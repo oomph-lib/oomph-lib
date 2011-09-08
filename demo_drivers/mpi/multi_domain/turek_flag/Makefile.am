@@ -33,7 +33,7 @@ turek_flag_load_balance_LDADD = \
 
 #----------------------------------------------------------------------
 
-EXTRA_DIST += turek_flag_partition.dat
+EXTRA_DIST += turek_flag_partition.dat load_balance.mcr
 
 # Include path for library headers: All library headers live in 
 # the include directory which we specify with -I

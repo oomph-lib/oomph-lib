@@ -513,7 +513,7 @@ class TecplotParsingError(Exception):
 ################################################################################
 #
 
-class TecplotNode():
+class TecplotNode:
     """ This class handles Tecplot node informations.
     """
     def __init__(self):
@@ -528,7 +528,7 @@ class TecplotNode():
 ################################################################################
 #
 
-class TecplotZone():
+class TecplotZone:
     """ This class handles Tecplot zone informations.
     """
     def __init__(self):
@@ -886,7 +886,7 @@ def tecplot_to_vtpxml(inputFilename, outputFilename, dim):
 ################################################################################
 #
 
-class InputPoints():
+class InputPoints:
     """ This class handles Tecplot node informations.
     """
     def __init__(self):

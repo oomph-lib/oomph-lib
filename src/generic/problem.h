@@ -409,16 +409,16 @@ namespace oomph
 
  /// \short Helper function to re-assign the first and last elements to be 
  /// assembled by each processor during parallel assembly for 
- /// non-distributed problem. On each processor the vector 
- /// elemental_assembly_time must contain the timings for the assembly
- /// of the elements. Each processor ONLY fills in the timings for
- /// elements it's in charge of when using the default distribution
- /// which is re-assigned every time assign_eqn_numbers() is called.
- /// First and last elements are then re-assigned to load-balance
- /// any subsequent assemblies.
- void recompute_load_balanced_assembly
-  (Vector<double>& elemental_assembly_time);
+ /// non-distributed problem. 
+ void recompute_load_balanced_assembly();
 
+ /// \short Boolean to switch on assessment of load imbalance in parallel 
+ /// assembly of distributed problem
+ bool Doc_imbalance_in_parallel_assembly;
+
+ /// \short Flag to use "default partition" during load balance.
+ /// Should only be set to true when run in validation mode.
+ bool Use_default_partition_in_load_balance;
 
  /// \short First element to be assembled by given processor for 
  /// non-distributed problem (only kept up to date when default assingment 
@@ -461,6 +461,10 @@ protected:
  Vector<double*> Dof_pt;
 
 #ifdef OOMPH_HAS_MPI
+
+ /// Storage for assembly times (used for load balancing)
+ Vector<double> Elemental_assembly_time;
+
  /// \short Pointer to the halo scheme for any global vectors
  /// that have the Dof_distribution
  DoubleVectorHaloScheme *Halo_scheme_pt;
@@ -675,9 +679,32 @@ protected:
    return Dist_problem_matrix_distribution;
   }
 
+ /// \short Enable doc of load imbalance in parallel 
+ /// assembly of distributed problem
+ void enable_doc_imbalance_in_parallel_assembly()
+ {Doc_imbalance_in_parallel_assembly=true;}
+
+ /// \short Disable doc of load imbalance in parallel 
+ /// assembly of distributed problem
+ void disable_doc_imbalance_in_parallel_assembly()
+ {Doc_imbalance_in_parallel_assembly=false;}
+
+ /// \short Return vector of most-recent elemental assembly times 
+ /// (used for load balancing). Zero sized if no Jacobian has been
+ /// computed since last re-assignment of equation numbers
+ Vector<double> elemental_assembly_time()
+  {return Elemental_assembly_time;}
+
+ /// \short Clear storage of most-recent elemental assembly times 
+ /// (used for load balancing). Next load balancing operation
+ /// will be based on the number of elements associated with a tree root.
+ void clear_elemental_assembly_time()
+ {
+  Must_recompute_load_balance_for_assembly=true;
+  Elemental_assembly_time.clear();
+ }
+ 
   private:
-
-
 
  /// \short Load balance helper routine: Get data to be sent to other
  /// processors during load balancing and other information about
@@ -865,22 +892,6 @@ protected:
  /// Actions to be performed after a (mesh) distribution
  virtual void actions_after_distribute() {}
 
- /// \short Complete the build of all halo elements
- /// This interface is required to pass global parameters pointed to
- /// by the root halo elements in the initial mesh to their sons...
- virtual void complete_build_of_halo_elements()
-  {
-   std::ostringstream warn_message;
-   warn_message
-    << "Warning: using the default (empty) complete_build_of_halo_elements()\n"
-    << "There are certain properties of elements that may not be passed from\n"
-    << "father to son if the element is a halo; this needs to be taken care\n"
-    << "of by the user since they know about their elements.\n";
-   OomphLibWarning(warn_message.str(),
-                   "Problem::complete_build_of_halo_elements()",
-                   OOMPH_EXCEPTION_LOCATION);
-   
-  }
 #endif
 
  /// \short Actions that are to be performed when the global parameter
@@ -1157,11 +1168,6 @@ protected:
                    const bool& report_stats,
                    const Vector<unsigned>& 
                    input_target_domain_for_local_non_halo_element);
-
- /// \short Flag to use "default partition" during load balance.
- /// Should only be set to true when run in validation mode.
- /// hierher: Why is this not private?
- bool Use_default_partition_in_load_balance;
 
  /// \short Set the use of the default partition in the load balance
  void set_default_partition_in_load_balance()

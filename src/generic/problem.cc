@@ -64,6 +64,8 @@ namespace oomph
   Default_set_initial_condition_called(false),
   Calculate_hessian_products_analytic(false),
 #ifdef OOMPH_HAS_MPI
+  Doc_imbalance_in_parallel_assembly(false),
+  Use_default_partition_in_load_balance(false),
   Must_recompute_load_balance_for_assembly(true),
   Halo_scheme_pt(0),
 #endif
@@ -92,7 +94,6 @@ namespace oomph
   Dist_problem_matrix_distribution(Uniform_matrix_distribution),
   Parallel_sparse_assemble_previous_allocation(0),
   Problem_has_been_distributed(false),
-  Use_default_partition_in_load_balance(false),
   Max_permitted_error_for_halo_check(1.0e-14),
 #endif
   Shut_up_in_newton_solve(false),
@@ -656,6 +657,12 @@ namespace oomph
 
    } // end if to check number of processors vs. number of elements etc.
 
+  
+  // Force re-analysis of time spent on assembly each
+  // elemental Jacobian
+  Must_recompute_load_balance_for_assembly=true;
+  Elemental_assembly_time.clear();
+  
   // Return the partition vector used in the distribution
   return return_element_domain; 
 
@@ -1411,16 +1418,9 @@ namespace oomph
 //=======================================================================
 /// Helper function to re-assign the first and last elements to be 
 /// assembled by each processor during parallel assembly for 
-/// non-distributed problem. On each processor the vector 
-/// elemental_assembly_time must contain the timings for the assembly
-/// of the elements. Each processor ONLY fills in the timings for
-/// elements it's in charge of when using the default distribution
-/// which is re-assigned every time assign_eqn_numbers() is called.
-/// First and last elements are then re-assigned to load-balance
-/// any subsequent assemblies.
+/// non-distributed problem. 
 //=======================================================================
- void Problem::recompute_load_balanced_assembly(
-  Vector<double>& elemental_assembly_time)
+ void Problem::recompute_load_balanced_assembly()
  {
   // Wait until all processes have completed/timed their assembly
   MPI_Barrier(this->communicator_pt()->mpi_comm());
@@ -1449,25 +1449,20 @@ namespace oomph
       
   // Make temporary c-style array to keep valgrind from complaining
   // about us reading and writing to same vector in gatherv below
-  unsigned nel=elemental_assembly_time.size();
+  unsigned nel=Elemental_assembly_time.size();
   double* el_ass_time = new double[nel];
   for (unsigned e=0;e<nel;e++)
    {
-    el_ass_time[e]=elemental_assembly_time[e];
+    el_ass_time[e]=Elemental_assembly_time[e];
    }
   
   // Gather timings on root processor
   unsigned nel_local =Last_el_for_assembly[rank]-First_el_for_assembly[rank]+1;
   MPI_Gatherv(
    &el_ass_time[First_el_for_assembly[rank]],nel_local,MPI_DOUBLE,
-   &elemental_assembly_time[0],&receive_count[0],&displacement[0],
+   &Elemental_assembly_time[0],&receive_count[0],&displacement[0],
    MPI_DOUBLE,0,this->communicator_pt()->mpi_comm());
   delete[] el_ass_time;
-
-  // We have determined load balancing for current setup.
-  // This can remain the same until assign_eqn_numbers() is called
-  // again -- the flag is re-set to true there.
-  Must_recompute_load_balance_for_assembly=false;
    
   // Vector of first and last elements for each processor
   Vector<int> first_and_last_element(2);
@@ -1485,7 +1480,7 @@ namespace oomph
     unsigned n_elements=Mesh_pt->nelement();    
     for (unsigned e=0;e<n_elements;e++)
      {
-      total+=elemental_assembly_time[e];
+      total+=Elemental_assembly_time[e];
      }
      
     // Target load per processor
@@ -1499,7 +1494,7 @@ namespace oomph
     total=0.0;
     for (unsigned e=0;e<n_elements;e++)
      {
-      total+=elemental_assembly_time[e];
+      total+=Elemental_assembly_time[e];
        
       if (total>target_load)
        {
@@ -1640,6 +1635,20 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
 
  // Storage for number of processors
  int n_proc=this->communicator_pt()->nproc();
+
+
+ if (n_proc>1)
+  {
+   // Force re-analysis of time spent on assembly each
+   // elemental Jacobian
+   Must_recompute_load_balance_for_assembly=true;
+   Elemental_assembly_time.clear();
+  }
+ else
+  {
+   Must_recompute_load_balance_for_assembly=false;
+  }
+
 
  // If the problem has been distributed we first have to 
  // classify any potentially newly created nodes as
@@ -1836,21 +1845,9 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
  // must be recomputed
  else
   {
-   if (n_proc>1)
-     {
-      // Force re-analysis of time spent on assembly each
-      // elemental Jacobian
-      Must_recompute_load_balance_for_assembly=true;
-     }
-    else
-     {
-      Must_recompute_load_balance_for_assembly=false;
-     }
-
     // Set default first and last elements for parallel assembly
     // of non-distributed problem.
-    set_default_first_and_last_element_for_assembly();
-     
+    set_default_first_and_last_element_for_assembly();  
   }
 
 #endif
@@ -2850,7 +2847,7 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
 
   //Locally cache pointer to assembly handler
   AssemblyHandler* const assembly_handler_pt = Assembly_handler_pt;
-
+  
   //Build and zero the residuals
   residuals.build(dist_pt,0.0);
 
@@ -3683,6 +3680,12 @@ void Problem::sparse_assemble_row_or_column_compressed_with_maps(
  //Locally cache pointer to assembly handler
  AssemblyHandler* const assembly_handler_pt = Assembly_handler_pt;
 
+ bool doing_residuals=false;
+ if (dynamic_cast<ParallelResidualsHandler*>(Assembly_handler_pt)!=0)
+  {
+   doing_residuals=true;
+  }
+ 
 //Error check dimensions
 #ifdef PARANOID
  if(row_or_column_start.size() != n_matrix)
@@ -3759,11 +3762,10 @@ void Problem::sparse_assemble_row_or_column_compressed_with_maps(
  double t_assemble_start=0.0;
  
  // Storage for assembly times
- Vector<double> elemental_assembly_time;
- if ((!Problem_has_been_distributed)&&
+ if ((!doing_residuals)&&
      Must_recompute_load_balance_for_assembly)
   {
-   elemental_assembly_time.resize(n_elements);
+   Elemental_assembly_time.resize(n_elements);
   }
 
 #endif
@@ -3783,7 +3785,7 @@ void Problem::sparse_assemble_row_or_column_compressed_with_maps(
 
 #ifdef OOMPH_HAS_MPI
     // Time it?
-    if ((!Problem_has_been_distributed)&&
+    if ((!doing_residuals)&&
         Must_recompute_load_balance_for_assembly)
      {
       t_assemble_start=TimingHelpers::timer();
@@ -3866,11 +3868,11 @@ void Problem::sparse_assemble_row_or_column_compressed_with_maps(
 
 #ifdef OOMPH_HAS_MPI
   // Time it?
-  if ((!Problem_has_been_distributed)&&
-      Must_recompute_load_balance_for_assembly)
-   {
-    elemental_assembly_time[e]=TimingHelpers::timer()-t_assemble_start;
-   }
+    if ((!doing_residuals)&&
+        Must_recompute_load_balance_for_assembly)
+     {
+      Elemental_assembly_time[e]=TimingHelpers::timer()-t_assemble_start;
+     }
 #endif
 
    } //End of loop over the elements
@@ -3882,10 +3884,20 @@ void Problem::sparse_assemble_row_or_column_compressed_with_maps(
  
  // Postprocess timing information and re-allocate distribution of
  // elements during subsequent assemblies.
- if ((!Problem_has_been_distributed)&&
+ if ((!doing_residuals)&&
+     (!Problem_has_been_distributed)&&
      Must_recompute_load_balance_for_assembly)
   {
-   recompute_load_balanced_assembly(elemental_assembly_time);
+   recompute_load_balanced_assembly(); 
+  }
+ 
+ // We have determined load balancing for current setup.
+ // This can remain the same until assign_eqn_numbers() is called
+ // again -- the flag is re-set to true there.
+ if ((!doing_residuals)&&
+     Must_recompute_load_balance_for_assembly)
+  {
+   Must_recompute_load_balance_for_assembly=false;
   }
 
 #endif
@@ -4011,6 +4023,12 @@ void Problem::sparse_assemble_row_or_column_compressed_with_lists(
  //Locally cache pointer to assembly handler
  AssemblyHandler* const assembly_handler_pt = Assembly_handler_pt;
 
+ bool doing_residuals=false;
+ if (dynamic_cast<ParallelResidualsHandler*>(Assembly_handler_pt)!=0)
+  {
+   doing_residuals=true;
+  }
+
 //Error check dimensions
 #ifdef PARANOID
  if(row_or_column_start.size() != n_matrix)
@@ -4084,11 +4102,10 @@ void Problem::sparse_assemble_row_or_column_compressed_with_lists(
  double t_assemble_start=0.0;
  
  // Storage for assembly times
- Vector<double> elemental_assembly_time;
- if ((!Problem_has_been_distributed)&&
+ if ((!doing_residuals)&&
      Must_recompute_load_balance_for_assembly)
   {
-   elemental_assembly_time.resize(n_elements);
+   Elemental_assembly_time.resize(n_elements);
   }
 
 #endif
@@ -4112,7 +4129,7 @@ void Problem::sparse_assemble_row_or_column_compressed_with_lists(
 
 #ifdef OOMPH_HAS_MPI
     // Time it?
-    if ((!Problem_has_been_distributed)&&
+    if ((!doing_residuals)&&
         Must_recompute_load_balance_for_assembly)
      {
       t_assemble_start=TimingHelpers::timer();
@@ -4205,11 +4222,11 @@ void Problem::sparse_assemble_row_or_column_compressed_with_lists(
 
 #ifdef OOMPH_HAS_MPI
   // Time it?
-  if ((!Problem_has_been_distributed)&&
-      Must_recompute_load_balance_for_assembly)
-   {
-    elemental_assembly_time[e]=TimingHelpers::timer()-t_assemble_start;
-   }
+    if ((!doing_residuals)&&
+        Must_recompute_load_balance_for_assembly)
+     {
+      Elemental_assembly_time[e]=TimingHelpers::timer()-t_assemble_start;
+     }
 #endif
 
    } //End of loop over the elements
@@ -4221,10 +4238,20 @@ void Problem::sparse_assemble_row_or_column_compressed_with_lists(
  
  // Postprocess timing information and re-allocate distribution of
  // elements during subsequent assemblies.
- if ((!Problem_has_been_distributed)&&
+ if ((!doing_residuals)&&
+     (!Problem_has_been_distributed)&&
      Must_recompute_load_balance_for_assembly)
   {
-   recompute_load_balanced_assembly(elemental_assembly_time);
+   recompute_load_balanced_assembly();
+  }
+
+ // We have determined load balancing for current setup.
+ // This can remain the same until assign_eqn_numbers() is called
+ // again -- the flag is re-set to true there.
+ if ((!doing_residuals)&&
+     Must_recompute_load_balance_for_assembly)
+  {
+   Must_recompute_load_balance_for_assembly=false;
   }
 
 #endif
@@ -4409,6 +4436,12 @@ void Problem::sparse_assemble_row_or_column_compressed_with_vectors_of_pairs(
  //Locally cache pointer to assembly handler
  AssemblyHandler* const assembly_handler_pt = Assembly_handler_pt;
  
+ bool doing_residuals=false;
+ if (dynamic_cast<ParallelResidualsHandler*>(Assembly_handler_pt)!=0)
+  {
+   doing_residuals=true;
+  }
+
 //Error check dimensions
 #ifdef PARANOID
  if(row_or_column_start.size() != n_matrix)
@@ -4473,11 +4506,10 @@ void Problem::sparse_assemble_row_or_column_compressed_with_vectors_of_pairs(
  double t_assemble_start=0.0;
  
  // Storage for assembly times
- Vector<double> elemental_assembly_time;
- if ((!Problem_has_been_distributed)&&
+ if ((!doing_residuals)&&
      Must_recompute_load_balance_for_assembly)
   {
-   elemental_assembly_time.resize(n_elements);
+   Elemental_assembly_time.resize(n_elements);
   }
 
 #endif
@@ -4497,7 +4529,7 @@ void Problem::sparse_assemble_row_or_column_compressed_with_vectors_of_pairs(
 
 #ifdef OOMPH_HAS_MPI
     // Time it?
-    if ((!Problem_has_been_distributed)&&
+    if ((!doing_residuals)&&
         Must_recompute_load_balance_for_assembly)
      {
       t_assemble_start=TimingHelpers::timer();
@@ -4611,11 +4643,11 @@ void Problem::sparse_assemble_row_or_column_compressed_with_vectors_of_pairs(
 
 #ifdef OOMPH_HAS_MPI
   // Time it?
-  if ((!Problem_has_been_distributed)&&
-      Must_recompute_load_balance_for_assembly)
-   {
-    elemental_assembly_time[e]=TimingHelpers::timer()-t_assemble_start;
-   }
+    if ((!doing_residuals)&&
+        Must_recompute_load_balance_for_assembly)
+     {
+      Elemental_assembly_time[e]=TimingHelpers::timer()-t_assemble_start;
+     }
 #endif
   
    } //End of loop over the elements
@@ -4629,10 +4661,20 @@ void Problem::sparse_assemble_row_or_column_compressed_with_vectors_of_pairs(
  
  // Postprocess timing information and re-allocate distribution of
  // elements during subsequent assemblies.
- if ((!Problem_has_been_distributed)&&
+ if ((!doing_residuals)&&
+     (!Problem_has_been_distributed)&&
      Must_recompute_load_balance_for_assembly)
   {
-   recompute_load_balanced_assembly(elemental_assembly_time);
+   recompute_load_balanced_assembly();
+  }
+
+ // We have determined load balancing for current setup.
+ // This can remain the same until assign_eqn_numbers() is called
+ // again -- the flag is re-set to true there.
+ if ((!doing_residuals)&&
+     Must_recompute_load_balance_for_assembly)
+  {
+   Must_recompute_load_balance_for_assembly=false;
   }
 
 #endif
@@ -4752,6 +4794,12 @@ void Problem::sparse_assemble_row_or_column_compressed_with_two_vectors(
  //Locally cache pointer to assembly handler
  AssemblyHandler* const assembly_handler_pt = Assembly_handler_pt;
 
+ bool doing_residuals=false;
+ if (dynamic_cast<ParallelResidualsHandler*>(Assembly_handler_pt)!=0)
+  {
+   doing_residuals=true;
+  }
+
 //Error check dimensions
 #ifdef PARANOID
  if(row_or_column_start.size() != n_matrix)
@@ -4822,11 +4870,10 @@ void Problem::sparse_assemble_row_or_column_compressed_with_two_vectors(
  double t_assemble_start=0.0;
  
  // Storage for assembly times
- Vector<double> elemental_assembly_time;
- if ((!Problem_has_been_distributed)&&
+ if ((!doing_residuals)&&
      Must_recompute_load_balance_for_assembly)
   {
-   elemental_assembly_time.resize(n_elements);
+   Elemental_assembly_time.resize(n_elements);
   }
 
 #endif
@@ -4847,7 +4894,7 @@ void Problem::sparse_assemble_row_or_column_compressed_with_two_vectors(
 
 #ifdef OOMPH_HAS_MPI
     // Time it?
-    if ((!Problem_has_been_distributed)&&
+    if ((!doing_residuals)&&
         Must_recompute_load_balance_for_assembly)
      {
       t_assemble_start=TimingHelpers::timer();
@@ -4967,11 +5014,11 @@ void Problem::sparse_assemble_row_or_column_compressed_with_two_vectors(
 
 #ifdef OOMPH_HAS_MPI
   // Time it?
-  if ((!Problem_has_been_distributed)&&
-      Must_recompute_load_balance_for_assembly)
-   {
-    elemental_assembly_time[e]=TimingHelpers::timer()-t_assemble_start;
-   }
+    if ((!doing_residuals)&&
+        Must_recompute_load_balance_for_assembly)
+     {
+      Elemental_assembly_time[e]=TimingHelpers::timer()-t_assemble_start;
+     }
 #endif
 
    } //End of loop over the elements
@@ -4984,10 +5031,20 @@ void Problem::sparse_assemble_row_or_column_compressed_with_two_vectors(
  
  // Postprocess timing information and re-allocate distribution of
  // elements during subsequent assemblies.
- if ((!Problem_has_been_distributed)&&
+ if ((!doing_residuals)&&
+     (!Problem_has_been_distributed)&&
      Must_recompute_load_balance_for_assembly)
   {
-   recompute_load_balanced_assembly(elemental_assembly_time);
+   recompute_load_balanced_assembly();
+  }
+
+ // We have determined load balancing for current setup.
+ // This can remain the same until assign_eqn_numbers() is called
+ // again -- the flag is re-set to true there.
+ if ((!doing_residuals)&&
+     Must_recompute_load_balance_for_assembly)
+  {
+   Must_recompute_load_balance_for_assembly=false;
   }
 
 #endif
@@ -5102,6 +5159,12 @@ void Problem::sparse_assemble_row_or_column_compressed_with_two_arrays(
  //Locally cache pointer to assembly handler
  AssemblyHandler* const assembly_handler_pt = Assembly_handler_pt;
 
+ bool doing_residuals=false;
+ if (dynamic_cast<ParallelResidualsHandler*>(Assembly_handler_pt)!=0)
+  {
+   doing_residuals=true;
+  }
+
 //Error check dimensions
 #ifdef PARANOID
  if(row_or_column_start.size() != n_matrix)
@@ -5172,11 +5235,10 @@ void Problem::sparse_assemble_row_or_column_compressed_with_two_arrays(
  double t_assemble_start=0.0;
  
  // Storage for assembly times
- Vector<double> elemental_assembly_time;
- if ((!Problem_has_been_distributed)&&
+ if ((!doing_residuals)&&
      Must_recompute_load_balance_for_assembly)
   {
-   elemental_assembly_time.resize(n_elements);
+   Elemental_assembly_time.resize(n_elements);
   }
 
 #endif
@@ -5212,7 +5274,7 @@ void Problem::sparse_assemble_row_or_column_compressed_with_two_arrays(
 
 #ifdef OOMPH_HAS_MPI
     // Time it?
-    if ((!Problem_has_been_distributed)&&
+    if ((!doing_residuals)&&
         Must_recompute_load_balance_for_assembly)
      {
       t_assemble_start=TimingHelpers::timer();
@@ -5404,11 +5466,11 @@ void Problem::sparse_assemble_row_or_column_compressed_with_two_arrays(
 
 #ifdef OOMPH_HAS_MPI
   // Time it?
-  if ((!Problem_has_been_distributed)&&
-      Must_recompute_load_balance_for_assembly)
-   {
-    elemental_assembly_time[e]=TimingHelpers::timer()-t_assemble_start;
-   }
+    if ((!doing_residuals)&&
+        Must_recompute_load_balance_for_assembly)
+     {
+      Elemental_assembly_time[e]=TimingHelpers::timer()-t_assemble_start;
+     }
 #endif
 
    } //End of loop over the elements
@@ -5421,10 +5483,20 @@ void Problem::sparse_assemble_row_or_column_compressed_with_two_arrays(
  
  // Postprocess timing information and re-allocate distribution of
  // elements during subsequent assemblies.
- if ((!Problem_has_been_distributed)&&
+ if ((!doing_residuals)&&
+     (!Problem_has_been_distributed)&&
      Must_recompute_load_balance_for_assembly)
   {
-   recompute_load_balanced_assembly(elemental_assembly_time);
+   recompute_load_balanced_assembly();
+  }
+
+ // We have determined load balancing for current setup.
+ // This can remain the same until assign_eqn_numbers() is called
+ // again -- the flag is re-set to true there.
+ if ((!doing_residuals)&&
+     Must_recompute_load_balance_for_assembly)
+  {
+   Must_recompute_load_balance_for_assembly=false;
   }
 
 #endif
@@ -5549,6 +5621,7 @@ void Problem::parallel_sparse_assemble
  Vector<double* > &residuals)
 {
 
+ // Time assembly
  double t_start=TimingHelpers::timer();
 
  // my rank and nproc
@@ -5698,11 +5771,10 @@ void Problem::parallel_sparse_assemble
  double t_assemble_start=0.0;
  
  // Storage for assembly times
- Vector<double> elemental_assembly_time;
- if ((!Problem_has_been_distributed)&&
+ if ((!doing_residuals)&&
      Must_recompute_load_balance_for_assembly)
   {
-   elemental_assembly_time.resize(n_elements);
+   Elemental_assembly_time.resize(n_elements);
   }
 
  // number of coefficients in each row
@@ -5739,7 +5811,7 @@ void Problem::parallel_sparse_assemble
    {
 
     // Time it?
-    if ((!Problem_has_been_distributed)&&
+    if ((!doing_residuals)&&
         Must_recompute_load_balance_for_assembly)
      {
       t_assemble_start=TimingHelpers::timer();
@@ -5948,57 +6020,76 @@ void Problem::parallel_sparse_assemble
      } // endif halo element
 
     // Time it?
-    if ((!Problem_has_been_distributed)&&
+    if ((!doing_residuals)&&
         Must_recompute_load_balance_for_assembly)
      {
-      elemental_assembly_time[e]=TimingHelpers::timer()-t_assemble_start;
+      Elemental_assembly_time[e]=TimingHelpers::timer()-t_assemble_start;
      }
    } //End of loop over the elements
  } //End of vector assembly
 
  // Postprocess timing information and re-allocate distribution of
  // elements during subsequent assemblies.
- if ((!Problem_has_been_distributed)&&
+ if ((!doing_residuals)&&
+     (!Problem_has_been_distributed)&&
      Must_recompute_load_balance_for_assembly)
   {
-   recompute_load_balanced_assembly(elemental_assembly_time);
+   recompute_load_balanced_assembly();
   }
 
+ // We have determined load balancing for current setup.
+ // This can remain the same until assign_eqn_numbers() is called
+ // again -- the flag is re-set to true there.
+ if ((!doing_residuals)&&
+     Must_recompute_load_balance_for_assembly)
+  {
+   Must_recompute_load_balance_for_assembly=false;
+  }
  
- double t_end=TimingHelpers::timer();
- double t_local=t_end-t_start;
+
+ // Doc?
+ double t_end=0.0;
+ double t_local=0.0;
  double t_max=0.0;
  double t_min=0.0;
  double t_sum=0.0;
- MPI_Allreduce(&t_local,&t_max,1,
-               MPI_DOUBLE,MPI_MAX,
-               this->communicator_pt()->mpi_comm());
- MPI_Allreduce(&t_local,&t_min,1,
-               MPI_DOUBLE,MPI_MIN,
-               this->communicator_pt()->mpi_comm());
- MPI_Allreduce(&t_local,&t_sum,1,
-               MPI_DOUBLE,MPI_SUM,
-               this->communicator_pt()->mpi_comm());
- double imbalance=(t_max-t_min)/(t_sum/double(nproc))*100.0;
- 
- if (doing_residuals)
+ if (Doc_imbalance_in_parallel_assembly)
   {
-   oomph_info 
-    << "CPU for residual computation (loc/max/min/imbal): ";
+   t_end=TimingHelpers::timer();
+   t_local=t_end-t_start;
+   t_max=0.0;
+   t_min=0.0;
+   t_sum=0.0;
+   MPI_Allreduce(&t_local,&t_max,1,
+                 MPI_DOUBLE,MPI_MAX,
+                 this->communicator_pt()->mpi_comm());
+   MPI_Allreduce(&t_local,&t_min,1,
+                 MPI_DOUBLE,MPI_MIN,
+                 this->communicator_pt()->mpi_comm());
+   MPI_Allreduce(&t_local,&t_sum,1,
+                 MPI_DOUBLE,MPI_SUM,
+                 this->communicator_pt()->mpi_comm());
+   double imbalance=(t_max-t_min)/(t_sum/double(nproc))*100.0;
+   
+   if (doing_residuals)
+    {
+     oomph_info 
+      << "\nCPU for residual computation (loc/max/min/imbal): ";
+    }
+   else
+    {
+     oomph_info 
+      << "\nCPU for Jacobian computation (loc/max/min/imbal): ";
+    }
+   oomph_info
+    << t_local << " " 
+    << t_max << " " 
+    << t_min << " " 
+    << imbalance << "%\n";
+   
+   t_start=TimingHelpers::timer();
   }
- else
-  {
-   oomph_info 
-    << "CPU for Jacobian computation (loc/max/min/imbal): ";
-  }
- oomph_info
-  << t_local << " " 
-  << t_max << " " 
-  << t_min << " " 
-  << imbalance << "%\n";
- 
- t_start=TimingHelpers::timer();
- 
+
 
  // next we compute the number of equations and number of non-zeros to be
  // sent to each processor, and send/recv that information
@@ -6691,39 +6782,43 @@ void Problem::parallel_sparse_assemble
     }
   }
 
-
- t_end=TimingHelpers::timer();
- t_local=t_end-t_start;
- t_max=0.0;
- t_min=0.0;
- t_sum=0.0;
- MPI_Allreduce(&t_local,&t_max,1,
-               MPI_DOUBLE,MPI_MAX,
-               this->communicator_pt()->mpi_comm());
- MPI_Allreduce(&t_local,&t_min,1,
-               MPI_DOUBLE,MPI_MIN,
-               this->communicator_pt()->mpi_comm());
- MPI_Allreduce(&t_local,&t_sum,1,
-               MPI_DOUBLE,MPI_SUM,
-               this->communicator_pt()->mpi_comm());
- imbalance=(t_max-t_min)/(t_sum/double(nproc))*100.0;
- if (doing_residuals)
+ // Doc?
+ if (Doc_imbalance_in_parallel_assembly)
   {
-   oomph_info 
-    << "CPU for residual distribut.  (loc/max/min/imbal): ";
+   t_end=TimingHelpers::timer();
+   t_local=t_end-t_start;
+   t_max=0.0;
+   t_min=0.0;
+   t_sum=0.0;
+   MPI_Allreduce(&t_local,&t_max,1,
+                 MPI_DOUBLE,MPI_MAX,
+                 this->communicator_pt()->mpi_comm());
+   MPI_Allreduce(&t_local,&t_min,1,
+                 MPI_DOUBLE,MPI_MIN,
+                 this->communicator_pt()->mpi_comm());
+   MPI_Allreduce(&t_local,&t_sum,1,
+                 MPI_DOUBLE,MPI_SUM,
+                 this->communicator_pt()->mpi_comm());
+   double imbalance=(t_max-t_min)/(t_sum/double(nproc))*100.0;
+   if (doing_residuals)
+    {
+     oomph_info 
+      << "CPU for residual distribut.  (loc/max/min/imbal): ";
+    }
+   else
+    {
+     oomph_info 
+      << "CPU for Jacobian distribut.  (loc/max/min/imbal): ";
+    }
+   oomph_info
+    << t_local << " " 
+    << t_max << " " 
+    << t_min << " " 
+    << imbalance << "%\n\n";
   }
- else
-  {
-   oomph_info 
-    << "CPU for Jacobian distribut.  (loc/max/min/imbal): ";
-  }
- oomph_info
-  << t_local << " " 
-  << t_max << " " 
-  << t_min << " " 
-  << imbalance << "%\n";
 
 }
+
 #endif
 
 

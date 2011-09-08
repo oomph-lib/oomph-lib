@@ -564,6 +564,32 @@ void METIS::partition_mesh(Problem* problem_pt, const unsigned& ndomain,
  // Total number of elements (halo and nonhalo) on this proc
  unsigned n_elem=mesh_pt->nelement();
 
+ // Get elemental assembly times
+ Vector<double> elemental_assembly_time=
+  problem_pt->elemental_assembly_time();
+
+#ifdef PARANOID
+ unsigned n=elemental_assembly_time.size();
+ if ((n!=0)&&(n!= n_elem))
+  {
+   std::ostringstream error_stream;
+   error_stream
+    << "Number of elements doesn't match the \n"
+    << "number of elemental assembly times: "
+    << n_elem << " " << n << std::endl;   
+   throw OomphLibError(error_stream.str(),
+                       "METIS::partition_distributed_mesh()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+
+ // Can we base load balancing on assembly times?
+ bool can_load_balance_on_assembly_times=false;
+ if (elemental_assembly_time.size()!=0)
+  {
+   can_load_balance_on_assembly_times=true;
+  }
+
  // Storage for global eqn numbers on current processor
  std::set<unsigned> global_eqns_on_this_proc;
 
@@ -574,9 +600,12 @@ void METIS::partition_mesh(Problem* problem_pt, const unsigned& ndomain,
  
  // Storage for long sequence of equation numbers as encountered
  // by the root elements on this processor
- // hierher reserve number of elements x average number of dofs
- Vector<unsigned> eqn_numbers_with_root_elements_on_this_proc; 
+ Vector<unsigned> eqn_numbers_with_root_elements_on_this_proc;
 
+ // Reserve number of elements x average/estimate (?) for number of dofs
+ // per element
+ eqn_numbers_with_root_elements_on_this_proc.reserve(n_elem*9);
+  
  // Storage for the number of eqn numbers associated with each
  // root element on this processors -- once this and the previous
  // container have been collected from all processors we're
@@ -589,6 +618,10 @@ void METIS::partition_mesh(Problem* problem_pt, const unsigned& ndomain,
  Vector<unsigned> number_of_non_halo_elements_for_root_element;
  number_of_non_halo_elements_for_root_element.reserve(n_elem);
 
+ // Ditto for total assembly time of "leaf" elements connected with each root
+ Vector<double> total_assembly_time_for_root_element;
+ total_assembly_time_for_root_element.reserve(n_elem);
+
  // Map storing the number of the root elements on this processor
  // (offset by one to bypass the zero default). 
  std::map<GeneralisedElement*,unsigned> root_el_number_plus_one;
@@ -598,10 +631,15 @@ void METIS::partition_mesh(Problem* problem_pt, const unsigned& ndomain,
  unsigned number_of_non_halo_elements=0;
  for (unsigned e=0; e<n_elem; e++)
   {
+   double el_assembly_time=0.0;
    GeneralisedElement* el_pt=mesh_pt->element_pt(e);
    if (!el_pt->is_halo())
     {
-
+     if (can_load_balance_on_assembly_times)
+      {
+       el_assembly_time=elemental_assembly_time[e];
+      }
+     
      // Get the associated root element which is either...
      GeneralisedElement* root_el_pt=0;
      RefineableElement* ref_el_pt=dynamic_cast<RefineableElement*>(el_pt);
@@ -666,11 +704,13 @@ void METIS::partition_mesh(Problem* problem_pt, const unsigned& ndomain,
       {
        number_of_dofs_for_root_element[root_el_number]+=n_dof;
        number_of_non_halo_elements_for_root_element[root_el_number]++;
+       total_assembly_time_for_root_element[root_el_number]+=el_assembly_time;
       }
      else
       {
        number_of_dofs_for_root_element.push_back(n_dof);
        number_of_non_halo_elements_for_root_element.push_back(1);
+       total_assembly_time_for_root_element.push_back(el_assembly_time);
       }
 
      // Bump up number of non-halos
@@ -679,7 +719,7 @@ void METIS::partition_mesh(Problem* problem_pt, const unsigned& ndomain,
   }
 
  // Tell everybody how many root elements
- // are on each processor // hierher does everybody need to know?
+ // are on each processor
  unsigned root_processor=0;
  Vector<int> number_of_root_elements_on_each_proc(n_proc,0);
  MPI_Allgather(&number_of_root_elements, 1, MPI_INT,
@@ -715,7 +755,7 @@ void METIS::partition_mesh(Problem* problem_pt, const unsigned& ndomain,
 
  // Gather this information for all processors:
  // n_eqns_on_each_proc[iproc] now contains the number of global
- // equations held on processor iproc. // hierher does everybody need to know?
+ // equations held on processor iproc. 
  Vector<int> n_eqns_on_each_proc(n_proc,0);
  MPI_Allgather(&n_eqns_on_this_proc, 1, MPI_INT,
                &n_eqns_on_each_proc[0], 1, MPI_INT,
@@ -807,6 +847,37 @@ void METIS::partition_mesh(Problem* problem_pt, const unsigned& ndomain,
              root_processor, comm_pt->mpi_comm());
 
 
+
+ // ditto for assembly times elements associated with root element
+ Vector<double> total_assembly_time_for_global_root_element(
+  total_number_of_root_elements);
+
+ // Create at least one entry so we don't get a seg fault below
+ if (total_assembly_time_for_root_element.size()==0)
+  {
+   total_assembly_time_for_root_element.resize(1);
+  }
+ MPI_Gatherv(&total_assembly_time_for_root_element[0], 
+                                      // pointer to first entry in 
+                                      // vector to be gathered on root
+             number_of_root_elements,    // Number of entries to be sent
+                                         // from current processor
+             MPI_DOUBLE,
+             &total_assembly_time_for_global_root_element[0],
+                                                     // Target -- this will 
+                                                     // store the concatenated
+                                                     // vectors sent from
+                                                     // everywhere
+             &number_of_root_elements_on_each_proc[0], // Pointer to 
+                                                       // vector containing
+                                                       // the length of the
+                                                       // vectors received
+                                                       // from elsewhere
+             &start_index[0], // "offset" for storage of vector received
+                              // from various processors in the global 
+                              // concatenated vector stored on root
+             MPI_DOUBLE, 
+             root_processor, comm_pt->mpi_comm());
 
  
  // Big vector to store the long sequence of global equation numbers 
@@ -1009,10 +1080,58 @@ void METIS::partition_mesh(Problem* problem_pt, const unsigned& ndomain,
    // Adjust flag and provide storage for weights
    wgtflag=2;
    vwgt=new int[total_number_of_root_elements];
-   for (unsigned e=0;e<total_number_of_root_elements;e++)
+
+
+   // Load balance based on assembly times of all leaf 
+   // elements associated with root
+   if (can_load_balance_on_assembly_times)
     {
-     // vwgt[e]=number_of_dofs_for_global_root_element[e];
-     vwgt[e]=number_of_non_halo_elements_for_global_root_element[e];
+     oomph_info << "Basing distribution on assembly times of elements\n";
+     
+     // Normalise
+     double min_time=*(std::min_element(
+                        total_assembly_time_for_global_root_element.begin(),
+                        total_assembly_time_for_global_root_element.end()));
+#ifdef PARANOID
+     if (min_time==0.0)
+      {
+       std::ostringstream error_stream;
+       error_stream
+        << "Minimum assemble time for element is zero!\n";
+       throw OomphLibError(error_stream.str(),
+                           "METIS::partition_distributed_mesh()",
+                           OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+     
+     // Bypass METIS (usually for validation) and use made-up but
+     // repeatable timings
+     if (bypass_metis)
+      {         
+       for (unsigned e=0;e<total_number_of_root_elements;e++)
+        {           
+         vwgt[e]=e;
+        }
+      }
+     else
+      {         
+       for (unsigned e=0;e<total_number_of_root_elements;e++)
+        {           
+         // Use assembly times (relative to minimum) as weight
+         vwgt[e]=int(total_assembly_time_for_global_root_element[e]/
+                     min_time);
+        }
+      }
+    }
+   // Load balanced based on number of leaf elements associated with
+   // root
+   else
+    {
+     oomph_info << "Basing distribution on number of elements\n";
+     for (unsigned e=0;e<total_number_of_root_elements;e++)
+      {
+       vwgt[e]=number_of_non_halo_elements_for_global_root_element[e];
+      }
     }
 
    // Bypass METIS (usually for validation)

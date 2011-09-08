@@ -491,6 +491,10 @@ TurekProblem(const double &length,
                                       Domain_length(length)
  
 {
+
+ // Tell us how well the load balancing is doing...
+ enable_doc_imbalance_in_parallel_assembly();
+
  // Increase max. number of iterations in Newton solver to
  // accomodate possible poor initial guesses
  Max_newton_iterations=20;
