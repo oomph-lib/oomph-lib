@@ -60,7 +60,7 @@ if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/results.dat.gz   \
-    bous_convection_fd_results.dat 0.1 2.0e-7  >> validation.log
+    bous_convection_fd_results.dat 0.1 5.0e-7  >> validation.log
 fi
 
 mv RESLT RESLT_non_refineable_fd
