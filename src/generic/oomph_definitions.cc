@@ -27,7 +27,12 @@
 //LIC//====================================================================
 //Non-inline and static member functions for the Oomph-lib
 //exception handlers
+
+
+#include "stacktrace.h"
+
 #include "oomph_definitions.h"
+
 
 
 namespace oomph
@@ -110,6 +115,9 @@ OomphLibException::OomphLibException(const std::string &error_description,
  exception_stream << exception_header << std::endl;
  //Report the error
  exception_stream << std::endl << error_description << std::endl;
+
+ // Print the stacktrace
+ print_stacktrace(exception_stream);
  
  //Finish off with another set of double lines
  for(unsigned i=0;i<output_width;i++) {exception_stream << "=";}
@@ -117,6 +125,7 @@ OomphLibException::OomphLibException(const std::string &error_description,
  
  //Flush the stream buffer
  exception_stream.flush();
+
 }
 
 //========================================================================
