@@ -626,17 +626,6 @@ void KirchhoffLoveBeamEquations::get_energy(double &stretch,
  double HoR_0 = h(); // i.e. refers to reference thickness 'h_0'
  double sigma_0=sigma0();
 
- if(sigma_0!=0)
-  {
-   std::string error_message = 
-    "Warning: Not sure if the energy is computed correctly\n";
-   error_message += "         for nonzero sigma_0\n";
-
-   throw OomphLibError(error_message,
-                       "KirchhoffLoveBeamEquations::get_energy()",
-                       OOMPH_EXCEPTION_LOCATION);
-  }
-
  double Lambda_sq=lambda_sq();
  
  //Loop over the integration points
@@ -763,7 +752,7 @@ void KirchhoffLoveBeamEquations::get_energy(double &stretch,
    double HoR=HoR_0*h_ratio;
 
    // Add contributions
-   stretch += h_ratio*0.5*gamma*gamma*W*sqrt(adet); 
+   stretch += h_ratio*0.5*(gamma+sigma_0)*(gamma+sigma_0)*W*sqrt(adet); 
    bend    += h_ratio*0.5*(1.0/12.0)*HoR*HoR*kappa*kappa*W*sqrt(adet);
    kin_en  += h_ratio*0.5*Lambda_sq*veloc_sq*W*sqrt(adet);
   } //End of loop over the integration points
