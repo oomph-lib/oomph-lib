@@ -67,7 +67,8 @@ namespace oomph
   double Radius = 0.25;
 
   /// Volume of the interface
-  double Volume = MathematicalConstants::Pi*Radius*Radius;
+  /// (Negative because the constraint is computed from the bulk side)
+  double Volume = -MathematicalConstants::Pi*Radius*Radius;
 
   /// \short Scaling factor for inflow velocity (allows it to be switched off
   /// to do hydrostatics)
@@ -1152,7 +1153,10 @@ void DropInChannelProblem<ELEMENT>::create_volume_constraint_elements()
      // Create new element
      LineVolumeConstraintBoundingSolidElement<ELEMENT>* el_pt =
       new LineVolumeConstraintBoundingSolidElement<ELEMENT>(
-       bulk_elem_pt,face_index,Vol_constraint_el_pt);   
+       bulk_elem_pt,face_index);   
+     
+     //Set the "master" volume constraint element
+     el_pt->set_volume_constraint_element(Vol_constraint_el_pt);
      
      // Add it to the mesh
      Volume_constraint_mesh_pt->add_element_pt(el_pt);     

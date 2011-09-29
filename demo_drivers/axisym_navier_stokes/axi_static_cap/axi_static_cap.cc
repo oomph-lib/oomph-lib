@@ -25,17 +25,17 @@
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 //LIC// 
 //LIC//====================================================================
-// Driver code for a 2D free-surface hydrostatics problem.
+// Driver code for an axisymmetric free-surface hydrostatics problem.
 // The system consists of a layer of fluid 
-// in a domain of height 1 and half-width 0.5.
+// in a domain of height 1 and radius 0.5.
 // The program solves for the interface position as the contact angle
 // at the wall, alpha, decreases from pi/2. The resulting shapes should all be
-// circular arcs and the pressure jump across the interface should be
-// cos(alpha)/0.5 = 2 cos(alpha)/Ca.
+// spherical shells and the pressure jump across the interface should be
+// 2 cos(alpha)/0.5 = 4 cos(alpha)/Ca.
 
 //OOMPH-LIB include files
 #include "generic.h"
-#include "navier_stokes.h"
+#include "axisym_navier_stokes.h"
 #include "fluid_interface.h"
 #include "constitutive.h"
 #include "solid.h"
@@ -84,7 +84,7 @@ template <class ELEMENT>
 class StaticSingleLayerMesh : 
  public SingleLayerSpineMesh<
  SpineElement<ELEMENT>, 
- SpineLineFluidInterfaceElement<SpineElement<ELEMENT> > >
+ SpineAxisymmetricFluidInterfaceElement<SpineElement<ELEMENT> > >
 {
 
 private:
@@ -115,7 +115,8 @@ StaticSingleLayerMesh<ELEMENT>::StaticSingleLayerMesh(const unsigned &nx,
                                             const unsigned &nh,
                                             const double & half_width) :
  SingleLayerSpineMesh<SpineElement<ELEMENT>, 
-                      SpineLineFluidInterfaceElement<SpineElement<ELEMENT> > >
+                      SpineAxisymmetricFluidInterfaceElement<
+                       SpineElement<ELEMENT> > >
  (nx,nh,half_width,1.0)
                                                
 {
@@ -123,8 +124,8 @@ StaticSingleLayerMesh<ELEMENT>::StaticSingleLayerMesh(const unsigned &nx,
  this->element_reorder();
  
  // Last interface element:
- SpineLineFluidInterfaceElement<SpineElement<ELEMENT> >* el_pt=
-  dynamic_cast<SpineLineFluidInterfaceElement<
+ SpineAxisymmetricFluidInterfaceElement<SpineElement<ELEMENT> >* el_pt=
+  dynamic_cast<SpineAxisymmetricFluidInterfaceElement<
  SpineElement<ELEMENT> >*>(this->Interface_element_pt[this->Nx-1]);
  
  //Now make our edge (point)  element
@@ -202,7 +203,8 @@ private:
 template<class ELEMENT>
 CapProblem<ELEMENT>::CapProblem(const bool& hijack_internal) :
  Ca(2.1),  //Initialise value of Ca to some random value
- Volume(0.5),  //Initialise the value of the volume 
+ Volume(0.125),  //Initialise the value of the volume:
+                 //the physical volume divided by 2pi
  Pext(1.23),  //Initialise the external pressure to some random value
  Angle(0.5*MathematicalConstants::Pi) //Initialise the contact angle
 {
@@ -276,8 +278,8 @@ CapProblem<ELEMENT>::CapProblem(const bool& hijack_internal) :
  for(unsigned e=0;e<n_interface;e++)
   {
    //Cast to a 1D element
-   SpineLineFluidInterfaceElement<SpineElement<ELEMENT> >*el_pt=
-    dynamic_cast<SpineLineFluidInterfaceElement<SpineElement<ELEMENT> >*>
+   SpineAxisymmetricFluidInterfaceElement<SpineElement<ELEMENT> >*el_pt=
+    dynamic_cast<SpineAxisymmetricFluidInterfaceElement<SpineElement<ELEMENT> >*>
     (Fluid_mesh_pt->interface_element_pt(e));
 
    //Set the Capillary number
@@ -379,8 +381,8 @@ void CapProblem<ELEMENT>::create_volume_constraint_elements()
      int face_index = Fluid_mesh_pt->face_index_at_boundary(b,e);
      
      // Create new element
-     SpineLineVolumeConstraintBoundingElement<ELEMENT>* el_pt =
-      new SpineLineVolumeConstraintBoundingElement<ELEMENT>(
+     SpineAxisymmetricVolumeConstraintBoundingElement<ELEMENT>* el_pt =
+      new SpineAxisymmetricVolumeConstraintBoundingElement<ELEMENT>(
        bulk_elem_pt,face_index);   
 
      //Set the "master" volume control element
@@ -468,9 +470,8 @@ void CapProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  Trace_file << " "  << Fluid_mesh_pt->spine_pt(nspine-1)->height();
  Trace_file << " " 
             << dynamic_cast<ELEMENT*>(Fluid_mesh_pt->bulk_element_pt(0))
-  ->p_nst(0)-
-  External_pressure_data_pt->value(0);
- Trace_file << " " << -2.0*cos(Angle)/Ca;
+  ->p_axi_nst(0) - External_pressure_data_pt->value(0);
+ Trace_file << " " << -4.0*cos(Angle)/Ca;
  Trace_file << std::endl;
  
 }
@@ -561,7 +562,8 @@ private:
 template<class ELEMENT>
 PseudoSolidCapProblem<ELEMENT>::PseudoSolidCapProblem(const bool& hijack_internal) :
  Ca(2.1),       //Initialise value of Ca to some random value
- Volume(0.5),   //Initialise the value of the volume 
+ Volume(0.125),   //Initialise the value of the volume
+                  // the physical volume divided by 2pi
  Pext(1.23),    //Initialise the external pressure to some random value
  Angle(0.5*MathematicalConstants::Pi) //Initialise the contact angle
 {
@@ -760,8 +762,8 @@ void PseudoSolidCapProblem<ELEMENT>::create_free_surface_elements()
    int face_index = Bulk_mesh_pt->face_index_at_boundary(b,e);
    
    // Create new element
-   ElasticLineFluidInterfaceElement<ELEMENT>* el_pt =
-    new ElasticLineFluidInterfaceElement<ELEMENT>(
+   ElasticAxisymmetricFluidInterfaceElement<ELEMENT>* el_pt =
+    new ElasticAxisymmetricFluidInterfaceElement<ELEMENT>(
      bulk_elem_pt,face_index);   
      
    // Add it to the mesh
@@ -813,8 +815,8 @@ void PseudoSolidCapProblem<ELEMENT>::create_volume_constraint_elements()
       int face_index = Bulk_mesh_pt->face_index_at_boundary(b,e);
       
       // Create new element
-      LineVolumeConstraintBoundingSolidElement<ELEMENT>* el_pt =
-       new LineVolumeConstraintBoundingSolidElement<ELEMENT>(
+      AxisymmetricVolumeConstraintBoundingSolidElement<ELEMENT>* el_pt =
+       new AxisymmetricVolumeConstraintBoundingSolidElement<ELEMENT>(
         bulk_elem_pt,face_index);   
 
       //Set the "master" volume control element
@@ -840,7 +842,7 @@ void PseudoSolidCapProblem<ELEMENT>::create_contact_angle_element()
   
  //Make the bounding element for the contact angle constraint
  FluidInterfaceBoundingElement* el_pt = 
-  dynamic_cast<ElasticLineFluidInterfaceElement<ELEMENT>*> 
+  dynamic_cast<ElasticAxisymmetricFluidInterfaceElement<ELEMENT>*> 
   (Free_surface_mesh_pt->element_pt(n_free_surface-1))->
   make_bounding_element(1);
  
@@ -940,9 +942,11 @@ void PseudoSolidCapProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
             << Free_surface_mesh_pt->finite_element_pt(ninterface-1)
   ->node_pt(np-1)->x(1);
  Trace_file << " " 
-            << dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(0))->p_nst(0)-
+            << 
+  dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(0))
+  ->p_axi_nst(0)-
                External_pressure_data_pt->value(0);
- Trace_file << " " << -2.0*cos(Angle)/Ca;
+ Trace_file << " " << -4.0*cos(Angle)/Ca;
  Trace_file << std::endl;
 
 } //end_of_doc_solution
@@ -964,7 +968,8 @@ int main()
    bool hijack_internal=false;
    if (i==1) hijack_internal=true;
    //Construct the problem
-   CapProblem<Hijacked<QCrouzeixRaviartElement<2> >  > problem(hijack_internal);
+   CapProblem<Hijacked<AxisymmetricQCrouzeixRaviartElement>  > 
+    problem(hijack_internal);
 
    string dir_name="RESLT_hijacked_external";
    if (i==1) dir_name="RESLT_hijacked_internal";
@@ -983,7 +988,7 @@ int main()
    if (i==1) hijack_internal=true;
    //Construct the problem
    PseudoSolidCapProblem<Hijacked<
-     PseudoSolidNodeUpdateElement<QCrouzeixRaviartElement<2>,
+     PseudoSolidNodeUpdateElement<AxisymmetricQCrouzeixRaviartElement,
     QPVDElementWithPressure<2> > > >  problem(hijack_internal);
 
    string dir_name="RESLT_elastic_hijacked_external";

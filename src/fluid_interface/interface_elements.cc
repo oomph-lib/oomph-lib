@@ -1200,65 +1200,83 @@ fill_in_generic_residual_contribution_interface(Vector<double> &residuals,
 ///Overload the output function
 //===========================================================================
 void SurfaceFluidInterfaceElement::
-output(std::ostream &outfile, const unsigned &n_plot)
+output(std::ostream &outfile, const unsigned &nplot)
 {
- //Set output Vector
+ //Storage for the local coordinate
  Vector<double> s(2);
-
- //Tecplot header info 
- outfile << "ZONE I=" << n_plot << ", J=" << n_plot << std::endl;
  
-   //Loop over element nodes
-   for(unsigned l=0;l<n_plot;l++)
+ // Tecplot header info
+ outfile << tecplot_zone_string(nplot);
+ 
+ // Loop over plot points
+ unsigned num_plot_points=nplot_points(nplot);
+ for (unsigned iplot=0;iplot<num_plot_points;iplot++)
+  {
+   
+   // Get local coordinates of plot point
+   get_s_plot(iplot,nplot,s);
+  
+   // Coordinates
+   for(unsigned i=0;i<3;i++) 
     {
-     for(unsigned k=0;k<n_plot;k++)
-      {
-       s[0] = -1.0 + l*2.0/(n_plot-1);
-       s[1] = -1.0 + k*2.0/(n_plot-1);  
-
-       //Output the x,y,z, u,v,w
-       for(unsigned i=0;i<3;i++) outfile << this->interpolated_x(s,i) << " ";
-       for(unsigned i=0;i<3;i++) outfile << interpolated_u(s,i) << " ";      
-
-       //Output a dummy pressure
-       outfile << 0.0 << std::endl;
-      }
+     outfile << interpolated_x(s,i) << " ";
     }
-   outfile << std::endl;
+   
+   // Velocities
+   for(unsigned i=0;i<3;i++) 
+    {
+     outfile << interpolated_u(s,i) << " ";
+    }
+   
+   // Dummy Pressure
+   outfile << 0.0  << " ";
+  
+   outfile << std::endl;   
+  }
+ outfile << std::endl;
+
+ // Write tecplot footer (e.g. FE connectivity lists)
+ write_tecplot_zone_footer(outfile,nplot);
 }
 
 //===========================================================================
 ///Overload the output function
 //===========================================================================
 void SurfaceFluidInterfaceElement::
-output(FILE* file_pt, const unsigned &n_plot)
+output(FILE* file_pt, const unsigned &nplot)
 {
- //Set output Vector
+ //Storage for local coordinates
  Vector<double> s(2);
  
- //Tecplot header info 
- fprintf(file_pt,"ZONE I=%i, J=%i \n",n_plot,n_plot);
+ // Tecplot header info
+ fprintf(file_pt,"%s",tecplot_zone_string(nplot).c_str());
  
- //Loop over plot points
- for(unsigned l=0;l<n_plot;l++)
+ // Loop over plot points
+ unsigned num_plot_points=nplot_points(nplot);
+ for (unsigned iplot=0;iplot<num_plot_points;iplot++)
   {
-   for(unsigned k=0;k<n_plot;k++)
+   // Get local coordinates of plot point
+   get_s_plot(iplot,nplot,s);
+   
+   // Coordinates
+   for(unsigned i=0;i<3;i++) 
     {
-     s[0] = -1.0 + l*2.0/(n_plot-1);
-     s[1] = -1.0 + k*2.0/(n_plot-1);
- 
-     //Output the x,y,u,v 
-     for(unsigned i=0;i<3;i++) 
-      {fprintf(file_pt,"%g ",this->interpolated_x(s,i));}
-
-     for(unsigned i=0;i<3;i++) 
-      {fprintf(file_pt,"%g ",this->interpolated_u(s,i));}
-
-     //Output a dummy pressure
-     fprintf(file_pt,"0.0 \n");
+     fprintf(file_pt,"%g ",interpolated_x(s,i));
     }
+   
+   // Velocities
+   for(unsigned i=0;i<3;i++) 
+    {
+     fprintf(file_pt,"%g ",interpolated_u(s,i));
+    }
+   
+   // Dummy Pressure
+   fprintf(file_pt,"%g \n",0.0);
   }
  fprintf(file_pt,"\n");
+ 
+ // Write tecplot footer (e.g. FE connectivity lists)
+ write_tecplot_zone_footer(file_pt,nplot);
 }
 
 }

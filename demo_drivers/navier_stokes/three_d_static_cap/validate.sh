@@ -18,6 +18,7 @@ echo "Running 3D static cap validation "
 mkdir RESLT_TH_internal RESLT_TH_external RESLT_CR_internal RESLT_CR_external
 mkdir RESLT_TH_internal_elastic RESLT_TH_external_elastic RESLT_CR_internal_elastic RESLT_CR_external_elastic
 ../3d_static_cap > OUTPUT_3d_static_cap
+../3d_static_cap_elastic > OUTPUT_3d_static_cap_elastic
 echo "done"
 echo " " >> validation.log
 echo "3D static cap validation" >> validation.log

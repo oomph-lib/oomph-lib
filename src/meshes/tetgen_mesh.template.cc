@@ -1093,9 +1093,10 @@ void TetgenMesh<ELEMENT>::build_from_scaffold(TimeStepper* time_stepper_pt,
 /// to true). Doc faces in output file.
 //======================================================================
 template <class ELEMENT>
-void TetgenMesh<ELEMENT>::setup_boundary_coordinates(const unsigned& b,
-                                                     const bool& switch_normal,
-                                                     std::ofstream& outfile)
+void TetgenMesh<ELEMENT>::setup_boundary_coordinates_generic(
+ const unsigned& b,
+ const bool& switch_normal,
+ std::ofstream& outfile)
 {
 
  // Temporary storage for face elements
@@ -1249,7 +1250,7 @@ void TetgenMesh<ELEMENT>::setup_boundary_coordinates(const unsigned& b,
         << "You can suppress this error message by recompiling \n"
         << "recompiling without PARANOID or by changing the tolerance.\n";
        throw OomphLibError(error_message.str(),
-                           "TetgenMesh::setup_boundary_coordinates()",
+                           "TetgenMesh::setup_boundary_coordinates_generic()",
                            OOMPH_EXCEPTION_LOCATION);
       }
     }
@@ -1304,7 +1305,7 @@ void TetgenMesh<ELEMENT>::setup_boundary_coordinates(const unsigned& b,
         << "You can suppress this error message by recompiling \n"
         << "recompiling without PARANOID or by changing the tolerance.\n";
        throw OomphLibError(error_message.str(),
-                           "TetgenMesh::setup_boundary_coordinates()",
+                           "TetgenMesh::setup_boundary_coordinates_generic()",
                            OOMPH_EXCEPTION_LOCATION);
       }
 #endif

@@ -351,8 +351,9 @@ namespace oomph
      Vector<double> &residuals,DenseMatrix<double> &jacobian,
      const unsigned &flag,
      const Shape &psif, const DShape &dpsifds,
+     const Vector<double> &interpolated_x,
      const Vector<double> &interpolated_n, 
-     const double &r, const double &W, const double &J)
+     const double &W, const double &J)
      
     {
      //Loop over the shape functions
@@ -365,6 +366,9 @@ namespace oomph
        //Note same shape functions used for lagrange multiplier field
        interpolated_lagrange += lagrange(l)*psif[l];
       }
+
+     //Cache the radial position
+     const double r = interpolated_x[0];
      
      int local_eqn=0, local_unknown = 0;
      //Loop over the shape functions
@@ -380,7 +384,8 @@ namespace oomph
           {
            //Add in Lagrange multiplier contribution
            residuals[local_eqn] -= 
-            r*interpolated_lagrange*interpolated_n[i]*psif[l]*W*J;
+            r*interpolated_lagrange*
+            interpolated_n[i]*psif[l]*W*J;
            
            //Do the Jacobian calculation
            if(flag)

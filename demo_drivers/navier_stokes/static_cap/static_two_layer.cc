@@ -41,6 +41,8 @@
 // The mesh
 #include "meshes/two_layer_spine_mesh.h"
 //Include our special fixed volume interface elements
+//These are used to overload the spine element to compute the
+//additional functions required to enforce the volume constraint.
 #include "fix_vol_int_elements.h"
 
 //Use the std namespace
@@ -227,7 +229,7 @@ CapProblem<ELEMENT>::CapProblem
 
    //Pass the Data item that contains the single (pressure) value
    // that has been "traded" for the volume constraint to the
-   // surface elements -- hacky! 
+   // surface elements
    el_pt->set_traded_pressure_data(hijacked_pressure_data_pt);
   }
  

@@ -542,7 +542,7 @@ public:
   // Don't switch the normal
   bool switch_normal=false;
 
-  setup_boundary_coordinates(b,switch_normal,some_file);
+  this->setup_boundary_coordinates_generic(b,switch_normal,some_file);
  }
  
  /// \short Setup boundary coordinate on boundary b which is
@@ -558,7 +558,7 @@ public:
   // Dummy file
   std::ofstream some_file;
   
-  setup_boundary_coordinates(b,switch_normal,some_file);
+  this->setup_boundary_coordinates_generic(b,switch_normal,some_file);
  }
  
 
@@ -576,9 +576,8 @@ public:
    // Don't switch the normal
    bool switch_normal=false;
    
-   setup_boundary_coordinates(b,switch_normal,outfile);
+   this->setup_boundary_coordinates_generic(b,switch_normal,outfile);
   }
-
 
  /// \short Setup boundary coordinate on boundary b which is
  /// assumed to be planar. Boundary coordinates are the
@@ -591,8 +590,24 @@ public:
  /// to true). Doc faces in output file.
  void setup_boundary_coordinates(const unsigned& b,
                                  const bool& switch_normal,
-                                 std::ofstream& outfile);
+                                 std::ofstream& outfile)
+ {
+  this->setup_boundary_coordinates_generic(b,switch_normal,outfile);
+ }
 
+ /// \short Setup boundary coordinate on boundary b which is
+ /// assumed to be planar. Boundary coordinates are the
+ /// x-y coordinates in the plane of that boundary with the
+ /// x-axis along the line from the (lexicographically)
+ /// "lower left" to the "upper right" node. The y axis
+ /// is obtained by taking the cross-product of the positive
+ /// x direction with the outer unit normal computed by
+ /// the face elements (or its negative if switch_normal is set
+ /// to true). Doc faces in output file.
+ virtual void setup_boundary_coordinates_generic(const unsigned& b,
+                                                 const bool& switch_normal,
+                                                 std::ofstream& outfile);
+ 
 
   /// Return the number of elements adjacent to boundary b in region r
   inline unsigned nboundary_element_in_region(const unsigned &b,

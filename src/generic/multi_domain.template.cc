@@ -106,6 +106,9 @@ namespace oomph
   (Problem* problem_pt, Mesh* const &mesh_pt, Mesh* const &external_mesh_pt,
    const unsigned& interaction_index)
   {
+   // Bulk elements must not be external elements in this case
+   Use_bulk_element_as_external=false;
+
    // Call the auxiliary function with GEOM_OBJECT=EXT_ELEMENT
    // and EL_DIM_EUL=EL_DIM_LAG=dimension returned from helper function
    get_dim_helper(problem_pt,mesh_pt,external_mesh_pt);

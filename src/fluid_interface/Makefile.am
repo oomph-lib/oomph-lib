@@ -3,7 +3,7 @@
 #-----------------------
 
 # Define the sources
-sources = interface_elements.cc
+sources = interface_elements.cc constrained_volume_elements.cc
 
 # Include files which shouldn't be compiled
 incl_cc_files = 
