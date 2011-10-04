@@ -854,6 +854,7 @@ void HSL_MA42::resolve(const DoubleVector &rhs, DoubleVector &result)
  //If there has been an error throw it
  if(Info[0] < 0) {throw NewtonSolverError(true);}
 
+ result.build(this->distribution_pt());
  //Put the answer into the result array
  for(int i=0;i<n_dof;++i) {result[i] = x[0][i];}
 
