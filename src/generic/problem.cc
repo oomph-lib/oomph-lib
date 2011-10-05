@@ -8013,7 +8013,6 @@ void Problem::newton_solve()
    if (!Shut_up_in_newton_solve) 
     {
      oomph_info << "Time outside linear solver        : "
-                << (total_time-total_linear_solver_time)/total_time*100.0
                 << "[too fast]"
                 << std::endl;
     }
@@ -12280,6 +12279,7 @@ void Problem::refine_uniformly_aux(const Vector<unsigned>& nrefine_for_mesh,
   }
 
 
+#ifdef OOMPH_HAS_MPI
 
  // Prune it?
  if (prune)
@@ -12297,6 +12297,17 @@ void Problem::refine_uniformly_aux(const Vector<unsigned>& nrefine_for_mesh,
     }
   }
  else
+#else
+  if (prune)
+   {
+    std::ostringstream error_message;
+    error_message  
+     << "Requested pruning in serial build. Ignoring the request.\n"; 
+    OomphLibWarning(error_message.str(),
+                    "Problem::refine_uniformly_aux()",
+                    OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
   {
    //Do equation numbering
    oomph_info <<"Number of equations after Problem::refine_uniformly_aux(): " 

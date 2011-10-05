@@ -87,28 +87,13 @@
 # it immediately wiped out when you re-install the library after
 # finishing your changes. We specify the location of the blas,
 # lapack, hypre and trilinos libraries, the latter two assumed
-# to have been compiled with mpi support. 
+# to have been compiled without mpi support. 
 #
-#--enable-suppress-doc
---enable-MPI
 --enable-symbolic-links-for-headers
---with-mpi-include-directory=/usr/lib/openmpi/include
 --with-blas=/home/mheil/local/lib/blas/blas.a
 --with-lapack=/home/mheil/local/lib/lapack/lapack.a
---with-hypre=/home/mheil/local/hypre_default_installation_mpi
---with-trilinos=/home/mheil/local/trilinos_default_installation_mpi
---with-mpi-self-tests="mpirun -np 2"
-CXXFLAGS="-O6 -Wall"
-CFLAGS="-O6"
-FFLAGS="-O6"
-CXX=mpic++
-CC=mpicc
-F77=mpif77
-LD=mpif77
-
-
-
-#--with-blacs=/home/mheil/local/lib/blacs_with_copy
-#--with-scalapack=/home/mheil/local/lib/scalapack/libscalapack.a
-#--with-pord=/home/mheil/local/pord/lib/libpord.a 
-#--with-mumps=/home/mheil/local/mumps
+--with-hypre=/home/mheil/local/hypre_default_installation_serial
+--with-trilinos=/home/mheil/local/trilinos_default_installation_serial
+CXXFLAGS="-g -Wall"
+CFLAGS="-g -Wall" 
+FFLAGS="-g -Wall" 

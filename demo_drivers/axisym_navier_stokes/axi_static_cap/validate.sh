@@ -19,6 +19,7 @@ mkdir RESLT_hijacked_external
 mkdir RESLT_hijacked_internal
 mkdir RESLT_elastic_hijacked_external
 mkdir RESLT_elastic_hijacked_internal
+#valgrind --leak-check=full -v 
 ../axi_static_cap > OUTPUT_axi_static_cap
 echo "done"
 echo " " >> validation.log

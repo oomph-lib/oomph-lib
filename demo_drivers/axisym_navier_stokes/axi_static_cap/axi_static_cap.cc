@@ -33,6 +33,8 @@
 // spherical shells and the pressure jump across the interface should be
 // 2 cos(alpha)/0.5 = 4 cos(alpha)/Ca.
 
+//#include <fenv.h>
+
 //OOMPH-LIB include files
 #include "generic.h"
 #include "axisym_navier_stokes.h"
@@ -959,6 +961,8 @@ void PseudoSolidCapProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 //======================================================================
 int main()
 {
+
+ //feenableexcept(FE_INVALID | FE_DIVBYZERO | FE_OVERFLOW | FE_UNDERFLOW);
 
  // Solve the problem twice, once hijacking an internal, once
  // hijacking the external pressure
