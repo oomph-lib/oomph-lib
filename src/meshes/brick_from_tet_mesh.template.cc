@@ -4923,6 +4923,10 @@ namespace oomph
   // Cleanup
   for (unsigned e=0;e<4;e++)
    {
+    for (unsigned j=0;j<8;j++)
+     {
+      delete dummy_q_el_pt[e]->node_pt(j);
+     }
     delete dummy_q_el_pt[e];
    }
 

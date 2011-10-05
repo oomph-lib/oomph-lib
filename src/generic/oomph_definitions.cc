@@ -30,9 +30,7 @@
 
 
 #include "stacktrace.h"
-
 #include "oomph_definitions.h"
-
 
 
 namespace oomph
@@ -80,14 +78,16 @@ namespace oomph
 /// function name,  a location string provided by the 
 /// OOMPH_EXCEPTION_LOCATION and an exception type "WARNING" or "ERROR" 
 /// and combines them into a standard error message that is written to the
-/// exception stream. The output_width of the message can also be specified
+/// exception stream. The output_width of the message can also be specified.
+/// Optionally provide a traceback of the function calls.
 //==========================================================================
 OomphLibException::OomphLibException(const std::string &error_description,
                                      const std::string &function_name,
                                      const char *location,
                                      const std::string &exception_type,
                                      std::ostream &exception_stream,
-                                     const unsigned &output_width) : 
+                                     const unsigned &output_width, 
+                                     bool list_trace_back) : 
  std::runtime_error("OomphException")
 {
  //Build an exception header string from the information passed
@@ -117,8 +117,11 @@ OomphLibException::OomphLibException(const std::string &error_description,
  exception_stream << std::endl << error_description << std::endl;
 
  // Print the stacktrace
- print_stacktrace(exception_stream);
- 
+ if (list_trace_back)
+  {
+   print_stacktrace(exception_stream);
+  }
+
  //Finish off with another set of double lines
  for(unsigned i=0;i<output_width;i++) {exception_stream << "=";}
  exception_stream << std::endl << std::endl;

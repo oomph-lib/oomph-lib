@@ -1455,8 +1455,7 @@ AM_CONDITIONAL(ALREADY_HAVE_SCALAPACK, test x$have_scalapack = xtrue)
 
 
 #---------------------------------------------------
-# Potential location for the blacs libraries with 
-# copy of blacs.a called blacs_copy.a. 
+# Potential location for the blacs libraries
 #
 # If the complete blacs library is available on
 # your machine, specify the absolute path to the
@@ -1467,12 +1466,10 @@ check_for_blacs=false
 
 AC_ARG_WITH(blacs,
 [  --with-blacs[=ABSOLUTE_PATH] ABSOLUTE PATH to blacs libraries
-                               e.g. /usr/local/lib/ 
+                               e.g. /usr/local/lib/ [with trailing forward slash!]
                                This specified directory must contain
                                the files blacs.a blacsF77.a and blacs_copy.a
-                               where blacs_copy.a is a copy of (or 
-                               symbolic link to) blacs.a -- needed to
-                               deal with some linking problems in mumps.],[
+                               the latter being a copy of blacs.a.],[
   if test "$withval" != "no" -a "$withval" != "yes"; then
     check_for_blacs=true
     BLACS_LIB=$withval
@@ -1784,7 +1781,7 @@ fi
 
 
 
-# Blacs with copy?
+# Blacs?
 if test x$have_blacs = xtrue; then  
   external_libs=`echo  " $BLACS_LIB/blacs.a $BLACS_LIB/blacsF77.a  $BLACS_LIB/blacs_copy.a" $external_libs`
 fi

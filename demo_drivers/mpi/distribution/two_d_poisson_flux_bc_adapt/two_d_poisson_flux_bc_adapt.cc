@@ -149,8 +149,13 @@ public:
  /// Constructor: Pass pointer to source function
  RefineableTwoMeshFluxPoissonProblem(PoissonEquations<2>::PoissonSourceFctPt source_fct_pt);
 
- /// Destructor (empty)
- ~RefineableTwoMeshFluxPoissonProblem(){}
+ /// Destructor
+ ~RefineableTwoMeshFluxPoissonProblem()
+  {
+   delete Bulk_mesh_pt->spatial_error_estimator_pt();
+   delete Bulk_mesh_pt;
+   delete Surface_mesh_pt;
+  }
 
  /// Doc the solution. DocInfo object stores flags/labels for where the
  /// output gets written to
@@ -448,6 +453,19 @@ void RefineableTwoMeshFluxPoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_inf
  unsigned npts;
  npts=5; 
 
+
+ // Output solution with halo elements 
+ //-----------------------------------
+ Bulk_mesh_pt->enable_output_of_halo_elements();
+ sprintf(filename,"%s/soln_with_halo%i_on_proc%i.dat",
+         doc_info.directory().c_str(),
+         doc_info.number(),this->communicator_pt()->my_rank());
+ some_file.open(filename);
+ Bulk_mesh_pt->output(some_file,npts);
+ some_file.close();
+ Bulk_mesh_pt->disable_output_of_halo_elements();
+
+
  // Output solution 
  //-----------------
  sprintf(filename,"%s/soln%i_on_proc%i.dat",doc_info.directory().c_str(),
@@ -553,6 +571,18 @@ int main(int argc, char* argv[])
  MPI_Helpers::init(argc,argv);
 #endif
 
+ // Switch off output modifier
+ oomph_info.output_modifier_pt() = &default_output_modifier;
+
+ // Define processor-labeled output file for all on-screen stuff
+ std::ofstream output_stream;
+ char filename[100];
+ sprintf(filename,"RESLT/OUTPUT.%i",MPI_Helpers::communicator_pt()->my_rank());
+ output_stream.open(filename);
+ oomph_info.stream_pt() = &output_stream;
+ OomphLibWarning::set_stream_pt(&output_stream);
+ OomphLibError::set_stream_pt(&output_stream);  
+
  //Set up the problem with 2D nine-node elements from the
  //QPoissonElement family. Pass pointer to source function. 
  RefineableTwoMeshFluxPoissonProblem<RefineableQPoissonElement<2,3> > 
@@ -566,7 +596,6 @@ int main(int argc, char* argv[])
  //Get the partition from file
  Vector<unsigned> element_partition(n_el);
  std::ifstream input_file;
- char filename[100];
  sprintf(filename,"two_d_poisson_flux_partition.dat");
  input_file.open(filename);
  std::string input_string;
@@ -583,7 +612,6 @@ int main(int argc, char* argv[])
  // Distribute the problem
  bool report_stats=false;
  problem.distribute(element_partition,mesh_doc_info,report_stats);
-
 
  // Optionally check and document the halo schemes
  problem.check_halo_schemes(mesh_doc_info);

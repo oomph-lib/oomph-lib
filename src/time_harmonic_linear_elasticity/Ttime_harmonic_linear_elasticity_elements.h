@@ -41,6 +41,7 @@
 #include "../generic/oomph_utilities.h"
 #include "../generic/Telements.h"
 #include "time_harmonic_linear_elasticity_elements.h"
+#include "../generic/error_estimator.h"
 
 namespace oomph
 {
@@ -62,7 +63,8 @@ namespace oomph
 //======================================================================
 template <unsigned DIM, unsigned NNODE_1D>
  class TTimeHarmonicLinearElasticityElement : public TElement<DIM,NNODE_1D>, 
- public TimeHarmonicLinearElasticityEquations<DIM>
+ public TimeHarmonicLinearElasticityEquations<DIM>,
+ public virtual ElementWithZ2ErrorEstimator
  {
   
    public:
@@ -109,6 +111,78 @@ template <unsigned DIM, unsigned NNODE_1D>
   {
    TimeHarmonicLinearElasticityEquations<DIM>::output(file_pt,n_plot);
   }
+
+
+ /// \short Number of vertex nodes in the element
+ unsigned nvertex_node() const
+ {return TElement<DIM,NNODE_1D>::nvertex_node();}
+ 
+ /// \short Pointer to the j-th vertex node in the element
+ Node* vertex_node_pt(const unsigned& j) const
+ {
+  return TElement<DIM,NNODE_1D>::vertex_node_pt(j);
+ }
+ 
+ /// \short Order of recovery shape functions for Z2 error estimation:
+ /// Same order as shape functions.
+ unsigned nrecovery_order() {return NNODE_1D-1;}
+
+ /// Number of 'flux' terms for Z2 error estimation 
+ unsigned num_Z2_flux_terms()
+ {
+  // DIM Diagonal strain rates and DIM*(DIM-1)/2 off diagonal terms
+  return 2*(DIM + DIM*(DIM-1)/2);
+ }
+ 
+ /// \short Get 'flux' for Z2 error recovery:   Upper triangular entries
+ /// in strain tensor.
+ void get_Z2_flux(const Vector<double>& s, Vector<double>& flux) 
+ {
+#ifdef PARANOID
+  unsigned num_entries=2*(DIM+((DIM*DIM)-DIM)/2);
+  if (flux.size()!=num_entries)
+   {
+    std::ostringstream error_message;
+    error_message << "The flux vector has the wrong number of entries, " 
+                  << flux.size() << ", whereas it should be " 
+                  << num_entries << std::endl;
+    throw OomphLibError(
+     error_message.str(),
+     "RefineableTimeHarmonicLinearElasticityEquations::get_Z2_flux()",
+     OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+  
+  // Get strain matrix
+  DenseMatrix<std::complex<double> > strain(DIM);
+  this->get_strain(s,strain);
+  
+  // Pack into flux Vector
+  unsigned icount=0;
+  
+  // Start with diagonal terms
+  for(unsigned i=0;i<DIM;i++)
+   {
+    flux[icount]=strain(i,i).real();
+    icount++;
+    flux[icount]=strain(i,i).imag();
+    icount++;
+   }
+  
+  //Off diagonals row by row
+  for(unsigned i=0;i<DIM;i++)
+   {
+    for(unsigned j=i+1;j<DIM;j++)
+     {
+      flux[icount]=strain(i,j).real();
+      icount++;
+      flux[icount]=strain(i,j).imag();
+      icount++;
+     }
+   }
+ }
+ 
+ 
 
 };
 

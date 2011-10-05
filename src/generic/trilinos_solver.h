@@ -297,7 +297,7 @@ class TrilinosAztecOOSolver : public IterativeLinearSolver
  TrilinosAztecOOSolver()
  {
   
-  // By default don't use workaround for creating of epetra matrix that 
+  // By default use workaround for creating of epetra matrix that 
   // respects aztecoo's ordering requirements
   Use_aztecoo_workaround_for_epetra_matrix_setup=true;
   

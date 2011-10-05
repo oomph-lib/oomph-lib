@@ -721,11 +721,11 @@ void TreeBasedRefineableMeshBase::adapt(OomphCommunicator* comm_pt,
     Nrefined=0;
 
 #ifdef OOMPH_HAS_MPI
-    // Flush any external element storage - any interaction will still
+    // Delete any external element storage - any interaction will still
     // be set up on the fly again, so we need to get rid of old information.
     // This particularly causes problems in multi-domain examples where
     // we decide not to refine one of the meshes
-    this->flush_all_external_storage();
+    this->delete_all_external_storage();
 #endif
    }
 
@@ -835,9 +835,9 @@ get_refinement_levels(unsigned& min_refinement_level,
 void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
 {
 #ifdef OOMPH_HAS_MPI
- // Flush any external element storage before performing the adaptation
+ // Delete any external element storage before performing the adaptation
  // (in particular, external halo nodes that are on mesh boundaries)
- this->flush_all_external_storage();
+ this->delete_all_external_storage();
 #endif
 
  //Only perform the adapt step if the mesh has any elements.  This is relevant

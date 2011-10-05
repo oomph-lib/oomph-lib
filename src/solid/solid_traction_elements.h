@@ -2362,6 +2362,1045 @@ protected:
 
 
 
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+
+
+
+//======================================================================
+/// A class for elements that allow the imposition of a displacement
+/// constraint for bulk solid elements via a Lagrange multiplier.
+/// Prescribed displaced is obtained from an adjacent bulk solid
+/// element (rather than from a lower-dimensional GeomObject
+/// as in the corresponding ImposeDisplacementByLagrangeMultiplierElement
+/// class. The present class is particularly suited for parallel
+/// FSI computations.
+/// \b NOTE: Currently (and for the foreseeable future) this 
+/// element only works with bulk elements that do not have
+/// generalised degrees of freedom (so it won't work with
+/// Hermite-type elements, say). The additional functionality 
+/// to deal with such elements could easily be added (once a 
+/// a suitable test case is written). For now we simply throw
+/// errors if an attempt is made to use the element with an unsuitable
+/// bulk element.
+//======================================================================
+template <class ELEMENT>
+class FSIImposeDisplacementByLagrangeMultiplierElement : 
+  public virtual FaceGeometry<ELEMENT>, 
+  public virtual SolidFaceElement,
+  public virtual ElementWithExternalElement
+{
+ 
+public:
+ 
+ /// \short Constructor takes a "bulk" element and the 
+ /// index that identifies which face the FaceElement is supposed
+ /// to be attached to. The optional identifier can be used
+ /// to distinguish the additional nodal values created by 
+ /// this element from thos created by other FaceElements.
+ FSIImposeDisplacementByLagrangeMultiplierElement(
+  FiniteElement* const &element_pt, 
+  const int &face_index, 
+  const unsigned &id=0,
+  const bool& called_from_refineable_constructor=false) : 
+  FaceGeometry<ELEMENT>(), FaceElement(), ElementWithExternalElement()
+  {     
+   // Set external element storage - one interaction
+   this->set_ninteraction(1);
+
+   //  Store the ID of the FaceElement -- this is used to distinguish
+   // it from any others
+   Id=id;
+   
+#ifdef PARANOID
+   { 
+    //Check that the bulk element is not a refineable 3d element
+    if (!called_from_refineable_constructor)
+     {
+      if(element_pt->dim()==3)
+       {
+        //Is it refineable
+        if(dynamic_cast<RefineableElement*>(element_pt))
+         {
+          //Issue a warning
+          OomphLibWarning(
+           "This face element will not work correctly if nodes are hanging\nUse the refineable version instead. ",
+           "FSIImposeDisplacementByLagrangeMultiplierElement::Constructor",
+           OOMPH_EXCEPTION_LOCATION);
+         }
+       }
+     }
+   }
+
+   {
+    // Check that the bulk element does not require generalised positional
+    // degrees of freedom
+    if(element_pt->nnodal_position_type()!=1)
+     {      
+      throw OomphLibError(
+       "FSIImposeDisplacementByLagrangeMultiplierElement cannot (currently) be used with elements that have generalised positional dofs",
+       "FSIImposeDisplacementByLagrangeMultiplierElement::FSIImposeDisplacementByLagrangeMultiplierElement()",
+       OOMPH_EXCEPTION_LOCATION);
+     }
+   }
+#endif
+ 
+   //Build the face element
+   element_pt->build_face_element(face_index,this);
+
+   // Dimension of the bulk element
+   unsigned dim=element_pt->dim();
+ 
+   // We need dim additional values for each FaceElement node
+   // to store the dim Lagrange multipliers.
+   Vector<unsigned> n_additional_values(nnode(), dim);
+   
+   // Now add storage for Lagrange multipliers and set the map containing 
+   // the position of the first entry of this face element's 
+   // additional values.
+   add_additional_values(n_additional_values,id);
+  }
+ 
+ 
+ /// Fill in the residuals
+ void fill_in_contribution_to_residuals(Vector<double> &residuals)
+  {
+   //Call the generic routine with the flag set to 0
+   fill_in_generic_contribution_to_residuals_fsi_displ_lagr_multiplier(
+    residuals,GeneralisedElement::Dummy_matrix,0);
+  }
+
+ 
+ /// Fill in contribution from Jacobian
+ void fill_in_contribution_to_jacobian(Vector<double> &residuals,
+                                   DenseMatrix<double> &jacobian)
+  {
+   //Call the generic routine with the flag set to 1
+   fill_in_generic_contribution_to_residuals_fsi_displ_lagr_multiplier(
+    residuals,jacobian,1);
+
+   //Add the contribution of the external interaction by finite differences
+   this->fill_in_jacobian_from_external_interaction_by_fd(jacobian);
+  }
+ 
+ /// \short Fill in contribution to Mass matrix and 
+ /// Jacobian. There is no contributiont to mass matrix
+ /// so simply call the fill_in_contribution_to_jacobian term
+ /// Note that the Jacobian is multiplied by minus one to 
+ /// ensure that the mass matrix is positive semi-definite.
+ void fill_in_contribution_to_jacobian_and_mass_matrix(
+  Vector<double> &residuals,
+  DenseMatrix<double> &jacobian,
+  DenseMatrix<double> &mass_matrix)
+  {
+   //Just call the jacobian calculation
+   fill_in_contribution_to_jacobian(residuals,jacobian);
+   
+   //Multiply the residuals and jacobian by minus one
+   const unsigned n_dof = this->ndof();
+   for(unsigned i=0;i<n_dof;i++)
+    {
+     residuals[i] *= -1.0;
+     for(unsigned j=0;j<n_dof;j++)
+      {
+       jacobian(i,j) *= -1.0;
+      }
+    }
+  }
+
+
+ 
+ /// \short Output function
+ void output(std::ostream &outfile, const unsigned &n_plot)
+  {
+   // Elemental dimension
+   unsigned dim_el=dim();
+
+   //Find the number of positional types
+   unsigned n_position_type = this->nnodal_position_type();
+   
+#ifdef PARANOID
+   if(n_position_type!=1)
+    {      
+     throw OomphLibError(
+      "FSIImposeDisplacementByLagrangeMultiplierElement cannot (currently) be used with elements that have generalised positional dofs",
+      "FSIImposeDisplacementByLagrangeMultiplierElement::output()",
+      OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+
+   //Local coord
+   Vector<double> s(dim_el);
+      
+   // # of nodes, 
+   unsigned n_node=nnode();
+   Shape psi(n_node,n_position_type);
+
+   // Tecplot header info
+   outfile << this->tecplot_zone_string(n_plot);
+   
+   // Loop over plot points
+   unsigned num_plot_points=this->nplot_points(n_plot);
+   for (unsigned iplot=0;iplot<num_plot_points;iplot++)
+    {
+     // Get local coordinates of plot point
+     this->get_s_plot(iplot,n_plot,s);
+     
+     // Get shape function
+     shape(s,psi);
+     
+     //Calculate the Eulerian coordinates and Lagrange multiplier
+     Vector<double> x(dim_el+1,0.0);
+     Vector<double> lambda(dim_el+1,0.0);
+     Vector<double> zeta(dim_el,0.0);
+     for(unsigned j=0;j<n_node;j++) 
+      {
+       // Cast to a boundary node
+       BoundaryNodeBase *bnod_pt = 
+        dynamic_cast<BoundaryNodeBase*>(node_pt(j));
+
+       // get the node pt
+       Node* nod_pt = node_pt(j);
+
+       // Get the index of the first nodal value associated with
+       // this FaceElement
+       unsigned first_index=
+        bnod_pt->index_of_first_value_assigned_by_face_element(Id);
+       
+       // higher dimensional quantities
+       for(unsigned i=0;i<dim_el+1;i++)
+        {
+         x[i]+=nodal_position(j,i)*psi(j,0); // need to sort
+                                             // this out properly
+                                             // for generalised dofs
+         lambda[i]+=nod_pt->value
+          (first_index+i)*psi(j,0);
+        }
+       //In-element quantities
+       for(unsigned i=0;i<dim_el;i++)
+        {
+         //Loop over positional types
+         for (unsigned k=0;k<n_position_type;k++)
+          {
+           zeta[i]+=zeta_nodal(j,k,i)*psi(j,k);
+          }
+        }
+      }
+
+     //Output stuff
+     for(unsigned i=0;i<dim_el+1;i++)
+      {
+       outfile << x[i] << " ";
+      }
+     for(unsigned i=0;i<dim_el+1;i++)
+      {
+       outfile << -lambda[i] << " ";
+      }
+     outfile << std::endl;
+    }
+  }
+
+
+ /// \short Output function
+ void output(std::ostream &outfile)
+  {
+   unsigned n_plot=5;
+   output(outfile,n_plot);
+  }
+
+
+protected:
+
+ /// \short Helper function to compute the residuals and, if flag==1, the
+ /// Jacobian 
+ void fill_in_generic_contribution_to_residuals_fsi_displ_lagr_multiplier(
+  Vector<double> &residuals, 
+  DenseMatrix<double> &jacobian, 
+  const unsigned& flag)
+  {
+   
+#ifdef PARANOID
+   //Find out how many positional dofs there are
+   unsigned n_position_type = this->nnodal_position_type();
+
+   if(n_position_type!=1)
+    {      
+     throw OomphLibError(
+      "FSIImposeDisplacementByLagrangeMultiplierElement cannot (currently) be used with elements that have generalised positional dofs",
+      "FSIImposeDisplacementByLagrangeMultiplierElement::fill_in_fsi_generic_contribution_to_residuals_displ_lagr_multiplier()",
+      OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+   //Find out how many nodes there are
+   unsigned n_node = nnode();
+   
+   // Dimension of element
+   unsigned dim_el=dim();
+
+   //Set up memory for the shape functions
+   Shape psi(n_node);
+   DShape dpsids(n_node,dim_el); 
+
+   //Set the value of n_intpt
+   unsigned n_intpt = integral_pt()->nweight();
+ 
+   //Loop over the integration points
+   for(unsigned ipt=0;ipt<n_intpt;ipt++)
+    {
+     //Get the integral weight
+     double w = integral_pt()->weight(ipt);
+     
+     //Only need to call the local derivatives
+     dshape_local_at_knot(ipt,psi,dpsids);
+
+     //Calculate the Eulerian coordinates and Lagrange multiplier
+     Vector<double> x(dim_el+1,0.0);
+     Vector<double> lambda(dim_el+1,0.0);
+     Vector<double> zeta(dim_el,0.0);
+     DenseMatrix<double> interpolated_a(dim_el,dim_el+1,0.0);   
+
+     // Loop over nodes
+     for(unsigned j=0;j<n_node;j++) 
+      {
+       Node* nod_pt=node_pt(j);
+       
+       // Cast to a boundary node
+       BoundaryNodeBase *bnod_pt = 
+        dynamic_cast<BoundaryNodeBase*>(node_pt(j));
+       
+       // Get the index of the first nodal value associated with
+       // this FaceElement
+       unsigned first_index=
+        bnod_pt->index_of_first_value_assigned_by_face_element(Id);
+       
+       //Assemble higher-dimensional quantities
+       for(unsigned i=0;i<dim_el+1;i++)
+        {
+         x[i]+=nodal_position(j,i)*psi(j);
+         lambda[i]+=nod_pt->value(first_index+i)*psi(j);
+         for(unsigned ii=0;ii<dim_el;ii++)
+          {
+           interpolated_a(ii,i) += 
+            lagrangian_position(j,i)*dpsids(j,ii);
+          }
+        }  
+      }
+     
+     //Now find the local undeformed metric tensor from the tangent Vectors
+     DenseMatrix<double> a(dim_el);
+     for(unsigned i=0;i<dim_el;i++)
+      {
+       for(unsigned j=0;j<dim_el;j++)
+        {
+         //Initialise surface metric tensor to zero
+         a(i,j) = 0.0;
+         //Take the dot product
+         for(unsigned k=0;k<dim_el+1;k++)
+          { 
+           a(i,j) += interpolated_a(i,k)*interpolated_a(j,k);
+          }
+        }
+      }
+
+     
+     //Find the determinant of the metric tensor
+     double adet =0.0;
+     switch(dim_el+1)
+      {
+
+      case 2:
+       adet = a(0,0);
+       break;
+
+      case 3:
+       adet = a(0,0)*a(1,1) - a(0,1)*a(1,0);
+       break;
+
+      default:
+       throw 
+        OomphLibError(
+         "Wrong dimension fill_in_generic_contribution_to_residuals_displ_lagr_multiplier",
+         "FSIImposeDisplacementByLagrangeMultiplierElement::fill_in_generic_contribution_to_residuals_fsi_displ_lagr_multiplier()",
+         OOMPH_EXCEPTION_LOCATION);
+      }
+     
+     // Get prescribed wall shape from adjacent bulk element
+     Vector<double> r_prescribed(dim_el+1);
+
+     // Get the local coordinate in the solid element (copy 
+     // operation for Vector)
+     Vector<double> s_adjacent(external_element_local_coord(0,ipt));
+ 
+     // Get the position in the adjacent element
+     FiniteElement* bulk_el_pt=external_element_pt(0,ipt);
+     bulk_el_pt->interpolated_x(s_adjacent,r_prescribed);
+
+     //Premultiply the weights and the square-root of the determinant of 
+     //the metric tensor
+     double W = w*sqrt(adet);
+
+     // Assemble residuals and jacobian
+     
+     //Loop over directions
+     for(unsigned i=0;i<dim_el+1;i++)
+      {     
+       //Loop over the nodes
+       for(unsigned j=0;j<n_node;j++)
+        {          
+         
+         // Assemble residual for Lagrange multiplier:
+        
+         // Cast to a boundary node
+         BoundaryNodeBase *bnod_pt = 
+          dynamic_cast<BoundaryNodeBase*>(node_pt(j));
+
+         // Local eqn number:   
+         int local_eqn=nodal_local_eqn
+          (j,bnod_pt->index_of_first_value_assigned_by_face_element(Id)+i); 
+           
+
+         if (local_eqn>=0)
+          {
+           residuals[local_eqn]+=(x[i]-r_prescribed[i])*psi(j)*W;
+
+           // Do Jacobian too?
+           if (flag==1)
+            {
+             // Loop over the nodes again for unknowns (only diagonal
+             // contribution to direction!).
+             for(unsigned jj=0;jj<n_node;jj++)
+              {     
+               int local_unknown=position_local_eqn(jj,0,i);
+               if (local_unknown>=0)
+                {
+                 jacobian(local_eqn,local_unknown)+=psi(jj)*psi(j)*W;
+                }
+              }
+            }
+          }
+
+         
+         // Add Lagrange multiplier contribution to bulk equations
+
+         // Local eqn number: Node, type, direction
+         local_eqn=position_local_eqn(j,0,i);
+         if (local_eqn>=0)
+          {
+           // Add to residual
+           residuals[local_eqn]+=lambda[i]*psi(j)*W;
+
+           // Do Jacobian too?
+           if (flag==1)
+            {
+             // Loop over the nodes again for unknowns (only diagonal
+             // contribution to direction!).
+             for(unsigned jj=0;jj<n_node;jj++)
+              { 
+               // Cast to a boundary node
+               BoundaryNodeBase *bnode_pt = 
+                dynamic_cast<BoundaryNodeBase*>(node_pt(jj));
+
+               int local_unknown=nodal_local_eqn
+                (jj,
+                 bnode_pt->index_of_first_value_assigned_by_face_element(Id)+i);
+               if (local_unknown>=0)
+                {
+                 jacobian(local_eqn,local_unknown)+=psi(jj)*psi(j)*W;
+                }
+              }
+            }
+          }
+
+        }
+      }
+   
+  
+  } //End of loop over the integration points
+
+  }
+
+
+ /// \short The number of "blocks" that degrees of freedom in this element
+ /// are sub-divided into: Just the solid degrees of freedom themselves.
+ unsigned ndof_types()
+  {
+   return this->dim()+1;
+  };
+ 
+
+ /// \short Create a list of pairs for all unknowns in this element,
+ /// so that the first entry in each pair contains the global equation
+ /// number of the unknown, while the second one contains the number
+ /// of the dof that this unknown is associated with.
+ /// (Function can obviously only be called if the equation numbering
+ /// scheme has been set up.) 
+ void get_dof_numbers_for_unknowns(
+  std::list<std::pair<unsigned long,unsigned> >& block_lookup_list)
+  {
+  
+   // temporary pair (used to store block lookup prior to being added to list)
+   std::pair<unsigned,unsigned> block_lookup;
+  
+   // number of nodes
+   const unsigned n_node = this->nnode();
+
+   //Loop over directions
+   unsigned dim_el = this->dim();
+   for(unsigned i=0;i<dim_el+1;i++)
+    {     
+     //Loop over the nodes
+     for(unsigned j=0;j<n_node;j++)
+      {          
+       // Cast to a boundary node
+       BoundaryNodeBase *bnod_pt = 
+        dynamic_cast<BoundaryNodeBase*>(node_pt(j));
+	 
+       // Local eqn number:
+       int local_eqn=nodal_local_eqn
+        (j,bnod_pt->index_of_first_value_assigned_by_face_element(Id)+i);
+       if (local_eqn>=0)
+        {
+         // store block lookup in temporary pair: First entry in pair
+         // is global equation number; second entry is block type
+         block_lookup.first = this->eqn_number(local_eqn);
+         block_lookup.second = i;
+        
+         // add to list
+         block_lookup_list.push_front(block_lookup);
+        }
+      }
+    }
+  }
+
+ /// Lagrange Id
+ unsigned Id;
+
+}; 
+
+
+
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+
+
+
+//======================================================================
+/// A class for elements that allow the imposition of a displacement
+/// constraint for bulk solid elements via a Lagrange multiplier.
+/// Prescribed displaced is obtained from an adjacent bulk solid
+/// element (rather than from a lower-dimensional GeomObject
+/// as in the corresponding ImposeDisplacementByLagrangeMultiplierElement
+/// class. The present class is particularly suited for parallel
+/// FSI computations.
+/// \b NOTE: Currently (and for the foreseeable future) this 
+/// element only works with bulk elements that do not have
+/// generalised degrees of freedom (so it won't work with
+/// Hermite-type elements, say). The additional functionality 
+/// to deal with such elements could easily be added (once a 
+/// a suitable test case is written). For now we simply throw
+/// errors if an attempt is made to use the element with an unsuitable
+/// bulk element.
+///
+/// REFINEABLE VERSION
+//======================================================================
+template <class ELEMENT>
+class RefineableFSIImposeDisplacementByLagrangeMultiplierElement : 
+  public virtual FSIImposeDisplacementByLagrangeMultiplierElement<ELEMENT>,
+   public virtual NonRefineableSolidElementWithHangingNodes
+
+{
+ 
+public:
+
+ /// \short Constructor takes a "bulk" element and the 
+ /// index that identifies which face the FaceElement is supposed
+ /// to be attached to. The optional identifier can be used
+ /// to distinguish the additional nodal values created by 
+ /// this element from thos created by other FaceElements.
+ RefineableFSIImposeDisplacementByLagrangeMultiplierElement(
+   FiniteElement* const &element_pt, 
+   const int &face_index, 
+   const unsigned &id=0) : 
+   FSIImposeDisplacementByLagrangeMultiplierElement<ELEMENT>(element_pt,
+                                                             face_index,
+                                                             id,true)
+  {}
+ 
+ 
+ /// \short Number of continuously interpolated values: Same for 
+ /// all nodes since it's a refineable element
+ unsigned ncont_interpolated_values() const
+  {
+   return node_pt(0)->nvalue();
+  }
+ 
+ /// Fill in the residuals
+ void fill_in_contribution_to_residuals(Vector<double> &residuals)
+  {
+   //Call the generic routine with the flag set to 0
+   refineable_fill_in_generic_contribution_to_residuals_fsi_displ_lagr_multiplier(
+    residuals,GeneralisedElement::Dummy_matrix,0);
+  }
+ 
+
+ /// Fill in contribution from Jacobian
+ void fill_in_contribution_to_jacobian(Vector<double> &residuals,
+                                   DenseMatrix<double> &jacobian)
+  {
+   //Call the generic routine with the flag set to 1
+   refineable_fill_in_generic_contribution_to_residuals_fsi_displ_lagr_multiplier(
+    residuals,jacobian,1);
+   
+   //Add the contribution of the external interaction by finite differences
+   this->fill_in_jacobian_from_external_interaction_by_fd(jacobian);
+  }
+ 
+ 
+ 
+protected:
+ 
+ /// \short Helper function to compute the residuals and, if flag==1, the
+ /// Jacobian 
+ void refineable_fill_in_generic_contribution_to_residuals_fsi_displ_lagr_multiplier(
+  Vector<double> &residuals, 
+  DenseMatrix<double> &jacobian, 
+  const unsigned& flag)
+  {
+   //Find out how many positional dofs there are
+   unsigned n_position_type = this->nnodal_position_type();
+   
+#ifdef PARANOID
+   if(n_position_type!=1)
+    {      
+     throw OomphLibError(
+      "RefineableImposeDisplacementByLagrangeMultiplierElement \n cannot (currently) be used with elements that have generalised\n positional dofs. Upgrade should be straightforward though the code is in a \n bit of state, with generalised degrees of freedom sometimes half taken into \n account, sometimes completely ignored...",
+      "RefineableImposeDisplacementByLagrangeMultiplierElement::refineable_fill_in_generic_contribution_to_residuals_displ_lagr_multiplier()",
+      OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+   
+   //Find out how many nodes there are
+   unsigned n_node = this->nnode();
+   
+   // Dimension of element
+   unsigned dim_el=this->dim();
+   
+   //Set up memory for the shape functions
+   Shape psi(n_node);
+   DShape dpsids(n_node,dim_el); 
+   
+   //Set the value of n_intpt
+   unsigned n_intpt = this->integral_pt()->nweight();
+   
+   
+   //Integers to store local equation number
+   int local_eqn=0;
+   int local_unknown=0;
+   
+   //Loop over the integration points
+   for(unsigned ipt=0;ipt<n_intpt;ipt++)
+    {
+     //Get the integral weight
+     double w = this->integral_pt()->weight(ipt);
+     
+     //Only need to call the local derivatives
+     this->dshape_local_at_knot(ipt,psi,dpsids);
+     
+     //Calculate the Eulerian coordinates and Lagrange multiplier
+     Vector<double> x(dim_el+1,0.0);
+     Vector<double> lambda(dim_el+1,0.0);
+     Vector<double> zeta(dim_el,0.0);
+     DenseMatrix<double> interpolated_a(dim_el,dim_el+1,0.0);   
+     
+     // Loop over nodes -- note in these calculations hang-ness is
+     // automatically taken into account because of calls to position(...)
+     // etc
+     for(unsigned j=0;j<n_node;j++) 
+      {
+       Node* nod_pt=this->node_pt(j);
+       
+       // Cast to a boundary node
+       BoundaryNodeBase *bnod_pt = 
+        dynamic_cast<BoundaryNodeBase*>(nod_pt);
+       
+       // Get the index of the first nodal value associated with
+       // this FaceElement
+       unsigned first_index=
+        bnod_pt->index_of_first_value_assigned_by_face_element(this->Id);
+       
+       //Assemble higher-dimensional quantities
+       for(unsigned i=0;i<dim_el+1;i++)
+        {
+         x[i]+=this->nodal_position(j,i)*psi(j);
+         lambda[i]+=nod_pt->value(first_index+i)*psi(j);
+         for(unsigned ii=0;ii<dim_el;ii++)
+          {
+           interpolated_a(ii,i) += 
+            this->lagrangian_position(j,i)*dpsids(j,ii);
+          }
+        }  
+     }
+    
+    
+    //Now find the local undeformed metric tensor from the tangent Vectors
+    DenseMatrix<double> a(dim_el);
+    for(unsigned i=0;i<dim_el;i++)
+     {
+      for(unsigned j=0;j<dim_el;j++)
+       {
+        //Initialise surface metric tensor to zero
+        a(i,j) = 0.0;
+        //Take the dot product
+        for(unsigned k=0;k<dim_el+1;k++)
+         { 
+          a(i,j) += interpolated_a(i,k)*interpolated_a(j,k);
+         }
+       }
+     }
+    
+    
+    //Find the determinant of the metric tensor
+    double adet =0.0;
+    switch(dim_el+1)
+     {
+      
+     case 2:
+      adet = a(0,0);
+      break;
+      
+     case 3:
+      adet = a(0,0)*a(1,1) - a(0,1)*a(1,0);
+      break;
+      
+     default:
+      throw 
+       OomphLibError(
+        "Wrong dimension refineable_fill_in_generic_contribution_to_residuals_displ_lagr_multiplier",
+        "RefineableImposeDisplacementByLagrangeMultiplierElement::refineablefill_in_generic_contribution_to_residuals_displ_lagr_multiplier()",
+        OOMPH_EXCEPTION_LOCATION);
+     }
+    
+    // Get prescribed wall shape from adjacent bulk element
+    Vector<double> r_prescribed(dim_el+1);
+    
+    // Get the local coordinate in the solid element (copy 
+    // operation for Vector)
+    Vector<double> s_adjacent(this->external_element_local_coord(0,ipt));
+    
+    // Get the position in the adjacent element
+    FiniteElement* bulk_el_pt=this->external_element_pt(0,ipt);
+    bulk_el_pt->interpolated_x(s_adjacent,r_prescribed);
+
+    
+    //Premultiply the weights and the square-root of the determinant of 
+    //the metric tensor
+    double W = w*sqrt(adet);
+    
+    // Assemble residuals and jacobian
+    
+
+   //Number of master nodes and storage for the weight of the shape function
+    unsigned n_master=1; 
+    unsigned n_master2=1; 
+    double hang_weight=1.0;
+    double hang_weight2=1.0;
+    
+    //Pointer to hang info object
+    HangInfo* hang_info_pt=0;
+    HangInfo* hang_info2_pt=0;
+
+
+
+    // Loop over nodes
+    for(unsigned j=0;j<n_node;j++)
+     {
+      // Local node itself (hanging or not)
+      Node* local_node_pt= this->node_pt(j);
+
+      //Local boolean to indicate whether the node is hanging
+      bool is_node_hanging = local_node_pt->is_hanging();
+      
+      //If the node is hanging
+      if(is_node_hanging)
+       {
+        hang_info_pt = local_node_pt->hanging_pt();
+        
+        //Read out number of master nodes from hanging data
+        n_master = hang_info_pt->nmaster();
+       }
+      //Otherwise the node is its own master
+      else
+       {
+        n_master = 1;
+       }
+      
+      //Loop over the master nodes
+      for(unsigned m=0;m<n_master;m++)
+       {
+        // Loop over velocity components for equations
+        for(unsigned i=0;i<dim_el+1;i++)
+         {
+
+          //Get the equation number for Lagrange multiplier eqn
+
+          //If the node is hanging
+          if(is_node_hanging)
+           {
+            // Cast to a boundary node
+            BoundaryNodeBase *bnod_pt =
+             dynamic_cast<BoundaryNodeBase*>(hang_info_pt->master_node_pt(m));
+            
+            //Get the equation number from the master node
+            local_eqn = this->local_hang_eqn(
+             hang_info_pt->master_node_pt(m),bnod_pt->
+             index_of_first_value_assigned_by_face_element(this->Id)+i);
+
+            //Get the hang weight from the master node
+            hang_weight = hang_info_pt->master_weight(m);
+           }
+          //If the node is not hanging
+          else
+           {
+            // Cast to a boundary node
+            BoundaryNodeBase *bnod_pt =
+             dynamic_cast<BoundaryNodeBase*>(local_node_pt);
+
+             // Local equation number
+            local_eqn = this->nodal_local_eqn(
+             j,bnod_pt->
+             index_of_first_value_assigned_by_face_element(this->Id)+i);
+            
+            // Node contributes with full weight
+            hang_weight = 1.0;
+           }
+          
+          //If it's not a boundary condition...
+          if(local_eqn>= 0)
+           {     
+            residuals[local_eqn]+=(x[i]-r_prescribed[i])*psi(j)*W*hang_weight;
+            
+            // Do Jacobian too? 
+            if (flag==1)
+             {
+              // Loop over the nodes again for unknowns (only diagonal
+              // contribution to direction!).
+              for(unsigned jj=0;jj<n_node;jj++)
+               {     
+                // Local node itself (hanging or not)
+                Node* local_node2_pt= this->node_pt(jj);
+                
+                //Local boolean to indicate whether the node is hanging
+                bool is_node_hanging2 = local_node2_pt->is_hanging();
+                
+                //If the node is hanging
+                if(is_node_hanging2)
+                 {
+                  hang_info2_pt = local_node2_pt->hanging_pt();
+                  
+                  //Read out number of master nodes from hanging data
+                  n_master2 = hang_info2_pt->nmaster();
+                 }
+                //Otherwise the node is its own master
+                else
+                 {
+                  n_master2 = 1;
+                 }
+                
+                //Loop over the master nodes
+                for(unsigned m2=0;m2<n_master2;m2++)
+                 {
+                  
+                  // Storage for local equation numbers at node indexed by
+                  // type and direction
+                  DenseMatrix<int> position_local_eqn_at_node2(n_position_type,
+                                                               dim_el+1);
+                  
+                  if (is_node_hanging2)
+                   {
+                    //Find the equation numbers
+                    position_local_eqn_at_node2 = 
+                     local_position_hang_eqn(local_node2_pt->
+                                             hanging_pt()->master_node_pt(m2));
+                    
+                    //Find the hanging node weight
+                    hang_weight2 = 
+                     local_node2_pt->hanging_pt()->master_weight(m2);         
+                   }
+                  else
+                   {
+                    // Non-loop of types of dofs
+                    //for(unsigned k2=0;k2<n_position_type;k2++)
+                    // {
+                    unsigned k2=0;
+                    
+                    //Loop over the displacement components
+                    //for(unsigned i2=0;i2<dim_el+1;i2++)
+                    unsigned i2=i; // only need that one, but need to store
+                                   // information in this container because
+                                   // it's required for hanging case.
+                     {
+                      position_local_eqn_at_node2(k2,i2) = 
+                       this->position_local_eqn(jj,k2,i2);
+                     }
+                    
+                    // Hang weight is one
+                    hang_weight2=1.0;
+                   }
+
+                  unsigned k2=0;
+                  local_unknown = position_local_eqn_at_node2(k2,i);
+                  if (local_unknown>=0) 
+                   {
+                    jacobian(local_eqn,local_unknown)+=
+                     psi(jj)*psi(j)*W*hang_weight*hang_weight2;
+                   }
+                 }
+               }
+             }
+            
+            
+            
+          // Add Lagrange multiplier contribution to bulk equations
+          
+          
+          // Storage for local equation numbers at node indexed by
+          // type and direction
+          DenseMatrix<int> position_local_eqn_at_node(n_position_type,dim_el+1);
+          
+          if (is_node_hanging)
+           {
+            //Find the equation numbers
+            position_local_eqn_at_node = 
+             local_position_hang_eqn(local_node_pt->
+                                     hanging_pt()->master_node_pt(m));
+           }
+          else
+           {
+            // Non-loop of types of dofs
+            //for(unsigned k2=0;k2<n_position_type;k2++)
+            // {
+            unsigned k2=0;
+            
+            //Loop over the displacement components
+            //for(unsigned i2=0;i2<dim_el+1;i2++)
+            unsigned i2=i; // only need that one, but need to store
+                           // information in this container because
+                           // it's required for hanging case.
+             {
+              position_local_eqn_at_node(k2,i2) = 
+               this->position_local_eqn(j,k2,i2);
+             }           
+           }
+          unsigned k=0;
+          local_eqn = position_local_eqn_at_node(k,i);
+          
+          /*IF it's not a boundary condition*/
+          if(local_eqn >= 0)
+           {
+            // Add to residual
+            residuals[local_eqn]+=lambda[i]*psi(j)*W*hang_weight;
+            
+            // Do Jacobian too?
+            if (flag==1) 
+             {
+              // Loop over the nodes again for unknowns (only diagonal
+              // contribution to direction!).
+              for(unsigned jj=0;jj<n_node;jj++)
+               { 
+                // Local node itself (hanging or not)
+                Node* local_node2_pt= this->node_pt(jj);
+                
+                //Local boolean to indicate whether the node is hanging
+                bool is_node_hanging2 = local_node2_pt->is_hanging();
+                
+                //If the node is hanging
+                if(is_node_hanging2)
+                 {
+                  hang_info2_pt = local_node2_pt->hanging_pt();
+                  
+                  //Read out number of master nodes from hanging data
+                  n_master2 = hang_info2_pt->nmaster();
+                 }
+                //Otherwise the node is its own master
+                else
+                 {
+                  n_master2 = 1;
+                 }
+                
+                //Loop over the master nodes
+                for(unsigned m2=0;m2<n_master2;m2++)
+                 {
+
+                  //Get the equation number for Lagrange multiplier eqn
+                  
+                  //If the node is hanging
+                  if(is_node_hanging2)
+                   {
+                    // Cast to a boundary node
+                    BoundaryNodeBase *bnod2_pt =
+                     dynamic_cast<BoundaryNodeBase*>(
+                      hang_info2_pt->master_node_pt(m2));
+                    
+                    //Get the equation number from the master node
+                    local_unknown = this->local_hang_eqn(
+                     hang_info2_pt->master_node_pt(m2),bnod2_pt->
+                       index_of_first_value_assigned_by_face_element(
+                        this->Id)+i);
+                      
+                    //Get the hang weight from the master node
+                    hang_weight2 = hang_info2_pt->master_weight(m2);
+                   }
+                  //If the node is not hanging
+                  else
+                   {
+                    // Cast to a boundary node
+                    BoundaryNodeBase *bnod2_pt =
+                     dynamic_cast<BoundaryNodeBase*>(local_node2_pt);
+                    
+                    // Local equation number
+                    local_unknown = this->nodal_local_eqn(
+                     jj,bnod2_pt->
+                       index_of_first_value_assigned_by_face_element(
+                        this->Id)+i);
+                    
+                    // Node contributes with full weight
+                    hang_weight2 = 1.0;
+                   }
+                  
+                  if (local_unknown>=0)
+                   {
+                    jacobian(local_eqn,local_unknown)+=psi(jj)*psi(j)*W*
+                     hang_weight*hang_weight2;
+                   }
+                 }
+               }
+             }
+           }
+           }
+         }
+       }
+     }
+       
+   } //End of loop over the integration points
+}
+ 
+}; 
+
+
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
 }
 
 #endif

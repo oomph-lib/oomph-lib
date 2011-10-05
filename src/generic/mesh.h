@@ -1475,7 +1475,7 @@ public:
 #endif 
 
  /// \short Wipe the storage for all externally-based elements
- void flush_all_external_storage();
+ void delete_all_external_storage();
 
 };
 

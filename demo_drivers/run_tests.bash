@@ -16,7 +16,7 @@
 #cd navier_stokes; make check; cd ..
 #cd axisym_navier_stokes; make check; cd ..
 #cd polar_navier_stokes; make check; cd ..
-#cd solid; make check; cd ..
+cd solid; make check; cd ..
 cd beam; make check; cd ..
 cd shell; make check; cd ..
 cd linear_wave; make check; cd ..

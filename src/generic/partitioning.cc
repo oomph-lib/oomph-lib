@@ -489,11 +489,43 @@ void METIS::partition_mesh(Problem* problem_pt, const unsigned& ndomain,
   }
    
  
+#ifdef PARANOID
+ std::vector<bool> done(nparts,false);
+#endif
+
  // Copy across
  for (unsigned e=0;e<nelem;e++)
   {
    element_domain[e]=part[e];
+#ifdef PARANOID
+   done[part[e]]=true;
+#endif
   }
+
+
+#ifdef PARANOID
+ // Check
+ std::ostringstream error_stream;
+ bool shout=false;
+ for (int p=0;p<nparts;p++)
+  {
+   if (!done[p]) 
+    {
+     shout=true;
+     error_stream 
+      << "No elements on processor " << p 
+      << "when trying to partition " << nelem
+      << "elements over " << nparts << " processors!\n";
+    }
+  }
+ if (shout)
+  {      
+   throw OomphLibError(error_stream.str(),
+                       " METIS::partition_mesh()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+
 
  // End timer
  cpu_end=clock();
@@ -918,7 +950,7 @@ void METIS::partition_mesh(Problem* problem_pt, const unsigned& ndomain,
  // Vector to store target domain for each of the root elements (concatenated
  // in processor-by-processor order)
  Vector<unsigned> root_element_domain(total_number_of_root_elements,0);
- if (my_rank==root_processor)
+ if (my_rank==root_processor) //--
   {
    // Start timer
    clock_t cpu_start=clock();
@@ -1085,7 +1117,7 @@ void METIS::partition_mesh(Problem* problem_pt, const unsigned& ndomain,
    // Load balance based on assembly times of all leaf 
    // elements associated with root
    if (can_load_balance_on_assembly_times)
-    {
+    { 
      oomph_info << "Basing distribution on assembly times of elements\n";
      
      // Normalise
@@ -1217,6 +1249,7 @@ void METIS::partition_mesh(Problem* problem_pt, const unsigned& ndomain,
    // Cleanup
    delete [] xadj;
    delete [] part;
+   delete [] vwgt;
    delete [] edgecut;
    delete [] options;
 

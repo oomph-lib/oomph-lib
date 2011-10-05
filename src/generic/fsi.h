@@ -765,6 +765,119 @@ namespace FSI_functions
    delete fluid_face_mesh_pt;
   }
 
+
+
+ //============================================================================
+ /// \short Setup multi-domain interaction required for imposition
+ /// of solid displacements onto the pseudo-solid fluid mesh by
+ /// Lagrange multipliers: This function locates the bulk solid 
+ /// elements next to boundary b_solid_fsi (the FSI boundary) 
+ /// in the solid mesh pointed to by Solid_mesh_pt. The deformation of 
+ /// these elements drives the deformation of the  pseudo-solid fluid 
+ /// mesh via the Lagrange multiplier elements stored in l
+ /// lagrange_multiplier_mesh_pt. The template parameters
+ /// specify the type of the bulk solid elements and their spatial
+ /// dimension. 
+ //============================================================================
+ template<class SOLID_ELEMENT, unsigned DIM_SOLID>
+  void setup_solid_elements_for_displacement_bc(
+   Problem* problem_pt,
+   const unsigned & b_solid_fsi, // hierher boundary_in_fluid_mesh,
+   Mesh* const &solid_mesh_pt, // hierher fluid_mesh_pt,
+   Mesh* const &lagrange_multiplier_mesh_pt) // solid_mesh_pt,
+ {
+  
+  // Create a face mesh adjacent to the solid mesh's b-th boundary. 
+  // The face mesh consists of FaceElements that may also be 
+  // interpreted as GeomObjects
+  Mesh* solid_face_mesh_pt = new Mesh;
+  solid_mesh_pt->template build_face_mesh
+   <SOLID_ELEMENT,FaceElementAsGeomObject>(b_solid_fsi,
+                                           solid_face_mesh_pt);
+  
+  // Loop over these new face elements and tell them the boundary number
+  // from the bulk solid mesh -- this is required to they can
+  // get access to the boundary coordinates!
+  unsigned n_face_element = solid_face_mesh_pt->nelement();
+  for(unsigned e=0;e<n_face_element;e++)
+   {
+    //Cast the element pointer to the correct thing!
+    FaceElementAsGeomObject<SOLID_ELEMENT>* el_pt=
+     dynamic_cast<FaceElementAsGeomObject<SOLID_ELEMENT>*>
+     (solid_face_mesh_pt->element_pt(e));
+    
+    // Set bulk boundary number
+    el_pt->set_boundary_number_in_bulk_mesh(b_solid_fsi);
+    
+    // Doc?
+    if (Doc_boundary_coordinate_file.is_open())
+     {
+      Vector<double> s(DIM_SOLID-1);
+      Vector<double> zeta(DIM_SOLID-1);
+      Vector<double> x(DIM_SOLID);
+      unsigned n_plot=5;
+      Doc_boundary_coordinate_file << el_pt->tecplot_zone_string(n_plot);
+      
+      // Loop over plot points
+      unsigned num_plot_points=el_pt->nplot_points(n_plot);
+      for (unsigned iplot=0;iplot<num_plot_points;iplot++)
+       {         
+        // Get local coordinates of plot point
+        el_pt->get_s_plot(iplot,n_plot,s);         
+        el_pt->interpolated_zeta(s,zeta);
+        el_pt->interpolated_x(s,x);
+        for (unsigned i=0;i<DIM_SOLID;i++)
+         {
+          Doc_boundary_coordinate_file << x[i] << " ";
+         }
+        for (unsigned i=0;i<DIM_SOLID-1;i++)
+         {
+          Doc_boundary_coordinate_file << zeta[i] << " ";
+         }
+        Doc_boundary_coordinate_file << std::endl;
+       }
+      el_pt->write_tecplot_zone_footer(Doc_boundary_coordinate_file,n_plot);
+     }   
+   }
+  
+  // Now sort the elements based on the boundary coordinates.
+  // This may allow a faster implementation of the locate_zeta
+  // function for the MeshAsGeomObject representation of this
+  // mesh, but also creates a unique ordering of the elements
+  std::sort(solid_face_mesh_pt->element_pt().begin(),
+            solid_face_mesh_pt->element_pt().end(),
+            CompareBoundaryCoordinate<SOLID_ELEMENT>());
+  
+  // Setup the interactions for this problem using the surface mesh
+  // on the solid mesh.  We're setting up the 0th "interaction"
+  Multi_domain_functions::setup_multi_domain_interaction
+   <SOLID_ELEMENT,FaceElementAsGeomObject<SOLID_ELEMENT> >
+   (problem_pt,lagrange_multiplier_mesh_pt,solid_mesh_pt,solid_face_mesh_pt,0);
+  
+  // The source elements and coordinates have now all been set
+  
+  //Clean up the memory allocated:
+  
+  //The MeshAsGeomObject has already been deleted (in set_external_storage)
+  
+  //Must be careful with the FaceMesh, because we cannot delete the nodes
+  //Loop over the elements backwards (paranoid!) and delete them
+  for(unsigned e=n_face_element;e>0;e--)
+   {
+    delete solid_face_mesh_pt->element_pt(e-1);
+    solid_face_mesh_pt->element_pt(e-1) = 0;
+   }
+  //Now clear all element and node storage (should maybe fine-grain this)
+  solid_face_mesh_pt->flush_element_and_node_storage();
+  
+  //Finally delete the mesh
+  delete solid_face_mesh_pt;
+ }
+ 
+ 
+ 
+
+
 //============================================================================
 /// Doc FSI: 
 /// -# Which Data values affect the traction onto the FSIWallElements

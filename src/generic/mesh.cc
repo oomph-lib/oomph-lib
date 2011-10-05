@@ -482,6 +482,7 @@ Mesh::~Mesh()
   {
    delete Node_pt[i-1]; Node_pt[i-1] = 0;
   }
+
  //Free the elements
  //Loop over the elements in reverse order
  unsigned long Element_pt_range = Element_pt.size();
@@ -489,6 +490,10 @@ Mesh::~Mesh()
   {
    delete Element_pt[i-1]; Element_pt[i-1] = 0;
   }
+
+ // Wipe the storage for all externally-based elements and delete halos
+ delete_all_external_storage();
+
 }
 
 //========================================================
@@ -717,8 +722,10 @@ unsigned Mesh::self_test()
 void Mesh::prune_dead_nodes()
 {
       
+
  // Only copy the 'live' nodes across to new mesh
  //----------------------------------------------
+
  // New Vector of pointers to nodes
  Vector<Node *> new_node_pt;
 
@@ -737,7 +744,7 @@ void Mesh::prune_dead_nodes()
    // the boundary lookup schemes below)
    else 
     {
-     if(Node_pt[n]->is_on_boundary()==false) 
+     if(!(Node_pt[n]->is_on_boundary()))
       {
        delete Node_pt[n];
        Node_pt[n]=0;
@@ -747,6 +754,7 @@ void Mesh::prune_dead_nodes()
  
  // Now update old vector by setting it equal to the new vector
  Node_pt = new_node_pt;
+
  
  // Boundaries
  //-----------
@@ -793,6 +801,7 @@ void Mesh::prune_dead_nodes()
    Boundary_node_pt[ibound] = new_boundary_node_pt;
   
   } //End of loop over boundaries
+
 }
 
 
@@ -1638,6 +1647,13 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
    t_start=TimingHelpers::timer();
   }
 
+ double tt_start = 0.0;
+ if (Global_timings::Doc_comprehensive_timings)
+  {
+   tt_start=TimingHelpers::timer();
+  }
+
+
  //Wipe existing storage schemes for halo(ed) nodes
  Halo_node_pt.clear();
  Haloed_node_pt.clear();
@@ -1718,6 +1734,18 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
       }
     }
   }
+
+
+ double tt_end=0.0;
+ if (Global_timings::Doc_comprehensive_timings)
+  {
+   tt_end = TimingHelpers::timer();
+   oomph_info 
+    << "Time for setup loops in Mesh::classify_halo_and_haloed_nodes: " 
+    << tt_end-tt_start << std::endl;
+   tt_start = TimingHelpers::timer();
+  }
+
 
  // At this point we need to "synchronise" the nodes on halo(ed) elements
  // so that the processors_associated_with_data agrees for the same node
@@ -1848,7 +1876,14 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
     }
   }
 
-  
+ if (Global_timings::Doc_comprehensive_timings)
+  {
+   tt_end = TimingHelpers::timer();
+   oomph_info 
+    << "Time for pt2pt send/recv in Mesh::classify_halo_and_haloed_nodes: " 
+    << tt_end-tt_start << std::endl;
+   tt_start = TimingHelpers::timer();
+  }
 
  // Loop over all nodes on the present processor and put the highest-numbered
  // processor associated with each node "in charge" of the node
@@ -1893,7 +1928,6 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
      processor_in_charge[solid_nod_pt->variable_position_pt()]=proc_max_solid;
     }
   }
-
 
 
  // First stab at determining halo nodes. They are located on the halo
@@ -2028,6 +2062,14 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
   }
 
 
+ if (Global_timings::Doc_comprehensive_timings)
+  {
+   tt_end = TimingHelpers::timer();
+   oomph_info 
+    << "Time for first classific in Mesh::classify_halo_and_haloed_nodes: " 
+    << tt_end-tt_start << std::endl;
+   tt_start = TimingHelpers::timer();
+  }
 
 
  // Find any overlooked halo nodes: 
@@ -2092,6 +2134,15 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
   }
    
    
+
+ if (Global_timings::Doc_comprehensive_timings)
+  {
+   tt_end = TimingHelpers::timer();
+   oomph_info 
+    << "Time for setup 1st alltoall in Mesh::classify_halo_and_haloed_nodes: " 
+    << tt_end-tt_start << std::endl;
+   tt_start = TimingHelpers::timer();
+  }
    
  //Storage for the number of data to be received from each processor
  Vector<int> receive_n(n_proc,0);
@@ -2100,6 +2151,16 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
  MPI_Alltoall(&send_n[0],1,MPI_INT,&receive_n[0],1,MPI_INT,
               comm_pt->mpi_comm());
    
+
+
+ if (Global_timings::Doc_comprehensive_timings)
+  {
+   tt_end = TimingHelpers::timer();
+   oomph_info 
+    << "Time for 1st alltoall in Mesh::classify_halo_and_haloed_nodes: " 
+    << tt_end-tt_start << std::endl;
+   tt_start = TimingHelpers::timer();
+  }
 
  //We now prepare the data to be received
  //by working out the displacements from the received data
@@ -2128,6 +2189,18 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
                &receive_displacement[0],
                MPI_INT,
                comm_pt->mpi_comm());
+
+
+
+ if (Global_timings::Doc_comprehensive_timings)
+  {
+   tt_end = TimingHelpers::timer();
+   oomph_info 
+    << "Time for 2nd alltoall in Mesh::classify_halo_and_haloed_nodes: " 
+    << tt_end-tt_start << std::endl;
+   tt_start = TimingHelpers::timer();
+  }
+
 
  // Provide storage for data to be sent to processor that used to be
  // in charge
@@ -2205,6 +2278,16 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
   } //End of data is received
 
 
+ if (Global_timings::Doc_comprehensive_timings)
+  {
+   tt_end = TimingHelpers::timer();
+   oomph_info 
+    << "Time for 1st setup 3rd alltoall in Mesh::classify_halo_and_haloed_nodes: " 
+    << tt_end-tt_start << std::endl;
+   tt_start = TimingHelpers::timer();
+  }
+
+
  // Data to be sent to each processor
  Vector<int> all_send_n(n_proc,0);
    
@@ -2239,6 +2322,18 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
    all_send_n[domain]=all_send_data.size()-all_send_displacement[domain];
   }
    
+
+
+
+ if (Global_timings::Doc_comprehensive_timings)
+  {
+   tt_end = TimingHelpers::timer();
+   oomph_info 
+    << "Time for 2nd setup 3rd alltoall in Mesh::classify_halo_and_haloed_nodes: " 
+    << tt_end-tt_start << std::endl;
+   tt_start = TimingHelpers::timer();
+  }
+
  //Storage for the number of data to be received from each processor
  Vector<int> all_receive_n(n_proc,0);
    
@@ -2246,6 +2341,16 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
  MPI_Alltoall(&all_send_n[0],1,MPI_INT,&all_receive_n[0],1,MPI_INT,
               comm_pt->mpi_comm());   
 
+
+
+ if (Global_timings::Doc_comprehensive_timings)
+  {
+   tt_end = TimingHelpers::timer();
+   oomph_info 
+    << "Time for 3rd alltoall in Mesh::classify_halo_and_haloed_nodes: " 
+    << tt_end-tt_start << std::endl;
+   tt_start = TimingHelpers::timer();
+  }
 
  //We now prepare the data to be received
  //by working out the displacements from the received data
@@ -2276,6 +2381,15 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
                MPI_INT,
                comm_pt->mpi_comm());
 
+
+ if (Global_timings::Doc_comprehensive_timings)
+  {
+   tt_end = TimingHelpers::timer();
+   oomph_info 
+    << "Time for 4th alltoall in Mesh::classify_halo_and_haloed_nodes: " 
+    << tt_end-tt_start << std::endl;
+   tt_start = TimingHelpers::timer();
+  }
 
  //Now use the received data 
  for (int send_rank=0;send_rank<n_proc;send_rank++)
@@ -2320,6 +2434,15 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
     }
 
   } //End of data is received
+
+ if (Global_timings::Doc_comprehensive_timings)
+  {
+   tt_end = TimingHelpers::timer();
+   oomph_info 
+    << "Time for postproc 4th alltoall in Mesh::classify_halo_and_haloed_nodes: " 
+    << tt_end-tt_start << std::endl;
+   tt_start = TimingHelpers::timer();
+  }
 
 
  // Doc stats
@@ -2877,6 +3000,8 @@ void Mesh::get_halo_node_stats(OomphCommunicator* comm_pt,
      for (int d=0;d<n_proc;d++)
       {
        domain_file[d]->close();
+       delete domain_file[d];
+       domain_file[d]=0;
       }
     }
   }
@@ -2958,6 +3083,8 @@ void Mesh::get_halo_node_stats(OomphCommunicator* comm_pt,
      for (int d=0;d<n_proc;d++)
       {
        node_file[d]->close();
+       delete node_file[d];
+       node_file[d]=0;
       }
     }
   }
@@ -2981,18 +3108,11 @@ void Mesh::get_halo_node_stats(OomphCommunicator* comm_pt,
    backed_up_el_pt[e]=this->element_pt(e);
   }
 
- // Backup pointers to nodes in this mesh
- Vector<Node*> backed_up_nod_pt(nnod);
- for (unsigned j=0;j<nnod;j++)
-  {
-   backed_up_nod_pt[j]=this->node_pt(j);
-  }
-
  // Flush the mesh storage
- this->flush_element_and_node_storage();
+ this->flush_element_storage();
 
- // Flush any storage of external elements and nodes
- this->flush_all_external_storage();
+ // Delete any storage of external elements and nodes
+ this->delete_all_external_storage();
 
  // Boolean to indicate which element is to be retained 
  std::vector<bool> element_retained(nelem,false);
@@ -3344,8 +3464,7 @@ void Mesh::get_halo_node_stats(OomphCommunicator* comm_pt,
                comm_pt->mpi_comm());
   }
  
- 
-
+  
  // Determine root haloed elements
  //-------------------------------
 
@@ -3357,8 +3476,10 @@ void Mesh::get_halo_node_stats(OomphCommunicator* comm_pt,
    unsigned n=nhaloed[d];
    for (unsigned e=0;e<n;e++)
     {
+ 
      int number=all_root_haloed_element[count];
      count++;
+
      // Ignore padded -1s that were only inserted to avoid
      // zero sized vectors
      if (number>=0)
@@ -3412,23 +3533,7 @@ void Mesh::get_halo_node_stats(OomphCommunicator* comm_pt,
   }
 
 
- // Complete rebuild of mesh by adding retained nodes
- // Note that they are added in the order in which they 
- // occured in the original mesh as this guarantees the
- // synchronisity between the serialised access to halo
- // and haloed nodes from different processors.
- nnod=backed_up_nod_pt.size();
- for (unsigned j=0;j<nnod;j++)
-  {
-   Node* nod_pt=backed_up_nod_pt[j];
-   if(!nod_pt->is_obsolete())
-    {
-     // Not obsolete so add it back to the mesh
-     this->add_node_pt(nod_pt);
-    }
-  }
-
- // Now remove the pruned nodes from the boundary lookup scheme
+ // Now remove the pruned nodes 
  this->prune_dead_nodes();
 
  // And finally re-setup the boundary lookup scheme for elements
@@ -3485,9 +3590,9 @@ void Mesh::prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
   {
    
 #ifdef OOMPH_HAS_MPI
-   // Flush any external element storage before performing the redistribution
+   // Delete any external element storage before performing the redistribution
    // (in particular, external halo nodes that are on mesh boundaries)
-   this->flush_all_external_storage();
+   this->delete_all_external_storage();
 #endif
    
    // Storage for number of processors and current processor
@@ -3525,6 +3630,13 @@ void Mesh::prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
      oomph_info << "----------------------------------------------------\n\n";
     }
    
+
+   double t_start = 0.0;
+   if (Global_timings::Doc_comprehensive_timings)
+    {
+     t_start=TimingHelpers::timer();
+    }
+
    // Declare all nodes as obsolete. We'll
    // change this setting for all nodes that must be retained
    // further down
@@ -3600,6 +3712,18 @@ void Mesh::prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
    unsigned n_ref=int(int_n_ref);
    
    
+   double t_end = 0.0;
+   if (Global_timings::Doc_comprehensive_timings)
+    {
+     t_end=TimingHelpers::timer();
+     oomph_info 
+      << "Time for establishing refinement levels in "
+      << " Mesh::prune_halo_elements_and_nodes() [includes comms]: " 
+      << t_end-t_start << std::endl;
+     t_start = TimingHelpers::timer();
+    }
+   
+
    // Bypass everything until next comms if no elements
    if (nelem>0)
     { 
@@ -3643,7 +3767,29 @@ void Mesh::prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
 
       } // end loop over base level elements
     }
+
+   // Synchronise refinement level when pruned over all meshes even if they
+   // were empty (in which case the uniform refinement level is still zero
+   // so go for max
+   unsigned n_unif=0;
+   unsigned n_unif_local=ref_mesh_pt->uniform_refinement_level_when_pruned();
+   MPI_Allreduce(&n_unif_local,&n_unif,1, 
+                 MPI_UNSIGNED,MPI_MAX, 
+                 MPI_Helpers::communicator_pt()->mpi_comm()); 
+   ref_mesh_pt->uniform_refinement_level_when_pruned()=n_unif;
    
+
+   t_end = 0.0;
+   if (Global_timings::Doc_comprehensive_timings)
+    {
+     t_end=TimingHelpers::timer();
+     oomph_info 
+      << "Time for synchronising refinement levels in "
+      << " Mesh::prune_halo_elements_and_nodes() [includes comms]: " 
+      << t_end-t_start << std::endl;
+     t_start = TimingHelpers::timer();
+    }
+
    // Now work on which "root" halo elements to keep at this level
    // Can't use the current set directly; however, 
    // we know the refinement level of the current halo, so
@@ -3720,7 +3866,16 @@ void Mesh::prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
       }
     }
   
-   
+   if (Global_timings::Doc_comprehensive_timings)
+    {
+     t_end=TimingHelpers::timer();
+     oomph_info 
+      << "Time for setup of retention pattern in "
+      << " Mesh::prune_halo_elements_and_nodes(): " 
+      << t_end-t_start << std::endl;
+     t_start = TimingHelpers::timer();
+    }
+
    // Make sure everybody finishes this part
    MPI_Barrier(comm_pt->mpi_comm());
 
@@ -3865,6 +4020,17 @@ void Mesh::prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
         }
       }
     }
+
+   if (Global_timings::Doc_comprehensive_timings)
+    {
+     t_end=TimingHelpers::timer();
+     oomph_info 
+      << "Time for pt2pt comms of retention pattern in "
+      << " Mesh::prune_halo_elements_and_nodes(): " 
+      << t_end-t_start << std::endl;
+     t_start = TimingHelpers::timer();
+    }
+
  
    // Backup pointers to nodes in this mesh
    nnod=this->nnode();
@@ -4042,12 +4208,45 @@ void Mesh::prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
      ref_mesh_pt->setup_tree_forest();
     }
     
+
+   if (Global_timings::Doc_comprehensive_timings)
+    {
+     t_end=TimingHelpers::timer();
+     oomph_info 
+      << "Time for local rebuild of mesh from retained elements in "
+      << " Mesh::prune_halo_elements_and_nodes(): " 
+      << t_end-t_start << std::endl;
+     t_start = TimingHelpers::timer();
+    }
+
+
    // Set up shared nodes scheme
    setup_shared_node_scheme();
    
+   if (Global_timings::Doc_comprehensive_timings)
+    {
+     t_end=TimingHelpers::timer();
+     oomph_info 
+      << "Time for setup_shared_node_scheme() "
+      << " Mesh::prune_halo_elements_and_nodes(): " 
+      << t_end-t_start << std::endl;
+     t_start = TimingHelpers::timer();
+    }
+
    // Classify nodes
    classify_halo_and_haloed_nodes(comm_pt,doc_info,report_stats);
    
+   if (Global_timings::Doc_comprehensive_timings)
+    {
+     t_end=TimingHelpers::timer();
+     oomph_info 
+      << "Time for Mesh::classify_halo_and_haloed_nodes() "
+      << " Mesh::prune_halo_elements_and_nodes(): " 
+      << t_end-t_start << std::endl;
+     t_start = TimingHelpers::timer();
+    }
+
+
    // Doc?
    //-----
    if (doc_info.is_doc_enabled())
@@ -4063,6 +4262,17 @@ void Mesh::prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
    // of mesh refinements -- this is required to allow dump/restart
    // on refined meshes
    this->reorder_nodes();
+
+   
+   if (Global_timings::Doc_comprehensive_timings)
+    {
+     t_end=TimingHelpers::timer();
+     oomph_info 
+      << "Time for Mesh::reorder_nodes() "
+      << " Mesh::prune_halo_elements_and_nodes(): " 
+      << t_end-t_start << std::endl;
+     t_start = TimingHelpers::timer();
+    }
 
    // Doc stats
    if (report_stats)
@@ -5583,7 +5793,7 @@ void Mesh::remove_null_pointers_from_external_halo_node_storage(
 //========================================================================
 /// Wipe the storage for all externally-based elements and delete halos
 //========================================================================
-void Mesh::flush_all_external_storage()
+void Mesh::delete_all_external_storage()
 {
 
 #ifdef OOMPH_HAS_MPI

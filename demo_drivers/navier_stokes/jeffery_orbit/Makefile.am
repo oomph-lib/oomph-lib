@@ -5,7 +5,8 @@ include $(top_srcdir)/config/makefile_templates/demo_drivers
 check_PROGRAMS=jeffery_orbit 
 
 # Sources for executable
-jeffery_orbit_SOURCES = jeffery_orbit.cc
+jeffery_orbit_SOURCES = jeffery_orbit.cc my_taylor_hood_elements.h
+
 
 # Required libraries: 
 # $(FLIBS) is included in case the solver involves fortran sources.

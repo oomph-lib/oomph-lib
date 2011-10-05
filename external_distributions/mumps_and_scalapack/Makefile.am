@@ -107,8 +107,13 @@ all:
 	echo "cd  scalapack_installer_0.94" >> build_script.bash
 	echo "" >> build_script.bash
 	echo "#Install with blacs (downloaded on the fly)" >> build_script.bash
-	echo "echo "Building..."" >> build_script.bash
-	echo "./setup.py --downblacs --lapacklib=$(lapack_lib) --blaslib=$(blas_lib) --mpiincdir=$(mpi_include) > scalapack.log" >> build_script.bash
+	echo "echo \"Bypassing test of executables (because it breaks on hector, or any\"">> build_script.bash
+	echo "echo \"other machine where we cross compile)\"">> build_script.bash
+	echo "cp script/framework.py script/framework.py.orig" >> build_script.bash
+	echo "sed 's/.\/tmpf/date/g' script/framework.py.orig | sed 's/.\/tmpc/date/g' > script/framework.py ">> build_script.bash
+	echo "patch script/blacs.py < ../../build_scripts/blacs.py.patch  ">> build_script.bash
+	echo "echo "Building... [this can take a while!]"" >> build_script.bash
+	echo "./setup.py --downblacs --lapacklib=$(lapack_lib) --blaslib=$(blas_lib) --mpiincdir=$(mpi_include) --mpicc=$(CC) --mpif77=$(F77) > scalapack.log" >> build_script.bash
 	echo "" >> build_script.bash
 	echo "echo "...done!"" >> build_script.bash
 	echo "#Test success" >> build_script.bash
@@ -119,7 +124,7 @@ all:
 	echo "else" >> build_script.bash
 	echo "    echo -e \"\n\nERROR(?): Scalapack installation does not seem to have been successful.\n\n\"" >> build_script.bash
 	echo "fi" >> build_script.bash
-	echo "echo -e \"Check \n\n  \"`pwd`\"/scalapack.log \n\nfor details.\n\n\"" >> build_script.bash
+	echo "echo -e \"Check \n\n  \"`pwd`\"scalapack/scalapack_installer_0.94/scalapack.log \n\nfor details.\n\n\"" >> build_script.bash
 	echo "" >> build_script.bash
 	echo "# Get handle to scalapack" >> build_script.bash
 	echo "scalapack1=\`grep -A1 'Your ScaLAPACK library is:' scalapack.log  | awk 'END{print $0}'\` " >> build_script.bash
@@ -171,7 +176,7 @@ all:
 	echo "mkdir mumps_and_scalapack_default_installation/include"  >> build_script.bash
 	echo "cp mumps/MUMPS_4.10.0/lib/libdmumps.a mumps/MUMPS_4.10.0/lib/libmumps_common.a mumps/MUMPS_4.10.0/lib/libpord.a mumps_and_scalapack_default_installation/lib"  >> build_script.bash
 	echo "cp scalapack/scalapack_installer_0.94/lib/libscalapack.a scalapack/scalapack_installer_0.94/lib/blacs.a scalapack/scalapack_installer_0.94/lib/blacsC.a scalapack/scalapack_installer_0.94/lib/blacsF77.a mumps_and_scalapack_default_installation/lib "  >> build_script.bash
-	echo "cp mumps_and_scalapack_default_installation/lib/blacs.a  mumps_and_scalapack_default_installation/lib/blacs_copy.a"  >> build_script.bash
+	echo "cp mumps_and_scalapack_default_installation/lib/blacs.a mumps_and_scalapack_default_installation/lib/blacs_copy.a "  >> build_script.bash
 	echo "cp mumps/MUMPS_4.10.0/lib/libdmumps.a mumps/MUMPS_4.10.0/include/*  mumps_and_scalapack_default_installation/include"  >> build_script.bash
 	chmod a+x build_script.bash 
 	./build_script.bash 

@@ -875,9 +875,26 @@ namespace oomph
       unsigned old_ndof=ndof();
 #endif
 
+     double t_start = 0.0;
+     if (Global_timings::Doc_comprehensive_timings)
+      {
+       t_start=TimingHelpers::timer();
+      }
+
       // Call actions before distribute
       actions_before_distribute();
       
+     double t_end = 0.0;
+     if (Global_timings::Doc_comprehensive_timings)
+      {
+       t_end=TimingHelpers::timer();
+       oomph_info 
+        << "Time for actions_before_distribute() in "
+        << "Problem::prune_halo_elements_and_nodes(): " 
+        << t_end-t_start << std::endl;
+       t_start = TimingHelpers::timer();
+      }
+
       // Associate all elements with root in current Base mesh
       unsigned nel=Base_mesh_element_pt.size();
       std::map<GeneralisedElement*,unsigned> old_base_element_number_plus_one; 
@@ -917,6 +934,19 @@ namespace oomph
          }
        }
       
+
+
+      if (Global_timings::Doc_comprehensive_timings)
+       {
+        t_end=TimingHelpers::timer();
+        oomph_info 
+         << "Time for setup old root elements in "
+         << "Problem::prune_halo_elements_and_nodes(): " 
+         << t_end-t_start << std::endl;
+        t_start = TimingHelpers::timer();
+       }
+
+
       // Now remember the old number of base elements
       unsigned nel_base_old=nel;
 
@@ -945,6 +975,15 @@ namespace oomph
         rebuild_global_mesh();
        }
 
+      if (Global_timings::Doc_comprehensive_timings)
+       {
+        t_end=TimingHelpers::timer();
+        oomph_info 
+         << "Total time for all mesh-level prunes in "
+         << "Problem::prune_halo_elements_and_nodes(): " 
+         << t_end-t_start << std::endl;
+        t_start = TimingHelpers::timer();
+       }
 
       // Loop over all elements in newly rebuilt mesh (which contains
       // all element in "tree order"), find the roots
@@ -1018,6 +1057,16 @@ namespace oomph
         n_new_root_back[e]=local_n_new_root[e];
 #endif
        }
+
+      if (Global_timings::Doc_comprehensive_timings)
+       {
+        t_end=TimingHelpers::timer();
+        oomph_info 
+         << "Time for setup of new base elements in "
+         << "Problem::prune_halo_elements_and_nodes(): " 
+         << t_end-t_start << std::endl;
+        t_start = TimingHelpers::timer();
+       }
       
       // Now do reduce operation to get information for all
       // old root/base elements -- the pruned (halo!) base elements contain
@@ -1025,7 +1074,18 @@ namespace oomph
       Vector<unsigned> n_new_root(nel_base_old);
       MPI_Allreduce(&local_n_new_root[0],&n_new_root[0],nel_base_old,
                     MPI_UNSIGNED,MPI_MAX,this->communicator_pt()->mpi_comm());
-      
+
+
+      if (Global_timings::Doc_comprehensive_timings)
+       {
+        t_end=TimingHelpers::timer();
+        oomph_info 
+         << "Time for allreduce in "
+         << "Problem::prune_halo_elements_and_nodes(): " 
+         << t_end-t_start << std::endl;
+        t_start = TimingHelpers::timer();
+       }
+
       // Find out total number of base elements
       unsigned nel_base_new=0;
       for (unsigned e=0;e<nel_base_old;e++)
@@ -1102,13 +1162,50 @@ namespace oomph
       // (used in the load_balance() routines)
       setup_base_mesh_info_after_pruning();
       
+
+      if (Global_timings::Doc_comprehensive_timings)
+       {
+        t_end=TimingHelpers::timer();
+        oomph_info 
+         << "Time for finishing off base mesh info "
+         << "Problem::prune_halo_elements_and_nodes(): " 
+         << t_end-t_start << std::endl;
+        t_start = TimingHelpers::timer();
+       }
+
+
       // Call actions after distribute
       actions_after_distribute();
   
+
+      if (Global_timings::Doc_comprehensive_timings)
+       {
+        t_end=TimingHelpers::timer();
+        oomph_info 
+         << "Time for actions_after_distribute() "
+         << "Problem::prune_halo_elements_and_nodes(): " 
+         << t_end-t_start << std::endl;
+        t_start = TimingHelpers::timer();
+       }
+
+
       // Re-assign the equation numbers (incl synchronisation if reqd)
       unsigned n_dof;
       n_dof=assign_eqn_numbers();
       
+
+
+      if (Global_timings::Doc_comprehensive_timings)
+       {
+        t_end=TimingHelpers::timer();
+        oomph_info 
+         << "Time for assign_eqn_numbers() "
+         << "Problem::prune_halo_elements_and_nodes(): " 
+         << t_end-t_start << std::endl;
+        t_start = TimingHelpers::timer();
+       }
+
+
 #ifdef PARANOID
       if (n_dof!=old_ndof)
        {   
@@ -1380,24 +1477,47 @@ namespace oomph
  {
   if (!Problem_has_been_distributed)
    {
+    
+    // Minimum number of elements per processor if there are fewer elements
+    // than processors
+    unsigned min_el=10;
+    
     // Resize and make default assignments
     int n_proc=this->communicator_pt()->nproc();
     unsigned n_elements=Mesh_pt->nelement();    
     First_el_for_assembly.resize(n_proc,0);
-    Last_el_for_assembly.resize(n_proc,n_elements-1);
+    Last_el_plus_one_for_assembly.resize(n_proc,0);
     
     // In the absence of any better knowledge distribute work evenly 
     // over elements
-    unsigned long range = 
-     static_cast<unsigned long>(double(n_elements)/double(n_proc));
-    for (int p=0;p<n_proc;p++)
+    unsigned range=0;
+    unsigned lo_proc=0;
+    unsigned hi_proc=n_proc-1;
+    if (int(n_elements)>=n_proc)
+     {
+      range=unsigned(double(n_elements)/double(n_proc));
+     }
+    else
+     {
+      range=min_el;
+      lo_proc=0;
+      hi_proc=unsigned(double(n_elements)/double(min_el));
+     }
+     
+    for (int p=lo_proc;p<=int(hi_proc);p++)
      {
       First_el_for_assembly[p] = p*range;
-      Last_el_for_assembly[p] = (p+1)*range-1;
+      
+      unsigned last_el_plus_one=(p+1)*range;
+      if (last_el_plus_one>n_elements) last_el_plus_one=n_elements;
+      Last_el_plus_one_for_assembly[p] = last_el_plus_one;
      }
     
     // Last one needs to incorporate any dangling elements
-    Last_el_for_assembly[n_proc-1] = n_elements-1;
+    if (int(n_elements)>=n_proc)
+     {
+      Last_el_plus_one_for_assembly[n_proc-1] = n_elements;
+     }
     
     // Doc
     if (n_proc>1)
@@ -1406,12 +1526,21 @@ namespace oomph
                  << "Jacobian uses default partitioning: "<< std::endl;
       for (int p=0;p<n_proc;p++)
        {
-        oomph_info << "Proc " << p << " assembles from element " 
-                   <<  First_el_for_assembly[p] << " to " 
-                   <<  Last_el_for_assembly[p] << " \n"; 
+        if (Last_el_plus_one_for_assembly[p]!=0)
+         {
+          oomph_info << "Proc " << p << " assembles from element " 
+                     <<  First_el_for_assembly[p] << " to " 
+                     <<  Last_el_plus_one_for_assembly[p]-1 << " \n"; 
+         }
+        else
+         {
+          oomph_info << "Proc " << p << " assembles no elements\n";
+         }
        }
      }
+    
    }
+
  }
  
 
@@ -1428,7 +1557,17 @@ namespace oomph
   // Storage for number of processors and current processor
   int n_proc=this->communicator_pt()->nproc();
   int rank=this->communicator_pt()->my_rank();
-  
+
+  // Don't bother to update if we've got fewer elements than
+  // processors
+  unsigned nel=Elemental_assembly_time.size();
+  if (int(nel)<n_proc)
+   {
+    oomph_info << "Not re-computing distribution of elemental assembly\n"
+               << "because there are fewer elements than processors\n";
+    return;
+   }
+
   // Setup vectors storing the number of element timings to be sent
   // and the offset in the final vector
   Vector<int> receive_count(n_proc);
@@ -1438,7 +1577,7 @@ namespace oomph
    {
     // Default distribution of labour
     unsigned el_lo = First_el_for_assembly[p];
-    unsigned el_hi = Last_el_for_assembly[p];
+    unsigned el_hi = Last_el_plus_one_for_assembly[p]-1;
      
     // Number of timings to be sent and offset from start in
     // final vector
@@ -1447,9 +1586,7 @@ namespace oomph
     offset+=el_hi-el_lo+1;
    }
       
-  // Make temporary c-style array to keep valgrind from complaining
-  // about us reading and writing to same vector in gatherv below
-  unsigned nel=Elemental_assembly_time.size();
+  // Make temporary c-style array to avoid over-writing in Gatherv below
   double* el_ass_time = new double[nel];
   for (unsigned e=0;e<nel;e++)
    {
@@ -1457,7 +1594,8 @@ namespace oomph
    }
   
   // Gather timings on root processor
-  unsigned nel_local =Last_el_for_assembly[rank]-First_el_for_assembly[rank]+1;
+  unsigned nel_local =Last_el_plus_one_for_assembly[rank]-1
+   -First_el_for_assembly[rank]+1;
   MPI_Gatherv(
    &el_ass_time[First_el_for_assembly[rank]],nel_local,MPI_DOUBLE,
    &Elemental_assembly_time[0],&receive_count[0],&displacement[0],
@@ -1503,7 +1641,7 @@ namespace oomph
         if (proc==0)
          {
           // Last element for current processor
-          Last_el_for_assembly[0]=e;
+          Last_el_plus_one_for_assembly[0]=e+1;
            
           // First element for next one
           first_and_last_element[0]=e+1;
@@ -1512,7 +1650,7 @@ namespace oomph
           oomph_info 
            << "Processor " << 0 << " assembles Jacobians" 
            <<  " from elements " << First_el_for_assembly[0] << " to " 
-           <<  Last_el_for_assembly[0] << " " 
+           <<  Last_el_plus_one_for_assembly[0]-1 << " " 
            << std::endl;
          }
         else if (proc<(n_proc-1))
@@ -1568,7 +1706,7 @@ namespace oomph
     MPI_Recv(&aux[0],2,MPI_INT,0,0,
              this->communicator_pt()->mpi_comm(),&status);
     First_el_for_assembly[rank]=aux[0];
-    Last_el_for_assembly[rank]=aux[1];
+    Last_el_plus_one_for_assembly[rank]=aux[1]+1;
    }
 
   // Wipe all others
@@ -1577,7 +1715,7 @@ namespace oomph
     if (p!=rank)
      {
       First_el_for_assembly[p]=0;
-      Last_el_for_assembly[p]=0;
+      Last_el_plus_one_for_assembly[p]=1;
      }
    }
 
@@ -2432,11 +2570,19 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
                    get_boundaries_pt(boundaries_pt);
                   if (boundaries_pt!=0)
                    {
+                    Vector<unsigned> bound;
+                    unsigned nb=(*boundaries_pt).size();
+                    bound.reserve(nb);
                     for (std::set<unsigned>::iterator it=
                           (*boundaries_pt).begin(); it!=
                           (*boundaries_pt).end(); it++)
                      {
-                      mesh_pt->remove_boundary_node((*it),duplicated_node_pt);
+                      bound.push_back((*it));
+                     }
+                    for (unsigned i=0;i<nb;i++)
+                     {
+                      mesh_pt->remove_boundary_node(bound[i],
+                                                    duplicated_node_pt);
                      }
                    }
                    
@@ -3664,7 +3810,7 @@ void Problem::sparse_assemble_row_or_column_compressed_with_maps(
  if (!Problem_has_been_distributed)
   {
    el_lo=First_el_for_assembly[Communicator_pt->my_rank()];
-   el_hi=Last_el_for_assembly[Communicator_pt->my_rank()];
+   el_hi=Last_el_plus_one_for_assembly[Communicator_pt->my_rank()]-1;
   }
 #endif 
 
@@ -4007,7 +4153,7 @@ void Problem::sparse_assemble_row_or_column_compressed_with_lists(
  if (!Problem_has_been_distributed)
   {
    el_lo=First_el_for_assembly[Communicator_pt->my_rank()];
-   el_hi=Last_el_for_assembly[Communicator_pt->my_rank()];
+   el_hi=Last_el_plus_one_for_assembly[Communicator_pt->my_rank()]-1;
   }
 #endif 
 
@@ -4420,7 +4566,7 @@ void Problem::sparse_assemble_row_or_column_compressed_with_vectors_of_pairs(
  if (!Problem_has_been_distributed)
   {
    el_lo=First_el_for_assembly[Communicator_pt->my_rank()];
-   el_hi=Last_el_for_assembly[Communicator_pt->my_rank()];
+   el_hi=Last_el_plus_one_for_assembly[Communicator_pt->my_rank()]-1;
   }
 #endif 
 
@@ -4778,7 +4924,7 @@ void Problem::sparse_assemble_row_or_column_compressed_with_two_vectors(
  if (!Problem_has_been_distributed)
   {
    el_lo=First_el_for_assembly[Communicator_pt->my_rank()];
-   el_hi=Last_el_for_assembly[Communicator_pt->my_rank()];
+   el_hi=Last_el_plus_one_for_assembly[Communicator_pt->my_rank()]-1;
   }
 #endif 
 
@@ -5143,7 +5289,7 @@ void Problem::sparse_assemble_row_or_column_compressed_with_two_arrays(
  if (!Problem_has_been_distributed)
   {
    el_lo=First_el_for_assembly[Communicator_pt->my_rank()];
-   el_hi=Last_el_for_assembly[Communicator_pt->my_rank()];
+   el_hi=Last_el_plus_one_for_assembly[Communicator_pt->my_rank()]-1;
   }
 #endif 
 
@@ -5630,12 +5776,12 @@ void Problem::parallel_sparse_assemble
 
  //Total number of elements
  const unsigned long  n_elements = mesh_pt()->nelement();
-   
-#ifdef PARANOID
+
+#ifdef PARANOID  
  // No elements? This is usually a sign that the problem distribution has
- // led to one processor not having any elements. Usually
- // a sign of something having gone wrong but we'd
- // rather not have to deal with the aftermath here...
+ // led to one processor not having any elements. Either
+ // a sign of something having gone wrong or a relatively small 
+ // problem on a huge number of processors
  if (n_elements==0)
   {
    std::ostringstream error_stream;
@@ -5644,7 +5790,7 @@ void Problem::parallel_sparse_assemble
     << " has no elements. \n"
     << "This is usually a sign that the problem distribution \n"
     << "or the load balancing have gone wrong.";
-   throw OomphLibError(
+   OomphLibWarning(
     error_stream.str(),
     "Problem::parallel_sparse_assemble()",
     OOMPH_EXCEPTION_LOCATION);
@@ -5654,7 +5800,7 @@ void Problem::parallel_sparse_assemble
 
  // Default range of elements for distributed problems. 
  unsigned long el_lo=0;
- unsigned long el_hi=n_elements-1;
+ unsigned long el_hi_plus_one=n_elements;
 
  // Otherwise just loop over a fraction of the elements
  // (This will either have been initialised in
@@ -5665,7 +5811,7 @@ void Problem::parallel_sparse_assemble
  if (!Problem_has_been_distributed)
   {
    el_lo=First_el_for_assembly[my_rank];
-   el_hi=Last_el_for_assembly[my_rank];
+   el_hi_plus_one=Last_el_plus_one_for_assembly[my_rank];
   }
 
  //Find the number of vectors to be assembled
@@ -5725,11 +5871,13 @@ void Problem::parallel_sparse_assemble
  // be halos.
  //======================================================================
  Vector<unsigned> my_eqns;
- this->get_my_eqns(assembly_handler_pt,el_lo,el_hi,my_eqns);
+ if (n_elements!=0)
+  {
+   this->get_my_eqns(assembly_handler_pt,el_lo,el_hi_plus_one-1,my_eqns);
+  }
 
  // number of equations
  unsigned my_n_eqn = my_eqns.size();
-
 
  // next we assemble the data into an array of arrays
  // =================================================
@@ -5807,9 +5955,8 @@ void Problem::parallel_sparse_assemble
   Vector<DenseMatrix<double> > el_jacobian(n_matrix);
   
   //Loop over the elements
-  for(unsigned long e=el_lo;e<=el_hi;e++)
+  for(unsigned long e=el_lo;e<el_hi_plus_one;e++)
    {
-
     // Time it?
     if ((!doing_residuals)&&
         Must_recompute_load_balance_for_assembly)
@@ -5956,6 +6103,7 @@ void Problem::parallel_sparse_assemble
                    new unsigned
                    [Sparse_assemble_with_arrays_previous_allocation[m]
                     [eqn_number]];
+
                   matrix_values[m][eqn_number] = 
                    new double
                    [Sparse_assemble_with_arrays_previous_allocation[m]
@@ -5966,9 +6114,11 @@ void Problem::parallel_sparse_assemble
                   matrix_col_indices[m][eqn_number] = 
                    new unsigned
                    [Sparse_assemble_with_arrays_initial_allocation];
+
                   matrix_values[m][eqn_number] = 
                    new double
                    [Sparse_assemble_with_arrays_initial_allocation];
+
                   Sparse_assemble_with_arrays_previous_allocation[m]
                    [eqn_number]=
                    Sparse_assemble_with_arrays_initial_allocation;
@@ -5995,8 +6145,10 @@ void Problem::parallel_sparse_assemble
                      }
                     delete[] matrix_values[m][eqn_number];
                     delete[] matrix_col_indices[m][eqn_number];
+
                     matrix_values[m][eqn_number] = new_values;
                     matrix_col_indices[m][eqn_number] = new_indices;
+
                     Sparse_assemble_with_arrays_previous_allocation
                      [m][eqn_number] = new_allocation;
                    }
@@ -6027,6 +6179,8 @@ void Problem::parallel_sparse_assemble
      }
    } //End of loop over the elements
  } //End of vector assembly
+
+
 
  // Postprocess timing information and re-allocate distribution of
  // elements during subsequent assemblies.
@@ -6090,6 +6244,42 @@ void Problem::parallel_sparse_assemble
    t_start=TimingHelpers::timer();
   }
 
+
+ // Adjust number of coefficients in each row
+ for (unsigned m = 0; m < n_matrix; m++)
+  {
+   unsigned max=0;
+   unsigned min=INT_MAX;
+   unsigned sum=0;
+   unsigned sum_total=0;
+   for (unsigned e = 0; e < my_n_eqn; e++)
+    {
+     sum+=ncoef[m][e];
+     sum_total+=Sparse_assemble_with_arrays_previous_allocation[m][e];
+     if (ncoef[m][e]>max) max=ncoef[m][e];
+     if (ncoef[m][e]<min) min=ncoef[m][e];
+
+     // Now shrink the storage to what we actually need
+     unsigned new_allocation = ncoef[m][e];
+     double* new_values = new double[new_allocation];
+     unsigned* new_indices = new unsigned[new_allocation];
+     for (unsigned c = 0; c < ncoef[m][e]; c++)
+      {
+       new_values[c] = matrix_values[m][e][c];
+       new_indices[c] = matrix_col_indices[m][e][c];
+      }
+     delete[] matrix_values[m][e];
+     delete[] matrix_col_indices[m][e];
+     
+     matrix_values[m][e] = new_values;
+     matrix_col_indices[m][e] = new_indices;
+
+    }
+   
+   // oomph_info << "Max/min/total number of coefficients over all eqns: " 
+   //            << max  << " " << min << " " << sum << " "  
+   //            << sum_total << std::endl;
+  }
 
  // next we compute the number of equations and number of non-zeros to be
  // sent to each processor, and send/recv that information
@@ -11990,11 +12180,15 @@ void Problem::refine_selected_elements(const
 
 
 //========================================================================
-/// Refine (all) refineable (sub)mesh(es) uniformly as many times as 
-/// specified in vector and rebuild problem; doc refinement process.
+/// Helper function to do compund refinement of (all) refineable 
+/// (sub)mesh(es) uniformly as many times as specified in vector and 
+/// rebuild problem; doc refinement process. Set boolean argument 
+/// to true if you want to prune immediately after refining the meshes
+/// individually. 
 //========================================================================
-void Problem::refine_uniformly(const Vector<unsigned>& nrefine_for_mesh,
-                               DocInfo& doc_info)
+void Problem::refine_uniformly_aux(const Vector<unsigned>& nrefine_for_mesh,
+                                   DocInfo& doc_info,
+                                   const bool& prune)
 {
 
  double t_start = 0.0;
@@ -12009,8 +12203,9 @@ void Problem::refine_uniformly(const Vector<unsigned>& nrefine_for_mesh,
  if (Global_timings::Doc_comprehensive_timings)
   {
    t_end = TimingHelpers::timer();
-   oomph_info << "Time for actions before adapt: " 
-              << t_end-t_start << std::endl;
+   oomph_info 
+    << "Time for actions before adapt in Problem::refine_uniformly_aux(): " 
+    << t_end-t_start << std::endl;
    t_start = TimingHelpers::timer();
   }
 
@@ -12065,8 +12260,9 @@ void Problem::refine_uniformly(const Vector<unsigned>& nrefine_for_mesh,
  if (Global_timings::Doc_comprehensive_timings)
   {
    t_end = TimingHelpers::timer();
-   oomph_info << "Time for mesh-level refine_uniformly: " 
-              << t_end-t_start << std::endl;
+   oomph_info 
+    << "Time for mesh-level mesh refinement in Problem::refine_uniformly_aux(): " 
+    << t_end-t_start << std::endl;
    t_start = TimingHelpers::timer();
   }
 
@@ -12077,21 +12273,43 @@ void Problem::refine_uniformly(const Vector<unsigned>& nrefine_for_mesh,
  if (Global_timings::Doc_comprehensive_timings)
   {
    t_end = TimingHelpers::timer();
-   oomph_info << "Time for actions before adapt: " 
+   oomph_info 
+    << "Time for actions after adapt  Problem::refine_uniformly_aux(): " 
               << t_end-t_start << std::endl;
    t_start = TimingHelpers::timer();
   }
 
- //Do equation numbering
- oomph_info <<"Number of equations after Problem::refine_uniformly(): " 
-            << assign_eqn_numbers() << std::endl; 
 
 
- if (Global_timings::Doc_comprehensive_timings)
+ // Prune it?
+ if (prune)
   {
-   t_end = TimingHelpers::timer();
-   oomph_info << "Time for eqn numbering in refine_uniformly: " 
-              << t_end-t_start << std::endl;
+   // Note: This calls assign eqn numbers already...
+   prune_halo_elements_and_nodes();
+
+   if (Global_timings::Doc_comprehensive_timings)
+    {
+     t_end = TimingHelpers::timer();
+     oomph_info 
+      << "Time for Problem::prune_halo_elements_and_nodes() in "
+      << "Problem::refine_uniformly_aux(): " 
+      << t_end-t_start << std::endl;
+    }
+  }
+ else
+  {
+   //Do equation numbering
+   oomph_info <<"Number of equations after Problem::refine_uniformly_aux(): " 
+              << assign_eqn_numbers() << std::endl; 
+
+   if (Global_timings::Doc_comprehensive_timings)
+    {
+     t_end = TimingHelpers::timer();
+     oomph_info 
+      << "Time for Problem::assign_eqn_numbers() in "
+      << "Problem::refine_uniformly_aux(): " 
+      << t_end-t_start << std::endl;
+    }
   }
 
 }
@@ -12554,14 +12772,14 @@ void Problem::newton_solve(const unsigned &max_adapt)
 }
 
 //========================================================================
-/// Flush any external storage for any submeshes
+/// Delete any external storage for any submeshes
 /// NB this would ordinarily take place within the adaptation procedure
 /// for each submesh (See RefineableMesh::adapt_mesh(...)), but there
 /// are instances where the actions_before/after_adapt routines are used
 /// and no adaptive routines are called in between (e.g. when doc-ing 
 /// errors at the end of an adaptive newton solver)
 //========================================================================
-void Problem::flush_all_external_storage()
+void Problem::delete_all_external_storage()
 {
  //Number of submeshes
  unsigned n_mesh=nsub_mesh();
@@ -12571,7 +12789,7 @@ void Problem::flush_all_external_storage()
   {
    for (unsigned i_mesh=0;i_mesh<n_mesh;i_mesh++)
     {
-     mesh_pt(i_mesh)->flush_all_external_storage();
+     mesh_pt(i_mesh)->delete_all_external_storage();
     }
   }
 }
@@ -13440,6 +13658,9 @@ void Problem::copy_external_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
                             const Vector<unsigned>& 
                             input_target_domain_for_local_non_halo_element)
  {
+
+ double start_t = TimingHelpers::timer();
+
  // Number of processes
  const unsigned n_proc=this->communicator_pt()->nproc();
  
@@ -13682,8 +13903,17 @@ void Problem::copy_external_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
         }
        delete old_mesh_pt[i_mesh];
       }
-     mesh_pt()=0;
+
+     // Empty storage for sub-meshes
      flush_sub_meshes();
+
+     // Flush the storage for nodes and elements in compound mesh
+     // (they've already been deleted in the sub-meshes)
+     mesh_pt()->flush_element_and_node_storage();
+
+     // Kill
+     delete mesh_pt();
+     mesh_pt()=0;
     }
    
 
@@ -13702,9 +13932,13 @@ void Problem::copy_external_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
    // common refinement level
    if (some_mesh_has_been_pruned)
     {
-   
      // Do actions before adapt
      actions_before_adapt();
+
+     // Re-assign number of submeshes -- when this was first
+     // set, the problem may have had face meshes that have now
+     // disappeared.
+     n_mesh=nsub_mesh();
 
      // Now adapt meshes manually
      if (n_mesh==0)
@@ -13739,6 +13973,8 @@ void Problem::copy_external_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
          // Refine as many times as required to get refinement up to
          // uniform refinement level after last prune
          unsigned nref=pruned_refinement_level[0]-min_ref;
+         oomph_info << "Refining one-and-only mesh uniformly "
+                    << nref << " times\n";
          for (unsigned i=0;i<nref;i++)
           {
            ref_mesh_pt->refine_uniformly();
@@ -13753,8 +13989,6 @@ void Problem::copy_external_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
           dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(i_mesh));
          if (ref_mesh_pt!=0)
           {
-           
-           
            // Get min and max refinement level
            unsigned local_min_ref=0;
            unsigned local_max_ref=0;
@@ -13780,6 +14014,8 @@ void Problem::copy_external_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
            // Refine as many times as required to get refinement up to
            // uniform refinement level after last prune
            unsigned nref=pruned_refinement_level[i_mesh]-min_ref;
+           oomph_info << "Refining sub-mesh " << i_mesh << " uniformly "
+                      << nref << " times\n";
            for (unsigned i=0;i<nref;i++)
             {             
              ref_mesh_pt->refine_uniformly();
@@ -13788,10 +14024,15 @@ void Problem::copy_external_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
         }
        // Rebuild the global mesh
        rebuild_global_mesh();    
-      }   
-   
+      }  
+
      // Do actions after adapt
      actions_after_adapt();
+
+     // Re-assign number of submeshes -- when this was first
+     // set, the problem may have had face meshes that have now
+     // disappeared.
+     n_mesh=nsub_mesh();
     }
    
    
@@ -13900,6 +14141,14 @@ void Problem::copy_external_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
                            OOMPH_EXCEPTION_LOCATION);
       }
 #endif
+     
+     
+     if (report_stats)
+      {
+       oomph_info << "Distributing one and only mesh\n"
+                  << "------------------------------" << std::endl;
+      }
+
      // No pre-set distribution from restart that may leave some
      // processors empty so no need to overrule deletion of elements
      bool overrule_keep_as_halo_element_status=false;
@@ -13915,8 +14164,10 @@ void Problem::copy_external_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
       {
        if (report_stats)
         {
-         oomph_info << "Distributing submesh " << i_mesh << std::endl
-                    << "--------------------" << std::endl;
+         oomph_info << "Distributing submesh " << i_mesh << " of " 
+                    << n_mesh << " in total\n"
+                    << "---------------------------------------------" 
+                    << std::endl;
         }
        // Set the doc_info number to reflect the submesh
        doc_info.number()=i_mesh;
@@ -14050,8 +14301,13 @@ void Problem::copy_external_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
    actions_after_distribute();
 
    // Re-assign equation numbers
+#ifdef PARANOID
    unsigned n_dof=assign_eqn_numbers();
+#else
+   assign_eqn_numbers();
+#endif
    
+
    if (report_stats)
     {
      oomph_info 
@@ -14079,6 +14335,9 @@ void Problem::copy_external_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
 #endif
   }
 
+ double end_t = TimingHelpers::timer();
+ oomph_info << "Time for load_balance() [sec]    : " 
+            << end_t-start_t << std::endl;
 }
 
 

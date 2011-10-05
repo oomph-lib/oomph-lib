@@ -299,7 +299,6 @@ public:
    delete Solid_mesh_pt;
    delete Solid_fsi_traction_mesh_pt;
    delete Lagrange_multiplier_mesh_pt;
-   delete Solid_fsi_boundary_pt;
    delete Solid_traction_mesh_pt;
   }
 
@@ -408,9 +407,6 @@ private:
 
  /// Solid traction elements (prescibed external pressure on solid wall)
  SolidMesh* Solid_traction_mesh_pt;
-
- /// GeomObject incarnations of the FSI boundary in the solid mesh
- MeshAsGeomObject* Solid_fsi_boundary_pt;
 
  /// \short Geometric Object defining the undeformed boundary of the
  /// fluid mesh
@@ -556,8 +552,6 @@ PseudoElasticCollapsibleChannelProblem()
  
  // Create elements
  Lagrange_multiplier_mesh_pt = new SolidMesh;
- //Initialise boundary_pt to zero
- Solid_fsi_boundary_pt=0;
  create_lagrange_multiplier_elements();
 
  // Create solid traction elements for external pressure
@@ -834,6 +828,113 @@ create_fsi_traction_elements()
 } // end of create_fsi_traction_elements
 
 
+//============start_of_create_lagrange_multiplier_elements===============
+/// Create elements that impose the prescribed boundary displacement
+/// for the pseudo-solid fluid mesh
+//=======================================================================
+template<class FLUID_ELEMENT, class SOLID_ELEMENT>
+void PseudoElasticCollapsibleChannelProblem<FLUID_ELEMENT,SOLID_ELEMENT>::
+create_lagrange_multiplier_elements()
+{
+ // Create Lagrange multiplier elements on boundary 3 of fluid mesh
+ unsigned b=3;
+ 
+ // How many bulk fluid elements are adjacent to boundary b?
+ unsigned n_element = Fluid_mesh_pt->nboundary_element(b);
+ 
+ // Loop over the bulk fluid elements adjacent to boundary b 
+ // to create elements
+ for(unsigned e=0;e<n_element;e++)
+  {
+   // Get pointer to the bulk fluid element that is adjacent to boundary b
+   FLUID_ELEMENT* bulk_elem_pt = dynamic_cast<FLUID_ELEMENT*>(
+    Fluid_mesh_pt->boundary_element_pt(b,e));
+   
+   //Find the index of the face of element e along boundary b
+   int face_index = Fluid_mesh_pt->face_index_at_boundary(b,e);
+   
+   // Create new element
+   RefineableFSIImposeDisplacementByLagrangeMultiplierElement<FLUID_ELEMENT>* 
+    el_pt =
+    new RefineableFSIImposeDisplacementByLagrangeMultiplierElement
+    <FLUID_ELEMENT>(bulk_elem_pt,face_index);
+   
+   // Add it to the mesh
+   Lagrange_multiplier_mesh_pt->add_element_pt(el_pt);
+   
+   // Specify boundary number
+   el_pt->set_boundary_number_in_bulk_mesh(b);
+  }
+ 
+ 
+ // Locate bulk solid elements next to boundary b_solid_fsi (the FSI boundary) 
+ // in the mesh pointed to by Solid_mesh_pt that drive the deformation of the 
+ // pseudo-solid fluid mesh via the Lagrange multiplier elements
+ // stored in Lagrange_multiplier_mesh_pt
+ unsigned b_solid=4;
+ FSI_functions::setup_solid_elements_for_displacement_bc<SOLID_ELEMENT,3>
+  (this,b_solid,Solid_mesh_pt,Lagrange_multiplier_mesh_pt);
+ 
+ // Loop over the bulk fluid elements adjacent to boundary b
+ // to apply boundary conditions
+ for(unsigned e=0;e<n_element;e++)
+  {
+   // Get element
+   RefineableFSIImposeDisplacementByLagrangeMultiplierElement<FLUID_ELEMENT>* 
+    el_pt=
+    dynamic_cast<RefineableFSIImposeDisplacementByLagrangeMultiplierElement
+    <FLUID_ELEMENT>*>(
+     Lagrange_multiplier_mesh_pt->finite_element_pt(e));
+   
+   // Loop over the nodes 
+   unsigned nnod=el_pt->nnode();
+   for (unsigned i=0;i<nnod;i++)
+    {
+     // How many nodal values were used by the "bulk" element
+     // that originally created this node?
+     unsigned n_bulk_value=el_pt->nbulk_value(i);
+     Node* node_pt = el_pt->node_pt(i);
+     
+     // The remaining ones are Lagrange multipliers and we pin them.
+     unsigned nval=node_pt->nvalue();
+     for (unsigned j=n_bulk_value;j<nval;j++)
+      {
+       // Direction of Lagrange multiplier force
+       int d=j-n_bulk_value;
+       
+       
+       // Boundary 0 (inflow): Pseudo-solid displacement is fixed so pin
+       // all Lagrange multipliers
+       if (node_pt->is_on_boundary(0))
+        {
+         if (d==0||d==1||d==2) node_pt->pin(j);
+        }
+       // Boundary 1 (symm BC, x=const.): Pseudo-solid displacement is 
+       // fixed in x-direction so pin corresponding Lagrange multiplier
+       if (node_pt->is_on_boundary(1))
+        {
+         if (d==0) node_pt->pin(j);
+        }
+       // Boundary 2 (symm BC, y=const.): Pseudo-solid displacement is 
+       // fixed in y-direction so pin corresponding Lagrange multiplier
+       if (node_pt->is_on_boundary(2))
+        {
+         if (d==1) node_pt->pin(j);
+        }
+       // Boundary 4 (outflow): Pseudo-solid displacement is fixed so pin
+       // all Lagrange multipliers
+       if (node_pt->is_on_boundary(4))
+        {
+         if (d==0||d==1||d==2) node_pt->pin(j);
+        }
+      }       
+    }
+  }
+
+} // end of create_lagrange_multiplier_elements
+
+
+
 //==================start_of_create_solid_traction_elements===============
 /// Create face elements that apply external pressure load onto
 /// wall
@@ -870,97 +971,6 @@ create_solid_traction_elements()
    Solid_traction_mesh_pt->add_element_pt(el_pt);
   }
 }
-
-//============start_of_create_lagrange_multiplier_elements===============
-/// Create elements that impose the prescribed boundary displacement
-/// for the pseudo-solid fluid mesh
-//=======================================================================
-template<class FLUID_ELEMENT, class SOLID_ELEMENT>
-void PseudoElasticCollapsibleChannelProblem<FLUID_ELEMENT,SOLID_ELEMENT>::
-create_lagrange_multiplier_elements()
-{
- // boundary 3 of fluid mesh
- unsigned b=3;
-
- // create the geom object for the wall
- // delete existing object, if there is one
- if(Solid_fsi_boundary_pt!=0)  {delete Solid_fsi_boundary_pt;}
- //Now create the new object.
- Solid_fsi_boundary_pt=
-  new MeshAsGeomObject(Solid_fsi_traction_mesh_pt);
-
- // How many bulk fluid elements are adjacent to boundary b?
- unsigned n_element = Fluid_mesh_pt->nboundary_element(b);
-   
- // Loop over the bulk fluid elements adjacent to boundary b?
- for(unsigned e=0;e<n_element;e++)
-  {
-   // Get pointer to the bulk fluid element that is adjacent to boundary b
-   FLUID_ELEMENT* bulk_elem_pt = dynamic_cast<FLUID_ELEMENT*>(
-    Fluid_mesh_pt->boundary_element_pt(b,e));
-   
-   //Find the index of the face of element e along boundary b
-   int face_index = Fluid_mesh_pt->face_index_at_boundary(b,e);
-   
-   // Create new element
-   RefineableImposeDisplacementByLagrangeMultiplierElement<FLUID_ELEMENT>* 
-    el_pt =
-    new  RefineableImposeDisplacementByLagrangeMultiplierElement<FLUID_ELEMENT>(
-     bulk_elem_pt,face_index);
-   
-   // Add it to the mesh
-   Lagrange_multiplier_mesh_pt->add_element_pt(el_pt);
-   
-   // Set the GeomObject that defines the boundary shape and set
-   // which bulk boundary we are attached to (needed to extract
-   // the boundary coordinate from the bulk nodes)
-   el_pt->set_boundary_shape_geom_object_pt(Solid_fsi_boundary_pt,b);
-
-   // Loop over the nodes 
-   unsigned nnod=el_pt->nnode();
-   for (unsigned i=0;i<nnod;i++)
-    {
-     // How many nodal values were used by the "bulk" element
-     // that originally created this node?
-     unsigned n_bulk_value=el_pt->nbulk_value(i);
-     Node* node_pt = el_pt->node_pt(i);
-
-     // The remaining ones are Lagrange multipliers and we pin them.
-     unsigned nval=node_pt->nvalue();
-     for (unsigned j=n_bulk_value;j<nval;j++)
-      {
-       // Direction of Lagrange multiplier force
-       int d=j-n_bulk_value;
-
-
-       // Boundary 0 (inflow): Pseudo-solid displacement is fixed so pin
-       // all Lagrange multipliers
-       if (node_pt->is_on_boundary(0))
-        {
-         if (d==0||d==1||d==2) node_pt->pin(j);
-        }
-       // Boundary 1 (symm BC, x=const.): Pseudo-solid displacement is 
-       // fixed in x-direction so pin corresponding Lagrange multiplier
-       if (node_pt->is_on_boundary(1))
-        {
-         if (d==0) node_pt->pin(j);
-        }
-       // Boundary 2 (symm BC, y=const.): Pseudo-solid displacement is 
-       // fixed in y-direction so pin corresponding Lagrange multiplier
-       if (node_pt->is_on_boundary(2))
-        {
-         if (d==1) node_pt->pin(j);
-        }
-       // Boundary 4 (outflow): Pseudo-solid displacement is fixed so pin
-       // all Lagrange multipliers
-       if (node_pt->is_on_boundary(4))
-        {
-         if (d==0||d==1||d==2) node_pt->pin(j);
-        }
-      }       
-    }
-  }
-} // end of create_lagrange_multiplier_elements
 
 //===========================================================================
 /// Flush mesh of face elements.
@@ -1087,23 +1097,6 @@ template<class FLUID_ELEMENT, class SOLID_ELEMENT>
 void PseudoElasticCollapsibleChannelProblem<FLUID_ELEMENT,SOLID_ELEMENT>
 ::actions_before_distribute()
 {
- // Loop over elements in traction meshes
- unsigned n_element=Solid_fsi_traction_mesh_pt->nelement();
- for (unsigned e=0;e<n_element;e++)
-  {
-   RefineableFSISolidTractionElement<SOLID_ELEMENT,3>* traction_elem_pt=
-    dynamic_cast<RefineableFSISolidTractionElement<SOLID_ELEMENT,3>* >
-    (Solid_fsi_traction_mesh_pt->element_pt(e));
-
-   // Get the bulk element (which is a SOLID_ELEMENT)
-   SOLID_ELEMENT* solid_elem_pt = dynamic_cast<SOLID_ELEMENT*>
-    (traction_elem_pt->bulk_element_pt());
-
-   // Require bulk to be kept as a (possible) halo element
-   // Note: The traction element itself will "become" a halo element 
-   // when it is recreated after the distribution has taken place
-   solid_elem_pt->set_must_be_kept_as_halo();
-  }
 
  // Flush all the submeshes out but keep the meshes of 
  // RefineableFSISolidTractionElements alive (i.e. don't delete them)

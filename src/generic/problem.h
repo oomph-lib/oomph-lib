@@ -269,6 +269,15 @@ namespace oomph
 
   private:
 
+ /// \short Helper function to do compund refinement of (all) refineable 
+ /// (sub)mesh(es) uniformly as many times as specified in vector and 
+ /// rebuild problem; doc refinement process. Set boolean argument 
+ /// to true if you want to prune immediately after refining the meshes
+ /// individually. 
+ void refine_uniformly_aux(const Vector<unsigned>& nrefine_for_mesh,
+                           DocInfo& doc_info,
+                           const bool& prune);
+
  /// \short Helper function to re-setup the Base_mesh enumeration 
  /// (used during load balancing) after pruning
  void setup_base_mesh_info_after_pruning();
@@ -421,13 +430,14 @@ namespace oomph
  bool Use_default_partition_in_load_balance;
 
  /// \short First element to be assembled by given processor for 
- /// non-distributed problem (only kept up to date when default assingment 
+ /// non-distributed problem (only kept up to date when default assignment 
  /// is used)
  Vector<unsigned> First_el_for_assembly;
 
- /// \short Last element to be assembled by given processor for non-distributed
- /// problem (only kept up to date when default assingment is used)
- Vector<unsigned> Last_el_for_assembly;
+ /// \short Last element (plus one) to be assembled by given processor 
+ /// for non-distributed problem (only kept up to date when default 
+ /// assignment is used)
+ Vector<unsigned> Last_el_plus_one_for_assembly;
 
  /// \short Boolean indicating that the division of elements over processors
  /// during the assembly process must be re-load-balanced.
@@ -809,7 +819,12 @@ protected:
   Vector<unsigned>& last_el_for_assembly)
  {
   First_el_for_assembly=first_el_for_assembly;
-  Last_el_for_assembly=last_el_for_assembly;
+  Last_el_plus_one_for_assembly=last_el_for_assembly;
+  unsigned n=last_el_for_assembly.size();
+  for (unsigned i=0;i<n;i++)
+   {
+    Last_el_plus_one_for_assembly[i]+=1;
+   }
  }
 
 
@@ -820,7 +835,12 @@ protected:
   Vector<unsigned>& last_el_for_assembly) const
  {
   first_el_for_assembly=First_el_for_assembly;
-  last_el_for_assembly=Last_el_for_assembly;
+  last_el_for_assembly=Last_el_plus_one_for_assembly;
+  unsigned n=last_el_for_assembly.size();
+  for (unsigned i=0;i<n;i++)
+   {
+    last_el_for_assembly[i]-=1;
+   }
  }
 
 #endif
@@ -1662,21 +1682,21 @@ protected:
  }
  
 #endif
-
-  /// \short Wrapper function to call flush_external_storage for
-  /// each submesh of the problem
-  void flush_all_external_storage();
-
-  /// \short Boolean to indicate if all output is suppressed in 
-  /// Problem::newton_solve(). Defaults to false.
-  bool Shut_up_in_newton_solve;
-
-
+ 
+ /// \short Wrapper function to delete external storage for
+ /// each submesh of the problem
+ void delete_all_external_storage();
+ 
+ /// \short Boolean to indicate if all output is suppressed in 
+ /// Problem::newton_solve(). Defaults to false.
+ bool Shut_up_in_newton_solve;
+ 
+ 
   protected:
-
-   /// \short Boolean to indicate whether a Newton step should be taken
-  /// even if the initial residuals are below the required tolerance
-  bool Always_take_one_newton_step;
+ 
+ /// \short Boolean to indicate whether a Newton step should be taken
+ /// even if the initial residuals are below the required tolerance
+ bool Always_take_one_newton_step;
 
  /// \short Perform a basic arc-length continuation step using Newton's
  /// method. Returns number of Newton steps taken.
@@ -1938,13 +1958,38 @@ protected:
  {  
   DocInfo doc_info;
   doc_info.disable_doc();
-  refine_uniformly(nrefine_for_mesh,doc_info);
+  bool prune=false;
+  refine_uniformly_aux(nrefine_for_mesh,doc_info,prune);
  }
 
  /// \short Refine refineable sub-meshes, each as many times as
  /// specified in the vector and rebuild problem; doc refinement process
  void refine_uniformly(const Vector<unsigned>& nrefine_for_mesh,
-                       DocInfo& doc_info);
+                       DocInfo& doc_info)
+ {  
+  bool prune=false;
+  refine_uniformly_aux(nrefine_for_mesh,doc_info,prune);
+ }
+
+ /// \short Refine refineable sub-meshes, each as many times as
+ /// specified in the vector and rebuild problem. Prune after
+ /// refinements
+ void refine_uniformly_and_prune(const Vector<unsigned>& nrefine_for_mesh)
+ {  
+  DocInfo doc_info;
+  doc_info.disable_doc();
+  bool prune=true;
+  refine_uniformly_aux(nrefine_for_mesh,doc_info,prune);
+ }
+
+ /// \short Refine refineable sub-meshes, each as many times as
+ /// specified in the vector and rebuild problem; doc refinement process
+ void refine_uniformly_and_prune(const Vector<unsigned>& nrefine_for_mesh,
+                                 DocInfo& doc_info)
+ {  
+  bool prune=true;
+  refine_uniformly_aux(nrefine_for_mesh,doc_info,prune);
+ }
 
  /// \short  Refine (all) refineable (sub)mesh(es) uniformly and 
  /// rebuild problem; doc refinement process.
@@ -1957,6 +2002,20 @@ protected:
   Vector<unsigned> nrefine_for_mesh(nmesh,1);
   refine_uniformly(nrefine_for_mesh);
  }
+
+
+ /// \short  Refine (all) refineable (sub)mesh(es) uniformly and 
+ /// rebuild problem; doc refinement process.
+ void refine_uniformly_and_prune(DocInfo& doc_info)
+ {
+  // Number of (sub)meshes
+  unsigned nmesh=std::max(unsigned(1),nsub_mesh());
+
+  // Refine each mesh once
+  Vector<unsigned> nrefine_for_mesh(nmesh,1);
+  refine_uniformly_and_prune(nrefine_for_mesh);
+ }
+
 
  /// \short  Refine (all) refineable (sub)mesh(es) uniformly and 
  /// rebuild problem

@@ -25,3 +25,4 @@ adaptive_drop_in_channel_LDADD = -L@libdir@ \
                        $(EXTERNAL_LIBS) $(FLIBS)
 
 
+EXTRA_DIST+= bubble.mcr

@@ -72,9 +72,9 @@ namespace oomph
   (Problem* problem_pt,Mesh* const &first_mesh_pt, Mesh* const &second_mesh_pt,
    const unsigned& first_interaction, const unsigned& second_interaction)
   {
-   // Flush all the current external halo(ed) element and node storage
-   first_mesh_pt->flush_all_external_storage();
-   second_mesh_pt->flush_all_external_storage();
+   // Delete all the current external halo(ed) element and node storage
+   first_mesh_pt->delete_all_external_storage();
+   second_mesh_pt->delete_all_external_storage();
 
    // Call setup_multi_domain_interaction in both directions
    setup_multi_domain_interaction<ELEMENT_1>

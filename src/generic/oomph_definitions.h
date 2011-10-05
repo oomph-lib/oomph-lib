@@ -124,13 +124,15 @@ class OomphLibException : public std::runtime_error
  ///and a location string provided by the OOMPH_EXCEPTION_LOCATION
  ///macro and combines them into a standard header. The exception type
  ///will be the string "WARNING" or "ERROR" and the message is written to
- ///the exception_stream, with a specified output_width
+ ///the exception_stream, with a specified output_width. Optionally
+ /// provide a traceback of the function calls.
  OomphLibException(const std::string &error_description,
                    const std::string &function_name,
                    const char *location,
                    const std::string &exception_type,
                    std::ostream &exception_stream,
-                   const unsigned &output_width);
+                   const unsigned &output_width,
+                   bool list_trace_back);
  
   ///The destructor cannot throw an exception (C++ STL standard) 
   ~OomphLibException() throw() {}
@@ -158,7 +160,7 @@ class OomphLibError : public OomphLibException
                const std::string &function_name,
                const char *location) :
   OomphLibException(error_description,function_name,location,"ERROR",
-                    *Stream_pt,Output_width) { }
+                    *Stream_pt,Output_width,true) { }
 
  /// \short Static member function used to specify the error stream,
  /// which must be passed as a pointer because streams cannot be copied.
@@ -194,7 +196,7 @@ class OomphLibWarning : public OomphLibException
                  const char* location) :
                  OomphLibException(warning_description,function_name,
                                    location,
-                                   "WARNING",*Stream_pt,Output_width) { }
+                                   "WARNING",*Stream_pt,Output_width,false) { }
                  
  /// \short Static member function used to specify the error stream,
  /// which must be passed as a pointer because streams cannot be copied.

@@ -957,9 +957,11 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::doc_solution(const
  // Write trace file on root only
  if (Communicator_pt->my_rank()==0)
   {
-   Vector<double> x(2);
-   x[0]=Doc_node_pt->x(0);
-   x[1]=Doc_node_pt->x(1);
+   Vector<double> x(2,0.0);
+// hierher need to re-assess which processor this node exists on 
+// after distribution
+//    x[0]=Doc_node_pt->x(0);
+//    x[1]=Doc_node_pt->x(1);
    double u_exact;
    GlobalParameters::get_exact_u(time_pt()->time(),x,u_exact);
    Vector<double > xi_wall(1);
@@ -967,7 +969,7 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::doc_solution(const
    xi_wall[0]=0.0;
    Boundary_pt->position(xi_wall,r_wall);
    Trace_file << time_pt()->time() 
-              << " " << Doc_node_pt->value(0)
+//              << " " << Doc_node_pt->value(0)
               << " " << u_exact
               << " " << r_wall[0]
               << " " << time_pt()->dt()
