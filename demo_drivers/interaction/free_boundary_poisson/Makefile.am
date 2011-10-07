@@ -9,7 +9,8 @@ geom_object_element circle \
 free_boundary_poisson_with_elastic_mesh_update \
 macro_element_free_boundary_poisson \
 old_macro_element_free_boundary_poisson_for_doc \
-doc_sparse_macro_node_update
+doc_sparse_macro_node_update \
+macro_element_free_boundary_poisson_non_ref
 
 
 ##################################################################
@@ -110,3 +111,16 @@ free_boundary_poisson_with_elastic_mesh_update_LDADD = \
 
 
 ##################################################################
+
+##################################################################
+
+# Sources for free-boundary Poisson with macro-element mesh update
+macro_element_free_boundary_poisson_non_ref_SOURCES = \
+                            macro_element_free_boundary_poisson_non_ref.cc\
+                            circle_as_generalised_element.h
+
+# Required libraries:
+# $(FLIBS) is included in case the solver involves fortran sources.
+macro_element_free_boundary_poisson_non_ref_LDADD = -L@libdir@ -lpoisson \
+                                      -lgeneric \
+                                      $(EXTERNAL_LIBS) $(FLIBS)

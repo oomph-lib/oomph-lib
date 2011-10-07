@@ -469,8 +469,12 @@ class ContProblem : public AdvectionProblem
                                                time_stepper_pt());
 
     //Make the boundaries periodic
-    mesh_pt()->boundary_node_pt(0,0)->
-     make_periodic(mesh_pt()->boundary_node_pt(1,0));
+    // This has been modified from the original (commented out below)
+    // so that it passes the self tests
+    mesh_pt()->boundary_node_pt(1,0)->
+     make_periodic(mesh_pt()->boundary_node_pt(0,0));
+//    mesh_pt()->boundary_node_pt(0,0)->
+//     make_periodic(mesh_pt()->boundary_node_pt(1,0));
 
     //Set the wind function
     for(unsigned e=0;e<n_element;e++)

@@ -25,8 +25,9 @@
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 //LIC// 
 //LIC//====================================================================
-// Driver for two-dimensional single-layer fluid problem 
- 
+// Driver for two-dimensional single fluid free surface problem, where
+// the mesh is deformed using a spine-based node-update strategy
+
 // Generic oomph-lib header
 #include "generic.h"
 
@@ -44,18 +45,20 @@ using namespace std;
 using namespace oomph;
 
 
-
-//==start_of_namespace===================================================
+//==start_of_namespace====================================================
 /// Namespace for physical parameters
-//=======================================================================
+//========================================================================
 namespace Global_Physical_Variables
 {
 
  /// Reynolds number
  double Re = 5.0;
 
- /// Womersley number
- double ReSt = 5.0; // (St = 1)
+ /// Strouhal number
+ double St = 1.0;
+
+ /// Womersley number (Reynolds x Strouhal, computed automatically)
+ double ReSt;
  
  /// Product of Reynolds number and inverse of Froude number
  double ReInvFr = 5.0; // (Fr = 1)
@@ -69,11 +72,15 @@ namespace Global_Physical_Variables
 } // End of namespace
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 
-//==start_of_problem_class===============================================
-/// Single fluid interface problem in a rectangular domain which is
+
+//==start_of_problem_class================================================
+/// Single fluid free surface problem in a rectangular domain which is
 /// periodic in the x direction
-//=======================================================================
+//========================================================================
 template<class ELEMENT, class TIMESTEPPER>
 class InterfaceProblem : public Problem
 {
@@ -89,46 +96,17 @@ public:
  /// Destructor (empty)
  ~InterfaceProblem() {}
 
- /// Spine heights/lengths are unknowns in the problem so their values get
- /// corrected during each Newton step. However, changing their value does
- /// not automatically change the nodal positions, so we need to update all
- /// of them here.
- void actions_before_newton_convergence_check()
-  {
-   mesh_pt()->node_update();
-  }
+ /// Set initial conditions
+ void set_initial_condition();
 
- // Update before solve (empty)
- void actions_before_newton_solve() {}
+ /// Set boundary conditions
+ void set_boundary_conditions();
 
- /// \short Update after solve can remain empty, because the update 
- /// is performed automatically after every Newton step.
- void actions_after_newton_solve() {}
+ /// Doc the solution
+ void doc_solution(DocInfo &doc_info);
 
- /// Set initial conditions: Set all nodal velocities to zero and
- /// initialise the previous velocities to correspond to an impulsive
- /// start
- void set_initial_condition()
-  {
-   // Determine number of nodes in mesh
-   const unsigned n_node = mesh_pt()->nnode();
-
-   // Loop over all nodes in mesh
-   for(unsigned n=0;n<n_node;n++)
-    {
-     // Loop over the two velocity components
-     for(unsigned i=0;i<2;i++)
-      {
-       // Set velocity component i of node n to zero
-       mesh_pt()->node_pt(n)->set_value(i,0.0);
-      }
-    }
-
-   // Initialise the previous velocity values for timestepping
-   // corresponding to an impulsive start
-   assign_initial_values_impulsive();
-
-  } // End of set_initial_condition
+ /// Do unsteady run up to maximum time t_max with given timestep dt
+ void unsteady_run(const double &t_max, const double &dt);
 
  /// \short Access function for the specific mesh
  SingleLayerSpineMesh<ELEMENT,SpineLineFluidInterfaceElement<ELEMENT> >* 
@@ -138,51 +116,39 @@ public:
     SpineLineFluidInterfaceElement<ELEMENT> >*>(Problem::mesh_pt());
   }
 
- /// Doc the solution
- void doc_solution(DocInfo &doc_info);
-
- /// Do unsteady run up to maximum time t_max with given timestep dt
- void unsteady_run(const double &t_max, const double &dt); 
- 
-
 private:
 
- /// Deform the mesh/free surface to a prescribed function
- void deform_free_surface(const double &epsilon, const unsigned &n_periods)
+ /// \short Spine heights/lengths are unknowns in the problem so their
+ /// values get corrected during each Newton step. However, changing
+ /// their value does not automatically change the nodal positions, so
+ /// we need to update all of them here.
+ void actions_before_newton_convergence_check()
   {
-   // Determine number of spines in mesh
-   const unsigned n_spine = mesh_pt()->nspine();
-
-   // Loop over spines in mesh
-   for(unsigned i=0;i<n_spine;i++)
-    {
-     
-     // Determine x coordinate of spine
-     double x_value = mesh_pt()->boundary_node_pt(0,i)->x(0);
-
-     // Set spine height
-     mesh_pt()->spine_pt(i)->height() = 
-      1.2 + epsilon*(cos(2.0*n_periods*MathematicalConstants::Pi*x_value/Lx));
-
-    } // End of loop over spines
-   
-   // Update nodes in bulk mesh
    mesh_pt()->node_update();
+  }
 
-  } // End of deform_free_surface
- 
+ /// No actions required before solve step
+ void actions_before_newton_solve() {}
+
+ /// \short Update after solve can remain empty, because the update 
+ /// is performed automatically after every Newton step.
+ void actions_after_newton_solve() {}
+
+ /// Deform the mesh/free surface to a prescribed function
+ void deform_free_surface(const double &epsilon, const unsigned &n_periods);
+
+ /// Width of domain
+ double Lx;
+
  /// Trace file
  ofstream Trace_file;
-
- /// Axial length of domain
- double Lx;
 
 }; // End of problem class
 
 
 
 //==start_of_constructor==================================================
-/// Constructor for single fluid interface problem
+/// Constructor for single fluid free surface problem
 //========================================================================
 template<class ELEMENT, class TIMESTEPPER>
 InterfaceProblem<ELEMENT,TIMESTEPPER>::
@@ -218,15 +184,19 @@ InterfaceProblem(const unsigned &n_x, const unsigned &n_y,
    // Loop over nodes on boundary b
    for(unsigned n=0;n<n_node;n++)
     {
-     // Pin x velocity on all boundaries other than top (no slip/penetration)
-     if(b!=2)
-      {
-       mesh_pt()->boundary_node_pt(b,n)->pin(0);
-      }
-     // Pin y velocity on bottom wall only (no penetration)
+     // On lower boundary (solid wall), pin x and y components of
+     // the velocity (no slip/penetration)
      if(b==0)
       {
+       mesh_pt()->boundary_node_pt(b,n)->pin(0);
        mesh_pt()->boundary_node_pt(b,n)->pin(1);
+      }
+     
+     // On left and right boundaries, pin x-component of the velocity
+     // (no penetration of the periodic boundaries)
+     if(b==1 || b==3)
+      {
+       mesh_pt()->boundary_node_pt(b,n)->pin(0);
       }
     } // End of loop over nodes on boundary b
   } // End of loop over mesh boundaries
@@ -236,10 +206,10 @@ InterfaceProblem(const unsigned &n_x, const unsigned &n_y,
  // ----------------------------------------------------------------
  
  // Determine number of bulk elements in mesh
- const unsigned n_bulk = mesh_pt()->nbulk();
+ const unsigned n_element_bulk = mesh_pt()->nbulk();
 
  // Loop over the bulk elements
- for(unsigned e=0;e<n_bulk;e++)
+ for(unsigned e=0;e<n_element_bulk;e++)
   {
    // Upcast from GeneralisedElement to the present element
    ELEMENT *el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->bulk_element_pt(e));
@@ -280,6 +250,9 @@ InterfaceProblem(const unsigned &n_x, const unsigned &n_y,
     dynamic_cast<SpineLineFluidInterfaceElement<ELEMENT>*>
     (mesh_pt()->interface_element_pt(e));
 
+   // Set the Strouhal number
+   el_pt->st_pt() = &Global_Physical_Variables::St;
+
    // Set the Capillary number
    el_pt->ca_pt() = &Global_Physical_Variables::Ca;
 
@@ -288,13 +261,114 @@ InterfaceProblem(const unsigned &n_x, const unsigned &n_y,
 
   } // End of loop over interface elements
 
+ // Apply the boundary conditions
+ set_boundary_conditions();
+
  // Setup equation numbering scheme
  cout << "Number of equations: " << assign_eqn_numbers() << std::endl;
 
 } // End of constructor
 
 
+
+//========================================================================
+//==start_of_set_initial_condition========================================
+/// \short Set initial conditions: Set all nodal velocities to zero and
+/// initialise the previous velocities and nodal positions to correspond
+/// to an impulsive start
+//========================================================================
+template <class ELEMENT, class TIMESTEPPER>
+void InterfaceProblem<ELEMENT,TIMESTEPPER>::set_initial_condition()
+{
+ // Determine number of nodes in mesh
+ const unsigned n_node = mesh_pt()->nnode();
+ 
+ // Loop over all nodes in mesh
+ for(unsigned n=0;n<n_node;n++)
+  {
+   // Loop over the two velocity components
+   for(unsigned i=0;i<2;i++)
+    {
+     // Set velocity component i of node n to zero
+     mesh_pt()->node_pt(n)->set_value(i,0.0);
+    }
+  }
+ 
+ // Initialise the previous velocity values for timestepping
+ // corresponding to an impulsive start
+ assign_initial_values_impulsive();
+ 
+} // End of set_initial_condition
+
+
+
+//==start_of_set_boundary_conditions======================================
+/// \short Set boundary conditions: Set both velocity components to zero
+/// on the bottom (solid) wall and the horizontal component only to zero
+/// on the side (periodic) boundaries
+//========================================================================
+template <class ELEMENT, class TIMESTEPPER>
+void InterfaceProblem<ELEMENT,TIMESTEPPER>::set_boundary_conditions()
+{
+ // Determine number of mesh boundaries
+ const unsigned n_boundary = mesh_pt()->nboundary();
+ 
+ // Loop over mesh boundaries
+ for(unsigned b=0;b<n_boundary;b++)
+  {
+   // Determine number of nodes on boundary b
+   const unsigned n_node = mesh_pt()->nboundary_node(b);
    
+   // Loop over nodes on boundary b
+   for(unsigned n=0;n<n_node;n++)
+    {
+     // Set x-component of the velocity to zero on all boundaries
+     // other than the free surface
+     if(b!=2)
+      {
+       mesh_pt()->boundary_node_pt(b,n)->set_value(0,0.0);
+      }
+     
+     // Set y-component of the velocity to zero on the bottom wall
+     if(b==0)
+      {
+       mesh_pt()->boundary_node_pt(b,n)->set_value(1,0.0);
+      }
+    } // End of loop over nodes on boundary b
+  } // End of loop over mesh boundaries
+ 
+} // End of set_boundary_conditions
+
+
+
+//==start_of_deform_free_surface==========================================
+/// Deform the mesh/free surface to a prescribed function
+//========================================================================
+template <class ELEMENT, class TIMESTEPPER>
+void InterfaceProblem<ELEMENT,TIMESTEPPER>::
+deform_free_surface(const double &epsilon,const unsigned &n_periods)
+{
+ // Determine number of spines in mesh
+ const unsigned n_spine = mesh_pt()->nspine();
+ 
+ // Loop over spines in mesh
+ for(unsigned i=0;i<n_spine;i++)
+  {
+   // Determine x coordinate of spine
+   double x_value = mesh_pt()->boundary_node_pt(0,i)->x(0);
+   
+   // Set spine height
+   mesh_pt()->spine_pt(i)->height() = 
+    1.0 + epsilon*(cos(2.0*n_periods*MathematicalConstants::Pi*x_value/Lx));
+  }
+ 
+ // Update nodes in bulk mesh
+ mesh_pt()->node_update();
+ 
+} // End of deform_free_surface
+
+
+
 //==start_of_doc_solution=================================================
 /// Doc the solution
 //========================================================================
@@ -305,27 +379,10 @@ void InterfaceProblem<ELEMENT,TIMESTEPPER>::doc_solution(DocInfo &doc_info)
  // Output the time
  cout << "Time is now " << time_pt()->time() << std::endl;
 
- // Determine number of 1D interface elements in mesh
-// const unsigned n_interface_element = mesh_pt()->ninterface_element();
-
-//  // Calculate left contact angle in degrees
-//  const double contact_angle_left =
-//   dynamic_cast<SpineLineFluidInterfaceElement<ELEMENT>*>(
-//    mesh_pt()->interface_element_pt(0))->
-//   actual_contact_angle_left()*180.0/MathematicalConstants::Pi;
-
-//  // Calculate right contact angle in degrees
-//  const double contact_angle_right =
-//   dynamic_cast<SpineLineFluidInterfaceElement<ELEMENT>*>(
-//    mesh_pt()->interface_element_pt(n_interface_element-1))->
-//   actual_contact_angle_right()*180.0/MathematicalConstants::Pi;
-
- // Document in trace file
+ // Document time and vertical position of left hand side of interface
+ // in trace file
  Trace_file << time_pt()->time() << " "
-            << mesh_pt()->spine_pt(0)->height() << " "
-//             << contact_angle_left << " "
-//             << contact_angle_right 
-            << std::endl;
+            << mesh_pt()->spine_pt(0)->height() << " " << std::endl;
 
  ofstream some_file;
  char filename[100];
@@ -340,17 +397,6 @@ void InterfaceProblem<ELEMENT,TIMESTEPPER>::doc_solution(DocInfo &doc_info)
 
  // Output solution to file
  mesh_pt()->output(some_file,npts);
-
- // Write file as a tecplot text object...
- some_file << "TEXT X=2.5,Y=93.6,F=HELV,HU=POINT,C=BLUE,H=26,T=\"time = " 
-           << time_pt()->time() << "\"";
- // ...and draw a horizontal line whose length is proportional
- // to the elapsed time
- some_file << "GEOMETRY X=2.5,Y=98,T=LINE,C=BLUE,LT=0.4" << std::endl;
- some_file << "1" << std::endl;
- some_file << "2" << std::endl;
- some_file << " 0 0" << std::endl;
- some_file << time_pt()->time()*20.0 << " 0" << std::endl;
 
  // Close solution output file
  some_file.close();
@@ -374,7 +420,7 @@ unsteady_run(const double &t_max, const double &dt)
  const unsigned n_periods = 1;
 
  // Deform the mesh/free surface
- deform_free_surface(epsilon, n_periods);
+ deform_free_surface(epsilon,n_periods);
 
  // Initialise DocInfo object
  DocInfo doc_info;
@@ -391,10 +437,7 @@ unsteady_run(const double &t_max, const double &dt)
  Trace_file.open(filename);
 
  // Initialise trace file
- Trace_file << "time" << ", "
-            << "edge spine height" << ", "
-            << "contact angle left" << ", "
-            << "contact angle right" << ", " << std::endl;
+ Trace_file << "time, free surface height" << std::endl;
 
  // Initialise timestep
  initialise_dt(dt);
@@ -431,47 +474,50 @@ unsteady_run(const double &t_max, const double &dt)
 } // End of unsteady_run
 
 
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 
 
-//==start_of_main======================================================
-/// Driver code for single fluid interface problem
-//=====================================================================
+//==start_of_main=========================================================
+/// Driver code for two-dimensional single fluid free surface problem
+//========================================================================
 int main(int argc, char* argv[]) 
 {
-
  // Store command line arguments
  CommandLineArgs::setup(argc,argv);
 
+ // Compute the Womersley number
+ Global_Physical_Variables::ReSt =
+  Global_Physical_Variables::Re*Global_Physical_Variables::St;
+
  /// Maximum time
- double t_max = 1.6;
+ double t_max = 0.6;
 
  /// Duration of timestep
- const double dt = 0.01;
+ const double dt = 0.0025;
 
  // If we are doing validation run, use smaller number of timesteps
- if(CommandLineArgs::Argc>1) { t_max = 0.02; }
+ if(CommandLineArgs::Argc>1) { t_max = 0.005; }
 
  // Number of elements in x direction
- const unsigned n_x = 10;
+ const unsigned n_x = 12;
    
  // Number of elements in y direction
- const unsigned n_y = 7;
+ const unsigned n_y = 12;
 
- // Axial length of domain
- const double l_x = 2.0;
+ // Width of domain
+ const double l_x = 1.0;
 
  // Height of fluid layer
- const double h = 2.0;
+ const double h = 1.0;
  
  // Set direction of gravity (vertically downwards)
  Global_Physical_Variables::G[0] = 0.0;
  Global_Physical_Variables::G[1] = -1.0;
  
- // Set up the spine test problem with QCrouzeixRaviartElements, using
- // the BDF<2> timestepper
+ // Set up the spine test problem with QCrouzeixRaviartElements,
+ // using the BDF<2> timestepper
  InterfaceProblem<SpineElement<QCrouzeixRaviartElement<2> >,BDF<2> >
   problem(n_x,n_y,l_x,h);
  

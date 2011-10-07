@@ -479,6 +479,8 @@ ConvectionProblem<QCrouzeixRaviartBoussinesqElement<2>,
  //Set the number of timesteps to our default value
  unsigned n_steps = 200;
 
+ problem.refine_uniformly();
+
  //If we have a command line argument, perform fewer steps 
  //(used for self-test runs)
  if(argc > 1) {n_steps = 5;}

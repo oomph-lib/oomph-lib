@@ -1265,8 +1265,25 @@ public:
 
    // Mesh Update
    Bulk_mesh_pt->node_update();
-  }
 
+   // This driver code cannot be allowed to use the analytical form of
+   // get_dresidual_dnodal_coordinates(...) that is implemented in the
+   // NavierStokesEquations class, since the elemental residuals have
+   // contributions from external data which is not taken into account
+   // by that routine. We therefore force the bulk elements to use the
+   // fully-finite differenced version.
+   // PATRICKFLAG I'm not sure why I can't just call this in the
+   // constructor for this problem, there doesn't seem to be any
+   // adaptivity going on...
+   const unsigned n_bulk_element = Bulk_mesh_pt->nelement();
+   for(unsigned e=0;e<n_bulk_element;e++)
+    {
+     ElementWithMovingNodes* el_pt =
+      dynamic_cast<ElementWithMovingNodes*>(Bulk_mesh_pt->element_pt(e));
+     el_pt->evaluate_shape_derivs_by_direct_fd();
+    }
+  }
+ 
  /// \short Update before solve: empty
  void actions_before_newton_solve() {}
 
@@ -1993,7 +2010,7 @@ AirwayReopeningProblem<ELEMENT>::AirwayReopeningProblem()
    el_pt->ca_pt() = &Global_Physical_Variables::Ca;
    //Set the external pressure data
    el_pt->set_external_pressure_data(Bubble_pressure_data_pt);
- 
+
    //We need to make sure that we hijack the nodes on the boundaries
    if(i==0) {el_pt->hijack_nodal_value(0,0);}
    if(i==interface_element_pt_range-1) 

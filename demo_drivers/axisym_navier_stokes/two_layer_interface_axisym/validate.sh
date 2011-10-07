@@ -2,7 +2,7 @@
 
 
 #Set the number of tests to be checked
-NUM_TESTS=1
+NUM_TESTS=2
 
 # Setup validation directory
 #---------------------------
@@ -10,30 +10,60 @@ touch Validation
 rm -r -f Validation
 mkdir Validation
 
-# Validation for two layer interface Navier Stokes problem
-#---------------------------------------------------------
+# Validation for spine two layer interface Navier Stokes problem
+#---------------------------------------------------------------
 cd Validation
 
-echo "Running two layer interface axisymmetric Navier Stokes validation "
+echo "Running spine two layer interface Navier Stokes validation "
 mkdir RESLT
-../two_layer_interface_axisym lalala > OUTPUT_two_layer_interface_axisym
+../spine_two_layer_interface_axisym dummy_input > OUTPUT_spine_two_layer_interface_axisym
 echo "done"
 echo " " >> validation.log
-echo "Two layer interface axisymmetric Navier Stokes validation" >> validation.log
-echo "---------------------------------------------------------" >> validation.log
+echo "Spine two layer interface Navier--Stokes validation" >> validation.log
+echo "---------------------------------------------------" >> validation.log
 echo " " >> validation.log
 echo "Validation directory: " >> validation.log
 echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
-cat  RESLT/soln0.dat  RESLT/soln1.dat RESLT/soln2.dat > two_layer_interface_axisym_results.dat
+cat  RESLT/soln0.dat  RESLT/soln1.dat RESLT/soln2.dat > results_spine_two_layer_interface_axisym.dat
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/results.dat.gz  \
-         two_layer_interface_axisym_results.dat >> validation.log
+../../../../bin/fpdiff.py ../validata/results_spine_two_layer_interface_axisym.dat.gz results_spine_two_layer_interface_axisym.dat >> validation.log
 fi
+
+mv RESLT RESLT_spine_two_layer_interface_axisym
+
+
+
+# Validation for elastic two layer interface Navier Stokes problem
+#---------------------------------------------------------------
+
+echo "Running elastic two layer interface Navier Stokes validation "
+mkdir RESLT
+../elastic_two_layer_interface_axisym dummy_input > OUTPUT_elastic_two_layer_interface_axisym
+echo "done"
+echo " " >> validation.log
+echo "Elastic two layer interface Navier--Stokes validation" >> validation.log
+echo "-----------------------------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat  RESLT/soln0.dat  RESLT/soln1.dat RESLT/soln2.dat > results_elastic_two_layer_interface_axisym.dat
+
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../../bin/fpdiff.py ../validata/results_elastic_two_layer_interface_axisym.dat.gz results_elastic_two_layer_interface_axisym.dat >> validation.log
+fi
+
+mv RESLT RESLT_elastic_two_layer_interface_axisym
+
+
 
 # Append log to main validation log
 cat validation.log >> ../../../../validation.log

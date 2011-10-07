@@ -2,7 +2,7 @@
 
 
 #Set the number of tests to be checked
-NUM_TESTS=6
+NUM_TESTS=7
 
 
 # Setup validation directory
@@ -178,6 +178,34 @@ else
 ../../../../bin/fpdiff.py ../validata/old_macro.dat.gz\
      old_macro.dat >> validation.log
 fi
+
+
+# Validation for free_bound poisson w/ macro el mesh update (non-refineable)
+#---------------------------------------------------------------------------
+
+echo "Running free_boundary poisson with macro element mesh update "
+echo "(non-refineable) validation "
+mkdir RESLT
+../macro_element_free_boundary_poisson_non_ref lalal > OUTPUT_macro_element_free_boundary_poisson_non_ref
+echo "done"
+echo " " >> validation.log
+echo "Free-boundary poisson w/ macro_el mesh update (non-ref) validation" >> validation.log
+echo "------------------------------------------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat RESLT/soln0.dat  > macro_non_ref.dat
+mv RESLT RESLT_coupled_macro_non_ref
+
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../../bin/fpdiff.py ../validata/macro_non_ref.dat.gz\
+     macro_non_ref.dat >> validation.log
+fi
+
 
 
 # Append output to global validation log file
