@@ -808,7 +808,7 @@ fill_in_generic_residual_contribution_interface(Vector<double> &residuals,
         (Sigma/Ca)*r*interpolated_t1[0]*dpsifds(l,0)*W;
        
        //Second residuals term from azimuthal curvature
-       residuals[local_eqn] -= (1.0/Ca)*psif(l)*W*J;
+       residuals[local_eqn] -= (Sigma/Ca)*psif(l)*W*J;
 
        //If the element is a free surface add in the external pressure
        //term

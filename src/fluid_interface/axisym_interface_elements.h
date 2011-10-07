@@ -239,8 +239,6 @@ namespace oomph
     // Return nodal value
     return this->nodal_local_eqn(j,lagr_index);
    }
-
-   
    
    /// \short Hijacking the kinematic condition corresponds to hijacking the
    /// spine heights -- used for strong imposition of contact angle condition
@@ -343,18 +341,18 @@ namespace oomph
     void output(FILE* file_pt, const unsigned &n_plot)
     {AxisymmetricFluidInterfaceElement::output(file_pt,n_plot);}
     
-
     /// \short Helper function to calculate the additional contributions
     /// to be added at each integration point. This deals with 
     /// Lagrange multiplier contribution.
     void add_additional_residual_contributions_interface(
-     Vector<double> &residuals,DenseMatrix<double> &jacobian,
+     Vector<double> &residuals,
+     DenseMatrix<double> &jacobian,
      const unsigned &flag,
-     const Shape &psif, const DShape &dpsifds,
-     const Vector<double> &interpolated_x,
+     const Shape &psif,
+     const DShape &dpsifds,
+     const Vector<double> &interpolated_x, 
      const Vector<double> &interpolated_n, 
      const double &W, const double &J)
-     
     {
      //Loop over the shape functions
      unsigned n_node = this->nnode();

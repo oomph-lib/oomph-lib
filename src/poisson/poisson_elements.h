@@ -343,12 +343,25 @@ protected:
                                                           DShape &dtestdx) 
   const=0;
 
+ /// \short Shape/test functions and derivs w.r.t. to global coords at 
+ /// integration point ipt; return Jacobian of mapping (J). Also compute
+ /// derivatives of dpsidx, dtestdx and J w.r.t. nodal coordinates.
+ virtual double dshape_and_dtest_eulerian_at_knot_poisson(
+  const unsigned &ipt,
+  Shape &psi,
+  DShape &dpsidx,
+  RankFourTensor<double> &d_dpsidx_dX,
+  Shape &test, 
+  DShape &dtestdx,
+  RankFourTensor<double> &d_dtestdx_dX,
+  DenseMatrix<double> &djacobian_dX) const=0;
+
  /// \short Compute element residual Vector only (if flag=and/or element 
  /// Jacobian matrix 
  virtual void fill_in_generic_residual_contribution_poisson(
   Vector<double> &residuals, DenseMatrix<double> &jacobian, 
   const unsigned& flag); 
- 
+
  /// Pointer to source function:
  PoissonSourceFctPt Source_fct_pt;
 
@@ -467,6 +480,19 @@ protected:
                                                          DShape &dtestdx) 
   const;
 
+ /// \short Shape/test functions and derivs w.r.t. to global coords at 
+ /// integration point ipt; return Jacobian of mapping (J). Also compute
+ /// derivatives of dpsidx, dtestdx and J w.r.t. nodal coordinates.
+ inline double dshape_and_dtest_eulerian_at_knot_poisson(
+  const unsigned &ipt,
+  Shape &psi,
+  DShape &dpsidx,
+  RankFourTensor<double> &d_dpsidx_dX,
+  Shape &test, 
+  DShape &dtestdx,
+  RankFourTensor<double> &d_dtestdx_dX,
+  DenseMatrix<double> &djacobian_dX) const;
+
 };
 
 
@@ -528,6 +554,43 @@ double QPoissonElement<DIM,NNODE_1D>::
  //Return the jacobian
  return J;
 }
+
+
+
+//======================================================================
+/// Define the shape functions (psi) and test functions (test) and
+/// their derivatives w.r.t. global coordinates (dpsidx and dtestdx)
+/// and return Jacobian of mapping (J). Additionally compute the
+/// derivatives of dpsidx, dtestdx and J w.r.t. nodal coordinates.
+///
+/// Galerkin: Test functions = shape functions
+//======================================================================
+template<unsigned DIM, unsigned NNODE_1D>
+ double QPoissonElement<DIM,NNODE_1D>::
+ dshape_and_dtest_eulerian_at_knot_poisson(
+  const unsigned &ipt,
+  Shape &psi,
+  DShape &dpsidx,
+  RankFourTensor<double> &d_dpsidx_dX,
+  Shape &test, 
+  DShape &dtestdx,
+  RankFourTensor<double> &d_dtestdx_dX,
+  DenseMatrix<double> &djacobian_dX) const
+ {
+  // Call the geometrical shape functions and derivatives  
+  const double J = this->dshape_eulerian_at_knot(ipt,psi,dpsidx,
+                                                 djacobian_dX,d_dpsidx_dX);
+  
+  // Set the pointers of the test functions
+  test = psi;
+  dtestdx = dpsidx;
+  d_dtestdx_dX = d_dpsidx_dX;
+  
+  //Return the jacobian
+  return J;
+}
+
+
 
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////

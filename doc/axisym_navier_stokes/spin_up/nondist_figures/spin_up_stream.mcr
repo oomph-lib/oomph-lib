@@ -1,344 +1,171 @@
-#!MC 1000
+#!MC 1200
+# Created by Tecplot 360 build 12.0.0.3454
 
-$!VARSET |PNG|=0
+$!VARSET |stem_of_input_file| = "soln"
+$!VARSET |nstep| = 100
+$!VARSET |first_soln_number| = 0
+$!VARSET |soln_skip| = 1 # (1==do every solution)
 
+###############################################################
+######################## START OF LOOP ########################
+###############################################################
 
-#$!GETUSERINPUT |lostep| INSTRUCTIONS = "Loop. First Step??"
-$!VARSET  |lostep|=0
-#$!GETUSERINPUT |dlstep| INSTRUCTIONS = "Loop. Step Increment?"
-$!VARSET  |dlstep|=1
-$!GETUSERINPUT |nstep| INSTRUCTIONS = "Loop. Number of Steps??"
-#$!VARSET |nstep| = 101
-
+## Start of loop with |nstep| steps
 $!LOOP |nstep|
-$!VarSet |nnstep| = |LOOP|
-$!VarSet |nnstep| -= 1
-$!VarSet |iistep| = |dlstep|
-$!VarSet |iistep| *= |nnstep|
-$!VarSet |iistep| += |lostep|
-$!NEWLAYOUT
-$!DRAWGRAPHICS FALSE
-#    $!IF |iistep| < 10 
-#      $!VARSET |istep|='00|iistep|'
-#    $!ENDIF
-#    $!IF |iistep| > 9 
-#      $!VARSET |istep|='0|iistep|'
-#    $!ENDIF
-#    $!IF |iistep| > 99 
-#      $!VARSET |istep|=|iistep|
-#    $!ENDIF
-$!VARSET |istep|=|iistep|
-#$!VARSET |istep|+=1
-#$!VARSET |istep|*=10
 
-$!DRAWGRAPHICS FALSE
+## Set the loop counter
+$!VARSET |soln_counter| = ( |first_soln_number| + ((|LOOP| - 1)*|soln_skip|) )
 
-$!VarSet |LFDSFN1| = '"soln|istep|.dat"'
-$!VarSet |LFDSVL1| = '"V1" "V2" "V3" "V4" "V5" "V6"'
-$!SETSTYLEBASE FACTORY
-$!PAPER 
-  BACKGROUNDCOLOR = WHITE
-  ISTRANSPARENT = YES
-  ORIENTPORTRAIT = NO
-  SHOWGRID = YES
-  SHOWRULER = YES
-  SHOWPAPER = YES
-  PAPERSIZE = A4
-  PAPERSIZEINFO
-    {
-    A3
-      {
-      WIDTH = 11.693
-      HEIGHT = 16.535
-      }
-    A4
-      {
-      WIDTH = 8.2677
-      HEIGHT = 11.693
-      LEFTHARDCLIPOFFSET = 0.125
-      RIGHTHARDCLIPOFFSET = 0.125
-      TOPHARDCLIPOFFSET = 0.125
-      BOTTOMHARDCLIPOFFSET = 0.125
-      }
-    }
-  RULERSPACING = ONECENTIMETER
-  PAPERGRIDSPACING = ONETENTHCENTIMETER
-  REGIONINWORKAREA
-    {
-    X1 = -0.05
-    Y1 = -0.05
-    X2 = 11.74
-    Y2 = 8.318
-    }
-$!COLORMAP 
-  CONTOURCOLORMAP = SMRAINBOW
-$!COLORMAPCONTROL RESETTOFACTORY
-### Frame Number 1 ###
-$!READDATASET  '|LFDSFN1|' 
-  INITIALPLOTTYPE = CARTESIAN2D
+## Compute the counter used in the output (png) file (pad with zeros)
+$!VARSET |output_counter| = "|soln_counter|"
+$!IF |soln_counter| < 10000
+$!VARSET |output_counter| = "0|soln_counter|"
+$!ENDIF
+$!IF |soln_counter| < 1000
+$!VARSET |output_counter| = "00|soln_counter|"
+$!ENDIF
+$!IF |soln_counter| < 100
+$!VARSET |output_counter| = "000|soln_counter|"
+$!ENDIF
+$!IF |soln_counter| < 10
+$!VARSET |output_counter| = "0000|soln_counter|"
+$!ENDIF
+
+## Set up Export file type and file name.
+$!EXPORTSETUP EXPORTFORMAT = PNG
+$!EXPORTSETUP EXPORTFNAME = "spin_up_stream|output_counter|.png"
+$!EXPORTSETUP IMAGEWIDTH = 600
+$!EXPORTSETUP USESUPERSAMPLEANTIALIASING = YES
+$!EXPORTSETUP SUPERSAMPLEFACTOR = 4
+
+#-------------------------------------------------------------#
+#------------------------ LEFT FRAME -------------------------#
+#-------------------------------------------------------------#
+
+## Change size/position of frame that gets created by default
+$!FRAMELAYOUT XYPOS{X = 0.0}
+$!FRAMELAYOUT XYPOS{Y = 0.0}
+$!FRAMELAYOUT WIDTH = 5.0
+$!FRAMELAYOUT HEIGHT = 7.0
+$!FRAMELAYOUT SHOWBORDER = NO
+
+###############################################################
+########## START OF MACRO FILE GENERATED GRAPHICALLY ##########
+######################## (WITH TWEAKS) ########################
+###############################################################
+
+## Read in data file
+$!READDATASET  '"|stem_of_input_file||soln_counter|.dat" '
+  READDATAOPTION = NEW
+  RESETSTYLE = YES
   INCLUDETEXT = NO
   INCLUDEGEOM = NO
-  RESETSTYLE = NO
+  INCLUDECUSTOMLABELS = NO
   VARLOADMODE = BYNAME
-  VARNAMELIST = '|LFDSVL1|' 
+  ASSIGNSTRANDIDS = YES
+  INITIALPLOTTYPE = CARTESIAN2D
+  VARNAMELIST = '"V1" "V2" "V3" "V4" "V5" "V6"'
 
-$!VARSET |ZONE| = |NUMZONES|
-$!VARSET |ZONE| -= 2
+## Read in data file
+$!READDATASET  '"max_min.dat" '
+  READDATAOPTION = APPEND
+  RESETSTYLE = YES
+  INCLUDETEXT = NO
+  INCLUDEGEOM = NO
+  INCLUDECUSTOMLABELS = NO
+  VARLOADMODE = BYNAME
+  ASSIGNSTRANDIDS = YES
+  INITIALPLOTTYPE = CARTESIAN2D
+  VARNAMELIST = '"V1" "V2" "V3" "V4" "V5" "V6"'
 
-$!RENAMEDATASETVAR 
+## Rename variables
+$!RENAMEDATASETVAR
   VAR = 1
   NAME = 'r' 
 $!RENAMEDATASETVAR 
   VAR = 2
   NAME = 'z' 
-$!RENAMEDATASETVAR 
-  VAR = 3
-  NAME = 'u(r,z,t)' 
-$!RENAMEDATASETVAR 
-  VAR = 4
-  NAME = 'w(r,z,t)' 
-$!RENAMEDATASETVAR 
-  VAR = 5
-  NAME = 'v(r,z,t)' 
-$!RENAMEDATASETVAR 
-  VAR = 6
-  NAME = 'p(r,z,t)' 
-$!FRAMELAYOUT 
-  SHOWBORDER = NO
-  SHOWHEADER = NO
-  HEADERCOLOR = RED
-  XYPOS
-    {
-    X = 0.125
-    Y = 0.027251
-    }
-  WIDTH = 5.7254
-  HEIGHT = 8.0309
-$!PLOTTYPE  = CARTESIAN2D
-$!FRAMENAME  = 'Frame 001' 
-$!ACTIVEFIELDZONES  =  [1-|ZONE|]
-$!GLOBALRGB 
-  RANGEMIN = 0
-  RANGEMAX = 1
-$!GLOBALCONTOUR  1
-  VAR = 5
-  DEFNUMLEVELS = 11
-  LABELS
-    {
-    AUTOLEVELSKIP = 2
-    }
-  LEGEND
-    {
-    SHOW = YES
-    XYPOS
-      {
-      X = 99.461
-      Y = 90.54
-      }
-    ISVERTICAL = NO
-    BOX
-      {
-      BOXTYPE = NONE
-      }
-    }
-  COLORCUTOFF
-    {
-    RANGEMIN = -0.549999976531
-    RANGEMAX = 0
-    }
-  COLORMAPFILTER
-    {
-    CONTINUOUSCOLOR
-      {
-      CMIN = -1.04999995232
-      CMAX = 0
-      }
-    }
-$!CONTOURLEVELS NEW
+
+## Make all zones (including dummy zones) active for plotting
+$!ACTIVEFIELDZONES  =  [1-|NUMZONES|]
+
+## Set axes to be independent and reset to variable min/max
+$!TWODAXIS AXISMODE = INDEPENDENT
+$!VIEW AXISFIT
+  AXIS = 'X'
+  AXISNUM = 1
+$!VIEW AXISFIT
+  AXIS = 'Y'
+  AXISNUM = 1
+
+## Change edge layer properties for all zones
+$!FIELDMAP [1-|NUMZONES|]  EDGELAYER{LINETHICKNESS = 0.0875}
+
+## Change font size on the axes
+$!TWODAXIS XDETAIL{TICKLABEL{TEXTSHAPE{HEIGHT = 2.675}}}
+$!TWODAXIS YDETAIL{TICKLABEL{TEXTSHAPE{HEIGHT = 2.675}}}
+$!TWODAXIS YDETAIL{TITLE{TEXTSHAPE{HEIGHT = 3.2125}}}
+$!TWODAXIS XDETAIL{TITLE{TEXTSHAPE{HEIGHT = 3.2125}}}
+$!TWODAXIS XDETAIL{TICKLABEL{OFFSET = 0.875}}
+$!TWODAXIS XDETAIL{TITLE{OFFSET = 4.25}}
+
+## Change axis details
+$!TWODAXIS XDETAIL{AXISLINE{LINETHICKNESS = 0.3575}}
+$!TWODAXIS XDETAIL{TICKS{LENGTH = 1.7875}}
+$!TWODAXIS XDETAIL{TICKS{LINETHICKNESS = 0.3575}}
+$!TWODAXIS XDETAIL{TICKS{MINORLENGTH = 0.857}}
+$!TWODAXIS XDETAIL{TICKS{MINORLINETHICKNESS = 0.0875}}
+$!TWODAXIS YDETAIL{AXISLINE{LINETHICKNESS = 0.3575}}
+$!TWODAXIS YDETAIL{TICKS{LENGTH = 1.7875}}
+$!TWODAXIS YDETAIL{TICKS{LINETHICKNESS = 0.3575}}
+$!TWODAXIS YDETAIL{TICKS{MINORLENGTH = 0.857}}
+$!TWODAXIS YDETAIL{TICKS{MINORLINETHICKNESS = 0.0875}}
+
+## Turn on contours
+$!FIELDLAYERS SHOWCONTOUR = YES
+$!GLOBALCONTOUR 1  VAR = 5
+$!GLOBALCONTOUR 1  COLORMAPFILTER{COLORMAPDISTRIBUTION = CONTINUOUS}
+$!CONTOURLEVELS RESETTONICE
   CONTOURGROUP = 1
-  RAWDATA
-11
-0
-0.1
-0.2
-0.3
-0.4
-0.5
-0.6
-0.7
-0.8
-0.9
-1
-$!GLOBALCONTOUR  2
-  LEGEND
-    {
-    XYPOS
-      {
-      X = 95
-      }
-    }
-  COLORMAPFILTER
-    {
-    CONTINUOUSCOLOR
-      {
-      CMIN = 0
-      CMAX = 1
-      }
-    }
-$!GLOBALCONTOUR  3
-  LEGEND
-    {
-    XYPOS
-      {
-      X = 95
-      }
-    }
-  COLORMAPFILTER
-    {
-    CONTINUOUSCOLOR
-      {
-      CMIN = 0
-      CMAX = 1
-      }
-    }
-$!GLOBALCONTOUR  4
-  LEGEND
-    {
-    XYPOS
-      {
-      X = 95
-      }
-    }
-  COLORMAPFILTER
-    {
-    CONTINUOUSCOLOR
-      {
-      CMIN = 0
-      CMAX = 1
-      }
-    }
-$!GLOBALTWODVECTOR 
-  UVAR = 3
-  VVAR = 4
-  RELATIVELENGTH = 30
-$!GLOBALSCATTER 
-  LEGEND
-    {
-    XYPOS
-      {
-      X = 95
-      }
-    }
-  REFSCATSYMBOL
-    {
-    COLOR = RED
-    FILLCOLOR = RED
-    }
-$!FIELD  [1-|NUMZONES|]
-  MESH
-    {
-    COLOR = RED
-    }
-  CONTOUR
-    {
-    CONTOURTYPE = FLOOD
-    COLOR = RED
-    USELIGHTINGEFFECT = YES
-    }
-  VECTOR
-    {
-    COLOR = RED
-    }
-  SCATTER
-    {
-    COLOR = RED
-    }
-  SHADE
-    {
-    COLOR = WHITE
-    }
-  BOUNDARY
-    {
-    SHOW = YES
-    COLOR = RED
-    LINETHICKNESS = 0.02
-    }
-  POINTS
-    {
-    POINTSTOPLOT = SURFACENODES
-    }
-  SURFACES
-    {
-    SURFACESTOPLOT = KPLANES
-    }
-  VOLUMEMODE
-    {
-    VOLUMEOBJECTSTOPLOT
-      {
-      SHOWISOSURFACES = NO
-      SHOWSLICES = NO
-      SHOWSTREAMTRACES = NO
-      }
-    }
+  APPROXNUMVALUES = 15
 
+## Show contour legend
+#$!GLOBALCONTOUR 1  LEGEND{SHOW = YES}
 
+## Create a field of vectors using variables 3 and 4
+$!GLOBALTWODVECTOR UVAR = 3
+$!GLOBALTWODVECTOR VVAR = 4
+$!RESETVECTORLENGTH 
+#$!FIELDLAYERS SHOWVECTOR = YES
 
-
-
-
-
-
-
-
-
-
-$!TWODAXIS 
-  XDETAIL
+$!ATTACHTEXT 
+  ANCHORPOS
     {
-    VARNUM = 1
+    X = 0.0
+    Y = 94.0
     }
-  YDETAIL
+  COLOR = PURPLE
+  TEXTSHAPE
     {
-    VARNUM = 2
+    FONT = HELV
+    HEIGHT = 16
     }
-$!VIEW FIT
-$!TWODAXIS 
-  DEPXTOYRATIO = 1
-$!TWODAXIS 
-  XDETAIL
-    {
-    RANGEMIN = 0
-    RANGEMAX = 1.0001079474513918655
-    GRSPACING = 0.2
-    }
-$!TWODAXIS 
-  YDETAIL
-    {
-    RANGEMIN = 0
-    RANGEMAX = 1.4402395232226652411
-    GRSPACING = 0.2
-    }
-$!GLOBALISOSURFACE 
-  ISOVALUE1 = 0
-  ISOVALUE2 = 0
-  ISOVALUE3 = 0
-  MARCHINGCUBEALGORITHM = CLASSICPLUS
-$!GLOBALSLICE 
-  BOUNDARY
-    {
-    SHOW = NO
-    }
+  TEXT = 'azimuthal velocity distribution' 
+
+## Define termination line for streamlines
 $!STREAMTRACE SETTERMINATIONLINE
   RAWDATA
 6
-0.521184919863 1.00408817138
-0.521184919863 1.37351090644
--0.0579621804066 1.35298742116
--0.0579621804066 -0.0768153867415
-0.524513351474 -0.104180033783
-0.517856488252 0.381542451198
+0.52 1.0
+0.52 1.5
+-0.05 1.5
+-0.05 -0.1
+0.52 -0.1
+0.52 0.4
 $!GLOBALSTREAM TERMLINE{ISACTIVE = YES}
 $!GLOBALSTREAM TERMLINE{SHOW = NO}
+
+## Add streamlines
 $!STREAMTRACE ADD
   STREAMTYPE = TWODLINE
   DIRECTION = BOTH
@@ -347,23 +174,13 @@ $!STREAMTRACE ADD
     X = 0.1
     Y = 0.6
     }
-  ALTSTARTPOS
-    {
-    X = 0.0700678565697
-    Y = 0.62330561581
-    }
 $!STREAMTRACE ADD
   STREAMTYPE = TWODLINE
   DIRECTION = BOTH
   STARTPOS
     {
     X = 0.1
-    Y = 0.7
-    }
-  ALTSTARTPOS
-    {
-    X = 0.0700678565697
-    Y = 0.62330561581
+    Y = 0.8
     }
 $!STREAMTRACE ADD
   STREAMTYPE = TWODLINE
@@ -371,12 +188,7 @@ $!STREAMTRACE ADD
   STARTPOS
     {
     X = 0.25
-    Y = 0.8
-    }
-  ALTSTARTPOS
-    {
-    X = 0.0700678565697
-    Y = 0.62330561581
+    Y = 0.9
     }
 $!STREAMTRACE ADD
   STREAMTYPE = TWODLINE
@@ -386,11 +198,6 @@ $!STREAMTRACE ADD
     X = 0.25
     Y = 0.5
     }
-  ALTSTARTPOS
-    {
-    X = 0.0700678565697
-    Y = 0.62330561581
-    }
 $!STREAMTRACE ADD
   STREAMTYPE = TWODLINE
   DIRECTION = BOTH
@@ -399,264 +206,168 @@ $!STREAMTRACE ADD
     X = 0.4
     Y = 0.3
     }
-  ALTSTARTPOS
-    {
-    X = 0.0700678565697
-    Y = 0.62330561581
-    }
 $!STREAMTRACE ADD
   STREAMTYPE = TWODLINE
   DIRECTION = BOTH
   STARTPOS
     {
     X = 0.4
-    Y = 1
+    Y = 1.1
     }
-  ALTSTARTPOS
-    {
-    X = 0.0700678565697
-    Y = 0.62330561581
-    }
+
+## Streamline options
 $!GLOBALSTREAM 
   STREAMTIMING
     {
-    DELTATIME = 0.100010794745
+    DELTATIME = 0.1
     }
   CELLFRACTION = 0.1
   MINCELLFRACTION = 1E-06
   MAXSTEPS = 5000
-$!FIELDLAYERS 
-  SHOWMESH = NO
-  SHOWCONTOUR = YES
-### Frame Number 2 ###
-$!CREATENEWFRAME 
-$!FRAMELAYOUT 
-  SHOWBORDER = NO
-  SHOWHEADER = NO
-  HEADERCOLOR = RED
-  XYPOS
-    {
-    X = 5.8426
-    Y = 0.027251
-    }
-  WIDTH = 5.7254
-  HEIGHT = 8.0309
-$!PLOTTYPE  = CARTESIAN2D
-$!FRAMENAME  = 'Frame 001' 
-$!ACTIVEFIELDZONES  =  [1-|ZONE|]
-$!GLOBALRGB 
-  RANGEMIN = 0
-  RANGEMAX = 1
-$!GLOBALCONTOUR  1
-  VAR = 6
-  DEFNUMLEVELS = 11
-  LABELS
-    {
-    AUTOLEVELSKIP = 2
-    }
-  LEGEND
-    {
-    SHOW = YES
-    XYPOS
-      {
-      X = 99.709
-      Y = 90.54
-      }
-    ISVERTICAL = NO
-    BOX
-      {
-      BOXTYPE = NONE
-      }
-    }
-  COLORCUTOFF
-    {
-    RANGEMIN = 0.11887059576
-    RANGEMAX = 0.356612198772
-    }
-  COLORMAPFILTER
-    {
-    CONTINUOUSCOLOR
-      {
-      CMIN = -2.05746005122E-07
-      CMAX = 0.475483000278
-      }
-    }
-$!CONTOURLEVELS NEW
-  CONTOURGROUP = 1
-  RAWDATA
-11
-0
-0.25
-0.5
-0.75
-1
-1.25
-1.5
-1.75
-2
-2.25
-2.5
-$!GLOBALCONTOUR  2
-  LEGEND
-    {
-    XYPOS
-      {
-      X = 95
-      }
-    }
-  COLORMAPFILTER
-    {
-    CONTINUOUSCOLOR
-      {
-      CMIN = 0
-      CMAX = 1
-      }
-    }
-$!GLOBALCONTOUR  3
-  LEGEND
-    {
-    XYPOS
-      {
-      X = 95
-      }
-    }
-  COLORMAPFILTER
-    {
-    CONTINUOUSCOLOR
-      {
-      CMIN = 0
-      CMAX = 1
-      }
-    }
-$!GLOBALCONTOUR  4
-  LEGEND
-    {
-    XYPOS
-      {
-      X = 95
-      }
-    }
-  COLORMAPFILTER
-    {
-    CONTINUOUSCOLOR
-      {
-      CMIN = 0
-      CMAX = 1
-      }
-    }
-$!GLOBALTWODVECTOR 
-  UVAR = 3
-  VVAR = 4
-  RELATIVELENGTH = 30
-$!GLOBALSCATTER 
-  LEGEND
-    {
-    XYPOS
-      {
-      X = 95
-      }
-    }
-  REFSCATSYMBOL
-    {
-    COLOR = RED
-    FILLCOLOR = RED
-    }
-$!FIELD  [1-|NUMZONES|]
-  MESH
-    {
-    COLOR = RED
-    }
-  CONTOUR
-    {
-    CONTOURTYPE = FLOOD
-    COLOR = RED
-    USELIGHTINGEFFECT = YES
-    }
-  VECTOR
-    {
-    COLOR = RED
-    }
-  SCATTER
-    {
-    COLOR = RED
-    }
-  SHADE
-    {
-    COLOR = WHITE
-    }
-  BOUNDARY
-    {
-    SHOW = YES
-    COLOR = RED
-    LINETHICKNESS = 0.02
-    }
-  POINTS
-    {
-    POINTSTOPLOT = SURFACENODES
-    }
-  SURFACES
-    {
-    SURFACESTOPLOT = KPLANES
-    }
-  VOLUMEMODE
-    {
-    VOLUMEOBJECTSTOPLOT
-      {
-      SHOWISOSURFACES = NO
-      SHOWSLICES = NO
-      SHOWSTREAMTRACES = NO
-      }
-    }
 
-
-
-$!TWODAXIS 
-  XDETAIL
-    {
-    VARNUM = 1
-    }
-  YDETAIL
-    {
-    VARNUM = 2
-    }
+## Fit to everything
 $!VIEW FIT
-$!TWODAXIS 
-  DEPXTOYRATIO = 1
-$!TWODAXIS 
-  XDETAIL
+
+###############################################################
+########### END OF MACRO FILE GENERATED GRAPHICALLY ###########
+###############################################################
+
+#-------------------------------------------------------------#
+#-------------------- END OF LEFT FRAME ----------------------#
+#-------------------------------------------------------------#
+
+#-------------------------------------------------------------#
+#----------------------- RIGHT FRAME -------------------------#
+#-------------------------------------------------------------#
+
+## Create a new frame
+$!CREATENEWFRAME
+  XYPOS
+   {
+    X = 5.0
+    Y = 0.0
+   }
+   WIDTH = 5.0
+   HEIGHT = 7.0
+$!FRAMELAYOUT SHOWBORDER = NO
+
+###############################################################
+########## START OF MACRO FILE GENERATED GRAPHICALLY ##########
+######################## (WITH TWEAKS) ########################
+###############################################################
+
+## Read in data file
+$!READDATASET  '"|stem_of_input_file||soln_counter|.dat" '
+  READDATAOPTION = NEW
+  RESETSTYLE = YES
+  INCLUDETEXT = NO
+  INCLUDEGEOM = NO
+  INCLUDECUSTOMLABELS = NO
+  VARLOADMODE = BYNAME
+  ASSIGNSTRANDIDS = YES
+  INITIALPLOTTYPE = CARTESIAN2D
+  VARNAMELIST = '"V1" "V2" "V3" "V4" "V5" "V6"'
+
+## Read in data file
+$!READDATASET  '"max_min.dat" '
+  READDATAOPTION = APPEND
+  RESETSTYLE = YES
+  INCLUDETEXT = NO
+  INCLUDEGEOM = NO
+  INCLUDECUSTOMLABELS = NO
+  VARLOADMODE = BYNAME
+  ASSIGNSTRANDIDS = YES
+  INITIALPLOTTYPE = CARTESIAN2D
+  VARNAMELIST = '"V1" "V2" "V3" "V4" "V5" "V6"'
+
+## Rename variables
+$!RENAMEDATASETVAR
+  VAR = 1
+  NAME = 'r' 
+$!RENAMEDATASETVAR 
+  VAR = 2
+  NAME = 'z' 
+
+## Make all zones (including dummy zones) active for plotting
+$!ACTIVEFIELDZONES  =  [1-|NUMZONES|]
+
+## Set axes to be independent and reset to variable min/max
+$!TWODAXIS AXISMODE = INDEPENDENT
+$!VIEW AXISFIT
+  AXIS = 'X'
+  AXISNUM = 1
+$!VIEW AXISFIT
+  AXIS = 'Y'
+  AXISNUM = 1
+
+## Change edge layer properties for all zones
+$!FIELDMAP [1-|NUMZONES|]  EDGELAYER{LINETHICKNESS = 0.0875}
+
+## Change font size on the axes
+$!TWODAXIS XDETAIL{TICKLABEL{TEXTSHAPE{HEIGHT = 2.675}}}
+$!TWODAXIS YDETAIL{TICKLABEL{TEXTSHAPE{HEIGHT = 2.675}}}
+$!TWODAXIS YDETAIL{TITLE{TEXTSHAPE{HEIGHT = 3.2125}}}
+$!TWODAXIS XDETAIL{TITLE{TEXTSHAPE{HEIGHT = 3.2125}}}
+$!TWODAXIS XDETAIL{TICKLABEL{OFFSET = 0.875}}
+$!TWODAXIS XDETAIL{TITLE{OFFSET = 4.25}}
+
+## Change axis details
+$!TWODAXIS XDETAIL{AXISLINE{LINETHICKNESS = 0.3575}}
+$!TWODAXIS XDETAIL{TICKS{LENGTH = 1.7875}}
+$!TWODAXIS XDETAIL{TICKS{LINETHICKNESS = 0.3575}}
+$!TWODAXIS XDETAIL{TICKS{MINORLENGTH = 0.857}}
+$!TWODAXIS XDETAIL{TICKS{MINORLINETHICKNESS = 0.0875}}
+$!TWODAXIS YDETAIL{AXISLINE{LINETHICKNESS = 0.3575}}
+$!TWODAXIS YDETAIL{TICKS{LENGTH = 1.7875}}
+$!TWODAXIS YDETAIL{TICKS{LINETHICKNESS = 0.3575}}
+$!TWODAXIS YDETAIL{TICKS{MINORLENGTH = 0.857}}
+$!TWODAXIS YDETAIL{TICKS{MINORLINETHICKNESS = 0.0875}}
+
+## Turn on contours
+$!FIELDLAYERS SHOWCONTOUR = YES
+$!GLOBALCONTOUR 1  VAR = 6
+$!GLOBALCONTOUR 1  COLORMAPFILTER{COLORMAPDISTRIBUTION = CONTINUOUS}
+$!CONTOURLEVELS RESETTONICE
+  CONTOURGROUP = 1
+  APPROXNUMVALUES = 15
+
+## Show contour legend
+#$!GLOBALCONTOUR 1  LEGEND{SHOW = YES}
+
+## Create a field of vectors using variables 3 and 4
+$!GLOBALTWODVECTOR UVAR = 3
+$!GLOBALTWODVECTOR VVAR = 4
+$!RESETVECTORLENGTH 
+#$!FIELDLAYERS SHOWVECTOR = YES
+
+$!ATTACHTEXT 
+  ANCHORPOS
     {
-    RANGEMIN = 0
-    RANGEMAX = 1.0001079474513918655
-    GRSPACING = 0.2
+    X = 0.0
+    Y = 94.0
     }
-$!TWODAXIS 
-  YDETAIL
+  COLOR = PURPLE
+  TEXTSHAPE
     {
-    RANGEMIN = 0
-    RANGEMAX = 1.4402395232226652411
-    GRSPACING = 0.2
+    FONT = HELV
+    HEIGHT = 16
     }
-$!GLOBALISOSURFACE 
-  ISOVALUE1 = 0.11887059576
-  ISOVALUE2 = 0.237741397266
-  ISOVALUE3 = 0.356612198772
-  MARCHINGCUBEALGORITHM = CLASSICPLUS
-$!GLOBALSLICE 
-  BOUNDARY
-    {
-    SHOW = NO
-    }
+  TEXT = 'pressure distribution' 
+
+## Define termination line for streamlines
 $!STREAMTRACE SETTERMINATIONLINE
   RAWDATA
 6
-0.521184919863 1.00408817138
-0.521184919863 1.37351090644
--0.0579621804066 1.35298742116
--0.0579621804066 -0.0768153867415
-0.524513351474 -0.104180033783
-0.517856488252 0.381542451198
+0.52 1.0
+0.52 1.5
+-0.05 1.5
+-0.05 -0.1
+0.52 -0.1
+0.52 0.4
 $!GLOBALSTREAM TERMLINE{ISACTIVE = YES}
 $!GLOBALSTREAM TERMLINE{SHOW = NO}
+
+## Add streamlines
 $!STREAMTRACE ADD
   STREAMTYPE = TWODLINE
   DIRECTION = BOTH
@@ -665,23 +376,13 @@ $!STREAMTRACE ADD
     X = 0.1
     Y = 0.6
     }
-  ALTSTARTPOS
-    {
-    X = 0.0700678565697
-    Y = 0.62330561581
-    }
 $!STREAMTRACE ADD
   STREAMTYPE = TWODLINE
   DIRECTION = BOTH
   STARTPOS
     {
     X = 0.1
-    Y = 0.7
-    }
-  ALTSTARTPOS
-    {
-    X = 0.0700678565697
-    Y = 0.62330561581
+    Y = 0.8
     }
 $!STREAMTRACE ADD
   STREAMTYPE = TWODLINE
@@ -689,12 +390,7 @@ $!STREAMTRACE ADD
   STARTPOS
     {
     X = 0.25
-    Y = 0.8
-    }
-  ALTSTARTPOS
-    {
-    X = 0.0700678565697
-    Y = 0.62330561581
+    Y = 0.9
     }
 $!STREAMTRACE ADD
   STREAMTYPE = TWODLINE
@@ -704,11 +400,6 @@ $!STREAMTRACE ADD
     X = 0.25
     Y = 0.5
     }
-  ALTSTARTPOS
-    {
-    X = 0.0700678565697
-    Y = 0.62330561581
-    }
 $!STREAMTRACE ADD
   STREAMTYPE = TWODLINE
   DIRECTION = BOTH
@@ -717,322 +408,46 @@ $!STREAMTRACE ADD
     X = 0.4
     Y = 0.3
     }
-  ALTSTARTPOS
-    {
-    X = 0.0700678565697
-    Y = 0.62330561581
-    }
 $!STREAMTRACE ADD
   STREAMTYPE = TWODLINE
   DIRECTION = BOTH
   STARTPOS
     {
     X = 0.4
-    Y = 1
+    Y = 1.1
     }
-  ALTSTARTPOS
-    {
-    X = 0.0700678565697
-    Y = 0.62330561581
-    }
+
+## Streamline options
 $!GLOBALSTREAM 
+  STREAMTIMING
+    {
+    DELTATIME = 0.1
+    }
   CELLFRACTION = 0.1
   MINCELLFRACTION = 1E-06
   MAXSTEPS = 5000
-$!FIELDLAYERS 
-  SHOWMESH = NO
-  SHOWCONTOUR = YES
-### Frame Number 3 ###
-$!CREATENEWFRAME 
-$!READDATASET  '|LFDSFN1|' 
-  INITIALPLOTTYPE = CARTESIAN2D
-  INCLUDETEXT = YES
-  INCLUDEGEOM = YES
-  VARLOADMODE = BYNAME
-  VARNAMELIST = '|LFDSVL1|' 
-$!REMOVEVAR |LFDSVL1|
-$!REMOVEVAR |LFDSFN1|
-$!FRAMELAYOUT 
-  SHOWBORDER = NO
-  SHOWHEADER = NO
-  ISTRANSPARENT = YES
-  HEADERCOLOR = GREEN
-  XYPOS
-    {
-    X = 0.13444
-    Y = 0.025966
-    }
-  WIDTH = 11.435
-  HEIGHT = 8.1179
-$!PLOTTYPE  = CARTESIAN2D
-$!FRAMENAME  = 'Frame 002' 
-$!ACTIVEFIELDZONES  =  [1]
-$!GLOBALRGB 
-  RANGEMIN = 0
-  RANGEMAX = 1
-$!GLOBALCONTOUR  1
-  LEGEND
-    {
-    XYPOS
-      {
-      X = 95
-      }
-    }
-  COLORMAPFILTER
-    {
-    CONTINUOUSCOLOR
-      {
-      CMIN = 0
-      CMAX = 1
-      }
-    }
-$!GLOBALCONTOUR  2
-  LEGEND
-    {
-    XYPOS
-      {
-      X = 95
-      }
-    }
-  COLORMAPFILTER
-    {
-    CONTINUOUSCOLOR
-      {
-      CMIN = 0
-      CMAX = 1
-      }
-    }
-$!GLOBALCONTOUR  3
-  LEGEND
-    {
-    XYPOS
-      {
-      X = 95
-      }
-    }
-  COLORMAPFILTER
-    {
-    CONTINUOUSCOLOR
-      {
-      CMIN = 0
-      CMAX = 1
-      }
-    }
-$!GLOBALCONTOUR  4
-  LEGEND
-    {
-    XYPOS
-      {
-      X = 95
-      }
-    }
-  COLORMAPFILTER
-    {
-    CONTINUOUSCOLOR
-      {
-      CMIN = 0
-      CMAX = 1
-      }
-    }
-$!GLOBALSCATTER 
-  LEGEND
-    {
-    XYPOS
-      {
-      X = 95
-      }
-    }
-  REFSCATSYMBOL
-    {
-    COLOR = RED
-    FILLCOLOR = RED
-    }
-$!FIELD  [1-|NUMZONES|]
-  MESH
-    {
-    COLOR = RED
-    }
-  CONTOUR
-    {
-    CONTOURTYPE = FLOOD
-    COLOR = RED
-    USELIGHTINGEFFECT = YES
-    SHOW = NO
-    }
-  VECTOR
-    {
-    COLOR = RED
-    }
-  SCATTER
-    {
-    COLOR = RED
-    }
-  SHADE
-    {
-    COLOR = WHITE
-    }
-  BOUNDARY
-    {
-    SHOW = NO
-    COLOR = RED
-    }
-  POINTS
-    {
-    POINTSTOPLOT = SURFACENODES
-    }
-  SURFACES
-    {
-    SURFACESTOPLOT = KPLANES
-    }
-  VOLUMEMODE
-    {
-    VOLUMEOBJECTSTOPLOT
-      {
-      SHOWISOSURFACES = NO
-      SHOWSLICES = NO
-      SHOWSTREAMTRACES = NO
-      }
-    }
 
-
-
-
-
-
-
-
-$!TWODAXIS 
-  XDETAIL
-    {
-    VARNUM = 1
-    }
-  YDETAIL
-    {
-    VARNUM = 2
-    }
+## Fit to everything
 $!VIEW FIT
-$!TWODAXIS 
-  DEPXTOYRATIO = 1
-$!TWODAXIS 
-  XDETAIL
-    {
-    SHOWAXIS = NO
-    RANGEMIN = 0
-    RANGEMAX = 0.22531169171332982026
-    GRSPACING = 0.05
-    }
-$!TWODAXIS 
-  YDETAIL
-    {
-    SHOWAXIS = NO
-    RANGEMIN = 0
-    RANGEMAX = 0.16421798481421634452
-    GRSPACING = 0.05
-    }
-$!GLOBALISOSURFACE 
-  MARCHINGCUBEALGORITHM = CLASSICPLUS
-$!GLOBALSLICE 
-  BOUNDARY
-    {
-    SHOW = NO
-    }
-$!FIELDLAYERS 
-  SHOWMESH = NO
-  SHOWBOUNDARY = NO
-$!ATTACHTEXT 
-  ANCHORPOS
-    {
-    X = 51.7369727047
-    Y = 90.1142532775
-    }
-  COLOR = PURPLE
-  TEXTSHAPE
-    {
-    FONT = HELV
-    HEIGHT = 18
-    }
-  BOX
-    {
-    MARGIN = 10
-    LINETHICKNESS = 0.4
-    }
-  SCOPE = GLOBAL
-  TEXT = 'pressure distribution' 
-$!ATTACHTEXT 
-  ANCHORPOS
-    {
-    X = 1.86104218363
-    Y = 89.9412428969
-    }
-  COLOR = PURPLE
-  TEXTSHAPE
-    {
-    FONT = HELV
-    HEIGHT = 18
-    }
-  BOX
-    {
-    MARGIN = 10
-    LINETHICKNESS = 0.4
-    }
-  SCOPE = GLOBAL
-  TEXT = 'azimuthal velocity distribution' 
 
-$!SETSTYLEBASE CONFIG
+###############################################################
+########### END OF MACRO FILE GENERATED GRAPHICALLY ###########
+###############################################################
 
-############################
+#-------------------------------------------------------------#
+#------------------- END OF RIGHT FRAME ----------------------#
+#-------------------------------------------------------------#
 
+## Redraw all frames (must do this here!)
+$!REDRAWALL 
 
+## Export all frames to the current .png file
+$!EXPORT 
+  EXPORTREGION = ALLFRAMES
 
+## End of loop
+$!ENDLOOP
 
-
-
-
-$!IF |PNG|==1
-
-
-        $!EXPORTSETUP EXPORTFORMAT = PNG
-        $!EXPORTSETUP SUPERSAMPLEFACTOR = 3
-        $!EXPORTSETUP USESUPERSAMPLEANTIALIASING = YES
-        $!EXPORTSETUP IMAGEWIDTH = 600
-        $!EXPORTSETUP EXPORTFNAME = 'spin_up_stream.png'
-        $!EXPORT
-          EXPORTREGION = ALLFRAMES
-
-        $!EXPORTSETUP EXPORTFORMAT = EPS
-        $!EXPORTSETUP USESUPERSAMPLEANTIALIASING = NO
-        $!EXPORTSETUP IMAGEWIDTH = 1423
-        $!EXPORTSETUP EXPORTFNAME = 'spin_up_stream|istep|.eps'
-
-        $!EXPORTSETUP PRINTRENDERTYPE = IMAGE
-        $!EXPORTSETUP EXPORTFNAME = 'spin_up_stream|istep|.img.eps'
-        $!EXPORT
-          EXPORTREGION = ALLFRAMES
-
-$!ELSE
-
-        $!IF |LOOP|>1
-                $!EXPORTNEXTFRAME
-        $!ELSE
-
-                $!EXPORTSETUP
-                 EXPORTFORMAT = AVI
-                 EXPORTFNAME = "spin_up_stream.avi"
-                $!EXPORTSETUP IMAGEWIDTH = 817
-                $!EXPORTSETUP USESUPERSAMPLEANTIALIASING = NO
-                $!EXPORTSTART
-        $!ENDIF
-
-$!ENDIF
-
-
-$!VARSET |LAST_STEP|=|istep|
-
-$!EndLoop
-
-
-$!IF |PNG|==0
-        $!EXPORTFINISH
-$!ENDIF
-
-
+###############################################################
+######################### END OF LOOP #########################
+###############################################################

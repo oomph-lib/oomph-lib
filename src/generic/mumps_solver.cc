@@ -78,6 +78,7 @@ bool MumpsSolver::Suppress_incorrect_rhs_distribution_warning_in_resolve
   Suppress_solve=false;
   Delete_matrix_data=false;
   Suppress_warning_about_MPI_COMM_WORLD=false;
+  Suppress_mumps_info_during_solve=false;
   Workspace_scaling_factor=Default_workspace_scaling_factor;
   Mumps_is_initialised=false;
   Mumps_struc_pt=0;
@@ -371,8 +372,11 @@ void MumpsSolver::factorise(DoubleMatrixBase* const &matrix_pt)
      // Document estimate for size of workspace
      if (my_rank==0)
       {
-       oomph_info <<  "Estimated max. workspace in MB: "
-                  << Mumps_struc_pt->infog[25] << std::endl;
+       if(!Suppress_mumps_info_during_solve)
+        {
+         oomph_info <<  "Estimated max. workspace in MB: "
+                    << Mumps_struc_pt->infog[25] << std::endl;
+        }
       }
       
      double t_start_factor = TimingHelpers::timer(); 
@@ -386,10 +390,14 @@ void MumpsSolver::factorise(DoubleMatrixBase* const &matrix_pt)
         // larger than infog(26)", according to the manual :(
         Mumps_struc_pt->icntl[22]=Workspace_scaling_factor*
          Mumps_struc_pt->infog[25];
-        oomph_info << "Attempting factorisation with workspace estimate: "
-                   << Mumps_struc_pt->icntl[22] << " MB\n";
-        oomph_info << "corresponding to Workspace_scaling_factor = "
-                   << Workspace_scaling_factor << "\n";
+
+        if(!Suppress_mumps_info_during_solve)
+         {
+          oomph_info << "Attempting factorisation with workspace estimate: "
+                     << Mumps_struc_pt->icntl[22] << " MB\n";
+          oomph_info << "corresponding to Workspace_scaling_factor = "
+                     << Workspace_scaling_factor << "\n";
+         }
 
         // Do factorisation
         Mumps_struc_pt->job = 2;
@@ -398,16 +406,22 @@ void MumpsSolver::factorise(DoubleMatrixBase* const &matrix_pt)
         // Check for error
         if (Mumps_struc_pt->infog[0]!=0)
          {
-          oomph_info << "Error during mumps factorisation!\n";
-          oomph_info << "Error codes: "
-                     << Mumps_struc_pt->info[0] << " " 
-                     << Mumps_struc_pt->info[1] << std::endl;
-          
+          if(!Suppress_mumps_info_during_solve)
+           {
+            oomph_info << "Error during mumps factorisation!\n";
+            oomph_info << "Error codes: "
+                       << Mumps_struc_pt->info[0] << " " 
+                       << Mumps_struc_pt->info[1] << std::endl;
+           }
+
           // Increase scaling factor for workspace and run again 
           Workspace_scaling_factor*=2;
-          
-          oomph_info << "Increasing workspace_scaling_factor to " 
-                     << Workspace_scaling_factor << std::endl;
+            
+          if(!Suppress_mumps_info_during_solve)
+           {
+            oomph_info << "Increasing workspace_scaling_factor to " 
+                       << Workspace_scaling_factor << std::endl;
+           }
          }
         else
          {

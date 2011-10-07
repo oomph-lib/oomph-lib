@@ -1,286 +1,232 @@
 \mainpage Demo problem: Relaxation oscillations of a fluid layer
 
-In the <A HREF="../../spine_channel_flow/html/index.html">previous
-example</A> we introduced the use of \c Spines, and used \c
-GeomObjects to define their heights. In this example we will be
-using \c Spines to model a free surface, and so their heights
-(i.e. the position of the free surface) will become unknowns in the
-problem which need to be solved for, as opposed to prescribed values.
+This is our first free surface example problem. We discuss the
+non-dimensionalisation of the free surface boundary conditions and
+their implementation in \c oomph-lib, and demonstrate the solution of
+a single layer relaxation problem.
 
 <HR>
 <HR>
 
-\section free_surface_eqns Equations governing a free surface
+\section free_surface_eqns Boundary conditions at a free surface
 
-We denote the position of the free surface by \f$ \mathbf{P}^* \f$. Two
-boundary conditions must be applied on this surface:
+Free surfaces occur at the interface between two fluids. Such
+interfaces require two boundary conditions to be applied:
+-# a kinematic condition which relates the motion of the free
+surface to the fluid velocities at the surface, and
+-# a dynamic condition which is concerned with the force balance at
+the free surface.
 
 \subsection kinematic_condition_theory The kinematic condition
 
-By definition no fluid can move through the free surface, although it can
-move along it. Therefore as the fluid at the free surface moves, the
-free surface moves with it, and the kinematic boundary condition is given by
+The kinematic condition states that the fluid particles at the surface
+remain on the surface for all times. If the surface is parameterised
+by intrinsic coordinates \f$ \zeta_1 \f$ and \f$ \zeta_2 \f$, then the
+Eulerian position vector which describes the surface at a given time
+\f$ t \f$ can be written as \f$ \mathbf{R}^* =
+\mathbf{R}^*(\zeta_1,\zeta_2,t) \f$. The kinematic condition is then
+given by 
 \f[
-\left(u_i^*-\frac{\partial P_i^*}{\partial t^*}\right) n_i = 0,
+\left(u_i^*-\frac{\partial R_i^*}{\partial t^*}\right) n_i = 0,
 \f]
-where \f$ u_i^* \f$ is the (dimensional) velocity of the fluid on the
-free surface and \f$ n_i \f$ is an outward pointing unit normal to the
-free surface. The
-indices take the value \f$ i = 1,2[,3] \f$ in 2[3] dimensions and we use the
-Einstein summation convention. In non-dimensional terms this becomes
+where \f$ \mathbf{u}^* \f$ is the (dimensional) velocity of the fluid
+and \f$ \mathbf{n} \f$ is the outer unit normal to the free
+surface. Using the same problem-specific reference quantities for the
+velocity, \f$ {\cal U} \f$, length, \f$ {\cal L} \f$, and time,
+\f${\cal T} \f$, that were used to <A HREF="../../driven_cavity/html/index.html#equation">non-dimensionalise the Navier--Stokes equations</A>, we scale the dimensional quantities such that
 \f[
-\left(u_i - St\, \frac{\partial P_i}{\partial t}\right) n_i = 0,
+u_i^* = {\cal U} \, u_i, \qquad
+R_i^* = {\cal L} \, R_i, \qquad
+t^* = {\cal T} \, t.
 \f]
-where
+The non-dimensional form of the kinematic boundary condition is then
+given by
 \f[
-u_i^* = U \, u_i, \qquad P_i^* = L \, P_i, \qquad t^* = T \, t,
+\left(u_i - St\, \frac{\partial R_i}{\partial t}\right) n_i = 0,
+\ \ \ \ \ \ \ \ \ \ @E[eqn:theory_kinematicBC]@
 \f]
-and the Strouhal number is
+where the Strouhal number is
 \f[
-St = \frac{L}{UT}.
+St = \frac{{\cal L}}{{\cal U}{\cal T}}.
 \f]
-Here we have used \f$ U \f$, \f$ L \f$ and \f$ T \f$ to denote the
-velocity, length and time scales respectively.
 
 \subsection dynamic_condition_theory The dynamic condition
 
+@I w 0.6\textwidth free_surface_sketch "Sketch of the interface between two fluids. "
+
 The dynamic boundary condition requires the stress to be continuous
-across a flat interface between two fluids. The traction exerted by fluid
-1 onto fluid 2, \f$ t_i^{[1]*} \f$, is equal and opposite to that
-exerted by fluid 2 onto fluid 1, \f$ t_i^{[2]*} \f$, and therefore \f$
-t_i^{[1]*} = - t_i^{[2]*} \f$. Since we are only modelling a single
-fluid in this problem, we treat the fluid above the interface as
-inviscid. We therefore specify that the traction exerted by this
-inviscid fluid (fluid 2) on the viscous fluid (fluid 1) is given by
+across a flat interface between two fluids. Referring to the sketch
+above, we define the lower fluid to be fluid 1 and the upper fluid to
+be fluid 2. The traction exerted by fluid 1 onto fluid 2, \f$
+\mathbf{t}^{[1]*} \f$, is equal and opposite to that exerted by fluid
+2 onto fluid 1, \f$ \mathbf{t}^{[2]*} \f$, and therefore \f$
+\mathbf{t}^{[1]*} = - \mathbf{t}^{[2]*} \f$. The traction in fluid \f$
+\beta \f$ (\f$ \beta = 1,2 \f$) is given by
 \f[
-t_i^{[2]*} = -p_{ext}^* \, n_i^{[2]},
+t_i^{[\beta]*} = \tau_{ij}^{[\beta]*} \, n_j^{[\beta]},
 \f]
-where \f$ p_{ext}^* \f$ is the constant pressure above the free
-surface and \f$ n_i^{[2]} \f$ is a unit normal to the free surface which
-points into the viscous fluid. We can therefore write that
+where \f$ \mathbf{\tau}^{[\beta]*} \f$ is the stress tensor in fluid \f$
+\beta \f$ and \f$ \mathbf{n}^{[\beta]} \f$ is the outer unit normal to
+fluid \f$ \beta \f$. Since \f$ \mathbf{n}^{[2]} \f$ must equal \f$
+-\mathbf{n}^{[1]} \f$, we have
 \f[
-t_i^{[1]*} = p_{ext}^* \, n_i^{[2]}.
+\tau_{ij}^{[1]*} \, n_j^{[1]} = \tau_{ij}^{[2]*} \, n_j^{[1]},
 \f]
-We now use the fact that the traction exerted by fluid 1 onto fluid 2
-is given by
-\f[
-t_i^{[1]*} = \tau_{ij}^{[1]*} \, n_j^{[1]},
-\f]
-where
-\f[
-\tau_{ij}^{[1]*} = -p^{[1]*} \, \delta_{ij}+ \mu\left(\frac{\partial
-u_i^{[1]*}}{\partial x_j^*} + \frac{\partial u_j^{[1]*}}{\partial x_i^*}\right)
-\f]
-is the stress tensor in fluid 1 and \f$ n_i^{[1]} \f$ is a unit normal
-to the free surface which points out of the viscous fluid, along with
-the fact that \f$ n_i^{[2]} = - n_i^{[1]} \f$, to write
-\f[
-\tau_{ij}^{[1]*} \, n_j^{[1]} = -p_{ext}^* \, n_i^{[1]}.
-\f]
+where we have arbitrarily chosen to use \f$ \mathbf{n}^{[1]} \f$ as
+the unit normal.
 
 On curved surfaces, surface tension creates a pressure jump \f$ \Delta p^*
-= \sigma \kappa^* \f$ across the free surface, where \f$ \sigma \f$ is the
+= \sigma \kappa^* \f$ across the interface, where \f$ \sigma \f$ is the
 surface tension and \f$ \kappa^* \f$ is equal to twice the mean curvature of
 the surface. Therefore the dynamic boundary condition is given by
 \f[
-\tau_{ij} \, n_j + \sigma \, \kappa^* \, n_i = -p_{ext}^* \, n_i,
+\tau_{ij}^{[2]*} \, n_j^{[1]} =
+\tau_{ij}^{[1]*} \, n_j^{[1]} + \sigma \, \kappa^* \, n_i^{[1]},
+\f]
+where \f$ \kappa > 0 \f$ if the centre of curvature lies inside fluid
+1. Using the same problem-specific reference quantities as in the
+<A HREF="#kinematic_condition_theory">section above</A>, the
+dimensional quantities are scaled such that
+\f[
+\tau_{ij}^* = \frac{\mu_{ref} \, {\cal U}}{{\cal L}} \, \tau_{ij}, \qquad
+\kappa^* = \frac{1}{{\cal L}} \, \kappa.
+\f]
+The non-dimensional form of the dynamic boundary condition is then
+given by
+\f[
+\tau_{ij}^{[2]} \, n_j^{[1]} =
+\tau_{ij}^{[1]} \, n_j^{[1]} + \frac{1}{Ca} \, \kappa \, n_i^{[1]},
+\f]
+where the Capillary number is
+\f[
+Ca = \frac{\mu_{ref} \, {\cal U}}{\sigma}.
+\f]
+
+In certain cases, such as the example problem below, we wish to model
+the fluid above the interface as totally inviscid. In this case, the
+stress tensor in fluid 2 reduces to \f$ \tau_{ij}^{[2]} = -
+\delta_{ij} p_{ext} \f$, where \f$ p_{ext} \f$ is the
+(non-dimensional) constant pressure above the free surface. The
+dynamic boundary condition therefore becomes
+\f[
+\tau_{ij} \, n_j = - \left( \frac{1}{Ca} \, \kappa + p_{ext} \right) n_i,
 \f]
 where we have dropped the explicit references to fluid 1 since it is
 understood that the stress tensor and unit normals refer to those of
-the (one and only) viscous fluid in the problem. In the above
-equation, we define \f$ \kappa^* \f$ to be positive if the centre of
-curvature lies inside the viscous fluid.
+the (one and only) viscous fluid in the problem.
 
-In non-dimensional terms this becomes
-\f[
-\tau_{ij} \, n_j = - \left( \frac{1}{Ca}\kappa + p_{ext} \right) n_i,
-\f]
-where
-\f[
-\tau_{ij}^*=\frac{\mu U}{L}\tau_{ij},
-\qquad \kappa*=\frac{1}{L}\kappa,
-\f]
-and the Capillary number is
-\f[
-Ca = \frac{\mu U}{\sigma}.
-\f]
-
-Next we will discuss the implementation of free surfaces in \c oomph-lib.
+We shall now discuss how the free surface boundary conditions are
+implemented in \c oomph-lib.
 
 <HR>
 <HR>
 
 \section implementation Implementation
 
-\subsection dynamic_condition_implementation The dynamic condition
-
-Both Taylor-Hood and Crouzeix-Raviart elements are implemented such
-that the normal stresses between elements are balanced. We apply
-the dynamic boundary condition using interface elements on the free
-surface, which apply the surface tension and an external pressure
-(which defaults to zero). The specific interface element used in this
-example is a \c SpineLineFluidInterfaceElement<ELEMENT>, which
-takes the bulk element type as a template argument. At the driver code
-level this allows the user to simply specify just the bulk element
-type that he/she would like to use, and the correct corresponding interface
-element is automatically applied.
-
-These interface elements are applied in the same way as all other surface
-elements (e.g. \c NavierStokesTractionElements, \c UnsteadyHeatFluxElements,
-etc.), and a general introduction can be found in <A
-HREF="../../../poisson/two_d_poisson_flux_bc/html/index.html#create_flux">another
-tutorial</A>.
-In order for the specific interface elements we are using in this
-example to be functional they must store pointers to the Capillary
-number \f$ Ca \f$ and the external pressure \f$ p_{ext} \f$.
-
-The Capillary number is set using the access function:
-\code
-double* SpineLineFluidInterfaceElement<ELEMENT>::ca_pt()
-\endcode
-The external pressure can be accessed using the function:
-\code
-double SpineLineFluidInterfaceElement<ELEMENT>::pext()
-\endcode
-but should be set using the function:
-\code
-void SpineLineFluidInterfaceElement<ELEMENT>::
-set_external_pressure_data(Data* external_pressure_data_pt)
-\endcode
-
-\subsection kinematic_condition_implementation The kinematic condition
+\subsection kinematic_condition_implementation The kinematic condition and the pseudo-solid node-update procedure
 
 In addition to solving for the fluid velocity and pressure (as in all
-Navier-Stokes examples), we have additional degrees of freedom in our
-problem due to the position of the free surface \f$ \mathbf{P} \f$
-being unknown. In order to solve for \f$ \mathbf{P} \f$ we need
-additional information, and it is at this point that we introduce the
-kinematic boundary condition.
+Navier--Stokes examples), we have additional degrees of freedom in our
+problem due to the fact that the position of the free surface \f$
+\mathbf{R} \f$ is unknown. The Navier--Stokes elements in
+\c oomph-lib are based on the Arbitrary Lagrangian Eulerian (ALE) form
+of the Navier-Stokes equations, and so can be used to solve problems
+in moving domains. This allows us to discretise our domain using a
+boundary fitted mesh, which will need to deform in response to 
+the motion of the free surface. This is achieved by treating the
+interior of the mesh as a fictitious elastic solid, and solving a
+solid mechanics problem for the (unknown) nodal positions. This
+technique, which will subsequently be referred to as a `pseudo-solid
+node-update strategy', employs wrapper elements to
+existing fluid and solid equation classes. The specific element used
+in this example is a \c PseudoSolidNodeUpdateElement<QCrouzeixRaviartElement<2>, \c QPVDElement<2,3> \c >
+element, which takes two template arguments. The first is the standard
+element type used to solve the fluid problem, and the second is the
+element type which solves the equations that are used to control the
+mesh deformation.
 
-In this example we are using spines to model the position of the free
-surface. If we parametrise the surface using intrinsic coordinates \f$
-\zeta_\alpha \f$ (\f$ \alpha=1[,2] \f$ in 2[3] dimensions) we can
-express the position of the surface as
-\f[
-\mathbf{P}(\zeta_\alpha) = \mathbf{P_b}(\zeta_\alpha) + h(\zeta_\alpha) \,
-\mathbf{\hat{P}_s},
-\f]
-where we have split the position vector up into two components: a base vector,
-\f$ \mathbf{P_b}(\zeta_\alpha) \f$, which describes the position of the
-base of the spine, and a second component, \f$ h(\zeta_\alpha) \,
-\mathbf{\hat{P}_s} \f$, which describes the position of the top of the spine
-relative to its base. Specifically, \f$ h(\zeta_\alpha) \f$ is the `height'
-of the spine at a point \f$ \zeta_\alpha \f$ along the free
-surface and \f$ \mathbf{\hat{P}_s} \f$ is a unit vector along the spine. In
-this example all the spines are parallel (and hence
-\f$ \mathbf{\hat{P}_s} \f$ is constant) but in general this does not have to
-be the case.
+The deformation of the free surface boundary is imposed by introducing
+a field of Lagrange multipliers at the free surface, following the
+method outlined in Cairncross et al., `A finite element method for
+free surface flows of incompressible fluids in three dimensions. Part
+I. Boundary fitted mesh motion' (2000). These new unknowns are stored
+as nodal values, and so the vector of values at each node is resized
+accordingly. Since this introduces further degrees of freedom into the
+problem, we require an additional equation: the kinematic boundary
+condition (@R[eqn:theory_kinematicBC]@).
 
-We have now expressed the free surface in terms of the heights of the
-spines, and to determine these quantities we solve the weak form of
-the kinematic boundary condition,
-\f[
-  \int_{fs} \left( u_i(\zeta_\alpha) - St \frac{\partial h(\zeta_\alpha)}{\partial t}
-    (\hat{P}_s)_i \right) n_i \, \psi^{[h]}(\zeta_\alpha) \, d\zeta_1
-    d\zeta_2 = 0, \qquad (\alpha=1[,2] \mbox{ and } i=1,2[,3] \mbox{
-    in 2[3] dimensions})
-\f]
-where the integral is over the free surface and \f$ \psi^{[h]} \f$ are
-the basis functions with which we will represent the spine heights,
-\f[
-h = \sum_{j=1}^{N} H_j \, \psi_j^{[h]}.
-\f]
+We discretise this equation by attaching \c FaceElements to the
+boundaries of the "bulk" elements that are adjacent to the free
+surface. The specific \c FaceElement used in this example is an \c
+ElasticLineFluidInterfaceElement<ELEMENT>, which takes the bulk
+element type as a template argument. This allows the user of the driver
+code to easily change the bulk element type, since the appropriate
+\c FaceElement type is automatically used. These \c FaceElements
+are applied in the same way as all other surface 
+elements (e.g. \c NavierStokesTractionElements, \c UnsteadyHeatFluxElements,
+etc.), and a general introduction can be found in <A HREF="../../../poisson/two_d_poisson_flux_bc/html/index.html#create_flux">another tutorial</A>.
 
-We note that in 
+\subsection dynamic_condition_implementation The dynamic condition
 
-A sensible choice for \f$ \psi^{[h]} \f$ is to let \f$ \psi^{[h]} =
-\psi^{[f]} \f$, i.e. to use the same quadratic shape
-functions to interpolate the spine heights as we use to interpolate
-the velocities. As the integral above is evaluated over the free
-surface only, it is implemented by the same \c
-SpineLineFluidInterfaceElements which
-we use to apply the contributions of surface tension and the external
-pressure which appear as a result of applying the dynamic boundary
-condition.
+Within a finite element framework, the dynamic boundary condition is
+incorporated as contributions to each of the momentum equations at the
+free surface. We refer to Ruschak, `A method for incorporating free
+boundaries with surface tension in finite element fluid-flow
+simulators' (1980), for details on the formulation.
+Since both Taylor--Hood and Crouzeix--Raviart elements
+are implemented such that the normal stresses between elements are
+balanced, applying the dynamic boundary condition in cases in
+which we are solving the Navier--Stokes equations on both sides of the
+interface is as straightforward as adding the appropriate surface
+tension contributions to the relevant momentum equations at the
+interface. In cases such as the example below, where we have an
+inviscid fluid above
+the free surface, we need to add the appropriate external pressure
+contributions (if any) as well. Both of these contributions are
+automatically added to the appropriate momentum equations using
+the same \c FaceElements which are used to discretise the kinematic
+boundary condition (see <A HREF="#kinematic_condition_implementation">above</A>).
 
-\subsection contact_line The contact line
+The Capillary number defaults to 1.0 and other values may be set using
+the function:
 
-In the weak form of the free surface Navier Stokes equations in three
-dimensions there appears a term of the form:
-\f[
-\oint_C \frac{1}{Ca} \, m_i \, \phi^{[f]} \, dC,
-\f]
-where \f$ m_i \f$ is the outward-pointing unit vector which is tangent to
-the free surface and normal to the contour bounding the free surface,
-\f$ C \f$, which is termed the contact line. This `contact line
-condition' can be applied in two ways:
--# Pinning the contact line causes \f$ \phi^{[f]} \f$ to be zero at
-this point and so the contour integral vanishes. `Pinning' in this
-context refers to constraining the height of the free surface at this
-contact point so that it remains constant throughout the
-simulation. This is done by pinning the height of the spine
-corresponding to this contact point. The \f$n\f$-th spine can be
-accessed and then pinned in the following way:
 \code
-mesh_pt()->spine_pt(n)->spine_height_pt()->pin(0)
+double* FluidInterfaceElement::ca_pt().
 \endcode
--# Alternatively, the tangent to the surface, \f$ m_i \f$, must be
-specified. In this case the `contact term' is added to the global
-residual vectors using \c
-FluidInterfaceEdgeElements, which are face elements which are attached
-to the interface elements which apply the dynamic and kinematic
-boundary conditions. These elements are therefore of one spatial
-dimension lower than the interface elements, and two spatial
-dimensions lower than the bulk elements. Thus in two-dimensional and
-axi-symmetric problems, they will be points, but in three-dimensional
-problems, they will be lines.
 
-By specifying the tangent to the surface at the point at
-which the surface meets another domain boundary we are essentially
-specifying the contact angle that the free surface makes with that
-domain boundary. The contact angle should be set using:
+The Strouhal number defaults to 1.0 and other values may be set using
+the function:
+
 \code
-void FluidInterfaceEdgeElement::
-set_contact_angle(double* const &angle_pt, const bool &strong=true)
+double* FluidInterfaceElement::st_pt().
 \endcode
-We note that by not including the contour integral term
-in the \f$ i \f$-th momentum equation (where \f$ i=1,2 \f$ or \f$ 3 \f$)
-we are specifying that the \f$ i \f$-th component of the tangent to the free
-surface is zero on the contact line \f$ C \f$.
 
-In the two-dimensional example we will be considering, the free
-surface is just a line and hence is bounded simply by two
-points. In this case, the integral around the closed contour \f$ C \f$ reduces
-to two point contributions which are located on the left and right
-domain boundaries. We want the domain
-to be periodic and symmetric in the \f$ x_1 \f$ direction, and so we
-must specify
-that there is no penetration of these boundaries by the fluid. This is
-done by applying Dirichlet conditions to the \f$ x_1 \f$-component of
-the velocity along \f$ x_1 = 0 \f$ and \f$ x_1 = L\f$, where \f$ L
-\f$ is the length of the domain in the \f$ x_1 \f$ direction. Since
-the contact points are located on these boundaries, the corresponding
-contact point terms vanish in the \f$ i=1 \f$-th momentum equation due
-to \f$ \phi^{[f]} \f$ being equal to zero on Dirichlet boundaries. In
-the \f$ x_2 \f$ direction we will not explicitly specify any contact point
-conditions, but since the boundary conditions are non-Dirichlet in
-this direction we are therefore prescribing that \f$ m_2=0 \f$ (the
-natural boundary condition). By this we mean that the \f$ x_2
-\f$-component of the tangent to the free surface at the points where
-it meets the left and right domain boundaries is zero; i.e. the
-contact angle between the free surface and the domain boundaries is
-\f$ 90^o \f$.
+The external pressure defaults to zero and other values may be set
+using the function:
+
+\code
+void FluidInterfaceElement::set_external_pressure_data(Data* p_ext_data_pt),
+\endcode
+
+where \c p_ext_data_pt is (a pointer to) the \c Data in which the
+value of the external pressure is stored. We note that the external
+pressure is represented by \c Data because it may be an unknown in
+certain problems, although it is simply a constant parameter in the
+example below. It can be accessed using the function:
+
+\code
+double FluidInterfaceElement::pext().
+\endcode
 
 <HR>
 <HR>
 
 \section example_problem The example problem
 
-We will illustrate the solution of the unsteady 2D Navier-Stokes
-equations using the example of a distorted free surface which is
-allowed to relax. The domain is periodic in the \f$ x_1
-\f$ direction. The mesh which we will use for this is discussed <A
-HREF="#mesh">below</A>.
+We will illustrate the solution of the unsteady two-dimensional
+Navier--Stokes equations using the example of a distorted free surface
+which is allowed to relax. The domain is periodic in the \f$ x_1
+\f$ direction.
 
 <CENTER>
 <TABLE>
@@ -289,7 +235,7 @@ HREF="#mesh">below</A>.
 \n
 <CENTER>
 <B>
-The 2D unsteady Navier-Stokes equations under a distorted free surface.</B>
+The 2D unsteady Navier--Stokes equations under a distorted free surface.</B>
 </CENTER> 
 \n
 Solve
@@ -307,11 +253,9 @@ and
 \frac{\partial u_i}{\partial x_i} = 0,
 \ \ \ \ \ \ \ \ \ \ @E[eqn:NScont]@
 \f]
-with gravity acting in the negative \f$ x_2 \f$ direction, in the
-periodic domain \f$ D = \left\{x_1 \in [0,L], x_2 \in [0, P_2]
-\right\} \f$, where the free surface is located at
-\f$ \mathbf{P}=\left(P_1,P_2\right) \f$, subject to the Dirichlet
-boundary conditions:
+with gravity acting in the negative \f$ x_2 \f$ direction, in the unit
+square, where the free surface is located at \f$ \mathbf{R} \f$, subject
+to the Dirichlet boundary conditions:
 \f[
 u_1=0 \ \ \ \ \ \ \ \ \ \ @E[eqn:BC1]@
 \f]
@@ -321,15 +265,15 @@ u_2=0 \ \ \ \ \ \ \ \ \ \ @E[eqn:BC2]@
 \f]
 on the bottom boundary.
 
-The free surface is defined by \f$ \mathbf{P} \f$, which is subject
+The free surface is defined by \f$ \mathbf{R} \f$, which is subject
 to the kinematic condition:
 \f[
-\left(u_i - St\, \frac{\partial P_i}{\partial t}\right) n_i = 0,
+\left(u_i - St\, \frac{\partial R_i}{\partial t}\right) n_i = 0,
 \ \ \ \ \ \ \ \ \ \ @E[eqn:kinematicBC]@
 \f]
 and the dynamic condition:
 \f[
-\tau_{ij}n_j = \left(\frac{1}{Ca}\kappa- p_{ext}\right)n_i,
+\tau_{ij}n_j = - \left(\frac{1}{Ca}\kappa + p_{ext}\right) n_i,
 \ \ \ \ \ \ \ \ \ \ @E[eqn:dynamicBC]@
 \f]
 where the stress tensor is defined as:
@@ -341,12 +285,11 @@ where the stress tensor is defined as:
 
 The initial deformation of the free surface is defined by:
 \f[
- \mathbf{P} = \left(x_1, 1.2 + 
- \epsilon\cos\left(\frac{2 n \pi x_1}{L}\right)\right),
+ \mathbf{R} = x_1 \, \mathbf{i} + \left[ 1.0 + 
+ \epsilon\cos\left( 2 n \pi x_1 \right)\right] \, \mathbf{j}
 \ \ \ \ \ \ \ \ \ \ @E[eqn:freesurfacedeformation]@
 \f]
-where \f$ \epsilon \f$ is a small parameter, \f$ n \f$ is the number
-of cosine periods and \f$ L \f$ is the width of the domain.
+where \f$ \epsilon \f$ is a small parameter and \f$ n \f$ is an integer.
 </TD>
 </TR>
 </TABLE>  
@@ -357,37 +300,63 @@ of cosine periods and \f$ L \f$ is the width of the domain.
 
 \section results Results
 
-Figure 1.1 below shows a contour plot of the pressure distribution
-with superimposed streamlines, as well as `carpet plots' of the
-pressure and the two velocity components, taken from <A
-HREF="../figures/single_layer.avi">this animation</A>. The results
-were produced using \c SpineElement<CrouzeixRaviartElement<2>> elements
-with \f$ Re = Re \, St = Re/Fr = 5 \f$ and \f$ Ca = 0.01 \f$.
+The figure below shows a contour plot of the pressure distribution
+with superimposed streamlines, taken from <A HREF="../figures/single_layer.avi">an animation of the flow field</A>,
+for the parameters \f$ Re = Re \, St = Re/Fr = 5.0 \f$ and \f$ Ca =
+0.01 \f$.
 
-@I w 0.75\textwidth single_layer "Velocity and pressure fields. "
+@I w 0.75\textwidth single_layer "Pressure contour plot for the relaxing interface problem. "
 
-The surface tension in the free surface causes the fluid to spring up
-in the centre, but since neither end is pinned the whole surface
-oscillates up and down. This process then repeats and declines until
-the free surface remains still as can be seen in the animation.
+At time \f$ t \leq 0 \f$ the free surface is fixed in its deformed shape,
+but as the simulation begins the restoring forces of surface tension
+and gravitational acceleration act to revert it to its undeformed flat
+state. The surface oscillates up and down, but the 
+motion is damped as the energy in the system is dissipated through
+viscous forces. Eventually the interface settles down to its
+equilibrium position. This viscous damping effect can be seen in the
+following time-trace of the height of the fluid layer at the edge of
+the domain.
 
-Figure 1.2 shows the time-trace of the height of the fluid layer at
-the edge of the domain. Since the domain is periodic
-in \f$ x_1 \f$, the left and right edges are equivalent.
+@I w 0.95\textwidth single_layer_trace "Time-trace of the height of the fluid layer at the edge of the domain. "
 
-@I w 0.75\textwidth single_layer_trace "Time-trace of the height of the fluid layer at the edge of the domain. "
+<HR>
+<HR>
+
+\section validation Validation
+
+The free surface boundary conditions for the Cartesian Navier--Stokes
+equations have been validated against an analytical test
+case, and we present the results in the figure
+below. The lines represent the real and imaginary parts of a
+dispersion relation \f$ \lambda(k) \f$, which correspond to the growth
+rate and the frequency of the oscillating free surface
+respectively. The points have 
+been obtained by running the driver code for given wavenumbers \f$ k
+\f$ and determining the growth rate and frequency from a time-trace of
+the left-hand edge of the free surface. Since the analytics assume
+that the initial deformation of the free surface is very small, we use
+the value \f$ \epsilon = 0.01 \f$ when calling \c
+deform_free_surface(...) in the code.
+
+@I w 0.95\textwidth single_layer_code_validation "Validation of the code (points) by comparison with an analytical dispersion relation (lines). "
 
 <HR>
 <HR>
 
 \section namespace Global parameters and functions
 
-For this problem, we use the dimensionless parameters \f$ Re \f$,
-\f$ Re\, St \f$, \f$ Re/Fr \f$ and \f$ Ca \f$. In addition, we create a
-vector \f$ G \f$ which will define the direction in which gravity
-acts. As usual, we define these quantities in a namespace:
+As usual, we use a namespace to define the dimensionless parameters
+\f$ Re \f$, \f$ St \f$, \f$ Re/Fr \f$ and \f$ Ca \f$, and we
+create a vector \f$ G \f$ which will define the direction in which
+gravity acts. We will need to pass the Strouhal number to the
+interface elements, but the product of the Strouhal number and the
+Reynolds number to the bulk elements. To avoid potentially
+inconsistent parameters, we compute \f$ Re \, St \f$ rather than
+defining it explicitly. Because the mesh is to be updated using a
+pseudo-solid node-update strategy, we also require the Poisson ratio
+for the generalised Hookean constitutive law.
 
-\dontinclude single_layer.cc
+\dontinclude elastic_single_layer.cc
 \skipline start_of_namespace
 \until End of namespace
 
@@ -396,17 +365,20 @@ acts. As usual, we define these quantities in a namespace:
 
 \section main The driver code
 
-We start by specifying the (non-dimensional) length of time for which
+We start by computing the product of the Reynolds and Strouhal numbers
+before specifying the (non-dimensional) length of time for which
 we want the simulation to run and the size of the timestep. Because all driver
 codes are run as part of \c oomph-lib's self-testing routines we allow
 the user to pass a command line argument to the executable which sets
 the maximum time to some lower value.
 
 \skipline start_of_main
-\until t_max = 0.02
+\until t_max = 0.005
 
 Next we specify the dimensions of the mesh and the number of elements
-in the \f$ x \f$ and \f$ y \f$ directions.
+in the \f$ x_1 \f$ and \f$ x_2 \f$ directions. To remain consistent
+with the example code we shall from now on refer to \f$ x_1 \f$ as \f$
+x \f$ and \f$ x_2 \f$ as \f$ y \f$.
 
 \skipline Number of elements in x direction
 \until double h
@@ -417,13 +389,13 @@ vertically downwards.
 \skipline Set direction of gravity
 \until G[1]
 
-Finally, we build the problem using the `spinified' version of \c
+Finally, we build the problem using the `pseudo-solid' version of \c
 QCrouzeixRaviartElements and the \c BDF<2> timestepper, before calling \c
 unsteady_run(...). This function solves the system at each timestep
 using the \c Problem::unsteady_newton_solve(...) function before
 documenting the result.
 
-\skipline Set up the spine test problem
+\skipline Set up the elastic test problem
 \until End of main
 
 <HR>
@@ -431,72 +403,44 @@ documenting the result.
 
 \section problem_class The problem class
 
-Since we are still solving the unsteady Navier-Stokes equations, the
-\c Problem class is very similar to that used in the <A
-HREF="../../rayleigh_channel/html/index.html">Rayleigh
+Since we are solving the unsteady Navier--Stokes equations, the
+\c Problem class is very similar to that used in the <A HREF="../../rayleigh_channel/html/index.html">Rayleigh
 channel example</A>. We specify the type of the element and the type
 of the timestepper (assumed to be a member of the \c BDF family) as
 template parameters, before passing the number of elements and domain
-length in both coordinate directions to the problem constructor.
+length in both coordinate directions to the problem constructor. We
+define an empty destructor, functions to set the initial and boundary
+conditions and a post-processing function \c doc_solution(...),
+which will be used by the timestepping function \c unsteady_run(...).
 
-\dontinclude single_layer.cc
+\dontinclude elastic_single_layer.cc
 \skipline start_of_problem_class
-\until ~InterfaceProblem()
-
-The heights of the \c Spines are updated automatically, but the locations
-of the \c SpineNodes along them are not. We therefore update the mesh
-before taking the first Newton step (see <A
-HREF="../../../order_of_action_functions/html/index.html">here</A> for
-a discussion of when the various action functions are called within
-the Newton solve).
-
-\skipline Spine heights/lengths
-\until }
-
-No action is needed before or after solving, and because the boundary
-conditions are not time dependant we do not need to reset them before
-each timestep. In fact, we do not explicitly set the values of the
-Dirichlet conditions anywhere since they are all zero and the nodal
-velocities are initialised to zero initially by default.
-
-\skipline Update before solve
-\until actions_after_newton_solve
-
-Next we set the initial conditions for the problem. We loop over all
-nodes in the mesh and set both velocity components to zero. No initial
-conditions are required for the pressure. We then call the function \c
-Problem::assign_initial_values_impulsive() which copies the current
-values at each of the nodes into the required number of history values
-for the timestepper in question. This corresponds to an impulsive
-start, as for all time \f$ t \leq 0 \f$ none of the fluid is moving.
-
-\skipline Set initial conditions
-\until End of set_initial_condition
-
-We provide an access function to the specific mesh and define the
-post-processing function \c doc_solution(...), which will be used by
-the timestepping function \c unsteady_run(...).
-
-\skipline Access function for the specific mesh
 \until unsteady_run
 
-At the beginning of the simulation the free surface is deformed by a
-prescribed function (@R[eqn:freesurfacedeformation]@). To do this we
-create a function, \c deform_free_surface(...), which cycles through
-the \c Spines and changes their heights accordingly, before calling \c
-Mesh::node_update() to redistribute the \c SpineNodes such that they
-retain their fractional position along each \c Spine. It is a private
-member function since only \c Problem::unsteady_run(...) should call it.
+The nodal positions are unknowns in the problem and hence are updated
+automatically, so there is no need to update the mesh before
+performing a Newton solve. However, since the main use of the
+methodology demonstrated here is in
+free-boundary problems where the solution of the solid problem merely
+serves to update the nodal positions in response to the motion of the
+free surface, we reset the nodes' Lagrangian coordinates to their
+Eulerian positions before every solve, by calling \c
+SolidMesh::set_lagrangian_nodal_coordinates(). This makes the deformed
+configuration stress-free and tends to stabilise the computation,
+allowing larger domain deformations to be computed.
 
 \skipline private
-\until End of deform_free_surface
+\until deform_free_surface
 
-The problem class stores an output stream, in which we record the height of
-the interface at the domain edge, and the width of the domain, which
-is used by the function \c deform_free_surface(...) when defining the
-initial mesh deformation.
+The problem class stores pointers to the specific bulk mesh and the
+surface mesh, which will contain the interface elements, as well as
+a pointer to a constitutive law for the pseudo-solid mesh. The width
+of the domain is also stored since it is used by the function \c
+deform_free_surface(...) when setting up the initial mesh
+deformation. Finally we store an output stream in which we record the
+height of the interface at the domain edge.
 
-\skipline Trace file
+\skipline Pointer to the (specific) "bulk" mesh
 \until End of problem class
 
 <HR>
@@ -511,58 +455,126 @@ timestepper.
 \skipline start_of_constructor
 \until add_time_stepper_pt
 
-Next we build the mesh, as usual. The mesh we are using is the \c
-SingleLayerSpineMesh<ELEMENT,INTERFACE_ELEMENT>, which takes both
-the bulk elements and the interface elements as template arguments. It
-creates a \c SpineMesh, similar to the \c ChannelSpineMesh<ELEMENT>
-discussed in <A HREF="../../spine_channel/html/index.html">another
-example</A>, but with the height of the spines defined by the
-interface elements, instead of a single \c GeomObject. The boolean
-argument in the mesh constructor, which is set to `true' here,
-indicates whether or not the domain is to be periodic in \f$ x \f$.
+Next we build the bulk mesh. The mesh we are using is the \c
+ElasticRectangularQuadMesh<ELEMENT>, which takes the bulk element as
+a template argument. The boolean argument in the mesh constructor,
+which is set to `true' here, indicates whether or not the domain is to
+be periodic in \f$ x \f$. The surface mesh is also built, although it
+is empty at this point.
 
-\skipline Build and assign mesh
-\until time_stepper_pt
+\skipline Build and assign the "bulk" mesh
+\until Surface_mesh_pt
+
+Having created the bulk elements, we now create the interface
+elements. We first build an empty mesh in which to store them, before
+looping over the bulk elements adjacent to the free surface and
+`attaching' interface elements to their upper faces. These
+newly-created elements are then stored in the surface mesh.
+
+\skipline ------------
+\until }
+
+Now that the interface elements have been created, we combine the bulk
+and surface meshes into a single mesh.
+
+\skipline Add the two sub-meshes to the problem
+\until build_global_mesh
 
 On the solid bottom boundary (\f$ y = 0 \f$) we pin both velocity
 components so that there is no penetration of the wall by the fluid
 or flow along it. On the left and right symmetry boundaries (\f$ x =
-0.0 \f$ and \f$ x = 2.0 \f$) we pin the \f$ x \f$ component of the
+0.0 \f$ and \f$ x = 1.0 \f$) we pin the \f$ x \f$ component of the
 velocity but leave the \f$ y \f$ component unconstrained. We do not
 apply any velocity boundary conditions to the free surface (the top
-boundary).
+boundary). We pin the vertical displacement of the nodes on the bottom
+boundary (since these must remain stationary) and pin the horizontal
+displacement of all nodes in the mesh.
 
 \skipline -----
-\until End of loop over mesh boundaries
+\until Bulk_mesh_pt->node_pt(n)->pin_position(0)
+
+Next we create a generalised Hookean constitutive equation for the
+pseudo-solid mesh. This constitutive equation is discussed in <A HREF="../../../solid/disk_compression/html/index.html#hooke">another tutorial</A>.
+
+\skipline Define a constitutive law
+\until GeneralisedHookean
 
 We loop over the bulk elements and pass them pointers to the Reynolds
 and Womersley numbers, \f$ Re \f$ and \f$ Re\, St \f$, the product of
 the Reynolds number and the inverse of the Froude number, \f$ Re/Fr
-\f$, and the direction of gravity \f$ G \f$. In addition we pass a
-pointer to the global time object, created when we called \c
-Problem::add_time_stepper_pt(...) above.
+\f$, the direction of gravity, \f$ G \f$, and the constitutive law. In
+addition we pass a pointer to the global time object, created when we
+called \c Problem::add_time_stepper_pt(...) above.
 
 \skipline -----
 \until End of loop over bulk elements
 
 Next we create a pointer to a \c Data value for the external pressure
-\f$ p_{ext} \f$, before pinning it and assigning an arbitrary value.
+\f$ p_{ext} \f$, before pinning it and assigning an arbitrary
+value.
 
 \skipline Create a Data object
-\until pin(0)
+\until set_value
 
 We then loop over the interface elements and pass them a pointer to this
-external pressure value as well as a pointer to the Capillary number
-\f$ Ca \f$.
+external pressure value as well as pointers to the Strouhal and
+Capillary numbers.
 
 \skipline Determine number of 1D interface elements
 \until End of loop over interface elements
 
-Finally, we set up the equation numbering scheme using the function \c
-Problem::assign_eqn_numbers().
+Finally, we apply the problem's boundary conditions (discussed <A HREF="#set_boundary_conditions">later on</A>) before setting up the equation
+numbering scheme using the function \c Problem::assign_eqn_numbers().
 
-\skipline Setup equation numbering scheme
+\skipline Apply the boundary conditions
 \until End of constructor
+
+<HR>
+<HR>
+
+\section set_initial_condition Initial conditions
+
+This function sets the initial conditions for the problem. We loop
+over all nodes in the mesh and set both velocity components to
+zero. No initial conditions are required for the pressure. We then
+call the function \c Problem::assign_initial_values_impulsive() which
+copies the current values at each of the nodes, as well as the current
+nodal positions, into the required number of history values
+for the timestepper in question. This corresponds to an impulsive
+start, as for all time \f$ t \leq 0 \f$ none of the fluid is moving
+and the shape of the interface is constant.
+
+\skipline start_of_set_initial_condition
+\until End of set_initial_condition
+
+<HR>
+<HR>
+
+\section set_boundary_conditions Boundary conditions
+
+This function sets the boundary conditions for the problem. Since the
+Dirichlet conditions are homogeneous this function is not strictly
+necessary as all values are initialised to zero by default.
+
+\skipline start_of_set_boundary_conditions
+\until End of set_boundary_conditions
+
+<HR>
+<HR>
+
+\section deform_free_surface Prescribing the initial free surface position
+
+At the beginning of the simulation the free surface is deformed by a
+prescribed function (@R[eqn:freesurfacedeformation]@). To do this we
+define a function, \c deform_free_surface(...), which cycles through
+the bulk mesh's \c Nodes and modifies their positions
+accordingly, such that the nodes on the free surface follow the
+prescribed interface shape (@R[eqn:freesurfacedeformation]@) and the
+bulk nodes retain their fractional position between the lower and the
+(now deformed) upper boundary.
+
+\skipline start_of_deform_free_surface
+\until End of deform_free_surface
 
 <HR>
 <HR>
@@ -571,20 +583,22 @@ Problem::assign_eqn_numbers().
 
 As expected, this member function documents the computed
 solution. We first output the value of the current time to the screen,
-before recording the following parameters in the trace file:
-- the value of the continuous time,
-- the height of the spine at the left/right domain boundary, and
-- the contact angles (in degrees) of the free surface and the left and
-right domain boundaries.
+before recording the continuous time and the height of the free
+surface at the domain boundary in the trace file. We note that as the
+domain is periodic the height of the free surface must be the same at
+both the left and right boundaries.
 
 \skipline start_of_doc_solution
-\until actual_contact_angle_right
+\until el_pt->node_pt(0)->x(1)
 
-We then output the computed solution, and include \c Tecplot instructions
-that generate a blue line in the top-left corner of the plot to
-indicate how time progresses during the simulation.
+We then output the computed solution.
 
 \skipline ofstream
+\until some_file.close()
+
+Finally, we output the shape of the interface.
+
+\skipline Open interface solution output file
 \until End of doc_solution
 
 <HR>
@@ -605,8 +619,7 @@ the label for the output files.
 \skipline Initialise DocInfo object
 \until doc_info.number()=0
 
-Next we open the trace file and write a suitable header for the
-visualisation with \c Tecplot.
+Next we open and initialise the trace file.
 
 \skipline Open trace file
 \until std::endl
@@ -616,7 +629,7 @@ Before using any of \c oomph-lib's timestepping functions, the timestep
 the function \c Problem::initialise_dt(...) which sets the weights for
 all timesteppers in the problem. Next we assign the initial conditions
 by calling \c Problem::set_initial_condition(), which was discussed
-<A HREF="#problem_class">above</A>.
+<A HREF="#set_initial_condition">above</A>.
 
 \skipline Initialise timestep
 \until set_initial_condition
@@ -632,28 +645,40 @@ the solution documented.
 <HR>
 <HR>
 
-\section comments Comments and Exercises
+\section comments Comments
 
+- Note that in the example above we do not explicitly apply any boundary
+  conditions at either end of the free surface. We neglect these
+  contributions because the natural condition is such that the
+  contact angle between the surface and the domain edge is
+  constrained to be \f$ 90^o \f$, and this is the appropriate
+  condition in this case. Contact angles of arbitrary size can be
+  enforced using \c FluidInterfaceEdgeElements, which are discussed
+  in <A HREF="../../../to_be_written/to_be_written/html/index.html">another tutorial</A>.
 
+- Specifying the contact angle is not the only condition that can be
+  applied at the edges of an interface. The alternative boundary
+  condition is to pin the contact line so that its position is fixed
+  for all time. Since this is a Dirichlet condition it causes the
+  integral over the contact line to vanish. Further details are again
+  discussed in <A HREF="../../../to_be_written/to_be_written/html/index.html">another tutorial</A>.
 
-\subsection mesh The free surface mesh
+<HR>
+<HR>
 
-The mesh used in this example, \c
-SingleLayerSpineMesh<ELEMENT,INTERFACE_ELEMENT>, is created in a very
-similar way to the \c ChannelSpineMesh used in the <A
-HREF="../../spine_channel_flow/html/index.html#spine_mesh">previous
-example</A>. The difference is that in this case there is only one
-region and we use the interface elements to determine the heights of
-the \c Spines rather than specifying them with a \c
-GeomObject. Therefore the spine heights become degrees of freedom in
-the problem which are determined during each Newton solve. The
-following piece of code illustrates how the interface elements are
-added to the mesh.
+\section sources Source files for this tutorial
+- The source files for this tutorial are located in the directory:\n\n
+<CENTER>
+<A HREF="../../../../demo_drivers/navier_stokes/single_layer_free_surface/">
+demo_drivers/navier_stokes/single_layer_free_surface/
+</A>
+</CENTER>\n
+- The driver code is: \n\n
+<CENTER>
+<A HREF="../../../../demo_drivers/navier_stokes/single_layer_free_surface/elastic_single_layer.cc">
+demo_drivers/navier_stokes/single_layer_free_surface/elastic_single_layer.cc
+</A>
+</CENTER>
+.
 
 @@END@@
-
-\dontinclude TEMP_single_layer_spine_mesh.template_FRAGMENT.cc
-\skipline Assign
-\until }
-
-

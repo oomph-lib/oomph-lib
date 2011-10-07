@@ -573,7 +573,7 @@ public  FaceGeometry<FaceGeometry<ELEMENT> > ,
 /// Base class establishing common interfaces and functions for all 
 /// Navier-Stokes-like fluid
 /// interface elements. That is elements that represent either a free 
-/// surface or an inteface between two fluids that have distinct
+/// surface or an interface between two fluids that have distinct
 /// momentum-like equation for each velocity component.
 //======================================================================
 class FluidInterfaceElement : public virtual FaceElement
@@ -680,10 +680,9 @@ public:
   /// \short Virtual function that specifies the non-dimensional 
   ///  surface tension as a function of local position within the element.
   /// The default behaviour is a constant surface tension of value 1.0
-  /// This function can be overloaded in more
-  /// specialised elements to incorporate variations in surface tension.
-  virtual double sigma(const Vector<double> &s_local)
-  {return 1.0;}
+  /// This function can be overloaded in more specialised elements to
+  /// incorporate variations in surface tension.
+  virtual double sigma(const Vector<double> &s_local) { return 1.0; }
   
   /// Calculate the residuals by calling the generic residual contribution.
   void fill_in_contribution_to_residuals(Vector<double> &residuals)

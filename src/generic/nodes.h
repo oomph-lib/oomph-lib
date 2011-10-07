@@ -1879,12 +1879,35 @@ class BoundaryNode: public NODE_TYPE, public BoundaryNodeBase
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
+
    //Set the number of values
-   this->Nvalue = Copied_node_pt->nvalue();
-   this->Value = Copied_node_pt->Value;
-   this->Eqn_number = Copied_node_pt->Eqn_number;
-   //We won't ever need to worry about updating position pointers
-   //because periodic solid problems are handled using lagrange multipliers.
+   this->Nvalue = copied_nod_pt->nvalue();
+   this->Value = copied_nod_pt->Value;
+   this->Eqn_number = copied_nod_pt->Eqn_number;
+   
+   // Cast Copied_node_pt to BoundaryNode
+   BoundaryNode<NODE_TYPE>* copied_nod_pt = 
+    dynamic_cast<BoundaryNode<NODE_TYPE>*>(Copied_node_pt);
+
+   // Check that dynamic cast has worked
+   if(copied_nod_pt)
+    {
+     this->index_of_first_value_assigned_by_face_element_pt() =
+      copied_nod_pt->index_of_first_value_assigned_by_face_element_pt();
+     //We won't ever need to worry about updating position pointers
+     //because periodic solid problems are handled using lagrange multipliers.
+    }
+   // PATRICKFLAG Is this really an error? Think about this...
+   else
+    {
+     std::ostringstream error_stream;
+     error_stream 
+      << "Copied_node_pt is not of type BoundaryNode*"
+      << std::endl;
+     throw OomphLibError(error_stream.str(),
+                         "BoundaryNode::reset_copied_pointers()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
   }
 
  /// \short Clear pointers to the copied data used when we have periodic nodes.
@@ -1930,6 +1953,46 @@ class BoundaryNode: public NODE_TYPE, public BoundaryNodeBase
 
      //Copy over the values of the equation numbers
      this->Eqn_number[i] = Copied_node_pt->eqn_number(i);
+    }
+
+   // Allocate storage for the index of first value assigned by face element
+   this->index_of_first_value_assigned_by_face_element_pt() =
+    new std::map<unsigned,unsigned>;
+
+   // Cast Copied_node_pt to BoundaryNode
+   BoundaryNode<NODE_TYPE>* copied_nod_pt =
+    dynamic_cast<BoundaryNode<NODE_TYPE>*>(Copied_node_pt);
+
+   // Check that dynamic cast has worked
+   if(copied_nod_pt)
+    {
+     // Initialise the values in the map to be those of the original data
+     std::map<unsigned,unsigned>::const_iterator it =
+      (*(copied_nod_pt->
+         index_of_first_value_assigned_by_face_element_pt())).begin();
+     std::map<unsigned,unsigned>::const_iterator end = 
+      (*(copied_nod_pt->
+         index_of_first_value_assigned_by_face_element_pt())).end();
+     for(std::map<unsigned,unsigned>::const_iterator it =
+          (*(copied_nod_pt->
+             index_of_first_value_assigned_by_face_element_pt())).begin();
+         it!=end;it++)
+      {
+       (*(this->
+          index_of_first_value_assigned_by_face_element_pt()))[it->first] =
+        it->second;
+      }
+    }
+   // PATRICKFLAG Is this really an error? Think about this...
+   else
+    {
+     std::ostringstream error_stream;
+     error_stream 
+      << "Copied_node_pt is not of type BoundaryNode*"
+      << std::endl;
+     throw OomphLibError(error_stream.str(),
+                         "BoundaryNode::reset_copied_pointers()",
+                         OOMPH_EXCEPTION_LOCATION);
     }
 
    //The node is no longer a copy

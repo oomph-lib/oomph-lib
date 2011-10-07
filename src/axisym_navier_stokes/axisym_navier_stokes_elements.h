@@ -932,7 +932,39 @@ public:
   }
 
  /// Return FE interpolated derivatives of velocity component u[i]
- /// w.r.t spatial coordinate direction x[j] at local coordinate s
+ /// w.r.t spatial local coordinate direction s[j] at local coordinate s
+ double interpolated_duds_axi_nst(const Vector<double> &s, 
+                                  const unsigned &i,
+                                  const unsigned &j) const
+  {
+   // Determine number of nodes
+   const unsigned n_node = nnode();
+
+   // Allocate storage for local shape function and its derivatives
+   // with respect to space
+   Shape psif(n_node);
+   DShape dpsifds(n_node,2);
+
+   // Find values of shape function (ignore jacobian)
+   (void)this->dshape_local(s,psif,dpsifds);
+   
+   // Get the index at which the velocity is stored
+   const unsigned u_nodal_index = u_index_axi_nst(i);
+
+   // Initialise value of duds
+   double interpolated_duds = 0.0;
+
+   // Loop over the local nodes and sum
+   for(unsigned l=0;l<n_node;l++) 
+    {
+     interpolated_duds += nodal_value(l,u_nodal_index)*dpsifds(l,j);
+    }
+   
+   return(interpolated_duds);
+  }
+
+ /// Return FE interpolated derivatives of velocity component u[i]
+ /// w.r.t spatial global coordinate direction x[j] at local coordinate s
  double interpolated_dudx_axi_nst(const Vector<double> &s, 
                                   const unsigned &i,
                                   const unsigned &j) const
@@ -1156,6 +1188,7 @@ class AxisymmetricQCrouzeixRaviartElement : public virtual QElement<2,3>,
  inline void pshape_axi_nst(const Vector<double> &s, Shape &psi, 
                             Shape &test) const;
 
+
 public:
 
  /// Constructor, there are three internal values (for the pressure)
@@ -1346,6 +1379,7 @@ pshape_axi_nst(const Vector<double> &s, Shape &psi, Shape &test) const
  //Loop over the test functions and set them equal to the shape functions
  for(unsigned i=0;i<3;i++) test[i] = psi[i];
 }
+
 
 //=======================================================================
 /// Face geometry of the Axisymmetric Crouzeix_Raviart elements

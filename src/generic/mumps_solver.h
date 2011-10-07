@@ -94,10 +94,19 @@ class MumpsSolver : public LinearSolver
  void enable_suppress_warning_about_MPI_COMM_WORLD()
  {Suppress_warning_about_MPI_COMM_WORLD=true;}
  
- /// Don't  suppress warning about communicator not equal to MPI_COMM_WORLD
+ /// Don't suppress warning about communicator not equal to MPI_COMM_WORLD
  void disable_suppress_warning_about_MPI_COMM_WORLD()
  {Suppress_warning_about_MPI_COMM_WORLD=false;}
  
+ /// \short Set boolean to suppress info being printed to screen
+ /// during MUMPS solve
+ void enable_suppress_mumps_info_during_solve()
+ {Suppress_mumps_info_during_solve=true;}
+
+ /// Don't suppress info being printed to screen during MUMPS solve
+ void disable_suppress_mumps_info_during_solve()
+ {Suppress_mumps_info_during_solve=false;}
+
  /// \short Solver: Takes pointer to problem and returns the results Vector
  /// which contains the solution of the linear system defined by
  /// the problem's fully assembled Jacobian and residual Vector.
@@ -201,6 +210,9 @@ class MumpsSolver : public LinearSolver
   
  /// Boolean to suppress warning about communicator not equal to MPI_COMM_WORLD
  bool Suppress_warning_about_MPI_COMM_WORLD;
+
+ /// Boolean to suppress info being printed to screen during MUMPS solve
+ bool Suppress_mumps_info_during_solve;
 
  /// Has mumps been initialised?
  bool Mumps_is_initialised;

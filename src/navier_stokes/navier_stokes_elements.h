@@ -519,7 +519,19 @@ template <unsigned DIM>
                                                       Shape &test, 
                                                       DShape &dtestdx) const=0;
 
-
+ /// \short Shape/test functions and derivs w.r.t. to global coords at 
+ /// integration point ipt; return Jacobian of mapping (J). Also compute
+ /// derivatives of dpsidx, dtestdx and J w.r.t. nodal coordinates.
+ virtual double dshape_and_dtest_eulerian_at_knot_nst(
+  const unsigned &ipt, 
+  Shape &psi, 
+  DShape &dpsidx,
+  RankFourTensor<double> &d_dpsidx_dX,
+  Shape &test, 
+  DShape &dtestdx,
+  RankFourTensor<double> &d_dtestdx_dX,
+  DenseMatrix<double> &djacobian_dX) const=0;
+ 
  /// \short Compute the pressure shape and test functions and derivatives 
  /// w.r.t. global coords at local coordinate s.
  /// Return Jacobian of mapping between local and global coordinates.
@@ -1463,8 +1475,19 @@ class QCrouzeixRaviartElement : public virtual QElement<DIM,3>,
                                                      Shape &test, 
                                                      DShape &dtestdx) const;
 
+ /// \short Shape/test functions and derivs w.r.t. to global coords at 
+ /// integration point ipt; return Jacobian of mapping (J). Also compute
+ /// derivatives of dpsidx, dtestdx and J w.r.t. nodal coordinates.
+ inline double dshape_and_dtest_eulerian_at_knot_nst(
+  const unsigned &ipt, 
+  Shape &psi, 
+  DShape &dpsidx,
+  RankFourTensor<double> &d_dpsidx_dX,
+  Shape &test, 
+  DShape &dtestdx,
+  RankFourTensor<double> &d_dtestdx_dX,
+  DenseMatrix<double> &djacobian_dX) const;
 
- 
  /// \short Pressure shape and test functions and their derivs 
  /// w.r.t. to global coords  at local coordinate s (taken from geometry)
  /// Return Jacobian of mapping between local and global coordinates.
@@ -1640,6 +1663,103 @@ dshape_and_dtest_eulerian_at_knot_nst(
  //Return the jacobian
  return J;
 }
+
+
+//=======================================================================
+/// 2D
+/// Define the shape functions (psi) and test functions (test) and
+/// their derivatives w.r.t. global coordinates (dpsidx and dtestdx)
+/// and return Jacobian of mapping (J). Additionally compute the
+/// derivatives of dpsidx, dtestdx and J w.r.t. nodal coordinates.
+///
+/// Galerkin: Test functions = shape functions
+//=======================================================================
+template<>
+inline double QCrouzeixRaviartElement<2>::
+dshape_and_dtest_eulerian_at_knot_nst(
+ const unsigned &ipt, Shape &psi, DShape &dpsidx,
+ RankFourTensor<double> &d_dpsidx_dX,
+ Shape &test, DShape &dtestdx,
+ RankFourTensor<double> &d_dtestdx_dX,
+ DenseMatrix<double> &djacobian_dX) const
+ {
+  // Call the geometrical shape functions and derivatives  
+  const double J = this->dshape_eulerian_at_knot(ipt,psi,dpsidx,
+                                                 djacobian_dX,
+                                                 d_dpsidx_dX);
+  
+  // Loop over the test functions and derivatives and set them equal to the
+  // shape functions
+  for(unsigned i=0;i<9;i++)
+   {
+    test[i] = psi[i];
+
+    for(unsigned k=0;k<2;k++)
+     {
+      dtestdx(i,k) = dpsidx(i,k);
+
+      for(unsigned p=0;p<2;p++)
+       {
+        for(unsigned q=0;q<9;q++)
+         {
+          d_dtestdx_dX(p,q,i,k) = d_dpsidx_dX(p,q,i,k);
+         }
+       }
+     }
+   }
+
+  // Return the jacobian
+  return J;
+ }
+
+
+//=======================================================================
+/// 3D
+/// Define the shape functions (psi) and test functions (test) and
+/// their derivatives w.r.t. global coordinates (dpsidx and dtestdx)
+/// and return Jacobian of mapping (J). Additionally compute the
+/// derivatives of dpsidx, dtestdx and J w.r.t. nodal coordinates.
+///
+/// Galerkin: Test functions = shape functions
+//=======================================================================
+template<>
+inline double QCrouzeixRaviartElement<3>::
+dshape_and_dtest_eulerian_at_knot_nst(
+ const unsigned &ipt, Shape &psi, DShape &dpsidx,
+ RankFourTensor<double> &d_dpsidx_dX,
+ Shape &test, DShape &dtestdx,
+ RankFourTensor<double> &d_dtestdx_dX,
+ DenseMatrix<double> &djacobian_dX) const
+ {
+  // Call the geometrical shape functions and derivatives  
+  const double J = this->dshape_eulerian_at_knot(ipt,psi,dpsidx,
+                                                 djacobian_dX,
+                                                 d_dpsidx_dX);
+
+  // Loop over the test functions and derivatives and set them equal to the
+  // shape functions
+  for(unsigned i=0;i<27;i++)
+   {
+    test[i] = psi[i];
+
+    for(unsigned k=0;k<3;k++)
+     {
+      dtestdx(i,k) = dpsidx(i,k);
+
+      for(unsigned p=0;p<3;p++)
+       {
+        for(unsigned q=0;q<27;q++)
+         {
+          d_dtestdx_dX(p,q,i,k) = d_dpsidx_dX(p,q,i,k);
+         }
+       }
+     }
+   }
+
+  // Return the jacobian
+  return J;
+ }
+
 
 
 //=======================================================================
@@ -1892,6 +2012,18 @@ class QTaylorHoodElement : public virtual QElement<DIM,3>,
                                                      Shape &test, 
                                                      DShape &dtestdx) const;
 
+ /// \short Shape/test functions and derivs w.r.t. to global coords at 
+ /// integration point ipt; return Jacobian of mapping (J). Also compute
+ /// derivatives of dpsidx, dtestdx and J w.r.t. nodal coordinates.
+ inline double dshape_and_dtest_eulerian_at_knot_nst(
+  const unsigned &ipt, 
+  Shape &psi, 
+  DShape &dpsidx,
+  RankFourTensor<double> &d_dpsidx_dX,
+  Shape &test, 
+  DShape &dtestdx,
+  RankFourTensor<double> &d_dtestdx_dX,
+  DenseMatrix<double> &djacobian_dX) const;
 
 
  /// \short Pressure shape and test functions and their derivs 
@@ -2125,6 +2257,104 @@ template<>
   return det;
     
  }
+
+
+
+//==========================================================================
+/// 2D : 
+/// Define the shape functions (psi) and test functions (test) and
+/// their derivatives w.r.t. global coordinates (dpsidx and dtestdx)
+/// and return Jacobian of mapping (J). Additionally compute the
+/// derivatives of dpsidx, dtestdx and J w.r.t. nodal coordinates.
+///
+/// Galerkin: Test functions = shape functions
+//==========================================================================
+template<>
+inline double QTaylorHoodElement<2>::
+ dshape_and_dtest_eulerian_at_knot_nst(
+  const unsigned &ipt, Shape &psi, DShape &dpsidx,
+  RankFourTensor<double> &d_dpsidx_dX,
+  Shape &test, DShape &dtestdx,
+  RankFourTensor<double> &d_dtestdx_dX,
+  DenseMatrix<double> &djacobian_dX) const
+ {
+  // Call the geometrical shape functions and derivatives  
+  const double J = this->dshape_eulerian_at_knot(ipt,psi,dpsidx,
+                                                 djacobian_dX,
+                                                 d_dpsidx_dX);
+
+  // Loop over the test functions and derivatives and set them equal to the
+  // shape functions
+  for(unsigned i=0;i<9;i++)
+   {
+    test[i] = psi[i];
+
+    for(unsigned k=0;k<2;k++)
+     {
+      dtestdx(i,k) = dpsidx(i,k);
+
+      for(unsigned p=0;p<2;p++)
+       {
+        for(unsigned q=0;q<9;q++)
+         {
+          d_dtestdx_dX(p,q,i,k) = d_dpsidx_dX(p,q,i,k);
+         }
+       }
+     }
+   }
+
+  // Return the jacobian
+  return J;
+ }
+
+
+//==========================================================================
+/// 3D : 
+/// Define the shape functions (psi) and test functions (test) and
+/// their derivatives w.r.t. global coordinates (dpsidx and dtestdx)
+/// and return Jacobian of mapping (J). Additionally compute the
+/// derivatives of dpsidx, dtestdx and J w.r.t. nodal coordinates.
+///
+/// Galerkin: Test functions = shape functions
+//==========================================================================
+template<>
+ inline double QTaylorHoodElement<3>::
+ dshape_and_dtest_eulerian_at_knot_nst(
+  const unsigned &ipt, Shape &psi, DShape &dpsidx,
+  RankFourTensor<double> &d_dpsidx_dX,
+  Shape &test, DShape &dtestdx,
+  RankFourTensor<double> &d_dtestdx_dX,
+  DenseMatrix<double> &djacobian_dX) const
+ {
+  // Call the geometrical shape functions and derivatives  
+  const double J = this->dshape_eulerian_at_knot(ipt,psi,dpsidx,
+                                                 djacobian_dX,
+                                                 d_dpsidx_dX);
+
+  // Loop over the test functions and derivatives and set them equal to the
+  // shape functions
+  for(unsigned i=0;i<27;i++)
+   {
+    test[i] = psi[i];
+
+    for(unsigned k=0;k<3;k++)
+     {
+      dtestdx(i,k) = dpsidx(i,k);
+
+      for(unsigned p=0;p<3;p++)
+       {
+        for(unsigned q=0;q<27;q++)
+         {
+          d_dtestdx_dX(p,q,i,k) = d_dpsidx_dX(p,q,i,k);
+         }
+       }
+     }
+   }
+
+  // Return the jacobian
+  return J;
+ }
+
 
 
 //==========================================================================

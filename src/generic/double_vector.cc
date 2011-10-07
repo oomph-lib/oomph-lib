@@ -711,7 +711,9 @@ namespace oomph
     {
      std::ostringstream error_message;    
      error_message << "The distribution of this vector and the vector vec "
-                   << "must be the same";
+                   << "must be the same."
+                   << "\n\n  this: " << *this->distribution_pt()
+                   << "\n  vec:  " << *vec.distribution_pt();
      throw OomphLibError(error_message.str(),
                          "DoubleVector::dot(...)",
                          OOMPH_EXCEPTION_LOCATION);

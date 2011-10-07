@@ -428,10 +428,10 @@ inline double AxisymmetricTCrouzeixRaviartElement::
   const double J = this->dshape_eulerian_at_knot(ipt,psi,dpsidx,
                                                  djacobian_dX,d_dpsidx_dX);
   
-  //Set the test functions equatl to the shape functions
+  // Set the test functions equal to the shape functions
   test = psi;
   dtestdx = dpsidx;
-  d_dtestdx_dX= d_dpsidx_dX;
+  d_dtestdx_dX = d_dpsidx_dX;
 
   // Return the jacobian
   return J;

@@ -220,7 +220,11 @@ issues arise:
    Problem::set_initial_condition() is not quite empty -- not 
    re-setting the initial condition when performing mesh adaptations 
    during the first timestep of a time-dependent simulation seems "so 
-   wrong" that the function issues a warning message.]
+   wrong" that the function issues a warning message. Although the
+   overloading of this function is not strictly necessary if the initial
+   conditions can be represented exactly by the interpolation from the
+   coarse mesh onto the fine mesh, we consider it good practice to
+   do so, for reasons discussed in <A HREF="../../../axisym_navier_stokes/spin_up/html/index.html#good_practice_ics">another tutorial</A>.]
 .
  
 

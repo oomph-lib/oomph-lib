@@ -274,6 +274,9 @@ namespace oomph
  /// the position of the node. 
  Vector<Data*> Geom_data_pt;
  
+ // PATRICKFLAG I'VE CHANGED THIS TO PUBLIC TO GET IT TO COMPILE...
+  public:
+
  /// \short Return the number of geometric data upon which the shape
  /// of the element depends
  unsigned ngeom_data() const {return Geom_data_pt.size();}

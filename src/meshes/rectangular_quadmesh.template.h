@@ -352,6 +352,33 @@ class ElasticRectangularQuadMesh :
    // Setup boundary coordinates
    set_boundary_coordinates(origin);
   }
+
+
+ /// \short Constructor: Build mesh and copy Eulerian coords to Lagrangian
+ /// ones so that the initial configuration is the stress-free one and
+ /// assign boundary coordinates. This includes a boolean flag to specify
+ /// if the mesh is periodic in the x-direction
+ ElasticRectangularQuadMesh<ELEMENT>(const unsigned& nx,
+                                     const unsigned& ny,
+                                     const double& lx,
+                                     const double& ly,
+                                     const bool& periodic_in_x,
+                                     TimeStepper* time_stepper_pt=
+                                     &Mesh::Default_TimeStepper) :
+  RectangularQuadMesh<ELEMENT>(nx,ny,lx,ly,periodic_in_x,time_stepper_pt)
+  {   
+   
+   // No shift 
+   Vector<double> origin(2,0.0);
+   
+   /// Make the current configuration the undeformed one by
+   /// setting the nodal Lagrangian coordinates to their current
+   /// Eulerian ones
+   set_lagrangian_nodal_coordinates();
+   
+   // Setup boundary coordinates
+   set_boundary_coordinates(origin);
+  }
  
   private:
  
@@ -445,6 +472,27 @@ public RefineableQuadMesh<ELEMENT>
   ElasticRectangularQuadMesh<ELEMENT>(nx,ny,lx,ly,time_stepper_pt)
   
   {
+   // Nodal positions etc. were created in base class.
+   // Only need to setup quadtree forest
+   this->setup_quadtree_forest();
+  }
+
+
+ /// \short Constructor: Build mesh and copy Eulerian coords to Lagrangian
+ /// ones so that the initial configuration is the stress-free one and
+ /// assign boundary coordinates. This includes a boolean flag to specify
+ /// if the mesh is periodic in the x-direction
+ ElasticRefineableRectangularQuadMesh<ELEMENT>(const unsigned& nx,
+                                               const unsigned& ny,
+                                               const double& lx,
+                                               const double& ly,
+                                               const bool& periodic_in_x,
+                                               TimeStepper* time_stepper_pt=
+                                               &Mesh::Default_TimeStepper) :
+  RectangularQuadMesh<ELEMENT>(nx,ny,lx,ly,periodic_in_x,time_stepper_pt),
+  ElasticRectangularQuadMesh<ELEMENT>(nx,ny,lx,ly,periodic_in_x,
+                                      time_stepper_pt)
+  {   
    // Nodal positions etc. were created in base class.
    // Only need to setup quadtree forest
    this->setup_quadtree_forest();

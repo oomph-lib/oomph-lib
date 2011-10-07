@@ -312,7 +312,7 @@ namespace oomph
      }
     else if (Method_for_shape_derivs==Shape_derivs_by_chain_rule)
      {
-    method=1;
+      method=1;
      }
     else if (Method_for_shape_derivs==Shape_derivs_by_fastest_method)
      {

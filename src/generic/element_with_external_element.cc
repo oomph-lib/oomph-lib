@@ -551,6 +551,7 @@ assign_external_interaction_data_local_eqn_numbers()
   //Locally cache the number of data
   const unsigned n_external_interaction_field_data = 
    nexternal_interaction_field_data();
+
   //If there is no such data return
   if(n_external_interaction_field_data==0) {return;}
 

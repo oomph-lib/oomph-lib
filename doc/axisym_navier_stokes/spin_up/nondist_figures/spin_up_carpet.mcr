@@ -1,1603 +1,641 @@
-#!MC 1000
+#!MC 1200
+# Created by Tecplot 360 build 12.0.0.3454
 
-$!VARSET |PNG|=0
+$!VARSET |stem_of_input_file| = "soln"
+$!VARSET |nstep| = 100
+$!VARSET |first_soln_number| = 0
+$!VARSET |soln_skip| = 1 # (1==do every solution)
 
+###############################################################
+######################## START OF LOOP ########################
+###############################################################
 
-#$!GETUSERINPUT |lostep| INSTRUCTIONS = "Loop. First Step??"
-$!VARSET  |lostep|=0
-#$!GETUSERINPUT |dlstep| INSTRUCTIONS = "Loop. Step Increment?"
-$!VARSET  |dlstep|=1
-$!GETUSERINPUT |nstep| INSTRUCTIONS = "Loop. Number of Steps??"
-#$!VARSET |nstep| = 101
-
+## Start of loop with |nstep| steps
 $!LOOP |nstep|
-$!VarSet |nnstep| = |LOOP|
-$!VarSet |nnstep| -= 1
-$!VarSet |iistep| = |dlstep|
-$!VarSet |iistep| *= |nnstep|
-$!VarSet |iistep| += |lostep|
-$!NEWLAYOUT
-$!DRAWGRAPHICS FALSE
-#    $!IF |iistep| < 10 
-#      $!VARSET |istep|='00|iistep|'
-#    $!ENDIF
-#    $!IF |iistep| > 9 
-#      $!VARSET |istep|='0|iistep|'
-#    $!ENDIF
-#    $!IF |iistep| > 99 
-#      $!VARSET |istep|=|iistep|
-#    $!ENDIF
-$!VARSET |istep|=|iistep|
-#$!VARSET |istep|+=1
-#$!VARSET |istep|*=10
 
-$!DRAWGRAPHICS FALSE
+## Set the loop counter
+$!VARSET |soln_counter| = ( |first_soln_number| + ((|LOOP| - 1)*|soln_skip|) )
 
+## Compute the counter used in the output (png) file (pad with zeros)
+$!VARSET |output_counter| = "|soln_counter|"
+$!IF |soln_counter| < 10000
+$!VARSET |output_counter| = "0|soln_counter|"
+$!ENDIF
+$!IF |soln_counter| < 1000
+$!VARSET |output_counter| = "00|soln_counter|"
+$!ENDIF
+$!IF |soln_counter| < 100
+$!VARSET |output_counter| = "000|soln_counter|"
+$!ENDIF
+$!IF |soln_counter| < 10
+$!VARSET |output_counter| = "0000|soln_counter|"
+$!ENDIF
 
-$!VarSet |LFDSFN1| = '"soln|istep|.dat"'
-$!VarSet |LFDSVL1| = '"V1" "V2" "V3" "V4" "V5" "V6"'
-$!SETSTYLEBASE FACTORY
-$!PAPER 
-  BACKGROUNDCOLOR = WHITE
-  ISTRANSPARENT = YES
-  ORIENTPORTRAIT = NO
-  SHOWGRID = YES
-  SHOWRULER = YES
-  SHOWPAPER = YES
-  PAPERSIZE = A4
-  PAPERSIZEINFO
-    {
-    A3
-      {
-      WIDTH = 11.693
-      HEIGHT = 16.535
-      }
-    A4
-      {
-      WIDTH = 8.2677
-      HEIGHT = 11.693
-      LEFTHARDCLIPOFFSET = 0.125
-      RIGHTHARDCLIPOFFSET = 0.125
-      TOPHARDCLIPOFFSET = 0.125
-      BOTTOMHARDCLIPOFFSET = 0.125
-      }
-    }
-  RULERSPACING = ONECENTIMETER
-  PAPERGRIDSPACING = ONETENTHCENTIMETER
-  REGIONINWORKAREA
-    {
-    X1 = -0.05
-    Y1 = -0.05
-    X2 = 11.74
-    Y2 = 8.318
-    }
-$!COLORMAP 
-  CONTOURCOLORMAP = SMRAINBOW
-$!COLORMAPCONTROL RESETTOFACTORY
-### Frame Number 1 ###
-$!READDATASET  '|LFDSFN1|' 
-  INITIALPLOTTYPE = CARTESIAN3D
+## Set up Export file type and file name.
+$!EXPORTSETUP EXPORTFORMAT = PNG
+$!EXPORTSETUP EXPORTFNAME = "spin_up_carpet|output_counter|.png"
+$!EXPORTSETUP IMAGEWIDTH = 600
+$!EXPORTSETUP USESUPERSAMPLEANTIALIASING = YES
+$!EXPORTSETUP SUPERSAMPLEFACTOR = 4
+
+#-------------------------------------------------------------#
+#-------------------------- FRAME 1 --------------------------#
+#-------------------------------------------------------------#
+
+## Change size/position of frame that gets created by default
+$!FRAMELAYOUT XYPOS{X = 0.0}
+$!FRAMELAYOUT XYPOS{Y = 0.0}
+$!FRAMELAYOUT WIDTH = 5.0
+$!FRAMELAYOUT HEIGHT = 4.6
+$!FRAMELAYOUT SHOWBORDER = NO
+
+###############################################################
+########## START OF MACRO FILE GENERATED GRAPHICALLY ##########
+######################## (WITH TWEAKS) ########################
+###############################################################
+
+## Read in data file
+$!READDATASET  '"|stem_of_input_file||soln_counter|.dat" '
+  READDATAOPTION = NEW
+  RESETSTYLE = YES
   INCLUDETEXT = NO
   INCLUDEGEOM = NO
+  INCLUDECUSTOMLABELS = NO
   VARLOADMODE = BYNAME
-  VARNAMELIST = '|LFDSVL1|' 
+  ASSIGNSTRANDIDS = YES
+  INITIALPLOTTYPE = CARTESIAN3D
+  VARNAMELIST = '"V1" "V2" "V3" "V4" "V5" "V6"'
 
-$!VARSET |ZONES| = |NUMZONES|
-$!VARSET |ZONES| -= 2
-$!VARSET |EXTRA| = |ZONES|
-$!VARSET |EXTRA| += 1
+## Read in data file
+$!READDATASET  '"max_min.dat" '
+  READDATAOPTION = APPEND
+  RESETSTYLE = YES
+  INCLUDETEXT = NO
+  INCLUDEGEOM = NO
+  INCLUDECUSTOMLABELS = NO
+  VARLOADMODE = BYNAME
+  ASSIGNSTRANDIDS = YES
+  INITIALPLOTTYPE = CARTESIAN3D
+  VARNAMELIST = '"V1" "V2" "V3" "V4" "V5" "V6"'
 
-$!RENAMEDATASETVAR 
+## Rename variables
+$!RENAMEDATASETVAR
   VAR = 1
   NAME = 'r' 
 $!RENAMEDATASETVAR 
   VAR = 2
   NAME = 'z' 
-$!RENAMEDATASETVAR 
-  VAR = 3
-  NAME = 'u(r,z,t)' 
-$!RENAMEDATASETVAR 
-  VAR = 4
-  NAME = 'w(r,z,t)' 
-$!RENAMEDATASETVAR 
-  VAR = 5
-  NAME = 'v(r,z,t)' 
-$!RENAMEDATASETVAR 
-  VAR = 6
-  NAME = 'p(r,z,t)' 
-$!FRAMELAYOUT 
-  SHOWBORDER = NO
-  SHOWHEADER = NO
-  HEADERCOLOR = RED
-  XYPOS
-    {
-    X = 0.13919
-    Y = 0.21438
-    }
-  WIDTH = 5.7112
-  HEIGHT = 3.9132
-$!PLOTTYPE  = CARTESIAN3D
-$!FRAMENAME  = 'Frame 001' 
+
+## Make all zones (including dummy zones) active for plotting
 $!ACTIVEFIELDZONES  =  [1-|NUMZONES|]
-$!GLOBALRGB 
-  RANGEMIN = 0
-  RANGEMAX = 1
-$!GLOBALCONTOUR  1
-  LEGEND
-    {
-    XYPOS
-      {
-      X = 95
-      }
-    }
-  COLORMAPFILTER
-    {
-    CONTINUOUSCOLOR
-      {
-      CMIN = 0
-      CMAX = 1
-      }
-    }
-$!GLOBALCONTOUR  2
-  LEGEND
-    {
-    XYPOS
-      {
-      X = 95
-      }
-    }
-  COLORMAPFILTER
-    {
-    CONTINUOUSCOLOR
-      {
-      CMIN = 0
-      CMAX = 1
-      }
-    }
-$!GLOBALCONTOUR  3
-  LEGEND
-    {
-    XYPOS
-      {
-      X = 95
-      }
-    }
-  COLORMAPFILTER
-    {
-    CONTINUOUSCOLOR
-      {
-      CMIN = 0
-      CMAX = 1
-      }
-    }
-$!GLOBALCONTOUR  4
-  LEGEND
-    {
-    XYPOS
-      {
-      X = 95
-      }
-    }
-  COLORMAPFILTER
-    {
-    CONTINUOUSCOLOR
-      {
-      CMIN = 0
-      CMAX = 1
-      }
-    }
-$!GLOBALSCATTER 
-  LEGEND
-    {
-    XYPOS
-      {
-      X = 95
-      }
-    }
-  REFSCATSYMBOL
-    {
-    COLOR = RED
-    FILLCOLOR = RED
-    }
-$!FIELD  [1-|ZONES|]
-  MESH
-    {
-    COLOR = RED
-    }
-  CONTOUR
-    {
-    CONTOURTYPE = FLOOD
-    COLOR = RED
-    USELIGHTINGEFFECT = YES
-    }
-  VECTOR
-    {
-    COLOR = RED
-    }
-  SCATTER
-    {
-    COLOR = RED
-    }
-  SHADE
-    {
-    COLOR = WHITE
-    }
-  BOUNDARY
-    {
-    SHOW = YES
-    COLOR = BLACK
-    LINETHICKNESS = 0.02
-    }
-  POINTS
-    {
-    POINTSTOPLOT = SURFACENODES
-    }
-  SURFACES
-    {
-    SURFACESTOPLOT = KPLANES
-    }
-  VOLUMEMODE
-    {
-    VOLUMEOBJECTSTOPLOT
-      {
-      SHOWISOSURFACES = NO
-      SHOWSLICES = NO
-      SHOWSTREAMTRACES = NO
-      }
-    }
 
+## Choose which field to display on the z-axis
+$!THREEDAXIS ZDETAIL{VARNUM = 3}
 
+## Set axes to be independent and reset to variable min/max
+$!THREEDAXIS AXISMODE = INDEPENDENT
+$!VIEW AXISFIT
+  AXIS = 'X'
+  AXISNUM = 1
+$!VIEW AXISFIT
+  AXIS = 'Y'
+  AXISNUM = 1
+$!VIEW AXISFIT
+  AXIS = 'Z'
+  AXISNUM = 1
 
+## Set 3D axis preferences
+$!THREEDAXIS XDETAIL{SHOWAXIS = YES}
+$!THREEDAXIS YDETAIL{SHOWAXIS = YES}
+$!THREEDAXIS ZDETAIL{SHOWAXIS = YES}
+$!THREEDAXIS XDETAIL{GRIDLINES{SHOW = NO}}
+$!THREEDAXIS YDETAIL{GRIDLINES{SHOW = NO}}
+$!THREEDAXIS ZDETAIL{GRIDLINES{SHOW = NO}}
+$!THREEDAXIS GRIDAREA{USELIGHTSOURCETOFILL = NO}
+$!THREEDAXIS XDETAIL{TITLE{OFFSET = 12}}
+$!THREEDAXIS XDETAIL{TITLE{TEXTSHAPE{SIZEUNITS = POINT}}}
+$!THREEDAXIS XDETAIL{TITLE{TEXTSHAPE{HEIGHT = 14}}}
+$!THREEDAXIS YDETAIL{TITLE{TEXTSHAPE{SIZEUNITS = POINT}}}
+$!THREEDAXIS YDETAIL{TITLE{TEXTSHAPE{HEIGHT = 14}}}
+$!THREEDAXIS ZDETAIL{TITLE{SHOWONAXISLINE = NO}}
+$!THREEDAXIS XDETAIL{TICKLABEL{TEXTSHAPE{SIZEUNITS = POINT}}}
+$!THREEDAXIS XDETAIL{TICKLABEL{TEXTSHAPE{HEIGHT = 10}}}
+$!THREEDAXIS YDETAIL{TICKLABEL{TEXTSHAPE{SIZEUNITS = POINT}}}
+$!THREEDAXIS YDETAIL{TICKLABEL{TEXTSHAPE{HEIGHT = 10}}}
+$!THREEDAXIS ZDETAIL{TICKLABEL{TEXTSHAPE{SIZEUNITS = POINT}}}
+$!THREEDAXIS ZDETAIL{TICKLABEL{TEXTSHAPE{HEIGHT = 10}}}
+$!THREEDAXIS XDETAIL{AUTOGRID = NO}
+$!THREEDAXIS XDETAIL{GRSPACING = 0.5}
+$!THREEDAXIS YDETAIL{AUTOGRID = NO}
+$!THREEDAXIS YDETAIL{GRSPACING = 0.2}
+$!THREEDAXIS ZDETAIL{AUTOGRID = NO}
+$!THREEDAXIS ZDETAIL{GRSPACING = 0.005}
+$!THREEDAXIS XDETAIL{AXISLINE{LINETHICKNESS = 0.1}}
+$!THREEDAXIS YDETAIL{AXISLINE{LINETHICKNESS = 0.1}}
+$!THREEDAXIS ZDETAIL{AXISLINE{LINETHICKNESS = 0.1}}
 
-$!FIELD  [|EXTRA|-|NUMZONES|]
-  MESH
-    {
-    COLOR = RED
-    }
-  CONTOUR
-    {
-    CONTOURTYPE = FLOOD
-    COLOR = RED
-    USELIGHTINGEFFECT = YES
-    }
-  VECTOR
-    {
-    COLOR = RED
-    }
-  SCATTER
-    {
-    COLOR = RED
-    }
-  SHADE
-    {
-    SHOW = NO
-    COLOR = WHITE
-    }
-  BOUNDARY
-    {
-    SHOW = NO
-    COLOR = BLACK
-    LINETHICKNESS = 0.02
-    }
-  POINTS
-    {
-    POINTSTOPLOT = SURFACENODES
-    }
-  SURFACES
-    {
-    SURFACESTOPLOT = KPLANES
-    }
-  VOLUMEMODE
-    {
-    VOLUMEOBJECTSTOPLOT
-      {
-      SHOWISOSURFACES = NO
-      SHOWSLICES = NO
-      SHOWSTREAMTRACES = NO
-      }
-    }
-  GROUP = 2
+## Set 3D view
+$!ROTATE3DVIEW PSI
+  ANGLE = 10
+  ROTATEORIGINLOCATION = DEFINEDORIGIN
+$!ROTATE3DVIEW THETA
+  ANGLE = 10
+  ROTATEORIGINLOCATION = DEFINEDORIGIN
 
-$!THREEDAXIS 
-  XDETAIL
+## Change the axis scale factor
+## (to make the four plots roughly the same dimensions)
+$!GLOBALTHREED AXISSCALEFACT{Z = 70.0}
+
+## Change edge layer properties for all zones
+$!FIELDMAP [1-|NUMZONES|]  EDGELAYER{LINETHICKNESS = 0.0875}
+
+## Remove orientation axis (in top-right corner)
+$!THREEDAXIS FRAMEAXIS{SHOW = NO}
+
+## Add title text
+$!ATTACHTEXT 
+  ANCHORPOS
     {
-    VARNUM = 1
+    X = 0.0
+    Y = 94.0
     }
-  YDETAIL
+  COLOR = PURPLE
+  TEXTSHAPE
     {
-    VARNUM = 2
+    FONT = HELV
+    HEIGHT = 16
     }
-  ZDETAIL
-    {
-    VARNUM = 3
-    }
+  TEXT = 'radial velocity' 
+
+## Fit to everything
 $!VIEW FIT
-$!THREEDAXIS 
-  AXISMODE = XYDEPENDENT
-  XYDEPXTOYRATIO = 1
-  DEPXTOYRATIO = 1
-  DEPXTOZRATIO = 0.0207407421021
-$!THREEDAXIS 
-  XDETAIL
-    {
-    RANGEMIN = -0.10499999839812516889
-    RANGEMAX = 1.1049999499693512472
-    GRSPACING = 0.2
-    AXISLINE
-      {
-      EDGE = 2
-      }
-    }
-$!THREEDAXIS 
-  YDETAIL
-    {
-    RANGEMIN = -0.11749999839812517999
-    RANGEMAX = 1.3674999499693512028
-    GRSPACING = 0.2
-    AXISLINE
-      {
-      EDGE = 3
-      }
-    }
-$!THREEDAXIS 
-  ZDETAIL
-    {
-    RANGEMIN = -0.0077000002376735208684
-    RANGEMAX = 0.0077000002376735208684
-    GRSPACING = 0.005
-    AXISLINE
-      {
-      EDGE = 2
-      }
-    }
-$!GLOBALISOSURFACE 
-  MARCHINGCUBEALGORITHM = CLASSICPLUS
-$!GLOBALSLICE 
-  BOUNDARY
-    {
-    SHOW = NO
-    }
-$!GLOBALTHREED 
-  AXISSCALEFACT
-    {
-    X = 1
-    Y = 1
-    Z = 48.2142825497
-    }
-  ROTATEORIGIN
-    {
-    X = 0.499999975786
-    Y = 0.624999975786
-    Z = 0
-    }
-  LIGHTSOURCE
-    {
-    INTENSITY = 75
-    BACKGROUNDLIGHT = 30
-    }
-  LINELIFTFRACTION = 0.2
-  SYMBOLLIFTFRACTION = 0.6
-  VECTORLIFTFRACTION = 0.7
-$!THREEDVIEW 
-  PSIANGLE = 82.8049
-  THETAANGLE = 239.756
-  VIEWERPOSITION
-    {
-    X = 11.0903179555
-    Y = 6.79957775824
-    Z = 0.0320982278157
-    }
-  VIEWWIDTH = 2.08156
-$!FIELDLAYERS 
-  SHOWMESH = NO
-  SHOWSHADE = YES
-  SHOWBOUNDARY = YES
-### Frame Number 2 ###
-$!CREATENEWFRAME 
-$!FRAMELAYOUT 
-  SHOWBORDER = NO
-  SHOWHEADER = NO
-  HEADERCOLOR = RED
+
+## Reduce size slightly to fit axis labels on
+$!VIEW SETMAGNIFICATION
+  MAGNIFICATION = 0.92
+
+###############################################################
+########### END OF MACRO FILE GENERATED GRAPHICALLY ###########
+###############################################################
+
+#-------------------------------------------------------------#
+#---------------------- END OF FRAME 1 -----------------------#
+#-------------------------------------------------------------#
+
+#-------------------------------------------------------------#
+#-------------------------- FRAME 2 --------------------------#
+#-------------------------------------------------------------#
+
+## Create a new frame
+$!CREATENEWFRAME
   XYPOS
-    {
-    X = 5.8568
-    Y = 0.2284
-    }
-  WIDTH = 5.7112
-  HEIGHT = 3.9132
-$!PLOTTYPE  = CARTESIAN3D
-$!FRAMENAME  = 'Frame 001' 
-$!ACTIVEFIELDZONES  =  [1-|NUMZONES|]
-$!GLOBALRGB 
-  RANGEMIN = 0
-  RANGEMAX = 1
-$!GLOBALCONTOUR  1
-  LEGEND
-    {
-    XYPOS
-      {
-      X = 95
-      }
-    }
-  COLORMAPFILTER
-    {
-    CONTINUOUSCOLOR
-      {
-      CMIN = 0
-      CMAX = 1
-      }
-    }
-$!GLOBALCONTOUR  2
-  LEGEND
-    {
-    XYPOS
-      {
-      X = 95
-      }
-    }
-  COLORMAPFILTER
-    {
-    CONTINUOUSCOLOR
-      {
-      CMIN = 0
-      CMAX = 1
-      }
-    }
-$!GLOBALCONTOUR  3
-  LEGEND
-    {
-    XYPOS
-      {
-      X = 95
-      }
-    }
-  COLORMAPFILTER
-    {
-    CONTINUOUSCOLOR
-      {
-      CMIN = 0
-      CMAX = 1
-      }
-    }
-$!GLOBALCONTOUR  4
-  LEGEND
-    {
-    XYPOS
-      {
-      X = 95
-      }
-    }
-  COLORMAPFILTER
-    {
-    CONTINUOUSCOLOR
-      {
-      CMIN = 0
-      CMAX = 1
-      }
-    }
-$!GLOBALSCATTER 
-  LEGEND
-    {
-    XYPOS
-      {
-      X = 95
-      }
-    }
-  REFSCATSYMBOL
-    {
-    COLOR = RED
-    FILLCOLOR = RED
-    }
-$!FIELD  [1-|ZONES|]
-  MESH
-    {
-    COLOR = RED
-    }
-  CONTOUR
-    {
-    CONTOURTYPE = FLOOD
-    COLOR = RED
-    USELIGHTINGEFFECT = YES
-    }
-  VECTOR
-    {
-    COLOR = RED
-    }
-  SCATTER
-    {
-    COLOR = RED
-    }
-  SHADE
-    {
-    COLOR = WHITE
-    }
-  BOUNDARY
-    {
-    SHOW = YES
-    COLOR = BLACK
-    LINETHICKNESS = 0.02
-    }
-  POINTS
-    {
-    POINTSTOPLOT = SURFACENODES
-    }
-  SURFACES
-    {
-    SURFACESTOPLOT = KPLANES
-    }
-  VOLUMEMODE
-    {
-    VOLUMEOBJECTSTOPLOT
-      {
-      SHOWISOSURFACES = NO
-      SHOWSLICES = NO
-      SHOWSTREAMTRACES = NO
-      }
-    }
+   {
+    X = 5.0
+    Y = 0.0
+   }
+   WIDTH = 5.0
+   HEIGHT = 4.6
+$!FRAMELAYOUT SHOWBORDER = NO
 
+###############################################################
+########## START OF MACRO FILE GENERATED GRAPHICALLY ##########
+######################## (WITH TWEAKS) ########################
+###############################################################
 
-
-
-$!FIELD  [|EXTRA|-|NUMZONES|]
-  MESH
-    {
-    COLOR = RED
-    }
-  CONTOUR
-    {
-    CONTOURTYPE = FLOOD
-    COLOR = RED
-    USELIGHTINGEFFECT = YES
-    }
-  VECTOR
-    {
-    COLOR = RED
-    }
-  SCATTER
-    {
-    COLOR = RED
-    }
-  SHADE
-    {
-    SHOW = NO
-    COLOR = WHITE
-    }
-  BOUNDARY
-    {
-    SHOW = NO
-    COLOR = BLACK
-    LINETHICKNESS = 0.02
-    }
-  POINTS
-    {
-    POINTSTOPLOT = SURFACENODES
-    }
-  SURFACES
-    {
-    SURFACESTOPLOT = KPLANES
-    }
-  VOLUMEMODE
-    {
-    VOLUMEOBJECTSTOPLOT
-      {
-      SHOWISOSURFACES = NO
-      SHOWSLICES = NO
-      SHOWSTREAMTRACES = NO
-      }
-    }
-  GROUP = 2
-
-
-
-
-
-$!THREEDAXIS 
-  XDETAIL
-    {
-    VARNUM = 1
-    }
-  YDETAIL
-    {
-    VARNUM = 2
-    }
-  ZDETAIL
-    {
-    VARNUM = 4
-    }
-$!VIEW FIT
-$!THREEDAXIS 
-  AXISMODE = XYDEPENDENT
-  XYDEPXTOYRATIO = 1
-  DEPXTOYRATIO = 1
-  DEPXTOZRATIO = 0.0207407421021
-$!THREEDAXIS 
-  XDETAIL
-    {
-    RANGEMIN = -0.10499999839812516889
-    RANGEMAX = 1.1049999499693512472
-    GRSPACING = 0.2
-    AXISLINE
-      {
-      EDGE = 2
-      }
-    }
-$!THREEDAXIS 
-  YDETAIL
-    {
-    RANGEMIN = -0.11749999839812517999
-    RANGEMAX = 1.3674999499693512028
-    GRSPACING = 0.2
-    AXISLINE
-      {
-      EDGE = 3
-      }
-    }
-$!THREEDAXIS 
-  ZDETAIL
-    {
-    RANGEMIN = -0.0077000002376735208684
-    RANGEMAX = 0.0077000002376735208684
-    GRSPACING = 0.005
-    AXISLINE
-      {
-      EDGE = 2
-      }
-    }
-$!GLOBALISOSURFACE 
-  MARCHINGCUBEALGORITHM = CLASSICPLUS
-$!GLOBALSLICE 
-  BOUNDARY
-    {
-    SHOW = NO
-    }
-$!GLOBALTHREED 
-  AXISSCALEFACT
-    {
-    X = 1
-    Y = 1
-    Z = 48.2142825497
-    }
-  ROTATEORIGIN
-    {
-    X = 0.499999975786
-    Y = 0.624999975786
-    Z = 0
-    }
-  LIGHTSOURCE
-    {
-    INTENSITY = 75
-    BACKGROUNDLIGHT = 30
-    }
-  LINELIFTFRACTION = 0.2
-  SYMBOLLIFTFRACTION = 0.6
-  VECTORLIFTFRACTION = 0.7
-$!THREEDVIEW 
-  PSIANGLE = 82.8049
-  THETAANGLE = 239.756
-  VIEWERPOSITION
-    {
-    X = 11.0903179555
-    Y = 6.79957775824
-    Z = 0.0320982278157
-    }
-  VIEWWIDTH = 2.08156
-$!FIELDLAYERS 
-  SHOWMESH = NO
-  SHOWSHADE = YES
-  SHOWBOUNDARY = YES
-### Frame Number 3 ###
-$!CREATENEWFRAME 
-$!FRAMELAYOUT 
-  SHOWBORDER = NO
-  SHOWHEADER = NO
-  HEADERCOLOR = RED
-  XYPOS
-    {
-    X = 0.125
-    Y = 4.1261
-    }
-  WIDTH = 5.7112
-  HEIGHT = 3.9132
-$!PLOTTYPE  = CARTESIAN3D
-$!FRAMENAME  = 'Frame 001' 
-$!ACTIVEFIELDZONES  =  [1-|NUMZONES|]
-$!GLOBALRGB 
-  RANGEMIN = 0
-  RANGEMAX = 1
-$!GLOBALCONTOUR  1
-  LEGEND
-    {
-    XYPOS
-      {
-      X = 95
-      }
-    }
-  COLORMAPFILTER
-    {
-    CONTINUOUSCOLOR
-      {
-      CMIN = 0
-      CMAX = 1
-      }
-    }
-$!GLOBALCONTOUR  2
-  LEGEND
-    {
-    XYPOS
-      {
-      X = 95
-      }
-    }
-  COLORMAPFILTER
-    {
-    CONTINUOUSCOLOR
-      {
-      CMIN = 0
-      CMAX = 1
-      }
-    }
-$!GLOBALCONTOUR  3
-  LEGEND
-    {
-    XYPOS
-      {
-      X = 95
-      }
-    }
-  COLORMAPFILTER
-    {
-    CONTINUOUSCOLOR
-      {
-      CMIN = 0
-      CMAX = 1
-      }
-    }
-$!GLOBALCONTOUR  4
-  LEGEND
-    {
-    XYPOS
-      {
-      X = 95
-      }
-    }
-  COLORMAPFILTER
-    {
-    CONTINUOUSCOLOR
-      {
-      CMIN = 0
-      CMAX = 1
-      }
-    }
-$!GLOBALSCATTER 
-  LEGEND
-    {
-    XYPOS
-      {
-      X = 95
-      }
-    }
-  REFSCATSYMBOL
-    {
-    COLOR = RED
-    FILLCOLOR = RED
-    }
-$!FIELD  [1-|ZONES|]
-  MESH
-    {
-    COLOR = RED
-    }
-  CONTOUR
-    {
-    CONTOURTYPE = FLOOD
-    COLOR = RED
-    USELIGHTINGEFFECT = YES
-    }
-  VECTOR
-    {
-    COLOR = RED
-    }
-  SCATTER
-    {
-    COLOR = RED
-    }
-  SHADE
-    {
-    COLOR = WHITE
-    }
-  BOUNDARY
-    {
-    SHOW = YES
-    COLOR = BLACK
-    LINETHICKNESS = 0.02
-    }
-  POINTS
-    {
-    POINTSTOPLOT = SURFACENODES
-    }
-  SURFACES
-    {
-    SURFACESTOPLOT = KPLANES
-    }
-  VOLUMEMODE
-    {
-    VOLUMEOBJECTSTOPLOT
-      {
-      SHOWISOSURFACES = NO
-      SHOWSLICES = NO
-      SHOWSTREAMTRACES = NO
-      }
-    }
-
-
-
-
-$!FIELD  [|EXTRA|-|NUMZONES|]
-  MESH
-    {
-    COLOR = RED
-    }
-  CONTOUR
-    {
-    CONTOURTYPE = FLOOD
-    COLOR = RED
-    USELIGHTINGEFFECT = YES
-    }
-  VECTOR
-    {
-    COLOR = RED
-    }
-  SCATTER
-    {
-    COLOR = RED
-    }
-  SHADE
-    {
-    SHOW = NO
-    COLOR = WHITE
-    }
-  BOUNDARY
-    {
-    SHOW = NO
-    COLOR = BLACK
-    LINETHICKNESS = 0.02
-    }
-  POINTS
-    {
-    POINTSTOPLOT = SURFACENODES
-    }
-  SURFACES
-    {
-    SURFACESTOPLOT = KPLANES
-    }
-  VOLUMEMODE
-    {
-    VOLUMEOBJECTSTOPLOT
-      {
-      SHOWISOSURFACES = NO
-      SHOWSLICES = NO
-      SHOWSTREAMTRACES = NO
-      }
-    }
-  GROUP = 2
-
-
-$!THREEDAXIS 
-  XDETAIL
-    {
-    VARNUM = 1
-    }
-  YDETAIL
-    {
-    VARNUM = 2
-    }
-  ZDETAIL
-    {
-    VARNUM = 5
-    }
-$!VIEW FIT
-$!THREEDAXIS 
-  AXISMODE = XYZDEPENDENT
-  XYDEPXTOYRATIO = 1
-  DEPXTOYRATIO = 1
-  DEPXTOZRATIO = 1
-$!THREEDAXIS 
-  XDETAIL
-    {
-    RANGEMIN = -0.10499999839812516889
-    RANGEMAX = 1.1049999499693512472
-    GRSPACING = 0.5
-    AXISLINE
-      {
-      EDGE = 2
-      }
-    }
-$!THREEDAXIS 
-  YDETAIL
-    {
-    RANGEMIN = -0.11749999839812517999
-    RANGEMAX = 1.3674999499693512028
-    GRSPACING = 0.2
-    AXISLINE
-      {
-      EDGE = 1
-      }
-    }
-$!THREEDAXIS 
-  ZDETAIL
-    {
-    RANGEMIN = -0.10499999839812518276
-    RANGEMAX = 1.1049999499693512472
-    GRSPACING = 0.2
-    AXISLINE
-      {
-      EDGE = 1
-      }
-    }
-$!GLOBALISOSURFACE 
-  MARCHINGCUBEALGORITHM = CLASSICPLUS
-$!GLOBALSLICE 
-  BOUNDARY
-    {
-    SHOW = NO
-    }
-$!GLOBALTHREED 
-  AXISSCALEFACT
-    {
-    X = 1
-    Y = 1
-    Z = 1
-    }
-  ROTATEORIGIN
-    {
-    X = 0.499999975786
-    Y = 0.624999975786
-    Z = 0.499999975786
-    }
-  LIGHTSOURCE
-    {
-    INTENSITY = 75
-    BACKGROUNDLIGHT = 30
-    }
-  LINELIFTFRACTION = 0.2
-  SYMBOLLIFTFRACTION = 0.6
-  VECTORLIFTFRACTION = 0.7
-$!THREEDVIEW 
-  PSIANGLE = 75.2033
-  THETAANGLE = 126.138
-  VIEWERPOSITION
-    {
-    X = -10.3247779537
-    Y = 8.52968632613
-    Z = 4.04060042355
-    }
-  VIEWWIDTH = 2.63786
-$!FIELDLAYERS 
-  SHOWMESH = NO
-  SHOWSHADE = YES
-  SHOWBOUNDARY = YES
-### Frame Number 4 ###
-$!CREATENEWFRAME 
-$!FRAMELAYOUT 
-  SHOWBORDER = NO
-  SHOWHEADER = NO
-  HEADERCOLOR = RED
-  XYPOS
-    {
-    X = 5.8426
-    Y = 4.1401
-    }
-  WIDTH = 5.7112
-  HEIGHT = 3.9132
-$!PLOTTYPE  = CARTESIAN3D
-$!FRAMENAME  = 'Frame 001' 
-$!ACTIVEFIELDZONES  =  [1-|NUMZONES|]
-$!GLOBALRGB 
-  RANGEMIN = 0
-  RANGEMAX = 1
-$!GLOBALCONTOUR  1
-  LEGEND
-    {
-    XYPOS
-      {
-      X = 95
-      }
-    }
-  COLORMAPFILTER
-    {
-    CONTINUOUSCOLOR
-      {
-      CMIN = 0
-      CMAX = 1
-      }
-    }
-$!GLOBALCONTOUR  2
-  LEGEND
-    {
-    XYPOS
-      {
-      X = 95
-      }
-    }
-  COLORMAPFILTER
-    {
-    CONTINUOUSCOLOR
-      {
-      CMIN = 0
-      CMAX = 1
-      }
-    }
-$!GLOBALCONTOUR  3
-  LEGEND
-    {
-    XYPOS
-      {
-      X = 95
-      }
-    }
-  COLORMAPFILTER
-    {
-    CONTINUOUSCOLOR
-      {
-      CMIN = 0
-      CMAX = 1
-      }
-    }
-$!GLOBALCONTOUR  4
-  LEGEND
-    {
-    XYPOS
-      {
-      X = 95
-      }
-    }
-  COLORMAPFILTER
-    {
-    CONTINUOUSCOLOR
-      {
-      CMIN = 0
-      CMAX = 1
-      }
-    }
-$!GLOBALSCATTER 
-  LEGEND
-    {
-    XYPOS
-      {
-      X = 95
-      }
-    }
-  REFSCATSYMBOL
-    {
-    COLOR = RED
-    FILLCOLOR = RED
-    }
-$!FIELD  [1-|ZONES|]
-  MESH
-    {
-    COLOR = RED
-    }
-  CONTOUR
-    {
-    CONTOURTYPE = FLOOD
-    COLOR = RED
-    USELIGHTINGEFFECT = YES
-    }
-  VECTOR
-    {
-    COLOR = RED
-    }
-  SCATTER
-    {
-    COLOR = RED
-    }
-  SHADE
-    {
-    COLOR = WHITE
-    }
-  BOUNDARY
-    {
-    SHOW = YES
-    COLOR = BLACK
-    LINETHICKNESS = 0.02
-    }
-  POINTS
-    {
-    POINTSTOPLOT = SURFACENODES
-    }
-  SURFACES
-    {
-    SURFACESTOPLOT = KPLANES
-    }
-  VOLUMEMODE
-    {
-    VOLUMEOBJECTSTOPLOT
-      {
-      SHOWISOSURFACES = NO
-      SHOWSLICES = NO
-      SHOWSTREAMTRACES = NO
-      }
-    }
-
-
-
-
-$!FIELD  [|EXTRA|-|NUMZONES|]
-  MESH
-    {
-    COLOR = RED
-    }
-  CONTOUR
-    {
-    CONTOURTYPE = FLOOD
-    COLOR = RED
-    USELIGHTINGEFFECT = YES
-    }
-  VECTOR
-    {
-    COLOR = RED
-    }
-  SCATTER
-    {
-    COLOR = RED
-    }
-  SHADE
-    {
-    SHOW = NO
-    COLOR = WHITE
-    }
-  BOUNDARY
-    {
-    SHOW = NO
-    COLOR = BLACK
-    LINETHICKNESS = 0.02
-    }
-  POINTS
-    {
-    POINTSTOPLOT = SURFACENODES
-    }
-  SURFACES
-    {
-    SURFACESTOPLOT = KPLANES
-    }
-  VOLUMEMODE
-    {
-    VOLUMEOBJECTSTOPLOT
-      {
-      SHOWISOSURFACES = NO
-      SHOWSLICES = NO
-      SHOWSTREAMTRACES = NO
-      }
-    }
-  GROUP = 2
-
-
-
-
-$!THREEDAXIS 
-  XDETAIL
-    {
-    VARNUM = 1
-    }
-  YDETAIL
-    {
-    VARNUM = 2
-    }
-  ZDETAIL
-    {
-    VARNUM = 6
-    }
-$!VIEW FIT
-$!THREEDAXIS 
-  AXISMODE = XYDEPENDENT
-  XYDEPXTOYRATIO = 1
-  DEPXTOYRATIO = 1
-  DEPXTOZRATIO = 1
-$!THREEDAXIS 
-  XDETAIL
-    {
-    RANGEMIN = -0.10499999839812516889
-    RANGEMAX = 1.1049999499693512472
-    GRSPACING = 0.5
-    AXISLINE
-      {
-      EDGE = 2
-      }
-    }
-$!THREEDAXIS 
-  YDETAIL
-    {
-    RANGEMIN = -0.11749999839812517999
-    RANGEMAX = 1.3674999499693512028
-    GRSPACING = 0.2
-    AXISLINE
-      {
-      EDGE = 1
-      }
-    }
-$!THREEDAXIS 
-  ZDETAIL
-    {
-    RANGEMIN = -0.17999999839812516611
-    RANGEMAX = 2.6799999499693512028
-    AUTOGRID = NO
-    GRSPACING = 0.5
-    AXISLINE
-      {
-      EDGE = 1
-      }
-    }
-$!GLOBALISOSURFACE 
-  MARCHINGCUBEALGORITHM = CLASSICPLUS
-$!GLOBALSLICE 
-  BOUNDARY
-    {
-    SHOW = NO
-    }
-$!GLOBALTHREED 
-  AXISSCALEFACT
-    {
-    X = 1
-    Y = 1
-    Z = 0.38554328943
-    }
-  ROTATEORIGIN
-    {
-    X = 0.499999975786
-    Y = 0.624999975786
-    Z = 1.24999997579
-    }
-  LIGHTSOURCE
-    {
-    INTENSITY = 75
-    BACKGROUNDLIGHT = 30
-    }
-  LINELIFTFRACTION = 0.2
-  SYMBOLLIFTFRACTION = 0.6
-  VECTORLIFTFRACTION = 0.7
-$!THREEDVIEW 
-  PSIANGLE = 75.2033
-  THETAANGLE = 126.138
-  VIEWERPOSITION
-    {
-    X = -10.1834973246
-    Y = 8.42651755275
-    Z = 10.3135475894
-    }
-  VIEWWIDTH = 2.47124
-$!FIELDLAYERS 
-  SHOWMESH = NO
-  SHOWSHADE = YES
-  SHOWBOUNDARY = YES
-### Frame Number 5 ###
-$!CREATENEWFRAME 
-$!READDATASET  '|LFDSFN1|' 
-  INITIALPLOTTYPE = CARTESIAN2D
-  INCLUDETEXT = YES
-  INCLUDEGEOM = YES
+## Read in data file
+$!READDATASET  '"|stem_of_input_file||soln_counter|.dat" '
+  READDATAOPTION = NEW
+  RESETSTYLE = YES
+  INCLUDETEXT = NO
+  INCLUDEGEOM = NO
+  INCLUDECUSTOMLABELS = NO
   VARLOADMODE = BYNAME
-  VARNAMELIST = '|LFDSVL1|' 
-$!REMOVEVAR |LFDSVL1|
-$!REMOVEVAR |LFDSFN1|
-$!FRAMELAYOUT 
-  SHOWBORDER = NO
-  SHOWHEADER = NO
-  ISTRANSPARENT = YES
-  HEADERCOLOR = GREEN
-  XYPOS
-    {
-    X = 0.12025
-    Y = 0.11009
-    }
-  WIDTH = 11.449
-  HEIGHT = 8.0338
-$!PLOTTYPE  = CARTESIAN2D
-$!FRAMENAME  = 'Frame 002' 
-$!ACTIVEFIELDZONES  =  [1]
-$!GLOBALRGB 
-  RANGEMIN = 0
-  RANGEMAX = 1
-$!GLOBALCONTOUR  1
-  LEGEND
-    {
-    XYPOS
-      {
-      X = 95
-      }
-    }
-  COLORMAPFILTER
-    {
-    CONTINUOUSCOLOR
-      {
-      CMIN = 0
-      CMAX = 1
-      }
-    }
-$!GLOBALCONTOUR  2
-  LEGEND
-    {
-    XYPOS
-      {
-      X = 95
-      }
-    }
-  COLORMAPFILTER
-    {
-    CONTINUOUSCOLOR
-      {
-      CMIN = 0
-      CMAX = 1
-      }
-    }
-$!GLOBALCONTOUR  3
-  LEGEND
-    {
-    XYPOS
-      {
-      X = 95
-      }
-    }
-  COLORMAPFILTER
-    {
-    CONTINUOUSCOLOR
-      {
-      CMIN = 0
-      CMAX = 1
-      }
-    }
-$!GLOBALCONTOUR  4
-  LEGEND
-    {
-    XYPOS
-      {
-      X = 95
-      }
-    }
-  COLORMAPFILTER
-    {
-    CONTINUOUSCOLOR
-      {
-      CMIN = 0
-      CMAX = 1
-      }
-    }
-$!GLOBALSCATTER 
-  LEGEND
-    {
-    XYPOS
-      {
-      X = 95
-      }
-    }
-  REFSCATSYMBOL
-    {
-    COLOR = RED
-    FILLCOLOR = RED
-    }
-$!FIELD  [1-|NUMZONES|]
-  MESH
-    {
-    COLOR = RED
-    }
-  CONTOUR
-    {
-    CONTOURTYPE = FLOOD
-    COLOR = RED
-    USELIGHTINGEFFECT = YES
-    }
-  VECTOR
-    {
-    COLOR = RED
-    }
-  SCATTER
-    {
-    COLOR = RED
-    }
-  SHADE
-    {
-    COLOR = WHITE
-    }
-  BOUNDARY
-    {
-    SHOW = NO
-    COLOR = RED
-    }
-  POINTS
-    {
-    POINTSTOPLOT = SURFACENODES
-    }
-  SURFACES
-    {
-    SURFACESTOPLOT = KPLANES
-    }
-  VOLUMEMODE
-    {
-    VOLUMEOBJECTSTOPLOT
-      {
-      SHOWISOSURFACES = NO
-      SHOWSLICES = NO
-      SHOWSTREAMTRACES = NO
-      }
-    }
+  ASSIGNSTRANDIDS = YES
+  INITIALPLOTTYPE = CARTESIAN3D
+  VARNAMELIST = '"V1" "V2" "V3" "V4" "V5" "V6"'
 
+## Read in data file
+$!READDATASET  '"max_min.dat" '
+  READDATAOPTION = APPEND
+  RESETSTYLE = YES
+  INCLUDETEXT = NO
+  INCLUDEGEOM = NO
+  INCLUDECUSTOMLABELS = NO
+  VARLOADMODE = BYNAME
+  ASSIGNSTRANDIDS = YES
+  INITIALPLOTTYPE = CARTESIAN3D
+  VARNAMELIST = '"V1" "V2" "V3" "V4" "V5" "V6"'
 
+## Rename variables
+$!RENAMEDATASETVAR
+  VAR = 1
+  NAME = 'r' 
+$!RENAMEDATASETVAR 
+  VAR = 2
+  NAME = 'z' 
 
-$!TWODAXIS 
-  XDETAIL
+## Make all zones (including dummy zones) active for plotting
+$!ACTIVEFIELDZONES  =  [1-|NUMZONES|]
+
+## Choose which field to display on the z-axis
+$!THREEDAXIS ZDETAIL{VARNUM = 4}
+
+## Set axes to be independent and reset to variable min/max
+$!THREEDAXIS AXISMODE = INDEPENDENT
+$!VIEW AXISFIT
+  AXIS = 'X'
+  AXISNUM = 1
+$!VIEW AXISFIT
+  AXIS = 'Y'
+  AXISNUM = 1
+$!VIEW AXISFIT
+  AXIS = 'Z'
+  AXISNUM = 1
+
+## Set 3D axis preferences
+$!THREEDAXIS XDETAIL{SHOWAXIS = YES}
+$!THREEDAXIS YDETAIL{SHOWAXIS = YES}
+$!THREEDAXIS ZDETAIL{SHOWAXIS = YES}
+$!THREEDAXIS XDETAIL{GRIDLINES{SHOW = NO}}
+$!THREEDAXIS YDETAIL{GRIDLINES{SHOW = NO}}
+$!THREEDAXIS ZDETAIL{GRIDLINES{SHOW = NO}}
+$!THREEDAXIS GRIDAREA{USELIGHTSOURCETOFILL = NO}
+$!THREEDAXIS XDETAIL{TITLE{OFFSET = 12}}
+$!THREEDAXIS XDETAIL{TITLE{TEXTSHAPE{SIZEUNITS = POINT}}}
+$!THREEDAXIS XDETAIL{TITLE{TEXTSHAPE{HEIGHT = 14}}}
+$!THREEDAXIS YDETAIL{TITLE{TEXTSHAPE{SIZEUNITS = POINT}}}
+$!THREEDAXIS YDETAIL{TITLE{TEXTSHAPE{HEIGHT = 14}}}
+$!THREEDAXIS ZDETAIL{TITLE{SHOWONAXISLINE = NO}}
+$!THREEDAXIS XDETAIL{TICKLABEL{TEXTSHAPE{SIZEUNITS = POINT}}}
+$!THREEDAXIS XDETAIL{TICKLABEL{TEXTSHAPE{HEIGHT = 10}}}
+$!THREEDAXIS YDETAIL{TICKLABEL{TEXTSHAPE{SIZEUNITS = POINT}}}
+$!THREEDAXIS YDETAIL{TICKLABEL{TEXTSHAPE{HEIGHT = 10}}}
+$!THREEDAXIS ZDETAIL{TICKLABEL{TEXTSHAPE{SIZEUNITS = POINT}}}
+$!THREEDAXIS ZDETAIL{TICKLABEL{TEXTSHAPE{HEIGHT = 10}}}
+$!THREEDAXIS XDETAIL{AUTOGRID = NO}
+$!THREEDAXIS XDETAIL{GRSPACING = 0.5}
+$!THREEDAXIS YDETAIL{AUTOGRID = NO}
+$!THREEDAXIS YDETAIL{GRSPACING = 0.2}
+$!THREEDAXIS ZDETAIL{AUTOGRID = NO}
+$!THREEDAXIS ZDETAIL{GRSPACING = 0.005}
+$!THREEDAXIS XDETAIL{AXISLINE{LINETHICKNESS = 0.1}}
+$!THREEDAXIS YDETAIL{AXISLINE{LINETHICKNESS = 0.1}}
+$!THREEDAXIS ZDETAIL{AXISLINE{LINETHICKNESS = 0.1}}
+
+## Set 3D view
+$!ROTATE3DVIEW PSI
+  ANGLE = 10
+  ROTATEORIGINLOCATION = DEFINEDORIGIN
+$!ROTATE3DVIEW THETA
+  ANGLE = 10
+  ROTATEORIGINLOCATION = DEFINEDORIGIN
+
+## Change the axis scale factor
+## (to make the four plots roughly the same dimensions)
+$!GLOBALTHREED AXISSCALEFACT{Z = 54.0}
+
+## Change edge layer properties for all zones
+$!FIELDMAP [1-|NUMZONES|]  EDGELAYER{LINETHICKNESS = 0.0875}
+
+## Remove orientation axis (in top-right corner)
+$!THREEDAXIS FRAMEAXIS{SHOW = NO}
+
+## Add title text
+$!ATTACHTEXT 
+  ANCHORPOS
     {
-    VARNUM = 1
+    X = 0.0
+    Y = 94.0
     }
-  YDETAIL
+  COLOR = PURPLE
+  TEXTSHAPE
     {
-    VARNUM = 2
+    FONT = HELV
+    HEIGHT = 16
     }
+  TEXT = 'axial velocity' 
+
+## Fit to everything
 $!VIEW FIT
-$!TWODAXIS 
-  DEPXTOYRATIO = 1
-$!TWODAXIS 
-  XDETAIL
-    {
-    SHOWAXIS = NO
-    RANGEMIN = 0
-    RANGEMAX = 0.22558688865862566719
-    GRSPACING = 0.05
-    }
-$!TWODAXIS 
-  YDETAIL
-    {
-    SHOWAXIS = NO
-    RANGEMIN = 0
-    RANGEMAX = 0.16251624403893946691
-    GRSPACING = 0.05
-    }
-$!GLOBALISOSURFACE 
-  MARCHINGCUBEALGORITHM = CLASSICPLUS
-$!GLOBALSLICE 
-  BOUNDARY
-    {
-    SHOW = NO
-    }
-$!FIELDLAYERS 
-  SHOWMESH = NO
-  SHOWBOUNDARY = NO
+
+## Reduce size slightly to fit axis labels on
+$!VIEW SETMAGNIFICATION
+  MAGNIFICATION = 0.92
+
+###############################################################
+########### END OF MACRO FILE GENERATED GRAPHICALLY ###########
+###############################################################
+
+#-------------------------------------------------------------#
+#---------------------- END OF FRAME 2 -----------------------#
+#-------------------------------------------------------------#
+
+#-------------------------------------------------------------#
+#-------------------------- FRAME 3 --------------------------#
+#-------------------------------------------------------------#
+
+## Create a new frame
+$!CREATENEWFRAME
+  XYPOS
+   {
+    X = 0.0
+    Y = 4.6
+   }
+   WIDTH = 5.0
+   HEIGHT = 4.6
+$!FRAMELAYOUT SHOWBORDER = NO
+
+###############################################################
+########## START OF MACRO FILE GENERATED GRAPHICALLY ##########
+######################## (WITH TWEAKS) ########################
+###############################################################
+
+## Read in data file
+$!READDATASET  '"|stem_of_input_file||soln_counter|.dat" '
+  READDATAOPTION = NEW
+  RESETSTYLE = YES
+  INCLUDETEXT = NO
+  INCLUDEGEOM = NO
+  INCLUDECUSTOMLABELS = NO
+  VARLOADMODE = BYNAME
+  ASSIGNSTRANDIDS = YES
+  INITIALPLOTTYPE = CARTESIAN3D
+  VARNAMELIST = '"V1" "V2" "V3" "V4" "V5" "V6"'
+
+## Read in data file
+$!READDATASET  '"max_min.dat" '
+  READDATAOPTION = APPEND
+  RESETSTYLE = YES
+  INCLUDETEXT = NO
+  INCLUDEGEOM = NO
+  INCLUDECUSTOMLABELS = NO
+  VARLOADMODE = BYNAME
+  ASSIGNSTRANDIDS = YES
+  INITIALPLOTTYPE = CARTESIAN3D
+  VARNAMELIST = '"V1" "V2" "V3" "V4" "V5" "V6"'
+
+## Rename variables
+$!RENAMEDATASETVAR
+  VAR = 1
+  NAME = 'r' 
+$!RENAMEDATASETVAR 
+  VAR = 2
+  NAME = 'z' 
+
+## Make all zones (including dummy zones) active for plotting
+$!ACTIVEFIELDZONES  =  [1-|NUMZONES|]
+
+## Choose which field to display on the z-axis
+$!THREEDAXIS ZDETAIL{VARNUM = 5}
+
+## Set axes to be independent and reset to variable min/max
+$!THREEDAXIS AXISMODE = INDEPENDENT
+$!VIEW AXISFIT
+  AXIS = 'X'
+  AXISNUM = 1
+$!VIEW AXISFIT
+  AXIS = 'Y'
+  AXISNUM = 1
+$!VIEW AXISFIT
+  AXIS = 'Z'
+  AXISNUM = 1
+
+## Set 3D axis preferences
+$!THREEDAXIS XDETAIL{SHOWAXIS = YES}
+$!THREEDAXIS YDETAIL{SHOWAXIS = YES}
+$!THREEDAXIS ZDETAIL{SHOWAXIS = YES}
+$!THREEDAXIS XDETAIL{GRIDLINES{SHOW = NO}}
+$!THREEDAXIS YDETAIL{GRIDLINES{SHOW = NO}}
+$!THREEDAXIS ZDETAIL{GRIDLINES{SHOW = NO}}
+$!THREEDAXIS GRIDAREA{USELIGHTSOURCETOFILL = NO}
+$!THREEDAXIS XDETAIL{TITLE{OFFSET = 12}}
+$!THREEDAXIS XDETAIL{TITLE{TEXTSHAPE{SIZEUNITS = POINT}}}
+$!THREEDAXIS XDETAIL{TITLE{TEXTSHAPE{HEIGHT = 14}}}
+$!THREEDAXIS YDETAIL{TITLE{TEXTSHAPE{SIZEUNITS = POINT}}}
+$!THREEDAXIS YDETAIL{TITLE{TEXTSHAPE{HEIGHT = 14}}}
+$!THREEDAXIS ZDETAIL{TITLE{SHOWONAXISLINE = NO}}
+$!THREEDAXIS XDETAIL{TICKLABEL{TEXTSHAPE{SIZEUNITS = POINT}}}
+$!THREEDAXIS XDETAIL{TICKLABEL{TEXTSHAPE{HEIGHT = 10}}}
+$!THREEDAXIS YDETAIL{TICKLABEL{TEXTSHAPE{SIZEUNITS = POINT}}}
+$!THREEDAXIS YDETAIL{TICKLABEL{TEXTSHAPE{HEIGHT = 10}}}
+$!THREEDAXIS ZDETAIL{TICKLABEL{TEXTSHAPE{SIZEUNITS = POINT}}}
+$!THREEDAXIS ZDETAIL{TICKLABEL{TEXTSHAPE{HEIGHT = 10}}}
+$!THREEDAXIS XDETAIL{AUTOGRID = NO}
+$!THREEDAXIS XDETAIL{GRSPACING = 0.5}
+$!THREEDAXIS YDETAIL{AUTOGRID = NO}
+$!THREEDAXIS YDETAIL{GRSPACING = 0.2}
+$!THREEDAXIS ZDETAIL{AUTOGRID = NO}
+$!THREEDAXIS ZDETAIL{GRSPACING = 0.2}
+$!THREEDAXIS XDETAIL{AXISLINE{LINETHICKNESS = 0.1}}
+$!THREEDAXIS YDETAIL{AXISLINE{LINETHICKNESS = 0.1}}
+$!THREEDAXIS ZDETAIL{AXISLINE{LINETHICKNESS = 0.1}}
+
+## Set 3D view
+$!ROTATE3DVIEW PSI
+  ANGLE = 10
+  ROTATEORIGINLOCATION = DEFINEDORIGIN
+$!ROTATE3DVIEW THETA
+  ANGLE = 10
+  ROTATEORIGINLOCATION = DEFINEDORIGIN
+
+## Change the axis scale factor
+## (to make the four plots roughly the same dimensions)
+$!GLOBALTHREED AXISSCALEFACT{Z = 0.9}
+
+## Change edge layer properties for all zones
+$!FIELDMAP [1-|NUMZONES|]  EDGELAYER{LINETHICKNESS = 0.0875}
+
+## Remove orientation axis (in top-right corner)
+$!THREEDAXIS FRAMEAXIS{SHOW = NO}
+
+## Add title text
 $!ATTACHTEXT 
   ANCHORPOS
     {
-    X = 52.4186448582
-    Y = 89.1797576003
+    X = 0.0
+    Y = 94.0
     }
   COLOR = PURPLE
   TEXTSHAPE
     {
     FONT = HELV
-    HEIGHT = 18
+    HEIGHT = 16
     }
-  BOX
-    {
-    MARGIN = 10
-    LINETHICKNESS = 0.4
-    }
-  SCOPE = GLOBAL
-  MACROFUNCTIONCOMMAND = '' 
-  TEXT = 'w(r,z,t)' 
+  TEXT = 'azimuthal velocity' 
+
+## Fit to everything
+$!VIEW FIT
+
+## Reduce size slightly to fit axis labels on
+$!VIEW SETMAGNIFICATION
+  MAGNIFICATION = 0.92
+
+###############################################################
+########### END OF MACRO FILE GENERATED GRAPHICALLY ###########
+###############################################################
+
+#-------------------------------------------------------------#
+#---------------------- END OF FRAME 3 -----------------------#
+#-------------------------------------------------------------#
+
+#-------------------------------------------------------------#
+#-------------------------- FRAME 4 --------------------------#
+#-------------------------------------------------------------#
+
+## Create a new frame
+$!CREATENEWFRAME
+  XYPOS
+   {
+    X = 5.0
+    Y = 4.6
+   }
+   WIDTH = 5.0
+   HEIGHT = 4.6
+$!FRAMELAYOUT SHOWBORDER = NO
+
+###############################################################
+########## START OF MACRO FILE GENERATED GRAPHICALLY ##########
+######################## (WITH TWEAKS) ########################
+###############################################################
+
+## Read in data file
+$!READDATASET  '"|stem_of_input_file||soln_counter|.dat" '
+  READDATAOPTION = NEW
+  RESETSTYLE = YES
+  INCLUDETEXT = NO
+  INCLUDEGEOM = NO
+  INCLUDECUSTOMLABELS = NO
+  VARLOADMODE = BYNAME
+  ASSIGNSTRANDIDS = YES
+  INITIALPLOTTYPE = CARTESIAN3D
+  VARNAMELIST = '"V1" "V2" "V3" "V4" "V5" "V6"'
+
+## Read in data file
+$!READDATASET  '"max_min.dat" '
+  READDATAOPTION = APPEND
+  RESETSTYLE = YES
+  INCLUDETEXT = NO
+  INCLUDEGEOM = NO
+  INCLUDECUSTOMLABELS = NO
+  VARLOADMODE = BYNAME
+  ASSIGNSTRANDIDS = YES
+  INITIALPLOTTYPE = CARTESIAN3D
+  VARNAMELIST = '"V1" "V2" "V3" "V4" "V5" "V6"'
+
+## Rename variables
+$!RENAMEDATASETVAR
+  VAR = 1
+  NAME = 'r' 
+$!RENAMEDATASETVAR 
+  VAR = 2
+  NAME = 'z' 
+
+## Make all zones (including dummy zones) active for plotting
+$!ACTIVEFIELDZONES  =  [1-|NUMZONES|]
+
+## Choose which field to display on the z-axis
+$!THREEDAXIS ZDETAIL{VARNUM = 6}
+
+## Set axes to be independent and reset to variable min/max
+$!THREEDAXIS AXISMODE = INDEPENDENT
+$!VIEW AXISFIT
+  AXIS = 'X'
+  AXISNUM = 1
+$!VIEW AXISFIT
+  AXIS = 'Y'
+  AXISNUM = 1
+$!VIEW AXISFIT
+  AXIS = 'Z'
+  AXISNUM = 1
+
+## Set 3D axis preferences
+$!THREEDAXIS XDETAIL{SHOWAXIS = YES}
+$!THREEDAXIS YDETAIL{SHOWAXIS = YES}
+$!THREEDAXIS ZDETAIL{SHOWAXIS = YES}
+$!THREEDAXIS XDETAIL{GRIDLINES{SHOW = NO}}
+$!THREEDAXIS YDETAIL{GRIDLINES{SHOW = NO}}
+$!THREEDAXIS ZDETAIL{GRIDLINES{SHOW = NO}}
+$!THREEDAXIS GRIDAREA{USELIGHTSOURCETOFILL = NO}
+$!THREEDAXIS XDETAIL{TITLE{OFFSET = 12}}
+$!THREEDAXIS XDETAIL{TITLE{TEXTSHAPE{SIZEUNITS = POINT}}}
+$!THREEDAXIS XDETAIL{TITLE{TEXTSHAPE{HEIGHT = 14}}}
+$!THREEDAXIS YDETAIL{TITLE{TEXTSHAPE{SIZEUNITS = POINT}}}
+$!THREEDAXIS YDETAIL{TITLE{TEXTSHAPE{HEIGHT = 14}}}
+$!THREEDAXIS ZDETAIL{TITLE{SHOWONAXISLINE = NO}}
+$!THREEDAXIS XDETAIL{TICKLABEL{TEXTSHAPE{SIZEUNITS = POINT}}}
+$!THREEDAXIS XDETAIL{TICKLABEL{TEXTSHAPE{HEIGHT = 10}}}
+$!THREEDAXIS YDETAIL{TICKLABEL{TEXTSHAPE{SIZEUNITS = POINT}}}
+$!THREEDAXIS YDETAIL{TICKLABEL{TEXTSHAPE{HEIGHT = 10}}}
+$!THREEDAXIS ZDETAIL{TICKLABEL{TEXTSHAPE{SIZEUNITS = POINT}}}
+$!THREEDAXIS ZDETAIL{TICKLABEL{TEXTSHAPE{HEIGHT = 10}}}
+$!THREEDAXIS XDETAIL{AUTOGRID = NO}
+$!THREEDAXIS XDETAIL{GRSPACING = 0.5}
+$!THREEDAXIS YDETAIL{AUTOGRID = NO}
+$!THREEDAXIS YDETAIL{GRSPACING = 0.2}
+$!THREEDAXIS ZDETAIL{AUTOGRID = NO}
+$!THREEDAXIS ZDETAIL{GRSPACING = 0.5}
+$!THREEDAXIS XDETAIL{AXISLINE{LINETHICKNESS = 0.1}}
+$!THREEDAXIS YDETAIL{AXISLINE{LINETHICKNESS = 0.1}}
+$!THREEDAXIS ZDETAIL{AXISLINE{LINETHICKNESS = 0.1}}
+
+## Set 3D view
+$!ROTATE3DVIEW PSI
+  ANGLE = 10
+  ROTATEORIGINLOCATION = DEFINEDORIGIN
+$!ROTATE3DVIEW THETA
+  ANGLE = 10
+  ROTATEORIGINLOCATION = DEFINEDORIGIN
+
+## Change the axis scale factor
+## (to make the four plots roughly the same dimensions)
+$!GLOBALTHREED AXISSCALEFACT{Z = 0.37}
+
+## Change edge layer properties for all zones
+$!FIELDMAP [1-|NUMZONES|]  EDGELAYER{LINETHICKNESS = 0.0875}
+
+## Remove orientation axis (in top-right corner)
+$!THREEDAXIS FRAMEAXIS{SHOW = NO}
+
+## Add title text
 $!ATTACHTEXT 
   ANCHORPOS
     {
-    X = 2.7262876363
-    Y = 90.4013980341
+    X = 0.0
+    Y = 94.0
     }
   COLOR = PURPLE
   TEXTSHAPE
     {
     FONT = HELV
-    HEIGHT = 18
+    HEIGHT = 16
     }
-  BOX
-    {
-    MARGIN = 10
-    LINETHICKNESS = 0.4
-    }
-  SCOPE = GLOBAL
-  MACROFUNCTIONCOMMAND = '' 
-  TEXT = 'u(r,z,t)' 
-$!ATTACHTEXT 
-  ANCHORPOS
-    {
-    X = 52.2947237679
-    Y = 44.3281016752
-    }
-  COLOR = PURPLE
-  TEXTSHAPE
-    {
-    FONT = HELV
-    HEIGHT = 18
-    }
-  BOX
-    {
-    MARGIN = 10
-    LINETHICKNESS = 0.4
-    }
-  SCOPE = GLOBAL
-  MACROFUNCTIONCOMMAND = '' 
-  TEXT = 'p(r,z,t)' 
-$!ATTACHTEXT 
-  ANCHORPOS
-    {
-    X = 1.61099782334
-    Y = 44.3281016752
-    }
-  COLOR = PURPLE
-  TEXTSHAPE
-    {
-    FONT = HELV
-    HEIGHT = 18
-    }
-  BOX
-    {
-    MARGIN = 10
-    LINETHICKNESS = 0.4
-    }
-  SCOPE = GLOBAL
-  MACROFUNCTIONCOMMAND = '' 
-  TEXT = 'v(r,z,t)' 
+  TEXT = 'pressure' 
 
-$!SETSTYLEBASE CONFIG
+## Fit to everything
+$!VIEW FIT
 
+## Reduce size slightly to fit axis labels on
+$!VIEW SETMAGNIFICATION
+  MAGNIFICATION = 0.92
 
-############################
+###############################################################
+########### END OF MACRO FILE GENERATED GRAPHICALLY ###########
+###############################################################
 
+#-------------------------------------------------------------#
+#---------------------- END OF FRAME 4 -----------------------#
+#-------------------------------------------------------------#
 
+## Redraw all frames (must do this here!)
+$!REDRAWALL 
 
+## Export all frames to the current .png file
+$!EXPORT 
+  EXPORTREGION = ALLFRAMES
 
+## End of loop
+$!ENDLOOP
 
-
-
-$!IF |PNG|==1
-
-
-        $!EXPORTSETUP EXPORTFORMAT = PNG
-        $!EXPORTSETUP SUPERSAMPLEFACTOR = 3
-        $!EXPORTSETUP USESUPERSAMPLEANTIALIASING = YES
-        $!EXPORTSETUP IMAGEWIDTH = 600
-        $!EXPORTSETUP EXPORTFNAME = 'spin_up3D_TH|istep|.png'
-        $!EXPORT
-          EXPORTREGION = ALLFRAMES
-
-        $!EXPORTSETUP EXPORTFORMAT = EPS
-        $!EXPORTSETUP USESUPERSAMPLEANTIALIASING = NO
-        $!EXPORTSETUP IMAGEWIDTH = 1423
-        $!EXPORTSETUP EXPORTFNAME = 'spin_up3D_TH|istep|.eps'
-
-        $!EXPORTSETUP PRINTRENDERTYPE = IMAGE
-        $!EXPORTSETUP EXPORTFNAME = 'spin_up3D_TH|istep|.img.eps'
-        $!EXPORT
-          EXPORTREGION = ALLFRAMES
-
-$!ELSE
-
-        $!IF |LOOP|>1
-                $!EXPORTNEXTFRAME
-        $!ELSE
-
-                $!EXPORTSETUP
-                 EXPORTFORMAT = AVI
-                 EXPORTFNAME = "spin_up3D_TH.avi"
-                $!EXPORTSETUP EXPORTREGION = ALLFRAMES
-                $!EXPORTSETUP IMAGEWIDTH = 817
-                $!EXPORTSETUP USESUPERSAMPLEANTIALIASING = NO
-                $!EXPORTSTART
-        $!ENDIF
-
-$!ENDIF
-
-
-$!VARSET |LAST_STEP|=|istep|
-
-$!EndLoop
-
-
-$!IF |PNG|==0
-        $!EXPORTFINISH
-$!ENDIF
-
-
-
+###############################################################
+######################### END OF LOOP #########################
+###############################################################

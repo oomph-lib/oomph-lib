@@ -1170,7 +1170,7 @@ fill_in_generic_residual_contribution_axi_nst(Vector<double> &residuals,
        
        //Add the gravitational body force term
        residuals[local_eqn] += r*scaled_re_inv_fr*testf[l]*G[1]*W;
-       
+
        //Add the pressure gradient term
        residuals[local_eqn]  += r*interpolated_p*dtestfdx(l,1)*W;
        
@@ -1450,7 +1450,6 @@ fill_in_generic_residual_contribution_axi_nst(Vector<double> &residuals,
         (interpolated_u[0] + r*interpolated_dudx(0,0) 
          + r*interpolated_dudx(1,1))*testp[l]*W;
 
-       
        /*CALCULATE THE JACOBIAN*/
        if(flag)
         {

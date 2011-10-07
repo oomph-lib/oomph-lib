@@ -1,14 +1,25 @@
 \mainpage Demo problem: Relaxation oscillations of an interface between two viscous fluids
 
 In the <A HREF="../../single_layer_free_surface/html/index.html">previous example</A>
-we looked at a single fluid with a free surface, which was deformed
-initially and then allowed to relax. This example is very similar, but
-this time we will place an interface between two fluids.
+we considered the problem of a single fluid layer. The free
+surface was deformed to a prescribed shape and then allowed to
+relax. In this example we consider the relaxation of an
+interface between two viscous fluids.
 
 <HR>
 <HR>
 
-\section implementation The implementation
+\section implementation Implementation
+
+
+
+PATRICKFLAG DO THIS SECTION!
+
+MENTION DENSITY AND VISCOSITY RATIO AND POINT TO REVELANT DOC.
+
+NOTE THAT WE WILL BE USING ADAPTIVITY AND POINT TO RELEVANT DOC THAT
+TALKS ABOUT THAT STUFF AND FACE ELEMENTS ETC.
+
 
 In the previous example we used 1D interface elements on the free
 surface boundary, which applied the kinematic and dynamic boundary
@@ -25,10 +36,10 @@ denote the lower fluid as fluid 1 and the upper fluid as fluid 2.
 
 \section example_problem The example problem
 
-We will illustrate the solution of the unsteady 2D Navier-Stokes
-equations using the example of a distorted free surface, between two
-fluids, which is allowed to relax. The domain is periodic in the \f$ x
-\f$ direction.
+We will illustrate the solution of the unsteady two-dimensional
+Navier--Stokes equations using the example of a distorted interface
+between two viscous fluids which is allowed to relax. The domain is
+periodic in the \f$ x_1 \f$ direction.
 
 <CENTER>
 <TABLE>
@@ -37,7 +48,7 @@ fluids, which is allowed to relax. The domain is periodic in the \f$ x
 \n
 <CENTER>
 <B>
-The 2D unsteady Navier-Stokes equations under a distorted free-surface.</B>
+The 2D unsteady Navier--Stokes equations either side of a distorted interface.</B>
 </CENTER> 
 \n
 Solve
@@ -45,22 +56,36 @@ Solve
 Re\left(St\frac{\partial u_i}{\partial t} +
 \ u_j\frac{\partial u_i}{\partial x_j}\right) =
 - \frac{\partial p}{\partial x_i} + \frac{Re}{Fr}G_i +
-\frac{\partial }{\partial x_j} \left[R_\mu
+\frac{\partial }{\partial x_j} \left[
 \frac{\partial u_i}{\partial x_j} +  
-\frac{\partial u_j}{\partial x_i} \right],
-\ \ \ \ \ \ \ \ \ \ @E[eqn:NSmom]@
+\frac{\partial u_j}{\partial x_i} \right]
+\ \ \ \ \ \ \ \ \ \ @E[eqn:NSmom_lower]@
 \f]
 and
 \f[
-\frac{\partial u_i}{\partial x_i} = 0,
-\ \ \ \ \ \ \ \ \ \ @E[eqn:NScont]@
+\frac{\partial u_i}{\partial x_i} = 0
+\ \ \ \ \ \ \ \ \ \ @E[eqn:NScont_lower]@
 \f]
-with gravity acting in the negative \f$ x_2 \f$ direction, in the
-periodic domain \f$ D = \left\{x_1 \in [0,L], x_2 \in [0,L]
-\right\} \f$, where the lower fluid lies in the region defined such
-that \f$ x_2 \in [0,h] \f$ and the upper fluid in the region defined such
-that \f$ x_2 \in [h,L] \f$ (where \f$ x_2=h(x_1,t)\f$
-is a free surface), subject to the Dirichlet boundary conditions:
+in the domain \f$ r \in [0.0,1.0], \; z \in [0.0,\mathbf{R}] \f$, and
+\f[
+R_\rho Re\left(St\frac{\partial u_i}{\partial t} +
+\ u_j\frac{\partial u_i}{\partial x_j}\right) =
+- \frac{\partial p}{\partial x_i} + R_\rho \frac{Re}{Fr}G_i +
+\frac{\partial }{\partial x_j} \left[R_\mu \left(
+\frac{\partial u_i}{\partial x_j} +  
+\frac{\partial u_j}{\partial x_i} \right) \right]
+\ \ \ \ \ \ \ \ \ \ @E[eqn:NSmom_upper]@
+\f]
+and
+\f[
+\frac{\partial u_i}{\partial x_i} = 0
+\ \ \ \ \ \ \ \ \ \ @E[eqn:NScont_upper]@
+\f]
+in the domain \f$ r \in [0.0,1.0], \; z \in [\mathbf{R},2.0] \f$,
+where \f$ \mathbf{R} \f$ denotes the position of the interface 
+between the fluids and gravity acts in the negative \f$ x_2 \f$
+direction. The governing equations are subject to the Dirichlet
+boundary conditions:
 \f[
 u_1=0 \ \ \ \ \ \ \ \ \ \ @E[eqn:BC1]@
 \f]
@@ -70,34 +95,31 @@ u_2=0 \ \ \ \ \ \ \ \ \ \ @E[eqn:BC2]@
 \f]
 on the top and bottom.
 
-The free-surface is defined by \f$\mathbf{R}\f$, which is subject
+The interface is defined by \f$ \mathbf{R} \f$, which is subject
 to the kinematic condition:
 \f[
-\left(\mathbf{u}-\frac{\partial\mathbf{R}}{\partial t}\right)
-\cdot\mathbf{n}=0,
+\left(u_i - St\, \frac{\partial R_i}{\partial t}\right) n_i = 0,
 \ \ \ \ \ \ \ \ \ \ @E[eqn:kinematicBC]@
 \f]
 and the dynamic condition:
 \f[
-\tau_{ij}^{[1]}n_j = \tau_{ij}^{[2]}n_j+\frac{1}{Ca}\kappa n_i,
+\tau_{ij}n_j = - \left(\frac{1}{Ca}\kappa + p_{ext}\right) n_i,
 \ \ \ \ \ \ \ \ \ \ @E[eqn:dynamicBC]@
 \f]
-where the stress tensor in fluid \f$ k \f$ is defined as:
+where the stress tensor is defined as:
 \f[
-\tau_{ij}^{[k]} = -p\delta_{ij} + \left(\frac{\partial u_i}{\partial x_j}
-+ \frac{\partial u_j}{\partial x_i}\right),
+\tau_{ij} = -p \, \delta_{ij} + \left(\frac{\partial u_i}{\partial x_j}
++ \frac{\partial u_j}{\partial x_i}\right).
 \ \ \ \ \ \ \ \ \ \ @E[eqn:stresstensor]@
 \f]
-and is applied on the free-surface.
 
-The initial deformation of the free surface is defined by:
+The initial deformation of the interface is defined by:
 \f[
-\mathbf{R} = \left(x_1,
-1.2 + \epsilon\cos\left(\frac{2N\pi x_1}{L}\right)\right),
-\ \ \ \ \ \ \ \ \ \ @E[eqn:freesurfacedeformation]@
+ \mathbf{R} = x_1 \, \mathbf{i} + \left[ 1.0 + 
+ \epsilon\cos\left( 2 n \pi x_1 \right)\right] \, \mathbf{j}
+\ \ \ \ \ \ \ \ \ \ @E[eqn:interfacedeformation]@
 \f]
-where \f$ \epsilon \f$ is a small parameter, \f$ N \f$ is the number
-of cosine periods and \f$ L \f$ is the width of the domain.
+where \f$ \epsilon \f$ is a small parameter and \f$ n \f$ is an integer.
 </TD>
 </TR>
 </TABLE>  
@@ -108,44 +130,67 @@ of cosine periods and \f$ L \f$ is the width of the domain.
 
 \section results Results
 
-Figure 1.1 below shows a contour plot of the pressure distribution
-with superimposed streamlines, as well as "carpet plots" of the
-pressure and the two velocity components, taken from <A
-HREF="../figures/two_layer.avi">this animation</A>. The results
-were produced using \c SpineElement<CrozierRaviartElement<2>> elements
-with \f$ Re = Re \, St = Re/Fr = 5 \f$, \f$ Ca = 0.01 \f$ and \f$
-R_{\mu} = 1.0 \f$ for both fluids.
+The figure below shows a contour plot of the pressure distribution
+with superimposed streamlines, taken from <A HREF="../figures/two_layer_interface.avi">an animation of the flow field</A>,
+for the parameters \f$ Re = Re \, St = Re/Fr = 5.0 \f$, \f$ R_\rho =
+0.5 \f$, \f$ R_\mu = 0.1 \f$ and \f$ Ca = 0.01 \f$.
 
-@I w 0.75\textwidth two_layer "Velocity and pressure fields. "
+@I w 0.75\textwidth two_layer_interface "Pressure contour plot for the relaxing interface problem. "
 
-The animation shows the interface oscillating up and down until a
-steady equilibrium is reached. Figure 1.2 shows the time-trace of the
-height of the interface at the edge of the domain. Since the domain is
-periodic in \f$ x \f$, the left and right edges are equivalent.
+At time \f$ t \leq 0 \f$ the interface is fixed in its deformed shape,
+but as the simulation begins the restoring forces of surface tension
+and gravitational acceleration act to revert it to its undeformed flat
+state. The interface oscillates up and down, but the 
+motion is damped as the energy in the system is dissipated through
+viscous forces, and eventually it settles down to its
+equilibrium position. This viscous damping effect can be seen in the
+following time-trace of the height of the interface at the edge of
+the domain.
 
-@I w 0.75\textwidth two_layer_trace "Time-trace of the height of the fluid interface at the edge of the domain. "
+@I w 0.95\textwidth two_layer_interface_trace "Time-trace of the height of the fluid layer at the edge of the domain. "
+
+<HR>
+<HR>
+
+\section validation Validation
+
+The free surface boundary conditions for the Cartesian Navier--Stokes
+equations have been validated against an analytical test
+case, and we present the results in the figure
+below. The lines represent the real and imaginary parts of a
+dispersion relation \f$ \lambda(k) \f$, which correspond to the growth
+rate and the frequency of the oscillating free surface
+respectively. The points have 
+been obtained by running the driver code for given wavenumbers \f$ k
+\f$ and determining the growth rate and frequency from a time-trace of
+the left-hand edge of the free surface. Since the analytics assume
+that the initial deformation of the free surface is very small, we use
+the value \f$ \epsilon = 0.01 \f$ when calling \c
+deform_free_surface(...) in the code.
+
+@I w 0.95\textwidth two_layer_interface_code_validation "Validation of the code (points) by comparison with an analytical dispersion relation (lines). "
 
 <HR>
 <HR>
 
 \section namespace Global parameters and functions
 
-For this problem, we use the dimensionless parameters \f$ Re \f$,
-\f$ Re\, St \f$, \f$ Re/Fr \f$ and \f$ Ca \f$. In addition, we create a
-vector \f$ G \f$ which will define the direction in which gravity
-acts. As usual, we define these quantities in a namespace:
+As in the <A HREF="../../single_layer_free_surface/html/index.html#namespace">previous example</A>, we use a namespace to define the dimensionless parameters
+\f$ Re \f$, \f$ St \f$, \f$ Re/Fr \f$, \f$ Ca \f$ and \f$ \nu \f$ (the
+Poisson ratio for the generalised Hookean constitutive law), and we
+create a vector \f$ G \f$ which will define the direction in which
+gravity acts. Because this is a two-fluid problem, we also need to
+define the density ratio \f$ R_{\rho} = \rho^{[2]}/\rho^{[1]} \f$ and
+viscosity ratio \f$ R_{\mu} = \mu^{[2]}/\mu^{[1]} \f$ of the two
+fluids. We shall assume that the lower fluid (fluid 1)
+is the `reference fluid' on which the Reynolds number is
+based. Therefore \f$ \rho^{[1]} = \rho_{ref} \f$ and \f$ \mu^{[1]} =
+\mu_{ref} \f$, and \f$ R_{\rho} \f$ and \f$ R_{\mu} \f$ define the
+density and viscosity of the upper fluid relative to these reference
+quantities. 
 
-\dontinclude two_layer_interface.cc
+\dontinclude elastic_two_layer_interface.cc
 \skipline start_of_namespace
-\until double Ca
-
-We also include the viscosity ratio, \f$ R_{\mu} = \mu^{[2]}/\mu^{[1]}
-\f$, and the density ratio, \f$ R_{\rho} = \rho^{[2]}/\rho^{[1]}
-\f$. We include both, even though we do not use a body force function
-in this example, and set them both to their default values purely to
-demonstrate their implementation.
-
-\skipline Ratio of viscosity
 \until End of namespace
 
 <HR>
@@ -153,50 +198,165 @@ demonstrate their implementation.
 
 \section main The driver code
 
-We start by specifying the (non-dimensional) length of time we want to
-run the simulation for and the size of the timestep. Because all driver
-codes are run as part of \c oomph-lib's self-testing routines we allow
-the user to pass a command line argument to the executable which sets
-the maximum time to some lower value.
+The driver code is very similar to the <A HREF="../../single_layer_free_surface/html/index.html#main">previous example</A>. We compute the product of the Reynolds and Strouhal
+numbers, specify the (non-dimensional) length of the simulation and
+set the dimensions of the mesh. The number of elements in the
+\f$ x_1 \f$ and \f$ x_2 \f$ directions in both fluid layers are
+specified. To remain consistent with the example code we shall from
+now on refer to \f$ x_1 \f$ as \f$ x \f$ and \f$ x_2 \f$ as \f$ y \f$.
 
 \skipline start_of_main
-\until t_max = 0.02
-
-Next we specify the width of the domain and the number of elements in
-the \f$ x \f$ direction, as well as the heights and number of elements
-in the \f$ y \f$ direction of both fluid layers.
-
-\skipline Number of elements in x direction
 \until double h2
 
-At this point we define the direction in which gravity acts;
-vertically downwards.
+As before, we define the direction in which gravity acts; vertically downwards.
 
 \skipline Set direction of gravity
 \until G[1]
 
-Finally, we build the problem using the "spinified" version of \c
-QCrouzeixRaviartElements and the \c BDF<2> timestepper, before calling \c
+Finally, we build the problem using the `pseudo-solid' version of \c
+RefineableQCrouzeixRaviartElements and the \c BDF<2> timestepper, before calling \c
 unsteady_run(...). This function solves the system at each timestep
 using the \c Problem::unsteady_newton_solve(...) function before
 documenting the result.
 
-\skipline Set up the spine test problem
+\skipline Set up the elastic test problem
 \until End of main
 
 <HR>
 <HR>
 
-\section problem_class The problem class 
-This remains exactly as in the <A
-HREF="../../single_layer_free_surface/html/index.html#problem_class">single-layer example</A>,
-except that we include a function which allows us to fix a pressure
-degree of freedom. Additionally, we now use the \c
-TwoLayerSpineMesh<ELEMENT,SpineLineNavierStokesInterfaceElement<ELEMENT>>.
+\section mesh The mesh class
 
-\dontinclude two_layer_interface.cc
-\skipline start_of_problem_class
-\until End of problem class
+In the <A HREF="../../single_layer_free_surface/html/index.html#main">previous
+example</A> we employed \c oomph-lib's \c
+ElasticRectangularQuadMesh. If we wanted to solve the same
+single-layer problem but with spatial adaptivity we would simply use
+that mesh's refineable counterpart, the \c
+ElasticRefineableRectangularQuadMesh. For this two-layer problem,
+however, it is convenient to define a new mesh class which will allow
+us to keep track of which elements are in each fluid. We start by
+defining the new class (which is templated by the element type) and
+inheriting from \c ElasticRefineableRectangularQuadMesh.
+
+\dontinclude elastic_two_layer_interface.cc
+\skipline start_of_specific_mesh_class
+\until {
+
+We begin our discussion of the mesh class with the private member
+data and functions, since they will be used by the public member
+functions. We define two members which will store pointers to those
+elements which are in the lower and upper fluid layers
+respectively. The entries in these containers will need to be
+recomputed every time the mesh is adapted, and this will be done using
+the function \c update_lower_and_upper_element_pt_vectors(), described
+later on.
+
+\skipline private:
+\until Upper_layer_element_pt
+
+We also define two containers which will store pointers to the `root'
+elements in the lower and upper fluid layers respectively. `Root'
+elements are any elements which exist in the initial, coarse
+mesh. This information will be used by \c 
+update_lower_and_upper_element_pt_vectors() to update \c
+Lower_layer_element_pt and \c Upper_layer_element_pt.
+
+\skipline Vector of pointers to those elements
+\until Upper_layer_root_element_pt
+
+The \c get_sons_recursively(...) function is used to search
+recursively through the sons of a particular element (pointed to by \c
+father_pt) and add pointers to those sons which are `leaf' elements to
+\c sons_which_are_leaves_pt. `Leaf' elements are any elements which do
+not have any sons.
+
+\skipline Helper function to recursively
+\until End of get_sons_recursively
+
+The first public member function is the mesh constructor. We pass it
+the usual parameters, including a boolean flag which indicates whether
+or not the mesh is periodic in the \f$ x \f$ direction.
+
+\dontinclude elastic_two_layer_interface.cc
+\skipline public:
+\until {
+
+We have so far created an \c ElasticRefineableRectangularQuadMesh,
+which has four boundaries which correspond to the edges of our
+problem's domain. We wish to define a fifth boundary which corresponds
+to the interface position. First we set the number of boundaries to
+five and then convert all the \c Nodes which correspond to the interface
+position into \c BoundaryNodes. These are then added to the fifth boundary.
+
+\skipline Set the number of boundaries
+\until End of loop over horizontal elements
+
+Next we populate the vectors \c Lower_layer_root_element_pt and \c
+Upper_layer_root_element_pt, before calling \c
+update_lower_and_upper_element_pt_vectors().
+
+\skipline Determine number of elements in lower and upper fluids
+\until End of constructor
+
+The function \c update_lower_and_upper_element_pt_vectors() populates
+\c Lower_layer_element_pt and \c Upper_layer_element_pt. This is
+achieved by visiting each `root' element in turn and calling \c
+get_sons_recursively().
+
+\skipline Update the lower and upper layer element
+\until End of update_lower_and_upper_element_pt_vectors
+
+Finally, we define functions which return the number of elements in
+both fluid layers and provide access functions for those elements.
+
+\skipline Access function for number of elements in lower layer
+\until Upper_layer_element_pt[i]
+
+<HR>
+<HR>
+
+\section problem_class The problem class 
+
+This is very similar to the problem class in the <A HREF="../../single_layer_free_surface/html/index.html#problem_class">previous example</A>, with a few modifications. Firstly, the problem
+constructor contains arguments to the heights of both fluid layers and
+the number of elements in each.
+
+\skipline Constructor
+\until const double &h2
+
+Because we shall use spatial adaptivity when solving this problem, we
+define the following two functions, which will be called before and after
+mesh adaptation.
+
+\skipline Strip off the interface elements
+\until actions_after_adapt
+
+These two functions will employ the following two helper functions,
+which are responsible for the creation and deletion of the interface
+elements.
+
+\skipline Create the 1d interface elements
+\until delete_interface_elements
+
+We define a helper function which recursively finds the `North-West`
+and `North-East' sons of a refineable element. This will be used by
+\c create_interface_elements() when determining which of the bulk
+elements (in the lower layer) are adjacent to the free surface.
+
+\skipline Helper function
+\until &sons_which_are_leaves_pt
+
+The following helper function pins a pressure value in a specified element
+and assigns a specific value.
+
+\skipline Fix pressure in element e
+\until }
+
+Finally, we store a Vector of (pointers to) those `root' elements in
+the lower layer which are adjacent to the interface.
+
+\skipline Vector of pointers to "root" elements
+\until Root_neighbour_element_pt
 
 <HR>
 <HR>
@@ -210,38 +370,45 @@ timestepper.
 \skipline start_of_constructor
 \until add_time_stepper_pt
 
-Next we build the mesh, as usual. The mesh we are using is the \c
-TwoLayerSpineMesh<ELEMENT,INTERFACE_ELEMENT>, which works in a very
-similar way to the single-layer mesh used in the <A
-HREF="../../single_layer_free_surface/html/index.html">previous example</A>, except
-that we have \c TwoLayerSpineMesh::nupper() bulk elements above the
-interface as well as the \c TwoLayerSpineMesh::nlower() bulk elements
-below it. As before, the boolean argument in the mesh constructor,
-which is set to "true" here, indicates whether or not the domain is to
-be periodic in \f$ x \f$.
+Next we build the bulk mesh, create an error estimator for the problem
+and set the maximum refinement level.
 
-\skipline Build and assign mesh
-\until time_stepper_pt
+\skipline Build and assign the "bulk" mesh
+\until max_refinement_level
+
+An empty surface mesh is created and then populated with a call to \c
+create_interface_elements. The bulk and surface meshes are then
+combined to form the global mesh.
+
+\skipline Create the "surface" mesh
+\until build_global_mesh
 
 On the solid boundaries (\f$ y = 0.0 \f$ and \f$ y = 2.0 \f$) we pin
 both velocity components so that there is no penetration of the wall
 by the fluid or flow along it. On the left and right symmetry
 boundaries (\f$ x = 0.0 \f$ and \f$ x = 2.0 \f$) we pin the \f$ x \f$
 component of the velocity but leave the \f$ y \f$ component
-unconstrained.
+unconstrained. We pin the vertical displacement of the nodes on the
+solid boundaries (since these must remain stationary) and pin the
+horizontal displacement of all nodes in the mesh.
 
 \skipline -----
-\until End of loop over mesh boundaries
+\until Bulk_mesh_pt->node_pt(n)->pin_position(0)
 
-We then pin one pressure degree of freedom.
+Next we create a generalised Hookean constitutive equation for the
+pseudo-solid mesh. This constitutive equation is discussed in <A HREF="../../../solid/disk_compression/html/index.html#hooke">another tutorial</A>.
 
-\skipline Fix zeroth pressure
-\until fix_pressure
+\skipline Define a constitutive law
+\until GeneralisedHookean
 
 We loop over the bulk elements in the lower fluid and pass them
-pointers to the physical parameters. Note that we do not assign
-pointers for \f$R_\mu\f$ and \f$R_\rho\f$ since these take the default
-value in the lower fluid.
+pointers to the Reynolds and Womersley numbers, \f$ Re \f$ and \f$
+Re\, St \f$, the product of the Reynolds number and the inverse of the
+Froude number, \f$ Re/Fr \f$, the direction of gravity, \f$ G \f$, the
+constitutive law and the global time object, created when we called \c
+Problem::add_time_stepper_pt(...) above. Note that we do not assign
+pointers for the viscosity and density ratios, \f$ R_\mu \f$ and \f$
+R_\rho \f$, since these take the default value in the lower fluid.
 
 \skipline -----
 \until End of loop over bulk elements in lower fluid
@@ -249,72 +416,262 @@ value in the lower fluid.
 We then do the same for the bulk elements in the upper fluid, and this
 time we do assign pointers for the viscosity and density ratios.
 
-\skipline Determine number of bulk elements in upper fluid
+\skipline Loop over bulk elements in upper fluid
 \until End of loop over bulk elements in upper fluid
 
-Finally, we assign pointers to the Capillary number to each of the
-interface elements before setting up the equation numbering scheme.
+We then pin one pressure degree of freedom, and call \c
+PVDEquationsBase<2>::pin_redundant_nodal_solid_pressures() to pin any
+redundant solid pressures. This call is unnecessary (but harmless)
+as \c RefineableQPVDElements do not contain pressure degrees of
+freedom. However, it is a good idea to include 
+this call anyway since our problem class is templated by the element type
+and may therefore also be used with other elements (see
+<A HREF="../../../navier_stokes/adaptive_driven_cavity/html/index.html">another tutorial</A> for a detailed discussion of the need to pin "redundant"
+pressure degrees of freedom in computations with spatial
+adaptivity).
 
-\skipline Determine number of 1D interface elements
+\skipline Set the pressure
+\until Bulk_mesh_pt->element_pt
+
+At this point we set up the boundary conditions.
+
+\skipline Apply the boundary conditions
+\until set_boundary_conditions
+
+Now we set up information about which of the `root' elements in the
+ lower layer are adjacent to the interface. Pointers to these elements
+ are stored in a \c Vector which is then used by \c
+ create_interface_elements() as a starting point for determining, at
+ any particular state of mesh adaptation, which of the current
+ elements are adjacent to the interface. We use this as a starting
+ point since only `root' elements are guarenteed to exist at any
+ particular state of mesh adaptation.
+
+\skipline -----
+\until }
+
+Finally, set up the equation numbering scheme.
+
+\skipline Setup equation numbering scheme
 \until End of constructor
+
+<HR>
+<HR>
+
+\section set_initial_condition Initial conditions
+
+The \c set_initial_conditions() function is identical to that in the <A HREF="../../single_layer_free_surface/html/index.html#set_initial_condition">previous example</A>.
+
+<HR>
+<HR>
+
+\section set_boundary_conditions Boundary conditions
+
+This function sets the boundary conditions for the problem. Since the
+Dirichlet conditions are homogeneous this function is not strictly
+necessary as all values are initialised to zero by default.
+
+\skipline start_of_set_boundary_conditions
+\until End of set_boundary_conditions
+
+<HR>
+<HR>
+
+\section before_adapt Actions before adaptation
+
+The mesh adaptation is driven by the error estimates in the bulk
+elements and only performed for that mesh. The interface elements must 
+therefore be removed before adaptation. We do this by calling 
+the function \c delete_interface_elements(...), and
+then rebuilding the \c Problem's global mesh.
+
+\skipline start_of_actions_before_adapt
+\until End of actions_before_adapt
+
+<HR>
+<HR>
+
+\section after_adapt Actions after adapt
+
+After the bulk mesh has been adapted, we must update the bulk mesh's
+vectors of pointers to elements in the two fluid layers.
+
+\skipline start_of_actions_after_adapt
+\until update_lower_and_upper_element_pt_vectors
+
+Next we create new interface elements, rebuild the problem's global
+mesh and pin the horizontal displacement of all nodes.
+
+\skipline Create the interface elements
+\until Bulk_mesh_pt->node_pt(n)->pin_position(0)
+
+To ensure that precisely one fluid pressure degree of freedom is
+pinned, we unpin all pressure degrees of freedom, pin any redundant
+nodal pressures which have arisen following mesh adaptation and call
+\c fix_pressure(...). We also pin any redundant solid pressures before
+re-setting the boundary conditions.
+
+\skipline Unpin all fluid pressure dofs
+\until End of actions_after_adapt
+
+<HR>
+<HR>
+
+\section create_interface_elements Create interface elements
+
+This function is used to `attach'
+interface elements to the upper face of those bulk elements in the
+lower fluid which are adjacent to the interface. We call these
+particular bulk elements `neighbours', and they will (in general) be
+different after every mesh adaptation. We determine the current
+neighbours by looping over the `root' neighbours and calling \c
+get_neighbour_sons_recursively, which is discussed 
+<A HREF="#get_neighbour_sons_recursively">later on</A>.
+
+\skipline start_of_create_interface_elements
+\until }
+
+Now that we have the current neighbours, we loop over them and create
+an interface element on their upper face (face 2). These newly-created
+elements are then added to the surface mesh.
+
+\skipline -------
+\until }
+
+Finally, we pass the Strouhal \f$ St \f$ and Capillary \f$ Ca \f$
+numbers to the interface elements.
+
+\skipline -------
+\until End of create_interface_elements
+
+<HR>
+<HR>
+
+\section delete_interface_elements Delete interface elements
+
+This function loops over all the interface elements (i.e. those in the
+surface mesh) and deletes them and their storage.
+
+\skipline start_of_delete_interface_elements
+\until End of delete_interface_elements
+
+<HR>
+<HR>
+
+\section deform_free_surface Prescribing the initial free surface position
+
+At the beginning of the simulation the interface is deformed by a
+prescribed function (@R[eqn:interfacedeformation]@). To do this we
+define a function, \c deform_free_surface(...), which cycles through
+the bulk mesh's \c Nodes and modifies their positions
+accordingly, such that the nodes on the free surface follow the
+prescribed interface shape (@R[eqn:interfacedeformation]@) and the
+bulk nodes retain their fractional position between the solid
+boundaries and the (now deformed) interface.
+
+\skipline start_of_deform_free_surface
+\until End of deform_free_surface
+
+<HR>
+<HR>
+
+\section get_neighbour_sons_recursively Determining the current interface neighbours
+
+This function is very similar to \c get_sons_recursively(...)
+(discussed <A HREF="#mesh">above</A>), except that the recursion is
+only called on the `North-West' and `North-East' sons of each element.
+This is because we only want to find those `leaf' elements which are
+adjacent to the interface.
+
+\skipline start_of_get_neighbour_sons_recursively
+\until End of get_neighbour_sons_recursively
 
 <HR>
 <HR>
 
 \section doc Post-processing
 
-This function is identical to that in the <A
-HREF="../../single_layer_free_surface/html/index.html#doc">previous example</A>. We
-output the value of the current time to the screen, before recording
-the following parameters in the trace file:
-- the value of the continuous time,
-- the height of the spine at the left/right domain boundary, and
-- the contact angles (in degrees) of the free surface and the left and
-right domain boundaries.
-
-\skipline start_of_doc_solution
-\until actual_contact_angle_right
-
-We then output the computed solution, and include \c Tecplot instructions
-that generate a blue line in the top-left corner of the plot to
-indicate how time progresses during the simulation.
-
-\skipline ofstream
-\until End of doc_solution
+This function is identical to that in the <A HREF="../../single_layer_free_surface/html/index.html#doc">previous example</A>.
 
 <HR>
 <HR>
 
 \section unsteady_run The timestepping loop
 
-This function is also identical to the equivalent function in the <A
-HREF="../../single_layer_free_surface/html/index.html#unsteady_run">previous example</A>. We
-begin by deforming the interface and then create a \c DocInfo object
-to store the output directory and the label for the output files.
+The function \c unsteady_run(...) is used to perform the timestepping
+procedure, and is very similar to that in the <A HREF="../../single_layer_free_surface/html/index.html#unsteady_run">previous example</A>. The only changes arise due to this problem being solved
+with spatial adaptation. We start by deforming the free surface in the
+manner specified by equation (@R[eqn:freesurfacedeformation]@).
 
 \skipline start_of_unsteady_run
+\until deform_free_surface
+
+We then create a \c DocInfo object to store the output directory and
+the label for the output files.
+
+\skipline Initialise DocInfo object
 \until doc_info.number()=0
 
-We initialise the trace file and the timestep, before setting the initial
-conditions and documenting them.
+Next we open and initialise the trace file.
 
 \skipline Open trace file
+\until std::endl
+
+Before using any of \c oomph-lib's timestepping functions, the timestep
+\f$ dt \f$ must be passed to the problem's timestepping routines by calling
+the function \c Problem::initialise_dt(...) which sets the weights for
+all timesteppers in the problem. Next we assign the initial conditions
+by calling \c Problem::set_initial_condition(), which was discussed
+<A HREF="#set_initial_condition">above</A>.
+
+\skipline Initialise timestep
+\until set_initial_condition
+
+We limit number of spatial adaptations per timestep to two and refine
+the problem uniformly twice, before documenting the initial conditions.
+
+\skipline Maximum number of spatial adaptations per timestep
 \until doc_info.number()++
 
-Finally, we perform the actual timestepping loop. For
-each timestep the function \c unsteady_newton_solve(dt) is called and
-the solution documented.
+Finally, we determine the number of timesteps to be performed and
+perform the actual timestepping loop. For each timestep the function
+\c unsteady_newton_solve(dt,max_adapt,first_timestep) is called and 
+the solution documented. The boolean flag \c first_timestep is used to
+instruct the code to re-assign the initial conditions after every mesh
+adaptation. After the first timestep, the maximum number of
+adaptations for all timesteps is reset to one. We refer to <A HREF="../../../unsteady_heat/two_d_unsteady_heat_adapt/html/index.html#spatial_adapt">another example</A> for a discussion of why this is recommended.
 
-\skipline Timestepping loop
+\skipline Determine number of timesteps
 \until End of unsteady_run
 
 <HR>
 <HR>
 
-\section comments Comments and Exercises
--# Investigate why we do not solve this problem using Taylor-Hood
-   elements.
+\section exercises Exercise
 
+- In the <A HREF="../../single_layer_free_surface/html/index.html">single-layer example</A> we chose to discretise the problem using
+  Crouzeix--Raviart elements, but we could also have chosen to use
+  Taylor--Hood elements. Why can we not use Taylor--Hood elements to
+  solve this two-layer problem?
 
+<HR>
+<HR>
+
+\section sources Source files for this tutorial
+- The source files for this tutorial are located in the directory:\n\n
+<CENTER>
+<A HREF="../../../../demo_drivers/navier_stokes/two_layer_interface/">
+demo_drivers/navier_stokes/two_layer_interface/
+</A>
+</CENTER>\n
+- The driver code is: \n\n
+<CENTER>
+<A HREF="../../../../demo_drivers/navier_stokes/two_layer_interface/elastic_two_layer_interface.cc">
+demo_drivers/navier_stokes/two_layer_interface/elastic_two_layer_interface.cc
+</A>
+</CENTER>
+.
+
+@@END@@
 
 

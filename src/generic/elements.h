@@ -875,14 +875,14 @@ public:
  /// \short Calculate the elemental Jacobian matrix "d equation / d variable".
  virtual void get_jacobian(Vector<double> &residuals, 
                            DenseMatrix<double> &jacobian) 
-  {
-   //Zero the residuals vector
-   residuals.initialise(0.0);
-   //Zero the jacobian matrix
-   jacobian.initialise(0.0);
-   //Add the elemental contribution to the residuals vector
-   fill_in_contribution_to_jacobian(residuals,jacobian);
-  }
+ {
+  //Zero the residuals vector
+  residuals.initialise(0.0);
+  //Zero the jacobian matrix
+  jacobian.initialise(0.0);
+  //Add the elemental contribution to the residuals vector
+  fill_in_contribution_to_jacobian(residuals,jacobian);
+ }
 
  /// \short Calculate the residuals and the elemental "mass" matrix, the
  /// matrix that multiplies the time derivative terms in a problem.
@@ -3593,6 +3593,7 @@ class FaceElement: public virtual FiniteElement
      // We only resize the node values Vector if we haven't done it yet
      std::map<unsigned, unsigned>::const_iterator p=map_pt->find(id);
 
+     // If this node hasn't been resized for current id
      if(p==map_pt->end())
       {
          
@@ -3601,7 +3602,7 @@ class FaceElement: public virtual FiniteElement
 
        // how many values are stored in the node?
        unsigned n_values= nod_pt->nvalue();
-         
+
        // assign the face element id and the position of the 
        //first entry to the boundary node
        (*map_pt)[id]= n_values;
