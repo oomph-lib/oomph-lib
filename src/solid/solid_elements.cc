@@ -1183,7 +1183,7 @@ void PVDEquationsBase<DIM>::get_deformed_covariant_basis_vectors(
 /// used to represent the positional hanging scheme in Hanging_pt objects
 //======================================================================
 template<unsigned DIM>
-int PVDEquationsWithPressure<DIM>::Solid_pressure_not_stored_at_node = -100;
+int PVDEquationsBase<DIM>::Solid_pressure_not_stored_at_node = -100;
 
 
 
@@ -1236,7 +1236,7 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
  const unsigned n_position_type = this->nnodal_position_type();
 
  //Find out how many pressure dofs there are
- const unsigned n_solid_pres = npres_solid();
+ const unsigned n_solid_pres = this->npres_solid();
 
  //Set up memory for the shape functions
  Shape psi(n_node,n_position_type);
@@ -1671,7 +1671,7 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
              //Loop over the pressure dofs for unknowns
              for(unsigned l2=0;l2<n_solid_pres;l2++)
               {
-               local_unknown = solid_p_local_eqn(l2);
+               local_unknown = this->solid_p_local_eqn(l2);
 
                //If it's not a boundary condition
                if(local_unknown >= 0)
@@ -1701,7 +1701,7 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
    //Now loop over the pressure degrees of freedom
    for(unsigned l=0;l<n_solid_pres;l++)
     {
-     local_eqn = solid_p_local_eqn(l);
+     local_eqn = this->solid_p_local_eqn(l);
 
      // Pinned (unlikely, actually) or real dof?
      if(local_eqn >= 0)
@@ -1822,7 +1822,7 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
            //Loop over the pressure nodes again
            for(unsigned l2=0;l2<n_solid_pres;l2++)
             {
-             local_unknown = solid_p_local_eqn(l2);
+             local_unknown = this->solid_p_local_eqn(l2);
              //If not pinnned 
              if(local_unknown >= 0)
               {
@@ -2136,7 +2136,7 @@ void PVDEquationsWithPressure<DIM>::get_stress(const Vector<double> &s,
  unsigned n_position_type = this->nnodal_position_type();
  
  //Find out how many pressure dofs there are
- unsigned n_solid_pres = npres_solid();
+ unsigned n_solid_pres = this->npres_solid();
 
  //Set up memory for the shape functions
  Shape psi(n_node,n_position_type);

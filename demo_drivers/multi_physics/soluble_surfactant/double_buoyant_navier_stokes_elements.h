@@ -106,7 +106,7 @@ public:
  ///Access function for the pointer to the thermal Rayleigh number
  double* &ra_t_pt() {return Ra_T_pt;}
 
- ///Access function for the solutale Rayleigh number (const version)
+ ///Access function for the solutal Rayleigh number (const version)
  const double &ra_s() const {return *Ra_S_pt;}
 
  ///Access function for the pointer to the solutal Rayleigh number
@@ -232,8 +232,8 @@ public:
  /// \short Overload the wind function in the advection-diffusion equations.
  /// This provides the coupling from the Navier--Stokes equations to the
  /// advection-diffusion equations because the wind is the fluid velocity.
- void get_wind_adv_diff_react(const unsigned& ipt, const Vector<double> &s, 
-                              const Vector<double>& x, 
+ void get_wind_adv_diff_react(const unsigned& ipt,
+                              const Vector<double> &s, const Vector<double>& x,
                               Vector<double>& wind) const
  {
    //The wind function is simply the velocity at the points
@@ -373,7 +373,12 @@ public:
          *value_pt += fd_step;
 
          //Get the altered advection-diffusion residuals.
-         AdvectionDiffusionReactionEquations<2,DIM>::get_residuals(newres);
+         //Do this using fill_in because get_residuals has never been 
+         //overloaded, and will actually compute all residuals which
+         //is slightly inefficient.
+         for(unsigned m=0;m<n_dof;m++) {newres[m] = 0.0;}
+         AdvectionDiffusionReactionEquations<2,DIM>::
+          fill_in_contribution_to_residuals(newres);
 
          //Now fill in the Advection-Diffusion-Reaction sub-block
          //of the jacobian
@@ -420,7 +425,11 @@ public:
          *value_pt += fd_step;
          
          //Get the altered Navier--Stokes residuals
-         NavierStokesEquations<DIM>::get_residuals(newres);
+         //Do this using fill_in because get_residuals has never been 
+         //overloaded, and will actually compute all residuals which
+         //is slightly inefficient.
+         for(unsigned m=0;m<n_dof;m++) {newres[m] = 0.0;}
+         NavierStokesEquations<DIM>::fill_in_contribution_to_residuals(newres);
          
          //Now fill in the Navier-Stokes sub-block
          for(unsigned m=0;m<n_node;m++)

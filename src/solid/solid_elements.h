@@ -60,6 +60,12 @@ namespace oomph
  template <unsigned DIM>
   class PVDEquationsBase : public virtual SolidFiniteElement
   {
+    private:
+   
+   /// \short Static "magic" number that indicates that the solid pressure
+   /// is not stored at a node
+   static int Solid_pressure_not_stored_at_node;
+
     public:
    
    /// \short Function pointer to function that specifies the isotropic
@@ -82,8 +88,7 @@ namespace oomph
    PVDEquationsBase() :  Isotropic_growth_fct_pt(0), Constitutive_law_pt(0),
     Lambda_sq_pt(&Default_lambda_sq_value), Unsteady(true), 
     Body_force_fct_pt(0), Evaluate_jacobian_by_fd(false) {}
-   
-   
+      
    /// Return the constitutive law pointer
    ConstitutiveLaw* &constitutive_law_pt() {return Constitutive_law_pt;}
    
@@ -119,7 +124,22 @@ namespace oomph
    
    ///Access function to flag that switches inertia on/off (const version)
    bool is_inertia_enabled() const {return Unsteady;}
+
+   /// \short Return the number of solid pressure degrees of freedom
+   /// Default is that there are no solid pressures
+   virtual unsigned npres_solid() const {return 0;}
+
+   /// \short Return the local degree of freedom associated with the
+   /// i-th solid pressure. Default is that there are none.
+   virtual int solid_p_local_eqn(const unsigned &i) {return -1;}
    
+   /// \short Return the index at which the solid pressure is stored if it
+   /// is stored at the nodes. If not stored at the nodes this will return
+   /// a negative number.
+   virtual int solid_p_nodal_index() const 
+    {return Solid_pressure_not_stored_at_node;}
+
+
    /// \short Unpin all solid pressure dofs in the element 
    virtual void unpin_elemental_solid_pressure_dofs()=0;
 
@@ -769,16 +789,11 @@ template<unsigned NNODE_1D>
  template <unsigned DIM>
   class PVDEquationsWithPressure : public PVDEquationsBase<DIM>
   {
-    private:
-   
-   /// \short Static "magic" number that indicates that the solid pressure
-   /// is not stored at a node
-   static int Solid_pressure_not_stored_at_node;
-   
     public:
    
    /// Constructor, by default the element is NOT incompressible.
-   PVDEquationsWithPressure() : Incompressible(false) {}
+    PVDEquationsWithPressure() : PVDEquationsBase<DIM>(), 
+    Incompressible(false)  {}
    
    /// \short Return the 2nd Piola Kirchoff stress tensor, as calculated
    /// from the constitutive law at specified local coordinate
@@ -792,21 +807,12 @@ template<unsigned NNODE_1D>
 
    /// Set the material to be compressible
    void set_compressible() {Incompressible=false;}
-
-   /// Return the number of solid pressure degrees of freedom
-   virtual unsigned npres_solid() const=0;
    
    /// Return the lth solid pressure
    virtual double solid_p(const unsigned &l)=0;
    
    /// Set the lth solid pressure to p_value
    virtual void set_solid_p(const unsigned &l, const double &p_value)=0;
-   
-   /// \short Return the index at which the solid pressure is stored if it
-   /// is stored at the nodes. If not stored at the nodes this will return
-   /// a negative number.
-   virtual int solid_p_nodal_index() const 
-    {return Solid_pressure_not_stored_at_node;}
 
    /// Fill in the residuals
    void fill_in_contribution_to_residuals(Vector<double> &residuals)
@@ -930,7 +936,7 @@ template<unsigned NNODE_1D>
    double interpolated_solid_p(const Vector<double> &s) 
     {
      //Find number of nodes
-     unsigned n_solid_pres = npres_solid();
+     unsigned n_solid_pres = this->npres_solid();
      //Local shape function
      Shape psisp(n_solid_pres);
      //Find values of shape function
@@ -971,7 +977,7 @@ template<unsigned NNODE_1D>
    
    /// \short Access function that returns local eqn number 
    /// information for the solid pressure
-   virtual int solid_p_local_eqn(const unsigned &i)=0;
+   //virtual int solid_p_local_eqn(const unsigned &i)=0;
   
    /// \short Return the deviatoric part of the 2nd Piola Kirchhoff stress 
    /// tensor, as calculated from the constitutive law in the nearly 

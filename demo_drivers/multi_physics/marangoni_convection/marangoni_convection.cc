@@ -33,8 +33,11 @@
 //Oomph-lib headers, 
 //We require the generic header
 #include "generic.h"
-//Our custom coupling of advection-diffusion and Navier--Stokes
-#include "buoyant_navier_stokes_elements.h"
+#include "advection_diffusion.h"
+#include "navier_stokes.h"
+//Include our coupling of advection-diffusion and Navier--Stokes
+//the Boussinesq elements
+#include "multi_physics.h"
 //The fluid interface elements
 #include "fluid_interface.h"
 

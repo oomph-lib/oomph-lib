@@ -148,6 +148,9 @@ public:
  //applied by hijacking internal or external pressure
  CapProblem(const bool& hijack_internal);
 
+ //Destructor: clean up all allocated memory
+ ~CapProblem();
+
  /// Perform a parameter study: Solve problem for a range of contact angles
  /// Pass name of output directory as a string
  void parameter_study(const string& dir_name);
@@ -347,6 +350,30 @@ CapProblem<ELEMENT>::CapProblem(const bool& hijack_internal) :
 }
 
 
+//==========================================================================
+/// Destructor. Make sure to clean up all allocated memory, so that multiple
+/// instances of the problem don't lead to excessive memory usage.
+//==========================================================================
+template<class ELEMENT>
+CapProblem<ELEMENT>::~CapProblem() 
+{
+ //Loop over the volume mesh and delete the elements
+ unsigned n_element = Volume_constraint_mesh_pt->nelement();
+ for(unsigned e=0;e<n_element;e++)
+  {delete Volume_constraint_mesh_pt->element_pt(e);}
+ //Now flush the storage
+ Volume_constraint_mesh_pt->flush_element_and_node_storage();
+ //Now delete the mesh
+ delete Volume_constraint_mesh_pt;
+
+ //Delete the traded pressure if not the same as the external pressure
+ if(Traded_pressure_data_pt!=External_pressure_data_pt)
+  {delete Traded_pressure_data_pt;}
+  //Next delete the external data
+ delete External_pressure_data_pt;
+ //Then delete the bulk mesh
+ delete Fluid_mesh_pt;
+}
 
 
 //=======================================================================
@@ -489,6 +516,9 @@ public:
  //applied by hijacking internal or external pressure
  PseudoSolidCapProblem(const bool& hijack_internal);
 
+ /// Destructor: clean up memory allocated by the object
+ ~PseudoSolidCapProblem();
+
  /// Peform a parameter study: Solve problem for a range of contact angles
  /// Pass name of output directory as a string
  void parameter_study(const string& dir_name);
@@ -519,6 +549,9 @@ private:
 
  /// The contact angle
  double Angle;
+
+ /// Strain energy function that will be used in the constitutive law
+ StrainEnergyFunction* Strain_energy_function_pt;
 
  /// Constitutive law used to determine the mesh deformation
  ConstitutiveLaw *Constitutive_law_pt;
@@ -626,11 +659,12 @@ PseudoSolidCapProblem<ELEMENT>::PseudoSolidCapProblem(const bool& hijack_interna
   }
 
  //Set the constituive law
+ Strain_energy_function_pt =    
+  new GeneralisedMooneyRivlin(&Global_Physical_Variables::Nu,
+                              &Global_Physical_Variables::C1,
+                              &Global_Physical_Variables::E); 
  Constitutive_law_pt = 
-  new IsotropicStrainEnergyFunctionConstitutiveLaw(
-   new GeneralisedMooneyRivlin(&Global_Physical_Variables::Nu,
-                               &Global_Physical_Variables::C1,
-                               &Global_Physical_Variables::E));
+  new IsotropicStrainEnergyFunctionConstitutiveLaw(Strain_energy_function_pt);
  
  //Loop over the elements to set the consitutive law and jacobian
  unsigned n_bulk = Bulk_mesh_pt->nelement();
@@ -732,6 +766,50 @@ PseudoSolidCapProblem<ELEMENT>::PseudoSolidCapProblem(const bool& hijack_interna
  cout << "Number of unknowns: " << assign_eqn_numbers() << std::endl; 
  
 } //end_of_constructor
+
+
+//==========================================================================
+/// Destructor. Make sure to clean up all allocated memory, so that multiple
+/// instances of the problem don't lead to excessive memory usage.
+//==========================================================================
+template<class ELEMENT>
+PseudoSolidCapProblem<ELEMENT>::~PseudoSolidCapProblem() 
+{
+ //Delete the contact angle element
+ delete Free_surface_bounding_mesh_pt->element_pt(0);
+ Free_surface_bounding_mesh_pt->flush_element_and_node_storage();
+ delete Free_surface_bounding_mesh_pt;
+ //Delete the volume constraint mesh
+ delete Volume_constraint_mesh_pt;
+ //Delete the surface volume computation elements
+ unsigned n_element = Volume_computation_mesh_pt->nelement();
+ for(unsigned e=0;e<n_element;e++)
+  {delete Volume_computation_mesh_pt->element_pt(e);}
+ //Now flush the storage
+ Volume_computation_mesh_pt->flush_element_and_node_storage();
+ //Now delete the mesh
+ delete Volume_computation_mesh_pt;
+ //Delete the free surface elements
+ n_element = Free_surface_mesh_pt->nelement();
+ for(unsigned e=0;e<n_element;e++)
+  {delete Free_surface_mesh_pt->element_pt(e);}
+ //Now flush the storage
+ Free_surface_mesh_pt->flush_element_and_node_storage();
+ //Now delete the mesh
+ delete Free_surface_mesh_pt;
+
+ //Delete the constitutive law
+ delete Constitutive_law_pt;
+ delete Strain_energy_function_pt;
+
+ //If not the same as the external pressure, delete the traded pressure
+ if(Traded_pressure_data_pt!=External_pressure_data_pt)
+  {delete Traded_pressure_data_pt;}
+ //Next delete the external data
+ delete External_pressure_data_pt;
+ //Then delete the bulk mesh
+ delete Bulk_mesh_pt;
+}
 
 //============create_free_surface_element================================
 /// Create the free surface elements

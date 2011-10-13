@@ -192,7 +192,8 @@
 
 The problem class consists of a constructor that takes the
 aforementioned boolean flag to determine which pressure degree of
-freedom to use for the volume constraint; a function that performs a
+freedom to use for the volume constraint; a destructor to clean up all
+memory allocated during the problem construction; a function that performs a
 parameter study, decreasing the contact angle from \f$ \theta_{c} =
 90^{\circ}  \f$ in steps of \f$ 5^{\circ} \f$; and a function that
 documents the solution. 

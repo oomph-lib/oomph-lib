@@ -199,19 +199,34 @@ namespace oomph
  {
   protected:
   
-  /// \short The Data that contains the traded pressure is stored
-  /// as external Data for this element. Which external Data item is it?
-  unsigned External_data_number_of_traded_pressure;
+  /// \short The Data that contains the traded pressure is usually stored
+  /// as external Data for this element, but may also be nodal Data
+  /// Which Data item is it?
+  unsigned Data_number_of_traded_pressure;
   
   /// Index of the value in traded pressure data that corresponds to the
   /// traded pressure
   unsigned Index_of_traded_pressure_value;
+
+  /// \short Boolean to indicate whether the traded pressure is
+  /// stored externally or at a node (this can happen in Taylor-Hood
+  /// elements)
+  bool Traded_pressure_stored_at_node;
   
   /// \short The local eqn number for the traded pressure
   inline int ptraded_local_eqn()
   {
-   return this->external_local_eqn(External_data_number_of_traded_pressure,
-                                   Index_of_traded_pressure_value);
+   //Return the appropriate nodal value if required
+   if(Traded_pressure_stored_at_node)
+    {
+     return this->nodal_local_eqn(Data_number_of_traded_pressure,
+                                  Index_of_traded_pressure_value);
+    }
+   else
+    {
+     return this->external_local_eqn(Data_number_of_traded_pressure,
+                                     Index_of_traded_pressure_value);
+    }
   }
   
   /// \short Helper function to fill in contributions to residuals
@@ -224,11 +239,13 @@ namespace oomph
  
   public:
  
- /// \short Empty Contructor
- VolumeConstraintBoundingElement() {}
+  /// \short Constructor initialise the boolean flag
+  /// We expect the traded pressure data to be stored externally
+   VolumeConstraintBoundingElement() : Traded_pressure_stored_at_node(false)
+   {}
  
- /// \short Empty Destructor
- ~VolumeConstraintBoundingElement() {}
+  /// \short Empty Destructor
+  ~VolumeConstraintBoundingElement() {}
 
  /// Fill in contribution to residuals and Jacobian
  void fill_in_contribution_to_residuals(Vector<double> &residuals)
@@ -237,12 +254,60 @@ namespace oomph
   this->fill_in_generic_residual_contribution_volume_constraint(residuals);
  }
 
- /// \short Set the "master" volume constraint element 
+ /// \short Set the "master" volume constraint element
+ /// The setup here is a bit more complicated than one might expect because
+ /// if an internal pressure on a boundary 
+ /// is hijacked in TaylorHood elements then
+ /// that the "traded" value may already be stored as nodal data
+ /// in this element. This causes no problems apart from when running
+ /// with PARANOID in which case the resulting 
+ /// repeated local equation numbers are spotted and an error is thrown.
+ /// The check is a finite amount of work and so can be avoided if
+ /// the boolean flag check_nodal_data is set to false.
  void set_volume_constraint_element(VolumeConstraintElement* const 
-                                    &vol_constraint_el_pt)
+                                    &vol_constraint_el_pt, 
+                                    const bool &check_nodal_data=true)
  {
+
+  //In order to buffer the case of nodal data, we (tediously) check that the 
+  //traded pressure is not already nodal data of this element
+  if(check_nodal_data)
+   {
+    //Get memory address of the equation indexed by the
+    //traded pressure datum
+    long* global_eqn_number = vol_constraint_el_pt->p_traded_data_pt()
+     ->eqn_number_pt(vol_constraint_el_pt->index_of_traded_pressure());
+    
+    //Put in a check if the datum already corresponds to any other 
+    //(nodal) data in the element by checking the memory addresses of
+    //their global equation numbers
+    const unsigned n_node = this->nnode();
+    for(unsigned n=0;n<n_node;n++)
+     {
+      //Cache the node pointer
+      Node* const nod_pt = this->node_pt(n);
+      //Find all nodal data values
+      unsigned n_value = nod_pt->nvalue();
+      //If we already have the data, set the 
+      //lookup schemes accordingly and return from the function
+      for(unsigned i=0;i<n_value;i++)
+       {
+        if(nod_pt->eqn_number_pt(i) == global_eqn_number)
+         {
+          Traded_pressure_stored_at_node = true;
+          Data_number_of_traded_pressure = n;
+          Index_of_traded_pressure_value = i;
+          //Finished so exit the function
+          return;
+         }
+       }
+     }
+   }
+  
+  //Should only get here if the data is not nodal 
+  
   // Add "traded" pressure data as external data to this element
-  External_data_number_of_traded_pressure=
+  Data_number_of_traded_pressure=
    this->add_external_data(vol_constraint_el_pt->p_traded_data_pt());
   
   // Which value corresponds to the traded pressure

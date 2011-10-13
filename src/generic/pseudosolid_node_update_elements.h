@@ -246,14 +246,53 @@ template<class BASIC, class SOLID>
   // Vector<double> newres_minus(n_dof);
   
   //Calculate the residuals (for the BASIC) equations 
-  BASIC::get_residuals(residuals);
+  //Need to do this using fill_in because get_residuals will
+  //compute all residuals for the problem, which is 
+  //a little ineffecient
+  for(unsigned m=0;m<n_dof;m++) {residuals[m] = 0.0;}
+  BASIC::fill_in_contribution_to_residuals(residuals);
+
+  //Need to determine which degrees of freedom are solid degrees of
+  //freedom
+  //A vector of booleans that will be true if the dof is associated
+  //with the solid equations
+  std::vector<bool> dof_is_solid(n_dof,false);
+
+  //Now set all solid positional dofs in the vector
+  for(unsigned n=0;n<n_node;n++)
+   {
+    for(unsigned k=0;k<n_position_type;k++)
+     {
+      for(unsigned i=0;i<nodal_dim;i++)
+       {
+        int local_dof = this->position_local_eqn(n,k,i);
+        if(local_dof >= 0)
+         {
+          dof_is_solid[local_dof] = true;
+         }
+       }
+     }
+   }
+
+  //Add the solid pressures (in solid elements without
+  //solid pressure the number will be zero).
+  unsigned n_solid_pres = this->npres_solid();
+  for(unsigned l=0;l<n_solid_pres;l++)
+   {
+    int local_dof = this->solid_p_local_eqn(l);
+    if(local_dof >= 0)
+     {
+      dof_is_solid[local_dof] = true;
+     }
+   }
+
   
   //Integer storage for local unknown
   int local_unknown=0;
- 
-  //Should probably give this a more global scope
+  
+  //Use default value defined in GeneralisedElement
   const double fd_step = this->Default_fd_jacobian_step;
- 
+
   //Loop over the nodes
   for(unsigned n=0;n<n_node;n++)
    {
@@ -280,7 +319,11 @@ template<class BASIC, class SOLID>
           this->node_pt(n)->perform_auxiliary_node_update_fct();
           
           //Calculate the new residuals
-          BASIC::get_residuals(newres);
+          //Need to do this using fill_in because get_residuals will
+          //compute all residuals for the problem, which is 
+          //a little ineffecient
+          for(unsigned m=0;m<n_dof;m++) {newres[m] = 0.0;}
+          BASIC::fill_in_contribution_to_residuals(newres);
          
 //          if (use_first_order_fd)
            {
@@ -288,7 +331,11 @@ template<class BASIC, class SOLID>
             for(unsigned m=0;m<n_dof;m++)
              {
               //Stick the entry into the Jacobian matrix
-              jacobian(m,local_unknown) = (newres[m] - residuals[m])/fd_step;
+              //but only if it's not a solid dof
+              if(dof_is_solid[m] == false)
+               {
+                jacobian(m,local_unknown) = (newres[m] - residuals[m])/fd_step;
+               }
              }
            }
 //           else
@@ -591,14 +638,141 @@ class RefineablePseudoSolidNodeUpdateElement : public virtual BASIC,
    // Vector<double> newres_minus(n_dof);
    
    //Calculate the residuals (for the BASIC) equations 
-   BASIC::get_residuals(residuals);
+   //Need to do this using fill_in because get_residuals will
+   //compute all residuals for the problem, which is 
+   //a little ineffecient
+   for(unsigned m=0;m<n_dof;m++) {residuals[m] = 0.0;}
+   BASIC::fill_in_contribution_to_residuals(residuals);
+
+   //Need to determine which degrees of freedom are solid degrees of
+   //freedom
+   //A vector of booleans that will be true if the dof is associated
+   //with the solid equations
+   std::vector<bool> dof_is_solid(n_dof,false);
+
+   //Now set all solid positional dofs in the vector
+   //This is a bit more involved because we need to take account of
+   //any hanging nodes
+   for(unsigned n=0;n<n_node;n++)
+    {
+     //Get pointer to the local node
+     Node* const local_node_pt = this->node_pt(n);
+     
+     //If the node is not a hanging node
+     if(local_node_pt->is_hanging()==false)
+      {
+       for(unsigned k=0;k<n_position_type;k++)
+        {
+         for(unsigned i=0;i<nodal_dim;i++)
+          {
+           int local_dof = this->position_local_eqn(n,k,i);
+           if(local_dof >= 0)
+            {
+             dof_is_solid[local_dof] = true;
+            }
+          }
+        }
+      }
+     //Otherwise the node is hanging
+     else
+      {
+       //Find the local hanging object
+       HangInfo* hang_info_pt = local_node_pt->hanging_pt();
+       //Loop over the master nodes
+       const unsigned n_master = hang_info_pt->nmaster();
+       for(unsigned m=0;m<n_master;m++)
+        {
+         //Get the local equation numbers for the master node
+         DenseMatrix<int> Position_local_eqn_at_node
+          = this->local_position_hang_eqn(hang_info_pt->master_node_pt(m));
+         
+         //Loop over position dofs
+         for(unsigned k=0;k<n_position_type;k++)
+          {
+           //Loop over dimension
+           for(unsigned i=0;i<nodal_dim;i++)
+            {
+             int local_dof = Position_local_eqn_at_node(k,i);
+             if(local_dof >= 0)
+              {
+               dof_is_solid[local_dof] = true;
+              }
+            }
+          }
+        }
+      }
+    } //End of loop over nodes
+
+   //Add the solid pressures (in solid elements without
+   //solid pressure the number will be zero).
+   unsigned n_solid_pres = this->npres_solid();
+   //Now is the solid pressure hanging
+   const int solid_p_index = this->solid_p_nodal_index();
+   //Find out whether the solid node is hanging
+   std::vector<bool> solid_p_is_hanging(n_solid_pres);
+   //If we have nodal solid pressures then read out the hanging status
+   if(solid_p_index >= 0)
+    {
+     //Loop over the solid dofs
+     for(unsigned l=0;l<n_solid_pres;l++)
+      {
+       solid_p_is_hanging[l] = 
+        this->solid_pressure_node_pt(l)->is_hanging(solid_p_index);
+      }
+    }
+   //Otherwise the pressure is not nodal, so cannot hang
+   else
+    {
+     for(unsigned l=0;l<n_solid_pres;l++)
+      {
+       solid_p_is_hanging[l] = false;
+      }
+    }
+     
+   //Now we can loop of the dofs again to actually set that the appropriate
+   //dofs are solid
+   for(unsigned l=0;l<n_solid_pres;l++)
+    {
+     //If the solid pressure is not hanging 
+     //we just read out the local equation numbers directly
+     if(solid_p_is_hanging[l] == false)
+      {
+       int local_dof = this->solid_p_local_eqn(l);
+       if(local_dof >= 0)
+        {
+         dof_is_solid[local_dof] = true;
+        }
+      }
+     //Otherwise solid pressure is hanging and we need to take
+     //care of the master nodes
+     else
+      {
+       //Find the local hanging object
+       HangInfo* hang_info_pt = 
+        this->solid_pressure_node_pt(l)->hanging_pt(solid_p_index);
+       //Loop over the master nodes
+       const unsigned n_master = hang_info_pt->nmaster();
+       for(unsigned m=0;m<n_master;m++)
+        {
+         //Get the local dof
+         int local_dof = this->local_hang_eqn(
+          hang_info_pt->master_node_pt(m),solid_p_index);
+         
+         if(local_dof >= 0)
+          {
+           dof_is_solid[local_dof] = true;
+          }
+        }
+      }
+    } //end of loop over solid pressure dofs
+         
    
    //Used default value defined in GeneralisedElement
    const double fd_step = this->Default_fd_jacobian_step;
-   
+ 
    //Integer storage for local unknowns
    int local_unknown=0;
-   
+
    //Loop over the nodes
    for(unsigned l=0;l<n_node;l++)
     {
@@ -631,7 +805,12 @@ class RefineablePseudoSolidNodeUpdateElement : public virtual BASIC,
              local_node_pt->perform_auxiliary_node_update_fct();
           
              //Calculate the new residuals
-             BASIC::get_residuals(newres);
+             //Need to do this using fill_in because get_residuals will
+             //compute all residuals for the problem, which is 
+             //a little ineffecient
+             for(unsigned m=0;m<n_dof;m++) {newres[m] = 0.0;}
+             BASIC::fill_in_contribution_to_residuals(newres);
+
              
 //           if (use_first_order_fd)
              {
@@ -639,7 +818,12 @@ class RefineablePseudoSolidNodeUpdateElement : public virtual BASIC,
               for(unsigned m=0;m<n_dof;m++)
                {
                 //Stick the entry into the Jacobian matrix
-                jacobian(m,local_unknown) = (newres[m] - residuals[m])/fd_step;
+                //But only if it's not a solid dof
+                if(dof_is_solid[m]==false)
+                 {
+                  jacobian(m,local_unknown) = 
+                   (newres[m] - residuals[m])/fd_step;
+                 }
                }
              }
 //             else
@@ -710,7 +894,11 @@ class RefineablePseudoSolidNodeUpdateElement : public virtual BASIC,
                master_node_pt->perform_auxiliary_node_update_fct();
           
                //Calculate the new residuals
-               BASIC::get_residuals(newres);
+               //Need to do this using fill_in because get_residuals will
+               //compute all residuals for the problem, which is 
+               //a little ineffecient
+               for(unsigned m=0;m<n_dof;m++) {newres[m] = 0.0;}
+               BASIC::fill_in_contribution_to_residuals(newres);
                
 //            if (use_first_order_fd)
                {
@@ -718,8 +906,12 @@ class RefineablePseudoSolidNodeUpdateElement : public virtual BASIC,
                 for(unsigned m=0;m<n_dof;m++)
                  {
                   //Stick the entry into the Jacobian matrix
-                  jacobian(m,local_unknown) = 
-                   (newres[m] - residuals[m])/fd_step;
+                  //But only if it's not a solid dof
+                  if(dof_is_solid[m] == false)
+                   {
+                    jacobian(m,local_unknown) = 
+                     (newres[m] - residuals[m])/fd_step;
+                   }
                  }
                }
 //               else

@@ -10,22 +10,23 @@ marangoni_convection  marangoni_convection_box
 
 
 # Sources for executable
-marangoni_convection_SOURCES = buoyant_navier_stokes_elements.h marangoni_convection.cc 
+marangoni_convection_SOURCES = marangoni_convection.cc 
 
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
 marangoni_convection_LDADD = -L@libdir@ -ladvection_diffusion \
- -lnavier_stokes -lfluid_interface -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
+ -lnavier_stokes -lfluid_interface -lmulti_physics -lgeneric \
+$(EXTERNAL_LIBS) $(FLIBS)
 
 
 # Sources for executable
-marangoni_convection_box_SOURCES = buoyant_navier_stokes_elements.h \
-                                     marangoni_convection_box.cc 
+marangoni_convection_box_SOURCES = marangoni_convection_box.cc 
 
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
 marangoni_convection_box_LDADD = -L@libdir@ -ladvection_diffusion \
- -lnavier_stokes -lfluid_interface -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
+ -lnavier_stokes -lmulti_physics -lfluid_interface -lgeneric \
+$(EXTERNAL_LIBS) $(FLIBS)
 

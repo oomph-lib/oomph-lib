@@ -462,7 +462,7 @@ SolidFreeSurfaceRotationProblem(DocInfo& doc_info,
  for(unsigned i=0;i<n_element;i++)
   {
    // Upcast from GeneralisedElement to the present element
-   ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(i));
+   ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->bulk_element_pt(i));
 
    el_pt->constitutive_law_pt() = Constitutive_law_pt;
   }

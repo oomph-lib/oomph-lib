@@ -90,6 +90,12 @@ public:
    Ra_pt = &Default_Physical_Constant_Value;
   }
 
+ /// Unpin p_dof-th pressure dof 
+ void unfix_pressure(const unsigned &p_dof)
+  {
+   this->internal_data_pt(this->P_nst_internal_index)->unpin(p_dof);
+  }
+
  ///\short The required number of values stored at the nodes is the sum of the
  ///required values of the two single-physics  elements. Note that this step is
  ///generic for any multi-physics element of this type.
@@ -351,7 +357,14 @@ public:
          *value_pt += fd_step;
 
          //Get the altered advection-diffusion residuals.
-         AdvectionDiffusionEquations<DIM>::get_residuals(newres);
+         //which must be done using fill_in_contribution because
+         //get_residuals will always return the full residuals
+         //because the appropriate fill_in function is overloaded above
+         for(unsigned m=0;m<n_dof;m++) {newres[m] = 0.0;}
+         AdvectionDiffusionEquations<DIM>::
+          fill_in_contribution_to_residuals(newres);
+         
+        //AdvectionDiffusionEquations<DIM>::get_residuals(newres);
 
          //Now fill in the Advection-Diffusion sub-block
          //of the jacobian
@@ -393,7 +406,14 @@ public:
         *value_pt += fd_step;
         
         //Get the altered Navier--Stokes residuals
-        NavierStokesEquations<DIM>::get_residuals(newres);
+        //which must be done using fill_in_contribution because
+        //get_residuals will always return the full residuals
+        //because the appropriate fill_in function is overloaded above
+        for(unsigned m=0;m<n_dof;m++) {newres[m] = 0.0;}
+        NavierStokesEquations<DIM>::
+          fill_in_contribution_to_residuals(newres);
+
+        //NavierStokesEquations<DIM>::get_residuals(newres);
          
         //Now fill in the Navier-Stokes sub-block
         for(unsigned m=0;m<n_node;m++)
@@ -646,6 +666,29 @@ template<>
 double BuoyantQCrouzeixRaviartElement<2>::Default_Physical_Constant_Value=0.0;
 template<>
 double BuoyantQCrouzeixRaviartElement<3>::Default_Physical_Constant_Value=0.0;
+
+
+//=======================================================================
+/// Face geometry of the 2D Buoyant Crouzeix_Raviart elements
+//=======================================================================
+template<unsigned int DIM>
+class FaceGeometry<BuoyantQCrouzeixRaviartElement<DIM> >: 
+public virtual QElement<DIM-1,3>
+{
+  public:
+ FaceGeometry() : QElement<DIM-1,3>() {}
+};
+
+//=======================================================================
+/// Face geometry of the Face geometry of 2D Buoyant Crouzeix_Raviart elements
+//=======================================================================
+template<>
+class FaceGeometry<FaceGeometry<BuoyantQCrouzeixRaviartElement<2> > >: 
+public virtual PointElement
+{
+  public:
+ FaceGeometry() : PointElement() {}
+};
 
 
 /////////////////////////////////////////////////////////////////////////

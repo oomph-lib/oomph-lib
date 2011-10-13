@@ -287,7 +287,12 @@ class NonIsothermalAxisymmetricQCrouzeixRaviartElement :
          *value_pt += fd_step;
 
          //Get the altered advection-diffusion residuals.
-         SteadyAxisymAdvectionDiffusionEquations::get_residuals(newres);
+         //which must be done using fill_in_contribution because
+         //get_residuals will always return the full residuals
+         //because the appropriate fill_in function is overloaded above
+         for(unsigned m=0;m<n_dof;m++) {newres[m] = 0.0;}
+         SteadyAxisymAdvectionDiffusionEquations::
+          fill_in_contribution_to_residuals(newres);
 
          //Now fill in the Advection-Diffusion sub-block
          //of the jacobian
@@ -329,8 +334,13 @@ class NonIsothermalAxisymmetricQCrouzeixRaviartElement :
         *value_pt += fd_step;
         
         //Get the altered Navier--Stokes residuals
-        AxisymmetricNavierStokesEquations::get_residuals(newres);
-         
+        //which must be done using fill_in_contribution because
+        //get_residuals will always return the full residuals
+        //because the appropriate fill_in function is overloaded above
+        for(unsigned m=0;m<n_dof;m++) {newres[m] = 0.0;}
+        AxisymmetricNavierStokesEquations::
+         fill_in_contribution_to_residuals(newres);
+        
         //Now fill in the Navier-Stokes sub-block
         for(unsigned m=0;m<n_node;m++)
          {

@@ -31,9 +31,11 @@
 //Marangoni-Bernard convection
 
 //Oomph-lib headers, we require the generic, advection-diffusion
-//and navier-stokes elements.
+//and navier-stokes elements and the multi_physics (Boussinesq) elements
 #include "generic.h"
-#include "buoyant_navier_stokes_elements.h"
+#include "advection_diffusion.h"
+#include "navier_stokes.h"
+#include "multi_physics.h"
 #include "fluid_interface.h"
 
 // The mesh is our standard rectangular quadmesh

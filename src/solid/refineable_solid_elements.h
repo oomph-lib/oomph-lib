@@ -124,6 +124,11 @@ public:
  
  /// Number of continuously interpolated values: 0 (pure solid problem)
  unsigned ncont_interpolated_values() const {return 0;}
+ 
+ //Return a pointer to the solid node at which pressure dof l2 is stored
+ //This is only required so that the generic templating in 
+ //PseudoSolidNodeUpdateElements works OK
+ virtual Node* solid_pressure_node_pt(const unsigned &l) {return 0;}
 
  /// Further build function, pass the pointers down to the sons
  void further_build()

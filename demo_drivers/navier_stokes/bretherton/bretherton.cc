@@ -309,7 +309,7 @@ public:
          //Zero the residuals
          for(unsigned idof=0;idof<n_dof;idof++) {residuals_plus[idof] = 0.0;}
          // Re-compute the element residual
-         ELEMENT::get_residuals(residuals_plus);
+         this->get_residuals(residuals_plus);
 
          for(unsigned idof=0;idof<n_dof;idof++)
           {

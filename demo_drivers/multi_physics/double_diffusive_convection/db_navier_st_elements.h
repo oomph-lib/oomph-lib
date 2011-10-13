@@ -373,7 +373,12 @@ public:
          *value_pt += fd_step;
 
          //Get the altered advection-diffusion residuals.
-         AdvectionDiffusionReactionEquations<2,DIM>::get_residuals(newres);
+         //Do this using fill_in because get_residuals has never been 
+         //overloaded, and will actually compute all residuals which
+         //is slightly inefficient.
+         for(unsigned m=0;m<n_dof;m++) {newres[m] = 0.0;}
+         AdvectionDiffusionReactionEquations<2,DIM>::
+          fill_in_contribution_to_residuals(newres);
 
          //Now fill in the Advection-Diffusion-Reaction sub-block
          //of the jacobian
@@ -420,7 +425,11 @@ public:
          *value_pt += fd_step;
          
          //Get the altered Navier--Stokes residuals
-         NavierStokesEquations<DIM>::get_residuals(newres);
+         //Do this using fill_in because get_residuals has never been 
+         //overloaded, and will actually compute all residuals which
+         //is slightly inefficient.
+         for(unsigned m=0;m<n_dof;m++) {newres[m] = 0.0;}
+         NavierStokesEquations<DIM>::fill_in_contribution_to_residuals(newres);
          
          //Now fill in the Navier-Stokes sub-block
          for(unsigned m=0;m<n_node;m++)
