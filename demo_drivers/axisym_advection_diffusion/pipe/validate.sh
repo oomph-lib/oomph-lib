@@ -2,7 +2,7 @@
 
 
 #Set the number of tests to be checked
-NUM_TESTS=1
+NUM_TESTS=2
 
 
 # Setup validation directory
@@ -35,6 +35,31 @@ else
 ../../../../bin/fpdiff.py ../validata/pipe.dat.gz \
     pipe.dat  >> validation.log
 fi
+
+mv RESLT RESLT_pipe
+
+echo "Running adaptive axisymmetric advection variable diffusion validation "
+mkdir RESLT
+../pipe_variable_diff > OUTPUT_pipe_variable_diff
+echo "done"
+echo " " >> validation.log
+echo "Adaptive axisymmetric advection variable diffusion validation " >> validation.log
+echo "-------------------------------------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat RESLT/soln3.dat > pipe_var_diff.dat
+
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../../bin/fpdiff.py ../validata/pipe_var_diff.dat.gz \
+    pipe_var_diff.dat  >> validation.log
+fi
+
+mv RESLT RESLT_pipe_var_diff
 
 
 # Append output to global validation log file

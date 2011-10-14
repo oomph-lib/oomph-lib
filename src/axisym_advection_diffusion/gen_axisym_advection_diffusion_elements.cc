@@ -25,19 +25,17 @@
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 //LIC// 
 //LIC//====================================================================
-//Non-inline functions for Advection Diffusion elements in a cylindrical
-//coordinate system
-#include "axisym_advection_diffusion_elements.h"
+//Non-inline functions for GeneralisedAxisymAdvection Diffusion elements
+#include "gen_axisym_advection_diffusion_elements.h"
 
 namespace oomph
 {
 
-/// 2D Steady Axisymmetric Advection Diffusion elements
+///2D GeneralisedAdvection Diffusion elements
+
 
 /// Default value for Peclet number
-double AxisymAdvectionDiffusionEquations::
-Default_peclet_number = 0.0;
-
+double GeneralisedAxisymAdvectionDiffusionEquations::Default_peclet_number=0.0;
 
 //======================================================================
 /// \short Compute element residual Vector and/or element Jacobian matrix 
@@ -47,17 +45,19 @@ Default_peclet_number = 0.0;
 ///
 /// Pure version without hanging nodes
 //======================================================================
-void  AxisymAdvectionDiffusionEquations::
-fill_in_generic_residual_contribution_axi_adv_diff(
- Vector<double> &residuals, DenseMatrix<double> &jacobian, 
- DenseMatrix<double> &mass_matrix,
+void  GeneralisedAxisymAdvectionDiffusionEquations::
+fill_in_generic_residual_contribution_cons_axisym_adv_diff(
+ Vector<double> &residuals, 
+ DenseMatrix<double> &jacobian, 
+ DenseMatrix<double> 
+ &mass_matrix,
  unsigned flag) 
 {
  //Find out how many nodes there are
  const unsigned n_node = nnode();
-
+ 
  //Get the nodal index at which the unknown is stored
- const unsigned u_nodal_index = u_index_axi_adv_diff();
+ const unsigned u_nodal_index = u_index_cons_axisym_adv_diff();
    
  //Set up memory for the shape and test functions
  Shape psi(n_node), test(n_node);
@@ -69,11 +69,11 @@ fill_in_generic_residual_contribution_axi_adv_diff(
  //Set the Vector to hold local coordinates
  Vector<double> s(2);
 
- //Get Physical Variables from Element
- const double scaled_peclet = pe();
+ //Get Peclet number
+ const double peclet = pe();
 
- //Get peclet number multiplied by Strouhal number
- const double scaled_peclet_st = pe_st();
+ //Get the Peclet*Strouhal number
+ const double peclet_st = pe_st();
 
  //Integers used to store the local equation number and local unknown
  //indices for the residuals and jacobians
@@ -91,52 +91,74 @@ fill_in_generic_residual_contribution_axi_adv_diff(
 
    //Call the derivatives of the shape and test functions
    double J = 
-    dshape_and_dtest_eulerian_at_knot_axi_adv_diff(
+    dshape_and_dtest_eulerian_at_knot_cons_axisym_adv_diff(
      ipt,psi,dpsidx,test,dtestdx);
-       
+   
    //Premultiply the weights and the Jacobian
    double W = w*J;
 
    //Calculate local values of the solution and its derivatives
    //Allocate
-   double interpolated_u = 0.0;
-   double dudt = 0.0;
+   double interpolated_u=0.0;
+   double dudt=0.0;
    Vector<double> interpolated_x(2,0.0);
    Vector<double> interpolated_dudx(2,0.0);
+   Vector<double> mesh_velocity(2,0.0);
+
 
    //Calculate function value and derivatives:
    //-----------------------------------------
-   //Loop over nodes
+   // Loop over nodes
    for(unsigned l=0;l<n_node;l++) 
     {
      //Get the value at the node
      double u_value = raw_nodal_value(l,u_nodal_index);
      interpolated_u += u_value*psi(l);
-     dudt += du_dt_axi_adv_diff(l)*psi(l);
-     //Loop over the two coordinates directions
+     dudt += du_dt_cons_axisym_adv_diff(l)*psi(l);
+     // Loop over directions
      for(unsigned j=0;j<2;j++)
       {
        interpolated_x[j] += raw_nodal_position(l,j)*psi(l);
        interpolated_dudx[j] += u_value*dpsidx(l,j);
       }
     }
-     
+   
+   // Mesh velocity?
+   if (!ALE_is_disabled)
+    {
+     for(unsigned l=0;l<n_node;l++) 
+      {
+       for(unsigned j=0;j<2;j++)
+        {
+         mesh_velocity[j] += raw_dnodal_position_dt(l,j)*psi(l);
+        }
+      }
+    }
+   
+
    //Get source function
    //-------------------
    double source;
-   get_source_axi_adv_diff(ipt,interpolated_x,source);
+   get_source_cons_axisym_adv_diff(ipt,interpolated_x,source);
 
 
-   //Get wind three potential components
-   //---------------------------------------
+   //Get wind (three components because this could come from a NS computation)
+   //--------
    Vector<double> wind(3);
-   get_wind_axi_adv_diff(ipt,s,interpolated_x,wind);
+   get_wind_cons_axisym_adv_diff(ipt,s,interpolated_x,wind);
+
+   //Get the conserved wind (non-divergence free)
+   Vector<double> conserved_wind(3);
+   get_conserved_wind_cons_axisym_adv_diff(ipt,s,interpolated_x,conserved_wind);
+
+   //Get diffusivity tensor
+   DenseMatrix<double> D(3,3);
+   get_diff_cons_axisym_adv_diff(ipt,s,interpolated_x,D);
 
    //r is the first position component
    double r = interpolated_x[0];
 
-   //TEMPERATURE EQUATION (Neglected viscous dissipation) 
-   //Assemble residuals and Jacobian
+   // Assemble residuals and Jacobian
    //--------------------------------
        
    // Loop over the test functions
@@ -148,18 +170,31 @@ fill_in_generic_residual_contribution_axi_adv_diff(
      /*IF it's not a boundary condition*/
      if(local_eqn >= 0)
       {
-       //Add body force/source term
-       residuals[local_eqn] -= (scaled_peclet_st*dudt + source)*r*test(l)*W;
+       // Add body force/source term and time derivative 
+       residuals[local_eqn] -= (peclet_st*dudt + source)*r*test(l)*W;
        
-       //The Advection Diffusion bit itself
-       residuals[local_eqn] -= 
-        //radial terms
-        (interpolated_dudx[0]*
-         (scaled_peclet*wind[0]*test(l) + dtestdx(l,0)) +
-         //azimuthal terms
-         (interpolated_dudx[1]*
-          (scaled_peclet*wind[1]*test(l) + dtestdx(l,1))))*r*W;
+       // The Generalised Advection Diffusion bit itself
+       // Only loop over the non azimuthal directions
+       for(unsigned k=0;k<2;k++)
+        {
+         //Terms that multiply the test function 
+         //divergence-free wind
+         double tmp = peclet*wind[k];
+         //If the mesh is moving need to subtract the mesh velocity
+         if(!ALE_is_disabled) {tmp -= peclet_st*mesh_velocity[k];}
+         tmp *= interpolated_dudx[k];
 
+         //Terms that multiply the derivative of the test function
+         //Advective term
+         double tmp2 = -conserved_wind[k]*interpolated_u;
+         //Now the diuffusive term
+         for(unsigned j=0;j<2;j++)
+          {
+           tmp2 += D(k,j)*interpolated_dudx[j];
+          }
+         //Now construct the contribution to the residuals
+         residuals[local_eqn] -= (tmp*test(l) + tmp2*dtestdx(l,k))*r*W;
+        }
        
        // Calculate the jacobian
        //-----------------------
@@ -173,27 +208,39 @@ fill_in_generic_residual_contribution_axi_adv_diff(
            
            //If at a non-zero degree of freedom add in the entry
            if(local_unknown >= 0)
-            {             
+            {
              //Mass matrix term
              jacobian(local_eqn,local_unknown) 
-              -= scaled_peclet_st*test(l)*psi(l2)*
+              -= peclet_st*test(l)*psi(l2)*
               node_pt(l2)->time_stepper_pt()->weight(1,0)*r*W;
-             
-             //add the mass matrix term
+
+             //Add the mass matrix term
              if(flag==2)
-              {  
+              {
                mass_matrix(local_eqn,local_unknown)
-                += scaled_peclet_st*test(l)*psi(l2)*r*W;
+                += peclet_st*test(l)*psi(l2)*r*W;
               }
 
-             //Assemble Jacobian term
-             jacobian(local_eqn,local_unknown) -= 
-              //radial terms
-              (dpsidx(l2,0)*
-               (scaled_peclet*wind[0]*test(l) + dtestdx(l,0)) +
-               //azimuthal terms
-               (dpsidx(l2,1)*
-                (scaled_peclet*wind[1]*test(l) + dtestdx(l,1))))*r*W;
+             //Add contribution to Elemental Matrix
+             for(unsigned k=0;k<2;k++)
+              {
+               //Temporary term used in assembly
+               double tmp = -peclet*wind[k];
+               if(!ALE_is_disabled) 
+                {tmp -= peclet_st*mesh_velocity[k];}
+               tmp *= dpsidx(l2,k);
+
+               double tmp2 = -conserved_wind[k]*psi(l2);
+               //Now the diffusive term
+               for(unsigned j=0;j<2;j++)
+                {
+                 tmp2 += D(k,j)*dpsidx(l2,j);
+                }
+               
+               //Now assemble Jacobian term
+               jacobian(local_eqn,local_unknown) 
+                -= (tmp*test(l) + tmp2*dtestdx(l,k))*r*W;
+              }
             }
           }
         }
@@ -202,24 +249,22 @@ fill_in_generic_residual_contribution_axi_adv_diff(
 
 
   } // End of loop over integration points
-}   
-
+}
 
 
 
 //======================================================================
 /// Self-test:  Return 0 for OK
 //======================================================================
-//template <unsigned DIM>
-unsigned  AxisymAdvectionDiffusionEquations::self_test()
+unsigned  GeneralisedAxisymAdvectionDiffusionEquations::self_test()
 {
 
- bool passed = true;
+ bool passed=true;
 
  // Check lower-level stuff
  if (FiniteElement::self_test()!=0)
   {
-   passed = false;
+   passed=false;
   }
 
  // Return verdict
@@ -243,23 +288,28 @@ unsigned  AxisymAdvectionDiffusionEquations::self_test()
 ///
 /// nplot points in each coordinate direction
 //======================================================================
-void AxisymAdvectionDiffusionEquations::output(std::ostream &outfile, 
-                                                     const unsigned &nplot)
-{ 
- //Vector of local coordinates
- Vector<double> s(2);
- 
- //Tecplot header info
- outfile << tecplot_zone_string(nplot);
- 
- //Loop over plot points
- unsigned num_plot_points = nplot_points(nplot);
- for (unsigned iplot=0;iplot<num_plot_points;iplot++)
+ void  GeneralisedAxisymAdvectionDiffusionEquations::output(
+  std::ostream &outfile, 
+  const unsigned &nplot)
+ { 
+  //Vector of local coordinates
+  Vector<double> s(2);
+  
+  // Tecplot header info
+  outfile << tecplot_zone_string(nplot);
+  
+  const unsigned n_node = this->nnode();
+  Shape psi(n_node);
+  DShape dpsidx(n_node,2);
+
+  // Loop over plot points
+  unsigned num_plot_points=nplot_points(nplot);
+  for (unsigned iplot=0;iplot<num_plot_points;iplot++)
   {
-   //Get local coordinates of plot point
+   // Get local coordinates of plot point
    get_s_plot(iplot,nplot,s);
    
-   //Get Eulerian coordinate of plot point
+   // Get Eulerian coordinate of plot point
    Vector<double> x(2);
    interpolated_x(s,x);
    
@@ -267,15 +317,30 @@ void AxisymAdvectionDiffusionEquations::output(std::ostream &outfile,
     {
      outfile << x[i] << " ";
     }
-
-   //Output concentration
-   outfile << this->interpolated_u_axi_adv_diff(s) << " ";
+   outfile << interpolated_u_cons_axisym_adv_diff(s) << " ";
    
-   //Get the wind
+   //Get the gradients
+   /*(void)this->dshape_eulerian(s,psi,dpsidx);
+   Vector<double> interpolated_dudx(2,0.0);
+   for(unsigned n=0;n<n_node;n++)
+    {
+     const double u_ = this->nodal_value(n,0);
+     for(unsigned i=0;i<2;i++)
+      {
+       interpolated_dudx[i] += u_*dpsidx(n,i);
+      }
+    }
+
+   for(unsigned i=0;i<2;i++)
+    {
+     outfile << interpolated_dudx[i]  << " ";
+     }*/
+    
+   // Get the wind
    Vector<double> wind(3);
-   //Dummy ipt argument needed... ?
-   unsigned ipt = 0;
-   get_wind_axi_adv_diff(ipt,s,x,wind);
+   // Dummy integration point variable needed
+   unsigned ipt=0;
+   get_wind_cons_axisym_adv_diff(ipt,s,x,wind);
    for(unsigned i=0;i<3;i++) 
     {
      outfile << wind[i] << " ";
@@ -284,7 +349,7 @@ void AxisymAdvectionDiffusionEquations::output(std::ostream &outfile,
    
   }
 
- //Write tecplot footer (e.g. FE connectivity lists)
+ // Write tecplot footer (e.g. FE connectivity lists)
  write_tecplot_zone_footer(outfile,nplot);
 
 }
@@ -297,22 +362,21 @@ void AxisymAdvectionDiffusionEquations::output(std::ostream &outfile,
 ///
 /// nplot points in each coordinate direction
 //======================================================================
-//template <unsigned DIM>
-void AxisymAdvectionDiffusionEquations::output(FILE* file_pt,
-                                                     const unsigned &nplot)
+void GeneralisedAxisymAdvectionDiffusionEquations::output(FILE* file_pt,
+                                                          const unsigned &nplot)
 {
  //Vector of local coordinates
  Vector<double> s(2);
  
- //Tecplot header info
+ // Tecplot header info
  fprintf(file_pt,"%s",tecplot_zone_string(nplot).c_str());
 
- //Loop over plot points
- unsigned num_plot_points = nplot_points(nplot);
+ // Loop over plot points
+ unsigned num_plot_points=nplot_points(nplot);
  for (unsigned iplot=0;iplot<num_plot_points;iplot++)
   {
    
-   //Get local coordinates of plot point
+   // Get local coordinates of plot point
    get_s_plot(iplot,nplot,s);
    
    for(unsigned i=0;i<2;i++) 
@@ -320,14 +384,15 @@ void AxisymAdvectionDiffusionEquations::output(FILE* file_pt,
      fprintf(file_pt,"%g ",interpolated_x(s,i));
 
     }
-
-   fprintf(file_pt,"%g \n",interpolated_u_axi_adv_diff(s));
+   fprintf(file_pt,"%g \n",interpolated_u_cons_axisym_adv_diff(s));
   }
 
- //Write tecplot footer (e.g. FE connectivity lists)
+ // Write tecplot footer (e.g. FE connectivity lists)
  write_tecplot_zone_footer(file_pt,nplot);
 
 }
+
+
 
 //======================================================================
  /// \short  Output exact solution
@@ -335,39 +400,38 @@ void AxisymAdvectionDiffusionEquations::output(FILE* file_pt,
  /// Solution is provided via function pointer.
  /// Plot at a given number of plot points.
  ///
- ///   r,z,u_exact
+ ///   r,z,,u_exact 
 //======================================================================
-//template <unsigned DIM>
-void AxisymAdvectionDiffusionEquations::output_fct(
+void GeneralisedAxisymAdvectionDiffusionEquations::output_fct(
  std::ostream &outfile, 
- const unsigned &nplot, 
- FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
+             const unsigned &nplot, 
+             FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
   {
 
    //Vector of local coordinates
    Vector<double> s(2);
 
-   //Vector for coordintes
+   // Vector for coordintes
    Vector<double> x(2);
 
-   //Tecplot header info
+   // Tecplot header info
    outfile << tecplot_zone_string(nplot);
    
-   //Exact solution Vector (here a scalar)
+   // Exact solution Vector (here a scalar)
    Vector<double> exact_soln(1);
 
-   //Loop over plot points
+   // Loop over plot points
    unsigned num_plot_points=nplot_points(nplot);
    for (unsigned iplot=0;iplot<num_plot_points;iplot++)
     {
      
-     //Get local coordinates of plot point
+     // Get local coordinates of plot point
      get_s_plot(iplot,nplot,s);
 
-     //Get x position as Vector
+     // Get x position as Vector
      interpolated_x(s,x);
 
-     //Get exact solution at this point
+     // Get exact solution at this point
      (*exact_soln_pt)(x,exact_soln);
 
      //Output x,y,...,u_exact
@@ -378,10 +442,12 @@ void AxisymAdvectionDiffusionEquations::output_fct(
      outfile << exact_soln[0] << std::endl;  
     }
 
-   //Write tecplot footer (e.g. FE connectivity lists)
+   // Write tecplot footer (e.g. FE connectivity lists)
    write_tecplot_zone_footer(outfile,nplot);
    
   }
+
+
 
 
 //======================================================================
@@ -391,22 +457,20 @@ void AxisymAdvectionDiffusionEquations::output_fct(
  /// Plot error at a given number of plot points.
  ///
 //======================================================================
-//template <unsigned DIM>
-void AxisymAdvectionDiffusionEquations::compute_error(
+void GeneralisedAxisymAdvectionDiffusionEquations::compute_error(
  std::ostream &outfile, 
  FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
- double& error,
- double& norm)
+ double& error, double& norm)
 { 
  
- //Initialise
+ // Initialise
  error=0.0;
  norm=0.0;
 
  //Vector of local coordinates
  Vector<double> s(2);
 
- //Vector for coordintes
+ // Vector for coordintes
  Vector<double> x(2);
 
  //Find out how many nodes there are in the element
@@ -417,10 +481,10 @@ void AxisymAdvectionDiffusionEquations::compute_error(
  //Set the value of n_intpt
  unsigned n_intpt = integral_pt()->nweight();
    
- //Tecplot header info
+ // Tecplot header info
  outfile << "ZONE" << std::endl;
    
- //Exact solution Vector (here a scalar)
+ // Exact solution Vector (here a scalar)
  Vector<double> exact_soln(1);
 
  //Loop over the integration points
@@ -436,19 +500,19 @@ void AxisymAdvectionDiffusionEquations::compute_error(
    //Get the integral weight
    double w = integral_pt()->weight(ipt);
 
-   //Get jacobian of mapping
+   // Get jacobian of mapping
    double J=J_eulerian(s);
 
    //Premultiply the weights and the Jacobian
    double W = w*J;
 
-   //Get x position as Vector
+   // Get x position as Vector
    interpolated_x(s,x);
 
-   //Get FE function value
-   double u_fe=interpolated_u_axi_adv_diff(s);
+   // Get FE function value
+   double u_fe=interpolated_u_cons_axisym_adv_diff(s);
 
-   //Get exact solution at this point
+   // Get exact solution at this point
    (*exact_soln_pt)(x,exact_soln);
 
    //Output x,y,...,error
@@ -457,30 +521,79 @@ void AxisymAdvectionDiffusionEquations::compute_error(
      outfile << x[i] << " ";
     }
    outfile << exact_soln[0] << " " << exact_soln[0]-u_fe << std::endl;  
-
-   //Add to error and norm
+   
+   // Add to error and norm
    norm+=exact_soln[0]*exact_soln[0]*x[0]*W;
    error+=(exact_soln[0]-u_fe)*(exact_soln[0]-u_fe)*x[0]*W;
-
   }
 
+}
+
+//======================================================================
+/// \short Calculate the integrated value of the unknown over the element
+///
+//======================================================================
+double GeneralisedAxisymAdvectionDiffusionEquations::integrate_u()
+{ 
+
+ // Initialise
+ double sum = 0.0;
+
+ //Find out how many nodes there are in the element
+ const unsigned n_node = this->nnode();
+
+ //Find the index at which the concentration is stored
+ const unsigned u_nodal_index = this->u_index_cons_axisym_adv_diff();
+
+ //Allocate memory for the shape functions
+ Shape psi(n_node);
+
+ //Set the value of n_intpt
+ const unsigned n_intpt = integral_pt()->nweight();
+
+ //Loop over the integration points
+ for(unsigned ipt=0;ipt<n_intpt;ipt++)
+  {
+   //Get the integral weight
+   const double w = integral_pt()->weight(ipt);
+   
+   //Get the shape functions
+   this->shape_at_knot(ipt,psi);
+
+   //Calculate the concentration 
+   double interpolated_u = 0.0;
+   for(unsigned l=0;l<n_node;l++) 
+    {interpolated_u += this->nodal_value(l,u_nodal_index)*psi(l);}
+
+   //calculate the r coordinate
+   double r = 0.0;
+   for(unsigned l=0;l<n_node;l++)
+    {r += this->nodal_position(l,0)*psi(l);}
+
+   // Get jacobian of mapping
+   const double J=J_eulerian_at_knot(ipt);
+
+   //Add the values to the sum
+   sum += interpolated_u*r*w*J;
+  }
+
+ //return the sum
+ return sum;
 }
 
 
 //======================================================================
 // Set the data for the number of Variables at each node
 //======================================================================
-template<unsigned NNODE_1D>
-const unsigned QAxisymAdvectionDiffusionElement<NNODE_1D>::
-Initial_Nvalue = 1;
-
+ template<unsigned NNODE_1D>
+ const unsigned QGeneralisedAxisymAdvectionDiffusionElement<NNODE_1D>::
+ Initial_Nvalue = 1;
+ 
 //====================================================================
 // Force build of templates
 //====================================================================
-
-template class QAxisymAdvectionDiffusionElement<2>;
-template class QAxisymAdvectionDiffusionElement<3>;
-template class QAxisymAdvectionDiffusionElement<4>;
-
+template class QGeneralisedAxisymAdvectionDiffusionElement<2>;
+template class QGeneralisedAxisymAdvectionDiffusionElement<3>;
+template class QGeneralisedAxisymAdvectionDiffusionElement<4>;
 
 }

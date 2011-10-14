@@ -3,12 +3,16 @@
 # Define the sources
 sources =  \
 axisym_advection_diffusion_elements.cc \
-refineable_axisym_advection_diffusion_elements.cc 
+refineable_axisym_advection_diffusion_elements.cc \
+gen_axisym_advection_diffusion_elements.cc \
+refineable_gen_axisym_advection_diffusion_elements.cc 
 
 # Define the headers
 headers =  \
 axisym_advection_diffusion_elements.h \
-refineable_axisym_advection_diffusion_elements.h
+refineable_axisym_advection_diffusion_elements.h \
+gen_axisym_advection_diffusion_elements.h \
+refineable_gen_axisym_advection_diffusion_elements.h
 
 # Define name of library
 libname = axisym_advection_diffusion
