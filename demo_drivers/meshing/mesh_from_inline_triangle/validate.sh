@@ -2,7 +2,7 @@
 
 
 #Set the number of tests to be checked
-NUM_TESTS=1
+NUM_TESTS=3
 
 
 # Setup validation directory
@@ -14,17 +14,17 @@ mkdir Validation
 cd Validation
 
 
-# Validation for mesh generation from inline triangle
-#----------------------------------------------------
+# Validate mesh generation from inline triangle (curvilinear outer boundary)
+#---------------------------------------------------------------------------
 
-echo "Running inline triangle mesh generation test"
+echo "Running inline triangle mesh generation test (curvilinear outer boundary)"
 mkdir RESLT
 ../mesh_from_inline_triangle --validation > OUTPUT
 
 echo "done"
 echo " " >> validation.log
-echo "triangle inline mesh generation test" >> validation.log
-echo "-----------------------------------" >> validation.log
+echo "triangle inline mesh generation test (curvilinear outer boundary)" >> validation.log
+echo "-----------------------------------------------------------------" >> validation.log
 echo " " >> validation.log
 echo "Validation directory: " >> validation.log
 echo " " >> validation.log
@@ -39,6 +39,69 @@ else
 ../../../../bin/fpdiff.py ../validata/results.dat.gz   \
     results.dat  >> validation.log
 fi
+
+mv RESLT RESLT_curvilinear_outer_boundary
+
+
+
+# Validate mesh generation from inline triangle (polygonal outer boundary)
+#---------------------------------------------------------------------------
+
+echo "Running inline triangle mesh generation test (polygonal outer boundary)"
+mkdir RESLT
+../mesh_from_inline_triangle_polygon --validation > OUTPUT
+
+echo "done"
+echo " " >> validation.log
+echo "triangle inline mesh generation test (polygonal outer boundary)" >> validation.log
+echo "--------------------------------------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat RESLT/trace.dat  \
+    > results_polygon.dat
+
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../../bin/fpdiff.py ../validata/results_polygon.dat.gz   \
+    results_polygon.dat  >> validation.log
+fi
+
+mv RESLT RESLT_polygonal_outer_boundary
+
+
+
+
+# Validate mesh generation from inline triangle (polygonal outer boundary)
+#---------------------------------------------------------------------------
+
+echo "Running inline triangle mesh generation test (no adaptation)"
+mkdir RESLT
+../mesh_from_inline_triangle_no_adapt --validation > OUTPUT
+
+echo "done"
+echo " " >> validation.log
+echo "triangle inline mesh generation test (no adapt)" >> validation.log
+echo "-----------------------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat RESLT/trace.dat  \
+    > results_no_adapt.dat
+
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../../bin/fpdiff.py ../validata/results_no_adapt.dat.gz   \
+    results_no_adapt.dat  >> validation.log
+fi
+
+mv RESLT RESLT_no_adapt
 
 
 # Append output to global validation log file

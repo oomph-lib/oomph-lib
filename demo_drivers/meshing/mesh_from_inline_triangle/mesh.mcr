@@ -1,14 +1,13 @@
 #!MC 1120
 
-$!VarSet |png| = 0
+$!VarSet |PNG| = 0
 
 $!VarSet |stem| = 'soln'
-$!VarSet |nstep| = 2
+$!VarSet |nstep| = 3
 
 $!LOOP |nstep|
 
-$!VarSet |dir| = 'Validation/RESLT'
-#$!VarSet |dir| = 'RESLT'
+$!VarSet |dir| = 'Validation/RESLT_no_adapt'
 $!VarSet |step| = (|LOOP|-1)
 
 $!READDATASET  '"|dir|/|stem||step|.dat" '
@@ -32,9 +31,9 @@ $!FIELDLAYERS SHOWMESH = NO
 $!FIELDMAP [1-|NUMZONES|]  EDGELAYER{COLOR = BLACK}
 $!TWODAXIS GRIDAREA{DRAWBORDER = YES}
 $!TWODAXIS YDETAIL{TITLE{TITLEMODE = USETEXT}}
-$!TWODAXIS YDETAIL{TITLE{TEXT = 'y'}}
+$!TWODAXIS YDETAIL{TITLE{TEXT = 'x<sub>2</sub>'}}
 $!TWODAXIS XDETAIL{TITLE{TITLEMODE = USETEXT}}
-$!TWODAXIS XDETAIL{TITLE{TEXT = 'x'}}
+$!TWODAXIS XDETAIL{TITLE{TEXT = 'x<sub>1</sub>'}}
 $!FIELDMAP [1-|NUMZONES|]  EDGELAYER{LINETHICKNESS = 0.400000000000000022}
 $!REDRAWALL 
 
@@ -43,6 +42,12 @@ $!VIEW FIT
 
 $!IF |PNG|==1
 
+
+        $!EXPORTSETUP EXPORTFORMAT = PNG
+        $!EXPORTSETUP IMAGEWIDTH = 750
+        $!EXPORTSETUP EXPORTFNAME = 'bla|LOOP|.png'
+        $!EXPORT
+          EXPORTREGION = ALLFRAMES
 $!ELSE
   
         $!IF |LOOP|>1

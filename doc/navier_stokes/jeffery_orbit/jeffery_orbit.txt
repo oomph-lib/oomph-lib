@@ -8,13 +8,13 @@ freely suspended in a shear flow as described by Jeffery (1922)
 <a href="../../../../doc/meshes/mesh_from_inline_triangle/html/index.html">
 inline unstructured mesh generation </a> procedures to modify 
 the fluid mesh in response to changes in orientation of the ellipse.
-
+ 
 \section overview Overview of the problem
 
 @I w 0.75\textwidth jeff_sketch "A rigid ellipse immersed in a shear flow "
 
 We consider an ellipse with centre of mass fixed at the origin of a
-Cartesian coordinate system \f$(x, y) = (x_{1}^{*}, x_{2}^{*})\f$, but
+Cartesian coordinate system \f$ (x_{1}^{*}, x_{2}^{*})\f$, but
 immersed in a viscous fluid undergoing a linear shear flow 
 with shear rate \f$G\f$. In the absence of the ellipse 
 the fluid velocity field would be 
@@ -46,7 +46,7 @@ the fluid velocity field would be
 </center>
  where the integral is around the perimeter of the ellipse,
  \f$\tau^{*}_{ij}\f$ is the fluid stress tensor and
- \f$(n_{1},n_{2})\f$ is a unit normal to the ellipse surface directed
+ \f$(n_{1},n_{2})\f$ is the unit normal to the ellipse surface, directed
  away from the solid body. 
 
  We non-dimensionalise the rigid-body equations, using the same 
@@ -68,8 +68,8 @@ t^* = {\cal T}\, t.
 </center>
 The external forces and torques are non-dimensionalised on the
 viscous scales per unit length, \f$ F^{*}_{i} = \mu_{ref} {\cal U}
-F_{i} \f$ and \f$ T^{*} = \mu_{ref} {\cal U} {\cal L} T \f$,
-then the dimensionless rigid-body equations are
+F_{i} \f$ and \f$ T^{*} = \mu_{ref} {\cal U} {\cal L} T \f$.
+The dimensionless rigid-body equations are then
 <center>
 \f[ Re St^{2} \frac{\rho_{s}}{\rho_{f}}\, \bar{M}\, 
 \frac{\mbox{d}^{2} X_{i}}{\mbox{d} t^{2}} = F_{i} 
@@ -85,9 +85,8 @@ then the dimensionless rigid-body equations are
     \bar{M} = \frac{M}{\rho_{s} {\cal L}^{2}}, \quad
     \bar{I} = \frac{I}{\rho_{s} {\cal L}^{4}}, \f]
 </center>
-are the Reynolds number, Strouhal number, density ratio, mass per unit
-length shape parameter and moment of inertia per unit length shape
-parameter, respectively. In the
+are the Reynolds number, the Strouhal number, the density ratio, and the
+dimensionless mass and moment of inertia, respectively. In the
 above \f$ \rho_{f} \f$ is the fluid density and \f$ \rho_{s} \f$ is
 the solid density.
 
@@ -116,8 +115,8 @@ u_j \frac{\partial u_i}{\partial x_j} \right) =
                 x_{2} \tau_{1j}\,n_{j}\, \right] \text{d} s, \f].
 </center>
 
- The computational domain is a fixed rectangle, \f$ x_{1} \in [-L,
- L]\f$ and \f$ x_{2} \in [-H, H] \f$, and the boundary conditions are
+We perform the computations in the domain \f$ x_{1} \in [-L,
+ L]\f$ and \f$ x_{2} \in [-H, H] \f$, and apply the boundary conditions
 <center>
  \f[ u_{1} = H f(t), u_{2} = 0, \quad\mbox{on}\quad x_{2} = -H; \f]
  \f[ u_{1} = -H f(t), u_{2} = 0, \quad\mbox{on}\quad x_{2} = H; \f]
@@ -145,16 +144,16 @@ u_j \frac{\partial u_i}{\partial x_j} \right) =
 @I w 0.75\textwidth orbit_mesh "An ellipse performing approximate Jeffery orbits at  Re = 1 "
 
 
-@I w 0.75\textwidth jeff_graph "Angle and Angular velocity as functions of time for Re = 1 "
+@I w 0.75\textwidth jeff_graph "Angle and angular velocity as functions of time for Re = 1 "
 
 \section fsi Implementation as a fluid-structure interaction problem
 
- The problem is a fluid-structure interaction problem, in
+ The problem is a fluid-structure interaction problem in
 which the structural dynamics are particularly simple, depending only
 on a single degree of freedom. 
 Nonetheless, the two types of physical coupling between the fluid 
 and the solid remain:
--# The positions of the nodes in the fluid mesh depend on the position
+-# The position of the free boundary depends on the position
    of the rigid body.
 -# The rigid body is loaded by the fluid traction.
 . 
@@ -163,10 +162,8 @@ and the solid remain:
 <a
 href="../../../../doc/interaction/unstructured_fsi/html/index.html">
  2D unstructured FSI </a> problems, we treat the fluid mesh as a
- pseudo-solid mesh that is generated  
- <a href="../../../../doc/meshes/mesh_from_inline_triangle/html/index.html">
- inline; </a> and the position of the boundary nodes 
- on the fluid-solid interface are determined using  
+ pseudo-solid body and determine the position of the boundary nodes 
+ on the fluid-solid interface using  
  \c ImposeDisplacementByLagrangeMultiplierElements. 
 
  The rigid body mechanics is handled by using a \c GeomObject that
@@ -174,7 +171,7 @@ represents the perimeter of the rigid body to create
 an \c ImmersedRigidBodyElement
 that solves the three equations of motion for
 a rigid body; and the load is applied to the rigid body
-by using \c NavierStokesSurfaceDragTorqueElements.
+using \c NavierStokesSurfaceDragTorqueElements.
 
 <HR>
 <HR>
@@ -192,9 +189,9 @@ by using \c NavierStokesSurfaceDragTorqueElements.
 
 \section ellipse Defining the ellipse as a GeomObject
 
- We create a basic \c GeomObject to represent the ellipse
- parameterised by the angle from its centre of mass to a point on the
- boundary.
+ We create a basic \c GeomObject to represent the ellipse whose
+boundary we parameterise by the polar angle, measured from its centre
+of mass.
 
 \dontinclude jeffery_orbit.cc 
 \skipline start_of_general_ellipse
@@ -256,10 +253,12 @@ by using \c NavierStokesSurfaceDragTorqueElements.
  boundary conditions are applied using the \c
  actions_before_implicit_timestep() function and the no-slip boundary
  condition is applied in \c actions_before_newton_convergence_check()
- via a auxiliary node update fuction.
+ via an auxiliary node update fuction.
 
- After adaptation a completely new mesh is generated and physical
- parameters and boundary conditions must be reassigned, which is the
+ <a href="../../../../doc/meshes/mesh_from_inline_triangle/html/index.html#adapt">
+ Recall</a> that when adapting an unstructured mesh, its constituent
+ elements are completely re-generated. Physical
+ parameters and boundary conditions must therefore be reassigned, which is the
  task of the \c complete_problem_setup() function, called in \c
  actions_after_adapt().
  Helper functions are also provided to solve the initial problem to
@@ -303,9 +302,9 @@ and file handles for documentation.
 
  The \c ImmersedRigidBodyElement is used to define a 
 \c TriangleMeshCurvilinearClosedCurve in exactly the same way as if it
-were simply a (passive) \c GeomObject, see <a
+were simply a (passive) \c GeomObject, as discussed in <a
 href="../../../../doc/meshes/mesh_from_inline_triangle/html/index.html">
-inline mesh generation. </a>
+another tutorial. </a>
 
 \until linear_boundary_pt,hole_
 
@@ -317,13 +316,12 @@ inline mesh generation. </a>
 
  The \c ImmersedRigidBodyElement is not deleted during the adaptation
  process and so its physical parameters can be set once in the
- constructor. We must set the initial position of the centre of mass,
- as well as the expected mass and moment of inertia shape parameters, 
- Reynolds number, Strouhal number and density ratio, which appear in the
+ constructor. We set the initial position of the centre of mass,
+ as well as the non-dimensional mass and moment of inertia shape, the 
+ Reynolds and Strouhal numbers, and the density ratio, which appear in the
  governing equations above. For this problem, we also fix the location
- of the centre of mass by pinning the first two entries in the 
- \c RigidBodyElement's only geometric data. The third and final entry
- represents the angular variable.
+ of the centre of mass. (The section \ref comments contains an
+ exercise that asks you to explore what happens when you omit this step).
 
 \until pin(1)
 
@@ -340,7 +338,9 @@ inline mesh generation. </a>
 
 \until rigid_element1_pt
 
- We next create the mesh of Lagrange-multiplier elements
+ We next create the mesh of Lagrange-multiplier elements that drive
+the deformation of the fluid mesh in response to the motion of the
+ellipse
 
  \until create_lagrange
  
@@ -348,9 +348,9 @@ inline mesh generation. </a>
 
  \until end_of_constructor
 
- Note that the \c Drag_mesh_pt does not need to be added as a sub_mesh
+ Note that the \c Drag_mesh_pt does not need to be added as a sub-mesh
  because its elements do not contribute <i> directly </i> to the
- residuals and jacobian. 
+ residuals and Jacobian. 
  
 <HR>
 <HR>
@@ -367,9 +367,9 @@ inline mesh generation. </a>
 \until ->pin(1)
 
  The boundary conditions for the solid degrees of freedom that
- describe the position of the mesh are assigned next by pinning the
- positions on the fixed boundaries of the domain (boundaries 0, 1, 2,
- 3)
+ describe the mesh deformation are assigned next by pinning the
+ nodal positions on the fixed domain boundaries (boundaries 0, 1, 2,
+ 3):
 
  \until }
 
@@ -419,7 +419,7 @@ inline mesh generation. </a>
  time-dependent boundary conditions to the external boundaries of the
  fluid domain. The only subtlety is that after a remesh the history
  values for the boundary nodes must also be (re-)applied; and, for
- simplicity, the history values always reset.
+ simplicity, the history values are always reset.
 
 <HR>
 <HR>
@@ -428,7 +428,7 @@ inline mesh generation. </a>
 
  The initial nodal positions are made consistent with the
  weakly-imposed displacement boundary condition by pinning the rigid
- body degrees of freedom, performing a steady newton solve and then
+ body degrees of freedom, performing a steady Newton solve and then
  releasing the rigid body degrees of freedom.
 
  \skipline start_solve_for_consistent_nodal_positions
@@ -441,10 +441,13 @@ inline mesh generation. </a>
 
 \subsection exercises Exercises
 
--# Confirm that the solution agrees with Jeffery's analytic solution
-   for \f$ Re=0 \f$. Explain why you expect there to be a discrepancy
-   at early times.\n\n
+-# Confirm that for sufficienly large times the solution agrees 
+   with Jeffery's analytic solution when you set \f$ Re=0 \f$. 
+   Explain why you expect there to be a discrepancy at early times.\n\n
 -# What happens when the centre of mass is not fixed?
+   Can you explain the observed behaviour?\n\n
+-# What happens if you don't call the function 
+   \c solve_for_consistent_nodal_positions()? 
    Can you explain the observed behaviour?\n\n
 -# Investigate the behaviour of the system with increasing
    \f$Re\f$. What happens to the oscillations for \f$ Re > 30 \f$?\n\n

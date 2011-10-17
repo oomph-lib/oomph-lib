@@ -489,8 +489,8 @@ UnstructuredImmersedEllipseProblem()
  rigid_element1_pt->density_ratio_pt() = &Problem_Parameter::Density_ratio;
 
  //Pin the position of the centre of mass
- rigid_element1_pt->geom_data_pt(0)->pin(0);
- rigid_element1_pt->geom_data_pt(0)->pin(1);
+ rigid_element1_pt->pin_centre_of_mass_coordinate(0);
+ rigid_element1_pt->pin_centre_of_mass_coordinate(1);
 
   // Create the mesh for the rigid bodies
  Rigid_body_mesh_pt = new Mesh;
@@ -709,6 +709,7 @@ void UnstructuredImmersedEllipseProblem<ELEMENT>::complete_problem_setup()
  // Re-apply Dirichlet boundary conditions for current and history values
  // (projection ignores boundary conditions!)
  this->set_boundary_velocity();
+
 } //end_of_complete_problem_setup
 
 
@@ -838,8 +839,9 @@ void UnstructuredImmersedEllipseProblem<ELEMENT>::unpin_rigid_body()
 
 //==========start_solve_for_consistent_nodal_positions================
 ///Assemble and solve a simplified problem that ensures that the 
-///boundary nodes are consistent with the weak imposition of the
-///displacement boundary conditions.
+///positions of the boundary nodes are consistent with the weak 
+///imposition of the displacement boundary conditions on the surface
+///of the ellipse.
 //===================================================================
 template<class ELEMENT>
 void UnstructuredImmersedEllipseProblem<ELEMENT>::
@@ -847,17 +849,25 @@ solve_for_consistent_nodal_positions()
 {
  //First pin all degrees of freedom in the rigid body
  this->pin_rigid_body();
+
  //Must reassign equation numbrs
  this->assign_eqn_numbers();
+
  //Do a steady solve to map the nodes to the boundary of the ellipse
  this->steady_newton_solve();
- //Now unpin the rigid body
+
+ //Now unpin the rigid body...
  this->unpin_rigid_body();
- //but repin the position of the centre of mass
- this->Rigid_body_pt[0]->geom_data_pt(0)->pin(0);
- this->Rigid_body_pt[0]->geom_data_pt(0)->pin(1);
+
+ //...and then repin the position of the centre of mass
+ ImmersedRigidBodyElement* rigid_element1_pt = 
+  dynamic_cast<ImmersedRigidBodyElement*>(Rigid_body_pt[0]);
+ rigid_element1_pt->pin_centre_of_mass_coordinate(0);
+ rigid_element1_pt->pin_centre_of_mass_coordinate(1);
+
  //and then reassign equation numbers
  this->assign_eqn_numbers();
+
 } //end_solve_for_consistent_nodal_positions
 
 
@@ -1197,8 +1207,10 @@ int main(int argc, char **argv)
  // Initialise timestepper
  double dt=0.05;
  problem.initialise_dt(dt);
+
  // Perform impulsive start
  problem.assign_initial_values_impulsive();
+
  // Output initial conditions
  problem.doc_solution();
 

@@ -579,12 +579,13 @@ animation in .jpg, .png or .tif format.
 
 
 These image files can then be combined into a video using \c
-mencoder, for example (.jpg):
+mencoder, for example to combine all png files in the current
+directory to an avi file use:
 \n
 \code
-mencoder mf:// -mf w=984:h=606:fps=10.0:type=jpg -ovc copy -oac copy -o output.avi
+mencoder "mf://*.png" -mf fps=25 -o output.avi -ovc lavc -lavcopts vcodec=mpeg4
 \endcode
 \n
 
-You have to set the resolution and the speed (fps: frames per second)
-and you get your video in \c output.avi.
+In the above example the speed is set to 25 frames per second
+(fps). See the mencoder man page for further details.

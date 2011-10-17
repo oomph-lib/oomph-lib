@@ -1,4 +1,5 @@
 SUBDIRS = \
+adaptive_bubble_in_channel \
 driven_cavity \
 adaptive_driven_cavity \
 circular_driven_cavity \

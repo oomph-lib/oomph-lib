@@ -171,14 +171,17 @@ UnstructuredPoissonProblem<ELEMENT>::UnstructuredPoissonProblem()
  // Pointer to the closed curve that defines the outer boundary
  TriangleMeshClosedCurve* closed_curve_pt=0;
 
- // Build outer boundary as Polygon
- //--------------------------------
+ // Build outer boundary as Polygon?
+ //---------------------------------
  bool polygon_for_outer_boundary=false;
+#ifdef OUTER_POLYGON
+ polygon_for_outer_boundary=true;
+#endif
  if (polygon_for_outer_boundary)
   { 
    // Number of segments that make up the boundary
    unsigned n_seg = 5; 
-   double unit_zeta = MathematicalConstants::Pi/double(n_seg); 
+   double unit_zeta = 0.5*MathematicalConstants::Pi/double(n_seg); 
    
    // The boundary is bounded by two distinct boundaries, each
    // represented by its own polyline
@@ -209,13 +212,14 @@ UnstructuredPoissonProblem<ELEMENT>::UnstructuredPoissonProblem()
 
    // Second part of the boundary
    //----------------------------
+   unit_zeta*=3.0;
    for(unsigned ipoint=0; ipoint<n_seg+1;ipoint++)
     {
      // Resize the vector 
      bound_coords[ipoint].resize(2);
      
      // Get the coordinates
-     zeta[0]=(unit_zeta*double(ipoint))+MathematicalConstants::Pi;
+     zeta[0]=(unit_zeta*double(ipoint))+0.5*MathematicalConstants::Pi;
      outer_boundary_ellipse_pt->position(zeta,posn);
      bound_coords[ipoint][0]=posn[0]+x_center;
      bound_coords[ipoint][1]=posn[1]+y_center;
@@ -230,6 +234,11 @@ UnstructuredPoissonProblem<ELEMENT>::UnstructuredPoissonProblem()
    //----------------------------------------------------
    TriangleMeshPolygon* outer_boundary_polygon_pt = 
     new TriangleMeshPolygon(boundary_polyline_pt);
+
+
+   // Enable redistribution of polylines
+   outer_boundary_polygon_pt->
+    enable_redistribution_of_segments_between_polylines();
    
    // Set the pointer
    closed_curve_pt=outer_boundary_polygon_pt;
@@ -239,6 +248,7 @@ UnstructuredPoissonProblem<ELEMENT>::UnstructuredPoissonProblem()
  //------------------------------------
  else
   {   
+
    // Provide storage for pointers to the two parts of the curvilinear boundary
    Vector<TriangleMeshCurviLine*> outer_curvilinear_boundary_pt(2);
    
@@ -394,6 +404,13 @@ UnstructuredPoissonProblem<ELEMENT>::UnstructuredPoissonProblem()
   new TriangleMeshInternalCurvilinearClosedCurve(curvilinear_boundary_pt,
                                                  hole_coords);
  
+ // Uncomment this as an exercise to observe how a
+ // layer of fine elements get left behind near the boundary
+ // once the tanh step has swept past: 
+
+ // closed_curve_pt->disable_polyline_refinement();
+ // closed_curve_pt->disable_polyline_unrefinement();
+
 
  // Now build the mesh
  //===================
@@ -538,6 +555,14 @@ void UnstructuredPoissonProblem<ELEMENT>::doc_solution(const
  My_mesh_pt->output_fct(some_file,npts,TanhSolnForPoisson::get_exact_u); 
  some_file.close();
  
+ // Output boundaries
+ //------------------
+ sprintf(filename,"RESLT/boundaries%i.dat",Doc_info.number());
+ some_file.open(filename);
+ My_mesh_pt->output_boundaries(some_file);
+ some_file.close();
+
+
  // Doc error and return of the square of the L2 error
  //---------------------------------------------------
  double error,norm,dummy_error,zero_norm;
@@ -598,6 +623,12 @@ int main(int argc, char **argv)
 //   }
  
  
+ // Doc the initial mesh
+ //=====================
+ std::stringstream comment_stream;
+ comment_stream << "Initial mesh ";
+ problem.doc_solution(comment_stream.str());
+   
  
  // Loop over orientation of step
  //==============================

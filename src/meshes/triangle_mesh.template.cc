@@ -652,7 +652,6 @@ namespace oomph
     GeomObject* const geom_object_pt = this->boundary_geom_object_pt(b);
     if(geom_object_pt!=0)
      {
-      oomph_info << "A geometric_object is set up for boundary " << b << "\n";
       Vector<double> bound_coord_limits = this->boundary_coordinate_limits(b);
       
       //Get the position of the ends of the geometric object
@@ -715,14 +714,15 @@ namespace oomph
       //coordinate direction correct.
       //If not then we must reverse it
       bool reversed=false;
-      if(error < rev_error)
+      if (error< rev_error)
        {
-        oomph_info << "Coordinates are aligned\n";
+        // Coordinates are aligned (btw: don't delete this block -- there's
+        // a final else below to catch errors!)
+        reversed=false;
        }
-      else if(error > rev_error)
+      else if (error > rev_error)
        {
         reversed=true;
-        oomph_info << "Coordinates are reversed\n";
 
         //Reverse the limits of the boundary coordinates along the
         //geometric object
@@ -850,8 +850,6 @@ namespace oomph
      }
     else
      {
-      oomph_info << "No geometric object for boundary " << b << "\n";
-      
       //Only use end points of the whole segment and pick the bottom left
       //node
       Node* bottom_left_node_pt=first_node_pt;
@@ -1661,14 +1659,13 @@ namespace oomph
        << "Mesh regeneration triggered by min angle criterion\n";
      }
 
-
     //Generate a new 1D mesh representation of the inner hole boundaries
     unsigned nhole=this->Internal_polygon_pt.size();
     Vector<Vector<double> > internal_point_coord(nhole);
     this->surface_remesh_for_inner_hole_boundaries(internal_point_coord);
 
     //Update the representation of the outer boundary
-    this->surface_remesh_for_outer_boundary();
+    this->update_polygon_using_face_mesh(this->Outer_boundary_pt);
 
     //If there is not a geometric object associated with the boundary
     //the reset the boundary coordinates so that the lengths are consistent
@@ -1743,17 +1740,22 @@ namespace oomph
     //tmp_new_mesh_pt->output("pre_mesh_nodes_snapped_0.dat");
     
     //Move the nodes on the new boundary onto the 
-    //old curvilinear boundary
-    //If the boundary is straight this will do precisely nothing
-    //but will be somewhat inefficient
+    //old curvilinear boundary. If the boundary is straight this 
+    //will do precisely nothing but will be somewhat inefficient
     for(unsigned b=0;b<n_boundary;b++)
      {
       this->snap_nodes_onto_boundary(tmp_new_mesh_pt,b);
      }
-    
+
+    // Update mesh further?
+    if (Mesh_update_fct_pt!=0)
+     {
+      Mesh_update_fct_pt(tmp_new_mesh_pt);
+     }
+
     //Output the mesh after the snapping has taken place
     //tmp_new_mesh_pt->output("mesh_nodes_snapped_0.dat"); 
-    
+
     // Get the TriangulateIO object associated with that mesh
     TriangulateIO tmp_new_triangulateio=
      tmp_new_mesh_pt->triangulateio_representation();
@@ -2032,17 +2034,21 @@ namespace oomph
       //new_mesh_pt->output("pre_mesh_nodes_snapped_1.dat"); 
       
       //Move the nodes on the new boundary onto the 
-      //old curvilinear boundary
-      //If the boundary is straight this will do precisely nothing
-      //but will be somewhat inefficient
+      //old curvilinear boundary. If the boundary is straight this 
+      //will do precisely nothing but will be somewhat inefficient
       for(unsigned b=0;b<n_boundary;b++)
        {
         this->snap_nodes_onto_boundary(new_mesh_pt,b);
        }
       
+      // Update mesh further?
+      if (Mesh_update_fct_pt!=0)
+       {
+        Mesh_update_fct_pt(new_mesh_pt);
+       }
+
       //Output the mesh after the snapping has taken place
       //new_mesh_pt->output("mesh_nodes_snapped_1.dat"); 
-
       
       // Not done: get ready for another iteration
       iter++;
@@ -2208,248 +2214,1060 @@ namespace oomph
 
  }
 
- //======================================================================
+
+//=========================================================================
  /// Helper function that updates the input polygon's PSLG
  /// by using the end-points of elements from FaceMesh(es) that are
  /// constructed for the boundaries associated with the segments of the
  /// polygon.
- //======================================================================
+//=========================================================================
  template<class ELEMENT>
  void RefineableTriangleMesh<ELEMENT>::
  update_polygon_using_face_mesh(TriangleMeshPolygon* polygon_pt)
  {
-  Vector<double> vertex_coord(3);
-  Vector<double> bound_left(1);
-  Vector<double> bound_right(1);
   
   //Loop over the number of polylines
   unsigned n_polyline = polygon_pt->npolyline();
-     for(unsigned p=0;p<n_polyline;p++)
-      {
-       //Set of coordinates that will be placed on the boundary
-       std::set<Vector<double> > vertex_nodes;
-       
-       //Get the boundary id of each polyline
-       unsigned bound = 
-        polygon_pt->polyline_pt(p)->boundary_id();
-       
-       // Create a face mesh adjacent to the fluid mesh's b-th boundary. 
-       // The face mesh consists of FaceElements that may also be 
-       // interpreted as GeomObjects
-       Mesh* face_mesh_pt = new Mesh;
-       this->template build_face_mesh
-        <ELEMENT,FaceElementAsGeomObject>(bound, face_mesh_pt);
-       
-       // Loop over these new face elements and tell them the boundary number
-       // from the bulk fluid mesh -- this is required to they can
-       // get access to the boundary coordinates!
-       unsigned n_face_element = face_mesh_pt->nelement();
-       for(unsigned e=0;e<n_face_element;e++)
-        {
-         //Cast the element pointer to the correct thing!
-         FaceElementAsGeomObject<ELEMENT>* el_pt=
-          dynamic_cast<FaceElementAsGeomObject<ELEMENT>*>
-          (face_mesh_pt->element_pt(e));
-         
-         // Set bulk boundary number
-         el_pt->set_boundary_number_in_bulk_mesh(bound);
-        }
-       
-       //Now we have the face mesh loop over the face elements and 
-       //print out the end points
-       for(unsigned e=0;e<n_face_element;++e)
-        {
-         unsigned n_node = face_mesh_pt->finite_element_pt(e)->nnode();
-         FiniteElement* el_pt = face_mesh_pt->finite_element_pt(e);
-         
-         //Add the left-hand node to the list
-         el_pt->node_pt(0)
-          ->get_coordinates_on_boundary(bound,bound_left);
-         vertex_coord[0] = bound_left[0];
-         for(unsigned i=0;i<2;i++)
-          {
-           vertex_coord[i+1] = el_pt->node_pt(0)->x(i);
-          }
-         
-         vertex_nodes.insert(vertex_coord);
-         
-         //Add the right-hand nodes to the list
-         el_pt->node_pt(n_node-1)
-          ->get_coordinates_on_boundary(bound,bound_right);
-         vertex_coord[0] = bound_right[0];
-         for(unsigned i=0;i<2;i++)
-          {
-           vertex_coord[i+1] = el_pt->node_pt(n_node-1)->x(i);
-          }
-         
-         vertex_nodes.insert(vertex_coord);
-         
-         //Worry about bulk refinement here?
-        }
-        
-       //Delete the allocated memory for theface mesh
-       face_mesh_pt->flush_element_and_node_storage();
-       delete face_mesh_pt;
-       
-       //Turn the set into a vector
-       //Firstly trim any elements below a minimum size
+
+  // Get face mesh representation of all polylines, possibly 
+  // with segments re-distributed to maintain an approximately
+  // even sub-division of the polygon
+  Vector<Mesh*> face_mesh_pt;
+  get_face_mesh_representation(polygon_pt,face_mesh_pt);
+  
+  // Create vertices for the polylines by using the vertices
+  // of the FaceElements
+  Vector<double> vertex_coord(3); // zeta,x,y
+  Vector<double> bound_left(1);
+  Vector<double> bound_right(1);
+  for(unsigned p=0;p<n_polyline;p++)
+   { 
+    // Set of coordinates that will be placed on the boundary
+    // Set entries are ordered on first  entry in vector which stores
+    // the boundary coordinate so the vertices come out in order!
+    std::set<Vector<double> > vertex_nodes;
+    
+    //Get the boundary id
+    unsigned bound=polygon_pt->polyline_pt(p)->boundary_id();
+    
+    // Loop over the face elements (ordered) and add their vertices
+    unsigned n_face_element = face_mesh_pt[p]->nelement();
+    for(unsigned e=0;e<n_face_element;++e)
+     {
+      FiniteElement* el_pt = face_mesh_pt[p]->finite_element_pt(e);
+      unsigned n_node = el_pt->nnode();
+      
+      //Add the left-hand node to the set:
+
+      // Boundary coordinate
+      el_pt->node_pt(0)->get_coordinates_on_boundary(bound,bound_left);
+      vertex_coord[0] = bound_left[0];
+
+      // Actual coordinates
+      for(unsigned i=0;i<2;i++)
        {
-        double min_length = 0.01;
-        std::set<Vector<double> > ::iterator it = vertex_nodes.begin();
-        //Get the location of the "leftmost" (first) vertex
-        Vector<double> left_vertex = *it;
-        //Loop over all other vertices starting from the first+1
-        //and stopping before the final vertex
-        for(++it;it!=--vertex_nodes.end();++it)
+        vertex_coord[i+1] = el_pt->node_pt(0)->x(i);
+       }
+      vertex_nodes.insert(vertex_coord);
+      
+      //Add the right-hand nodes to the set:
+
+      //Boundary coordinate
+      el_pt->node_pt(n_node-1)->get_coordinates_on_boundary(bound,bound_right);
+      vertex_coord[0] = bound_right[0];
+
+      // Actual coordinates
+      for(unsigned i=0;i<2;i++)
+       {
+        vertex_coord[i+1] = el_pt->node_pt(n_node-1)->x(i);
+       }
+      vertex_nodes.insert(vertex_coord);
+     }
+    
+
+    // Now turn into vector for ease of handling...
+    unsigned n_poly_vertex = vertex_nodes.size();
+    Vector<Vector<double> > tmp_vector_vertex_node(n_poly_vertex);
+    unsigned count=0;
+    for(std::set<Vector<double> >::iterator it = vertex_nodes.begin();
+        it!=vertex_nodes.end();++it)
+     {
+      tmp_vector_vertex_node[count].resize(3);
+      tmp_vector_vertex_node[count][0] = (*it)[0];
+      tmp_vector_vertex_node[count][1] = (*it)[1];
+      tmp_vector_vertex_node[count][2] = (*it)[2];
+      ++count;
+     }
+    
+    // Size of the vector
+    unsigned n_vertex=tmp_vector_vertex_node.size();
+
+
+    // Tolerance below which the middle point can be deleted
+    // (ratio of deflection to element length)
+    double unrefinement_tolerance=polygon_pt->polyline_unrefinement_tolerance();
+
+    //------------------------------------------------------
+    // Unrefinement 
+    //------------------------------------------------------
+    if (unrefinement_tolerance>0.0)
+     {
+
+      // Initialise counter that indicates at which vertex we're currently
+      // considering for deletion
+      unsigned counter=1;
+      
+      // Loop over the nodes; start with the second one and increment by two
+      // this way a "pack" of three nodes will be considered for calculation:
+      // the middle-node (which is to be deleted or not) and the adjacent 
+      // nodes
+      if (n_vertex>=3)
+       {
+        for(unsigned i=1;i<n_vertex-2;i+=2)
          {
-          //What is the actual length between the "left" vertex
-          //and the current vertex
-          double length = 0.0;
-          for(unsigned i=0;i<2;i++)
+          // Maths from http://www.cgafaq.info/wiki/Circle_Through_Three_Points
+          double a_x=tmp_vector_vertex_node[i-1][0];
+          double a_y=tmp_vector_vertex_node[i-1][1];
+          double b_x=tmp_vector_vertex_node[i][0];
+          double b_y=tmp_vector_vertex_node[i][1];
+          double c_x=tmp_vector_vertex_node[i+1][0];
+          double c_y=tmp_vector_vertex_node[i+1][1];
+
+          double a=b_x-a_x;
+          double b=b_y-a_y;
+          double c=c_x-a_x;
+          double d=c_y-a_y;
+
+          double e=a*(a_x+b_x)+b*(a_y+b_y);
+          double f=a*(a_x+c_x)+b*(a_y+c_y);
+
+          double g=2.0*(a*(c_y-b_y)-b*(c_x-b_x));
+
+          bool do_it=false;
+          if (g<1.0e-14)
            {
-            length += pow(((*it)[i+1] - left_vertex[i+1]),2.0);
+            do_it=true;
            }
-          //If smaller than minimum delete the current vertex
-          //Need to be careful when deleting entries in a set that
-          //is being iterated over.
-          if(sqrt(length) < min_length)
-           {
-            //Say so
-            oomph_info << "Surface element too small: ";
-            oomph_info << "Removing node at " << (*it)[1] << " " << (*it)[2]
-                       << "\n";
-            //Store the current value of the iterator
-            std::set<Vector<double> >::iterator tmp_it = it;
-            //Go back to the previous entry with the loop iterator
-            --it;
-            //Erase the offending entry
-            vertex_nodes.erase(tmp_it);
-           }
-          //Otherwise, the "left" vertex becomes the current vertex
           else
            {
-            left_vertex = *it;
+            double p_x=(d*e-b*f)/g;
+            double p_y=(a*f-c*e)/g;
+            
+            double r=sqrt(pow((a_x-p_x),2)+pow((a_y-p_y),2));
+            
+            double rpc_x=c_x-p_x;
+            double rpc_y=c_y-p_y;
+
+            double rhalfca_x=0.5*(a_x-c_x);
+            double rhalfca_y=0.5*(a_y-c_y);
+            
+            double halfca_squared=pow(rhalfca_x,2)+pow(rhalfca_y,2);
+            double pc_squared=pow(rpc_x,2)+pow(rpc_y,2);
+
+            double sticky_out_bit=r-sqrt(pc_squared-halfca_squared);
+
+            // If sticky out bit divided by distance between end nodes 
+            // is less than tolerance the boundary is so flat that we 
+            // can safely kill the node
+            if ((sticky_out_bit/(2.0*sqrt(halfca_squared)))<
+                 unrefinement_tolerance)
+             {
+              do_it=true;
+             } 
+           }
+
+
+          // Remove node?
+          if (do_it)
+           {
+            tmp_vector_vertex_node[i].resize(0);
+           }
+          
+          // Increase the counter, that indicates the number of the 
+          // current middle node
+          counter+=2;
+         }
+
+
+        
+        // Special treatment for the end of the polyline:
+        // If the for loop ended at the last but second node and this node
+        // was not deleted, then check if the last but one node can be deleted
+        if((counter==n_vertex-3)&&
+           (tmp_vector_vertex_node[counter].size()!=0))
+         {
+          // Set the last but one node as middle node
+          unsigned i=tmp_vector_vertex_node.size()-2;
+
+
+          // CODE DUPLICATION -- CAN'T BE BOTHERED TO WRITE A SEPARATE
+          // FUNCTION FOR THIS; PROBABLY WORTH DOING IF/WHEN THERE'S
+          // A MISTAKE IN ANY OF THIS AND IT NEEDS TO BE FIXED...
+
+          // Maths from http://www.cgafaq.info/wiki/Circle_Through_Three_Points
+          double a_x=tmp_vector_vertex_node[i-1][0];
+          double a_y=tmp_vector_vertex_node[i-1][1];
+          double b_x=tmp_vector_vertex_node[i][0];
+          double b_y=tmp_vector_vertex_node[i][1];
+          double c_x=tmp_vector_vertex_node[i+1][0];
+          double c_y=tmp_vector_vertex_node[i+1][1];
+
+          double a=b_x-a_x;
+          double b=b_y-a_y;
+          double c=c_x-a_x;
+          double d=c_y-a_y;
+
+          double e=a*(a_x+b_x)+b*(a_y+b_y);
+          double f=a*(a_x+c_x)+b*(a_y+c_y);
+
+          double g=2.0*(a*(c_y-b_y)-b*(c_x-b_x));
+
+          bool do_it=false;
+          if (g<1.0e-14)
+           {
+            do_it=true;
+           }
+          else
+           {
+            double p_x=(d*e-b*f)/g;
+            double p_y=(a*f-c*e)/g;
+            
+            double r=sqrt(pow((a_x-p_x),2)+pow((a_y-p_y),2));
+            
+            double rpc_x=c_x-p_x;
+            double rpc_y=c_y-p_y;
+
+            double rhalfca_x=0.5*(a_x-c_x);
+            double rhalfca_y=0.5*(a_y-c_y);
+            
+            double halfca_squared=pow(rhalfca_x,2)+pow(rhalfca_y,2);
+            double pc_squared=pow(rpc_x,2)+pow(rpc_y,2);
+
+            double sticky_out_bit=r-sqrt(pc_squared-halfca_squared);
+
+            // If sticky out bit divided by distance between end nodes 
+            // is less than tolerance the boundary is so flat that we 
+            // can safely kill the node
+            if ((sticky_out_bit/(2.0*sqrt(halfca_squared)))<
+                 unrefinement_tolerance)
+             {
+              do_it=true;
+             } 
+           }
+          
+          // Remove node?
+          if (do_it)
+           {
+            tmp_vector_vertex_node[i].resize(0);
            }
          }
-
-        //If the final element is too small then remove the interior node
-        //Get the last node
-        it = --vertex_nodes.end();
-        Vector<double> right_vertex = *it;
-        //Now decrease iterator
-        --it;
         
-        //What is the actual length between the "right" vertex
-        //and the current vertex
-        double length = 0.0;
+        // Create another vector, which will only contain entries of 
+        //nodes that still exist
+        Vector<Vector<double> > compact_vector;
+        compact_vector.reserve(n_vertex);
+        for (unsigned i=0;i<n_vertex;i++)
+         {
+          // If the entry was not deleted include it in the new vector
+          if (tmp_vector_vertex_node[i].size()!=0)
+           {
+            compact_vector.push_back(tmp_vector_vertex_node[i]);
+           }
+         }
+        
+        /// Get the size of the vector that now includes all remaining nodes
+        n_vertex =compact_vector.size();
+        
+        /// Copy back
+        tmp_vector_vertex_node.resize(n_vertex);
+        for(unsigned i=0;i<n_vertex;i++)
+         {
+          tmp_vector_vertex_node[i].resize(3);
+          tmp_vector_vertex_node[i][0]=compact_vector[i][0];
+          tmp_vector_vertex_node[i][1]=compact_vector[i][1];
+          tmp_vector_vertex_node[i][2]=compact_vector[i][2];
+         }
+       } // end of if for at least three points
+     } // end of unrefinement
+    
+    
+    
+    //------------------------------------------------
+    /// Refinement
+    //------------------------------------------------
+    double refinement_tolerance=polygon_pt->polyline_refinement_tolerance();
+    if (refinement_tolerance>0)
+     {
+      // Create a geometric object from the mesh to represent
+      //the curvilinear boundary
+      MeshAsGeomObject* mesh_geom_obj_pt = 
+       new MeshAsGeomObject(face_mesh_pt[p]);
+      
+      // Get the total number of current vertices
+      unsigned n_vertex=tmp_vector_vertex_node.size();
+      
+      // Create a new (temporary) vector for the nodes, so
+      // that new nodes can be stored
+      Vector<Vector<double> > extended_vector;
+      
+      // Reserve memory space for twice the number of already
+      // existing nodes (worst case)
+      extended_vector.reserve(2*n_vertex);
+      
+      // Loop over the nodes until the last but one node
+      for(unsigned inod=0;inod<n_vertex-1;inod++)
+       {
+        // Get local coordinate of "left" node
+        double zeta_left=tmp_vector_vertex_node[inod][0];
+        
+        // Get position vector of "left" node
+        Vector<double> R_left(2);
         for(unsigned i=0;i<2;i++)
          {
-          length += pow(((*it)[i+1] - right_vertex[i+1]),2.0);
+          R_left[i]=tmp_vector_vertex_node[inod][i+1];
          }
-        //If smaller than minimum delete the current vertex
-        //Need to be careful when deleting entries in a set that
-        //is being iterated over.
-        if(sqrt(length) < min_length)
+        
+        // Get local coordinate of "right" node
+        double zeta_right=tmp_vector_vertex_node[inod+1][0];
+        
+        // Get position vector of "right" node
+        Vector<double> R_right(2);
+        for(unsigned i=0;i<2;i++)
          {
-          //Say so
-          oomph_info << "Surface element too small: ";
-          oomph_info << "Removing node at " << (*it)[1] << " " << (*it)[2]
-                     << "\n";
-          //Store the current value of the iterator
-          std::set<Vector<double> >::iterator tmp_it = it;
-          //Erase the offending entry
-          vertex_nodes.erase(tmp_it);
+          R_right[i]=tmp_vector_vertex_node[inod+1][i+1];
+         }
+        
+        // Get the boundary coordinate of the midpoint
+        Vector<double> zeta_mid(1);
+        zeta_mid[0]=0.5*(zeta_left+zeta_right);
+        
+        // Get the position vector of the midpoint on the
+        // curvilinear boundary
+        Vector<double> R_mid(2);
+        mesh_geom_obj_pt->position(zeta_mid,R_mid);
+        
+        // Get the position vector of the midpoint on the straight
+        // line connecting "left" and "right" node
+        Vector<double> R_mid_polygon(2);
+        for(unsigned i=0;i<2;i++)
+         {
+          R_mid_polygon[i]=0.5*(R_right[i]+R_left[i]);
+         }
+        
+        // Calculate the distance between the midpoint on the curvilinear
+        // boundary and the midpoint on the straight line
+        double distance=sqrt((R_mid[0]-R_mid_polygon[0])*
+                             (R_mid[0]-R_mid_polygon[0])+
+                             (R_mid[1]-R_mid_polygon[1])*
+                             (R_mid[1]-R_mid_polygon[1]));
+        
+        // Calculating the length of the straight line
+        double length=sqrt((R_right[0]-R_left[0])*(R_right[0]-R_left[0])+
+                           (R_right[1]-R_left[1])*(R_right[1]-R_left[1]));
+        
+        // If the ratio of distance between the midpoints to the length
+        // of the straight line is larger than the tolerance
+        // specified for the criterion when points can be deleted,
+        // create a new node and add it to the (temporary) vector
+        if((distance/length) > refinement_tolerance)
+         {
+          Vector<double> new_node(3);
+          new_node[0]=zeta_mid[0];
+          new_node[1]=R_mid[0];
+          new_node[2]=R_mid[1];
+          
+          // Include the "left" node in the new "temporary" vector
+          extended_vector.push_back(tmp_vector_vertex_node[inod]);
+          
+          // Include the new node as well
+          extended_vector.push_back(new_node);
+         }
+        else
+         {
+          // Include the "left" node in the new "temporary" vector
+          // and move on to the next node
+          extended_vector.push_back(tmp_vector_vertex_node[inod]);
+         }
+       } // end of loop over nodes
+      
+      // Add the last node to the vector
+      extended_vector.push_back(tmp_vector_vertex_node[n_vertex-1]);
+      
+      /// Get the size of the vector that now includes all added nodes
+      n_vertex=extended_vector.size();
+      
+      // Copy across
+      tmp_vector_vertex_node.resize(n_vertex);
+      for(unsigned i=0;i<n_vertex;i++)
+       {
+        tmp_vector_vertex_node[i].resize(3);
+        tmp_vector_vertex_node[i][0]=extended_vector[i][0];
+        tmp_vector_vertex_node[i][1]=extended_vector[i][1];
+        tmp_vector_vertex_node[i][2]=extended_vector[i][2];
+       }
+      
+      // Delete the allocated memory for the geometric object
+      // that represents the curvilinear boundary
+      delete mesh_geom_obj_pt;
+      
+     } // end refinement
+    
+    
+    // For further processing the three-dimensional vector
+    // has to be reduced to a two-dimensional vector
+    n_vertex=tmp_vector_vertex_node.size();
+    Vector<Vector<double> > vector_vertex_node(n_vertex);
+    for(unsigned i=0;i<n_vertex;i++)
+     {
+      vector_vertex_node[i].resize(2);
+      vector_vertex_node[i][0]=tmp_vector_vertex_node[i][1];
+      vector_vertex_node[i][1]=tmp_vector_vertex_node[i][2];
+     }
+    
+    
+    //Check whether the segments are continguous (first vertex of this
+    //segment is equal to last vertex of previous segment).
+    //If not, we should reverse the order of the current segment.
+    //This check only applies for segments other than the first.
+    if(p > 0)
+     {
+      //Final end point of previous line
+      Vector<double> final_vertex_of_previous_segment;
+      unsigned n_prev_vertex = 
+       polygon_pt->polyline_pt(p-1)->nvertex();
+      final_vertex_of_previous_segment = 
+       polygon_pt->polyline_pt(p-1)->
+       vertex_coordinate(n_prev_vertex-1);
+      
+      //Find the error between the final vertex of the previous
+      //line and the first vertex of the current line
+      double error = 0.0;
+      for(unsigned i=0;i<2;i++)
+       {
+        const double dist =
+         final_vertex_of_previous_segment[i] - 
+         (*vector_vertex_node.begin())[i];
+        error += dist*dist;
+       }
+      error = sqrt(error);
+      
+      //If the error is bigger than the tolerance then
+      //we probably need to reverse, but better check
+      if(error > ToleranceForVertexMismatchInPolygons::Tolerable_error)
+       {
+        //Find the error between the final vertex of the previous
+        //line and the first vertex of the current line
+        double rev_error = 0.0;
+        for(unsigned i=0;i<2;i++)
+         {
+          const double dist =
+           final_vertex_of_previous_segment[i] - 
+           (*--vector_vertex_node.end())[i];
+          rev_error += dist*dist;
+         }
+        rev_error = sqrt(rev_error);
+        
+        if(rev_error > 
+           ToleranceForVertexMismatchInPolygons::Tolerable_error)
+         {
+          std::ostringstream error_stream;
+          error_stream << 
+           "The distance between the first node of the current\n" << 
+           "line segment and either and of the previous line segment\n"
+                       <<
+           "is bigger than the desired tolerance " <<
+           ToleranceForVertexMismatchInPolygons::Tolerable_error << ".\n"
+                       << 
+           "This suggests that the polylines defining the polygonal\n" <<
+           "representation of the hole are not properly ordered.\n" <<
+           "This should have failed when first trying to construct the\n"
+                       << "polygon.\n";
+          throw OomphLibError(error_stream.str(),
+                              "TriangleMesh::adapt()",
+                              OOMPH_EXCEPTION_LOCATION);
+         }
+        
+        //Reverse the current vector to line up with the previous one
+        std::reverse(vector_vertex_node.begin(),vector_vertex_node.end());
+       }
+     }
+    
+    
+    //Now update the polyline according to the new vertices
+    delete polygon_pt->polyline_pt(p);
+    polygon_pt->polyline_pt(p) = 
+     new TriangleMeshPolyLine(vector_vertex_node,bound); 
+   }
+  
+  // Cleanup (but only the elements -- the nodes still exist in
+  // the bulk mesh!
+  for(unsigned p=0;p<n_polyline;p++)
+   {
+    face_mesh_pt[p]->flush_node_storage();
+    delete face_mesh_pt[p];
+   }   
+  
+ }
+ 
+ 
+ 
+  //=========================================================================
+  /// Helper function to construct face mesh representation of all polylines, 
+  /// possibly with segments re-distributed between polylines 
+  /// to maintain an approximately even sub-division of the polygon
+  //=========================================================================
+ template<class ELEMENT>
+ void RefineableTriangleMesh<ELEMENT>::
+ get_face_mesh_representation(TriangleMeshPolygon* polygon_pt,
+                              Vector<Mesh*>& face_mesh_pt)
+ {
+  
+  // Number of polylines
+  unsigned n_polyline = polygon_pt->npolyline();
+  face_mesh_pt.resize(n_polyline);
+  
+  // Are we eligigible for re-distributing polyline segments between
+  // polylines? We're not if any of the boundaries are associated
+  // with a GeomObject because we're then tied to the start and
+  // end coordinates along it.
+  bool eligible_for_segment_redistribution=true;
+
+  // Loop over constituent polylines 
+  for(unsigned p=0;p<n_polyline;p++)
+   { 
+    //Get the boundary id of the polyline
+    unsigned bound = 
+     polygon_pt->polyline_pt(p)->boundary_id();
+    
+    //If the boundary has a geometric object representation then
+    //we can't redistribute
+    GeomObject* const geom_object_pt = this->boundary_geom_object_pt(bound);
+    if(geom_object_pt!=0)
+     {
+      eligible_for_segment_redistribution=false;
+     }
+
+    // Create a face mesh adjacent to the fluid mesh's b-th boundary. 
+    // The face mesh consists of FaceElements that may also be 
+    // interpreted as GeomObjects
+    face_mesh_pt[p] = new Mesh;
+    this->template build_face_mesh
+     <ELEMENT,FaceElementAsGeomObject>(bound, face_mesh_pt[p]);
+    
+    // Loop over these new face elements and tell them the boundary number
+    // from the bulk fluid mesh -- this is required to they can
+    // get access to the boundary coordinates!
+    unsigned n_face_element = face_mesh_pt[p]->nelement();
+    for(unsigned e=0;e<n_face_element;e++)
+     {
+      //Cast the element pointer to the correct thing!
+      FaceElementAsGeomObject<ELEMENT>* el_pt=
+       dynamic_cast<FaceElementAsGeomObject<ELEMENT>*>
+       (face_mesh_pt[p]->element_pt(e));
+      
+      // Set bulk boundary number
+      el_pt->set_boundary_number_in_bulk_mesh(bound);
+     }
+   }
+ 
+
+  if (!polygon_pt->is_redistribution_of_segments_between_polylines_enabled())
+   {
+    return;
+   }
+ 
+
+  //If there is more than one region we have to think... Die for now.
+  if(this->nregion() > 1)
+   {
+    std::ostringstream warn_message;
+    warn_message 
+     << "Can't currently re-distribute segments between polylines if there\n"
+     << "are multiple regions; returning..." << std::endl;
+    OomphLibWarning(warn_message.str(),
+                    "RefineableTriangleMesh::get_face_mesh_representation()",
+                    OOMPH_EXCEPTION_LOCATION);    
+    return;
+   }
+
+  // Redistribution overruled
+  if (!eligible_for_segment_redistribution)
+   {
+    std::ostringstream warn_message;
+    warn_message 
+     << "Over-ruling re-distribution of segments between polylines\n"
+     << "because at least one boundary is associated with a GeomObject."
+     << "Returning..." << std::endl;
+    OomphLibWarning(warn_message.str(),
+                    "RefineableTriangleMesh::get_face_mesh_representation()",
+                    OOMPH_EXCEPTION_LOCATION);    
+    return;
+   }
+  
+  // Create a vector for ordered face mesh
+  Vector<Mesh*> ordered_face_mesh_pt(n_polyline);
+  
+  // Storage for the total arclength of polygon
+  double s_total=0.0;
+  
+  // Storage for first and last nodes on polylines so we can figure
+  // out if they are inverted relative to each other
+  Vector<Node*> first_polyline_node_pt(n_polyline);
+  Vector<Node*> last_polyline_node_pt(n_polyline);
+  std::vector<bool> is_reversed(n_polyline,false);
+
+  // Loop over constituent polylines 
+  for(unsigned p=0;p<n_polyline;p++)
+   { 
+    
+    // Put all face elements in order
+    //-------------------------------
+
+    // Put first element into ordered list
+    std::list<FiniteElement*> ordered_el_pt;
+    FiniteElement* el_pt=face_mesh_pt[p]->finite_element_pt(0);
+    ordered_el_pt.push_back(el_pt);
+
+    // Number of nodes
+    unsigned nnod=el_pt->nnode();
+
+    // Default for first and last node on polyline
+    first_polyline_node_pt[p]=el_pt->node_pt(0);
+    last_polyline_node_pt[p]=el_pt->node_pt(nnod-1);
+
+    // Count elements that have been done
+    unsigned count_done=0;
+
+    // How many face elements are there?
+    unsigned n_face_element = face_mesh_pt[p]->nelement();
+
+    //Get the boundary id of the polyline
+    unsigned bound = 
+     polygon_pt->polyline_pt(p)->boundary_id();
+    
+    // Keep track of who's done
+    std::map<FiniteElement*,bool> done_el;
+    
+    // Keep track of which element is inverted
+    std::map<FiniteElement*,bool> is_inverted;
+    
+    // Fit in the other elements in at most nel^2 loops
+    for (unsigned ee=1;ee<n_face_element;ee++)
+     {
+      // Loop over all elements to check if they fit to the right
+      // or the left of the current one
+      for (unsigned e=1;e<n_face_element;e++)
+       {
+        // Candidate element
+        el_pt=face_mesh_pt[p]->finite_element_pt(e);
+        
+        // Is it done yet?
+        if (!done_el[el_pt])
+         {
+          // Left and rightmost elements 
+          FiniteElement* first_el_pt=(*ordered_el_pt.begin());
+          std::list<FiniteElement*>::iterator it=ordered_el_pt.end();
+          it--;
+          FiniteElement* last_el_pt=*it;
+          
+          // Left and rightmost nodes
+          Node* left_node_pt=first_el_pt->node_pt(0);
+          if (is_inverted[first_el_pt]) 
+           {
+            left_node_pt=first_el_pt->node_pt(nnod-1);
+           }
+          Node* right_node_pt=last_el_pt->node_pt(nnod-1);
+          if (is_inverted[last_el_pt]) 
+           {
+            right_node_pt=last_el_pt->node_pt(0);
+           }
+          
+          // New element fits at the left of first element and is not inverted
+          if (left_node_pt==el_pt->node_pt(nnod-1))
+           {
+            ordered_el_pt.push_front(el_pt);
+            done_el[el_pt]=true;
+            count_done++;
+            is_inverted[el_pt]=false;
+            first_polyline_node_pt[p]=el_pt->node_pt(0);
+           }
+          // New element fits at the left of first element and is inverted
+          else if (left_node_pt==el_pt->node_pt(0))
+           {
+            ordered_el_pt.push_front(el_pt);
+            done_el[el_pt]=true;
+            count_done++;
+            is_inverted[el_pt]=true;
+            first_polyline_node_pt[p]=el_pt->node_pt(nnod-1);
+           }
+          // New element fits on the right of last element and is not inverted
+          else if(right_node_pt==el_pt->node_pt(0))
+           {
+            ordered_el_pt.push_back(el_pt);
+            done_el[el_pt]=true;
+            count_done++;
+            is_inverted[el_pt]=false;
+            last_polyline_node_pt[p]=el_pt->node_pt(nnod-1);
+           }
+          // New element fits on the right of last element and is inverted
+          else if (right_node_pt==el_pt->node_pt(nnod-1))
+           {
+            ordered_el_pt.push_back(el_pt);
+            done_el[el_pt]=true;
+            count_done++;
+            is_inverted[el_pt]=true;
+            last_polyline_node_pt[p]=el_pt->node_pt(0);
+           }
+          
+          if (done_el[el_pt])
+           {
+            break;
+           }
          }
        }
-        
-       unsigned n_poly_vertex = vertex_nodes.size();
-       Vector<Vector<double> > vector_vertex_node(n_poly_vertex);
-       unsigned count=0;
-       for(std::set<Vector<double> >::iterator it = vertex_nodes.begin();
-           it!=vertex_nodes.end();++it)
-        {
-         vector_vertex_node[count].resize(2);
-         vector_vertex_node[count][0] = (*it)[1];
-         vector_vertex_node[count][1] = (*it)[2];
-         ++count;
-        }
-       
-       
-       //Check whether the segments are continguous (first vertex of this
-       //segment is equal to last vertex of previous segment).
-       //If not, we should reverse the order of the current segment.
-       //This check only applies for segments other than the first.
-       if(p > 0)
-        {
-         //Final end point of previous line
-         Vector<double> final_vertex_of_previous_segment;
-         unsigned n_prev_vertex = 
-          polygon_pt->polyline_pt(p-1)->nvertex();
-         final_vertex_of_previous_segment = 
-          polygon_pt->polyline_pt(p-1)->
-          vertex_coordinate(n_prev_vertex-1);
-         
-         //Find the error between the final vertex of the previous
-         //line and the first vertex of the current line
-         double error = 0.0;
-         for(unsigned i=0;i<2;i++)
-          {
-           const double dist =
-            final_vertex_of_previous_segment[i] - 
-            (*vector_vertex_node.begin())[i];
-           error += dist*dist;
-          }
-         error = sqrt(error);
-         
-         //If the error is bigger than the tolerance then
-         //we probably need to reverse, but better check
-         if(error > ToleranceForVertexMismatchInPolygons::Tolerable_error)
-          {
-           //Find the error between the final vertex of the previous
-           //line and the first vertex of the current line
-           double rev_error = 0.0;
-           for(unsigned i=0;i<2;i++)
-            {
-             const double dist =
-              final_vertex_of_previous_segment[i] - 
-              (*--vector_vertex_node.end())[i];
-             rev_error += dist*dist;
-            }
-           rev_error = sqrt(rev_error);
-           
-           if(rev_error > 
-              ToleranceForVertexMismatchInPolygons::Tolerable_error)
-            {
-             std::ostringstream error_stream;
-             error_stream << 
-              "The distance between the first node of the current\n" << 
-              "line segment and either and of the previous line segment\n"
-                          <<
-              "is bigger than the desired tolerance " <<
-              ToleranceForVertexMismatchInPolygons::Tolerable_error << ".\n"
-                          << 
-              "This suggests that the polylines defining the polygonal\n" <<
-              "representation of the hole are not properly ordered.\n" <<
-              "This should have failed when first trying to construct the\n"
-                          << "polygon.\n";
-             throw OomphLibError(error_stream.str(),
-                                 "TriangleMesh::adapt()",
-                                 OOMPH_EXCEPTION_LOCATION);
-            }
-           
-           //Reverse the current vector to line up with the previous one
-           std::reverse(vector_vertex_node.begin(),vector_vertex_node.end());
-          }
-        }
-       
-       //Now update the polyline according to the new vertices
-       //Need offset because of stupid triangle
-       delete polygon_pt->polyline_pt(p);
-       polygon_pt->polyline_pt(p) = 
-        new TriangleMeshPolyLine(vector_vertex_node,bound); //+1);
-      }
-    }
+     }
+    
+    // Are we done?
+    if (count_done!=(n_face_element-1))
+     {
+      std::ostringstream error_message;
+      error_message 
+       << "When ordering FaceElements on  " 
+       << "boundary " << bound << " only managed to order \n" << count_done 
+       << " of " << n_face_element << " face elements.\n"
+       << std::endl;
+      throw OomphLibError(
+       error_message.str(),
+       "RefineableTriangleMesh::get_face_mesh_representation()",
+       OOMPH_EXCEPTION_LOCATION);
+     }
+    
+    
+    // Now make a mesh that contains the FaceElements in order
+    ordered_face_mesh_pt[p] = new Mesh;
+    
+    // Fill it
+    for (std::list<FiniteElement*>::iterator it=ordered_el_pt.begin();
+         it!=ordered_el_pt.end();it++)
+     {
+      // Get element
+      FiniteElement* el_pt=*it;
+      
+      // add this face element to the order original mesh
+      ordered_face_mesh_pt[p]->add_element_pt(el_pt);
+     }
+    
+    
+    //Get the arclength along the polygon
+    for(unsigned e=0;e<n_face_element;++e)
+     {
+      FiniteElement* el_pt=ordered_face_mesh_pt[p]->finite_element_pt(e);
+      unsigned n_node=el_pt->nnode();
+      double element_length_squared=0.0;
+      for(unsigned i=0;i<2;i++)
+       {
+        element_length_squared += pow(el_pt->node_pt(n_node-1)->x(i)-
+                                      el_pt->node_pt(0)->x(i),2);
+       }
+      
+      // Determine element length
+      double element_length=sqrt(element_length_squared);
+      
+      // Add this length to the total arclength
+      s_total += element_length;
+     }
 
+    // Empty the original meshes
+    face_mesh_pt[p]->flush_element_and_node_storage();
+   }
+  
+        
+  // Is first one reversed?
+  if ((last_polyline_node_pt[0]==first_polyline_node_pt[1])||
+      (last_polyline_node_pt[0]==last_polyline_node_pt[1]))
+   {
+    is_reversed[0]=false;
+   }
+  else if ((first_polyline_node_pt[0]==first_polyline_node_pt[1])||
+           (first_polyline_node_pt[0]==last_polyline_node_pt[1]))
+   {
+    is_reversed[0]=true;
+   }
+
+  // Reorder the face meshes so that they are contiguous
+  Vector<Mesh*> tmp_face_mesh_pt(n_polyline);
+  std::vector<bool> mesh_done(n_polyline,false);
+  Vector<unsigned> old_polyline_number(n_polyline);
+
+  // Initial entry
+  tmp_face_mesh_pt[0]=ordered_face_mesh_pt[0];
+  unsigned current=0;
+  old_polyline_number[0]=0;
+  unsigned count_found=0;
+
+  // Fill in the next entries
+  for(unsigned p=1;p<n_polyline;p++)
+   {    
+    Node* end_node_pt=last_polyline_node_pt[current];
+    if (is_reversed[current])
+     {
+      end_node_pt=first_polyline_node_pt[current];
+     }
+    
+    // Loop over all remaining face meshes to see which one fits
+    for(unsigned pp=1;pp<n_polyline;pp++)
+     {      
+      if (!mesh_done[pp])
+       {
+        // Current one is not reversed, candidate is not reversed
+        if ((!is_reversed[current])&&
+            (end_node_pt==first_polyline_node_pt[pp]))
+         {
+          tmp_face_mesh_pt[p]=ordered_face_mesh_pt[pp];
+          mesh_done[pp]=true;  
+          is_reversed[pp]=false;
+          old_polyline_number[p]=pp;
+          current=pp;
+          count_found++;
+          break;
+         }
+        // Current one is not reversed, candidate is reversed
+        else if ((!is_reversed[current])&&
+                 (end_node_pt==last_polyline_node_pt[pp]))
+         {
+          tmp_face_mesh_pt[p]=ordered_face_mesh_pt[pp];
+          mesh_done[pp]=true;
+          is_reversed[pp]=true;
+          old_polyline_number[p]=pp;
+          current=pp;
+          count_found++;
+          break;
+         }
+        // Current one is reversed, candidate is not reversed
+        else if ((is_reversed[current])&&
+                 (end_node_pt==first_polyline_node_pt[pp]))
+         {
+          tmp_face_mesh_pt[p]=ordered_face_mesh_pt[pp];
+          mesh_done[pp]=true;
+          is_reversed[pp]=false;
+          old_polyline_number[p]=pp;
+          current=pp;
+          count_found++;
+          break;
+         }
+        // Current one is reversed, candidate is reversed
+        else if ((is_reversed[current])&&
+                 (end_node_pt==last_polyline_node_pt[pp]))
+         {
+          tmp_face_mesh_pt[p]=ordered_face_mesh_pt[pp];
+          mesh_done[pp]=true;
+          is_reversed[pp]=true;
+          old_polyline_number[p]=pp;
+          current=pp;         
+          count_found++;
+          break;
+         }
+       }
+     }
+   }
+  
+#ifdef PARANOID
+  if (count_found!=n_polyline-1)
+   {
+    std::ostringstream error_message;
+    error_message << "Only found " << count_found 
+                  << " out of " << n_polyline-1 
+                  << " polylines to be fitted in.\n";
+    throw OomphLibError(
+     error_message.str(),
+     "RefineableTriangleMesh::get_face_mesh_representation()",
+     OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+
+  // Now overwrite the re-ordered data
+  for (unsigned i=0;i<n_polyline;i++)
+   {
+    ordered_face_mesh_pt[i]=tmp_face_mesh_pt[i];
+   }
+
+
+  // Now do an approximate equidistribution of polylines
+  //----------------------------------------------------
+  double s=0.0;
+  unsigned new_face_id=0;
+
+  // Matrix map to indicate if node must not be removed from specified
+  // boundary (!=0) or not (=0). Initialises itself to zero
+  std::map<Node*,std::map<unsigned,unsigned> > 
+   node_must_not_be_removed_from_boundary_flag;
+  
+  // Loop over the old face mesh
+  for(unsigned p=0;p<n_polyline;p++)
+   {
+    // Loop over the face elements
+    unsigned n_face_element = ordered_face_mesh_pt[p]->nelement();
+    for (unsigned e=0;e<n_face_element;e++)
+     {
+      unsigned el_number=e;
+      if (is_reversed[p])
+       {
+        el_number=n_face_element-e-1;
+       }
+
+      FiniteElement* el_pt=
+       ordered_face_mesh_pt[p]->finite_element_pt(el_number);
+      unsigned n_node = el_pt->nnode();
+      
+      // Determine element length
+      double element_length_squared=0.0;
+      for(unsigned i=0;i<2;i++)
+       {
+        element_length_squared += pow(el_pt->node_pt(n_node-1)->x(i)-
+                                      el_pt->node_pt(0)->x(i),2);
+       }
+      double element_length=sqrt(element_length_squared);
+      
+      // Add this length to the total arclength
+      s += element_length;
+      
+      // Check if the current 'arclength' is less than the
+      // whole 'arclength' divided by the number of polylines
+      if(s < s_total/double(n_polyline)+1e-6)
+       {
+        // If so add this face element to the new face mesh
+        face_mesh_pt[new_face_id]->add_element_pt(el_pt);
+        
+        unsigned bound_old = 
+         polygon_pt->polyline_pt(old_polyline_number[p])->boundary_id();
+        
+        unsigned bound_new = 
+         polygon_pt->polyline_pt(new_face_id)->boundary_id();
+        
+        // Loop over the nodes in the element
+        for(unsigned i=0;i<n_node;i++)
+         {
+          // Get the pointer to the node
+          Node* nod_pt=el_pt->node_pt(i);
+          
+          // If the two boundary id's are different, the face element's nodes
+          // have to be added to the new boundary
+          if(bound_new != bound_old)
+           {
+            // Add it to the new boundary
+            add_boundary_node(bound_new,nod_pt);
+
+            // We are happy for this node to be removed from the
+            // old boundary? 
+            node_must_not_be_removed_from_boundary_flag[nod_pt][bound_old]+=0;
+           }
+          
+          // If the face element hasn't moved, its nodes MUST remain
+          // on that boundary (incl. any nodes that ar shared by
+          // FaceElements that have moved (see above)
+          else
+           {
+            node_must_not_be_removed_from_boundary_flag[nod_pt][bound_old]+=1;
+           }
+         }
+       }
+
+      // If not, reset the current 'arclength' to zero,
+      // increase the new face id by one and go one element
+      // back by decreasing e by one to make sure the current
+      // element gets added to the next face mesh      
+      else
+       {
+        if(new_face_id!=n_polyline-1)
+         {
+          s=0.0;
+          new_face_id++;
+          --e; 
+         }
+        else
+         {
+          s=0.0;
+          --e; 
+         }
+       }
+     }
+   } // end of loop over all polylines -- they are now re-distributed
+  
+
+  
+  // Loop over all nodes on the boundaries of the polygon to remove
+  // nodes from boundaries they are no longer on
+  unsigned move_count=0;
+  for (std::map<Node*,std::map<unsigned,unsigned> >::iterator 
+        it=node_must_not_be_removed_from_boundary_flag.begin();
+       it!=node_must_not_be_removed_from_boundary_flag.end();it++)
+   {
+    // Get the node
+    Node* nod_pt=(*it).first;
+    
+    // Now we loop over the boundaries that this node is on
+    for (std::map<unsigned,unsigned>::iterator 
+          it_2=(*it).second.begin();it_2!=(*it).second.end();it_2++)
+     {
+      // Get the boundary id
+      unsigned bound=(*it_2).first;
+      
+      // Remove it from that boundary?
+      if((*it_2).second==0)
+       {
+        remove_boundary_node(bound,nod_pt);
+        move_count++;
+       }
+     }
+   }
+  
+  // Loop over the new face mesh to assign new boundary IDs
+  for(unsigned p=0;p<n_polyline;p++)
+   {
+    //Get the boundary id of the polyline
+    unsigned bound = 
+     polygon_pt->polyline_pt(p)->boundary_id();
+    
+    // Loop over the face elements
+    unsigned n_face_element = face_mesh_pt[p]->nelement();
+    for(unsigned e=0;e<n_face_element;e++)
+     {
+      //Cast the element pointer to the correct thing!
+      FaceElementAsGeomObject<ELEMENT>* el_pt=
+       dynamic_cast<FaceElementAsGeomObject<ELEMENT>*>
+       (face_mesh_pt[p]->element_pt(e));
+      
+      // Set bulk boundary number
+      el_pt->set_boundary_number_in_bulk_mesh(bound);
+     }
+   }
+  
+  // Update look-up for elements next to boundary
+  setup_boundary_element_info();
+  
+  // Now re-create the boundary coordinates
+  for(unsigned p=0;p<n_polyline;p++)
+   { 
+    //Get the boundary id of the polyline
+    unsigned bound = 
+     polygon_pt->polyline_pt(p)->boundary_id();
+    
+    // Do it
+    this->setup_boundary_coordinates(bound);
+   }
+
+  // Clean up
+  for(unsigned p=0;p<n_polyline;p++)
+   {
+    // Flush the nodes from the face mesh to make sure we
+    // don't delete them (the face mesh that we're returning from here
+    // still needs them!)
+    ordered_face_mesh_pt[p]->flush_element_and_node_storage();
+    delete ordered_face_mesh_pt[p];
+   }
+
+ }
+ 
 
 
 //======================================================================
@@ -2469,107 +3287,82 @@ namespace oomph
     TriangleMeshInternalPolygon* const poly_pt 
      = this->Internal_polygon_pt[ihole];
 
-    //Only bother to do anything if the body is not fixed
-    if(!poly_pt->is_fixed())
+    //Can the polygon update its own configuration, in which case this
+    //is easy
+    if(poly_pt->can_update_reference_configuration())
      {
-      //Can the polygon update its own configuration, in which case this
-      //is easy
-      if(poly_pt->can_update_reference_configuration())
+      poly_pt->reset_reference_configuration();
+      
+      // Initialize Vector hole_coordinates
+      internal_point_coord[ihole].resize(2);
+      
+      // Get the vector of hole coordinates
+      internal_point_coord[ihole]=poly_pt->internal_point();
+     }
+    //Otherwise we have to work much harder
+    else
+     {
+      //Update the polygon associated with the ihole-th hole
+      this->update_polygon_using_face_mesh(poly_pt);
+
+      //Now sort out the hole coordinates
+      Vector<double> vertex_coord;
+      unsigned n_polyline = poly_pt->npolyline();      
+
+      // Initialize Vector hole_coordinates
+      vertex_coord.resize(2);
+      internal_point_coord[ihole].resize(2);
+      
+      //Hole centre will be found by averaging the position of 
+      //all vertex nodes
+      internal_point_coord[ihole][0] = 0.0;
+      internal_point_coord[ihole][1] = 0.0;
+      
+      for(unsigned p=0;p<n_polyline;p++)
        {
-        //Call the function to update the reference configuration
-        poly_pt->reset_reference_configuration();
-        
-        // Initialize Vector hole_coordinates
-        internal_point_coord[ihole].resize(2);
-        
-        // Get the vector of hole coordinates
-        internal_point_coord[ihole] = poly_pt->internal_point();
-       }
-      //Otherwise we have to work much harder
-      else
-       {
-        //Update the polygon associated with the ihole-th hole
-        this->update_polygon_using_face_mesh(poly_pt);
-        
-        //Now sort out the hole coordinates
-        Vector<double> vertex_coord;
-        unsigned n_polyline = poly_pt->npolyline();
-        
-        vertex_coord.resize(2);
-        // Initialize Vector hole_coordinates
-        internal_point_coord[ihole].resize(2);
-        
-        //Hole centre will be found by averaging the position of 
-        //all vertex nodes
-        internal_point_coord[ihole][0] = 0.0;
-        internal_point_coord[ihole][1] = 0.0;
-        
-        for(unsigned p=0;p<n_polyline;p++)
+        Vector<double> poly_ave(2,0.0);
+        //How many vertices are there in the segment
+        unsigned n_vertex = poly_pt->polyline_pt(p)->nvertex();
+        for(unsigned v=0;v<n_vertex;v++)
          {
-          Vector<double> poly_ave(2,0.0);
-          //How many vertices are there in the segment
-          unsigned n_vertex = poly_pt->polyline_pt(p)->nvertex();
-          for(unsigned v=0;v<n_vertex;v++)
-           {
-            vertex_coord = poly_pt->polyline_pt(p)->vertex_coordinate(v);
-            for(unsigned i=0;i<2;i++)
-             {
-              poly_ave[i] += vertex_coord[i];
-             }
-           }
-          
-          //Add the average polyline coordinate to the hole centre
+          vertex_coord = poly_pt->polyline_pt(p)->vertex_coordinate(v);
           for(unsigned i=0;i<2;i++)
            {
-            internal_point_coord[ihole][i] += poly_ave[i]/n_vertex;
+            poly_ave[i] += vertex_coord[i];
            }
          }
         
-        //Now average out the hole centre
+        //Add the average polyline coordinate to the hole centre
         for(unsigned i=0;i<2;i++)
          {
-          internal_point_coord[ihole][i] /= n_polyline;
+          internal_point_coord[ihole][i] += poly_ave[i]/n_vertex;
          }
-        
-        //Set the new hole centre 
-        poly_pt->internal_point() = internal_point_coord[ihole];
        }
-     } //End of the action
-   } //End of the loop of internal boundaries
- }
-
-
-//======================================================================
-/// Update the PSLG that define the outer boundary of the mesh.
-///
-//======================================================================
- template <class ELEMENT>
- void RefineableTriangleMesh<ELEMENT>::
- surface_remesh_for_outer_boundary()
- {
-  //Only if there is a geometric object associated with the first boundary
-  // (HACK)
-  if(this->boundary_geom_object_pt(0)!=0)
-   {
-    //Update the polygon associated with the outer boundary
-    this->update_polygon_using_face_mesh(this->Outer_boundary_pt);
-   }
- }
+      
+      //Now average out the hole centre
+      for(unsigned i=0;i<2;i++)
+       {
+        internal_point_coord[ihole][i] /= n_polyline;
+       }
+      
+      //Set the new hole centre 
+      poly_pt->internal_point() = internal_point_coord[ihole];
+     }
+   } //End of the action
+ } //End of the loop of internal boundaries
 
 
 //======================================================================
 /// Move the boundary nodes onto the boundary defined by the old mesh
 //======================================================================
  template <class ELEMENT>
- void RefineableTriangleMesh<ELEMENT>:: snap_nodes_onto_boundary(
+ void RefineableTriangleMesh<ELEMENT>::snap_nodes_onto_boundary(
   RefineableTriangleMesh<ELEMENT>* &new_mesh_pt, const unsigned &b)
  {
 
   // Quick return
   if (!Boundary_coordinate_exists[b])
    {
-    oomph_info << "Not snapping nodes on boundary " << b 
-               << " because no boundary coordinate has been set up.\n";
     return;
    }
 
@@ -2589,8 +3382,6 @@ namespace oomph
   // Quick return if there are no nodes
   if (n_boundary_node==0)
    {
-    oomph_info << "Not snapping nodes on boundary " << b 
-               << " because there aren't any.\n";
     return;
    }
 
@@ -2699,6 +3490,8 @@ namespace oomph
   //The end points should always be present, so we
   //can (and must) always add them in exactly
   new_boundary_node[0][4] = new_boundary_node[0][0];
+
+  /// Correct!? Because assigned again below
   new_boundary_node[n_new_boundary_node-1][4] = 
   new_boundary_node[0][5] = 1.0;
   
@@ -2791,14 +3584,14 @@ namespace oomph
     // Set bulk boundary number
     el_pt->set_boundary_number_in_bulk_mesh(b);
    }   
-  
+
   //Now make the mesh as geometric object
   MeshAsGeomObject* mesh_geom_obj_pt = new MeshAsGeomObject(face_mesh_pt);
     
   //Now assign the new nodes positions based on the old meshes
   //potentially curvilinear boundary (its geom object incarnation)
   Vector<double> new_x(2);
-  //for(unsigned n=0;n<n_new_boundary_node;n++)
+
   //Loop over the nodes that need to be snapped
   for(std::list<unsigned>::iterator it=nodes_to_be_snapped.begin();
       it!=nodes_to_be_snapped.end();++it)
@@ -2819,7 +3612,9 @@ namespace oomph
 
   //Delete the allocated memory for the geometric object and face mesh
   delete mesh_geom_obj_pt;
-  face_mesh_pt->flush_element_and_node_storage();
+  // Flush the nodes from the face mesh to make sure we
+  // don't delete them (the bulk mesh still needs them!)
+  face_mesh_pt->flush_node_storage();
   delete face_mesh_pt;
   
   //Fix up the elements adjacent to the boundary
@@ -2893,6 +3688,10 @@ namespace oomph
 #endif  
       // Deal with six noded stuff for all (normal and enriched) elements 
       
+      ///----------------------------------------------------------------
+      ///         Repositioning of mid-side nodes
+      ///----------------------------------------------------------------
+
       //Side between 0 and 1
       if(el_pt->node_pt(3)->is_on_boundary(b))
        {

@@ -250,7 +250,17 @@ def tecplot_to_vtkxml(inputFilename, outputFilename):
     nbzones = len(zones)
     sys.stdout.write("* %d lines ignored\n" % ignoredlines)
     if nbzones == 0:
-        error("The input file does not contain any Tecplot zone ! \n Try to convert to point Data with -p2 option if dim == 2 or -p3 option if dim == 3")
+
+        #---------------------------------------------------------------------------
+        # Dummy output
+        #---------------------------------------------------------------------------
+        try:
+            output = open(outputFilename, "w")
+        except:
+            error("Failed to open output file for writing !")
+        
+        output.close()
+        error("The input file does not contain any Tecplot zone ! Created an empty file... \n You may want to try converting this file to point \n data with -p2 option if dim == 2 or -p3 option if dim == 3")
 
     #---------------------------------------------------------------------------
     # Compute global informations

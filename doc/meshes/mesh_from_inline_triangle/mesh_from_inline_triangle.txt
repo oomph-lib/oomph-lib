@@ -22,10 +22,12 @@ Here we restrict ourselves to the solution of problems in fixed
 domains. Other tutorials discuss more advanced applications involving
 moving meshes, e.g.
 - <A HREF="../../../../doc/navier_stokes/jeffery_orbit/html/index.html">
-  the motion of an ellipse in a shear flow</a>
+  The motion of an ellipse in a shear flow</a>
   \n\n
-- <A HREF="../../../../doc/bla/bla/html/index.html">free-surface
-  flows</a>
+- <A HREF=
+  "../../../../doc/navier_stokes/adaptive_bubble_in_channel/html/index.html">
+  The propagation of a bubble in a channel -- mesh generation and adaptation
+  for free-surface flows.</a>
   \n\n
 .
 <HR>
@@ -54,13 +56,11 @@ to  <A HREF="http://www.cs.cmu.edu/~quake/triangle.html">\c Triangle </A>
 is that each closed \c TriangleMeshPolygon must contain at least two
 distinct \c TriangleMeshPolyLines, each with its own boundary ID. 
 This is because every \c Node can only have a single-valued boundary
-coordinate, and so if boundary is closed there will be a discontinuity
+coordinate but if the boundary is closed there would be a discontinuity
 in the coordinate value. (For example, a standard representation 
-would have \f$\zeta = [0,2\pi]\f$, but the node at 
-\f$\zeta=0\f$ should also have \f$\zeta=2\pi\f$ and this is not possible.)
-Thus, \c oomph-lib will not be able to refine automatically 
-along the boundary unless it is split in two.
- The sketch below shows a representative domain 
+would have \f$ \zeta = [0,2\pi] \f$ , but the node at 
+\f$\zeta=0\f$ should also have \f$ \zeta=2\pi \f$ and this is not possible.)
+The sketch below shows a representative domain 
 as well as two legal and one illegal representations of the domain
 boundaries. Note that the boundaries can be enumerated in an arbitrary 
 fashion. 
@@ -116,6 +116,15 @@ adjust the element sizes guided by spatial error estimates
 when re-meshing the domain is a simple fringe benefit.
 
 A number of issues are important: 
+- To facilitate mesh adaptation in free-boundary problems, we 
+  re-generate the polygonal representation of the boundary,
+  using the vertex nodes of the elements on the boundary to re-define 
+  the polygon. The number of vertices in the polygons that define the
+  mesh boundaries will therefore generally change during the mesh 
+  adaptation process. This is discussed in more detail in 
+  <a href=
+  "../../../../doc/navier_stokes/adaptive_bubble_in_channel/html/index.html#adapt">
+  another tutorial.</a>\n\n
 - The mesh (and thus its constituent elements) are completely 
   re-generated when the mesh is adapted, and so it is necessary to "complete
   the build" of all elements after each mesh adaptation. For instance,
@@ -199,7 +208,7 @@ for \f$ \alpha = 5 \f$ for various angles \f$ \Phi \f$. It illustrates
 how the mesh adaptation adjusts the mesh such the smallest elements
 are located in the region where the solution undergoes rapid change. 
 
-@I w 0.75\textwidth solution "hierher "
+@I w 0.75\textwidth solution "Contour plot of the solution. "
 
 <HR>
 <HR>
@@ -245,7 +254,7 @@ usual member functions. As discussed above, the boundary conditions
 and the source function have to be re-specified after every mesh 
 adaptation since the adapted mesh contains completely new elements.
 This is done in the function \c complete_problem_setup(), discussed
-below,which is called from the Problem constructor and 
+below, which is called from the Problem constructor and 
 from \c actions_after_adapt(). We re-assign the Dirichlet boundary 
 conditions in \c actions_before_newton_solve(), using a second helper function
 \c apply_boundary_conditions():
@@ -451,6 +460,15 @@ src/poisson/poisson_elements.h
 </A>
 </CENTER>
 
+Of course, you can avoid the additional work by dispensing with
+adaptivity and simply generating a sufficiently fine (uniform)
+mesh. This is illustrated in the alternative driver code
+<CENTER>
+<A HREF="../../../../demo_drivers/meshing/mesh_from_inline_triangle/mesh_from_inline_triangle_no_adapt.cc">
+demo_drivers/meshing/mesh_from_inline_triangle/mesh_from_inline_triangle_no_adapt.cc
+</A>
+</CENTER>
+
 <HR>
 
 \subsection how_many_segments How many vertices should I use to sample my curvilinear boundary?
@@ -479,13 +497,18 @@ compromise between two conflicting demands:
   and global coordinates becomes non-positive anywhere. 
   Note that negative Jacobians may
   occur in the interior of elements (e.g. at their Gauss points) even
-  if a plot of the element, based on its nodal positions still looks "OK").
+  if a plot of the element, based on its nodal positions, still looks "OK").
 .
 
 <HR>
 
 \subsection ex Exercises
--# Change the outer curvilinear boundary to a polygonal boundary.
+-# Change the outer curvilinear boundary to a polygonal boundary
+   (you can cheat -- the relevant code is already contained in 
+   the driver code but it's "hidden" with \c ifdefs; this code also
+   documents the re-distribution of straight-line segments between 
+   different polylines, a capability that is important in certain
+   free-boundary problems). 
    \n\n
 -# Vary the number of vertices used for the initial polygonal
    representation of the curvilinear hole to establish what number
@@ -507,13 +530,24 @@ compromise between two conflicting demands:
 - The source files for this tutorial are located in the directory:\n\n
 <CENTER>
 <A HREF="../../../../demo_drivers/meshing/mesh_from_triangle/">
-demo_drivers/meshing/mesh_from_triangle/
+demo_drivers/meshing/mesh_from_inline_triangle/
 </A>
 </CENTER>\n
 - The driver code is: \n\n
 <CENTER>
 <A HREF="../../../../demo_drivers/meshing/mesh_from_inline_triangle/mesh_from_inline_triangle.cc">
 demo_drivers/meshing/mesh_from_inline_triangle/mesh_from_inline_triangle.cc
+</A> 
+</CENTER>
+\n\n
+- The additional driver code \n\n
+<CENTER>
+<A HREF="../../../../demo_drivers/meshing/mesh_from_inline_triangle/mesh_from_inline_triangle_no_adapt.cc">
+demo_drivers/meshing/mesh_from_inline_triangle/mesh_from_inline_triangle_no_adapt.cc
 </A>
 </CENTER>
+\n
+shows how to generate non-refineable triangle meshes inline. This
+code does not require any modifications to existing triangular
+elements.
 .

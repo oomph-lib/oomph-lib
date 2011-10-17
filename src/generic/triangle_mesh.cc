@@ -1059,7 +1059,8 @@ namespace ToleranceForVertexMismatchInPolygons
 //=========================================================================
 TriangleMeshPolygon::TriangleMeshPolygon(const Vector<TriangleMeshPolyLine*>& 
                                          boundary_polyline_pt) :
- Boundary_polyline_pt(boundary_polyline_pt)
+ Boundary_polyline_pt(boundary_polyline_pt),    
+ Enable_redistribution_of_segments_between_polylines(false)
   {
    
 #ifdef PARANOID

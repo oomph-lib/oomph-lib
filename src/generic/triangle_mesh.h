@@ -417,11 +417,104 @@ class TriangleMeshClosedCurve
 public:
 
  /// Empty constructor
- TriangleMeshClosedCurve(){};
-
+ TriangleMeshClosedCurve()
+  {
+   Polyline_refinement_tolerance=0.08;
+   Polyline_unrefinement_tolerance=0.04;
+  }
 
  /// Empty destructor
  virtual ~TriangleMeshClosedCurve(){};
+
+
+ /// \short Enable refinement of polylines to create a better
+ /// representation of curvilinear boundaries (e.g. in free-surface 
+ /// problems). See tutorial for
+ /// interpretation of the optional argument which specifies the
+ /// refinement tolerance. It defaults to 0.08 and the smaller the 
+ /// number the finer the surface representation.
+ void enable_polyline_refinement(const double& tolerance=0.08)
+ {
+  Polyline_refinement_tolerance=tolerance;
+ }
+
+ /// \short Set tolerance for refinement of polylines to create a better
+ /// representation of curvilinear boundaries (e.g. in free-surface 
+ /// problems). See tutorial for
+ /// interpretation of the refinement tolerance. (The smaller the 
+ /// number the finer the surface representation). If set to 
+ /// a negative value, we're switching off refinement --
+ /// equivalent to calling disable_polyline_refinement()
+ void set_polyline_refinement_tolerance(const double& tolerance)
+ {
+  Polyline_refinement_tolerance=tolerance;
+ }
+
+ /// \short Get tolerance for refinement of polylines to create a better
+ /// representation of curvilinear boundaries (e.g. in free-surface 
+ /// problems). See tutorial for
+ /// interpretation. If it's negative refinement is disabled.
+ double polyline_refinement_tolerance()
+ {
+  return Polyline_refinement_tolerance;
+ }
+
+ /// \short Disable refinement of polylines
+ void disable_polyline_refinement()
+ {
+  Polyline_refinement_tolerance=-1.0;
+ }
+
+ /// \short Enable unrefinement of polylines to avoid unnecessarily large
+ /// numbers of elements on of curvilinear boundaries (e.g. in free-surface 
+ /// problems). See tutorial for
+ /// interpretation of the optional argument which specifies the
+ /// unrefinement tolerance. It defaults to 0.04 and the larger the number
+ /// the more agressive we are when removing unnecessary vertices on
+ /// gently curved polylines.
+ void enable_polyline_unrefinement(const double& tolerance=0.04)
+ {
+  Polyline_unrefinement_tolerance=tolerance;
+ }
+
+ /// \short Set tolerance for unrefinement of polylines  
+ /// to avoid unnecessarily large
+ /// numbers of elements on of curvilinear boundaries (e.g. in free-surface 
+ /// problems). See tutorial for
+ /// interpretation of the optional argument which specifies the
+ /// unrefinement tolerance. It defaults to 0.04 and the larger the number
+ /// the more agressive we are when removing unnecessary vertices on
+ /// gently curved polylines. If set to 
+ /// a negative value, we're switching off unrefinement --
+ /// equivalent to calling disable_polyline_unrefinement()
+ void set_polyline_unrefinement_tolerance(const double& tolerance)
+ {
+  Polyline_unrefinement_tolerance=tolerance;
+ }
+
+ /// \short Get tolerance for unrefinement of polylines to create a better
+ /// representation of curvilinear boundaries (e.g. in free-surface 
+ /// problems). See tutorial for
+ /// interpretation. If it's negative unrefinement is disabled.
+ double polyline_unrefinement_tolerance()
+ {
+  return Polyline_unrefinement_tolerance;
+ }
+
+ /// \short Disable unrefinement of polylines
+ void disable_polyline_unrefinement()
+ {
+  Polyline_unrefinement_tolerance=-1.0;
+ }
+
+
+  private:
+
+ /// Tolerance for refinement of polylines (neg if refinement is disabled)
+ double Polyline_refinement_tolerance;
+
+ /// Tolerance for unrefinement of polylines (neg if refinement is disabled)
+ double Polyline_unrefinement_tolerance;
 
 };
 
@@ -607,7 +700,33 @@ public:
    }
  }
 
+ /// \short Enable re-distribution of polyline segments between different
+ /// boundaries during adaptation
+ void enable_redistribution_of_segments_between_polylines()
+ {
+  Enable_redistribution_of_segments_between_polylines=true;
+ }
+
+ /// \short Disable re-distribution of polyline segments between different
+ /// boundaries during adaptation
+ void disable_redistribution_of_segments_between_polylines()
+ {
+  Enable_redistribution_of_segments_between_polylines=false;
+ }
+
+ /// \short Is re-distribution of polyline segments between different
+ /// boundaries during adaptation enabled?
+ bool is_redistribution_of_segments_between_polylines_enabled()
+ {
+  return Enable_redistribution_of_segments_between_polylines;
+ }
+
+
 protected:
+
+ /// \short Is re-distribution of polyline segments between different
+ /// boundaries during adaptation enabled? (Default: false)
+ bool Enable_redistribution_of_segments_between_polylines;
    
  /// Vector of pointers to constituent polylines
  Vector<TriangleMeshPolyLine*> Boundary_polyline_pt;

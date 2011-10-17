@@ -44,10 +44,18 @@
 #include <fstream>
 #include <string.h>
 
+
 #include "../generic/problem.h" 
 #include "../generic/triangle_scaffold_mesh.h" 
 #include "../generic/triangle_mesh.h"
 #include "../generic/refineable_mesh.h"
+
+
+
+namespace oomph
+{
+
+
 
 #ifdef OOMPH_HAS_TRIANGLE_LIB
 
@@ -59,10 +67,8 @@ extern "C" {
 }
 
 #endif
-
-namespace oomph
-{
  
+
 //============start_of_triangle_class===================================
 /// Triangle mesh build with the help of the scaffold mesh coming  
 /// from the triangle mesh generator Triangle.
@@ -265,6 +271,22 @@ namespace oomph
       
       // Create polygonal bundary from all the polylines
       outer_boundary_polygon_pt=new TriangleMeshPolygon(boundary_polyline_pt);
+
+      // Pass on refinement information
+      outer_boundary_polygon_pt->set_polyline_refinement_tolerance(
+       outer_boundary_pt->polyline_refinement_tolerance());
+      outer_boundary_polygon_pt->set_polyline_unrefinement_tolerance(
+       outer_boundary_pt->polyline_unrefinement_tolerance());
+
+      TriangleMeshPolygon* tmp_pt=dynamic_cast<TriangleMeshPolygon*>(
+       outer_boundary_pt);
+      if (tmp_pt!=0)
+       {
+        if (tmp_pt->is_redistribution_of_segments_between_polylines_enabled())
+         {
+          tmp_pt->enable_redistribution_of_segments_between_polylines();
+         }
+       }
      }
     // It's a polygonal boundary
     else if (polygon_pt!=0)
@@ -1273,6 +1295,12 @@ template<class ELEMENT>
    
     public:
 
+   /// \short Function pointer to function that updates the 
+   /// mesh following the snapping of boundary nodes to the
+   /// boundaries (e.g. to move boundary nodes very slightly 
+   /// to satisfy volume constraints)
+   typedef void (*MeshUpdateFctPt)(Mesh* mesh_pt);
+
     /// \short Build mesh, based on closed curve that specifies
     /// the outer boundary of the domain and any number of internal
     /// closed curves, specified by TriangleMeshInternalClosedCurves. Specify
@@ -1431,8 +1459,15 @@ template<class ELEMENT>
    void adapt(OomphCommunicator* comm_pt,
               const Vector<double>& elem_error); 
    
+   /// \short Access to function pointer to function that updates the 
+   /// mesh following the snapping of boundary nodes to the
+   /// boundaries (e.g. to move boundary nodes very slightly 
+   /// to satisfy volume constraints)
+   MeshUpdateFctPt& mesh_update_fct_pt()
+   {
+    return Mesh_update_fct_pt;
+   }
 
-   
     protected:
    
    /// \short Helper function that updates the input polygon's PSLG
@@ -1446,16 +1481,16 @@ template<class ELEMENT>
    virtual void surface_remesh_for_inner_hole_boundaries(
     Vector<Vector<double> > &internal_point_coord);
    
-   
-   /// \short Generate a new PSLG representation of the outer boundary
-   virtual void surface_remesh_for_outer_boundary();
-   
-   
   /// \short Snap the boundary nodes onto any curvilinear boundaries
   void snap_nodes_onto_boundary(RefineableTriangleMesh<ELEMENT>* &new_mesh_pt,
                                 const unsigned &b);
-
-   
+ 
+  /// \short Helper function to construct face mesh representation of all 
+  /// polylines, possibly with segments re-distributed between polylines 
+  /// to maintain an appxroximately even sub-division of the polygon
+  void get_face_mesh_representation(TriangleMeshPolygon* polygon_pt,
+                                    Vector<Mesh*>& face_mesh_pt);
+ 
    /// Helper function to initialise data associated with adaptation
    void initialise_adaptation_data()
    {
@@ -1476,6 +1511,14 @@ template<class ELEMENT>
     this->Max_element_size=1.0;
     this->Min_element_size=0.001;
     this->Min_permitted_angle=15.0;
+
+
+    // Initialise function pointer to function that updates the 
+    // mesh following the snapping of boundary nodes to the
+    // boundaries (e.g. to move boundary nodes very slightly 
+    // to satisfy volume constraints)
+    Mesh_update_fct_pt=0;
+
    }
    
    /// \short Build a new TriangulateIO object from previous TriangulateIO
@@ -1595,6 +1638,12 @@ template<class ELEMENT>
    /// Min angle before remesh gets triggered
    double Min_permitted_angle;
    
+   /// \short Function pointer to function that updates the 
+   /// mesh following the snapping of boundary nodes to the
+   /// boundaries (e.g. to move boundary nodes very slightly 
+   /// to satisfy volume constraints)
+   MeshUpdateFctPt Mesh_update_fct_pt;
+
   }; 
 
 #endif

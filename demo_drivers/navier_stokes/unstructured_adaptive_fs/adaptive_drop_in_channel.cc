@@ -959,7 +959,6 @@ DropInChannelProblem<ELEMENT>::DropInChannelProblem()
  Drop_polygon_pt[0] = new TriangleMeshInternalPolygon(
   drop_center,drop_polyline_pt);
  
-
  // Now build the mesh, based on the boundaries specified by
  //---------------------------------------------------------
  // polygons just created

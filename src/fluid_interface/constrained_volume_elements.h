@@ -177,9 +177,29 @@ namespace oomph
   this->fill_in_generic_contribution_to_residuals_volume_constraint(
    residuals);
  }
- 
+
 }; 
 
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+
+
+
+//=======================================================================
+/// Base class for interface elements that allow the application of 
+/// a volume constraint on the region bounded by these elements. 
+//=======================================================================
+ class TemplateFreeVolumeConstraintBoundingElementBase :  
+ public virtual FaceElement
+ {
+   public:
+
+
+  /// Return this element's contribution to the total volume enclosed
+  virtual double contribution_to_enclosed_volume()=0;
+  
+ };
 
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
@@ -197,6 +217,7 @@ namespace oomph
 //=======================================================================
  class VolumeConstraintBoundingElement : public virtual FaceElement
  {
+
   protected:
   
   /// \short The Data that contains the traded pressure is usually stored
@@ -314,7 +335,7 @@ namespace oomph
   Index_of_traded_pressure_value=vol_constraint_el_pt->
    index_of_traded_pressure();
  }
-   
+ 
 };
 
 /////////////////////////////////////////////////////////////////////////
@@ -466,7 +487,6 @@ namespace oomph
    
 };
 
-
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
@@ -496,7 +516,7 @@ namespace oomph
   /// 1D line elements that bound 2D cartesian fluid elements.
   void  fill_in_generic_residual_contribution_volume_constraint(
    Vector<double> &residuals);
-  
+   
   public:
   
   /// \short Empty Contructor
@@ -507,7 +527,6 @@ namespace oomph
   ~AxisymmetricVolumeConstraintBoundingElement() {}
   
  };
-
 
 //////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////

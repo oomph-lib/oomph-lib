@@ -228,7 +228,31 @@ namespace oomph
      }
     return cog;
    }
-  
+
+  /// Pin the i-th coordinate of the centre of mass
+  void pin_centre_of_mass_coordinate(const unsigned& i)
+  {
+   Centre_displacement_data_pt->pin(i);
+  }
+
+  /// Unpin the i-th coordinate of the centre of mass
+  void unpin_centre_of_mass_coordinate(const unsigned& i)
+  {
+   Centre_displacement_data_pt->unpin(i);
+  }
+
+  /// Pin the rotation angle
+  void pin_rotation_angle()
+  {
+   Centre_displacement_data_pt->pin(2);
+  }
+
+  /// Unpin the rotation angle
+  void unpin_rotation_angle()
+  {
+   Centre_displacement_data_pt->unpin(2);
+  }
+
   /// Output position velocity and acceleration of centre of gravity
   void output_centre_of_gravity(std::ostream& outfile);
 
