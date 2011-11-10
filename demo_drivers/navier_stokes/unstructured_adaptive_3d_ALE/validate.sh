@@ -14,20 +14,20 @@ mkdir Validation
 #----------------------------------
 cd Validation
 
-echo "Running 3D unstructured adaptive Navier Stokes ALE validation "
+echo "Running unstructured adaptive 3D Navier Stokes ALE validation "
 mkdir RESLT
 
 ../uns_adapt_3d --validation > OUTPUT
 echo "done"
 echo " " >> validation.log
-echo "3D unstructured adaptive Navier Stokes ALE validation" >> validation.log
-echo "-----------------------------------------------------" >> validation.log
+echo "Unstructured adaptive 3D Navier Stokes ALE validation" >> validation.log
+echo "------------------------------------------------------" >> validation.log
 echo " " >> validation.log
 echo "Validation directory: " >> validation.log
 echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
-cat RESLT/soln0.dat > results.dat
+cat RESLT/diss.dat > results.dat
 
 if test "$1" = "no_fpdiff"; then
     echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log

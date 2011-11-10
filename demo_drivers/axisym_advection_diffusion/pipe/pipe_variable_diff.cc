@@ -50,6 +50,9 @@ namespace Global_Physical_Variables
  /// Peclet number
  double Peclet=200.0;
 
+ /// Peclet number multiplied by Strouhal number
+ double Peclet_St = 1.0;
+
  /// Length of the pipe
  double Length=10.0;
 
@@ -126,25 +129,8 @@ public:
  /// Destructor. Empty
  ~RefineableAdvectionDiffusionPipeProblem(){}
 
- /// \short Set the inlet concentration condition
- void set_inlet_concentration();
-
- /// \short Update the problem specs before solve: Reset boundary conditions
- /// to the values from the tanh solution.
- void actions_before_newton_solve();
-
- /// Update the problem after solve (empty)
- void actions_after_newton_solve(){}
-
- /// Actions before adapt: Document the solution
- void actions_before_adapt()
-  {
-   // Doc the solution
-   doc_solution();
-   
-   // Increment label for output files
-   Doc_info.number()++;
-  }
+ /// \short Set the initial state of the system
+ void set_initial_condition();
 
  /// \short Doc the solution.
  void doc_solution();
@@ -174,6 +160,8 @@ template<class ELEMENT>
 RefineableAdvectionDiffusionPipeProblem<ELEMENT>::
 RefineableAdvectionDiffusionPipeProblem()
 { 
+ //Add the timestepper
+ this->add_time_stepper_pt(new BDF<2>);
 
  // Set output directory
  Doc_info.set_directory("RESLT");
@@ -194,24 +182,59 @@ RefineableAdvectionDiffusionPipeProblem()
 
  // Build and assign mesh
  Problem::mesh_pt() = 
-  new RefineableRectangularQuadMesh<ELEMENT>(n_r,n_z,l_r,l_z);
+  new RefineableRectangularQuadMesh<ELEMENT>(n_r,n_z,l_r,l_z,
+                                             this->time_stepper_pt());
 
  // Create/set error estimator
  mesh_pt()->spatial_error_estimator_pt()=new Z2ErrorEstimator;
-  
- // Set the boundary conditions for this problem: All nodes are
- // free by default -- only need to pin the ones that have Dirichlet 
- // conditions here
- // Assume specified inlet concentration (boundary 0)
- {
-  unsigned b=0;
-  unsigned num_nod= mesh_pt()->nboundary_node(b);
-  for (unsigned inod=0;inod<num_nod;inod++)
-   {
-    mesh_pt()->boundary_node_pt(b,inod)->pin(0); 
-   }
- } 
+
+  // Make the mesh periodic in the z-direction by setting the nodes on
+ // right boundary (boundary 0) to be the periodic counterparts of
+ // those on the left one (boundary 2).
+ unsigned n_node = mesh_pt()->nboundary_node(0);
+ for(unsigned n=0;n<n_node;n++)
+  {
+   mesh_pt()->boundary_node_pt(0,n)
+    ->make_periodic(mesh_pt()->boundary_node_pt(2,n));
+  }
  
+ // Now establish the new neighbours (created by "wrapping around"
+ // the domain) in the TreeForst representation of the mesh
+
+ // Get pointers to tree roots associated with elements on the 
+ // top and bottom  boundaries
+ Vector<TreeRoot*> top_root_pt(n_r);
+ Vector<TreeRoot*> bottom_root_pt(n_r);
+ for(unsigned i=0;i<n_r;i++) 
+  {
+   top_root_pt[i] = 
+    dynamic_cast<ELEMENT*>(mesh_pt()->element_pt((n_z-1)*n_r + i))->
+    tree_pt()->root_pt();
+   bottom_root_pt[i] = 
+    dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i))->
+    tree_pt()->root_pt();
+  }
+
+  // Switch on QuadTreeNames for enumeration of directions
+   using namespace QuadTreeNames;
+
+  //Set the neighbour and periodicity
+  for(unsigned i=0;i<n_r;i++) 
+   {
+    // The northern neighbours of the elements on the top
+    // boundary are those on the bottom
+    top_root_pt[i]->neighbour_pt(N) = bottom_root_pt[i];
+    top_root_pt[i]->set_neighbour_periodic(N); 
+    
+    // The southern neighbours of the elements on the bottom
+    // boundary are those on the top
+    bottom_root_pt[i]->neighbour_pt(S) = top_root_pt[i];
+    bottom_root_pt[i]->set_neighbour_periodic(S);     
+   } // done
+  
+ //No boundary conditions because we have periodicity in the axial direction
+ //and no-flux in the radial direction
+  
  // Complete the build of all elements so they are fully functional 
 
  // Loop over the elements to set up element-specific 
@@ -232,6 +255,9 @@ RefineableAdvectionDiffusionPipeProblem()
    //Set the diffusivity
    el_pt->diff_fct_pt() = Global_Physical_Variables::diff_function;
 
+   //Set the Peclet Strouhal number
+   el_pt->pe_st_pt() = &Global_Physical_Variables::Peclet_St;
+
    // Set the Peclet number
    el_pt->pe_pt() = &Global_Physical_Variables::Peclet;
   }
@@ -242,36 +268,26 @@ RefineableAdvectionDiffusionPipeProblem()
 } // end of constructor
 
 
-//=============================start_of_actions_before_newton_solve=======
-/// Update the problem specs before solve: (Re-)set boundary conditions
-/// to the values from the tanh solution.
-//========================================================================
-template<class ELEMENT>
-void RefineableAdvectionDiffusionPipeProblem<ELEMENT>::
-actions_before_newton_solve()
-{
- this->set_inlet_concentration();
-}  // end of actions before solve
-
 
 //=============================start_of_set_concentration_profile=======
 ///Set a specified inlet concentration profile
 //========================================================================
 template<class ELEMENT>
 void RefineableAdvectionDiffusionPipeProblem<ELEMENT>::
-set_inlet_concentration()
+set_initial_condition()
 {
- unsigned b=0;
- unsigned n_node = mesh_pt()->nboundary_node(b);
+ //Lets have a little blob of swimmers along the axis
+ unsigned n_node = mesh_pt()->nnode();
  for(unsigned n=0;n<n_node;n++)
   {
-   Node* nod_pt = this->mesh_pt()->boundary_node_pt(b,n);
-   //Get the radial value
+   Node* nod_pt = mesh_pt()->node_pt(n);
    double r = nod_pt->x(0);
+   double z = nod_pt->x(1);
    
-   //Now chose an exponetially decaying profile
-   double c = exp(-10.0*r*r);
-
+   //Exponentially decaying in two directions
+   double c = exp(-10*r*r
+                  -2.0*(z-0.5*Global_Physical_Variables::Length)*
+                  (z-0.5*Global_Physical_Variables::Length));
    nod_pt->set_value(0,c);
   }
 }  // end of actions before solve
@@ -299,6 +315,9 @@ void RefineableAdvectionDiffusionPipeProblem<ELEMENT>::doc_solution()
  mesh_pt()->output(some_file,npts);
  some_file.close();
 
+ //Increase the number
+ ++Doc_info.number();
+
 } // end of doc
 
 
@@ -316,11 +335,25 @@ int main()
  RefineableAdvectionDiffusionPipeProblem<
  RefineableQGeneralisedAxisymAdvectionDiffusionElement<3> > problem;
 
- // Solve the problem, performing up to 4 adaptive refinements
- problem.newton_solve(4);
-
- //Output the solution
+ //Refine uniformly once
+ problem.refine_uniformly();
+ //Set the initial distribution
+ problem.set_initial_condition();
  problem.doc_solution();
+
+ //Set the timestep
+ double dt = 0.001;
+ problem.assign_initial_values_impulsive(dt);
+
+ //Now take a few timesteps
+ bool first = true;
+ unsigned max_adapt=2;
+ for(unsigned t=0;t<3;t++)
+  {
+   problem.unsteady_newton_solve(dt,max_adapt,first);
+   problem.doc_solution();
+   if(t==0) {first=false;}
+  }
  
 } // end of main
 

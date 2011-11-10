@@ -10,6 +10,7 @@ vmtk_fsi \
 unsteady_vmtk_fsi \
 unstructured_fsi \
 unstructured_three_d_fsi \
+unstructured_adaptive_fsi \
 elastic_bretherton \
 pseudo_solid_collapsible_tube
 

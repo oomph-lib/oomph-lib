@@ -531,9 +531,10 @@ int main(int argc, char **argv)
   new GeneralisedHookean(&Global_Physical_Variables::Nu);
  
 
- std::ofstream strain("s_energy.dat");
+
 
  {
+  std::ofstream strain("RESLT/s_energy.dat");
   std::cout << "Running with pure displacement formulation\n";
 
   //Set up the problem
@@ -549,46 +550,35 @@ int main(int argc, char **argv)
   
   unsigned nstep=5;
 
+
   for (unsigned istep=0;istep<nstep;istep++)
    {
     // Solve the problem
     problem.newton_solve(1);
 
-    if(istep==0)
-     {
-      double strain_energy = problem.get_strain_energy();
-      std::cout << "First strain energy is "
-                << strain_energy << "\n";
-      strain << "Disp   " << strain_energy << std::endl;
-     }
+    double strain_energy = problem.get_strain_energy();
+    std::cout << "Strain energy is " << strain_energy << "\n";
+    //Output strain energy to file
+    strain << Global_Physical_Variables::P << " " << strain_energy << std::endl;
 
     //Output solution
     problem.doc_solution(doc_info);
     doc_info.number()++;
     
-    if(istep==2) 
-     {
-      pressure_increment *= -1.0;
-      double strain_energy = problem.get_strain_energy();
-      std::cout << "Max strain energy is "
-                << strain_energy << "\n";
-      strain << "Disp   " << strain_energy << std::endl;
-     }
-    // Bump up suction
+    //Reverse direction of increment 
+    if(istep==2) {pressure_increment *= -1.0;}
+
+    // Increase (or decrease) load
     Global_Physical_Variables::P+=pressure_increment;
    }
 
-  //Report final strain energy
-  double strain_energy = problem.get_strain_energy();
-  std::cout << "Final strain energy is "
-            << strain_energy << "\n";
-  strain << "Disp " << strain_energy << std::endl;
-
-
+  strain.close();
  } //end_displacement_formulation
+
 
  //Repeat for displacement/pressure formulation 
  {
+  std::ofstream strain("RESLT_pres_disp/s_energy.dat");
   std::cout << "Running with pressure/displacement formulation\n";
 
   // Change output directory
@@ -612,35 +602,29 @@ int main(int argc, char **argv)
    {
     // Solve the problem
     problem.newton_solve(1);
-    
-    if(istep==0)
-     {
-      double strain_energy = problem.get_strain_energy();
-      std::cout << "First strain energy is "
-                << strain_energy << "\n";
-      strain << "Disp + Pressure  " << strain_energy << std::endl;
-     }
 
+    double strain_energy = problem.get_strain_energy();
+    std::cout << "Strain energy is "<< strain_energy << "\n";
+    //Output strain energy to file
+    strain << Global_Physical_Variables::P << " " << strain_energy << std::endl;
+    
     //Output solution
     problem.doc_solution(doc_info);
     doc_info.number()++;
 
     if(istep==2) {pressure_increment *= -1.0;}    
-    // Bump up suction
+    // Increase (or decrease) pressure load
     Global_Physical_Variables::P+=pressure_increment;
    }
 
-  double strain_energy = problem.get_strain_energy();
-  std::cout << "Final strain energy is "
-            << strain_energy << "\n";
-  strain << "Disp + Pressure  " << strain_energy << std::endl;
-
+  strain.close();
  }
 
 
  //Repeat for displacement/pressure formulation 
  //enforcing incompressibility
  {
+  std::ofstream strain("RESLT_pres_disp_incomp/s_energy.dat");
   std::cout << 
    "Running with pressure/displacement formulation (incompressible) \n";
 
@@ -685,35 +669,23 @@ int main(int argc, char **argv)
    {
     // Solve the problem
     problem.newton_solve(1);
-
-    if(istep==0)
-     {
-      double strain_energy = problem.get_strain_energy();
-      std::cout << "First strain energy is "
-                << strain_energy << "\n";
-      strain << "Disp + Pressure (Incompressible)  " 
-             << strain_energy << std::endl;
-     }
-
+    
+    double strain_energy = problem.get_strain_energy();
+    std::cout << "Strain energy is " << strain_energy << "\n";
+    //Output strain energy to file
+    strain << Global_Physical_Variables::P << " " << strain_energy << std::endl;
     
     //Output solution
     problem.doc_solution(doc_info);
     doc_info.number()++;
 
     if(istep==2) {pressure_increment *= -1.0;}        
-    // Bump up suction
+    // Increase (or decrease) pressure load
     Global_Physical_Variables::P+=pressure_increment;
    }
 
-  double strain_energy = problem.get_strain_energy();
-  std::cout << "Final strain energy is "
-            << strain_energy << "\n";
-  strain << "Disp + Pressure  (Incompressible) " << strain_energy << std::endl;
-
+  strain.close();
  }
-
- strain.close();
- 
 
 } // end main
 

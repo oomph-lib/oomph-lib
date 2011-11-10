@@ -1,7 +1,5 @@
 #! /bin/sh
 
-exit
-
 #Set the number of tests to be checked
 NUM_TESTS=3
 
@@ -31,9 +29,9 @@ echo "Validation directory: " >> validation.log
 echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
-cat RESLT/soln2.dat > res.dat
-cat RESLT_pres_disp/soln2.dat > res_pres_disp.dat
-cat RESLT_pres_disp_incomp/soln2.dat > res_pres_disp_incomp.dat
+cat RESLT/s_energy.dat > res.dat
+cat RESLT_pres_disp/s_energy.dat > res_pres_disp.dat
+cat RESLT_pres_disp_incomp/s_energy.dat > res_pres_disp_incomp.dat
 
 
 if test "$1" = "no_fpdiff"; then

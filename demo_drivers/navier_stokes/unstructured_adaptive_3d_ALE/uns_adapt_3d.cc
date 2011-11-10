@@ -1047,6 +1047,23 @@ RefineableTetgenMesh<ELEMENT>* mesh_pt()
   /// Doc the solution
  void doc_solution(const unsigned& nplot, DocInfo& doc_info);
 
+ 
+ /// Calculate the fluid dissipation
+ double get_dissipation()
+  {
+   double dissipation=0.0;
+   const unsigned n_element = this->mesh_pt()->nelement();
+   for(unsigned e=0;e<n_element;e++)
+    {
+     //Cast to a fluid element
+     ELEMENT *el_pt = 
+      dynamic_cast<ELEMENT*>(this->mesh_pt()->element_pt(e));
+     //Add to the dissipation
+     dissipation += el_pt->dissipation(); 
+    }
+   return dissipation;
+  }
+
  /// Storage for the outer boundary object
  TetgenMeshFacetedSurface* Outer_boundary_pt;
 
@@ -1491,6 +1508,9 @@ int main(int argc, char* argv[])
  // Number of output points per edge
  unsigned nplot=2;
 
+ //Output trace file
+ std::ofstream dissipation("RESLT/diss.dat");
+
  // Do the problem with quadratic elements
  //---------------------------------------
  {
@@ -1509,10 +1529,15 @@ int main(int argc, char* argv[])
     
     //Increment counter for solutions 
     doc_info.number()++;
-    
+    //Output the dissipation
+    dissipation << " " << Global_Parameters::Re << "  "
+                << problem.get_dissipation() << std::endl;
+
+    //Increase the Reynolds number
     Global_Parameters::Re += 0.1;
    }
 
+  dissipation.close();
  }
 
 

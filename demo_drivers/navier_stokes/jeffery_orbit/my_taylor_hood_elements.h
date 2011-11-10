@@ -288,5 +288,18 @@ namespace oomph
   FaceGeometry() : SolidTElement<1,3>() {}
  };
 
+//=======================================================================
+/// Face geometry for element is the same as that for the underlying
+/// wrapped element
+//=======================================================================
+ template<>
+ class FaceGeometry<FaceGeometry<MyTaylorHoodElement> >
+  : public virtual PointElement 
+ {
+ public:
+  FaceGeometry() : PointElement() {}
+ };
+
+
 }
 #endif

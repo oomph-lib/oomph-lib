@@ -122,16 +122,20 @@ class Data
  /// low (Data) level.
  TimeStepper* Time_stepper_pt;
 
+  protected:
+
  /// \short C-style array of any Data objects that contain copies 
  /// of the current Data object's data values.
  Data **Copy_of_data_pt;
- 
- /// \short Number of values stored in the data object.
- unsigned Nvalue;
- 
+
  /// \short Number of Data that contain copies of this Data object's 
  /// values
  unsigned Ncopies;
+
+  private:
+ 
+ /// \short Number of values stored in the data object.
+ unsigned Nvalue;
 
 #ifdef OOMPH_HAS_MPI
 
@@ -1759,34 +1763,36 @@ class BoundaryNodeBase
 
  /// \short Return pointer to the map giving
  /// the index of the first face element value.
- std::map<unsigned, unsigned>* &index_of_first_value_assigned_by_face_element_pt()
-  {
-   return Index_of_first_value_assigned_by_face_element_pt;
-  }
-
+ std::map<unsigned, unsigned>* 
+  &index_of_first_value_assigned_by_face_element_pt()
+ {
+  return Index_of_first_value_assigned_by_face_element_pt;
+ }
+ 
  /// \short Return the index of the first value associated with
  /// the i-th face element value. If no argument is specified
  /// we return the index associated with the first (and assumed to be only)
  /// face element attached to this node. 
- unsigned index_of_first_value_assigned_by_face_element(const unsigned& face_id=0) const
-  {
+ unsigned index_of_first_value_assigned_by_face_element(
+  const unsigned& face_id=0) const
+ {
 #ifdef PARANOID
-   if (Index_of_first_value_assigned_by_face_element_pt==0)
-    {
-     std::ostringstream error_message;
-     error_message 
-      << "Index_of_first_value_assigned_by_face_element_pt==0;\n"
-      << "Pointer must be set via call to: \n\n"
-      << "  BoundaryNode::index_of_first_value_assigned_by_face_element_pt(), \n\n" 
-      << "typically from FaceElement::add_additional_values(...).";
-     throw OomphLibError(error_message.str(),
-                         "BoundaryNode::index_of_first_value_assigned_by_face_element()",
-                         OOMPH_EXCEPTION_LOCATION);
-     return UINT_MAX;
-    }
+  if (Index_of_first_value_assigned_by_face_element_pt==0)
+   {
+    std::ostringstream error_message;
+    error_message 
+     << "Index_of_first_value_assigned_by_face_element_pt==0;\n"
+     << "Pointer must be set via call to: \n\n"
+     << "  BoundaryNode::index_of_first_value_assigned_by_face_element_pt(), \n\n" 
+     << "typically from FaceElement::add_additional_values(...).";
+    throw OomphLibError(error_message.str(),
+                        "BoundaryNode::index_of_first_value_assigned_by_face_element()",
+                        OOMPH_EXCEPTION_LOCATION);
+    return UINT_MAX;
+   }
 #endif
-   return (*Index_of_first_value_assigned_by_face_element_pt)[face_id];
-  }
+  return (*Index_of_first_value_assigned_by_face_element_pt)[face_id];
+ }
  
  /// \short Default constructor, set the pointers to the storage to NULL
   BoundaryNodeBase() :  Index_of_first_value_assigned_by_face_element_pt(0), 
@@ -1897,7 +1903,6 @@ class BoundaryNode: public NODE_TYPE, public BoundaryNodeBase
      this->index_of_first_value_assigned_by_face_element_pt() =
       cast_copied_node_pt->index_of_first_value_assigned_by_face_element_pt();
     }
-   // PATRICKFLAG Is this really an error? Think about this...
    else
     {
      std::ostringstream error_stream;
@@ -1909,6 +1914,47 @@ class BoundaryNode: public NODE_TYPE, public BoundaryNodeBase
                          OOMPH_EXCEPTION_LOCATION);
     }
   }
+
+ /// \short Copy over additional information so that if the node
+ /// is periodic it can remain active if the node that holds the periodic
+ /// data is deleted
+ void clear_additional_copied_pointers()
+ {
+  //Only worry about the face index if it has been assigned
+  if(this->index_of_first_value_assigned_by_face_element_pt()!=0)
+   {
+    // Allocate storage for the index of first value assigned by face element
+    this->index_of_first_value_assigned_by_face_element_pt() =
+     new std::map<unsigned,unsigned>;
+    
+    // Cast copied_node_pt to BoundaryNode 
+    // This will never work because when this is called the node is
+    // no longer a boundary node
+    BoundaryNode<NODE_TYPE>* cast_copied_node_pt =
+     dynamic_cast<BoundaryNode<NODE_TYPE>*>(Copied_node_pt);
+    
+    // Check that dynamic cast has worked
+    if(cast_copied_node_pt)
+     {
+      // Initialise the values in the map to be those of the original data
+      //std::map<unsigned,unsigned>::const_iterator it =
+      // (*(cast_copied_node_pt->
+      //    index_of_first_value_assigned_by_face_element_pt())).begin();
+      std::map<unsigned,unsigned>::const_iterator end = 
+       (*(cast_copied_node_pt->
+          index_of_first_value_assigned_by_face_element_pt())).end();
+      for(std::map<unsigned,unsigned>::const_iterator it =
+           (*(cast_copied_node_pt->
+              index_of_first_value_assigned_by_face_element_pt())).begin();
+          it!=end;it++)
+       {
+        (*(this->
+           index_of_first_value_assigned_by_face_element_pt()))[it->first] =
+         it->second;
+       }
+     }
+   }
+ }
 
  /// \short Clear pointers to the copied data used when we have periodic nodes.
  /// The shallow (pointer) copy is turned into a deep copy by allocating
@@ -1953,46 +1999,6 @@ class BoundaryNode: public NODE_TYPE, public BoundaryNodeBase
 
      //Copy over the values of the equation numbers
      this->Eqn_number[i] = Copied_node_pt->eqn_number(i);
-    }
-
-   // Allocate storage for the index of first value assigned by face element
-   this->index_of_first_value_assigned_by_face_element_pt() =
-    new std::map<unsigned,unsigned>;
-
-   // Cast Copied_node_pt to BoundaryNode
-   BoundaryNode<NODE_TYPE>* cast_copied_node_pt =
-    dynamic_cast<BoundaryNode<NODE_TYPE>*>(Copied_node_pt);
-
-   // Check that dynamic cast has worked
-   if(cast_copied_node_pt)
-    {
-     // Initialise the values in the map to be those of the original data
-     std::map<unsigned,unsigned>::const_iterator it =
-      (*(cast_copied_node_pt->
-         index_of_first_value_assigned_by_face_element_pt())).begin();
-     std::map<unsigned,unsigned>::const_iterator end = 
-      (*(cast_copied_node_pt->
-         index_of_first_value_assigned_by_face_element_pt())).end();
-     for(std::map<unsigned,unsigned>::const_iterator it =
-          (*(cast_copied_node_pt->
-             index_of_first_value_assigned_by_face_element_pt())).begin();
-         it!=end;it++)
-      {
-       (*(this->
-          index_of_first_value_assigned_by_face_element_pt()))[it->first] =
-        it->second;
-      }
-    }
-   // PATRICKFLAG Is this really an error? Think about this...
-   else
-    {
-     std::ostringstream error_stream;
-     error_stream 
-      << "Copied_node_pt is not of type BoundaryNode*"
-      << std::endl;
-     throw OomphLibError(error_stream.str(),
-                         "BoundaryNode::reset_copied_pointers()",
-                         OOMPH_EXCEPTION_LOCATION);
     }
 
    //The node is no longer a copy
@@ -2067,6 +2073,31 @@ class BoundaryNode: public NODE_TYPE, public BoundaryNodeBase
  /// \short Destructor resets pointers if 
  ~BoundaryNode() 
   {
+   //If there are any copies of this Node 
+   //then we need to clear their pointers to information stored in 
+   //this BoundaryNode
+   //at this level because once we are down to the Node's destructor 
+   //the information no longer exists.
+   for(unsigned i=0;i<this->Ncopies;i++)
+    {
+     //Is the copied node a boundary node (it should be)
+     BoundaryNode<NODE_TYPE>* cast_node_pt = 
+      dynamic_cast<BoundaryNode<NODE_TYPE>*>(this->Copy_of_data_pt[i]);
+     //We can only do this if the node is a boundary node
+     if(cast_node_pt!=0)
+      {
+       cast_node_pt->clear_additional_copied_pointers();
+      }
+#ifdef PARANOID
+     else
+      {
+       OomphLibError("Copy of a BoundaryNode is not a BoundaryNode",
+                     "BoundaryNode::~BoundaryNode",
+                     OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+    }
+
    //If the node was periodic then clear the pointers before deleting
    if(Copied_node_pt)
     {

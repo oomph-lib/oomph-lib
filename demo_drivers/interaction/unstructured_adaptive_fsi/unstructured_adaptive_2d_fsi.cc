@@ -287,6 +287,18 @@ public:
  
   }
 
+ ///Output function to compute the strain energy in the solid and the 
+ ///dissipation in the fluid and write to the output stream trace
+ void output_strain_and_dissipation(std::ostream &trace)
+  {
+   double strain_energy = this->get_solid_strain_energy();
+   double dissipation = this->get_fluid_dissipation();
+
+   trace << Global_Physical_Variables::Q <<
+    " " << dissipation << " " << strain_energy << std::endl;
+  }
+
+
 private:
 
  /// Create the traction element
@@ -434,6 +446,40 @@ private:
   }
 
 
+
+ /// Calculate the strain energy of the solid
+ double get_solid_strain_energy()
+  {
+   double strain_energy=0.0;
+   const unsigned n_element = Solid_mesh_pt->nelement();
+   for(unsigned e=0;e<n_element;e++)
+    {
+     //Cast to a solid element
+     SOLID_ELEMENT *el_pt = 
+      dynamic_cast<SOLID_ELEMENT*>(Solid_mesh_pt->element_pt(e));
+     
+     double pot_en, kin_en;
+     el_pt->get_energy(pot_en,kin_en);
+     strain_energy += pot_en;
+    }
+   return strain_energy;
+  }
+
+ /// Calculate the fluid dissipation
+ double get_fluid_dissipation()
+  {
+   double dissipation=0.0;
+   const unsigned n_element = Fluid_mesh_pt->nelement();
+   for(unsigned e=0;e<n_element;e++)
+    {
+     //Cast to a fluid element
+     FLUID_ELEMENT *el_pt = 
+      dynamic_cast<FLUID_ELEMENT*>(Fluid_mesh_pt->element_pt(e));
+     //Add to the dissipation
+     dissipation += el_pt->dissipation(); 
+    }
+   return dissipation;
+  }
 
  /// Bulk solid mesh
  RefineableSolidTriangleMesh<SOLID_ELEMENT>* Solid_mesh_pt;
@@ -896,6 +942,9 @@ int main(int argc, char **argv)
 
  // Output directory
  doc_info.set_directory("RESLT");
+
+ //Create a trace file
+ std::ofstream trace("RESLT/trace.dat");
  
  // Create generalised Hookean constitutive equations
  Global_Physical_Variables::Constitutive_law_pt = 
@@ -921,25 +970,37 @@ problem.newton_solve();
 //Output solution
 problem.doc_solution(doc_info);
 doc_info.number()++;
+//Calculate the strain energy of the solid and dissipation in the
+//fluid as global output measures of the solution for validation purposes
+problem.output_strain_and_dissipation(trace);
+
+//Number of steps to be taken
+unsigned n_step = 10;
+//Reduce the number of steps if validating
+if (CommandLineArgs::command_line_flag_has_been_set("--validation"))
+ {
+  n_step=3;
+ }
 
 //Now Crank up interaction
-for(unsigned i=0;i<10;i++)
+for(unsigned i=0;i<n_step;i++)
  {
   Global_Physical_Variables::Q += 1.0e-4;
   problem.newton_solve(1);
 
+  //Reset the lagrangian nodal coordinates in the fluid mesh
+  //(Obviously we shouldn't do this in the solid mesh)
   problem.Fluid_mesh_pt->set_lagrangian_nodal_coordinates();
   //Output solution
   problem.doc_solution(doc_info);
   doc_info.number()++;
+
+  //Calculate the strain energy of the solid and dissipation in the
+  //fluid as global output measures of the solution for validation purposes
+  problem.output_strain_and_dissipation(trace);
  }
 
-/*problem.newton_solve(1);
- //Output solution
- problem.doc_solution(doc_info);
- doc_info.number()++;*/
-
-
+trace.close();
 } // end main
 
 

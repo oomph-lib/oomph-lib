@@ -227,7 +227,7 @@ long Data::Is_constrained=-2;
  Data::Data() : Value(0), Eqn_number(0), 
                 Time_stepper_pt(Data::Default_static_time_stepper_pt),
                 Copy_of_data_pt(0),
-                Nvalue(0), Ncopies(0)
+                Ncopies(0), Nvalue(0)
 #ifdef OOMPH_HAS_MPI
                 , Is_halo(false)
 #endif
@@ -242,8 +242,8 @@ long Data::Is_constrained=-2;
   Value(0), Eqn_number(0),
   Time_stepper_pt(Data::Default_static_time_stepper_pt),
   Copy_of_data_pt(0),
-  Nvalue(initial_n_value),
-  Ncopies(0)
+  Ncopies(0),
+  Nvalue(initial_n_value)
 #ifdef OOMPH_HAS_MPI
   , Is_halo(false)
 #endif
@@ -285,8 +285,8 @@ Data::Data(TimeStepper* const &time_stepper_pt_,
  : 
  Value(0), Eqn_number(0), Time_stepper_pt(time_stepper_pt_),
  Copy_of_data_pt(0),
- Nvalue(initial_n_value), 
- Ncopies(0)
+ Ncopies(0),
+ Nvalue(initial_n_value)
 #ifdef OOMPH_HAS_MPI
  , Is_halo(false)
 #endif
@@ -919,7 +919,7 @@ void HijackedData::reset_copied_pointers()
 
 
 //===============================================================
-/// Clear ther pointers to the copied data
+/// Clear the pointers to the copied data
 //===============================================================
 void HijackedData::clear_copied_pointers()
 {
