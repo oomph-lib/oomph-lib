@@ -1295,7 +1295,7 @@ int main(int argc, char **argv)
  doc_info.number()++;   
 
  //Set value of dt
- double nsteps_per_period=40;
+ unsigned nsteps_per_period=40;
  double dt = Global_Parameters::Period/double(nsteps_per_period);
  problem.initialise_dt(dt);
 

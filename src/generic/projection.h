@@ -52,14 +52,13 @@ namespace oomph
 //==================================================================
  class ProjectableElementBase 
 {
-  private:
-
+ 
+  protected:
+ 
  ///\short Enumerated collection to specify which projection problem
  ///is to be solved.
  enum Projection_Type {Coordinate, Lagrangian, Value};
 
-protected:
- 
  /// Field that is currently being projected
  unsigned Projected_field; 
 

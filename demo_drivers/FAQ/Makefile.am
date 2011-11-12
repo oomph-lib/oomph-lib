@@ -11,7 +11,8 @@ broken_this_demo_SOURCES = broken_this_demo.cc
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
-broken_this_demo_LDADD = -L@libdir@  $(EXTERNAL_LIBS) $(FLIBS)
+# NOT NEEDED AND BREAKS STUFF ON JEAN-LUC'S MACHINE
+#broken_this_demo_LDADD = -L@libdir@  $(EXTERNAL_LIBS) $(FLIBS)
 
 #----------------------------------------------------------------------
 

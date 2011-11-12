@@ -1767,7 +1767,7 @@ fi
 
 #Note: serial metis has to go last
 if test x$have_metis = xfalse; then  
-  external_libs=`echo $external_libs " -loomph_metis_4.0"`
+  external_libs=`echo $external_libs " -loomph_metis_from_parmetis_3.1.1"`
 else 
   echo "Omitting specification of metis library -- assumed to be"
   echo "provided automatically by compiler/linker..."

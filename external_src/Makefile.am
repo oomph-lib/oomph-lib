@@ -21,7 +21,8 @@ endif
 # Check if metis is already available
 if ALREADY_HAVE_METIS
 else
-  SUBDIRS += oomph_metis_4.0 
+#  SUBDIRS += oomph_metis_4.0 
+  SUBDIRS += oomph_metis_from_parmetis_3.1.1
 endif
 
 # Check if superlu is already available

@@ -61,7 +61,8 @@ multi_domain_boussinesq_convection_fd_CXXFLAGS = -DUSE_FD_JACOBIAN_NST_IN_MULTI_
 
 EXTRA_DIST += multi_domain_boussinesq_partition.dat \
               multi_domain_ref_b_partition.dat \
-              refineable_b_convection_partition.dat
+              refineable_b_convection_partition.dat \
+              multi_domain_boussinesq_partition_2.dat
 
 # Include path for library headers: All library headers live in 
 # the include directory which we specify with -I

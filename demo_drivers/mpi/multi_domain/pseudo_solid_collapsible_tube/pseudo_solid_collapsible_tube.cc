@@ -511,7 +511,7 @@ PseudoElasticCollapsibleChannelProblem()
  // Try non-matching discretisation if validation
  if (CommandLineArgs::Argc!=1)
   {
-   nz*=1.5;
+   nz=unsigned(double(nz)*1.5);
   }
  Solid_mesh_pt = new WallMesh<SOLID_ELEMENT>(r_min,r_max,lz,
                                              nr,nphi,nz,Wall_time_stepper_pt);

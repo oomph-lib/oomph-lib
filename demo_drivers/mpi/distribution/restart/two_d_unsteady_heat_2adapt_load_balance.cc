@@ -1399,8 +1399,26 @@ int main(int argc, char* argv[])
       }
     }
    
+   // Create storage for actually used partitioning
+   Vector<unsigned> used_element_partition;
+ 
    // Now perform the distribution 
-   problem.distribute(element_partition);
+   used_element_partition=problem.distribute(element_partition);
+
+
+   // Write used partition to disk
+   std::ofstream output_file;
+   char filename[100];
+   sprintf(filename,"RESLT/partitioning.dat");
+   output_file.open(filename);
+   unsigned n_used=used_element_partition.size();
+   output_file << n_used << std::endl;
+   for (unsigned e=0;e<n_used;e++)
+    {
+     output_file << used_element_partition[e] << std::endl;
+    }
+   output_file.close();
+
   }
 
 

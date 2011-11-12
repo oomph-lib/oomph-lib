@@ -34,7 +34,7 @@ for first in `echo $first_list`; do
     #-----------------------------------------------------------
     echo "Running distributed load-balanced doubly adaptive 2D unsteady heat validation; first: $first_flag "
     mkdir RESLT
-    $MPI_RUN_COMMAND ../two_d_unsteady_heat_2adapt_load_balance $validation_run_flag $prune_first_flag > OUTPUT_`echo $first_flag`_first_for_restart
+    $MPI_RUN_COMMAND ../two_d_unsteady_heat_2adapt_load_balance $validation_run_flag $prune_first_flag --partitioning_file ../partitioning.dat > OUTPUT_`echo $first_flag`_first_for_restart
     echo "done run for restart"
     echo " " >> validation.log
     echo "2D distributed load-balanced doubly adaptive unsteady heat validation; first: $first_flag " >> validation.log

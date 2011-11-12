@@ -581,6 +581,10 @@ void HelmholtzEquations<DIM>::compute_error(std::ostream &outfile,
 //====================================================================
 // Force build of templates
 //====================================================================
+template class HelmholtzEquations<1>;
+template class HelmholtzEquations<2>;
+template class HelmholtzEquations<3>;
+
 template class QHelmholtzElement<1,2>;
 template class QHelmholtzElement<1,3>;
 template class QHelmholtzElement<1,4>;

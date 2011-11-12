@@ -774,7 +774,6 @@ void get_wind_axi_adv_diff(const unsigned& ipt,
 //===================================================================
 ///Set the default value of the Rayleigh number to be zero
 //=================================================================== 
-template<>
 double RefineableBuoyantQAxisymCrouzeixRaviartElement::
 Default_Physical_Constant_Value=0.0;
 

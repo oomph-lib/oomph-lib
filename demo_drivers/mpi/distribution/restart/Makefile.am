@@ -16,4 +16,5 @@ two_d_unsteady_heat_2adapt_load_balance_LDADD = -L@libdir@ -lunsteady_heat -lgen
 
 #----------------------------------------------
 
-EXTRA_DIST+=load_balance.mcr show_dist.mcr prune_and_balance.mcr two_meshes.mcr
+EXTRA_DIST+=load_balance.mcr show_dist.mcr prune_and_balance.mcr\
+two_meshes.mcr partitioning.dat

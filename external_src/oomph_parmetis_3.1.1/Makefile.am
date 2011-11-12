@@ -9,14 +9,14 @@
 
 # Define the sources
 sources =  \
-adrivers.c	 frename.c	 kmetis.c	mmetis.c       selectq.c \
+frename.c	 kmetis.c	mmetis.c       selectq.c \
 akwayfm.c	 gkmetis.c	 kwaybalance.c	move.c	       serial.c \
 ametis.c	 grsetup.c	 kwayfm.c	msetup.c       setup.c \
 backcompat.c	 iidxsort.c	 kwayrefine.c	node_refine.c  stat.c \
 balancemylink.c  iintsort.c	 lmatch.c	ometis.c       timer.c \
 comm.c		 ikeysort.c	 match.c	order.c        util.c \
 csrmatch.c	 ikeyvalsort.c	 mdiffusion.c	pspases.c      wave.c \
-debug.c		 initbalance.c	 mdrivers.c	redomylink.c   weird.c \
+debug.c		 initbalance.c 	redomylink.c   weird.c \
 diffutil.c	 initmsection.c  memory.c	remap.c        xyzpart.c \
 fpqueue.c	 initpart.c	 mesh.c		rmetis.c      
 

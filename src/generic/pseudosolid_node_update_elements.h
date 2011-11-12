@@ -406,6 +406,19 @@ template<class BASIC, class SOLID>
  /// \short Number of 'flux' terms for Z2 error estimation: Error estimation
  /// is based on error in BASIC element
  unsigned num_Z2_flux_terms() {return BASIC::num_Z2_flux_terms();}
+
+
+ /// \short Plot the error when compared against a given exact flux.
+ /// Also calculates the norm of the error and that of the exact flux.
+ /// Use version in BASIC element
+ void compute_exact_Z2_error(
+  std::ostream &outfile,
+  FiniteElement::SteadyExactSolutionFctPt exact_flux_pt,
+  double& error, double& norm)
+ {
+  BASIC::compute_exact_Z2_error(outfile, exact_flux_pt,
+                                error, norm);
+ }
  
  /// 'Flux' vector for Z2 error estimation: Error estimation
  /// is based on error in BASIC element
@@ -1236,6 +1249,18 @@ class RefineablePseudoSolidNodeUpdateElement : public virtual BASIC,
  /// \short Pointer to the j-th vertex node in the element
  Node* vertex_node_pt(const unsigned& j) const
   {return BASIC::vertex_node_pt(j);}
+
+ /// \short Plot the error when compared against a given exact flux.
+ /// Also calculates the norm of the error and that of the exact flux.
+ /// Use version in BASIC element
+ void compute_exact_Z2_error(
+  std::ostream &outfile,
+  FiniteElement::SteadyExactSolutionFctPt exact_flux_pt,
+  double& error, double& norm)
+ {
+  BASIC::compute_exact_Z2_error(outfile, exact_flux_pt,
+                                error, norm);
+ }
 
  /// \short Order of recovery shape functions for Z2 error estimation: Done
  /// for BASIC element since it determines the refinement

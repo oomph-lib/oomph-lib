@@ -453,6 +453,18 @@ int main(int argc, char **argv)
  MPI_Helpers::init(argc,argv);
 #endif
 
+  // Switch off output modifier
+ oomph_info.output_modifier_pt() = &default_output_modifier;
+
+ // Define processor-labeled output file for all on-screen stuff
+ std::ofstream output_stream;
+ char filename[100];
+ sprintf(filename,"OUTPUT.%i",MPI_Helpers::communicator_pt()->my_rank());
+ output_stream.open(filename);
+ oomph_info.stream_pt() = &output_stream;
+ OomphLibWarning::set_stream_pt(&output_stream);
+ OomphLibError::set_stream_pt(&output_stream);   
+
  // Store command line arguments
  CommandLineArgs::setup(argc,argv);
 
@@ -504,6 +516,7 @@ int main(int argc, char **argv)
    // Get partition from file
    unsigned n_element=problem.mesh_pt()->nelement();
    Vector<unsigned> element_partition(n_element);
+
    // Two possible partitions on two processors - one for "normal" 
    // METIS behaviour, the other gives one mesh to one processor 
    // and the other mesh to the other processor
@@ -518,14 +531,43 @@ int main(int argc, char **argv)
      sprintf(filename,"multi_domain_boussinesq_partition.dat");
     }
    input_file.open(filename);
+   oomph_info << "Opened: " << filename << std::endl;
+   if (!input_file.is_open())
+    {
+     oomph_info << "Error opening input file\n";
+     exit(1);
+    }
    std::string input_string;
    for (unsigned e=0;e<n_element;e++)
     {
-     getline(input_file,input_string,'\n');
-     element_partition[e]=atoi(input_string.c_str());
+     if (getline(input_file,input_string,'\n'))
+      {
+       element_partition[e]=atoi(input_string.c_str());
+      }
+     else
+      {
+       oomph_info << "Reached end of file when reading partitioning file\n";
+       exit(1);
+      }
     }
+   input_file.close();
 
-   problem.distribute(element_partition,mesh_doc_info,report_stats);
+   // Create storage for actually used partitioning
+   Vector<unsigned> used_element_partition;
+   used_element_partition=problem.distribute(element_partition,
+                                             mesh_doc_info,report_stats);
+
+   // Write used partition to disk
+   sprintf(filename,"RESLT/partitioning.dat");
+   output_file.open(filename);
+   unsigned n_used=used_element_partition.size();
+   output_file << n_used << std::endl;
+   for (unsigned e=0;e<n_used;e++)
+    {
+     output_file << used_element_partition[e] << std::endl;
+    }
+   output_file.close();
+
   }
 
 #endif

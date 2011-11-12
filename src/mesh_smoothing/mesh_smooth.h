@@ -334,7 +334,7 @@ public:
        // Solve 
        newton_solve();
       }
-     catch(oomph::NewtonSolverError)
+     catch(oomph::NewtonSolverError&)
       {
        success=false;
        Helper_namespace_for_mesh_smoothing::Scale-=
