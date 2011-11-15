@@ -5944,7 +5944,8 @@ void Problem::parallel_sparse_assemble
      Sparse_assemble_with_arrays_previous_allocation[m].resize(my_n_eqn,0);
     }
   }
-
+ 
+  
  // assemble and populate an array based storage scheme
  {
   //Allocate local storage for the element's contribution to the
@@ -6181,26 +6182,6 @@ void Problem::parallel_sparse_assemble
  } //End of vector assembly
 
 
-
- // Postprocess timing information and re-allocate distribution of
- // elements during subsequent assemblies.
- if ((!doing_residuals)&&
-     (!Problem_has_been_distributed)&&
-     Must_recompute_load_balance_for_assembly)
-  {
-   recompute_load_balanced_assembly();
-  }
-
- // We have determined load balancing for current setup.
- // This can remain the same until assign_eqn_numbers() is called
- // again -- the flag is re-set to true there.
- if ((!doing_residuals)&&
-     Must_recompute_load_balance_for_assembly)
-  {
-   Must_recompute_load_balance_for_assembly=false;
-  }
- 
-
  // Doc?
  double t_end=0.0;
  double t_local=0.0;
@@ -6280,6 +6261,27 @@ void Problem::parallel_sparse_assemble
    //            << max  << " " << min << " " << sum << " "  
    //            << sum_total << std::endl;
   }
+
+ // Postprocess timing information and re-allocate distribution of
+ // elements during subsequent assemblies.
+ if ((!doing_residuals)&&
+     (!Problem_has_been_distributed)&&
+     Must_recompute_load_balance_for_assembly)
+  {
+   recompute_load_balanced_assembly();
+  }
+
+ // We have determined load balancing for current setup.
+ // This can remain the same until assign_eqn_numbers() is called
+ // again -- the flag is re-set to true there.
+ if ((!doing_residuals)&&
+     Must_recompute_load_balance_for_assembly)
+  {
+   Must_recompute_load_balance_for_assembly=false;
+  }
+ 
+
+
 
  // next we compute the number of equations and number of non-zeros to be
  // sent to each processor, and send/recv that information
