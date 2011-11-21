@@ -198,7 +198,6 @@ fill_in_generic_contribution_to_residuals_pvd(Vector<double> &residuals,
    DenseMatrix<double> sigma(DIM);
    this->get_stress(g,G,sigma);
 
-
    // Get stress derivative by FD only needed for Jacobian
    //-----------------------------------------------------
    
@@ -240,6 +239,15 @@ fill_in_generic_contribution_to_residuals_pvd(Vector<double> &residuals,
      this->get_d_stress_dG_upper(g,G,sigma,d_stress_dG);
     }
    
+
+   // Add pre-stress
+   for(unsigned i=0;i<DIM;i++) 
+    {
+     for(unsigned j=0;j<DIM;j++) 
+      {
+       sigma(i,j) += this->prestress(i,j,interpolated_xi);
+      }
+    }
 
 //=====EQUATIONS OF ELASTICITY FROM PRINCIPLE OF VIRTUAL DISPLACEMENTS========
        
@@ -804,7 +812,7 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
       {
        for (unsigned b=0;b<DIM;b++)
         {         
-         sigma(a,b)=sigma_dev(a,b) - interpolated_solid_p*Gup(a,b);
+         sigma(a,b)=sigma_dev(a,b)-interpolated_solid_p*Gup(a,b);
         }
       }
 
@@ -830,7 +838,7 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
       {
        for (unsigned b=0;b<DIM;b++)
         {         
-         sigma(a,b)=sigma_dev(a,b) - interpolated_solid_p*Gup(a,b);
+         sigma(a,b)=sigma_dev(a,b)-interpolated_solid_p*Gup(a,b);
         }
       }
 
@@ -846,6 +854,14 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
       }
     }
 
+   // Add pre-stress
+   for(unsigned i=0;i<DIM;i++) 
+    {
+     for(unsigned j=0;j<DIM;j++) 
+      {
+       sigma(i,j) += this->prestress(i,j,interpolated_xi);
+      }
+    }
 
 //=====EQUATIONS OF ELASTICITY FROM PRINCIPLE OF VIRTUAL DISPLACEMENTS========
        

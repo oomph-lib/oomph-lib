@@ -73,6 +73,12 @@ namespace oomph
    /// xi is a Vector! 
    typedef void (*IsotropicGrowthFctPt)
     (const Vector<double>& xi, double& gamma);
+
+   /// \short Function pointer to function that specifies the pre-stress
+   /// sigma_0(i,j) as a function of the Lagrangian coordinates 
+   /// FCT(i,j,xi) --  xi is a Vector! 
+   typedef double (*PrestressFctPt)
+    (const unsigned& i, const unsigned& j, const Vector<double>& xi);
    
    /// \short Function pointer to function that specifies the body force
    /// as a function of the Lagrangian coordinates and time FCT(t,xi,b) -- 
@@ -85,9 +91,11 @@ namespace oomph
    /// isotropic growth function. Set physical parameter values to 
    /// default values, enable inertia and set body force to zero.
    /// Default evaluation of Jacobian: analytically rather than by FD.
-   PVDEquationsBase() :  Isotropic_growth_fct_pt(0), Constitutive_law_pt(0),
+   PVDEquationsBase() :  Isotropic_growth_fct_pt(0),
+    Prestress_fct_pt(0), Constitutive_law_pt(0),
     Lambda_sq_pt(&Default_lambda_sq_value), Unsteady(true), 
-    Body_force_fct_pt(0), Evaluate_jacobian_by_fd(false) {}
+    Body_force_fct_pt(0), Evaluate_jacobian_by_fd(false) 
+    {}
       
    /// Return the constitutive law pointer
    ConstitutiveLaw* &constitutive_law_pt() {return Constitutive_law_pt;}
@@ -105,6 +113,9 @@ namespace oomph
    IsotropicGrowthFctPt& isotropic_growth_fct_pt() 
     {return Isotropic_growth_fct_pt;}
    
+   /// Access function: Pointer to pre-stress function
+   PrestressFctPt& prestress_fct_pt() 
+    {return Prestress_fct_pt;}
 
    /// Access function: Pointer to isotropic growth function (const version)
    IsotropicGrowthFctPt isotropic_growth_fct_pt() const
@@ -334,10 +345,29 @@ namespace oomph
    /// Return the flag indicating whether the jacobian is evaluated by fd
    bool is_jacobian_evaluated_by_fd() const {return Evaluate_jacobian_by_fd;}
    
+   /// \short Return (i,j)-th component of second Piola Kirchhoff membrane 
+   /// prestress at Lagrangian coordinate xi
+   double prestress(const unsigned& i,
+                    const unsigned& j,
+                    const Vector<double> xi)
+   {
+    if (Prestress_fct_pt==0)
+     {
+      return 0.0;
+     }
+    else
+     {
+      return (*Prestress_fct_pt)(i,j,xi);
+     }
+   }
+
   protected:
    
    /// Pointer to isotropic growth function
    IsotropicGrowthFctPt Isotropic_growth_fct_pt;
+
+   /// Pointer to prestress function
+   PrestressFctPt Prestress_fct_pt;
    
    /// Pointer to the constitutive law
    ConstitutiveLaw *Constitutive_law_pt;
@@ -356,7 +386,7 @@ namespace oomph
    
    /// Use FD to evaluate Jacobian
    bool Evaluate_jacobian_by_fd;
-
+   
   };
  
  
@@ -371,7 +401,7 @@ class PVDEquations : public PVDEquationsBase<DIM>
     public:
    
    /// \short  Constructor
-   PVDEquations() {}
+   PVDEquations(){}
    
    /// \short Return the 2nd Piola Kirchoff stress tensor, as calculated
    /// from the constitutive law at specified local coordinate
@@ -793,7 +823,7 @@ template<unsigned NNODE_1D>
    
    /// Constructor, by default the element is NOT incompressible.
     PVDEquationsWithPressure() : PVDEquationsBase<DIM>(), 
-    Incompressible(false)  {}
+    Incompressible(false) {}
    
    /// \short Return the 2nd Piola Kirchoff stress tensor, as calculated
    /// from the constitutive law at specified local coordinate

@@ -3,9 +3,10 @@
 # Use png output (otherwise avi)
 $!VARSET |PNG|=0
 
+$!VARSET |dir|='Validation/RESLT_fs'
 $!VARSET |dir|='RESLT'
 
-$!VARSET |nstep|=50
+$!VARSET |nstep|=20
 $!VARSET |lostep|=0
 $!VARSET |dlstep|=1
 $!LOOP |nstep|

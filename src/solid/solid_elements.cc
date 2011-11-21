@@ -40,6 +40,7 @@ template <unsigned DIM>
 double PVDEquationsBase<DIM>::Default_lambda_sq_value=1.0;
 
 
+
 //////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////
@@ -340,6 +341,14 @@ fill_in_generic_contribution_to_residuals_pvd(Vector<double> &residuals,
    DenseMatrix<double> sigma(DIM);
    get_stress(g,G,sigma);
 
+   // Add pre-stress
+   for(unsigned i=0;i<DIM;i++) 
+    {
+     for(unsigned j=0;j<DIM;j++) 
+      {
+       sigma(i,j) += this->prestress(i,j,interpolated_xi);
+      }
+    }
 
    // Get stress derivative by FD only needed for Jacobian
    //-----------------------------------------------------
@@ -872,6 +881,15 @@ void PVDEquationsBase<DIM>::get_energy(double &pot_en, double &kin_en)
    //Now calculate the stress tensor from the constitutive law
    this->get_stress(s,sigma);
 
+   // Add pre-stress
+   for(unsigned i=0;i<DIM;i++) 
+    {
+     for(unsigned j=0;j<DIM;j++) 
+      {
+       sigma(i,j) += prestress(i,j,interpolated_xi);
+      }
+    }
+
    //get the strain
    this->get_strain(s,strain);
 
@@ -1022,10 +1040,22 @@ void PVDEquationsBase<DIM>::get_principal_stress(
  const Vector<double> &s, DenseMatrix<double>& principal_stress_vector,
  Vector<double>& principal_stress)
 {
-
- /// Compute contravariant ("upper") 2nd Piola Kirchhoff stress 
+ // Compute contravariant ("upper") 2nd Piola Kirchhoff stress 
  DenseDoubleMatrix sigma(DIM,DIM);
  get_stress(s,sigma);
+
+ // Lagrangian coordinates
+ Vector<double> xi(DIM);
+ this->interpolated_xi(s,xi);
+ 
+ // Add pre-stress
+ for(unsigned i=0;i<DIM;i++) 
+  {
+   for(unsigned j=0;j<DIM;j++) 
+    {
+     sigma(i,j) += this->prestress(i,j,xi);
+    }
+  }
 
  // Get covariant base vectors in deformed configuration
  DenseMatrix<double> lower_deformed_basis(DIM);
@@ -1448,7 +1478,7 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
       {
        for (unsigned b=0;b<DIM;b++)
         {         
-         sigma(a,b)=sigma_dev(a,b) - interpolated_solid_p*Gup(a,b);
+         sigma(a,b)=sigma_dev(a,b)-interpolated_solid_p*Gup(a,b);
         }
       }
 
@@ -1474,7 +1504,7 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
       {
        for (unsigned b=0;b<DIM;b++)
         {         
-         sigma(a,b)=sigma_dev(a,b) - interpolated_solid_p*Gup(a,b);
+         sigma(a,b)=sigma_dev(a,b)-interpolated_solid_p*Gup(a,b);
         }
       }
 
@@ -1488,8 +1518,16 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
                                    d_stress_dG,d_gen_dil_dG);
       }
     }
-
-
+   
+   // Add pre-stress
+   for(unsigned i=0;i<DIM;i++) 
+    {
+     for(unsigned j=0;j<DIM;j++) 
+      {
+       sigma(i,j) += this->prestress(i,j,interpolated_xi);
+      }
+    }
+   
 //=====EQUATIONS OF ELASTICITY FROM PRINCIPLE OF VIRTUAL DISPLACEMENTS========
        
    //Loop over the test functions, nodes of the element
@@ -2264,7 +2302,7 @@ void PVDEquationsWithPressure<DIM>::get_stress(const Vector<double> &s,
   {
    for (unsigned j=0;j<DIM;j++)
     {
-     sigma(i,j) = -interpolated_solid_p*Gup(i,j)+sigma_dev(i,j);
+     sigma(i,j)=-interpolated_solid_p*Gup(i,j)+sigma_dev(i,j);
     }
   }
 

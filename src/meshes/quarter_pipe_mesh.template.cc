@@ -47,7 +47,32 @@ namespace oomph
   // Update node coordinates with macroelement coordinates,
   // updating solid coordinates too.
   this->node_update(true);
+   
+  // Setup boundary coordinates on inner boundary (boundary 1)
+  unsigned b=1;
+  unsigned nnod=this->nboundary_node(b);
+  for (unsigned j=0;j<nnod;j++)
+   {
+    // Pointer to node
+    Node* nod_pt=this->boundary_node_pt(b,j);
+    
+    // Get the Eulerian coordinates
+    double x=nod_pt->x(0);
+    double y=nod_pt->x(1);
+    double z=nod_pt->x(2);
+    
+    // Polar angle
+    double phi=atan2(y,x);
+
+    // Set boundary coordinates
+    Vector<double> zeta(2);
+    zeta[0]=z;
+    zeta[1]=phi;
+    nod_pt->set_coordinates_on_boundary(b,zeta);
+   }
+  this->Boundary_coordinate_exists[b]=true;
  }
+ 
 }  
 
 
