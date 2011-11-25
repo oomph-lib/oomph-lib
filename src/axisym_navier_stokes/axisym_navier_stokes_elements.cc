@@ -56,14 +56,31 @@ Default_Gravity_vector(3,0.0);
 
 
 //================================================================
-/// Compute the diagonal of the velocity mass matrix
+/// Compute the diagonal of the velocity/pressure mass matrices.
+/// If which one=0, both are computed, otherwise only the pressure 
+/// (which_one=1) or the velocity mass matrix (which_one=2 -- the 
+/// LSC version of the preconditioner only needs that one)
+/// NOTE: pressure versions isn't implemented yet because this
+///       element has never been tried with Fp preconditoner.
 //================================================================
  void AxisymmetricNavierStokesEquations::
- get_velocity_mass_matrix_diagonal(Vector<double> &mass_diag)
+ get_pressure_and_velocity_mass_matrix_diagonal(
+  Vector<double> &press_mass_diag, Vector<double> &veloc_mass_diag,
+  const unsigned& which_one)
  {
-  
+
+#ifdef PARANOID
+  if ((which_one==0)||(which_one==1)) 
+   {
+    throw OomphLibError(
+     "Computation of diagonal of pressure mass matrix is not impmented yet.\n",
+     "AxisymmetricNavierStokesEquations::get_pressure_and_velocity_mass_matrix_diagonal()",
+     OOMPH_EXCEPTION_LOCATION);
+   }
+#endif  
+
   // Resize and initialise
-  mass_diag.assign(ndof(), 0.0);
+  veloc_mass_diag.assign(ndof(), 0.0);
   
   // find out how many nodes there are
   const unsigned n_node = nnode();
@@ -126,7 +143,7 @@ Default_Gravity_vector(3,0.0);
         if(local_eqn >= 0)
          {
           //Add the contribution
-          mass_diag[local_eqn] += test[l]*test[l] * W;
+          veloc_mass_diag[local_eqn] += test[l]*test[l] * W;
          } //End of if not boundary condition statement
        } //End of loop over dimension
      } //End of loop over test functions

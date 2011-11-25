@@ -216,7 +216,8 @@ namespace oomph
 /// parameters (By default, \f$ R_\rho  = R_\mu = 1 \f$; other values
 /// tend to be used in problems involving multiple fluids). 
 //======================================================================
-class AxisymmetricNavierStokesEquations : public virtual FiniteElement
+ class AxisymmetricNavierStokesEquations : public virtual FiniteElement,
+  public virtual NavierStokesElementWithDiagonalMassMatrices
 {
   private:
 
@@ -633,8 +634,18 @@ public:
                const Vector<double>& N, 
                Vector<double>& traction);
 
+ /// \short Compute the diagonal of the velocity/pressure mass matrices.
+ /// If which one=0, both are computed, otherwise only the pressure 
+ /// (which_one=1) or the velocity mass matrix (which_one=2 -- the 
+ /// LSC version of the preconditioner only needs that one)
+ /// NOTE: pressure versions isn't implemented yet because this
+ ///       element has never been tried with Fp preconditoner.
+ void get_pressure_and_velocity_mass_matrix_diagonal(
+  Vector<double> &press_mass_diag, Vector<double> &veloc_mass_diag,
+  const unsigned& which_one=0);
+
  /// Compute the diagonal of the velocity mass matrix
- void get_velocity_mass_matrix_diagonal(Vector<double> &mass_diag);
+ // hierher obsolete void get_mass_matrix_diagonal(Vector<double> &mass_diag);
 
  /// \short Output function: x,y,[z],u,v,[w],p
  /// in tecplot format. Default number of plot points

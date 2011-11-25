@@ -286,7 +286,7 @@ namespace oomph
    /// of the "DOF" that this unknown is associated with.
    /// (Function can obviously only be called if the equation numbering
    /// scheme has been set up.)\n
-   /// E.g. in a 3D problem there are 6 types of DOF:\n
+   /// E.g. in a 3D problem there are 3 types of DOF:\n
    /// 0 - x displacement\n
    /// 1 - y displacement\n
    /// 2 - z displacement\n
@@ -395,7 +395,7 @@ namespace oomph
 /// on the principle of virtual displacements in cartesian coordinates.
 //=======================================================================
 template <unsigned DIM>
-class PVDEquations : public PVDEquationsBase<DIM>
+class PVDEquations : public virtual PVDEquationsBase<DIM>
 {
 
     public:
@@ -817,7 +817,8 @@ template<unsigned NNODE_1D>
 /// formulation of the constitutive equations.
 //============================================================================
  template <unsigned DIM>
-  class PVDEquationsWithPressure : public PVDEquationsBase<DIM>
+ class PVDEquationsWithPressure : public virtual PVDEquationsBase<DIM>,
+  public virtual SolidElementWithDiagonalMassMatrix
   {
     public:
    
@@ -1003,11 +1004,92 @@ template<unsigned NNODE_1D>
    /// C-style output: x,y,[z],xi0,xi1,[xi2],p,gamma
    void output(FILE* file_pt, const unsigned &n_plot);
    
-    protected:
+   /// \short Compute the diagonal of the displacement mass matrix for
+   /// LSC preconditioner
+   void get_mass_matrix_diagonal(Vector<double> &mass_diag);
    
-   /// \short Access function that returns local eqn number 
-   /// information for the solid pressure
-   //virtual int solid_p_local_eqn(const unsigned &i)=0;
+   /// \short returns the number of DOF types associated with this element:
+   /// 2: displacements and pressure // hierher
+   unsigned ndof_types()
+   {
+    return DIM+1; // hierher
+    }
+ 
+   /// \short Create a list of pairs for all unknowns in this element,
+   /// so that the first entry in each pair contains the global equation
+   /// number of the unknown, while the second one contains the number
+   /// of the "DOF" that this unknown is associated with.
+   /// (Function can obviously only be called if the equation numbering
+   /// scheme has been set up.)\n
+   /// There are 2 types of DOF:\n
+   /// 0 - displacement\n
+   /// 1 - pressure\n // hierher
+   void get_dof_numbers_for_unknowns(
+    std::list<std::pair<unsigned long,unsigned> >& block_lookup_list)
+    {
+     // temporary pair (used to store block lookup prior to being added to list
+     std::pair<unsigned,unsigned> block_lookup;
+   
+     // number of nodes
+     const unsigned n_node = this->nnode();
+   
+     //Get the number of position dofs and dimensions at the node
+     const unsigned n_position_type = this->nnodal_position_type();
+     const unsigned nodal_dim = this->nodal_dimension();
+   
+     //Integer storage for local unknown
+     int local_unknown=0;
+   
+     //Loop over the nodes
+     for(unsigned n=0;n<n_node;n++)
+      {
+
+       //Loop over position dofs
+       for(unsigned k=0;k<n_position_type;k++)
+        {
+         //Loop over dimension
+         for(unsigned i=0;i<nodal_dim;i++)
+          {
+           //If the variable is free
+           local_unknown = this->position_local_eqn(n,k,i);
+         
+           // ignore pinned values
+           if (local_unknown >= 0)
+            {
+             // store block lookup in temporary pair: First entry in pair
+             // is global equation number; second entry is block type
+             block_lookup.first = this->eqn_number(local_unknown);
+             block_lookup.second = i;
+           
+             // add to list
+             block_lookup_list.push_front(block_lookup);
+           
+            }
+          }
+        }
+      }
+
+     //Do solid pressure degrees of freedom
+     unsigned np=this->npres_solid();
+     for (unsigned j=0;j<np;j++)
+      {
+       int local_unknown=this->solid_p_local_eqn(j);
+       // ignore pinned values
+       if (local_unknown >= 0)
+        {
+         // store block lookup in temporary pair: First entry in pair
+         // is global equation number; second entry is block type 
+         block_lookup.first = this->eqn_number(local_unknown);
+         block_lookup.second = DIM;
+         
+         // add to list
+         block_lookup_list.push_front(block_lookup);
+        }
+      }
+
+    }
+
+    protected:
   
    /// \short Return the deviatoric part of the 2nd Piola Kirchhoff stress 
    /// tensor, as calculated from the constitutive law in the nearly 
@@ -1520,6 +1602,36 @@ public virtual PointElement
  /// Constructor must call constructor of the underlying Point element
   FaceGeometry() : PointElement() {}
 };
+
+
+//===============================================================
+/// FaceGeometry for 3D QPVDElementWithContinuousPressure element
+//===============================================================
+template<>
+class FaceGeometry<QPVDElementWithContinuousPressure<3> >: 
+public virtual SolidQElement<2,3>
+{
+  public:
+ /// Constructor must call constructor of the underlying Solid element
+ FaceGeometry() : SolidQElement<2,3>() {}
+};
+
+
+
+//===============================================================
+/// FaceGeometry of FaceGeometry 
+/// for 3D QPVDElementWithContinuousPressure element
+//===============================================================
+template<>
+class FaceGeometry<FaceGeometry<QPVDElementWithContinuousPressure<3> > >: 
+public virtual SolidQElement<1,3>
+{
+  public:
+ /// Constructor must call constructor of the underlying element
+  FaceGeometry() : SolidQElement<1,3>() {}
+};
+
+
 
 
 //////////////////////////////////////////////////////////////////////

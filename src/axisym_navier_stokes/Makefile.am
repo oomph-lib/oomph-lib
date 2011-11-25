@@ -6,7 +6,6 @@
 sources =  \
 axisym_navier_stokes_elements.cc \
 refineable_axisym_navier_stokes_elements.cc \
-axisym_navier_stokes_preconditioners.cc \
 Taxisym_navier_stokes_elements.cc
 
 # Include files which shouldn't be compiled
@@ -16,7 +15,6 @@ incl_cc_files =
 headers =  \
 axisym_navier_stokes_elements.h  \
 refineable_axisym_navier_stokes_elements.h \
-axisym_navier_stokes_preconditioners.h \
 Taxisym_navier_stokes_elements.h
 
 # Template only files. These should be included in include directory

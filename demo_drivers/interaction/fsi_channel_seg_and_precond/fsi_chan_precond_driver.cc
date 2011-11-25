@@ -311,21 +311,6 @@ PreconditionedFSICollapsibleChannelProblem(const unsigned& nup,
 
       // Set solid mesh:
       prec_pt->set_wall_mesh(combined_solid_mesh_pt);
-        
-      // Set flags in the underlying Navier-Stokes preconditioner
-      prec_pt->navier_stokes_preconditioner_pt()->enable_p_matrix_scaling();
-      
-      if (!prec_pt->navier_stokes_preconditioner_pt()->
-          is_p_matrix_using_scaling())
-       {
-        std::cout << "SCALING SWITCHED OFF !!!! " << std::endl;
-        std::cout << "SCALING SWITCHED OFF !!!! " << std::endl;
-        std::cout << "SCALING SWITCHED OFF !!!! " << std::endl;
-        std::cout << "SCALING SWITCHED OFF !!!! " << std::endl;
-        std::cout << "SCALING SWITCHED OFF !!!! " << std::endl;
-        std::cout << "SCALING SWITCHED OFF !!!! " << std::endl;
-       }
-
 
 
       switch (solver_sub_flag)
@@ -430,21 +415,6 @@ PreconditionedFSICollapsibleChannelProblem(const unsigned& nup,
 
       // Set solid mesh:
       prec_pt->set_wall_mesh(combined_solid_mesh_pt);
-        
-      // Set flags in the underlying Navier-Stokes preconditioner
-      prec_pt->navier_stokes_preconditioner_pt()->enable_p_matrix_scaling();
-
-      if (!prec_pt->navier_stokes_preconditioner_pt()->
-          is_p_matrix_using_scaling())
-       {
-        std::cout << "SCALING SWITCHED OFF !!!! " << std::endl;
-        std::cout << "SCALING SWITCHED OFF !!!! " << std::endl;
-        std::cout << "SCALING SWITCHED OFF !!!! " << std::endl;
-        std::cout << "SCALING SWITCHED OFF !!!! " << std::endl;
-        std::cout << "SCALING SWITCHED OFF !!!! " << std::endl;
-        std::cout << "SCALING SWITCHED OFF !!!! " << std::endl;
-       }
-
 
 #ifdef OOMPH_HAS_HYPRE
 //If we are using MPI, then only use HYPRE if it has been initialised

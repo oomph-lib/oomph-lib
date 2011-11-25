@@ -330,7 +330,7 @@ class CollapsibleChannelProblem : public Problem
    Wall_pt->enable_remain_steady_at_maximum_amplitude();
   }
 
- /// Create a mesh for the NavierStokesLSCPreconditioner
+ /// Create a mesh for the NavierStokesSchurComplementPreconditioner
  Mesh* create_mesh_for_navier_stokes_preconditioner();
 
 protected:
@@ -1110,7 +1110,7 @@ void CollapsibleChannelProblem<ELEMENT>::actions_after_adapt()
 
 
 //========================================================================
-/// Create a mesh for the NavierStokesLSCPreconditioner
+/// Create a mesh for the NavierStokesSchurComplementPreconditioner
 //========================================================================
 template<class ELEMENT>
 Mesh* CollapsibleChannelProblem<ELEMENT>::
@@ -1852,10 +1852,10 @@ int main(int argc, char *argv[])
  Preconditioner* f_preconditioner_pt;
  f_preconditioner_pt=0;
  GMRES<CRDoubleMatrix>* iterative_solver_pt=0;
- NavierStokesLSCPreconditioner* ns_preconditioner_pt=0; 
+ NavierStokesSchurComplementPreconditioner* ns_preconditioner_pt=0; 
  
  // Don't build the problem with Crouzeix Raviart Elements if using the 
- // LSC preconditioner!
+ // SchurComplement preconditioner!
  CollapsibleChannelProblem<RefineableQTaylorHoodElement<2> > 
   problem(nup, ncollapsible, ndown, ny, 
           lup, lcollapsible, ldown, ly, limpedance,
@@ -1879,7 +1879,7 @@ int main(int argc, char *argv[])
    problem.linear_solver_pt() = iterative_solver_pt;
 
    // Set up the preconditioner
-   NavierStokesLSCPreconditioner* ns_preconditioner_pt = 0;
+   NavierStokesSchurComplementPreconditioner* ns_preconditioner_pt = 0;
    FSIPreconditioner* fsi_preconditioner_pt = 0;
 
    if (outflow==2)
@@ -1888,10 +1888,11 @@ int main(int argc, char *argv[])
      fsi_preconditioner_pt = new FSIPreconditioner;
      fsi_preconditioner_pt->enable_doc_time();
 
-     // Get a pointer to the LSC preconditioner
-     ns_preconditioner_pt = dynamic_cast<NavierStokesLSCPreconditioner*>
+     // Get a pointer to the preconditioner
+     ns_preconditioner_pt = 
+      dynamic_cast<NavierStokesSchurComplementPreconditioner*>
       (fsi_preconditioner_pt->navier_stokes_preconditioner_pt());
-
+     
      // Set solid mesh
      fsi_preconditioner_pt->
       set_wall_mesh(problem.outflow_impedance_master_mesh_pt());
@@ -1906,14 +1907,14 @@ int main(int argc, char *argv[])
     }
    else
     {
-     // Construct the LSC preconditioner
-     ns_preconditioner_pt = new NavierStokesLSCPreconditioner;
+     // Construct the preconditioner
+     ns_preconditioner_pt = new NavierStokesSchurComplementPreconditioner;
 
      // Setup the fluid mesh
      ns_preconditioner_pt->set_navier_stokes_mesh
       (problem.create_mesh_for_navier_stokes_preconditioner());
      
-     // Pass the LSC preconditioner to the solver
+     // Pass the preconditioner to the solver
      iterative_solver_pt->preconditioner_pt() = ns_preconditioner_pt;
     }
 
@@ -1990,8 +1991,8 @@ int main(int argc, char *argv[])
  // run the problem
  problem.unsteady_run(directory_for_data, nsteps, validation_run);
 
- // delete stuff - remembering P and F matrix preconditioners are deleted in the 
- // LSC preconditioner
+ // delete stuff - remembering P and F matrix preconditioners are 
+ // deleted in the Schur complement preconditioner
  delete iterative_solver_pt;
  iterative_solver_pt=0;
  delete ns_preconditioner_pt;

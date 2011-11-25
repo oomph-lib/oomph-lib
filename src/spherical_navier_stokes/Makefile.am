@@ -5,8 +5,7 @@
 # Define the sources
 sources =  \
 spherical_navier_stokes_elements.cc \
-refineable_spherical_navier_stokes_elements.cc \
-spherical_navier_stokes_preconditioners.cc
+refineable_spherical_navier_stokes_elements.cc 
 
 # Include files which shouldn't be compiled
 incl_cc_files =
@@ -14,8 +13,7 @@ incl_cc_files =
 # Define the headers
 headers =  \
 spherical_navier_stokes_elements.h  \
-refineable_spherical_navier_stokes_elements.h \
-spherical_navier_stokes_preconditioners.h
+refineable_spherical_navier_stokes_elements.h 
 
 # Template only files. These should be included in include directory
 # but should not be listed in combined header file

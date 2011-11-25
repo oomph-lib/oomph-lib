@@ -332,7 +332,7 @@ class CollapsibleChannelProblem : public Problem
    Wall_pt->enable_remain_steady_at_maximum_amplitude();
   }
 
- /// Create a mesh for the NavierStokesLSCPreconditioner
+ /// Create a mesh for the NavierStokes Preconditioner
  Mesh* create_mesh_for_navier_stokes_preconditioner();
 
 protected:
@@ -1112,7 +1112,7 @@ void CollapsibleChannelProblem<ELEMENT>::actions_after_adapt()
 
 
 //========================================================================
-/// Create a mesh for the NavierStokesLSCPreconditioner
+/// Create a mesh for the NavierStokes Preconditioner
 //========================================================================
 template<class ELEMENT>
 Mesh* CollapsibleChannelProblem<ELEMENT>::
@@ -1861,7 +1861,7 @@ int main(int argc, char *argv[])
  Preconditioner* f_preconditioner_pt;
  f_preconditioner_pt=0;
  GMRES<CRDoubleMatrix>* iterative_solver_pt=0;
- NavierStokesLSCPreconditioner* ns_preconditioner_pt=0; 
+ NavierStokesSchurComplementPreconditioner* ns_preconditioner_pt=0; 
  
  // Don't build the problem with Crouzeix Raviart Elements if using the 
  // LSC preconditioner!
@@ -1888,7 +1888,7 @@ int main(int argc, char *argv[])
    problem.linear_solver_pt() = iterative_solver_pt;
 
    // Set up the preconditioner
-   NavierStokesLSCPreconditioner* ns_preconditioner_pt = 0;
+   NavierStokesSchurComplementPreconditioner* ns_preconditioner_pt = 0;
    FSIPreconditioner* fsi_preconditioner_pt = 0;
 
    if (outflow==2)
@@ -1898,7 +1898,8 @@ int main(int argc, char *argv[])
      fsi_preconditioner_pt->enable_doc_time();
 
      // Get a pointer to the LSC preconditioner
-     ns_preconditioner_pt = dynamic_cast<NavierStokesLSCPreconditioner*>
+     ns_preconditioner_pt = 
+      dynamic_cast<NavierStokesSchurComplementPreconditioner*>
       (fsi_preconditioner_pt->navier_stokes_preconditioner_pt());
 
      // Set solid mesh
@@ -1915,7 +1916,7 @@ int main(int argc, char *argv[])
    else
     {
      // Construct the LSC preconditioner
-     ns_preconditioner_pt = new NavierStokesLSCPreconditioner;
+     ns_preconditioner_pt = new NavierStokesSchurComplementPreconditioner;
 
      // Setup the fluid mesh
      ns_preconditioner_pt->set_navier_stokes_mesh(

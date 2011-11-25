@@ -4,8 +4,7 @@
 
 # Define the sources
 sources =  \
-solid_elements.cc refineable_solid_elements.cc 
-#solid_traction_elements.cc
+solid_elements.cc refineable_solid_elements.cc solid_preconditioners.cc
 
 # Include files which shouldn't be compiled
 incl_cc_files =
@@ -13,7 +12,7 @@ incl_cc_files =
 # Define the headers
 headers =  \
 solid_elements.h refineable_solid_elements.h \
-solid_traction_elements.h
+solid_traction_elements.h solid_preconditioners.h
 
 # Template only files. These should be included in include directory
 # but should not be listed in combined header file

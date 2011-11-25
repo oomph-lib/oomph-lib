@@ -388,6 +388,11 @@ void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
     cast_father_element_pt->is_jacobian_evaluated_by_fd();
   }
 
+
+ /// \short Compute the diagonal of the displacement mass matrix for
+ /// LSC preconditioner
+ void get_mass_matrix_diagonal(Vector<double> &mass_diag);
+ 
 };
 
 //===========================================================================

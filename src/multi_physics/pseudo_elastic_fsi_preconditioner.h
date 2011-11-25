@@ -84,7 +84,7 @@ namespace oomph {
      Pseudo_elastic_preconditioner_pt = 
       new PseudoElasticPreconditioner();
 
-     // using LSC preconditioner for NS
+     // using Schur complement preconditioner for NS
      Navier_stokes_preconditioner_pt = new SuperLUPreconditioner;
      Navier_stokes_schur_complement_preconditioner_pt 
       = new NavierStokesSchurComplementPreconditioner; 

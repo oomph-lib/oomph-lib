@@ -44,7 +44,7 @@ namespace oomph
 /// blocks in the 3x3 overall block matrix structure arising from
 /// the monolithic discretisation of FSI problems with algebraic
 /// node updates. Dofs are decomposed into fluid velocity, pressure 
-/// and solid unknowns. NavierStokesLSCPreconditioner is used
+/// and solid unknowns. NavierStokesSchurComplementPreconditioner is used
 /// as the inexact solver for the fluid block; SuperLU (in 
 /// its incarnation as an "exact" preconditioner) is used for
 /// the solid block. By default we retain the fluid on solid off
@@ -69,8 +69,9 @@ public :
    Retain_solid_onto_fluid_terms=false;
    Retain_fluid_onto_solid_terms=true;
 
-   // Create the Navier Stokes LSC preconditioner
-   Navier_stokes_preconditioner_pt = new NavierStokesLSCPreconditioner;
+   // Create the Navier Stokes Schur complement preconditioner
+   Navier_stokes_preconditioner_pt = 
+    new NavierStokesSchurComplementPreconditioner;
 
    // Create the Solid preconditioner
    Solid_preconditioner_pt = new SuperLUPreconditioner;
@@ -179,7 +180,8 @@ public :
                            DoubleVector &z);
 
  /// Access function to the Navier Stokes preconditioner (inexact solver)
- NavierStokesLSCPreconditioner* navier_stokes_preconditioner_pt() const
+ NavierStokesSchurComplementPreconditioner* 
+  navier_stokes_preconditioner_pt() const
   {
    return Navier_stokes_preconditioner_pt;
   }
@@ -194,7 +196,7 @@ public :
 private:
 
  /// Pointer the Navier Stokes preconditioner (inexact solver)
- NavierStokesLSCPreconditioner* Navier_stokes_preconditioner_pt;
+ NavierStokesSchurComplementPreconditioner* Navier_stokes_preconditioner_pt;
 
  /// Pointer to the solid preconditioner  (inexact solver)
  Preconditioner* Solid_preconditioner_pt;
@@ -289,8 +291,8 @@ void FSIPreconditioner::setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt)
     ns_dof_lookup[i] = i;
    }
 
-  // Turn the Navier Stokes LSC preconditioner into a subsidiary preconditioner
-  // of this preconditioner
+  // Turn the Navier Stokes Schur complement preconditioner into a 
+  // subsidiary preconditioner of this preconditioner
   Navier_stokes_preconditioner_pt->
    turn_into_subsidiary_block_preconditioner(this,ns_dof_lookup);
 

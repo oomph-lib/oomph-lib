@@ -212,23 +212,6 @@ class MyAxisymmetricFluidElement : public ELEMENT
 
 
 
-
-
-#ifdef OOMPH_HAS_HYPRE
-//=============================================================================
-/// helper method for the block diagonal F block preconditioner to allow 
-/// hypre to be used for as a subsidiary block preconditioner
-//=============================================================================
-namespace Hypre_Subsidiary_Preconditioner_Helper
-{
- Preconditioner* set_hypre_preconditioner()
- {
-  return new HyprePreconditioner;
- }
-}
-#endif
-
-
 //==========================================================================
 /// Solve the Axisymmetric Navier Stokes equations in a torus
 //==========================================================================

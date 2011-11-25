@@ -2125,8 +2125,10 @@ namespace oomph
     {
      std::ostringstream error_message;
      error_message  
-      << "The dof_to_block_map vector must be of size Ndof_types";
-     throw OomphLibWarning(
+      << "The dof_to_block_map vector (size="
+      << dof_to_block_map.size() << ") must be of size Ndof_types="
+      << Ndof_types;
+     throw OomphLibError(
       error_message.str(),
       "BlockPreconditioner::block_setup(...)",
       OOMPH_EXCEPTION_LOCATION);

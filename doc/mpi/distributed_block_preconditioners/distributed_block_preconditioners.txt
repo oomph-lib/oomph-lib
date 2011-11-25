@@ -212,7 +212,7 @@ example). For instance our two-dimensional FSI channel with leaflet problem has 
 In the FSI preconditioner there are two block types, fluid and solid.
 In the fluid elements we have classified the DOFs into velocities and
 pressures. 
-This classification is necessary for the \c NavierStokesLSCPreconditioner which needs to differentiate between the velocities and
+This classification is necessary for the \c NavierStokesSchurComplementPreconditioner which needs to differentiate between the velocities and
 pressure. However, in this FSI preconditioner we group all the fluid DOFs
 together into a single fluid block. 
 The solid elements have only one type of DOF, which will form the solid block type. 
@@ -233,13 +233,13 @@ preconditioners as subsidiary preconditioners. \c Oomph-lib's block precondition
 of existing preconditioners as subsidiary preconditioners.
 
 
-We wish to use the \c NavierStokesLSCPreconditioner (see <a
+We wish to use the \c NavierStokesSchurComplementPreconditioner (see <a
 href="../../../preconditioners/lsc_navier_stokes/html/index.html">Navier
 Stokes Preconditioner Tutorial</A>)  as the subsidiary
 preconditioner for the fluid subisidiary problem \f$\tilde F\f$; this
 preconditioner will utilise the fine
 grained labelling of the fluid DOFs. We refer to the FSI 
-preconditioner as the \c NavierStokesLSCPreconditioner's
+preconditioner as the \c NavierStokesSchurComplementPreconditioner's
 master preconditioner.
 
 
@@ -398,7 +398,7 @@ master preconditioner DOF types that it operates on.
 
 This is done in two steps:
 
--# First we must turn the \c NavierStokesLSCPreconditioner into a subsidiary 
+-# First we must turn the \c NavierStokesSchurComplementPreconditioner into a subsidiary 
 block preconditioner. We assemble a list a fluid DOF types in this
 preconditioner, and pass this list to the Navier-Stokes preconditioner
 to indicate that
@@ -409,7 +409,7 @@ result of choosing the fluid mesh to be mesh \c 0; in general the index of \c ns
 \dontinclude fsi_channel_with_leaflet.cc
 \skipline Next the fluid preconditioner
 \until turn_into_subsidiary_block_preconditioner(this,ns_dof_list);
--# Now we set up the \c NavierStokesLSCPreconditioner.
+-# Now we set up the \c NavierStokesSchurComplementPreconditioner.
 We pass the Navier-Stokes mesh to the the
 subsidiary preconditioner and set up the operator. Note that the
 pointer to the full FSI Jacobian is passed to the subsidiary block
@@ -417,7 +417,7 @@ preconditioner. This allows the subsidiary preconditioner to extract
 the relevant sub-blocks, using the lookup schemes established by the
 call to \c  turn_into_subsidiary_block_preconditioner(...).
 \dontinclude fsi_channel_with_leaflet.cc
-\skipline Setup the Navier Stokes LSC preconditioner.
+\skipline Setup the NavierStokesSchurComplement preconditioner.
 \until Navier_stokes_preconditioner_pt->setup(problem_pt,matrix_pt);
 
 The final operator to set up is the matrix-vector product. This mirrors
@@ -444,7 +444,7 @@ The first step is to apply the Navier-Stokes preconditioner \f$\tilde
 F\f$ to the fluid elements \c y_f of \c y. Since \f$\tilde F\f$ is a 
 subisidiary block preconditioner  we apply it to the full-length
  \c y and \c z vectors which contain both the fluid and solid unknowns. The block preconditioner infrastructure utilised 
-within the \c NavierStokesLSCPreconditioner will ensure that the 
+within the \c NavierStokesSchurComplementPreconditioner will ensure that the 
 preconditioner only operates on fluid DOFs.
 
 \dontinclude fsi_channel_with_leaflet.cc
@@ -452,7 +452,7 @@ preconditioner only operates on fluid DOFs.
 \until Navier_stokes_preconditioner_pt->preconditioner_solve(y,z);
 
 The fluid elements \c z_f of the vector \c z will now have been updated to
-contain the action of the LSC preconditioner on the fluid elements \c y_f of
+contain the action of the SchurComplement preconditioner on the fluid elements \c y_f of
 the vector \c y.
 
 
@@ -481,7 +481,7 @@ copied to the full-length vector \c z which contains the fluid and solid DOFs.
 \section Parallelisation
 
 We note that the above discussion did not address the parallelisation of the preconditioner. This is because the subsidiary
-operators ( \c NavierStokesLSCPreconditioner, \c
+operators ( \c NavierStokesSchurComplementPreconditioner, \c
 SuperLUPreconditioner and \c MatrixVectorProduct) are all parallel
 operators, and given that the action of the \c BlockPreconditioner
 framework is parallelised, the parallelisation of this preconditioner

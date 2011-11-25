@@ -32,6 +32,7 @@
 //OOMPH-LIB include files
 #include "generic.h"
 #include "axisym_navier_stokes.h"
+#include "navier_stokes.h" // for preconditioner
 #include "meshes/full_circle_mesh.h"
 
 using namespace std;
@@ -235,8 +236,8 @@ TorusProblem<ELEMENT>::TorusProblem(const unsigned &max_refinement_level,
  // Set tolerance
  iterative_linear_solver_pt->tolerance() = 1.0e-8;   
  
- AxisymmetricNavierStokesLSCPreconditioner* prec_pt = 
-  new AxisymmetricNavierStokesLSCPreconditioner;
+ NavierStokesSchurComplementPreconditioner* prec_pt = 
+  new NavierStokesSchurComplementPreconditioner;
  //Set the mesh
  prec_pt->set_navier_stokes_mesh(this->mesh_pt());
 

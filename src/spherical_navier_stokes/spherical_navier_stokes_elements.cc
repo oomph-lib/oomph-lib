@@ -57,7 +57,7 @@ Vector<double> SphericalNavierStokesEquations::Default_Gravity_vector(3,0.0);
 /// Compute the diagonal of the velocity mass matrix
 //================================================================
  void SphericalNavierStokesEquations::
- get_velocity_mass_matrix_diagonal(Vector<double> &mass_diag)
+ get_mass_matrix_diagonal(Vector<double> &mass_diag)
  {
   
   // Resize and initialise

@@ -655,7 +655,7 @@ void FSIChannelWithLeafletProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 /// \short Simple FSI preconditioner. A block uppper triangular preconditioner
 /// for the 2x2 FSI block system -- DOFs are decomposed into fluid DOFs and 
 /// solid DOFs. The fluid subisidiary system is solved with the 
-/// NavierStokesLSCPreconditioner and the solid subsidiary system with the
+/// Navier Stokes Preconditioner and the solid subsidiary system with the
 /// SuperLUPreconditioner. 
 /// Note Jacobian must be of type CRDoubleMatrix
 //=============================================================================
@@ -669,8 +669,9 @@ public :
  SimpleFSIPreconditioner()
   : Navier_stokes_mesh_pt(0), Solid_mesh_pt(0)
   {
-   // Create the Navier Stokes LSC preconditioner
-   Navier_stokes_preconditioner_pt = new NavierStokesLSCPreconditioner;
+   // Create the Navier Stokes Schur Complement preconditioner
+   Navier_stokes_preconditioner_pt = 
+    new NavierStokesSchurComplementPreconditioner;
 
    // Create the Solid preconditioner
    Solid_preconditioner_pt = new SuperLUPreconditioner;
@@ -730,7 +731,7 @@ public :
 private:
 
  /// Pointer the Navier Stokes preconditioner.
- NavierStokesLSCPreconditioner* Navier_stokes_preconditioner_pt;
+ NavierStokesSchurComplementPreconditioner* Navier_stokes_preconditioner_pt;
 
  /// Pointer to the solid preconditioner.
  Preconditioner* Solid_preconditioner_pt;
@@ -806,22 +807,22 @@ void SimpleFSIPreconditioner::setup(Problem* problem_pt,
   // Next the fluid preconditioner
   //==============================
 
-  // Specify the relationship between the enumeration of DOF types in the master
-  // preconditioner and the LSC subsidiary preconditioner so that 
-  // ns_dof_type[i_nst] contains i_master
+  // Specify the relationship between the enumeration of DOF types in the 
+  // master preconditioner and the Schur complement subsidiary preconditioner 
+  // so that ns_dof_type[i_nst] contains i_master
   Vector<unsigned> ns_dof_list(n_fluid_dof_type);
   for (unsigned i = 0; i < n_fluid_dof_type; i++)
    {
     ns_dof_list[i] = i;
    }
 
-  // Turn the Navier Stokes LSC preconditioner into a subsidiary preconditioner
-  // of this (FSI) preconditioner
+  // Turn the NavierStokesSchurComplement preconditioner into a subsidiary 
+  // preconditioner of this (FSI) preconditioner
   Navier_stokes_preconditioner_pt->
    turn_into_subsidiary_block_preconditioner(this,ns_dof_list);
 
-  // Setup the Navier Stokes LSC preconditioner. (Pass it a pointer to the 
-  // Navier Stokes mesh)
+  // Setup the NavierStokesSchurComplement  preconditioner. 
+  // (Pass it a pointer to the Navier Stokes mesh)
   Navier_stokes_preconditioner_pt->
    set_navier_stokes_mesh(Navier_stokes_mesh_pt);
   Navier_stokes_preconditioner_pt->setup(problem_pt,matrix_pt);

@@ -301,26 +301,26 @@ RotatingProblem<ELEMENT>::RotatingProblem
 //  this->linear_solver_pt() = solver_pt;
 //  solver_pt->enable_suppress_warning_about_MPI_COMM_WORLD();
 
- //Build iterative linear solver
- /*GMRES<CRDoubleMatrix>* iterative_linear_solver_pt = new
-  GMRES<CRDoubleMatrix>;
+//  //Build iterative linear solver
+//  /*GMRES<CRDoubleMatrix>* iterative_linear_solver_pt = new
+//   GMRES<CRDoubleMatrix>;
  
-  // Set maximum number of iterations
-  iterative_linear_solver_pt->max_iter() = 500;
+//   // Set maximum number of iterations
+//   iterative_linear_solver_pt->max_iter() = 500;
  
-//  // Set tolerance
-  iterative_linear_solver_pt->tolerance() = 1.0e-8;   
+// //  // Set tolerance
+//   iterative_linear_solver_pt->tolerance() = 1.0e-8;   
  
-  AxisymmetricNavierStokesLSCPreconditioner* prec_pt = 
-   new AxisymmetricNavierStokesLSCPreconditioner;
-  //Set the mesh
-  prec_pt->set_navier_stokes_mesh(this->mesh_pt());
+//   AxisymmetricNavierStokesLSCPreconditioner* prec_pt = 
+//    new AxisymmetricNavierStokesLSCPreconditioner;
+//   //Set the mesh
+//   prec_pt->set_navier_stokes_mesh(this->mesh_pt());
 
-//  //Set the preconditioner
-  iterative_linear_solver_pt->preconditioner_pt() = prec_pt;
+// //  //Set the preconditioner
+//   iterative_linear_solver_pt->preconditioner_pt() = prec_pt;
  
-//  //Set the linear solver
-this->linear_solver_pt() = iterative_linear_solver_pt;*/
+// //  //Set the linear solver
+// this->linear_solver_pt() = iterative_linear_solver_pt;*/
 
 /*#ifdef OOMPH_HAS_HYPRE
 //Trap because HYPRE can't handle the case when OOMPH_HAS_MPI, but we

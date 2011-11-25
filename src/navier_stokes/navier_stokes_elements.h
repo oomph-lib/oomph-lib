@@ -315,7 +315,9 @@ fill_in_generic_residual_contribution_fp_press_adv_diff_robin_bc(
 /// Template-free base class for Navier-Stokes equations to avoid
 /// casting problems
 //======================================================================
-class TemplateFreeNavierStokesEquationsBase : virtual public FiniteElement
+class TemplateFreeNavierStokesEquationsBase : 
+public virtual NavierStokesElementWithDiagonalMassMatrices,
+ public virtual FiniteElement
 {
 
   public:
@@ -325,7 +327,6 @@ class TemplateFreeNavierStokesEquationsBase : virtual public FiniteElement
 
  /// Virtual destructor (empty)
  virtual ~TemplateFreeNavierStokesEquationsBase(){};
-
  
  /// \short Compute the residuals for the associated pressure advection 
  /// diffusion problem. Used by the Fp preconditioner.
@@ -931,7 +932,7 @@ public:
  
  /// Compute the diagonal of the velocity mass matrix hierher obsolete
  /// can go with LSC preconditioner itself.
- void get_velocity_mass_matrix_diagonal(Vector<double> &mass_diag);
+ void get_mass_matrix_diagonal(Vector<double> &mass_diag);
 
  /// \short Compute the diagonal of the velocity/pressure mass matrices.
  /// If which one=0, both are computed, otherwise only the pressure 

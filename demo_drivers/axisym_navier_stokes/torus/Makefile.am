@@ -9,5 +9,5 @@ torus_SOURCES = torus.cc
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
-torus_LDADD = -L@libdir@ -laxisym_navier_stokes -lgeneric \
+torus_LDADD = -L@libdir@ -lnavier_stokes -laxisym_navier_stokes -lgeneric \
                       $(EXTERNAL_LIBS) $(FLIBS)

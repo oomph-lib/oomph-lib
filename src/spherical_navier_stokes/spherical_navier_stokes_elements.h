@@ -55,7 +55,7 @@ namespace oomph
 /// in FSI problems, by deriving it from the FSIFluidElement base
 /// class. 
 //======================================================================
-class SphericalNavierStokesEquations : public virtual FSIFluidElement
+ class SphericalNavierStokesEquations : public virtual FSIFluidElement
 {
 
   public:
@@ -427,7 +427,7 @@ public:
   }
  
  /// Compute the diagonal of the velocity mass matrix
- void get_velocity_mass_matrix_diagonal(Vector<double> &mass_diag);
+ void get_mass_matrix_diagonal(Vector<double> &mass_diag);
 
  /// \short Output function: x,y,[z],u,v,[w],p
  /// in tecplot format. Default number of plot points

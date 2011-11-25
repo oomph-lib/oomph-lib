@@ -198,7 +198,7 @@ Vector<double> NavierStokesEquations<DIM>::Default_Gravity_vector(DIM,0.0);
 //================================================================
  template<unsigned DIM>
  void NavierStokesEquations<DIM>::
- get_velocity_mass_matrix_diagonal(Vector<double> &mass_diag)
+ get_mass_matrix_diagonal(Vector<double> &mass_diag)
  {
   
   // hierher -- this is about to become obsolete with demise of

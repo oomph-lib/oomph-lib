@@ -196,7 +196,7 @@ private:
  IterativeLinearSolver* Solver_pt;
  
  /// Preconditioner
- NavierStokesLSCPreconditioner* Prec_pt;
+ NavierStokesSchurComplementPreconditioner* Prec_pt;
 
  /// Inexact solver for P block
  Preconditioner* P_matrix_preconditioner_pt;
@@ -298,7 +298,7 @@ RectangularDrivenCavityProblem<ELEMENT>::RectangularDrivenCavityProblem(
    linear_solver_pt() = Solver_pt;
    
    // Set preconditioner
-   Prec_pt=new NavierStokesLSCPreconditioner;
+   Prec_pt=new NavierStokesSchurComplementPreconditioner;
    Prec_pt->set_navier_stokes_mesh(this->mesh_pt());
    Solver_pt->preconditioner_pt()=Prec_pt;
    

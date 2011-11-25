@@ -4221,12 +4221,114 @@ public:
 }; 
 
 
+
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
 
-}
 
+//======================================================================
+/// Pure virtual base class for elements that can be used with
+/// PressureBasedSolidLSCPreconditioner.
+//======================================================================
+class SolidElementWithDiagonalMassMatrix 
+{
+ 
+  public:
+ 
+ /// Empty constructor
+ SolidElementWithDiagonalMassMatrix(){}
+ 
+ /// Virtual destructor 
+ virtual ~SolidElementWithDiagonalMassMatrix(){}
+ 
+ /// Broken copy constructor
+ SolidElementWithDiagonalMassMatrix(
+  const SolidElementWithDiagonalMassMatrix&) 
+  { 
+   BrokenCopy::broken_copy(
+    "SolidElementWithDiagonalMassMatrix");
+  } 
+ 
+ /// Broken assignment operator
+ void operator=(const 
+                SolidElementWithDiagonalMassMatrix&) 
+  {
+   BrokenCopy::broken_assign(
+    "SolidElementWithDiagonalMassMatrix");
+  }
+ 
+ /// \short Get the diagonal of whatever represents the mass matrix
+ /// in the specific preconditionable element. For Navier-Stokes
+ /// elements this is the velocity mass matrix; for incompressible solids it's 
+ /// the mass matrix; ... 
+ virtual void get_mass_matrix_diagonal(Vector<double> &mass_diag)=0;
+ 
+};
+
+
+
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
+
+
+//======================================================================
+/// Pure virtual base class for elements that can be used with
+/// Navier-Stokes Schur complement preconditioner and provide the diagonal 
+/// of their velocity and pressure mass matrices -- needs to be defined here 
+/// (in generic)  because this applies to a variety of Navier-Stokes 
+/// elements (cartesian, cylindrical polar, ...)
+/// that can be preconditioned effectively by the Navier Stokes (!)
+/// preconditioners in the (cartesian) Navier-Stokes directory.
+//======================================================================
+class NavierStokesElementWithDiagonalMassMatrices
+{
+ 
+  public:
+ 
+ /// Empty constructor
+ NavierStokesElementWithDiagonalMassMatrices(){}
+ 
+ /// Virtual destructor 
+ virtual ~NavierStokesElementWithDiagonalMassMatrices(){}
+ 
+ /// Broken copy constructor
+ NavierStokesElementWithDiagonalMassMatrices(
+  const NavierStokesElementWithDiagonalMassMatrices&) 
+  { 
+   BrokenCopy::broken_copy(
+    "NavierStokesElementWithDiagonalMassMatrices");
+  } 
+ 
+ /// Broken assignment operator
+ void operator=(const 
+                NavierStokesElementWithDiagonalMassMatrices&) 
+  {
+   BrokenCopy::broken_assign(
+    "NavierStokesElementWithDiagonalMassMatrices");
+  }
+ 
+ /// \short Compute the diagonal of the velocity/pressure mass matrices.
+ /// If which one=0, both are computed, otherwise only the pressure 
+ /// (which_one=1) or the velocity mass matrix (which_one=2 -- the 
+ /// LSC version of the preconditioner only needs that one)
+ virtual void get_pressure_and_velocity_mass_matrix_diagonal(
+  Vector<double> &press_mass_diag, Vector<double> &veloc_mass_diag,
+  const unsigned& which_one=0)=0;
+ 
+};
+
+
+
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
+} // end of oomph-lib namespace
 
 #endif
 

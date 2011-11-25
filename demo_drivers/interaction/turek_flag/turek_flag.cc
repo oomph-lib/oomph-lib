@@ -804,9 +804,6 @@ TurekProblem(const double &length,
  // Set solid mesh:
  prec_pt->set_wall_mesh(solid_mesh_pt());
 
- // Set flags in the underlying Navier-Stokes preconditioner
- prec_pt->navier_stokes_preconditioner_pt()->enable_p_matrix_scaling();
-
  // Retain fluid onto solid terms
  prec_pt->use_block_triangular_version_with_fluid_on_solid();
 

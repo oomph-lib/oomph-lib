@@ -68,7 +68,7 @@ public:
 /// blocks in the 3x3 overall block matrix structure arising from
 /// the monolithic discretisation of Boussinesq problems.
 /// Dofs are decomposed into fluid velocity, pressure 
-/// and temperature unknowns. NavierStokesLSCPreconditioner is used
+/// and temperature unknowns. NavierStokesSchurComplementPreconditioner is used
 /// as the inexact solver for the fluid block; SuperLU (in 
 /// its incarnation as an "exact" preconditioner) is used for
 /// the temperature block. By default we retain the fluid on temperature off
@@ -88,8 +88,9 @@ public :
    Retain_temperature_onto_fluid_terms=false; 
    Retain_fluid_onto_temperature_terms=true;
 
-   // Create the Navier Stokes LSC preconditioner
-   Navier_stokes_preconditioner_pt = new NavierStokesLSCPreconditioner;
+   // Create the Navier Stokes preconditioner
+   Navier_stokes_preconditioner_pt = 
+    new NavierStokesSchurComplementPreconditioner;
    Navier_stokes_preconditioner_pt->disable_doc_time();
 
    //Set the temperature preconditioner
@@ -215,7 +216,8 @@ public :
                            DoubleVector &z);
 
  /// Access function to the Navier Stokes preconditioner (inexact solver)
- NavierStokesLSCPreconditioner* navier_stokes_preconditioner_pt() const
+ NavierStokesSchurComplementPreconditioner* 
+ navier_stokes_preconditioner_pt() const
   {
    return Navier_stokes_preconditioner_pt;
   }
@@ -248,7 +250,7 @@ private:
   }
 
  /// Pointer the Navier Stokes preconditioner (inexact solver)
- NavierStokesLSCPreconditioner* Navier_stokes_preconditioner_pt;
+ NavierStokesSchurComplementPreconditioner* Navier_stokes_preconditioner_pt;
 
  /// Pointer to the temperature preconditioner  (inexact solver)
  Preconditioner* Temperature_preconditioner_pt;
@@ -334,8 +336,8 @@ void BoussinesqPreconditioner::setup(Problem* problem_pt,
     ns_dof_lookup[i] = i;
    }
 
-  // Turn the Navier Stokes LSC preconditioner into a subsidiary preconditioner
-  // of this preconditioner
+  // Turn the Navier Stokes Schur complement preconditioner into a 
+  // subsidiary preconditioner of this preconditioner
   Navier_stokes_preconditioner_pt->
    turn_into_subsidiary_block_preconditioner(this,ns_dof_lookup);
 

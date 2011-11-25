@@ -42,6 +42,19 @@ namespace oomph
 template <class ELEMENT> 
 void SimpleCubicMesh<ELEMENT>::build_mesh(TimeStepper* time_stepper_pt)
 {
+
+ if ((Nx==1)||(Ny==1)||(Nz==1))
+  {
+   std::ostringstream error_message;
+   error_message 
+    << "SimpleCubicMesh needs at least two elements in each,\n"
+    << "coordinate direction. You have specified \n"
+    << "Nx=" << Nx << "; Ny=" << Ny << "; Nz=" << Nz << std::endl; 
+   throw OomphLibError(error_message.str(),
+                       "SimpleCubicMesh::build_mesh()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+
  //Set the number of boundaries
  set_nboundary(6);
 

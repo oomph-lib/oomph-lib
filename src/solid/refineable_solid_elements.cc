@@ -539,6 +539,126 @@ fill_in_generic_contribution_to_residuals_pvd(Vector<double> &residuals,
 }
  
 
+//=======================================================================
+/// Compute the diagonal of the velocity mass matrix for LSC 
+/// preconditioner.
+//=======================================================================
+template<unsigned DIM>
+void RefineablePVDEquationsWithPressure<DIM>::get_mass_matrix_diagonal(
+ Vector<double> &mass_diag)
+{
+ 
+ // Resize and initialise
+ mass_diag.assign(this->ndof(),0.0);
+ 
+ // find out how many nodes there are
+ unsigned n_node = this->nnode();
+ 
+ //Find out how many position types of dof there are
+ const unsigned n_position_type = this->nnodal_position_type();
+ 
+ //Set up memory for the shape functions
+ Shape psi(n_node,n_position_type);
+ DShape dpsidxi(n_node,n_position_type,DIM);
+ 
+ //Number of integration points
+ unsigned n_intpt = this->integral_pt()->nweight();
+ 
+ //Integer to store the local equations no
+ int local_eqn=0;
+ 
+ //Loop over the integration points
+ for(unsigned ipt=0; ipt<n_intpt; ipt++)
+  {
+   //Get the integral weight
+   double w = this->integral_pt()->weight(ipt);
+   
+   //Call the derivatives of the shape functions
+   double J = this->dshape_lagrangian_at_knot(ipt,psi,dpsidxi);
+   
+   //Premultiply weights and Jacobian
+   double W = w*J;
+   
+   unsigned n_master=1;
+   double hang_weight=1.0;
+   
+   //Loop over the nodes
+   for(unsigned l=0; l<n_node; l++)
+    {
+     //Get pointer to local node l
+     Node* local_node_pt = node_pt(l);
+     
+     // Cache hang status
+     bool is_hanging=local_node_pt->is_hanging();
+     
+     //If the node is a hanging node
+     if(is_hanging)
+      {      
+       n_master = local_node_pt->hanging_pt()->nmaster();
+      }
+     // Otherwise the node is its own master
+     else
+      {
+       n_master=1;
+      }
+     
+     // Storage for local equation numbers at node indexed by
+     // type and direction
+     DenseMatrix<int> position_local_eqn_at_node(n_position_type,DIM);
+     
+     // Loop over the master nodes
+     for(unsigned m=0;m<n_master;m++)
+      {
+       if (is_hanging)
+        {
+         //Find the equation numbers
+         position_local_eqn_at_node = 
+          local_position_hang_eqn(local_node_pt->
+                                  hanging_pt()->master_node_pt(m));
+         
+         //Find the hanging node weight
+         hang_weight = local_node_pt->hanging_pt()->master_weight(m);         
+        }
+       else
+        {
+         //Loop of types of dofs
+         for(unsigned k=0;k<n_position_type;k++)
+          {
+           //Loop over the displacement components
+           for(unsigned i=0;i<DIM;i++)
+            {
+             position_local_eqn_at_node(k,i) = position_local_eqn(l,k,i);
+            }
+          }
+         
+         // Hang weight is one
+         hang_weight=1.0;
+        }
+       
+       //Loop over the types of dof
+       for(unsigned k=0;k<n_position_type;k++)
+        {
+         //Loop over the directions
+         for(unsigned i=0; i<DIM; i++)
+          {
+           //Get the equation number
+           local_eqn =  position_local_eqn_at_node(k,i);
+           
+           //If not a boundary condition
+           if(local_eqn >= 0)
+            {
+             //Add the contribution
+             mass_diag[local_eqn] += pow(psi(l,k)*hang_weight,2) * W;
+            } //End of if not boundary condition statement
+          }//End of loop over dimension
+        } // End of dof type
+      }// End of loop over master nodes
+    } //End of loop over basis functions (nodes)   
+  } // End integration loop
+ 
+}
+
+
 
 //===========================================================================
 /// Fill in element's contribution to the elemental 

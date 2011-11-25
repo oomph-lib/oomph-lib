@@ -515,10 +515,7 @@ FSIChannelWithLeafletProblem<ELEMENT>::FSIChannelWithLeafletProblem(
    // Set solid mesh:
    prec_pt->set_wall_mesh(Wall_mesh_pt);
    
-   // Set flags in the underlying Navier-Stokes preconditioner
-   prec_pt->navier_stokes_preconditioner_pt()->enable_p_matrix_scaling();
-   
-   // By default, the LSC Preconditioner uses SuperLU as
+   // By default, the Schur complement preconditioner uses SuperLU as
    // an exact preconditioner (i.e. a solver) for the
    // momentum and Schur complement blocks.
    // Can overwrite this by passing pointers to

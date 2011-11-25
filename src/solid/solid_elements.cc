@@ -2155,6 +2155,73 @@ void PVDEquationsWithPressure<DIM>::output(FILE* file_pt,
 
 
 //=======================================================================
+/// Compute the diagonal of the velocity mass matrix for LSC 
+/// preconditioner.
+//=======================================================================
+template <unsigned DIM>
+void PVDEquationsWithPressure<DIM>::get_mass_matrix_diagonal(
+ Vector<double> &mass_diag)
+{
+ // Resize and initialise
+ mass_diag.assign(this->ndof(),0.0);
+ 
+ // find out how many nodes there are
+ unsigned n_node = this->nnode();
+ 
+ //Find out how many position types of dof there are
+ const unsigned n_position_type = this->nnodal_position_type();
+ 
+ //Set up memory for the shape functions
+ Shape psi(n_node,n_position_type);
+ DShape dpsidxi(n_node,n_position_type,DIM);
+ 
+ //Number of integration points
+ unsigned n_intpt = this->integral_pt()->nweight();
+ 
+ //Integer to store the local equations no
+ int local_eqn=0;
+ 
+ //Loop over the integration points
+ for(unsigned ipt=0; ipt<n_intpt; ipt++)
+  {
+   //Get the integral weight
+   double w = this->integral_pt()->weight(ipt);
+   
+   //Call the derivatives of the shape functions
+   double J = this->dshape_lagrangian_at_knot(ipt,psi,dpsidxi);
+   
+   //Premultiply weights and Jacobian
+   double W = w*J;
+   
+   //Loop over the nodes
+   for(unsigned l=0; l<n_node; l++)
+    {
+     //Loop over the types of dof
+     for(unsigned k=0;k<n_position_type;k++)
+      {
+       //Loop over the directions
+       for(unsigned i=0; i<DIM; i++)
+        {
+         //Get the equation number
+         local_eqn = this->position_local_eqn(l,k,i);
+         
+         //If not a boundary condition
+         if(local_eqn >= 0)
+          {
+           //Add the contribution
+           mass_diag[local_eqn] += pow(psi(l,k),2) * W;
+          } //End of if not boundary condition statement
+        }//End of loop over dimension
+      } // End of dof type
+    } //End of loop over basis functions
+   
+  }
+
+}
+
+
+
+//=======================================================================
 /// Compute the contravariant second Piola Kirchoff stress at a given local
 /// coordinate. Note: this replicates a lot of code that is already
 /// coontained in get_residuals() but without sacrificing efficiency

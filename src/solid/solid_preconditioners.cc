@@ -25,7 +25,7 @@
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 //LIC// 
 //LIC//====================================================================
-#include "axisym_navier_stokes_preconditioners.h"
+#include "solid_preconditioners.h"
 
 
 namespace oomph
@@ -33,14 +33,15 @@ namespace oomph
 
 
 
+
 //===========================================================================
-/// Setup the least-squares commutator AxisymmetricNavier Stokes preconditioner. This
-/// extracts blocks corresponding to the velocity and pressure unknowns,
-/// creates the matrices actually needed in the application of the
+/// Setup the least-squares commutator solid preconditioner. This
+/// extracts blocks corresponding to the position/displacement and pressure 
+/// unknowns, creates the matrices actually needed in the application of the
 /// preconditioner and deletes what can be deleted... Note that
 /// this preconditioner needs a CRDoubleMatrix.
 //============================================================================
- void AxisymmetricNavierStokesLSCPreconditioner::
+ void PressureBasedSolidLSCPreconditioner::
  setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt)
  {
 
@@ -55,20 +56,20 @@ namespace oomph
   clean_up_memory();
 
 #ifdef PARANOID
-  // paranoid check that the navier stokes mesh pt has been set
-  if (Navier_stokes_mesh_pt == 0)
+  // paranoid check that the solid mesh pt has been set
+  if (Solid_mesh_pt == 0)
    {
     std::ostringstream error_message;
-    error_message << "The navier stokes elements mesh pointer must be set.\n"
-                  << "Use method set_navier_stokes_mesh(...)";
+    error_message << "The solid mesh pointer must be set.\n"
+                  << "Use method set_solid_mesh(...)";
     throw OomphLibError(error_message.str(),
-                     	"AxisymmetricNavierStokesLSCPreconditioner::setup()",
+                     	"PressureBasedSolidLSCPreconditioner::setup()",
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif
 
   // set the mesh
-  this->set_mesh(0,problem_pt,Navier_stokes_mesh_pt);
+  this->set_mesh(0,problem_pt,Solid_mesh_pt);
 
   // Get blocks
   // ----------
@@ -81,10 +82,10 @@ namespace oomph
   if (cr_matrix_pt==0)
    {
     std::ostringstream error_message;
-    error_message << "AxisymmetricNavierStokesLSCPreconditioner only works with "
+    error_message << "PressureBasedSolidLSCPreconditioner only works with "
                   << "CRDoubleMatrix matrices" << std::endl;
     throw OomphLibError(error_message.str(),
-                     	"AxisymmetricNavierStokesLSCPreconditioner::setup()",
+                     	"PressureBasedSolidLSCPreconditioner::setup()",
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -94,7 +95,7 @@ namespace oomph
   // provided in the block-preconditionable elements in the problem)
 
   // this preconditioner has two types of block:
-  // type 0: velocity - corresponding to DOFs 0 to n-2
+  // type 0: displacement/positions - corresponding to DOFs 0 to n-2
   // type 1: pressure - corresponding to DOF n-1
   double t_block_start = TimingHelpers::timer();
   unsigned ndof_types = 0;
@@ -159,13 +160,13 @@ namespace oomph
       
       // Assemble the ivmm diagonal
       double ivmm_assembly_start_t = TimingHelpers::timer();
-      ivmm_pt = assemble_velocity_mass_matrix_diagonal();
+      ivmm_pt = assemble_mass_matrix_diagonal();
       double ivmm_assembly_finish_t = TimingHelpers::timer();
       if (Doc_time)
        {
         double 
          ivmm_assembly_time = ivmm_assembly_finish_t - ivmm_assembly_start_t;
-        oomph_info << "Time to assemble inverse velocity mass matrix [sec]: "
+        oomph_info << "Time to assemble inverse mass matrix [sec]: "
                    << ivmm_assembly_time << "\n";
        }
       
@@ -207,7 +208,7 @@ namespace oomph
                  << t_P_time << std::endl;
      }
 
-    // Multiply auxiliary matrix by diagonal of velocity mass matrix if 
+    // Multiply auxiliary matrix by diagonal of mass matrix if 
     // required
     if (P_matrix_using_scaling)
      {
@@ -309,18 +310,18 @@ namespace oomph
   else
    {
 
-    // get the inverse velocity mass matrix (Q)
+    // get the inverse mass matrix (Q)
     CRDoubleMatrix* ivmm_pt = 0;
     if (P_matrix_using_scaling)
      {
       double ivmm_assembly_start_t = TimingHelpers::timer();
-      ivmm_pt = assemble_velocity_mass_matrix_diagonal();
+      ivmm_pt = assemble_mass_matrix_diagonal();
       double ivmm_assembly_finish_t = TimingHelpers::timer();
       if (Doc_time)
        {
         double 
          ivmm_assembly_time = ivmm_assembly_finish_t - ivmm_assembly_start_t;
-        oomph_info << "Time to assemble Q (inverse diagonal velocity "
+        oomph_info << "Time to assemble Q (inverse diagonal "
                    << "mass matrix) [sec]: "
                    << ivmm_assembly_time << "\n";
        }
@@ -446,6 +447,12 @@ namespace oomph
     Using_default_p_preconditioner = true;
    }
 
+  // std::stringstream junk;
+  // junk << "p_matrix" << problem_pt->communicator_pt()->my_rank()
+  //      << ".dat";
+  // p_matrix_pt->sparse_indexed_output_with_offset(junk.str());
+  // oomph_info << "Done output of " << junk.str() << std::endl;
+  
   // Setup the preconditioner for the Pressure matrix
   double t_p_prec_start = TimingHelpers::timer();
   P_preconditioner_pt->setup(problem_pt, p_matrix_pt);
@@ -509,7 +516,7 @@ namespace oomph
 //=======================================================================
  /// Apply preconditioner to r.
 //=======================================================================
- void AxisymmetricNavierStokesLSCPreconditioner::
+ void PressureBasedSolidLSCPreconditioner::
  preconditioner_solve(const DoubleVector &r, DoubleVector &z)
  {
 
@@ -520,7 +527,7 @@ namespace oomph
     error_message << "setup must be called before using preconditioner_solve";
     throw OomphLibError(
      error_message.str(),
-     "AxisymmetricNavierStokesLSCPreconditioner::preconditioner_solve()",
+     "PressureBasedSolidLSCPreconditioner::preconditioner_solve()",
      OOMPH_EXCEPTION_LOCATION);
    }
   if (z.built())
@@ -532,14 +539,18 @@ namespace oomph
                     << "of global rows";
       throw OomphLibError(
        error_message.str(),
-       "AxisymmetricNavierStokesLSCPreconditioner::preconditioner_solve()",
+       "PressureBasedSolidLSCPreconditioner::preconditioner_solve()",
        OOMPH_EXCEPTION_LOCATION);      
      }
    }
 #endif
 
+  double t_start_overall = TimingHelpers::timer();
+  double t_start = TimingHelpers::timer();
+  double t_end=0;
+
   // if z is not setup then give it the same distribution
-  if (!z.distribution_pt()->built())
+  if (!z.built())
    {
     z.build(r.distribution_pt(),0.0);
    }
@@ -553,8 +564,17 @@ namespace oomph
 
   // Copy pressure values from residual vector to temp_vec:
   // Loop over all entries in the global vector (this one
-  // includes velocity and pressure dofs in some random fashion)
+  // includes displacement/position and pressure dofs in some random fashion)
   this->get_block_vector(1,r,temp_vec);
+
+
+  if(Doc_time)
+   {
+    t_end=TimingHelpers::timer();
+    oomph_info << "LSC prec solve: Time for get block vector: "
+               << t_end-t_start << std::endl;
+    t_start=TimingHelpers::timer();
+   }
 
   // NOTE: The vector temp_vec now contains the vector r_p.
 
@@ -567,13 +587,24 @@ namespace oomph
     error_message << "P_preconditioner_pt has not been set.";
     throw OomphLibError(
      error_message.str(),
-     "AxisymmetricNavierStokesLSCPreconditioner::preconditioner_solve()",
+     "PressureBasedSolidLSCPreconditioner::preconditioner_solve()",
      OOMPH_EXCEPTION_LOCATION);
    }
 #endif
 
   // use some Preconditioner's preconditioner_solve function
   P_preconditioner_pt->preconditioner_solve(temp_vec, another_temp_vec);
+
+
+  if(Doc_time)
+   {
+    t_end=TimingHelpers::timer();
+    oomph_info << "LSC prec solve: First P solve [nrow="
+               << P_preconditioner_pt->nrow() << "]: "
+               << t_end-t_start << std::endl;
+    t_start=TimingHelpers::timer();
+   }
+
 
   // NOTE: The vector another_temp_vec now contains the vector P^{-1} r_p
 
@@ -592,11 +623,31 @@ namespace oomph
     QBt_mat_vec_pt->multiply_transpose(another_temp_vec, temp_vec);
    }
 
+
+  if(Doc_time)
+   {
+    t_end=TimingHelpers::timer();
+    oomph_info << "LSC prec solve: E matrix vector product: "
+               << t_end-t_start << std::endl;
+    t_start=TimingHelpers::timer();
+   }
+
   // NOTE: The vector temp_vec now contains E P^{-1} r_p
 
   // Solve second pressure Poisson system using preconditioner_solve
   another_temp_vec.clear();
   P_preconditioner_pt->preconditioner_solve(temp_vec, another_temp_vec);
+
+
+  if(Doc_time)
+   {
+    t_end=TimingHelpers::timer();
+    oomph_info << "LSC prec solve: Second P solve [nrow="
+               << P_preconditioner_pt->nrow() << "]: "
+               << t_end-t_start << std::endl;
+    t_start=TimingHelpers::timer();
+   }
+
 
   // NOTE: The vector another_temp_vec now contains  z_p = P^{-1} E P^{-1} r_p
   //       as required (apart from the sign which we'll fix in the
@@ -608,8 +659,8 @@ namespace oomph
   temp_vec -= another_temp_vec;
   return_block_vector(1,temp_vec,z);
 
-  // Step 2 - apply preconditioner to velocity unknowns (block 0)
-  // ------------------------------------------------------------
+  // Step 2 - apply preconditioner to displacement/positon unknowns (block 0)
+  // ------------------------------------------------------------------------
   
   // Recall that another_temp_vec (computed above) contains the
   // negative of the solution of the Schur complement systen, -z_p.
@@ -618,14 +669,23 @@ namespace oomph
   temp_vec.clear();
   Bt_mat_vec_pt->multiply(another_temp_vec, temp_vec);
 
+
+  if(Doc_time)
+   {
+    t_end=TimingHelpers::timer();
+    oomph_info << "LSC prec solve: G matrix vector product: "
+               << t_end-t_start << std::endl;
+    t_start=TimingHelpers::timer();
+   }
+
   // NOTE: temp_vec now contains -G z_p
 
   // The vector another_temp_vec is no longer needed -- re-use it to store
-  // velocity quantities:
+  // displacement/position quantities:
   another_temp_vec.clear();
 
   // Loop over all enries in the global vector and find the
-  // entries associated with the velocities:
+  // entries associated with the displacement/position:
   get_block_vector(0,r,another_temp_vec);
   another_temp_vec += temp_vec;
  
@@ -640,7 +700,7 @@ namespace oomph
     error_message << "F_preconditioner_pt has not been set."; 
     throw OomphLibError(
      error_message.str(),
-     "AxisymmetricNavierStokesLSCPreconditioner::preconditioner_solve()",
+     "PressureBasedSolidLSCPreconditioner::preconditioner_solve()",
      OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -657,20 +717,28 @@ namespace oomph
     F_preconditioner_pt->preconditioner_solve(another_temp_vec, temp_vec);
     return_block_vector(0,temp_vec,z);
    }
+
+  if(Doc_time)
+   {
+    t_end=TimingHelpers::timer();
+    oomph_info << "LSC prec solve: F solve [nrow="
+               << P_preconditioner_pt->nrow() << "]: "
+               << t_end-t_start << std::endl;
+    oomph_info << "LSC prec solve: Overall "
+               << t_end-t_start_overall << std::endl;
+   }
+
  }
 
 
 //========================================================================
-/// Helper function to assemble the diagonal of the velocity
+/// Helper function to assemble the diagonal of the 
 /// mass matrix from the elemental contributions defined in
-/// AxisymmetricNavierStokesEquations::
-/// get_velocity_mass_matrix_diagonal(...).
+/// SolidElementWithDiagonalMassMatrix::get_mass_matrix_diagonal(...).
 //========================================================================
  CRDoubleMatrix* 
- AxisymmetricNavierStokesLSCPreconditioner::
- assemble_velocity_mass_matrix_diagonal()
+ PressureBasedSolidLSCPreconditioner::assemble_mass_matrix_diagonal()
  {
-
   // determine the rows required by this processor
   unsigned first_row = this->block_distribution_pt(0)->first_row();
   unsigned nrow_local = this->block_distribution_pt(0)->nrow_local();
@@ -698,7 +766,7 @@ namespace oomph
    }
 #endif
 
-  // next we get the diagonal velocity mass matrix data
+  // next we get the diagonal mass matrix data
   if (distributed)
    {
 #ifdef OOMPH_HAS_MPI
@@ -738,9 +806,9 @@ namespace oomph
      this->master_distribution_pt()->nrow_local() - 1;
 
     // find number of local elements
-    unsigned n_el = Navier_stokes_mesh_pt->nelement();
+    unsigned n_el = Solid_mesh_pt->nelement();
     
-    // the diagonal velocity mass matrix contributions that have been
+    // the diagonal mass matrix contributions that have been
     // classified and should be sent to another processor
     Vector<double>* classified_contributions_send 
      = new Vector<double>[nproc];
@@ -762,8 +830,8 @@ namespace oomph
     const LinearAlgebraDistribution* master_distribution_pt = 
      this->master_distribution_pt();
 
-    // get the velocity distribution pt
-    const LinearAlgebraDistribution* velocity_dist_pt 
+    // get the displacement/position distribution pt
+    const LinearAlgebraDistribution* displ_dist_pt 
      = this->block_distribution_pt(0);
 
     // get the contribution for each element
@@ -771,27 +839,51 @@ namespace oomph
      {
 
       // check that the element is not halo d
-      if (!Navier_stokes_mesh_pt->element_pt(e)->is_halo())
+      if (!Solid_mesh_pt->element_pt(e)->is_halo())
        {
         
         // find number of degrees of freedom in the element
         // (this is slightly too big because it includes the
         // pressure dofs but this doesn't matter)
-        unsigned el_dof = Navier_stokes_mesh_pt->element_pt(e)->ndof();
+        unsigned el_dof = Solid_mesh_pt->element_pt(e)->ndof();
         
         // allocate local storage for the element's contribution to the
-        // velocity mass matrix diagonal
+        // mass matrix diagonal
         Vector<double> el_vmm_diagonal(el_dof);
-        dynamic_cast<AxisymmetricNavierStokesEquations*>
-         (Navier_stokes_mesh_pt->element_pt(e))
-         ->get_velocity_mass_matrix_diagonal(el_vmm_diagonal);
+
+        SolidElementWithDiagonalMassMatrix*
+         cast_el_pt=dynamic_cast<
+         SolidElementWithDiagonalMassMatrix*>
+         ( Solid_mesh_pt->element_pt(e) );
+
+
+        if (cast_el_pt==0)
+         {
+#ifdef PARANOID
+          std::ostringstream error_message;
+          error_message 
+           << "Failed cast to "
+           << "SolidElementWithDiagonalMassMatrix*\n"
+           << "Element is of type: "
+           << typeid(*(Solid_mesh_pt->element_pt(e))).name() << "\n"
+           << typeid(Solid_mesh_pt->element_pt(e)).name() << std::endl;
+          OomphLibWarning(
+           error_message.str(),
+           "PressureBasedSolidLSCPreconditioner::assemble_mass_matrix_diagonal()",
+           OOMPH_EXCEPTION_LOCATION);
+#endif
+         }
+        else
+         {
+          cast_el_pt->get_mass_matrix_diagonal(el_vmm_diagonal);
+         }
         
         // get the contribution for each dof
         for (unsigned i = 0; i < el_dof; i++)
          {
 
           //Get the equation number
-          unsigned eqn_number = Navier_stokes_mesh_pt
+          unsigned eqn_number = Solid_mesh_pt
            ->element_pt(e)->eqn_number(i);
 
           // if I have lookup information on this processor
@@ -799,7 +891,7 @@ namespace oomph
               eqn_number <= last_lookup_row)
            {
             
-            // bypass non velocity DOFs
+            // bypass non displacement/position DOFs
             if ( this->block_number(eqn_number)==0 )
              {
               
@@ -809,10 +901,10 @@ namespace oomph
               // determine which processor requires the block index
               for (unsigned p = 0; p < nproc; p++)
                {
-                if (index >= velocity_dist_pt->first_row(p) &&
+                if (index >= displ_dist_pt->first_row(p) &&
                     (index < 
-                     (velocity_dist_pt->first_row(p)
-                      +velocity_dist_pt->nrow_local(p))))
+                     (displ_dist_pt->first_row(p)
+                      +displ_dist_pt->nrow_local(p))))
                  {
                   
                   // if it is required by this processor then add the 
@@ -879,7 +971,7 @@ namespace oomph
        }
      }
     
-    // then all-to-all com number of unclassified to be sent / recv
+    // then all-to-all number of unclassified to be sent / recv
     unsigned* n_unclassified_recv = new unsigned[nproc];
     MPI_Alltoall(n_unclassified_send,1,MPI_UNSIGNED,
                  n_unclassified_recv,1,MPI_UNSIGNED,
@@ -1013,7 +1105,7 @@ namespace oomph
       for (unsigned i = 0; i < n_recv; i++)
        {
         unsigned eqn_number = unclassified_indices_recv[p][i];
-        // bypass non velocity DOFs
+        // bypass non displacement/position DOFs
         if ( this->block_number(eqn_number)==0 )
          {
            
@@ -1025,10 +1117,10 @@ namespace oomph
            {
              
              
-            if (index >= velocity_dist_pt->first_row(pp) &&
+            if (index >= displ_dist_pt->first_row(pp) &&
                 (index < 
-                 (velocity_dist_pt->first_row(pp)
-                  +velocity_dist_pt->nrow_local(pp))))
+                 (displ_dist_pt->first_row(pp)
+                  +displ_dist_pt->nrow_local(pp))))
              {
                
               // if it is required by this processor then add the 
@@ -1244,7 +1336,7 @@ namespace oomph
    {
 
     // find number of elements
-    unsigned n_el = Navier_stokes_mesh_pt->nelement();
+    unsigned n_el = Solid_mesh_pt->nelement();
     
     // get the contribution for each element
     for (unsigned e = 0; e < n_el; e++)
@@ -1253,23 +1345,46 @@ namespace oomph
       // find number of degrees of freedom in the element
       // (this is slightly too big because it includes the
       // pressure dofs but this doesn't matter)
-      unsigned el_dof = Navier_stokes_mesh_pt->element_pt(e)->ndof();
+      unsigned el_dof = Solid_mesh_pt->element_pt(e)->ndof();
 
       // allocate local storage for the element's contribution to the
-      // velocity mass matrix diagonal
+      //  mass matrix diagonal
       Vector<double> el_vmm_diagonal(el_dof);
-      dynamic_cast< AxisymmetricNavierStokesEquations*>
-       ( Navier_stokes_mesh_pt->element_pt(e) )
-         ->get_velocity_mass_matrix_diagonal(el_vmm_diagonal);
+      
+      SolidElementWithDiagonalMassMatrix*
+       cast_el_pt=dynamic_cast<
+       SolidElementWithDiagonalMassMatrix*>
+       ( Solid_mesh_pt->element_pt(e) );
+
+      if (cast_el_pt==0)
+       {
+#ifdef PARANOID
+        std::ostringstream error_message;
+        error_message 
+         << "Failed cast to "
+         << "SolidElementWithDiagonalMassMatrix*\n"
+         << "Element is of type: "
+         << typeid(*(Solid_mesh_pt->element_pt(e))).name() << "\n"
+         << typeid(Solid_mesh_pt->element_pt(e)).name() << std::endl;
+        OomphLibWarning(
+         error_message.str(),
+         "PressureBasedSolidLSCPreconditioner::assemble_mass_matrix_diagonal()",
+         OOMPH_EXCEPTION_LOCATION);
+#endif
+       }
+      else
+       {
+        cast_el_pt->get_mass_matrix_diagonal(el_vmm_diagonal);
+       }
 
       // get the contribution for each dof
       for (unsigned i = 0; i < el_dof; i++)
        {
         //Get the equation number
-        unsigned eqn_number = Navier_stokes_mesh_pt
+        unsigned eqn_number = Solid_mesh_pt
          ->element_pt(e)->eqn_number(i);
         
-        // bypass non velocity DOFs
+        // bypass non displacement/position DOFs
         if ( this->block_number(eqn_number)==0 )
          {
 
@@ -1310,7 +1425,7 @@ namespace oomph
 //=========================================================================
 /// Helper function to delete preconditioner data.
 //=========================================================================
- void AxisymmetricNavierStokesLSCPreconditioner::clean_up_memory()
+ void PressureBasedSolidLSCPreconditioner::clean_up_memory()
  {
   if (Preconditioner_has_been_setup)
    {
@@ -1331,7 +1446,7 @@ namespace oomph
       E_mat_vec_pt = 0;
      }
 
-    // delete stuff from velocity solve
+    // delete stuff from displacement/position solve
     if (Using_default_f_preconditioner)
      {
       delete F_preconditioner_pt;

@@ -394,7 +394,7 @@ FpTestProblem::FpTestProblem(const unsigned& n_el,
  Prec_pt=prec_pt;
    
  
- // By default, the LSC Preconditioner uses SuperLU as
+ // By default, the Schur Complement Preconditioner uses SuperLU as
  // an exact preconditioner (i.e. a solver) for the
  // momentum and Schur complement blocks. 
  // Can overwrite this by passing pointers to 
@@ -463,38 +463,22 @@ FpTestProblem::FpTestProblem(const unsigned& n_el,
    prec_pt->set_navier_stokes_mesh(Bulk_mesh_pt);    
    
    
-// hierher
-//  else
-//   {   
-//    // Preconditioner
-//    NavierStokesLSCPreconditioner* lsc_prec_pt=
-//     new NavierStokesLSCPreconditioner;
-   
-
-//    // Set Navier Stokes mesh
-//    lsc_prec_pt->set_navier_stokes_mesh(Bulk_mesh_pt);
-    
-//    oomph_info << "Orig lsc\n";     
-//    Prec_pt=lsc_prec_pt;
-//   }
- 
-
- // Set the boundary conditions for this problem: All nodes are
- // free by default -- just pin the ones that have Dirichlet conditions
- // here. 
- unsigned num_bound = Bulk_mesh_pt->nboundary();
- for(unsigned ibound=0;ibound<num_bound;ibound++)
-  {
-   unsigned num_nod= Bulk_mesh_pt->nboundary_node(ibound);
-   for (unsigned inod=0;inod<num_nod;inod++)
+   // Set the boundary conditions for this problem: All nodes are
+   // free by default -- just pin the ones that have Dirichlet conditions
+   // here. 
+   unsigned num_bound = Bulk_mesh_pt->nboundary();
+   for(unsigned ibound=0;ibound<num_bound;ibound++)
     {
-     // Loop over values (u, v and w velocities)
-     for (unsigned i=0;i<3;i++)
+     unsigned num_nod= Bulk_mesh_pt->nboundary_node(ibound);
+     for (unsigned inod=0;inod<num_nod;inod++)
       {
-       Bulk_mesh_pt->boundary_node_pt(ibound,inod)->pin(i); 
+       // Loop over values (u, v and w velocities)
+       for (unsigned i=0;i<3;i++)
+        {
+         Bulk_mesh_pt->boundary_node_pt(ibound,inod)->pin(i); 
+        }
       }
-    }
-  } // end loop over boundaries
+    } // end loop over boundaries
 
  
 
