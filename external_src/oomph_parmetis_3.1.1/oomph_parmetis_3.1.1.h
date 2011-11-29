@@ -14,7 +14,10 @@
 #ifndef __parmetis_h__
 #define __parmetis_h__
 
+//ALH: Need to buffer this case for when compiling in serial
+#ifdef OOMPH_HAS_MPI
 #include <mpi.h>
+#endif
 
 #ifndef _MSC_VER
 #define __cdecl
