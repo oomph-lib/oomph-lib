@@ -234,12 +234,6 @@ namespace Global_Physical_Variables
  /// Pseudo-solid Poisson ratio
  double Nu=0.1;
 
- /// Pseudo-solid Mooney-Rivlin parameter
- double C1=1.0;
-
- /// Pseudo-solid Young's modulus
- double E=0.5;
-
  /// Traction applied on the fluid at the left (inflow) boundary
  void prescribed_traction(const double& t,
                           const Vector<double>& x,
@@ -546,10 +540,7 @@ FSICollapsibleChannelProblem<ELEMENT>::FSICollapsibleChannelProblem(
  bulk_mesh_pt()->spatial_error_estimator_pt()=error_estimator_pt;
  
  //Set the constitutive law
- Constitutive_law_pt = new IsotropicStrainEnergyFunctionConstitutiveLaw(
-  new GeneralisedMooneyRivlin(&Global_Physical_Variables::Nu,
-                              &Global_Physical_Variables::C1,
-                              &Global_Physical_Variables::E));
+ Constitutive_law_pt = new GeneralisedHookean(&Global_Physical_Variables::Nu);
 
 
  // Complete build of fluid mesh

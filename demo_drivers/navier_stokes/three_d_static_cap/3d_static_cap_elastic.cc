@@ -55,12 +55,6 @@ namespace Global_Physical_Variables
  /// Pseudo-solid Poisson ratio
  double Nu=0.1;
 
- /// Pseudo-solid Mooney-Rivlin parameter
- double C1=1.0;
-
- /// Pseudo-solid Young's modulus
- double E=0.5;
-
 } // end_of_namespace
 
 namespace WallFunction
@@ -449,12 +443,8 @@ SolidFreeSurfaceRotationProblem(DocInfo& doc_info,
 
  //Boundary 4 is the top, so it's traction free
  
- //Set the constituive law
- Constitutive_law_pt = new IsotropicStrainEnergyFunctionConstitutiveLaw(
-  new GeneralisedMooneyRivlin(&Global_Physical_Variables::Nu,
-                              &Global_Physical_Variables::C1,
-                              &Global_Physical_Variables::E));
- 
+ //Set the constitutive law
+ Constitutive_law_pt = new GeneralisedHookean(&Global_Physical_Variables::Nu);
  
  // Loop over the elements to set up element-specific 
  // things that cannot be handled by constructor

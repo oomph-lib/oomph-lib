@@ -156,20 +156,11 @@ private:
 //================================================================
 namespace Global_Physical_Variables
 {
- /// Pointer to strain energy function
- StrainEnergyFunction* Strain_energy_function_pt;
-
  /// Pointer to constitutive law
  ConstitutiveLaw* Constitutive_law_pt;
 
- /// Elastic modulus
- double E=1.0;
-
  /// Poisson's ratio
  double Nu=0.3;
-
- /// "Mooney Rivlin" coefficient for generalised Mooney Rivlin law
- double C1=1.3;
 
 }
 
@@ -476,20 +467,11 @@ int main(int argc, char* argv[])
  CommandLineArgs::setup(argc,argv);
 
  //Set physical parameters
- Global_Physical_Variables::E = 2.1;  
  Global_Physical_Variables::Nu = 0.4; 
- Global_Physical_Variables::C1 = 1.3; 
-
- // Define a strain energy function: Generalised Mooney Rivlin
- Global_Physical_Variables::Strain_energy_function_pt = 
-  new GeneralisedMooneyRivlin(&Global_Physical_Variables::Nu,
-                              &Global_Physical_Variables::C1,
-                              &Global_Physical_Variables::E);
  
  // Define a constitutive law (based on strain energy function)
   Global_Physical_Variables::Constitutive_law_pt = 
-   new IsotropicStrainEnergyFunctionConstitutiveLaw(
-    Global_Physical_Variables::Strain_energy_function_pt);
+   new GeneralisedHookean(&Global_Physical_Variables::Nu);
 
   // Set up the problem: Choose a hybrid element that combines the
   // 3x3 node refineable quad Poisson element with a displacement-based

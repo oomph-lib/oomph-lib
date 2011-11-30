@@ -38,6 +38,10 @@ typedef short idxtype;
 #endif
 
 
+//ALH: Also need to buffer out the entire rest of the code
+//     because MPIComm is not defined
+#ifdef OOMPH_HAS_MPI
+
 /*************************************************************************
 * Constants 
 **************************************************************************/
@@ -204,3 +208,4 @@ void __cdecl PARDAMETIS(
 #define PARMETIS_RTYPE_2PHASE    3
 
 #endif 
+#endif

@@ -85,12 +85,6 @@ namespace Global_Physical_Variables
  /// Pseudo-solid Poisson ratio
  double Nu=0.1;
 
- /// Pseudo-solid Mooney-Rivlin parameter
- double C1=1.0;
-
- /// Pseudo-solid Young's modulus
- double E=2.2;
-
  // MH: No longer needed
  /// Timescale ratio (density) for (pseudo-)solid
  //double Lambda_sq=0.0;
@@ -662,11 +656,7 @@ int main(int argc, char **argv)
  using namespace Global_Physical_Variables;
  
  //Set the constitutive law for the mesh deformation
- Constitutive_law_pt  =
-  new IsotropicStrainEnergyFunctionConstitutiveLaw(
-   new GeneralisedMooneyRivlin(&Global_Physical_Variables::Nu,
-                               &Global_Physical_Variables::C1,
-                               &Global_Physical_Variables::E));
+ Constitutive_law_pt  = new GeneralisedHookean(&Global_Physical_Variables::Nu);
 
 
 #ifdef CR_ELEMENT

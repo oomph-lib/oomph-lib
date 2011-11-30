@@ -46,12 +46,6 @@ namespace Global_Physical_Variables
  /// Pseudo-solid Poisson ratio
  double Nu=0.1;
 
- /// Pseudo-solid Mooney-Rivlin parameter
- double C1=1.0;
-
- /// Pseudo-solid Young's modulus
- double E=2.2;
-
  ///Direction of the wall normal vector
  Vector<double> Wall_normal;
 
@@ -966,14 +960,7 @@ RefineableRotatingCylinderProblem<ELEMENT>::RefineableRotatingCylinderProblem(
  //linear_solver_pt() = new HSL_MA42;
 
  //Set the constituive law
- Constitutive_law_pt = 
-  //obsolete: new DeformedMetricTensorLinearElasticConstitutiveLaw(1.0,0.001);
-  //new GeneralisedHookean(0.001,1.0);
-  new IsotropicStrainEnergyFunctionConstitutiveLaw(
-   new GeneralisedMooneyRivlin(&Global_Physical_Variables::Nu,
-                               &Global_Physical_Variables::C1,
-                               &Global_Physical_Variables::E));
- 
+ Constitutive_law_pt = new GeneralisedHookean(&Global_Physical_Variables::Nu);
 
  
  /// Switch off full doc for frontal solver

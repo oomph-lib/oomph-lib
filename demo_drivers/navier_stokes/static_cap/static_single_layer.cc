@@ -57,12 +57,6 @@ namespace Global_Physical_Variables
  /// Pseudo-solid Poisson ratio
  double Nu=0.1;
 
- /// Pseudo-solid Mooney-Rivlin parameter
- double C1=1.0;
-
- /// Pseudo-solid Young's modulus
- double E=2.2;
-
  ///Direction of the wall normal vector
  Vector<double> Wall_normal;
 
@@ -550,9 +544,6 @@ private:
  /// The contact angle
  double Angle;
 
- /// Strain energy function that will be used in the constitutive law
- StrainEnergyFunction* Strain_energy_function_pt;
-
  /// Constitutive law used to determine the mesh deformation
  ConstitutiveLaw *Constitutive_law_pt;
 
@@ -659,12 +650,8 @@ PseudoSolidCapProblem<ELEMENT>::PseudoSolidCapProblem(const bool& hijack_interna
   }
 
  //Set the constituive law
- Strain_energy_function_pt =    
-  new GeneralisedMooneyRivlin(&Global_Physical_Variables::Nu,
-                              &Global_Physical_Variables::C1,
-                              &Global_Physical_Variables::E); 
- Constitutive_law_pt = 
-  new IsotropicStrainEnergyFunctionConstitutiveLaw(Strain_energy_function_pt);
+ Constitutive_law_pt =  
+  new GeneralisedHookean(&Global_Physical_Variables::Nu);
  
  //Loop over the elements to set the consitutive law and jacobian
  unsigned n_bulk = Bulk_mesh_pt->nelement();
@@ -800,7 +787,6 @@ PseudoSolidCapProblem<ELEMENT>::~PseudoSolidCapProblem()
 
  //Delete the constitutive law
  delete Constitutive_law_pt;
- delete Strain_energy_function_pt;
 
  //If not the same as the external pressure, delete the traded pressure
  if(Traded_pressure_data_pt!=External_pressure_data_pt)

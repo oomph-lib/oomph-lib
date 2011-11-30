@@ -341,7 +341,7 @@ A hyperelastic material is one for which the stress can be derived
 from a potential function \f$ W(\gamma_{ij})\f$,
 known as the strain-energy function, and
 \f[
- \sigma^{ij} = \frac{1}{\sqrt{G}}\frac{\partial W}{\partial
+ \sigma^{ij} = \frac{\partial W}{\partial
  \gamma_{ij}}.
 \f]
  A strain-energy function exists if the  elastic deformations are 
@@ -356,10 +356,10 @@ and can be written \f$W(I_{1},I_{2},I_{3})\f$. It may be shown, see
 Green \& Zerna,  that
 \f[ \sigma^{ij} = \Phi g^{ij} + \Psi B^{ij} + p G^{ij},\f]
 where 
-\f[ \Phi = \frac{2}{\sqrt{I_{3}}} \frac{\partial W}{\partial
+\f[ \Phi = 2\, \frac{\partial W}{\partial
 I_{1}},\quad
- \Psi = \frac{2}{\sqrt{I_{3}}} \frac{\partial W}{\partial I_{2}},\quad
- p = 2\sqrt{I_{3}} \frac{\partial W}{\partial I_{3}} \quad\mbox{and}\quad
+ \Psi = 2\, \frac{\partial W}{\partial I_{2}},\quad
+ p = 2 I_{3} \frac{\partial W}{\partial I_{3}} \quad\mbox{and}\quad
 B^{ij} = I_{1} g^{ij} - g^{ir}g^{js}G_{rs}
 \f]
 

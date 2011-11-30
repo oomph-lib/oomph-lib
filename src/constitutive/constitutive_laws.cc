@@ -969,9 +969,12 @@ calculate_second_piola_kirchhoff_stress(
   }
 
  //Now set the values of the functions phi, psi and p (Green & Zerna notation)
- double phi = 2.0*dWdI[0]/sqrt(I[2]);
- double psi = 2.0*dWdI[1]/sqrt(I[2]);
- double p = 2.0*dWdI[2]*sqrt(I[2]);
+ //Note that the Green & Zerna stress \tau^{ij} is s^{ij}/sqrt(I[2]),
+ //where s^{ij} is the desired second Piola-Kirchhoff stress tensor
+ //so we multiply their constants by sqrt(I[2])
+ double phi = 2.0*dWdI[0];
+ double psi = 2.0*dWdI[1];
+ double p = 2.0*dWdI[2]*I[2];
 
  //Put it all together to get the stress
  for(unsigned i=0;i<dim;i++)
@@ -1188,15 +1191,16 @@ calculate_second_piola_kirchhoff_stress(const DenseMatrix<double> &g,
   }
 
  //Now set the values of the functions phi and psi (Green & Zerna notation)
- double phi = 2.0*dWdI[0]/sqrt(I[2]);
- double psi = 2.0*dWdI[1]/sqrt(I[2]);
+ //but multiplied by sqrt(I[2]) to recover the second Piola-Kirchhoff stress
+ double phi = 2.0*dWdI[0];
+ double psi = 2.0*dWdI[1];
 
  //Choose inverse kappa to be one...
  inv_kappa = 1.0;
 
  //...then the generalised dilation is the same as p  in Green & Zerna's
- // notation
- gen_dil = 2.0*dWdI[2]*sqrt(I[2]);
+ // notation, but multiplied by sqrt(I[2])
+ gen_dil = 2.0*dWdI[2]*I[2];
 
  //Calculate the non-isotropic part of the stress
  for(unsigned i=0;i<dim;i++)
