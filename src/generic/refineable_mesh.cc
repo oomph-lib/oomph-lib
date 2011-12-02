@@ -931,6 +931,20 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
    // is still hanging -- we don't know this yet, and this step makes
    // sure that all nodes are fully functional and up-to-date, should
    // they become non-hanging below).
+   //
+   //
+   // However, if we have a fixed mesh and hanging nodes on the boundary 
+   // become non-hanging they will not necessarily respect the curvilinear
+   // boundaries. This can only happen in 3D of course because it is not
+   // possible to have hanging nodes on boundaries in 2D.
+   // The solution is to store those nodes on the boundaries that are
+   // currently hanging and then check to see whether they have changed
+   // status at the end of the refinement procedure.
+   // If it has changed, then we need to adjust their positions.
+   const unsigned n_boundary = this->nboundary();
+   const unsigned mesh_dim = this->finite_element_pt(0)->dim();
+   Vector<std::set<Node*> > hanging_nodes_on_boundary_pt(n_boundary);
+
    unsigned long n_node=this->nnode();
    for (unsigned long n=0;n<n_node;n++)
     {
@@ -948,7 +962,7 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
 
      //If the node is hanging then ...
      if(is_hanging)
-      {
+      {       
        // Unless they are turned into hanging nodes again below
        // (this might or might not happen), fill in all the necessary
        // data to make them 'proper' nodes again.
@@ -988,7 +1002,33 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
            solid_node_pt->xi(i) = solid_node_pt->lagrangian_position(i);
           }
         }
-      }
+
+       //Now store geometrically hanging nodes on boundaries that
+       //may need updating after refinement.
+       //There will only be a problem if we have 3 spatial dimensions
+       if((mesh_dim > 2) && (nod_pt->is_hanging()))
+        {
+         //If the node is on a boundary then add a pointer to the node
+         //to our lookup scheme
+         if(nod_pt->is_on_boundary())
+          {
+           //Storage for the boundaries on which the Node is located
+           std::set<unsigned>* boundaries_pt;
+           nod_pt->get_boundaries_pt(boundaries_pt);
+           if(boundaries_pt!=0)
+            {
+             //Loop over the boundaries and add a pointer to the node
+             //to the appropriate storage scheme
+             for(std::set<unsigned>::iterator it=boundaries_pt->begin();
+                 it!=boundaries_pt->end();++it)
+              {
+               hanging_nodes_on_boundary_pt[*it].insert(nod_pt);
+              }
+            }
+          }
+        }
+
+      } //End of is_hanging
 
      // Initially mark all nodes as 'non-hanging' and `obsolete' 
      nod_pt->set_nonhanging();
@@ -1251,6 +1291,140 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
                 << t_end-t_start << std::endl;
      t_start = TimingHelpers::timer();
     }
+
+
+   //Now we can correct the nodes on boundaries that were hanging that
+   //are no longer hanging
+   //Only bother if we have more than two dimensions
+   if(mesh_dim > 2)
+    {
+     //Loop over the boundaries
+     for(unsigned b=0;b<n_boundary;b++)
+      {
+       //If the nodes that were hanging are still hanging then remove them
+       //from the set (note increment is not in for command for efficiencty)
+       for(std::set<Node*>::iterator 
+            it=hanging_nodes_on_boundary_pt[b].begin();
+            it!=hanging_nodes_on_boundary_pt[b].end();)
+        {
+         if((*it)->is_hanging()) 
+          {hanging_nodes_on_boundary_pt[b].erase(it++);}
+         else {++it;}
+        }
+
+       //Are there any nodes that have changed geometric hanging status
+       //on the boundary
+       //The slightly painful part is that we must adjust the position
+       //via the macro-elements which are only available through the
+       //elements and not the nodes.
+       if(hanging_nodes_on_boundary_pt[b].size()>0)
+        {
+         //If so we loop over all elements adjacent to the boundary
+         unsigned n_boundary_element = this->nboundary_element(b);
+         for(unsigned e=0;e<n_boundary_element;++e)
+          {
+           //Get a pointer to the element
+           FiniteElement* el_pt = this->boundary_element_pt(b,e);
+
+           //Do we have a solid element
+           SolidFiniteElement* solid_el_pt = 
+            dynamic_cast<SolidFiniteElement*>(el_pt);
+           
+           //Determine whether there is a macro element
+           bool macro_present = (el_pt->macro_elem_pt()!=0);
+           //Or a solid macro element
+           if(solid_el_pt!=0)
+            {
+             macro_present |= (solid_el_pt->undeformed_macro_elem_pt()!=0);
+            }
+           
+           //Only bother to do anything if there is a macro element
+           //or undeformed macro element in a SolidElement
+           if(macro_present)
+            {
+             //Loop over the nodes 
+             //ALH: (could optimise to only loop over
+             //node associated with the boundary with more effort)
+             unsigned n_el_node = el_pt->nnode();
+             for(unsigned n=0;n<n_el_node;n++)
+              {
+               //Cache pointer to the node
+               Node* nod_pt = el_pt->node_pt(n);
+               if(nod_pt->is_on_boundary(b))
+                {
+                 //Is the Node in our set
+                 std::set<Node*>::iterator it = 
+                  hanging_nodes_on_boundary_pt[b].find(nod_pt);
+                 //If we have found the Node the update the position
+                 //to be consistent with the macro-element representation
+                 if(it!=hanging_nodes_on_boundary_pt[b].end())
+                  {
+                   //Specialise local and global coordinates to 3D
+                   //because there is only a problem in 3D.
+                   Vector<double> s(3), x(3);
+                   //Find the local coordinate of the ndoe
+                   el_pt->local_coordinate_of_node(n,s);
+                   //Find the number of time history values
+                   const unsigned ntstorage = nod_pt->ntstorage();
+                   
+                   //Do we have a solid node
+                   SolidNode* solid_node_pt = dynamic_cast<SolidNode*>(nod_pt);
+                   if(solid_node_pt)
+                    {
+                     std::ostringstream warn_stream;
+                     warn_stream <<
+                      "Solid Node has become unhanging on boundary.\n"
+                                 <<
+                      "The Lagrangian coordinate may be inconsistent with\n"
+                                 <<
+                      "the undeformed macro element, if there is one\n";
+                     OomphLibWarning(warn_stream.str(),
+                                     "TreeBasedRefineableMesh::adapt_mesh()",
+                                     OOMPH_EXCEPTION_LOCATION);
+                    }
+                   else
+                    {
+#ifdef PARANOID
+                     //Say what we are doing to the node
+                     oomph_info << "Boundary "
+                                <<  b << ": Adjusting position of Node from "
+                                << "(" << nod_pt->x(0) << ", "
+                                << nod_pt->x(1) << ", " << nod_pt->x(2) 
+                                << ") to ";
+#endif
+                     
+                     //Set position and history values from the macro-element
+                     //representation
+                     for(unsigned t=0;t<ntstorage;t++)
+                      {
+                       //Get the history value from the macro element
+                       el_pt->get_x(t,s,x);
+#ifdef PARANOID
+                       if(t==0)
+                        {
+                         oomph_info << "(" << x[0] << ", "
+                                    << x[1] << ", " << x[2] << ")\n";
+                        }
+#endif
+                       //Set the coordinate to that of the macroelement
+                       //representation
+                       for(unsigned i=0;i<3;i++) {nod_pt->x(t,i) = x[i];}
+                      }
+                    } //End of non-solid node case
+                   
+                   //Now remove the node from the list
+                   hanging_nodes_on_boundary_pt[b].erase(it);
+                   //If there are no Nodes left then exit the loops
+                   if(hanging_nodes_on_boundary_pt[b].size()==0)
+                    {e=n_boundary_element; break;}
+                  }
+                }
+              }
+            } //End of macro element case
+          }
+        }
+      }
+    } //End of case when we have fixed nodal positions
 
    // Final doc
    //-----------

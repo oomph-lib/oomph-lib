@@ -2,7 +2,7 @@
 
 
 #Set the number of tests to be checked
-NUM_TESTS=1
+NUM_TESTS=2
 
 # Setup validation directory
 #---------------------------
@@ -10,19 +10,19 @@ touch Validation
 rm -r -f Validation
 mkdir Validation
 
-# Validation for 3D entry flow Navier Stokes problem
-#---------------------------------------------------------
+# Validation for 3D entry flow Navier Stokes problem (quarter tube)
+#-------------------------------------------------------------------
 cd Validation
 
-echo "Running 3D entry flow Navier Stokes validation "
+echo "Running 3D entry flow (quarter tube) Navier Stokes validation "
 mkdir RESLT_TH
 mkdir RESLT_CR
 
 ../three_d_entry_flow lalala > OUTPUT
 echo "done"
 echo " " >> validation.log
-echo "3D entry flow Navier Stokes validation" >> validation.log
-echo "--------------------------------------" >> validation.log
+echo "3D entry flow (quarter tube) Navier Stokes validation" >> validation.log
+echo "-----------------------------------------------------" >> validation.log
 echo " " >> validation.log
 echo "Validation directory: " >> validation.log
 echo " " >> validation.log
@@ -35,6 +35,34 @@ if test "$1" = "no_fpdiff"; then
 else
 ../../../../bin/fpdiff.py ../validata/entry_flow_results.dat.gz  \
          entry_flow_results.dat >> validation.log
+fi
+
+mv RESLT_TH RESLT_TH_quarter
+mv RESLT_CR RESLT_CR_quarter
+
+# Validation for 3D entry flow (full tube) Navier Stokes problem
+#--------------------------------------------------------------------
+
+echo "Running 3D entry flow (full tube) Navier Stokes validation "
+mkdir RESLT_TH
+
+../full_tube > OUTPUT_full
+echo "done"
+echo " " >> validation.log
+echo "3D entry flow (full tube) Navier Stokes validation" >> validation.log
+echo "--------------------------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat  RESLT_TH/soln_Re50.dat  > full_tube.dat
+
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../../bin/fpdiff.py ../validata/full_tube.dat.gz  \
+         full_tube.dat >> validation.log
 fi
 
 # Append log to main validation log
