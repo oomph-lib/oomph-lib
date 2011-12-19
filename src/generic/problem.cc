@@ -9581,6 +9581,14 @@ double Problem::doubly_adaptive_unsteady_newton_solve(const double &dt_desired,
  oomph_info << "Accepted solution taken with timestep: " 
             << dt_taken << std::endl;
 
+
+ // Bail out straightaway if no spatial adaptation allowed
+ if (max_adapt==0)
+  {
+   oomph_info << "No spatial refinement allowed; max_adapt=0\n";
+   return new_dt;
+  }
+
  // Adapt problem/mesh
  unsigned n_refined=0;
  unsigned n_unrefined=0;
