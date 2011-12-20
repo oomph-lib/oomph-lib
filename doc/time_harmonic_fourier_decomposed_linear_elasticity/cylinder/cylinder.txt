@@ -1,0 +1,388 @@
+\mainpage Example problem: deformation of an elastic cylinder
+
+The aim of this tutorial is to demonstrate that the implementation of
+time-harmonic Fourier decomposed linear elasticity elements in \c
+oomph-lib has been done correctly.  The simplest way of verifying 
+this is to ``invent'' an exact solution of the equations by
+choosing a particular displacement field and rearranging the equations 
+to determine the fictitious body force that is required for this to be
+a solution.  It is clear from this that the problem considered herein
+has no physical meaning; however, the driver code can easily be
+modified to investigate the time-harmonic motion of an axisymmetric
+structure subjected to more realistic traction/displacement boundary conditions.
+
+
+\section theory Theory
+Consider a three-dimensional body occupying the region \f$ D \f$, and
+whose boundary is \f$ \partial D \f$.  Using cylindrical coordinates \f$ (r^*,\theta,z^*) \f$, the
+equations of time-harmonic linear elasticity can be written as
+<CENTER>
+\f[
+\mbox{\boldmath$ \nabla^*\cdot\tau^*$}+\mbox{\boldmath$
+F^*$}=-\rho\omega^2\mbox{\boldmath$ u^*$},
+\f]
+</CENTER>
+where \f$\mbox{\boldmath$ \nabla^*$}=(\frac{\partial}{\partial
+r^*},\frac{1}{r^*}\frac{\partial}{\partial\theta},\frac{\partial}{\partial
+z^*}) \f$, and the stresses, body force
+and displacements are given by 
+\f$ {\rm Re}\{\mbox{\boldmath$\tau^*$}(r^*,\theta,z^*){\rm e}^{-{\rm i}\omega
+t^*}\} \f$, \f$ {\rm Re}\{\mbox{\boldmath$F^*$}(r^*,\theta,z^*){\rm e}^{-{\rm i}\omega
+t^*}\} \f$ and \f$ {\rm Re}\{\mbox{\boldmath$u^*$}(r^*,\theta,z^*){\rm e}^{-{\rm i}\omega
+t^*}\} \f$ respectively.  Note that here and henceforth, the superscript
+asterisk notation is used to refer to a dimensional quantity.  (The coordinate
+\f$ \theta \f$ is by definition dimensionless, and so we do not use
+an asterisk when referencing this parameter) The boundary conditions are
+<CENTER>
+\f[
+\mbox{\boldmath$ u^*$}=\mbox{\boldmath$ \hat{u}^*$}\,\,\textrm{on $
+\partial D_d $ },\quad
+\mbox{\boldmath$ \tau^*$}=\mbox{\boldmath$ \hat{\tau}^*$}\,\,\textrm{on $
+\partial D_n $ },
+\f]
+</CENTER>
+where \f$ \partial D=\partial D_d\cup\partial D_n \f$.  Finally, the
+stresses and displacements are related by the constitutive equations
+<CENTER>
+\f[
+\mbox{\boldmath$ \tau^*$}=\frac{E}{1+\nu}\left(
+\frac{\nu}{1-2\nu}(\mbox{\boldmath$\nabla^*\cdot u^*$})\textbf{I}+
+\frac{1}{2}(\mbox{\boldmath$ \nabla^* u^*$}+\mbox{\boldmath$ \nabla^* u^*$}^{{\rm T}})\right),
+\f]
+</CENTER>
+where \f$ E \f$ is Young's modulus, \f$ \nu \f$
+is Poisson's ratio and \f$ \mbox{\boldmath$ \nabla^* u^*$}^{{\rm T}}
+\f$ represents the transpose of \f$ \mbox{\boldmath$ \nabla^* u^*$}
+\f$.  Note that in cylindrical coordinates, the second-order
+tensor \f$ \mbox{\boldmath$ \nabla^* u^*$} \f$ is given by
+<CENTER>
+\f[
+\mbox{\boldmath$ \nabla^* u^*$}=\left(\begin{array}{ccc}\frac{\partial u^*_r}{\partial r^*}&\frac{1}{r^*}\frac{\partial u^*_r}{\partial\theta}-\frac{u^*_\theta}{r^*}&\frac{\partial u^*_r}{\partial z^*}\\\frac{\partial u^*_\theta}{\partial r^*}&\frac{1}{r^*}\frac{\partial u^*_\theta}{\partial\theta}+\frac{u^*_r}{r^*}&\frac{\partial u^*_\theta}{\partial z^*}\\\frac{\partial u^*_z}{\partial r^*}&\frac{1}{r^*}\frac{\partial u^*_z}{\partial\theta}&\frac{\partial u^*_z}{\partial z^*}\end{array}\right)
+\f]
+</CENTER>
+and \f$ \mbox{\boldmath$\nabla^*\cdot u^*$} \f$ is equal to the trace
+of this matrix.
+
+We non-dimensionalise the equations, using a problem specific reference
+length, \f$ {\cal L} \f$, and a timescale \f$ {\cal T}=1/\omega \f$, and  use
+Young's modulus to non-dimensionalise the body force and the stress tensor:
+<CENTER>
+\f[
+\mbox{\boldmath$ \tau^*$} = E \, \mbox{\boldmath$ \tau$}, \qquad
+r^* = {\cal L}\, r, \qquad z^* = {\cal L}\, z
+\f]
+\f[
+\mbox{\boldmath$ u^*$} = {\cal L}\, \mbox{\boldmath$ u$}, \qquad
+\mbox{\boldmath$ F^*$} = \frac{E}{\cal L} \, \mbox{\boldmath$ F$},
+\qquad
+t^* = {\cal T}\, t.
+\f]
+</CENTER>
+
+The non-dimensional form of the linear elasticity equations is then given by
+<CENTER>
+\f[
+\mbox{\boldmath$ \nabla\cdot\tau$}+\mbox{\boldmath$
+F$}=-\Omega^2\mbox{\boldmath$ u$},
+\ \ \ \ \ \ \ \ \ \ @E[nondimeqn]@
+\f]
+</CENTER>
+where \f$\mbox{\boldmath$ \nabla$}=(\frac{\partial}{\partial
+r},\frac{1}{r}\frac{\partial}{\partial\theta},\frac{\partial}{\partial
+z}) \f$,
+<CENTER>
+\f[
+\mbox{\boldmath$ \tau $}=\frac{1}{1+\nu}\left(
+\frac{\nu}{1-2\nu}(\mbox{\boldmath$\nabla\cdot u$})\textbf{I}+
+\frac{1}{2}(\mbox{\boldmath$ \nabla u$}+\mbox{\boldmath$ \nabla
+u$}^{{\rm T}})\right),
+\ \ \ \ \ \ \ \ \ \ @E[nondimconstitutive]@
+\f]
+</CENTER>
+and the non-dimensional parameter
+<CENTER>
+\f[
+\Omega = {\cal L}\omega \sqrt{\frac{\rho}{E}}
+\f]
+</CENTER>
+is the ratio of the elastic body's intrinsic timescale,
+ \f${\cal L} \sqrt{\frac{\rho}{E}}\f$, to the problem-specific 
+timescale, \f$ {\cal T}=1/\omega \f$, that we used to non-dimensionalise time.
+The boundary conditions are
+<CENTER>
+\f[
+\mbox{\boldmath$ u$}=\mbox{\boldmath$ \hat{u}$}\,\,\textrm{on $
+\partial D_d $},\quad
+\mbox{\boldmath$ \tau$}=\mbox{\boldmath$ \hat{\tau}$}\,\,\textrm{on $
+\partial D_n $}.\f]
+</CENTER>
+
+In the analysis that follows, we seek Fourier-decomposed solutions of
+the form
+<CENTER>
+\f[
+\mbox{\boldmath$ u$}(r,\theta ,z)=\sum_{n=-\infty}^{\infty}\mbox{\boldmath$ u$}^{(n)}(r,z){\rm e}^{{\rm i}
+n\theta},\quad
+\mbox{\boldmath$ F$} (r,\theta ,z)=\sum_{n=-\infty}^{\infty}\mbox{\boldmath$ F$}^{(n)}(r,z){\rm e}^{{\rm i}
+n\theta},\quad
+\mbox{\boldmath$ \tau$} (r,\theta ,z)=\sum_{n=-\infty}^{\infty}\mbox{\boldmath$ \tau$}^{(n)}(r,z){\rm e}^{{\rm i}
+n\theta}
+,\f]
+</CENTER>
+and so \f$ n \f$ is an input parameter in the problem, and the aim is
+to determine for a given body force the Fourier-decomposed
+displacement components.  Note that this decomposition allows us to
+remove the \f$ \theta \f$-dependence from the equations by writing 
+\f$ \frac{\partial\zeta}{\partial\theta}={\rm i}n\zeta \f$, where
+\f$\zeta \f$ represents any physical parameter in the problem.
+
+
+<HR>
+<HR>
+
+\section test The test problem
+The figure below shows a 2-D slice of an axisymmetric linearly elastic
+body that occupies the region \f$ r_{\rm min}\leq
+r\leq r_{\rm max}, z_{\rm min}\leq
+z\leq z_{\rm max}, 0\leq\theta\leq 2\pi \f$.  We suppose the 
+body is constrained so that its \f$ n^{\rm th} \f$ Fourier component 
+of displacement is given by
+@I w 0.5\textwidth elastic_body "2-D slice of cylindrical body "
+<CENTER>
+\f[
+\mbox{\boldmath$
+u$}^{(n)}=\left(\begin{array}{c}u_r^{(n)}\\u_\theta^{(n)}\\u_z^{(n)}\end{array}\right)=\left(\begin{array}{c}r^3\cos\,
+z\\r^3z^3\\r^3\sin\,z\end{array}\right).
+\ \ \ \ \ \ \ \ \ \ @E[Fourierdisp]@
+\f]
+</CENTER>
+On rearranging (@R[nondimeqn]@) and invoking (@R[nondimconstitutive]@), we find that the (Fourier decomposed) body force required to ensure that  (@R[Fourierdisp]@) is a solution of (@R[nondimeqn]@) is given by
+<CENTER>
+\f[
+\mbox{\boldmath$ F$}^{(n)}=\left(\begin{array}{c}
+-r(2{\rm i} nz^3\lambda+\cos\, z\{(8+3r)\lambda-(n^2-16+r(r-3))\mu+r^2\rho\omega^2\})\\
+-r\{8z^3\mu-n^2z^3(\lambda+2\mu)+r^2(z^3\rho\omega^2+6\mu z)+{\rm i} n\cos\, z((4+r)\lambda+(6+r)\mu)\}\\
+r\sin\,
+z\{(n^2-9)\mu+4r(\lambda+\mu)+r^2(\lambda+2\mu-\rho\omega^2)\}-3{\rm
+i} nr^2z^2(\lambda+\mu)\end{array}\right),
+\ \ \ \ \ \ \ \ \ \ @E[Fourierbodyforce]@
+\f]
+</CENTER>
+where \f$ \lambda \f$ and \f$ \mu \f$ are the Lam\'{e} parameters
+(non-dimensionalised on \f$ E \f$).  This body force gives rise to a non-zero traction on all four
+boundaries; for example, on boundary 3 (\f$ r=r_{\rm min} \f$) the
+traction is
+<CENTER>
+\f[
+\mbox{\boldmath$ \hat{\tau}$}^{(n)}_3=
+\mbox{\boldmath$ \tau$}^{(n)}(r_{\rm min},z)\cdot (-1,0,0)^{\rm T}=
+\left(\begin{array}{c}
+-6r_{\rm min}^2\mu\cos\, z-\lambda({\rm i} nr_{\rm min}^2z^3+r_{\rm min}^2(4+r_{\rm min})\cos\, z)
+\\
+-\mu r_{\rm min}^2(2z^3+{\rm i} n\cos\, z)
+\\
+-\mu r_{\rm min}^2\sin\, z(3-r_{\rm min})
+\end{array}\right).
+\ \ \ \ \ \ \ \ \ \ @E[testtract]@
+\f]
+</CENTER>
+We choose to set this traction as a boundary condition, whilst
+pinning the displacements on the remaining boundaries via (@R[Fourierdisp]@).
+
+
+\section namespace Global parameters and functions
+As usual, we define all non-dimensional parameters in a namespace.  In
+this namespace, we also define the (Fourier-decomposed) body force,
+traction to apply on boundary 3 and the exact solution.  Note that the 
+order of vector components is \f$ (r,z,\theta) \f$; this is in
+contrast to the analysis given in \ref theory and \ref test, where the
+order is the more usual  \f$ (r,\theta,z) \f$.
+
+\dontinclude cylinder.cc
+\skipline start_of_namespace
+\until end_of_namespace
+
+<HR>
+<HR>
+
+
+\section element_types Implementation 
+
+<HR>
+
+Within \c oomph-lib, the non-dimensional version of the 
+two-dimensional Fourier-decomposed equations (@R[nondimeqn]@) with 
+the constitutive equations (@R[nondimconstitutive]@) are implemented 
+in the (non-templated) \c TimeHarmonicFourierDecomposedLinearElasticityEquations equations class. Following
+our usual approach, discussed in the
+<A HREF="../../../quick_guide/html/index.html"> (Not-So-)Quick
+Guide,</A> this equation class is then combined with a geometric finite
+element to form a fully-functional finite element. 
+For instance, the combination of the \c TimeHarmonicFourierDecomposedLinearElasticityEquations
+class with the geometric finite element \c QElement<3> yields a nine-node 
+quadrilateral element. As usual, the mapping 
+between local and global (Eulerian) coordinates within an element is given by,
+<CENTER>
+\f[
+x_i = \sum_{j=1}^{N^{(E)}} X^{(E)}_{ij} \, \psi_j, \qquad
+i=1,2,
+\f]
+</CENTER>
+where \f$ N^{(E)} \f$ is the number of nodes in the element, 
+\f$ X^{(E)}_{ij} \f$ is the \f$ i \f$-th global (Eulerian) coordinate
+of the \f$ j \f$-th \c Node in the element, and the \f$ \psi_j \f$ are 
+the element's shape functions, defined in the geometric
+finite element. 
+
+The displacement components \f$ u_r^{(n)}=u_1, \f$ \f$ u_z^{(n)}=u_2 \f$  
+and \f$ u_\theta^{(n)}=u_3 \f$ are stored as nodal values, and the 
+shape functions are used to interpolate the displacements as
+<CENTER>
+\f[
+u_i = \sum_{j=1}^{N^{(E)}} U^{(E)}_{ij} \, \psi_j, \qquad 
+i=1,2,3,
+\f]
+</CENTER>
+where \f$  U^{(E)}_{ij} \f$  is the \f$ i \f$-th displacement component 
+at the \f$ j \f$-th \c Node in the element.
+
+
+
+<HR>
+<HR>
+
+
+\section results Results
+The figure below shows a contour plot of \f$ {\rm Re}\{u_r^{(n)}\}
+\f$, for \f$ n=3,r_{\rm min}=0.1,r_{\rm max}=1.1,z_{\rm
+min}=0.3,z_{\rm max}=2.3,\Omega^2=10+5{\rm i},E/E_{\rm ref}=1+0.01{\rm
+i},\nu=0.3+0.05{\rm i}\f$.  It can be seen
+that this closely resembles the exact solution \f$
+u_r^{(n)}=r^3\cos\,z \f$ e.g. the displacement is close to zero on the
+line \f$ z=\pi/2 \f$.   The accuracy of the solution can be improved
+by increasing the values of \c nr and \c nz in the
+driver code; as expected, \f$ {\rm Im}\{\mbox{\boldmath$
+u$}^{(n)}\}\to 0 \f$ as these parameters increase.
+
+@I w 0.3\textwidth oomph_sol "Computed solution for real part of radial component of displacement. "
+
+
+<HR>
+<HR>
+
+
+\section main The driver code
+
+We start by setting the number of elements in each of the two
+coordinate directions before creating a  \c DocInfo object to 
+store the output directory.
+
+\skipline start_of_main
+\until doc_info.set_directory("RESLT")
+
+We build the problem using two-dimensional \c QTimeHarmonicFourierDecomposedLinearElasticityElements, solve 
+using the \c Problem::newton_solve() function, and document the 
+results.
+
+\skipline // Set up problem
+\until end_of_main
+
+
+<HR>
+<HR>
+
+\section problem The problem class 
+The \c Problem class is very simple. As in other problems with Neumann 
+boundary conditions, we provide separate meshes for the "bulk" 
+elements and the face elements that apply the traction 
+boundary conditions.  The latter are attached to the relevant 
+faces of the bulk elements by the function \c assign_traction_elements().
+
+\dontinclude cylinder.cc
+\skipline start_of_problem_class
+\until end_of_problem_class
+
+
+
+<HR>
+<HR>
+
+\section constructor The problem constructor
+We begin by building the meshes and pin the displacements on 
+the appropriate boundaries.
+
+\skipline start_of_constructor
+\until end_loop_over_boundary_nodes
+
+Next we loop over the bulk mesh elements and assign the elastic
+parameters, body force, Fourier wavenumber and non-dimensional
+frequency to each element.
+
+\skipline Complete the problem
+\until end loop over elements
+
+We then loop over the traction elements and specify the applied traction.
+
+\skipline Loop over the traction elements
+\until end loop over traction elements
+
+The two submeshes are now added to the problem and a global mesh is constructed before the equation numbering scheme is set up, using the function \c assign_eqn_numbers().
+
+\skipline Add the submeshes to the problem
+\until end of constructor
+ 
+
+<HR>
+<HR>
+
+\section traction_elements The traction elements
+In anticipation of the extension of this code to its 
+<a href="../../refineable_periodic_load/html/index.html">adaptive
+counterpart</a>, we create the face elements that apply the traction to
+the boundary \f$ r=r_{\rm min} \f$ in a separate function. 
+
+\skipline start_of_traction
+\until end of assign_traction_elements
+
+
+<HR>
+<HR>
+
+\section doc Post-processing
+As expected, this member function documents the computed solution.
+
+\skipline start_of_doc_solution
+\until end_of_doc_solution
+
+<HR>
+<HR>
+
+
+\section conclusion Comments and Exercises
+
+\subsection comments Comments
+
+\subsection exercises Exercises
+
+
+<HR>
+<HR>
+
+
+\section sources Source files for this tutorial
+- The source files for this tutorial are located in the directory:\n\n
+<CENTER>
+<A HREF="../../../../demo_drivers/time_harmonic_fourier_decomposed_linear_elasticity/cylinder/">
+demo_drivers/time_harmonic_fourier_decomposed_linear_elasticity/cylinder/
+</A>
+</CENTER>\n
+- The driver code is: \n\n
+<CENTER>
+<A HREF="../../../../demo_drivers/time_harmonic_fourier_decomposed_linear_elasticity/cylinder/cylinder.cc">
+demo_drivers/time_harmonic_fourier_decomposed_linear_elasticity/cylinder/cylinder.cc
+</A>
+</CENTER>
+.
+
+
+

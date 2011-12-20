@@ -40,7 +40,8 @@ to_be_written \
 young_laplace \
 mpi \
 creating_doc \
-linear_elasticity
+linear_elasticity \
+time_harmonic_fourier_decomposed_linear_elasticity
 
 
 include $(top_srcdir)/config/makefile_templates/doc
