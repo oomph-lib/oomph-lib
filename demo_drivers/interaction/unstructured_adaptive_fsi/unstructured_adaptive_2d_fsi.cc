@@ -99,22 +99,7 @@ namespace Global_Physical_Variables
  /// Pointer to constitutive law for the mesh
  ConstitutiveLaw* Mesh_constitutive_law_pt=0;
 
- /// Non-dim gravity
- double Gravity=0.0;
-
- /// Non-dimensional gravity as body force
- void gravity(const double& time, 
-              const Vector<double> &xi, 
-              Vector<double> &b)
- {
-  b[0]=0.0;
-  b[1]=-Gravity;
- }
-
 } //end namespace
-
-
-
 
 
 
@@ -148,8 +133,7 @@ public:
   }
 
 
-
- /// Need to add on the traction elements after adaptation
+ /// Actions after adapt
  void actions_after_adapt()
   {
    //Ensure that the lagrangian coordinates of the mesh are set to be
@@ -185,10 +169,8 @@ public:
      // Set the constitutive law
      el_pt->constitutive_law_pt() =
       Global_Physical_Variables::Constitutive_law_pt;
-     
-     //Set the body force
-     el_pt->body_force_fct_pt() = Global_Physical_Variables::gravity;
-    }
+    } // end complete solid build
+
    
    // Set the boundary conditions for fluid problem: All nodes are
    // free by default 
@@ -634,7 +616,7 @@ UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::UnstructuredFSIProblem()
     {
      nod_pt->pin_position(i);
     }
-  }
+  } // end_solid_boundary_conditions
 
  // Complete the build of all elements so they are fully functional
  unsigned n_element = Solid_mesh_pt->nelement();
@@ -647,9 +629,6 @@ UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::UnstructuredFSIProblem()
    // Set the constitutive law
    el_pt->constitutive_law_pt() =
     Global_Physical_Variables::Constitutive_law_pt;
-   
-   //Set the body force
-   el_pt->body_force_fct_pt() = Global_Physical_Variables::gravity;
   }
 
 
@@ -841,7 +820,10 @@ UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::UnstructuredFSIProblem()
   } // end Poiseuille
  
 
- // Make traction mesh (this must be done first)
+ // Make traction mesh 
+ //(This must be done first because the resulting meshes are used
+ // as the geometric objects that set the boundary locations of the fluid
+ // mesh, as enforced by the Lagrange multipliers)
  Traction_mesh_pt.resize(3);
  for(unsigned m=0;m<3;m++) {Traction_mesh_pt[m] = new SolidMesh;}
  this->create_fsi_traction_elements();
@@ -970,6 +952,7 @@ problem.newton_solve();
 //Output solution
 problem.doc_solution(doc_info);
 doc_info.number()++;
+
 //Calculate the strain energy of the solid and dissipation in the
 //fluid as global output measures of the solution for validation purposes
 problem.output_strain_and_dissipation(trace);

@@ -11,4 +11,5 @@ simple_shear \
 vmtk_solid \
 unstructured_solid \
 unstructured_three_d_solid \
+unstructured_adaptive_solid \
 compressed_square

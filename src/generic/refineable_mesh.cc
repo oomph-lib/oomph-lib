@@ -1355,7 +1355,7 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
                  //Is the Node in our set
                  std::set<Node*>::iterator it = 
                   hanging_nodes_on_boundary_pt[b].find(nod_pt);
-                 //If we have found the Node the update the position
+                 //If we have found the Node then update the position
                  //to be consistent with the macro-element representation
                  if(it!=hanging_nodes_on_boundary_pt[b].end())
                   {

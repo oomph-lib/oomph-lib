@@ -14,7 +14,8 @@ turek_flag \
 fsi_channel_with_leaflet \
 vmtk_fsi \
 unstructured_fsi \
-unstructured_three_d_fsi
+unstructured_three_d_fsi \
+unstructured_adaptive_fsi
 
 
 

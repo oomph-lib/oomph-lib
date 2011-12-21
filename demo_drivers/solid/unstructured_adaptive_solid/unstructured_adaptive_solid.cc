@@ -57,18 +57,6 @@ namespace Global_Physical_Variables
 
  /// Pointer to constitutive law
  ConstitutiveLaw* Constitutive_law_pt=0;
-
- /// Non-dim gravity
- double Gravity=0.0;
-
- /// Non-dimensional gravity as body force
- void gravity(const double& time, 
-              const Vector<double> &xi, 
-              Vector<double> &b)
- {
-  b[0]=0.0;
-  b[1]=-Gravity;
- }
  
  /// Uniform pressure
  double P = 0.0;
@@ -89,9 +77,6 @@ namespace Global_Physical_Variables
  } 
 
 } //end namespace
-
-
-
 
 
 
@@ -117,146 +102,13 @@ public:
  void doc_solution(DocInfo& doc_info);
 
  /// Calculate the strain energy
- double get_strain_energy()
-  {
-   double strain_energy=0.0;
-   const unsigned n_element = Solid_mesh_pt->nelement();
-   for(unsigned e=0;e<n_element;e++)
-    {
-     //Cast to a solid element
-     ELEMENT *el_pt = dynamic_cast<ELEMENT*>(Solid_mesh_pt->element_pt(e));
-     
-     double pot_en, kin_en;
-     el_pt->get_energy(pot_en,kin_en);
-     strain_energy += pot_en;
-    }
-   return strain_energy;
-  }
+ double get_strain_energy();
 
+ /// Remove Traction Mesh
+ void actions_before_adapt();
 
- /// Actions before adapt
- void actions_before_adapt()
-  {
-   static int num=0;
-   ofstream some_file;
-   char filename[100];
-   
-   // Number of plot points
-   unsigned npts;
-   npts=5;
-   
-   // Output solution
-   //----------------
-   sprintf(filename,"RESLT/pre_adapt%i.dat", num);
-   some_file.open(filename);
-   Solid_mesh_pt->output(some_file,npts);
-   some_file.close();
-   ++num;
-
-   // How many surface elements are in the surface mesh
-   unsigned n_element = Traction_mesh_pt->nelement();
-   
-   // Loop over the surface elements and kill them
-   for(unsigned e=0;e<n_element;e++) {delete Traction_mesh_pt->element_pt(e);}
-   
-   // Wipe the mesh
-   Traction_mesh_pt->flush_element_and_node_storage();
-  }
-
-
- /// Need to add on the traction elements after adaptation
- void actions_after_adapt()
-  {
-   //The boundary is boundary 1
-   unsigned b=0;
-   
-   // How many bulk elements are adjacent to boundary b?
-   unsigned n_element = Solid_mesh_pt->nboundary_element(b);
-   
-   // Loop over the bulk elements adjacent to boundary b
-   for(unsigned e=0;e<n_element;e++)
-    {
-     // Get pointer to the bulk element that is adjacent to boundary b
-     ELEMENT* bulk_elem_pt = dynamic_cast<ELEMENT*>(
-      Solid_mesh_pt->boundary_element_pt(b,e));
-     
-     //Find the index of the face of element e along boundary b
-     int face_index = Solid_mesh_pt->face_index_at_boundary(b,e);
-     
-     //Create solid traction element
-     SolidTractionElement<ELEMENT> *el_pt = 
-      new SolidTractionElement<ELEMENT>(bulk_elem_pt,face_index);   
-     
-     // Add to mesh
-     Traction_mesh_pt->add_element_pt(el_pt);
-     
-     //Set the traction function
-     el_pt->traction_fct_pt() = Global_Physical_Variables::constant_pressure;
-    }  
-   
-   //Finally, rebuild the global mesh
-   this->rebuild_global_mesh();
-
-
-   //Reset the boundary conditions
-   // Pin both positions at lower boundary (boundary 3)
-   unsigned ibound=3;
-   unsigned num_nod= mesh_pt()->nboundary_node(ibound);
-   for (unsigned inod=0;inod<num_nod;inod++)
-    {  
-     
-     // Get node
-     SolidNode* nod_pt=Solid_mesh_pt->boundary_node_pt(ibound,inod);
-     
-     // Pin both directions
-     for (unsigned i=0;i<2;i++)
-      {
-       nod_pt->pin_position(i);
-      }
-    }
-   
-   
-   // Complete the build of all elements so they are fully functional
-   n_element = Solid_mesh_pt->nelement();
-   for(unsigned i=0;i<n_element;i++)
-    {
-     //Cast to a solid element
-     ELEMENT *el_pt = dynamic_cast<ELEMENT*>(Solid_mesh_pt->element_pt(i));
-     
-     // Set the constitutive law
-     el_pt->constitutive_law_pt() =
-      Global_Physical_Variables::Constitutive_law_pt;
-     
-     //Set the body force
-     el_pt->body_force_fct_pt() = Global_Physical_Variables::gravity;
-
-     //Set the incompressibility flag if required
-     if(Incompressible) 
-      {
-       //Need another dynamic cast
-       dynamic_cast<TPVDElementWithContinuousPressure<2>*>(el_pt)
-        ->set_incompressible();
-      }
-    }
-
-   //Output the projected mesh
-
-   static int num=0;
-   ofstream some_file;
-   char filename[100];
-   
-   // Number of plot points
-   unsigned npts;
-   npts=5;
-   
-   // Output solution
-   //----------------
-   sprintf(filename,"RESLT/post_adapt%i.dat", num);
-   some_file.open(filename);
-   Solid_mesh_pt->output(some_file,npts);
-   some_file.close();
-   ++num;
-  }
+ /// Add on the traction elements after adaptation
+ void actions_after_adapt();
 
 private:
  
@@ -355,6 +207,7 @@ UnstructuredSolidProblem<ELEMENT>::UnstructuredSolidProblem() :
  double uniform_element_area=0.2;
 
  TriangleMeshClosedCurve* closed_curve_pt=Outer_boundary_polyline_pt;
+ //Need a hole_pt, but there are no holes, so it has size zero
  Vector<TriangleMeshInternalClosedCurve*> hole_pt;
  
 
@@ -373,84 +226,28 @@ UnstructuredSolidProblem<ELEMENT>::UnstructuredSolidProblem() :
  Solid_mesh_pt->min_permitted_error()=0.001; 
  Solid_mesh_pt->max_element_size()=0.2;
  Solid_mesh_pt->min_element_size()=0.001; 
-
- if (CommandLineArgs::command_line_flag_has_been_set("--validation"))
-  {
-   Solid_mesh_pt->min_element_size()=0.01; 
-  }
    
  // Output boundary and mesh
  this->Solid_mesh_pt->output_boundaries("boundaries.dat");
  this->Solid_mesh_pt->output("mesh.dat");
- 
- // Traction elements are located on boundary 0:
- unsigned b=0;
 
- // Make traction mesh
+ // Make the traction mesh
  Traction_mesh_pt=new SolidMesh;
-
- // How many bulk elements are adjacent to boundary b?
- unsigned n_element = Solid_mesh_pt->nboundary_element(b);
- 
- // Loop over the bulk elements adjacent to boundary b
- for(unsigned e=0;e<n_element;e++)
-  {
-   // Get pointer to the bulk element that is adjacent to boundary b
-   ELEMENT* bulk_elem_pt = dynamic_cast<ELEMENT*>(
-    Solid_mesh_pt->boundary_element_pt(b,e));
-   
-   //Find the index of the face of element e along boundary b
-   int face_index = Solid_mesh_pt->face_index_at_boundary(b,e);
-   
-   //Create solid traction element
-   SolidTractionElement<ELEMENT> *el_pt = 
-    new SolidTractionElement<ELEMENT>(bulk_elem_pt,face_index);   
-   
-   // Add to mesh
-   Traction_mesh_pt->add_element_pt(el_pt);
- 
-   //Set the traction function
-   el_pt->traction_fct_pt() = Global_Physical_Variables::constant_pressure;
-  }  
  
  // Add sub meshes
  add_sub_mesh(Solid_mesh_pt);
  add_sub_mesh(Traction_mesh_pt);
  
- // Build global mesh
+ // Build the global mesh
  build_global_mesh();
 
- // Pin both positions at lower boundary (boundary 3)
- unsigned ibound=3;
- unsigned num_nod= mesh_pt()->nboundary_node(ibound);
- for (unsigned inod=0;inod<num_nod;inod++)
-  {  
-
-   // Get node
-   SolidNode* nod_pt=Solid_mesh_pt->boundary_node_pt(ibound,inod);
-   
-   // Pin both directions
-   for (unsigned i=0;i<2;i++)
-    {
-     nod_pt->pin_position(i);
-    }
-  }
-
-
- // Complete the build of all elements so they are fully functional
- n_element = Solid_mesh_pt->nelement();
- for(unsigned i=0;i<n_element;i++)
-  {
-   //Cast to a solid element
-   ELEMENT *el_pt = dynamic_cast<ELEMENT*>(Solid_mesh_pt->element_pt(i));
-   
-   // Set the constitutive law
-   el_pt->constitutive_law_pt() =
-    Global_Physical_Variables::Constitutive_law_pt;
-   
-   //Set the body force
-   el_pt->body_force_fct_pt() = Global_Physical_Variables::gravity;
-  }
+ //Call actions after adapt:
+ // 1) to build the traction elements
+ // 2) to pin the nodes on the lower boundary (boundary 3)
+ // 3) to complete the build of the elements
+ // Note there is slight duplication here because we rebuild the global mesh
+ // twice.
+ this->actions_after_adapt();
    
  // Setup equation numbering scheme
  cout <<"Number of equations: " << assign_eqn_numbers() << std::endl; 
@@ -497,8 +294,115 @@ void UnstructuredSolidProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
 }
 
+//================start_get_strain_energy================================
+/// Calculate the strain energy in the entire elastic solid
+//=======================================================================
+template<class ELEMENT>
+double UnstructuredSolidProblem<ELEMENT>::get_strain_energy()
+{
+ double strain_energy=0.0;
+ const unsigned n_element = Solid_mesh_pt->nelement();
+ for(unsigned e=0;e<n_element;e++)
+  {
+   //Cast to a solid element
+   ELEMENT *el_pt = dynamic_cast<ELEMENT*>(Solid_mesh_pt->element_pt(e));
+   
+   double pot_en, kin_en;
+   el_pt->get_energy(pot_en,kin_en);
+   strain_energy += pot_en;
+  }
  
+ return strain_energy;
+} // end_get_strain_energy
 
+
+//==============start_actions_before_adapt================================
+/// Actions before adapt: remove the traction elements in the surface mesh
+//========================================================================
+template<class ELEMENT>
+void UnstructuredSolidProblem<ELEMENT>::actions_before_adapt()
+{
+ // How many surface elements are in the surface mesh
+ unsigned n_element = Traction_mesh_pt->nelement();
+ 
+ // Loop over the surface elements and kill them
+ for(unsigned e=0;e<n_element;e++) {delete Traction_mesh_pt->element_pt(e);}
+ 
+ // Wipe the mesh
+ Traction_mesh_pt->flush_element_and_node_storage();
+
+} // end_actions_before_adapt
+
+//=================start_actions_after_adapt=============================
+ /// Need to add on the traction elements after adaptation
+//=======================================================================
+template<class ELEMENT>
+void UnstructuredSolidProblem<ELEMENT>::actions_after_adapt()
+{
+ //The boundary in question is boundary 0
+ unsigned b=0;
+ 
+ // How many bulk elements are adjacent to boundary b?
+ unsigned n_element = Solid_mesh_pt->nboundary_element(b);
+ // Loop over the bulk elements adjacent to boundary b
+ for(unsigned e=0;e<n_element;e++)
+  {
+   // Get pointer to the bulk element that is adjacent to boundary b
+   ELEMENT* bulk_elem_pt = dynamic_cast<ELEMENT*>(
+    Solid_mesh_pt->boundary_element_pt(b,e));
+   
+   //Find the index of the face of element e along boundary b
+   int face_index = Solid_mesh_pt->face_index_at_boundary(b,e);
+   
+   //Create solid traction element
+   SolidTractionElement<ELEMENT> *el_pt = 
+    new SolidTractionElement<ELEMENT>(bulk_elem_pt,face_index);   
+   
+   // Add to mesh
+   Traction_mesh_pt->add_element_pt(el_pt);
+   
+   //Set the traction function
+   el_pt->traction_fct_pt() = Global_Physical_Variables::constant_pressure;
+  }  
+ 
+ //Now rebuild the global mesh
+ this->rebuild_global_mesh();
+ 
+ //(Re)set the boundary conditions
+ //Pin both positions at lower boundary (boundary 3)
+ unsigned ibound=3;
+ unsigned num_nod= mesh_pt()->nboundary_node(ibound);
+ for (unsigned inod=0;inod<num_nod;inod++)
+  {  
+   // Get node
+   SolidNode* nod_pt=Solid_mesh_pt->boundary_node_pt(ibound,inod);
+   
+   // Pin both directions
+   for (unsigned i=0;i<2;i++) {nod_pt->pin_position(i);}
+  }
+ //End of set boundary conditions 
+ 
+ // Complete the build of all elements so they are fully functional
+ n_element = Solid_mesh_pt->nelement();
+ for(unsigned e=0;e<n_element;e++)
+  {
+   //Cast to a solid element
+   ELEMENT *el_pt = dynamic_cast<ELEMENT*>(Solid_mesh_pt->element_pt(e));
+   
+   // Set the constitutive law
+   el_pt->constitutive_law_pt() =
+    Global_Physical_Variables::Constitutive_law_pt;
+   
+   //Set the incompressibility flag if required
+   if(Incompressible) 
+    {
+     //Need another dynamic cast
+     dynamic_cast<TPVDElementWithContinuousPressure<2>*>(el_pt)
+      ->set_incompressible();
+    }
+  }
+
+} // end_actions_after_adapt
 
 
 //===========start_main===================================================
@@ -506,21 +410,7 @@ void UnstructuredSolidProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 //========================================================================
 int main(int argc, char **argv)
 {
- // Store command line arguments
- CommandLineArgs::setup(argc,argv);
-
- // Define possible command line arguments and parse the ones that
- // were actually specified
- 
- // Validation?
- CommandLineArgs::specify_command_line_flag("--validation");
-
- // Parse command line
- CommandLineArgs::parse_and_assign(); 
- 
- // Doc what has actually been specified on the command line
- CommandLineArgs::doc_specified_flags();
-
+ //Doc info object
  DocInfo doc_info;
 
  // Output directory
@@ -530,9 +420,6 @@ int main(int argc, char **argv)
  Global_Physical_Variables::Constitutive_law_pt = 
   new GeneralisedHookean(&Global_Physical_Variables::Nu);
  
-
-
-
  {
   std::ofstream strain("RESLT/s_energy.dat");
   std::cout << "Running with pure displacement formulation\n";
@@ -550,10 +437,9 @@ int main(int argc, char **argv)
   
   unsigned nstep=5;
 
-
   for (unsigned istep=0;istep<nstep;istep++)
    {
-    // Solve the problem
+    // Solve the problem with one round of adaptivity
     problem.newton_solve(1);
 
     double strain_energy = problem.get_strain_energy();
@@ -587,7 +473,9 @@ int main(int argc, char **argv)
   doc_info.number() = 0;
   
   //Set up the problem
-  UnstructuredSolidProblem<ProjectablePVDElementWithContinuousPressure<TPVDElementWithContinuousPressure<2> > > problem;
+  UnstructuredSolidProblem<
+  ProjectablePVDElementWithContinuousPressure<
+  TPVDElementWithContinuousPressure<2> > > problem;
   
   //Output initial configuration
   problem.doc_solution(doc_info);
@@ -634,7 +522,9 @@ int main(int argc, char **argv)
   doc_info.number() = 0;
   
   //Set up the problem
-  UnstructuredSolidProblem<ProjectablePVDElementWithContinuousPressure<TPVDElementWithContinuousPressure<2> > > problem;
+  UnstructuredSolidProblem<
+  ProjectablePVDElementWithContinuousPressure<
+  TPVDElementWithContinuousPressure<2> > > problem;
   
   //Loop over all elements and set incompressibility flag
   {
