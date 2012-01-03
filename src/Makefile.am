@@ -7,6 +7,7 @@ womersley advection_diffusion_reaction spherical_advection_diffusion \
 axisym_advection_diffusion biharmonic \
 flux_transport young_laplace steady_axisym_advection_diffusion \
 mesh_smoothing helmholtz time_harmonic_linear_elasticity rigid_body \
-time_harmonic_fourier_decomposed_linear_elasticity
+time_harmonic_fourier_decomposed_linear_elasticity \
+fourier_decomposed_helmholtz
 
 

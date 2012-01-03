@@ -140,12 +140,6 @@ template <class ELEMENT>
     BrokenCopy::broken_assign("HelmholtzBCElementBase");
    }
   
-  /// Pointer to square of wavenumber 
-  double*& k_squared_pt()
-   { 
-    return K_squared_pt;
-   }
-  
   
   /// \short Specify the value of nodal zeta from the face geometry
   /// The "global" intrinsic coordinate of the element when
@@ -503,10 +497,7 @@ template <class ELEMENT>
  
  ///The spatial dimension of the problem
  unsigned Dim;
- 
- /// Pointer to square of wavenumber
- double* K_squared_pt;
- 
+  
  
  }; 
 
@@ -528,14 +519,13 @@ template<class ELEMENT>
  /// Constructor: Specify radius of outer boundary and number of
  /// Fourier terms used in the computation of the gamma integral
   HelmholtzDtNMesh(const double& outer_radius, 
-                   const unsigned nfourier) : 
- Outer_radius(outer_radius), Nfourier(nfourier)
+                   const unsigned& nfourier_terms) : 
+ Outer_radius(outer_radius), Nfourier_terms(nfourier_terms)
  {}
  
  /// \short Compute and store the gamma integral at all integration
  /// points of the constituent elements.
  void setup_gamma();
-
 
  /// \short Compute Fourier components of the solution -- length of
  /// vector indicates number of terms to be computed. 
@@ -565,9 +555,9 @@ template<class ELEMENT>
  
  /// \short Number of Fourier terms used in the computation of the
  /// gamma integral
- unsigned& nfourier () 
+ unsigned& nfourier_terms() 
  {                                          
-  return Nfourier ;
+  return Nfourier_terms;
  }
  
   private:
@@ -576,7 +566,7 @@ template<class ELEMENT>
   double Outer_radius;
   
 /// Nbr of Fourier terms used in the  Gamma computation
-  unsigned Nfourier;
+  unsigned Nfourier_terms;
   
   
   /// \short Container to store the gamma integral for given Gauss point
@@ -682,14 +672,6 @@ class HelmholtzAbsorbingBCElement : public  HelmholtzBCElementBase<ELEMENT>
      OOMPH_EXCEPTION_LOCATION);
    }
   
-  if (this->K_squared_pt==0)
-   {
-    throw OomphLibError(
-     "Pointer to square of wavenumber hasn't been set!",
-     "HelmholtzAbsorbingBCElement::fill_in_generic_residual_contribution_helmholtz_abc",
-     OOMPH_EXCEPTION_LOCATION);
-   }
-  
 #endif
 
   //Find out how many nodes there are
@@ -714,7 +696,7 @@ class HelmholtzAbsorbingBCElement : public  HelmholtzBCElementBase<ELEMENT>
   
   // Define the problem parameters
   double R=*Outer_radius_pt;
-  double k=sqrt(*(this->K_squared_pt));
+  double k=sqrt(dynamic_cast<ELEMENT*>(this->bulk_element_pt())->k_squared());  
   
   //Loop over the integration points
   //--------------------------------
@@ -790,7 +772,7 @@ class HelmholtzAbsorbingBCElement : public  HelmholtzBCElementBase<ELEMENT>
           //-----------------------
           if(flag)
            {
-            //Loop over the velocity shape functions again
+            //Loop over the shape functions again
             for(unsigned l2=0;l2<n_node;l2++)
              {     
               local_unknown_real = this->nodal_local_eqn(
@@ -830,7 +812,7 @@ class HelmholtzAbsorbingBCElement : public  HelmholtzBCElementBase<ELEMENT>
           //-----------------------
           if(flag)
            {
-            //Loop over the velocity shape functions again
+            //Loop over the shape functions again
             for(unsigned l2=0;l2<n_node;l2++)
              {     
               local_unknown_real = this->nodal_local_eqn(
@@ -887,7 +869,7 @@ class HelmholtzAbsorbingBCElement : public  HelmholtzBCElementBase<ELEMENT>
           //-----------------------
           if(flag)
            {
-            //Loop over the velocity shape functions again
+            //Loop over the shape functions again
             for(unsigned l2=0;l2<n_node;l2++)
              {     
               local_unknown_real = this->nodal_local_eqn(
@@ -933,7 +915,7 @@ class HelmholtzAbsorbingBCElement : public  HelmholtzBCElementBase<ELEMENT>
           //-----------------------
           if(flag)
            {
-            //Loop over the velocity shape functions again
+            //Loop over the shape functions again
             for(unsigned l2=0;l2<n_node;l2++)
              {     
               local_unknown_real = this->nodal_local_eqn(
@@ -993,7 +975,7 @@ class HelmholtzAbsorbingBCElement : public  HelmholtzBCElementBase<ELEMENT>
           //-----------------------
           if(flag)
            {
-            //Loop over the velocity shape functions again
+            //Loop over the shape functions again
             for(unsigned l2=0;l2<n_node;l2++)
              {     
               local_unknown_real = this->nodal_local_eqn(
@@ -1042,7 +1024,7 @@ class HelmholtzAbsorbingBCElement : public  HelmholtzBCElementBase<ELEMENT>
           //-----------------------
           if(flag)
            {
-            //Loop over the velocity shape functions again
+            //Loop over the shape functions again
             for(unsigned l2=0;l2<n_node;l2++)
              {     
               local_unknown_real = this->nodal_local_eqn(
@@ -1144,13 +1126,20 @@ class HelmholtzDtNBoundaryElement : public  HelmholtzBCElementBase<ELEMENT>
   (HelmholtzDtNMesh<ELEMENT>* mesh_pt)
  {
   Outer_boundary_mesh_pt=mesh_pt;
-  
+ }
+ 
+
+ /// \short Complete the setup of additional dependencies arising
+ /// through the far-away interaction with other nodes in 
+ /// Outer_boundary_mesh_pt.
+ void complete_setup_of_dependencies()
+ {
   // Create a set of all nodes
   std::set<Node*> node_set;
-  unsigned nel=mesh_pt->nelement();
+  unsigned nel=Outer_boundary_mesh_pt->nelement();
   for (unsigned e=0;e<nel;e++)
    {
-    FiniteElement* el_pt=mesh_pt->finite_element_pt(e);
+    FiniteElement* el_pt=Outer_boundary_mesh_pt->finite_element_pt(e);
     unsigned nnod=el_pt->nnode();
     for (unsigned j=0;j<nnod;j++)
      {
@@ -1163,7 +1152,7 @@ class HelmholtzDtNBoundaryElement : public  HelmholtzBCElementBase<ELEMENT>
        }
      }
    }
-    // Now erase the current element's own nodes
+  // Now erase the current element's own nodes
   unsigned nnod=this->nnode();
   for (unsigned j=0;j<nnod;j++)
    {
@@ -1185,10 +1174,8 @@ class HelmholtzDtNBoundaryElement : public  HelmholtzBCElementBase<ELEMENT>
    {
     this->add_external_data(*it);
    }
-  
  }
- 
-  
+
  
   private:
  
@@ -1266,27 +1253,29 @@ class HelmholtzDtNBoundaryElement : public  HelmholtzBCElementBase<ELEMENT>
          //-----------------------
          if(flag)
           {
-           //Loop over the velocity shape functions again
+           //Loop over the shape functions again
            for(unsigned l2=0;l2<n_node;l2++)
             { 
              // Add the contribution of the local data
              local_unknown_real = this->nodal_local_eqn(
               l2,this->U_index_helmholtz.real());
-             global_eqn_real=this->eqn_number(local_unknown_real);
              
              local_unknown_imag = this->nodal_local_eqn(
               l2,this->U_index_helmholtz.imag());
-             global_eqn_imag=this->eqn_number(local_unknown_imag);
              
              //If at a non-zero degree of freedom add in the entry
              if(local_unknown_real >= 0)
               {
+               global_eqn_real=this->eqn_number(local_unknown_real);
+
                // Add the first order terms contribution
                jacobian(local_eqn_real,local_unknown_real)
                 -=d_gamma[ipt][global_eqn_real].real()*test[l]*W; 
               }
              if(local_unknown_imag >= 0)
               {
+               global_eqn_imag=this->eqn_number(local_unknown_imag);
+
                // Add the first order terms contribution
                jacobian(local_eqn_real,local_unknown_imag)
                 -=d_gamma[ipt][global_eqn_imag].real()*test[l]*W; 
@@ -1295,27 +1284,29 @@ class HelmholtzDtNBoundaryElement : public  HelmholtzBCElementBase<ELEMENT>
            
            // Add the contribution of the external data
            unsigned n_ext_data=this->nexternal_data();
-           //Loop over the velocity shape functions again
+           //Loop over the shape functions again
            for(unsigned l2=0;l2<n_ext_data;l2++)
             { 
              // Add the contribution of the local data
              external_unknown_real = this->external_local_eqn(
               l2,this->U_index_helmholtz.real());
-             external_global_eqn_real=this->eqn_number(external_unknown_real);
              
              external_unknown_imag = this->external_local_eqn(
               l2,this->U_index_helmholtz.imag());
-             external_global_eqn_imag=this->eqn_number(external_unknown_imag);
              
              //If at a non-zero degree of freedom add in the entry
              if(external_unknown_real >= 0)
               {
+               external_global_eqn_real=this->eqn_number(external_unknown_real);
+
                // Add the first order terms contribution
                jacobian(local_eqn_real,external_unknown_real)
                 -=d_gamma[ipt][external_global_eqn_real].real()*test[l]*W;
               }
              if(external_unknown_imag >= 0)
               {
+               external_global_eqn_imag=this->eqn_number(external_unknown_imag);
+
                // Add the first order terms contribution
                jacobian(local_eqn_real,external_unknown_imag)
                 -=d_gamma[ipt][external_global_eqn_imag].real()*test[l]*W;
@@ -1333,26 +1324,29 @@ class HelmholtzDtNBoundaryElement : public  HelmholtzBCElementBase<ELEMENT>
          //-----------------------
          if(flag)
           {
-           //Loop over the velocity shape functions again
+           //Loop over the shape functions again
            for(unsigned l2=0;l2<n_node;l2++)
             { 
              // Add the contribution of the local data
              local_unknown_real = this->nodal_local_eqn(
               l2,this->U_index_helmholtz.real());
-             global_eqn_real=this->eqn_number(local_unknown_real);
              
              local_unknown_imag = this->nodal_local_eqn(
               l2,this->U_index_helmholtz.imag());
-             global_eqn_imag=this->eqn_number(local_unknown_imag);
+
              //If at a non-zero degree of freedom add in the entry
              if(local_unknown_real >= 0)
               {
+               global_eqn_real=this->eqn_number(local_unknown_real);
+
                // Add the first order terms contribution
                jacobian(local_eqn_imag,local_unknown_real)
                 -=d_gamma[ipt][global_eqn_real].imag()*test[l]*W;
               }
              if(local_unknown_imag >= 0)
               {
+               global_eqn_imag=this->eqn_number(local_unknown_imag);
+
                // Add the first order terms contribution
                jacobian(local_eqn_imag,local_unknown_imag)
                 -=d_gamma[ipt][global_eqn_imag].imag()*test[l]*W; 
@@ -1361,27 +1355,29 @@ class HelmholtzDtNBoundaryElement : public  HelmholtzBCElementBase<ELEMENT>
            
            // Add the contribution of the external data
            unsigned n_ext_data=this->nexternal_data();
-           //Loop over the velocity shape functions again
+           //Loop over the shape functions again
            for(unsigned l2=0;l2<n_ext_data;l2++)
             { 
              // Add the contribution of the local data
              external_unknown_real = this->external_local_eqn(
               l2,this->U_index_helmholtz.real());
-             external_global_eqn_real=this->eqn_number(external_unknown_real);
              
              external_unknown_imag = this->external_local_eqn(
               l2,this->U_index_helmholtz.imag());
-             external_global_eqn_imag=this->eqn_number(external_unknown_imag);
              
              //If at a non-zero degree of freedom add in the entry
              if(external_unknown_real >= 0)
               {
+               external_global_eqn_real=this->eqn_number(external_unknown_real);
+
                // Add the first order terms contribution
                jacobian(local_eqn_imag,external_unknown_real)
                 -=d_gamma[ipt][external_global_eqn_real].imag()*test[l]*W;
               }
              if(external_unknown_imag >= 0)
               {
+               external_global_eqn_imag=this->eqn_number(external_unknown_imag);
+
                // Add the first order terms contribution
                jacobian(local_eqn_imag,external_unknown_imag)
                 -=d_gamma[ipt][external_global_eqn_imag].imag()*test[l]*W;
@@ -1437,7 +1433,7 @@ template<class ELEMENT>
   
   // initialise the variable
   int local_unknown_real=0, local_unknown_imag=0;
-  int global_eqn_real=0,global_eqn_imag=0;
+  int global_unknown_real=0,global_unknown_imag=0;
   
   //Set the value of n_intpt
   const unsigned n_intpt=local_integral_pt->nweight();
@@ -1508,25 +1504,23 @@ template<class ELEMENT>
     // compute the contribution to each node to the map   
     for(unsigned l=0;l<n_node;l++) 
      {
-      std::complex<double> factor(1.0,0.0);
-      
       // Add the contribution of the real local data
       local_unknown_real = this->nodal_local_eqn(
        l,this->U_index_helmholtz.real());
-     global_eqn_real=this->eqn_number(local_unknown_real);
-     if (global_eqn_real >= 0)
+     if (local_unknown_real >= 0)
       {   
-       d_gamma_con[global_eqn_real]+=
+       global_unknown_real=this->eqn_number(local_unknown_real);
+       d_gamma_con[global_unknown_real]+=
         (dphi_ds)*w*exp(I*(phi-phi_p)*double(n))*psi(l);
       }
      
      // Add the contribution of the imag local data
      local_unknown_imag = this->nodal_local_eqn(
       l,this->U_index_helmholtz.imag());
-     global_eqn_imag=this->eqn_number(local_unknown_imag);
-     if (global_eqn_real >= 0)
+     if (local_unknown_imag >= 0)
       {   
-       d_gamma_con[global_eqn_imag]+=
+       global_unknown_imag=this->eqn_number(local_unknown_imag);
+       d_gamma_con[global_unknown_imag]+=
         I* (dphi_ds)*w*exp(I*(phi-phi_p)*double(n))*psi(l);
       }
      }// end of loop over the node
@@ -1692,17 +1686,18 @@ void HelmholtzDtNMesh<ELEMENT>::setup_gamma()
 #endif
 
 
- // Get Helmholtz parameter from first element
+ // Get Helmholtz parameter from bulk element
  HelmholtzDtNBoundaryElement<ELEMENT>* el_pt=
   dynamic_cast<HelmholtzDtNBoundaryElement<ELEMENT>*>
   (this->element_pt(0));    
- double k=sqrt(*(el_pt->k_squared_pt()));  
+ double k=sqrt(dynamic_cast<ELEMENT*>(el_pt->bulk_element_pt())->k_squared());  
  
  // Precompute factors in sum
- Vector<std::complex<double> > h_a(Nfourier), hp_a(Nfourier),q(Nfourier);
+ Vector<std::complex<double> > h_a(Nfourier_terms), hp_a(Nfourier_terms),
+  q(Nfourier_terms);
  Hankel_functions_for_helmholtz_problem::
-  Hankel_first(Nfourier,Outer_radius*k,h_a,hp_a);
- for (unsigned i=0;i<Nfourier;i++)
+  Hankel_first(Nfourier_terms,Outer_radius*k,h_a,hp_a);
+ for (unsigned i=0;i<Nfourier_terms;i++)
   {
    q[i]=(k/(2.0*MathematicalConstants::Pi))*(hp_a[i]/h_a[i]);  
   } 
@@ -1749,7 +1744,7 @@ void HelmholtzDtNMesh<ELEMENT>::setup_gamma()
       std::map<unsigned,std::complex<double> > d_gamma_con_p,d_gamma_con_n;
       
       // loop over the Fourier terms
-      for (unsigned nn=0;nn<Nfourier;nn++)
+      for (unsigned nn=0;nn<Nfourier_terms;nn++)
        {
         //Second loop over the element 
         //to evaluate the complete integral
@@ -1774,16 +1769,14 @@ void HelmholtzDtNMesh<ELEMENT>::setup_gamma()
             for(unsigned l=0;l<n_node;l++) 
              {
               // Add the contribution of the real local data
-              int local_unknown_p_real=
-               eel_pt->nodal_local_eqn(
-                l,eel_pt->u_index_helmholtz().real());
-              
-              int global_eqn_p_real=eel_pt->eqn_number(
-               local_unknown_p_real);
-              if (global_eqn_p_real >= 0)
+              int local_unknown_p_real=eel_pt->nodal_local_eqn(
+               l,eel_pt->u_index_helmholtz().real());
+              if (local_unknown_p_real >= 0)
                {   
-                d_gamma_vector[ipt][global_eqn_p_real]+=
-                 q[nn]*d_gamma_con_p[global_eqn_p_real];
+                int global_unknown_p_real=eel_pt->eqn_number(
+                 local_unknown_p_real);
+                d_gamma_vector[ipt][global_unknown_p_real]+=
+                 q[nn]*d_gamma_con_p[global_unknown_p_real];
                }
               
               // Add the contribution of the imag local data
@@ -1791,12 +1784,13 @@ void HelmholtzDtNMesh<ELEMENT>::setup_gamma()
                eel_pt->nodal_local_eqn(
                 l,eel_pt->u_index_helmholtz().imag());
               
-              int global_eqn_p_imag=eel_pt->eqn_number(
-               local_unknown_p_imag);
-              if (global_eqn_p_imag >= 0)
+              if (local_unknown_p_imag >= 0)
                {   
-                d_gamma_vector[ipt][global_eqn_p_imag]+=
-                 q[nn]*d_gamma_con_p[global_eqn_p_imag];
+                int global_unknown_p_imag=eel_pt->eqn_number(
+                 local_unknown_p_imag);
+                
+                d_gamma_vector[ipt][global_unknown_p_imag]+=
+                 q[nn]*d_gamma_con_p[global_unknown_p_imag];
                }
              }// end of loop over the node
            }//End of if
@@ -1806,26 +1800,24 @@ void HelmholtzDtNMesh<ELEMENT>::setup_gamma()
             for(unsigned l=0;l<n_node;l++) 
              {
               // Add the contribution of the real local data
-              int local_unknown_real
-               =eel_pt->nodal_local_eqn(
-                l,eel_pt->u_index_helmholtz().real());
-              int global_eqn_real=eel_pt->eqn_number(local_unknown_real);
-              if (global_eqn_real >= 0)
+              int local_unknown_real=eel_pt->nodal_local_eqn(
+               l,eel_pt->u_index_helmholtz().real());
+              if (local_unknown_real >= 0)
                {          
-                d_gamma_vector[ipt][global_eqn_real]+=
-                 q[nn]*(d_gamma_con_p[global_eqn_real]+
-                        d_gamma_con_n[global_eqn_real]);
+                int global_unknown_real=eel_pt->eqn_number(local_unknown_real);
+                d_gamma_vector[ipt][global_unknown_real]+=
+                 q[nn]*(d_gamma_con_p[global_unknown_real]+
+                        d_gamma_con_n[global_unknown_real]);
                }  
               // Add the contribution of the imag local data
-              int local_unknown_imag
-               =eel_pt->nodal_local_eqn(
-                l,eel_pt->u_index_helmholtz().imag());
-              int global_eqn_imag=eel_pt->eqn_number(local_unknown_imag);
-              if (global_eqn_imag >= 0)
+              int local_unknown_imag=eel_pt->nodal_local_eqn(
+               l,eel_pt->u_index_helmholtz().imag());
+              if (local_unknown_imag >= 0)
                {          
-                d_gamma_vector[ipt][global_eqn_imag]+=
-                 q[nn]*(d_gamma_con_p[global_eqn_imag]+
-                        d_gamma_con_n[global_eqn_imag]);
+                int global_unknown_imag=eel_pt->eqn_number(local_unknown_imag);
+                d_gamma_vector[ipt][global_unknown_imag]+=
+                 q[nn]*(d_gamma_con_p[global_unknown_imag]+
+                        d_gamma_con_n[global_unknown_imag]);
                }  
              }// end of loop over the node
            }//End of else  
@@ -1841,11 +1833,7 @@ void HelmholtzDtNMesh<ELEMENT>::setup_gamma()
 }
 
 //===========================================================================
-/// Constructor, takes the pointer to the "bulk" element, the 
-/// index of the fixed local coordinate and its value represented
-/// by an integer (+/- 1), indicating that the face is located
-/// at the max. or min. value of the "fixed" local coordinate
-/// in the bulk element.
+/// Constructor, takes the pointer to the "bulk" element and the face index
 //===========================================================================
 template<class ELEMENT>
  HelmholtzBCElementBase<ELEMENT>::
@@ -1878,9 +1866,6 @@ template<class ELEMENT>
   // to its nodes (by referring to the appropriate nodes in the bulk
   // element), etc.
   bulk_el_pt->build_face_element(face_index,this);
-  
-  // Initialise pointer to wavenumber
-  K_squared_pt=0;
   
   // Extract the dimension of the problem from the dimension of 
   // the first node

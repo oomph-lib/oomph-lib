@@ -408,7 +408,7 @@ namespace oomph
       error_message 
        << "No boundary elements in region 0. You're in trouble.\n" 
        << "Ask Andrew to sort this out!\n";
-      throw OomphLibError(error_message.str(),
+      OomphLibError(error_message.str(), // hierher re-enable throw
                           "TriangleMesh::setup_boundary_coordinates()",
                           OOMPH_EXCEPTION_LOCATION);
      }
@@ -571,7 +571,7 @@ namespace oomph
                     << "This will file will contain FaceElements that\n"
                     << "oomph-lib believes to be located on the boundary.\n"
                     << std::endl;
-      throw OomphLibError(error_message.str(),
+      OomphLibError(error_message.str(), // hierher re-enable throw
                           "TriangleMesh::setup_boundary_coordinates()",
                           OOMPH_EXCEPTION_LOCATION);
      }

@@ -45,6 +45,7 @@
 
 //OOMPH-LIB headers
 #include "src/generic/Qelements.h"
+#include "src/generic/Telements.h"
 
 
 namespace oomph
@@ -459,11 +460,70 @@ class TimeHarmonicFourierDecomposedLinearElasticityEquations :
  public virtual QElement<1,NNODE_1D>
   {
     public:
-   /// Constructor must call the constructor of the underlying solid element
+   /// Constructor must call the constructor of the underlying element
     FaceGeometry() : QElement<1,NNODE_1D>() {}
   };
  
+
+
+
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+
+//===========================================================================
+/// An Element that solves the equations of Fourier decomposed (in cylindrical
+/// polars) time-harmonic linear elasticity, using TElements for the geometry.
+//============================================================================
+  template<unsigned NNODE_1D>
+   class TTimeHarmonicFourierDecomposedLinearElasticityElement : 
+  public virtual TElement<2,NNODE_1D>,
+   public virtual TimeHarmonicFourierDecomposedLinearElasticityEquations
+   {
+    public:
+   
+   /// Constructor
+   TTimeHarmonicFourierDecomposedLinearElasticityElement() : 
+    TElement<2,NNODE_1D>(), 
+    TimeHarmonicFourierDecomposedLinearElasticityEquations() { }
+    
+    /// Output function
+   void output(std::ostream &outfile) 
+   {TimeHarmonicFourierDecomposedLinearElasticityEquations::output(outfile);}
+   
+   /// Output function
+   void output(std::ostream &outfile, const unsigned &n_plot)
+   {TimeHarmonicFourierDecomposedLinearElasticityEquations::
+     output(outfile,n_plot);}
+   
+   /// C-style output function
+   void output(FILE* file_pt) 
+   {TimeHarmonicFourierDecomposedLinearElasticityEquations::output(file_pt);}
+   
+   /// C-style output function
+   void output(FILE* file_pt, const unsigned &n_plot)
+   {TimeHarmonicFourierDecomposedLinearElasticityEquations::
+     output(file_pt,n_plot);}
+   
+  };
  
+
+//============================================================================
+/// FaceGeometry of a linear 
+/// TTimeHarmonicFourierDecomposedLinearElasticityElement element
+//============================================================================
+ template<unsigned NNODE_1D>
+  class FaceGeometry<TTimeHarmonicFourierDecomposedLinearElasticityElement<NNODE_1D> > :
+ public virtual TElement<1,NNODE_1D>
+  {
+    public:
+   /// Constructor must call the constructor of the underlying element
+    FaceGeometry() : TElement<1,NNODE_1D>() {}
+  };
+ 
+ 
+
 }
 
 #endif

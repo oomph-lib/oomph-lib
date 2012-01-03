@@ -44,21 +44,17 @@ using namespace oomph;
 namespace Global_Parameters
 {
  /// Define Poisson's ratio Nu
- std::complex<double> Nu(0.3,0.05);
+ std::complex<double> Nu(0.3,0.0);
 
  /// Define the non-dimensional Young's modulus
- std::complex<double> E(1.0,0.01);
-
- // Lame parameters
- std::complex<double> lambda = E*Nu/(1.0+Nu)/(1.0-2.0*Nu);
- std::complex<double> mu = E/2.0/(1.0+Nu);
+ std::complex<double> E(1.0,0.0);
 
  /// Define Fourier wavenumber
- int Fourier_wavenumber = 3;
+ int Fourier_wavenumber = 0;
 
  /// \short Define the non-dimensional square angular frequency of 
  /// time-harmonic motion
- std::complex<double> Omega_sq (10.0,5.0);
+ std::complex<double> Omega_sq (10.0,0.0);
 
  /// Length of domain in r direction
  double Lr = 1.0;
@@ -75,55 +71,23 @@ namespace Global_Parameters
  /// Define the imaginary unit
  const std::complex<double> I(0.0,1.0);
 
+ // Pressure load
+ double P=1.0;
+
  /// The traction function at r=rmin: (t_r, t_z, t_theta)
  void boundary_traction(const Vector<double> &x,
                       const Vector<double> &n,
                       Vector<std::complex<double> > &result)
  {
-  result[0] = -6.0*pow(x[0],2)*mu*cos(x[1])-
-   lambda*(I*double(Fourier_wavenumber)*pow(x[0],2)*pow(x[1],3)+
-           (4.0*pow(x[0],2)+pow(x[0],3))*cos(x[1]));
-  result[1] = -mu*(3.0*pow(x[0],2)-pow(x[0],3))*sin(x[1]);
-  result[2] = -mu*pow(x[0],2)*(2*pow(x[1],3)+I*double(Fourier_wavenumber)*
-                               cos(x[1]));
+  // Radial traction
+  result[0] = P;
+  // Axial traction
+  result[1] = 0.0;
+  // Azimuthal traction
+  result[2] = 0.0;
  }
  
  
- /// \short The body force function; returns vector of complex doubles
- /// in the order (b_r, b_z, b_theta)
- void body_force(const Vector<double> &x,
-                 Vector<std::complex<double> > &result)
- {
-  result[0] = 
-   x[0]*(-2.0*I*lambda*double(Fourier_wavenumber)*pow(x[1],3)-cos(x[1])*
-         (lambda*(8.0+3.0*x[0])-
-          mu*(pow(double(Fourier_wavenumber),2)
-              -16.0+x[0]*(x[0]-3.0))+pow(x[0],2)*Omega_sq));
-  result[1] = 
-   x[0]*sin(x[1])*(mu*(pow(double(Fourier_wavenumber),2)-9.0)+
-                   4.0*x[0]*(lambda+mu)+pow(x[0],2)*
-                   (lambda+2.0*mu-Omega_sq))-
-   3.0*I*double(Fourier_wavenumber)*pow(x[0],2)*pow(x[1],2)*(lambda+mu);
-  result[2] = 
-   -x[0]*(8.0*mu*pow(x[1],3)-pow(double(Fourier_wavenumber),2)*pow(x[1],3)*
-          (lambda+2.0*mu)+pow(x[0],2)*(pow(x[1],3)*Omega_sq+6.0*mu*x[1])+
-          I*cos(x[1])*double(Fourier_wavenumber)*
-          (lambda*(4.0+x[0])+mu*(6.0+x[0])));
- }
- 
- /// The exact solution in a flat-packed vector:
- // 0: u_r[real], 1: u_z[real],..., 5: u_theta[imag]
- void exact_solution(const Vector<double> &x,
-                     Vector<double> &u)
- {
-  u[0] = pow(x[0],3)*cos(x[1]);
-  u[1] = pow(x[0],3)*sin(x[1]);
-  u[2] = pow(x[0],3)*pow(x[1],3);
-  u[3] = 0.0;
-  u[4] = 0.0;
-  u[5] = 0.0;
- }
-
 } // end_of_namespace
 
 
@@ -187,137 +151,32 @@ FourierDecomposedTimeHarmonicLinearElasticityProblem
  // Set the boundary conditions for this problem: All nodes are
  // free by default -- just pin & set the ones that have Dirichlet 
  // conditions here
- 
- // storage for nodal position
- Vector<double> x(2);
-
- // Storage for prescribed displacements
- Vector<double> u(6);
-
- unsigned ibound, num_nod;
-
- // // Uncomment this section to pin displacments on r=rmin 
- // // (boundary 3) rather than prescribe traction
- // //-------------------------------------
- // ibound=3;
- // num_nod=Bulk_mesh_pt->nboundary_node(ibound);
- // for (unsigned inod=0;inod<num_nod;inod++)
- //  {
- //   // Get pointer to node
- //   Node* nod_pt=Bulk_mesh_pt->boundary_node_pt(ibound,inod);
-
- //   // get r and z coordinates
- //   x[0]=nod_pt->x(0);
- //   x[1]=nod_pt->x(1);
-
- //   // Pinned in r, z and theta
- //   nod_pt->pin(0);nod_pt->pin(1);nod_pt->pin(2);
- //   nod_pt->pin(3);nod_pt->pin(4);nod_pt->pin(5);
-
- //   // Compute the value of the exact solution at the nodal point
- //   Vector<double> u(6);
- //   Global_Parameters::exact_solution(x,u);
-
- //   // Set the displacements
- //   nod_pt->set_value(0,u[0]);
- //   nod_pt->set_value(1,u[1]);
- //   nod_pt->set_value(2,u[2]);
- //   nod_pt->set_value(3,u[3]);
- //   nod_pt->set_value(4,u[4]);
- //   nod_pt->set_value(5,u[5]);
- //  }
 
 
- // Now set displacements on z=zmin (boundary 0) 
- //------------------------------------------
- ibound=0;
- num_nod=Bulk_mesh_pt->nboundary_node(ibound);
- for (unsigned inod=0;inod<num_nod;inod++) 
+
+ // Pin displacements everywhere apart from boundaries 1 and 3
+ //-----------------------------------------------------------
+ for (unsigned ibound=0;ibound<3;ibound=ibound+2)
   {
-   // Get pointer to node
-   Node* nod_pt=Bulk_mesh_pt->boundary_node_pt(ibound,inod);
-
-   // get r and z coordinates
-   x[0]=nod_pt->x(0);
-   x[1]=nod_pt->x(1);
- 
-   // Pinned in r, z and theta
-   nod_pt->pin(0);nod_pt->pin(1);nod_pt->pin(2);
-   nod_pt->pin(3);nod_pt->pin(4);nod_pt->pin(5);
-
-   // Compute the value of the exact solution at the nodal point
-   Vector<double> u(6);
-   Global_Parameters::exact_solution(x,u);
-
-   // Set the displacements
-   nod_pt->set_value(0,u[0]);
-   nod_pt->set_value(1,u[1]);
-   nod_pt->set_value(2,u[2]);
-   nod_pt->set_value(3,u[3]);
-   nod_pt->set_value(4,u[4]);
-   nod_pt->set_value(5,u[5]);
+   unsigned num_nod=Bulk_mesh_pt->nboundary_node(ibound);
+   for (unsigned inod=0;inod<num_nod;inod++) 
+    {
+     // Get pointer to node
+     Node* nod_pt=Bulk_mesh_pt->boundary_node_pt(ibound,inod);
+     
+     // Pinned in r, z and theta
+     nod_pt->pin(0);nod_pt->pin(1);nod_pt->pin(2);
+     nod_pt->pin(3);nod_pt->pin(4);nod_pt->pin(5);
+     
+     // Set the displacements
+     nod_pt->set_value(0,0.0);
+     nod_pt->set_value(1,0.0);
+     nod_pt->set_value(2,0.0);
+     nod_pt->set_value(3,0.0);
+     nod_pt->set_value(4,0.0);
+     nod_pt->set_value(5,0.0);
+    }
   }
-
-
- // Now set displacements at r=rmax (boundary 1)
- //-------------------------------------------
- ibound=1;
- num_nod=Bulk_mesh_pt->nboundary_node(ibound);
- for (unsigned inod=0;inod<num_nod;inod++) 
-  {
-   // Get pointer to node
-   Node* nod_pt=Bulk_mesh_pt->boundary_node_pt(ibound,inod);
-
-   // get r and z coordinates
-   x[0]=nod_pt->x(0);
-   x[1]=nod_pt->x(1);
-   
-   // Pinned in r, z and theta
-   nod_pt->pin(0);nod_pt->pin(1);nod_pt->pin(2);
-   nod_pt->pin(3);nod_pt->pin(4);nod_pt->pin(5);
-
-   // Compute the value of the exact solution at the nodal point
-   Vector<double> u(6);
-   Global_Parameters::exact_solution(x,u);
-
-   // Set the displacements
-   nod_pt->set_value(0,u[0]);
-   nod_pt->set_value(1,u[1]);
-   nod_pt->set_value(2,u[2]);
-   nod_pt->set_value(3,u[3]);
-   nod_pt->set_value(4,u[4]);
-   nod_pt->set_value(5,u[5]);
-  }
-
- // Now set displacements at z=zmax (boundary 2)
- //------------------------------------------
- ibound=2;
- num_nod=Bulk_mesh_pt->nboundary_node(ibound);
- for (unsigned inod=0;inod<num_nod;inod++) 
-  {
-   // Get pointer to node
-   Node* nod_pt=Bulk_mesh_pt->boundary_node_pt(ibound,inod);
-
-   // get r and z coordinates
-   x[0]=nod_pt->x(0);
-   x[1]=nod_pt->x(1);
-    
-   // Pinned in r, z and theta
-   nod_pt->pin(0);nod_pt->pin(1);nod_pt->pin(2);
-   nod_pt->pin(3);nod_pt->pin(4);nod_pt->pin(5);
-
-   // Compute the value of the exact solution at the nodal point
-   Vector<double> u(6);
-   Global_Parameters::exact_solution(x,u);
-
-   // Set the displacements
-   nod_pt->set_value(0,u[0]);
-   nod_pt->set_value(1,u[1]);
-   nod_pt->set_value(2,u[2]);
-   nod_pt->set_value(3,u[3]);
-   nod_pt->set_value(4,u[4]);
-   nod_pt->set_value(5,u[5]);
-  } // end_loop_over_boundary_nodes
 
 
  // Complete the problem setup to make the elements fully functional
@@ -328,9 +187,6 @@ FourierDecomposedTimeHarmonicLinearElasticityProblem
   {
    // Cast to a bulk element
    ELEMENT *el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
-
-   // Set the body force
-   el_pt->body_force_fct_pt() = &Global_Parameters::body_force;
 
    // Set the pointer to Poisson's ratio
    el_pt->nu_pt() = &Global_Parameters::Nu;
@@ -422,28 +278,6 @@ doc_solution(DocInfo& doc_info)
  Bulk_mesh_pt->output(some_file,npts);
  some_file.close();
 
- // Output exact solution 
- sprintf(filename,"%s/exact_soln.dat",doc_info.directory().c_str());
- some_file.open(filename);
- Bulk_mesh_pt->output_fct(some_file,npts,
-                          Global_Parameters::exact_solution);
- some_file.close();
-
- // Doc error
- double error=0.0;
- double norm=0.0;
- sprintf(filename,"%s/error.dat",doc_info.directory().c_str());
- some_file.open(filename);
- Bulk_mesh_pt->compute_error(some_file,
-                             Global_Parameters::exact_solution, 
-                             error,norm);
- some_file.close();
-
- // Doc error norm:
- cout << "\nNorm of error:    " << sqrt(error) << std::endl; 
- cout << "Norm of solution: " << sqrt(norm) << std::endl << std::endl;
- cout << std::endl;
-
 } // end_of_doc_solution   
 
 
@@ -453,7 +287,7 @@ doc_solution(DocInfo& doc_info)
 int main(int argc, char* argv[]) 
 {
  // Number of elements in r-direction
- unsigned nr=5;
+ unsigned nr=10;
  
  // Number of elements in z-direction (for (approximately) square elements)
  unsigned nz=unsigned(double(nr)*Global_Parameters::Lz/Global_Parameters::Lr);

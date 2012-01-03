@@ -169,7 +169,6 @@ namespace GlobalParameters
   double rr=sqrt(K_squared)*r;  
   
   // Compute Bessel/Hankel functions
-  // hierher complex<double> fluxx(0.0,0.0);
   Vector<double> jn(N_fourier+1), yn(N_fourier+1),
    jnp(N_fourier+1), ynp(N_fourier+1);
 
@@ -467,9 +466,6 @@ void ScatteringProblem<ELEMENT>::setup_outer_boundary()
       dynamic_cast< HelmholtzDtNBoundaryElement<ELEMENT>*>(
        Helmholtz_outer_boundary_mesh_pt->element_pt(e));
      
-     // Set pointer to wavenumber squared
-     el_pt->k_squared_pt()=&GlobalParameters::K_squared;
-     
      // Set pointer to the mesh that contains all the boundary condition
      // elements on this boundary
      el_pt->set_outer_boundary_mesh_pt(Helmholtz_outer_boundary_mesh_pt);
@@ -484,9 +480,6 @@ void ScatteringProblem<ELEMENT>::setup_outer_boundary()
      
      // Set pointer to outer radius of artificial boundary
      el_pt->outer_radius_pt()=&GlobalParameters::Outer_radius;
-     
-     // Set pointer to wavenumber squared
-     el_pt->k_squared_pt()=&GlobalParameters::K_squared;
      
      // Set order of absorbing boundary condition
      el_pt->abc_order_pt()=&GlobalParameters::ABC_order;

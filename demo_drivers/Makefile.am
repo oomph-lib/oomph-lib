@@ -36,7 +36,8 @@ biharmonic \
 reaction_diffusion \
 flux_transport \
 young_laplace \
-time_harmonic_fourier_decomposed_linear_elasticity
+time_harmonic_fourier_decomposed_linear_elasticity \
+fourier_decomposed_helmholtz
 if WANT_MPI
 SUBDIRS += mpi
 endif

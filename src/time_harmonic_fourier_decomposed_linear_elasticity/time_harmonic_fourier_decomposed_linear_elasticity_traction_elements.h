@@ -124,27 +124,7 @@ public virtual FaceGeometry<ELEMENT>,
  TimeHarmonicFourierDecomposedLinearElasticityTractionElement
   (FiniteElement* const &element_pt, const int &face_index) : 
  FaceGeometry<ELEMENT>(), FaceElement()
-  { 
-#ifdef PARANOID
-   {
-    //Check that the element is not a refineable 3d element
-    ELEMENT* elem_pt = new ELEMENT;
-    //If it's three-d
-    if(elem_pt->dim()==3)
-     {
-      //Is it refineable
-      if(dynamic_cast<RefineableElement*>(elem_pt))
-       {
-        //Issue a warning
-        OomphLibWarning(
-         "This flux element will not work correctly if nodes are hanging\n",
-         "TimeHarmonicFourierDecomposedLinearElasticityTractionElement::Constructor",
-         OOMPH_EXCEPTION_LOCATION);
-       }
-     }
-   }
-#endif
-   
+  {    
    //Attach the geometrical information to the element. N.B. This function
    //also assigns nbulk_value from the required_nvalue of the bulk element
    element_pt->build_face_element(face_index,this);
@@ -395,7 +375,7 @@ template<class ELEMENT>
     //Premultiply the weights and the square-root of the determinant of 
     //the metric tensor
     double W = w*sqrt(Adet);
-    
+
     //Now calculate the load
     Vector<std::complex<double> > traction(n_dim+1);
     get_traction(ipt,

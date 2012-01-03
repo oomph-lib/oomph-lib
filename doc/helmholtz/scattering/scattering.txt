@@ -44,7 +44,7 @@ U(x,y,t) =\Re (u(x,y) \ e^{-i \omega t})
 where \f$ u(x,y) \f$ is complex-valued. This transforms 
 (@R[lin_wave]@) into the Helmholtz equation
 \f[
-\nabla^2 u(x,y,t) + k^2 u = 0
+\nabla^2 u(x,y) + k^2 u(x,y) = 0
  \ \ \ \ \ \ \ \ \ \ \ \ @E[helmholtz]@
 \f]
 where 
@@ -80,7 +80,7 @@ of the Helmholtz equation involve complex-valued solutions, we provide
 separate storage for the real and imaginary parts of the solution -- 
 each \c Node therefore stores two unknowns values. By default,
 the real and imaginary parts are stored as values 0 and 1,
-respecively; see the section \ref numbering for details.
+respectively; see the section \ref numbering for details.
 
 The application of Dirichlet and Neumann boundary conditions is 
 straightforward and follows the pattern employed for the solution
@@ -102,8 +102,8 @@ that the infinite domain is truncated at a circular artificial
 boundary \f$ \Gamma \f$ of radius \f$ R. \f$ [This assumption is also 
 made in the implementation of \c oomph-lib's \c FaceElements
 that allow the (approximate) imposition of the Sommerfeld radiation
-condition. The existing elements can easily be modified to other 
-situations but this has not been done yet -- any volunteers?]
+condition. The methodology can easily be modified to deal with other 
+geometries but this has not been done yet -- any volunteers?]
 All methods exploit the fact that the relevant solution of the 
 Helmholtz equation can be written in polar coordinates as
 \f[
@@ -195,7 +195,7 @@ where
 Equation (@R[gamma_bc]@) again provides a condition on the
 normal derivative of the solution along the artificial boundary 
 and is implemented in the \c HelmholtzDtNBoundaryElement class.
-However, since \f$ \gamma \f$ depends on the solution everywhere 
+Since \f$ \gamma \f$ depends on the solution everywhere 
 along the artificial boundary (see (@R[gamma]@)), the application of the 
 boundary condition (@R[gamma_bc]@) introduces a non-local coupling
 between all the degrees of freedom located on that boundary.
@@ -640,7 +640,7 @@ only be improved by increasing the size of the computational domain.
 - The driver code is: \n\n
   <CENTER>
   <A HREF="../../../../demo_drivers/helmholtz/scattering/scattering.cc">
-  demo_drivers/scattering/scattering.cc
+  demo_drivers/helmholtz/scattering/scattering.cc
   </A>
   </CENTER>
 .
