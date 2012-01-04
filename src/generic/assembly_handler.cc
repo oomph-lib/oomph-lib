@@ -1749,7 +1749,7 @@ namespace oomph
   //this->build_distribution(aug_dist);
 
   //Find the number of dofs of the augmented system
-  const unsigned n_aug_dof = problem_pt->ndof();
+  //const unsigned n_aug_dof = problem_pt->ndof();
 
   //Storage for the result distribution
   LinearAlgebraDistribution result_dist;

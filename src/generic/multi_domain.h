@@ -205,6 +205,13 @@ namespace Multi_domain_functions
   /// properly first in order for it to work
   extern bool Use_bulk_element_as_external;
 
+  /// \short Boolean to indicate if we're allowed to use halo elements
+  /// as external elements. Can drastically reduce the number of
+  /// external halo elements -- currently not aware of any problems
+  /// therefore set to true by default [hierher check] but retention
+  /// of this flag allows easy return to previous implementation.
+  extern bool Allow_use_of_halo_elements_as_external_elements;
+
   /// \short Boolean to indicate whether to doc timings or not.
   extern bool Doc_timings;
 
@@ -325,12 +332,23 @@ namespace Multi_domain_functions
 
   // Helper functions for external haloed node identification
 
+
   /// \short Helper function to add external haloed nodes, inc. masters
+  /// of external haloed nodes
   void add_external_haloed_node_to_storage(int& iproc, Node* nod_pt,
                                            Problem* problem_pt,
                                            Mesh* const &external_mesh_pt,
                                            int& n_cont_inter_values);
 
+  
+  /// \short Recursively add any master nodes (and their master nodes etc) 
+  /// of external haloed nodes
+  void recursively_add_masters_of_external_haloed_node(
+   int& iproc, Node* nod_pt,
+   Problem* problem_pt,
+   Mesh* const &external_mesh_pt,
+   int& n_cont_inter_values);
+  
 
   /// \short Helper function to add external haloed node that is not a master
   void add_external_haloed_node_helper(int& iproc, Node* nod_pt,
@@ -358,9 +376,9 @@ namespace Multi_domain_functions
   void get_required_master_nodal_information_helper
    (int& iproc, Node* master_nod_pt, Problem* problem_pt,
     Mesh* const &external_mesh_pt, int& n_cont_inter_values);
-
+  
   // Helper functions for external halo node identification
-
+  
   /// \short Helper function to add external halo nodes, including any masters,
   /// based on information received from the haloed process
   template<class EXT_ELEMENT>
@@ -371,6 +389,16 @@ namespace Multi_domain_functions
                                           FiniteElement* const &new_el_pt,
                                           int& n_cont_inter_values,
                                           Problem* problem_pt);
+  
+  /// \short Recursively add masters of external halo nodes (and their 
+  /// masters, etc) based on information received from the haloed process
+  template<class EXT_ELEMENT>
+   void recursively_add_masters_of_external_halo_node_to_storage
+   (Node* &new_nod_pt, Mesh* const &external_mesh_pt, unsigned& loc_p,
+    unsigned& node_index, FiniteElement* const &new_el_pt, 
+    int& n_cont_inter_values,
+    Problem* problem_pt);
+   
 
   /// \short Helper function to add external halo node that is not a master
    void add_external_halo_node_helper(Node* &new_nod_pt,

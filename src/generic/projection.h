@@ -656,22 +656,21 @@ class ProjectionProblem : public virtual Problem
    Problem_is_nonlinear=false;
   }
 
-///\short Project from base into the problem's own mesh. hierher: Need to
-/// extend this to the case of multiple sub-meshes.
+ ///\short Project from base into the problem's own mesh. 
  void project(Mesh* base_mesh_pt)
-  {
-
-   //Display stats 
-   unsigned n_element = Problem::mesh_pt()->nelement();
-   unsigned n_element1=base_mesh_pt->nelement();
-   unsigned n_node = Problem::mesh_pt()->nnode();
-   unsigned n_node1=base_mesh_pt->nnode();
-   oomph_info <<"\n=============================\n";
-   oomph_info << "Base mesh has " << n_element1 << " elements\n";
-   oomph_info << "Target mesh has " << n_element << " elements\n";
-   oomph_info << "Base mesh has " << n_node1 << " nodes\n";
-   oomph_info << "Target mesh has " << n_node << " nodes\n";
-   oomph_info <<"=============================\n\n";
+ {
+  
+  //Display stats 
+  unsigned n_element = Problem::mesh_pt()->nelement();
+  unsigned n_element1=base_mesh_pt->nelement();
+  unsigned n_node = Problem::mesh_pt()->nnode();
+  unsigned n_node1=base_mesh_pt->nnode();
+  oomph_info <<"\n=============================\n";
+  oomph_info << "Base mesh has " << n_element1 << " elements\n";
+  oomph_info << "Target mesh has " << n_element << " elements\n";
+  oomph_info << "Base mesh has " << n_node1 << " nodes\n";
+  oomph_info << "Target mesh has " << n_node << " nodes\n";
+  oomph_info <<"=============================\n\n";
    
    if (n_element==0)
     {

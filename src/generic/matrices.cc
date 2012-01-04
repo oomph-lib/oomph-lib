@@ -3098,9 +3098,6 @@ double CRDoubleMatrix::inf_norm() const
    n = n2;
 #endif
    
-   // sqrt the norm // hierher
-   // hierher n = sqrt(n);
-
    // and return
    return n;
   }

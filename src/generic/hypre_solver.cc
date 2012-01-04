@@ -632,17 +632,10 @@ namespace oomph
      }
    } // end of setting up internal preconditioner
 
-  // Record preconditioner set up time
-  double preconditioner_setup_time=0;
-  if (Output_info)
-   {
-    t_end = TimingHelpers::timer();
-    preconditioner_setup_time = t_end-t_start; 
-   }
 
   // set up solver
   // -------------
-  t_start = t_end;
+  t_start = TimingHelpers::timer();
 
   // AMG solver
   if (Hypre_method==BoomerAMG)

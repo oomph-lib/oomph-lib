@@ -667,9 +667,6 @@ void RefineableQElement<2>::build(Mesh*& mesh_pt,
    Vector<double> s_hi(2);
    Vector<double> s(2);
    Vector<double> x(2);
-
-   unsigned ii0_lo=0;
-   unsigned ii1_lo=0;
  
    // Setup vertex coordinates in father element:
    //--------------------------------------------
@@ -680,8 +677,6 @@ void RefineableQElement<2>::build(Mesh*& mesh_pt,
      s_hi[0]= 0.0;
      s_lo[1]=-1.0;
      s_hi[1]= 0.0;
-     ii0_lo=0;
-     ii1_lo=0;
      break;
      
     case SE:
@@ -689,8 +684,6 @@ void RefineableQElement<2>::build(Mesh*& mesh_pt,
      s_hi[0]= 1.0;
      s_lo[1]=-1.0;
      s_hi[1]= 0.0;
-     ii0_lo= n_p-1;
-     ii1_lo=0;
      break;
 
     case NE:
@@ -698,8 +691,6 @@ void RefineableQElement<2>::build(Mesh*& mesh_pt,
      s_hi[0]= 1.0;
      s_lo[1]= 0.0;
      s_hi[1]= 1.0;
-     ii0_lo= n_p-1;
-     ii1_lo= n_p-1;
      break;
 
     case NW:
@@ -707,8 +698,6 @@ void RefineableQElement<2>::build(Mesh*& mesh_pt,
      s_hi[0]= 0.0;
      s_lo[1]= 0.0;
      s_hi[1]= 1.0;
-     ii0_lo=0;
-     ii1_lo= n_p-1;
      break;
     }
 
@@ -1209,11 +1198,9 @@ void RefineableQElement<2>::build(Mesh*& mesh_pt,
       }
 
 #ifdef OOMPH_HAS_MPI
-     // Is the new element a halo element?
-     if (tree_pt()->father_pt()->object_pt()->is_halo())
-      {
-       Is_halo=true;
-      }
+     // Pass on non-halo proc id
+     Non_halo_proc_ID=
+      tree_pt()->father_pt()->object_pt()->non_halo_proc_ID();
 #endif
 
      // Is it an ElementWithMovingNodes? 

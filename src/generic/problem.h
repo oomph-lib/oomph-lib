@@ -803,6 +803,9 @@ protected:
  /// Has the problem been distributed amongst multiple processors?
  bool Problem_has_been_distributed;
 
+ /// Boolean to bypass check of increase in dofs during pruning
+ bool Bypass_increase_in_dof_check_during_pruning;
+
   public:
 
  /// access function to the problem has been distributed flag

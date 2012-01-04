@@ -70,7 +70,7 @@ namespace oomph
     // Cache the hanging point
     HangInfo* hang_info_pt = 0;
     
-    // Find tghe number of master nodes if the node is hanging
+    // Find the number of master nodes if the node is hanging
     if (node_is_hanging) 
      {
       hang_info_pt = nod_pt->hanging_pt();
@@ -84,6 +84,7 @@ namespace oomph
       if (node_is_hanging)
        {master_node_pt = hang_info_pt->master_node_pt(imaster);}
       
+
       //Find the number of data
       const unsigned n_geom_data = master_node_pt->ngeom_data();
       //If there are geometric data add them to the set
@@ -98,7 +99,6 @@ namespace oomph
           unique_geom_data_pt.insert(node_geom_data_pt[i]);
          }
        }
-      
           
       // Find the number of geometric objects
       unsigned n_geom_obj = master_node_pt->ngeom_object();
@@ -116,7 +116,7 @@ namespace oomph
          {
           //Get the next geometric object
           GeomObject* geom_obj_pt=geom_object_pt[i];
-          
+
           // Number of items of geometric data that the geometric
           // object depends on
           unsigned n_geom_data=geom_obj_pt->ngeom_data();

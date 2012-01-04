@@ -124,8 +124,8 @@ class GeneralisedElement
 
 #ifdef OOMPH_HAS_MPI
 
- /// Is this element a halo?
- bool Is_halo;
+ /// \short Non-halo processor ID for Data; -1 if it's not a halo.
+ int Non_halo_proc_ID;
 
  /// Does this element need to be kept as a halo element during a distribute?
  bool Must_be_kept_as_halo;
@@ -567,7 +567,7 @@ public:
  GeneralisedElement() : Time_pt(0), Eqn_number(0), Data_pt(0),
   Data_local_eqn(0), Ndof(0), Ninternal_data(0), Nexternal_data(0)
 #ifdef OOMPH_HAS_MPI
-  , Is_halo(false), Must_be_kept_as_halo(false)
+  , Non_halo_proc_ID(-1) , Must_be_kept_as_halo(false)
 #endif
  {}
 
@@ -983,15 +983,26 @@ public:
 
 #ifdef OOMPH_HAS_MPI
 
- /// \short Label the element as halo
- void set_halo() {Is_halo=true;}
+ /// \short Label the element as halo and specify processor that holds
+ /// non-halo counterpart
+ void set_halo(const unsigned& non_halo_proc_ID) 
+ {
+  Non_halo_proc_ID=non_halo_proc_ID;
+ }
 
  /// \short Label the element as not being a halo
- void set_nonhalo() {Is_halo=false;}
-
+ void set_nonhalo() {Non_halo_proc_ID=-1;}
+ 
  /// \short Is this element a halo?
- bool is_halo() const {return Is_halo;} 
-
+ bool is_halo() const {return (Non_halo_proc_ID!=-1);} 
+ 
+ /// \short ID of processor ID that holds non-halo counterpart
+ /// of halo element; negative if not a halo.
+ int non_halo_proc_ID() 
+ {
+  return Non_halo_proc_ID;
+ }
+ 
  /// Insist that this element be kept as a halo element during a distribute?
  void set_must_be_kept_as_halo() {Must_be_kept_as_halo = true;}
 

@@ -71,6 +71,12 @@ public:
                       const double &a,
                       TimeStepper* time_stepper_pt=
                       &Mesh::Default_TimeStepper); 
+
+ /// Destructor: Kill the domain
+ virtual ~CylinderWithFlagMesh()
+  {
+   delete Domain_pt;
+  }
  
  /// Access function to the domain
  CylinderWithFlagDomain* domain_pt() {return Domain_pt;}

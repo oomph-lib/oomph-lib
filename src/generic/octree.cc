@@ -4103,7 +4103,6 @@ void OcTree::doc_face_neighbours(Vector<Tree*> forest_nodes_pt,
  using namespace OcTreeNames;
 
  int diff_level;
- double s_difflo,s_diffhi;
  int face=OMEGA;
  
  Vector<double> s(3);
@@ -4151,8 +4150,6 @@ void OcTree::doc_face_neighbours(Vector<Tree*> forest_nodes_pt,
       
       // Initialise difference in levels and coordinate offset
      diff_level=0;
-     s_difflo=0.0;
-     s_diffhi=0.0;
 
      // Find greater-or-equal-sized neighbour...
       OcTree* neighb_pt=el_pt->gteq_face_neighbour(direction, translate_s,
@@ -4659,6 +4656,12 @@ OcTreeForest::OcTreeForest(Vector<TreeRoot* >& trees_pt) :
 #ifdef LEAK_CHECK
  LeakCheckNames::OcTreeForest_build+=1;
 #endif
+
+ // Don't setup neighbours etc. if forest is empty
+ if (trees_pt.size()==0)
+  {
+   return;
+  }
 
  using namespace OcTreeNames;
  

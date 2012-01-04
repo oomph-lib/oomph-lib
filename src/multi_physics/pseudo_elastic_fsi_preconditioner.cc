@@ -56,7 +56,7 @@ namespace oomph {
  {
   // clean the memory
   this->clean_up_memory();
-  
+
 #ifdef PARANOID
   // paranoid check that the meshes have been set
   if (Fluid_and_pseudo_elastic_mesh_pt==0)
@@ -86,6 +86,7 @@ namespace oomph {
    }
 #endif
   
+
   // add the meshes
   this->set_mesh(0,problem_pt,Fluid_and_pseudo_elastic_mesh_pt);
   this->set_mesh(1,problem_pt,Solid_mesh_pt);
@@ -93,7 +94,7 @@ namespace oomph {
   
   // determine the number of fluid dofs
   unsigned nfluid_dof = Dim + 1;
-  
+
   // determine the number of pseudo solid dofs
   unsigned npseudo_elastic_dof = this->ndof_types_in_mesh(0)-nfluid_dof;
   
@@ -154,13 +155,16 @@ namespace oomph {
    {
     Navier_stokes_schur_complement_preconditioner_pt->
      set_navier_stokes_mesh(Fluid_and_pseudo_elastic_mesh_pt);
+
     Vector<unsigned> ns_dof_list(nfluid_dof,0);
     for (unsigned i = 0; i < nfluid_dof; i++)
      {
       ns_dof_list[i] = i;
      }
+
     Navier_stokes_schur_complement_preconditioner_pt->
      turn_into_subsidiary_block_preconditioner(this,ns_dof_list);
+
     Navier_stokes_schur_complement_preconditioner_pt->setup(problem_pt,
                                                             matrix_pt);
    }
@@ -168,6 +172,7 @@ namespace oomph {
    {
     CRDoubleMatrix* ns_matrix_pt = 0;
     this->get_block(0,0,cr_matrix_pt,ns_matrix_pt);
+
     Navier_stokes_preconditioner_pt->setup(problem_pt,ns_matrix_pt);
     delete ns_matrix_pt;
    }
@@ -189,6 +194,7 @@ namespace oomph {
        {
         solid_prec_dof_list[i]=offset+i;
        }
+
       solid_block_preconditioner_pt
        ->turn_into_subsidiary_block_preconditioner(this,
                                                    solid_prec_dof_list);
@@ -268,6 +274,7 @@ namespace oomph {
   get_block(3,1,cr_matrix_pt,ls_matrix_pt);
   Lagrange_solid_matvec_pt->setup(ls_matrix_pt);
   delete ls_matrix_pt;
+
  }
 
  //=============================================================================

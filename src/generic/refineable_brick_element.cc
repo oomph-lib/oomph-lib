@@ -1269,10 +1269,6 @@ void RefineableQElement<3>::build(Mesh*& mesh_pt,
    Vector<int> s_hi(3);
    Vector<double> s(3);
    Vector<double> x(3);
-   
-   unsigned ii0_lo=0;
-   unsigned ii1_lo=0;
-   unsigned ii2_lo=0;
  
    // Setup vertex coordinates in father element:
    //--------------------------------------------
@@ -1293,11 +1289,7 @@ void RefineableQElement<3>::build(Mesh*& mesh_pt,
     {
      s_hi[i]=s_lo[i]+1;
     }
-   
-   ii0_lo=(1+s_lo[0])*(n_p-1);
-   ii1_lo=(1+s_lo[1])*(n_p-1);
-   ii2_lo=(1+s_lo[2])*(n_p-1);
-   
+      
    // Pass macro element pointer on to sons and
    // set coordinates in macro element
    if(father_el_pt->macro_elem_pt()!=0)
@@ -1705,7 +1697,8 @@ void RefineableQElement<3>::build(Mesh*& mesh_pt,
      // Is the new element a halo element?
      if (tree_pt()->father_pt()->object_pt()->is_halo())
       {
-       Is_halo=true;
+       Non_halo_proc_ID=
+        tree_pt()->father_pt()->object_pt()->non_halo_proc_ID();
       }
 #endif
 
@@ -2233,12 +2226,15 @@ void RefineableQElement<3>::check_integrity(double& max_error)
               //If it's bigger than our tolerance, say so
               if (err>1e-9)
                {
-                oomph_info << "errx " << err << " " << t << " " 
-                          << node_pt(n)->x(t,i) 
-                          << " " <<  x_in_neighb[i]<< std::endl;
-                
-                oomph_info << "at " <<  node_pt(n)->x(0) << " "
-                          <<  node_pt(n)->x(1) << std::endl;
+                oomph_info << "errx[" << i << "], t x, x_neigh: " 
+                           << err << " " << t << " " 
+                           << node_pt(n)->x(t,i) 
+                           << " " <<  x_in_neighb[i]<< std::endl;
+                oomph_info << "at " 
+                           <<  node_pt(n)->x(0) << " "
+                           <<  node_pt(n)->x(1) << " " 
+                           <<  node_pt(n)->x(2) << " " 
+                           << std::endl;
                }
               
               //If it's bigger than the previous max error, it is the

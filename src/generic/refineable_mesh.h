@@ -38,6 +38,11 @@
 namespace oomph
 {
 
+
+  
+
+
+
 //=======================================================================
 /// Base class for refineable meshes. Provides standardised interfaces
 /// for the following standard mesh adaptation routines:
@@ -49,8 +54,8 @@ namespace oomph
 //=======================================================================
 class RefineableMeshBase : public virtual Mesh
 {
-public:
 
+public:
 
  /// Constructor sets default values for refinement targets etc.
  /// and initialises pointer to spatial error estimator to NULL.
@@ -439,13 +444,90 @@ public:
  }
  
 #ifdef OOMPH_HAS_MPI
+
+ /// Classify all halo and haloed information in the mesh (overloaded
+ /// version from Mesh base class. Calls that one first, then synchronises
+ /// hanging nodes)
+ void classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
+                                     DocInfo& doc_info, 
+                                     const bool& report_stats)
+ {
+
+  // Call version in base class but don't bother to call
+  // resize_halo_nodes() -- we'll do it ourselves below
+  bool backup=Resize_halo_nodes_not_required;
+  Resize_halo_nodes_not_required=false;
+  Mesh::classify_halo_and_haloed_nodes(comm_pt, 
+                                       doc_info,
+                                       report_stats);
+  Resize_halo_nodes_not_required=backup;
+
+  double t_start=0.0;
+  if (Global_timings::Doc_comprehensive_timings)
+   {
+    t_start = TimingHelpers::timer();
+   }
+  
+  // Get number of continously interpolated variables
+  unsigned local_ncont_interpolated_values=0;
+  
+  // Bypass if we have no elements and then get overall
+  // value by reduction
+  if (nelement()>0)
+   {         
+    local_ncont_interpolated_values=dynamic_cast<RefineableElement*>
+     (element_pt(0))->ncont_interpolated_values();
+   }
+  // hierher remove MPI helpers communicator!
+  unsigned ncont_interpolated_values=0;
+  MPI_Allreduce(&local_ncont_interpolated_values,
+                &ncont_interpolated_values,1,
+                MPI_UNSIGNED,MPI_MAX,
+                MPI_Helpers::communicator_pt()->mpi_comm());
+  
+  // Synchronise the hanging nodes 
+  synchronise_hanging_nodes(comm_pt,ncont_interpolated_values);
+
+  if (Global_timings::Doc_comprehensive_timings)
+   {
+    double t_end = TimingHelpers::timer();
+    oomph_info 
+        << "Time for "
+        << "TreeBasedRefineableMeshBase::synchronise_hanging_nodes() "
+        << "incl. time for initial allreduce in " 
+        << "TreeBasedRefineableMeshBase::classify_halo_and_haloed_nodes(): " 
+        << t_end-t_start << std::endl;
+   }
+
+  // Now do resize halo nodes after all (unless it's been 
+  // declared to be unnecessary by somebody...)
+  if (!Resize_halo_nodes_not_required)
+   {
+    resize_halo_nodes(comm_pt);
+   }
+
+ }
+
+
+ /// Classify the halo and haloed nodes in the mesh. 
+ void classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
+                                     const bool& report_stats=false)
+ {
+  DocInfo doc_info;
+  doc_info.disable_doc();
+  classify_halo_and_haloed_nodes(comm_pt,doc_info,report_stats);
+ }
+ 
+#endif
+
+protected:
+ 
+#ifdef OOMPH_HAS_MPI
  /// Synchronise the hanging nodes if the mesh is distributed
  void synchronise_hanging_nodes(OomphCommunicator* comm_pt,
                                 const unsigned& ncont_interpolated_values);
 #endif
 
-protected:
- 
  /// \short Split all the elements in the mesh if required. This template free
  /// interface will be overloaded in RefineableMesh<ELEMENT> so that
  /// any new elements that are created will be of the correct type.
@@ -472,6 +554,20 @@ protected:
 
  /// Forest representation of the mesh
  TreeForest* Forest_pt;
+
+  private:
+ 
+ /// \short Helper struct to collate data required during 
+ /// TreeBasedRefineableMeshBase::synchronise_hanging_nodes
+ struct HangHelperStruct
+ {
+  unsigned Sending_processor;
+  unsigned Shared_node_id_on_sending_processor;
+  unsigned Shared_node_proc;
+  double Weight;
+  HangInfo* Hang_pt;
+  unsigned Master_node_index;
+ };  
 
 };
 

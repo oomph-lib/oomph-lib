@@ -782,9 +782,9 @@ namespace FSI_functions
  template<class SOLID_ELEMENT, unsigned DIM_SOLID>
   void setup_solid_elements_for_displacement_bc(
    Problem* problem_pt,
-   const unsigned & b_solid_fsi, // hierher boundary_in_fluid_mesh,
-   Mesh* const &solid_mesh_pt, // hierher fluid_mesh_pt,
-   Mesh* const &lagrange_multiplier_mesh_pt) // solid_mesh_pt,
+   const unsigned & b_solid_fsi, 
+   Mesh* const &solid_mesh_pt, 
+   Mesh* const &lagrange_multiplier_mesh_pt)
  {
   
   // Create a face mesh adjacent to the solid mesh's b-th boundary. 

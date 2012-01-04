@@ -549,11 +549,9 @@ namespace oomph
        }
       
 #ifdef OOMPH_HAS_MPI
-      // Is the new element a halo element?
-      if (tree_pt()->father_pt()->object_pt()->is_halo())
-       {
-        Is_halo=true;
-       }
+      // Pass on non-halo proc ID
+      Non_halo_proc_ID=
+       tree_pt()->father_pt()->object_pt()->non_halo_proc_ID();
 #endif
       
       // Is the new element an ElementWithMovingNodes? 

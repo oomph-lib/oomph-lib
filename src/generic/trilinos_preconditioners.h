@@ -37,6 +37,9 @@
 #include "mpi.h"
 #endif
 
+// Needed in trilinos (as of gcc 4.6.* or so...)
+#include<cstddef>
+
 // trilinos headers
 #include "ml_include.h"
 #include "ml_MultiLevelPreconditioner.h"

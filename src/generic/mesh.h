@@ -147,6 +147,12 @@ class Mesh
  /// bool to indicate whether to keep all elements in a mesh as halos or not
  bool Keep_all_elements_as_halos;
 
+ /// Set this to true to suppress resizing of halo nodes (at your own risk!)
+ bool Resize_halo_nodes_not_required;
+
+ /// Setup shared node scheme
+ void setup_shared_node_scheme();
+
 #endif
 
  /// \short Assign the global equation numbers in the Data stored at the nodes 
@@ -176,11 +182,12 @@ class Mesh
  /// addressed by node_pt on return from the function.
  void convert_to_boundary_node(Node* &node_pt);
 
+
+public:
+
+
 #ifdef OOMPH_HAS_MPI
 
-
- /// Set this to true to suppress resizing of halo nodes (at your own risk!)
- bool Resize_halo_nodes_not_required;
 
  /// \short Helper function that resizes halo nodes to the same
  /// size as their non-halo counterparts if required. (A discrepancy
@@ -194,7 +201,7 @@ class Mesh
      
 #endif
 
-public:
+
 
 
  /// \short Typedef for function pointer to function that computes 
@@ -931,19 +938,38 @@ public:
  void check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info, 
                          double& max_permitted_error_for_halo_check);
 
- /// \short Classify the halo and haloed nodes in the mesh
- void classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
-                                     DocInfo& doc_info,
-                                     const bool& report_stats);
+ /// \short Classify the halo and haloed nodes in the mesh. Virtual
+ /// so it can be overloaded to perform additional functionality
+ /// (such as synchronising hanging nodes) in refineable meshes, say.
+ virtual void classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
+                                             DocInfo& doc_info,
+                                             const bool& report_stats);
 
- /// Classify the halo and haloed nodes in the mesh
- void classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
-                                     const bool& report_stats=false)
+ /// Classify the halo and haloed nodes in the mesh. Virtual
+ /// so it can be overloaded to perform additional functionality
+ /// (such as synchronising hanging nodes) in refineable meshes, say.
+ virtual void classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
+                                             const bool& report_stats=false)
   {
    DocInfo doc_info;
    doc_info.disable_doc();
    classify_halo_and_haloed_nodes(comm_pt,doc_info,report_stats);
   }
+ 
+ /// \short Synchronise shared node lookup schemes to cater for the
+ /// the case where: 
+ /// (1) a certain node on the current processor is halo with proc p 
+ ///     (i.e. its non-halo counterpart lives on processor p)
+ /// (2) that node is also exists (also as a halo) on another processor 
+ ///     (q, say) where its non-halo counter part is also known to be 
+ ///     on processor p.
+ /// However, without calling this function the current processor does not
+ /// necessarily know that it shares a node with processor q. This
+ /// information can be required, e.g. when synchronising hanging node
+ /// schemes over all processors.
+ void synchronise_shared_nodes(OomphCommunicator* comm_pt,
+                               const bool& report_stats);
+
 
  /// \short Get all the halo data stored in the mesh and add pointers to
  /// the data to the map, indexed by global equation number
@@ -1083,7 +1109,7 @@ public:
  void add_root_halo_element_pt(const unsigned& p, GeneralisedElement*& el_pt)
   {
    Root_halo_element_pt[p].push_back(el_pt);
-   el_pt->set_halo(); 
+   el_pt->set_halo(p); 
   }
 
  /// \short Total number of halo nodes in this Mesh
@@ -1232,10 +1258,6 @@ public:
    Output_halo_elements=true;
   }
 
-
- /// Setup shared node scheme
- void setup_shared_node_scheme();
-
  /// \short Total number of shared nodes in this Mesh
  unsigned nshared_node()
   {
@@ -1315,6 +1337,35 @@ public:
  // External halo(ed) elements are "source/other" elements which are
  // on different processes to the element for which they are the source
 
+ /// \short Output all external halo elements
+ void output_external_halo_elements(std::ostream &outfile,
+                                    const unsigned &n_plot=5)
+ {
+  for (std::map<unsigned,Vector<GeneralisedElement*> >::iterator it=
+        External_halo_element_pt.begin();
+       it!=External_halo_element_pt.end();it++)
+   {
+    unsigned p=(*it).first;
+    output_external_halo_elements(p,outfile,n_plot);
+   }
+ }
+ 
+ /// \short Output all external halo elements with processor p
+ void output_external_halo_elements(const unsigned& p, std::ostream &outfile, 
+                                    const unsigned &n_plot=5)
+ {
+  unsigned nel=External_halo_element_pt[p].size();
+  for (unsigned e=0;e<nel;e++)
+   {
+    FiniteElement* fe_pt=dynamic_cast<FiniteElement*>(
+     External_halo_element_pt[p][e]);
+    if (fe_pt!=0)
+     {
+      fe_pt->output(outfile,n_plot);
+     }
+   }
+ }
+
  /// \short Total number of external halo elements in this Mesh
  unsigned nexternal_halo_element() 
   {
@@ -1348,8 +1399,8 @@ public:
  void add_external_halo_element_pt(const unsigned& p, 
                                    GeneralisedElement*& el_pt)
   {
-   el_pt->set_halo();
    External_halo_element_pt[p].push_back(el_pt);
+   el_pt->set_halo(p);
   }
 
  /// \short Total number of external haloed elements in this Mesh
@@ -1397,6 +1448,37 @@ public:
    return n;
   }
 
+
+ /// \short Get vector of pointers to all external halo nodes
+ void get_external_halo_node_pt(Vector<Node*>& external_halo_node_pt)
+ {
+  unsigned n_total=nexternal_halo_node();
+  external_halo_node_pt.reserve(n_total);
+  for (std::map<unsigned,Vector<Node*> >::iterator it=
+        External_halo_node_pt.begin();it!=External_halo_node_pt.end();it++)
+   {
+    unsigned np=(it->second).size();
+    for (unsigned j=0;j<np;j++)
+     {
+      external_halo_node_pt.push_back((it->second)[j]);
+     }
+   }
+#ifdef PARANOID
+  if (external_halo_node_pt.size()!=n_total)
+   {
+    std::ostringstream error_stream;
+    error_stream  
+     << "Total number of external halo nodes, " 
+     << n_total << " doesn't match number of entries \n in vector, " 
+     << external_halo_node_pt.size() << std::endl; 
+    throw OomphLibError(error_stream.str(),
+                        "Mesh::get_external_halo_node_pt()",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+ }
+
+
  /// \short Number of external halo nodes in this Mesh whose non-halo 
  /// (external) counterpart is held on processor p.
  unsigned nexternal_halo_node(const unsigned& p)
@@ -1408,8 +1490,8 @@ public:
  /// is held on processor p to the storage scheme for halo nodes.
  void add_external_halo_node_pt(const unsigned& p, Node*& nod_pt)
   {
-   nod_pt->set_halo();
    External_halo_node_pt[p].push_back(nod_pt);
+   nod_pt->set_halo(p);
   }
 
 
@@ -1476,6 +1558,9 @@ public:
 
  /// \short Wipe the storage for all externally-based elements
  void delete_all_external_storage();
+
+
+
 
 };
 

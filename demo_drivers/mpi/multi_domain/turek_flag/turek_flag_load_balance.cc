@@ -453,9 +453,6 @@ private:
  /// Vector of pointers to mesh of FSI traction elements
  Vector<SolidMesh*> Traction_mesh_pt;
 
- /// Combined mesh of traction elements -- only used for documentation
- SolidMesh* Combined_traction_mesh_pt;
-
  /// Overall height of domain
  double Domain_height;
 
@@ -1083,6 +1080,23 @@ const bool& called_from_adapt)
 
   } // end of (re-)assignment of the auxiliary node update fct
 
+
+
+ // Call update_node_update for all the nodes of external halo elements
+ Vector<Node*> external_halo_node_pt;
+ fluid_mesh_pt()->get_external_halo_node_pt(external_halo_node_pt);
+ unsigned n=external_halo_node_pt.size();
+ for (unsigned j=0;j<n;j++)
+  {
+   // Get the (algebraic) node
+   AlgebraicNode* alg_nod_pt=dynamic_cast<AlgebraicNode*>
+    (external_halo_node_pt[j]);
+   
+   // Call update_node_update for this node
+   fluid_mesh_pt()->update_node_update(alg_nod_pt);
+  }
+ 
+
  // Re-set control nodes
 
  // Loop over fluid nodes
@@ -1141,22 +1155,6 @@ void TurekProblem<FLUID_ELEMENT,SOLID_ELEMENT>::create_fsi_traction_elements()
      
     } //end of loop over bulk elements adjacent to boundary b
 
-   // Identify unique nodes
-   unsigned nnod=solid_mesh_pt()->nboundary_node(b);
-   for (unsigned j=0;j<nnod;j++)
-    {
-     all_nodes.insert(solid_mesh_pt()->boundary_node_pt(b,j));
-    }
-  }
-
- // Build combined mesh of fsi traction elements
- Combined_traction_mesh_pt=new SolidMesh(Traction_mesh_pt);
- 
- // Stick nodes into combined traction mesh
- for (std::set<SolidNode*>::iterator it=all_nodes.begin();
-      it!=all_nodes.end();it++)
-  {
-   Combined_traction_mesh_pt->add_node_pt(*it);
   }
 
 } // end of create_traction_elements
@@ -1270,6 +1268,21 @@ int main(int argc, char* argv[])
   MPI_Helpers::init(argc,argv);
 #endif
 
+
+
+  // Switch off output modifier
+ oomph_info.output_modifier_pt() = &default_output_modifier;
+
+ // Define processor-labeled output file for all on-screen stuff
+ std::ofstream output_stream;
+ char filename[100];
+ sprintf(filename,"RESLT_TUREK_LOAD_BALANCE/OUTPUT.%i",
+         MPI_Helpers::communicator_pt()->my_rank());
+ output_stream.open(filename);
+ oomph_info.stream_pt() = &output_stream;
+ OomphLibWarning::set_stream_pt(&output_stream);
+ OomphLibError::set_stream_pt(&output_stream);  
+
  // Store command line arguments
  CommandLineArgs::setup(argc,argv);
 
@@ -1309,7 +1322,6 @@ int main(int argc, char* argv[])
  // Prepare output
  DocInfo doc_info;
  ofstream trace_file; 
- char filename[100];
  doc_info.set_directory("RESLT_TUREK_LOAD_BALANCE");
  sprintf(filename,"%s/trace_on_proc%i.dat",doc_info.directory().c_str(),
          problem.communicator_pt()->my_rank());

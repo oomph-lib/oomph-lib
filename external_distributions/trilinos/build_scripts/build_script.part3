@@ -6,5 +6,18 @@
 #mv ./packages/anasazi/test/MVOPTester/Makefile ./packages/anasazi/test/MVOPTester/Makefile.back
 #sed "s/cp  \$(srcdir)\/mhd1280b.cua mhd1280b.cua/#cp  \$(srcdir)\/mhd1280b.cua mhd1280b.cua/g" < ./packages/anasazi/test/MVOPTester/Makefile.back > ./packages/anasazi/test/MVOPTester/Makefile
 
+
+# Fix header files in teuchos for gcc4.6
+#---------------------------------------
+cd ./packages/teuchos/src
+file_list="Teuchos_ArrayViewDecl.hpp  Teuchos_ErrorPolling.cpp  Teuchos_ParameterEntry.cpp  Teuchos_ParameterListNonAcceptor.cpp Teuchos_CTimeMonitor.cpp   Teuchos_MPIComm.cpp       Teuchos_ParameterList.cpp   Teuchos_PerformanceMonitorUtils.cpp"
+
+for file in `echo $file_list`; do
+    cp $file $file.back
+    cat ../../../../build_scripts/teuchos_header_prefix_for_gcc4.6.txt $file.back > $file
+    rm $file.back
+done
+cd ../../..
+
 make 
 make install

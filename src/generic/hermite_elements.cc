@@ -294,11 +294,8 @@ void QHermiteElement<1>::build_face_element(const int &face_index,
  face_element_pt->bulk_element_pt()=this;
  
 #ifdef OOMPH_HAS_MPI
- // If the bulk element is halo then the face element must be too
- if (this->is_halo())
-  {
-   face_element_pt->set_halo();
-  }
+ // Pass on non-halo ID
+ face_element_pt->set_halo(Non_halo_proc_ID);
 #endif
 
  // Resize the storage for the original number of values at the (one and only)
@@ -950,11 +947,8 @@ void QHermiteElement<2>::build_face_element(const int &face_index,
  face_element_pt->bulk_element_pt()=this;
   
 #ifdef OOMPH_HAS_MPI
- // If the bulk element is halo then the face element must be too
- if (this->is_halo())
-  {
-   face_element_pt->set_halo();
-  }
+ // Pass on non-halo proc ID
+ face_element_pt->set_halo(Non_halo_proc_ID);
 #endif
 
  //Resize the bulk_position_type translation scheme to the number of position

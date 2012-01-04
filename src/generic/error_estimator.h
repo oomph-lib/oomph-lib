@@ -578,16 +578,6 @@ class Z2ErrorEstimator : public virtual ErrorEstimator
      }
 #endif
 
-    unsigned dim=mesh_pt->finite_element_pt(0)->node_pt(0)->ndim();
-    if (use_lagrangian_coordinates)
-     {
-      SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(
-       mesh_pt->finite_element_pt(0)->node_pt(0));
-      if (solid_nod_pt!=0)
-       {
-        dim=solid_nod_pt-> nlagrangian();
-       }
-     }
     unsigned nregion=1;
     Region_low_bound.resize(nregion);
     Region_upp_bound.resize(nregion);

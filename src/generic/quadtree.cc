@@ -794,6 +794,12 @@ QuadTreeForest::QuadTreeForest(Vector<TreeRoot* >& trees_pt) :
  LeakCheckNames::QuadTreeForest_build+=1;
 #endif
 
+ // Don't setup neighbours etc. if forest is empty
+ if (trees_pt.size()==0)
+  {
+   return;
+  }
+
  using namespace QuadTreeNames;
 
  //Setup the neighbours

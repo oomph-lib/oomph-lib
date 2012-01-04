@@ -192,6 +192,13 @@ namespace Multi_domain_functions
   /// properly first in order for it to work
   bool Use_bulk_element_as_external=false;
 
+  /// \short Boolean to indicate if we're allowed to use halo elements
+  /// as external elements. Can drastically reduce the number of
+  /// external halo elements -- currently not aware of any problems
+  /// therefore set to true by default [hierher check] but retention
+  /// of this flag allows easy return to previous implementation.
+  bool Allow_use_of_halo_elements_as_external_elements=true;
+
   /// \short Boolean to indicate whether to doc timings or not.
   bool Doc_timings=false;
 
@@ -345,6 +352,14 @@ namespace Multi_domain_functions
     {     
      MPI_Isend(&Flat_packed_unsigneds[0],send_count_unsigned_values,MPI_INT,
                orig_send_proc,15,comm_pt->mpi_comm(),&request);
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+     for (unsigned i=0;i<send_count_unsigned_values;i++)
+      {
+       oomph_info << "Sent:" << i << " to orig_proc:" << orig_send_proc
+                  << " " << Flat_packed_unsigneds_string[i] 
+                  << ": " << Flat_packed_unsigneds[i] << std::endl;
+      }
+#endif
     }
    if (receive_count_unsigned_values!=0)
     {
@@ -473,11 +488,31 @@ namespace Multi_domain_functions
                                           Problem* problem_pt,
                                           Mesh* const &external_mesh_pt,
                                           int& n_cont_inter_values)
+ {
+  // Add the node if required
+  add_external_haloed_node_helper(iproc,nod_pt,problem_pt,external_mesh_pt,
+                                  n_cont_inter_values);
+  
+  // Recursively add any master nodes (and their master nodes etc)
+  recursively_add_masters_of_external_haloed_node(iproc, nod_pt,
+                                                  problem_pt,
+                                                  external_mesh_pt,
+                                                  n_cont_inter_values);
+ }
+  
+  
+  
+ //========================================================================
+ ///Recursively add any master nodes (and their master nodes etc) of
+ /// external nodes
+ //========================================================================
+  void recursively_add_masters_of_external_haloed_node(
+   int& iproc, Node* nod_pt,
+   Problem* problem_pt,
+   Mesh* const &external_mesh_pt,
+   int& n_cont_inter_values)
   {
-   // Add the node if required
-   add_external_haloed_node_helper(iproc,nod_pt,problem_pt,external_mesh_pt,
-                                   n_cont_inter_values);
-
+   
    // Loop over continuously interpolated values and add masters
    for (int i_cont=-1;i_cont<n_cont_inter_values;i_cont++)
     {
@@ -494,7 +529,7 @@ namespace Multi_domain_functions
        HangInfo* hang_pt=nod_pt->hanging_pt(i_cont);
        // Loop over masters
        unsigned n_master=hang_pt->nmaster();
-
+       
        // Indicate number of master nodes to add on other process
        Flat_packed_unsigneds.push_back(n_master);
 #ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
@@ -503,19 +538,25 @@ namespace Multi_domain_functions
        for (unsigned m=0;m<n_master;m++)
         {
          Node* master_nod_pt=hang_pt->master_node_pt(m);
-
+         
          // Call the helper function for master nodes
          add_external_haloed_master_node_helper(iproc,master_nod_pt,
                                                 problem_pt,
                                                 external_mesh_pt,
                                                 n_cont_inter_values);
-
+         
          // Indicate the weight of this master
          Flat_packed_doubles.push_back(hang_pt->master_weight(m));
+
+         // Recursively add any master nodes (and their master nodes etc)
+         recursively_add_masters_of_external_haloed_node(iproc, master_nod_pt,
+                                                         problem_pt,
+                                                         external_mesh_pt,
+                                                         n_cont_inter_values);
         }
       }
      else
-      {
+      {       
        // Indicate that it's not a hanging node in this variable
        Flat_packed_unsigneds.push_back(0);
 #ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
@@ -523,16 +564,16 @@ namespace Multi_domain_functions
 #endif
       }
     } // end loop over continously interpolated values
-
+   
   }
-
+  
 //==========start of add_external_haloed_node_helper======================
 /// Helper to add external haloed node that is not a master
 //========================================================================
- void add_external_haloed_node_helper(int& iproc, Node* nod_pt,
-                                      Problem* problem_pt,
+  void add_external_haloed_node_helper(int& iproc, Node* nod_pt,
+                                       Problem* problem_pt,
                                       Mesh* const &external_mesh_pt,
-                                      int& n_cont_inter_values)
+                                       int& n_cont_inter_values)
   {
    // Attempt to add this node as an external haloed node
    unsigned n_ext_haloed_nod=external_mesh_pt->nexternal_haloed_node(iproc);
@@ -1749,7 +1790,7 @@ namespace Multi_domain_functions
         }
         
        // Check if the returned element is halo
-       if (!source_el_pt->is_halo())
+       if (!source_el_pt->is_halo()) // cannot accept halo here
         {
          // The correct non-halo element has been located; this will become
          // an external haloed element on the current process, and an
@@ -1777,7 +1818,7 @@ namespace Multi_domain_functions
          // If it was added to the storage then the returned index
          // will be the same as the (old) size of the storage
          if (external_haloed_el_index==n_extern_haloed)
-          {
+          {           
            // Set Located_element_status to say it 
            // should be newly created
            Located_element_status[i]=New;
@@ -1975,8 +2016,9 @@ namespace Multi_domain_functions
      ElementWithExternalElement *el_pt=
       dynamic_cast<ElementWithExternalElement*>(mesh_pt->element_pt(e));
 #ifdef OOMPH_HAS_MPI
-     // Only visit non-halo elements
-     if (!el_pt->is_halo())
+     // Only visit non-halo elements -- we're not setting up external elements
+     // for on-halos!
+     if (!el_pt->is_halo()) 
 #endif 
       {
        // Find number of Gauss points and element dimension
@@ -2043,9 +2085,11 @@ namespace Multi_domain_functions
               }
 
              // Check if it's a halo; if it is then the non-halo equivalent
-             // needs to be located from another processor
+             // needs to be located from another processor (unless we
+             // accept halo elements as external elements
 #ifdef OOMPH_HAS_MPI
-             if (!source_el_pt->is_halo())
+             if (Allow_use_of_halo_elements_as_external_elements||
+                 (!source_el_pt->is_halo()))
 #endif
               {
                //Need to cast to a FiniteElement

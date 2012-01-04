@@ -136,9 +136,9 @@ build_face_element(const int &face_index,
 
 #ifdef OOMPH_HAS_MPI
  // If the bulk element is halo then the face element must be too
- if (this->is_halo())
+ //if (this->is_halo())
   {
-   face_element_pt->set_halo();
+   face_element_pt->set_halo(Non_halo_proc_ID);
   }
 #endif
  
@@ -322,9 +322,9 @@ void QSpectralElement<2,NNODE_1D>::build_face_element(
 
 #ifdef OOMPH_HAS_MPI
  // If the bulk element is halo then the face element must be too
- if (this->is_halo())
+ //if (this->is_halo())
   {
-   face_element_pt->set_halo();
+   face_element_pt->set_halo(Non_halo_proc_ID);
   }
 #endif
 
@@ -557,9 +557,9 @@ output(std::ostream &outfile, const unsigned &n_plot)
 
 #ifdef OOMPH_HAS_MPI
  // If the bulk element is halo then the face element must be too
- if (this->is_halo())
+ //if (this->is_halo())
   {
-   face_element_pt->set_halo();
+   face_element_pt->set_halo(Non_halo_proc_ID);
   }
 #endif
 

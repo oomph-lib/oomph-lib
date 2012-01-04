@@ -139,8 +139,8 @@ class Data
 
 #ifdef OOMPH_HAS_MPI
 
- /// \short Is the Data a halo?
- bool Is_halo;
+ /// \short Non-halo processor ID for Data; -1 if it's not a halo.
+ int Non_halo_proc_ID;
 
 #endif
 
@@ -427,14 +427,25 @@ class Data
  
 #ifdef OOMPH_HAS_MPI
 
- /// \short Label the node as halo
- void set_halo() {Is_halo=true;}
+ /// \short Label the node as halo and specify processor that holds
+ /// non-halo counterpart
+ void set_halo(const unsigned& non_halo_proc_ID) 
+ {
+  Non_halo_proc_ID=non_halo_proc_ID;
+ }
 
  /// \short Label the node as not being a halo
- void set_nonhalo() {Is_halo=false;}
+ void set_nonhalo() {Non_halo_proc_ID=-1;}
 
  /// \short Is this Data a halo?
- bool is_halo() const {return Is_halo;} 
+ bool is_halo() const {return (Non_halo_proc_ID!=-1);} 
+
+ /// \short ID of processor ID that holds non-halo counterpart
+ /// of halo node; negative if not a halo.
+ int non_halo_proc_ID() 
+ {
+  return Non_halo_proc_ID;
+ }
 
  /// \short Add all data and time history values to the vector in 
  /// the internal storage order
@@ -1046,6 +1057,22 @@ public:
  ///so we put the virtual interface here to avoid virtual functions in Data
  virtual void unpin_all() {Data::unpin_all();}
 
+
+ /// Code that encapsulates the hanging status of the node (incl. the geometric
+ /// hanging status) as  \sum_{i=-1}{nval-1} Node::is_hanging(i) 2^{i+1}
+ unsigned hang_code()
+ {
+  unsigned hang_code=0;
+  int nval=nvalue();
+  for (int i=-1;i<nval;i++)
+   {
+    hang_code+=unsigned(Node::is_hanging(i))*
+     unsigned(pow(unsigned(2),unsigned(i+1)));
+   }
+  return hang_code;
+ }
+
+
  /// \short Return pointer to hanging node data (this refers to the geometric
  /// hanging node status) (const version).
  HangInfo* const &hanging_pt() const
@@ -1156,7 +1183,7 @@ public:
     }
   }
 
- /// Set the hanging data for the i-th value.
+ /// Set the hanging data for the i-th value. (hang_pt=0 to make non-hanging)
  void set_hanging_pt(HangInfo* const &hang_pt, const int &i);
 
  /// Label node as non-hanging node by removing all hanging node data.

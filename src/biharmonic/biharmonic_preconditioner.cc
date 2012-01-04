@@ -461,7 +461,6 @@ void InexactSubBiharmonicPreconditioner::compute_inexact_schur_complement()
   double* J_01_value = 0; 
   int* J_10_row_start = 0;
   int* J_10_column_index = 0;
-  double* J_10_value = 0;
 
   // J_01 matrix
   J_01_row_start = Matrix_of_block_pointers(0,1)->row_start();
@@ -471,7 +470,6 @@ void InexactSubBiharmonicPreconditioner::compute_inexact_schur_complement()
   // J_10 matrix
   J_10_row_start = Matrix_of_block_pointers(1,0)->row_start();
   J_10_column_index  = Matrix_of_block_pointers(1,0)->column_index();
-  J_10_value = Matrix_of_block_pointers(1,0)->value();
 
   // if required get pointers to the vector components of J01 and J10
   int* J_02_row_start = 0;
@@ -479,7 +477,6 @@ void InexactSubBiharmonicPreconditioner::compute_inexact_schur_complement()
   double* J_02_value = 0; 
   int* J_20_row_start = 0;
   int* J_20_column_index = 0;
-  double* J_20_value = 0;
 
   // J_02 matrix
   J_02_row_start = Matrix_of_block_pointers(0,2)->row_start();
@@ -489,7 +486,6 @@ void InexactSubBiharmonicPreconditioner::compute_inexact_schur_complement()
   // J_20 matrix
   J_20_row_start = Matrix_of_block_pointers(2,0)->row_start();
   J_20_column_index  = Matrix_of_block_pointers(2,0)->column_index();
-  J_20_value = Matrix_of_block_pointers(2,0)->value();
 
   // get the inverse lumped vector of J_11 if required
   double* J_11_lumped_and_inverted = 0;

@@ -29,10 +29,11 @@
 #cd bifurcation_tracking; make check; cd ..
 #cd FAQ; make check; cd ..
 #cd linear_solvers; make check; cd ..
-cd biharmonic; make check; cd ..
-cd linear_elasticity; make check; cd ..
-cd womersley; make check; cd ..
+#cd biharmonic; make check; cd ..
+#cd linear_elasticity; make check; cd ..
+#cd womersley; make check; cd ..
 cd reaction_diffusion; make check; cd ..
 cd flux_transport; make check; cd ..
 cd young_laplace; make check; cd ..
+cd time_harmonic_fourier_decomposed_linear_elasticity; make check; cd ..
 cd mpi; make check; cd ..

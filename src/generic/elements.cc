@@ -67,6 +67,7 @@ bool GeneralisedElement::Suppress_warning_about_repeated_external_data=true;
   //Local cache of numbers of internal and external data
   const unsigned n_internal_data = Ninternal_data;
   const unsigned n_external_data = Nexternal_data;
+
   //Find out whether the data is already stored in the array
   
   //Loop over the number of internals

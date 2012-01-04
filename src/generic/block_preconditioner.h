@@ -204,7 +204,8 @@ namespace oomph
       }
 #endif
 
-     // get the number of DOF types in this MESH
+     // Get the number of DOF types in this MESH. Remains -1
+     // if we don't have any elements on this processor 
      int ndof_types_in_mesh = -1;
      if (mesh_pt->nelement() > 0)
       {
@@ -241,25 +242,40 @@ namespace oomph
 #ifdef OOMPH_HAS_MPI
        unsigned nproc = problem_pt->communicator_pt()->nproc();
        unsigned my_rank = problem_pt->communicator_pt()->my_rank();
+
+       // Collect on root the number of dofs types determined independently
+       // on all processors (-1 indicates that the processor didn't have
+       // any elements and therefore doesn't know!
        int* ndof_types_recv = 0;
        if (my_rank == 0)
         {
          ndof_types_recv = new int[nproc];
         }
+
        MPI_Gather(&ndof_types_in_mesh,1,MPI_INT,
                   ndof_types_recv,1,MPI_INT,0,
                   problem_pt->communicator_pt()->mpi_comm());
+
+       // Root: Update own number of dof types, check consistency amongst
+       // all processors (in paranoid mode) and send out the actual
+       // number of dof types to those processors who couldn't figure this
+       // out themselves
        if (my_rank == 0)
         {
-         for (unsigned p = 0; p < nproc; p++)
+         // Check number of types of all non-root processors
+         for (unsigned p = 1; p < nproc; p++)
           {
            if (ndof_types_recv[p] != -1)
             {
+             // Processor p was able to figure out how many
+             // dof types there are, so I root can update
+             // its own (if required)
              if (ndof_types_in_mesh == -1)
               {
                ndof_types_in_mesh = ndof_types_recv[p];
               }
 #ifdef PARANOID
+             // Check consistency
              else if (ndof_types_in_mesh != ndof_types_recv[p])
               {
                std::ostringstream error_message;
@@ -285,8 +301,9 @@ namespace oomph
 #endif
             }
           }
-         // send ndof types to meshes that don't have it
-         for (unsigned p = 0; p < nproc; p++)
+
+         // Now send ndof types to non-root processors that don't have it
+         for (unsigned p = 1; p < nproc; p++)
           {
            if (ndof_types_recv[p] == -1)
             {
@@ -297,6 +314,8 @@ namespace oomph
          // clean up
          delete[] ndof_types_recv;
         }
+       // "else if": "else" for non-root; "if" for checking if we current (non-root) processors
+       // does not know ndof type and is therefore about to receive it from root 
        else if (ndof_types_in_mesh == -1)
         {
          MPI_Recv(&ndof_types_in_mesh,1,MPI_INT,0,0,
@@ -2752,44 +2771,6 @@ namespace oomph
       }
 #endif
     }
-   
-
-/*    if (Master_block_preconditioner_pt == 0) */
-/*     { */
-/*      std::stringstream name; */
-/*      name << "lookup_new_" */
-/*           << Global_unsigned::Number */
-/*           << "_proc" << my_rank << ".txt"; */
-/*      std::ofstream file(name.str().c_str()); */
-/*      for (unsigned p = 0; p < nproc; p++) */
-/*       { */
-/*        if (p == my_rank) */
-/*         { */
-/*          unsigned j = 0; */
-/*          for (; Global_index_sparse[j] < this->distribution_pt()->first_row() */
-/*                && j < Global_index_sparse.size(); j++) */
-/*           { */
-/*            file << Global_index_sparse[j] << " : " */
-/*                 << Dof_number_sparse[j] << " " */
-/*                 << Index_in_dof_block_sparse[j] << "\n"; */
-/*           } */
-/*          for (unsigned i = 0; i < Dof_number_dense.size(); i++) */
-/*           { */
-/*            file << this->distribution_pt()->first_row()+i << " : " */
-/*                 << Dof_number_dense[i] << " " */
-/*                 << Index_in_dof_block_dense[i] << "\n"; */
-/*           } */
-/*          for (; j < Global_index_sparse.size(); j++) */
-/*           { */
-/*            file << Global_index_sparse[j] << " : " */
-/*                 << Dof_number_sparse[j] << " " */
-/*                 << Index_in_dof_block_sparse[j] << "\n"; */
-/*           } */
-/*         } */
-/*       } */
-/*      file.close(); */
-/*      Global_unsigned::Number++; */
-/*     } */
    
   }
 

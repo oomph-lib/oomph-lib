@@ -197,7 +197,6 @@ void  YoungLaplaceEquations::exact_position(const Vector<double>& s,
     ///--------------
     double nonlinearterm=1.0;
     double sqnorm=0.0;
-    double normplusone=1.0;
    
     /// Spine case 
     ///-----------
@@ -243,7 +242,6 @@ void  YoungLaplaceEquations::exact_position(const Vector<double>& s,
         sqnorm += interpolated_dudzeta[j]*interpolated_dudzeta[j];
        }
       nonlinearterm=1.0/sqrt(1.0+sqnorm);
-      normplusone=1.0+sqnorm;
      }
    
     //Spines

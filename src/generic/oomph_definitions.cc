@@ -196,7 +196,6 @@ namespace Global_unsigned
 /// Namespace containing a vector of strings that can be used to
 /// to store global output modifiers. This is global data
 /// and you use it at your own risk!
-/// hierher probably better stuck into a static class to hide the vector.
 //=======================================================================
 namespace Global_string_for_annotation
 {

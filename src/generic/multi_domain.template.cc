@@ -341,7 +341,8 @@ namespace oomph
       dynamic_cast<ElementWithExternalElement*>(mesh_pt->element_pt(e));
 
 #ifdef OOMPH_HAS_MPI
-     if (!el_pt->is_halo())
+     // We're not setting up external elements for halo elements
+     if (!el_pt->is_halo()) 
 #endif
       {
        //We need to allocate storage for the external elements
@@ -426,6 +427,7 @@ namespace oomph
          ElementWithExternalElement *el_pt=
           dynamic_cast<ElementWithExternalElement*>(mesh_pt->element_pt(e));
 #ifdef OOMPH_HAS_MPI
+         // We're not setting up external elements for halo elements
          if (!el_pt->is_halo())
 #endif
           {
@@ -636,6 +638,7 @@ namespace oomph
          ElementWithExternalElement *el_pt=
           dynamic_cast<ElementWithExternalElement*>(mesh_pt->element_pt(e));
 #ifdef OOMPH_HAS_MPI
+         // We're not setting up external elements for halo elements
          if (!el_pt->is_halo())
 #endif
           {
@@ -810,11 +813,11 @@ namespace oomph
      error_stream 
       << "Mesh and external mesh documented in missing_coords_mesh*.dat\n"
       << "and missing_coords_ext_mesh*.dat, respectively. Missing \n"
-      << "coordinates in missing_coords*.dat hierher don' throw\n";
-     throw OomphLibError // hierher don't throw
-     (error_stream.str(),
-      "Multi_domain_functions::locate_zeta_for_local_coordinates()",
-      OOMPH_EXCEPTION_LOCATION);     
+      << "coordinates in missing_coords*.dat\n";
+     throw OomphLibError
+      (error_stream.str(),
+       "Multi_domain_functions::locate_zeta_for_local_coordinates()",
+       OOMPH_EXCEPTION_LOCATION);     
     }
    
 
@@ -1029,6 +1032,8 @@ namespace oomph
      // Cast to ElementWithExternalElement to set external element (if located)
      ElementWithExternalElement *el_pt=
       dynamic_cast<ElementWithExternalElement*>(mesh_pt->element_pt(e));
+
+     // We're not setting up external elements for halo elements
      if (!el_pt->is_halo())
       {
        // Loop over integration points
@@ -1214,6 +1219,7 @@ namespace oomph
   }
 
 
+
 //============start of add_external_halo_node_to_storage===============
 /// Helper function to add external halo nodes, including any masters,
 /// based on information received from the haloed process
@@ -1230,49 +1236,80 @@ namespace oomph
                                  node_index,new_el_pt,
                                  n_cont_inter_values,problem_pt);
    
-   for (int i_cont=-1;i_cont<n_cont_inter_values;i_cont++)
-    {
-#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
-     oomph_info 
-      << "Rec:" << Counter_for_flat_packed_unsigneds 
-      << " Boolean to indicate that continuously interpolated variable i_cont "
-      << i_cont << " is hanging " 
-      << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
-      << std::endl;
-#endif
-     if (Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++]==1)
-      {
-#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
-       oomph_info 
-        << "Rec:" << Counter_for_flat_packed_unsigneds 
-        << "  Number of master nodes "
-        << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
-        << std::endl;
-#endif
-       unsigned n_master=Flat_packed_unsigneds
-        [Counter_for_flat_packed_unsigneds++];
-
-       // Setup new HangInfo
-       HangInfo* hang_pt=new HangInfo(n_master);
-       for (unsigned m=0;m<n_master;m++)
-        {
-         Node* master_nod_pt=0;
-         // Get the master node (creating and adding it if required)
-         add_external_halo_master_node_helper<EXT_ELEMENT>
-          (master_nod_pt,new_nod_pt,external_mesh_pt,loc_p,
-           n_cont_inter_values,problem_pt);
-
-         // Get the weight and set the HangInfo
-         double master_weight=Flat_packed_doubles
-          [Counter_for_flat_packed_doubles++];
-         hang_pt->set_master_node_pt(m,master_nod_pt,master_weight);
-        }
-       new_nod_pt->set_hanging_pt(hang_pt,i_cont);
-      }
-    } // end loop over continous interpolated values
-
+   // Recursively add masters
+   recursively_add_masters_of_external_halo_node_to_storage<EXT_ELEMENT>
+    (new_nod_pt, external_mesh_pt, loc_p,
+     node_index, new_el_pt, 
+     n_cont_inter_values,
+     problem_pt);
+   
+   
   }
+ 
+  
+//========================================================================
+/// Recursively add masters of external halo nodes (and their masters, etc)
+/// based on information received from the haloed process
+//=========================================================================
+ template<class EXT_ELEMENT>
+ void Multi_domain_functions::
+ recursively_add_masters_of_external_halo_node_to_storage
+ (Node* &new_nod_pt, Mesh* const &external_mesh_pt, unsigned& loc_p,
+  unsigned& node_index, FiniteElement* const &new_el_pt, 
+  int& n_cont_inter_values,
+  Problem* problem_pt)
+ {
+  
+  for (int i_cont=-1;i_cont<n_cont_inter_values;i_cont++)
+   {
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+    oomph_info 
+     << "Rec:" << Counter_for_flat_packed_unsigneds 
+     << " Boolean to indicate that continuously interpolated variable i_cont "
+     << i_cont << " is hanging " 
+     << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+     << std::endl;
+#endif
+    if (Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++]==1)
+     {
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+      oomph_info 
+       << "Rec:" << Counter_for_flat_packed_unsigneds 
+       << "  Number of master nodes "
+       << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+       << std::endl;
+#endif
+      unsigned n_master=Flat_packed_unsigneds
+       [Counter_for_flat_packed_unsigneds++];
+      
+      // Setup new HangInfo
+      HangInfo* hang_pt=new HangInfo(n_master);
+      for (unsigned m=0;m<n_master;m++)
+       {
+        Node* master_nod_pt=0;
+        // Get the master node (creating and adding it if required)
+        add_external_halo_master_node_helper<EXT_ELEMENT>
+         (master_nod_pt,new_nod_pt,external_mesh_pt,loc_p,
+          n_cont_inter_values,problem_pt);
+        
+        // Get the weight and set the HangInfo
+        double master_weight=Flat_packed_doubles
+         [Counter_for_flat_packed_doubles++];
+        hang_pt->set_master_node_pt(m,master_nod_pt,master_weight);
 
+        // Recursively add masters of master
+        recursively_add_masters_of_external_halo_node_to_storage<EXT_ELEMENT>
+         (master_nod_pt, external_mesh_pt, loc_p,
+          node_index, new_el_pt, 
+          n_cont_inter_values,
+          problem_pt);
+       }
+      new_nod_pt->set_hanging_pt(hang_pt,i_cont);
+     }
+   } // end loop over continous interpolated values
+  
+ }
+ 
 //========================================================================
 /// Helper function to add external halo node that is a master
 //========================================================================

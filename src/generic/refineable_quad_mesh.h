@@ -136,6 +136,17 @@ public:
      // we only came in here to participate in the communication
      if (this->nelement()==0)
       {
+       // Flush the Forest's current trees
+       this->Forest_pt->flush_trees();
+       
+       // Delete the old Forest
+       delete this->Forest_pt;
+       
+       // Empty dummy vector to build empty forest
+       Vector<TreeRoot*> trees_pt;
+       
+       // Make a new (empty) Forest
+       this->Forest_pt = new QuadTreeForest(trees_pt);
        return;
       }
 

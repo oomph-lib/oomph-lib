@@ -229,7 +229,7 @@ long Data::Is_constrained=-2;
                 Copy_of_data_pt(0),
                 Ncopies(0), Nvalue(0)
 #ifdef OOMPH_HAS_MPI
-                , Is_halo(false)
+              , Non_halo_proc_ID(-1)
 #endif
 
  {}
@@ -245,7 +245,7 @@ long Data::Is_constrained=-2;
   Ncopies(0),
   Nvalue(initial_n_value)
 #ifdef OOMPH_HAS_MPI
-  , Is_halo(false)
+  , Non_halo_proc_ID(-1)
 #endif
  {
   //Only bother to do something if there are values
@@ -288,7 +288,7 @@ Data::Data(TimeStepper* const &time_stepper_pt_,
  Ncopies(0),
  Nvalue(initial_n_value)
 #ifdef OOMPH_HAS_MPI
- , Is_halo(false)
+ , Non_halo_proc_ID(-1) 
 #endif
 {
  //If we are in charge of allocating the storage,
@@ -472,7 +472,7 @@ void Data::read(std::ifstream& restart_file)
         {
          error_stream << nod_pt->x(i) << " ";
         }
-       error_stream << std::endl;
+       error_stream << nod_pt << std::endl;
       }
      throw OomphLibError(error_stream.str(),
                          "Data::read()",
@@ -770,18 +770,36 @@ void Data::add_values_to_vector(Vector<double> &vector_of_values)
  //Find the number of stored values
  const unsigned n_value = this->nvalue();
 
+#ifndef PARANOID
+
  //If no values are stored then return immediately
  if(n_value==0) {return;}
+
+#endif
 
  //Find the number of stored time data
  const unsigned n_tstorage = this->ntstorage();
 
  //Resize the vector to accommodate the new data
  const unsigned n_current_value = vector_of_values.size();
- vector_of_values.resize(n_current_value + n_tstorage*n_value);
+
+#ifdef PARANOID
+ unsigned n_debug=2;
+#else
+ unsigned n_debug=0;
+#endif
+
+ vector_of_values.resize(n_current_value + n_tstorage*n_value + n_debug);
 
  //Now add the data to the vector
  unsigned index = n_current_value;
+
+#ifdef PARANOID
+ vector_of_values[index++]=n_tstorage;
+ vector_of_values[index++]=n_value;
+ // Now return
+ if(n_value==0) {return;}
+#endif
 
  //Pointer to the first entry in the data array
  double* data_pt = Value[0];
@@ -815,12 +833,30 @@ void Data::read_values_from_vector(const Vector<double> &vector_of_values,
                                    unsigned &index)
 {
  //Find the number of stored values
- const unsigned n_value = this->nvalue();
- //If no values are stored, return immediately
- if(n_value==0) {return;}
+ unsigned n_value = this->nvalue();
 
  //Find the number of stored time data
  const unsigned n_tstorage = this->ntstorage();
+
+#ifdef PARANOID
+ unsigned orig_n_tstorage=unsigned(vector_of_values[index++]);
+ unsigned orig_n_value=unsigned(vector_of_values[index++]);
+ if ((orig_n_tstorage!=n_tstorage)||(orig_n_value!=n_value))
+  {
+   std::ostringstream error_stream;
+   error_stream << "Non-matching number of values:\n"
+                << "sent and local n_tstorage: " << orig_n_tstorage << " " 
+                << n_tstorage << std::endl
+                << "sent and local n_value: " << orig_n_value << " " 
+                << n_value << std::endl;
+   throw OomphLibError(error_stream.str(),
+                      "Data::read_values_from_vector",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+
+ //If no values are stored, return immediately
+ if(n_value==0) {return;}
 
  //Pointer to the first entry in the data array
  double* data_pt = Value[0];
@@ -1598,7 +1634,9 @@ void Node::read(std::ifstream& restart_file)
 /// If the node isn't hanging (because it might not be hanging
 /// geometrically), create the Vector of hanging pointers
 /// and make the other entries point to the node's geometric
-/// hanging data.
+/// hanging data. Set hang_pt=0 to make entry explicitly non-hanging.
+/// Use Node::set_nonhanging() to unhang everything and clear up
+/// storage.
 //=====================================================================
 void Node::set_hanging_pt(HangInfo* const &hang_pt, const int &i)
 {
@@ -1632,7 +1670,14 @@ void Node::set_hanging_pt(HangInfo* const &hang_pt, const int &i)
    
    //Constrain the geometric data (virtual function that is
    //overladed in solid nodes)
-   constrain_positions();
+   if (hang_pt!=0)
+    {
+     constrain_positions();
+    }
+   else
+    {
+     unconstrain_positions();
+    }
 
    //Loop over the entries again and update all pointers that pointed to
    //the geometric data
@@ -1641,8 +1686,16 @@ void Node::set_hanging_pt(HangInfo* const &hang_pt, const int &i)
      if(Same_as_geometric[n]==true) 
       {
        Hanging_pt[n] = Hanging_pt[0];
+
        //In addition set the corresponding value to be constrained (hanging)
-       constrain(n-1);
+       if (Hanging_pt[n]!=0)
+        {
+         constrain(n-1);
+        }
+       else
+        {
+         unconstrain(n-1);
+        }
       }
     }
 
@@ -1663,7 +1716,14 @@ void Node::set_hanging_pt(HangInfo* const &hang_pt, const int &i)
    Hanging_pt[i+1]=hang_pt;
 
    //In addition set the value to be constrained (hanging)
-   constrain(i);
+   if (hang_pt!=0)
+    {
+     constrain(i);
+    }
+   else
+    {
+     unconstrain(i);
+    }
   }
 }
 
@@ -1718,7 +1778,14 @@ void Node::resize(const unsigned &n_value)
     {
      Hanging_pt[i] = Hanging_pt[0];
      //and constrain if necessary
-     if(Hanging_pt[i]!=0) {constrain(i-1);}
+     if(Hanging_pt[i]!=0) 
+      {
+       constrain(i-1);
+      }
+     else
+      {
+       unconstrain(i-1);
+      }
     }
 
    //If necessary constrain 
@@ -2244,10 +2311,23 @@ void Node::add_values_to_vector(Vector<double> &vector_of_values)
 
  //Resize the vector to accommodate the new data
  const unsigned n_current_value = vector_of_values.size();
- vector_of_values.resize(n_current_value + n_tstorage*n_storage);
+
+#ifdef PARANOID
+ unsigned n_debug=2;
+#else
+ unsigned n_debug=0;
+#endif
+
+ vector_of_values.resize(n_current_value + n_tstorage*n_storage+n_debug);
  
  //Now add the data to the vector
  unsigned index = n_current_value;
+
+#ifdef PARANOID
+ vector_of_values[index++]=n_storage;
+ vector_of_values[index++]=n_tstorage;
+#endif
+
 
  //Pointer to the first entry in the data array
  double* data_pt = X_position[0];
@@ -2277,7 +2357,7 @@ void Node::read_values_from_vector(const Vector<double> &vector_of_values,
  //Read the standard nodal data
  Data::read_values_from_vector(vector_of_values,index);
 
-  //Now read the additional position data to the vector
+ //Now read the additional position data to the vector
  
  //Find the number of stored time data for the position
  const unsigned n_tstorage = this->position_time_stepper_pt()->ntstorage();
@@ -2285,8 +2365,26 @@ void Node::read_values_from_vector(const Vector<double> &vector_of_values,
 //Find the total amount of storage required for the position variables
  const unsigned n_storage = this->ndim()*this->nposition_type();
 
+#ifdef PARANOID
+ unsigned orig_n_storage=unsigned(vector_of_values[index++]);
+ unsigned orig_n_tstorage=unsigned(vector_of_values[index++]);
+ if ((orig_n_tstorage!=n_tstorage)||(orig_n_storage!=n_storage))
+  {
+   std::ostringstream error_stream;
+   error_stream << "Non-matching number of values:\n"
+                << "sent and local n_tstorage: " << orig_n_tstorage << " " 
+                << n_tstorage << std::endl
+                << "sent and local n_storage: " << orig_n_storage << " " 
+                << n_storage << std::endl;
+   throw OomphLibError(error_stream.str(),
+                       "Node::read_values_from_vector",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+
  //Pointer to the first entry in the data array
  double* data_pt = X_position[0];
+
  //Loop over values
  for(unsigned i=0;i<n_storage;i++)
   {
@@ -3067,12 +3165,25 @@ void SolidNode::add_values_to_vector(Vector<double> &vector_of_values)
 
  //Resize the vector to accommodate the new data
  const unsigned n_current_value = vector_of_values.size();
- vector_of_values.resize(n_current_value + n_lagrangian_storage);
+ 
+#ifdef PARANOID
+ unsigned n_debug=1;
+#else
+ unsigned n_debug=0;
+#endif
+ 
+ vector_of_values.resize(n_current_value + n_lagrangian_storage+n_debug);
  
  //Now add the data to the vector
  unsigned index = n_current_value;
+ 
+#ifdef PARANOID
+ vector_of_values[index++]=n_lagrangian_storage;
+#endif
+
  //Pointer to the first entry in the data array
  double* data_pt = Xi_position;
+
  //Loop over values
  for(unsigned i=0;i<n_lagrangian_storage;i++)
   {
@@ -3100,8 +3211,24 @@ void SolidNode::read_values_from_vector(const Vector<double> &vector_of_values,
  const unsigned n_lagrangian_storage = 
   this->nlagrangian()*this->nlagrangian_type();
 
+#ifdef PARANOID
+ unsigned orig_n_lagrangian_storage=unsigned(vector_of_values[index++]);
+ if (orig_n_lagrangian_storage!=n_lagrangian_storage)
+  {
+   std::ostringstream error_stream;
+   error_stream << "Non-matching number of values:\n"
+                << "sent and local n_lagrangian_storage: " 
+                << orig_n_lagrangian_storage << " " 
+                << n_lagrangian_storage << std::endl;
+   throw OomphLibError(error_stream.str(),
+                       "SolidNode::read_values_from_vector",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+
  //Pointer to the first entry in the data array
  double* data_pt = Xi_position;
+
  //Loop over values
  for(unsigned i=0;i<n_lagrangian_storage;i++)
   {

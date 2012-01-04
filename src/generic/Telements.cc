@@ -239,11 +239,8 @@ void TElement<1,NNODE_1D>::build_face_element(const int &face_index,
  face_element_pt->bulk_element_pt()=this;
  
 #ifdef OOMPH_HAS_MPI
- // If the bulk element is halo then the face element must be too
- if (this->is_halo())
-  {
-   face_element_pt->set_halo();
-  }
+ // Pass on non-halo proc ID
+ face_element_pt->set_halo(Non_halo_proc_ID);
 #endif
 
  // Resize the storage for the original number of values at the (one and only)
@@ -435,11 +432,8 @@ namespace TElement2BulkCoordinateDerivatives
  face_element_pt->bulk_element_pt()=this;
 
 #ifdef OOMPH_HAS_MPI
- // If the bulk element is halo then the face element must be too
- if (this->is_halo())
-  {
-   face_element_pt->set_halo();
-  }
+ // Pass on non-halo proc ID
+ face_element_pt->set_halo(Non_halo_proc_ID);
 #endif
 
  //Calculate the number of nodes in the face element
@@ -928,11 +922,8 @@ const unsigned TElement<3,3>::NodeOnFace[4][6] =
  face_element_pt->bulk_element_pt()=this;
 
 #ifdef OOMPH_HAS_MPI
- // If the bulk element is halo then the face element must be too
- if (this->is_halo())
-  {
-   face_element_pt->set_halo();
-  }
+ // Pass on non-halo proc ID
+ face_element_pt->set_halo(Non_halo_proc_ID);
 #endif
 
  //Calculate the number of nodes in the face element

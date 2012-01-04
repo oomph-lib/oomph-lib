@@ -141,35 +141,47 @@ void TreeBasedRefineableMeshBase::refine_base_mesh(OomphCommunicator* comm_pt,
                                                    Vector<Vector<unsigned> >& 
                                                    to_be_refined)
 {
-
  // Get mesh back to unrefined state
  unsigned my_max,my_min;
  get_refinement_levels(my_min,my_max);
+
+ // Max refinement level:
+ unsigned my_max_level=to_be_refined.size();
+
  unsigned global_max=0;
+ unsigned global_max_level=0;
+ Vector<unsigned> data(2,0);
+ data[0]=my_max;
+ data[1]=my_max_level;
+ Vector<unsigned> global_data(2,0);
 #ifdef OOMPH_HAS_MPI
  if (this->is_mesh_distributed())
   {
-   MPI_Allreduce(&my_max,&global_max,1,MPI_UNSIGNED,MPI_MAX,
+   MPI_Allreduce(&data[0],&global_data[0],2,MPI_UNSIGNED,MPI_MAX,
                  comm_pt->mpi_comm());
+   global_max=global_data[0];
+   global_max_level=global_data[1];
+
   }
  else
 #endif
   {
    global_max=my_max;
+   global_max_level=my_max_level;
   }
+
+
  for (unsigned i=0;i<global_max;i++)
-  {
+  {   
    unrefine_uniformly(comm_pt); 
   }
-  
- // Max refinement level:
- unsigned max_level=to_be_refined.size();
-
+ 
  // Do refinement steps in current mesh
- for (unsigned l=0;l<max_level;l++)
+ for (unsigned l=0;l<global_max_level;l++)
   {
    // Loop over elements that need to be refined at this level
-   unsigned n_to_be_refined=to_be_refined[l].size();
+   unsigned n_to_be_refined=0;
+   if (l<my_max_level) n_to_be_refined=to_be_refined[l].size();
 
    // Select relevant elements to be refined
    for (unsigned i=0;i<n_to_be_refined;i++)
@@ -177,11 +189,32 @@ void TreeBasedRefineableMeshBase::refine_base_mesh(OomphCommunicator* comm_pt,
      dynamic_cast<RefineableElement*>(
       this->element_pt(to_be_refined[l][i]))->select_for_refinement();
     }
-
+   
    // Now do the actual mesh refinement
    adapt_mesh();
-
   }
+
+
+
+  // Still need to delete external storage and reorder nodes even if adapt_mesh 
+  // wasn't called on this processor
+  if (my_max_level==0)
+   {
+ #ifdef OOMPH_HAS_MPI
+    // Delete any external element storage - any interaction will still
+    // be set up on the fly again, so we need to get rid of old information.
+    // This particularly causes problems in multi-domain examples where
+    // we decide not to refine one of the meshes
+    this->delete_all_external_storage();
+ #endif
+
+    // Reorder the nodes within the mesh's node vector
+    // to establish a standard ordering regardless of the sequence
+    // of mesh refinements -- this is required to allow dump/restart
+    // on refined meshes
+    this->reorder_nodes();
+   }
+
 
 }
 
@@ -200,7 +233,6 @@ void TreeBasedRefineableMeshBase::refine(OomphCommunicator* comm_pt,
 
  // Refine
  refine_base_mesh(comm_pt,to_be_refined);
-
 }
 
 
@@ -456,8 +488,7 @@ void TreeBasedRefineableMeshBase::adapt(OomphCommunicator* comm_pt,
      }
    }
   oomph_info << " \n Number of elements to be merged : " 
-            << n_unrefine << std::endl << std::endl;
-
+             << n_unrefine << std::endl << std::endl;
 
 
   //Now do the actual mesh adaptation
@@ -700,7 +731,6 @@ void TreeBasedRefineableMeshBase::adapt(OomphCommunicator* comm_pt,
 #endif
 #endif
     
-    
     //Perform the actual adaptation
     adapt_mesh(local_doc_info);
 
@@ -708,9 +738,25 @@ void TreeBasedRefineableMeshBase::adapt(OomphCommunicator* comm_pt,
     Nunrefined=n_unrefine;
     Nrefined=n_refine;
    }
-  //If not worthwhile, say so
+  // If not worthwhile, say so but still reorder nodes and kill external storage
+  // for consistency in parallel computations
   else
    {
+
+#ifdef OOMPH_HAS_MPI
+    // Delete any external element storage - any interaction will still
+    // be set up on the fly again, so we need to get rid of old information.
+    // This particularly causes problems in multi-domain examples where
+    // we decide not to refine one of the meshes
+    this->delete_all_external_storage();
+#endif
+
+    // Reorder the nodes within the mesh's node vector
+    // to establish a standard ordering regardless of the sequence
+    // of mesh refinements -- this is required to allow dump/restart
+    // on refined meshes
+    this->reorder_nodes();
+
     if (n_refine==0)
      {
       oomph_info 
@@ -720,14 +766,8 @@ void TreeBasedRefineableMeshBase::adapt(OomphCommunicator* comm_pt,
     Nunrefined=0;
     Nrefined=0;
 
-#ifdef OOMPH_HAS_MPI
-    // Delete any external element storage - any interaction will still
-    // be set up on the fly again, so we need to get rid of old information.
-    // This particularly causes problems in multi-domain examples where
-    // we decide not to refine one of the meshes
-    this->delete_all_external_storage();
-#endif
    }
+
 
  }
 
@@ -834,6 +874,7 @@ get_refinement_levels(unsigned& min_refinement_level,
 //=================================================================
 void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
 {
+
 #ifdef OOMPH_HAS_MPI
  // Delete any external element storage before performing the adaptation
  // (in particular, external halo nodes that are on mesh boundaries)
@@ -1291,7 +1332,11 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
                 << t_end-t_start << std::endl;
      t_start = TimingHelpers::timer();
     }
-
+   
+   
+   
+   
+   
 
    //Now we can correct the nodes on boundaries that were hanging that
    //are no longer hanging
@@ -1435,7 +1480,7 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
      // '2' for pinned -- ideal for tecplot scatter sizing.
      //----------------------------------------------------
      //num_tree_nodes=tree_nodes_pt.size();
-
+   
      // Determine maximum number of values at any node in this type of element
      RefineableElement* el_pt = tree_nodes_pt[0]->object_pt();
      //Initalise max_nval
@@ -1445,7 +1490,7 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
        if (el_pt->node_pt(n)->nvalue()>max_nval)
         {max_nval=el_pt->node_pt(n)->nvalue();}
       }
-
+   
      //Open the output file
      std::ofstream bcs_file;
      fullname.str("");
@@ -1497,7 +1542,7 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
      all_nodes_file.open(fullname.str().c_str());  
    
      all_nodes_file << "ZONE \n"; 
-     
+   
      // Need to recompute the number of nodes since it may have
      // changed during mesh refinement/unrefinement
      n_node = this->nnode();
@@ -1511,10 +1556,10 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
         }
        all_nodes_file << std::endl;
       }
-     
+   
      all_nodes_file.close();
-
-
+   
+   
      // Doc all hanging nodes:
      //-----------------------
      std::ofstream some_file;
@@ -1525,7 +1570,7 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
      for(unsigned long n=0;n<n_node;n++)
       {
        Node* nod_pt=this->node_pt(n);
-
+     
        if (nod_pt->is_hanging())
         {
          unsigned n_dim = nod_pt->ndim();       
@@ -1543,7 +1588,7 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
         }
       }
      some_file.close();
-
+   
      // Doc all hanging nodes and their masters 
      // View with QHangingNodesWithMasters.mcr
      fullname.str("");
@@ -1623,8 +1668,21 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
       }
    
     } //End of documentation
-
   } // End if (this->nelement()>0)
+
+
+#ifdef OOMPH_HAS_MPI
+
+ // Now (re-)classify halo and haloed nodes and synchronise hanging
+ // nodes
+ // hierher replace communicator; get rid of helper version
+ if (this->is_mesh_distributed())
+  {
+   classify_halo_and_haloed_nodes(MPI_Helpers::communicator_pt(),
+                                  doc_info,doc_info.is_doc_enabled());
+  } 
+
+#endif
 
 }
 
@@ -1643,8 +1701,8 @@ void TreeBasedRefineableMeshBase::refine_uniformly(DocInfo& doc_info)
   }
  
  // Do the actual mesh adaptation
- adapt_mesh(doc_info); 
- }
+ adapt_mesh(doc_info);  
+}
 
 
 
@@ -1665,7 +1723,7 @@ void TreeBasedRefineableMeshBase::refine_selected_elements(
  
  // Do the actual mesh adaptation
  adapt_mesh(); 
- }
+}
 
 
 
@@ -1684,8 +1742,8 @@ void TreeBasedRefineableMeshBase::refine_selected_elements(
   }
  
  // Do the actual mesh adaptation
- adapt_mesh(); 
- }
+ adapt_mesh();  
+}
 
 
 
@@ -2136,9 +2194,6 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
 (OomphCommunicator* comm_pt, const unsigned& ncont_interpolated_values)
 {
 
- // This synchronisation necesarily takes place before the classification 
- // of halo/haloed nodes, so it must be performed on the halo/haloed elements
-
  // Store number of processors and current process
  MPI_Status status;
  int n_proc=comm_pt->nproc();
@@ -2165,31 +2220,27 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
   {
    if (d!=my_rank) // no halo with yourself!
     {
-     // Get vector of haloed elements
-     Vector<GeneralisedElement*> haloed_elem_pt(this->haloed_element_pt(d));
-     unsigned nhaloed_elem=haloed_elem_pt.size();
      
-     // Loop over elements
-     for (unsigned e=0;e<nhaloed_elem;e++)
+     // Loop over haloed nodes
+     unsigned nh=nhaloed_node(d);     
+     for (unsigned j=0;j<nh;j++)
       {
-       // Get element, loop over nodes
-       FiniteElement* el_pt=dynamic_cast<FiniteElement*>(haloed_elem_pt[e]);
-       unsigned n_node=el_pt->nnode();       
-       for (unsigned j=0;j<n_node;j++)
-        {         
-         // Loop over the hanging status for each interpolated variable
-         // (and the geometry)
-         for (int icont=-1; icont<ncont_inter_values; icont++)
-          { 
-           // Store the hanging status of this haloed node
-           if (el_pt->node_pt(j)->is_hanging(icont))
-            {
-             haloed_hanging[d].push_back(1);
-            }
-           else
-            {
-             haloed_hanging[d].push_back(0);
-            }
+       // Get node
+       Node* nod_pt=haloed_node_pt(d,j);
+       
+       // Loop over the hanging status for each interpolated variable
+       // (and the geometry)
+       for (int icont=-1; icont<ncont_inter_values; icont++)
+        { 
+         // Store the hanging status of this haloed node
+         if (nod_pt->is_hanging(icont))
+          {
+           unsigned n_master=nod_pt->hanging_pt(icont)->nmaster();
+           haloed_hanging[d].push_back(n_master);
+          }
+         else
+          {
+           haloed_hanging[d].push_back(0);
           }
         }
       }
@@ -2199,7 +2250,7 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
      
 #ifdef PARANOID
      // Check that number of halo and haloed data match
-     unsigned tmp=0;
+     unsigned tmp=0;     
      MPI_Recv(&tmp,1,MPI_UNSIGNED,d,0,comm_pt->mpi_comm(),&status);
      if (tmp!=count_haloed)
       {
@@ -2219,7 +2270,7 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
       {
        halo_hanging[d].resize(count_haloed);
        MPI_Recv(&halo_hanging[d][0],count_haloed,MPI_INT,d,0,
-                comm_pt->mpi_comm(),&status);
+                comm_pt->mpi_comm(),&status);       
       }
     }
    else // d==my_rank, i.e. current process
@@ -2230,41 +2281,34 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
        // No halo with yourself
        if (dd!=d)
         {
-         // Get vector of halo elements by copy operation
-         Vector<GeneralisedElement*> halo_elem_pt(this->halo_element_pt(dd));
-         
+       
          // Storage for halo hanging status and counter
          Vector<int> local_halo_hanging;
-         
-         // Loop over halo elements associated with this adjacent domain
-         unsigned nelem=halo_elem_pt.size();
-         for (unsigned e=0;e<nelem;e++)
-          { 
-           // Get element
-           FiniteElement* el_pt
-            =dynamic_cast<FiniteElement*>(halo_elem_pt[e]);
+
+         // Loop over halo nodes
+         unsigned nh=nhalo_node(dd);
+         for (unsigned j=0;j<nh;j++)
+          {
+           // Get node
+           Node* nod_pt=halo_node_pt(dd,j);
            
-           //Loop over nodes
-           unsigned n_node=el_pt->nnode();
-           for (unsigned j=0;j<n_node;j++)
-            {
-             
-             // Loop over the hanging status for each interpolated variable
-             // (and the geometry)
-             for (int icont=-1; icont<ncont_inter_values; icont++)
-              { 
-               // Store hanging status of halo node
-               if (el_pt->node_pt(j)->is_hanging(icont))
-                {
-                 local_halo_hanging.push_back(1);
-                }
-               else
-                {
-                 local_halo_hanging.push_back(0);
-                }
+           // Loop over the hanging status for each interpolated variable
+           // (and the geometry)
+           for (int icont=-1; icont<ncont_inter_values; icont++)
+            { 
+             // Store hanging status of halo node
+             if (nod_pt->is_hanging(icont))
+              {
+               unsigned n_master=nod_pt->hanging_pt(icont)->nmaster();
+               local_halo_hanging.push_back(n_master);
+              }
+             else
+              {
+               local_halo_hanging.push_back(0);
               }
             }
           }
+         
          
          // Send the information to the relevant process
          unsigned count_halo=local_halo_hanging.size();
@@ -2280,12 +2324,11 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
            MPI_Send(&local_halo_hanging[0],count_halo,MPI_INT,
                     dd,0,comm_pt->mpi_comm());
           }
-         
         }
       }
     }
   }
- 
+
  if (Global_timings::Doc_comprehensive_timings)
   {
    t_end = TimingHelpers::timer();
@@ -2294,31 +2337,42 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
    t_start = TimingHelpers::timer();
   }
  
- 
-   
+  
  // Now compare equivalent halo and haloed vectors to find discrepancies.
  // It is possible that a master node may not be on either process involved
  // in the halo-haloed scheme; to work round this, we use the shared_node
  // storage scheme, which stores all nodes that are on each pair of processors
  // in the same order on each of the two processors
- 
+
+ // Vector to store info that will help us locate master nodes on "other" 
+ // processor
+ Vector<HangHelperStruct> hang_info;
+
+ // Copy vector-based representation of shared nodes into
+ // map for faster search
+ Vector<std::map<Node*,unsigned> > shared_node_map(n_proc);
+ for (int d=0;d<n_proc;d++)
+  {
+   unsigned n=Shared_node_pt[d].size();
+   for (unsigned jj=0;jj<n;jj++)
+    {
+     shared_node_map[d][Shared_node_pt[d][jj]]=jj;
+    }
+  }
+
  // Loop over domains
  for (int d=0; d<n_proc; d++)
   {
    // No halo with yourself
    if (d!=my_rank)      
     {
-     // Number of shared nodes between these domains
-     unsigned nnod_shared=nshared_node(d);
+ 
+     unsigned discrepancy_count=0;
      
      // Storage for hanging information that needs to be sent to the
      // relevant process if there is a discrepancy in the hanging status
      Vector<int> send_data;
      Vector<double> send_double_data;
-     
-     // Get vector of haloed elements
-     Vector<GeneralisedElement*> haloed_elem_pt(this->haloed_element_pt(d));
-     unsigned nhaloed_elem=haloed_elem_pt.size();
      
      // Counter for traversing haloed data
      unsigned count=0;
@@ -2326,99 +2380,338 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
      // Indicate presence of discrepancy. Default: there's none
      unsigned discrepancy=0;
      
-     // Loop over elements
-     for (unsigned e=0;e<nhaloed_elem;e++)
+     // Loop over haloed nodes
+     unsigned nh=nhaloed_node(d);
+     for (unsigned j=0;j<nh;j++)
       {
-       FiniteElement* el_pt=dynamic_cast<FiniteElement*>(haloed_elem_pt[e]);
-       unsigned n_node=el_pt->nnode();
+       // Get node
+       Node* nod_pt=haloed_node_pt(d,j);
        
-       // Loop over nodes
-       for (unsigned j=0;j<n_node;j++)
-        {
-         // Loop over the hanging status for each interpolated variable
-         // (and the geometry)
-         for (int icont=-1; icont<ncont_inter_values; icont++)
-          { 
-           // Compare hanging status of halo/haloed counterpart structure
-           if ((haloed_hanging[d][count]==1) && 
-               (halo_hanging[d][count]==0))
+       // Loop over the hanging status for each interpolated variable
+       // (and the geometry)
+       for (int icont=-1; icont<ncont_inter_values; icont++)
+        { 
+         // Compare hanging status of halo/haloed counterpart structure
+         
+         // Haloed is is hanging and haloed has different number
+         // of master nodes (which includes none in which case it isn't
+         // hanging)
+         if ((haloed_hanging[d][count]>0)&&
+             (haloed_hanging[d][count]!=halo_hanging[d][count]))
+          {
+           discrepancy=1;
+           discrepancy_count++;
+
+           // Find master nodes of haloed node
+           HangInfo* hang_pt=nod_pt->hanging_pt(icont);
+           unsigned nhd_master=hang_pt->nmaster();
+           
+           // Add the number of master nodes to the hanging_nodes vector
+           send_data.push_back(nhd_master);
+           
+           // Loop over master nodes required for HangInfo
+           for (unsigned m=0; m<nhd_master; m++)
             {
-             // The haloed equivalent of a halo node is hanging; therefore
-             // the halo node itself should be hanging too - package the
-             // information to send so that the HangInfo can be created
-             // on the relevant domain
-             discrepancy=1;
+             // Get mth master node
+             Node* master_nod_pt=hang_pt->master_node_pt(m);
              
-             // Find master nodes of haloed node
-             HangInfo* hang_pt=el_pt->node_pt(j)->hanging_pt(icont);
-             unsigned nhd_master=hang_pt->nmaster();
+
+
+//              //------------------------------------------
+//              // Old direct search is much slower!
+//              // Keep this code alive to allow comparisons
+//
+//              double t_start_search=TimingHelpers::timer();
+//
+//              // This node will be shared: find it!
+//              bool found=false;
+//
+//              // Look in shared node storage with domain d first
+//              unsigned nnod_shared=nshared_node(d);
+//              for (unsigned k=0; k<nnod_shared; k++)
+//               {
+//                if (master_nod_pt==shared_node_pt(d,k))
+//                 {
+//                  // Found a master: Put its number in the shared 
+//                  // scheme into send data
+//                  send_data.push_back(k);
+//
+//                  // Add the weight
+//                  send_double_data.push_back(hang_pt->master_weight(m));
+//                 
+//                  // Done
+//                  found=true;
+//                  break;
+//                 }
+//               }
+//
+//              double t_end_search=TimingHelpers::timer();
+//              t_start_search_total+=(t_end_search-t_start_search);
+//
+//              // end direct search demo
+//              //-----------------------
+
              
-             // Add the number of master nodes to the hanging_nodes vector
-             send_data.push_back(nhd_master);
+             // This node will be shared: find it!
+             bool found=false;
+
+             // Which processor holds the non-halo counterpart of this
+             // node?
+             int non_halo_proc_id=master_nod_pt->non_halo_proc_ID();
+
+             // Try to find node in map with proc d and get iterator to entry
+             std::map<Node*,unsigned>::iterator it=
+              shared_node_map[d].find(master_nod_pt); 
              
-             // Loop over master nodes required for HangInfo
-             for (unsigned m=0; m<nhd_master; m++)
+             // If it's not in there iterator points to end of
+             // set
+             if (it!=shared_node_map[d].end())
               {
-               // Get mth master node
-               Node* nod_pt=hang_pt->master_node_pt(m);
+               // Found a master: When looking up the node in the shared
+               // node scheme on processor d, which processor do I work
+               // with? The current one
+               send_data.push_back(my_rank);
+
+               // Found a master: Send its index in the shared 
+               // node scheme
+               send_data.push_back((*it).second);
                
-               // This node will be shared: find it!
-               bool found=false;
-               for (unsigned k=0; k<nnod_shared; k++)
+               // Add the weight
+               send_double_data.push_back(hang_pt->master_weight(m));
+               
+               // Done
+               found=true;
+              }
+
+             // If we haven't found it in the shared node scheme with proc d
+             // find it in the shared node scheme with the processor that holds
+             // the non-halo version
+             if (!found)
+              {
+               std::map<Node*,unsigned>::iterator it=
+                shared_node_map[non_halo_proc_id].find(master_nod_pt); 
+               
+               // If it's not in there iterator points to end of
+               // set
+               if (it!=shared_node_map[non_halo_proc_id].end())
                 {
-                 if (nod_pt==shared_node_pt(d,k))
+                 // Found a master: Send ID of processor that holds non-halo
+                 // (the fact that this is different from my_rank (the processor
+                 // that sends this) will alert the other processor to the fact
+                 // that it needs to 
+                 send_data.push_back(non_halo_proc_id);
+                 
+                 // Found a master: Send its index in the shared 
+                 // node scheme
+                 send_data.push_back((*it).second);
+                 
+                 // Add the weight
+                 send_double_data.push_back(hang_pt->master_weight(m));
+                 
+                 // Done
+                 found=true;
+                }
+              }
+
+
+             // Paranoid check: if we haven't found the master node
+             // then throw an error
+             if (!found)
+              {
+               char filename[100];
+               std::ofstream some_file;
+               sprintf(filename,"sync_hanging_node_crash_mesh_proc%i.dat",
+                       my_rank);
+               some_file.open(filename);
+               this->output(some_file);
+               some_file.close();
+               
+               sprintf(filename,"sync_hanging_node_crash_mesh_with_haloes_proc%i.dat",
+                       my_rank);
+               some_file.open(filename);
+               this->enable_output_of_halo_elements();
+               this->output(some_file);
+               this->disable_output_of_halo_elements();
+               some_file.close();
+               
+               sprintf(filename,"sync_hanging_node_crash_halo_elements_with_proc%i_proc%i.dat",
+                       d,my_rank);
+               some_file.open(filename);
+               Vector<GeneralisedElement*> 
+                halo_elem_pt(this->halo_element_pt(d));
+               unsigned nelem=halo_elem_pt.size();
+               for (unsigned e=0;e<nelem;e++)
+                {
+                 FiniteElement* el_pt=
+                  dynamic_cast<FiniteElement*>(halo_elem_pt[e]);
+                 el_pt->output(some_file);
+                }
+               some_file.close();
+
+               sprintf(filename,"sync_hanging_node_crash_haloed_elements_with_proc%i_proc%i.dat",
+                       d,my_rank);
+               some_file.open(filename);
+               Vector<GeneralisedElement*> 
+                haloed_elem_pt(this->haloed_element_pt(d));
+               nelem=haloed_elem_pt.size();
+               for (unsigned e=0;e<nelem;e++)
+                {
+                 FiniteElement* el_pt=
+                  dynamic_cast<FiniteElement*>(haloed_elem_pt[e]);
+                 el_pt->output(some_file);
+                }
+               some_file.close();
+
+
+               sprintf(filename,"sync_hanging_node_crash_shared_nodes_with_proc%i_proc%i.dat",
+                       d,my_rank);
+               some_file.open(filename);
+               unsigned n=nshared_node(d);
+               for (unsigned j=0;j<n;j++)
+                {
+                 Node* nod_pt=shared_node_pt(d,j);
+                 unsigned nd=nod_pt->ndim();
+                 for (unsigned i=0;i<nd;i++)
                   {
-                   // Found a master: Put it's number in the shared 
-                   // scheme into send data
-                   send_data.push_back(k);
-                   
-                   // Add the weight
-                   send_double_data.push_back(hang_pt->master_weight(m));
-                   
-                   // Done
-                   found=true;
-                   break;
+                   some_file << nod_pt->x(i) << " ";
+                  }
+                 some_file << "\n";
+                }
+               some_file.close();
+
+
+               sprintf(filename,"sync_hanging_node_crash_halo_nodes_with_proc%i_proc%i.dat",
+                       d,my_rank);
+               some_file.open(filename);
+               n=nhalo_node(d);
+               for (unsigned j=0;j<n;j++)
+                {
+                 Node* nod_pt=halo_node_pt(d,j);
+                 unsigned nd=nod_pt->ndim();
+                 for (unsigned i=0;i<nd;i++)
+                  {
+                   some_file << nod_pt->x(i) << " ";
+                  }
+                 some_file << "\n";
+                }
+               some_file.close();
+
+
+               sprintf(filename,
+                       "sync_hanging_node_crash_haloed_nodes_with_proc%i_proc%i.dat",
+                       d,my_rank);
+               some_file.open(filename);
+               n=nhaloed_node(d);
+               for (unsigned j=0;j<n;j++)
+                {
+                 Node* nod_pt=haloed_node_pt(d,j);
+                 unsigned nd=nod_pt->ndim();
+                 for (unsigned i=0;i<nd;i++)
+                  {
+                   some_file << nod_pt->x(i) << " ";
+                  }
+                 some_file << "\n";
+                }
+               some_file.close();
+               
+               std::ostringstream error_stream;
+               n=master_nod_pt->ndim();
+               error_stream  << "Error: Master node at:\n\n";
+               for (unsigned i=0;i<n;i++)
+                {
+                 error_stream <<  master_nod_pt->x(i) << " ";
+                }
+               error_stream   << "\n\nnot found for icont="
+                              << icont << "in  " 
+                              << "shared node storage with proc " << d << "\n"
+                              << "Relevant files: sync_hanging_node_crash*.dat\n\n" 
+                              << "Hanging node itself: \n\n";
+               n=nod_pt->ndim();
+               for (unsigned i=0;i<n;i++)
+                {
+                 error_stream << nod_pt->x(i) << " ";
+                }
+               error_stream << "\n\nMaster nodes:\n\n";
+               for (unsigned m=0; m<nhd_master; m++)
+                {
+                 Node* master_nod_pt=hang_pt->master_node_pt(m);
+                 n=master_nod_pt->ndim();
+                 for (unsigned i=0;i<n;i++)
+                  {
+                   error_stream << master_nod_pt->x(i) << " ";
+                  }
+                 error_stream << "\n";
+                }
+               
+               // try to find it somewhere else -- sub-optimal search but
+               // we're about to die on our arses (yes, plural -- this is 
+               // a parallel run!) anyway...
+               for (int dddd=0;dddd<n_proc;dddd++)
+                {
+                 bool loc_found=false;
+                 unsigned nnnod_shared=nshared_node(dddd);
+                 for (unsigned k=0; k<nnnod_shared; k++)
+                  {
+                   if (master_nod_pt==shared_node_pt(dddd,k))
+                    {
+                     loc_found=true;
+                     error_stream 
+                      << "Found that master node as " << k 
+                      << "-th entry in shared node storage with proc " 
+                      << dddd << "\n";
+                    }
+                  }
+                 if (!loc_found)
+                  {
+                   error_stream 
+                    << "Did not find that master node in shared node storage with proc " 
+                    << dddd << "\n";
                   }
                 }
+               error_stream << "\n\n";
 
-#ifdef PARANOID
-               // Paranoid check: if we haven't found the master node
-               // then throw an error
-               if (!found)
-                {
-                 std::ostringstream error_stream;
-                 error_stream  << "Error: Master node not found in  " 
-                               << "shared node storage!" 
-                               << std::endl;
-                 throw OomphLibError(
-                  error_stream.str(),
-                  "TreeBasedRefineableMeshBase::synchronise_hanging_nodes(...)",
-                  OOMPH_EXCEPTION_LOCATION);
-                }
-#endif
-               
-              } // loop over master nodes
-            }
-           else if ((haloed_hanging[d][count]==0) && 
-                    (halo_hanging[d][count]==1))
-            {
-             // The halo node should not be hanging in this instance, as its
-             // non-halo equivalent is nonhanging
-             // Indicate this by an entry of -1 in the send data
-             discrepancy=1;
-             send_data.push_back(-1);
-            }
-           else if (haloed_hanging[d][count]==
-                    halo_hanging[d][count]) 
-            {
-             // No discrepancy - put a zero in send data
-             send_data.push_back(0);
-            }
-           // Increment counter for number of haloed data
-           count++;
-          } // end of loop over icont
-        } // end of loop over nodes
-      } // end of loop over haloed elements
+               throw OomphLibError(
+                error_stream.str(),
+                "TreeBasedRefineableMeshBase::synchronise_hanging_nodes(...)",
+                OOMPH_EXCEPTION_LOCATION);
+              }
+             
+             
+            } // loop over master nodes
+          }
+         // Haloed node isn't hanging but halo is: the latter
+         // shouldn't so send a -1 to indicate that it's to be made
+         // non-hanging
+         else if ((haloed_hanging[d][count]==0) && 
+                  (halo_hanging[d][count]>0))
+          {
+           discrepancy=1;
+           discrepancy_count++;
+           send_data.push_back(-1);
+          }
+         // Both halo and haloed node have the same number of masters
+         // we're happy!
+         else if (haloed_hanging[d][count]==
+                  halo_hanging[d][count]) 
+          {
+           send_data.push_back(0);
+          }
+         else
+          {
+           std::ostringstream error_stream;
+           error_stream  << "Never get here!\n " 
+                         << "haloed_hanging[d][count]=" << haloed_hanging[d][count]
+                         << "; halo_hanging[d][count]=" <<   halo_hanging[d][count]
+                         << std::endl;
+           throw OomphLibError(
+            error_stream.str(),
+            "TreeBasedRefineableMeshBase::synchronise_hanging_nodes(...)",
+            OOMPH_EXCEPTION_LOCATION);
+          }
+         // Increment counter for number of haloed data
+         count++;
+        } // end of loop over icont
+      } // end of loop over haloed nodes
      
      // Now send all the required info to the equivalent halo layer -
      // If there are no discrepancies, no need to send anything
@@ -2428,7 +2721,7 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
        MPI_Send(&n_all_send[0],2,MPI_UNSIGNED,d,0,comm_pt->mpi_comm());
       }
      else
-      {
+      {       
        // How much data is there to be sent?
        n_all_send[0]=send_data.size();         
        n_all_send[1]=send_double_data.size();         
@@ -2448,7 +2741,6 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
                   comm_pt->mpi_comm());
         }
       }
-     
     }
    else // (d==my_rank), current process
     {
@@ -2464,113 +2756,436 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
          Vector<unsigned> n_all_recv(2,0);
          MPI_Recv(&n_all_recv[0],2,MPI_UNSIGNED,dd,0,
                   comm_pt->mpi_comm(),&status);
-         
+
          // Storage for received information
          Vector<int> receive_data;
          Vector<double> receive_double_data;
          
-         // If no information, no need to do anything else
+         // Receive unsigneds (if any)
          if (n_all_recv[0]!=0)
           {
            // Receive the data
            receive_data.resize(n_all_recv[0]);
            MPI_Recv(&receive_data[0],n_all_recv[0],MPI_INT,dd,1,
                     comm_pt->mpi_comm(),&status);
-           
-           // Receive doubles (if any)
-           if (n_all_recv[1]!=0)
-            {
-             // Receive the data
-             receive_double_data.resize(n_all_recv[1]);
-             MPI_Recv(&receive_double_data[0],n_all_recv[1],MPI_DOUBLE,dd,1,
-                      comm_pt->mpi_comm(),&status);
-            }
-           
+          }
+
+         // Receive doubles (if any)
+         if (n_all_recv[1]!=0)
+          {
+           // Receive the data
+           receive_double_data.resize(n_all_recv[1]);
+           MPI_Recv(&receive_double_data[0],n_all_recv[1],MPI_DOUBLE,dd,1,
+                    comm_pt->mpi_comm(),&status);
+          }
+         
+         // If no information, no need to do anything else  
+         if (n_all_recv[0]!=0)
+          {
            // Counters for traversing received data
            unsigned count=0;
            unsigned count_double=0;
            
-           // Get vector of halo elements by copy operation
-           Vector<GeneralisedElement*> 
-            halo_elem_pt(this->halo_element_pt(dd));
-           
-           // Loop over halo elements associated with this adjacent domain
-           unsigned nelem=halo_elem_pt.size();
-           for (unsigned e=0;e<nelem;e++)
+           // Loop over halo nodes
+           unsigned nh=nhalo_node(dd);
+           for (unsigned j=0;j<nh;j++)
             {
-             // Get element
-             FiniteElement* el_pt=
-              dynamic_cast<FiniteElement*>(halo_elem_pt[e]);
+             // Get node
+             Node* nod_pt=halo_node_pt(dd,j);           
              
-             // Loop over nodes
-             unsigned n_node=el_pt->nnode();
-             for (unsigned j=0;j<n_node;j++)
-              {
+             // Loop over the hanging status for each interpolated variable
+             // (and the geometry)
+             for (int icont=-1; icont<ncont_inter_values; icont++)
+              { 
                
-               // Loop over the hanging status for each interpolated variable
-               // (and the geometry)
-               for (int icont=-1; icont<ncont_inter_values; icont++)
-                { 
+               // Read next entry
+               int next_entry=receive_data[count++];
+               
+               // If it's positive, then the number tells us how 
+               // many master nodes we have
+               if (next_entry>0) 
+                {
+                 unsigned nhd_master=unsigned(next_entry);
                  
-                 // Read next entry
-                 int next_entry=receive_data[count++];
+                 // Set up a new HangInfo for this node
+                 HangInfo* hang_pt = new HangInfo(nhd_master);
                  
-                 // If it's positive, then the number tells us how 
-                 // many master nodes we have
-                 if (next_entry>0) 
+                 // Now set up the master nodes and weights
+                 for (unsigned m=0; m<nhd_master; m++)
                   {
-                   unsigned nhd_master=unsigned(next_entry);
+                   // Get the sent master node (a shared node) and 
+                   // the weight
+
+                   // ID of proc in whose shared node lookup scheme
+                   // the sending processor found the node
+                   unsigned shared_node_proc=unsigned(receive_data[count++]);
+
+                   // Index of node in the shared node lookup scheme 
+                   unsigned shared_node_id=unsigned(receive_data[count++]);
                    
-                   // Set up a new HangInfo for this node
-                   HangInfo* hang_pt = new HangInfo(nhd_master);
-                   
-                   // Now set up the master nodes and weights
-                   for (unsigned m=0; m<nhd_master; m++)
+                   // Get weight
+                   double mtr_weight=receive_double_data[count_double++];
+
+                   // If the shared node processor is the same as the
+                   // the sending processor we can processor everything here
+                   if (shared_node_proc==unsigned(dd))
                     {
-                     // Get the sent master node (a shared node) and 
-                     // the weight
-                     
-                     // Shared node ID
-                     unsigned shared_node_id=unsigned(receive_data[count++]);
-                     
                      // Get node
-                     Node* nod_pt=shared_node_pt(dd,shared_node_id);
-                     
-                     // Get weight
-                     double mtr_weight=receive_double_data[count_double++];
+                     Node* master_nod_pt=shared_node_pt(dd,shared_node_id);
                      
                      // Set as a master node (with corresponding weight)
-                     hang_pt->set_master_node_pt(m,nod_pt,mtr_weight);
+                     hang_pt->set_master_node_pt(m,master_nod_pt,mtr_weight);
                     }
-                   
-                   // Set the hanging pointer for the current halo node
-                   el_pt->node_pt(j)->set_hanging_pt(hang_pt,icont);
+                   // ...otherwise we have do another communication with
+                   // intermediate processor that holds the non-halo
+                   // version of the master node -- only that processor can
+                   // translate the index of the node the share node 
+                   // lookup scheme with the sending processor to the
+                   // index in the shared node lookup scheme with this
+                   // processor
+                   else
+                    {
+                     // Store
+                     HangHelperStruct tmp;
+                     tmp.Sending_processor=dd;
+                     tmp.Shared_node_id_on_sending_processor=shared_node_id;
+                     tmp.Shared_node_proc=shared_node_proc;
+                     tmp.Weight=mtr_weight;
+                     tmp.Hang_pt=hang_pt;
+                     tmp.Master_node_index=m;
+                     hang_info.push_back(tmp);
+                    }
                   }
-                 // Negative entry: the hanging node already exists, 
-                 // but it shouldn't, so set it to nonhanging
-                 else if (next_entry<0)
-                  {
-                   el_pt->node_pt(j)->set_nonhanging();
-                  }
-                 
-                } // end of loop over icont
-              } // end of loop over nodes
-            } // end of loop over elements
+
+                 // Set the hanging pointer for the current halo node
+                 // (does delete any previous hang data)
+                 nod_pt->set_hanging_pt(hang_pt,icont);
+                }
+               // Negative entry: the hanging node already exists, 
+               // but it shouldn't, so set it to nonhanging
+               else if (next_entry<0)
+                {
+                 nod_pt->set_hanging_pt(0,icont);
+                }
+               
+              } // end of loop over icont
+            } // end of loop over nodes
           } // end of anything to receive
         }
-      } 
+      }
     }
   }// end loop over all processors
-   
+ 
+
+
  if (Global_timings::Doc_comprehensive_timings)
   {
    t_end = TimingHelpers::timer();
    oomph_info << "Time for second all-to-all in synchronise_hanging_nodes() " 
               << t_end-t_start << std::endl;
+   t_start = TimingHelpers::timer();
   }  
-
-}
  
+
+ // Now identify master nodes by translating index in shared 
+ // node lookup scheme from the lookup scheme with the sending
+ // processor to that with the current processor
+ unsigned n=hang_info.size();
+
+ // Storage for the translated entries (in order) for/from
+ // other processors
+ Vector<Vector<unsigned> > translated_entry(n_proc);
+  
+ // Storage for how-many-th entry in this processor's 
+ // hang_info vector will be completed by processor rank.
+ Vector<Vector<unsigned> > hang_info_index_for_proc(n_proc);
+
+ // Send information to intermediate processor that holds
+ // non-halo version of missing master node
+ {
+  // Storage for number of data to be sent to each processor
+  Vector<int> send_n(n_proc,0);
+  
+  // Storage for all values to be sent to all processors
+  Vector<unsigned> send_data;
+  
+  // Start location within send_data for data to be sent to each processor 
+  Vector<int> send_displacement(n_proc,0);
+  
+  // Loop over all processors
+  for(int rank=0;rank<n_proc;rank++)
+   {  
+    //Set the offset for the current processor
+    send_displacement[rank] = send_data.size();
+    
+    //Don't bother to do anything if the processor in the loop is the 
+    //current processor
+    if(rank!=my_rank)
+     {
+      
+      // Search through the (typically few) entries
+      // in hang info vector to find the ones that
+      // must be sent to proc rank (the proc that holds
+      // the non-halo version of the "missing" master node
+      for (unsigned i=0;i<n;i++)
+       {
+        HangHelperStruct tmp=hang_info[i];
+        if (tmp.Shared_node_proc==unsigned(rank))
+         {
+          // Add the sending processor
+          send_data.push_back(tmp.Sending_processor);
+          
+          // Add the index of the missing master node
+          // in the shared node lookup scheme between
+          // sending processor and processor rank
+          send_data.push_back(tmp.Shared_node_id_on_sending_processor);
+
+          // Record the how-many-th entry in this processor's 
+          // hang_info vector will be completed by processor rank.
+          hang_info_index_for_proc[rank].push_back(i);
+         }
+       }
+     }
+    
+    //Find the number of data added to the vector
+    send_n[rank] = send_data.size() - send_displacement[rank];
+   }
+  
+  
+  //Storage for the number of data to be received from each processor
+  Vector<int> receive_n(n_proc,0);
+  
+  //Now send numbers of data to be sent between all processors
+  MPI_Alltoall(&send_n[0],1,MPI_INT,&receive_n[0],1,MPI_INT,
+               comm_pt->mpi_comm());
+  
+  //We now prepare the data to be received
+  //by working out the displacements from the received data
+  Vector<int> receive_displacement(n_proc,0);
+  int receive_data_count=0;
+  for(int rank=0;rank<n_proc;++rank)
+   {
+    //Displacement is number of data received so far
+    receive_displacement[rank] = receive_data_count;
+    receive_data_count += receive_n[rank];
+   }
+  
+  //Now resize the receive buffer for all data from all processors
+  //Make sure that it has a size of at least one
+  if(receive_data_count==0) {++receive_data_count;}
+  Vector<unsigned> receive_data(receive_data_count);
+  
+  //Make sure that the send buffer has size at least one
+  //so that we don't get a segmentation fault
+  if(send_data.size()==0) {send_data.resize(1);}
+  
+  //Now send the data between all the processors
+  MPI_Alltoallv(&send_data[0],&send_n[0],&send_displacement[0],
+                MPI_UNSIGNED,
+                &receive_data[0],&receive_n[0],
+                &receive_displacement[0],
+                MPI_UNSIGNED,
+                comm_pt->mpi_comm());
+  
+  //Now use the received data to update the halo nodes
+  for (int send_rank=0;send_rank<n_proc;send_rank++)
+   {
+    //Don't bother to do anything for the processor corresponding to the
+    //current processor or if no data were received from this processor
+    if((send_rank != my_rank) && (receive_n[send_rank] != 0))
+     {
+      //Counter for the data within the large array
+      unsigned count=receive_displacement[send_rank];
+      
+      // We're reading two numbers per missing halo node
+      unsigned n_rec=unsigned(receive_n[send_rank]);
+      for (unsigned i=0;i<n_rec/2;i++)
+       {
+        
+        // Receive orig sending proc
+        unsigned orig_sending_proc=receive_data[count];
+        count++;
+        
+        // Receive the index of the missing master node
+        // in the shared node lookup scheme between
+        // orig sending processor and current processor
+        unsigned shared_node_id_on_orig_sending_proc=
+         receive_data[count];
+        count++;
+        
+        // Extract node from shared node lookup scheme
+        Node* master_nod_pt=
+         shared_node_pt(orig_sending_proc,
+                        shared_node_id_on_orig_sending_proc);
+        
+        // Now find it in shared halo scheme with the processor
+        // that's sent the request
+        
+        std::map<Node*,unsigned>::iterator it=
+         shared_node_map[send_rank].find(master_nod_pt); 
+        
+        // If it's not in there iterator points to end of
+        // set
+        if (it!=shared_node_map[send_rank].end())
+         {          
+          // Store it so we can send it back
+          translated_entry[send_rank].push_back((*it).second);
+         }
+        else
+         {
+          std::ostringstream error_stream;
+          error_stream
+           << "Received translation query for shared node"
+           << " entry " << shared_node_id_on_orig_sending_proc 
+           << " with processor " << orig_sending_proc 
+           << " from proc " << send_rank << std::endl
+           << "but did not find node in shared node scheme with proc "
+           << send_rank << std::endl;
+          throw OomphLibError(
+           error_stream.str(),
+           "TreeBasedRefineableMeshBase::synchronise_hanging_nodes(...)",
+           OOMPH_EXCEPTION_LOCATION);
+         }
+        
+       }
+      
+     }
+   } //End of data is received
+  
+ }   // end of sending stuff to intermediate processor that holds
+ //     non halo version of missing master node
+
+ 
+
+ if (Global_timings::Doc_comprehensive_timings)
+  {
+   t_end = TimingHelpers::timer();
+   oomph_info << "Time for third all-to-all in synchronise_hanging_nodes() " 
+              << t_end-t_start << std::endl;
+   t_start = TimingHelpers::timer();
+  }  
+ 
+
+
+ // Send information back to processor that needs to identify
+ // missing master node via shared node lookup scheme with
+ // this processor
+ {
+  // Storage for number of data to be sent to each processor
+  Vector<int> send_n(n_proc,0);
+  
+  // Storage for all values to be sent to all processors
+  Vector<unsigned> send_data;
+  
+  // Start location within send_data for data to be sent to each processor 
+  Vector<int> send_displacement(n_proc,0);
+  
+  // Loop over all processors
+  for(int rank=0;rank<n_proc;rank++)
+   {  
+    //Set the offset for the current processor
+    send_displacement[rank] = send_data.size();
+    
+    //Don't bother to do anything if the processor in the loop is the 
+    //current processor
+    if(rank!=my_rank)
+     {
+      // Put the translated entries for processor rank into
+      // send data
+      unsigned n=translated_entry[rank].size();
+      for (unsigned j=0;j<n;j++)
+       {
+        send_data.push_back(translated_entry[rank][j]);
+       }
+     }
+    
+    //Find the number of data added to the vector
+    send_n[rank] = send_data.size() - send_displacement[rank];
+   }
+  
+  
+  //Storage for the number of data to be received from each processor
+  Vector<int> receive_n(n_proc,0);
+  
+  //Now send numbers of data to be sent between all processors
+  MPI_Alltoall(&send_n[0],1,MPI_INT,&receive_n[0],1,MPI_INT,
+               comm_pt->mpi_comm());
+  
+  //We now prepare the data to be received
+  //by working out the displacements from the received data
+  Vector<int> receive_displacement(n_proc,0);
+  int receive_data_count=0;
+  for(int rank=0;rank<n_proc;++rank)
+   {
+    //Displacement is number of data received so far
+    receive_displacement[rank] = receive_data_count;
+    receive_data_count += receive_n[rank];
+   }
+  
+  //Now resize the receive buffer for all data from all processors
+  //Make sure that it has a size of at least one
+  if(receive_data_count==0) {++receive_data_count;}
+  Vector<unsigned> receive_data(receive_data_count);
+  
+  //Make sure that the send buffer has size at least one
+  //so that we don't get a segmentation fault
+  if(send_data.size()==0) {send_data.resize(1);}
+  
+  //Now send the data between all the processors
+  MPI_Alltoallv(&send_data[0],&send_n[0],&send_displacement[0],
+                MPI_UNSIGNED,
+                &receive_data[0],&receive_n[0],
+                &receive_displacement[0],
+                MPI_UNSIGNED,
+                comm_pt->mpi_comm());
+  
+  //Now use the received data to update the halo nodes
+  for (int send_rank=0;send_rank<n_proc;send_rank++)
+   {
+    //Don't bother to do anything for the processor corresponding to the
+    //current processor or if no data were received from this processor
+    if((send_rank != my_rank) && (receive_n[send_rank] != 0))
+     {
+      //Counter for the data within the large array
+      unsigned count=receive_displacement[send_rank];
+
+      // We're reading one number per missing halo node
+      unsigned n_rec=unsigned(receive_n[send_rank]);
+      for (unsigned i=0;i<n_rec;i++)
+       {
+        // Index of missing master node in shared node lookup scheme
+        // with processor send_rank:
+        unsigned index=receive_data[count];
+        count++;
+
+        // Extract node from shared node lookup scheme
+        Node* master_nod_pt=
+         shared_node_pt(send_rank,index);
+        
+        // Recall information associated with that missing master
+        unsigned hang_info_index=hang_info_index_for_proc[send_rank][i];
+        HangHelperStruct tmp=hang_info[hang_info_index];
+        
+        // Set as a master node (with corresponding weight)
+        tmp.Hang_pt->set_master_node_pt(tmp.Master_node_index,
+                                        master_nod_pt,tmp.Weight);
+       }
+      
+     }
+   } //End of data is received
+  
+ } // end of completing hang info for missing master nodes
+ 
+
+ if (Global_timings::Doc_comprehensive_timings)
+  {
+   t_end = TimingHelpers::timer();
+   oomph_info << "Time for fourth all-to-all in synchronise_hanging_nodes() " 
+              << t_end-t_start << std::endl;
+  }  
+ 
+}
+
 #endif
 
 }

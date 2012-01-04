@@ -91,7 +91,6 @@ fill_in_contribution_to_residuals(Vector<double> &residuals)
    ///--------------
    double nonlinearterm=1.0;
    double sqnorm=0.0;
-   double normplusone=1.0;
   
    /// Spine case 
    ///-----------
@@ -137,7 +136,6 @@ fill_in_contribution_to_residuals(Vector<double> &residuals)
       sqnorm += interpolated_du_dzeta[j]*interpolated_du_dzeta[j];
      
      nonlinearterm=1.0/sqrt(1.0+sqnorm);
-     normplusone=1.0+sqnorm;
     }
 
    //Spines

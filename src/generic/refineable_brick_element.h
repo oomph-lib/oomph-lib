@@ -326,11 +326,7 @@ class RefineableSolidQElement<3> : public virtual RefineableQElement<3>,
    Vector<double> xi_fe(3);
    Vector<double> x(3);
    Vector<double> x_fe(3);
- 
-   unsigned ii0_lo=0;
-   unsigned ii1_lo=0;
-   unsigned ii2_lo=0;
-   
+    
    //Get the number of 1d nodes
    unsigned n_p = nnode_1d();
 
@@ -353,11 +349,7 @@ class RefineableSolidQElement<3> : public virtual RefineableQElement<3>,
      {
       s_hi[i]=s_lo[i]+1;
      }
-    
-    ii0_lo=(1+s_lo[0])*(n_p-1);
-    ii1_lo=(1+s_lo[1])*(n_p-1);
-    ii2_lo=(1+s_lo[2])*(n_p-1);
-    
+        
     // Pass Undeformed macro element pointer on to sons and
     // set coordinates in macro element
    if(father_el_pt->Undeformed_macro_elem_pt!=0)
