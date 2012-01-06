@@ -12,5 +12,4 @@ unstructured_fsi \
 unstructured_three_d_fsi \
 unstructured_adaptive_fsi \
 elastic_bretherton \
-pseudo_solid_collapsible_tube \
-unstructured_adaptive_fsi
+pseudo_solid_collapsible_tube 
