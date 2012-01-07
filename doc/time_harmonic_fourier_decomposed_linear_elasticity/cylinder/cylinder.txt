@@ -1,7 +1,9 @@
-\mainpage The Fourier-decomposed equations of time-harmonic linear elasticity 
+\mainpage The azimuthally Fourier-decomposed equations of time-harmonic linear elasticity 
 
 The aim of this tutorial is to demonstrate the solution of the
-time-harmonic, Fourier-decomposed equations of linear elasticity.
+time-harmonic equations of linear elasticity in cylindrical polar
+coordinates, using a Fourier decomposition of the solution in the 
+azimuthal direction.
 These equations are useful to describe forced, time-harmonic,
 non-axisymmetric oscillations of axisymmetric elastic bodies.
 
@@ -65,7 +67,7 @@ where \f$ \partial D=\partial D_d\cup\partial D_n \f$ so that
 \partial D_d $ },\quad
 \mbox{\boldmath$ \tau^*$} \cdot 
 {\bf n}=\mbox{\boldmath$ \hat{\tau}^*$}\,\,\textrm{on $
-\partial D_n $ }.
+\partial D_n $ }
 \f]
 </CENTER>
 where \f$ {\bf n} \f$ is the outer unit normal on the boundary.
@@ -160,7 +162,7 @@ The boundary conditions are
 \partial D_n $}.\f]
 </CENTER>
 
-Given the assumed axisymmetric of the body we expand all quantities
+Given the assumed axisymmetry of the body we expand all quantities
 in a Fourier series in the azimuthal coordinate \f$ \theta \f$ by 
 writing,
 <CENTER>
@@ -199,7 +201,7 @@ Guide,</A> this equation class is then combined with a geometric finite
 element to form a fully-functional finite element. 
 For instance, the combination of the 
 \c TimeHarmonicFourierDecomposedLinearElasticityEquations
-class with the geometric finite element \c QElement<3> yields a nine-node 
+class with the geometric finite element \c QElement<2,3> yields a nine-node 
 quadrilateral element. As usual, the mapping 
 between local and global (Eulerian) coordinates within an element is given by,
 <CENTER>
@@ -255,11 +257,11 @@ The displacement field
 \mbox{\boldmath$u$}^{(n)}=
 \left(\begin{array}{c}u_r^{(n)}\\u_\theta^{(n)}\\u_z^{(n)}\end{array}\right)=
 \left(\begin{array}{c}r^3\cos\,
-z\\r^3z^3\\r^3\sin\,z\end{array}\right).
+z\\r^3z^3\\r^3\sin\,z\end{array}\right)
 \ \ \ \ \ \ \ \ \ \ @E[Fourierdisp]@
 \f]
 </CENTER>
-is an exact solution of the governing equations if the the body is 
+is an exact solution of the governing equations if the body is 
 subject to a body force
 <CENTER>
 \f[
@@ -274,7 +276,8 @@ i} nr^2z^2(\lambda+\mu)\end{array}\right),
 \ \ \ \ \ \ \ \ \ \ @E[Fourierbodyforce]@
 \f]
 </CENTER>
-where \f$ \lambda \f$ and \f$ \mu \f$ are the Lame parameters
+where \f$ \lambda =  \nu/((1+\nu)(1-2\nu))\f$ and \f$ \mu =
+1/(2(1+\nu))\f$ are the non-dimensional Lam&eacute;   parameters
 (non-dimensionalised on \f$ E \f$).  The body is subject to 
 a non-zero traction on all four boundaries; for 
 example, on the inner boundary (where \f$ r=r_{\rm min} \f$) the
@@ -282,7 +285,7 @@ traction is
 <CENTER>
 \f[
 \mbox{\boldmath$ \hat{\tau}$}^{(n)}_3=
-\mbox{\boldmath$ \tau$}^{(n)}(r_{\rm min},z)\cdot (-1,0,0)^{\rm T}=
+\mbox{\boldmath$ \tau$}^{(n)}(r_{\rm min},z)\cdot (-{\bf e}_r) =
 \left(\begin{array}{c}
 -6r_{\rm min}^2\mu\cos\, 
 z-\lambda({\rm i} nr_{\rm min}^2z^3+r_{\rm min}^2(4+r_{\rm min})\cos\, z)
@@ -296,7 +299,7 @@ z-\lambda({\rm i} nr_{\rm min}^2z^3+r_{\rm min}^2(4+r_{\rm min})\cos\, z)
 </CENTER>
 We choose to set this traction as a boundary condition, whilst
 pinning the displacements on the remaining boundaries 
-and imposing a prescribed displacement according to (@R[Fourierdisp]@).
+where we impose a prescribed displacement according to (@R[Fourierdisp]@).
 
 
 <HR>
@@ -309,10 +312,10 @@ The figures below show plots of \f$ {\rm Re}\{u_r^{(n)}\},
 for a Fourier wavenumber of \f$ n=3 \f$ and geometric parameters 
 \f$ r_{\rm min}=0.1, r_{\rm max}=1.1, z_{\rm
 min}=0.3, z_{\rm max}=2.3 \f$. We set \f$ \Omega^2=10+5{\rm i}\f$, 
-corresponding to an exponentially growing time-periodic forcing,
+corresponding to an exponentially growing time-periodic forcing;
 \f$ E=1+0.01{\rm
 i} \f$, corresponding to a slightly dissipative material (see \ref
-comments ), and \f$ \nu=0.3+0.05{\rm i}\f$.  The imaginary part of the 
+comments ); and \f$ \nu=0.3+0.05{\rm i}\f$.  The imaginary part of the 
 solution is small (though not identically equal to zero) but it converges to 
 zero under mesh refinement; see \ref exercises .
 

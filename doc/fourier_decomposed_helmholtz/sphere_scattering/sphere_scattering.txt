@@ -1,4 +1,4 @@
-\mainpage Example problem: The Fourier-decomposed 3D Helmholtz equation
+\mainpage Example problem: The azimuthally Fourier-decomposed 3D Helmholtz equation
 
 
 In this document we discuss the finite-element-based solution of the 
@@ -73,7 +73,7 @@ ensures that scattering of an incoming wave only produces outgoing not
 incoming waves from infinity.
 
   These equations can be solved using \c oomph-lib's cartesian
-Helmholtz elements, decribed in  
+Helmholtz elements, described in  
 <a href="../../../helmholtz/scattering/html/index.html">another
 tutorial.</a> Here we consider an alternative approach in which we
 solve the equations in cylindrical polar coordinates \f$ (r,\varphi,z)
@@ -161,7 +161,7 @@ The functions
 P_{l}^{m}(x)=(-1)^{m}(1-x^2)^{m/2}\frac{d^m}{dx^m}P_{l}(x)
 \f]
 are the associated Legendre functions, expressed in terms of the
-Legrendre polynomials
+Legendre polynomials
 \f[
 P_{n}(x)=\frac{1}{2^{n} \, n!}\frac{d^n}{dx^n}[(x^2-1)^{n}].
 \f]
@@ -206,7 +206,7 @@ The solution on (and near) \f$ \Gamma \f$  is therefore given by
 \sum_{l=0}^{+\infty}\sum_{n=-l}^{l} \ a_{ln}\ h_{l}^{(1)}(k\rho)
 \ P_{l}^{n}(\cos\theta) \ \exp({\rm i}n\varphi).
 \f]
-Restricting outselves to the single azimuthal Fourier mode \f$ n=N \f$
+Restricting ourselves to the single azimuthal Fourier mode \f$ n=N \f$
 to be determined by (@R[fourier_helmholtz]@), we have
 \f[
 u_N(\rho,\theta)=\sum_{l=N}^{+\infty}
@@ -223,7 +223,7 @@ a_{l}=\frac{2l+1}{2 h_{l}^{(1)}(kR)}
 \f]
 Using these coefficients, we can differentiate
 (@R[outgoing_single_mode_hh]@) to obtain the normal derivative of the
-solution on the artificial outer boundary \f$ \Gamma \f$ in terms
+solution on the (spherical) artificial outer boundary \f$ \Gamma \f$ in terms
 of the solution itself:
 \f[
 \left. \frac{\partial u}{\partial n} \right|_{\rho=R} = 
@@ -252,7 +252,7 @@ along the artificial boundary, the application of the Sommerfeld
 radiation condition via (@R[gamma_bc]@) introduces a non-local coupling
 between all the degrees of freedom located on that boundary.
 This is handled by classifying the unknowns that affect \f$ \gamma \f$ 
-but are not associated with the element's own nodes as external \c Data. 
+but are not associated with an element's own nodes as its external \c Data. 
 
 To facilitate the setup of the interaction between the 
 \c FourierDecomposedHelmholtzDtNBoundaryElements, \c oomph-lib provides the
@@ -262,8 +262,8 @@ that discretise the artificial boundary. The
 member function 
 \c FourierDecomposedHelmholtzDtNMesh::setup_gamma() pre-computes the 
 \f$ \gamma \f$ values required for the imposition of equation (@R[gamma_bc]@).
-The radius \f$ R \f$ of the artificial boundary and the (finite) number of
-terms used in the sum in (@R[gamma_bc]@) are specified
+The radius \f$ R \f$ of the artificial boundary and the (finite) upper limit
+for the sum in (@R[gamma_bc]@) are specified
 as arguments to the constructor of the \c FourierDecomposedHelmholtzDtNMesh.
 \n\n 
 <b>NOTE:</b> Since \f$ \gamma \f$  depends on the solution, 
@@ -294,7 +294,7 @@ This solution corresponds to the superposition of several outgoing
 waves of the form  (@R[outgoing_single_mode_hh]@) with 
 coefficients \f$ a_l = 1 \f$.  We solve the Helmholtz
 equation in the infinite region surrounding the unit sphere
-on whose surface we apply impose flux boundary conditions 
+on whose surface we impose flux boundary conditions 
 consistent with the derivative of the exact solution. 
 
 To solve this problem numerically, we discretise the annular
@@ -304,9 +304,8 @@ outer boundary \f$ \Gamma \f$ located  at \f$ \sqrt{r^2 + z^2}
 = R = 3\f$.
 
 The two plots below show a comparison between the exact and computed
-solutions for a Fourier wavenumber of \f$ N=3 \f$ and a
-Helmholtz wavenumber of
-\f$ k^2 = 10 \f$.
+solutions for \f$ N_{\rm terms}=6 \f$ , a Fourier wavenumber 
+of \f$ N=3 \f$ , and a (squared) Helmholtz wavenumber of \f$ k^2 = 10 \f$.
 
 @I w 0.6\textwidth real "Plot of the exact (green) and computed (red) real parts of the solution of the Fourier-decomposed Helmholtz equation for N=3 and a wavenumber of k^2 = 10. "
 
@@ -333,7 +332,7 @@ Dirichlet-to-Neumann mapping (@R[gamma_bc]@); see \ref acc.
 
 
 \dontinclude sphere_scattering.cc
-\skipline start_of_namespace
+\skipline start_of_namespace===
 \until Nterms_for_DtN
 
 Next we define the coefficients
@@ -358,7 +357,7 @@ whose listings we omit here.
 \subsection main The driver code
 The driver code is very straightforward. We create the problem object,
 discretising the domain with 3x3-noded \c QFourierDecomposedHelmholtzElements 
-and setup the output directory.
+and set up the output directory.
 
 \dontinclude sphere_scattering.cc
 \skipline start_of_main
@@ -406,8 +405,7 @@ during the Newton iteration.
 
 We start by building the bulk mesh, using the \c TwoDAnnularMesh,
 defined in the  
-<A
-HREF="../../../../demo_drivers/fourier_decomposed_helmholtz/sphere_scattering/sphere_scattering.cc">
+<a href="../../../../demo_drivers/fourier_decomposed_helmholtz/sphere_scattering/sphere_scattering.cc">
 driver code</a> but omitted here for brevity.
 
 
@@ -445,7 +443,7 @@ The problem is now ready to be solved.
 \subsection create_flux Creating the face elements
 The functions \c create_flux_elements(...) and 
 \c create_outer_bc_elements(...) create the \c FaceElements
-required to apply the bounday conditions on the inner and
+required to apply the boundary conditions on the inner and
 outer boundaries of the annular computational domain.
 They both loop over the bulk elements that are adjacent to the appropriate
 mesh boundary and attach the required \c FaceElements to their
@@ -476,7 +474,7 @@ and assesses the error in the computed solution.
 \until Norm of solution
 
 The function \c check_gamma(...) is used to check the computation of
-\f$ \gamma \f$ integral. If computed correctly its values
+the \f$ \gamma \f$ integral. If computed correctly, its values
 (pre-computed at the Gauss points of the 
 \c FourierDecomposedHelmholtzFluxElement) ought to agree (well) with the
 derivative of the exact solution. They do; see \ref acc.
@@ -520,7 +518,7 @@ scatterer that any near field effects have decayed. The actual
 accuracy of the computational results depends on various factors: \n
 - The number of \c FourierDecomposedHelmholtzDtNBoundaryElement
   along the artificial domain boundary. Since these elements are
-  attached to the "bulk" \c FourierDecomposedHelmholtzElements the
+  attached to the "bulk" \c FourierDecomposedHelmholtzElements
   it is important that the bulk mesh is sufficiently fine to resolve the
   relevant features of the solution throughout the domain.
   \n

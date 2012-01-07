@@ -194,130 +194,39 @@ FourierDecomposedTimeHarmonicLinearElasticityProblem
  // Storage for prescribed displacements
  Vector<double> u(6);
 
- unsigned ibound, num_nod;
-
- // // Uncomment this section to pin displacments on r=rmin 
- // // (boundary 3) rather than prescribe traction
- // //-------------------------------------
- // ibound=3;
- // num_nod=Bulk_mesh_pt->nboundary_node(ibound);
- // for (unsigned inod=0;inod<num_nod;inod++)
- //  {
- //   // Get pointer to node
- //   Node* nod_pt=Bulk_mesh_pt->boundary_node_pt(ibound,inod);
-
- //   // get r and z coordinates
- //   x[0]=nod_pt->x(0);
- //   x[1]=nod_pt->x(1);
-
- //   // Pinned in r, z and theta
- //   nod_pt->pin(0);nod_pt->pin(1);nod_pt->pin(2);
- //   nod_pt->pin(3);nod_pt->pin(4);nod_pt->pin(5);
-
- //   // Compute the value of the exact solution at the nodal point
- //   Vector<double> u(6);
- //   Global_Parameters::exact_solution(x,u);
-
- //   // Set the displacements
- //   nod_pt->set_value(0,u[0]);
- //   nod_pt->set_value(1,u[1]);
- //   nod_pt->set_value(2,u[2]);
- //   nod_pt->set_value(3,u[3]);
- //   nod_pt->set_value(4,u[4]);
- //   nod_pt->set_value(5,u[5]);
- //  }
-
-
- // Now set displacements on z=zmin (boundary 0) 
- //------------------------------------------
- ibound=0;
- num_nod=Bulk_mesh_pt->nboundary_node(ibound);
- for (unsigned inod=0;inod<num_nod;inod++) 
+ // Now set displacements on boundaries 0 (z=zmin),
+ //------------------------------------------------
+ // 1 (r=rmax) and 2 (z=zmax)
+ //--------------------------
+ for (unsigned ibound=0;ibound<=2;ibound++)
   {
-   // Get pointer to node
-   Node* nod_pt=Bulk_mesh_pt->boundary_node_pt(ibound,inod);
-
-   // get r and z coordinates
-   x[0]=nod_pt->x(0);
-   x[1]=nod_pt->x(1);
- 
-   // Pinned in r, z and theta
-   nod_pt->pin(0);nod_pt->pin(1);nod_pt->pin(2);
-   nod_pt->pin(3);nod_pt->pin(4);nod_pt->pin(5);
-
-   // Compute the value of the exact solution at the nodal point
-   Vector<double> u(6);
-   Global_Parameters::exact_solution(x,u);
-
-   // Set the displacements
-   nod_pt->set_value(0,u[0]);
-   nod_pt->set_value(1,u[1]);
-   nod_pt->set_value(2,u[2]);
-   nod_pt->set_value(3,u[3]);
-   nod_pt->set_value(4,u[4]);
-   nod_pt->set_value(5,u[5]);
-  }
-
-
- // Now set displacements at r=rmax (boundary 1)
- //-------------------------------------------
- ibound=1;
- num_nod=Bulk_mesh_pt->nboundary_node(ibound);
- for (unsigned inod=0;inod<num_nod;inod++) 
-  {
-   // Get pointer to node
-   Node* nod_pt=Bulk_mesh_pt->boundary_node_pt(ibound,inod);
-
-   // get r and z coordinates
-   x[0]=nod_pt->x(0);
-   x[1]=nod_pt->x(1);
-   
-   // Pinned in r, z and theta
-   nod_pt->pin(0);nod_pt->pin(1);nod_pt->pin(2);
-   nod_pt->pin(3);nod_pt->pin(4);nod_pt->pin(5);
-
-   // Compute the value of the exact solution at the nodal point
-   Vector<double> u(6);
-   Global_Parameters::exact_solution(x,u);
-
-   // Set the displacements
-   nod_pt->set_value(0,u[0]);
-   nod_pt->set_value(1,u[1]);
-   nod_pt->set_value(2,u[2]);
-   nod_pt->set_value(3,u[3]);
-   nod_pt->set_value(4,u[4]);
-   nod_pt->set_value(5,u[5]);
-  }
-
- // Now set displacements at z=zmax (boundary 2)
- //------------------------------------------
- ibound=2;
- num_nod=Bulk_mesh_pt->nboundary_node(ibound);
- for (unsigned inod=0;inod<num_nod;inod++) 
-  {
-   // Get pointer to node
-   Node* nod_pt=Bulk_mesh_pt->boundary_node_pt(ibound,inod);
-
-   // get r and z coordinates
-   x[0]=nod_pt->x(0);
-   x[1]=nod_pt->x(1);
-    
-   // Pinned in r, z and theta
-   nod_pt->pin(0);nod_pt->pin(1);nod_pt->pin(2);
-   nod_pt->pin(3);nod_pt->pin(4);nod_pt->pin(5);
-
-   // Compute the value of the exact solution at the nodal point
-   Vector<double> u(6);
-   Global_Parameters::exact_solution(x,u);
-
-   // Set the displacements
-   nod_pt->set_value(0,u[0]);
-   nod_pt->set_value(1,u[1]);
-   nod_pt->set_value(2,u[2]);
-   nod_pt->set_value(3,u[3]);
-   nod_pt->set_value(4,u[4]);
-   nod_pt->set_value(5,u[5]);
-  } // end_loop_over_boundary_nodes
+   unsigned num_nod=Bulk_mesh_pt->nboundary_node(ibound);
+   for (unsigned inod=0;inod<num_nod;inod++) 
+    {
+     // Get pointer to node
+     Node* nod_pt=Bulk_mesh_pt->boundary_node_pt(ibound,inod);
+     
+     // get r and z coordinates
+     x[0]=nod_pt->x(0);
+     x[1]=nod_pt->x(1);
+     
+     // Pinned in r, z and theta
+     nod_pt->pin(0);nod_pt->pin(1);nod_pt->pin(2);
+     nod_pt->pin(3);nod_pt->pin(4);nod_pt->pin(5);
+     
+     // Compute the value of the exact solution at the nodal point
+     Vector<double> u(6);
+     Global_Parameters::exact_solution(x,u);
+     
+     // Set the displacements
+     nod_pt->set_value(0,u[0]);
+     nod_pt->set_value(1,u[1]);
+     nod_pt->set_value(2,u[2]);
+     nod_pt->set_value(3,u[3]);
+     nod_pt->set_value(4,u[4]);
+     nod_pt->set_value(5,u[5]);
+    }
+  } // end_of_loop_over_boundary_nodes
 
 
  // Complete the problem setup to make the elements fully functional

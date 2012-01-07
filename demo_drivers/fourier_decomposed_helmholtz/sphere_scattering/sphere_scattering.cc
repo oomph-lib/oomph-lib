@@ -104,7 +104,7 @@ class AnnularQuadMesh : public SimpleRectangularQuadMesh<ELEMENT>
 
 
 
-//===== start_of_namespace=============================================
+//===== start_of_namespace_planar_wave=================================
 /// Namespace to test representation of planar wave in spherical
 /// polars
 //=====================================================================

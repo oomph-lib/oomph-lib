@@ -88,13 +88,11 @@
 # finishing your changes. We specify the location of the blas,
 # lapack, hypre and trilinos libraries, the latter two assumed
 # to have been compiled with mpi support. 
-#
-#--enable-suppress-doc
 --enable-MPI
 --enable-symbolic-links-for-headers
 --with-blacs=/home/mheil/local/lib/blacs_with_copy
 --with-scalapack=/home/mheil/local/lib/scalapack/libscalapack.a
---with-pord=/home/mheil/local/pord/lib/libpord.a 
+--with-pord=/home/mheil/local/lib/pord/libpord.a 
 --with-mumps=/home/mheil/local/mumps
 --with-blas=/home/mheil/local/lib/blas/blas.a
 --with-lapack=/home/mheil/local/lib/lapack/lapack.a
@@ -108,4 +106,3 @@ CXX=mpic++
 CC=mpicc
 F77=mpif77
 LD=mpif77
-
