@@ -637,8 +637,9 @@ public:
   }
 
  /// \short Prune nodes. Nodes that have been marked as obsolete are removed
- /// from the mesh (and its boundary-node scheme)
- void prune_dead_nodes();
+ /// from the mesh (and its boundary-node scheme). Returns vector
+ /// of pointers to deleted nodes.
+ Vector<Node*> prune_dead_nodes();
 
  /// Return number of boundaries
  unsigned nboundary() const {return Boundary_node_pt.size();}
@@ -1259,7 +1260,7 @@ public:
   }
 
  /// \short Total number of shared nodes in this Mesh
- unsigned nshared_node()
+ unsigned nshared_node() 
   {
    unsigned n=0;
    for (std::map<unsigned,Vector<Node*> >::iterator it=
@@ -1271,7 +1272,7 @@ public:
   }
 
  /// \short Doc shared nodes
- void doc_shared_nodes()
+ void doc_shared_nodes() 
   {
    for (std::map<unsigned,Vector<Node*> >::iterator it=
          Shared_node_pt.begin();it!=Shared_node_pt.end();it++)

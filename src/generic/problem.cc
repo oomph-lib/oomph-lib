@@ -2279,14 +2279,15 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
    }
  
  
-  // Doc timings if required
-  if (Global_timings::Doc_comprehensive_timings)
-   {
-    double t_locate=TimingHelpers::timer();
-    oomph_info 
-     <<"CPU for assembly of existing global eqns in remove_duplicate_data(): "
-     << t_locate-t_start << std::endl;
-   }
+// hierher too short/too many
+//   // Doc timings if required
+//   if (Global_timings::Doc_comprehensive_timings)
+//    {
+//     double t_locate=TimingHelpers::timer();
+//     oomph_info 
+//      <<"CPU for assembly of existing global eqns in remove_duplicate_data(): "
+//      << t_locate-t_start << std::endl;
+//    }
 
 
   // Set to record duplicate nodes scheduled to be killed

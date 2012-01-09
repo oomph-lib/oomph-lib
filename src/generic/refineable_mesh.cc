@@ -1309,7 +1309,7 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
     }
  
    //Now we can prune the dead nodes from the mesh.
-   this->prune_dead_nodes();
+   Vector<Node*> deleted_node_pt=this->prune_dead_nodes();
 
    if (Global_timings::Doc_comprehensive_timings)
     {
@@ -1346,6 +1346,14 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
      //Loop over the boundaries
      for(unsigned b=0;b<n_boundary;b++)
       {
+
+       // Remove deleted nodes from the set
+       unsigned n_del=deleted_node_pt.size();
+       for (unsigned j=0;j<n_del;j++)
+        {
+         hanging_nodes_on_boundary_pt[b].erase(deleted_node_pt[j]);
+        }
+       
        //If the nodes that were hanging are still hanging then remove them
        //from the set (note increment is not in for command for efficiencty)
        for(std::set<Node*>::iterator 

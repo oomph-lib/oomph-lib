@@ -720,17 +720,18 @@ unsigned Mesh::self_test()
 
 //========================================================
 /// Nodes that have been marked as obsolete are removed
-/// from the mesh and the its boundaries
+/// from the mesh and the its boundaries. Returns vector
+/// of pointers to deleted nodes.
 //========================================================
-void Mesh::prune_dead_nodes()
+Vector<Node*> Mesh::prune_dead_nodes()
 {
-      
 
  // Only copy the 'live' nodes across to new mesh
  //----------------------------------------------
 
  // New Vector of pointers to nodes
  Vector<Node *> new_node_pt;
+ Vector<Node *> deleted_node_pt;
 
  // Loop over all nodes in mesh 
  unsigned long n_node = nnode();
@@ -749,6 +750,7 @@ void Mesh::prune_dead_nodes()
     {
      if(!(Node_pt[n]->is_on_boundary()))
       {
+       deleted_node_pt.push_back(Node_pt[n]);
        delete Node_pt[n];
        Node_pt[n]=0;
       }
@@ -795,6 +797,9 @@ void Mesh::prune_dead_nodes()
        //Now if the node is no longer on any boundaries, delete it
        if(!Boundary_node_pt[ibound][n]->is_on_boundary())
         {
+         deleted_node_pt.push_back(
+          dynamic_cast<Node*>(Boundary_node_pt[ibound][n]));
+
          delete Boundary_node_pt[ibound][n];
         }
       }
@@ -805,6 +810,8 @@ void Mesh::prune_dead_nodes()
   
   } //End of loop over boundaries
 
+ // Tell us who you deleted
+ return deleted_node_pt;
 }
 
 
@@ -1526,7 +1533,7 @@ void Mesh::setup_shared_node_scheme()
             {
              this->add_shared_node_pt(d,nod_pt);
              node_shared[nod_pt]=true;
-          }
+            }
            
           } // end loop over nodes
         }
@@ -1817,13 +1824,26 @@ void Mesh::synchronise_shared_nodes(OomphCommunicator* comm_pt,
   }
  
  
+ if (Global_timings::Doc_comprehensive_timings)
+  {
+   oomph_info 
+    << "Starting vector to set conversion in "
+    << "Mesh::synchronise_shared_nodes() for a total of "
+    << nshared_node() << " nodes\n"; 
+   tt_start = TimingHelpers::timer();
+  }
+ 
+ 
  // Copy vector-based representation of shared nodes into
  // sets for faster search
  Vector<std::set<Node*> > shared_node_set(n_proc);
  for (int d=0;d<n_proc;d++)
   {
-   std::copy(Shared_node_pt[d].begin(), Shared_node_pt[d].end(), 
-             std::inserter(shared_node_set[d], shared_node_set[d].end()));
+   unsigned n_vector=Shared_node_pt[d].size();
+   for (unsigned i=0;i<n_vector;i++)
+    {
+     shared_node_set[d].insert(Shared_node_pt[d][i]);
+    }
   }
  
  
@@ -1928,15 +1948,18 @@ void Mesh::synchronise_shared_nodes(OomphCommunicator* comm_pt,
          
          // Is node already listed in shared node scheme? Find it 
          // and get iterator to entry
-         std::set<Node*>::iterator itt=
+         std::set<Node*>::iterator ittt=
           shared_node_set[shared_domain].find(nod_pt);
          
          // If it's not in there already iterator points to end of
          // set
-         if (itt!=shared_node_set[shared_domain].end())
+         if (ittt==shared_node_set[shared_domain].end())
           {
            // Now add it
            add_shared_node_pt(shared_domain,nod_pt);
+
+           // Update set
+           shared_node_set[shared_domain].insert(nod_pt);
           }
         }       
       }
@@ -5387,7 +5410,22 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
    std::set<Node*> shared_node_set;
    for (unsigned i=0;i<n_vector;i++)
     {
+     unsigned old_size=shared_node_set.size();
      shared_node_set.insert(Shared_node_pt[d][i]);
+     unsigned new_size=shared_node_set.size();
+     if (old_size==new_size)
+      {
+       Node* nod_pt=Shared_node_pt[d][i];
+       oomph_info << "Repeated node in shared node lookup scheme: "
+                  << i << "-th node with proc " << d << " : "
+                  << nod_pt << " at: ";
+       unsigned n=nod_pt->ndim();
+       for (unsigned ii=0;ii<n;ii++)
+        {
+         oomph_info << nod_pt->x(ii) << " ";
+        }
+       oomph_info << std::endl;
+      }
     }
    unsigned n_set=shared_node_set.size();
    if (n_vector!=n_set)
