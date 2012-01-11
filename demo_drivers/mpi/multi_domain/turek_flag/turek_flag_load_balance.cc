@@ -376,6 +376,39 @@ public:
  /// \short Constructor: Pass length and height of domain
  TurekProblem(const double &length, const double &height);
  
+
+ /// Destructor: clean up memory
+ ~TurekProblem()
+  {
+
+   oomph_info << "In problem destructor\n";   
+
+   // Delete the old MeshAsGeomObjects 
+   delete this->fluid_mesh_pt()->bottom_flag_pt();
+   delete this->fluid_mesh_pt()->top_flag_pt();
+   delete this->fluid_mesh_pt()->tip_flag_pt();
+
+   // Kill traction meshes
+   for (unsigned b=0;b<3;b++)
+    {
+     delete this->Traction_mesh_pt[b];
+    }
+
+   delete linear_solver_pt();
+   delete time_stepper_pt(0);
+   delete time_stepper_pt(1);
+   delete dynamic_cast<CylinderWithFlagDomain*>(this->fluid_mesh_pt()->
+                                                domain_pt())->cylinder_pt();
+   delete this->solid_mesh_pt()->spatial_error_estimator_pt();
+   delete this->solid_mesh_pt();
+   delete this->fluid_mesh_pt()->spatial_error_estimator_pt();
+   delete this->fluid_mesh_pt();
+
+   delete Global_Parameters::Constitutive_law_pt;
+
+   oomph_info << "Done problem destructor\n";   
+  }
+
  /// Access function for the fluid mesh 
  RefineableAlgebraicCylinderWithFlagMesh<FLUID_ELEMENT>* fluid_mesh_pt() 
   { return Fluid_mesh_pt;}
@@ -475,6 +508,21 @@ private:
  /// fluid control node
  bool I_have_the_fluid_control_node;
  
+ /// The flag timestepper (consistent with BDF<2> for fluid)
+ Newmark<2>* Flag_time_stepper_pt; 
+
+ /// Error estimator for the solid mesh
+ Z2ErrorEstimator* Solid_error_estimator_pt;
+
+ /// The fluid timestepper
+ BDF<2>* Fluid_time_stepper_pt;
+
+ /// Circle object as the central cylinder
+ Circle* Cylinder_pt;
+
+ /// Error estimator for the fluid mesh
+ Z2ErrorEstimator* Fluid_error_estimator_pt;
+
 };// end_of_problem_class
 
 
@@ -496,6 +544,25 @@ TurekProblem(const double &length,
  // accomodate possible poor initial guesses
  Max_newton_iterations=20;
  Max_residuals=1.0e4;
+
+ // Create the flag timestepper (consistent with BDF<2> for fluid)
+ Flag_time_stepper_pt=new Newmark<2>;
+ add_time_stepper_pt(Flag_time_stepper_pt); 
+
+ // Create error estimator for the solid mesh
+ Solid_error_estimator_pt=new Z2ErrorEstimator;
+
+ //Create a new Circle object as the central cylinder
+ Cylinder_pt = new Circle(Global_Parameters::Centre_x,
+                          Global_Parameters::Centre_y,
+                          Global_Parameters::Radius);
+ 
+ // Allocate the fluid timestepper
+ Fluid_time_stepper_pt=new BDF<2>;
+ add_time_stepper_pt(Fluid_time_stepper_pt);
+
+ // Create error estimator for the fluid mesh
+ Fluid_error_estimator_pt=new Z2ErrorEstimator;
 
  // Build the meshes for this problem
  build_mesh();
@@ -571,10 +638,6 @@ void TurekProblem<FLUID_ELEMENT,SOLID_ELEMENT>::build_mesh()
  // Domain length in y-direction 
  double l_y=Global_Parameters::H;
 
- // Create the flag timestepper (consistent with BDF<2> for fluid)
- Newmark<2>* flag_time_stepper_pt=new Newmark<2>;
- add_time_stepper_pt(flag_time_stepper_pt); 
-
  /// Left point on centreline of flag so that the top and bottom
  /// vertices merge with the cylinder.
  Vector<double> origin(2);
@@ -590,11 +653,10 @@ void TurekProblem<FLUID_ELEMENT,SOLID_ELEMENT>::build_mesh()
 
  //Now create the mesh
  solid_mesh_pt() = new ElasticRefineableRectangularQuadMesh<SOLID_ELEMENT>(
-  n_x,n_y,l_x,l_y,origin,flag_time_stepper_pt);
+  n_x,n_y,l_x,l_y,origin,Flag_time_stepper_pt);
 
  // Set error estimator for the solid mesh
- Z2ErrorEstimator* solid_error_estimator_pt=new Z2ErrorEstimator;
- solid_mesh_pt()->spatial_error_estimator_pt()=solid_error_estimator_pt;
+ solid_mesh_pt()->spatial_error_estimator_pt()=Solid_error_estimator_pt;
 
 
  // Element that contains the control point
@@ -692,19 +754,10 @@ void TurekProblem<FLUID_ELEMENT,SOLID_ELEMENT>::build_mesh()
  // Build fluid mesh
  //-----------------
 
- //Create a new Circle object as the central cylinder
- Circle* cylinder_pt = new Circle(Global_Parameters::Centre_x,
-                                  Global_Parameters::Centre_y,
-                                  Global_Parameters::Radius);
-
- // Allocate the fluid timestepper
- BDF<2>* fluid_time_stepper_pt=new BDF<2>;
- add_time_stepper_pt(fluid_time_stepper_pt);
- 
  // Build fluid mesh
  Fluid_mesh_pt=
   new RefineableAlgebraicCylinderWithFlagMesh<FLUID_ELEMENT>
-  (cylinder_pt, 
+  (Cylinder_pt, 
    top_flag_pt,
    bottom_flag_pt,
    tip_flag_pt,
@@ -713,7 +766,7 @@ void TurekProblem<FLUID_ELEMENT,SOLID_ELEMENT>::build_mesh()
    Global_Parameters::Centre_x,
    Global_Parameters::Centre_y,
    Global_Parameters::Radius,
-   fluid_time_stepper_pt);
+   Fluid_time_stepper_pt);
  
  // By default all processors contain the fluid control node
  I_have_the_fluid_control_node=true;
@@ -731,8 +784,7 @@ void TurekProblem<FLUID_ELEMENT,SOLID_ELEMENT>::build_mesh()
  Fluid_control_x1=Fluid_control_node_pt->x(1);
 
  // Set error estimator for the fluid mesh
- Z2ErrorEstimator* fluid_error_estimator_pt=new Z2ErrorEstimator;
- fluid_mesh_pt()->spatial_error_estimator_pt()=fluid_error_estimator_pt;
+ fluid_mesh_pt()->spatial_error_estimator_pt()=Fluid_error_estimator_pt;
 
  // Refine uniformly
  Fluid_mesh_pt->refine_uniformly();
@@ -1405,21 +1457,26 @@ int main(int argc, char* argv[])
  // Start of timestepping loop
  for(unsigned i=0;i<nstep;i++)
   { 
-  // Solve the problem
-  problem.unsteady_newton_solve(dt,max_adapt,first); 
-  
-  // Output the solution
-  problem.doc_solution(doc_info,trace_file);
-  
-  // Step number
-  doc_info.number()++;
+   // Solve the problem
+   problem.unsteady_newton_solve(dt,max_adapt,first); 
+   
+   // Output the solution
+   problem.doc_solution(doc_info,trace_file);
+   
+   // Step number
+   doc_info.number()++;
+   
+   // Load balance the problem
+   DocInfo load_doc_info;
+   problem.load_balance(load_doc_info,report_stats);
 
-  // Load balance the problem
-  DocInfo load_doc_info;
-  problem.load_balance(load_doc_info,report_stats);
   } // end of timestepping loop
  
  trace_file.close(); 
+
+
+
+ oomph_info << "Done\n";
 
 #ifdef OOMPH_HAS_MPI
  MPI_Helpers::finalize();
