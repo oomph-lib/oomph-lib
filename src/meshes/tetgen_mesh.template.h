@@ -284,6 +284,21 @@ public:
     //Now tetrahedralise
     std::stringstream input_string;
     input_string << "pAa" << element_volume;
+
+    //If any of the boundaries should not be split add the "Y" flag
+    bool can_boundaries_be_split = outer_boundary_pt->can_boundaries_be_split();
+    {
+     unsigned n_internal=internal_closed_surface_pt.size();
+     for(unsigned i=0;i<n_internal;i++)
+      {
+       can_boundaries_be_split &= 
+        internal_closed_surface_pt[i]->can_boundaries_be_split();
+      }
+    }
+    //If we can't split the boundaries add the flag
+    if(can_boundaries_be_split==false) {input_string << "Y";}
+
+    //Now convert to a C-style string
     char tetswitches[100];
     sprintf(tetswitches,"%s",input_string.str().c_str());
 
@@ -295,9 +310,23 @@ public:
 
     // Build scaffold
     Tmp_mesh_pt= new TetgenScaffoldMesh(*this->Tetgenio_pt);
+
+    //If any of the objects are different regions then we need to use
+    //the atributes
+    bool regions_exist = false;
+    {
+     unsigned n_internal=internal_closed_surface_pt.size();
+     for(unsigned i=0;i<n_internal;i++)
+      {
+       regions_exist |= 
+        internal_closed_surface_pt[i]->is_region();
+      }
+    }
+    //If there are regions, use the attributes
+    if(regions_exist==true) {Use_attributes=true;}
     
     // Convert mesh from scaffold to actual mesh
-    build_from_scaffold(time_stepper_pt,use_attributes);
+    build_from_scaffold(time_stepper_pt,Use_attributes);
     
     // Kill the scaffold
     delete Tmp_mesh_pt;
@@ -429,6 +458,8 @@ public:
 
    //Initialise the number of holes
    tetgen_io.numberofholes=0;
+   //and the number of regions
+   tetgen_io.numberofregions=0;
 
    //Loop over the internal stuff
    for(unsigned h=0;h<n_internal;++h)
@@ -463,6 +494,14 @@ public:
       {
        ++tetgen_io.numberofholes;
       }
+     //Otherwise it may be region
+     else
+      {
+       if(internal_closed_surface_pt[h]->is_region())
+        {
+         ++tetgen_io.numberofregions;
+        }
+      }
     }
 
    //Set storage for the holes
@@ -482,13 +521,28 @@ public:
       }
     }
 
- /*in.numberofregions = 1;
- in.regionlist = new double[5*in.numberofregions];
- in.regionlist[0] = 0.0;
- in.regionlist[1] = 0.0;
- in.regionlist[2] = 0.0;
- in.regionlist[3] = 1;
- in.regionlist[4] = 1;*/
+   //Set storage for the regions
+   tetgen_io.regionlist = new double[5*tetgen_io.numberofregions];
+   //Loop over all the internal boundaries again
+   counter=0;
+   for(unsigned h=0;h<n_internal;++h)
+    {
+     if(internal_closed_surface_pt[h]->is_region())
+      {
+       for(unsigned i=0;i<3;++i)
+        {
+         tetgen_io.regionlist[counter] = 
+          internal_closed_surface_pt[h]->internal_point(i);
+         ++counter;
+        }
+       tetgen_io.regionlist[counter] =
+        static_cast<double>(internal_closed_surface_pt[h]->region());
+       ++counter;
+       //Area target
+       tetgen_io.regionlist[counter] = 0.0;
+       ++counter;
+      }
+    }
   }
 
 

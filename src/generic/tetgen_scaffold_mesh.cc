@@ -737,7 +737,7 @@ TetgenScaffoldMesh::TetgenScaffoldMesh(const std::string& node_file_name,
        k++;
       }
      Element_attribute[i] = tetgen_data.tetrahedronattributelist[i];
-    }
+   }
   }
     
  // Resize the Element vector

@@ -183,6 +183,17 @@ class ElasticityTensor
     this->set_lame_coefficients(lambda,mu);
    }    
 
+  /// \short Constructur. Passing in the values of the two lame
+  /// coefficients directly (interpreted as the ratios of these
+  /// quantities to a reference stiffness used to non-dimensionalised
+  IsotropicElasticityTensor(const Vector<double> &lame)
+   {
+    //Set the three independent componens
+    C[0] = 0.0;
+    this->set_lame_coefficients(lame[0],lame[1]);
+   }
+  
+
   ///Overload the independent coefficient function
   inline double independent_component(const unsigned &i) const
    {return C[StaticIndex[i]];}

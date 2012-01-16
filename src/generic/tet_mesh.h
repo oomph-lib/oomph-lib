@@ -72,11 +72,22 @@ public:
   Internal_point = hole_point;
  }
 
+ /// Set the region
+ void set_region(const int &region,
+                 const Vector<double> &region_point)
+ {
+  Internal_point = region_point;
+  Region = region;
+ }
+
  /// Return the region flag
  const int &region() {return Region;}
 
  /// Is this a hole
  bool is_hole() {if (Region==-1) {return true;} else {return false;}}
+
+ /// Is it a specified region (i.e. region is positive)
+ bool is_region() {if(Region > 0) {return true;} else {return false;}}
 
   protected:
 
@@ -100,10 +111,14 @@ class TetgenMeshFacetedSurface : public TetgenMeshClosedSurface
 
  ///\short Constructor: Takes a vector of vertex coordinates,
  /// a vector of facet connectivities and an optional vector of
- /// boundary ids associated with each facet
+ /// boundary ids associated with each facet. The final boolean argument
+ /// is used to control whether boundaries can be split. If it is false
+ /// then additional nodes will NOT be added on any boundaries.
  TetgenMeshFacetedSurface(const Vector<Vector<double> > &vertex_coordinate,
-                          const Vector<Vector<unsigned> > &facet) :
- TetgenMeshClosedSurface(), Vertex_coordinate(vertex_coordinate), Facet(facet)
+                          const Vector<Vector<unsigned> > &facet,
+                          const bool &split_boundaries=true) :
+ TetgenMeshClosedSurface(), Vertex_coordinate(vertex_coordinate), Facet(facet),
+  Split_boundaries(split_boundaries)
  {
    //Check for dimensions
 #ifdef PARANOID
@@ -131,12 +146,16 @@ class TetgenMeshFacetedSurface : public TetgenMeshClosedSurface
  
  ///\short Constructor: Takes a vector of vertex coordinates,
  /// a vector of facet connectivities and an optional vector of
- /// boundary ids associated with each facte
+ /// boundary ids associated with each facet.
+ /// The final boolean argument
+ /// is used to control whether boundaries can be split. If it is false
+ /// then additional nodes will NOT be added on any boundaries. 
  TetgenMeshFacetedSurface(const Vector<Vector<double> > &vertex_coordinate,
-                         const Vector<Vector<unsigned> > &facet,
-                         const Vector<unsigned> &facet_boundary_id) :
+                          const Vector<Vector<unsigned> > &facet,
+                          const Vector<unsigned> &facet_boundary_id,
+                          const bool &split_boundaries=true) :
   Vertex_coordinate(vertex_coordinate), Facet(facet),
-  Facet_boundary_id(facet_boundary_id)
+   Facet_boundary_id(facet_boundary_id), Split_boundaries(split_boundaries)
  {
   //Find the number of vertices
   const unsigned n_vertex=Vertex_coordinate.size();
@@ -231,6 +250,9 @@ class TetgenMeshFacetedSurface : public TetgenMeshClosedSurface
  {
   return Facet[i];
  }
+
+ /// Test whether boundaries can be split
+ bool can_boundaries_be_split() {return Split_boundaries;}
  
 private:
   
@@ -245,6 +267,9 @@ private:
 
  /// Vector of Facet boundary ids
  Vector<unsigned> Facet_boundary_id;
+
+ /// Boolean to indicate whether extra vertices can be added on the boundary
+ bool Split_boundaries;
 
 };
 

@@ -594,6 +594,9 @@ void TElement<2,NNODE_1D>::output(std::ostream &outfile,const unsigned &nplot)
    
  //Vector of local coordinates
  Vector<double> s(2);
+
+ //Get the dimension of the node
+ unsigned n_dim = this->nodal_dimension();
  
  // Tecplot header info
  outfile << tecplot_zone_string(nplot);
@@ -605,7 +608,7 @@ void TElement<2,NNODE_1D>::output(std::ostream &outfile,const unsigned &nplot)
    // Get local coordinates of plot point
    get_s_plot(iplot,nplot,s);
    
-   for(unsigned i=0;i<2;i++) 
+   for(unsigned i=0;i<n_dim;i++) 
     {
      outfile << interpolated_x(s,i) << " ";
     }
@@ -672,6 +675,9 @@ void TElement<2,NNODE_1D>::output(FILE* file_pt,const unsigned &nplot)
 
  //Vector of local coordinates
  Vector<double> s(2);
+
+ //Find the dimensions of the nodes
+ unsigned n_dim = this->nodal_dimension();
  
  // Tecplot header info
  fprintf(file_pt,"%s \n",tecplot_zone_string(nplot).c_str());
@@ -683,7 +689,7 @@ void TElement<2,NNODE_1D>::output(FILE* file_pt,const unsigned &nplot)
    // Get local coordinates of plot point
    get_s_plot(iplot,nplot,s);
    
-   for(unsigned i=0;i<2;i++) 
+   for(unsigned i=0;i<n_dim;i++) 
     {
      fprintf(file_pt,"%g ", interpolated_x(s,i));
      //outfile << interpolated_x(s,i) << " ";
@@ -754,6 +760,9 @@ void TElement<3,NNODE_1D>::output(std::ostream &outfile,const unsigned &nplot)
    
  //Vector of local coordinates
  Vector<double> s(3);
+
+ //Find the dimension of the nodes
+ unsigned n_dim = this->nodal_dimension();
  
  // Tecplot header info
  outfile << tecplot_zone_string(nplot);
@@ -765,7 +774,7 @@ void TElement<3,NNODE_1D>::output(std::ostream &outfile,const unsigned &nplot)
    // Get local coordinates of plot point
    get_s_plot(iplot,nplot,s);
    
-   for(unsigned i=0;i<3;i++) 
+   for(unsigned i=0;i<n_dim;i++) 
     {
      outfile << interpolated_x(s,i) << " ";
     }   
@@ -832,6 +841,9 @@ void TElement<3,NNODE_1D>::output(FILE* file_pt,const unsigned &nplot)
  //Vector of local coordinates
  Vector<double> s(3);
  
+ //Find the dimension of the nodes
+ unsigned n_dim = this->nodal_dimension();
+
  // Tecplot header info
  fprintf(file_pt,"%s \n",tecplot_zone_string(nplot).c_str());
  
@@ -842,7 +854,7 @@ void TElement<3,NNODE_1D>::output(FILE* file_pt,const unsigned &nplot)
    // Get local coordinates of plot point
    get_s_plot(iplot,nplot,s);
    
-   for(unsigned i=0;i<2;i++) 
+   for(unsigned i=0;i<n_dim;i++) 
     {
      fprintf(file_pt,"%g ", interpolated_x(s,i));
      //outfile << interpolated_x(s,i) << " ";
