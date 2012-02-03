@@ -135,6 +135,80 @@ namespace oomph
   };
  
  
+ 
+ //====================================================================
+ /// Refineable version of the OneDMesh
+ //====================================================================
+ template <class ELEMENT>
+  class PRefineableOneDMesh : public virtual OneDMesh<ELEMENT>,  
+                              public PRefineableLineMesh<ELEMENT>
+  {
+
+   public:
+   
+   /// \short Constructor: Pass number of elements, n_element, length of
+   /// domain, length, and pointer to timestepper (defaults to Steady)
+   PRefineableOneDMesh(const unsigned &n_element, const double &length,
+                      TimeStepper* time_stepper_pt=&Mesh::Default_TimeStepper)
+    : OneDMesh<ELEMENT>(n_element,length,time_stepper_pt)
+    {
+     // Nodal positions etc. were created in constructor for OneDMesh<...>
+     // so only need to set up binary tree forest
+     this->setup_binary_tree_forest();
+
+     //Get pointer to a p-refineable element
+     PRefineableElement* first_el_pt =
+      dynamic_cast<PRefineableElement*>(this->element_pt(0));
+
+     if(first_el_pt!=0)
+      {
+       // Get current p-refinement level to use as the minimum
+       unsigned min_p_order = first_el_pt->p_order();
+       
+       // Max/min p-refinement levels
+       this->Max_p_refinement_level=7;
+       this->Min_p_refinement_level=min_p_order;
+      }
+     else
+      {
+       oomph_info << "INFO/WARNING: p-refineable mesh contains non p-refineable elements\n";
+      }
+    }
+   
+   /// \short Constructor that allows the specification of minimum and
+   /// maximum values of x coordinates. Also pass pointer to timestepper
+   /// (defaults to Steady).
+   PRefineableOneDMesh(const unsigned &n_element,
+                      const double &xmin, const double &xmax, 
+                      TimeStepper* time_stepper_pt=&Mesh::Default_TimeStepper)
+    : OneDMesh<ELEMENT>(n_element,xmin,xmax,time_stepper_pt)
+    {
+     // Nodal positions etc. were created in constructor for OneDMesh<...>
+     // so only need to set up binary tree forest
+     this->setup_binary_tree_forest();
+
+     //Get pointer to a p-refineable element
+     PRefineableElement* first_el_pt =
+      dynamic_cast<PRefineableElement*>(this->element_pt(0));
+
+     if(first_el_pt!=0)
+      {
+       // Get current p-refinement level to use as the minimum
+       unsigned min_p_order = first_el_pt->p_order();
+       
+       // Max/min p-refinement levels
+       this->Max_p_refinement_level=7;
+       this->Min_p_refinement_level=min_p_order;
+      }
+     else
+      {
+       oomph_info << "INFO/WARNING: p-refineable mesh contains non p-refineable elements\n";
+      }
+    }
+   
+  };
+ 
+ 
 } // End of namespace
 
 #endif

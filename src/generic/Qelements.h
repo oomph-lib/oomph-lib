@@ -1659,6 +1659,22 @@ class RefineableQElement
 };
 
 //==============================================================
+/// A class that is used to template the p-refineable Q elements
+/// by dimension. It's really nothing more than a policy class.
+/// The default template parameter ensures that these elements
+/// inherit from the QElement of the correct type if they start
+/// with a p-order higher than linear (e.g. Navier-Stokes Elements).
+//=============================================================
+template<unsigned DIM, unsigned INITIAL_NNODE_1D=2>
+class PRefineableQElement
+{
+  public:
+
+ /// Empty constuctor
+ PRefineableQElement() {}
+};
+
+//==============================================================
 /// A class that is used to template the solid refineable Q elements
 /// by dimension. It's really nothing more than a policy class
 //=============================================================

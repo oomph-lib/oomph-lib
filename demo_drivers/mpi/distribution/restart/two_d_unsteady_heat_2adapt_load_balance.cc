@@ -1281,6 +1281,68 @@ int main(int argc, char* argv[])
  
  // Doc what has actually been specified on the command line
  CommandLineArgs::doc_specified_flags();
+ 
+ // Build problem: Pass pointer to source function and initial timestep
+ RefineableUnsteadyHeatProblem<RefineableQUnsteadyHeatElement<2,3> >
+  problem(&GlobalParameters::get_source);
+
+ // Work out doc_info directory
+ char doc_info_directory[100];
+ if(CommandLineArgs::command_line_flag_has_been_set("--validation_run"))
+  {
+   //Validation run
+   if(CommandLineArgs::command_line_flag_has_been_set("--load_balance_first"))
+    {
+     //Load balancing
+     if(!CommandLineArgs::command_line_flag_has_been_set("--restart_file"))
+      {
+       //First run
+       sprintf(doc_info_directory,"RESLT_load_balance_first_for_restart");
+      }
+     else
+      {
+       //Restarting
+       //cout << GlobalParameters::Restart_file.c_str() << endl;
+       char filename[100];
+       sprintf(filename,GlobalParameters::Restart_file.c_str());
+       char* step;
+       step = strtok(filename,"/");
+       step = strtok(NULL,"/");
+       sprintf(doc_info_directory,"RESLT_load_balance_first_restarted_from_step_%s",step);
+       //cout << doc_info_directory << endl;
+       //exit(1);
+      }
+    }
+   else
+    {
+     //Pruning
+     if(!CommandLineArgs::command_line_flag_has_been_set("--restart_file"))
+      {
+       //First run
+       sprintf(doc_info_directory,"RESLT_prune_first_for_restart");
+      }
+     else
+      {
+       //Restarting
+       //cout << GlobalParameters::Restart_file.c_str() << endl;
+       char filename[100];
+       sprintf(filename,GlobalParameters::Restart_file.c_str());
+       char* step;
+       step = strtok(filename,"/");
+       step = strtok(NULL,"/");
+       sprintf(doc_info_directory,"RESLT_prune_first_restarted_from_step_%s",step);
+       //cout << doc_info_directory << endl;
+       //exit(1);
+      }
+    }
+  }
+ else
+  {
+   sprintf(doc_info_directory,"RESLT");
+  }
+ 
+ // Set doc_info directory
+ problem.doc_info().set_directory(doc_info_directory);
 
   // Switch off output modifier
  oomph_info.output_modifier_pt() = &default_output_modifier;
@@ -1288,7 +1350,8 @@ int main(int argc, char* argv[])
  // Define processor-labeled output file for all on-screen stuff
  std::ofstream output_stream;
  char filename[100];
- sprintf(filename,"RESLT/OUTPUT.%i",
+ sprintf(filename,"%s/OUTPUT.%i",
+         problem.doc_info().directory().c_str(),
          MPI_Helpers::communicator_pt()->my_rank());
  output_stream.open(filename);
  oomph_info.stream_pt() = &output_stream;
@@ -1297,10 +1360,6 @@ int main(int argc, char* argv[])
 
  // Doc what has actually been specified on the command line
  CommandLineArgs::doc_specified_flags();
- 
- // Build problem: Pass pointer to source function and initial timestep
- RefineableUnsteadyHeatProblem<RefineableQUnsteadyHeatElement<2,3> >
-  problem(&GlobalParameters::get_source);
    
  // First timestep?
  bool first=true;
@@ -1347,7 +1406,7 @@ int main(int argc, char* argv[])
    // Write partition to disk
    std::ofstream output_file;
    char filename[100];
-   sprintf(filename,"RESLT/partitioning.dat");
+   sprintf(filename,"%s/partitioning.dat",problem.doc_info().directory().c_str());
    output_file.open(filename);
    unsigned n=element_partition.size();
    output_file << element_partition.size() << std::endl;
@@ -1409,7 +1468,7 @@ int main(int argc, char* argv[])
    // Write used partition to disk
    std::ofstream output_file;
    char filename[100];
-   sprintf(filename,"RESLT/partitioning.dat");
+   sprintf(filename,"%s/partitioning.dat",problem.doc_info().directory().c_str());
    output_file.open(filename);
    unsigned n_used=used_element_partition.size();
    output_file << n_used << std::endl;

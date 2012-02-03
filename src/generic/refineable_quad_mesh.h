@@ -272,6 +272,172 @@ public:
 
 };
 
+//=======================================================================
+/// Intermediate mesh class that implements the mesh p-adaptation functions
+/// specified in the TreeBasedPRefineableMesh class for meshes that contain the
+/// p-refineable variant of QElement s [The class ELEMENT provided
+/// as the template parameter must be of type 
+/// PRefineableQElement<2,INITIAL_NNODE_1D>].
+/// 
+/// Mesh adaptation/refinement is implemented by QuadTree 
+/// procedures and any concrete implementation of this class needs to
+/// provide a QuadTreeForest representation of the initial (coarse) mesh.
+//=======================================================================
+template <class ELEMENT>
+class PRefineableQuadMesh : public virtual TreeBasedPRefineableMesh<ELEMENT>, 
+public virtual QuadMeshBase
+{
+
+public:
+
+ /// Constructor: Setup static quadtree data
+ PRefineableQuadMesh()
+  {
+   // QuadTree static data needs to be setup before quadtree-based mesh 
+   // refinement works
+   QuadTree::setup_static_data();
+  }
+
+ /// Broken copy constructor
+ PRefineableQuadMesh(const PRefineableQuadMesh& dummy) 
+  { 
+   BrokenCopy::broken_copy("PRefineableQuadMesh");
+  } 
+ 
+ /// Broken assignment operator
+ void operator=(const PRefineableQuadMesh&) 
+  {
+   BrokenCopy::broken_assign("PRefineableQuadMesh");
+  }
+
+ /// Destructor:
+ virtual ~PRefineableQuadMesh() {}
+
+
+ /// \short Set up the tree forest associated with the Mesh. 
+ /// Forwards call to setup_quadtree_forest()
+ virtual void setup_tree_forest()
+  {
+   setup_quadtree_forest();
+  }
+
+ /// \short Set up QuadTreeForest. Wipes any existing tree structure below
+ /// the minimum refinement level and regards the elements at that level
+ /// as the root trees in the forest.
+ void setup_quadtree_forest()
+  {
+   if (this->Forest_pt!=0)
+    {
+     // Get all the tree nodes
+     Vector<Tree*> all_tree_nodes_pt;
+     this->Forest_pt->stick_all_tree_nodes_into_vector(all_tree_nodes_pt);
+
+     // Get min and max refinement level from the tree
+     unsigned min_ref;
+     unsigned max_ref;
+     this->get_refinement_levels(min_ref,max_ref);
+
+     // Vector to store trees for new Forest
+     Vector<TreeRoot*> trees_pt;
+
+     // Loop over tree nodes (e.g. elements)
+     unsigned n_tree_nodes=all_tree_nodes_pt.size();
+     for (unsigned e=0;e<n_tree_nodes;e++)
+      {
+       Tree* tree_pt=all_tree_nodes_pt[e];
+
+       // If the object_pt has been flushed then we don't want to keep
+       // this tree
+       if (tree_pt->object_pt()!=0)
+        {
+         // Get the refinement level of the current tree node
+         RefineableElement* el_pt=dynamic_cast<RefineableElement*>
+          (tree_pt->object_pt());
+         unsigned level=el_pt->refinement_level();
+
+         // If we are below the minimum refinement level, remove tree
+         if (level<min_ref)
+          {
+           // Flush sons for this tree
+           tree_pt->flush_sons();
+
+           // Delete the tree (no recursion)
+           delete tree_pt;
+
+           // Delete the element
+           delete el_pt;
+          }
+         else if (level==min_ref)
+          {
+           // Get the sons (if there are any) and store them
+           unsigned n_sons=tree_pt->nsons();
+           Vector<Tree*> backed_up_sons(n_sons);
+           for (unsigned i_son=0;i_son<n_sons;i_son++)
+            {
+             backed_up_sons[i_son]=tree_pt->son_pt(i_son);
+            }
+
+           // Make the element into a new treeroot
+           QuadTreeRoot* tree_root_pt=new QuadTreeRoot(el_pt);
+
+           // Loop over sons and make the new treeroot their father
+           for (unsigned i_son=0;i_son<n_sons;i_son++)
+            {
+             Tree* son_pt=backed_up_sons[i_son];
+             son_pt->set_father_pt(tree_root_pt);
+            }
+
+           // Add treeroot to the trees_pt vector
+           trees_pt.push_back(tree_root_pt);
+          }
+
+        }
+       else // tree_pt->object_pt() is null, so delete tree
+        {
+         // Flush sons for this tree
+         tree_pt->flush_sons();
+
+         // Delete the tree (no recursion)
+         delete tree_pt;
+        }
+      }
+
+     // Flush the Forest's current trees
+     this->Forest_pt->flush_trees();
+
+     // Delete the old Forest
+     delete this->Forest_pt;
+
+     // Make a new Forest with the trees_pt roots created earlier
+     this->Forest_pt = new QuadTreeForest(trees_pt);
+
+    }
+   else // Create a new Forest from scratch in the "usual" uniform way
+    {
+     // Each finite element in the coarse base mesh gets associated
+     // with (the root of) a QuadTree. Store QuadTreeRoots in vector:
+     Vector<TreeRoot*> trees_pt;
+   
+     // Loop over all elements, build corresponding QuadTree
+     // and store QuadTreeRoots in vector:
+     unsigned n_element=this->nelement();
+     for (unsigned e=0;e<n_element;e++)
+      {
+       // Get pointer to full element type 
+       ELEMENT* el_pt=dynamic_cast<ELEMENT*>(this->element_pt(e));
+     
+       // Build associated quadtree(root) -- pass pointer to corresponding
+       // finite element and add the pointer to vector of quadtree (roots):
+       trees_pt.push_back(new QuadTreeRoot(el_pt));
+      } 
+   
+     // Plant QuadTreeRoots in QuadTreeForest
+     this->Forest_pt = new QuadTreeForest(trees_pt);
+    }
+  }
+
+};
+
 }
 
 #endif

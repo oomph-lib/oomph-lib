@@ -731,6 +731,59 @@ QuadTree* QuadTree::gteq_edge_neighbour(
 }
 
 //================================================================
+/// Traverse Tree: Preorder traverse and stick pointers to
+/// neighbouring leaf nodes (only) into Vector
+//=================================================================
+void QuadTree::stick_neighbouring_leaves_into_vector(
+                Vector<const QuadTree*>& tree_neighouring_nodes,
+                Vector<Vector<double> >& tree_neighouring_s_lo,
+                Vector<Vector<double> >& tree_neighouring_s_hi,
+                Vector<int>& tree_neighouring_diff_level,
+                const QuadTree* neigh_pt,
+                const int& direction) const
+{
+ //If the Tree has sons
+ unsigned numsons=Son_pt.size();
+ if(numsons> 0)
+  {
+   // Now do the sons (if they exist)
+   for(unsigned i=0;i<numsons;i++)
+    {
+     dynamic_cast<QuadTree*>(Son_pt[i])->
+      stick_neighbouring_leaves_into_vector(tree_neighouring_nodes,
+                                            tree_neighouring_s_lo,
+                                            tree_neighouring_s_hi,
+                                            tree_neighouring_diff_level,
+                                            neigh_pt, direction);
+    }
+  }
+ else
+  {
+   // Required data for neighbour-finding routine
+   Vector<unsigned> translate_s(2);
+   Vector<double> s_lo(2), s_hi(2);
+   int edge, diff_level;
+   bool in_neighbouring_tree;
+   QuadTree* neigh_neigh_pt;
+   
+   // Get neighbouring element
+   neigh_neigh_pt=gteq_edge_neighbour(direction, translate_s, s_lo, s_hi,
+                                      edge, diff_level, in_neighbouring_tree);
+   
+   // Check if my neighbour is the same as the element passed in
+   // (i.e. Am I a neighbour of the master element?)
+   if (neigh_neigh_pt==neigh_pt)
+    {
+     // Add the element and the diff_level to passed vectors
+     tree_neighouring_nodes.push_back(this);
+     tree_neighouring_s_lo.push_back(s_lo);
+     tree_neighouring_s_hi.push_back(s_hi);
+     tree_neighouring_diff_level.push_back(diff_level);
+    }
+  }
+}
+
+//================================================================
 /// Self-test: Check neighbour finding routine. For each element
 /// in the tree and for each vertex, determine the 
 /// distance between the vertex and its position in the

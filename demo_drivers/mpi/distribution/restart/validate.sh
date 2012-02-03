@@ -33,7 +33,7 @@ for first in `echo $first_list`; do
     # Validation for load-balanced doubly adaptive unsteady heat
     #-----------------------------------------------------------
     echo "Running distributed load-balanced doubly adaptive 2D unsteady heat validation; first: $first_flag "
-    mkdir RESLT
+    mkdir RESLT_`echo $first_flag`_first_for_restart
     $MPI_RUN_COMMAND ../two_d_unsteady_heat_2adapt_load_balance $validation_run_flag $prune_first_flag --partitioning_file ../partitioning.dat > OUTPUT_`echo $first_flag`_first_for_restart
     echo "done run for restart"
     echo " " >> validation.log
@@ -46,9 +46,9 @@ for first in `echo $first_list`; do
     echo " " >> validation.log
     
     sleep 5
-    cat RESLT/soln21_on_proc0.dat  RESLT/soln21_on_proc1.dat  \
+    cat RESLT_`echo $first_flag`_first_for_restart/soln21_on_proc0.dat  RESLT_`echo $first_flag`_first_for_restart/soln21_on_proc1.dat  \
         > result_`echo $first_flag`_first_for_restart.dat
-    mv RESLT RESLT_`echo $first_flag`_first_for_restart
+    #mv RESLT RESLT_`echo $first_flag`_first_for_restart
     
     
     if test "$1" = "no_fpdiff"; then
@@ -60,20 +60,20 @@ for first in `echo $first_list`; do
     restart_list="2 7 11 16 20"
     for restart_step in `echo $restart_list`; do
         
-        mkdir RESLT
-        $MPI_RUN_COMMAND ../two_d_unsteady_heat_2adapt_load_balance $validation_run_flag  $prune_first_flag --restart_file RESLT_`echo $first_flag`_first_for_restart/restart$restart_step --partitioning_file RESLT_`echo $first_flag`_first_for_restart/partitioning.dat  > OUTPUT_`echo $first_flag`_first_restarted_from_step$restart_step
+        mkdir RESLT_`echo $first_flag`_first_restarted_from_step_restart`echo $restart_step`
+        $MPI_RUN_COMMAND ../two_d_unsteady_heat_2adapt_load_balance $validation_run_flag  $prune_first_flag --restart_file RESLT_`echo $first_flag`_first_for_restart/restart$restart_step --partitioning_file RESLT_`echo $first_flag`_first_for_restart/partitioning.dat  > OUTPUT_`echo $first_flag`_first_restarted_from_step_restart$restart_step
         echo "done restarted run from step $restart_step"
         
         sleep 5
-        cat RESLT/soln21_on_proc0.dat  RESLT/soln21_on_proc1.dat  >> result_`echo $first_flag`_first_restarted_from_step`echo $restart_step`.dat
-        mv RESLT RESLT_`echo $first_flag`_first_restarted_from_step`echo $restart_step`
+        cat RESLT_`echo $first_flag`_first_restarted_from_step_restart`echo $restart_step`/soln21_on_proc0.dat  RESLT_`echo $first_flag`_first_restarted_from_step_restart`echo $restart_step`/soln21_on_proc1.dat  >> result_`echo $first_flag`_first_restarted_from_step_restart`echo $restart_step`.dat
+        #mv RESLT RESLT_`echo $first_flag`_first_restarted_from_step_restart`echo $restart_step`
     
 
         if test "$1" = "no_fpdiff"; then
             echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
         else
             # Note: Should all agree with last file from non-restarted run!
-            ../../../../../bin/fpdiff.py ../validata/result_`echo $first_flag`_first_for_restart.dat.gz result_`echo $first_flag`_first_restarted_from_step`echo $restart_step`.dat   >> validation.log
+            ../../../../../bin/fpdiff.py ../validata/result_`echo $first_flag`_first_for_restart.dat.gz result_`echo $first_flag`_first_restarted_from_step_restart`echo $restart_step`.dat   >> validation.log
         fi
     
     done

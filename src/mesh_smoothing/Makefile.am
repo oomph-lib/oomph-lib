@@ -3,7 +3,8 @@
 #-----------------------
 
 # Define the sources
-sources = 
+sources = \
+mesh_smooth.cc 
 
 # Include files which shouldn't be compiled
 incl_cc_files =

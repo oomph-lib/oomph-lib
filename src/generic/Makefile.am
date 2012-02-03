@@ -24,6 +24,7 @@ dg_elements.cc \
 error_estimator.cc   \
 refineable_elements.cc pseudosolid_node_update_elements.cc \
 refineable_quad_element.cc  refineable_mesh.cc \
+hp_refineable_elements.cc \
 fsi.cc octree.cc tree.cc orthpoly.cc             \
 superlu.c superlu_complex.c refineable_brick_element.cc \
 brick_mesh.cc spines.cc element_with_moving_nodes.cc \
@@ -76,6 +77,7 @@ error_estimator.h \
 refineable_mesh.h \
 fsi.h octree.h  tree.h  \
 refineable_elements.h refineable_quad_element.h \
+hp_refineable_elements.h \
 refineable_line_spectral_element.h \
 refineable_quad_spectral_element.h \
 refineable_brick_spectral_element.h orthpoly.h \

@@ -38,6 +38,7 @@
 //Oomph-lib headers
 #include "../generic/refineable_quad_element.h"
 #include "../generic/refineable_brick_element.h"
+#include "../generic/hp_refineable_elements.h"
 #include "../generic/error_estimator.h"
 #include "navier_stokes_elements.h"
 
@@ -1254,6 +1255,201 @@ void get_interpolated_values(const Vector<double>&s,  Vector<double>& values)
 };
 
 
+//======================================================================
+/// p-refineable version of Crouzeix Raviart elements. Generic class
+/// definitions
+//======================================================================
+template<unsigned DIM>
+class PRefineableQCrouzeixRaviartElement :
+public QCrouzeixRaviartElement<DIM>, 
+public virtual RefineableNavierStokesEquations<DIM>,
+public virtual PRefineableQElement<DIM,3> 
+{
+  private:
+ 
+ /// Unpin all internal pressure dofs
+ void unpin_elemental_pressure_dofs()
+  {
+   unsigned n_pres = this->npres_nst();
+   n_pres = this->internal_data_pt(this->P_nst_internal_index)->nvalue();
+   // loop over pressure dofs and unpin them
+   for(unsigned l=0;l<n_pres;l++) 
+    {this->internal_data_pt(this->P_nst_internal_index)->unpin(l);}
+  }
+
+  public:
+ 
+ /// \short Constructor
+ PRefineableQCrouzeixRaviartElement() : 
+  RefineableElement(),
+  RefineableNavierStokesEquations<DIM>(),
+  PRefineableQElement<DIM,3>(),
+  QCrouzeixRaviartElement<DIM>()
+   {
+    // Set the p-order
+    this->p_order()=3;
+    
+    // Set integration scheme
+    // (To avoid memory leaks in pre-build and p-refine where new
+    // integration schemes are created)
+    this->set_integration_scheme(new GaussLobattoLegendre<DIM,3>);
+    
+    // Resize pressure storage
+    // (Constructor for QCrouzeixRaviartElement sets up DIM+1 pressure values)
+    if (this->internal_data_pt(this->P_nst_internal_index)->nvalue()
+          <= this->npres_nst())
+     {
+      this->internal_data_pt(this->P_nst_internal_index)
+          ->resize(this->npres_nst());
+     }
+    else
+     {
+      Data* new_data_pt = new Data(this->npres_nst());
+      delete internal_data_pt(this->P_nst_internal_index);
+      internal_data_pt(this->P_nst_internal_index) = new_data_pt;
+     }
+   }
+ 
+ /// \short Destructor
+ ~PRefineableQCrouzeixRaviartElement()
+  {
+   delete this->integral_pt();
+  }
+ 
+ /// \short Return the i-th pressure value
+ /// (Discontinous pressure interpolation -- no need to cater for hanging 
+ /// nodes). 
+ double p_nst(const unsigned &i) const
+  {return this->internal_data_pt(this->P_nst_internal_index)->value(i);}
+
+ ///// Return number of pressure values
+ unsigned npres_nst() const {return (this->p_order()-2)*(this->p_order()-2);}
+ 
+ /// Pin p_dof-th pressure dof and set it to value specified by p_value.
+ void fix_pressure(const unsigned &p_dof, const double &p_value)
+  {
+   this->internal_data_pt(this->P_nst_internal_index)->pin(p_dof);
+   this->internal_data_pt(this->P_nst_internal_index)->set_value(p_dof,p_value);
+  }
+ 
+ unsigned required_nvalue(const unsigned& n) const
+  {return DIM;}
+ 
+ /// Number of continuously interpolated values: DIM (velocities)
+ unsigned ncont_interpolated_values() const {return DIM;}
+ 
+ /// \short Rebuild from sons: Reconstruct pressure from the (merged) sons
+ /// This must be specialised for each dimension.
+ void rebuild_from_sons(Mesh* &mesh_pt);
+
+ /// \short Order of recovery shape functions for Z2 error estimation:
+ /// - Same order as shape functions.
+ //unsigned nrecovery_order()
+ // {
+ //  if(this->nnode_1d() < 4) {return (this->nnode_1d()-1);}
+ //  else {return 3;}
+ // }
+ /// - Constant recovery order, since recovery order of the first element
+ ///   is used for the whole mesh.
+ unsigned nrecovery_order() {return 3;}
+
+ /// \short Number of vertex nodes in the element
+ unsigned nvertex_node() const
+  {return QCrouzeixRaviartElement<DIM>::nvertex_node();}
+
+ /// \short Pointer to the j-th vertex node in the element
+ Node* vertex_node_pt(const unsigned& j) const
+  {
+   return QCrouzeixRaviartElement<DIM>::vertex_node_pt(j);
+  }
+ 
+ /// \short Velocity shape and test functions and their derivs 
+ /// w.r.t. to global coords  at local coordinate s (taken from geometry)
+ ///Return Jacobian of mapping between local and global coordinates.
+ inline double dshape_and_dtest_eulerian_nst(const Vector<double> &s, 
+                                             Shape &psi, 
+                                             DShape &dpsidx, Shape &test, 
+                                             DShape &dtestdx) const;
+
+ /// \short Velocity shape and test functions and their derivs 
+ /// w.r.t. to global coords at ipt-th integation point (taken from geometry)
+ ///Return Jacobian of mapping between local and global coordinates.
+ inline double dshape_and_dtest_eulerian_at_knot_nst(const unsigned &ipt, 
+                                                     Shape &psi, 
+                                                     DShape &dpsidx, 
+                                                     Shape &test, 
+                                                     DShape &dtestdx) const;
+
+ /// Pressure shape functions at local coordinate s
+ inline void pshape_nst(const Vector<double> &s, Shape &psi) const;
+ 
+ /// Pressure shape and test functions at local coordinte s
+ inline void pshape_nst(const Vector<double> &s, Shape &psi, Shape &test) const;
+
+ /// \short Get the function value u in Vector.
+ /// Note: Given the generality of the interface (this function
+ /// is usually called from black-box documentation or interpolation routines),
+ /// the values Vector sets its own size in here.
+ void get_interpolated_values(const Vector<double>&s,  Vector<double>& values)
+  {
+   // Set size of Vector: u,v,p and initialise to zero
+   values.resize(DIM,0.0);
+   
+   //Calculate velocities: values[0],...
+   for(unsigned i=0;i<DIM;i++) {values[i] = this->interpolated_u_nst(s,i);}
+  }
+
+ /// \short Get all function values [u,v..,p] at previous timestep t
+ /// (t=0: present; t>0: previous timestep). 
+ /// \n 
+ /// Note: Given the generality of the interface (this function
+ /// is usually called from black-box documentation or interpolation routines),
+ /// the values Vector sets its own size in here.
+ /// \n
+ /// Note: No pressure history is kept, so pressure is always
+ /// the current value.
+ void get_interpolated_values(const unsigned& t, const Vector<double>&s, 
+                              Vector<double>& values)
+  {
+   // Set size of Vector: u,v,p
+   values.resize(DIM);
+
+   // Initialise
+   for(unsigned i=0;i<DIM;i++) {values[i]=0.0;}
+   
+   //Find out how many nodes there are
+   unsigned n_node = this->nnode();
+   
+   // Shape functions
+   Shape psif(n_node);
+   this->shape(s,psif);
+   
+   //Calculate velocities: values[0],...
+   for(unsigned i=0;i<DIM;i++) 
+    {
+     //Get the nodal index at which the i-th velocity component is stored
+     unsigned u_nodal_index = this->u_index_nst(i);
+     for(unsigned l=0;l<n_node;l++) 
+      {
+       values[i] += this->nodal_value(t,l,u_nodal_index)*psif[l];
+      } 
+    }
+  }
+ 
+ ///  \short Perform additional hanging node procedures for variables
+ /// that are not interpolated by all nodes. Empty
+ void further_setup_hanging_nodes() {}
+ 
+ /// Further build for Crouzeix_Raviart interpolates the internal 
+ /// pressure dofs from father element: Make sure pressure values and 
+ /// dp/ds agree between fathers and sons at the midpoints of the son 
+ /// elements. This must be specialised for each dimension.
+ void further_build();
+
+
+};
+
+
 //=======================================================================
 /// Face geometry of the RefineableQuadQCrouzeixRaviartElements
 //=======================================================================
@@ -1280,6 +1476,8 @@ public virtual FaceGeometry<FaceGeometry<QCrouzeixRaviartElement<DIM> > >
   {}
 };
 
+
+//Inline functions
 
 //=====================================================================
 /// 2D Rebuild from sons: Reconstruct pressure from the (merged) sons
@@ -1631,6 +1829,117 @@ inline void RefineableQCrouzeixRaviartElement<3>::further_build()
    //Set the value
    internal_data_pt(this->P_nst_internal_index)
     ->set_value(i,half_father_slope);
+  }
+}
+
+//=======================================================================
+/// 2D
+/// Derivatives of the shape functions and test functions w.r.t. to global
+/// (Eulerian) coordinates. Return Jacobian of mapping between
+/// local and global coordinates.
+//=======================================================================
+template<>
+inline double PRefineableQCrouzeixRaviartElement<2>::
+dshape_and_dtest_eulerian_nst(const Vector<double> &s, Shape &psi, 
+                              DShape &dpsidx, Shape &test, 
+                              DShape &dtestdx) const
+{
+ //Call the geometrical shape functions and derivatives  
+ double J = this->dshape_eulerian(s,psi,dpsidx);
+ 
+ //Loop over the test functions and derivatives and set them equal to the
+ //shape functions
+ for(unsigned i=0;i<nnode_1d()*nnode_1d();i++)
+  {
+   test[i] = psi[i]; 
+   dtestdx(i,0) = dpsidx(i,0);
+   dtestdx(i,1) = dpsidx(i,1);
+  }
+  
+ //Return the jacobian
+ return J;
+}
+
+//=======================================================================
+/// 2D
+/// Derivatives of the shape functions and test functions w.r.t. to global
+/// (Eulerian) coordinates. Return Jacobian of mapping between
+/// local and global coordinates.
+//=======================================================================
+template<>
+inline double PRefineableQCrouzeixRaviartElement<2>::
+dshape_and_dtest_eulerian_at_knot_nst(const unsigned &ipt, Shape &psi, 
+                                      DShape &dpsidx, Shape &test, 
+                                      DShape &dtestdx) const
+{
+ //Call the geometrical shape functions and derivatives
+ double J = this->dshape_eulerian_at_knot(ipt,psi,dpsidx);
+ 
+ //Loop over the test functions and derivatives and set them equal to the
+ //shape functions
+ for(unsigned i=0;i<nnode_1d()*nnode_1d();i++)
+  {
+   test[i] = psi[i]; 
+   dtestdx(i,0) = dpsidx(i,0);
+   dtestdx(i,1) = dpsidx(i,1);
+  }
+ 
+ //Return the jacobian
+ return J;
+}
+
+//=======================================================================
+/// 2D :
+/// Pressure shape functions
+//=======================================================================
+template<>
+inline void PRefineableQCrouzeixRaviartElement<2>::
+pshape_nst(const Vector<double> &s, Shape &psi) const
+{
+ unsigned npres = this->npres_nst();
+ if (npres==1)
+  {
+   psi[0] = 1.0;
+  }
+ else
+  {
+   // Get number of pressure modes
+   unsigned npres_1d = (int) sqrt(npres);
+   
+   //Local storage
+   //Call the one-dimensional modal shape functions
+   OneDimensionalModalShape psi1(npres_1d,s[0]);
+   OneDimensionalModalShape psi2(npres_1d,s[1]);
+   
+   //Now let's loop over the nodal points in the element
+   //s1 is the "x" coordinate, s2 the "y" 
+   for(unsigned i=0;i<npres_1d;i++)
+    {
+     for(unsigned j=0;j<npres_1d;j++)
+      {
+       //Multiply the two 1D functions together to get the 2D function
+       psi[i*npres_1d + j] = psi2[i]*psi1[j];
+      }
+    }
+  }
+}
+
+///Define the pressure shape and test functions
+template<>
+inline void PRefineableQCrouzeixRaviartElement<2>::
+pshape_nst(const Vector<double> &s, Shape &psi, Shape &test) const
+{
+ //Call the pressure shape functions
+ pshape_nst(s,psi);
+ 
+ //Loop over the test functions and set them equal to the shape functions
+ if (this->npres_nst()==1)
+  {
+   test[0] = psi[0];
+  }
+ else
+  {
+   for(unsigned i=0;i<this->npres_nst();i++) test[i] = psi[i];
   }
 }
 

@@ -120,6 +120,9 @@ void Tree::split_if_required()
     {
      Son_pt[i_son]= construct_son(new_elements_pt[i_son],
                                   father_pt,i_son);
+     // Now that the son knows its position in the tree, we can set it
+     // up as a proper element (e.g. p-refineable stuff)
+     Son_pt[i_son]->object_pt()->initial_setup();
     }
   }
 }

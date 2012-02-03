@@ -67,6 +67,9 @@ namespace oomph
  //Forward definition for RefineableElement class
  class RefineableElement;
 
+ //Forward definition for PRefineableElement class
+ class PRefineableElement;
+
  //Forward definition for FiniteElement class
  class FiniteElement;
 
@@ -277,6 +280,15 @@ namespace oomph
  void refine_uniformly_aux(const Vector<unsigned>& nrefine_for_mesh,
                            DocInfo& doc_info,
                            const bool& prune);
+
+ /// \short Helper function to do compund p-refinement of (all) p-refineable 
+ /// (sub)mesh(es) uniformly as many times as specified in vector and 
+ /// rebuild problem; doc refinement process. Set boolean argument 
+ /// to true if you want to prune immediately after refining the meshes
+ /// individually. 
+ void p_refine_uniformly_aux(const Vector<unsigned>& nrefine_for_mesh,
+                             DocInfo& doc_info,
+                             const bool& prune);
 
  /// \short Helper function to re-setup the Base_mesh enumeration 
  /// (used during load balancing) after pruning
@@ -2040,6 +2052,103 @@ protected:
    refine_uniformly(i_mesh,doc_info);
   }
 
+ /// \short p-refine p-refineable sub-meshes, each as many times as
+ /// specified in the vector and rebuild problem
+ void p_refine_uniformly(const Vector<unsigned>& nrefine_for_mesh)
+ {  
+  DocInfo doc_info;
+  doc_info.disable_doc();
+  bool prune=false;
+  p_refine_uniformly_aux(nrefine_for_mesh,doc_info,prune);
+ }
+
+ /// \short p-refine p-refineable sub-meshes, each as many times as
+ /// specified in the vector and rebuild problem; doc refinement process
+ void p_refine_uniformly(const Vector<unsigned>& nrefine_for_mesh,
+                         DocInfo& doc_info)
+ {  
+  bool prune=false;
+  p_refine_uniformly_aux(nrefine_for_mesh,doc_info,prune);
+ }
+
+ /// \short p-refine p-refineable sub-meshes, each as many times as
+ /// specified in the vector and rebuild problem. Prune after
+ /// refinements
+ void p_refine_uniformly_and_prune(const Vector<unsigned>& nrefine_for_mesh)
+ {  
+  //Not tested:
+  throw OomphLibWarning("This functionality has not yet been tested.",
+                        "Problem::p_refine_uniformly_and_prune()",
+                        OOMPH_EXCEPTION_LOCATION);
+  DocInfo doc_info;
+  doc_info.disable_doc();
+  bool prune=true;
+  p_refine_uniformly_aux(nrefine_for_mesh,doc_info,prune);
+ }
+
+ /// \short p-refine p-refineable sub-meshes, each as many times as
+ /// specified in the vector and rebuild problem; doc refinement process
+ void p_refine_uniformly_and_prune(const Vector<unsigned>& nrefine_for_mesh,
+                                   DocInfo& doc_info)
+ {  
+  //Not tested:
+  throw OomphLibWarning("This functionality has not yet been tested.",
+                        "Problem::p_refine_uniformly_and_prune()",
+                        OOMPH_EXCEPTION_LOCATION);
+  bool prune=true;
+  p_refine_uniformly_aux(nrefine_for_mesh,doc_info,prune);
+ }
+
+ /// \short  p-refine (all) p-refineable (sub)mesh(es) uniformly and 
+ /// rebuild problem; doc refinement process.
+ void p_refine_uniformly(DocInfo& doc_info)
+ {
+  // Number of (sub)meshes
+  unsigned nmesh=std::max(unsigned(1),nsub_mesh());
+
+  // Refine each mesh once
+  Vector<unsigned> nrefine_for_mesh(nmesh,1);
+  p_refine_uniformly(nrefine_for_mesh);
+ }
+
+
+ /// \short  p-refine (all) p-refineable (sub)mesh(es) uniformly and 
+ /// rebuild problem; doc refinement process.
+ void p_refine_uniformly_and_prune(DocInfo& doc_info)
+ {
+  //Not tested:
+  throw OomphLibWarning("This functionality has not yet been tested.",
+                        "Problem::p_refine_uniformly_and_prune()",
+                        OOMPH_EXCEPTION_LOCATION);
+  // Number of (sub)meshes
+  unsigned nmesh=std::max(unsigned(1),nsub_mesh());
+
+  // Refine each mesh once
+  Vector<unsigned> nrefine_for_mesh(nmesh,1);
+  p_refine_uniformly_and_prune(nrefine_for_mesh);
+ }
+
+
+ /// \short  p-refine (all) p-refineable (sub)mesh(es) uniformly and 
+ /// rebuild problem
+ void p_refine_uniformly()
+  {
+   DocInfo doc_info;
+   doc_info.disable_doc();
+   p_refine_uniformly(doc_info);
+  }
+
+ /// Do uniform p-refinement for submesh i_mesh with documentation
+ void p_refine_uniformly(const unsigned& i_mesh, DocInfo& doc_info);
+
+ /// Do uniform p-refinement for submesh i_mesh without documentation
+ void p_refine_uniformly(const unsigned& i_mesh)
+  {  
+   DocInfo doc_info;
+   doc_info.disable_doc();
+   p_refine_uniformly(i_mesh,doc_info);
+  }
+
  /// \short Refine (one and only!) mesh by splitting the elements identified
  /// by their numbers relative to the problems' only mesh, then rebuild 
  /// the problem. 
@@ -2076,6 +2185,42 @@ protected:
  void refine_selected_elements(const Vector<Vector<RefineableElement*> >& 
                                elements_to_be_refined_pt);
 
+ /// \short p-refine (one and only!) mesh by refining the elements identified
+ /// by their numbers relative to the problems' only mesh, then rebuild 
+ /// the problem. 
+ void p_refine_selected_elements(const Vector<unsigned>& 
+                                 elements_to_be_refined);
+
+
+ /// \short p-refine (one and only!) mesh by refining the elements identified
+ /// by their pointers, then rebuild the problem. 
+ void p_refine_selected_elements(const Vector<PRefineableElement*>& 
+                                 elements_to_be_refined_pt);
+
+ /// \short p-refine specified submesh by refining the elements identified
+ /// by their numbers relative to the submesh, then rebuild the problem.
+ void p_refine_selected_elements(const unsigned& i_mesh,
+                                 const Vector<unsigned>& 
+                                 elements_to_be_refined);
+
+ /// \short p-refine specified submesh by refining the elements identified
+ /// by their pointers, then rebuild the problem.
+ void p_refine_selected_elements(const unsigned& i_mesh,
+                                 const Vector<PRefineableElement*>& 
+                                 elements_to_be_refined_pt);
+
+ /// \short p-refine all submeshes by refining the elements identified
+ /// by their numbers relative to each submesh in a Vector of Vectors, 
+ /// then rebuild the problem.
+ void p_refine_selected_elements(const Vector<Vector<unsigned> >& 
+                                 elements_to_be_refined);
+
+ /// \short p-refine all submeshes by refining the elements identified
+ /// by their pointers within each submesh in a Vector of Vectors, 
+ /// then rebuild the problem.
+ void p_refine_selected_elements(const Vector<Vector<PRefineableElement*> >& 
+                                 elements_to_be_refined_pt);
+
  /// \short  Refine (all) refineable (sub)mesh(es) uniformly and 
  /// rebuild problem. Return 0 for success,
  /// 1 for failure (if unrefinement has reached the coarsest permitted
@@ -2086,6 +2231,17 @@ protected:
  /// Return 0 for success, 1 for failure (if unrefinement has reached 
  /// the coarsest permitted level)
  unsigned unrefine_uniformly(const unsigned& i_mesh);
+
+ /// \short  p-unrefine (all) p-refineable (sub)mesh(es) uniformly and 
+ /// rebuild problem. Return 0 for success,
+ /// 1 for failure (if unrefinement has reached the coarsest permitted
+ /// level)
+ unsigned p_unrefine_uniformly();
+
+ /// Do uniform p-unrefinement for submesh i_mesh without documentation.
+ /// Return 0 for success, 1 for failure (if unrefinement has reached 
+ /// the coarsest permitted level)
+ unsigned p_unrefine_uniformly(const unsigned& i_mesh);
 
  /// \short Adapt problem:
  /// Perform mesh adaptation for (all) refineable (sub)mesh(es),
@@ -2107,6 +2263,28 @@ protected:
   {
    unsigned n_refined, n_unrefined;
    adapt(n_refined,n_unrefined);
+  }
+
+ /// \short p-adapt problem:
+ /// Perform mesh adaptation for (all) refineable (sub)mesh(es),
+ /// based on their own error estimates and the target errors specified
+ /// in the mesh(es). Following mesh adaptation,
+ /// update global mesh, and re-assign equation numbers. 
+ /// Return # of refined/unrefined elements. On return from this
+ /// function, Problem can immediately be solved again.
+ void p_adapt(unsigned& n_refined, unsigned& n_unrefined);
+
+ /// \short p-adapt problem:
+ /// Perform mesh adaptation for (all) refineable (sub)mesh(es),
+ /// based on their own error estimates and the target errors specified
+ /// in the mesh(es). Following mesh adaptation,
+ /// update global mesh, and re-assign equation numbers. 
+ /// On return from this function, Problem can immediately be solved again.
+ /// [Argument-free wrapper]
+ void p_adapt()
+  {
+   unsigned n_refined, n_unrefined;
+   p_adapt(n_refined,n_unrefined);
   }
 
 

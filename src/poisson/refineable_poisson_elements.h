@@ -39,6 +39,7 @@
 //oomph-lib headers
 #include "../generic/refineable_quad_element.h"
 #include "../generic/refineable_brick_element.h"
+#include "../generic/hp_refineable_elements.h"
 #include "../generic/error_estimator.h"
 #include "poisson_elements.h"
 
@@ -237,6 +238,83 @@ template <unsigned DIM, unsigned NNODE_1D>
  void further_setup_hanging_nodes(){}
 
 };
+
+
+//======================================================================
+/// p-refineable version of 2D QPoissonElement elements
+//======================================================================
+template<unsigned DIM>
+class PRefineableQPoissonElement : public QPoissonElement<DIM,2>,
+ public virtual RefineablePoissonEquations<DIM>,
+ public virtual PRefineableQElement<DIM>
+{
+   public:
+
+ /// \short Constructor, simply call the other constructors 
+ PRefineableQPoissonElement() : RefineableElement(),
+  RefineablePoissonEquations<DIM>(),
+  PRefineableQElement<DIM>(),
+  QPoissonElement<DIM,2>()
+   {
+    // Set integration scheme
+    // (To avoid memory leaks in pre-build and p-refine where new integration schemes are created)
+    this->set_integration_scheme(new GaussLobattoLegendre<DIM,2>);
+   }
+ 
+ /// Destructor (to avoid memory leaks)
+ ~PRefineableQPoissonElement()
+  {
+   delete this->integral_pt();
+  }
+
+
+ /// Broken copy constructor
+ PRefineableQPoissonElement(const PRefineableQPoissonElement<DIM>& dummy) 
+  { 
+   BrokenCopy::broken_copy("PRefineableQPoissonElement");
+  } 
+ 
+ /// Broken assignment operator
+ void operator=(const PRefineableQPoissonElement<DIM>&) 
+  {
+   BrokenCopy::broken_assign("PRefineableQPoissonElement");
+  }
+ 
+ void further_build();
+ 
+ /// Number of continuously interpolated values: 1
+ unsigned ncont_interpolated_values() const {return 1;}
+ 
+ /// \short Number of vertex nodes in the element
+ unsigned nvertex_node() const
+  {return QPoissonElement<DIM,2>::nvertex_node();}
+ 
+ /// \short Pointer to the j-th vertex node in the element
+ Node* vertex_node_pt(const unsigned& j) const
+  {return QPoissonElement<DIM,2>::vertex_node_pt(j);}
+
+ /// \short Order of recovery shape functions for Z2 error estimation:
+ /// - Same order as shape functions.
+ //unsigned nrecovery_order()
+ // {
+ //  if(this->nnode_1d() < 4) {return (this->nnode_1d()-1);}
+ //  else {return 3;}
+ // }
+ /// - Constant recovery order, since recovery order of the first element
+ ///   is used for the whole mesh.
+ unsigned nrecovery_order() {return 3;}
+ 
+ // Rebuild the element from its sons
+ // Adjusts its p-order to be the maximum of its sons' p-orders
+ void rebuild_from_sons(Mesh* &mesh_pt);
+ 
+ void compute_energy_error(std::ostream &outfile, 
+  FiniteElement::SteadyExactSolutionFctPt exact_grad_pt,
+  double& error, double& norm);
+};
+
+
+
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////

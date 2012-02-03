@@ -2,10 +2,12 @@ SUBDIRS = \
 hanging_node_reconciliation \
 restart \
 adaptive_driven_cavity \
+hp_adaptive_driven_cavity \
 circular_driven_cavity \
 fish_poisson \
 airy_cantilever \
 two_d_poisson_flux_bc_adapt \
+hp_adaptive_poisson \
 prescribed_displ_lagr_mult \
 three_d_entry_flow \
 three_d_cantilever \

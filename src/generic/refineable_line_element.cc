@@ -202,7 +202,7 @@ namespace oomph
   // Check this by determining whether or not the first node has been built
   
   // If this element has not already been built...
-  if(node_pt(0)==0)
+  if (!nodes_built())
    {
 #ifdef PARANOID
     if (father_pt==0)

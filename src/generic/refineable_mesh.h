@@ -30,6 +30,9 @@
 
 #include "mesh.h"
 #include "refineable_elements.h"
+//Must include spectral elements for check in TreeBasedRefineableMesh<ELEMENT>
+//constructor
+#include "Qspectral_elements.h"
 //Include the tree template to fill in the C++ split function
 //Must be called after refineable_element.h
 #include "tree.template.cc"
@@ -281,6 +284,11 @@ public:
 
    // Mesh hasn't been pruned yet
    Uniform_refinement_level_when_pruned=0;
+
+#ifdef OOMPH_HAS_MPI
+   // Don't suppress synchronisation of hanging status of halo/haloed nodes
+   Synchronise_hanging_nodes_not_required=false;
+#endif
   }
 
 
@@ -517,12 +525,18 @@ public:
   doc_info.disable_doc();
   classify_halo_and_haloed_nodes(comm_pt,doc_info,report_stats);
  }
+
+ /// BENFLAG: Set this to true to suppress the synchronisation of the hanging
+ /// status of halo/haloed nodes (at your own risk!)
+ /// public so that user can set it
+ bool Synchronise_hanging_nodes_not_required;
  
 #endif
 
 protected:
  
 #ifdef OOMPH_HAS_MPI
+
  /// Synchronise the hanging nodes if the mesh is distributed
  void synchronise_hanging_nodes(OomphCommunicator* comm_pt,
                                 const unsigned& ncont_interpolated_values);
@@ -556,6 +570,8 @@ protected:
  TreeForest* Forest_pt;
 
   private:
+
+#ifdef OOMPH_HAS_MPI
  
  /// \short Helper struct to collate data required during 
  /// TreeBasedRefineableMeshBase::synchronise_hanging_nodes
@@ -567,9 +583,143 @@ protected:
   double Weight;
   HangInfo* Hang_pt;
   unsigned Master_node_index;
- };  
+ };
+ 
+#endif
 
 };
+
+
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+
+
+//=======================================================================
+/// Base class for tree-based p-refineable meshes. 
+//=======================================================================
+class TreeBasedPRefineableMeshBase : public TreeBasedRefineableMeshBase
+{
+public:
+
+ /// Constructor 
+ TreeBasedPRefineableMeshBase()
+  {
+   // Max/min p-refinement levels (Min_p_refinement_level must be re-set for
+   // meshes containing elements with greater initial p-order)
+   Max_p_refinement_level=7;
+   Min_p_refinement_level=2;
+  }
+
+ /// Broken copy constructor
+ TreeBasedPRefineableMeshBase(const TreeBasedPRefineableMeshBase& dummy) 
+  { 
+   BrokenCopy::broken_copy("TreeBasedPRefineableMeshBase");
+  } 
+ 
+ /// Broken assignment operator
+ void operator=(const TreeBasedPRefineableMeshBase&) 
+  {
+   BrokenCopy::broken_assign("TreeBasedPRefineableMeshBase");
+  }
+
+ /// Empty Destructor: 
+ virtual ~TreeBasedPRefineableMeshBase() {}
+
+ /// \short p-adapt mesh: Refine elements whose error is lager than err_max
+ /// and (try to) unrefine those whose error is smaller than err_min
+ void p_adapt(OomphCommunicator* comm_pt, 
+              const Vector<double>& elemental_error);
+ 
+ /// p-refine mesh uniformly and doc process
+ void p_refine_uniformly(DocInfo& doc_info)
+  { 
+   //Select all elements for refinement
+   unsigned long Nelement=this->nelement();
+   for (unsigned long e=0;e<Nelement;e++)
+    {
+     dynamic_cast<RefineableElement*>
+      (this->element_pt(e))->select_for_refinement();
+    }
+   
+   // Do the actual mesh adaptation
+   p_adapt_mesh(doc_info);
+  }
+ 
+ /// p-refine mesh uniformly
+ void p_refine_uniformly()
+  {
+   DocInfo doc_info;
+   doc_info.directory()="";
+   doc_info.disable_doc();
+   p_refine_uniformly(doc_info);
+  }
+ 
+ /// \short p-unrefine mesh uniformly: Return 0 for success,
+ /// 1 for failure (if unrefinement has reached the highest/lowest
+ /// permitted level)
+ unsigned p_unrefine_uniformly(OomphCommunicator* comm_pt);
+
+
+ /// Doc the targets for mesh adaptation
+ void doc_adaptivity_targets(std::ostream &outfile)
+  {
+   outfile << std::endl;
+   outfile << "Targets for mesh adaptation: " << std::endl;
+   outfile << "---------------------------- " << std::endl;
+   outfile << "Target for max. error: " << Max_permitted_error << std::endl;
+   outfile << "Target for min. error: " << Min_permitted_error << std::endl;
+   outfile << "Min. refinement level: " << Min_refinement_level << std::endl;
+   outfile << "Max. refinement level: " << Max_refinement_level << std::endl;
+   outfile << "Min. p-refinement level: " << Min_p_refinement_level << std::endl;
+   outfile << "Max. p-refinement level: " << Max_p_refinement_level << std::endl;
+   outfile << "Don't unrefine if less than " << Max_keep_unrefined 
+           << " elements need unrefinement." << std::endl;
+   outfile << std::endl;
+  }
+ 
+ /// Access fct for max. permissible p-refinement level (relative to base mesh)
+ unsigned& max_p_refinement_level() {return Max_p_refinement_level;}
+ 
+ /// Access fct for min. permissible p-refinement level (relative to base mesh)
+ unsigned& min_p_refinement_level() {return Min_p_refinement_level;}
+ 
+ /// \short Perform the actual tree-based mesh p-adaptation, 
+ /// documenting the progress in the directory specified in DocInfo object.
+ void p_adapt_mesh(DocInfo& doc_info);
+
+ /// \short Perform the actual tree-based mesh p-adaptation. A simple wrapper
+ /// to call the function without documentation.
+ void p_adapt_mesh()
+  {
+   //Create a dummy doc_info object
+   DocInfo doc_info;
+   doc_info.directory()="";
+   doc_info.disable_doc();
+   //Call the other adapt mesh
+   p_adapt_mesh(doc_info);
+  }
+
+ /// \short p-refine mesh by refining the elements identified
+ /// by their numbers.
+ void p_refine_selected_elements(const Vector<unsigned>& 
+                                 elements_to_be_refined);
+
+ /// \short p-refine mesh by refining the elements identified
+ /// by their pointers.
+ void p_refine_selected_elements(const Vector<PRefineableElement*>& 
+                                 elements_to_be_refined_pt);
+
+protected:
+ 
+ /// Max. permissible refinement level (relative to base mesh)
+ unsigned Max_p_refinement_level;
+
+ /// Min. permissible refinement level (relative to base mesh)
+ unsigned Min_p_refinement_level;
+
+};
+
 
 
 ////////////////////////////////////////////////////////////////////
@@ -610,7 +760,56 @@ class TreeBasedRefineableMesh : public TreeBasedRefineableMeshBase
    public:
 
   ///Constructor, call the constructor of the base class
-  TreeBasedRefineableMesh() : TreeBasedRefineableMeshBase() { }
+  TreeBasedRefineableMesh() : TreeBasedRefineableMeshBase()
+   {
+    
+#ifdef OOMPH_HAS_MPI
+
+    // Check class ELEMENT to see if it has non-uniformly spaced nodes
+    // BENFLAG: Currently the only elements with non-uniformly spaced
+    //          nodes are SpectralElements and PRefineableElements
+
+    //Create an ELEMENT so that we can see what type it is
+    ELEMENT* test_element = new ELEMENT;
+
+    //Check if it is spectral or p-refineable (with GLL-spaced nodes)
+    if(dynamic_cast<SpectralElement*>(test_element)!=0
+       || dynamic_cast<PRefineableElement*>(test_element)!=0)
+     {
+      // Suppress synchronisation of hanging status of halo/haloed nodes.
+      // BENFLAG: This crashes with the mortar method because not all master
+      // nodes for halo/haloed nodes are shared between processors.
+      Synchronise_hanging_nodes_not_required=true;
+      
+#ifdef PARANOID
+      
+      std::ostringstream warn_stream;
+      warn_stream << "Synchronisation of hanging status of halo/haloed nodes"
+                  << std::endl
+                  << "has been disabled for this mesh because it contains"
+                  << std::endl
+                  << "elements with non-uniformly spaced nodes."
+                  << std::endl
+                  << "This would otherwise cause the function"
+                  << std::endl
+                  << "TreeBasedRefineableMeshBase::synchronise_hanging_nodes()"
+                  << std::endl
+                  << "to crash."
+                  << std::endl;
+      OomphLibWarning(
+       warn_stream.str(),
+       "TreeBasedRefineableMesh<ELEMENT>::TreeBasedRefineableMesh()",
+       OOMPH_EXCEPTION_LOCATION);
+      
+#endif
+     }
+
+    //Delete the ELEMENT
+    delete test_element;
+    
+#endif
+    
+   }
   
   /// Broken copy constructor
   TreeBasedRefineableMesh(const TreeBasedRefineableMesh& dummy) 
@@ -620,6 +819,101 @@ class TreeBasedRefineableMesh : public TreeBasedRefineableMeshBase
   
   ///Empty virtual destructor
   virtual ~TreeBasedRefineableMesh() { }
+
+ };
+
+//=======================================================================
+/// Templated base class for p-refineable meshes. The use of the template
+/// parameter is required only for creating new elements during mesh
+/// (h-)adaptation. This class overloaded the template-free inteface to
+/// the function split_elements_if_required() to make use of the template
+/// parameter.
+/// All p-refineable meshes should inherit directly from 
+/// TreeBasedPRefineableMesh<ELEMENT>
+//=======================================================================
+template <class ELEMENT>
+class TreeBasedPRefineableMesh : public TreeBasedPRefineableMeshBase
+ {
+ private:
+   
+  /// \short Split all the elements if required. Overload the template-free
+  /// interface so that any new elements that are created 
+  /// will be of the correct type.
+  void split_elements_if_required()
+   {
+    //Find the number of trees in the forest
+    unsigned n_tree = this->Forest_pt->ntree();
+    //Loop over all "active" elements in the forest and split them
+    //if required
+    for (unsigned long e=0;e<n_tree;e++)
+     {
+      this->Forest_pt->tree_pt(e)->
+       traverse_leaves(&Tree::split_if_required<ELEMENT>);
+     }
+   }
+
+ public:
+
+  ///Constructor, call the constructor of the base class
+  TreeBasedPRefineableMesh() : TreeBasedPRefineableMeshBase()
+   {
+    
+#ifdef OOMPH_HAS_MPI
+
+    // Check class ELEMENT to see if it has non-uniformly spaced nodes
+    // BENFLAG: Currently the only elements with non-uniformly spaced
+    //          nodes are SpectralElements and PRefineableElements
+
+    //Create (locally) an ELEMENT so that we can see what type it is
+    ELEMENT* test_element = new ELEMENT;
+
+    //Check if it is spectral or p-refineable (with GLL-spaced nodes)
+    if(dynamic_cast<SpectralElement*>(test_element)!=0
+       || dynamic_cast<PRefineableElement*>(test_element)!=0)
+     {
+      // Suppress synchronisation of hanging status of halo/haloed nodes.
+      // BENFLAG: This crashes with the mortar method because not all master
+      // nodes for halo/haloed nodes are shared between processors.
+      Synchronise_hanging_nodes_not_required=true;
+      
+#ifdef PARANOID
+      
+      std::ostringstream warn_stream;
+      warn_stream << "Synchronisation of hanging status of halo/haloed nodes"
+                  << std::endl
+                  << "has been disabled for this mesh because it contains"
+                  << std::endl
+                  << "elements with non-uniformly spaced nodes."
+                  << std::endl
+                  << "This would otherwise cause the function"
+                  << std::endl
+                  << "TreeBasedRefineableMeshBase::synchronise_hanging_nodes()"
+                  << std::endl
+                  << "to crash."
+                  << std::endl;
+      OomphLibWarning(
+       warn_stream.str(),
+       "TreeBasedPRefineableMesh<ELEMENT>::TreeBasedPRefineableMesh()",
+       OOMPH_EXCEPTION_LOCATION);
+      
+#endif
+     }
+
+    //Delete the ELEMENT
+    delete test_element;
+    
+#endif
+    
+   }
+  
+  /// Broken copy constructor
+  TreeBasedPRefineableMesh(const TreeBasedPRefineableMesh& dummy) 
+   { 
+    BrokenCopy::broken_copy("TreeBasedPRefineableMesh");
+   } 
+  
+  ///Empty virtual destructor
+  virtual ~TreeBasedPRefineableMesh() { }
 
  };
 

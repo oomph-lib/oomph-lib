@@ -1,6 +1,7 @@
 SUBDIRS = \
 driven_cavity \
 adaptive_driven_cavity \
+hp_adaptive_driven_cavity \
 circular_driven_cavity \
 osc_ring \
 single_layer_free_surface \

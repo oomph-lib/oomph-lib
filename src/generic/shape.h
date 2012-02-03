@@ -763,6 +763,50 @@ class OneDimensionalLegendreDShape : public Shape
 
 };
 
+
+
+//=====================================================================
+/// Non-templated class that returns modal hierachical shape functions
+/// based on Legendre polynomials
+//=====================================================================
+class OneDimensionalModalShape : public Shape
+{
+ public:
+ /// Constructor
+ OneDimensionalModalShape(const unsigned p_order, const double &s)
+  : Shape(p_order)
+  {   
+   //Populate the shape functions
+   (*this)[0] = 0.5*(1.0 - s);
+   (*this)[1] = 0.5*(1.0 + s);
+   for(unsigned i=2;i<p_order;i++)
+    {
+     (*this)[i] = (0.5*(1.0 - s))*(0.5*(1.0 + s))
+                    *Orthpoly::legendre(i-2,s);
+    }
+  }
+};
+
+class OneDimensionalModalDShape : public Shape
+{
+ public:
+ // Constructor 
+ OneDimensionalModalDShape(const unsigned p_order, const double &s)
+  : Shape(p_order)
+  {   
+   //Populate the shape functions
+   (*this)[0] = -0.5;
+   (*this)[1] = 0.5;
+   for(unsigned i=2;i<p_order;i++)
+    {
+     (*this)[i] = (0.5*(1.0 - s))*(0.5*(1.0 + s))
+                    *Orthpoly::dlegendre(i-2,s)
+                    - 0.5*s*Orthpoly::legendre(i-2,s);
+    }
+  }
+
+};
+
 }
 
 #endif

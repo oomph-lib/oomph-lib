@@ -117,8 +117,8 @@ public:
  /// a pointer to that node. If not, return NULL (0).
  /// If the node is on a periodic boundary the flag is_periodic is true,
  /// otherwise it will be false.
- Node* node_created_by_neighbour(const Vector<double> &s_fraction,
-                                 bool &is_periodic);
+ virtual Node* node_created_by_neighbour(const Vector<double> &s_fraction,
+                                         bool &is_periodic);
 
  /// \short Build the element, i.e. give it nodal positions, apply BCs, etc. 
  /// Pointers to any new nodes will be returned in new_node_pt. If 
@@ -190,8 +190,8 @@ public:
  
  /// \short Internal helper function that is used to construct the
  /// hanging node schemes for the positions.
- void quad_hang_helper(const int &value_id,
-                       const int &my_edge, std::ofstream &output_hangfile);
+ virtual void quad_hang_helper(const int &value_id, const int &my_edge,
+                               std::ofstream &output_hangfile);
 
 };
 

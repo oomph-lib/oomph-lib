@@ -11496,6 +11496,308 @@ void Problem::adapt(unsigned &n_refined, unsigned &n_unrefined)
 }
 
 //========================================================================
+/// p-adapt problem:
+/// Perform mesh adaptation for (all) refineable (sub)mesh(es),
+/// based on their own error estimates and the target errors specified
+/// in the mesh(es). Following mesh adaptation,
+/// update global mesh, and re-assign equation numbers. 
+/// Return # of refined/unrefined elements. On return from this
+/// function, Problem can immediately be solved again.
+//======================================================================
+void Problem::p_adapt(unsigned &n_refined, unsigned &n_unrefined)
+{
+
+ double t_start_total = 0.0;
+ if (Global_timings::Doc_comprehensive_timings)
+  {
+   t_start_total=TimingHelpers::timer();
+  }
+
+ //Get the bifurcation type
+ int bifurcation_type = this->Assembly_handler_pt->bifurcation_type();
+
+ //If we are tracking a bifurcation then call the bifurcation adapt function
+ if(bifurcation_type!=0)
+  {
+   this->bifurcation_adapt_helper(n_refined,n_unrefined,bifurcation_type);
+   //Return immediately
+   return;
+  }
+
+ oomph_info << std::endl << std::endl;
+ oomph_info << "p-adapting problem:" << std::endl;
+ oomph_info << "===================" << std::endl;
+
+ double t_start = 0.0;
+ if (Global_timings::Doc_comprehensive_timings)
+  {
+   t_start=TimingHelpers::timer();
+  }
+
+ //Call the actions before adaptation
+ actions_before_adapt();
+
+ double t_end = 0.0;
+ if (Global_timings::Doc_comprehensive_timings)
+  {
+   t_end = TimingHelpers::timer();
+   oomph_info << "Time for actions before adapt: " 
+              << t_end-t_start << std::endl;
+   t_start = TimingHelpers::timer();
+  }
+
+ // Initialise counters
+ n_refined=0;
+ n_unrefined=0;
+ 
+ // Number of submeshes?
+ unsigned Nmesh=nsub_mesh();
+ 
+ // Single mesh:
+ //------------
+ if(Nmesh==0)
+  {
+   // Refine single mesh if possible
+   if(TreeBasedPRefineableMeshBase* mmesh_pt = 
+      dynamic_cast<TreeBasedPRefineableMeshBase*>(mesh_pt(0)))
+    { 
+     if (mmesh_pt->is_adaptation_enabled())
+      {
+       double t_start = TimingHelpers::timer();
+       
+       // Get pointer to error estimator
+       ErrorEstimator* error_estimator_pt=mmesh_pt->
+        spatial_error_estimator_pt();
+       
+#ifdef PARANOID
+       if (error_estimator_pt==0)
+        {
+         throw OomphLibError(
+          "Error estimator hasn't been set yet",
+          "Problem::adapt()",
+          OOMPH_EXCEPTION_LOCATION);
+        }
+#endif
+
+       // Get error for all elements
+       Vector<double> elemental_error(mmesh_pt->nelement());
+       
+       if (mmesh_pt->doc_info_pt()==0)
+        {
+         error_estimator_pt->get_element_errors(this->communicator_pt(),
+                                                mesh_pt(0),elemental_error);
+        }
+       else
+        {
+         error_estimator_pt->get_element_errors(this->communicator_pt(),
+                                                mesh_pt(0),elemental_error,
+                                                *mmesh_pt->doc_info_pt());
+        }
+       
+       // Store max./min actual error
+       mmesh_pt->max_error()=
+        std::abs(*std::max_element(elemental_error.begin(),
+                                   elemental_error.end(),AbsCmp<double>()));
+       
+       mmesh_pt->min_error()=
+        std::abs(*std::min_element(elemental_error.begin(),
+                                   elemental_error.end(),AbsCmp<double>()));
+
+       oomph_info << "\n Max/min error: " 
+                  << mmesh_pt->max_error() << " "
+                  << mmesh_pt->min_error() 
+                  << std::endl << std::endl;
+
+
+       if (Global_timings::Doc_comprehensive_timings)
+        {
+         t_end = TimingHelpers::timer();
+         oomph_info << "Time for error estimation: " 
+                    << t_end-t_start << std::endl;
+         t_start = TimingHelpers::timer();
+        }
+       
+       // Adapt mesh
+       mmesh_pt->p_adapt(this->communicator_pt(),elemental_error);
+        
+       // Add to counters
+       n_refined+=mmesh_pt->nrefined(); 
+       n_unrefined+=mmesh_pt->nunrefined(); 
+
+       if (Global_timings::Doc_comprehensive_timings)
+        {
+         t_end = TimingHelpers::timer();
+         oomph_info << "Time for complete mesh adaptation "
+                    << "(but excluding comp of error estimate): " 
+                    << t_end-t_start << std::endl;
+         t_start = TimingHelpers::timer();
+        }
+
+      }
+     else
+      {
+       oomph_info << "Info/Warning: Mesh adaptation is disabled." << std::endl;
+      }
+    }
+   else
+    {
+     oomph_info << "Info/Warning: Mesh cannot be adapted" << std::endl;
+    }
+
+  }
+ //Multiple submeshes
+ //------------------
+ else
+  {
+   // Loop over submeshes
+   for (unsigned imesh=0;imesh<Nmesh;imesh++)
+    {
+     // Refine single mesh uniformly if possible
+     if(TreeBasedPRefineableMeshBase* mmesh_pt =
+        dynamic_cast<TreeBasedPRefineableMeshBase*>(mesh_pt(imesh)))
+      {
+       double t_start = TimingHelpers::timer();
+
+       // Get pointer to error estimator
+       ErrorEstimator* error_estimator_pt=mmesh_pt->
+        spatial_error_estimator_pt();
+        
+#ifdef PARANOID
+       if (error_estimator_pt==0)
+        {
+         throw OomphLibError(
+          "Error estimator hasn't been set yet",
+          "Problem::adapt()",
+          OOMPH_EXCEPTION_LOCATION);
+        }
+#endif
+        
+       if (mmesh_pt->is_adaptation_enabled())
+        {
+         // Get error for all elements
+         Vector<double> elemental_error(mmesh_pt->nelement());
+         if (mmesh_pt->doc_info_pt()==0)
+          {
+           error_estimator_pt->get_element_errors(this->communicator_pt(),
+                                                  mesh_pt(imesh),
+                                                  elemental_error);
+          }
+         else
+          {
+           error_estimator_pt->get_element_errors(this->communicator_pt(),
+                                                  mesh_pt(imesh),
+                                                  elemental_error,
+                                                  *mmesh_pt->doc_info_pt());
+          }
+        
+         // Store max./min error if the mesh has any elements
+         if (mesh_pt(imesh)->nelement()>0)
+          {
+           mmesh_pt->max_error()=
+            std::abs(*std::max_element(elemental_error.begin(),
+                                       elemental_error.end(),
+                                       AbsCmp<double>()));
+          
+           mmesh_pt->min_error()=
+            std::abs(*std::min_element(elemental_error.begin(),
+                                       elemental_error.end(),
+                                       AbsCmp<double>()));
+          }
+
+         oomph_info << "\n Max/min error: " 
+                    << mmesh_pt->max_error() << " "
+                    << mmesh_pt->min_error() << std::endl;
+
+
+         if (Global_timings::Doc_comprehensive_timings)
+          {
+           t_end = TimingHelpers::timer();
+           oomph_info << "Time for error estimation: " 
+                      << t_end-t_start << std::endl;
+           t_start = TimingHelpers::timer();
+          }
+
+         // Adapt mesh
+         mmesh_pt->p_adapt(this->communicator_pt(),elemental_error); 
+  
+         // Add to counters
+         n_refined+=mmesh_pt->nrefined(); 
+         n_unrefined+=mmesh_pt->nunrefined(); 
+
+
+         if (Global_timings::Doc_comprehensive_timings)
+          {
+           t_end = TimingHelpers::timer();
+           oomph_info << "Time for complete mesh adaptation "
+                      << "(but excluding comp of error estimate): " 
+                      << t_end-t_start << std::endl;
+           t_start = TimingHelpers::timer();
+          }
+
+        }
+       else
+        {
+         oomph_info << "Info/Warning: Mesh adaptation is disabled." 
+                    << std::endl;
+        }
+      }
+     else
+      {
+       oomph_info << "Info/Warning: Mesh cannot be adapted." << std::endl;
+      }
+      
+    } // End of loop over submeshes
+
+   // Rebuild the global mesh
+   rebuild_global_mesh();
+
+  }
+
+
+ if (Global_timings::Doc_comprehensive_timings)
+  {
+   t_end = TimingHelpers::timer();
+   oomph_info << "Total time for actual adaptation "
+              << "(all meshes; incl error estimates): " 
+              << t_end-t_start << std::endl;
+   t_start = TimingHelpers::timer();
+  }
+
+ //Any actions after adapt
+ actions_after_adapt();
+
+
+ if (Global_timings::Doc_comprehensive_timings)
+  {
+   t_end = TimingHelpers::timer();
+   oomph_info << "Time for actions after adapt: " 
+              << t_end-t_start << std::endl;
+   t_start = TimingHelpers::timer();
+
+   oomph_info << "About to start re-assigning eqn numbers "
+              << "with Problem::assign_eqn_numbers() at end of "
+              << "Problem::adapt().\n";
+  }
+
+ //Attach the boundary conditions to the mesh
+ oomph_info <<"\nNumber of equations: " << assign_eqn_numbers() 
+            << std::endl<< std::endl; 
+
+
+ if (Global_timings::Doc_comprehensive_timings)
+  {
+   t_end = TimingHelpers::timer();
+   oomph_info << "Time for re-assigning eqn numbers with "
+              << "Problem::assign_eqn_numbers() at end of Problem::adapt(): " 
+              << t_end-t_start << std::endl;
+   oomph_info << "Total time for adapt: " 
+              << t_end-t_start_total << std::endl;
+  }
+
+
+}
+
+//========================================================================
 /// Perform mesh adaptation for (all) refineable (sub)mesh(es),
 /// based on the error estimates in elemental_error 
 /// and the target errors specified
@@ -12178,6 +12480,305 @@ void Problem::refine_selected_elements(const
             << std::endl; 
  }
 
+//========================================================================
+/// p-refine (one and only!) mesh by refining the elements identified
+/// by their numbers relative to the problems' only mesh, then rebuild 
+/// the problem. 
+//========================================================================
+void Problem::p_refine_selected_elements(const Vector<unsigned>& 
+                                         elements_to_be_refined)
+{
+ actions_before_adapt();
+ 
+ // Number of submeshes?
+ unsigned Nmesh=nsub_mesh();
+
+ // Single mesh:
+ if (Nmesh==0)
+  {
+   // Refine single mesh if possible
+   if(TreeBasedPRefineableMeshBase* mmesh_pt = 
+      dynamic_cast<TreeBasedPRefineableMeshBase*>(mesh_pt(0)))
+    {
+     mmesh_pt->p_refine_selected_elements(elements_to_be_refined);
+    }
+   else
+    {
+     oomph_info << "Info/Warning: Mesh cannot be p-refined " 
+                << std::endl;
+    }
+  }
+ //Multiple submeshes
+ else
+  {
+   std::ostringstream error_message;
+   error_message << "Problem::p_refine_selected_elements(...) only works for\n"
+                 << "multiple-mesh problems if you specify the mesh\n"
+                 << "number in the function argument before the Vector,\n"
+                 << "or a Vector of Vectors for each submesh.\n"
+                 << std::endl;
+   throw OomphLibError(error_message.str(),
+                       "Problem::p_refine_selected_elements()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+
+ //Any actions after the adapatation phase
+ actions_after_adapt();
+
+ //Attach the boundary conditions to the mesh
+ oomph_info <<"Number of equations: " 
+            << assign_eqn_numbers() << std::endl; 
+}
+
+//========================================================================
+/// p-refine (one and only!) mesh by refining the elements identified
+/// by their pointers, then rebuild the problem. 
+//========================================================================
+void Problem::p_refine_selected_elements(const Vector<PRefineableElement*>& 
+                                         elements_to_be_refined_pt)
+{
+ actions_before_adapt();
+ 
+ // Number of submeshes?
+ unsigned Nmesh=nsub_mesh();
+
+ // Single mesh:
+ if (Nmesh==0)
+  {
+   // Refine single mesh if possible
+   if(TreeBasedPRefineableMeshBase* mmesh_pt = 
+      dynamic_cast<TreeBasedPRefineableMeshBase*>(mesh_pt(0)))
+    {
+     mmesh_pt->p_refine_selected_elements(elements_to_be_refined_pt);
+    }
+   else
+    {
+     oomph_info << "Info/Warning: Mesh cannot be p-refined " 
+                << std::endl;
+    }
+  }
+ //Multiple submeshes
+ else
+  {
+   std::ostringstream error_message;
+   error_message << "Problem::p_refine_selected_elements(...) only works for\n"
+                 << "multiple-mesh problems if you specify the mesh\n"
+                 << "number in the function argument before the Vector,\n"
+                 << "or a Vector of Vectors for each submesh.\n"
+                 << std::endl;
+   throw OomphLibError(error_message.str(),
+                       "Problem::p_refine_selected_elements()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+
+ //Any actions after the adapatation phase
+ actions_after_adapt();
+
+ //Do equation numbering
+ oomph_info <<"Number of equations: " << assign_eqn_numbers()
+            << std::endl; 
+}
+
+//========================================================================
+/// p-refine specified submesh by refining the elements identified
+/// by their numbers relative to the specified mesh, then rebuild the problem. 
+//========================================================================
+void Problem::p_refine_selected_elements(const unsigned& i_mesh,
+                                         const Vector<unsigned>& 
+                                         elements_to_be_refined)
+ {
+  OomphLibWarning(
+   "p-refinement for multiple submeshes has not yet been tested.",
+   "Problem::p_refine_selected_elements()",
+   OOMPH_EXCEPTION_LOCATION);
+  
+  actions_before_adapt();
+ 
+  // Number of submeshes?
+  unsigned n_mesh=nsub_mesh();
+
+  if (i_mesh>=n_mesh)
+   {
+    std::ostringstream error_message;
+    error_message <<
+     "Problem only has " << n_mesh << " submeshes. Cannot p-refine submesh " 
+                         << i_mesh << std::endl;
+    throw OomphLibError(error_message.str(),
+                        "Problem::p_refine_selected_elements()",
+                        OOMPH_EXCEPTION_LOCATION);   
+   }
+
+  // Refine single mesh if possible
+  if(TreeBasedPRefineableMeshBase* mmesh_pt = 
+     dynamic_cast<TreeBasedPRefineableMeshBase*>(mesh_pt(i_mesh)))
+   {
+    mmesh_pt->p_refine_selected_elements(elements_to_be_refined);
+   }
+  else
+   {
+    oomph_info << "Info/Warning: Mesh cannot be p-refined " 
+               << std::endl;
+   }
+
+  if (n_mesh>1)
+   {
+    //Rebuild the global mesh
+    rebuild_global_mesh();
+   }
+
+  //Any actions after the adapatation phase
+  actions_after_adapt();
+
+  //Do equation numbering
+  oomph_info <<"Number of equations: " << assign_eqn_numbers()
+            << std::endl; 
+ }
+
+
+//========================================================================
+/// p-refine specified submesh by refining the elements identified
+/// by their pointers, then rebuild the problem. 
+//========================================================================
+void Problem::p_refine_selected_elements(const unsigned& i_mesh,
+                                         const Vector<PRefineableElement*>& 
+                                         elements_to_be_refined_pt)
+{  
+ OomphLibWarning(
+  "p-refinement for multiple submeshes has not yet been tested.",
+  "Problem::p_refine_selected_elements()",
+  OOMPH_EXCEPTION_LOCATION);
+ 
+ actions_before_adapt();
+ 
+ // Number of submeshes?
+ unsigned n_mesh=nsub_mesh();
+
+ if (i_mesh>=n_mesh)
+  {
+   std::ostringstream error_message;
+   error_message <<
+    "Problem only has " << n_mesh << " submeshes. Cannot p-refine submesh " 
+                 << i_mesh << std::endl;
+   throw OomphLibError(error_message.str(),
+                       "Problem::p_refine_selected_elements()",
+                       OOMPH_EXCEPTION_LOCATION);   
+  }
+
+ // Refine single mesh if possible
+ if(TreeBasedPRefineableMeshBase* mmesh_pt = 
+    dynamic_cast<TreeBasedPRefineableMeshBase*>(mesh_pt(i_mesh))) 
+  {
+   mmesh_pt->p_refine_selected_elements(elements_to_be_refined_pt);
+  }
+ else
+  {
+   oomph_info << "Info/Warning: Mesh cannot be p-refined " 
+              << std::endl;
+  }
+
+ if (n_mesh>1)
+  {
+   //Rebuild the global mesh
+   rebuild_global_mesh();
+  }
+
+ //Any actions after the adapatation phase
+ actions_after_adapt();
+
+ //Do equation numbering
+ oomph_info <<"Number of equations: " << assign_eqn_numbers()
+            << std::endl; 
+}
+
+//========================================================================
+/// p-refine all submeshes by refining the elements identified by their
+/// numbers relative to each submesh in a Vector of Vectors, then 
+/// rebuild the problem. 
+//========================================================================
+void Problem::p_refine_selected_elements(const Vector<Vector<unsigned> >&
+                                         elements_to_be_refined)
+ {
+  OomphLibWarning(
+   "p-refinement for multiple submeshes has not yet been tested.",
+   "Problem::p_refine_selected_elements()",
+   OOMPH_EXCEPTION_LOCATION);
+  
+  actions_before_adapt();
+ 
+  // Number of submeshes?
+  unsigned n_mesh=nsub_mesh();
+
+  // Refine all submeshes if possible
+  for (unsigned i_mesh=0; i_mesh<n_mesh; i_mesh++)
+   {
+    if(TreeBasedPRefineableMeshBase* mmesh_pt = 
+       dynamic_cast<TreeBasedPRefineableMeshBase*>(mesh_pt(i_mesh)))
+     {
+      mmesh_pt->p_refine_selected_elements(elements_to_be_refined[i_mesh]);
+     }
+    else
+     {
+      oomph_info << "Info/Warning: Mesh cannot be p-refined " 
+                 << std::endl;
+     }
+   }
+
+  //Rebuild the global mesh
+  rebuild_global_mesh();
+
+  //Any actions after the adapatation phase
+  actions_after_adapt();
+
+  //Do equation numbering
+  oomph_info <<"Number of equations: " << assign_eqn_numbers()
+            << std::endl; 
+ }
+
+//========================================================================
+/// p-refine all submeshes by refining the elements identified by their
+/// pointers within each submesh in a Vector of Vectors, then 
+/// rebuild the problem. 
+//========================================================================
+void Problem::p_refine_selected_elements(const 
+                                         Vector<Vector<PRefineableElement*> >&
+                                         elements_to_be_refined_pt)
+ {
+  OomphLibWarning(
+   "p-refinement for multiple submeshes has not yet been tested.",
+   "Problem::p_refine_selected_elements()",
+   OOMPH_EXCEPTION_LOCATION);
+  
+  actions_before_adapt();
+ 
+  // Number of submeshes?
+  unsigned n_mesh=nsub_mesh();
+
+  // Refine all submeshes if possible
+  for (unsigned i_mesh=0; i_mesh<n_mesh; i_mesh++)
+   {
+    if(TreeBasedPRefineableMeshBase* mmesh_pt = 
+       dynamic_cast<TreeBasedPRefineableMeshBase*>(mesh_pt(i_mesh)))
+     {
+      mmesh_pt->p_refine_selected_elements(elements_to_be_refined_pt[i_mesh]);
+     }
+    else
+     {
+      oomph_info << "Info/Warning: Mesh cannot be p-refined " 
+                 << std::endl;
+     }
+   }
+
+  //Rebuild the global mesh
+  rebuild_global_mesh();
+
+  //Any actions after the adapatation phase
+  actions_after_adapt();
+
+  //Do equation numbering
+  oomph_info <<"Number of equations: " << assign_eqn_numbers()
+            << std::endl; 
+ }
+
 
 //========================================================================
 /// Helper function to do compund refinement of (all) refineable 
@@ -12329,6 +12930,162 @@ void Problem::refine_uniformly_aux(const Vector<unsigned>& nrefine_for_mesh,
 
 }
 
+
+//========================================================================
+/// Helper function to do compund p-refinement of (all) p-refineable 
+/// (sub)mesh(es) uniformly as many times as specified in vector and 
+/// rebuild problem; doc refinement process. Set boolean argument 
+/// to true if you want to prune immediately after refining the meshes
+/// individually. 
+//========================================================================
+void Problem::p_refine_uniformly_aux(const Vector<unsigned>& nrefine_for_mesh,
+                                     DocInfo& doc_info,
+                                     const bool& prune)
+{
+
+ double t_start = 0.0;
+ if (Global_timings::Doc_comprehensive_timings)
+  {
+   t_start=TimingHelpers::timer();
+  }
+
+ actions_before_adapt();
+
+ double t_end = 0.0;
+ if (Global_timings::Doc_comprehensive_timings)
+  {
+   t_end = TimingHelpers::timer();
+   oomph_info 
+    << "Time for actions before adapt in Problem::p_refine_uniformly_aux(): " 
+    << t_end-t_start << std::endl;
+   t_start = TimingHelpers::timer();
+  }
+
+ // Number of submeshes?
+ unsigned n_mesh=nsub_mesh();
+  
+ // Single mesh:
+ if (n_mesh==0)
+  {
+   // Refine single mesh uniformly if possible
+   if(TreeBasedPRefineableMeshBase* mmesh_pt = 
+      dynamic_cast<TreeBasedPRefineableMeshBase*>(mesh_pt(0)))
+    {
+     unsigned nref=nrefine_for_mesh[0];
+     for (unsigned i=0;i<nref;i++)
+      {
+       mmesh_pt->p_refine_uniformly(doc_info);
+      }
+    }
+   else
+    {
+     oomph_info << "Info/Warning: Mesh cannot be p-refined uniformly " 
+                << std::endl;
+    }
+  }
+ //Multiple submeshes
+ else
+  {
+   OomphLibWarning(
+    "p-refinement for multiple submeshes has not yet been tested.",
+    "Problem::p_refine_uniformly_aux()",
+    OOMPH_EXCEPTION_LOCATION);
+   
+   // Loop over submeshes
+   for (unsigned imesh=0;imesh<n_mesh;imesh++)
+    {
+     // Refine i-th submesh uniformly if possible
+     if (TreeBasedPRefineableMeshBase* mmesh_pt =
+         dynamic_cast<TreeBasedPRefineableMeshBase*>(mesh_pt(imesh)))
+      {
+       unsigned nref=nrefine_for_mesh[imesh];
+       for (unsigned i=0;i<nref;i++)
+        {
+         mmesh_pt->p_refine_uniformly(doc_info);
+        }
+      }
+     else
+      {
+       oomph_info << "Info/Warning: Cannot p-refine mesh " << imesh 
+                  << std::endl;
+      } 
+    }
+   //Rebuild the global mesh
+   rebuild_global_mesh();
+  }
+
+ if (Global_timings::Doc_comprehensive_timings)
+  {
+   t_end = TimingHelpers::timer();
+   oomph_info 
+    << "Time for mesh-level mesh refinement in "
+    << "Problem::p_refine_uniformly_aux(): " 
+    << t_end-t_start << std::endl;
+   t_start = TimingHelpers::timer();
+  }
+
+ //Any actions after the adaptation phase
+ actions_after_adapt();
+
+
+ if (Global_timings::Doc_comprehensive_timings)
+  {
+   t_end = TimingHelpers::timer();
+   oomph_info 
+    << "Time for actions after adapt  Problem::p_refine_uniformly_aux(): " 
+              << t_end-t_start << std::endl;
+   t_start = TimingHelpers::timer();
+  }
+
+
+#ifdef OOMPH_HAS_MPI
+
+ // Prune it?
+ if (prune)
+  {
+   // Note: This calls assign eqn numbers already...
+   Bypass_increase_in_dof_check_during_pruning=true;
+   prune_halo_elements_and_nodes();
+   Bypass_increase_in_dof_check_during_pruning=false;
+
+   if (Global_timings::Doc_comprehensive_timings)
+    {
+     t_end = TimingHelpers::timer();
+     oomph_info 
+      << "Time for Problem::prune_halo_elements_and_nodes() in "
+      << "Problem::p_refine_uniformly_aux(): " 
+      << t_end-t_start << std::endl;
+    }
+  }
+ else
+#else
+  if (prune)
+   {
+    std::ostringstream error_message;
+    error_message  
+     << "Requested pruning in serial build. Ignoring the request.\n"; 
+    OomphLibWarning(error_message.str(),
+                    "Problem::p_refine_uniformly_aux()",
+                    OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+  {
+   //Do equation numbering
+   oomph_info <<"Number of equations after Problem::p_refine_uniformly_aux(): " 
+              << assign_eqn_numbers() << std::endl; 
+
+   if (Global_timings::Doc_comprehensive_timings)
+    {
+     t_end = TimingHelpers::timer();
+     oomph_info 
+      << "Time for Problem::assign_eqn_numbers() in "
+      << "Problem::p_refine_uniformly_aux(): " 
+      << t_end-t_start << std::endl;
+    }
+  }
+
+}
+
 //========================================================================
 /// Refine submesh i_mesh uniformly and rebuild problem;
 /// doc refinement process.
@@ -12358,6 +13115,54 @@ void Problem::refine_uniformly(const unsigned& i_mesh,
     dynamic_cast<RefineableMeshBase*>(mesh_pt(i_mesh)))
   {
    mmesh_pt->refine_uniformly(doc_info);
+  }
+ else
+  {
+   oomph_info << "Info/Warning: Mesh cannot be refined uniformly " 
+              << std::endl;
+  }
+
+ //Rebuild the global mesh
+ rebuild_global_mesh();
+
+ //Any actions after the adaptation phase
+ actions_after_adapt();
+
+ //Do equation numbering
+ oomph_info <<"Number of equations: " 
+            << assign_eqn_numbers() << std::endl; 
+
+}
+
+//========================================================================
+/// p-refine submesh i_mesh uniformly and rebuild problem;
+/// doc refinement process.
+//========================================================================
+void Problem::p_refine_uniformly(const unsigned& i_mesh, 
+                                 DocInfo& doc_info)
+{
+ actions_before_adapt();
+ 
+#ifdef PARANOID
+ // Number of submeshes?
+ if (i_mesh>=nsub_mesh())
+  {
+   std::ostringstream error_message;
+   error_message  << "imesh " << i_mesh 
+                  << " is greater than the number of sub meshes " 
+                  << nsub_mesh() << std::endl;
+ 
+   throw OomphLibError(error_message.str(),
+                       "Problem::refine_uniformly()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+
+ // Refine single mesh uniformly if possible
+ if(TreeBasedPRefineableMeshBase* mmesh_pt = 
+    dynamic_cast<TreeBasedPRefineableMeshBase*>(mesh_pt(i_mesh)))
+  {
+   mmesh_pt->p_refine_uniformly(doc_info);
   }
  else
   {
@@ -12511,8 +13316,145 @@ unsigned Problem::unrefine_uniformly(const unsigned& i_mesh)
   }
 
 }
+//========================================================================
+/// p-unrefine (all) p-refineable (sub)mesh(es) uniformly and rebuild problem.
+/// Return 0 for success,
+/// 1 for failure (if unrefinement has reached the coarsest permitted
+/// level)
+//========================================================================
+unsigned Problem::p_unrefine_uniformly()
+{
+ actions_before_adapt();
 
+ // Has unrefinement been successful?
+ unsigned success_flag=0;
 
+ // Number of submeshes?
+ unsigned n_mesh=nsub_mesh();
+
+ // Single mesh:
+ if (n_mesh==0)
+  {
+   // Unrefine single mesh uniformly if possible
+   if(TreeBasedPRefineableMeshBase* mmesh_pt = 
+      dynamic_cast<TreeBasedPRefineableMeshBase*>(mesh_pt(0)))
+    {
+     success_flag+=mmesh_pt->p_unrefine_uniformly(this->communicator_pt());
+    }
+   else
+    {
+     oomph_info << "Info/Warning: Mesh cannot be unrefined uniformly " 
+                << std::endl;
+    }
+  }
+ //Multiple submeshes
+ else
+  {
+   //Not tested:
+   throw OomphLibError("This functionality has not yet been tested.",
+                       "Problem::p_unrefine_uniformly()",
+                       OOMPH_EXCEPTION_LOCATION);
+   // Loop over submeshes
+   for (unsigned imesh=0;imesh<n_mesh;imesh++)
+    {
+     // Unrefine i-th submesh uniformly if possible
+     if (TreeBasedPRefineableMeshBase* mmesh_pt=
+         dynamic_cast<TreeBasedPRefineableMeshBase*>(mesh_pt(imesh)))
+      {
+       success_flag+=mmesh_pt->p_unrefine_uniformly(this->communicator_pt());
+      }
+     else
+      {
+       oomph_info << "Info/Warning: Cannot unrefine mesh " << imesh 
+                  << std::endl;
+      } 
+    }
+   //Rebuild the global mesh
+   rebuild_global_mesh();
+  }
+
+ //Any actions after the adaptation phase
+ actions_after_adapt();
+
+ //Do equation numbering
+ oomph_info <<"Number of equations: " 
+            << assign_eqn_numbers() << std::endl; 
+
+ // Judge success
+ if (success_flag>0)
+  {
+   return 1;
+  }
+ else
+  {
+   return 0;
+  }
+
+}
+
+//========================================================================
+/// p-unrefine submesh i_mesh uniformly and rebuild problem.
+/// Return 0 for success,
+/// 1 for failure (if unrefinement has reached the coarsest permitted
+/// level)
+//========================================================================
+unsigned Problem::p_unrefine_uniformly(const unsigned& i_mesh)
+{
+ actions_before_adapt();
+
+ // Has unrefinement been successful?
+ unsigned success_flag=0;
+
+#ifdef PARANOID
+ // Number of submeshes?
+ if (i_mesh>=nsub_mesh())
+  {
+   std::ostringstream error_message;
+   error_message  << "imesh " << i_mesh 
+                  << " is greater than the number of sub meshes " 
+                  << nsub_mesh() << std::endl;
+ 
+   throw OomphLibError(error_message.str(),
+                       "Problem::unrefine_uniformly()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+
+ // Unrefine single mesh uniformly if possible
+ if(TreeBasedPRefineableMeshBase* mmesh_pt = 
+    dynamic_cast<TreeBasedPRefineableMeshBase*>(mesh_pt(i_mesh)))
+  {
+   success_flag+=mmesh_pt->p_unrefine_uniformly(this->communicator_pt());
+  }
+ else
+  {
+   oomph_info << "Info/Warning: Mesh cannot be unrefined uniformly " 
+              << std::endl;
+  }
+
+ //Rebuild the global mesh
+ rebuild_global_mesh();
+
+ //Any actions after the adaptation phase
+ actions_after_adapt();
+
+ //Do equation numbering
+ oomph_info <<"Number of equations: " 
+            << assign_eqn_numbers() << std::endl; 
+
+ // Judge success
+ if (success_flag>0)
+  {
+   return 1;
+  }
+ else
+  {
+   return 0;
+  }
+
+}
+
+ 
 //========================================================================
 /// Do one timestep, dt, forward  using Newton's method with specified 
 /// tolerance and linear solver specified via member data.

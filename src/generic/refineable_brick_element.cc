@@ -1220,8 +1220,8 @@ void RefineableQElement<3>::build(Mesh*& mesh_pt,
  // What type of son am I? Ask my octree representation...
  int son_type=octree_pt()->son_type();
 
- // Has somebody built me already? (If the first node has not been built)
- if (node_pt(0)==0)
+ // Has somebody build me already? (If any nodes have not been built)
+ if (!nodes_built())
   {
 #ifdef PARANOID
    if (father_pt==0)

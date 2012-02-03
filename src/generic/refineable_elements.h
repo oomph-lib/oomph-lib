@@ -504,6 +504,13 @@ class RefineableElement : public virtual FiniteElement
     }
   }
 
+ /// \short Initial setup of the element: e.g. set the appropriate internal
+ /// p-order.
+ virtual void initial_setup() {}
+
+ /// \short Pre-build the element
+ virtual void pre_build() {}
+
  /// \short Further build: e.g. deal with interpolation of internal values
  virtual void further_build() {}
  
@@ -549,6 +556,82 @@ class RefineableElement : public virtual FiniteElement
 
 
 };
+ 
+
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+
+
+
+
+//======================================================================
+/// p-refineable version of RefineableElement
+//======================================================================
+class PRefineableElement : public virtual RefineableElement
+{
+protected:
+ 
+ /// The polynomial expansion order of the elemental basis functions
+ unsigned P_order;
+ 
+ /// Unrefine flag
+ bool To_be_unrefined;
+ 
+public:
+
+ /// \short Constructor, calls the RefineableElement constructor
+ PRefineableElement() : RefineableElement(), P_order(2), To_be_unrefined(false)
+  {}
+
+ /// Destructor, empty
+ virtual ~PRefineableElement() {}
+
+ /// Broken copy constructor
+ PRefineableElement(const PRefineableElement&) 
+  { 
+   BrokenCopy::broken_copy("PRefineableElement");
+  } 
+ 
+ /// Broken assignment operator
+ void operator=(const PRefineableElement&) 
+  {
+   BrokenCopy::broken_assign("PRefineableElement");
+  }
+ 
+ /// Access function to P_order
+ unsigned &p_order() {return P_order;}
+ 
+ /// Access function to P_order (const version)
+ unsigned p_order() const {return P_order;}
+ 
+ /// Select the element for refinement
+ void select_for_unrefinement() {To_be_unrefined=true;}
+ 
+ /// Deselect the element for refinement
+ void deselect_for_unrefinement() {To_be_unrefined=false;}
+ 
+ /// Has the element been selected for unrefinement?
+ bool to_be_unrefined() {return To_be_unrefined;}
+ 
+ /// p-refine the element
+ virtual void p_refine(const int &inc, Mesh* &mesh_pt)=0;
+ 
+ // Overload the nodes_built function to check every node
+ bool nodes_built()
+  {
+   // Must check that EVERY node exists
+   unsigned n_node = this->nnode();
+   for(unsigned n=0; n<n_node; n++)
+    {
+     if(this->node_pt(n)==0) {return false;}
+    }
+   // If we get here then all the nodes are built
+   return true;
+  }
+
+};
+
  
 
 //////////////////////////////////////////////////////////////////////
