@@ -659,7 +659,7 @@ void METIS::partition_mesh(Problem* problem_pt, const unsigned& ndomain,
  std::map<GeneralisedElement*,unsigned> root_el_number_plus_one;
 
  // Loop over non-halo elements on this processor
- unsigned number_of_root_elements=0;
+ int number_of_root_elements=0;
  unsigned number_of_non_halo_elements=0;
  for (unsigned e=0; e<n_elem; e++)
   {
@@ -782,7 +782,7 @@ void METIS::partition_mesh(Problem* problem_pt, const unsigned& ndomain,
 
 
  // How many global equations are held on this processor?
- unsigned n_eqns_on_this_proc=
+ int n_eqns_on_this_proc=
   eqn_numbers_with_root_elements_on_this_proc.size();
 
  // Gather this information for all processors:
@@ -829,7 +829,7 @@ void METIS::partition_mesh(Problem* problem_pt, const unsigned& ndomain,
                                              // vector to be gathered on root
              number_of_root_elements,    // Number of entries to be sent
                                          // from current processor
-             MPI_INT,
+             MPI_UNSIGNED,
              &number_of_dofs_for_global_root_element[0], // Target -- this will 
                                                      // store the concatenated
                                                      // vectors sent from
@@ -842,7 +842,7 @@ void METIS::partition_mesh(Problem* problem_pt, const unsigned& ndomain,
              &start_index[0], // "offset" for storage of vector received
                               // from various processors in the global 
                               // concatenated vector stored on root
-             MPI_INT, 
+             MPI_UNSIGNED, 
              root_processor, comm_pt->mpi_comm());
 
 
@@ -861,7 +861,7 @@ void METIS::partition_mesh(Problem* problem_pt, const unsigned& ndomain,
                                       // vector to be gathered on root
              number_of_root_elements,    // Number of entries to be sent
                                          // from current processor
-             MPI_INT,
+             MPI_UNSIGNED,
              &number_of_non_halo_elements_for_global_root_element[0],
                                                      // Target -- this will 
                                                      // store the concatenated
@@ -875,7 +875,7 @@ void METIS::partition_mesh(Problem* problem_pt, const unsigned& ndomain,
              &start_index[0], // "offset" for storage of vector received
                               // from various processors in the global 
                               // concatenated vector stored on root
-             MPI_INT, 
+             MPI_UNSIGNED, 
              root_processor, comm_pt->mpi_comm());
 
 
@@ -923,11 +923,11 @@ void METIS::partition_mesh(Problem* problem_pt, const unsigned& ndomain,
   }
  MPI_Gatherv(&eqn_numbers_with_root_elements_on_this_proc[0], 
              n_eqns_on_this_proc, 
-             MPI_INT,
+             MPI_UNSIGNED,
              &eqn_numbers_with_root_elements[0], 
              &n_eqns_on_each_proc[0], 
              &start_eqns_index[0], 
-             MPI_INT, 
+             MPI_UNSIGNED, 
              root_processor, comm_pt->mpi_comm());
 
  // Doc
@@ -1272,10 +1272,10 @@ void METIS::partition_mesh(Problem* problem_pt, const unsigned& ndomain,
  MPI_Scatterv(&root_element_domain[0],
               &number_of_root_elements_on_each_proc[0],
               &start_index[0],
-              MPI_INT,
+              MPI_UNSIGNED,
               &root_element_domain_on_this_proc[0],
               number_of_root_elements,
-              MPI_INT,
+              MPI_UNSIGNED,
               root_processor,
               comm_pt->mpi_comm());
 

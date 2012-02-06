@@ -429,6 +429,13 @@ void Mesh::reorder_nodes()
  
  // Loop over all nodes
  unsigned nnod=nnode();
+
+ // Return immediately if there are no nodes: Note assumption:
+ // Either all the elements' nodes stored here or none. 
+ // If only a subset is stored in the Node_pt vector we'll get
+ // a range checking error below (only if run with range, checking, 
+ // of course).
+ if (nnod==0) return;
  for (unsigned j=0;j<nnod;j++)
   {
    done[node_pt(j)]=false;
@@ -449,7 +456,15 @@ void Mesh::reorder_nodes()
      // Has node been done yet?
      if (!done[nod_pt])
       {
-       // Insert into node vector
+       // Insert into node vector. NOTE: If you get a seg fault/range checking
+       // error here then you probably haven't added all the elements' nodes
+       // to the Node_pt vector -- this is most likely to arise in the
+       // case of meshes of face elements (though they usually don't
+       // store the nodes at all so if you have any problems here there's
+       // something unusual/not quite right in any case... For this
+       // reason we don't range check here by default (not even under
+       // paranoia) but force you turn on proper (costly) range checking
+       // to track this down...
        Node_pt[count]=nod_pt;
        done[nod_pt]=true;
        // Increase counter
@@ -851,6 +866,12 @@ void Mesh::output_boundaries(std::ostream &outfile)
 //===================================================================
 void Mesh::dump(std::ofstream &dump_file)
 {
+
+ // Reorder the nodes within the mesh's node vector
+ // to establish a standard ordering regardless of the sequence
+ // of mesh refinements etc
+ this->reorder_nodes();
+
  // Find number of nodes
  unsigned long Node_pt_range = this->nnode(); 
    
@@ -890,6 +911,11 @@ void Mesh::read(std::ifstream &restart_file)
 {
  std::string input_string;
  
+ // Reorder the nodes within the mesh's node vector
+ // to establish a standard ordering regardless of the sequence
+ // of mesh refinements etc
+ this->reorder_nodes();
+
  //Read nodes
  
  // Find number of nodes
@@ -1648,7 +1674,7 @@ void Mesh::setup_shared_node_scheme()
 /// the case where: 
 /// (1) a certain node on the current processor is halo with proc p 
 ///     (i.e. its non-halo counterpart lives on processor p)
-/// (2) that node is also exists (also as a halo) on another processor 
+/// (2) that node also exists (also as a halo) on another processor 
 ///     (q, say) where its non-halo counter part is also known to be 
 ///     on processor p.
 /// However, without calling this function the current processor does not
@@ -1676,6 +1702,20 @@ void Mesh::synchronise_shared_nodes(OomphCommunicator* comm_pt,
  // Storage for current processor and number of processors
  int n_proc=comm_pt->nproc();
  int my_rank=comm_pt->my_rank();
+
+
+#ifdef PARANOID
+ // Has some twit filled in shared nodes with own process?!
+ // Check at start of function
+ if (Shared_node_pt[my_rank].size()!=0)
+  {
+   throw OomphLibError(
+    "Processor has shared nodes with itself! Something's gone wrong!", 
+    "Mesh::synchronise_shared_nodes()",
+    OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+
 
  // Stage 1: Populate the set of of processor IDs that 
  // each haloed node on current processor is haloed by.
@@ -1726,7 +1766,7 @@ void Mesh::synchronise_shared_nodes(OomphCommunicator* comm_pt,
  Vector<int> send_n(n_proc,0);
  
  // Storage for all values to be sent to all processors
- Vector<int> send_data;
+ Vector<unsigned> send_data;
    
  // Start location within send_data for data to be sent to each processor 
  Vector<int> send_displacement(n_proc,0);
@@ -1738,8 +1778,8 @@ void Mesh::synchronise_shared_nodes(OomphCommunicator* comm_pt,
    //Set the offset for the current processor
    send_displacement[domain] = send_data.size();
    
-   //Don't bother to do anything if the processor in the loop is the 
-   //current processor
+   // Every processor works on haloed nodes with proc "domain" and
+   // sends associations across to that domain. No need to talk to yourself...
    if(domain!=my_rank)
     {
      // Send total number of global haloed nodes
@@ -1807,10 +1847,10 @@ void Mesh::synchronise_shared_nodes(OomphCommunicator* comm_pt,
  
  //Now send the data between all the processors
  MPI_Alltoallv(&send_data[0],&send_n[0],&send_displacement[0],
-               MPI_INT,
+               MPI_UNSIGNED,
                &receive_data[0],&receive_n[0],
                &receive_displacement[0],
-               MPI_INT,
+               MPI_UNSIGNED,
                comm_pt->mpi_comm());
  
  
@@ -1946,20 +1986,24 @@ void Mesh::synchronise_shared_nodes(OomphCommunicator* comm_pt,
         {
          int shared_domain=(*itt);
          
-         // Is node already listed in shared node scheme? Find it 
-         // and get iterator to entry
-         std::set<Node*>::iterator ittt=
-          shared_node_set[shared_domain].find(nod_pt);
-         
-         // If it's not in there already iterator points to end of
-         // set
-         if (ittt==shared_node_set[shared_domain].end())
+         // No need to add shared nodes with oneself!
+         if (shared_domain!=my_rank)
           {
-           // Now add it
-           add_shared_node_pt(shared_domain,nod_pt);
+           // Is node already listed in shared node scheme? Find it 
+           // and get iterator to entry
+           std::set<Node*>::iterator ittt=
+            shared_node_set[shared_domain].find(nod_pt);
+           
+           // If it's not in there already iterator points to end of
+           // set
+           if (ittt==shared_node_set[shared_domain].end())
+            {
+             // Now add it
+             add_shared_node_pt(shared_domain,nod_pt);
 
-           // Update set
-           shared_node_set[shared_domain].insert(nod_pt);
+             // Update set
+             shared_node_set[shared_domain].insert(nod_pt);
+            }
           }
         }       
       }
@@ -1968,7 +2012,21 @@ void Mesh::synchronise_shared_nodes(OomphCommunicator* comm_pt,
    
   } // end of loop over send ranks
 
- 
+
+
+#ifdef PARANOID
+ // Has some twit filled in shared nodes with own process?!
+ // Check at end pf function.
+ if (Shared_node_pt[my_rank].size()!=0)
+  {
+   throw OomphLibError(
+    "Processor has shared nodes with itself! Something's gone wrong!", 
+    "Mesh::synchronise_shared_nodes()",
+    OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+
+
  if (Global_timings::Doc_comprehensive_timings)
   {
    tt_end = TimingHelpers::timer();
@@ -2014,7 +2072,6 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
  // Set up shared nodes scheme
  setup_shared_node_scheme();
  
-
  double tt_end=0.0;
  if (Global_timings::Doc_comprehensive_timings)
   {
@@ -2121,11 +2178,15 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
 
  // At this point we need to "synchronise" the nodes on halo(ed) elements
  // so that the processors_associated_with_data agrees for the same node
- // on all processors
+ // on all processors. Strategy: All local nodes have just had their
+ // association recorded. Now loop over all haloed elements
+ // and send the association of their nodes to the corresponding
+ // halo processors where they update/augment the association of the
+ // nodes of the corresponding halo elements.
 
  // Loop over all domains
  for (int d=0;d<n_proc;d++)
-  {
+  {           
    // Prepare vector to send/receive
    Vector<unsigned> processors_associated_with_data_on_other_proc;
 
@@ -2162,7 +2223,8 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
            count_data++;
            
            // Now add the process IDs associated to the vector to be sent
-           std::set<unsigned> procs_set=processors_associated_with_data[nod_pt];
+           std::set<unsigned> procs_set=
+            processors_associated_with_data[nod_pt];
            for (std::set<unsigned>::iterator it=procs_set.begin();
                 it!=procs_set.end();it++)
             {
@@ -2173,12 +2235,14 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
         }
       }
 
+
+
      // Send the information
-     MPI_Send(&count_data,1,MPI_INT,d,0,comm_pt->mpi_comm());
+     MPI_Send(&count_data,1,MPI_UNSIGNED,d,0,comm_pt->mpi_comm());
      if (count_data!=0)
       {
        MPI_Send(&processors_associated_with_data_on_other_proc[0],count_data,
-                MPI_INT,d,1,comm_pt->mpi_comm());
+                MPI_UNSIGNED,d,1,comm_pt->mpi_comm());   
       }
     }
    else
@@ -2191,16 +2255,13 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
          // We will be looping over the halo elements with process dd
          Vector<GeneralisedElement*> halo_elem_pt(this->halo_element_pt(dd));
          unsigned n_halo_elem=halo_elem_pt.size();
-
          unsigned count_data=0;
-         MPI_Recv(&count_data,1,MPI_INT,dd,0,comm_pt->mpi_comm(),&status);
-
+         MPI_Recv(&count_data,1,MPI_UNSIGNED,dd,0,comm_pt->mpi_comm(),&status);
          if (count_data!=0)
           {
            processors_associated_with_data_on_other_proc.resize(count_data);
-
            MPI_Recv(&processors_associated_with_data_on_other_proc[0],
-                    count_data,MPI_INT,dd,1,comm_pt->mpi_comm(),&status);
+                    count_data,MPI_UNSIGNED,dd,1,comm_pt->mpi_comm(),&status);
 
            // Reset counter and loop through nodes on halo elements
            count_data=0;
@@ -2444,7 +2505,34 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
   }
 
 
- // Find any overlooked halo nodes: 
+ // Find any overlooked halo nodes: These are any nodes on the halo/haloed
+ // elements (i.e. precisely the nodes currently contained in the shared
+ // node scheme) that have not been classified as haloes (yet) though they
+ // should have been because another processor is in charge of them.
+ // This arises when the "overlooked halo node" is not part of the
+ // halo/haloed element lookup scheme between the current processor
+ // and the processor that holds the non-halo counterpart. E.g. we're
+ // on proc 3. A node at the very edge of its halo layer also exists
+ // on procs 0 and 1 with 1 being "in charge". However, the node in 
+ // question is not part of the halo/haloed element lookup scheme between
+ // processor 1 and 3 so in the classification performed above, we never
+ // visit it so it's overlooked. The code below rectifies this by going
+ // through the intermediate processor (here proc 0) that contains the node in 
+ // lookup schemes with the halo processor (here proc 3, this one) and the one
+ // that contains the non-halo counterpart (here proc 1). 
+
+
+ // Counter for number of overlooked halos (if there aren't any we don't
+ // need any comms below)
+ unsigned n_overlooked_halo=0;
+
+ // Record previously overlooked halo nodes so they can be 
+ // added to the shared node lookup scheme (in a consistent order) below
+ Vector<Vector<Node*> > over_looked_halo_node_pt(n_proc);
+
+ // Record previously overlooked haloed nodes so they can be 
+ // added to the shared node lookup scheme (in a consistent order) below
+ Vector<Vector<Node*> > over_looked_haloed_node_pt(n_proc);
 
  // Data to be sent to each processor
  Vector<int> send_n(n_proc,0);
@@ -2477,6 +2565,10 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
          // Add it as being halo node whose non-halo counterpart
          // is located on processor proc_in_charge
          this->add_halo_node_pt(proc_in_charge,nod_pt);
+
+         // We have another one...
+         n_overlooked_halo++;
+         over_looked_halo_node_pt[proc_in_charge].push_back(nod_pt);
          
          // The node itself needs to know it is a halo
          nod_pt->set_halo(proc_in_charge);
@@ -2505,318 +2597,376 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
    send_n[domain] = send_data.size() - send_displacement[domain];
   }
    
-   
+
+ // Check if any processor has stumbled across overlooked halos
+ // (if not we can omit the comms below)
+ unsigned global_max_n_overlooked_halo=0;
+ MPI_Allreduce(&n_overlooked_halo,&global_max_n_overlooked_halo,1,
+               MPI_UNSIGNED,MPI_MAX,
+               MPI_Helpers::communicator_pt()->mpi_comm());
+
+
+ oomph_info << "Global max number of overlooked haloes: " 
+            << global_max_n_overlooked_halo << std::endl;
 
  if (Global_timings::Doc_comprehensive_timings)
   {
    tt_end = TimingHelpers::timer();
    oomph_info 
-    << "Time for setup 1st alltoall in Mesh::classify_halo_and_haloed_nodes: " 
-    << tt_end-tt_start << std::endl;
-   tt_start = TimingHelpers::timer();
-  }
-   
- //Storage for the number of data to be received from each processor
- Vector<int> receive_n(n_proc,0);
-   
- //Now send numbers of data to be sent between all processors
- MPI_Alltoall(&send_n[0],1,MPI_INT,&receive_n[0],1,MPI_INT,
-              comm_pt->mpi_comm());
-   
-
-
- if (Global_timings::Doc_comprehensive_timings)
-  {
-   tt_end = TimingHelpers::timer();
-   oomph_info 
-    << "Time for 1st alltoall in Mesh::classify_halo_and_haloed_nodes: " 
-    << tt_end-tt_start << std::endl;
-   tt_start = TimingHelpers::timer();
-  }
-
- //We now prepare the data to be received
- //by working out the displacements from the received data
- Vector<int> receive_displacement(n_proc,0);
- int receive_data_count=0;
- for(int rank=0;rank<n_proc;++rank)
-  {
-   //Displacement is number of data received so far
-   receive_displacement[rank] = receive_data_count;
-   receive_data_count += receive_n[rank];
-  }
-   
- //Now resize the receive buffer for all data from all processors
- //Make sure that it has a size of at least one
- if(receive_data_count==0) {++receive_data_count;}
- Vector<unsigned> receive_data(receive_data_count);
-   
- //Make sure that the send buffer has size at least one
- //so that we don't get a segmentation fault
- if(send_data.size()==0) {send_data.resize(1);}
-   
- //Now send the data between all the processors
- MPI_Alltoallv(&send_data[0],&send_n[0],&send_displacement[0],
-               MPI_INT,
-               &receive_data[0],&receive_n[0],
-               &receive_displacement[0],
-               MPI_INT,
-               comm_pt->mpi_comm());
-
-
-
- if (Global_timings::Doc_comprehensive_timings)
-  {
-   tt_end = TimingHelpers::timer();
-   oomph_info 
-    << "Time for 2nd alltoall in Mesh::classify_halo_and_haloed_nodes: " 
+    <<"Time for setup 1st alltoalls in Mesh::classify_halo_and_haloed_nodes: " 
     << tt_end-tt_start << std::endl;
    tt_start = TimingHelpers::timer();
   }
 
 
- // Provide storage for data to be sent to processor that used to be
- // in charge
- Vector<Vector<int> > send_data_for_proc_in_charge(n_proc);
-
- //Now use the received data 
- for (int send_rank=0;send_rank<n_proc;send_rank++)
+ // Any comms needed?
+ if (global_max_n_overlooked_halo>0)
   {
-   //Don't bother to do anything for the processor corresponding to the
-   //current processor or if no data were received from this processor
-   if((send_rank != my_rank) && (receive_n[send_rank] != 0))
+
+
+   
+   //Storage for the number of data to be received from each processor
+   Vector<int> receive_n(n_proc,0);
+   
+   //Now send numbers of data to be sent between all processors
+   MPI_Alltoall(&send_n[0],1,MPI_INT,&receive_n[0],1,MPI_INT,
+                comm_pt->mpi_comm());
+   
+
+
+   if (Global_timings::Doc_comprehensive_timings)
     {
-     //Counter for the data within the large array
-     unsigned count=receive_displacement[send_rank];
-       
-     // Unpack until we reach "end of data" indicator (-1)
-     while(true)
+     tt_end = TimingHelpers::timer();
+     oomph_info 
+      << "Time for 1st alltoall in Mesh::classify_halo_and_haloed_nodes: " 
+      << tt_end-tt_start << std::endl;
+     tt_start = TimingHelpers::timer();
+    }
+
+   //We now prepare the data to be received
+   //by working out the displacements from the received data
+   Vector<int> receive_displacement(n_proc,0);
+   int receive_data_count=0;
+   for(int rank=0;rank<n_proc;++rank)
+    {
+     //Displacement is number of data received so far
+     receive_displacement[rank] = receive_data_count;
+     receive_data_count += receive_n[rank];
+    }
+   
+   //Now resize the receive buffer for all data from all processors
+   //Make sure that it has a size of at least one
+   if(receive_data_count==0) {++receive_data_count;}
+   Vector<int> receive_data(receive_data_count);
+   
+   //Make sure that the send buffer has size at least one
+   //so that we don't get a segmentation fault
+   if(send_data.size()==0) {send_data.resize(1);}
+   
+   //Now send the data between all the processors
+   MPI_Alltoallv(&send_data[0],&send_n[0],&send_displacement[0],
+                 MPI_INT,
+                 &receive_data[0],&receive_n[0],
+                 &receive_displacement[0],
+                 MPI_INT,
+                 comm_pt->mpi_comm());
+
+
+
+   if (Global_timings::Doc_comprehensive_timings)
+    {
+     tt_end = TimingHelpers::timer();
+     oomph_info 
+      << "Time for 2nd alltoall in Mesh::classify_halo_and_haloed_nodes: " 
+      << tt_end-tt_start << std::endl;
+     tt_start = TimingHelpers::timer();
+    }
+
+
+   // Provide storage for data to be sent to processor that used to be
+   // in charge
+   Vector<Vector<int> > send_data_for_proc_in_charge(n_proc);
+
+   //Now use the received data 
+   for (int send_rank=0;send_rank<n_proc;send_rank++)
+    {
+     //Don't bother to do anything for the processor corresponding to the
+     //current processor or if no data were received from this processor
+     if((send_rank != my_rank) && (receive_n[send_rank] != 0))
       {
-         
-       //Read next entry
-       int next_one=receive_data[count++];
-
-       if (next_one==-1)
+       //Counter for the data within the large array
+       unsigned count=receive_displacement[send_rank];
+       
+       // Unpack until we reach "end of data" indicator (-1)
+       while(true)
         {
-         break;
-        }
-       else
-        {
-         // Shared halo node number in lookup scheme between intermediate
-         // (i.e. this) processor and the one that has the overlooked halo
-         unsigned j=unsigned(next_one);
-           
-         // Processor in charge:
-         unsigned proc_in_charge=unsigned(receive_data[count++]);
-           
-         // Find actual node from shared node lookup scheme
-         Node* nod_pt=shared_node_pt(send_rank,j);
-
          
-         // Note: This search seems relatively cheap
-         //       and in the tests done, did not benefit
-         //       from conversion to map-based search 
-         //       as in 
-         //       TreeBasedRefineableMeshBase::synchronise_hanging_nodes()
+         //Read next entry
+         int next_one=receive_data[count++];
 
-
-         // Locate its index in lookup scheme with proc in charge
-         bool found=false;
-         unsigned nnod=nshared_node(proc_in_charge);
-         for (unsigned jj=0;jj<nnod;jj++)
+         if (next_one==-1)
           {
-           if (nod_pt==shared_node_pt(proc_in_charge,jj))
-            {
-             found=true;
-
-             // Shared node ID in lookup scheme with intermediate (i.e. this)
-             // processor
-             send_data_for_proc_in_charge[proc_in_charge].push_back(jj);
-             
-             // Processor that holds the overlooked halo node 
-             send_data_for_proc_in_charge[proc_in_charge].push_back(
-              send_rank);
-             
-             break;
-            }               
+           break;
           }
-         if (!found)
+         else
           {
+           // Shared halo node number in lookup scheme between intermediate
+           // (i.e. this) processor and the one that has the overlooked halo
+           unsigned j=unsigned(next_one);
+           
+           // Processor in charge:
+           unsigned proc_in_charge=unsigned(receive_data[count++]);
+           
+           // Find actual node from shared node lookup scheme
+           Node* nod_pt=shared_node_pt(send_rank,j);
 
-           std::ostringstream error_stream;
-           error_stream << "Failed to find node that is shared node " << j
-                        << " (with processor " << send_rank 
-                        << ") \n in shared node lookup scheme with processor "
-                        << proc_in_charge << " which is in charge.\n";
-           throw OomphLibError(error_stream.str(),
-                               "Mesh::classify_halo_and_haloed_nodes()",
-                               OOMPH_EXCEPTION_LOCATION);
-          }         
+         
+           // Note: This search seems relatively cheap
+           //       and in the tests done, did not benefit
+           //       from conversion to map-based search 
+           //       as in 
+           //       TreeBasedRefineableMeshBase::synchronise_hanging_nodes()
+
+
+           // Locate its index in lookup scheme with proc in charge
+           bool found=false;
+           unsigned nnod=nshared_node(proc_in_charge);
+           for (unsigned jj=0;jj<nnod;jj++)
+            {
+             if (nod_pt==shared_node_pt(proc_in_charge,jj))
+              {
+               found=true;
+
+               // Shared node ID in lookup scheme with intermediate (i.e. this)
+               // processor
+               send_data_for_proc_in_charge[proc_in_charge].push_back(jj);
+             
+               // Processor that holds the overlooked halo node 
+               send_data_for_proc_in_charge[proc_in_charge].push_back(
+                send_rank);
+             
+               break;
+              }               
+            }
+           if (!found)
+            {
+
+             std::ostringstream error_stream;
+             error_stream << "Failed to find node that is shared node " << j
+                          << " (with processor " << send_rank 
+                          << ") \n in shared node lookup scheme with processor "
+                          << proc_in_charge << " which is in charge.\n";
+             throw OomphLibError(error_stream.str(),
+                                 "Mesh::classify_halo_and_haloed_nodes()",
+                                 OOMPH_EXCEPTION_LOCATION);
+            }         
+          }
         }
-      }
        
-    }
-  } //End of data is received
-
-
- if (Global_timings::Doc_comprehensive_timings)
-  {
-   tt_end = TimingHelpers::timer();
-   oomph_info 
-    << "Time for 1st setup 3rd alltoall in Mesh::classify_halo_and_haloed_nodes: " 
-    << tt_end-tt_start << std::endl;
-   tt_start = TimingHelpers::timer();
-  }
-
-
- // Data to be sent to each processor
- Vector<int> all_send_n(n_proc,0);
-   
- // Storage for all values to be sent to all processors
- Vector<int> all_send_data;
-   
- // Start location within send_data for data to be sent to each processor 
- Vector<int> all_send_displacement(n_proc,0);
- 
- // Collate data
- for (int domain=0;domain<n_proc;domain++) 
-  {     
-   //Set the offset for the current processor
-   all_send_displacement[domain] = all_send_data.size();
-   
-   //Don't bother to do anything if the processor in the loop is the 
-   //current processor
-   if(domain!=my_rank)
-    {
-     unsigned n=send_data_for_proc_in_charge[domain].size();
-     for (unsigned j=0;j<n;j++)
-      {
-       all_send_data.push_back(
-        send_data_for_proc_in_charge[domain][j]);
       }
+    } //End of data is received
+
+
+   if (Global_timings::Doc_comprehensive_timings)
+    {
+     tt_end = TimingHelpers::timer();
+     oomph_info 
+      << "Time for 1st setup 3rd alltoall in Mesh::classify_halo_and_haloed_nodes: " 
+      << tt_end-tt_start << std::endl;
+     tt_start = TimingHelpers::timer();
+    }
+
+
+   // Data to be sent to each processor
+   Vector<int> all_send_n(n_proc,0);
+   
+   // Storage for all values to be sent to all processors
+   Vector<int> all_send_data;
+   
+   // Start location within send_data for data to be sent to each processor 
+   Vector<int> all_send_displacement(n_proc,0);
+ 
+   // Collate data
+   for (int domain=0;domain<n_proc;domain++) 
+    {     
+     //Set the offset for the current processor
+     all_send_displacement[domain] = all_send_data.size();
+   
+     //Don't bother to do anything if the processor in the loop is the 
+     //current processor
+     if(domain!=my_rank)
+      {
+       unsigned n=send_data_for_proc_in_charge[domain].size();
+       for (unsigned j=0;j<n;j++)
+        {
+         all_send_data.push_back(
+          send_data_for_proc_in_charge[domain][j]);
+        }
+      }
+   
+     // End of data
+     all_send_data.push_back(-1);
+   
+     //Find the number of data added to the vector
+     all_send_n[domain]=all_send_data.size()-all_send_displacement[domain];
     }
    
-   // End of data
-   all_send_data.push_back(-1);
-   
-   //Find the number of data added to the vector
-   all_send_n[domain]=all_send_data.size()-all_send_displacement[domain];
-  }
-   
 
- if (Global_timings::Doc_comprehensive_timings)
-  {
-   tt_end = TimingHelpers::timer();
-   oomph_info 
-    << "Time for 2nd setup 3rd alltoall in Mesh::classify_halo_and_haloed_nodes: " 
-    << tt_end-tt_start << std::endl;
-   tt_start = TimingHelpers::timer();
-  }
-
- //Storage for the number of data to be received from each processor
- Vector<int> all_receive_n(n_proc,0);
-   
- //Now send numbers of data to be sent between all processors
- MPI_Alltoall(&all_send_n[0],1,MPI_INT,&all_receive_n[0],1,MPI_INT,
-              comm_pt->mpi_comm());   
-
-
-
- if (Global_timings::Doc_comprehensive_timings)
-  {
-   tt_end = TimingHelpers::timer();
-   oomph_info 
-    << "Time for 3rd alltoall in Mesh::classify_halo_and_haloed_nodes: " 
-    << tt_end-tt_start << std::endl;
-   tt_start = TimingHelpers::timer();
-  }
-
- //We now prepare the data to be received
- //by working out the displacements from the received data
- Vector<int> all_receive_displacement(n_proc,0);
- int all_receive_data_count=0;
-
- for(int rank=0;rank<n_proc;++rank)
-  {
-   //Displacement is number of data received so far
-   all_receive_displacement[rank] = all_receive_data_count;
-   all_receive_data_count += all_receive_n[rank];
-  }
-   
- //Now resize the receive buffer for all data from all processors
- //Make sure that it has a size of at least one
- if (all_receive_data_count==0) {++all_receive_data_count;}
- Vector<unsigned> all_receive_data(all_receive_data_count);
- 
- //Make sure that the send buffer has size at least one
- //so that we don't get a segmentation fault
- if(all_send_data.size()==0) {all_send_data.resize(1);}
- 
- //Now send the data between all the processors
- MPI_Alltoallv(&all_send_data[0],&all_send_n[0],&all_send_displacement[0],
-               MPI_INT,
-               &all_receive_data[0],&all_receive_n[0],
-               &all_receive_displacement[0],
-               MPI_INT,
-               comm_pt->mpi_comm());
-
-
- if (Global_timings::Doc_comprehensive_timings)
-  {
-   tt_end = TimingHelpers::timer();
-   oomph_info 
-    << "Time for 4th alltoall in Mesh::classify_halo_and_haloed_nodes: " 
-    << tt_end-tt_start << std::endl;
-   tt_start = TimingHelpers::timer();
-  }
-
- //Now use the received data 
- for (int send_rank=0;send_rank<n_proc;send_rank++)
-  {
-   //Don't bother to do anything for the processor corresponding to the
-   //current processor or if no data were received from this processor
-   if((send_rank != my_rank) && (all_receive_n[send_rank] != 0))
+   if (Global_timings::Doc_comprehensive_timings)
     {
-     //Counter for the data within the large array
-     unsigned count=all_receive_displacement[send_rank];
+     tt_end = TimingHelpers::timer();
+     oomph_info 
+      << "Time for 2nd setup 3rd alltoall in Mesh::classify_halo_and_haloed_nodes: " 
+      << tt_end-tt_start << std::endl;
+     tt_start = TimingHelpers::timer();
+    }
+
+   //Storage for the number of data to be received from each processor
+   Vector<int> all_receive_n(n_proc,0);
+   
+   //Now send numbers of data to be sent between all processors
+   MPI_Alltoall(&all_send_n[0],1,MPI_INT,&all_receive_n[0],1,MPI_INT,
+                comm_pt->mpi_comm());   
+
+
+
+   if (Global_timings::Doc_comprehensive_timings)
+    {
+     tt_end = TimingHelpers::timer();
+     oomph_info 
+      << "Time for 3rd alltoall in Mesh::classify_halo_and_haloed_nodes: " 
+      << tt_end-tt_start << std::endl;
+     tt_start = TimingHelpers::timer();
+    }
+
+   //We now prepare the data to be received
+   //by working out the displacements from the received data
+   Vector<int> all_receive_displacement(n_proc,0);
+   int all_receive_data_count=0;
+
+   for(int rank=0;rank<n_proc;++rank)
+    {
+     //Displacement is number of data received so far
+     all_receive_displacement[rank] = all_receive_data_count;
+     all_receive_data_count += all_receive_n[rank];
+    }
+   
+   //Now resize the receive buffer for all data from all processors
+   //Make sure that it has a size of at least one
+   if (all_receive_data_count==0) {++all_receive_data_count;}
+   Vector<int> all_receive_data(all_receive_data_count);
+ 
+   //Make sure that the send buffer has size at least one
+   //so that we don't get a segmentation fault
+   if(all_send_data.size()==0) {all_send_data.resize(1);}
+ 
+   //Now send the data between all the processors
+   MPI_Alltoallv(&all_send_data[0],&all_send_n[0],&all_send_displacement[0],
+                 MPI_INT,
+                 &all_receive_data[0],&all_receive_n[0],
+                 &all_receive_displacement[0],
+                 MPI_INT,
+                 comm_pt->mpi_comm());
+
+
+   if (Global_timings::Doc_comprehensive_timings)
+    {
+     tt_end = TimingHelpers::timer();
+     oomph_info 
+      << "Time for 4th alltoall in Mesh::classify_halo_and_haloed_nodes: " 
+      << tt_end-tt_start << std::endl;
+     tt_start = TimingHelpers::timer();
+    }
+
+   //Now use the received data 
+   for (int send_rank=0;send_rank<n_proc;send_rank++)
+    {
+     //Don't bother to do anything for the processor corresponding to the
+     //current processor or if no data were received from this processor
+     if((send_rank != my_rank) && (all_receive_n[send_rank] != 0))
+      {
+       //Counter for the data within the large array
+       unsigned count=all_receive_displacement[send_rank];
        
-     // Unpack until we reach "end of data" indicator (-1)
-     while(true)
-      {
-         
-       //Read next entry
-       int next_one=all_receive_data[count++];
-
-       if (next_one==-1)
+       // Unpack until we reach "end of data" indicator (-1)
+       while(true)
         {
-         break;
+         
+         //Read next entry
+         int next_one=all_receive_data[count++];
+
+         if (next_one==-1)
+          {
+           break;
+          }
+         else
+          {
+           // Shared node ID in lookup scheme with intermediate (sending)
+           // processor
+           unsigned j=unsigned(next_one);           
+         
+           // Get pointer to previously overlooked halo 
+           Node* nod_pt=shared_node_pt(send_rank,j);
+         
+           // Proc where overlooked halo is          
+           unsigned proc_with_overlooked_halo=all_receive_data[count++];
+
+           // Add it as being haloed from specified domain
+           this->add_haloed_node_pt(proc_with_overlooked_halo,nod_pt);
+
+           // Record new haloed node so it an be added to the shared
+           // node lookup scheme (in a consistent order) below.
+           over_looked_haloed_node_pt[proc_with_overlooked_halo].
+            push_back(nod_pt);
+          }
         }
-       else
-        {
-         // Shared node ID in lookup scheme with intermediate (sending)
-         // processor
-         unsigned j=unsigned(next_one);           
-         
-         // Get pointer to previously overlooked halo 
-         Node* nod_pt=shared_node_pt(send_rank,j);
-         
-         // Proc where overlooked halo is          
-         unsigned proc_with_overlooked_halo=all_receive_data[count++];
+      }
+    } //End of data is received
 
-         // Add it as being haloed from specified domain
-         this->add_haloed_node_pt(proc_with_overlooked_halo,nod_pt);
+   if (Global_timings::Doc_comprehensive_timings)
+    {
+     tt_end = TimingHelpers::timer();
+     oomph_info 
+      << "Time for postproc 4th alltoall in Mesh::classify_halo_and_haloed_nodes: " 
+      << tt_end-tt_start << std::endl;
+     tt_start = TimingHelpers::timer();
+    }
+
+   // Now add previously overlooked halo/haloed nodes to shared node
+   // lookup scheme in consistent order
+   for (int d=0;d<n_proc;d++)
+    {
+     // For all domains lower than the current domain: Do halos first
+     // then haloed, to ensure correct order in lookup scheme from
+     // the other side
+     if (d<my_rank)
+      {
+       unsigned nnod=over_looked_halo_node_pt[d].size();
+       for (unsigned j=0;j<nnod;j++)
+        {
+         this->add_shared_node_pt(d,over_looked_halo_node_pt[d][j]);
+        }
+       nnod=over_looked_haloed_node_pt[d].size();
+       for (unsigned j=0;j<nnod;j++)
+        {
+         this->add_shared_node_pt(d,over_looked_haloed_node_pt[d][j]);
+        }
+      }
+     else if (d>my_rank)
+      {
+
+       unsigned nnod=over_looked_haloed_node_pt[d].size();
+       for (unsigned j=0;j<nnod;j++)
+        {
+         this->add_shared_node_pt(d,over_looked_haloed_node_pt[d][j]);
+        }
+       nnod=over_looked_halo_node_pt[d].size();
+       for (unsigned j=0;j<nnod;j++)
+        {
+         this->add_shared_node_pt(d,over_looked_halo_node_pt[d][j]);
         }
       }
     }
-  } //End of data is received
-
- if (Global_timings::Doc_comprehensive_timings)
-  {
-   tt_end = TimingHelpers::timer();
-   oomph_info 
-    << "Time for postproc 4th alltoall in Mesh::classify_halo_and_haloed_nodes: " 
-    << tt_end-tt_start << std::endl;
-   tt_start = TimingHelpers::timer();
-  }
 
 
 //  // Doc stats
@@ -2836,7 +2986,8 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
 //     {
 //      // Get vector of halo elements by copy operation
 //      Vector<GeneralisedElement*> halo_elem_pt(this->halo_element_pt(iproc));
-//      Vector<GeneralisedElement*> haloed_elem_pt(this->haloed_element_pt(iproc));
+//      Vector<GeneralisedElement*> haloed_elem_pt(
+//       this->haloed_element_pt(iproc));
 //      oomph_info << "With process " << iproc << ", there are " 
 //                 << this->nhalo_node(iproc) << " halo nodes, and " << std::endl
 //                 << this->nhaloed_node(iproc) << " haloed nodes, and " 
@@ -2846,12 +2997,45 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
 //     }
 //   }
 
-
-  
-  
+  } // end if comms reqd because we encountered overlooked halo elements
+ 
   // Synchronise shared nodes
   synchronise_shared_nodes(comm_pt,report_stats);
 
+#ifdef PARANOID
+ // Has some twit filled in haloed nodes with own process?!
+ if (Haloed_node_pt[my_rank].size()!=0)
+  {
+   throw OomphLibError(
+    "Processor has haloed nodes with itself! Something's gone wrong!", 
+    "Mesh::classify_halo_and_haloed_nodes()",
+    OOMPH_EXCEPTION_LOCATION);
+  }
+ // Has some twit filled in halo nodes with own process?!
+ if (Halo_node_pt[my_rank].size()!=0)
+  {
+   throw OomphLibError(
+    "Processor has halo nodes with itself! Something's gone wrong!", 
+    "Mesh::classify_halo_and_haloed_nodes()",
+    OOMPH_EXCEPTION_LOCATION);
+  }
+ // Has some twit filled in root haloed elements with own process?!
+ if (Root_haloed_element_pt[my_rank].size()!=0)
+  {
+   throw OomphLibError(
+    "Processor has root haloed elements with itself! Something's gone wrong!", 
+    "Mesh::classify_halo_and_haloed_nodes()",
+    OOMPH_EXCEPTION_LOCATION);
+  }
+ // Has some twit filled in root halo elements with own process?!
+ if (Root_halo_element_pt[my_rank].size()!=0)
+  {
+   throw OomphLibError(
+    "Processor has root halo elements with itself! Something's gone wrong!", 
+    "Mesh::classify_halo_and_haloed_nodes()",
+    OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
 
  // Doc stats
  if (report_stats)
@@ -2870,7 +3054,8 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
     {
      // Get vector of halo elements by copy operation
      Vector<GeneralisedElement*> halo_elem_pt(this->halo_element_pt(iproc));
-     Vector<GeneralisedElement*> haloed_elem_pt(this->haloed_element_pt(iproc));
+     Vector<GeneralisedElement*> haloed_elem_pt(
+      this->haloed_element_pt(iproc));
      oomph_info << "With process " << iproc << ", there are " 
                 << this->nhalo_node(iproc) << " halo nodes, and " << std::endl
                 << this->nhaloed_node(iproc) << " haloed nodes, and " 
@@ -2896,6 +3081,7 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
    oomph_info << "Total time for Mesh::classify_halo_and_halo_nodes(): " 
               << t_end-t_start << std::endl;
   }
+
 }
 
 
@@ -3605,218 +3791,98 @@ void Mesh::get_halo_node_stats(OomphCommunicator* comm_pt,
  
  // Determine which elements are going to end up on which processor
  //----------------------------------------------------------------
- 
- // This procedure needs to be repeated to catch elements which may
- // be missed the first time round but which contain nodes from this process
- 
- //double t_start=clock();
-  bool elements_retained=true;
- int myi=1;
- while (elements_retained) 
+ unsigned number_of_retained_elements=0;
+    
+ // Loop over all backed up elements
+ nelem=backed_up_el_pt.size();
+ for (unsigned e=0;e<nelem;e++)
   {
-   unsigned number_of_retained_elements=0;
-   int number_of_retained_halo_elements=0;
-   
-   // Loop over all backed up elements
-   nelem=backed_up_el_pt.size();
-   for (unsigned e=0;e<nelem;e++)
-    {
-     // Get element and its domain
-     GeneralisedElement* el_pt=backed_up_el_pt[e];
-     unsigned el_domain=element_domain[e];
+   // Get element and its domain
+   GeneralisedElement* el_pt=backed_up_el_pt[e];
+   unsigned el_domain=element_domain[e];
      
-     // If element is located on current processor add it back to the mesh
-     if (el_domain==unsigned(my_rank))
+   // If element is located on current processor add it back to the mesh
+   if (el_domain==unsigned(my_rank))
+    {
+     // Add element to current processor 
+     element_retained[e]=true;
+     number_of_retained_elements++;
+    }
+   // Otherwise we may still need it if it's a halo element:
+   else
+    {       
+     // If this current mesh has been told to keep all elements as halos,
+     // OR the element itself knows that it must be kept then
+     // keep it
+     if ((this->Keep_all_elements_as_halos) || 
+         (el_pt->must_be_kept_as_halo()))
       {
-       // Add element to current processor 
-       element_retained[e]=true;
-       number_of_retained_elements++;
-      }
-     // Otherwise we may still need it if it's a halo element:
-     else
-      {       
-       // If this current mesh has been told to keep all elements as halos,
-       // OR the element itself knows that it must be kept then
-       // keep it
-       if ((this->Keep_all_elements_as_halos) || 
-           (el_pt->must_be_kept_as_halo()))
+       if (!overrule_keep_as_halo_element_status)
         {
-         if (!overrule_keep_as_halo_element_status)
+         // Add as root halo element whose non-halo counterpart is
+         // located on processor el_domain
+         if (!element_retained[e])
           {
-           // Add as root halo element whose non-halo counterpart is
-           // located on processor el_domain
-           if (!element_retained[e])
-            {
-             root_halo_element[el_domain].push_back(e); 
-             element_retained[e]=true;
-             number_of_retained_elements++;
-            }
+           root_halo_element[el_domain].push_back(e); 
+           element_retained[e]=true;
+           number_of_retained_elements++;
           }
         }
-       //Otherwise: Is one of the nodes associated with the current processor?
-       else
+      }
+     //Otherwise: Is one of the nodes associated with the current processor?
+     else
+      {
+       //Can only have nodes if this is a finite element
+       FiniteElement* finite_el_pt = dynamic_cast<FiniteElement*>(el_pt);
+       if(finite_el_pt!=0)
         {
-         //Can only have nodes if this is a finite element
-         FiniteElement* finite_el_pt = dynamic_cast<FiniteElement*>(el_pt);
-         if(finite_el_pt!=0)
+         unsigned n_node = finite_el_pt->nnode();
+         for (unsigned n=0;n<n_node;n++)
           {
-           unsigned n_node = finite_el_pt->nnode();
-           for (unsigned n=0;n<n_node;n++)
+           Node* nod_pt=finite_el_pt->node_pt(n); 
+             
+           // Keep element? (use stl find?)
+           unsigned keep_it=false;
+           for (std::set<unsigned>::iterator 
+                 it=processors_associated_with_data[nod_pt].begin();
+                it!=processors_associated_with_data[nod_pt].end();
+                it++)
             {
-             Node* nod_pt=finite_el_pt->node_pt(n); 
-             
-             // Keep element? (use stl find?)
-             unsigned keep_it=false;
-             for (std::set<unsigned>::iterator 
-                   it=processors_associated_with_data[nod_pt].begin();
-                  it!=processors_associated_with_data[nod_pt].end();
-                  it++)
+             if (*it==unsigned(my_rank))
               {
-               if (*it==unsigned(my_rank))
-                {
-                 keep_it=true;
-                 //Break out of the loop over processors
-                 break;
-                }
-              }
-             
-             // Add a root halo element either if keep_it=true 
-             if (keep_it)
-              {
-               // Add as root halo element whose non-halo counterpart is
-               // located on processor el_domain
-               if (!element_retained[e])
-                {
-                 root_halo_element[el_domain].push_back(e); 
-                 element_retained[e]=true;
-                 number_of_retained_elements++;
-                }
-               //Now break out of loop over nodes
+               keep_it=true;
+               //Break out of the loop over processors
                break;
               }
-            } 
-          }  
-        } //End of testing for halo by virtue of shared nodes
-      }//End of halo element conditions
-    } //end of loop over elements
+            }
+             
+           // Add a root halo element either if keep_it=true 
+           if (keep_it)
+            {
+             // Add as root halo element whose non-halo counterpart is
+             // located on processor el_domain
+             if (!element_retained[e])
+              {
+               root_halo_element[el_domain].push_back(e); 
+               element_retained[e]=true;
+               number_of_retained_elements++;
+              }
+             //Now break out of loop over nodes
+             break;
+            }
+          } 
+        }  
+      } //End of testing for halo by virtue of shared nodes
+    }//End of halo element conditions
+  } //end of loop over elements
 
    
-   // Now loop over all halo elements to check if any of their
-   // nodes are located on a higher-numbered processor.
-   // The elements associated with these must be added as halo elements, too
-   std::map<Node*,bool> higher_numbered_node;
-   
-   // Loop over all domains
-   for (int d=0;d<n_proc;d++)
-    {  
-     // Loop over root halo elements 
-     unsigned nelem=root_halo_element[d].size();     
-     for (unsigned e=0;e<nelem;e++)
-      {
-       int number=root_halo_element[d][e];
-       if (number>=0)
-        {
-         //Can we cast it to a finite element
-         FiniteElement* finite_el_pt
-          =dynamic_cast<FiniteElement*>(backed_up_el_pt[number]);
-       
-         if(finite_el_pt!=0)
-          {
-           // Loop over its nodes
-           unsigned nnod=finite_el_pt->nnode();
-           for (unsigned j=0;j<nnod;j++)
-            {
-             Node* nod_pt=finite_el_pt->node_pt(j);
-             int proc_in_charge=processor_in_charge[nod_pt];
-             if (proc_in_charge>d) 
-              {
-               higher_numbered_node[nod_pt]=true;
-              }
-             else
-              {
-               higher_numbered_node[nod_pt]=false;
-              }
-            }
-          }
-        }
-      }
-    }
+// NOTE: No need to add additional layer of halo elements.
+//       Procedure for removing "overlooked" halo nodes in 
+//       deals classify_halo_and_haloed_nodes() deals 
+//       with the problem addressed here. [code that dealt with this
+//       problem at distribution stage has been removed]
 
-   // Now loop over all the original elements again
-   nelem=backed_up_el_pt.size();
-   for (unsigned e=0;e<nelem;e++)
-    {
-     //Only need to worry about finite elements
-     FiniteElement* finite_el_pt = 
-      dynamic_cast<FiniteElement*>(backed_up_el_pt[e]);
-     if(finite_el_pt!=0)
-      {
-       unsigned el_domain=element_domain[e];
-       
-       // By default, don't keep it
-       bool keep_it=false;
-       
-       // Check if it's already retained
-       if (!element_retained[e])
-        {
-         // Loop over its nodes
-         unsigned nnod=finite_el_pt->nnode();
-         for (unsigned j=0;j<nnod;j++)
-          {
-           Node* nod_pt=finite_el_pt->node_pt(j);
-           if (higher_numbered_node[nod_pt]&&
-               (element_domain[e]==processor_in_charge[nod_pt]))
-            {
-             keep_it=true; 
-             break; 
-            }
-          }
-         if (keep_it)
-          {
-           if (!element_retained[e])
-            {
-             root_halo_element[el_domain].push_back(e); 
-             element_retained[e]=true;
-             number_of_retained_elements++;
-             number_of_retained_halo_elements++; 
-            }
-          }
-        }
-      }
-    }
-   
-   if (report_stats)
-    {
-     // Check number of retained halo elements on this process
-     if (number_of_retained_elements!=0)
-      {
-       oomph_info << "Percentage of extra halo elements retained: "
-                  << 100.0*double(number_of_retained_halo_elements)/
-        double(number_of_retained_elements)
-                  << " in loop number " << myi << std::endl;
-      }
-     else // Dummy output in case a process has no retained elements
-      // (relevant in some multi-mesh problems)
-      {
-       oomph_info << "Percentage of extra halo elements retained: "
-                  << 0.0 << " in loop number " << myi << std::endl;
-      }
-    }
-   
-   if (report_stats)
-    {
-     oomph_info << "Total number of extra halo elements retained: " 
-                << number_of_retained_halo_elements
-                << " in loop: " << myi << std::endl;
-    }
-   
-   if (number_of_retained_halo_elements==0) {elements_retained=false;} 
-   
-   myi++;
-   
-  } // end of while(elements_retained)
- 
- 
  
  // Copy the elements associated with the actual
  // current processor into its own permanent storage.
@@ -5327,6 +5393,10 @@ void Mesh::doc_mesh_distribution(OomphCommunicator* comm_pt,DocInfo& doc_info)
 void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
                               double& max_permitted_error_for_halo_check)
 {
+
+ oomph_info << "Doing check_halo_schemes for mesh: " 
+            << typeid(*this).name() << std::endl;
+
  // Moved this from the Problem class so that it would work better
  // in multiple mesh problems; there remains a simple "wrapper"
  // function in the Problem class that calls this for each (sub)mesh.
@@ -5533,9 +5603,25 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
               {error += (x_shared[i] - x_share[i])*(x_shared[i] - x_share[i]);}
              error = sqrt(error);
 
+             // Doc if relevant
+             if (error>max_permitted_error_for_halo_check)
+              {
+               oomph_info << "Error in shared nodes: ";
+               for(unsigned i=0;i<nod_dim;i++)                 
+                {
+                 oomph_info << x_shared[i] << " "; 
+                }
+               for(unsigned i=0;i<nod_dim;i++)                 
+                {
+                 oomph_info << x_share[i] << " "; 
+                }
+               oomph_info << error << std::endl;
+              }
+
+             // Keep tracking max
              if (error>max_error)
               {
-               max_error= error;       
+               max_error=error;
               }
             }
           }
@@ -5780,7 +5866,7 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
              Vector<int> other_nodal_hangings;
              unsigned n_other_nodal_hangings=0;
              MPI_Recv(&n_other_nodal_hangings,1,
-                      MPI_INT,dd,
+                      MPI_UNSIGNED,dd,
                       1,comm_pt->mpi_comm(),&status);
              if (n_other_nodal_hangings>0)
               {
@@ -6022,7 +6108,7 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
      if (nelem_halo!=0)
       {          
        // Send it across to the processor whose haloed nodes are being checked
-       MPI_Send(&nelem_halo,1,MPI_INT,d,0,comm_pt->mpi_comm());
+       MPI_Send(&nelem_halo,1,MPI_UNSIGNED,d,0,comm_pt->mpi_comm());
 
        //Only bother if the mesh consists of finite elements
        if(dynamic_cast<FiniteElement*>(this->element_pt(0)))
@@ -6079,7 +6165,7 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
          MPI_Send(&nodal_positions[0],nod_dim*nnod_per_el*nelem_halo,
                   MPI_DOUBLE,d,0,comm_pt->mpi_comm());
          MPI_Send(&n_nodal_hangings,1,
-                  MPI_INT,d,1,comm_pt->mpi_comm());
+                  MPI_UNSIGNED,d,1,comm_pt->mpi_comm());
          if (n_nodal_hangings>0)
           {
            MPI_Send(&nodal_hangings[0], n_nodal_hangings,
@@ -6519,7 +6605,7 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
              Vector<int> other_nodal_hangings;
              unsigned n_other_nodal_hangings=0;
              MPI_Recv(&n_other_nodal_hangings,1,
-                      MPI_INT,dd,
+                      MPI_UNSIGNED,dd,
                       1,comm_pt->mpi_comm(),&status);
              if (n_other_nodal_hangings>0)
               {
@@ -6761,7 +6847,7 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
      if (nelem_halo!=0)
       {          
        // Send it across to the processor whose external haloed nodes are being checked
-       MPI_Send(&nelem_halo,1,MPI_INT,d,0,comm_pt->mpi_comm());
+       MPI_Send(&nelem_halo,1,MPI_UNSIGNED,d,0,comm_pt->mpi_comm());
 
        //Only bother if the mesh consists of finite elements
        FiniteElement* fe_pt=dynamic_cast<FiniteElement*>(ext_halo_elem_pt[0]);
@@ -6814,12 +6900,12 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
          // Total number of nodal hang information to be checked
          unsigned n_nodal_hangings=nodal_hangings.size();
          
-         // Send it across to the processor whose external haloed elements are being 
-         // checked         
+         // Send it across to the processor whose external haloed 
+         // elements are being checked         
          MPI_Send(&nodal_positions[0],nod_dim*nnod_per_el*nelem_halo,
                   MPI_DOUBLE,d,0,comm_pt->mpi_comm());
          MPI_Send(&n_nodal_hangings,1,
-                  MPI_INT,d,1,comm_pt->mpi_comm());
+                  MPI_UNSIGNED,d,1,comm_pt->mpi_comm());
          if (n_nodal_hangings>0)
           {
            MPI_Send(&nodal_hangings[0], n_nodal_hangings,
@@ -6983,7 +7069,7 @@ void Mesh::remove_null_pointers_from_external_halo_node_storage(
  //Now resize the receive buffer for all data from all processors
  //Make sure that it has a size of at least one
  if(receive_data_count==0) {++receive_data_count;}
- Vector<unsigned> receive_data(receive_data_count);
+ Vector<int> receive_data(receive_data_count);
    
  //Make sure that the send buffer has size at least one
  //so that we don't get a segmentation fault

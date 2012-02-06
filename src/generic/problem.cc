@@ -2278,19 +2278,7 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
     // internal data on locally-stored elements can never be halo.
    }
  
- 
-// hierher too short/too many
-//   // Doc timings if required
-//   if (Global_timings::Doc_comprehensive_timings)
-//    {
-//     double t_locate=TimingHelpers::timer();
-//     oomph_info 
-//      <<"CPU for assembly of existing global eqns in remove_duplicate_data(): "
-//      << t_locate-t_start << std::endl;
-//    }
-
-
-  // Set to record duplicate nodes scheduled to be killed
+   // Set to record duplicate nodes scheduled to be killed
   std::set<Node*> killed_nodes;
  
   // Now loop over the other processors from highest to lowest
@@ -10734,7 +10722,52 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
  if (nmesh==0) nmesh=1;
  for (unsigned m=0;m<nmesh;m++)
   {
+
+
+//    //---------------------------------------------------------
+//    // Keep this commented out code around to debug restarts
+//    //---------------------------------------------------------
+//    std::ofstream some_file;
+//    char filename[100];
+//    sprintf(filename,"read_mesh%i_on_proc%i.dat",m,
+//            this->communicator_pt()->my_rank());
+//    some_file.open(filename);
+//    mesh_pt(m)->output(some_file);
+//    some_file.close();
+
+//    sprintf(filename,"read_mesh%i_with_haloes_on_proc%i.dat",m,
+//            this->communicator_pt()->my_rank());
+//    mesh_pt(m)->enable_output_of_halo_elements();
+//    some_file.open(filename);
+//    mesh_pt(m)->output(some_file);
+//    mesh_pt(m)->disable_output_of_halo_elements();
+//    some_file.close();
+//    oomph_info << "Doced mesh " << m << " before reading\n";
+
+//    sprintf(filename,"read_nodes_mesh%i_on_proc%i.dat",m,
+//            this->communicator_pt()->my_rank());
+//    some_file.open(filename);
+//    unsigned nnod=mesh_pt(m)->nnode();
+//    for (unsigned j=0;j<nnod;j++)
+//     {
+//      Node* nod_pt=mesh_pt(m)->node_pt(j);
+//      unsigned n=nod_pt->ndim();
+//      for (unsigned i=0;i<n;i++)
+//       {
+//        some_file << nod_pt->x(i) << " ";
+//       }
+//      some_file << nod_pt->is_halo() << " "
+//                << nod_pt->nvalue() << " "
+//                << nod_pt->hang_code() << "\n";
+//     }
+//    some_file.close();
+//    oomph_info << "Doced mesh " << m << " before reading\n";
+//    //---------------------------------------------------------
+//    // End keep this commented out code around to debug restarts
+//    //---------------------------------------------------------
+ 
    mesh_pt(m)->read(restart_file);
+
   }
 
 
@@ -10792,6 +10825,10 @@ void Problem::initialise_dt(const double& dt)
  for(unsigned i=0;i<n_time_steppers;i++)
   {
    time_stepper_pt(i)->set_weights();
+   if (time_stepper_pt(i)->adaptive_flag())
+    {
+     time_stepper_pt(i)->set_error_weights();
+    }
   }
 }
 
@@ -10811,6 +10848,10 @@ void Problem::initialise_dt(const Vector<double>& dt)
  for(unsigned i=0;i<n_time_steppers;i++)
   {
    time_stepper_pt(i)->set_weights();
+   if (time_stepper_pt(i)->adaptive_flag())
+    {
+     time_stepper_pt(i)->set_error_weights();
+    }
   }
 }
 
@@ -13526,10 +13567,10 @@ void Problem::unsteady_newton_solve(const double &dt,
      unsigned total_unrefined=0;
      if (Problem_has_been_distributed)
       {
-       MPI_Allreduce(&n_refined,&total_refined,1,MPI_INT,MPI_SUM,
+       MPI_Allreduce(&n_refined,&total_refined,1,MPI_UNSIGNED,MPI_SUM,
                      this->communicator_pt()->mpi_comm());
        n_refined=total_refined;
-       MPI_Allreduce(&n_unrefined,&total_unrefined,1,MPI_INT,MPI_SUM,
+       MPI_Allreduce(&n_unrefined,&total_unrefined,1,MPI_UNSIGNED,MPI_SUM,
                      this->communicator_pt()->mpi_comm());
        n_unrefined=total_unrefined;
       }
@@ -13639,10 +13680,10 @@ void Problem::newton_solve(const unsigned &max_adapt)
      unsigned total_unrefined=0;
      if (Problem_has_been_distributed)
       {
-       MPI_Allreduce(&n_refined,&total_refined,1,MPI_INT,MPI_SUM,
+       MPI_Allreduce(&n_refined,&total_refined,1,MPI_UNSIGNED,MPI_SUM,
                      this->communicator_pt()->mpi_comm());
        n_refined=total_refined;
-       MPI_Allreduce(&n_unrefined,&total_unrefined,1,MPI_INT,MPI_SUM,
+       MPI_Allreduce(&n_unrefined,&total_unrefined,1,MPI_UNSIGNED,MPI_SUM,
                      this->communicator_pt()->mpi_comm());
        n_unrefined=total_unrefined;
       }

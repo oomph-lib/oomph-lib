@@ -2388,7 +2388,7 @@ namespace oomph
   
   //Loop over the elements and count the entries
   //and number of (non-halo) elements
-  int n_non_halo_element_local=0;
+  unsigned n_non_halo_element_local=0;
   for(unsigned e=0;e<n_element;e++)
    {
     GeneralisedElement* elem_pt = Problem_pt->mesh_pt()->element_pt(e);
@@ -2418,7 +2418,7 @@ namespace oomph
   if(Distributed)
    {
     //Need to gather the total number of non halo elements
-    MPI_Allreduce(&n_non_halo_element_local,&Nelement,1,MPI_INT,MPI_SUM,
+    MPI_Allreduce(&n_non_halo_element_local,&Nelement,1,MPI_UNSIGNED,MPI_SUM,
                   Problem_pt->communicator_pt()->mpi_comm());
    }
   //Otherwise the total number is the same on each processor

@@ -802,7 +802,7 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
 #endif
 #else
-       return static_cast<int>(Dof_number_dense[i_dof]); // hierher mh added "_dense"
+       return static_cast<int>(Dof_number_dense[i_dof]); 
 #endif
       }
      // else this preconditioner  is a subsidiary one, and its Block_number
@@ -1276,7 +1276,7 @@ namespace oomph
      unsigned nrow_local = this->distribution_pt()->nrow_local();
      unsigned last_row = first_row+nrow_local-1;
 
-#ifdef OOMPH_HAS_MPI // hierher mh moved this up from below
+#ifdef OOMPH_HAS_MPI 
 
      // storage for the rows required by each processor in the dense
      // block lookup storage scheme
@@ -1326,9 +1326,9 @@ namespace oomph
       }
      sparse_global_rows_for_block_lookup.clear();
 
-//#ifdef OOMPH_HAS_MPI // hierher mh commented out and moved up
+
      Vector<MPI_Request> recv_requests_sparse_nreq;
-     if (matrix_distributed) // hierher mh added if
+     if (matrix_distributed)
       {
        MPI_Aint base_displacement_sparse;
        MPI_Address(nreq_sparse,&base_displacement_sparse);
@@ -1429,7 +1429,7 @@ namespace oomph
                    problem_pt->communicator_pt()->mpi_comm(),&req);
          recv_requests_sparse_nreq.push_back(req);
         }
-      } // hierher mh added if
+      } 
 #endif
 
      // resize the storage
@@ -1954,7 +1954,7 @@ namespace oomph
 #ifdef OOMPH_HAS_MPI
      Vector<unsigned*> sparse_rows_for_proc(nproc,0);
      Vector<MPI_Request> sparse_rows_for_proc_requests;     
-     if (matrix_distributed)// hierher mh added if
+     if (matrix_distributed)
       {
        // wait for number of sparse rows each processor requires 
        // post recvs for that data
@@ -1976,7 +1976,7 @@ namespace oomph
            sparse_rows_for_proc_requests.push_back(req);
           }
         }
-      } // hierher mh added if
+      } 
 #endif
 
 

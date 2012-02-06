@@ -470,8 +470,8 @@ namespace oomph
      // Only perform the reduction operation if there's more than one process
      if (problem_pt->communicator_pt()->nproc() > 1)
       {
-       int count_local_zetas=n_zeta_not_found;
-       MPI_Allreduce(&count_local_zetas,&n_zeta_not_found,1,MPI_INT,MPI_SUM,
+       unsigned count_local_zetas=n_zeta_not_found;
+       MPI_Allreduce(&count_local_zetas,&n_zeta_not_found,1,MPI_UNSIGNED,MPI_SUM,
                      problem_pt->communicator_pt()->mpi_comm());
       }
 
@@ -570,9 +570,9 @@ namespace oomph
 #ifdef OOMPH_HAS_MPI
          if (problem_pt->communicator_pt()->nproc() > 1)
           {
-           int count_local_zetas=n_zeta_not_found;
+           unsigned count_local_zetas=n_zeta_not_found;
            MPI_Allreduce(&count_local_zetas,&n_zeta_not_found,1,
-                         MPI_INT,MPI_SUM,
+                         MPI_UNSIGNED,MPI_SUM,
                          problem_pt->communicator_pt()->mpi_comm());
           }
 #endif
@@ -667,7 +667,7 @@ namespace oomph
      if (problem_pt->communicator_pt()->nproc() > 1)
       {
        unsigned count_local_zetas=n_zeta_not_found;
-       MPI_Allreduce(&count_local_zetas,&n_zeta_not_found,1,MPI_INT,MPI_SUM,
+       MPI_Allreduce(&count_local_zetas,&n_zeta_not_found,1,MPI_UNSIGNED,MPI_SUM,
                      problem_pt->communicator_pt()->mpi_comm());
       }
 #endif

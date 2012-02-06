@@ -198,8 +198,8 @@ void TreeBasedRefineableMeshBase::refine_base_mesh(OomphCommunicator* comm_pt,
 
 
 
-  // Still need to delete external storage and reorder nodes even if adapt_mesh 
-  // wasn't called on this processor
+  // Still need to delete external storage and reorder nodes even if 
+  // adapt_mesh wasn't called on this processor
   if (my_max_level==0)
    {
  #ifdef OOMPH_HAS_MPI
@@ -513,7 +513,7 @@ void TreeBasedRefineableMeshBase::adapt(OomphCommunicator* comm_pt,
   // Sum n_refine across all processors
   if (this->is_mesh_distributed())
    {
-    MPI_Allreduce(&n_refine,&total_n_refine,1,MPI_INT,MPI_SUM,
+    MPI_Allreduce(&n_refine,&total_n_refine,1,MPI_UNSIGNED,MPI_SUM,
                   comm_pt->mpi_comm());
    }
   else 
@@ -537,7 +537,7 @@ void TreeBasedRefineableMeshBase::adapt(OomphCommunicator* comm_pt,
   // Sum n_unrefine across all processors
   if (this->is_mesh_distributed())
    {
-    MPI_Allreduce(&n_unrefine,&total_n_unrefine,1,MPI_INT,MPI_SUM,
+    MPI_Allreduce(&n_unrefine,&total_n_unrefine,1,MPI_UNSIGNED,MPI_SUM,
                   comm_pt->mpi_comm());
    }
   else
@@ -554,11 +554,10 @@ void TreeBasedRefineableMeshBase::adapt(OomphCommunicator* comm_pt,
   if ((total_n_refine > 0) || (total_n_unrefine > max_keep_unrefined()))
    {
 
-
-    
 #ifdef PARANOID
 #ifdef OOMPH_HAS_MPI
     
+
     // Sanity check: Each processor checks if the enforced unrefinement of
     // its haloed element is matched by enforced unrefinement of the
     // corresponding halo elements on the other processors.
@@ -568,171 +567,201 @@ void TreeBasedRefineableMeshBase::adapt(OomphCommunicator* comm_pt,
       MPI_Status status;
       int n_proc=comm_pt->nproc();
       int my_rank=comm_pt->my_rank();
-      
-      // Loop over all other domains/processors
-      for (int d=0;d<n_proc;d++)
-       {
-        // Don't talk to yourself
-        if (d!=my_rank)
-         {
-
-          {
-           // Get the vector of halo elements whose non-halo counterpart
-           // are on processor d
-           Vector<GeneralisedElement*> halo_elem_pt(this->halo_element_pt(d));
-           
-           // Create vector containing (0)1 to indicate that
-           // halo element is (not) to be unrefined
-           unsigned nhalo=halo_elem_pt.size();
-           Vector<int> halo_to_be_unrefined(nhalo,0);
-           for (unsigned e=0;e<nhalo;e++)
-            {
-             if (dynamic_cast<RefineableElement*>(halo_elem_pt[e])
-                 ->sons_to_be_unrefined())
-              {
-               halo_to_be_unrefined[e]=1;
-              }
-            }
-
-           //Trap the case when there are no halo elements
-           //so that we don't get a segfault in the MPI send
-           if(nhalo > 0)
-            {
-             // Send it across
-             MPI_Send(&halo_to_be_unrefined[0],nhalo,MPI_INT,
-                      d,0,comm_pt->mpi_comm());
-            }
-          }
-
-          {
-           
-           // Get the vector of haloed elements on current processor
-           Vector<GeneralisedElement*> 
-            haloed_elem_pt(this->haloed_element_pt(d));
-           
-           // Ask processor d to send vector containing (0)1 for 
-           // halo element with current processor to be (not)unrefined
-           unsigned nhaloed=haloed_elem_pt.size();
-           Vector<int> halo_to_be_unrefined(nhaloed);
-           //Trap to catch the case that there are no haloed elements
-           if(nhaloed > 0)
-            {
-             MPI_Recv(&halo_to_be_unrefined[0],nhaloed,MPI_INT,d,0,
-                      comm_pt->mpi_comm(),&status);
-            }
-
-           // Check it
-           for (unsigned e=0;e<nhaloed;e++)
-            {
-             if ( ( (halo_to_be_unrefined[e]==0)&&
-                    (dynamic_cast<RefineableElement*>(haloed_elem_pt[e])->
-                     sons_to_be_unrefined()) ) ||
-                  ( (halo_to_be_unrefined[e]==1)&&
-                    (!dynamic_cast<RefineableElement*>(haloed_elem_pt[e])->
-                     sons_to_be_unrefined()) ) )
-              {
-               std::ostringstream error_message;
-               error_message 
-                << "Error in refinement: \n"
-                << "Haloed element: " << e << " on proc " << my_rank << " \n"
-                << "wants to be unrefined whereas its halo counterpart on\n"
-                << "proc " << d << " doesn't (or vice versa)...\n"
-                << "This is most likely because the error estimator\n"
-                << "has not assigned the same errors to halo and haloed\n"
-                << "elements -- it ought to!\n";
-               throw OomphLibError(error_message.str(),
-                                   "TreeBasedRefineableMeshBase::adapt_mesh",
-                                   OOMPH_EXCEPTION_LOCATION);
-              }
-            }
-           }        
-         }
-        
-       }
-
-
-
-      // Loop over all other domains/processors
-      for (int d=0;d<n_proc;d++)
-       {
-        // Don't talk to yourself
-        if (d!=my_rank)
-         {
-
-          {
-           // Get the vector of halo elements whose non-halo counterpart
-           // are on processor d
-           Vector<GeneralisedElement*> halo_elem_pt(this->halo_element_pt(d));
-           
-           // Create vector containing (0)1 to indicate that
-           // halo element is (not) to be refined
-           unsigned nhalo=halo_elem_pt.size();
-           Vector<int> halo_to_be_refined(nhalo,0);
-           for (unsigned e=0;e<nhalo;e++)
-            {
-             if (dynamic_cast<RefineableElement*>(halo_elem_pt[e])
-                 ->to_be_refined())
-              {
-               halo_to_be_refined[e]=1;
-              }
-            }
-           
-           // Send it across
-           if(nhalo > 0)
-            {
-             MPI_Send(&halo_to_be_refined[0],nhalo,MPI_INT,
-                      d,0,comm_pt->mpi_comm());
-            }
-          }
-
-          {
-           
-           // Get the vector of haloed elements on current processor
-           Vector<GeneralisedElement*> 
-            haloed_elem_pt(this->haloed_element_pt(d));
-           
-           // Ask processor d to send vector containing (0)1 for 
-           // halo element with current processor to be (not)refined
-           unsigned nhaloed=haloed_elem_pt.size();
-           Vector<int> halo_to_be_refined(nhaloed);
-           if(nhaloed > 0)
-            {
-             MPI_Recv(&halo_to_be_refined[0],nhaloed,MPI_INT,d,0,
-                      comm_pt->mpi_comm(),&status);
-            }
-
-           // Check it
-           for (unsigned e=0;e<nhaloed;e++)
-            {
-             if ( ( (halo_to_be_refined[e]==0)&&
-                    (dynamic_cast<RefineableElement*>(haloed_elem_pt[e])->
-                     to_be_refined()) ) ||
-                  ( (halo_to_be_refined[e]==1)&&
-                    (!dynamic_cast<RefineableElement*>(haloed_elem_pt[e])->
-                     to_be_refined()) ) )
-              {
-               std::ostringstream error_message;
-               error_message 
-                << "Error in refinement: \n"
-                << "Haloed element: " << e << " on proc " << my_rank << " \n"
-                << "wants to be refined whereas its halo counterpart on\n"
-                << "proc " << d << " doesn't (or vice versa)...\n"
-                << "This is most likely because the error estimator\n"
-                << "has not assigned the same errors to halo and haloed\n"
-                << "elements -- it ought to!\n";
-               throw OomphLibError(error_message.str(),
-                                   "TreeBasedRefineableMeshBase::adapt_mesh",
-                                   OOMPH_EXCEPTION_LOCATION);
-              }
-            }
-           }        
-         }
-        
-       }
-     }   
-#endif
-#endif
     
+      // Loop over processes: Each processor sends unrefinement pattern
+      // for halo elements with processor d to processor d where it's
+      // compared against the unrefinement pattern for the corresponding
+      // haloed elements
+      for (int d=0; d<n_proc; d++)
+       {
+        
+        // No halo with self: Send unrefinement info to proc d
+        if (d!=my_rank) 
+         {
+          
+
+          // Get the vector of halo elements whose non-halo counterpart
+          // are on processor d
+          Vector<GeneralisedElement*> halo_elem_pt(this->halo_element_pt(d));
+          
+          // Create vector containing (0)1 to indicate that
+          // halo element is (not) to be unrefined
+          unsigned nhalo=halo_elem_pt.size();
+          Vector<int> halo_to_be_unrefined(nhalo,0);
+          for (unsigned e=0;e<nhalo;e++)
+           {
+            if (dynamic_cast<RefineableElement*>(halo_elem_pt[e])
+                ->sons_to_be_unrefined())
+             {
+              halo_to_be_unrefined[e]=1;
+             }
+           }
+          
+          //Trap the case when there are no halo elements
+          //so that we don't get a segfault in the MPI send
+          if(nhalo > 0)
+           {
+            // Send it across to proc d
+            MPI_Send(&halo_to_be_unrefined[0],nhalo,MPI_INT,
+                     d,0,comm_pt->mpi_comm());
+           }
+         }
+        // else (d=my_rank): Receive unrefinement pattern from all
+        // other processors (dd)
+        else
+         {
+          // Loop over other processors
+          for (int dd=0; dd<n_proc; dd++)
+           {
+            // No halo with yourself
+            if (dd!=d)
+             {
+              // Get the vector of haloed elements on current processor
+              // with processor dd
+              Vector<GeneralisedElement*> 
+               haloed_elem_pt(this->haloed_element_pt(dd));
+              
+              // Ask processor dd to send vector containing (0)1 for 
+              // halo element with current processor to be (not)unrefined
+              unsigned nhaloed=haloed_elem_pt.size();
+              Vector<int> halo_to_be_unrefined(nhaloed);
+              //Trap to catch the case that there are no haloed elements
+              if(nhaloed > 0)
+               {
+                // Receive unrefinement pattern of haloes from proc dd
+                MPI_Recv(&halo_to_be_unrefined[0],nhaloed,MPI_INT,dd,0,
+                         comm_pt->mpi_comm(),&status);
+               }
+              
+              // Check it
+              for (unsigned e=0;e<nhaloed;e++)
+               {
+                if ( ( (halo_to_be_unrefined[e]==0)&&
+                       (dynamic_cast<RefineableElement*>(haloed_elem_pt[e])->
+                        sons_to_be_unrefined()) ) ||
+                     ( (halo_to_be_unrefined[e]==1)&&
+                       (!dynamic_cast<RefineableElement*>(haloed_elem_pt[e])->
+                        sons_to_be_unrefined()) ) )
+                 {
+                  std::ostringstream error_message;
+                  error_message 
+                   << "Error in unrefinement: \n"
+                   << "Haloed element: " << e << " on proc " << my_rank<< " \n"
+                   << "wants to be unrefined whereas its halo counterpart on\n"
+                   << "proc " << dd << " doesn't (or vice versa)...\n"
+                   << "This is most likely because the error estimator\n"
+                   << "has not assigned the same errors to halo and haloed\n"
+                   << "elements -- it ought to!\n";
+                  throw OomphLibError(
+                   error_message.str(),
+                   "TreeBasedRefineableMeshBase::adapt_mesh",
+                   OOMPH_EXCEPTION_LOCATION);
+                 }
+               }
+             }
+           }       
+         }
+       }
+
+
+
+      // Loop over processes: Each processor sends refinement pattern
+      // for halo elements with processor d to processor d where it's
+      // compared against the refinement pattern for the corresponding
+      // haloed elements
+      for (int d=0; d<n_proc; d++)
+       {
+        
+        // No halo with self: Send refinement info to proc d
+        if (d!=my_rank) 
+         {
+          // Get the vector of halo elements whose non-halo counterpart
+          // are on processor d
+          Vector<GeneralisedElement*> halo_elem_pt(this->halo_element_pt(d));
+          
+          // Create vector containing (0)1 to indicate that
+          // halo element is (not) to be refined
+          unsigned nhalo=halo_elem_pt.size();
+          Vector<int> halo_to_be_refined(nhalo,0);
+          for (unsigned e=0;e<nhalo;e++)
+           {
+            if (dynamic_cast<RefineableElement*>(halo_elem_pt[e])
+                ->to_be_refined())
+             {
+              halo_to_be_refined[e]=1;
+             }
+           }
+          
+          //Trap the case when there are no halo elements
+          //so that we don't get a segfault in the MPI send
+          if(nhalo > 0)
+           {
+            // Send it across to proc d
+            MPI_Send(&halo_to_be_refined[0],nhalo,MPI_INT,
+                     d,0,comm_pt->mpi_comm());
+           }
+         }
+        // else (d=my_rank): Receive refinement pattern from all
+        // other processors (dd)
+        else
+         {
+          // Loop over other processors
+          for (int dd=0; dd<n_proc; dd++)
+           {
+            // No halo with yourself
+            if (dd!=d)
+             {
+              // Get the vector of haloed elements on current processor
+              // with processor dd
+              Vector<GeneralisedElement*> 
+               haloed_elem_pt(this->haloed_element_pt(dd));
+              
+              // Ask processor dd to send vector containing (0)1 for 
+              // halo element with current processor to be (not)refined
+              unsigned nhaloed=haloed_elem_pt.size();
+              Vector<int> halo_to_be_refined(nhaloed);
+              //Trap to catch the case that there are no haloed elements
+              if(nhaloed > 0)
+               {
+                // Receive unrefinement pattern of haloes from proc dd
+                MPI_Recv(&halo_to_be_refined[0],nhaloed,MPI_INT,dd,0,
+                         comm_pt->mpi_comm(),&status);
+               }
+              
+              // Check it
+              for (unsigned e=0;e<nhaloed;e++)
+               {
+                if ( ( (halo_to_be_refined[e]==0)&&
+                       (dynamic_cast<RefineableElement*>(haloed_elem_pt[e])->
+                        to_be_refined()) ) ||
+                     ( (halo_to_be_refined[e]==1)&&
+                       (!dynamic_cast<RefineableElement*>(haloed_elem_pt[e])->
+                        to_be_refined()) ) )
+                 {
+                  std::ostringstream error_message;
+                  error_message 
+                   << "Error in refinement: \n"
+                   << "Haloed element: " << e << " on proc " << my_rank<< " \n"
+                   << "wants to be refined whereas its halo counterpart on\n"
+                   << "proc " << dd << " doesn't (or vice versa)...\n"
+                   << "This is most likely because the error estimator\n"
+                   << "has not assigned the same errors to halo and haloed\n"
+                   << "elements -- it ought to!\n";
+                  throw OomphLibError(
+                   error_message.str(),
+                   "TreeBasedRefineableMeshBase::adapt_mesh",
+                   OOMPH_EXCEPTION_LOCATION);
+                 } 
+               } 
+             }
+           }       
+         }
+       }
+     }
+
+#endif
+#endif
+
     //Perform the actual adaptation
     adapt_mesh(local_doc_info);
 
@@ -740,8 +769,8 @@ void TreeBasedRefineableMeshBase::adapt(OomphCommunicator* comm_pt,
     Nunrefined=n_unrefine;
     Nrefined=n_refine;
    }
-  // If not worthwhile, say so but still reorder nodes and kill external storage
-  // for consistency in parallel computations
+  // If not worthwhile, say so but still reorder nodes and kill 
+  // external storage for consistency in parallel computations
   else
    {
 
@@ -767,7 +796,6 @@ void TreeBasedRefineableMeshBase::adapt(OomphCommunicator* comm_pt,
      }
     Nunrefined=0;
     Nrefined=0;
-
    }
 
 
@@ -1340,11 +1368,6 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
                 << t_end-t_start << std::endl;
      t_start = TimingHelpers::timer();
     }
-   
-   
-   
-   
-   
 
    //Now we can correct the nodes on boundaries that were hanging that
    //are no longer hanging
@@ -2751,14 +2774,17 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
    t_start = TimingHelpers::timer();
   }
 
-
  // Store number of continuosly interpolated values as int
  int ncont_inter_values=ncont_interpolated_values;
  
- // Loop over processes
+ // Loop over processes: Each processor checks that is haloed nodes
+ // with proc d have consistent hanging stats with halo counterparts.
  for (int d=0; d<n_proc; d++)
   {
-   if (d!=my_rank) // no halo with yourself!
+
+   // No halo with self: Setup hang info for my haloed nodes with proc d 
+   // then get ready to receive halo info from processor d.
+   if (d!=my_rank) 
     {
      
      // Loop over haloed nodes
@@ -2813,9 +2839,10 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
                 comm_pt->mpi_comm(),&status);       
       }
     }
-   else // d==my_rank, i.e. current process
+   else // d==my_rank, i.e. current process: Send halo hanging status 
+        // to process dd where it's received (see above) and compared
+        // and compared against the hang status of the haloed nodes
     {
-     // Send halo hanging status to relevant process
      for (int dd=0; dd<n_proc; dd++)
       {
        // No halo with yourself
@@ -2900,7 +2927,10 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
     }
   }
 
- // Loop over domains
+
+ // Loop over domains: Each processor checks consistency of hang status
+ // of its haloed nodes with proc d against the halo counterpart. Haloed
+ // wins if there are any discrepancies.
  for (int d=0; d<n_proc; d++)
   {
    // No halo with yourself
@@ -3028,28 +3058,45 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
              // the non-halo version
              if (!found)
               {
-               std::map<Node*,unsigned>::iterator it=
-                shared_node_map[non_halo_proc_id].find(master_nod_pt); 
-               
-               // If it's not in there iterator points to end of
-               // set
-               if (it!=shared_node_map[non_halo_proc_id].end())
+
+               // This is odd -- can't currently handle the case where
+               // node is owned by current processor (indicated by 
+               // non_halo_proc_id being negative
+               if (non_halo_proc_id<0)
                 {
-                 // Found a master: Send ID of processor that holds non-halo
-                 // (the fact that this is different from my_rank (the processor
-                 // that sends this) will alert the other processor to the fact
-                 // that it needs to 
-                 send_data.push_back(non_halo_proc_id);
-                 
-                 // Found a master: Send its index in the shared 
-                 // node scheme
-                 send_data.push_back((*it).second);
-                 
-                 // Add the weight
-                 send_double_data.push_back(hang_pt->master_weight(m));
-                 
-                 // Done
-                 found=true;
+                 OomphLibError(
+                  "Odd: missing master node is owned by current proc. Will crash below.",
+                  "TreeBasedRefineableMeshBase::synchronise_hanging_nodes(...)",
+                  OOMPH_EXCEPTION_LOCATION);
+                }
+               else // i.e. (non_halo_proc_id>=0)
+                {
+                 if (shared_node_map[non_halo_proc_id].size()>0)
+                  {
+                   std::map<Node*,unsigned>::iterator it=
+                    shared_node_map[non_halo_proc_id].find(master_nod_pt); 
+                   
+                   // If it's not in there iterator points to end of
+                   // set
+                   if (it!=shared_node_map[non_halo_proc_id].end())
+                    {
+                     // Found a master: Send ID of processor that holds 
+                     // non-halo (the fact that this is different from 
+                     // my_rank (the processor that sends this) will alert 
+                     // the other processor to the fact that it needs to 
+                     send_data.push_back(non_halo_proc_id);
+                     
+                     // Found a master: Send its index in the shared 
+                     // node scheme
+                     send_data.push_back((*it).second);
+                     
+                     // Add the weight
+                     send_double_data.push_back(hang_pt->master_weight(m));
+                     
+                     // Done
+                     found=true;
+                    }
+                  }                 
                 }
               }
 
@@ -3066,7 +3113,8 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
                this->output(some_file);
                some_file.close();
                
-               sprintf(filename,"sync_hanging_node_crash_mesh_with_haloes_proc%i.dat",
+               sprintf(filename,
+                       "sync_hanging_node_crash_mesh_with_haloes_proc%i.dat",
                        my_rank);
                some_file.open(filename);
                this->enable_output_of_halo_elements();
@@ -3074,88 +3122,108 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
                this->disable_output_of_halo_elements();
                some_file.close();
                
-               sprintf(filename,"sync_hanging_node_crash_halo_elements_with_proc%i_proc%i.dat",
-                       d,my_rank);
-               some_file.open(filename);
-               Vector<GeneralisedElement*> 
-                halo_elem_pt(this->halo_element_pt(d));
-               unsigned nelem=halo_elem_pt.size();
-               for (unsigned e=0;e<nelem;e++)
-                {
-                 FiniteElement* el_pt=
-                  dynamic_cast<FiniteElement*>(halo_elem_pt[e]);
-                 el_pt->output(some_file);
-                }
-               some_file.close();
 
-               sprintf(filename,"sync_hanging_node_crash_haloed_elements_with_proc%i_proc%i.dat",
-                       d,my_rank);
-               some_file.open(filename);
-               Vector<GeneralisedElement*> 
-                haloed_elem_pt(this->haloed_element_pt(d));
-               nelem=haloed_elem_pt.size();
-               for (unsigned e=0;e<nelem;e++)
+               std::set<unsigned> other_proc_id;
+               other_proc_id.insert(d);
+               other_proc_id.insert(non_halo_proc_id);
+               for (std::set<unsigned>::iterator it=other_proc_id.begin();
+                    it!=other_proc_id.end();it++)
                 {
-                 FiniteElement* el_pt=
-                  dynamic_cast<FiniteElement*>(haloed_elem_pt[e]);
-                 el_pt->output(some_file);
-                }
-               some_file.close();
-
-
-               sprintf(filename,"sync_hanging_node_crash_shared_nodes_with_proc%i_proc%i.dat",
-                       d,my_rank);
-               some_file.open(filename);
-               unsigned n=nshared_node(d);
-               for (unsigned j=0;j<n;j++)
-                {
-                 Node* nod_pt=shared_node_pt(d,j);
-                 unsigned nd=nod_pt->ndim();
-                 for (unsigned i=0;i<nd;i++)
+                 unsigned d_doc=(*it);
+                 
+                 sprintf(
+                  filename,
+                  "sync_hanging_node_crash_halo_elements_with_proc%i_proc%i.dat",
+                  d_doc,my_rank);
+                 some_file.open(filename);
+                 Vector<GeneralisedElement*> 
+                  halo_elem_pt(this->halo_element_pt(d_doc));
+                 unsigned nelem=halo_elem_pt.size();
+                 for (unsigned e=0;e<nelem;e++)
                   {
-                   some_file << nod_pt->x(i) << " ";
+                   FiniteElement* el_pt=
+                    dynamic_cast<FiniteElement*>(halo_elem_pt[e]);
+                   el_pt->output(some_file);
                   }
-                 some_file << "\n";
-                }
-               some_file.close();
-
-
-               sprintf(filename,"sync_hanging_node_crash_halo_nodes_with_proc%i_proc%i.dat",
-                       d,my_rank);
-               some_file.open(filename);
-               n=nhalo_node(d);
-               for (unsigned j=0;j<n;j++)
-                {
-                 Node* nod_pt=halo_node_pt(d,j);
-                 unsigned nd=nod_pt->ndim();
-                 for (unsigned i=0;i<nd;i++)
+                 some_file.close();
+                 
+                 sprintf(
+                  filename,
+                  "sync_hanging_node_crash_haloed_elements_with_proc%i_proc%i.dat",
+                  d_doc,my_rank);
+                 some_file.open(filename);
+                 Vector<GeneralisedElement*> 
+                  haloed_elem_pt(this->haloed_element_pt(d_doc));
+                 nelem=haloed_elem_pt.size();
+                 for (unsigned e=0;e<nelem;e++)
                   {
-                   some_file << nod_pt->x(i) << " ";
+                   FiniteElement* el_pt=
+                    dynamic_cast<FiniteElement*>(haloed_elem_pt[e]);
+                   el_pt->output(some_file);
                   }
-                 some_file << "\n";
-                }
-               some_file.close();
-
-
-               sprintf(filename,
-                       "sync_hanging_node_crash_haloed_nodes_with_proc%i_proc%i.dat",
-                       d,my_rank);
-               some_file.open(filename);
-               n=nhaloed_node(d);
-               for (unsigned j=0;j<n;j++)
-                {
-                 Node* nod_pt=haloed_node_pt(d,j);
-                 unsigned nd=nod_pt->ndim();
-                 for (unsigned i=0;i<nd;i++)
+                 some_file.close();
+                 
+                 
+                 sprintf(
+                  filename,
+                  "sync_hanging_node_crash_shared_nodes_with_proc%i_proc%i.dat",
+                  d_doc,my_rank);
+                 some_file.open(filename);
+                 unsigned n=nshared_node(d_doc);
+                 for (unsigned j=0;j<n;j++)
                   {
-                   some_file << nod_pt->x(i) << " ";
+                   Node* nod_pt=shared_node_pt(d_doc,j);
+                   unsigned nd=nod_pt->ndim();
+                   for (unsigned i=0;i<nd;i++)
+                    {
+                     some_file << nod_pt->x(i) << " ";
+                    }
+                   some_file << "\n";
                   }
-                 some_file << "\n";
-                }
-               some_file.close();
+                 some_file.close();
+                 
+                 
+                 sprintf(
+                  filename,
+                  "sync_hanging_node_crash_halo_nodes_with_proc%i_proc%i.dat",
+                  d_doc,my_rank);
+                 some_file.open(filename);
+                 n=nhalo_node(d_doc);
+                 for (unsigned j=0;j<n;j++)
+                  {
+                   Node* nod_pt=halo_node_pt(d_doc,j);
+                   unsigned nd=nod_pt->ndim();
+                   for (unsigned i=0;i<nd;i++)
+                    {
+                     some_file << nod_pt->x(i) << " ";
+                    }
+                   some_file << "\n";
+                  }
+                 some_file.close();
+                 
+                 
+                 sprintf(
+                  filename,
+                  "sync_hanging_node_crash_haloed_nodes_with_proc%i_proc%i.dat",
+                  d_doc,my_rank);
+                 some_file.open(filename);
+                 n=nhaloed_node(d_doc);
+                 for (unsigned j=0;j<n;j++)
+                  {
+                   Node* nod_pt=haloed_node_pt(d_doc,j);
+                   unsigned nd=nod_pt->ndim();
+                   for (unsigned i=0;i<nd;i++)
+                    {
+                     some_file << nod_pt->x(i) << " ";
+                    }
+                   some_file << "\n";
+                  }
+                 some_file.close();
+                 
+                } // end of loop over all inter-processor lookup schemes
                
                std::ostringstream error_stream;
-               n=master_nod_pt->ndim();
+               unsigned n=master_nod_pt->ndim();
                error_stream  << "Error: Master node at:\n\n";
                for (unsigned i=0;i<n;i++)
                 {
@@ -3164,6 +3232,9 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
                error_stream   << "\n\nnot found for icont="
                               << icont << "in  " 
                               << "shared node storage with proc " << d << "\n"
+                              << "or in shared node storage with proc " 
+                              << non_halo_proc_id 
+                              << " which is where its non-halo counterpart lives.\n"
                               << "Relevant files: sync_hanging_node_crash*.dat\n\n" 
                               << "Hanging node itself: \n\n";
                n=nod_pt->ndim();
@@ -3171,6 +3242,7 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
                 {
                  error_stream << nod_pt->x(i) << " ";
                 }
+               error_stream << nod_pt->non_halo_proc_ID();
                error_stream << "\n\nMaster nodes:\n\n";
                for (unsigned m=0; m<nhd_master; m++)
                 {
@@ -3180,6 +3252,7 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
                   {
                    error_stream << master_nod_pt->x(i) << " ";
                   }
+                 error_stream << master_nod_pt->non_halo_proc_ID();
                  error_stream << "\n";
                 }
                
@@ -3432,301 +3505,324 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
  // processor to that with the current processor
  unsigned n=hang_info.size();
 
- // Storage for the translated entries (in order) for/from
- // other processors
- Vector<Vector<unsigned> > translated_entry(n_proc);
-  
- // Storage for how-many-th entry in this processor's 
- // hang_info vector will be completed by processor rank.
- Vector<Vector<unsigned> > hang_info_index_for_proc(n_proc);
 
- // Send information to intermediate processor that holds
- // non-halo version of missing master node
+
+ // Is there anything to do be done?
+ unsigned global_n=0;
+ MPI_Allreduce(&n,&global_n,1,MPI_UNSIGNED,MPI_MAX,
+               MPI_Helpers::communicator_pt()->mpi_comm());
+ if (global_n==0)
+  {
+   oomph_info 
+    << "No need for reconciliation of wrongly synchronised hang nodes\n";
+  }
+ // Reconcilation required
+ else  
  {
-  // Storage for number of data to be sent to each processor
-  Vector<int> send_n(n_proc,0);
-  
-  // Storage for all values to be sent to all processors
-  Vector<unsigned> send_data;
-  
-  // Start location within send_data for data to be sent to each processor 
-  Vector<int> send_displacement(n_proc,0);
-  
-  // Loop over all processors
-  for(int rank=0;rank<n_proc;rank++)
-   {  
-    //Set the offset for the current processor
-    send_displacement[rank] = send_data.size();
+
+   oomph_info 
+    << "Need to reconcile of wrongly syncronised hang nodes\n";
+
+   // Storage for the translated entries (in order) for/from
+   // other processors
+   Vector<Vector<unsigned> > translated_entry(n_proc);
+   
+   // Storage for how-many-th entry in this processor's 
+   // hang_info vector will be completed by processor rank.
+   Vector<Vector<unsigned> > hang_info_index_for_proc(n_proc);
+   
+   // Send information to intermediate processor that holds
+   // non-halo version of missing master node
+   {
+    // Storage for number of data to be sent to each processor
+    Vector<int> send_n(n_proc,0);
     
-    //Don't bother to do anything if the processor in the loop is the 
-    //current processor
-    if(rank!=my_rank)
-     {
+    // Storage for all values to be sent to all processors
+    Vector<unsigned> send_data;
+    
+    // Start location within send_data for data to be sent to each processor 
+    Vector<int> send_displacement(n_proc,0);
+    
+    // Loop over all processors
+    for(int rank=0;rank<n_proc;rank++)
+     {  
+      //Set the offset for the current processor
+      send_displacement[rank] = send_data.size();
       
-      // Search through the (typically few) entries
-      // in hang info vector to find the ones that
-      // must be sent to proc rank (the proc that holds
-      // the non-halo version of the "missing" master node
-      for (unsigned i=0;i<n;i++)
+      //Don't bother to do anything if the processor in the loop is the 
+      //current processor
+      if(rank!=my_rank)
        {
-        HangHelperStruct tmp=hang_info[i];
-        if (tmp.Shared_node_proc==unsigned(rank))
+        
+        // Search through the (typically few) entries
+        // in hang info vector to find the ones that
+        // must be sent to proc rank (the proc that holds
+        // the non-halo version of the "missing" master node
+        for (unsigned i=0;i<n;i++)
          {
-          // Add the sending processor
-          send_data.push_back(tmp.Sending_processor);
+          HangHelperStruct tmp=hang_info[i];
+          if (tmp.Shared_node_proc==unsigned(rank))
+           {
+            // Add the sending processor
+            send_data.push_back(tmp.Sending_processor);
+            
+            // Add the index of the missing master node
+            // in the shared node lookup scheme between
+            // sending processor and processor rank
+            send_data.push_back(tmp.Shared_node_id_on_sending_processor);
+            
+            // Record the how-many-th entry in this processor's 
+            // hang_info vector will be completed by processor rank.
+            hang_info_index_for_proc[rank].push_back(i);
+           }
+         }
+       }
+      
+      //Find the number of data added to the vector
+      send_n[rank] = send_data.size() - send_displacement[rank];
+     }
+    
+    
+    //Storage for the number of data to be received from each processor
+    Vector<int> receive_n(n_proc,0);
+    
+    //Now send numbers of data to be sent between all processors
+    MPI_Alltoall(&send_n[0],1,MPI_INT,&receive_n[0],1,MPI_INT,
+                 comm_pt->mpi_comm());
+    
+    //We now prepare the data to be received
+    //by working out the displacements from the received data
+    Vector<int> receive_displacement(n_proc,0);
+    int receive_data_count=0;
+    for(int rank=0;rank<n_proc;++rank)
+     {
+      //Displacement is number of data received so far
+      receive_displacement[rank] = receive_data_count;
+      receive_data_count += receive_n[rank];
+     }
+    
+    //Now resize the receive buffer for all data from all processors
+    //Make sure that it has a size of at least one
+    if(receive_data_count==0) {++receive_data_count;}
+    Vector<unsigned> receive_data(receive_data_count);
+    
+    //Make sure that the send buffer has size at least one
+    //so that we don't get a segmentation fault
+    if(send_data.size()==0) {send_data.resize(1);}
+    
+    //Now send the data between all the processors
+    MPI_Alltoallv(&send_data[0],&send_n[0],&send_displacement[0],
+                  MPI_UNSIGNED,
+                  &receive_data[0],&receive_n[0],
+                  &receive_displacement[0],
+                  MPI_UNSIGNED,
+                  comm_pt->mpi_comm());
+    
+    //Now use the received data to update the halo nodes
+    for (int send_rank=0;send_rank<n_proc;send_rank++)
+     {
+      //Don't bother to do anything for the processor corresponding to the
+      //current processor or if no data were received from this processor
+      if((send_rank != my_rank) && (receive_n[send_rank] != 0))
+       {
+        //Counter for the data within the large array
+        unsigned count=receive_displacement[send_rank];
+        
+        // We're reading two numbers per missing halo node
+        unsigned n_rec=unsigned(receive_n[send_rank]);
+        for (unsigned i=0;i<n_rec/2;i++)
+         {
           
-          // Add the index of the missing master node
+          // Receive orig sending proc
+          unsigned orig_sending_proc=receive_data[count];
+          count++;
+          
+          // Receive the index of the missing master node
           // in the shared node lookup scheme between
-          // sending processor and processor rank
-          send_data.push_back(tmp.Shared_node_id_on_sending_processor);
-
-          // Record the how-many-th entry in this processor's 
-          // hang_info vector will be completed by processor rank.
-          hang_info_index_for_proc[rank].push_back(i);
+          // orig sending processor and current processor
+          unsigned shared_node_id_on_orig_sending_proc=
+           receive_data[count];
+          count++;
+          
+          // Extract node from shared node lookup scheme
+          Node* master_nod_pt=
+           shared_node_pt(orig_sending_proc,
+                          shared_node_id_on_orig_sending_proc);
+          
+          // Now find it in shared halo scheme with the processor
+          // that's sent the request
+          
+          std::map<Node*,unsigned>::iterator it=
+           shared_node_map[send_rank].find(master_nod_pt); 
+          
+          // If it's not in there iterator points to end of
+          // set
+          if (it!=shared_node_map[send_rank].end())
+           {          
+            // Store it so we can send it back
+            translated_entry[send_rank].push_back((*it).second);
+           }
+          else
+           {
+            std::ostringstream error_stream;
+            error_stream
+             << "Received translation query for shared node"
+             << " entry " << shared_node_id_on_orig_sending_proc 
+             << " with processor " << orig_sending_proc 
+             << " from proc " << send_rank << std::endl
+             << "but did not find node in shared node scheme with proc "
+             << send_rank << std::endl;
+            throw OomphLibError(
+             error_stream.str(),
+             "TreeBasedRefineableMeshBase::synchronise_hanging_nodes(...)",
+             OOMPH_EXCEPTION_LOCATION);
+           }
+          
          }
+        
        }
-     }
+     } //End of data is received
     
-    //Find the number of data added to the vector
-    send_n[rank] = send_data.size() - send_displacement[rank];
-   }
-  
-  
-  //Storage for the number of data to be received from each processor
-  Vector<int> receive_n(n_proc,0);
-  
-  //Now send numbers of data to be sent between all processors
-  MPI_Alltoall(&send_n[0],1,MPI_INT,&receive_n[0],1,MPI_INT,
-               comm_pt->mpi_comm());
-  
-  //We now prepare the data to be received
-  //by working out the displacements from the received data
-  Vector<int> receive_displacement(n_proc,0);
-  int receive_data_count=0;
-  for(int rank=0;rank<n_proc;++rank)
+   }   // end of sending stuff to intermediate processor that holds
+       // non halo version of missing master node
+   
+   
+   if (Global_timings::Doc_comprehensive_timings)
+    {
+     t_end = TimingHelpers::timer();
+     oomph_info << "Time for third all-to-all in synchronise_hanging_nodes() " 
+                << t_end-t_start << std::endl;
+     t_start = TimingHelpers::timer();
+    }  
+   
+   
+   
+   // Send information back to processor that needs to identify
+   // missing master node via shared node lookup scheme with
+   // this processor
    {
-    //Displacement is number of data received so far
-    receive_displacement[rank] = receive_data_count;
-    receive_data_count += receive_n[rank];
-   }
-  
-  //Now resize the receive buffer for all data from all processors
-  //Make sure that it has a size of at least one
-  if(receive_data_count==0) {++receive_data_count;}
-  Vector<unsigned> receive_data(receive_data_count);
-  
-  //Make sure that the send buffer has size at least one
-  //so that we don't get a segmentation fault
-  if(send_data.size()==0) {send_data.resize(1);}
-  
-  //Now send the data between all the processors
-  MPI_Alltoallv(&send_data[0],&send_n[0],&send_displacement[0],
-                MPI_UNSIGNED,
-                &receive_data[0],&receive_n[0],
-                &receive_displacement[0],
-                MPI_UNSIGNED,
-                comm_pt->mpi_comm());
-  
-  //Now use the received data to update the halo nodes
-  for (int send_rank=0;send_rank<n_proc;send_rank++)
-   {
-    //Don't bother to do anything for the processor corresponding to the
-    //current processor or if no data were received from this processor
-    if((send_rank != my_rank) && (receive_n[send_rank] != 0))
-     {
-      //Counter for the data within the large array
-      unsigned count=receive_displacement[send_rank];
+    // Storage for number of data to be sent to each processor
+    Vector<int> send_n(n_proc,0);
+    
+    // Storage for all values to be sent to all processors
+    Vector<unsigned> send_data;
+    
+    // Start location within send_data for data to be sent to each processor 
+    Vector<int> send_displacement(n_proc,0);
+    
+    // Loop over all processors
+    for(int rank=0;rank<n_proc;rank++)
+     {  
+      //Set the offset for the current processor
+      send_displacement[rank] = send_data.size();
       
-      // We're reading two numbers per missing halo node
-      unsigned n_rec=unsigned(receive_n[send_rank]);
-      for (unsigned i=0;i<n_rec/2;i++)
+      //Don't bother to do anything if the processor in the loop is the 
+      //current processor
+      if(rank!=my_rank)
        {
-        
-        // Receive orig sending proc
-        unsigned orig_sending_proc=receive_data[count];
-        count++;
-        
-        // Receive the index of the missing master node
-        // in the shared node lookup scheme between
-        // orig sending processor and current processor
-        unsigned shared_node_id_on_orig_sending_proc=
-         receive_data[count];
-        count++;
-        
-        // Extract node from shared node lookup scheme
-        Node* master_nod_pt=
-         shared_node_pt(orig_sending_proc,
-                        shared_node_id_on_orig_sending_proc);
-        
-        // Now find it in shared halo scheme with the processor
-        // that's sent the request
-        
-        std::map<Node*,unsigned>::iterator it=
-         shared_node_map[send_rank].find(master_nod_pt); 
-        
-        // If it's not in there iterator points to end of
-        // set
-        if (it!=shared_node_map[send_rank].end())
-         {          
-          // Store it so we can send it back
-          translated_entry[send_rank].push_back((*it).second);
-         }
-        else
+        // Put the translated entries for processor rank into
+        // send data
+        unsigned n=translated_entry[rank].size();
+        for (unsigned j=0;j<n;j++)
          {
-          std::ostringstream error_stream;
-          error_stream
-           << "Received translation query for shared node"
-           << " entry " << shared_node_id_on_orig_sending_proc 
-           << " with processor " << orig_sending_proc 
-           << " from proc " << send_rank << std::endl
-           << "but did not find node in shared node scheme with proc "
-           << send_rank << std::endl;
-          throw OomphLibError(
-           error_stream.str(),
-           "TreeBasedRefineableMeshBase::synchronise_hanging_nodes(...)",
-           OOMPH_EXCEPTION_LOCATION);
+          send_data.push_back(translated_entry[rank][j]);
+         }
+       }
+      
+      //Find the number of data added to the vector
+      send_n[rank] = send_data.size() - send_displacement[rank];
+     }
+    
+    
+    //Storage for the number of data to be received from each processor
+    Vector<int> receive_n(n_proc,0);
+    
+    //Now send numbers of data to be sent between all processors
+    MPI_Alltoall(&send_n[0],1,MPI_INT,&receive_n[0],1,MPI_INT,
+                 comm_pt->mpi_comm());
+    
+    //We now prepare the data to be received
+    //by working out the displacements from the received data
+    Vector<int> receive_displacement(n_proc,0);
+    int receive_data_count=0;
+    for(int rank=0;rank<n_proc;++rank)
+     {
+      //Displacement is number of data received so far
+      receive_displacement[rank] = receive_data_count;
+      receive_data_count += receive_n[rank];
+     }
+    
+    //Now resize the receive buffer for all data from all processors
+    //Make sure that it has a size of at least one
+    if(receive_data_count==0) {++receive_data_count;}
+    Vector<unsigned> receive_data(receive_data_count);
+    
+    //Make sure that the send buffer has size at least one
+    //so that we don't get a segmentation fault
+    if(send_data.size()==0) {send_data.resize(1);}
+    
+    //Now send the data between all the processors
+    MPI_Alltoallv(&send_data[0],&send_n[0],&send_displacement[0],
+                  MPI_UNSIGNED,
+                  &receive_data[0],&receive_n[0],
+                  &receive_displacement[0],
+                  MPI_UNSIGNED,
+                  comm_pt->mpi_comm());
+    
+    //Now use the received data to update the halo nodes
+    for (int send_rank=0;send_rank<n_proc;send_rank++)
+     {
+      //Don't bother to do anything for the processor corresponding to the
+      //current processor or if no data were received from this processor
+      if((send_rank != my_rank) && (receive_n[send_rank] != 0))
+       {
+        //Counter for the data within the large array
+        unsigned count=receive_displacement[send_rank];
+        
+        // We're reading one number per missing halo node
+        unsigned n_rec=unsigned(receive_n[send_rank]);
+        for (unsigned i=0;i<n_rec;i++)
+         {
+          // Index of missing master node in shared node lookup scheme
+          // with processor send_rank:
+          unsigned index=receive_data[count];
+          count++;
+          
+          // Extract node from shared node lookup scheme
+          Node* master_nod_pt=
+           shared_node_pt(send_rank,index);
+          
+          // Recall information associated with that missing master
+          unsigned hang_info_index=hang_info_index_for_proc[send_rank][i];
+          HangHelperStruct tmp=hang_info[hang_info_index];
+          
+          // Set as a master node (with corresponding weight)
+          tmp.Hang_pt->set_master_node_pt(tmp.Master_node_index,
+                                          master_nod_pt,tmp.Weight);
          }
         
        }
-      
-     }
-   } //End of data is received
-  
- }   // end of sending stuff to intermediate processor that holds
- //     non halo version of missing master node
-
- 
-
- if (Global_timings::Doc_comprehensive_timings)
-  {
-   t_end = TimingHelpers::timer();
-   oomph_info << "Time for third all-to-all in synchronise_hanging_nodes() " 
-              << t_end-t_start << std::endl;
-   t_start = TimingHelpers::timer();
-  }  
- 
-
-
- // Send information back to processor that needs to identify
- // missing master node via shared node lookup scheme with
- // this processor
- {
-  // Storage for number of data to be sent to each processor
-  Vector<int> send_n(n_proc,0);
-  
-  // Storage for all values to be sent to all processors
-  Vector<unsigned> send_data;
-  
-  // Start location within send_data for data to be sent to each processor 
-  Vector<int> send_displacement(n_proc,0);
-  
-  // Loop over all processors
-  for(int rank=0;rank<n_proc;rank++)
-   {  
-    //Set the offset for the current processor
-    send_displacement[rank] = send_data.size();
+     } //End of data is received
     
-    //Don't bother to do anything if the processor in the loop is the 
-    //current processor
-    if(rank!=my_rank)
-     {
-      // Put the translated entries for processor rank into
-      // send data
-      unsigned n=translated_entry[rank].size();
-      for (unsigned j=0;j<n;j++)
-       {
-        send_data.push_back(translated_entry[rank][j]);
-       }
-     }
-    
-    //Find the number of data added to the vector
-    send_n[rank] = send_data.size() - send_displacement[rank];
-   }
-  
-  
-  //Storage for the number of data to be received from each processor
-  Vector<int> receive_n(n_proc,0);
-  
-  //Now send numbers of data to be sent between all processors
-  MPI_Alltoall(&send_n[0],1,MPI_INT,&receive_n[0],1,MPI_INT,
-               comm_pt->mpi_comm());
-  
-  //We now prepare the data to be received
-  //by working out the displacements from the received data
-  Vector<int> receive_displacement(n_proc,0);
-  int receive_data_count=0;
-  for(int rank=0;rank<n_proc;++rank)
-   {
-    //Displacement is number of data received so far
-    receive_displacement[rank] = receive_data_count;
-    receive_data_count += receive_n[rank];
-   }
-  
-  //Now resize the receive buffer for all data from all processors
-  //Make sure that it has a size of at least one
-  if(receive_data_count==0) {++receive_data_count;}
-  Vector<unsigned> receive_data(receive_data_count);
-  
-  //Make sure that the send buffer has size at least one
-  //so that we don't get a segmentation fault
-  if(send_data.size()==0) {send_data.resize(1);}
-  
-  //Now send the data between all the processors
-  MPI_Alltoallv(&send_data[0],&send_n[0],&send_displacement[0],
-                MPI_UNSIGNED,
-                &receive_data[0],&receive_n[0],
-                &receive_displacement[0],
-                MPI_UNSIGNED,
-                comm_pt->mpi_comm());
-  
-  //Now use the received data to update the halo nodes
-  for (int send_rank=0;send_rank<n_proc;send_rank++)
-   {
-    //Don't bother to do anything for the processor corresponding to the
-    //current processor or if no data were received from this processor
-    if((send_rank != my_rank) && (receive_n[send_rank] != 0))
-     {
-      //Counter for the data within the large array
-      unsigned count=receive_displacement[send_rank];
+   } // end of completing hang info for missing master nodes
+   
+   
+   if (Global_timings::Doc_comprehensive_timings)
+    {
+     t_end = TimingHelpers::timer();
+     oomph_info 
+      << "Time for fourth all-to-all in synchronise_hanging_nodes() " 
+      << t_end-t_start << std::endl;
+    }  
+  } // end  of reconciliation required
 
-      // We're reading one number per missing halo node
-      unsigned n_rec=unsigned(receive_n[send_rank]);
-      for (unsigned i=0;i<n_rec;i++)
-       {
-        // Index of missing master node in shared node lookup scheme
-        // with processor send_rank:
-        unsigned index=receive_data[count];
-        count++;
-
-        // Extract node from shared node lookup scheme
-        Node* master_nod_pt=
-         shared_node_pt(send_rank,index);
-        
-        // Recall information associated with that missing master
-        unsigned hang_info_index=hang_info_index_for_proc[send_rank][i];
-        HangHelperStruct tmp=hang_info[hang_info_index];
-        
-        // Set as a master node (with corresponding weight)
-        tmp.Hang_pt->set_master_node_pt(tmp.Master_node_index,
-                                        master_nod_pt,tmp.Weight);
-       }
-      
-     }
-   } //End of data is received
-  
- } // end of completing hang info for missing master nodes
- 
-
- if (Global_timings::Doc_comprehensive_timings)
-  {
-   t_end = TimingHelpers::timer();
-   oomph_info << "Time for fourth all-to-all in synchronise_hanging_nodes() " 
-              << t_end-t_start << std::endl;
-  }  
 
 #ifdef PARANOID
+
+ // hierher This is from Ben -- may need another look
+
  //Check to see if we were supposed to die by now
- if(about_to_crash_horribly)
+ if (about_to_crash_horribly)
   {
    //Do error
    std::ostringstream error_stream;
@@ -3744,6 +3840,7 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
   }
 #endif
  
+
 }
 
 #endif

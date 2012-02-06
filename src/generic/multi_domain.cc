@@ -195,7 +195,7 @@ namespace Multi_domain_functions
   /// \short Boolean to indicate if we're allowed to use halo elements
   /// as external elements. Can drastically reduce the number of
   /// external halo elements -- currently not aware of any problems
-  /// therefore set to true by default [hierher check] but retention
+  /// therefore set to true by default but retention
   /// of this flag allows easy return to previous implementation.
   bool Allow_use_of_halo_elements_as_external_elements=true;
 
@@ -313,7 +313,7 @@ namespace Multi_domain_functions
    // Send the double values associated with external halos
    //------------------------------------------------------
    unsigned send_count_double_values=Flat_packed_doubles.size(); 
-   MPI_Isend(&send_count_double_values,1,MPI_INT,
+   MPI_Isend(&send_count_double_values,1,MPI_UNSIGNED,
             orig_send_proc,1,comm_pt->mpi_comm(),&request);
    int receive_count_double_values=0;
    MPI_Recv(&receive_count_double_values,1,MPI_INT,
@@ -339,7 +339,7 @@ namespace Multi_domain_functions
    // Now send unsigned values associated with external halos
    //---------------------------------------------------------
    unsigned send_count_unsigned_values=Flat_packed_unsigneds.size(); 
-   MPI_Isend(&send_count_unsigned_values,1,MPI_INT,
+   MPI_Isend(&send_count_unsigned_values,1,MPI_UNSIGNED,
             orig_send_proc,14,comm_pt->mpi_comm(),&request);
 
    int receive_count_unsigned_values=0;
@@ -350,7 +350,7 @@ namespace Multi_domain_functions
 
    if (send_count_unsigned_values!=0)
     {     
-     MPI_Isend(&Flat_packed_unsigneds[0],send_count_unsigned_values,MPI_INT,
+     MPI_Isend(&Flat_packed_unsigneds[0],send_count_unsigned_values,MPI_UNSIGNED,
                orig_send_proc,15,comm_pt->mpi_comm(),&request);
 #ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
      for (unsigned i=0;i<send_count_unsigned_values;i++)
@@ -365,7 +365,7 @@ namespace Multi_domain_functions
     {
      received_unsigned_values.resize(receive_count_unsigned_values);
      MPI_Recv(&received_unsigned_values[0],receive_count_unsigned_values,
-              MPI_INT,orig_recv_proc,15,comm_pt->mpi_comm(),&status);
+              MPI_UNSIGNED,orig_recv_proc,15,comm_pt->mpi_comm(),&status);
     }
 
    if (send_count_unsigned_values!=0)
@@ -385,7 +385,7 @@ namespace Multi_domain_functions
    
    if (send_count!=0)
     {
-     MPI_Isend(&Located_element_status[0],send_count,MPI_INT,
+     MPI_Isend(&Located_element_status[0],send_count,MPI_UNSIGNED,
                orig_send_proc,3,comm_pt->mpi_comm(),&request);
     }
    
@@ -393,7 +393,7 @@ namespace Multi_domain_functions
     {
      received_located_element_status.resize(receive_count);
      MPI_Recv(&received_located_element_status[0],receive_count,
-              MPI_INT,orig_recv_proc,3,
+              MPI_UNSIGNED,orig_recv_proc,3,
               comm_pt->mpi_comm(),&status);
     }
    if (send_count!=0)
@@ -424,10 +424,10 @@ namespace Multi_domain_functions
    // And finally the Flat_packed_located_coordinates array
    //------------------------------------------------------
    unsigned send_count_located_coord=Flat_packed_located_coordinates.size();
-   MPI_Isend(&send_count_located_coord,1,MPI_INT,
+   MPI_Isend(&send_count_located_coord,1,MPI_UNSIGNED,
             orig_send_proc,4,comm_pt->mpi_comm(),&request);
-   int receive_count_located_coord=0;
-   MPI_Recv(&receive_count_located_coord,1,MPI_INT,orig_recv_proc,4,
+   unsigned receive_count_located_coord=0;
+   MPI_Recv(&receive_count_located_coord,1,MPI_UNSIGNED,orig_recv_proc,4,
             comm_pt->mpi_comm(),&status);
    MPI_Wait(&request,MPI_STATUS_IGNORE);
 
@@ -2170,12 +2170,12 @@ namespace Multi_domain_functions
    if (n_proc > 1)
     {
      unsigned mesh_dim_reduce;
-     MPI_Allreduce(&mesh_dim,&mesh_dim_reduce,1,MPI_INT,
+     MPI_Allreduce(&mesh_dim,&mesh_dim_reduce,1,MPI_UNSIGNED,
                    MPI_MAX,comm_pt->mpi_comm());
      mesh_dim=mesh_dim_reduce;
 
      unsigned external_mesh_dim_reduce;
-     MPI_Allreduce(&external_mesh_dim,&external_mesh_dim_reduce,1,MPI_INT,
+     MPI_Allreduce(&external_mesh_dim,&external_mesh_dim_reduce,1,MPI_UNSIGNED,
                    MPI_MAX,comm_pt->mpi_comm());
      external_mesh_dim=external_mesh_dim_reduce;
     }

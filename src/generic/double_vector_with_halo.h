@@ -62,7 +62,7 @@ class DoubleVectorHaloScheme
 
  /// \short The haloed entries that will be sent in a format compatible
  /// with MPI_Alltoallv i.e. (send_to_proc0,send_to_proc1 ... send_to_procn)
- Vector<unsigned> Haloed_eqns;
+ Vector<int> Haloed_eqns;
 
  /// \short Storage for the number of haloed entries to be sent to each
  /// processor

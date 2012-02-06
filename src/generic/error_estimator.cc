@@ -778,10 +778,10 @@ void Z2ErrorEstimator::get_element_errors(OomphCommunicator* comm_pt,
   // if the mesh has been distributed
   if (mesh_pt->is_mesh_distributed())
    {
-    MPI_Allreduce(&num_flux_terms_local,&num_flux_terms,1,MPI_INT,
+    MPI_Allreduce(&num_flux_terms_local,&num_flux_terms,1,MPI_UNSIGNED,
                   MPI_MAX,comm_pt->mpi_comm());
     MPI_Allreduce(&dim_local,&dim,1,MPI_INT,MPI_MAX,comm_pt->mpi_comm());
-    MPI_Allreduce(&recovery_order_local,&recovery_order,1,MPI_INT,
+    MPI_Allreduce(&recovery_order_local,&recovery_order,1,MPI_UNSIGNED,
                   MPI_MAX,comm_pt->mpi_comm());
    }
   else

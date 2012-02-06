@@ -472,7 +472,15 @@ void Data::read(std::ifstream& restart_file)
         {
          error_stream << nod_pt->x(i) << " ";
         }
-       error_stream << nod_pt << std::endl;
+       error_stream << nod_pt << " "; 
+       if (nod_pt->is_halo())
+        {
+         error_stream << " (halo)\n";
+        }
+       else
+        {
+         error_stream << " (not halo)\n";
+        }
       }
      throw OomphLibError(error_stream.str(),
                          "Data::read()",
@@ -1618,7 +1626,7 @@ void Node::read(std::ifstream& restart_file)
     {
      // Read line
      getline(restart_file,input_string);
-     
+
      // Transform to double
      X_position[j][t] = atof(input_string.c_str());
     }

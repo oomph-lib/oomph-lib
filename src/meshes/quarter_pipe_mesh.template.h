@@ -240,11 +240,30 @@ public:
       ELEMENT* ref_el_pt=dynamic_cast<ELEMENT*>(el_pt);
       OcTreeRoot* octree_root_pt=new OcTreeRoot(ref_el_pt);
       trees_pt.push_back(octree_root_pt);
-     }
-    
+     }    
     this->Forest_pt = new OcTreeForest(trees_pt);
+    
+    // Loop over all elements and set the undeformed macro element pointer
+    unsigned n_element=this->nelement();
+    for (unsigned e=0;e<n_element;e++)
+     {
+      // Get pointer to full element type
+      ELEMENT* el_pt=dynamic_cast<ELEMENT*>(this->element_pt(e));
+      
+      // Set pointer to macro element so the curvlinear boundaries
+      // of the undeformed mesh/domain get picked up during adaptive
+      // mesh refinement
+      el_pt->set_undeformed_macro_elem_pt(this->
+                                          Domain_pt->macro_element_pt(e));
+      
+      // Use MacroElement representation for
+      // Lagrangian coordinates of newly created
+      // nodes
+      el_pt->enable_use_of_undeformed_macro_element_for_new_lagrangian_coords();
+     }
+
+
    }
-  
 };
 
 

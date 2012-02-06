@@ -208,7 +208,7 @@ namespace Multi_domain_functions
   /// \short Boolean to indicate if we're allowed to use halo elements
   /// as external elements. Can drastically reduce the number of
   /// external halo elements -- currently not aware of any problems
-  /// therefore set to true by default [hierher check] but retention
+  /// therefore set to true by default but retention
   /// of this flag allows easy return to previous implementation.
   extern bool Allow_use_of_halo_elements_as_external_elements;
 
