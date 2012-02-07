@@ -376,10 +376,6 @@ class TrilinosAztecOOSolver : public IterativeLinearSolver
    delete AztecOO_solver_pt;
    AztecOO_solver_pt = 0;
 
-   // delete the matrices
-   delete Epetra_matrix_pt;
-   Epetra_matrix_pt = 0;
-
    // delete the Epetra_Operator preconditioner (only if it is a wrapper to an 
    // oomphlib preconditioner in which case only the wrapper is deleted and 
    // not the actual preconditioner).
@@ -400,6 +396,14 @@ class TrilinosAztecOOSolver : public IterativeLinearSolver
     {
      this->preconditioner_pt()->clean_up_memory();
     }
+
+
+   // delete the matrices
+   // This must now happen after the preconditioner delete because the 
+   // ML preconditioner (and maybe others) use the communicator from the
+   // matrix in the destructor
+   delete Epetra_matrix_pt;
+   Epetra_matrix_pt = 0;
   }
 
  /// \short Function which uses problem_pt's get_jacobian(...) function to

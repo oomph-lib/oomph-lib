@@ -19,5 +19,8 @@ for file in `echo $file_list`; do
 done
 cd ../../..
 
-make 
-make install
+#Otherwise it's Trilinos 10+
+else
+
+ mkdir -p build
+ cd build

@@ -125,7 +125,7 @@ namespace oomph
    //Prepare the data to be sent
    //Always resize to at least one
    if(send_data_count==0) {++send_data_count;}
-   Vector<int> send_data(send_data_count);
+   Vector<unsigned> send_data(send_data_count);
    //Iterate over the entries in the map
    unsigned count=0;
    for(std::map<unsigned,Vector<unsigned> >::iterator it
@@ -135,7 +135,7 @@ namespace oomph
     for(Vector<unsigned>::iterator it2 = it->second.begin();
         it2 != it->second.end();++it2)
      {
-      send_data[count] = static_cast<int>(*it2);
+      send_data[count] = (*it2);
       ++count;
      }
    }
@@ -157,10 +157,10 @@ namespace oomph
    Haloed_eqns.resize(receive_data_count);
    //Send the data between all the processors
    MPI_Alltoallv(&send_data[0],&send_n[0],&send_displacement[0],
-                 MPI_INT,
+                 MPI_UNSIGNED,
                  &Haloed_eqns[0],&Haloed_n[0],
                  &Haloed_displacement[0],
-                 MPI_INT,
+                 MPI_UNSIGNED,
                  dist_pt->communicator_pt()->mpi_comm());
    
    //Finally, we translate the map of halo entries into the permanent 

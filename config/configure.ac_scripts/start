@@ -432,6 +432,8 @@ fi
 AM_CONDITIONAL(COMPARE_AGAINST_VALIDATA, test x$compare_against_validata = xtrue)
 
 
+
+
 # Do we have the sources for the HSL frontal solver in external_src?
 #-------------------------------------------------------------------
 AC_CHECK_FILES(external_src/oomph_hsl/frontal.f,
@@ -1164,6 +1166,27 @@ AC_SUBST(HYPRE_INCLUDE)
 
 
 
+# Do we have cmake installed?
+#-----------------------------
+AC_CHECK_PROG(have_cmake,cmake,true,false)
+if test x$have_cmake = xfalse; then \
+  echo " "; \
+  echo "================================================================="; \
+  echo "Cannot find cmake on your system"; \
+  echo "---> Will not be able to build Trilinos > 9 "; \
+  echo "If you want to build Trilinos 10 or higher "; \
+  echo "please get your system administrator to install cmake for you. "; \
+  echo " "; \
+  echo "=================================================================="; \
+  echo " "; \
+else \
+  echo "Congratulations! I have located cmake."; \
+fi
+AM_CONDITIONAL(HAVE_CMAKE, test x$have_cmake = xtrue)
+
+
+
+
 #---------------------------------------------------
 # Potential location of the TRILINOS libraries.
 #
@@ -1239,15 +1262,17 @@ else \
 
     # Will trilinos library be built?
     #--------------------------------
-    AC_CHECK_FILES(external_distributions/trilinos/trilinos-9.0.2.tar.gz,
-                   echo "Found trilinos-9.0.2.tar.gz --> will build trilinos library"; will_have_trilinos=true, 
-                  echo "Not found trilinos-9.0.2.tar.gz --> will not build trilinos library"; will_have_trilinos=false)
+will_have_trilinos=false;
+    AC_CHECK_FILES([external_distributions/trilinos/trilinos-9.0.2.tar.gz  external_distributions/trilinos/trilinos-10.8.5-Source.tar.gz], will_have_trilinos=true, )
     
    if test x$will_have_trilinos = xtrue; then \
+    echo "Trilinos distribution .tar.gz file found ... will build trilinos"; \
     have_trilinos=true; \
     TRILINOS_DIR="`pwd`/external_distributions/trilinos/trilinos_default_installation"
     TRILINOS_LIB="`pwd`/external_distributions/trilinos/trilinos_default_installation/lib"
     TRILINOS_INCLUDE="`pwd`/external_distributions/trilinos/trilinos_default_installation/include"
+   else
+    echo "Trilinos distribution .tar.gz file not found ... can't build trilinos";
    fi;
 
 fi

@@ -231,7 +231,8 @@ cppcon.f  dlapy2.f    ilaver.f  sorgql.f    zhesv.f \
 cppequ.f  dlapy3.f    iparmq.f  sorgqr.f    zhesvx.f \
 cpprfs.f  dlaqgb.f    izmax1.f  sorgr2.f    zhetd2.f \
 cppsv.f   dlaqge.f    lsame.f   sorgrq.f    zhetf2.f \
-cppsvx.f  dlaqp2.f    lsamen.f  sorgtr.f    zhetrd.f 
+cppsvx.f  dlaqp2.f    lsamen.f  sorgtr.f    zhetrd.f \
+clarnd.f  zlarnd.f
 
 
 # Define name of library

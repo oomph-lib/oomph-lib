@@ -1,4 +1,3 @@
-#! /bin/bash
 
 #=====================================================
 # Script to install trilinos from tar file.
@@ -18,16 +17,31 @@ echo "CHECKING IF TRILINOS HAS TO BE INSTALLED"
 echo "========================================="
 echo " " 
 
-# Check if tar file exists
-if [ -e  trilinos-9.0.2.tar.gz ]; then
+#Find any trilinos tarball
+COUNTER=0
+for TRILINOS_FILE in trilinos*.tar.gz
+do
+  #Extract the stem name
+  TRILINOS_STEM=${TRILINOS_FILE%.tar.gz}
+  printf "\n File ${TRILINOS_STEM}.tar.gz exists "
+  let COUNTER=COUNTER+1
+done
 
-   printf "File trilinos-9.0.2.tar.gz exists in directory \n \n   `pwd` \n"
+if [ $COUNTER -eq 0 ]; then
+
+   printf "No trilinos .tar.gz files  found in directory \n \n  `pwd` \n"
+   printf "\n \n --> I am not building trilinos. \n \n \n"
+   exit
+
+elif [ $COUNTER -gt 1 ]; then
+
+   printf "\n Multiple trilinos .tar.gz files found in directory \n \n `pwd`\n"
+   printf "\n I\'m only going to install one of them, so delete the one(s) you don\'t want!\n\n"
+   exit
 
 else
 
-   printf "File trilinos-9.0.2.tar.gz does not exist in directory \n \n    `pwd` \n"
-   printf "\n \n --> I am not building trilinos. \n \n \n"
-   exit
+   printf " in directory \n \n  `pwd` \n"  
 
 fi
 
@@ -37,21 +51,43 @@ if [ -e $INSTALL_DIRECTORY/include ]; then
 
    printf "\n...but trilinos already appears to have been installed \n"
    printf "because the directory  \n\n"
-   printf "      " $INSTALL_DIRECTORY"/include \n\n"
-   printf "already exists. I'm not installing trilinos again.\n\n\n"
+   printf "       ${INSTALL_DIRECTORY}/include \n\n"
+   printf "already exists. I\'m not installing trilinos again.\n\n\n"
    exit
 
 else
 
-  printf "\n\n ---> Installing trilinos in \n\n     " $INSTALL_DIRECTORY " \n\n\n"
+  printf "\n\n ---> Installing trilinos in \n\n ${INSTALL_DIRECTORY}  \n\n\n"
 
 fi
 
+#Find out the major version number
+MAJOR_VERSION=${TRILINOS_STEM#trilinos-}
+MAJOR_VERSION=${MAJOR_VERSION%%.*}
+
+printf "Major version number is ${MAJOR_VERSION} ..."
+if [ ${MAJOR_VERSION} -lt 10 ]; then
+
+ printf " using autotools build machinery\n\n"
+
+else
+
+ printf " using cmake build machinery\n\n"
+
+ if [ ${CMAKE_INSTALLED} -ne 1 ]; then
+  printf " ... but cmake is not installed, so I'm not, sorry\n\n"
+  exit
+ fi
+
+fi
 
 # Unpack trilinos
-tar xvfz trilinos-9.0.2.tar.gz
+tar xvfz ${TRILINOS_STEM}.tar.gz
+#Change into the directory
+cd ${TRILINOS_STEM}
 
-cd trilinos-9.0.2
+#Keep the old commands alive
+if [ ${MAJOR_VERSION} -lt 10 ]; then
 
 
 # Configure it
