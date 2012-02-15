@@ -964,7 +964,7 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
     }
 
 
-
+  
    // Build all elements and store vector of pointers to new nodes
    // (Note: build() checks if the element has been built 
    // already, i.e. if it's not a new element).
@@ -992,7 +992,7 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
                 << t_end-t_start << std::endl;
      t_start = TimingHelpers::timer();
     }
-
+  
    //Close the new nodes files, if it was opened
    if(doc_info.is_doc_enabled()) {new_nodes_file.close();}
 
@@ -1054,9 +1054,15 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
        for(unsigned t=0;t<nt;t++)
         {
          nod_pt->value(t,values);
-         for(unsigned i=0;i<n_value;i++) {nod_pt->set_value(t,i,values[i]);}
+         for(unsigned i=0;i<n_value;i++) 
+          {
+           nod_pt->set_value(t,i,values[i]);
+          }
          nod_pt->position(t,position);
-         for(unsigned i=0;i<n_dim;i++) {nod_pt->x(t,i)=position[i];}
+         for(unsigned i=0;i<n_dim;i++) 
+          {
+           nod_pt->x(t,i)=position[i];
+          }
         }
 
        // If it's an algebraic node: Update its previous nodal positions too
@@ -1181,7 +1187,7 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
                 << t_end-t_start << std::endl;
      t_start = TimingHelpers::timer();
     }
-
+  
    // Cannot delete nodes that are still marked as obsolete
    // because they may still be required to assemble the hanging schemes
    //-------------------------------------------------------------------
@@ -1227,8 +1233,7 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
    // Complete the hanging nodes schemes by dealing with the
    // recursively hanging nodes
    complete_hanging_nodes(ncont_interpolated_values);
-
-
+  
    if (Global_timings::Doc_comprehensive_timings)
     {
      t_end = TimingHelpers::timer();
@@ -1255,7 +1260,7 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
       << t_end-t_start << std::endl;
      t_start = TimingHelpers::timer();
     }
-
+  
 #ifdef PARANOID
  
    // Doc/check the neighbours
@@ -1332,7 +1337,7 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
     }
 
 #endif
-
+  
    //Loop over all elements other than the final level and deactivate the
    //objects, essentially set the pointer that point to nodes that are
    //about to be deleted to NULL. This must take place here because nodes
@@ -1368,7 +1373,7 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
                 << t_end-t_start << std::endl;
      t_start = TimingHelpers::timer();
     }
-
+  
    //Now we can correct the nodes on boundaries that were hanging that
    //are no longer hanging
    //Only bother if we have more than two dimensions
@@ -1510,6 +1515,7 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
       }
     } //End of case when we have fixed nodal positions
 
+  
    // Final doc
    //-----------
    if (doc_info.is_doc_enabled())
@@ -1705,7 +1711,6 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
         }
        some_file.close();
       }
-   
     } //End of documentation
   } // End if (this->nelement()>0)
 
@@ -2274,494 +2279,504 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
  int n_proc=comm_pt->nproc();
  int my_rank=comm_pt->my_rank();
 
-#ifdef PARANOID
- // Paranoid check to see if required masters do actually exist on this
- // processor
- //
- // For 2D meshes of uniform p-order, the constraints at spatially non-
- // conforming element boundaries lead to hanging nodes on the short edges,
- // each with master nodes located on the long edge. In the case of QElements
- // with equally spaced nodes, these master nodes always correspond to nodes
- // shared between both elements. If, however, the nodes are not equally spaced
- // (e.g. in QSpectralElements) then the master nodes are only present in the
- // element corresponding to the long edge. If this element is a neighbour of a
- // halo element which has been deleted from the mesh of a processor then these
- // nodes will not be in the shared storage scheme between processors and
- // therefore the node-synchronisation algorithm below will fail. This paranoid
- // test alerts the user in cases where this problem arises.
+
+// // hierher BENFLAG This needs to be sorted (by Ben!) at some point.
+// // For now comment out because this whole functionality is bypassed
+// // for hp-refineable elements
+
+// #ifdef PARANOID
+//  // Paranoid check to see if required masters do actually exist on this
+//  // processor
+//  //
+//  // For 2D meshes of uniform p-order, the constraints at spatially non-
+//  // conforming element boundaries lead to hanging nodes on the short edges,
+//  // each with master nodes located on the long edge. In the case of QElements
+//  // with equally spaced nodes, these master nodes always correspond to nodes
+//  // shared between both elements. If, however, the nodes are not equally spaced
+//  // (e.g. in QSpectralElements) then the master nodes are only present in the
+//  // element corresponding to the long edge. If this element is a neighbour of a
+//  // halo element which has been deleted from the mesh of a processor then these
+//  // nodes will not be in the shared storage scheme between processors and
+//  // therefore the node-synchronisation algorithm below will fail. This paranoid
+//  // test alerts the user in cases where this problem arises.
  
- //Flag to check if code failed to die as expected
- bool about_to_crash_horribly = false;
+//  //Flag to check if code failed to die as expected
+//  bool about_to_crash_horribly = false;
  
- // Check only for 2D meshes (for now)
- if(finite_element_pt(0)->dim() == 2)
-  {
-   using namespace QuadTreeNames;
+//  // Check only for 2D meshes (for now)
+//  if(finite_element_pt(0)->dim() == 2)
+//   {
+//    using namespace QuadTreeNames;
    
-   //Storage for info about offending elements
-   Vector<unsigned> offending_element_proc(0);
-   Vector<GeneralisedElement*> offending_element_pt(0);
-   Vector<Vector<double> > offending_element_corner(0);
+//    //Storage for info about offending elements
+//    Vector<unsigned> offending_element_proc(0);
+//    Vector<GeneralisedElement*> offending_element_pt(0);
+//    Vector<Vector<double> > offending_element_corner(0);
    
-   //Not a problem for elements with uniformly spaced nodes
-   //Only perform check for meshes with spectral or p-refineable elements
-   if(dynamic_cast<SpectralElement*>(this->element_pt(0)))
-    {
-     //BENFLAG: For spectral elements, master is long edge.
-     //         We therefore check to see if any of the halo elements'
-     //         non-existent neighbours are larger. If this is the case then
-     //         my slave nodes will have master nodes which are not on this
-     //         processor and wich therefore cannot be accessed.
+//    //Not a problem for elements with uniformly spaced nodes
+//    //Only perform check for meshes with spectral or p-refineable elements
+//    if(dynamic_cast<SpectralElement*>(this->element_pt(0)))
+//     {
+//      //BENFLAG: For spectral elements, master is long edge.
+//      //         We therefore check to see if any of the halo elements'
+//      //         non-existent neighbours are larger. If this is the case then
+//      //         my slave nodes will have master nodes which are not on this
+//      //         processor and wich therefore cannot be accessed.
    
-     //Loop over processors
-     for(int d=0; d<n_proc; d++)
-      {
-       // Am I sending or receiving? Sending
-       if(d==my_rank)
-        {
-         // Loop over domains for halo elements
-         for(int dd=0; dd<n_proc; dd++)
-          {
-           // Don't talk to yourself
-           if(dd!=d)
-            {
-             // Get vectors of haloed elements by copy operation
-             Vector<GeneralisedElement*> 
-              haloed_elem_pt(haloed_element_pt(dd));
+//      //Loop over processors
+//      for(int d=0; d<n_proc; d++)
+//       {
+//        // Am I sending or receiving? Sending
+//        if(d==my_rank)
+//         {
+//          // Loop over domains for halo elements
+//          for(int dd=0; dd<n_proc; dd++)
+//           {
+//            // Don't talk to yourself
+//            if(dd!=d)
+//             {
+//              // Get vectors of haloed elements by copy operation
+//              Vector<GeneralisedElement*> 
+//               haloed_elem_pt(haloed_element_pt(dd));
            
-             // How many of my elements are halo elements whose haloed
-             // counterpart is located on processor dd?
-             unsigned nelem_haloed=haloed_elem_pt.size();
+//              // How many of my elements are halo elements whose haloed
+//              // counterpart is located on processor dd?
+//              unsigned nelem_haloed=haloed_elem_pt.size();
 
-             if(nelem_haloed != 0)
-              {
-               //Loop over haloed elements
-               for(unsigned e=0; e<nelem_haloed; e++)
-                {
-                 // Get list of gteq_edge_neighbours
-                 Vector<unsigned> haloed_neigh_exists(0);
-                 Vector<int> haloed_neigh_diff_level(0);
-                 for(int direction=N; direction<=W; direction++)
-                  {
-                   //Temp storage for unknowns
-                   Vector<unsigned> translate_s(2);
-                   Vector<double> s_lo(2), s_hi(2);
-                   int edge=0, diff_level=0;
-                   bool in_neighbouring_tree=false;
-                   //Get neighbour in this direction
-                   QuadTree* neigh_pt =
-                    dynamic_cast<QuadTree*>
-                    (dynamic_cast<RefineableElement*>
-                     (haloed_elem_pt[e])->tree_pt())->
-                    gteq_edge_neighbour(direction,translate_s,
-                                        s_lo,s_hi,edge,diff_level,
-                                        in_neighbouring_tree);
-                   //Collect required stats
-                   if(neigh_pt!=0)
-                    {
-                     haloed_neigh_exists.push_back(1);
-                    }
-                   else
-                    {
-                     haloed_neigh_exists.push_back(0);
-                    }
-                   haloed_neigh_diff_level.push_back(diff_level);
-                  }
+//              if(nelem_haloed != 0)
+//               {
+//                //Loop over haloed elements
+//                for(unsigned e=0; e<nelem_haloed; e++)
+//                 {
+//                  // Get list of gteq_edge_neighbours
+//                  Vector<unsigned> haloed_neigh_exists(0);
+//                  Vector<int> haloed_neigh_diff_level(0);
+//                  for(int direction=N; direction<=W; direction++)
+//                   {
+//                    //Temp storage for unknowns
+//                    Vector<unsigned> translate_s(2);
+//                    Vector<double> s_lo(2), s_hi(2);
+//                    int edge=0, diff_level=0;
+//                    bool in_neighbouring_tree=false;
+//                    //Get neighbour in this direction
+//                    QuadTree* neigh_pt =
+//                     dynamic_cast<QuadTree*>
+//                     (dynamic_cast<RefineableElement*>
+//                      (haloed_elem_pt[e])->tree_pt())->
+//                     gteq_edge_neighbour(direction,translate_s,
+//                                         s_lo,s_hi,edge,diff_level,
+//                                         in_neighbouring_tree);
+//                    //Collect required stats
+//                    if(neigh_pt!=0)
+//                     {
+//                      haloed_neigh_exists.push_back(1);
+//                     }
+//                    else
+//                     {
+//                      haloed_neigh_exists.push_back(0);
+//                     }
+//                    haloed_neigh_diff_level.push_back(diff_level);
+//                   }
                
-                 ////Print out info
-                 //oomph_info << "to be sent:    neighbours of haloed element " << haloed_elem_pt[e] << std::endl;
-                 //oomph_info << "to be sent:    neight_exists    diff_level" << std::endl;
-                 //for(unsigned dir=0; dir<4; dir++)
-                 // {
-                 //  oomph_info << "to be sent:    " << neigh_exists[dir] << "    " << neigh_diff_level[dir] << std::endl;
-                 // }
+//                  ////Print out info
+//                  //oomph_info << "to be sent:    neighbours of haloed element " << haloed_elem_pt[e] << std::endl;
+//                  //oomph_info << "to be sent:    neight_exists    diff_level" << std::endl;
+//                  //for(unsigned dir=0; dir<4; dir++)
+//                  // {
+//                  //  oomph_info << "to be sent:    " << neigh_exists[dir] << "    " << neigh_diff_level[dir] << std::endl;
+//                  // }
                
-                 //Send to processor (dd) on which this is a halo element
-                 MPI_Send(&haloed_neigh_exists[0],4,MPI_UNSIGNED,dd,0,
-                          comm_pt->mpi_comm());
-                 MPI_Send(&haloed_neigh_diff_level[0],4,MPI_INT,dd,1,
-                          comm_pt->mpi_comm());
-                }
+//                  //Send to processor (dd) on which this is a halo element
+//                  MPI_Send(&haloed_neigh_exists[0],4,MPI_UNSIGNED,dd,0,
+//                           comm_pt->mpi_comm());
+//                  MPI_Send(&haloed_neigh_diff_level[0],4,MPI_INT,dd,1,
+//                           comm_pt->mpi_comm());
+//                 }
              
-              }
-            }
-          }
-        }
-       // Am I sending or receiving? Receiving
-       else
-        {
-         //Get vector of halo elements by copy operation
-         Vector<GeneralisedElement*> halo_elem_pt(halo_element_pt(d));
+//               }
+//             }
+//           }
+//         }
+//        // Am I sending or receiving? Receiving
+//        else
+//         {
+//          //Get vector of halo elements by copy operation
+//          Vector<GeneralisedElement*> halo_elem_pt(halo_element_pt(d));
          
-         // How many of my elements are halo elements whose haloed
-         // counterpart is located on processor d?
-         unsigned nelem_halo=halo_elem_pt.size();
+//          // How many of my elements are halo elements whose haloed
+//          // counterpart is located on processor d?
+//          unsigned nelem_halo=halo_elem_pt.size();
          
-         if(nelem_halo!=0)
-          {
-           //Loop over halo elements
-           for(unsigned e=0; e<nelem_halo; e++)
-            {
-             // Get list of gteq_edge_neighbours
-             Vector<unsigned> halo_neigh_exists(0);
-             for(int direction=N; direction<=W; direction++)
-              {
-               //Temp storage for unknowns
-               Vector<unsigned> translate_s(2);
-               Vector<double> s_lo(2), s_hi(2);
-               int edge=0, diff_level=0;
-               bool in_neighbouring_tree=false;
-               //Get neighbour in this direction
-               QuadTree* neigh_pt =
-                dynamic_cast<QuadTree*>
-                (dynamic_cast<RefineableElement*>
-                 (halo_elem_pt[e])->tree_pt())->
-                gteq_edge_neighbour(direction,translate_s,
-                                    s_lo,s_hi,
-                                    edge,diff_level,
-                                    in_neighbouring_tree);
-               //Collect required stats
-               if(neigh_pt != 0)
-                {
-                 halo_neigh_exists.push_back(1);
-                }
-               else
-                {
-                 halo_neigh_exists.push_back(0);
-                }
-              }
+//          if(nelem_halo!=0)
+//           {
+//            //Loop over halo elements
+//            for(unsigned e=0; e<nelem_halo; e++)
+//             {
+//              // Get list of gteq_edge_neighbours
+//              Vector<unsigned> halo_neigh_exists(0);
+//              for(int direction=N; direction<=W; direction++)
+//               {
+//                //Temp storage for unknowns
+//                Vector<unsigned> translate_s(2);
+//                Vector<double> s_lo(2), s_hi(2);
+//                int edge=0, diff_level=0;
+//                bool in_neighbouring_tree=false;
+//                //Get neighbour in this direction
+//                QuadTree* neigh_pt =
+//                 dynamic_cast<QuadTree*>
+//                 (dynamic_cast<RefineableElement*>
+//                  (halo_elem_pt[e])->tree_pt())->
+//                 gteq_edge_neighbour(direction,translate_s,
+//                                     s_lo,s_hi,
+//                                     edge,diff_level,
+//                                     in_neighbouring_tree);
+//                //Collect required stats
+//                if(neigh_pt != 0)
+//                 {
+//                  halo_neigh_exists.push_back(1);
+//                 }
+//                else
+//                 {
+//                  halo_neigh_exists.push_back(0);
+//                 }
+//               }
              
-             ////Print out info
-             //oomph_info << "neighbours of halo element " << halo_elem_pt[e] << std::endl;
-             //oomph_info << "neigh_exists    diff_level" << std::endl;
-             //for(unsigned dir=0; dir<4; dir++)
-             // {
-             //  oomph_info << halo_neigh_exists[dir] << "    " << halo_neigh_diff_level[dir] << std::endl;
-             // }
+//              ////Print out info
+//              //oomph_info << "neighbours of halo element " << halo_elem_pt[e] << std::endl;
+//              //oomph_info << "neigh_exists    diff_level" << std::endl;
+//              //for(unsigned dir=0; dir<4; dir++)
+//              // {
+//              //  oomph_info << halo_neigh_exists[dir] << "    " << halo_neigh_diff_level[dir] << std::endl;
+//              // }
              
-             // Get list of gteq_edge_neighbours
-             Vector<unsigned> haloed_equivalent_neigh_exists(4);
-             Vector<int> haloed_equivalent_neigh_diff_level(4);
+//              // Get list of gteq_edge_neighbours
+//              Vector<unsigned> haloed_equivalent_neigh_exists(4);
+//              Vector<int> haloed_equivalent_neigh_diff_level(4);
              
-             //Receive from processor (d) on which this is a haloed element
-             MPI_Recv(&haloed_equivalent_neigh_exists[0],4,MPI_UNSIGNED,d,0,
-                      comm_pt->mpi_comm(),&status);
-             MPI_Recv(&haloed_equivalent_neigh_diff_level[0],4,MPI_INT,d,1,
-                      comm_pt->mpi_comm(),&status);
+//              //Receive from processor (d) on which this is a haloed element
+//              MPI_Recv(&haloed_equivalent_neigh_exists[0],4,MPI_UNSIGNED,d,0,
+//                       comm_pt->mpi_comm(),&status);
+//              MPI_Recv(&haloed_equivalent_neigh_diff_level[0],4,MPI_INT,d,1,
+//                       comm_pt->mpi_comm(),&status);
              
-             ////Print out received info
-             //oomph_info << "received:    neighbours of haloed equivalent element:" << std::endl;
-             //oomph_info << "received:    neigh_exists    diff_level" << std::endl;
-             //for(unsigned dir=0; dir<4; dir++)
-             // {
-             //  oomph_info << "received:    " << haloed_equivalent_neigh_exists[dir] << "    " << haloed_equivalent_neigh_diff_level[dir] << std::endl;
-             // }
+//              ////Print out received info
+//              //oomph_info << "received:    neighbours of haloed equivalent element:" << std::endl;
+//              //oomph_info << "received:    neigh_exists    diff_level" << std::endl;
+//              //for(unsigned dir=0; dir<4; dir++)
+//              // {
+//              //  oomph_info << "received:    " << haloed_equivalent_neigh_exists[dir] << "    " << haloed_equivalent_neigh_diff_level[dir] << std::endl;
+//              // }
 
-             // Now check to see which neighbours are missing from the halo element
-             // but are present on another processor as a neighbour of the haloed
-             // equivalent element
-             for(unsigned dir=0; dir<4; dir++)
-              {
-               //Find non-existent neighbours
-               if(haloed_equivalent_neigh_exists[dir]
-                  && !halo_neigh_exists[dir])
-                {
-                 //Check relative sizes
-                 if(haloed_equivalent_neigh_diff_level[dir] < 0)
-                  {
-                   //Non-existent neighbour is larger than me!
-                   //This means that tha masters of my slave nodes belong
-                   //to that element and are not (necessarily) shared with
-                   //me -- this is a problem
-                   offending_element_proc.push_back(my_rank);
-                   offending_element_pt.push_back(halo_elem_pt[e]);
-                   FiniteElement* el_pt =
-                    dynamic_cast<FiniteElement*>(halo_elem_pt[e]);
-                   Vector<double> corner(2);
-                   corner[0] = el_pt->node_pt(0)->x(0);
-                   corner[1] = el_pt->node_pt(0)->x(1);
-                   offending_element_corner.push_back(corner);
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    } // End of spectral case
-   else if(dynamic_cast<PRefineableElement*>(this->element_pt(0)))
-    {
-     //BENFLAG: For p-refineable elements, master is short edge. If edges are
-     //         equal in length then master is edge with lower p-order.
-     //         We therefore check to see if any of the halo elements'
-     //         non-existent neighbours are smaller (gteq_edge_neighbour has
-     //         sons) or, if the edges are equal in length, if they have a
-     //         lower p-order. If this is the case then my slave nodes will
-     //         have master nodes which are not on this processor and
-     //         therefore cannot be accessed..
+//              // Now check to see which neighbours are missing from the halo element
+//              // but are present on another processor as a neighbour of the haloed
+//              // equivalent element
+//              for(unsigned dir=0; dir<4; dir++)
+//               {
+//                //Find non-existent neighbours
+//                if(haloed_equivalent_neigh_exists[dir]
+//                   && !halo_neigh_exists[dir])
+//                 {
+//                  //Check relative sizes
+//                  if(haloed_equivalent_neigh_diff_level[dir] < 0)
+//                   {
+//                    //Non-existent neighbour is larger than me!
+//                    //This means that tha masters of my slave nodes belong
+//                    //to that element and are not (necessarily) shared with
+//                    //me -- this is a problem
+//                    offending_element_proc.push_back(my_rank);
+//                    offending_element_pt.push_back(halo_elem_pt[e]);
+//                    FiniteElement* el_pt =
+//                     dynamic_cast<FiniteElement*>(halo_elem_pt[e]);
+//                    Vector<double> corner(2);
+//                    corner[0] = el_pt->node_pt(0)->x(0);
+//                    corner[1] = el_pt->node_pt(0)->x(1);
+//                    offending_element_corner.push_back(corner);
+//                   }
+//                 }
+//               }
+//             }
+//           }
+//         }
+//       }
+//     } // End of spectral case
+//    else if(dynamic_cast<PRefineableElement*>(this->element_pt(0)))
+//     {
+//      //BENFLAG: For p-refineable elements, master is short edge. If edges are
+//      //         equal in length then master is edge with lower p-order.
+//      //         We therefore check to see if any of the halo elements'
+//      //         non-existent neighbours are smaller (gteq_edge_neighbour has
+//      //         sons) or, if the edges are equal in length, if they have a
+//      //         lower p-order. If this is the case then my slave nodes will
+//      //         have master nodes which are not on this processor and
+//      //         therefore cannot be accessed..
      
-     //Loop over processors
-     for(int d=0; d<n_proc; d++)
-      {
-       // Am I sending or receiving? Sending
-       if(d==my_rank)
-        {
-         // Loop over domains for halo elements
-         for(int dd=0; dd<n_proc; dd++)
-          {
-           // Don't talk to yourself
-           if(dd!=d)
-            {
-             // Get vectors of haloed elements by copy operation
-             Vector<GeneralisedElement*> 
-              haloed_elem_pt(haloed_element_pt(dd));
+//      //Loop over processors
+//      for(int d=0; d<n_proc; d++)
+//       {
+//        // Am I sending or receiving? Sending
+//        if(d==my_rank)
+//         {
+//          // Loop over domains for halo elements
+//          for(int dd=0; dd<n_proc; dd++)
+//           {
+//            // Don't talk to yourself
+//            if(dd!=d)
+//             {
+//              // Get vectors of haloed elements by copy operation
+//              Vector<GeneralisedElement*> 
+//               haloed_elem_pt(haloed_element_pt(dd));
            
-             // How many of my elements are halo elements whose haloed
-             // counterpart is located on processor dd?
-             unsigned nelem_haloed=haloed_elem_pt.size();
+//              // How many of my elements are halo elements whose haloed
+//              // counterpart is located on processor dd?
+//              unsigned nelem_haloed=haloed_elem_pt.size();
 
-             if(nelem_haloed != 0)
-              {
-               //Loop over haloed elements
-               for(unsigned e=0; e<nelem_haloed; e++)
-                {
-                 // Get list of gteq_edge_neighbours
-                 Vector<unsigned> haloed_neigh_exists(0);
-                 Vector<int> haloed_neigh_diff_level(0);
-                 Vector<unsigned> haloed_neigh_nsons(0), haloed_neigh_p_order(0);
-                 for(int direction=N; direction<=W; direction++)
-                  {
-                   //Temp storage for unknowns
-                   Vector<unsigned> translate_s(2);
-                   Vector<double> s_lo(2), s_hi(2);
-                   int edge=0, diff_level=0;
-                   bool in_neighbouring_tree=false;
-                   //Get neighbour in this direction
-                   QuadTree* neigh_pt =
-                    dynamic_cast<QuadTree*>
-                    (dynamic_cast<RefineableElement*>
-                     (haloed_elem_pt[e])->tree_pt())->
-                    gteq_edge_neighbour(direction,translate_s,
-                                        s_lo,s_hi,edge,diff_level,
-                                        in_neighbouring_tree);
-                   unsigned nsons = (neigh_pt!=0) ? neigh_pt->nsons() : 0;
-                   unsigned p_order = (neigh_pt!=0) ?
-                    dynamic_cast<PRefineableElement*>(neigh_pt->object_pt())
-                     ->p_order()
-                      : 0;
-                   //Collect required stats
-                   if(neigh_pt!=0)
-                    {
-                     haloed_neigh_exists.push_back(1);
-                    }
-                   else
-                    {
-                     haloed_neigh_exists.push_back(0);
-                    }
-                   haloed_neigh_diff_level.push_back(diff_level);
-                   haloed_neigh_nsons.push_back(nsons);
-                   haloed_neigh_p_order.push_back(p_order);
-                  }
+//              if(nelem_haloed != 0)
+//               {
+//                //Loop over haloed elements
+//                for(unsigned e=0; e<nelem_haloed; e++)
+//                 {
+//                  // Get list of gteq_edge_neighbours
+//                  Vector<unsigned> haloed_neigh_exists(0);
+//                  Vector<int> haloed_neigh_diff_level(0);
+//                  Vector<unsigned> haloed_neigh_nsons(0), haloed_neigh_p_order(0);
+//                  for(int direction=N; direction<=W; direction++)
+//                   {
+//                    //Temp storage for unknowns
+//                    Vector<unsigned> translate_s(2);
+//                    Vector<double> s_lo(2), s_hi(2);
+//                    int edge=0, diff_level=0;
+//                    bool in_neighbouring_tree=false;
+//                    //Get neighbour in this direction
+//                    QuadTree* neigh_pt =
+//                     dynamic_cast<QuadTree*>
+//                     (dynamic_cast<RefineableElement*>
+//                      (haloed_elem_pt[e])->tree_pt())->
+//                     gteq_edge_neighbour(direction,translate_s,
+//                                         s_lo,s_hi,edge,diff_level,
+//                                         in_neighbouring_tree);
+//                    unsigned nsons = (neigh_pt!=0) ? neigh_pt->nsons() : 0;
+//                    unsigned p_order = (neigh_pt!=0) ?
+//                     dynamic_cast<PRefineableElement*>(neigh_pt->object_pt())
+//                      ->p_order()
+//                       : 0;
+//                    //Collect required stats
+//                    if(neigh_pt!=0)
+//                     {
+//                      haloed_neigh_exists.push_back(1);
+//                     }
+//                    else
+//                     {
+//                      haloed_neigh_exists.push_back(0);
+//                     }
+//                    haloed_neigh_diff_level.push_back(diff_level);
+//                    haloed_neigh_nsons.push_back(nsons);
+//                    haloed_neigh_p_order.push_back(p_order);
+//                   }
                
-                 ////Print out info
-                 //oomph_info << "to be sent:    neighbours of haloed element " << haloed_elem_pt[e] << std::endl;
-                 //oomph_info << "to be sent:    neight_exists    diff_level" << std::endl;
-                 //for(unsigned dir=0; dir<4; dir++)
-                 // {
-                 //  oomph_info << "to be sent:    " << neigh_exists[dir] << "    " << neigh_diff_level[dir] << std::endl;
-                 // }
+//                  ////Print out info
+//                  //oomph_info << "to be sent:    neighbours of haloed element " << haloed_elem_pt[e] << std::endl;
+//                  //oomph_info << "to be sent:    neight_exists    diff_level" << std::endl;
+//                  //for(unsigned dir=0; dir<4; dir++)
+//                  // {
+//                  //  oomph_info << "to be sent:    " << neigh_exists[dir] << "    " << neigh_diff_level[dir] << std::endl;
+//                  // }
                
-                 //Send to processor (dd) on which this is a halo element
-                 MPI_Send(&haloed_neigh_exists[0],4,MPI_UNSIGNED,dd,0,
-                          comm_pt->mpi_comm());
-                 MPI_Send(&haloed_neigh_diff_level[0],4,MPI_INT,dd,1,
-                          comm_pt->mpi_comm());
-                 MPI_Send(&haloed_neigh_nsons[0],4,MPI_UNSIGNED,dd,2,
-                          comm_pt->mpi_comm());
-                 MPI_Send(&haloed_neigh_p_order[0],4,MPI_UNSIGNED,dd,3,
-                          comm_pt->mpi_comm());
-                }
+//                  //Send to processor (dd) on which this is a halo element
+//                  MPI_Send(&haloed_neigh_exists[0],4,MPI_UNSIGNED,dd,0,
+//                           comm_pt->mpi_comm());
+//                  MPI_Send(&haloed_neigh_diff_level[0],4,MPI_INT,dd,1,
+//                           comm_pt->mpi_comm());
+//                  MPI_Send(&haloed_neigh_nsons[0],4,MPI_UNSIGNED,dd,2,
+//                           comm_pt->mpi_comm());
+//                  MPI_Send(&haloed_neigh_p_order[0],4,MPI_UNSIGNED,dd,3,
+//                           comm_pt->mpi_comm());
+//                 }
              
-              }
-            }
-          }
-        }
-       // Am I sending or receiving? Receiving
-       else
-        {
-         //Get vector of halo elements by copy operation
-         Vector<GeneralisedElement*> halo_elem_pt(halo_element_pt(d));
+//               }
+//             }
+//           }
+//         }
+//        // Am I sending or receiving? Receiving
+//        else
+//         {
+//          //Get vector of halo elements by copy operation
+//          Vector<GeneralisedElement*> halo_elem_pt(halo_element_pt(d));
          
-         // How many of my elements are halo elements whose haloed
-         // counterpart is located on processor d?
-         unsigned nelem_halo=halo_elem_pt.size();
+//          // How many of my elements are halo elements whose haloed
+//          // counterpart is located on processor d?
+//          unsigned nelem_halo=halo_elem_pt.size();
          
-         if(nelem_halo!=0)
-          {
-           //Loop over halo elements
-           for(unsigned e=0; e<nelem_halo; e++)
-            {
-             // Get list of gteq_edge_neighbours
-             Vector<unsigned> halo_neigh_exists(0);
-             for(int direction=N; direction<=W; direction++)
-              {
-               //Temp storage for unknowns
-               Vector<unsigned> translate_s(2);
-               Vector<double> s_lo(2), s_hi(2);
-               int edge=0, diff_level=0;
-               bool in_neighbouring_tree=false;
-               //Get neighbour in this direction
-               QuadTree* neigh_pt =
-                dynamic_cast<QuadTree*>
-                (dynamic_cast<RefineableElement*>
-                 (halo_elem_pt[e])->tree_pt())->
-                gteq_edge_neighbour(direction,translate_s,
-                                    s_lo,s_hi,edge,diff_level,
-                                    in_neighbouring_tree);
-               //Collect required stats
-               if(neigh_pt!=0)
-                {
-                 halo_neigh_exists.push_back(1);
-                }
-               else
-                {
-                 halo_neigh_exists.push_back(0);
-                }
-              }
+//          if(nelem_halo!=0)
+//           {
+//            //Loop over halo elements
+//            for(unsigned e=0; e<nelem_halo; e++)
+//             {
+//              // Get list of gteq_edge_neighbours
+//              Vector<unsigned> halo_neigh_exists(0);
+//              for(int direction=N; direction<=W; direction++)
+//               {
+//                //Temp storage for unknowns
+//                Vector<unsigned> translate_s(2);
+//                Vector<double> s_lo(2), s_hi(2);
+//                int edge=0, diff_level=0;
+//                bool in_neighbouring_tree=false;
+//                //Get neighbour in this direction
+//                QuadTree* neigh_pt =
+//                 dynamic_cast<QuadTree*>
+//                 (dynamic_cast<RefineableElement*>
+//                  (halo_elem_pt[e])->tree_pt())->
+//                 gteq_edge_neighbour(direction,translate_s,
+//                                     s_lo,s_hi,edge,diff_level,
+//                                     in_neighbouring_tree);
+//                //Collect required stats
+//                if(neigh_pt!=0)
+//                 {
+//                  halo_neigh_exists.push_back(1);
+//                 }
+//                else
+//                 {
+//                  halo_neigh_exists.push_back(0);
+//                 }
+//               }
              
-             ////Print out info
-             //oomph_info << "neighbours of halo element " << halo_elem_pt[e] << std::endl;
-             //oomph_info << "neigh_exists    diff_level" << std::endl;
-             //for(unsigned dir=0; dir<4; dir++)
-             // {
-             //  oomph_info << halo_neigh_exists[dir] << "    " << halo_neigh_diff_level[dir] << std::endl;
-             // }
+//              ////Print out info
+//              //oomph_info << "neighbours of halo element " << halo_elem_pt[e] << std::endl;
+//              //oomph_info << "neigh_exists    diff_level" << std::endl;
+//              //for(unsigned dir=0; dir<4; dir++)
+//              // {
+//              //  oomph_info << halo_neigh_exists[dir] << "    " << halo_neigh_diff_level[dir] << std::endl;
+//              // }
              
-             // Get list of gteq_edge_neighbours
-             Vector<unsigned> haloed_equivalent_neigh_exists(4);
-             Vector<int> haloed_equivalent_neigh_diff_level(4);
-             Vector<unsigned> haloed_equivalent_neigh_nsons(4);
-             Vector<unsigned> haloed_equivalent_neigh_p_order(4);
+//              // Get list of gteq_edge_neighbours
+//              Vector<unsigned> haloed_equivalent_neigh_exists(4);
+//              Vector<int> haloed_equivalent_neigh_diff_level(4);
+//              Vector<unsigned> haloed_equivalent_neigh_nsons(4);
+//              Vector<unsigned> haloed_equivalent_neigh_p_order(4);
              
-             //Receive from processor (d) on which this is a haloed element
-             MPI_Recv(&haloed_equivalent_neigh_exists[0],4,MPI_UNSIGNED,d,0,
-                      comm_pt->mpi_comm(),&status);
-             MPI_Recv(&haloed_equivalent_neigh_diff_level[0],4,MPI_INT,d,1,
-                      comm_pt->mpi_comm(),&status);
-             MPI_Recv(&haloed_equivalent_neigh_nsons[0],4,MPI_UNSIGNED,d,2,
-                      comm_pt->mpi_comm(),&status);
-             MPI_Recv(&haloed_equivalent_neigh_p_order[0],4,MPI_UNSIGNED,d,3,
-                      comm_pt->mpi_comm(),&status);
+//              //Receive from processor (d) on which this is a haloed element
+//              MPI_Recv(&haloed_equivalent_neigh_exists[0],4,MPI_UNSIGNED,d,0,
+//                       comm_pt->mpi_comm(),&status);
+//              MPI_Recv(&haloed_equivalent_neigh_diff_level[0],4,MPI_INT,d,1,
+//                       comm_pt->mpi_comm(),&status);
+//              MPI_Recv(&haloed_equivalent_neigh_nsons[0],4,MPI_UNSIGNED,d,2,
+//                       comm_pt->mpi_comm(),&status);
+//              MPI_Recv(&haloed_equivalent_neigh_p_order[0],4,MPI_UNSIGNED,d,3,
+//                       comm_pt->mpi_comm(),&status);
              
-             ////Print out received info
-             //oomph_info << "received:    neighbours of haloed equivalent element:" << std::endl;
-             //oomph_info << "received:    neigh_exists    diff_level" << std::endl;
-             //for(unsigned dir=0; dir<4; dir++)
-             // {
-             //  oomph_info << "received:    " << haloed_equivalent_neigh_exists[dir] << "    " << haloed_equivalent_neigh_diff_level[dir] << std::endl;
-             // }
+//              ////Print out received info
+//              //oomph_info << "received:    neighbours of haloed equivalent element:" << std::endl;
+//              //oomph_info << "received:    neigh_exists    diff_level" << std::endl;
+//              //for(unsigned dir=0; dir<4; dir++)
+//              // {
+//              //  oomph_info << "received:    " << haloed_equivalent_neigh_exists[dir] << "    " << haloed_equivalent_neigh_diff_level[dir] << std::endl;
+//              // }
 
-             // Now check to see which neighbours are missing from the halo element
-             // but are present on another processor as a neighbour of the haloed
-             // equivalent element
-             for(unsigned dir=0; dir<4; dir++)
-              {
-               //Find non-existent neighbours
-               if(haloed_equivalent_neigh_exists[dir]
-                  && !halo_neigh_exists[dir])
-                {
-                 bool element_is_a_problem = false;
-                 //Check relative sizes
-                 if(haloed_equivalent_neigh_nsons[dir] > 0)
-                  {
-                   //Non-existent neighbour is smaller than me!
-                   //This means that the masters of my slave nodes belong to
-                   //that element and are not (necessarily) shared with me --
-                   //this is a problem.
-                   element_is_a_problem = true;
+//              // Now check to see which neighbours are missing from the halo element
+//              // but are present on another processor as a neighbour of the haloed
+//              // equivalent element
+//              for(unsigned dir=0; dir<4; dir++)
+//               {
+//                //Find non-existent neighbours
+//                if(haloed_equivalent_neigh_exists[dir]
+//                   && !halo_neigh_exists[dir])
+//                 {
+//                  bool element_is_a_problem = false;
+//                  //Check relative sizes
+//                  if(haloed_equivalent_neigh_nsons[dir] > 0)
+//                   {
+//                    //Non-existent neighbour is smaller than me!
+//                    //This means that the masters of my slave nodes belong to
+//                    //that element and are not (necessarily) shared with me --
+//                    //this is a problem.
+//                    element_is_a_problem = true;
 
-                   //Special case: if I am a quadratic element and my
-                   //neighbours are smaller than me then there are no hanging
-                   //nodes to worry about since my middle node matches with a
-                   //neighbour's son's corner.
-                   unsigned my_p_order =
-                    dynamic_cast<PRefineableElement*>(halo_elem_pt[e])->p_order();
-                   if(my_p_order == 3) //Quadratic(!)
-                    {
-                     //This element isn't a problem after all
-                     element_is_a_problem = false;
-                    }
-                  }
-                 else if(haloed_equivalent_neigh_diff_level[dir] == 0)
-                  {
-                   //Edges are the same length, so check p-orders
-                   unsigned my_p_order =
-                    dynamic_cast<PRefineableElement*>(halo_elem_pt[e])->p_order();
-                   if(haloed_equivalent_neigh_p_order[dir] < my_p_order)
-                    {
-                     //Non-existant neighbour has lower p-order than me!
-                     //This means that the masters of my slave nodes belong to
-                     //that element and are not (necessarily) shared with me --
-                     //this is a problem.
-                     element_is_a_problem = true;
-                    }
-                  }
+//                    //Special case: if I am a quadratic element and my
+//                    //neighbours are smaller than me then there are no hanging
+//                    //nodes to worry about since my middle node matches with a
+//                    //neighbour's son's corner.
+//                    unsigned my_p_order =
+//                     dynamic_cast<PRefineableElement*>(halo_elem_pt[e])->p_order();
+//                    if(my_p_order == 3) //Quadratic(!)
+//                     {
+//                      //This element isn't a problem after all
+//                      element_is_a_problem = false;
+//                     }
+//                   }
+//                  else if(haloed_equivalent_neigh_diff_level[dir] == 0)
+//                   {
+//                    //Edges are the same length, so check p-orders
+//                    unsigned my_p_order =
+//                     dynamic_cast<PRefineableElement*>(halo_elem_pt[e])->p_order();
+//                    if(haloed_equivalent_neigh_p_order[dir] < my_p_order)
+//                     {
+//                      //Non-existant neighbour has lower p-order than me!
+//                      //This means that the masters of my slave nodes belong to
+//                      //that element and are not (necessarily) shared with me --
+//                      //this is a problem.
+//                      element_is_a_problem = true;
+//                     }
+//                   }
 
-                 if(element_is_a_problem)
-                  {
-                   //Non-existent neighbour is going to be a problem
-                   offending_element_proc.push_back(my_rank);
-                   offending_element_pt.push_back(halo_elem_pt[e]);
-                   FiniteElement* el_pt =
-                    dynamic_cast<FiniteElement*>(halo_elem_pt[e]);
-                   Vector<double> corner(2);
-                   corner[0] = el_pt->node_pt(0)->x(0);
-                   corner[1] = el_pt->node_pt(0)->x(1);
-                   offending_element_corner.push_back(corner);
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    } // End of p-refineable case
+//                  if(element_is_a_problem)
+//                   {
+//                    //Non-existent neighbour is going to be a problem
+//                    offending_element_proc.push_back(my_rank);
+//                    offending_element_pt.push_back(halo_elem_pt[e]);
+//                    FiniteElement* el_pt =
+//                     dynamic_cast<FiniteElement*>(halo_elem_pt[e]);
+//                    Vector<double> corner(2);
+//                    corner[0] = el_pt->node_pt(0)->x(0);
+//                    corner[1] = el_pt->node_pt(0)->x(1);
+//                    offending_element_corner.push_back(corner);
+//                   }
+//                 }
+//               }
+//             }
+//           }
+//         }
+//       }
+//     } // End of p-refineable case
    
-   //Throw error if we're about to crash horribly...
-   if(offending_element_pt.size() != 0)
-    {
-     std::ostringstream warn_stream;
-     warn_stream << "This is process " << my_rank << "."
-                 << std::endl
-                 << "I am about to crash horribly because the master nodes"
-                 << std::endl
-                 << "associated with some of the hanging nodes are not shared"
-                 << std::endl
-                 << "between processors."
-                 << std::endl << std::endl
-                 << "Offending elements:"
-                 << std::endl;
-     for(unsigned e=0; e<offending_element_pt.size(); e++)
-      {
-       warn_stream << "element " << offending_element_pt[e]
-                   << "on processor " << offending_element_proc[e]
-                   << ":    corner at ( " << offending_element_corner[e][0]
-                   << " , " << offending_element_corner[e][1]
-                   << ")" << std::endl;
-      }
+//    //Throw error if we're about to crash horribly...
+//    if(offending_element_pt.size() != 0)
+//     {
+//      std::ostringstream warn_stream;
+//      warn_stream << "This is process " << my_rank << "."
+//                  << std::endl
+//                  << "I am about to crash horribly because the master nodes"
+//                  << std::endl
+//                  << "associated with some of the hanging nodes are not shared"
+//                  << std::endl
+//                  << "between processors."
+//                  << std::endl << std::endl
+//                  << "Offending elements:"
+//                  << std::endl;
+//      for(unsigned e=0; e<offending_element_pt.size(); e++)
+//       {
+//        warn_stream << "element " << offending_element_pt[e]
+//                    << "on processor " << offending_element_proc[e]
+//                    << ":    corner at ( " << offending_element_corner[e][0]
+//                    << " , " << offending_element_corner[e][1]
+//                    << ")" << std::endl;
+//       }
 
-     //Warn
-     OomphLibWarning(warn_stream.str(),
-                     "TreeBasedRefineableMeshBase::synchronise_hanging_nodes()",
-                     OOMPH_EXCEPTION_LOCATION);
+//      //Warn
+//      OomphLibWarning(warn_stream.str(),
+//                      "TreeBasedRefineableMeshBase::synchronise_hanging_nodes()",
+//                      OOMPH_EXCEPTION_LOCATION);
 
-     //Set flag to catch later
-     about_to_crash_horribly = true;
-    }
+//      //Set flag to catch later
+//      about_to_crash_horribly = true;
+//     }
    
-  } // End of 2D checking
-#endif
+//   } // End of 2D checking
+// #endif
  
+// hierher BENFLAG [end] This needs to be sorted (by Ben!) at some point.
+// For now comment out because this whole functionality is bypassed
+// for hp-refineable elements
+
+
  double t_start = 0.0;
  double t_end = 0.0;
  
@@ -3817,28 +3832,29 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
   } // end  of reconciliation required
 
 
-#ifdef PARANOID
+// #ifdef PARANOID
 
- // hierher This is from Ben -- may need another look
+//  // hierher BENFLAG This is from Ben -- may need another look;
+//  // re-enable (or not) together with the stuff above
 
- //Check to see if we were supposed to die by now
- if (about_to_crash_horribly)
-  {
-   //Do error
-   std::ostringstream error_stream;
-   error_stream << "This is process " << my_rank << "."
-                << std::endl
-                << "I should have crashed by now. If there are no errors above"
-                << std::endl
-                << "then the check for existence of master nodes in shared"
-                << std::endl
-                << "storage is incorrect (see warning above).";
+//  //Check to see if we were supposed to die by now
+//  if (about_to_crash_horribly)
+//   {
+//    //Do error
+//    std::ostringstream error_stream;
+//    error_stream << "This is process " << my_rank << "."
+//                 << std::endl
+//                 << "I should have crashed by now. If there are no errors above"
+//                 << std::endl
+//                 << "then the check for existence of master nodes in shared"
+//                 << std::endl
+//                 << "storage is incorrect (see warning above).";
    
-   throw OomphLibError(error_stream.str(),
-                       "TreeBasedRefineableMeshBase::synchronise_hanging_nodes()",
-                       OOMPH_EXCEPTION_LOCATION);
-  }
-#endif
+//    throw OomphLibError(error_stream.str(),
+//                        "TreeBasedRefineableMeshBase::synchronise_hanging_nodes()",
+//                        OOMPH_EXCEPTION_LOCATION);
+//   }
+// #endif
  
 
 }

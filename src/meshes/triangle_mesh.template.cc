@@ -2339,12 +2339,12 @@ namespace oomph
           double d=c_y-a_y;
 
           double e=a*(a_x+b_x)+b*(a_y+b_y);
-          double f=a*(a_x+c_x)+b*(a_y+c_y);
+          double f=c*(a_x+c_x)+d*(a_y+c_y);
 
           double g=2.0*(a*(c_y-b_y)-b*(c_x-b_x));
 
           bool do_it=false;
-          if (g<1.0e-14)
+          if (abs(g)<1.0e-14)
            {
             do_it=true;
            }

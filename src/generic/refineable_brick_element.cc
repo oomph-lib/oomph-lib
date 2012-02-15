@@ -1381,10 +1381,32 @@ void RefineableQElement<3>::build(Mesh*& mesh_pt,
              // Copy node across
              node_pt(jnod) = created_node_pt;
 
-             ///\todo We need to copy values from the father element
-             ///to handle the case of mixed interpolation in 3D
-             ///but I'm not prepared to accept this slow down at just 
-             ///this moment.
+             //Make sure that we update the values at the node so that
+             //they are consistent with the present representation.
+             //This is only need for mixed interpolation where the value
+             //at the father could now become active.
+             
+             // Loop over all history values
+             for(unsigned t=0;t<ntstorage;t++)
+              {
+               // Get values from father element
+               // Note: get_interpolated_values() sets Vector size itself.
+               Vector<double> prev_values;
+               father_el_pt->get_interpolated_values(t,s,prev_values);
+               //Find the minimum number of values
+               //(either those stored at the node, or those returned by
+               // the function)
+               unsigned n_val_at_node = created_node_pt->nvalue();
+               unsigned n_val_from_function = prev_values.size(); 
+               //Use the ternary conditional operator here
+               unsigned n_var = n_val_at_node < n_val_from_function ?
+                n_val_at_node : n_val_from_function;
+               //Assign the values that we can
+               for(unsigned k=0;k<n_var;k++)
+                {
+                 created_node_pt->set_value(t,k,prev_values[k]);
+                }
+              }
 
              // Node has been created by copy
              node_done=true;
@@ -1608,7 +1630,7 @@ void RefineableQElement<3>::build(Mesh*& mesh_pt,
                    created_node_pt->set_value(t,k,prev_values[k]);
                   }
                 }
-               
+
                // Add new node to mesh
                mesh_pt->add_node_pt(created_node_pt);
                

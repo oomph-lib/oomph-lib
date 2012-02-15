@@ -7760,13 +7760,13 @@ void Problem::newton_solve()
 
        if (!Shut_up_in_newton_solve) 
         {
-         //Let's output the residuals
+         // Let's output the residuals
          //unsigned n_row_local = dx.distribution_pt()->nrow_local();
          //unsigned first_row = dx.distribution_pt()->first_row();
          //for(unsigned n=0;n<n_row_local;n++)
-         // {
-         //  oomph_info << n + first_row << " " << dx[n] << "\n";
-         // }
+         //{
+         //oomph_info << "residual: " << n + first_row << " " << dx[n] << "\n";
+         //}
 
          oomph_info << "Initial Maximum residuals " << maxres << std::endl;
         }
@@ -10265,6 +10265,51 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
    if (req_flag==1)
     {
      refine_and_prune_required=true;
+    }
+   
+   // If refine and prune is required make number of uniform
+   // refinements for each mesh consistent otherwise code
+   // hangs on "empty" processors for which no restart file exists
+   if (refine_and_prune_required)
+    {
+     // This is what we have locally
+     Vector<unsigned> local_nrefinement_for_mesh(nrefinement_for_mesh);
+     // Synchronise over all processors with max operation
+     MPI_Allreduce(&local_nrefinement_for_mesh[0],
+                   &nrefinement_for_mesh[0],
+                   n_mesh,
+                   MPI_UNSIGNED,MPI_MAX,
+                   MPI_Helpers::communicator_pt()->mpi_comm());
+     
+#ifdef PARANOID
+     // Check it: Reconciliation should only be required for
+     // for processors on which no restart file was opened and
+     // for which the meshes are therefore empty
+     bool fail=false;
+     std::ostringstream error_message;
+     error_message << "Number of uniform refinements was not consistent \n"
+                   << "for following meshes during restart on processor \n"
+                   << "on which restart file could be opened:\n";
+     for (unsigned i=0;i<n_mesh;i++)
+      {
+       if ((local_nrefinement_for_mesh[i]!=nrefinement_for_mesh[i])&&
+           restart_file_is_open)
+        {
+         fail=true;
+         error_message << "Sub-mesh: " << i 
+                       << "; local nrefinement: " 
+                       << local_nrefinement_for_mesh[i] << " "
+                       << "; global/synced nrefinement: " 
+                       << nrefinement_for_mesh[i] << "\n";
+        }
+      }
+     if (fail)
+      {
+       OomphLibWarning(error_message.str(),
+                       "Problem::read()",
+                       OOMPH_EXCEPTION_LOCATION); 
+      }
+#endif
     }
   }
 #endif
@@ -12853,7 +12898,7 @@ void Problem::refine_uniformly_aux(const Vector<unsigned>& nrefine_for_mesh,
 
  // Number of submeshes?
  unsigned n_mesh=nsub_mesh();
-  
+
  // Single mesh:
  if (n_mesh==0)
   {
