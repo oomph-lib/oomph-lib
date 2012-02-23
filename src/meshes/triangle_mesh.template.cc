@@ -814,7 +814,7 @@ namespace oomph
           if (!found)
            {
 #ifdef PARANOID
-            double diff=abs(zeta[0]-
+            double diff=std::fabs(zeta[0]-
                             polygonal_vertex_arclength[n_vertex-1].first);
             if (diff>ToleranceForVertexMismatchInPolygons::Tolerable_error)
              {
@@ -881,7 +881,7 @@ namespace oomph
         //If direction is reversed, then take absolute value
         if(zeta[0] < 0.0)
          {
-          zeta[0] = std::abs(zeta[0]);
+          zeta[0] = std::fabs(zeta[0]);
          }
         if(zeta[0] > zeta_max) {zeta_max = zeta[0];}
         nod_pt->set_coordinates_on_boundary(b,zeta);
@@ -2312,7 +2312,6 @@ namespace oomph
     //------------------------------------------------------
     if (unrefinement_tolerance>0.0)
      {
-
       // Initialise counter that indicates at which vertex we're currently
       // considering for deletion
       unsigned counter=1;
@@ -2323,15 +2322,15 @@ namespace oomph
       // nodes
       if (n_vertex>=3)
        {
-        for(unsigned i=1;i<n_vertex-2;i+=2)
+        for(unsigned i=1;i<=n_vertex-2;i+=2)
          {
           // Maths from http://www.cgafaq.info/wiki/Circle_Through_Three_Points
-          double a_x=tmp_vector_vertex_node[i-1][0];
-          double a_y=tmp_vector_vertex_node[i-1][1];
-          double b_x=tmp_vector_vertex_node[i][0];
-          double b_y=tmp_vector_vertex_node[i][1];
-          double c_x=tmp_vector_vertex_node[i+1][0];
-          double c_y=tmp_vector_vertex_node[i+1][1];
+          double a_x=tmp_vector_vertex_node[i-1][1];
+          double a_y=tmp_vector_vertex_node[i-1][2];
+          double b_x=tmp_vector_vertex_node[i][1];
+          double b_y=tmp_vector_vertex_node[i][2];
+          double c_x=tmp_vector_vertex_node[i+1][1];
+          double c_y=tmp_vector_vertex_node[i+1][2];
 
           double a=b_x-a_x;
           double b=b_y-a_y;
@@ -2344,7 +2343,7 @@ namespace oomph
           double g=2.0*(a*(c_y-b_y)-b*(c_x-b_x));
 
           bool do_it=false;
-          if (abs(g)<1.0e-14)
+          if (std::fabs(g)<1.0e-14)
            {
             do_it=true;
            }
@@ -2384,16 +2383,15 @@ namespace oomph
            }
           
           // Increase the counter, that indicates the number of the 
-          // current middle node
+          // next middle node
           counter+=2;
          }
 
 
-        
         // Special treatment for the end of the polyline:
         // If the for loop ended at the last but second node and this node
         // was not deleted, then check if the last but one node can be deleted
-        if((counter==n_vertex-3)&&
+        if(((counter-2)==(n_vertex-3))&& 
            (tmp_vector_vertex_node[counter].size()!=0))
          {
           // Set the last but one node as middle node
@@ -2405,12 +2403,12 @@ namespace oomph
           // A MISTAKE IN ANY OF THIS AND IT NEEDS TO BE FIXED...
 
           // Maths from http://www.cgafaq.info/wiki/Circle_Through_Three_Points
-          double a_x=tmp_vector_vertex_node[i-1][0];
-          double a_y=tmp_vector_vertex_node[i-1][1];
-          double b_x=tmp_vector_vertex_node[i][0];
-          double b_y=tmp_vector_vertex_node[i][1];
-          double c_x=tmp_vector_vertex_node[i+1][0];
-          double c_y=tmp_vector_vertex_node[i+1][1];
+          double a_x=tmp_vector_vertex_node[i-1][1];
+          double a_y=tmp_vector_vertex_node[i-1][2];
+          double b_x=tmp_vector_vertex_node[i][1];
+          double b_y=tmp_vector_vertex_node[i][2];
+          double c_x=tmp_vector_vertex_node[i+1][1];
+          double c_y=tmp_vector_vertex_node[i+1][2];
 
           double a=b_x-a_x;
           double b=b_y-a_y;
@@ -2418,12 +2416,12 @@ namespace oomph
           double d=c_y-a_y;
 
           double e=a*(a_x+b_x)+b*(a_y+b_y);
-          double f=a*(a_x+c_x)+b*(a_y+c_y);
+          double f=c*(a_x+c_x)+d*(a_y+c_y);
 
           double g=2.0*(a*(c_y-b_y)-b*(c_x-b_x));
 
           bool do_it=false;
-          if (g<1.0e-14)
+          if (std::fabs(g)<1.0e-14)
            {
             do_it=true;
            }
@@ -3435,9 +3433,9 @@ namespace oomph
     for(unsigned m=old_index;m<n_boundary_node;++m)
      {
       if(
-       (std::abs(old_boundary_node[m][1] - new_boundary_node[n][1]) < 1.0e-14)
+       (std::fabs(old_boundary_node[m][1] - new_boundary_node[n][1])<1.0e-14)
        && 
-       (std::abs(old_boundary_node[m][2] - new_boundary_node[n][2]) < 1.0e-14))
+       (std::fabs(old_boundary_node[m][2] - new_boundary_node[n][2])<1.0e-14))
        {
         //Store the boundary coordinate from the old mesh
         new_boundary_node[n][4] = old_boundary_node[m][0];

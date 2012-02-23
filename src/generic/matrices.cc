@@ -107,7 +107,7 @@ namespace JacobiEigenSolver
    sm=0.0;
    for (ip=0;ip<n-1;ip++) {
     for (iq=ip+1;iq<n;iq++)
-     sm += std::abs(a(ip,iq));
+     sm += std::fabs(a(ip,iq));
    }
    if (sm == 0.0)
     return;
@@ -117,17 +117,17 @@ namespace JacobiEigenSolver
     tresh=0.0;
    for (ip=0;ip<n-1;ip++) {
     for (iq=ip+1;iq<n;iq++) {
-     g=100.0*std::abs(a(ip,iq));
-     if (i > 4 && (std::abs(d[ip])+g) == std::abs(d[ip])
-         && (std::abs(d[iq])+g) == std::abs(d[iq]))
+     g=100.0*std::fabs(a(ip,iq));
+     if (i > 4 && (std::fabs(d[ip])+g) == std::fabs(d[ip])
+         && (std::fabs(d[iq])+g) == std::fabs(d[iq]))
       a(ip,iq)=0.0;
-     else if (std::abs(a(ip,iq)) > tresh) {
+     else if (std::fabs(a(ip,iq)) > tresh) {
       h=d[iq]-d[ip];
-      if ((std::abs(h)+g) == std::abs(h))
+      if ((std::fabs(h)+g) == std::fabs(h))
        t=(a(ip,iq))/h;
       else {
        theta=0.5*h/(a(ip,iq));
-       t=1.0/(std::abs(theta)+std::sqrt(1.0+theta*theta));
+       t=1.0/(std::fabs(theta)+std::sqrt(1.0+theta*theta));
        if (theta < 0.0) t = -t;
       }
       c=1.0/std::sqrt(1+t*t);
@@ -622,9 +622,9 @@ void DenseDoubleMatrix::matrix_reduction(const double &alpha,
    for(unsigned long j=0;j<M;j++)
     {
      // Find max. value in row
-     if(std::abs( Matrixdata[M*i+j])>max_row)
+     if(std::fabs( Matrixdata[M*i+j])>max_row)
       {
-       max_row=std::abs( Matrixdata[M*i+j]);
+       max_row=std::fabs( Matrixdata[M*i+j]);
       }
     }
 
@@ -633,7 +633,7 @@ void DenseDoubleMatrix::matrix_reduction(const double &alpha,
     {
      // If we're on the diagonal or the value is sufficiently large: retain
      // i.e. copy across.
-     if(i==j || std::abs(Matrixdata[M*i+j])>alpha*max_row )
+     if(i==j || std::fabs(Matrixdata[M*i+j])>alpha*max_row )
       {
        reduced_matrix(i,j) =Matrixdata[M*i+j];
       }
@@ -1313,9 +1313,9 @@ void CCDoubleMatrix::matrix_reduction(const double &alpha,
     {
     
      // Find max. value in row
-     if(std::abs(Value[j])>max_row[Row_index[j]])
+     if(std::fabs(Value[j])>max_row[Row_index[j]])
       {
-       max_row[Row_index[j]]=std::abs(Value[j]);
+       max_row[Row_index[j]]=std::fabs(Value[j]);
       }
     }
 
@@ -1324,7 +1324,7 @@ void CCDoubleMatrix::matrix_reduction(const double &alpha,
     {
      // If we're on the diagonal or the value is sufficiently large: retain
      // i.e. copy across.
-     if(i==Row_index[j] || std::abs(Value[j])>alpha*max_row[Row_index[j]] )
+     if(i==Row_index[j] || std::fabs(Value[j])>alpha*max_row[Row_index[j]] )
       {
        B_value.push_back(Value[j]);
        B_column_index.push_back(Row_index[j]);
@@ -2234,9 +2234,9 @@ void CRDoubleMatrix::matrix_reduction(const double &alpha,
    for(long j=row_start[i];j<row_start[i+1];j++)
     {
      // Find max. value in row
-     if(std::abs(value[j])>max_row)
+     if(std::fabs(value[j])>max_row)
       {
-       max_row=std::abs(value[j]);
+       max_row=std::fabs(value[j]);
       }
     }
 
@@ -2245,7 +2245,7 @@ void CRDoubleMatrix::matrix_reduction(const double &alpha,
     {
      // If we're on the diagonal or the value is sufficiently large: retain
      // i.e. copy across.
-     if(i==column_index[j] || std::abs(value[j])>alpha*max_row )
+     if(i==column_index[j] || std::fabs(value[j])>alpha*max_row )
       {
        B_value.push_back(value[j]);
        B_column_index.push_back(column_index[j]);

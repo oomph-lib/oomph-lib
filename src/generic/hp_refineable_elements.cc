@@ -139,12 +139,12 @@ get_node_at_local_coordinate(const Vector<double> &s)
  // -------------------
  
  // If we are at the lower limit, the index is zero
- if(std::abs(s[0] + 1.0) < tol)
+ if(std::fabs(s[0] + 1.0) < tol)
   {
    index[0] = 0;
   }
  // If we are at the upper limit, the index is the number of nodes minus 1
- else if(std::abs(s[0] - 1.0) < tol)
+ else if(std::fabs(s[0] - 1.0) < tol)
   {
    index[0] = this->nnode_1d()-1;
   }
@@ -157,7 +157,7 @@ get_node_at_local_coordinate(const Vector<double> &s)
    // Loop over possible internal nodal positions
    for (unsigned n=1; n<this->nnode_1d()-1; n++)
     {
-     if (std::abs(z[n] - s[0]) < tol)
+     if (std::fabs(z[n] - s[0]) < tol)
       {
        index[0] = n;
        break;
@@ -790,13 +790,13 @@ get_node_at_local_coordinate(const Vector<double> &s)
    bool is_found=false;
    
    // If we are at the lower limit, the index is zero
-   if(std::abs(s[i] + 1.0) < tol)
+   if(std::fabs(s[i] + 1.0) < tol)
     {
      index[i] = 0;
      is_found=true;
     }
    // If we are at the upper limit, the index is the number of nodes minus 1
-   else if(std::abs(s[i] - 1.0) < tol)
+   else if(std::fabs(s[i] - 1.0) < tol)
     {
      index[i] = Nnode_1d-1;
      is_found=true;
@@ -810,7 +810,7 @@ get_node_at_local_coordinate(const Vector<double> &s)
      // Loop over possible internal nodal positions
      for (unsigned n=1; n<Nnode_1d-1; n++)
       {
-       if (std::abs(z[n] - s[i]) < tol)
+       if (std::fabs(z[n] - s[i]) < tol)
         {
          index[i] = n;
          is_found=true;
@@ -2854,7 +2854,7 @@ check_integrity(double& max_error)
            for(int i=0;i<2;i++)
             {
              //Find the spatial error
-             double err = std::abs(local_node_pt->x(t,i) - x_in_neighb[i]);
+             double err = std::fabs(local_node_pt->x(t,i) - x_in_neighb[i]);
              
              //If it's bigger than our tolerance, say so
              if (err>1e-9)
@@ -2892,7 +2892,7 @@ check_integrity(double& max_error)
          // Check error
          for(unsigned ival=0;ival<num_val;ival++)
           {
-           double err=std::abs(values[ival] - values_in_neighb[ival]);
+           double err=std::fabs(values[ival] - values_in_neighb[ival]);
            
            if (err>1.0e-10)
              {
@@ -3082,13 +3082,13 @@ get_node_at_local_coordinate(const Vector<double> &s)
    bool is_found=false;
    
    // If we are at the lower limit, the index is zero
-   if(std::abs(s[i] + 1.0) < tol)
+   if(std::fabs(s[i] + 1.0) < tol)
     {
      index[i] = 0;
      is_found=true;
     }
    // If we are at the upper limit, the index is the number of nodes minus 1
-   else if(std::abs(s[i] - 1.0) < tol)
+   else if(std::fabs(s[i] - 1.0) < tol)
     {
      index[i] = Nnode_1d-1;
      is_found=true;
@@ -3102,7 +3102,7 @@ get_node_at_local_coordinate(const Vector<double> &s)
      // Loop over possible internal nodal positions
      for (unsigned n=1; n<Nnode_1d-1; n++)
       {
-       if (std::abs(z[n] - s[i]) < tol)
+       if (std::fabs(z[n] - s[i]) < tol)
         {
          index[i] = n;
          is_found=true;

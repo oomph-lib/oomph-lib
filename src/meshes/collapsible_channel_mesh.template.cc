@@ -366,14 +366,14 @@ void AlgebraicCollapsibleChannelMesh<ELEMENT>::setup_algebraic_node_update()
 
      // Sanity check: Confirm that the wall is in its undeformed position
 #ifdef PARANOID
-     if ((std::abs(r_wall[0]-x)>1.0e-15)&&(std::abs(r_wall[1]-y)>1.0e-15))
+     if ((std::fabs(r_wall[0]-x)>1.0e-15)&&(std::fabs(r_wall[1]-y)>1.0e-15))
       {
        std::ostringstream error_stream;
        error_stream 
         << "Wall must be in its undeformed position when\n"
         << "algebraic node update information is set up!\n "
-        << "x-discrepancy: " << std::abs(r_wall[0]-x) << std::endl
-        << "y-discrepancy: " << std::abs(r_wall[1]-y) << std::endl;
+        << "x-discrepancy: " << std::fabs(r_wall[0]-x) << std::endl
+        << "y-discrepancy: " << std::fabs(r_wall[1]-y) << std::endl;
        
        throw OomphLibError(
         error_stream.str(),

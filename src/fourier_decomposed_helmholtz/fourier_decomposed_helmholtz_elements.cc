@@ -59,7 +59,7 @@ namespace oomph
 
 #ifdef PARANOID
    // Shout if things went wrong  
-   if (fabs(x) > 1.0)
+   if (std::fabs(x) > 1.0)
     {
      std::ostringstream error_stream;    
      error_stream << "Bad arguments in routine plgndr1: x=" << x 
@@ -107,7 +107,7 @@ namespace oomph
 
 #ifdef PARANOID
    // Shout if things went wrong  
-   if (fabs(x) > 1.0)
+   if (std::fabs(x) > 1.0)
     {
      std::ostringstream error_stream;    
      error_stream << "Bad arguments in routine plgndr2: x=" << x 

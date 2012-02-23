@@ -716,7 +716,7 @@ double MinModLimiter::minmod(Vector<double> &args)
  else {return 0.0;}
  
  //Initialise the minimum value
- double min = std::abs(args[0]);
+ double min = std::fabs(args[0]);
  
  //Now loop over the rest of the values
  for(unsigned i=1;i<n_arg;i++)
@@ -729,7 +729,7 @@ double MinModLimiter::minmod(Vector<double> &args)
    else if(sign == -1)
     {
      if(args[i] > 0.0) {return 0.0;}
-     else if(std::abs(args[i]) < min) {min = std::abs(args[i]);}
+     else if(std::fabs(args[i]) < min) {min = std::fabs(args[i]);}
     }
   }
  
@@ -746,7 +746,7 @@ double MinModLimiter::minmodB(Vector<double> &args, const double &h)
  if(n_arg==0) {return 0.0;}
   
  //Modification to fix extrema
- if(std::abs(args[0]) < this->M*h*h) {return args[0];}
+ if(std::fabs(args[0]) < this->M*h*h) {return args[0];}
  //Otherwise just return the usual minmod
  else {return minmod(args);}
 }
@@ -794,8 +794,8 @@ void MinModLimiter::limit(const unsigned &i,
 
  //If the basic limited values are different from 
  //the unlimited values then limit
- if((std::abs(u_l - required_element_pt[0]->node_pt(0)->value(i)) > tol) &&
-    (std::abs(u_r - required_element_pt[0]->node_pt(n_node-1)->value(i)) 
+ if((std::fabs(u_l - required_element_pt[0]->node_pt(0)->value(i)) > tol) &&
+    (std::fabs(u_r - required_element_pt[0]->node_pt(n_node-1)->value(i)) 
      > tol))
   {
    //Find the centre of the element on the left

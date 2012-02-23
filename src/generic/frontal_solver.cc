@@ -120,7 +120,7 @@ void HSL_MA42::solve_for_one_dof(Problem* const &problem_pt,
   }
  //Set the sign of the jacobian
  problem_pt->sign_of_jacobian() = 
-  static_cast<int>(std::abs(global_jac)/global_jac);
+  static_cast<int>(std::fabs(global_jac)/global_jac);
 }
 
 //====================================================================

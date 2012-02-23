@@ -764,7 +764,7 @@ namespace oomph
         if(is_periodic==false)
          {
           // Find the spatial error
-          double err = std::abs(local_node_pt->x(t,0) - x_in_neighbour[0]);
+          double err = std::fabs(local_node_pt->x(t,0) - x_in_neighbour[0]);
           
           // If it's bigger than our tolerance, say so
           if(err>1e-9)
@@ -803,7 +803,7 @@ namespace oomph
         for(unsigned ival=0;ival<num_val;ival++)
          {
           // Find the spatial error
-          double err = std::abs(values_in_current[ival]
+          double err = std::fabs(values_in_current[ival]
                                 - values_in_neighbour[ival]);
 
           // If it's bigger than our tolerance, say so           

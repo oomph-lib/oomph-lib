@@ -435,11 +435,11 @@ namespace oomph
   double dof_length=0.0, a_length=0.0, alpha_length=0.0;
   for(unsigned n=0;n<n_dof;n++)
    {
-    if(std::abs(problem_pt->dof(n)) > dof_length) 
-     {dof_length = std::abs(problem_pt->dof(n));}
-    if(std::abs(a[n]) > a_length) {a_length = std::abs(a[n]);}
-    if(std::abs(y_minus_alpha[n]) > alpha_length) 
-     {alpha_length = std::abs(y_minus_alpha[n]);}
+    if(std::fabs(problem_pt->dof(n)) > dof_length) 
+     {dof_length = std::fabs(problem_pt->dof(n));}
+    if(std::fabs(a[n]) > a_length) {a_length = std::fabs(a[n]);}
+    if(std::fabs(y_minus_alpha[n]) > alpha_length) 
+     {alpha_length = std::fabs(y_minus_alpha[n]);}
    }
 
   double a_mult = dof_length/a_length;
@@ -557,7 +557,7 @@ namespace oomph
 
    //The sign of the jacobian is the sign of the final entry in e
    problem_pt->sign_of_jacobian() = 
-    static_cast<int>(std::abs(e_final)/e_final);
+    static_cast<int>(std::fabs(e_final)/e_final);
 
    //Switch things to our block solver
    handler_pt->solve_full_system();
@@ -652,10 +652,10 @@ namespace oomph
   double dof_length=0.0, a_length=0.0;
   for(unsigned n=0;n<n_dof;n++)
    {
-    if(std::abs(problem_pt->dof(n)) > dof_length) 
-     {dof_length = std::abs(problem_pt->dof(n));}
+    if(std::fabs(problem_pt->dof(n)) > dof_length) 
+     {dof_length = std::fabs(problem_pt->dof(n));}
     
-    if(std::abs(a[n]) > a_length) {a_length = std::abs(a[n]);}
+    if(std::fabs(a[n]) > a_length) {a_length = std::fabs(a[n]);}
    }
   double a_mult = dof_length/a_length;
   const double FD_step = 1.0e-8;
@@ -1695,7 +1695,7 @@ namespace oomph
   //the product psi_c and l_b
   //NOT CHECKED YET!
   problem_pt->sign_of_jacobian() = 
-   static_cast<int>(std::abs(psi_c*l_b)/(psi_c*l_b));
+   static_cast<int>(std::fabs(psi_c*l_b)/(psi_c*l_b));
   
   //Redistribute the result into its incoming distribution
   result.redistribute(&result_dist);
@@ -2034,11 +2034,11 @@ namespace oomph
   double dof_length=0.0, a_length=0.0, alpha_length=0.0;
   for(unsigned n=0;n<n_dof;n++)
    {
-    if(std::abs(problem_pt->dof(n)) > dof_length) 
-     {dof_length = std::abs(problem_pt->dof(n));}
-    if(std::abs(a[n]) > a_length) {a_length = std::abs(a[n]);}
-    if(std::abs((*Alpha_pt)[n]) > alpha_length) 
-     {alpha_length = std::abs((*Alpha_pt)[n]);}
+    if(std::fabs(problem_pt->dof(n)) > dof_length) 
+     {dof_length = std::fabs(problem_pt->dof(n));}
+    if(std::fabs(a[n]) > a_length) {a_length = std::fabs(a[n]);}
+    if(std::fabs((*Alpha_pt)[n]) > alpha_length) 
+     {alpha_length = std::fabs((*Alpha_pt)[n]);}
    }
 
   double a_mult = dof_length/a_length;
@@ -2160,7 +2160,7 @@ namespace oomph
 
    //The sign of the jacobian is the sign of the final entry in e
    problem_pt->sign_of_jacobian() = 
-    static_cast<int>(std::abs(e_final)/e_final);
+    static_cast<int>(std::fabs(e_final)/e_final);
 
    
    //Switch things to our block solver
@@ -2239,10 +2239,10 @@ namespace oomph
   double dof_length=0.0, a_length=0.0;
   for(unsigned n=0;n<n_dof;n++)
    {
-    if(std::abs(problem_pt->dof(n)) > dof_length) 
-     {dof_length = std::abs(problem_pt->dof(n));}
+    if(std::fabs(problem_pt->dof(n)) > dof_length) 
+     {dof_length = std::fabs(problem_pt->dof(n));}
     
-    if(std::abs(a[n]) > a_length) {a_length = std::abs(a[n]);}
+    if(std::fabs(a[n]) > a_length) {a_length = std::fabs(a[n]);}
    }
   double a_mult = dof_length/a_length;
   const double FD_step = 1.0e-8;
@@ -3372,11 +3372,11 @@ namespace oomph
   //Loop over the standard number of dofs
   for(unsigned n=0;n<n_dof;n++)
    {
-    if(std::abs(problem_pt->dof(n)) > dof_length) 
-     {dof_length = std::abs(problem_pt->dof(n));}
-    if(std::abs((*A_pt)[n]) > a_length) {a_length = std::abs((*A_pt)[n]);}
-    if(std::abs(y1[n]) > y1_length) 
-     {y1_length = std::abs(y1[n]);}
+    if(std::fabs(problem_pt->dof(n)) > dof_length) 
+     {dof_length = std::fabs(problem_pt->dof(n));}
+    if(std::fabs((*A_pt)[n]) > a_length) {a_length = std::fabs((*A_pt)[n]);}
+    if(std::fabs(y1[n]) > y1_length) 
+     {y1_length = std::fabs(y1[n]);}
    }
 
   double a_mult = dof_length/a_length;
@@ -3552,7 +3552,7 @@ namespace oomph
    //The sign of the jacobian is the previous signs multiplied by the 
    //sign of the denominator
    problem_pt->sign_of_jacobian() = sign_of_jacobian*
-    static_cast<int>(std::abs(denom)/denom);
+    static_cast<int>(std::fabs(denom)/denom);
    
    //Switch things to our full solver
    handler_pt->solve_full_system();
@@ -3719,13 +3719,13 @@ namespace oomph
   //Loop over the standard number of dofs
   for(unsigned n=0;n<n_dof;n++)
    {
-    if(std::abs(problem_pt->dof(n)) > dof_length) 
-     {dof_length = std::abs(problem_pt->dof(n));}
-    if(std::abs((*A_pt)[n]) > a_length) {a_length = std::abs((*A_pt)[n]);}
-    if(std::abs(y1[n]) > y1_length) 
-     {y1_length = std::abs(y1[n]);}
-    if(std::abs(y1_resolve[n]) > y1_resolve_length) 
-     {y1_resolve_length = std::abs(y1[n]);}
+    if(std::fabs(problem_pt->dof(n)) > dof_length) 
+     {dof_length = std::fabs(problem_pt->dof(n));}
+    if(std::fabs((*A_pt)[n]) > a_length) {a_length = std::fabs((*A_pt)[n]);}
+    if(std::fabs(y1[n]) > y1_length) 
+     {y1_length = std::fabs(y1[n]);}
+    if(std::fabs(y1_resolve[n]) > y1_resolve_length) 
+     {y1_resolve_length = std::fabs(y1[n]);}
    }
 
 
@@ -3968,7 +3968,7 @@ namespace oomph
    //The sign of the jacobian is the previous signs multiplied by the 
    //sign of the denominator
    problem_pt->sign_of_jacobian() = sign_of_jacobian*
-    static_cast<int>(std::abs(denom)/denom);
+    static_cast<int>(std::fabs(denom)/denom);
    
    //Switch things to our full solver
    handler_pt->solve_full_system();

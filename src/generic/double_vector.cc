@@ -582,9 +582,9 @@ namespace oomph
    double max = 0.0;
    for (unsigned i = 0; i < nrow; i++)
     {
-     if (std::abs(Values_pt[i]) > std::abs(max))
+     if (std::fabs(Values_pt[i]) > std::fabs(max))
       {
-       max = std::abs(Values_pt[i]);
+       max = std::fabs(Values_pt[i]);
       }
     }
 

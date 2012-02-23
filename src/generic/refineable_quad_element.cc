@@ -1768,7 +1768,7 @@ void RefineableQElement<2>::check_integrity(double& max_error)
            for(int i=0;i<2;i++)
             {
              //Find the spatial error
-             double err = std::abs(local_node_pt->x(t,i) - x_in_neighb[i]);
+             double err = std::fabs(local_node_pt->x(t,i) - x_in_neighb[i]);
              
              //If it's bigger than our tolerance, say so
              if (err>1e-9)
@@ -1804,7 +1804,7 @@ void RefineableQElement<2>::check_integrity(double& max_error)
          // Check error
          for(unsigned ival=0;ival<num_val;ival++)
           {
-           double err=std::abs(values[ival] - values_in_neighb[ival]);
+           double err=std::fabs(values[ival] - values_in_neighb[ival]);
            
            if (err>1.0e-10)
              {

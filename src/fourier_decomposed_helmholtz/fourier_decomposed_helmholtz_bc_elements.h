@@ -974,7 +974,7 @@ void FourierDecomposedHelmholtzDtNMesh<ELEMENT>::setup_gamma()
          OOMPH_EXCEPTION_LOCATION);
        }
       
-      if(abs((r-this->Outer_radius)/Outer_radius)
+      if(std::fabs((r-this->Outer_radius)/Outer_radius)
          >ToleranceForFourierDecomposedHelmholtzOuterBoundary::Tol)
        { 
         std::ostringstream error_stream; 

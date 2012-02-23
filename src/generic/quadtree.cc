@@ -1524,9 +1524,9 @@ void QuadTree::doc_neighbours(Vector<Tree*> forest_nodes_pt,
            neighbours_txt_file << "Error (1) " << error << std::endl;
           }
          
-         if (std::abs(error)>max_error)
+         if (std::fabs(error)>max_error)
           {
-           max_error=std::abs(error);
+           max_error=std::fabs(error);
           }
          
          if (neighbours_file.is_open()) 
@@ -1566,9 +1566,9 @@ void QuadTree::doc_neighbours(Vector<Tree*> forest_nodes_pt,
             neighbours_txt_file << "Error (2) " << error << std::endl;
            }
 
-          if (std::abs(error)>max_error)
+          if (std::fabs(error)>max_error)
            {
-            max_error=std::abs(error);
+            max_error=std::fabs(error);
            }
 
           if (neighbours_file.is_open()) 

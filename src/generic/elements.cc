@@ -1446,7 +1446,7 @@ namespace Locate_zeta_helpers
  void FiniteElement::check_jacobian(const double &jacobian) const
  {
   //First check for a zero jacobian
-  if(std::abs(jacobian) < 1.0e-16)
+  if(std::fabs(jacobian) < 1.0e-16)
    {
     if (FiniteElement::Suppress_output_while_checking_for_inverted_elements)
      {
@@ -3432,7 +3432,7 @@ void FiniteElement::get_dresidual_dnodal_coordinates(
        //Calculate the difference between coordinates
        //and if it's bigger than our tolerance 
        //break out of the (inner)loop
-       if(std::abs(s[i] - s_node[i]) > tol)
+       if(std::fabs(s[i] - s_node[i]) > tol)
         {
          Match = false;
          break;
@@ -3955,7 +3955,7 @@ void FiniteElement::get_dresidual_dnodal_coordinates(
 
        
         //Check for a singular jacobian
-        if(std::abs(jacobian) < 1.0e-16)
+        if(std::fabs(jacobian) < 1.0e-16)
          {
           std::ostringstream warning_stream;
           warning_stream << "Determinant of Jacobian matrix is zero at ipt "
@@ -4265,7 +4265,7 @@ void FiniteElement::locate_zeta(const Vector<double> &zeta,
           }
 
          double maxres =
-          std::abs(*std::max_element(work_dx.begin(),work_dx.end(),
+          std::fabs(*std::max_element(work_dx.begin(),work_dx.end(),
                                      AbsCmp<double>()));
 
          // test against previous residuals
@@ -4298,7 +4298,7 @@ void FiniteElement::locate_zeta(const Vector<double> &zeta,
        if(count==1)
         {
          double maxres =
-          std::abs(*std::max_element(dx.begin(),dx.end(),AbsCmp<double>()));
+          std::fabs(*std::max_element(dx.begin(),dx.end(),AbsCmp<double>()));
 
          //If it's small enough exit
          if(maxres < Locate_zeta_helpers::Newton_tolerance)
@@ -4426,7 +4426,7 @@ void FiniteElement::locate_zeta(const Vector<double> &zeta,
      
        //Get the maximum residuals
        double maxres =
-        std::abs(*std::max_element(dx.begin(),dx.end(),AbsCmp<double>()));
+        std::fabs(*std::max_element(dx.begin(),dx.end(),AbsCmp<double>()));
 
        //If we have converged jump straight to the test at the end of the loop
        if(maxres < Locate_zeta_helpers::Newton_tolerance)

@@ -3914,7 +3914,7 @@ void Problem::sparse_assemble_row_or_column_compressed_with_maps(
             //Get the value of the matrix at this point
             double value = el_jacobian[m](i,j);
             //Only bother to add to the map if it's non-zero
-            if(std::abs(value) > Numerical_zero_for_sparse_assembly)
+            if(std::fabs(value) > Numerical_zero_for_sparse_assembly)
              {
               //If it's compressed row storage, then our vector of maps
               //is indexed by row (equation number)
@@ -4258,7 +4258,7 @@ void Problem::sparse_assemble_row_or_column_compressed_with_lists(
             //Get the value of the matrix at this point
             double value = el_jacobian[m](i,j);
             //Only add to theif it's non-zero
-            if(std::abs(value) > Numerical_zero_for_sparse_assembly)
+            if(std::fabs(value) > Numerical_zero_for_sparse_assembly)
              {
               //If it's compressed row storage, then our vector is indexed
               //by row (the equation number)
@@ -4388,7 +4388,7 @@ void Problem::sparse_assemble_row_or_column_compressed_with_lists(
        //of the present entry to the value. 
        //Additionally check that the entry is non-zero
        if((it->first == current_index) && 
-          (std::abs(it->second) > Numerical_zero_for_sparse_assembly))
+          (std::fabs(it->second) > Numerical_zero_for_sparse_assembly))
         {
          current_value += it->second;
         }
@@ -4661,7 +4661,7 @@ void Problem::sparse_assemble_row_or_column_compressed_with_vectors_of_pairs(
             //Get the value of the matrix at this point
             double value = el_jacobian[m](i,j);
             //Only bother to add to the vector if it's non-zero
-            if(std::abs(value) > Numerical_zero_for_sparse_assembly)
+            if(std::fabs(value) > Numerical_zero_for_sparse_assembly)
              {
               //If it's compressed row storage, then our vector of maps
               //is indexed by row (equation number)
@@ -5025,7 +5025,7 @@ void Problem::sparse_assemble_row_or_column_compressed_with_two_vectors(
             //Get the value of the matrix at this point
             double value = el_jacobian[m](i,j);
             //Only bother to add to the vector if it's non-zero
-            if(std::abs(value) > Numerical_zero_for_sparse_assembly)
+            if(std::fabs(value) > Numerical_zero_for_sparse_assembly)
              {
               //If it's compressed row storage, then our vector of maps
               //is indexed by row (equation number)
@@ -5405,7 +5405,7 @@ void Problem::sparse_assemble_row_or_column_compressed_with_two_arrays(
             //Get the value of the matrix at this point
             double value = el_jacobian[m](i,j);
             //Only bother to add to the vector if it's non-zero
-            if(std::abs(value) > Numerical_zero_for_sparse_assembly)
+            if(std::fabs(value) > Numerical_zero_for_sparse_assembly)
              {
               // number of entrys in this row
               const unsigned size = ncoef[m][eqn_number];
@@ -6016,7 +6016,7 @@ void Problem::parallel_sparse_assemble
             //Get the value of the matrix at this point
             double value = el_jacobian[m](i,j);
             //Only bother to add to the vector if it's non-zero
-            if(std::abs(value) > Numerical_zero_for_sparse_assembly)
+            if(std::fabs(value) > Numerical_zero_for_sparse_assembly)
              {
               // number of entrys in this row
               const unsigned size = ncoef[m][eqn_number];
@@ -7210,8 +7210,8 @@ for(unsigned i=0;i<n_vec;i++)
    
    for(unsigned n=0;n<n_dof_local;n++)
     {
-     if(std::abs(this->dof(n)) > dof_length) 
-      {dof_length = std::abs(this->dof(n));}
+     if(std::fabs(this->dof(n)) > dof_length) 
+      {dof_length = std::fabs(this->dof(n));}
     }
    
    //C is assumed to have the same distribution as the dofs
@@ -7219,7 +7219,7 @@ for(unsigned i=0;i<n_vec;i++)
     {
      for(unsigned n=0;n<n_dof_local;n++)
       {
-       if(std::abs(C[i][n]) > C_length[i]) {C_length[i] = std::abs(C[i][n]);}
+       if(std::fabs(C[i][n]) > C_length[i]) {C_length[i] = std::fabs(C[i][n]);}
       }
     }
    
@@ -7859,7 +7859,7 @@ void Problem::newton_solve()
    if (Problem_is_nonlinear)
     {
      //Get the maximum residuals
-     //maxres = std::abs(*std::max_element(dx.begin(),dx.end(),
+     //maxres = std::fabs(*std::max_element(dx.begin(),dx.end(),
      //                                    AbsCmp<double>()));
      //oomph_info << "Maxres correction " << maxres << "\n";
 
@@ -8148,9 +8148,9 @@ newton_solve_continuation(double* const &parameter_pt,
       Parameter_derivative*(*parameter_pt - Parameter_current) - Ds_current;
 
      //Is it the max
-     if(std::abs(arc_length_constraint_residual) > maxres)
+     if(std::fabs(arc_length_constraint_residual) > maxres)
       {
-       maxres = std::abs(arc_length_constraint_residual);
+       maxres = std::fabs(arc_length_constraint_residual);
       }
 
      //Find the max
@@ -8311,9 +8311,9 @@ newton_solve_continuation(double* const &parameter_pt,
     - Ds_current;
 
    //Is it the max
-   if(std::abs(arc_length_constraint_residual) > maxres)
+   if(std::fabs(arc_length_constraint_residual) > maxres)
     {
-     maxres = std::abs(arc_length_constraint_residual);
+     maxres = std::fabs(arc_length_constraint_residual);
     }
 
    if (!Shut_up_in_newton_solve) 
@@ -8869,7 +8869,7 @@ double Problem::arc_length_step_solve(double* const &parameter_pt,
  do
   {
    //Check that the step has not fallen below the minimum tolerance
-   if(std::abs(Ds_current) < Minimum_ds)
+   if(std::fabs(Ds_current) < Minimum_ds)
     {
      std::ostringstream error_message;
      error_message << "DESIRED ARC-LENGTH STEP " << Ds_current 
@@ -11380,11 +11380,11 @@ void Problem::adapt(unsigned &n_refined, unsigned &n_unrefined)
        
        // Store max./min actual error
        mmesh_pt->max_error()=
-        std::abs(*std::max_element(elemental_error.begin(),
+        std::fabs(*std::max_element(elemental_error.begin(),
                                    elemental_error.end(),AbsCmp<double>()));
        
        mmesh_pt->min_error()=
-        std::abs(*std::min_element(elemental_error.begin(),
+        std::fabs(*std::min_element(elemental_error.begin(),
                                    elemental_error.end(),AbsCmp<double>()));
 
        oomph_info << "\n Max/min error: " 
@@ -11478,12 +11478,12 @@ void Problem::adapt(unsigned &n_refined, unsigned &n_unrefined)
          if (mesh_pt(imesh)->nelement()>0)
           {
            mmesh_pt->max_error()=
-            std::abs(*std::max_element(elemental_error.begin(),
+            std::fabs(*std::max_element(elemental_error.begin(),
                                        elemental_error.end(),
                                        AbsCmp<double>()));
           
            mmesh_pt->min_error()=
-            std::abs(*std::min_element(elemental_error.begin(),
+            std::fabs(*std::min_element(elemental_error.begin(),
                                        elemental_error.end(),
                                        AbsCmp<double>()));
           }
@@ -11682,11 +11682,11 @@ void Problem::p_adapt(unsigned &n_refined, unsigned &n_unrefined)
        
        // Store max./min actual error
        mmesh_pt->max_error()=
-        std::abs(*std::max_element(elemental_error.begin(),
+        std::fabs(*std::max_element(elemental_error.begin(),
                                    elemental_error.end(),AbsCmp<double>()));
        
        mmesh_pt->min_error()=
-        std::abs(*std::min_element(elemental_error.begin(),
+        std::fabs(*std::min_element(elemental_error.begin(),
                                    elemental_error.end(),AbsCmp<double>()));
 
        oomph_info << "\n Max/min error: " 
@@ -11780,12 +11780,12 @@ void Problem::p_adapt(unsigned &n_refined, unsigned &n_unrefined)
          if (mesh_pt(imesh)->nelement()>0)
           {
            mmesh_pt->max_error()=
-            std::abs(*std::max_element(elemental_error.begin(),
+            std::fabs(*std::max_element(elemental_error.begin(),
                                        elemental_error.end(),
                                        AbsCmp<double>()));
           
            mmesh_pt->min_error()=
-            std::abs(*std::min_element(elemental_error.begin(),
+            std::fabs(*std::min_element(elemental_error.begin(),
                                        elemental_error.end(),
                                        AbsCmp<double>()));
           }
@@ -12046,11 +12046,11 @@ void Problem::get_all_error_estimates(Vector<Vector<double> > &elemental_error)
        
        // Store max./min actual error
        mmesh_pt->max_error()=
-        std::abs(*std::max_element(elemental_error[0].begin(),
+        std::fabs(*std::max_element(elemental_error[0].begin(),
                                    elemental_error[0].end(),AbsCmp<double>()));
        
        mmesh_pt->min_error()=
-        std::abs(*std::min_element(elemental_error[0].begin(),
+        std::fabs(*std::min_element(elemental_error[0].begin(),
                                    elemental_error[0].end(),AbsCmp<double>()));
        
        oomph_info << "\n Max/min error: " 
@@ -12118,12 +12118,12 @@ void Problem::get_all_error_estimates(Vector<Vector<double> > &elemental_error)
          
          // Store max./min error
          mmesh_pt->max_error()=
-          std::abs(*std::max_element(elemental_error[imesh].begin(),
+          std::fabs(*std::max_element(elemental_error[imesh].begin(),
                                      elemental_error[imesh].end(),
                                      AbsCmp<double>()));
          
          mmesh_pt->min_error()=
-          std::abs(*std::min_element(elemental_error[imesh].begin(),
+          std::fabs(*std::min_element(elemental_error[imesh].begin(),
                                      elemental_error[imesh].end(),
                                      AbsCmp<double>()));
          
@@ -12206,11 +12206,11 @@ void Problem::doc_errors(DocInfo& doc_info)
 
      // Store max./min actual error
      mmesh_pt->max_error()=
-      std::abs(*std::max_element(elemental_error.begin(),
+      std::fabs(*std::max_element(elemental_error.begin(),
                                  elemental_error.end(),AbsCmp<double>()));
       
      mmesh_pt->min_error()=
-      std::abs(*std::min_element(elemental_error.begin(),
+      std::fabs(*std::min_element(elemental_error.begin(),
                                  elemental_error.end(),AbsCmp<double>()));
       
      oomph_info << "\n Max/min error: " 
@@ -12268,11 +12268,11 @@ void Problem::doc_errors(DocInfo& doc_info)
        if (mesh_pt(imesh)->nelement()>0)
         {
          mmesh_pt->max_error()=
-          std::abs(*std::max_element(elemental_error.begin(),
+          std::fabs(*std::max_element(elemental_error.begin(),
                                      elemental_error.end(),AbsCmp<double>()));
         
          mmesh_pt->min_error()=
-          std::abs(*std::min_element(elemental_error.begin(),
+          std::fabs(*std::min_element(elemental_error.begin(),
                                      elemental_error.end(),AbsCmp<double>()));
         }
 

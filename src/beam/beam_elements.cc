@@ -1142,7 +1142,7 @@ void FSIHermiteBeamElement::locate_zeta(const Vector<double> &zeta,
  // Check if we've really ended where we wanted to be...
  Vector<double> zeta_test(1);
  interpolated_zeta(s,zeta_test);
- if (fabs(zeta[0]-zeta_test[0])>epsilon)
+ if (std::fabs(zeta[0]-zeta_test[0])>epsilon)
   {
    std::ostringstream error_stream;
    error_stream    

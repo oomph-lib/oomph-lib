@@ -68,7 +68,7 @@ void gll_nodes(const unsigned &Nnode, Vector<double> &x)
            del= dlegendre(p,z)/ddlegendre(p,z);
            zold=z;
            z=zold-del;
-	  } while(std::abs(z-zold) > eps);
+	  } while(std::fabs(z-zold) > eps);
 	  x[j]=z;
 	  x[p-j]=-z;
 	}
@@ -120,7 +120,7 @@ void gl_nodes(const unsigned &Nnode, Vector<double> &x)
       del = legendre(p+1,z)/dlegendre(p+1,z);
       zold=z;
 	    z=zold-del;
-     } while(std::abs(z-zold)>eps);
+     } while(std::fabs(z-zold)>eps);
      x[j]=z;
      x[p-j]=-z;
     }

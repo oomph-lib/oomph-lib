@@ -185,7 +185,7 @@ FullCircleMesh<ELEMENT>::FullCircleMesh(GeomObject* area_pt,
            // Check:
            for (unsigned i=0;i<2;i++)
             {
-             double error=std::abs(
+             double error=std::fabs(
               finite_element_pt(ielem)->node_pt(jnod_local)->x(i)-
               finite_element_pt(ielem_neigh)->
               node_pt(jnod_local_neigh)->x(i));
@@ -272,7 +272,7 @@ FullCircleMesh<ELEMENT>::FullCircleMesh(GeomObject* area_pt,
            // Check:
            for (unsigned i=0;i<2;i++)
             {
-             double error=std::abs(
+             double error=std::fabs(
               finite_element_pt(ielem)->node_pt(jnod_local)->x(i)-
               finite_element_pt(ielem_neigh)->
               node_pt(jnod_local_neigh)->x(i));
@@ -310,7 +310,7 @@ FullCircleMesh<ELEMENT>::FullCircleMesh(GeomObject* area_pt,
            // Check:
            for (unsigned i=0;i<2;i++)
             {
-             double error=std::abs(
+             double error=std::fabs(
               finite_element_pt(ielem)->node_pt(jnod_local)->x(i)-
               finite_element_pt(ielem_neigh)->
               node_pt(jnod_local_neigh)->x(i));
@@ -399,7 +399,7 @@ FullCircleMesh<ELEMENT>::FullCircleMesh(GeomObject* area_pt,
            // Check:
            for (unsigned i=0;i<2;i++)
             {
-             double error=std::abs(
+             double error=std::fabs(
               finite_element_pt(ielem)->node_pt(jnod_local)->x(i)-
               finite_element_pt(ielem_neigh)->
               node_pt(jnod_local_neigh)->x(i));
@@ -436,7 +436,7 @@ FullCircleMesh<ELEMENT>::FullCircleMesh(GeomObject* area_pt,
            // Check:
            for (unsigned i=0;i<2;i++)
             {
-             double error=std::abs(
+             double error=std::fabs(
               finite_element_pt(ielem)->node_pt(jnod_local)->x(i)-
               finite_element_pt(ielem_neigh)->
               node_pt(jnod_local_neigh)->x(i));
@@ -523,7 +523,7 @@ FullCircleMesh<ELEMENT>::FullCircleMesh(GeomObject* area_pt,
            // Check:
            for (unsigned i=0;i<2;i++)
             {
-             double error=std::abs(
+             double error=std::fabs(
               finite_element_pt(ielem)->node_pt(jnod_local)->x(i)-
               finite_element_pt(ielem_neigh)->
               node_pt(jnod_local_neigh)->x(i));
@@ -560,7 +560,7 @@ FullCircleMesh<ELEMENT>::FullCircleMesh(GeomObject* area_pt,
            // Check:
            for (unsigned i=0;i<2;i++)
             {
-             double error=std::abs(
+             double error=std::fabs(
               finite_element_pt(ielem)->node_pt(jnod_local)->x(i)-
               finite_element_pt(ielem_neigh)->
               node_pt(jnod_local_neigh)->x(i));
@@ -597,7 +597,7 @@ FullCircleMesh<ELEMENT>::FullCircleMesh(GeomObject* area_pt,
            // Check:
            for (unsigned i=0;i<2;i++)
             {
-             double error=std::abs(
+             double error=std::fabs(
               finite_element_pt(ielem)->node_pt(jnod_local)->x(i)-
               finite_element_pt(ielem_neigh)->
               node_pt(jnod_local_neigh)->x(i));

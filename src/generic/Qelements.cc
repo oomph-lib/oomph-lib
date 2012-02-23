@@ -61,12 +61,12 @@ get_node_at_local_coordinate(const Vector<double> &s)
  // -------------------
 
  // If we are at the lower limit, the index is zero
- if(std::abs(s[0] + 1.0) < tol)
+ if(std::fabs(s[0] + 1.0) < tol)
   {
    index[0] = 0;
   }
  // If we are at the upper limit, the index is the number of nodes minus 1
- else if(std::abs(s[0] - 1.0) < tol)
+ else if(std::fabs(s[0] - 1.0) < tol)
   {
    index[0] = NNODE_1D-1;
   }
@@ -416,12 +416,12 @@ get_node_at_local_coordinate(const Vector<double> &s)
  for(unsigned i=0;i<2;i++)
   {
    //If we are at the lower limit, the index is zero
-   if(std::abs(s[i] + 1.0) < tol)
+   if(std::fabs(s[i] + 1.0) < tol)
     {
      index[i] = 0;
     }
    //If we are at the upper limit, the index is the number of nodes minus 1
-   else if(std::abs(s[i] - 1.0) < tol)
+   else if(std::fabs(s[i] - 1.0) < tol)
     {
      index[i] = NNODE_1D-1;
     }
@@ -887,12 +887,12 @@ get_node_at_local_coordinate(const Vector<double> &s)
  for(unsigned i=0;i<3;i++)
   {
    //If we are at the lower limit, the index is zero
-   if(std::abs(s[i] + 1.0) < tol)
+   if(std::fabs(s[i] + 1.0) < tol)
     {
      index[i] = 0;
     }
    //If we are at the upper limit, the index is the number of nodes minus 1
-   else if(std::abs(s[i] - 1.0) < tol)
+   else if(std::fabs(s[i] - 1.0) < tol)
     {
      index[i] = NNODE_1D-1;
     }

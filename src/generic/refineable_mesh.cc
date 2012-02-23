@@ -2198,7 +2198,7 @@ complete_hanging_nodes(const int& ncont_interpolated_values)
           unsigned n_master=master_nodes.size();
           for(unsigned k=0;k<n_master;k++)
            {
-            if(std::abs(hanging_weights[k])>min_weight)
+            if(std::fabs(hanging_weights[k])>min_weight)
              hang_weights[master_nodes[k]]+=hanging_weights[k];
            }
           
@@ -2244,10 +2244,10 @@ complete_hanging_nodes(const int& ncont_interpolated_values)
          {
           sum+=nod_pt->hanging_pt(i)->master_weight(imaster);
          }
-        if (std::abs(sum-1.0)>1.0e-7)
+        if (std::fabs(sum-1.0)>1.0e-7)
          {
-          oomph_info << "WARNING: Sum of master node weights abs(sum-1.0) " 
-               << std::abs(sum-1.0) << " for node number " << n 
+          oomph_info << "WARNING: Sum of master node weights fabs(sum-1.0) " 
+               << std::fabs(sum-1.0) << " for node number " << n 
                << " at value " << i << std::endl;
          }
        }

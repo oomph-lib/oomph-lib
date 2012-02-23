@@ -950,7 +950,7 @@ calculate_second_piola_kirchhoff_stress(
  //Only bother to compute the tensor B^{ij} (Green & Zerna notation)
  //if the derivative wrt the second strain invariant is non-zero
  DenseMatrix<double> Bup(dim,dim,0.0);
- if(std::abs(dWdI[1]) > 0.0);
+ if(std::fabs(dWdI[1]) > 0.0);
   {
    for(unsigned i=0;i<dim;i++)
     {
@@ -1062,7 +1062,7 @@ calculate_second_piola_kirchhoff_stress(
  //Only bother to compute the tensor B^{ij} (Green & Zerna notation)
  //if the derivative wrt the second strain invariant is non-zero
  DenseMatrix<double> Bup(dim,dim,0.0);
- if(std::abs(dWdI[1]) > 0.0)
+ if(std::fabs(dWdI[1]) > 0.0)
   {
    for(unsigned i=0;i<dim;i++)
     {
@@ -1172,7 +1172,7 @@ calculate_second_piola_kirchhoff_stress(const DenseMatrix<double> &g,
  //Only bother to calculate the tensor B^{ij} (Green & Zerna notation)
  //if the derivative wrt the second strain invariant is non-zero
  DenseMatrix<double> Bup(dim,dim,0.0);
- if(std::abs(dWdI[1]) > 0.0)
+ if(std::fabs(dWdI[1]) > 0.0)
   {
    for(unsigned i=0;i<dim;i++)
     {

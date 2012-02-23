@@ -702,7 +702,7 @@ class OneDimensionalLegendreShape : public Shape
    for(unsigned i=0;i<NNODE_1D;i++)
     {
      //If we're at one of the nodes, the value must be 1.0
-     if(std::abs(s-z[i]) < Orthpoly::eps) {(*this)[i] = 1.0;}
+     if(std::fabs(s-z[i]) < Orthpoly::eps) {(*this)[i] = 1.0;}
      //Otherwise use the lagrangian interpolant
      else
       {
@@ -736,25 +736,40 @@ class OneDimensionalLegendreDShape : public Shape
    for(unsigned i=0;i<NNODE_1D;i++)
     {
      unsigned rootnum=0;
-     for(unsigned j=0;j<NNODE_1D;j++){     // Loop over roots to check if
-      if(std::abs(s-z[j])<10*Orthpoly::eps){ // s happens to be a root.
-       root=true;
-       break;
+     for(unsigned j=0;j<NNODE_1D;j++)
+      {     // Loop over roots to check if
+       if(std::fabs(s-z[j])<10*Orthpoly::eps)
+        { // s happens to be a root.
+         root=true;
+         break;
+        }
+       rootnum+=1;
       }
-		    rootnum+=1;
-     }
      if(root==true){
-      if(i==rootnum && i==0){(*this)[i]=-(1.0+p)*p/4.0;}
-      else if(i==rootnum && i==p){(*this)[i]=(1.0+p)*p/4.0;}
-		    else if(i==rootnum){(*this)[i]=0.0;}
-      else{(*this)[i]=Orthpoly::legendre(p,z[rootnum])
-            /Orthpoly::legendre(p,z[i])/(z[rootnum]-z[i]);}
+      if(i==rootnum && i==0)
+       {
+        (*this)[i]=-(1.0+p)*p/4.0;
+       }
+      else if(i==rootnum && i==p)
+       {
+        (*this)[i]=(1.0+p)*p/4.0;
+       }
+      else if(i==rootnum)
+       {
+        (*this)[i]=0.0;
+       }
+      else
+       {
+        (*this)[i]=Orthpoly::legendre(p,z[rootnum])
+         /Orthpoly::legendre(p,z[i])/(z[rootnum]-z[i]);
+       }
      }
-     else{
-		    (*this)[i]=((1+s*(s-2*z[i]))/(s-z[i])* Orthpoly::dlegendre(p,s)
-                                -(1-s*s)* Orthpoly::ddlegendre(p,s))
-                     /p/(p+1.0)/Orthpoly::legendre(p,z[i])/(s-z[i]);
-     }
+     else
+      {
+       (*this)[i]=((1+s*(s-2*z[i]))/(s-z[i])* Orthpoly::dlegendre(p,s)
+                   -(1-s*s)* Orthpoly::ddlegendre(p,s))
+        /p/(p+1.0)/Orthpoly::legendre(p,z[i])/(s-z[i]);
+      }
      root = false;
     }
    

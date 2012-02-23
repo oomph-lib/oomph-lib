@@ -3344,6 +3344,7 @@ OcTree* OcTree::gteq_face_neighbour(const int& direction,
       //Set the translation scheme
       for(unsigned i=0;i<3;i++)
        {
+        // abs is ok here; not fabs!
         translate_s[i] = std::abs(translate_s_new[i]);
        }
      }
@@ -3601,6 +3602,7 @@ OcTree* OcTree::gteq_true_edge_neighbour(const int& direction,
      //Set the translation scheme
      for(unsigned i=0;i<3;i++)
       {
+       // abs is ok here; not fabs!
        translate_s[i] = std::abs(translate_s_new[i]);
       }
     }
@@ -4218,16 +4220,16 @@ void OcTree::doc_face_neighbours(Vector<Tree*> forest_nodes_pt,
          neighbours_txt_file << "Error (1) " << error << std::endl;
         }
 
-       if (std::abs(error)>max_error)
+       if (std::fabs(error)>max_error)
         {
-         max_error=std::abs(error);
+         max_error=std::fabs(error);
         }
 
 
        // Check error and doc mismatch if required
        bool stop=false;
        std::ofstream mismatch_file;
-       if (std::abs(error)>Max_neighbour_finding_tolerance)
+       if (std::fabs(error)>Max_neighbour_finding_tolerance)
         {
          stop=true;
          mismatch_file.open("mismatch.dat");
@@ -4280,14 +4282,14 @@ void OcTree::doc_face_neighbours(Vector<Tree*> forest_nodes_pt,
          neighbours_txt_file << "Error (2) " << error << std::endl;
         }
 
-       if (std::abs(error)>max_error)
+       if (std::fabs(error)>max_error)
         {
-         max_error=std::abs(error);
+         max_error=std::fabs(error);
         }
 
 
        // Check error and doc mismatch if required
-       if (std::abs(error)>Max_neighbour_finding_tolerance) stop=true;
+       if (std::fabs(error)>Max_neighbour_finding_tolerance) stop=true;
        if (stop)
         {
          if (!mismatch_file.is_open())
@@ -4481,16 +4483,16 @@ void OcTree::doc_true_edge_neighbours(Vector<Tree*> forest_nodes_pt,
          neighbours_txt_file << "Error (1) " << error << std::endl;
         }
 
-       if (std::abs(error)>max_error)
+       if (std::fabs(error)>max_error)
         {
-         max_error=std::abs(error);
+         max_error=std::fabs(error);
         }
 
 
        // Check error and doc mismatch if required
        bool stop=false;
        std::ofstream mismatch_file;
-       if (std::abs(error)>Max_neighbour_finding_tolerance)
+       if (std::fabs(error)>Max_neighbour_finding_tolerance)
         {
          stop=true;
          mismatch_file.open("mismatch.dat");
@@ -4544,14 +4546,14 @@ void OcTree::doc_true_edge_neighbours(Vector<Tree*> forest_nodes_pt,
          neighbours_txt_file << "Error (2) " << error << std::endl;
         }
 
-       if (std::abs(error)>max_error)
+       if (std::fabs(error)>max_error)
         {
-         max_error=std::abs(error);
+         max_error=std::fabs(error);
         }
 
 
        // Check error and doc mismatch if required
-       if (std::abs(error)>Max_neighbour_finding_tolerance) stop=true;
+       if (std::fabs(error)>Max_neighbour_finding_tolerance) stop=true;
        if (stop)
         {
          if (!mismatch_file.is_open())

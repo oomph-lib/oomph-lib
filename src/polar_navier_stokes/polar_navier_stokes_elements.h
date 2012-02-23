@@ -482,9 +482,9 @@ public:
        {
 	 for(unsigned j=0;j<n_dof;j++)
 	  {
-	    if(std::abs(jacobian(i,j) - jacobian_fd(i,j)) > 1.0e-3)
+	    if(std::fabs(jacobian(i,j) - jacobian_fd(i,j)) > 1.0e-3)
 	     {
-	       std::cout << i << " " << j << " " << std::abs(jacobian(i,j) - jacobian_fd(i,j)) << std::endl;
+	       std::cout << i << " " << j << " " << std::fabs(jacobian(i,j) - jacobian_fd(i,j)) << std::endl;
 	     }
 	  }
        }
@@ -508,13 +508,13 @@ public:
      {
       for(unsigned i=0;i<n_dof;i++)
        {
-	 if(std::abs(residuals_new[i] - residuals_old[i])>1.0e-8) std::cout << i << " " << std::abs(residuals_new[i] - residuals_old[i]) << std::endl;
+	 if(std::fabs(residuals_new[i] - residuals_old[i])>1.0e-8) std::cout << i << " " << std::fabs(residuals_new[i] - residuals_old[i]) << std::endl;
 	 //std::cout << residuals_new[i] << std::endl;
 	 for(unsigned j=0;j<n_dof;j++)
 	  {
-	    if(std::abs(jacobian_new(i,j) - jacobian_old(i,j)) > 1.0e-8)
+	    if(std::fabs(jacobian_new(i,j) - jacobian_old(i,j)) > 1.0e-8)
 	     {
-	       std::cout << i << " " << j << " " << std::abs(jacobian_new(i,j) - jacobian_old(i,j)) << std::endl;
+	       std::cout << i << " " << j << " " << std::fabs(jacobian_new(i,j) - jacobian_old(i,j)) << std::endl;
 	     }
 	  }
        }

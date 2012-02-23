@@ -779,7 +779,7 @@ strain_rate(const Vector<double>& s, DenseMatrix<double>& strainrate) const
  
  // Overwrite the strain rates with negative powers of the radius
  // unless we're at the origin
- if (std::abs(interpolated_r)>1.0e-16)
+ if (std::fabs(interpolated_r)>1.0e-16)
   {
    double inverse_radius=1.0/interpolated_r;
    strainrate(0,2)=0.5*(duphidr-inverse_radius*uphi);

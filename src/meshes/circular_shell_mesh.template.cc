@@ -81,7 +81,7 @@ void CircularCylindricalShellMesh<ELEMENT>::build_mesh(
       double x=nod_pt->xi(0);
       for(unsigned k=0;k<n_node;k++)
        {
-        double dx=abs(x-dynamic_cast<SolidNode*>(el_pt->node_pt(k))->xi(0));
+        double dx=fabs(x-dynamic_cast<SolidNode*>(el_pt->node_pt(k))->xi(0));
         if (dx<min_dx[nod_pt])
          {
           if (dx!=0.0) min_dx[nod_pt]=dx;

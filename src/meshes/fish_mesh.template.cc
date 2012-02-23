@@ -278,7 +278,7 @@ void FishMesh<ELEMENT>::build_mesh(TimeStepper* time_stepper_pt)
        // Check:
        for (unsigned i=0;i<2;i++)
         {
-         double error=std::abs(
+         double error=std::fabs(
           finite_element_pt(e)->node_pt(j_local)->x(i)-
           finite_element_pt(e_neigh)->
           node_pt(j_local_neigh)->x(i));
@@ -372,7 +372,7 @@ void FishMesh<ELEMENT>::build_mesh(TimeStepper* time_stepper_pt)
        // Check:
        for (unsigned i=0;i<2;i++)
         {
-         double error=std::abs(
+         double error=std::fabs(
           finite_element_pt(e)->node_pt(j_local)->x(i)-
           finite_element_pt(e_neigh)->
           node_pt(j_local_neigh)->x(i));
@@ -472,7 +472,7 @@ void FishMesh<ELEMENT>::build_mesh(TimeStepper* time_stepper_pt)
        // Check:
        for (unsigned i=0;i<2;i++)
         {
-         double error=std::abs(
+         double error=std::fabs(
           finite_element_pt(e)->node_pt(j_local)->x(i)-
           finite_element_pt(e_neigh)->
           node_pt(j_local_neigh)->x(i));
@@ -513,7 +513,7 @@ void FishMesh<ELEMENT>::build_mesh(TimeStepper* time_stepper_pt)
        // Check:
        for (unsigned i=0;i<2;i++)
         {
-         double error=std::abs(
+         double error=std::fabs(
           finite_element_pt(e)->node_pt(j_local)->x(i)-
           finite_element_pt(e_neigh)->
           node_pt(j_local_neigh)->x(i));
@@ -634,7 +634,7 @@ void FishMesh<ELEMENT>::build_mesh(TimeStepper* time_stepper_pt)
         // Check:
         for (unsigned i=0;i<2;i++)
          {
-          double error=std::abs(r[i]-boundary_node_pt(ibound,inod)->x(i));
+          double error=std::fabs(r[i]-boundary_node_pt(ibound,inod)->x(i));
           if (error>Max_tol_in_node_killing)
            {
             oomph_info << "Error in boundary coordinate for direction " 

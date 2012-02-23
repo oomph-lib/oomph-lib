@@ -509,7 +509,7 @@ void black_box_fd_newton_solve(ResidualFctPt residual_fct,
    
    
    // Check max. residuals
-   double max_res = std::abs(*std::max_element(residuals.begin(),
+   double max_res = std::fabs(*std::max_element(residuals.begin(),
                                                residuals.end(),
                                                AbsCmp<double>()));
    
@@ -670,7 +670,7 @@ void black_box_fd_newton_solve(ResidualFctPt residual_fct,
   double test=0.0;
   for (unsigned i=0;i<n;i++)
    {
-    double temp=fabs(newton_dir[i])/std::max(fabs(x_old[i]),1.0);  
+    double temp=std::fabs(newton_dir[i])/std::max(std::fabs(x_old[i]),1.0);  
     if (temp > test) test=temp;
    }
   double alamin=TOLX/test;

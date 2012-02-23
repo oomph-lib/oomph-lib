@@ -2256,7 +2256,7 @@ namespace SolidHelpers
      double dev_max=1.0e-2;
      if (principal_stress[0]!=0.0)
       {
-       if (std::abs((principal_stress[0]-principal_stress[1])/
+       if (std::fabs((principal_stress[0]-principal_stress[1])/
                     principal_stress[0])<dev_max)
         {
          hydrostat=true;

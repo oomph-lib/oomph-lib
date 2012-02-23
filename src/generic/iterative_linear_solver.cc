@@ -1781,7 +1781,7 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
                           sn[iter_restart]);
      
      // compute current residual
-     beta = fabs(s[iter_restart+1]);
+     beta = std::fabs(s[iter_restart+1]);
 
      // compute relative residual
      resid = beta/normb;

@@ -110,7 +110,7 @@ BrethertonSpineMesh<ELEMENT,INTERFACE_ELEMENT>::BrethertonSpineMesh(
  double radius=-r_wall_lo[1]-H;
 
  //Check to non-symmetric mesh
- if (std::abs(r_wall_lo[1]+r_wall_up[1])>1.0e-4)
+ if (std::fabs(r_wall_lo[1]+r_wall_up[1])>1.0e-4)
   {
    oomph_info << "\n\n=================================================== "  << std::endl;
    oomph_info << "Warning: " << std::endl;
@@ -1071,8 +1071,8 @@ find_distance_to_free_surface(GeomObject* const &fs_geom_object_pt,
   fs_geom_object_pt->position(initial_zeta,free_x);
   
   for(unsigned i=0;i<2;++i) {dx[i] = spine_x[i] - free_x[i];}
-  maxres = std::abs(dx[0]) > std::abs(dx[1]) ? std::abs(dx[0]) : 
-   std::abs(dx[1]);
+  maxres = std::fabs(dx[0]) > std::fabs(dx[1]) ? std::fabs(dx[0]) : 
+   std::fabs(dx[1]);
 
   if(count > 100) 
    {

@@ -104,7 +104,7 @@ public virtual QAdvectionDiffusionElement<DIM,NNODE_1D>
    double h=0;
    if (DIM==1)
    {
-     h = std::abs(this->vertex_node_pt(1)->x(0) -
+     h = std::fabs(this->vertex_node_pt(1)->x(0) -
                   this->vertex_node_pt(0)->x(0));
    }
    else if (DIM==2)

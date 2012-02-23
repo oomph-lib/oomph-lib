@@ -549,7 +549,7 @@ public virtual QSpectralElement<DIM-1,NNODE_1D>
     //vel = sqrt(vel)/u_average[0];
     vel /= u_average[0];
 
-    double arg = std::abs(gamma*p/u_average[0]);*/
+    double arg = std::fabs(gamma*p/u_average[0]);*/
 
     //Let's calculate the internal and external pressures and then enthalpies
     double p_int = cast_bulk_element_pt->pressure(u_int);
@@ -608,10 +608,10 @@ public virtual QSpectralElement<DIM-1,NNODE_1D>
     eigA[1] = vel;
     eigA[2] = vel + a;
 
-    double lambda = std::abs(eigA[0]);
+    double lambda = std::fabs(eigA[0]);
     for(unsigned i=1;i<3;i++)
      {
-      if(std::abs(eigA[i]) > lambda) {lambda = std::abs(eigA[i]);}
+      if(std::fabs(eigA[i]) > lambda) {lambda = std::fabs(eigA[i]);}
      }
     
     
@@ -622,7 +622,7 @@ public virtual QSpectralElement<DIM-1,NNODE_1D>
     
     //Get the pressure
     double p = cast_bulk_element_pt->pressure(u_ext);
-    double lambda_ext = vel_mag + sqrt(std::abs(gamma*p/u_ext[0]));
+    double lambda_ext = vel_mag + sqrt(std::fabs(gamma*p/u_ext[0]));
     
     //Let's do the same for the internal one
     vel_mag = 0.0;
@@ -631,7 +631,7 @@ public virtual QSpectralElement<DIM-1,NNODE_1D>
     
     //Get the pressure
     p = cast_bulk_element_pt->pressure(u_int);
-    double lambda_int = vel_mag + sqrt(std::abs(gamma*p/u_int[0]));
+    double lambda_int = vel_mag + sqrt(std::fabs(gamma*p/u_int[0]));
     
     //Now take the largest
     double lambda = lambda_int;

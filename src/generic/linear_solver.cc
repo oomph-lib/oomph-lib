@@ -149,7 +149,7 @@ void DenseLU::factorise(DoubleMatrixBase* const &matrix_pt)
    double big=0.0;
    for(unsigned long j=0;j<n;j++)
     {
-     double temp = std::abs((*matrix_pt)(i,j));
+     double temp = std::fabs((*matrix_pt)(i,j));
      if(temp > big) big = temp;
     }
    if(big==0.0) 
@@ -211,7 +211,7 @@ void DenseLU::factorise(DoubleMatrixBase* const &matrix_pt)
       }
      LU_factors[n*i+j] = sum;
      //Set temporary
-     double temp = vv[i]*std::abs(sum);
+     double temp = vv[i]*std::fabs(sum);
      if(temp >= big)
       {
        big = temp;

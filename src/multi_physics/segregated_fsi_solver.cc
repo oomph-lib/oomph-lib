@@ -356,7 +356,7 @@ namespace oomph
        Solid_data_pt[i]->value(k);
 
       // Max change?
-      if (std::abs(change)>max_change) max_change=std::abs(change);
+      if (std::fabs(change)>max_change) max_change=std::fabs(change);
 
       //Add square of change relative to previous value
       rms_change+=pow(change,2);
@@ -428,7 +428,7 @@ namespace oomph
         den+=del2*del2;
 
         // Update convergence criterion
-        crit+=std::abs(change);
+        crit+=std::fabs(change);
 
         // Increment counter
         value_count++;
@@ -544,7 +544,7 @@ namespace oomph
 
       double new_value=v2;
 
-      double max_diff=std::max(std::abs(v1-v0),std::abs(v2-v1));
+      double max_diff=std::max(std::fabs(v1-v0),std::fabs(v2-v1));
       if (max_diff>1.0e-10)
        {
         new_value=v2-std::pow((v2-v1),int(2))/(v2-2.0*v1+v0);
@@ -802,7 +802,7 @@ namespace oomph
          
          
        case Assess_convergence_based_on_relative_solid_change:
-        tol_achieved=std::abs(rms_change/rms_norm);
+        tol_achieved=std::fabs(rms_change/rms_norm);
         if (tol_achieved<Convergence_tolerance)
          {
           oomph_info
