@@ -122,10 +122,12 @@ namespace oomph
    Centre_displacement_data_pt(centre_displacement_data_pt),
    Geom_object_pt(0),
    External_force_fct_pt(0), External_torque_fct_pt(0),
-   Drag_mesh_pt(0), G_pt(0), 
+   Drag_mesh_pt(0), G_pt(&Default_Gravity_vector), 
    Re_pt(&Default_Physical_Constant_Value),
    St_pt(&Default_Physical_Ratio_Value),
-   Density_ratio_pt(&Default_Physical_Ratio_Value)
+   ReInvFr_pt(&Default_Physical_Constant_Value),
+   Density_ratio_pt(&Default_Physical_Ratio_Value),
+   Include_geometric_rotation(true)
     {
      this->initialise(time_stepper_pt);
     }
@@ -141,14 +143,23 @@ namespace oomph
    Centre_displacement_data_pt(centre_displacement_data_pt),
    Geom_object_pt(geom_object_pt),
    External_force_fct_pt(0), External_torque_fct_pt(0),
-   Drag_mesh_pt(0), G_pt(0), 
+   Drag_mesh_pt(0), G_pt(&Default_Gravity_vector), 
    Re_pt(&Default_Physical_Constant_Value),
    St_pt(&Default_Physical_Ratio_Value),
-   Density_ratio_pt(&Default_Physical_Ratio_Value)
+   ReInvFr_pt(&Default_Physical_Constant_Value),
+   Density_ratio_pt(&Default_Physical_Ratio_Value),
+   Include_geometric_rotation(true)
     {
      this->initialise(time_stepper_pt);
     }
   
+  /// Set the rotation of the object to be included
+  void set_geometric_rotation() {Include_geometric_rotation=true;}
+
+  /// \short Set the rotation of the object to be ignored (only really 
+  /// useful if you have a circular shape)
+  void unset_geometric_rotation() {Include_geometric_rotation=false;}
+
   ///Access function for the initial angle
   double &initial_phi() {return Initial_Phi;}
 
@@ -365,6 +376,9 @@ namespace oomph
  /// \short Access function to the direction of gravity
  Vector<double>* &g_pt() {return G_pt;}
  
+ /// \short Access function for gravity
+ const Vector<double> &g() const {return *G_pt;}
+
  /// \short Access function for the pointer to the fluid Reynolds number
  double* &re_pt() {return Re_pt;}
  
@@ -376,6 +390,13 @@ namespace oomph
  
  ///Access function for the fluid Strouhal number
  const double &st() const {return *St_pt;}
+
+ /// \short Access function for pointer to the fluid inverse Froude number
+ /// (dimensionless gravitational loading)
+ double* &re_invfr_pt() {return ReInvFr_pt;}
+
+ /// Access to the fluid inverse Froude number
+ const double &re_invfr() {return *ReInvFr_pt;}
 
  /// \short Access function for the pointer to the density ratio
  double* &density_ratio_pt() {return Density_ratio_pt;}
@@ -402,12 +423,24 @@ namespace oomph
   
   // Updated position vector
   r[0] = Initial_centre_of_mass[0] + 
-   this->Centre_displacement_data_pt->value(t,0)+
-   r_orig*cos(phi_orig + this->Centre_displacement_data_pt->value(t,2));
-  
+   this->Centre_displacement_data_pt->value(t,0);
+
   r[1] = Initial_centre_of_mass[1] + 
-   this->Centre_displacement_data_pt->value(t,1)+
-   r_orig*sin(phi_orig + this->Centre_displacement_data_pt->value(t,2));
+   this->Centre_displacement_data_pt->value(t,1);
+
+  //Add in the rotation terms if there are to be included
+  if(Include_geometric_rotation) 
+   {
+    r[0] +=
+     r_orig*cos(phi_orig + this->Centre_displacement_data_pt->value(t,2));
+    r[1] +=
+     r_orig*sin(phi_orig + this->Centre_displacement_data_pt->value(t,2));
+   }
+  else
+   {
+    r[0] += r_orig*cos(phi_orig);
+    r[1] += r_orig*sin(phi_orig);
+   }
  }
  
  
@@ -481,6 +514,9 @@ namespace oomph
  /// Strouhal number of external fluid
  double *St_pt;
  
+ /// Reynolds number divided by Froude number of external fluid
+ double *ReInvFr_pt;
+
  /// Density ratio of the solid to the external fluid
  double *Density_ratio_pt;
  
@@ -489,6 +525,9 @@ namespace oomph
  
  /// Static default value for physical ratios
  static double Default_Physical_Ratio_Value;
+
+ /// Static default value for gravity
+ static Vector<double> Default_Gravity_vector;
  
  /// \short Index for the data (internal or external) that contains the 
  /// centre-of-gravity displacement
@@ -496,6 +535,10 @@ namespace oomph
  
  /// Boolean flag to indicate whether data is internal
  bool Displacement_data_is_internal;
+
+ /// Boolean to indicate that the rotation variable does not affect the boundary
+ /// shape
+ bool Include_geometric_rotation;
 
 };
  

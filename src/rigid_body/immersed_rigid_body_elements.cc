@@ -38,6 +38,9 @@ double ImmersedRigidBodyElement::Default_Physical_Constant_Value=0.0;
 /// \short Static default value for physical ratio 
 double ImmersedRigidBodyElement::Default_Physical_Ratio_Value=1.0;
 
+/// \short Static default gravity direction vector
+Vector<double> ImmersedRigidBodyElement::Default_Gravity_vector(2,0.0);
+
 //=======================================================================
 /// Work out the position derivative taking into account the movement
 /// relative to the original centre of mass
@@ -76,12 +79,16 @@ double ImmersedRigidBodyElement::Default_Physical_Ratio_Value=1.0;
                        veloc);
     
     //Now use the chain rule to specify the boundary velocities
-    drdt[0] = veloc[0] 
-     - r_orig*sin(phi_orig + 
-                  this->Centre_displacement_data_pt->value(2))*veloc[2];
-    drdt[1] = veloc[1] 
-     + r_orig*cos(phi_orig + this->Centre_displacement_data_pt->value(2))
-     *veloc[2];
+    drdt[0] = veloc[0];
+    drdt[1] = veloc[1];
+    
+    if(Include_geometric_rotation)
+     {
+     drdt[0] += - r_orig*sin(
+      phi_orig + this->Centre_displacement_data_pt->value(2))*veloc[2];
+     drdt[1] +=   r_orig*cos(
+      phi_orig + this->Centre_displacement_data_pt->value(2))*veloc[2];
+     }
    }
    //Done
    return;
@@ -133,6 +140,7 @@ double ImmersedRigidBodyElement::Default_Physical_Ratio_Value=1.0;
           << veloc[0] << " " << veloc[1] << " " << veloc[2] << " "
           << accel[0] << " " << accel[1] << " " << accel[2] << std::endl;
  }
+
 
 //======================================================================
 /// Obtain the external force and torque on the body from specified 
@@ -308,14 +316,21 @@ double ImmersedRigidBodyElement::Default_Physical_Ratio_Value=1.0;
    //and Strouhal number squared
    const double Lambda_sq =
     this->re()*this->st()*this->st()*this->density_ratio();
-   
+  
+   //Get the effective ReInvFr which must be multiplied by the 
+   //density ratio to compute the gravitational load on the rigid body
+   const double scaled_re_inv_fr =
+    this->re_invfr()*this->density_ratio();
+   //Get the gravitational load
+   Vector<double> G = g();
+
    // Newton's law
    int local_eqn=0;
    local_eqn = this->centre_displacement_local_eqn(0);
    if(local_eqn >= 0)
     {
      residuals[local_eqn]=
-      Lambda_sq*Mass*accel[0]- external_force[0] - Mass*(*G_pt)[0];
+      Lambda_sq*Mass*accel[0]- external_force[0] - Mass*scaled_re_inv_fr*G[0];
      
      // Get Jacobian too?
      if (flag)
@@ -329,7 +344,7 @@ double ImmersedRigidBodyElement::Default_Physical_Ratio_Value=1.0;
    if(local_eqn >= 0)
     {
      residuals[local_eqn]=Lambda_sq*Mass*accel[1] - 
-      external_force[1] - Mass*(*G_pt)[1];
+      external_force[1] - Mass*scaled_re_inv_fr*G[1];
      // Get Jacobian too?
      if (flag)
       {

@@ -322,6 +322,58 @@ Data::Data(TimeStepper* const &time_stepper_pt_,
   }
 }
 
+
+//================================================================
+/// Set a new TimeStepper be resizing the appropriate storage.
+/// Equation numbering (if already performed) will be unaffected.
+/// The current (zero) values will be unaffected, but all other entries
+/// will be set to zero.
+//================================================================
+void Data::set_time_stepper(TimeStepper* const &time_stepper_pt)
+{
+ //If the timestepper is unchanged do nothing
+ if(Time_stepper_pt==time_stepper_pt) {return;}
+ 
+ //Set the new time stepper
+ Time_stepper_pt = time_stepper_pt;
+
+ //If the data is a copy don't mess with it
+ if(this->is_a_copy()) {return;}
+
+ //Find the current number of values
+ const unsigned n_value = nvalue();
+
+ //IF there are data to allocate, do so
+ if(n_value > 0)
+  {
+   //Locally cache the new number of time storage values
+   const unsigned n_tstorage = time_stepper_pt->ntstorage();
+      
+   //Allocate all the data values in one big array for data locality.
+   double *values = new double[n_value*n_tstorage];
+
+   //Copy the old "current" values into the new storage scheme
+   for(unsigned i=0;i<n_value;i++) {values[i*n_tstorage] = Value[i][0];}
+
+   //Now delete the old value storage
+   delete[] Value[0];
+   
+   //Reset the pointers to the new data values
+   for(unsigned i=0;i<n_value;i++)
+    {
+     Value[i] = &values[i*n_tstorage];
+     //Initialise all new time storage values to zero
+     for(unsigned t=1;t<n_tstorage;t++) {Value[i][t] = 0.0;}
+    }
+
+   //Update any pointers in any copies of this data
+   for(unsigned i=0;i<Ncopies;i++)
+    {
+     Copy_of_data_pt[i]->reset_copied_pointers();
+    }
+  }
+}
+
 //================================================================
 ///Virtual destructor, deallocates memory assigned for data
 //================================================================

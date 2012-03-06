@@ -145,11 +145,14 @@ namespace oomph
  friend class FoldHandler;
  friend class PitchForkHandler;
  friend class HopfHandler;
+ template<unsigned NNODE_1D> 
+  friend class  PeriodicOrbitAssemblyHandler;
  friend class BlockFoldLinearSolver;
  friend class BlockPitchForkLinearSolver;
  friend class AugmentedBlockFoldLinearSolver;
  friend class AugmentedBlockPitchForkLinearSolver;
  friend class BlockHopfLinearSolver;
+
 
   private: 
 
@@ -477,7 +480,7 @@ namespace oomph
 
 #endif
 
-protected:
+ protected:
 
  /// Vector of pointers to dofs
  Vector<double*> Dof_pt;

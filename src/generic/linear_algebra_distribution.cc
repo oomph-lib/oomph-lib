@@ -96,8 +96,9 @@ namespace oomph
     Nrow = global_nrow;
    }
 
-  // the distribution is true
-  Distributed = true;
+  // the distribution is true, unless we only have 1 processor
+  if(nproc!=1) {Distributed = true;}
+  else {Distributed = false;}
 
 #ifdef OOMPH_HAS_MPI  
 #ifdef PARANOID

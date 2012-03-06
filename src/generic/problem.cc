@@ -3143,7 +3143,7 @@ else
     if (!(*residuals.distribution_pt() == *jacobian.distribution_pt()))
      {                                    
       std::ostringstream error_stream;
-      error_stream << "If the distribution of the residuals must "
+      error_stream << "The distribution of the residuals must "
                    << "be the same as the distribution of the jacobian."; 
       throw OomphLibError(error_stream.str(),              
                           "Problem::get_jacobian(...)", 
@@ -7467,9 +7467,27 @@ void Problem::get_eigenproblem_matrices(CRDoubleMatrix &mass_matrix,
                                         CRDoubleMatrix &main_matrix,
                                         const double &shift)
 {
+ // Three different cases again here: 
+ // 1) Compiled with MPI, but run in serial
+ // 2) Compiled with MPI, but MPI not initialised in driver
+ // 3) Serial version
+
+
 #ifdef PARANOID
- if (mass_matrix.distribution_built())
+ if (mass_matrix.distribution_built() && main_matrix.distribution_built())
   {
+   //Check that the distribution of the mass matrix and jacobian match
+   if(!(*mass_matrix.distribution_pt() == *main_matrix.distribution_pt()))
+    {
+     std::ostringstream error_stream;
+     error_stream 
+      << "The distributions of the jacobian and mass matrix are\n"
+      << "not the same and they must be.\n";
+     throw OomphLibError(error_stream.str(),
+                         "Problem::get_eigenproblem_matrices()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+   
    if (mass_matrix.nrow() != this->ndof())
     {   
      std::ostringstream error_stream;
@@ -7480,18 +7498,7 @@ void Problem::get_eigenproblem_matrices(CRDoubleMatrix &mass_matrix,
                          "Problem::get_eigen_problem_matrices(...)",
                          OOMPH_EXCEPTION_LOCATION);
     }
-   if (mass_matrix.distribution_pt()->distributed())
-    {
-     std::ostringstream error_stream;
-     error_stream
-      << "mass_matrix cannot be distributed";
-     throw OomphLibError(error_stream.str(),
-                         "Problem::get_eigen_problem_matrices(...)",
-                         OOMPH_EXCEPTION_LOCATION);
-    }
-  }
- if (main_matrix.distribution_built())
-  {
+
    if (main_matrix.nrow() != this->ndof())
     {
      std::ostringstream error_stream;
@@ -7502,32 +7509,18 @@ void Problem::get_eigenproblem_matrices(CRDoubleMatrix &mass_matrix,
                          "Problem::get_eigen_problem_matrices(...)",
                          OOMPH_EXCEPTION_LOCATION);
     }
-   if (main_matrix.distribution_pt()->distributed())
-    {
-     std::ostringstream error_stream;
-     error_stream
-      << "main_matrix cannot be distributed";
-     throw OomphLibError(error_stream.str(),
-                         "Problem::get_eigen_problem_matrices(...)",
-                         OOMPH_EXCEPTION_LOCATION);
-    }
+  }
+ //If the distributions are not the same, then complain
+ else if(main_matrix.distribution_built() != mass_matrix.distribution_built())
+  {
+   std::ostringstream error_stream; 
+   error_stream << "The distribution of the jacobian and mass matrix must "
+                << "both be setup or both not setup";
+   throw OomphLibError(error_stream.str(),                           
+                       "Problem::get_eigenproblem_matrices(...)",              
+                       OOMPH_EXCEPTION_LOCATION); 
   }
 #endif 
-
- // if the matrices are not setup then build them
- if (!main_matrix.distribution_built() || 
-     !mass_matrix.distribution_built())
-  {
-   LinearAlgebraDistribution dist(this->communicator_pt(),this->ndof(),false);
-   if (!main_matrix.distribution_built())
-    {
-     main_matrix.build(&dist);
-    }
-   if (!mass_matrix.distribution_built())
-    {
-     mass_matrix.build(&dist);
-    }
-  }
 
  //Store the old assembly handler
  AssemblyHandler* old_assembly_handler_pt = Assembly_handler_pt;
@@ -7542,26 +7535,153 @@ void Problem::get_eigenproblem_matrices(CRDoubleMatrix &mass_matrix,
  //Allocate pointer to residuals, although not used in these problems
  Vector<double* > residuals_vectors(0);
 
+ // total number of rows in each matrix
+ unsigned nrow = this->ndof();
+ 
+ // determine the distribution for the jacobian (main matrix)
+ // IF the jacobian has distribution setup then use that
+ // ELSE determine the distribution based on the 
+ // distributed_matrix_distribution enum
+ LinearAlgebraDistribution* dist_pt=0;
+ if (main_matrix.distribution_built())
+  {
+   dist_pt = new LinearAlgebraDistribution(main_matrix.distribution_pt());
+  }
+ else
+  {
+#ifdef OOMPH_HAS_MPI
+   // if problem is only one one processor
+   if (Communicator_pt->nproc() == 1)
+    {
+     dist_pt = new LinearAlgebraDistribution(Communicator_pt,nrow,false);
+    }
+   // if the problem is not distributed then assemble the matrices with
+   // a uniform distributed distribution
+   else if (!Problem_has_been_distributed)
+    {
+     dist_pt = new LinearAlgebraDistribution(Communicator_pt,nrow,true);
+    }
+   // otherwise the problem is a distributed problem
+   else
+    {
+     switch (Dist_problem_matrix_distribution)
+      {
+      case Uniform_matrix_distribution:
+       dist_pt = new LinearAlgebraDistribution(Communicator_pt,nrow,true);
+       break;
+      case Problem_matrix_distribution:
+       dist_pt = new LinearAlgebraDistribution(Dof_distribution_pt);
+       break;
+      case Default_matrix_distribution:
+       LinearAlgebraDistribution* uniform_dist_pt = 
+        new LinearAlgebraDistribution(Communicator_pt,nrow,true);
+       bool use_problem_dist = true;
+       unsigned nproc = Communicator_pt->nproc();
+       for (unsigned p = 0; p < nproc; p++)
+        {
+         if ((double)Dof_distribution_pt->nrow_local(p) > 
+             ((double)uniform_dist_pt->nrow_local(p))*1.1)
+          {
+           use_problem_dist = false;
+          }
+        }
+       if (use_problem_dist)
+        {
+         dist_pt = new LinearAlgebraDistribution(Dof_distribution_pt);
+        }
+       else
+        {
+         dist_pt = new LinearAlgebraDistribution(uniform_dist_pt);
+        }
+       delete uniform_dist_pt;
+       break;
+      }
+    }
+#else
+   dist_pt = new LinearAlgebraDistribution(Communicator_pt,nrow,false);
+#endif
+  }
+
+
+ //The matrix is in compressed row format
  bool compressed_row_flag=true;
+ 
+#ifdef OOMPH_HAS_MPI
+ //
+ if (Communicator_pt->nproc() == 1)
+  {
+#endif
 
- sparse_assemble_row_or_column_compressed(column_or_row_index,
-                                          row_or_column_start,
-                                          value,
-                                          nnz,
-                                          residuals_vectors,
-                                          compressed_row_flag);
+   sparse_assemble_row_or_column_compressed(column_or_row_index,
+                                            row_or_column_start,
+                                            value,
+                                            nnz,
+                                            residuals_vectors,
+                                            compressed_row_flag);
+   
+   //The main matrix is the first entry
+   main_matrix.build(dist_pt);
+   main_matrix.build_without_copy(dist_pt->nrow(),nnz[0],value[0],
+                                  column_or_row_index[0],
+                                  row_or_column_start[0]);
+   //The mass matrix is the second entry
+   mass_matrix.build(dist_pt);
+   mass_matrix.build_without_copy(dist_pt->nrow(),nnz[1],value[1],
+                                  column_or_row_index[1],
+                                  row_or_column_start[1]);   
+#ifdef OOMPH_HAS_MPI
+   }
+  else
+   {
+    if (dist_pt->distributed())
+     {
+      parallel_sparse_assemble(dist_pt,
+                               column_or_row_index,
+                               row_or_column_start,
+                               value,
+                               nnz,
+                               residuals_vectors);
+      //The main matrix is the first entry
+      main_matrix.build(dist_pt);
+      main_matrix.build_without_copy(dist_pt->nrow(),nnz[0],
+                                     value[0],column_or_row_index[0],
+                                     row_or_column_start[0]); 
+      //The mass matrix is the second entry
+      mass_matrix.build(dist_pt);
+      mass_matrix.build_without_copy(dist_pt->nrow(),nnz[1],value[1],
+                                     column_or_row_index[1],
+                                     row_or_column_start[1]);   
+      
+     }
+    else
+     {
+      LinearAlgebraDistribution* temp_dist_pt = 
+       new LinearAlgebraDistribution(Communicator_pt,dist_pt->nrow(),true);
+      parallel_sparse_assemble(temp_dist_pt,
+                               column_or_row_index,
+                               row_or_column_start,
+                               value,
+                               nnz,
+                               residuals_vectors);
+      //The main matrix is the first entry
+      main_matrix.build(temp_dist_pt);
+      main_matrix.build_without_copy(dist_pt->nrow(),nnz[0],
+                                     value[0],column_or_row_index[0],
+                                     row_or_column_start[0]); 
+      main_matrix.redistribute(dist_pt);
+      //The mass matrix is the second entry
+      mass_matrix.build(temp_dist_pt);
+      mass_matrix.build_without_copy(dist_pt->nrow(),nnz[1],value[1],
+                                     column_or_row_index[1],
+                                     row_or_column_start[1]);   
+      mass_matrix.redistribute(dist_pt);
+      delete temp_dist_pt;
+     }
+   }
+#endif
 
- //Get the number of dofs (size of matrices)
- unsigned long n_dof = ndof();
-
- //The main matrix is the first entry
- main_matrix.build_without_copy(n_dof,nnz[0],value[0],
-                                column_or_row_index[0],
-                                row_or_column_start[0]);
- //The mass matrix is the second entry
- mass_matrix.build_without_copy(n_dof,nnz[1],value[1],
-                                column_or_row_index[1],
-                                row_or_column_start[1]);   
+  // clean up dist_pt and residuals_vector pt
+  delete dist_pt;
 
  //Delete the eigenproblem handler
  delete Assembly_handler_pt;
@@ -7640,10 +7760,14 @@ void Problem::assign_eigenvector_to_dofs(DoubleVector &eigenvector)
   }
 
  //Loop over the dofs and assign the eigenvector
- for(unsigned long n=0;n<n_dof;n++)
+ for(unsigned long n=0;n<eigenvector.nrow_local();n++)
   {
    dof(n) = eigenvector[n];
   }
+//Of course we now need to synchronise
+#ifdef OOMPH_HAS_MPI
+ this->synchronise_all_dofs();
+#endif 
 }
 
 
@@ -7670,10 +7794,15 @@ void Problem::add_eigenvector_to_dofs(const double &epsilon,
   }
 
  //Loop over the dofs and add the eigenvector
- for(unsigned long n=0;n<n_dof;n++)
+ //Only use local values
+ for(unsigned long n=0;n<eigenvector.nrow_local();n++)
   {
    dof(n) += epsilon*eigenvector[n];
   }
+//Of course we now need to synchronise
+#ifdef OOMPH_HAS_MPI
+ this->synchronise_all_dofs();
+#endif 
 }
 
 

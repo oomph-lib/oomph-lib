@@ -1,7 +1,7 @@
 #! /bin/sh
 
 #Set the number of tests to be checked
-NUM_TESTS=6
+NUM_TESTS=7
 
 # Setup validation directory
 #---------------------------
@@ -15,7 +15,7 @@ mkdir Validation
 
 cd Validation
 mkdir RESLT_fold RESLT_pitch RESLT_hopf RESLT_adaptive_pitch \
-      RESLT_adaptive_hopf RESLT_track_pitch
+      RESLT_adaptive_hopf RESLT_track_pitch RESLT_periodic_orbit
 
 echo "Running fold bifurcation validation "
 cd RESLT_fold
@@ -159,6 +159,30 @@ if test "$1" = "no_fpdiff"; then
 else
 ../../../bin/fpdiff.py ../validata/adaptive_hopf.dat.gz adaptive_hopf.dat \
  0.1 5.0e-8 >> validation.log
+fi
+
+echo "Running periodic_orbit validation "
+cd RESLT_periodic_orbit
+../../periodic_orbit > ../OUTPUT_periodic_orbit
+cd ..
+
+echo "done"
+echo " " >> validation.log
+echo "Periodic orbit validation" >> validation.log
+echo "----------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat RESLT_periodic_orbit/trace.dat RESLT_periodic_orbit/orbit_trace.dat \
+  RESLT_periodic_orbit/first_orbit.dat > periodic_orbit.dat
+
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../bin/fpdiff.py ../validata/periodic_orbit.dat.gz periodic_orbit.dat \
+ 0.1 1.0e-12 >> validation.log
 fi
 
 

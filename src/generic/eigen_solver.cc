@@ -61,7 +61,7 @@ namespace oomph
 //==========================================================================
 /// Use ARPACK to solve an eigen problem that is assembled by elements in
 /// a mesh in a Problem object.
-#//==========================================================================
+//==========================================================================
 void ARPACK::solve_eigenproblem(Problem* const &problem_pt,
                                 const int &n_eval,
                                 Vector<std::complex<double> > &eigenvalue,

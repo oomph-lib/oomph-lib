@@ -6112,7 +6112,7 @@ int tetgenmesh::tri_edge_2d(point A, point B, point C, point P, point Q,
     REAL n[3], len;
     // Calculate a lift point, saved in dummypoint.
     facenormal2(A, B, C, n, 1);
-    len = sqrt(DOT(n, n));
+    len = sqrt(TETGEN_DOT(n, n));
     n[0] /= len;
     n[1] /= len;
     n[2] /= len;
@@ -6971,9 +6971,9 @@ REAL tetgenmesh::incircle3d(point pa, point pb, point pc, point pd)
 
   // Calculate the areas of the two triangles [a, b, c] and [b, a, d].
   facenormal2(pa, pb, pc, n1, 1);
-  area2[0] = DOT(n1, n1);
+  area2[0] = TETGEN_DOT(n1, n1);
   facenormal2(pb, pa, pd, n2, 1);
-  area2[1] = DOT(n2, n2);
+  area2[1] = TETGEN_DOT(n2, n2);
 
   if (area2[0] > area2[1]) {
     // Choose [a, b, c] as the base triangle.
@@ -7573,9 +7573,9 @@ void tetgenmesh::facenormal2(point pa, point pb, point pc, REAL *n, int pivot)
     v3[0] = pc[0] - pb[0];  // edge vector v3: b->c
     v3[1] = pc[1] - pb[1];
     v3[2] = pc[2] - pb[2];
-    L1 = DOT(v1, v1);
-    L2 = DOT(v2, v2);
-    L3 = DOT(v3, v3);
+    L1 = TETGEN_DOT(v1, v1);
+    L2 = TETGEN_DOT(v2, v2);
+    L3 = TETGEN_DOT(v3, v3);
     // Sort the three edge lengths.
     if (L1 < L2) {
       if (L2 < L3) {
@@ -20173,7 +20173,7 @@ enum tetgenmesh::interresult tetgenmesh::scoutcrosstet(face *pssub,
   if (cofacetflag) {
     // There are co-facet points. Calculate a point above the subface.
     facenormal2(pa, pb, pc, n, 1);
-    len = sqrt(DOT(n, n));
+    len = sqrt(TETGEN_DOT(n, n));
     n[0] /= len;
     n[1] /= len;
     n[2] /= len;
@@ -20313,7 +20313,7 @@ void tetgenmesh::recoversubfacebyflips(face* pssub, triface* crossface,
   if (pe == dummypoint) {
     // Calculate a point above the faces.
     facenormal2(pa, pb, pd, n, 1);
-    len = sqrt(DOT(n, n));
+    len = sqrt(TETGEN_DOT(n, n));
     n[0] /= len;
     n[1] /= len;
     n[2] /= len;
@@ -20385,7 +20385,7 @@ void tetgenmesh::recoversubfacebyflips(face* pssub, triface* crossface,
     if (pe == dummypoint) {
       // Calculate a point above the faces.
       facenormal2(pa, pb, pd, n, 1);
-      len = sqrt(DOT(n, n));
+      len = sqrt(TETGEN_DOT(n, n));
       n[0] /= len;
       n[1] /= len;
       n[2] /= len;
@@ -21516,7 +21516,7 @@ bool tetgenmesh::fillcavity(arraypool* topshells, arraypool* botshells,
     }
     // Calculate a point above the faces.
     facenormal2(pa, pb, pc, n, 1);
-    len = sqrt(DOT(n, n));
+    len = sqrt(TETGEN_DOT(n, n));
     n[0] /= len;
     n[1] /= len;
     n[2] /= len;
@@ -29388,7 +29388,7 @@ void tetgenmesh::repairencsubs(bool chkbadtet)
         // getfacetabovepoint(&splitsub);
         // Calculate an abovepoint in dummypoint.
         facenormal2(encloop->forg, encloop->fdest, encloop->fapex, normal, 1);
-        len = sqrt(DOT(normal, normal));
+        len = sqrt(TETGEN_DOT(normal, normal));
         normal[0] /= len;
         normal[1] /= len;
         normal[2] /= len;

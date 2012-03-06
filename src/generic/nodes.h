@@ -224,6 +224,10 @@ class Data
   /// Destructor, deallocates memory assigned for data.
  virtual ~Data();
 
+ /// \short Set a new timestepper by resizing the appropriate storage.
+ /// If already assigne equation numbering will not be affected
+ void set_time_stepper(TimeStepper* const &time_stepper_pt);
+
  /// Return the pointer to the timestepper.
  TimeStepper*& time_stepper_pt() {return Time_stepper_pt;}
 

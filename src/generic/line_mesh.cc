@@ -116,65 +116,69 @@ namespace oomph
    } // End of loop over elements
   
 #ifdef PARANOID
-  
+
   // Check each boundary only has precisely one element next to it
   // -------------------------------------------------------------
-  
-  // Loop over boundaries
-  for(unsigned b=0;b<n_bound;b++)
+  //Only if not distributed
+  if(this->Mesh_is_distributed==false)
    {
-    // Evaluate number of elements adjacent to boundary b
-    const unsigned n_element = Boundary_element_pt[b].size();
-    
-    switch(n_element)
+    // Loop over boundaries
+    for(unsigned b=0;b<n_bound;b++)
      {
-      // Boundary b has no adjacent elements
-     case 0:
-      {
-       std::ostringstream error_stream;
-       error_stream << "Boundary " << b << " has no element adjacent to it\n";
-       throw OomphLibError(error_stream.str(),
-                           "LineMeshBase::setup_boundary_element_info()",
-                           OOMPH_EXCEPTION_LOCATION);
-       break;
-      }
-      // Boundary b has one adjacent element (this is good!)
-     case 1:
-      break;
+      // Evaluate number of elements adjacent to boundary b
+      const unsigned n_element = Boundary_element_pt[b].size();
       
-      // Boundary b has more than one adjacent element
-     default:
-      {
-       std::ostringstream error_stream;
-       error_stream << "Boundary " << b << " has " << n_element
-                    << " elements adjacent to it.\n"
-                    << "This shouldn't occur in a 1D mesh.\n";
-       throw OomphLibError(error_stream.str(),
-                           "LineMeshBase::setup_boundary_element_info()",
-                           OOMPH_EXCEPTION_LOCATION);
-       break;
-      }
-     } // End of switch
-    
-    // Because each boundary should only have one element adjacent to it,
-    // each `Face_index_at_boundary[b]' should be of size one.
-    
-    const unsigned face_index_at_boundary_size 
-     = Face_index_at_boundary[b].size();
-    
-    if(face_index_at_boundary_size != 1)
-     {
-      std::ostringstream error_stream;
-      error_stream << "Face_index_at_boundary[" << b << "] has size" 
-                   << face_index_at_boundary_size
-                   << " which does not make sense.\n"
-                   << "In a 1D mesh its size should always be one since only\n"
-                   << "one element can be adjacent to any particular boundary";
-      throw OomphLibError(error_stream.str(),
-                          "LineMeshBase::setup_boundary_element_info()",
-                          OOMPH_EXCEPTION_LOCATION);
-     }
-   } // End of loop over boundaries
+      switch(n_element)
+       {
+        // Boundary b has no adjacent elements
+       case 0:
+       {
+        std::ostringstream error_stream;
+        error_stream << "Boundary " << b << " has no element adjacent to it\n";
+        throw OomphLibError(error_stream.str(),
+                            "LineMeshBase::setup_boundary_element_info()",
+                            OOMPH_EXCEPTION_LOCATION);
+        break;
+       }
+       // Boundary b has one adjacent element (this is good!)
+       case 1:
+        break;
+        
+        // Boundary b has more than one adjacent element
+       default:
+       {
+        std::ostringstream error_stream;
+        error_stream << "Boundary " << b << " has " << n_element
+                     << " elements adjacent to it.\n"
+                     << "This shouldn't occur in a 1D mesh.\n";
+        throw OomphLibError(error_stream.str(),
+                            "LineMeshBase::setup_boundary_element_info()",
+                            OOMPH_EXCEPTION_LOCATION);
+        break;
+       }
+       } // End of switch
+      
+      // Because each boundary should only have one element adjacent to it,
+      // each `Face_index_at_boundary[b]' should be of size one.
+      
+      const unsigned face_index_at_boundary_size 
+       = Face_index_at_boundary[b].size();
+      
+      if(face_index_at_boundary_size != 1)
+       {
+        std::ostringstream error_stream;
+        error_stream 
+         << "Face_index_at_boundary[" << b << "] has size" 
+         << face_index_at_boundary_size
+         << " which does not make sense.\n"
+         << "In a 1D mesh its size should always be one since only\n"
+         << "one element can be adjacent to any particular boundary";
+        throw OomphLibError(error_stream.str(),
+                            "LineMeshBase::setup_boundary_element_info()",
+                            OOMPH_EXCEPTION_LOCATION);
+       }
+     } // End of loop over boundaries
+   }
 #endif
   
   // Doc?

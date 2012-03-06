@@ -2,7 +2,8 @@
 include $(top_srcdir)/config/makefile_templates/demo_drivers
 
 # Name of executable
-check_PROGRAMS=fold hopf pitchfork track_pitch adaptive_pitchfork adaptive_hopf
+check_PROGRAMS=fold hopf pitchfork track_pitch adaptive_pitchfork \
+	adaptive_hopf periodic_orbit
 
 #----------------------------------------------------------------------
 
@@ -54,6 +55,13 @@ adaptive_hopf_SOURCES = adaptive_hopf.cc
 # Required libraries
 # $(FLIBS) is included in case the solver involves fortran sources
 adaptive_hopf_LDADD = -L@libdir@ -lnavier_stokes -lgeneric \
+                           $(EXTERNAL_LIBS) $(FLIBS)
+
+# Sources for executable
+periodic_orbit_SOURCES = periodic_orbit.cc 
+# Required libraries
+# $(FLIBS) is included in case the solver involves fortran sources
+periodic_orbit_LDADD = -L@libdir@ -lgeneric \
                            $(EXTERNAL_LIBS) $(FLIBS)
 
 

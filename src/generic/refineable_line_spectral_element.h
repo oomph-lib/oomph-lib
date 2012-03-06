@@ -9,6 +9,9 @@
 
 
 // oomph-lib headers
+#include "mesh.h"
+#include "algebraic_elements.h"
+#include "macro_element_node_update_element.h"
 #include "refineable_line_element.h"
 
 namespace oomph

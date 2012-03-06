@@ -3389,7 +3389,7 @@ inline REAL tetgenmesh::distance(REAL* p1, REAL* p2)
 #define DIST(p1, p2) \
   sqrt(NORM2((p2)[0] - (p1)[0], (p2)[1] - (p1)[1], (p2)[2] - (p1)[2]))
 
-#define DOT(v1, v2) \
+#define TETGEN_DOT(v1, v2) \
   ((v1)[0] * (v2)[0] + (v1)[1] * (v2)[1] + (v1)[2] * (v2)[2])
 
 #define CROSS(v1, v2, n) \

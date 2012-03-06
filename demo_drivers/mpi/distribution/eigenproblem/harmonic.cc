@@ -38,7 +38,6 @@ using namespace std;
 
 using namespace oomph;
 
-
 //===================================================================
 /// Function-type-object to perform comparison of complex data types
 /// Needed to sort the complex eigenvalues into order based on the
@@ -423,7 +422,8 @@ void HarmonicProblem<ELEMENT,EIGEN_SOLVER>::doc_solution(const unsigned& label)
  npts=5; 
 
  // Output solution with specified number of plot points per element
- sprintf(filename,"soln%i.dat",label);
+ sprintf(filename,"soln%i_on_proc%i.dat",label,
+         this->communicator_pt()->my_rank());
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);
  some_file.close();
@@ -469,7 +469,7 @@ solve(const unsigned& label)
  //Normalise the eigenvector 
  {
   //Get the dimension of the eigenvector
-  unsigned dim = eigenvectors[second_smallest_index].nrow();
+  unsigned dim = eigenvectors[second_smallest_index].nrow_local();
   double length=0.0;
   //Loop over all the entries
   for(unsigned i=0;i<dim;i++)
@@ -479,12 +479,35 @@ solve(const unsigned& label)
    }
   //Now take the magnitude
   length = sqrt(length);
+#ifdef OOMPH_HAS_MPI
+  double length2 = length;
+  if (eigenvectors[second_smallest_index].distributed() && 
+      eigenvectors[second_smallest_index].distribution_pt()
+      ->communicator_pt()->nproc() > 1)
+   {
+     MPI_Allreduce(&length,&length2,1,MPI_DOUBLE,MPI_SUM,
+                   eigenvectors[second_smallest_index].distribution_pt()
+                   ->communicator_pt()->mpi_comm());
+   }
+  length = length2;
+#endif
+  
   //Fix the sign
-  if(eigenvectors[second_smallest_index][0] < 0) {length *= -1.0;}
+  int sign=1;
+  if(this->communicator_pt()->my_rank()==0)
+   {
+    if(eigenvectors[second_smallest_index][0] < 0) {sign = -1;}
+   }
+
+#ifdef OOMPH_HAS_MPI
+  //Broadcast to all other processes
+  MPI_Bcast(&sign,1,MPI_INT,0,this->communicator_pt()->mpi_comm());
+#endif
+
   //Finally normalise
   for(unsigned i=0;i<dim;i++)
    {
-    eigenvectors[second_smallest_index][i] /= length;
+    eigenvectors[second_smallest_index][i] /= length*sign;
    }
  }
 
@@ -494,15 +517,16 @@ solve(const unsigned& label)
  this->doc_solution(label);
 
  char filename[100];
- sprintf(filename,"eigenvalues%i.dat",label);
+ sprintf(filename,"eigenvalues%i_on_proc%i.dat",label,
+         this->communicator_pt()->my_rank());
  
  //Open an output file for the sorted eigenvalues
  ofstream evalues(filename);
  for(unsigned i=0;i<n_eval;i++)
   {
    //Print to screen
-   cout << sorted_eigenvalues[i].real() << " " 
-        << sorted_eigenvalues[i].imag() << std::endl;
+   oomph_info << sorted_eigenvalues[i].real() << " " 
+              << sorted_eigenvalues[i].imag() << std::endl;
    //Send to file
    evalues << sorted_eigenvalues[i].real() << " " 
            << sorted_eigenvalues[i].imag() << std::endl;
@@ -522,56 +546,45 @@ solve(const unsigned& label)
 //=====================================================================
 int main(int argc, char **argv)
 {
-
+#ifdef OOMPH_HAS_MPI
+ MPI_Helpers::init(argc,argv);
+#endif
  // Set up the problem: 
  unsigned n_element=100; //Number of elements
 
+#ifdef OOMPH_HAS_TRILINOS
+//Solve with Anasazi (non distributed)
  clock_t t_start1 = clock();
- //Solve with ARPACK
  {
-  HarmonicProblem<QHarmonicElement<3>,ARPACK> 
-   problem(n_element);
-  
-  std::cout << "Matrix size " << problem.ndof() << std::endl;
+  HarmonicProblem<QHarmonicElement<3>,ANASAZI> problem(n_element);
   
   problem.solve(1);
  }
  clock_t t_end1 = clock();
- 
+
+
+ //Solve with Anasazi (distributed)
  clock_t t_start2 = clock();
- //Solve with LAPACK_QZ
  {
-  HarmonicProblem<QHarmonicElement<3>,LAPACK_QZ> 
-   problem(n_element);
-  
+  HarmonicProblem<QHarmonicElement<3>,ANASAZI> problem(n_element);
+  problem.distribute();
+
   problem.solve(2);
  }
  clock_t t_end2 = clock();
 
-#ifdef OOMPH_HAS_TRILINOS
-//Only do this if we don't have MPI
-#ifndef OOMPH_HAS_MPI
- clock_t t_start3 = clock();
-//Solve with Anasazi
- {
-  HarmonicProblem<QHarmonicElement<3>,ANASAZI> problem(n_element);
-  problem.solve(3);
- }
- clock_t t_end3 = clock();
-#endif
+ oomph_info << "ANASAZI TIME (non-distributed): " 
+            << (double)(t_end1 - t_start1)/CLOCKS_PER_SEC
+            << std::endl;
+
+
+ oomph_info << "ANASAZI TIME (distributed): " << 
+  (double)(t_end2 - t_start2)/CLOCKS_PER_SEC
+            << std::endl;
 #endif
 
- std::cout << "ARPACK TIME: " << (double)(t_end1 - t_start1)/CLOCKS_PER_SEC
-           << std::endl;
-
- std::cout << "LAPACK TIME: " << (double)(t_end2 - t_start2)/CLOCKS_PER_SEC
-           << std::endl;
-
-#ifdef OOMPH_HAS_TRILINOS
-#ifndef OOMPH_HAS_MPI
-  std::cout << "ANASAZI TIME: " << (double)(t_end3 - t_start3)/CLOCKS_PER_SEC
-           << std::endl;
-#endif
+#ifdef OOMPH_HAS_MPI
+ MPI_Helpers::finalize();
 #endif
 
 } // end of main

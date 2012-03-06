@@ -296,7 +296,7 @@ void HSL_MA42::solve(Problem* const &problem_pt, DoubleVector &result)
       }
      
      // Cleanup
-     delete ivar;
+     delete[] ivar;
      ivar=0;
      
     }
@@ -369,7 +369,7 @@ void HSL_MA42::solve(Problem* const &problem_pt, DoubleVector &result)
       }
      
      // Cleanup
-     delete ivar;
+     delete[] ivar;
      ivar=0;
      
     } // end of symbolic factorisation
@@ -637,8 +637,16 @@ void HSL_MA42::solve(Problem* const &problem_pt, DoubleVector &result)
       {
        //Now translate the residuals and jacobian into form to be
        //taken by stupid FORTRAN frontal solver
-       double avar[nvar][nmaxe], rhs[1][nmaxe];
-       
+       //double avar[nvar][nmaxe], rhs[1][nmaxe];
+       //Assign memory on the heap rather than the stack because the ndofs
+       //could get too large
+       double **avar = new double*[nvar];
+       double *tmp = new double[nvar*nmaxe];
+       for(unsigned i=0;i<nvar;i++) {avar[i] = &tmp[i*nmaxe];}
+       double **rhs = new double*[1];
+       rhs[0] = new double[nmaxe];
+
+
        for(int i=0;i<nmaxe;i++)
         {
          rhs[0][i] = residuals[i];
@@ -688,10 +696,16 @@ void HSL_MA42::solve(Problem* const &problem_pt, DoubleVector &result)
            throw NewtonSolverError(true);
           }
         }
+
+       //Clean up the memory
+       delete[] rhs[0]; rhs[0] = 0;
+       delete[] rhs; rhs =0;
+       delete[] avar[0]; avar[0] = 0;
+       delete[] avar;
       }
      
      // Cleanup
-     delete ivar;
+     delete[] ivar;
      ivar=0;
      
     } // end of loop over elements for assemble/solve

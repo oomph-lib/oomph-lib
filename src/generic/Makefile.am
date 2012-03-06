@@ -10,7 +10,7 @@ oomph_definitions.cc oomph_utilities.cc \
 complex_matrices.cc \
 matrices.cc       timesteppers.cc explicit_timesteppers.cc \
 integral.cc   nodes.cc  \
-elements.cc mesh.cc assembly_handler.cc problem.cc \
+elements.cc mesh.cc assembly_handler.cc periodic_orbit_handler.cc problem.cc \
 Qelements.cc Qspectral_elements.cc frontal_solver.cc      linear_solver.cc \
 Qelement_face_coordinate_translation_schemes.cc \
 Telements.cc hermite_elements.cc   \
@@ -39,6 +39,7 @@ line_mesh.cc binary_tree.cc refineable_line_element.cc \
 triangle_mesh.cc tet_mesh.cc \
 partitioning.cc communicator.cc linear_algebra_distribution.cc \
 double_vector.cc \
+double_multi_vector.cc \
 double_vector_with_halo.cc \
 iterative_linear_solver.cc \
 general_purpose_preconditioners.cc block_preconditioner.cc \
@@ -58,7 +59,7 @@ endif
 headers =  \
 oomph_definitions.h Qelements.h    Qspectral_elements.h        elements.h    \
 Qelement_face_coordinate_translation_schemes.h \
-integral.h       assembly_handler.h problem.h \
+integral.h       assembly_handler.h periodic_orbit_handler.h problem.h \
 linear_solver.h       shape.h \
 Vector.h            frontal_solver.h      matrices.h       spines.h \
 element_with_moving_nodes.h \
@@ -93,7 +94,7 @@ line_mesh.h binary_tree.h refineable_line_element.h \
 refineable_line_mesh.h \
 triangle_mesh.h tet_mesh.h \
 partitioning.h communicator.h linear_algebra_distribution.h double_vector.h \
-double_vector_with_halo.h \
+double_multi_vector.h double_vector_with_halo.h \
 multi_domain.h element_with_external_element.h iterative_linear_solver.h \
 preconditioner.h \
 general_purpose_preconditioners.h block_preconditioner.h \
@@ -130,12 +131,12 @@ if OOMPH_HAS_TRILINOS
 
    # Add the trilinos sources
    sources += trilinos_helpers.cc trilinos_preconditioners.cc \
-              trilinos_solver.cc
+              trilinos_solver.cc trilinos_eigen_solver.cc
 
 
    # Add the trilinos headers
    headers +=   trilinos_helpers.h trilinos_preconditioners.h \
-                trilinos_solver.h
+                trilinos_solver.h trilinos_eigen_solver.h
 
 endif
 

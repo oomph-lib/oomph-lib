@@ -175,6 +175,8 @@ class CRDoubleMatrix;
 
    // Set the distribution
    this->build_distribution(dist_pt);
+   // Say that it's built
+   Built = true;
 
    // set the external values
    set_external_values(external_values,delete_external_values);
