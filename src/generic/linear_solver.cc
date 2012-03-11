@@ -270,6 +270,23 @@ void DenseLU::factorise(DoubleMatrixBase* const &matrix_pt)
    determinant_exponent += iexp;
   }
 
+ //If paranoid issue a warning that the matrix is near singular
+// #ifdef PARANOID
+//  int tiny_exponent = -60;
+//  if(determinant_exponent < tiny_exponent)
+//   {
+//    std::ostringstream warning_stream;
+//    warning_stream << "The determinant of the matrix is very close to zero.\n"
+//                   << "It is " << determinant_mantissa << " x 2^" 
+//                   << determinant_exponent << "\n";
+//    warning_stream << "The results will depend on the exact details of the\n"
+//                   << "floating point implementation ... just to let you know\n";
+//    OomphLibWarning(warning_stream.str(),
+//                    "DenseLU::factorise()",
+//                    OOMPH_EXCEPTION_LOCATION);
+//   }
+// #endif
+
  //Integer to store the sign of the determinant
  int sign = 0;
  //Find the sign of the determinant

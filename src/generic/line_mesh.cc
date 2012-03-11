@@ -120,7 +120,9 @@ namespace oomph
   // Check each boundary only has precisely one element next to it
   // -------------------------------------------------------------
   //Only if not distributed
+#ifdef OOMPH_HAS_MPI
   if(this->Mesh_is_distributed==false)
+#endif
    {
     // Loop over boundaries
     for(unsigned b=0;b<n_bound;b++)

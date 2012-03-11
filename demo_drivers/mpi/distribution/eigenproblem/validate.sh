@@ -14,8 +14,10 @@ cd Validation
 
 
 
-# Validation for distributed pitchfork bifurcation detection
+# Validation for distributed eigenproblem detection
 #---------------------------------------------------------------------
+
+if [ -f ../harmonic ]; then
 
 mkdir RESLT_harmonic
 cd RESLT_harmonic
@@ -48,9 +50,19 @@ echo "Distributed" >> validation.log
  harmonic_dist.dat 0.1 1.0e-13 >> validation.log
 fi
 
+else
+echo "Not runnning test because Trilinos is required"
+echo "[OK] (Dummy for non-existent Trilinos)" >> validation.log
+echo "[OK] (Dummy for non-existent Trilinos)" >> validation.log
+fi
+
+
 # Append output to global validation log file
 #--------------------------------------------
 cat validation.log >> ../../../../../validation.log
+
+
+
 
 cd ..
 

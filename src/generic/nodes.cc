@@ -525,6 +525,7 @@ void Data::read(std::ifstream& restart_file)
          error_stream << nod_pt->x(i) << " ";
         }
        error_stream << nod_pt << " "; 
+#ifdef OOMPH_HAS_MPI
        if (nod_pt->is_halo())
         {
          error_stream << " (halo)\n";
@@ -533,6 +534,7 @@ void Data::read(std::ifstream& restart_file)
         {
          error_stream << " (not halo)\n";
         }
+#endif
       }
      throw OomphLibError(error_stream.str(),
                          "Data::read()",

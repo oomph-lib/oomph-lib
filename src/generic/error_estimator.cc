@@ -29,12 +29,15 @@
 #include "mpi.h"
 #endif
 
+
 #include "refineable_quad_element.h"
 #include "error_estimator.h"
 #include "shape.h"
+#include "Telements.h"
 
 namespace oomph
 {
+
 
 //====================================================================
 /// Recovery shape functions as functions of the global, Eulerian
@@ -88,7 +91,7 @@ void Z2ErrorEstimator::shape_rec(const Vector<double>& x,
 
      error_stream 
       << "Recovery shape functions for recovery order " 
-      << recovery_order() << " haven't yet been implemented for 2D" 
+      << recovery_order() << " haven't yet been implemented for 1D" 
       << std::endl;
 
      throw OomphLibError(error_stream.str(),
@@ -232,6 +235,170 @@ void Z2ErrorEstimator::shape_rec(const Vector<double>& x,
                 << dim << std::endl;
    throw OomphLibError(error_stream.str(),
                        "Z2ErrorEstimator::shape_rec()",
+                       OOMPH_EXCEPTION_LOCATION);
+   break;
+  }
+}
+
+//====================================================================
+/// Integation scheme associated with the recovery shape functions
+/// must be of sufficiently high order to integrate the mass matrix
+/// associated with the recovery shape functions. The  argument
+/// is the dimension of the elements.
+/// The integration is performed locally over the elements, so the 
+/// integration scheme does depend on the geometry of the element.
+/// The type of element is specified by the boolean which is
+/// true if elements in the patch are QElements and false if they are 
+/// TElements (will need change if we ever have other element types)
+//====================================================================
+ Integral* Z2ErrorEstimator::integral_rec(const unsigned& dim,
+  const bool &is_q_mesh)
+{
+ std::ostringstream error_stream;
+ 
+  /// Which spatial dimension are we dealing with?
+ switch(dim)
+  {
+
+  case 1:
+
+   // 1D:
+   //====
+
+   /// Find order of recovery shape functions
+   switch(recovery_order())
+   {
+    case 1:
+
+     //Complete linear polynomial in 1D 
+     //(quadratic terms in mass matrix)
+     if(is_q_mesh) {return(new Gauss<1,2>);}
+     else {return(new TGauss<1,2>);}
+     break;
+
+    case 2:
+
+     // Complete quadratic polynomial in 1D:
+     //(quartic terms in the mass marix)
+     if(is_q_mesh) {return(new Gauss<1,3>);}
+     else {return(new TGauss<1,3>);}
+     break;
+
+    case 3:
+
+     // Complete cubic polynomial in 1D:
+     // (order six terms in mass matrix)
+     if(is_q_mesh) {return(new Gauss<1,4>);}
+     else {return(new TGauss<1,4>);}
+     break;
+
+    default:
+
+     error_stream 
+      << "Recovery shape functions for recovery order " 
+      << recovery_order() << " haven't yet been implemented for 1D" 
+      << std::endl;
+
+     throw OomphLibError(error_stream.str(),
+                         "Z2ErrorEstimator::integral_rec()",
+                         OOMPH_EXCEPTION_LOCATION);
+   }
+   break;
+
+  case 2:
+
+   // 2D:
+   //====
+
+   /// Find order of recovery shape functions
+   switch(recovery_order())
+   {
+    case 1:
+
+     // Complete linear polynomial in 2D:
+     if(is_q_mesh) {return(new Gauss<2,2>);}
+     else {return(new TGauss<2,2>);}
+     break;
+
+    case 2:
+
+     // Complete quadratic polynomial in 2D:
+     if(is_q_mesh) {return(new Gauss<2,3>);}
+     else {return(new TGauss<2,3>);}
+     break;
+
+    case 3:
+
+     // Complete cubic polynomial in 2D:
+     if(is_q_mesh) {return(new Gauss<2,4>);}
+     else {return(new TGauss<2,4>);}
+     break;
+
+    default:
+
+     error_stream 
+      << "Recovery shape functions for recovery order " 
+      << recovery_order() << " haven't yet been implemented for 2D" 
+      << std::endl;
+
+     throw OomphLibError(error_stream.str(),
+                         "Z2ErrorEstimator::integral_rec()",
+                         OOMPH_EXCEPTION_LOCATION);
+   }
+   break;
+
+  case 3:
+
+   // 3D:
+   //====
+   /// Find order of recovery shape functions
+   switch(recovery_order())
+    {
+    case 1:
+
+     // Complete linear polynomial in 3D:
+     if(is_q_mesh) {return(new Gauss<3,2>);}
+     else {return(new TGauss<3,2>);}
+     break;
+
+    case 2:
+
+     // Complete quadratic polynomial in 3D:
+     if(is_q_mesh) {return(new Gauss<3,3>);}
+     else {return(new TGauss<3,3>);}
+     break;
+
+    case 3:
+
+     // Complete cubic polynomial in 3D:
+     if(is_q_mesh) {return(new Gauss<3,4>);}
+     else {return(new TGauss<3,5>);} //TGauss<3,4> not implemented
+
+     break;
+  
+    default:
+
+     error_stream 
+      << "Recovery shape functions for recovery order " 
+      << recovery_order() << " haven't yet been implemented for 3D" 
+      << std::endl;
+
+     throw OomphLibError(error_stream.str(),
+                         "Z2ErrorEstimator::integral_rec()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+
+
+   break;
+
+  default:
+
+   // Any other dimension?
+   //=====================
+   error_stream << "No recovery shape functions for dim " 
+                << dim << std::endl;
+   throw OomphLibError(error_stream.str(),
+                       "Z2ErrorEstimator::integral_rec()",
                        OOMPH_EXCEPTION_LOCATION);
    break;
   }
@@ -463,10 +630,22 @@ void Z2ErrorEstimator::get_recovered_flux_in_patch(
      rhs[irhs][j]=0.0;
     }
   }
+
   
+ //Create a new integration scheme based on the recovery order
+ //in the elements
+ //Need to find the type of the element, default is to assume a quad
+ bool is_q_mesh=true;
+ //If we can dynamic cast to the TElementBase, then it's a triangle/tet
+ //Note that I'm assuming that all elements are of the same geometry, but
+ //if they weren't we could adapt...
+ if(dynamic_cast<TElementBase*>(patch_el_pt[0])) {is_q_mesh=false;}
+
+ Integral* const integ_pt = this->integral_rec(dim,is_q_mesh);
+
  //Loop over all elements in patch to assemble linear system
  unsigned nelem=patch_el_pt.size();
- for (unsigned e=0;e<nelem;e++)
+for (unsigned e=0;e<nelem;e++)
   {
    // Get pointer to element
    ElementWithZ2ErrorEstimator* const el_pt=patch_el_pt[e];
@@ -476,9 +655,6 @@ void Z2ErrorEstimator::get_recovered_flux_in_patch(
    
    //Create vector to hold local coordinates
    Vector<double> s(dim); 
-
-   // multiple dereferencing occuring to el_pt->integral_pt()
-   Integral* const integ_pt = el_pt->integral_pt();
 
    //Loop over the integration points
    unsigned Nintpt = integ_pt->nweight();
@@ -527,6 +703,7 @@ void Z2ErrorEstimator::get_recovered_flux_in_patch(
         }
       }
 
+
      // Loop over the nodes for the test functions 
      for(unsigned l=0;l<num_recovery_terms;l++)
       {
@@ -541,7 +718,9 @@ void Z2ErrorEstimator::get_recovered_flux_in_patch(
     
   } // End of loop over elements that make up patch. 
 
- 
+ //Delete the integration scheme
+ delete integ_pt;
+
  // Linear system is now assembled: Solve recovery system
 
  // LU decompose the recovery matrix

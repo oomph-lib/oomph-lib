@@ -111,7 +111,8 @@ public:
    this->setup_quadtree_forest();
    
    // Get current p-refinement level (in first element) to use as the minimum
-   unsigned min_p_order = dynamic_cast<PRefineableElement*>(this->element_pt(0))->p_order();
+   unsigned min_p_order = 
+    dynamic_cast<PRefineableElement*>(this->element_pt(0))->p_order();
    
    // Max/min p-refinement levels
    this->Max_p_refinement_level=7;
@@ -136,13 +137,10 @@ template<class ELEMENT>
 class RefineableTwoDPoissonProblem : public Problem
 {
 public:
-    Vector<Integral*> integration_scheme;
-
-public:
 
  /// Constructor: Pass pointer to source function
  RefineableTwoDPoissonProblem(PoissonEquations<2>::PoissonSourceFctPt 
-                          source_fct_pt);
+                              source_fct_pt);
 
  /// Destructor (empty)
  ~RefineableTwoDPoissonProblem()
@@ -343,7 +341,7 @@ void RefineableTwoDPoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 //========================================================================
 int main()
 {
-  
+
  // Create label for output
  //------------------------
  DocInfo doc_info;

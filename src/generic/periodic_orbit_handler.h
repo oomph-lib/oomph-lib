@@ -822,8 +822,8 @@ private:
 
    //Need to reassign equation numbers so that the DOF pointer, points to the 
    //newly allocated storage
-   std::cout << "Re-allocated " << problem_pt->assign_eqn_numbers() 
-             << " equation numbers\n";
+   oomph_info << "Re-allocated " << problem_pt->assign_eqn_numbers() 
+              << " equation numbers\n";
 
    //Now's let's add all the unknowns to the problem
    problem_pt->Dof_pt.resize(Ndof*N_tstorage + 1);
@@ -1172,7 +1172,7 @@ private:
    //Let's dump it
    for(unsigned e=0;e<n_time_element;e++)
     {
-     std::cout << e << " " << elemental_error[e] << "\n";
+     oomph_info << e << " " << elemental_error[e] << "\n";
     }
 
    //Now adapt the mesh
@@ -1291,8 +1291,8 @@ private:
 
    //Need to reassign equation numbers so that the DOF pointer, points to the 
    //newly allocated storage
-   std::cout << "Re-allocated " << Problem_pt->assign_eqn_numbers() 
-             << " equation numbers\n";
+   oomph_info << "Re-allocated " << Problem_pt->assign_eqn_numbers() 
+              << " equation numbers\n";
 
    //Now's let's add all the unknowns to the problem
    Problem_pt->Dof_pt.resize(Ndof*N_tstorage + 1);

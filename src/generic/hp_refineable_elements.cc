@@ -677,7 +677,7 @@ local_coordinate_of_node(const unsigned& n, Vector<double>& s)
   s.resize(2);
   unsigned Nnode_1d = this->nnode_1d();
   unsigned n0 = n%Nnode_1d;
-  unsigned n1 = unsigned(double(n)/double(Nnode_1d));
+  unsigned n1 = n/Nnode_1d; 
   
   switch(Nnode_1d)
    {

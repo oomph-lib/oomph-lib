@@ -428,6 +428,11 @@ class Z2ErrorEstimator : public virtual ErrorEstimator
  void shape_rec(const Vector<double>& x, const unsigned& dim,
                 Vector<double>& psi_r);
 
+ /// \short Integation scheme associated with the recovery shape functions
+ /// must be of sufficiently high order to integrate the mass matrix
+ /// associated with the recovery shape functions
+ Integral* integral_rec(const unsigned &dim, const bool &is_q_mesh);
+
  /// Order of recovery polynomials
  unsigned Recovery_order;
 

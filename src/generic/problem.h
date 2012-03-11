@@ -1372,6 +1372,20 @@ namespace oomph
    //If the problem is distributed I have to do something different
    if(Problem_has_been_distributed)
     {
+#ifdef PARANOID
+     if(Halo_scheme_pt==0)
+      {
+       std::ostringstream error_stream;
+       error_stream 
+        << "Direct access to global dofs in a distributed problem is only\n"
+        << "possible if the function setup_dof_halo_scheme() has been called.\n"
+        << "You can access local dofs via Problem::dof(i).\n";
+       thow OomphLibError(error_stream.str(),
+                          "Poblem::dof_pt()",
+                          OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+                          
      //Work out the local coordinate of the dof
      //based on the original distribution stored in the Halo_scheme 
      const unsigned first_row_local = 

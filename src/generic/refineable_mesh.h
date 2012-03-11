@@ -603,7 +603,7 @@ class TreeBasedPRefineableMeshBase : public TreeBasedRefineableMeshBase
 public:
 
  /// Constructor 
- TreeBasedPRefineableMeshBase()
+  TreeBasedPRefineableMeshBase() : TreeBasedRefineableMeshBase()
   {
    // Max/min p-refinement levels (Min_p_refinement_level must be re-set for
    // meshes containing elements with greater initial p-order)

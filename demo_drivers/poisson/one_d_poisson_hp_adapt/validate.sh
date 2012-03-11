@@ -34,9 +34,9 @@ if test "$1" = "no_python"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/modal_results.dat.gz   \
-    modal_results.dat  >> validation.log
+    modal_results.dat  0.1 1.0e-12 >> validation.log
 ../../../../bin/fpdiff.py ../validata/nodal_results.dat.gz   \
-    nodal_results.dat  >> validation.log
+    nodal_results.dat  0.1 1.0e-12 >> validation.log
 fi
 
 # Append output to global validation log file
