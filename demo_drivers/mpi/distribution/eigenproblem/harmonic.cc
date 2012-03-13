@@ -566,9 +566,22 @@ int main(int argc, char **argv)
  //Solve with Anasazi (distributed)
  clock_t t_start2 = clock();
  {
-  HarmonicProblem<QHarmonicElement<3>,ANASAZI> problem(n_element);
-  problem.distribute();
 
+  HarmonicProblem<QHarmonicElement<3>,ANASAZI> problem(n_element);
+  //In the validation case there should be two processors
+  if(problem.communicator_pt()->nproc()==2)
+   {
+    //Setup a dummy partition
+    unsigned n_element = problem.mesh_pt()->nelement();
+    Vector<unsigned> element_partition(n_element);
+    for(unsigned e=0;e<n_element/2;e++) {element_partition[e]=0;}
+    for(unsigned e=n_element/2;e<n_element;e++) {element_partition[e]=1;}
+    problem.distribute(element_partition);
+   }
+  else
+   {
+    problem.distribute();
+   }
   problem.solve(2);
  }
  clock_t t_end2 = clock();

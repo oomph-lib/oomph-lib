@@ -122,6 +122,18 @@ namespace Anasazi
    { 
     return Teuchos::rcp(new oomph::DoubleMultiVector(mv,index,false));
    }
+
+   /// \brief Creates a new oomph::DoubleMultiVector that contains 
+   /// shallow copies
+   /// of selected entries of the oomph::DoubleMultiVector mv
+   /// return Reference-counted pointer to the new oomph::DoubleMultiVector
+   /// (Non-const version for Trilinos 9 interface)
+   static Teuchos::RCP<oomph::DoubleMultiVector> 
+    CloneView( oomph::DoubleMultiVector &mv, 
+               const std::vector<int>& index )
+   { 
+    return Teuchos::rcp(new oomph::DoubleMultiVector(mv,index,false));
+   }
    
    /// \brief Creates a new oomph::DoubleMultiVector that 
    /// contains shallow copies

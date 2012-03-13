@@ -1380,7 +1380,7 @@ namespace oomph
         << "Direct access to global dofs in a distributed problem is only\n"
         << "possible if the function setup_dof_halo_scheme() has been called.\n"
         << "You can access local dofs via Problem::dof(i).\n";
-       thow OomphLibError(error_stream.str(),
+       throw OomphLibError(error_stream.str(),
                           "Poblem::dof_pt()",
                           OOMPH_EXCEPTION_LOCATION);
       }
