@@ -11,7 +11,7 @@
  */
 
 #ifdef USING_OOMPH_SUPERLU
-#include "../../external_src/oomph_superlu_3.0/slu_ddefs.h"
+#include "../../external_src/oomph_superlu_4.3/slu_ddefs.h"
 #else
 #include "slu_ddefs.h"
 #endif
@@ -77,7 +77,7 @@ int superlu(int *op_flag, int *n, int *nnz, int *nrhs,
     NCformat *Ustore;
     int      i, j, panel_size, permc_spec, relax;
     trans_t  trans;
-    double   drop_tol = 0.0;
+    //double   drop_tol = 0.0; //No longer need SuperLU 4.3
     mem_usage_t   mem_usage;
     superlu_options_t options;
     SuperLUStat_t stat;
@@ -131,7 +131,7 @@ int superlu(int *op_flag, int *n, int *nnz, int *nrhs,
 	panel_size = sp_ienv(1);
 	relax = sp_ienv(2);
 
-	dgstrf(&options, &AC, drop_tol, relax, panel_size, 
+	dgstrf(&options, &AC, /*drop_tol,*/ relax, panel_size, 
 	       etree, NULL, 0, perm_c, perm_r, L, U, &stat, info);
 
 	if ( *info == 0 ) {
@@ -143,17 +143,19 @@ int superlu(int *op_flag, int *n, int *nnz, int *nrhs,
               printf(" No of nonzeros in factor U = %d\n", Ustore->nnz);
               printf(" No of nonzeros in L+U = %d\n", Lstore->nnz + Ustore->nnz);
               dQuerySpace(L, U, &mem_usage);
-              printf(" L\\U MB %.3f\ttotal MB needed %.3f\texpansions %d\n",
-                     mem_usage.for_lu/1e6, mem_usage.total_needed/1e6,
-                     mem_usage.expansions);
+              printf(" L\\U MB %.3f\ttotal MB needed %.3f\n",
+                     //\texpansions %d\n",
+                     mem_usage.for_lu/1e6, mem_usage.total_needed/1e6);
+                     //mem_usage.expansions);
              }
 	} else {
 	    printf("dgstrf() error returns INFO= %d\n", *info);
 	    if ( *info <= *n ) { /* factorization completes */
 	       dQuerySpace(L, U, &mem_usage);
-	       printf(" L\\U MB %.3f\ttotal MB needed %.3f\texpansions %d\n\n",
-		       mem_usage.for_lu/1e6, mem_usage.total_needed/1e6,
-		       mem_usage.expansions);
+	       printf(" L\\U MB %.3f\ttotal MB needed %.3f\n",
+                      //\texpansions %d\n\n",
+                      mem_usage.for_lu/1e6, mem_usage.total_needed/1e6);
+               //mem_usage.expansions);
 	    }
 	}
 	

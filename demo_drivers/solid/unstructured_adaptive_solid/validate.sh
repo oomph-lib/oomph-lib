@@ -40,9 +40,9 @@ else
 ../../../../bin/fpdiff.py ../validata/res.dat.gz \
     res.dat 0.1 1.0e-12 >> validation.log
 ../../../../bin/fpdiff.py ../validata/res_pres_disp.dat.gz \
-    res_pres_disp.dat 0.1 1.0e-12 >> validation.log
+    res_pres_disp.dat 0.1 1.0e-7 >> validation.log
 ../../../../bin/fpdiff.py ../validata/res_pres_disp_incomp.dat.gz \
-    res_pres_disp_incomp.dat 0.1 1.0e-12 >> validation.log
+    res_pres_disp_incomp.dat 0.11 1.5e-7 >> validation.log
 fi
 
 # Append output to global validation log file

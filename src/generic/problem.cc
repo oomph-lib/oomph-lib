@@ -1609,7 +1609,8 @@ namespace oomph
   delete[] el_ass_time;
    
   // Vector of first and last elements for each processor
-  Vector<int> first_and_last_element(2);
+  Vector<Vector <int> > first_and_last_element(n_proc);
+  for(unsigned p=0;p<n_proc;p++) {first_and_last_element[p].resize(2);}
    
   // Re-distribute work
   if (rank==0)
@@ -1629,10 +1630,10 @@ namespace oomph
      
     // Target load per processor
     double target_load=total/double(n_proc);
-     
+
     // We're on the root processor: Always start with the first element
     int proc=0;
-    First_el_for_assembly[0]=0;
+    first_and_last_element[0][0] = 0;
      
     // Initialise total work allocated
     total=0.0;
@@ -1640,69 +1641,107 @@ namespace oomph
      {
       total+=Elemental_assembly_time[e];
        
+      //Once we have reached the target load
       if (total>target_load)
        {
-         
-        // Keep it local on root
-        if (proc==0)
+        //Provided that we are not on the last processor
+        if (proc<(n_proc-1))
          {
           // Last element for current processor
-          Last_el_plus_one_for_assembly[0]=e+1;
-           
-          // First element for next one
-          first_and_last_element[0]=e+1;
-           
-          // Doc
-          oomph_info 
-           << "Processor " << 0 << " assembles Jacobians" 
-           <<  " from elements " << First_el_for_assembly[0] << " to " 
-           <<  Last_el_plus_one_for_assembly[0]-1 << " " 
-           << std::endl;
-         }
-        else if (proc<(n_proc-1))
-         {
-          // Last element for current processor
-          first_and_last_element[1]=e;
-
-          // Send two ints to processor p:
-          MPI_Send(&first_and_last_element[0],2,MPI_INT,proc,0,
-                   this->communicator_pt()->mpi_comm());
-
-          // Doc
-          oomph_info 
-           << "Processor " << proc << " assembles Jacobians" 
-           <<  " from elements " << first_and_last_element[0] << " to " 
-           <<  first_and_last_element[1] << " " 
-           << std::endl;
-
+          first_and_last_element[proc][1]=e;
 
           // Set first element for next one
-          first_and_last_element[0]=e+1;
+          first_and_last_element[proc+1][0]=e+1;
          }
          
         // Move on to the next processor
         proc++;
-         
-        // Re-initialise
+        
+        // Re-initialise the time
         total=0.0;
-
        } // end of test for "total exceeds target"
      }
-     
-    // Last one
-    first_and_last_element[1]=n_elements-1;
 
-    // Send two ints to processor p:
-    MPI_Send(&first_and_last_element[0],2,MPI_INT,n_proc-1,
-             0,this->communicator_pt()->mpi_comm());
-     
-    // Doc
-    oomph_info 
-     << "Processor " << n_proc-1 << " assembles Jacobians" 
-     <<  " from elements " << first_and_last_element[0] << " to " 
-     <<  first_and_last_element[1] << " " 
-     << std::endl;
+    //If we haven't got to the end of the processor list then 
+    //need to shift things about slightly because the processors
+    //at the end will be empty.
+    //This can occur when you have very fast assembly times and the 
+    //rounding errors mean that the targets are achieved before all processors
+    //have been visited.
+    //Happens a lot when you massively oversubscribe the CPUs (which was
+    //only ever for testing!)
+    if(proc!=n_proc-1)
+     {
+      oomph_info 
+       << "First pass did not allocate elements on every processor\n";
+      oomph_info <<
+       "Moving elements so that each processor has at least one\n";
+      
+      //Work out number of empty processos
+      unsigned n_empty_processors = n_proc - proc + 1;
+
+      //Loop over the processors that do have elements
+      //and work out how many we need to steal elements from
+      unsigned n_element_on_processors=0;
+      do
+       {
+        //Step down the processors
+        --proc;
+        //Add the current processor to the number of empty processors
+        //because the elements have to be shared between processors
+        //including the one(s) on which they are currently stored.
+        ++n_empty_processors; 
+        n_element_on_processors += 
+         (first_and_last_element[proc][1] - 
+          first_and_last_element[proc][0] + 1);
+       }
+      while(n_element_on_processors < n_empty_processors);
+      
+      //Should now be able to put one element on each processor
+      //Start from the end and do so
+      unsigned current_element  = n_elements-1;
+      for(unsigned p=n_proc-1;p>proc;p--)
+       {
+        first_and_last_element[p][1] = current_element;
+        first_and_last_element[p][0] = --current_element;
+       }
+
+      //Now for the last processor we touched, just adjust the final value
+      first_and_last_element[proc][1] = current_element;
+     }
+    //Otherwise just put the rest of the elements on the final 
+    //processor
+    else
+     {
+      // Last one
+      first_and_last_element[n_proc-1][1]=n_elements-1;
+     }
+
+    //Now communicate the information
+
+    //Set local informationt for this (root) processor
+    First_el_for_assembly[0]= first_and_last_element[0][0];
+    Last_el_plus_one_for_assembly[0] = first_and_last_element[0][1] + 1;
     
+    oomph_info 
+     << "Processor " << 0 << " assembles Jacobians" 
+     <<  " from elements " << first_and_last_element[0][0] << " to " 
+     <<  first_and_last_element[0][1] << " " 
+     << std::endl;
+
+    //Only now can we send the information to the other processors
+    for(unsigned p=1;p<n_proc;++p)
+     {
+
+      MPI_Send(&first_and_last_element[p][0],2,MPI_INT,p,
+               0,this->communicator_pt()->mpi_comm());
+
+      oomph_info 
+       << "Processor " << p << " assembles Jacobians" 
+       <<  " from elements " << first_and_last_element[p][0] << " to " 
+       <<  first_and_last_element[p][1] << " " 
+       << std::endl;
+     }
    }
   // Receive first and last element from root on non-master processors
   else

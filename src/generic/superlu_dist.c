@@ -27,7 +27,7 @@
  */
 #include <math.h>
 #ifdef USING_OOMPH_SUPERLU_DIST
-#include "oomph_superlu_dist_2.3.h"
+#include "oomph_superlu_dist_3.0.h"
 #else
 #include<superlu_defs.h> 
 #include<superlu_ddefs.h> 
@@ -225,7 +225,7 @@ void superlu_dist_distributed_matrix(int opt_flag, int allow_permutations,
 
    /* Iterative refinement (essential as far as I can tell).*/
    /* Can be "NO" or "DOUBLE"*/
-   options->IterRefine = DOUBLE;
+   options->IterRefine = SLU_DOUBLE;
    
    /* Print stats during solve? */
    if (doc==0)
@@ -292,11 +292,11 @@ void superlu_dist_distributed_matrix(int opt_flag, int allow_permutations,
     {
      *info = -1;
     }
-   else if ( options->IterRefine < 0 || options->IterRefine > EXTRA )
+   else if ( options->IterRefine < 0 || options->IterRefine > SLU_EXTRA )
     {
      *info = -1;
     }
-   else if ( options->IterRefine == EXTRA )
+   else if ( options->IterRefine == SLU_EXTRA )
     {
      *info = -1;
      fprintf(stderr, "Extra precise iterative refinement yet to support.\n");
@@ -1290,7 +1290,7 @@ void superlu_dist_global_matrix(int opt_flag, int allow_permutations,
    
    /* Iterative refinement (essential as far as I can tell).*/
    /* Can be "NO" or "DOUBLE"*/
-   options->IterRefine = DOUBLE;
+   options->IterRefine = SLU_DOUBLE;
    
    /* Print stats during solve? */
    if (doc==0)
@@ -1334,11 +1334,11 @@ void superlu_dist_global_matrix(int opt_flag, int allow_permutations,
     {
      *info = -1;
     }
-   else if ( options->IterRefine < 0 || options->IterRefine > EXTRA )
+   else if ( options->IterRefine < 0 || options->IterRefine > SLU_EXTRA )
     {
      *info = -1;
     }
-   else if ( options->IterRefine == EXTRA ) 
+   else if ( options->IterRefine == SLU_EXTRA ) 
     {
      *info = -1;
      fprintf(stderr, "Extra precise iterative refinement yet to support.\n");

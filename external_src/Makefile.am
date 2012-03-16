@@ -28,7 +28,7 @@ endif
 # Check if superlu is already available
 if ALREADY_HAVE_SUPERLU
 else
-  SUBDIRS += oomph_superlu_3.0 
+  SUBDIRS += oomph_superlu_4.3 
 endif
 
 
@@ -50,7 +50,7 @@ if WANT_MPI
 # Check if superlu is already available
 if ALREADY_HAVE_SUPERLU_DIST
 else
-  SUBDIRS += oomph_superlu_dist_2.3 
+  SUBDIRS += oomph_superlu_dist_3.0 
 endif
 
 
@@ -66,7 +66,7 @@ endif
 # in the directory above the actual headers as in the installed include
 # directory.
 clean-local:
-	rm -f oomph_metis_4.0.h oomph_superlu_3.0.h oomph_parmetis_3.1.1.h
+	rm -f oomph_metis_4.0.h oomph_superlu_4.3.h oomph_parmetis_3.1.1.h
 
 
 EXTRA_DIST=parmetis.h

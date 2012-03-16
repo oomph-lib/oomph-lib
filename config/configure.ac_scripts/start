@@ -1761,7 +1761,7 @@ fi
 
 # SuperLU?
 if test x$have_superlu = xfalse; then  
-  external_libs=`echo $external_libs " -loomph_superlu_3.0"`
+  external_libs=`echo $external_libs " -loomph_superlu_4.3"`
 else 
   echo "Omitting specification of superlu library -- assumed to be"
   echo "provided automatically by compiler/linker..."
@@ -1782,7 +1782,7 @@ if test x$want_mpi = xtrue; then
 
   # SuperLU_dist?
   if test x$have_superlu_dist = xfalse; then  
-    external_libs=`echo $external_libs " -loomph_superlu_dist_2.3"`
+    external_libs=`echo $external_libs " -loomph_superlu_dist_3.0"`
   else 
     echo "Omitting specification of superlu_dist library -- assumed to be"
     echo "provided automatically by compiler/linker..."

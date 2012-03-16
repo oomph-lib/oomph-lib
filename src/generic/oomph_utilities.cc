@@ -1559,11 +1559,16 @@ namespace TimingHelpers
  double timer()
   {
 #ifdef OOMPH_HAS_MPI
-   return MPI_Wtime();
-#else
-   time_t t = clock();
-   return  double(t) / double(CLOCKS_PER_SEC);
+   if(MPI_Helpers::mpi_has_been_initialised())
+    {
+     return MPI_Wtime();
+    }
+   else
 #endif
+    {
+     time_t t = clock();
+     return  double(t) / double(CLOCKS_PER_SEC);
+    }
   }
 }//end of namespace TimingHelpers
 
