@@ -730,23 +730,19 @@ void TElement<3,NNODE_1D>::output(std::ostream &outfile)
     {
      outfile << node_pt(n)->x(i) << " ";
     }
-   //Find out how many data values at the node
-   unsigned initial_nvalue = node_pt(n)->nvalue();
-   //Loop over the data and output whether pinned or not
-   for(unsigned i=0;i<initial_nvalue;i++)
-    {
-     outfile << node_pt(n)->is_pinned(i) << " ";
-    }
+//    //Find out how many data values at the node
+//    unsigned initial_nvalue = node_pt(n)->nvalue();
+//    //Loop over the data and output whether pinned or not
+//    for(unsigned i=0;i<initial_nvalue;i++)
+//     {
+//      outfile << node_pt(n)->is_pinned(i) << " ";
+//     }
    outfile << std::endl;
   }
  
- //Output local node connectivity list (for tecplot)
- for (unsigned n=0;n<n_node;n++)
-  {
-   outfile << n+1 << " ";
-  }
- outfile << std::endl;
- 
+ // Write tecplot footer (e.g. FE connectivity lists)
+ write_tecplot_zone_footer(outfile,NNODE_1D);
+   
 }
 
 
@@ -778,6 +774,7 @@ void TElement<3,NNODE_1D>::output(std::ostream &outfile,const unsigned &nplot)
     {
      outfile << interpolated_x(s,i) << " ";
     }   
+   outfile << "\n";
   }
  
  // Write tecplot footer (e.g. FE connectivity lists)

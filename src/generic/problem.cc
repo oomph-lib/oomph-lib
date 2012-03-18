@@ -7734,16 +7734,41 @@ void Problem::get_eigenproblem_matrices(CRDoubleMatrix &mass_matrix,
 //=======================================================================
 void Problem::store_current_dof_values()
 {
- //Find the number of dofs
- unsigned long n_dof = ndof();
+
  //If memory has not been allocated, then allocated memory for the saved
  //dofs
- if(Saved_dof_pt==0) {Saved_dof_pt = new Vector<double>;}
- //Resize the vector
- Saved_dof_pt->resize(n_dof);
+ if (Saved_dof_pt==0) {Saved_dof_pt = new Vector<double>;}
+ 
+#ifdef OOMPH_HAS_MPI
+   //If the problem is distributed I have to do something different
+   if(Problem_has_been_distributed)
+    {
+     // How many entries do we store locally?
+     const unsigned n_row_local = 
+      Dof_distribution_pt->nrow_local();
+     
+     //Resize the vector
+     Saved_dof_pt->resize(n_row_local);
+     
+     // Back 'em up
+     for (unsigned i=0;i<n_row_local;i++)
+      {
+       (*Saved_dof_pt)[i]=*(this->Dof_pt[i]);
+      }
+    }
+   //Otherwise just store all the dofs
+   else
+#endif
+    {
+     //Find the number of dofs
+     unsigned long n_dof = ndof();
 
- //Transfer the values over
- for(unsigned long n=0;n<n_dof;n++) {(*Saved_dof_pt)[n] = dof(n);}
+     //Resize the vector
+     Saved_dof_pt->resize(n_dof);
+     
+     //Transfer the values over
+     for(unsigned long n=0;n<n_dof;n++) {(*Saved_dof_pt)[n] = dof(n);}
+    }
 }
 
 //====================================================================
@@ -7760,23 +7785,52 @@ void Problem::restore_dof_values()
     OOMPH_EXCEPTION_LOCATION);
   }
 
- //Find the number of dofs
- unsigned long n_dof = ndof();
 
- if(Saved_dof_pt->size() != n_dof)
-  {
-   throw OomphLibError(
-    "The number of stored values is not equal to the current number of dofs\n",
-    "Problem::restore_dof_values()",
-    OOMPH_EXCEPTION_LOCATION);
-  }
+#ifdef OOMPH_HAS_MPI
+   //If the problem is distributed I have to do something different
+   if(Problem_has_been_distributed)
+    {
 
- //Transfer the values over
- for(unsigned long n=0;n<n_dof;n++) {dof(n) = (*Saved_dof_pt)[n];}
+     // How many entries do we store locally?
+     const unsigned n_row_local = 
+      Dof_distribution_pt->nrow_local();
+     
+     if(Saved_dof_pt->size() != n_row_local)
+      {
+       throw OomphLibError(
+        "The number of stored values is not equal to the current number of dofs\n",
+        "Problem::restore_dof_values()",
+        OOMPH_EXCEPTION_LOCATION);
+      }
+     
+     //Transfer the values over
+     for(unsigned long n=0;n<n_row_local;n++) 
+      {
+       *(this->Dof_pt[n]) = (*Saved_dof_pt)[n];
+      }
+    }
+   //Otherwise just store all the dofs
+   else
+#endif
+    {
+     //Find the number of dofs
+     unsigned long n_dof = ndof();
+     
+     if(Saved_dof_pt->size() != n_dof)
+      {
+       throw OomphLibError(
+        "The number of stored values is not equal to the current number of dofs\n",
+        "Problem::restore_dof_values()",
+        OOMPH_EXCEPTION_LOCATION);
+      }
+     
+     //Transfer the values over
+     for(unsigned long n=0;n<n_dof;n++) {dof(n) = (*Saved_dof_pt)[n];}
+    }
 
- //Delete the memory
- delete Saved_dof_pt;
- Saved_dof_pt = 0;
+   //Delete the memory
+   delete Saved_dof_pt;
+   Saved_dof_pt = 0;
 }
 
 //======================================================================
@@ -8617,13 +8671,17 @@ void Problem::calculate_continuation_derivatives(const DoubleVector &z)
  //Scale the value of theta if the control flag is set
  if(Scale_arc_length)
   {
-   Theta_squared *= (Parameter_derivative*Parameter_derivative/
-                     Desired_proportion_of_arc_length)*
-    ((1.0 - Desired_proportion_of_arc_length)/
-     (1.0 - Parameter_derivative*Parameter_derivative));
-
-   //Recalculate the continuation derivatives with the new scaled values
-   calculate_continuation_derivatives_helper(z);
+   // Don't divide by zero!
+   if (Parameter_derivative!=1.0)
+    {
+     Theta_squared *= (Parameter_derivative*Parameter_derivative/
+                       Desired_proportion_of_arc_length)*
+      ((1.0 - Desired_proportion_of_arc_length)/
+       (1.0 - Parameter_derivative*Parameter_derivative));
+     
+     //Recalculate the continuation derivatives with the new scaled values
+     calculate_continuation_derivatives_helper(z);
+    }
   }
 }
 
@@ -8641,13 +8699,17 @@ void Problem::calculate_continuation_derivatives_fd(
  //Scale the value of theta if the control flag is set
  if(Scale_arc_length)
   {
-   Theta_squared *= (Parameter_derivative*Parameter_derivative/
-                     Desired_proportion_of_arc_length)*
-    ((1.0 - Desired_proportion_of_arc_length)/
-     (1.0 - Parameter_derivative*Parameter_derivative));
-
-   //Recalculate the continuation derivatives with the new scaled values
-   calculate_continuation_derivatives_fd_helper(parameter_pt);
+   // Don't divide by zero!
+   if (Parameter_derivative!=1.0)
+    {
+     Theta_squared *= (Parameter_derivative*Parameter_derivative/
+                       Desired_proportion_of_arc_length)*
+      ((1.0 - Desired_proportion_of_arc_length)/
+       (1.0 - Parameter_derivative*Parameter_derivative));
+     
+     //Recalculate the continuation derivatives with the new scaled values
+     calculate_continuation_derivatives_fd_helper(parameter_pt);
+    }
   }
 }
 
@@ -8784,8 +8846,7 @@ double* const  &parameter_pt)
  for(unsigned long l=0;l<ndof_local;l++)
   {
    Dof_derivatives[l] = z[l]/length;
-  }
- 
+  } 
  Parameter_derivative = Z/length;
 }
 

@@ -31,7 +31,7 @@ cat  RESLT/soln0.dat  RESLT/soln1.dat RESLT/soln2.dat > results_spine_two_layer_
 if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/results_spine_two_layer_interface.dat.gz results_spine_two_layer_interface.dat 0.1 2.0e-12 >> validation.log
+../../../../bin/fpdiff.py ../validata/results_spine_two_layer_interface.dat.gz results_spine_two_layer_interface.dat 0.1 2.0e-11 >> validation.log
 fi
 
 mv RESLT RESLT_spine_two_layer_interface

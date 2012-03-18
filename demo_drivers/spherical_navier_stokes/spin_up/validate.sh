@@ -42,7 +42,7 @@ else
 echo "Crouzeix-Raviart elements" >> validation.log
 echo " " >> validation.log
 ../../../../bin/fpdiff.py ../validata/sphere_CR.dat.gz  \
-         sphere_CR.dat 0.1 5.0e-11 >> validation.log
+         sphere_CR.dat 0.1 5.0e-10 >> validation.log
 echo "Taylor-Hood elements" >> validation.log
 echo " " >> validation.log
 ../../../../bin/fpdiff.py ../validata/sphere_TH.dat.gz  \

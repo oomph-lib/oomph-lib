@@ -635,7 +635,7 @@ namespace oomph
       if (old_node_pt==0)
        {
         Node* new_node_pt=0;
-        if (face0.is_boundary_face())
+        if (face2.is_boundary_face())
          {
           new_node_pt=el_pt->construct_boundary_node(j,time_stepper_pt);
          }
@@ -1684,7 +1684,7 @@ namespace oomph
       if (old_node_pt==0)
        {
         Node* new_node_pt=0;
-        if (face0.is_boundary_face())
+        if (face1.is_boundary_face())
          {
           new_node_pt=el_pt->construct_boundary_node(j,time_stepper_pt);
          }
@@ -1720,7 +1720,7 @@ namespace oomph
       if (old_node_pt==0)
        {
         Node* new_node_pt=0;
-        if (face0.is_boundary_face())
+        if (face2.is_boundary_face())
          {
           new_node_pt=el_pt->construct_boundary_node(j,time_stepper_pt);
          }
@@ -2749,7 +2749,7 @@ namespace oomph
       if (old_node_pt==0)
        {
         Node* new_node_pt=0;
-        if (face0.is_boundary_face())
+        if (face1.is_boundary_face())
          {
           new_node_pt=el_pt->construct_boundary_node(j,time_stepper_pt);
          }
@@ -2785,7 +2785,7 @@ namespace oomph
       if (old_node_pt==0)
        {
         Node* new_node_pt=0;
-        if (face0.is_boundary_face())
+        if (face2.is_boundary_face())
          {
           new_node_pt=el_pt->construct_boundary_node(j,time_stepper_pt);
          }
@@ -3803,7 +3803,7 @@ namespace oomph
       if (old_node_pt==0)
        {
         Node* new_node_pt=0;
-        if (face0.is_boundary_face())
+        if (face1.is_boundary_face())
          {
           new_node_pt=el_pt->construct_boundary_node(j,time_stepper_pt);
          }
@@ -3839,7 +3839,7 @@ namespace oomph
       if (old_node_pt==0)
        {
         Node* new_node_pt=0;
-        if (face0.is_boundary_face())
+        if (face2.is_boundary_face())
          {
           new_node_pt=el_pt->construct_boundary_node(j,time_stepper_pt);
          }
@@ -4628,7 +4628,6 @@ namespace oomph
           // in s_face
           Vector<Node*> brick_face_node_pt(19);
 
-
           switch (face_index)
            {
            case 0:
@@ -4764,7 +4763,7 @@ namespace oomph
            {
             // Which node is it?
             Node* brick_node_pt=brick_face_node_pt[translate[j]];
-             
+
             // Get coordinates etc of point from face
             Vector<double> s=s_face[j]; 
             Vector<double> zeta(2);
@@ -4851,7 +4850,7 @@ namespace oomph
                OOMPH_EXCEPTION_LOCATION);
              }
 #endif
-             
+
             // Set boundary stuff
             add_boundary_node(b,brick_node_pt);
             brick_node_pt->set_coordinates_on_boundary(b,zeta);
