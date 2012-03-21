@@ -3886,8 +3886,9 @@ void FiniteElement::get_dresidual_dnodal_coordinates(
 
     //Find the number of local nodes
     const unsigned n_node = nnode();
+    const unsigned n_position_type = nnodal_position_type();
     //Set up memory for the shape and test functions
-    Shape psi(n_node);
+    Shape psi(n_node,n_position_type);
     DShape dpsidx(n_node,dim_el);
             
     // Jacobian

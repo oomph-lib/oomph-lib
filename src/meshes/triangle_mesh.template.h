@@ -1473,13 +1473,21 @@ template<class ELEMENT>
    /// \short Helper function that updates the input polygon's PSLG
    /// by using the end-points of elements from FaceMesh(es) that are
    /// constructed for the boundaries associated with the segments of the
-   /// polygon.
-   void update_polygon_using_face_mesh(TriangleMeshPolygon* polygon_pt);
+   /// polygon. Optional boolean is used to run it as test only (if 
+   /// true is specified as input) in which case polygon isn't actually
+   /// modified. Returned boolean indicates if polygon was (or would have
+   /// been -- if called with check_only=false) changed. 
+   bool update_polygon_using_face_mesh(TriangleMeshPolygon* polygon_pt,
+                                       const bool& check_only=false);
    
    /// \short Generate a new PSLG representation of the inner hole
-   /// boundaries
-   virtual void surface_remesh_for_inner_hole_boundaries(
-    Vector<Vector<double> > &internal_point_coord);
+   /// boundaries. Optional boolean is used to run it as test only (if 
+   /// true is specified as input) in which case PSLG isn't actually
+   /// modified. Returned boolean indicates if PSLG was (or would have
+   /// been -- if called with check_only=false) changed. 
+   virtual bool surface_remesh_for_inner_hole_boundaries(
+    Vector<Vector<double> > &internal_point_coord,
+    const bool& check_only=false);
    
   /// \short Snap the boundary nodes onto any curvilinear boundaries
   void snap_nodes_onto_boundary(RefineableTriangleMesh<ELEMENT>* &new_mesh_pt,

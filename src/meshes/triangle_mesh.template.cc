@@ -1645,18 +1645,45 @@ namespace oomph
   double orig_max_area, orig_min_area;
   this->max_and_min_element_size(orig_max_area, orig_min_area);
   oomph_info << "Max/min element size in original mesh: " 
-             << orig_max_area  << " "
+             << orig_max_area << " "
              << orig_min_area << std::endl;    
+
+
+  // Check if boundary needs to be updated (regardless of 
+  // requirements of bulk error estimator) but don't do anything!
+  bool check_only=true;
+  bool outer_boundary_update_necessary=
+   this->update_polygon_using_face_mesh(this->Outer_boundary_pt,check_only);
+
+  // Check if we need to generate a new 1D mesh representation of 
+  // the inner hole boundaries
+  unsigned nhole=this->Internal_polygon_pt.size();
+  Vector<Vector<double> > internal_point_coord(nhole);
+  bool inner_boundary_update_necessary=
+   this->surface_remesh_for_inner_hole_boundaries(internal_point_coord,
+                                                  check_only);
 
   // Should we bother to adapt?
   if ( (Nrefined > 0) || (Nunrefined > max_keep_unrefined()) ||
-       (min_angle < min_permitted_angle()) )
+       (min_angle < min_permitted_angle()) || (outer_boundary_update_necessary)
+       || (inner_boundary_update_necessary) )
    {
 
     if (! ( (Nrefined > 0) || (Nunrefined > max_keep_unrefined()) ) )
      {
-      oomph_info 
-       << "Mesh regeneration triggered by min angle criterion\n";
+
+      if ( (outer_boundary_update_necessary)
+           || (inner_boundary_update_necessary) )
+       {
+        oomph_info 
+         << "Mesh regeneration triggered by inaccurate interface/surface "
+         << "representation\n";
+       }
+      else
+       {
+        oomph_info 
+         << "Mesh regeneration triggered by min angle criterion\n";
+       }
      }
 
     //Generate a new 1D mesh representation of the inner hole boundaries
@@ -1737,7 +1764,7 @@ namespace oomph
      }
     
     //Output the mesh before any snapping takes place
-    //tmp_new_mesh_pt->output("pre_mesh_nodes_snapped_0.dat");
+    //   tmp_new_mesh_pt->output("pre_mesh_nodes_snapped_0.dat");
     
     //Move the nodes on the new boundary onto the 
     //old curvilinear boundary. If the boundary is straight this 
@@ -1754,7 +1781,7 @@ namespace oomph
      }
 
     //Output the mesh after the snapping has taken place
-    //tmp_new_mesh_pt->output("mesh_nodes_snapped_0.dat"); 
+    //   tmp_new_mesh_pt->output("mesh_nodes_snapped_0.dat"); 
 
     // Get the TriangulateIO object associated with that mesh
     TriangulateIO tmp_new_triangulateio=
@@ -2031,7 +2058,7 @@ namespace oomph
        }
       
       //Output the mesh before any snapping takes place
-      //new_mesh_pt->output("pre_mesh_nodes_snapped_1.dat"); 
+      //   new_mesh_pt->output("pre_mesh_nodes_snapped_1.dat"); 
       
       //Move the nodes on the new boundary onto the 
       //old curvilinear boundary. If the boundary is straight this 
@@ -2048,7 +2075,7 @@ namespace oomph
        }
 
       //Output the mesh after the snapping has taken place
-      //new_mesh_pt->output("mesh_nodes_snapped_1.dat"); 
+      //   new_mesh_pt->output("mesh_nodes_snapped_1.dat"); 
       
       // Not done: get ready for another iteration
       iter++;
@@ -2061,6 +2088,7 @@ namespace oomph
       
      } // end of iteration
     
+
     // Project current solution onto new mesh
     //---------------------------------------
     ProjectionProblem<ELEMENT>* project_problem_pt=
@@ -2188,6 +2216,7 @@ namespace oomph
      TriangleHelper::deep_copy_of_triangulateio_representation(
       new_mesh_pt->triangulateio_representation(),quiet);
     
+ 
     // Flush the mesh
     new_mesh_pt->flush_element_and_node_storage();
     
@@ -2219,13 +2248,20 @@ namespace oomph
  /// Helper function that updates the input polygon's PSLG
  /// by using the end-points of elements from FaceMesh(es) that are
  /// constructed for the boundaries associated with the segments of the
- /// polygon.
+ /// polygon. Optional boolean is used to run it as test only (if 
+ /// true is specified as input) in which case polygon isn't actually
+ /// modified. Returned boolean indicates if polygon was (or would have
+ /// been -- if called with check_only=false) changed. 
 //=========================================================================
  template<class ELEMENT>
- void RefineableTriangleMesh<ELEMENT>::
- update_polygon_using_face_mesh(TriangleMeshPolygon* polygon_pt)
+ bool RefineableTriangleMesh<ELEMENT>::
+ update_polygon_using_face_mesh(TriangleMeshPolygon* polygon_pt, 
+                                const bool& check_only)
  {
-  
+  // Boolean that indicates whether an actual update of the polygon
+  // was performed or not
+  bool update_was_performed=false;
+
   //Loop over the number of polylines
   unsigned n_polyline = polygon_pt->npolyline();
 
@@ -2346,6 +2382,17 @@ namespace oomph
           if (std::fabs(g)<1.0e-14)
            {
             do_it=true;
+            if(check_only)
+             {
+              // Cleanup (but only the elements -- the nodes still exist in
+              // the bulk mesh!
+              for(unsigned p=0;p<n_polyline;p++)
+               {
+                face_mesh_pt[p]->flush_node_storage();
+                delete face_mesh_pt[p];
+               }
+              return true;
+             }
            }
           else
            {
@@ -2353,17 +2400,13 @@ namespace oomph
             double p_y=(a*f-c*e)/g;
             
             double r=sqrt(pow((a_x-p_x),2)+pow((a_y-p_y),2));
-            
-            double rpc_x=c_x-p_x;
-            double rpc_y=c_y-p_y;
 
             double rhalfca_x=0.5*(a_x-c_x);
             double rhalfca_y=0.5*(a_y-c_y);
             
             double halfca_squared=pow(rhalfca_x,2)+pow(rhalfca_y,2);
-            double pc_squared=pow(rpc_x,2)+pow(rpc_y,2);
 
-            double sticky_out_bit=r-sqrt(pc_squared-halfca_squared);
+            double sticky_out_bit=r-sqrt(r*r-halfca_squared);
 
             // If sticky out bit divided by distance between end nodes 
             // is less than tolerance the boundary is so flat that we 
@@ -2372,6 +2415,17 @@ namespace oomph
                  unrefinement_tolerance)
              {
               do_it=true;
+              if(check_only)
+               {
+                // Cleanup (but only the elements -- the nodes still exist in
+                // the bulk mesh!
+                for(unsigned p=0;p<n_polyline;p++)
+                 {
+                  face_mesh_pt[p]->flush_node_storage();
+                  delete face_mesh_pt[p];
+                 }
+                return true;
+               }
              } 
            }
 
@@ -2387,24 +2441,47 @@ namespace oomph
           counter+=2;
          }
 
+        // coming out of here the value of counter is the index of the
+        // last node on the polyline counter=n_vertex-1 (in case of an 
+        // even number of nodes) or counter has the value of the number 
+        // of nodes on the polyline counter=n_vertex (in case of an odd
+        // number of nodes
 
         // Special treatment for the end of the polyline:
-        // If the for loop ended at the last but second node and this node
-        // was not deleted, then check if the last but one node can be deleted
-        if(((counter-2)==(n_vertex-3))&& 
-           (tmp_vector_vertex_node[counter].size()!=0))
+        // If the number of nodes is even, then the previous loop stopped
+        // at the last but second node, i.e. the current value of counter
+        // is the index of the last node. If that's the case, the last but
+        // one node needs to be treated separately
+        if( (counter)==(n_vertex-1) )
          {
           // Set the last but one node as middle node
           unsigned i=tmp_vector_vertex_node.size()-2;
+          
+          // Index of the current! last but second node (considering any
+          // previous deletion)
+          unsigned n=0;
 
+          if(tmp_vector_vertex_node[counter-2].size()!=0)
+           {
+            // if the initial last but second node does still exist then
+            // this one is obviously also the current last but second one
+            n=counter-2;
+           }
+          else
+           {
+            // if the initial last but second node was deleted then the
+            // initial last but third node is the current last but second
+            // node
+            n=counter-3;
+           }
 
           // CODE DUPLICATION -- CAN'T BE BOTHERED TO WRITE A SEPARATE
           // FUNCTION FOR THIS; PROBABLY WORTH DOING IF/WHEN THERE'S
           // A MISTAKE IN ANY OF THIS AND IT NEEDS TO BE FIXED...
 
           // Maths from http://www.cgafaq.info/wiki/Circle_Through_Three_Points
-          double a_x=tmp_vector_vertex_node[i-1][1];
-          double a_y=tmp_vector_vertex_node[i-1][2];
+          double a_x=tmp_vector_vertex_node[n][1];
+          double a_y=tmp_vector_vertex_node[n][2];
           double b_x=tmp_vector_vertex_node[i][1];
           double b_y=tmp_vector_vertex_node[i][2];
           double c_x=tmp_vector_vertex_node[i+1][1];
@@ -2424,6 +2501,17 @@ namespace oomph
           if (std::fabs(g)<1.0e-14)
            {
             do_it=true;
+            if(check_only)
+             {
+              // Cleanup (but only the elements -- the nodes still exist in
+              // the bulk mesh!
+              for(unsigned p=0;p<n_polyline;p++)
+               {
+                face_mesh_pt[p]->flush_node_storage();
+                delete face_mesh_pt[p];
+               }
+              return true;
+             }
            }
           else
            {
@@ -2431,17 +2519,13 @@ namespace oomph
             double p_y=(a*f-c*e)/g;
             
             double r=sqrt(pow((a_x-p_x),2)+pow((a_y-p_y),2));
-            
-            double rpc_x=c_x-p_x;
-            double rpc_y=c_y-p_y;
 
             double rhalfca_x=0.5*(a_x-c_x);
             double rhalfca_y=0.5*(a_y-c_y);
             
             double halfca_squared=pow(rhalfca_x,2)+pow(rhalfca_y,2);
-            double pc_squared=pow(rpc_x,2)+pow(rpc_y,2);
 
-            double sticky_out_bit=r-sqrt(pc_squared-halfca_squared);
+            double sticky_out_bit=r-sqrt(r*r-halfca_squared);
 
             // If sticky out bit divided by distance between end nodes 
             // is less than tolerance the boundary is so flat that we 
@@ -2450,6 +2534,17 @@ namespace oomph
                  unrefinement_tolerance)
              {
               do_it=true;
+              if(check_only)
+               {
+                // Cleanup (but only the elements -- the nodes still exist in
+                // the bulk mesh!
+                for(unsigned p=0;p<n_polyline;p++)
+                 {
+                  face_mesh_pt[p]->flush_node_storage();
+                  delete face_mesh_pt[p];
+                 }
+                return true;
+               }
              } 
            }
           
@@ -2475,7 +2570,16 @@ namespace oomph
         
         /// Get the size of the vector that now includes all remaining nodes
         n_vertex =compact_vector.size();
-        
+
+        // If the size of the vector containing the remaining nodes is
+        // different from the size of the vector before the unrefinement
+        // routine (with the original nodes)
+        // then the polyline was obviously updated
+        if( n_vertex != tmp_vector_vertex_node.size() )
+         {
+          update_was_performed=true;
+         }
+
         /// Copy back
         tmp_vector_vertex_node.resize(n_vertex);
         for(unsigned i=0;i<n_vertex;i++)
@@ -2489,12 +2593,11 @@ namespace oomph
      } // end of unrefinement
     
     
-    
     //------------------------------------------------
     /// Refinement
     //------------------------------------------------
     double refinement_tolerance=polygon_pt->polyline_refinement_tolerance();
-    if (refinement_tolerance>0)
+    if (refinement_tolerance>0.0)
      {
       // Create a geometric object from the mesh to represent
       //the curvilinear boundary
@@ -2569,6 +2672,19 @@ namespace oomph
         // create a new node and add it to the (temporary) vector
         if((distance/length) > refinement_tolerance)
          {
+
+          if(check_only)
+           {
+            // Cleanup (but only the elements -- the nodes still exist in
+            // the bulk mesh!
+            for(unsigned p=0;p<n_polyline;p++)
+             {
+              face_mesh_pt[p]->flush_node_storage();
+              delete face_mesh_pt[p];
+             }
+            return true;
+           }
+
           Vector<double> new_node(3);
           new_node[0]=zeta_mid[0];
           new_node[1]=R_mid[0];
@@ -2579,6 +2695,7 @@ namespace oomph
           
           // Include the new node as well
           extended_vector.push_back(new_node);
+
          }
         else
          {
@@ -2593,6 +2710,14 @@ namespace oomph
       
       /// Get the size of the vector that now includes all added nodes
       n_vertex=extended_vector.size();
+      
+      // If the size of the vector including the added nodes is
+      // different from the size of the vector before the refinement
+      // routine then the polyline was obviously updated
+      if( n_vertex != tmp_vector_vertex_node.size() )
+       {
+        update_was_performed=true;
+       }
       
       // Copy across
       tmp_vector_vertex_node.resize(n_vertex);
@@ -2610,7 +2735,6 @@ namespace oomph
       
      } // end refinement
     
-    
     // For further processing the three-dimensional vector
     // has to be reduced to a two-dimensional vector
     n_vertex=tmp_vector_vertex_node.size();
@@ -2622,12 +2746,13 @@ namespace oomph
       vector_vertex_node[i][1]=tmp_vector_vertex_node[i][2];
      }
     
-    
     //Check whether the segments are continguous (first vertex of this
     //segment is equal to last vertex of previous segment).
     //If not, we should reverse the order of the current segment.
     //This check only applies for segments other than the first.
-    if(p > 0)
+    //We only bother with this check, if we actually perform an update
+    //of the polyline, i.e. if it's not only a check
+    if( (p > 0) && !check_only )
      {
       //Final end point of previous line
       Vector<double> final_vertex_of_previous_segment;
@@ -2690,11 +2815,13 @@ namespace oomph
        }
      }
     
-    
-    //Now update the polyline according to the new vertices
-    delete polygon_pt->polyline_pt(p);
-    polygon_pt->polyline_pt(p) = 
-     new TriangleMeshPolyLine(vector_vertex_node,bound); 
+    if(!check_only)
+     {
+      //Now update the polyline according to the new vertices
+      delete polygon_pt->polyline_pt(p);
+      polygon_pt->polyline_pt(p) = 
+       new TriangleMeshPolyLine(vector_vertex_node,bound);
+     } 
    }
   
   // Cleanup (but only the elements -- the nodes still exist in
@@ -2705,6 +2832,21 @@ namespace oomph
     delete face_mesh_pt[p];
    }   
   
+  if(check_only)
+   {
+    // if we end up all the way down here, no update of the internal boundaries
+    // is necessary (in case we only check)
+    return false;
+   }
+  else
+   {
+    // if we not only check, but actually perform the update and end up
+    // all the way down here then we indicate whether an update was performed
+    // or not
+    return update_was_performed;
+   }
+
+
  }
  
  
@@ -3270,13 +3412,20 @@ namespace oomph
 
 //======================================================================
 /// Update the PSLG that define the inner boundaries of the mesh.
-///
+///Optional boolean is used to run it as test only (if 
+ /// true is specified as input) in which case PSLG isn't actually
+ /// modified. Returned boolean indicates if PSLG was (or would have
+ /// been -- if called with check_only=false) changed. 
 //======================================================================
  template <class ELEMENT>
- void RefineableTriangleMesh<ELEMENT>::
+ bool RefineableTriangleMesh<ELEMENT>::
  surface_remesh_for_inner_hole_boundaries(Vector<Vector<double> >
-                                          &internal_point_coord)
+                                          &internal_point_coord,
+                                          const bool& check_only)
  {
+  //Boolean to indicate whether an actual update of the internal
+  // holes was performed
+  bool update_was_performed=false;
   //Loop over the number of internal boundaries
   unsigned n_hole = internal_point_coord.size();
   for(unsigned ihole=0;ihole<n_hole;ihole++)
@@ -3300,8 +3449,28 @@ namespace oomph
     //Otherwise we have to work much harder
     else
      {
-      //Update the polygon associated with the ihole-th hole
-      this->update_polygon_using_face_mesh(poly_pt);
+      //if we only want to check whether an update of the inner
+      //hole is necessary
+      if(check_only)
+       {
+        //is it necessary?
+        bool update_necessary=
+         this->update_polygon_using_face_mesh(poly_pt,check_only);
+
+        //Yes?
+        if(update_necessary)
+         {
+          //then we have to adapt and return 'true'
+          return true;
+         }
+       }
+      //if we not only want to check, then we actually perform
+      //the update
+      else
+       {
+        update_was_performed=
+         this->update_polygon_using_face_mesh(poly_pt);
+       }
 
       //Now sort out the hole coordinates
       Vector<double> vertex_coord;
@@ -3347,6 +3516,18 @@ namespace oomph
       poly_pt->internal_point() = internal_point_coord[ihole];
      }
    } //End of the action
+
+  if(check_only)
+   {
+    // If we make it up to here and we only check then no update is required
+    return false;
+   }
+  else
+   {
+    // otherwise indicate whether an actual update was performed
+    return update_was_performed;
+   }
+
  } //End of the loop of internal boundaries
 
 
