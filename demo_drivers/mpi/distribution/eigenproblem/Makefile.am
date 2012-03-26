@@ -25,7 +25,7 @@ harmonic_LDADD = \
 #----------------------------------------------------------------------
 
 
-EXTRA_DIST += harmonic_partition.dat
+#EXTRA_DIST += harmonic_partition.dat
 
 # Include path for library headers: All library headers live in 
 # the include directory which we specify with -I
