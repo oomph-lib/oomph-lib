@@ -45,6 +45,8 @@
 #include "dg_elements.h"
 #include "partitioning.h"
 
+//Include to fill in additional_setup_shared_node_scheme() function
+#include "refineable_mesh.template.cc"
 
 namespace oomph
 {
@@ -11873,10 +11875,10 @@ void Problem::p_adapt(unsigned &n_refined, unsigned &n_unrefined)
  if(Nmesh==0)
   {
    // Refine single mesh if possible
-   if(TreeBasedPRefineableMeshBase* mmesh_pt = 
-      dynamic_cast<TreeBasedPRefineableMeshBase*>(mesh_pt(0)))
+   if(RefineableMeshBase* mmesh_pt = 
+      dynamic_cast<RefineableMeshBase*>(mesh_pt(0)))
     { 
-     if (mmesh_pt->is_adaptation_enabled())
+     if (mmesh_pt->is_p_adaptation_enabled())
       {
        double t_start = TimingHelpers::timer();
        
@@ -11889,7 +11891,7 @@ void Problem::p_adapt(unsigned &n_refined, unsigned &n_unrefined)
         {
          throw OomphLibError(
           "Error estimator hasn't been set yet",
-          "Problem::adapt()",
+          "Problem::p_adapt()",
           OOMPH_EXCEPTION_LOCATION);
         }
 #endif
@@ -11968,8 +11970,8 @@ void Problem::p_adapt(unsigned &n_refined, unsigned &n_unrefined)
    for (unsigned imesh=0;imesh<Nmesh;imesh++)
     {
      // Refine single mesh uniformly if possible
-     if(TreeBasedPRefineableMeshBase* mmesh_pt =
-        dynamic_cast<TreeBasedPRefineableMeshBase*>(mesh_pt(imesh)))
+     if(RefineableMeshBase* mmesh_pt =
+        dynamic_cast<RefineableMeshBase*>(mesh_pt(imesh)))
       {
        double t_start = TimingHelpers::timer();
 
@@ -11982,12 +11984,12 @@ void Problem::p_adapt(unsigned &n_refined, unsigned &n_unrefined)
         {
          throw OomphLibError(
           "Error estimator hasn't been set yet",
-          "Problem::adapt()",
+          "Problem::p_adapt()",
           OOMPH_EXCEPTION_LOCATION);
         }
 #endif
         
-       if (mmesh_pt->is_adaptation_enabled())
+       if (mmesh_pt->is_p_adaptation_enabled())
         {
          // Get error for all elements
          Vector<double> elemental_error(mmesh_pt->nelement());
@@ -12812,14 +12814,14 @@ void Problem::p_refine_selected_elements(const Vector<unsigned>&
  if (Nmesh==0)
   {
    // Refine single mesh if possible
-   if(TreeBasedPRefineableMeshBase* mmesh_pt = 
-      dynamic_cast<TreeBasedPRefineableMeshBase*>(mesh_pt(0)))
+   if(TreeBasedRefineableMeshBase* mmesh_pt = 
+      dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(0)))
     {
      mmesh_pt->p_refine_selected_elements(elements_to_be_refined);
     }
    else
     {
-     oomph_info << "Info/Warning: Mesh cannot be p-refined " 
+     oomph_info << "Info/Warning: Mesh cannot be refined " 
                 << std::endl;
     }
   }
@@ -12861,14 +12863,14 @@ void Problem::p_refine_selected_elements(const Vector<PRefineableElement*>&
  if (Nmesh==0)
   {
    // Refine single mesh if possible
-   if(TreeBasedPRefineableMeshBase* mmesh_pt = 
-      dynamic_cast<TreeBasedPRefineableMeshBase*>(mesh_pt(0)))
+   if(TreeBasedRefineableMeshBase* mmesh_pt = 
+      dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(0)))
     {
      mmesh_pt->p_refine_selected_elements(elements_to_be_refined_pt);
     }
    else
     {
-     oomph_info << "Info/Warning: Mesh cannot be p-refined " 
+     oomph_info << "Info/Warning: Mesh cannot be refined " 
                 << std::endl;
     }
   }
@@ -12924,14 +12926,14 @@ void Problem::p_refine_selected_elements(const unsigned& i_mesh,
    }
 
   // Refine single mesh if possible
-  if(TreeBasedPRefineableMeshBase* mmesh_pt = 
-     dynamic_cast<TreeBasedPRefineableMeshBase*>(mesh_pt(i_mesh)))
+  if(TreeBasedRefineableMeshBase* mmesh_pt = 
+     dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(i_mesh)))
    {
     mmesh_pt->p_refine_selected_elements(elements_to_be_refined);
    }
   else
    {
-    oomph_info << "Info/Warning: Mesh cannot be p-refined " 
+    oomph_info << "Info/Warning: Mesh cannot be refined " 
                << std::endl;
    }
 
@@ -12980,14 +12982,14 @@ void Problem::p_refine_selected_elements(const unsigned& i_mesh,
   }
 
  // Refine single mesh if possible
- if(TreeBasedPRefineableMeshBase* mmesh_pt = 
-    dynamic_cast<TreeBasedPRefineableMeshBase*>(mesh_pt(i_mesh))) 
+ if(TreeBasedRefineableMeshBase* mmesh_pt = 
+    dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(i_mesh))) 
   {
    mmesh_pt->p_refine_selected_elements(elements_to_be_refined_pt);
   }
  else
   {
-   oomph_info << "Info/Warning: Mesh cannot be p-refined " 
+   oomph_info << "Info/Warning: Mesh cannot be refined " 
               << std::endl;
   }
 
@@ -13026,14 +13028,14 @@ void Problem::p_refine_selected_elements(const Vector<Vector<unsigned> >&
   // Refine all submeshes if possible
   for (unsigned i_mesh=0; i_mesh<n_mesh; i_mesh++)
    {
-    if(TreeBasedPRefineableMeshBase* mmesh_pt = 
-       dynamic_cast<TreeBasedPRefineableMeshBase*>(mesh_pt(i_mesh)))
+    if(TreeBasedRefineableMeshBase* mmesh_pt = 
+       dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(i_mesh)))
      {
       mmesh_pt->p_refine_selected_elements(elements_to_be_refined[i_mesh]);
      }
     else
      {
-      oomph_info << "Info/Warning: Mesh cannot be p-refined " 
+      oomph_info << "Info/Warning: Mesh cannot be refined " 
                  << std::endl;
      }
    }
@@ -13071,14 +13073,14 @@ void Problem::p_refine_selected_elements(const
   // Refine all submeshes if possible
   for (unsigned i_mesh=0; i_mesh<n_mesh; i_mesh++)
    {
-    if(TreeBasedPRefineableMeshBase* mmesh_pt = 
-       dynamic_cast<TreeBasedPRefineableMeshBase*>(mesh_pt(i_mesh)))
+    if(TreeBasedRefineableMeshBase* mmesh_pt = 
+       dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(i_mesh)))
      {
       mmesh_pt->p_refine_selected_elements(elements_to_be_refined_pt[i_mesh]);
      }
     else
      {
-      oomph_info << "Info/Warning: Mesh cannot be p-refined " 
+      oomph_info << "Info/Warning: Mesh cannot be refined " 
                  << std::endl;
      }
    }
@@ -13283,8 +13285,8 @@ void Problem::p_refine_uniformly_aux(const Vector<unsigned>& nrefine_for_mesh,
  if (n_mesh==0)
   {
    // Refine single mesh uniformly if possible
-   if(TreeBasedPRefineableMeshBase* mmesh_pt = 
-      dynamic_cast<TreeBasedPRefineableMeshBase*>(mesh_pt(0)))
+   if(RefineableMeshBase* mmesh_pt = 
+      dynamic_cast<RefineableMeshBase*>(mesh_pt(0)))
     {
      unsigned nref=nrefine_for_mesh[0];
      for (unsigned i=0;i<nref;i++)
@@ -13310,8 +13312,8 @@ void Problem::p_refine_uniformly_aux(const Vector<unsigned>& nrefine_for_mesh,
    for (unsigned imesh=0;imesh<n_mesh;imesh++)
     {
      // Refine i-th submesh uniformly if possible
-     if (TreeBasedPRefineableMeshBase* mmesh_pt =
-         dynamic_cast<TreeBasedPRefineableMeshBase*>(mesh_pt(imesh)))
+     if (RefineableMeshBase* mmesh_pt =
+         dynamic_cast<RefineableMeshBase*>(mesh_pt(imesh)))
       {
        unsigned nref=nrefine_for_mesh[imesh];
        for (unsigned i=0;i<nref;i++)
@@ -13474,8 +13476,8 @@ void Problem::p_refine_uniformly(const unsigned& i_mesh,
 #endif
 
  // Refine single mesh uniformly if possible
- if(TreeBasedPRefineableMeshBase* mmesh_pt = 
-    dynamic_cast<TreeBasedPRefineableMeshBase*>(mesh_pt(i_mesh)))
+ if(RefineableMeshBase* mmesh_pt = 
+    dynamic_cast<RefineableMeshBase*>(mesh_pt(i_mesh)))
   {
    mmesh_pt->p_refine_uniformly(doc_info);
   }
@@ -13631,18 +13633,15 @@ unsigned Problem::unrefine_uniformly(const unsigned& i_mesh)
   }
 
 }
+
+
 //========================================================================
-/// p-unrefine (all) p-refineable (sub)mesh(es) uniformly and rebuild problem.
-/// Return 0 for success,
-/// 1 for failure (if unrefinement has reached the coarsest permitted
-/// level)
+/// p-unrefine (all) p-refineable (sub)mesh(es) uniformly and rebuild problem;
+/// doc refinement process.
 //========================================================================
-unsigned Problem::p_unrefine_uniformly()
+void Problem::p_unrefine_uniformly(DocInfo& doc_info)
 {
  actions_before_adapt();
-
- // Has unrefinement been successful?
- unsigned success_flag=0;
 
  // Number of submeshes?
  unsigned n_mesh=nsub_mesh();
@@ -13651,14 +13650,14 @@ unsigned Problem::p_unrefine_uniformly()
  if (n_mesh==0)
   {
    // Unrefine single mesh uniformly if possible
-   if(TreeBasedPRefineableMeshBase* mmesh_pt = 
-      dynamic_cast<TreeBasedPRefineableMeshBase*>(mesh_pt(0)))
+   if(RefineableMeshBase* mmesh_pt = 
+      dynamic_cast<RefineableMeshBase*>(mesh_pt(0)))
     {
-     success_flag+=mmesh_pt->p_unrefine_uniformly(this->communicator_pt());
+     mmesh_pt->p_unrefine_uniformly(doc_info);
     }
    else
     {
-     oomph_info << "Info/Warning: Mesh cannot be unrefined uniformly " 
+     oomph_info << "Info/Warning: Mesh cannot be p-unrefined uniformly " 
                 << std::endl;
     }
   }
@@ -13673,14 +13672,14 @@ unsigned Problem::p_unrefine_uniformly()
    for (unsigned imesh=0;imesh<n_mesh;imesh++)
     {
      // Unrefine i-th submesh uniformly if possible
-     if (TreeBasedPRefineableMeshBase* mmesh_pt=
-         dynamic_cast<TreeBasedPRefineableMeshBase*>(mesh_pt(imesh)))
+     if (RefineableMeshBase* mmesh_pt=
+         dynamic_cast<RefineableMeshBase*>(mesh_pt(imesh)))
       {
-       success_flag+=mmesh_pt->p_unrefine_uniformly(this->communicator_pt());
+       mmesh_pt->p_unrefine_uniformly(doc_info);
       }
      else
       {
-       oomph_info << "Info/Warning: Cannot unrefine mesh " << imesh 
+       oomph_info << "Info/Warning: Cannot p-unrefine mesh " << imesh 
                   << std::endl;
       } 
     }
@@ -13695,31 +13694,17 @@ unsigned Problem::p_unrefine_uniformly()
  oomph_info <<"Number of equations: " 
             << assign_eqn_numbers() << std::endl; 
 
- // Judge success
- if (success_flag>0)
-  {
-   return 1;
-  }
- else
-  {
-   return 0;
-  }
-
 }
 
 //========================================================================
-/// p-unrefine submesh i_mesh uniformly and rebuild problem.
-/// Return 0 for success,
-/// 1 for failure (if unrefinement has reached the coarsest permitted
-/// level)
+/// p-unrefine submesh i_mesh uniformly and rebuild problem;
+/// doc refinement process.
 //========================================================================
-unsigned Problem::p_unrefine_uniformly(const unsigned& i_mesh)
+void Problem::p_unrefine_uniformly(const unsigned& i_mesh, 
+                                   DocInfo& doc_info)
 {
  actions_before_adapt();
-
- // Has unrefinement been successful?
- unsigned success_flag=0;
-
+ 
 #ifdef PARANOID
  // Number of submeshes?
  if (i_mesh>=nsub_mesh())
@@ -13730,20 +13715,20 @@ unsigned Problem::p_unrefine_uniformly(const unsigned& i_mesh)
                   << nsub_mesh() << std::endl;
  
    throw OomphLibError(error_message.str(),
-                       "Problem::unrefine_uniformly()",
+                       "Problem::p_unrefine_uniformly()",
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
 
- // Unrefine single mesh uniformly if possible
- if(TreeBasedPRefineableMeshBase* mmesh_pt = 
-    dynamic_cast<TreeBasedPRefineableMeshBase*>(mesh_pt(i_mesh)))
+ // Refine single mesh uniformly if possible
+ if(RefineableMeshBase* mmesh_pt = 
+    dynamic_cast<RefineableMeshBase*>(mesh_pt(i_mesh)))
   {
-   success_flag+=mmesh_pt->p_unrefine_uniformly(this->communicator_pt());
+   mmesh_pt->p_unrefine_uniformly(doc_info);
   }
  else
   {
-   oomph_info << "Info/Warning: Mesh cannot be unrefined uniformly " 
+   oomph_info << "Info/Warning: Mesh cannot be p-unrefined uniformly " 
               << std::endl;
   }
 
@@ -13756,16 +13741,6 @@ unsigned Problem::p_unrefine_uniformly(const unsigned& i_mesh)
  //Do equation numbering
  oomph_info <<"Number of equations: " 
             << assign_eqn_numbers() << std::endl; 
-
- // Judge success
- if (success_flag>0)
-  {
-   return 1;
-  }
- else
-  {
-   return 0;
-  }
 
 }
 

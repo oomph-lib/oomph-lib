@@ -36,8 +36,8 @@
 #include <limits>
  
 #include "refineable_mesh.h"
-//Spectral elements required for check in synchronise_hanging_nodes()
-#include "Qspectral_elements.h"
+//Include to fill in additional_synchronise_hanging_nodes() function
+#include "refineable_mesh.template.cc"
 
 namespace oomph
 {
@@ -215,6 +215,23 @@ void TreeBasedRefineableMeshBase::refine_base_mesh(OomphCommunicator* comm_pt,
     // of mesh refinements -- this is required to allow dump/restart
     // on refined meshes
     this->reorder_nodes();
+
+#ifdef OOMPH_HAS_MPI
+
+    // Now (re-)classify halo and haloed nodes and synchronise hanging
+    // nodes
+    // hierher replace communicator; get rid of helper version
+    //BENFLAG: This is required in cases where delete_all_external_storage()
+    //         made slave nodes to external halo nodes nonhanging.
+    if (this->is_mesh_distributed())
+     {
+      DocInfo doc_info;
+      doc_info.disable_doc();
+      classify_halo_and_haloed_nodes(MPI_Helpers::communicator_pt(),
+                                     doc_info,doc_info.is_doc_enabled());
+     } 
+
+#endif
    }
 
 
@@ -788,6 +805,23 @@ void TreeBasedRefineableMeshBase::adapt(OomphCommunicator* comm_pt,
     // on refined meshes
     this->reorder_nodes();
 
+#ifdef OOMPH_HAS_MPI
+
+    // Now (re-)classify halo and haloed nodes and synchronise hanging
+    // nodes
+    // hierher replace communicator; get rid of helper version
+    //BENFLAG: This is required in cases where delete_all_external_storage()
+    //         made slave nodes to external halo nodes nonhanging.
+    if (this->is_mesh_distributed())
+     {
+      DocInfo doc_info;
+      doc_info.disable_doc();
+      classify_halo_and_haloed_nodes(MPI_Helpers::communicator_pt(),
+                                     doc_info,doc_info.is_doc_enabled());
+     } 
+
+#endif
+
     if (n_refine==0)
      {
       oomph_info 
@@ -974,7 +1008,7 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
    for (unsigned long e=0;e<num_tree_nodes;e++)
     {
      // Pre-build must be performed before any elements are built
-     leaf_nodes_pt[e]->object_pt()->pre_build();
+     leaf_nodes_pt[e]->object_pt()->pre_build(mesh_pt,new_node_pt);
     }
    for (unsigned long e=0;e<num_tree_nodes;e++)
     {
@@ -1749,6 +1783,30 @@ void TreeBasedRefineableMeshBase::refine_uniformly(DocInfo& doc_info)
 }
 
 
+//========================================================================
+/// p-refine mesh uniformly
+//========================================================================
+void TreeBasedRefineableMeshBase::p_refine_uniformly(DocInfo& doc_info)
+{ 
+ //Select all elements for refinement
+ unsigned long Nelement=this->nelement();
+ for (unsigned long e=0;e<Nelement;e++)
+  {
+   //Get pointer to p-refineable element
+   PRefineableElement* el_pt
+    = dynamic_cast<PRefineableElement*>(this->element_pt(e));
+   //Mark for p-refinement if possible. If not then p_adapt_mesh() will
+   //report the error.
+   if(el_pt!=0)
+    {
+     el_pt->select_for_p_refinement();
+    }
+  }
+ 
+ // Do the actual mesh adaptation
+ p_adapt_mesh(doc_info);  
+}
+
 
 //========================================================================
 /// Refine mesh by splitting the elements identified
@@ -2269,513 +2327,10 @@ complete_hanging_nodes(const int& ncont_interpolated_values)
 void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
 (OomphCommunicator* comm_pt, const unsigned& ncont_interpolated_values)
 {
-
- // BENFLAG: If the synchronisation has been suppressed by the user, do
- // nothing.
- if(Synchronise_hanging_nodes_not_required) return;
-
  // Store number of processors and current process
  MPI_Status status;
  int n_proc=comm_pt->nproc();
  int my_rank=comm_pt->my_rank();
-
-
-// // hierher BENFLAG This needs to be sorted (by Ben!) at some point.
-// // For now comment out because this whole functionality is bypassed
-// // for hp-refineable elements
-
-// #ifdef PARANOID
-//  // Paranoid check to see if required masters do actually exist on this
-//  // processor
-//  //
-//  // For 2D meshes of uniform p-order, the constraints at spatially non-
-//  // conforming element boundaries lead to hanging nodes on the short edges,
-//  // each with master nodes located on the long edge. In the case of QElements
-//  // with equally spaced nodes, these master nodes always correspond to nodes
-//  // shared between both elements. If, however, the nodes are not equally spaced
-//  // (e.g. in QSpectralElements) then the master nodes are only present in the
-//  // element corresponding to the long edge. If this element is a neighbour of a
-//  // halo element which has been deleted from the mesh of a processor then these
-//  // nodes will not be in the shared storage scheme between processors and
-//  // therefore the node-synchronisation algorithm below will fail. This paranoid
-//  // test alerts the user in cases where this problem arises.
- 
-//  //Flag to check if code failed to die as expected
-//  bool about_to_crash_horribly = false;
- 
-//  // Check only for 2D meshes (for now)
-//  if(finite_element_pt(0)->dim() == 2)
-//   {
-//    using namespace QuadTreeNames;
-   
-//    //Storage for info about offending elements
-//    Vector<unsigned> offending_element_proc(0);
-//    Vector<GeneralisedElement*> offending_element_pt(0);
-//    Vector<Vector<double> > offending_element_corner(0);
-   
-//    //Not a problem for elements with uniformly spaced nodes
-//    //Only perform check for meshes with spectral or p-refineable elements
-//    if(dynamic_cast<SpectralElement*>(this->element_pt(0)))
-//     {
-//      //BENFLAG: For spectral elements, master is long edge.
-//      //         We therefore check to see if any of the halo elements'
-//      //         non-existent neighbours are larger. If this is the case then
-//      //         my slave nodes will have master nodes which are not on this
-//      //         processor and wich therefore cannot be accessed.
-   
-//      //Loop over processors
-//      for(int d=0; d<n_proc; d++)
-//       {
-//        // Am I sending or receiving? Sending
-//        if(d==my_rank)
-//         {
-//          // Loop over domains for halo elements
-//          for(int dd=0; dd<n_proc; dd++)
-//           {
-//            // Don't talk to yourself
-//            if(dd!=d)
-//             {
-//              // Get vectors of haloed elements by copy operation
-//              Vector<GeneralisedElement*> 
-//               haloed_elem_pt(haloed_element_pt(dd));
-           
-//              // How many of my elements are halo elements whose haloed
-//              // counterpart is located on processor dd?
-//              unsigned nelem_haloed=haloed_elem_pt.size();
-
-//              if(nelem_haloed != 0)
-//               {
-//                //Loop over haloed elements
-//                for(unsigned e=0; e<nelem_haloed; e++)
-//                 {
-//                  // Get list of gteq_edge_neighbours
-//                  Vector<unsigned> haloed_neigh_exists(0);
-//                  Vector<int> haloed_neigh_diff_level(0);
-//                  for(int direction=N; direction<=W; direction++)
-//                   {
-//                    //Temp storage for unknowns
-//                    Vector<unsigned> translate_s(2);
-//                    Vector<double> s_lo(2), s_hi(2);
-//                    int edge=0, diff_level=0;
-//                    bool in_neighbouring_tree=false;
-//                    //Get neighbour in this direction
-//                    QuadTree* neigh_pt =
-//                     dynamic_cast<QuadTree*>
-//                     (dynamic_cast<RefineableElement*>
-//                      (haloed_elem_pt[e])->tree_pt())->
-//                     gteq_edge_neighbour(direction,translate_s,
-//                                         s_lo,s_hi,edge,diff_level,
-//                                         in_neighbouring_tree);
-//                    //Collect required stats
-//                    if(neigh_pt!=0)
-//                     {
-//                      haloed_neigh_exists.push_back(1);
-//                     }
-//                    else
-//                     {
-//                      haloed_neigh_exists.push_back(0);
-//                     }
-//                    haloed_neigh_diff_level.push_back(diff_level);
-//                   }
-               
-//                  ////Print out info
-//                  //oomph_info << "to be sent:    neighbours of haloed element " << haloed_elem_pt[e] << std::endl;
-//                  //oomph_info << "to be sent:    neight_exists    diff_level" << std::endl;
-//                  //for(unsigned dir=0; dir<4; dir++)
-//                  // {
-//                  //  oomph_info << "to be sent:    " << neigh_exists[dir] << "    " << neigh_diff_level[dir] << std::endl;
-//                  // }
-               
-//                  //Send to processor (dd) on which this is a halo element
-//                  MPI_Send(&haloed_neigh_exists[0],4,MPI_UNSIGNED,dd,0,
-//                           comm_pt->mpi_comm());
-//                  MPI_Send(&haloed_neigh_diff_level[0],4,MPI_INT,dd,1,
-//                           comm_pt->mpi_comm());
-//                 }
-             
-//               }
-//             }
-//           }
-//         }
-//        // Am I sending or receiving? Receiving
-//        else
-//         {
-//          //Get vector of halo elements by copy operation
-//          Vector<GeneralisedElement*> halo_elem_pt(halo_element_pt(d));
-         
-//          // How many of my elements are halo elements whose haloed
-//          // counterpart is located on processor d?
-//          unsigned nelem_halo=halo_elem_pt.size();
-         
-//          if(nelem_halo!=0)
-//           {
-//            //Loop over halo elements
-//            for(unsigned e=0; e<nelem_halo; e++)
-//             {
-//              // Get list of gteq_edge_neighbours
-//              Vector<unsigned> halo_neigh_exists(0);
-//              for(int direction=N; direction<=W; direction++)
-//               {
-//                //Temp storage for unknowns
-//                Vector<unsigned> translate_s(2);
-//                Vector<double> s_lo(2), s_hi(2);
-//                int edge=0, diff_level=0;
-//                bool in_neighbouring_tree=false;
-//                //Get neighbour in this direction
-//                QuadTree* neigh_pt =
-//                 dynamic_cast<QuadTree*>
-//                 (dynamic_cast<RefineableElement*>
-//                  (halo_elem_pt[e])->tree_pt())->
-//                 gteq_edge_neighbour(direction,translate_s,
-//                                     s_lo,s_hi,
-//                                     edge,diff_level,
-//                                     in_neighbouring_tree);
-//                //Collect required stats
-//                if(neigh_pt != 0)
-//                 {
-//                  halo_neigh_exists.push_back(1);
-//                 }
-//                else
-//                 {
-//                  halo_neigh_exists.push_back(0);
-//                 }
-//               }
-             
-//              ////Print out info
-//              //oomph_info << "neighbours of halo element " << halo_elem_pt[e] << std::endl;
-//              //oomph_info << "neigh_exists    diff_level" << std::endl;
-//              //for(unsigned dir=0; dir<4; dir++)
-//              // {
-//              //  oomph_info << halo_neigh_exists[dir] << "    " << halo_neigh_diff_level[dir] << std::endl;
-//              // }
-             
-//              // Get list of gteq_edge_neighbours
-//              Vector<unsigned> haloed_equivalent_neigh_exists(4);
-//              Vector<int> haloed_equivalent_neigh_diff_level(4);
-             
-//              //Receive from processor (d) on which this is a haloed element
-//              MPI_Recv(&haloed_equivalent_neigh_exists[0],4,MPI_UNSIGNED,d,0,
-//                       comm_pt->mpi_comm(),&status);
-//              MPI_Recv(&haloed_equivalent_neigh_diff_level[0],4,MPI_INT,d,1,
-//                       comm_pt->mpi_comm(),&status);
-             
-//              ////Print out received info
-//              //oomph_info << "received:    neighbours of haloed equivalent element:" << std::endl;
-//              //oomph_info << "received:    neigh_exists    diff_level" << std::endl;
-//              //for(unsigned dir=0; dir<4; dir++)
-//              // {
-//              //  oomph_info << "received:    " << haloed_equivalent_neigh_exists[dir] << "    " << haloed_equivalent_neigh_diff_level[dir] << std::endl;
-//              // }
-
-//              // Now check to see which neighbours are missing from the halo element
-//              // but are present on another processor as a neighbour of the haloed
-//              // equivalent element
-//              for(unsigned dir=0; dir<4; dir++)
-//               {
-//                //Find non-existent neighbours
-//                if(haloed_equivalent_neigh_exists[dir]
-//                   && !halo_neigh_exists[dir])
-//                 {
-//                  //Check relative sizes
-//                  if(haloed_equivalent_neigh_diff_level[dir] < 0)
-//                   {
-//                    //Non-existent neighbour is larger than me!
-//                    //This means that tha masters of my slave nodes belong
-//                    //to that element and are not (necessarily) shared with
-//                    //me -- this is a problem
-//                    offending_element_proc.push_back(my_rank);
-//                    offending_element_pt.push_back(halo_elem_pt[e]);
-//                    FiniteElement* el_pt =
-//                     dynamic_cast<FiniteElement*>(halo_elem_pt[e]);
-//                    Vector<double> corner(2);
-//                    corner[0] = el_pt->node_pt(0)->x(0);
-//                    corner[1] = el_pt->node_pt(0)->x(1);
-//                    offending_element_corner.push_back(corner);
-//                   }
-//                 }
-//               }
-//             }
-//           }
-//         }
-//       }
-//     } // End of spectral case
-//    else if(dynamic_cast<PRefineableElement*>(this->element_pt(0)))
-//     {
-//      //BENFLAG: For p-refineable elements, master is short edge. If edges are
-//      //         equal in length then master is edge with lower p-order.
-//      //         We therefore check to see if any of the halo elements'
-//      //         non-existent neighbours are smaller (gteq_edge_neighbour has
-//      //         sons) or, if the edges are equal in length, if they have a
-//      //         lower p-order. If this is the case then my slave nodes will
-//      //         have master nodes which are not on this processor and
-//      //         therefore cannot be accessed..
-     
-//      //Loop over processors
-//      for(int d=0; d<n_proc; d++)
-//       {
-//        // Am I sending or receiving? Sending
-//        if(d==my_rank)
-//         {
-//          // Loop over domains for halo elements
-//          for(int dd=0; dd<n_proc; dd++)
-//           {
-//            // Don't talk to yourself
-//            if(dd!=d)
-//             {
-//              // Get vectors of haloed elements by copy operation
-//              Vector<GeneralisedElement*> 
-//               haloed_elem_pt(haloed_element_pt(dd));
-           
-//              // How many of my elements are halo elements whose haloed
-//              // counterpart is located on processor dd?
-//              unsigned nelem_haloed=haloed_elem_pt.size();
-
-//              if(nelem_haloed != 0)
-//               {
-//                //Loop over haloed elements
-//                for(unsigned e=0; e<nelem_haloed; e++)
-//                 {
-//                  // Get list of gteq_edge_neighbours
-//                  Vector<unsigned> haloed_neigh_exists(0);
-//                  Vector<int> haloed_neigh_diff_level(0);
-//                  Vector<unsigned> haloed_neigh_nsons(0), haloed_neigh_p_order(0);
-//                  for(int direction=N; direction<=W; direction++)
-//                   {
-//                    //Temp storage for unknowns
-//                    Vector<unsigned> translate_s(2);
-//                    Vector<double> s_lo(2), s_hi(2);
-//                    int edge=0, diff_level=0;
-//                    bool in_neighbouring_tree=false;
-//                    //Get neighbour in this direction
-//                    QuadTree* neigh_pt =
-//                     dynamic_cast<QuadTree*>
-//                     (dynamic_cast<RefineableElement*>
-//                      (haloed_elem_pt[e])->tree_pt())->
-//                     gteq_edge_neighbour(direction,translate_s,
-//                                         s_lo,s_hi,edge,diff_level,
-//                                         in_neighbouring_tree);
-//                    unsigned nsons = (neigh_pt!=0) ? neigh_pt->nsons() : 0;
-//                    unsigned p_order = (neigh_pt!=0) ?
-//                     dynamic_cast<PRefineableElement*>(neigh_pt->object_pt())
-//                      ->p_order()
-//                       : 0;
-//                    //Collect required stats
-//                    if(neigh_pt!=0)
-//                     {
-//                      haloed_neigh_exists.push_back(1);
-//                     }
-//                    else
-//                     {
-//                      haloed_neigh_exists.push_back(0);
-//                     }
-//                    haloed_neigh_diff_level.push_back(diff_level);
-//                    haloed_neigh_nsons.push_back(nsons);
-//                    haloed_neigh_p_order.push_back(p_order);
-//                   }
-               
-//                  ////Print out info
-//                  //oomph_info << "to be sent:    neighbours of haloed element " << haloed_elem_pt[e] << std::endl;
-//                  //oomph_info << "to be sent:    neight_exists    diff_level" << std::endl;
-//                  //for(unsigned dir=0; dir<4; dir++)
-//                  // {
-//                  //  oomph_info << "to be sent:    " << neigh_exists[dir] << "    " << neigh_diff_level[dir] << std::endl;
-//                  // }
-               
-//                  //Send to processor (dd) on which this is a halo element
-//                  MPI_Send(&haloed_neigh_exists[0],4,MPI_UNSIGNED,dd,0,
-//                           comm_pt->mpi_comm());
-//                  MPI_Send(&haloed_neigh_diff_level[0],4,MPI_INT,dd,1,
-//                           comm_pt->mpi_comm());
-//                  MPI_Send(&haloed_neigh_nsons[0],4,MPI_UNSIGNED,dd,2,
-//                           comm_pt->mpi_comm());
-//                  MPI_Send(&haloed_neigh_p_order[0],4,MPI_UNSIGNED,dd,3,
-//                           comm_pt->mpi_comm());
-//                 }
-             
-//               }
-//             }
-//           }
-//         }
-//        // Am I sending or receiving? Receiving
-//        else
-//         {
-//          //Get vector of halo elements by copy operation
-//          Vector<GeneralisedElement*> halo_elem_pt(halo_element_pt(d));
-         
-//          // How many of my elements are halo elements whose haloed
-//          // counterpart is located on processor d?
-//          unsigned nelem_halo=halo_elem_pt.size();
-         
-//          if(nelem_halo!=0)
-//           {
-//            //Loop over halo elements
-//            for(unsigned e=0; e<nelem_halo; e++)
-//             {
-//              // Get list of gteq_edge_neighbours
-//              Vector<unsigned> halo_neigh_exists(0);
-//              for(int direction=N; direction<=W; direction++)
-//               {
-//                //Temp storage for unknowns
-//                Vector<unsigned> translate_s(2);
-//                Vector<double> s_lo(2), s_hi(2);
-//                int edge=0, diff_level=0;
-//                bool in_neighbouring_tree=false;
-//                //Get neighbour in this direction
-//                QuadTree* neigh_pt =
-//                 dynamic_cast<QuadTree*>
-//                 (dynamic_cast<RefineableElement*>
-//                  (halo_elem_pt[e])->tree_pt())->
-//                 gteq_edge_neighbour(direction,translate_s,
-//                                     s_lo,s_hi,edge,diff_level,
-//                                     in_neighbouring_tree);
-//                //Collect required stats
-//                if(neigh_pt!=0)
-//                 {
-//                  halo_neigh_exists.push_back(1);
-//                 }
-//                else
-//                 {
-//                  halo_neigh_exists.push_back(0);
-//                 }
-//               }
-             
-//              ////Print out info
-//              //oomph_info << "neighbours of halo element " << halo_elem_pt[e] << std::endl;
-//              //oomph_info << "neigh_exists    diff_level" << std::endl;
-//              //for(unsigned dir=0; dir<4; dir++)
-//              // {
-//              //  oomph_info << halo_neigh_exists[dir] << "    " << halo_neigh_diff_level[dir] << std::endl;
-//              // }
-             
-//              // Get list of gteq_edge_neighbours
-//              Vector<unsigned> haloed_equivalent_neigh_exists(4);
-//              Vector<int> haloed_equivalent_neigh_diff_level(4);
-//              Vector<unsigned> haloed_equivalent_neigh_nsons(4);
-//              Vector<unsigned> haloed_equivalent_neigh_p_order(4);
-             
-//              //Receive from processor (d) on which this is a haloed element
-//              MPI_Recv(&haloed_equivalent_neigh_exists[0],4,MPI_UNSIGNED,d,0,
-//                       comm_pt->mpi_comm(),&status);
-//              MPI_Recv(&haloed_equivalent_neigh_diff_level[0],4,MPI_INT,d,1,
-//                       comm_pt->mpi_comm(),&status);
-//              MPI_Recv(&haloed_equivalent_neigh_nsons[0],4,MPI_UNSIGNED,d,2,
-//                       comm_pt->mpi_comm(),&status);
-//              MPI_Recv(&haloed_equivalent_neigh_p_order[0],4,MPI_UNSIGNED,d,3,
-//                       comm_pt->mpi_comm(),&status);
-             
-//              ////Print out received info
-//              //oomph_info << "received:    neighbours of haloed equivalent element:" << std::endl;
-//              //oomph_info << "received:    neigh_exists    diff_level" << std::endl;
-//              //for(unsigned dir=0; dir<4; dir++)
-//              // {
-//              //  oomph_info << "received:    " << haloed_equivalent_neigh_exists[dir] << "    " << haloed_equivalent_neigh_diff_level[dir] << std::endl;
-//              // }
-
-//              // Now check to see which neighbours are missing from the halo element
-//              // but are present on another processor as a neighbour of the haloed
-//              // equivalent element
-//              for(unsigned dir=0; dir<4; dir++)
-//               {
-//                //Find non-existent neighbours
-//                if(haloed_equivalent_neigh_exists[dir]
-//                   && !halo_neigh_exists[dir])
-//                 {
-//                  bool element_is_a_problem = false;
-//                  //Check relative sizes
-//                  if(haloed_equivalent_neigh_nsons[dir] > 0)
-//                   {
-//                    //Non-existent neighbour is smaller than me!
-//                    //This means that the masters of my slave nodes belong to
-//                    //that element and are not (necessarily) shared with me --
-//                    //this is a problem.
-//                    element_is_a_problem = true;
-
-//                    //Special case: if I am a quadratic element and my
-//                    //neighbours are smaller than me then there are no hanging
-//                    //nodes to worry about since my middle node matches with a
-//                    //neighbour's son's corner.
-//                    unsigned my_p_order =
-//                     dynamic_cast<PRefineableElement*>(halo_elem_pt[e])->p_order();
-//                    if(my_p_order == 3) //Quadratic(!)
-//                     {
-//                      //This element isn't a problem after all
-//                      element_is_a_problem = false;
-//                     }
-//                   }
-//                  else if(haloed_equivalent_neigh_diff_level[dir] == 0)
-//                   {
-//                    //Edges are the same length, so check p-orders
-//                    unsigned my_p_order =
-//                     dynamic_cast<PRefineableElement*>(halo_elem_pt[e])->p_order();
-//                    if(haloed_equivalent_neigh_p_order[dir] < my_p_order)
-//                     {
-//                      //Non-existant neighbour has lower p-order than me!
-//                      //This means that the masters of my slave nodes belong to
-//                      //that element and are not (necessarily) shared with me --
-//                      //this is a problem.
-//                      element_is_a_problem = true;
-//                     }
-//                   }
-
-//                  if(element_is_a_problem)
-//                   {
-//                    //Non-existent neighbour is going to be a problem
-//                    offending_element_proc.push_back(my_rank);
-//                    offending_element_pt.push_back(halo_elem_pt[e]);
-//                    FiniteElement* el_pt =
-//                     dynamic_cast<FiniteElement*>(halo_elem_pt[e]);
-//                    Vector<double> corner(2);
-//                    corner[0] = el_pt->node_pt(0)->x(0);
-//                    corner[1] = el_pt->node_pt(0)->x(1);
-//                    offending_element_corner.push_back(corner);
-//                   }
-//                 }
-//               }
-//             }
-//           }
-//         }
-//       }
-//     } // End of p-refineable case
-   
-//    //Throw error if we're about to crash horribly...
-//    if(offending_element_pt.size() != 0)
-//     {
-//      std::ostringstream warn_stream;
-//      warn_stream << "This is process " << my_rank << "."
-//                  << std::endl
-//                  << "I am about to crash horribly because the master nodes"
-//                  << std::endl
-//                  << "associated with some of the hanging nodes are not shared"
-//                  << std::endl
-//                  << "between processors."
-//                  << std::endl << std::endl
-//                  << "Offending elements:"
-//                  << std::endl;
-//      for(unsigned e=0; e<offending_element_pt.size(); e++)
-//       {
-//        warn_stream << "element " << offending_element_pt[e]
-//                    << "on processor " << offending_element_proc[e]
-//                    << ":    corner at ( " << offending_element_corner[e][0]
-//                    << " , " << offending_element_corner[e][1]
-//                    << ")" << std::endl;
-//       }
-
-//      //Warn
-//      OomphLibWarning(warn_stream.str(),
-//                      "TreeBasedRefineableMeshBase::synchronise_hanging_nodes()",
-//                      OOMPH_EXCEPTION_LOCATION);
-
-//      //Set flag to catch later
-//      about_to_crash_horribly = true;
-//     }
-   
-//   } // End of 2D checking
-// #endif
- 
-// hierher BENFLAG [end] This needs to be sorted (by Ben!) at some point.
-// For now comment out because this whole functionality is bypassed
-// for hp-refineable elements
-
 
  double t_start = 0.0;
  double t_end = 0.0;
@@ -2783,6 +2338,9 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
  // Storage for the hanging status of halo/haloed nodes on elements
  Vector<Vector<int> > haloed_hanging(n_proc);
  Vector<Vector<int> > halo_hanging(n_proc);
+
+ // Counter for the number of nodes which require additional synchronisation
+ unsigned nnode_still_requiring_synchronisation=0;
 
  if (Global_timings::Doc_comprehensive_timings)
   {
@@ -2953,17 +2511,24 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
     {
  
      unsigned discrepancy_count=0;
+     unsigned discrepancy_count_buff=0;
      
      // Storage for hanging information that needs to be sent to the
      // relevant process if there is a discrepancy in the hanging status
      Vector<int> send_data;
      Vector<double> send_double_data;
+     //Buffer storage for data to be sent
+     //(We need this because we cannot tell until the end of the loop over
+     //a node's master nodes whether we can reconcile its hanging status)
+     Vector<int> send_data_buff(0);
+     Vector<double> send_double_data_buff(0);
      
      // Counter for traversing haloed data
      unsigned count=0;
      
      // Indicate presence of discrepancy. Default: there's none
      unsigned discrepancy=0;
+     unsigned discrepancy_buff=0;
      
      // Loop over haloed nodes
      unsigned nh=nhaloed_node(d);
@@ -2984,15 +2549,18 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
          if ((haloed_hanging[d][count]>0)&&
              (haloed_hanging[d][count]!=halo_hanging[d][count]))
           {
-           discrepancy=1;
-           discrepancy_count++;
+           discrepancy_buff=1;
+           discrepancy_count_buff++;
+
+           //Flag to check if all masters of this node have been found
+           bool found_all_masters=true;
 
            // Find master nodes of haloed node
            HangInfo* hang_pt=nod_pt->hanging_pt(icont);
            unsigned nhd_master=hang_pt->nmaster();
            
            // Add the number of master nodes to the hanging_nodes vector
-           send_data.push_back(nhd_master);
+           send_data_buff.push_back(nhd_master);
            
            // Loop over master nodes required for HangInfo
            for (unsigned m=0; m<nhd_master; m++)
@@ -3055,14 +2623,14 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
                // Found a master: When looking up the node in the shared
                // node scheme on processor d, which processor do I work
                // with? The current one
-               send_data.push_back(my_rank);
+               send_data_buff.push_back(my_rank);
 
                // Found a master: Send its index in the shared 
                // node scheme
-               send_data.push_back((*it).second);
+               send_data_buff.push_back((*it).second);
                
                // Add the weight
-               send_double_data.push_back(hang_pt->master_weight(m));
+               send_double_data_buff.push_back(hang_pt->master_weight(m));
                
                // Done
                found=true;
@@ -3079,10 +2647,13 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
                // non_halo_proc_id being negative
                if (non_halo_proc_id<0)
                 {
-                 OomphLibError(
-                  "Odd: missing master node is owned by current proc. Will crash below.",
-                  "TreeBasedRefineableMeshBase::synchronise_hanging_nodes(...)",
-                  OOMPH_EXCEPTION_LOCATION);
+                 //BENFLAG: This case is handled by the function
+                 //         additional_synchronise_hanging_nodes()
+                 //         called (if necessary) at the end
+                 //OomphLibWarning(
+                 // "Odd: missing master node is owned by current proc. Will crash below.",
+                 // "TreeBasedRefineableMeshBase::synchronise_hanging_nodes(...)",
+                 // OOMPH_EXCEPTION_LOCATION);
                 }
                else // i.e. (non_halo_proc_id>=0)
                 {
@@ -3099,23 +2670,34 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
                      // non-halo (the fact that this is different from 
                      // my_rank (the processor that sends this) will alert 
                      // the other processor to the fact that it needs to 
-                     send_data.push_back(non_halo_proc_id);
+                     send_data_buff.push_back(non_halo_proc_id);
                      
                      // Found a master: Send its index in the shared 
                      // node scheme
-                     send_data.push_back((*it).second);
+                     send_data_buff.push_back((*it).second);
                      
                      // Add the weight
-                     send_double_data.push_back(hang_pt->master_weight(m));
+                     send_double_data_buff.push_back(hang_pt->master_weight(m));
                      
                      // Done
                      found=true;
+
+                     //BENFLAG: It is possible that the master node found in
+                     //         the shared storage with processor
+                     //         <non_halo_proc_id> does not actually exist on
+                     //         processor d. If it does turn out to exist, we
+                     //         are ok, but if not then we must remember to
+                     //         create it later (in the
+                     //         additional_synchronise_hanging_nodes()
+                     //         function)
                     }
                   }                 
                 }
               }
 
-
+             /*
+             // BENFLAG: Don't throw error, we will construct missing master
+             //          nodes in additional_synchronise_hanging_nodes() below
              // Paranoid check: if we haven't found the master node
              // then throw an error
              if (!found)
@@ -3303,9 +2885,59 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
                 "TreeBasedRefineableMeshBase::synchronise_hanging_nodes(...)",
                 OOMPH_EXCEPTION_LOCATION);
               }
+             */
+
+             //Check if the master has been found
+             if (!found)
+              {
+               //If this master hasn't been found then set the flag
+               found_all_masters=false;
+               //No need to continue searching for masters
+               break;
+              }
              
              
             } // loop over master nodes
+           
+
+           // Check if we need to send the data
+           if(found_all_masters)
+            {
+             // All masters were found, so populate send data from buffer
+             discrepancy = discrepancy_buff;
+             discrepancy_count += discrepancy_count_buff;
+             for(unsigned i=0; i<send_data_buff.size(); i++)
+              {
+               send_data.push_back(send_data_buff[i]);
+              }
+             for(unsigned i=0; i<send_double_data_buff.size(); i++)
+              {
+               send_double_data.push_back(send_double_data_buff[i]);
+              }
+
+             // Clear buffers and reset
+             discrepancy_buff = 0;
+             discrepancy_count_buff = 0;
+             send_data_buff.clear();
+             send_double_data_buff.clear();
+            }
+           else
+            {
+             // At least one master node was not found, so we can't
+             // reconcile the hanging status of this node yet. We tell
+             // the other processor to do nothing for now.
+             send_data.push_back(0);
+
+             // Clear buffers and reset
+             discrepancy_buff = 0;
+             discrepancy_count_buff = 0;
+             send_data_buff.clear();
+             send_double_data_buff.clear();
+
+             // Set flag to trigger another round of synchronisation
+             nnode_still_requiring_synchronisation++;
+            }
+             
           }
          // Haloed node isn't hanging but halo is: the latter
          // shouldn't so send a -1 to indicate that it's to be made
@@ -3481,6 +3113,8 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
                      tmp.Weight=mtr_weight;
                      tmp.Hang_pt=hang_pt;
                      tmp.Master_node_index=m;
+                     tmp.Node_pt=nod_pt;
+                     tmp.icont=icont;
                      hang_info.push_back(tmp);
                     }
                   }
@@ -3540,7 +3174,10 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
 
    // Storage for the translated entries (in order) for/from
    // other processors
-   Vector<Vector<unsigned> > translated_entry(n_proc);
+   //BENFLAG: Must be ints so that an entry of -1 tells the other processor
+   //         that the node could not be found. See comment above for why
+   //         this may be necessary.
+   Vector<Vector<int> > translated_entry(n_proc);
    
    // Storage for how-many-th entry in this processor's 
    // hang_info vector will be completed by processor rank.
@@ -3553,7 +3190,7 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
     Vector<int> send_n(n_proc,0);
     
     // Storage for all values to be sent to all processors
-    Vector<unsigned> send_data;
+    Vector<int> send_data;
     
     // Start location within send_data for data to be sent to each processor 
     Vector<int> send_displacement(n_proc,0);
@@ -3627,10 +3264,10 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
     
     //Now send the data between all the processors
     MPI_Alltoallv(&send_data[0],&send_n[0],&send_displacement[0],
-                  MPI_UNSIGNED,
+                  MPI_INT,
                   &receive_data[0],&receive_n[0],
                   &receive_displacement[0],
-                  MPI_UNSIGNED,
+                  MPI_INT,
                   comm_pt->mpi_comm());
     
     //Now use the received data to update the halo nodes
@@ -3679,6 +3316,15 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
            }
           else
            {
+            //BENFLAG: This node has not been found in the shared scheme, so
+            //         the translation query has failed. We send a -1 to tell
+            //         the other processor the bad news.
+            translated_entry[send_rank].push_back(-1);
+
+            /*
+            //BENFLAG: We don't need to crash anymore because the function
+            //         additional_synchronise_hanging_nodes() will magically
+            //         sort out all the problems!
             std::ostringstream error_stream;
             error_stream
              << "Received translation query for shared node"
@@ -3691,6 +3337,7 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
              error_stream.str(),
              "TreeBasedRefineableMeshBase::synchronise_hanging_nodes(...)",
              OOMPH_EXCEPTION_LOCATION);
+            */
            }
           
          }
@@ -3720,7 +3367,7 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
     Vector<int> send_n(n_proc,0);
     
     // Storage for all values to be sent to all processors
-    Vector<unsigned> send_data;
+    Vector<int> send_data;
     
     // Start location within send_data for data to be sent to each processor 
     Vector<int> send_displacement(n_proc,0);
@@ -3778,10 +3425,10 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
     
     //Now send the data between all the processors
     MPI_Alltoallv(&send_data[0],&send_n[0],&send_displacement[0],
-                  MPI_UNSIGNED,
+                  MPI_INT,
                   &receive_data[0],&receive_n[0],
                   &receive_displacement[0],
-                  MPI_UNSIGNED,
+                  MPI_INT,
                   comm_pt->mpi_comm());
     
     //Now use the received data to update the halo nodes
@@ -3800,20 +3447,44 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
          {
           // Index of missing master node in shared node lookup scheme
           // with processor send_rank:
-          unsigned index=receive_data[count];
+          //BENFLAG: Must be an int because failure returns -1
+          int index=receive_data[count];
           count++;
-          
-          // Extract node from shared node lookup scheme
-          Node* master_nod_pt=
-           shared_node_pt(send_rank,index);
-          
-          // Recall information associated with that missing master
-          unsigned hang_info_index=hang_info_index_for_proc[send_rank][i];
-          HangHelperStruct tmp=hang_info[hang_info_index];
-          
-          // Set as a master node (with corresponding weight)
-          tmp.Hang_pt->set_master_node_pt(tmp.Master_node_index,
-                                          master_nod_pt,tmp.Weight);
+
+          //BENFLAG: Translation query has been successful if index >= 0
+          if(index >= 0)
+           {
+            // Recall information associated with that missing master
+            unsigned hang_info_index=hang_info_index_for_proc[send_rank][i];
+            HangHelperStruct tmp=hang_info[hang_info_index];
+
+            // Extract node from shared node lookup scheme
+            Node* master_nod_pt=
+             shared_node_pt(send_rank,index);
+
+            // Set as a master node (with corresponding weight)
+            tmp.Hang_pt->set_master_node_pt(tmp.Master_node_index,
+                                            master_nod_pt,tmp.Weight);
+           }
+          else
+           {
+            //BENFLAG: Translation query has failed. This is the processor
+            //         on which the node was a halo, so we must delete the
+            //         partial hang info.
+
+            // Recall information associated with that missing master
+            unsigned hang_info_index=hang_info_index_for_proc[send_rank][i];
+            HangHelperStruct tmp=hang_info[hang_info_index];
+
+            // Delete partial hanging information
+            tmp.Node_pt->set_hanging_pt(0,tmp.icont);
+            
+            // Set flag to trigger another round of synchronisation
+            // BENFLAG: This works even though we don't own the node that
+            //          still requires synchrionisation because this variable
+            //          is reduced over all processors at the end
+            nnode_still_requiring_synchronisation++;
+           }
          }
         
        }
@@ -3832,31 +3503,49 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
   } // end  of reconciliation required
 
 
-// #ifdef PARANOID
+ //Get global number of nodes still requiring synchronisation due to
+ //missing master nodes
+ //BENFLAG: This will only be necessary for meshes involving elements
+ //         with nonuniformly spaced nodes. All other cases will continue to
+ //         work as before because all nodes will have been successfully
+ //         synchronised by now
+ unsigned global_nnode_still_requiring_synchronisation=0;
+ MPI_Allreduce(&nnode_still_requiring_synchronisation,
+               &global_nnode_still_requiring_synchronisation,
+               1,MPI_UNSIGNED,MPI_MAX,comm_pt->mpi_comm());
+ if (global_nnode_still_requiring_synchronisation>0)
+  {
 
-//  // hierher BENFLAG This is from Ben -- may need another look;
-//  // re-enable (or not) together with the stuff above
+   double tt_start = 0.0;
+   if (Global_timings::Doc_comprehensive_timings)
+    {
+     tt_start=TimingHelpers::timer();
+    }
 
-//  //Check to see if we were supposed to die by now
-//  if (about_to_crash_horribly)
-//   {
-//    //Do error
-//    std::ostringstream error_stream;
-//    error_stream << "This is process " << my_rank << "."
-//                 << std::endl
-//                 << "I should have crashed by now. If there are no errors above"
-//                 << std::endl
-//                 << "then the check for existence of master nodes in shared"
-//                 << std::endl
-//                 << "storage is incorrect (see warning above).";
+   oomph_info << "Need to do additional synchronisation of hanging nodes"
+              << std::endl;
+
+   // Do additional synchronisation
+   additional_synchronise_hanging_nodes(comm_pt,ncont_interpolated_values);
+
+   double tt_end=0.0;
+   if (Global_timings::Doc_comprehensive_timings)
+    {
+     tt_end=TimingHelpers::timer();
+     oomph_info 
+      << "Time for RefineableMesh::additional_synchronise_hanging_nodes() "
+      << "in TreeBasedRefineableMeshBase::synchronise_hanging_nodes(): " 
+      << tt_end-tt_start << std::endl;
+     tt_start = TimingHelpers::timer();
+    }
+
+  }
+ else
+  {
+   oomph_info << "No need to do additional synchronisation of hanging nodes"
+              << std::endl;
+  }
    
-//    throw OomphLibError(error_stream.str(),
-//                        "TreeBasedRefineableMeshBase::synchronise_hanging_nodes()",
-//                        OOMPH_EXCEPTION_LOCATION);
-//   }
-// #endif
- 
-
 }
 
 #endif
@@ -3869,9 +3558,14 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
 
 
 
- /// \short p-adapt mesh: Refine elements whose error is lager than err_max
- /// and (try to) unrefine those whose error is smaller than err_min
-void TreeBasedPRefineableMeshBase::p_adapt(OomphCommunicator* comm_pt,
+//========================================================================
+/// Do adaptive p-refinement for mesh.
+/// - Pass Vector of error estimates for all elements.
+/// - p-refine those whose errors exceeds the threshold
+/// - p-unrefine those whose errors is less than
+///   threshold.
+//========================================================================
+void TreeBasedRefineableMeshBase::p_adapt(OomphCommunicator* comm_pt,
  const Vector<double>& elemental_error)
 {
  //Set the refinement tolerance to be the max permissible error
@@ -3897,7 +3591,7 @@ void TreeBasedPRefineableMeshBase::p_adapt(OomphCommunicator* comm_pt,
                 << "this beautiful code!" << std::endl;
    
    throw OomphLibError(error_stream.str(),
-                       "TreeBasedPRefineableMeshBase::p_adapt()",
+                       "TreeBasedRefineableMeshBase::p_adapt()",
                        OOMPH_EXCEPTION_LOCATION);
   }
  
@@ -3908,10 +3602,6 @@ void TreeBasedPRefineableMeshBase::p_adapt(OomphCommunicator* comm_pt,
  // refined further but can't
  this->nrefinement_overruled()=0;
 
- // Note: Yes, this needs to be a map because we'll have to check
- // the refinement wishes of brothers (who we only access via pointers)
- //std::map<RefineableElement*,bool> wants_to_be_unrefined;
-
  unsigned n_refine=0;
  unsigned n_unrefine=0;
  // Loop over all elements and mark them according to the error criterion
@@ -3921,42 +3611,56 @@ void TreeBasedPRefineableMeshBase::p_adapt(OomphCommunicator* comm_pt,
    //(Cast) pointer to the element
    PRefineableElement* el_pt =
     dynamic_cast<PRefineableElement*>(this->element_pt(e));
- 
-   //Initially element is not to be refined
-   el_pt->deselect_for_refinement();
-   el_pt->deselect_for_unrefinement();
-    
-   //If the element error exceeds the threshold ...
-   if(elemental_error[e] > refine_tol)
+
+   //Check that we can p-refine the element
+   if(el_pt!=0)
     {
-     // ... and its refinement level is less than the maximum desired level
-     //mark is to be refined
-     if((el_pt->refinement_is_enabled())&&
-        (el_pt->p_order() < this->max_p_refinement_level()))
+     //Initially element is not to be refined
+     el_pt->deselect_for_p_refinement();
+     el_pt->deselect_for_p_unrefinement();
+      
+     //If the element error exceeds the threshold ...
+     if(elemental_error[e] > refine_tol)
       {
-       el_pt->select_for_refinement();
-       n_refine++;
+       // ... and its refinement level is less than the maximum desired level
+       //mark is to be refined
+       if((el_pt->p_refinement_is_enabled())&&
+          (el_pt->p_order() < this->max_p_refinement_level()))
+        {
+         el_pt->select_for_p_refinement();
+         n_refine++;
+        }
+       // ... otherwise mark it as having been over-ruled
+       else
+        {
+         this->nrefinement_overruled()+=1;
+        }
       }
-     // ... otherwise mark it as having been over-ruled
-     else
+     if(elemental_error[e] < unrefine_tol)
       {
-       this->nrefinement_overruled()+=1;
+       // ... and its refinement level is more than the minimum desired level
+       //mark is to be refined
+       //(Also check that we don't unrefine past the initial refinement level)
+       if((el_pt->p_refinement_is_enabled())&&
+          (el_pt->p_order() > this->min_p_refinement_level())&&
+          (el_pt->p_order() > el_pt->initial_p_order()))
+        {
+         el_pt->select_for_p_unrefinement();
+         n_unrefine++;
+        }
+       // ... otherwise mark it as having been over-ruled
+       else
+        {
+         this->nrefinement_overruled()+=1;
+        }
       }
-    }
-   if(elemental_error[e] < unrefine_tol)
+    }//End of check for p-refineability of element
+   else
     {
-     // ... and its refinement level is more than the minimum desired level
-     //mark is to be refined
-     if(el_pt->p_order() > this->min_p_refinement_level())
-      {
-       el_pt->select_for_unrefinement();
-       n_unrefine++;
-      }
-     // ... otherwise mark it as having been over-ruled
-     else
-      {
-       this->nrefinement_overruled()+=1;
-      }
+     oomph_info << "p-refinement is not possible for these elements"
+                << std::endl;
+     //Don't try to p-refine any more elements
+     break;
     }
   }
   
@@ -4063,7 +3767,7 @@ void TreeBasedPRefineableMeshBase::p_adapt(OomphCommunicator* comm_pt,
           for (unsigned e=0;e<nhalo;e++)
            {
             if (dynamic_cast<PRefineableElement*>(halo_elem_pt[e])
-                ->to_be_unrefined())
+                ->to_be_p_unrefined())
              {
               halo_to_be_unrefined[e]=1;
              }
@@ -4101,10 +3805,10 @@ void TreeBasedPRefineableMeshBase::p_adapt(OomphCommunicator* comm_pt,
            {
             if ( ( (halo_to_be_unrefined[e]==0)&&
                    (dynamic_cast<PRefineableElement*>(haloed_elem_pt[e])->
-                    to_be_unrefined()) ) ||
+                    to_be_p_unrefined()) ) ||
                  ( (halo_to_be_unrefined[e]==1)&&
                    (!dynamic_cast<PRefineableElement*>(haloed_elem_pt[e])->
-                    to_be_unrefined()) ) )
+                    to_be_p_unrefined()) ) )
              {
               std::ostringstream error_message;
               error_message 
@@ -4116,7 +3820,7 @@ void TreeBasedPRefineableMeshBase::p_adapt(OomphCommunicator* comm_pt,
                << "has not assigned the same errors to halo and haloed\n"
                << "elements -- it ought to!\n";
               throw OomphLibError(error_message.str(),
-                                  "TreeBasedPRefineableMeshBase::adapt_mesh()",
+                                  "TreeBasedRefineableMeshBase::adapt_mesh()",
                                   OOMPH_EXCEPTION_LOCATION);
              }
            }
@@ -4145,8 +3849,8 @@ void TreeBasedPRefineableMeshBase::p_adapt(OomphCommunicator* comm_pt,
           Vector<int> halo_to_be_refined(nhalo,0);
           for (unsigned e=0;e<nhalo;e++)
            {
-            if (dynamic_cast<RefineableElement*>(halo_elem_pt[e])
-                ->to_be_refined())
+            if (dynamic_cast<PRefineableElement*>(halo_elem_pt[e])
+                ->to_be_p_refined())
              {
               halo_to_be_refined[e]=1;
              }
@@ -4180,11 +3884,11 @@ void TreeBasedPRefineableMeshBase::p_adapt(OomphCommunicator* comm_pt,
           for (unsigned e=0;e<nhaloed;e++)
            {
             if ( ( (halo_to_be_refined[e]==0)&&
-                   (dynamic_cast<RefineableElement*>(haloed_elem_pt[e])->
-                    to_be_refined()) ) ||
+                   (dynamic_cast<PRefineableElement*>(haloed_elem_pt[e])->
+                    to_be_p_refined()) ) ||
                  ( (halo_to_be_refined[e]==1)&&
-                   (!dynamic_cast<RefineableElement*>(haloed_elem_pt[e])->
-                    to_be_refined()) ) )
+                   (!dynamic_cast<PRefineableElement*>(haloed_elem_pt[e])->
+                    to_be_p_refined()) ) )
              {
               std::ostringstream error_message;
               error_message 
@@ -4196,7 +3900,7 @@ void TreeBasedPRefineableMeshBase::p_adapt(OomphCommunicator* comm_pt,
                << "has not assigned the same errors to halo and haloed\n"
                << "elements -- it ought to!\n";
               throw OomphLibError(error_message.str(),
-                                  "TreeBasedPRefineableMeshBase::p_adapt_mesh()",
+                                  "TreeBasedRefineableMeshBase::p_adapt_mesh()",
                                   OOMPH_EXCEPTION_LOCATION);
              }
            }
@@ -4233,6 +3937,23 @@ void TreeBasedPRefineableMeshBase::p_adapt(OomphCommunicator* comm_pt,
    // of mesh refinements -- this is required to allow dump/restart
    // on refined meshes
    this->reorder_nodes();
+
+#ifdef OOMPH_HAS_MPI
+
+    // Now (re-)classify halo and haloed nodes and synchronise hanging
+    // nodes
+    // hierher replace communicator; get rid of helper version
+    //BENFLAG: This is required in cases where delete_all_external_storage()
+    //         made slave nodes to external halo nodes nonhanging.
+    if (this->is_mesh_distributed())
+     {
+      DocInfo doc_info;
+      doc_info.disable_doc();
+      classify_halo_and_haloed_nodes(MPI_Helpers::communicator_pt(),
+                                     doc_info,doc_info.is_doc_enabled());
+     } 
+
+#endif
    
    if (n_refine==0)
     {
@@ -4246,9 +3967,66 @@ void TreeBasedPRefineableMeshBase::p_adapt(OomphCommunicator* comm_pt,
 
 }
 
-/// \short Perform the actual tree-based mesh p-adaptation, 
-/// documenting the progress in the directory specified in DocInfo object.
-void TreeBasedPRefineableMeshBase::p_adapt_mesh(DocInfo& doc_info)
+
+//================================================================
+/// p-adapt mesh, which exists in two representations,
+/// namely as:
+///  - a FE mesh 
+///  - a forest of Oc or QuadTrees 
+///
+/// p-refinement/derefinement process is documented (in tecplot-able form)
+/// if requested. 
+///
+/// Procedure:
+/// - Loop over all elements and do the p-refinement/unrefinement for
+///   those who want to be refined. Note: p-refinement builds fully-
+///   functional elements.
+/// - For all nodes that were hanging on the previous mesh (and are still
+///   marked as such), fill in their nodal values (consistent
+///   with the current hanging node scheme) to make sure they are fully 
+///   functional, should they have become non-hanging during the 
+///   mesh-adaptation. Then mark the nodes as non-hanging.
+/// - Delete any nodes that have become obsolete.
+/// - Mark up hanging nodes and setup hanging node scheme (incl.
+///   recursive cleanup for hanging nodes that depend on other
+///   hanging nodes).
+/// - run a quick self-test on the neighbour finding scheme and
+///   check the integrity of the elements (if PARANOID)
+/// - doc hanging node status, boundary conditions, neighbour
+///   scheme if requested.
+///
+///
+/// After adaptation, all nodes (whether new or old) have up-to-date
+/// current and previous values. 
+///
+/// If refinement process is being documented, the following information
+/// is documented:
+/// - The files
+///   - "neighbours.dat" 
+///   - "all_nodes.dat" 
+///   - "new_nodes.dat" 
+///   - "hang_nodes_*.dat" 
+///     where the * denotes a direction (n,s,e,w) in 2D 
+///     or (r,l,u,d,f,b) in 3D
+///. 
+///   can be viewed with 
+///   - QHangingNodes.mcr
+///   .
+/// - The file
+///    - "hangnodes_withmasters.dat"
+///    .
+///    can be viewed with 
+///    - QHangingNodesWithMasters.mcr
+///    .
+///    to check the hanging node status.
+/// - The neighbour status of the elements is documented in
+///   - "neighbours.dat"
+///   .
+///   and can be viewed with 
+///   - QuadTreeNeighbours.mcr
+///   .
+//=================================================================
+void TreeBasedRefineableMeshBase::p_adapt_mesh(DocInfo& doc_info)
 {
    
 #ifdef OOMPH_HAS_MPI
@@ -4278,11 +4056,11 @@ void TreeBasedPRefineableMeshBase::p_adapt_mesh(DocInfo& doc_info)
       = dynamic_cast<PRefineableElement*>(this->element_pt(e));
      if ( el_pt!=0 )
       {
-       if (el_pt->to_be_refined())
+       if (el_pt->to_be_p_refined())
         {
          el_pt->p_refine(1,mesh_pt);
         }
-       else if (el_pt->to_be_unrefined())
+       else if (el_pt->to_be_p_unrefined())
         {
          el_pt->p_refine(-1,mesh_pt);
         }
@@ -4290,7 +4068,7 @@ void TreeBasedPRefineableMeshBase::p_adapt_mesh(DocInfo& doc_info)
      else 
       {
        throw OomphLibError("Element cannot be adapted",
-                           "TreeBasedPRefineableMeshBase::p_adapt_mesh()",
+                           "TreeBasedRefineableMeshBase::p_adapt_mesh()",
                            OOMPH_EXCEPTION_LOCATION);
       }
     }
@@ -4302,65 +4080,7 @@ void TreeBasedPRefineableMeshBase::p_adapt_mesh(DocInfo& doc_info)
                 << t_end-t_start << std::endl;
      t_start = TimingHelpers::timer();
     }
-    
-   // Now elements have been created -- build all the leaves
-   //-------------------------------------------------------
-   //Firstly put all the elements into a vector
-   Vector<Tree*> leaf_nodes_pt;
-   this->forest_pt()->stick_leaves_into_vector(leaf_nodes_pt);
 
-
-   if (Global_timings::Doc_comprehensive_timings)
-    {
-     double t_end = TimingHelpers::timer();
-     oomph_info << "Time for stick_leaves_into_vector: " 
-                << t_end-t_start << std::endl;
-     t_start = TimingHelpers::timer();
-    }
-    
-   //If we are documenting the output, create the filename
-   std::ostringstream fullname;
-   std::ofstream new_nodes_file;
-   if(doc_info.is_doc_enabled())
-    {
-     fullname << doc_info.directory() << "/new_nodes" 
-              << doc_info.number() << ".dat";
-     new_nodes_file.open(fullname.str().c_str());
-    }
-
-
-
-   // Build all elements and store vector of pointers to new nodes
-   // (Note: build() checks if the element has been built 
-   // already, i.e. if it's not a new element).
-   Vector<Node*> new_node_pt;
-   bool was_already_built;
-   unsigned long num_tree_nodes=leaf_nodes_pt.size();
-   for (unsigned long e=0;e<num_tree_nodes;e++)
-    {
-     // Pre-build must be performed before any elements are built
-     leaf_nodes_pt[e]->object_pt()->pre_build();
-    }
-   for (unsigned long e=0;e<num_tree_nodes;e++)
-    {
-     // Now do the actual build of the new elements
-     leaf_nodes_pt[e]->object_pt()
-      ->build(mesh_pt,new_node_pt,was_already_built,new_nodes_file);
-    }
-
-
-   double t_end=0.0;
-   if (Global_timings::Doc_comprehensive_timings)
-    {
-     t_end = TimingHelpers::timer();
-     oomph_info << "Time for building " << num_tree_nodes << " new elements: " 
-                << t_end-t_start << std::endl;
-     t_start = TimingHelpers::timer();
-    }
-    
-   //Close the new nodes files, if it was opened
-   if(doc_info.is_doc_enabled()) {new_nodes_file.close();}
-    
    // Loop over all nodes in mesh and free the dofs of those that were
    //-----------------------------------------------------------------
    // pinned only because they were hanging nodes. Also update their
@@ -4476,7 +4196,8 @@ void TreeBasedPRefineableMeshBase::p_adapt_mesh(DocInfo& doc_info)
      nod_pt->set_nonhanging();
      nod_pt->set_obsolete();
     }
-
+   
+   double t_end=0.0;
    if (Global_timings::Doc_comprehensive_timings)
     {
      t_end = TimingHelpers::timer();
@@ -4485,13 +4206,12 @@ void TreeBasedPRefineableMeshBase::p_adapt_mesh(DocInfo& doc_info)
      t_start = TimingHelpers::timer();
     }
       
-   // Stick all elements into a new vector
-   //(note the leaves may have changed, so this is not duplicated work)
+   // Stick all elements into a vector
    Vector<Tree*> tree_nodes_pt;
    this->forest_pt()->stick_leaves_into_vector(tree_nodes_pt);
      
    //Copy the elements into the mesh Vector
-   num_tree_nodes=tree_nodes_pt.size();
+   unsigned long num_tree_nodes=tree_nodes_pt.size();
    this->element_pt().resize(num_tree_nodes);
    for (unsigned long e=0;e<num_tree_nodes;e++)
     {
@@ -4509,8 +4229,8 @@ void TreeBasedPRefineableMeshBase::p_adapt_mesh(DocInfo& doc_info)
      // (Required because refined element is the same element as the original)
      PRefineableElement* cast_el_pt =
       dynamic_cast<PRefineableElement*>(this->element_pt(e));
-     cast_el_pt->deselect_for_refinement();
-     cast_el_pt->deselect_for_unrefinement();
+     cast_el_pt->deselect_for_p_refinement();
+     cast_el_pt->deselect_for_p_unrefinement();
     }
     
    // Cannot delete nodes that are still marked as obsolete
@@ -4639,7 +4359,7 @@ void TreeBasedPRefineableMeshBase::p_adapt_mesh(DocInfo& doc_info)
      error_stream << "Doced problem mesh in ProblemMesh.dat" << std::endl;
  
      throw OomphLibError(error_stream.str(),
-                         "TreeBasedPRefineableMeshBase::p_adapt_mesh()",
+                         "TreeBasedRefineableMeshBase::p_adapt_mesh()",
                          OOMPH_EXCEPTION_LOCATION);
     }
    else
@@ -4866,6 +4586,7 @@ void TreeBasedPRefineableMeshBase::p_adapt_mesh(DocInfo& doc_info)
       }
  
      //Open the output file
+     std::ostringstream fullname;
      std::ofstream bcs_file;
      fullname.str("");
      fullname << doc_info.directory() << "/bcs" << doc_info.number()
@@ -5061,61 +4782,34 @@ void TreeBasedPRefineableMeshBase::p_adapt_mesh(DocInfo& doc_info)
 }
 
 //========================================================================
-/// p-unrefine mesh uniformly. Return 0 for success,
-/// 1 for failure (if unrefinement has reached the highest/lowest
-/// permitted level)
+/// p-unrefine mesh uniformly
+/// Unlike in h-refinement, we can simply p-unrefine each element in the mesh
 //========================================================================
-unsigned TreeBasedPRefineableMeshBase::p_unrefine_uniformly(
- OomphCommunicator* comm_pt)
+void TreeBasedRefineableMeshBase::p_unrefine_uniformly(DocInfo& doc_info)
 { 
-
- // We can't just select all elements for unrefinement
- // because they need to merge with their brothers.
- // --> Rather than repeating the convoluted logic of
- // RefineableQuadMesh<ELEMENT>::adapt(Vector<double>& elemental_error) 
- // here (code duplication!) hack it by filling the error
- // vector with values that ensure unrefinement for all
- // elements where this is possible
-
- // Create dummy vector for elemental errors
+ //Select all elements for unrefinement
  unsigned long Nelement=this->nelement();
- Vector<double> elemental_error(Nelement);
-
- // Set it error to 1/100 of the min. error to force unrefinement
- double error=this->min_permitted_error()/100.0;
  for (unsigned long e=0;e<Nelement;e++)
   {
-   elemental_error[e]=error;
+   //Get pointer to p-refineable element
+   PRefineableElement* el_pt
+    = dynamic_cast<PRefineableElement*>(this->element_pt(e));
+   //Mark for p-refinement if possible. If not then p_adapt_mesh() will
+   //report the error.
+   if(el_pt!=0)
+    {
+     el_pt->select_for_p_unrefinement();
+    }
   }
-
- // Temporarily lift any restrictions on the minimum number of
- // elements that need to be unrefined to make it worthwhile
- unsigned backup=this->max_keep_unrefined();
- this->max_keep_unrefined()=0;
-
- // Do the actual mesh adaptation with fake error vector
- p_adapt(comm_pt,elemental_error); 
-
- // Reset the minimum number of elements that need to be unrefined 
- // to make it worthwhile
- this->max_keep_unrefined()=backup;
-
- // Has the unrefinement actually changed anything?
- if (Nelement==this->nelement())
-  {
-   return 1;
-  }
- else
-  {
-   return 0;
-  }
-
+ 
+ // Do the actual mesh adaptation
+ p_adapt_mesh(doc_info);  
 }
 
 //========================================================================
 /// p-refine mesh by refining the elements identified by their numbers.
 //========================================================================
-void TreeBasedPRefineableMeshBase::p_refine_selected_elements(
+void TreeBasedRefineableMeshBase::p_refine_selected_elements(
  const Vector<unsigned>& elements_to_be_refined)
 {
  
@@ -5138,8 +4832,16 @@ void TreeBasedPRefineableMeshBase::p_refine_selected_elements(
  unsigned long nref=elements_to_be_refined.size();
  for (unsigned long e=0;e<nref;e++)
   {
-   dynamic_cast<PRefineableElement*>
-    (this->element_pt(elements_to_be_refined[e]))->select_for_refinement();
+   //Get pointer to p-refineable element
+   PRefineableElement* el_pt
+    = dynamic_cast<PRefineableElement*>
+       (this->element_pt(elements_to_be_refined[e]));
+   //Mark for p-refinement if possible. If not then p_adapt_mesh() will
+   //report the error.
+   if(el_pt!=0)
+    {
+     el_pt->select_for_p_refinement();
+    }
   }
  
  // Do the actual mesh adaptation
@@ -5149,7 +4851,7 @@ void TreeBasedPRefineableMeshBase::p_refine_selected_elements(
 //========================================================================
 /// p-refine mesh by refining the elements identified by their pointers.
 //========================================================================
-void TreeBasedPRefineableMeshBase::p_refine_selected_elements(
+void TreeBasedRefineableMeshBase::p_refine_selected_elements(
  const Vector<PRefineableElement*>& elements_to_be_refined_pt)
 {
  
@@ -5172,7 +4874,7 @@ void TreeBasedPRefineableMeshBase::p_refine_selected_elements(
  unsigned long nref=elements_to_be_refined_pt.size();
  for (unsigned long e=0;e<nref;e++)
   {
-   elements_to_be_refined_pt[e]->select_for_refinement();
+   elements_to_be_refined_pt[e]->select_for_p_refinement();
   }
  
  // Do the actual mesh adaptation

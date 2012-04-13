@@ -1340,9 +1340,6 @@ class ModalPRefineableQPoissonElement :
  Node* vertex_node_pt(const unsigned& j) const
   {return QPoissonElement<DIM,2>::vertex_node_pt(j);}
 
- /// Rebuild from sons: empty
- void rebuild_from_sons(Mesh* &mesh_pt) {}
-
  /// \short Order of recovery shape functions for Z2 error estimation:
  /// - Same order as shape functions.
  //unsigned nrecovery_order()
@@ -1760,9 +1757,9 @@ public:
  
  /// \short Overloaded version of the Problem's access function to the mesh.
  /// Recasts the pointer to the base Mesh object to the actual mesh type.
- PRefineableOneDMesh<ELEMENT>* mesh_pt() 
+ RefineableOneDMesh<ELEMENT>* mesh_pt() 
   {
-   return dynamic_cast<PRefineableOneDMesh<ELEMENT>*>(Problem::mesh_pt());
+   return dynamic_cast<RefineableOneDMesh<ELEMENT>*>(Problem::mesh_pt());
   }
  
 private:
@@ -1795,7 +1792,7 @@ PRefineableOneDPoissonProblem(PoissonEquations<1>::PoissonSourceFctPt
 
  // Build and assign mesh
  Problem::mesh_pt() = 
-  new PRefineableOneDMesh<ELEMENT>(n,length);
+  new RefineableOneDMesh<ELEMENT>(n,length);
 
  // Create/set error estimator
  mesh_pt()->spatial_error_estimator_pt() = new Z2ErrorEstimator;

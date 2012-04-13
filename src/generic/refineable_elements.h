@@ -509,7 +509,7 @@ class RefineableElement : public virtual FiniteElement
  virtual void initial_setup() {}
 
  /// \short Pre-build the element
- virtual void pre_build() {}
+ virtual void pre_build(Mesh*& mesh_pt, Vector<Node*>& new_node_pt) {}
 
  /// \short Further build: e.g. deal with interpolation of internal values
  virtual void further_build() {}
@@ -574,15 +574,22 @@ protected:
  
  /// The polynomial expansion order of the elemental basis functions
  unsigned P_order;
+
+ /// Flag for p-refinement
+ bool To_be_p_refined;
  
- /// Unrefine flag
- bool To_be_unrefined;
+ /// Flag to indicate suppression of any refinement
+ bool P_refinement_is_enabled;
+ 
+ /// Flag for unrefinement
+ bool To_be_p_unrefined;
  
 public:
 
  /// \short Constructor, calls the RefineableElement constructor
- PRefineableElement() : RefineableElement(), P_order(2), To_be_unrefined(false)
-  {}
+ PRefineableElement() : RefineableElement(), P_order(2),
+  To_be_p_refined(false), P_refinement_is_enabled(true),
+  To_be_p_unrefined(false) {}
 
  /// Destructor, empty
  virtual ~PRefineableElement() {}
@@ -598,6 +605,16 @@ public:
   {
    BrokenCopy::broken_assign("PRefineableElement");
   }
+
+
+ /// Flag to indicate suppression of any refinement
+ bool p_refinement_is_enabled(){return P_refinement_is_enabled;}
+
+ /// Suppress of any refinement for this element 
+ void disable_p_refinement(){P_refinement_is_enabled=false;}
+
+ /// Emnable refinement for this element 
+ void enable_p_refinement(){P_refinement_is_enabled=true;}
  
  /// Access function to P_order
  unsigned &p_order() {return P_order;}
@@ -605,17 +622,34 @@ public:
  /// Access function to P_order (const version)
  unsigned p_order() const {return P_order;}
  
- /// Select the element for refinement
- void select_for_unrefinement() {To_be_unrefined=true;}
+ /// Get the initial P_order
+ /// This is required so that elements which are constructed with a
+ /// higher p-order initially are not un-refined past this level (e.g.
+ /// in fluid problems where elements initially use quadratic velocity
+ /// and linear pressure)
+ /// Virtual because this needs to be set in templated derived classes
+ virtual unsigned initial_p_order() const=0;
  
- /// Deselect the element for refinement
- void deselect_for_unrefinement() {To_be_unrefined=false;}
+ /// Select the element for p-refinement
+ void select_for_p_refinement() {To_be_p_refined=true;}
  
- /// Has the element been selected for unrefinement?
- bool to_be_unrefined() {return To_be_unrefined;}
+ /// Deselect the element for p-refinement
+ void deselect_for_p_refinement() {To_be_p_refined=false;}
+ 
+ /// Select the element for p-unrefinement
+ void select_for_p_unrefinement() {To_be_p_unrefined=true;}
+ 
+ /// Deselect the element for p-unrefinement
+ void deselect_for_p_unrefinement() {To_be_p_unrefined=false;}
+
+ /// Has the element been selected for refinement?
+ bool to_be_p_refined() {return To_be_p_refined;}
+ 
+ /// Has the element been selected for p-unrefinement?
+ bool to_be_p_unrefined() {return To_be_p_unrefined;}
  
  /// p-refine the element
- virtual void p_refine(const int &inc, Mesh* &mesh_pt)=0;
+ virtual void p_refine(const int &inc, Mesh* const &mesh_pt)=0;
  
  // Overload the nodes_built function to check every node
  bool nodes_built()

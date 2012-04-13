@@ -6,7 +6,7 @@ include $(top_srcdir)/config/makefile_templates/demo_drivers
 
 # Name of executable
 check_PROGRAMS= \
-adaptive_driven_cavity 
+adaptive_driven_cavity hp_adaptive_driven_cavity 
 
 #----------------------------------------------------------------------
 
@@ -21,7 +21,19 @@ adaptive_driven_cavity_LDADD = \
 
 #----------------------------------------------------------------------
 
-EXTRA_DIST += nodes_cr.lay  nodes.lay
+# Sources for executable
+hp_adaptive_driven_cavity_SOURCES = hp_adaptive_driven_cavity.cc
+
+# Required libraries:
+# $(FLIBS) is included in case the solver involves fortran sources.
+hp_adaptive_driven_cavity_LDADD = \
+                -L@libdir@ -lnavier_stokes  \
+                -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
+
+#----------------------------------------------------------------------
+
+EXTRA_DIST += nodes_cr.lay  nodes.lay \
+              hp_adaptive_cavity_partition.dat
 
 # Include path for library headers: All library headers live in 
 # the include directory which we specify with -I

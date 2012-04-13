@@ -285,6 +285,35 @@ void PRefineableDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  // Get current process rank
  int my_rank=this->communicator_pt()->my_rank();
 
+
+ {
+  sprintf(filename,"%s/nodes%i_on_proc%i.dat",doc_info.directory().c_str(),
+          doc_info.number(),this->communicator_pt()->my_rank());
+  some_file.open(filename);
+  unsigned nnod=mesh_pt()->nnode();
+  for (unsigned j=0;j<nnod;j++)
+   {
+    Node* nod_pt=mesh_pt()->node_pt(j);
+    some_file << nod_pt->x(0) << " " 
+              << nod_pt->x(1) << " ";
+    int nval=nod_pt->nvalue();
+    for (int i=-1;i<nval;i++)
+     {
+      if (nod_pt->is_hanging(i))
+       {
+        some_file << "1 ";
+       }
+      else
+       {
+        some_file << "0 ";
+       }
+     }
+    some_file << std::endl;
+   }
+ }
+ some_file.close();
+ 
+
  // Output solution 
  sprintf(filename,"%s/soln%i_on_proc%i.dat",doc_info.directory().c_str(),
          doc_info.number(),my_rank);
@@ -314,7 +343,7 @@ int main(int argc, char **argv)
  
  // Set output directory
  DocInfo doc_info;
- doc_info.set_directory("RESLT");
+ doc_info.set_directory("RESLT_hp");
  
  
 
@@ -405,7 +434,7 @@ int main(int argc, char **argv)
 #ifdef OOMPH_HAS_MPI
 
     DocInfo mesh_doc_info;
-    mesh_doc_info.set_directory("RESLT_MESH");
+    mesh_doc_info.set_directory("RESLT_hp_MESH");
     mesh_doc_info.number()=0;
     std::ifstream input_file;
     char filename[100];
@@ -452,6 +481,12 @@ int main(int argc, char **argv)
    problem.newton_solve();
    doc_info.number()=6;
    problem.doc_solution(doc_info);
+  
+#ifdef OOMPH_HAS_MPI
+  mesh_doc_info.number()=1;
+  problem.mesh_pt()->doc_mesh_distribution(problem.communicator_pt(),
+                                           mesh_doc_info);
+#endif
    
   } // end of validation run
  

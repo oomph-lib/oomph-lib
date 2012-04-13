@@ -86,6 +86,20 @@ namespace oomph
    Node* node_created_by_neighbour(const Vector<double> &s_fraction,
                                    bool &is_periodic);
   
+   /// \short If a neighbouring element has already created a node at a
+   /// position corresponding to the local fractional position within the
+   /// present element, s_fraction, return a pointer to that node. If
+   /// not, return NULL (0). If the node is on a periodic boundary the
+   /// flag is_periodic is true, otherwise it will be false.
+   Node* node_created_by_son_of_neighbour(const Vector<double> &s_fraction,
+                                                  bool &is_periodic)
+    {
+     /// BENFLAG: It is impossible for this situation to arise in meshes
+     ///          containing elements of uniform p-order, so there is nothing
+     ///          to do here. Instead we overload it for p-refineable elements.
+     return 0;
+    }
+  
    /// \short Build the element, i.e. give it nodal positions, apply BCs,
    /// etc. Pointers to any new nodes will be returned in new_node_pt. 
    /// If it is open, the positions of the new nodes will be written to

@@ -1089,6 +1089,20 @@ public virtual RefineableQElement<DIM>
   RefineableNavierStokesEquations<DIM>(),
   RefineableQElement<DIM>(),  
   QCrouzeixRaviartElement<DIM>() {}
+
+
+ /// Broken copy constructor
+ RefineableQCrouzeixRaviartElement
+  (const RefineableQCrouzeixRaviartElement<DIM>& dummy) 
+  { 
+   BrokenCopy::broken_copy("RefineableQCrouzeixRaviartElement");
+  } 
+ 
+ /// Broken assignment operator
+ void operator=(const RefineableQCrouzeixRaviartElement<DIM>&) 
+  {
+   BrokenCopy::broken_assign("RefineableQCrouzeixRaviartElement");
+  }
  
  /// Number of continuously interpolated values: DIM (velocities)
  unsigned ncont_interpolated_values() const {return DIM;}
@@ -1315,6 +1329,93 @@ public virtual PRefineableQElement<DIM,3>
   {
    delete this->integral_pt();
   }
+
+
+ /// Broken copy constructor
+ PRefineableQCrouzeixRaviartElement
+  (const PRefineableQCrouzeixRaviartElement<DIM>& dummy) 
+  { 
+   BrokenCopy::broken_copy("PRefineableQCrouzeixRaviartElement");
+  } 
+ 
+ /// Broken assignment operator
+ void operator=(const PRefineableQCrouzeixRaviartElement<DIM>&) 
+  {
+   BrokenCopy::broken_assign("PRefineableQCrouzeixRaviartElement");
+  }
+
+ /// Create and return a clone of myself (like a "virtual" constructor).
+ /// This is required during the p-refinement so that the element can
+ /// read data from "itself" while it builds itself with a new p-order.
+ //BENFLAG: This is not a "fully-functioning" clone! It merely contains
+ //         all the information normally obtained from the father in the
+ //         RefineableQElement's build() procedure, and it doesn't
+ //         introduce any memory leaks (I think).
+ PRefineableQCrouzeixRaviartElement<DIM>* make_backup_clone() const
+  {
+   // Make new element (using element's standard constructor)
+   //========================================================
+   PRefineableQCrouzeixRaviartElement<DIM>* clone_pt
+    = new PRefineableQCrouzeixRaviartElement<DIM>();
+
+   // Copy across into the clone any data that may have changed
+   // since I was created using the standard constructor
+   //==========================================================
+   // BENFLAG: All that we need to update is:
+   //           - p-order
+   //           - Integration scheme
+   //           - Node storage and
+   //           - Number of nodes
+   //          All other information is either set correctly in
+   //          the constructor or is superfluous for the build
+   //          procedure.
+
+   //Do p-order
+   clone_pt->p_order() = this->p_order();
+
+   //Do integration scheme
+   delete clone_pt->integral_pt();
+   switch(clone_pt->p_order())
+    {
+    case 2:
+     clone_pt->set_integration_scheme(new GaussLobattoLegendre<DIM,2>);
+     break;
+    case 3:
+     clone_pt->set_integration_scheme(new GaussLobattoLegendre<DIM,3>);
+     break;
+    case 4:
+     clone_pt->set_integration_scheme(new GaussLobattoLegendre<DIM,4>);
+     break;
+    case 5:
+     clone_pt->set_integration_scheme(new GaussLobattoLegendre<DIM,5>);
+     break;
+    case 6:
+     clone_pt->set_integration_scheme(new GaussLobattoLegendre<DIM,6>);
+     break;
+    case 7:
+     clone_pt->set_integration_scheme(new GaussLobattoLegendre<DIM,7>);
+     break;
+    default:
+     std::ostringstream error_message;
+     error_message <<"\nERROR: Exceeded maximum polynomial order for";
+     error_message <<"\n       integration scheme.\n";
+     throw OomphLibError(
+            error_message.str(),
+            "PRefineableQPoissonElement<DIM>::clone()",
+            OOMPH_EXCEPTION_LOCATION);
+    }
+
+   //Do nodes
+   clone_pt->set_n_node(this->nnode());
+   for(unsigned j=0; j<clone_pt->nnode(); j++)
+    {
+     clone_pt->node_pt(j) = this->node_pt(j);
+    }
+
+   // Return cloned element
+   //======================
+   return clone_pt;
+  }
  
  /// \short Return the i-th pressure value
  /// (Discontinous pressure interpolation -- no need to cater for hanging 
@@ -1340,7 +1441,19 @@ public virtual PRefineableQElement<DIM,3>
  
  /// \short Rebuild from sons: Reconstruct pressure from the (merged) sons
  /// This must be specialised for each dimension.
- void rebuild_from_sons(Mesh* &mesh_pt);
+ void rebuild_from_sons(Mesh* &mesh_pt)
+  {
+   //Do p-refineable version
+   PRefineableQElement<DIM,3>::rebuild_from_sons(mesh_pt);
+   //Do Crouzeix-Raviart version
+   //BENFLAG: Need to reconstruct pressure manually!
+   for(unsigned p=0; p<npres_nst(); p++)
+    {
+     //BENFLAG: Set to zero for now -- don't do projection problem
+     this->internal_data_pt(this->P_nst_internal_index)->set_value(p,0.0);
+    }
+     
+  }
 
  /// \short Order of recovery shape functions for Z2 error estimation:
  /// - Same order as shape functions.

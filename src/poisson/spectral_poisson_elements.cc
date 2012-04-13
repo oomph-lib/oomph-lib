@@ -53,6 +53,7 @@ template class QSpectralPoissonElement<2,4>;
 template class QSpectralPoissonElement<2,5>;
 template class QSpectralPoissonElement<2,6>;
 template class QSpectralPoissonElement<2,7>;
+template class QSpectralPoissonElement<2,8>;
 
 
 template class QSpectralPoissonElement<3,2>;
@@ -61,5 +62,6 @@ template class QSpectralPoissonElement<3,4>;
 template class QSpectralPoissonElement<3,5>;
 template class QSpectralPoissonElement<3,6>;
 template class QSpectralPoissonElement<3,7>;
+template class QSpectralPoissonElement<3,8>;
 
 }

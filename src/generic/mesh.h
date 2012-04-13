@@ -1307,6 +1307,18 @@ public:
    return Shared_node_pt[p][j];
   }
 
+ /// \short Get vector of pointers to shared nodes with processor p
+ // BENFLAG: Required for faster search in
+ //          Multi_domain_functions::add_external_haloed_master_node_helper()
+ void get_shared_node_pt(const unsigned& p, Vector<Node*>& shared_node_pt)
+ {
+  unsigned np=nshared_node(p);
+  shared_node_pt.resize(np);
+  for (unsigned j=0;j<np;j++)
+   {
+    shared_node_pt[j] = Shared_node_pt[p][j];
+   }
+ }
 
 
  /// \short Add shared node whose counterpart is held 

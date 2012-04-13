@@ -938,6 +938,135 @@ void RefineableQElement<2>::build(Mesh*& mesh_pt,
              //Node has been created
              node_done = true;
             }
+           // Node does not exist in neighbour element but might already
+           //-----------------------------------------------------------
+           // have been created by a son of a neighbouring element
+           //-----------------------------------------------------
+           else
+            {
+             //Was the node created by one of its neighbours' sons
+             //Whether or not the node lies on an edge can be calculated
+             //by from the fractional position
+             bool is_periodic=false;;
+             created_node_pt = 
+              node_created_by_son_of_neighbour(s_fraction,is_periodic);
+  
+             //If the node was so created, assign the pointers
+             if(created_node_pt!=0)
+              {
+               //If the node is periodic
+               if(is_periodic)
+                {
+                 //Now the node must be on a boundary, but we don't know which
+                 //one
+                 //The returned created_node_pt is actually the neighbouring
+                 //periodic node
+                 Node* neighbour_node_pt = created_node_pt;
+    
+                 // Determine the edge on which the new node will live
+                 int father_bound=Father_bound[n_p](jnod,son_type);
+                 
+                 // Storage for the set of Mesh boundaries on which the 
+                 // appropriate father edge lives.
+                 // [New nodes should always be mid-edge nodes in father
+                 // and therefore only live on one boundary but just to 
+                 // play it safe...]
+                 std::set<unsigned> boundaries;
+                 //Only get the boundaries if we are at the edge of
+                 //an element. Nodes in the centre of an element cannot be
+                 //on Mesh boundaries
+                 if(father_bound!=Tree::OMEGA)
+                  {father_el_pt->get_boundaries(father_bound,boundaries);}
+                 
+#ifdef PARANOID
+                 //Case where a new node lives on more than one boundary
+                 // seems fishy enough to flag
+                 if (boundaries.size()>1)
+                  {
+                   throw OomphLibError(
+                    "boundaries.size()!=1 seems a bit strange..\n",
+                    "RefineableQElement<2>::build()",
+                    OOMPH_EXCEPTION_LOCATION);
+                  }
+  
+                 //Case when there are no boundaries, we are in big trouble
+                 if(boundaries.size() == 0)
+                  {
+                   std::ostringstream error_stream;
+                   error_stream    
+                    << "Periodic node is not on a boundary...\n"
+                    << "Coordinates: " 
+                    << created_node_pt->x(0) << " "
+                    << created_node_pt->x(1) << "\n";
+                   throw OomphLibError(
+                    error_stream.str(),
+                    "RefineableQElement<2>::build()",
+                    OOMPH_EXCEPTION_LOCATION);
+                  }
+#endif
+                 
+                 // Create node and set the pointer to it from the element 
+                 created_node_pt = 
+                  construct_boundary_node(jnod,time_stepper_pt);
+                 //Make the node periodic from the neighbour
+                 created_node_pt->
+                  make_periodic(neighbour_node_pt);
+                 // Add to vector of new nodes
+                 new_node_pt.push_back(created_node_pt);
+                 
+                 // Loop over # of history values
+                 for (unsigned t=0;t<ntstorage;t++)
+                  {
+                   // Get position from father element -- this uses the macro
+                   // element representation if appropriate. If the node
+                   // turns out to be a hanging node later on, then
+                   // its position gets adjusted in line with its
+                   // hanging node interpolation.
+                   Vector<double> x_prev(2);
+                   father_el_pt->get_x(t,s,x_prev);
+                   // Set previous positions of the new node
+                   for(unsigned i=0;i<2;i++)
+                    {
+                     created_node_pt->x(t,i) = x_prev[i];
+                    }
+                  }
+                 
+                 // Next, we Update the boundary lookup schemes
+                 //Loop over the boundaries stored in the set
+                 for(std::set<unsigned>::iterator it = boundaries.begin();
+                     it != boundaries.end(); ++it)
+                  {
+                   //Add the node to the boundary
+                   mesh_pt->add_boundary_node(*it,created_node_pt);
+                   
+                   //If we have set an intrinsic coordinate on this
+                   //mesh boundary then it must also be interpolated on
+                   //the new node
+                   //Now interpolate the intrinsic boundary coordinate
+                   if(mesh_pt->boundary_coordinate_exists(*it)==true)
+                    {
+                     Vector<double> zeta(1);
+                     father_el_pt->interpolated_zeta_on_edge(*it,
+                                                             father_bound,
+                                                             s,zeta);
+                     
+                     created_node_pt->set_coordinates_on_boundary(*it,zeta);
+                    }
+                  }
+                 
+                 //Make sure that we add the node to the mesh
+                 mesh_pt->add_node_pt(created_node_pt);        
+                } //End of periodic case
+               //Otherwise the node is not periodic, so just set the 
+               //pointer to the neighbours node
+               else
+                {
+                 node_pt(jnod) = created_node_pt;
+                }
+               //Node has been created
+               node_done = true;
+              } // Node does not exist in son of neighbouring element
+            } // Node does not exist in neighbouring element
           } // Node does not exist in father element
 
          // Node has not been built anywhere ---> build it here

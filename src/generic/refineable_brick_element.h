@@ -111,7 +111,19 @@ public:
  /// a position corresponding to the local fractional position within the
  /// present element, s_fraction, return
  /// a pointer to that node. If not, return NULL (0).
- Node* node_created_by_neighbour(const Vector<double> &s_fraction);
+ virtual Node* node_created_by_neighbour(const Vector<double> &s_fraction);
+
+ /// \short If a neighbouring element has already created a node at
+ /// a position corresponding to the local fractional position within the
+ /// present element, s_fraction, return
+ /// a pointer to that node. If not, return NULL (0).
+ virtual Node* node_created_by_son_of_neighbour(const Vector<double> &s_fraction)
+  {
+   /// BENFLAG: It is impossible for this situation to arise in meshes
+   ///          containing elements of uniform p-order, so there is nothing
+   ///          to do here. Instead we overload it for p-refineable elements.
+   return 0;
+  }
 
  /// \short Build the element: i.e. give it nodal positions, apply BCs, etc. 
  /// Pointers to any new nodes will be returned in new_node_pt. If 

@@ -49,6 +49,10 @@
 #include "element_with_external_element.h"
 #include "multi_domain.h"
 
+//BENFLAG: Needed to check if elements have nonuniformlyspaced nodes
+#include "refineable_elements.h"
+#include "Qspectral_elements.h"
+
 namespace oomph
 {
 
@@ -207,6 +211,52 @@ namespace oomph
   (Problem* problem_pt, Mesh* const &mesh_pt, Mesh* const &external_mesh_pt,
    const unsigned& interaction_index, Mesh* const &external_face_mesh_pt)
   {
+   //BENFLAG: Multi-domain setup will not work for elements with
+   //         nonuniformly spaced nodes
+#ifdef PARANOID
+   //Must check type of elements in the mesh and in the external mesh
+   //(assume element type is the same for all elements in each mesh)
+
+   //Get pointer to first element in each mesh
+   GeneralisedElement* el_pt_0 = mesh_pt->element_pt(0);
+   GeneralisedElement* ext_el_pt_0 = external_mesh_pt->element_pt(0);
+
+   //Make sure both exist
+   if(el_pt_0==0)
+    {
+     throw OomphLibError(
+            "Element 0 does not exist in the mesh!",
+            "Multi_domain_functions::aux_setup_multi_domain_interaction()",
+            OOMPH_EXCEPTION_LOCATION);
+    }
+   if(ext_el_pt_0==0)
+    {
+     throw OomphLibError(
+            "External element 0 does not exist in the mesh!",
+            "Multi_domain_functions::aux_setup_multi_domain_interaction()",
+            OOMPH_EXCEPTION_LOCATION);
+    }
+
+   //Check they are not spectral elements
+   if(dynamic_cast<SpectralElement*>(el_pt_0)!=0
+      || dynamic_cast<SpectralElement*>(ext_el_pt_0)!=0)
+    {
+     throw OomphLibError(
+            "Multi-domain setup does not work with spectral elements.",
+            "Multi_domain_functions::aux_setup_multi_domain_interaction()",
+            OOMPH_EXCEPTION_LOCATION);
+    }
+   
+   //Check they are not hp-refineable elements
+   if(dynamic_cast<PRefineableElement*>(el_pt_0)!=0
+      || dynamic_cast<PRefineableElement*>(ext_el_pt_0)!=0)
+    {
+     throw OomphLibError(
+            "Multi-domain setup does not work with hp-refineable elements.",
+            "Multi_domain_functions::aux_setup_multi_domain_interaction()",
+            OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
 
 #ifdef OOMPH_HAS_MPI
    // Storage for number of processors and my rank

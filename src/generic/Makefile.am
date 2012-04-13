@@ -31,6 +31,7 @@ brick_mesh.cc spines.cc element_with_moving_nodes.cc \
 macro_element_node_update_element.cc \
 mesh_as_geometric_object.cc \
 multi_domain.cc \
+missing_masters.cc \
 element_with_external_element.cc \
 eigen_solver.cc \
 triangle_scaffold_mesh.cc  geompack_scaffold_mesh.cc \
@@ -96,6 +97,7 @@ triangle_mesh.h tet_mesh.h \
 partitioning.h communicator.h linear_algebra_distribution.h double_vector.h \
 double_multi_vector.h double_vector_with_halo.h \
 multi_domain.h element_with_external_element.h iterative_linear_solver.h \
+missing_masters.h \
 preconditioner.h \
 general_purpose_preconditioners.h block_preconditioner.h \
 general_purpose_block_preconditioners.h SuperLU_preconditioner.h \
@@ -112,7 +114,8 @@ endif
 # Template-only files: Need to be included in include directory
 # but should not be listed in combined header file
 templates = \
-tree.template.cc multi_domain.template.cc
+tree.template.cc refineable_mesh.template.cc multi_domain.template.cc \
+missing_masters.template.cc
 
 # Do we have the HYPRE library?
 if OOMPH_HAS_HYPRE

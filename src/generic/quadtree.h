@@ -162,11 +162,11 @@ class QuadTree : public virtual Tree
  /// \short Traverse Tree: Preorder traverse and stick pointers to
  /// neighbouring leaf nodes (only) into Vector
  void stick_neighbouring_leaves_into_vector(
-       Vector<const QuadTree*>& tree_neighouring_nodes,
-       Vector<Vector<double> >& tree_neighouring_s_lo,
-       Vector<Vector<double> >& tree_neighouring_s_hi,
-       Vector<int>& tree_neighouring_diff_level,
-       const QuadTree* neigh_pt,
+       Vector<const QuadTree*>& tree_neighbouring_nodes,
+       Vector<Vector<double> >& tree_neighbouring_s_lo,
+       Vector<Vector<double> >& tree_neighbouring_s_hi,
+       Vector<int>& tree_neighbouring_diff_level,
+       const QuadTree* my_neigh_pt,
        const int& direction) const;
 
  /// \short Self-test: Check all neighbours. Return success (0) 

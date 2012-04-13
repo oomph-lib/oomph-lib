@@ -402,6 +402,9 @@ void Z2ErrorEstimator::shape_rec(const Vector<double>& x,
                        OOMPH_EXCEPTION_LOCATION);
    break;
   }
+   
+ //Dummy return (never get here)
+ return 0;
 }
 
 

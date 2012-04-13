@@ -65,10 +65,10 @@ public:
  
  /// \short Pre-build (search father for required nodes which may already
  /// exist)
- void pre_build();
+ void pre_build(Mesh*& mesh_pt, Vector<Node*>& new_node_pt);
  
  /// \short p-refine the element (refine if inc>0, unrefine if inc<0).
- void p_refine(const int &inc, Mesh* &mesh_pt=0);
+ void p_refine(const int &inc, Mesh* const &mesh_pt);
  
  // Overload the shape functions
  void shape(const Vector<double> &s, Shape &psi) const;
@@ -77,10 +77,6 @@ public:
  
  void d2shape_local(const Vector<double> &s, Shape &psi, DShape &dpsids,
                     DShape &d2psids) const;
-
- /// \short Set up hanging node information. Empty for 1D elements.
- void binary_hang_helper(const int &value_id, const int &my_edge,
-                         std::ofstream& output_hangfile);
  
  /// \short Perform additional hanging node procedures for variables
  /// that are not interpolated by all nodes (e.g. lower order interpolations
@@ -91,13 +87,13 @@ public:
  /// Overloaded to return the (variable) p-order rather than the template
  /// argument.
  unsigned nnode_1d() const {return this->p_order();}
+ 
+ /// Get the initial P_order
+ unsigned initial_p_order() const {return INITIAL_NNODE_1D;}
   
  // Overloaded from QElement<1,NNODE_1D> to use nnode_1d() instead of
  // template argument.
  Node* get_node_at_local_coordinate(const Vector<double> &s);
- 
- Node* node_created_by_neighbour(const Vector<double> &s_fraction, 
-                                 bool &is_periodic);
  
  Node* node_created_by_son_of_neighbour(const Vector<double> &s_fraction, 
                                         bool &is_periodic);
@@ -112,9 +108,19 @@ public:
  /// The local one-d fraction is the same
  double local_one_d_fraction_of_node(const unsigned &n1d, const unsigned &i);
 
+ /// Rebuild the element. This needs to find any nodes in the sons which
+ /// are still required.
+ void rebuild_from_sons(Mesh* &mesh_pt);
+
  /// \short Check the integrity of interpolated values across element
  /// boundaries.
  void check_integrity(double& max_error);
+
+protected:
+
+ /// \short Set up hanging node information. Empty for 1D elements.
+ void binary_hang_helper(const int &value_id, const int &my_edge,
+                         std::ofstream& output_hangfile);
  
 };
 
@@ -131,6 +137,17 @@ public:
  /// Constructor
  PRefineableQElement() : PRefineableElement(), RefineableQElement<2>()
   {}
+
+ /// Create and return a clone of myself (like a "virtual" constructor).
+ /// This is required during the p-refinement so that the element can
+ /// read data from "itself" while it builds itself with a new p-order.
+ /// Must be defined in the derived class to return an object of the
+ /// correct type.
+ //BENFLAG: This is not a "fully-functioning" clone! It will merely contain
+ //         all the required information normally obtained from the father
+ //         in the RefineableQElement's build() procedure, and it has no
+ //         memory leaks (I think).
+ virtual PRefineableQElement<2,INITIAL_NNODE_1D>* make_backup_clone() const=0;
  
  /// \short Initial setup of element (set the correct p-order and integration
  /// scheme)
@@ -138,10 +155,10 @@ public:
  
  /// \short Pre-build (search father for required nodes which may already
  /// exist)
- void pre_build();
+ void pre_build(Mesh*& mesh_pt, Vector<Node*>& new_node_pt);
 
  /// \short p-refine the element (refine if inc>0, unrefine if inc<0).
- void p_refine(const int &inc, Mesh* &mesh_pt=0);
+ void p_refine(const int &inc, Mesh* const &mesh_pt);
  
  // Overload the shape functions
  void shape(const Vector<double> &s, Shape &psi) const;
@@ -150,13 +167,6 @@ public:
  
  void d2shape_local(const Vector<double> &s, Shape &psi, DShape &dpsids,
                     DShape &d2psids) const;
-
- /// \short Set up hanging node information.
- /// Overloaded to implement the mortar method rather than constrained
- /// approximation. This enforces continuity weakly via an integral matching
- /// condition at non-conforming element boundaries.
- void quad_hang_helper(const int &value_id, const int &my_edge,
-                       std::ofstream& output_hangfile);
  
  /// \short Perform additional hanging node procedures for variables
  /// that are not interpolated by all nodes (e.g. lower order interpolations
@@ -167,6 +177,9 @@ public:
  /// Overloaded to return the (variable) p-order rather than the template
  /// argument.
  unsigned nnode_1d() const {return this->p_order();}
+ 
+ /// Get the initial P_order
+ unsigned initial_p_order() const {return INITIAL_NNODE_1D;}
   
  // Overloaded from QElement<2,NNODE_1D> to use nnode_1d() instead of
  // template argument.
@@ -187,6 +200,10 @@ public:
 
  /// The local one-d fraction is the same
  double local_one_d_fraction_of_node(const unsigned &n1d, const unsigned &i);
+
+ /// Rebuild the element. This needs to find any nodes in the sons which
+ /// are still required.
+ void rebuild_from_sons(Mesh* &mesh_pt);
  
  /// \short Check the integrity of interpolated values across element
  /// boundaries.
@@ -194,6 +211,47 @@ public:
  /// conforming element boundaries, so it makes no sense to check the
  /// continuity of interpolated values across these boundaries.
  void check_integrity(double& max_error);
+
+protected:
+
+ /// \short Set up hanging node information.
+ /// Overloaded to implement the mortar method rather than constrained
+ /// approximation. This enforces continuity weakly via an integral matching
+ /// condition at non-conforming element boundaries.
+ void quad_hang_helper(const int &value_id, const int &my_edge,
+                       std::ofstream& output_hangfile);
+ 
+ /// \short Return the value of the intrinsic boundary coordinate
+ /// interpolated along the edge (S/W/N/E) of the element before
+ /// p-refinement. Requires a vector of pointers to the element's
+ /// original nodes and the original p-order of the element before
+ /// refinement in addition to the arguments to the standard
+ /// interpolated_zeta_on_edge(...) function.
+ // BENFLAG: This is required during p-refinement because new nodes in
+ //          elements with curvilinear boundaries normally interpolate
+ //          their boundary coordinate from their element's father, but
+ //          with p-refinement they should instead interpolate from the
+ //          current element before it was refined.
+ void interpolated_zeta_on_edge_before_p_refinement(
+       const unsigned &boundary,
+       const int &edge,
+       const Vector<double> &s,
+       const unsigned &old_p_order,
+       const Vector<Node*> &old_node_pt,
+       Vector<double> &zeta);
+ 
+ // Set up node update info for (newly created) algebraic node: Work out its
+ // node update information by interpolation from its father element, 
+ // based on pointer to father element and its local coordinate in 
+ // the father element. We're creating the node update info
+ // for update functions that are shared by all nodes in the
+ // father element. 
+ void bens_setup_algebraic_node_update_generic(
+       Node*& node_pt,
+       const Vector<double>& s,
+       FiniteElement* father_el_pt,
+       const unsigned& old_p_order,
+       const Vector<Node*>& old_node_pt) const;
  
 };
 
@@ -222,10 +280,10 @@ public:
  
  /// \short Pre-build (search father for required nodes which may already
  /// exist)
- void pre_build();
+ void pre_build(Mesh*& mesh_pt, Vector<Node*>& new_node_pt);
  
  /// \short p-refine the element (refine if inc>0, unrefine if inc<0).
- void p_refine(const int &inc, Mesh* &mesh_pt=0);
+ void p_refine(const int &inc, Mesh* const &mesh_pt);
  
  // Overload the shape functions
  void shape(const Vector<double> &s, Shape &psi) const;
@@ -234,13 +292,6 @@ public:
  
  void d2shape_local(const Vector<double> &s, Shape &psi, DShape &dpsids,
                     DShape &d2psids) const;
- 
- /// \short Set up hanging node information.
- /// Overloaded to implement the mortar method rather than constrained
- /// approximation. This enforces continuity weakly via an integral matching
- /// condition at non-conforming element boundaries.
- void oc_hang_helper(const int &value_id, const int &my_edge,
-                     std::ofstream& output_hangfile);
  
  /// \short Perform additional hanging node procedures for variables
  /// that are not interpolated by all nodes (e.g. lower order interpolations
@@ -251,16 +302,17 @@ public:
  /// Overloaded to return the (variable) p-order rather than the template
  /// argument.
  unsigned nnode_1d() const {return this->p_order();}
+ 
+ /// Get the initial P_order
+ unsigned initial_p_order() const {return INITIAL_NNODE_1D;}
   
  // Overloaded from QElement<3,NNODE_1D> to use nnode_1d() instead of
  // template argument.
  Node* get_node_at_local_coordinate(const Vector<double> &s);
  
- Node* node_created_by_neighbour(const Vector<double> &s_fraction, 
-                                 bool &is_periodic);
+ Node* node_created_by_neighbour(const Vector<double> &s_fraction);
  
- Node* node_created_by_son_of_neighbour(const Vector<double> &s_fraction, 
-                                        bool &is_periodic);
+ Node* node_created_by_son_of_neighbour(const Vector<double> &s_fraction);
  
  // Overload nodal positions -- these elements have GLL-spaced nodes.
  /// Get local coordinates of node j in the element; vector sets its own size
@@ -271,6 +323,10 @@ public:
 
  /// The local one-d fraction is the same
  double local_one_d_fraction_of_node(const unsigned &n1d, const unsigned &i);
+
+ /// Rebuild the element. This needs to find any nodes in the sons which
+ /// are still required.
+ void rebuild_from_sons(Mesh* &mesh_pt);
  
  /// \short Check the integrity of interpolated values across element
  /// boundaries.
@@ -278,6 +334,34 @@ public:
  /// conforming element boundaries, so it makes no sense to check the
  /// continuity of interpolated values across these boundaries.
  void check_integrity(double& max_error);
+
+protected:
+ 
+ /// \short Set up hanging node information.
+ /// Overloaded to implement the mortar method rather than constrained
+ /// approximation. This enforces continuity weakly via an integral matching
+ /// condition at non-conforming element boundaries.
+ void oc_hang_helper(const int &value_id, const int &my_edge,
+                     std::ofstream& output_hangfile);
+ 
+// /// \short Return the value of the intrinsic boundary coordinate
+// /// interpolated along the face (S/W/N/E) of the element before
+// /// p-refinement. Requires a vector of pointers to the element's
+// /// original nodes and the original p-order of the element before
+// /// refinement in addition to the arguments to the standard
+// /// interpolated_zeta_on_edge(...) function.
+// // BENFLAG: This is required during p-refinement because new nodes in
+// //          elements with curvilinear boundaries normally interpolate
+// //          their boundary coordinate from their element's father, but
+// //          with p-refinement they should instead interpolate from the
+// //          current element before it was refined.
+// void interpolated_zeta_on_face_before_p_refinement(
+//       const unsigned &boundary,
+//       const int &edge,
+//       const Vector<double> &s,
+//       const unsigned &old_p_order,
+//       const Vector<Node*> &old_node_pt,
+//       Vector<double> &zeta);
  
 };
 

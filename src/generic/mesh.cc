@@ -281,6 +281,69 @@ void Mesh::add_boundary_node(const unsigned &b, Node* const &node_pt)
 //========================================================
 void Mesh::node_update(const bool& update_all_solid_nodes)
 {
+ //BENFLAG: Node update does not work for missing master nodes added as
+ //         external halo nodes if they don't belong to an element on
+ //         this processor. I can't see any way around this without
+ //         communicating the updated position from the halo version.
+ //         (But the whole point of setting all the node update info up
+ //         is so that node updates can be local!)
+#ifdef PARANOID
+#ifdef OOMPH_HAS_MPI
+ //Paranoid check to throw an error if node update is called for elements
+ //with nonuniformly spaced nodes for which some masters are 'external'
+ for(unsigned long n=0;n<nnode();n++)
+  {
+   Node* nod_pt = Node_pt[n];
+   if (nod_pt->is_hanging())
+    {
+     //Loop over master nodes
+     unsigned nmaster=nod_pt->hanging_pt()->nmaster();
+     for (unsigned imaster=0;imaster<nmaster;imaster++)
+      {
+       //Get pointer to master node
+       Node* master_nod_pt = nod_pt->hanging_pt()->master_node_pt(imaster);
+
+       //Get vector of all external halo nodes
+       Vector<Node*> external_halo_node_pt;
+       get_external_halo_node_pt(external_halo_node_pt);
+
+       //Search the external halo storage for this node
+       Vector<Node*>::iterator it
+        = std::find(external_halo_node_pt.begin(),
+                    external_halo_node_pt.end(),
+                    master_nod_pt);
+
+       //Check if the node was found
+       if(it != external_halo_node_pt.end())
+        {
+         //Throw error becase node update won't work
+         //BENFLAG: It's ok to throw an error here because this function is
+         //         overloaded for Algebraic and MacroElementNodeUpdate
+         //         Meshes. This is only a problem for meshes of ordinary
+         //         nodes.
+         std::ostringstream err_stream;
+         
+         err_stream << "Calling node_update() for a mesh which contains"
+                    << std::endl
+                    << "master nodes which live in the external storage."
+                    << std::endl
+                    << "These nodes do not belong to elements on this"
+                    << std::endl
+                    << "processor and therefore cannot be updated locally."
+                    << std::endl;
+         
+         throw OomphLibError(err_stream.str(),
+                             "Mesh::node_update()",
+                             OOMPH_EXCEPTION_LOCATION);
+        }
+      }
+    }
+  }
+ //If we get to here then none of the masters of any of the nodes in the
+ //mesh live in the external storage, so we'll be fine if we carry on.
+#endif
+#endif
+ 
  /// Local and global (Eulerian) coordinate
  Vector<double> s;
  Vector<double> r;
@@ -395,6 +458,12 @@ void Mesh::node_update(const bool& update_all_solid_nodes)
   }
 
 
+ //BENFLAG: We may need to update the external halo nodes before we adjust
+ //         the positions of the hanging nodes in case any masters live in
+ //         the external storage. But we may need to update all (internal)
+ //         nodes before updating the external mesh in multidomain problems.
+ //         Need to think more about this.
+ 
 #ifdef OOMPH_HAS_MPI
 
  // Loop over all external halo nodes with other processors
@@ -3165,7 +3234,7 @@ void Mesh::resize_halo_nodes(OomphCommunicator* comm_pt)
              error_message 
               << " between procs "
               << dd << " and " << d << ": " 
-              << nnod_haloed << " " << nnod_halo << std::endl;
+              << nnod_ext_haloed << " " << nnod_ext_halo << std::endl;
              throw OomphLibError(error_message.str(),
                                  "Mesh::resize_halo_nodes()",
                                  OOMPH_EXCEPTION_LOCATION);
@@ -5616,6 +5685,15 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
                  oomph_info << x_share[i] << " "; 
                 }
                oomph_info << error << std::endl;
+               oomph_info << "shared node: " << shared_node_pt(dd,j) << std::endl;
+               if(shared_node_pt(dd,j)->is_hanging())
+                {
+                 oomph_info << "shared node: " << shared_node_pt(dd,j) << " is hanging with masters" << std::endl;
+                 for(unsigned m=0; m<shared_node_pt(dd,j)->hanging_pt()->nmaster(); m++)
+                  {
+                   oomph_info << "master: " << shared_node_pt(dd,j)->hanging_pt()->master_node_pt(m) << std::endl;
+                  }
+                }
               }
 
              // Keep tracking max
@@ -5852,14 +5930,26 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
            //We can only check nodal stuff for meshes of finite elements
            if(dynamic_cast<FiniteElement*>(this->element_pt(0)))
             {
+             //BENFLAG: This assumes that all elements are 'the same', which
+             //         may not be the case. e.g. for elements with variable
+             //         p-order, elements may have different numbers of nodes
              // Get strung-together elemental nodal positions 
              // from other processor
-             unsigned nnod_per_el=finite_element_pt(0)->nnode();
+             //unsigned nnod_per_el=finite_element_pt(0)->nnode();
              unsigned nod_dim=finite_element_pt(0)->node_pt(0)->ndim();
-             Vector<double> other_nodal_positions
-              (nod_dim*nnod_per_el*nelem_halo);
-             MPI_Recv(&other_nodal_positions[0],nod_dim*nnod_per_el*nelem_halo,
-                      MPI_DOUBLE,dd,0,comm_pt->mpi_comm(),&status);
+             //Vector<double> other_nodal_positions
+             // (nod_dim*nnod_per_el*nelem_halo);
+             //MPI_Recv(&other_nodal_positions[0],nod_dim*nnod_per_el*nelem_halo,
+             //         MPI_DOUBLE,dd,0,comm_pt->mpi_comm(),&status);
+             unsigned n_nodal_positions=0;
+             MPI_Recv(&n_nodal_positions,1,
+                      MPI_UNSIGNED,dd,0,comm_pt->mpi_comm(),&status);
+             Vector<double> other_nodal_positions(n_nodal_positions);
+             if (n_nodal_positions>0)
+              {
+               MPI_Recv(&other_nodal_positions[0],n_nodal_positions,
+                        MPI_DOUBLE,dd,0,comm_pt->mpi_comm(),&status);
+              }
 
 
              // Receive hanging info to be checked
@@ -5904,9 +5994,11 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
                
                if(finite_el_pt!=0)
                 {
-                 for (unsigned j=0;j<nnod_per_el;j++)
+                 unsigned nnod_this_el = finite_el_pt->nnode();
+                 for (unsigned j=0;j<nnod_this_el;j++)
                   {
                    Node* nod_pt=finite_el_pt->node_pt(j);
+                   //unsigned nod_dim = nod_pt->ndim();
                    
                    // Testing POSITIONS, not x location 
                    // (cf hanging nodes, nodes.h)
@@ -6114,29 +6206,53 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
        if(dynamic_cast<FiniteElement*>(this->element_pt(0)))
         {
          // Now string together the nodal positions of all halo nodes
-         unsigned nnod_per_el=finite_element_pt(0)->nnode();
+         //BENFLAG: Use this only to work out roughly how much space to
+         //         reserve for the vector. Then we can push data cheaply
+         //         while not assuming all elements have the same number
+         //         of nodes.
+         unsigned nnod_first_el=finite_element_pt(0)->nnode();
          unsigned nod_dim=finite_element_pt(0)->node_pt(0)->ndim();
-         Vector<double> nodal_positions(nod_dim*nnod_per_el*nelem_halo); 
+         Vector<double> nodal_positions;
+         nodal_positions.reserve(nod_dim*nnod_first_el*nelem_halo); 
 
          // Storage for hang information
          Vector<int> nodal_hangings;
 
-         unsigned count=0;
+         //unsigned count=0;
          for (unsigned e=0;e<nelem_halo;e++)
           {
            FiniteElement* finite_el_pt = 
             dynamic_cast<FiniteElement*>(halo_elem_pt[e]);
            if(finite_el_pt!=0)
             {
-             for (unsigned j=0;j<nnod_per_el;j++)
+             unsigned nnod_this_el = finite_el_pt->nnode();
+             for (unsigned j=0;j<nnod_this_el;j++)
               {
                Node* nod_pt=finite_el_pt->node_pt(j);
+               //unsigned nod_dim = nod_pt->ndim();
+
+               //BENFLAG: Throw error if node doesn't exist
+               if(nod_pt==0)
+                {
+                 //Print our nodes in element
+                 oomph_info << "element: " << finite_el_pt << std::endl;
+                 for(unsigned i=0; i<finite_el_pt->nnode(); i++)
+                  {
+                   oomph_info << finite_el_pt->node_pt(i) << std::endl;
+                  }
+
+                 //Throw error
+                 throw OomphLibError("Node doesn't exist!",
+                                     "Mesh::check_halo_schemes()",
+                                     OOMPH_EXCEPTION_LOCATION);
+                }
                
                // Testing POSITIONS, not x location (cf hanging nodes, nodes.h)
                for(unsigned i=0;i<nod_dim;i++)
                 {
-                 nodal_positions[count]=nod_pt->position(i);
-                 count++;
+                 //nodal_positions[count]=nod_pt->position(i);
+                 //count++;
+                 nodal_positions.push_back(nod_pt->position(i));
                 }
 
                unsigned nval=nod_pt->nvalue();
@@ -6157,13 +6273,23 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
             }
           }
 
+         // Total number of nodal positions to be checked
+         unsigned n_nodal_positions=nodal_positions.size();
+
          // Total number of nodal hang information to be checked
          unsigned n_nodal_hangings=nodal_hangings.size();
          
          // Send it across to the processor whose haloed elements are being 
          // checked         
-         MPI_Send(&nodal_positions[0],nod_dim*nnod_per_el*nelem_halo,
-                  MPI_DOUBLE,d,0,comm_pt->mpi_comm());
+         //MPI_Send(&nodal_positions[0],nod_dim*nnod_per_el*nelem_halo,
+         //         MPI_DOUBLE,d,0,comm_pt->mpi_comm());
+         MPI_Send(&n_nodal_positions,1,
+                  MPI_UNSIGNED,d,0,comm_pt->mpi_comm());
+         if (n_nodal_positions>0)
+          {
+           MPI_Send(&nodal_positions[0],n_nodal_positions,
+                    MPI_DOUBLE,d,0,comm_pt->mpi_comm());
+          }
          MPI_Send(&n_nodal_hangings,1,
                   MPI_UNSIGNED,d,1,comm_pt->mpi_comm());
          if (n_nodal_hangings>0)
@@ -6593,12 +6719,21 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
             {
              // Get strung-together elemental nodal positions 
              // from other processor
-             unsigned nnod_per_el=fe_pt->nnode();
+             //unsigned nnod_per_el=fe_pt->nnode();
              unsigned nod_dim=fe_pt->node_pt(0)->ndim();
-             Vector<double> other_nodal_positions
-              (nod_dim*nnod_per_el*nelem_halo);
-             MPI_Recv(&other_nodal_positions[0],nod_dim*nnod_per_el*nelem_halo,
-                      MPI_DOUBLE,dd,0,comm_pt->mpi_comm(),&status);
+             //Vector<double> other_nodal_positions
+             // (nod_dim*nnod_per_el*nelem_halo);
+             //MPI_Recv(&other_nodal_positions[0],nod_dim*nnod_per_el*nelem_halo,
+             //         MPI_DOUBLE,dd,0,comm_pt->mpi_comm(),&status);
+             unsigned n_nodal_positions=0;
+             MPI_Recv(&n_nodal_positions,1,
+                      MPI_UNSIGNED,dd,0,comm_pt->mpi_comm(),&status);
+             Vector<double> other_nodal_positions(n_nodal_positions);
+             if (n_nodal_positions>0)
+              {
+               MPI_Recv(&other_nodal_positions[0],n_nodal_positions,
+                        MPI_DOUBLE,dd,0,comm_pt->mpi_comm(),&status);
+              }
 
 
              // Receive hanging info to be checked
@@ -6643,9 +6778,11 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
                
                if(finite_el_pt!=0)
                 {
-                 for (unsigned j=0;j<nnod_per_el;j++)
+                 unsigned nnod_this_el = finite_el_pt->nnode();
+                 for (unsigned j=0;j<nnod_this_el;j++)
                   {
                    Node* nod_pt=finite_el_pt->node_pt(j);
+                   //unsigned nod_dim = mod_pt->ndim();
                    
                    // Testing POSITIONS, not x location 
                    // (cf hanging nodes, nodes.h)
@@ -6854,9 +6991,10 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
        if(fe_pt!=0)
         {
          // Now string together the nodal positions of all halo nodes
-         unsigned nnod_per_el=fe_pt->nnode();
+         unsigned nnod_first_el=fe_pt->nnode();
          unsigned nod_dim=fe_pt->node_pt(0)->ndim();
-         Vector<double> nodal_positions(nod_dim*nnod_per_el*nelem_halo); 
+         Vector<double> nodal_positions;
+         nodal_positions.reserve(nod_dim*nnod_first_el*nelem_halo); 
 
          // Storage for hang information
          Vector<int> nodal_hangings;
@@ -6868,14 +7006,15 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
             dynamic_cast<FiniteElement*>(ext_halo_elem_pt[e]);
            if(finite_el_pt!=0)
             {
-             for (unsigned j=0;j<nnod_per_el;j++)
+             unsigned nnod_this_el = finite_el_pt->nnode();
+             for (unsigned j=0;j<nnod_this_el;j++)
               {
                Node* nod_pt=finite_el_pt->node_pt(j);
                
                // Testing POSITIONS, not x location (cf hanging nodes, nodes.h)
                for(unsigned i=0;i<nod_dim;i++)
                 {
-                 nodal_positions[count]=nod_pt->position(i);
+                 nodal_positions.push_back(nod_pt->position(i));
                  count++;
                 }
 
@@ -6897,13 +7036,23 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
             }
           }
 
+         // Total number of nodal positions to be checked
+         unsigned n_nodal_positions=nodal_positions.size();
+
          // Total number of nodal hang information to be checked
          unsigned n_nodal_hangings=nodal_hangings.size();
          
          // Send it across to the processor whose external haloed 
          // elements are being checked         
-         MPI_Send(&nodal_positions[0],nod_dim*nnod_per_el*nelem_halo,
-                  MPI_DOUBLE,d,0,comm_pt->mpi_comm());
+         //MPI_Send(&nodal_positions[0],nod_dim*nnod_per_el*nelem_halo,
+         //         MPI_DOUBLE,d,0,comm_pt->mpi_comm());
+         MPI_Send(&n_nodal_positions,1,
+                  MPI_UNSIGNED,d,0,comm_pt->mpi_comm());
+         if (n_nodal_positions>0)
+          {
+           MPI_Send(&nodal_positions[0], n_nodal_positions,
+                    MPI_DOUBLE,d,0,comm_pt->mpi_comm());
+          }
          MPI_Send(&n_nodal_hangings,1,
                   MPI_UNSIGNED,d,1,comm_pt->mpi_comm());
          if (n_nodal_hangings>0)
@@ -7150,6 +7299,149 @@ void Mesh::delete_all_external_storage()
 {
 
 #ifdef OOMPH_HAS_MPI
+
+ //Only do for distributed meshes
+ if(Mesh_is_distributed)
+  {
+
+   //BENFLAG: Some of the external halo/haloed nodes are masters of nodes
+   //         in this mesh. We must set to be non-hanging any nodes whose
+   //         masters we are about to delete, to remove any dependencies.
+   for(unsigned i=0; i<nnode(); i++)
+    {
+     //Get pointer to the node
+     Node* nod_pt = node_pt(i);
+     
+     //Check if the node exists
+     if(nod_pt != 0)
+      {
+       //Check if the node is hanging
+       if(nod_pt->is_hanging())
+        {
+         //Get pointer to the hang info
+         HangInfo* hang_pt = nod_pt->hanging_pt();
+       
+         //Check if any master is in the external halo storage
+         //External haloed nodes don't get deleted, so we don't need to
+         //(and shouldn't) un-hang their slaves
+         bool found_a_master_in_external_halo_storage = false;
+         for(unsigned m=0; m<hang_pt->nmaster(); m++)
+          {
+           //Iterator for vector of nodes
+           Vector<Node*>::iterator it;
+  
+           //Loop over external halo storage with all processors
+           bool found_this_master_in_external_halo_storage = false;
+           for(int d=0; d<MPI_Helpers::communicator_pt()->nproc(); d++)
+            {
+             //Find master in map of external halo nodes
+             it = std::find(External_halo_node_pt[d].begin(),
+                            External_halo_node_pt[d].end(),
+                            hang_pt->master_node_pt(m));
+  
+             //Check if it was found
+             if(it != External_halo_node_pt[d].end())
+              {
+               //Mark as found
+               found_this_master_in_external_halo_storage = true;
+               //Don't need to search remaining processors
+               break;
+              }
+            }
+  
+           //Check if any have been found
+           if(found_this_master_in_external_halo_storage)
+            {
+             //Mark as found
+             found_a_master_in_external_halo_storage = true;
+             //Don't need to search remaining masters
+             break;
+            }
+          }
+  
+         //If it was found...
+         if(found_a_master_in_external_halo_storage)
+          {
+           //Master is in external halo storage and is about to be deleted,
+           //so we'd better make this node non-hanging. In case the node
+           //does not become hanging again, we must get all the required
+           //information from its masters to make it a 'proper' node again.
+      
+           // Reconstruct the nodal values/position from the node's 
+           // hanging node representation
+           unsigned nt=nod_pt->ntstorage();
+           unsigned n_value=nod_pt->nvalue();
+           Vector<double> values(n_value);
+           unsigned n_dim=nod_pt->ndim();
+           Vector<double> position(n_dim);
+           // Loop over all history values
+           for(unsigned t=0;t<nt;t++)
+            {
+             nod_pt->value(t,values);
+             for(unsigned i=0;i<n_value;i++) {nod_pt->set_value(t,i,values[i]);}
+             nod_pt->position(t,position);
+             for(unsigned i=0;i<n_dim;i++) {nod_pt->x(t,i)=position[i];}
+            }
+           
+           // If it's an algebraic node: Update its previous nodal positions too
+           AlgebraicNode* alg_node_pt=dynamic_cast<AlgebraicNode*>(nod_pt);
+           if (alg_node_pt!=0)
+            {
+             bool update_all_time_levels=true;
+             alg_node_pt->node_update(update_all_time_levels);
+            }
+            
+            
+           //If it's a Solid node, update Lagrangian coordinates
+           // from its hanging node representation
+           SolidNode* solid_node_pt = dynamic_cast<SolidNode*>(nod_pt);
+           if(solid_node_pt!=0)
+            {
+             unsigned n_lagrangian = solid_node_pt->nlagrangian();
+             for(unsigned i=0;i<n_lagrangian;i++)
+              {
+               solid_node_pt->xi(i) = solid_node_pt->lagrangian_position(i);
+              }
+            }
+  
+           //BENFLAG: No need to worry about geometrically hanging nodes
+           //         on boundaries (as in (p_)adapt_mesh())
+           ////Now store geometrically hanging nodes on boundaries that
+           ////may need updating after refinement.
+           ////There will only be a problem if we have 3 spatial dimensions
+           //if((mesh_dim > 2) && (nod_pt->is_hanging()))
+           // {
+           //  //If the node is on a boundary then add a pointer to the node
+           //  //to our lookup scheme
+           //  if(nod_pt->is_on_boundary())
+           //   {
+           //    //Storage for the boundaries on which the Node is located
+           //    std::set<unsigned>* boundaries_pt;
+           //    nod_pt->get_boundaries_pt(boundaries_pt);
+           //    if(boundaries_pt!=0)
+           //     {
+           //      //Loop over the boundaries and add a pointer to the node
+           //      //to the appropriate storage scheme
+           //      for(std::set<unsigned>::iterator it=boundaries_pt->begin();
+           //          it!=boundaries_pt->end();++it)
+           //       {
+           //        hanging_nodes_on_boundary_pt[*it].insert(nod_pt);
+           //       }
+           //     }
+           //   }
+           // }
+           
+           //Finally set nonhanging
+           nod_pt->set_nonhanging();
+          }
+        }
+      }
+     else
+      {
+       //Node doesn't exist!
+      }
+    }
+  }
 
  // Careful: some of the external halo nodes are also in boundary
  //          node storage and should be removed from this first

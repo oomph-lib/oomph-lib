@@ -2250,15 +2250,11 @@ namespace oomph
  unsigned unrefine_uniformly(const unsigned& i_mesh);
 
  /// \short  p-unrefine (all) p-refineable (sub)mesh(es) uniformly and 
- /// rebuild problem. Return 0 for success,
- /// 1 for failure (if unrefinement has reached the coarsest permitted
- /// level)
- unsigned p_unrefine_uniformly();
+ /// rebuild problem.
+ void p_unrefine_uniformly(DocInfo& doc_info);
 
  /// Do uniform p-unrefinement for submesh i_mesh without documentation.
- /// Return 0 for success, 1 for failure (if unrefinement has reached 
- /// the coarsest permitted level)
- unsigned p_unrefine_uniformly(const unsigned& i_mesh);
+ void p_unrefine_uniformly(const unsigned& i_mesh, DocInfo& doc_info);
 
  /// \short Adapt problem:
  /// Perform mesh adaptation for (all) refineable (sub)mesh(es),

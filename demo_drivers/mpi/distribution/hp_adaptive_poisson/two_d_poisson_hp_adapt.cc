@@ -87,9 +87,9 @@ namespace TanhSolnForPoisson
 /// implemented in the RefineableQuadMesh base class.
 //=================================================================
 template<class ELEMENT>
-class SimplePRefineableRectangularQuadMesh : 
+class SimpleRefineableRectangularQuadMesh : 
  public virtual SimpleRectangularQuadMesh<ELEMENT>,  
- public PRefineableQuadMesh<ELEMENT>
+ public RefineableQuadMesh<ELEMENT>
 { 
 
 public: 
@@ -97,7 +97,7 @@ public:
  /// \short  Pass number of elements in the horizontal 
  /// and vertical directions, and the corresponding dimensions.
  /// Timestepper defaults to Static.
- SimplePRefineableRectangularQuadMesh(const unsigned &Nx,
+ SimpleRefineableRectangularQuadMesh(const unsigned &Nx,
                                      const unsigned &Ny, 
                                      const double &Lx, const double &Ly,
                                      TimeStepper* time_stepper_pt=
@@ -109,19 +109,11 @@ public:
    // adaptivity information: Associate finite elements with their 
    // QuadTrees and plant them in a QuadTreeForest:
    this->setup_quadtree_forest();
-   
-   // Get current p-refinement level (in first element) to use as the minimum
-   unsigned min_p_order = dynamic_cast<PRefineableElement*>(this->element_pt(0))->p_order();
-   
-   // Max/min p-refinement levels
-   this->Max_p_refinement_level=7;
-   this->Min_p_refinement_level=min_p_order;
-
   } // end of constructor
  
 
  /// Destructor: Empty
- virtual ~SimplePRefineableRectangularQuadMesh() {}
+ virtual ~SimpleRefineableRectangularQuadMesh() {}
 
 }; // end of mesh
 
@@ -165,9 +157,9 @@ public:
  /// \short Overloaded version of the Problem's access function to 
  /// the mesh. Recasts the pointer to the base Mesh object to 
  /// the actual mesh type.
- SimplePRefineableRectangularQuadMesh<ELEMENT>* mesh_pt() 
+ SimpleRefineableRectangularQuadMesh<ELEMENT>* mesh_pt() 
   {
-   return dynamic_cast<SimplePRefineableRectangularQuadMesh<ELEMENT>*>(
+   return dynamic_cast<SimpleRefineableRectangularQuadMesh<ELEMENT>*>(
     Problem::mesh_pt());
   }
 
@@ -207,7 +199,7 @@ RefineableTwoDPoissonProblem<ELEMENT>::
 
  // Build and assign mesh
  Problem::mesh_pt() = 
-  new SimplePRefineableRectangularQuadMesh<ELEMENT>(n_x,n_y,l_x,l_y);
+  new SimpleRefineableRectangularQuadMesh<ELEMENT>(n_x,n_y,l_x,l_y);
 
  // Create/set error estimator
  mesh_pt()->spatial_error_estimator_pt()=new Z2ErrorEstimator;

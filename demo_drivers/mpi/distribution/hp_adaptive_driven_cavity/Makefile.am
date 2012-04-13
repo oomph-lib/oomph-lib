@@ -22,9 +22,7 @@ hp_adaptive_driven_cavity_LDADD = \
 #----------------------------------------------------------------------
 
 
-#EXTRA_DIST += adaptive_cavity_1_partition.dat \
-#              adaptive_cavity_2_partition.dat \
-#              load_balance.mcr prune_and_balance.mcr
+EXTRA_DIST += hp_adaptive_cavity_partition.dat
 
 
 # Include path for library headers: All library headers live in 
