@@ -80,27 +80,30 @@
 #              other libraries.
 #=====================================================================
 #
-# Compilation with lam mpi compilers (wrappers to gcc) with 
-# debugging (-g) and full warnings. 
+# gcc-based compilation with full optimisation.
 # Library headers in the build directory are replaced by symbolic
 # links to the src directory -- this ensures that you don't
 # accidentally edit a file in the include directory only to have
 # it immediately wiped out when you re-install the library after
 # finishing your changes. We specify the location of the blas,
 # lapack, hypre and trilinos libraries, the latter two assumed
-# to have been compiled with mpi support. Linking is done
-# with the lam mpi fortran compiler.
-#
---enable-suppress-doc
+# to have been compiled with mpi support. 
 --enable-MPI
 --enable-symbolic-links-for-headers
---with-mpi-include-directory=/usr/include/mpich2
---with-mpi-self-tests="mpirun -np 2"
-CXXFLAGS="-O6 -Wall"
-CFLAGS="-O6"
-FFLAGS="-O6"
-CXX=mpic++
-CC=mpicc
-F77=mpif77
-LD=mpif77
+--enable-suppress-triangle
+--enable-suppress-tetgen
+--with-mpi-self-tests="mpiexec -n 2"
+CXXFLAGS="-qarch=pwr7 -qtune=pwr7 -O3 -qhot -q64 -DIBMR2Fortran -Dappendus"
+CFLAGS="-qarch=pwr7 -qtune=pwr7 -O3 -qhot -q64"
+FFLAGS="-qarch=pwr7 -qtune=pwr7 -qextname -O3 -qhot -q64"
+CXX=mpCC
+CC=mpcc
+F77=mpfort
+LD=mpCC
 
+
+
+#--with-blacs=/home/mheil/local/lib/blacs_with_copy
+#--with-scalapack=/home/mheil/local/lib/scalapack/libscalapack.a
+#--with-pord=/home/mheil/local/lib/pord/libpord.a 
+#--with-mumps=/home/mheil/local/mumps

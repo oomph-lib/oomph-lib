@@ -227,6 +227,90 @@ class NavierStokesSurfaceDragTorqueElement :
  {return FaceElement::zeta_nodal(n,k,i);}     
 
 
+
+ /// \short Output function
+ void output(std::ostream &outfile, const unsigned &n_plot)
+  {
+   // Get pointer to assocated bulk element
+   ELEMENT* bulk_el_pt=dynamic_cast<ELEMENT*>(bulk_element_pt());
+   
+   // Elemental dimension
+   unsigned dim_el=dim();
+   
+   //Local coordinates
+   Vector<double> s(dim_el);
+
+   Vector<double> s_bulk(dim_el+1);
+   
+   //Calculate the Eulerian coordinates and Lagrange multiplier
+   Vector<double> x(dim_el+1,0.0);
+
+   // Outer unit normal of the fluid
+   Vector<double> normal(dim_el+1);
+
+   // Velocity from bulk element
+   Vector<double> veloc(dim_el+1);
+
+   // Tractions (from bulk element)
+   Vector<double> traction(dim_el+1);
+
+   // Tecplot header info
+   outfile << this->tecplot_zone_string(n_plot);
+   
+   // Loop over plot points
+   unsigned num_plot_points=this->nplot_points(n_plot);
+   for (unsigned iplot=0;iplot<num_plot_points;iplot++)
+    {
+     // Get local coordinates of plot point
+     this->get_s_plot(iplot,n_plot,s);
+     
+     this->get_local_coordinate_in_bulk(s,s_bulk);
+     
+     //Get x position from bulk
+     bulk_el_pt->interpolated_x(s_bulk,x);
+     //Get outer unit normal
+     outer_unit_normal(s,normal);
+     bulk_el_pt->interpolated_u_nst(s_bulk,veloc);
+     // Get traction from bulk element this is directed into the fluid
+     //so we need to reverse the sign
+     bulk_el_pt->get_traction(s_bulk,normal,traction);
+
+     //Now Calculate the torque which is r x F
+     //Scale X relative to the centre of rotation
+     Vector<double> X(dim_el+1);
+     for(unsigned i=0;i<dim_el+1;i++) 
+      {X[i] = x[i] - Centre_of_rotation[i] 
+        - this->external_data_pt(Translation_index)->value(i);}
+
+     for(unsigned i=0;i<dim_el+1;i++)
+      {
+       outfile << x[i] << "  ";
+      }
+
+     for(unsigned i=0;i<dim_el+1;i++)
+      {
+       outfile << normal[i] << " ";
+      }
+
+     for(unsigned i=0;i<dim_el+1;i++)
+      {
+       outfile << veloc[i] << " ";
+      }
+     
+     for(unsigned i=0;i<dim_el+1;i++)
+      {
+       outfile << -1.0*traction[i] << " ";
+      }
+     outfile << -(X[0]*traction[1] - X[1]*traction[0]);
+
+     outfile << std::endl;
+
+    }
+
+   this->write_tecplot_zone_footer(outfile,n_plot);
+  }
+
+
 private:
 
  ///The highest dimension of the problem 

@@ -1064,7 +1064,7 @@ public:
   }
  
  // p-refine the element
- void p_refine(const int &inc, Mesh* &mesh_pt);
+ void p_refine(const int &inc, Mesh* const &mesh_pt);
  
  // Overload the shape and basis functions
  void shape(const Vector<double> &s, Shape &psi) const;
@@ -1156,7 +1156,7 @@ template<>
 void ModalPRefineableQElement<1>::pre_build() {}
 
 template<>
-void ModalPRefineableQElement<1>::p_refine(const int &inc, Mesh* &mesh_pt)
+void ModalPRefineableQElement<1>::p_refine(const int &inc, Mesh* const &mesh_pt)
 {
  // Create storage for modes if none exists
  if (this->ninternal_data()==0)
@@ -1946,79 +1946,6 @@ int main()
  // Create the problem with 1D three-node refineable elements from the
  // PRefineableQPoissonElement<1> family. Pass pointer to source function. 
  PRefineableOneDPoissonProblem<PRefineableQPoissonElement<1> > 
-  modal_problem(&ArcTanSolnForPoisson::get_source);
- 
- // Check if we're ready to go:
- // ---------------------------
- cout << "\n\n\nProblem self-test ";
- if (modal_problem.self_test()==0) 
-  {
-   cout << "passed: Problem can be solved." << std::endl;
-  }
- else 
-  {
-   throw OomphLibError("Self test failed",
-                       "main()",
-                       OOMPH_EXCEPTION_LOCATION);
-  }
- 
- // Refine problem uniformly 2 times
- for(unsigned i=0;i<2;i++)
-  {
-   cout << "p_refining:" << endl;
-   modal_problem.p_refine_uniformly();
-  }
- for(unsigned i=0;i<2;i++)
-  {
-   cout << "h_refining:" << endl;
-   modal_problem.refine_uniformly();
-  }
- 
- doc_info.number()=2;
- modal_problem.newton_solve();
- modal_problem.doc_solution(doc_info);
-
- modal_problem.adapt();
- doc_info.number()=3;
- modal_problem.newton_solve();
- modal_problem.doc_solution(doc_info);
- 
- modal_problem.p_adapt();
- doc_info.number()=4;
- modal_problem.newton_solve();
- modal_problem.doc_solution(doc_info);
- 
- modal_problem.adapt();
- doc_info.number()=5;
- modal_problem.newton_solve();
- modal_problem.doc_solution(doc_info);
- 
- modal_problem.p_adapt();
- doc_info.number()=6;
- modal_problem.newton_solve();
- modal_problem.doc_solution(doc_info);
- 
- modal_problem.adapt();
- doc_info.number()=7;
- modal_problem.newton_solve();
- modal_problem.doc_solution(doc_info);
- 
- modal_problem.p_adapt();
- doc_info.number()=8;
- modal_problem.newton_solve();
- modal_problem.doc_solution(doc_info);
- 
- doc_info.number()=0;
- modal_problem.doc_solution(doc_info);
- 
- cout << "\n====================================\nModal elements:\n" << endl;
- 
- //Set up the problem
- //------------------
- 
- // Create the problem with 1D three-node refineable elements from the
- // RefineableLinePoissonElement family. Pass pointer to source function. 
- PRefineableOneDPoissonProblem<ModalPRefineableQPoissonElement<1> > 
   nodal_problem(&ArcTanSolnForPoisson::get_source);
  
  // Check if we're ready to go:
@@ -2050,7 +1977,7 @@ int main()
  doc_info.number()=2;
  nodal_problem.newton_solve();
  nodal_problem.doc_solution(doc_info);
- 
+
  nodal_problem.adapt();
  doc_info.number()=3;
  nodal_problem.newton_solve();
@@ -2070,7 +1997,7 @@ int main()
  doc_info.number()=6;
  nodal_problem.newton_solve();
  nodal_problem.doc_solution(doc_info);
-
+ 
  nodal_problem.adapt();
  doc_info.number()=7;
  nodal_problem.newton_solve();
@@ -2081,7 +2008,80 @@ int main()
  nodal_problem.newton_solve();
  nodal_problem.doc_solution(doc_info);
  
- doc_info.number()=1;
+ doc_info.number()=0;
  nodal_problem.doc_solution(doc_info);
+ 
+ cout << "\n====================================\nModal elements:\n" << endl;
+ 
+ //Set up the problem
+ //------------------
+ 
+ // Create the problem with 1D three-node refineable elements from the
+ // RefineableLinePoissonElement family. Pass pointer to source function. 
+ PRefineableOneDPoissonProblem<ModalPRefineableQPoissonElement<1> > 
+  modal_problem(&ArcTanSolnForPoisson::get_source);
+ 
+ // Check if we're ready to go:
+ // ---------------------------
+ cout << "\n\n\nProblem self-test ";
+ if (modal_problem.self_test()==0) 
+  {
+   cout << "passed: Problem can be solved." << std::endl;
+  }
+ else 
+  {
+   throw OomphLibError("Self test failed",
+                       "main()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+ 
+ // Refine problem uniformly 2 times
+ for(unsigned i=0;i<2;i++)
+  {
+   cout << "p_refining:" << endl;
+   modal_problem.p_refine_uniformly();
+  }
+ for(unsigned i=0;i<2;i++)
+  {
+   cout << "h_refining:" << endl;
+   modal_problem.refine_uniformly();
+  }
+ 
+ doc_info.number()=2;
+ modal_problem.newton_solve();
+ modal_problem.doc_solution(doc_info);
+ 
+ modal_problem.adapt();
+ doc_info.number()=3;
+ modal_problem.newton_solve();
+ modal_problem.doc_solution(doc_info);
+ 
+ modal_problem.p_adapt();
+ doc_info.number()=4;
+ modal_problem.newton_solve();
+ modal_problem.doc_solution(doc_info);
+ 
+ modal_problem.adapt();
+ doc_info.number()=5;
+ modal_problem.newton_solve();
+ modal_problem.doc_solution(doc_info);
+ 
+ modal_problem.p_adapt();
+ doc_info.number()=6;
+ modal_problem.newton_solve();
+ modal_problem.doc_solution(doc_info);
+
+ modal_problem.adapt();
+ doc_info.number()=7;
+ modal_problem.newton_solve();
+ modal_problem.doc_solution(doc_info);
+ 
+ modal_problem.p_adapt();
+ doc_info.number()=8;
+ modal_problem.newton_solve();
+ modal_problem.doc_solution(doc_info);
+ 
+ doc_info.number()=1;
+ modal_problem.doc_solution(doc_info);
  
 } // End of main

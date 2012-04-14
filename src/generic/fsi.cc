@@ -260,7 +260,8 @@ double FSIWallElement::Default_Q_Value=1.0;
   for(unsigned i=0;i<n_interaction;i++)
    {
     //Loop over each element in the set 
-    for(std::set<FiniteElement*>::iterator it=external_elements_pt[i].begin();
+    for(std::set<FiniteElement*>::const_iterator it=
+         external_elements_pt[i].begin();
         it != external_elements_pt[i].end(); it++)
      {
       //Cast the element  the specific fluid element
@@ -304,7 +305,8 @@ double FSIWallElement::Default_Q_Value=1.0;
     for(unsigned i=0;i<n_interaction;i++)
      {
       //Loop over each element in the set 
-      for(std::set<FiniteElement*>::iterator it=external_elements_pt[i].begin();
+      for(std::set<FiniteElement*>::const_iterator it=
+           external_elements_pt[i].begin();
           it != external_elements_pt[i].end(); it++)
        {
         (*it)->identify_geometric_data(external_geometric_data_pt);

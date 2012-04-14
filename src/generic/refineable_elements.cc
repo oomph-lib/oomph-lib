@@ -33,6 +33,11 @@
 
 namespace oomph
 {
+ //=====================================================================
+ /// Destructor (needed here because of IBM xlC compiler under AIX)
+ /// Delete the storage allocated for the local equations.
+ //====================================================================
+ RefineableElement::~RefineableElement() {delete[] Local_hang_eqn;}
 
 //========================================================================
 /// Max. allowed discrepancy in element integrity check

@@ -21,10 +21,12 @@ echo " "
 COUNTER=0
 for TRILINOS_FILE in trilinos*.tar.gz
 do
+  if [ $TRILINOS_FILE != "trilinos*.tar.gz" ]; then
   #Extract the stem name
   TRILINOS_STEM=${TRILINOS_FILE%.tar.gz}
   printf "\n File ${TRILINOS_STEM}.tar.gz exists "
   let COUNTER=COUNTER+1
+fi
 done
 
 if [ $COUNTER -eq 0 ]; then

@@ -197,9 +197,9 @@ class RefineableElement : public virtual FiniteElement
   Sons_to_be_unrefined(false), Number(-1),
   Local_hang_eqn(0) {}
 
- /// Destructor, delete the allocated storage
- /// for the hanging equations
- virtual ~RefineableElement() {delete[] Local_hang_eqn;}
+ /// Destructor, delete the allocated storage for the hanging equations
+ // (The body is now in the cc file to keep the xlC compiler happy under AIX)
+ virtual ~RefineableElement();
 
  /// Broken copy constructor
  RefineableElement(const RefineableElement&) 

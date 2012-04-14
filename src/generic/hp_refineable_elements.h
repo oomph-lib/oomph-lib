@@ -70,7 +70,7 @@ public:
  /// \short p-refine the element (refine if inc>0, unrefine if inc<0).
  void p_refine(const int &inc, Mesh* const &mesh_pt);
  
- // Overload the shape functions
+ /// Overload the shape functions
  void shape(const Vector<double> &s, Shape &psi) const;
  
  void dshape_local(const Vector<double> &s, Shape &psi, DShape &dpsi) const;

@@ -338,6 +338,8 @@ void LevenbergMarquardtFitter::fit_it(
        
      if (!quiet)
       {
+       //Store the current output flags
+       std::ios_base::fmtflags ff = std::cout.flags();
        // Output with fixed width
        std::cout.setf(std::ios_base::scientific,std::ios_base::floatfield);
        std::cout.width(15);
@@ -348,7 +350,7 @@ void LevenbergMarquardtFitter::fit_it(
         }       
        std::cout << std::endl;
        // Reset
-       std::cout.setf(std::_Ios_Fmtflags(0), std::ios_base::floatfield);
+       std::cout.setf(ff, std::ios_base::floatfield);
        std::cout.width(0);
       }
     }

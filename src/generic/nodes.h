@@ -1071,7 +1071,7 @@ public:
   for (int i=-1;i<nval;i++)
    {
     hang_code+=unsigned(Node::is_hanging(i))*
-     unsigned(pow(unsigned(2),unsigned(i+1)));
+     unsigned(std::pow(2.0,double(i+1)));
    }
   return hang_code;
  }

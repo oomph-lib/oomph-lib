@@ -2017,7 +2017,7 @@ pshape_nst(const Vector<double> &s, Shape &psi) const
  else
   {
    // Get number of pressure modes
-   unsigned npres_1d = (int) sqrt(npres);
+   unsigned npres_1d = (int) std::sqrt((double)npres);
    
    //Local storage
    //Call the one-dimensional modal shape functions
