@@ -101,7 +101,7 @@ missing_masters.h \
 preconditioner.h \
 general_purpose_preconditioners.h block_preconditioner.h \
 general_purpose_block_preconditioners.h SuperLU_preconditioner.h \
-matrix_vector_product.h projection.h line_visualiser.h stacktrace.h
+matrix_vector_product.h projection.h line_visualiser.h
 
 if OOMPH_HAS_MUMPS
 headers+=mumps_solver.h
@@ -110,6 +110,10 @@ endif
 if WANT_MPI
 headers += preconditioner_array.h
 endif
+
+if HAVE_STACKTRACE
+headers += stacktrace.h
+endif 
 
 # Template-only files: Need to be included in include directory
 # but should not be listed in combined header file

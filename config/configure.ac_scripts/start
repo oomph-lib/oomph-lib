@@ -60,6 +60,8 @@ if test -z $ac_cv_prog_f77_v; then
  exit
 fi 
 
+# Defined the no-optimisation environment flag for use in oomph_flapack
+AC_ARG_VAR([FFLAGS_NO_OPT],[Fortran compiler flags without optimisation])
 
 # Set additional flags for C++ compilation: 
 #------------------------------------------
@@ -160,6 +162,24 @@ AC_CHECK_HEADERS([limits.h stdlib.h string.h sys/time.h],
                    echo "Trouble -- missing header[s]! ";
                    echo "==================================================";
                    exit])
+
+
+#Check for the execinfo header
+AC_CHECK_HEADER(execinfo.h,[have_execinfo=true;
+                            echo "Can use stacktrace in debugging";],
+                           [have_execinfo=false;
+                            echo "Can't use stacktrace in debugging";])
+
+# Pass result of test to automake (makefiles can now check for 
+# status of HAVE_STACKTRACE in any Makefile.am:
+AM_CONDITIONAL(HAVE_STACKTRACE, test x$have_execinfo = xtrue)
+
+
+# Add flag (don't use the obvious HAVE_STACKTRACE as this is used by
+# other packages too and leads to clashes!)
+if test x$have_execinfo = xtrue; then \
+    accumulated_cpp_flags=`echo $accumulated_cpp_flags " -DOOMPH_HAS_STACKTRACE"`; \
+fi;
 
 
 # Does C compiler support const?

@@ -257,9 +257,9 @@ liboomph_flapack_non_opt_la_FFLAGS="-O0"
 # See http://sources.redhat.com/ml/automake/2002-08/msg00082.html
 # This is the automake-produced rule with $(FFLAGS) removed
 slamch.lo: slamch.f
-	$(LIBTOOL) --tag=F77 --mode=compile $(F77) $(liboomph_flapack_non_opt_la_FFLAGS) -c -o slamch.lo `test -f 'slamch.f' || echo '$(srcdir)/'`slamch.f
+	$(LIBTOOL) --tag=F77 --mode=compile $(F77) $(FFLAGS_NO_OPT) -c -o slamch.lo `test -f 'slamch.f' || echo '$(srcdir)/'`slamch.f
 dlamch.lo: dlamch.f
-	$(LIBTOOL) --tag=F77 --mode=compile $(F77) $(liboomph_flapack_non_opt_la_FFLAGS) -c -o dlamch.lo `test -f 'dlamch.f' || echo '$(srcdir)/'`dlamch.f
+	$(LIBTOOL) --tag=F77 --mode=compile $(F77) $(FFLAGS_NO_OPT) -c -o dlamch.lo `test -f 'dlamch.f' || echo '$(srcdir)/'`dlamch.f
 
 
 # The library's include headers:

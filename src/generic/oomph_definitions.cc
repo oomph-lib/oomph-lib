@@ -28,8 +28,9 @@
 //Non-inline and static member functions for the Oomph-lib
 //exception handlers
 
-
+#ifdef OOMPH_HAS_STACKTRACE
 #include "stacktrace.h"
+#endif
 #include "oomph_definitions.h"
 
 namespace oomph
@@ -115,11 +116,13 @@ OomphLibException::OomphLibException(const std::string &error_description,
  //Report the error
  exception_stream << std::endl << error_description << std::endl;
 
+#ifdef OOMPH_HAS_STACKTRACE
  // Print the stacktrace
  if (list_trace_back)
   {
    print_stacktrace(exception_stream);
   }
+#endif
 
  //Finish off with another set of double lines
  for(unsigned i=0;i<output_width;i++) {exception_stream << "=";}
