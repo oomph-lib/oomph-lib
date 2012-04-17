@@ -1972,6 +1972,9 @@ namespace oomph
            }
          }
 
+        //Delete the temporary geometric object
+        delete tmp_mesh_geom_obj_pt;
+
        } // endif for projection/diffused bin
       
       oomph_info << "CPU for transfer of target areas (iter "
@@ -2682,6 +2685,7 @@ namespace oomph
               face_mesh_pt[p]->flush_node_storage();
               delete face_mesh_pt[p];
              }
+            delete mesh_geom_obj_pt;
             return true;
            }
 

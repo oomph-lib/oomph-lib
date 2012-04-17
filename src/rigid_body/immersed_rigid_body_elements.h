@@ -359,6 +359,8 @@ namespace oomph
  /// \short Function to clear the drag mesh and all associated external data
  void flush_drag_mesh()
  {
+  //Delete the hijacked data created as the load
+  this->delete_external_hijacked_data();
   //Flush the external data
   this->flush_external_data();
   //Set the Drag_mesh pointer to null
@@ -469,7 +471,25 @@ namespace oomph
                                        DenseMatrix<double> &jacobian,
                                        const bool& flag);
  
+ /// Storage for the external data that is formed from hijacked data
+ /// that must be deleted by this element
+ std::list<unsigned> List_of_external_hijacked_data;
  
+ /// Delete the storage for the external data formed from hijacked data
+ void delete_external_hijacked_data()
+ {
+  for(std::list<unsigned>::iterator it = 
+       List_of_external_hijacked_data.begin();
+      it!=List_of_external_hijacked_data.end();++it)
+   {
+    //Delete the associated external data
+    delete this->external_data_pt(*it);
+    this->external_data_pt(*it) =0;
+   }
+  //Now clear the list
+  List_of_external_hijacked_data.clear();
+ }
+
    protected: 
  
  /// X-coordinate of initial centre of gravity

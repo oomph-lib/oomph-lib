@@ -202,6 +202,8 @@ Vector<double> ImmersedRigidBodyElement::Default_Gravity_vector(2,0.0);
 //=======================================================================
  void ImmersedRigidBodyElement::set_drag_mesh(Mesh* const &drag_mesh_pt)
  {
+  //Delete the external hijacked data
+  this->delete_external_hijacked_data();
   //Flush any existing external data
   this->flush_external_data();
   //Set the pointer
@@ -249,7 +251,8 @@ Vector<double> ImmersedRigidBodyElement::Default_Gravity_vector(2,0.0);
        it!=bulk_load_data_pt.end();++it)
     {
      Data* temp_data_pt = new HijackedData(it->second,it->first);
-     this->add_external_data(temp_data_pt);
+     List_of_external_hijacked_data.push_back(
+      this->add_external_data(temp_data_pt));
     }
  }
 
