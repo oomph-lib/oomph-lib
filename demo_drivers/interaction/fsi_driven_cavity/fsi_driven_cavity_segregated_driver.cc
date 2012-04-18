@@ -449,7 +449,7 @@ int main(int argc, char* argv[])
    PicardConvergenceData conv_data;
    
    // Number iterations taken
-   unsigned niter=0; 
+   //unsigned niter=0; 
    
    // Setup segregated solver in either case
    problem.setup_segregated_solver();
@@ -459,7 +459,7 @@ int main(int argc, char* argv[])
 
    conv_data=problem.unsteady_segregated_solve(dt);
 
-   niter=conv_data.niter();
+   //niter=conv_data.niter();
    if (conv_data.cpu_total()!=0.0)
     {
      std::cout 

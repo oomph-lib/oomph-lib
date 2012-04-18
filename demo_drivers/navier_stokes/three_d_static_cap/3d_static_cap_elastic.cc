@@ -625,7 +625,7 @@ int main(int argc, char* argv[])
  //-----------------------------------------------------------------------
  // error estimate
  //---------------
- unsigned max_adapt;
+ //unsigned max_adapt;
  double max_error_target,min_error_target;
 
  using namespace Global_Physical_Variables;
@@ -635,7 +635,7 @@ int main(int argc, char* argv[])
  if (CommandLineArgs::Argc==1)
   {
    // Up to five adaptations
-   max_adapt=5;
+   //max_adapt=5;
 
    // Error targets for adaptive refinement
    max_error_target=0.005;
@@ -647,7 +647,7 @@ int main(int argc, char* argv[])
  else
   {
    // Validation run: Just one round of adaptation
-   max_adapt=1;
+   //max_adapt=1;
    
    // Error targets for adaptive refinement
    max_error_target=0.02;

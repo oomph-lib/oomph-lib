@@ -473,7 +473,7 @@ namespace Multi_domain_functions
      Located_element_status[ii]=received_located_element_status[ii];
     }
    Flat_packed_located_coordinates.resize(receive_count_located_coord);
-   for (int ii=0;ii<receive_count_located_coord;ii++)
+   for (int ii=0;ii<int(receive_count_located_coord);ii++)
     {
      Flat_packed_located_coordinates[ii]=received_located_coord[ii];
     }

@@ -193,6 +193,20 @@ setup_trilinos_preconditioner(Problem* problem_pt,
   new ML_Epetra::MultiLevelPreconditioner(*epetra_matrix_pt,
                                           ML_parameters,
                                           true);
+
+ // oomph_info << "In here\n";
+ // ML_Epetra::MultiLevelPreconditioner* tmp_pt=0;
+ // tmp_pt=dynamic_cast<ML_Epetra::MultiLevelPreconditioner*>(
+ //  Epetra_preconditioner_pt);
+ // if (tmp_pt!=0)
+ //  {
+ //   oomph_info << "Doing test\n";
+ //   ML_parameters.print(*(oomph_info.stream_pt()));
+ //   oomph_info.stream_pt()->flush();
+ //   // tmp_pt->TestSmoothers(); 
+ //   oomph_info << "Done test\n";
+ //  }
+
 }
 
 

@@ -106,8 +106,6 @@ SimpleRectangularQuadMesh<ELEMENT>::SimpleRectangularQuadMesh(
  //----------------------------------
  
  //Set the corner node
- //Determine number of values at this node
- unsigned nvalue = finite_element_pt(0)->required_nvalue(0);
 
  //Allocate memory for the node
  Node_pt[node_count] = 
@@ -130,9 +128,6 @@ SimpleRectangularQuadMesh<ELEMENT>::SimpleRectangularQuadMesh(
  //Loop over the other nodes in the first row
  for(unsigned l2=1;l2<n_p;l2++)
   {
-   //Determine the number of values at this node
-   nvalue = finite_element_pt(0)->required_nvalue(l2);
-
    //Allocate memory for the nodes
    Node_pt[node_count] = finite_element_pt(0)->
     construct_boundary_node(l2,time_stepper_pt);
@@ -157,9 +152,6 @@ SimpleRectangularQuadMesh<ELEMENT>::SimpleRectangularQuadMesh(
  //Loop over the other node columns
  for(unsigned l1=1;l1<n_p;l1++)
   {
-   //Determine the number of values
-   nvalue = finite_element_pt(0)->required_nvalue(l1*n_p);
-
    //Allocate memory for the nodes
    Node_pt[node_count] = finite_element_pt(0)->
     construct_boundary_node(l1*n_p,time_stepper_pt);
@@ -183,9 +175,6 @@ SimpleRectangularQuadMesh<ELEMENT>::SimpleRectangularQuadMesh(
    //Loop over the other nodes in the row
    for(unsigned l2=1;l2<n_p;l2++)
     {
-     //Set the number of values
-     nvalue = finite_element_pt(0)->required_nvalue(l1*n_p+l2);    
-
      //Allocate the memory for the node
      Node_pt[node_count] = finite_element_pt(0)->
       construct_node(l1*n_p+l2,time_stepper_pt);
@@ -223,9 +212,6 @@ SimpleRectangularQuadMesh<ELEMENT>::SimpleRectangularQuadMesh(
    //New nodes for other columns
    for(unsigned l2=1;l2<n_p;l2++)
     {
-     //Determine number of values
-     nvalue = finite_element_pt(j)->required_nvalue(l2);
-
      //Allocate memory for the nodes
      Node_pt[node_count] = finite_element_pt(j)->
       construct_boundary_node(l2,time_stepper_pt);
@@ -257,9 +243,6 @@ SimpleRectangularQuadMesh<ELEMENT>::SimpleRectangularQuadMesh(
      //New nodes for other columns
      for(unsigned l2=1;l2<n_p;l2++)
       {
-       //Determine number of values
-       nvalue = finite_element_pt(j)->required_nvalue(l1*n_p+l2);
-
        //Allocate memory for the nodes
        Node_pt[node_count] = finite_element_pt(j)->
         construct_node(l1*n_p+l2,time_stepper_pt);
@@ -292,9 +275,6 @@ SimpleRectangularQuadMesh<ELEMENT>::SimpleRectangularQuadMesh(
  //New middle nodes
  for(unsigned l2=1;l2<(n_p-1);l2++)
   {
-   //Determine number of values
-   nvalue = finite_element_pt(Nx-1)->required_nvalue(l2);
-
    //Allocate memory for node
    Node_pt[node_count] = finite_element_pt(Nx-1)->
     construct_boundary_node(l2,time_stepper_pt);
@@ -317,9 +297,6 @@ SimpleRectangularQuadMesh<ELEMENT>::SimpleRectangularQuadMesh(
   }
 
  //New final node
-
- //Determine number of values
- nvalue = finite_element_pt(Nx-1)->required_nvalue(n_p-1);
 
  //Allocate memory for the node
  Node_pt[node_count] = finite_element_pt(Nx-1)->
@@ -352,9 +329,6 @@ SimpleRectangularQuadMesh<ELEMENT>::SimpleRectangularQuadMesh(
    //New node for middle column
    for(unsigned l2=1;l2<(n_p-1);l2++)
     {
-     //Determine number of values
-     nvalue = finite_element_pt(Nx-1)->required_nvalue(l1*n_p+l2);
-
      //Allocate memory for node
      Node_pt[node_count] = finite_element_pt(Nx-1)->
       construct_node(l1*n_p+l2,time_stepper_pt);
@@ -374,9 +348,6 @@ SimpleRectangularQuadMesh<ELEMENT>::SimpleRectangularQuadMesh(
     }    
 
    //New node for final column
-
-   //Determine number of values
-   nvalue = finite_element_pt(Nx-1)->required_nvalue(l1*n_p+(n_p-1));
 
    //Allocate memory for node
    Node_pt[node_count] = finite_element_pt(Nx-1)->
@@ -423,9 +394,6 @@ SimpleRectangularQuadMesh<ELEMENT>::SimpleRectangularQuadMesh(
     {
      //First column of nodes
 
-     //Determine number of values
-     nvalue = finite_element_pt(Nx*i)->required_nvalue(l1*n_p);
-
      //Allocate memory for node
      Node_pt[node_count] = finite_element_pt(Nx*i)->
       construct_boundary_node(l1*n_p,time_stepper_pt);
@@ -449,9 +417,6 @@ SimpleRectangularQuadMesh<ELEMENT>::SimpleRectangularQuadMesh(
      //Now do the other columns
      for(unsigned l2=1;l2<n_p;l2++)
       {
-       //Determine number of values
-       nvalue = finite_element_pt(Nx*i)->required_nvalue(l1*n_p+l2);
-
        //Allocate memory for node
        Node_pt[node_count] = finite_element_pt(Nx*i)->
         construct_node(l1*n_p+l2,time_stepper_pt);
@@ -493,9 +458,6 @@ SimpleRectangularQuadMesh<ELEMENT>::SimpleRectangularQuadMesh(
        //New nodes for other columns
        for(unsigned l2=1;l2<n_p;l2++)
         {
-         //Determine number of values
-         nvalue = finite_element_pt(Nx*i+j)->required_nvalue(l1*n_p+l2);
-
          //Allocate memory for the nodes
          Node_pt[node_count]=finite_element_pt(Nx*i+j)->
           construct_node(l1*n_p+l2,time_stepper_pt);
@@ -538,9 +500,6 @@ SimpleRectangularQuadMesh<ELEMENT>::SimpleRectangularQuadMesh(
      //Middle nodes
      for(unsigned l2=1;l2<(n_p-1);l2++)
       {
-       //Determine number of values
-       nvalue = finite_element_pt(Nx*i+Nx-1)->required_nvalue(l1*n_p+l2);
-
        //Allocate memory for node
        Node_pt[node_count] = finite_element_pt(Nx*i+Nx-1)->
         construct_node(l1*n_p+l2,time_stepper_pt);
@@ -561,9 +520,6 @@ SimpleRectangularQuadMesh<ELEMENT>::SimpleRectangularQuadMesh(
       }
 
      //Final node
-
-     //Determine number of values
-     nvalue = finite_element_pt(Nx*i+Nx-1)->required_nvalue(l1*n_p+(n_p-1));
 
      //Allocate memory for node
      Node_pt[node_count] = finite_element_pt(Nx*i+Nx-1)->
@@ -613,9 +569,6 @@ SimpleRectangularQuadMesh<ELEMENT>::SimpleRectangularQuadMesh(
  //First column of nodes
  for(unsigned l1=1;l1<(n_p-1);l1++)
   {
-   //Determine number of values
-   nvalue = finite_element_pt(Nx*(Ny-1))->required_nvalue(n_p*l1);
-
    //Allocate memory for node
    Node_pt[node_count] = finite_element_pt(Nx*(Ny-1))->
     construct_boundary_node(n_p*l1,time_stepper_pt);
@@ -639,9 +592,6 @@ SimpleRectangularQuadMesh<ELEMENT>::SimpleRectangularQuadMesh(
    //Now do the other columns
    for(unsigned l2=1;l2<n_p;l2++)
     {
-     //Determine number of values
-     nvalue = finite_element_pt(Nx*(Ny-1))->required_nvalue(n_p*l1+l2);
-
      //Allocate memory for node
      Node_pt[node_count] = 
       finite_element_pt(Nx*(Ny-1))->construct_node(n_p*l1+l2,time_stepper_pt);
@@ -665,8 +615,7 @@ SimpleRectangularQuadMesh<ELEMENT>::SimpleRectangularQuadMesh(
  //Final row of nodes
  //First column of nodes
  //Top left node
- //Determine number of values
- nvalue = finite_element_pt(Nx*(Ny-1))->required_nvalue(n_p*(n_p-1));
+
  //Allocate memory for node
  Node_pt[node_count] = finite_element_pt(Nx*(Ny-1))->
   construct_boundary_node(n_p*(n_p-1),time_stepper_pt);
@@ -691,8 +640,6 @@ SimpleRectangularQuadMesh<ELEMENT>::SimpleRectangularQuadMesh(
  //Now do the other columns
  for(unsigned l2=1;l2<n_p;l2++)
   {
-   //Determine number of values
-   nvalue = finite_element_pt(Nx*(Ny-1))->required_nvalue(n_p*(n_p-1)+l2);
    //Allocate memory for the node
    Node_pt[node_count] = finite_element_pt(Nx*(Ny-1))->
     construct_boundary_node(n_p*(n_p-1)+l2,time_stepper_pt);
@@ -738,8 +685,6 @@ SimpleRectangularQuadMesh<ELEMENT>::SimpleRectangularQuadMesh(
      //New nodes for other columns
      for(unsigned l2=1;l2<n_p;l2++)
       {
-       //Determine number of values
-       nvalue = finite_element_pt(Nx*(Ny-1)+j)->required_nvalue(n_p*l1+l2);
        //Allocate memory for the node
        Node_pt[node_count] = finite_element_pt(Nx*(Ny-1)+j)->
         construct_node(n_p*l1+l2,time_stepper_pt);
@@ -767,8 +712,6 @@ SimpleRectangularQuadMesh<ELEMENT>::SimpleRectangularQuadMesh(
    //New nodes for other columns
    for(unsigned l2=1;l2<n_p;l2++)
     {
-     //Determine number of values
-     nvalue = finite_element_pt(Nx*(Ny-1)+j)->required_nvalue(n_p*(n_p-1)+l2); 
      //Allocate memory for node
      Node_pt[node_count] = finite_element_pt(Nx*(Ny-1)+j)->
       construct_boundary_node(n_p*(n_p-1)+l2,time_stepper_pt);
@@ -816,8 +759,6 @@ SimpleRectangularQuadMesh<ELEMENT>::SimpleRectangularQuadMesh(
    //Middle nodes
    for(unsigned l2=1;l2<(n_p-1);l2++)
     {
-     //Determine number of values
-     nvalue = finite_element_pt(Nx*(Ny-1)+Nx-1)->required_nvalue(n_p*l1+l2); 
      //Allocate memory for node
      Node_pt[node_count] = finite_element_pt(Nx*(Ny-1)+Nx-1)->
       construct_node(n_p*l1+l2,time_stepper_pt);
@@ -838,8 +779,7 @@ SimpleRectangularQuadMesh<ELEMENT>::SimpleRectangularQuadMesh(
     }  
 
    //Final node
-   //Determine number of values
-   nvalue = finite_element_pt(Nx*(Ny-1)+Nx-1)->required_nvalue(n_p*l1+(n_p-1));
+
    //Allocate memory for node
    Node_pt[node_count] = finite_element_pt(Nx*(Ny-1)+Nx-1)->
     construct_boundary_node(n_p*l1+(n_p-1),time_stepper_pt);
@@ -871,8 +811,6 @@ SimpleRectangularQuadMesh<ELEMENT>::SimpleRectangularQuadMesh(
  //Middle nodes
  for(unsigned l2=1;l2<(n_p-1);l2++)
   {
-   //Determine number of values
-   nvalue =  finite_element_pt(Nx*(Ny-1)+Nx-1)->required_nvalue(n_p*(n_p-1)+l2);
    //Allocate memory for node
    Node_pt[node_count] = finite_element_pt(Nx*(Ny-1)+Nx-1)->
     construct_boundary_node(n_p*(n_p-1)+l2,time_stepper_pt);
@@ -897,8 +835,7 @@ SimpleRectangularQuadMesh<ELEMENT>::SimpleRectangularQuadMesh(
   }
 
  //Final node
- //Determine number of values
- nvalue = finite_element_pt(Nx*(Ny-1)+Nx-1)->required_nvalue(n_p*(n_p-1)+(n_p-1));
+
  //Allocate memory for node
  Node_pt[node_count] = finite_element_pt(Nx*(Ny-1)+Nx-1)->
   construct_boundary_node(n_p*(n_p-1)+(n_p-1),time_stepper_pt);

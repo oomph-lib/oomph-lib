@@ -642,7 +642,7 @@ void HSL_MA42::solve(Problem* const &problem_pt, DoubleVector &result)
        //could get too large
        double **avar = new double*[nvar];
        double *tmp = new double[nvar*nmaxe];
-       for(unsigned i=0;i<nvar;i++) {avar[i] = &tmp[i*nmaxe];}
+       for(int i=0;i<nvar;i++) {avar[i] = &tmp[i*nmaxe];}
        double **rhs = new double*[1];
        rhs[0] = new double[nmaxe];
 

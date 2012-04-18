@@ -713,16 +713,16 @@ namespace oomph
       //If the (normal) error is small than reversed then we have the 
       //coordinate direction correct.
       //If not then we must reverse it
-      bool reversed=false;
+      //bool reversed=false;
       if (error< rev_error)
        {
         // Coordinates are aligned (btw: don't delete this block -- there's
         // a final else below to catch errors!)
-        reversed=false;
+        //reversed=false;
        }
       else if (error > rev_error)
        {
-        reversed=true;
+        //reversed=true;
 
         //Reverse the limits of the boundary coordinates along the
         //geometric object

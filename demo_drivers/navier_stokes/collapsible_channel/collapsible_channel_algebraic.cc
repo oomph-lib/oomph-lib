@@ -920,14 +920,14 @@ int main(int argc, char* argv[])
    problem.bulk_mesh_pt()->min_permitted_error()=1.0e-6;
   }
 
-#endif
-
  // First timestep: We may re-assign the initial condition
  // following any mesh adaptation.
  bool first=true;
 
  // Max. number of adaptations during first timestep
  unsigned max_adapt=10;
+
+#endif
 
  // Timestepping loop
  for (unsigned istep=0;istep<nstep;istep++)
@@ -952,11 +952,16 @@ int main(int argc, char* argv[])
    // Step number
    doc_info.number()++;
 
+#ifdef ADAPTIVE
+
    // We've done one step: Don't re-assign the initial conditions
    // and limit the number of adaptive mesh refinements to one
    // per timestep.
    first=false;
    max_adapt=1;
+
+#endif
+
   }
 
  trace_file.close();

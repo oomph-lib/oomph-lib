@@ -100,9 +100,6 @@ QuarterCircleSectorMesh<ELEMENT>::QuarterCircleSectorMesh(
  //Set the corner node (on boundaries 0 and 2)
  //-------------------------------------------
 
- //Determine number of values at this node
- unsigned nvalue = finite_element_pt(0)->required_nvalue(0);
-
  //Create the ll node
  Node_pt[node_count] = finite_element_pt(0)->
   construct_boundary_node(0,time_stepper_pt);
@@ -131,9 +128,6 @@ QuarterCircleSectorMesh<ELEMENT>::QuarterCircleSectorMesh(
 
    // Local node number
    unsigned jnod_local=l1;
-
-   //Determine the number of values
-   nvalue = finite_element_pt(0)->required_nvalue(jnod_local);
 
    // Create the node
    Node_pt[node_count] = finite_element_pt(0)->
@@ -170,9 +164,6 @@ QuarterCircleSectorMesh<ELEMENT>::QuarterCircleSectorMesh(
    // Local node number
    unsigned jnod_local=n_p*l2;
 
-   // Determine the number of values at this node 
-   nvalue = finite_element_pt(0)->required_nvalue(jnod_local);
-
    // Create the node
    Node_pt[node_count] = finite_element_pt(0)->
     construct_boundary_node(jnod_local,time_stepper_pt);
@@ -203,9 +194,6 @@ QuarterCircleSectorMesh<ELEMENT>::QuarterCircleSectorMesh(
 
      // Local node number
      unsigned jnod_local=l1+n_p*l2;
-
-     //Determine the number of values
-     nvalue = finite_element_pt(0)->required_nvalue(jnod_local);
 
      // Create the node
      Node_pt[node_count] = finite_element_pt(0)->
@@ -255,9 +243,6 @@ QuarterCircleSectorMesh<ELEMENT>::QuarterCircleSectorMesh(
    // Local node number
    unsigned jnod_local=l1;
 
-   //Determine the number of values
-   nvalue = finite_element_pt(1)->required_nvalue(jnod_local);
-
    // Create the node
    Node_pt[node_count] = finite_element_pt(1)->
     construct_boundary_node(jnod_local,time_stepper_pt);
@@ -284,9 +269,6 @@ QuarterCircleSectorMesh<ELEMENT>::QuarterCircleSectorMesh(
     {
      // Local node number
      unsigned jnod_local=l1+l2*n_p;
-
-     //Determine the number of values
-     nvalue = finite_element_pt(1)->required_nvalue(jnod_local);
 
      // Create the node
      Node_pt[node_count] = finite_element_pt(1)->
@@ -315,9 +297,6 @@ QuarterCircleSectorMesh<ELEMENT>::QuarterCircleSectorMesh(
  
  // Local node number
  unsigned  jnod_local=n_p-1;
-
- //Determine the number of values
- nvalue = finite_element_pt(1)->required_nvalue(jnod_local);
 
  // Create the node
  Node_pt[node_count] = finite_element_pt(1)->
@@ -350,9 +329,6 @@ QuarterCircleSectorMesh<ELEMENT>::QuarterCircleSectorMesh(
   {
    // Local node number
    unsigned jnod_local=(n_p-1)+l2*n_p;
-
-   //Determine the number of values
-   nvalue = finite_element_pt(1)->required_nvalue(jnod_local);
 
    // Create the node
    Node_pt[node_count] = finite_element_pt(1)->
@@ -431,9 +407,6 @@ QuarterCircleSectorMesh<ELEMENT>::QuarterCircleSectorMesh(
    // Local node number
    unsigned jnod_local=n_p*l2;
 
-   // Determine the number of values at this node 
-   nvalue = finite_element_pt(2)->required_nvalue(jnod_local);
-
    // Create the node
    Node_pt[node_count] = finite_element_pt(2)->
     construct_boundary_node(jnod_local,time_stepper_pt);
@@ -463,9 +436,6 @@ QuarterCircleSectorMesh<ELEMENT>::QuarterCircleSectorMesh(
      // Local node number
      unsigned jnod_local=l1+n_p*l2;
 
-     //Determine the number of values
-     nvalue = finite_element_pt(2)->required_nvalue(jnod_local);
-
      // Create the node
      Node_pt[node_count] = finite_element_pt(2)->
       construct_node(jnod_local,time_stepper_pt);
@@ -491,9 +461,6 @@ QuarterCircleSectorMesh<ELEMENT>::QuarterCircleSectorMesh(
 
  // Local node number
  jnod_local=n_p*(n_p-1);
-
- //Determine the number of values
- nvalue = finite_element_pt(2)->required_nvalue(jnod_local);
 
  // Create the node
  Node_pt[node_count] = finite_element_pt(2)->
@@ -527,9 +494,6 @@ QuarterCircleSectorMesh<ELEMENT>::QuarterCircleSectorMesh(
   {
    // Local node number
    unsigned jnod_local=n_p*(n_p-1)+l1;
-
-   //Determine the number of values
-   nvalue = finite_element_pt(2)->required_nvalue(jnod_local);
 
    // Create the node
    Node_pt[node_count] = finite_element_pt(2)->

@@ -1379,6 +1379,37 @@ public:
    }
  }
 
+
+ /// \short Output all external haloed elements
+ void output_external_haloed_elements(std::ostream &outfile,
+                                      const unsigned &n_plot=5)
+ {
+  for (std::map<unsigned,Vector<GeneralisedElement*> >::iterator it=
+        External_haloed_element_pt.begin();
+       it!=External_haloed_element_pt.end();it++)
+   {
+    unsigned p=(*it).first;
+    output_external_haloed_elements(p,outfile,n_plot);
+   }
+ }
+ 
+ /// \short Output all external haloed elements with processor p
+ void output_external_haloed_elements(const unsigned& p, std::ostream &outfile, 
+                                      const unsigned &n_plot=5)
+ {
+  unsigned nel=External_haloed_element_pt[p].size();
+  for (unsigned e=0;e<nel;e++)
+   {
+    FiniteElement* fe_pt=dynamic_cast<FiniteElement*>(
+     External_haloed_element_pt[p][e]);
+    if (fe_pt!=0)
+     {
+      fe_pt->output(outfile,n_plot);
+     }
+   }
+ }
+
+
  /// \short Total number of external halo elements in this Mesh
  unsigned nexternal_halo_element() 
   {

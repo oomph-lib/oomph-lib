@@ -55,7 +55,8 @@ namespace oomph
   double plgndr1(const unsigned& n, const double& x)
   {
    unsigned i;
-   double pmm,pmm1,pmm2;
+   double pmm,pmm1;
+   double pmm2=0;
 
 #ifdef PARANOID
    // Shout if things went wrong  
@@ -103,7 +104,8 @@ namespace oomph
   double plgndr2(const unsigned& l, const unsigned& m, const double& x)
   {
    unsigned i,ll;
-   double fact,pll,pmm,pmmp1,somx2;
+   double fact,pmm,pmmp1,somx2;
+   double pll=0.0;
 
 #ifdef PARANOID
    // Shout if things went wrong  

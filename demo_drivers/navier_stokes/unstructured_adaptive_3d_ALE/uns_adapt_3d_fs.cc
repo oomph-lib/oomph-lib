@@ -1477,11 +1477,10 @@ public:
     unsigned num_nod=Fluid_mesh_pt->nboundary_node(5);
     for (unsigned inod=0;inod<num_nod;inod++)
      {
-       Node* nod_pt=Fluid_mesh_pt->boundary_node_pt(5,inod);
-       double x = nod_pt->x(0);
-       double y = nod_pt->x(1);
-       double u = (Box_width-x)*(Box_width+x)*(Box_width-y)*(Box_width+y);
-
+      //Node* nod_pt=Fluid_mesh_pt->boundary_node_pt(5,inod);
+       //double x = nod_pt->x(0);
+       //double y = nod_pt->x(1);
+       //double u = (Box_width-x)*(Box_width+x)*(Box_width-y)*(Box_width+y);
        // nod_pt->set_value(2,u);
      }
    }

@@ -6580,6 +6580,18 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
    // Loop over domains for external halo elements
    for (int dd=0;dd<n_proc;dd++)
     {
+
+     filename.str("");
+     filename << doc_info.directory() << "/ext_halo_element_check"
+              << doc_info.label() << "_on_proc"
+              << my_rank << "_with_proc" << dd << "_" 
+              << doc_info.number()
+              << ".dat";
+     ext_halo_file.open(filename.str().c_str());
+     output_external_halo_elements(dd,ext_halo_file);
+     ext_halo_file.close(); 
+
+
      filename.str("");
      filename << doc_info.directory() << "/ext_halo_node_check"
               << doc_info.label() << "_on_proc"
@@ -6620,6 +6632,20 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
    // Loop over domains for external halo elements
    for (int d=0;d<n_proc;d++)
     {
+
+
+     filename.str("");
+     filename << doc_info.directory() << "/ext_haloed_element_check"
+              << doc_info.label() << "_on_proc"
+              << my_rank << "_with_proc" << d << "_" 
+              << doc_info.number()
+              << ".dat";
+     ext_haloed_file.open(filename.str().c_str());
+     output_external_haloed_elements(d,ext_haloed_file);
+     ext_haloed_file.close(); 
+
+
+
      filename.str("");
      filename << doc_info.directory() << "/ext_haloed_node_check"
               << doc_info.label() << "_on_proc"

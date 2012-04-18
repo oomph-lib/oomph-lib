@@ -240,12 +240,15 @@ namespace oomph
    TrilinosEpetraHelpers::create_distributed_epetra_vector(y);
 
   // do the multiply
+#ifdef PARANOID
   int epetra_error_flag = 0;
-  epetra_error_flag = Epetra_matrix_pt->Multiply(false,*epetra_x_pt,
-                                                 *epetra_soln_pt);
+  epetra_error_flag = 
+#endif
+   Epetra_matrix_pt->Multiply(false,*epetra_x_pt,
+                              *epetra_soln_pt);
 
   // throw error if there is an epetra error
-#if PARANOID
+#ifdef PARANOID
   if (epetra_error_flag != 0)
    {
     std::ostringstream error_message;
@@ -284,12 +287,15 @@ namespace oomph
    TrilinosEpetraHelpers::create_distributed_epetra_vector(y);
 
   // do the multiply
+#ifdef PARANOID
   int epetra_error_flag = 0;
-  epetra_error_flag = Epetra_matrix_pt->Multiply(true,*epetra_x_pt,
-                                                 *epetra_soln_pt);
+  epetra_error_flag = 
+#endif
+   Epetra_matrix_pt->Multiply(true,*epetra_x_pt,
+                              *epetra_soln_pt);
 
   // throw error if there is an epetra error
-#if PARANOID
+#ifdef PARANOID
   if (epetra_error_flag != 0)
    {
     std::ostringstream error_message;

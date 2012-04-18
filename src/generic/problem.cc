@@ -1193,9 +1193,11 @@ namespace oomph
 
 
       // Re-assign the equation numbers (incl synchronisation if reqd)
-      unsigned n_dof;
-      n_dof=assign_eqn_numbers();
-      
+#ifdef PARANOID
+      unsigned n_dof=assign_eqn_numbers();
+#else
+      assign_eqn_numbers();
+#endif
 
 
       if (Global_timings::Doc_comprehensive_timings)
@@ -1612,7 +1614,7 @@ namespace oomph
    
   // Vector of first and last elements for each processor
   Vector<Vector <int> > first_and_last_element(n_proc);
-  for(unsigned p=0;p<n_proc;p++) {first_and_last_element[p].resize(2);}
+  for(int p=0;p<n_proc;p++) {first_and_last_element[p].resize(2);}
    
   // Re-distribute work
   if (rank==0)
@@ -1702,7 +1704,7 @@ namespace oomph
       //Should now be able to put one element on each processor
       //Start from the end and do so
       unsigned current_element  = n_elements-1;
-      for(unsigned p=n_proc-1;p>proc;p--)
+      for(int p=n_proc-1;p>proc;p--)
        {
         first_and_last_element[p][1] = current_element;
         first_and_last_element[p][0] = --current_element;
@@ -1732,7 +1734,7 @@ namespace oomph
      << std::endl;
 
     //Only now can we send the information to the other processors
-    for(unsigned p=1;p<n_proc;++p)
+    for(int p=1;p<n_proc;++p)
      {
 
       MPI_Send(&first_and_last_element[p][0],2,MPI_INT,p,
@@ -1988,7 +1990,7 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
    if (Global_timings::Doc_comprehensive_timings)
     {
      t_end = TimingHelpers::timer();
-     oomph_info 
+     oomph_info  
       << "Time for Problem::synchronise_eqn_numbers in "
       << "Problem::assign_eqn_numbers: " 
       << t_end-t_start << std::endl;
@@ -2047,7 +2049,7 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
       {
        t_end = TimingHelpers::timer();
        std::stringstream tmp;
-       tmp << "Time for Problem::remove_duplicate_data in "
+       tmp << "Time for calls to Problem::remove_duplicate_data in "
            << "Problem::assign_eqn_numbers: " 
            << t_end-t_start << "; have ";
        if (!actually_removed_some_data)
@@ -2165,12 +2167,14 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
   unsigned n_dof=ndof();
   Vector<Node*> global_node_pt(n_dof,0);
 
-  // Doc timings if required
-  double t_start=0.0;
-  if (Global_timings::Doc_comprehensive_timings)
-   {
-    t_start=TimingHelpers::timer();
-   }
+
+  // //   // hierher taken out again by MH -- clutters up output
+  // // Doc timings if required
+  // double t_start=0.0;
+  // if (Global_timings::Doc_comprehensive_timings)
+  //  {
+  //   t_start=TimingHelpers::timer();
+  //  }
 
   // Only do each retained node once
   std::map<Node*,bool> node_done;
@@ -2714,7 +2718,16 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
   mesh_pt->remove_null_pointers_from_external_halo_node_storage(
    this->communicator_pt());
 
-
+  // // Time it...
+  //   // hierher taken out again by MH -- clutters up output
+  // if (Global_timings::Doc_comprehensive_timings)
+  //  {
+  //   double t_end = TimingHelpers::timer();
+  //   oomph_info 
+  //    << "Total time for Problem::remove_duplicate_data: "
+  //    << t_end-t_start << std::endl;
+  //  }
+  
 }
 
 
@@ -10394,7 +10407,11 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
                          OOMPH_EXCEPTION_LOCATION);
     }
   }
-#endif
+#else
+ // Suppress comiler warnings about non-used variable
+ n_submesh_read++;
+ n_submesh_read--;
+#endif 
 
 
  // Read levels of refinement before pruning
@@ -10569,7 +10586,13 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
                          OOMPH_EXCEPTION_LOCATION);
     }
   }
+
+#else
+ // Suppress comiler warnings about non-used variable
+ tmp++;
+ tmp--;
 #endif
+
 
 #ifdef OOMPH_HAS_MPI
 
@@ -15613,6 +15636,9 @@ void Problem::copy_external_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
     }
 #endif
   }
+
+ // Finally synchronise all dofs to allow halo check to pass
+ synchronise_all_dofs();
 
  double end_t = TimingHelpers::timer();
  oomph_info << "Time for load_balance() [sec]    : " 

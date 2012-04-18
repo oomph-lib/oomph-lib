@@ -186,6 +186,21 @@ namespace oomph
      ML_Epetra::SetDefaults("NSSA", ML_parameters);
     }
 
+
+   /// \short Set control flags to values for classical smoothed aggregation-
+   /// based 2-level domain decomposition
+   void set_DD_default_values()
+    {
+     ML_Epetra::SetDefaults("DD", ML_parameters);
+    }
+
+
+   /// \short Set control flags to values 3-level algebraic domain decomposition
+   void set_DDML_default_values()
+    {
+     ML_Epetra::SetDefaults("DD-ML", ML_parameters);
+    }
+
    /// \short Set control flags to values for classical smoothed 
    /// aggregation preconditioning
    void set_SA_default_values()

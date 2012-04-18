@@ -739,7 +739,7 @@ int main(int argc, char **argv)
    // Loop over preconditioners: iprec=0: LSC
    //                            iprec=1: Fp
    bool use_lsc=true;
-   bool use_robin=true;
+   //bool use_robin=true;
    for (unsigned iprec=0;iprec<2;iprec++)
     {
      
@@ -788,7 +788,7 @@ int main(int argc, char **argv)
        else if (iprec==1)
         {
          use_lsc=false;
-         use_robin=true;
+         //use_robin=true;
          header2=", Fp";
         }   
        

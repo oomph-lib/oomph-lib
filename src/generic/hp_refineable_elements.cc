@@ -3406,9 +3406,9 @@ quad_hang_helper(const int &value_id, const int &my_edge,
  //----------------------------
  
  // Set up booleans
- bool h_type_master = false;
+ //bool h_type_master = false;
  bool h_type_slave  = false;
- bool p_type_master = false;
+ //bool p_type_master = false;
  bool p_type_slave  = false;
  
  // Neighbour exists and all nodes have been created
@@ -3418,7 +3418,7 @@ quad_hang_helper(const int &value_id, const int &my_edge,
    if(diff_level!=0)
     {
      // Master at h-type non-conformity
-     h_type_master = true;
+     //h_type_master = true;
     }
    else if(neigh_pt->nsons()==0)
     {
@@ -3438,7 +3438,7 @@ quad_hang_helper(const int &value_id, const int &my_edge,
      else
       {
        // Master at p-type non-conformity
-       p_type_master = true;
+       //p_type_master = true;
       }
     }
    else

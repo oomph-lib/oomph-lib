@@ -345,11 +345,11 @@ void StreamfunctionProblem::assign_velocities()
     x[0]=mesh_pt()->node_pt(i)->x(0);
     x[1]=mesh_pt()->node_pt(i)->x(1);
 
-    double A = Global_Physical_Variables::Alpha;
+    //double A = Global_Physical_Variables::Alpha;
 
     //double u=(x[0]/A)*cos(x[1])-(1./(4.*A));
     //double v=-2.*x[0]*sin(x[1])+0.25*x[1];
-    A=0.0;
+    //A=0.0;
     double u=0.0;double v=0.0;
 
     mesh_pt()->node_pt(i)->set_value(1,u);

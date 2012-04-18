@@ -1324,15 +1324,12 @@ int main(int argc, char* argv[])
      else
       {
        //Restarting
-       //cout << GlobalParameters::Restart_file.c_str() << endl;
        char filename[100];
        sprintf(filename,GlobalParameters::Restart_file.c_str());
        char* step;
        step = strtok(filename,"/");
        step = strtok(NULL,"/");
        sprintf(doc_info_directory,"RESLT_prune_first_restarted_from_step_%s",step);
-       //cout << doc_info_directory << endl;
-       //exit(1);
       }
     }
   }

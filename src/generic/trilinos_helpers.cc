@@ -364,11 +364,14 @@ Epetra_CrsMatrix* TrilinosEpetraHelpers::create_distributed_epetra_matrix
   {
    // get pointer to this row in values/columns
    int ptr = row_start[row+offset];
+#ifdef PARANOID
    int err = 0;
-   err = epetra_matrix_pt->InsertGlobalValues(first_row+row,
-                                              nnz_per_row[row],
-                                              value+ptr,
-                                              column+ptr);
+   err = 
+#endif
+    epetra_matrix_pt->InsertGlobalValues(first_row+row,
+                                         nnz_per_row[row],
+                                         value+ptr,
+                                         column+ptr);
 #ifdef PARANOID
    if (err != 0)
     {
@@ -396,9 +399,12 @@ Epetra_CrsMatrix* TrilinosEpetraHelpers::create_distributed_epetra_matrix
     (dist_pt->communicator_pt(),dist_pt->nrow(),true);
   }
  Epetra_Map* epetra_domain_map_pt = create_epetra_map(target_col_dist_pt);
+#ifdef PARANOID
  int err=0;
- err = epetra_matrix_pt->FillComplete(*epetra_domain_map_pt,
-                                      *epetra_map_pt);
+ err = 
+#endif
+  epetra_matrix_pt->FillComplete(*epetra_domain_map_pt,
+                                 *epetra_map_pt);
 #ifdef PARANOID
  if (err != 0)
   {
@@ -602,11 +608,14 @@ create_distributed_epetra_matrix_for_aztecoo
   {
    // get pointer to this row in values/columns
    int ptr = row_start[row+offset];
+#ifdef PARANOID
    int err = 0;
-   err = epetra_matrix_pt->InsertGlobalValues(first_row+row,
-                                              nnz_per_row[row],
-                                              value+ptr,
-                                              column+ptr);
+   err = 
+#endif
+    epetra_matrix_pt->InsertGlobalValues(first_row+row,
+                                         nnz_per_row[row],
+                                         value+ptr,
+                                         column+ptr);
 #ifdef PARANOID
    if (err != 0)
     {
@@ -623,8 +632,12 @@ create_distributed_epetra_matrix_for_aztecoo
   }
 
  // complete the build of the trilinos matrix
+#ifdef PARANOID
  int err=0;
- err = epetra_matrix_pt->FillComplete();
+ err = 
+#endif
+  epetra_matrix_pt->FillComplete();
+
 #ifdef PARANOID
  if (err != 0)
   {
@@ -723,9 +736,12 @@ void TrilinosEpetraHelpers::multiply(const CRDoubleMatrix* oomph_matrix_pt,
   create_distributed_epetra_vector(oomph_y);
 
  // do the multiply
+#ifdef PARANOID
  int epetra_error_flag = 0;
- epetra_error_flag = epetra_matrix_pt->Multiply(false,*epetra_x_pt,
-                                                *epetra_y_pt);
+ epetra_error_flag = 
+#endif
+  epetra_matrix_pt->Multiply(false,*epetra_x_pt,
+                             *epetra_y_pt);
  
  // return the solution
  copy_to_oomphlib_vector(epetra_y_pt,oomph_y);
@@ -879,8 +895,10 @@ void TrilinosEpetraHelpers::multiply(const CRDoubleMatrix &matrix_1,
   // this method requires us to pass in the solution matrix
   solution_pt = new Epetra_CrsMatrix(Copy,epetra_matrix_1_pt->RowMap(),
                                      0);
+#ifdef PARANOID
   int epetra_error_flag = 0;
   epetra_error_flag = 
+#endif
    EpetraExt::MatrixMatrix::Multiply(*epetra_matrix_1_pt,
                                      false,
                                      *epetra_matrix_2_pt,
