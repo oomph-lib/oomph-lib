@@ -406,9 +406,12 @@ namespace oomph
       //Send to halo process the number of haloed nodes we processed
       MPI_Send(&nhaloed_nonmaster_nodes_processed,1,MPI_UNSIGNED,d,2,
                comm_pt->mpi_comm());
-      MPI_Send(&haloed_nonmaster_node_index[0],
-               nhaloed_nonmaster_nodes_processed,MPI_UNSIGNED,d,3,
-               comm_pt->mpi_comm());
+      if(nhaloed_nonmaster_nodes_processed>0)
+       {
+        MPI_Send(&haloed_nonmaster_node_index[0],
+                 nhaloed_nonmaster_nodes_processed,MPI_UNSIGNED,d,3,
+                 comm_pt->mpi_comm());
+       }
 
       //Send data about external halo nodes
       if(send_unsigneds_count>0)
@@ -450,10 +453,13 @@ namespace oomph
                    comm_pt->mpi_comm(),&status);
           Vector<unsigned> halo_nonmaster_node_index(
                             nhalo_nonmaster_nodes_to_process);
-          MPI_Recv(&halo_nonmaster_node_index[0],
-                   nhalo_nonmaster_nodes_to_process,MPI_UNSIGNED,dd,3,
-                   comm_pt->mpi_comm(),&status);
-         
+          if (nhalo_nonmaster_nodes_to_process!=0)
+           {
+            MPI_Recv(&halo_nonmaster_node_index[0],
+                     nhalo_nonmaster_nodes_to_process,MPI_UNSIGNED,dd,3,
+                     comm_pt->mpi_comm(),&status);
+           }
+
           //Storage for data to be received
           Vector<unsigned> recv_unsigneds(nrecv_unsigneds);
           Vector<double> recv_doubles(nrecv_doubles);

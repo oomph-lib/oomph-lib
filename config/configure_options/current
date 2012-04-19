@@ -96,7 +96,7 @@
 # lapack, hypre and trilinos libraries, the latter two assumed
 # to have been compiled with mpi support. 
 #
-#--enable-suppress-doc
+--enable-suppress-doc
 --enable-MPI
 --enable-symbolic-links-for-headers
 --with-blas=/home/mheil/local/lib/blas/blas.a
@@ -104,9 +104,9 @@
 --with-hypre=/home/mheil/local/hypre_default_installation_mpi
 --with-trilinos=/home/mheil/local/trilinos_default_installation_mpi
 --with-mpi-self-tests="mpirun -np 2"
-CXXFLAGS="-O6 -Wall"
-CFLAGS="-O6"
-FFLAGS="-O6"
+CXXFLAGS="-g -DPARANOID -DRANGE_CHECKING -Wall"
+CFLAGS="-g"
+FFLAGS="-g"
 FFLAGS_NO_OPT="-O0"
 CXX=mpic++
 CC=mpicc
@@ -117,6 +117,3 @@ LD=mpif77
 #--with-scalapack=/home/mheil/local/lib/scalapack/libscalapack.a
 #--with-pord=/home/mheil/local/pord/lib/libpord.a 
 #--with-mumps=/home/mheil/local/mumps
-
-#--with-mpi-include-directory=/usr/lib/openmpi/include
-

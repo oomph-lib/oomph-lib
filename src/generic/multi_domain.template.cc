@@ -218,34 +218,17 @@ namespace oomph
    //(assume element type is the same for all elements in each mesh)
 
    //Get pointer to first element in each mesh
-   GeneralisedElement* el_pt_0 = mesh_pt->element_pt(0);
-   GeneralisedElement* ext_el_pt_0 = external_mesh_pt->element_pt(0);
-
-   //Make sure both exist
-   if(el_pt_0==0)
+   GeneralisedElement* el_pt_0=0;
+   if (mesh_pt->nelement()!=0)
     {
-     throw OomphLibError(
-            "Element 0 does not exist in the mesh!",
-            "Multi_domain_functions::aux_setup_multi_domain_interaction()",
-            OOMPH_EXCEPTION_LOCATION);
+     el_pt_0 = mesh_pt->element_pt(0);
     }
-   if(ext_el_pt_0==0)
+   GeneralisedElement* ext_el_pt_0=0;
+   if (external_mesh_pt->nelement()!=0)
     {
-     throw OomphLibError(
-            "External element 0 does not exist in the mesh!",
-            "Multi_domain_functions::aux_setup_multi_domain_interaction()",
-            OOMPH_EXCEPTION_LOCATION);
+     ext_el_pt_0 = external_mesh_pt->element_pt(0);
     }
 
-   //Check they are not spectral elements
-   if(dynamic_cast<SpectralElement*>(el_pt_0)!=0
-      || dynamic_cast<SpectralElement*>(ext_el_pt_0)!=0)
-    {
-     throw OomphLibError(
-            "Multi-domain setup does not work with spectral elements.",
-            "Multi_domain_functions::aux_setup_multi_domain_interaction()",
-            OOMPH_EXCEPTION_LOCATION);
-    }
    
    //Check they are not hp-refineable elements
    if(dynamic_cast<PRefineableElement*>(el_pt_0)!=0

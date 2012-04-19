@@ -89,7 +89,7 @@ else
 fi
 
 mv RESLT RESLT_adaptive_driven_cavity
-mv RESLT_hp_adapt RESLT_hp_adaptive_driven_cavity
+mv RESLT_hp RESLT_hp_adaptive_driven_cavity
 mv RESLT_TH_MESH  RESLT_TH_MESH_adaptive_driven_cavity
 mv RESLT_CR_MESH  RESLT_CR_MESH_adaptive_driven_cavity
 mv RESLT_hp_MESH  RESLT_hp_MESH_adaptive_driven_cavity

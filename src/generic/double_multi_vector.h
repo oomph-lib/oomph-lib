@@ -476,7 +476,7 @@ namespace oomph
 #ifdef RANGE_CHECKING
    std::ostringstream error_message;
    bool error=false;
-   if(v > Nvector)
+   if(v > int(Nvector))
     {
      error_message << "Range Error: Vector " << v 
                    << "is not in the range (0,"

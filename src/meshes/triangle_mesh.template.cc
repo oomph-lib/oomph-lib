@@ -3820,10 +3820,10 @@ namespace oomph
     // Deal with different numbers of nodes separately
     unsigned nnod=el_pt->nnode();
 
-#ifdef PARANOID
-    // Flag to indicate if we successully classified/dealt with the element
-    bool success=false;
-#endif
+// #ifdef PARANOID
+//     // Flag to indicate if we successully classified/dealt with the element
+//     bool success=false;
+// #endif
 
     // Simplex element: Nothing to be done other than error checking
     if (nnod==3)
@@ -3839,7 +3839,7 @@ namespace oomph
          OOMPH_EXCEPTION_LOCATION);
        }
       // If I get there I must not have thrown :)
-      success=true;
+      //success=true;
 #endif
      }
     // Quadratic element (or enriched quadratic)
@@ -3867,7 +3867,7 @@ namespace oomph
          }
        }
       // If I get there I must not have thrown :)
-      success=true;
+      //success=true;
 #endif  
       // Deal with six noded stuff for all (normal and enriched) elements 
       
