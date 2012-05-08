@@ -157,11 +157,16 @@ namespace oomph
   {
     public:
 
-   /// Constructor.
+   /// \short Constructor. Build with Smooth Aggretation (SA) default 
+   /// settings, but our own default number of V cycles (initialised
+   /// to 1 to replicate TrilinosML's own behaviour).
    TrilinosMLPreconditioner()
     {  
      // set default values
      ML_Epetra::SetDefaults("SA", ML_parameters);
+
+     // Set number of MG cycles performed in preconditioner
+     ML_parameters.set("cycle applications", Default_n_cycles);
     }
 
    /// Destructor empty -- clean up is done in base class
@@ -249,6 +254,11 @@ namespace oomph
     {
      ML_parameters.set("output", output); 
     }
+
+
+   /// \short Default number of V cycles (one to be consistent with 
+   /// previous default) (It's an int because Trilinos wants it to be!)
+   static int Default_n_cycles;
 
     protected:
 

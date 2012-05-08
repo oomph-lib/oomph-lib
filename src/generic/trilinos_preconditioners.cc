@@ -85,7 +85,7 @@ void TrilinosPreconditionerBase::setup(Problem* problem_pt,
  // create the matrices
  Epetra_matrix_pt = TrilinosEpetraHelpers::create_distributed_epetra_matrix
   (cr_matrix_pt,this->distribution_pt());
-
+ 
  // set up preconditioner
  setup_trilinos_preconditioner(problem_pt,matrix_pt,Epetra_matrix_pt);
 }
@@ -179,6 +179,12 @@ preconditioner_solve(const DoubleVector &r, DoubleVector &z)
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
+ 
+ //=============================================================================
+ /// (Static) default number of V cycles (one to be consistent 
+ /// with previous default). (It's an int because Trilinos wants it to be!)
+ //=============================================================================
+ int TrilinosMLPreconditioner::Default_n_cycles=1;
 
 //=============================================================================
 // Function to set up the ML preconditioner.

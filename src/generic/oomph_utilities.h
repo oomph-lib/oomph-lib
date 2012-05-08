@@ -635,6 +635,7 @@ public:
   Output_from_single_processor(false)
   {}
 
+ /// Return pointer to communicator
  OomphCommunicator*& communicator_pt() { return Communicator_pt; }
 
  /// Precede the output by the processor ID but output everything

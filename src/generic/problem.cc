@@ -14142,24 +14142,8 @@ void Problem::check_halo_schemes(DocInfo& doc_info)
 //========================================================================
 void Problem::synchronise_all_dofs()
 {
- // Synchronise the solution on different processors (on each submesh)
- unsigned nmesh=this->nsub_mesh();
- if (nmesh==0)
-  {
-   this->synchronise_dofs(mesh_pt());
-  }
- else
-  {
-   // Synchronise ALL halo(ed) dofs BEFORE external halo(ed) dofs
-   for (unsigned imesh=0; imesh<nmesh; imesh++)
-    {
-     this->synchronise_dofs(mesh_pt(imesh));
-    }
-   for (unsigned imesh=0; imesh<nmesh; imesh++)
-    {
-     this->synchronise_external_dofs(mesh_pt(imesh));
-    }
-  }
+ // Synchronise dofs themselves
+ this->synchronise_dofs();
 
  //Now perform any synchronisation required by the assembly handler
  this->assembly_handler_pt()->synchronise();
@@ -14168,13 +14152,20 @@ void Problem::synchronise_all_dofs()
 
 
 //========================================================================
-///  Synchronise the degrees of freedom by overwriting
+/// Synchronise the degrees of freedom by overwriting
 /// the haloed values with their non-halo counterparts held
-/// on other processors. This works on the (sub)mesh specified by
-/// the argument
+/// on other processors.
 //========================================================================
-void Problem::synchronise_dofs(Mesh* &mesh_pt)
+void Problem::synchronise_dofs()
 { 
+ // Do we have submeshes?
+ unsigned n_mesh_loop=1;
+ unsigned nmesh=nsub_mesh();
+ if (nmesh>0)
+  {
+   n_mesh_loop=nmesh;
+  }
+
  // Local storage for number of processors and current processor
  const int n_proc=this->communicator_pt()->nproc();
 
@@ -14202,29 +14193,66 @@ void Problem::synchronise_dofs(Mesh* &mesh_pt)
    //current processor
    if(rank!=my_rank)
     {
-     // How many of my nodes are haloed by the processor whose values
-     // are updated?
-     unsigned n_nod=mesh_pt->nhaloed_node(rank);
-     for (unsigned n=0;n<n_nod;n++)
+     // Deal with sub-meshes one-by-one if required
+     Mesh* my_mesh_pt=0;
+
+     // Loop over submeshes
+     for (unsigned imesh=0;imesh<n_mesh_loop;imesh++)
       {
-       //Add the data for each haloed node to the vector
-       mesh_pt->haloed_node_pt(rank,n)->add_values_to_vector(send_data);
-      }
-     
-     // Now loop over haloed elements and prepare to add their 
-     // internal data to the big vector to be sent
-     Vector<GeneralisedElement*> 
-      haloed_elem_pt=mesh_pt->haloed_element_pt(rank);
-     unsigned nelem_haloed=haloed_elem_pt.size();
-     for (unsigned e=0; e<nelem_haloed; e++)
-      {
-       haloed_elem_pt[e]->
-        add_internal_data_values_to_vector(send_data);
-      }
+       if (nmesh==0)
+        {
+         my_mesh_pt=mesh_pt();
+        }
+       else
+        {
+         my_mesh_pt=mesh_pt(imesh);
+        }
+
+       // How many of my nodes are haloed by the processor whose values
+       // are updated?
+       unsigned n_nod=my_mesh_pt->nhaloed_node(rank);
+       for (unsigned n=0;n<n_nod;n++)
+        {
+         //Add the data for each haloed node to the vector
+         my_mesh_pt->haloed_node_pt(rank,n)->add_values_to_vector(send_data);
+        }
+       
+       // Now loop over haloed elements and prepare to add their 
+       // internal data to the big vector to be sent
+       Vector<GeneralisedElement*> 
+        haloed_elem_pt=my_mesh_pt->haloed_element_pt(rank);
+       unsigned nelem_haloed=haloed_elem_pt.size();
+       for (unsigned e=0; e<nelem_haloed; e++)
+        {
+         haloed_elem_pt[e]->
+          add_internal_data_values_to_vector(send_data);
+        }
+
+       // How many of my nodes are externally haloed by the processor whose
+       // values are updated?  NB these nodes are on the external mesh.
+       unsigned n_ext_nod=my_mesh_pt->nexternal_haloed_node(rank);
+       for (unsigned n=0;n<n_ext_nod;n++)
+        {
+         //Add data from each external haloed node to the vector
+         my_mesh_pt->external_haloed_node_pt(rank,n)->
+          add_values_to_vector(send_data);
+        }
+       
+       // Now loop over haloed elements and prepare to send internal data
+       unsigned next_elem_haloed=my_mesh_pt->nexternal_haloed_element(rank);
+       for (unsigned e=0; e<next_elem_haloed; e++)
+        {
+         my_mesh_pt->external_haloed_element_pt(rank,e)->
+          add_internal_data_values_to_vector(send_data);
+        }
+
+      } // end of loop over meshes
+
     }
    
    //Find the number of data added to the vector
    send_n[rank] = send_data.size() - send_displacement[rank];
+
   }
 
  
@@ -14273,153 +14301,70 @@ void Problem::synchronise_dofs(Mesh* &mesh_pt)
      //Counter for the data within the large array
      unsigned count=receive_displacement[send_rank];
      
-     // How many of my nodes are halos whose non-halo counter
-     // parts live on processor send_rank?
-     unsigned n_nod=mesh_pt->nhalo_node(send_rank);
-     for (unsigned n=0;n<n_nod;n++)
-      {       
-       //Read in values for each halo node
-       mesh_pt->halo_node_pt(send_rank,n)->
-        read_values_from_vector(receive_data,count);
-      }
+     // Deal with sub-meshes one-by-one if required
+     Mesh* my_mesh_pt=0;
      
-     // Get number of halo elements whose non-halo is 
-     // on process send_rank
-     Vector<GeneralisedElement*> halo_elem_pt=mesh_pt->
-      halo_element_pt(send_rank);
-     
-     unsigned nelem_halo=halo_elem_pt.size();
-     for (unsigned e=0;e<nelem_halo;e++)
+     // Loop over submeshes
+     for (unsigned imesh=0;imesh<n_mesh_loop;imesh++)
       {
-       halo_elem_pt[e]->
-        read_internal_data_values_from_vector(receive_data,count);
-      }
+       if (nmesh==0)
+        {
+         my_mesh_pt=mesh_pt();
+        }
+       else
+        {
+         my_mesh_pt=mesh_pt(imesh);
+        }
+       
+       // How many of my nodes are halos whose non-halo counter
+       // parts live on processor send_rank?
+       unsigned n_nod=my_mesh_pt->nhalo_node(send_rank);
+       for (unsigned n=0;n<n_nod;n++)
+        {       
+         //Read in values for each halo node
+         my_mesh_pt->halo_node_pt(send_rank,n)->
+          read_values_from_vector(receive_data,count);
+        }
+       
+       // Get number of halo elements whose non-halo is 
+       // on process send_rank
+       Vector<GeneralisedElement*> halo_elem_pt=my_mesh_pt->
+        halo_element_pt(send_rank);
+       
+       unsigned nelem_halo=halo_elem_pt.size();
+       for (unsigned e=0;e<nelem_halo;e++)
+        {
+         halo_elem_pt[e]->
+          read_internal_data_values_from_vector(receive_data,count);
+        }
+
+       // How many of my nodes are external halos whose external non-halo
+       // counterparts live on processor send_rank? 
+       unsigned n_ext_nod=my_mesh_pt->nexternal_halo_node(send_rank);
+       
+       // Copy into the values of the external halo nodes
+       // on the present processors
+       for (unsigned n=0;n<n_ext_nod;n++)
+        {
+         //Read the data from the array into each halo node
+         my_mesh_pt->external_halo_node_pt(send_rank,n)->
+          read_values_from_vector(receive_data,count);
+        }
+       
+       // Get number of halo elements whose non-halo is 
+       // on process send_rank
+       unsigned next_elem_halo=my_mesh_pt->nexternal_halo_element(send_rank);
+       for (unsigned e=0;e<next_elem_halo;e++)
+        {
+         my_mesh_pt->external_halo_element_pt(send_rank,e)->
+          read_internal_data_values_from_vector(receive_data,count);
+        }
+       
+      } // end of loop over meshes
     }
   } //End of data is received
 } //End of synchronise
 
-//========================================================================
-/// Synchronise the external degrees of freedom by overwriting
-/// the external halo values with their external haloed counterparts held
-/// on other processors and the external mesh.
-//========================================================================
-void Problem::synchronise_external_dofs(Mesh* &mesh_pt)
-{ 
- // Storage for number of processors and current processor
- int n_proc=this->communicator_pt()->nproc();
- //If only one processor then return
- if(n_proc==1) {return;}
- int my_rank=this->communicator_pt()->my_rank();
- 
- // Storage for number of data to be sent to each processor
- Vector<int> send_n(n_proc,0);
- // Storage for all values to be sent to all processors
- Vector<double> send_data;
- // Start location within send_data for data to be sent to each processor 
- Vector<int> send_displacement(n_proc,0);
- 
- // Loop over all processors whose eqn numbers are to be updated
- for (int rank=0;rank<n_proc;rank++)
-  {   
-   //Set the displacement of the current processor in the loop
-   send_displacement[rank] = send_data.size();
-   
-   //Don't bother to do anything if the processor in the loop is the current
-   //processor
-   if (rank!=my_rank)
-    {
-     // How many of my nodes are externally haloed by the processor whose
-     // values are updated?  NB these nodes are on the external mesh.
-     unsigned n_ext_nod=mesh_pt->nexternal_haloed_node(rank);
-     for (unsigned n=0;n<n_ext_nod;n++)
-      {
-       //Add data from each external haloed node to the vector
-       mesh_pt->external_haloed_node_pt(rank,n)->
-        add_values_to_vector(send_data);
-      }
-     
-     // Now loop over haloed elements and prepare to send internal data
-     unsigned next_elem_haloed=mesh_pt->nexternal_haloed_element(rank);
-     for (unsigned e=0; e<next_elem_haloed; e++)
-      {
-       mesh_pt->external_haloed_element_pt(rank,e)->
-        add_internal_data_values_to_vector(send_data);
-      }
-    }
-
-   //Find the number of data added to the vector by this processor
-   send_n[rank] = send_data.size() - send_displacement[rank];
-  }
-
- //Storage for the number of data to be received from each processor
- Vector<int> receive_n(n_proc,0);
-
- //Communicate numbers of all data to be sent between every processor
- MPI_Alltoall(&send_n[0],1,MPI_INT,&receive_n[0],1,MPI_INT,
-              this->communicator_pt()->mpi_comm());
- 
- //We now prepare the data to be received
- //by working out the displacements from the received data
- Vector<int> receive_displacement(n_proc,0);
- int receive_data_count=0;
- for(int rank=0;rank<n_proc;++rank)
-  {
-   //Displacement is number of data received so far
-   receive_displacement[rank] = receive_data_count;
-   receive_data_count += receive_n[rank];
-  }
- 
- //Now resize the receive buffer
- //Make sure that it has a size of at least one
- if(receive_data_count==0) {++receive_data_count;}
- Vector<double> receive_data(receive_data_count);
- 
- //Make sure that the send buffer has size at least one
- //so that we don't get a segmentation fault
- if(send_data.size()==0) {send_data.resize(1);}
- 
- //Now send the data between all the processors
- MPI_Alltoallv(&send_data[0],&send_n[0],&send_displacement[0],
-               MPI_DOUBLE,
-               &receive_data[0],&receive_n[0],
-               &receive_displacement[0],
-               MPI_DOUBLE,
-               this->communicator_pt()->mpi_comm());
-
- 
- //Now use the received data to update the halo node values
- for (int send_rank=0;send_rank<n_proc;send_rank++)
-  {
-   //Don't do anything for the processor corresponding to the
-   //current processor or if no data were received from this processor
-   if((send_rank!=my_rank) && (receive_n[send_rank] != 0))
-    {
-     //Counter for the data within the large array
-     unsigned count = receive_displacement[send_rank];
-     
-     // How many of my nodes are external halos whose external non-halo
-     // counterparts live on processor send_rank? 
-     unsigned n_ext_nod=mesh_pt->nexternal_halo_node(send_rank);
-     // Copy into the values of the external halo nodes
-     // on the present processors
-     for (unsigned n=0;n<n_ext_nod;n++)
-      {
-       //Read the data from the array into each halo node
-       mesh_pt->external_halo_node_pt(send_rank,n)->
-        read_values_from_vector(receive_data,count);
-      }
-           
-     // Get number of halo elements whose non-halo is 
-     // on process send_rank
-     unsigned next_elem_halo=mesh_pt->nexternal_halo_element(send_rank);
-     for (unsigned e=0;e<next_elem_halo;e++)
-      {
-       mesh_pt->external_halo_element_pt(send_rank,e)->
-        read_internal_data_values_from_vector(receive_data,count);
-      }
-    }
-  } //End of loop over processors
-}
 
 //========================================================================
 ///  Synchronise equation numbers and return the total
@@ -14571,46 +14516,16 @@ long Problem::synchronise_eqn_numbers(const bool& assign_local_eqn_numbers)
    t_start = TimingHelpers::timer();
   }
 
- // The following copies the halo(ed) eqn numbers, and therefore
- // needs to be called at a submesh level as the halo(ed) structure
- // is only visible at the submesh level
- unsigned nmesh=nsub_mesh();
+
  // Now copy the haloed eqn numbers across
  // This has to include the internal data equation numbers as well
  // as the solid node equation numbers
- if (nmesh==0)
-  {
-   copy_haloed_eqn_numbers_helper(mesh_pt());
-  }
- else // nmesh!=0
-  {
-   for (unsigned imesh=0; imesh<nmesh; imesh++)
-    {
-     // Do the haloed eqn numbers for this submesh
-     copy_haloed_eqn_numbers_helper(mesh_pt(imesh));
-    }
-  }
-
+ copy_haloed_eqn_numbers_helper();
 
  if (Global_timings::Doc_comprehensive_timings)
   {
    t_end = TimingHelpers::timer();
    oomph_info << "Time for copy_haloed_eqn_numbers_helper: " 
-              << t_end-t_start << std::endl;
-   t_start = TimingHelpers::timer();
-  }
-
- // Also copy external haloed equation numbers
- for (unsigned i=0;i<nmesh;i++)
-  {
-   copy_external_haloed_eqn_numbers_helper(mesh_pt(i));
-  }
-
-
- if (Global_timings::Doc_comprehensive_timings)
-  {
-   t_end = TimingHelpers::timer();
-   oomph_info << "Time for copy_external_haloed_eqn_numbers_helper: " 
               << t_end-t_start << std::endl;
    t_start = TimingHelpers::timer();
   }
@@ -14672,13 +14587,23 @@ long Problem::synchronise_eqn_numbers(const bool& assign_local_eqn_numbers)
 
 //=======================================================================
 /// A private helper function to
-/// copy the haloed equation numbers into the halo equation numbers.
-/// The argument is the mesh/submesh which will be worked on.
+/// copy the haloed equation numbers into the halo equation numbers,
+/// either for the problem's one and only mesh or for all of its
+/// submeshes.
 //===================================================================
-void Problem::copy_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
+void Problem::copy_haloed_eqn_numbers_helper()
 {
+ // Do we have submeshes?
+ unsigned n_mesh_loop=1;
+ unsigned nmesh=nsub_mesh();
+ if (nmesh>0)
+  {
+   n_mesh_loop=nmesh;
+  }
+
  // Storage for number of processors and current processor
  int n_proc=this->communicator_pt()->nproc();
+
  //If only one processor then return
  if(n_proc==1) {return;}
  int my_rank=this->communicator_pt()->my_rank();
@@ -14702,25 +14627,60 @@ void Problem::copy_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
    // eqn numbers into the vector
    if (rank!=my_rank)
     {
-     //Add equation numbers for each haloed node
-     unsigned n_nod=mesh_pt->nhaloed_node(rank);
-     for (unsigned n=0;n<n_nod;n++)
-      {
-       mesh_pt->haloed_node_pt(rank,n)->
-        add_eqn_numbers_to_vector(send_data);
-      }
-     
-     //Add the equation numbers associated with internal data
-     //in the haloed elements
-     Vector<GeneralisedElement*> 
-      haloed_elem_pt=mesh_pt->haloed_element_pt(rank);
-     unsigned nelem_haloed=haloed_elem_pt.size();
-     for (unsigned e=0; e<nelem_haloed; e++)
-      {
-       haloed_elem_pt[e]->add_internal_eqn_numbers_to_vector(send_data);
-      }
-    }
+     // Deal with sub-meshes one-by-one if required
+     Mesh* my_mesh_pt=0;
 
+     // Loop over submeshes
+     for (unsigned imesh=0;imesh<n_mesh_loop;imesh++)
+      {
+       if (nmesh==0)
+        {
+         my_mesh_pt=mesh_pt();
+        }
+       else
+        {
+         my_mesh_pt=mesh_pt(imesh);
+        }
+       
+       //Add equation numbers for each haloed node
+       unsigned n_nod=my_mesh_pt->nhaloed_node(rank);
+       for (unsigned n=0;n<n_nod;n++)
+        {
+         my_mesh_pt->haloed_node_pt(rank,n)->
+          add_eqn_numbers_to_vector(send_data);
+        }
+       
+       //Add the equation numbers associated with internal data
+       //in the haloed elements
+       Vector<GeneralisedElement*> 
+        haloed_elem_pt=my_mesh_pt->haloed_element_pt(rank);
+       unsigned nelem_haloed=haloed_elem_pt.size();
+       for (unsigned e=0; e<nelem_haloed; e++)
+        {
+         haloed_elem_pt[e]->add_internal_eqn_numbers_to_vector(send_data);
+        }
+
+       //Add equation numbers associated with external haloed nodes
+       unsigned n_ext_nod=my_mesh_pt->nexternal_haloed_node(rank);
+       for (unsigned n=0;n<n_ext_nod;n++)
+        {
+         my_mesh_pt->external_haloed_node_pt(rank,n)->
+          add_eqn_numbers_to_vector(send_data);
+        }
+       
+       //Add the equation numbers associated with internal data in
+       //each external haloed element
+       unsigned next_elem_haloed=my_mesh_pt->nexternal_haloed_element(rank);
+       for (unsigned e=0; e<next_elem_haloed; e++)
+        {
+         // how many internal data values for this element?
+         my_mesh_pt->external_haloed_element_pt(rank,e)->
+          add_internal_eqn_numbers_to_vector(send_data);
+        }
+
+      } // end of loop over meshes
+    } 
+   
    //Find the number of data added to the vector by this processor
    send_n[rank] = send_data.size() - send_displacement[rank];
   }
@@ -14771,156 +14731,67 @@ void Problem::copy_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
     {
      //Counter for the data within the large array
      unsigned count = receive_displacement[send_rank];
-
-     // How many of my nodes are halos whose non-halo counter
-     // parts live on processor send_rank?
-     unsigned n_nod=mesh_pt->nhalo_node(send_rank);
-     for (unsigned n=0;n<n_nod;n++)
-      {
-       // Generalise to variable number of values per node
-       mesh_pt->halo_node_pt(send_rank,n)->
-        read_eqn_numbers_from_vector(receive_data,count);
-      }
      
-     // Get number of halo elements whose non-halo is on 
-     //process send_rank
-     Vector<GeneralisedElement*> halo_elem_pt=mesh_pt->
-      halo_element_pt(send_rank);
-     unsigned nelem_halo=halo_elem_pt.size();
-     for (unsigned e=0;e<nelem_halo;e++)
+     // Deal with sub-meshes one-by-one if required
+     Mesh* my_mesh_pt=0;
+
+     // Loop over submeshes
+     for (unsigned imesh=0;imesh<n_mesh_loop;imesh++)
       {
-       halo_elem_pt[e]->
-        read_internal_eqn_numbers_from_vector(receive_data,count);
-      }
+       if (nmesh==0)
+        {
+         my_mesh_pt=mesh_pt();
+        }
+       else
+        {
+         my_mesh_pt=mesh_pt(imesh);
+        }
+       
+       // How many of my nodes are halos whose non-halo counter
+       // parts live on processor send_rank?
+       unsigned n_nod=my_mesh_pt->nhalo_node(send_rank);
+       for (unsigned n=0;n<n_nod;n++)
+        {
+         // Generalise to variable number of values per node
+         my_mesh_pt->halo_node_pt(send_rank,n)->
+          read_eqn_numbers_from_vector(receive_data,count);
+        }
+       
+       // Get number of halo elements whose non-halo is on 
+       //process send_rank
+       Vector<GeneralisedElement*> halo_elem_pt=my_mesh_pt->
+        halo_element_pt(send_rank);
+       unsigned nelem_halo=halo_elem_pt.size();
+       for (unsigned e=0;e<nelem_halo;e++)
+        {
+         halo_elem_pt[e]->
+          read_internal_eqn_numbers_from_vector(receive_data,count);
+        }
+
+       // How many of my nodes are external halos whose external non-halo
+       // counterparts live on processor send_rank?
+       unsigned n_ext_nod=my_mesh_pt->nexternal_halo_node(send_rank);
+       for (unsigned n=0;n<n_ext_nod;n++)
+        {
+         my_mesh_pt->external_halo_node_pt(send_rank,n)->
+          read_eqn_numbers_from_vector(receive_data,count);
+        }
+       
+       // Get number of external halo elements whose external haloed
+       // counterpart is on process send_rank
+       unsigned next_elem_halo=my_mesh_pt->nexternal_halo_element(send_rank);
+       for (unsigned e=0;e<next_elem_halo;e++)
+        {
+         my_mesh_pt->external_halo_element_pt(send_rank,e)->
+          read_internal_eqn_numbers_from_vector(receive_data,count);
+        }
+
+      } // end of loop over meshes
     }
   } //End of loop over processors
 }
 
 
-
-
-//=======================================================================
-/// A helper function to copy the external haloed equation 
-/// numbers into the external halo equation numbers.
-/// The arguments are the submesh for the external halo nodes and the
-/// (external) submesh for the external haloed nodes
-//===================================================================
-void Problem::copy_external_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
-{
- // Storage for number of processors and current processor
- int n_proc=this->communicator_pt()->nproc();
- //If only one processor then return
- if(n_proc==1) {return;}
- int my_rank=this->communicator_pt()->my_rank();
-
- // Storage for number of data to be sent to each processor
- Vector<int> send_n(n_proc,0);
- // Storage for all equation numbers to be sent to all processors
- Vector<long> send_data;
- // Start location within send_data for data to be sent to each processor 
- Vector<int> send_displacement(n_proc,0);
-
- // Loop over all processors whose eqn numbers are to be updated
- for (int rank=0;rank<n_proc;rank++)
-  {
-   //Set the displacement of the current processor in the loop
-   send_displacement[rank] = send_data.size();
-   
-   // If I'm not the processor whose external halo eqn numbers are updated,
-   // some of my nodes may be externally haloed: Stick their
-   // eqn numbers into the vector
-   if (rank!=my_rank)
-    {
-     //Add equation numbers associated with external haloed nodes
-     unsigned n_ext_nod=mesh_pt->nexternal_haloed_node(rank);
-     for (unsigned n=0;n<n_ext_nod;n++)
-      {
-       mesh_pt->external_haloed_node_pt(rank,n)->
-        add_eqn_numbers_to_vector(send_data);
-      }
-     
-     //Add the equation numbers associated with internal data in
-     //each external haloed element
-     unsigned next_elem_haloed=mesh_pt->nexternal_haloed_element(rank);
-     for (unsigned e=0; e<next_elem_haloed; e++)
-      {
-       // how many internal data values for this element?
-       mesh_pt->external_haloed_element_pt(rank,e)->
-        add_internal_eqn_numbers_to_vector(send_data);
-      }
-    }
-
-   //Find the number of data added to the vector by this processor
-   send_n[rank] = send_data.size() - send_displacement[rank];
-  }
-
-
- //Storage for the number of data to be received from each processor
- Vector<int> receive_n(n_proc,0);
- 
- //Communicate the numbers of data to be sent between all processors
- MPI_Alltoall(&send_n[0],1,MPI_INT,&receive_n[0],1,MPI_INT,
-              this->communicator_pt()->mpi_comm());
- 
- //We now prepare the data to be received
- //by working out the displacements from the received data
- Vector<int> receive_displacement(n_proc,0);
- int receive_data_count=0;
- for(int rank=0;rank<n_proc;++rank)
-  {
-   //Displacement is number of data received so far
-   receive_displacement[rank] = receive_data_count;
-   receive_data_count += receive_n[rank];
-  }
- 
- //Now resize the receive buffer
- //Make sure that it has a size of at least one
- if(receive_data_count==0) {++receive_data_count;}
- Vector<long> receive_data(receive_data_count);
- 
- //Make sure that the send buffer has size at least one
- //so that we don't get a segmentation fault
- if(send_data.size()==0) {send_data.resize(1);}
- 
- //Now send the data between all the processors
- MPI_Alltoallv(&send_data[0],&send_n[0],&send_displacement[0],
-               MPI_LONG,
-               &receive_data[0],&receive_n[0],
-               &receive_displacement[0],
-               MPI_LONG,
-               this->communicator_pt()->mpi_comm());
- 
- // Loop over all other processors to receive their
- // eqn numbers
- for(int send_rank=0;send_rank<n_proc;send_rank++)
-  {
-   // Don't do anything for the processor corresponding to the 
-   // current processor or if no data were received from this processor
-   if((send_rank!=my_rank) && (receive_n[send_rank] != 0))
-    {
-     //Counter for the data within the large array
-     unsigned count = receive_displacement[send_rank];
-     
-     // How many of my nodes are external halos whose external non-halo
-     // counterparts live on processor send_rank?
-     unsigned n_ext_nod=mesh_pt->nexternal_halo_node(send_rank);
-     for (unsigned n=0;n<n_ext_nod;n++)
-      {
-       mesh_pt->external_halo_node_pt(send_rank,n)->
-        read_eqn_numbers_from_vector(receive_data,count);
-      }
-     
-     // Get number of external halo elements whose external haloed
-     // counterpart is on process send_rank
-     unsigned next_elem_halo=mesh_pt->nexternal_halo_element(send_rank);
-     for (unsigned e=0;e<next_elem_halo;e++)
-      {
-       mesh_pt->external_halo_element_pt(send_rank,e)->
-        read_internal_eqn_numbers_from_vector(receive_data,count);
-      }
-    }
-  }
-}
 
 
 
@@ -16532,17 +16403,12 @@ void Problem::send_data_to_be_sent_during_load_balancing(
 
  // Now that this is done, we need to synchronise dofs to get
  // the halo element and node values correct
+ this->synchronise_dofs();
+ 
+ // Now rebuild global mesh if required
  unsigned n_mesh=nsub_mesh();
- if (n_mesh==0)
+ if (n_mesh!=0)
   {
-   synchronise_dofs(mesh_pt());
-  }
- else
-  {
-   for (unsigned i_mesh=0;i_mesh<n_mesh;i_mesh++)
-    {
-     synchronise_dofs(mesh_pt(i_mesh));
-    }
    rebuild_global_mesh();
   }
  

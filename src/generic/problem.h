@@ -411,7 +411,7 @@ namespace oomph
                   Vector<unsigned> &my_eqns);
 
  /// \short Helper method to assemble CRDoubleMatrices from distributed
-/// on multiple processors.
+ /// on multiple processors.
  void parallel_sparse_assemble
   (const LinearAlgebraDistribution* const &dist_pt,
    Vector<int* > &column_or_row_index, 
@@ -420,9 +420,11 @@ namespace oomph
    Vector<unsigned > &nnz, 
    Vector<double* > &residuals);
 
- /// \short Private helper function to copy the haloed eqn numbers across
- /// for the Mesh in the argument
- void copy_haloed_eqn_numbers_helper(Mesh* &mesh_pt);
+ /// \short A private helper function to
+ /// copy the haloed equation numbers into the halo equation numbers,
+ /// either for the problem's one and only mesh or for all of its
+ /// submeshes.
+ void copy_haloed_eqn_numbers_helper();
 
  /// \short Private helper function to remove repeated data
  /// in external haloed elements in specified mesh. Bool is true if some data 
@@ -1631,17 +1633,8 @@ namespace oomph
 
  /// \short Synchronise the degrees of freedom by overwriting
  /// the haloed values with their non-halo counterparts held
- /// on other processors on the specified mesh
- void synchronise_dofs(Mesh* &mesh_pt);
-
- /// \short Synchronise the degrees of freedom from external
- /// nodes and elements held on other processors for the
- /// specified mesh; also pass in the external mesh for this mesh
- void synchronise_external_dofs(Mesh* &mesh_pt);
-
- /// \short A helper function to copy the external haloed eqn numbers
- /// on the Mesh in the argument to the external halo eqn numbers
- void copy_external_haloed_eqn_numbers_helper(Mesh* &mesh_pt);
+ /// on other processors
+ void synchronise_dofs();
 
  /// Check the halo/haloed node/element schemes
  void check_halo_schemes(DocInfo& doc_info);

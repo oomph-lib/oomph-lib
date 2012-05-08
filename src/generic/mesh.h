@@ -1129,7 +1129,14 @@ public:
  /// is held on processor p.
  unsigned nhalo_node(const unsigned& p)
   {
-   return Halo_node_pt[p].size();
+   //Memory saving version of: return Halo_node_pt[p].size();
+   std::map<unsigned, Vector<Node*> >::iterator it=
+    Halo_node_pt.find(p);
+   if (it==Halo_node_pt.end())
+    {
+     return 0;
+    }
+   return (*it).second.size();
   }
 
  /// \short Add halo node whose non-halo counterpart is held 
@@ -1164,7 +1171,14 @@ public:
  /// counterpart is held on processor p.
  unsigned nroot_haloed_element(const unsigned& p)
   {
-   return Root_haloed_element_pt[p].size();
+   //Memory saving version of: return Root_haloed_element_pt[p].size();
+   std::map<unsigned, Vector<GeneralisedElement*> >::iterator it=
+    Root_haloed_element_pt.find(p);
+   if (it==Root_haloed_element_pt.end())
+    {
+     return 0;
+    }
+   return (*it).second.size();
   }
 
 
@@ -1172,13 +1186,21 @@ public:
  /// whose non-halo counterpart is held on processor p.
  Vector<GeneralisedElement*> root_haloed_element_pt(const unsigned& p)
   {
-   return Root_haloed_element_pt[p];
+   //Memory saving version of:  return Root_haloed_element_pt[p];
+   std::map<unsigned, Vector<GeneralisedElement*> >::iterator it=  
+    Root_haloed_element_pt.find(p);
+   if (it==Root_haloed_element_pt.end())
+    {
+     Vector<GeneralisedElement*> tmp;
+     return tmp;
+    }
+   return (*it).second;
   }
 
  /// \short Access fct to the e-th root haloed element in this Mesh 
  /// whose non-halo counterpart is held on processor p.
  GeneralisedElement* &root_haloed_element_pt(const unsigned& p, 
-                                            const unsigned& e)
+                                             const unsigned& e)
   {
    return Root_haloed_element_pt[p][e];
   }
@@ -1211,7 +1233,14 @@ public:
  /// is held on processor p.
  unsigned nhaloed_node(const unsigned& p)
   {
-   return Haloed_node_pt[p].size();
+   // Memory saving version of: return Haloed_node_pt[p].size();
+   std::map<unsigned, Vector<Node*> >::iterator it=
+    Haloed_node_pt.find(p);
+   if (it==Haloed_node_pt.end())
+    {
+     return 0;
+    }
+   return (*it).second.size();
   }
 
  /// \short Access fct to the j-th haloed node in this Mesh 
@@ -1297,7 +1326,14 @@ public:
  /// on processor p.
  unsigned nshared_node(const unsigned& p)
   {
-   return Shared_node_pt[p].size();
+   // Memory saving version of: return Shared_node_pt[p].size();
+   std::map<unsigned, Vector<Node*> >::iterator it=
+    Shared_node_pt.find(p);
+   if (it==Shared_node_pt.end())
+    {
+     return 0;
+    }
+   return (*it).second.size();
   }
 
  /// \short Access fct to the j-th shared node in this Mesh 
@@ -1427,7 +1463,14 @@ public:
  /// counterpart is held on processor p.
  unsigned nexternal_halo_element(const unsigned& p)
   {
-   return External_halo_element_pt[p].size();
+   // Memory saving version of: return External_halo_element_pt[p].size();
+   std::map<unsigned, Vector<GeneralisedElement*> >::iterator it=
+    External_halo_element_pt.find(p);
+   if (it==External_halo_element_pt.end())
+    {
+     return 0;
+    }
+   return (*it).second.size();
   }
 
  /// \short Access fct to the e-th external halo element in this Mesh 
@@ -1464,7 +1507,14 @@ public:
  /// counterpart is held on processor p.
  unsigned nexternal_haloed_element(const unsigned& p) 
   {
-   return External_haloed_element_pt[p].size();
+   // Memory saving version of: return External_haloed_element_pt[p].size();
+   std::map<unsigned, Vector<GeneralisedElement*> >::iterator it=
+    External_haloed_element_pt.find(p);
+   if (it==External_haloed_element_pt.end())
+    {
+     return 0;
+    }
+   return (*it).second.size();
   }
 
  /// \short Access fct to the e-th external haloed element in this Mesh 
@@ -1526,9 +1576,16 @@ public:
  /// \short Number of external halo nodes in this Mesh whose non-halo 
  /// (external) counterpart is held on processor p.
  unsigned nexternal_halo_node(const unsigned& p)
-  {
-   return External_halo_node_pt[p].size();
-  }
+ {
+  // Memory saving version of: return External_halo_node_pt[p].size();
+  std::map<unsigned, Vector<Node*> >::iterator it=
+   External_halo_node_pt.find(p);
+  if (it==External_halo_node_pt.end())
+   {
+    return 0;
+   }
+  return (*it).second.size();
+ }
 
  /// \short Add external halo node whose non-halo (external) counterpart 
  /// is held on processor p to the storage scheme for halo nodes.
@@ -1570,9 +1627,16 @@ public:
  /// whose halo (external) counterpart is held on processor p.
  unsigned nexternal_haloed_node(const unsigned& p)
   {
-   return External_haloed_node_pt[p].size();
+   // Memory saving version of: return External_haloed_node_pt[p].size();
+   std::map<unsigned, Vector<Node*> >::iterator it=
+    External_haloed_node_pt.find(p);
+   if (it==External_haloed_node_pt.end())
+    {
+     return 0;
+    }
+   return (*it).second.size();
   }
-
+ 
  /// \short Access fct to the j-th external haloed node in this Mesh 
  /// whose halo external counterpart is held on processor p.
  Node* &external_haloed_node_pt(const unsigned &p, const unsigned &j)

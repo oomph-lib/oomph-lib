@@ -46,17 +46,31 @@ namespace oomph
 
  //=============================================================================
  /// \short Functions to create instances of optimal subsidiary operators for
- /// the PseudoElasticPreconditioner
+ /// the PseudoElasticPreconditioner. By default we use hypre for the
+ /// the elastic blocks but can use Trilinos ML too.
  //=============================================================================
  namespace Pseudo_Elastic_Preconditioner_Subsidiary_Operator_Helper
  {
+
+
 #ifdef OOMPH_HAS_HYPRE
+
+  /// \short Hypre AMG w/ GS smoothing for the augmented elastic 
+  /// subsidiary linear systems
+  Preconditioner* get_elastic_preconditioner_hypre();
+  
   /// \short AMG w/ GS smoothing for the augmented elastic subsidiary linear
-  /// systems
+  /// systems -- calls Hypre version to stay consistent with previous default
   Preconditioner* get_elastic_preconditioner();
+  
 #endif
   
 #ifdef OOMPH_HAS_TRILINOS
+
+  /// \short TrilinosML smoothing for the augmented elastic 
+  /// subsidiary linear systems
+  Preconditioner* get_elastic_preconditioner_trilinos_ml();
+
   /// \short CG with diagonal preconditioner for the lagrange multiplier
   /// subsidiary linear systems.
   Preconditioner* get_lagrange_multiplier_preconditioner();

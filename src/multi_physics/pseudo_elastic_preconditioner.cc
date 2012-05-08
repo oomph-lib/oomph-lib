@@ -40,7 +40,7 @@ namespace oomph
 #ifdef OOMPH_HAS_HYPRE
   /// \short AMG w/ GS smoothing for the augmented elastic subsidiary linear
   /// systems
-  Preconditioner* get_elastic_preconditioner()
+  Preconditioner* get_elastic_preconditioner_hypre()
   {
    HyprePreconditioner* hypre_preconditioner_pt = new HyprePreconditioner;
    hypre_preconditioner_pt->set_amg_iterations(2);
@@ -52,9 +52,28 @@ namespace oomph
    hypre_preconditioner_pt->amg_coarsening() = 6;
    return hypre_preconditioner_pt;
   }
+
+
+  /// \short AMG w/ GS smoothing for the augmented elastic subsidiary linear
+  /// systems -- calls Hypre version to stay consistent with previous default
+  Preconditioner* get_elastic_preconditioner()
+  {
+   return get_elastic_preconditioner_hypre();
+  }
+  
 #endif
   
 #ifdef OOMPH_HAS_TRILINOS
+
+  /// \short TrilinosML smoothing for the augmented elastic 
+  /// subsidiary linear systems
+  Preconditioner* get_elastic_preconditioner_trilinos_ml()
+  {
+   TrilinosMLPreconditioner* trilinos_prec_pt=
+    new TrilinosMLPreconditioner;
+   return trilinos_prec_pt;
+  }
+
   /// \short CG with diagonal preconditioner for the lagrange multiplier
   /// subsidiary linear systems.
   Preconditioner* get_lagrange_multiplier_preconditioner()

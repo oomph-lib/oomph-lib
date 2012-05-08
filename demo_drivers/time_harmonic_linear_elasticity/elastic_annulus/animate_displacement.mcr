@@ -17,7 +17,7 @@ $!IF |PNG|==0
        EXPORTREGION = ALLFRAMES 
 $!ENDIF         
 
-$!READDATASET  '"RESLT/elast_soln610.plt" '
+$!READDATASET  '"RESLT/elast_soln20.dat" '
   READDATAOPTION = NEW
   RESETSTYLE = YES
   INCLUDETEXT = NO
