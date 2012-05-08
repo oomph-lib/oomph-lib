@@ -803,16 +803,10 @@ namespace PauseFlags
 /// Pause and dump out message
 void pause(std::string message);
 
-/// Doc memory usage (in % of available memory) -- write to file 
-void doc_memory_usage();
-
-
-/// Initialise doc memory usage (in % of available memory)
-void init_doc_memory_usage();
 
 
 //=============================================================================
-/// Helper for recordning execution time.
+/// Helper for recording execution time.
 //=============================================================================
 namespace TimingHelpers
 {
@@ -821,5 +815,97 @@ namespace TimingHelpers
  double timer();
 
 }//end of namespace TimingHelpers
+
+
+
+
+
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+
+
+
+//===============================================================
+/// Namespace with helper functions to assess total memory usage
+/// on the fly using system() -- details are very machine specific! This just
+/// provides the overall machinery with default settings for
+/// our own (linux machines). Uses the system command
+/// to spawn a command that computes the total memory usage
+/// on the machine where this is called.  [Disclaimer: works 
+/// on my machine(s) -- no guarantees for any other platform; 
+/// linux or not. MH]
+//===============================================================
+namespace MemoryUsage
+{
+
+  /// \short String containing system command that obtains memory usage
+  /// of all processes.
+  /// Default assigment for linux. [Disclaimer: works on my machine(s) --
+  /// no guarantees for any other platform; linux or not. MH]
+ extern std::string My_memory_usage_system_string;
+
+ /// \short Bool allowing quick bypassing of ALL operations related
+ /// to memory usage monitoring -- this allows the code to remain
+ /// "instrumented" without incurring the heavy penalties associated
+ /// with the system calls and i/o. Default setting: false.
+ extern bool Bypass_all_memory_usage_monitoring;
+ 
+ /// \short String containing name of file in which we document
+ /// my memory usage -- you may want to change this to allow different
+ /// processors to write to separate files (especially in mpi 
+ /// context). Note that file is appended to 
+ /// so it ought to be emptied (either manually or by calling
+ /// helper function empty_memory_usage_file()
+ extern std::string My_memory_usage_filename;
+ 
+ /// \short Function to empty file that records my memory usage in
+ /// file whose name is specified by My_memory_usage_filename.
+ void empty_my_memory_usage_file();
+ 
+ /// \short Doc my memory usage, prepended by string (which allows
+ /// identification from where the function is called, say) that records 
+ /// memory usage in file whose name is specified by My_memory_usage_filename.
+ /// Data is appended to that file; wipe it with empty_my_memory_usage_file().
+ void doc_my_memory_usage(const std::string& prefix_string=0);
+ 
+ /// \short String containing system command that obtains total memory usage.
+ /// Default assigment for linux. [Disclaimer: works on my machine(s) --
+ /// no guarantees for any other platform; linux or not. MH]
+ extern std::string Total_memory_usage_system_string;
+ 
+ /// \short String containing name of file in which we document total
+ /// memory usage -- you may want to change this to allow different
+ /// processors to write to separate files (especially in mpi 
+ /// context). Note that file is appended to 
+ /// so it ought to be emptied (either manually or by calling
+ /// helper function empty_memory_usage_file()
+ extern std::string Total_memory_usage_filename;
+ 
+ /// \short Function to empty file that records total memory usage in
+ /// file whose name is specified by Total_memory_usage_filename.
+ void empty_total_memory_usage_file();
+ 
+ /// \short Doc total memory usage, prepended by string (which allows
+ /// identification from where the function is called, say) that records 
+ /// mem usage in file whose name is specified by Total_memory_usage_filename.
+ /// Data is appended to that file; wipe it with empty_memory_usage_file().
+ void doc_total_memory_usage(const std::string& prefix_string="");
+ 
+ /// \short Function to empty file that records total and local memory usage
+ /// in appropriate files
+ void empty_memory_usage_files();
+ 
+ /// \short Doc total and local memory usage, prepended by string (which allows
+ /// identification from where the function is called, say)
+ void doc_memory_usage(const std::string& prefix_string="");
+ 
+
+} // end of namespace MemoryUsage
+
+
+
+
+
 }
 #endif

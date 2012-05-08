@@ -29,13 +29,15 @@
 #include "mpi.h"
 #endif
 
-#include "oomph_utilities.h"
-#include "Vector.h"
-#include "matrices.h"
+#include <unistd.h>
 #include <algorithm>
 #include <limits.h>
 #include <cstring>
 
+
+#include "oomph_utilities.h"
+#include "Vector.h"
+#include "matrices.h"
 
 namespace oomph
 {
@@ -1575,38 +1577,183 @@ namespace TimingHelpers
 }//end of namespace TimingHelpers
 
 
-// //====================================================================
-// // Half-arsed attempt at docmenting memory usage
-// //====================================================================
-// void init_doc_memory_usage()
-// {
-//  int my_pid=int(getpid());
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+
+
+
+//===============================================================
+/// Namespace with helper functions to assess total memory usage
+/// on the fly using system() -- details are very machine specific! This just
+/// provides the overall machinery with default settings for
+/// our own (linux machines). Uses the system command
+/// to spawn a command that computes the total memory usage
+/// on the machine where this is called.  [Disclaimer: works 
+/// on my machine(s) -- no guarantees for any other platform; 
+/// linux or not. MH]
+//===============================================================
+namespace MemoryUsage
+{
  
-//  //oomph_info << "My pid " << my_pid << std::endl;
+  /// \short String containing system command that obtains memory usage
+  /// of all processes.
+  /// Default assigment for linux. [Disclaimer: works on my machine(s) --
+  /// no guarantees for any other platform; linux or not. MH]
+  std::string My_memory_usage_system_string="ps aux";
+
+ /// \short Bool allowing quick bypassing of ALL operations related
+ /// to memory usage monitoring -- this allows the code to remain
+ /// "instrumented" without incurring the heavy penalties associated
+ /// with the system calls and i/o. Default setting: false.
+ bool Bypass_all_memory_usage_monitoring=false;
  
-//  char check_mem_command[100];
-//  sprintf(check_mem_command,
-//    "rm -f memory_usage_%i.dat; date >>memory_usage_%i.dat ",my_pid,my_pid);
-//  system(check_mem_command);
-// }
+  /// \short String containing name of file in which we document
+  /// my memory usage -- you may want to change this to allow different
+  /// processors to write to separate files (especially in mpi 
+  /// context). Note that file is appended to 
+  /// so it ought to be emptied (either manually or by calling
+  /// helper function empty_memory_usage_file()
+  std::string My_memory_usage_filename="my_memory_usage.dat";
+
+  /// \short Function to empty file that records my memory usage in
+  /// file whose name is specified by My_memory_usage_filename.
+  void empty_my_memory_usage_file()
+  {
+   // bail out straight away?
+   if (Bypass_all_memory_usage_monitoring) return;
+
+   // Open without appending and write header
+   std::ofstream the_file;
+   the_file.open(My_memory_usage_filename.c_str());
+   the_file << "# My memory usage: \n";
+   the_file.close();
+  }
+
+
+  
+  /// \short Doc my memory usage, prepended by string (which allows
+  /// identification from where the function is called, say) that records 
+  /// memory usage in file whose name is specified by My_memory_usage_filename.
+  /// Data is appended to that file; wipe it with empty_my_memory_usage_file().
+  void doc_my_memory_usage(const std::string& prefix_string)
+  {
+   // bail out straight away?
+   if (Bypass_all_memory_usage_monitoring) return;
+
+   // Write prefix
+   std::ofstream the_file;
+   the_file.open(My_memory_usage_filename.c_str(),std::ios::app);
+   the_file << prefix_string << " "; 
+   the_file.close();
+  
+   // Sync all processors if in parallel
+#ifdef OOMPH_HAS_MPI
+   if (MPI_Helpers::mpi_has_been_initialised())
+    {
+     MPI_Barrier(MPI_Helpers::communicator_pt()->mpi_comm());
+    }
+#endif
+
+   // Process memory usage command and write to file
+   std::stringstream tmp;
+   tmp << My_memory_usage_system_string 
+       << " | awk '{if ($2==" << getpid() << "){print $4}}' >> " 
+       << My_memory_usage_filename;
+   int success=system(tmp.str().c_str());
+
+   // Dummy command to shut up compiler warnings
+   success+=1;
+  }
+
+ /// \short String containing system command that obtains total memory usage.
+ /// Default assigment for linux. [Disclaimer: works on my machine(s) --
+ /// no guarantees for any other platform; linux or not. MH]
+ std::string Total_memory_usage_system_string=
+  "ps aux | awk 'BEGIN{sum=0}{sum+=$4}END{print sum}'";
+ 
+ /// \short String containing name of file in which we document total
+ /// memory usage -- you may want to change this to allow different
+ /// processors to write to separate files (especially in mpi 
+ /// context). Note that file is appended to 
+ /// so it ought to be emptied (either manually or by calling
+ /// helper function empty_memory_usage_file()
+ std::string Total_memory_usage_filename="memory_usage.dat";
+ 
+ /// \short Function to empty file that records total memory usage in
+ /// file whose name is specified by Total_memory_usage_filename.
+ void empty_total_memory_usage_file()
+ {
+  // bail out straight away?
+  if (Bypass_all_memory_usage_monitoring) return;
+
+  // Open without appending and write header
+  std::ofstream the_file;
+  the_file.open(Total_memory_usage_filename.c_str());
+  the_file << "# Total memory usage: \n";
+  the_file.close();
+ }
+ 
+ /// \short Doc total memory usage, prepended by string (which allows
+ /// identification from where the function is called, say) that records 
+ /// memory usage in file whose name is specified by Total_memory_usage_filename.
+ /// Data is appended to that file; wipe it with empty_memory_usage_file().
+ void doc_total_memory_usage(const std::string& prefix_string)
+ {
+  // bail out straight away?
+  if (Bypass_all_memory_usage_monitoring) return;
+
+  // Write prefix
+  std::ofstream the_file;
+  the_file.open(Total_memory_usage_filename.c_str(),std::ios::app);
+  the_file << prefix_string << " "; 
+  the_file.close();
+  
+  // Sync all processors if in parallel
+#ifdef OOMPH_HAS_MPI
+  if (MPI_Helpers::mpi_has_been_initialised())
+   {
+    MPI_Barrier(MPI_Helpers::communicator_pt()->mpi_comm());
+   }
+#endif
+  
+  // Process memory usage command and write to file
+  std::stringstream tmp;
+  tmp << Total_memory_usage_system_string << " >> " 
+      << Total_memory_usage_filename;
+  int success=system(tmp.str().c_str());
+  
+  // Dummy command to shut up compiler warnings
+  success+=1;
+ }
 
 
 
+ /// \short Function to empty file that records total and local memory usage
+ /// in appropriate files
+ void empty_memory_usage_files()
+ {
+  // bail out straight away?
+  if (Bypass_all_memory_usage_monitoring) return;
+
+  empty_my_memory_usage_file();
+  empty_total_memory_usage_file();
+ }
+ 
+ /// \short Doc total and local memory usage, prepended by string (which allows
+ /// identification from where the function is called, say)
+ void doc_memory_usage(const std::string& prefix_string)
+ {
+  // bail out straight away?
+  if (Bypass_all_memory_usage_monitoring) return;
+
+  doc_my_memory_usage(prefix_string);
+  doc_total_memory_usage(prefix_string);
+ }
 
 
 
-// //====================================================================
-// // Half-arsed attempt at docmenting memory usage
-// //====================================================================
-// void doc_memory_usage()
-// {
-//    int my_pid=int(getpid());
+} // end of namespace MemoryUsage
 
-//    char check_mem_command[100];
-//    sprintf(check_mem_command,
-//     "top n1 -p %i | awk '{MEMORY=$12} END {print MEMORY}' >> memory_usage_%i.dat",my_pid,my_pid);
-
-//    system(check_mem_command);
-//  }
 
 }
