@@ -29,7 +29,6 @@
 #include "mpi.h"
 #endif
 
-#include <unistd.h>
 #include <algorithm>
 #include <limits.h>
 #include <cstring>
