@@ -7110,22 +7110,6 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
                        "Mesh::check_halo_schemes()",
                        OOMPH_EXCEPTION_LOCATION);
   }
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
 
 

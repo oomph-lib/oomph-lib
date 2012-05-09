@@ -1603,6 +1603,28 @@ public:
    return External_halo_node_pt[p][j];
   }
 
+ /// \short Access fct to vector  of  external halo node in this Mesh 
+ /// whose non-halo external counterpart is held on processor p. (read only)
+ Vector<Node*> external_halo_node_pt(const unsigned& p)
+  {
+   std::map<unsigned, Vector<Node*> >::iterator it=  
+    External_halo_node_pt.find(p);
+   if (it==External_halo_node_pt.end())
+    {
+     Vector<Node*> tmp;
+     return tmp;
+    }
+   return (*it).second;
+  }
+
+ /// \short Set vector of external halo node in this Mesh 
+ /// whose non-halo external counterpart is held on processor p. 
+ void set_external_halo_node_pt(const unsigned& p, 
+                                const Vector<Node*>& external_halo_node_pt)
+  {
+   External_halo_node_pt[p]=external_halo_node_pt;
+  }
+
  /// Null out specified external halo node (used when deleting duplicates)
  void null_external_halo_node(const unsigned& p, Node* nod_pt);
 
@@ -1647,6 +1669,28 @@ public:
  /// \short Add external haloed node whose halo (external) counterpart
  /// is held on processor p to the storage scheme for haloed nodes.
  unsigned add_external_haloed_node_pt(const unsigned& p, Node*& nod_pt);
+
+ /// \short Access fct to vector of external haloed node in this Mesh 
+ /// whose halo external counterpart is held on processor p. (read only)
+ Vector<Node*> external_haloed_node_pt(const unsigned& p)
+  {
+   std::map<unsigned, Vector<Node*> >::iterator it=  
+    External_haloed_node_pt.find(p);
+   if (it==External_haloed_node_pt.end())
+    {
+     Vector<Node*> tmp;
+     return tmp;
+    }
+   return (*it).second;
+  }
+
+ /// \short Set vector of external haloed node in this Mesh 
+ /// whose halo external counterpart is held on processor p. 
+ void set_external_haloed_node_pt(const unsigned& p, 
+                                  const Vector<Node*>& external_haloed_node_pt)
+  {
+   External_haloed_node_pt[p]=external_haloed_node_pt;
+  }
 
  /// \short Return the set of processors that hold external halo nodes. This is
  /// required to avoid having to pass a communicator into the node_update 

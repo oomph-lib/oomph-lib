@@ -433,6 +433,11 @@ namespace oomph
  void remove_duplicate_data(Mesh* const &mesh_pt,
                             bool& actually_removed_some_data);
 
+
+ /// \short Consolidate external halo node storage by removing nulled out
+ /// pointers in external halo and haloed schemes for all meshes.
+ void remove_null_pointers_from_external_halo_node_storage();
+
  /// \short Helper function to re-assign the first and last elements to be 
  /// assembled by each processor during parallel assembly for 
  /// non-distributed problem. 
