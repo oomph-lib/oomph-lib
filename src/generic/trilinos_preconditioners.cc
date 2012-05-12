@@ -39,6 +39,14 @@ namespace oomph
 
 
 //=============================================================================
+/// \short Static double that accumulates the preconditioner 
+/// solve time of all instantiations of this class. Reset
+/// it manually, e.g. after every Newton solve.
+//=============================================================================
+ double TrilinosPreconditionerBase::Cumulative_preconditioner_solve_time=0.0;
+ 
+
+//=============================================================================
 /// \short Function to set up a preconditioner for the linear system 
 /// defined by matrix_pt. This function must be called before using 
 /// preconditioner_solve. \n
@@ -128,6 +136,10 @@ void TrilinosPreconditionerBase::setup(Problem* problem_pt,
 void TrilinosPreconditionerBase::
 preconditioner_solve(const DoubleVector &r, DoubleVector &z)
 {
+
+ // Get ready to do cumulative timings
+double t_start = TimingHelpers::timer();
+
 #ifdef PARANOID
  // check preconditioner data exists
  if (Epetra_preconditioner_pt == 0)
@@ -170,6 +182,12 @@ preconditioner_solve(const DoubleVector &r, DoubleVector &z)
  // clean up memory
  delete epetra_r_pt;
  delete epetra_z_pt;
+
+
+ // Add to cumulative solve time
+ double t_end = TimingHelpers::timer();
+ Cumulative_preconditioner_solve_time+=(t_end-t_start); 
+  
 }
 
 
@@ -194,11 +212,23 @@ setup_trilinos_preconditioner(Problem* problem_pt,
                               DoubleMatrixBase* oomph_matrix_pt, 
                               Epetra_CrsMatrix* epetra_matrix_pt)
 {
+
+
+ // doc setup time
+ oomph_info << "Setting up TrilinosML, ";
+ double t_start = TimingHelpers::timer();
+ 
+
  // create the preconditioner
  Epetra_preconditioner_pt =
   new ML_Epetra::MultiLevelPreconditioner(*epetra_matrix_pt,
                                           ML_parameters,
                                           true);
+
+  // doc setup time
+ oomph_info << "time for setup [s] : "
+            << TimingHelpers::timer()-t_start  
+            << std::endl;
 
  // oomph_info << "In here\n";
  // ML_Epetra::MultiLevelPreconditioner* tmp_pt=0;

@@ -1563,6 +1563,14 @@ namespace oomph
 
 
 //=============================================================================
+/// \short Static double that accumulates the preconditioner 
+/// solve time of all instantiations of this class. Reset
+/// it manually, e.g. after every Newton solve.
+//=============================================================================
+ double HyprePreconditioner::Cumulative_preconditioner_solve_time=0.0;
+ 
+
+//=============================================================================
 /// An interface to allow HypreSolver to be used as a Preconditioner
 /// for the oomph-lib IterativeLinearSolver class.
 /// Matrix has to be of type CRDoubleMatrix or DistributedCRDoubleMatrix.
@@ -1627,6 +1635,10 @@ namespace oomph
  void HyprePreconditioner::preconditioner_solve(const DoubleVector &r,
                                                 DoubleVector &z)
  {
+
+  // Store time
+  double t_start = TimingHelpers::timer();
+  
 #ifdef PARANOID
   // check solver data exists
   if (existing_solver()==None)
@@ -1672,6 +1684,11 @@ namespace oomph
   
   // perform hypre_solve
   hypre_solve(r,z);
+
+  // Add to cumulative solve time
+  double t_end = TimingHelpers::timer();
+  Cumulative_preconditioner_solve_time+=(t_end-t_start); 
+  
  }
 
  

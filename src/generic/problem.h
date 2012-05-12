@@ -423,9 +423,11 @@ namespace oomph
  /// \short A private helper function to
  /// copy the haloed equation numbers into the halo equation numbers,
  /// either for the problem's one and only mesh or for all of its
- /// submeshes.
- void copy_haloed_eqn_numbers_helper();
-
+ /// submeshes. Bools control if we deal with data associated with
+ /// external halo/ed elements/nodes or the "normal" halo/ed ones.
+ void copy_haloed_eqn_numbers_helper(const bool& do_halos,
+                                     const bool& do_external_halos);
+ 
  /// \short Private helper function to remove repeated data
  /// in external haloed elements in specified mesh. Bool is true if some data 
  /// was removed -- this usually requires re-running through certain
@@ -1633,13 +1635,15 @@ namespace oomph
  /// number of degrees of freedom in the overall problem
  long synchronise_eqn_numbers(const bool& assign_local_eqn_numbers=true);
 
- /// \short Perform all required synchronisation in solvers
- void synchronise_all_dofs();
-
  /// \short Synchronise the degrees of freedom by overwriting
  /// the haloed values with their non-halo counterparts held
- /// on other processors
- void synchronise_dofs();
+ /// on other processors. Bools control if we deal with data associated with
+ /// external halo/ed elements/nodes or the "normal" halo/ed ones.
+ void synchronise_dofs(const bool& do_halos,
+                       const bool& do_external_halos);
+
+ /// \short Perform all required synchronisation in solvers
+ void synchronise_all_dofs();
 
  /// Check the halo/haloed node/element schemes
  void check_halo_schemes(DocInfo& doc_info);

@@ -73,6 +73,11 @@ namespace oomph
      clean_up_memory();
     }
    
+   /// \short Static double that accumulates the preconditioner 
+   /// solve time of all instantiations of this class. Reset
+   /// it manually, e.g. after every Newton solve.
+   static double Cumulative_preconditioner_solve_time;
+
    /// deletes the preconditioner, matrices and maps
    void clean_up_memory()
     {

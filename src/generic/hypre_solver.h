@@ -723,6 +723,11 @@ namespace oomph
      BrokenCopy::broken_assign("HyprePreconditioner");
     }
 
+   /// \short Static double that accumulates the preconditioner 
+   /// solve time of all instantiations of this class. Reset
+   /// it manually, e.g. after every Newton solve.
+   static double Cumulative_preconditioner_solve_time;
+
    /// Enable documentation of preconditioner timings
    void enable_doc_time() {Doc_time = true;}
 
