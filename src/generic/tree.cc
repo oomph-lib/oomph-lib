@@ -164,8 +164,9 @@ void Tree::traverse_all(Tree::VoidMemberFctPt member_function)
 /// Preorder traverse the tree and execute a void Tree member function 
 /// that takes one argument at all nodes.
 //=================================================================
-void Tree::traverse_all(Tree::VoidMeshPtArgumentMemberFctPt member_function,
-                        Mesh* &mesh_pt)
+void Tree::
+traverse_all(Tree::VoidMeshPtArgumentMemberFctPt member_function,
+             Mesh* &mesh_pt)
 {
  // Process the object contained in (well, pointed to) by current 
  // Tree
@@ -219,6 +220,29 @@ void Tree::traverse_leaves(Tree::VoidMemberFctPt member_function)
   {
    //Call the member function
    (this->*member_function)(); 
+  }
+}
+
+//================================================================
+/// Preorder traverse the tree and execute void Tree member function 
+/// that takes one argument at the leaves only
+/// (ignore "grey" = non-leaf nodes)
+//=================================================================
+void Tree::traverse_leaves(Tree::VoidMeshPtArgumentMemberFctPt member_function,
+                           Mesh* &mesh_pt)
+{
+ //If the Tree has sons
+ unsigned numsons=Son_pt.size();
+ if(numsons>0)
+  {
+   // Proceed to the sons (if they exist)
+   for(unsigned i=0;i<numsons;i++)
+    {Son_pt[i]->traverse_leaves(member_function,mesh_pt);}
+  }
+ else
+  {
+   //Call the member function
+   (this->*member_function)(mesh_pt); 
   }
 }
 

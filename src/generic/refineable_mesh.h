@@ -671,6 +671,12 @@ protected:
  /// any new elements that are created will be of the correct type.
  virtual void split_elements_if_required()=0;
 
+ /// \short p-refine all the elements in the mesh if required. This template
+ /// free interface will be overloaded in RefineableMesh<ELEMENT> so that
+ /// any temporary copies of the element that are created will be of the
+ /// correct type.
+ virtual void p_refine_elements_if_required()=0;
+
  /// \short Complete the hanging node scheme recursively
  void complete_hanging_nodes(const int& ncont_interpolated_values);
 
@@ -756,6 +762,24 @@ class TreeBasedRefineableMesh : public TreeBasedRefineableMeshBase
      {
       this->Forest_pt->tree_pt(e)->
        traverse_leaves(&Tree::split_if_required<ELEMENT>);
+     }
+   }
+   
+  /// \short p-refine all the elements if required. Overload the template-free
+  /// interface so that any temporary copies of the element that are created
+  /// will be of the correct type.
+  void p_refine_elements_if_required()
+   {
+    //BENFLAG: Make a non const pointer to the mesh so it can be passed (HACK)
+    Mesh* mesh_pt=this;
+    //Find the number of trees in the forest
+    unsigned n_tree = this->Forest_pt->ntree();
+    //Loop over all "active" elements in the forest and p-refine them
+    //if required
+    for (unsigned long e=0;e<n_tree;e++)
+     {
+      this->Forest_pt->tree_pt(e)->
+       traverse_leaves(&Tree::p_refine_if_required<ELEMENT>,mesh_pt);
      }
    }
 

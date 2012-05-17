@@ -191,73 +191,86 @@ node_created_by_son_of_neighbour(const Vector<double> &s_fraction,
 //==================================================================
 /// Set the correct p-order of the element based on that of its
 /// father. Then construct an integration scheme of the correct order.
+/// If an adopted father is specified, information from this is
+/// used instead of using the father found from the tree.
 //==================================================================
 template<unsigned INITIAL_NNODE_1D>
-void PRefineableQElement<1,INITIAL_NNODE_1D>::initial_setup()
+void PRefineableQElement<1,INITIAL_NNODE_1D>::
+initial_setup(Tree* const &adopted_father_pt)
 {
- // Check if element is in a tree
- if (Tree_pt!=0)
+ //Storage for pointer to my father (in binarytree impersonation)
+ BinaryTree* father_pt;
+ 
+ // Check if an adopted father has been specified
+ if (adopted_father_pt!=0)
   {
-   //Pointer to my father (in quadtree impersonation)
-   BinaryTree* father_pt = dynamic_cast<BinaryTree*>(binary_tree_pt()->father_pt());
-   
-   // Check if element has father
-   if (father_pt!=0)
-    {
-     PRefineableQElement<1,INITIAL_NNODE_1D>* father_el_pt =
-            dynamic_cast<PRefineableQElement<1,INITIAL_NNODE_1D>*>
-                (this->tree_pt()->father_pt()->object_pt());
-     if (father_el_pt!=0)
-      {
-       unsigned father_p_order = father_el_pt->p_order();
-       // Set p-order to that of father
-       P_order = father_p_order;
-      }
-     
-     // Now sort out the element...
-     // (has p nodes)
-     unsigned new_n_node = P_order;
-     
-     // Allocate new space for Nodes (at the element level)
-     this->set_n_node(new_n_node);
-     
-     // Set integration scheme
-     delete this->integral_pt();
-     switch(P_order)
-     {
-     case 2:
-      this->set_integration_scheme(new GaussLobattoLegendre<1,2>);
-      break;
-     case 3:
-      this->set_integration_scheme(new GaussLobattoLegendre<1,3>);
-      break;
-     case 4:
-      this->set_integration_scheme(new GaussLobattoLegendre<1,4>);
-      break;
-     case 5:
-      this->set_integration_scheme(new GaussLobattoLegendre<1,5>);
-      break;
-     case 6:
-      this->set_integration_scheme(new GaussLobattoLegendre<1,6>);
-      break;
-     case 7:
-      this->set_integration_scheme(new GaussLobattoLegendre<1,7>);
-      break;
-     default:
-      std::ostringstream error_message;
-      error_message <<"\nERROR: Exceeded maximum polynomial order for";
-      error_message <<"\n       integration scheme.\n";
-      throw OomphLibError(error_message.str(),
-                          "PRefineableQElement<1,INITIAL_NNODE_1D>::initial_setup()",
-                          OOMPH_EXCEPTION_LOCATION);
-     }
-    }
+   //Get pointer to my father (in binarytree impersonation)
+   father_pt = dynamic_cast<BinaryTree*>(adopted_father_pt);
+  }
+ // Check if element is in a tree
+ else if (Tree_pt!=0)
+  {
+   //Get pointer to my father (in binarytree impersonation)
+   father_pt = dynamic_cast<BinaryTree*>(binary_tree_pt()->father_pt());
   }
  else
   {
-   throw OomphLibError("Element not in a tree!",
-                       "PRefineableQElement<1,INITIAL_NNODE_1D>::initial_setup()",
-                       OOMPH_EXCEPTION_LOCATION);
+   throw OomphLibError(
+          "Element not in a tree, and no adopted father has been specified!",
+          "PRefineableQElement<1,INITIAL_NNODE_1D>::initial_setup()",
+          OOMPH_EXCEPTION_LOCATION);
+  }
+
+ // Check if element has father
+ if (father_pt!=0)
+  {
+   PRefineableQElement<1,INITIAL_NNODE_1D>* father_el_pt
+    = dynamic_cast<PRefineableQElement<1,INITIAL_NNODE_1D>*>
+       (father_pt->object_pt());
+   if (father_el_pt!=0)
+    {
+     unsigned father_p_order = father_el_pt->p_order();
+     // Set p-order to that of father
+     P_order = father_p_order;
+    }
+   
+   // Now sort out the element...
+   // (has p nodes)
+   unsigned new_n_node = P_order;
+   
+   // Allocate new space for Nodes (at the element level)
+   this->set_n_node(new_n_node);
+   
+   // Set integration scheme
+   delete this->integral_pt();
+   switch(P_order)
+   {
+   case 2:
+    this->set_integration_scheme(new GaussLobattoLegendre<1,2>);
+    break;
+   case 3:
+    this->set_integration_scheme(new GaussLobattoLegendre<1,3>);
+    break;
+   case 4:
+    this->set_integration_scheme(new GaussLobattoLegendre<1,4>);
+    break;
+   case 5:
+    this->set_integration_scheme(new GaussLobattoLegendre<1,5>);
+    break;
+   case 6:
+    this->set_integration_scheme(new GaussLobattoLegendre<1,6>);
+    break;
+   case 7:
+    this->set_integration_scheme(new GaussLobattoLegendre<1,7>);
+    break;
+   default:
+    std::ostringstream error_message;
+    error_message <<"\nERROR: Exceeded maximum polynomial order for";
+    error_message <<"\n       integration scheme.\n";
+    throw OomphLibError(error_message.str(),
+                        "PRefineableQElement<1,INITIAL_NNODE_1D>::initial_setup()",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
   }
 }
 
@@ -302,74 +315,106 @@ void PRefineableQElement<1,INITIAL_NNODE_1D>::pre_build(
 /// is performed.)
 //==================================================================
 template<unsigned INITIAL_NNODE_1D>
-void PRefineableQElement<1,INITIAL_NNODE_1D>::p_refine(const int &inc,
-                                                       Mesh* const &mesh_pt)
+void PRefineableQElement<1,INITIAL_NNODE_1D>::p_refine(
+      const int &inc,
+      Mesh* const &mesh_pt,
+      GeneralisedElement* const &clone_pt)
 {
- //BENFLAG: Need to change this to follow the logic in
- //         RefineableQElement<1>::build() (?).
+ //Cast clone to correct type
+ PRefineableQElement<1,INITIAL_NNODE_1D>* clone_el_pt
+  = dynamic_cast<PRefineableQElement<1,INITIAL_NNODE_1D>*>(clone_pt);
+
+ //Check if we can use it
+ if(clone_el_pt==0)
+  {
+   throw OomphLibError(
+          "Cloned copy must be a PRefineableQElement<1,INITIAL_NNODE_1D>!",
+          "PRefineableQElement<1,INITIAL_NNODE_1D>::p_refine()",
+          OOMPH_EXCEPTION_LOCATION);
+  }
+#ifdef PARANOID
+ //Clone exists, so check that it is infact a copy of me
+ else
+  {
+   //Flag to keep track of check
+   bool clone_is_ok=true;
+
+   //Does the clone have the correct p-order?
+   clone_is_ok = (clone_el_pt->p_order() == this->p_order());
+
+   if(!clone_is_ok)
+    {
+     std::ostringstream err_stream;
+     err_stream << "Clone element has a different p-order from me,"
+                << std::endl
+                << "but it is supposed to be a copy!" << std::endl;
+     
+     throw OomphLibError(err_stream.str(),
+                         "PRefineableQElement<1,INITIAL_NNODE_1D>::p_refine()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+
+   //Does the clone have the same number of nodes as me?
+   clone_is_ok = (clone_el_pt->nnode() == this->nnode());
+
+   if(!clone_is_ok)
+    {
+     std::ostringstream err_stream;
+     err_stream << "Clone element has a different number of nodes from me,"
+                << std::endl
+                << "but it is supposed to be a copy!" << std::endl;
+     
+     throw OomphLibError(err_stream.str(),
+                         "PRefineableQElement<1,INITIAL_NNODE_1D>::p_refine()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+   
+   //Does the clone have the same nodes as me?
+   for(unsigned n=0; n<this->nnode(); n++)
+    {
+     clone_is_ok = (clone_el_pt->node_pt(n) == this->node_pt(n));
+    }
+
+   if(!clone_is_ok)
+    {
+     std::ostringstream err_stream;
+     err_stream << "The nodes belonging to the clone element are different"
+                << std::endl
+                << "from mine, but it is supposed to be a copy!" << std::endl;
+     
+     throw OomphLibError(err_stream.str(),
+                         "PRefineableQElement<1,INITIAL_NNODE_1D>::p_refine()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+
+   //If we get to here then the clone has all the information we require
+  }
+#endif
+
+ // Currently we can't handle the case of generalised coordinates
+ // since we haven't established how they should be interpolated.
+ // Buffer this case:
+ if (clone_el_pt->node_pt(0)->nposition_type()!=1)
+  {
+   throw OomphLibError(
+          "Can't handle generalised nodal positions (yet).",
+          "PRefineableQElement<1,INITIAL_NNODE_1D>::p_refine()",
+          OOMPH_EXCEPTION_LOCATION);
+  }
  
  // Timestepper should be the same for all nodes -- use it
  // to create timesteppers for new nodes
  TimeStepper* time_stepper_pt = this->node_pt(0)->time_stepper_pt();
  
- // Number of history values (incl. present)
+ // Get number of history values (incl. present)
  unsigned ntstorage = time_stepper_pt->ntstorage();
  
- // Back up old vertex nodes
- unsigned n_vertex_node = this->nvertex_node();
- Vector<Node*> old_vertex_node_pt(n_vertex_node);
- for (unsigned n=0; n<n_vertex_node; n++)
-  {
-   old_vertex_node_pt[n] = this->vertex_node_pt(n);
-  }
- 
- // Compute new coordinates and projected values
- Vector<double> new_local_x(P_order + inc);
- Vector<Vector<double> > new_global_x(P_order + inc);
- for (unsigned i=0; i<P_order + inc; i++)
-  {new_global_x[i].resize(1);}
- unsigned ncont = this->ncont_interpolated_values();
- Vector<Vector<Vector<double> > > projected_value(ntstorage);
- for(unsigned t=0;t<ntstorage;t++)
-  {
-   projected_value[t].resize(P_order + inc);
-   for (unsigned i=0; i<P_order + inc; i++)
-    {
-     projected_value[t][i].resize(ncont);
-    }
-  }
- 
- // Compute 1D Gauss-Lobatto-Legendre node spacing
- Orthpoly::gll_nodes(P_order + inc, new_local_x);
- 
- for (unsigned n=0; n<P_order+inc; n++)
-  {
-   // Create coordinate vector
-   Vector<double> s(1);
-   s[0] = new_local_x[n];
-   
-   new_global_x[n][0] = this->interpolated_x(s,0);
-   
-   // Loop over all history values
-   for(unsigned t=0;t<ntstorage;t++)
-    {
-     // Interpolate new nodal values
-     // (while still using old integration scheme and shape functions)
-     Vector<double> prev_values;
-     this->get_interpolated_values(t,s,prev_values);
-     for(unsigned i=0; i<ncont; i++)
-      {
-       projected_value[t][n][i] = prev_values[i];
-      }
-    }
- }
- 
  // Increment p-order of the element
- p_order() += inc;
+ P_order += inc;
  
  // Change integration scheme
  delete this->integral_pt();
- switch(p_order())
+ switch(P_order)
  {
  case 2:
   this->set_integration_scheme(new GaussLobattoLegendre<1,2>);
@@ -390,40 +435,269 @@ void PRefineableQElement<1,INITIAL_NNODE_1D>::p_refine(const int &inc,
   this->set_integration_scheme(new GaussLobattoLegendre<1,7>);
   break;
  default:
-  oomph_info << "\n ERROR: Exceeded maximum polynomial order for";
-  oomph_info << "\n        integration scheme." << std::endl;
-  break;
+  std::ostringstream error_message;
+  error_message <<"\nERROR: Exceeded maximum polynomial order for";
+  error_message <<"\n       integration scheme.\n";
+  throw OomphLibError(error_message.str(),
+                      "PRefineableQElement<1,INITIAL_NNODE_1D>::p_refine()",
+                      OOMPH_EXCEPTION_LOCATION);
  }
  
  // Allocate new space for Nodes (at the element level)
  this->set_n_node(P_order);
  
- // Copy back vertex nodes
- this->node_pt(0        ) = old_vertex_node_pt[0];
- this->node_pt(P_order-1) = old_vertex_node_pt[1];
-
- //Create new internal nodes
- for (unsigned n=1; n<P_order-1; n++)
-  {
-   // Build node
-   Node* created_node_pt = this->construct_node(n,time_stepper_pt);
-   this->node_pt(n) = created_node_pt;
-   // Add node to mesh
-   mesh_pt->add_node_pt(created_node_pt);
-  }
+ // Copy vertex nodes and create new internal nodes
+ //------------------------------------------------
  
- // Set coordinates and project data
- for(unsigned t=0;t<ntstorage;t++)
+ // Setup vertex coordinates in element:
+ //-------------------------------------
+ Vector<double> s_left(1);
+ Vector<double> s_right(1);
+ s_left[0]=-1.0;
+ s_right[0]= 1.0;
+
+ //Local coordinate in element
+ Vector<double> s(1);
+ 
+ Vector<double> s_fraction(1);
+ // Loop over all nodes in the element
+ for(unsigned n=0;n<P_order;n++)
   {
-   for (unsigned n=0; n<P_order; n++)
+   // Get the fractional position (in the current element) of the node
+   // in the direction of s[0]
+   s_fraction[0] = this->local_one_d_fraction_of_node(n,0);
+   
+   // Evaluate the local coordinate of the node in the father element
+   s[0] = s_left[0] + (s_right[0]-s_left[0])*s_fraction[0];
+   
+   // Initialise flag: So far, this node hasn't been built or copied yet
+   bool node_done = false;
+   
+   //Get the pointer to the node in this element (or rather, its clone),
+   //returns NULL if there is not node
+   Node* created_node_pt = clone_el_pt->get_node_at_local_coordinate(s);
+   
+   // Does this node already exist in this element?
+   //----------------------------------------------
+   if(created_node_pt!=0)
     {
-     this->node_pt(n)->x(0) = new_global_x[n][0];
-     for(unsigned i=0; i<ncont; i++)
+     // Copy node across
+     this->node_pt(n) = created_node_pt;
+     
+     // Make sure that we update the values at the node so that they
+     // are consistent with the present representation. This is only
+     // needed for mixed interpolation where the value at the father
+     // could now become active.
+     
+     // Loop over all history values
+     for(unsigned t=0;t<ntstorage;t++)
       {
-       this->node_pt(n)->set_value(t,i,projected_value[t][n][i]);
+       // Get values from father element
+       // Note: get_interpolated_values() sets Vector size itself
+       Vector<double> prev_values;
+       clone_el_pt->get_interpolated_values(t,s,prev_values);
+       //Find the minimum number of values
+       //(either those stored at the node, or those returned by
+       // the function)
+       unsigned n_val_at_node = created_node_pt->nvalue();
+       unsigned n_val_from_function = prev_values.size(); 
+       // Use the ternary conditional operator here
+       unsigned n_var = n_val_at_node < n_val_from_function ?
+        n_val_at_node : n_val_from_function;
+       // Assign the values that we can
+       for(unsigned k=0;k<n_var;k++)
+        {
+         created_node_pt->set_value(t,k,prev_values[k]);
+        }
       }
+     
+     // Indicate that node has been created by copy
+     node_done = true;
+    }
+        
+   // Node does not exist in this element
+   //------------------------------------
+   
+   // If the node has not been built anywhere ---> build it here
+   if(!node_done)
+    {
+     // In a 1D mesh any node which lies on the boundary must exist in
+     // the initial (coarse) mesh, so any newly-built nodes cannot be
+     // boundary nodes. Therefore we always create a normal "bulk" node.
+     // PATRICKFLAG: Should I write a check for this?
+     
+     // Create node and set the pointer to it from the element 
+     created_node_pt = this->construct_node(n,time_stepper_pt);
+
+     //Now we set the position and values at the newly created node
+       
+     // Now we set the position and values at the newly created node.
+     // In the first instance use macro element or FE representation
+     // to create past and present nodal positions.
+     // (THIS STEP SHOULD NOT BE SKIPPED FOR ALGEBRAIC ELEMENTS AS NOT
+     // ALL OF THEM NECESSARILY IMPLEMENT NONTRIVIAL NODE UPDATE
+     // FUNCTIONS. CALLING THE NODE UPDATE FOR SUCH ELEMENTS/NODES WILL
+     // LEAVE THEIR NODAL POSITIONS WHERE THEY WERE (THIS IS APPROPRIATE
+     // ONCE THEY HAVE BEEN GIVEN POSITIONS) BUT WILL NOT ASSIGN SENSIBLE
+     // INITIAL POSITIONS!)
+     
+     // Loop over history values
+     for(unsigned t=0;t<ntstorage;t++)
+      {
+       // Allocate storage for the previous position of the node
+       Vector<double> x_prev(1);
+       
+       // Get position from father element -- this uses the macro
+       // element representation if appropriate.
+       clone_el_pt->get_x(t,s,x_prev);
+       
+       // Set the previous position of the new node
+       created_node_pt->x(t,0) = x_prev[0];
+       
+       // Allocate storage for the previous values at the node
+       // NOTE: the size of this vector is equal to the number of values
+       // (e.g. 3 velocity components and 1 pressure, say)
+       // associated with each node and NOT the number of history values
+       // which the node stores!
+       Vector<double> prev_values;
+       
+       // Get values from father element
+       // Note: get_interpolated_values() sets Vector size itself.
+       clone_el_pt->get_interpolated_values(t,s,prev_values);
+       
+       // Determine the number of values at the new node
+       const unsigned n_value = created_node_pt->nvalue();
+       
+       // Loop over all values and set the previous values
+       for(unsigned v=0;v<n_value;v++)
+        {
+         created_node_pt->set_value(t,v,prev_values[v]);
+        }
+      } // End of loop over history values
+     
+     // Add new node to mesh
+     mesh_pt->add_node_pt(created_node_pt);
+ 
+     AlgebraicElementBase* alg_el_pt=
+      dynamic_cast<AlgebraicElementBase*>(this);		
+
+     //If we do have an algebraic element
+     if(alg_el_pt!=0)
+      {
+       std::string error_message =
+        "Have not implemented p-refinement for";
+       error_message +=
+        "Algebraic p-refineable elements yet\n";
+         
+       throw 
+        OomphLibError(error_message,
+                      "PRefineableQElement<1,INITIAL_NNODE_1D>::p_refine()",
+                      OOMPH_EXCEPTION_LOCATION);
+      }
+     
+    } // End of case where we build the node ourselves
+ 
+   // Check if the element is an algebraic element
+   AlgebraicElementBase* alg_el_pt=
+    dynamic_cast<AlgebraicElementBase*>(this);		
+         
+   // If the element is an algebraic element, setup 
+   // node position (past and present) from algebraic node update
+   // function. This over-writes previous assingments that
+   // were made based on the macro-element/FE representation.
+   // NOTE: YES, THIS NEEDS TO BE CALLED REPEATEDLY IF THE
+   // NODE IS MEMBER OF MULTIPLE ELEMENTS: THEY ALL ASSIGN
+   // THE SAME NODAL POSITIONS BUT WE NEED TO ADD THE REMESH 
+   // INFO FOR *ALL* ROOT ELEMENTS!
+   if (alg_el_pt!=0)
+    {
+     // Build algebraic node update info for new node 
+     // This sets up the node update data for all node update
+     // functions that are shared by all nodes in the father
+     // element
+     alg_el_pt->setup_algebraic_node_update(this->node_pt(n),s,
+                                            clone_el_pt);
+    }
+   
+  } // End of loop over all nodes in element
+
+ 
+ // Loop over all nodes in element again, to re-set the positions
+ //BENFLAG: This must be done using the new element's macro-element
+ //         representation, rather than the old version which may be
+ //         of a different p-order!
+ for(unsigned n=0;n<P_order;n++)
+  {
+   //Get the fractional position of the node in the direction of s[0]
+   s_fraction[0] = this->local_one_d_fraction_of_node(n,0);
+   // Local coordinate
+   s[0] = s_left[0] + (s_right[0]-s_left[0])*s_fraction[0];
+   
+   // Loop over # of history values
+   for (unsigned t=0;t<ntstorage;t++)
+    {
+     // Get position from father element -- this uses the macro
+     // element representation if appropriate. If the node
+     // turns out to be a hanging node later on, then
+     // its position gets adjusted in line with its
+     // hanging node interpolation.
+     Vector<double> x_prev(1);
+     this->get_x(t,s,x_prev);
+     
+       // Set previous positions of the new node
+     this->node_pt(n)->x(t,0) = x_prev[0];
     }
   }
+
+
+ // If the element is a MacroElementNodeUpdateElement, set
+ // the update parameters for the current element's nodes --
+ // all this needs is the vector of (pointers to the) 
+ // geometric objects that affect the MacroElement-based
+ // node update -- this needs to be done to set the node
+ // update info for newly created nodes
+ MacroElementNodeUpdateElementBase* clone_m_el_pt=dynamic_cast<
+  MacroElementNodeUpdateElementBase*>(clone_el_pt);
+ if (clone_m_el_pt!=0)
+  {
+   // Get vector of geometric objects from father (construct vector
+   // via copy operation)
+   Vector<GeomObject*> geom_object_pt(clone_m_el_pt->geom_object_pt());
+
+   // Cast current element to MacroElementNodeUpdateElement:
+   MacroElementNodeUpdateElementBase* m_el_pt=dynamic_cast<
+    MacroElementNodeUpdateElementBase*>(this);
+
+#ifdef PARANOID
+   if (m_el_pt==0)
+    {
+     std::string error_message =
+      "Failed to cast to MacroElementNodeUpdateElementBase*\n";
+     error_message += 
+      "Strange -- if my clone is a MacroElementNodeUpdateElement\n";
+     error_message += "then I should be too....\n";
+
+     throw OomphLibError(error_message,
+                         "PRefineableQElement<1,INITIAL_NNODE_1D>::p_refine()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+   // Build update info by passing vector of geometric objects:
+   // This sets the current element to be the update element
+   // for all of the element's nodes -- this is reversed
+   // if the element is ever un-refined in the father element's
+   // rebuild_from_sons() function which overwrites this
+   // assignment to avoid nasty segmentation faults that occur
+   // when a node tries to update itself via an element that no
+   // longer exists...
+   m_el_pt->set_node_update_info(geom_object_pt);
+  }
+ 
+ // Not necessary to delete the old nodes since all original nodes are in the
+ // current mesh and so will be pruned as part of the mesh adaption process.
+ 
+ // Do any further-build required
+ this->further_build();
 }
 
 //=======================================================================
@@ -1324,80 +1598,92 @@ node_created_by_son_of_neighbour(const Vector<double> &s_fraction,
 //==================================================================
 /// Set the correct p-order of the element based on that of its
 /// father. Then construct an integration scheme of the correct order.
+/// If an adopted father is specified, information from this is
+/// used instead of using the father found from the tree.
 //==================================================================
 template<unsigned INITIAL_NNODE_1D>
-void PRefineableQElement<2,INITIAL_NNODE_1D>::initial_setup()
+void PRefineableQElement<2,INITIAL_NNODE_1D>::
+initial_setup(Tree* const &adopted_father_pt)
 {
- // Check if element is in a tree
- if (Tree_pt!=0)
+ //Storage for pointer to my father (in quadtree impersonation)
+ QuadTree* father_pt;
+ 
+ // Check if an adopted father has been specified
+ if (adopted_father_pt!=0)
   {
-   //Pointer to my father (in quadtree impersonation)
-   QuadTree* father_pt = dynamic_cast<QuadTree*>(quadtree_pt()->father_pt());
-   
-   // Check if element has father
-   if (father_pt!=0)
-    {
-     PRefineableQElement<2,INITIAL_NNODE_1D>* father_el_pt =
-            dynamic_cast<PRefineableQElement<2,INITIAL_NNODE_1D>*>
-                (this->tree_pt()->father_pt()->object_pt());
-     if (father_el_pt!=0)
-      {
-       unsigned father_p_order = father_el_pt->p_order();
-       // Set p-order to that of father
-       P_order = father_p_order;
-      }
-     
-     // Now sort out the element...
-     // (has p^2 nodes)
-     unsigned new_n_node = P_order*P_order;
-     
-     // Allocate new space for Nodes (at the element level)
-     this->set_n_node(new_n_node);
-     
-     // Set integration scheme
-     delete this->integral_pt();
-     switch(P_order)
-     {
-     case 2:
-      this->set_integration_scheme(new GaussLobattoLegendre<2,2>);
-      break;
-     case 3:
-      this->set_integration_scheme(new GaussLobattoLegendre<2,3>);
-      break;
-     case 4:
-      this->set_integration_scheme(new GaussLobattoLegendre<2,4>);
-      break;
-     case 5:
-      this->set_integration_scheme(new GaussLobattoLegendre<2,5>);
-      break;
-     case 6:
-      this->set_integration_scheme(new GaussLobattoLegendre<2,6>);
-      break;
-     case 7:
-      this->set_integration_scheme(new GaussLobattoLegendre<2,7>);
-      break;
-     default:
-      std::ostringstream error_message;
-      error_message <<"\nERROR: Exceeded maximum polynomial order for";
-      error_message <<"\n       integration scheme.\n";
-      throw OomphLibError(error_message.str(),
-                          "PRefineableQElement<2,INITIAL_NNODE_1D>::initial_setup()",
-                          OOMPH_EXCEPTION_LOCATION);
-     }
-    }
+   //Get pointer to my father (in quadtree impersonation)
+   father_pt = dynamic_cast<QuadTree*>(adopted_father_pt);
+  }
+ // Check if element is in a tree
+ else if (Tree_pt!=0)
+  {
+   //Get pointer to my father (in quadtree impersonation)
+   father_pt = dynamic_cast<QuadTree*>(quadtree_pt()->father_pt());
   }
  else
   {
-   throw OomphLibError("Element not in a tree!",
-                       "PRefineableQElement<2,INITIAL_NNODE_1D>::initial_setup()",
-                       OOMPH_EXCEPTION_LOCATION);
+   throw OomphLibError(
+          "Element not in a tree, and no adopted father has been specified!",
+          "PRefineableQElement<2,INITIAL_NNODE_1D>::initial_setup()",
+          OOMPH_EXCEPTION_LOCATION);
+  }
+
+ // Check if we found a father
+ if (father_pt!=0)
+  {
+   PRefineableQElement<2,INITIAL_NNODE_1D>* father_el_pt
+    = dynamic_cast<PRefineableQElement<2,INITIAL_NNODE_1D>*>
+       (father_pt->object_pt());
+   if (father_el_pt!=0)
+    {
+     unsigned father_p_order = father_el_pt->p_order();
+     // Set p-order to that of father
+     P_order = father_p_order;
+    }
+   
+   // Now sort out the element...
+   // (has p^2 nodes)
+   unsigned new_n_node = P_order*P_order;
+   
+   // Allocate new space for Nodes (at the element level)
+   this->set_n_node(new_n_node);
+   
+   // Set integration scheme
+   delete this->integral_pt();
+   switch(P_order)
+   {
+   case 2:
+    this->set_integration_scheme(new GaussLobattoLegendre<2,2>);
+    break;
+   case 3:
+    this->set_integration_scheme(new GaussLobattoLegendre<2,3>);
+    break;
+   case 4:
+    this->set_integration_scheme(new GaussLobattoLegendre<2,4>);
+    break;
+   case 5:
+    this->set_integration_scheme(new GaussLobattoLegendre<2,5>);
+    break;
+   case 6:
+    this->set_integration_scheme(new GaussLobattoLegendre<2,6>);
+    break;
+   case 7:
+    this->set_integration_scheme(new GaussLobattoLegendre<2,7>);
+    break;
+   default:
+    std::ostringstream error_message;
+    error_message <<"\nERROR: Exceeded maximum polynomial order for";
+    error_message <<"\n       integration scheme.\n";
+    throw OomphLibError(error_message.str(),
+                        "PRefineableQElement<2,INITIAL_NNODE_1D>::initial_setup()",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
   }
 }
 
 //==================================================================
 /// Check the father element for any required nodes which
 /// already exist
-/// BENFLAG: Also need to check sons of neighbours!!!
 //==================================================================
 template<unsigned INITIAL_NNODE_1D>
 void PRefineableQElement<2,INITIAL_NNODE_1D>::pre_build(
@@ -1447,7 +1733,7 @@ void PRefineableQElement<2,INITIAL_NNODE_1D>::pre_build(
    unsigned ntstorage=time_stepper_pt->ntstorage();
    
    // Pass pointer to time object:
-   time_pt()=father_el_pt->time_pt();
+   this->time_pt()=father_el_pt->time_pt();
    
    Vector<double> s_lo(2);
    Vector<double> s_hi(2);
@@ -1524,14 +1810,14 @@ void PRefineableQElement<2,INITIAL_NNODE_1D>::pre_build(
      for(unsigned i0=0;i0<n_p;i0++)
       {
        //Get the fractional position of the node in the direction of s[0]
-       s_fraction[0] = local_one_d_fraction_of_node(i0,0);
+       s_fraction[0] = this->local_one_d_fraction_of_node(i0,0);
        // Local coordinate in father element
        s[0] = s_lo[0] + (s_hi[0]-s_lo[0])*s_fraction[0];
    
        for(unsigned i1=0;i1<n_p;i1++)
         {
          //Get the fractional position of the node in the direction of s[1]
-         s_fraction[1] = local_one_d_fraction_of_node(i1,1);
+         s_fraction[1] = this->local_one_d_fraction_of_node(i1,1);
          // Local coordinate in father element
          s[1] = s_lo[1] + (s_hi[1]-s_lo[1])*s_fraction[1];
          
@@ -1564,7 +1850,7 @@ void PRefineableQElement<2,INITIAL_NNODE_1D>::pre_build(
          if(created_node_pt!=0) 
           {
            // Copy node across
-           node_pt(jnod) = created_node_pt;
+           this->node_pt(jnod) = created_node_pt;
   
            //Make sure that we update the values at the node so that
            //they are consistent with the present representation.
@@ -1608,12 +1894,92 @@ void PRefineableQElement<2,INITIAL_NNODE_1D>::pre_build(
 /// is performed.)
 //==================================================================
 template<unsigned INITIAL_NNODE_1D>
-void PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine(const int &inc,
-                                                       Mesh* const &mesh_pt)
+void PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine(
+      const int &inc,
+      Mesh* const &mesh_pt,
+      GeneralisedElement* const &clone_pt)
 {
- //Create temporary (semi-)deep copy of this element
+ //Cast clone to correct type
  PRefineableQElement<2,INITIAL_NNODE_1D>* clone_el_pt
-  = this->make_backup_clone();
+  = dynamic_cast<PRefineableQElement<2,INITIAL_NNODE_1D>*>(clone_pt);
+
+ //Check if we can use it
+ if(clone_el_pt==0)
+  {
+   throw OomphLibError(
+          "Cloned copy must be a PRefineableQElement<2,INITIAL_NNODE_1D>!",
+          "PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine()",
+          OOMPH_EXCEPTION_LOCATION);
+  }
+#ifdef PARANOID
+ //Clone exists, so check that it is infact a copy of me
+ else
+  {
+   //Flag to keep track of check
+   bool clone_is_ok=true;
+
+   //Does the clone have the correct p-order?
+   clone_is_ok = (clone_el_pt->p_order() == this->p_order());
+
+   if(!clone_is_ok)
+    {
+     std::ostringstream err_stream;
+     err_stream << "Clone element has a different p-order from me,"
+                << std::endl
+                << "but it is supposed to be a copy!" << std::endl;
+     
+     throw OomphLibError(err_stream.str(),
+                         "PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+
+   //Does the clone have the same number of nodes as me?
+   clone_is_ok = (clone_el_pt->nnode() == this->nnode());
+
+   if(!clone_is_ok)
+    {
+     std::ostringstream err_stream;
+     err_stream << "Clone element has a different number of nodes from me,"
+                << std::endl
+                << "but it is supposed to be a copy!" << std::endl;
+     
+     throw OomphLibError(err_stream.str(),
+                         "PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+   
+   //Does the clone have the same nodes as me?
+   for(unsigned n=0; n<this->nnode(); n++)
+    {
+     clone_is_ok = (clone_el_pt->node_pt(n) == this->node_pt(n));
+    }
+
+   if(!clone_is_ok)
+    {
+     std::ostringstream err_stream;
+     err_stream << "The nodes belonging to the clone element are different"
+                << std::endl
+                << "from mine, but it is supposed to be a copy!" << std::endl;
+     
+     throw OomphLibError(err_stream.str(),
+                         "PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+
+   //If we get to here then the clone has all the information we require
+  }
+#endif
+
+ // Currently we can't handle the case of generalised coordinates
+ // since we haven't established how they should be interpolated.
+ // Buffer this case:
+ if (clone_el_pt->node_pt(0)->nposition_type()!=1)
+  {
+   throw OomphLibError(
+          "Can't handle generalised nodal positions (yet).",
+          "PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine()",
+          OOMPH_EXCEPTION_LOCATION);
+  }
  
  // Timestepper should be the same for all nodes -- use it
  // to create timesteppers for new nodes
@@ -1681,14 +2047,14 @@ void PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine(const int &inc,
  for(unsigned i0=0;i0<P_order;i0++)
   {
    //Get the fractional position of the node in the direction of s[0]
-   s_fraction[0] = local_one_d_fraction_of_node(i0,0);
+   s_fraction[0] = this->local_one_d_fraction_of_node(i0,0);
    // Local coordinate
    s[0] = s_lo[0] + (s_hi[0]-s_lo[0])*s_fraction[0];
    
    for(unsigned i1=0;i1<P_order;i1++)
     {
      //Get the fractional position of the node in the direction of s[1]
-     s_fraction[1] = local_one_d_fraction_of_node(i1,1);
+     s_fraction[1] = this->local_one_d_fraction_of_node(i1,1);
      // Local coordinate
      s[1] = s_lo[1] + (s_hi[1]-s_lo[1])*s_fraction[1];
      
@@ -1702,14 +2068,13 @@ void PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine(const int &inc,
      //Get the pointer to the node in this element (or rather, its clone),
      //returns NULL if there is not node
      Node* created_node_pt = clone_el_pt->get_node_at_local_coordinate(s);
-     //Node* created_node_pt = this->get_node_at_local_coordinate(s);
 
      // Does this node already exist in this element?
      //----------------------------------------------
      if (created_node_pt!=0)
       {
        // Copy node across
-       node_pt(jnod) = created_node_pt;
+       this->node_pt(jnod) = created_node_pt;
 
        //Make sure that we update the values at the node so that
        //they are consistent with the present representation.
@@ -1814,7 +2179,7 @@ void PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine(const int &inc,
            
            // Create node and set the pointer to it from the element 
            created_node_pt = 
-            construct_boundary_node(jnod,time_stepper_pt);
+            this->construct_boundary_node(jnod,time_stepper_pt);
            //Make the node periodic from the neighbour
            created_node_pt->
             make_periodic(neighbour_node_pt);
@@ -1866,7 +2231,7 @@ void PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine(const int &inc,
          //pointer to the neighbours node
          else
           {
-           node_pt(jnod) = created_node_pt;
+           this->node_pt(jnod) = created_node_pt;
           }
          //Node has been created
          node_done = true;
@@ -1944,7 +2309,7 @@ void PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine(const int &inc,
              
              // Create node and set the pointer to it from the element 
              created_node_pt = 
-              construct_boundary_node(jnod,time_stepper_pt);
+              this->construct_boundary_node(jnod,time_stepper_pt);
              //Make the node periodic from the neighbour
              created_node_pt->
               make_periodic(neighbour_node_pt);
@@ -1996,7 +2361,7 @@ void PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine(const int &inc,
            //pointer to the neighbours node
            else
             {
-             node_pt(jnod) = created_node_pt;
+             this->node_pt(jnod) = created_node_pt;
             }
            //Node has been created
            node_done = true;
@@ -2047,14 +2412,14 @@ void PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine(const int &inc,
        if(boundaries.size()> 0)
         {
          // Create node and set the pointer to it from the element 
-         created_node_pt = construct_boundary_node(jnod,time_stepper_pt);
+         created_node_pt = this->construct_boundary_node(jnod,time_stepper_pt);
 
          //Now we need to work out whether to pin the values at
          //the new node based on the boundary conditions applied at
          //its Mesh boundary 
 
          //Get the boundary conditions from the father
-         Vector<int> bound_cons(ncont_interpolated_values());
+         Vector<int> bound_cons(this->ncont_interpolated_values());
          clone_el_pt->get_bcs(my_bound,bound_cons);
              
          //Loop over the values and pin, if necessary
@@ -2075,7 +2440,6 @@ void PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine(const int &inc,
            Vector<int> solid_bound_cons(n_dim);
            RefineableSolidQElement<2>* clone_solid_el_pt=
             dynamic_cast<RefineableSolidQElement<2>*>(clone_el_pt);
-            //dynamic_cast<RefineableSolidQElement<2>*>(this);
 #ifdef PARANOID
            if (clone_solid_el_pt==0)
             {
@@ -2130,7 +2494,7 @@ void PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine(const int &inc,
        else
         {
          // Create node and set the pointer to it from the element 
-         created_node_pt = construct_node(jnod,time_stepper_pt);
+         created_node_pt = this->construct_node(jnod,time_stepper_pt);
         }
 
        //Now we set the position and values at the newly created node
@@ -2218,7 +2582,7 @@ void PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine(const int &inc,
        // This sets up the node update data for all node update
        // functions that are shared by all nodes in the father
        // element
-       alg_el_pt->setup_algebraic_node_update(node_pt(jnod),s,
+       alg_el_pt->setup_algebraic_node_update(this->node_pt(jnod),s,
                                               clone_el_pt);
       }
 
@@ -2234,14 +2598,14 @@ void PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine(const int &inc,
  for(unsigned i0=0;i0<P_order;i0++)
   {
    //Get the fractional position of the node in the direction of s[0]
-   s_fraction[0] = local_one_d_fraction_of_node(i0,0);
+   s_fraction[0] = this->local_one_d_fraction_of_node(i0,0);
    // Local coordinate
    s[0] = s_lo[0] + (s_hi[0]-s_lo[0])*s_fraction[0];
    
    for(unsigned i1=0;i1<P_order;i1++)
     {
      //Get the fractional position of the node in the direction of s[1]
-     s_fraction[1] = local_one_d_fraction_of_node(i1,1);
+     s_fraction[1] = this->local_one_d_fraction_of_node(i1,1);
      // Local coordinate
      s[1] = s_lo[1] + (s_hi[1]-s_lo[1])*s_fraction[1];
      
@@ -2262,7 +2626,7 @@ void PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine(const int &inc,
        // Set previous positions of the new node
        for(unsigned i=0;i<2;i++)
         {
-         node_pt(jnod)->x(t,i) = x_prev[i];
+         this->node_pt(jnod)->x(t,i) = x_prev[i];
         }
       }
     }
@@ -2317,9 +2681,6 @@ void PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine(const int &inc,
  
  // Do any further-build required
  this->further_build();
- 
- //Delete my clone
- delete clone_el_pt;
 }
 
 //=======================================================================
@@ -2929,10 +3290,10 @@ rebuild_from_sons(Mesh* &mesh_pt)
        if(boundaries.size()>0)
         {
          //Construct the new node
-         created_node_pt = construct_boundary_node(jnod,time_stepper_pt);
+         created_node_pt = this->construct_boundary_node(jnod,time_stepper_pt);
          
          //Get the boundary conditions from the son
-         Vector<int> bound_cons(ncont_interpolated_values());
+         Vector<int> bound_cons(this->ncont_interpolated_values());
          son_el_pt->get_bcs(boundary,bound_cons);
            
          //Loop over the values and pin if necessary
@@ -3006,7 +3367,7 @@ rebuild_from_sons(Mesh* &mesh_pt)
        else
         {
          //Construct the new node
-         created_node_pt = construct_node(jnod,time_stepper_pt);
+         created_node_pt = this->construct_node(jnod,time_stepper_pt);
         }
 
        //Now we set the position and values at the newly created node
@@ -3205,7 +3566,7 @@ check_integrity(double& max_error)
           {
           case 0:
            // Local fraction of node
-           s_fraction[0] = local_one_d_fraction_of_node(i0,0);
+           s_fraction[0] = this->local_one_d_fraction_of_node(i0,0);
            s_fraction[1] = 0.0;
            // Get pointer to local node
            local_node_pt = this->node_pt(i0);
@@ -3213,7 +3574,7 @@ check_integrity(double& max_error)
            
           case 1:
            // Local fraction of node
-           s_fraction[0] = local_one_d_fraction_of_node(i0,0);
+           s_fraction[0] = this->local_one_d_fraction_of_node(i0,0);
            s_fraction[1] = 1.0;
            // Get pointer to local node
            local_node_pt =  this->node_pt(i0 + n_p*(n_p-1));
@@ -3222,7 +3583,7 @@ check_integrity(double& max_error)
            case 2:
             // Local fraction of node
             s_fraction[0] = 0.0; 
-            s_fraction[1] = local_one_d_fraction_of_node(i0,1);
+            s_fraction[1] = this->local_one_d_fraction_of_node(i0,1);
             // Get pointer to local node
             local_node_pt = this->node_pt(n_p*i0);
             break;
@@ -3230,7 +3591,7 @@ check_integrity(double& max_error)
           case 3:
            // Local fraction of node
            s_fraction[0] = 1.0; 
-           s_fraction[1] = local_one_d_fraction_of_node(i0,1);          
+           s_fraction[1] = this->local_one_d_fraction_of_node(i0,1);          
            // Get pointer to local node
            local_node_pt = this->node_pt(n_p-1 + n_p*i0);
            break;
@@ -3289,7 +3650,7 @@ check_integrity(double& max_error)
            
            // Get the values in current element.
            Vector<double> values;
-           get_interpolated_values(t,s,values);
+           this->get_interpolated_values(t,s,values);
            
            // Now figure out how many continuously interpolated values there are
            unsigned num_val=neigh_pt->object_pt()->ncont_interpolated_values();
@@ -3304,7 +3665,7 @@ check_integrity(double& max_error)
                 oomph_info <<  local_node_pt->x(0) << " " 
                           <<  local_node_pt->x(1) << " \n# "
                           << "erru (S)" << err << " " << ival << " " 
-                          << get_node_number(local_node_pt) << " "
+                          << this->get_node_number(local_node_pt) << " "
                           << values[ival]
                           << " " << values_in_neighb[ival] << std::endl;
                }
@@ -3508,7 +3869,7 @@ quad_hang_helper(const int &value_id, const int &my_edge,
      //Are we crossing a periodic boundary
      bool is_periodic = false;
      if(in_neighbouring_tree)
-      {is_periodic = tree_pt()->root_pt()->is_neighbour_periodic(my_edge);}
+      {is_periodic = this->tree_pt()->root_pt()->is_neighbour_periodic(my_edge);}
      
      //If it is periodic we actually need to get the node in
      //the neighbour of the neighbour (which will be a parent of
@@ -3594,30 +3955,30 @@ quad_hang_helper(const int &value_id, const int &my_edge,
       {
       case N:
        s_fraction[0] = 
-        local_one_d_fraction_of_interpolating_node(i0,0,value_id);
+        this->local_one_d_fraction_of_interpolating_node(i0,0,value_id);
        s_fraction[1] = 1.0;
-       local_node_pt = interpolating_node_pt(i0 + my_n_p*(my_n_p-1),value_id);
+       local_node_pt = this->interpolating_node_pt(i0 + my_n_p*(my_n_p-1),value_id);
        break;
          
       case S:
        s_fraction[0] = 
-        local_one_d_fraction_of_interpolating_node(i0,0,value_id);
+        this->local_one_d_fraction_of_interpolating_node(i0,0,value_id);
        s_fraction[1] = 0.0;
-       local_node_pt = interpolating_node_pt(i0,value_id);
+       local_node_pt = this->interpolating_node_pt(i0,value_id);
        break;
       
       case E:
        s_fraction[0] = 1.0;
        s_fraction[1] = 
-        local_one_d_fraction_of_interpolating_node(i0,1,value_id);
-       local_node_pt = interpolating_node_pt(my_n_p-1 + my_n_p*i0,value_id);
+        this->local_one_d_fraction_of_interpolating_node(i0,1,value_id);
+       local_node_pt = this->interpolating_node_pt(my_n_p-1 + my_n_p*i0,value_id);
        break;
          
       case W:
        s_fraction[0] = 0.0;
        s_fraction[1] = 
-        local_one_d_fraction_of_interpolating_node(i0,1,value_id);
-       local_node_pt = interpolating_node_pt(my_n_p*i0,value_id);
+        this->local_one_d_fraction_of_interpolating_node(i0,1,value_id);
+       local_node_pt = this->interpolating_node_pt(my_n_p*i0,value_id);
        break;
 
       default:
@@ -4695,78 +5056,91 @@ node_created_by_son_of_neighbour(const Vector<double> &s_fraction)
 //==================================================================
 /// Set the correct p-order of the element based on that of its
 /// father. Then construct an integration scheme of the correct order.
+/// If an adopted father is specified, information from this is
+/// used instead of using the father found from the tree.
 //==================================================================
 template<unsigned INITIAL_NNODE_1D>
-void PRefineableQElement<3,INITIAL_NNODE_1D>::initial_setup()
+void PRefineableQElement<3,INITIAL_NNODE_1D>::
+initial_setup(Tree* const &adopted_father_pt)
 {
  OomphLibWarning(
   "3D PRefineableQElements have not been fully implemented.",
   "PRefineableQElement<3,INITIAL_NNODE_1D>::initial_setup()",
   OOMPH_EXCEPTION_LOCATION);
-  
- // Check if element is in a tree
- if (Tree_pt!=0)
+ 
+ //Storage for pointer to my father (in octree impersonation)
+ OcTree* father_pt;
+ 
+ // Check if an adopted father has been specified
+ if (adopted_father_pt!=0)
   {
-   //Pointer to my father (in quadtree impersonation)
-   OcTree* father_pt = dynamic_cast<OcTree*>(octree_pt()->father_pt());
-   
-   // Check if element has father
-   if (father_pt!=0)
-    {
-     PRefineableQElement<3,INITIAL_NNODE_1D>* father_el_pt =
-            dynamic_cast<PRefineableQElement<3,INITIAL_NNODE_1D>*>
-                (this->tree_pt()->father_pt()->object_pt());
-     if (father_el_pt!=0)
-      {
-       unsigned father_p_order = father_el_pt->p_order();
-       // Set p-order to that of father
-       P_order = father_p_order;
-      }
-     
-     // Now sort out the element...
-     // (has p^3 nodes)
-     unsigned new_n_node = P_order*P_order*P_order;
-     
-     // Allocate new space for Nodes (at the element level)
-     this->set_n_node(new_n_node);
-     
-     // Set integration scheme
-     delete this->integral_pt();
-     switch(P_order)
-     {
-     case 2:
-      this->set_integration_scheme(new GaussLobattoLegendre<3,2>);
-      break;
-     case 3:
-      this->set_integration_scheme(new GaussLobattoLegendre<3,3>);
-      break;
-     case 4:
-      this->set_integration_scheme(new GaussLobattoLegendre<3,4>);
-      break;
-     case 5:
-      this->set_integration_scheme(new GaussLobattoLegendre<3,5>);
-      break;
-     case 6:
-      this->set_integration_scheme(new GaussLobattoLegendre<3,6>);
-      break;
-     case 7:
-      this->set_integration_scheme(new GaussLobattoLegendre<3,7>);
-      break;
-     default:
-      std::ostringstream error_message;
-      error_message <<"\nERROR: Exceeded maximum polynomial order for";
-      error_message <<"\n       integration scheme.\n";
-      throw OomphLibError(error_message.str(),
-                          "PRefineableQElement<3,INITIAL_NNODE_1D>::initial_setup()",
-                          OOMPH_EXCEPTION_LOCATION);
-     }
-    }
+   //Get pointer to my father (in octree impersonation)
+   father_pt = dynamic_cast<OcTree*>(adopted_father_pt);
+  }
+ // Check if element is in a tree
+ else if (Tree_pt!=0)
+  {
+   //Get pointer to my father (in octree impersonation)
+   father_pt = dynamic_cast<OcTree*>(octree_pt()->father_pt());
   }
  else
   {
-   throw OomphLibError("Element not in a tree!",
-                       "PRefineableQElement<3,INITIAL_NNODE_1D>::initial_setup()",
-                       OOMPH_EXCEPTION_LOCATION);
+   throw OomphLibError(
+          "Element not in a tree, and no adopted father has been specified!",
+          "PRefineableQElement<2,INITIAL_NNODE_1D>::initial_setup()",
+          OOMPH_EXCEPTION_LOCATION);
+  }
+
+ // Check if element has father
+ if (father_pt!=0)
+  {
+   PRefineableQElement<3,INITIAL_NNODE_1D>* father_el_pt
+    =dynamic_cast<PRefineableQElement<3,INITIAL_NNODE_1D>*>
+      (father_pt->object_pt());
+   if (father_el_pt!=0)
+    {
+     unsigned father_p_order = father_el_pt->p_order();
+     // Set p-order to that of father
+     P_order = father_p_order;
+    }
+   
+   // Now sort out the element...
+   // (has p^3 nodes)
+   unsigned new_n_node = P_order*P_order*P_order;
+   
+   // Allocate new space for Nodes (at the element level)
+   this->set_n_node(new_n_node);
+   
+   // Set integration scheme
+   delete this->integral_pt();
+   switch(P_order)
+   {
+   case 2:
+    this->set_integration_scheme(new GaussLobattoLegendre<3,2>);
+    break;
+   case 3:
+    this->set_integration_scheme(new GaussLobattoLegendre<3,3>);
+    break;
+   case 4:
+    this->set_integration_scheme(new GaussLobattoLegendre<3,4>);
+    break;
+   case 5:
+    this->set_integration_scheme(new GaussLobattoLegendre<3,5>);
+    break;
+   case 6:
+    this->set_integration_scheme(new GaussLobattoLegendre<3,6>);
+    break;
+   case 7:
+    this->set_integration_scheme(new GaussLobattoLegendre<3,7>);
+    break;
+   default:
+    std::ostringstream error_message;
+    error_message <<"\nERROR: Exceeded maximum polynomial order for";
+    error_message <<"\n       integration scheme.\n";
+    throw OomphLibError(error_message.str(),
+                        "PRefineableQElement<3,INITIAL_NNODE_1D>::initial_setup()",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
   }
 }
 
@@ -4891,21 +5265,21 @@ void PRefineableQElement<3,INITIAL_NNODE_1D>::pre_build(
      for(unsigned i0=0;i0<n_p;i0++)
       {
        //Get the fractional position of the node in the direction of s[0]
-       s_fraction[0] = local_one_d_fraction_of_node(i0,0);
+       s_fraction[0] = this->local_one_d_fraction_of_node(i0,0);
        // Local coordinate in father element
        s[0] = s_lo[0] + (s_hi[0]-s_lo[0])*s_fraction[0];
    
        for(unsigned i1=0;i1<n_p;i1++)
         {
          //Get the fractional position of the node in the direction of s[1]
-         s_fraction[1] = local_one_d_fraction_of_node(i1,1);
+         s_fraction[1] = this->local_one_d_fraction_of_node(i1,1);
          // Local coordinate in father element
          s[1] = s_lo[1] + (s_hi[1]-s_lo[1])*s_fraction[1];
    
          for(unsigned i2=0;i2<n_p;i2++)
           {
            //Get the fractional position of the node in the direction of s[1]
-           s_fraction[2] = local_one_d_fraction_of_node(i2,2);
+           s_fraction[2] = this->local_one_d_fraction_of_node(i2,2);
            // Local coordinate in father element
            s[2] = s_lo[2] + (s_hi[2]-s_lo[2])*s_fraction[2];
          
@@ -4921,7 +5295,7 @@ void PRefineableQElement<3,INITIAL_NNODE_1D>::pre_build(
            if(created_node_pt!=0) 
             {
              // Copy node across
-             node_pt(jnod) = created_node_pt;
+             this->node_pt(jnod) = created_node_pt;
             }
           }
         }
@@ -4943,13 +5317,97 @@ void PRefineableQElement<3,INITIAL_NNODE_1D>::pre_build(
 /// is performed.)
 //==================================================================
 template<unsigned INITIAL_NNODE_1D>
-void PRefineableQElement<3,INITIAL_NNODE_1D>::p_refine(const int &inc,
-                                                       Mesh* const &mesh_pt)
+void PRefineableQElement<3,INITIAL_NNODE_1D>::p_refine(
+      const int &inc,
+      Mesh* const &mesh_pt,
+      GeneralisedElement* const &clone_pt)
 {
  OomphLibWarning(
   "3D PRefineableQElements have not been fully implemented.",
   "PRefineableQElement<3,INITIAL_NNODE_1D>::p_refine()",
   OOMPH_EXCEPTION_LOCATION);
+ 
+ //Cast clone to correct type
+ PRefineableQElement<3,INITIAL_NNODE_1D>* clone_el_pt
+  = dynamic_cast<PRefineableQElement<3,INITIAL_NNODE_1D>*>(clone_pt);
+
+ //Check if we can use it
+ if(clone_el_pt==0)
+  {
+   throw OomphLibError(
+          "Cloned copy must be a PRefineableQElement<3,INITIAL_NNODE_1D>!",
+          "PRefineableQElement<3,INITIAL_NNODE_1D>::p_refine()",
+          OOMPH_EXCEPTION_LOCATION);
+  }
+#ifdef PARANOID
+ //Clone exists, so check that it is infact a copy of me
+ else
+  {
+   //Flag to keep track of check
+   bool clone_is_ok=true;
+
+   //Does the clone have the correct p-order?
+   clone_is_ok = (clone_el_pt->p_order() == this->p_order());
+
+   if(!clone_is_ok)
+    {
+     std::ostringstream err_stream;
+     err_stream << "Clone element has a different p-order from me,"
+                << std::endl
+                << "but it is supposed to be a copy!" << std::endl;
+     
+     throw OomphLibError(err_stream.str(),
+                         "PRefineableQElement<3,INITIAL_NNODE_1D>::p_refine()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+
+   //Does the clone have the same number of nodes as me?
+   clone_is_ok = (clone_el_pt->nnode() == this->nnode());
+
+   if(!clone_is_ok)
+    {
+     std::ostringstream err_stream;
+     err_stream << "Clone element has a different number of nodes from me,"
+                << std::endl
+                << "but it is supposed to be a copy!" << std::endl;
+     
+     throw OomphLibError(err_stream.str(),
+                         "PRefineableQElement<3,INITIAL_NNODE_1D>::p_refine()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+   
+   //Does the clone have the same nodes as me?
+   for(unsigned n=0; n<this->nnode(); n++)
+    {
+     clone_is_ok = (clone_el_pt->node_pt(n) == this->node_pt(n));
+    }
+
+   if(!clone_is_ok)
+    {
+     std::ostringstream err_stream;
+     err_stream << "The nodes belonging to the clone element are different"
+                << std::endl
+                << "from mine, but it is supposed to be a copy!" << std::endl;
+     
+     throw OomphLibError(err_stream.str(),
+                         "PRefineableQElement<3,INITIAL_NNODE_1D>::p_refine()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+
+   //If we get to here then the clone has all the information we require
+  }
+#endif
+
+ // Currently we can't handle the case of generalised coordinates
+ // since we haven't established how they should be interpolated.
+ // Buffer this case:
+ if (clone_el_pt->node_pt(0)->nposition_type()!=1)
+  {
+   throw OomphLibError(
+          "Can't handle generalised nodal positions (yet).",
+          "PRefineableQElement<3,INITIAL_NNODE_1D>::p_refine()",
+          OOMPH_EXCEPTION_LOCATION);
+  }
 
  // Timestepper should be the same for all nodes -- use it
  // to create timesteppers for new nodes
@@ -5096,7 +5554,7 @@ void PRefineableQElement<3,INITIAL_NNODE_1D>::p_refine(const int &inc,
  // current mesh and so will be pruned as part of the mesh adaption process.
  
  // Do any further-build required
- further_build();
+ this->further_build();
  
 }
 

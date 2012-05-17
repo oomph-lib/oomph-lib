@@ -60,15 +60,18 @@ public:
   {}
  
  /// \short Initial setup of element (set the correct p-order and
- /// integration scheme)
- void initial_setup();
+ /// integration scheme) If an adopted father is specified, information
+ /// from this is used instead of using the father found from the tree.
+ void initial_setup(Tree* const &adopted_father_pt=0);
  
  /// \short Pre-build (search father for required nodes which may already
  /// exist)
  void pre_build(Mesh*& mesh_pt, Vector<Node*>& new_node_pt);
  
  /// \short p-refine the element (refine if inc>0, unrefine if inc<0).
- void p_refine(const int &inc, Mesh* const &mesh_pt);
+ void p_refine(const int &inc,
+               Mesh* const &mesh_pt,
+               GeneralisedElement* const &clone_pt);
  
  /// Overload the shape functions
  void shape(const Vector<double> &s, Shape &psi) const;
@@ -138,29 +141,21 @@ public:
  PRefineableQElement() : PRefineableElement(), RefineableQElement<2>()
   {}
 
- /// Create and return a clone of myself (like a "virtual" constructor).
- /// This is required during the p-refinement so that the element can
- /// read data from "itself" while it builds itself with a new p-order.
- /// Must be defined in the derived class to return an object of the
- /// correct type.
- //BENFLAG: This is not a "fully-functioning" clone! It will merely contain
- //         all the required information normally obtained from the father
- //         in the RefineableQElement's build() procedure, and it has no
- //         memory leaks (I think).
- virtual PRefineableQElement<2,INITIAL_NNODE_1D>* make_backup_clone() const=0;
- 
- /// \short Initial setup of element (set the correct p-order and integration
- /// scheme)
- void initial_setup();
+ /// \short Initial setup of element (set the correct p-order and
+ /// integration scheme) If an adopted father is specified, information
+ /// from this is used instead of using the father found from the tree.
+ void initial_setup(Tree* const &adopted_father_pt=0);
  
  /// \short Pre-build (search father for required nodes which may already
  /// exist)
  void pre_build(Mesh*& mesh_pt, Vector<Node*>& new_node_pt);
 
  /// \short p-refine the element (refine if inc>0, unrefine if inc<0).
- void p_refine(const int &inc, Mesh* const &mesh_pt);
+ void p_refine(const int &inc,
+               Mesh* const &mesh_pt,
+               GeneralisedElement* const &clone_pt);
  
- // Overload the shape functions
+ /// Overload the shape functions
  void shape(const Vector<double> &s, Shape &psi) const;
  
  void dshape_local(const Vector<double> &s, Shape &psi, DShape &dpsi) const;
@@ -274,18 +269,21 @@ public:
     OOMPH_EXCEPTION_LOCATION);
   }
  
- /// \short Initial setup of element (set the correct p-order and integration
- /// scheme)
- void initial_setup();
+ /// \short Initial setup of element (set the correct p-order and
+ /// integration scheme) If an adopted father is specified, information
+ /// from this is used instead of using the father found from the tree.
+ void initial_setup(Tree* const &adopted_father_pt=0);
  
  /// \short Pre-build (search father for required nodes which may already
  /// exist)
  void pre_build(Mesh*& mesh_pt, Vector<Node*>& new_node_pt);
  
  /// \short p-refine the element (refine if inc>0, unrefine if inc<0).
- void p_refine(const int &inc, Mesh* const &mesh_pt);
+ void p_refine(const int &inc,
+               Mesh* const &mesh_pt,
+               GeneralisedElement* const &clone_pt);
  
- // Overload the shape functions
+ /// Overload the shape functions
  void shape(const Vector<double> &s, Shape &psi) const;
  
  void dshape_local(const Vector<double> &s, Shape &psi, DShape &dpsi) const;

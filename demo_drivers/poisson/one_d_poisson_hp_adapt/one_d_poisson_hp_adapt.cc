@@ -1056,7 +1056,7 @@ class ModalPRefineableQElement : public PRefineableQElement<DIM,2>
 public:
  ModalPRefineableQElement() : PRefineableQElement<DIM,2>() {}
  
- void initial_setup();
+ void initial_setup(Tree* const &adopted_father_pt=0);
  void pre_build();
  void further_build()
   {
@@ -1064,7 +1064,9 @@ public:
   }
  
  // p-refine the element
- void p_refine(const int &inc, Mesh* const &mesh_pt);
+ void p_refine(const int &inc,
+               Mesh* const &mesh_pt,
+               GeneralisedElement* const &clone_pt);
  
  // Overload the shape and basis functions
  void shape(const Vector<double> &s, Shape &psi) const;
@@ -1076,20 +1078,43 @@ public:
 };
 
 template<>
-void ModalPRefineableQElement<1>::initial_setup()
+void ModalPRefineableQElement<1>::initial_setup(Tree* const &adopted_father_pt)
 {
  // Create storage for internal data
  if (this->ninternal_data()==0)
   {
    this->add_internal_data(new Data(0));
   }
+
+ //Storage for pointer to my father (in binarytree impersonation)
+ BinaryTree* father_pt;
  
+ // Check if an adopted father has been specified
+ if (adopted_father_pt!=0)
+  {
+   //Get pointer to my father (in binarytree impersonation)
+   father_pt = dynamic_cast<BinaryTree*>(adopted_father_pt);
+  }
+ // Check if element is in a tree
+ else if (Tree_pt!=0)
+  {
+   //Get pointer to my father (in binarytree impersonation)
+   father_pt = dynamic_cast<BinaryTree*>(binary_tree_pt()->father_pt());
+  }
+ else
+  {
+   throw OomphLibError(
+          "Element not in a tree, and no adopted father has been specified!",
+          "PRefineableQElement<1,INITIAL_NNODE_1D>::initial_setup()",
+          OOMPH_EXCEPTION_LOCATION);
+  }
+
  // Check if element has father
- if (this->tree_pt()->father_pt()!=0)
+ if (father_pt!=0)
   {
    if (PRefineableQElement<1,2>* father_el_pt =
           dynamic_cast<PRefineableQElement<1,2>*>
-          (this->tree_pt()->father_pt()->object_pt()))
+          (father_pt->object_pt()))
     {
      unsigned father_p_order = father_el_pt->p_order();
      // Set the correct p-order of the element
@@ -1156,8 +1181,16 @@ template<>
 void ModalPRefineableQElement<1>::pre_build() {}
 
 template<>
-void ModalPRefineableQElement<1>::p_refine(const int &inc, Mesh* const &mesh_pt)
+void ModalPRefineableQElement<1>::p_refine(
+      const int &inc,
+      Mesh* const &mesh_pt,
+      GeneralisedElement* const &clone_pt)
 {
+ // BENFLAG: In this case we do not need the pointer to a clone of the
+ //          element, or to the mesh, but they are required in the
+ //          interface because we are overloading this function from
+ //          the class PRefineableElement in which they are present.
+ 
  // Create storage for modes if none exists
  if (this->ninternal_data()==0)
   {

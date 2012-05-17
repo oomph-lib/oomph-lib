@@ -238,7 +238,7 @@ public:
   {
    DocInfo my_doc_info;
    dynamic_cast<NavierStokesSchurComplementPreconditioner*>(
-    Prec_pt)->validate<FP_ELEMENT>(my_doc_info,this);
+    Prec_pt)->template validate<FP_ELEMENT>(my_doc_info,this);
    pause("done validation");
   }
 

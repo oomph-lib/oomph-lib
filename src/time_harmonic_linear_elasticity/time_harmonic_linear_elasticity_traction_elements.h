@@ -156,11 +156,14 @@ public virtual FaceGeometry<ELEMENT>,
    this->U_index_time_harmonic_linear_elasticity_traction.resize(n_dim);
    for(unsigned i=0;i<n_dim;i++)
     {
-     this->U_index_time_harmonic_linear_elasticity_traction[i].real() = 
-      cast_element_pt->u_index_time_harmonic_linear_elasticity(i).real();
+     //this->U_index_time_harmonic_linear_elasticity_traction[i].real() = 
+     // cast_element_pt->u_index_time_harmonic_linear_elasticity(i).real();
+     //
+     //this->U_index_time_harmonic_linear_elasticity_traction[i].imag() = 
+     // cast_element_pt->u_index_time_harmonic_linear_elasticity(i).imag();
 
-     this->U_index_time_harmonic_linear_elasticity_traction[i].imag() = 
-      cast_element_pt->u_index_time_harmonic_linear_elasticity(i).imag();
+     this->U_index_time_harmonic_linear_elasticity_traction[i] =
+      cast_element_pt->u_index_time_harmonic_linear_elasticity(i);
     }
    
    // Zero traction
@@ -292,11 +295,14 @@ template<class ELEMENT>
   std::complex<unsigned> u_nodal_index[n_dim];
   for(unsigned i=0;i<n_dim;i++)
    {
-    u_nodal_index[i].real() = 
-     this->U_index_time_harmonic_linear_elasticity_traction[i].real();
+    //u_nodal_index[i].real() = 
+    // this->U_index_time_harmonic_linear_elasticity_traction[i].real();
+    //
+    //u_nodal_index[i].imag() = 
+    // this->U_index_time_harmonic_linear_elasticity_traction[i].imag();
 
-    u_nodal_index[i].imag() = 
-     this->U_index_time_harmonic_linear_elasticity_traction[i].imag();
+    u_nodal_index[i] =
+     this->U_index_time_harmonic_linear_elasticity_traction[i];
    }
   
   //Integer to hold the local equation number

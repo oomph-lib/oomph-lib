@@ -4040,9 +4040,6 @@ void TreeBasedRefineableMeshBase::p_adapt_mesh(DocInfo& doc_info)
  // process may not have any elements on a particular submesh.
  if (this->nelement()>0)
   {
-   // Pointer to mesh needs to be passed to some functions
-   Mesh* mesh_pt=this;
- 
    double t_start = 0.0;
    if (Global_timings::Doc_comprehensive_timings)
     {
@@ -4050,28 +4047,7 @@ void TreeBasedRefineableMeshBase::p_adapt_mesh(DocInfo& doc_info)
     }
     
    // Do refinement/unrefinement if required
-   for(unsigned e=0; e<this->nelement(); e++)
-    {
-     PRefineableElement* el_pt
-      = dynamic_cast<PRefineableElement*>(this->element_pt(e));
-     if ( el_pt!=0 )
-      {
-       if (el_pt->to_be_p_refined())
-        {
-         el_pt->p_refine(1,mesh_pt);
-        }
-       else if (el_pt->to_be_p_unrefined())
-        {
-         el_pt->p_refine(-1,mesh_pt);
-        }
-      }
-     else 
-      {
-       throw OomphLibError("Element cannot be adapted",
-                           "TreeBasedRefineableMeshBase::p_adapt_mesh()",
-                           OOMPH_EXCEPTION_LOCATION);
-      }
-    }
+   this->p_refine_elements_if_required();
 
    if (Global_timings::Doc_comprehensive_timings)
     {

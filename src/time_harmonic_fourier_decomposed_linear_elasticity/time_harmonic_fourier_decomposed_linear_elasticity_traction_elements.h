@@ -138,15 +138,20 @@ public virtual FaceGeometry<ELEMENT>,
     U_index_time_harmonic_fourier_decomposed_linear_elasticity_traction.resize(n_dim+1);
    for(unsigned i=0;i<n_dim+1;i++)
     {
-     this->
-      U_index_time_harmonic_fourier_decomposed_linear_elasticity_traction[i].real() = 
-      cast_element_pt->
-      u_index_time_harmonic_fourier_decomposed_linear_elasticity(i).real();
+     //this->
+     // U_index_time_harmonic_fourier_decomposed_linear_elasticity_traction[i].real() = 
+     // cast_element_pt->
+     // u_index_time_harmonic_fourier_decomposed_linear_elasticity(i).real();
+     //
+     //this->
+     // U_index_time_harmonic_fourier_decomposed_linear_elasticity_traction[i].imag() = 
+     // cast_element_pt->
+     // u_index_time_harmonic_fourier_decomposed_linear_elasticity(i).imag();
 
      this->
-      U_index_time_harmonic_fourier_decomposed_linear_elasticity_traction[i].imag() = 
+      U_index_time_harmonic_fourier_decomposed_linear_elasticity_traction[i] = 
       cast_element_pt->
-      u_index_time_harmonic_fourier_decomposed_linear_elasticity(i).imag();
+      u_index_time_harmonic_fourier_decomposed_linear_elasticity(i);
     }
    
    // Zero traction
@@ -279,13 +284,17 @@ template<class ELEMENT>
   std::complex<unsigned> u_nodal_index[n_dim+1];
   for(unsigned i=0;i<n_dim+1;i++)
    {
-    u_nodal_index[i].real() = 
+    //u_nodal_index[i].real() = 
+    // this->
+    // U_index_time_harmonic_fourier_decomposed_linear_elasticity_traction[i].real();
+    //
+    //u_nodal_index[i].imag() = 
+    // this->
+    // U_index_time_harmonic_fourier_decomposed_linear_elasticity_traction[i].imag();
+    
+    u_nodal_index[i] = 
      this->
-     U_index_time_harmonic_fourier_decomposed_linear_elasticity_traction[i].real();
-
-    u_nodal_index[i].imag() = 
-     this->
-     U_index_time_harmonic_fourier_decomposed_linear_elasticity_traction[i].imag();
+     U_index_time_harmonic_fourier_decomposed_linear_elasticity_traction[i];
    }
   
   //Integer to hold the local equation number

@@ -295,8 +295,9 @@ namespace Global_Parameters
   unsigned dim = traction.size();
   for(unsigned i=0;i<dim;i++)
    {
-    traction[i].real() = -P*n[i];
-    traction[i].imag() =  P*n[i];
+    //traction[i].real() = -P*n[i];
+    //traction[i].imag() =  P*n[i];
+    traction[i] = complex<double>(-P*n[i],P*n[i]);
    }
  } // end of pressure load
  

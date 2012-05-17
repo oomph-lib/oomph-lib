@@ -148,6 +148,12 @@ class Tree
  template<class ELEMENT>
  void split_if_required();
 
+ ///\short  If required, p-refine the leaf -- 
+ /// criterion: bool object_pt()-> to_be_p_refined() = true
+ /// or bool object_pt()-> to_be_p_unrefined() = true
+ template<class ELEMENT>
+ void p_refine_if_required(Mesh* &mesh_pt);
+
  /// \short If required, merge the four sons for unrefinement -- 
  /// criterion: bool object_pt()-> sons_to_be_unrefined() = true
  void merge_sons_if_required(Mesh* &mesh_pt);
@@ -168,6 +174,7 @@ class Tree
  /// pointer to a mesh as its argument
  typedef void (Tree::* VoidMeshPtArgumentMemberFctPt)(Mesh* &mesh_pt);
 
+
  /// \short Traverse the tree and execute void Tree member function 
  /// member_function() at all its "nodes"
  void traverse_all(Tree::VoidMemberFctPt member_function);
@@ -184,6 +191,11 @@ class Tree
  /// \short  Traverse the tree and execute void Tree member function 
  /// member_function() only at its leaves
  void traverse_leaves(Tree::VoidMemberFctPt member_function);
+
+ /// \short  Traverse the tree and execute void Tree member function 
+ /// that takes a pointer to a mesh as an argument only at its leaves
+ void traverse_leaves(Tree::VoidMeshPtArgumentMemberFctPt member_function,
+                      Mesh* &mesh_pt);
 
  /// Traverse tree and stick pointers to leaf "nodes" (only) into Vector
  void stick_leaves_into_vector(Vector<Tree* >&);
