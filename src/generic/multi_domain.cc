@@ -137,15 +137,15 @@ namespace Multi_domain_functions
 
   /// \short Number of bins in the first dimension in binning method in
   /// setup_multi_domain_interaction(). 
-  unsigned Nx_bin=1000;
+  unsigned Nx_bin=100;
 
   /// \short Number of bins in the second dimension in binning method in
   /// setup_multi_domain_interaction(). 
-  unsigned Ny_bin=1000;
+  unsigned Ny_bin=100;
 
   /// \short Number of bins in the third dimension in binning method in
   /// setup_multi_domain_interaction(). 
-  unsigned Nz_bin=1000;
+  unsigned Nz_bin=100;
 
   /// Number of spirals to be searched in one go
   unsigned N_spiral_chunk=1;
@@ -251,8 +251,7 @@ namespace Multi_domain_functions
             4,comm_pt->mpi_comm(),&status);
 
    MPI_Wait(&request,MPI_STATUS_IGNORE);
-
-
+   
    // Send the vector of flat-packed zetas that we couldn't find
    // locally to the next processor
    if (n_missing_local_zetas!=0)
@@ -1738,6 +1737,9 @@ namespace Multi_domain_functions
    // Number of zeta tuples to be dealt with
    unsigned n_zeta=Received_flat_packed_zetas_to_be_found.size()/Dim;
  
+
+
+
    // Create storage for the processor id (plus one) on which
    // the zetas stored in Flat_packed_zetas_not_found_locally[...]
    // were located 
@@ -1992,6 +1994,361 @@ namespace Multi_domain_functions
      
   }
 
+ //=====================================================================
+ // hierher vector based version
+
+ /// Locate zeta for current set of missing coordinates
+ //=====================================================================
+  void locate_zeta_for_missing_coordinates
+  (int& iproc, Mesh* const &external_mesh_pt, Problem* problem_pt,
+   Vector<MeshAsGeomObject*>& mesh_geom_obj_pt)
+  {
+   // How many meshes are we dealing with?
+   unsigned n_mesh=mesh_geom_obj_pt.size();
+   
+   // Storage for number of processors, current process and communicator
+   OomphCommunicator* comm_pt=problem_pt->communicator_pt();
+   int n_proc=comm_pt->nproc();
+   int my_rank=comm_pt->my_rank();
+   
+   // Clear vectors containing data to be sent
+   Flat_packed_doubles.resize(0);
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+   Flat_packed_unsigneds_string.resize(0);
+#endif
+   Flat_packed_unsigneds.resize(0);
+   Flat_packed_located_coordinates.resize(0);
+   
+   // Flush storage for zetas not found locally (when
+   // processing the zeta coordinates received from "previous"
+   // processor)
+   Flat_packed_zetas_not_found_locally.resize(0);
+   
+   // Number of zeta tuples to be dealt with (includes padding!)
+   unsigned n_zeta=Received_flat_packed_zetas_to_be_found.size()/Dim;
+   
+   // Create storage for the processor id (plus one) on which
+   // the zetas stored in Flat_packed_zetas_not_found_locally[...]
+   // were located. (Remains zero for padded entries).
+   Proc_id_plus_one_of_external_element.resize(n_zeta,0);
+   
+   // Create storage for the status of the (external halo) element associated
+   // the zetas stored in Flat_packed_zetas_not_found_locally[...].
+   // It either hasn't been found, already exists on the processor
+   // that needs it, or needs to be newly created. (Remains Not_found
+   // for padded entries).
+   Located_element_status.resize(n_zeta,Not_found);
+
+   // Counter for flat-packed array of external zeta coordinates
+   unsigned count=0;
+
+   // Current mesh
+   unsigned i_mesh=0;
+
+   // Loop over the zeta tuples that we received from elsewhere and
+   // are trying to find here for current mesh
+   for (unsigned i=0;i<n_zeta;i++)
+    {
+     // Storage for global coordinates to be located
+     Vector<double> x_global(Dim);
+     
+     // Loop to fill in coordinates
+     for (unsigned ii=0;ii<Dim;ii++)
+      {
+       x_global[ii]=Received_flat_packed_zetas_to_be_found[count];
+       count++;
+      }
+
+     // Check if we've reached the end of the mesh
+     bool reached_end_of_mesh=false;
+     unsigned dbl_max_count=0;
+     for (unsigned ii=0;ii<Dim;ii++)
+      {
+       if (x_global[ii]==DBL_MAX)
+        {
+         dbl_max_count++;
+         reached_end_of_mesh=true;
+        }
+      }
+
+     // Reached end of mesh
+     if (reached_end_of_mesh)
+      {
+#ifdef PARANOID
+       // Check if all coordinates were set to DBX_MAX
+       if (dbl_max_count!=Dim)
+        {
+         std::ostringstream error_stream;
+         error_stream  << "Appear to have reached end of mesh " << i_mesh 
+                       << " but only " << dbl_max_count << " out of "
+                       << Dim << " zeta coordinates have been set to DBX_MAX\n";
+         throw OomphLibError
+          (error_stream.str(),
+           "Multi_domain_functions::locate_zeta_for_missing_coordinates(...)",
+           OOMPH_EXCEPTION_LOCATION);
+        }
+#endif
+
+       // Indicate end of mesh in flat packed data
+       for (unsigned i=0;i<Dim;i++)
+        {
+         Flat_packed_zetas_not_found_locally.push_back(DBL_MAX);
+        }
+       
+       // Bump mesh counter
+       i_mesh++;
+
+       // Bail out if we're done
+       if (i_mesh==n_mesh)
+        {
+         return;
+        }
+
+
+
+       // // Read coordinates again
+       // for (unsigned ii=0;ii<Dim;ii++)
+       //  {
+       //   x_global[ii]=Received_flat_packed_zetas_to_be_found[count];
+       //   count++;
+       //  }
+       
+      }
+
+     
+     // Perform locate_zeta for these coordinates and current mesh
+     GeomObject *sub_geom_obj_pt=0;
+     Vector<double> ss(Dim);
+     if (!reached_end_of_mesh)
+      {
+       bool called_within_spiral=true;
+       mesh_geom_obj_pt[i_mesh]->spiraling_locate_zeta(x_global,
+                                                       sub_geom_obj_pt,ss,
+                                                       called_within_spiral);
+      }
+
+     // Did the locate method work?
+     if (sub_geom_obj_pt!=0)
+      {
+       // Get the source element - bulk or not?
+       GeneralisedElement *source_el_pt=0;
+       if (!Use_bulk_element_as_external)
+        {
+         source_el_pt=dynamic_cast<FiniteElement*>(sub_geom_obj_pt);
+        }
+       else
+        {
+         FaceElement *face_el_pt=dynamic_cast<FaceElement*>(sub_geom_obj_pt);
+         source_el_pt=dynamic_cast<FiniteElement*>(face_el_pt->
+                                                   bulk_element_pt());
+        }
+       
+       // Check if the returned element is halo
+       if (!source_el_pt->is_halo()) // cannot accept halo here
+        {
+         // The correct non-halo element has been located; this will become
+         // an external haloed element on the current process, and an
+         // external halo copy needs to be created on the current process
+         // minus wherever we are in the "ring-loop"
+         int halo_copy_proc=my_rank-iproc;
+         
+         // If iproc is bigger than my_rank then we've "gone through" nproc-1
+         if (my_rank<iproc) { halo_copy_proc=n_proc+halo_copy_proc; }
+         
+         // So, we found zeta on the current processor
+         Proc_id_plus_one_of_external_element[i]=my_rank+1;
+          
+         // This source element is an external halo on process halo_copy_proc
+         // but it should only be added to the storage if it hasn't
+         // been added already, and this information also needs to be
+         // communicated over to the other process
+         
+         unsigned n_extern_haloed=external_mesh_pt->
+          nexternal_haloed_element(halo_copy_proc);
+         unsigned external_haloed_el_index=
+          external_mesh_pt->add_external_haloed_element_pt(halo_copy_proc,
+                                                           source_el_pt);
+
+         // If it was added to the storage then the returned index
+         // will be the same as the (old) size of the storage
+         if (external_haloed_el_index==n_extern_haloed)
+          {
+           // Set Located_element_status to say it 
+           // should be newly created
+           Located_element_status[i]=New;
+           
+           // How many continuously interpolated values are there?
+           int n_cont_inter_values=-1;
+           if (dynamic_cast<RefineableElement*>(source_el_pt)!=0)
+            {
+             n_cont_inter_values=dynamic_cast<RefineableElement*>
+              (source_el_pt)->ncont_interpolated_values();
+            }
+           
+           // Since it is (externally) haloed from the current process,
+           // the info required to create a new element in the equivalent
+           // external halo layer on process halo_copy_proc needs to be 
+           // sent there
+           
+           // If we're using macro elements to update...
+           MacroElementNodeUpdateMesh* macro_mesh_pt=
+            dynamic_cast<MacroElementNodeUpdateMesh*>(external_mesh_pt);
+           if (macro_mesh_pt!=0)
+            {
+             Flat_packed_unsigneds.push_back(1);
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+             Flat_packed_unsigneds_string.push_back("Mesh is macro element mesh[2]");
+#endif
+             //Cast to finite element... this must work because it's
+             //a macroelement no update mesh
+             FiniteElement* source_finite_el_pt 
+              = dynamic_cast<FiniteElement*>(source_el_pt);
+             
+             MacroElement* macro_el_pt=source_finite_el_pt->macro_elem_pt();
+             // Send the macro element number across
+             unsigned macro_el_num=macro_el_pt->macro_element_number();
+             Flat_packed_unsigneds.push_back(macro_el_num);
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+             Flat_packed_unsigneds_string.push_back("Number of macro element[2]");
+#endif              
+             // we need to send
+             // the lower left and upper right coordinates of the macro
+             QElementBase* q_el_pt=dynamic_cast<QElementBase*>(source_el_pt);
+             if (q_el_pt!=0)
+              {
+               // The macro element needs to be set first before
+               // its lower left and upper right coordinates can be accessed
+               // Now send the lower left and upper right coordinates
+               unsigned el_dim=q_el_pt->dim();
+               for (unsigned i_dim=0;i_dim<el_dim;i_dim++)
+                {
+                 Flat_packed_doubles.push_back(q_el_pt->s_macro_ll(i_dim));
+                 Flat_packed_doubles.push_back(q_el_pt->s_macro_ur(i_dim));
+                }
+              }
+             else // Throw an error
+              {
+               std::ostringstream error_stream;
+               error_stream << "You are using a MacroElement node update\n"
+                            << "in a case with non-QElements. This has not\n"
+                            << "yet been implemented.\n";
+               throw OomphLibError
+                (error_stream.str(),
+                 "Multi_domain_functions::locate_zeta_for_missing_coordinates()",
+                 OOMPH_EXCEPTION_LOCATION);
+              }
+             
+            }
+           else // Not using macro elements to update
+            {
+             Flat_packed_unsigneds.push_back(0);
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+             Flat_packed_unsigneds_string.push_back("Mesh is not a macro element mesh [2]");
+#endif
+            }
+           
+           
+           //Cast to finite element... this must work because it's
+           //a macroelement no update mesh
+           FiniteElement* source_finite_el_pt 
+            = dynamic_cast<FiniteElement*>(source_el_pt);
+#ifdef PARANOID
+           if(source_finite_el_pt==0)
+            {
+             throw 
+              OomphLibError(
+               "Unable to cast source function to finite element\n",
+               "Multi_domain_functions::locate_zeta_for_missing_coordinates()",
+               OOMPH_EXCEPTION_LOCATION);
+            }
+#endif
+            
+            
+           // Loop over the nodes of the new source element
+           unsigned n_node=source_finite_el_pt->nnode();
+           for (unsigned j=0;j<n_node;j++)
+            {
+             Node* nod_pt=source_finite_el_pt->node_pt(j);
+              
+             // Add the node to the storage; this routine
+             // also takes care of any master nodes if the
+             // node is hanging
+             add_external_haloed_node_to_storage(halo_copy_proc,nod_pt,
+                                                 problem_pt,
+                                                 external_mesh_pt,
+                                                 n_cont_inter_values);
+            }            
+          }
+         else // it has already been added, so tell the other process
+          {
+           // Set Located_element_status to indicate an element has 
+           // already been added
+           Located_element_status[i]=Exists;
+           Flat_packed_unsigneds.push_back(external_haloed_el_index);
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+           Flat_packed_unsigneds_string.push_back("Index of existing external haloed element[2]");
+#endif
+          }
+         
+         // The coordinates returned by locate_zeta are also needed
+         // in the setup of the source elements on the other process
+         if (!Use_bulk_element_as_external)
+          {
+           for (unsigned ii=0;ii<Dim;ii++)
+            {
+             Flat_packed_located_coordinates.push_back(ss[ii]);
+            }
+          }
+         else // translate the coordinates to the bulk element
+          {
+           // The translation is from Lagrangian to Eulerian
+           FaceElement *face_el_pt=
+            dynamic_cast<FaceElement*>(sub_geom_obj_pt);
+           //Get the dimension of the BulkElement
+           unsigned bulk_el_dim = 
+            dynamic_cast<FiniteElement*>(source_el_pt)->dim();
+           Vector<double> s_trans(bulk_el_dim);
+           face_el_pt->get_local_coordinate_in_bulk(ss,s_trans);
+           for (unsigned ii=0;ii<bulk_el_dim;ii++)
+            {
+             Flat_packed_located_coordinates.push_back(s_trans[ii]);
+            }
+          }
+        }
+       else // halo, so search again until non-halo equivalent is located
+        {
+         // Add required information to arrays (as below)
+         for (unsigned ii=0;ii<Dim;ii++)
+          {
+           Flat_packed_zetas_not_found_locally.push_back(x_global[ii]);
+          }
+         // It wasn't found here
+         Proc_id_plus_one_of_external_element[i]=0;
+
+         // Set Located_element_status to indicate not found
+         Located_element_status[i]=Not_found;
+        }
+      }
+     else // not successful this time, so prepare for next process to try
+      {
+       // Add this global coordinate to the LOCAL zeta array
+       for (unsigned ii=0;ii<Dim;ii++)
+        {
+         Flat_packed_zetas_not_found_locally.push_back(x_global[ii]);
+        }
+       // It wasn't found here
+       Proc_id_plus_one_of_external_element[i]=0;
+
+       // Set Located_element_status to indicate not found
+       Located_element_status[i]=Not_found;
+      }
+
+    }
+   
+  }
+
+
+
 #endif
 
 
@@ -2135,6 +2492,203 @@ namespace Multi_domain_functions
   }
 
 
+
+ //=====================================================================
+ // hierher vector based version
+  
+ /// locate zeta for current set of "local" coordinates
+ //=====================================================================
+  void locate_zeta_for_local_coordinates
+  (const Vector<Mesh*>& mesh_pt, Mesh* const &external_mesh_pt,
+   Vector<MeshAsGeomObject*>& mesh_geom_obj_pt,
+   const unsigned& interaction_index)
+  {
+   // Flush storage for zetas not found locally 
+   Flat_packed_zetas_not_found_locally.resize(0);
+
+   // Number of meshes
+   unsigned n_mesh=mesh_pt.size();
+   
+#ifdef PARANOID
+   if (mesh_geom_obj_pt.size()!=n_mesh)
+    {
+     std::ostringstream error_stream;
+     error_stream << "Sizes of mesh_geom_obj_pt [ "
+                  << mesh_geom_obj_pt.size() << " ] and "
+                  << "mesh_pt [ " << n_mesh << " ] don't match.\n";
+     throw OomphLibError
+      (error_stream.str(),
+       "Multi_domain_functions::locate_zeta_for_local_coordinates(...)",
+       OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+   // Element counter
+   unsigned e_count=0;
+
+   // Loop over meshes
+   for (unsigned i_mesh=0;i_mesh<n_mesh;i_mesh++)
+    {
+
+     // Number of local elements
+     unsigned n_element=mesh_pt[i_mesh]->nelement();
+     
+     // Loop over this processor's elements
+     for (unsigned e=0;e<n_element;e++)
+      {
+       ElementWithExternalElement *el_pt=
+        dynamic_cast<ElementWithExternalElement*>(mesh_pt[i_mesh]->
+                                                  element_pt(e));
+#ifdef OOMPH_HAS_MPI
+       // Only visit non-halo elements -- we're not setting up external elements
+       // for on-halos!
+       if (!el_pt->is_halo()) 
+#endif 
+        {
+         // Find number of Gauss points and element dimension
+         unsigned n_intpt=el_pt->integral_pt()->nweight();
+         unsigned el_dim=el_pt->dim();
+         
+         
+#ifdef PARANOID
+         if (el_dim!=Dim)
+          {
+           std::ostringstream error_stream;
+           error_stream 
+            << "Dimension of element " << el_dim 
+            << " is not consitent with dimension assumed \n"
+            << " in multidomain namespace, " << Dim << std::endl;
+           throw OomphLibError
+            (error_stream.str(),
+             "Multi_domain_functions::locate_zeta_for_local_coordinates(...)",
+             OOMPH_EXCEPTION_LOCATION);
+          }
+#endif
+
+         // Set storage for local and global coordinates
+         Vector<double> s_local(el_dim);
+         Vector<double> x_global(el_dim);
+         
+         // Loop over integration points
+         for (unsigned ipt=0;ipt<n_intpt;ipt++)
+          {         
+           // Has this integration point been done yet?
+           if (External_element_located[e_count][ipt]==0)
+            {
+             // Get local coordinates
+             for (unsigned i=0;i<el_dim;i++)
+              {
+               s_local[i]=el_pt->integral_pt()->knot(ipt,i);
+              }
+             // Interpolate to global coordinates
+             el_pt->interpolated_zeta(s_local,x_global);
+             
+             // Storage for geometric object and its local coordinates
+             GeomObject* sub_geom_obj_pt=0;
+             Vector<double> s_ext(el_dim);
+             
+             // Perform locate_zeta locally for this coordinate
+             bool called_within_spiral=true;
+             mesh_geom_obj_pt[i_mesh]->spiraling_locate_zeta(
+              x_global,
+              sub_geom_obj_pt,s_ext,
+              called_within_spiral);
+             
+             // Has the required element been located?
+             if (sub_geom_obj_pt!=0)
+              {
+               // The required element has been located
+               // The located coordinates have the same dimension as the bulk
+               GeneralisedElement* source_el_pt;
+               Vector<double> s_source(el_dim);
+               
+               // Is the bulk element the actual external element?
+               if (!Use_bulk_element_as_external)
+                {
+                 // Use the object directly (it must be a finite element)
+                 source_el_pt=dynamic_cast<FiniteElement*>(sub_geom_obj_pt);
+                 s_source=s_ext;
+                }
+               else
+                {
+                 // Cast to a FaceElement and use the bulk element
+                 FaceElement* face_el_pt=
+                  dynamic_cast<FaceElement*>(sub_geom_obj_pt);
+                 source_el_pt=face_el_pt->bulk_element_pt();
+                 
+                 //Need to resize the located coordinates to have the same
+                 //dimension as the bulk element
+                 s_source.resize(dynamic_cast<FiniteElement*>
+                                 (source_el_pt)->dim());
+                 
+                 // Translate the returned local coords into the bulk element
+                 face_el_pt->get_local_coordinate_in_bulk(s_ext,s_source);
+                }
+               
+               // Check if it's a halo; if it is then the non-halo equivalent
+               // needs to be located from another processor (unless we
+               // accept halo elements as external elements)
+#ifdef OOMPH_HAS_MPI
+               if (Allow_use_of_halo_elements_as_external_elements||
+                   (!source_el_pt->is_halo()))
+#endif
+                {
+                 //Need to cast to a FiniteElement
+                 FiniteElement* source_finite_el_pt = 
+                  dynamic_cast<FiniteElement*>(source_el_pt);
+                 
+                 // Set the external element pointer and local coordinates
+                 el_pt->external_element_pt(interaction_index,ipt)
+                  = source_finite_el_pt;
+                 el_pt->external_element_local_coord(interaction_index,ipt)
+                  =s_source;
+                 
+                 // Set the lookup array to 1/true 
+                 External_element_located[e_count][ipt]=1;
+                }
+#ifdef OOMPH_HAS_MPI
+               // located element is halo and we're not accepting haloes
+               // obviously only makes sense in mpi mode...
+               else 
+                {
+                 // Add required information to arrays
+                 for (unsigned i=0;i<el_dim;i++)
+                  {
+                   Flat_packed_zetas_not_found_locally.push_back(x_global[i]);
+                  }
+                }
+#endif
+              }
+             else
+              {
+               // Search has failed then add the required information to the
+               // arrays which need to be sent to the other processors so that
+               // they can perform the locate_zeta
+               
+               // Add this global coordinate to the LOCAL zeta array
+               for (unsigned i=0;i<el_dim;i++)
+                {
+                 Flat_packed_zetas_not_found_locally.push_back(x_global[i]);
+                }
+              }
+            }
+          } // end loop over integration points
+        } //end for halo
+
+       // Bump up counter for all elements
+       e_count++;
+
+      } // end loop over local elements
+
+
+     // Mark end of mesh data in flat packed array
+     for (unsigned i=0;i<Dim;i++)
+      {
+       Flat_packed_zetas_not_found_locally.push_back(DBL_MAX);
+      }
+     
+    } // end of loop over meshes
+  }
 
 
 //=====================================================================

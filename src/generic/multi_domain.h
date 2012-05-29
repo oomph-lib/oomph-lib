@@ -42,6 +42,13 @@
 #include <oomph-lib-config.h>
 #endif
 
+
+
+
+// hierher 
+#define USE_VECTOR_BASED_MD
+//#undef USE_VECTOR_BASED_MD
+
 //Oomph-lib headers
 #include "geom_objects.h"
 #include "problem.h"
@@ -293,6 +300,16 @@ namespace Multi_domain_functions
                                        Mesh* const &external_face_mesh_pt,
                                        const unsigned& interaction_index=0);
   
+
+  // hierher vector-based version
+  template<class EXT_ELEMENT, class FACE_ELEMENT_GEOM_OBJECT>
+   void setup_multi_domain_interaction(Problem* problem_pt,
+                                       const Vector<Mesh*>& mesh_pt,
+                                       Mesh* const &external_mesh_pt,
+                                       const Vector<Mesh*>& external_face_mesh_pt,
+                                       const unsigned& interaction_index=0);
+
+
   /// \short Auxiliary function which is called from the two preceding
   /// functions 
   template<class EXT_ELEMENT, class GEOM_OBJECT>
@@ -301,12 +318,32 @@ namespace Multi_domain_functions
                                            Mesh* const &external_mesh_pt,
                                            const unsigned& interaction_index,
                                            Mesh* const &external_face_mesh_pt=0);
+
+  /// hierher vector based version
+  template<class EXT_ELEMENT, class GEOM_OBJECT>
+   void aux_setup_multi_domain_interaction(Problem* problem_pt,
+                                           const Vector<Mesh*>& mesh_pt,
+                                           Mesh* const &external_mesh_pt,
+                                           const unsigned& interaction_index,
+                                           const Vector<Mesh*>& external_face_mesh_pt=0);
+
+
   
   /// \short Helper function to locate "local" zeta coordinates
    void locate_zeta_for_local_coordinates
    (Mesh* const &mesh_pt, Mesh* const &external_mesh_pt,
     MeshAsGeomObject* &mesh_geom_obj_pt,
     const unsigned& interaction_index);
+
+
+  
+   // hierher vector based version
+   /// \short Helper function to locate "local" zeta coordinates
+   void locate_zeta_for_local_coordinates
+    (const Vector<Mesh*>& mesh_pt, Mesh* const &external_mesh_pt,
+     Vector<MeshAsGeomObject*>& mesh_geom_obj_pt,
+     const unsigned& interaction_index);
+
 
 #ifdef OOMPH_HAS_MPI
   /// \short Helper function to send any "missing" zeta coordinates to
@@ -317,6 +354,14 @@ namespace Multi_domain_functions
   void locate_zeta_for_missing_coordinates(
    int& iproc, Mesh* const &external_mesh_pt,Problem* problem_pt,
     MeshAsGeomObject* &mesh_geom_obj_pt);
+
+
+  // hierher vector based version
+  /// \short Helper function to locate these "missing" zeta coordinates.
+  void locate_zeta_for_missing_coordinates(
+   int& iproc, Mesh* const &external_mesh_pt,Problem* problem_pt,
+    Vector<MeshAsGeomObject*>& mesh_geom_obj_pt);
+
 
   /// \short Helper function to send back any located information
   void send_and_receive_located_info(int& iproc, Mesh* const &external_mesh_pt,

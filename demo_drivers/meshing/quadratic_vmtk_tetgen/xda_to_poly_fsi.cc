@@ -94,7 +94,6 @@ using namespace std;
 int main()
 {
  
- 
  // Prompt input from user
  //-----------------------
  std::cout << "Please enter the file name without the file extension '.xda': ";

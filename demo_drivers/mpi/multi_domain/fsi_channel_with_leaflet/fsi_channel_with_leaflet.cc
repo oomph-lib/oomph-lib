@@ -672,7 +672,7 @@ void FSIChannelWithLeafletProblem<ELEMENT>::actions_after_distribute()
     }
   } // aux node update fct has been (re-)set
 
- 
+
 } // end_of_actions_after_distribute
 
 
@@ -812,7 +812,7 @@ void FSIChannelWithLeafletProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
 /// the code in validation mode where it only performs a few steps
 //=====================================================================
 int main(int argc, char* argv[])
-{
+{ 
 
 #ifdef OOMPH_HAS_MPI
 
@@ -820,6 +820,18 @@ int main(int argc, char* argv[])
 
 #endif
 
+  // Switch off output modifier
+ oomph_info.output_modifier_pt() = &default_output_modifier;
+
+ // Define processor-labeled output file for all on-screen stuff
+ std::ofstream output_stream;
+ char filename[1000];
+ sprintf(filename,"OUTPUT.%i",
+         MPI_Helpers::communicator_pt()->my_rank());
+ output_stream.open(filename);
+ oomph_info.stream_pt() = &output_stream;
+ OomphLibWarning::set_stream_pt(&output_stream);
+ OomphLibError::set_stream_pt(&output_stream);   
 
  // Store command line arguments
  CommandLineArgs::setup(argc,argv);
@@ -852,7 +864,6 @@ int main(int argc, char* argv[])
 
  // Trace file (only on processor zero)
  ofstream trace;
- char filename[150];
  if (problem.communicator_pt()->my_rank()==0)
   {
    sprintf(filename,"%s/trace.dat",doc_info.directory().c_str());
@@ -911,7 +922,10 @@ int main(int argc, char* argv[])
   }
 
 #endif
- 
+
+
+ problem.doc_solution(doc_info,trace);
+
  // Initial loop to increment the Reynolds number in sequence of steady solves
  //---------------------------------------------------------------------------
  unsigned n_increment=4;
@@ -944,6 +958,7 @@ int main(int argc, char* argv[])
    problem.steady_newton_solve(max_adapt);
    problem.doc_solution(doc_info,trace);
    doc_info.number()++; 
+
   } // reached final Reynolds number 
 
 

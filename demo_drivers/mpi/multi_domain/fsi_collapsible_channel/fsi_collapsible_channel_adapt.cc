@@ -1003,8 +1003,7 @@ int main(int argc, char* argv[])
 {
 
 // feenableexcept(FE_INVALID | FE_DIVBYZERO | FE_OVERFLOW | FE_UNDERFLOW);
-
-
+ 
 #ifdef OOMPH_HAS_MPI
  MPI_Helpers::init(argc,argv);
 #endif

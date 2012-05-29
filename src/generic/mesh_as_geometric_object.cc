@@ -41,12 +41,44 @@
 namespace oomph
 {
 
+
+//========================================================================
+ /// \short Counter for overall number of bins allocated -- used to
+ /// issue warning if this exceeds a threshhold. (Default assignment
+ /// of 100^DIM bins per MeshAsGeomObject can be a killer if there
+ /// are huge numbers of sub-meshes (e.g. in unstructured FSI).
+//========================================================================
+ unsigned long MeshAsGeomObject::Total_nbin_cells_counter=0;
+ 
+
+//========================================================================
+ /// \short Total number of bins above which warning is issued.
+ /// (Default assignment of 100^DIM bins per MeshAsGeomObject can 
+ /// be a killer if there are huge numbers of sub-meshes (e.g. in 
+ /// unstructured FSI).
+//========================================================================
+ unsigned long MeshAsGeomObject::Threshold_for_total_bin_cell_number_warning=
+  50000000;
+
+//========================================================================
+ /// \short Boolean to supppress warnings about large number of bins
+//========================================================================
+ bool MeshAsGeomObject::Suppress_warning_about_large_total_number_of_bins=false;
+
+
+//========================================================================
+ /// \short Boolean flag to make sure that warning about large number
+/// of bin cells only gets triggered once.
+//========================================================================
+ bool MeshAsGeomObject::Already_warned_about_large_number_of_bin_cells=false;
+
 //========================================================================
 /// Helper function for constructor: Pass the pointer to the mesh, 
 /// communicator and boolean
 /// to specify whether to calculate coordinate extrema or not
 /// The dimensions for the GeomObject are read out from the elements and
-/// nodes of the mesh.
+/// nodes of the mesh. Bin dimensions are specified in
+/// Multi_domain_functions:N{x,y,z}_bin.
 //========================================================================
  void MeshAsGeomObject::construct_it
  (Mesh* const &mesh_pt, OomphCommunicator* comm_pt,
@@ -146,6 +178,19 @@ namespace oomph
      count++;
     }
 
+   // if (n_sub_object==1)
+   //  {
+   //   if (Multi_domain_functions::Nx_bin*
+   //       Multi_domain_functions::Ny_bin*
+   //       Multi_domain_functions::Nz_bin!=1)
+   //    {
+   //     oomph_info << "hierher SHITE Would have triggered " 
+   //                << Multi_domain_functions::Nx_bin << " " 
+   //                << Multi_domain_functions::Ny_bin << " " 
+   //                << Multi_domain_functions::Nz_bin << "\n";
+   //    }
+   //  }
+
    // Set storage for minimum and maximum coordinates
    const unsigned dim_lagrangian = this->nlagrangian();
    Min_coords.resize(dim_lagrangian);
@@ -153,45 +198,100 @@ namespace oomph
 
    // Get the default parameters for the number of bins in each 
    // dimension from the Multi_domain_functions namespace
-
-   // If the mesh has only one element there's no need for big bin structure
-   if (n_sub_object==1)
-    {
-     Nbin_x=1;
-     Nbin_y=1;
-     Nbin_z=1;
-    }
-   else
-    {
-     Nbin_x=Multi_domain_functions::Nx_bin;
-     Nbin_y=Multi_domain_functions::Ny_bin;
-     Nbin_z=Multi_domain_functions::Nz_bin;
-    }
+   Nbin_x=Multi_domain_functions::Nx_bin;
+   Nbin_y=Multi_domain_functions::Ny_bin;
+   Nbin_z=Multi_domain_functions::Nz_bin;
 
    // Are we computing the extreme bin coordinates here?
    if (compute_extreme_bin_coords)
     {
      // Find the maximum and minimum coordinates for the mesh
      get_min_and_max_coordinates(mesh_pt);
-
-     // Create the bin structure
-     create_bins_of_objects();
     }
    else
     {
-     Min_coords[0] = Multi_domain_functions::X_min;
-     Max_coords[0] = Multi_domain_functions::X_max;
+#ifdef PARANOID
+   // Check X_min is less than X_max
+   if (Multi_domain_functions::X_min >= Multi_domain_functions::X_max)
+    {
+     std::ostringstream error_stream;
+     error_stream << "Minimum coordinate in the X direction of the bin\n"
+                  << "to be used in the multi-domain method is greater\n"
+                  << "than or equal to the maximum coordinate.\n"
+                  << "  X_min=" << Multi_domain_functions::X_min 
+                  << ", X_max=" << Multi_domain_functions::X_max << "\n";
+     throw OomphLibError
+      (error_stream.str(),
+       "MeshAsGeomObject::construct_it()",
+       OOMPH_EXCEPTION_LOCATION);
+    }
+   if (dim_lagrangian>=2)
+    {
+     // Check Y_min is less than Y_max
+     if (Multi_domain_functions::Y_min >= Multi_domain_functions::Y_max)
+      {
+       std::ostringstream error_stream;
+       error_stream << "Minimum coordinate in the Y direction of the bin\n"
+                    << "to be used in the multi-domain method is greater\n"
+                    << "than or equal to the maximum coordinate.\n"
+                    << "  Y_min=" << Multi_domain_functions::Y_min 
+                    << ", Y_max=" << Multi_domain_functions::Y_max << "\n";
+       throw OomphLibError
+        (error_stream.str(),
+         "MeshAsGeomObject::construct_it()",
+         OOMPH_EXCEPTION_LOCATION);
+      }
+    }
+   if (dim_lagrangian==3)
+    {
+     // Check Z_min is less than Z_max
+     if (Multi_domain_functions::Z_min >= Multi_domain_functions::Z_max)
+      {
+       std::ostringstream error_stream;
+       error_stream << "Minimum coordinate in the Z direction of the bin\n"
+                    << "to be used in the multi-domain method is greater\n"
+                    << "than or equal to the maximum coordinate.\n"
+                    << "  Z_min=" << Multi_domain_functions::Z_min 
+                    << ", Z_max=" << Multi_domain_functions::Z_max << "\n";
+       throw OomphLibError
+        (error_stream.str(),
+         "MeshAsGeomObject::construct_it()",
+         OOMPH_EXCEPTION_LOCATION);
+      }
+    }
+#endif
+   
+
+
+
+     Min_coords[0] = Multi_domain_functions::X_min-
+      Multi_domain_functions::Percentage_offset*(
+       Multi_domain_functions::X_max-Multi_domain_functions::X_min);
+     Max_coords[0] = Multi_domain_functions::X_max+
+      Multi_domain_functions::Percentage_offset*(
+       Multi_domain_functions::X_max-Multi_domain_functions::X_min);
      if (nlagrangian()>1)
       {
-       Min_coords[1] = Multi_domain_functions::Y_min;
-       Max_coords[1] = Multi_domain_functions::Y_max;
+       Min_coords[1] = Multi_domain_functions::Y_min-
+        Multi_domain_functions::Percentage_offset*(
+         Multi_domain_functions::Y_max-Multi_domain_functions::Y_min);
+       Max_coords[1] = Multi_domain_functions::Y_max+
+        Multi_domain_functions::Percentage_offset*(
+         Multi_domain_functions::Y_max-Multi_domain_functions::Y_min);
        if (nlagrangian()>2)
         {
-         Min_coords[2] = Multi_domain_functions::Z_min;
-         Max_coords[2] = Multi_domain_functions::Z_max;
+         Min_coords[2] = Multi_domain_functions::Z_min-
+          Multi_domain_functions::Percentage_offset*(
+           Multi_domain_functions::Z_max-Multi_domain_functions::Z_min);
+         Max_coords[2] = Multi_domain_functions::Z_max+
+          Multi_domain_functions::Percentage_offset*(
+           Multi_domain_functions::Z_max-Multi_domain_functions::Z_min);
         }
       }
     }
+
+   // Create the bin structure
+   create_bins_of_objects();
  }
 
 
@@ -782,6 +882,45 @@ namespace oomph
    unsigned ntotalbin=Nbin[0];
    for(unsigned i=1;i<n_lagrangian;i++) {ntotalbin *= Nbin[i];}
    Bin_object_coord_pairs.resize(ntotalbin);
+
+   // Increase overall counter
+   Total_nbin_cells_counter+=ntotalbin;
+
+   // Issue warning?
+   if (!Suppress_warning_about_large_total_number_of_bins)
+    {
+     if (Total_nbin_cells_counter>Threshold_for_total_bin_cell_number_warning)
+      {
+       if (!Already_warned_about_large_number_of_bin_cells)
+        {
+         Already_warned_about_large_number_of_bin_cells=true;
+         std::ostringstream warn_message;
+         warn_message 
+          << "Have allocated \n\n"
+          << "   MeshAsGeomObject::Total_nbin_cells_counter="
+          << MeshAsGeomObject::Total_nbin_cells_counter 
+          << "\n\nbin cells, which is more than \n\n"
+          << "   MeshAsGeomObject::Threshold_for_total_bin_cell_number_warning="
+          << MeshAsGeomObject::Threshold_for_total_bin_cell_number_warning 
+          << "\n\nIf you run out of memory, consider reducing\n"
+          << "Multi_domain_functions::N{x,y,z}_bin from their current\n"
+          << "values of { " 
+          << Multi_domain_functions::Nx_bin << " "
+          << Multi_domain_functions::Ny_bin << " "
+          << Multi_domain_functions::Nz_bin << " }.\n"
+          << "\nNOTE: You can suppress this warning by increasing\n\n"
+          << "   MeshAsGeomObject::Threshold_for_total_bin_cell_number_warning\n\n"
+          << "or by setting \n\n   MeshAsGeomObject::Suppress_warning_about_large_total_number_of_bins\n\n"
+          << "to true (both are public static data).\n\n"
+          << "NOTE: I'll only issues this warning once -- total number of\n"
+          << "bins may grow yet further!\n";
+         OomphLibWarning(
+          warn_message.str(),
+          "MeshAsGeomObject::create_bins_of_objects()",
+          OOMPH_EXCEPTION_LOCATION);
+        }
+      }
+    }
 
    ///Loop over subobjects (elements) to decide which bin they belong in...
    unsigned n_sub=Sub_geom_object_pt.size();

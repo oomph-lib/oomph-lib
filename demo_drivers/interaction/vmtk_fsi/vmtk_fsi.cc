@@ -300,6 +300,15 @@ private:
 template<class FLUID_ELEMENT, class SOLID_ELEMENT>
 UnstructuredFSIProblem<FLUID_ELEMENT,SOLID_ELEMENT>::UnstructuredFSIProblem()
 { 
+
+ // We have a large number of sub-meshes with very few elements
+ // in this problem: Reduce the number of bins in the MeshAsGeomObject
+ // representations of these meshes to avoid memory problems
+ Multi_domain_functions::Nx_bin=1;
+ Multi_domain_functions::Ny_bin=1;
+ Multi_domain_functions::Nz_bin=1;
+
+
  // Define fluid mesh and its distinguished boundaries
  //---------------------------------------------------
  
@@ -661,7 +670,6 @@ UnstructuredFSIProblem<FLUID_ELEMENT,SOLID_ELEMENT>::UnstructuredFSIProblem()
     Global_Parameters::Constitutive_law_pt;
   }
 
-
  // Setup FSI
  //----------
      
@@ -998,7 +1006,7 @@ doc_solution(DocInfo& doc_info)
 //========================================================================
 int main(int argc, char **argv)
 {
- 
+
  // Label for output
  DocInfo doc_info;
  

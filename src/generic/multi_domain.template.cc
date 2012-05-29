@@ -100,7 +100,7 @@ namespace oomph
  ///   the interaction is set up. 
  /// - \c external_mesh_pt points to the mesh that contains the elements
  ///   of type EXT_ELEMENT that act as "external elements" for the
- ///   \c ElementWithExternalElements in \ mesh_pt.
+ ///   \c ElementWithExternalElements in \c mesh_pt.
  /// - The interaction_index parameter defaults to zero and must be otherwise
  ///   set by the user if there is more than one mesh that provides sources
  ///   for the Mesh pointed to by mesh_pt.
@@ -187,12 +187,96 @@ namespace oomph
        OOMPH_EXCEPTION_LOCATION);
     }
 
-
+   // Call the function that actually does the work
    aux_setup_multi_domain_interaction
     <EXT_ELEMENT,FACE_ELEMENT_GEOM_OBJECT>
     (problem_pt,mesh_pt,external_mesh_pt,
      interaction_index,external_face_mesh_pt);
   }
+
+
+//========================================================================
+/// hierher vector based version
+//========================================================================
+ template<class EXT_ELEMENT,class FACE_ELEMENT_GEOM_OBJECT>
+  void Multi_domain_functions::setup_multi_domain_interaction
+ (Problem* problem_pt, const Vector<Mesh*>& mesh_pt,
+  Mesh* const &external_mesh_pt, const Vector<Mesh*>& external_face_mesh_pt,
+  const unsigned& interaction_index)
+ {
+
+  // How many meshes do we have?
+  unsigned n_mesh=mesh_pt.size();
+  
+#ifdef PARANOID
+  if (external_face_mesh_pt.size()!=n_mesh)
+   {
+    std::ostringstream error_stream;
+    error_stream << "Sizes of external_face_mesh_pt [ "
+                 << external_face_mesh_pt.size() << " ] and "
+                 << "mesh_pt [ " << n_mesh << " ] don't match.\n";
+    throw OomphLibError
+     (error_stream.str(),
+      "Multi_domain_functions::setup_multi_domain_interaction(...)",
+      OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+
+  // Bail out?
+  if (n_mesh==0) return;
+  
+  // Bulk elements must be external elements in this case
+  Use_bulk_element_as_external=true;
+  
+  // Call the auxiliary routine with GEOM_OBJECT=FACE_ELEMENT_GEOM_OBJECT
+  // and EL_DIM_LAG=Dim, EL_DIM_EUL=Dim+1. Use first mesh only.
+  get_dim_helper(problem_pt,mesh_pt[0],external_face_mesh_pt[0]);
+  
+  
+#ifdef PARANOID
+  // Check consitency
+  unsigned old_dim=Dim;
+  for (unsigned i=1;i<n_mesh;i++)
+   {    
+    // Set up Dim again
+    get_dim_helper(problem_pt,mesh_pt[i],external_face_mesh_pt[i]);
+    
+    if (Dim!=old_dim)
+     {
+      std::ostringstream error_stream;
+      error_stream 
+       << "Inconsistency: Mesh  " << i << " has Dim=" << Dim
+       << "while mesh 0 has Dim="<< old_dim << std::endl;
+      throw OomphLibError
+       (error_stream.str(),
+        "Multi_domain_functions::setup_multi_domain_interaction(...)",
+        OOMPH_EXCEPTION_LOCATION);
+     }
+   }  
+#endif
+  
+  if(Dim > 2)
+   {
+    std::ostringstream error_stream;
+    error_stream << "The elements within the two interacting meshes have a\n"
+                 << "dimension not equal to 1 or 2.\n"
+                 << "The multi-domain method will not work in this case.\n"
+                 << "The dimension is: " << Dim << "\n";
+    throw OomphLibError
+     (error_stream.str(),
+      "Multi_domain_functions::setup_multi_domain_interaction(...)",
+      OOMPH_EXCEPTION_LOCATION);
+   }
+  
+   // Now do the actual work for all meshes simultaneously
+   aux_setup_multi_domain_interaction
+    <EXT_ELEMENT,FACE_ELEMENT_GEOM_OBJECT>
+    (problem_pt,mesh_pt,external_mesh_pt,
+     interaction_index,external_face_mesh_pt);
+
+ }
+
+
 
 
 //========================================================================
@@ -211,6 +295,25 @@ namespace oomph
   (Problem* problem_pt, Mesh* const &mesh_pt, Mesh* const &external_mesh_pt,
    const unsigned& interaction_index, Mesh* const &external_face_mesh_pt)
   {
+
+#ifdef USE_VECTOR_BASED_MD
+
+   // Convert to vector-based storage
+   Vector<Mesh*> mesh_pt_vector(1);
+   mesh_pt_vector[0]=mesh_pt;
+   Vector<Mesh*> external_face_mesh_pt_vector(1);
+   external_face_mesh_pt_vector[0]=external_face_mesh_pt;
+
+   // Call vector-based version
+   aux_setup_multi_domain_interaction<EXT_ELEMENT,GEOM_OBJECT>
+    (problem_pt, mesh_pt_vector, 
+     external_mesh_pt, interaction_index, 
+     external_face_mesh_pt_vector);
+
+#else
+
+   oomph_info << "OLD aux_setup_multi_domain_interaction\n";
+
    //BENFLAG: Multi-domain setup will not work for elements with
    //         nonuniformly spaced nodes
 #ifdef PARANOID
@@ -295,70 +398,6 @@ namespace oomph
     }
 
    unsigned EL_DIM_LAG = mesh_geom_obj_pt->nlagrangian();
-
-   if (!Compute_extreme_bin_coordinates)
-    {
-     // Check X_min is less than X_max
-     if (X_min >= X_max)
-      {
-       std::ostringstream error_stream;
-       error_stream << "Minimum coordinate in the X direction of the bin\n"
-                    << "to be used in the multi-domain method is greater\n"
-                    << "than or equal to the maximum coordinate.\n"
-                    << "  X_min=" << X_min << ", X_max=" << X_max << "\n";
-       throw OomphLibError
-        (error_stream.str(),
-         "Multi_domain_functions::aux_setup_multi_domain_interactions(...)",
-         OOMPH_EXCEPTION_LOCATION);
-      }
-
-     // New maxima and minima to be used in x-direction
-     mesh_geom_obj_pt->x_min()=X_min-Percentage_offset*(X_max-X_min);
-     mesh_geom_obj_pt->x_max()=X_max+Percentage_offset*(X_max-X_min);
-
-     if (EL_DIM_LAG>=2)
-      {
-       // Check Y_min is less than Y_max
-       if (Y_min >= Y_max)
-        {
-         std::ostringstream error_stream;
-         error_stream << "Minimum coordinate in the Y direction of the bin\n"
-                      << "to be used in the multi-domain method is greater\n"
-                      << "than or equal to the maximum coordinate.\n"
-                      << "  Y_min=" << Y_min << ", Y_max=" << Y_max << "\n";
-         throw OomphLibError
-          (error_stream.str(),
-           "Multi_domain_functions::aux_setup_multi_domain_interactions(...)",
-           OOMPH_EXCEPTION_LOCATION);
-        }
-
-       mesh_geom_obj_pt->y_min()=Y_min-Percentage_offset*(Y_max-Y_min);
-       mesh_geom_obj_pt->y_max()=Y_max+Percentage_offset*(Y_max-Y_min);
-      }
-
-     if (EL_DIM_LAG==3)
-      {
-       // Check Z_min is less than Z_max
-       if (Z_min >= Z_max)
-        {
-         std::ostringstream error_stream;
-         error_stream << "Minimum coordinate in the Z direction of the bin\n"
-                      << "to be used in the multi-domain method is greater\n"
-                      << "than or equal to the maximum coordinate.\n"
-                      << "  Z_min=" << Z_min << ", Z_max=" << Z_max << "\n";
-         throw OomphLibError
-          (error_stream.str(),
-           "Multi_domain_functions::aux_setup_multi_domain_interactions(...)",
-           OOMPH_EXCEPTION_LOCATION);
-        }
-
-       mesh_geom_obj_pt->z_min()=Z_min-Percentage_offset*(Z_max-Z_min);;
-       mesh_geom_obj_pt->z_max()=Z_max+Percentage_offset*(Z_max-Z_min);;
-      }
-
-     // Create the bin structure
-     mesh_geom_obj_pt->create_bins_of_objects();
-    }
 
    double t_setup_lookups=0.0;
    if (Doc_timings) 
@@ -465,22 +504,16 @@ namespace oomph
      if (Doc_stats)
       {
        unsigned count_locates=0;
-       for (unsigned e=0;e<n_element;e++)
+       unsigned n_ext_loc=External_element_located.size();
+       for (unsigned e=0;e<n_ext_loc;e++)
         {
-         ElementWithExternalElement *el_pt=
-          dynamic_cast<ElementWithExternalElement*>(mesh_pt->element_pt(e));
-#ifdef OOMPH_HAS_MPI
-         // We're not setting up external elements for halo elements
-         if (!el_pt->is_halo())
-#endif
+         unsigned n_intpt=External_element_located[e].size();
+         for (unsigned ipt=0;ipt<n_intpt;ipt++)
           {
-           unsigned n_intpt=el_pt->integral_pt()->nweight();
-           for (unsigned ipt=0;ipt<n_intpt;ipt++)
-            {
-             count_locates+=External_element_located[e][ipt];
-            }
+           count_locates+=External_element_located[e][ipt];
           }
         }
+
        // Store percentage of integration points successfully located.
        // Only assign if we had anything to allocte, otherwise 100%
        // (default assignment; see above) is correct
@@ -540,7 +573,7 @@ namespace oomph
        double t_create_halo_tot=0.0; 
 
        // Start ring communication: Loop (number of processes - 1) 
-       // starting from 1. The variably iproc represents the "distance" from 
+       // starting from 1. The variable iproc represents the "distance" from 
        // the current process to the process for which it is attempting 
        // to locate an element for the current set of not-yet-located 
        // zeta coordinates
@@ -605,7 +638,8 @@ namespace oomph
           }
 
 
-         // Do we have any further locating to do?
+         // Do we have any further locating to do or have we found
+         // everything at this level of the ring communication?
          // Only perform the reduction operation if there's more than 
          // one process
          n_zeta_not_found=Flat_packed_zetas_not_found_locally.size(); 
@@ -620,7 +654,7 @@ namespace oomph
           }
 #endif
          
-         // If  its is now zero then break out of the spirals loop
+         // If  its is now zero then break out of the ring comms loop
          if (n_zeta_not_found==0) 
           {
            if (Doc_timings)
@@ -676,22 +710,16 @@ namespace oomph
      if (Doc_stats)
       {
        unsigned count_locates=0;
-       for (unsigned e=0;e<n_element;e++)
+       unsigned n_ext_loc=External_element_located.size();
+       for (unsigned e=0;e<n_ext_loc;e++)
         {
-         ElementWithExternalElement *el_pt=
-          dynamic_cast<ElementWithExternalElement*>(mesh_pt->element_pt(e));
-#ifdef OOMPH_HAS_MPI
-         // We're not setting up external elements for halo elements
-         if (!el_pt->is_halo())
-#endif
+         unsigned n_intpt=External_element_located[e].size();
+         for (unsigned ipt=0;ipt<n_intpt;ipt++)
           {
-           unsigned n_intpt=el_pt->integral_pt()->nweight();
-           for (unsigned ipt=0;ipt<n_intpt;ipt++)
-            {
-             count_locates+=External_element_located[e][ipt];
-            }
+           count_locates+=External_element_located[e][ipt];
           }
         }
+
        // Store total percentage of locates so far.
        // Only assign if we had anything to allocte, otherwise 100%
        // (default assignment; see above) is correct
@@ -702,7 +730,8 @@ namespace oomph
         }
       }
 
-     // Do we have any further locating to do?
+     // Do we have any further locating to do? If so, the remaining
+     // zetas will (hopefully) be found at the next spiral level.
      // Only perform the reduction operation if there's more than one process
      n_zeta_not_found=Flat_packed_zetas_not_found_locally.size(); 
 
@@ -939,6 +968,937 @@ namespace oomph
      // Allreduce to check if anyone has benefitted from parallel ring
      // search
      unsigned overall_status=0;
+     // Only perform the reduction operation if there's more than one process
+     if (problem_pt->communicator_pt()->nproc() > 1)
+      {
+       MPI_Allreduce(&status,&overall_status,1,
+                     MPI_UNSIGNED,MPI_MAX,
+                     problem_pt->communicator_pt()->mpi_comm());
+      }
+     else
+      {
+       overall_status=status;
+      }
+
+     // Report of mpi was useful to anyone
+     if (overall_status==1) 
+      {
+       oomph_info << "- Ring-based, parallel search did succesfully\n";
+       oomph_info << "  locate zetas on at least one other proc, so it\n";
+       oomph_info << "  was worthwhile.\n";
+       oomph_info << std::endl;
+      }
+     else
+      {
+       if (max_level_reached>1)
+        {
+         oomph_info << "- Ring-based, parallel search did NOT locate zetas\n";
+         oomph_info << "  on ANY other procs, i.e it was useless.\n";
+         oomph_info << "  --> We should really have done more local search\n";
+         oomph_info << "   by reducing number of bins, or doing more spirals\n";
+         oomph_info << "   in one go before initiating parallel search.\n";
+         oomph_info << std::endl;
+        }
+       else
+        {
+         oomph_info << "- No ring-based, parallel search was performed\n";
+         oomph_info << "  or necessary. Perfect!\n";
+         oomph_info << std::endl;
+        }
+      }
+
+
+     // How many external elements does the external mesh have now?
+     oomph_info << "------------------------------------------" << std::endl;
+     oomph_info << "External mesh: I have " << external_mesh_pt->nelement()
+                << " elements, and " << std::endl
+                << external_mesh_pt->nexternal_halo_element()
+                << " external halo elements, "
+                << external_mesh_pt->nexternal_haloed_element()
+                << " external haloed elements" 
+                << std::endl;
+
+     // How many external nodes does each submesh have now?
+     oomph_info << "------------------------------------------" << std::endl;
+     oomph_info << "External mesh: I have " << external_mesh_pt->nnode()
+                << " nodes, and " << std::endl
+                << external_mesh_pt->nexternal_halo_node()
+                << " external halo nodes, "
+                << external_mesh_pt->nexternal_haloed_node()
+                << " external haloed nodes" 
+                << std::endl;
+     oomph_info << "------------------------------------------" << std::endl;
+    }
+
+   // Output further information about (external) halo(ed)
+   // elements and nodes if required
+   if (Doc_full_stats)
+    {
+     // How many elements does this submesh have for each of the processors?
+     for (int iproc=0;iproc<n_proc;iproc++)
+      {
+       oomph_info << "----------------------------------------" << std::endl;
+       oomph_info << "With process " << iproc << " there are "
+                  << external_mesh_pt->nroot_halo_element(iproc)
+                  << " root halo elements, and "
+                  << external_mesh_pt->nroot_haloed_element(iproc)
+                  << " root haloed elements" << std::endl
+                  << "and there are "
+                  << external_mesh_pt->nexternal_halo_element(iproc)
+                  << " external halo elements, and "
+                  << external_mesh_pt->nexternal_haloed_element(iproc)
+                  << " external haloed elements." << std::endl;
+
+       oomph_info << "----------------------------------------" << std::endl;
+       oomph_info << "With process " << iproc << " there are "
+                  << external_mesh_pt->nhalo_node(iproc)
+                  << " halo nodes, and "
+                  << external_mesh_pt->nhaloed_node(iproc)
+                  << " haloed nodes" << std::endl
+                  << "and there are "
+                  << external_mesh_pt->nexternal_halo_node(iproc)
+                  << " external halo nodes, and "
+                  << external_mesh_pt->nexternal_haloed_node(iproc)
+                  << " external haloed nodes." << std::endl;
+      }
+     oomph_info << "-----------------------------------------" << std::endl
+                << std::endl;
+    }
+
+ #endif
+
+   // Doc timings if required
+   if (Doc_timings)
+    {
+     t_end=TimingHelpers::timer();
+     oomph_info << "CPU for (one way) aux_setup_multi_domain_interaction: "
+                << t_end-t_start << std::endl;
+    }
+
+#endif
+
+  } // end of aux_setup_multi_domain_interaction
+
+
+
+
+
+//========================================================================
+// hierher vector-based version
+//
+/// This routine calls the locate_zeta routine (simultaneously on each 
+/// processor for each individual processor's element set if necessary)
+/// and sets up the external (halo) element and node storage as
+/// necessary.  The locate_zeta procedure here works for all multi-domain
+/// problems where either two meshes occupy the same physical space but have
+/// differing element types (e.g. a Boussinesq convection problem where
+/// AdvectionDiffusion elements interact with Navier-Stokes type elements)
+/// or two meshes interact along some boundary of the external mesh,
+/// represented by a "face mesh", such as an FSI problem.
+//========================================================================
+ template<class EXT_ELEMENT,class GEOM_OBJECT>
+  void Multi_domain_functions::aux_setup_multi_domain_interaction
+ (Problem* problem_pt, const Vector<Mesh*>& mesh_pt, 
+  Mesh* const &external_mesh_pt, const unsigned& interaction_index, 
+  const Vector<Mesh*>& external_face_mesh_pt)
+  {
+
+   oomph_info << "NEW aux_setup_multi_domain_interaction\n";
+
+   // How many meshes do we have?
+   unsigned n_mesh=mesh_pt.size();
+   
+#ifdef PARANOID
+  if (external_face_mesh_pt.size()!=n_mesh)
+   {
+    std::ostringstream error_stream;
+    error_stream << "Sizes of external_face_mesh_pt [ "
+                 << external_face_mesh_pt.size() << " ] and "
+                 << "mesh_pt [ " << n_mesh << " ] don't match.\n";
+    throw OomphLibError
+     (error_stream.str(),
+      "Multi_domain_functions::aux_setup_multi_domain_interaction(...)",
+      OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+   
+   // Bail out?
+   if (n_mesh==0) return;
+
+   //BENFLAG: Multi-domain setup will not work for elements with
+   //         nonuniformly spaced nodes
+   //Must check type of elements in the mesh and in the external mesh
+   //(assume element type is the same for all elements in each mesh)
+
+#ifdef PARANOID
+   
+   // Pointer to first element in external mesh
+   GeneralisedElement* ext_el_pt_0=0;
+   if (external_mesh_pt->nelement()!=0)
+    {
+     ext_el_pt_0 = external_mesh_pt->element_pt(0);
+    }
+   
+   // Loop over all meshes
+   for (unsigned i_mesh=0;i_mesh<n_mesh;i_mesh++)
+    {
+     //Get pointer to first element in each mesh
+     GeneralisedElement* el_pt_0=0;
+     if (mesh_pt[i_mesh]->nelement()!=0)
+      {
+       el_pt_0 = mesh_pt[i_mesh]->element_pt(0);
+      }
+     
+     //Check they are not spectral elements
+     if(dynamic_cast<SpectralElement*>(el_pt_0)!=0
+        || dynamic_cast<SpectralElement*>(ext_el_pt_0)!=0)
+      {
+       throw OomphLibError(
+        "Multi-domain setup does not work with spectral elements.",
+        "Multi_domain_functions::aux_setup_multi_domain_interaction()",
+        OOMPH_EXCEPTION_LOCATION);
+      }
+     
+     //Check they are not hp-refineable elements
+     if(dynamic_cast<PRefineableElement*>(el_pt_0)!=0
+        || dynamic_cast<PRefineableElement*>(ext_el_pt_0)!=0)
+      {
+       throw OomphLibError(
+        "Multi-domain setup does not work with hp-refineable elements.",
+        "Multi_domain_functions::aux_setup_multi_domain_interaction()",
+        OOMPH_EXCEPTION_LOCATION);
+      }
+    } // end over initial loop over meshes
+
+#endif
+     
+
+   
+#ifdef OOMPH_HAS_MPI
+   // Storage for number of processors and my rank
+   int n_proc=problem_pt->communicator_pt()->nproc();
+   int my_rank=problem_pt->communicator_pt()->my_rank();
+#endif
+   
+   // Timing
+   double t_start=0.0; double t_end=0.0; double t_local=0.0;
+   double t_set=0.0; double t_locate=0.0; double t_spiral_start=0.0;
+#ifdef OOMPH_HAS_MPI
+   double t_loop_start=0.0; 
+   double t_sendrecv=0.0; 
+   double t_missing=0.0;
+   double t_send_info=0.0; double t_create_halo=0.0;
+#endif
+   
+   if (Doc_timings) 
+    {
+     t_start=TimingHelpers::timer();
+    }
+   
+   // Initialize number of zeta coordinates not found yet 
+   unsigned n_zeta_not_found=0;
+   
+   // Geometric objects used to represent the external (face) meshes
+   Vector<MeshAsGeomObject*> mesh_geom_obj_pt(n_mesh,0);
+   
+   // Initialise lagrangian dimension of element
+   unsigned EL_DIM_LAG = 0;
+
+   // Create mesh as geom objects for all meshes
+   for (unsigned i_mesh=0;i_mesh<n_mesh;i_mesh++)
+    {
+     // Are bulk elements used as external elements?
+     if (!Use_bulk_element_as_external)
+      {
+       // Fix this when required
+       if (n_mesh!=1)
+        {
+         std::ostringstream error_stream;
+         error_stream 
+          << "Sorry I currently can't deal with non-bulk external elements\n"
+          << "in multi-domain setup for multiple meshes.\n"
+          << "The functionality should be easy to implement now that you\n"
+          << "have a test case. If you're not willinig to do this, call\n"
+          << "the multi-domain setup mesh-by-mesh instead (though this can\n"
+          << "be costly in parallel because of global comms. \n";
+         throw OomphLibError
+          (error_stream.str(),
+           "Multi_domain_functions::aux_setup_multi_domain_interaction(...)",
+           OOMPH_EXCEPTION_LOCATION);
+        }
+       
+       // Set the geometric object from the external mesh
+       mesh_geom_obj_pt[0]=new MeshAsGeomObject
+        (external_mesh_pt,problem_pt->communicator_pt(),
+         Compute_extreme_bin_coordinates);
+      }
+     else
+      {
+       // Set the geometric object from the external face mesh argument
+       mesh_geom_obj_pt[i_mesh]=new MeshAsGeomObject
+        (external_face_mesh_pt[i_mesh],problem_pt->communicator_pt(),
+         Compute_extreme_bin_coordinates);
+      }
+     
+#ifdef PARANOID
+     unsigned old_el_dim_lag=EL_DIM_LAG;
+#endif
+     
+     // Set lagrangian dimension of element
+     EL_DIM_LAG = mesh_geom_obj_pt[i_mesh]->nlagrangian();
+
+#ifdef PARANOID
+     // Check consistency
+     if (i_mesh>0)
+      {
+       if (EL_DIM_LAG!=old_el_dim_lag)
+        {
+         std::ostringstream error_stream;
+         error_stream << "Lagrangian dimensions of elements don't match \n "
+                      << "between meshes: " << EL_DIM_LAG << " " 
+                      << old_el_dim_lag << "\n";
+         throw OomphLibError
+          (error_stream.str(),
+           "Multi_domain_functions::auxsetup_multi_domain_interaction(...)",
+           OOMPH_EXCEPTION_LOCATION);
+        }
+      }
+#endif
+
+
+    }// end of loop over meshes
+   
+   double t_setup_lookups=0.0;
+   if (Doc_timings) 
+    {
+     t_set=TimingHelpers::timer();
+     oomph_info << "CPU for creation of MeshAsGeomObjects and bin structure: "
+                << t_set-t_start << std::endl;
+     t_setup_lookups=TimingHelpers::timer();
+    }
+   
+   // Total number of integration points
+   unsigned tot_int=0;
+   
+   // Counter for total number of elements (in flat packed order)
+   unsigned e_count=0;
+
+   // Loop over all meshes to get total number of elements
+   for (unsigned i_mesh=0;i_mesh<n_mesh;i_mesh++)
+    {
+     e_count+=mesh_pt[i_mesh]->nelement();
+    }
+   External_element_located.resize(e_count);
+
+   // Reset counter for elements in flat packed storage
+   e_count=0;
+   
+   // Loop over all meshes 
+   for (unsigned i_mesh=0;i_mesh<n_mesh;i_mesh++)
+    {
+     // Loop over (this processor's) elements and set lookup array
+     unsigned n_element=mesh_pt[i_mesh]->nelement();
+     for (unsigned e=0;e<n_element;e++)
+      {
+       // Zero-sized vector means its a halo
+       External_element_located[e_count].resize(0);
+       ElementWithExternalElement *el_pt=
+        dynamic_cast<ElementWithExternalElement*>(
+         mesh_pt[i_mesh]->element_pt(e));
+       
+#ifdef OOMPH_HAS_MPI
+       // We're not setting up external elements for halo elements
+       if (!el_pt->is_halo()) 
+#endif
+        {
+         //We need to allocate storage for the external elements
+         //within the element. Memory will actually only be 
+         //allocated the first time this function is called for 
+         //each element, or if the number of interactions or integration
+         //points within the element has changed.
+         el_pt->initialise_external_element_storage();
+
+         // Clear any previous allocation
+         unsigned n_intpt=el_pt->integral_pt()->nweight();
+         for (unsigned ipt=0;ipt<n_intpt;ipt++)
+          {
+           el_pt->external_element_pt(interaction_index,ipt)=0;
+          }
+
+         External_element_located[e_count].resize(n_intpt);
+         for (unsigned ipt=0;ipt<n_intpt;ipt++)
+          {
+           External_element_located[e_count][ipt]=0;
+           tot_int++;
+          }
+        }
+       // next element
+       e_count++;
+      }
+    } // end of loop over meshes
+
+   if (Doc_timings) 
+    {
+     double t=TimingHelpers::timer();
+     oomph_info 
+      << "CPU for setup of lookup schemes for located elements/coords: "
+      << t-t_setup_lookups << std::endl;
+    }
+   
+   // Find maximum spiral level within the cartesian bin structure
+   unsigned n_max_level=Nx_bin;
+   if (EL_DIM_LAG>=2)
+    {
+     if (Ny_bin > n_max_level) 
+      {
+       n_max_level=Ny_bin;
+      }
+    }
+   if (EL_DIM_LAG==3)
+    {
+     if (Nz_bin > n_max_level) 
+      {
+       n_max_level=Nz_bin;
+      }
+    }
+
+   // Storage for info about coordinate location -- initialise to 100%.
+   // Gets overwritten below if we've actually had any location to do here.
+   Vector<double> percentage_coords_located_locally(n_max_level,100.0);
+   Vector<double> percentage_coords_located_elsewhere(n_max_level,100.0);
+   unsigned max_level_reached=1;
+
+   // Loop over all meshes
+   for (unsigned i_mesh=0;i_mesh<n_mesh;i_mesh++)
+    {
+     // Initialise spiral levels
+     mesh_geom_obj_pt[i_mesh]->current_min_spiral_level()=0;
+     mesh_geom_obj_pt[i_mesh]->current_max_spiral_level()=N_spiral_chunk-1;
+     
+     // Limit it so that we search at least once
+     if (mesh_geom_obj_pt[i_mesh]->current_max_spiral_level()>n_max_level)
+      {
+       mesh_geom_obj_pt[i_mesh]->current_max_spiral_level()=n_max_level-1;
+      }
+    }
+   
+   // Loop over "spirals/levels" away from the current position
+   // Note: All meshes go through their spirals simultaneously;
+   // read out spiral level from first one
+   unsigned i_level=0;
+   while (mesh_geom_obj_pt[0]->current_max_spiral_level()<n_max_level) 
+    {
+     
+     // Record time at start of spiral loop
+     if (Doc_timings)
+      {
+       t_spiral_start=TimingHelpers::timer();
+      }
+     
+     // Perform locate_zeta locally first! This looks locally for
+     // all not-yet-located zetas within the current spiral range.
+     locate_zeta_for_local_coordinates(mesh_pt,external_mesh_pt,
+                                       mesh_geom_obj_pt,
+                                       interaction_index);
+     
+     // Store stats about successful locates for reporting later
+     if (Doc_stats)
+      {
+       unsigned count_locates=0;
+       unsigned n_ext_loc=External_element_located.size();
+       for (unsigned e=0;e<n_ext_loc;e++)
+        {
+         unsigned n_intpt=External_element_located[e].size();
+         for (unsigned ipt=0;ipt<n_intpt;ipt++)
+          {
+           count_locates+=External_element_located[e][ipt];
+          }
+        }
+       
+       // Store percentage of integration points successfully located.
+       // Only assign if we had anything to allocte, otherwise 100%
+       // (default assignment; see above) is correct
+       if (tot_int!=0)
+        {
+         percentage_coords_located_locally[i_level]=
+          100.0*double(count_locates)/double(tot_int);
+        }
+      }
+  
+     if (Doc_timings) 
+      {
+       t_local=TimingHelpers::timer();
+       oomph_info 
+        << "CPU for local location of zeta coordinate [spiral level "
+        << i_level << "]: "
+        << t_local-t_spiral_start << std::endl;
+      }
+     
+       
+     // Now test whether anything needs to be broadcast elsewhere
+     // (i.e. were there any failures in the locate method above?)
+     // If there are, then the zetas for these failures need to be
+     // broadcast...
+     
+     // How many zetas have we failed to find? [Note: Array is padded
+     // by Dim padded entries (DBL_MAX) for each mesh]
+     n_zeta_not_found=Flat_packed_zetas_not_found_locally.size()-
+      Dim*n_mesh;
+
+#ifdef OOMPH_HAS_MPI
+     // Only perform the reduction operation if there's more than one process
+     if (problem_pt->communicator_pt()->nproc() > 1)
+      {
+       unsigned count_local_zetas=n_zeta_not_found;
+       MPI_Allreduce(&count_local_zetas,&n_zeta_not_found,1,
+                     MPI_UNSIGNED,MPI_SUM,
+                     problem_pt->communicator_pt()->mpi_comm());
+      }
+
+     // If we have missing zetas on any process 
+     // and the problem is distributed, we need to locate elsewhere
+     if ((n_zeta_not_found!=0) && (problem_pt->problem_has_been_distributed()))
+      {
+       // Timings
+       double t_sendrecv_min= DBL_MAX; 
+       double t_sendrecv_max=-DBL_MAX; 
+       double t_sendrecv_tot=0.0; 
+
+       double t_missing_min= DBL_MAX; 
+       double t_missing_max=-DBL_MAX; 
+       double t_missing_tot=0.0; 
+
+       double t_send_info_min= DBL_MAX; 
+       double t_send_info_max=-DBL_MAX; 
+       double t_send_info_tot=0.0; 
+
+       double t_create_halo_min= DBL_MAX; 
+       double t_create_halo_max=-DBL_MAX; 
+       double t_create_halo_tot=0.0; 
+
+       // Start ring communication: Loop (number of processes - 1) 
+       // starting from 1. The variable iproc represents the "distance" from 
+       // the current process to the process for which it is attempting 
+       // to locate an element for the current set of not-yet-located 
+       // zeta coordinates
+       unsigned ring_count=0;
+       for (int iproc=1;iproc<n_proc;iproc++)
+        {
+         // Record time at start of loop
+         if (Doc_timings) 
+          {
+           t_loop_start=TimingHelpers::timer();
+          }
+
+         // Send the zeta values you haven't found to the
+         // next process, receive from the previous process:
+         // (Padded) Flat_packed_zetas_not_found_locally are sent
+         // to next processor where they are received as 
+         // (padded) Received_flat_packed_zetas_to_be_found.
+         send_and_receive_missing_zetas(problem_pt);
+
+         if (Doc_timings) 
+          {
+           ring_count++;
+           t_sendrecv=TimingHelpers::timer();
+           t_sendrecv_max=std::max(t_sendrecv_max,t_sendrecv-t_loop_start);
+           t_sendrecv_min=std::min(t_sendrecv_min,t_sendrecv-t_loop_start);
+           t_sendrecv_tot+=(t_sendrecv-t_loop_start);
+          }
+
+         // Perform the locate_zeta for the new set of zetas on this process
+         locate_zeta_for_missing_coordinates
+          (iproc,external_mesh_pt,problem_pt,mesh_geom_obj_pt);
+
+         if (Doc_timings) 
+          {
+           t_missing=TimingHelpers::timer();
+           t_missing_max=std::max(t_missing_max,t_missing-t_sendrecv);
+           t_missing_min=std::min(t_missing_min,t_missing-t_sendrecv);
+           t_missing_tot+=(t_missing-t_sendrecv);
+          }
+
+         // Send any located coordinates back to the correct process, and 
+         // prepare to send on to the next process if necessary
+         send_and_receive_located_info(iproc,external_mesh_pt,problem_pt);
+
+         if (Doc_timings) 
+          {
+           t_send_info=TimingHelpers::timer();
+           t_send_info_max=std::max(t_send_info_max,t_send_info-t_missing);
+           t_send_info_min=std::min(t_send_info_min,t_send_info-t_missing);
+           t_send_info_tot+=(t_send_info-t_missing);
+          }
+
+         // Create any located external halo elements on the current process
+         create_external_halo_elements<EXT_ELEMENT>
+          (iproc,mesh_pt,external_mesh_pt,problem_pt,interaction_index);
+
+         if (Doc_timings) 
+          {
+           t_create_halo=TimingHelpers::timer();
+           t_create_halo_max=std::max(t_create_halo_max,
+                                      t_create_halo-t_send_info);
+           t_create_halo_min=std::min(t_create_halo_min,
+                                      t_create_halo-t_send_info);
+           t_create_halo_tot+=(t_create_halo-t_send_info);
+          }
+
+         // Do we have any further locating to do or have we found
+         // everything at this level of the ring communication?
+         // Only perform the reduction operation if there's more than 
+         // one process [Note: Array is padded
+         // by DIM times DBL_MAX entries for each mesh]
+         n_zeta_not_found=Flat_packed_zetas_not_found_locally.size()-
+          Dim*n_mesh;
+         
+
+#ifdef OOMPH_HAS_MPI
+         if (problem_pt->communicator_pt()->nproc() > 1)
+          {
+           unsigned count_local_zetas=n_zeta_not_found;
+           MPI_Allreduce(&count_local_zetas,&n_zeta_not_found,1,
+                         MPI_UNSIGNED,MPI_SUM,
+                         problem_pt->communicator_pt()->mpi_comm());
+          }
+#endif
+         
+         // If  its is now zero then break out of the ring comms loop
+         if (n_zeta_not_found==0) 
+          {
+           if (Doc_timings)
+            {
+             t_local=TimingHelpers::timer(); 
+             oomph_info 
+              << "BREAK N-1: CPU for entrire spiral [spiral level "
+              << i_level << "]: "
+              << t_local-t_spiral_start << std::endl;
+            }
+           break;
+          }
+        }
+
+
+       // Doc timings
+       if (Doc_timings)
+        {
+         oomph_info 
+          << "Ring-based search continued until iteration " 
+          << ring_count << " out of a maximum of " 
+          << problem_pt->communicator_pt()->nproc()-1 << "\n";
+         oomph_info 
+          << "Total, av, max, min CPU for send/recv of remaining zeta coordinates: "
+          << t_sendrecv_tot << " "
+          << t_sendrecv_tot/double(ring_count) << " "
+          << t_sendrecv_max << " " 
+          << t_sendrecv_min << "\n";
+         oomph_info 
+          << "Total, av, max, min CPU for location of missing zeta coordinates   : "
+          << t_missing_tot << " "
+          << t_missing_tot/double(ring_count) << " "
+          << t_missing_max << " " 
+          << t_missing_min << "\n";
+         oomph_info 
+          << "Total, av, max, min CPU for send/recv of new element info          : "
+          << t_send_info_tot << " "
+          << t_send_info_tot/double(ring_count) << " "
+          << t_send_info_max << " " 
+          << t_send_info_min << "\n";
+         oomph_info 
+          << "Total, av, max, min CPU for local creation of external halo objects: "
+          << t_create_halo_tot << " "
+          << t_create_halo_tot/double(ring_count) << " "
+          << t_create_halo_max << " " 
+          << t_create_halo_min << "\n";
+        }
+
+      } // end if for missing zetas on any process
+#endif
+
+
+     // Store information about location of elements for integration points
+     if (Doc_stats)
+      {
+       unsigned count_locates=0;
+       unsigned n_ext_loc=External_element_located.size();
+       for (unsigned e=0;e<n_ext_loc;e++)
+        {
+         unsigned n_intpt=External_element_located[e].size();
+         for (unsigned ipt=0;ipt<n_intpt;ipt++)
+          {
+           count_locates+=External_element_located[e][ipt];
+          }
+        }
+       
+       // Store total percentage of locates so far.
+       // Only assign if we had anything to allocte, otherwise 100%
+       // (default assignment; see above) is correct
+       if (tot_int!=0)
+        {
+         percentage_coords_located_elsewhere[i_level]=
+          100.0*double(count_locates)/double(tot_int);
+        }
+      }
+     
+     // Do we have any further locating to do? If so, the remaining
+     // zetas will (hopefully) be found at the next spiral level.
+     // Only perform the reduction operation if there's more than one process
+     // [Note: Array is padded
+     // by DIM times DBL_MAX entries for each mesh]
+     n_zeta_not_found=Flat_packed_zetas_not_found_locally.size()-
+      Dim*n_mesh;
+
+
+#ifdef OOMPH_HAS_MPI
+     if (problem_pt->communicator_pt()->nproc() > 1)
+      {
+       unsigned count_local_zetas=n_zeta_not_found;
+       MPI_Allreduce(&count_local_zetas,&n_zeta_not_found,1,MPI_UNSIGNED,MPI_SUM,
+                     problem_pt->communicator_pt()->mpi_comm());
+      }
+#endif
+
+     // Specify max level reached for later loop
+      max_level_reached=i_level+1; 
+     
+     /// If it's is now zero then break out of the spirals loop
+     if (n_zeta_not_found==0) 
+      {
+       if (Doc_timings)
+        {
+         t_local=TimingHelpers::timer(); 
+         oomph_info 
+          << "BREAK N: CPU for entrire spiral [spiral level "
+          << i_level << "]: "
+          << t_local-t_spiral_start << std::endl;
+        }
+       break; 
+      }
+
+     if (Doc_timings) 
+      {
+       t_local=TimingHelpers::timer();
+       oomph_info 
+        << "CPU for entrire spiral [spiral level "
+        << i_level << "]: "
+        << t_local-t_spiral_start << std::endl;
+      }
+     
+     // Bump up spiral levels for all meshes
+     i_level++;
+     for (unsigned i_mesh=0;i_mesh<n_mesh;i_mesh++)
+      {
+       mesh_geom_obj_pt[i_mesh]->current_min_spiral_level()+=N_spiral_chunk;
+       mesh_geom_obj_pt[i_mesh]->current_max_spiral_level()+=N_spiral_chunk;
+      }
+     
+    } // end of "spirals" loop
+   
+   // If we haven't found all zetas we're dead now...
+   if (n_zeta_not_found!=0)
+    {
+     std::ostringstream error_stream;
+     error_stream 
+      << "Multi_domain_functions::locate_zeta_for_local_coordinates()"
+      << "\nhas failed ";
+     
+#ifdef OOMPH_HAS_MPI
+     if (problem_pt->communicator_pt()->nproc() > 1)
+      {
+       error_stream << " on proc: " << problem_pt->communicator_pt()->my_rank()
+                    << std::endl;
+      }
+#endif
+     error_stream 
+      << "\n\n\nThis is most likely to arise because the two meshes\n"
+      << "that are to be matched don't overlap perfectly or\n"
+      << "because the elements are distorted and too small a \n"
+      << "number of sampling points has been used when setting\n"
+      << "up the bin structure.\n\n"
+      << "You should try to increase the value of \n"
+      << "Multi_domain_functions::Nsample_points from \n"
+      << "its current value of " 
+      << Multi_domain_functions::Nsample_points << "\n";
+     
+     std::ostringstream modifier;     
+#ifdef OOMPH_HAS_MPI
+     if (problem_pt->communicator_pt()->nproc() > 1)
+      {
+       modifier << "_proc" << problem_pt->communicator_pt()->my_rank();
+      }
+#endif
+
+     // Loop over all meshes
+     for (unsigned i_mesh=0;i_mesh<n_mesh;i_mesh++)
+      {
+
+       // Add yet another modifier to distinguish meshes if reqd
+       if (n_mesh>1)
+        {
+         modifier << "_mesh" << i_mesh;
+        }
+       
+       std::ofstream outfile;
+       char filename[100];
+       sprintf(filename,"missing_coords_mesh%s.dat",modifier.str().c_str());
+       outfile.open(filename); 
+       unsigned nel=mesh_pt[i_mesh]->nelement();
+       for (unsigned e=0;e<nel;e++)
+        {
+         mesh_pt[i_mesh]->finite_element_pt(e)->FiniteElement::output(outfile);
+        }
+       outfile.close();
+       
+       sprintf(filename,"missing_coords_ext_mesh%s.dat",modifier.str().c_str());
+       outfile.open(filename); 
+       nel=external_mesh_pt->nelement();
+       for (unsigned e=0;e<nel;e++)
+        {
+         external_mesh_pt->finite_element_pt(e)->FiniteElement::output(outfile);
+        }
+       outfile.close();
+       
+       sprintf(filename,"missing_coords_bin%s.dat",modifier.str().c_str());
+       outfile.open(filename); 
+       mesh_geom_obj_pt[i_mesh]->output_bins(outfile);
+       outfile.close();
+       
+       sprintf(filename,"missing_coords%s.dat",modifier.str().c_str());
+       outfile.open(filename); 
+       unsigned n=External_element_located.size();
+       error_stream << "Number of unlocated elements " << n << std::endl;
+       for (unsigned e=0;e<n;e++)
+        {
+         unsigned n_intpt=External_element_located[e].size();
+         if (n_intpt==0)
+          {
+           error_stream 
+            << "Failure to locate in halo element! Why are we searching there?"
+            << std::endl;
+          }
+         for (unsigned ipt=0;ipt<n_intpt;ipt++)
+          {
+           if (External_element_located[e][ipt]==0)
+            {
+             error_stream << "Failure at element/intpt: " 
+                          << e << " " << ipt << std::endl;
+             
+             // Cast
+             ElementWithExternalElement *el_pt=
+              dynamic_cast<ElementWithExternalElement*>(
+               mesh_pt[i_mesh]->element_pt(e));
+             
+             unsigned n_dim_el=el_pt->dim();
+             Vector<double> s(n_dim_el);
+             for (unsigned i=0;i<n_dim_el;i++)
+              {
+               s[i]=el_pt->integral_pt()->knot(ipt,i);
+              }
+             unsigned n_dim=el_pt->node_pt(0)->ndim();
+             Vector<double> x(n_dim);
+             el_pt->interpolated_x(s,x);
+             for (unsigned i=0;i<n_dim;i++)
+              {
+               error_stream << x[i] << " ";
+               outfile<< x[i] << " ";
+              }            
+             error_stream << std::endl;
+             outfile << std::endl;
+            }
+          }
+        }
+       outfile.close();
+      }
+
+     error_stream 
+      << "Mesh and external mesh documented in missing_coords_mesh*.dat\n"
+      << "and missing_coords_ext_mesh*.dat, respectively. Missing \n"
+      << "coordinates in missing_coords*.dat\n";
+     throw OomphLibError
+      (error_stream.str(),
+       "Multi_domain_functions::locate_zeta_for_local_coordinates()",
+       OOMPH_EXCEPTION_LOCATION);     
+    }
+   
+
+   // Doc timings if required
+   if (Doc_timings)
+    {
+     t_locate=TimingHelpers::timer();
+     oomph_info 
+      << "Total CPU for location and creation of all external elements: "
+      << t_locate-t_start << std::endl;
+    }
+
+   // Delete the geometric object representing the mesh
+   for (unsigned i_mesh=0;i_mesh<n_mesh;i_mesh++)
+    {
+     delete mesh_geom_obj_pt[i_mesh];
+    }
+
+   // Clean up all the (extern) Vectors associated with creating the
+   // external storage information
+   clean_up();
+
+#ifdef OOMPH_HAS_MPI
+   // Output information about external storage if required
+   if (Doc_stats)
+    {
+     // Report stats regarding location method
+     bool comm_was_required=false;
+     oomph_info << "-------------------------------------------" << std::endl;
+     oomph_info << "- Cumulative percentage of locate success -" << std::endl; 
+     oomph_info << "--- Spiral -- Found local -- Found else ---" << std::endl;
+     for (unsigned level=0; level<max_level_reached; level++)
+      {
+       oomph_info << "---   " << level << "   -- " 
+                  << percentage_coords_located_locally[level] << " -- "
+                  << percentage_coords_located_elsewhere[level] << " ---" 
+                  << std::endl;
+       // Has communication with other processors at this level actually
+       // produced any results?
+       if (percentage_coords_located_elsewhere[level]>
+           percentage_coords_located_locally[level])
+        {
+         comm_was_required=true;
+        }
+      }
+     oomph_info << "-------------------------------------------" << std::endl;
+
+     // Initialise to indicate that none of the zetas required
+     // on this processor were located through parallel ring search,
+     // i.e. comm was not required and we could have done some
+     // more local searching first
+     oomph_info << std::endl;
+     oomph_info <<"ASSESSMENT OF NEED FOR PARALLEL SEARCH: \n";
+     oomph_info <<"=======================================\n";
+     unsigned status=0;
+     if (comm_was_required) 
+      {
+       oomph_info 
+        <<"- Ring-based parallel search did successfully locate zetas on proc "
+        << my_rank << std::endl;
+       status=1;
+      }
+     else
+      {
+       if (max_level_reached>1)
+        {
+         oomph_info 
+          << "- Ring-based parallel search did NOT locate zetas on proc"
+          << my_rank << std::endl;
+        }
+       else
+        {
+         oomph_info 
+          << "- No ring-based parallel search was performed on proc"
+          << my_rank << std::endl;
+        }
+      }
+     
+     // Allreduce to check if anyone has benefitted from parallel ring
+     // search
+     unsigned overall_status=0;
      MPI_Allreduce(&status,&overall_status,1,
                    MPI_UNSIGNED,MPI_MAX,
                    problem_pt->communicator_pt()->mpi_comm());
@@ -1039,7 +1999,7 @@ namespace oomph
     }
 
   } // end of aux_setup_multi_domain_interaction
-
+  
 #ifdef OOMPH_HAS_MPI
 
 
@@ -1259,7 +2219,260 @@ namespace oomph
         } // end loop over integration points
       }
     } // end loop over local processor's elements
+
   }
+
+
+
+//=====================================================================
+// vector based version
+
+/// Creates external (halo) elements on the loop process based on the
+/// information received from each locate_zeta call on other processes
+//=====================================================================
+ template<class EXT_ELEMENT>
+  void Multi_domain_functions::create_external_halo_elements
+ (int& iproc, const Vector<Mesh*>& mesh_pt, Mesh* const &external_mesh_pt, 
+   Problem* problem_pt, const unsigned& interaction_index)
+  {
+   OomphCommunicator* comm_pt=problem_pt->communicator_pt();
+   int my_rank=comm_pt->my_rank();
+
+   // Reset counters for flat packed unsigneds (namespace data because
+   // it's also accessed by helper functions)
+   Counter_for_flat_packed_doubles=0;
+   Counter_for_flat_packed_unsigneds=0; 
+
+   // Initialise counter for stepping through zetas
+   unsigned zeta_counter=0;
+
+   // Initialise counter for stepping through flat-packed located
+   // coordinates
+   unsigned counter_for_located_coord=0;
+
+   // Counter for elements in flag packed storage
+   unsigned e_count=0;
+
+
+   // Loop over all meshes
+   unsigned n_mesh=mesh_pt.size();
+   for (unsigned i_mesh=0;i_mesh<n_mesh;i_mesh++)
+    {
+
+     // The creation all happens on the current processor
+     // Loop over this processors elements
+     unsigned n_element=mesh_pt[i_mesh]->nelement();
+     for (unsigned e=0;e<n_element;e++)
+      {
+       // Cast to ElementWithExternalElement to set external element 
+       // (if located)
+       ElementWithExternalElement *el_pt=
+        dynamic_cast<ElementWithExternalElement*>(mesh_pt[i_mesh]
+                                                  ->element_pt(e));
+       
+       // We're not setting up external elements for halo elements
+       // (Note: this is consistent with padding introduced when 
+       // External_element_located was first assigned)
+       if (!el_pt->is_halo())
+        {
+         // Loop over integration points
+         unsigned n_intpt=el_pt->integral_pt()->nweight();
+         for (unsigned ipt=0;ipt<n_intpt;ipt++)
+          {
+           // Has an external element been assigned to this integration point?
+           if (External_element_located[e_count][ipt]==0)
+            {
+             // Was a (non-halo) element located for this integration point
+             if (((Proc_id_plus_one_of_external_element[zeta_counter]-1)==
+                  my_rank) || 
+                 (Proc_id_plus_one_of_external_element[zeta_counter]==0))
+              {
+               // Either it was already found, or not found on the current proc.
+               // In either case, we don't need to do anything for this
+               // integration point
+              }
+             else
+              {
+               // Get the process number on which the element was located
+               unsigned loc_p=
+                Proc_id_plus_one_of_external_element[zeta_counter]-1;
+               
+               // Is it a new external halo element or not?
+               // If so, then create it, populate it, and add it as a
+               // source; if not, then find the right one which
+               // has already been created and use it as the source
+               // element. 
+               
+               // FiniteElement stored at this integration point
+               FiniteElement* f_el_pt=0;
+               
+               // Is it a new element?
+               if (Located_element_status[zeta_counter]==New)
+                {
+                 // Create a new element from the communicated values
+                 // and coords from the process that located zeta
+                 GeneralisedElement *new_el_pt= new EXT_ELEMENT;
+                 
+                 // Add external halo element to this mesh
+                 external_mesh_pt->
+                  add_external_halo_element_pt(loc_p, new_el_pt);
+ 
+                 // Cast to the FE pointer
+                 f_el_pt=dynamic_cast<FiniteElement*>(new_el_pt);
+                 
+                 // We need the number of interpolated values if Refineable
+                 int n_cont_inter_values=-1;
+                 if (dynamic_cast<RefineableElement*>(new_el_pt)!=0)
+                  {
+                   n_cont_inter_values=dynamic_cast<RefineableElement*>
+                    (new_el_pt)->ncont_interpolated_values();
+                  }
+                 
+                 // If we're using macro elements to update
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+                 oomph_info 
+                  << "Rec:" << Counter_for_flat_packed_unsigneds 
+                  << "  Using macro element node update "
+                  << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+                  << std::endl;
+#endif
+                 if (Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++]
+                     ==1)
+                  {
+                   // Set the macro element
+                   MacroElementNodeUpdateMesh* macro_mesh_pt=
+                    dynamic_cast<MacroElementNodeUpdateMesh*>
+                    (external_mesh_pt);
+                   
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+                   oomph_info 
+                    << "Rec:" << Counter_for_flat_packed_unsigneds 
+                    << "  Number of macro element "
+                    << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+                    << std::endl;
+#endif
+                   unsigned macro_el_num=
+                    Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++];
+                   f_el_pt->set_macro_elem_pt
+                    (macro_mesh_pt->macro_domain_pt()->
+                     macro_element_pt(macro_el_num));
+                   
+                   
+                   // We need to receive the lower left
+                   // and upper right coordinates of the macro element
+                   QElementBase* q_el_pt=
+                    dynamic_cast<QElementBase*>(new_el_pt);
+                   if (q_el_pt!=0)
+                    {
+                     unsigned el_dim=q_el_pt->dim();
+                     for (unsigned i_dim=0;i_dim<el_dim;i_dim++)
+                      {
+                       q_el_pt->s_macro_ll(i_dim)=
+                        Flat_packed_doubles[Counter_for_flat_packed_doubles++];
+                       q_el_pt->s_macro_ur(i_dim)=
+                        Flat_packed_doubles[Counter_for_flat_packed_doubles++];
+                      }
+                    }
+                   else // Throw an error, since this is only implemented for Q
+                    {
+                     std::ostringstream error_stream;
+                     error_stream << "Using MacroElement node update\n"
+                                  << "in a case with non-QElements\n"
+                                  << "has not yet been implemented.\n";
+                     throw OomphLibError
+                      (error_stream.str(),
+                       "Multi_domain_functions::create_external_elements()",
+                       OOMPH_EXCEPTION_LOCATION);
+                     
+                    }
+                  }
+                 
+                 // Now we add nodes to the new element
+                 unsigned n_node=f_el_pt->nnode();
+                 for (unsigned j=0;j<n_node;j++)
+                  {
+                   Node* new_nod_pt=0;
+                   
+                   // Call the add external halo node helper function
+                   add_external_halo_node_to_storage<EXT_ELEMENT>
+                    (new_nod_pt,external_mesh_pt,loc_p,j,f_el_pt,
+                     n_cont_inter_values,problem_pt);
+                  }
+                }
+               else // the element already exists as an external_halo
+                {
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+                 oomph_info 
+                  << "Rec:" << Counter_for_flat_packed_unsigneds 
+                  << "  Index of existing external halo element "
+                  << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+                  << std::endl;
+#endif
+                 // The index itself is in Flat_packed_unsigneds[...]
+                 unsigned external_halo_el_index=
+                  Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++];
+                 
+                 // Use this index to get the element
+                 f_el_pt=dynamic_cast<FiniteElement*>(external_mesh_pt->
+                                                      external_halo_element_pt
+                                                      (loc_p,
+                                                       external_halo_el_index));
+                 
+                 //If it's not a finite element die
+                 if(f_el_pt==0)
+                  {                 
+                   throw OomphLibError(
+                    "External halo element is not a FiniteElement\n",
+                    "Multi_domain_functions::create_external_halo_elements",
+                    OOMPH_EXCEPTION_LOCATION);
+                  }
+                }
+               
+               // The source element storage was initialised but
+               // not filled earlier, so do it now
+               // The located coordinates are required
+               // (which could be a different dimension to zeta, e.g. in FSI)
+               unsigned el_dim=f_el_pt->dim();
+               Vector<double> s_located(el_dim);
+               for (unsigned i=0;i<el_dim;i++)
+                {
+                 s_located[i]=
+                  Flat_packed_located_coordinates[counter_for_located_coord];
+                 counter_for_located_coord++;
+                }
+               
+               // Set the element for this integration point
+               el_pt->external_element_pt(interaction_index,ipt)=f_el_pt;
+               el_pt->
+                external_element_local_coord(interaction_index,ipt)=s_located;
+
+               // Set the lookup array to true
+               External_element_located[e_count][ipt]=1;
+              }
+             
+             // Increment the integration point counter
+             zeta_counter++;
+            }
+          } // end loop over integration points         
+        } // end of is halo
+       
+       // Bump flat-packed element counter
+       e_count++;
+      
+      } // end of loop over elements
+     
+     // Bump up zeta counter to skip over padding entry at end of
+     // mesh
+     zeta_counter++;
+
+    } // end loop over meshes
+  }
+
+
+
+
+
+
 
 
 

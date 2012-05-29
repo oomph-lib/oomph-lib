@@ -918,10 +918,8 @@ using namespace oomph;
 //========================================================================
 int main(int argc, char **argv)
 {
-
  // Store command line arguments
  CommandLineArgs::setup(argc,argv);
-
 
  // Demonstrate smoothing with nonlinear elastictiy
  demo_smoothing_with_nonlinear_elasticity();

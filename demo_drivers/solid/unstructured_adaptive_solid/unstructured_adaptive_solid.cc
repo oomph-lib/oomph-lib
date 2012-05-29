@@ -410,6 +410,7 @@ void UnstructuredSolidProblem<ELEMENT>::actions_after_adapt()
 //========================================================================
 int main(int argc, char **argv)
 {
+
  //Doc info object
  DocInfo doc_info;
 

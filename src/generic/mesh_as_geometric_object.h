@@ -65,7 +65,7 @@ private:
 
  /// \short  Helper function for constructor: pass the pointer to the mesh, 
  /// communicator and boolean
- /// to specify whether to calculate coordinate extrema or not
+ /// to specify whether to calculate coordinate extrema or not.
  void construct_it(Mesh* const &mesh_pt, OomphCommunicator* comm_pt,
                    const bool& compute_extreme_bin_coords);
 
@@ -214,8 +214,16 @@ public:
    this->construct_it(mesh_pt,comm_pt,compute_extreme_bin_coords);
   }
  
- /// Empty constructor
+ /// Empty Constructor
  MeshAsGeomObject(){} 
+
+ /// Destructor
+ ~MeshAsGeomObject()
+  {
+   // Flush bin (mainly to decrement counter for number of 
+   // active bins)
+   flush_bins_of_objects();
+  } 
 
  /// Broken copy constructor
  MeshAsGeomObject(const MeshAsGeomObject&) 
@@ -406,12 +414,16 @@ public:
  void get_bin_vertices(const unsigned& i_bin,
                        Vector<Vector<double> >& bin_vertex);
  
- ///Initialise and populate the "bin" structure for locating coordinates
+ /// Initialise and populate the "bin" structure for locating coordinates
+ /// and increment counter for total number of bins in active use by any 
+ /// MeshAsGeomObject)
  void create_bins_of_objects();
 
- ///Flush the storage for the binning method
+ /// \short Flush the storage for the binning method (and decrement counter
+ /// for total number of bins in active use by any MeshAsGeomObject)
  void flush_bins_of_objects()
   {
+   Total_nbin_cells_counter-=Bin_object_coord_pairs.size();
    Bin_object_coord_pairs.clear();
   }
 
@@ -436,8 +448,8 @@ public:
                                    const unsigned& level,
                                    Vector<unsigned>& neighbour_bin);
 
- /// \short Fill bin by diffusion, populating each empty bin with the same content
- /// as the first non-empty bin found during a spiral-based search 
+ /// \short Fill bin by diffusion, populating each empty bin with the 
+ /// same content as the first non-empty bin found during a spiral-based search 
  /// up to the specified "radius" (default 1)
  void fill_bin_by_diffusion(const unsigned& bin_diffusion_radius=1);
 
@@ -452,6 +464,26 @@ public:
   output_bins(outfile);
   outfile.close();
  }
+
+
+ /// \short Counter for overall number of bins allocated -- used to
+ /// issue warning if this exceeds a threshhold. (Default assignment
+ /// of 100^DIM bins per MeshAsGeomObject can be a killer if there
+ /// are huge numbers of sub-meshes (e.g. in unstructured FSI).
+ static unsigned long Total_nbin_cells_counter;
+
+ /// \short Total number of bins above which warning is issued.
+ /// (Default assignment of 100^DIM bins per MeshAsGeomObject can 
+ /// be a killer if there are huge numbers of sub-meshes (e.g. in 
+ /// unstructured FSI).
+ static unsigned long Threshold_for_total_bin_cell_number_warning;
+
+ /// \short Boolean to supppress warnings about large number of bins
+ static bool Suppress_warning_about_large_total_number_of_bins;
+
+ /// \short Boolean flag to make sure that warning about large number
+ /// of bin cells only gets triggered once.
+ static bool Already_warned_about_large_number_of_bin_cells;
 
 };
 
