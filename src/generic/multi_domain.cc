@@ -2088,9 +2088,8 @@ namespace Multi_domain_functions
            OOMPH_EXCEPTION_LOCATION);
         }
 #endif
-
        // Indicate end of mesh in flat packed data
-       for (unsigned i=0;i<Dim;i++)
+       for (unsigned ii=0;ii<Dim;ii++)
         {
          Flat_packed_zetas_not_found_locally.push_back(DBL_MAX);
         }
@@ -2103,19 +2102,8 @@ namespace Multi_domain_functions
         {
          return;
         }
-
-
-
-       // // Read coordinates again
-       // for (unsigned ii=0;ii<Dim;ii++)
-       //  {
-       //   x_global[ii]=Received_flat_packed_zetas_to_be_found[count];
-       //   count++;
-       //  }
-       
       }
-
-     
+         
      // Perform locate_zeta for these coordinates and current mesh
      GeomObject *sub_geom_obj_pt=0;
      Vector<double> ss(Dim);
@@ -2125,199 +2113,214 @@ namespace Multi_domain_functions
        mesh_geom_obj_pt[i_mesh]->spiraling_locate_zeta(x_global,
                                                        sub_geom_obj_pt,ss,
                                                        called_within_spiral);
-      }
+      
 
-     // Did the locate method work?
-     if (sub_geom_obj_pt!=0)
-      {
-       // Get the source element - bulk or not?
-       GeneralisedElement *source_el_pt=0;
-       if (!Use_bulk_element_as_external)
+       // Did the locate method work?
+       if (sub_geom_obj_pt!=0)
         {
-         source_el_pt=dynamic_cast<FiniteElement*>(sub_geom_obj_pt);
-        }
-       else
-        {
-         FaceElement *face_el_pt=dynamic_cast<FaceElement*>(sub_geom_obj_pt);
-         source_el_pt=dynamic_cast<FiniteElement*>(face_el_pt->
-                                                   bulk_element_pt());
-        }
-       
-       // Check if the returned element is halo
-       if (!source_el_pt->is_halo()) // cannot accept halo here
-        {
-         // The correct non-halo element has been located; this will become
-         // an external haloed element on the current process, and an
-         // external halo copy needs to be created on the current process
-         // minus wherever we are in the "ring-loop"
-         int halo_copy_proc=my_rank-iproc;
-         
-         // If iproc is bigger than my_rank then we've "gone through" nproc-1
-         if (my_rank<iproc) { halo_copy_proc=n_proc+halo_copy_proc; }
-         
-         // So, we found zeta on the current processor
-         Proc_id_plus_one_of_external_element[i]=my_rank+1;
-          
-         // This source element is an external halo on process halo_copy_proc
-         // but it should only be added to the storage if it hasn't
-         // been added already, and this information also needs to be
-         // communicated over to the other process
-         
-         unsigned n_extern_haloed=external_mesh_pt->
-          nexternal_haloed_element(halo_copy_proc);
-         unsigned external_haloed_el_index=
-          external_mesh_pt->add_external_haloed_element_pt(halo_copy_proc,
-                                                           source_el_pt);
-
-         // If it was added to the storage then the returned index
-         // will be the same as the (old) size of the storage
-         if (external_haloed_el_index==n_extern_haloed)
+         // Get the source element - bulk or not?
+         GeneralisedElement *source_el_pt=0;
+         if (!Use_bulk_element_as_external)
           {
-           // Set Located_element_status to say it 
-           // should be newly created
-           Located_element_status[i]=New;
-           
-           // How many continuously interpolated values are there?
-           int n_cont_inter_values=-1;
-           if (dynamic_cast<RefineableElement*>(source_el_pt)!=0)
+           source_el_pt=dynamic_cast<FiniteElement*>(sub_geom_obj_pt);
+          }
+         else
+          {
+           FaceElement *face_el_pt=dynamic_cast<FaceElement*>(sub_geom_obj_pt);
+           source_el_pt=dynamic_cast<FiniteElement*>(face_el_pt->
+                                                     bulk_element_pt());
+          }
+       
+         // Check if the returned element is halo
+         if (!source_el_pt->is_halo()) // cannot accept halo here
+          {
+           // The correct non-halo element has been located; this will become
+           // an external haloed element on the current process, and an
+           // external halo copy needs to be created on the current process
+           // minus wherever we are in the "ring-loop"
+           int halo_copy_proc=my_rank-iproc;
+         
+           // If iproc is bigger than my_rank then we've "gone through" nproc-1
+           if (my_rank<iproc) { halo_copy_proc=n_proc+halo_copy_proc; }
+         
+           // So, we found zeta on the current processor
+           Proc_id_plus_one_of_external_element[i]=my_rank+1;
+          
+           // This source element is an external halo on process halo_copy_proc
+           // but it should only be added to the storage if it hasn't
+           // been added already, and this information also needs to be
+           // communicated over to the other process
+         
+           unsigned n_extern_haloed=external_mesh_pt->
+            nexternal_haloed_element(halo_copy_proc);
+           unsigned external_haloed_el_index=
+            external_mesh_pt->add_external_haloed_element_pt(halo_copy_proc,
+                                                             source_el_pt);
+
+           // If it was added to the storage then the returned index
+           // will be the same as the (old) size of the storage
+           if (external_haloed_el_index==n_extern_haloed)
             {
-             n_cont_inter_values=dynamic_cast<RefineableElement*>
-              (source_el_pt)->ncont_interpolated_values();
-            }
+             // Set Located_element_status to say it 
+             // should be newly created
+             Located_element_status[i]=New;
            
-           // Since it is (externally) haloed from the current process,
-           // the info required to create a new element in the equivalent
-           // external halo layer on process halo_copy_proc needs to be 
-           // sent there
+             // How many continuously interpolated values are there?
+             int n_cont_inter_values=-1;
+             if (dynamic_cast<RefineableElement*>(source_el_pt)!=0)
+              {
+               n_cont_inter_values=dynamic_cast<RefineableElement*>
+                (source_el_pt)->ncont_interpolated_values();
+              }
            
-           // If we're using macro elements to update...
-           MacroElementNodeUpdateMesh* macro_mesh_pt=
-            dynamic_cast<MacroElementNodeUpdateMesh*>(external_mesh_pt);
-           if (macro_mesh_pt!=0)
-            {
-             Flat_packed_unsigneds.push_back(1);
+             // Since it is (externally) haloed from the current process,
+             // the info required to create a new element in the equivalent
+             // external halo layer on process halo_copy_proc needs to be 
+             // sent there
+           
+             // If we're using macro elements to update...
+             MacroElementNodeUpdateMesh* macro_mesh_pt=
+              dynamic_cast<MacroElementNodeUpdateMesh*>(external_mesh_pt);
+             if (macro_mesh_pt!=0)
+              {
+               Flat_packed_unsigneds.push_back(1);
 #ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
-             Flat_packed_unsigneds_string.push_back("Mesh is macro element mesh[2]");
+               Flat_packed_unsigneds_string.push_back("Mesh is macro element mesh[2]");
 #endif
+               //Cast to finite element... this must work because it's
+               //a macroelement no update mesh
+               FiniteElement* source_finite_el_pt 
+                = dynamic_cast<FiniteElement*>(source_el_pt);
+             
+               MacroElement* macro_el_pt=source_finite_el_pt->macro_elem_pt();
+               // Send the macro element number across
+               unsigned macro_el_num=macro_el_pt->macro_element_number();
+               Flat_packed_unsigneds.push_back(macro_el_num);
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+               Flat_packed_unsigneds_string.push_back("Number of macro element[2]");
+#endif              
+               // we need to send
+               // the lower left and upper right coordinates of the macro
+               QElementBase* q_el_pt=dynamic_cast<QElementBase*>(source_el_pt);
+               if (q_el_pt!=0)
+                {
+                 // The macro element needs to be set first before
+                 // its lower left and upper right coordinates can be accessed
+                 // Now send the lower left and upper right coordinates
+                 unsigned el_dim=q_el_pt->dim();
+                 for (unsigned i_dim=0;i_dim<el_dim;i_dim++)
+                  {
+                   Flat_packed_doubles.push_back(q_el_pt->s_macro_ll(i_dim));
+                   Flat_packed_doubles.push_back(q_el_pt->s_macro_ur(i_dim));
+                  }
+                }
+               else // Throw an error
+                {
+                 std::ostringstream error_stream;
+                 error_stream << "You are using a MacroElement node update\n"
+                              << "in a case with non-QElements. This has not\n"
+                              << "yet been implemented.\n";
+                 throw OomphLibError
+                  (error_stream.str(),
+                   "Multi_domain_functions::locate_zeta_for_missing_coordinates()",
+                   OOMPH_EXCEPTION_LOCATION);
+                }
+             
+              }
+             else // Not using macro elements to update
+              {
+               Flat_packed_unsigneds.push_back(0);
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+               Flat_packed_unsigneds_string.push_back("Mesh is not a macro element mesh [2]");
+#endif
+              }
+           
+           
              //Cast to finite element... this must work because it's
              //a macroelement no update mesh
              FiniteElement* source_finite_el_pt 
               = dynamic_cast<FiniteElement*>(source_el_pt);
-             
-             MacroElement* macro_el_pt=source_finite_el_pt->macro_elem_pt();
-             // Send the macro element number across
-             unsigned macro_el_num=macro_el_pt->macro_element_number();
-             Flat_packed_unsigneds.push_back(macro_el_num);
-#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
-             Flat_packed_unsigneds_string.push_back("Number of macro element[2]");
-#endif              
-             // we need to send
-             // the lower left and upper right coordinates of the macro
-             QElementBase* q_el_pt=dynamic_cast<QElementBase*>(source_el_pt);
-             if (q_el_pt!=0)
+#ifdef PARANOID
+             if(source_finite_el_pt==0)
               {
-               // The macro element needs to be set first before
-               // its lower left and upper right coordinates can be accessed
-               // Now send the lower left and upper right coordinates
-               unsigned el_dim=q_el_pt->dim();
-               for (unsigned i_dim=0;i_dim<el_dim;i_dim++)
-                {
-                 Flat_packed_doubles.push_back(q_el_pt->s_macro_ll(i_dim));
-                 Flat_packed_doubles.push_back(q_el_pt->s_macro_ur(i_dim));
-                }
-              }
-             else // Throw an error
-              {
-               std::ostringstream error_stream;
-               error_stream << "You are using a MacroElement node update\n"
-                            << "in a case with non-QElements. This has not\n"
-                            << "yet been implemented.\n";
-               throw OomphLibError
-                (error_stream.str(),
+               throw 
+                OomphLibError(
+                 "Unable to cast source function to finite element\n",
                  "Multi_domain_functions::locate_zeta_for_missing_coordinates()",
                  OOMPH_EXCEPTION_LOCATION);
               }
-             
-            }
-           else // Not using macro elements to update
-            {
-             Flat_packed_unsigneds.push_back(0);
-#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
-             Flat_packed_unsigneds_string.push_back("Mesh is not a macro element mesh [2]");
-#endif
-            }
-           
-           
-           //Cast to finite element... this must work because it's
-           //a macroelement no update mesh
-           FiniteElement* source_finite_el_pt 
-            = dynamic_cast<FiniteElement*>(source_el_pt);
-#ifdef PARANOID
-           if(source_finite_el_pt==0)
-            {
-             throw 
-              OomphLibError(
-               "Unable to cast source function to finite element\n",
-               "Multi_domain_functions::locate_zeta_for_missing_coordinates()",
-               OOMPH_EXCEPTION_LOCATION);
-            }
 #endif
             
             
-           // Loop over the nodes of the new source element
-           unsigned n_node=source_finite_el_pt->nnode();
-           for (unsigned j=0;j<n_node;j++)
-            {
-             Node* nod_pt=source_finite_el_pt->node_pt(j);
+             // Loop over the nodes of the new source element
+             unsigned n_node=source_finite_el_pt->nnode();
+             for (unsigned j=0;j<n_node;j++)
+              {
+               Node* nod_pt=source_finite_el_pt->node_pt(j);
               
-             // Add the node to the storage; this routine
-             // also takes care of any master nodes if the
-             // node is hanging
-             add_external_haloed_node_to_storage(halo_copy_proc,nod_pt,
-                                                 problem_pt,
-                                                 external_mesh_pt,
-                                                 n_cont_inter_values);
-            }            
-          }
-         else // it has already been added, so tell the other process
-          {
-           // Set Located_element_status to indicate an element has 
-           // already been added
-           Located_element_status[i]=Exists;
-           Flat_packed_unsigneds.push_back(external_haloed_el_index);
+               // Add the node to the storage; this routine
+               // also takes care of any master nodes if the
+               // node is hanging
+               add_external_haloed_node_to_storage(halo_copy_proc,nod_pt,
+                                                   problem_pt,
+                                                   external_mesh_pt,
+                                                   n_cont_inter_values);
+              }            
+            }
+           else // it has already been added, so tell the other process
+            {
+             // Set Located_element_status to indicate an element has 
+             // already been added
+             Located_element_status[i]=Exists;
+             Flat_packed_unsigneds.push_back(external_haloed_el_index);
 #ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
-           Flat_packed_unsigneds_string.push_back("Index of existing external haloed element[2]");
+             Flat_packed_unsigneds_string.push_back("Index of existing external haloed element[2]");
 #endif
-          }
+            }
          
-         // The coordinates returned by locate_zeta are also needed
-         // in the setup of the source elements on the other process
-         if (!Use_bulk_element_as_external)
+           // The coordinates returned by locate_zeta are also needed
+           // in the setup of the source elements on the other process
+           if (!Use_bulk_element_as_external)
+            {
+             for (unsigned ii=0;ii<Dim;ii++)
+              {
+               Flat_packed_located_coordinates.push_back(ss[ii]);
+              }
+            }
+           else // translate the coordinates to the bulk element
+            {
+             // The translation is from Lagrangian to Eulerian
+             FaceElement *face_el_pt=
+              dynamic_cast<FaceElement*>(sub_geom_obj_pt);
+             //Get the dimension of the BulkElement
+             unsigned bulk_el_dim = 
+              dynamic_cast<FiniteElement*>(source_el_pt)->dim();
+             Vector<double> s_trans(bulk_el_dim);
+             face_el_pt->get_local_coordinate_in_bulk(ss,s_trans);
+             for (unsigned ii=0;ii<bulk_el_dim;ii++)
+              {
+               Flat_packed_located_coordinates.push_back(s_trans[ii]);
+              }
+            }
+          }
+         else // halo, so search again until non-halo equivalent is located
           {
+           // Add required information to arrays (as below)
            for (unsigned ii=0;ii<Dim;ii++)
             {
-             Flat_packed_located_coordinates.push_back(ss[ii]);
+             Flat_packed_zetas_not_found_locally.push_back(x_global[ii]);
             }
-          }
-         else // translate the coordinates to the bulk element
-          {
-           // The translation is from Lagrangian to Eulerian
-           FaceElement *face_el_pt=
-            dynamic_cast<FaceElement*>(sub_geom_obj_pt);
-           //Get the dimension of the BulkElement
-           unsigned bulk_el_dim = 
-            dynamic_cast<FiniteElement*>(source_el_pt)->dim();
-           Vector<double> s_trans(bulk_el_dim);
-           face_el_pt->get_local_coordinate_in_bulk(ss,s_trans);
-           for (unsigned ii=0;ii<bulk_el_dim;ii++)
-            {
-             Flat_packed_located_coordinates.push_back(s_trans[ii]);
-            }
+           // It wasn't found here
+           Proc_id_plus_one_of_external_element[i]=0;
+
+           // Set Located_element_status to indicate not found
+           Located_element_status[i]=Not_found;
           }
         }
-       else // halo, so search again until non-halo equivalent is located
+       else // not successful this time (i.e. sub_geom_obj_pt==0), so 
+        // prepare for next process to try
         {
-         // Add required information to arrays (as below)
+         // Add this global coordinate to the LOCAL zeta array
          for (unsigned ii=0;ii<Dim;ii++)
           {
            Flat_packed_zetas_not_found_locally.push_back(x_global[ii]);
@@ -2328,22 +2331,10 @@ namespace Multi_domain_functions
          // Set Located_element_status to indicate not found
          Located_element_status[i]=Not_found;
         }
-      }
-     else // not successful this time, so prepare for next process to try
-      {
-       // Add this global coordinate to the LOCAL zeta array
-       for (unsigned ii=0;ii<Dim;ii++)
-        {
-         Flat_packed_zetas_not_found_locally.push_back(x_global[ii]);
-        }
-       // It wasn't found here
-       Proc_id_plus_one_of_external_element[i]=0;
 
-       // Set Located_element_status to indicate not found
-       Located_element_status[i]=Not_found;
-      }
-
-    }
+      } // end of mesh not reached
+     
+    } // end of loop over flat-packed zeta tuples
    
   }
 

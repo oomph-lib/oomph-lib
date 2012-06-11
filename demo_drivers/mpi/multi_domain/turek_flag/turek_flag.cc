@@ -774,6 +774,9 @@ TurekProblem(const double &length,
  // and specify the velocity of the fluid nodes based on the wall motion
  if (!Global_Parameters::Ignore_fluid_loading)
   {
+
+#ifdef OLD_FSI
+
    // Work out which fluid dofs affect the residuals of the wall elements:
    // We pass the boundary between the fluid and solid meshes and 
    // pointers to the meshes. The interaction boundary are boundaries 5,6,7
@@ -786,6 +789,27 @@ TurekProblem(const double &length,
 
    FSI_functions::setup_fluid_load_info_for_solid_elements<FLUID_ELEMENT,2>
     (this,7,Fluid_mesh_pt,Traction_mesh_pt[1]); 
+
+#else
+
+   // Package fsi solid traction meshes and boundary IDs in 
+   // fluid mesh
+   Vector<unsigned> fluid_fsi_boundary_id(3);
+   Vector<Mesh*> traction_mesh_pt(3);
+   fluid_fsi_boundary_id[0]=5;
+   traction_mesh_pt[0]=Traction_mesh_pt[0];
+   fluid_fsi_boundary_id[1]=6;
+   traction_mesh_pt[1]=Traction_mesh_pt[2];
+   fluid_fsi_boundary_id[2]=7;
+   traction_mesh_pt[2]=Traction_mesh_pt[1];
+   
+   // Vector based FSI setup
+   FSI_functions::setup_fluid_load_info_for_solid_elements<FLUID_ELEMENT,2>
+    (this,fluid_fsi_boundary_id,Fluid_mesh_pt,
+     traction_mesh_pt);
+
+#endif
+
 
    // The velocity of the fluid nodes on the wall (fluid mesh boundary 5,6,7)
    // is set by the wall motion -- hence the no-slip condition must be
@@ -955,6 +979,9 @@ void TurekProblem<FLUID_ELEMENT,SOLID_ELEMENT>::actions_after_adapt()
  // and specify the velocity of the fluid nodes based on the wall motion
  if (!Global_Parameters::Ignore_fluid_loading)
   {
+
+#ifdef OLD_FSI
+
    // Re-setup the fluid load information for fsi solid traction elements
    FSI_functions::setup_fluid_load_info_for_solid_elements<FLUID_ELEMENT,2>
     (this,5,Fluid_mesh_pt,Traction_mesh_pt[0]); 
@@ -964,6 +991,26 @@ void TurekProblem<FLUID_ELEMENT,SOLID_ELEMENT>::actions_after_adapt()
 
    FSI_functions::setup_fluid_load_info_for_solid_elements<FLUID_ELEMENT,2>
     (this,7,Fluid_mesh_pt,Traction_mesh_pt[1]); 
+
+#else
+
+   // Package fsi solid traction meshes and boundary IDs in 
+   // fluid mesh
+   Vector<unsigned> fluid_fsi_boundary_id(3);
+   Vector<Mesh*> traction_mesh_pt(3);
+   fluid_fsi_boundary_id[0]=5;
+   traction_mesh_pt[0]=Traction_mesh_pt[0];
+   fluid_fsi_boundary_id[1]=6;
+   traction_mesh_pt[1]=Traction_mesh_pt[2];
+   fluid_fsi_boundary_id[2]=7;
+   traction_mesh_pt[2]=Traction_mesh_pt[1];
+   
+   // Vector based FSI setup
+   FSI_functions::setup_fluid_load_info_for_solid_elements<FLUID_ELEMENT,2>
+    (this,fluid_fsi_boundary_id,Fluid_mesh_pt,
+     traction_mesh_pt);
+
+#endif
 
    // The velocity of the fluid nodes on the wall (fluid mesh boundary 5,6,7)
    // is set by the wall motion -- hence the no-slip condition must be
@@ -1128,6 +1175,9 @@ void TurekProblem<FLUID_ELEMENT,SOLID_ELEMENT>::actions_after_distribute()
  // and specify the velocity of the fluid nodes based on the wall motion
  if (!Global_Parameters::Ignore_fluid_loading)
   {
+
+#ifdef OLD_FSI
+
    // Re-setup the fluid load information for fsi solid traction elements
    FSI_functions::setup_fluid_load_info_for_solid_elements<FLUID_ELEMENT,2>
     (this,5,Fluid_mesh_pt,Traction_mesh_pt[0]); 
@@ -1137,6 +1187,26 @@ void TurekProblem<FLUID_ELEMENT,SOLID_ELEMENT>::actions_after_distribute()
 
    FSI_functions::setup_fluid_load_info_for_solid_elements<FLUID_ELEMENT,2>
     (this,7,Fluid_mesh_pt,Traction_mesh_pt[1]); 
+
+#else
+
+   // Package fsi solid traction meshes and boundary IDs in 
+   // fluid mesh
+   Vector<unsigned> fluid_fsi_boundary_id(3);
+   Vector<Mesh*> traction_mesh_pt(3);
+   fluid_fsi_boundary_id[0]=5;
+   traction_mesh_pt[0]=Traction_mesh_pt[0];
+   fluid_fsi_boundary_id[1]=6;
+   traction_mesh_pt[1]=Traction_mesh_pt[2];
+   fluid_fsi_boundary_id[2]=7;
+   traction_mesh_pt[2]=Traction_mesh_pt[1];
+   
+   // Vector based FSI setup
+   FSI_functions::setup_fluid_load_info_for_solid_elements<FLUID_ELEMENT,2>
+    (this,fluid_fsi_boundary_id,Fluid_mesh_pt,
+     traction_mesh_pt);
+
+#endif
 
    // The velocity of the fluid nodes on the wall (fluid mesh boundary 5,6,7)
    // is set by the wall motion -- hence the no-slip condition must be

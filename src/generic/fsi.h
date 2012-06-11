@@ -671,7 +671,7 @@ namespace FSI_functions
  //============================================================================
  template<class FLUID_ELEMENT, unsigned DIM_FLUID>
   void setup_fluid_load_info_for_solid_elements(
-   Problem*& problem_pt,
+   Problem* problem_pt,
    Vector<unsigned>& boundary_in_fluid_mesh,
    Mesh* const &fluid_mesh_pt,
    Vector<Mesh*>& solid_mesh_pt,
