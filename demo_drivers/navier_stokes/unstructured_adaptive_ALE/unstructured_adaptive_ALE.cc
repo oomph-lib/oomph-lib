@@ -672,8 +672,8 @@ public:
  /// Sanity check: Doc boundary coordinates from mesh and GeomObject
  void doc_boundary_coordinates();
  
- /// Get the TriangleMeshInternalPolygon objects
- Vector<TriangleMeshInternalPolygon*>& inner_hole_pt()
+ /// Get the TriangleMeshPolygon objects
+ Vector<TriangleMeshPolygon*>& inner_hole_pt()
   {return Inner_hole_pt;}
  
 private:
@@ -709,7 +709,7 @@ private:
  RefineableSolidTriangleMesh<ELEMENT>* Fluid_mesh_pt;
  
  /// Vector storing pointer to the hole polygon
- Vector<TriangleMeshInternalPolygon*> Inner_hole_pt;
+ Vector<TriangleMeshPolygon*> Inner_hole_pt;
 
  /// Triangle mesh polygon for outer boundary 
  TriangleMeshPolygon* Outer_boundary_polyline_pt; 
@@ -720,7 +720,7 @@ private:
 
 //==start_constructor=====================================================
 /// Constructor: build the first mesh with TriangleMeshPolygon and
-///              TriangleMeshInternalPolygon object
+///              TriangleMeshPolygon object
 //========================================================================
 template<class ELEMENT>
 UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
@@ -744,7 +744,7 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
  //--------------------------------------------------------------
  // four separeate polyline segments
  //---------------------------------
- Vector<TriangleMeshPolyLine*> boundary_segment_pt(4);
+ Vector<TriangleMeshCurveSection*> boundary_segment_pt(4);
  
  // Initialize boundary segment
  Vector<Vector<double> > bound_seg(2);
@@ -850,7 +850,7 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
  
  // This hole is bounded by two distinct boundaries, each
  // represented by its own polyline
- Vector<TriangleMeshPolyLine*> hole_segment_pt(2);
+ Vector<TriangleMeshCurveSection*> hole_segment_pt(2);
  
  // Vertex coordinates
  Vector<Vector<double> > bound_hole(ppoints);
@@ -901,7 +901,7 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
  
  // Fill in the vector of holes. Specify data that define centre's
  // displacement
- Inner_hole_pt[0] = new ImmersedRigidBodyTriangleMeshInternalPolygon(
+ Inner_hole_pt[0] = new ImmersedRigidBodyTriangleMeshPolygon(
   hole_center,hole_segment_pt,this->time_stepper_pt(),
   Problem_Parameter::Centre_displacement_data_pt[0]);
  
@@ -965,7 +965,7 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
  
  // Fill in the second hole. Specify data that define centre's
  // displacement
- Inner_hole_pt[1] = new ImmersedRigidBodyTriangleMeshInternalPolygon(
+ Inner_hole_pt[1] = new ImmersedRigidBodyTriangleMeshPolygon(
   hole_center,hole_segment_pt,this->time_stepper_pt(),
   Problem_Parameter::Centre_displacement_data_pt[1]);
  
@@ -977,19 +977,34 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
 
  TriangleMeshClosedCurve* closed_curve_pt=Outer_boundary_polyline_pt;
  unsigned nh=Inner_hole_pt.size();
- Vector<TriangleMeshInternalClosedCurve*> hole_pt(nh);
+ Vector<TriangleMeshClosedCurve*> hole_pt(nh);
  for (unsigned i=0;i<nh;i++)
   {
    hole_pt[i]=Inner_hole_pt[i];
   }
  
+ // Use the TriangleMeshParameters object for gathering all
+ // the necessary arguments for the TriangleMesh object
+ TriangleMeshParameters triangle_mesh_parameters(
+   closed_curve_pt);
 
- Fluid_mesh_pt = 
-  new RefineableSolidTriangleMesh<ELEMENT>(closed_curve_pt,
-                                           hole_pt,
-                                           uniform_element_area,
-                                           this->time_stepper_pt());
- 
+ // Define the holes on the domain
+ triangle_mesh_parameters.internal_closed_curve_pt() =
+   hole_pt;
+
+ // Define the maximum element area
+ triangle_mesh_parameters.element_area() =
+   uniform_element_area;
+
+ // Define the time stepper
+ triangle_mesh_parameters.time_stepper_pt() =
+   this->time_stepper_pt();
+
+ // Create the mesh
+ Fluid_mesh_pt =
+   new RefineableSolidTriangleMesh<ELEMENT>(
+     triangle_mesh_parameters);
+
  // Set error estimator for bulk mesh
  Z2ErrorEstimator* error_estimator_pt=new Z2ErrorEstimator;
  Fluid_mesh_pt->spatial_error_estimator_pt()=error_estimator_pt;
@@ -1262,7 +1277,7 @@ void UnstructuredFluidProblem<ELEMENT>::doc_solution(
   << "\n cenrelinedispl = "
   <<Problem_Parameter::Centre_displacement_data_pt[0]->value(0)<< "\n"
   << "centre of mass: " 
-  << dynamic_cast<ImmersedRigidBodyTriangleMeshInternalPolygon*>(
+  << dynamic_cast<ImmersedRigidBodyTriangleMeshPolygon*>(
    Inner_hole_pt[0])->initial_centre_of_mass(0) 
   << std::endl;
 

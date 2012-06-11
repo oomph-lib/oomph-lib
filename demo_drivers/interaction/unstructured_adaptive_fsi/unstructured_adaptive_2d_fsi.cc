@@ -520,7 +520,7 @@ UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::UnstructuredFSIProblem()
  //--------------------------------------------------------------
  // four separeate polyline segments
  //---------------------------------
- Vector<TriangleMeshPolyLine*> solid_boundary_segment_pt(4);
+ Vector<TriangleMeshCurveSection*> solid_boundary_segment_pt(4);
  
  // Initialize boundary segment
  Vector<Vector<double> > bound_seg(2);
@@ -589,13 +589,21 @@ UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::UnstructuredFSIProblem()
 
  TriangleMeshClosedCurve* solid_closed_curve_pt=
   Solid_outer_boundary_polyline_pt;
- Vector<TriangleMeshInternalClosedCurve*> hole_pt;
- 
- Solid_mesh_pt = 
-  new RefineableSolidTriangleMesh<SOLID_ELEMENT>(solid_closed_curve_pt,
-                                                 hole_pt,
-                                                 uniform_element_area);
- 
+
+ // Use the TriangleMeshParameters object for gathering all
+ // the necessary arguments for the TriangleMesh object
+ TriangleMeshParameters triangle_mesh_parameters_solid(
+   solid_closed_curve_pt);
+
+ // Define the maximum element area
+ triangle_mesh_parameters_solid.element_area() =
+   uniform_element_area;
+
+ // Create the mesh
+ Solid_mesh_pt =
+   new RefineableSolidTriangleMesh<SOLID_ELEMENT>(
+     triangle_mesh_parameters_solid);
+
  // Set error estimator for bulk mesh
  Z2ErrorEstimator* error_estimator_pt=new Z2ErrorEstimator;
  Solid_mesh_pt->spatial_error_estimator_pt()=error_estimator_pt;
@@ -647,7 +655,7 @@ UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::UnstructuredFSIProblem()
  //--------------------------------------------------------------
  // four separeate polyline segments
  //---------------------------------
- Vector<TriangleMeshPolyLine*> fluid_boundary_segment_pt(8);
+ Vector<TriangleMeshCurveSection*> fluid_boundary_segment_pt(8);
  
  //The first three boundaries should be in common with the solid
  for(unsigned b=0;b<3;b++)
@@ -732,10 +740,19 @@ UnstructuredFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::UnstructuredFSIProblem()
  TriangleMeshClosedCurve* fluid_closed_curve_pt=
   Fluid_outer_boundary_polyline_pt;
  
- Fluid_mesh_pt = 
-  new RefineableSolidTriangleMesh<FLUID_ELEMENT>(fluid_closed_curve_pt,
-                                                 hole_pt,
-                                                 uniform_element_area);
+ // Use the TriangleMeshParameters object for gathering all
+ // the necessary arguments for the TriangleMesh object
+ TriangleMeshParameters triangle_mesh_parameters_fluid(
+   fluid_closed_curve_pt);
+
+ // Define the maximum element area
+ triangle_mesh_parameters_fluid.element_area() =
+   uniform_element_area;
+
+ // Create the mesh
+ Fluid_mesh_pt =
+   new RefineableSolidTriangleMesh<FLUID_ELEMENT>(
+     triangle_mesh_parameters_fluid);
 
  // Set error estimator for bulk mesh
  Z2ErrorEstimator* fluid_error_estimator_pt=new Z2ErrorEstimator;

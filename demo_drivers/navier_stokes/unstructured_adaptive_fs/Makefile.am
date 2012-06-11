@@ -11,7 +11,7 @@ adaptive_bubble_in_channel_SOURCES = adaptive_bubble_in_channel.cc \
 # $(FLIBS) is included in case the solver involves fortran sources.
 adaptive_bubble_in_channel_LDADD = -L@libdir@ \
                        -lsolid -lconstitutive -lnavier_stokes \
-                       -lfluid_interface -lgeneric \
+                       -lfluid_interface -lrigid_body -lgeneric \
                        $(EXTERNAL_LIBS) $(FLIBS)
 
 # Sources for executable
@@ -21,7 +21,7 @@ adaptive_drop_in_channel_SOURCES = adaptive_drop_in_channel.cc
 # $(FLIBS) is included in case the solver involves fortran sources.
 adaptive_drop_in_channel_LDADD = -L@libdir@ \
                        -lsolid -lconstitutive -lnavier_stokes \
-                       -lfluid_interface -lgeneric \
+                       -lfluid_interface -lrigid_body -lgeneric \
                        $(EXTERNAL_LIBS) $(FLIBS)
 
 

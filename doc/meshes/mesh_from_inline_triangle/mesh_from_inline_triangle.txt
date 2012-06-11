@@ -96,8 +96,8 @@ points (specified by the user in the constructor) to create the
 vertices for a polyline representation of the boundary. 
 This polygonal representation of the boundaries is 
 used by \c Triangle to generate the mesh. Finally, nodes on 
-(and close to) curvilinear boundaries are "snapped" onto the 
-actual curvilinear boundary.
+curvilinear boundaries are "snapped" onto the actual curvilinear 
+boundary.
 
 <HR>
 <HR>
@@ -316,14 +316,14 @@ and eight segments for the lower half which we label as boundary 1:
 \until outer_boundary_ellipse_pt,zeta_start,zeta_end,
 
 We then combine the two \c TriangleMeshCurviLines to a 
-\c TriangleMeshCurvilinearClosedCurve which describes the outer
-boundary.
+\c TriangleMeshClosedCurve which describes the outer boundary.
 
-\until closed_curve_pt
+\skipline // Combine to curvilinear boundary and define the
+\until TriangleMeshClosedCurve
 
 Next we deal with the two inner (hole) boundaries
 
-\skipline the holes
+\skipline Now build the holes
 \until hole_pt(2)
 
 The first hole is a polygon whose 12 vertices we distribute along a
@@ -362,8 +362,18 @@ specification of a point inside the hole.
 \skipline curvlinear hole
 \until hole_coords); 
 
-We can now construct the mesh, specifying a target for the element
-sizes
+\subsection build_mesh Construct the mesh
+
+To facilitate the construction of the mesh \c TriangleMesh
+object we use the object \c TriangleMeshParameters. 
+The only necessary argument for creating this object is the outer 
+boundary. The definition of holes, internal boundaries and regions is
+explained in 
+<A HREF="../../../../doc/meshes/mesh_from_inline_triangle_internal_boundaries/html/index.html">
+another tutorial</a>.
+
+We can specify a target for the element sizes and pass it to the
+\c TriangleMeshParameters object as showed next:
 
 \skipline Now build the mesh
 \until Problem::mesh_pt()
@@ -551,3 +561,18 @@ shows how to generate non-refineable triangle meshes inline. This
 code does not require any modifications to existing triangular
 elements.
 .
+
+\section curve_sections Appendix A: Generalization for polylines and curvilines
+
+The objects, \c TriangleMeshPolyLine and \c TriangleMeshCurviLine 
+inherit the properties of a more general representation called 
+\c TriangleMeshCurveSection. This allows one to define more general 
+boundaries as a combination of \c TriangleMeshPolyLines and 
+\c TriangleMeshCurviLines. Therefore, instead of using a 
+\c TriangleMeshPolygon or a \c TriangleMeshCurvilinearClosedCurve 
+for creating the closed boundary we will use the object 
+\c TriangleMeshClosedCurve. You may notice the use of this object 
+through the example code when defining the outer boundary.
+
+
+

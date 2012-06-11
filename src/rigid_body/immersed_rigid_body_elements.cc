@@ -380,16 +380,16 @@ Vector<double> ImmersedRigidBodyElement::Default_Gravity_vector(2,0.0);
 /// the two displacements of and the rotation angle about the polygon's 
 /// centre of mass.
 //=======================================================================
- ImmersedRigidBodyTriangleMeshInternalPolygon::
- ImmersedRigidBodyTriangleMeshInternalPolygon(
+ ImmersedRigidBodyTriangleMeshPolygon::
+ ImmersedRigidBodyTriangleMeshPolygon(
   const Vector<double>& hole_center,
-  const Vector<TriangleMeshPolyLine*>& 
+  const Vector<TriangleMeshCurveSection*>&
   boundary_polyline_pt,
   TimeStepper* const &time_stepper_pt,
   Data* const &centre_displacement_data_pt) :
-  TriangleMeshPolygon(boundary_polyline_pt),
-  TriangleMeshInternalClosedCurve(hole_center),
-  TriangleMeshInternalPolygon(hole_center,boundary_polyline_pt), 
+  TriangleMeshCurve(boundary_polyline_pt),
+  TriangleMeshClosedCurve(boundary_polyline_pt, hole_center),
+  TriangleMeshPolygon(boundary_polyline_pt, hole_center),
   ImmersedRigidBodyElement(time_stepper_pt,centre_displacement_data_pt)
  {  
   //The underlying geometric object can be used to update the configuration
@@ -417,8 +417,8 @@ Vector<double> ImmersedRigidBodyElement::Default_Gravity_vector(2,0.0);
    for(unsigned j=0;j<nseg;j++)
     {
      // Get the vertex coordinates
-     r_left =boundary_polyline_pt[i]->vertex_coordinate(j);
-     r_right=boundary_polyline_pt[i]->vertex_coordinate(j+1);
+     r_left =this->polyline_pt(i)->vertex_coordinate(j);
+     r_right=this->polyline_pt(i)->vertex_coordinate(j+1);
    
      // Mass (area)
      Mass+=0.5*(r_left[0]*r_right[1]-r_right[0]*r_left[1]);
@@ -432,8 +432,8 @@ Vector<double> ImmersedRigidBodyElement::Default_Gravity_vector(2,0.0);
    if (nboundary==1)
     {
      // Get the vertex coordinates
-     r_left =boundary_polyline_pt[0]->vertex_coordinate(nseg);
-     r_right=boundary_polyline_pt[0]->vertex_coordinate(0);
+     r_left =this->polyline_pt(0)->vertex_coordinate(nseg);
+     r_right=this->polyline_pt(0)->vertex_coordinate(0);
    
      // Mass (area)
      Mass+=0.5*(r_left[0]*r_right[1]-r_right[0]*r_left[1]);
@@ -458,8 +458,8 @@ Vector<double> ImmersedRigidBodyElement::Default_Gravity_vector(2,0.0);
    for(unsigned j=0;j<nseg;j++)
     {
      // Get the vertex coordinates
-     r_left =boundary_polyline_pt[i]->vertex_coordinate(j);
-     r_right=boundary_polyline_pt[i]->vertex_coordinate(j+1);
+     r_left =this->polyline_pt(i)->vertex_coordinate(j);
+     r_right=this->polyline_pt(i)->vertex_coordinate(j+1);
        
      // Get moment about centroid
      r_left[0]-=Initial_centre_of_mass[0];
@@ -482,8 +482,8 @@ Vector<double> ImmersedRigidBodyElement::Default_Gravity_vector(2,0.0);
    if (nboundary==1)
     {
      // Get the vertex coordinates
-     r_left =boundary_polyline_pt[0]->vertex_coordinate(nseg);
-     r_right=boundary_polyline_pt[0]->vertex_coordinate(0);
+     r_left =this->polyline_pt(0)->vertex_coordinate(nseg);
+     r_right=this->polyline_pt(0)->vertex_coordinate(0);
        
      // Get moment about centroid
      r_left[0]-=Initial_centre_of_mass[0];
@@ -542,17 +542,17 @@ Vector<double> ImmersedRigidBodyElement::Default_Gravity_vector(2,0.0);
 /// original position of the centre of mass, and the displacements 
 /// and rotations relative to it
 //===============================================================
-void ImmersedRigidBodyTriangleMeshInternalPolygon::
+void ImmersedRigidBodyTriangleMeshPolygon::
 reset_reference_configuration()
 {
  Vector<double> x_orig(2);
  Vector<double> r(2);
  
  // Loop over the polylines and update their vertex positions
- unsigned npoly=Boundary_polyline_pt.size();
+ unsigned npoly=this->ncurve_section();
  for (unsigned i=0;i<npoly;i++)
   {
-   TriangleMeshPolyLine* poly_line_pt=Boundary_polyline_pt[i];
+   TriangleMeshPolyLine* poly_line_pt=this->polyline_pt(i);
    unsigned nvertex=poly_line_pt->nvertex();
    for (unsigned j=0;j<nvertex;j++)
     {

@@ -114,7 +114,7 @@ namespace oomph
 
   /// \short Default constructor that intialises everything to 
   /// zero. This is expected to be called only from derived clases
-  /// such as the ImmersedRigidBodyTriangleMeshInternalPolygon that can provided
+  /// such as the ImmersedRigidBodyTriangleMeshPolygon that can provided
   /// their own position() functions.
   ImmersedRigidBodyElement(TimeStepper* const &time_stepper_pt,
                            Data* const &centre_displacement_data_pt=0)  : 
@@ -580,8 +580,8 @@ namespace oomph
 /// Navier-Stokes FaceElements that apply a viscous drag to an 
 /// immersed body, represented by the polygon.)
 //=====================================================================
-class ImmersedRigidBodyTriangleMeshInternalPolygon : 
- public TriangleMeshInternalPolygon, 
+class ImmersedRigidBodyTriangleMeshPolygon :
+ public TriangleMeshPolygon,
  public ImmersedRigidBodyElement
 {
  
@@ -596,14 +596,14 @@ public:
  /// is a pointer to a Data object whose three values represent 
  /// the two displacements of and the rotation angle about the polygon's 
  /// centre of mass.
- ImmersedRigidBodyTriangleMeshInternalPolygon(const Vector<double>& hole_center,
-                                  const Vector<TriangleMeshPolyLine*>& 
+ ImmersedRigidBodyTriangleMeshPolygon(const Vector<double>& hole_center,
+                                  const Vector<TriangleMeshCurveSection*>&
                                   boundary_polyline_pt,
                                   TimeStepper* const &time_stepper_pt,
                                   Data* const &centre_displacement_data_pt=0);
  
  /// \short Empty Destuctor
- ~ImmersedRigidBodyTriangleMeshInternalPolygon() 
+ ~ImmersedRigidBodyTriangleMeshPolygon()
   {
 
   }
@@ -657,7 +657,7 @@ private:
        "greater than maximum " << zeta_max << "\n";
       throw 
        OomphLibError(error_message.str(),
-                     "TriangleMeshInternalPolygon::position()",
+                     "TriangleMeshPolygon::position()",
                      OOMPH_EXCEPTION_LOCATION);
      }
 
@@ -690,7 +690,7 @@ private:
       
 
       throw OomphLibError(error_message.str(),
-                          "TriangleMeshInternalPolygon::position()",
+                          "TriangleMeshPolygon::position()",
                           OOMPH_EXCEPTION_LOCATION);
      }
 

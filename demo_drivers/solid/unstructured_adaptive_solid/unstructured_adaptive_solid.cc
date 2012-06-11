@@ -139,7 +139,7 @@ UnstructuredSolidProblem<ELEMENT>::UnstructuredSolidProblem() :
  //--------------------------------------------------------------
  // four separeate polyline segments
  //---------------------------------
- Vector<TriangleMeshPolyLine*> boundary_segment_pt(4);
+ Vector<TriangleMeshCurveSection*> boundary_segment_pt(4);
  
  // Initialize boundary segment
  Vector<Vector<double> > bound_seg(2);
@@ -207,15 +207,21 @@ UnstructuredSolidProblem<ELEMENT>::UnstructuredSolidProblem() :
  double uniform_element_area=0.2;
 
  TriangleMeshClosedCurve* closed_curve_pt=Outer_boundary_polyline_pt;
- //Need a hole_pt, but there are no holes, so it has size zero
- Vector<TriangleMeshInternalClosedCurve*> hole_pt;
- 
 
- Solid_mesh_pt = 
-  new RefineableSolidTriangleMesh<ELEMENT>(closed_curve_pt,
-                                           hole_pt,
-                                           uniform_element_area);
- 
+ // Use the TriangleMeshParameters object for gathering all
+ // the necessary arguments for the TriangleMesh object
+ TriangleMeshParameters triangle_mesh_parameters(
+   closed_curve_pt);
+
+ // Define the maximum element area
+ triangle_mesh_parameters.element_area() =
+   uniform_element_area;
+
+ // Create the mesh
+ Solid_mesh_pt =
+   new RefineableSolidTriangleMesh<ELEMENT>(
+     triangle_mesh_parameters);
+
  // Set error estimator for bulk mesh
  Z2ErrorEstimator* error_estimator_pt=new Z2ErrorEstimator;
  Solid_mesh_pt->spatial_error_estimator_pt()=error_estimator_pt;

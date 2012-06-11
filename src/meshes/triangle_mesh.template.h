@@ -35,7 +35,7 @@
 
 #ifdef OOMPH_HAS_MPI
 //mpi headers
-#include "mpi.h"
+#include <mpi.h>
 #endif
 
 //Standards
@@ -44,11 +44,11 @@
 #include <fstream>
 #include <string.h>
 
-
 #include "../generic/problem.h" 
 #include "../generic/triangle_scaffold_mesh.h" 
 #include "../generic/triangle_mesh.h"
 #include "../generic/refineable_mesh.h"
+#include "../rigid_body/immersed_rigid_body_elements.h"
 
 
 
@@ -67,7 +67,181 @@ extern "C" {
 }
 
 #endif
- 
+
+
+
+
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+
+
+
+//=========================================================================
+// \short Helper object for dealing with the parameters used for the
+/// TriangleMesh objects
+//=========================================================================
+class TriangleMeshParameters
+{
+
+ public:
+
+ /// Constructor: It can take all the parameters or just the outer boundary
+ TriangleMeshParameters(
+   TriangleMeshClosedCurve *outer_boundary_pt,
+   Vector<TriangleMeshClosedCurve*>&
+   internal_closed_curve_pt=Empty_internal_closed_curve,
+   Vector<TriangleMeshOpenCurve*>&
+   internal_open_curves_pt=Empty_internal_open_curves,
+   double element_area=0.2,
+   Vector<Vector<double> > &extra_holes_coordinates_pt =
+     Empty_extra_hole_coordinates,
+   Vector<Vector<double> > &regions_coordinates_pt =
+     Empty_region_coordinates,
+   bool use_attributes=false,
+   TimeStepper* time_stepper_pt=&Default_TimeStepper)
+ : Outer_boundary_pt(outer_boundary_pt),
+   Internal_closed_curve_pt(internal_closed_curve_pt),
+   Internal_open_curves_pt(internal_open_curves_pt),
+   Element_area(element_area),
+   Extra_holes_coordinates_pt(extra_holes_coordinates_pt),
+   Regions_coordinates_pt(regions_coordinates_pt),
+   Use_attributes(use_attributes),
+   Time_stepper_pt(time_stepper_pt)
+ { }
+
+ /// Empty destructor
+ virtual ~TriangleMeshParameters() { }
+
+  /// Helper function for getting the outer boundary
+  TriangleMeshClosedCurve *outer_boundary_pt() const
+  {return Outer_boundary_pt;}
+
+  /// Helper function for getting access to the outer boundary
+  TriangleMeshClosedCurve* &outer_boundary_pt()
+  {return Outer_boundary_pt;}
+
+  /// Helper function for getting the internal closed boundaries
+  Vector<TriangleMeshClosedCurve*> internal_closed_curve_pt() const
+  {return Internal_closed_curve_pt;}
+
+  /// \short Helper function for getting access to the internal
+  /// closed boundaries
+  Vector<TriangleMeshClosedCurve*> &internal_closed_curve_pt()
+  {return Internal_closed_curve_pt;}
+
+  /// Helper function for getting the internal open boundaries
+  Vector<TriangleMeshOpenCurve*> internal_open_curves_pt() const
+  {return Internal_open_curves_pt;}
+
+  /// \short Helper function for getting access to the internal
+  /// open boundaries
+  Vector<TriangleMeshOpenCurve*> &internal_open_curves_pt()
+  {return Internal_open_curves_pt;}
+
+  /// Helper function for getting the element area
+  double element_area() const {return Element_area;}
+
+  /// Helper function for getting access to the element area
+  double &element_area(){return Element_area;}
+
+  /// Helper function for getting the extra holes
+  Vector<Vector<double> > extra_holes_coordinates_pt() const
+  {return Extra_holes_coordinates_pt;}
+
+  /// Helper function for getting access to the extra holes
+  Vector<Vector<double> > &extra_holes_coordinates_pt()
+  {return Extra_holes_coordinates_pt;}
+
+  /// Helper function for getting the extra regions
+  Vector<Vector<double> > regions_coordinates_pt() const
+  {return Regions_coordinates_pt;}
+
+  /// Helper function for getting access to the extra regions
+  Vector<Vector<double> > &regions_coordinates_pt()
+  {return Regions_coordinates_pt;}
+
+  /// \short Helper function for getting the use of attributes
+  // variable
+  bool use_attributes() const {return Use_attributes;}
+
+  /// \short Helper function for getting access to the use
+  /// of attributes variable
+  bool &use_attributes() {return Use_attributes;}
+
+  /// \short Helper function for getting the time stepper
+  /// pointer
+  TimeStepper* time_stepper_pt() const
+  {return Time_stepper_pt;}
+
+  /// \short Helper function for getting access to the time
+  /// stepper pointer
+  TimeStepper* &time_stepper_pt() {return Time_stepper_pt;}
+
+ protected:
+
+  /// The outer boundary
+  TriangleMeshClosedCurve *Outer_boundary_pt;
+
+  /// Internal closed boundaries
+  Vector<TriangleMeshClosedCurve*> Internal_closed_curve_pt;
+
+  /// Internal boundaries
+  Vector<TriangleMeshOpenCurve*> Internal_open_curves_pt;
+
+  /// The element are when calling triangulate external routine
+  double Element_area;
+
+  /// Store the coordinates for defining extra holes
+  Vector<Vector<double> > Extra_holes_coordinates_pt;
+
+  /// Store the coordinates for defining extra regions
+  Vector<Vector<double> > Regions_coordinates_pt;
+
+  /// Define the use of attributes (regions)
+  bool Use_attributes;
+
+  /// Timestepper used to build elements
+  TimeStepper* Time_stepper_pt;
+
+ private:
+
+  // STATIC VARIABLES (used for default values)
+
+  /// \short Static empty Vector for use as a default argument
+  /// for internal closed curves on the constructor
+  static Vector<TriangleMeshClosedCurve*>
+  Empty_internal_closed_curve;
+
+  /// \short Static empty Vector for use as a default argument
+  /// for internal open curves on the constructor
+  static Vector<TriangleMeshOpenCurve*>
+  Empty_internal_open_curves;
+
+  /// \short Static empty vector for use as a default argument
+  /// to the constructor
+  static Vector<Vector<double> > Empty_extra_hole_coordinates;
+
+  /// \short Static empty vector for use as a default argument
+  /// to the constructor
+  static Vector<Vector<double> > Empty_region_coordinates;
+
+  /// \short Default Steady Timestepper, to be used as default
+  /// arguments to Mesh constructors
+  static Steady<0> Default_TimeStepper;
+
+};
+
+
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
 
 //============start_of_triangle_class===================================
 /// Triangle mesh build with the help of the scaffold mesh coming  
@@ -78,7 +252,7 @@ extern "C" {
   class TriangleMesh : public virtual TriangleMeshBase
  {
    public:
-  
+
    /// \short Empty constructor 
   TriangleMesh()
    {
@@ -93,9 +267,9 @@ extern "C" {
                const std::string& element_file_name,
                const std::string& poly_file_name,
                TimeStepper* time_stepper_pt=
-               &Mesh::Default_TimeStepper,
-               const bool &use_attributes=false)   
-   {    
+                   &Mesh::Default_TimeStepper,
+               const bool &use_attributes=false)
+   {
     //Store the attributes
     Use_attributes = use_attributes;
     
@@ -134,15 +308,14 @@ extern "C" {
       this->setup_boundary_coordinates(b);
      }
    }
-  
-  
+
 #ifdef OOMPH_HAS_TRIANGLE_LIB
 
   /// \short Constructor based on TriangulateIO object 
   TriangleMesh(TriangulateIO& triangulate_io,
                TimeStepper* time_stepper_pt=
-               &Mesh::Default_TimeStepper,
-               const bool &use_attributes=false)  
+                   &Mesh::Default_TimeStepper,
+               const bool &use_attributes=false)
    {
     //Store the attributes flag
     Use_attributes = use_attributes;
@@ -179,424 +352,170 @@ extern "C" {
      }
    }
 
+  /// \short Build mesh, based on the specifications on
+  /// TriangleMeshParameters
+  TriangleMesh(TriangleMeshParameters &triangle_mesh_parameters)
+  {
 
-  /// \short Build mesh, based on a TriangleMeshClosedCurve that specifies
-  /// the outer boundary of the domain and any number of internal
-  /// closed curves, specified by TriangleMeshInternalClosedCurves.
-  /// Also specify target area for uniform element size.
-  TriangleMesh(TriangleMeshClosedCurve* &outer_boundary_pt,
-               Vector<TriangleMeshInternalClosedCurve*>& 
-               internal_closed_curve_pt,
-               const double &element_area,
-               TimeStepper* time_stepper_pt=
-               &Mesh::Default_TimeStepper,
-               std::set<unsigned> &fill_index
-               = Empty_fill_index,
-               const bool &use_attributes=false) 
-   {
-    //Create the PolyLine representation of the boundary and
-    //then call the generic constructor
+   // ********************************************************************
+   // First part - Get polylines representations
+   // ********************************************************************
 
-    // Intrinsic coordinate along GeomObjects
-    Vector<double> zeta(1);
-    
-    // Position vector to point on GeomObject
-    Vector<double> posn(2); 
+   // Create the polyline representation of all the boundaries and
+   // then create the mesh by calling to "generic_constructor()"
 
-    // Initialise highest boundary id
-    unsigned max_boundary_id = 0;
+   // Initialise highest boundary id
+   unsigned max_boundary_id = 0;
 
-    // Storage for outer boundary in incarnation as polygon
-    TriangleMeshPolygon* outer_boundary_polygon_pt=0;
+   // *****************************************************************
+   // Part 1.1 - Outer boundary
+   // *****************************************************************
+   // Get the representation of the outer boundary from the
+   // TriangleMeshParameters object
+   TriangleMeshClosedCurve *outer_boundary_pt =
+     triangle_mesh_parameters.outer_boundary_pt();
 
-    // What type of outer boundary is it? Try to cast
-    TriangleMeshCurvilinearClosedCurve* curvilinear_boundary_pt=
-     dynamic_cast<TriangleMeshCurvilinearClosedCurve*>(outer_boundary_pt);
-    
-    TriangleMeshPolygon* polygon_pt=
-     dynamic_cast<TriangleMeshPolygon*>(outer_boundary_pt);
-    
-    // It's a curvilinear boundary
-    if (curvilinear_boundary_pt!=0)
-     {
-      // How many separate boundaries do we have 
-      unsigned nb=curvilinear_boundary_pt->ncurvilinear_boundary();
+   // Get the polygon representation and compute the max boundary_id on
+   // the outer polygon. Does nothing (i.e. just returns a pointer to
+   // the outer boundary that was input) if the outer boundary is
+   // already a polygon
+   TriangleMeshPolygon* outer_boundary_polygon_pt =
+     closed_curve_to_polygon_helper(outer_boundary_pt, max_boundary_id);
 
-#ifdef PARANOID
-      if (nb<2)
-       {
-        std::ostringstream error_message;
-        error_message 
-         << "TriangleMeshClosedCurve that defines outer boundary\n"
-         << "must be made up of at least two "
-         << "TriangleMeshCurvilinearClosedCurves\n"
-         << "to allow the automatic set up boundary coordinates.\n"
-         << "Yours only has " << nb << std::endl;
-        throw OomphLibError(error_message.str(),
-                            "TriangleMesh::TriangleMesh()",
-                            OOMPH_EXCEPTION_LOCATION);
-       }
-#endif
+   // *****************************************************************
+   // Part 1.2 - Internal closed boundaries (possible holes)
+   // *****************************************************************
+   // Get the representation of the internal closed boundaries from the
+   // TriangleMeshParameters object
+   Vector<TriangleMeshClosedCurve *> internal_closed_curve_pt =
+     triangle_mesh_parameters.internal_closed_curve_pt();
 
-      // Provide storage for accompanying polylines
-      Vector<TriangleMeshPolyLine*> boundary_polyline_pt(nb);    
-      
-      // Loop over boundaries that make up this boundary
-      for (unsigned b=0;b<nb;b++)
-       {
-        // Get pointer to curvilinear boundary that makes up this part
-        // of the boundary
-        TriangleMeshCurviLine* boundary_pt=
-         curvilinear_boundary_pt->curvilinear_boundary_pt(b);
+   // Find the number of internal closed curves
+   unsigned n_internal_closed_curves = internal_closed_curve_pt.size();
 
-        // Create vertex coordinates for polygonal representation
-        Vector<Vector<double> > bound;
-        Vector<std::pair<double,double> > polygonal_vertex_arclength;
-        create_vertex_coordinates_for_polyline(boundary_pt,
-                                               bound,
-                                               polygonal_vertex_arclength);
-        // Boundary id
-        unsigned bnd_id=boundary_pt->boundary_id();
-        
-        // Store
-        Polygonal_vertex_arclength_info[bnd_id]=polygonal_vertex_arclength;
+   // Create the storage for the polygons that define the internal closed
+   // boundaries (again nothing happens (as above) if an internal closed
+   // curve is already a polygon)
+   Vector<TriangleMeshPolygon*> internal_polygon_pt(n_internal_closed_curves);
 
-        // Build associated polyline
-        boundary_polyline_pt[b] = new TriangleMeshPolyLine(bound,bnd_id);
-        
-        // Keep track...
-        if (bnd_id>max_boundary_id) max_boundary_id=bnd_id;
-        
-       } //end of loop over boundaries
-      
-      // Create polygonal bundary from all the polylines
-      outer_boundary_polygon_pt=new TriangleMeshPolygon(boundary_polyline_pt);
+   // Loop over the number of internal closed curves
+   for(unsigned i=0;i<n_internal_closed_curves;++i)
+    {
+     // Get the polygon representation and compute the max boundary_id on
+     // each internal polygon
+     internal_polygon_pt[i] =
+       closed_curve_to_polygon_helper(
+         internal_closed_curve_pt[i], max_boundary_id);
+    }
 
-      // Pass on refinement information
-      outer_boundary_polygon_pt->set_polyline_refinement_tolerance(
-       outer_boundary_pt->polyline_refinement_tolerance());
-      outer_boundary_polygon_pt->set_polyline_unrefinement_tolerance(
-       outer_boundary_pt->polyline_unrefinement_tolerance());
+   // *****************************************************************
+   // Part 1.3 - Internal open boundaries
+   // *****************************************************************
+   // Get the representation of open boundaries from the
+   // TriangleMeshParameteres object
+   Vector<TriangleMeshOpenCurve*> internal_open_curve_pt =
+     triangle_mesh_parameters.internal_open_curves_pt();
 
-      TriangleMeshPolygon* tmp_pt=dynamic_cast<TriangleMeshPolygon*>(
-       outer_boundary_pt);
-      if (tmp_pt!=0)
-       {
-        if (tmp_pt->is_redistribution_of_segments_between_polylines_enabled())
-         {
-          tmp_pt->enable_redistribution_of_segments_between_polylines();
-         }
-       }
-     }
-    // It's a polygonal boundary
-    else if (polygon_pt!=0)
-     {
-      // We're already a polygon
-      outer_boundary_polygon_pt=polygon_pt;
+   //Find the number of internal open curves
+   unsigned n_internal_open_curves = internal_open_curve_pt.size();
 
-      //Max boundary ID in outer boundary 
-      max_boundary_id=polygon_pt->max_polygon_boundary_id();
-     }
-    // It's neither -- die on your arse
-    else
-     {
-      std::ostringstream error_message;
-      error_message 
-       << "TriangleMeshClosedCurve that defines outer boundary\n"
-       << "is neither a TriangleMeshCurvilinearClosedCurve\n"
-       << "nor a TriangleMeshPolygon. This doesn't make sense.\n";
-      throw OomphLibError(error_message.str(),
-                          "TriangleMesh::TriangleMesh()",
-                          OOMPH_EXCEPTION_LOCATION);
-     }
-    
-    // Now deal with the internal closed curves
+   // Create the storage for the polylines that define the open boundaries
+   Vector<TriangleMeshOpenCurve*> internal_open_curve_poly_pt(
+     n_internal_open_curves);
 
-    //Find the number of internal closed curves
-    unsigned n_internal_closed_curve = internal_closed_curve_pt.size();
+   // Loop over the number of internal open curves
+   for (unsigned i = 0; i < n_internal_open_curves; i++)
+    {
+     // Get the open polyline representation and compute the max boundary_id
+     // on each open polyline (again, nothing happens if there are curve
+     // sections on the current internal open curve)
+     internal_open_curve_poly_pt[i] =
+       create_open_curve_with_polyline_helper(
+         internal_open_curve_pt[i], max_boundary_id);
+    }
 
-    //Storage for the triangle polygons that define the internal boundaries
-    Vector<TriangleMeshInternalPolygon*> 
-     internal_polygon_pt(n_internal_closed_curve);
-    
-    //Loop over the number of internal closed curves
-    for(unsigned h=0;h<n_internal_closed_curve;++h)
-     {
-      // What type of internal closed curve is it? Try to cast
-      TriangleMeshInternalCurvilinearClosedCurve* curvilinear_hole_pt=
-       dynamic_cast<TriangleMeshInternalCurvilinearClosedCurve*>(
-        internal_closed_curve_pt[h]);
+   // ********************************************************************
+   // Second part - Get associated geom objects and coordinate limits
+   // ********************************************************************
 
-      TriangleMeshInternalPolygon* polygon_hole_pt=
-       dynamic_cast<TriangleMeshInternalPolygon*>(internal_closed_curve_pt[h]);
+   // Now resize the storage for geometric objects and coordinate limits
+   Boundary_geom_object_pt.resize(max_boundary_id+1,0);
+   Boundary_coordinate_limits.resize(max_boundary_id+1);
 
-      // It's a curvilinear curve
-      if (curvilinear_hole_pt!=0)
-       {
-        // How many separate boundaries do we have 
-        unsigned nb=curvilinear_hole_pt->ncurvilinear_boundary();
+   // ***************************************************************
+   // Part 2.1 Outer boundary
+   // ***************************************************************
+   set_geom_objects_and_coordinate_limits_for_close_curve(outer_boundary_pt);
 
-#ifdef PARANOID 
-        if (nb<2)
-         {     
-          std::ostringstream error_message;
-          error_message 
-           << "TriangleMeshClosedCurve that defines internal closed curve\n"
-           << "must be made up of at least two "
-           << "TriangleMeshCurvilinearClosedCurves\n"
-           << "to allow the automatic set up boundary coordinates.\n"
-           << "The one defining your internal curve " << h << " only has " 
-           << nb << std::endl;
-          throw OomphLibError(error_message.str(),
-                              "TriangleMesh::TriangleMesh()",
-                              OOMPH_EXCEPTION_LOCATION);
-         }
-#endif
+   // ***************************************************************
+   // Part 2.2 - Internal closed boundaries (possible holes)
+   // ***************************************************************
+   for (unsigned i = 0; i < n_internal_closed_curves; i++)
+    {
+     set_geom_objects_and_coordinate_limits_for_close_curve(
+       internal_closed_curve_pt[i]);
+    }
 
-        // Provide storage for accompanying polylines
-        Vector<TriangleMeshPolyLine*> hole_polyline_pt(nb);    
-        
-        // Loop over boundaries that make up this interal curve
-        for (unsigned b=0;b<nb;b++)
-         {
-          // Get pointer to curvilinear boundary that makes up this part
-          // of the closed curve
-          TriangleMeshCurviLine* boundary_pt=
-           curvilinear_hole_pt->curvilinear_boundary_pt(b);
-          
-          // Create vertex coordinates for polygonal represetation
-          Vector<Vector<double> > bound_hole;
-          Vector<std::pair<double,double> > polygonal_vertex_arclength;
-          create_vertex_coordinates_for_polyline(boundary_pt,
-                                                 bound_hole,
-                                                 polygonal_vertex_arclength);
-          
-          // Boundary id
-          unsigned bnd_id=boundary_pt->boundary_id();
-          
-          // Store
-          Polygonal_vertex_arclength_info[bnd_id]=polygonal_vertex_arclength;
+   // ********************************************************************
+   // Part 2.3 - Internal open boundaries
+   // ********************************************************************
+   for (unsigned i = 0; i < n_internal_open_curves; i++)
+    {
+     set_geom_objects_and_coordinate_limits_for_open_curve(
+       internal_open_curve_pt[i]);
+    }
 
-          // Build associated polyline
-          hole_polyline_pt[b] = 
-           new TriangleMeshPolyLine(bound_hole,bnd_id);
+   // ********************************************************************
+   // Third part - Creates the TriangulateIO object by calling the
+   //              "generic_constructor()" function
+   // ********************************************************************
+   // Get all the other parameters from the TriangleMeshParameters object
+   // The maximum element area
+   const double element_area =
+     triangle_mesh_parameters.element_area();
 
-          // Keep track...
-          if (bnd_id>max_boundary_id) max_boundary_id=bnd_id;
-          
-         } //end of loop over boundaries
-        
-        // Internal point coordinates by copy operation
-        Vector<double> internal_point(curvilinear_hole_pt->internal_point());
+   // The holes coordinates
+   Vector<Vector<double> > extra_holes_coordinates_pt =
+     triangle_mesh_parameters.extra_holes_coordinates_pt();
 
-        // Create polygonal hole from all the polylines
-        internal_polygon_pt[h] = new TriangleMeshInternalPolygon(
-         internal_point,hole_polyline_pt);
-       }
-      // It's polygon hole
-      else if (polygon_hole_pt!=0)
-       {
-        // Get the max. boundary ID
-        unsigned max_hole_boundary_id = 
-         polygon_hole_pt->max_polygon_boundary_id();
-        if (max_hole_boundary_id>max_boundary_id)
-         {
-          max_boundary_id=max_hole_boundary_id;
-         }
-        
-        // Set pointer to Polygon representation (it is one already!)
-        internal_polygon_pt[h]=polygon_hole_pt;
-       }
-      // Neither: Die on your arse!
-      else
-       {
-        std::ostringstream error_message;
-        error_message 
-         << "TriangleMeshClosedCurve that defines the " << h 
-         << "-th internal closed curve\n"
-         << "is neither a TriangleMeshInternalCurvilinearClosedCurve\n"
-         << "nor a TriangleMeshInternalPolygon. This doesn't make sense.\n";
-         throw OomphLibError(error_message.str(),
-                             "TriangleMesh::TriangleMesh()",
-                             OOMPH_EXCEPTION_LOCATION);
-       }
-     }
+   // The regions coordinates
+   Vector<Vector<double> > regions_pt =
+     triangle_mesh_parameters.regions_coordinates_pt();
 
-    // Now resize the storage
-    this->Boundary_geom_object_pt.resize(max_boundary_id+1,0);
-    this->Boundary_coordinate_limits.resize(max_boundary_id+1);
+   // If we use regions then we use attributes
+   const bool use_attributes = triangle_mesh_parameters.use_attributes();
 
-    // If it's a curvilinear boundary store the associated geometric objects
-    //and coordinates
-    if (curvilinear_boundary_pt!=0)
-     {
-      // How many separate boundaries do we have 
-      unsigned nb=curvilinear_boundary_pt->ncurvilinear_boundary();
-      
-#ifdef PARANOID
-      if (nb<2)
-       {
-        std::ostringstream error_message;
-        error_message 
-         << "TriangleMeshClosedCurve that defines outer boundary\n"
-         << "must be made up of at least two "
-         << "TriangleMeshCurvilinearClosedCurves\n"
-         << "to allow the automatic set up boundary coordinates.\n"
-         << "Yours only has " << nb << std::endl;
-        throw OomphLibError(error_message.str(),
-                            "TriangleMesh::TriangleMesh()",
-                            OOMPH_EXCEPTION_LOCATION);
-       }
-#endif
+   // The pointer to the time stepper
+   TimeStepper* time_stepper_pt = triangle_mesh_parameters.time_stepper_pt();
 
-      // Loop over boundaries that make up this boundary
-      for (unsigned b=0;b<nb;b++)
-       {
-        // Get pointer to curvilinear boundary that makes up this part
-        // of the boundary
-        TriangleMeshCurviLine* boundary_pt=
-         curvilinear_boundary_pt->curvilinear_boundary_pt(b);
-        
-        //Read the values of the limiting coordinates
-        Vector<double> zeta_bound(2);
-        zeta_bound[0] = boundary_pt->zeta_start();
-        zeta_bound[1] = boundary_pt->zeta_end(); 
-        
-        // Boundary id
-        unsigned bnd_id=boundary_pt->boundary_id();
-        
-        //Set the boundary geometric object and limits
-        Boundary_geom_object_pt[bnd_id] = boundary_pt->geom_object_pt();
-        Boundary_coordinate_limits[bnd_id] = zeta_bound;        
-       }
-     }
+   this->generic_constructor(outer_boundary_polygon_pt,
+                             internal_polygon_pt,
+                             internal_open_curve_poly_pt,
+                             element_area,
+                             extra_holes_coordinates_pt,
+                             regions_pt,
+                             time_stepper_pt,
+                             use_attributes);
 
-    // Loop over the interla closed curves again and store the 
-    // associated geometric objects and coordinates
-    for(unsigned h=0;h<n_internal_closed_curve;h++)
-     {
-      // What type of internal curve is it? Try to cast
-      TriangleMeshInternalCurvilinearClosedCurve* curvilinear_hole_pt=
-       dynamic_cast<TriangleMeshInternalCurvilinearClosedCurve*>(
-        internal_closed_curve_pt[h]);
+   // Setup boundary coordinates for boundaries
+   unsigned nb=nboundary();
 
-      TriangleMeshInternalPolygon* polygon_hole_pt=
-       dynamic_cast<TriangleMeshInternalPolygon*>(internal_closed_curve_pt[h]);
-      
-      // It's a curvilinear closed curve
-      if (curvilinear_hole_pt!=0)
-       {
-        
-        // How many separate boundaries do we have 
-        unsigned nb=curvilinear_hole_pt->ncurvilinear_boundary();
-        
-#ifdef PARANOID
-        if (nb<2)
-         {
-          std::ostringstream error_message;
-          error_message 
-           << "TriangleMeshClosedCurve that defines outer boundary\n"
-           << "must be made up of at least two "
-           << "TriangleMeshCurvilinearClosedCurves\n"
-           << "to allow the automatic set up boundary coordinates.\n"
-           << "Yours only has " << nb << std::endl;
-          throw OomphLibError(error_message.str(),
-                              "TriangleMesh::TriangleMesh()",
-                              OOMPH_EXCEPTION_LOCATION);
-         }
-#endif
+   for (unsigned b=0;b<nb;b++)
+    {
+     this->setup_boundary_coordinates(b);
+    }
 
-        // Loop over boundaries that make up this internal closed curve
-        for (unsigned b=0;b<nb;b++)
-         {
-          // Get pointer to curvilinear boundary that makes up this part
-          // of the internal closed curve
-          TriangleMeshCurviLine* boundary_pt=
-           curvilinear_hole_pt->curvilinear_boundary_pt(b);
-          
-          //Read the values of the limiting coordinates
-          Vector<double> zeta_bound(2);
-          zeta_bound[0] = boundary_pt->zeta_start();
-          zeta_bound[1] = boundary_pt->zeta_end(); 
-          
-          // Boundary id
-          unsigned bnd_id=boundary_pt->boundary_id();
-          
-          //Set the boundary geometric object and limits
-          Boundary_geom_object_pt[bnd_id] = boundary_pt->geom_object_pt();
-          Boundary_coordinate_limits[bnd_id] = zeta_bound;
-         }
-       }
-      // It's polygon 
-      else if (polygon_hole_pt!=0)
-       {
-        //Can the Polygon be cast to a geometric object incarnation
-        GeomObject* bound_geom_obj_pt 
-         = dynamic_cast<GeomObject*>(polygon_hole_pt);
-        
-        //If cast successful set up the coordinates 
-        if(bound_geom_obj_pt!=0) 
-         {
-          unsigned n_poly = polygon_hole_pt->npolyline();
-          for(unsigned p=0;p<n_poly;p++)
-           {
-            //Read out the index of the boundary from the polyline
-            unsigned b_index = polygon_hole_pt->polyline_pt(p)->boundary_id();
-            
-            //Set the geometric object
-            this->Boundary_geom_object_pt[b_index] = bound_geom_obj_pt;
-            
-            //The coordinates along each polyline boundary are scaled to
-            //of unit length so the total coordinate limits are simply
-            //(p,p+1)
-            this->Boundary_coordinate_limits[b_index].resize(2);
-            this->Boundary_coordinate_limits[b_index][0] = p;
-            this->Boundary_coordinate_limits[b_index][1] = p + 1.0;
-           }
-         }
-       }
-      // Neither: Die on your arse!
-      else
-       {
-        std::ostringstream error_message;
-        error_message 
-         << "TriangleMeshClosedCurve that defines the " << h 
-         << "-th internal closed curve\n"
-         << "is neither a TriangleMeshInternalCurvilinearClosedCurve\n"
-         << "nor a TriangleMeshInternalPolygon. This doesn't make sense.\n";
-         throw OomphLibError(error_message.str(),
-                             "TriangleMesh::TriangleMesh()",
-                             OOMPH_EXCEPTION_LOCATION);
-       }
-     }
+   // Snap it!
+   this->snap_nodes_onto_geometric_objects();
 
-    //Call the method used in the alternative constructor
-    this->generic_constructor(outer_boundary_polygon_pt,
-                              internal_polygon_pt,
-                              fill_index,
-                              element_area,
-                              time_stepper_pt,
-                              use_attributes);
-
-    // Setup boundary coordinates for boundaries
-    unsigned nb=nboundary();
-    for (unsigned b=0;b<nb;b++)
-     {
-      this->setup_boundary_coordinates(b);
-     }
-
-    // Snap it!
-    this->snap_nodes_onto_geometric_objects();
-   }
-  
-
+  }
 
   /// \short Build mesh from poly file, with specified target
   /// area for all elements.
   TriangleMesh(const std::string& poly_file_name,
                const double& element_area,
                TimeStepper* time_stepper_pt=
-               &Mesh::Default_TimeStepper,
+                   &Mesh::Default_TimeStepper,
                const bool &use_attributes=false)
    {  
     // Disclaimer
@@ -617,12 +536,12 @@ extern "C" {
     
     // Input string for triangle
     std::stringstream input_string_stream;
-    input_string_stream<<"-p-a" << element_area << "q30";
+    input_string_stream<<"-pA -a" << element_area << "q30";
     
     // Convert to a *char required by the triangulate function
-     char triswitches[100];
-     sprintf(triswitches,"%s",input_string_stream.str().c_str());
-     
+    char triswitches[100];
+    sprintf(triswitches,"%s",input_string_stream.str().c_str());
+
     // Build the input triangulateio object from the .poly file
     build_triangulateio(poly_file_name, triangle_in);
     
@@ -656,7 +575,7 @@ extern "C" {
   
   /// Broken copy constructor
   TriangleMesh(const TriangleMesh& dummy) 
-   { 
+   {
     BrokenCopy::broken_copy("TriangleMesh");
    } 
   
@@ -668,18 +587,40 @@ extern "C" {
   
   /// Destructor 
   virtual ~TriangleMesh() 
-   {     
+  {
 #ifdef OOMPH_HAS_TRIANGLE_LIB
-    if (Triangulateio_exists) 
-     {
-      TriangleHelper::clear_triangulateio(Triangulateio);
-     }
+   if (Triangulateio_exists)
+    {
+     TriangleHelper::clear_triangulateio(Triangulateio);
+    }
+
+   std::set<TriangleMeshCurveSection*>::iterator it_polyline;
+   for (it_polyline = Free_curve_section_pt.begin();
+     it_polyline != Free_curve_section_pt.end();
+     it_polyline++)
+    {
+     delete (*it_polyline);
+    }
+
+   std::set<TriangleMeshPolygon*>::iterator it_polygon;
+   for (it_polygon = Free_polygon_pt.begin();
+     it_polygon != Free_polygon_pt.end();
+     it_polygon++)
+    {
+     delete (*it_polygon);
+    }
+
+   std::set<TriangleMeshOpenCurve*>::iterator it_open_polyline;
+   for (it_open_polyline = Free_open_curve_pt.begin();
+     it_open_polyline != Free_open_curve_pt.end();
+     it_open_polyline++)
+    {
+     delete (*it_open_polyline);
+    }
+
 #endif
-   }
+  }
 
-
-
-  
   /// \short Setup boundary coordinate on boundary b.
   /// Boundary coordinate increases continously along
   /// polygonal boundary. It's zero at the lowest left
@@ -702,66 +643,64 @@ extern "C" {
   /// Return the number of elements adjacent to boundary b in region r
   inline unsigned nboundary_element_in_region(const unsigned &b,
                                         const unsigned &r) const
-   {
-    //Need to use a constant iterator here to keep the function "const"
-    //Return an iterator to the appropriate entry, if we find it
-    std::map<unsigned,Vector<FiniteElement*> >::const_iterator it =
+  {
+   //Need to use a constant iterator here to keep the function "const"
+   //Return an iterator to the appropriate entry, if we find it
+   std::map<unsigned,Vector<FiniteElement*> >::const_iterator it =
      Boundary_region_element_pt[b].find(r);
-    if(it!=Boundary_region_element_pt[b].end())
-     {
-      return (it->second).size();
-     }
-    //Otherwise there are no elements adjacent to boundary b in the region r
-    else
-     {
-      return 0;
-     }
-   }
+   if(it!=Boundary_region_element_pt[b].end())
+    {
+     return (it->second).size();
+    }
+   //Otherwise there are no elements adjacent to boundary b in the region r
+   else
+    {
+     return 0;
+    }
+  }
 
   /// Return pointer to the e-th element adjacent to boundary b in region r
   FiniteElement* boundary_element_pt_in_region(const unsigned &b, 
                                                const unsigned &r,
                                                const unsigned &e) const
-   {
-    //Use a constant iterator here to keep function "const" overall
-    std::map<unsigned,Vector<FiniteElement*> >::const_iterator it =
+  {
+   //Use a constant iterator here to keep function "const" overall
+   std::map<unsigned,Vector<FiniteElement*> >::const_iterator it =
      Boundary_region_element_pt[b].find(r);
-    if(it!=Boundary_region_element_pt[b].end())
-     {
-      return (it->second)[e];
-     }
-    else
-     {
-      return 0;
-     }
-   }
+   if(it!=Boundary_region_element_pt[b].end())
+    {
+     return (it->second)[e];
+    }
+   else
+    {
+     return 0;
+    }
+  }
 
   /// Return face index of the e-th element adjacent to boundary b in region r
   int face_index_at_boundary_in_region(const unsigned &b, 
                                        const unsigned &r,
                                        const unsigned &e) const
-   {
-    //Use a constant iterator here to keep function "const" overall
-    std::map<unsigned,Vector<int> >::const_iterator it =
+  {
+   //Use a constant iterator here to keep function "const" overall
+   std::map<unsigned,Vector<int> >::const_iterator it =
      Face_index_region_at_boundary[b].find(r);
-    if(it!=Face_index_region_at_boundary[b].end())
-     {
-      return (it->second)[e];
-     }
-    else
-     {
-      std::ostringstream error_message;
-      error_message << "Face indices not set up for boundary " 
-                    << b << " in region " << r << "\n";
-      error_message 
-       << "This probably means that the boundary is not adjacent to region\n";
-      throw OomphLibError(error_message.str(),
-                          "TriangleMesh::face_index_at_boundary_in_region()",
-                          OOMPH_EXCEPTION_LOCATION);
-     }
-   }
-
-
+   if(it!=Face_index_region_at_boundary[b].end())
+    {
+     return (it->second)[e];
+    }
+   else
+    {
+     std::ostringstream error_message;
+     error_message << "Face indices not set up for boundary "
+       << b << " in region " << r << "\n";
+     error_message
+     << "This probably means that the boundary is not adjacent to region\n";
+     throw OomphLibError(error_message.str(),
+       "TriangleMesh::face_index_at_boundary_in_region()",
+       OOMPH_EXCEPTION_LOCATION);
+    }
+  }
 
   /// Return the number of regions specified by attributes
   unsigned nregion() {return Region_element_pt.size();}
@@ -778,7 +717,6 @@ extern "C" {
   FiniteElement* region_element_pt(const unsigned &i,
                                    const unsigned &e)
   {return Region_element_pt[i][e];}
-  
 
   /// \short Return the geometric object associated with the b-th boundary or
   /// null if the boundary has associated geometric object.
@@ -795,7 +733,7 @@ extern "C" {
    {return Boundary_geom_object_pt;}
   
   /// \short Return access to the vector of boundary coordinates associated
-  ///with each geometric object
+  /// with each geometric object
   Vector<Vector<double> > &boundary_coordinate_limits()
    {return Boundary_coordinate_limits;}
   
@@ -816,6 +754,16 @@ extern "C" {
      }
    }
   
+  /// \short Return access to the associated boundary polyline
+  TriangleMeshPolyLine *boundary_polyline(const unsigned &b)
+  {return
+    dynamic_cast<TriangleMeshPolyLine*>(Boundary_curve_section_pt[b]);}
+
+  /// \short Return access to the associated set of vertices that
+  /// receive connections on the specified boundary
+  std::set<Vector<double> > &boundary_connections(const unsigned &b)
+  {return Boundary_connections_pt[b];}
+
 #ifdef OOMPH_HAS_TRIANGLE_LIB
 
   /// \short Update the TriangulateIO object to the current nodal position
@@ -828,7 +776,7 @@ extern "C" {
    unsigned count_coord=0;
    for(unsigned ihole=0;ihole<nhole;ihole++)
     {
-     Triangulateio.holelist[count_coord]+=internal_point[ihole][0];  
+     Triangulateio.holelist[count_coord]+=internal_point[ihole][0];
      Triangulateio.holelist[count_coord+1]+=internal_point[ihole][1]; 
      
      // Increment counter
@@ -894,6 +842,8 @@ extern "C" {
     this->Region_attribute.clear();
     this->Boundary_region_element_pt.clear();
     this->Face_index_region_at_boundary.clear();
+    this->Boundary_curve_section_pt.clear();
+    this->Boundary_connections_pt.clear();
 
     //Now build the new scaffold
     Tmp_mesh_pt= new TriangleScaffoldMesh(this->Triangulateio);
@@ -931,13 +881,19 @@ extern "C" {
    
   /// \short Snap the boundary nodes onto any curvilinear boundaries
   /// defined by geometric objects
-  void snap_nodes_onto_geometric_objects();    
-  
-    protected:
+  void snap_nodes_onto_geometric_objects();
 
-  /// Static empty set for use as a default argument
-  /// to to constructor
-  static std::set<unsigned> Empty_fill_index;
+  /// \short Gets a pointer to a set with all the nodes
+  /// related with a boundary
+  std::map<unsigned, std::set<Node*> > &nodes_on_boundary_pt() {
+	  return Nodes_on_boundary_pt;
+  }
+
+  /// \short Stores a pointer to a set with all the nodes
+  /// related with a boundary
+  std::map<unsigned, std::set<Node*> > Nodes_on_boundary_pt;
+
+    protected:
 
   /// Build mesh from scaffold
   void build_from_scaffold(TimeStepper* time_stepper_pt,
@@ -945,14 +901,17 @@ extern "C" {
 
 #ifdef OOMPH_HAS_TRIANGLE_LIB  
   
-  /// \short Build TriangulateIO object from TriangleMeshPolyLine and 
-  /// TriangleMeshInternalClosedCurvePolyLine
+  /// \short Build TriangulateIO object from TriangleMeshPolygon (outer
+  /// boundary) and TriangleMeshPolygon list (internal boundaries) and
+  /// TriangleMeshOpenCurve list for internal curves
   void build_triangulateio(TriangleMeshPolygon* &outer_boundary_pt,
-                           Vector<TriangleMeshInternalPolygon*>&
-                           internal_closed_curve_pt,
-                           std::set<unsigned> &fill_index,
+                           Vector<TriangleMeshPolygon*> &internal_polygon_pt,
+                           Vector<TriangleMeshOpenCurve*>
+                           &open_polylines_pt,
+                           Vector<Vector<double> > &extra_holes_coordinates_pt,
+                           Vector<Vector<double> > &regions_coordinates_pt,
                            TriangulateIO& triangulate_io);
-  
+
   /// \short Helper function to create TriangulateIO object (return in
   /// triangulate_io) from the .poly file 
   void build_triangulateio(const std::string& poly_file_name,
@@ -963,9 +922,12 @@ extern "C" {
   /// mesh once the different specific constructors have assembled the
   /// appropriate information.
   void generic_constructor(TriangleMeshPolygon* &outer_boundary_pt,
-                           Vector<TriangleMeshInternalPolygon*> &internal_polygon_pt,
-                           std::set<unsigned> &fill_index,
+                           Vector<TriangleMeshPolygon*> &internal_polygon_pt,
+                           Vector<TriangleMeshOpenCurve*>
+                           &open_polylines_pt,
                            const double &element_area,
+                           Vector<Vector<double> > &extra_holes_coordinates_pt,
+                           Vector<Vector<double> > &regions_coordinates_pt,
                            TimeStepper* time_stepper_pt,
                            const bool &use_attributes) 
    {
@@ -981,44 +943,52 @@ extern "C" {
     // Store internal polygons by copy constructor
     Internal_polygon_pt=internal_polygon_pt;
     
-    // Store the fill index
-    Fill_index = fill_index;
+    // Store internal polylines by copy constructor
+    Internal_open_curve_pt = open_polylines_pt;
+
+    // Store the extra holes coordinates
+    Extra_holes_coordinates_pt = extra_holes_coordinates_pt;
+
+    // Store the extra regions coordinates
+    Regions_coordinates_pt = regions_coordinates_pt;
 
     // Create the data structures required to call the triangulate function
     TriangulateIO triangulate_io;
     
     // Initialize TriangulateIO structure
     TriangleHelper::initialise_triangulateio(triangulate_io);
-    
-    // Convert TriangleMeshPolyLine and TriangleMeshInternalClosedCurvePolyLine
+
+    // Convert TriangleMeshPolyLine and TriangleMeshClosedCurvePolyLine
     // to a triangulateio object
     build_triangulateio(outer_boundary_pt,
                         internal_polygon_pt,
-                        fill_index,
+                        open_polylines_pt,
+                        extra_holes_coordinates_pt,
+                        regions_coordinates_pt,
                         triangulate_io);
-    
+
     // Initialize TriangulateIO structure
     TriangleHelper::initialise_triangulateio(Triangulateio);
-    
+
     // Triangulation has been created -- remember to wipe it!
     Triangulateio_exists=true;
-    
+
     // Input string for triangle
     std::stringstream input_string_stream;
-    input_string_stream<<"-pA-a" << element_area << "q30";
+    input_string_stream<<"-pA -a" << element_area << " -q30";
     
     // Convert the Input string in *char required by the triangulate function
-     char triswitches[100];
-     sprintf(triswitches,"%s",input_string_stream.str().c_str());
-     
+    char triswitches[100];
+    sprintf(triswitches,"%s",input_string_stream.str().c_str());
+
     // Build the mesh using triangulate function
-    triangulate(triswitches, &triangulate_io, &Triangulateio, 0);   
+    triangulate(triswitches, &triangulate_io, &Triangulateio, 0);
     
     // Build scaffold
     Tmp_mesh_pt= new TriangleScaffoldMesh(Triangulateio);
-    
+
     //If we have filled holes then we must use the attributes
-    if(fill_index.size() > 0) 
+    if(!regions_coordinates_pt.empty())
      {
       // Convert mesh from scaffold to actual mesh
       build_from_scaffold(time_stepper_pt,true);
@@ -1051,7 +1021,7 @@ extern "C" {
   /// made of the arclength of the i_vertex-th vertex along the polygonal 
   /// representation (.first), and the corresponding coordinate on the
   /// GeomObject (.second)
-  void create_vertex_coordinates_for_polyline(
+  void create_vertex_coordinates_for_polyline_no_connections(
    TriangleMeshCurviLine* boundary_pt,
    Vector<Vector<double> >& vertex_coord,
    Vector<std::pair<double,double> >& polygonal_vertex_arclength_info)
@@ -1073,16 +1043,20 @@ extern "C" {
    polygonal_vertex_arclength_info[0].first=0.0;
    polygonal_vertex_arclength_info[0].second=zeta_initial;
   
-  
-
    // Vertices placed in equal zeta increments
    if (!(boundary_pt->space_vertices_evenly_in_arclength()))
     {
      //Read the values of the limiting coordinates, assuming equal
      //spacing of the nodes
      double zeta_increment = 
-      (boundary_pt->zeta_end()-boundary_pt->zeta_start())/(double(n_seg));
+      std::fabs(boundary_pt->zeta_end()-
+        boundary_pt->zeta_start())/(double(n_seg));
    
+     if(boundary_pt->reversed())
+      {
+       zeta_increment=-zeta_increment;
+      }
+
      //Loop over the n_seg+1 points bounding the segments
      for(unsigned s=0;s<n_seg+1;s++)
       {
@@ -1112,16 +1086,22 @@ extern "C" {
      unsigned nsample=nsample_per_segment*n_seg;
    
      // Work out start and increment
-     double zeta_increment=(boundary_pt->zeta_end()-
+     double zeta_increment=std::fabs(boundary_pt->zeta_end()-
                             boundary_pt->zeta_start())/(double(nsample));
    
+     if(boundary_pt->reversed())
+      {
+       zeta_increment=-zeta_increment;
+      }
+
      // Get coordinate of first point
      Vector<double> start_point(2);
      zeta[0]=zeta_initial;
+
      boundary_pt->geom_object_pt()->position(zeta,start_point);
    
      // Storage for coordinates of end point
-     Vector<double> end_point(2);          
+     Vector<double> end_point(2);
    
      // Compute total arclength
      double total_arclength=0.0;
@@ -1172,7 +1152,6 @@ extern "C" {
          arclength_increment+=sqrt(pow(end_point[0]-start_point[0],2)+
                                    pow(end_point[1]-start_point[1],2));
        
-       
          // Shift back
          start_point=end_point;
        
@@ -1210,11 +1189,496 @@ extern "C" {
       polygonal_vertex_arclength_info[s-1].first+
       sqrt(pow(vertex_coord[s][0]-vertex_coord[s-1][0],2)+
            pow(vertex_coord[s][1]-vertex_coord[s-1][1],2));
-     polygonal_vertex_arclength_info[s].second=zeta[0];    
+     polygonal_vertex_arclength_info[s].second=zeta[0];
+
     }
   }
- 
-  
+
+  /// \short Helper function to create polyline vertex coordinates for
+  /// curvilinear boundary specified by boundary_pt, using either
+  /// equal increments in zeta or in (approximate) arclength
+  /// along the curviline. vertex_coord[i_vertex][i_dim] stores
+  /// i_dim-th coordinate of i_vertex-th vertex.
+  /// polygonal_vertex_arclength_info[i_vertex] contains the pair of doubles
+  /// made of the arclength of the i_vertex-th vertex along the polygonal
+  /// representation (.first), and the corresponding coordinate on the
+  /// GeomObject (.second)
+  void create_vertex_coordinates_for_polyline_connections(
+      TriangleMeshCurviLine* boundary_pt,
+      Vector<Vector<double> >& vertex_coord,
+      Vector<std::pair<double,double> >& polygonal_vertex_arclength_info)
+  {
+
+   // Start coordinate
+   double zeta_initial = boundary_pt->zeta_start();
+   // Final coordinate
+   double zeta_final = boundary_pt->zeta_end();
+
+   Vector<double> *connection_points_pt =
+     boundary_pt->connection_points_pt();
+
+   unsigned n_connections = connection_points_pt->size();
+
+   // We need to sort the connection points
+   if (n_connections > 1)
+    {
+     std::sort(connection_points_pt->begin(), connection_points_pt->end());
+    }
+
+#ifdef PARANOID
+   bool f = false;
+   std::ostringstream error_message;
+   if(!boundary_pt->reversed())
+    {
+     if (zeta_initial > (*connection_points_pt)[0])
+      {
+       error_message
+       << "One of the specified connection points is out of the\n"
+       << "curviline limits. We found that the point ("
+       << (*connection_points_pt)[0] << ") is\n" << "less than the"
+       << "initial zeta value which is (" << zeta_initial
+       << ")."
+       << std::endl << std::endl;
+       f = true;
+      }
+
+     if (zeta_final < (*connection_points_pt)[n_connections-1])
+      {
+       error_message
+       << "One of the specified connection points is out of the\n"
+       << "curviline limits. We found that the point ("
+       << (*connection_points_pt)[n_connections-1] << ") is\n"
+       << "greater than the final zeta value which is ("
+       << zeta_final << ")." << std::endl << std::endl;
+       f = true;
+      }
+    }
+   else
+    {
+     if (zeta_initial < (*connection_points_pt)[0])
+      {
+       error_message
+       << "One of the specified connection points is out of the\n"
+       << "curviline limits. We found that the point ("
+       << (*connection_points_pt)[0] << ") is\n" << "greater than the"
+       << "initial zeta value which is (" << zeta_initial
+       << "). Remeber that the curviline was defined as reversed!!!"
+       << std::endl << std::endl;
+       f = true;
+      }
+
+     if (zeta_final > (*connection_points_pt)[n_connections-1])
+      {
+       error_message
+       << "One of the specified connection points is out of the\n"
+       << "curviline limits. We found that the point ("
+       << (*connection_points_pt)[n_connections-1] << ") is\n"
+       << "less than the final zeta value which is ("
+       << zeta_final << "). Remeber that the curviline was defined "
+       << "as reversed!!!" << std::endl << std::endl;
+       f = true;
+      }
+    }
+
+   if (f)
+    {
+     throw OomphLibError(error_message.str(),
+       "TriangleMesh::create_vertex_coordinates_for_polyline_connections()",
+       OOMPH_EXCEPTION_LOCATION);
+    }
+
+#endif
+
+   // Intrinsic coordinate along GeomObjects
+   Vector<double> zeta(1);
+
+   // Position vector to point on GeomObject
+   Vector<double> posn(2);
+
+   //How many segments do we want on this polyline?
+   unsigned n_seg = boundary_pt->nsegment();
+
+   // How many connection vertices have we already created
+   unsigned i_connection = 0;
+   Vector<double> zeta_connection(1);
+
+   // If we have more connection points than the generated
+   // by the number of segments then we have to change the
+   // number of segments and create all the vertices
+   // according to the connection points list
+   if (n_connections >= n_seg - 1)
+    {
+     std::ostringstream warning_message;
+     warning_message
+     << "The number of segments specified for the curviline with\n"
+     << "boundary id (" <<  boundary_pt->boundary_id() << ") is less "
+     << "(or equal) than the ones that will be\ngenerated by using "
+     << "the specified number of connection points.\n"
+     << "You specified (" << n_seg << ") segments but ("
+     << n_connections + 1 << ") segments\nwill be generated."
+     << std::endl;
+     OomphLibWarning(warning_message.str(),
+       "TriangleMesh::create_vertex_coordinates_for_polyline_connections()",
+       OOMPH_EXCEPTION_LOCATION);
+
+     // We have to explicitly change the number of segments
+     boundary_pt->nsegment() = n_connections + 1;
+     n_seg = boundary_pt->nsegment();
+     vertex_coord.resize(n_seg+1);
+
+     // Initial coordinate and initial values
+     zeta[0]= zeta_initial;
+     boundary_pt->geom_object_pt()->position(zeta, posn);
+     vertex_coord[0]=posn;
+
+     polygonal_vertex_arclength_info.resize(n_seg+1);
+     polygonal_vertex_arclength_info[0].first=0.0;
+     polygonal_vertex_arclength_info[0].second=zeta_initial;
+
+     //Loop over the n_connections points bounding the segments
+     for(i_connection = 0; i_connection < n_connections; i_connection++)
+      {
+
+       // Get the coordinates
+       zeta[0]= (*connection_points_pt)[i_connection];
+       boundary_pt->geom_object_pt()->position(zeta, posn);
+       vertex_coord[i_connection + 1] = posn;
+
+       // Bump up the polygonal arclength
+       polygonal_vertex_arclength_info[i_connection + 1].first=
+         polygonal_vertex_arclength_info[i_connection].first+
+         sqrt(pow(vertex_coord[i_connection + 1][0]-
+           vertex_coord[i_connection][0],2)+
+           pow(vertex_coord[i_connection + 1][1]-
+             vertex_coord[i_connection][1],2));
+       polygonal_vertex_arclength_info[i_connection + 1].second=zeta[0];
+
+      }
+
+     // Final coordinate and final values
+     zeta[0] = zeta_final;
+     boundary_pt->geom_object_pt()->position(zeta, posn);
+     vertex_coord[n_seg]=posn;
+
+     polygonal_vertex_arclength_info[n_seg].first=
+       polygonal_vertex_arclength_info[n_seg-1].first+
+       sqrt(pow(vertex_coord[n_seg][0]-vertex_coord[n_seg-1][0],2)+
+         pow(vertex_coord[n_seg][1]-vertex_coord[n_seg-1][1],2));
+     polygonal_vertex_arclength_info[n_seg].second = zeta_final;
+
+    }
+   else
+    {
+
+     // Total number of vertices
+     unsigned n_t_vertices = n_seg+1;
+     // Number of vertices left for creation
+     unsigned l_vertices = n_t_vertices;
+     // Total number of already created vertices
+     unsigned n_assigned_vertices = 0;
+
+     // Stores the distance between current vertices in the list
+     // Edge vertices + Connection points - 1
+     Vector<double> delta_z(2 + n_connections - 1);
+
+     std::list<double> zeta_values_pt;
+     zeta_values_pt.push_back(zeta_initial);
+     for (unsigned s = 0; s < n_connections; s++)
+      {
+       zeta_values_pt.push_back((*connection_points_pt)[s]);
+      }
+     zeta_values_pt.push_back(zeta_final);
+
+     l_vertices-= 2; // Edge vertices
+     l_vertices-= n_connections; // Connection points
+     n_assigned_vertices+= 2; // Edge vertices
+     n_assigned_vertices+= n_connections; // Connection points
+
+     // Vertices placed in equal zeta increments
+     if (!(boundary_pt->space_vertices_evenly_in_arclength()))
+      {
+       double local_zeta_initial;
+       double local_zeta_final;
+       double local_zeta_increment;
+       double local_zeta_insert;
+       // How many vertices for each section
+       unsigned local_n_vertices;
+
+       std::list<double>::iterator l_it = zeta_values_pt.begin();
+       std::list<double>::iterator r_it = zeta_values_pt.begin();
+       r_it++;
+
+       for (unsigned h = 0; r_it!=zeta_values_pt.end(); l_it++,r_it++,h++)
+        {
+         delta_z[h] = *r_it-*l_it;
+        }
+
+       l_it = r_it = zeta_values_pt.begin();
+       r_it++;
+
+       for (unsigned h = 0; r_it!=zeta_values_pt.end(); h++)
+        {
+         local_n_vertices =
+           ((double)n_t_vertices * delta_z[h]) /
+           std::fabs(zeta_final - zeta_initial);
+
+         local_zeta_initial = *l_it;
+         local_zeta_final = *r_it;
+         local_zeta_increment =
+           (local_zeta_final - local_zeta_initial) /
+           (double)(local_n_vertices + 1);
+
+         for (unsigned s=0; s<local_n_vertices;s++)
+          {
+           local_zeta_insert =
+             local_zeta_initial + local_zeta_increment*double(s+1);
+           zeta_values_pt.insert(r_it, local_zeta_insert);
+           n_assigned_vertices++;
+          }
+         // Moving to the next segment
+         l_it = r_it;
+         r_it++;
+
+        }
+
+       // Finishing it ...!!!
+#ifdef PARANOID
+       // Counting the vertices number and the total of
+       // assigned vertices values
+       unsigned s = zeta_values_pt.size();
+
+       if (s!=n_assigned_vertices)
+        {
+         error_message
+         << "The total number of assigned vertices is different from\n"
+         << "the number of elements in the z_values list. The number"
+         << "of\nelements in the z_values list is (" << s << ") but "
+         << "the number\n"
+         << "of assigned vertices is (" << n_assigned_vertices << ")."
+         << std::endl << std::endl;
+         throw OomphLibError(error_message.str(),
+         "TriangleMesh::create_vertex_coordinates_for_polyline_connections()",
+           OOMPH_EXCEPTION_LOCATION);
+        }
+#endif
+
+       vertex_coord.resize(n_assigned_vertices);
+       polygonal_vertex_arclength_info.resize(n_assigned_vertices);
+       polygonal_vertex_arclength_info[0].first=0.0;
+       polygonal_vertex_arclength_info[0].second=zeta_initial;
+
+       // Creating the vertices with the corresponding z_values
+       l_it = zeta_values_pt.begin();
+       for (unsigned s = 0; l_it!=zeta_values_pt.end(); s++,l_it++)
+        {
+         // Get the coordinates
+         zeta[0]= *l_it;
+         boundary_pt->geom_object_pt()->position(zeta, posn);
+         vertex_coord[s] = posn;
+
+         // Bump up the polygonal arclength
+         if (s>0)
+          {
+           polygonal_vertex_arclength_info[s].first=
+             polygonal_vertex_arclength_info[s-1].first+
+             sqrt(pow(vertex_coord[s][0]-vertex_coord[s-1][0],2)+
+               pow(vertex_coord[s][1]-vertex_coord[s-1][1],2));
+          }
+        }
+      }
+     // Vertices placed in equal increments in (approximate) arclength
+     else
+      {
+       // Compute the total arclength
+       // Number of sampling points to compute arclength and
+       // arclength increments
+       unsigned nsample_per_segment=100;
+       unsigned nsample=nsample_per_segment*n_seg;
+
+       // Work out start and increment
+       double zeta_increment=
+         std::fabs(zeta_final-zeta_initial)/(double(nsample));
+
+       if(boundary_pt->reversed())
+        {
+         zeta_increment=-zeta_increment;
+        }
+
+       // Get coordinate of first point
+       Vector<double> start_point(2);
+       zeta[0]=zeta_initial;
+       boundary_pt->geom_object_pt()->position(zeta,start_point);
+
+       // Storage for coordinates of end point
+       Vector<double> end_point(2);
+
+       // Compute total arclength
+       double total_arclength=0.0;
+       for (unsigned i=1;i<nsample;i++)
+        {
+         // Next point
+         zeta[0]+=zeta_increment;
+
+         // Get coordinate of end point
+         boundary_pt->geom_object_pt()->position(zeta,end_point);
+
+         // Increment arclength
+         total_arclength+=sqrt(pow(end_point[0]-start_point[0],2)+
+           pow(end_point[1]-start_point[1],2));
+
+         // Shift back
+         start_point=end_point;
+        }
+
+       double local_zeta_initial;
+       double local_zeta_final;
+       double local_zeta_increment;
+
+       // How many vertices per section
+       unsigned local_n_vertices;
+
+       std::list<double>::iterator l_it = zeta_values_pt.begin();
+       std::list<double>::iterator r_it = zeta_values_pt.begin();
+       r_it++;
+
+       for (unsigned h = 0; r_it!=zeta_values_pt.end(); h++)
+        {
+         // There is no need to move the r_it iterator since it is
+         // moved at the final of this loop
+         local_zeta_initial = *l_it;
+         local_zeta_final = *r_it;
+         local_zeta_increment =
+           (local_zeta_final - local_zeta_initial) /
+           (double)(nsample);
+
+         // Compute local arclength
+         // Get coordinate of first point
+         zeta[0]=local_zeta_initial;
+         boundary_pt->geom_object_pt()->position(zeta, start_point);
+
+         delta_z[h] = 0.0;
+
+         for (unsigned i=1;i<nsample;i++)
+          {
+           // Next point
+           zeta[0]+=local_zeta_increment;
+
+           // Get coordinate of end point
+           boundary_pt->geom_object_pt()->position(zeta, end_point);
+
+           // Increment arclength
+           delta_z[h]+=sqrt(pow(end_point[0]-start_point[0],2)+
+             pow(end_point[1]-start_point[1],2));
+
+           // Shift back
+           start_point=end_point;
+          }
+
+         local_n_vertices =
+           ((double)n_t_vertices * delta_z[h]) / (total_arclength);
+
+         // Desired arclength increment
+         double local_target_s_increment=
+           delta_z[h]/double(local_n_vertices+1);
+
+         // Get coordinate of first point again
+         zeta[0]=local_zeta_initial;
+         boundary_pt->geom_object_pt()->position(zeta, start_point);
+
+         // Start sampling point
+         unsigned i_lo=1;
+
+         //Loop over the n_seg-1 internal points bounding the segments
+         for(unsigned s=0;s<local_n_vertices;s++)
+          {
+           // Visit potentially all sample points until we've found
+           // the one at which we exceed the target arclength increment
+           double local_arclength_increment=0.0;
+           for (unsigned i=i_lo;i<nsample;i++)
+            //for (unsigned i=i_lo;i<nsample_per_segment;i++)
+            {
+             // Next point
+             zeta[0]+=local_zeta_increment;
+
+             // Get coordinate of end point
+             boundary_pt->geom_object_pt()->position(zeta, end_point);
+
+             // Increment arclength increment
+             local_arclength_increment+=
+               sqrt(pow(end_point[0]-start_point[0],2)+
+                 pow(end_point[1]-start_point[1],2));
+
+             // Shift back
+             start_point=end_point;
+
+             // Are we there yet?
+             if (local_arclength_increment>local_target_s_increment)
+              {
+               // Remember how far we've got
+               i_lo=i;
+
+               // And bail out
+               break;
+              }
+            }
+
+           zeta_values_pt.insert(r_it, zeta[0]);
+           n_assigned_vertices++;
+
+          }
+         // Moving to the next segments
+         l_it = r_it;
+         r_it++;
+        }
+
+       // Finishing it ... !!!
+#ifdef PARANOID
+       // Counting the vertices number and the total of
+       // assigned vertices values
+       unsigned h = zeta_values_pt.size();
+
+       if (h!=n_assigned_vertices)
+        {
+         error_message
+         << "The total number of assigned vertices is different from\n"
+         << "the number of elements in the z_values list. The number of\n"
+         << "elements in the z_values list is (" << h << ") but the number\n"
+         << "of assigned vertices is (" << n_assigned_vertices << ")."
+         << std::endl << std::endl;
+         throw OomphLibError(error_message.str(),
+         "TriangleMesh::create_vertex_coordinates_for_polyline_connections()",
+           OOMPH_EXCEPTION_LOCATION);
+        }
+#endif
+
+       vertex_coord.resize(n_assigned_vertices);
+       polygonal_vertex_arclength_info.resize(n_assigned_vertices);
+       polygonal_vertex_arclength_info[0].first=0.0;
+       polygonal_vertex_arclength_info[0].second=zeta_initial;
+
+       // Creating the vertices with the corresponding z_values
+       l_it = zeta_values_pt.begin();
+       for (unsigned s = 0; l_it!=zeta_values_pt.end(); s++,l_it++)
+        {
+         // Get the coordinates
+         zeta[0]= *l_it;
+         boundary_pt->geom_object_pt()->position(zeta, posn);
+         vertex_coord[s] = posn;
+
+         // Bump up the polygonal arclength
+         if (s>0)
+          {
+           polygonal_vertex_arclength_info[s].first=
+             polygonal_vertex_arclength_info[s-1].first+
+             sqrt(pow(vertex_coord[s][0]-vertex_coord[s-1][0],2)+
+               pow(vertex_coord[s][1]-vertex_coord[s-1][1],2));
+           polygonal_vertex_arclength_info[s].second=zeta[0];
+          }
+        }
+      } // Arclength uniformly spaced
+    } // Less number of insertion points than vertices
+  } // Function
+
   /// Boolean defining if Triangulateio object has been built or not
   bool Triangulateio_exists;
 
@@ -1236,15 +1700,31 @@ extern "C" {
   /// Polygon that defines outer boundaries
   TriangleMeshPolygon* Outer_boundary_pt;
   
-  /// Vector to polygons that define internal polygons
-  Vector<TriangleMeshInternalPolygon*> Internal_polygon_pt;
+  /// Vector of polygons that define internal polygons
+  Vector<TriangleMeshPolygon*> Internal_polygon_pt;
   
+  /// Vector of open polylines that define internal curves
+  Vector<TriangleMeshOpenCurve*> Internal_open_curve_pt;
+
   /// \short Storage for the geometric objects associated with any boundaries
   /// hierher should this be a map?
   Vector<GeomObject*> Boundary_geom_object_pt;
 
-  /// Storage of indices of any inner holes that should be filled
-  std::set<unsigned> Fill_index;
+  /// Storage for extra coordinates for holes
+  Vector<Vector<double> > Extra_holes_coordinates_pt;
+
+  /// Storage for extra coordinates for regions
+  Vector<Vector<double> > Regions_coordinates_pt;
+
+  /// A map that stores the associated curve section of the specified
+  /// boundary id
+  std::map<unsigned, TriangleMeshCurveSection*> Boundary_curve_section_pt;
+
+  /// A map that stores the vertices that receive connections, they
+  /// are identified by the boundary number that receive the connection
+  /// This is necessary for not erasing them on the adaptation process,
+  /// specifically for the un-refinement process
+  std::map<unsigned, std::set<Vector<double> > > Boundary_connections_pt;
 
   /// Storage for elements adjacent to a boundary in a particular region
   Vector<std::map<unsigned,Vector<FiniteElement*> > > 
@@ -1275,13 +1755,589 @@ extern "C" {
   /// Boolean flag to indicate whether to use attributes or not
   /// (required for multidomain meshes
   bool Use_attributes;
-  
+
+protected:
+
+  // \short A set that contains the curve sections created by this object
+  /// therefore it is necessary to free their associated memory
+  std::set<TriangleMeshCurveSection*> Free_curve_section_pt;
+
+  // \short A set that contains the polygons created by this object
+  /// therefore it is necessary to free their associated memory
+  std::set<TriangleMeshPolygon*> Free_polygon_pt;
+
+  // \short A set that contains the open curves created by this
+  /// object therefore it is necessary to free their associated memory
+  std::set<TriangleMeshOpenCurve*> Free_open_curve_pt;
+
+  /// \short Helper function for passing the connection information
+  // from the input curve(polyline or curviline) to the output polyline
+  void compute_connection_information(
+      TriangleMeshCurveSection* input_curve_pt,
+      TriangleMeshCurveSection* output_curve_pt)
+  {
+   // Pass vertices connection information
+
+   // Initial vertex
+   if (input_curve_pt->is_initial_vertex_connected())
+    {
+     output_curve_pt->set_initial_vertex_connected();
+
+     output_curve_pt->initial_vertex_connected_bnd_id() =
+       input_curve_pt->initial_vertex_connected_bnd_id();
+
+     // We need to know if we have to compute the vertex number or
+     // if we need just to copy it
+     if (input_curve_pt->is_initial_vertex_connected_to_curviline())
+      {
+       double initial_s_connection =
+         input_curve_pt->initial_s_connection_value();
+
+       unsigned bnd_id =
+         output_curve_pt->initial_vertex_connected_bnd_id();
+
+       double s_tolerance =
+         input_curve_pt->tolerance_for_s_connection();
+
+       output_curve_pt->initial_vertex_connected_n_vertex() =
+         get_associated_vertex_to_svalue(
+           initial_s_connection, bnd_id, s_tolerance);
+
+       // The output polyline is not longer connected to a curviline because
+       // we will be using the polyline representation of the curviline
+       output_curve_pt->unset_initial_vertex_connected_to_curviline();
+
+      }
+     else
+      {
+       output_curve_pt->initial_vertex_connected_n_vertex() =
+         input_curve_pt->initial_vertex_connected_n_vertex();
+
+      }
+
+     // Get the initial vertex coordinates
+     Vector<double> initial_vertex;
+     output_curve_pt->initial_vertex_coordinate(initial_vertex);
+
+     // Boundary id to which the curve is connected
+     unsigned bnd_id = output_curve_pt->initial_vertex_connected_bnd_id();
+
+     // Establish the vertex coordinates as untouchable for the adaptation
+     // process. It means that un-refinement can not take off the vertices
+     // that receive connections
+     this->Boundary_connections_pt[bnd_id].insert(initial_vertex);
+
+    }
+
+   // Final vertex
+   if (input_curve_pt->is_final_vertex_connected())
+    {
+     output_curve_pt->set_final_vertex_connected();
+
+     output_curve_pt->final_vertex_connected_bnd_id() =
+       input_curve_pt->final_vertex_connected_bnd_id();
+
+     // We need to know if we have to compute the vertex number or
+     // if we need just to copy it
+     if (input_curve_pt->is_final_vertex_connected_to_curviline())
+      {
+       double final_s_connection =
+         input_curve_pt->final_s_connection_value();
+
+       unsigned bnd_id =
+         input_curve_pt->final_vertex_connected_bnd_id();
+
+       double s_tolerance =
+         input_curve_pt->tolerance_for_s_connection();
+
+       output_curve_pt->final_vertex_connected_n_vertex() =
+         get_associated_vertex_to_svalue(
+         final_s_connection, bnd_id, s_tolerance);
+
+       // The output polyline is not longer connected to a curviline because
+       // we will be using the polyline representation of the curviline
+       output_curve_pt->unset_final_vertex_connected_to_curviline();
+      }
+     else
+      {
+       output_curve_pt->final_vertex_connected_n_vertex() =
+         input_curve_pt->final_vertex_connected_n_vertex();
+
+      }
+
+     // Get the final vertex coordinates
+     Vector<double> final_vertex;
+     output_curve_pt->final_vertex_coordinate(final_vertex);
+
+     // Boundary id to which the curve is connected
+     unsigned bnd_id = output_curve_pt->final_vertex_connected_bnd_id();
+
+     // Establish the vertex coordinates as untouchable for the adaptation
+     // process. It means that un-refinement can not take off the vertices
+     // that receive connections
+     this->Boundary_connections_pt[bnd_id].insert(final_vertex);
+
+    }
+
+  }
+
+private:
+
+  // \short Helper function that creates the associated polyline
+  /// representation for curvilines
+  TriangleMeshCurveSection *curviline_to_polyline(
+      TriangleMeshCurviLine* &curviline_pt,  unsigned &bnd_id)
+  {
+
+   // Create vertex coordinates for polygonal representation
+   Vector<Vector<double> > bound;
+   Vector<std::pair<double,double> > polygonal_vertex_arclength;
+
+   if (curviline_pt->are_there_connection_points())
+    {
+     create_vertex_coordinates_for_polyline_connections(
+       curviline_pt, bound, polygonal_vertex_arclength);
+    }
+   else
+    {
+     create_vertex_coordinates_for_polyline_no_connections(
+       curviline_pt, bound, polygonal_vertex_arclength);
+    }
+
+   // Store the vertex-arclength information
+   Polygonal_vertex_arclength_info[bnd_id]=polygonal_vertex_arclength;
+
+   // Build associated polyline
+   return new TriangleMeshPolyLine(bound, bnd_id);
+
+  }
+
+  /// \short Get the associated vertex to the given s value by looking to
+  /// the list of s values created when changing from curviline to polyline
+  unsigned get_associated_vertex_to_svalue(
+      double &target_s_value,
+      unsigned &bnd_id,
+      double &s_tolerance = 1.0e-14)
+  {
+   // Create a pointer to the list of s coordinates and arclength values
+   // associated with a vertex
+    Vector<std::pair<double, double> > *vertex_info =
+      &Polygonal_vertex_arclength_info[bnd_id];
+
+    // Total vertex number
+    unsigned vector_size = vertex_info->size();
+
+    // Counter for current vertex number
+    unsigned n_vertex = 0;
+
+    // Find the associated value to the given s value
+    do {
+        // Store the current zeta value
+        double s = (*vertex_info)[n_vertex].second;
+
+        // When find it save the vertex number and return it
+        if (std::fabs(s - target_s_value) < s_tolerance)
+         {
+          break;
+         }
+
+        n_vertex++;
+
+    }while(n_vertex < vector_size);
+
+#ifdef PARANOID
+    if (n_vertex >= vector_size)
+      {
+        std::ostringstream error_message;
+        error_message
+        << "Could not find the associated vertex number in\n"
+        << "boundary " << bnd_id << " with the given s\n"
+        << "connection value (" << target_s_value << ") using\n"
+        << "this tolerance: " << s_tolerance << std::endl;
+        throw OomphLibError(error_message.str(),
+            "TriangleMesh::get_associated_vertex_to_svalue()",
+            OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+
+    return n_vertex;
+
+  }
+
+  // \short Helper function that returns a polygon representation for
+  /// the given closed curve, it also computes the maximum boundary id of
+  /// the constituent curves.
+  /// If the TriangleMeshClosedCurve is already a TriangleMeshPolygon
+  /// we simply return a pointer to it. Otherwise a new TrilangleMeshPolygon
+  /// is created -- this is deleted automatically when the TriangleMesh
+  /// destructor is called, so no external book-keeping is required.
+  TriangleMeshPolygon *closed_curve_to_polygon_helper(
+    TriangleMeshClosedCurve* closed_curve_pt,
+    unsigned &max_bnd_id_local)
+  {
+   // How many separate boundaries do we have
+   unsigned nb = closed_curve_pt->ncurve_section();
+
+#ifdef PARANOID
+   if (nb<2)
+    {
+     std::ostringstream error_message;
+     error_message
+     << "TriangleMeshClosedCurve that defines outer boundary\n"
+     << "must be made up of at least two "
+     << "TriangleMeshCurveSections\n"
+     << "to allow the automatic set up boundary coordinates.\n"
+     << "Yours only has (" << nb << ")" << std::endl;
+     throw OomphLibError(error_message.str(),
+       "TriangleMesh::closed_curve_to_polygon_helper()",
+       OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+   // If the closed curve is already a polygon it is not necessary
+   // to create a new one, just return it!!!
+   TriangleMeshPolygon *out_polygon_pt =
+     dynamic_cast<TriangleMeshPolygon*>(closed_curve_pt);
+   if (out_polygon_pt!=0)
+    {
+     for (unsigned b=0;b<nb;b++)
+      {
+       // Boundary id
+       unsigned bnd_id =
+         out_polygon_pt->curve_section_pt(b)->boundary_id();
+
+       // Updates bnd_id<--->curve section map
+       Boundary_curve_section_pt[bnd_id] =
+         out_polygon_pt->curve_section_pt(b);
+
+       // Keep track...
+       if (bnd_id>max_bnd_id_local)
+        {
+         max_bnd_id_local=bnd_id;
+        }
+      }
+
+     return out_polygon_pt;
+
+    }
+   else // It wasn't a polygon, we need to create a new one
+    {
+     // Provide storage for accompanying polylines
+     Vector<TriangleMeshCurveSection*> boundary_polyline_pt(nb);
+
+     // Loop over boundaries that make up this boundary
+     for (unsigned b=0;b<nb;b++)
+      {
+       // Get pointer to the curve segment boundary that makes up
+       // this part of the boundary
+       TriangleMeshCurviLine *curviline_pt =
+         dynamic_cast<TriangleMeshCurviLine*>(
+           closed_curve_pt->curve_section_pt(b));
+
+       TriangleMeshPolyLine *polyline_pt =
+         dynamic_cast<TriangleMeshPolyLine*>(
+           closed_curve_pt->curve_section_pt(b));
+
+       if (curviline_pt != 0)
+        {
+         // Boundary id
+         unsigned bnd_id = curviline_pt->boundary_id();
+
+         // Build associated polyline
+         boundary_polyline_pt[b] =
+           curviline_to_polyline(curviline_pt, bnd_id);
+
+         // Updates bnd_id<--->curve section map
+         Boundary_curve_section_pt[bnd_id] = boundary_polyline_pt[b];
+
+         // Keep track of curve sections that need to be deleted!!!
+         Free_curve_section_pt.insert(boundary_polyline_pt[b]);
+
+         // Keep track...
+         if (bnd_id>max_bnd_id_local)
+          {
+           max_bnd_id_local=bnd_id;
+          }
+
+        }
+       else if (polyline_pt != 0)
+        {
+         // Boundary id
+         unsigned bnd_id=polyline_pt->boundary_id();
+
+         // Pass the pointer of the already existing polyline
+         boundary_polyline_pt[b] = polyline_pt;
+
+         // Updates bnd_id<--->curve section map
+         Boundary_curve_section_pt[bnd_id] = boundary_polyline_pt[b];
+
+         // Keep track...
+         if (bnd_id>max_bnd_id_local)
+          {
+           max_bnd_id_local=bnd_id;
+          }
+
+        }
+       else
+        {
+         std::ostringstream error_stream;
+         error_stream
+         << "The 'curve_segment' is not a curviline neither a\n "
+         << "polyline: What is it?\n"
+         << std::endl;
+         throw OomphLibError(
+           error_stream.str(),
+           "TriangleMesh::closed_curve_to_polygon_helper()",
+           OOMPH_EXCEPTION_LOCATION);
+        }
+
+      } //end of loop over boundaries
+
+     // Create a new polygon by using the new created polylines
+     TriangleMeshPolygon *output_polygon_pt =
+       new TriangleMeshPolygon(boundary_polyline_pt,
+         closed_curve_pt->internal_point());
+
+     // Keep track of new created polygons that need to be deleted!!!
+     Free_polygon_pt.insert(output_polygon_pt);
+
+     // Pass on refinement information
+     output_polygon_pt->set_polyline_refinement_tolerance(
+       closed_curve_pt->polyline_refinement_tolerance());
+     output_polygon_pt->set_polyline_unrefinement_tolerance(
+       closed_curve_pt->polyline_unrefinement_tolerance());
+
+     return output_polygon_pt;
+
+    }
+
+  }
+
+  // \short Helper function that creates and returns an open curve with
+  /// the polyline representation of its constituent curve sections. The
+  /// new created open curve is deleted when the TriangleMesh destructor
+  /// is called
+  TriangleMeshOpenCurve *create_open_curve_with_polyline_helper(
+    TriangleMeshOpenCurve* open_curve_pt,
+    unsigned &max_bnd_id_local)
+  {
+   unsigned nb=open_curve_pt->ncurve_section();
+
+   // Provide storage for accompanying polylines
+   Vector<TriangleMeshCurveSection*> boundary_polyline_pt(nb);
+
+   //Loop over the number of curve sections on the open curve
+   for (unsigned i = 0; i < nb; i++)
+    {
+     // Get pointer to the curve segment boundary that makes up
+     // this part of the boundary
+     TriangleMeshCurviLine *curviline_pt =
+       dynamic_cast<TriangleMeshCurviLine*>(
+         open_curve_pt->curve_section_pt(i));
+     TriangleMeshPolyLine *polyline_pt =
+       dynamic_cast<TriangleMeshPolyLine*>(
+         open_curve_pt->curve_section_pt(i));
+
+     if (curviline_pt != 0)
+      {
+       // Boundary id
+       unsigned bnd_id = curviline_pt->boundary_id();
+
+       // Build associated polyline
+       boundary_polyline_pt[i] =
+         curviline_to_polyline(curviline_pt, bnd_id);
+
+       // Pass the connection information to the polyline representation
+       compute_connection_information(
+         curviline_pt, boundary_polyline_pt[i]);
+
+       // Updates bnd_id<--->curve section map
+       Boundary_curve_section_pt[bnd_id] = boundary_polyline_pt[i];
+
+       // Keep track of curve sections that need to be deleted!!!
+       Free_curve_section_pt.insert(boundary_polyline_pt[i]);
+
+       // Keep track...
+       if (bnd_id>max_bnd_id_local)
+        {
+         max_bnd_id_local=bnd_id;
+        }
+
+      }
+     else if (polyline_pt != 0)
+      {
+       // Boundary id
+       unsigned bnd_id=polyline_pt->boundary_id();
+
+       // Storage pointer
+       boundary_polyline_pt[i] = polyline_pt;
+
+       // Pass the connection information to the polyline representation
+       compute_connection_information(
+         polyline_pt, boundary_polyline_pt[i]);
+
+       // Updates bnd_id<--->curve section map
+       Boundary_curve_section_pt[bnd_id] = boundary_polyline_pt[i];
+
+       // Keep track...
+       if (bnd_id>max_bnd_id_local)
+        {
+         max_bnd_id_local=bnd_id;
+        }
+
+      }
+     else
+      {
+       std::ostringstream error_stream;
+       error_stream
+       << "The 'curve_segment' (open) is not a curviline neither a\n "
+       << "polyline: What is it?\n"
+       << std::endl;
+       throw OomphLibError(error_stream.str(),
+         "TriangleMesh::create_open_curve_with_polyline_helper()",
+         OOMPH_EXCEPTION_LOCATION);
+      }
+
+    } // end of loop over boundaries
+
+   // Create open curve with polylines boundaries
+   TriangleMeshOpenCurve *output_open_polyline_pt =
+     new TriangleMeshOpenCurve(boundary_polyline_pt);
+
+   // Keep track of open polylines that need to be deleted!!!
+   Free_open_curve_pt.insert(output_open_polyline_pt);
+
+   // Pass on refinement information
+   output_open_polyline_pt->set_polyline_refinement_tolerance(
+     open_curve_pt->polyline_refinement_tolerance());
+   output_open_polyline_pt->set_polyline_unrefinement_tolerance(
+     open_curve_pt->polyline_unrefinement_tolerance());
+
+   return output_open_polyline_pt;
+
+  }
+
+  // \short Stores the geometric objects associated to the
+  /// curve sections that compound the closed curve. It also
+  /// stores the limits defined by these geometric objects
+  void set_geom_objects_and_coordinate_limits_for_close_curve(
+    TriangleMeshClosedCurve* input_closed_curve_pt)
+  {
+
+   unsigned nb=input_closed_curve_pt->ncurve_section();
+
+#ifdef PARANOID
+   if (nb<2)
+    {
+     std::ostringstream error_message;
+     error_message
+     << "TriangleMeshCurve that defines closed boundary\n"
+     << "must be made up of at least two "
+     << "TriangleMeshCurveSection\n"
+     << "to allow the automatic set up boundary coordinates.\n"
+     << "Yours only has " << nb << std::endl;
+     throw OomphLibError(error_message.str(),
+       "TriangleMesh::set_geom_objects_and_coordinate_limits_on_close_curve()",
+       OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+   // TODO: Used for the ImmersedRigidBodyTriangleMeshPolygon objects only
+   ImmersedRigidBodyTriangleMeshPolygon* bound_geom_obj_pt
+    = dynamic_cast<ImmersedRigidBodyTriangleMeshPolygon*>(
+      input_closed_curve_pt);
+
+   //If cast successful set up the coordinates
+   if(bound_geom_obj_pt!=0)
+    {
+     unsigned n_poly = input_closed_curve_pt->ncurve_section();
+     for(unsigned p=0;p<n_poly;p++)
+      {
+       //Read out the index of the boundary from the polyline
+       unsigned b_index =
+         input_closed_curve_pt->curve_section_pt(p)->boundary_id();
+
+       //Set the geometric object
+       Boundary_geom_object_pt[b_index] = bound_geom_obj_pt;
+
+       //The coordinates along each polyline boundary are scaled to
+       //of unit length so the total coordinate limits are simply
+       //(p,p+1)
+       Boundary_coordinate_limits[b_index].resize(2);
+       Boundary_coordinate_limits[b_index][0] = p;
+       Boundary_coordinate_limits[b_index][1] = p + 1.0;
+      }
+    }
+   else
+    {
+     // Loop over curve sections that make up this boundary
+     for (unsigned b=0;b<nb;b++)
+      {
+       TriangleMeshCurviLine* curviline_pt =
+         dynamic_cast<TriangleMeshCurviLine*>
+       (input_closed_curve_pt->curve_section_pt(b));
+
+       if (curviline_pt != 0)
+        {
+         //Read the values of the limiting coordinates
+         Vector<double> zeta_bound(2);
+         zeta_bound[0] = curviline_pt->zeta_start();
+         zeta_bound[1] = curviline_pt->zeta_end();
+
+         // Boundary id
+         unsigned bnd_id=curviline_pt->boundary_id();
+
+         //Set the boundary geometric object and limits
+         Boundary_geom_object_pt[bnd_id] =
+           curviline_pt->geom_object_pt();
+         Boundary_coordinate_limits[bnd_id] = zeta_bound;
+        }
+      } // for
+    } // else
+  } // function
+
+  // \short Stores the geometric objects associated to the
+  /// curve sections that compound the open curve. It also
+  /// stores the limits defined by these geometric objects
+  void set_geom_objects_and_coordinate_limits_for_open_curve(
+    TriangleMeshOpenCurve* input_open_curve_pt)
+  {
+   unsigned nb=input_open_curve_pt->ncurve_section();
+
+   // Loop over curve sections that make up this boundary
+   for (unsigned b=0;b<nb;b++)
+    {
+
+     TriangleMeshCurviLine* curviline_pt =
+       dynamic_cast<TriangleMeshCurviLine*>
+     (input_open_curve_pt->curve_section_pt(b));
+
+     if (curviline_pt != 0)
+      {
+       //Read the values of the limiting coordinates
+       Vector<double> zeta_bound(2);
+       zeta_bound[0] = curviline_pt->zeta_start();
+       zeta_bound[1] = curviline_pt->zeta_end();
+
+       // Boundary id
+       unsigned bnd_id=curviline_pt->boundary_id();
+
+       //Set the boundary geometric object and limits
+       Boundary_geom_object_pt[bnd_id] =
+         curviline_pt->geom_object_pt();
+       Boundary_coordinate_limits[bnd_id] = zeta_bound;
+      }
+    } // for
+  } // function
+
  };
 
 
 //////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
+
+
 
 #ifdef OOMPH_HAS_TRIANGLE_LIB  
  
@@ -1301,35 +2357,23 @@ template<class ELEMENT>
    /// to satisfy volume constraints)
    typedef void (*MeshUpdateFctPt)(Mesh* mesh_pt);
 
-    /// \short Build mesh, based on closed curve that specifies
-    /// the outer boundary of the domain and any number of internal
-    /// closed curves, specified by TriangleMeshInternalClosedCurves. Specify
-    /// target area for uniform element size.
-    RefineableTriangleMesh(
-     TriangleMeshClosedCurve* &outer_boundary_pt,
-     Vector<TriangleMeshInternalClosedCurve*>& internal_closed_curve_pt,
-     const double &element_area,
-     TimeStepper* time_stepper_pt=&Mesh::Default_TimeStepper,
-     std::set<unsigned> &fill_index=TriangleMesh<ELEMENT>::Empty_fill_index,
-     const bool &use_attributes=false) :
-     TriangleMesh<ELEMENT>(outer_boundary_pt,
-                           internal_closed_curve_pt,
-                           element_area,
-                           time_stepper_pt,
-                           fill_index,
-                           use_attributes)
-     {
-      // Initialise the data associated with adaptation
-      initialise_adaptation_data();
-     }
+   /// \short Build mesh, based on the specifications on
+   /// TriangleMeshParameters
+   RefineableTriangleMesh(
+     TriangleMeshParameters &triangle_mesh_parameters)
+   : TriangleMesh<ELEMENT>(triangle_mesh_parameters)
+      {
+        // Initialise the data associated with adaptation
+        initialise_adaptation_data();
+      }
 
    /// \short Build mesh from specified triangulation and
    /// associated target areas for elements in it
    RefineableTriangleMesh(const Vector<double> &target_area,
                           TriangulateIO& triangulate_io,
                           TimeStepper* time_stepper_pt=
-                          &Mesh::Default_TimeStepper,
-                          const bool &use_attributes=false)  
+                              &Mesh::Default_TimeStepper,
+                          const bool &use_attributes=false)
     {
      // Initialise the data associated with adaptation
      initialise_adaptation_data();
@@ -1358,7 +2402,7 @@ template<class ELEMENT>
      // Convert to a *char required by the triangulate function
      char triswitches[100];
      sprintf(triswitches,"%s",input_string_stream.str().c_str());
-     
+
      // Build triangulateio refined object
      triangulate(triswitches, &triangle_refine, &this->Triangulateio, 0);       
      // Build scaffold
@@ -1469,7 +2513,41 @@ template<class ELEMENT>
    }
 
     protected:
-   
+
+   /// \short Helper function that performs the unrefinement process
+   /// on the specified boundary by using the provided vertices
+   /// representation. Optional boolean is used to run it as test only (if
+   /// true is specified as input) in which case vertex coordinates aren't
+   /// actually modified. Returned boolean indicates if polyline was (or
+   /// would have been -- if called with check_only=false) changed.
+   bool unrefine_boundary(const unsigned &b,
+                          Vector<Vector<double> > &vector_bnd_vertices,
+                          double &unrefinement_tolerance,
+                          const bool &check_only = false);
+
+   /// \short Helper function that performs the refinement process
+   /// on the specified boundary by using the provided vertices
+   /// representation. Optional boolean is used to run it as test only (if
+   /// true is specified as input) in which case vertex coordinates aren't
+   /// actually modified. Returned boolean indicates if polyline was (or
+   /// would have been -- if called with check_only=false) changed.
+   bool refine_boundary(Mesh* face_mesh_pt,
+                        Vector<Vector<double> > &vector_bnd_vertices,
+                        double &refinement_tolerance,
+                        const bool &check_only = false);
+
+   /// \short Computes the associated vertex number on the destination
+   /// boundary
+   bool get_connected_vertex_number_on_dst_boundary(
+     Vector<double> &vertex_coordinates,
+     const unsigned &dst_b_id, unsigned &vertex_number);
+
+   /// \short Restore the connections on the specific internal boundary
+   /// They could be change on the vertices numbering when adding
+   /// (refinement) or erasing (unrefinement) nodes (vertices)
+   void restore_connections_on_internal_boundary(
+     TriangleMeshPolyLine* polyline_pt);
+
    /// \short Helper function that updates the input polygon's PSLG
    /// by using the end-points of elements from FaceMesh(es) that are
    /// constructed for the boundaries associated with the segments of the
@@ -1480,6 +2558,17 @@ template<class ELEMENT>
    bool update_polygon_using_face_mesh(TriangleMeshPolygon* polygon_pt,
                                        const bool& check_only=false);
    
+   /// \short Helper function that updates the input open curve by using
+   /// end-points of elements from FaceMesh(es) that are constructed for the
+   /// boundaries associated with the polylines. Optional boolean is used to
+   /// run it as test only (if true is specified as input) in which case the
+   /// polylines are not actually modified. Returned boolean indicates if
+   /// polylines were (or would have been -- if called with check_only=false)
+   /// changed.
+   bool update_open_curve_using_face_mesh(
+     TriangleMeshOpenCurve* open_polyline_pt,
+     const bool& check_only=false);
+
    /// \short Generate a new PSLG representation of the inner hole
    /// boundaries. Optional boolean is used to run it as test only (if 
    /// true is specified as input) in which case PSLG isn't actually
@@ -1493,41 +2582,65 @@ template<class ELEMENT>
   void snap_nodes_onto_boundary(RefineableTriangleMesh<ELEMENT>* &new_mesh_pt,
                                 const unsigned &b);
  
+  /// \short Helper function
+  /// Creates an unsorted face mesh representation from the specified
+  /// boundary id. It means that the elements are not sorted along the
+  /// boundary
+  void create_unsorted_face_mesh_representation(
+      const unsigned &boundary_id,
+      Mesh* face_mesh_pt);
+
+  /// \short Helper function
+  /// Creates a sorted face mesh representation of the specified PolyLine
+  /// It means that the elements are sorted along the boundary
+  /// It also returns a map that indicated the inverted elements
+  void create_sorted_face_mesh_representation(
+      const unsigned &boundary_id,
+      Mesh* face_mesh_pt,
+      std::map<FiniteElement*, bool> &is_inverted,
+      bool &inverted_face_mesh);
+
   /// \short Helper function to construct face mesh representation of all 
   /// polylines, possibly with segments re-distributed between polylines 
   /// to maintain an appxroximately even sub-division of the polygon
   void get_face_mesh_representation(TriangleMeshPolygon* polygon_pt,
                                     Vector<Mesh*>& face_mesh_pt);
  
-   /// Helper function to initialise data associated with adaptation
-   void initialise_adaptation_data()
-   {
-    // Boolean flag to choose method for transfer of target areas
-    // between meshes: Bin (fast but more diffusive; false; default)
-    // or projection (slow; true)
-    this->Do_area_transfer_by_projection=false;
-    
-    // Number of bins in the x-direction
-    // when transferring target areas by bin method
-    this->Nbin_x_for_area_transfer=100;
-    
-    // Number of bins in the y-direction
-    // when transferring target areas by bin method
-    this->Nbin_y_for_area_transfer=100;
+  /// \short Helper function to construct face mesh representation of
+  /// open curves
+  void get_face_mesh_representation(
+    TriangleMeshOpenCurve* open_polyline_pt,
+    Vector<Mesh*>& face_mesh_pt);
 
-    // Set max and min targets for adaptation
-    this->Max_element_size=1.0;
-    this->Min_element_size=0.001;
-    this->Min_permitted_angle=15.0;
+  /// Helper function to initialise data associated with adaptation
+  void initialise_adaptation_data()
+  {
+   // Boolean flag to choose method for transfer of target areas
+   // between meshes: Bin (fast but more diffusive; false; default)
+   // or projection (slow; true)
+   this->Do_area_transfer_by_projection=false;
+
+   // Number of bins in the x-direction
+   // when transferring target areas by bin method
+   this->Nbin_x_for_area_transfer=100;
+
+   // Number of bins in the y-direction
+   // when transferring target areas by bin method
+   this->Nbin_y_for_area_transfer=100;
+
+   // Set max and min targets for adaptation
+   this->Max_element_size=1.0;
+   this->Min_element_size=0.001;
+   this->Min_permitted_angle=15.0;
 
 
-    // Initialise function pointer to function that updates the 
-    // mesh following the snapping of boundary nodes to the
-    // boundaries (e.g. to move boundary nodes very slightly 
-    // to satisfy volume constraints)
-    Mesh_update_fct_pt=0;
+   // Initialise function pointer to function that updates the
+   // mesh following the snapping of boundary nodes to the
+   // boundaries (e.g. to move boundary nodes very slightly
+   // to satisfy volume constraints)
+   Mesh_update_fct_pt=0;
 
-   }
+  }
    
    /// \short Build a new TriangulateIO object from previous TriangulateIO
    /// based on target area for each element
@@ -1673,29 +2786,20 @@ template<class ELEMENT>
   {
    
     public:
-   
-  /// \short Build mesh, based on closed curve that specifies
-  /// the outer boundary of the domain and any number of internal
-  /// clsed curves. Specify target area for uniform element size.
-   SolidTriangleMesh(
-    TriangleMeshClosedCurve* &outer_boundary_pt,
-    Vector<TriangleMeshInternalClosedCurve*>& internal_closed_curve_pt,
-    const double &element_area,
-    TimeStepper* time_stepper_pt=&Mesh::Default_TimeStepper,
-    std::set<unsigned> &fill_index=TriangleMesh<ELEMENT>::Empty_fill_index,
-    const bool &use_attributes=false) :
-    TriangleMesh<ELEMENT>(outer_boundary_pt,
-                          internal_closed_curve_pt,
-                          element_area,
-                          time_stepper_pt,
-                          fill_index,
-                          use_attributes)
-    {
-     //Assign the Lagrangian coordinates
-     set_lagrangian_nodal_coordinates();
-    }
-    
-    
+
+     /// \short Build mesh, based on the specifications on
+     /// TriangleMeshParameters
+     SolidTriangleMesh(
+       TriangleMeshParameters &triangle_mesh_parameters)
+     : TriangleMesh<ELEMENT>(triangle_mesh_parameters)
+       {
+         //Assign the Lagrangian coordinates
+         set_lagrangian_nodal_coordinates();
+       }
+
+     /// Empty Destructor
+     virtual ~SolidTriangleMesh() { }
+
   };
 
 #endif
@@ -1704,54 +2808,36 @@ template<class ELEMENT>
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 
-#ifdef OOMPH_HAS_TRIANGLE_LIB  
+#ifdef OOMPH_HAS_TRIANGLE_LIB
 
 //=========================================================================
 // Unstructured refineable Triangle Mesh upgraded to solid mesh
 //=========================================================================
  template<class ELEMENT>
-  class RefineableSolidTriangleMesh : 
+  class RefineableSolidTriangleMesh :
 public virtual RefineableTriangleMesh<ELEMENT>,
  public virtual SolidMesh
  {
-  
+
    public:
-  
-  /// \short Build mesh, based on closed curve that specifies
-  /// the outer boundary of the domain and any number of internal
-  /// closed curves. Specify target area for uniform element size.
+
+  /// \short Build mesh, based on the specifications on
+  /// TriangleMeshParameters
   RefineableSolidTriangleMesh(
-   TriangleMeshClosedCurve* &outer_boundary_pt,
-   Vector<TriangleMeshInternalClosedCurve*>& internal_closed_curve_pt,
-   const double &element_area,
-   TimeStepper* time_stepper_pt=&Mesh::Default_TimeStepper,
-   std::set<unsigned> &fill_index=TriangleMesh<ELEMENT>::Empty_fill_index,
-   const bool &use_attributes=false) :
-   TriangleMesh<ELEMENT>(outer_boundary_pt,
-                         internal_closed_curve_pt,
-                         element_area,
-                         time_stepper_pt,
-                         fill_index,
-                         use_attributes),
-   RefineableTriangleMesh<ELEMENT>(outer_boundary_pt,
-                                   internal_closed_curve_pt,
-                                   element_area,
-                                   time_stepper_pt,
-                                   fill_index,
-                                   use_attributes)
+    TriangleMeshParameters &triangle_mesh_parameters)
+  : TriangleMesh<ELEMENT>(triangle_mesh_parameters),
+    RefineableTriangleMesh<ELEMENT>(triangle_mesh_parameters)
     {
-     //Assign the Lagrangian coordinates
-     set_lagrangian_nodal_coordinates();
+      //Assign the Lagrangian coordinates
+      set_lagrangian_nodal_coordinates();
     }
-   
-   
    
    /// \short Build mesh from specified triangulation and
    /// associated target areas for elements in it.
    RefineableSolidTriangleMesh(const Vector<double> &target_area,
                                TriangulateIO& triangulate_io,
                                TimeStepper* time_stepper_pt=
-                               &Mesh::Default_TimeStepper,
+                                   &Mesh::Default_TimeStepper,
                                const bool &use_attributes=false)  :
     RefineableTriangleMesh<ELEMENT>(target_area,
                                     triangulate_io,
@@ -1767,7 +2853,7 @@ public virtual RefineableTriangleMesh<ELEMENT>,
     
  };
 
-#endif
+#endif // #ifdef OOMPH_HAS_TRIANGLE_LIB
 
 }
 

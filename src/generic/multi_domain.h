@@ -375,6 +375,14 @@ namespace Multi_domain_functions
                                       Problem* problem_pt,
                                       const unsigned& interaction_index);
 
+  // hierher vector based version
+  /// Creates external (halo) elements on the loop process based on the
+  /// information received from each locate_zeta call on other processes
+  template<class EXT_ELEMENT>
+  void create_external_halo_elements
+  (int& iproc, const Vector<Mesh*>& mesh_pt, Mesh* const &external_mesh_pt,
+   Problem* problem_pt, const unsigned& interaction_index);
+
   // Helper functions for external haloed node identification
 
 

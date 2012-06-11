@@ -273,7 +273,7 @@ private:
  RefineableSolidTriangleMesh<ELEMENT>* Fluid_mesh_pt;
  
  /// Triangle mesh polygon for outer boundary 
- TriangleMeshPolygon* Outer_boundary_polyline_pt; 
+ TriangleMeshPolygon* Outer_boundary_polygon_pt;
 
  /// Mesh of drag elements
  Vector<Mesh*> Drag_mesh_pt;
@@ -334,7 +334,7 @@ UnstructuredImmersedEllipseProblem()
  //--------------------------------------------------------------
  // four separate polyline segments
  //---------------------------------
- Vector<TriangleMeshPolyLine*> boundary_segment_pt(4);
+ Vector<TriangleMeshCurveSection*> boundary_segment_pt(4);
 
  //Set the length of the channel
  double half_length = 5.0;
@@ -393,14 +393,14 @@ UnstructuredImmersedEllipseProblem()
  boundary_segment_pt[3] = new TriangleMeshPolyLine(bound_seg,bound_id);
   
  // Create the triangle mesh polygon for outer boundary using boundary segment
- Outer_boundary_polyline_pt = new TriangleMeshPolygon(boundary_segment_pt);
+ Outer_boundary_polygon_pt = new TriangleMeshPolygon(boundary_segment_pt);
 
  // Now build the moving rigid body
  //-------------------------------------
 
  // We have one rigid body
  Rigid_body_pt.resize(1);
- Vector<TriangleMeshInternalClosedCurve*> hole_pt(1);
+ Vector<TriangleMeshClosedCurve*> hole_pt(1);
 
  // Build Rigid Body
  //-----------------
@@ -413,7 +413,7 @@ UnstructuredImmersedEllipseProblem()
                                                  this->time_stepper_pt(1));
 
  // Build the two parts of the curvilinear boundary from the rigid body
- Vector<TriangleMeshCurviLine*> curvilinear_boundary_pt(2);
+ Vector<TriangleMeshCurveSection*> curvilinear_boundary_pt(2);
 
  //First section (boundary 4)
  double zeta_start=0.0;
@@ -436,9 +436,9 @@ UnstructuredImmersedEllipseProblem()
  Vector<double> hole_coords(2);
  hole_coords[0]=0.0;
  hole_coords[1]=0.0;
- Vector<TriangleMeshInternalClosedCurve*> curvilinear_hole_pt(1);
+ Vector<TriangleMeshClosedCurve*> curvilinear_hole_pt(1);
  hole_pt[0]=
-  new TriangleMeshInternalCurvilinearClosedCurve(
+  new TriangleMeshClosedCurve(
    curvilinear_boundary_pt,hole_coords);
  
  // Now build the mesh, based on the boundaries specified by
@@ -446,15 +446,32 @@ UnstructuredImmersedEllipseProblem()
  // polygons just created
  //----------------------
 
- TriangleMeshClosedCurve* closed_curve_pt=Outer_boundary_polyline_pt;
+ TriangleMeshClosedCurve* closed_curve_pt=Outer_boundary_polygon_pt;
 
- double uniform_element_area=1.0; 
- Fluid_mesh_pt = 
-  new RefineableSolidTriangleMesh<ELEMENT>(closed_curve_pt, 
-                                           hole_pt, 
-                                           uniform_element_area,
-                                           this->time_stepper_pt());
- 
+ double uniform_element_area=1.0;
+
+ // Use the TriangleMeshParameters object for gathering all
+ // the necessary arguments for the TriangleMesh object
+ TriangleMeshParameters triangle_mesh_parameters(
+   closed_curve_pt);
+
+ // Define the holes on the domain
+ triangle_mesh_parameters.internal_closed_curve_pt() =
+   hole_pt;
+
+ // Define the maximum element area
+ triangle_mesh_parameters.element_area() =
+   uniform_element_area;
+
+ // Define the time stepper
+ triangle_mesh_parameters.time_stepper_pt() =
+   this->time_stepper_pt();
+
+ // Create the mesh
+ Fluid_mesh_pt =
+   new RefineableSolidTriangleMesh<ELEMENT>(
+     triangle_mesh_parameters);
+
  // Set error estimator for bulk mesh
  Z2ErrorEstimator* error_estimator_pt=new Z2ErrorEstimator;
  Fluid_mesh_pt->spatial_error_estimator_pt()=error_estimator_pt;
@@ -548,12 +565,12 @@ UnstructuredImmersedEllipseProblem<ELEMENT>::
  delete this->time_stepper_pt(1);
  
  // Kill data associated with outer boundary
- unsigned n=Outer_boundary_polyline_pt->npolyline();
+ unsigned n=Outer_boundary_polygon_pt->npolyline();
  for (unsigned j=0;j<n;j++)
   {
-   delete Outer_boundary_polyline_pt->polyline_pt(j);
+   delete Outer_boundary_polygon_pt->polyline_pt(j);
   }
- delete Outer_boundary_polyline_pt;
+ delete Outer_boundary_polygon_pt;
  
  // Flush Lagrange multiplier mesh
  delete_lagrange_multiplier_elements();

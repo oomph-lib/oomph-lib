@@ -772,7 +772,7 @@ private:
  RefineableSolidTriangleMesh<ELEMENT>* Fluid_mesh_pt;
  
  /// Vector storing pointer to the drop polygons
- Vector<TriangleMeshInternalPolygon*> Drop_polygon_pt;
+ Vector<TriangleMeshPolygon*> Drop_polygon_pt;
 
  /// Triangle mesh polygon for outer boundary 
  TriangleMeshPolygon* Outer_boundary_polyline_pt; 
@@ -825,7 +825,7 @@ DropInChannelProblem<ELEMENT>::DropInChannelProblem()
  //--------------------------------------------------------------
  // four separate polylines
  //------------------------
- Vector<TriangleMeshPolyLine*> boundary_polyline_pt(4);
+ Vector<TriangleMeshCurveSection*> boundary_polyline_pt(4);
  
  // Each polyline only has two vertices -- provide storage for their
  // coordinates
@@ -902,12 +902,12 @@ DropInChannelProblem<ELEMENT>::DropInChannelProblem()
  Vector<double> coord(2);
  
  // Number of points defining drop
- unsigned npoints = 16; 
+ unsigned npoints = 16;
  double unit_zeta = MathematicalConstants::Pi/double(npoints-1);
  
  // This drop is bounded by two distinct boundaries, each
  // represented by its own polyline
- Vector<TriangleMeshPolyLine*> drop_polyline_pt(2);
+ Vector<TriangleMeshCurveSection*> drop_polyline_pt(2);
  
  // Vertex coordinates
  Vector<Vector<double> > drop_vertex(npoints);
@@ -947,17 +947,10 @@ DropInChannelProblem<ELEMENT>::DropInChannelProblem()
 
  // Build the 2nd drop polyline
  drop_polyline_pt[1] = new TriangleMeshPolyLine(drop_vertex,boundary_id++);
-
-
- // Define coordinates of a point inside the drop
- Vector<double> drop_center(2);
- drop_center[0]=x_center;
- drop_center[1]=y_center;
- 
  
  // Create closed polygon from two polylines
- Drop_polygon_pt[0] = new TriangleMeshInternalPolygon(
-  drop_center,drop_polyline_pt);
+ Drop_polygon_pt[0] = new TriangleMeshPolygon(
+		 drop_polyline_pt);
  
  // Now build the mesh, based on the boundaries specified by
  //---------------------------------------------------------
@@ -967,27 +960,54 @@ DropInChannelProblem<ELEMENT>::DropInChannelProblem()
  // Convert to "closed curve" objects
  TriangleMeshClosedCurve* outer_closed_curve_pt=Outer_boundary_polyline_pt;
  unsigned nb=Drop_polygon_pt.size();
- Vector<TriangleMeshInternalClosedCurve*> drop_closed_curve_pt(nb);
+ Vector<TriangleMeshClosedCurve*> drop_closed_curve_pt(nb);
  for (unsigned i=0;i<nb;i++)
   {
    drop_closed_curve_pt[i]=Drop_polygon_pt[i];
   }
 
-
- //Create a set to indicate that the hole should be filled
- // hierher: Andrew stick this information into internal boundary information
- std::set<unsigned> fill_index;
- fill_index.insert(0);
-
-
  // Target area for initial mesh
  double uniform_element_area=0.2;
- Fluid_mesh_pt = 
-  new RefineableSolidTriangleMesh<ELEMENT>(outer_closed_curve_pt, 
-                                           drop_closed_curve_pt,
-                                           uniform_element_area,
-                                           this->time_stepper_pt(),
-                                           fill_index);
+
+ // Define coordinates of a point inside the drop
+ Vector<double> drop_center(2);
+ drop_center[0]=x_center;
+ drop_center[1]=y_center;
+
+ Vector<Vector <double> > regions_coordinates(1);
+ regions_coordinates[0] = drop_center;
+
+ bool use_attributes = true;
+
+ // Use the TriangleMeshParameters object for gathering all
+ // the necessary arguments for the TriangleMesh object
+ TriangleMeshParameters triangle_mesh_parameters(
+   outer_closed_curve_pt);
+
+ // Define the holes on the boundary
+ triangle_mesh_parameters.internal_closed_curve_pt() =
+   drop_closed_curve_pt;
+
+ // Define the maximum element area
+ triangle_mesh_parameters.element_area() =
+   uniform_element_area;
+
+ // Define the regions
+ triangle_mesh_parameters.regions_coordinates_pt() =
+   regions_coordinates;
+
+ // Establish the use of regions when setting use attributes = true
+ triangle_mesh_parameters.use_attributes() =
+   use_attributes;
+
+ // Define the time stepper
+ triangle_mesh_parameters.time_stepper_pt() =
+   this->time_stepper_pt();
+
+ // Create the mesh
+ Fluid_mesh_pt =
+   new RefineableSolidTriangleMesh<ELEMENT>(
+     triangle_mesh_parameters);
  
  // Set error estimator for bulk mesh
  Z2ErrorEstimator* error_estimator_pt=new Z2ErrorEstimator;

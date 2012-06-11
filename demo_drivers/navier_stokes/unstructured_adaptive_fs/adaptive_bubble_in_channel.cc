@@ -592,7 +592,7 @@ private:
  RefineableSolidTriangleMesh<ELEMENT>* Fluid_mesh_pt;
  
  /// Vector storing pointer to the bubble polygons
- Vector<TriangleMeshInternalPolygon*> Bubble_polygon_pt;
+ Vector<TriangleMeshPolygon*> Bubble_polygon_pt;
 
  /// Triangle mesh polygon for outer boundary 
  TriangleMeshPolygon* Outer_boundary_polyline_pt; 
@@ -676,7 +676,7 @@ BubbleInChannelProblem<ELEMENT>::BubbleInChannelProblem()
  //--------------------------------------------------------------
  // four separate polylines
  //------------------------
- Vector<TriangleMeshPolyLine*> boundary_polyline_pt(4);
+ Vector<TriangleMeshCurveSection*> boundary_polyline_pt(4);
  
  // Each polyline only has two vertices -- provide storage for their
  // coordinates
@@ -758,7 +758,7 @@ BubbleInChannelProblem<ELEMENT>::BubbleInChannelProblem()
  
  // This bubble is bounded by two distinct boundaries, each
  // represented by its own polyline
- Vector<TriangleMeshPolyLine*> bubble_polyline_pt(2);
+ Vector<TriangleMeshCurveSection*> bubble_polyline_pt(2);
  
  // Vertex coordinates
  Vector<Vector<double> > bubble_vertex(npoints);
@@ -807,8 +807,9 @@ BubbleInChannelProblem<ELEMENT>::BubbleInChannelProblem()
  
  
  // Create closed polygon from two polylines
- Bubble_polygon_pt[0] = new TriangleMeshInternalPolygon(
-  bubble_center,bubble_polyline_pt);
+ Bubble_polygon_pt[0] = new TriangleMeshPolygon(
+		 bubble_polyline_pt,
+		 bubble_center);
  
  // Now build the mesh, based on the boundaries specified by
  //---------------------------------------------------------
@@ -818,7 +819,7 @@ BubbleInChannelProblem<ELEMENT>::BubbleInChannelProblem()
  // Convert to "closed curve" objects
  TriangleMeshClosedCurve* outer_closed_curve_pt=Outer_boundary_polyline_pt;
  unsigned nb=Bubble_polygon_pt.size();
- Vector<TriangleMeshInternalClosedCurve*> bubble_closed_curve_pt(nb);
+ Vector<TriangleMeshClosedCurve*> bubble_closed_curve_pt(nb);
  for (unsigned i=0;i<nb;i++)
   {
    bubble_closed_curve_pt[i]=Bubble_polygon_pt[i];
@@ -826,11 +827,29 @@ BubbleInChannelProblem<ELEMENT>::BubbleInChannelProblem()
 
  // Target area for initial mesh
  double uniform_element_area=0.2;
- Fluid_mesh_pt = 
-  new RefineableSolidTriangleMesh<ELEMENT>(outer_closed_curve_pt, 
-                                             bubble_closed_curve_pt,
-                                             uniform_element_area,
-                                             this->time_stepper_pt());
+
+ // Use the TriangleMeshParameters object for gathering all
+ // the necessary arguments for the TriangleMesh object
+ TriangleMeshParameters triangle_mesh_parameters(
+   outer_closed_curve_pt);
+
+ // Define the holes on the boundary
+ triangle_mesh_parameters.internal_closed_curve_pt() =
+   bubble_closed_curve_pt;
+
+ // Define the maximum element areas
+ triangle_mesh_parameters.element_area() =
+   uniform_element_area;
+
+ // Define the time stepper
+ triangle_mesh_parameters.time_stepper_pt() =
+   this->time_stepper_pt();
+
+ // Create the mesh
+ Fluid_mesh_pt =
+   new RefineableSolidTriangleMesh<ELEMENT>(
+     triangle_mesh_parameters);
+
  // hierher 
  // Fluid_mesh_pt->mesh_update_fct_pt()=
  //  &Problem_Parameter::mesh_update_for_volume_conservation;

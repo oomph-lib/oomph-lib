@@ -30,6 +30,7 @@
 #include "map_matrix.h"
 #include "triangle_mesh.h"
 
+
 namespace oomph
 {
 
@@ -575,7 +576,6 @@ namespace TriangleHelper
     //read in the boundary marker
     if(boundary_markers_flag==1)
      {
-      
       poly_file>>dummy;
      }
    }
@@ -1020,9 +1020,15 @@ void read_triangulateio(std::istream &restart_file,TriangulateIO &triangle_io)
 
 
 
+
+
+
+
 ////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////
+
+
 
 
 
@@ -1044,105 +1050,609 @@ namespace ToleranceForVertexMismatchInPolygons
 }
 
 
+
+
+
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+
+
+
+
+
+// =======================================================================
+// \short Connects the initial vertex of the curve section to a desired
+/// target polyline by specifying the vertex number. There is a checking
+/// which verifies that the initial vertex is close enough to the
+/// destination vertex on the target polyline by no more than the specified
+/// tolerance
+// =======================================================================
+void TriangleMeshCurveSection::connect_initial_vertex_to_polyline(
+  TriangleMeshPolyLine *polyline_pt,
+  const unsigned &vertex_number,
+  const double &tolerance_for_connection)
+{
+
+#ifdef PARANOID
+ unsigned n_vertices = polyline_pt->nvertex();
+
+ if (n_vertices <= vertex_number)
+  {
+   std::ostringstream error_stream;
+   error_stream
+   << "The vertex number you provided (" << vertex_number
+   << ") is greater\n than the number of vertices ("
+   << n_vertices << "in the specified TriangleMeshPolyLine.\n"
+   << "Remember that the vertex index starts at 0" << std::endl
+   << "Source boundary (" << boundary_id() << ") wants to connect "
+   << "to destination boundary (" << polyline_pt->boundary_id()
+   << ")" << std::endl;
+   throw OomphLibError(error_stream.str(),
+     "TriangleMeshCurveSection::connect_initial_vertex_to_polyline()",
+     OOMPH_EXCEPTION_LOCATION);
+  }
+
+ // Verify if there is really a match point in the specified
+ // connection values
+ Vector<double> v_src(2);
+ Vector<double> v_dst(2);
+
+ this->initial_vertex_coordinate(v_src);
+ v_dst = polyline_pt->vertex_coordinate(vertex_number);
+
+ double error = sqrt((v_src[0] - v_dst[0])*(v_src[0] - v_dst[0]) +
+   (v_src[1] - v_dst[1])*(v_src[1] - v_dst[1]));
+
+ if (error > tolerance_for_connection)
+  {
+   std::ostringstream error_stream;
+   error_stream
+   << "The associated vertices for the connection"
+   << "\nare not close enough. Their respective values are:\n"
+   << "Source boundary id:(" << this->boundary_id() << ")\n"
+   << "Source vertex x:(" << v_src[0] << ") y:(" << v_src[1] << ")\n"
+   << "Destination boundary id:(" << polyline_pt->boundary_id() << ")"
+   << "\nAssociated vertex x:(" << v_dst[0] << ") y:(" << v_dst[1] << ")"
+   << "\nThe corresponding distance is: ("<<  error << ") but the "
+   << "allowed\ntolerance is: (" << tolerance_for_connection <<")"
+   << std::endl;
+   throw OomphLibError(error_stream.str(),
+     "TriangleMeshCurveSection::connect_initial_vertex_to_curviline()",
+     OOMPH_EXCEPTION_LOCATION);
+  }
+
+#endif
+
+ Initial_vertex_connected = true;
+ Initial_vertex_connected_bnd_id = polyline_pt->boundary_id();
+ Initial_vertex_connected_n_vertex = vertex_number;
+
+}
+
+// =======================================================================
+// \short Connects the final vertex of the curve section to a desired
+/// target polyline by specifying the vertex number. There is a checking
+/// which verifies that the final vertex is close enough to the
+/// destination vertex on the target polyline by no more than the specified
+/// tolerance
+// =======================================================================
+void TriangleMeshCurveSection::connect_final_vertex_to_polyline(
+  TriangleMeshPolyLine *polyline_pt,
+  const unsigned &vertex_number,
+  const double &tolerance_for_connection)
+{
+
+#ifdef PARANOID
+ unsigned n_vertices = polyline_pt->nvertex();
+
+ if (n_vertices <= vertex_number)
+  {
+   std::ostringstream error_stream;
+   error_stream
+   << "The vertex number you provided (" << vertex_number
+   << ") is greater\n than the number of vertices ("
+   << n_vertices << "in the specified TriangleMeshPolyLine.\n"
+   << "Remember that the vertex index starts at 0" << std::endl
+   << "Source boundary (" << boundary_id() << ") wants to connect "
+   << "to destination boundary (" << polyline_pt->boundary_id()
+   << ")" << std::endl;
+   throw OomphLibError(error_stream.str(),
+     "TriangleMeshCurveSection::connect_final_vertex_to_polyline()",
+     OOMPH_EXCEPTION_LOCATION);
+  }
+
+ // Verify if there is really a match point in the specified
+ // connection values
+ Vector<double> v_src(2);
+ Vector<double> v_dst(2);
+
+ this->final_vertex_coordinate(v_src);
+ v_dst = polyline_pt->vertex_coordinate(vertex_number);
+
+ double error = sqrt((v_src[0] - v_dst[0])*(v_src[0] - v_dst[0]) +
+   (v_src[1] - v_dst[1])*(v_src[1] - v_dst[1]));
+
+ if (error > tolerance_for_connection)
+  {
+   std::ostringstream error_stream;
+   error_stream
+   << "The associated vertices for the connection"
+   << "\nare not close enough. Their respective values are:\n"
+   << "Source boundary id:(" << this->boundary_id() << ")\n"
+   << "Source vertex x:(" << v_src[0] << ") y:(" << v_src[1] << ")\n"
+   << "Destination boundary id:(" << polyline_pt->boundary_id() << ")"
+   << "\nAssociated vertex x:(" << v_dst[0] << ") y:(" << v_dst[1] << ")"
+   << "\nThe corresponding distance is: ("<<  error << ") but the "
+   << "allowed\ntolerance is: (" << tolerance_for_connection <<")"
+   << std::endl;
+   throw OomphLibError(error_stream.str(),
+     "TriangleMeshCurveSection::connect_final_vertex_to_polyline()",
+     OOMPH_EXCEPTION_LOCATION);
+  }
+
+#endif
+
+ Final_vertex_connected = true;
+ Final_vertex_connected_bnd_id = polyline_pt->boundary_id();
+ Final_vertex_connected_n_vertex = vertex_number;
+
+}
+
+// =======================================================================
+// \short Connects the initial vertex of the curve section to a desired
+/// target curviline by specifying the s value (intrinsic value on the
+/// geometric object of the curviline) where to connect on the target
+/// curviline. There is a checking which verifies that the initial vertex
+/// and the coordinates on the given s value are close enough by no more
+/// than the given tolerance
+// =======================================================================
+void TriangleMeshCurveSection::connect_initial_vertex_to_curviline(
+  TriangleMeshCurviLine *curviline_pt,
+  const double &s_value,
+  const double &tolerance_for_connection)
+{
+
+#ifdef PARANOID
+ double z_initial = curviline_pt->zeta_start();
+ double z_final = curviline_pt->zeta_end();
+ if (s_value < z_initial || z_final < s_value)
+  {
+   std::ostringstream error_stream;
+   error_stream
+   << "The s value you provided for connection (" << s_value
+   << ") is out\nof the limits of the specified "
+   << "TriangleMeshCurviLine.\nThe limits are [" << z_initial
+   << ", " << z_final << "]" << std::endl
+   << "Source boundary (" << boundary_id() << ") wants to connect "
+   << "to destination boundary (" << curviline_pt->boundary_id()
+   << ")" << std::endl;
+   throw OomphLibError(error_stream.str(),
+     "TriangleMeshCurveSection::connect_initial_vertex_to_curviline()",
+     OOMPH_EXCEPTION_LOCATION);
+  }
+
+ // Verify if there is really a match point in the specified
+ // connection values
+ Vector<double> v_src(2);
+ Vector<double> v_dst(2);
+ Vector<double> z(1);
+
+ this->initial_vertex_coordinate(v_src);
+ z[0] = s_value;
+ curviline_pt->geom_object_pt()->position(z, v_dst);
+ double error = sqrt((v_src[0] - v_dst[0])*(v_src[0] - v_dst[0]) +
+   (v_src[1] - v_dst[1])*(v_src[1] - v_dst[1]));
+ if (error >= tolerance_for_connection)
+  {
+   std::ostringstream error_stream;
+   error_stream
+   << "The associated vertex for the provided connection s value\n"
+   << "are not close enough. Their respective values are:\n"
+   << "Source boundary id:(" << this->boundary_id() << ")\n"
+   << "Source vertex x:(" << v_src[0] << ") y:(" << v_src[1] << ")\n"
+   << "Destination boundary id:(" << curviline_pt->boundary_id() << ")"
+   << "\nDestination s value (" << s_value << ")\n"
+   << "Associated vertex x:(" << v_dst[0] << ") y:(" << v_dst[1] << ")"
+   << "\nThe corresponding distance is: ("<<  error << ") but the "
+   << "allowed\ntolerance is: (" << tolerance_for_connection <<")"
+   << std::endl;
+   throw OomphLibError(error_stream.str(),
+     "TriangleMeshCurveSection::connect_initial_vertex_to_curviline()",
+     OOMPH_EXCEPTION_LOCATION);
+  }
+
+#endif
+
+ Initial_vertex_connected_to_curviline = true;
+ Initial_vertex_connected = true;
+ Initial_vertex_connected_bnd_id = curviline_pt->boundary_id();
+
+ // We are still not able to compute the vertex number but we can
+ // at least store the corresponding s value
+ // The corresponding vertex will be computed when the curviline be
+ // changed into a polyline
+ Initial_s_connection_value = s_value;
+ Tolerance_for_s_connection = tolerance_for_connection;
+
+ curviline_pt->add_connection_point(s_value, tolerance_for_connection);
+
+}
+
+// =======================================================================
+// \short Connects the final vertex of the curve section to a desired
+/// target curviline by specifying the s value (intrinsic value on the
+/// geometric object of the curviline) where to connect on the target
+/// curviline. There is a checking which verifies that the final vertex
+/// and the coordinates on the given s value are close enough by no more
+/// than the given tolerance
+// =======================================================================
+void TriangleMeshCurveSection::connect_final_vertex_to_curviline(
+  TriangleMeshCurviLine *curviline_pt,
+  const double &s_value,
+  const double &tolerance_for_connection)
+{
+
+#ifdef PARANOID
+ double z_initial = curviline_pt->zeta_start();
+ double z_final = curviline_pt->zeta_end();
+ if (s_value < z_initial || z_final < s_value)
+  {
+   std::ostringstream error_stream;
+   error_stream
+   << "The s value you provided for connection (" << s_value
+   << ") is out\nof the limits of the specified "
+   << "TriangleMeshCurviLine.\nThe limits are [" << z_initial
+   << ", " << z_final << "]" << std::endl
+   << "Source boundary (" << boundary_id() << ") wants to connect "
+   << "to destination boundary (" << curviline_pt->boundary_id()
+   << ")" << std::endl;
+   throw OomphLibError(error_stream.str(),
+     "TriangleMeshCurveSection::connect_final_vertex_to_curviline()",
+     OOMPH_EXCEPTION_LOCATION);
+  }
+
+ // Verify if there is really a match point in the specified
+ // connection values
+ Vector<double> v_src(2);
+ Vector<double> v_dst(2);
+ Vector<double> z(1);
+
+ this->final_vertex_coordinate(v_src);
+ z[0] = s_value;
+ curviline_pt->geom_object_pt()->position(z, v_dst);
+
+ double error = sqrt((v_src[0] - v_dst[0])*(v_src[0] - v_dst[0]) +
+   (v_src[1] - v_dst[1])*(v_src[1] - v_dst[1]));
+
+ if (error >= tolerance_for_connection)
+  {
+   std::ostringstream error_stream;
+   error_stream
+   << "The associated vertex for the provided connection s value\n"
+   << "are not close enough. Their respective values are:\n"
+   << "Source boundary id:(" << this->boundary_id() << ")\n"
+   << "Source vertex x:(" << v_src[0] << ") y:(" << v_src[1] << ")\n"
+   << "Destination boundary id:(" << curviline_pt->boundary_id() << ")"
+   << "\nDestination s value (" << s_value << ")\n"
+   << "Associated vertex x:(" << v_dst[0] << ") y:(" << v_dst[1] << ")"
+   << "\nThe corresponding distance is: ("<<  error << ") but the "
+   << "allowed\ntolerance is: (" << tolerance_for_connection <<")"
+   << std::endl;
+   throw OomphLibError(error_stream.str(),
+     "TriangleMeshCurveSection::connect_final_vertex_to_curviline()",
+     OOMPH_EXCEPTION_LOCATION);
+  }
+
+#endif
+
+ Final_vertex_connected_to_curviline = true;
+ Final_vertex_connected = true;
+ Final_vertex_connected_bnd_id = curviline_pt->boundary_id();
+
+ // We are still not able to compute the vertex number but we can
+ // at least store the corresponding s value.
+ // The corresponding vertex will be computed when the curviline be
+ // transformed into a polyline
+ Final_s_connection_value = s_value;
+ Tolerance_for_s_connection = tolerance_for_connection;
+
+ curviline_pt->add_connection_point(s_value, tolerance_for_connection);
+
+}
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+//=====================================================================
+/// Class defining a closed curve for the Triangle mesh generation
+//=====================================================================
+TriangleMeshClosedCurve::TriangleMeshClosedCurve(
+  const Vector<TriangleMeshCurveSection*> &curve_section_pt,
+  const Vector<double>& internal_point_pt) :
+  TriangleMeshCurve(curve_section_pt),
+  Internal_point_pt(internal_point_pt)
+{
+
+#ifdef PARANOID
+
+ // Matching of curve sections i.e. the last vertex of
+ // the i curve section should match with the first
+ // vertex of the i+1 curve section
+
+ // Total number of boundaries
+ unsigned n_boundaries = Curve_section_pt.size();
+
+ // Need at least two
+ if (n_boundaries<2)
+  {
+   std::ostringstream error_stream;
+   error_stream
+   << "Sorry -- I'm afraid we insist that a closed curve is\n"
+   << "specified by at least two separate CurveSections.\n"
+   << "You've only specified (" << n_boundaries << ")" << std::endl;
+   throw OomphLibError(error_stream.str(),
+     "TriangleMeshClosedCurve::TriangleMeshClosedCurve()",
+     OOMPH_EXCEPTION_LOCATION);
+  }
+
+ // Check last point of each boundary bit coincides with first point
+ // on next one
+ for (unsigned i=0;i<n_boundaries-1;i++)
+  {
+
+   // Auxiliary vertex for storing the vertex values of contiguous curves
+   Vector<double> v1(2);
+
+   // This is for getting the final coordinates of the i curve section
+   curve_section_pt[i]->final_vertex_coordinate(v1);
+
+   // Auxiliary vertex for storing the vertex values of contiguous curves
+   Vector<double> v2(2);
+
+   // This is for the start coordinates of the i+1 curve section
+   curve_section_pt[i+1]->initial_vertex_coordinate(v2);
+
+   // Work out error
+   double error = sqrt(pow(v1[0]-v2[0],2)+pow(v1[1]-v2[1],2));
+
+   if (error>ToleranceForVertexMismatchInPolygons::Tolerable_error)
+    {
+     std::ostringstream error_stream;
+     error_stream
+     << "The start and end points of curve section boundary parts " << i
+     << " and " <<i+1<< " don't match when judged \nwith the tolerance of "
+     << ToleranceForVertexMismatchInPolygons::Tolerable_error
+     << " which is specified in the namespace \nvariable "
+     << "ToleranceForVertexMismatchInPolygons::Tolerable_error.\n\n"
+     << "Feel free to adjust this or to recompile the code without\n"
+     << "paranoia if you think this is OK...\n"
+     << std::endl;
+     throw OomphLibError(
+       error_stream.str(),
+       "TriangleMeshClosedCurve::TriangleMeshClosedCurve()",
+       OOMPH_EXCEPTION_LOCATION);
+    }
+   else
+    {
+     // Aligns (only implemented for polylines)
+     TriangleMeshPolyLine *current_polyline =
+       dynamic_cast<TriangleMeshPolyLine*>(Curve_section_pt[i]);
+     TriangleMeshPolyLine *next_polyline =
+       dynamic_cast<TriangleMeshPolyLine*>(Curve_section_pt[i+1]);
+
+     if (current_polyline && next_polyline)
+      {
+       unsigned last_vertex = current_polyline->nvertex() - 1;
+       next_polyline->vertex_coordinate(0) =
+         current_polyline->vertex_coordinate(last_vertex);
+      }
+    }
+
+  } // For n_boundaries - 1
+
+ // Check wrap around
+ // Auxiliary vertex for storing the vertex values of contiguous curves
+ Vector<double> v1(2);
+
+ // This is for getting the first coordinates of the first curve section
+ Curve_section_pt[0]->initial_vertex_coordinate(v1);
+
+ // Auxiliary vertex for storing the vertex values of contiguous curves
+ Vector<double> v2(2);
+
+ // This is for getting the last coordinates of the last curve section
+ Curve_section_pt[n_boundaries-1]->final_vertex_coordinate(v2);
+
+ double error = sqrt(pow(v2[0]-v1[0],2)+pow(v2[1]-v1[1],2));
+
+ if (error>ToleranceForVertexMismatchInPolygons::Tolerable_error)
+  {
+   std::ostringstream error_stream;
+   error_stream
+   << "The start and end points of the first and last curve segment\n"
+   << "boundary parts don't match when judged \nwith the tolerance of "
+   << ToleranceForVertexMismatchInPolygons::Tolerable_error
+   << " which is specified in the namespace \nvariable "
+   << "ToleranceForVertexMismatchInPolygons::Tolerable_error.\n\n"
+   << "Feel free to adjust this or to recompile the code without\n"
+   << "paranoia if you think this is OK...\n"
+   << std::endl;
+   throw OomphLibError(
+     error_stream.str(),
+     "TriangleMeshClosedCurve::TriangleMeshClosedCurve()",
+     OOMPH_EXCEPTION_LOCATION);
+  }
+ else
+  {
+   // Aligns (only implemented for polylines)
+   TriangleMeshPolyLine *first_polyline =
+     dynamic_cast<TriangleMeshPolyLine*>(Curve_section_pt[0]);
+   TriangleMeshPolyLine *last_polyline =
+     dynamic_cast<TriangleMeshPolyLine*>(Curve_section_pt[n_boundaries-1]);
+
+   if (first_polyline && last_polyline)
+    {
+     unsigned last_vertex = last_polyline->nvertex() - 1;
+     first_polyline->vertex_coordinate(0) =
+       last_polyline->vertex_coordinate(last_vertex);
+    }
+  }
+
+#endif
+
+}
+
+
+
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+
+
 //=========================================================================
-/// Constructor: Specify vector of pointers to TriangleMeshPolyLines
+/// Constructor: Specify vector of pointers to TriangleMeshCurveSection
 /// that define the boundary of the segments of the polygon.
-/// Each TriangleMeshPolyLine has its own boundary ID and can contain
+/// Each TriangleMeshCurveSection has its own boundary ID and can contain
 /// multiple (straight-line) segments. For consistency across the
 /// various uses of this class, we insist that the closed boundary
-/// is represented by at least two separate TriangleMeshPolyLines
+/// is represented by at least two separate TriangleMeshCurveSection
 /// whose joint vertices must be specified in both.
 /// (This is to allow the setup of unique boundary coordinate(s)
 /// around the polygon.) This may seem slightly annoying
 /// in cases where a polygon really only represents a single
 /// boundary, but...
+/// Note: The specified vector of pointers must consist of only
+/// TriangleMeshPolyLine elements. There is a checking on the PARANOID
+/// mode for this constraint
 //=========================================================================
-TriangleMeshPolygon::TriangleMeshPolygon(const Vector<TriangleMeshPolyLine*>& 
-                                         boundary_polyline_pt) :
- Boundary_polyline_pt(boundary_polyline_pt),    
- Enable_redistribution_of_segments_between_polylines(false)
-  {
-   
-#ifdef PARANOID
-   
-   // Check that the polylines are contiguous
-   bool contiguous=true;
-   unsigned i_offensive=0;
-   unsigned nbound=Boundary_polyline_pt.size();
+TriangleMeshPolygon::TriangleMeshPolygon(
+    const Vector<TriangleMeshCurveSection*>& boundary_polyline_pt,
+    const Vector<double>& internal_point_pt) :
+    TriangleMeshCurve(boundary_polyline_pt),
+    TriangleMeshClosedCurve(boundary_polyline_pt, internal_point_pt),
+    Enable_redistribution_of_segments_between_polylines(false),
+    Can_update_configuration(false),
+    Polygon_fixed(false)
+{
 
-   // Need at least two
-   if (nbound<2)
+#ifdef PARANOID
+
+  unsigned nbound=boundary_polyline_pt.size();
+
+  // Check that all the constituent TriangleMeshCurveSection are
+  // instance of TriangleMeshPolyLine
+  for (unsigned p = 0; p < nbound; p++)
+   {
+    TriangleMeshPolyLine *tmp_polyline_pt =
+      dynamic_cast<TriangleMeshPolyLine*>(boundary_polyline_pt[p]);
+    if (tmp_polyline_pt == 0)
+     {
+      std::ostringstream error_stream;
+      error_stream
+      << "The (" << p << ") TriangleMeshCurveSection is not a "
+      << "TriangleMeshPolyLine.\nThe TriangleMeshPolygon object"
+      << "is constituent of only TriangleMeshPolyLine objects.\n"
+      << "Verify that all the constituent elements of the "
+      << "TriangleMeshPolygon\nare instantiated as "
+      << "TriangleMeshPolyLines." << std::endl;
+      throw OomphLibError(error_stream.str(),
+          "TriangleMeshPolygon::TriangleMeshPolygon()",
+          OOMPH_EXCEPTION_LOCATION);
+     }
+   }
+
+ // Check that the polylines are contiguous
+ bool contiguous=true;
+ unsigned i_offensive=0;
+
+  // Need at least two
+  if (nbound<2)
     {
-     std::ostringstream error_stream;
-     error_stream
+      std::ostringstream error_stream;
+      error_stream
       << "Sorry -- I'm afraid we insist that the polygon is specified\n"
       << "by at least two separate PolyLines. You've only specied "
       << nbound << std::endl;
-     throw OomphLibError(error_stream.str(),
-                         "TriangleMeshPolygon::TriangleMeshPolygon()",
-                         OOMPH_EXCEPTION_LOCATION);
+      throw OomphLibError(error_stream.str(),
+          "TriangleMeshPolygon::TriangleMeshPolygon()",
+          OOMPH_EXCEPTION_LOCATION);
     }
 
-   
-   // Does the last node of the polyline connect to the first one
-   // of the next one (only up the last but one!)
-   for(unsigned i=0;i<nbound-1;i++)
+
+  // Does the last node of the polyline connect to the first one
+  // of the next one (only up the last but one!)
+  for(unsigned i=0;i<nbound-1;i++)
     {
-     // Get vector last vertex in current polyline
-     unsigned last_vertex = (Boundary_polyline_pt[i]->nvertex())-1;
-     Vector<double> v1=Boundary_polyline_pt[i]->
+      // Get vector last vertex in current polyline
+      unsigned last_vertex = (polyline_pt(i)->nvertex())-1;
+      Vector<double> v1=polyline_pt(i)->
+          vertex_coordinate(last_vertex);
+
+      // Get vector to first vertex in next polyline
+      Vector<double> v2=polyline_pt(i+1)->vertex_coordinate(0);
+
+      // Work out error
+      double error=sqrt(pow(v1[0]-v2[0],2)+pow(v1[1]-v2[1],2));
+
+      // Is error accetable?
+      if (error>ToleranceForVertexMismatchInPolygons::Tolerable_error)
+        {
+          contiguous=false;
+          i_offensive=i;
+          break;
+        }
+      // Align
+      else
+        {
+          polyline_pt(i+1)->vertex_coordinate(0)=
+              polyline_pt(i)->vertex_coordinate(last_vertex);
+        }
+    }
+
+  // Does the last one connect to the first one?
+
+  // Get vector last vertex last polyline
+  unsigned last_vertex = (polyline_pt(nbound-1)->nvertex())-1;
+  Vector<double> v1=polyline_pt(nbound-1)->
       vertex_coordinate(last_vertex);
-     
-     // Get vector to first vertex in next polyline
-     Vector<double> v2=Boundary_polyline_pt[i+1]->vertex_coordinate(0);
-     
-     // Work out error
-     double error=sqrt(pow(v1[0]-v2[0],2)+pow(v1[1]-v2[1],2));
-     
-     // Is error accetable?
-     if (error>ToleranceForVertexMismatchInPolygons::Tolerable_error)       
-      {
-       contiguous=false;
-       i_offensive=i;
-       break;
-      }
-     // Align
-     else
-      {
-       Boundary_polyline_pt[i+1]->vertex_coordinate(0)=
-        Boundary_polyline_pt[i]->vertex_coordinate(last_vertex);
-      }
+
+  // Get vector first vertex first polyline
+  Vector<double> v2=polyline_pt(0)->vertex_coordinate(0);
+  double error=sqrt(pow(v1[0]-v2[0],2)+pow(v1[1]-v2[1],2));
+
+  if (error>ToleranceForVertexMismatchInPolygons::Tolerable_error)
+    {
+      contiguous=false;
+      i_offensive=nbound-1;
     }
-   
-   // Does the last one connect to the first one?
-   
-   // Get vector last vertex last polyline
-   unsigned last_vertex = (Boundary_polyline_pt[nbound-1]->nvertex())-1;
-   Vector<double> v1=Boundary_polyline_pt[nbound-1]->
-    vertex_coordinate(last_vertex);
-   
-   // Get vector first vertex first polyline
-   Vector<double> v2=Boundary_polyline_pt[0]->vertex_coordinate(0);
-   double error=sqrt(pow(v1[0]-v2[0],2)+pow(v1[1]-v2[1],2));
-   if (error>ToleranceForVertexMismatchInPolygons::Tolerable_error)
+  else
     {
-     contiguous=false;
-     i_offensive=nbound-1;
-    } 
-   else
-    {
-     Boundary_polyline_pt[0]->vertex_coordinate(0)=
-      Boundary_polyline_pt[nbound-1]->vertex_coordinate(last_vertex);
+      polyline_pt(0)->vertex_coordinate(0)=
+          polyline_pt(nbound-1)->vertex_coordinate(last_vertex);
     }
-   
-   if (!contiguous)
+
+  if (!contiguous)
     {
-     std::ostringstream error_stream;
-     error_stream
+      std::ostringstream error_stream;
+      error_stream
       << "The polylines specified \n"
       << "should define a closed geometry, i.e. the first/last vertex of\n"
       << "adjacent polylines should match.\n\n"
-      << "Your polyline number "<< i_offensive 
+      << "Your polyline number "<< i_offensive
       <<" has no contiguous neighbour, when judged \nwith the tolerance of "
       << ToleranceForVertexMismatchInPolygons::Tolerable_error
       << " which is specified in the namespace \nvariable "
@@ -1150,19 +1660,263 @@ TriangleMeshPolygon::TriangleMeshPolygon(const Vector<TriangleMeshPolyLine*>&
       << "Feel free to adjust this or to recompile the code without\n"
       << "paranoia if you think this is OK...\n"
       << std::endl;
-     throw OomphLibError(error_stream.str(),
-                         "TriangleMeshPolygon::TriangleMeshPolygon()",
-                         OOMPH_EXCEPTION_LOCATION);
+      throw OomphLibError(error_stream.str(),
+          "TriangleMeshPolygon::TriangleMeshPolygon()",
+          OOMPH_EXCEPTION_LOCATION);
     }
-   
+
+  // Check if internal point is actually located in bounding polygon
+  // Reference: http://paulbourke.net/geometry/insidepoly/
+
+  // Only checked if there is an internal hole
+  if (!Internal_point_pt.empty())
+    {
+
+      // Vertex coordinates
+      Vector<Vector<double> > polygon_vertex;
+
+      // Total number of vertices
+      unsigned nvertex=0;
+
+      // Storage for first/last point on polyline for contiguousness check
+      Vector<double> last_vertex(2);
+      Vector<double> first_vertex(2);
+
+      // Get vertices
+      unsigned npolyline=boundary_polyline_pt.size();
+      for (unsigned i=0;i<npolyline;i++)
+        {
+          // Number of vertices
+          unsigned nvert=boundary_polyline_pt[i]->nvertex();
+          for (unsigned j=0;j<nvert;j++)
+            {
+              // Check contiguousness
+              if ((i>1)&&(j==0))
+                {
+                  first_vertex=polyline_pt(i)->vertex_coordinate(j);
+                  double dist=sqrt(pow(first_vertex[0]-last_vertex[0],2)+
+                      pow(first_vertex[1]-last_vertex[1],2));
+                  if (dist
+                      >ToleranceForVertexMismatchInPolygons::Tolerable_error)
+                    {
+                      std::ostringstream error_stream;
+                      error_stream
+                      << "The start and end points of polylines " << i
+                      << " and " <<i+1<< " don't match when judged\n"
+                      << "with the tolerance ("
+                      << ToleranceForVertexMismatchInPolygons::Tolerable_error
+                      << ") which is specified in the namespace \nvariable "
+                      << "ToleranceForVertexMismatchInPolygons::"
+                      << "Tolerable_error.\n\n"
+                      << "Feel free to adjust this or to recompile the "
+                      << "code without\n"
+                      << "paranoia if you think this is OK...\n"
+                      << std::endl;
+                      throw OomphLibError(
+                          error_stream.str(),
+                          "TriangleMeshPolygon::TriangleMeshPolygon()",
+                          OOMPH_EXCEPTION_LOCATION);
+                    }
+                }
+              // Get vertex (ignore end point)
+              if (j<nvert-1)
+                {
+                  polygon_vertex.push_back(
+                    polyline_pt(i)->vertex_coordinate(j));
+                }
+              // Prepare for check of contiguousness
+              else
+                {
+                  last_vertex=polyline_pt(i)->vertex_coordinate(j);
+                }
+            }
+        }
+
+      // Total number of vertices
+      nvertex=polygon_vertex.size();
+
+      // Counter for number of intersections
+      unsigned intersect_counter=0;
+
+      //Get first vertex
+      Vector<double> p1=polygon_vertex[0];
+      for (unsigned i=1;i<=nvertex;i++)
+        {
+          // Get second vertex by wrap-around
+          Vector<double> p2 = polygon_vertex[i%nvertex];
+
+          if (Internal_point_pt[1] > std::min(p1[1],p2[1]))
+            {
+              if (Internal_point_pt[1] <= std::max(p1[1],p2[1]))
+                {
+                  if (Internal_point_pt[0] <= std::max(p1[0],p2[0]))
+                    {
+                      if (p1[1] != p2[1])
+                        {
+                          double xintersect =
+                            (Internal_point_pt[1]-p1[1])*(p2[0]-p1[0])/
+                              (p2[1]-p1[1])+p1[0];
+                          if ( (p1[0] == p2[0]) ||
+                            (Internal_point_pt[0] <= xintersect) )
+                            {
+                              intersect_counter++;
+                            }
+                        }
+                    }
+                }
+            }
+          p1 = p2;
+        }
+
+
+      /*    oomph_info << Internal_point[0]<< " "  */
+      /*               << Internal_point[1]<< " "; */
+
+      // Even number of intersections: outside
+      if (intersect_counter%2==0)
+        {
+          //     oomph_info << 1 << std::endl;
+
+          std::ostringstream error_stream;
+          error_stream
+          << "The internal point at "
+          << Internal_point_pt[0]<< " "
+          << Internal_point_pt[1]
+          << " isn't in the polygon that describes the internal closed "
+          << "curve!\nPolygon vertices are at: \n";
+          for (unsigned i=0;i<nvertex;i++)
+            {
+              error_stream << polygon_vertex[i][0] << " "
+                  << polygon_vertex[i][1] << "\n";
+            }
+          error_stream
+          << "This may be because the internal point is defined by a\n"
+          << "GeomObject that has deformed so much that it's \n"
+          << "swept over the (initial) internal point.\n"
+          << "If so, you should update the position of the internal point. \n"
+          << "This could be done automatically by generating \n"
+          << "an internal mesh inside the polygon and using one\n"
+          << "of its internal nodes as the internal point. Actually not \n"
+          << "why triangle doesn't do that automatically....\n";
+          throw OomphLibError(
+              error_stream.str(),
+              "TriangleMeshPolygon::TriangleMeshPolygon()",
+              OOMPH_EXCEPTION_LOCATION);
+        }
+
+    }
+
 #endif
-   
-  }
-   
+
+}
+
+
+
+
 
 /////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////
+
+
+
+
+
+//=====================================================================
+/// Class defining an open curve for the Triangle mesh generation
+//=====================================================================
+TriangleMeshOpenCurve::TriangleMeshOpenCurve(
+   const Vector<TriangleMeshCurveSection*> &curve_section_pt)
+ : TriangleMeshCurve(curve_section_pt)
+ {
+
+#ifdef PARANOID
+
+ // Matching of curve sections i.e. the last vertex of
+ // the i curve section should match with the first
+ // vertex of the i+1 curve section
+
+ // Total number of boundaries
+ unsigned n_boundaries = Curve_section_pt.size();
+
+ // Check last point of each boundary bit coincides with first point
+ // on next one
+ for (unsigned i=0;i<n_boundaries-1;i++)
+  {
+
+   // Auxiliary vertex for storing the vertex values of contiguous curves
+   Vector<double> v1(2);
+   Vector<double> v2(2);
+
+   // This is for getting the final coordinates of the i curve section
+   Curve_section_pt[i]->final_vertex_coordinate(v1);
+
+   // This is for the start coordinates of the i+1 curve section
+   Curve_section_pt[i+1]->initial_vertex_coordinate(v2);
+
+   // Work out error
+   double error = sqrt(pow(v1[0]-v2[0],2)+pow(v1[1]-v2[1],2));
+
+   bool contiguous=true;
+   unsigned i_offensive=0;
+
+   if (error>ToleranceForVertexMismatchInPolygons::Tolerable_error)
+    {
+
+     contiguous = false;
+     i_offensive=i;
+
+     std::ostringstream error_stream;
+     error_stream
+     << "The start and end points of curve section boundary parts " << i
+     << " and " <<i+1<< " don't match when judged \nwith the tolerance of "
+     << ToleranceForVertexMismatchInPolygons::Tolerable_error
+     << " which is specified in the namespace \nvariable "
+     << "ToleranceForVertexMismatchInPolygons::Tolerable_error.\n\n"
+     << "Feel free to adjust this or to recompile the code without\n"
+     << "paranoia if you think this is OK...\n"
+     << std::endl;
+     throw OomphLibError(
+       error_stream.str(),
+       "TriangleMeshOpenCurve::TriangleMeshOpenCurve()",
+       OOMPH_EXCEPTION_LOCATION);
+    }
+   else
+    {
+     // Aligns (only implemented for polylines)
+     TriangleMeshPolyLine *current_polyline =
+       dynamic_cast<TriangleMeshPolyLine*>(Curve_section_pt[i]);
+     TriangleMeshPolyLine *next_polyline =
+       dynamic_cast<TriangleMeshPolyLine*>(Curve_section_pt[i+1]);
+
+     if (current_polyline && next_polyline)
+      {
+       unsigned last_vertex = current_polyline->nvertex() - 1;
+       next_polyline->vertex_coordinate(0) =
+         current_polyline->vertex_coordinate(last_vertex);
+      }
+    }
+
+  } // For n_boundaries - 1
+
+#endif
+
+ }
+
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+
+
+
+
 
 
  //=================================================
@@ -1434,7 +2188,7 @@ void TriangleMeshBase::setup_boundary_element_info(std::ostream &outfile)
    // Get pointer to element
    FiniteElement* fe_pt=finite_element_pt(e);
    
-   if (doc) outfile << "Element: " << e << " " << fe_pt << std::endl;
+   if (doc) {outfile << "Element: " << e << " " << fe_pt << std::endl;}
    
    // Only include 2D elements! Some meshes contain interface elements too.
    if (fe_pt->dim()==2)

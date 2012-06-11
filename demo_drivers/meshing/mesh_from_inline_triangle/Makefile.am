@@ -21,7 +21,7 @@ mesh_from_inline_triangle_SOURCES = mesh_from_inline_triangle.cc
 # we specify with -L. $(FLIBS) get included just in case
 # we decide to use a solver that involves fortran sources. 
 mesh_from_inline_triangle_LDADD = -L@libdir@ -lpoisson \
- -lgeneric  $(EXTERNAL_LIBS) $(FLIBS)
+ -lrigid_body -lgeneric  $(EXTERNAL_LIBS) $(FLIBS)
 
 
 
@@ -37,7 +37,7 @@ mesh_from_inline_triangle_polygon_SOURCES = mesh_from_inline_triangle.cc
 # we specify with -L. $(FLIBS) get included just in case
 # we decide to use a solver that involves fortran sources. 
 mesh_from_inline_triangle_polygon_LDADD = -L@libdir@ -lpoisson \
- -lgeneric  $(EXTERNAL_LIBS) $(FLIBS)
+ -lrigid_body -lgeneric  $(EXTERNAL_LIBS) $(FLIBS)
 
 mesh_from_inline_triangle_polygon_CXXFLAGS = -DOUTER_POLYGON
 
@@ -56,5 +56,5 @@ mesh_from_inline_triangle_no_adapt_SOURCES = mesh_from_inline_triangle_no_adapt.
 # we specify with -L. $(FLIBS) get included just in case
 # we decide to use a solver that involves fortran sources. 
 mesh_from_inline_triangle_no_adapt_LDADD = -L@libdir@ -lpoisson \
- -lgeneric  $(EXTERNAL_LIBS) $(FLIBS)
+ -lrigid_body -lgeneric  $(EXTERNAL_LIBS) $(FLIBS)
 

@@ -173,7 +173,7 @@ UnstructuredPoissonProblem<ELEMENT>::UnstructuredPoissonProblem()
    
    // The boundary is bounded by two distinct boundaries, each
    // represented by its own polyline
-   Vector<TriangleMeshPolyLine*> boundary_polyline_pt(2);
+   Vector<TriangleMeshCurveSection*> boundary_polyline_pt(2);
    
    // Vertex coordinates on boundary
    Vector<Vector<double> > bound_coords(n_seg+1);
@@ -237,7 +237,7 @@ UnstructuredPoissonProblem<ELEMENT>::UnstructuredPoissonProblem()
   {   
 
    // Provide storage for pointers to the two parts of the curvilinear boundary
-   Vector<TriangleMeshCurviLine*> outer_curvilinear_boundary_pt(2);
+   Vector<TriangleMeshCurveSection*> outer_curvilinear_boundary_pt(2);
    
    // First bit
    //----------
@@ -259,8 +259,8 @@ UnstructuredPoissonProblem<ELEMENT>::UnstructuredPoissonProblem()
    
    // Combine to curvilinear boundary
    //--------------------------------
-   TriangleMeshCurvilinearClosedCurve* curvilinear_outer_boundary_pt=
-    new TriangleMeshCurvilinearClosedCurve(outer_curvilinear_boundary_pt);
+   TriangleMeshClosedCurve* curvilinear_outer_boundary_pt=
+    new TriangleMeshClosedCurve(outer_curvilinear_boundary_pt);
 
    // Set the pointer
    closed_curve_pt=curvilinear_outer_boundary_pt;
@@ -269,7 +269,7 @@ UnstructuredPoissonProblem<ELEMENT>::UnstructuredPoissonProblem()
 
  // Now build the holes
  //====================
- Vector<TriangleMeshInternalClosedCurve*> hole_pt(2);
+ Vector<TriangleMeshClosedCurve*> hole_pt(2);
 
  // Build polygonal hole
  //=====================
@@ -287,7 +287,7 @@ UnstructuredPoissonProblem<ELEMENT>::UnstructuredPoissonProblem()
  
  // This hole is bounded by two distinct boundaries, each
  // represented by its own polyline
- Vector<TriangleMeshPolyLine*> hole_polyline_pt(2);
+ Vector<TriangleMeshCurveSection*> hole_polyline_pt(2);
  
 
  // First boundary of polygonal hole
@@ -308,7 +308,7 @@ UnstructuredPoissonProblem<ELEMENT>::UnstructuredPoissonProblem()
   }
  
  // Specify the hole boundary id
- unsigned boundary_id=3;
+ unsigned boundary_id=2;
  
  // Build the 1st hole polyline
  hole_polyline_pt[0] = new TriangleMeshPolyLine(bound_hole,boundary_id);
@@ -329,7 +329,7 @@ UnstructuredPoissonProblem<ELEMENT>::UnstructuredPoissonProblem()
   }
  
  // Specify the hole boundary id
- boundary_id=4;
+ boundary_id=3;
  
  // Build the 2nd hole polyline
  hole_polyline_pt[1] = new TriangleMeshPolyLine(bound_hole,boundary_id);
@@ -343,7 +343,7 @@ UnstructuredPoissonProblem<ELEMENT>::UnstructuredPoissonProblem()
  hole_center[0]=x_center;
  hole_center[1]=y_center;
 
- hole_pt[0] = new TriangleMeshInternalPolygon(hole_center,hole_polyline_pt);
+ hole_pt[0] = new TriangleMeshPolygon(hole_polyline_pt, hole_center);
  
 
 
@@ -357,7 +357,7 @@ UnstructuredPoissonProblem<ELEMENT>::UnstructuredPoissonProblem()
  Ellipse* ellipse_pt=new Ellipse(A,B);
  
  // Build the two parts of the curvilinear boundary
- Vector<TriangleMeshCurviLine*> curvilinear_boundary_pt(2);
+ Vector<TriangleMeshCurveSection*> curvilinear_boundary_pt(2);
  
 
  // First part of curvilinear boundary
@@ -365,7 +365,7 @@ UnstructuredPoissonProblem<ELEMENT>::UnstructuredPoissonProblem()
  double zeta_start=0.0;
  double zeta_end=MathematicalConstants::Pi;
  unsigned nsegment=10;
- boundary_id=7;
+ boundary_id=4;
  curvilinear_boundary_pt[0]=new TriangleMeshCurviLine(
   ellipse_pt,zeta_start,zeta_end, 
   nsegment,boundary_id);
@@ -375,7 +375,7 @@ UnstructuredPoissonProblem<ELEMENT>::UnstructuredPoissonProblem()
  zeta_start=MathematicalConstants::Pi;
  zeta_end=2.0*MathematicalConstants::Pi;
  nsegment=15;
- boundary_id=8;
+ boundary_id=5;
  curvilinear_boundary_pt[1]=new TriangleMeshCurviLine(
   ellipse_pt,zeta_start,zeta_end, 
   nsegment,boundary_id);
@@ -386,9 +386,9 @@ UnstructuredPoissonProblem<ELEMENT>::UnstructuredPoissonProblem()
  Vector<double> hole_coords(2);
  hole_coords[0]=0.0;
  hole_coords[1]=0.0;
- Vector<TriangleMeshInternalClosedCurve*> curvilinear_hole_pt(1);
+ Vector<TriangleMeshClosedCurve*> curvilinear_hole_pt(1);
  hole_pt[1]=
-  new TriangleMeshInternalCurvilinearClosedCurve(curvilinear_boundary_pt,
+  new TriangleMeshClosedCurve(curvilinear_boundary_pt,
                                                  hole_coords);
  
  // hierher
@@ -398,13 +398,23 @@ UnstructuredPoissonProblem<ELEMENT>::UnstructuredPoissonProblem()
 
  // Now build the mesh
  //===================
+
+ // Use the TriangleMeshParameters object for helping on the manage of the
+ // TriangleMesh parameters
+ TriangleMeshParameters triangle_mesh_parameters(closed_curve_pt);
+
+ // Specify the closed curve using the TriangleMeshParameters object
+ triangle_mesh_parameters.internal_closed_curve_pt() = hole_pt;
+
+ // Specify the maximum area element
  double uniform_element_area=0.2;
- My_mesh_pt=new 
-  TriangleMesh<ELEMENT>(closed_curve_pt,
-                        hole_pt,
-                        uniform_element_area);
- 
- // Store as the problem's one and only mesh
+ triangle_mesh_parameters.element_area() = uniform_element_area;
+
+ // Create the mesh
+  My_mesh_pt=new
+    TriangleMesh<ELEMENT>(triangle_mesh_parameters);
+
+  // Store as the problem's one and only mesh
  Problem::mesh_pt()=My_mesh_pt;
  
  // Set boundary condition and complete the build of all elements

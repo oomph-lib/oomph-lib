@@ -434,7 +434,7 @@ UnstructuredTorusProblem<ELEMENT>::UnstructuredTorusProblem(
 //   Outer_boundary_polyline_pt = new TriangleMeshPolygon(boundary_segment_pt);
 
  // No holes
- Vector<TriangleMeshInternalClosedCurve*> Inner_hole_pt;
+ Vector<TriangleMeshClosedCurve*> Inner_hole_pt;
  
  //Now create the mesh
  double uniform_element_area = 0.2;
@@ -449,7 +449,7 @@ UnstructuredTorusProblem<ELEMENT>::UnstructuredTorusProblem(
 
 
  // Build the two parts of the curvilinear boundary
- Vector<TriangleMeshCurviLine*> curvilinear_boundary_pt(2);
+ Vector<TriangleMeshCurveSection*> curvilinear_boundary_pt(2);
  
  double zeta_start=0.0;
  double zeta_end=MathematicalConstants::Pi;
@@ -473,7 +473,7 @@ UnstructuredTorusProblem<ELEMENT>::UnstructuredTorusProblem(
  hole_coords[0]=0.0;
  hole_coords[1]=0.0;
  TriangleMeshClosedCurve* curvilinear_outer_boundary_pt=
-  new TriangleMeshCurvilinearClosedCurve(curvilinear_boundary_pt);
+  new TriangleMeshClosedCurve(curvilinear_boundary_pt);
  
 
 //  //Set the boundaries
@@ -484,15 +484,26 @@ UnstructuredTorusProblem<ELEMENT>::UnstructuredTorusProblem(
 //  outer_split_coord[1][0] = outer_split_coord[0][1]; 
 //  outer_split_coord[1][1] = 8.0*atan(1.0);
 
+ // Use the TriangleMeshParameters object for gathering all
+ // the necessary arguments for the TriangleMesh object
+ TriangleMeshParameters triangle_mesh_parameters(
+   curvilinear_outer_boundary_pt);
 
+ // Take the holes into the TriangleMeshParameters object
+ triangle_mesh_parameters.internal_closed_curve_pt() =
+   Inner_hole_pt;
 
+ // Take the maximum element area
+ triangle_mesh_parameters.element_area() =
+   uniform_element_area;
 
+ // Define the time stepper
+ triangle_mesh_parameters.time_stepper_pt() =
+   this->time_stepper_pt();
+
+ // Create the mesh
  Problem::mesh_pt() = new RefineableTriangleMesh<ELEMENT>(
-  curvilinear_outer_boundary_pt, //area_pt,
-//  outer_split_coord,
-  Inner_hole_pt,
-  uniform_element_area,
-  this->time_stepper_pt());
+   triangle_mesh_parameters);
 
  // Set error estimator 
  Z2ErrorEstimator* error_estimator_pt=new Z2ErrorEstimator;

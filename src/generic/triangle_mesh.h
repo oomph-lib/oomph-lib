@@ -150,50 +150,243 @@ namespace TriangleHelper
 }
 
 
-////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////
-
-
-
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
 
+class TriangleMeshPolyLine;
+class TriangleMeshCurviLine;
 
 //=====================================================================
-/// Base class definining a mesh boundary
+/// Base class for defining a triangle mesh boundary, this class has the
+/// methods that allow to connect the initial and final ends to other
+/// triangle mesh boundaries
 //=====================================================================
-class TriangleMeshOpenCurve
+class TriangleMeshCurveSection
 {
 
   public:
 
- /// Empty constructor
- TriangleMeshOpenCurve(){}
-
+ /// Empty constructor. Initialises the curve section as non connected
+ TriangleMeshCurveSection() :
+  Initial_vertex_connected(false),
+  Final_vertex_connected(false),
+  Initial_vertex_connected_to_curviline(false),
+  Final_vertex_connected_to_curviline(false)
+ { }
 
  /// Empty destructor
- virtual ~TriangleMeshOpenCurve(){}
+ virtual ~TriangleMeshCurveSection() { }
 
  /// \short Number of segments that this part of the
  /// boundary is to be represented by. This corresponds
  /// to the number of straight-line segments in triangle
  /// representation.
- virtual unsigned nsegment() const=0;
+ virtual unsigned nsegment() const = 0;
 
- /// Boundary ID
- virtual unsigned boundary_id()const=0;
+ /// Boundary id
+ virtual unsigned boundary_id()const = 0;
+
+ /// Number of vertices
+ virtual unsigned nvertex() const = 0;
+
+ /// Output the curve_section
+ virtual void output(std::ostream &outfile, const unsigned& n_sample=50) = 0;
+
+ /// Get first vertex coordinates
+ virtual void initial_vertex_coordinate(
+   Vector<double> &vertex) = 0;
+
+ /// Get last vertex coordinates
+ virtual void final_vertex_coordinate(
+   Vector<double> &vertex) = 0;
+
+ // \short Connects the initial vertex of the curve section to a desired
+ /// target polyline by specifying the vertex number. There is a checking
+ /// which verifies that the initial vertex is close enough to the
+ /// destination vertex on the target polyline by no more than the specified
+ /// tolerance
+ void connect_initial_vertex_to_polyline(
+   TriangleMeshPolyLine *polyline_pt,
+   const unsigned &vertex_number,
+   const double &tolerance_for_connection = 1.0e-14);
+
+ // \short Connects the final vertex of the curve section to a desired
+ /// target polyline by specifying the vertex number. There is a checking
+ /// which verifies that the final vertex is close enough to the
+ /// destination vertex on the target polyline by no more than the specified
+ /// tolerance
+ void connect_final_vertex_to_polyline(
+   TriangleMeshPolyLine *polyline_pt,
+   const unsigned &vertex_number,
+   const double &tolerance_for_connection = 1.0e-14);
+
+ // \short Connects the initial vertex of the curve section to a desired
+ /// target curviline by specifying the s value (intrinsic value on the
+ /// geometric object of the curviline) where to connect on the target
+ /// curviline. There is a checking which verifies that the initial vertex
+ /// and the coordinates on the given s value are close enough by no more
+ /// than the given tolerance
+ void connect_initial_vertex_to_curviline(
+   TriangleMeshCurviLine *curviline_pt,
+   const double &s_value,
+   const double &tolerance_for_connection = 1.0e-14);
+
+ // \short Connects the final vertex of the curve section to a desired
+ /// target curviline by specifying the s value (intrinsic value on the
+ /// geometric object of the curviline) where to connect on the target
+ /// curviline. There is a checking which verifies that the final vertex
+ /// and the coordinates on the given s value are close enough by no more
+ /// than the given tolerance
+ void connect_final_vertex_to_curviline(
+   TriangleMeshCurviLine *curviline_pt,
+   const double &s_value,
+   const double &tolerance_for_connection = 1.0e-14);
+
+ /// Test whether initial vertex is connected or not
+ bool is_initial_vertex_connected() const
+ {return Initial_vertex_connected;}
+
+ /// Sets the initial vertex as connected
+ void set_initial_vertex_connected()
+ {Initial_vertex_connected = true;}
+
+ /// Sets the initial vertex as non connected
+ void unset_initial_vertex_connected()
+  {Initial_vertex_connected = false;}
+
+ /// Test whether final vertex is connected or not
+ bool is_final_vertex_connected() const
+ {return Final_vertex_connected;}
+
+ /// Sets the final vertex as connected
+ void set_final_vertex_connected()
+ {Final_vertex_connected = true;}
+
+ /// Sets the final vertex as non connected
+ void unset_final_vertex_connected()
+  {Final_vertex_connected = false;}
+
+ /// Gets the id to which the initial end is connected
+ unsigned initial_vertex_connected_bnd_id() const
+ {return Initial_vertex_connected_bnd_id;}
+
+ /// Sets the id to which the initial end is connected
+ unsigned &initial_vertex_connected_bnd_id()
+ {return Initial_vertex_connected_bnd_id;}
+
+ /// Gets the vertex number to which the initial end is connected
+ unsigned initial_vertex_connected_n_vertex() const
+ {return Initial_vertex_connected_n_vertex;}
+
+ /// Sets the vertex number to which the initial end is connected
+ unsigned &initial_vertex_connected_n_vertex()
+ {return Initial_vertex_connected_n_vertex;}
+
+ /// Gets the id to which the final end is connected
+ unsigned final_vertex_connected_bnd_id() const
+ {return Final_vertex_connected_bnd_id;}
+
+ /// Sets the id to which the final end is connected
+ unsigned &final_vertex_connected_bnd_id()
+ {return Final_vertex_connected_bnd_id;}
+
+ /// Sets the vertex number to which the final end is connected
+ unsigned final_vertex_connected_n_vertex() const
+ {return Final_vertex_connected_n_vertex;}
+
+ /// Gets the vertex number to which the initial end is connected
+ unsigned &final_vertex_connected_n_vertex()
+ {return Final_vertex_connected_n_vertex;}
+
+ /// Test whether the initial vertex is connected to a curviline
+ bool is_initial_vertex_connected_to_curviline() const
+ {return Initial_vertex_connected_to_curviline;}
+
+ /// Sets the initial vertex as connected to a curviline
+ void set_initial_vertex_connected_to_curviline()
+ {Initial_vertex_connected_to_curviline = true;}
+
+ /// Sets the initial vertex as non connected to a curviline
+ void unset_initial_vertex_connected_to_curviline()
+ {Initial_vertex_connected_to_curviline = false;}
+
+ /// Test whether the final vertex is connected to a curviline
+ bool is_final_vertex_connected_to_curviline() const
+ {return Final_vertex_connected_to_curviline;}
+
+ /// Sets the final vertex as connected to a curviline
+ void set_final_vertex_connected_to_curviline()
+ {Final_vertex_connected_to_curviline = true;}
+
+ /// Sets the final vertex as non connected to a curviline
+ void unset_final_vertex_connected_to_curviline()
+ {Final_vertex_connected_to_curviline = false;}
+
+ /// \short Gets the s value to which the initial end
+ /// is connected
+ double initial_s_connection_value() const
+ {return Initial_s_connection_value;}
+
+ /// \short Gets the s value to which the final end
+ /// is connected
+ double final_s_connection_value() const
+ {return Final_s_connection_value;}
+
+ /// \short Gets the tolerance value for connections among
+ /// curvilines
+ double tolerance_for_s_connection() const
+ {return Tolerance_for_s_connection;}
+
+protected:
+
+ /// \short Used for stating if the initial end is connected
+ /// to another boundary
+ bool Initial_vertex_connected;
+
+ /// \short Used for stating if the final end is connected
+ /// to another boundary
+ bool Final_vertex_connected;
+
+ /// Stores the id to which the initial end is connected
+ unsigned Initial_vertex_connected_bnd_id;
+
+ /// \short Stores the vertex number used for connection with
+ /// the initial end
+ unsigned Initial_vertex_connected_n_vertex;
+
+ /// Stores the id to which the initial end is connected
+ unsigned Final_vertex_connected_bnd_id;
+
+ /// \short Stores the vertex number used for connection with
+ /// the final end
+ unsigned Final_vertex_connected_n_vertex;
+
+ /// States if the initial vertex is connected to a curviline
+ bool Initial_vertex_connected_to_curviline;
+
+ /// States if the final vertex is connected to a curviline
+ bool Final_vertex_connected_to_curviline;
+
+ /// \short Stores the s value used for connecting the
+ /// initial end with a curviline
+ double Initial_s_connection_value;
+
+ /// \short Stores the s value used for connecting the
+ /// final end with a curviline
+ double Final_s_connection_value;
+
+ /// Tolerance used for connecting the ends to a curviline
+ double Tolerance_for_s_connection;
 
 };
-
 
  
 //=====================================================================
 /// Class definining a curvilinear triangle mesh boundary in terms 
 /// of a GeomObject. Curvlinear equivalent of PolyLine.
 //=====================================================================
-class TriangleMeshCurviLine : public virtual TriangleMeshOpenCurve
+class TriangleMeshCurviLine : public virtual TriangleMeshCurveSection
 {
  
 public:
@@ -212,27 +405,40 @@ public:
                        const double& zeta_end,
                        const unsigned& nsegment,
                        const unsigned& boundary_id,
-                       const bool& space_vertices_evenly_in_arclength=true) :
-  Geom_object_pt(geom_object_pt), Zeta_start(zeta_start),
-  Zeta_end(zeta_end), Nsegment(nsegment), Boundary_id(boundary_id),
-  Space_vertices_evenly_in_arclength(space_vertices_evenly_in_arclength)
-  {}
- 
+                       const bool&
+                       space_vertices_evenly_in_arclength=true)
+                     :  TriangleMeshCurveSection(),
+                        Geom_object_pt(geom_object_pt),
+                        Zeta_start(zeta_start),
+                        Zeta_end(zeta_end),
+                        Nsegment(nsegment),
+                        Boundary_id(boundary_id),
+                        Space_vertices_evenly_in_arclength(
+                          space_vertices_evenly_in_arclength),
+                          Reversed(false)
+  { }
+
+
  /// \short Empty Destuctor
  virtual ~TriangleMeshCurviLine() { }
  
  /// Pointer to GeomObject that represents this part of the boundary
  GeomObject* geom_object_pt(){return Geom_object_pt;}
  
- /// Start coordinate in terms of the GeomObject's intrinisic coordinate
+ /// Start coordinate in terms of the GeomObject's intrinsic coordinate
  double zeta_start(){return Zeta_start;}
- 
- /// End coordinate in terms of the GeomObject's intrinisic coordinate
+
+ /// End coordinate in terms of the GeomObject's intrinsic coordinate
  double zeta_end(){return Zeta_end;}
 
  /// \short Number of (initially straight-line) segments that this part of the
  /// boundary is to be represented by
  unsigned nsegment() const {return Nsegment;}
+
+ /// \short Number of (initially straight-line) segments that this part of the
+ /// boundary is to be represented by. This version allows the change of the
+ /// number of segments
+ unsigned &nsegment() {return Nsegment;}
 
  /// Boundary ID
  unsigned boundary_id() const {return Boundary_id;}
@@ -255,20 +461,91 @@ public:
  /// of the Curvline are spaced (approximately) evenly in arclength 
  /// along the GeomObject [true] or in equal increments in zeta [false]
  bool space_vertices_evenly_in_arclength() const
+  {
+	 return Space_vertices_evenly_in_arclength;
+  }
+
+ /// Number of vertices
+ unsigned nvertex() const {return 2;}
+
+ /// Get first vertex coordinates
+ void initial_vertex_coordinate(Vector<double> &vertex)
+  {
+   Vector<double> z(1);
+   z[0] = Zeta_start;
+   Geom_object_pt->position(z, vertex);
+  }
+
+ /// Get last vertex coordinates
+ void final_vertex_coordinate(Vector<double> &vertex)
+  {
+   Vector<double> z(1);
+   z[0] = Zeta_end;
+   Geom_object_pt->position(z, vertex);
+  }
+
+ /// \short Does the vector for storing connections has elements?
+ bool are_there_connection_points()
+ {return !Connection_points_pt.empty();}
+
+ /// \short Returns the connection points vector
+ Vector<double> *connection_points_pt()
+ {return &Connection_points_pt;}
+
+ /// Add the connection point (z_value) to the connection
+ /// points that receive the curviline
+ void add_connection_point(
+   const double &z_value,
+   const double &tol = 1.0e-12)
  {
-  return Space_vertices_evenly_in_arclength;
+
+  // If we are trying to connect to the initial or final
+  // point then it is not necessary to add this point
+  // to the list since it will explicitly be created when
+  // transforming the curviline to polyline
+  if (std::fabs(z_value - Zeta_start) < tol ||
+    std::fabs(z_value - Zeta_end) < tol)
+   {return;}
+
+  // We need to deal with repeated connection points,
+  // if the connection point is already in the list then
+  // we will not add it!!!
+  // Search for repeated elements
+  unsigned n_size = Connection_points_pt.size();
+  for (unsigned i = 0; i < n_size; i++)
+   {
+    if (fabs(z_value - Connection_points_pt[i]) < tol)
+     {return;}
+   }
+
+  // Only add the connection point if it is not the
+  // initial or final zeta value and it is not already on the
+  // list
+  Connection_points_pt.push_back(z_value);
+
  }
 
+ /// \short Gets access to the reversed variable
+ void reverse()
+  {
+   double tmp_zeta = zeta_start();
+   Zeta_start = zeta_end();
+   Zeta_end = tmp_zeta;
+   Reversed = true;
+  }
 
-  private:
+ /// \short Get access to the reversed variable
+ const bool reversed() {return Reversed;}
+
+private:
 
  /// Pointer to GeomObject that represents this part of the boundary
  GeomObject* Geom_object_pt;
  
- /// Start coordinate in terms of the GeomObject's intrinisic coordinate
+ /// Start coordinate in terms of the GeomObject's intrinsic coordinate
  double Zeta_start;
  
- /// End coordinate in terms of the GeomObject's intrinisic coordinate
+ /// End coordinate in terms of the GeomObject's intrinsic coordinate
  double Zeta_end;
 
  /// Number of (initially straight-line) segments that this part of the
@@ -279,9 +556,18 @@ public:
  unsigned Boundary_id;
 
  /// \short Boolean to indicate if vertices in polygonal representation
- /// of the Curvline are spaced (approximately) evenly in arclength 
+ /// of the Curviline are spaced (approximately) evenly in arclength
  /// along the GeomObject [true] or in equal increments in zeta [false]
  bool Space_vertices_evenly_in_arclength;
+
+ // \short Stores the information for connections received on the
+ /// curviline. Used when converting to polyline
+ Vector<double> Connection_points_pt;
+
+ /// \short Helper variable that indicates that the associated polyline
+ /// on the TriangleMesh should be constructed running from the
+ /// final point to the first one
+ bool Reversed;
 
 };
 
@@ -290,7 +576,7 @@ public:
 //=====================================================================
 /// Class defining a polyline for use in Triangle Mesh generation
 //=====================================================================
-class TriangleMeshPolyLine : public virtual TriangleMeshOpenCurve
+class TriangleMeshPolyLine : public virtual TriangleMeshCurveSection
 {
  
 public:
@@ -299,34 +585,34 @@ public:
  /// Also allows the optional specification of a boundary ID -- useful
  /// in a mesh generation context. If not specified it defaults to zero.
  TriangleMeshPolyLine(const Vector<Vector<double> >& vertex_coordinate,
-                      const unsigned &boundary_id=0) :
-  Vertex_coordinate(vertex_coordinate), Boundary_id(boundary_id)
-  {
+                      const unsigned &boundary_id) :
+                       TriangleMeshCurveSection(),
+                       Vertex_coordinate(vertex_coordinate),
+                       Boundary_id(boundary_id)
+ {
 #ifdef PARANOID
-   unsigned nvert=Vertex_coordinate.size();
-   for (unsigned i=0;i<nvert;i++)
-    {
-     if (Vertex_coordinate[i].size()!=2)
-      {
-       std::ostringstream error_stream;
-       error_stream 
-        << "TriangleMeshPolyLine should only be used in 2D!\n"
-        << "Your Vector of coordinates, contains data for " 
-        << Vertex_coordinate[i].size() 
-        << "-dimensional coordinates." << std::endl;
-       throw OomphLibError(error_stream.str(),
-                           "TriangleMeshPolyLine::TriangleMeshPolyLine()",
-                           OOMPH_EXCEPTION_LOCATION);
-      }
-    }
-#endif   
-  }
+  unsigned nvert=Vertex_coordinate.size();
+  for (unsigned i=0;i<nvert;i++)
+   {
+    if (Vertex_coordinate[i].size()!=2)
+     {
+      std::ostringstream error_stream;
+      error_stream
+      << "TriangleMeshPolyLine should only be used in 2D!\n"
+      << "Your Vector of coordinates, contains data for "
+      << Vertex_coordinate[i].size()
+      << "-dimensional coordinates." << std::endl;
+      throw OomphLibError(error_stream.str(),
+        "TriangleMeshPolyLine::TriangleMeshPolyLine()",
+        OOMPH_EXCEPTION_LOCATION);
+     }
+   }
+#endif
+ }
  
-
  /// Empty destructor
- ~TriangleMeshPolyLine() {}
+ virtual ~TriangleMeshPolyLine() { }
 
- 
  /// Number of vertices
  unsigned nvertex() const {return Vertex_coordinate.size();}
    
@@ -338,18 +624,22 @@ public:
   
  /// Coordinate vector of i-th vertex (const version)
  Vector<double> vertex_coordinate(const unsigned& i) const
-  {
-   return Vertex_coordinate[i];
-  }   
+ {return Vertex_coordinate[i];}
 
  /// Coordinate vector of i-th vertex
  Vector<double>& vertex_coordinate(const unsigned& i)
-  {
-   return Vertex_coordinate[i];
-  }
-  
- /// Output the polyline -- close it if optional boolean flag is true
- void output(std::ostream &outfile, const bool& close_it=false)
+ {return Vertex_coordinate[i];}
+
+ /// Get first vertex coordinates
+ void initial_vertex_coordinate(Vector<double> &vertex)
+ {vertex = Vertex_coordinate[0];}
+
+ /// Get last vertex coordinates
+ void final_vertex_coordinate(Vector<double> &vertex)
+ {vertex = Vertex_coordinate[nvertex()-1];}
+
+ /// Output the polyline -- n_sample is ignored
+ void output(std::ostream &outfile, const unsigned& n_sample=50)
   {
    outfile <<"ZONE T=\"TriangleMeshPolyLine with boundary ID" 
            << Boundary_id<<"\""<<std::endl;
@@ -359,18 +649,17 @@ public:
      outfile << Vertex_coordinate[i][0] << " " 
              << Vertex_coordinate[i][1] << std::endl;
     }
-   if (close_it)
-    {
-     outfile << Vertex_coordinate[0][0] << " " 
-             << Vertex_coordinate[0][1] << std::endl;
-    }
   }
 
+ /// Reverse vertices
+ void reverse()
+ {std::reverse(Vertex_coordinate.begin(), Vertex_coordinate.end());}
+
 private:
-  
+
  /// Vector of Vector of vertex coordinates
  Vector<Vector<double> > Vertex_coordinate;
-   
+
  /// Boundary ID
  unsigned Boundary_id;
 
@@ -400,180 +689,242 @@ namespace ToleranceForVertexMismatchInPolygons
  extern double Tolerable_error;
 }
 
-
-
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
 
+//=====================================================================
+// \short Class defining triangle mesh curves. Abstract class for
+/// closed curves and open curves. All TriangleMeshCurves are composed
+/// of a Vector of TriangleMeshCurveSections
+//=====================================================================
+class TriangleMeshCurve
+{
 
+public:
+
+  /// Empty constructor
+  TriangleMeshCurve(const Vector<TriangleMeshCurveSection*> &curve_section_pt)
+  : Curve_section_pt(curve_section_pt)
+  {
+   Polyline_refinement_tolerance = 0.08;
+   Polyline_unrefinement_tolerance = 0.04;
+  }
+
+  /// Empty destructor
+  virtual ~TriangleMeshCurve() { }
+
+  /// Number of vertices
+  virtual unsigned nvertices() const = 0;
+
+  /// Total number of segments
+  virtual unsigned nsegments() const = 0;
+
+  /// Return max boundary id of associated curves
+  unsigned max_boundary_id()
+  {
+   unsigned max=0;
+   unsigned n_curve_section = ncurve_section();
+   for(unsigned i=0; i<n_curve_section; i++)
+    {
+     unsigned boundary_id=Curve_section_pt[i]->boundary_id();
+     if (boundary_id>max) {max=boundary_id;}
+    }
+   return max;
+  }
+
+  /// Number of constituent curves
+  virtual unsigned ncurve_section() const
+   {return Curve_section_pt.size();}
+
+  /// \short Enable refinement of polylines to create a better
+  /// representation of curvilinear boundaries (e.g. in free-surface
+  /// problems). See tutorial for
+  /// interpretation of the optional argument which specifies the
+  /// refinement tolerance. It defaults to 0.08 and the smaller the
+  /// number the finer the surface representation.
+  void enable_polyline_refinement(const double& tolerance=0.08)
+  {
+   Polyline_refinement_tolerance=tolerance;
+  }
+
+  /// \short Set tolerance for refinement of polylines to create a better
+  /// representation of curvilinear boundaries (e.g. in free-surface
+  /// problems). See tutorial for
+  /// interpretation of the refinement tolerance. (The smaller the
+  /// number the finer the surface representation). If set to
+  /// a negative value, we're switching off refinement --
+  /// equivalent to calling disable_polyline_refinement()
+  void set_polyline_refinement_tolerance(const double& tolerance)
+  {
+   Polyline_refinement_tolerance=tolerance;
+  }
+
+  /// \short Get tolerance for refinement of polylines to create a better
+  /// representation of curvilinear boundaries (e.g. in free-surface
+  /// problems). See tutorial for
+  /// interpretation. If it's negative refinement is disabled.
+  double polyline_refinement_tolerance()
+  {
+   return Polyline_refinement_tolerance;
+  }
+
+  /// \short Disable refinement of polylines
+  void disable_polyline_refinement()
+  {
+   Polyline_refinement_tolerance=-1.0;
+  }
+
+  /// \short Enable unrefinement of polylines to avoid unnecessarily large
+  /// numbers of elements on of curvilinear boundaries (e.g. in free-surface
+  /// problems). See tutorial for
+  /// interpretation of the optional argument which specifies the
+  /// unrefinement tolerance. It defaults to 0.04 and the larger the number
+  /// the more agressive we are when removing unnecessary vertices on
+  /// gently curved polylines.
+  void enable_polyline_unrefinement(const double& tolerance=0.04)
+  {
+   Polyline_unrefinement_tolerance=tolerance;
+  }
+
+  /// \short Set tolerance for unrefinement of polylines
+  /// to avoid unnecessarily large
+  /// numbers of elements on of curvilinear boundaries (e.g. in free-surface
+  /// problems). See tutorial for
+  /// interpretation of the optional argument which specifies the
+  /// unrefinement tolerance. It defaults to 0.04 and the larger the number
+  /// the more agressive we are when removing unnecessary vertices on
+  /// gently curved polylines. If set to
+  /// a negative value, we're switching off unrefinement --
+  /// equivalent to calling disable_polyline_unrefinement()
+  void set_polyline_unrefinement_tolerance(const double& tolerance)
+  {
+   Polyline_unrefinement_tolerance=tolerance;
+  }
+
+  /// \short Get tolerance for unrefinement of polylines to create a better
+  /// representation of curvilinear boundaries (e.g. in free-surface
+  /// problems). See tutorial for
+  /// interpretation. If it's negative unrefinement is disabled.
+  double polyline_unrefinement_tolerance()
+  {
+   return Polyline_unrefinement_tolerance;
+  }
+
+  /// \short Disable unrefinement of polylines
+  void disable_polyline_unrefinement()
+  {
+   Polyline_unrefinement_tolerance=-1.0;
+  }
+
+  /// Output each sub-boundary at n_sample (default: 50) points
+  virtual void output(std::ostream &outfile, const unsigned& n_sample=50) = 0;
+
+  /// Pointer to i-th constituent curve section
+  virtual TriangleMeshCurveSection* curve_section_pt(const unsigned& i) const
+  {return Curve_section_pt[i];}
+
+  /// Pointer to i-th constituent curve section
+  virtual TriangleMeshCurveSection* &curve_section_pt(const unsigned& i)
+  {return Curve_section_pt[i];}
+
+protected:
+
+  /// Vector of curve sections
+  Vector<TriangleMeshCurveSection*> Curve_section_pt;
+
+private:
+
+  /// Tolerance for refinement of polylines (neg if refinement is disabled)
+  double Polyline_refinement_tolerance;
+
+  /// Tolerance for unrefinement of polylines (neg if refinement is disabled)
+  double Polyline_unrefinement_tolerance;
+
+};
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 
 //=====================================================================
 /// Base class defining a closed curve for the Triangle mesh generation
 //=====================================================================
-class TriangleMeshClosedCurve
+class TriangleMeshClosedCurve : public virtual TriangleMeshCurve
 {
-  
+
 public:
 
  /// Empty constructor
- TriangleMeshClosedCurve()
-  {
-   Polyline_refinement_tolerance=0.08;
-   Polyline_unrefinement_tolerance=0.04;
-  }
+ TriangleMeshClosedCurve(
+   const Vector<TriangleMeshCurveSection*> &curve_section_pt,
+   const Vector<double>& internal_point_pt = Vector<double>(0));
 
  /// Empty destructor
- virtual ~TriangleMeshClosedCurve(){};
+ virtual ~TriangleMeshClosedCurve() { }
 
-
- /// \short Enable refinement of polylines to create a better
- /// representation of curvilinear boundaries (e.g. in free-surface 
- /// problems). See tutorial for
- /// interpretation of the optional argument which specifies the
- /// refinement tolerance. It defaults to 0.08 and the smaller the 
- /// number the finer the surface representation.
- void enable_polyline_refinement(const double& tolerance=0.08)
+ /// Number of vertices
+ unsigned nvertices() const
  {
-  Polyline_refinement_tolerance=tolerance;
+  unsigned n_curve_section=ncurve_section();
+  unsigned n_vertices=0;
+  for(unsigned j=0;j<n_curve_section;j++)
+   {
+    // Storing the number of the vertices
+    n_vertices+=Curve_section_pt[j]->nvertex()-1;
+   }
+  // If there's just one boundary. All the vertices should be counted
+  if(n_curve_section==1) {n_vertices+=1;}
+  return n_vertices;
  }
 
- /// \short Set tolerance for refinement of polylines to create a better
- /// representation of curvilinear boundaries (e.g. in free-surface 
- /// problems). See tutorial for
- /// interpretation of the refinement tolerance. (The smaller the 
- /// number the finer the surface representation). If set to 
- /// a negative value, we're switching off refinement --
- /// equivalent to calling disable_polyline_refinement()
- void set_polyline_refinement_tolerance(const double& tolerance)
+ /// Total number of segments
+ unsigned nsegments() const
  {
-  Polyline_refinement_tolerance=tolerance;
+  unsigned n_curve_section=ncurve_section();
+  unsigned nseg=0;
+  for(unsigned j=0;j<n_curve_section;j++)
+   {nseg+=Curve_section_pt[j]->nsegment();}
+  // If there's just one boundary poly line we have another segment
+  // connecting the last vertex to the first one
+  if(n_curve_section==1) {nseg+=1;}
+  return nseg;
  }
-
- /// \short Get tolerance for refinement of polylines to create a better
- /// representation of curvilinear boundaries (e.g. in free-surface 
- /// problems). See tutorial for
- /// interpretation. If it's negative refinement is disabled.
- double polyline_refinement_tolerance()
- {
-  return Polyline_refinement_tolerance;
- }
-
- /// \short Disable refinement of polylines
- void disable_polyline_refinement()
- {
-  Polyline_refinement_tolerance=-1.0;
- }
-
- /// \short Enable unrefinement of polylines to avoid unnecessarily large
- /// numbers of elements on of curvilinear boundaries (e.g. in free-surface 
- /// problems). See tutorial for
- /// interpretation of the optional argument which specifies the
- /// unrefinement tolerance. It defaults to 0.04 and the larger the number
- /// the more agressive we are when removing unnecessary vertices on
- /// gently curved polylines.
- void enable_polyline_unrefinement(const double& tolerance=0.04)
- {
-  Polyline_unrefinement_tolerance=tolerance;
- }
-
- /// \short Set tolerance for unrefinement of polylines  
- /// to avoid unnecessarily large
- /// numbers of elements on of curvilinear boundaries (e.g. in free-surface 
- /// problems). See tutorial for
- /// interpretation of the optional argument which specifies the
- /// unrefinement tolerance. It defaults to 0.04 and the larger the number
- /// the more agressive we are when removing unnecessary vertices on
- /// gently curved polylines. If set to 
- /// a negative value, we're switching off unrefinement --
- /// equivalent to calling disable_polyline_unrefinement()
- void set_polyline_unrefinement_tolerance(const double& tolerance)
- {
-  Polyline_unrefinement_tolerance=tolerance;
- }
-
- /// \short Get tolerance for unrefinement of polylines to create a better
- /// representation of curvilinear boundaries (e.g. in free-surface 
- /// problems). See tutorial for
- /// interpretation. If it's negative unrefinement is disabled.
- double polyline_unrefinement_tolerance()
- {
-  return Polyline_unrefinement_tolerance;
- }
-
- /// \short Disable unrefinement of polylines
- void disable_polyline_unrefinement()
- {
-  Polyline_unrefinement_tolerance=-1.0;
- }
-
-
-  private:
-
- /// Tolerance for refinement of polylines (neg if refinement is disabled)
- double Polyline_refinement_tolerance;
-
- /// Tolerance for unrefinement of polylines (neg if refinement is disabled)
- double Polyline_unrefinement_tolerance;
-
-};
-
-
-
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-
-
-//=====================================================================
-/// Base class defining a internal closed curve in Triangle Mesh generation
-//=====================================================================
-class TriangleMeshInternalClosedCurve
-{
- 
-  public:
- 
- /// Constructor: Specify coordinate of internal point
- TriangleMeshInternalClosedCurve(const Vector<double>& internal_point) :
-  Internal_point(internal_point)
-  {};
- 
-
- /// Empty destructor
- virtual ~TriangleMeshInternalClosedCurve(){};
 
  /// Output each sub-boundary at n_sample (default: 50) points
- /// and internal point
- virtual void output(std::ostream &outfile, const unsigned& n_sample=50)=0;
-  
- /// Coordinate of the internal point
- Vector<double> internal_point() const
-  {
-   return Internal_point;
-  }
-   
- /// Coordinate of the internal point
- Vector<double> &internal_point() 
-  {
-   return Internal_point;
-  }
-  
-  protected:
- 
- /// Vector of vertex coordinates
- Vector<double> Internal_point;
+ void output(std::ostream &outfile, const unsigned& n_sample=50)
+ {
+  unsigned nb=Curve_section_pt.size();
+  for (unsigned i=0;i<nb;i++)
+   {
+    Curve_section_pt[i]->output(outfile,n_sample);
+   }
 
+  if (!Internal_point_pt.empty())
+   {
+    outfile << "ZONE T=\"Internal point\"\n";
+    outfile << Internal_point_pt[0] << " "
+            << Internal_point_pt[1] << "\n";
+   }
+
+ }
+
+ /// Coordinates of the internal point
+ Vector<double> internal_point() const {return Internal_point_pt;}
+
+ /// Coordinates of the internal point
+ Vector<double> &internal_point() {return Internal_point_pt;}
+
+protected:
+
+ /// Vector of vertex coordinates
+ Vector<double> Internal_point_pt;
 
 };
 
-
-
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
-
-
-
 
 
 //=====================================================================
@@ -584,54 +935,87 @@ class TriangleMeshPolygon : public virtual TriangleMeshClosedCurve
   
 public:
   
- /// \short Constructor: Specify vector of pointers to TriangleMeshPolyLines
+ /// \short Constructor: Specify vector of pointers to TriangleMeshCurveSection
  /// that define the boundary of the segments of the polygon.
- /// Each TriangleMeshPolyLine has its own boundary ID and can contain
+ /// Each TriangleMeshCurveSection has its own boundary ID and can contain
  /// multiple (straight-line) segments. For consistency across the
  /// various uses of this class, we insist that the closed boundary
- /// is represented by at least two separate TriangleMeshPolyLines
+ /// is represented by at least two separate TriangleMeshCurveSection
  /// whose joint vertices must be specified in both.
  /// (This is to allow the setup of unique boundary coordinate(s)
  /// around the polygon.) This may seem slightly annoying
  /// in cases where a polygon really only represents a single
  /// boundary, but...
- TriangleMeshPolygon(const Vector<TriangleMeshPolyLine*>& 
-                     boundary_polyline_pt);
-   
-
+ /// Note: The specified vector of pointers must consist of only
+ /// TriangleMeshPolyLine elements. There is a checking on the PARANOID
+ /// mode for this constraint
+ TriangleMeshPolygon(const Vector<TriangleMeshCurveSection*>&
+   boundary_polyline_pt, const Vector<double>& internal_point_pt =
+     Vector<double>(0));
 
  /// Empty virtual destructor
- virtual ~TriangleMeshPolygon() {}
+ virtual ~TriangleMeshPolygon() { }
  
- /// Number of constituent polylines
- unsigned npolyline() const {return Boundary_polyline_pt.size();}
-  
- /// Coordinate of i-th constituent polyline
- TriangleMeshPolyLine* polyline_pt(const unsigned& i) const
-  {
-   return Boundary_polyline_pt[i];
-  }
-  
- /// Total number of segments
- unsigned nsegment()
-  {
-   unsigned npolyline=this->npolyline();
-   unsigned nseg=0;
-   for(unsigned j=0;j<npolyline;j++)
-    {
-     nseg += this->polyline_pt(j)->nsegment();      
-    }  
-   // If there's just one boundary poly line we have another segment
-   // connecting the last vertex to the first one
-   if(npolyline==1){nseg+=1;}
+ /// Number of constituent curves
+ unsigned ncurve_section() const
+  {return npolyline();}
 
-   return nseg;
-  }
-  
-  
+ /// Number of constituent polylines
+ unsigned npolyline() const {return Curve_section_pt.size();}
+
+ /// Pointer to i-th constituent polyline
+ TriangleMeshPolyLine* polyline_pt(const unsigned& i) const
+ {
+  TriangleMeshPolyLine *tmp_polyline =
+    dynamic_cast<TriangleMeshPolyLine*>(Curve_section_pt[i]);
+#ifdef PARANOID
+  if (tmp_polyline == NULL)
+   {
+    std::ostringstream error_stream;
+    error_stream
+    << "The (" << i << ") TriangleMeshCurveSection is not a "
+    << "TriangleMeshPolyLine\nThe TriangleMeshPolygon object"
+    << "is constituent of only TriangleMeshPolyLine objects.\n"
+    << "The problem could be generated when changing the constituent "
+    << "objects of the TriangleMeshPolygon.\nCheck where you got "
+    << "access to this objects and review that you are not introducing "
+    << "any other objects than TriangleMeshPolyLines" << std::endl;
+    throw OomphLibError(error_stream.str(),
+      "TriangleMeshPolygon::polyline_pt()",
+      OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+  return tmp_polyline;
+ }
+
+ /// Pointer to i-th constituent polyline
+ TriangleMeshPolyLine* polyline_pt(const unsigned& i)
+ {
+  TriangleMeshPolyLine *tmp_polyline =
+    dynamic_cast<TriangleMeshPolyLine*>(Curve_section_pt[i]);
+#ifdef PARANOID
+  if (tmp_polyline == NULL)
+   {
+    std::ostringstream error_stream;
+    error_stream
+    << "The (" << i << ") TriangleMeshCurveSection is not a "
+    << "TriangleMeshPolyLine\nThe TriangleMeshPolygon object"
+    << "is constituent of only TriangleMeshPolyLine objects.\n"
+    << "The problem could be generated when changing the constituent "
+    << "objects of the TriangleMeshPolygon.\nCheck where you got "
+    << "access to this objects and review that you are not introducing "
+    << "any other objects than TriangleMeshPolyLines" << std::endl;
+    throw OomphLibError(error_stream.str(),
+      "TriangleMeshPolygon::polyline_pt()",
+      OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+  return tmp_polyline;
+ }
+
  /// Return vector of boundary ids of associated polylines
  Vector<unsigned> polygon_boundary_id()
-  {     
+  {
    // Get the number of polylines
    unsigned nline=npolyline();
    Vector<unsigned> boundary_id(nline);
@@ -639,284 +1023,49 @@ public:
    // Loop over the polyline to get the id
    for(unsigned iline=0;iline<nline;iline++)
     {
-     boundary_id[iline]=Boundary_polyline_pt[iline]->boundary_id();
+     boundary_id[iline]=Curve_section_pt[iline]->boundary_id();
     }
    return boundary_id;
   }
-   
 
-
- /// Return max boundary id of associated polylines
- unsigned max_polygon_boundary_id()
-  {     
-   unsigned max=0;
-
-   // Loop over the polyline to get the id
-   unsigned nline=npolyline();
-   for(unsigned iline=0;iline<nline;iline++)
-    {
-     unsigned boundary_id=Boundary_polyline_pt[iline]->boundary_id();
-     if (boundary_id>max) max=boundary_id;
-    }
-   return max;
-  }
-   
-
- /// Number of vertices
- unsigned nvertex()
-  {
-   unsigned n_polyline=this->npolyline();
-   unsigned nvertices=0;
-   for(unsigned j=0;j<n_polyline;j++)
-    {
-     // Storing the number of the vertices
-     nvertices += this->polyline_pt(j)->nvertex()-1;
-    }
-   // If there's just one boundary. All the vertices should be counted   
-   if(n_polyline==1)
-    {
-     nvertices+=1;
-    }
-   return nvertices;
-  } 
-  
- /// Pointer to i-th constituent polyline
- TriangleMeshPolyLine* &polyline_pt(const unsigned& i)
-  {
-   return Boundary_polyline_pt[i];
-  }
-
-  
- /// Output the constituent polylines (nsample argument is ignored
- /// since we have straightline segments anyway)
- void output(std::ostream &outfile, const unsigned& n_sample=50)
- {
-  unsigned nbound=Boundary_polyline_pt.size();
-  bool close_it=false;
-  if (nbound==1) close_it=true;
-  for(unsigned j=0;j<nbound;j++)
-   {
-    Boundary_polyline_pt[j]->output(outfile,close_it);
-   }
- }
-
- /// \short Enable re-distribution of polyline segments between different
- /// boundaries during adaptation
- void enable_redistribution_of_segments_between_polylines()
- {
-  Enable_redistribution_of_segments_between_polylines=true;
- }
-
- /// \short Disable re-distribution of polyline segments between different
- /// boundaries during adaptation
- void disable_redistribution_of_segments_between_polylines()
- {
-  Enable_redistribution_of_segments_between_polylines=false;
- }
-
- /// \short Is re-distribution of polyline segments between different
- /// boundaries during adaptation enabled?
+ /// \short Is re-distribution of polyline segments in the curve
+ /// between different boundaries during adaptation enabled?
  bool is_redistribution_of_segments_between_polylines_enabled()
+  {return Enable_redistribution_of_segments_between_polylines;}
+
+ /// \short Enable re-distribution of polyline segments in the curve
+ /// between different boundaries during adaptation
+ void enable_redistribution_of_segments_between_polylines()
+  {Enable_redistribution_of_segments_between_polylines=true;}
+
+ /// \short Disable re-distribution of polyline segments in the curve
+ /// between different boundaries during adaptation
+ void disable_redistribution_of_segments_between_polylines()
+  {Enable_redistribution_of_segments_between_polylines=false;}
+
+ /// \short Test whether curve can update reference
+ bool can_update_reference_configuration() const
+ {return Can_update_configuration;}
+
+ /// \short Virtual function that should be overloaded to update the polygons
+ /// reference configuration
+ virtual void reset_reference_configuration()
  {
-  return Enable_redistribution_of_segments_between_polylines;
+   std::ostringstream error_stream;
+   error_stream
+   << "Broken Default Called\n"
+   << "This function should be overloaded if Can_update_configuration = true,\n"
+   << "which indicates that the curve in it polylines parts can update its "
+   << "own position (i.e. it\n"
+   << "may be a rigid body. Otherwise the update will be via a FaceMesh \n"
+   << "representation of the boundary which is appropriate for \n"
+   << "general deforming surfaces\n";
+
+   throw OomphLibError(
+       error_stream.str(),
+       "TriangleMeshPolygon::reset_reference_configuration()",
+       OOMPH_EXCEPTION_LOCATION);
  }
-
-
-protected:
-
- /// \short Is re-distribution of polyline segments between different
- /// boundaries during adaptation enabled? (Default: false)
- bool Enable_redistribution_of_segments_between_polylines;
-   
- /// Vector of pointers to constituent polylines
- Vector<TriangleMeshPolyLine*> Boundary_polyline_pt;
-   
-};
-
-
-
-
-//=====================================================================
-/// Class upgrading a TriangleMeshPolygon to a internal closed curve 
-/// for use during 
-/// triangle mesh generation. For mesh generation purposes, the main (and only)
-/// addition to the base class is the provision of the coordinates
-/// of an internal point inside the polygon. 
-//=====================================================================
-class TriangleMeshInternalPolygon : public virtual TriangleMeshPolygon, 
- public virtual TriangleMeshInternalClosedCurve
-{
-  private:
- ///\short Boolean flag to indicate whether the polygon can move
- /// (default false because if it doesn't move this will just lead to
- ///  wasted work)
- bool Polygon_fixed;
-
-  protected:
-
- ///\short Boolean flag to indicate whether the polygon can update its
- ///own reference configuration after it has moved i.e. if it is
- ///upgraded to a rigid body rather than being a free surface (default false)
- bool Can_update_configuration;
- 
-public:
- 
- /// \short Constructor: Specify coordinates of a point inside the 
- /// closed curve and a vector of pointers to TriangleMeshPolyLines
- /// that define the boundary segments of the polygon.
- /// Each TriangleMeshPolyLine has its own boundary ID and can contain
- /// multiple (straight-line) segments. For consistency across the
- /// various uses of this class, we insist that the closed boundary
- /// is represented by at least two separate TriangleMeshPolyLines
- /// whose joint vertices must be specified in both.
- /// (This is to allow the setup of unique boundary coordinate(s)
- /// around the polygon.) This may seem slightly annoying
- /// in cases where a polygon really only represents a single
- /// boundary, but...
- TriangleMeshInternalPolygon(const Vector<double>& internal_point,
-                             const Vector<TriangleMeshPolyLine*>& 
-                             boundary_polyline_pt) :
-  TriangleMeshPolygon(boundary_polyline_pt), 
-   TriangleMeshInternalClosedCurve(internal_point), Polygon_fixed(false),
-   Can_update_configuration(false)
-  {
-#ifdef PARANOID
-
-   // Check if internal point  is actually located in bounding polygon
-   // Reference: http://paulbourke.net/geometry/insidepoly/
-   
-   // Vertex coordinates
-   Vector<Vector<double> > polygon_vertex;
-   
-   // Total number of vertices
-   unsigned nvertex=0;
-   
-   // Storage for first/last point on polyline for contiguousness check
-   Vector<double> last_vertex(2);
-   Vector<double> first_vertex(2);
-   
-   // Get vertices
-   unsigned npolyline=boundary_polyline_pt.size();
-   for (unsigned i=0;i<npolyline;i++)
-    {
-     // Number of vertices
-     unsigned nvert=boundary_polyline_pt[i]->nvertex();
-     for (unsigned j=0;j<nvert;j++)
-      {
-       // Check contiguousness
-       if ((i>1)&&(j=0))
-        {
-         first_vertex=boundary_polyline_pt[i]->vertex_coordinate(j);
-         double dist=sqrt(pow(first_vertex[0]-last_vertex[0],2)+
-                          pow(first_vertex[1]-last_vertex[1],2));
-         if (dist>ToleranceForVertexMismatchInPolygons::Tolerable_error)
-          {
-           std::ostringstream error_stream;
-           error_stream
-            << "The start and end points of polylines " << i 
-            << " and " <<i+1<< " don't match when judged\n"
-            << "with the tolerance of "
-            << ToleranceForVertexMismatchInPolygons::Tolerable_error
-            << " which is specified in the namespace \nvariable "
-            << "ToleranceForVertexMismatchInPolygons::Tolerable_error.\n\n"
-            << "Feel free to adjust this or to recompile the code without\n"
-            << "paranoia if you think this is OK...\n"
-            << std::endl;
-           throw OomphLibError(
-            error_stream.str(),
-            "TriangleMeshInternalPolygon:: constructor ",
-            OOMPH_EXCEPTION_LOCATION);
-          }
-        }
-       // Get vertex (ignore end point)
-       if (j<nvert-1)
-        {
-         polygon_vertex.push_back(
-          boundary_polyline_pt[i]->vertex_coordinate(j));
-        }
-       // Prepare for check of contiguousness
-       else
-        {
-         last_vertex=boundary_polyline_pt[i]->vertex_coordinate(j);
-        }
-      }
-    }
-
-   // Total number of vertices
-   nvertex=polygon_vertex.size();
-
-   // Counter for number of intersections
-   unsigned intersect_counter=0;
-
-   //Get first vertex
-   Vector<double> p1=polygon_vertex[0];
-   for (unsigned i=1;i<=nvertex;i++) 
-    {
-     // Get second vertex by wrap-around
-     Vector<double> p2 = polygon_vertex[i%nvertex];
-
-     if (Internal_point[1] > std::min(p1[1],p2[1])) 
-      {
-       if (Internal_point[1] <= std::max(p1[1],p2[1])) 
-        {
-         if (Internal_point[0] <= std::max(p1[0],p2[0]))
-          {
-           if (p1[1] != p2[1])
-            {
-             double xintersect = (Internal_point[1]-p1[1])*(p2[0]-p1[0])/
-              (p2[1]-p1[1])+p1[0];
-             if ( (p1[0] == p2[0]) || (Internal_point[0] <= xintersect) )
-              {
-               intersect_counter++;
-              }
-            }
-          }
-        }
-      }
-     p1 = p2;
-    }
-   
-
-/*    oomph_info << Internal_point[0]<< " "  */
-/*               << Internal_point[1]<< " "; */
-
-   // Even number of intersections: outside
-   if (intersect_counter%2==0)
-    {
-//     oomph_info << 1 << std::endl;
-     
-     std::ostringstream error_stream;
-     error_stream
-      << "The internal point at "
-      << Internal_point[0]<< " "
-      << Internal_point[1]
-      << " isn't in the polygon that describes the internal closed curve!\n"
-      << "Polygon vertices are at: \n";
-     for (unsigned i=0;i<nvertex;i++)
-      {
-       error_stream << polygon_vertex[i][0] << " "
-                    << polygon_vertex[i][1] << "\n";
-      }
-     error_stream 
-      << "This may be because the internal point is defined by a\n"
-      << "GeomObject that has deformed so much that it's \n"
-      << "swept over the (initial) internal point.\n"
-      << "If so, you should update the position of the internal point. \n"
-      << "This could be done automatically by generating \n"
-      << "an internal mesh inside the polygon and using one\n"
-      << "of its internal nodes as the internal point. Actually not \n"
-      << "why triangle doesn't do that automatically....\n";
-     throw OomphLibError(
-      error_stream.str(),
-      "TriangleMeshInternalPolygon:: constructor ",
-      OOMPH_EXCEPTION_LOCATION);
-    }
-
-#endif 
-  }
-  
- /// \short Empty Destuctor
- virtual ~TriangleMeshInternalPolygon() { }
 
  /// \short Test whether the polygon is fixed or not
  bool is_fixed() const {return Polygon_fixed;}
@@ -927,235 +1076,132 @@ public:
  /// \short Set the polygon to be allowed to move (default)
  void set_unfixed() {Polygon_fixed = false;}
 
- /// \short Test whether polygon can update reference
- bool can_update_reference_configuration() const 
- {return Can_update_configuration;}
+protected:
 
- /// \short Virtual function that should be overloaded to update the polygons
- /// reference configuration
- virtual void reset_reference_configuration()
- {
-  std::ostringstream error_stream;
-  error_stream 
-   << "Broken Default Called\n"
-   << "This function should be overloaded if Can_update_configuration = true,\n"
-   << "which indicates that the polygon can update its own position (i.e. it\n"
-   << "may be a rigid body. Otherwise the update will be via a FaceMesh \n"
-   << "representation of the boundary which is appropriate for \n"
-   << "general deforming surfaces\n";
-  
- throw OomphLibError(
-  error_stream.str(),
-  "TriangleMeshInternalPolygon::reset_reference_configuration()",
-  OOMPH_EXCEPTION_LOCATION);
- }
- 
-  /// Output each sub-boundary at n_sample (default: 50) points
-  /// and internal point
-  void output(std::ostream &outfile, const unsigned& n_sample=50)
-  {
-   TriangleMeshPolygon::output(outfile,n_sample);
-   outfile << "ZONE T=\"Internal point\"\n";
-   outfile << Internal_point[0] << " " 
-           << Internal_point[1] << "\n"; 
-  }
+ /// \short Is re-distribution of polyline segments between different
+ /// boundaries during adaptation enabled? (Default: false)
+ bool Enable_redistribution_of_segments_between_polylines;
+
+ ///\short Boolean flag to indicate whether the polygon can update its
+ ///own reference configuration after it has moved i.e. if it is
+ ///upgraded to a rigid body rather than being a free surface (default false)
+ bool Can_update_configuration;
+
+private:
+
+ ///\short Boolean flag to indicate whether the polygon can move
+ /// (default false because if it doesn't move this will just lead to
+ ///  wasted work)
+ bool Polygon_fixed;
 
 };
 
-
-
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
-
-
 
 //=====================================================================
-/// Class definining a curvilinear internal closed curve for
-/// triangle mesh.
+/// Base class defining an open curve for the Triangle mesh generation
+/// Basically used to define internal boundaries on the mesh
 //=====================================================================
-class TriangleMeshCurvilinearClosedCurve :
-public virtual TriangleMeshClosedCurve
+class TriangleMeshOpenCurve : public virtual TriangleMeshCurve
 {
- 
- 
-  public:
- 
- /// \short Constructor: Specify TriangleMeshCurviLine objects
- /// (at least two) that make up the closed curve
- TriangleMeshCurvilinearClosedCurve(Vector<TriangleMeshCurviLine*>
-                                    curvilinear_boundary_pt) :
-  Curvilinear_boundary_pt(curvilinear_boundary_pt)
-  {
-#ifdef PARANOID
-   
-   // Check that boundary bits match together
-   unsigned nb=Curvilinear_boundary_pt.size();
-   Vector<double> zeta(1);
-   
-   // Check last point of each boundary bit coincides with first point
-   // on next one
-   for (unsigned i=0;i<nb-1;i++)
-    {
-     TriangleMeshCurviLine* first_pt=Curvilinear_boundary_pt[i];
-     GeomObject* geom_obj_pt=first_pt->geom_object_pt();
-     zeta[0]=first_pt->zeta_end();
-     Vector<double> end(2);
-     geom_obj_pt->position(zeta,end);
-     
-     
-     TriangleMeshCurviLine* second_pt=Curvilinear_boundary_pt[i+1];
-     geom_obj_pt=second_pt->geom_object_pt();
-     zeta[0]=second_pt->zeta_start();
-     Vector<double> start(2);
-     geom_obj_pt->position(zeta,start);
-     
-     double dist=sqrt(pow(start[0]-end[0],2)+pow(start[1]-end[1],2));
-     if (dist>ToleranceForVertexMismatchInPolygons::Tolerable_error)
-      {
-       std::ostringstream error_stream;
-       error_stream
-        << "The start and end points of curvilinear boundary parts " << i 
-        << " and " <<i+1<< " don't match when judged \nwith the tolerance of "
-        << ToleranceForVertexMismatchInPolygons::Tolerable_error
-        << " which is specified in the namespace \nvariable "
-        << "ToleranceForVertexMismatchInPolygons::Tolerable_error.\n\n"
-        << "Feel free to adjust this or to recompile the code without\n"
-        << "paranoia if you think this is OK...\n"
-        << std::endl;
-       throw OomphLibError(
-        error_stream.str(),
-        "TriangleMeshCurvilinearClosedCurve:: constructor ",
-        OOMPH_EXCEPTION_LOCATION);
-      }
-    }
-   
-   
-   // Check wrap around
-   {
-    TriangleMeshCurviLine* first_pt=Curvilinear_boundary_pt[0];
-    GeomObject* geom_obj_pt=first_pt->geom_object_pt();
-    zeta[0]=first_pt->zeta_start();
-    Vector<double> start(2);
-    geom_obj_pt->position(zeta,start);
-    
-    TriangleMeshCurviLine* second_pt=Curvilinear_boundary_pt[nb-1];
-    geom_obj_pt=second_pt->geom_object_pt();
-    zeta[0]=second_pt->zeta_end();
-    Vector<double> end(2);
-    geom_obj_pt->position(zeta,end);
-    
-    double dist=sqrt(pow(start[0]-end[0],2)+pow(start[1]-end[1],2));
-    if (dist>ToleranceForVertexMismatchInPolygons::Tolerable_error)
-     {
-      std::ostringstream error_stream;
-      error_stream
-       << "The start and end points of 1st and last curvilinear\n"
-       << "boundary parts don't match when judged \nwith the tolerance of "
-       << ToleranceForVertexMismatchInPolygons::Tolerable_error
-       << " which is specified in the namespace \nvariable "
-       << "ToleranceForVertexMismatchInPolygons::Tolerable_error.\n\n"
-       << "Feel free to adjust this or to recompile the code without\n"
-       << "paranoia if you think this is OK...\n"
-       << std::endl;
-      throw OomphLibError(
-       error_stream.str(),
-       "TriangleMeshCurvilinearClosedCurve:: constructor ",
-       OOMPH_EXCEPTION_LOCATION);
-     }
-   }
-   
-#endif
-  }
-  
-  /// \short Empty Destuctor
-  virtual ~TriangleMeshCurvilinearClosedCurve() {}
-  
-  
- 
-  /// \short Number of TriangleMeshCurvilinearBoundaries that make up this
-  /// internal closed curve
-  unsigned ncurvilinear_boundary()
-  {
-   return Curvilinear_boundary_pt.size();
-  }
-  
- /// \short Access to the i-th TriangleMeshCurviLine 
- // that makes up this internal closed curve
- TriangleMeshCurviLine* curvilinear_boundary_pt(const unsigned& i)
-  {
-   return Curvilinear_boundary_pt[i];
-  }
- 
+
+ public:
+
+ /// Constructor
+ TriangleMeshOpenCurve(const Vector<TriangleMeshCurveSection*> &curve_section_pt);
+
+ /// Empty destructor
+ virtual ~TriangleMeshOpenCurve() { }
+
+ /// Number of vertices
+ unsigned nvertices() const
+ {
+  unsigned n_vertices = 0;
+  unsigned n_curve_section=ncurve_section();
+  for (unsigned i = 0; i < n_curve_section; i++)
+   n_vertices+=Curve_section_pt[i]->nvertex();
+  // If there's just one boundary. All the vertices should be counted
+  if (n_curve_section==1) {n_vertices+=1;}
+  return n_vertices;
+ }
+
+ /// Total number of segments
+ unsigned nsegments() const
+ {
+  unsigned n_curve_section=ncurve_section();
+  unsigned nseg=0;
+  for(unsigned j=0;j<n_curve_section;j++)
+   {nseg+=Curve_section_pt[j]->nsegment();}
+  return nseg;
+ }
 
  /// Output each sub-boundary at n_sample (default: 50) points
  void output(std::ostream &outfile, const unsigned& n_sample=50)
-  {
-   unsigned nb=Curvilinear_boundary_pt.size();
-   for (unsigned i=0;i<nb;i++)
-    {
-     Curvilinear_boundary_pt[i]->output(outfile,n_sample);
-    }
-  }
+ {
+  unsigned nb=Curve_section_pt.size();
+  for (unsigned i=0;i<nb;i++)
+   {
+    Curve_section_pt[i]->output(outfile,n_sample);
+   }
 
-  private:
-  
-  /// Vector of curvlinear boundaries
-  Vector<TriangleMeshCurviLine*> Curvilinear_boundary_pt;
-  
-  
+ }
+
+ /// Pointer to i-th constituent polyline
+ TriangleMeshPolyLine* polyline_pt(const unsigned& i) const
+ {
+  TriangleMeshPolyLine *tmp_polyline =
+    dynamic_cast<TriangleMeshPolyLine*>(Curve_section_pt[i]);
+#ifdef PARANOID
+  if (tmp_polyline == NULL)
+   {
+    std::ostringstream error_stream;
+    error_stream
+    << "The (" << i << ")-th TriangleMeshCurveSection is not a "
+    << "TriangleMeshPolyLine.\nPlease make sure that when you"
+    << "first created this object the (" <<  i << ")-th\n"
+    << "TriangleCurveSection is a TriangleMeshPolyLine."
+    << std::endl;
+    throw OomphLibError(error_stream.str(),
+      "TriangleMeshOpenCurve::polyline_pt()",
+      OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+  return tmp_polyline;
+ }
+
+ /// Pointer to i-th constituent polyline
+ TriangleMeshPolyLine* polyline_pt(const unsigned& i)
+ {
+  TriangleMeshPolyLine *tmp_polyline =
+    dynamic_cast<TriangleMeshPolyLine*>(Curve_section_pt[i]);
+#ifdef PARANOID
+  if (tmp_polyline == NULL)
+   {
+    std::ostringstream error_stream;
+    error_stream
+    << "The (" << i << ")-th TriangleMeshCurveSection is not a "
+    << "TriangleMeshPolyLine.\nPlease make sure that when you"
+    << "first created this object the (" <<  i << ")-th\n"
+    << "TriangleCurveSection is a TriangleMeshPolyLine."
+    << std::endl;
+    throw OomphLibError(error_stream.str(),
+      "TriangleMeshOpenCurve::polyline_pt()",
+      OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+  return tmp_polyline;
+ }
+
 };
 
 
 
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 
-//=====================================================================
-/// Class definining an internal closed curve to define internal 
-/// boundaries in a triangle mesh.
-//=====================================================================
-class TriangleMeshInternalCurvilinearClosedCurve : public virtual 
- TriangleMeshCurvilinearClosedCurve, 
- public virtual TriangleMeshInternalClosedCurve
-{
- 
-  public:
- 
- /// \short Constructor: Specify TriangleMeshCurviLine objects
- /// (at least two) that make up the boundary of the internal closed curve, and
- /// coordinates of a single point inside the closed curve
- TriangleMeshInternalCurvilinearClosedCurve(Vector<TriangleMeshCurviLine*>
-                             curvilinear_boundary_pt,
-                             const Vector<double>& internal_point) :
-  TriangleMeshCurvilinearClosedCurve(curvilinear_boundary_pt), 
-  TriangleMeshInternalClosedCurve(internal_point)
-   {}
-  
-  
-  /// \short Empty Destuctor
-  virtual ~TriangleMeshInternalCurvilinearClosedCurve() {}
-    
-  /// Output each sub-boundary at n_sample (default: 50) points
-  /// and internal point
-  void output(std::ostream &outfile, const unsigned& n_sample=50)
-  {
-   TriangleMeshCurvilinearClosedCurve::output(outfile,n_sample);
-   outfile << "ZONE T=\"Internal point\"\n";
-   outfile << Internal_point[0] << " " 
-           << Internal_point[1] << "\n"; 
-  }
-  
-  
-  private:
-  
-  /// Vector of curvlinear boundaries
-  Vector<TriangleMeshCurviLine*> Curvilinear_boundary_pt;
-    
-};
-
-
-/////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////
 
 
 //================================================================
@@ -1264,9 +1310,6 @@ public:
 #endif 
  
 };
-
-
-
 
 }
 

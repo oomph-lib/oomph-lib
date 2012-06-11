@@ -13,7 +13,7 @@ unstructured_adaptive_solid_SOURCES = unstructured_adaptive_solid.cc
 # Required libraries: 
 # $(FLIBS) is included in case the solver involves fortran sources.
 unstructured_adaptive_solid_LDADD = -L@libdir@ -lsolid -lconstitutive \
-                    -lgeneric \
+                    -lrigid_body -lgeneric \
                     $(EXTERNAL_LIBS) $(FLIBS)
 
 #-------------------------------------------------------------------

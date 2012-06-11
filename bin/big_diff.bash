@@ -12,5 +12,6 @@ modified_list=`svn status  | awk '{if ($1="M")  system("echo " $2)} ' | awk '/.*
 for file in `echo $modified_list`; do
 
     echo -e "\n\n\n\n##########################################################\n\nFile: " $file"\n\n##########################################################\n\n: "
-    svn diff  -x -w $file
+#    svn diff  -x -w $file
+    svn diff $file
 done

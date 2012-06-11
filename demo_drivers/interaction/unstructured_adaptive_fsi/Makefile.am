@@ -13,6 +13,6 @@ unstructured_adaptive_2d_fsi_SOURCES = unstructured_adaptive_2d_fsi.cc
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
 unstructured_adaptive_2d_fsi_LDADD = \
- -L@libdir@ -lsolid -lconstitutive -lnavier_stokes -lmeshes -lgeneric  \
+ -L@libdir@ -lsolid -lconstitutive -lnavier_stokes -lmeshes -lrigid_body -lgeneric  \
                      $(EXTERNAL_LIBS) $(FLIBS)
 

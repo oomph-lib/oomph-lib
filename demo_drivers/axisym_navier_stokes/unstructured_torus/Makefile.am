@@ -10,5 +10,5 @@ unstructured_torus_SOURCES = unstructured_torus.cc
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
 unstructured_torus_LDADD = -L@libdir@ -laxisym_navier_stokes \
-                          -lgeneric \
+                          -lrigid_body -lgeneric \
                       $(EXTERNAL_LIBS) $(FLIBS)
