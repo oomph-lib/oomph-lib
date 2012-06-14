@@ -119,6 +119,10 @@ public:
  
  protected: 
 
+ /// Check mesh integrity -- performs some internal consistency checks
+ /// and throws error if violated.
+ void check_mesh_integrity();
+
  /// \short Number of internal edges
  unsigned Nglobal_edge;
 

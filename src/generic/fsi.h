@@ -680,12 +680,21 @@ namespace FSI_functions
   
   unsigned n_mesh=boundary_in_fluid_mesh.size();
   
-  oomph_info << "hierher n_mesh=" << n_mesh << std::endl;
-
 #ifdef PARANOID
-  // hierher check sizes match
+  // Check sizes match
+  if (boundary_in_fluid_mesh.size()!=solid_mesh_pt.size())
+   {
+    std::ostringstream error_message;
+    error_message 
+     << "Sizes of vector of boundary ids in fluid mesh (" 
+     << boundary_in_fluid_mesh.size() << ") and vector of pointers\n"
+     << "to FSIWallElements (" << solid_mesh_pt.size() << " doesn't match.\n";
+    throw OomphLibError(
+     error_message.str(),
+     "FSI_functions::setup_fluid_load_info_for_solid_elements()",
+     OOMPH_EXCEPTION_LOCATION);
+   }
 #endif
-
 
   // Create face meshes adjacent to the fluid mesh's b-th boundary. 
   // Each face mesh consists of FaceElements that may also be 
@@ -925,7 +934,7 @@ namespace FSI_functions
 
  
  //============================================================================
- // vector-based version
+ // hierher vector-based version
 
  /// \short Setup multi-domain interaction required for imposition
  /// of solid displacements onto the pseudo-solid fluid mesh by
@@ -945,14 +954,26 @@ namespace FSI_functions
    Mesh* const &solid_mesh_pt, 
    Vector<Mesh*>& lagrange_multiplier_mesh_pt)
  {
-
-
   // Number of meshes
   unsigned n_mesh=b_solid_fsi.size();
 
 #ifdef PARANOID
-  // hierher check sizes match
+  // Check sizes match
+  if (b_solid_fsi.size()!=lagrange_multiplier_mesh_pt.size())
+   {
+    std::ostringstream error_message;
+    error_message 
+     << "Sizes of vector of boundary ids in solid mesh (" 
+     << b_solid_mesh.size() << ") and vector of pointers\n"
+     << "to Lagrange multiplier elements (" 
+     << lagrange_multiplier_mesh_pt.size() << " doesn't match.\n";
+    throw OomphLibError(
+     error_message.str(),
+     "FSI_functions::setup_solid_elements_for_displacement_bc()",
+     OOMPH_EXCEPTION_LOCATION);
+   }
 #endif
+
 
   // Create a face mesh adjacent to the solid mesh's b-th boundary. 
   // The face mesh consists of FaceElements that may also be 

@@ -99,6 +99,7 @@
 #--enable-suppress-doc
 --enable-MPI
 --enable-symbolic-links-for-headers
+--with-mpi-include-directory=/usr/lib/openmpi/include
 --with-blas=/home/mheil/local/lib/blas/blas.a
 --with-lapack=/home/mheil/local/lib/lapack/lapack.a
 --with-hypre=/home/mheil/local/hypre_default_installation_mpi
@@ -111,19 +112,15 @@ FFLAGS_NO_OPT="-O0"
 CXX=mpic++
 CC=mpicc
 F77=mpif77
+FC=mpif90
 LD=mpif77
 
-
-#CXXFLAGS="-O3 -Wall"
-#CFLAGS="-O3"
-#FFLAGS="-O3"
-
-#CXXFLAGS="-g -DPARANOID -Wall -DRANGE_CHECKING"
+#CXXFLAGS="-g -DPARANOID -Wall"
 #CFLAGS="-g"
 #FFLAGS="-g"
-
 
 #--with-blacs=/home/mheil/local/lib/blacs_with_copy
 #--with-scalapack=/home/mheil/local/lib/scalapack/libscalapack.a
 #--with-pord=/home/mheil/local/pord/lib/libpord.a 
 #--with-mumps=/home/mheil/local/mumps
+

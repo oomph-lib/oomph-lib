@@ -32,6 +32,54 @@ namespace oomph
 {
 
 
+//=====================================================================
+ /// Check mesh integrity -- performs some internal consistency checks
+ /// and throws error if violated.
+//=====================================================================
+ void TriangleScaffoldMesh::check_mesh_integrity()
+ {
+  // Check that all nodes are attached to elements
+  std::map<Node*, bool> done;
+  
+  //Number of nodes per element 
+  unsigned nnod_el = finite_element_pt(0)->nnode();
+
+  // Loop over elements to visit their nodes
+  unsigned nelem=nelement();  
+  for (unsigned e = 0; e < nelem; e++)
+   {
+    // Loop over all nodes in element
+    for (unsigned j = 0; j < nnod_el; j++)
+     {
+      // Pointer to node in the scaffold mesh
+      Node* node_pt = finite_element_pt(e)->node_pt(j);
+      
+      done[node_pt]=true;
+     }
+   }
+
+  // Now check if all nodes have been visited
+  std::ostringstream error_stream;
+  bool broken=false;
+  unsigned nnod=nnode();
+  for (unsigned j=0;j<nnod;j++)
+   {
+    if (!done[Node_pt[j]])
+     {
+      error_stream
+       << "Scaffold node " << j 
+       << " does not seem to be attached to any element";
+      broken=true;
+     }
+   }
+  if (broken)
+   {
+    throw OomphLibError(error_stream.str(),
+                        "TriangleScaffoldMesh::check_mesh_integrity()()",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+  
+ }
 
 //=====================================================================
 /// Constructor: Pass the filenames of the triangle files
@@ -80,7 +128,11 @@ namespace oomph
    
   // Resize stoorage for global node numbers listed element-by-element
   Global_node.resize(n_element*n_local_node);
-   
+  
+#ifdef PARANOID
+  std::map<unsigned,bool> global_node_done;
+#endif
+ 
   // Initialise counter
   unsigned k=0;
 
@@ -97,6 +149,9 @@ namespace oomph
       for(unsigned j=0;j<n_local_node;j++)
        {
         element_file>>Global_node[k];
+#ifdef PARANOID
+        global_node_done[Global_node[k]-1]=true;
+#endif
         k++;
        }
      }
@@ -109,6 +164,9 @@ namespace oomph
       for(unsigned j=0;j<n_local_node;j++)
        {
         element_file>>Global_node[k];
+#ifdef PARANOID
+        global_node_done[Global_node[k]-1]=true;
+#endif
         k++;
        }
       element_file>> Element_attribute[i];
@@ -519,6 +577,32 @@ namespace oomph
      }
 
    }
+
+#ifdef PARANOID
+  
+  std::ostringstream error_stream;    
+  bool broken=false;
+  unsigned nnod=nnode();
+  error_stream << "Checking presence of " << nnod << " global nodes\n";
+  for (unsigned j=0;j<nnod;j++)
+   {
+    if (!global_node_done[j])
+     {
+      error_stream << "Global node " << j << " was not listed in *.ele file\n";
+      broken=true;
+     }
+   }
+  if (broken)
+   {
+    throw OomphLibError(error_stream.str(),
+                        "TriangleScaffoldMesh::TriangleScaffoldMesh()",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+
+  // Check things and throw if mesh is broken...
+  check_mesh_integrity();
+#endif  
+
  }
 
 #ifdef OOMPH_HAS_TRIANGLE_LIB  
@@ -554,6 +638,10 @@ namespace oomph
   // Resizestoorage for global node numbers listed element-by-element
   Global_node.resize(n_element*n_local_node);
   
+#ifdef PARANOID
+  std::map<unsigned,bool> global_node_done;
+#endif
+
   // Initialise counter
   unsigned k=0;
   
@@ -569,6 +657,9 @@ namespace oomph
       for(unsigned j=0;j<n_local_node;j++)
        {
         Global_node[k] = static_cast<unsigned>(triangle_data.trianglelist[k]);
+#ifdef PARANOID
+        global_node_done[Global_node[k]-1]=true;
+#endif
         k++;
        }
      }
@@ -580,6 +671,9 @@ namespace oomph
       for(unsigned j=0;j<n_local_node;j++)
        {
         Global_node[k] = static_cast<unsigned>(triangle_data.trianglelist[k]);
+#ifdef PARANOID
+        global_node_done[Global_node[k]-1]=true;
+#endif
         k++;
        }
       Element_attribute[i] = triangle_data.triangleattributelist[i];
@@ -731,6 +825,7 @@ namespace oomph
           //Construct a boundary node
           Node_pt[global_node_number-1] = 
            finite_element_pt(e)->construct_boundary_node(j);
+
           //Add to the boundary node look-up scheme
           add_boundary_node(bound[global_node_number-1]-1,
                             Node_pt[global_node_number-1]);
@@ -852,6 +947,32 @@ namespace oomph
      }
 
    }
+
+#ifdef PARANOID
+
+  std::ostringstream error_stream;    
+  bool broken=false;
+  unsigned nnod=nnode();
+  error_stream << "Checking presence of " << nnod << " global nodes\n";
+  for (unsigned j=0;j<nnod;j++)
+   {
+    if (!global_node_done[j])
+     {
+      error_stream << "Global node " << j << " was not listed in *.ele file\n";
+      broken=true;
+     }
+   }
+  if (broken)
+   {
+    throw OomphLibError(error_stream.str(),
+                        "TriangleScaffoldMesh::TriangleScaffoldMesh()",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+
+  // Check things and throw if mesh is broken...
+  check_mesh_integrity();
+#endif  
+
  }
 
 #endif

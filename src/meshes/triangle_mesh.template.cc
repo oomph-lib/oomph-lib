@@ -115,19 +115,15 @@ namespace oomph
        // Pointer to node in the scaffold mesh
        Node* scaffold_node_pt = Tmp_mesh_pt->finite_element_pt(e)->node_pt(j);
 
-       //unsigned j_global = Tmp_mesh_pt->global_node_number(e*nnod_el+j) -1;
-
        // Get the (pseudo-)global node number in scaffold mesh
        // (It's zero [=default] if not visited this one yet)
        unsigned j_global = global_number[scaffold_node_pt];
 
        // Haven't done this one yet
        if (j_global == 0)
-       //if(Node_pt[j_global]==0)
         {
          // Find and store the node_id in the old nodes map
          Oomph_vertex_nodes_id[global_count] =
-         //Oomph_vertex_nodes_id[j_global] =
            old_global_number[scaffold_node_pt];
 
          // Get pointer to set of mesh boundaries that this
@@ -171,7 +167,6 @@ namespace oomph
          // node number that we've just associated with the
          // corresponding node in the scaffold mesh
          Node_pt[global_count - 1] = new_node_pt;
-         //Node_pt[j_global] = new_node_pt;
 
          // Assign coordinates
          for (unsigned i = 0; i < finite_element_pt(e)->dim(); i++)
@@ -182,7 +177,6 @@ namespace oomph
        // This one has already been done: Copy accross
        else
         {
-         //finite_element_pt(e)->node_pt(j)=Node_pt[j_global];
          finite_element_pt(e)->node_pt(j) = Node_pt[j_global - 1];
         }
       }
@@ -312,6 +306,7 @@ namespace oomph
 
            //Add to the global node list
            Node_pt.push_back(new_node_pt);
+
            //Add to the edge index
            nodes_on_global_edge[edge_index].push_back(new_node_pt);
            //Increment the node number
@@ -364,6 +359,7 @@ namespace oomph
 
    // Lookup scheme has now been setup
    Lookup_for_elements_next_boundary_is_setup = true;
+
   }
 
  //======================================================================
