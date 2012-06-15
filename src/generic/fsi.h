@@ -964,7 +964,7 @@ namespace FSI_functions
     std::ostringstream error_message;
     error_message 
      << "Sizes of vector of boundary ids in solid mesh (" 
-     << b_solid_mesh.size() << ") and vector of pointers\n"
+     << b_solid_fsi.size() << ") and vector of pointers\n"
      << "to Lagrange multiplier elements (" 
      << lagrange_multiplier_mesh_pt.size() << " doesn't match.\n";
     throw OomphLibError(
