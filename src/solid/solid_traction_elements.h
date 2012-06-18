@@ -1528,6 +1528,165 @@ public:
   }
 
 
+ /// \short Compute square of L2 norm of error between
+ /// prescribed and actual displacement
+ double square_of_l2_norm_of_error()
+  {
+   //Find out how many positional dofs there are
+   unsigned n_position_type = this->nnodal_position_type();
+   
+#ifdef PARANOID
+   if(n_position_type!=1)
+    {      
+     throw OomphLibError(
+      "ImposeDisplacementByLagrangeMultiplierElement cannot (currently) be used with elements that have generalised positional dofs",
+      "ImposeDisplacementByLagrangeMultiplierElement::fill_in_generic_contribution_to_residuals_displ_lagr_multiplier()",
+      OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+   //Find out how many nodes there are
+   unsigned n_node = nnode();
+   
+   // Dimension of element
+   unsigned dim_el=dim();
+
+   //Set up memory for the shape functions
+   Shape psi(n_node);
+   DShape dpsids(n_node,dim_el); 
+
+   //Set the value of n_intpt
+   unsigned n_intpt = integral_pt()->nweight();
+
+
+   // Initialise error
+   double squared_error=0.0;
+
+   //Loop over the integration points
+   for(unsigned ipt=0;ipt<n_intpt;ipt++)
+    {
+     //Get the integral weight
+     double w = integral_pt()->weight(ipt);
+     
+     //Only need to call the local derivatives
+     dshape_local_at_knot(ipt,psi,dpsids);
+
+     //Calculate the Eulerian coordinates and Lagrange multiplier
+     Vector<double> x(dim_el+1,0.0);
+     Vector<double> lambda(dim_el+1,0.0);
+     Vector<double> zeta(dim_el,0.0);
+     DenseMatrix<double> interpolated_a(dim_el,dim_el+1,0.0);   
+
+     // Loop over nodes
+     for(unsigned j=0;j<n_node;j++) 
+      {
+       Node* nod_pt=node_pt(j);
+       
+       // Cast to a boundary node
+       BoundaryNodeBase *bnod_pt = 
+        dynamic_cast<BoundaryNodeBase*>(node_pt(j));
+       
+       // Get the index of the first nodal value associated with
+       // this FaceElement
+       unsigned first_index=
+        bnod_pt->index_of_first_value_assigned_by_face_element(Id);
+       
+       //Assemble higher-dimensional quantities
+       for(unsigned i=0;i<dim_el+1;i++)
+        {
+         x[i]+=nodal_position(j,i)*psi(j);
+         lambda[i]+=nod_pt->value(first_index+i)*psi(j);
+         for(unsigned ii=0;ii<dim_el;ii++)
+          {
+           interpolated_a(ii,i) += 
+            lagrangian_position(j,i)*dpsids(j,ii);
+          }
+        }  
+       if (!Sparsify)
+        {
+         for(unsigned k=0;k<n_position_type;k++)
+          {   
+           //Assemble in-element quantities: boundary coordinate
+           for(unsigned i=0;i<dim_el;i++)
+            {
+             zeta[i]+=zeta_nodal(j,k,i)*psi(j,k);
+            }
+          }
+        }
+      }
+     
+     if (Sparsify) zeta=Zeta_sub_geom_object[ipt];
+      
+     
+     //Now find the local undeformed metric tensor from the tangent Vectors
+     DenseMatrix<double> a(dim_el);
+     for(unsigned i=0;i<dim_el;i++)
+      {
+       for(unsigned j=0;j<dim_el;j++)
+        {
+         //Initialise surface metric tensor to zero
+         a(i,j) = 0.0;
+         //Take the dot product
+         for(unsigned k=0;k<dim_el+1;k++)
+          { 
+           a(i,j) += interpolated_a(i,k)*interpolated_a(j,k);
+          }
+        }
+      }
+
+     
+     //Find the determinant of the metric tensor
+     double adet =0.0;
+     switch(dim_el+1)
+      {
+
+      case 2:
+       adet = a(0,0);
+       break;
+
+      case 3:
+       adet = a(0,0)*a(1,1) - a(0,1)*a(1,0);
+       break;
+
+      default:
+       throw 
+        OomphLibError(
+         "Wrong dimension fill_in_generic_contribution_to_residuals_displ_lagr_multiplier",
+         "ImposeDisplacementByLagrangeMultiplierElement::fill_in_generic_contribution_to_residuals_displ_lagr_multiplier()",
+         OOMPH_EXCEPTION_LOCATION);
+      }
+     
+     // Get prescribed wall shape
+     Vector<double> r_prescribed(dim_el+1);
+     if (!Sparsify)
+      {
+       Boundary_shape_geom_object_pt->position(zeta,r_prescribed);
+      }
+     else
+      {
+       Sub_geom_object_pt[ipt]->position(zeta,r_prescribed);       
+      }
+
+     //Premultiply the weights and the square-root of the determinant of 
+     //the metric tensor
+     double W = w*sqrt(adet);
+
+     // Assemble error
+     
+     //Loop over directions
+     for(unsigned i=0;i<dim_el+1;i++)
+      {     
+       squared_error+=(x[i]-r_prescribed[i])*(x[i]-r_prescribed[i])*W;
+      }  
+    } //End of loop over the integration points
+   
+   return squared_error;
+
+  }
+
+
+
+
 protected:
 
  /// \short Helper function to compute the residuals and, if flag==1, the
