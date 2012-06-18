@@ -133,8 +133,8 @@ class SimpleCubicMesh : public virtual BrickMeshBase
 /// Refineable version of simple cubic 3D Brick mesh class.
 //=======================================================================
 template <class ELEMENT>
-class RefineableSimpleCubicMesh :  public SimpleCubicMesh<ELEMENT>,  
- public RefineableBrickMesh<ELEMENT>
+class RefineableSimpleCubicMesh :  public virtual SimpleCubicMesh<ELEMENT>,  
+ public virtual RefineableBrickMesh<ELEMENT>
 {
 
 public:
