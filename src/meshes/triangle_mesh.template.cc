@@ -1195,9 +1195,19 @@ namespace oomph
     // Loop over the constituent polylines
     for(unsigned p = 0; p < n_polylines; p++)
      {
-      n_internal_open_vertices+=
-        internal_polylines_pt[b]->curve_section_pt(p)->nvertex();
-
+      // We are not double counting internal vertices
+      // We have a special case if there is just one polyline per open curve
+      if (p == 0)
+	{
+	  n_internal_open_vertices+=
+	    internal_polylines_pt[b]->curve_section_pt(p)->nvertex();
+	}
+      else
+	{
+	  n_internal_open_vertices+=
+	    internal_polylines_pt[b]->curve_section_pt(p)->nvertex()-1;
+	}
+	
       // When two lines are connected (via a vertex) we need to avoid
       // counting the connection vertex twice
       // If the polyline is connected to an outer or another internal
@@ -1210,11 +1220,12 @@ namespace oomph
       n_internal_open_vertices-=
         internal_polylines_pt[b]->
         polyline_pt(p)->is_final_vertex_connected();
-
+      
       n_internal_open_segments+=
         internal_polylines_pt[b]->curve_section_pt(p)->nsegment();
 
      }
+    
    }
 
 #ifdef PARANOID
@@ -1339,6 +1350,23 @@ namespace oomph
         pair_id_vertex = std::make_pair(idpolyline, count_vertices);
         vertices_connections[pair_id_vertex] = edge_segment;
 
+        // Added line to allow connect to a vertex by using any reference
+        // of it (as last vertex of previos polyline or as first vertex
+        // o f the current polyline)
+        if (count_seg>0 && count_vertices==0)
+         {
+          unsigned id_previous_polyline = 
+           outer_boundary_pt->curve_section_pt(count_seg-1)->boundary_id();
+
+          unsigned n_previous_polyline_vertices =
+           outer_boundary_pt->curve_section_pt(count_seg-1)->nvertex()-1;
+
+          pair_id_vertex = std::make_pair(
+           id_previous_polyline, n_previous_polyline_vertices);
+          vertices_connections[pair_id_vertex] = edge_segment;    
+
+         }
+
         triangulate_io.segmentlist[count_tri]=edge_segment;
         triangulate_io.segmentlist[count_tri+1]=edge_segment+1;
         edge_segment++;
@@ -1420,6 +1448,25 @@ namespace oomph
           // "boundary_id" = idpolyline is stored on the "edge_segment"
           pair_id_vertex = std::make_pair(idpolyline, count_vertices);
           vertices_connections[pair_id_vertex] = edge_segment;
+
+        // Added line to allow connect to a vertex by using any reference
+        // of it (as last vertex of previos polyline or as first vertex
+        // o f the current polyline)
+        if (count_seg>0 && count_vertices==0)
+         {
+          unsigned id_previous_polyline = 
+           internal_polygon_pt[count_hole]->curve_section_pt(count_seg-1)->
+           boundary_id();
+
+          unsigned n_previous_polyline_vertices =
+           internal_polygon_pt[count_hole]->curve_section_pt(count_seg-1)->
+           nvertex()-1;
+
+          pair_id_vertex = std::make_pair(
+           id_previous_polyline, n_previous_polyline_vertices);
+          vertices_connections[pair_id_vertex] = edge_segment;    
+
+         }
 
           triangulate_io.segmentlist[count_tri]=edge_segment;
           triangulate_io.segmentlist[count_tri+1]=edge_segment+1;
@@ -1514,7 +1561,7 @@ namespace oomph
         // Increment the segment list index
         seg_lst_idx++;
        }
-      else
+      else if (count_seg == 0)
        {
         // If it is not connected then we do not know its
         // coordinates and then we need to add them to the list
@@ -1545,7 +1592,7 @@ namespace oomph
        }
 
       // *********************************************************************
-      // Medium vertices on the others polylines excepting the first and last
+      // Medium vertices (no the very first and last one)
       // *********************************************************************
       // Variables for having control of the 'for' loop limits.
       // 1) When dealing with the first polyline we have already processed
@@ -1555,9 +1602,11 @@ namespace oomph
       unsigned lower_limit_index = 0;
       unsigned upper_limit_index = n_polyline_vertices;
 
-      if (count_seg == 0)
-       {lower_limit_index = 1;}
+      // The first vertex is always treated by the previous polyline, therefore
+      // we always start on the second vertex
+      lower_limit_index = 1;
 
+      // If we are dealing with the last segment
       if (count_seg == n_polyline-1)
        {upper_limit_index = n_polyline_vertices-1;}
 
@@ -1581,6 +1630,22 @@ namespace oomph
         pair_id_vertex = std::make_pair(idpolyline, count_vertices);
         vertices_connections[pair_id_vertex] = edge_segment;
 
+        // Added line to allow connect to a vertex by using any reference
+        // of it (as last vertex of previos polyline or as first vertex
+        // o f the current polyline)
+        if (count_seg<n_polyline-1&&count_vertices==upper_limit_index-1)
+         {
+          unsigned id_next_polyline = 
+           open_polyline_pt->polyline_pt(count_seg+1)->boundary_id();
+
+          unsigned n_next_polyline_vertex = 0;
+
+          pair_id_vertex = std::make_pair(
+           id_next_polyline, n_next_polyline_vertex);
+          vertices_connections[pair_id_vertex] = edge_segment;    
+
+         }
+
         // Since it is not an initial or final vertex neither is
         // connected there is no need to look for the corresponding
         // 'edge_segment'
@@ -1594,7 +1659,6 @@ namespace oomph
         seg_lst_idx+=2;
 
         // Store the marker list of the segments
-        //triangulate_io.segmentmarkerlist[seg_lst_idx/2]=idpolyline+1;
         triangulate_io.segmentmarkerlist[count_tri_seg/2]=idpolyline+1;
 
         // Increment counter
@@ -1652,15 +1716,24 @@ namespace oomph
         // Increment the segment list index
         seg_lst_idx++;
 
+	// Store the marker list of the segments
+	triangulate_io.segmentmarkerlist[count_tri_seg/2]=idpolyline+1;
+
+	// Increment counter
+	count_tri_seg+=2;
+
+	// Increase the total number of segments
+	n_boundglobalseg++;
+
        }
-      else
+      else if (count_seg == n_polyline - 1)
        {
         // Compute the total number of vertices
         unsigned n_vertices = polyline_pt->nvertex();
 
         // If it is not connected then we do not know its coordinates,
         // therefore we need to add them to the list (the last vertex
-        // is "1" for this special case
+        // is "n_vertices-1"
         triangulate_io.pointlist[count_tri]=
           polyline_pt->vertex_coordinate(n_vertices-1)[0];
         triangulate_io.pointlist[count_tri+1]=
@@ -1670,7 +1743,7 @@ namespace oomph
         count_tri+=2;
 
         // Adding the information to the vertices_connections map.
-        // The vertex "1" of the "boudary_id" = idpolyline is
+        // The vertex "n_vertices-1" of the "boudary_id" = idpolyline is
         // connected to the "edge_segment"
         pair_id_vertex = std::make_pair(idpolyline, n_vertices-1);
         vertices_connections[pair_id_vertex] = edge_segment;
@@ -1685,17 +1758,16 @@ namespace oomph
         // Increment the segment list index
         seg_lst_idx++;
 
+	// Store the marker list of the segments
+	triangulate_io.segmentmarkerlist[count_tri_seg/2]=idpolyline+1;
+
+	// Increment counter
+	count_tri_seg+=2;
+
+	// Increase the total number of segments
+	n_boundglobalseg++;
+
        }
-
-      // Store the marker list of the segments
-      //triangulate_io.segmentmarkerlist[seg_lst_idx/2]=idpolyline+1;
-      triangulate_io.segmentmarkerlist[count_tri_seg/2]=idpolyline+1;
-
-      // Increment counter
-      count_tri_seg+=2;
-
-      // Increase the total number of segments
-      n_boundglobalseg++;
 
      }
 
@@ -3049,7 +3121,6 @@ update_polygon_using_face_mesh(TriangleMeshPolygon* polygon_pt,
    double refinement_tolerance=polygon_pt->polyline_refinement_tolerance();
    if (refinement_tolerance>0.0)
     {
-
      refinement_was_performed =
        refine_boundary(face_mesh_pt[p], tmp_vector_vertex_node,
          refinement_tolerance, check_only);
@@ -3951,8 +4022,9 @@ refine_boundary(Mesh* face_mesh_pt,
 
   // Create a geometric object from the mesh to represent
   //the curvilinear boundary
+
   MeshAsGeomObject* mesh_geom_obj_pt =
-  new MeshAsGeomObject(face_mesh_pt);
+    new MeshAsGeomObject(face_mesh_pt);
 
   // Get the total number of current vertices
   unsigned n_vertex=vector_bnd_vertices.size();
