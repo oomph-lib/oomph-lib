@@ -901,6 +901,45 @@ namespace MemoryUsage
  void doc_memory_usage(const std::string& prefix_string="");
  
 
+
+
+ /// \short String containing system command that runs "top" (or equivalent)
+ /// "indefinitely" and writes to file specified in Top_output_filename.
+ /// Default assigment for linux. [Disclaimer: works on my machine(s) --
+ /// no guarantees for any other platform; linux or not. MH]
+ extern std::string Top_system_string;
+ 
+ /// \short  String containing name of file in which we document "continuous"
+ /// output from "top" (or equivalent)-- you may want to change this to 
+ /// allow different processors to write to separate files (especially in mpi 
+ /// context). Note that file is appended to 
+ /// so it ought to be emptied (either manually or by calling
+ /// helper function empty_top_file()
+ extern std::string Top_output_filename;
+ 
+ /// \short Function to empty file that records continuous output from top in
+ /// file whose name is specified by Top_output_filename
+ void empty_top_file();
+ 
+ /// \short Start running top continously and output (append) into 
+ /// file specified by Top_output_filename. Wipe that file  with 
+ /// empty_top_file() first if you wish. Note that this is again 
+ /// quite linux specific and unlikely to work on other operating systems.
+ /// Insert optional comment into output file before starting.
+ void run_continous_top(const std::string& comment="");
+
+ /// \short Stop running top continously. Note that this is 
+ /// again quite linux specific and unlikely to work on other operating 
+ /// systems.
+ /// Insert optional comment into output file before stopping.
+ void stop_continous_top(const std::string& comment="");
+  
+ /// \short Insert comment into running continous top output
+ void insert_comment_to_continous_top(const std::string& comment);
+
+
+
+ 
 } // end of namespace MemoryUsage
 
 

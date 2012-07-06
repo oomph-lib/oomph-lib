@@ -1737,6 +1737,7 @@ namespace MemoryUsage
 
   empty_my_memory_usage_file();
   empty_total_memory_usage_file();
+  empty_top_file();
  }
  
  /// \short Doc total and local memory usage, prepended by string (which allows
@@ -1748,6 +1749,149 @@ namespace MemoryUsage
 
   doc_my_memory_usage(prefix_string);
   doc_total_memory_usage(prefix_string);
+ }
+
+
+
+
+ /// \short String containing system command that runs "top" (or equivalent)
+ /// "indefinitely" and writes to file specified in Top_output_filename.
+ /// Default assigment for linux. [Disclaimer: works on my machine(s) --
+ /// no guarantees for any other platform; linux or not. MH]
+ std::string Top_system_string="while true; do top -b -n 2 ; done  ";
+ 
+ /// \short  String containing name of file in which we document "continuous"
+ /// output from "top" (or equivalent)-- you may want to change this to 
+ /// allow different processors to write to separate files (especially in mpi 
+ /// context). Note that file is appended to 
+ /// so it ought to be emptied (either manually or by calling
+ /// helper function empty_top_file()
+         std::string Top_output_filename="top_output.dat";
+ 
+ /// \short Function to empty file that records continuous output from top in
+ /// file whose name is specified by Top_output_filename
+ void empty_top_file()
+ {
+  // bail out straight away?
+  if (Bypass_all_memory_usage_monitoring) return;
+  
+  // Open without appending and write header
+  std::ofstream the_file;
+  the_file.open(Top_output_filename.c_str());
+  the_file << "# Continuous output from top obtained with: \n";
+  the_file << "# " << Top_system_string << "\n";
+  the_file.close();
+ }
+ 
+
+ /// \short Start running top continously and output (append) into 
+ /// file specified by Top_output_filename. Wipe that file  with 
+ /// empty_top_file() if you wish. Note that this is again quite linux specific
+ /// and unlikely to work on other operating systems.
+ /// Insert optional comment into output file before starting.
+ void run_continous_top(const std::string& comment)
+  {
+   // bail out straight away?
+   if (Bypass_all_memory_usage_monitoring) return;
+  
+   // Sync all processors if in parallel
+   std::string modifier="";
+
+#ifdef OOMPH_HAS_MPI
+   if (MPI_Helpers::mpi_has_been_initialised())
+    {
+     MPI_Barrier(MPI_Helpers::communicator_pt()->mpi_comm());     
+     std::stringstream tmp;
+     tmp << "_proc" << MPI_Helpers::communicator_pt()->my_rank();
+     modifier=tmp.str();
+    }
+#endif
+
+   // Process memory usage command and write to file
+   std::stringstream tmp;
+
+   // String stream seems unhappy about direct insertions of these
+   std::string backslash="\\";
+   std::string dollar="$";
+
+   // Create files that spawn and kill continuous top
+   tmp << "echo \"#/bin/bash\" > run_continuous_top" << modifier 
+       << ".bash; "
+       << "echo \" echo " << backslash << "\" kill " 
+       << backslash << dollar 
+       << backslash << dollar << " " << backslash << "\" > kill_continuous_top" 
+       << modifier << ".bash; chmod a+x kill_continuous_top" 
+       << modifier << ".bash; "  << Top_system_string 
+       << " \" >> run_continuous_top" << modifier 
+       << ".bash; chmod a+x run_continuous_top" << modifier << ".bash ";
+   int success=system(tmp.str().c_str());
+
+   // Add comment to annotate?
+   if (comment!="")
+    {
+     insert_comment_to_continous_top(comment);
+    }
+
+   // Start spawning
+   std::stringstream tmp2;
+   tmp2 << "./run_continuous_top" << modifier << ".bash  >> " 
+        << Top_output_filename << " & ";
+   success=system(tmp2.str().c_str());
+
+   // Dummy command to shut up compiler warnings
+   success+=1;
+  }
+
+
+
+ /// \short Stop running top continously. Note that this is 
+ /// again quite linux specific and unlikely to work on other operating 
+ /// systems. Insert optional comment into output file before stopping.
+ void stop_continous_top(const std::string& comment)
+  {
+   // bail out straight away?
+   if (Bypass_all_memory_usage_monitoring) return;
+  
+   // Sync all processors if in parallel
+   std::string modifier="";
+
+#ifdef OOMPH_HAS_MPI
+   if (MPI_Helpers::mpi_has_been_initialised())
+    {
+     MPI_Barrier(MPI_Helpers::communicator_pt()->mpi_comm());     
+     std::stringstream tmp;
+     tmp << "_proc" << MPI_Helpers::communicator_pt()->my_rank();
+     modifier=tmp.str();
+    }
+#endif
+
+   // Add comment to annotate?
+   if (comment!="")
+    {
+     insert_comment_to_continous_top(comment);
+    }
+ 
+   // Kill
+   std::stringstream tmp2;
+   tmp2 << "./kill_continuous_top" << modifier << ".bash  >> " 
+        << Top_output_filename << " & ";
+   int success=system(tmp2.str().c_str());
+
+   // Dummy command to shut up compiler warnings
+   success+=1;
+  }
+
+
+ /// \short Insert comment into running continous top output
+ void insert_comment_to_continous_top(const std::string& comment)
+ {
+  std::stringstream tmp;
+  tmp << " echo \"" << comment << "\"  >> " 
+      << Top_output_filename;
+  int success=system(tmp.str().c_str());
+  
+  // Dummy command to shut up compiler warnings
+  success+=1;
  }
 
 
