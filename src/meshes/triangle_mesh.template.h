@@ -87,6 +87,7 @@ extern "C" {
 class TriangleMeshParameters
 {
 
+
  public:
 
  /// Constructor: It can take all the parameters or just the outer boundary
