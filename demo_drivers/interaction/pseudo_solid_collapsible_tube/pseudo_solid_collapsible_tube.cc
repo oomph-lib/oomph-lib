@@ -210,7 +210,8 @@ public:
  WallMesh(const double& r_min, const double& r_max, const double& lz,
           const int& nr, const int& nphi,const int& nz,
           TimeStepper* time_stepper_pt=&Mesh::Default_TimeStepper)
-  : RefineableSimpleCubicMesh<ELEMENT>(nr,nphi,nz,1.0,1.0,lz,time_stepper_pt)
+  : SimpleCubicMesh<ELEMENT>(nr,nphi,nz,1.0,1.0,lz,time_stepper_pt),
+    RefineableSimpleCubicMesh<ELEMENT>(nr,nphi,nz,1.0,1.0,lz,time_stepper_pt)
   {
 
    // hierher: Important: Currently wall mesh will not refine

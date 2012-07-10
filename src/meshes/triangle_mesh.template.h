@@ -51,7 +51,6 @@
 #include "../rigid_body/immersed_rigid_body_elements.h"
 
 
-
 namespace oomph
 {
 
@@ -87,152 +86,133 @@ extern "C" {
 class TriangleMeshParameters
 {
 
-
  public:
 
  /// Constructor: It can take all the parameters or just the outer boundary
- TriangleMeshParameters(
-   TriangleMeshClosedCurve *outer_boundary_pt,
-   Vector<TriangleMeshClosedCurve*>&
-   internal_closed_curve_pt=Empty_internal_closed_curve,
-   Vector<TriangleMeshOpenCurve*>&
-   internal_open_curves_pt=Empty_internal_open_curves,
-   double element_area=0.2,
-   Vector<Vector<double> > &extra_holes_coordinates_pt =
-     Empty_extra_hole_coordinates,
-   Vector<Vector<double> > &regions_coordinates_pt =
-     Empty_region_coordinates,
-   bool use_attributes=false,
-   TimeStepper* time_stepper_pt=&Default_TimeStepper)
- : Outer_boundary_pt(outer_boundary_pt),
-   Internal_closed_curve_pt(internal_closed_curve_pt),
-   Internal_open_curves_pt(internal_open_curves_pt),
-   Element_area(element_area),
-   Extra_holes_coordinates_pt(extra_holes_coordinates_pt),
-   Regions_coordinates_pt(regions_coordinates_pt),
-   Use_attributes(use_attributes),
-   Time_stepper_pt(time_stepper_pt)
- { }
-
+ TriangleMeshParameters(TriangleMeshClosedCurve *outer_boundary_pt)
+  : Outer_boundary_pt(outer_boundary_pt),
+    Element_area(0.2),
+    Use_attributes(false)
+  { }
+ 
  /// Empty destructor
  virtual ~TriangleMeshParameters() { }
-
-  /// Helper function for getting the outer boundary
-  TriangleMeshClosedCurve *outer_boundary_pt() const
+ 
+ /// Helper function for getting the outer boundary
+ TriangleMeshClosedCurve *outer_boundary_pt() const
   {return Outer_boundary_pt;}
 
-  /// Helper function for getting access to the outer boundary
-  TriangleMeshClosedCurve* &outer_boundary_pt()
+ /// Helper function for getting access to the outer boundary
+ TriangleMeshClosedCurve* &outer_boundary_pt()
   {return Outer_boundary_pt;}
-
-  /// Helper function for getting the internal closed boundaries
-  Vector<TriangleMeshClosedCurve*> internal_closed_curve_pt() const
+  
+ /// Helper function for getting the internal closed boundaries
+ Vector<TriangleMeshClosedCurve*> internal_closed_curve_pt() const
+  {return Internal_closed_curve_pt;}
+  
+ /// \short Helper function for getting access to the internal
+ /// closed boundaries
+ Vector<TriangleMeshClosedCurve*> &internal_closed_curve_pt()
   {return Internal_closed_curve_pt;}
 
-  /// \short Helper function for getting access to the internal
-  /// closed boundaries
-  Vector<TriangleMeshClosedCurve*> &internal_closed_curve_pt()
-  {return Internal_closed_curve_pt;}
-
-  /// Helper function for getting the internal open boundaries
-  Vector<TriangleMeshOpenCurve*> internal_open_curves_pt() const
+ /// Helper function for getting the internal open boundaries
+ Vector<TriangleMeshOpenCurve*> internal_open_curves_pt() const
   {return Internal_open_curves_pt;}
-
-  /// \short Helper function for getting access to the internal
-  /// open boundaries
-  Vector<TriangleMeshOpenCurve*> &internal_open_curves_pt()
+ 
+ /// \short Helper function for getting access to the internal
+ /// open boundaries
+ Vector<TriangleMeshOpenCurve*> &internal_open_curves_pt()
   {return Internal_open_curves_pt;}
+ 
+ /// Helper function for getting the element area
+ double element_area() const {return Element_area;}
 
-  /// Helper function for getting the element area
-  double element_area() const {return Element_area;}
+ /// Helper function for getting access to the element area
+ double &element_area(){return Element_area;}
 
-  /// Helper function for getting access to the element area
-  double &element_area(){return Element_area;}
+ /// Helper function for getting the extra holes
+ Vector<Vector<double> > extra_holes_coordinates() const
+  {return Extra_holes_coordinates;}
+ 
+ /// Helper function for getting access to the extra holes
+ Vector<Vector<double> > &extra_holes_coordinates()
+  {return Extra_holes_coordinates;}
 
-  /// Helper function for getting the extra holes
-  Vector<Vector<double> > extra_holes_coordinates_pt() const
-  {return Extra_holes_coordinates_pt;}
+ /// Helper function for getting the extra regions
+ void add_region_coordinates(const unsigned &i,
+                             Vector<double> &region_coordinates)
+  {
+   // Verify if not using the default region number (zero)
+   if (i == 0) 
+    {
+     std::ostringstream error_message;
+     error_message << "Please use another region id different from zero.\n"
+                   << "It is internally used as the default region number.\n";
+     throw OomphLibError(error_message.str(),
+                         "TriangleMeshParameters::add_region_coordinates()",
+                         OOMPH_EXCEPTION_LOCATION);     
+    }
+/*
+   // First check if the region with the specified id does not already exist
+   std::map<unsigned, Vector<double> >::iterator it;
+   it = Regions_coordinates.find(i);
+   // If it is already a region defined with that id throw an error
+   if (it != Regions_coordinates.end())
+    {
+     std::ostringstream error_message;
+     error_message << "The region id ("<<i<<")that you are using for"
+                   << "defining\n"
+                   << "your region is already in use. Use another\n"
+                   << "region id and verify that you are not re-using\n"
+                   <<" previously defined regions id's\n"<<std::endl;
+     throw OomphLibError(error_message.str(),
+                         "TriangleMeshParameters::add_region_coordinates()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+*/
+   // If it does not exist then create the map
+   Regions_coordinates[i] = region_coordinates;
+   // Automatically set the using of attributes to enable
+   enable_use_attributes();
+  }
+ 
+ /// Helper function for getting access to the regions coordinates
+ std::map<unsigned, Vector<double> >&regions_coordinates()
+  {return Regions_coordinates;}
+ 
+ /// \short Helper function for enabling the use of attributes
+ void enable_use_attributes() {Use_attributes=true;}
+ 
+ /// \short Helper function for disabling the use of attributes
+ void disable_use_attributes() {Use_attributes=false;}
 
-  /// Helper function for getting access to the extra holes
-  Vector<Vector<double> > &extra_holes_coordinates_pt()
-  {return Extra_holes_coordinates_pt;}
+ /// \short Helper function for getting the status of use_attributes 
+ /// variable
+ bool is_use_attributes() const {return Use_attributes;}
+ 
+  protected:
+ 
+ /// The outer boundary
+ TriangleMeshClosedCurve *Outer_boundary_pt;
 
-  /// Helper function for getting the extra regions
-  Vector<Vector<double> > regions_coordinates_pt() const
-  {return Regions_coordinates_pt;}
+ /// Internal closed boundaries
+ Vector<TriangleMeshClosedCurve*> Internal_closed_curve_pt;
+ 
+ /// Internal boundaries
+ Vector<TriangleMeshOpenCurve*> Internal_open_curves_pt;
 
-  /// Helper function for getting access to the extra regions
-  Vector<Vector<double> > &regions_coordinates_pt()
-  {return Regions_coordinates_pt;}
-
-  /// \short Helper function for getting the use of attributes
-  // variable
-  bool use_attributes() const {return Use_attributes;}
-
-  /// \short Helper function for getting access to the use
-  /// of attributes variable
-  bool &use_attributes() {return Use_attributes;}
-
-  /// \short Helper function for getting the time stepper
-  /// pointer
-  TimeStepper* time_stepper_pt() const
-  {return Time_stepper_pt;}
-
-  /// \short Helper function for getting access to the time
-  /// stepper pointer
-  TimeStepper* &time_stepper_pt() {return Time_stepper_pt;}
-
- protected:
-
-  /// The outer boundary
-  TriangleMeshClosedCurve *Outer_boundary_pt;
-
-  /// Internal closed boundaries
-  Vector<TriangleMeshClosedCurve*> Internal_closed_curve_pt;
-
-  /// Internal boundaries
-  Vector<TriangleMeshOpenCurve*> Internal_open_curves_pt;
-
-  /// The element are when calling triangulate external routine
-  double Element_area;
-
-  /// Store the coordinates for defining extra holes
-  Vector<Vector<double> > Extra_holes_coordinates_pt;
-
-  /// Store the coordinates for defining extra regions
-  Vector<Vector<double> > Regions_coordinates_pt;
-
-  /// Define the use of attributes (regions)
-  bool Use_attributes;
-
-  /// Timestepper used to build elements
-  TimeStepper* Time_stepper_pt;
-
- private:
-
-  // STATIC VARIABLES (used for default values)
-
-  /// \short Static empty Vector for use as a default argument
-  /// for internal closed curves on the constructor
-  static Vector<TriangleMeshClosedCurve*>
-  Empty_internal_closed_curve;
-
-  /// \short Static empty Vector for use as a default argument
-  /// for internal open curves on the constructor
-  static Vector<TriangleMeshOpenCurve*>
-  Empty_internal_open_curves;
-
-  /// \short Static empty vector for use as a default argument
-  /// to the constructor
-  static Vector<Vector<double> > Empty_extra_hole_coordinates;
-
-  /// \short Static empty vector for use as a default argument
-  /// to the constructor
-  static Vector<Vector<double> > Empty_region_coordinates;
-
-  /// \short Default Steady Timestepper, to be used as default
-  /// arguments to Mesh constructors
-  static Steady<0> Default_TimeStepper;
+ /// The element are when calling triangulate external routine
+ double Element_area;
+ 
+ /// Store the coordinates for defining extra holes
+ Vector<Vector<double> > Extra_holes_coordinates;
+ 
+ /// Store the coordinates for defining extra regions
+ /// The key on the map is the region id
+ std::map<unsigned, Vector<double> > Regions_coordinates;
+ 
+ /// Define the use of attributes (regions)
+ bool Use_attributes;
 
 };
 
@@ -355,7 +335,8 @@ class TriangleMeshParameters
 
   /// \short Build mesh, based on the specifications on
   /// TriangleMeshParameters
-  TriangleMesh(TriangleMeshParameters &triangle_mesh_parameters)
+  TriangleMesh(TriangleMeshParameters &triangle_mesh_parameters, 
+               TimeStepper* time_stepper_pt=&Mesh::Default_TimeStepper)
   {
 
    // ********************************************************************
@@ -476,25 +457,22 @@ class TriangleMeshParameters
      triangle_mesh_parameters.element_area();
 
    // The holes coordinates
-   Vector<Vector<double> > extra_holes_coordinates_pt =
-     triangle_mesh_parameters.extra_holes_coordinates_pt();
+   Vector<Vector<double> > extra_holes_coordinates =
+     triangle_mesh_parameters.extra_holes_coordinates();
 
    // The regions coordinates
-   Vector<Vector<double> > regions_pt =
-     triangle_mesh_parameters.regions_coordinates_pt();
+   std::map<unsigned, Vector<double> > regions =
+     triangle_mesh_parameters.regions_coordinates();
 
    // If we use regions then we use attributes
-   const bool use_attributes = triangle_mesh_parameters.use_attributes();
-
-   // The pointer to the time stepper
-   TimeStepper* time_stepper_pt = triangle_mesh_parameters.time_stepper_pt();
+   const bool use_attributes = triangle_mesh_parameters.is_use_attributes();
 
    this->generic_constructor(outer_boundary_polygon_pt,
                              internal_polygon_pt,
                              internal_open_curve_poly_pt,
                              element_area,
-                             extra_holes_coordinates_pt,
-                             regions_pt,
+                             extra_holes_coordinates,
+                             regions,
                              time_stepper_pt,
                              use_attributes);
 
@@ -708,7 +686,18 @@ class TriangleMeshParameters
   
   /// Return the number of elements in region i
   unsigned nregion_element(const unsigned &i) 
-  {return Region_element_pt[i].size();}
+   {
+    std::map<unsigned,Vector<FiniteElement*> >::iterator it =
+     Region_element_pt.find(i);
+    if(it!=Region_element_pt.end())
+     {
+      return (it->second).size();
+     }
+    else
+     {
+      return 0;
+     }
+   }
   
   /// Return the attribute associated with region i
   double region_attribute(const unsigned &i)
@@ -717,7 +706,25 @@ class TriangleMeshParameters
   /// Return the e-th element in the i-th region
   FiniteElement* region_element_pt(const unsigned &i,
                                    const unsigned &e)
-  {return Region_element_pt[i][e];}
+   {
+    std::map<unsigned,Vector<FiniteElement*> >::iterator it =
+     Region_element_pt.find(i);
+    if(it!=Region_element_pt.end())
+     {
+      return (it->second)[e];
+     }
+    else
+     {
+      std::ostringstream error_message;
+      error_message << "There are not elements associated with region ("
+                    << i << ")\n";
+      error_message
+       << "This probably means that you are using a non defined region id\n";
+      throw OomphLibError(error_message.str(),
+                          "TriangleMesh::region_element_pt()",
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+   }
 
   /// \short Return the geometric object associated with the b-th boundary or
   /// null if the boundary has associated geometric object.
@@ -909,8 +916,9 @@ class TriangleMeshParameters
                            Vector<TriangleMeshPolygon*> &internal_polygon_pt,
                            Vector<TriangleMeshOpenCurve*>
                            &open_polylines_pt,
-                           Vector<Vector<double> > &extra_holes_coordinates_pt,
-                           Vector<Vector<double> > &regions_coordinates_pt,
+                           Vector<Vector<double> > &extra_holes_coordinates,
+                           std::map<unsigned, Vector<double> >
+                           &regions_coordinates,
                            TriangulateIO& triangulate_io);
 
   /// \short Helper function to create TriangulateIO object (return in
@@ -927,8 +935,9 @@ class TriangleMeshParameters
                            Vector<TriangleMeshOpenCurve*>
                            &open_polylines_pt,
                            const double &element_area,
-                           Vector<Vector<double> > &extra_holes_coordinates_pt,
-                           Vector<Vector<double> > &regions_coordinates_pt,
+                           Vector<Vector<double> > &extra_holes_coordinates,
+                           std::map<unsigned, Vector<double> >
+                           &regions_coordinates,
                            TimeStepper* time_stepper_pt,
                            const bool &use_attributes) 
    {
@@ -948,10 +957,10 @@ class TriangleMeshParameters
     Internal_open_curve_pt = open_polylines_pt;
 
     // Store the extra holes coordinates
-    Extra_holes_coordinates_pt = extra_holes_coordinates_pt;
+    Extra_holes_coordinates = extra_holes_coordinates;
 
     // Store the extra regions coordinates
-    Regions_coordinates_pt = regions_coordinates_pt;
+    Regions_coordinates = regions_coordinates;
 
     // Create the data structures required to call the triangulate function
     TriangulateIO triangulate_io;
@@ -964,8 +973,8 @@ class TriangleMeshParameters
     build_triangulateio(outer_boundary_pt,
                         internal_polygon_pt,
                         open_polylines_pt,
-                        extra_holes_coordinates_pt,
-                        regions_coordinates_pt,
+                        extra_holes_coordinates,
+                        regions_coordinates,
                         triangulate_io);
 
     // Initialize TriangulateIO structure
@@ -989,7 +998,7 @@ class TriangleMeshParameters
     Tmp_mesh_pt= new TriangleScaffoldMesh(Triangulateio);
 
     //If we have filled holes then we must use the attributes
-    if(!regions_coordinates_pt.empty())
+    if(!regions_coordinates.empty())
      {
       // Convert mesh from scaffold to actual mesh
       build_from_scaffold(time_stepper_pt,true);
@@ -1050,14 +1059,8 @@ class TriangleMeshParameters
      //Read the values of the limiting coordinates, assuming equal
      //spacing of the nodes
      double zeta_increment = 
-      std::fabs(boundary_pt->zeta_end()-
-        boundary_pt->zeta_start())/(double(n_seg));
+      (boundary_pt->zeta_end()-boundary_pt->zeta_start())/(double(n_seg));
    
-     if(boundary_pt->reversed())
-      {
-       zeta_increment=-zeta_increment;
-      }
-
      //Loop over the n_seg+1 points bounding the segments
      for(unsigned s=0;s<n_seg+1;s++)
       {
@@ -1087,14 +1090,9 @@ class TriangleMeshParameters
      unsigned nsample=nsample_per_segment*n_seg;
    
      // Work out start and increment
-     double zeta_increment=std::fabs(boundary_pt->zeta_end()-
+     double zeta_increment=(boundary_pt->zeta_end()-
                             boundary_pt->zeta_start())/(double(nsample));
    
-     if(boundary_pt->reversed())
-      {
-       zeta_increment=-zeta_increment;
-      }
-
      // Get coordinate of first point
      Vector<double> start_point(2);
      zeta[0]=zeta_initial;
@@ -1229,7 +1227,11 @@ class TriangleMeshParameters
 #ifdef PARANOID
    bool f = false;
    std::ostringstream error_message;
-   if(!boundary_pt->reversed())
+   // Check if the curviline should be created on a reversed way
+   bool reversed = false;
+   if (zeta_final < zeta_initial)
+     {reversed = true;}
+   if(!reversed)
     {
      if (zeta_initial > (*connection_points_pt)[0])
       {
@@ -1237,9 +1239,10 @@ class TriangleMeshParameters
        << "One of the specified connection points is out of the\n"
        << "curviline limits. We found that the point ("
        << (*connection_points_pt)[0] << ") is\n" << "less than the"
-       << "initial zeta value which is (" << zeta_initial
-       << ")."
-       << std::endl << std::endl;
+       << "initial s value which is (" << zeta_initial << ").\n"
+       << "Initial value: ("<<zeta_initial<<")\n"
+       << "Final value: ("<<zeta_final<<")\n"
+       << std::endl;
        f = true;
       }
 
@@ -1249,8 +1252,11 @@ class TriangleMeshParameters
        << "One of the specified connection points is out of the\n"
        << "curviline limits. We found that the point ("
        << (*connection_points_pt)[n_connections-1] << ") is\n"
-       << "greater than the final zeta value which is ("
-       << zeta_final << ")." << std::endl << std::endl;
+       << "greater than the final s value which is ("
+       << zeta_final << ").\n"
+       << "Initial value: ("<<zeta_initial<<")\n"
+       << "Final value: ("<<zeta_final<<")\n"
+       << std::endl;
        f = true;
       }
     }
@@ -1262,9 +1268,10 @@ class TriangleMeshParameters
        << "One of the specified connection points is out of the\n"
        << "curviline limits. We found that the point ("
        << (*connection_points_pt)[0] << ") is\n" << "greater than the"
-       << "initial zeta value which is (" << zeta_initial
-       << "). Remeber that the curviline was defined as reversed!!!"
-       << std::endl << std::endl;
+       << "initial s value which is (" << zeta_initial  << ").\n"
+       << "Initial value: ("<<zeta_initial<<")\n"
+       << "Final value: ("<<zeta_final<<")\n"
+       << std::endl;
        f = true;
       }
 
@@ -1274,9 +1281,11 @@ class TriangleMeshParameters
        << "One of the specified connection points is out of the\n"
        << "curviline limits. We found that the point ("
        << (*connection_points_pt)[n_connections-1] << ") is\n"
-       << "less than the final zeta value which is ("
-       << zeta_final << "). Remeber that the curviline was defined "
-       << "as reversed!!!" << std::endl << std::endl;
+       << "less than the final s value which is ("
+       << zeta_final << ").\n"
+       << "Initial value: ("<<zeta_initial<<")\n"
+       << "Final value: ("<<zeta_final<<")\n"
+       << std::endl;
        f = true;
       }
     }
@@ -1498,12 +1507,7 @@ class TriangleMeshParameters
 
        // Work out start and increment
        double zeta_increment=
-         std::fabs(zeta_final-zeta_initial)/(double(nsample));
-
-       if(boundary_pt->reversed())
-        {
-         zeta_increment=-zeta_increment;
-        }
+         (zeta_final-zeta_initial)/(double(nsample));
 
        // Get coordinate of first point
        Vector<double> start_point(2);
@@ -1692,8 +1696,9 @@ class TriangleMeshParameters
   /// for all vertex nodes in the TriangulateIO representation of the mesh
   Vector<unsigned> Oomph_vertex_nodes_id;
   
-  /// Vectors of elements in each region differentiated by attribute
-  Vector<Vector<FiniteElement* > > Region_element_pt;
+  /// Vector of elements in each region differentiated by attribute (the key 
+  /// of the map is the attribute)
+  std::map<unsigned, Vector<FiniteElement* > > Region_element_pt;
   
   /// Vector of attributes associated with the elements in each region
   Vector<double> Region_attribute;
@@ -1712,10 +1717,11 @@ class TriangleMeshParameters
   Vector<GeomObject*> Boundary_geom_object_pt;
 
   /// Storage for extra coordinates for holes
-  Vector<Vector<double> > Extra_holes_coordinates_pt;
+  Vector<Vector<double> > Extra_holes_coordinates;
 
   /// Storage for extra coordinates for regions
-  Vector<Vector<double> > Regions_coordinates_pt;
+  /// The key on the map is the region id
+  std::map<unsigned, Vector<double> > Regions_coordinates;
 
   /// A map that stores the associated curve section of the specified
   /// boundary id
@@ -2046,11 +2052,21 @@ private:
 
          // Build associated polyline
          boundary_polyline_pt[b] =
-           curviline_to_polyline(curviline_pt, bnd_id);
+          curviline_to_polyline(curviline_pt, bnd_id);
+         
+	 // Copy the unrefinement and refinement information
+	 boundary_polyline_pt[b]->set_unrefinement_tolerance(
+          curviline_pt->unrefinement_tolerance());
+	 boundary_polyline_pt[b]->set_refinement_tolerance(
+          curviline_pt->refinement_tolerance());
 
+	 // Copy the maximum length constraint
+	 boundary_polyline_pt[b]->set_maximum_length(
+          curviline_pt->maximum_length());
+         
          // Updates bnd_id<--->curve section map
          Boundary_curve_section_pt[bnd_id] = boundary_polyline_pt[b];
-
+         
          // Keep track of curve sections that need to be deleted!!!
          Free_curve_section_pt.insert(boundary_polyline_pt[b]);
 
@@ -2148,10 +2164,20 @@ private:
        boundary_polyline_pt[i] =
          curviline_to_polyline(curviline_pt, bnd_id);
 
+       // Copy the unrefinement and refinement information
+       boundary_polyline_pt[i]->set_unrefinement_tolerance(
+        curviline_pt->unrefinement_tolerance());
+       boundary_polyline_pt[i]->set_refinement_tolerance(
+        curviline_pt->refinement_tolerance());
+       
+       // Copy the maximum length constraint
+       boundary_polyline_pt[i]->set_maximum_length(
+        curviline_pt->maximum_length());
+       
        // Pass the connection information to the polyline representation
        compute_connection_information(
          curviline_pt, boundary_polyline_pt[i]);
-
+       
        // Updates bnd_id<--->curve section map
        Boundary_curve_section_pt[bnd_id] = boundary_polyline_pt[i];
 
@@ -2361,8 +2387,9 @@ template<class ELEMENT>
    /// \short Build mesh, based on the specifications on
    /// TriangleMeshParameters
    RefineableTriangleMesh(
-     TriangleMeshParameters &triangle_mesh_parameters)
-   : TriangleMesh<ELEMENT>(triangle_mesh_parameters)
+     TriangleMeshParameters &triangle_mesh_parameters, 
+     TimeStepper* time_stepper_pt=&Mesh::Default_TimeStepper)
+    : TriangleMesh<ELEMENT>(triangle_mesh_parameters, time_stepper_pt)
       {
         // Initialise the data associated with adaptation
         initialise_adaptation_data();
@@ -2536,6 +2563,15 @@ template<class ELEMENT>
                         Vector<Vector<double> > &vector_bnd_vertices,
                         double &refinement_tolerance,
                         const bool &check_only = false);
+
+   // \short Helper function that applies the maximum length constraint
+   // when it was specified. This will increase the number of points in
+   // the current curve section in case that any segment on it does not
+   // fulfils the requirement
+   bool apply_max_length_constraint(Mesh* face_mesh_pt,
+				    Vector<Vector<double> > 
+				    &vector_bnd_vertices,
+				    double &max_length_constraint);
 
    /// \short Computes the associated vertex number on the destination
    /// boundary
@@ -2791,8 +2827,9 @@ template<class ELEMENT>
      /// \short Build mesh, based on the specifications on
      /// TriangleMeshParameters
      SolidTriangleMesh(
-       TriangleMeshParameters &triangle_mesh_parameters)
-     : TriangleMesh<ELEMENT>(triangle_mesh_parameters)
+       TriangleMeshParameters &triangle_mesh_parameters, 
+       TimeStepper* time_stepper_pt=&Mesh::Default_TimeStepper)
+     : TriangleMesh<ELEMENT>(triangle_mesh_parameters, time_stepper_pt)
        {
          //Assign the Lagrangian coordinates
          set_lagrangian_nodal_coordinates();
@@ -2825,9 +2862,10 @@ public virtual RefineableTriangleMesh<ELEMENT>,
   /// \short Build mesh, based on the specifications on
   /// TriangleMeshParameters
   RefineableSolidTriangleMesh(
-    TriangleMeshParameters &triangle_mesh_parameters)
-  : TriangleMesh<ELEMENT>(triangle_mesh_parameters),
-    RefineableTriangleMesh<ELEMENT>(triangle_mesh_parameters)
+    TriangleMeshParameters &triangle_mesh_parameters, 
+    TimeStepper* time_stepper_pt=&Mesh::Default_TimeStepper)
+  : TriangleMesh<ELEMENT>(triangle_mesh_parameters, time_stepper_pt),
+    RefineableTriangleMesh<ELEMENT>(triangle_mesh_parameters, time_stepper_pt)
     {
       //Assign the Lagrangian coordinates
       set_lagrangian_nodal_coordinates();

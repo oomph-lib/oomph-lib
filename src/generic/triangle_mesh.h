@@ -172,7 +172,8 @@ class TriangleMeshCurveSection
   Initial_vertex_connected(false),
   Final_vertex_connected(false),
   Initial_vertex_connected_to_curviline(false),
-  Final_vertex_connected_to_curviline(false)
+  Final_vertex_connected_to_curviline(false),
+  Maximum_length(-1.0)
  { }
 
  /// Empty destructor
@@ -193,13 +194,106 @@ class TriangleMeshCurveSection
  /// Output the curve_section
  virtual void output(std::ostream &outfile, const unsigned& n_sample=50) = 0;
 
+ /// \short Enable refinement of curve section to create a better
+ /// representation of curvilinear boundaries (e.g. in free-surface
+ /// problems). See tutorial for
+ /// interpretation of the optional argument which specifies the
+ /// refinement tolerance. It defaults to 0.08 and the smaller the
+ /// number the finer the surface representation.
+ virtual void enable_refinement(const double& tolerance=0.08)
+  {
+   Refinement_tolerance=tolerance;
+  }
+
+ /// \short Set tolerance for refinement of curve sections to create a better
+ /// representation of curvilinear boundaries (e.g. in free-surface
+ /// problems). See tutorial for
+ /// interpretation of the refinement tolerance. (The smaller the
+ /// number the finer the surface representation). If set to
+ /// a negative value, we're switching off refinement --
+ /// equivalent to calling disable_polyline_refinement()
+ virtual void set_refinement_tolerance(const double& tolerance)
+  {
+   Refinement_tolerance=tolerance;
+  }
+
+ /// \short Get tolerance for refinement of curve sections to create a better
+ /// representation of curvilinear boundaries (e.g. in free-surface
+ /// problems). See tutorial for
+ /// interpretation. If it's negative refinement is disabled.
+ virtual double refinement_tolerance()
+  {
+   return Refinement_tolerance;
+  }
+
+ /// \short Disable refinement of curve section
+ virtual void disable_refinement()
+  {
+   Refinement_tolerance=-1.0;
+  }
+
+ /// \short Enable unrefinement of curve sections to avoid unnecessarily large
+ /// numbers of elements on of curvilinear boundaries (e.g. in free-surface
+ /// problems). See tutorial for
+ /// interpretation of the optional argument which specifies the
+ /// unrefinement tolerance. It defaults to 0.04 and the larger the number
+ /// the more agressive we are when removing unnecessary vertices on
+ /// gently curved polylines.
+ virtual void enable_unrefinement(const double& tolerance=0.04)
+  {
+   Unrefinement_tolerance=tolerance;
+  }
+
+ /// \short Set tolerance for unrefinement of curve sections
+ /// to avoid unnecessarily large
+ /// numbers of elements on of curvilinear boundaries (e.g. in free-surface
+ /// problems). See tutorial for
+ /// interpretation of the optional argument which specifies the
+ /// unrefinement tolerance. It defaults to 0.04 and the larger the number
+ /// the more agressive we are when removing unnecessary vertices on
+ /// gently curved polylines. If set to
+ /// a negative value, we're switching off unrefinement --
+ /// equivalent to calling disable_curve_section_unrefinement()
+ virtual void set_unrefinement_tolerance(const double& tolerance)
+  {
+   Unrefinement_tolerance=tolerance;
+  }
+
+ /// \short Get tolerance for unrefinement of curve section to create a better
+ /// representation of curvilinear boundaries (e.g. in free-surface
+ /// problems). See tutorial for
+ /// interpretation. If it's negative unrefinement is disabled.
+ virtual double unrefinement_tolerance()
+  {
+   return Unrefinement_tolerance;
+  }
+
+ /// \short Disable unrefinement of curve sections
+ virtual void disable_unrefinement()
+  {
+   Unrefinement_tolerance=-1.0;
+  }
+
+ // \short Allows to specify the maximum distance between two vertices
+ // that define the associated polyline of the curve section, it only
+ // takes effect on the unrefinement and refinement steps
+ virtual void set_maximum_length(const double &maximum_length)
+  {Maximum_length = maximum_length;}
+
+ // \short Disables the use of the maximum length criteria on the unrefinement
+ // or refinement steps
+ virtual void disable_use_maximum_length()
+  {Maximum_length=-1.0;}
+
+ // \short Gets access to the maximum length variable
+ virtual double maximum_length()
+  {return Maximum_length;}
+ 
  /// Get first vertex coordinates
- virtual void initial_vertex_coordinate(
-   Vector<double> &vertex) = 0;
+ virtual void initial_vertex_coordinate(Vector<double> &vertex) = 0;
 
  /// Get last vertex coordinates
- virtual void final_vertex_coordinate(
-   Vector<double> &vertex) = 0;
+ virtual void final_vertex_coordinate(Vector<double> &vertex) = 0;
 
  // \short Connects the initial vertex of the curve section to a desired
  /// target polyline by specifying the vertex number. There is a checking
@@ -379,6 +473,18 @@ protected:
  /// Tolerance used for connecting the ends to a curviline
  double Tolerance_for_s_connection;
 
+  private:
+ 
+ /// Tolerance for refinement of curve sections (neg if refinement is disabled)
+ double Refinement_tolerance;
+ 
+ /// Tolerance for unrefinement of curve sections (neg if refinement is disabled)
+ double Unrefinement_tolerance;
+
+ /// Maximum allowed distance between two vertices on the polyline representation
+ /// of the curve section
+ double Maximum_length;
+
 };
 
  
@@ -414,8 +520,7 @@ public:
                         Nsegment(nsegment),
                         Boundary_id(boundary_id),
                         Space_vertices_evenly_in_arclength(
-                          space_vertices_evenly_in_arclength),
-                          Reversed(false)
+                          space_vertices_evenly_in_arclength)
   { }
 
 
@@ -525,18 +630,6 @@ public:
 
  }
 
- /// \short Gets access to the reversed variable
- void reverse()
-  {
-   double tmp_zeta = zeta_start();
-   Zeta_start = zeta_end();
-   Zeta_end = tmp_zeta;
-   Reversed = true;
-  }
-
- /// \short Get access to the reversed variable
- const bool reversed() {return Reversed;}
-
 private:
 
  /// Pointer to GeomObject that represents this part of the boundary
@@ -563,11 +656,6 @@ private:
  // \short Stores the information for connections received on the
  /// curviline. Used when converting to polyline
  Vector<double> Connection_points_pt;
-
- /// \short Helper variable that indicates that the associated polyline
- /// on the TriangleMesh should be constructed running from the
- /// final point to the first one
- bool Reversed;
 
 };
 
@@ -709,6 +797,17 @@ public:
   {
    Polyline_refinement_tolerance = 0.08;
    Polyline_unrefinement_tolerance = 0.04;
+   
+   // Establish the default refinement and unrefinement tolerance for all the
+   // curve sections on the TriangleMeshCurve
+   unsigned n_curve_sections = Curve_section_pt.size();
+   for (unsigned i = 0; i < n_curve_sections; i++)
+    {
+     Curve_section_pt[i]->set_refinement_tolerance(
+      Polyline_refinement_tolerance);
+     Curve_section_pt[i]->set_unrefinement_tolerance(
+      Polyline_unrefinement_tolerance);
+    }
   }
 
   /// Empty destructor

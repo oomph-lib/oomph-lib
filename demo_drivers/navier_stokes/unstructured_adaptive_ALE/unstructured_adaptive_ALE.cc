@@ -996,14 +996,10 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
  triangle_mesh_parameters.element_area() =
    uniform_element_area;
 
- // Define the time stepper
- triangle_mesh_parameters.time_stepper_pt() =
-   this->time_stepper_pt();
-
  // Create the mesh
  Fluid_mesh_pt =
    new RefineableSolidTriangleMesh<ELEMENT>(
-     triangle_mesh_parameters);
+     triangle_mesh_parameters, this->time_stepper_pt());
 
  // Set error estimator for bulk mesh
  Z2ErrorEstimator* error_estimator_pt=new Z2ErrorEstimator;

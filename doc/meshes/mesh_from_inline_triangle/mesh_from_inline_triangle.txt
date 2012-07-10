@@ -84,8 +84,7 @@ GeomObject and the start and end values of the boundary coordinate \f$
 \zeta \f$
 along the relevant part of the curvilinear boundary. 
 The \c TriangleMeshCurviLines are then  combined to a
-\c TriangleMeshCurvilinearClosedCurve -- the curvilinear equivalent
-of the \c TriangleMeshPolyLine. 
+\c TriangleMeshClosedCurve -- the general closed curve.
 
 
 @I w 0.75\textwidth curvilinear_mesh "Sketch of a  domain bounded by a curvilinear boundary, containing two holes with curvilinear (hole 1) and polygonal (hole 2) boundaries, respectively. "
@@ -568,11 +567,9 @@ The objects, \c TriangleMeshPolyLine and \c TriangleMeshCurviLine
 inherit the properties of a more general representation called 
 \c TriangleMeshCurveSection. This allows one to define more general 
 boundaries as a combination of \c TriangleMeshPolyLines and 
-\c TriangleMeshCurviLines. Therefore, instead of using a 
-\c TriangleMeshPolygon or a \c TriangleMeshCurvilinearClosedCurve 
-for creating the closed boundary we will use the object 
-\c TriangleMeshClosedCurve. You may notice the use of this object 
-through the example code when defining the outer boundary.
+\c TriangleMeshCurviLines. Therefore, if we want to define a more general
+closed curve use the \c TriangleMeshClosedCurve object. 
+You may notice the use of this object through the example code when defining the outer boundary.
 
 
 

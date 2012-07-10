@@ -238,24 +238,31 @@ by specifying the coordinate \f$ ( 1.5, 0.75) \f$, see figure below.
 
 \dontinclude mesh_from_inline_triangle_internal_boundaries_extra.cc
 \skipline // Adding a hole on the domain
-\until triangle_mesh_parameters.extra_holes_coordinates_pt() = additional_hole;
+\until triangle_mesh_parameters.extra_holes_coordinates() = additional_hole;
 
-\dontinclude mesh_from_inline_triangle_internal_boundaries_extra.cc
-\skipline Pass the TriangleMeshParameters object to the TriangleMesh one
+#\dontinclude mesh_from_inline_triangle_internal_boundaries_extra.cc
+\skipline // Pass the TriangleMeshParameters object to the TriangleMesh one
 \until Problem::mesh_pt() =
 
 \subsubsection def_extra_regions Defining regions
 
 The definition of regions follows the same principle that defining holes, it means,
-one only need to define the coordinates of a point that lies inside a region.
+one only need to specify the coordinates of a point that lies inside a region.
 If we would like to define the region showed on light gray on the figure below 
-we only need to add the list of region points to the \c TriangleMeshParameters object.
+we use the method \c add_region_coordinates of the \c TriangleMeshParameters
+object. You can specify any region id for the defined region.
 
 @I w 0.50\textwidth sketch_domain_hole_region "The sketch of the domain with a hole and a defined region. "
 
 \dontinclude mesh_from_inline_triangle_internal_boundaries_extra.cc
-\skipline Adding a region on the domain
-\until Problem::mesh_pt() = new TriangleMesh<ELEMENT>(triangle_mesh_parameters);
+\skipline // Adding a region on the domain
+\until Problem::mesh_pt()
+
+By default the complete domain belongs to region zero. Therefore, one
+could leave parts of the domain without a defined region or explicitly
+define all the regions on the domain.
+NOTE: Be sure to use the region ids when documenting the solution by
+its specified regions.
 
 <HR>
 <HR>

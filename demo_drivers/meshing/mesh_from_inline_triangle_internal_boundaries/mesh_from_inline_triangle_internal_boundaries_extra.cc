@@ -513,19 +513,18 @@ PoissonProblem(PoissonEquations<2>::PoissonSourceFctPt source_fct_pt)
   additional_hole[0][1] = 0.75;
 
   // Pass information about the additional holes coordinates
-  triangle_mesh_parameters.extra_holes_coordinates_pt() = additional_hole;
+  triangle_mesh_parameters.extra_holes_coordinates() = additional_hole;
 
   // Adding a region on the domain
-  Vector<Vector <double> > regions(1);
+  Vector<double> region(2);
 
-  // Define the coordinates on the domain
-  regions[0].resize(2);
-  regions[0][0] = 0.5;
-  regions[0][1] = 0.5;
+  // Define the coordinates of the regions on the domain
+  region[0] = 0.5;
+  region[1] = 0.5;
 
   // Pass information about the defined regions
-  triangle_mesh_parameters.regions_coordinates_pt() = regions;
-
+  triangle_mesh_parameters.add_region_coordinates(1, region);
+  
   // Pass the TriangleMeshParameters object to the TriangleMesh one
   Problem::mesh_pt() = new TriangleMesh<ELEMENT>(triangle_mesh_parameters);
 
@@ -643,7 +642,7 @@ int main(int argc, char* argv[])
   DocInfo doc_info;
 
   // Output directory
-  doc_info.set_directory("RESLT_mesh_from_inline_triangle_internal_boundaries_extra");
+  doc_info.set_directory("RESLT");
 
 
   // Do the problem with cubic elements

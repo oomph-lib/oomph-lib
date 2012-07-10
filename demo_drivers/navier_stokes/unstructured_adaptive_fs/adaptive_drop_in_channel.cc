@@ -974,11 +974,6 @@ DropInChannelProblem<ELEMENT>::DropInChannelProblem()
  drop_center[0]=x_center;
  drop_center[1]=y_center;
 
- Vector<Vector <double> > regions_coordinates(1);
- regions_coordinates[0] = drop_center;
-
- bool use_attributes = true;
-
  // Use the TriangleMeshParameters object for gathering all
  // the necessary arguments for the TriangleMesh object
  TriangleMeshParameters triangle_mesh_parameters(
@@ -992,22 +987,16 @@ DropInChannelProblem<ELEMENT>::DropInChannelProblem()
  triangle_mesh_parameters.element_area() =
    uniform_element_area;
 
- // Define the regions
- triangle_mesh_parameters.regions_coordinates_pt() =
-   regions_coordinates;
-
+ // Define the region
+ triangle_mesh_parameters.add_region_coordinates(1, drop_center);
+ 
  // Establish the use of regions when setting use attributes = true
- triangle_mesh_parameters.use_attributes() =
-   use_attributes;
-
- // Define the time stepper
- triangle_mesh_parameters.time_stepper_pt() =
-   this->time_stepper_pt();
+ triangle_mesh_parameters.enable_use_attributes();
 
  // Create the mesh
  Fluid_mesh_pt =
    new RefineableSolidTriangleMesh<ELEMENT>(
-     triangle_mesh_parameters);
+     triangle_mesh_parameters, this->time_stepper_pt());
  
  // Set error estimator for bulk mesh
  Z2ErrorEstimator* error_estimator_pt=new Z2ErrorEstimator;

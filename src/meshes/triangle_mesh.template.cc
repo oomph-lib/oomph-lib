@@ -194,7 +194,6 @@ namespace oomph
     {
      unsigned n_attribute = element_attribute_map.size();
      //There are n_attribute different regions
-     Region_element_pt.resize(n_attribute);
      Region_attribute.resize(n_attribute);
      //Copy the vectors in the map over to our internal storage
      unsigned count = 0;
@@ -202,7 +201,7 @@ namespace oomph
        element_attribute_map.begin(); it != element_attribute_map.end(); ++it)
       {
        Region_attribute[count] = it->first;
-       Region_element_pt[count] = it->second;
+       Region_element_pt[Region_attribute[count]] = it->second;
        ++count;
       }
     }
@@ -401,11 +400,12 @@ namespace oomph
 
    if (n_regions > 1)
     {
-     for (unsigned i_r = 0; i_r < n_regions; i_r++)
+     for (unsigned rr = 0 ; rr < n_regions; rr++)
       {
-
+       unsigned region_id = this->Region_attribute[rr];
+       
        // Loop over all elements on boundaries in region i_r
-       unsigned nel_in_region = this->nboundary_element_in_region(b, i_r);
+       unsigned nel_in_region = this->nboundary_element_in_region(b, region_id);
        unsigned nel_repetead_in_region = 0;
 
 #ifdef PARANOID
@@ -414,11 +414,11 @@ namespace oomph
          std::ostringstream warning_message;
          warning_message
          << "There are no elements associated with boundary (" << b << ")\n"
-         << "in region (" << i_r << "). This could happen because:\n"
+         << "in region (" << region_id << "). This could happen because:\n"
          << "1) You did not specified boundaries with this boundary id.\n"
          << "---- Review carefully the indexing of your boundaries.\n"
          << "2) The boundary (" << b << ") is not associated with region ("
-         << i_r << ").\n"
+         << region_id << ").\n"
          << "---- The boundary does not touch the region\n.";
          /*OomphLibWarning(warning_message.str(),
            "TriangleMesh::setup_boundary_coordinates()",
@@ -442,10 +442,10 @@ namespace oomph
           {
            // Get pointer to the bulk element that is adjacent to boundary b
            FiniteElement* bulk_elem_pt =
-             this->boundary_element_pt_in_region(b, i_r, e);
+             this->boundary_element_pt_in_region(b, region_id, e);
 
            //Find the index of the face of element e along boundary b
-           int face_index = this->face_index_at_boundary_in_region(b, i_r, e);
+           int face_index = this->face_index_at_boundary_in_region(b, region_id, e);
 
            // Before adding the new element we need to be sure that
            // the edge that this element represent has not been
@@ -1067,8 +1067,8 @@ namespace oomph
    TriangleMeshPolygon* &outer_boundary_pt,
    Vector<TriangleMeshPolygon*> &internal_polygon_pt,
    Vector<TriangleMeshOpenCurve*> &internal_polylines_pt,
-   Vector<Vector<double> > &extra_holes_coordinates_pt,
-   Vector<Vector<double> > &regions_coordinates_pt,
+   Vector<Vector<double> > &extra_holes_coordinates,
+   std::map<unsigned, Vector<double> > &regions_coordinates,
    TriangulateIO& triangulate_io)
    {
   // triangulate_io initialization
@@ -1801,7 +1801,7 @@ namespace oomph
   // ****************************************************************
 
   // Number of extra regions
-  unsigned n_regions = regions_coordinates_pt.size();
+  unsigned n_regions = regions_coordinates.size();
 
   // Check for any defined region
   if(n_regions > 0)
@@ -1810,20 +1810,23 @@ namespace oomph
     triangulate_io.regionlist = (double*)
          malloc(triangulate_io.numberofregions * 4 * sizeof(double));
 
-    unsigned region_count = 1;
+    std::map<unsigned, Vector<double> >::iterator it_regions;
 
-    //Loop over the extra holes vector
-    for(unsigned p = 0; p < n_regions; p++)
+    //Loop over the regions map
+    unsigned p = 1;
+    for(it_regions = regions_coordinates.begin(); 
+        it_regions != regions_coordinates.end(); 
+        it_regions++)
      {
-      triangulate_io.regionlist[4*region_count-4] =
-        regions_coordinates_pt[p][0];
-      triangulate_io.regionlist[4*region_count-3] =
-        regions_coordinates_pt[p][1];
-      triangulate_io.regionlist[4*region_count-2] =
-        static_cast<double>(region_count);
-      triangulate_io.regionlist[4*region_count-1] = 0.0;
-      //Increase the number of regions
-      ++region_count;
+      unsigned region_id = (*it_regions).first;
+      triangulate_io.regionlist[4*p-4] =
+        ((*it_regions).second)[0];
+      triangulate_io.regionlist[4*p-3] =
+        ((*it_regions).second)[1];
+      triangulate_io.regionlist[4*p-2] =
+        static_cast<double>(region_id);
+      triangulate_io.regionlist[4*p-1] = 0.0;
+      p++;
      }
 
    }
@@ -1832,7 +1835,7 @@ namespace oomph
   // Store the hole coordinates in the TriangulateIO object (4th stage)
   // ******************************************************************
 
-  unsigned n_extra_holes = extra_holes_coordinates_pt.size();
+  unsigned n_extra_holes = extra_holes_coordinates.size();
   unsigned n_real_holes = 0;
   Vector<unsigned> index_holes;
 
@@ -1869,9 +1872,9 @@ namespace oomph
     count_hole+=2,c_extra_hole++)
    {
     triangulate_io.holelist[count_hole] =
-      extra_holes_coordinates_pt[c_extra_hole][0];
+      extra_holes_coordinates[c_extra_hole][0];
     triangulate_io.holelist[count_hole+1] =
-      extra_holes_coordinates_pt[c_extra_hole][1];
+      extra_holes_coordinates[c_extra_hole][1];
    }
 
  }
@@ -2459,29 +2462,30 @@ void RefineableTriangleMesh<ELEMENT>::adapt(OomphCommunicator* comm_pt,
 
     // Pass information about the extra holes (not defined with closed
     // boundaries)
-    triangle_mesh_parameters.extra_holes_coordinates_pt() =
-      this->Extra_holes_coordinates_pt;
+    triangle_mesh_parameters.extra_holes_coordinates() =
+      this->Extra_holes_coordinates;
 
     //Pass information about regions
-    triangle_mesh_parameters.regions_coordinates_pt() =
-      this->Regions_coordinates_pt;
+    triangle_mesh_parameters.regions_coordinates() =
+      this->Regions_coordinates;
 
     //Pass information about the using of regions
-    triangle_mesh_parameters.use_attributes() = this->Use_attributes;
+    if (triangle_mesh_parameters.is_use_attributes())
+     {
+      triangle_mesh_parameters.enable_use_attributes();
+     }
 
-    //Pass information about the time stepper object used
-    triangle_mesh_parameters.time_stepper_pt() = this->Time_stepper_pt;
     // *****************************************************************
 
     if (solid_mesh_pt!=0)
      {
       tmp_new_mesh_pt=new RefineableSolidTriangleMesh<ELEMENT>
-      (triangle_mesh_parameters);
+      (triangle_mesh_parameters, this->Time_stepper_pt);
      }
     else
      {
       tmp_new_mesh_pt=new RefineableTriangleMesh<ELEMENT>
-      (triangle_mesh_parameters);
+      (triangle_mesh_parameters, this->Time_stepper_pt);
      }
 
     // Snap to curvilinear boundaries (some code duplication as this
@@ -2490,12 +2494,12 @@ void RefineableTriangleMesh<ELEMENT>::adapt(OomphCommunicator* comm_pt,
 
     //Pass the boundary geometric objects to the new mesh
     tmp_new_mesh_pt->boundary_geom_object_pt() =
-    this->boundary_geom_object_pt();
+     this->boundary_geom_object_pt();
 
     //Reset the boundary coordinates if there is
     //a geometric object associated with the boundary
     tmp_new_mesh_pt->boundary_coordinate_limits() =
-    this->boundary_coordinate_limits();
+     this->boundary_coordinate_limits();
     for (unsigned b=0;b<n_boundary;b++)
      {
       if(tmp_new_mesh_pt->boundary_geom_object_pt(b)!=0)
@@ -2626,8 +2630,9 @@ void RefineableTriangleMesh<ELEMENT>::adapt(OomphCommunicator* comm_pt,
         // Make a mesh as geom object representation of the temporary
         // mesh -- this also builds up the internal bin structure 
         // from which we'll recover the target areas
+
         MeshAsGeomObject* tmp_mesh_geom_obj_pt =
-        new MeshAsGeomObject(tmp_new_mesh_pt);
+         new MeshAsGeomObject(tmp_new_mesh_pt);
 
         // Reset
         Multi_domain_functions::Nx_bin=backup_bin_x;
@@ -2766,7 +2771,7 @@ void RefineableTriangleMesh<ELEMENT>::adapt(OomphCommunicator* comm_pt,
         (new_target_area,
           tmp_new_triangulateio,
           this->Time_stepper_pt,
-          this->Use_attributes);
+            this->Use_attributes);
        }
       // No solid mesh
       else
@@ -2775,7 +2780,7 @@ void RefineableTriangleMesh<ELEMENT>::adapt(OomphCommunicator* comm_pt,
         (new_target_area,
           tmp_new_triangulateio,
           this->Time_stepper_pt,
-          this->Use_attributes);
+            this->Use_attributes);
        }
 
       // Snap to curvilinear boundaries (some code duplication as this
@@ -2895,17 +2900,18 @@ void RefineableTriangleMesh<ELEMENT>::adapt(OomphCommunicator* comm_pt,
     if(n_region > 1)
      {
       //Deal with the region information first
-      this->Region_element_pt.resize(n_region);
       this->Region_attribute.resize(n_region);
       for(unsigned r=0;r<n_region;r++)
        {
         this->Region_attribute[r] = new_mesh_pt->region_attribute(r);
+        // Get the region id
+        unsigned r_id = this->Region_attribute[r];
         //Find the number of elements in the region
-        unsigned n_region_element = new_mesh_pt->nregion_element(r);
-        this->Region_element_pt[r].resize(n_region_element);
+        unsigned n_region_element = new_mesh_pt->nregion_element(r_id);
+        this->Region_element_pt[r_id].resize(n_region_element);
         for(unsigned e=0;e<n_region_element;e++)
          {
-          this->Region_element_pt[r][e] = new_mesh_pt->region_element_pt(r,e);
+          this->Region_element_pt[r_id][e] = new_mesh_pt->region_element_pt(r_id,e);
          }
        }
 
@@ -2916,11 +2922,13 @@ void RefineableTriangleMesh<ELEMENT>::adapt(OomphCommunicator* comm_pt,
       //Now loop over the boundaries
       for(unsigned b=0;b<nbound;++b)
        {
-        //Loop over the regions
-        for(unsigned r=0;r<n_region;++r)
+        for (unsigned rr = 0 ; rr < n_region; rr++)
          {
+          // The region id
+          unsigned r = this->Region_attribute[rr];
+          
           unsigned n_boundary_el_in_region =
-          new_mesh_pt->nboundary_element_in_region(b,r);
+           new_mesh_pt->nboundary_element_in_region(b,r);
 
           if(n_boundary_el_in_region > 0)
            {
@@ -3003,6 +3011,7 @@ update_polygon_using_face_mesh(TriangleMeshPolygon* polygon_pt,
  // was performed or not
  bool unrefinement_was_performed=false;
  bool refinement_was_performed=false;
+ bool max_length_applied = false;
 
  //Loop over the number of polylines
  unsigned n_polyline = polygon_pt->npolyline();
@@ -3085,7 +3094,8 @@ update_polygon_using_face_mesh(TriangleMeshPolygon* polygon_pt,
 
    // Tolerance below which the middle point can be deleted
    // (ratio of deflection to element length)
-   double unrefinement_tolerance=polygon_pt->polyline_unrefinement_tolerance();
+   double unrefinement_tolerance=
+    polygon_pt->polyline_pt(p)->unrefinement_tolerance();
 
    //------------------------------------------------------
    // Unrefinement
@@ -3095,7 +3105,7 @@ update_polygon_using_face_mesh(TriangleMeshPolygon* polygon_pt,
 
      unrefinement_was_performed =
        unrefine_boundary(bound, tmp_vector_vertex_node,
-         unrefinement_tolerance, check_only);
+			 unrefinement_tolerance, check_only);
 
      // In this case the "unrefinement_was_performed" variable
      // tell us if the update had been performed when calling
@@ -3114,18 +3124,18 @@ update_polygon_using_face_mesh(TriangleMeshPolygon* polygon_pt,
 
     } // end of unrefinement
 
-
    //------------------------------------------------
-   /// Refinement
+   // Refinement
    //------------------------------------------------
-   double refinement_tolerance=polygon_pt->polyline_refinement_tolerance();
+   double refinement_tolerance=
+    polygon_pt->polyline_pt(p)->refinement_tolerance();
    if (refinement_tolerance>0.0)
     {
      refinement_was_performed =
        refine_boundary(face_mesh_pt[p], tmp_vector_vertex_node,
          refinement_tolerance, check_only);
 
-     // In this case the "unrefinement_was_performed" variable
+     // In this case the "refinement_was_performed" variable
      // tell us if the update had been performed when calling
      // with check_oly=false
      if (check_only && refinement_was_performed)
@@ -3141,6 +3151,33 @@ update_polygon_using_face_mesh(TriangleMeshPolygon* polygon_pt,
       }
 
     } // end refinement
+
+   //------------------------------------------------
+   // Maximum length constrait
+   //-----------------------------------------------
+   double maximum_length = polygon_pt->polyline_pt(p)->maximum_length();
+   if (maximum_length > 0.0)
+    {
+     max_length_applied = 
+      apply_max_length_constraint(face_mesh_pt[p], 
+                                  tmp_vector_vertex_node,
+                                  maximum_length);
+     
+     // In this case the max length criteria was applied, check if 
+     // check_only=false
+     if (check_only && max_length_applied)
+      {
+       // Cleanup (but only the elements -- the nodes still exist in
+       // the bulk mesh!
+       for(unsigned p=0;p<n_polyline;p++)
+        {
+         face_mesh_pt[p]->flush_node_storage();
+         delete face_mesh_pt[p];
+        }
+       return true;
+      }
+
+    }
 
    // For further processing the three-dimensional vector
    // has to be reduced to a two-dimensional vector
@@ -3320,7 +3357,7 @@ update_polygon_using_face_mesh(TriangleMeshPolygon* polygon_pt,
     {
      //Now update the polyline according to the new vertices but
      //first check if the object is allowed to delete the representation
-     // or if it should be done by other object
+     //or if it should be done by other object
 
      bool delete_it_on_destructor = false;
 
@@ -3335,11 +3372,20 @@ update_polygon_using_face_mesh(TriangleMeshPolygon* polygon_pt,
       }
 
      polygon_pt->curve_section_pt(p) =
-       new TriangleMeshPolyLine(vector_vertex_node,bound);
-
+      new TriangleMeshPolyLine(vector_vertex_node,bound);
+     
+     // Establish refinement and unrefinement tolerance
+     polygon_pt->curve_section_pt(p)->set_unrefinement_tolerance(
+      unrefinement_tolerance);
+     polygon_pt->curve_section_pt(p)->set_refinement_tolerance(
+      refinement_tolerance);
+     
+     // Establish the maximum length constraint
+     polygon_pt->curve_section_pt(p)->set_maximum_length(maximum_length);
+     
      // Update the Boundary - Polyline map
      this->Boundary_curve_section_pt[bound] = polygon_pt->curve_section_pt(p);
-
+     
      if (delete_it_on_destructor)
       {
        this->Free_curve_section_pt.insert(polygon_pt->curve_section_pt(p));
@@ -3367,7 +3413,7 @@ update_polygon_using_face_mesh(TriangleMeshPolygon* polygon_pt,
    // if we not only check, but actually perform the update and end up
    // all the way down here then we indicate whether an update was performed
    // or not
-   return (unrefinement_was_performed || refinement_was_performed);
+   return (unrefinement_was_performed || refinement_was_performed || max_length_applied);
   }
 
   }
@@ -3390,6 +3436,7 @@ bool RefineableTriangleMesh<ELEMENT>::update_open_curve_using_face_mesh(
   // were performed or not
   bool unrefinement_was_performed=false;
   bool refinement_was_performed=false;
+  bool max_length_applied = false;
 
   //Loop over the number of polylines
   unsigned n_polyline = open_polyline_pt->ncurve_section();
@@ -3473,17 +3520,16 @@ bool RefineableTriangleMesh<ELEMENT>::update_open_curve_using_face_mesh(
     // Tolerance below which the middle point can be deleted
     // (ratio of deflection to element length)
     double unrefinement_tolerance=
-      open_polyline_pt->polyline_unrefinement_tolerance();
+      open_polyline_pt->polyline_pt(p)->unrefinement_tolerance();
 
     //------------------------------------------------------
     // Unrefinement
     //------------------------------------------------------
     if (unrefinement_tolerance>0.0 && n_vertex>=3)
      {
-
       unrefinement_was_performed =
         unrefine_boundary(bound, tmp_vector_vertex_node,
-          unrefinement_tolerance, check_only);
+			  unrefinement_tolerance, check_only);
 
       // In this case the unrefinement_was_performed variable actually
       // tell us if the update had been performed when calling
@@ -3502,15 +3548,13 @@ bool RefineableTriangleMesh<ELEMENT>::update_open_curve_using_face_mesh(
 
      } // end of unrefinement
 
-
     //------------------------------------------------
     /// Refinement
     //------------------------------------------------
     double refinement_tolerance=
-      open_polyline_pt->polyline_refinement_tolerance();
+      open_polyline_pt->polyline_pt(p)->refinement_tolerance();
     if (refinement_tolerance>0.0)
      {
-
       refinement_was_performed =
         refine_boundary(face_mesh_pt[p], tmp_vector_vertex_node,
           refinement_tolerance, check_only);
@@ -3532,6 +3576,34 @@ bool RefineableTriangleMesh<ELEMENT>::update_open_curve_using_face_mesh(
 
      } // end refinement
 
+    //------------------------------------------------
+    // Maximum length constrait
+    //-----------------------------------------------
+    double maximum_length = open_polyline_pt->polyline_pt(p)->maximum_length();
+    if (maximum_length > 0.0)
+      {
+       bool max_length_applied = false;
+       max_length_applied = 
+        apply_max_length_constraint(face_mesh_pt[p], 
+                                    tmp_vector_vertex_node,
+                                    maximum_length);
+       
+       // In this case the max length criteria was applied, check if 
+       // check_only=false
+       if (check_only && max_length_applied)
+        {
+         // Cleanup (but only the elements -- the nodes still exist in
+         // the bulk mesh!
+         for(unsigned p=0;p<n_polyline;p++)
+          {
+           face_mesh_pt[p]->flush_node_storage();
+           delete face_mesh_pt[p];
+          }
+         return true;
+        }
+       
+      }
+    
     // For further processing the three-dimensional vector
     // has to be reduced to a two-dimensional vector
     n_vertex=tmp_vector_vertex_node.size();
@@ -3626,14 +3698,23 @@ bool RefineableTriangleMesh<ELEMENT>::update_open_curve_using_face_mesh(
       // Create a temporal "curve section" version of the recently created
       // polyline
       TriangleMeshCurveSection *tmp_curve_section = tmp_polyline;
-
+      
+      // Copy the unrefinement and refinement information
+      tmp_polyline->set_unrefinement_tolerance(
+       unrefinement_tolerance);
+      tmp_polyline->set_refinement_tolerance(
+       refinement_tolerance);
+      
+      // Establish the maximum length constraint
+      tmp_polyline->set_maximum_length(maximum_length);
+      
       // *****************************************************************
       // We need to pass the connection information from the
       // old polyline to the new one (if the polyline is connected
       // or not. After this we need to restore the vertices number used for
       // connections.
       this->compute_connection_information(
-        open_polyline_pt->polyline_pt(p), tmp_curve_section);
+       open_polyline_pt->polyline_pt(p), tmp_curve_section);
 
       // Re-store the connection vertices
       // Since we have added or eliminated nodes (vertices) on the
@@ -3692,7 +3773,7 @@ bool RefineableTriangleMesh<ELEMENT>::update_open_curve_using_face_mesh(
     // if we not only check, but actually perform the update and end up
     // all the way down here then we indicate whether an update was performed
     // or not
-    return (unrefinement_was_performed || refinement_was_performed);
+    return (unrefinement_was_performed || refinement_was_performed || max_length_applied);
    }
 
   }
@@ -4152,6 +4233,124 @@ refine_boundary(Mesh* face_mesh_pt,
   delete mesh_geom_obj_pt;
 
   return refinement_was_performed;
+
+ }
+
+ template<class ELEMENT>
+ bool RefineableTriangleMesh<ELEMENT>::
+ apply_max_length_constraint(Mesh* face_mesh_pt,
+                             Vector<Vector<double> > &vector_bnd_vertices,
+                             double &max_length_constraint)
+ {
+
+  // Boolean that indicates whether an actual update of the vertex
+  // coordinates was performed or not
+  bool max_length_applied=false;
+
+  // Create a geometric object from the mesh to represent
+  //the curvilinear boundary
+  MeshAsGeomObject* mesh_geom_obj_pt =
+   new MeshAsGeomObject(face_mesh_pt);
+
+  // Get the total number of current vertices
+  unsigned n_vertex=vector_bnd_vertices.size();
+
+  // Create a new (temporary) vector for the nodes, so
+  // that new nodes can be stored
+  Vector<Vector<double> > extended_vector;
+
+  // Reserve memory space for twice the number of already
+  // existing nodes (worst case)
+  //extended_vector.reserve(2*n_vertex);
+
+  // Loop over the nodes until the last but one node
+  for(unsigned inod=0;inod<n_vertex-1;inod++)
+   {
+    // Get local coordinate of "left" node
+    double zeta_left=vector_bnd_vertices[inod][0];
+
+    // Get position vector of "left" node
+    Vector<double> R_left(2);
+    for(unsigned i=0;i<2;i++)
+     {
+      R_left[i]=vector_bnd_vertices[inod][i+1];
+     }
+
+    // Get local coordinate of "right" node
+    double zeta_right=vector_bnd_vertices[inod+1][0];
+
+    // Get position vector of "right" node
+    Vector<double> R_right(2);
+    for(unsigned i=0;i<2;i++)
+     {
+      R_right[i]=vector_bnd_vertices[inod+1][i+1];
+     }
+
+    // Include the "left" node in the new "temporary" vector
+    extended_vector.push_back(vector_bnd_vertices[inod]);
+
+    // Check whether the current distance between the left and right node 
+    // is longer than the specified constraint or not
+    double length=std::fabs(zeta_right-zeta_left);
+
+    // Do we need to introduce new nodes?
+    if (length > max_length_constraint)
+     {
+      double n_pts = length/max_length_constraint;
+      // We only want the integer part
+      unsigned n_points = (unsigned)n_pts;
+      double zeta_increment = (zeta_right-zeta_left)/((double)n_points+1);
+       
+      Vector<double> zeta(1);
+      // Create the n_points+1 points inside the segment
+      for(unsigned s=1;s<n_points+1;s++)
+       {
+        // Get the coordinates
+        zeta[0]= zeta_left + zeta_increment*double(s);
+        Vector<double> vertex(2);
+        mesh_geom_obj_pt->position(zeta, vertex);
+
+        // Create the new node
+        Vector<double> new_node(3);
+        new_node[0]=zeta[0];
+        new_node[1]=vertex[0];
+        new_node[2]=vertex[1];
+
+        // Include the new node
+        extended_vector.push_back(new_node);
+       }
+     }
+   }
+
+  // Add the last node to the vector
+  extended_vector.push_back(vector_bnd_vertices[n_vertex-1]);
+
+  /// Get the size of the vector that now includes all added nodes
+  n_vertex=extended_vector.size();
+
+  // If the size of the vector including the added nodes is
+  // different from the size of the vector before applying the maximum length
+  // constraint then the polyline was obviously updated
+  if( n_vertex != vector_bnd_vertices.size() )
+   {
+    max_length_applied = true;
+   }
+
+  // Copy across
+  vector_bnd_vertices.resize(n_vertex);
+  for(unsigned i=0;i<n_vertex;i++)
+   {
+    vector_bnd_vertices[i].resize(3);
+    vector_bnd_vertices[i][0]=extended_vector[i][0];
+    vector_bnd_vertices[i][1]=extended_vector[i][1];
+    vector_bnd_vertices[i][2]=extended_vector[i][2];
+   }
+
+  // Delete the allocated memory for the geometric object
+  // that represents the curvilinear boundary
+  delete mesh_geom_obj_pt;
+
+  return max_length_applied;
 
  }
 
@@ -5121,42 +5320,27 @@ void RefineableTriangleMesh<ELEMENT>::
 get_face_mesh_representation(
   TriangleMeshOpenCurve* open_polyline_pt,
   Vector<Mesh*>& face_mesh_pt)
- {
+{
 
-  // Number of polylines
-  unsigned n_polyline = open_polyline_pt->ncurve_section();
-  face_mesh_pt.resize(n_polyline);
+ // Number of polylines
+ unsigned n_polyline = open_polyline_pt->ncurve_section();
+ face_mesh_pt.resize(n_polyline);
 
-  // Are we eligible for re-distributing polyline segments between
-  // polylines? We're not if any of the boundaries are associated
-  // with a GeomObject because we're then tied to the start and
-  // end coordinates along it.
-  bool eligible_for_segment_redistribution=true;
+ // Loop over constituent polylines
+ for(unsigned p=0;p<n_polyline;p++)
+  {
 
-  // Loop over constituent polylines
-  for(unsigned p=0;p<n_polyline;p++)
-   {
+   //Get the boundary id of the polyline
+   unsigned bound =
+    open_polyline_pt->curve_section_pt(p)->boundary_id();
 
-    //Get the boundary id of the polyline
-    unsigned bound =
-      open_polyline_pt->curve_section_pt(p)->boundary_id();
+   face_mesh_pt[p] = new Mesh();
+   create_unsorted_face_mesh_representation(
+    bound, face_mesh_pt[p]);
 
-    //If the boundary has a geometric object representation then
-    //we can't redistribute
-    GeomObject* const geom_object_pt =
-    this->boundary_geom_object_pt(bound);
-    if(geom_object_pt!=0)
-     {
-      eligible_for_segment_redistribution=false;
-     }
+  }
 
-    face_mesh_pt[p] = new Mesh();
-    create_unsorted_face_mesh_representation(
-      bound, face_mesh_pt[p]);
-
-   }
-
- }
+}
 
 //======================================================================
 /// Update the PSLG that define the inner boundaries of the mesh.
@@ -5747,55 +5931,6 @@ void RefineableTriangleMesh<ELEMENT>::snap_nodes_onto_boundary(
  }
 
 
-
-
-
-
-//////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////
-
-
-
-
-
-//============================================================
-/// Static empty Vector for use as a default argument for internal
-/// closed curves on the constructor
-//============================================================
-Vector<TriangleMeshClosedCurve*>
-TriangleMeshParameters::Empty_internal_closed_curve;
-
-//============================================================
-/// Static empty Vector for use as a default argument for internal
-/// open curves on the constructor
-//============================================================
-Vector<TriangleMeshOpenCurve*>
-TriangleMeshParameters::Empty_internal_open_curves;
-
-//============================================================
-/// Static empty vector for use as a default argument
-/// to the constructor which will specify that there are
-/// not additional hole coordinates
-//============================================================
-Vector<Vector<double> >
-TriangleMeshParameters::Empty_extra_hole_coordinates;
-
-//============================================================
-/// Static empty vector for use as a default arguments
-/// to the constructor which specify that there are not
-/// extra additional regions
-//============================================================
-Vector<Vector<double> >
-TriangleMeshParameters::Empty_region_coordinates;
-
-//============================================================
-/// \short Default Steady Timestepper, to be used in default
-  /// arguments to Mesh constructors
-//============================================================
-Steady<0> TriangleMeshParameters::Default_TimeStepper;
 
 #endif // #ifdef OOMPH_HAS_TRIANGLE_LIB
 

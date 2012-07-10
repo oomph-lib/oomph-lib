@@ -621,7 +621,7 @@ int main(int argc, char* argv[])
   DocInfo doc_info;
 
   // Output directory
-  doc_info.set_directory("RESLT_mesh_from_inline_triangle_internal_boundaries");
+  doc_info.set_directory("RESLT");
 
 
   // Do the problem with cubic elements

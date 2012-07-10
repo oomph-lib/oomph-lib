@@ -2,7 +2,7 @@
 
 
 #Set the number of tests to be checked
-NUM_TESTS=1
+NUM_TESTS=2
 
 
 # Setup validation directory
@@ -17,13 +17,13 @@ cd Validation
 # Validate mesh generation from inline triangle (internal boundaries)
 #---------------------------------------------------------------------------
 
-echo "Running inline triangle mesh generation test (internal boudaries)"
+echo "Running inline triangle mesh generation test (internal boundaries)"
 mkdir RESLT
 ../mesh_from_inline_triangle_internal_boundaries --validation > OUTPUT
 
 echo "done"
 echo " " >> validation.log
-echo "triangle inline mesh generation test (internal boudaries)" >> validation.log
+echo "triangle inline mesh generation test (internal boundaries)" >> validation.log
 echo "-----------------------------------------------------------------" >> validation.log
 echo " " >> validation.log
 echo "Validation directory: " >> validation.log
@@ -39,6 +39,38 @@ else
 ../../../../bin/fpdiff.py ../validata/results.dat.gz   \
     results.dat  >> validation.log
 fi
+
+mv RESLT RESLT_internal_boundaries
+
+
+# Validate mesh generation from inline triangle_extra (internal boundaries and definition of
+# regions and holes)
+#---------------------------------------------------------------------------
+
+echo "Running inline triangle mesh generation test (internal boundaries -- definition of holes and regions --)"
+mkdir RESLT
+../mesh_from_inline_triangle_internal_boundaries_extra --validation > OUTPUT
+
+echo "done"
+echo " " >> validation.log
+echo "triangle inline mesh generation test (internal boundaries -- definition of holes and regions --)" >> validation.log
+echo "-----------------------------------------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat RESLT/trace.dat  \
+    > results.dat
+
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../../bin/fpdiff.py ../validata/results_extra.dat.gz   \
+    results.dat  >> validation.log
+fi
+
+mv RESLT RESLT_internal_boundaries_extra
 
 
 # Append output to global validation log file

@@ -318,6 +318,7 @@ constraint. We then combine the submeshes into a global mesh.
 During the problem setup the position of all boundary nodes in the 
 pseudo-elastic fluid mesh, apart from those on the bubble boundary, are pinned.
 
+\dontinclude adaptive_bubble_in_channel.cc
 \skipline start_of_complete_problem_setup
 \until // points on bubble 
 
@@ -471,19 +472,18 @@ is deleted.
 The tolerance for the unrefinement of polygons is set by the function 
 
 \code
-TriangleMeshClosedCurve::set_polyline_unrefinement_tolerance(...)
+TriangleMesh::set_polyline_unrefinement_tolerance(...)
 \endcode
 
 By default we allow polyline unrefinement (with a default tolerance of 0.04).
 Polyline unrefinement can be disabled by calling
 
 \code
-TriangleMeshClosedCurve::disable_polyline_unrefinement()
+TriangleMesh::disable_polyline_unrefinement()
 \endcode
 
-where \c TriangleMeshClosedCurve is a base class that is common
-to the \c TriangleMeshPolygon and \c TriangleMeshCurvilinearClosedCurve
-classes.
+where \c TriangleMesh is a base for the \c TriangleMeshClosedCurve
+class.
 
 \subsubsection refinement Refinement of polylines 
 
@@ -513,14 +513,14 @@ two as illustrated in the figure below:
 The tolerance for the refinement of polygons is set by the function 
 
 \code
-TriangleMeshClosedCurve::set_polyline_refinement_tolerance(...)
+TriangleMesh::set_polyline_refinement_tolerance(...)
 \endcode
 
 By default we allow polyline refinement (with a default tolerance of 0.08).
 Polyline refinement can be disabled by calling
 
 \code
-TriangleMeshClosedCurve::disable_polyline_refinement()
+TriangleMesh::disable_polyline_refinement()
 \endcode
 
 \subsubsection redistribution Redistribution of segments between polylines 
@@ -556,9 +556,9 @@ TriangleMeshPolygon::enable_redistribution_of_segments_between_polylines()
 \endcode
 
 Note that the redistribution of segments is not possible/sensible for
-\c TriangleMeshCurvilinearClosedCurve since each of its 
-constituent \c TriangleMeshCurviLine is associated with a separate \c
-GeomObject (with specific start/end coordinates). 
+\c TriangleMeshClosedCurve formed by \c TriangleMeshCurviLines since them 
+have associated a separate \c GeomObject (with specific start/end 
+coordinates). 
 
 
 <HR>
