@@ -200,7 +200,7 @@ class TriangleMeshCurveSection
  /// interpretation of the optional argument which specifies the
  /// refinement tolerance. It defaults to 0.08 and the smaller the
  /// number the finer the surface representation.
- virtual void enable_refinement(const double& tolerance=0.08)
+ void enable_refinement_tolerance(const double& tolerance=0.08)
   {
    Refinement_tolerance=tolerance;
   }
@@ -212,7 +212,7 @@ class TriangleMeshCurveSection
  /// number the finer the surface representation). If set to
  /// a negative value, we're switching off refinement --
  /// equivalent to calling disable_polyline_refinement()
- virtual void set_refinement_tolerance(const double& tolerance)
+ void set_refinement_tolerance(const double& tolerance)
   {
    Refinement_tolerance=tolerance;
   }
@@ -221,13 +221,13 @@ class TriangleMeshCurveSection
  /// representation of curvilinear boundaries (e.g. in free-surface
  /// problems). See tutorial for
  /// interpretation. If it's negative refinement is disabled.
- virtual double refinement_tolerance()
+ double refinement_tolerance()
   {
    return Refinement_tolerance;
   }
 
  /// \short Disable refinement of curve section
- virtual void disable_refinement()
+ void disable_refinement_tolerance()
   {
    Refinement_tolerance=-1.0;
   }
@@ -239,7 +239,7 @@ class TriangleMeshCurveSection
  /// unrefinement tolerance. It defaults to 0.04 and the larger the number
  /// the more agressive we are when removing unnecessary vertices on
  /// gently curved polylines.
- virtual void enable_unrefinement(const double& tolerance=0.04)
+ void enable_unrefinement_tolerance(const double& tolerance=0.04)
   {
    Unrefinement_tolerance=tolerance;
   }
@@ -254,7 +254,7 @@ class TriangleMeshCurveSection
  /// gently curved polylines. If set to
  /// a negative value, we're switching off unrefinement --
  /// equivalent to calling disable_curve_section_unrefinement()
- virtual void set_unrefinement_tolerance(const double& tolerance)
+ void set_unrefinement_tolerance(const double& tolerance)
   {
    Unrefinement_tolerance=tolerance;
   }
@@ -263,13 +263,13 @@ class TriangleMeshCurveSection
  /// representation of curvilinear boundaries (e.g. in free-surface
  /// problems). See tutorial for
  /// interpretation. If it's negative unrefinement is disabled.
- virtual double unrefinement_tolerance()
+ double unrefinement_tolerance()
   {
    return Unrefinement_tolerance;
   }
 
  /// \short Disable unrefinement of curve sections
- virtual void disable_unrefinement()
+ void disable_unrefinement_tolerance()
   {
    Unrefinement_tolerance=-1.0;
   }
@@ -277,16 +277,16 @@ class TriangleMeshCurveSection
  // \short Allows to specify the maximum distance between two vertices
  // that define the associated polyline of the curve section, it only
  // takes effect on the unrefinement and refinement steps
- virtual void set_maximum_length(const double &maximum_length)
+ void set_maximum_length(const double &maximum_length)
   {Maximum_length = maximum_length;}
 
  // \short Disables the use of the maximum length criteria on the unrefinement
  // or refinement steps
- virtual void disable_use_maximum_length()
+ void disable_use_maximum_length()
   {Maximum_length=-1.0;}
 
  // \short Gets access to the maximum length variable
- virtual double maximum_length()
+ double maximum_length()
   {return Maximum_length;}
  
  /// Get first vertex coordinates
@@ -845,6 +845,14 @@ public:
   void enable_polyline_refinement(const double& tolerance=0.08)
   {
    Polyline_refinement_tolerance=tolerance;
+   // Establish the refinement tolerance for all the
+   // curve sections on the TriangleMeshCurve
+   unsigned n_curve_sections = Curve_section_pt.size();
+   for (unsigned i = 0; i < n_curve_sections; i++)
+    {
+     Curve_section_pt[i]->set_refinement_tolerance(
+      Polyline_refinement_tolerance);
+    }
   }
 
   /// \short Set tolerance for refinement of polylines to create a better
@@ -857,6 +865,14 @@ public:
   void set_polyline_refinement_tolerance(const double& tolerance)
   {
    Polyline_refinement_tolerance=tolerance;
+   // Establish the refinement tolerance for all the
+   // curve sections on the TriangleMeshCurve
+   unsigned n_curve_sections = Curve_section_pt.size();
+   for (unsigned i = 0; i < n_curve_sections; i++)
+    {
+     Curve_section_pt[i]->set_refinement_tolerance(
+      Polyline_refinement_tolerance);
+    }
   }
 
   /// \short Get tolerance for refinement of polylines to create a better
@@ -872,6 +888,11 @@ public:
   void disable_polyline_refinement()
   {
    Polyline_refinement_tolerance=-1.0;
+   // Disable the refinement tolerance for all the
+   // curve sections on the TriangleMeshCurve
+   unsigned n_curve_sections = Curve_section_pt.size();
+   for (unsigned i = 0; i < n_curve_sections; i++)
+    {Curve_section_pt[i]->disable_refinement_tolerance();}
   }
 
   /// \short Enable unrefinement of polylines to avoid unnecessarily large
@@ -884,6 +905,14 @@ public:
   void enable_polyline_unrefinement(const double& tolerance=0.04)
   {
    Polyline_unrefinement_tolerance=tolerance;
+   // Establish the unrefinement tolerance for all the
+   // curve sections on the TriangleMeshCurve
+   unsigned n_curve_sections = Curve_section_pt.size();
+   for (unsigned i = 0; i < n_curve_sections; i++)
+    {
+     Curve_section_pt[i]->set_unrefinement_tolerance(
+      Polyline_unrefinement_tolerance);
+    }
   }
 
   /// \short Set tolerance for unrefinement of polylines
@@ -899,6 +928,14 @@ public:
   void set_polyline_unrefinement_tolerance(const double& tolerance)
   {
    Polyline_unrefinement_tolerance=tolerance;
+   // Establish the unrefinement tolerance for all the
+   // curve sections on the TriangleMeshCurve
+   unsigned n_curve_sections = Curve_section_pt.size();
+   for (unsigned i = 0; i < n_curve_sections; i++)
+    {
+     Curve_section_pt[i]->set_unrefinement_tolerance(
+      Polyline_unrefinement_tolerance);
+    }
   }
 
   /// \short Get tolerance for unrefinement of polylines to create a better
@@ -914,6 +951,11 @@ public:
   void disable_polyline_unrefinement()
   {
    Polyline_unrefinement_tolerance=-1.0;
+   // Disable the unrefinement tolerance for all the
+   // curve sections on the TriangleMeshCurve
+   unsigned n_curve_sections = Curve_section_pt.size();
+   for (unsigned i = 0; i < n_curve_sections; i++)
+    {Curve_section_pt[i]->disable_unrefinement_tolerance();}
   }
 
   /// Output each sub-boundary at n_sample (default: 50) points

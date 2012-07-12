@@ -201,7 +201,8 @@ namespace oomph
        element_attribute_map.begin(); it != element_attribute_map.end(); ++it)
       {
        Region_attribute[count] = it->first;
-       Region_element_pt[Region_attribute[count]] = it->second;
+       Region_element_pt[static_cast<unsigned>(Region_attribute[count])] = 
+        it->second;
        ++count;
       }
     }
@@ -402,7 +403,7 @@ namespace oomph
     {
      for (unsigned rr = 0 ; rr < n_regions; rr++)
       {
-       unsigned region_id = this->Region_attribute[rr];
+       unsigned region_id = static_cast<unsigned>(this->Region_attribute[rr]);
        
        // Loop over all elements on boundaries in region i_r
        unsigned nel_in_region = this->nboundary_element_in_region(b, region_id);
@@ -2905,13 +2906,14 @@ void RefineableTriangleMesh<ELEMENT>::adapt(OomphCommunicator* comm_pt,
        {
         this->Region_attribute[r] = new_mesh_pt->region_attribute(r);
         // Get the region id
-        unsigned r_id = this->Region_attribute[r];
+        unsigned r_id = static_cast<unsigned>(this->Region_attribute[r]);
         //Find the number of elements in the region
         unsigned n_region_element = new_mesh_pt->nregion_element(r_id);
         this->Region_element_pt[r_id].resize(n_region_element);
         for(unsigned e=0;e<n_region_element;e++)
          {
-          this->Region_element_pt[r_id][e] = new_mesh_pt->region_element_pt(r_id,e);
+          this->Region_element_pt[r_id][e] = 
+           new_mesh_pt->region_element_pt(r_id,e);
          }
        }
 
@@ -2925,7 +2927,7 @@ void RefineableTriangleMesh<ELEMENT>::adapt(OomphCommunicator* comm_pt,
         for (unsigned rr = 0 ; rr < n_region; rr++)
          {
           // The region id
-          unsigned r = this->Region_attribute[rr];
+          unsigned r = static_cast<unsigned>(this->Region_attribute[rr]);
           
           unsigned n_boundary_el_in_region =
            new_mesh_pt->nboundary_element_in_region(b,r);
@@ -4298,7 +4300,7 @@ refine_boundary(Mesh* face_mesh_pt,
      {
       double n_pts = length/max_length_constraint;
       // We only want the integer part
-      unsigned n_points = (unsigned)n_pts;
+      unsigned n_points = static_cast<unsigned>(n_pts);
       double zeta_increment = (zeta_right-zeta_left)/((double)n_points+1);
        
       Vector<double> zeta(1);

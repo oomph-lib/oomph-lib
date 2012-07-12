@@ -1429,8 +1429,8 @@ class TriangleMeshParameters
        for (unsigned h = 0; r_it!=zeta_values_pt.end(); h++)
         {
          local_n_vertices =
-           ((double)n_t_vertices * delta_z[h]) /
-           std::fabs(zeta_final - zeta_initial);
+          static_cast<unsigned>(((double)n_t_vertices * delta_z[h]) /
+                    std::fabs(zeta_final - zeta_initial));
 
          local_zeta_initial = *l_it;
          local_zeta_final = *r_it;
@@ -1580,7 +1580,8 @@ class TriangleMeshParameters
           }
 
          local_n_vertices =
-           ((double)n_t_vertices * delta_z[h]) / (total_arclength);
+          static_cast<unsigned>(((double)n_t_vertices * delta_z[h]) / 
+                                (total_arclength));
 
          // Desired arclength increment
          double local_target_s_increment=
