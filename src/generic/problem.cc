@@ -2202,10 +2202,6 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
   // and removes the duplication by overwriting any data point with an already
   // existing eqn number with the original data point which had the eqn no.
 
-  // Storage for existing nodes, enumerated by first non-negative
-  // global equation number
-  unsigned n_dof=ndof();
-
   // Note: This used to be
   // Vector<Node*> global_node_pt(n_dof,0);
   // but this is a total killer! Memory allocation is extremely
