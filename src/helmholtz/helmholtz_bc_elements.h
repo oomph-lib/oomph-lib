@@ -347,11 +347,7 @@ template <class ELEMENT>
 
    // define the imaginary number
    const std::complex<double> I(0.0,1.0);
-   
-   // Make integration scheme hierher: Make this variable!
-   GaussLobattoLegendre<1,10>* local_integral_pt=
-    new GaussLobattoLegendre<1,10>;
-   
+     
    //Find out how many nodes there are
    const unsigned n_node = this->nnode();
    
@@ -360,7 +356,7 @@ template <class ELEMENT>
    DShape dpsi(n_node,1);
    
    //Set the value of n_intpt
-   const unsigned n_intpt=local_integral_pt->nweight();
+   const unsigned n_intpt=this->integral_pt()->nweight();
    
    //Set the Vector to hold local coordinates
    Vector<double> s(this->Dim-1);
@@ -380,11 +376,11 @@ template <class ELEMENT>
     //Assign values of s
     for(unsigned i=0;i<(this->Dim-1);i++) 
      {
-      s[i]=local_integral_pt->knot(ipt,i);
+      s[i]=this->integral_pt()->knot(ipt,i);
      }
     
     //Get the integral weight
-    double w=local_integral_pt->weight(ipt);
+    double w=this->integral_pt()->weight(ipt);
     
     // Get the shape functions
     this->dshape_local(s,psi,dpsi);
@@ -440,9 +436,6 @@ template <class ELEMENT>
      }
     
    }//End of loop over integration points    
-  
-  // Kill integration scheme (hierher make pool)
-  delete local_integral_pt;
   
   }
   
@@ -1419,11 +1412,7 @@ template<class ELEMENT>
  {  
   // define the imaginary number
   const std::complex<double> I(0.0,1.0);
-  
-  // Make integraton scheme hierher: Make this variable!
-  GaussLobattoLegendre<1,10>* local_integral_pt=
-   new GaussLobattoLegendre<1,10>;
-  
+
   //Find out how many nodes there are
   const unsigned n_node = this->nnode();
   
@@ -1436,7 +1425,7 @@ template<class ELEMENT>
   int global_unknown_real=0,global_unknown_imag=0;
   
   //Set the value of n_intpt
-  const unsigned n_intpt=local_integral_pt->nweight();
+  const unsigned n_intpt=this->integral_pt()->nweight();
   
  //Set the Vector to hold local coordinates
   Vector<double> s(this->Dim-1);
@@ -1452,11 +1441,11 @@ template<class ELEMENT>
    //Assign values of s
     for(unsigned i=0;i<(this->Dim-1);i++) 
      {
-      s[i]=local_integral_pt->knot(ipt,i);
+      s[i]=this->integral_pt()->knot(ipt,i);
      }
     
     //Get the integral weight
-    double w=local_integral_pt->weight(ipt);
+    double w=this->integral_pt()->weight(ipt);
     
     // Get the shape functions
     this->dshape_local(s,psi,dpsi);
@@ -1525,9 +1514,6 @@ template<class ELEMENT>
       }
      }// end of loop over the node
    }//End of loop over integration points    
-  
-  // Kill integration scheme (hierher make pool)
-  delete local_integral_pt;
   
  }
 

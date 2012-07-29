@@ -35,6 +35,15 @@ namespace oomph
 ///2D UnsteadyHeat elements
 
 
+/// Default value for Alpha parameter (thermal inertia)
+template<unsigned DIM>
+double UnsteadyHeatEquations<DIM>::Default_alpha_parameter=1.0;
+
+/// Default value for Beta parameter (thermal conductivity)
+template<unsigned DIM>
+double UnsteadyHeatEquations<DIM>::Default_beta_parameter=1.0;
+
+
 //======================================================================
 // Set the data for the number of Variables at each node
 //======================================================================
@@ -70,6 +79,10 @@ fill_in_generic_residual_contribution_ust_heat(Vector<double> &residuals,
    
  //Set the Vector to hold local coordinates
  Vector<double> s(DIM);
+
+ //Get Alpha and beta parameters number
+ double alpha_local = alpha();
+ double beta_local = beta();
 
  //Integers to hold the local equation and unknowns
  int local_eqn=0, local_unknown=0;
@@ -143,14 +156,14 @@ fill_in_generic_residual_contribution_ust_heat(Vector<double> &residuals,
       {
 
        // Add body force/source term and time derivative
-       residuals[local_eqn] += (dudt+source)*test(l)*W;
+       residuals[local_eqn] += (alpha_local*dudt+source)*test(l)*W;
            
        // The mesh velocity bit
        if (!ALE_is_disabled)
        {
         for(unsigned k=0;k<DIM;k++)
          {
-          residuals[local_eqn] -= 
+          residuals[local_eqn] -= alpha_local*
            mesh_velocity[k]*interpolated_dudx[k]*test(l)*W;
          }
        }
@@ -158,7 +171,7 @@ fill_in_generic_residual_contribution_ust_heat(Vector<double> &residuals,
        // Laplace operator
        for(unsigned k=0;k<DIM;k++)
         {
-         residuals[local_eqn] += 
+         residuals[local_eqn] += beta_local*
           interpolated_dudx[k]*dtestdx(l,k)*W;
         }
 
@@ -176,15 +189,16 @@ fill_in_generic_residual_contribution_ust_heat(Vector<double> &residuals,
             {
              // Mass matrix
              jacobian(local_eqn,local_unknown) 
-              += test(l)*psi(l2)*
+              += alpha_local*test(l)*psi(l2)*
               node_pt(l2)->time_stepper_pt()->weight(1,0)*W;
 
              // Laplace operator & mesh velocity bit
              for(unsigned i=0;i<DIM;i++)
               {
                double tmp=dtestdx(l,i);
-               if (!ALE_is_disabled) tmp+=mesh_velocity[i]*test(l);
-               jacobian(local_eqn,local_unknown) += dpsidx(l2,i)*tmp*W;
+               if (!ALE_is_disabled) tmp+=alpha_local*mesh_velocity[i]*test(l);
+               jacobian(local_eqn,local_unknown) += 
+                beta_local*dpsidx(l2,i)*tmp*W;
               }
             }
           }

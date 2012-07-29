@@ -156,7 +156,6 @@ private:
 //========================================================================
 /// Constructor for Poisson problem
 //========================================================================
-
 template<class ELEMENT>
 PoissonProblem<ELEMENT>::
 PoissonProblem(PoissonEquations<2>::PoissonSourceFctPt source_fct_pt)

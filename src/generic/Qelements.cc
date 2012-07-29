@@ -734,7 +734,6 @@ template<unsigned NNODE_1D>
 void QElement<2,NNODE_1D>::build_face_element(const int &face_index,
                                               FaceElement* face_element_pt)
 {
-
  // Set the nodal dimension from the first node
  face_element_pt->set_nodal_dimension(node_pt(0)->ndim());
 

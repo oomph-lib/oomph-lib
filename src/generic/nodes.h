@@ -1803,7 +1803,13 @@ class BoundaryNodeBase
  /// \short Return the index of the first value associated with
  /// the i-th face element value. If no argument is specified
  /// we return the index associated with the first (and assumed to be only)
- /// face element attached to this node. 
+ /// face element attached to this node. Throws error only in paranoid mode
+ /// if no values have been set by any FaceElements. If you want to
+ /// catch such cases gracefully in all circumstances (there are examples
+ /// with complex unstructured 3D meshes where it's not clear a priori
+ /// if a node has been resized by FaceElements) use alternative 
+ /// version (with leading bool arguments) that always checks and throws
+ /// so exceptions can be caught gracefully.
  unsigned index_of_first_value_assigned_by_face_element(
   const unsigned& face_id=0) const
  {
@@ -1822,6 +1828,64 @@ class BoundaryNodeBase
     return UINT_MAX;
    }
 #endif
+  return (*Index_of_first_value_assigned_by_face_element_pt)[face_id];
+ }
+ 
+
+
+ /// \short Return the index of the first value associated with
+ /// the i-th face element value. If no argument id is specified
+ /// we return the index associated with the first (and assumed to be only)
+ /// face element attached to this node. 
+ /// If no values have been set by any FaceElements and 
+ /// throw_if_no_value_assigned_by_face_element is set to true, this
+ /// is caught gracefully in all circumstances (there are examples
+ /// with complex unstructured 3D meshes where it's not clear a priori
+ /// if a node has been resized by FaceElements) by throwing an OomphLibError
+ /// that can be caught gracefully. If throw_quietly is set to true
+ /// we throw an OomphLibQuietException instead. You can catch either
+ /// by catching the underlying std::runtime_error. In PARANOID mode
+ /// we check regardless of the setting of 
+ /// throw_if_no_value_assigned_by_face_element (but respect the
+ /// request for quietness).
+ unsigned index_of_first_value_assigned_by_face_element(
+  const bool& throw_if_no_value_assigned_by_face_element,
+  const bool& throw_quietly,
+  const unsigned& face_id=0) const
+ {
+
+  // Over-rule if paranoia rules
+  bool local_throw_if_no_value_assigned_by_face_element=
+   throw_if_no_value_assigned_by_face_element;
+#ifdef PARANOID
+  local_throw_if_no_value_assigned_by_face_element=true;
+#endif
+
+  if (local_throw_if_no_value_assigned_by_face_element)
+   {
+    if (Index_of_first_value_assigned_by_face_element_pt==0)
+     {
+      std::ostringstream error_message;
+      error_message 
+       << "Index_of_first_value_assigned_by_face_element_pt==0;\n"
+       << "Pointer must be set via call to: \n\n"
+       << "  BoundaryNode::index_of_first_value_assigned_by_face_element_pt(), \n\n" 
+       << "typically from FaceElement::add_additional_values(...).";
+
+      if (throw_quietly)
+       {
+        throw OomphLibQuietException();
+       }
+      else
+       {
+        throw OomphLibError(
+         error_message.str(),
+         "BoundaryNode::index_of_first_value_assigned_by_face_element()",
+         OOMPH_EXCEPTION_LOCATION);
+       }
+      return UINT_MAX;
+     }
+   }
   return (*Index_of_first_value_assigned_by_face_element_pt)[face_id];
  }
  

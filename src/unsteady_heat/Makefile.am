@@ -4,7 +4,8 @@
 
 # Define the sources
 sources =  \
-unsteady_heat_elements.cc refineable_unsteady_heat_elements.cc 
+unsteady_heat_elements.cc refineable_unsteady_heat_elements.cc  \
+Tunsteady_heat_elements.cc
 
 #unsteady_heat_flux_elements.cc 
 
@@ -14,7 +15,7 @@ incl_cc_files =
 # Define the headers
 headers =  \
 unsteady_heat_elements.h  unsteady_heat_flux_elements.h \
-refineable_unsteady_heat_elements.h 
+refineable_unsteady_heat_elements.h Tunsteady_heat_elements.h
 
 # Define name of library
 libname = unsteady_heat

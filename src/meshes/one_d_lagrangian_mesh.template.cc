@@ -140,6 +140,13 @@ void OneDLagrangianMesh<ELEMENT>::assign_undeformed_positions()
  //Find the number Eulerian coordinates, assume same for all nodes
  unsigned n_dim = node_pt(0)->ndim();
 
+ //Find cast pointer to first element
+ ELEMENT* cast_element_pt = dynamic_cast<ELEMENT*>(finite_element_pt(0));
+ 
+ //Do we need to worry about the slopes
+ //Read out number of position dofs
+ unsigned n_lagrangian_type = cast_element_pt->nnodal_lagrangian_type();
+
  // Setup position Vector and derivatives (they *should* dimension themselves
  // in call to position() etc)
  Vector<double> R(n_dim);
@@ -165,13 +172,16 @@ void OneDLagrangianMesh<ELEMENT>::assign_undeformed_positions()
     {
      //Set the position
      node_pt(n)->x_gen(0,i) = R[i];
-     
-     // Set the derivative wrt Lagrangian coordinates
-     // Note that we need to scale by the length of each element here!!
-     // and the 0.5 comes from the fact that our reference element has 
-     // length 2.0
-     node_pt(n)->x_gen(1,i) = 0.5*a(0,i)*
-      (OneDMesh<ELEMENT>::Length/double(OneDMesh<ELEMENT>::N));
+ 
+     if(n_lagrangian_type > 1)
+      {
+       // Set the derivative wrt Lagrangian coordinates
+       // Note that we need to scale by the length of each element here!!
+       // and the 0.5 comes from the fact that our reference element has 
+       // length 2.0
+       node_pt(n)->x_gen(1,i) = 0.5*a(0,i)*
+        (OneDMesh<ELEMENT>::Length/double(OneDMesh<ELEMENT>::N));
+      }
    }
   }
 }

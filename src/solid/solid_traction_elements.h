@@ -1133,7 +1133,7 @@ public:
    const bool& called_from_refineable_constructor=false) : 
  FaceGeometry<ELEMENT>(), FaceElement(), Boundary_shape_geom_object_pt(0)
   {   
-   
+
    //  Store the ID of the FaceElement -- this is used to distinguish
    // it from any others
    Id=id;

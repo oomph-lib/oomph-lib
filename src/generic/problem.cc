@@ -9974,7 +9974,8 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
 
 
 //=======================================================================
-///  Unsteady "doubly" adaptive Newton solve: Does temporal
+/// Private helper function to perform
+/// unsteady "doubly" adaptive Newton solve: Does temporal
 /// adaptation first, i.e. we try to do a timestep with an increment
 /// of dt, and adjusting dt until the solution on the given mesh satisfies
 /// the temporal error measure with tolerance epsilon. Following
@@ -9986,12 +9987,16 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
 /// if first_timestep==true because we're constantly re-assigning
 /// the initial conditions; if first_timestep==true and shift==false
 /// shifting is performed anyway and a warning is issued.
+ /// Pseudo-Boolean flag suppress_resolve_after_spatial_adapt [0: false;
+ /// 1: true] does what it says.]
 //========================================================================
-double Problem::doubly_adaptive_unsteady_newton_solve(const double &dt_desired,
-                                                      const double &epsilon, 
-                                                      const unsigned &max_adapt,
-                                                      const bool &first,
-                                                      const bool &shift_values)
+double Problem::doubly_adaptive_unsteady_newton_solve_helper
+(const double &dt_desired,
+ const double &epsilon, 
+ const unsigned &max_adapt,
+ const unsigned& suppress_resolve_after_spatial_adapt_flag,
+ const bool &first,
+ const bool &shift_values)
 {
  //Store the initial time
  double initial_time = time_pt()->time();
@@ -10034,55 +10039,63 @@ double Problem::doubly_adaptive_unsteady_newton_solve(const double &dt_desired,
                  communicator_pt()->mpi_comm());
   }
 #endif
-
-
+ 
+ 
  // Re-solve the problem if the adaptation has changed anything
  if ((total_ref_count[0]!=0)||
      (total_ref_count[1]!=0))
   {
-   oomph_info << "Mesh was adapted --> we'll re-solve for current timestep." 
-              << std::endl;
-
-   // Reset time to what it was when we entered here
-   // because it will be incremented again by dt_taken.
-   time_pt()->time()=initial_time;
-
-   // Shift the timesteps? No! They've been shifted already when we
-   // called the solve with pure temporal adaptivity...
-   bool shift=false;
-
-   // Reset the inital condition on refined meshes
-   if (first) 
+   if (suppress_resolve_after_spatial_adapt_flag==1)
     {
-     // Reset default set_initial_condition has been called flag to false
-     Default_set_initial_condition_called = false;
-
-     //Reset the initial conditions
-     oomph_info << "Re-assigning initial condition at time=" 
-                << time_pt()->time()<< std::endl;
-     set_initial_condition();
-
-     // This is the first timestep so shifting
-     // has to be done following the assignment of initial conditions,
-     // providing the default set_initial_condition function has not
-     // been called.
-     // In fact, unsteady_newton_solve(...) does that automatically.
-     // We're changing the flag here to avoid warning messages.
-     if(!Default_set_initial_condition_called) { shift=true; }
+     oomph_info << "Mesh was adapted but re-solve has been suppressed." 
+                << std::endl;
     }
-
-   // Now take the step again on the refined mesh, using the same
-   // timestep as used before.
-   unsteady_newton_solve(dt_taken,max_adapt,first,shift);
+   else
+    {
+     oomph_info << "Mesh was adapted --> we'll re-solve for current timestep." 
+                << std::endl;
+     
+     // Reset time to what it was when we entered here
+     // because it will be incremented again by dt_taken.
+     time_pt()->time()=initial_time;
+     
+     // Shift the timesteps? No! They've been shifted already when we
+     // called the solve with pure temporal adaptivity...
+     bool shift=false;
+     
+     // Reset the inital condition on refined meshes
+     if (first) 
+      {
+       // Reset default set_initial_condition has been called flag to false
+       Default_set_initial_condition_called = false;
+       
+       //Reset the initial conditions
+       oomph_info << "Re-assigning initial condition at time=" 
+                  << time_pt()->time()<< std::endl;
+       set_initial_condition();
+       
+       // This is the first timestep so shifting
+       // has to be done following the assignment of initial conditions,
+       // providing the default set_initial_condition function has not
+       // been called.
+       // In fact, unsteady_newton_solve(...) does that automatically.
+       // We're changing the flag here to avoid warning messages.
+       if(!Default_set_initial_condition_called) { shift=true; }
+      }
+     
+     // Now take the step again on the refined mesh, using the same
+     // timestep as used before.
+     unsteady_newton_solve(dt_taken,max_adapt,first,shift);
+    }
   }
  else
   {
    oomph_info << "Mesh wasn't adapted --> we'll accept spatial refinement." 
               << std::endl;
   }
-
+ 
  return new_dt;
-
+   
 }
 
 

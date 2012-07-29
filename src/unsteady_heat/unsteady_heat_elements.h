@@ -36,6 +36,7 @@
 
 
 //OOMPH-LIB headers
+#include "../generic/projection.h"
 #include "../generic/nodes.h"
 #include "../generic/Qelements.h"
 #include "../generic/oomph_utilities.h"
@@ -71,7 +72,14 @@ public:
 
  /// \short Constructor: Initialises the Source_fct_pt to null and 
  /// sets flag to use ALE formulation of the equations.
- UnsteadyHeatEquations() : Source_fct_pt(0), ALE_is_disabled(false) {}
+ /// Also set Alpha (thermal inertia) and Beta (thermal conductivity)
+ /// parameters to defaults (both one for natural scaling)
+ UnsteadyHeatEquations() : Source_fct_pt(0), ALE_is_disabled(false) 
+  {
+   //Set Alpha and Beta parameter to default (one for natural scaling of time)
+   Alpha_pt = &Default_alpha_parameter;
+   Beta_pt = &Default_beta_parameter;
+  }
  
 
  /// Broken copy constructor
@@ -219,6 +227,19 @@ public:
     }
   }
 
+ /// Alpha parameter (thermal inertia)
+ const double &alpha() const {return *Alpha_pt;}
+
+ /// Pointer to Alpha parameter (thermal inertia)
+ double* &alpha_pt() {return Alpha_pt;}
+
+
+ /// Beta parameter (thermal conductivity)
+ const double &beta() const {return *Beta_pt;}
+
+ /// Pointer to Beta parameter (thermal conductivity)
+ double* &beta_pt() {return Beta_pt;}
+
  /// Get flux: flux[i] = du/dx_i
  void get_flux(const Vector<double>& s, Vector<double>& flux) const
   {
@@ -296,6 +317,62 @@ public:
    return(interpolated_u);
   }
 
+
+ /// \short Return FE representation of function value u(s) at local 
+ /// coordinate s at previous time t (t=0: present)
+ inline double interpolated_u_ust_heat(const unsigned& t,
+                                       const Vector<double> &s) const
+  {
+   //Find number of nodes
+   unsigned n_node = nnode();
+
+   //Find the index at which the variable is stored
+   unsigned u_nodal_index = u_index_ust_heat();
+
+   //Local shape function
+   Shape psi(n_node);
+
+   //Find values of shape function
+   shape(s,psi);
+
+   //Initialise value of u
+   double interpolated_u = 0.0;
+
+   //Loop over the local nodes and sum
+   for(unsigned l=0;l<n_node;l++) 
+    {
+     interpolated_u += nodal_value(t,l,u_nodal_index)*psi[l];
+    }
+
+   return(interpolated_u);
+  }
+
+
+ /// Return FE representation of function value du/dt(s) at local coordinate s
+ inline double interpolated_du_dt_ust_heat(const Vector<double> &s) const
+  {
+   //Find number of nodes
+   unsigned n_node = nnode();
+
+   //Local shape function
+   Shape psi(n_node);
+
+   //Find values of shape function
+   shape(s,psi);
+
+   //Initialise value of du/dt
+   double interpolated_dudt = 0.0;
+
+   //Loop over the local nodes and sum
+   for(unsigned l=0;l<n_node;l++) 
+    {
+     interpolated_dudt += du_dt_ust_heat(l)*psi[l];
+    }
+
+   return(interpolated_dudt);
+  }
+
+
  /// \short Self-test: Return 0 for OK
  unsigned self_test();
 
@@ -334,6 +411,22 @@ protected:
  /// time-derivatives are computed. Only set to true if you're sure
  /// that the mesh is stationary.
  bool ALE_is_disabled;
+
+ /// Pointer to Alpha parameter (thermal inertia)
+ double *Alpha_pt;
+
+ /// Pointer to Beta parameter (thermal conductivity)
+ double *Beta_pt;
+
+  private:
+
+ /// \short Static default value for the Alpha parameter: 
+ /// (thermal inertia): One for natural scaling
+ static double Default_alpha_parameter;
+
+ /// \short Static default value for the Beta parameter (thermal 
+ /// conductivity): One for natural scaling
+ static double Default_beta_parameter;
 
 };
 
@@ -565,6 +658,289 @@ class FaceGeometry<QUnsteadyHeatElement<1,NNODE_1D> >:
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
+
+
+
+//==========================================================
+/// UnsteadyHeat upgraded to become projectable
+//==========================================================
+ template<class UNSTEADY_HEAT_ELEMENT>
+ class ProjectableUnsteadyHeatElement : 
+  public virtual ProjectableElement<UNSTEADY_HEAT_ELEMENT>
+ {
+
+ public:
+
+
+  /// \short Constructor [this was only required explicitly
+  /// from gcc 4.5.2 onwards...]
+  ProjectableUnsteadyHeatElement(){}
+
+  /// \short Specify the values associated with field fld. 
+  /// The information is returned in a vector of pairs which comprise 
+  /// the Data object and the value within it, that correspond to field fld. 
+  Vector<std::pair<Data*,unsigned> > data_values_of_field(const unsigned& fld)
+   { 
+
+#ifdef PARANOID
+    if (fld!=0)
+     {
+      std::stringstream error_stream;
+      error_stream 
+       << "UnsteadyHeat elements only store a single field so fld must be 0 rather"
+       << " than " << fld << std::endl;
+      throw OomphLibError(
+       error_stream.str(),
+       "ProjectableUnsteadyHeatElement::data_values_of_field()",
+       OOMPH_EXCEPTION_LOCATION);
+     }
+#endif
+  
+    // Create the vector
+    unsigned nnod=this->nnode();
+    Vector<std::pair<Data*,unsigned> > data_values(nnod);
+   
+    // Loop over all nodes
+    for (unsigned j=0;j<nnod;j++)
+     {
+      // Add the data value associated field: The node itself
+      data_values[j]=std::make_pair(this->node_pt(j),fld);
+     }
+   
+    // Return the vector
+    return data_values;
+   }
+
+  /// \short Number of fields to be projected: Just one
+  unsigned nfields_for_projection()
+   {
+    return 1;
+   }
+ 
+  /// \short Number of history values to be stored for fld-th field. 
+  unsigned nhistory_values_for_projection(const unsigned &fld)
+  {
+#ifdef PARANOID
+    if (fld!=0)
+     {
+      std::stringstream error_stream;
+      error_stream 
+       << "UnsteadyHeat elements only store a single field so fld must be 0 rather"
+       << " than " << fld << std::endl;
+      throw OomphLibError(
+       error_stream.str(),
+       "ProjectableUnsteadyHeatElement::nhistory_values_for_projection()",
+       OOMPH_EXCEPTION_LOCATION);
+     }
+#endif
+   return this->node_pt(0)->ntstorage();   
+  }
+  
+  ///\short Number of positional history values
+  unsigned nhistory_values_for_coordinate_projection()
+   {
+    return this->node_pt(0)->position_time_stepper_pt()->ntstorage();
+   }
+  
+  /// \short Return Jacobian of mapping and shape functions of field fld
+  /// at local coordinate s
+  double jacobian_and_shape_of_field(const unsigned &fld, 
+                                     const Vector<double> &s, 
+                                     Shape &psi)
+   {
+#ifdef PARANOID
+    if (fld!=0)
+     {
+      std::stringstream error_stream;
+      error_stream 
+       << "UnsteadyHeat elements only store a single field so fld must be 0 rather"
+       << " than " << fld << std::endl;
+      throw OomphLibError(
+       error_stream.str(),
+       "ProjectableUnsteadyHeatElement::jacobian_and_shape_of_field()",
+       OOMPH_EXCEPTION_LOCATION);
+     }
+#endif
+    unsigned n_dim=this->dim();
+    unsigned n_node=this->nnode();
+    Shape test(n_node); 
+    DShape dpsidx(n_node,n_dim), dtestdx(n_node,n_dim);
+    double J=this->dshape_and_dtest_eulerian_ust_heat(s,psi,dpsidx,
+                                                      test,dtestdx);
+    return J;
+   }
+
+
+
+  /// \short Return interpolated field fld at local coordinate s, at time level
+  /// t (t=0: present; t>0: history values)
+  double get_field(const unsigned &t, 
+                   const unsigned &fld,
+                   const Vector<double>& s)
+   {
+#ifdef PARANOID
+    if (fld!=0)
+     {
+      std::stringstream error_stream;
+      error_stream 
+       << "UnsteadyHeat elements only store a single field so fld must be 0 rather"
+       << " than " << fld << std::endl;
+      throw OomphLibError(
+       error_stream.str(),
+       "ProjectableUnsteadyHeatElement::jget_field()",
+       OOMPH_EXCEPTION_LOCATION);
+     }
+#endif
+    //Find the index at which the variable is stored
+    unsigned u_nodal_index = this->u_index_ust_heat();
+    
+      //Local shape function
+    unsigned n_node=this->nnode();
+    Shape psi(n_node);
+    
+    //Find values of shape function
+    this->shape(s,psi);
+    
+    //Initialise value of u
+    double interpolated_u = 0.0;
+    
+    //Sum over the local nodes
+    for(unsigned l=0;l<n_node;l++) 
+     {
+      interpolated_u += this->nodal_value(t,l,u_nodal_index)*psi[l];
+     }
+    return interpolated_u;     
+   }
+
+
+
+
+  ///Return number of values in field fld: One per node
+  unsigned nvalue_of_field(const unsigned &fld)
+   {
+#ifdef PARANOID
+    if (fld!=0)
+     {
+      std::stringstream error_stream;
+      error_stream 
+       << "UnsteadyHeat elements only store a single field so fld must be 0 rather"
+       << " than " << fld << std::endl;
+      throw OomphLibError(
+       error_stream.str(),
+       "ProjectableUnsteadyHeatElement::nvalue_of_field()",
+       OOMPH_EXCEPTION_LOCATION);
+     }
+#endif
+    return this->nnode();
+   }
+
+ 
+  ///Return local equation number of value j in field fld.
+  int local_equation(const unsigned &fld,
+                     const unsigned &j)
+   {
+#ifdef PARANOID
+    if (fld!=0)
+     {
+      std::stringstream error_stream;
+      error_stream 
+       << "UnsteadyHeat elements only store a single field so fld must be 0 rather"
+       << " than " << fld << std::endl;
+      throw OomphLibError(
+       error_stream.str(),
+       "ProjectableUnsteadyHeatElement::local_equation()",
+       OOMPH_EXCEPTION_LOCATION);
+     }
+#endif
+    const unsigned u_nodal_index = this->u_index_ust_heat();
+    return this->nodal_local_eqn(j,u_nodal_index);     
+   }
+
+
+
+
+ /// \short hierher Output FE representation of soln: x,y,u or x,y,z,u at 
+ /// n_plot^DIM plot points
+ void output(std::ostream &outfile, const unsigned &nplot)
+ {
+  unsigned el_dim=this->dim();
+  //Vector of local coordinates
+  Vector<double> s(el_dim);
+  
+  // Tecplot header info
+  outfile << this->tecplot_zone_string(nplot);
+  
+  // Loop over plot points
+  unsigned num_plot_points=this->nplot_points(nplot);
+  for (unsigned iplot=0;iplot<num_plot_points;iplot++)
+   {
+    // Get local coordinates of plot point
+    this->get_s_plot(iplot,nplot,s);
+    
+    for(unsigned i=0;i<el_dim;i++) 
+     {
+      outfile << this->interpolated_x(s,i) << " ";
+     }
+    outfile << this->interpolated_u_ust_heat(s) << " ";   
+    outfile << this->interpolated_du_dt_ust_heat(s) << " ";
+
+     
+    // History values of coordinates
+    unsigned n_prev=this->node_pt(0)->position_time_stepper_pt()->ntstorage();
+    for (unsigned t=1;t<n_prev;t++)
+     {
+      for(unsigned i=0;i<el_dim;i++) 
+       {
+        outfile << this->interpolated_x(t,s,i) << " ";
+       }
+     }
+    
+    // History values of velocities
+    n_prev=this->node_pt(0)->time_stepper_pt()->ntstorage();
+    for (unsigned t=1;t<n_prev;t++)
+     {
+      outfile << this->interpolated_u_ust_heat(t,s) << " ";
+     }
+    outfile << std::endl;   
+   }
+  
+
+
+  // Write tecplot footer (e.g. FE connectivity lists)
+  this->write_tecplot_zone_footer(outfile,nplot);
+ }
+ 
+  
+ };
+
+
+//=======================================================================
+/// Face geometry for element is the same as that for the underlying
+/// wrapped element
+//=======================================================================
+ template<class ELEMENT>
+ class FaceGeometry<ProjectableUnsteadyHeatElement<ELEMENT> > 
+  : public virtual FaceGeometry<ELEMENT>
+ {
+ public:
+  FaceGeometry() : FaceGeometry<ELEMENT>() {}
+ };
+
+
+//=======================================================================
+/// Face geometry of the Face Geometry for element is the same as 
+/// that for the underlying wrapped element
+//=======================================================================
+ template<class ELEMENT>
+ class FaceGeometry<FaceGeometry<ProjectableUnsteadyHeatElement<ELEMENT> > >
+  : public virtual FaceGeometry<FaceGeometry<ELEMENT> >
+ {
+ public:
+  FaceGeometry() : FaceGeometry<FaceGeometry<ELEMENT> >() {}
+ };
+
+
+
 
 }
 

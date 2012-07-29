@@ -25,8 +25,8 @@
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 //LIC// 
 //LIC//====================================================================
-//Non-inline functions for Helmholtz elements
-#include "Thelmholtz_elements.h"
+//Non-inline functions for UnsteadyHeat elements
+#include "Tunsteady_heat_elements.h"
 
 
 namespace oomph
@@ -35,30 +35,29 @@ namespace oomph
 
 
 /////////////////////////////////////////////////////////////////////////
-// THelmholtzElement
+// TUnsteadyHeatElement
 /////////////////////////////////////////////////////////////////////////
 
 
 
 //======================================================================
-// Set the data for the number of Variables at each node, always two
-/// (real and imag part) in every case
+// Set the data for the number of Variables at each node, always 1
 //======================================================================
 template<unsigned DIM, unsigned NNODE_1D>
-const unsigned THelmholtzElement<DIM,NNODE_1D>::Initial_Nvalue = 2;
+const unsigned TUnsteadyHeatElement<DIM,NNODE_1D>::Initial_Nvalue = 1;
 
 //====================================================================
 // Force build of templates
 //====================================================================
-template class THelmholtzElement<1,2>;
-template class THelmholtzElement<1,3>;
-template class THelmholtzElement<1,4>;
+template class TUnsteadyHeatElement<1,2>;
+template class TUnsteadyHeatElement<1,3>;
+template class TUnsteadyHeatElement<1,4>;
 
-template class THelmholtzElement<2,2>;
-template class THelmholtzElement<2,3>;
-template class THelmholtzElement<2,4>;
+template class TUnsteadyHeatElement<2,2>;
+template class TUnsteadyHeatElement<2,3>;
+template class TUnsteadyHeatElement<2,4>;
 
-template class THelmholtzElement<3,2>;
-template class THelmholtzElement<3,3>;
+template class TUnsteadyHeatElement<3,2>;
+template class TUnsteadyHeatElement<3,3>;
 
 }

@@ -61,6 +61,10 @@ unsigned n_intpt = integral_pt()->nweight();
 //Set the Vector to hold local coordinates
 Vector<double> s(DIM);
 
+ //Get Alpha and beta parameters number
+ double alpha_local = this->alpha();
+ double beta_local = this->beta();
+
 //Integers used to store the local equation number and local unknown
 //indices for the residuals and jacobians
 int local_eqn=0, local_unknown=0;
@@ -185,17 +189,14 @@ for(unsigned ipt=0;ipt<n_intpt;ipt++)
      if(local_eqn >= 0)
       {
        // Add body force/source term and time derivative
-       residuals[local_eqn] += (dudt + source)*test(l)*W*hang_weight;
+       residuals[local_eqn]+=(alpha_local*dudt + source)*test(l)*W*hang_weight;
          
        // Mesh velocity and  Laplace operator itself
        for(unsigned k=0;k<DIM;k++)
         {
-         double tmp=dtestdx(l,k);
-         if (!ALE_is_disabled_flag) tmp -= mesh_velocity[k]*test(l);
+         double tmp=dtestdx(l,k)*beta_local;
+         if (!ALE_is_disabled_flag) tmp -= alpha_local*mesh_velocity[k]*test(l);
          residuals[local_eqn] += interpolated_dudx[k]*tmp*W*hang_weight;
-
-//         residuals[local_eqn] += interpolated_dudx[k]*
-//          (dtestdx(l,k) - mesh_velocity[k]*test(l))*W*hang_weight;
         }
          
        // Calculate the Jacobian
@@ -250,15 +251,19 @@ for(unsigned ipt=0;ipt<n_intpt;ipt++)
                //Add contribution to Elemental Matrix
                // Mass matrix
                jacobian(local_eqn,local_unknown) 
-                += test(l)*psi(l2)*
+                += alpha_local*test(l)*psi(l2)*
                 this->node_pt(l2)->time_stepper_pt()->weight(1,0)
                 *W*hang_weight*hang_weight2;
 
                // Laplace operator and mesh veloc bit
                for(unsigned k=0;k<DIM;k++)
                 {
-                 double tmp=dtestdx(l,k);
-                 if(!ALE_is_disabled_flag) tmp -= mesh_velocity[k]*test(l);
+                 double tmp=dtestdx(l,k)*beta_local;
+                 if(!ALE_is_disabled_flag)
+                  {
+                   tmp -= 
+                    alpha_local*mesh_velocity[k]*test(l);
+                  }
                  jacobian(local_eqn,local_unknown) += 
                   dpsidx(l2,k)*tmp*W*hang_weight*hang_weight2;
                 }

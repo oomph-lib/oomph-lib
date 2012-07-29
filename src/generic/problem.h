@@ -275,6 +275,19 @@ namespace oomph
 
   private:
 
+
+ /// \short Private helper function that actually performs the unsteady 
+ /// "doubly"  adaptive Newton solve. See actual (non-helper) functions
+ /// for description of parameters.
+ double doubly_adaptive_unsteady_newton_solve_helper(
+  const double &dt, 
+  const double &epsilon,
+  const unsigned &max_adapt,
+  const unsigned& suppress_resolve_after_spatial_adapt,
+  const bool &first,
+  const bool& shift=true);
+
+
  /// \short Helper function to do compund refinement of (all) refineable 
  /// (sub)mesh(es) uniformly as many times as specified in vector and 
  /// rebuild problem; doc refinement process. Set boolean argument 
@@ -1936,7 +1949,52 @@ namespace oomph
                                               const double &epsilon,
                                               const unsigned &max_adapt,
                                               const bool &first,
-                                              const bool& shift=true);
+                                              const bool& shift=true)
+ {
+  // Call helper function with default setting (do re-solve after
+  // spatial adaptation)
+  unsigned suppress_resolve_after_spatial_adapt_flag=0;
+  return doubly_adaptive_unsteady_newton_solve_helper
+   (dt,
+    epsilon, 
+    max_adapt,
+    suppress_resolve_after_spatial_adapt_flag,
+    first,
+    shift);
+ }
+ 
+ 
+ /// \short Unsteady "doubly" adaptive Newton solve: Does temporal
+ /// adaptation first, i.e. we try to do a timestep with an increment
+ /// of dt, and adjusting dt until the solution on the given mesh satisfies
+ /// the temporal error measure with tolerance epsilon. Following
+ /// this, we do up to max_adapt spatial adaptions (without 
+ /// re-examining the temporal error). If first==true, the initial conditions
+ /// are re-assigned after the mesh adaptations.
+ /// Shifting of time can be suppressed by overwriting the
+ /// default value of shift (true). [Shifting must be done
+ /// if first_timestep==true because we're constantly re-assigning
+ /// the initial conditions; if first_timestep==true and shift==false
+ /// shifting is performed anyway and a warning is issued.
+ /// Pseudo-Boolean flag suppress_resolve_after_spatial_adapt [0: false;
+ /// 1: true] does what it says.]
+ double doubly_adaptive_unsteady_newton_solve(
+  const double &dt, 
+  const double &epsilon,
+  const unsigned &max_adapt,
+  const unsigned& suppress_resolve_after_spatial_adapt_flag,
+  const bool &first,
+  const bool& shift=true)
+ {
+  // Call helper function 
+  return doubly_adaptive_unsteady_newton_solve_helper
+   (dt,
+    epsilon, 
+    max_adapt,
+    suppress_resolve_after_spatial_adapt_flag,
+    first,
+    shift);
+ }
 
  
  /// \short Attempt to advance timestep by dt_desired. If the solution fails
