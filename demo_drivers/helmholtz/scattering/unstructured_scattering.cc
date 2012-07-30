@@ -307,6 +307,9 @@ public:
  /// the Helmholtz inner boundary condition elements 
  Mesh* Helmholtz_inner_boundary_mesh_pt;
 
+ /// Trace file
+ ofstream Trace_file;
+
 }; // end of problem class
 
 
@@ -318,6 +321,9 @@ template<class ELEMENT>
 ScatteringProblem<ELEMENT>::
 ScatteringProblem()
 { 
+
+ // Open trace file
+ Trace_file.open("RESLT/trace.dat");
  
  // Setup "bulk" mesh
   
@@ -699,6 +705,8 @@ void ScatteringProblem<ELEMENT>::doc_solution(DocInfo&
  unsigned npts;
  npts=5; 
 
+ // Total radiated power
+ double power=0.0;
 
  if (!GlobalParameters::Rectangular_outer_boundary) 
   {
@@ -709,7 +717,6 @@ void ScatteringProblem<ELEMENT>::doc_solution(DocInfo&
    some_file.open(filename);
    
    // Accumulate contribution from elements
-   double power=0.0;
    unsigned nn_element=Helmholtz_outer_boundary_mesh_pt->nelement(); 
    for(unsigned e=0;e<nn_element;e++)
     {
@@ -750,6 +757,9 @@ void ScatteringProblem<ELEMENT>::doc_solution(DocInfo&
  oomph_info << "\nNorm of error   : " << sqrt(error) << std::endl; 
  oomph_info << "Norm of solution: " << sqrt(norm) << std::endl << std::endl;
  
+
+ // Write power to trace file
+ Trace_file  << power << std::endl;
 
  // Do animation of Helmholtz solution
  //-----------------------------------
