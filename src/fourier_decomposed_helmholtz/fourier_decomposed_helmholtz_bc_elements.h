@@ -853,7 +853,7 @@ compute_gamma_contribution(
    double phi=atan2(interpolated_x[0],interpolated_x[1]);
    
    //define dphi_ds=-z'/r
-   double dphi_ds=-interpolated_dxds[1]/interpolated_x[0];
+   double dphi_ds=-std::fabs(-interpolated_dxds[1]/interpolated_x[0]);
    
    //define the associated legendre functions
 

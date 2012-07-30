@@ -422,7 +422,7 @@ template <class ELEMENT>
      (interpolated_x[1]*interpolated_x[1]);
     double nom =-interpolated_dxds[1]*interpolated_x[0]+
      interpolated_dxds[0]*interpolated_x[1];
-    double dphi_ds=nom/denom;
+    double dphi_ds=std::fabs(nom/denom);
     
     // Positive coefficients 
     for (unsigned i=0;i<n;i++)
@@ -1485,7 +1485,7 @@ template<class ELEMENT>
      (interpolated_x[1]*interpolated_x[1]);
     double nom =-interpolated_dxds[1]*interpolated_x[0]+
      interpolated_dxds[0]*interpolated_x[1];
-    double dphi_ds=nom/denom;
+    double dphi_ds=std::fabs(nom/denom);
     
     // compute the element contribution to gamma
     gamma_con+=(dphi_ds)*w*exp(I*(phi-phi_p)*double(n))*interpolated_u;

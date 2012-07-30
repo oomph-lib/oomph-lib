@@ -2,7 +2,7 @@
 
 
 #Set the number of tests to be checked
-NUM_TESTS=1
+NUM_TESTS=2
 
 
 # Setup validation directory
@@ -35,6 +35,41 @@ else
 ../../../../bin/fpdiff.py ../validata/results.dat.gz   \
     results.dat  >> validation.log
 fi
+
+
+mv RESLT RESLT_sphere_scattering
+mv OUTPUT OUTPUT_sphere_scattering
+
+# Validation for unstructured sphere scattering
+#----------------------------------------------
+
+echo "Running unstructured sphere scattering validation. Dirichlet-to-Neumann BC"
+mkdir RESLT
+../unstructured_sphere_scattering > OUTPUT
+echo "done"
+echo " " >> validation.log
+echo "Unstructured sphere validation (Dirichlet-to-Neumann BC)" >> validation.log
+echo "--------------------------------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat RESLT/soln0.dat  RESLT/soln1.dat RESLT/soln2.dat  RESLT/soln3.dat > unstructured_results.dat
+
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../../bin/fpdiff.py ../validata/unstructured_results.dat.gz   \
+    unstructured_results.dat  >> validation.log
+fi
+
+
+mv RESLT RESLT_unstructured_sphere_scattering
+mv OUTPUT OUTPUT_unstructured_sphere_scattering
+
+
+
 
 
 # Append output to global validation log file

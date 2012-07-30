@@ -2,7 +2,7 @@
 
 
 #Set the number of tests to be checked
-NUM_TESTS=14
+NUM_TESTS=16
 
 
 # Setup validation directory
@@ -225,6 +225,30 @@ mv RESLT RESLT_3
 # Validation for unstructured adaptive scattering
 #-------------------------------------------------
 
+echo "Running adaptive unstructured scattering validation. Dirichlet-to-Neumann BC"
+mkdir RESLT
+../adaptive_unstructured_scattering --case 0 > OUTPUT_unstructured_adapt_0
+echo "done"
+echo " " >> validation.log
+echo "Unstructured adaptive scattering validation (Dirichlet-to-Neumann BC)" >> validation.log
+echo "---------------------------------------------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat RESLT/trace.dat > unstructured_adaptive_scattering_results0.dat
+
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../../bin/fpdiff.py ../validata/unstructured_adaptive_scattering_results0.dat.gz   \
+    unstructured_adaptive_scattering_results0.dat  >> validation.log
+fi
+mv RESLT RESLT_unstructured_adapt_0
+
+
+
 echo "Running adaptive unstructured scattering validation. first order abc"
 mkdir RESLT
 ../adaptive_unstructured_scattering --case 1 > OUTPUT_unstructured_adapt_1
@@ -301,6 +325,30 @@ mv RESLT RESLT_unstructured_adapt_3
 
 # Validation for unstructured scattering
 #---------------------------------------
+
+echo "Running unstructured scattering validation. Dirichlet-to-Neumann BC"
+mkdir RESLT
+../unstructured_scattering --case 0 > OUTPUT_unstructured_0
+echo "done"
+echo " " >> validation.log
+echo "Unstructured scattering validation (Dirichlet-to-Neumann BC)" >> validation.log
+echo "------------------------------------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat RESLT/trace.dat > unstructured_scattering_results0.dat
+
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../../bin/fpdiff.py ../validata/unstructured_scattering_results0.dat.gz   \
+    unstructured_scattering_results0.dat  >> validation.log
+fi
+mv RESLT RESLT_unstructured_0
+
+
 
 echo "Running unstructured scattering validation. first order abc"
 mkdir RESLT

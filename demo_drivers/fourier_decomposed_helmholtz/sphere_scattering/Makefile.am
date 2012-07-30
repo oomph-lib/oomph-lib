@@ -2,16 +2,25 @@
 include $(top_srcdir)/config/makefile_templates/demo_drivers
 
 # Name of executable
-check_PROGRAMS=sphere_scattering 
+check_PROGRAMS=sphere_scattering  unstructured_sphere_scattering 
 
 #--------------------------------------
 
 # Sources for executable
-sphere_scattering_SOURCES = sphere_scattering.cc validate.sh
+sphere_scattering_SOURCES = sphere_scattering.cc
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
 sphere_scattering_LDADD = -L@libdir@ -lfourier_decomposed_helmholtz -lgeneric -loomph_crbond_bessel $(EXTERNAL_LIBS) $(FLIBS)
+
+#--------------------------------------
+
+# Sources for executable
+unstructured_sphere_scattering_SOURCES = unstructured_sphere_scattering.cc
+
+# Required libraries:
+# $(FLIBS) is included in case the solver involves fortran sources.
+unstructured_sphere_scattering_LDADD = -L@libdir@ -lrigid_body -lfourier_decomposed_helmholtz -lgeneric -loomph_crbond_bessel $(EXTERNAL_LIBS) $(FLIBS)
 
 #--------------------------------------
 

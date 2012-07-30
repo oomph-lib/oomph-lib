@@ -3,8 +3,8 @@
 
 # Define the sources
 sources =  \
-fourier_decomposed_helmholtz_elements.cc 
-
+fourier_decomposed_helmholtz_elements.cc  \
+Tfourier_decomposed_helmholtz_elements.cc
 
 # Include files which shouldn't be compiled
 incl_cc_files =
@@ -13,7 +13,8 @@ incl_cc_files =
 headers =  \
 fourier_decomposed_helmholtz_elements.h \
 fourier_decomposed_helmholtz_flux_elements.h \
-fourier_decomposed_helmholtz_bc_elements.h
+fourier_decomposed_helmholtz_bc_elements.h \
+Tfourier_decomposed_helmholtz_elements.h
 
 # Define name of library 
 libname = fourier_decomposed_helmholtz
