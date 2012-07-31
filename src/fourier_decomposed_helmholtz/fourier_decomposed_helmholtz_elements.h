@@ -226,6 +226,10 @@ namespace oomph
                       FiniteElement::SteadyExactSolutionFctPt exact_soln_pt);
  
  
+
+ /// \short Compute norm of solution
+ void compute_norm(double& norm);
+
  /// Get error against and norm of exact solution
  void compute_error(std::ostream &outfile, 
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,

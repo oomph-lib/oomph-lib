@@ -981,6 +981,19 @@ public:
  /// pinned/unpinned? Return 0 if OK. 
  virtual unsigned self_test();
 
+
+ /// \short Compute norm of solution -- broken virtual can be overloaded
+ /// by element writer to implement whatever norm is desired for
+ /// the specific element
+ virtual void compute_norm(double& norm)
+  {
+   std::string error_message = "compute_norm undefined for this element \n";
+   throw OomphLibError(error_message,
+                       "GeneralisedElement::compute_norm()",
+                       OOMPH_EXCEPTION_LOCATION);
+
+  }
+
 #ifdef OOMPH_HAS_MPI
 
  /// \short Label the element as halo and specify processor that holds
@@ -2513,6 +2526,7 @@ public:
    // Dummy return
    return 0;
   }
+
 
 
  /// \short Plot the error when compared 

@@ -769,6 +769,37 @@ public:
  /// with the mesh, usually used in adaptive time-stepping.
  void calculate_predictions();
 
+ /// \short Compute norm of solution by summing contributions of
+ /// compute_norm(...) for all constituent elements in the mesh.
+ /// What that norm means depends on what's defined in the element's
+ /// function; may need to take the square root afterwards if the elements
+ /// compute the square of the L2 norm, say.
+ virtual void compute_norm(double& norm)
+  {
+   //Initialse the norm 
+   norm=0.0;
+
+   //Per-element norm 
+   double el_norm=0;
+   
+   //Loop over the elements
+   unsigned long n_element = Element_pt.size();
+   for(unsigned long e=0;e<n_element;e++)
+    {
+     GeneralisedElement* el_pt=Element_pt[e];
+
+#ifdef OOMPH_HAS_MPI
+     //Compute error for each non-halo element
+     if (!(el_pt->is_halo()))
+#endif
+      {
+       el_pt->compute_norm(el_norm);
+      }
+     norm+=el_norm; 
+    }
+  }
+
+ 
  /// \short Plot error when compared against a given exact solution.
  ///  Also returns the norm  of the error and that of the exact solution
  virtual void compute_error(std::ostream &outfile,

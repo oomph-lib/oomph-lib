@@ -723,6 +723,60 @@ namespace oomph
  }
  
  
+
+//======================================================================
+ /// Compute norm of fe solution
+ ///
+//======================================================================
+ void FourierDecomposedHelmholtzEquations::compute_norm(double& norm)
+ { 
+  
+  // Initialise
+  norm=0.0;
+  
+  //Vector of local coordinates
+  Vector<double> s(2);
+  
+  // Vector for coordintes
+  Vector<double> x(2);
+  
+  //Find out how many nodes there are in the element
+  unsigned n_node = nnode();
+  
+  Shape psi(n_node);
+  
+  //Set the value of n_intpt
+  unsigned n_intpt = integral_pt()->nweight();
+  
+  //Loop over the integration points
+  for(unsigned ipt=0;ipt<n_intpt;ipt++)
+   {
+    
+    //Assign values of s
+    for(unsigned i=0;i<2;i++)
+     {
+      s[i] = integral_pt()->knot(ipt,i);
+     }
+    
+    //Get the integral weight
+    double w = integral_pt()->weight(ipt);
+    
+    // Get jacobian of mapping
+    double J=J_eulerian(s);
+    
+    //Premultiply the weights and the Jacobian
+    double W = w*J;
+    
+    // Get FE function value
+    std::complex<double> u_fe=interpolated_u_fourier_decomposed_helmholtz(s);
+    
+    // Add to  norm
+    norm+=(u_fe.real()*u_fe.real()+u_fe.imag()*u_fe.imag())*W;
+    
+   }
+ }
+ 
+ 
  
  
  

@@ -373,6 +373,9 @@ private:
  /// on the inner boundary
  Mesh* Helmholtz_inner_boundary_mesh_pt;
 
+ /// Trace file
+ ofstream Trace_file;
+
 }; // end of problem class
 
 
@@ -385,6 +388,9 @@ FourierDecomposedHelmholtzProblem<ELEMENT>::
 FourierDecomposedHelmholtzProblem()
 { 
 
+ // Open trace file
+ Trace_file.open("RESLT/trace.dat");
+ 
  // Create circles representing inner and outer boundary
  double x_c=0.0;
  double y_c=0.0;
@@ -632,10 +638,18 @@ void FourierDecomposedHelmholtzProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
                              error,norm); 
  some_file.close();
  
+ // Compute norm of FE solution
+ double fe_norm=0.0;
+ Bulk_mesh_pt->compute_norm(fe_norm);
+
  // Doc L2 error and norm of solution
  cout << "\nNorm of error   : " << sqrt(error) << std::endl; 
- cout << "Norm of solution: " << sqrt(norm) << std::endl << std::endl;
+ cout << "Norm of exact and FE solution: " 
+      << sqrt(norm) << " " << sqrt(fe_norm) <<  std::endl << std::endl;
  
+ // Write norms to trace file
+ Trace_file << sqrt(norm) << " " << sqrt(fe_norm) << std::endl;
+
  // Check gamma computation
  check_gamma(doc_info);
 
