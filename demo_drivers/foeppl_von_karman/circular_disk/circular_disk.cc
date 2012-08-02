@@ -300,10 +300,6 @@ UnstructuredFvKProblem<ELEMENT>::UnstructuredFvKProblem(double element_area)
  inner_boundary_pt[0] =
   new TriangleMeshClosedCurve(inner_curvilinear_boundary_pt);
 
- Vector<Vector<double> > regions_coordinates(2);
- regions_coordinates[0] = left_region_coords;
- regions_coordinates[1] = right_region_coords;
-
  //Diameter boundary line
  Vector<TriangleMeshOpenCurve*> inner_open_boundary_pt(4);
 
@@ -403,8 +399,9 @@ UnstructuredFvKProblem<ELEMENT>::UnstructuredFvKProblem(double element_area)
 
  mesh_parameters.internal_closed_curve_pt() = inner_boundary_pt;
  mesh_parameters.internal_open_curves_pt() = inner_open_boundary_pt;
- mesh_parameters.regions_coordinates_pt() = regions_coordinates;
- mesh_parameters.use_attributes() = true;
+ mesh_parameters.add_region_coordinates(1,left_region_coords);
+ mesh_parameters.add_region_coordinates(2,right_region_coords);
+ mesh_parameters.enable_use_attributes();
  mesh_parameters.element_area() = element_area;
 
  My_mesh_pt = new RefineableTriangleMesh<ELEMENT>(mesh_parameters);
