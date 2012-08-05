@@ -351,6 +351,12 @@ public:
    Helmholtz_outer_boundary_mesh_pt->setup_gamma();
   }
 
+ /// Actions before adapt: Wipe the mesh of prescribed flux elements
+ void actions_before_adapt();
+ 
+ /// Actions after adapt: Rebuild the mesh of prescribed flux elements
+ void actions_after_adapt();
+ 
  /// Check gamma computation
  void check_gamma(DocInfo& doc_info);
   
@@ -361,15 +367,40 @@ private:
  
  /// Create flux elements on inner boundary
  void create_flux_elements_on_inner_boundary();
+ 
+ 
+ /// \short Delete boundary face elements and wipe the surface mesh
+ void delete_face_elements( Mesh* const & boundary_mesh_pt)
+  {
+   // Loop over the surface elements
+   unsigned n_element = boundary_mesh_pt->nelement();
+   for(unsigned e=0;e<n_element;e++)
+    {
+     // Kill surface element
+     delete  boundary_mesh_pt->element_pt(e);
+    }
+   
+   // Wipe the mesh
+   boundary_mesh_pt->flush_element_and_node_storage();
+   
+  } 
+
+#ifdef ADAPTIVE
+
+ /// Pointer to the "bulk" mesh
+ RefineableTriangleMesh<ELEMENT>* Bulk_mesh_pt;
+
+#else
 
  /// Pointer to the "bulk" mesh
  TriangleMesh<ELEMENT>* Bulk_mesh_pt;
+
+#endif
   
  /// \short Pointer to mesh containing the DtN boundary
  /// condition elements
  FourierDecomposedHelmholtzDtNMesh<ELEMENT>* Helmholtz_outer_boundary_mesh_pt;
 
- /// \short Mesh of face elements that apply the prescribed flux
  /// on the inner boundary
  Mesh* Helmholtz_inner_boundary_mesh_pt;
 
@@ -378,6 +409,61 @@ private:
 
 }; // end of problem class
 
+
+
+//=====================start_of_actions_before_adapt======================
+/// Actions before adapt: Wipe the mesh of face elements
+//========================================================================
+template<class ELEMENT>
+void FourierDecomposedHelmholtzProblem<ELEMENT>::actions_before_adapt()
+{ 
+ // Kill the flux elements and wipe the boundary meshs
+ delete_face_elements(Helmholtz_outer_boundary_mesh_pt);
+ delete_face_elements(Helmholtz_inner_boundary_mesh_pt);
+
+ // Rebuild the Problem's global mesh from its various sub-meshes
+ rebuild_global_mesh();
+
+}// end of actions_before_adapt
+
+
+//=====================start_of_actions_after_adapt=======================
+///  Actions after adapt: Rebuild the face element meshes
+//========================================================================
+template<class ELEMENT>
+void FourierDecomposedHelmholtzProblem<ELEMENT>::actions_after_adapt()
+{
+
+
+ // Complete the build of all elements so they are fully functional
+ 
+ // Loop over the Helmholtz bulk elements to set up element-specific 
+ // things that cannot be handled by constructor: Pass pointer to 
+ // wave number squared
+ unsigned n_element = Bulk_mesh_pt->nelement();
+ for(unsigned e=0;e<n_element;e++)
+  {
+   // Upcast from GeneralisedElement to Helmholtz bulk element
+   ELEMENT *el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
+   
+   //Set the k_squared  pointer
+   el_pt->k_squared_pt() = &ProblemParameters::K_squared;
+
+   // Set pointer to Fourier wave number
+   el_pt->n_fourier_pt()=&ProblemParameters::N_fourier;
+  }
+
+ // Create prescribed-flux elements and BC elements 
+ // from all elements that are adjacent to the boundaries and add them to 
+ // Helmholtz_boundary_meshes
+ create_flux_elements_on_inner_boundary();
+ create_outer_bc_elements();
+ 
+
+ // Rebuild the Problem's global mesh from its various sub-meshes
+ rebuild_global_mesh();
+  
+}// end of actions_after_adapt
 
 
 //=======start_of_constructor=============================================
@@ -480,8 +566,24 @@ FourierDecomposedHelmholtzProblem()
  double element_area = 0.1; 
  triangle_mesh_parameters.element_area() = element_area;
  
+#ifdef ADAPTIVE
+ 
+ // Build "bulk" mesh
+ Bulk_mesh_pt=new RefineableTriangleMesh<ELEMENT>(triangle_mesh_parameters);
+
+ // Create/set error estimator
+ Bulk_mesh_pt->spatial_error_estimator_pt()=new Z2ErrorEstimator;
+ 
+ // Choose error tolerances to force some uniform refinement
+ Bulk_mesh_pt->min_permitted_error()=0.00004;
+ Bulk_mesh_pt->max_permitted_error()=0.0001;
+
+#else
+
  // Pass the TriangleMeshParameters object to the TriangleMesh one
  Bulk_mesh_pt= new TriangleMesh<ELEMENT>(triangle_mesh_parameters);
+
+#endif
 
  // Check what we've built so far...
  Bulk_mesh_pt->output("mesh.dat");
@@ -638,17 +740,14 @@ void FourierDecomposedHelmholtzProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
                              error,norm); 
  some_file.close();
  
- // Compute norm of FE solution
- double fe_norm=0.0;
- Bulk_mesh_pt->compute_norm(fe_norm);
-
  // Doc L2 error and norm of solution
  cout << "\nNorm of error   : " << sqrt(error) << std::endl; 
- cout << "Norm of exact and FE solution: " 
-      << sqrt(norm) << " " << sqrt(fe_norm) <<  std::endl << std::endl;
+ cout << "Norm of solution: " << sqrt(norm) << std::endl << std::endl;
  
- // Write norms to trace file
- Trace_file << sqrt(norm) << " " << sqrt(fe_norm) << std::endl;
+
+ // Write norm of solution to trace file
+ Bulk_mesh_pt->compute_norm(norm); 
+ Trace_file  << norm << std::endl;
 
  // Check gamma computation
  check_gamma(doc_info);
@@ -843,12 +942,22 @@ int main()
  }
 
  
+#ifdef ADAPTIVE
+
+ // Create the problem with 2D six-node elements from the
+ // TFourierDecomposedHelmholtzElement family. 
+ FourierDecomposedHelmholtzProblem<ProjectableFourierDecomposedHelmholtzElement<
+  TFourierDecomposedHelmholtzElement<3> > > problem;
+ 
+#else
  
  // Create the problem with 2D six-node elements from the
  // TFourierDecomposedHelmholtzElement family. 
  FourierDecomposedHelmholtzProblem<TFourierDecomposedHelmholtzElement<3> > 
   problem;
  
+#endif
+
  // Create label for output
  DocInfo doc_info;
  
@@ -862,8 +971,23 @@ int main()
    // Step number
    doc_info.number()=ProblemParameters::N_fourier;
    
+
+
+#ifdef ADAPTIVE
+
+ // Max. number of adaptations
+ unsigned max_adapt=1;
+ 
+   // Solve the problem with Newton's method, allowing
+   // up to max_adapt mesh adaptations after every solve.
+   problem.newton_solve(max_adapt);
+
+#else
+
    // Solve the problem
    problem.newton_solve();
+
+#endif
    
    //Output the solution
    problem.doc_solution(doc_info);

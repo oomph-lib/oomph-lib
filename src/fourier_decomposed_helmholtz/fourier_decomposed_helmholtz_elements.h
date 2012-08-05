@@ -40,6 +40,7 @@
 
 
 //OOMPH-LIB headers
+#include "../generic/projection.h"
 #include "../generic/nodes.h"
 #include "../generic/Qelements.h"
 #include "../generic/oomph_utilities.h"
@@ -226,10 +227,6 @@ namespace oomph
                       FiniteElement::SteadyExactSolutionFctPt exact_soln_pt);
  
  
-
- /// \short Compute norm of solution
- void compute_norm(double& norm);
-
  /// Get error against and norm of exact solution
  void compute_error(std::ostream &outfile, 
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
@@ -246,6 +243,9 @@ namespace oomph
    "FourierDecomposedHelmholtzEquations::compute_error()",
    OOMPH_EXCEPTION_LOCATION);
  }
+
+ /// Compute norm of fe solution
+ void compute_norm(double& norm);
  
  /// Access function: Pointer to source function
  FourierDecomposedHelmholtzSourceFctPt& source_fct_pt() {return Source_fct_pt;}
@@ -643,6 +643,266 @@ namespace oomph
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
+
+
+
+//==========================================================
+/// Fourier decomposed Helmholtz upgraded to become projectable
+//==========================================================
+ template<class FOURIER_DECOMPOSED_HELMHOLTZ_ELEMENT>
+ class ProjectableFourierDecomposedHelmholtzElement : 
+  public virtual ProjectableElement<FOURIER_DECOMPOSED_HELMHOLTZ_ELEMENT>
+ {
+
+ public:
+
+
+  /// \short Constructor [this was only required explicitly
+  /// from gcc 4.5.2 onwards...]
+  ProjectableFourierDecomposedHelmholtzElement(){}
+
+  /// \short Specify the values associated with field fld. 
+  /// The information is returned in a vector of pairs which comprise 
+  /// the Data object and the value within it, that correspond to field fld. 
+  Vector<std::pair<Data*,unsigned> > data_values_of_field(const unsigned& fld)
+   { 
+
+#ifdef PARANOID
+    if (fld>1)
+     {
+      std::stringstream error_stream;
+      error_stream 
+       << "Fourier decomposed Helmholtz elements only store 2 fields so fld = "
+       << fld << " is illegal \n";
+      throw OomphLibError(
+       error_stream.str(),
+       "ProjectableFourierDecomposedHelmholtzElement::data_values_of_field()",
+       OOMPH_EXCEPTION_LOCATION);
+     }
+#endif
+  
+    // Create the vector
+    unsigned nnod=this->nnode();
+    Vector<std::pair<Data*,unsigned> > data_values(nnod);
+   
+    // Loop over all nodes
+    for (unsigned j=0;j<nnod;j++)
+     {
+      // Add the data value associated field: The node itself
+      data_values[j]=std::make_pair(this->node_pt(j),fld);
+     }
+   
+    // Return the vector
+    return data_values;
+   }
+
+  /// \short Number of fields to be projected: 2 (real and imag part)
+  unsigned nfields_for_projection()
+   {
+    return 2;
+   }
+ 
+  /// \short Number of history values to be stored for fld-th field. 
+  unsigned nhistory_values_for_projection(const unsigned &fld)
+  {
+#ifdef PARANOID
+    if (fld>1)
+     {
+      std::stringstream error_stream;
+      error_stream 
+       << "Helmholtz elements only store two fields so fld = "
+       << fld << " is illegal\n";
+      throw OomphLibError(
+       error_stream.str(),
+       "ProjectableFourierDecomposedHelmholtzElement::nhistory_values_for_projection()",
+       OOMPH_EXCEPTION_LOCATION);
+     }
+#endif
+   return this->node_pt(0)->ntstorage();   
+  }
+  
+  ///\short Number of positional history values
+  unsigned nhistory_values_for_coordinate_projection()
+   {
+    return this->node_pt(0)->position_time_stepper_pt()->ntstorage();
+   }
+  
+  /// \short Return Jacobian of mapping and shape functions of field fld
+  /// at local coordinate s
+  double jacobian_and_shape_of_field(const unsigned &fld, 
+                                     const Vector<double> &s, 
+                                     Shape &psi)
+   {
+#ifdef PARANOID
+    if (fld>1)
+     {
+      std::stringstream error_stream;
+      error_stream 
+       << "Helmholtz elements only store two fields so fld = "
+       << fld << " is illegal.\n";
+      throw OomphLibError(
+       error_stream.str(),
+       "ProjectableFourierDecomposedHelmholtzElement::jacobian_and_shape_of_field()",
+       OOMPH_EXCEPTION_LOCATION);
+     }
+#endif
+    unsigned n_dim=this->dim();
+    unsigned n_node=this->nnode();
+    Shape test(n_node); 
+    DShape dpsidx(n_node,n_dim), dtestdx(n_node,n_dim);
+    double J=this->dshape_and_dtest_eulerian_fourier_decomposed_helmholtz(
+     s,psi,dpsidx,
+     test,dtestdx);
+    return J;
+   }
+
+
+
+  /// \short Return interpolated field fld at local coordinate s, at time level
+  /// t (t=0: present; t>0: history values)
+  double get_field(const unsigned &t, 
+                   const unsigned &fld,
+                   const Vector<double>& s)
+   {
+#ifdef PARANOID
+    if (fld>1)
+     {
+      std::stringstream error_stream;
+      error_stream 
+       << "Helmholtz elements only store two fields so fld = "
+       << fld << " is illegal\n";
+      throw OomphLibError(
+       error_stream.str(),
+       "ProjectableFourierDecomposedHelmholtzElement::jget_field()",
+       OOMPH_EXCEPTION_LOCATION);
+     }
+#endif
+    //Find the index at which the variable is stored
+    std::complex<unsigned> complex_u_nodal_index = 
+     this->u_index_fourier_decomposed_helmholtz();
+    unsigned u_nodal_index = 0;
+    if (fld==0)
+     {
+      u_nodal_index = complex_u_nodal_index.real();
+     }
+    else
+     {
+      u_nodal_index = complex_u_nodal_index.imag();
+     }
+
+    
+      //Local shape function
+    unsigned n_node=this->nnode();
+    Shape psi(n_node);
+    
+    //Find values of shape function
+    this->shape(s,psi);
+    
+    //Initialise value of u
+    double interpolated_u = 0.0;
+    
+    //Sum over the local nodes
+    for(unsigned l=0;l<n_node;l++) 
+     {
+      interpolated_u += this->nodal_value(t,l,u_nodal_index)*psi[l];
+     }
+    return interpolated_u;     
+   }
+
+
+
+
+  ///Return number of values in field fld: One per node
+  unsigned nvalue_of_field(const unsigned &fld)
+   {
+#ifdef PARANOID
+    if (fld>1)
+     {
+      std::stringstream error_stream;
+      error_stream 
+       << "Helmholtz elements only store two fields so fld = "
+       << fld << " is illegal\n";
+      throw OomphLibError(
+       error_stream.str(),
+       "ProjectableFourierDecomposedHelmholtzElement::nvalue_of_field()",
+       OOMPH_EXCEPTION_LOCATION);
+     }
+#endif
+    return this->nnode();
+   }
+
+ 
+  ///Return local equation number of value j in field fld.
+  int local_equation(const unsigned &fld,
+                     const unsigned &j)
+   {
+#ifdef PARANOID
+    if (fld>1)
+     {
+      std::stringstream error_stream;
+      error_stream 
+       << "Helmholtz elements only store two fields so fld = "
+       << fld << " is illegal\n";
+      throw OomphLibError(
+       error_stream.str(),
+       "ProjectableFourierDecomposedHelmholtzElement::local_equation()",
+       OOMPH_EXCEPTION_LOCATION);
+     }
+#endif
+    std::complex<unsigned> complex_u_nodal_index = 
+     this->u_index_fourier_decomposed_helmholtz();
+    unsigned u_nodal_index = 0;
+    if (fld==0)
+     {
+      u_nodal_index = complex_u_nodal_index.real();
+     }
+    else
+     {
+      u_nodal_index = complex_u_nodal_index.imag();
+     }
+    return this->nodal_local_eqn(j,u_nodal_index);     
+   }
+
+
+
+
+ /// \short hierher Output FE representation of soln: x,y,u or x,y,z,u at 
+ /// n_plot^DIM plot points
+ void output(std::ostream &outfile, const unsigned &nplot)
+ {
+  FOURIER_DECOMPOSED_HELMHOLTZ_ELEMENT::output(outfile,nplot);
+ }
+ 
+   
+ };
+
+
+//=======================================================================
+/// Face geometry for element is the same as that for the underlying
+/// wrapped element
+//=======================================================================
+ template<class ELEMENT>
+ class FaceGeometry<ProjectableFourierDecomposedHelmholtzElement<ELEMENT> > 
+  : public virtual FaceGeometry<ELEMENT>
+ {
+ public:
+  FaceGeometry() : FaceGeometry<ELEMENT>() {}
+ };
+
+
+//=======================================================================
+/// Face geometry of the Face Geometry for element is the same as 
+/// that for the underlying wrapped element
+//=======================================================================
+ template<class ELEMENT>
+ class FaceGeometry<FaceGeometry<ProjectableFourierDecomposedHelmholtzElement<ELEMENT> > >
+  : public virtual FaceGeometry<FaceGeometry<ELEMENT> >
+ {
+ public:
+  FaceGeometry() : FaceGeometry<FaceGeometry<ELEMENT> >() {}
+ };
+
+
 
 
 }

@@ -2,7 +2,7 @@
 
 
 #Set the number of tests to be checked
-NUM_TESTS=2
+NUM_TESTS=3
 
 
 # Setup validation directory
@@ -68,6 +68,36 @@ fi
 mv RESLT RESLT_unstructured_sphere_scattering
 mv OUTPUT OUTPUT_unstructured_sphere_scattering
 
+
+
+
+# Validation for adaptive unstructured sphere scattering
+#-------------------------------------------------------
+
+echo "Running adaptive unstructured sphere scattering validation. Dirichlet-to-Neumann BC"
+mkdir RESLT
+../unstructured_adaptive_sphere_scattering > OUTPUT
+echo "done"
+echo " " >> validation.log
+echo "Adaptive unstructured sphere validation (Dirichlet-to-Neumann BC)" >> validation.log
+echo "--------------------------------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat RESLT/trace.dat > adaptive_unstructured_results.dat
+
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../../bin/fpdiff.py ../validata/adaptive_unstructured_results.dat.gz   \
+    adaptive_unstructured_results.dat  >> validation.log
+fi
+
+
+mv RESLT RESLT_adaptive_unstructured_sphere_scattering
+mv OUTPUT OUTPUT_unstructured_sphere_scattering
 
 
 

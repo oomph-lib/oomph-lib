@@ -726,7 +726,6 @@ namespace oomph
 
 //======================================================================
  /// Compute norm of fe solution
- ///
 //======================================================================
  void FourierDecomposedHelmholtzEquations::compute_norm(double& norm)
  { 

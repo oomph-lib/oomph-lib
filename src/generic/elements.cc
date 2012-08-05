@@ -4537,6 +4537,14 @@ void FiniteElement::identify_field_data_for_interactions(
 //========================================================================
  double FaceElement::J_eulerian(const Vector<double> &s) const
  {
+
+  //Find out the sptial dimension of the element
+  unsigned n_dim_el = this->dim();
+
+  // Bail out if we're in a point element -- not sure what
+  // J_eulerian actually is, but this is harmless 
+  if (n_dim_el==0) return 1.0;
+   
   //Find out how many nodes there are
   unsigned n_node = nnode();
   
@@ -4545,10 +4553,7 @@ void FiniteElement::identify_field_data_for_interactions(
   
   //Find out the dimension of the node
   unsigned n_dim = this->nodal_dimension();
-  
-  //Find out the sptial dimension of the element
-  unsigned n_dim_el = this->dim();
-  
+    
   //Set up memory for the shape functions
   Shape psi(n_node,n_position_type);
   DShape dpsids(n_node,n_position_type,n_dim_el); 
