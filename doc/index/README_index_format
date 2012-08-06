@@ -1,0 +1,31 @@
+1. The basic format of the oomph.idx file is 
+
+Tag @ %link.html @end
+
+The % is a tag to indicate that it is a link and is converted to 
+ $(top_builddir)/doc/link.html
+
+2. The tags can be nested
+
+Tag1 @ Tag2 @ %link2.html @end
+
+3. Cross references are indicated by a ^
+
+ Tag1 @ ^Other_Tag @end
+
+4. In order to cross-reference over several levels you can use the tags
+separated by dots
+
+Main link @ sublink @ %link.html @end
+
+Synonym @ ^Main link.sublink @end
+
+5. You may like to know that all entries are given html anchors which can be 
+accessed by removing all spaces, replacing @ with . and putting the first 
+letter of the main tag first
+
+Main link @ sublink @ %link.html @end
+
+ can be accessed directly by
+
+ ($top_builddir)/doc/index.html#M.Mainlink.sublink
