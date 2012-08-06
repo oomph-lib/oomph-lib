@@ -617,6 +617,9 @@ class ANASAZI : public EigenSolver
                          Vector<std::complex<double> > &eigenvalue,
                          Vector<DoubleVector> &eigenvector)
  {
+  //No access to sigma, so set from sigma real
+  Sigma = Sigma_real;
+
   //Initially be dumb here
   Linear_solver_pt = problem_pt->linear_solver_pt();
 
@@ -695,7 +698,7 @@ class ANASAZI : public EigenSolver
    {
     //Undo shift and invert
     double a = evals[i].realpart; double b = evals[i].imagpart;
-    double det = a*a - b*b;
+    double det = a*a + b*b;
     eigenvalue[i] = std::complex<double>(a/det+Sigma,-b/det);
 
     //Now set the eigenvectors, I hope

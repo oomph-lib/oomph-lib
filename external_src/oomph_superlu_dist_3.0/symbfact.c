@@ -98,7 +98,7 @@ int_t symbfact
     info = symbfact_SubInit(DOFACT, NULL, 0, m, n, ((NCPformat*)A->Store)->nnz,
 			    Glu_persist, Glu_freeable);
 
-    iwork = (int_t *) intMalloc_dist(6*m+2*n);
+    iwork = (int_t *) intMalloc_dist(7*m+2*n);
     perm_r = iwork;
     segrep = iwork + m;
     repfnz = segrep + m;
@@ -111,6 +111,7 @@ int_t symbfact
     ifill_dist(perm_r, m, EMPTY);
     ifill_dist(repfnz, m, EMPTY);
     ifill_dist(marker, m, EMPTY);
+    ifill_dist(xprune, m, EMPTY);
     Glu_persist->supno[0] = -1;
     Glu_persist->xsup[0] = 0;
     Glu_freeable->xlsub[0] = 0;
@@ -177,7 +178,6 @@ int_t symbfact
 	printf("\tnonzeros in L+U     %ld\n", nnzL + nnzU - min_mn);
 	printf("\tnonzeros in LSUB    %ld\n", i);
     }
-    SUPERLU_FREE(iwork);
 
 #if ( PRNTlevel>=3 )
     PrintInt10("lsub", Glu_freeable->xlsub[n], Glu_freeable->lsub);
@@ -189,6 +189,7 @@ int_t symbfact
     PrintInt10("xsup", (Glu_persist->supno[n])+2, Glu_persist->xsup);
 #endif
 
+    SUPERLU_FREE(iwork);
 #if ( DEBUGlevel>=1 )
     CHECK_MALLOC(pnum, "Exit symbfact()");
 #endif

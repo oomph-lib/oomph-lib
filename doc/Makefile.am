@@ -1,4 +1,5 @@
 SUBDIRS = \
+index \
 picture_show \
 optimisation \
 get_involved \

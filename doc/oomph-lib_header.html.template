@@ -123,6 +123,8 @@ function formCheck(formobj){
 <div id="hotspot" name="hotspot" class="hotspot" 
      title="click to expand the navigation menu"> Documentation</div> 
 <dl style="" id="toggle" name="toggle" class="toggle">  
+      <dt><a href="############/../doc/index/html/index.html">Index</a></dt>
+
       <dt><a href="############/../doc/intro/html/index.html">FE theory and top-down discussion of the data structure</a></dt>
       <dt><a href="############/../doc/quick_guide/html/index.html">The (Not-so) Quick Guide</a></dt>
 
@@ -219,6 +221,24 @@ if you wish to be informed of the library's "official" release.
 
 </CENTER>
 <HR>
+
+<script type="text/javascript">
+ 
+ function index_toggle(id,img) {
+  var e = document.getElementById(id);
+  var im = document.getElementById(img);
+  if (e.style.display == '')
+   {
+      e.style.display = 'none';
+      im.src="../expand.png";
+   }
+  else
+   {
+   e.style.display = '';
+   im.src = "../collapse.png";
+   }
+ }
+</script>
 
 
 

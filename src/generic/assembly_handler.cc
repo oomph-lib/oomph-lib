@@ -3147,9 +3147,14 @@ namespace oomph
 
     //Restrict the problem to the standard variables and
     //the bifurcation parameter only
+    Problem_pt->Dof_distribution_pt = new LinearAlgebraDistribution
+     (Problem_pt->communicator_pt(),Ndof+1,false);
     Problem_pt->Dof_pt.resize(Ndof+1);
-    Problem_pt->Dof_distribution_pt->build(Problem_pt->communicator_pt(),
-                                           Ndof+1,false);
+
+//Problem_pt->Dof_pt.resize(Ndof+1);
+//    Problem_pt->Dof_distribution_pt->build(Problem_pt->communicator_pt(),
+//                                         Ndof+1,false);
+
     //Remove all previous sparse storage used during Jacobian assembly
     Problem_pt->Sparse_assemble_with_arrays_previous_allocation.resize(0);
     
@@ -3216,6 +3221,8 @@ namespace oomph
         Problem_pt->Dof_pt.push_back(&Y[n]);
        }
       
+
+
 #ifdef OOMPH_HAS_MPI
       if((!Distributed) || (my_rank==0))
 #endif
@@ -3225,6 +3232,10 @@ namespace oomph
         Problem_pt->Dof_pt.push_back(&Sigma);
        }
 
+
+      //Delete the distribtion created in the augmented block solve
+      if(Problem_pt->Dof_distribution_pt!=this->Dof_distribution_pt)
+       {delete Problem_pt->Dof_distribution_pt;}
       
       // update the Dof distribution
       Problem_pt->Dof_distribution_pt = 
