@@ -657,6 +657,7 @@ unsigned Data::ntstorage() const {return Time_stepper_pt->ntstorage();}
 void Data::assign_eqn_numbers(unsigned long &global_number, 
                               Vector<double *> &dof_pt)
 {
+
  //Loop over the number of variables
  //Set temporary to hold range
  const unsigned eqn_number_range = Nvalue;
@@ -1282,7 +1283,8 @@ unsigned Node::No_independent_position=10;
 Node::Node() : Data(), 
                Position_time_stepper_pt(Data::Default_static_time_stepper_pt),
                Hanging_pt(0),
-               Ndim(0), Nposition_type(0), Aux_node_update_fct_pt(0)
+               Ndim(0), Nposition_type(0), Obsolete(false),
+               Aux_node_update_fct_pt(0)
 {
 #ifdef LEAK_CHECK
  LeakCheckNames::Node_build+=1;
@@ -1301,11 +1303,11 @@ Node::Node(const unsigned &n_dim,
            const unsigned &initial_n_value,
            const bool &allocate_x_position) : 
  Data(initial_n_value), 
- X_position(0),
+ X_position(0), 
  Position_time_stepper_pt(Data::Default_static_time_stepper_pt),
  Hanging_pt(0),
  Ndim(n_dim), 
- Nposition_type(n_position_type), Aux_node_update_fct_pt(0)
+ Nposition_type(n_position_type), Obsolete(false), Aux_node_update_fct_pt(0)
 {
 #ifdef LEAK_CHECK
  LeakCheckNames::Node_build+=1;
@@ -1350,10 +1352,10 @@ Node::Node(TimeStepper* const &time_stepper_pt_,
            const unsigned &initial_n_value,
            const bool &allocate_x_position) 
  : Data(time_stepper_pt_,initial_n_value),
-   X_position(0),
+   X_position(0), 
    Position_time_stepper_pt(time_stepper_pt_), 
    Hanging_pt(0),
-   Ndim(n_dim), Nposition_type(n_position_type), Aux_node_update_fct_pt(0)
+   Ndim(n_dim), Nposition_type(n_position_type), Obsolete(false), Aux_node_update_fct_pt(0)
 {
 #ifdef LEAK_CHECK
  LeakCheckNames::Node_build+=1;

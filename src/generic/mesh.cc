@@ -590,6 +590,7 @@ unsigned long Mesh::assign_global_eqn_numbers(Vector<double *> &Dof_pt)
 
  //Loop over the nodes and call their assigment functions
  unsigned long nnod = Node_pt.size();
+
  for(unsigned long i=0;i<nnod;i++)
   {
    Node_pt[i]->assign_eqn_numbers(equation_number,Dof_pt);
