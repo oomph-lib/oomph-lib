@@ -43,7 +43,8 @@ mpi \
 creating_doc \
 linear_elasticity \
 time_harmonic_fourier_decomposed_linear_elasticity \
-fourier_decomposed_helmholtz
+fourier_decomposed_helmholtz \
+generalised_helmholtz
 
 
 include $(top_srcdir)/config/makefile_templates/doc

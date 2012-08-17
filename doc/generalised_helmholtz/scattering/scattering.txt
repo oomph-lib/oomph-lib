@@ -1,0 +1,633 @@
+\mainpage Example problem: The generalised Helmholtz equation and usage of perfectly matched layers
+
+
+
+In this document we discuss the finite-element-based solution of a
+generalised form of the Helmholtz equation, an elliptic PDE that describes time-harmonic wave propagation 
+problems. Another key modification to the standard formulation is the usage of the perfectly
+matched layers as an alternative to classical absorbing/approximate
+boundary conditions or DtN maps.
+
+We start by  reviewing the relevant theory and then 
+present the solution of a simple model problem -- the outward propagation of
+waves from the surface of a cylinder.
+
+
+<CENTER>
+<TABLE BORDER=1, WIDTH=500px>
+<TR>
+<TD bgcolor="cornsilk">
+<CENTER>
+<B>Acknowledgement:</B>
+\n\n
+This tutorial and the associated driver codes were developed jointly
+with
+<a href="http://imperial.academia.edu/RaduCimpeanu">
+Radu Cimpeanu</a>. 
+ (Imperial College London)
+</CENTER>
+\n
+</TD>
+</TR>
+</TABLE>
+</CENTER>
+
+<HR>
+<HR>
+
+\section theory Theory: The Helmholtz equation for time-harmonic scattering problems
+
+The original formulation for the wave equation and its time harmonic
+ treatment are the primary starting point for the generalisation. The
+ particular source in this case can be found in the scattering example
+ <A HREF="../../../helmholtz/scattering/html/index.html"> 
+/helmholtz/scattering/
+</A> 
+and the next few paragraphs provide an outline for the main
+ theoretical structures of the problem.
+
+The Helmholtz equation governs time-harmonic solutions of problems
+governed by the linear wave equation
+\f[
+\nabla^2 U(x,y,t) = \frac{1}{c^2} \frac{\partial^2 U(x,y,t)}{\partial t^2},
+ \ \ \ \ \ \ \ \ \ \ \ \ @E[lin_wave]@
+\f]
+where \f$ c \f$ is the wavespeed. Assuming that \f$ U(x,y,t) \f$
+is time-harmonic, with frequency \f$ \omega \f$, we write the real
+function \f$ U(x,y,t) \f$ as
+\f[
+U(x,y,t) =\Re (u(x,y) \ e^{-i \omega t})
+\f]
+where \f$ u(x,y) \f$ is complex-valued. This transforms 
+(@R[lin_wave]@) into the Helmholtz equation
+\f[
+\nabla^2 u(x,y) + k^2 u(x,y) = 0
+ \ \ \ \ \ \ \ \ \ \ \ \ @E[helmholtz]@
+\f]
+where 
+\f[
+k = \frac{\omega}{c}
+ \ \ \ \ \ \ \ \ \ \ \ \ @E[wavenumber]@
+\f]
+is the wave number. Like other elliptic PDEs the Helmholtz equation
+admits Dirichlet, Neumann (flux) and Robin boundary conditions.
+
+If the equation is solved in an infinite domain (e.g. in scattering
+problems) the solution must satisfy the so-called
+<a href="http://en.wikipedia.org/wiki/Sommerfeld_radiation_condition">
+Sommerfeld radiation condition</a> which in 2D has the form
+\f[
+\lim_{r\to \infty} \sqrt{r} \left(\frac{\partial u}{\partial r} - iku
+\right) =0. 
+\f]
+Mathematically, this condition is required to ensure the uniqueness
+of the solution (and hence the well-posedness of the problem).
+In a physical context, such as a scattering problem, the condition 
+ensures that scattering of an incoming wave only produces outgoing not 
+incoming waves from infinity.
+
+For the generalization however, several minor modifications have to be
+considered in order to enable the usage of absorption in the physical
+domain, as well as allow for correct construction of the boundary
+layers to be discussed in a future subsection.
+
+To begin with, the wavenumber is redefined to be
+\f[
+k(x,y) = \frac{\omega}{c(x,y)} + i \alpha(x,y)
+ \ \ \ \ \ \ \ \ \ \ \ \ @E[newwavenumber]@
+\f]
+
+Here \f$ \alpha \f$ is used to denote the absorption of the
+propagation medium and is hence spatially dependent. This property
+also extends to the wavespeed definition and in this form the
+Helmholtz equation is capable of representing inhomogeneous domains
+with a reasonable amount of flexibility. 
+
+One further significant modification is the full coupling of real and
+imaginary solutions, such that after multiplication by \f$ c^2 \f$
+across the whole equation, the new form becomes
+ \f[
+ \nabla (c^2 \nabla) (u_R + i u_I) + (\omega^2 - \alpha^2 c^2 + i 2 \alpha \omega c) (u_R + i u_I) = 0
+ \ \ \ \ \ \ \ \ \ \ \ \ @E[newhelmholtz]@
+\f]
+
+The aim is to separate the above equation into its purely real and imaginary parts in order to be able to explicitly write down
+residual and Jacobian contributions. After straightforward arithmetic
+operations, the final equation of interest reduces to
+
+ \f[
+ \nabla(c^2 \nabla) u_R + (\omega^2 - \alpha^2 c^2) u_R - 2 \alpha \omega c u_I 
++ i [\nabla (c^2 \nabla)u_I + 2 \alpha \omega c u_R + (\omega^2 -
+\alpha^2 c^2) u_I] = 0
+ \ \ \ \ \ \ \ \ \ \ \ \ @E[separatedhelmholtz]@
+\f]
+
+<HR>
+<HR>
+
+\section discr Discretisation by finite elements
+The discretisation of the Helmholtz equation itself only requires a trivial
+modification of \c oomph-lib's Helmholtz elements -- we simply modify
+the terms containing  \f$ k \f$ to accomodate for the formulation in
+ \f$ \omega \f$,  \f$ c \f$  and  \f$ \alpha \f$. Since most practical applications
+of the Helmholtz equation involve complex-valued solutions, we provide 
+separate storage for the real and imaginary parts of the solution -- 
+each \c Node therefore stores two unknowns values. By default,
+the real and imaginary parts are stored as values 0 and 1,
+respectively; see the section \ref numbering for details. The full
+coupling of the real and imaginary parts also require further
+modifications to residual and Jacobian entries to correctly capture
+the new form. The exact contributions are however easy to extract from 
+@R[separatedhelmholtz]@.
+
+The application of Dirichlet and Neumann boundary conditions is 
+straightforward and follows the pattern employed for the solution
+of the Poisson equation: 
+- Dirichlet conditions are imposed by pinning the relevant nodal
+  values and setting them to the appropriate prescribed values. 
+  \n\n
+- Neumann (flux) boundary conditions are imposed via 
+  \c FaceElements (here the \c HelmholtzFluxElements). 
+   <a href="../../../poisson/two_d_poisson_flux_bc/html/index.html">
+  As usual</a> we attach these to the faces of the "bulk" elements
+  that are subject to the Neumann boundary conditions.
+.
+
+The imposition of the Sommerfeld radiation condition for problems in
+infinite domains is slightly more complicated. In the current
+generalization this role is attributed to the perfectly matched layers
+which replace the standard boundary conditions with a layer of
+elements with damping properties that allow for a theoretically
+reflectionless interface between the physical domain and the
+artificial domain in which the layers now live. The exact mathematical
+formulation of these layers is described in more detail in the
+following subsection \ref pml.
+
+<HR>
+
+\subsection pml Perfectly matched layers
+
+An intuitive explanation for the usage of perfectly matched layers is
+the analogy to surrounding the physical domain with an artificial
+material with damping properties in such a way that no reflections are
+allowed to form on the interface between the physical and artificial
+media. The exact form of these layers used in the current
+implememntation can be found in
+<a href="http://www.sciencedirect.com/science/article/pii/S0021999106004487">
+Bermudez et al.</a>
+and introduces, as commonly used in the perfectly matched layer framework, a
+complex coordinate transformation taking place inside the layers
+themselves. The imaginary component that justifies the usage of
+complex functions plays the role of an exponential damper, adjusted to
+absorb waves irrespective of their frequency. The flexibility of the
+damping properties, as well as the geometrical advantages of being
+able to replace any constrained setting appearing in classical
+boundary condition applications, are what makes the perfectly matched
+layer very popular.
+
+In a more rigorous formulation, enabling the perfectly matched layer property of anisotropic damping first of all involves splitting the Laplace operators from their general
+form to an adapted anisotropic form
+ \f[
+ \nabla(c^2 \nabla) u =\frac{\partial}{\partial x} \left( c^2
+ \frac{\partial u}{\partial x} \right) + \frac{\partial}{\partial y}\left( c^2 \frac{\partial u}{\partial y}\right)
+ \ \ \ \ \ \ \ \ \ \ \ \ @E[pml1]@
+\f]
+
+in \f$2 \f$ dimensions, where right now the splitting is not
+necessary. However in the next step, with the new complex coordinate
+mapping 
+ \f[
+\frac{\partial}{\partial x_j} \to \frac{1}{\gamma_j} \frac{\partial}{\partial x_j} 
+ \ \ \ \ \ \ \ \ \ \ \ \ @E[cctransform]@
+\f]
+we need to add new coefficients
+
+ \f[
+ \nabla(c^2 \nabla) u = \frac{1}{\gamma_x}\frac{\partial}{\partial x} \left( c^2
+ \frac{1}{\gamma_x}\frac{\partial u}{\partial x} \right) + \frac{1}{\gamma_y}\frac{\partial}{\partial y}\left( c^2 \frac{1}{\gamma_y}\frac{\partial u}{\partial y}\right)
+ \ \ \ \ \ \ \ \ \ \ \ \ @E[pml2]@
+\f]
+
+The notation \f$ \gamma \f$ is reserved for the perfectly matched layer functions currently formulated as follows:
+ \f[
+
+\gamma_{x}(x) & = &
+\begin{cases}
+1 \ \ \mathrm{ if }\   x \in \Omega_D \\
+1+\frac{i}{\omega/c+i\cdot \alpha}\sigma_{x}(x) \ \mathrm{ if }\ x \in \Omega_{A}
+ \end{cases}
+ @E[absorbingfctx]@
+\f]
+
+and, respectively, 
+
+ \f[
+
+\gamma_{y}(y) & = &
+\begin{cases}
+1 \ \ \mathrm{ if }\   y \in \Omega_D \\
+1+\frac{i}{\omega/c+i\cdot \alpha}\sigma_{y}(y) \ \mathrm{ if }\ y\in \Omega_A
+\end{cases}
+@E[absorbingfcty]@
+\f]
+
+where by \f$\Omega_D \f$ the physical domain is denoted, whereas
+\f$\Omega_A \f$ is reserved for the artificial perfectly matched layer domain.
+
+The \f$\gamma- \f$functions represent the specific weights inside the artifical domain. Naturally
+everywhere else the value of these functions is 1. What remains to
+be done is determination of the \f$\sigma \f$-functions, where the
+chosen forms are:
+ \f[
+\sigma_{x}(x)  =  \frac{1}{x^*-x} \textrm{ and }
+\sigma_{y}(y)  =  \frac{1}{y^*-y}  @E[sigmafct]@
+\f]
+
+Each of the functions can be activated/de-activated on a certain
+region of the domain via a construction of type \c PMLHelper::create_right_pml_mesh(bulk_mesh_pt, right_boundary_id, n_x_right_pml, l_x_right_pml);, where the user
+specifies the bulk mesh pointer, the boundary for where the PML is to
+be attached and its sizes in both elements and real world coordinates,
+in relation to the size of the physical domain. These are all used in the computation of the \f$\sigma-\f$functions.
+
+The logic behind this particular form is that
+
+ - the functions are "switching on" the damping gradually, slowly at the beginning and more strongly next to the outer boundary
+ - at the node closest to the border the value should be very high, as it converges to \f$\infty \f$
+ - In the literature it was determined that this shape, which starts from a non-zero value of \f$\sigma \f$ near the physical-artificial interface
+performes best. The paper illustrates a few convincing tests.
+ - The respective coefficients are placed in front of the \f$\sigma \f$ function so as to damp any particular incident wave, by canceling
+the wavenumber and being universally damping rather than custom built.
+
+Note that irrespective of the damping functions used, it is important
+to set the outer boundary conditions on the layers to Dirichlet \f$0
+\f$ for both the real and imaginary parts of the solution. This must
+be done, not only for completeness, but also because even in case the
+waves are not fully damped on first passing, this particular boundary
+condition has the effect of redirecting the waves through the
+absorbing layers again, and thus using their properties a second time
+where needed.
+
+
+<HR>
+<HR>
+
+\section scattering A specific example: Outward propagation of acoustic waves from the surface of a cylindrical object
+
+We will now demonstrate the methodology for a specific example:
+the propagation of acoustic waves as propagated from the surface of a
+circular disk. The particular case was chosen not only for its
+simplicity, but also because it fully tests the strength of the
+perfectly matched layers. In this case, information travels in all
+directions and hence, unless the damping in the artificial layers
+behaves correctly on all levels, severe effects will be noticed in the
+solution.
+
+Since the layer construction requires access to specific physical
+values such as wavespeed and absorption, which may now vary across the
+domain, a non-dimensionalization would not be feasible. The
+implemented form of the equations is described by 
+(@R[separatedhelmholtz]@), with added perfectly matched layers as
+described in \ref pml. 
+
+The specific domain used in this case can be seen in the figure below.
+@I w 0.75\textwidth Mesh "The computational domain used in the example problem. "
+Discretisation of this domain constitutes one of the main challenges
+in the problem. Although in this perfectly matched layer formulation
+the outer boundaries of the physical domain must be axis-aligned (and rectangular at this
+stage), a general and flexible form should ideally be kept for the interior
+domain. 
+
+The option of triangulation would best meet the demands of both worlds,
+under the condition that the artificial domain can then be constructed
+to adapt to any triangulation of the domain. The current
+implementation uses merging between triangular (interior) and
+rectangular (exterior) meshes and axis alignment to ensure optimality
+of information propagation inside the layers. Recall that axis
+alignment is necessary because the damping is anisotropic and hence it
+would be beneficial to utilize this property to its full extent. 
+
+After having constructed the physical triangular mesh, perfectly
+matched layer rectangular meshes are succesively added and aligned
+until all four sides of the rectangle are covered. Subsequently, using
+the information from the recently built meshes, the corner PML meshes
+with damping enabled in both dimensions are constructed so as to
+create an overall rectangular structure from which waves are absorbed
+in all directions.
+
+After having constructed the full system of one physical triangular
+mesh and eight artificial rectangular meshes and the damping is
+enabled in a correct manner, the fully coupled system of equations is
+resolved by the direct solver and the results can be analyzed.
+
+<HR>
+<HR>
+
+\section results Results
+The figures below show the real part of the solution \f$ \Re(u(x,y,t)) \f$
+radiating from a circular disk 
+with a radius of \f$ r=0.1 \f$. 
+The simulation was performed in an 
+triangular computational domain with rectangular exterior boundaries,
+bounded by regular rectangular meshes with enabled perfectly matched layers. 
+
+The only boundary conditions that need to be set are a non-zero
+Dirichlet value on the real part of \f$ u \f$ on the surface of the disk, which in this case is set to be
+\f[
+\Re(u(x,y,t))\bigg|_{\partial R} = 0.1
+\f]
+and Dirichlet \f$ 0 \f$ boundary conditions on the exterior part of
+the domain, after the propagation through the perfectly matched layers
+has already taken place.
+
+@I w 0.6\textwidth Soln2D "Sample solution with activated perfectly matched layers. "
+
+@I w 0.6\textwidth SolnHeight "Sample solution with activated perfectly matched layers -- height view. "
+
+From the two images, one can notice the clean circular solution across
+the domain. Had the perfectly matched layers not been effective,
+artifacts in the form of irregular structures would have been observed
+throughout the surface. The specific PML-related parameters used are
+an attributed layer of \f$ 3 \f$ elements for the PML in each
+dimension, on a size described as \f$ 10\% \f$ of the physical domain
+on each side.
+
+An even more convincing example would be
+completely ignoring the layers and simply using zero flux boundary
+conditions on the exterior domain. The two images below display the result of this exploration, which
+show heavy reflections and an overall behaviour of the solution that
+in no way resembles the expected result.
+
+
+@I w 0.6\textwidth ZeroFlux2D "The solution with zero flux boundary conditions. "
+
+@I w 0.6\textwidth ZeroFluxHeight "The solution with zero flux boundary conditions -- height view. "
+
+<HR>
+<HR>
+
+\section num_soln The numerical solution
+
+\subsection namespace The global namespace
+
+As usual, we define the problem parameters in a global namespace.
+The main physical parameters are the frequency \f$ \Omega \f$, the
+wavespeed \f$ c \f$ and the absorption coefficient
+\f$ \alpha \f$. 
+ 
+\dontinclude unstructured_two_d_helmholtz.cc
+\skipline   /// Setting of frequency across the entire domain 
+\until } // end of namespace 
+
+<HR>
+<HR>
+
+\subsection main The driver code
+The driver code is very straightforward. There are no specific
+parameters that need to be parsed. Adaptivity is currently included as
+an option, however its usage for wave propagation problem in a
+triangulated environment is a questionable upgrade at best. Therefore
+the preset form of the code is not adaptive, however can be easily
+transformed to become adaptive by including the simple command \c
+#define ADAPTIVE at the start of the driver code. 
+
+\dontinclude unstructured_two_d_helmholtz.cc
+\skipline start_of_main
+\until  CommandLineArgs::doc_specified_flags(); 
+
+Next we build the problem, either with or without enabling spatial
+adaptivity and define the output directory.
+
+\until RESLT
+
+Finally, we solve the problem and document the results.
+
+\until } //end of main
+
+ 
+<HR>
+<HR>
+
+\subsection class The problem class
+
+The problem class is very similar to that employed for 
+the <a href="../../../helmholtz/scattering/html/index.html">
+solution of the 2D Helmholtz equation with flux boundary
+conditions.</a> The only difference is that one must now take into
+account that we need four new standard PML meshes that are to be glued
+to the triangular mesh and four corner PML meshes that need to be
+constructed based on the existing rectangular PML meshes.
+
+\dontinclude unstructured_two_d_helmholtz.cc
+\skipline start_of_problem_class
+\until }; // end of problem class
+
+
+<HR>
+<HR>
+
+\subsection constr The problem constructor
+
+We start by building the bulk mesh, using the refineable or
+non-refineable version of the \c TriangleMesh, depending on the
+macro \c ADAPTIVE. For this we need to specify the parameters for the
+inner circle that serves as the source for outgoing waves
+
+
+\dontinclude unstructured_two_d_helmholtz.cc
+\skipline start_of_constructor
+\until  // Outer boundary
+
+followed by the description of the outer rectangular boundary
+
+\until outer_boundary_pt = new TriangleMeshPolygon(outer_boundary_line_pt);
+
+Next we specify a certain resolution my beans of adjusting either the
+adaptivity parameters or the area of the triangles in the mesh via
+
+\until #endif
+
+Based on specific boundary id's, we prescribe rectangular meshes that
+are extended three elements wide and with a size that is \f$ 10 \% \f$
+of the bulk mesh. The various submeshes are created and the global
+mesh is constructed from its nine submeshes.
+
+\until  build_global_mesh();
+
+Notice that the meshes have to be constructed in a specific
+order. Furthermore, it is useful to note that the domain needs to be
+centered around \f$ (0,0) \f$ for this mesh construction to work, as
+it assumes coordinates varying from negative to positive in each
+direction. Simple translation of any mesh will provide a solution to
+this problem.
+
+At this stage, the perfectly matched layer properties are fully
+enabled, as they are adjusted by the preset element number and
+physical size.
+
+Finally, we complete the build of the various elements by
+by passing pointers to the relevant quantities to them,
+and assign the equation numbers. 
+
+\until } // end of constructor
+
+The problem is now ready to be solved.
+
+<HR>
+<HR>
+
+\subsection before_adapt Actions before adapt
+The mesh adaptation is driven by the error estimates for the bulk
+elements. The various \c PMLQuadMesh and \c PMLCornerQuadMesh
+constructions must be removed before rebuilding the Problem's global mesh.
+
+\dontinclude unstructured_two_d_helmholtz.cc
+\skipline start_of_actions_before_adapt
+\until }// end of actions_before_adapt
+
+
+<HR>
+<HR>
+
+\subsection after_adapt Actions after adapt
+After the (bulk-)mesh has been adapted, the PML meshes must be
+reattached and the element properties redeclared over the entire
+rebuilt mesh.
+
+\dontinclude unstructured_two_d_helmholtz.cc
+\skipline start_of_actions_after_adapt
+\until }// end of actions_after_adapt
+
+
+<HR>
+<HR>
+
+
+\subsection create_flux Setting boundary conditions
+The function \c set_prescribed_incoming_flux_pt() is modified in this
+case to prescribe simple Dirichlet boundary conditions for the real
+part of the unknown on the surface of the disk only, given by boundary
+ids 0 and 1 in the current form. This is performed, as customary, by
+pinning the boundary values and declaring values for both the real
+(non-zero) and imaginary (zero) parts.
+
+\dontinclude unstructured_two_d_helmholtz.cc
+\skipline //==================start_of_set_prescribed_incoming_flux_pt
+\until end of set prescribed_incoming_flux pt
+
+The flux boundary condition can be easily activated, should they be
+preferred over the current Dirichlet BC setting, which best puts the
+perfectly matched layers to the test.
+
+<HR>
+<HR>
+
+
+\subsection doc Post-processing
+The post-processing function \c doc_solution(...) simply outputs the
+computed solution, without any reference to an actual analytical
+solution. This could be re-enabled if a specific test case with a
+known analytical solution is designed.  
+
+\dontinclude unstructured_two_d_helmholtz.cc
+\skipline //=====================start_of_doc=======================================
+\until  some_file.close();
+
+
+<HR>
+<HR>
+
+\section comm_ex Comments and Exercises
+\subsection numbering The enumeration of the unknowns
+As discussed in the introduction, most practically relevant
+solutions of the Helmholtz equation are complex valued. Since \c oomph-lib's 
+solvers only deal with real (double precision) unknowns, the equations
+are separated into their real and imaginary parts.
+In the implementation of the Helmholtz elements, we store the real
+and imaginary parts of the solution as two separate values at each 
+node. By default, the real and imaginary parts are accessible via 
+\c Node::value(0) and \c Node::value(1). However, to facilitate the use of the elements
+in multi-physics problems we avoid accessing the unknowns
+directly in this manner but provide the virtual function
+\code
+std::complex<unsigned> HelmholtzEquations<DIM>::u_index_helmholtz()
+\endcode
+which returns a complex number made of the two unsigneds that indicate
+which nodal value represents the real and imaginary parts of the solution.
+This function may be overloaded in combined multi-physics elements
+in which a Helmholtz element is combined (by multiple inheritance) 
+with another element, using the strategy described in 
+<a href="../../../multi_physics/b_convection/html/index.html">
+the Boussinesq convection tutorial</a>.
+
+The ability to prescribe perfectly matched layers correctly also
+derives from this property of the current implementation. As they are
+formally a complex coordinate mapping, without the coupling, the
+construction would not be possible.
+
+\subsection dampingfct Damping functions
+The choice for the absorbing functions in this implementation is of
+course not unique. There are alternatives varying in both order and
+continuity properties. The current form is the result of several
+feasibility studies and comparisons found in both
+<a href="http://www.sciencedirect.com/science/article/pii/S0021999106004487">
+Bermudez et al.</a>
+and in the relevant papers
+<a href="http://imperial.academia.edu/RaduCimpeanu/Papers">
+here</a>. These damping functions produce an acceptable result in most
+practical situations without further modifications. For very specific
+applications, alternatives may need to be used.
+
+<HR>
+
+\subsection ex Exercises
+\subsubsection pmlsize Changing perfectly matched layer parameters
+Confirm that a very low number of elements attributed to the perfectly
+matched layers, even \f$ 2 \f$, are still
+effective in terms of damping. Furthermore, show and try to explain
+why too many elements may not perform as expected. A second parameter
+that can be adjusted is the physical length of the perfectly matched
+layers. As mentioned before in \ref pml, an outer boundary of the
+layer which is close to the interface performs better than layers
+extending on very large regions with few elements attributed to
+them. Test this and try to find an explanation for the phenomenon
+given the exact form of the absorbing functions used in the complex
+coordinate transformation.
+
+\subsubsection inhomogeneous Inhomogeneous domains
+Explore the enabling of setting
+inhomogeneous elements in the domain by modifying \f$ c \f$ and \f$
+\alpha \f$ in specific areas (not the entire domain) only. How do the
+perfectly matched layers behave in this situation. What would cause
+potential "unexpected" artifacts in the solution. Try to consider a
+physical explanation of the phenomenon. 
+
+\subsubsection resolution High wavenumber treatment
+For Helmholtz problems in general,
+ill-conditioning appears as the wavenumber becomes very high. By
+altering wavespeed and/or frequency, explore the limitations of both
+the mesh and the solvers in terms of this parameter. Try adjusting the
+area and initial refinement level in general in order to alleviate
+resolution-related effects. Notice the effect of the perfectly matched
+layers on high wavenumber problems vs. few ones. Does anything change?
+Are they still effective? If not, based on the first problem in this tutorial, try changing
+their properties in order to better suit the new problem.
+
+<HR>
+<HR>
+
+
+\section sources Source files for this tutorial
+- The source files for this tutorial are located in the directory:\n\n
+  <CENTER>
+  <A HREF="../../../../demo_drivers/generalised_helmholtz/scattering">
+  demo_drivers/generalised_helmholtz/scattering/
+  </A>
+  </CENTER>\n
+- The driver code is: \n\n
+  <CENTER>
+  <A HREF="../../../../demo_drivers/generalised_helmholtz/scattering/unstructured_two_d_helmholtz.cc">
+  demo_drivers/generalised_helmholtz/scattering/unstructured_two_d_helmholtz.cc
+  </A>
+  </CENTER>
+.
+
