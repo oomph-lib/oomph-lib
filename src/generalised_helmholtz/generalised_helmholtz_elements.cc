@@ -1568,7 +1568,7 @@ void  GeneralisedHelmholtzEquations<DIM>::output(std::ostream &outfile,
    
    // Get local coordinates of plot point
    get_s_plot(iplot,nplot,s);
-   std::complex<double> u(interpolated_u_helmholtz(s));
+   std::complex<double> u(interpolated_u_generalised_helmholtz(s));
    for(unsigned i=0;i<DIM;i++) 
     {
      outfile << interpolated_x(s,i) << " ";
@@ -1615,7 +1615,7 @@ void  GeneralisedHelmholtzEquations<DIM>::output_real(std::ostream &outfile,
    
    // Get local coordinates of plot point
    get_s_plot(iplot,nplot,s);
-   std::complex<double> u(interpolated_u_helmholtz(s));
+   std::complex<double> u(interpolated_u_generalised_helmholtz(s));
    for(unsigned i=0;i<DIM;i++) 
     {
      outfile << interpolated_x(s,i) << " ";
@@ -1659,7 +1659,7 @@ void  GeneralisedHelmholtzEquations<DIM>::output_imag(std::ostream &outfile,
    
    // Get local coordinates of plot point
    get_s_plot(iplot,nplot,s);
-   std::complex<double> u(interpolated_u_helmholtz(s));
+   std::complex<double> u(interpolated_u_generalised_helmholtz(s));
    for(unsigned i=0;i<DIM;i++) 
     {
      outfile << interpolated_x(s,i) << " ";
@@ -1697,7 +1697,7 @@ void  GeneralisedHelmholtzEquations<DIM>::output(FILE* file_pt,
   {
    // Get local coordinates of plot point
    get_s_plot(iplot,nplot,s);
-   std::complex<double> u(interpolated_u_helmholtz(s));
+   std::complex<double> u(interpolated_u_generalised_helmholtz(s));
 
    for(unsigned i=0;i<DIM;i++) 
     {
@@ -1947,7 +1947,7 @@ void GeneralisedHelmholtzEquations<DIM>::compute_error(std::ostream &outfile,
    interpolated_x(s,x);
    
    // Get FE function value
-   std::complex<double> u_fe=interpolated_u_helmholtz(s);
+   std::complex<double> u_fe=interpolated_u_generalised_helmholtz(s);
    
    // Get exact solution at this point
    (*exact_soln_pt)(x,exact_soln);
@@ -1969,6 +1969,61 @@ void GeneralisedHelmholtzEquations<DIM>::compute_error(std::ostream &outfile,
   }
 }
 
+
+
+
+//======================================================================
+ /// Compute norm of fe solution
+//======================================================================
+template <unsigned DIM>
+void GeneralisedHelmholtzEquations<DIM>::compute_norm(double& norm)
+{ 
+ 
+ // Initialise
+ norm=0.0;
+ 
+ //Vector of local coordinates
+ Vector<double> s(2);
+ 
+ // Vector for coordintes
+ Vector<double> x(2);
+ 
+ //Find out how many nodes there are in the element
+  unsigned n_node = nnode();
+  
+  Shape psi(n_node);
+  
+  //Set the value of n_intpt
+  unsigned n_intpt = integral_pt()->nweight();
+  
+  //Loop over the integration points
+  for(unsigned ipt=0;ipt<n_intpt;ipt++)
+   {
+    
+    //Assign values of s
+    for(unsigned i=0;i<2;i++)
+     {
+      s[i] = integral_pt()->knot(ipt,i);
+     }
+    
+    //Get the integral weight
+    double w = integral_pt()->weight(ipt);
+    
+    // Get jacobian of mapping
+    double J=J_eulerian(s);
+    
+    //Premultiply the weights and the Jacobian
+    double W = w*J;
+    
+    // Get FE function value
+    std::complex<double> u_fe=interpolated_u_generalised_helmholtz(s);
+    
+    // Add to  norm
+    norm+=(u_fe.real()*u_fe.real()+u_fe.imag()*u_fe.imag())*W;
+    
+   }
+ }
+ 
 //====================================================================
 // Force build of templates
 //====================================================================

@@ -259,7 +259,7 @@ PoissonFluxElement(FiniteElement* const &bulk_el_pt,
          OOMPH_EXCEPTION_LOCATION);
        }
      }
-   delete ELEMENT;
+    delete elem_pt;
    }
 #endif   
 

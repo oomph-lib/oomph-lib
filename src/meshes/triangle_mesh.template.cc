@@ -4418,8 +4418,10 @@ restore_connections_on_internal_boundary(
   TriangleMeshPolyLine* polyline_pt)
   {
 
+#ifdef PARANOID
   // Get the associated boundary id of the current polyline
   unsigned bnd_id = polyline_pt->boundary_id();
+#endif
 
   // Verify if this polyline is connected to another polyline
 

@@ -2,7 +2,7 @@
 
 
 #Set the number of tests to be checked
-NUM_TESTS=1
+NUM_TESTS=2
 
 
 # Setup validation directory
@@ -11,13 +11,13 @@ touch Validation
 rm -r -f Validation
 mkdir Validation
 
-# Validation for adaptive scattering
+# Validation for non-adaptive scattering
 #-----------------------------------
 cd Validation
 
 echo "Running unstructured PML scattering"
 mkdir RESLT
-../unstructured_two_d_helmholtz --validation > OUTPUT
+../unstructured_two_d_helmholtz > OUTPUT_non_adapt
 echo "done"
 echo " " >> validation.log
 echo "Running unstructured PML scattering" >> validation.log
@@ -27,7 +27,7 @@ echo "Validation directory: " >> validation.log
 echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
-cat RESLT/soln0.dat > pml_scattering_results.dat
+cat RESLT/trace.dat > pml_scattering_results.dat
 
 if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
@@ -36,6 +36,32 @@ else
     pml_scattering_results.dat  >> validation.log
 fi
 mv RESLT RESLT_non_adapt
+
+
+# Validation for adaptive scattering
+#-----------------------------------
+
+echo "Running adaptive unstructured PML scattering"
+mkdir RESLT
+../unstructured_two_d_helmholtz_adapt > OUTPUT_adapt
+echo "done"
+echo " " >> validation.log
+echo "Running adaptive unstructured PML scattering" >> validation.log
+echo "--------------------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat RESLT/trace.dat > pml_adaptive_scattering_results.dat
+
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../../bin/fpdiff.py ../validata/pml_scattering_results.dat.gz   \
+    pml_scattering_results.dat  >> validation.log
+fi
+mv RESLT RESLT_adapt
 
 
 

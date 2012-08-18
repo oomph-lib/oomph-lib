@@ -1387,6 +1387,10 @@ public:
     OOMPH_EXCEPTION_LOCATION);
   }
 
+
+ /// Compute norm of fe solution
+ void compute_norm(double& norm);
+ 
  /// Access function: Pointer to source function
  GeneralisedHelmholtzSourceFctPt& source_fct_pt() {return Source_fct_pt;}
 
@@ -1524,7 +1528,7 @@ public:
  /// \short Return FE representation of function value u_helmholtz(s) 
  /// at local coordinate s
  inline std::complex<double> 
-  interpolated_u_helmholtz(const Vector<double> &s) const
+  interpolated_u_generalised_helmholtz(const Vector<double> &s) const
   {
    //Find number of nodes
    const unsigned n_node = nnode();
