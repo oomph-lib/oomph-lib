@@ -1,4 +1,4 @@
-\mainpage Example problem: The generalised Helmholtz equation and use of perfectly matched layers
+\mainpage Example problem: The generalised Helmholtz equation and the use of perfectly matched layers
 
 
 
@@ -28,7 +28,7 @@ waves from the surface of a cylinder.
 This tutorial and the associated driver codes were developed jointly
 with
 <a href="http://imperial.academia.edu/RaduCimpeanu">
-Radu Cimpeanu</a>. 
+Radu Cimpeanu</a>
  (Imperial College London)
 </CENTER>
 \n
@@ -118,23 +118,18 @@ which can be decomposed into real and imaginary part as
 
 \section discr Discretisation by finite elements
 The discretisation of the Helmholtz equation itself only requires a trivial
-modification of \c oomph-lib's Helmholtz elements -- we simply modify
-the terms containing  \f$ k \f$ to accomodate for the formulation in
+modification of \c oomph-lib's Helmholtz elements -- we simply rewrite
+the terms containing  \f$ k \f$ in
 terms of \f$ \omega \f$,  \f$ c \f$  and  \f$ \alpha \f$. Since most practical 
 applications
 of the Helmholtz equation involve complex-valued solutions, we provide 
 separate storage for the real and imaginary parts of the solution -- 
 each \c Node therefore stores two unknowns values. By default,
 the real and imaginary parts are stored as values 0 and 1,
-respectively; see the section \ref numbering for details. The full
-coupling of the real and imaginary parts also require further
-modifications to residual and Jacobian entries to correctly capture
-the new form. The exact contributions are however easy to extract from 
-(@R[separatedhelmholtz]@).
+respectively; see the section \ref numbering for details. 
 
 The application of Dirichlet and Neumann boundary conditions is 
-straightforward and follows the pattern employed for the solution
-of the Poisson equation: 
+straightforward:
 - Dirichlet conditions are imposed by pinning the relevant nodal
   values and setting them to the appropriate prescribed values. 
   \n\n
@@ -165,7 +160,7 @@ of the solution at large distances from the region of interest
 (the vicinity of the scatterer, say).
 
 If computations are performed in a finite computational domain, \f$
-D_c \f$ , (shown in the middle) spurious wave reflections are likely to  
+D_c \f$ , (shown in the middle), spurious wave reflections are likely to  
 be generated at the artificial boundary \f$
 \partial D_c \f$ of the computational domain.
 
@@ -185,7 +180,7 @@ A. Bermudeza, L. Hervella-Nietob, A. Prietoa, and
 R. Rodriguezc "An optimal perfectly matched layer with unbounded 
 absorbing function for time-harmonic acoustic scattering problems"
 Journal of Computational Physics <b>223</b> 469-488 (2007)</a>
-and we assume the boundaries of the computational domain are aligned
+and we assume the boundaries of the computational domain to be aligned
 with the coordinate axes, as shown in the sketch above.
 
 The method requires a slight further generalisation of the equations, 
@@ -284,9 +279,9 @@ set to 1.
 boundaries of a given bulk mesh is faciliated by helper
 functions which automatically erect layers of (quadrilateral)
 PML elements. The layers are built from 
-\c QGeneralisedHelmholtzElement<2,NNODE_1D> and
-the parameter \c NNODE_1D  chosen to match that in the bulk mesh.
-We note that the bulk mesh can contain quads or triangles
+\c QGeneralisedHelmholtzElement<2,NNODE_1D> elements and
+the parameter \c NNODE_1D is automatically chosen to match that of
+the elements in the bulk mesh. The bulk mesh can contain quads or triangles
 (as shown in the specific example presented below).
 
 For instance, to erect a PML layer (of width \c width, with \c n_pml elements
@@ -297,7 +292,7 @@ bulk_mesh_pt, a call to
 PMLHelper::create_right_pml_mesh(bulk_mesh_pt, b_bulk, n_pml, width);
 \endcode
 returns a pointer to a newly-created mesh that contains the 
-required elements which are automatically attached to the 
+PML elements which are automatically attached to the 
 boundary of the bulk mesh (i.e. the \c Nodes on the
 outer boundary of the bulk mesh are shared (pointed to), rather than
 duplicated, by the
@@ -324,7 +319,7 @@ boundaries and 3D is straightforward (if tedious) to implement
 We will now demonstrate the methodology for a specific example:
 the propagation of axisymmetric waves from the surface of a
 circular disk. This is a good test case because any deviations from the
-axisymmetry of the (exact) solution by spuriuos reflections
+axisymmetry of the (exact) solution by spurious reflections
 from the boundaries of the computational domain are easy to 
 detect visually.
 
@@ -361,7 +356,7 @@ the domain. Had the perfectly matched layers not been effective,
 artifacts caused by the spurious reflections from the domain
 boundaries would have been observed throughout the domain. 
 
-This is demonstrated by following two figures which show the solution
+This is demonstrated by the following two figures which show the solution
 obtained without the PML layers (and "do-nothing" (zero-flux) boundary
 conditions on the outer boundaries of the computational domain).
 The spurious reflections from the boundaries completely
@@ -429,7 +424,7 @@ conditions.</a> We provide helper functions to create the
 PML meshes and to apply the boundary conditions (mainly
 because these tasks have to be performed repeatedly in 
 the spatially adaptive version this code which is not discussed
-explcitly here, but see \ref comm_ex ).
+explicitly here; but see \ref comm_ex ).
 
 \dontinclude unstructured_two_d_helmholtz.cc
 \skipline start_of_problem_class
@@ -462,8 +457,8 @@ and define the polygonal outer boundary of the computational domain.
 
 \until outer_boundary_pt = new TriangleMeshPolygon(outer_boundary_line_pt);
 
-Next we define the curvilinar inner boundary in terms of two
-\c TriangleMeshCurviLines which define a hole in the domain:
+Next we define the curvilinear inner boundary in terms of two
+\c TriangleMeshCurviLines which define the hole in the domain:
 
 \until hole_coords);
 
@@ -479,6 +474,7 @@ and build the bulk mesh
 We create the PML meshes and add them (and the bulk mesh) 
 to the Problem's collection of sub-meshes and build the global mesh.
 
+\skipline Create the main triangular mesh
 \until  build_global_mesh();
 
 Next we pass the problem parameters to all elements (remember that
@@ -549,8 +545,7 @@ the Boussinesq convection tutorial</a>.
 
 \subsection dampingfct PML damping functions
 The choice for the absorbing functions in our implementation of
-the PMLs is of
-course not unique. There are alternatives varying in both order and
+the PMLs is not unique. There are alternatives varying in both order and
 continuity properties. The current form is the result of several
 feasibility studies and comparisons found in both
 <a href="http://www.sciencedirect.com/science/article/pii/S0021999106004487">
@@ -569,8 +564,10 @@ existing framework.
 \subsubsection pmlsize Changing perfectly matched layer parameters
 Confirm that only a very small number of PML elements (across the thickness
 of the PML layer) is required to effectively damp the outgoing waves.
-Furthermore, show that (and try to explain why) too many elements may 
-not perform as expected. A second parameter
+Furthermore, show that (and try to explain why) PMLs with too many 
+elements may not perform as expected. 
+
+A second parameter
 that can be adjusted is the geometrical thickness of the perfectly matched
 layers. Relative thin layers layer tend to perform better than thick layers
 with few elements across their width. Confirm this and try to 
@@ -611,7 +608,7 @@ in the PML layers.
 Following our usual convention, we provide default values
 for problem parameters where this is sensible. For instance,
 if the pointer to the damping function is not set, we assume
-that there is no damping. 
+that there is no damping, i.e. \f$ \alpha(x,y)=0. \f$
 
 
 <b>RADU: Query -- it doesn't really make sense to assign default
@@ -624,6 +621,23 @@ assingments and throw an error if the pointers aren't set?
 Confirm that this is the case by commenting out the relevant
 assignments.
 
+\subsubsection non_convex Non-convex PML boundaries
+As discussed above, we currently provide helper functions to 
+attach PML layers to axis-aligned boundaries of 2D meshes with
+convex outer boundaries. Essentially, this restricts us to 
+rectangular computational domains. Extend this capability by developing
+methodologies to 
+- deal with non-convex domain boundaries. We suggest you
+  create PML meshes for the non-convex corners first, then
+  create the axis-aligned meshes (note that these have to 
+  share nodes with the already-created elements that occupy the
+  non-convex corners), and then create the corner meshes
+  for the convex corners (as before). When you're done, let
+  us know -- this would be a really useful addition to
+  oomph-lib's machinery. We're happy to help!
+- Repeat the same exercise in 3D -- somewhat less trivial
+  (so we're even keener for somebody to have a go!)
+.
 
 <HR>
 <HR>

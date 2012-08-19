@@ -26,8 +26,8 @@
 //LIC// 
 //LIC//
 //LIC//======================================================================
-/// \short Driver for a specific 2D Helmholtz problem with 
-/// perfectly matched layer treatment for the exterior boundaries 
+// Driver for a specific 2D Helmholtz problem with 
+// perfectly matched layer treatment for the exterior boundaries 
 
 #include<fenv.h>
 
@@ -80,21 +80,22 @@ namespace GlobalParameters
 /////////////////////////////////////////////////////////////////////
 
 //========= start_of_problem_class=====================================
-/// Problem class to compute scattering of planar wave from unit disk
+/// Problem class to demonstrate use of perfectly matched layers
+/// for Helmholtz problems.
 //=====================================================================
 template<class ELEMENT> 
-class ScatteringProblem : public Problem
+class PMLProblem : public Problem
 {
 
 public:
  
  /// Constructor
- ScatteringProblem();
+ PMLProblem();
  
  /// Destructor (empty)
- ~ScatteringProblem(){}
+ ~PMLProblem(){}
 
- /// \short Update the problem specs before solve (empty)
+ /// Update the problem specs before solve (empty)
  void actions_before_newton_solve(){} 
 
  /// Update the problem specs after solve (empty)
@@ -104,7 +105,7 @@ public:
  /// output gets written to
  void doc_solution(DocInfo& doc_info);
  
- /// \short Create PML meshes
+ /// Create PML meshes
  void create_pml_meshes();
 
  // Apply boundary conditions
@@ -173,19 +174,14 @@ private:
 /// Constructor for Helmholtz problem
 //========================================================================
 template<class ELEMENT>
-ScatteringProblem<ELEMENT>::
-ScatteringProblem()
+PMLProblem<ELEMENT>::PMLProblem()
 { 
 
  // Open trace file
  Trace_file.open("RESLT/trace.dat");
  
- // Setup "bulk" mesh
-  
- // Inner radius
+ // Create circle representing inner boundary
  double a=0.2;
- 
- // Create circles representing inner and outer boundary
  double x_c=0.0;
  double y_c=0.0;
  Circle* inner_circle_pt=new Circle(x_c,y_c,a);
@@ -197,8 +193,8 @@ ScatteringProblem()
  unsigned n_segments = 20;
  Vector<TriangleMeshCurveSection*> outer_boundary_line_pt(4);
  
- /// \short Each polyline only has three vertices, provide storage for their
- /// coordinates
+ // Each polyline only has three vertices, provide storage for their
+ // coordinates
  Vector<Vector<double> > vertex_coord(2);
  for(unsigned i=0;i<2;i++)
   {
@@ -361,7 +357,7 @@ ScatteringProblem()
 /// Actions before adapt: Wipe the mesh of face elements
 //========================================================================
 template<class ELEMENT>
-void ScatteringProblem<ELEMENT>::actions_before_adapt()
+void PMLProblem<ELEMENT>::actions_before_adapt()
 {
  // Before adapting the added PML meshes must be removed
  // as they are not refineable and are to be rebuilt from the
@@ -401,7 +397,7 @@ void ScatteringProblem<ELEMENT>::actions_before_adapt()
 ///  Actions after adapt: Rebuild the face element meshes
 //========================================================================
 template<class ELEMENT>
-void ScatteringProblem<ELEMENT>::actions_after_adapt()
+void PMLProblem<ELEMENT>::actions_after_adapt()
 {
 
  // Build PML meshes  and add them to the global mesh
@@ -443,7 +439,7 @@ void ScatteringProblem<ELEMENT>::actions_after_adapt()
 /// Apply boundary conditions
 //========================================================================
 template<class ELEMENT>
-void ScatteringProblem<ELEMENT>::apply_boundary_conditions()
+void PMLProblem<ELEMENT>::apply_boundary_conditions()
 {
 
  // Boundary conditions are set on the surface of the circle
@@ -474,8 +470,7 @@ void ScatteringProblem<ELEMENT>::apply_boundary_conditions()
 /// Doc the solution: doc_info contains labels/output directory etc.
 //========================================================================
 template<class ELEMENT>
-void ScatteringProblem<ELEMENT>::doc_solution(DocInfo& 
-                                              doc_info) 
+void PMLProblem<ELEMENT>::doc_solution(DocInfo& doc_info) 
 { 
 
  ofstream some_file,some_file2;
@@ -524,7 +519,7 @@ void ScatteringProblem<ELEMENT>::doc_solution(DocInfo&
 /// Create PML meshes and add them to the problem's sub-meshes
 //============================================================================
 template<class ELEMENT>
-void ScatteringProblem<ELEMENT>::create_pml_meshes()
+void PMLProblem<ELEMENT>::create_pml_meshes()
 {
 
  // Bulk mesh left boundary id
@@ -630,23 +625,23 @@ int main(int argc, char **argv)
  
  // Set up the problem with projectable 2D six-node elements from the
  // TGeneralisedHelmholtzElement family.
- ScatteringProblem<ProjectableGeneralisedHelmholtzElement
+ PMLProblem<ProjectableGeneralisedHelmholtzElement
   <TGeneralisedHelmholtzElement<2,3> > > problem;
 
  // Set up the problem with 2D ten-node elements from the
  // TGeneralisedHelmholtzElement family. 
- //  ScatteringProblem<ProjectableGeneralisedHelmholtzElement
+ //  PMLProblem<ProjectableGeneralisedHelmholtzElement
  //   <TGeneralisedHelmholtzElement<2,4> > > problem;
 
 #else
  
  // Set up the problem with 2D six-node elements from the
  // TGeneralisedHelmholtzElement family. 
- ScatteringProblem<TGeneralisedHelmholtzElement<2,3> >  problem;
+ PMLProblem<TGeneralisedHelmholtzElement<2,3> >  problem;
 
  // Set up the problem with 2D ten-node elements from the
  // TGeneralisedHelmholtzElement family. 
- //   ScatteringProblem<TGeneralisedHelmholtzElement<2,4> >  problem;
+ //   PMLProblem<TGeneralisedHelmholtzElement<2,4> >  problem;
 
 #endif
  
