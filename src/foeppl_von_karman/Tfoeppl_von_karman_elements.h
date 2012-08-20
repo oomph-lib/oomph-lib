@@ -36,7 +36,6 @@
 #endif
 
 
-// hierher
 //OOMPH-LIB headers
 #include "../generic/nodes.h"
 #include "../generic/oomph_utilities.h"
@@ -57,8 +56,8 @@ namespace oomph
 
 
 //======================================================================
-/// TFoepplvonKarmanElement<DIM,NNODE_1D> elements are isoparametric
-/// triangular DIM-dimensional Foeppl von Karman elements with NNODE_1D
+/// TFoepplvonKarmanElement<NNODE_1D> elements are isoparametric
+/// triangular 2-dimensional Foeppl von Karman elements with NNODE_1D
 /// nodal points along each element edge. Inherits from TElement and
 /// FoepplvonKarmanEquations
 //======================================================================
@@ -160,19 +159,6 @@ protected:
                                                      DShape &dtestdx)
   const;
 
- /// \short Shape/test functions and derivs w.r.t. to global coords at
- /// integration point ipt; return Jacobian of mapping (J). Also compute
- /// derivatives of dpsidx, dtestdx and J w.r.t. nodal coordinates.
- inline double dshape_and_dtest_eulerian_at_knot_fvk(
-  const unsigned &ipt,
-  Shape &psi,
-  DShape &dpsidx,
-  RankFourTensor<double> &d_dpsidx_dX,
-  Shape &test,
-  DShape &dtestdx,
-  RankFourTensor<double> &d_dtestdx_dX,
-  DenseMatrix<double> &djacobian_dX) const;
-
  /// \short Order of recovery shape functions for Z2 error estimation:
  /// Same order as shape functions.
  unsigned nrecovery_order() {return (NNODE_1D-1);}
@@ -182,7 +168,7 @@ protected:
 
  /// Get 'flux' for Z2 error recovery:  Standard flux.from FvK equations
  void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
-  {this->get_flux(s,flux);}
+  {this->get_gradient_of_deflection(s,flux);}
 
  /// \short Number of vertex nodes in the element
  unsigned nvertex_node() const
@@ -269,45 +255,6 @@ dshape_and_dtest_eulerian_at_knot_fvk(
 }
 
 
-
-//======================================================================
-/// Define the shape functions (psi) and test functions (test) and
-/// their derivatives w.r.t. global coordinates (dpsidx and dtestdx)
-/// and return Jacobian of mapping (J). Additionally compute the
-/// derivatives of dpsidx, dtestdx and J w.r.t. nodal coordinates.
-///
-/// Galerkin: Test functions = shape functions
-//======================================================================
-template<unsigned NNODE_1D>
- double TFoepplvonKarmanElement<NNODE_1D>::
- dshape_and_dtest_eulerian_at_knot_fvk(
-  const unsigned &ipt,
-  Shape &psi,
-  DShape &dpsidx,
-  RankFourTensor<double> &d_dpsidx_dX,
-  Shape &test,
-  DShape &dtestdx,
-  RankFourTensor<double> &d_dtestdx_dX,
-  DenseMatrix<double> &djacobian_dX) const
- {
-  // Call the geometrical shape functions and derivatives
-  const double J = this->dshape_eulerian_at_knot(ipt,psi,dpsidx,
-                                                 djacobian_dX,d_dpsidx_dX);
-
-  // Set the pointers of the test functions
-  test = psi;
-  dtestdx = dpsidx;
-  d_dtestdx_dX = d_dpsidx_dX;
-
-  //Return the jacobian
-  return J;
-}
-
-
-//mjr
-//Look into this - with dimension fixed to 2, the FaceGeometry elements
-//are 1D, so do we need the TElement<1,NNODE_1D> version and/or the
-//PointElement version? Probably just the PointElement one.
 //=======================================================================
 /// Face geometry for the TFoepplvonKarmanElement elements: The spatial
 /// dimension of the face elements is one lower than that of the
@@ -326,22 +273,6 @@ class FaceGeometry<TFoepplvonKarmanElement<NNODE_1D> >:
  FaceGeometry() : TElement<1,NNODE_1D>() {}
 
 };
-
-////=======================================================================
-///// Face geometry for the 1D TFoepplvonKarmanElement elements: Point elements
-////=======================================================================
-//template<unsigned NNODE_1D>
-//class FaceGeometry<TFoepplvonKarmanElement<1,NNODE_1D> >:
-// public virtual PointElement
-//{
-//
-//  public:
-//
-// /// \short Constructor: Call the constructor for the
-// /// appropriate lower-dimensional TElement
-// FaceGeometry() : PointElement() {}
-//
-//};
 
 }
 

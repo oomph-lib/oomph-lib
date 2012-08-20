@@ -44,9 +44,7 @@ namespace TestSoln
 {
  double A = 1.0;
  double B = 2.0;
- //double lambda =  8.882558072182224e+09;
  double lambda = 1;
- //double eta = 25.917355371900832;
  double eta = 1;
  // The bubble radius
  double r_b = 0.1;
@@ -62,14 +60,6 @@ namespace TestSoln
  void get_pressure(const Vector<double>& x, double& pressure)
   {
    double r = sqrt(x[0]*x[0] + x[1]*x[1]);
-   //pressure = A*D*Pi*((2*Pi*Pi*r*r-1)*sin(Pi*r)
-   // + Pi*r*(Pi*Pi*r*r+1)*cos(Pi*r))/(r*r*r);
-
-   //pressure = A*Pi*((2*Pi*Pi*r*r-1)*sin(Pi*r)
-   // + Pi*r*(Pi*Pi*r*r+1)*cos(Pi*r))/(r*r*r)
-   // - (2*eta*A*B*Pi*Pi*Pi/r)*sin(Pi*r)*cos(Pi*r);
-
-   //pressure = 10;
 
    if (r < r_b)
     {
@@ -81,25 +71,11 @@ namespace TestSoln
     }
   }
 
- void qget_pressure(const Vector<double>& x, double& pressure)
+ void get_airy_forcing(const Vector<double>& x, double& airy_forcing)
   {
-   //double r = sqrt(x[0]*x[0] + x[1]*x[1]);
-   //pressure = B*Pi*((2*Pi*Pi*r*r-1)*sin(Pi*r)
-   // + Pi*r*(Pi*Pi*r*r+1)*cos(Pi*r))/(r*r*r);
-
-   //pressure = B*Pi*((2*Pi*Pi*r*r-1)*sin(Pi*r)
-   // + Pi*r*(Pi*Pi*r*r+1)*cos(Pi*r))/(r*r*r)
-   // + (A*A*Pi*Pi*Pi/r)*sin(Pi*r)*cos(Pi*r);
-   pressure = 0;
+   airy_forcing = 0;
   }
  
- //void get_exact_u(const Vector<double>& x, Vector<double>& u)
- // {
- //  double r = sqrt(x[0]*x[0] + x[1]*x[1]);
- //  u[0] = A*(cos(MathematicalConstants::Pi*r)+1);
- //  u[1] = B*(cos(MathematicalConstants::Pi*r)+1);
- // }
-
  void zero(const Vector<double>& x, Vector<double>& u)
   {
    u[0]=0.0;
@@ -149,8 +125,10 @@ public:
  void actions_after_adapt()
   {
    Volume_constraint_element_pt =
-    new FoepplvonKarmanVolumeConstraintElement(My_mesh_pt,
-                                               Temp_pressure_pt);
+    new FoepplvonKarmanVolumeConstraintElement
+    <ELEMENT, RefineableTriangleMesh> (My_mesh_pt,
+                                       &Bubble_regions,
+                                       Temp_pressure_pt);
    Volume_constraint_element_pt->set_prescribed_volume(
      TestSoln::prescribed_volume);
    Volume_constraint_mesh_pt->add_element_pt(Volume_constraint_element_pt);
@@ -194,11 +172,14 @@ private:
  Mesh *Volume_constraint_mesh_pt;
 
  /// Single volume constraint element instance
- FoepplvonKarmanVolumeConstraintElement *Volume_constraint_element_pt;
+ FoepplvonKarmanVolumeConstraintElement<ELEMENT, RefineableTriangleMesh>
+  *Volume_constraint_element_pt;
 
  /// Temporary storage for the pressure used when switching between instances
  /// of volume constraint element
  double *Temp_pressure_pt;
+
+ Vector<unsigned> Bubble_regions;
 
  /// Trace file to document norm of solution
  ofstream Trace_file;
@@ -401,11 +382,12 @@ UnstructuredFvKProblem<ELEMENT>::UnstructuredFvKProblem(double element_area)
  mesh_parameters.internal_open_curves_pt() = inner_open_boundary_pt;
  mesh_parameters.add_region_coordinates(1,left_region_coords);
  mesh_parameters.add_region_coordinates(2,right_region_coords);
+ Bubble_regions.push_back(1);
+ Bubble_regions.push_back(2);
  mesh_parameters.enable_use_attributes();
  mesh_parameters.element_area() = element_area;
 
  My_mesh_pt = new RefineableTriangleMesh<ELEMENT>(mesh_parameters);
- //My_mesh_pt = new TriangleMesh<ELEMENT>(mesh_parameters);
 
  Z2ErrorEstimator* error_estimator_pt = new Z2ErrorEstimator;
  My_mesh_pt->spatial_error_estimator_pt() = error_estimator_pt;
@@ -422,7 +404,8 @@ UnstructuredFvKProblem<ELEMENT>::UnstructuredFvKProblem(double element_area)
 
  /// Create the initial volume constraint element
  Volume_constraint_element_pt
-  = new FoepplvonKarmanVolumeConstraintElement(My_mesh_pt);
+  = new FoepplvonKarmanVolumeConstraintElement
+  <ELEMENT, RefineableTriangleMesh> (My_mesh_pt, &Bubble_regions);
  Volume_constraint_element_pt->set_prescribed_volume(
    TestSoln::prescribed_volume);
 
@@ -471,7 +454,7 @@ void UnstructuredFvKProblem<ELEMENT>::complete_problem_setup()
  //Just loop over outer boundary since inner boundary doesn't have boundary
  //conditions
  unsigned nbound = Outer_boundary1 + 1;
- //unsigned nbound = 4;
+
  for(unsigned ibound=0;ibound<nbound;ibound++)
   {
    unsigned num_nod=My_mesh_pt->nboundary_node(ibound);
@@ -480,7 +463,7 @@ void UnstructuredFvKProblem<ELEMENT>::complete_problem_setup()
      // Get node
      Node* nod_pt=My_mesh_pt->boundary_node_pt(ibound,inod);
      
-     // Pin one-and-only unknown value
+     // Pin unknown values
      nod_pt->pin(0);
      nod_pt->pin(2);
     }   
@@ -499,23 +482,21 @@ void UnstructuredFvKProblem<ELEMENT>::complete_problem_setup()
    el_pt->lambda_pt() = &TestSoln::lambda;
    el_pt->eta_pt() = &TestSoln::eta;
    el_pt->pressure_fct_pt() = &TestSoln::get_pressure;
-   el_pt->qpressure_fct_pt() = &TestSoln::qget_pressure;
+   el_pt->airy_forcing_fct_pt() = &TestSoln::get_airy_forcing;
   }
 
  // Add the bubble pressure as external data to the nodes in the bubble
  // region
- n_element = My_mesh_pt->nregion_element(1);
- for(unsigned e = 0; e < n_element; e++)
+ unsigned n_bubble_regions = Bubble_regions.size();
+ 
+ for(unsigned r = 0; r < n_bubble_regions; r++)
   {
-   My_mesh_pt->region_element_pt(1,e)->add_external_data(
-     Volume_constraint_element_pt->pressure_data_pt());
-  }
-
- n_element = My_mesh_pt->nregion_element(2);
- for(unsigned e = 0; e < n_element; e++)
-  {
-   My_mesh_pt->region_element_pt(2,e)->add_external_data(
-     Volume_constraint_element_pt->pressure_data_pt());
+   n_element = My_mesh_pt->nregion_element(Bubble_regions[r]);
+   for(unsigned e = 0; e < n_element; e++)
+    {
+     My_mesh_pt->region_element_pt(Bubble_regions[r],e)->add_external_data(
+       Volume_constraint_element_pt->pressure_data_pt());
+    }
   }
   
  // Re-apply Dirichlet boundary conditions (projection ignores
@@ -535,7 +516,7 @@ void UnstructuredFvKProblem<ELEMENT>::apply_boundary_conditions()
  //Just loop over outer boundary since inner boundary doesn't have boundary
  //conditions
  unsigned nbound = Outer_boundary1 + 1;
- //unsigned nbound = 4;
+
  for(unsigned ibound=0;ibound<nbound;ibound++)
   {
    unsigned num_nod=this->My_mesh_pt->nboundary_node(ibound);
@@ -548,16 +529,6 @@ void UnstructuredFvKProblem<ELEMENT>::apply_boundary_conditions()
      Vector<double> x(2);
      x[0]=nod_pt->x(0);
      x[1]=nod_pt->x(1);
-     
-     // Compute the value of the exact solution at the nodal point
-     //Vector<double> u(2);
-
-     // Set the value on the boundary nodes to 0
-     //TestSoln::get_exact_u(x,u);
-
-     // Assign the nodal values at this node
-     //nod_pt->set_value(0,u[0]);
-     //nod_pt->set_value(2,u[1]);
     }
   } 
 
@@ -583,14 +554,6 @@ void UnstructuredFvKProblem<ELEMENT>::doc_solution(const
  some_file << "TEXT X = 22, Y = 92, CS=FRAME T = \"" 
            << comment << "\"\n";
  some_file.close();
- 
- // Output exact solution 
- //----------------------
- // Disabled since we don't have the exact solution for this case
- //sprintf(filename,"RESLT/exact_soln%i-%f.dat",Doc_info.number(),Element_area);
- //some_file.open(filename);
- //My_mesh_pt->output_fct(some_file,npts,TestSoln::get_exact_u); 
- //some_file.close();
  
  // Output boundaries
  //------------------
@@ -658,13 +621,15 @@ void UnstructuredFvKProblem<ELEMENT>::doc_solution(const
    sprintf(filename,"RESLT/bubble_volume%i.dat",Doc_info.number());
    some_file.open(filename);
    unsigned n_inner_el;
-   for(unsigned r = 1;r <= 2; r++)
+   unsigned n_bubble_regions = Bubble_regions.size();
+
+   for(unsigned r = 0;r < n_bubble_regions; r++)
     {
-     n_inner_el = My_mesh_pt->nregion_element(r);
+     n_inner_el = My_mesh_pt->nregion_element(Bubble_regions[r]);
      for(unsigned e = 0; e < n_inner_el; e++)
       {
-       ELEMENT* el_pt =
-        dynamic_cast<ELEMENT*>(My_mesh_pt->region_element_pt(r,e));
+       ELEMENT* el_pt = dynamic_cast<ELEMENT*>(
+         My_mesh_pt->region_element_pt(Bubble_regions[r],e));
        if(el_pt != 0)
         {
          bubble_volume += el_pt->get_integral_w();
@@ -682,28 +647,17 @@ void UnstructuredFvKProblem<ELEMENT>::doc_solution(const
  double dummy_error,zero_norm;
  sprintf(filename,"RESLT/error%i-%f.dat",Doc_info.number(),Element_area);
  some_file.open(filename);
- // Disabled since we don't have the exact solution for this case
- //My_mesh_pt->compute_error(some_file,TestSoln::get_exact_u,
- //                          error,norm);
  
  My_mesh_pt->compute_error(some_file,TestSoln::zero,
                            dummy_error,zero_norm);
  some_file.close();
 
  // Doc L2 error and norm of solution
- //oomph_info << "\nNorm of error   : " << sqrt(error) << std::endl;
- //oomph_info << "Norm of exact solution: " << sqrt(norm) << std::endl;
  oomph_info << "Norm of computed solution: " << sqrt(dummy_error) << std::endl;
 
  Trace_file << TestSoln::p_b_pt->value(0) << " "
             << TestSoln::p_0_pt->value(0) << " "
             << w_0 << " " << bubble_volume << '\n';
-
- //sprintf(filename,"RESLT/myerr");
- //some_file.open(filename,fstream::app);
- //some_file << log10(sqrt(Element_area)) << " " << log10(sqrt(error))
- // << " " << sqrt(norm) << '\n';
- //some_file.close();
 
  // Increment the doc_info number
  Doc_info.number()++;
@@ -735,8 +689,6 @@ int main(int argc, char **argv)
  // Doc what has actually been specified on the command line
  CommandLineArgs::doc_specified_flags();
 
- remove("RESLT/myerr");
-
  // Problem instance
  UnstructuredFvKProblem<
   ProjectableFoepplvonKarmanElement<TFoepplvonKarmanElement<3> > >
@@ -745,13 +697,5 @@ int main(int argc, char **argv)
  problem.newton_solve();
  problem.doc_solution();
 
- //for (double area = 0.01; area > 0.000009; area -= 0.0001)
- // {
- //  UnstructuredFvKProblem<TFvKElement<3> >
- //   problem(area);
- //  problem.doc_solution();
- //  problem.newton_solve();
- //  problem.doc_solution();
- // }
 } //End of main
 

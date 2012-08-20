@@ -38,9 +38,6 @@
 #include<sstream>
 
 //OOMPH-LIB headers
-// hierher
-//#include "generic.h"
-
 #include "../generic/projection.h"
 #include "../generic/nodes.h"
 #include "../generic/Qelements.h"
@@ -76,19 +73,11 @@ public:
    const Vector<double>& x,
    double& f);
 
-
- /// \short Function pointer to gradient of pressure function fct(x,g(x)) --
- /// x is a Vector!
- typedef void (*FoepplvonKarmanPressureFctGradientPt)(
-   const Vector<double>& x,
-   Vector<double>& gradient);
-
-
- /// Constructor (must initialise the Pressure_fct_pt to null)
- /// Also set physical parameters to their default values
+ /// \short Constructor (must initialise the Pressure_fct_pt and
+ /// Airy_forcing_fct_pt to null). Also set physical parameters to their
+ /// default values
  FoepplvonKarmanEquations() : Pressure_fct_pt(0),
-                              Pressure_fct_gradient_pt(0),
-                              qPressure_fct_pt(0)
+                              Airy_forcing_fct_pt(0)
   {
    //Set all the physical constants to the default value (zero)
    Eta_pt = &Default_Physical_Constant_Value;
@@ -201,30 +190,21 @@ public:
  FoepplvonKarmanPressureFctPt pressure_fct_pt() const
   {return Pressure_fct_pt;}
 
- /// Access function: Pointer to gradient of pressure function
- FoepplvonKarmanPressureFctGradientPt& pressure_fct_gradient_pt()
-  {return Pressure_fct_gradient_pt;}
+ /// Access function: Pointer to Airy forcing function
+ FoepplvonKarmanPressureFctPt& airy_forcing_fct_pt()
+  {return Airy_forcing_fct_pt;}
 
- /// Access function: Pointer to gradient pressure function. Const version
- FoepplvonKarmanPressureFctGradientPt pressure_fct_gradient_pt() const
-  {return Pressure_fct_gradient_pt;}
+ /// Access function: Pointer to Airy forcing function. Const version
+ FoepplvonKarmanPressureFctPt airy_forcing_fct_pt()
+  const {return Airy_forcing_fct_pt;}
 
- //mjr Ridicu-hack for made-up second pressure, q
- /// Access function: Pointer to pressure function
- FoepplvonKarmanPressureFctPt& qpressure_fct_pt()
-  {return qPressure_fct_pt;}
-
- /// Access function: Pointer to pressure function. Const version
- FoepplvonKarmanPressureFctPt qpressure_fct_pt()
-  const {return qPressure_fct_pt;}
-
- /// Get pressure term at (Eulerian) position x. This function is
+ /// \short Get pressure term at (Eulerian) position x. This function is
  /// virtual to allow overloading in multi-physics problems where
  /// the strength of the pressure function might be determined by
  /// another system of equations.
  inline virtual void get_pressure_fvk(const unsigned& ipt,
-                                        const Vector<double>& x,
-                                        double& pressure) const
+                                      const Vector<double>& x,
+                                      double& pressure) const
   {
    //If no pressure function has been set, return zero
    if(Pressure_fct_pt==0) {pressure = 0.0;}
@@ -235,66 +215,26 @@ public:
     }
   }
 
- /// Get pressure term at (Eulerian) position x. This function is
+ /// \short Get Airy forcing term at (Eulerian) position x. This function is
  /// virtual to allow overloading in multi-physics problems where
  /// the strength of the pressure function might be determined by
  /// another system of equations.
- inline virtual void qget_pressure_fvk(const unsigned& ipt,
-                                        const Vector<double>& x,
-                                        double& pressure) const
+ inline virtual void get_airy_forcing_fvk(const unsigned& ipt,
+                                          const Vector<double>& x,
+                                          double& airy_forcing) const
   {
    //If no pressure function has been set, return zero
-   if(qPressure_fct_pt==0) {pressure = 0.0;}
+   if(Airy_forcing_fct_pt==0) {airy_forcing = 0.0;}
    else
     {
      // Get pressure strength
-     (*qPressure_fct_pt)(x,pressure);
+     (*Airy_forcing_fct_pt)(x,airy_forcing);
     }
   }
 
-
- /// Get gradient of pressure term at (Eulerian) position x. This function is
- /// virtual to allow overloading in multi-physics problems where
- /// the strength of the pressure function might be determined by
- /// another system of equations. Computed via function pointer
- /// (if set) or by finite differencing (default)
- inline virtual void get_pressure_gradient_fvk(
-  const unsigned& ipt,
-  const Vector<double>& x,
-  Vector<double>& gradient) const
-  {
-   //If no gradient function has been set, FD it
-   if(Pressure_fct_gradient_pt==0)
-    {
-     // Reference value
-     double pressure=0.0;
-     get_pressure_fvk(ipt,x,pressure);
-
-     // FD it
-     double eps_fd=GeneralisedElement::Default_fd_jacobian_step;
-     double pressure_pls=0.0;
-     Vector<double> x_pls(x);
-
-     for (unsigned i=0;i<2;i++)
-      {
-       x_pls[i]+=eps_fd;
-       get_pressure_fvk(ipt,x_pls,pressure_pls);
-       gradient[i]=(pressure_pls-pressure)/eps_fd;
-       x_pls[i]=x[i];
-      }
-    }
-   else
-    {
-     // Get gradient
-     (*Pressure_fct_gradient_pt)(x,gradient);
-    }
-  }
-
-
-
-
- /// Get flux: flux[i] = dw/dx_i
- void get_flux(const Vector<double>& s, Vector<double>& flux) const
+ /// Get gradient of deflection: gradient[i] = dw/dx_i
+ void get_gradient_of_deflection(const Vector<double>& s,
+                                 Vector<double>& gradient) const
   {
    //Find out how many nodes there are in the element
    const unsigned n_node = nnode();
@@ -312,7 +252,7 @@ public:
    //Initialise to zero
    for(unsigned j=0;j<2;j++)
     {
-     flux[j] = 0.0;
+     gradient[j] = 0.0;
     }
 
    // Loop over nodes
@@ -321,15 +261,20 @@ public:
      //Loop over derivative directions
      for(unsigned j=0;j<2;j++)
       {
-       flux[j] += this->nodal_value(l,w_nodal_index)*dpsidx(l,j);
+       gradient[j] += this->nodal_value(l,w_nodal_index)*dpsidx(l,j);
       }
     }
   }
 
+ /// Fill in the residuals with this element's contribution
  void fill_in_contribution_to_residuals(Vector<double> &residuals);
 
+ //void fill_in_contribution_to_jacobian(Vector<double> &residuals,
+ //                                      DenseMatrix<double> &jacobian);
+
  /// \short Return FE representation of function value w_fvk(s)
- /// at local coordinate s
+ /// at local coordinate s (by default - if index > 0, returns
+ /// FE representation of valued stored at index^th nodal index 
  inline double interpolated_w_fvk(const Vector<double> &s,
                                   unsigned index=0) const
   {
@@ -338,16 +283,12 @@ public:
 
    //Get the index at which the poisson unknown is stored
    const unsigned w_nodal_index = nodal_index_fvk(index);
-   //const unsigned w_nodal_index = nodal_index_fvk(4);
-   //const unsigned w_nodal_index2 = nodal_index_fvk(5);
 
    //Local shape function
    Shape psi(n_node);
-   //DShape dpsidx(n_node,2);
 
    //Find values of shape function
    shape(s,psi);
-   //dshape_eulerian(s,psi,dpsidx);
 
    //Initialise value of u
    double interpolated_w = 0.0;
@@ -356,10 +297,6 @@ public:
    for(unsigned l=0;l<n_node;l++)
     {
      interpolated_w += this->nodal_value(l,w_nodal_index)*psi[l];
-     // mjr testing the mixed derivatives
-     //interpolated_w += 0.5*
-     //                  (this->nodal_value(l,w_nodal_index)*dpsidx(l,1)
-     //                  +this->nodal_value(l,w_nodal_index2)*dpsidx(l,0));
     }
 
    return(interpolated_w);
@@ -440,19 +377,6 @@ protected:
                                                       DShape &dtestdx)
   const=0;
 
- /// \short Shape/test functions and derivs w.r.t. to global coords at
- /// integration point ipt; return Jacobian of mapping (J). Also compute
- /// derivatives of dpsidx, dtestdx and J w.r.t. nodal coordinates.
- virtual double dshape_and_dtest_eulerian_at_knot_fvk(
-  const unsigned &ipt,
-  Shape &psi,
-  DShape &dpsidx,
-  RankFourTensor<double> &d_dpsidx_dX,
-  Shape &test,
-  DShape &dtestdx,
-  RankFourTensor<double> &d_dtestdx_dX,
-  DenseMatrix<double> &djacobian_dX) const=0;
-
  // Pointers to global physical constants
 
  /// Pointer to global eta
@@ -464,11 +388,8 @@ protected:
  /// Pointer to pressure function:
  FoepplvonKarmanPressureFctPt Pressure_fct_pt;
 
- /// Pointer to gradient of pressure function
- FoepplvonKarmanPressureFctGradientPt Pressure_fct_gradient_pt;
-
  //mjr Ridicu-hack for made-up second pressure, q
- FoepplvonKarmanPressureFctPt qPressure_fct_pt;
+ FoepplvonKarmanPressureFctPt Airy_forcing_fct_pt;
 
 private:
  /// Default value for physical constants
@@ -588,19 +509,6 @@ protected:
                                                      DShape &dtestdx)
   const;
 
- /// \short Shape/test functions and derivs w.r.t. to global coords at
- /// integration point ipt; return Jacobian of mapping (J). Also compute
- /// derivatives of dpsidx, dtestdx and J w.r.t. nodal coordinates.
- inline double dshape_and_dtest_eulerian_at_knot_fvk(
-  const unsigned &ipt,
-  Shape &psi,
-  DShape &dpsidx,
-  RankFourTensor<double> &d_dpsidx_dX,
-  Shape &test,
-  DShape &dtestdx,
-  RankFourTensor<double> &d_dtestdx_dX,
-  DenseMatrix<double> &djacobian_dX) const;
-
 };
 
 
@@ -664,90 +572,29 @@ double QFoepplvonKarmanElement<NNODE_1D>::
 }
 
 
-
-//======================================================================
-/// Define the shape functions (psi) and test functions (test) and
-/// their derivatives w.r.t. global coordinates (dpsidx and dtestdx)
-/// and return Jacobian of mapping (J). Additionally compute the
-/// derivatives of dpsidx, dtestdx and J w.r.t. nodal coordinates.
-///
-/// Galerkin: Test functions = shape functions
-//======================================================================
-template<unsigned NNODE_1D>
-double QFoepplvonKarmanElement<NNODE_1D>::
- dshape_and_dtest_eulerian_at_knot_fvk(
-  const unsigned &ipt,
-  Shape &psi,
-  DShape &dpsidx,
-  RankFourTensor<double> &d_dpsidx_dX,
-  Shape &test,
-  DShape &dtestdx,
-  RankFourTensor<double> &d_dtestdx_dX,
-  DenseMatrix<double> &djacobian_dX) const
- {
-  // Call the geometrical shape functions and derivatives
-  const double J = this->dshape_eulerian_at_knot(ipt,psi,dpsidx,
-                                                 djacobian_dX,d_dpsidx_dX);
-
-  // Set the pointers of the test functions
-  test = psi;
-  dtestdx = dpsidx;
-  d_dtestdx_dX = d_dpsidx_dX;
-
-  //Return the jacobian
-  return J;
-}
-
-
-
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 
 
-//mjr
-//No point in de-DIMming these classes since they're not used here anyway
 //=======================================================================
 /// Face geometry for the QFoepplvonKarmanElement elements: The spatial
 /// dimension of the face elements is one lower than that of the
 /// bulk element but they have the same number of points
 /// along their 1D edges.
 //=======================================================================
-//template<unsigned DIM, unsigned NNODE_1D>
-//class FaceGeometry<QFoepplvonKarmanElement<DIM,NNODE_1D> >:
-// public virtual QElement<DIM-1,NNODE_1D>
-//{
-//
-//  public:
-//
-// /// \short Constructor: Call the constructor for the
-// /// appropriate lower-dimensional QElement
-// FaceGeometry() : QElement<DIM-1,NNODE_1D>() {}
-//
-//};
-//
-//////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////
-//
-//
-////=======================================================================
-///// Face geometry for the 1D QFoepplvonKarmanElement elements: Point elements
-////=======================================================================
-//template<unsigned NNODE_1D>
-//class FaceGeometry<QFoepplvonKarmanElement<1,NNODE_1D> >:
-// public virtual PointElement
-//{
-//
-//  public:
-//
-// /// \short Constructor: Call the constructor for the
-// /// appropriate lower-dimensional QElement
-// FaceGeometry() : PointElement() {}
-//
-//};
+template<unsigned NNODE_1D>
+class FaceGeometry<QFoepplvonKarmanElement<NNODE_1D> >:
+ public virtual QElement<1,NNODE_1D>
+{
 
+  public:
 
+ /// \short Constructor: Call the constructor for the
+ /// appropriate lower-dimensional QElement
+ FaceGeometry() : QElement<1,NNODE_1D>() {}
+
+};
 
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////

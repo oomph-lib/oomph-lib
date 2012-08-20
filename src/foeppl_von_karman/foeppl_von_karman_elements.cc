@@ -29,6 +29,7 @@
 
 #include "foeppl_von_karman_elements.h"
 
+#include <iostream>
 
 namespace oomph
 {
@@ -164,8 +165,8 @@ fill_in_contribution_to_residuals(Vector<double> &residuals)
    double pressure;
    get_pressure_fvk(ipt,interpolated_x,pressure);
 
-   double qpressure;
-   qget_pressure_fvk(ipt,interpolated_x,qpressure);
+   double airy_forcing;
+   get_airy_forcing_fvk(ipt,interpolated_x,airy_forcing);
 
    // Assemble residuals and Jacobian
    //--------------------------------
@@ -217,7 +218,7 @@ fill_in_contribution_to_residuals(Vector<double> &residuals)
      // IF it's not a boundary condition
      if(local_eqn >= 0)
       {
-       residuals[local_eqn] += qpressure*test(l)*W;
+       residuals[local_eqn] += airy_forcing*test(l)*W;
 
        // Reduced order biharmonic operator
        for(unsigned k=0;k<2;k++)
@@ -284,6 +285,29 @@ fill_in_contribution_to_residuals(Vector<double> &residuals)
   } // End of loop over integration points
 }
 
+/*
+void FoepplvonKarmanEquations::fill_in_contribution_to_jacobian(Vector<double> &residuals,
+  DenseMatrix<double> &jacobian)
+{
+ //Add the contribution to the residuals
+ FoepplvonKarmanEquations::fill_in_contribution_to_residuals(residuals);
+ //Allocate storage for the full residuals (residuals of entire element)
+ unsigned n_dof = ndof();
+ Vector<double> full_residuals(n_dof);
+ //Get the residuals for the entire element
+ FoepplvonKarmanEquations::get_residuals(full_residuals);
+ //Calculate the contributions from the internal dofs
+ //(finite-difference the lot by default)
+ fill_in_jacobian_from_internal_by_fd(full_residuals,jacobian,true);
+ //Calculate the contributions from the external dofs
+ //(finite-difference the lot by default)
+ fill_in_jacobian_from_external_by_fd(full_residuals,jacobian,true);
+ //Calculate the contributions from the nodal dofs
+ fill_in_jacobian_from_nodal_by_fd(full_residuals,jacobian);
+}
+*/
+
+
 //======================================================================
 /// Self-test:  Return 0 for OK
 //======================================================================
@@ -315,7 +339,7 @@ unsigned FoepplvonKarmanEquations::self_test()
 //======================================================================
 /// Output function:
 ///
-///   x,y,u   or    x,y,z,u
+///   x,y,w
 ///
 /// nplot points in each coordinate direction
 //======================================================================
