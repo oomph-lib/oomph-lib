@@ -127,10 +127,10 @@ public:
    Volume_constraint_element_pt =
     new FoepplvonKarmanVolumeConstraintElement
     <ELEMENT, RefineableTriangleMesh> (My_mesh_pt,
-                                       &Bubble_regions,
-                                       Temp_pressure_pt);
+                                       Bubble_regions,
+                                       *Temp_pressure_pt);
    Volume_constraint_element_pt->set_prescribed_volume(
-     TestSoln::prescribed_volume);
+     &TestSoln::prescribed_volume);
    Volume_constraint_mesh_pt->add_element_pt(Volume_constraint_element_pt);
    TestSoln::p_b_pt = Volume_constraint_element_pt->pressure_data_pt();
    rebuild_global_mesh();
@@ -405,9 +405,9 @@ UnstructuredFvKProblem<ELEMENT>::UnstructuredFvKProblem(double element_area)
  /// Create the initial volume constraint element
  Volume_constraint_element_pt
   = new FoepplvonKarmanVolumeConstraintElement
-  <ELEMENT, RefineableTriangleMesh> (My_mesh_pt, &Bubble_regions);
+  <ELEMENT, RefineableTriangleMesh> (My_mesh_pt, Bubble_regions);
  Volume_constraint_element_pt->set_prescribed_volume(
-   TestSoln::prescribed_volume);
+   &TestSoln::prescribed_volume);
 
  /// Set the problem pressure to be that of the volume constraint element
  TestSoln::p_b_pt = Volume_constraint_element_pt->pressure_data_pt();
@@ -632,7 +632,7 @@ void UnstructuredFvKProblem<ELEMENT>::doc_solution(const
          My_mesh_pt->region_element_pt(Bubble_regions[r],e));
        if(el_pt != 0)
         {
-         bubble_volume += el_pt->get_integral_w();
+         bubble_volume += el_pt->get_bounded_volume();
         }
       }
     }

@@ -121,7 +121,7 @@ public:
  /// In derived multi-physics elements, this function should be overloaded
  /// to reflect the chosen storage scheme. Note that these equations require
  /// that the unknown is always stored at the same index at each node.
- virtual inline unsigned nodal_index_fvk(unsigned i=0) const {return i;}
+ virtual inline unsigned nodal_index_fvk(const unsigned& i=0) const {return i;}
 
  /// Output with default number of plot points
  void output(std::ostream &outfile)
@@ -304,55 +304,56 @@ public:
 
  /// \short Return the integral of the displacement over the current
  /// element, effectively calculating its contribution to the volume under
- /// the membrane
- double get_integral_w() const
-  {
-   //Number of nodes and integration points for the current element
-   const unsigned n_node = nnode();
-   const unsigned n_intpt = integral_pt()->nweight();
-
-   //Shape functions and their derivatives
-   Shape psi(n_node);
-   DShape dpsidx(n_node,2);
-
-   //The nodal index at which the displacement is stored
-   const unsigned w_nodal_index = nodal_index_fvk();
-
-   //Initalise the integral variable
-   double integral_w = 0;
-
-   //Loop over the integration points
-   for(unsigned ipt=0;ipt<n_intpt;ipt++)
-    {
-     //Get the integral weight
-     double w = integral_pt()->weight(ipt);
-
-     //Get determinant of the Jacobian of the mapping
-     double J = dshape_eulerian_at_knot(ipt,psi,dpsidx);
-
-     //Premultiply the weight and Jacobian
-     double W = w*J;
-
-     //Initialise storage for the w value and nodal value
-     double interpolated_w = 0;
-     double w_nodal_value;
-
-     //Loop over the shape functions/nodes
-     for(unsigned l=0;l<n_node;l++)
-      {
-       //Get the current nodal value
-       w_nodal_value = raw_nodal_value(l,w_nodal_index);
-       //Add the contribution to interpolated w
-       interpolated_w += w_nodal_value*psi(l);
-      }
-
-     //Add the contribution from the current integration point
-     integral_w += interpolated_w*W;
-    }
-
-   //Return the calculated integral
-   return integral_w;
-  }
+ /// the membrane. Virtual so it can be overloaded in multi-physics
+ /// where the volume may incorporate an offset, say.
+ virtual double get_bounded_volume() const
+ {
+  //Number of nodes and integration points for the current element
+  const unsigned n_node = nnode();
+  const unsigned n_intpt = integral_pt()->nweight();
+  
+  //Shape functions and their derivatives
+  Shape psi(n_node);
+  DShape dpsidx(n_node,2);
+  
+  //The nodal index at which the displacement is stored
+  const unsigned w_nodal_index = nodal_index_fvk();
+  
+  //Initalise the integral variable
+  double integral_w = 0;
+  
+  //Loop over the integration points
+  for(unsigned ipt=0;ipt<n_intpt;ipt++)
+   {
+    //Get the integral weight
+    double w = integral_pt()->weight(ipt);
+    
+    //Get determinant of the Jacobian of the mapping
+    double J = dshape_eulerian_at_knot(ipt,psi,dpsidx);
+    
+    //Premultiply the weight and Jacobian
+    double W = w*J;
+    
+    //Initialise storage for the w value and nodal value
+    double interpolated_w = 0;
+    double w_nodal_value;
+    
+    //Loop over the shape functions/nodes
+    for(unsigned l=0;l<n_node;l++)
+     {
+      //Get the current nodal value
+      w_nodal_value = raw_nodal_value(l,w_nodal_index);
+      //Add the contribution to interpolated w
+      interpolated_w += w_nodal_value*psi(l);
+     }
+    
+    //Add the contribution from the current integration point
+    integral_w += interpolated_w*W;
+   }
+  
+  //Return the calculated integral
+  return integral_w;
+ }
 
  /// \short Self-test: Return 0 for OK
  unsigned self_test();
