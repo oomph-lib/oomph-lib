@@ -52,7 +52,7 @@ namespace oomph
 /// A class for all isoparametric elements that solve the
 /// Foeppl von Karman equations.
 /// \f[
-/// \nabla^4 w - \eta\Diamond^4(w,\phi) = \lambda p(x,y)
+/// \nabla^4 w - \eta\Diamond^4(w,\phi) = p(x,y)
 /// \f]
 /// and
 /// \f[
@@ -81,7 +81,7 @@ public:
   {
    //Set all the physical constants to the default value (zero)
    Eta_pt = &Default_Physical_Constant_Value;
-   Lambda_pt = &Default_Physical_Constant_Value;
+   Linear_Bending_Model = false;
   }
 
  /// Broken copy constructor
@@ -103,12 +103,6 @@ public:
 
  /// Pointer to eta
  double* &eta_pt() {return Eta_pt;}
-
- /// Lambda
- const double &lambda() const {return *Lambda_pt;}
-
- /// Pointer to lambda
- double* &lambda_pt() {return Lambda_pt;}
 
  /// \short Return the index at which the i-th unknown value
  /// is stored. The default value, i, is appropriate for single-physics
@@ -358,6 +352,37 @@ public:
  /// \short Self-test: Return 0 for OK
  unsigned self_test();
 
+ /// \short Sets a flag to signify that we are solving the linear, pure bending
+ /// equations, and pin all the nodal values that will not be used in this case
+ void use_linear_bending_model()
+  {
+   // Set the boolean flag
+   Linear_Bending_Model = true;
+
+   // Get the index of the first FvK nodal value
+   unsigned first_fvk_nodal_index = nodal_index_fvk();
+
+   // Get the total number of FvK nodal values (assuming they are stored
+   // contiguously) at node 0 (it's the same at all nodes anyway)
+   unsigned total_fvk_nodal_indicies = required_nvalue(0);
+
+   // Get the number of nodes in this element
+   unsigned n_node = nnode();
+
+   // Loop over the appropriate nodal indicies
+   for(unsigned index=first_fvk_nodal_index+2;
+                index<first_fvk_nodal_index+total_fvk_nodal_indicies;
+                index++)
+    {
+     // Loop over the nodes in the element
+     for(unsigned inod=0;inod<n_node;inod++)
+      {
+       // Pin the nodal value at the current index
+       node_pt(inod)->pin(index);
+      }
+    }
+  }
+
 
 protected:
 
@@ -383,9 +408,6 @@ protected:
  /// Pointer to global eta
  double *Eta_pt;
 
- /// Pointer to global lambda
- double *Lambda_pt;
-
  /// Pointer to pressure function:
  FoepplvonKarmanPressureFctPt Pressure_fct_pt;
 
@@ -395,6 +417,10 @@ protected:
 private:
  /// Default value for physical constants
  static double Default_Physical_Constant_Value;
+
+ /// \short Flag which stores whether we are using a linear, pure bending model
+ /// instead of the full non-linear Foeppl-von Karman
+ bool Linear_Bending_Model;
 };
 
 

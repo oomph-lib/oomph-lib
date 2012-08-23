@@ -121,33 +121,41 @@ fill_in_contribution_to_residuals(Vector<double> &residuals)
      //Get the nodal values
      nodal_value[0] = raw_nodal_value(l,w_nodal_index);
      nodal_value[1] = raw_nodal_value(l,laplacian_w_nodal_index);
-     nodal_value[2] = raw_nodal_value(l,phi_nodal_index);
-     nodal_value[3] = raw_nodal_value(l,laplacian_phi_nodal_index);
-     nodal_value[4] = raw_nodal_value(l,smooth_dwdx_nodal_index);
-     nodal_value[5] = raw_nodal_value(l,smooth_dwdy_nodal_index);
-     nodal_value[6] = raw_nodal_value(l,smooth_dphidx_nodal_index);
-     nodal_value[7] = raw_nodal_value(l,smooth_dphidy_nodal_index);
+
+     if(!Linear_Bending_Model)
+     {
+      nodal_value[2] = raw_nodal_value(l,phi_nodal_index);
+      nodal_value[3] = raw_nodal_value(l,laplacian_phi_nodal_index);
+      nodal_value[4] = raw_nodal_value(l,smooth_dwdx_nodal_index);
+      nodal_value[5] = raw_nodal_value(l,smooth_dwdy_nodal_index);
+      nodal_value[6] = raw_nodal_value(l,smooth_dphidx_nodal_index);
+      nodal_value[7] = raw_nodal_value(l,smooth_dphidy_nodal_index);
+     }
 
      //Add contributions from current node/shape function
      interpolated_w += nodal_value[0]*psi(l);
      interpolated_laplacian_w += nodal_value[1]*psi(l);
-     interpolated_phi += nodal_value[2]*psi(l);
-     interpolated_laplacian_phi += nodal_value[3]*psi(l);
 
-     interpolated_smooth_dwdx[0] += nodal_value[4]*psi(l);
-     interpolated_smooth_dwdx[1] += nodal_value[5]*psi(l);
-     interpolated_smooth_dphidx[0] += nodal_value[6]*psi(l);
-     interpolated_smooth_dphidx[1] += nodal_value[7]*psi(l);
-
-     interpolated_continuous_d2wdx2 += nodal_value[4]*dpsidx(l,0);
-     interpolated_continuous_d2wdy2 += nodal_value[5]*dpsidx(l,1);
-     interpolated_continuous_d2phidx2 += nodal_value[6]*dpsidx(l,0);
-     interpolated_continuous_d2phidy2 += nodal_value[7]*dpsidx(l,1);
-     //mjr CHECK THESE
-     interpolated_continuous_d2wdxdy += 0.5*(nodal_value[4]*dpsidx(l,1)
-                                           + nodal_value[5]*dpsidx(l,0));
-     interpolated_continuous_d2phidxdy += 0.5*(nodal_value[6]*dpsidx(l,1)
-                                             + nodal_value[7]*dpsidx(l,0));
+     if(!Linear_Bending_Model)
+     {
+      interpolated_phi += nodal_value[2]*psi(l);
+      interpolated_laplacian_phi += nodal_value[3]*psi(l);
+ 
+      interpolated_smooth_dwdx[0] += nodal_value[4]*psi(l);
+      interpolated_smooth_dwdx[1] += nodal_value[5]*psi(l);
+      interpolated_smooth_dphidx[0] += nodal_value[6]*psi(l);
+      interpolated_smooth_dphidx[1] += nodal_value[7]*psi(l);
+ 
+      interpolated_continuous_d2wdx2 += nodal_value[4]*dpsidx(l,0);
+      interpolated_continuous_d2wdy2 += nodal_value[5]*dpsidx(l,1);
+      interpolated_continuous_d2phidx2 += nodal_value[6]*dpsidx(l,0);
+      interpolated_continuous_d2phidy2 += nodal_value[7]*dpsidx(l,1);
+      //mjr CHECK THESE
+      interpolated_continuous_d2wdxdy += 0.5*(nodal_value[4]*dpsidx(l,1)
+                                            + nodal_value[5]*dpsidx(l,0));
+      interpolated_continuous_d2phidxdy += 0.5*(nodal_value[6]*dpsidx(l,1)
+                                              + nodal_value[7]*dpsidx(l,0));
+     }
 
      // Loop over directions
      for(unsigned j=0;j<2;j++)
@@ -155,8 +163,12 @@ fill_in_contribution_to_residuals(Vector<double> &residuals)
        interpolated_x[j] += raw_nodal_position(l,j)*psi(l);
        interpolated_dwdx[j] += nodal_value[0]*dpsidx(l,j);
        interpolated_dlaplacian_wdx[j] += nodal_value[1]*dpsidx(l,j);
-       interpolated_dphidx[j] += nodal_value[2]*dpsidx(l,j);
-       interpolated_dlaplacian_phidx[j] += nodal_value[3]*dpsidx(l,j);
+
+       if(!Linear_Bending_Model)
+       {
+        interpolated_dphidx[j] += nodal_value[2]*dpsidx(l,j);
+        interpolated_dlaplacian_phidx[j] += nodal_value[3]*dpsidx(l,j);
+       }
       }
     }
 
@@ -180,7 +192,7 @@ fill_in_contribution_to_residuals(Vector<double> &residuals)
      // IF it's not a boundary condition
      if(local_eqn >= 0)
       {
-       residuals[local_eqn] += lambda()*pressure*test(l)*W;
+       residuals[local_eqn] += pressure*test(l)*W;
 
        // Reduced order biharmonic operator
        for(unsigned k=0;k<2;k++)
@@ -188,13 +200,16 @@ fill_in_contribution_to_residuals(Vector<double> &residuals)
          residuals[local_eqn] += interpolated_dlaplacian_wdx[k]*dtestdx(l,k)*W;
         }
 
-       // Monge-Ampere part
-       residuals[local_eqn] +=
-          eta()*
-         (interpolated_continuous_d2wdx2*interpolated_continuous_d2phidy2
-        + interpolated_continuous_d2wdy2*interpolated_continuous_d2phidx2
-        - 2*interpolated_continuous_d2wdxdy*interpolated_continuous_d2phidxdy)
-         *test(l)*W;
+       if(!Linear_Bending_Model)
+       {
+        // Monge-Ampere part
+        residuals[local_eqn] +=
+           eta()*
+          (interpolated_continuous_d2wdx2*interpolated_continuous_d2phidy2
+         + interpolated_continuous_d2wdy2*interpolated_continuous_d2phidx2
+         - 2*interpolated_continuous_d2wdxdy*interpolated_continuous_d2phidxdy)
+          *test(l)*W;
+       }
       }
 
      //Get the local equation

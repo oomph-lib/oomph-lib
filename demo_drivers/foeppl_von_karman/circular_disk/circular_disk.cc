@@ -44,7 +44,6 @@ namespace TestSoln
 {
  double A = 1.0;
  double B = 2.0;
- double lambda = 1;
  double eta = 1;
  // The bubble radius
  double r_b = 0.1;
@@ -479,7 +478,6 @@ void UnstructuredFvKProblem<ELEMENT>::complete_problem_setup()
    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(My_mesh_pt->element_pt(e));
    
    //Set the pressure function pointers and the physical constants
-   el_pt->lambda_pt() = &TestSoln::lambda;
    el_pt->eta_pt() = &TestSoln::eta;
    el_pt->pressure_fct_pt() = &TestSoln::get_pressure;
    el_pt->airy_forcing_fct_pt() = &TestSoln::get_airy_forcing;
