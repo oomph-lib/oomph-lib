@@ -1,7 +1,7 @@
 \mainpage Example problem: The generalised Helmholtz equation and the use of perfectly matched layers
 
 
-
+ 
 In this document we discuss the finite-element-based solution of a
 generalised form of the Helmholtz equation, an elliptic PDE that 
 describes time-harmonic wave propagation  problems. Compared to the
@@ -84,8 +84,8 @@ ensures that scattering of an incoming wave only produces outgoing not
 incoming waves from infinity.
 
 Here we generalise the above formulation by allowing for
-- spatial variation of the wave-speed
 - the presence of damping
+- spatial variation of the wave-speed and damping
 .
 by writing the wavenumber as
 \f[
@@ -176,8 +176,8 @@ between the PML layer and the computational domain.
 Our implementation of the perfectly matched layers follows the
 development in 
 <a href="http://www.sciencedirect.com/science/article/pii/S0021999106004487">
-A. Bermudeza, L. Hervella-Nietob, A. Prietoa, and 
-R. Rodriguezc "An optimal perfectly matched layer with unbounded 
+A. Bermudez, L. Hervella-Nieto, A. Prieto, and 
+R. Rodriguez "An optimal perfectly matched layer with unbounded 
 absorbing function for time-harmonic acoustic scattering problems"
 Journal of Computational Physics <b>223</b> 469-488 (2007)</a>
 and we assume the boundaries of the computational domain to be aligned
@@ -200,25 +200,32 @@ anisotropic and in 2D we have
  \ \ \ \ \ \ \ \ \ \ \ \ @E[pml2]@
 \f]
 
-The choice of \f$ \gamma \f$ depends on the orientation of the 
-PML layer. 
+The choice of \f$ \gamma_x \f$  and 
+\f$ \gamma_y \f$ depends on the orientation of the 
+PML layer. Since we are restricting ourselves to axis-aligned
+mesh boundaries we need to distinguish three different cases, as 
+shown in the sketch below:
 
-- For layers that are aligned with the y axis we set 
+
+@I w 0.75\textwidth pml_meshes "Sketch illustrating the geometry of the perfectly matched layers. "
+
+- For layers that are aligned with the y axis (such as the left
+  and right PML layers in the sketch) we set 
   \f[
   \gamma_{x}(x)  = 
   1 +\frac{i}{\omega/c+i  \alpha}\ \sigma_{x}(x) 
   \ \ \ \ \ \ \ \mbox{ \ \ \ with \ \ \ }
-  \sigma_{x}(x)  =  \frac{1}{X_{PML}-x}, \ \ \ \ \ 
+  \sigma_{x}(x)  =  \frac{1}{|X_{PML}-x|}, \ \ \ \ \ 
   @E[absorbingfctx]@
   \f] 
   where \f$ X_{PML} \f$ is the x-coordinate of the outer boundary
-  of the computational domain (i.e. the inner boundary of the 
-  PML layer) and
+  of the PML layer, and
   \f[
    \gamma_y = 1.
   \f] 
   \n\n
-- For layers that are aligned with the x axis we set 
+- For layers that are aligned with the x axis  (such as the top
+  and bottom PML layers in the sketch) we set 
   \f[ 
   \gamma_x = 1,
   \f] 
@@ -227,21 +234,20 @@ PML layer.
   \gamma_{y}(y) = 
   1+\frac{i}{\omega/c+i \alpha} \ \sigma_{y}(y) 
   \ \ \ \ \ \ \ \mbox{ \ \ \ with \ \ \ }
-  \sigma_{y}(y)  =  \frac{1}{Y_{PML}-y}, \ \ \ \ \ 
+  \sigma_{y}(y)  =  \frac{1}{|Y_{PML}-y|}, \ \ \ \ \ 
   @E[absorbingfcty]@
   \f]
   where \f$ Y_{PML} \f$ is the y-coordinate of the outer boundary
-  of the computational domain (i.e. the inner boundary of the 
-  PML layer).
+  of the PML layer.
   \n\n
 - In corner regions that are bounded by two axis-aligned PML layers
-  (with inner coordinates \f$ X_{PML} \f$ and  
+  (with outer coordinates \f$ X_{PML} \f$ and  
   \f$ Y_{PML} \f$) we set
   \f[
   \gamma_{x}(x)  = 
   1 +\frac{i}{\omega/c+i  \alpha}\ \sigma_{x}(x) 
   \ \ \ \ \ \ \ \mbox{ \ \ \ with \ \ \ }
-  \sigma_{x}(x)  =  \frac{1}{X_{PML}-x} \ \ \ \ \ 
+  \sigma_{x}(x)  =  \frac{1}{|X_{PML}-x|} \ \ \ \ \ 
   @E[absorbingfctx_corner]@
   \f]
   and
@@ -249,7 +255,7 @@ PML layer.
   \gamma_{y}(y) = 
   1+\frac{i}{\omega/c+i \alpha} \ \sigma_{y}(y) 
   \ \ \ \ \ \ \ \mbox{ \ \ \ with \ \ \ }
-  \sigma_{y}(y)  =  \frac{1}{Y_{PML}-y}. \ \ \ \ \ 
+  \sigma_{y}(y)  =  \frac{1}{|Y_{PML}-y|}. \ \ \ \ \ 
   @E[absorbingfcty_corner]@
   \f]
   \n\n
@@ -276,7 +282,7 @@ are disabled, i.e.  \f$ \gamma_{x}(x) \f$ and \f$ \gamma_{y}(y) \f$ are both
 set to 1.
 
   The generation of suitable 2D PML meshes along the axis-aligned
-boundaries of a given bulk mesh is faciliated by helper
+boundaries of a given bulk mesh is facilitated by helper
 functions which automatically erect layers of (quadrilateral)
 PML elements. The layers are built from 
 \c QGeneralisedHelmholtzElement<2,NNODE_1D> elements and
@@ -326,7 +332,7 @@ detect visually.
 
 The specific domain used in this case can be seen in the figure below.
 We create an unstructured mesh of six-noded \c TGeneralisedHelmholtzElements
-to create the finite computational domain surounding a circular disk.
+to create the finite computational domain surrounding a circular disk.
 This is surrounded by four axis-aligned PML layers and four
 corner meshes (each made of nine-noded \c QGeneralisedHelmholtzElements).
 
@@ -353,8 +359,7 @@ imposed only on the real part of \f$ u \f$ by setting
 
 From the two images, one can notice the clean circular solution across
 the domain. Had the perfectly matched layers not been effective,
-artifacts caused by the spurious reflections from the domain
-boundaries would have been observed throughout the domain. 
+numerical artifacts would have been observed throughout the domain. 
 
 This is demonstrated by the following two figures which show the solution
 obtained without the PML layers (and "do-nothing" (zero-flux) boundary
@@ -609,14 +614,11 @@ Following our usual convention, we provide default values
 for problem parameters where this is sensible. For instance,
 if the pointer to the damping function is not set, we assume
 that there is no damping, i.e. \f$ \alpha(x,y)=0. \f$
-
-
-<b>RADU: Query -- it doesn't really make sense to assign default
-values for omega and the wavespeed (I don't think the pml stuff
-will work if we (essentially) set k=0; should I kill the default
-assingments and throw an error if the pointers aren't set?
-</b>
-
+Some parameters, such as the wavespeed \f$ c \f$ and the frequency
+\f$ \omega \f$, do need to be set since there are no obvious
+defaults. If \c oomph-lib is compiled in \c PARANOID mode,
+an error is thrown if the relevant pointers haven't been set. 
+Without paranoia, you get a segmentation fault...
 
 Confirm that this is the case by commenting out the relevant
 assignments.

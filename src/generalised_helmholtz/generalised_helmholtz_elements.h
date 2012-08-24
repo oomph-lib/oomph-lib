@@ -14,7 +14,7 @@
 //LIC// 
 //LIC// This library is distributed in the hope that it will be useful,
 //LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
-//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+//LIC// MERCHANTABILITY or FITNESS_pt FOR A PARTICULAR PURPOSE.  See the GNU
 //LIC// Lesser General Public License for more details.
 //LIC// 
 //LIC// You should have received a copy of the GNU Lesser General Public
@@ -1224,12 +1224,9 @@ public:
  /// x is a Vector! 
  typedef void (*AlphaFctPt)(const Vector<double>& x, double& f);
 
- /// Constructor (must initialise the Source_fct_pt to null)
- // All pointers are set to null
- // Pml_direction creates a vector of 2 bools, sets them to false
- // X_pml creates a vector of 2 doubles, sets them to 0.0
+ /// Constructor
  GeneralisedHelmholtzEquations() : Source_fct_pt(0),
-  Omega_pt(0), C_fct_pt(0), Alpha_fct_pt(0), K_squared_pt(0)
+  Omega_pt(0), C_fct_pt(0), Alpha_fct_pt(0)
   {}
 
 
@@ -1257,38 +1254,20 @@ public:
    return Omega_pt;
   }
 
- /// Get pointer to square of wavenumber
- //! double*& k_squared_pt()
-  std::complex<double>*& k_squared_pt()
-  { 
-   return K_squared_pt;
-  }
-
 
  /// Get omega 
  double omega()
  { 
-  if (Omega_pt==0) //! if (K_squared_pt==0)
+#ifdef PARANOID
+  if (Omega_pt==0) 
    {
-    return 0.0; //omega defaults to 0
+    throw OomphLibError(
+     "Please set pointer to omega using access fct to pointer!",
+     "GeneralisedHelmholtzEquations<DIM>::omega()",
+     OOMPH_EXCEPTION_LOCATION); 
    } 
-  else
-   {
-    return *Omega_pt;
-   }
- }
-
- /// Get the square of wavenumber 
- std::complex<double> k_squared() //! double k_squared()
- { 
-  if (K_squared_pt==0) 
-   {
-    return std::complex<double>(0.0,0.0); 
-   } 
-  else
-   {
-    return *K_squared_pt;
-   }
+#endif
+  return *Omega_pt;
  }
 
  /// Output with default number of plot points
@@ -1432,13 +1411,18 @@ public:
                                         const Vector<double>& x,
                                         double& c) const
   {
-   //If no source function has been set, return one
-   if(C_fct_pt==0) {c = 1.0;}
-   else
+#ifdef PARANOID
+   if (C_fct_pt==0) 
     {
-     // Get source strength
-     (*C_fct_pt)(x,c);
-    }
+     throw OomphLibError(
+      "Please set function pointer that sets wave speed.!",
+      "GeneralisedHelmholtzEquations<DIM>::get_c_helmholtz()",
+      OOMPH_EXCEPTION_LOCATION); 
+    } 
+#endif
+
+   // Get wave speed
+   (*C_fct_pt)(x,c);
   }
 
  /// Access function: Pointer to source function
@@ -1455,11 +1439,11 @@ public:
                                         const Vector<double>& x,
                                         double& alpha) const
   {
-   //If no source function has been set, return zero
+   //If no damping function has been set, return zero
    if(Alpha_fct_pt==0) {alpha = 0.0;}
    else
     {
-     // Get source strength
+     // Get damping
      (*Alpha_fct_pt)(x,alpha);
     }
   }
@@ -1663,19 +1647,19 @@ protected:
  /// Pointer to source function:
  GeneralisedHelmholtzSourceFctPt Source_fct_pt;
 
- /// Pointer to frequency
+ /// Pointer to frequency (must be set!)
  double* Omega_pt;
 
  /// \short Pointer to soundspeed field, 
- /// containing the wavespeed distribution across the domain:
+ /// containing the wavespeed distribution across the domain.
+ /// (Must be set)
  CFctPt C_fct_pt;
 
  /// \short Pointer to absorption field, 
- /// containing the absorption distribution across the domain:
+ /// containing the absorption distribution across the domain.
+ /// If not set we set the damping to zero.
  AlphaFctPt Alpha_fct_pt;
 
- /// Pointer to square of wavenumber, now redundant
- std::complex<double>* K_squared_pt;
 };
 
 ///////////////////////////////////////////////////////////////////////////
