@@ -527,7 +527,7 @@ public:
    this->Output_prefix = "spine";
 
    //Create our one and only timestepper, with adaptive timestepping
-   add_time_stepper_pt(new TIMESTEPPER);
+   this->add_time_stepper_pt(new TIMESTEPPER);
 
    Problem::mesh_pt() = new  SpineInclinedPlaneMesh<ELEMENT>(
     nx,ny,length,1.0,this->time_stepper_pt());
@@ -603,7 +603,7 @@ public:
    this->Output_prefix = "elastic";
    
    //Create our one and only timestepper, with adaptive timestepping
-   add_time_stepper_pt(new TIMESTEPPER);
+   this->add_time_stepper_pt(new TIMESTEPPER);
 
    Problem::mesh_pt() = new  ElasticInclinedPlaneMesh<ELEMENT>(
     nx,ny,length,1.0,this->time_stepper_pt());

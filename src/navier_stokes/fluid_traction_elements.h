@@ -434,7 +434,7 @@ refineable_fill_in_generic_residual_contribution_fluid_traction(
    
    //Get the user-defined traction terms
    Vector<double> traction(this->Dim);
-   get_traction(time(),interpolated_x,traction);
+   this->get_traction(time(),interpolated_x,traction);
    
    //Now add to the appropriate equations
    

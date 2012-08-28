@@ -1319,8 +1319,8 @@ public virtual PRefineableQElement<DIM,3>
     else
      {
       Data* new_data_pt = new Data(this->npres_nst());
-      delete internal_data_pt(this->P_nst_internal_index);
-      internal_data_pt(this->P_nst_internal_index) = new_data_pt;
+      delete this->internal_data_pt(this->P_nst_internal_index);
+      this->internal_data_pt(this->P_nst_internal_index) = new_data_pt;
      }
    }
  

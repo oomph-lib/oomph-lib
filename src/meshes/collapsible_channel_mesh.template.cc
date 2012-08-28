@@ -147,7 +147,7 @@ CollapsibleChannelMesh<ELEMENT>::CollapsibleChannelMesh(
     {
      for (unsigned i=0;i<nnode_1d;i++)
       {
-       add_boundary_node(0, this->finite_element_pt(e)->node_pt(i));
+       this->add_boundary_node(0, this->finite_element_pt(e)->node_pt(i));
       }
     }
    // Upstream upper rigid bit
@@ -156,7 +156,7 @@ CollapsibleChannelMesh<ELEMENT>::CollapsibleChannelMesh(
     {
      for (unsigned i=0;i<nnode_1d;i++)
       {
-       add_boundary_node(4,
+       this->add_boundary_node(4,
                          this->finite_element_pt(e)->node_pt(2*nnode_1d+i));
       }
     }
@@ -166,7 +166,7 @@ CollapsibleChannelMesh<ELEMENT>::CollapsibleChannelMesh(
     {
      for (unsigned i=0;i<nnode_1d;i++)
       {
-       add_boundary_node(3,
+       this->add_boundary_node(3,
                          this->finite_element_pt(e)->node_pt(2*nnode_1d+i));
        
        // What column of elements are we in?
@@ -186,7 +186,7 @@ CollapsibleChannelMesh<ELEMENT>::CollapsibleChannelMesh(
     {
      for (unsigned i=0;i<nnode_1d;i++)
       {
-       add_boundary_node(2,
+       this->add_boundary_node(2,
                          this->finite_element_pt(e)->node_pt(2*nnode_1d+i));
       }
     }
@@ -195,7 +195,7 @@ CollapsibleChannelMesh<ELEMENT>::CollapsibleChannelMesh(
     {
      for (unsigned i=0;i<nnode_1d;i++)
       {
-       add_boundary_node(5,
+       this->add_boundary_node(5,
                          this->finite_element_pt(e)->node_pt(i*nnode_1d));
       }
     }
@@ -204,7 +204,7 @@ CollapsibleChannelMesh<ELEMENT>::CollapsibleChannelMesh(
     {
      for (unsigned i=0;i<nnode_1d;i++)
       {
-       add_boundary_node(1,
+       this->add_boundary_node(1,
                       this->finite_element_pt(e)->node_pt((i+1)*nnode_1d-1));
       }
     }

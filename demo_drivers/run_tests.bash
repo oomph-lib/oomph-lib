@@ -7,12 +7,12 @@
 # procedure
 #-----------------------------------------------
 
-#cd poisson; make check; cd ..
-#cd unsteady_heat; make check; cd ..
-#cd advection_diffusion; make check; cd ..
-#cd helmholtz; make check; cd ..
-#cd spherical_advection_diffusion; make check; cd ..
-#cd steady_axisym_advection_diffusion; make check; cd ..
+cd poisson; make check; cd ..
+cd unsteady_heat; make check; cd ..
+cd advection_diffusion; make check; cd ..
+cd helmholtz; make check; cd ..
+cd spherical_advection_diffusion; make check; cd ..
+cd steady_axisym_advection_diffusion; make check; cd ..
 #cd navier_stokes; make check; cd ..
 #cd axisym_navier_stokes; make check; cd ..
 #cd polar_navier_stokes; make check; cd ..
@@ -32,8 +32,8 @@
 #cd biharmonic; make check; cd ..
 #cd linear_elasticity; make check; cd ..
 #cd womersley; make check; cd ..
-cd reaction_diffusion; make check; cd ..
-cd flux_transport; make check; cd ..
-cd young_laplace; make check; cd ..
-cd time_harmonic_fourier_decomposed_linear_elasticity; make check; cd ..
-cd mpi; make check; cd ..
+#cd reaction_diffusion; make check; cd ..
+#cd flux_transport; make check; cd ..
+#cd young_laplace; make check; cd ..
+#cd time_harmonic_fourier_decomposed_linear_elasticity; make check; cd ..
+#cd mpi; make check; cd ..
