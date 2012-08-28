@@ -838,6 +838,13 @@ namespace TimingHelpers
 //===============================================================
 namespace MemoryUsage
 {
+ 
+ /// \short Boolean to suppress synchronisation of doc memory
+ /// usage on processors (via mpi barriers). True (i.e. sync is
+ /// is suppressed by default because not all processors may
+ /// execute the reach the relevant doc memory usage statements
+ /// causing the code to hang).
+ extern bool Suppress_mpi_synchronisation;
 
   /// \short String containing system command that obtains memory usage
   /// of all processes.

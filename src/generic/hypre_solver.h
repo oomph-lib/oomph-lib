@@ -55,6 +55,27 @@ namespace oomph
  namespace HypreHelpers
   {
    
+   /// \short Default for AMG strength (0.25 recommended for 2D problems;
+   /// larger (0.5-0.75, say) for 3D
+   extern double AMG_strength;
+
+   /// \short Default AMG coarsening strategy. Coarsening types include:
+   ///  0 = CLJP (parallel coarsening using independent sets)
+   ///  1 = classical RS with no boundary treatment (not recommended
+   ///      in parallel)
+   ///  3 = modified RS with 3rd pass to add C points on the boundaries
+   ///  6 = Falgout (uses 1 then CLJP using interior coarse points as
+   ///      first independent set)
+   ///  8 = PMIS (parallel coarsening using independent sets - lower
+   ///      complexities than 0, maybe also slower convergence)
+   ///  10= HMIS (one pass RS on each processor then PMIS on interior
+   ///      coarse points as first independent set)
+   ///  11= One pass RS on each processor (not recommended)
+   extern unsigned AMG_coarsening;
+
+   /// AMG interpolation truncation factor
+   extern double AMG_truncation; // 0.0;
+
    /// \short Helper function to check the Hypre error flag, return the
    /// message associated with any error, and reset the error flag to zero.
    int check_HYPRE_error_flag(std::ostringstream& message);
@@ -147,13 +168,22 @@ namespace oomph
      // Default AMG control parameters -- these seem OK;
      // see hypre documenation for details. 
      AMG_using_simple_smoothing=true;
-     AMG_simple_smoother = 1;
+     if (MPI_Helpers::communicator_pt()->nproc()>1)
+      {
+       // Jacobi in parallel
+       AMG_simple_smoother = 0;
+      }
+     else
+      {
+       // Gauss Seidel in serial
+       AMG_simple_smoother = 1;
+      }
      AMG_complex_smoother = 6;
      AMG_smoother_iterations = 2;
      AMG_damping = 1.0;
-     AMG_strength = 0.25;
-     AMG_truncation = 0.0;
-     AMG_coarsening = 0;
+     AMG_strength = HypreHelpers::AMG_strength; // 0.25;
+     AMG_truncation = HypreHelpers::AMG_truncation; // 0.0;
+     AMG_coarsening = HypreHelpers::AMG_coarsening; // 0
      AMG_max_levels = 100;
      AMG_max_row_sum = 1.0;
      AMG_print_level = 0;
@@ -685,9 +715,12 @@ namespace oomph
   {
     public:
 
-   /// \short  Constructor 
-   HyprePreconditioner() 
+   /// \short  Constructor. Provide optional string that is used
+   /// in annotation of performance
+   HyprePreconditioner(const std::string& context_string="") 
     {
+     Context_string=context_string;
+
      // Hypre copies matrix data from oomph-lib's CRDoubleMatrix
      // or DistributedCRDoubleMatrix into its own data structures, 
      // doubling the memory requirements for the matrix.
@@ -706,10 +739,29 @@ namespace oomph
      Max_iter = 1;
      Hypre_method = BoomerAMG;
      Internal_preconditioner = None;
+
+
+     // Initialise private double that accumulates the preconditioner 
+     // solve time of thi instantiation of this class. Is reported
+     // in destructor if Report_my_cumulative_preconditioner_solve_time
+     // is set to true
+     My_cumulative_preconditioner_solve_time=0.0;
+
+     // hierher change to false
+     Report_my_cumulative_preconditioner_solve_time=true;
     }
    
-   /// Empty destructor.
-   ~HyprePreconditioner(){}
+   /// Destructor.
+   ~HyprePreconditioner()
+    {
+     if (Report_my_cumulative_preconditioner_solve_time)
+      {
+       oomph_info 
+        << "~HyprePreconditioner() in context \" "
+        << Context_string << "\": My_cumulative_preconditioner_solve_time = "
+        << My_cumulative_preconditioner_solve_time << std::endl;
+      }
+    }
    
    /// Broken copy constructor.
    HyprePreconditioner(const HyprePreconditioner&)
@@ -725,8 +777,53 @@ namespace oomph
 
    /// \short Static double that accumulates the preconditioner 
    /// solve time of all instantiations of this class. Reset
-   /// it manually, e.g. after every Newton solve.
+   /// it manually, e.g. after every Newton solve, using
+   /// reset_cumulative_solve_times().
    static double Cumulative_preconditioner_solve_time;
+
+   /// \short Static double that accumulates the preconditioner 
+   /// solve time of all instantiations of this class, labeled by
+   /// context string. Reset
+   /// it manually, e.g. after every Newton solve, using
+   /// reset_cumulative_solve_times().
+   static std::map<std::string,double> Context_based_cumulative_solve_time;
+
+
+   /// \short Static unsigned that accumulates the number of preconditioner 
+   /// solves of all instantiations of this class. Reset
+   /// it manually, e.g. after every Newton solve, using
+   /// reset_cumulative_solve_times().
+   static unsigned Cumulative_npreconditioner_solve;
+
+   /// \short Static unsigned that accumulates the number of preconditioner 
+   /// solves of all instantiations of this class, labeled by
+   /// context string. Reset
+   /// it manually, e.g. after every Newton solve, using
+   /// reset_cumulative_solve_times().
+   static std::map<std::string,unsigned> 
+    Context_based_cumulative_npreconditioner_solve;
+
+   /// \short Static unsigned that stores nrow for the most recent
+   /// instantiations of this class, labeled by
+   /// context string. Reset
+   /// it manually, e.g. after every Newton solve, using
+   /// reset_cumulative_solve_times().
+   static std::map<std::string,unsigned> Context_based_nrow;
+
+   /// \short Report cumulative solve times of all instantiations of this
+   /// class
+   static void report_cumulative_solve_times();
+
+   /// \short Reset cumulative solve times
+   static void reset_cumulative_solve_times();
+
+   /// \short Enable reporting of cumulative solve time in destructor
+   void enable_report_my_cumulative_preconditioner_solve_time()
+   {Report_my_cumulative_preconditioner_solve_time=true;}
+
+   /// \short Disable reporting of cumulative solve time in destructor
+   void disable_report_my_cumulative_preconditioner_solve_time()
+   {Report_my_cumulative_preconditioner_solve_time=false;}
 
    /// Enable documentation of preconditioner timings
    void enable_doc_time() {Doc_time = true;}
@@ -906,6 +1003,19 @@ namespace oomph
 
    // Flag is true to output results of timings
    bool Doc_time;
+
+   /// \short Private double that accumulates the preconditioner 
+   /// solve time of thi instantiation of this class. Is reported
+   /// in destructor if Report_my_cumulative_preconditioner_solve_time
+   /// is set to true
+   double My_cumulative_preconditioner_solve_time;
+
+   /// \short Bool to request report of My_cumulative_preconditioner_solve_time
+   /// in destructor 
+   bool Report_my_cumulative_preconditioner_solve_time;
+
+   /// String can be used to provide context for annotation
+   std::string Context_string;
 
   };
 

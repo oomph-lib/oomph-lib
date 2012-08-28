@@ -216,24 +216,31 @@ void TreeBasedRefineableMeshBase::refine_base_mesh(OomphCommunicator* comm_pt,
     // on refined meshes
     this->reorder_nodes();
 
-#ifdef OOMPH_HAS_MPI
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+// hierher Ben to sort this out -- it causes hanging!
+// #ifdef OOMPH_HAS_MPI
 
-    // Now (re-)classify halo and haloed nodes and synchronise hanging
-    // nodes
-    // hierher replace communicator; get rid of helper version
-    //BENFLAG: This is required in cases where delete_all_external_storage()
-    //         made slave nodes to external halo nodes nonhanging.
-    if (this->is_mesh_distributed())
-     {
-      DocInfo doc_info;
-      doc_info.disable_doc();
-      classify_halo_and_haloed_nodes(MPI_Helpers::communicator_pt(),
-                                     doc_info,doc_info.is_doc_enabled());
-     } 
+//     // Now (re-)classify halo and haloed nodes and synchronise hanging
+//     // nodes
+//     // hierher replace communicator; get rid of helper version
+//     //BENFLAG: This is required in cases where delete_all_external_storage()
+//     //         made slave nodes to external halo nodes nonhanging.
+//     if (this->is_mesh_distributed())
+//      {
 
-#endif
+//       DocInfo doc_info;
+//       doc_info.disable_doc();
+//       classify_halo_and_haloed_nodes(MPI_Helpers::communicator_pt(),
+//                                      doc_info,doc_info.is_doc_enabled());
+
+//      } 
+
+// #endif
+
+// hierher end Ben's new code which causes hanging
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
    }
-
 
 }
 
@@ -671,7 +678,7 @@ void TreeBasedRefineableMeshBase::adapt(OomphCommunicator* comm_pt,
                    << "elements -- it ought to!\n";
                   throw OomphLibError(
                    error_message.str(),
-                   "TreeBasedRefineableMeshBase::adapt_mesh",
+                   "TreeBasedRefineableMeshBase::adapt",
                    OOMPH_EXCEPTION_LOCATION);
                  }
                }
@@ -766,7 +773,7 @@ void TreeBasedRefineableMeshBase::adapt(OomphCommunicator* comm_pt,
                    << "elements -- it ought to!\n";
                   throw OomphLibError(
                    error_message.str(),
-                   "TreeBasedRefineableMeshBase::adapt_mesh",
+                   "TreeBasedRefineableMeshBase::adapt",
                    OOMPH_EXCEPTION_LOCATION);
                  } 
                } 
@@ -1758,7 +1765,7 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
   {
    classify_halo_and_haloed_nodes(MPI_Helpers::communicator_pt(),
                                   doc_info,doc_info.is_doc_enabled());
-  } 
+  }
 
 #endif
 
@@ -1780,7 +1787,8 @@ void TreeBasedRefineableMeshBase::refine_uniformly(DocInfo& doc_info)
  
  // Do the actual mesh adaptation
  adapt_mesh(doc_info);  
-}
+
+ }
 
 
 //========================================================================
@@ -1838,9 +1846,10 @@ void TreeBasedRefineableMeshBase::refine_selected_elements(
    dynamic_cast<RefineableElement*>
     (this->element_pt(elements_to_be_refined[e]))->select_for_refinement();
   }
- 
+
  // Do the actual mesh adaptation
  adapt_mesh(); 
+
 }
 
 

@@ -577,7 +577,6 @@ public:
                                      DocInfo& doc_info, 
                                      const bool& report_stats)
  {
-
   // Call version in base class but don't bother to call
   // resize_halo_nodes() -- we'll do it ourselves below
   bool backup=Resize_halo_nodes_not_required;
@@ -630,7 +629,6 @@ public:
    {
     resize_halo_nodes(comm_pt);
    }
-
  }
 
 

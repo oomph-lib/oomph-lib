@@ -129,7 +129,7 @@ namespace oomph
                << "uses this storage (for now).";
     throw OomphLibError(
      err_stream.str(),
-     "TreeBasedRefineableMesh<ELEMENT>::synchronise_hanging_nodes()",
+     "TreeBasedRefineableMesh<ELEMENT>::additional_synchronise_hanging_nodes()",
      OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -205,7 +205,7 @@ namespace oomph
                       << count_haloed << std::endl;
         throw OomphLibError(
          error_stream.str(),
-         "TreeBasedRefineableMeshBase::synchronise_hanging_nodes(...)",
+         "TreeBasedRefineableMeshBase::additional_synchronise_hanging_nodes(...)",
          OOMPH_EXCEPTION_LOCATION);
        }
 #endif
@@ -278,7 +278,7 @@ namespace oomph
   if (Global_timings::Doc_comprehensive_timings)
    {
     t_end = TimingHelpers::timer();
-    oomph_info << "Time for first all-to-all in synchronise_hanging_nodes(): " 
+    oomph_info << "Time for first all-to-all in additional_synchronise_hanging_nodes(): " 
                << t_end-t_start << std::endl;
     t_start = TimingHelpers::timer();
    }
@@ -390,7 +390,7 @@ namespace oomph
          {
           throw OomphLibError(
                  "Haloed node not found in haloed node storage",
-                 "TreeBasedRefineableMesh<ELEMENT>::additional_setup_shared_node_scheme()",
+                 "TreeBasedRefineableMesh<ELEMENT>::additional_synchronise_hanging_nodes()",
                  OOMPH_EXCEPTION_LOCATION);
          }
        }
@@ -514,7 +514,7 @@ namespace oomph
                          << "the missing halo nodes which will be added"
                          << std::endl;
               throw OomphLibError(err_stream.str(),
-                                  "TreeBasedRefineableMesh<ELEMENT>::additional_setup_shared_node_scheme()",
+                                  "TreeBasedRefineableMesh<ELEMENT>::additional_synchronise_hanging_nodes()",
                                   OOMPH_EXCEPTION_LOCATION);
              }
 #endif
@@ -537,8 +537,9 @@ namespace oomph
   if (Global_timings::Doc_comprehensive_timings)
    {
     t_end = TimingHelpers::timer();
-    oomph_info << "Time for second all-to-all in synchronise_hanging_nodes() " 
-               << t_end-t_start << std::endl;
+    oomph_info 
+     << "Time for second all-to-all in additional_synchronise_hanging_nodes() " 
+     << t_end-t_start << std::endl;
     t_start = TimingHelpers::timer();
    }
 
@@ -679,17 +680,19 @@ namespace oomph
                << "(See source code for more detailed explanation)"
                << std::endl;
 
-    throw OomphLibError(err_stream.str(),
-                        "TreeBasedRefineableMesh<ELEMENT>::additional_setup_shared_node_scheme()",
-                        OOMPH_EXCEPTION_LOCATION);
+    throw OomphLibError(
+     err_stream.str(),
+     "TreeBasedRefineableMesh<ELEMENT>::additional_synchronise_hanging_nodes()",
+     OOMPH_EXCEPTION_LOCATION);
    }
 
 
   if (Global_timings::Doc_comprehensive_timings)
    {
     t_end = TimingHelpers::timer();
-    oomph_info << "Time for identification of shared nodes: " 
-               << t_end-t_start << std::endl;
+    oomph_info 
+     << "Time for identification of shared nodes in additional_synchronise_hanging_nodes(): " 
+     << t_end-t_start << std::endl;
    }
 
  }

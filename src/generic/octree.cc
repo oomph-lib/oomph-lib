@@ -4670,11 +4670,20 @@ OcTreeForest::OcTreeForest(Vector<TreeRoot* >& trees_pt) :
  //Construct the neighbour and rotation scheme, note that all neighbour 
  //pointers must be set before the constructor is called
  
+//  MemoryUsage::doc_memory_usage(
+//   "before find_neighbours in octree forest constr");
+
  // setup the neighbour scheme
  find_neighbours();
+
+//  MemoryUsage::doc_memory_usage(
+//   "after find_neighbours in octree forest constr");
  
  // setup the rotation scheme
  construct_up_right_equivalents();
+
+//  MemoryUsage::doc_memory_usage(
+//   "after construct_up_right_equivalents in octree forest constr");
 
 }
 

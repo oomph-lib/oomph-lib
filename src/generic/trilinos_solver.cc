@@ -46,7 +46,13 @@ namespace oomph
 //=============================================================================
  void TrilinosAztecOOSolver::solve(Problem* const &problem_pt,
                                    DoubleVector &solution)
- { 
+ {
+
+
+//   MemoryUsage::doc_memory_usage("start of TrilinosAztecOOSolver::solve");
+//   MemoryUsage::insert_comment_to_continous_top(
+//    "start of TrilinosAztecOOSolver::solve");
+ 
   // clean up from previous solve
   clean_up_memory();
 
@@ -69,6 +75,9 @@ namespace oomph
   // record the start time
   double start_t = TimingHelpers::timer();
 
+//   MemoryUsage::doc_memory_usage("start of get_jacobian()");
+//   MemoryUsage::insert_comment_to_continous_top("start of get_jacobian()");
+ 
   // create the residual
   DoubleVector residual;
 
@@ -86,6 +95,11 @@ namespace oomph
     oomph_info << "Time to generate Jacobian [sec]    : "
                << Jacobian_setup_time << std::endl;
    }
+ 
+
+//   MemoryUsage::doc_memory_usage("after get_jacobian() in trilinos solver");
+//   MemoryUsage::insert_comment_to_continous_top(
+//    "after get_jacobian() in trilinos solver");
   
   // store the distribution of the solution vector
   if (!solution.built())
@@ -97,11 +111,24 @@ namespace oomph
   // redistribute the distribution
   solution.redistribute(this->distribution_pt());
 
+//   MemoryUsage::doc_memory_usage("before trilinos solve");
+//   MemoryUsage::insert_comment_to_continous_top("before trilinos solve ");
+  
   // continue solving using matrix based solve function
   solve(Oomph_matrix_pt, residual, solution);
 
+
+//   MemoryUsage::doc_memory_usage("after trilinos solve");
+//   MemoryUsage::insert_comment_to_continous_top("after trilinos solve ");
+  
   // return to the original distribution
   solution.redistribute(&solution_dist);
+
+//   MemoryUsage::doc_memory_usage("end of TrilinosAztecOOSolver::solve");
+//   MemoryUsage::insert_comment_to_continous_top(
+//    "end of TrilinosAztecOOSolver::solve");
+ 
+
 }
 
 

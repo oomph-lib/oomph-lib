@@ -1809,7 +1809,7 @@ class BoundaryNodeBase
  /// with complex unstructured 3D meshes where it's not clear a priori
  /// if a node has been resized by FaceElements) use alternative 
  /// version (with leading bool arguments) that always checks and throws
- /// so exceptions can be caught gracefully.
+ /// so exceptions can be caught gracefully. Returns UINT_MAX if error.
  unsigned index_of_first_value_assigned_by_face_element(
   const unsigned& face_id=0) const
  {
@@ -1847,7 +1847,7 @@ class BoundaryNodeBase
  /// by catching the underlying std::runtime_error. In PARANOID mode
  /// we check regardless of the setting of 
  /// throw_if_no_value_assigned_by_face_element (but respect the
- /// request for quietness).
+ /// request for quietness). Returns UINT_MAX if error.
  unsigned index_of_first_value_assigned_by_face_element(
   const bool& throw_if_no_value_assigned_by_face_element,
   const bool& throw_quietly,

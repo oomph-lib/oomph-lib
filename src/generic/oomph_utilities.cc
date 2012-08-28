@@ -1595,6 +1595,13 @@ namespace TimingHelpers
 namespace MemoryUsage
 {
  
+ /// \short Boolean to suppress synchronisation of doc memory
+ /// usage on processors (via mpi barriers). True (i.e. sync is
+ /// suppressed) by default because not all processors may
+ /// reach the relevant doc memory usage statements
+ /// causing the code to hang).
+ bool Suppress_mpi_synchronisation=true;
+ 
   /// \short String containing system command that obtains memory usage
   /// of all processes.
   /// Default assigment for linux. [Disclaimer: works on my machine(s) --
@@ -1646,9 +1653,10 @@ namespace MemoryUsage
    the_file << prefix_string << " "; 
    the_file.close();
   
-   // Sync all processors if in parallel
+   // Sync all processors if in parallel (unless supressed)
 #ifdef OOMPH_HAS_MPI
-   if (MPI_Helpers::mpi_has_been_initialised())
+   if ((MPI_Helpers::mpi_has_been_initialised())&&
+       (!Suppress_mpi_synchronisation))
     {
      MPI_Barrier(MPI_Helpers::communicator_pt()->mpi_comm());
     }
@@ -1710,7 +1718,8 @@ namespace MemoryUsage
   
   // Sync all processors if in parallel
 #ifdef OOMPH_HAS_MPI
-  if (MPI_Helpers::mpi_has_been_initialised())
+  if ((MPI_Helpers::mpi_has_been_initialised())&&
+      (!Suppress_mpi_synchronisation))
    {
     MPI_Barrier(MPI_Helpers::communicator_pt()->mpi_comm());
    }
@@ -1800,7 +1809,10 @@ namespace MemoryUsage
 #ifdef OOMPH_HAS_MPI
    if (MPI_Helpers::mpi_has_been_initialised())
     {
-     MPI_Barrier(MPI_Helpers::communicator_pt()->mpi_comm());     
+     if (!Suppress_mpi_synchronisation)
+      {
+       MPI_Barrier(MPI_Helpers::communicator_pt()->mpi_comm());     
+      }
      std::stringstream tmp;
      tmp << "_proc" << MPI_Helpers::communicator_pt()->my_rank();
      modifier=tmp.str();
@@ -1858,7 +1870,10 @@ namespace MemoryUsage
 #ifdef OOMPH_HAS_MPI
    if (MPI_Helpers::mpi_has_been_initialised())
     {
-     MPI_Barrier(MPI_Helpers::communicator_pt()->mpi_comm());     
+     if (!Suppress_mpi_synchronisation)
+      {
+       MPI_Barrier(MPI_Helpers::communicator_pt()->mpi_comm());     
+      }
      std::stringstream tmp;
      tmp << "_proc" << MPI_Helpers::communicator_pt()->my_rank();
      modifier=tmp.str();
@@ -1885,8 +1900,11 @@ namespace MemoryUsage
  /// \short Insert comment into running continous top output
  void insert_comment_to_continous_top(const std::string& comment)
  {
+   // bail out straight away?
+   if (Bypass_all_memory_usage_monitoring) return;
+  
   std::stringstream tmp;
-  tmp << " echo \"" << comment << "\"  >> " 
+  tmp << " echo \"OOMPH-LIB EVENT: " << comment << "\"  >> " 
       << Top_output_filename;
   int success=system(tmp.str().c_str());
   

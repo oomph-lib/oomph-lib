@@ -42,12 +42,21 @@ namespace oomph
   /// systems
   Preconditioner* get_elastic_preconditioner_hypre()
   {
-   HyprePreconditioner* hypre_preconditioner_pt = new HyprePreconditioner;
+   HyprePreconditioner* hypre_preconditioner_pt = 
+    new HyprePreconditioner("Hypre for diagonal blocks in pseudo-solid");
    hypre_preconditioner_pt->set_amg_iterations(2);
    hypre_preconditioner_pt->amg_using_simple_smoothing();
-   hypre_preconditioner_pt->amg_simple_smoother() = 3;
+   if (MPI_Helpers::communicator_pt()->nproc()>1)
+    {
+     // Jacobi in parallel
+     hypre_preconditioner_pt->amg_simple_smoother() = 0;
+    }
+   else
+    {
+     // Gauss Seidel in serial (was 3 actually...)
+     hypre_preconditioner_pt->amg_simple_smoother() =1;
+    }
    hypre_preconditioner_pt->hypre_method() = HyprePreconditioner::BoomerAMG;
-   hypre_preconditioner_pt->amg_strength() = 0.25;
    hypre_preconditioner_pt->amg_damping() = 1.0;
    hypre_preconditioner_pt->amg_coarsening() = 6;
    return hypre_preconditioner_pt;

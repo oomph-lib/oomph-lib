@@ -112,6 +112,35 @@ namespace oomph
  namespace HypreHelpers
  {
   
+
+//========================================================================   
+  /// \short Default for AMG strength (0.25 recommended for 2D problems;
+  /// larger (0.5-0.75, say) for 3D
+//========================================================================
+  double AMG_strength=0.25;
+  
+//========================================================================
+  /// \short Default AMG coarsening strategy. Coarsening types include:
+  ///  0 = CLJP (parallel coarsening using independent sets)
+  ///  1 = classical RS with no boundary treatment (not recommended
+  ///      in parallel)
+  ///  3 = modified RS with 3rd pass to add C points on the boundaries
+  ///  6 = Falgout (uses 1 then CLJP using interior coarse points as
+  ///      first independent set)
+  ///  8 = PMIS (parallel coarsening using independent sets - lower
+  ///      complexities than 0, maybe also slower convergence)
+  ///  10= HMIS (one pass RS on each processor then PMIS on interior
+  ///      coarse points as first independent set)
+  ///  11= One pass RS on each processor (not recommended)
+//========================================================================
+  unsigned AMG_coarsening=6;
+
+
+//========================================================================
+  /// AMG interpolation truncation factor
+//========================================================================
+  double AMG_truncation=0.0;
+
 //========================================================================
 /// Helper function to check the Hypre error flag, return the message
 /// associated with any error, and reset the global error flag to zero.
@@ -680,10 +709,16 @@ namespace oomph
       HYPRE_BoomerAMGSetSmoothNumSweeps(Solver, AMG_smoother_iterations);
      }  
 
+//     MemoryUsage::doc_memory_usage("before amg setup [solver]");
+//     MemoryUsage::insert_comment_to_continous_top("BEFORE AMG SETUP [SOLVER]");
+
     HYPRE_BoomerAMGSetup(Solver,
                          Matrix_par,
                          dummy_rhs_par,
                          dummy_sol_par);
+
+//     MemoryUsage::doc_memory_usage("after amg setup [solver]");
+//     MemoryUsage::insert_comment_to_continous_top("AFTER AMG SETUP [SOLVER]");
 
     Existing_solver = BoomerAMG;
    }
@@ -1565,9 +1600,104 @@ namespace oomph
 //=============================================================================
 /// \short Static double that accumulates the preconditioner 
 /// solve time of all instantiations of this class. Reset
-/// it manually, e.g. after every Newton solve.
+/// it manually, e.g. after every Newton solve, using
+   /// reset_cumulative_solve_times().
 //=============================================================================
  double HyprePreconditioner::Cumulative_preconditioner_solve_time=0.0;
+ 
+//=============================================================================
+ /// \short map of static doubles that accumulates the preconditioner 
+ /// solve time of all instantiations of this class, labeled by
+/// context string. Reset
+ /// it manually, e.g. after every Newton solve, using
+ /// reset_cumulative_solve_times().
+//============================================================================= 
+std::map<std::string,double> HyprePreconditioner::Context_based_cumulative_solve_time;
+ 
+//============================================================================= 
+ /// \short Static unsigned that accumulates the number of preconditioner 
+ /// solves of all instantiations of this class. Reset
+ /// it manually, e.g. after every Newton solve, using
+ /// reset_cumulative_solve_times().
+//============================================================================= 
+ unsigned HyprePreconditioner::Cumulative_npreconditioner_solve=0;
+
+//============================================================================= 
+ /// \short Static unsigned that accumulates the number of preconditioner 
+ /// solves of all instantiations of this class, labeled by
+ /// context string. Reset
+ /// it manually, e.g. after every Newton solve, using
+ /// reset_cumulative_solve_times().
+//============================================================================= 
+ std::map<std::string,unsigned>    
+ HyprePreconditioner::Context_based_cumulative_npreconditioner_solve;
+
+//============================================================================= 
+ /// \short Static unsigned that stores nrow for the most recent
+ /// instantiations of this class, labeled by
+ /// context string. Reset
+ /// it manually, e.g. after every Newton solve, using
+ /// reset_cumulative_solve_times().
+//============================================================================= 
+ std::map<std::string,unsigned> HyprePreconditioner::Context_based_nrow;
+
+//============================================================================= 
+ /// \short Report cumulative solve times of all instantiations of this
+ /// class
+//=============================================================================
+ void HyprePreconditioner::report_cumulative_solve_times()
+ {
+  oomph_info << "\n\n=====================================================\n";
+  oomph_info << "Cumulative HyprePreconditioner solve time "
+             << HyprePreconditioner::Cumulative_preconditioner_solve_time
+             << " for " << Cumulative_npreconditioner_solve 
+             << " solves";
+  if (Cumulative_npreconditioner_solve!=0)
+   {
+    oomph_info <<" ( "  
+               << HyprePreconditioner::Cumulative_preconditioner_solve_time/
+     double(Cumulative_npreconditioner_solve) << " per solve )";
+   }
+  oomph_info << std::endl << std::endl;
+  if (Context_based_cumulative_solve_time.size()>0)
+   {
+    oomph_info << "Breakdown by context: " << std::endl;
+    for (std::map<std::string,double>::iterator it=
+          Context_based_cumulative_solve_time.begin();it!=
+          Context_based_cumulative_solve_time.end();it++)
+     {
+      oomph_info << (*it).first << " " << (*it).second << " for "
+                 << Context_based_cumulative_npreconditioner_solve[(*it).first]
+                 << " solves";
+      if (Context_based_cumulative_npreconditioner_solve[(*it).first]!=0)
+       {
+        oomph_info << " ( "
+                   <<  (*it).second/
+         double(Context_based_cumulative_npreconditioner_solve[(*it).first])
+                   <<  " per solve; "
+                   <<  (*it).second/
+         double(Context_based_cumulative_npreconditioner_solve[(*it).first])/
+         double(Context_based_nrow[(*it).first])
+                   << " per solve per dof )";
+       }
+      oomph_info << std::endl;
+     }
+   }
+  oomph_info << "\n=====================================================\n";
+  oomph_info << std::endl;
+ }
+ 
+//=============================================================================
+ /// \short Reset cumulative solve times
+//=============================================================================
+ void HyprePreconditioner::reset_cumulative_solve_times()
+ {
+  Cumulative_preconditioner_solve_time=0.0;
+  Context_based_cumulative_solve_time.clear();
+  Cumulative_npreconditioner_solve=0;
+  Context_based_cumulative_npreconditioner_solve.clear();
+  Context_based_nrow.clear();
+ }
  
 
 //=============================================================================
@@ -1623,6 +1753,16 @@ namespace oomph
                         OOMPH_EXCEPTION_LOCATION);
 #endif
    }
+
+  if (Context_string!="")
+   {
+    oomph_info << "Setup of HyprePreconditioner in context \" "
+               << Context_string << "\": nrow, nrow_local, nnz "
+               << cr_matrix_pt->nrow() << " "
+               << cr_matrix_pt->nrow_local() << " "
+               << cr_matrix_pt->nnz() << std::endl;
+   }
+  Context_based_nrow[Context_string]=cr_matrix_pt->nrow();
 
   // call hypre_solver_setup
   hypre_solver_setup();
@@ -1688,7 +1828,13 @@ namespace oomph
   // Add to cumulative solve time
   double t_end = TimingHelpers::timer();
   Cumulative_preconditioner_solve_time+=(t_end-t_start); 
-  
+  Cumulative_npreconditioner_solve++;
+  My_cumulative_preconditioner_solve_time+=(t_end-t_start); 
+  if (Context_string!="")
+   {
+    Context_based_cumulative_solve_time[Context_string]+=(t_end-t_start); 
+    Context_based_cumulative_npreconditioner_solve[Context_string]++;
+   }
  }
 
  

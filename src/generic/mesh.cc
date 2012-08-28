@@ -1735,6 +1735,7 @@ void Mesh::setup_shared_node_scheme()
    t_end = TimingHelpers::timer();
    oomph_info << "Time for identification of shared nodes: " 
               << t_end-t_start << std::endl;
+   oomph_info.stream_pt()->flush();
   }
 
 }
@@ -2126,6 +2127,11 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
                                           DocInfo& doc_info, 
                                           const bool& report_stats)
 {
+
+
+//  MemoryUsage::doc_memory_usage(
+//   "at beginning of Mesh::classify_halo_and_haloed_nodes");
+
  double t_start = 0.0;
  if (Global_timings::Doc_comprehensive_timings)
   {
@@ -2138,10 +2144,11 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
    tt_start=TimingHelpers::timer();
   }
 
-
  // Set up shared nodes scheme
  setup_shared_node_scheme();
- 
+
+ //MemoryUsage::doc_memory_usage("after setup shared node scheme");
+
  double tt_end=0.0;
  if (Global_timings::Doc_comprehensive_timings)
   {
@@ -2150,6 +2157,7 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
     << "Time for Mesh::setup_shared_node_scheme() "
     << " Mesh::classify_halo_and_haloed_nodes(): " 
     << tt_end-tt_start << std::endl;
+   oomph_info.stream_pt()->flush();
    tt_start = TimingHelpers::timer();
   }
 
@@ -2242,9 +2250,11 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
    oomph_info 
     << "Time for setup loops in Mesh::classify_halo_and_haloed_nodes: " 
     << tt_end-tt_start << std::endl;
+   oomph_info.stream_pt()->flush();
    tt_start = TimingHelpers::timer();
   }
 
+ //MemoryUsage::doc_memory_usage("after setup loops");
 
  // At this point we need to "synchronise" the nodes on halo(ed) elements
  // so that the processors_associated_with_data agrees for the same node
@@ -2385,8 +2395,12 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
    oomph_info 
     << "Time for pt2pt send/recv in Mesh::classify_halo_and_haloed_nodes: " 
     << tt_end-tt_start << std::endl;
+   oomph_info.stream_pt()->flush();
    tt_start = TimingHelpers::timer();
   }
+
+
+ //MemoryUsage::doc_memory_usage("after pt2pt send/recv");
 
  // Loop over all nodes on the present processor and put the highest-numbered
  // processor associated with each node "in charge" of the node
@@ -2571,8 +2585,11 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
    oomph_info 
     << "Time for first classific in Mesh::classify_halo_and_haloed_nodes: " 
     << tt_end-tt_start << std::endl;
+   oomph_info.stream_pt()->flush();
    tt_start = TimingHelpers::timer();
   }
+
+ //MemoryUsage::doc_memory_usage("after first classific");
 
 
  // Find any overlooked halo nodes: These are any nodes on the halo/haloed
@@ -2685,9 +2702,11 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
    oomph_info 
     <<"Time for setup 1st alltoalls in Mesh::classify_halo_and_haloed_nodes: " 
     << tt_end-tt_start << std::endl;
+   oomph_info.stream_pt()->flush();
    tt_start = TimingHelpers::timer();
   }
 
+ //MemoryUsage::doc_memory_usage("after setup 1st alltoalls");
 
  // Any comms needed?
  if (global_max_n_overlooked_halo>0)
@@ -2710,8 +2729,12 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
      oomph_info 
       << "Time for 1st alltoall in Mesh::classify_halo_and_haloed_nodes: " 
       << tt_end-tt_start << std::endl;
+     oomph_info.stream_pt()->flush();
      tt_start = TimingHelpers::timer();
     }
+
+   //MemoryUsage::doc_memory_usage("after 1st alltoall");
+
 
    //We now prepare the data to be received
    //by working out the displacements from the received data
@@ -2749,9 +2772,11 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
      oomph_info 
       << "Time for 2nd alltoall in Mesh::classify_halo_and_haloed_nodes: " 
       << tt_end-tt_start << std::endl;
+     oomph_info.stream_pt()->flush();
      tt_start = TimingHelpers::timer();
     }
 
+   //MemoryUsage::doc_memory_usage("after 2nd alltoall");
 
    // Provide storage for data to be sent to processor that used to be
    // in charge
@@ -2843,9 +2868,11 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
      oomph_info 
       << "Time for 1st setup 3rd alltoall in Mesh::classify_halo_and_haloed_nodes: " 
       << tt_end-tt_start << std::endl;
+     oomph_info.stream_pt()->flush();
      tt_start = TimingHelpers::timer();
     }
 
+   //MemoryUsage::doc_memory_usage("after 1st setup for 3rd alltoall");
 
    // Data to be sent to each processor
    Vector<int> all_send_n(n_proc,0);
@@ -2888,8 +2915,11 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
      oomph_info 
       << "Time for 2nd setup 3rd alltoall in Mesh::classify_halo_and_haloed_nodes: " 
       << tt_end-tt_start << std::endl;
+     oomph_info.stream_pt()->flush();
      tt_start = TimingHelpers::timer();
     }
+
+   //MemoryUsage::doc_memory_usage("after 2nd setup 3rd alltoall");
 
    //Storage for the number of data to be received from each processor
    Vector<int> all_receive_n(n_proc,0);
@@ -2906,8 +2936,11 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
      oomph_info 
       << "Time for 3rd alltoall in Mesh::classify_halo_and_haloed_nodes: " 
       << tt_end-tt_start << std::endl;
+     oomph_info.stream_pt()->flush();
      tt_start = TimingHelpers::timer();
     }
+
+   //MemoryUsage::doc_memory_usage("after 3rd alltoall");
 
    //We now prepare the data to be received
    //by working out the displacements from the received data
@@ -2945,8 +2978,12 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
      oomph_info 
       << "Time for 4th alltoall in Mesh::classify_halo_and_haloed_nodes: " 
       << tt_end-tt_start << std::endl;
+     oomph_info.stream_pt()->flush();
      tt_start = TimingHelpers::timer();
     }
+
+   //MemoryUsage::doc_memory_usage("after 4th alltoall");
+
 
    //Now use the received data 
    for (int send_rank=0;send_rank<n_proc;send_rank++)
@@ -2999,8 +3036,11 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
      oomph_info 
       << "Time for postproc 4th alltoall in Mesh::classify_halo_and_haloed_nodes: " 
       << tt_end-tt_start << std::endl;
+     oomph_info.stream_pt()->flush();
      tt_start = TimingHelpers::timer();
     }
+
+   //MemoryUsage::doc_memory_usage("after postprocess 4th alltoall");
 
    // Now add previously overlooked halo/haloed nodes to shared node
    // lookup scheme in consistent order
@@ -3069,8 +3109,13 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
 
   } // end if comms reqd because we encountered overlooked halo elements
  
+
+ //MemoryUsage::doc_memory_usage("before sync halo nodes");
+
   // Synchronise shared nodes
   synchronise_shared_nodes(comm_pt,report_stats);
+
+  //MemoryUsage::doc_memory_usage("after sync halo nodes");
 
 #ifdef PARANOID
  // Has some twit filled in haloed nodes with own process?!
@@ -3136,6 +3181,8 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
   }
 
 
+ //MemoryUsage::doc_memory_usage("before resize halo nodes");
+
  // Now resize halo nodes if required (can be over-ruled from the outside
  // either by user (for (risky!) efficienty saving) or from overloaded
  // version of classify_... in refineable version of that function
@@ -3145,12 +3192,18 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
    resize_halo_nodes(comm_pt);
   }
 
+ //MemoryUsage::doc_memory_usage("after resize halo nodes");
+
  if (Global_timings::Doc_comprehensive_timings)
   {
    double t_end = TimingHelpers::timer();
    oomph_info << "Total time for Mesh::classify_halo_and_halo_nodes(): " 
               << t_end-t_start << std::endl;
+   oomph_info.stream_pt()->flush();
   }
+
+//  MemoryUsage::doc_memory_usage(
+//   "at end of Mesh::classify_halo_and_halo_nodes()");
 
 }
 
@@ -4234,6 +4287,7 @@ void Mesh::prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
                                          const bool& report_stats)
 {
 
+ //MemoryUsage::doc_memory_usage("at start of mesh-level prunes");
 
    
 #ifdef OOMPH_HAS_MPI
@@ -4308,6 +4362,8 @@ void Mesh::prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
      backed_up_el_pt[e]=this->finite_element_pt(e);
     }
    
+   //MemoryUsage::doc_memory_usage("after backed up elements");
+
    // Get the min and max refinement level, and current refinement pattern
    unsigned min_ref=0;
    unsigned max_ref=0;
@@ -4375,6 +4431,7 @@ void Mesh::prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
      t_start = TimingHelpers::timer();
     }
    
+   //MemoryUsage::doc_memory_usage("after establishing refinement levels");
 
    // Bypass everything until next comms if no elements
    if (nelem>0)
@@ -4440,7 +4497,12 @@ void Mesh::prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
       << " Mesh::prune_halo_elements_and_nodes() [includes comms]: " 
       << t_end-t_start << std::endl;
      t_start = TimingHelpers::timer();
-    }
+    }   
+
+
+
+   //MemoryUsage::doc_memory_usage("after synchronising refinement levels");
+
 
    // Now work on which "root" halo elements to keep at this level
    // Can't use the current set directly; however, 
@@ -4527,6 +4589,8 @@ void Mesh::prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
       << t_end-t_start << std::endl;
      t_start = TimingHelpers::timer();
     }
+
+   //MemoryUsage::doc_memory_usage("after setup of retention pattern");
 
    // Make sure everybody finishes this part
    MPI_Barrier(comm_pt->mpi_comm());
@@ -4683,6 +4747,8 @@ void Mesh::prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
      t_start = TimingHelpers::timer();
     }
 
+   //MemoryUsage::doc_memory_usage("after pt2pt comms of retention pattern");
+
  
    // Backup pointers to nodes in this mesh
    nnod=this->nnode();
@@ -4772,6 +4838,7 @@ void Mesh::prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
       }
     }
   
+   //MemoryUsage::doc_memory_usage("before deleting superfluous elements");
 
    // Delete superfluous elements
    for (std::set<Tree*>::iterator it=trees_to_be_deleted_pt.begin();
@@ -4785,6 +4852,9 @@ void Mesh::prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
        tree_pt->flush_object();
       }
     }
+
+   //MemoryUsage::doc_memory_usage("after deleting superfluous elements");
+
 
    // Wipe the storage scheme for (root) halo(ed) elements and then re-assign
    Root_haloed_element_pt.clear();
@@ -4806,6 +4876,8 @@ void Mesh::prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
       }
     }
    
+//    MemoryUsage::doc_memory_usage(
+//     "after wiping storage scheme for root halo/ed els");
    
    // Loop over all retained elements at this level and mark their nodes
    //-------------------------------------------------------------------
@@ -4841,14 +4913,20 @@ void Mesh::prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
       }
     }
    
+   // MemoryUsage::doc_memory_usage("after adding nodes back in");
+
    // Prune and rebuild mesh
    //-----------------------
    
    // Now remove the pruned nodes from the boundary lookup scheme
    this->prune_dead_nodes();
     
+   // MemoryUsage::doc_memory_usage("after prune dead nodes");
+
    // And finally re-setup the boundary lookup scheme for elements
    this->setup_boundary_element_info();
+
+   //MemoryUsage::doc_memory_usage("after setup boundary info");
 
    // Re-setup tree forest if needed. (Call this every time even if 
  // a (distributed) mesh has no elements on this processor.
@@ -4860,7 +4938,8 @@ void Mesh::prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
      ref_mesh_pt->setup_tree_forest();
     }
     
-   
+   //MemoryUsage::doc_memory_usage("after setup tree forest");
+
    if (Global_timings::Doc_comprehensive_timings)
     {
      t_end=TimingHelpers::timer();
@@ -4884,6 +4963,7 @@ void Mesh::prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
      t_start = TimingHelpers::timer();
     }
 
+   //MemoryUsage::doc_memory_usage("after classify_halo_and_haloed_nodes()");
 
    // Doc?
    //-----
@@ -4911,6 +4991,8 @@ void Mesh::prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
       << t_end-t_start << std::endl;
      t_start = TimingHelpers::timer();
     }
+
+   //MemoryUsage::doc_memory_usage("after reorder nodes");
 
    // Doc stats
    if (report_stats)
@@ -4944,6 +5026,8 @@ void Mesh::prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
     }
 
   }
+
+ //MemoryUsage::doc_memory_usage("end of mesh level prune");
 
 }
 
