@@ -821,7 +821,7 @@ void SimpleFSIPreconditioner::setup(Problem* problem_pt,
   Navier_stokes_preconditioner_pt->
    turn_into_subsidiary_block_preconditioner(this,ns_dof_list);
 
-  // Setup the NavierStokesSchurComplement  preconditioner. 
+  // Setup the NavierStokesSchurComplement preconditioner. 
   // (Pass it a pointer to the Navier Stokes mesh)
   Navier_stokes_preconditioner_pt->
    set_navier_stokes_mesh(Navier_stokes_mesh_pt);

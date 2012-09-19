@@ -10,13 +10,13 @@ of tutorials</a>
 that discuss how to modify serial driver codes to distribute the
 \c Problem object across multiple processors.
 
-Most of the driver code is identical to the <a
-href="../../adaptive_driven_cavity/html/index.html">previous
+Most of the driver code is identical to the 
+<a href="../../adaptive_driven_cavity/html/index.html">previous
 example</a> and we only discuss the changes required to perform load
 balancing on the problem. Please refer to
 <a href="../../../navier_stokes/adaptive_driven_cavity/html/index.html">
-this tutorial</a> and <a
-href="../../adaptive_driven_cavity/html/index.html">this tutorial</a>
+this tutorial</a> and 
+<a href="../../adaptive_driven_cavity/html/index.html">this tutorial</a>
 for a more detailed discussion of the problem and its serial and
 parallel implementation.
 
@@ -111,8 +111,8 @@ set_wall_mesh(..), etc.).
 
 \section example An example: revisiting the adaptive driven cavity problem 
 
-In this section we outline the changes which must be made to the <a
-href="../../adaptive_driven_cavity/html/index.html">parallel version
+In this section we outline the changes which must be made to the 
+<a href="../../adaptive_driven_cavity/html/index.html">parallel version
 of the adaptive driven cavity problem</a> so that the problem can use
 the load balancing method described above.
 
@@ -159,14 +159,16 @@ problem constructor accordingly:
 \subsection problem_class Changes to the problem class
 
 As the load balancing method performs a distribution immediately
-followed by a refinement, we must supply an additional function, \c
-actions_after_load_balance().  In this example, this function is
+followed by a refinement, the function \c actions_after_distribute()
+will be called after the balancing stage. In this example, the 
+function is
 identical in content to the \c actions_after_adapt() routine, since
-there is no requirement for an \c actions_after_distribute() routine.
+there is no requirement for an \c actions_after_distribute() routine
+in the absence of any load balancing.
 
 \dontinclude adaptive_driven_cavity_load_balance.cc
-\skipline Actions after load balancing
-\until end_of_actions_after_load_balance
+\skipline actions_after_distribute()
+\until }
 
 <HR>
 
@@ -175,14 +177,14 @@ there is no requirement for an \c actions_after_distribute() routine.
 The actual driver code demonstrates some of the different options available 
 for the \c Problem::load_balance() function, selected by the presence or 
 absence of command line arguments, and the use of the function \c
-Problem::use_default_partition_in_load_balance() (default value \c
-false), which is required when the use of command-line arguments
+Problem::set_default_partition_in_load_balance(), 
+which is required when the use of command-line arguments
 indicates a test run.
 
 \subsection default_partition Option I: Load balancing a problem based on a default partitioning of the elements
 
-If the function \c Problem::use_default_partition_in_load_balance() is
-set to \c true, then the load balancing method skips step 1 in the
+If the function \c Problem::set_default_partition_in_load_balance() is
+called then the load balancing method skips step 1 in the
 method described earlier (which uses \c METIS) and partitions the
 elements by splitting them equally across two processors.  [Note: all
 test runs use two processors; if you try to run a test case on more
@@ -190,8 +192,8 @@ than two processors then it is likely to fail as the original
 partition, which is stored in a file, only contains partition
 information for a run using two processors.]
 
-\skipline Validation run
-\until #endif
+\skipline Make up some distribution
+\until }
 
 In this instance, we also pass in a DocInfo object which documents the
 new distribution of the (root) elements, and a boolean flag
@@ -203,8 +205,8 @@ to report information to the screen during the load balancing procedure.
 
 If no command line arguments are specified, we simply call the \c
 load_balance() function with no arguments.  The following code is
-identical to the <a
-href="../../adaptive_driven_cavity/html/index.html">original parallel
+identical to the 
+<a href="../../adaptive_driven_cavity/html/index.html">original parallel
 driver code</a> aside from the insertion of the \c load_balance()
 function.
 

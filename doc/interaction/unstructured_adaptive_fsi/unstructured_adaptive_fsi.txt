@@ -2,16 +2,16 @@
 
 This tutorial demonstrates the use of unstructured meshes
 in 2D fluid-structure interaction problems with adaptivity. The
-formulation is extremely similar to that used in <a
-href="../../../interaction/unstructured_fsi/html/index.html">
+formulation is extremely similar to that used in 
+<a href="../../../interaction/unstructured_fsi/html/index.html">
 unstructured fsi without adaptivity, </a> but the geometry of the 
-problem is closely related to the <a
-href="../../fsi_channel_with_leaflet/html/index.html"> flow in a
+problem is closely related to the 
+<a href="../../fsi_channel_with_leaflet/html/index.html"> flow in a
 channel with a leaflet using structured adaptivity. </a> 
 
 The solid mechanics problem is exactly the same as that described in
-the <a
-href="../../../solid/unstructured_adaptive_solid/html/index.html">
+the 
+<a href="../../../solid/unstructured_adaptive_solid/html/index.html">
 unstructured solid mechanics with adaptivity tutorial. </a> The fluid
 mechanics problem is new, but is a simple extension of the 
 previous problems. The key realisation is that the unstructured
@@ -21,8 +21,8 @@ parametrisation. Moreover, the common boundary <b>must</b> have the
 same parametrisation in order for the fluid-structure interaction to
 be set up in the first place. Thus, setting up unstructured adaptivity
 for fsi problems is no more difficult than setting up the original
-unstructured problem using \c oomph-lib's <a
-href="../../../meshes/mesh_from_inline_triangle/html/index.html">
+unstructured problem using \c oomph-lib's 
+<a href="../../../meshes/mesh_from_inline_triangle/html/index.html">
 inline unstructured mesh generation </a> procedures.
 
 <HR>
@@ -35,8 +35,8 @@ inlet velocity profile.
 
 @I w 0.75\textwidth fsi_sketch "Sketch of the problem showing fluid and solid boundary ids."
 
- The non-dimension formulation is the same as decribed in <a
- href="../../unstructured_fsi/html/index.html"> the related
+ The non-dimension formulation is the same as decribed in 
+<a href="../../unstructured_fsi/html/index.html"> the related
  non-adaptive problem. </a> The fluid structure interaction parameter
  \f$Q \f$ is the ratio of viscous fluid stress to the reference stress
  (Young's modulus) of the solid.  
@@ -159,8 +159,8 @@ fluid and solid meshes.
 
  We start by building the solid mesh, an associated error estimator
  and then writing the boundaries and mesh to output files. These steps
- are exactly the same as in the <a
- href="../../../solid/unstructured_adaptive_solid/html/index.html"> 
+ are exactly the same as in the 
+<a href="../../../solid/unstructured_adaptive_solid/html/index.html"> 
  unstructured adapative solid mechanics tutorial. </a>
 
  \dontinclude unstructured_adaptive_2d_fsi.cc
@@ -307,8 +307,8 @@ non-adaptive </a> case.
 
 \section comm_ex Comments and Exercises
 
- The majority of comments in the <a
- href="../../unstructured_fsi/html/index.html">
+ The majority of comments in the 
+<a href="../../unstructured_fsi/html/index.html">
  non-adaptive unstructured FSI tutorial </a> also apply here. As
  mentioned above, the reason why the methodology works so
  straightforwardly is because the
@@ -326,8 +326,8 @@ non-adaptive </a> case.
 -# Investigate the behaviour of the system under increasing Reynolds
    number.
 -# Compare the results of the present (two-d elastic) problem 
-to that of the <a
-   href="../../fsi_channel_with_leaflet/html/index.html"> 
+to that of the 
+ <a href="../../fsi_channel_with_leaflet/html/index.html"> 
   (one-d) beam immersed within a channel. </a> Do the results agree as
    the thickness of the two-d elastic bar decreases?
 -# Modify your driver to perform unsteady runs and again compare your

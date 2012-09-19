@@ -21,7 +21,7 @@ unstructured_sphere_scattering_SOURCES = unstructured_sphere_scattering.cc
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
-unstructured_sphere_scattering_LDADD = -L@libdir@ -lrigid_body -lfourier_decomposed_helmholtz -lgeneric -loomph_crbond_bessel $(EXTERNAL_LIBS) $(FLIBS)
+unstructured_sphere_scattering_LDADD = -L@libdir@ -lfourier_decomposed_helmholtz -lgeneric -loomph_crbond_bessel $(EXTERNAL_LIBS) $(FLIBS)
 
 
 #--------------------------------------
@@ -31,7 +31,7 @@ unstructured_adaptive_sphere_scattering_SOURCES = unstructured_sphere_scattering
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
-unstructured_adaptive_sphere_scattering_LDADD = -L@libdir@ -lrigid_body -lfourier_decomposed_helmholtz -lgeneric -loomph_crbond_bessel $(EXTERNAL_LIBS) $(FLIBS)
+unstructured_adaptive_sphere_scattering_LDADD = -L@libdir@ -lfourier_decomposed_helmholtz -lgeneric -loomph_crbond_bessel $(EXTERNAL_LIBS) $(FLIBS)
 
 unstructured_adaptive_sphere_scattering_CXXFLAGS = -DADAPTIVE
 

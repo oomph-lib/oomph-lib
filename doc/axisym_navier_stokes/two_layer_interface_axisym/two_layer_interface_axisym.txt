@@ -285,8 +285,8 @@ documenting the result.
 <HR>
 
 \section problem_class The problem class 
-The problem class largely follows that of the <A
-HREF="../../single_layer_free_surface/html/index.html#problem_class">single-layer
+The problem class largely follows that of the 
+<A HREF="../../single_layer_free_surface/html/index.html#problem_class">single-layer
 example</A>, but with a few changes. We start by specifying the
 element and timestepper types as template parameters, where the
 timestepper is assumed to be a member of the \c BDF family. We then
@@ -297,8 +297,8 @@ the constructor.
 \skipline start_of_problem_class
 \until ~InterfaceProblem
 
-The next few functions take exactly the same form as those in the <A
-HREF="../../single_layer_free_surface/html/index.html#problem_class">single-layer
+The next few functions take exactly the same form as those in the 
+<A HREF="../../single_layer_free_surface/html/index.html#problem_class">single-layer
 example</A>, with the single exception that because in this geometry
 there are three velocity components (rather than two in the planar
 case), these must all be initialised in the \c
@@ -325,8 +325,8 @@ member function since only \c Problem::unsteady_run(...) should call it.
 \skipline private
 \until End of deform_free_surface
 
-Whereas in the <A
-HREF="../../single_layer_free_surface/html/index.html#problem_class">single-layer
+Whereas in the 
+<A HREF="../../single_layer_free_surface/html/index.html#problem_class">single-layer
 example</A> we specified the external pressure explicitly, here the pressure
 field in both fluids is an unknown which will be solved for. Because
 only the pressure gradient appears in the Navier-Stokes equations,
@@ -361,8 +361,8 @@ timestepper.
 
 Next we build the mesh, as usual. The mesh we are using is the \c
 TwoLayerSpineMesh<ELEMENT,INTERFACE_ELEMENT>, which works in a very
-similar way to the single-layer mesh used in the <A
-HREF="../../single_layer_free_surface/html/index.html">previous example</A>, except
+similar way to the single-layer mesh used in the 
+<A HREF="../../single_layer_free_surface/html/index.html">previous example</A>, except
 that we have \c TwoLayerSpineMesh::nupper() bulk elements above the
 interface as well as the \c TwoLayerSpineMesh::nlower() bulk elements
 below it. The boolean argument in the mesh constructor,
@@ -425,8 +425,8 @@ PATRICKFLAG THIS IS WHERE I'M UP TO!
 
 \section doc Post-processing
 
-This function is identical to that in the <A
-HREF="../../single_layer_free_surface/html/index.html#doc">previous example</A>. We
+This function is identical to that in the 
+<A HREF="../../single_layer_free_surface/html/index.html#doc">previous example</A>. We
 output the value of the current time to the screen, before recording
 the following parameters in the trace file:
 - the value of the continuous time,
@@ -449,8 +449,8 @@ indicate how time progresses during the simulation.
 
 \section unsteady_run The timestepping loop
 
-This function is also identical to the equivalent function in the <A
-HREF="../../single_layer_free_surface/html/index.html#unsteady_run">previous example</A>. We
+This function is also identical to the equivalent function in the 
+<A HREF="../../single_layer_free_surface/html/index.html#unsteady_run">previous example</A>. We
 begin by deforming the interface and then create a \c DocInfo object
 to store the output directory and the label for the output files.
 

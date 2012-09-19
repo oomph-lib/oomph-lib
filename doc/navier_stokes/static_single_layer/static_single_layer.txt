@@ -29,7 +29,8 @@
 
  The governing equations are the Navier--Stokes equations together
  with the free surface boundary conditions at the upper surface, see
- PATRICK another tutorial for further details. As in that tutorial, 
+ <A HREF="../../single_layer_free_surface/html/index.html"> 
+another tutorial </A> for further details. As in that tutorial, 
  we also compute the deformation of the internal fluid mesh by using a 
  pseudo-solid node-update strategy.
 
@@ -206,7 +207,9 @@ documents the solution.
 \c FaceElements used to enforce the additional boundary conditions and
 constraints. The function \c create_free_surface_elements() adds
 \c ElasticLineFluidInterfaceElements to the upper boundary (boundary
-2) of the mesh, exactly as in PATRICK another tutorial. The function
+2) of the mesh, exactly as in <A
+HREF="../../single_layer_free_surface/html/index.html"> another
+tutorial </A>. The function
 \c create_volume_constraint_elements() constructs the elements required to
 enforce the volume constraint. Finally, the function 
 \c create_contact_angle_element() constructs the \c PointElement that
@@ -246,6 +249,8 @@ container.
 
 \until set_value(0,Pext);
 
+
+ \anchor hijack
  We next setup the reference pressure and traded pressure. If we are
  using the external pressure as the reference pressure, then we pin it
  and set an internal pressure degree of freedom as the "traded"
@@ -256,8 +261,8 @@ container.
  residuals within the element. In addition,
  we will also need direct access to the data and its global equation
  number. The  appropriate machinery is provided by the \c Hijacked wrapper class
- which allows variables within an underlying element to be "hijacked",
- see ANOTHER TUTORIAL. The bulk elements are of \c QCrouzeixRaviart type,
+ which allows variables within an underlying element to be
+ "hijacked". The bulk elements are of \c QCrouzeixRaviart type,
  which means that the pressure variables are internal data and we
  hijack the first of these in the first element (although any would
  do). The function \c hijack_internal_value(..) instructs the bulk
@@ -318,7 +323,8 @@ container.
 
 \subsection free Free surface elements
  The free surface elements are created in exactly the same way as in
- the PATRICK tutorial. The only difference is that the construction
+ <A HREF="../../single_layer_free_surface/html/index.html"> another
+ tutorial </A>. The only difference is that the construction
  takes place within the function \c create_free_surface_elements()
  rather than within the constructor directly.
 

@@ -2271,8 +2271,10 @@ private:
 #endif
 
    // TODO: Used for the ImmersedRigidBodyTriangleMeshPolygon objects only
-   ImmersedRigidBodyTriangleMeshPolygon* bound_geom_obj_pt
-    = dynamic_cast<ImmersedRigidBodyTriangleMeshPolygon*>(
+   //ImmersedRigidBodyTriangleMeshPolygon* bound_geom_obj_pt
+   GeomObject* bound_geom_obj_pt
+    //= dynamic_cast<ImmersedRigidBodyTriangleMeshPolygon*>(
+    = dynamic_cast<GeomObject*>(
       input_closed_curve_pt);
 
    //If cast successful set up the coordinates

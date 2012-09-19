@@ -9,5 +9,5 @@ circular_disk_SOURCES = circular_disk.cc
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
-circular_disk_LDADD = -L@libdir@ -lfoeppl_von_karman -lgeneric -lrigid_body $(EXTERNAL_LIBS) $(FLIBS)
+circular_disk_LDADD = -L@libdir@ -lfoeppl_von_karman -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
 

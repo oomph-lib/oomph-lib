@@ -2,14 +2,13 @@
 
 In this document we will demonstrate how to use the general-purpose block
 preconditioners implemented in \c oomph-lib. This tutorial follows from the 
- <a
- href="../../../mpi/distributed_block_preconditioners/html/index.html">
+ <a href="../../../mpi/distributed_block_preconditioners/html/index.html">
 (Distributed) Block Preconditioners</A> tutorial, which provides
  an overview of \c oomph-lib's generic block preconditioning framework. 
 
 
-We use the \c Problem described in the <a
- href="../../../solid/airy_cantilever/html/index.html">
+We use the \c Problem described in the
+ <a href="../../../solid/airy_cantilever/html/index.html">
 Bending of a Cantilever Beam</A>  tutorial to illustrate the key concepts.
 
 \section introduction Introduction
@@ -170,8 +169,8 @@ Given an instance of the problem,
 \until CantileverProblem<MySolidElement<RefineableQPVDElement<2,3> > > problem;
 
 we specify GMRES as the linear solver. If available, we use the \c
-TrilinosAztecOOSolver wrapper to the <a
-href="http://trilinos.sandia.gov/packages/aztecoo/"><code>Trilinos
+TrilinosAztecOOSolver wrapper to the 
+<a href="http://trilinos.sandia.gov/packages/aztecoo/"><code>Trilinos
 AztecOO</code></a> implementation of GMRES. (This is the only
 distributed implementation of GMRES in \c oomph-lib.)
 

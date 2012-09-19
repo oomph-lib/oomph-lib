@@ -218,6 +218,7 @@ convention:
 <TABLE>
 <TR>
 <TD bgcolor="cornsilk">
+\anchor conv_mesh_const
 \n<CENTER><B>A general convention</B></CENTER> \n
 
 Recall that all \c Data objects store a pointer to a \c TimeStepper
@@ -326,7 +327,7 @@ of the elemental residual vector and the Jacobian matrix.
 <HR>
 <HR>
 
-\section before_timestep Actions before timestep
+\section before_timestep Actions before (implicit) timestep
 We overload the (empty) virtual function 
 \c Problem::actions_before_implicit_timestep() to update the time-dependent
 boundary conditions (@R[2DHeat_BC1]@), using the current 
@@ -365,6 +366,7 @@ the \c i -th nodal coordinate at previous timestep \c t.
 <TABLE>
 <TR>
 <TD bgcolor="cornsilk">
+\anchor conv_t_arg
 \n<CENTER><B>A general convention</B></CENTER> \n
 Many functions in \c oomph-lib have steady and time-dependent
 versions which usually differ in their first argument. Typically,
@@ -382,7 +384,7 @@ timestepping schemes, the history values include approximations of
 the first and second time-derivatives at the previous timestep. 
 
 <HR>
-
+\anchor conv_hist_vals
 \n<CENTER><B>Another general convention</B></CENTER> \n
 While, in general, not all "history values" represent
 the solution at previous timesteps, the "history values"

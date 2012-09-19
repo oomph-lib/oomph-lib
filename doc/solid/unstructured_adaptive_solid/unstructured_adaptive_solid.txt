@@ -11,13 +11,12 @@ unstructured solid mechanics without mesh adaptation. </a>
 Lagrangian coordinates are projected
 between meshes in the same way as all other field variables, Eulerian
 coordinates and history values, see the description in
- <a
- href="../../../doc/meshes/mesh_from_inline_triangle/html/index.html"> 
+ <a href="../../../doc/meshes/mesh_from_inline_triangle/html/index.html"> 
 another tutorial. </a>
 
 The solid mechanics problem described here can be regarded as a
-sub-problem for the  <a
-href="../../../../doc/interaction/unstructured_adaptive_fsi/html/index.html">
+sub-problem for the  
+<a href="../../../../doc/interaction/unstructured_adaptive_fsi/html/index.html">
 unstructured adaptive fluid--structure interaction tutorial.</a> In
 addition, we can use the problem to assess the 
 errors incurred when projecting the solution between different meshes.
@@ -131,7 +130,7 @@ another tutorial. </a>
 
 \dontinclude unstructured_adaptive_solid.cc
 \skipline start_constructor
-\until uniform_element_area)
+\until triangle_mesh_parameters)
 
 We next construct an error estimator and
 specify the target errors and element sizes.

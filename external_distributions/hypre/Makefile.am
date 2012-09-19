@@ -21,7 +21,7 @@ run_command2 += " --with-lapack=$(LAPACK_LIB) "
 else
 run_command2 += " --with-lapack=dummy" 
 endif
-run_command2 += " F77=$(F77)  CC=$(CC) CXX=$(CXX) FFLAGS=\"$(FFLAGS)\"  CFLAGS=\"$(CFLAGS)\" CXXFLAGS=\"$(CXXFLAGS)\" " 
+run_command2 += " F77=$(F77)  CC=$(CC) CXX=$(CXX) FFLAGS=\"$(FFLAGS)\"  CFLAGS=\"$(CFLAGS)\" CXXFLAGS=\"$(CXXFLAGS)\" LDFLAGS=\"$(LDFLAGS)\" " 
 
 all:
 	echo "#! /bin/bash" > build_script.bash

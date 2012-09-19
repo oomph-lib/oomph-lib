@@ -3,13 +3,13 @@
 
 In this document we discuss \c oomph-libs block preconditioning
 framework. We describe the functionality of the framework by discussing the 
-implementation of the FSI preconditioner described in the <a
-href="../../../preconditioners/fsi/html/index.html">FSI Preconditioner
+implementation of the FSI preconditioner described in the 
+<a href="../../../preconditioners/fsi/html/index.html">FSI Preconditioner
 Tutorial</A>. The aim of the block preconditioning framework is to provide a simple environment to facilitate the implementation of distributed block preconditioners which in particular allows existing (block) preconditioners to be reused to create in hierarchical fashion new block preconditioners for multi-physics problems. For example, in the FSI preconditioner (considered in this document) we reuse existing single-physics preconditioners for the fluid and solid subsidiary problems.
 
 
-Throughout this document we use the <a
-href="../../../interaction/fsi_channel_with_leaflet/html/index.html">FSI channel with leaflet problem</A> to illustrate the key concepts.
+Throughout this document we use the 
+<a href="../../../interaction/fsi_channel_with_leaflet/html/index.html">FSI channel with leaflet problem</A> to illustrate the key concepts.
 
 
 \section theory Theoretical Background
@@ -97,8 +97,8 @@ B& \\
 \f]
 
 where \f$A\f$ is the momentum block, \f$B^T\f$ the discrete gradient
-operator, and \f$B\f$ the discrete divergence operator (see <a
-href="../../../preconditioners/lsc_navier_stokes/html/index.html">Navier
+operator, and \f$B\f$ the discrete divergence operator (see 
+<a href="../../../preconditioners/lsc_navier_stokes/html/index.html">Navier
 Stokes Preconditioner Tutorial</A>). 
 
 This FSI preconditioner 
@@ -233,8 +233,8 @@ preconditioners as subsidiary preconditioners. \c Oomph-lib's block precondition
 of existing preconditioners as subsidiary preconditioners.
 
 
-We wish to use the \c NavierStokesSchurComplementPreconditioner (see <a
-href="../../../preconditioners/lsc_navier_stokes/html/index.html">Navier
+We wish to use the \c NavierStokesSchurComplementPreconditioner (see 
+<a href="../../../preconditioners/lsc_navier_stokes/html/index.html">Navier
 Stokes Preconditioner Tutorial</A>)  as the subsidiary
 preconditioner for the fluid subisidiary problem \f$\tilde F\f$; this
 preconditioner will utilise the fine

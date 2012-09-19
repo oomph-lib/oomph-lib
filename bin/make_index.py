@@ -3,6 +3,8 @@
 #Script to generate an index page for oomph-lib from a very simple
 #input file
 
+# Global (bit bad) counter to give unique ids for each division for use
+# when hiding sections of text
 div_counter=0
 
 #Function that is used to convert the entries of a list into a key
@@ -20,18 +22,19 @@ def get_key_and_link(entry):
  #Otherwise we could have a link or cross reference as well
  elif n > 1:
   key = entry[0]
-  #If the entry starts with a % it's a link
+  #If the entry starts with a % it's a link, find the relative link name
   if entry[1][0]=='%':
    link = entry[1].lstrip('%')
   #If it starts with a ^ it's a cross-ref
-  #Also provide the synonym to which we are referring in synonym
+  #Determine the relative hyperlink and
+  #also provide the synonym to which we are referring in synonym
   elif entry[1][0]=='^':
    anchor = entry[1].lstrip('^').strip().replace(' ','')
    synonym = ", see " + entry[1].lstrip('^').strip().replace('.',':')
    link = "index/html/index.html#" + anchor[0].upper() + '.' + anchor 
  return (key,link,synonym)  
 
-#Output the key and link or cross-reference
+#Output the key and link or cross-reference in pretty format
 def print_key(doc_root_directory,key,level,anchor):
  #Increment the global counter to give unique text block IDs
  global div_counter
@@ -63,13 +66,23 @@ def print_key(doc_root_directory,key,level,anchor):
  #If we don't have a link then it's a submenu heading, which we allow to
  #collapse and uncollapse by the following html magic
  #The link is to its own anchor so it shouldn't move much, but has the
- #same look as real links 
+ #same look as real links (In the end I found this confusing, so have removed 
+ #it)
  if key[1]=='':
-  print begin_tag, anchor_string, \
-  "\htmlonly", anchor_tag, key[0], "</a>" \
-  "<a onclick=\"index_toggle(\'div_id",div_counter,"\',\'im_id",div_counter,"\')\">", "<img src=\"../collapse.png\" id=\"im_id",div_counter,"\">",\
-  "</a>\endhtmlonly",end_tag, \
-  "\htmlonly<div id=\"div_id",div_counter,"\"",style,">\endhtmlonly"
+  print begin_tag, anchor_string #, \
+  #Uncomment for self anchor-tag 
+  #"\htmlonly",\
+  #anchor_tag, key[0], "</a>"
+  print key[0]
+  #Uncomment for the collapsing section stuff
+  #print "<a onclick=\"index_toggle(\'div_id",div_counter,"\',\'im_id",\
+  #div_counter,"\')\">", \
+  #"<img src=\"../collapse.png\" id=\"im_id",div_counter,"\">", "</a>",
+  #print  "\endhtmlonly"
+  print end_tag, \
+  "\htmlonly",\
+  "<div id=\"div_id",div_counter,"\"",style,">\endhtmlonly"
+
  #Otherwise just print the link and key
  else:
   output_key = key[0] + key[2]
@@ -175,6 +188,23 @@ def make_index(filename,doc_root_directory):
 
  #Sort the list
  main_index.sort()
+
+ #Dump the output to a sorted file
+ sorted_index=open("sorted.idx",'w')
+ for entry in main_index:
+  n = len(entry)
+  for index,field in enumerate(entry):
+   #If we have a link write a newline first
+   if field[0]=='^' or field[0]=='%':
+    sorted_index.write("\n")
+   #Write the entry
+   sorted_index.write(field)
+   #Write the separator
+   if index!=n-1:
+    sorted_index.write(" @ ")
+   else:
+    sorted_index.write(" @end \n\n")
+ sorted_index.close()
 
  #Add first letters of each key as the first entry in the list
  for line in main_index:

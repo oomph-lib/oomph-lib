@@ -20,7 +20,7 @@ mesh_from_inline_triangle_internal_boundaries_SOURCES = mesh_from_inline_triangl
 # we specify with -L. $(FLIBS) get included just in case
 # we decide to use a solver that involves fortran sources. 
 mesh_from_inline_triangle_internal_boundaries_LDADD = -L@libdir@ -lpoisson \
- -lrigid_body -lgeneric  $(EXTERNAL_LIBS) $(FLIBS)
+ -lgeneric  $(EXTERNAL_LIBS) $(FLIBS)
 
 # THE EXECUTABLE:
 #----------------
@@ -33,6 +33,6 @@ mesh_from_inline_triangle_internal_boundaries_extra_SOURCES = mesh_from_inline_t
 # which are accessible via the general library directory which 
 # we specify with -L. $(FLIBS) get included just in case
 # we decide to use a solver that involves fortran sources. 
-mesh_from_inline_triangle_internal_boundaries_extra_LDADD = -L@libdir@ -lpoisson -lrigid_body \
- -lgeneric  $(EXTERNAL_LIBS) $(FLIBS)
+mesh_from_inline_triangle_internal_boundaries_extra_LDADD = -L@libdir@ \
+-lpoisson -lgeneric  $(EXTERNAL_LIBS) $(FLIBS)
 

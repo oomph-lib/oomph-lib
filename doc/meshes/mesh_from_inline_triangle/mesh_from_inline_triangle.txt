@@ -330,7 +330,7 @@ circle of radius \f$ 0.1 \f$ , centred at \f$ (x_1,x_2)=(0,0.5). \f$
 As above, we break the closed boundary into two distinct 
 sub-boundaries -- this time represented by \c TriangleMeshPolyLines:
 
-\until TriangleMeshPolyLine
+\until TriangleMeshCurveSection
 
 We create the vertex coordinates for the upper half of the polygonal
 hole,
@@ -348,7 +348,7 @@ We repeat the exercise for the lower half which we turn into boundary
 
 Finally, we build the polygonal hole itself, specifying its constituent
 \c TriangleMeshPolyLines and the coordinate of a point inside the
-hole, which is required by \c Triangle.
+hole, which is required by \c Triangle:
 
 \until hole_pt[0]
 
