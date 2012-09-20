@@ -298,6 +298,7 @@ fill_in_contribution_to_residuals(Vector<double> &residuals)
       }
     }
   } // End of loop over integration points
+
 }
 
 /*

@@ -364,7 +364,7 @@ public:
 
    // Get the total number of FvK nodal values (assuming they are stored
    // contiguously) at node 0 (it's the same at all nodes anyway)
-   unsigned total_fvk_nodal_indicies = required_nvalue(0);
+   unsigned total_fvk_nodal_indicies = 8; // hierher required_nvalue(0);
 
    // Get the number of nodes in this element
    unsigned n_node = nnode();
