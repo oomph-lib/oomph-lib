@@ -494,7 +494,8 @@ void Data::dump(std::ostream& dump_file)
 void Data::read(std::ifstream& restart_file)
 {
  std::string input_string;
- 
+ std::ostringstream error_stream;
+
  //Find the amount of data stored 
  const unsigned value_pt_range = nvalue();
  const unsigned time_steps_range = ntstorage();
@@ -510,11 +511,15 @@ void Data::read(std::ifstream& restart_file)
    const unsigned long check_nvalues=atoi(input_string.c_str());
    if (check_nvalues!=value_pt_range)
     {
-     std::ostringstream error_stream;
      error_stream 
       << "Number of values stored in dump file is not equal to the amount "
       << "of storage allocated in Data object "
-      <<  check_nvalues << " " << value_pt_range << std::endl;
+      <<  check_nvalues << " " << value_pt_range;
+     if (check_nvalues>value_pt_range)
+      {
+       error_stream << " [ignoring extra entries]";
+      }
+     error_stream << std::endl;
      Node* nod_pt=dynamic_cast<Node*>(this);
      if (nod_pt!=0)
       {
@@ -536,15 +541,20 @@ void Data::read(std::ifstream& restart_file)
         }
 #endif
       }
-     throw OomphLibError(error_stream.str(),
-                         "Data::read()",
-                         OOMPH_EXCEPTION_LOCATION);
+     if (check_nvalues<value_pt_range)
+      {
+       throw OomphLibError(error_stream.str(),
+                           "Data::read()",
+                           OOMPH_EXCEPTION_LOCATION);
+      }
     }
    
    // Read line up to termination sign
    getline(restart_file,input_string,'#');
+
    // Ignore rest of line
    restart_file.ignore(80,'\n');
+
    // Check # of values:
    const unsigned check_ntvalues=atoi(input_string.c_str());
    
@@ -570,18 +580,41 @@ void Data::read(std::ifstream& restart_file)
      // Read data
      for(unsigned t=0;t<time_steps_range;t++)
       {
-       for(unsigned j=0;j<value_pt_range;j++) 
+       for(unsigned j=0;j<check_nvalues;j++) 
         {
          if (t==0)
           {
            // Read line
            getline(restart_file,input_string);
+
            // Transform to double
-           set_value(t,j,atof(input_string.c_str()));
+           if (j<value_pt_range)
+            {
+             set_value(t,j,atof(input_string.c_str()));
+            }
+           else
+            {
+             error_stream 
+              << "Not setting j=" << j 
+              << " -th history restart value  [t = " << t << " ] to "
+              << atof(input_string.c_str()) << " because Data "
+              << " hasn't been sufficiently resized\n";
+            }
           }
          else
           {
-           set_value(t,j,0.0);
+           if (j<value_pt_range)
+            {
+             set_value(t,j,0.0);
+            }
+           else
+            {
+             error_stream 
+              << "Not setting j=" << j 
+              << " -th restart history value  [t = " << t << " ] to "
+              << 0.0 << " because Data "
+              << " hasn't been sufficiently resized\n";
+            }
           }
         }
       }
@@ -604,14 +637,25 @@ void Data::read(std::ifstream& restart_file)
      // Read data
      for(unsigned t=0;t<check_ntvalues;t++)
       {
-       for(unsigned j=0;j<value_pt_range;j++) 
+       for(unsigned j=0;j<check_nvalues;j++) 
         {
          // Read line
          getline(restart_file,input_string);
          if (t==0)
           {
            // Transform to double
-           set_value(t,j,atof(input_string.c_str()));
+           if (j<value_pt_range)
+            {
+             set_value(t,j,atof(input_string.c_str()));
+            }
+           else
+            {
+             error_stream 
+              << "Not setting j=" << j 
+              << " -th restart history value  [t = " << t << " ] to "
+              << atof(input_string.c_str()) << " because Data "
+              << " hasn't been sufficiently resized\n";
+            }
           }
         }
       }
@@ -622,16 +666,35 @@ void Data::read(std::ifstream& restart_file)
      // Read data
      for(unsigned t=0;t<time_steps_range;t++)
       {
-       for(unsigned j=0;j<value_pt_range;j++) 
+       for(unsigned j=0;j<check_nvalues;j++) 
         {
          // Read line
          getline(restart_file,input_string);
+
          // Transform to double
-         set_value(t,j,atof(input_string.c_str()));
+         if (j<value_pt_range)
+          {
+           set_value(t,j,atof(input_string.c_str()));
+          }
+         else
+          {
+           error_stream << "Not setting j=" << j 
+                        << " -th restart history value [t = " << t << " ] to "
+                        << atof(input_string.c_str()) << " because Data "
+                        << " hasn't been sufficiently resized\n";
+          }
         }
       }
     }
+   if (check_nvalues>value_pt_range)
+    {
+     OomphLibWarning(error_stream.str(),
+                     "Data::read()",
+                     OOMPH_EXCEPTION_LOCATION);
+    }
   }
+
+
 }
 
 
