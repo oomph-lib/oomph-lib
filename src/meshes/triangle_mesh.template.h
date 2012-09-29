@@ -852,29 +852,21 @@ class TriangleMeshParameters
     this->Face_index_region_at_boundary.clear();
     this->Boundary_curve_section_pt.clear();
     this->Boundary_connections_pt.clear();
+    unsigned nbound=nboundary();
+    Boundary_coordinate_exists.resize(nbound,false);
 
     //Now build the new scaffold
     Tmp_mesh_pt= new TriangleScaffoldMesh(this->Triangulateio);
-        
+     
     // Triangulation has been created -- remember to wipe it!
     Triangulateio_exists=true;
     
     // Convert mesh from scaffold to actual mesh
     build_from_scaffold(this->Time_stepper_pt,this->Use_attributes);
-    
+        
     // Kill the scaffold
     delete Tmp_mesh_pt;
     Tmp_mesh_pt=0;
-
-    // Setup boundary coordinates for boundaries
-    unsigned nb=nboundary();
-    for (unsigned b=0;b<nb;b++)
-     {
-      this->setup_boundary_coordinates(b);
-     }
-
-    //Deform the boundary onto any geometric objects
-    this->snap_nodes_onto_geometric_objects();
    }
 
   /// Boolean defining if Triangulateio object has been built or not
@@ -1189,7 +1181,6 @@ class TriangleMeshParameters
       sqrt(pow(vertex_coord[s][0]-vertex_coord[s-1][0],2)+
            pow(vertex_coord[s][1]-vertex_coord[s-1][1],2));
      polygonal_vertex_arclength_info[s].second=zeta[0];
-
     }
   }
 
@@ -1891,7 +1882,7 @@ protected:
 
 private:
 
-  // \short Helper function that creates the associated polyline
+  /// \short Helper function that creates the associated polyline
   /// representation for curvilines
   TriangleMeshCurveSection *curviline_to_polyline(
       TriangleMeshCurviLine* &curviline_pt,  unsigned &bnd_id)

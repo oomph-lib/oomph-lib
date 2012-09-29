@@ -1413,20 +1413,13 @@ public:
  void clear_triangulateio()
   {TriangleHelper::clear_triangulateio(Triangulateio);}
 
- /// \short Dump the triangulateio structure to a dump file
- void dump_triangulateio(std::ostream &dump_file)
-  {TriangleHelper::dump_triangulateio(Triangulateio,dump_file);}
+ /// \short Dump the triangulateio structure to a dump file and
+ /// record boundary coordinates of boundary nodes
+ void dump_triangulateio(std::ostream &dump_file);
 
  /// \short Regenerate the mesh from a dumped triangulateio file
- void remesh_from_triangulateio(std::istream &restart_file)
-  {
-   //Clear the existing triangulate io
-   TriangleHelper::clear_triangulateio(Triangulateio);
-   //Read the data into the file
-   TriangleHelper::read_triangulateio(restart_file,Triangulateio);
-   //Now remesh from the new data structure
-   this->remesh_from_internal_triangulateio();
-  }
+ /// and dumped boundary coordinates of boundary nodes
+ void remesh_from_triangulateio(std::istream &restart_file);
 
  ///Virtual function that is used for specific remeshing from the triangulateio
  virtual void remesh_from_internal_triangulateio() 

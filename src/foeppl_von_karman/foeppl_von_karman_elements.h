@@ -695,8 +695,9 @@ class FaceGeometry<QFoepplvonKarmanElement<NNODE_1D> >:
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif
-   return this->node_pt(0)->ntstorage();
+    return this->node_pt(0)->ntstorage();
   }
+
 
   ///\short Number of positional history values
   unsigned nhistory_values_for_coordinate_projection()
@@ -740,6 +741,7 @@ class FaceGeometry<QFoepplvonKarmanElement<NNODE_1D> >:
                    const unsigned &fld,
                    const Vector<double>& s)
    {
+
 #ifdef PARANOID
     if (fld > 7)
      {
@@ -769,7 +771,7 @@ class FaceGeometry<QFoepplvonKarmanElement<NNODE_1D> >:
     //Sum over the local nodes
     for(unsigned l=0;l<n_node;l++)
      {
-      interpolated_w += this->nodal_value(l,w_nodal_index)*psi[l];
+      interpolated_w += this->nodal_value(t,l,w_nodal_index)*psi[l];
      }
     return interpolated_w;
    }

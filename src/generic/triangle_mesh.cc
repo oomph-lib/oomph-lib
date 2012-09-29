@@ -1768,15 +1768,9 @@ TriangleMeshPolygon::TriangleMeshPolygon(
           p1 = p2;
         }
 
-
-      /*    oomph_info << Internal_point[0]<< " "  */
-      /*               << Internal_point[1]<< " "; */
-
       // Even number of intersections: outside
       if (intersect_counter%2==0)
         {
-          //     oomph_info << 1 << std::endl;
-
           std::ostringstream error_stream;
           error_stream
           << "The internal point at "
@@ -1856,16 +1850,8 @@ TriangleMeshOpenCurve::TriangleMeshOpenCurve(
 
    // Work out error
    double error = sqrt(pow(v1[0]-v2[0],2)+pow(v1[1]-v2[1],2));
-
-   bool contiguous=true;
-   unsigned i_offensive=0;
-
    if (error>ToleranceForVertexMismatchInPolygons::Tolerable_error)
     {
-
-     contiguous = false;
-     i_offensive=i;
-
      std::ostringstream error_stream;
      error_stream
      << "The start and end points of curve section boundary parts " << i
@@ -1944,6 +1930,148 @@ namespace TriangleBoundaryHelper
 }
 
 #ifdef OOMPH_HAS_TRIANGLE_LIB
+
+
+
+//==============================================================
+/// Dump the triangulateio structure to a dump file and
+/// record boundary coordinates of boundary nodes
+//==============================================================
+ void TriangleMeshBase::dump_triangulateio(std::ostream &dump_file)
+ {
+  TriangleHelper::dump_triangulateio(Triangulateio,dump_file);
+
+  // Loop over all boundary nodes and dump out boundary coordinates 
+  // if they exist
+  Vector<double> zeta(1);
+  unsigned nb=nboundary();
+  for (unsigned b=0;b<nb;b++)
+   {
+    if (Boundary_coordinate_exists[b])
+     {
+      dump_file << "1 # Boundary coordinate for boundary " << b 
+                << " does exist\n";
+      unsigned nnod=nboundary_node(b);
+      dump_file << nnod << " # Number of dumped boundary nodes\n";
+      for (unsigned j=0;j<nnod;j++)
+       {
+        Node* nod_pt=boundary_node_pt(b,j);
+        nod_pt->get_coordinates_on_boundary(b,zeta);
+        dump_file << zeta[0] << std::endl;
+       }
+      dump_file << "-999 # Done boundary coords for boundary " << b << "\n";
+     }
+    else
+     {
+      dump_file << "0 # Boundary coordinate for boundary " << b 
+                << " does not exist\n";
+      
+     }
+   }
+ }
+
+
+//==============================================================
+/// Regenerate the mesh from a dumped triangulateio file
+/// and dumped boundary coordinates of boundary nodes
+//==============================================================
+ void TriangleMeshBase::remesh_from_triangulateio(std::istream &restart_file)
+ {
+  //Clear the existing triangulate io
+  TriangleHelper::clear_triangulateio(Triangulateio);
+
+  //Read the data into the file
+  TriangleHelper::read_triangulateio(restart_file,Triangulateio);
+
+  //Now remesh from the new data structure
+  this->remesh_from_internal_triangulateio();
+   
+  // Loop over all boundary nodes and read boundary coordinates 
+  // if they exist
+  Vector<double> zeta(1);
+  std::string input_string;
+  unsigned nb=nboundary();
+  for (unsigned b=0;b<nb;b++)
+   {
+    // Read line up to termination sign
+    getline(restart_file,input_string,'#');
+
+    // Ignore rest of line
+    restart_file.ignore(80,'\n');
+
+    // Did boundary coordinate exist?
+    const unsigned bound_coord_exists=atoi(input_string.c_str());    
+    if (bound_coord_exists==1)
+     {
+      // Remember it!
+      Boundary_coordinate_exists[b]=true;
+
+      // Read line up to termination sign
+      getline(restart_file,input_string,'#');
+      
+      // Ignore rest of line
+      restart_file.ignore(80,'\n');
+      
+      // How many nodes did we dump?
+      const unsigned nnod_dumped=atoi(input_string.c_str());
+
+      // Does it match?
+      unsigned nnod=nboundary_node(b);
+      if (nnod!=nnod_dumped)
+       {
+        std::ostringstream error_stream;
+        error_stream << "Number of dumped boundary nodes " 
+                     << nnod_dumped 
+                     << " doesn't match number of nodes on boundary " 
+                     << b << ": " << nnod << std::endl;
+        throw OomphLibError(error_stream.str(),
+                            "TriangleMeshBase::remesh_from_triangulateio()",
+                            OOMPH_EXCEPTION_LOCATION);
+       }
+
+      // Loop over all nodes
+      for (unsigned j=0;j<nnod;j++)
+       {
+        // Read line up to termination sign
+        getline(restart_file,input_string);
+        
+        // Boundary coordinate
+        zeta[0]=atof(input_string.c_str());
+
+        // Set it
+        Node* nod_pt=boundary_node_pt(b,j);
+        nod_pt->set_coordinates_on_boundary(b,zeta);
+       }
+
+      // Read line up to termination sign
+      getline(restart_file,input_string,'#');
+      
+      // Ignore rest of line
+      restart_file.ignore(80,'\n');
+      
+      // Have we reached the end?
+      const int check=atoi(input_string.c_str());
+      if (check!=-999)
+       {
+        std::ostringstream error_stream;
+        error_stream << "Haven't read all nodes on boundary "<< b << std::endl; 
+        throw OomphLibError(error_stream.str(),
+                            "TriangleMeshBase::remesh_from_triangulateio()",
+                            OOMPH_EXCEPTION_LOCATION);
+       }
+     }
+    else
+     {
+      oomph_info << "Restart: Boundary coordinate for boundary " << b 
+                 << " does not exist.\n";
+      
+     }
+   }
+ }
+
+
+
+
 
 //==============================================================
 /// Write a Triangulateio_object file of the TriangulateIO object

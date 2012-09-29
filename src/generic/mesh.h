@@ -264,6 +264,12 @@ public:
   void doc_boundary_coordinates(const unsigned& b, std::ofstream& the_file)
   { 
    if (nelement()==0) return;
+   if (!Boundary_coordinate_exists[b])
+    {
+     oomph_info << "No boundary coordinates were set up for boundary " 
+                << b << std::endl;
+     return;
+    }
 
    // Get spatial dimension
    unsigned dim=finite_element_pt(0)->node_pt(0)->ndim();
