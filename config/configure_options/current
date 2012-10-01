@@ -105,9 +105,9 @@
 --with-hypre=/home/mheil/local/hypre_default_installation_mpi
 --with-trilinos=/home/mheil/local/trilinos_default_installation_mpi
 --with-mpi-self-tests="mpirun -np 2"
-CXXFLAGS="-O6 -Wall"
-CFLAGS="-O6"
-FFLAGS="-O6"
+CXXFLAGS="-g -DPARANOID -DRANGE_CHECKING -Wall"
+CFLAGS="-g"
+FFLAGS="-g"
 FFLAGS_NO_OPT="-O0"
 CXX=mpic++
 CC=mpicc

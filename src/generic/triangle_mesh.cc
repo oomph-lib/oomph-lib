@@ -1977,6 +1977,18 @@ namespace TriangleBoundaryHelper
 //==============================================================
  void TriangleMeshBase::remesh_from_triangulateio(std::istream &restart_file)
  {
+
+
+#ifdef PARANOID
+  // Record number of boundary nodes before remesh
+  unsigned nbound_old=nboundary();
+  Vector<unsigned> old_nboundary_node(nbound_old);
+  for (unsigned j=0;j<nbound_old;j++)
+   {
+    old_nboundary_node[j]=nboundary_node(j);
+   }
+#endif
+
   //Clear the existing triangulate io
   TriangleHelper::clear_triangulateio(Triangulateio);
 
@@ -1986,6 +1998,46 @@ namespace TriangleBoundaryHelper
   //Now remesh from the new data structure
   this->remesh_from_internal_triangulateio();
    
+
+#ifdef PARANOID
+  // Record number of boundary nodes after remesh
+  unsigned nbound_new=nboundary();
+  if (nbound_new!=nbound_old)
+   {
+    std::ostringstream error_stream;
+    error_stream << "Number of boundaries before remesh from triangulateio, " 
+                 << nbound_new 
+                 << ",\ndoesn't match number boundaries afterwards, " 
+                 << nbound_old 
+                 << ". Have you messed \naround with boundary nodes in the "
+                 << "derived mesh constructor (or after calling \nit)? If so,"
+                 << " the dump/restart won't work as written at the moment.";
+    throw OomphLibError(error_stream.str(),
+                        "TriangleMeshBase::remesh_from_triangulateio()",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+  unsigned nbound=nboundary();
+  for (unsigned j=0;j<nbound;j++)
+   {
+    if (old_nboundary_node[j]!=nboundary_node(j))
+     {
+      std::ostringstream error_stream;
+      error_stream << "Number of boundary nodes on boundary " << j 
+                   << " before remesh from triangulateio, " 
+                   << old_nboundary_node[j]
+                   << ",\ndoesn't match number boundaries afterwards, " 
+                   << nboundary_node(j)
+                   << ".\nHave you messed around with boundary nodes in the\n"
+                   << "derived mesh constructor (or after calling it)? \nIf so,"
+                   << " the dump/restart won't work as written at the moment.";
+      throw OomphLibError(error_stream.str(),
+                          "TriangleMeshBase::remesh_from_triangulateio()",
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+   }
+#endif
+
+
   // Loop over all boundary nodes and read boundary coordinates 
   // if they exist
   Vector<double> zeta(1);
