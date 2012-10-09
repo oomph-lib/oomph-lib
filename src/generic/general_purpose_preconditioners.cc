@@ -332,6 +332,17 @@ void ILUZeroPreconditioner<CCDoubleMatrix>::setup(Problem* problem_pt,
  // cast the Double Base Matrix to Compressed Column Double Matrix
  CCDoubleMatrix* cc_matrix_pt = dynamic_cast<CCDoubleMatrix*>(matrix_pt);
  
+#ifdef PARANOID
+ if(cc_matrix_pt == 0)
+   {
+     std::ostringstream error_msg;
+     error_msg << "Failed to conver matrix_pt to CCDoubleMatrix*.";
+     throw OomphLibError(error_msg.str(),
+                         "ILUZeroPreconditioner<CCDoubleMatrix>::setup",
+                         OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+ 
  // number of rows in matrix
  int n_row=cc_matrix_pt->nrow();
  
@@ -466,6 +477,17 @@ void ILUZeroPreconditioner<CRDoubleMatrix>::setup(Problem* problem_pt,
  // cast the Double Base Matrix to Compressed Column Double Matrix
  CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt);
  
+#ifdef PARANOID
+ if(cr_matrix_pt == 0)
+   {
+     std::ostringstream error_msg;
+     error_msg << "Failed to conver matrix_pt to CRDoubleMatrix*.";
+     throw OomphLibError(error_msg.str(),
+                         "ILUZeroPreconditioner<CRDoubleMatrix>::setup",
+                         OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+
  // if the matrix is distributed then build global version
  bool built_global = false;
  if (cr_matrix_pt->distributed())
@@ -477,7 +499,7 @@ void ILUZeroPreconditioner<CRDoubleMatrix>::setup(Problem* problem_pt,
    cr_matrix_pt = global_matrix_pt;
 
    // set the flag so we can delete later
-   built_global = false;
+   built_global = true;
   }
 
  // store the Distribution

@@ -42,8 +42,7 @@ namespace oomph
  template<> 
  void BlockPreconditioner<CCDoubleMatrix>:: 
  get_block(const unsigned& i, const unsigned& j, 
-           CCDoubleMatrix* matrix_pt,
-           CCDoubleMatrix*& block_pt)
+	    CCDoubleMatrix*& block_pt) const
  {
 
   // pointers for the jacobian matrix is compressed column sparse format 
@@ -51,10 +50,13 @@ namespace oomph
   int* j_row_index;
   double* j_value;
   
+    // Cast the matrix pointer
+    CCDoubleMatrix* cc_matrix_pt = dynamic_cast<CCDoubleMatrix*>(matrix_pt());
+
   // sets pointers to jacobian matrix
-  j_column_start = matrix_pt->column_start();
-  j_row_index = matrix_pt->row_index();
-  j_value = matrix_pt->value();
+    j_column_start = cc_matrix_pt->column_start();
+    j_row_index = cc_matrix_pt->row_index();
+    j_value = cc_matrix_pt->value();
 
   // get the block dimensions
   unsigned block_nrow = this->block_dimension(i);
@@ -140,7 +142,7 @@ namespace oomph
     if (Run_block_matrix_test)
      {
       // checks to see if block matrix has been set up correctly 
-      block_matrix_test(matrix_pt,i,j,block_pt);
+	    block_matrix_test(i,j,block_pt);
      }
 #endif
    }
@@ -160,8 +162,7 @@ namespace oomph
  template<> 
  void BlockPreconditioner<CRDoubleMatrix>:: 
  get_block(const unsigned& block_i, const unsigned& block_j, 
-           CRDoubleMatrix* matrix_pt,
-           CRDoubleMatrix*& block_pt)
+	    CRDoubleMatrix*& block_pt) const
  {
 
 #ifdef PARANOID
@@ -181,11 +182,14 @@ namespace oomph
    }
 #endif
 
+    // Cast the pointer
+    CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt());
+
   // if + only one processor
   //    + more than one processor but matrix_pt is not distributed
   // then use the serial get_block method
-  if (matrix_pt->distribution_pt()->communicator_pt()->nproc() == 1 ||
-      !matrix_pt->distribution_pt()->distributed())
+    if (cr_matrix_pt->distribution_pt()->communicator_pt()->nproc() == 1 ||
+	!cr_matrix_pt->distribution_pt()->distributed())
    {
     // pointers for the jacobian matrix is compressed row sparse format 
     int* j_row_start;
@@ -193,9 +197,9 @@ namespace oomph
     double* j_value;
     
     // sets pointers to jacobian matrix
-    j_row_start = matrix_pt->row_start();
-    j_column_index = matrix_pt->column_index();
-    j_value = matrix_pt->value();
+	j_row_start = cr_matrix_pt->row_start();
+	j_column_index = cr_matrix_pt->column_index();
+	j_value = cr_matrix_pt->value();
     
     // get the block dimensions
     unsigned block_nrow = this->block_dimension(block_i);
@@ -290,7 +294,7 @@ namespace oomph
     if (Run_block_matrix_test)
      {
       // checks to see if block matrix has been set up correctly 
-      block_matrix_test(matrix_pt,block_i,block_j,block_pt);
+	    block_matrix_test(block_i,block_j,block_pt);
      }
 #endif 
    }
@@ -307,9 +311,9 @@ namespace oomph
     unsigned my_rank = this->distribution_pt()->communicator_pt()->my_rank();
 
     // sets pointers to jacobian matrix
-    int* j_row_start = matrix_pt->row_start();
-    int* j_column_index = matrix_pt->column_index();
-    double* j_value = matrix_pt->value();
+	int* j_row_start = cr_matrix_pt->row_start();
+	int* j_column_index = cr_matrix_pt->column_index();
+	double* j_value = cr_matrix_pt->value();
 
     // number of non zeros in each row to be sent
     Vector<int*> nnz_send(nproc,0);
@@ -697,22 +701,19 @@ namespace oomph
 /// \short test function to check that every element in the block matrix
 /// (block_i,block_j) matches the corresponding element in the original matrix
 //=============================================================================
- template<typename MATRIX>
- void BlockPreconditioner<MATRIX>::block_matrix_test(const MATRIX* matrix_pt,
-                                                     const unsigned& block_i,
-                                                     const unsigned& block_j,
-                                                     const MATRIX*
-                                                     block_matrix_pt)
+  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
+  block_matrix_test(const unsigned& block_i, const unsigned& block_j,
+		    const MATRIX* block_matrix_pt) const
  {
 
   // boolean flag to indicate whether test is passed
   bool check = true;
   
   // number of rows in matrix
-  unsigned n_row = matrix_pt->nrow();
+    unsigned n_row = matrix_pt()->nrow();
   
   // number of columns in matrix
-  unsigned n_col = matrix_pt->ncol();
+    unsigned n_col = matrix_pt()->ncol();
   
   // loop over rows of original matrix
   for (unsigned i = 0; i < n_row; i++)
@@ -734,7 +735,7 @@ namespace oomph
           
           // check whether elements in original matrix and matrix of block 
           // pointers match
-          if ( matrix_pt->operator()(i,j) !=
+		    if ( matrix_pt()->operator()(i,j) !=
                block_matrix_pt
                ->operator()(index_in_block(i),index_in_block(j)) )
            {
@@ -767,9 +768,9 @@ namespace oomph
 /// be solved directly. Specialised version for CCDoubleMatrix.
 //=============================================================================
  template<> 
- void BlockPreconditioner<CCDoubleMatrix>::build_preconditioner_matrix( 
-  DenseMatrix<CCDoubleMatrix*>& block_matrix_pt, CCDoubleMatrix*& 
-  preconditioner_matrix_pt)
+  void BlockPreconditioner<CCDoubleMatrix>::
+  build_preconditioner_matrix(DenseMatrix<CCDoubleMatrix*>& block_matrix_pt,
+			      CCDoubleMatrix*& preconditioner_matrix_pt) const
  {
 
 
@@ -875,9 +876,9 @@ namespace oomph
 /// be solved directly. Specialised version for CRDoubleMatrix.
 //=============================================================================
  template<>
- void BlockPreconditioner<CRDoubleMatrix>::build_preconditioner_matrix(
-  DenseMatrix<CRDoubleMatrix*>& block_matrix_pt, CRDoubleMatrix*&
-  preconditioner_matrix_pt)
+  void BlockPreconditioner<CRDoubleMatrix>::
+  build_preconditioner_matrix(DenseMatrix<CRDoubleMatrix*>& block_matrix_pt,
+			      CRDoubleMatrix*& preconditioner_matrix_pt) const
  {
   // the number of blocks
   unsigned n_blocks = this->nblock_types();
@@ -1013,5 +1014,7 @@ namespace oomph
                                                p_column_index, 
                                                p_row_start);   
  }
+
+
 }
 

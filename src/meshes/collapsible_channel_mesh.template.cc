@@ -157,7 +157,7 @@ CollapsibleChannelMesh<ELEMENT>::CollapsibleChannelMesh(
      for (unsigned i=0;i<nnode_1d;i++)
       {
        this->add_boundary_node(4,
-                         this->finite_element_pt(e)->node_pt(2*nnode_1d+i));
+                         this->finite_element_pt(e)->node_pt((nnode_1d-1)*nnode_1d+i));
       }
     }
    // Collapsible bit
@@ -167,7 +167,7 @@ CollapsibleChannelMesh<ELEMENT>::CollapsibleChannelMesh(
      for (unsigned i=0;i<nnode_1d;i++)
       {
        this->add_boundary_node(3,
-                         this->finite_element_pt(e)->node_pt(2*nnode_1d+i));
+                         this->finite_element_pt(e)->node_pt((nnode_1d-1)*nnode_1d+i));
        
        // What column of elements are we in?
        unsigned ix=e-first_collapsible;
@@ -176,7 +176,7 @@ CollapsibleChannelMesh<ELEMENT>::CollapsibleChannelMesh(
        zeta[0]=double(ix)*dzeta+double(i)*dzeta/double(nnode_1d-1);
        
        // Set boundary coordinate
-       this->finite_element_pt(e)->node_pt(2*nnode_1d+i)->
+       this->finite_element_pt(e)->node_pt((nnode_1d-1)*nnode_1d+i)->
         set_coordinates_on_boundary(3,zeta);
       }
     }
@@ -187,7 +187,7 @@ CollapsibleChannelMesh<ELEMENT>::CollapsibleChannelMesh(
      for (unsigned i=0;i<nnode_1d;i++)
       {
        this->add_boundary_node(2,
-                         this->finite_element_pt(e)->node_pt(2*nnode_1d+i));
+                         this->finite_element_pt(e)->node_pt((nnode_1d-1)*nnode_1d+i));
       }
     }
    // Left end

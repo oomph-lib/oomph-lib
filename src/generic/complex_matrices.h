@@ -86,7 +86,7 @@ class ComplexMatrixBase
  /// \short Round brackets to give access as a(i,j) for read only
  /// (we're not providing a general interface for component-wise write
  /// access since not all matrix formats allow efficient direct access!)
- virtual const std::complex<double>& operator()(const unsigned long &i, 
+ virtual std::complex<double> operator()(const unsigned long &i, 
                                                 const unsigned long &j) 
   const=0;
 
@@ -231,7 +231,7 @@ class ComplexMatrixBase
  
  /// \short Overload the const version of the round-bracket access operator
  /// for read-only access.
- inline const std::complex<double>& operator()(const unsigned long &i, 
+ inline std::complex<double> operator()(const unsigned long &i, 
                                                const unsigned long &j) 
   const {return DenseMatrix<std::complex<double> >::get_entry(i,j);}
  
@@ -342,7 +342,7 @@ class CRComplexMatrix : public CRMatrix<std::complex<double> >,
   {return CRMatrix<std::complex<double> >::ncol();}
 
  /// Overload the round-bracket access operator for read-only access
- inline const std::complex<double> & operator()(const unsigned long &i, 
+ inline std::complex<double> operator()(const unsigned long &i, 
                                                 const unsigned long &j) 
   const {return CRMatrix<std::complex<double> >::get_entry(i,j);}
  
@@ -458,7 +458,7 @@ class CCComplexMatrix : public ComplexMatrixBase,
  
  /// \short Overload the round-bracket access operator to provide
  /// read-only (const) access to the data
- inline const std::complex<double> & operator()(const unsigned long &i, 
+ inline std::complex<double> operator()(const unsigned long &i, 
                                  const unsigned long &j) 
   const {return CCMatrix<std::complex<double> >::get_entry(i,j);}
  

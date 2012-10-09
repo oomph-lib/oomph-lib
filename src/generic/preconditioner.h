@@ -148,7 +148,13 @@ class IdentityPreconditioner : public Preconditioner
       unsigned n_row=matrix_pt->nrow();
 
       // create the distribution
-      LinearAlgebraDistribution dist(problem_pt->communicator_pt(),n_row,false);
+      // LinearAlgebraDistribution dist(problem_pt->communicator_pt(),n_row,false);
+
+      //??ds this was stopping me using a linear solve without a problem so I
+      // made a dummy communicator - might be ok because this is only for the
+      // non-distributed case anyway...
+      OomphCommunicator* communicator_pt = new OomphCommunicator();
+      LinearAlgebraDistribution dist(communicator_pt,n_row,false);
       this->build_distribution(dist);
      }
    }

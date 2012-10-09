@@ -132,7 +132,7 @@ class Matrix
  /// The function uses the  MATRIX_TYPE template parameter to call the
  /// get_entry() function which must be defined in all derived classes
  /// that are to be fully instantiated.
- inline const T& operator()(const unsigned long &i, 
+ inline T operator()(const unsigned long &i, 
                             const unsigned long &j) const
   {
    return static_cast<MATRIX_TYPE const *>(this)->get_entry(i,j);
@@ -158,7 +158,7 @@ class Matrix
  /// to the stream outfile.
  /// Broken virtual since it might not be sensible to implement this for 
  /// some sparse matrices.
- virtual void output(std::ostream &outfile)
+ virtual void output(std::ostream &outfile) const
   {
    throw OomphLibError(
     "Output function is not implemented for this matrix class",
@@ -168,7 +168,7 @@ class Matrix
 
  /// \short Indexed output function to print a matrix to the 
  /// stream outfile as i,j,a(i,j) for a(i,j)!=0 only
- virtual void sparse_indexed_output(std::ostream &outfile)=0;
+ virtual void sparse_indexed_output(std::ostream &outfile) const=0;
 
 };
 
@@ -225,7 +225,7 @@ class DoubleMatrixBase
  /// \short Round brackets to give access as a(i,j) for read only
  /// (we're not providing a general interface for component-wise write
  /// access since not all matrix formats allow efficient direct access!)
- virtual const double& operator()(const unsigned long &i, 
+ virtual double operator()(const unsigned long &i, 
                                   const unsigned long &j) const=0;
 
  
@@ -391,7 +391,7 @@ class DenseMatrix : public Matrix<T, DenseMatrix<T> >
 
  /// \short The access function the will be called by the read-only 
  /// (const version) round-bracket operator.
- inline const T& get_entry(const unsigned long &i, 
+ inline T get_entry(const unsigned long &i, 
                            const unsigned long &j) const
   {
 #ifdef RANGE_CHECKING
@@ -438,26 +438,26 @@ class DenseMatrix : public Matrix<T, DenseMatrix<T> >
   {for(unsigned long i=0;i<(N*M);++i) {Matrixdata[i] = val;}}
  
  /// Output function to print a matrix row-by-row to the stream outfile
- void output(std::ostream &outfile);
+ void output(std::ostream &outfile) const;
  
  /// Output function to print a matrix row-by-row to a file. Specify filename.
- void output(std::string filename);
+ void output(std::string filename) const;
 
  /// \short Indexed output function to print a matrix to the 
  /// stream outfile as i,j,a(i,j)
- void indexed_output(std::ostream &outfile);
+ void indexed_output(std::ostream &outfile) const;
 
  /// \short Indexed output function to print a matrix to a
  /// file as i,j,a(i,j). Specify filename.
- void indexed_output(std::string filename);
+ void indexed_output(std::string filename) const;
 
  /// \short Indexed output function to print a matrix to the 
  /// stream outfile as i,j,a(i,j) for a(i,j)!=0 only
- void sparse_indexed_output(std::ostream &outfile);
+ void sparse_indexed_output(std::ostream &outfile) const;
  
  /// \short Indexed output function to print a matrix to a 
  /// file as i,j,a(i,j) for a(i,j)!=0 only. Specify filename.
- void sparse_indexed_output(std::string filename);
+ void sparse_indexed_output(std::string filename) const;
 
 };
 
@@ -544,7 +544,7 @@ class SparseMatrix : public Matrix<T,MATRIX_TYPE>
   
   /// \short Indexed output function to print a matrix to the
   /// stream outfile as i,j,a(i,j) for a(i,j)!=0 only
-  virtual void sparse_indexed_output(std::ostream &outfile)
+  virtual void sparse_indexed_output(std::ostream &outfile) const
    {
     std::string error_message = 
      "SparseMatrix::sparse_indexed_output() is a virtual function.\n";
@@ -558,7 +558,7 @@ class SparseMatrix : public Matrix<T,MATRIX_TYPE>
   
   /// \short Indexed output function to print a matrix to a
   /// file as i,j,a(i,j) for a(i,j)!=0 only. Specify filename.
-  void sparse_indexed_output(std::string filename)
+  void sparse_indexed_output(std::string filename) const
    {
     // Open file
     std::ofstream some_file;
@@ -651,7 +651,7 @@ class CRMatrix : public SparseMatrix<T, CRMatrix<T> >
  
  /// \short Access function that will be called by the read-only round-bracket
  /// operator (const)
- const T& get_entry(const unsigned long &i, 
+  T get_entry(const unsigned long &i, 
                     const unsigned long &j) const
   {
 #ifdef RANGE_CHECKING
@@ -702,7 +702,7 @@ class CRMatrix : public SparseMatrix<T, CRMatrix<T> >
 
  /// \short Indexed output function to print a matrix to the
  /// stream outfile as i,j,a(i,j) for a(i,j)!=0 only
- void sparse_indexed_output(std::ostream &outfile)
+ void sparse_indexed_output(std::ostream &outfile) const
   {
    for (unsigned long i=0;i<this->N;i++)
     {
@@ -712,12 +712,18 @@ class CRMatrix : public SparseMatrix<T, CRMatrix<T> >
                << std::endl;
       }
     }
-  }
 
+   // If there is no output for the last entry then output zero
+   if(get_entry(this->nrow()-1, this->ncol()-1) == this->Zero)
+     {
+       outfile << this->nrow()-1 << " " << this->ncol()-1 << " " << this->Zero
+               << std::endl;
+     }
+  }
 
  /// \short Indexed output function to print a matrix to a
  /// file as i,j,a(i,j) for a(i,j)!=0 only. Specify filename.
- void sparse_indexed_output(std::string filename)
+ void sparse_indexed_output(std::string filename) const
   {
    // Open file
    std::ofstream some_file;
@@ -856,14 +862,14 @@ class CRDoubleMatrix : public Matrix<double, CRDoubleMatrix >,
 
  /// \short Indexed output function to print a matrix to the 
  /// stream outfile as i,j,a(i,j) for a(i,j)!=0 only
- void sparse_indexed_output(std::ostream &outfile)
+ void sparse_indexed_output(std::ostream &outfile) const
   {
    CR_matrix.sparse_indexed_output(outfile);
   }
 
   /// \short Indexed output function to print a matrix to a
   /// file as i,j,a(i,j) for a(i,j)!=0 only. Specify filename.
-  void sparse_indexed_output(std::string filename)
+  void sparse_indexed_output(std::string filename) const
    {
     // Open file
     std::ofstream some_file;
@@ -900,7 +906,7 @@ class CRDoubleMatrix : public Matrix<double, CRDoubleMatrix >,
 
  /// Overload the round-bracket access operator for read-only access. In a 
  /// distributed matrix i refers to the local row index. 
- inline const double& operator()(const unsigned long &i, 
+ inline double operator()(const unsigned long &i, 
                                  const unsigned long &j) const 
  {return CR_matrix.get_entry(i,j);}
  
@@ -1084,7 +1090,7 @@ class DenseDoubleMatrix : public DoubleMatrixBase,
 
  /// \short Overload the const version of the round-bracket access operator
  /// for read-only access.
- inline const double& operator()(const unsigned long &i, 
+ inline double operator()(const unsigned long &i, 
                                  const unsigned long &j) 
   const {return DenseMatrix<double>::get_entry(i,j);}
    
@@ -1412,7 +1418,7 @@ class RankThreeTensor
   }
 
  /// Overload a const version for read-only access as a(i,j,k)
- inline const T &operator()(const unsigned long &i, const unsigned long &j,
+ inline T operator()(const unsigned long &i, const unsigned long &j,
                             const unsigned long &k) const
   {
 #ifdef RANGE_CHECKING
@@ -1739,7 +1745,7 @@ class RankFourTensor
   }
  
  /// Overload a const version for read-only access as a(i,j,k,l)
- inline const T &operator()(const unsigned long &i, 
+ inline T operator()(const unsigned long &i, 
                             const unsigned long &j,
                             const unsigned long &k, 
                             const unsigned long &l) const
@@ -2131,7 +2137,7 @@ class RankFiveTensor
   }
  
  /// Overload a const version for read-only access as a(i,j,k,l,m)
- inline const T &operator()(const unsigned long &i, 
+ inline T operator()(const unsigned long &i, 
                             const unsigned long &j,
                             const unsigned long &k, 
                             const unsigned long &l,
@@ -2256,7 +2262,7 @@ class CCMatrix : public SparseMatrix<T, CCMatrix<T> >
  
  /// \short Access function that will be called by the read-only round-bracket
  /// operator (const)
- const T& get_entry(const unsigned long &i, const unsigned long &j) const
+ T get_entry(const unsigned long &i, const unsigned long &j) const
   {
 #ifdef RANGE_CHECKING
    this->range_check(i,j);
@@ -2307,7 +2313,7 @@ class CCMatrix : public SparseMatrix<T, CCMatrix<T> >
 
  /// \short Indexed output function to print a matrix to the
  /// stream outfile as i,j,a(i,j) for a(i,j)!=0 only
- void sparse_indexed_output(std::ostream &outfile)
+ void sparse_indexed_output(std::ostream &outfile) const
   {
    for (unsigned long j=0;j<this->N;j++)
     {
@@ -2317,12 +2323,19 @@ class CCMatrix : public SparseMatrix<T, CCMatrix<T> >
                <<  " " << this->Value[k] << std::endl;
       }
     }
+
+   // If there is no output for the last entry then output zero
+   if(get_entry(this->nrow()-1, this->ncol()-1) == this->Zero)
+     {
+       outfile << this->nrow()-1 << " " << this->ncol()-1 << " " << this->Zero
+               << std::endl;
+     }
   }
 
 
  /// \short Indexed output function to print a matrix to a
  /// file as i,j,a(i,j) for a(i,j)!=0 only. Specify filename.
- void sparse_indexed_output(std::string filename)
+ void sparse_indexed_output(std::string filename) const
   {
    // Open file
    std::ofstream some_file;
@@ -2420,7 +2433,7 @@ class CCDoubleMatrix : public DoubleMatrixBase,
 
  /// \short Overload the round-bracket access operator to provide
  /// read-only (const) access to the data
- inline const double& operator()(const unsigned long &i, 
+ inline double operator()(const unsigned long &i, 
                                  const unsigned long &j) 
   const {return CCMatrix<double>::get_entry(i,j);}
  
@@ -2637,7 +2650,7 @@ void DenseMatrix<T>::resize(const unsigned long &n,
 /// Output function to print a matrix row-by-row to the stream outfile
 //============================================================================
 template<class T>
-void DenseMatrix<T>::output(std::ostream &outfile)
+void DenseMatrix<T>::output(std::ostream &outfile) const
 {
  //Loop over the rows
  for(unsigned i=0;i<N;i++)
@@ -2658,7 +2671,7 @@ void DenseMatrix<T>::output(std::ostream &outfile)
 /// Output function to print a matrix row-by-row to a file. Specify filename.
 //============================================================================
 template<class T>
-void DenseMatrix<T>::output(std::string filename)
+void DenseMatrix<T>::output(std::string filename) const
 {
  // Open file
  std::ofstream some_file;
@@ -2674,7 +2687,7 @@ void DenseMatrix<T>::output(std::string filename)
 /// Indexed output as i,j,a(i,j)
 //============================================================================
 template<class T>
-void DenseMatrix<T>::indexed_output(std::ostream &outfile)
+void DenseMatrix<T>::indexed_output(std::ostream &outfile) const
 {
  //Loop over the rows
  for(unsigned i=0;i<N;i++)
@@ -2694,7 +2707,7 @@ void DenseMatrix<T>::indexed_output(std::ostream &outfile)
 /// file as i,j,a(i,j). Specify filename.
 //============================================================================
 template<class T>
-void DenseMatrix<T>::indexed_output(std::string filename)
+void DenseMatrix<T>::indexed_output(std::string filename) const
 {
  // Open file
  std::ofstream some_file;
@@ -2709,7 +2722,7 @@ void DenseMatrix<T>::indexed_output(std::string filename)
 /// Sparse indexed output as i,j,a(i,j) for a(i,j)!=0 only
 //============================================================================
 template<class T>
-void DenseMatrix<T>::sparse_indexed_output(std::ostream &outfile)
+void DenseMatrix<T>::sparse_indexed_output(std::ostream &outfile) const
 {
  //Loop over the rows
  for(unsigned i=0;i<N;i++)
@@ -2723,6 +2736,13 @@ void DenseMatrix<T>::sparse_indexed_output(std::ostream &outfile)
       }
     }
   }
+
+ // If there is no output for the last entry then output zero
+ if(get_entry(this->nrow()-1, this->ncol()-1) == T(0))
+   {
+     outfile << this->nrow()-1 << " " << this->ncol()-1 << " " << T(0)
+             << std::endl;
+   }
 }
 
 
@@ -2732,7 +2752,7 @@ void DenseMatrix<T>::sparse_indexed_output(std::ostream &outfile)
 /// file as i,j,a(i,j) for a(i,j)!=0 only. Specify filename.
 //============================================================================
 template<class T>
-void DenseMatrix<T>::sparse_indexed_output(std::string filename)
+void DenseMatrix<T>::sparse_indexed_output(std::string filename) const
 {
  // Open file
  std::ofstream some_file;
@@ -2974,6 +2994,18 @@ void CRMatrix<T>::build(const Vector<T>& value,
                         const unsigned long &n,
                         const unsigned long &m)
 {
+#ifdef PARANOID
+    if(value.size() != column_index_.size())
+      {
+	std::ostringstream error_message;
+	error_message << "Must have the same number of values and column indices,"
+		      << "we have " << value.size() << " values and "
+		      << column_index_.size() << " column inidicies."
+		      << std::endl;
+	throw OomphLibError(error_message.str(),"CRMatrix<T>::build",
+			    OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
  // Number of nonzero entries
  this->Nnz = value.size();
  
@@ -3020,8 +3052,275 @@ void CRMatrix<T>::build(const Vector<T>& value,
 template<class T,class MATRIX_TYPE>
  T SparseMatrix<T,MATRIX_TYPE>::Zero=T(0);
 
+
+
+//======================================================================
+/// Class for a matrix of the form M = S + G + H + ... where S is the main
+/// matrix and G,H etc. are matrices of size S or smaller.  This may be useful
+/// if, for example, G,H etc. are subblocks of M that must be stored in a
+/// different format to S.
+
+/// Maps mut be provided which gives a map from the rows/cols of the "main"
+/// matrix to the rows/cols of each of the added matrices.
+//======================================================================
+class SumOfMatrices : public DoubleMatrixBase,
+  public Matrix<double,SumOfMatrices>
+{
+
+ private:
+
+
+  typedef std::map<long unsigned, long unsigned> IndexMap;
+
+  /// Pointer to the matrix which we are adding the others to
+  DoubleMatrixBase* Main_matrix_pt;
+
+  /// List of pointers to the matrices that are added to the main matrix
+  Vector<DoubleMatrixBase*> Added_matrix_pt;
+
+  /// \short List of maps from the row numbers of the main matrix to the added matrix
+  /// row numbers.
+  Vector<IndexMap* > Main_to_individual_rows_pt;
+
+  /// \short List of maps from the col numbers of the main matrix to the added matrix
+  /// col numbers.
+  Vector<IndexMap* > Main_to_individual_cols_pt;
+
+  /// Should we delete the sub matrices when destructor is called?
+  Vector<unsigned> Should_delete_added_matrix;
+
+  /// \short Should we delete the main matrix when destructor is called? Default is
+  /// no.
+  bool Should_delete_main_matrix;
+
+ public:
+
+  /// Default constructor
+ SumOfMatrices()
+   : Main_matrix_pt(0), Added_matrix_pt(0),
+    Main_to_individual_rows_pt(0), Main_to_individual_cols_pt(0),
+    Should_delete_added_matrix(0), Should_delete_main_matrix(0) {}
+
+  /// Constructor taking a pointer to the main matrix as input.
+   SumOfMatrices(DoubleMatrixBase* main_matrix_pt)
+   : Main_matrix_pt(main_matrix_pt), Added_matrix_pt(0),
+    Main_to_individual_rows_pt(0), Main_to_individual_cols_pt(0),
+    Should_delete_added_matrix(0), Should_delete_main_matrix(0) {}
+
+  /// Broken copy constructor
+  SumOfMatrices(const SumOfMatrices& matrix)
+    {BrokenCopy::broken_copy("SumOfMatrices");}
+
+  /// Broken assignment operator
+  void operator=(const SumOfMatrices&)
+    {BrokenCopy::broken_assign("SumOfMatrices");}
+
+  /// Destructor: delete matrices as instructed by Should_delete_added_matrix vector
+  virtual ~SumOfMatrices()
+    {
+      for(unsigned i_matrix=0; i_matrix<Added_matrix_pt.size(); i_matrix++)
+	{
+	  if(Should_delete_added_matrix[i_matrix] == 1)
+	    delete Added_matrix_pt[i_matrix];
+        }
+
+      if(Should_delete_main_matrix)
+	delete Main_matrix_pt;
+    }
+
+  /// Access to the main matrix
+  const DoubleMatrixBase* main_matrix_pt() const {return Main_matrix_pt;}
+  DoubleMatrixBase*& main_matrix_pt() {return Main_matrix_pt;}
+
+  /// \short Set the main matrix to be deleted by the destructor of the SumOfMatrices
+  /// (default is to not delete it).
+  void set_delete_main_matrix()
+  {Should_delete_main_matrix = true;}
+
+  /// \short Output the matrix in sparse format. Note that this is going to be
+  /// slow because we have to check every entry of every matrix for non-zeros.
+  void sparse_indexed_output(std::ostream &outfile) const
+  {
+    for (unsigned long i=0; i<nrow(); i++)
+      {
+        for (unsigned long j=0; j<ncol(); j++)
+          {
+            double entry = operator()(i,j);
+            // Output if non-zero entry
+            if(entry != 0.0)
+              {
+                outfile << i << " " << j << " " << entry
+                        << std::endl;
+              }
+          }
+      }
+
+   // If there is no output for the last entry then output zero
+   if(operator()(this->nrow()-1, this->ncol()-1) == 0.0)
+     {
+       outfile << this->nrow()-1 << " " << this->ncol()-1 << " 0"
+               << std::endl;
+     }
+  }
+
+  /// \short Output the matrix in sparse format to a file. Note that this is
+  /// going to be slow because we have to check every entry of every matrix
+  /// for non-zeros.
+  void sparse_indexed_output(const std::string &outfile) const
+  {
+    // Open file
+    std::ofstream some_file;
+    some_file.open(outfile.c_str());
+    sparse_indexed_output(some_file);
+    some_file.close();
+    sparse_indexed_output(outfile);
+  }
+
+
+  /// \short Get a list of row/col indices and total entry for non-zeros in the
+  /// matrix. e.g. for use as input to other matrix classes. Warning this is
+  /// SLOW! for sparse matrices.
+  void get_as_indices(Vector<int>& row, Vector<int>& col,
+                       Vector<double>& values)
+  {
+    row.clear(); col.clear(); values.clear();
+
+    for (int i=0; i<int(nrow()); i++)
+      {
+        for (int j=0; j<int(ncol()); j++)
+          {
+            double entry = operator()(i,j);
+            // Output if non-zero entry
+            if(entry != 0.0)
+              {
+                row.push_back(i);
+                col.push_back(j);
+                values.push_back(entry);
+              }
+          }
+      }
+  }
+
+  /// \short Add a new matrix to the sum by giving a matrix pointer and a mapping from
+  /// the main matrix numbering to the new matrix numbering.
+  void add_matrix(DoubleMatrixBase* added_matrix_pt_in,
+                  IndexMap* const main_to_individual_rows_pt,
+                  IndexMap* const main_to_individual_cols_pt,
+                  bool should_delete_matrix=false)
+  {
+#ifdef RANGE_CHECKING
+    if (main_to_individual_rows_pt->size() > added_matrix_pt_in->nrow())
+      {
+        throw OomphLibError("Row mapping size should be less than or equal to nrow (less than if it is a sparse matrix and there are some empty rows.",
+                            "SumOfMatrices::add_matrix",
+                            OOMPH_EXCEPTION_LOCATION);
+      }
+
+    if (main_to_individual_cols_pt->size() > added_matrix_pt_in->ncol())
+      {
+        throw OomphLibError("Col mapping size should be less than or equal to ncol (less than if it is a sparse matrix and there are some empty cols.",
+                            "SumOfMatrices::add_matrix",
+                            OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+
+    Added_matrix_pt.push_back(added_matrix_pt_in);
+    Main_to_individual_rows_pt.push_back(main_to_individual_rows_pt);
+    Main_to_individual_cols_pt.push_back(main_to_individual_cols_pt);
+    Should_delete_added_matrix.push_back(unsigned(should_delete_matrix));
+  }
+
+  /// Access functions
+  inline DoubleMatrixBase* added_matrix_pt(const unsigned& i) const
+  {return Added_matrix_pt[i];}
+
+  /// Return the number of rows of the total matrix (equal to that of the first
+  /// matrix).
+  inline unsigned long nrow() const
+  {
+#ifdef PARANOID
+    if(Main_matrix_pt==0)
+      {
+        OomphLibError("Main_matrix_pt not set","SumOfMatrices::nrow()",
+                      OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+    return Main_matrix_pt->nrow();
 }
 
+  /// \short Return the number of columns of the total matrix (equal to that of the
+  /// first matrix).
+  inline unsigned long ncol() const
+  {
+#ifdef PARANOID
+    if(Main_matrix_pt==0)
+      {
+        OomphLibError("Main_matrix_pt not set","SumOfMatrices::nrow()",
+                      OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+    return Main_matrix_pt->ncol();
+  }
+
+  /// Return the number of matrices in the sum
+  inline unsigned n_added_matrix() const {return Added_matrix_pt.size();}
+
+  /// \short Multiply: just call multiply on each of the matrices and add up the
+  /// results (with appropriate bookeeping of the relative positions).
+  void multiply(const DoubleVector &x, DoubleVector &soln) const;
+
+  /// \short Broken operator() because it does not make sense to return
+  /// anything by reference.
+  double& entry(const unsigned long& i, const unsigned long& j) const
+  {
+    throw OomphLibError("Broken write to entry: it does not make sense to write to a sum, you must write to one of the component matrices.",
+                        "non-constant SumOfMatrices::operator()",
+                        OOMPH_EXCEPTION_LOCATION);
+  }
+
+  /// Access function to get the total value of entries in position (i,j).
+  double operator()(const unsigned long &i,
+                    const unsigned long &j) const
+  {
+    // Get contributions from all matrices
+    double sum = main_matrix_pt()->operator()(i,j);
+    for(unsigned i_matrix=0; i_matrix<n_added_matrix(); i_matrix++)
+      {
+        IndexMap::iterator local_row_it
+          = Main_to_individual_rows_pt[i_matrix]->find(i);
+        IndexMap::iterator local_col_it
+          = Main_to_individual_cols_pt[i_matrix]->find(j);
+
+        if((local_row_it != Main_to_individual_rows_pt[i_matrix]->end())
+           && (local_col_it != Main_to_individual_cols_pt[i_matrix]->end()))
+          {
+            sum += added_matrix_pt(i_matrix)
+              ->operator()(local_row_it->second,local_col_it->second);
+          }
+      }
+
+    return sum;
+  }
+
+  /// \short Dummy overload of a pure virtual function. I'm not sure how best to
+  /// implement this and I don't think I'll ever need it.
+  virtual void multiply_transpose(const DoubleVector &x,
+                                  DoubleVector &soln)const
+  {
+        std::ostringstream error_msg;
+        error_msg << "Function not yet implemented.";
+        throw OomphLibError(error_msg.str(),
+                            "SumOfMatrices::multiply_transpose",
+                            OOMPH_EXCEPTION_LOCATION);
+
+        // Possible implementations (not really thought through):
+        // - just call multiply transpose on submatrices?
+        // - do something funny with switching row and column maps?
+  }
+
+};
+
+}
 #endif
 
 

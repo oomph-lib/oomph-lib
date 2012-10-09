@@ -403,8 +403,15 @@ public:
  /// Return pointer to global node n
  Node* &node_pt(const unsigned long &n) {return Node_pt[n];}
 
+ /// Return pointer to global node n (const version)
+ Node* node_pt(const unsigned long &n) const {return Node_pt[n];}
+
  /// Return  pointer to element e
  GeneralisedElement* &element_pt(const unsigned long &e) 
+  {return Element_pt[e];}
+
+ /// Return pointer to element e (const version)
+ GeneralisedElement* element_pt(const unsigned long &e) const
   {return Element_pt[e];}
 
  /// Return reference to the Vector of elements
@@ -436,6 +443,10 @@ public:
 
  /// Return pointer to node n on boundary b
  Node* &boundary_node_pt(const unsigned &b, const unsigned &n)
+  {return Boundary_node_pt[b][n];}
+
+ /// Return pointer to node n on boundary b
+ Node* boundary_node_pt(const unsigned &b, const unsigned &n) const
   {return Boundary_node_pt[b][n];}
 
  /// Set the number of boundaries in the mesh
@@ -487,6 +498,9 @@ public:
 
  /// Return number of nodes in the mesh
  unsigned long nnode() const {return Node_pt.size();}
+
+ /// Return number of dof types in mesh
+ unsigned ndof_types(const OomphCommunicator* const comm_pt) const;
 
  /// Add a (pointer to a) node to the mesh
  void add_node_pt(Node* const &node_pt) {Node_pt.push_back(node_pt);}

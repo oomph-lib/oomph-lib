@@ -2742,7 +2742,7 @@ void BoundaryNodeBase::remove_from_boundary(const unsigned &b)
 //========================================================================
 /// Test whether the node lies on the mesh boundary b
 //========================================================================
-bool BoundaryNodeBase::is_on_boundary(const unsigned &b)
+bool BoundaryNodeBase::is_on_boundary(const unsigned &b) const
 {
  //If the node lies on any boundary
  if(Boundaries_pt!=0)

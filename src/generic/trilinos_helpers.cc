@@ -747,7 +747,7 @@ void TrilinosEpetraHelpers::multiply(const CRDoubleMatrix* oomph_matrix_pt,
  copy_to_oomphlib_vector(epetra_y_pt,oomph_y);
 
  // throw error if there is an epetra error
-#if PARANOID
+#ifdef PARANOID
  if (epetra_error_flag != 0)
   {
    std::ostringstream error_message;

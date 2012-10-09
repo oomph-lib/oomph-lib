@@ -567,8 +567,8 @@ void ARPACK::solve_eigenproblem(Problem* const &problem_pt,
 
 
 //==========================================================================
-/// Use LAPACK to solve an complex eigen problem specified by the given
-/// given matrices
+/// Use LAPACK to solve a complex eigen problem specified by the given 
+/// matrices.
 //==========================================================================
 void LAPACK_QZ::find_eigenvalues(const ComplexMatrixBase &A,
                                  const ComplexMatrixBase &M,

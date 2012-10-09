@@ -55,7 +55,7 @@ namespace oomph
 /// have only one index that can be thought of as corresponding to the
 /// nodal points. In general, however, when quantities and 
 /// their gradients are interpolated separately, the shape function have
-/// two indicies: one corresponding to the nodal points, and the other
+/// two indices: one corresponding to the nodal points, and the other
 /// to the "type" of quantity being interpolated: function, derivative, &c
 /// The second index can also represent the vector coordinate for 
 /// vector-valued (Nedelec) shape functions.
@@ -78,7 +78,7 @@ namespace oomph
 //=========================================================================
 class Shape
 {
-  private:
+protected:
 
  /// \short Pointer that addresses the storage that will be used to read and
  /// set the shape functions. The shape functions are packed into 
@@ -132,6 +132,10 @@ public:
 
  /// Broken copy constructor
  Shape(const Shape &shape) {BrokenCopy::broken_copy("Shape");}
+
+ /// Default constructor - just assigns a null pointer for the storage so that
+ /// the destructor works as expected.
+ Shape() : Allocated_storage(0) {}
 
  /// The assignment operator does a shallow copy 
  /// (resets the pointer to the data)
@@ -219,7 +223,7 @@ public:
    return Psi[i*Index2];
   }
  
- /// Overload the round bracket operator, allowing for two indicies
+ /// Overload the round bracket operator, allowing for two indices
  inline double &operator()(const unsigned &i, const unsigned &j) 
   {
 #ifdef RANGE_CHECKING
@@ -452,6 +456,43 @@ class DShape
 
  /// Return the range of index 3 of the derivatives of the shape functions
  inline unsigned long nindex3() const {return Index3;}
+
+};
+
+//======================================================================
+/// A shape function with a deep copy constructor. This allows for use with stl
+///  operations (e.g. manipulating vectors of shape functions). A seperate class
+///  is needed because the basic shape function uses a shallow copy.
+//======================================================================
+class ShapeWithDeepCopy : public Shape
+{
+public:
+
+  /// Constructor for a single-index set of shape functions.
+  ShapeWithDeepCopy(const unsigned &N) : Shape(N) {}
+
+  /// Constructor for a two-index set of shape functions.
+  ShapeWithDeepCopy(const unsigned &N, const unsigned &M) : Shape(N,M) {}
+
+  /// Default constructor
+  ShapeWithDeepCopy() : Shape() {}
+
+  /// Deep copy constructor
+  ShapeWithDeepCopy(const ShapeWithDeepCopy &old_shape) :
+    Shape(old_shape.Index1, old_shape.Index2)
+  {
+    for(unsigned i=0; i<Index1*Index2; i++)
+      {
+        Psi[i] = old_shape.Psi[i];
+      }
+  }
+
+  /// Broken assignment operator
+  void operator=(const ShapeWithDeepCopy &old_shape)
+  {BrokenCopy::broken_assign("ShapeWithDeepCopy");}
+
+ /// Destructor, clear up the memory allocated by the object
+ ~ShapeWithDeepCopy() {delete[] Allocated_storage; Allocated_storage=0;}
 
 };
 

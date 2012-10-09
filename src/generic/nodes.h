@@ -353,6 +353,15 @@ class Data
    return Eqn_number[i];
   }
 
+  /// Return the equation number of the i-th stored variable.
+  inline long eqn_number(const unsigned &i) const
+  {
+#ifdef RANGE_CHECKING
+    range_check(0,i);
+#endif
+    return Eqn_number[i];
+  }
+
  /// \short Pin the i-th stored variable.
  inline void pin(const unsigned &i) {eqn_number(i)=Is_pinned;}
 
@@ -1224,12 +1233,12 @@ public:
  /// \short Test whether the Node lies on a boundary. The "bulk" Node
  /// cannot lie on a boundary, so return false. This will be overloaded
  /// by BoundaryNodes
- virtual bool is_on_boundary() {return false;}
+ virtual bool is_on_boundary() const {return false;}
 
  /// \short Test whether the node lies on mesh boundary b. The "bulk" Node
  /// cannot lie on a boundary, so return false. This will be overloaded by
  /// BoundaryNodes
- virtual bool is_on_boundary(const unsigned &b) {return false;}
+ virtual bool is_on_boundary(const unsigned &b) const {return false;}
 
  /// \short Broken interface for adding the node to the mesh boundary b
  /// Essentially here for error reporting.
@@ -1892,7 +1901,8 @@ class BoundaryNodeBase
  /// \short Default constructor, set the pointers to the storage to NULL
   BoundaryNodeBase() :  Index_of_first_value_assigned_by_face_element_pt(0), 
   Boundary_coordinates_pt(0), 
-  Boundaries_pt(0), Copied_node_pt(0) {}
+			Boundaries_pt(0),
+			Copied_node_pt(0){}
  
  /// \short Destructor, clean up any allocated storage for the boundaries
  ~BoundaryNodeBase();
@@ -1917,10 +1927,10 @@ class BoundaryNodeBase
  void remove_from_boundary(const unsigned &b);
 
  /// \short Test whether the node lies on a boundary
- bool is_on_boundary() {return (!Boundaries_pt==0);}
+ bool is_on_boundary() const {return (!Boundaries_pt==0);}
 
  /// \short Test whether the node lies on mesh boundary b
- bool is_on_boundary(const unsigned &b);
+ bool is_on_boundary(const unsigned &b) const;
 
  /// \short Get the number of boundary coordinates on mesh boundary b
  unsigned ncoordinates_on_boundary(const unsigned &b);
@@ -2225,11 +2235,11 @@ class BoundaryNode: public NODE_TYPE, public BoundaryNodeBase
 
  /// \short Test whether the node lies on a boundary
  /// Final overload
- bool is_on_boundary() {return BoundaryNodeBase::is_on_boundary();}
+ bool is_on_boundary() const {return BoundaryNodeBase::is_on_boundary();}
  
  /// \short Test whether the node lies on mesh boundary b
  /// Final overload
- bool is_on_boundary(const unsigned &b) 
+ bool is_on_boundary(const unsigned &b) const
   {return BoundaryNodeBase::is_on_boundary(b);}
 
  /// \short Add the node to mesh boundary b, final overload

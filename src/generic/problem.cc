@@ -83,7 +83,8 @@ namespace oomph
   Numerical_zero_for_sparse_assembly(0.0),
   Mass_matrix_reuse_is_enabled(false), Mass_matrix_has_been_computed(false),
   Discontinuous_element_formulation(false),
-  Minimum_dt(1.0e-12), Maximum_dt(1.0e12), DTSF_max_increase(4.0),
+  Minimum_dt(1.0e-12), Maximum_dt(1.0e12),
+  DTSF_max_increase(4.0),
   Minimum_dt_but_still_proceed(-1.0),
   Scale_arc_length(true), Desired_proportion_of_arc_length(0.5),
   Theta_squared(1.0), Sign_of_jacobian(0), Continuation_direction(1.0), 
@@ -1917,18 +1918,6 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
    unsigned Nglobal_data = nglobal_data();
    for(unsigned i=0;i<Nglobal_data;i++)
     {Global_data_pt[i]->assign_eqn_numbers(equation_number,Dof_pt);}
-   
-   //Check that the Mesh_pt has been assigned
-   if(Mesh_pt==0)
-    {
-     std::string error_message =
-      "(Global) Mesh_pt must be assigned before calling ";
-     error_message += " assign_eqn_numbers()\n";
-     
-     throw OomphLibError(error_message,
-                         "Problem::assign_eqn_numbers()",
-                         OOMPH_EXCEPTION_LOCATION);
-    }
    
    if (Global_timings::Doc_comprehensive_timings)
     {
@@ -7271,6 +7260,10 @@ void Problem::get_fd_jacobian(DoubleVector &residuals,
  get_residuals(residuals);
 
  const double FD_step=1.0e-8;
+
+ // Make sure the Jacobian is the right size (since we don't care about speed).
+ jacobian.resize(n_dof,n_dof);
+ 
  //Loop over all dofs
  for(unsigned long jdof=0;jdof<n_dof;jdof++) 
   {
@@ -7291,6 +7284,7 @@ void Problem::get_fd_jacobian(DoubleVector &residuals,
     {
      jacobian(ieqn,jdof)=(residuals_pls[ieqn]-residuals[ieqn])/FD_step;
     }
+
    *Dof_pt[jdof]=backup;
   }
 
@@ -9749,7 +9743,7 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
  //The value of the actual timestep, by default the same as desired timestep
  double dt_actual=dt_desired;
  //Timestep rescaling factor, 1.0 by default
- double DTSF = 1.0;
+ double dt_rescaling_factor = 1.0;
  
  //Determine the number of timesteppers
  unsigned n_time_steppers = ntime_stepper();
@@ -9877,10 +9871,10 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
      double error = global_temporal_error_norm(); 
 
      //Calculate the scaling  factor
-     DTSF = pow((epsilon/error),
+     dt_rescaling_factor = pow((epsilon/error),
                 (1.0/(1.0+time_stepper_pt()->order())));
      
-     oomph_info << "DTSF is  " << DTSF << std::endl;
+     oomph_info << "Timestep scaling factor is  " << dt_rescaling_factor << std::endl;
      oomph_info << "Estimated timestepping error is " << error << std::endl;
      
      
@@ -9889,9 +9883,9 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
      
      // Impose lower bound on timestep (i.e. accept timestep
      // even though tolerance isn't satisfied)
-     if(DTSF <= dtsf_threshold)
+     if(dt_rescaling_factor <= dtsf_threshold)
       {
-       double new_timestep=dt_actual*DTSF;
+       double new_timestep=dt_actual*dt_rescaling_factor;
        
        if (new_timestep<Minimum_dt_but_still_proceed)
         {
@@ -9902,19 +9896,19 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
           << "         Problem::Minimum_dt_but_still_proceed="
           <<           Minimum_dt_but_still_proceed << "\n"
           << "         ---> We're continuing with present timestep.\n";
-         DTSF=1.0;
+         dt_rescaling_factor=1.0;
         }
       }
      
-     //Now decide what to do based upon DTSF
+     //Now decide what to do based upon dt_rescaling_factor
      //If it's small reject the timestep
-     if(DTSF <= dtsf_threshold)
+     if(dt_rescaling_factor <= dtsf_threshold)
       {
        oomph_info << "TIMESTEP REJECTED" << std::endl;
        //Reject the timestep
        REJECT_TIMESTEP=1;
        //Modify the actual timestep
-       dt_actual *= DTSF;
+       dt_actual *= dt_rescaling_factor;
        //Reset the time
        time_pt()->time() = time_current;
        //Reload the dofs
@@ -9934,13 +9928,14 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
        continue;
       }
      //If it's large change the timestep
-     if(DTSF >= 1.0)
+     if(dt_rescaling_factor >= 1.0)
       {
        //Restrict the increase
-       if(DTSF > DTSF_max_increase)
+       if(dt_rescaling_factor > DTSF_max_increase)
         {
-         DTSF = DTSF_max_increase;
-         oomph_info << "DTSF LIMITED TO " << DTSF_max_increase << std::endl;
+         dt_rescaling_factor = DTSF_max_increase;
+         oomph_info << "TIMESTEP SCALING FACTOR LIMITED TO "
+		    << DTSF_max_increase << std::endl;
         }
       }
 
@@ -9952,19 +9947,19 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
 
 
  //Make sure timestep doesn't get too large
- if ((dt_actual*DTSF) > Maximum_dt)
+ if ((dt_actual*dt_rescaling_factor) > Maximum_dt)
   {
-   oomph_info << "DTSF WOULD INCREASE TIMESTEP "
+   oomph_info << "TIMESTEP SCALING WOULD INCREASE TIMESTEP "
               << "ABOVE SPECIFIED THRESHOLD: Problem::Maximum_dt=" 
               <<  Maximum_dt << std::endl;
-   DTSF =  Maximum_dt/dt_actual;
-   oomph_info << "ADJUSTING DTSF TO " << DTSF << std::endl;
+   dt_rescaling_factor =  Maximum_dt/dt_actual;
+   oomph_info << "ADJUSTING TIMESTEP SCALING FACTOR TO " << dt_rescaling_factor << std::endl;
   }
  
 
  //Once the timestep has been accepted, return the actual timestep taken, 
  //suitably scaled, to be used the next time
- return (dt_actual*DTSF);
+ return (dt_actual*dt_rescaling_factor);
 }
 
 
@@ -14257,7 +14252,7 @@ void Problem::newton_solve(const unsigned &max_adapt)
     try
      {
       //Solve the non-linear problem for this timestep with Newton's method
-      Problem::newton_solve();
+       newton_solve();
      }
     //Catch any exceptions thrown in the Newton solver
     catch(NewtonSolverError &error)

@@ -113,22 +113,23 @@ namespace oomph
     }
 
    /// modified block setup for general purpose block preconditioners
-   void block_setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt)
+    void block_setup(MATRIX* matrix_pt)
    {
     unsigned nmesh = Prec_mesh_pt.size();
     this->set_nmesh(nmesh);
     for (unsigned m = 0; m < nmesh; m++)
      {
-      this->set_mesh(m,problem_pt,Prec_mesh_pt[m]);
+          this->set_mesh(m,Prec_mesh_pt[m]);
      }
+
     if (Dof_to_block_map.size() > 0)
      {
-      BlockPreconditioner<MATRIX>::block_setup(problem_pt,matrix_pt,
+          BlockPreconditioner<MATRIX>::block_setup(matrix_pt,
                                                Dof_to_block_map);
      }
     else
      {
-      BlockPreconditioner<MATRIX>::block_setup(problem_pt,matrix_pt);
+          BlockPreconditioner<MATRIX>::block_setup(matrix_pt);
      }
    }
 
@@ -147,6 +148,7 @@ namespace oomph
   };
 
  
+
 //=============================================================================
 /// \short Block diagonal preconditioner. By default SuperLU is used to solve 
 /// the subsidiary systems, but other preconditioners can be used by setting 
@@ -226,14 +228,18 @@ namespace oomph
    void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
  
    /// \short Setup the preconditioner 
-   void setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt);
+    virtual void setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt);
  
    /// \short Access function to the i-th subsidiary preconditioner,
    /// i.e. the preconditioner for the i-th block.
    Preconditioner* subsidiary_block_preconditioner_pt(const unsigned& i)
-   {
-    return Diagonal_block_preconditioner_pt[i]; 
-   }
+      const
+    {return Diagonal_block_preconditioner_pt[i];}
+
+    /// \short Write access function to the i-th subsidiary preconditioner,
+    /// i.e. the preconditioner for the i-th block.
+    Preconditioner*& subsidiary_block_preconditioner_pt(const unsigned& i)
+    {return Diagonal_block_preconditioner_pt[i];}
    
 #ifdef OOMPH_HAS_MPI
    /// \short Use two level parallelisation 
@@ -285,24 +291,29 @@ namespace oomph
    // clean the memory
    this->clean_up_memory();
 
-   //setup the blocks look up schemes
-   this->block_setup(problem_pt,matrix_pt);
+    // Set the problem pointer
+    BlockPreconditioner<MATRIX>::problem_pt() = problem_pt;
 
-   // number of types of degree of freedom
-   unsigned nblock_types = this->nblock_types();
-
-   // Need to recast here -- input type is determined by specs in
-   // base class.
+    // Cast to the real type of the matrix (as specified by template)
    MATRIX* cast_matrix_pt=dynamic_cast<MATRIX*>(matrix_pt);
   
 #ifdef PARANOID
+    // Check the cast was successful
    if (cast_matrix_pt==0)
     {
-     throw OomphLibError("Wasn't able to cast matrix to specific type.",
-                         "BlockDiagonalPreconditioner::setup()",
+        std::ostringstream error_msg;
+        error_msg << "Could not cast matrix_pt to templated type";
+        throw OomphLibError(error_msg.str(),
+                            "BlockTriangularPreconditioner::setup()",
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
+
+    // Set up the block look up schemes
+    GeneralPurposeBlockPreconditioner<MATRIX>::block_setup(cast_matrix_pt);
+
+    // number of types of degree of freedom
+    unsigned nblock_types = this->nblock_types();
 
    // Resize the storage for the diagonal blocks
    Diagonal_block_preconditioner_pt.resize(nblock_types);
@@ -327,7 +338,7 @@ namespace oomph
    for (unsigned i=0;i<nblock_types;i++)
     {
      CRDoubleMatrix* block_pt = 0;
-     this->get_block(i,i,cast_matrix_pt,block_pt);
+        this->get_block(i,i,block_pt);
 #ifdef OOMPH_HAS_MPI
      if (Use_two_level_parallelisation)
       {
@@ -336,8 +347,14 @@ namespace oomph
      else
 #endif
       {
-       Diagonal_block_preconditioner_pt[i]
-        ->setup(problem_pt,block_pt);
+            // Set up preconditioner (i.e. solve the block)
+            double superlusetup_start = TimingHelpers::timer();
+            Diagonal_block_preconditioner_pt[i]->setup(problem_pt,block_pt);
+            double superlusetup_end = TimingHelpers::timer();
+            oomph_info << "Took " << superlusetup_end - superlusetup_start
+                       << "s to setup."<< std::endl;
+
+            // Done with this block now so delete it
        delete block_pt;
       }
     }
@@ -553,23 +570,29 @@ namespace oomph
    // clean the memory
    this->clean_memory();
 
-   //setup the blocks look up schemes
-   this->block_setup(problem_pt,matrix_pt);
+    // Set the problem pointer
+    BlockPreconditioner<MATRIX>::problem_pt() = problem_pt;
   
-   // number of types of degree of freedom
-   unsigned nblock_types = this->nblock_types();
-
-   // Need to recast here -- input type is determined by specs in
-   // base class.
+    // Cast to the real type of the matrix (as specified by template)
    MATRIX* cast_matrix_pt=dynamic_cast<MATRIX*>(matrix_pt);
+
 #ifdef PARANOID
+    // Check the cast was successful
    if (cast_matrix_pt==0)
     {
-     throw OomphLibError("Wasn't able to cast matrix to specific type.",
+        std::ostringstream error_msg;
+        error_msg << "Could not cast matrix_pt to templated type";
+        throw OomphLibError(error_msg.str(),
                          "BlockTriangularPreconditioner::setup()",
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
+
+    // Set up the block look up schemes
+    this->block_setup(cast_matrix_pt);
+
+    // number of types of degree of freedom
+    unsigned nblock_types = this->nblock_types();
 
    // Storage for the diagonal block preconditioners
    Diagonal_block_preconditioner_pt.resize(nblock_types);
@@ -596,7 +619,7 @@ namespace oomph
      // setup the preconditioner
      // delete the matrix
      CRDoubleMatrix* block_matrix_pt = 0;
-     this->get_block(i,i,cast_matrix_pt,block_matrix_pt);
+        this->get_block(i,i,block_matrix_pt);
      Diagonal_block_preconditioner_pt[i]->setup(problem_pt,block_matrix_pt);
      delete block_matrix_pt;
      
@@ -611,7 +634,7 @@ namespace oomph
      for (unsigned j = l; j < u; j++)
       {
        CRDoubleMatrix* block_matrix_pt = 0;
-       this->get_block(i,j,cast_matrix_pt,block_matrix_pt);
+            this->get_block(i,j,block_matrix_pt);
        Off_diagonal_matrix_vector_products(i,j) 
         = new MatrixVectorProduct();
        Off_diagonal_matrix_vector_products(i,j)->setup(block_matrix_pt);
@@ -623,11 +646,10 @@ namespace oomph
 //=============================================================================
 /// Preconditioner solve for the block triangular preconditioner
 //=============================================================================
- template<typename MATRIX> 
-  void BlockTriangularPreconditioner<MATRIX>::preconditioner_solve(
-   const DoubleVector& r, DoubleVector& z)
+  template<typename MATRIX> void BlockTriangularPreconditioner<MATRIX>::
+  preconditioner_solve(const DoubleVector& r, DoubleVector& z)
   {
-   // Cache umber of block types
+    // Cache number of block types
    const unsigned n_block = this->nblock_types();
 
    //
@@ -739,36 +761,39 @@ namespace oomph
    delete Preconditioner_pt;
    Preconditioner_pt = 0;
    
-   //setup the blocks look up schemes
-   this->block_setup(problem_pt,matrix_pt);
+    // Set the problem pointer
+    BlockPreconditioner<MATRIX>::problem_pt() = problem_pt;
 
-   // get the number of DOF types
-   unsigned nblock_types = this->nblock_types();
-
-   // Set the diagonal elements of required block to true for block diagonal
-   // preconditioner
-   DenseMatrix<bool> required_blocks(nblock_types,
-                                     nblock_types,true); 
-
-   // Need to recast here -- input type is determined by specs in
-   // base class.
+    // Cast to the real type of the matrix (as specified by template)
    MATRIX* cast_matrix_pt=dynamic_cast<MATRIX*>(matrix_pt);
   
 #ifdef PARANOID
+    // Check the cast was successful
    if (cast_matrix_pt==0)
     {
-     throw OomphLibError("Wasn't able to cast matrix to specific type.",
-                         "ExactBlockPreconditioner::setup()",
+        std::ostringstream error_msg;
+        error_msg << "Could not cast matrix_pt to templated type";
+        throw OomphLibError(error_msg.str(),
+                            "BlockTriangularPreconditioner::setup()",
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
 
+    // Set up the block look up schemes
+    this->block_setup(cast_matrix_pt);
+
+    // get the number of DOF types
+    unsigned nblock_types = this->nblock_types();
+
+    // Set the diagonal elements of required block to true for block diagonal
+    // preconditioner
+    DenseMatrix<bool> required_blocks(nblock_types, nblock_types,true);
+
    // matrix of block pt
-   DenseMatrix<MATRIX* > block_matrix_pt(nblock_types,
-                                         nblock_types,0);
+    DenseMatrix<MATRIX* > block_matrix_pt(nblock_types, nblock_types,0);
 
    // Get pointers to the blocks
-   this->get_blocks(cast_matrix_pt, required_blocks, block_matrix_pt);
+    this->get_blocks(required_blocks, block_matrix_pt);
 
    // Build the preconditioner matrix
    MATRIX* exact_block_matrix_pt = 0;
@@ -819,5 +844,68 @@ namespace oomph
    // copy solution back to z vector
    this->return_block_ordered_preconditioner_vector(block_order_z,z);
   }
+
+
+  // =================================================================
+  /// Preconditioner that doesn't actually do any preconditioning, it just
+  /// allows access to the Jacobian blocks. This is pretty hacky but oh well..
+  // =================================================================
+  template<typename MATRIX>
+  class DummyBlockPreconditioner
+    : public GeneralPurposeBlockPreconditioner<MATRIX>
+  {
+
+  public :
+
+    /// constructor
+    DummyBlockPreconditioner()
+      : GeneralPurposeBlockPreconditioner<MATRIX>() {}
+
+    /// Destructor - delete the subisidariry preconditioner
+    ~DummyBlockPreconditioner() {}
+
+    /// Broken copy constructor
+    DummyBlockPreconditioner(const DummyBlockPreconditioner&)
+    {
+      BrokenCopy::broken_copy("DummyBlockPreconditioner");
+    }
+
+    /// Broken assignment operator
+    void operator=(const DummyBlockPreconditioner&)
+    {
+      BrokenCopy::broken_assign("DummyBlockPreconditioner");
+    }
+
+    /// Apply preconditioner to r (just copy r to z).
+    void preconditioner_solve(const DoubleVector &r, DoubleVector &z)
+    {z.build(r);}
+
+    /// \short Setup the preconditioner
+    void setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt)
+    {
+      // Set the problem pointer
+      BlockPreconditioner<MATRIX>::problem_pt() = problem_pt;
+
+      // Cast to the real type of the matrix (as specified by template)
+      MATRIX* cast_matrix_pt = dynamic_cast<MATRIX*>(matrix_pt);
+
+#ifdef PARANOID
+      // Check the cast was successful
+      if (cast_matrix_pt==0)
+        {
+          std::ostringstream error_msg;
+          error_msg << "Could not cast matrix_pt to templated type";
+          throw OomphLibError(error_msg.str(),
+                              "BlockTriangularPreconditioner::setup()",
+                              OOMPH_EXCEPTION_LOCATION);
+        }
+#endif
+
+      // Set up the block look up schemes
+      this->block_setup(cast_matrix_pt);
+    }
+
+  };
+
 }
 #endif

@@ -7386,6 +7386,154 @@ void Mesh::remove_null_pointers_from_external_halo_node_storage(
 #endif
 
 
+// =================================================================
+/// Get the number of dof types in the mesh from the first element of the
+/// mesh. If MPI is on then also do some consistency checks between processors.
+/// \b Careful: Involves MPI Broadcasts and must therefore be called on all
+/// processors!
+// =================================================================
+unsigned Mesh::ndof_types(const OomphCommunicator* const comm_pt) const
+{
+
+  // Remains -1 if we don't have any elements on this processor.
+  int ndof_types = -1;
+  if (nelement() > 0)
+    {
+      ndof_types = element_pt(0)->ndof_types();
+#ifdef PARANOID
+      // Check that every element in this mesh has the same number of
+      // types of DOF.
+      for (unsigned i = 1; i < nelement(); i++)
+	{
+	  if (ndof_types != int(element_pt(i)->ndof_types()) )
+	    {
+	      std::ostringstream error_message;
+	      error_message
+		<< "Every element in the mesh must have the same number of "
+		<< "types of DOF for ndof_types() to work\n"
+		<< "Element 0 has " << ndof_types << " DOF types\n"
+		<< "Element " << i << " has "
+		<< element_pt(i)->ndof_types() << " DOF types";
+	      throw OomphLibError(error_message.str(),
+				  "Mesh::ndof_types",
+				  OOMPH_EXCEPTION_LOCATION);
+	    }
+	}
+#endif
+    }
+
+#ifdef OOMPH_HAS_MPI
+
+  // If we are using MPI then check the comm_pt was assigned
+  if(comm_pt == 0)
+    {
+      std::ostringstream error_message;
+      error_message
+	<< "If MPI is in use a communicator pointer must be provided.";
+      throw OomphLibError(error_message.str(),
+			  "Mesh::ndof_types",
+			  OOMPH_EXCEPTION_LOCATION);
+    }
+
+  // if more than one processor then
+  // + ensure number of DOFs is consistent on each processor (PARANOID)
+  // + ensure processors with no elements in this mesh have the
+  //   correct number of DOF types
+  if (comm_pt->nproc() > 1)
+    {
+      unsigned nproc = comm_pt->nproc();
+      unsigned my_rank = comm_pt->my_rank();
+
+      // Collect on root the number of dofs types determined independently
+      // on all processors (-1 indicates that the processor didn't have
+      // any elements and therefore doesn't know!)
+      int* ndof_types_recv = 0;
+      if (my_rank == 0)
+	{
+	  ndof_types_recv = new int[nproc];
+	}
+
+      MPI_Gather(&ndof_types,1,MPI_INT,
+		 ndof_types_recv,1,MPI_INT,0,
+		 comm_pt->mpi_comm());
+
+      // Root: Update own number of dof types, check consistency amongst
+      // all processors (in paranoid mode) and send out the actual
+      // number of dof types to those processors who couldn't figure this
+      // out themselves
+      if (my_rank == 0)
+	{
+	  // Check number of types of all non-root processors
+	  for (unsigned p = 1; p < nproc; p++)
+	    {
+	      if (ndof_types_recv[p] != -1)
+		{
+		  // Processor p was able to figure out how many
+		  // dof types there are, so I root can update
+		  // its own (if required)
+		  if (ndof_types == -1)
+		    {
+		      ndof_types = ndof_types_recv[p];
+		    }
+#ifdef PARANOID
+		  // Check consistency
+		  else if (ndof_types != ndof_types_recv[p])
+		    {
+		      std::ostringstream error_message;
+		      error_message
+			<< "The elements in this mesh must have the same number "
+			<< "of types of DOF on each processor";
+		      for (unsigned p = 0; p < nproc; p++)
+			{
+			  if (ndof_types_recv[p] != -1)
+			    {
+			      error_message << "Processor " << p << " : "
+					    << ndof_types_recv[p] << "\n";
+			    }
+			  else
+			    {
+			      error_message << "Processor " << p << " : (no elements)\n";
+			    }
+			}
+		      throw OomphLibError(error_message.str(),
+					  "BlockPreconditioner::set_mesh(...)",
+					  OOMPH_EXCEPTION_LOCATION);
+		    }
+#endif
+		}
+	    }
+
+	  // Now send ndof types to non-root processors that don't have it
+	  for (unsigned p = 1; p < nproc; p++)
+	    {
+	      if (ndof_types_recv[p] == -1)
+		{
+		  MPI_Send(&ndof_types,1,MPI_INT,p,0,
+			   comm_pt->mpi_comm());
+		}
+	    }
+	  // clean up
+	  delete[] ndof_types_recv;
+	}
+      // "else if": "else" for non-root; "if" for checking if current
+      // (non-root) processor does not know ndof type and is therefore
+      // about to receive it from root.
+      else if (ndof_types == -1)
+	{
+	  MPI_Recv(&ndof_types,1,MPI_INT,0,0,
+		   comm_pt->mpi_comm(),MPI_STATUS_IGNORE);
+	}
+    }
+#endif
+
+  // If ndof_types if still -1 then no elements were found for this mesh, so it
+  // has no dofs.
+  if(ndof_types == -1) ndof_types = 0;
+
+  return unsigned(ndof_types);
+}
+
+
 
 //========================================================================
 /// Wipe the storage for all externally-based elements and delete halos

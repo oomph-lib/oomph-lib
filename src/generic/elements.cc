@@ -3606,13 +3606,11 @@ void FiniteElement::get_dresidual_dnodal_coordinates(
   assemble_eulerian_base_vectors(dpsids,interpolated_G);
  
   //Calculate the metric tensor of the element
-  DenseMatrix<double> G(n_dim_element);
+  DenseMatrix<double> G(n_dim_element,n_dim_element,0.0);
   for(unsigned i=0;i<n_dim_element;i++)
    {
     for(unsigned j=0;j<n_dim_element;j++)
      {
-      //Initialise to zero
-      G(i,j) = 0.0;
       for(unsigned k=0;k<n_dim_node;k++) 
        {
         G(i,j) += interpolated_G(i,k)*interpolated_G(j,k);
@@ -3681,13 +3679,11 @@ void FiniteElement::get_dresidual_dnodal_coordinates(
   assemble_eulerian_base_vectors(dpsids,interpolated_G);
  
   //Calculate the metric tensor of the element
-  DenseMatrix<double> G(n_dim_element);
+  DenseMatrix<double> G(n_dim_element,n_dim_element,0.0);
   for(unsigned i=0;i<n_dim_element;i++)
    {
     for(unsigned j=0;j<n_dim_element;j++)
      {
-      //Initialise to zero
-      G(i,j) = 0.0;
       for(unsigned k=0;k<n_dim_node;k++) 
        {
         G(i,j) += interpolated_G(i,k)*interpolated_G(j,k);
@@ -4583,13 +4579,11 @@ void FiniteElement::identify_field_data_for_interactions(
      }
    }
   //Now find the local deformed metric tensor from the tangent Vectors
-  DenseMatrix<double> A(n_dim_el);
+  DenseMatrix<double> A(n_dim_el,n_dim_el,0.0);
   for(unsigned i=0;i<n_dim_el;i++)
    {
     for(unsigned j=0;j<n_dim_el;j++)
      {
-      //Initialise surface metric tensor to zero
-      A(i,j) = 0.0;
       //Take the dot product
       for(unsigned k=0;k<n_dim;k++)
        { 
@@ -4671,13 +4665,11 @@ void FiniteElement::identify_field_data_for_interactions(
    }
 
   //Now find the local deformed metric tensor from the tangent Vectors
-  DenseMatrix<double> A(n_dim_el);
+  DenseMatrix<double> A(n_dim_el,n_dim_el,0.0);
   for(unsigned i=0;i<n_dim_el;i++)
    {
     for(unsigned j=0;j<n_dim_el;j++)
      {
-      //Initialise surface metric tensor to zero
-      A(i,j) = 0.0;
       //Take the dot product
       for(unsigned k=0;k<n_dim;k++)
        { 
@@ -4834,9 +4826,7 @@ void FiniteElement::identify_field_data_for_interactions(
  
     //Calculate all derivatives of the spatial coordinates wrt 
     //local coordinates
-    DenseMatrix<double> interpolated_dxds(1,spatial_dim);
-    //Initialise to zero
-    for(unsigned i=0;i<spatial_dim;i++) {interpolated_dxds(0,i) = 0.0;}
+    DenseMatrix<double> interpolated_dxds(1,spatial_dim,0.0);
     
     //Loop over all parent nodes
     for(unsigned l=0;l<n_node_bulk;l++)
@@ -4887,10 +4877,7 @@ void FiniteElement::identify_field_data_for_interactions(
  
     //Calculate all derivatives of the spatial coordinates 
     //wrt local coordinates
-    DenseMatrix<double> interpolated_dxds(2,spatial_dim);
-    //Initialise to zero
-    for(unsigned j=0;j<2;j++)
-     {for(unsigned i=0;i<spatial_dim;i++) {interpolated_dxds(j,i) = 0.0;}}
+    DenseMatrix<double> interpolated_dxds(2,spatial_dim,0.0);
     
     //Loop over all parent nodes
     for(unsigned l=0;l<n_node_bulk;l++)
@@ -4994,10 +4981,7 @@ void FiniteElement::identify_field_data_for_interactions(
  
     //Calculate all derivatives of the spatial coordinates 
     //wrt local coordinates
-    DenseMatrix<double> interpolated_dxds(2,3);
-    //Initialise to zero
-    for(unsigned j=0;j<2;j++)
-     {for(unsigned i=0;i<3;i++) {interpolated_dxds(j,i) = 0.0;}}
+    DenseMatrix<double> interpolated_dxds(2,3,0.0);
     
     //Loop over all nodes
     for(unsigned l=0;l<n_node;l++)
@@ -6017,13 +6001,11 @@ void SolidFiniteElement::fill_in_generic_jacobian_for_solid_ic(
    shape(s,psi);
 
    // Get Lagrangian coordinate
-   Vector<double> xi(n_lagrangian);
+   Vector<double> xi(n_lagrangian,0.0);
 
    //Loop over the number of lagrangian coordinates
    for(unsigned i=0;i<n_lagrangian;i++)
     {
-     //Initialise component to zero
-     xi[i] = 0.0;
      //Loop over the local nodes
      for(unsigned l=0;l<n_node;l++) 
       {

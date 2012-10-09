@@ -1925,5 +1925,6 @@ template class GS<DenseDoubleMatrix>;
 template class GMRES<CCDoubleMatrix>;
 template class GMRES<CRDoubleMatrix>;
 template class GMRES<DenseDoubleMatrix>;
+template class GMRES<SumOfMatrices>;
 
 }

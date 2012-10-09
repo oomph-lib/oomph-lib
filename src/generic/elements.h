@@ -1234,7 +1234,7 @@ class FiniteElement : public virtual GeneralisedElement, public GeomObject
 
  /// \short Return the local equation number corresponding to the i-th
  /// value at the n-th local node.
- inline int nodal_local_eqn(const unsigned &n, const unsigned &i)
+ inline int nodal_local_eqn(const unsigned &n, const unsigned &i) const
   {
 #ifdef RANGE_CHECKING
    if(n >= Nnode)

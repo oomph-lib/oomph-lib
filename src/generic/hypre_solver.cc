@@ -321,7 +321,7 @@ namespace oomph
 
    // get pointers to the matrix
 
-   // column indicies of matrix
+   // column indices of matrix
    const int* matrix_cols = oomph_matrix->column_index();
 
    // entries of matrix

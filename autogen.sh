@@ -1,7 +1,6 @@
 #! /bin/sh
 
-
-
+set -o errexit
 
 
 #====================================================================
@@ -18,9 +17,6 @@ OptionPrompt()
 OptionRead()
 {
  read Opt
- if test "$Opt" = "" ; then
-  Opt=$1
- fi
  echo $Opt
 }
 
@@ -105,6 +101,11 @@ if (test "$raw_build" = "false"); then
 fi   
 
 
+# Set the script to crash if any un set variables are used (we put this after
+# the options processsing since some command line arguments may legitimately not
+# exist).
+set -o nounset
+
 # Read out root install directory
 #--------------------------------
 MY_HOME_WD=`pwd`
@@ -167,7 +168,29 @@ fi
 fi
 
 
+# Autodetect folders in user_drivers
+#-----------------------------------
 
+# Backup old file (use -f so it doesn't give an error if the file doesn't exist)
+mv -f ${MY_HOME_WD}/config/configure.ac_scripts/user_drivers.dir_list ${MY_HOME_WD}/config/configure.ac_scripts/user_drivers.dir_list.backup
+
+# Get a list of locations of files named Makefile.am, modify a little and write to user_drivers.dir_list.
+find ${MY_HOME_WD}/user_drivers -type f -name "Makefile.am" \
+    | grep -v "^${MY_HOME_WD}/user_drivers/Makefile.am" \
+    | sed 's:/Makefile.am$::' \
+    | sed "s:^${MY_HOME_WD}/::" \
+    > ${MY_HOME_WD}/config/configure.ac_scripts/user_drivers.dir_list
+
+# The grep and sed commands above do the following: 1) Remove the line that
+# corresponds to the Makefile.am in user_drivers itself. 2) Remove
+# "/Makefile.am" from each line leaving only the directory (dirname doesn't work
+# with pipes). 3) Remove the start of the path from each line leaving only the
+# location relative to the oomph-lib root directory.
+
+echo
+echo "User driver folders included are:"
+cat ${MY_HOME_WD}/config/configure.ac_scripts/user_drivers.dir_list
+echo
 
 
 # Set the build directory (for lib,include), relative to root
@@ -412,6 +435,7 @@ fi
 
 #If it's not OK, then read in alternative options from a file, or
 #specify on command line
+private_configure_option_files=""
 if test "$reply" = "n" -o "$reply" = "N"; then
  
   #Remove the current symbolic link (or file)
@@ -741,9 +765,10 @@ tmp=`OptionRead`
 #====================================================================
 
 
-# Raw build: Go through all the initialisation procedures
+# If we are doing a raw build or if ./configure does not yet exist then generate
+# all config files needed.
 #--------------------------------------------------------
-if $raw_build; then
+if [ $raw_build -o ! -e ./configure ]; then
  $MY_HOME_WD/bin/regenerate_config_files.sh $MY_HOME_WD
 fi
 
@@ -810,10 +835,18 @@ fi
 # declaration in the "Makefile.am"s
 #-----------------------------------
 if test "$want_self_tests" = "y" -o "$reply" = "Y" ; then 
+   
+  # We have to turn off "crash on errors" here because we don't want everything
+  # to stop if a single self test fails.
+  set -o errexit false
+
   echo " "
   echo "Running check to build/self-test the demo codes."
   echo "y" | make $make_options check
   echo "Done self test"
+
+  # and now turn it back on (just in case...)
+  set -o errexit
 
   # Size after self-tests
   #----------------------
