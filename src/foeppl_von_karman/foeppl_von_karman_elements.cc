@@ -122,7 +122,7 @@ fill_in_contribution_to_residuals(Vector<double> &residuals)
      nodal_value[0] = raw_nodal_value(l,w_nodal_index);
      nodal_value[1] = raw_nodal_value(l,laplacian_w_nodal_index);
 
-     if(!Linear_Bending_Model)
+     if(!Linear_bending_model)
      {
       nodal_value[2] = raw_nodal_value(l,phi_nodal_index);
       nodal_value[3] = raw_nodal_value(l,laplacian_phi_nodal_index);
@@ -136,7 +136,7 @@ fill_in_contribution_to_residuals(Vector<double> &residuals)
      interpolated_w += nodal_value[0]*psi(l);
      interpolated_laplacian_w += nodal_value[1]*psi(l);
 
-     if(!Linear_Bending_Model)
+     if(!Linear_bending_model)
      {
       interpolated_phi += nodal_value[2]*psi(l);
       interpolated_laplacian_phi += nodal_value[3]*psi(l);
@@ -164,7 +164,7 @@ fill_in_contribution_to_residuals(Vector<double> &residuals)
        interpolated_dwdx[j] += nodal_value[0]*dpsidx(l,j);
        interpolated_dlaplacian_wdx[j] += nodal_value[1]*dpsidx(l,j);
 
-       if(!Linear_Bending_Model)
+       if(!Linear_bending_model)
        {
         interpolated_dphidx[j] += nodal_value[2]*dpsidx(l,j);
         interpolated_dlaplacian_phidx[j] += nodal_value[3]*dpsidx(l,j);
@@ -200,7 +200,7 @@ fill_in_contribution_to_residuals(Vector<double> &residuals)
          residuals[local_eqn] += interpolated_dlaplacian_wdx[k]*dtestdx(l,k)*W;
         }
 
-       if(!Linear_Bending_Model)
+       if(!Linear_bending_model)
        {
         // Monge-Ampere part
         residuals[local_eqn] +=
@@ -297,7 +297,23 @@ fill_in_contribution_to_residuals(Vector<double> &residuals)
         (interpolated_dphidx[1] - interpolated_smooth_dphidx[1])*test(l)*W;
       }
     }
+
   } // End of loop over integration points
+
+
+ // Finally: My contribution to the volume constraint equation
+ // (if any). Note this must call get_bounded_volume since the
+ // definition of the bounded volume can be overloaded in derived
+ // elements.
+ if (Volume_constraint_pressure_external_data_index>=0)
+  {
+   local_eqn=external_local_eqn(
+    Volume_constraint_pressure_external_data_index,0);
+   if (local_eqn>=0)
+    {
+     residuals[local_eqn]+=get_bounded_volume();
+    }
+  }
 
 }
 
@@ -347,6 +363,56 @@ unsigned FoepplvonKarmanEquations::self_test()
   {
    return 1;
   }
+
+}
+
+
+//======================================================================
+/// Compute in-plane stresses
+//======================================================================
+void FoepplvonKarmanEquations::interpolated_stress(const Vector<double> &s,
+                                                   double& sigma_xx,
+                                                   double& sigma_yy,
+                                                   double& sigma_xy)
+{
+
+ // No in plane stresses if linear bending
+ if(Linear_bending_model)
+  {
+   sigma_xx=0.0;
+   sigma_yy=0.0;
+   sigma_xy=0.0;
+   return;
+  }
+
+ // Get shape fcts and derivs
+ unsigned n_dim=this->dim();
+ unsigned n_node=this->nnode();
+ Shape psi(n_node);
+ DShape dpsidx(n_node,n_dim);
+ dshape_eulerian(s,psi,dpsidx);
+ double interpolated_continuous_d2phidx2 = 0;
+ double interpolated_continuous_d2phidy2 = 0;
+ double interpolated_continuous_d2phidxdy = 0;
+ 
+ const unsigned smooth_dphidx_nodal_index = nodal_index_fvk(6);
+ const unsigned smooth_dphidy_nodal_index = nodal_index_fvk(7);
+ 
+ // Loop over nodes
+ for(unsigned l=0;l<n_node;l++)
+  {
+   interpolated_continuous_d2phidx2 += 
+    raw_nodal_value(l,smooth_dphidx_nodal_index)*dpsidx(l,0);
+   interpolated_continuous_d2phidy2 += 
+    raw_nodal_value(l,smooth_dphidy_nodal_index)*dpsidx(l,1);
+   interpolated_continuous_d2phidxdy += 0.5*(
+    raw_nodal_value(l,smooth_dphidx_nodal_index)*dpsidx(l,1)+
+    raw_nodal_value(l,smooth_dphidy_nodal_index)*dpsidx(l,0));
+  }
+ 
+ sigma_xx=interpolated_continuous_d2phidy2;
+ sigma_yy=interpolated_continuous_d2phidx2;
+ sigma_xy=-interpolated_continuous_d2phidxdy;
 
 }
 

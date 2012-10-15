@@ -44,7 +44,7 @@ namespace oomph
 
 
 //=============================================================
-/// A class which allows the user to specifiy a prescribed
+/// A class which allows the user to specify a prescribed
 /// volume (as opposed to a prescribed pressure) for in the region
 /// bounded by the membrane.
 /// Effectively adds an equation to the system for pressure.
@@ -70,7 +70,7 @@ namespace oomph
    const double& pressure = 0.0) :
    Bounding_mesh_pt(bounding_mesh_pt),
    Contributing_region(contributing_region),
-   Prescribed_volume_pt(0)
+    Prescribed_volume_pt(0)
     {
      // Create instance of pressure that is traded for volume constraint
      Volume_control_pressure_pt = new Data(1);
@@ -78,37 +78,6 @@ namespace oomph
 
      // Add the data object as internal data for this element
      Pressure_data_index = add_internal_data(Volume_control_pressure_pt);
-          
-     // Loop over the regions that contribute to volume
-     unsigned n_contributing_regions = Contributing_region.size();
-     for(unsigned r = 0; r < n_contributing_regions; r++)
-      {
-       unsigned n_inner_el = 
-        Bounding_mesh_pt->nregion_element(Contributing_region[r]);
-       
-       /// Loop over the elements in the contributing regions
-       for(unsigned e = 0; e < n_inner_el; e++)
-        {
-         ELEMENT *el_pt = dynamic_cast<ELEMENT *>
-          (Bounding_mesh_pt->region_element_pt(Contributing_region[r],e));
-         
-         // Add their nodes as external data to volume constraint element
-         unsigned n_node = el_pt->nnode();
-         for(unsigned n = 0; n < n_node; n++)
-          {
-           add_external_data(el_pt->node_pt(n));
-           
-           //Also add the nodal positions as external data in the 
-           // case that the nodes are SolidNodes
-           SolidNode *solid_node_pt = 
-            dynamic_cast<SolidNode*>(el_pt->node_pt(n));
-           if(solid_node_pt != 0)
-            {
-             add_external_data(solid_node_pt->variable_position_pt());
-            }
-          }
-        } /// end of loop over elements
-      } /// end of loop over contributing regions
     }
    
    // Destructor (empty)
@@ -158,16 +127,117 @@ namespace oomph
     Volume_control_local_eqn = internal_local_eqn(Pressure_data_index,0);
    }
    
-   /// Add the contribution to the appropriate elemtent of the 
-   /// residual vector which effectively minimises the difference
-   /// between the actual volume and the prescribed volume
+   /// \short Fill in residual: Difference between actual and
+   /// prescribed bounded volume.
    void fill_in_contribution_to_residuals(Vector<double> &residuals)
    {
     if(Volume_control_local_eqn >= 0)
      {
-      residuals[Volume_control_local_eqn] += get_bounded_volume()
-       - (*Prescribed_volume_pt);
+      residuals[Volume_control_local_eqn] += 
+       - (*Prescribed_volume_pt);      
      }
+   }
+
+
+   /// Fill in contribution to elemental residual and Jacobian
+   void fill_in_contribution_to_jacobian(Vector<double> &residuals,
+                                         DenseMatrix<double> &jacobian)
+   {
+    if(Volume_control_local_eqn >= 0)
+     {
+      // Only add contribution to residual; Jacobian (derivs w.r.t. to
+      // this element's external data is handled by FvK elements)
+      residuals[Volume_control_local_eqn] -= (*Prescribed_volume_pt);
+      
+
+     /*  // We are in charge... */
+     /*  else */
+     /*   { */
+     /*    // hierher This is very slow but keep code alive -- can be */
+     /*    // recycled if/when we ever make the Jacobians in the */
+     /*    // Foeppl von Karman elements analytical. */
+     /*    double t_start=TimingHelpers::timer(); */
+
+     /*    // Setup lookup scheme between local and global data */
+     /*    std::map<unsigned,unsigned> local_external_eqn; */
+     /*    unsigned next=nexternal_data(); */
+     /*    for (unsigned j=0;j<next;j++) */
+     /*     { */
+     /*      Data* data_pt=external_data_pt(j); */
+     /*      unsigned nval=data_pt->nvalue(); */
+     /*      for (unsigned k=0;k<nval;k++) */
+     /*       { */
+     /*        int local_eqn=external_local_eqn(j,k); */
+     /*        if (local_eqn>=0) */
+     /*         { */
+     /*          int global_eqn=data_pt->eqn_number(k); */
+     /*          local_external_eqn[global_eqn]=local_eqn; */
+     /*         } */
+     /*       } */
+     /*     } */
+
+
+     /*    double t_end=TimingHelpers::timer(); */
+     /*    oomph_info << "Time for local_external_eqn setup: "  */
+     /*               << t_end-t_start << std::endl; */
+     /*    t_start=TimingHelpers::timer(); */
+
+                
+     /*    // Add initial contribution */
+     /*    residuals[Volume_control_local_eqn] -= (*Prescribed_volume_pt); */
+
+     /*    // Initialise total bounded volume */
+     /*    double bounded_volume = 0.0; */
+      
+     /*    // Loop over the bounded regions */
+     /*    unsigned n_contributing_regions = Contributing_region.size(); */
+     /*    for(unsigned r = 0; r < n_contributing_regions; r++) */
+     /*     { */
+     /*      // Loop over the elements in the bounded regions */
+     /*      unsigned n_inner_el =  */
+     /*       Bounding_mesh_pt->nregion_element(Contributing_region[r]); */
+     /*      for(unsigned e = 0; e < n_inner_el; e++) */
+     /*       { */
+     /*        // Get element */
+     /*        ELEMENT *el_pt = dynamic_cast<ELEMENT*> */
+     /*         (Bounding_mesh_pt->region_element_pt(Contributing_region[r],e)); */
+
+     /*        // Get element's contribution to bounded volume and */
+     /*        // derivative w.r.t. its unknowns */
+     /*        double el_bounded_volume=0.0; */
+
+     /*        std::map<unsigned,double> d_bounded_volume_d_unknown; */
+     /*        el_pt->fill_in_d_bounded_volume_d_unknown(el_bounded_volume, */
+     /*                                                  d_bounded_volume_d_unknown); */
+
+     /*        // Add contribution to bounded volume */
+     /*        bounded_volume += el_bounded_volume; */
+
+
+     /*        // Add contribution to Jacobian */
+     /*        for (std::map<unsigned,double>::iterator it= */
+     /*              d_bounded_volume_d_unknown.begin();it!= */
+     /*              d_bounded_volume_d_unknown.end();it++) */
+     /*         { */
+     /*          unsigned global_eqn=(*it).first; */
+     /*          unsigned local_eqn=local_external_eqn[global_eqn]; */
+     /*          jacobian(Volume_control_local_eqn,local_eqn)+=(*it).second; */
+     /*         } */
+     /*       } */
+     /*     } */
+     /*    // Add contribution to residuals */
+     /*    residuals[Volume_control_local_eqn]+=bounded_volume; */
+
+
+
+     /*    t_end=TimingHelpers::timer(); */
+     /*    oomph_info << "Time for second part (actual work) of fill...jacobian: "  */
+     /*               << t_end-t_start << std::endl; */
+      
+     /*   } */
+
+
+     } 
    }
    
    /// Set pointer to target volume
@@ -189,7 +259,6 @@ namespace oomph
    /// that has been "traded" for the volume constraint.
    Data *Volume_control_pressure_pt;
 
-
    /// \short Unsigned indicating which internal Data object 
    /// stores the pressure
    unsigned Pressure_data_index;
@@ -198,7 +267,10 @@ namespace oomph
    int Volume_control_local_eqn;
    
    /// \short Pointer to mesh of Foeppl von Karman elements that bound
-   /// the prescribed volume
+   /// the prescribed volume; NULL if the FvK elements that contribute
+   /// to the bounding volume are in charge of adding their own 
+   /// contribution to the volume constraint equation (and the
+   /// associated Jacobian)
    MESH<ELEMENT>* Bounding_mesh_pt;
    
    /// \short Region IDs in the bounding mesh that contribute to the 
@@ -207,6 +279,7 @@ namespace oomph
 
    /// Pointer to target volume
    double* Prescribed_volume_pt;
+
  };
  
 }

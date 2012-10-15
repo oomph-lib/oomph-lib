@@ -2936,6 +2936,41 @@ void FiniteElement::d_dshape_eulerian_dnodal_coordinates(
 
 
 //========================================================================
+/// \short Compute the geometric shape functions (psi) at integration point
+/// ipt. Return the determinant of the jacobian of the mapping (detJ).
+/// Additionally calculate the derivatives of "detJ" w.r.t. the 
+/// nodal coordinates.
+//========================================================================
+ double FiniteElement::dJ_eulerian_at_knot(
+  const unsigned &ipt,
+  Shape &psi, 
+  DenseMatrix<double> &djacobian_dX) const
+ {
+  // Find the element dimension
+  const unsigned el_dim = dim();
+ 
+  // Get the values of the shape function and local derivatives
+  unsigned nnod=nnode();
+  DShape dpsi(nnod,el_dim);
+  dshape_local_at_knot(ipt,psi,dpsi);
+ 
+  // Allocate memory for the jacobian and the inverse of the jacobian
+  DenseMatrix<double> jacobian(el_dim), inverse_jacobian(el_dim);
+
+  // Now calculate the inverse jacobian
+  const double det = local_to_eulerian_mapping(dpsi,jacobian,inverse_jacobian);
+
+  // Calculate the derivative of the jacobian w.r.t. nodal coordinates
+  // Note: must call this before "transform_derivatives(...)" since this
+  // function requires dpsids rather than dpsidx
+  dJ_eulerian_dnodal_coordinates(jacobian,dpsi,djacobian_dX);
+
+  // Return the determinant of the jacobian
+  return det;
+ }
+
+
+//========================================================================
 /// \short Compute the geometric shape functions (psi) and first
 /// derivatives w.r.t. global coordinates (dpsidx) at integration point
 /// ipt. Return the determinant of the jacobian of the mapping (detJ).

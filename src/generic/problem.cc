@@ -1639,33 +1639,47 @@ namespace oomph
     // We're on the root processor: Always start with the first element
     int proc=0;
     first_and_last_element[0][0] = 0;
-     
+
+    // Highest element we can help ourselves to if we want to leave
+    // at least one element for all subsequent processors
+    unsigned max_el_avail=n_elements-n_proc;
+
     // Initialise total work allocated
     total=0.0;
     for (unsigned e=0;e<n_elements;e++)
      {
       total+=Elemental_assembly_time[e];
        
-      //Once we have reached the target load
-      if (total>target_load)
+      //Once we have reached the target load or we've used up practically
+      // all the elements...
+      if ((total>target_load)||(e==max_el_avail))
        {
+
+        // Last element for current processor
+        first_and_last_element[proc][1]=e;
+
         //Provided that we are not on the last processor
         if (proc<(n_proc-1))
          {
-          // Last element for current processor
-          first_and_last_element[proc][1]=e;
-
           // Set first element for next one
           first_and_last_element[proc+1][0]=e+1;
          }
          
         // Move on to the next processor
         proc++;
-        
+     
+        // Can have one more...
+        max_el_avail++;
+
         // Re-initialise the time
         total=0.0;
        } // end of test for "total exceeds target"
      }
+
+
+    // Last element for last processor
+    first_and_last_element[n_proc-1][1]=n_elements-1;
+
 
     //If we haven't got to the end of the processor list then 
     //need to shift things about slightly because the processors
@@ -1675,7 +1689,7 @@ namespace oomph
     //have been visited.
     //Happens a lot when you massively oversubscribe the CPUs (which was
     //only ever for testing!)
-    if(proc!=n_proc-1)
+    if (proc!=n_proc-1)
      {
       oomph_info 
        << "First pass did not allocate elements on every processor\n";

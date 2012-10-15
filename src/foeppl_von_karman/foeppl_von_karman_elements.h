@@ -61,7 +61,6 @@ namespace oomph
 /// This contains the generic maths. Shape functions, geometric
 /// mapping etc. must get implemented in derived class.
 //=============================================================
-
 class FoepplvonKarmanEquations : public virtual FiniteElement
 {
 
@@ -75,13 +74,16 @@ public:
 
  /// \short Constructor (must initialise the Pressure_fct_pt and
  /// Airy_forcing_fct_pt to null). Also set physical parameters to their
- /// default values
+ /// default values. No volume constraint applied by default.
  FoepplvonKarmanEquations() : Pressure_fct_pt(0),
                               Airy_forcing_fct_pt(0)
   {
    //Set all the physical constants to the default value (zero)
    Eta_pt = &Default_Physical_Constant_Value;
-   Linear_Bending_Model = false;
+   Linear_bending_model = false;
+   
+   // No volume constraint
+   Volume_constraint_pressure_external_data_index=-1;
   }
 
  /// Broken copy constructor
@@ -103,6 +105,28 @@ public:
 
  /// Pointer to eta
  double* &eta_pt() {return Eta_pt;}
+
+
+ /// \short Set Data value containing a single value which represents the
+ /// volume control pressure as external data for this element. 
+ /// Only used for volume controlled problems in conjunction with
+ /// FoepplvonKarmanVolumeConstraintElement.
+ void set_volume_constraint_pressure_data_as_external_data(Data* data_pt)
+ {
+#ifdef PARANOID
+  if (data_pt->nvalue()!=1)
+   {
+    throw OomphLibError(
+     "Data object that contains volume control pressure should only contain a single value. ",
+     "FoepplvonKarmanEquations::set_volume_constraint_pressure_data_as_external_data()",
+     OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+
+  // Add as external data and remember the index in the element's storage
+  // scheme
+  Volume_constraint_pressure_external_data_index=add_external_data(data_pt);
+ }
 
  /// \short Return the index at which the i-th unknown value
  /// is stored. The default value, i, is appropriate for single-physics
@@ -296,12 +320,19 @@ public:
    return(interpolated_w);
   }
 
+ /// Compute in-plane stresses
+ void interpolated_stress(const Vector<double> &s,
+                          double& sigma_xx,
+                          double& sigma_yy,
+                          double& sigma_xy);
+
  /// \short Return the integral of the displacement over the current
  /// element, effectively calculating its contribution to the volume under
  /// the membrane. Virtual so it can be overloaded in multi-physics
  /// where the volume may incorporate an offset, say.
  virtual double get_bounded_volume() const
  {
+
   //Number of nodes and integration points for the current element
   const unsigned n_node = nnode();
   const unsigned n_intpt = integral_pt()->nweight();
@@ -357,19 +388,19 @@ public:
  void use_linear_bending_model()
   {
    // Set the boolean flag
-   Linear_Bending_Model = true;
+   Linear_bending_model = true;
 
    // Get the index of the first FvK nodal value
    unsigned first_fvk_nodal_index = nodal_index_fvk();
 
    // Get the total number of FvK nodal values (assuming they are stored
    // contiguously) at node 0 (it's the same at all nodes anyway)
-   unsigned total_fvk_nodal_indicies = 8; // hierher required_nvalue(0);
+   unsigned total_fvk_nodal_indicies = 8; 
 
    // Get the number of nodes in this element
    unsigned n_node = nnode();
 
-   // Loop over the appropriate nodal indicies
+   // Loop over the appropriate nodal indices
    for(unsigned index=first_fvk_nodal_index+2;
                 index<first_fvk_nodal_index+total_fvk_nodal_indicies;
                 index++)
@@ -415,12 +446,20 @@ protected:
  FoepplvonKarmanPressureFctPt Airy_forcing_fct_pt;
 
 private:
+
  /// Default value for physical constants
  static double Default_Physical_Constant_Value;
 
  /// \short Flag which stores whether we are using a linear, pure bending model
  /// instead of the full non-linear Foeppl-von Karman
- bool Linear_Bending_Model;
+ bool Linear_bending_model;
+
+ /// \short Index of the external Data object that represents the volume 
+ /// constraint pressure (initialised to -1 indicating no such constraint)
+ /// Gets overwritten when calling 
+ /// set_volume_constraint_pressure_data_as_external_data(...)
+ int Volume_constraint_pressure_external_data_index;
+
 };
 
 

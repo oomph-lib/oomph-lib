@@ -1275,6 +1275,15 @@ class FiniteElement : public virtual GeneralisedElement, public GeomObject
    return Nodal_local_eqn[n][i];
   }
 
+
+
+ /// \short Compute the geometric shape functions (psi) at integration point
+ /// ipt. Return the determinant of the jacobian of the mapping (detJ).
+ /// Additionally calculate the derivatives of "detJ" w.r.t. the 
+ /// nodal coordinates.
+ double dJ_eulerian_at_knot(const unsigned &ipt,
+                            Shape &psi, 
+                            DenseMatrix<double> &djacobian_dX) const;
   protected: 
 
  /// \short Static array that holds the number of second derivatives

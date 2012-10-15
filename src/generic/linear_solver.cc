@@ -709,7 +709,7 @@ void SuperLUSolver::solve(Problem* const &problem_pt, DoubleVector &result)
      // Doc time for setup
      double t_end = TimingHelpers::timer();
      Jacobian_setup_time = t_end-t_start;
-     if ((Doc_time) && (problem_pt->communicator_pt()->my_rank()==0))
+     if (Doc_time)
       {
        oomph_info << "Time to set up CRDoubleMatrix Jacobian [sec]        : "
                   << Jacobian_setup_time << std::endl;
@@ -754,7 +754,7 @@ void SuperLUSolver::solve(Problem* const &problem_pt, DoubleVector &result)
      // Doc time for setup
      double t_end = TimingHelpers::timer();
      Jacobian_setup_time = t_end-t_start;
-     if ((Doc_time) && (problem_pt->communicator_pt()->my_rank()==0))
+     if (Doc_time)
       {
        oomph_info << "Time to set up CR Jacobian [sec]   : "
                   << Jacobian_setup_time << std::endl;
