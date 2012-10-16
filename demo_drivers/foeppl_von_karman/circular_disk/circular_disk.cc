@@ -492,8 +492,12 @@ void UnstructuredFvKProblem<ELEMENT>::complete_problem_setup()
    n_element = My_mesh_pt->nregion_element(Bubble_regions[r]);
    for(unsigned e = 0; e < n_element; e++)
     {
-     My_mesh_pt->region_element_pt(Bubble_regions[r],e)->add_external_data(
-       Volume_constraint_element_pt->pressure_data_pt());
+     // Upcast from GeneralisedElement to the present element
+     ELEMENT* el_pt = dynamic_cast<ELEMENT*>(
+      My_mesh_pt->region_element_pt(Bubble_regions[r],e));
+     
+     el_pt->set_volume_constraint_pressure_data_as_external_data(
+      Volume_constraint_element_pt->pressure_data_pt());
     }
   }
   
