@@ -1663,10 +1663,10 @@ namespace oomph
          {
           // Set first element for next one
           first_and_last_element[proc+1][0]=e+1;
+
+          // Move on to the next processor
+          proc++;
          }
-         
-        // Move on to the next processor
-        proc++;
      
         // Can have one more...
         max_el_avail++;
@@ -1681,60 +1681,101 @@ namespace oomph
     first_and_last_element[n_proc-1][1]=n_elements-1;
 
 
-    //If we haven't got to the end of the processor list then 
-    //need to shift things about slightly because the processors
-    //at the end will be empty.
-    //This can occur when you have very fast assembly times and the 
-    //rounding errors mean that the targets are achieved before all processors
-    //have been visited.
-    //Happens a lot when you massively oversubscribe the CPUs (which was
-    //only ever for testing!)
-    if (proc!=n_proc-1)
+    // The following block should probably be paranoidified away
+    // but we've screwed the logic up so many times that I feel
+    // it's safer to keep it...
+    bool wrong=false;
+    std::ostringstream error_stream;
+    for (int p=0;p<n_proc-1;p++)
      {
-      oomph_info 
-       << "First pass did not allocate elements on every processor\n";
-      oomph_info <<
-       "Moving elements so that each processor has at least one\n";
-      
-      //Work out number of empty processos
-      unsigned n_empty_processors = n_proc - proc + 1;
-
-      //Loop over the processors that do have elements
-      //and work out how many we need to steal elements from
-      unsigned n_element_on_processors=0;
-      do
+      unsigned first_of_current=first_and_last_element[p][0];
+      unsigned last_of_current=first_and_last_element[p][1];
+      if (first_of_current>last_of_current)
        {
-        //Step down the processors
-        --proc;
-        //Add the current processor to the number of empty processors
-        //because the elements have to be shared between processors
-        //including the one(s) on which they are currently stored.
-        ++n_empty_processors; 
-        n_element_on_processors += 
-         (first_and_last_element[proc][1] - 
-          first_and_last_element[proc][0] + 1);
+        wrong=true;
+        error_stream << "Error: First/last element of proc " << p << ": "
+                     << first_of_current << " " << last_of_current 
+                     << std::endl;
        }
-      while(n_element_on_processors < n_empty_processors);
-      
-      //Should now be able to put one element on each processor
-      //Start from the end and do so
-      unsigned current_element  = n_elements-1;
-      for(int p=n_proc-1;p>proc;p--)
+      unsigned first_of_next=first_and_last_element[p+1][0];
+      if (first_of_next!=(last_of_current+1))
        {
-        first_and_last_element[p][1] = current_element;
-        first_and_last_element[p][0] = --current_element;
+        wrong=true;
+        error_stream << "Error: First element of proc " << p+1 << ": "
+                     << first_of_next << " and last element of proc " 
+                     << p << ": " << last_of_current 
+                     << std::endl;
        }
-
-      //Now for the last processor we touched, just adjust the final value
-      first_and_last_element[proc][1] = current_element;
      }
-    //Otherwise just put the rest of the elements on the final 
-    //processor
-    else
+    if (wrong)
      {
-      // Last one
-      first_and_last_element[n_proc-1][1]=n_elements-1;
+      throw OomphLibError(error_stream.str(),
+                          "Problem::recompute_load_balanced_assembly()",
+                          OOMPH_EXCEPTION_LOCATION);
      }
+    
+
+    // THIS TIDY UP SHOULD NO LONGER BE REQUIRED AND CAN GO AT SOME POINT
+
+    // //If we haven't got to the end of the processor list then 
+    // //need to shift things about slightly because the processors
+    // //at the end will be empty.
+    // //This can occur when you have very fast assembly times and the 
+    // //rounding errors mean that the targets are achieved before all processors
+    // //have been visited.
+    // //Happens a lot when you massively oversubscribe the CPUs (which was
+    // //only ever for testing!)
+    // if (proc!=n_proc-1)
+    //  {
+    //   oomph_info 
+    //    << "First pass did not allocate elements on every processor\n";
+    //   oomph_info <<
+    //    "Moving elements so that each processor has at least one\n";
+      
+    //   //Work out number of empty processos
+    //   unsigned n_empty_processors = n_proc - proc + 1;
+
+    //   //Loop over the processors that do have elements
+    //   //and work out how many we need to steal elements from
+    //   unsigned n_element_on_processors=0;
+    //   do
+    //    {
+    //     //Step down the processors
+    //     --proc;
+    //     //Add the current processor to the number of empty processors
+    //     //because the elements have to be shared between processors
+    //     //including the one(s) on which they are currently stored.
+    //     ++n_empty_processors; 
+    //     n_element_on_processors += 
+    //      (first_and_last_element[proc][1] - 
+    //       first_and_last_element[proc][0] + 1);
+    //    }
+    //   while(n_element_on_processors < n_empty_processors);
+      
+    //   //Should now be able to put one element on each processor
+    //   //Start from the end and do so
+    //   unsigned current_element  = n_elements-1;
+    //   for(int p=n_proc-1;p>proc;p--)
+    //    {
+    //     first_and_last_element[p][1] = current_element;
+    //     first_and_last_element[p][0] = --current_element;
+    //    }
+
+    //   //Now for the last processor we touched, just adjust the final value
+    //   first_and_last_element[proc][1] = current_element;
+    //  }
+    // //Otherwise just put the rest of the elements on the final 
+    // //processor
+    // else
+    //  {
+    //   // Last one
+    //   first_and_last_element[n_proc-1][1]=n_elements-1;
+    //  }
+
+
+    // END PRESUMED-TO-BE-UNNECESSARY BLOCK...
+
+
 
     //Now communicate the information
 
