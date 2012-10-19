@@ -398,6 +398,10 @@ class TriangleMeshParameters
    Vector<TriangleMeshOpenCurve*> internal_open_curve_pt =
      triangle_mesh_parameters.internal_open_curves_pt();
 
+   // Sort the open polylines so that when connections exists only
+   // depend on already defined polylines
+   sort_open_curves_based_on_connections_order(internal_open_curve_pt);
+
    //Find the number of internal open curves
    unsigned n_internal_open_curves = internal_open_curve_pt.size();
 
@@ -944,7 +948,7 @@ class TriangleMeshParameters
     
     // Store internal polygons by copy constructor
     Internal_polygon_pt=internal_polygon_pt;
-    
+
     // Store internal polylines by copy constructor
     Internal_open_curve_pt = open_polylines_pt;
 
@@ -982,7 +986,7 @@ class TriangleMeshParameters
     // Convert the Input string in *char required by the triangulate function
     char triswitches[100];
     sprintf(triswitches,"%s",input_string_stream.str().c_str());
-
+    
     // Build the mesh using triangulate function
     triangulate(triswitches, &triangulate_io, &Triangulateio, 0);
     
@@ -1013,7 +1017,173 @@ class TriangleMeshParameters
     TriangleHelper::clear_triangulateio(triangulate_io,clear_hole_data);
    }
   
-  
+  /// \short Solve dependencies for connections between internal open
+  /// curves. When an internal polyline is connected to another internal
+  /// polyline that has not been created (because of the storing order of
+  /// the open curves) this method sort the open curves to ensure that an
+  /// open curve is always connected to an already created open curve
+  void sort_open_curves_based_on_connections_order(
+   Vector<TriangleMeshOpenCurve*> &open_curves_pt)
+  {
+   // 1) Go through all the open curves and their respective polylines
+   // 2) If connected (initial or final end) then get the boundaries id
+   //    to which they are connected
+   // 3) Verify that all the boundaries to which each polyline is connected
+   //    are stored before in the open curves Vector (use a list to re-sort
+   //    the open curves)
+   unsigned nopen_curves = open_curves_pt.size();
+
+   // Return
+   if (nopen_curves <= 1)
+    {return;}
+   
+   // The list of sorted open curves according to their connections
+   // dependencies
+   // pair(open curve, set of boundaries id to which depends)
+   std::list<std::pair<TriangleMeshOpenCurve *, std::set<unsigned> > > 
+    sorted_open_curves;
+   
+   // *******************************************************************
+   // Insert the first open curve to the list
+   // Get the set of boundaries ids to which the first open curve depends
+   // and add it to the sorted open curves list
+   std::set<unsigned> connected_with;
+   unsigned npolylines = open_curves_pt[0]->ncurve_section();
+   for (unsigned p = 0; p < npolylines; p++)
+    {
+     TriangleMeshCurveSection *curve_section_pt = 
+      open_curves_pt[0]->curve_section_pt(p);
+     if (curve_section_pt->is_initial_vertex_connected())
+      {
+       // We need to get the boundary id of the destination/connected
+       // boundary
+       unsigned dst_bnd_id = 
+        curve_section_pt->initial_vertex_connected_bnd_id();
+       // ... and store it on the "is connected with" set
+       connected_with.insert(dst_bnd_id);
+      }
+     if (curve_section_pt->is_final_vertex_connected())
+      {
+       // We need to get the boundary id of the destination/connected
+       // boundary
+       unsigned dst_bnd_id = 
+        curve_section_pt->final_vertex_connected_bnd_id();
+       // ... and store it on the "is connected with" set
+       connected_with.insert(dst_bnd_id);
+      }
+    } // for p (polylines on the current open curve)
+
+   // Make the pair to insert to the list
+   std::pair<TriangleMeshOpenCurve*, std::set<unsigned> > insert_pair = 
+    std::make_pair(open_curves_pt[0], connected_with);
+   
+   // Insert the last open curve as the base one
+   sorted_open_curves.push_back(insert_pair);
+
+   // *******************************************************************
+   // Sort the open curves in the vector
+   for (unsigned i = 1; i < nopen_curves; i++)
+    {
+     // Stores the boundaries id to which the current open curve is
+     // connected
+     connected_with.clear();
+     // Store the boundaries ids with the current open curve
+     std::set<unsigned> bnd_ids;
+     unsigned npolylines = open_curves_pt[i]->ncurve_section();
+     for (unsigned p = 0; p < npolylines; p++)
+      {
+       TriangleMeshCurveSection *curve_section_pt = 
+        open_curves_pt[i]->curve_section_pt(p);
+
+       bnd_ids.insert(curve_section_pt->boundary_id());
+
+       if (curve_section_pt->is_initial_vertex_connected())
+        {
+         // We need to get the boundary id of the destination/connected
+         // boundary
+         unsigned dst_bnd_id = 
+          curve_section_pt->initial_vertex_connected_bnd_id();
+         // ... and store it on the "is connected with" set
+         connected_with.insert(dst_bnd_id);
+        }
+       if (curve_section_pt->is_final_vertex_connected())
+        {
+         // We need to get the boundary id of the destination/connected
+         // boundary
+         unsigned dst_bnd_id = 
+          curve_section_pt->final_vertex_connected_bnd_id();
+         // ... and store it on the "is connected with" set
+         connected_with.insert(dst_bnd_id);
+        }
+      } // for p (polylines on the current open curve)
+
+     // Now we have all the boundaries id's to which the current open curve
+     // is connected. This information will be useful to store the current
+     // open curve in the list
+
+     // Insert the current open curve in the open curve's list
+     // according to its dependency in connections (if has dependency go
+     // to the rigth -- after -- and if has no dependency go to the left
+     // -- before --)
+     std::list<std::pair<TriangleMeshOpenCurve *, 
+      std::set<unsigned> > >::iterator it_list;
+     it_list = sorted_open_curves.begin();
+     bool inserted_open_curve = false;
+     for (; it_list != sorted_open_curves.end(); it_list++)
+      {
+       std::set<unsigned> depends_on = (*it_list).second;
+
+       // Verify dependencies
+       std::set<unsigned>::iterator it;
+       it = depends_on.begin();
+       for (; it != depends_on.end(); it++)
+        {
+         unsigned b = (*it);
+         std::set<unsigned>::iterator it_found;
+         it_found = bnd_ids.find(b);
+         // Is there a dependency?
+         if (it_found!=bnd_ids.end())
+          {
+           // Insert the current open curve to the left of the open curve
+           // in the list
+           // Make the pair to insert to the list
+           std::pair<TriangleMeshOpenCurve*, std::set<unsigned> >
+            insert_pair = std::make_pair(open_curves_pt[i], connected_with);
+            
+           // Insert the last open curve as the base one
+           sorted_open_curves.insert(it_list, insert_pair);
+           inserted_open_curve = true;
+           break; // With one dependency is enough
+          }
+        }
+       // Break, no need to check for more open curves
+       if (inserted_open_curve) break;
+      }
+
+     // Not necessary to re-sort the open curves, insert at the end of
+     // the list
+     if (!inserted_open_curve)
+      {
+       // Make the pair to insert to the list
+       std::pair<TriangleMeshOpenCurve*, std::set<unsigned> >
+        insert_pair = std::make_pair(open_curves_pt[i], connected_with);
+       sorted_open_curves.push_back(insert_pair);
+      }
+
+    } // for i (open curves)
+
+   // Now copy the list
+   unsigned counter = 0;
+   std::list<std::pair<TriangleMeshOpenCurve *, 
+    std::set<unsigned> > >::iterator it_list;
+   it_list = sorted_open_curves.begin();
+   for (; it_list != sorted_open_curves.end(); it_list++)
+    {
+     open_curves_pt[counter] = (*it_list).first;
+     counter++;
+    }
+  }
+
   /// \short Helper function to create polyline vertex coordinates for 
   /// curvilinear boundary specified by boundary_pt, using either
   /// equal increments in zeta or in (approximate) arclength
@@ -2577,7 +2747,7 @@ template<class ELEMENT>
    /// They could be change on the vertices numbering when adding
    /// (refinement) or erasing (unrefinement) nodes (vertices)
    void restore_connections_on_internal_boundary(
-     TriangleMeshPolyLine* polyline_pt);
+    TriangleMeshPolyLine* polyline_pt);
 
    /// \short Helper function that updates the input polygon's PSLG
    /// by using the end-points of elements from FaceMesh(es) that are

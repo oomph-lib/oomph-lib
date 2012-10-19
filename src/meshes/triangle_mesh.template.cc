@@ -2358,6 +2358,7 @@ void RefineableTriangleMesh<ELEMENT>::adapt(OomphCommunicator* comm_pt,
         inner_open_boundary_update_necessary=
           this->update_open_curve_using_face_mesh(
             this->Internal_open_curve_pt[i], check_only);
+
         // If at least one needs modification then break the for loop
         if (inner_open_boundary_update_necessary) break;
        }
@@ -3627,66 +3628,121 @@ bool RefineableTriangleMesh<ELEMENT>::update_open_curve_using_face_mesh(
       //Final end point of previous line
       Vector<double> final_vertex_of_previous_segment;
       open_polyline_pt->polyline_pt(p-1)->
-        final_vertex_coordinate(final_vertex_of_previous_segment);
-
+       final_vertex_coordinate(final_vertex_of_previous_segment);
+      
       unsigned prev_seg_boundary_id =
-        open_polyline_pt->curve_section_pt(p-1)->boundary_id();
-
+       open_polyline_pt->curve_section_pt(p-1)->boundary_id();
+      
       //Find the error between the final vertex of the previous
       //line and the first vertex of the current line
       double error = 0.0;
       for(unsigned i=0;i<2;i++)
        {
         const double dist =
-          final_vertex_of_previous_segment[i] -
-          (*vector_vertex_node.begin())[i];
+         final_vertex_of_previous_segment[i] -
+         (*vector_vertex_node.begin())[i];
         error += dist*dist;
        }
       error = sqrt(error);
-
+      
       //If the error is bigger than the tolerance then
       //we probably need to reverse, but better check
       if(error > ToleranceForVertexMismatchInPolygons::Tolerable_error)
        {
         //Find the error between the final vertex of the previous
         //line and the first vertex of the current line
-        double rev_error = 0.0;
+        error = 0.0;
         for(unsigned i=0;i<2;i++)
          {
           const double dist =
-            final_vertex_of_previous_segment[i] -
-            (*--vector_vertex_node.end())[i];
-          rev_error += dist*dist;
+           final_vertex_of_previous_segment[i] -
+           (*--vector_vertex_node.end())[i];
+          error += dist*dist;
          }
-        rev_error = sqrt(rev_error);
-
-        if(rev_error >
-          ToleranceForVertexMismatchInPolygons::Tolerable_error)
+        error = sqrt(error);
+        
+        if (error > ToleranceForVertexMismatchInPolygons::Tolerable_error)
          {
-          std::ostringstream error_stream;
-          error_stream <<
-            "The distance between the first node of the current\n" <<
-            "line segment (boundary " << bound << ") and either end of "
-            << "the previous line segment\n"
-            << "(boundary " << prev_seg_boundary_id << ") is bigger than the "
-            << "desired tolerance " <<
-            ToleranceForVertexMismatchInPolygons::Tolerable_error << ".\n"
-            <<
-            "This suggests that the polylines defining the open curve\n" <<
-            "representation are not properly ordered.\n"
-            << "Fail on last vertex of polyline: (" << prev_seg_boundary_id
-            << ") and\nfirst vertex of polyline (" << bound << ").\n"
-            << "This should have failed when first trying to construct the\n"
-            << "open curve.\n";
-          throw OomphLibError(error_stream.str(),
-            "TriangleMesh::update_open_curve_using_face_mesh()",
-            OOMPH_EXCEPTION_LOCATION);
+          // If no found it is possible that the previous polyline be reversed
+          // Check for that case
+          //Initial point of previous line
+          Vector<double> initial_vertex_of_previous_segment;
+          open_polyline_pt->polyline_pt(p-1)->
+           initial_vertex_coordinate(initial_vertex_of_previous_segment);
+          
+          //Find the error between the initial vertex of the previous
+          //line and the first vertex of the current line
+          error = 0.0;
+          for(unsigned i=0;i<2;i++)
+           {
+            const double dist =
+             initial_vertex_of_previous_segment[i] -
+             (*vector_vertex_node.begin())[i];
+            error += dist*dist;
+           }
+          error = sqrt(error);
+          
+          //If the error is bigger than the tolerance then
+          //we probably need to reverse, but better check
+          if(error > ToleranceForVertexMismatchInPolygons::Tolerable_error)
+           {
+            //Find the error between the final vertex of the previous
+            //line and the first vertex of the current line
+            error = 0.0;
+            for(unsigned i=0;i<2;i++)
+             {
+              const double dist =
+               initial_vertex_of_previous_segment[i] -
+               (*--vector_vertex_node.end())[i];
+              error += dist*dist;
+             }
+            error = sqrt(error);
+            
+            if(error >
+               ToleranceForVertexMismatchInPolygons::Tolerable_error)
+             {
+              std::ostringstream error_stream;
+              error_stream 
+               <<"The distance between the first node of the current\n"
+               <<"line segment (boundary " << bound
+               <<") and either end of the previous line segment\n"
+               <<"(boundary " << prev_seg_boundary_id << ") is bigger than "
+               <<"the desired tolerance " <<
+               ToleranceForVertexMismatchInPolygons::Tolerable_error << ".\n"
+               <<"This suggests that the polylines defining the open curve\n"
+               <<"representation are not properly ordered.\n"
+               <<"Fail on last vertex of polyline: (" << prev_seg_boundary_id
+               <<") and\nfirst vertex of polyline (" << bound << ").\n"
+               <<"This should have failed when first trying to construct\n"
+               <<"the open curve.\n";
+              throw OomphLibError(error_stream.str(),
+               "TriangleMesh::update_open_curve_using_face_mesh()",
+               OOMPH_EXCEPTION_LOCATION);
+             }
+            else // We have to reverse both
+             {
+              // First reverse the previous polyline
+              open_polyline_pt->polyline_pt(p-1)->reverse();
+              // Then reverse the current polyline
+              std::reverse(vector_vertex_node.begin(),
+                           vector_vertex_node.end());
+             }
+           }
+          else
+           {
+            // Reverse the previous polyline only
+            open_polyline_pt->polyline_pt(p-1)->reverse();
+           }
+         }
+        else
+         {
+          //Reverse the current vector to line up with the previous one
+          std::reverse(vector_vertex_node.begin(),vector_vertex_node.end());
          }
 
-        //Reverse the current vector to line up with the previous one
-        std::reverse(vector_vertex_node.begin(),vector_vertex_node.end());
        }
-     }
+
+     } // if p > 0
 
     if(!check_only)
      {
@@ -3721,7 +3777,7 @@ bool RefineableTriangleMesh<ELEMENT>::update_open_curve_using_face_mesh(
       // mesh/domain then we need to restore the connections (it means,
       // compute the new vertices numbers for connections since they could
       // be moved)
-      restore_connections_on_internal_boundary(tmp_polyline);
+      this->restore_connections_on_internal_boundary(tmp_polyline);
 
       std::set<TriangleMeshCurveSection*>::iterator it =
         this->Free_curve_section_pt.find(open_polyline_pt->curve_section_pt(p));
@@ -4413,126 +4469,128 @@ get_connected_vertex_number_on_dst_boundary(
 template<class ELEMENT>
 void RefineableTriangleMesh<ELEMENT>::
 restore_connections_on_internal_boundary(
-  TriangleMeshPolyLine* polyline_pt)
-  {
+ TriangleMeshPolyLine* polyline_pt)
+{
 
 #ifdef PARANOID
-  // Get the associated boundary id of the current polyline
-  unsigned bnd_id = polyline_pt->boundary_id();
+ // Get the associated boundary id of the current polyline
+ unsigned bnd_id = polyline_pt->boundary_id();
 #endif
 
-  // Verify if this polyline is connected to another polyline
+ // Verify if this polyline is connected to another polyline
 
-  // ****************************************************************
-  // 1) If it is connected then get the proper vertex number on the
-  //    destination polyline
-  // 2) Assign the proper vertex number
-  // ****************************************************************
+ // ****************************************************************
+ // 1) If it is connected then get the proper vertex number on the
+ //    destination polyline
+ // 2) Assign the proper vertex number
+ // ****************************************************************
 
-  // ****************************************************************
-  // First check the initial end
-  if (polyline_pt->is_initial_vertex_connected())
-   {
-    // We need to get the boundary id of the destination/connected
-    // boundary
-    unsigned dst_bnd_id = polyline_pt->initial_vertex_connected_bnd_id();
+ // ****************************************************************
+ // First check the initial end
+ if (polyline_pt->is_initial_vertex_connected())
+  {
+   // We need to get the boundary id of the destination/connected
+   // boundary
+   unsigned dst_bnd_id = polyline_pt->initial_vertex_connected_bnd_id();
 
-    // Get the vertex number according to the vertex coordinates
-    // on the source boundary
-    Vector<double> src_vertex_coordinates =
+   // Get the vertex number according to the vertex coordinates
+   // on the source boundary
+   Vector<double> src_vertex_coordinates =
+    polyline_pt->vertex_coordinate(0);
+
+   unsigned n_vertex_connection;
+
+   bool found_vertex_on_dst_boundary =
+    get_connected_vertex_number_on_dst_boundary(
+     src_vertex_coordinates, dst_bnd_id, n_vertex_connection);
+
+   // If no found it is because the original polyline could be
+   // reversed, try again after reversing!!!
+   if (!found_vertex_on_dst_boundary)
+    {
+     // Reverse the polyline
+     polyline_pt->reverse();
+
+     // Get the new vertex coordinates
+     src_vertex_coordinates =
       polyline_pt->vertex_coordinate(0);
 
-    unsigned n_vertex_connection;
-
-    bool found_vertex_on_dst_boundary =
+     // Try it again!!!
+     found_vertex_on_dst_boundary =
       get_connected_vertex_number_on_dst_boundary(
-        src_vertex_coordinates, dst_bnd_id, n_vertex_connection);
+       src_vertex_coordinates, dst_bnd_id, n_vertex_connection);
 
-    // If no found it is because the original polyline could be
-    // reversed, try again after reversing!!!
-    if (!found_vertex_on_dst_boundary)
-     {
-      // Reverse the polyline
-      polyline_pt->reverse();
-
-      // Get the new vertex coordinates
-      src_vertex_coordinates =
-        polyline_pt->vertex_coordinate(0);
-
-      // Try it again!!!
-      found_vertex_on_dst_boundary =
-        get_connected_vertex_number_on_dst_boundary(
-          src_vertex_coordinates, dst_bnd_id, n_vertex_connection);
-
-      // If no found again then there is a problem with the vertices
-      if (!found_vertex_on_dst_boundary)
-       {
+     // If no found again then there is a problem with the vertices
+     if (!found_vertex_on_dst_boundary)
+      {
 #ifdef PARANOID
-        std::ostringstream error_message;
-        error_message << "It was not possible to find the associated "
-          << "vertex number on the\ndestination boundary ("
-          << dst_bnd_id << ").\nThe source boundary is (" << bnd_id << ") and"
-          << "the vertex\ntrying to find on the destination boundary "
-          << "is (" << src_vertex_coordinates[0] << ","
-          << src_vertex_coordinates[1]<< ")\n"
-          << "Initial vertex connection\n";
-        throw OomphLibError(
-          error_message.str(),
-          "RefineableTriangleMesh::restore_connections_on_internal_boundary()",
-          OOMPH_EXCEPTION_LOCATION);
-#endif
-       }
-
-     }
-
-    polyline_pt->initial_vertex_connected_n_vertex() = n_vertex_connection;
-
-   }
-
-  // ****************************************************************
-  // and now the final end
-  if (polyline_pt->is_final_vertex_connected())
-   {
-
-    // We need to get the boundary id of the destination/connected
-    // boundary
-    unsigned dst_bnd_id = polyline_pt->final_vertex_connected_bnd_id();
-
-    // Get the vertex number according to the vertex coordinates
-    // on the source boundary
-    unsigned tmp_n_vertices = polyline_pt->nvertex();
-    Vector<double> src_vertex_coordinates =
-      polyline_pt->vertex_coordinate(tmp_n_vertices-1);
-
-    unsigned n_vertex_connection;
-
-    bool found_vertex_on_dst_boundary =
-      get_connected_vertex_number_on_dst_boundary(
-        src_vertex_coordinates, dst_bnd_id, n_vertex_connection);
-
-    if (!found_vertex_on_dst_boundary)
-     {
-#ifdef PARANOID
-      std::ostringstream error_message;
-      error_message << "It was not possible to find the associated "
+       std::ostringstream error_message;
+       error_message 
+        << "It was not possible to find the associated "
         << "vertex number on the\ndestination boundary ("
         << dst_bnd_id << ").\nThe source boundary is (" << bnd_id << ") and"
         << "the vertex\ntrying to find on the destination boundary "
         << "is (" << src_vertex_coordinates[0] << ","
         << src_vertex_coordinates[1]<< ")\n"
-        << "Final vertex connection\n";
-      throw OomphLibError(
+        << "Initial vertex connection\n";
+       throw OomphLibError(
         error_message.str(),
-        "RefineableTriangleMesh::restore_connections_on_internal_boundary()",
+        "RefineableTriangleMesh::restore_connections_on_internal_boundaries()",
         OOMPH_EXCEPTION_LOCATION);
 #endif
-     }
+      }
 
-    polyline_pt->final_vertex_connected_n_vertex() = n_vertex_connection;
+    }
 
-   }
+   polyline_pt->initial_vertex_connected_n_vertex() = n_vertex_connection;
 
   }
+
+ // ****************************************************************
+ // and now the final end
+ if (polyline_pt->is_final_vertex_connected())
+  {
+
+   // We need to get the boundary id of the destination/connected
+   // boundary
+   unsigned dst_bnd_id = polyline_pt->final_vertex_connected_bnd_id();
+
+   // Get the vertex number according to the vertex coordinates
+   // on the source boundary
+   unsigned tmp_n_vertices = polyline_pt->nvertex();
+   Vector<double> src_vertex_coordinates =
+    polyline_pt->vertex_coordinate(tmp_n_vertices-1);
+
+   unsigned n_vertex_connection;
+
+   bool found_vertex_on_dst_boundary =
+    get_connected_vertex_number_on_dst_boundary(
+     src_vertex_coordinates, dst_bnd_id, n_vertex_connection);
+
+   if (!found_vertex_on_dst_boundary)
+    {
+#ifdef PARANOID
+     std::ostringstream error_message;
+     error_message 
+      << "It was not possible to find the associated "
+      << "vertex number on the\ndestination boundary ("
+      << dst_bnd_id << ").\nThe source boundary is (" << bnd_id << ") and"
+      << "the vertex\ntrying to find on the destination boundary "
+      << "is (" << src_vertex_coordinates[0] << ","
+      << src_vertex_coordinates[1]<< ")\n"
+      << "Final vertex connection\n";
+     throw OomphLibError(
+      error_message.str(),
+      "RefineableTriangleMesh::restore_connections_on_internal_boundaries()",
+      OOMPH_EXCEPTION_LOCATION);
+#endif
+    }
+
+   polyline_pt->final_vertex_connected_n_vertex() = n_vertex_connection;
+
+  }
+
+}
 
 //=========================================================================
 /// \short Helper function
