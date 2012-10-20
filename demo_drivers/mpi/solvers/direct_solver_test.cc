@@ -375,7 +375,7 @@ int main(int argc, char **argv)
   oomph_info 
    << "///////////////////////////////////////////////////////////////////////"
    << std::endl;
-  oomph_info << "TESTING: SuperLU_dist global problem based solve"
+  oomph_info << "TESTING: SuperLU_dist distributed solve"
              << std::endl;
   oomph_info 
    << "///////////////////////////////////////////////////////////////////////"
@@ -385,7 +385,7 @@ int main(int argc, char **argv)
   DoubleVector x;
   SuperLUSolver solver;
   solver.set_solver_type(SuperLUSolver::Distributed);
-  solver.use_global_solve_in_superlu_dist();
+  solver.use_distributed_solve_in_superlu_dist();
   problem.linear_solver_pt() = &solver;
   problem.newton_solve();
   doc_info.number()++;
