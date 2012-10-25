@@ -107,6 +107,9 @@ class Problem;
  /// \short Disable documentation of solve times
  void disable_doc_time() {Doc_time=false;}
 
+ /// \short Is documentation of solve times enabled?
+ bool is_doc_time_enabled() {return Doc_time;}
+
  /// \short Boolean flag indicating if resolves are enabled
  bool is_resolve_enabled() const {return Enable_resolve;}
 

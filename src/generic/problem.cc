@@ -1533,23 +1533,26 @@ namespace oomph
     // Doc
     if (n_proc>1)
      {
-      oomph_info << "\nProblem is not distributed. Parallel assembly of "
-                 << "Jacobian uses default partitioning: "<< std::endl;
-      for (int p=0;p<n_proc;p++)
+
+      if(!Shut_up_in_newton_solve) 
        {
-        if (Last_el_plus_one_for_assembly[p]!=0)
+        oomph_info << "\nProblem is not distributed. Parallel assembly of "
+                   << "Jacobian uses default partitioning: "<< std::endl;
+        for (int p=0;p<n_proc;p++)
          {
-          oomph_info << "Proc " << p << " assembles from element " 
-                     <<  First_el_for_assembly[p] << " to " 
-                     <<  Last_el_plus_one_for_assembly[p]-1 << " \n"; 
-         }
-        else
-         {
-          oomph_info << "Proc " << p << " assembles no elements\n";
+          if (Last_el_plus_one_for_assembly[p]!=0)
+           {
+            oomph_info << "Proc " << p << " assembles from element " 
+                       <<  First_el_for_assembly[p] << " to " 
+                       <<  Last_el_plus_one_for_assembly[p]-1 << " \n"; 
+           }
+          else
+           {
+            oomph_info << "Proc " << p << " assembles no elements\n";
+           }
          }
        }
      }
-    
    }
 
  }
@@ -1619,12 +1622,15 @@ namespace oomph
    
   // Re-distribute work
   if (rank==0)
-   {
-    oomph_info 
-     << std::endl
-     << "Re-assigning distribution of element assembly over processors:" 
-     << std::endl;
-     
+   {    
+    if(!Shut_up_in_newton_solve) 
+     {
+      oomph_info 
+       << std::endl
+       << "Re-assigning distribution of element assembly over processors:" 
+       << std::endl;
+     }
+
     // Get total assembly time
     double total=0.0;
     unsigned n_elements=Mesh_pt->nelement();    
@@ -1782,12 +1788,15 @@ namespace oomph
     //Set local informationt for this (root) processor
     First_el_for_assembly[0]= first_and_last_element[0][0];
     Last_el_plus_one_for_assembly[0] = first_and_last_element[0][1] + 1;
-    
-    oomph_info 
-     << "Processor " << 0 << " assembles Jacobians" 
-     <<  " from elements " << first_and_last_element[0][0] << " to " 
-     <<  first_and_last_element[0][1] << " " 
-     << std::endl;
+        
+    if(!Shut_up_in_newton_solve) 
+     {
+      oomph_info 
+       << "Processor " << 0 << " assembles Jacobians" 
+       <<  " from elements " << first_and_last_element[0][0] << " to " 
+       <<  first_and_last_element[0][1] << " " 
+       << std::endl;
+     }
 
     //Only now can we send the information to the other processors
     for(int p=1;p<n_proc;++p)
@@ -1796,11 +1805,15 @@ namespace oomph
       MPI_Send(&first_and_last_element[p][0],2,MPI_INT,p,
                0,this->communicator_pt()->mpi_comm());
 
-      oomph_info 
-       << "Processor " << p << " assembles Jacobians" 
-       <<  " from elements " << first_and_last_element[p][0] << " to " 
-       <<  first_and_last_element[p][1] << " " 
-       << std::endl;
+
+      if(!Shut_up_in_newton_solve) 
+       {
+        oomph_info 
+         << "Processor " << p << " assembles Jacobians" 
+         <<  " from elements " << first_and_last_element[p][0] << " to " 
+         <<  first_and_last_element[p][1] << " " 
+         << std::endl;
+       }
      }
    }
   // Receive first and last element from root on non-master processors

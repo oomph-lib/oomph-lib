@@ -654,24 +654,58 @@ class ProjectionProblem : public virtual Problem
    //This is a linear problem, which avoids checking the residual
    //after the solve and means that we don't get a singular matrix
    Problem_is_nonlinear=false;
+
+   // By default suppress output during projection
+   Output_during_projection_suppressed=true;
   }
+
+ /// Suppress all output during projection phases
+ void enable_suppress_output_during_projection()
+ {
+  Output_during_projection_suppressed=true;
+ }
+
+ /// Undo suppression of all output during projection phases
+ void disable_suppress_output_during_projection()
+ {
+  Output_during_projection_suppressed=false;
+ }
 
  ///\short Project from base into the problem's own mesh. 
  void project(Mesh* base_mesh_pt)
  {
-  
+
+  // Backup verbosity in Newton solve status
+  bool shut_up_in_newton_solve_backup=Shut_up_in_newton_solve;
+
+  // Disable documentation of solve times
+  bool backed_up_doc_time_enabled=linear_solver_pt()->is_doc_time_enabled();
+  if (Output_during_projection_suppressed)
+   {
+    linear_solver_pt()->disable_doc_time();
+   }
+
   //Display stats 
   unsigned n_element = Problem::mesh_pt()->nelement();
   unsigned n_element1=base_mesh_pt->nelement();
   unsigned n_node = Problem::mesh_pt()->nnode();
   unsigned n_node1=base_mesh_pt->nnode();
-  oomph_info <<"\n=============================\n";
-  oomph_info << "Base mesh has " << n_element1 << " elements\n";
-  oomph_info << "Target mesh has " << n_element << " elements\n";
-  oomph_info << "Base mesh has " << n_node1 << " nodes\n";
-  oomph_info << "Target mesh has " << n_node << " nodes\n";
-  oomph_info <<"=============================\n\n";
-   
+  if (!Output_during_projection_suppressed)
+   {
+    oomph_info <<"\n=============================\n";
+    oomph_info << "Base mesh has " << n_element1 << " elements\n";
+    oomph_info << "Target mesh has " << n_element << " elements\n";
+    oomph_info << "Base mesh has " << n_node1 << " nodes\n";
+    oomph_info << "Target mesh has " << n_node << " nodes\n";
+    oomph_info <<"=============================\n\n";
+   }
+  else
+   {
+    // Make Newton solver shut up too
+    disable_info_in_newton_solve();
+   }
+  
+
    if (n_element==0)
     {
      oomph_info 
@@ -724,8 +758,11 @@ class ProjectionProblem : public virtual Problem
    double t_start=TimingHelpers::timer();
    Multi_domain_functions::setup_multi_domain_interaction
     <PROJECTABLE_ELEMENT>(this,Problem::mesh_pt(),base_mesh_pt);
-   oomph_info  <<"CPU for setup of multi-domain interaction for projection: "
-               << TimingHelpers::timer()-t_start << std::endl;
+   if (!Output_during_projection_suppressed)
+    {
+     oomph_info  <<"CPU for setup of multi-domain interaction for projection: "
+                 << TimingHelpers::timer()-t_start << std::endl;
+    }
    t_start=TimingHelpers::timer();
 
 
@@ -757,19 +794,27 @@ class ProjectionProblem : public virtual Problem
      //Now loop over the lagrangian coordinates
      for(unsigned i=0;i<n_lagrangian;++i)
       {
-       oomph_info <<"\n\n=============================================\n";
-       oomph_info <<    "Projecting values for Lagrangian coordinate " << i
-                  << std::endl;
-       oomph_info <<"=============================================\n\n";
+
+       if (!Output_during_projection_suppressed)
+        {
+         oomph_info <<"\n\n=============================================\n";
+         oomph_info <<    "Projecting values for Lagrangian coordinate " << i
+                    << std::endl;
+         oomph_info <<"=============================================\n\n";
+        }
        
        //Set the coordinate for projection
        this->set_lagrangian_coordinate_for_projection(i);
        
        //Assign equation number
-       oomph_info << 
-        "Number of equations for projection of Lagrangian coordinate " 
-                  << " : "<< assign_eqn_numbers() <<std::endl << std::endl;
-       
+       unsigned ndof_tmp=assign_eqn_numbers();
+       if (!Output_during_projection_suppressed)
+        {
+         oomph_info << 
+          "Number of equations for projection of Lagrangian coordinate " 
+                    << " : "<< ndof_tmp <<std::endl << std::endl;
+        }
+
        //Projection and interpolation
        Problem::newton_solve();
        
@@ -828,11 +873,14 @@ class ProjectionProblem : public virtual Problem
       {
        for (unsigned i=0;i<n_dim;i++)
         {     
-         oomph_info <<"\n\n=============================================\n";
-         oomph_info <<    "Projecting history values for coordinate " << i
-                    << std::endl;
-         oomph_info <<"=============================================\n\n";
-         
+         if (!Output_during_projection_suppressed)
+          {
+           oomph_info <<"\n\n=============================================\n";
+           oomph_info <<    "Projecting history values for coordinate " << i
+                      << std::endl;
+           oomph_info <<"=============================================\n\n";
+          }
+
          //Set the coordinate for projection
          this->set_coordinate_for_projection(i);
          this->unpin_dofs_of_coordinate(i);
@@ -847,10 +895,14 @@ class ProjectionProblem : public virtual Problem
            this->set_time_level_for_projection(time_level);
            
            //Assign equation number
-           oomph_info << "Number of equations for projection of coordinate " 
-                      << i << " at time level " << time_level
-                      << " : "<< assign_eqn_numbers() <<std::endl << std::endl;
-           
+           unsigned ndof_tmp=assign_eqn_numbers();
+           if (!Output_during_projection_suppressed)
+            {
+             oomph_info << "Number of equations for projection of coordinate " 
+                        << i << " at time level " << time_level
+                        << " : "<< ndof_tmp <<std::endl << std::endl;
+            }
+
            //Projection and interpolation
            Problem::newton_solve();
            
@@ -899,11 +951,14 @@ class ProjectionProblem : public virtual Problem
       {
        for (unsigned i=0;i<n_dim;i++)
         {     
-         oomph_info <<"\n\n=============================================\n";
-         oomph_info <<    "Projecting history values for coordinate " << i
-                    << std::endl;
-         oomph_info <<"=============================================\n\n";
-         
+         if (!Output_during_projection_suppressed)
+          {
+           oomph_info <<"\n\n=============================================\n";
+           oomph_info <<    "Projecting history values for coordinate " << i
+                      << std::endl;
+           oomph_info <<"=============================================\n\n";
+          }
+
          //Set the coordinate for projection
          this->set_coordinate_for_projection(i);
          
@@ -917,10 +972,14 @@ class ProjectionProblem : public virtual Problem
            this->set_time_level_for_projection(time_level);
            
            //Assign equation number
-           oomph_info << "Number of equations for projection of coordinate " 
-                      << i << " at time level " << time_level
-                      << " : "<< assign_eqn_numbers() <<std::endl << std::endl;
-           
+           unsigned ndof_tmp=assign_eqn_numbers();
+           if (!Output_during_projection_suppressed)
+            {
+             oomph_info << "Number of equations for projection of coordinate " 
+                        << i << " at time level " << time_level
+                        << " : "<< ndof_tmp <<std::endl << std::endl;
+            }
+
            //Projection and interpolation
            Problem::newton_solve();
            
@@ -979,19 +1038,26 @@ class ProjectionProblem : public virtual Problem
      for (unsigned h_tim=n_history_values;h_tim>0;h_tim--)
       {
        unsigned time_level=h_tim-1;
-       oomph_info <<"\n=========================================\n";
-       oomph_info <<   "Projecting field " << fld << " at time level "
-                  << time_level<<std::endl;
-       oomph_info <<   "========================================\n";
-              
+       if (!Output_during_projection_suppressed)
+        {
+         oomph_info <<"\n=========================================\n";
+         oomph_info <<   "Projecting field " << fld << " at time level "
+                    << time_level<<std::endl;
+         oomph_info <<   "========================================\n";
+        }
+
        //Set time_level we are dealing with
        this->set_time_level_for_projection(time_level);
        
        //Assign equation number
-       oomph_info << "Number of equations for projection of field " 
-                  << fld << " at time level " << time_level
-                  << " : "<< assign_eqn_numbers() <<std::endl << std::endl;
-       
+       unsigned ndof_tmp=assign_eqn_numbers();
+       if (!Output_during_projection_suppressed)
+        {
+         oomph_info << "Number of equations for projection of field " 
+                    << fld << " at time level " << time_level
+                    << " : "<< ndof_tmp <<std::endl << std::endl;
+        }
+
        //Projection and interpolation
        Problem::newton_solve();
        
@@ -1050,9 +1116,24 @@ class ProjectionProblem : public virtual Problem
    
    // Now cleanup the storage
    Solid_backup.clear();
+   
+   unsigned ndof_tmp=this->assign_eqn_numbers();
+   if (!Output_during_projection_suppressed)
+    {
+     oomph_info << "Number of unknowns after project: " 
+                << ndof_tmp << std::endl;
+    }
+   else
+    {
+     // Reset verbosity in Newton solver
+     Shut_up_in_newton_solve=shut_up_in_newton_solve_backup;
 
-   oomph_info << "Number of unknowns after project: " 
-              << this->assign_eqn_numbers() << std::endl;
+     /// \short Disable documentation of solve times
+     if (backed_up_doc_time_enabled)
+      {
+       linear_solver_pt()->enable_doc_time();
+      }
+    }
 
   } //End of function Projection
  
@@ -1430,6 +1511,10 @@ class ProjectionProblem : public virtual Problem
 
  /// Backup for pin status of solid node's position Data
  Vector<DenseMatrix<double> > Solid_backup;
+
+
+ /// Flag to suppress output during projection
+ bool Output_during_projection_suppressed;
 
 };
 

@@ -312,7 +312,7 @@ namespace oomph
 
 #else
 
-   oomph_info << "OLD aux_setup_multi_domain_interaction\n";
+   //oomph_info << "OLD aux_setup_multi_domain_interaction\n";
 
    //BENFLAG: Multi-domain setup will not work for elements with
    //         nonuniformly spaced nodes
@@ -1103,7 +1103,7 @@ namespace oomph
   const Vector<Mesh*>& external_face_mesh_pt)
   {
 
-   oomph_info << "NEW aux_setup_multi_domain_interaction\n";
+   // oomph_info << "NEW aux_setup_multi_domain_interaction\n";
 
    // How many meshes do we have?
    unsigned n_mesh=mesh_pt.size();
