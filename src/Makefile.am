@@ -10,6 +10,7 @@ mesh_smoothing helmholtz time_harmonic_linear_elasticity rigid_body \
 time_harmonic_fourier_decomposed_linear_elasticity \
 fourier_decomposed_helmholtz\
 foeppl_von_karman \
-generalised_helmholtz
+generalised_helmholtz \
+axisym_linear_elasticity
 
 

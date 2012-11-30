@@ -75,9 +75,10 @@ namespace Global_Parameters
  }
 
  /// The traction function
-void periodic_traction(const Vector<double> &x,
-                        const Vector<double> &n,
-                        Vector<double> &result)
+void periodic_traction(const double &time,
+                       const Vector<double> &x,
+                       const Vector<double> &n,
+                       Vector<double> &result)
  {
   result[0] = -Amplitude*cos(2.0*MathematicalConstants::Pi*x[0]/Lx);
   result[1] = -Amplitude*sin(2.0*MathematicalConstants::Pi*x[0]/Lx);

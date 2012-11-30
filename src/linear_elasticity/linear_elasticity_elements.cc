@@ -48,8 +48,9 @@ double LinearElasticityEquationsBase<DIM>::Default_lambda_sq_value=1.0;
 /// Compute the strain tensor at local coordinate s
 //======================================================================
  template<unsigned DIM>
- void LinearElasticityEquationsBase<DIM>::get_strain(const Vector<double> &s,
-                                                     DenseMatrix<double> &strain) const
+ void LinearElasticityEquationsBase<DIM>::get_strain(
+   const Vector<double> &s,
+   DenseMatrix<double> &strain) const
  {
 #ifdef PARANOID
   if ((strain.ncol()!=DIM)||(strain.nrow()!=DIM))
@@ -93,26 +94,18 @@ double LinearElasticityEquationsBase<DIM>::Default_lambda_sq_value=1.0;
   //Calculate interpolated values of the derivative of global position
   DenseMatrix<double> interpolated_dudx(DIM,DIM,0.0);
   
-  //Storage for Eulerian coordinates (initialised to zero)
-  // only needed when growth comes back in 
-  // Vector<double> interpolated_x(DIM,0.0);
-  
   //Loop over nodes
   for(unsigned l=0;l<n_node;l++) 
    {
     //Loop over velocity components
     for(unsigned i=0;i<DIM;i++)
      {
-      //Calculate the Eulerian coordinates
-      // only needed when growth comes back in 
-      // hierherinterpolated_x[i] += this->nodal_position(l,i)*psi(l);
-      
       //Get the nodal value
       const double u_value = this->nodal_value(l,u_nodal_index[i]);
 
       //Loop over derivative directions
       for(unsigned j=0;j<DIM;j++)
-       {                               
+       {
         interpolated_dudx(i,j) += u_value*dpsidx(l,j);
        }
     }
@@ -235,9 +228,8 @@ void LinearElasticityEquations<DIM>::get_stress(const Vector<double> &s,
   for(unsigned i=0;i<DIM;i++) 
    {u_nodal_index[i] = this->u_index_linear_elasticity(i);}
   
-  // hierher get time dependence back in
   // Timescale ratio (non-dim density)
-  //double Lambda_sq = this->lambda_sq();
+  double Lambda_sq = this->lambda_sq();
   
   //Set up memory for the shape functions
   Shape psi(n_node);
@@ -271,10 +263,8 @@ void LinearElasticityEquations<DIM>::get_stress(const Vector<double> &s,
     //wrt lagrangian coordinates
     DenseMatrix<double> interpolated_dudx(DIM,DIM,0.0);
     
-    // hierher
     // Setup memory for accelerations (initialised to zero)
-    //Vector<double> accel(DIM,0.0);
-    
+    Vector<double> accel(DIM,0.0);
     
     //Calculate displacements and derivatives and lagrangian coordinates
     for(unsigned l=0;l<n_node;l++)
@@ -285,14 +275,11 @@ void LinearElasticityEquations<DIM>::get_stress(const Vector<double> &s,
         //Calculate the Lagrangian coordinates and the accelerations
         interpolated_x[i] += this->raw_nodal_position(l,i)*psi(l);
         
-        // hierher
         // Only compute accelerations if inertia is switched on
-        // otherwise the timestepper might not be able to 
-        // work out dx_gen_dt(2,...)
-        //if (this->Unsteady)
-        // {
-        //  accel[i] += this->dnodal_position_dt(2,l,i)*psi(l);
-        // }
+        if(this->Unsteady)
+         {
+          accel[i] += this->d2u_dt2_linear_elasticity(l,i)*psi(l);
+         }
         
         //Get the nodal displacements
         const double u_value = this->raw_nodal_value(l,u_nodal_index[i]);
@@ -327,8 +314,7 @@ void LinearElasticityEquations<DIM>::get_stress(const Vector<double> &s,
          {
           // Acceleration and body force
           residuals[local_eqn] += 
-           // hierher
-           (/*Lambda_sq*accel[a]*/-b[a])*psi(l)*W;
+           (Lambda_sq*accel[a]-b[a])*psi(l)*W;
           
           // Stress term
           for(unsigned b=0;b<DIM;b++)
@@ -343,7 +329,7 @@ void LinearElasticityEquations<DIM>::get_stress(const Vector<double> &s,
                }
              }
            }
-          
+
           //Jacobian entries
           if(flag)
            {
@@ -357,6 +343,15 @@ void LinearElasticityEquations<DIM>::get_stress(const Vector<double> &s,
                 //If it's not pinned
                 if(local_unknown >= 0)
                  {
+                  // Inertial term
+                  if (a==c)
+                   {
+                    jacobian(local_eqn,local_unknown) +=
+                     Lambda_sq*
+                     this->node_pt(l2)->time_stepper_pt()->weight(2,0)*
+                     psi(l)*psi(l2)*W;
+                   }
+
                   for(unsigned b=0;b<DIM;b++)
                    {
                     for(unsigned d=0;d<DIM;d++)
@@ -416,6 +411,60 @@ void LinearElasticityEquations<DIM>::get_stress(const Vector<double> &s,
    
    // Get exact solution at this point
    (*exact_soln_pt)(x,exact_soln);
+   
+   //Output x,y,...,u_exact,...
+   for(unsigned i=0;i<DIM;i++)
+    {
+     outfile << x[i] << " ";
+    }
+   for(unsigned i=0;i<DIM;i++)
+    {
+     outfile << exact_soln[i] << " ";
+    }
+   outfile << std::endl;  
+  }
+ 
+ // Write tecplot footer (e.g. FE connectivity lists)
+ this->write_tecplot_zone_footer(outfile,nplot);
+
+}
+
+
+
+//=======================================================================
+/// Output exact solution x,y,[z],u,v,[w] (unsteady version)
+//=======================================================================
+ template <unsigned DIM>
+ void LinearElasticityEquations<DIM>::output_fct(std::ostream &outfile,
+                                                 const unsigned &nplot,
+                                                 const double &time,
+                  FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)
+{
+ //Vector of local coordinates
+ Vector<double> s(DIM);
+ 
+ // Vector for coordintes
+ Vector<double> x(DIM);
+ 
+ // Tecplot header info
+ outfile << this->tecplot_zone_string(nplot);
+ 
+ // Exact solution Vector 
+ Vector<double> exact_soln(DIM);
+ 
+ // Loop over plot points
+ unsigned num_plot_points=this->nplot_points(nplot);
+ for (unsigned iplot=0;iplot<num_plot_points;iplot++)
+  {
+   
+   // Get local coordinates of plot point
+   this->get_s_plot(iplot,nplot,s);
+   
+   // Get x position as Vector
+   this->interpolated_x(s,x);
+   
+   // Get exact solution at this point
+   (*exact_soln_pt)(time,x,exact_soln);
    
    //Output x,y,...,u_exact,...
    for(unsigned i=0;i<DIM;i++)
@@ -575,6 +624,85 @@ void LinearElasticityEquations<DIM>::compute_error(
 
    // Get exact solution at this point
    (*exact_soln_pt)(x,exact_soln);
+
+   // Displacement error
+   for(unsigned i=0;i<DIM;i++)
+    {
+     norm+=exact_soln[i]*exact_soln[i]*W;
+     error+=(exact_soln[i]-this->interpolated_u_linear_elasticity(s,i))*
+      (exact_soln[i]-this->interpolated_u_linear_elasticity(s,i))*W;
+    }
+
+   //Output x,y,[z]
+   for(unsigned i=0;i<DIM;i++)
+    {
+     outfile << x[i] << " ";
+    }
+
+   //Output u_error,v_error,[w_error]
+   for(unsigned i=0;i<DIM;i++)
+    {
+     outfile << exact_soln[i]-this->interpolated_u_linear_elasticity(s,i) 
+             << " ";
+    }
+   outfile << std::endl;   
+  }
+}
+
+//======================================================================
+/// Validate against exact velocity solution
+/// Solution is provided via function pointer.
+/// Plot at a given number of plot points and compute L2 error
+/// and L2 norm of velocity solution over element. Unsteady version
+//=======================================================================
+template<unsigned DIM>
+void LinearElasticityEquations<DIM>::compute_error(
+ std::ostream &outfile,
+ FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
+ const double& time, double& error, double& norm)
+{
+ 
+ error=0.0;
+ norm=0.0;
+
+ //Vector of local coordinates
+ Vector<double> s(DIM);
+
+ // Vector for coordinates
+ Vector<double> x(DIM);
+
+ //Set the value of n_intpt
+ unsigned n_intpt = this->integral_pt()->nweight();
+   
+ outfile << "ZONE" << std::endl;
+ 
+ // Exact solution Vector (u,v,[w])
+ Vector<double> exact_soln(DIM);
+   
+ //Loop over the integration points
+ for(unsigned ipt=0;ipt<n_intpt;ipt++)
+  {
+
+   //Assign values of s
+   for(unsigned i=0;i<DIM;i++)
+    {
+     s[i] = this->integral_pt()->knot(ipt,i);
+    }
+
+   //Get the integral weight
+   double w = this->integral_pt()->weight(ipt);
+
+   // Get jacobian of mapping
+   double J=this->J_eulerian(s);
+
+   //Premultiply the weights and the Jacobian
+   double W = w*J;
+
+   // Get x position as Vector
+   this->interpolated_x(s,x);
+
+   // Get exact solution at this point
+   (*exact_soln_pt)(time,x,exact_soln);
 
    // Displacement error
    for(unsigned i=0;i<DIM;i++)

@@ -63,7 +63,37 @@ namespace oomph
    /// single-physics problems.
    virtual inline unsigned u_index_linear_elasticity(const unsigned i) const
    {return i;}
-   
+
+   /// d^2u/dt^2 at local node n
+   double d2u_dt2_linear_elasticity(const unsigned &n,
+                                    const unsigned &i) const
+    {
+     // Get the timestepper
+     TimeStepper* time_stepper_pt=node_pt(n)->time_stepper_pt();
+
+     // Storage for the derivative - initialise to 0
+     double d2u_dt2=0.0;
+
+     // If we are doing an unsteady solve then calculate the derivative
+     if(!time_stepper_pt->is_steady())
+      {
+       // Get the nodal index
+       const unsigned u_nodal_index=u_index_linear_elasticity(i);
+
+       // Get the number of values required to represent history
+       const unsigned n_time=time_stepper_pt->ntstorage();
+
+       // Loop over history values
+       for(unsigned t=0;t<n_time;t++)
+        {
+         //Add the contribution to the derivative
+         d2u_dt2+=time_stepper_pt->weight(2,t)*nodal_value(t,n,u_nodal_index);
+        }
+      }
+
+     return d2u_dt2;
+    }
+
    /// Compute vector of FE interpolated displacement u at local coordinate s
    void interpolated_u_linear_elasticity(const Vector<double> &s, 
                                          Vector<double>& disp) 
@@ -339,7 +369,6 @@ namespace oomph
      residuals,GeneralisedElement::Dummy_matrix,0);
    }
    
-   
    /// The jacobian is calculated by finite differences by default,
    /// We need only to take finite differences w.r.t. positional variables
    /// For this element
@@ -361,6 +390,12 @@ namespace oomph
    void output_fct(std::ostream &outfile, 
                    const unsigned &nplot, 
                    FiniteElement::SteadyExactSolutionFctPt exact_soln_pt);
+
+   ///Output exact solution x,y,[z],u,v,[w] (unsteady version)
+   void output_fct(std::ostream &outfile, 
+                   const unsigned &nplot, 
+                   const double &time,
+                   FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt);
    
    /// Output: x,y,[z],u,v,[w]
    void output(std::ostream &outfile) 
@@ -390,6 +425,15 @@ namespace oomph
    void compute_error(std::ostream &outfile,
                       FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
                       double& error, double& norm);
+
+   /// \short Validate against exact solution.
+   /// Solution is provided via function pointer.
+   /// Plot at a given number of plot points and compute L2 error
+   /// and L2 norm of displacement solution over element
+   /// (unsteady version)
+   void compute_error(std::ostream &outfile,
+                      FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
+                      const double& time, double& error, double& norm);
    
     private:
 
