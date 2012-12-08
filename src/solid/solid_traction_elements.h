@@ -1913,11 +1913,12 @@ protected:
 
 
  /// \short The number of "blocks" that degrees of freedom in this element
- /// are sub-divided into: Just the solid degrees of freedom themselves.
+ /// are sub-divided into: We only label the 
+ /// Lagrange multiplier degrees of freedom (one for each spatial dimension)
  unsigned ndof_types()
   {
    return this->dim()+1;
-  };
+  }
  
 
  /// \short Create a list of pairs for all unknowns in this element,

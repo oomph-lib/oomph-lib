@@ -46,10 +46,10 @@ directory).
 </TD>
 </TR>
 </TABLE>
+ 
 
 
-
-<B>Overview:</b>
+<A NAME="overview"><B>Overview:</b></a>
 -# <A HREF="#problems">Example codes for specific problem/equations</A>
   - Single-physics problems:
     - <A HREF="#poisson">Poisson problems</A>
@@ -57,19 +57,22 @@ directory).
                Poisson problems</A>
     - <A HREF="#adv_diff">The advection-diffusion equation</A>
     - <A HREF="#unsteady_heat">The unsteady heat equation; with an
-              introduction to timestepping</A>
+               introduction to timestepping</A>
     - <A HREF="#wave">The linear wave equation</A>
     - <A HREF="#helmholtz">The Helmholtz equation</A>
     - <A HREF="#fourier_decomposed_helmholtz"> The Fourier-decomposed
-    Helmholtz equation </A>
+               Helmholtz equation </A>
+    - <A HREF="#gen_helmholtz">The generalised Helmholtz equation and
+perfectly matched layers</A>
     - <A HREF="#young_laplace">The Young-Laplace equations</A>
     - <A HREF="#nst">The Navier-Stokes equations</A>
     - <A HREF="#axisym_nst">The axisymmetric Navier-Stokes equations</A>
     - <A HREF="#free_surface_nst">The free-surface Navier-Stokes equations</A>
     - <A HREF="#solid">Nonlinear solid mechanics problems</A>
     - <A HREF="#linear_elasticity">Linear elasticity</A>
+    - <A HREF="#axisym_linear_elasticity">Axisymmetric linear elasticity</A>
     - <A HREF="#fourier_decomp_lin_elas"> Fourier-decomposed,
-    time-harmonic linear elasticity </A>
+              time-harmonic linear elasticity </A>
     - <A HREF="#beam">Beam structures</A>
     - <A HREF="#shell">Shell structures</A>
     .
@@ -675,7 +678,7 @@ We solve the Helmholtz equation in cylindrical polar coordinates,
   using a Fourier-decomposition in the azimuthal direction.
 </TD>
 <TD>
-- The Helmholtz equation and a azimuthal Fourier decomposition.
+- The Helmholtz equation and its azimuthal Fourier decomposition.
 - Dirichlet to Neumann mapping.
 - Validation with an exact solution formed by a superposition of
   outgoing waves from a sphere.
@@ -685,6 +688,40 @@ We solve the Helmholtz equation in cylindrical polar coordinates,
 <CENTER>complete</CENTER>
 </TD>
 </TR>
+#####################################################################
+######################################################################
+<TR>
+<TD COLSPAN=3 bgcolor="lightcyan">
+<A NAME="gen_helmholtz"><CENTER><B>The generalised Helmholtz equation and
+perfectly matched layers</B></CENTER></A>
+</TD>
+</TR>
+######################################################################
+<TR>
+<TD>
+<A HREF="../../generalised_helmholtz/scattering/html/index.html">
+<B>The generalised Helmholtz equation and perfectly matched layers (PMLs).
+</B>
+</A>
+\n\n
+We consider a generalisation of the Helmholtz equation to allow
+for spatially varying wavenumbers and damping, and
+demonstrate the imposition of the Sommerfeld radiation condition
+by perfectly matched layers (PMLs).
+</TD>
+<TD>
+- The generalised Helmholtz equation with spatially variable
+  wavenumber and damping.
+- The Sommerfeld radiation condition and its approximation by
+  perfectly matched layers (PMLs).
+  \n\n
+</TD>
+<TD>
+<CENTER>complete</CENTER>
+</TD>
+</TR>
+
+#####################################################################
 #####################################################################
 
 
@@ -1740,6 +1777,47 @@ spatial adaptivity.
 </TR>
 ######################################################################
 
+
+
+
+
+######################################################################
+######################################################################
+<TR>
+<TD COLSPAN=3 bgcolor="lightcyan">
+<A NAME="axisym_linear_elasticity"><CENTER><B>Axisymmetric inear elasticity</B></CENTER></A>
+</TD>
+</TR>
+######################################################################
+<TR>
+<TD>
+<A HREF="../../axisym_linear_elasticity/cylinder/html/index.html">
+<B>Axisymmetric linear elasticity: Theory, implementation
+and a time-dependent demo problem.
+</B>
+</A>
+\n\n
+In this document we discuss the theoretical background and the
+practical implementation of \c oomph-lib's axisymmetric linear elasticity
+elements and demonstrate their use in time-dependent test problem.
+</TD>
+<TD>
+- The equations of axisymmetric linear elasticity and their 
+  non-dimensionalisation.
+- Implementation of the equations, based on a displacement formulation.
+- The solution of a 2D model problem: The time-dependent deformation
+  of an annular region and the validation against a manufactured
+  exact solution.
+.
+</TD>
+<TD>
+<CENTER>complete</CENTER>
+</TD>
+</TR>
+######################################################################
+
+
+######################################################################
 ######################################################################
 <TR>
 <TD COLSPAN=3 bgcolor="lightcyan">
@@ -2745,7 +2823,7 @@ Navier-Stokes precondtitioner.
 </TD>
 <TD>
 - How to use <code>oomph-lib</code>'s Least-Squares-Commutator (LSC) 
-Navier-Stokes preconditioner
+Navier-Stokes preconditioner.
 .
 </TD>
 <TD>
@@ -2760,10 +2838,36 @@ Navier-Stokes preconditioner
 preconditioner</B></A> \n\n
 We discuss <code>oomph-lib</code>'s preconditioner for the
 solution of monolithically-discretised fluid-structure interaction 
-problems.
+problems with algebraic node updates.
 </TD>
 <TD>
-- How to use <code>oomph-lib</code>'s FSI preconditioner
+- How to use <code>oomph-lib</code>'s FSI preconditioner for problems
+  with algebraic node updates.
+.
+</TD>
+<TD>
+<CENTER>complete</CENTER>
+</TD>
+</TR>
+######################################################################
+<TR>
+<TD>
+<A HREF="../../preconditioners/prescribed_displ_lagr_mult/html/index.html"><B>
+<code>oomph-lib</code>'s 
+preconditioner for the solution of solid mechanics problems with
+prescribed boundary displacements</B></A> \n\n
+We discuss <code>oomph-lib</code>'s preconditioner for the
+solution of solid mechanics problems in which the displacement
+of a boundary is prescribed and imposed by Larange multipliers.
+This preconditioner is an important building block for the
+solution of FSI problems in which the node update is performed
+by pseudo-elastic node updates in the fluid mesh.
+</TD>
+<TD>
+- How to use <code>oomph-lib</code>'s  for the solution of solid 
+  mechanics problems with prescribed boundary displacements.
+- How to specify subsidiary preconditioners (inexact solvers) 
+  with any of <code>oomph-lib</code>'s existing block preconditioners.
 .
 </TD>
 <TD>

@@ -38,6 +38,7 @@ namespace oomph
  namespace Pseudo_Elastic_Preconditioner_Subsidiary_Operator_Helper
  {
 #ifdef OOMPH_HAS_HYPRE
+
   /// \short AMG w/ GS smoothing for the augmented elastic subsidiary linear
   /// systems
   Preconditioner* get_elastic_preconditioner_hypre()
@@ -269,13 +270,13 @@ namespace oomph
     switch (E_preconditioner_type)
      {
      case Block_diagonal_preconditioner:
-      s_prec_pt->block_diagonal();
+      s_prec_pt->use_block_diagonal_approximation();
       break;
      case Block_upper_triangular_preconditioner:
-      s_prec_pt->upper_triangular();
+      s_prec_pt->use_upper_triangular_approximation();
       break;
      case Block_lower_triangular_preconditioner:
-      s_prec_pt->lower_triangular();
+      s_prec_pt->use_lower_triangular_approximation();
       break;
      default:
       break;
@@ -323,6 +324,7 @@ namespace oomph
   Elastic_preconditioner_pt->preconditioner_solve(r,z);
  }
  
+
  //=============================================================================
  /// \short Apply the lagrange multiplier subsidiary preconditioner.
  //=============================================================================

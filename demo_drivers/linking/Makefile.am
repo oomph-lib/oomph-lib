@@ -14,6 +14,9 @@ demo_code_SOURCES = demo_code.cc
 # $(FLIBS) is included in case the solver involves fortran sources.
 demo_code_LDADD = -L@libdir@ -lpoisson -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
 
+junk:
+	echo $(CXXFLAGS)
+
 
 #-------------------------------------------------------------------------
 
@@ -54,6 +57,9 @@ makefile.sample:
 	echo " "  >> makefile.sample
 	echo "# Flags for C pre-processor " >> makefile.sample
 	echo "AM_CPPFLAGS=-DHAVE_CONFIG_H -I. -I../.. " $(AM_CPPFLAGS) >> makefile.sample
+	echo " "  >> makefile.sample
+	echo "# Flags for C++ compiler " >> makefile.sample
+	echo "CXXFLAGS=" $(CXXFLAGS) >> makefile.sample
 	echo " "  >> makefile.sample
 	echo "# Library include directory: This is where all the header files live" >> makefile.sample
 	echo "OOMPH-LIB_INCLUDE_DIR="@includedir@  >> makefile.sample
@@ -105,7 +111,7 @@ makefile.sample:
 #
 
 #old	echo -e "\t $(CXX) \044(AM_CPPFLAGS) -c demo_code.cc -o my_demo_code.o \\"   >> makefile.sample
-	printf  "\t $(CXX) \044(AM_CPPFLAGS) -c demo_code.cc -o my_demo_code.o \\"   >> makefile.sample
+	printf  "\t $(CXX) \044(AM_CPPFLAGS)  \044(CXXFLAGS) -c demo_code.cc -o my_demo_code.o \\"   >> makefile.sample
 	echo ""   >> makefile.sample
 #old	echo -e "\t       -I\044(OOMPH-LIB_INCLUDE_DIR)  " >> makefile.sample
 	printf  "\t       -I\044(OOMPH-LIB_INCLUDE_DIR) \n " >> makefile.sample

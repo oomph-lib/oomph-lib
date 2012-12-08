@@ -8379,8 +8379,8 @@ void Problem::newton_solve()
    if (!Shut_up_in_newton_solve) 
     {
      oomph_info << std::endl;
-     oomph_info << "Time for linear solver (ndof="
-                << n_dofs << ") [sec]: " 
+     oomph_info << "Time for linear solver ( ndof = "
+                << n_dofs << " ) [sec]: " 
                 << t_solver_end-t_solver_start 
                 << std::endl << std::endl;
     }

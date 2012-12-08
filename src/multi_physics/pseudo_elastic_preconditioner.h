@@ -247,14 +247,14 @@ namespace oomph
   void lagrange_multiplier_preconditioner_solve(const DoubleVector& r,
                                                 DoubleVector& z);
   
-  /// The scaling. Defaults to infinite norm of S.
+  /// The scaling. Defaults to infinity norm of S.
   double Scaling;
   
   /// \short boolean indicating whether the inf-norm of S should be used as 
   /// scaling. Default = true;
   bool Use_inf_norm_of_s_scaling;
   
-  /// \short an unsigned indicating which method should be used for 
+  /// \short An unsigned indicating which method should be used for 
   /// preconditioning the solid component.
   Elastic_preconditioner_type E_preconditioner_type;
   
@@ -267,17 +267,17 @@ namespace oomph
   /// \short lagrange multiplier preconditioner pt
   Vector<Preconditioner*> Lagrange_multiplier_preconditioner_pt;
   
-  /// the lagrange multiplier subsidary preconditioner function pointer
+  /// The Lagrange multiplier subsidary preconditioner function pointer
   SubsidiaryPreconditionerFctPt 
    Lagrange_multiplier_subsidiary_preconditioner_function_pt;
   
-  /// the solid subsidiary preconditioner function pointer
+  /// The solid subsidiary preconditioner function pointer
   SubsidiaryPreconditionerFctPt Elastic_subsidiary_preconditioner_function_pt;
   
-  /// \short the Solid mesh pt
+  /// Pointer to the mesh containing the solid elements
   Mesh* Elastic_mesh_pt;
   
-  /// \short the Lagrange multiplier mesh pt
+  /// Pointer to the mesh containing the Lagrange multiplier elements
   Mesh* Lagrange_multiplier_mesh_pt;
  };
  
@@ -314,7 +314,7 @@ class PseudoElasticPreconditionerSubsidiaryPreconditioner
  /// for the destruction of the subsidiary preconditioners.
  typedef Preconditioner* (*SubsidiaryPreconditionerFctPt)();
 
- /// \short
+ /// Constructor
  PseudoElasticPreconditionerSubsidiaryPreconditioner()
   {
    Scaling = 1.0;
@@ -322,7 +322,7 @@ class PseudoElasticPreconditionerSubsidiaryPreconditioner
    Subsidiary_preconditioner_function_pt = 0;
   }
    
- /// destructor
+ /// Destructor
  ~PseudoElasticPreconditionerSubsidiaryPreconditioner()
   {
    this->clean_up_memory();
@@ -343,10 +343,10 @@ class PseudoElasticPreconditionerSubsidiaryPreconditioner
    (" PseudoElasticPreconditionerSubsidiaryPreconditioner");
   }
  
- // setup the preconditioner
+ // Setup the preconditioner
  void setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt);
    
- // apply the preconditioner
+ // Apply the preconditioner
  void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
    
  /// \short Specify the scaling. Default is 1.0  Must be called before 
@@ -361,7 +361,7 @@ class PseudoElasticPreconditionerSubsidiaryPreconditioner
   (SubsidiaryPreconditionerFctPt sub_prec_fn)
   {
    Subsidiary_preconditioner_function_pt = sub_prec_fn;
-  };
+  }
 
   private:
    
@@ -467,24 +467,24 @@ class PseudoElasticPreconditionerSubsidiaryPreconditioner
   };
   
   /// use as a block diagonal preconditioner
-  void block_diagonal()
+  void use_block_diagonal_approximation()
   {
    Method = 0;
   }
   
   /// Use as an upper triangular preconditioner
-  void upper_triangular() 
+  void use_upper_triangular_approximation() 
   {
    Method = 1;
   }
   
   /// Use as a lower triangular preconditioner
-  void lower_triangular() 
+  void use_lower_triangular_approximation() 
   {
    Method = 2;
   }
   
-  /// \short specify the scaling. Default is 1.0  Must be called before 
+  /// \short Specify the scaling. Default is 1.0  Must be set before 
   /// setup(...).
   double& scaling()
   {
@@ -507,10 +507,10 @@ class PseudoElasticPreconditionerSubsidiaryPreconditioner
   /// 2 - lower triangular\n
   unsigned Method;
   
-  /// the SubisidaryPreconditionerFctPt 
+  /// The SubisidaryPreconditionerFctPt 
   SubsidiaryPreconditionerFctPt Subsidiary_preconditioner_function_pt;
   
-  /// the scaling. default 1.0.
+  /// The scaling. default 1.0.
   double Scaling;
  };
 
@@ -524,7 +524,8 @@ class PseudoElasticPreconditionerSubsidiaryPreconditioner
 
 //=============================================================================
 /// \short A helper class for PseudoElasticPreconditioner.
-/// \n NOT A PRECONDITIONER.
+///  Note that this is NOT actually a functioning preconditioner.
+/// We simply derive from this class to get access to the blocks.
 //=============================================================================
 class PseudoElasticPreconditionerScalingHelper
 : public BlockPreconditioner<CRDoubleMatrix>
@@ -556,12 +557,12 @@ class PseudoElasticPreconditionerScalingHelper
    Matrix_pt = matrix_pt;
   }
 
- /// Destructor. Does nothing.
- ~ PseudoElasticPreconditionerScalingHelper() 
+ /// Destructor. 
+ ~PseudoElasticPreconditionerScalingHelper() 
   {
    this->clear_block_preconditioner_base();
   }
-
+ 
  /// Broken copy constructor
  PseudoElasticPreconditionerScalingHelper
   (const PseudoElasticPreconditionerScalingHelper&)
@@ -592,7 +593,7 @@ class PseudoElasticPreconditionerScalingHelper
   {
    std::ostringstream error_message;
    error_message
-    << "This method is intentionally broken. This is not a functioning "
+    << "This method is intentionally broken. This class is not a functioning "
     << "preconditioner.";
    throw OomphLibError(
     error_message.str(),
@@ -605,7 +606,7 @@ class PseudoElasticPreconditionerScalingHelper
   {
    std::ostringstream error_message;
    error_message
-    << "This method is intentionally broken. This is not a functioning "
+    << "This method is intentionally broken. This class is not a functioning "
     << "preconditioner.";
    throw OomphLibError(
     error_message.str(),
@@ -617,6 +618,8 @@ class PseudoElasticPreconditionerScalingHelper
    
  /// pointer to the Jacobian
  CRDoubleMatrix* Matrix_pt;
+
 }; // end of PseudoElasticPreconditionerScalingHelper
+
 }
 #endif

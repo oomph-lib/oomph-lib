@@ -1,6 +1,8 @@
 SUBDIRS = \
 lsc_navier_stokes \
-fsi
+fsi \
+prescribed_displ_lagr_mult
+
 
 
 

@@ -1,7 +1,7 @@
 #! /bin/sh
 
 #Set the number of tests to be checked
-NUM_TESTS=2
+NUM_TESTS=4
 
 # Setup validation directory
 #---------------------------
@@ -64,6 +64,44 @@ else
 fi
 
 mv RESLT RESLT_without_lagr_mult
+
+
+
+mkdir RESLT
+
+echo "Running precond imposed boundary deformation without Lagrange multipliers "
+../prescribed_displ_lagr_mult_precond --block_upper_for_elastic_block > OUTPUT_without_lagr_mult_precond
+
+echo "done"
+echo " " >> validation.log
+echo "Preconditioned imposed boundary deformation without Lagrange multipliers" >> validation.log
+echo "------------------------------------------------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+
+max_iter=`grep iterations OUTPUT_without_lagr_mult_precond | awk 'BEGIN{max=0}{if ($NF>max) max=$NF}END{print max}'`
+echo " " >> validation.log
+echo "Max number of GMRES iterations: "$max_iter>> validation.log
+echo " " >> validation.log
+if [ $max_iter -le 40 ]; then
+      echo "   [OK] -- for number of iterations below 40" >> validation.log
+else
+      echo "   [FAILED] -- number of iterations above 40" >> validation.log
+fi
+
+cat RESLT/soln2.dat > result_precond.dat
+
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../../bin/fpdiff.py ../validata/result_precond.dat.gz \
+    result_precond.dat  >> validation.log
+fi
+
+mv RESLT RESLT_precond
 
 
 # Append output to global validation log file
