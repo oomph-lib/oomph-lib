@@ -184,6 +184,82 @@ namespace oomph
     }
  }
 
+
+
+//====================================================================
+/// \short Return this element's contribution to the total volume enclosed
+//====================================================================
+ double LineVolumeConstraintBoundingElement::contribution_to_enclosed_volume()
+ {
+
+  // Initialise
+  double vol=0.0;
+
+  //Find out how many nodes there are
+  const unsigned n_node = this->nnode();
+  
+  //Set up memeory for the shape functions
+  Shape psif(n_node);
+  DShape dpsifds(n_node,1);
+  
+  //Set the value of n_intpt
+  const unsigned n_intpt = this->integral_pt()->nweight();
+  
+  //Storage for the local cooridinate
+  Vector<double> s(1);
+  
+  //Loop over the integration points
+  for(unsigned ipt=0;ipt<n_intpt;ipt++)
+   {
+    //Get the local coordinate at the integration point
+    s[0] = this->integral_pt()->knot(ipt,0);
+    
+    //Get the integral weight
+    double W = this->integral_pt()->weight(ipt);
+    
+    //Call the derivatives of the shape function at the knot point
+    this->dshape_local_at_knot(ipt,psif,dpsifds);
+    
+    // Get position and tangent vector
+    Vector<double> interpolated_t1(2,0.0);
+    Vector<double> interpolated_x(2,0.0);
+    for(unsigned l=0;l<n_node;l++)
+     {
+      //Loop over directional components
+      for(unsigned i=0;i<2;i++)
+       {
+        interpolated_x[i] += this->nodal_position(l,i)*psif(l);
+        interpolated_t1[i] += this->nodal_position(l,i)*dpsifds(l,0);
+       }
+     }
+    
+    //Calculate the length of the tangent Vector
+    double tlength = interpolated_t1[0]*interpolated_t1[0] + 
+     interpolated_t1[1]*interpolated_t1[1];
+    
+    //Set the Jacobian of the line element
+    double J = sqrt(tlength);
+    
+    //Now calculate the normal Vector
+    Vector<double> interpolated_n(2);
+    this->outer_unit_normal(ipt,interpolated_n);
+    
+    // Assemble dot product
+    double dot = 0.0;
+    for(unsigned k=0;k<2;k++) 
+     {
+      dot += interpolated_x[k]*interpolated_n[k];
+     }
+    
+    // Add to volume with sign chosen so that the volume is
+    // positive when the elements bound the fluid
+    vol += 0.5*dot*W*J;
+   }
+
+  return vol;
+ }
+
+
 //////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////

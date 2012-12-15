@@ -14,10 +14,6 @@ demo_code_SOURCES = demo_code.cc
 # $(FLIBS) is included in case the solver involves fortran sources.
 demo_code_LDADD = -L@libdir@ -lpoisson -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
 
-junk:
-	echo $(CXXFLAGS)
-
-
 #-------------------------------------------------------------------------
 
 

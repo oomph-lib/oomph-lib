@@ -618,7 +618,7 @@ DenseMatrix<double> GeneralisedElement::Dummy_matrix;
             unsigned ndim=nod_pt->ndim();
             for (unsigned ii=0;ii<ndim;ii++)
              {
-              error_stream << nod_pt->x(i) << " ";
+              error_stream << nod_pt->x(ii) << " ";
              }
            }
           error_stream << ")\n";

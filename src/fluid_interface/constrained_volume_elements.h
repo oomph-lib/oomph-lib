@@ -355,8 +355,10 @@ namespace oomph
 /// VolumeConstraintElement, which stores the value of the
 /// target volume. 
 //=======================================================================
- class LineVolumeConstraintBoundingElement : public
-   VolumeConstraintBoundingElement
+ class LineVolumeConstraintBoundingElement : 
+ public virtual VolumeConstraintBoundingElement, 
+  public virtual TemplateFreeVolumeConstraintBoundingElementBase // hierher
+ // make base class of VolumeConstraintBoundingElement class
  {
    protected:
   
@@ -375,6 +377,9 @@ namespace oomph
   /// \short Empty Destructor
   ~LineVolumeConstraintBoundingElement() {}
   
+  /// Return this element's contribution to the total volume enclosed
+  double contribution_to_enclosed_volume();
+
  };
 
 
