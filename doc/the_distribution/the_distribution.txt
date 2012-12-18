@@ -550,9 +550,11 @@ by specifying the configure option
 \endcode
 
 
-\b Note: \c oomph-lib works with version 9.0.2 of the library. 
-If this version of \c Trilinos is not available on your machine
-download the tar file 
+\b Note: \c oomph-lib should work with major version numbers 9 and 10
+of the Trilinos library.
+If these versions of \c Trilinos are not available on your machine you
+can get the latest version from the <a href="http://trilinos.sandia.gov/">
+Trilinos web site </a> or download the older version below
 
 <CENTER>
 <a href="http://www.maths.man.ac.uk/~mheil/oomph-lib_actual_tar_files/trilinos-9.0.2.tar.gz">http://www.maths.man.ac.uk/~mheil/oomph-lib_actual_tar_files/trilinos-9.0.2.tar.gz</a>
@@ -564,7 +566,11 @@ tar file into the directory
 \code
 external_distributions/trilinos
 \endcode
-and (re-)run \c autogen.sh. The installation procedure will detect
+and (re-)run \c autogen.sh. The build process is somewhat different
+for major version numbers 9 and 10, but oomph-lib will detect this
+automatically, provided that the source file is called
+trilinos-N.*.tar.gz, where N is the major version number. 
+The installation procedure will then detect
 the tar file, unpack it, and install the library in 
 \code
 external_distributions/trilinos/trilinos_default_installation
@@ -591,7 +597,7 @@ unpacked \c Trilinos sources but not the tar file and the library itself.
 </CENTER>
 
 <CENTER>
-The compilation of \c Trilinos takes \b very long! 
+The compilation of \c Trilinos can take \b a very long time! 
 
 We strongly recommend installing \c oomph-lib without it in the first
 instance.

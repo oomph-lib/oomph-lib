@@ -417,7 +417,9 @@ public:
  /// Initialise and populate the "bin" structure for locating coordinates
  /// and increment counter for total number of bins in active use by any 
  /// MeshAsGeomObject)
- void create_bins_of_objects();
+ /// Note that the number of elements in the mesh is passed in only
+ /// for a warning message about small numbers of bins.
+ void create_bins_of_objects(const unsigned long &n_mesh_element);
 
  /// \short Flush the storage for the binning method (and decrement counter
  /// for total number of bins in active use by any MeshAsGeomObject)
@@ -484,6 +486,19 @@ public:
  /// \short Boolean flag to make sure that warning about large number
  /// of bin cells only gets triggered once.
  static bool Already_warned_about_large_number_of_bin_cells;
+
+ /// \short Fraction of elements/bin that triggers warning. Too many
+ /// elements per bin can lead to very slow computations
+ static unsigned Threshold_for_elements_per_bin_warning;
+
+ /// \short Boolean to supppress warnings about small number of bins
+ static bool Suppress_warning_about_small_number_of_bins;
+
+ /// \short Boolean flag to make sure that warning about small number
+ /// of bin cells only gets triggered once.
+ static bool Already_warned_about_small_number_of_bin_cells;
+
+
 
 };
 

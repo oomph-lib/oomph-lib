@@ -36,6 +36,14 @@ def search_dead_links(doc_root_directory):
  local_files = proc.stdout.read()
  new_local_files = local_files.split()
 
+ #Need to remove the documentation root and replace it by a .
+ local_files = []
+ for url in new_local_files:
+  local_file = string.replace(url,doc_root_directory,"./")
+  local_files.append(local_file)
+
+ new_local_files = local_files
+
  #Finally print out ones that don't match
  print "Files not linked in example list file\n"
 

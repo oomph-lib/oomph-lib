@@ -73,6 +73,25 @@ namespace oomph
  bool MeshAsGeomObject::Already_warned_about_large_number_of_bin_cells=false;
 
 //========================================================================
+ /// \short Number elements/bin that triggers a warning when it gets
+ /// too large, i.e. too many elements per bin, which can lead to very slow
+ /// computations. Sart at 100
+//========================================================================
+ unsigned MeshAsGeomObject::Threshold_for_elements_per_bin_warning = 100;
+
+//========================================================================
+ /// \short Boolean to supppress warnings about small number of bins
+//========================================================================
+ bool MeshAsGeomObject::Suppress_warning_about_small_number_of_bins=false;
+
+//========================================================================
+ /// \short Boolean flag to make sure that warning about small number
+/// of bin cells only gets triggered once.
+//========================================================================
+ bool MeshAsGeomObject::Already_warned_about_small_number_of_bin_cells=false;
+
+
+//========================================================================
 /// Helper function for constructor: Pass the pointer to the mesh, 
 /// communicator and boolean
 /// to specify whether to calculate coordinate extrema or not
@@ -290,8 +309,9 @@ namespace oomph
       }
     }
 
-   // Create the bin structure
-   create_bins_of_objects();
+   // Create the bin structure, passing in the number of elements in 
+   // the mesh
+   create_bins_of_objects(mesh_pt->nelement());
  }
 
 
@@ -836,8 +856,11 @@ namespace oomph
 
 //========================================================================
 ///Initialise the "bin" structure for locating coordinates
+///The number of elements in the mesh is passed in only for an error check
+///about the number of elements / bin.
 //========================================================================
- void MeshAsGeomObject::create_bins_of_objects()
+ void MeshAsGeomObject::create_bins_of_objects(
+  const unsigned long &n_mesh_element)
   {
    //Store the lagrangian dimension
    const unsigned n_lagrangian = this->nlagrangian();
@@ -882,6 +905,44 @@ namespace oomph
    unsigned ntotalbin=Nbin[0];
    for(unsigned i=1;i<n_lagrangian;i++) {ntotalbin *= Nbin[i];}
    Bin_object_coord_pairs.resize(ntotalbin);
+
+   // Issue warning about small number of bins
+   if (!Suppress_warning_about_small_number_of_bins)
+    {
+     //Calculate the (nearest integer) number of elements per bin
+     unsigned elements_per_bin = n_mesh_element / ntotalbin;
+     //If it is above the threshold then issue a warning
+     if (elements_per_bin > Threshold_for_elements_per_bin_warning)
+      {
+       if (!Already_warned_about_small_number_of_bin_cells)
+        {
+         Already_warned_about_small_number_of_bin_cells=true;
+         std::ostringstream warn_message;
+         warn_message 
+          << "The average (integer) number of elements per bin is \n\n"
+          << elements_per_bin 
+          << ", which is more than \n\n"
+          << "   MeshAsGeomObject::Threshold_for_elements_per_bin_warning="
+          << MeshAsGeomObject::Threshold_for_elements_per_bin_warning 
+          << "\n\nIf the lookup seems slow (and you have the memory), consider increasing\n"
+          << "Multi_domain_functions::N{x,y,z}_bin from their current\n"
+          << "values of { " 
+          << Multi_domain_functions::Nx_bin << " "
+          << Multi_domain_functions::Ny_bin << " "
+          << Multi_domain_functions::Nz_bin << " }.\n"
+          << "\nNOTE: You can suppress this warning by increasing\n\n"
+          << "   MeshAsGeomObject::Threshold_for_elements_per_bin_warning\n\n"
+          << "or by setting \n\n   MeshAsGeomObject::Suppress_warning_about_small_number_of_bins\n\n"
+          << "to true (both are public static data).\n\n";
+         OomphLibWarning(
+          warn_message.str(),
+          "MeshAsGeomObject::create_bins_of_objects()",
+          OOMPH_EXCEPTION_LOCATION);
+        }
+      }
+    }
+
+
 
    // Increase overall counter
    Total_nbin_cells_counter+=ntotalbin;
