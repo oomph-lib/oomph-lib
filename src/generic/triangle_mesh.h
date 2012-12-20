@@ -134,7 +134,9 @@ namespace TriangleHelper
  extern void create_triangulateio_from_polyfiles(
   const std::string& node_file_name,
   const std::string& element_file_name,
-  const std::string& poly_file_name, TriangulateIO &triangle_io);
+  const std::string& poly_file_name,
+  TriangulateIO &triangle_io,
+  bool &use_attributes);
   
 
  /// \short Dump the triangulatio data into a dump file

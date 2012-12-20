@@ -248,33 +248,35 @@ class TriangleMeshParameters
                const std::string& element_file_name,
                const std::string& poly_file_name,
                TimeStepper* time_stepper_pt=
-                   &Mesh::Default_TimeStepper,
-               const bool &use_attributes=false)
+                   &Mesh::Default_TimeStepper)
    {
-    //Store the attributes
-    Use_attributes = use_attributes;
-    
     // Store Timestepper used to build elements
     Time_stepper_pt=time_stepper_pt;
 
-#ifdef OOMPH_HAS_TRIANGLE_LIB  
-    
+    bool use_attributes = false;
+
+#ifdef OOMPH_HAS_TRIANGLE_LIB
+
     // Using this constructor build the triangulatio
     TriangleHelper::create_triangulateio_from_polyfiles(node_file_name,
                                                         element_file_name,
                                                         poly_file_name,
-                                                        Triangulateio);
-    //Record that the triangulateio object has been created      
+                                                        Triangulateio,
+                                                        use_attributes);
+    //Record that the triangulateio object has been created
     Triangulateio_exists=true;
 
 #endif
+
+    // Keep track of the attributes info.
+    Use_attributes = use_attributes;
 
     // Build scaffold
     Tmp_mesh_pt= new 
      TriangleScaffoldMesh(node_file_name,
                           element_file_name,
                           poly_file_name);
-    
+
     // Convert mesh from scaffold to actual mesh
     build_from_scaffold(time_stepper_pt,use_attributes);
     

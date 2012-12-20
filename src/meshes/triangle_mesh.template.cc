@@ -419,10 +419,10 @@ void TriangleMesh<ELEMENT>::setup_boundary_coordinates(const unsigned& b,
          << "2) The boundary (" << b << ") is not associated with region ("
          << region_id << ").\n"
          << "---- The boundary does not touch the region\n.";
-        /*OomphLibWarning(warning_message.str(),
-          "TriangleMesh::setup_boundary_coordinates()",
-          OOMPH_EXCEPTION_LOCATION);
-        */
+        OomphLibWarning(warning_message.str(),
+                        "TriangleMesh::setup_boundary_coordinates()",
+                        OOMPH_EXCEPTION_LOCATION);
+        
        }
 #endif
       
@@ -2077,6 +2077,35 @@ void TriangleMesh<ELEMENT>::setup_boundary_coordinates(const unsigned& b,
        poly_file>>triangulate_io.holelist[i+1];
       }
     }
+
+   // Read and store the number of regions if given
+   // Skip line with commentary
+   if(getline(poly_file,test_string,'#'))
+    {
+     poly_file.ignore(80,'\n');
+
+     unsigned dummy_region;
+     unsigned nregion;
+     poly_file>>nregion;
+     std::cerr << "Regions: "<< nregion << std::endl;
+     getchar();
+
+     triangulate_io.numberofregions = nregion;
+     triangulate_io.regionlist =
+     (double *) malloc(triangulate_io.numberofregions * 4 * sizeof(double));
+
+     // Loop over the regions to get coords and store value onto the
+     // TriangulateIO object
+     for(unsigned i=0;i<nregion;i++)
+      {
+       poly_file>>dummy_region;
+       poly_file>>triangulate_io.regionlist[4*i];
+       poly_file>>triangulate_io.regionlist[4*i+1];
+       poly_file>>triangulate_io.regionlist[4*i+2];
+       triangulate_io.regionlist[4*i+3] = 0.0;
+      }
+    }
+
   }
 
 #endif

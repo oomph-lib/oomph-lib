@@ -409,7 +409,8 @@ namespace TriangleHelper
  void create_triangulateio_from_polyfiles(
   const std::string& node_file_name,
   const std::string& element_file_name,
-  const std::string& poly_file_name, TriangulateIO &triangle_io)
+  const std::string& poly_file_name, TriangulateIO &triangle_io,
+  bool &use_attributes)
  {
   //Initialise the TriangulateIO data structure
   initialise_triangulateio(triangle_io);
@@ -634,7 +635,47 @@ namespace TriangleHelper
     poly_file >> triangle_io.holelist[2*ihole];
     poly_file >> triangle_io.holelist[2*ihole+1];
    }
+
+  // Extract regions information
+  poly_file >> triangle_io.numberofregions;
+  unsigned n_regions = static_cast<unsigned>(triangle_io.numberofregions);
+
+  //Allocate memory
+  triangle_io.regionlist = 
+   (double*) malloc(triangle_io.numberofregions * 4 * sizeof(double));
+
+  // Check for using regions
+  if (n_regions > 0)
+   {use_attributes = true;}
+
+  // Dummy for regions number
+  unsigned dummy_region;
+
+  // Loop over the regions to get their coords
+  for(unsigned iregion=0;iregion<n_regions;iregion++)
+   {
+    // Read the regions coordinates
+    poly_file >> dummy_region;
+    poly_file >> triangle_io.regionlist[4*iregion];
+    poly_file >> triangle_io.regionlist[4*iregion+1];
+    poly_file >> triangle_io.regionlist[4*iregion+2];
+    triangle_io.regionlist[4*iregion+3] = 0.0;
+
+    // Verify if not using the default region number (zero)
+    if (triangle_io.regionlist[4*iregion+2] == 0) 
+     {
+      std::ostringstream error_message;
+      error_message << "Please use another region id different from zero.\n"
+                    << "It is internally used as the default region number.\n";
+      throw OomphLibError(error_message.str(),
+       "TriangleHelper::create_triangulateio_from_polyfiles()",
+       OOMPH_EXCEPTION_LOCATION);
+     }
+ 
+   }
+
   poly_file.close();
+
  }
 
   
