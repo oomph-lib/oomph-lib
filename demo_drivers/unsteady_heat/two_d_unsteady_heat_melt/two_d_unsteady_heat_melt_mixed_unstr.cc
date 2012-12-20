@@ -122,93 +122,95 @@ private:
  void complete_problem_setup()
   {
    
+
+// hierher continue here
    
-   // Set the boundary conditions for this problem: 
-   // ---------------------------------------------
+//    // Set the boundary conditions for this problem: 
+//    // ---------------------------------------------
    
-   // All nodes are free by default -- just pin the ones that have 
-   // Dirichlet conditions here. 
-   unsigned n_bound = Bulk_mesh_pt->nboundary();
-   for(unsigned b=0;b<n_bound;b++)
-    {
-     if (b!=b_flux) 
-      {
-       unsigned n_node = Bulk_mesh_pt->nboundary_node(b);
-       for (unsigned n=0;n<n_node;n++)
-        {
-         Bulk_mesh_pt->boundary_node_pt(b,n)->pin(0); 
-        }
-      }
-    } // end of set boundary conditions
+//    // All nodes are free by default -- just pin the ones that have 
+//    // Dirichlet conditions here. 
+//    unsigned n_bound = Bulk_mesh_pt->nboundary();
+//    for(unsigned b=0;b<n_bound;b++)
+//     {
+//      if (b!=b_flux) 
+//       {
+//        unsigned n_node = Bulk_mesh_pt->nboundary_node(b);
+//        for (unsigned n=0;n<n_node;n++)
+//         {
+//          Bulk_mesh_pt->boundary_node_pt(b,n)->pin(0); 
+//         }
+//       }
+//     } // end of set boundary conditions
    
    
    
-   // Complete the build of all elements so they are fully functional
-   //----------------------------------------------------------------
+//    // Complete the build of all elements so they are fully functional
+//    //----------------------------------------------------------------
    
-   // Find number of elements in mesh
-   n_element = Bulk_mesh_pt->nelement();
+//    // Find number of elements in mesh
+//    n_element = Bulk_mesh_pt->nelement();
    
-   // Loop over the elements to set up element-specific 
-   // things that cannot be handled by constructor
-   for(unsigned i=0;i<n_element;i++)
-    {
-     // Upcast from FiniteElement to the present element
-     ELEMENT *el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(i));
+//    // Loop over the elements to set up element-specific 
+//    // things that cannot be handled by constructor
+//    for(unsigned i=0;i<n_element;i++)
+//     {
+//      // Upcast from FiniteElement to the present element
+//      ELEMENT *el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(i));
      
-     // Set pointer to continous time
-     el_pt->time_pt()=time_pt();
-    }
+//      // Set pointer to continous time
+//      el_pt->time_pt()=time_pt();
+//     }
    
-   // Loop over the flux elements to pass pointer to prescribed flux function
-   n_element=Surface_melt_mesh_pt->nelement();
-   for(unsigned e=0;e<n_element;e++)
-    {
-     // Upcast from GeneralisedElement to UnsteadyHeat flux element
-     UnsteadyHeatFluxMeltElement<ELEMENT> *el_pt = 
-      dynamic_cast<UnsteadyHeatFluxMeltElement<ELEMENT>*>(
-       Surface_melt_mesh_pt->element_pt(e));
+//    // Loop over the flux elements to pass pointer to prescribed flux function
+//    n_element=Surface_melt_mesh_pt->nelement();
+//    for(unsigned e=0;e<n_element;e++)
+//     {
+//      // Upcast from GeneralisedElement to UnsteadyHeat flux element
+//      UnsteadyHeatFluxMeltElement<ELEMENT> *el_pt = 
+//       dynamic_cast<UnsteadyHeatFluxMeltElement<ELEMENT>*>(
+//        Surface_melt_mesh_pt->element_pt(e));
      
-     // Set the pointer to the prescribed flux function
-     el_pt->flux_fct_pt() = &ProblemParameters::flux;
+//      // Set the pointer to the prescribed flux function
+//      el_pt->flux_fct_pt() = &ProblemParameters::flux;
      
-     // Set pointer to continous time
-     el_pt->time_pt()=time_pt();
+//      // Set pointer to continous time
+//      el_pt->time_pt()=time_pt();
      
-     // Set melt temperature
-     el_pt->melt_temperature_pt()=&ProblemParameters::Melt_temperature;
+//      // Set melt temperature
+//      el_pt->melt_temperature_pt()=&ProblemParameters::Melt_temperature;
      
-     // Suppress melting?
-     if (CommandLineArgs::command_line_flag_has_been_set("--disable_melting"))
-      {
-       el_pt->disable_melting();
-      }
-     else
-      {
-       // Disable suppression of refreezing?
-       if (CommandLineArgs::command_line_flag_has_been_set(
-            "--disable_suppression_of_refreezing"))
-        {
-         el_pt->disable_suppression_of_refreezing();
-        }
-      }
-    }
+//      // Suppress melting?
+//      if (CommandLineArgs::command_line_flag_has_been_set("--disable_melting"))
+//       {
+//        el_pt->disable_melting();
+//       }
+//      else
+//       {
+//        // Disable suppression of refreezing?
+//        if (CommandLineArgs::command_line_flag_has_been_set(
+//             "--disable_suppression_of_refreezing"))
+//         {
+//          el_pt->disable_suppression_of_refreezing();
+//         }
+//       }
+//     }
    
-   // Loop over the flux elements to pass pointer to prescribed flux function
-   n_element=Surface_mesh_pt->nelement();
-   for(unsigned e=0;e<n_element;e++)
-    {
-     // Upcast from GeneralisedElement to UnsteadyHeat flux element
-     UnsteadyHeatFluxElement<ELEMENT> *el_pt = 
-      dynamic_cast<UnsteadyHeatFluxElement<ELEMENT>*>(
-       Surface_mesh_pt->element_pt(e));
+//    // Loop over the flux elements to pass pointer to prescribed flux function
+//    n_element=Surface_mesh_pt->nelement();
+//    for(unsigned e=0;e<n_element;e++)
+//     {
+//      // Upcast from GeneralisedElement to UnsteadyHeat flux element
+//      UnsteadyHeatFluxElement<ELEMENT> *el_pt = 
+//       dynamic_cast<UnsteadyHeatFluxElement<ELEMENT>*>(
+//        Surface_mesh_pt->element_pt(e));
      
-     // Set the pointer to the prescribed flux function
-     el_pt->flux_fct_pt() = &ProblemParameters::flux;
+//      // Set the pointer to the prescribed flux function
+//      el_pt->flux_fct_pt() = &ProblemParameters::flux;
      
-     // Set pointer to continous time
-     el_pt->time_pt()=time_pt();
-    }
+//      // Set pointer to continous time
+//      el_pt->time_pt()=time_pt();
+//     }
 
   }
  
