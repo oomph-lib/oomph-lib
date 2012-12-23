@@ -100,9 +100,10 @@
 #
 --enable-MPI
 --enable-symbolic-links-for-headers
+--enable-suppress-doc
 --with-mpi-self-tests="mpirun -np 2"
-CXXFLAGS="-g -Wall"
-CFLAGS="-g"
+CXXFLAGS="-g -O0 -Wall"
+CFLAGS="-g -O0"
 FFLAGS="-g"
 FFLAGS_NO_OPT="-O0"
 CXX=mpic++

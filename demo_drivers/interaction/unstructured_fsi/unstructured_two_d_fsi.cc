@@ -122,11 +122,9 @@ public:
                      const std::string& element_file_name,
                      const std::string& poly_file_name,
                      TimeStepper* time_stepper_pt=
-                     &Mesh::Default_TimeStepper,
-                     const bool &use_attributes=false) : 
+                     &Mesh::Default_TimeStepper) :
   TriangleMesh<ELEMENT>(node_file_name,element_file_name,
-                        poly_file_name, time_stepper_pt,
-                        use_attributes)
+                        poly_file_name, time_stepper_pt)
   {
    //Assign the Lagrangian coordinates
    set_lagrangian_nodal_coordinates();
@@ -190,11 +188,9 @@ public:
                    const std::string& element_file_name,
                    const std::string& poly_file_name,
                    TimeStepper* time_stepper_pt=
-                   &Mesh::Default_TimeStepper,
-                   const bool &use_attributes=false) : 
+                   &Mesh::Default_TimeStepper) :
   TriangleMesh<ELEMENT>(node_file_name,element_file_name,
-                        poly_file_name, time_stepper_pt,
-                        use_attributes)
+                        poly_file_name, time_stepper_pt)
   {
    //Assign the Lagrangian coordinates
    set_lagrangian_nodal_coordinates();
