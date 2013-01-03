@@ -64,9 +64,9 @@ class MeshAsGeomObject : public GeomObject
 private:
 
  /// \short  Helper function for constructor: pass the pointer to the mesh, 
- /// communicator and boolean
+ /// and boolean
  /// to specify whether to calculate coordinate extrema or not.
- void construct_it(Mesh* const &mesh_pt, OomphCommunicator* comm_pt,
+ void construct_it(Mesh* const &mesh_pt,
                    const bool& compute_extreme_bin_coords);
 
  /// \short Sort the sampling points in the specified bin by distance from 
@@ -130,7 +130,7 @@ public:
  /// structure that contains its own elements, rather than a bin
  /// bin structure that is identical for each processor. Obviously
  /// only relevant for distributed problems. 
- MeshAsGeomObject(Mesh* const &mesh_pt,
+ MeshAsGeomObject(Mesh* const &mesh_pt, 
                   const unsigned& suppress_synchronisation_of_bins_flag=0) 
   : GeomObject()
   {
@@ -140,9 +140,8 @@ public:
     {
      Suppress_synchronisation_of_bins=true;
     }
-   OomphCommunicator* comm_pt=0;
    bool compute_extreme_bin_coords=true;
-   this->construct_it(mesh_pt,comm_pt,compute_extreme_bin_coords);
+   this->construct_it(mesh_pt,compute_extreme_bin_coords);
   }
 
  ///\short Constructor, pass the pointer to the mesh and communicator. 
@@ -164,7 +163,7 @@ public:
      Suppress_synchronisation_of_bins=true;
     }
    bool compute_extreme_bin_coords=true;
-   this->construct_it(mesh_pt,comm_pt,compute_extreme_bin_coords);
+   this->construct_it(mesh_pt,compute_extreme_bin_coords);
   }
 
  ///\short Constructor, pass the pointer to the mesh and 
@@ -186,8 +185,7 @@ public:
     {
      Suppress_synchronisation_of_bins=true;
     }
-   OomphCommunicator* comm_pt=0;
-   this->construct_it(mesh_pt,comm_pt,compute_extreme_bin_coords);
+   this->construct_it(mesh_pt,compute_extreme_bin_coords);
   }
 
 
@@ -211,7 +209,7 @@ public:
      Suppress_synchronisation_of_bins=true;
     }
    Suppress_synchronisation_of_bins=false;
-   this->construct_it(mesh_pt,comm_pt,compute_extreme_bin_coords);
+   this->construct_it(mesh_pt,compute_extreme_bin_coords);
   }
  
  /// Empty Constructor

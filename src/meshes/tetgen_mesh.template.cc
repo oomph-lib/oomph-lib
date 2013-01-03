@@ -54,6 +54,9 @@ template <class ELEMENT>
 void TetgenMesh<ELEMENT>::build_from_scaffold(TimeStepper* time_stepper_pt,
                                               const bool &use_attributes)
 {
+ // Mesh can only be built with 3D Telements.
+ MeshChecker::assert_geometric_element<TElementGeometricBase,ELEMENT>(3);
+
  // Create space for elements
  unsigned nelem=Tmp_mesh_pt->nelement();
  Element_pt.resize(nelem);

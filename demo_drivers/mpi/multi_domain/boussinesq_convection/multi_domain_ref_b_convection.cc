@@ -499,11 +499,11 @@ void RefineableConvectionProblem<NST_ELEMENT,AD_ELEMENT>::doc_solution()
 
  /// Doc the mesh distribution
  Doc_info.label()="temperature_";
- adv_diff_mesh_pt()->doc_mesh_distribution(this->communicator_pt(),Doc_info);
+ adv_diff_mesh_pt()->doc_mesh_distribution(Doc_info);
  
  /// Doc the mesh distribution
  Doc_info.label()="fluid_";
- nst_mesh_pt()->doc_mesh_distribution(this->communicator_pt(),Doc_info);
+ nst_mesh_pt()->doc_mesh_distribution(Doc_info);
  
 
 

@@ -66,17 +66,17 @@ mv RESLT_CR_MESH  RESLT_CR_MESH_adaptive_driven_cavity
 # Validation for adaptive driven cavity (TH & CR) with load balancing
 #--------------------------------------------------------------------
 
-echo "Running adaptive rectangular driven cavity (TH & CR) validation with load balancing"
-mkdir RESLT_LOAD_BALANCE RESLT_CR_MESH RESLT_TH_MESH
+echo "Running adaptive rectangular driven cavity validation with load balancing"
+mkdir RESLT_LOAD_BALANCE 
 
 # Wait for a bit to allow parallel file systems to realise
 # the existence of the new directory
 sleep 5
 
-$MPI_RUN_COMMAND ../adaptive_driven_cavity_load_balance validate > OUTPUT_adaptive_driven_cavity_load_balance
+$MPI_RUN_COMMAND ../adaptive_driven_cavity_load_balance --validate > OUTPUT_adaptive_driven_cavity_load_balance
 echo "done"
 echo " " >> validation.log
-echo "Adaptive rectangular driven cavity (TH & CR) validation with load balancing" >> validation.log
+echo "Adaptive rectangular driven cavity validation with load balancing" >> validation.log
 echo "------------------------------------" >> validation.log
 echo " " >> validation.log
 echo "Validation directory: " >> validation.log

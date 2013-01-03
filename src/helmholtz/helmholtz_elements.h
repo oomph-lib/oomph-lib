@@ -51,7 +51,7 @@ namespace oomph
 /// A class for all isoparametric elements that solve the 
 /// Helmholtz equations.
 /// \f[ 
-/// \frac{\partial^2 u}{\partial x_i^2} = f(x_j) hierher update
+/// \frac{\partial^2 u}{\partial x_i^2} + k^2 u = f(x_j) 
 /// \f] 
 /// This contains the generic maths. Shape functions, geometric
 /// mapping etc. must get implemented in derived class.
@@ -814,7 +814,7 @@ class FaceGeometry<QHelmholtzElement<1,NNODE_1D> >:
 
 
 
- /// \short hierher Output FE representation of soln: x,y,u or x,y,z,u at 
+ /// \short Output FE representation of soln: x,y,u or x,y,z,u at 
  /// n_plot^DIM plot points
  void output(std::ostream &outfile, const unsigned &nplot)
  {

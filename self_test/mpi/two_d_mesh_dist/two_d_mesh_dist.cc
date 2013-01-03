@@ -386,12 +386,11 @@ void parallel_test(const unsigned& n_refine_first,
 
  // Assess the quality of the distribution
  //---------------------------------------
- problem_pt->mesh_pt()->get_halo_node_stats(problem_pt->communicator_pt(),
-                                            av_number_halo_nodes,
+ problem_pt->mesh_pt()->get_halo_node_stats(av_number_halo_nodes,
                                             max_number_halo_nodes,
                                             min_number_halo_nodes);
  problem_pt->mesh_pt()->get_efficiency_of_mesh_distribution
-  (problem_pt->communicator_pt(),av_efficiency,max_efficiency,min_efficiency);
+  (av_efficiency,max_efficiency,min_efficiency);
  
 
  // Doc stats
@@ -485,13 +484,11 @@ void parallel_test(const unsigned& n_refine_first,
 
    // Assess efficiency
    //------------------
-   problem_pt->mesh_pt()->get_halo_node_stats(problem_pt->communicator_pt(),
-                                              av_number_halo_nodes,
+   problem_pt->mesh_pt()->get_halo_node_stats(av_number_halo_nodes,
                                               max_number_halo_nodes,
                                               min_number_halo_nodes);
    problem_pt->mesh_pt()->get_efficiency_of_mesh_distribution
-    (problem_pt->communicator_pt(),av_efficiency,
-     max_efficiency,min_efficiency);
+    (av_efficiency,max_efficiency,min_efficiency);
  
 
    if (my_rank==0)
@@ -581,13 +578,11 @@ void parallel_test(const unsigned& n_refine_first,
 
       // Re-assess efficiency
       //----------------------
-      problem_pt->mesh_pt()->get_halo_node_stats(problem_pt->communicator_pt(),
-                                                 av_number_halo_nodes,
+      problem_pt->mesh_pt()->get_halo_node_stats(av_number_halo_nodes,
                                                  max_number_halo_nodes,
                                                  min_number_halo_nodes);
       problem_pt->mesh_pt()->
-       get_efficiency_of_mesh_distribution(problem_pt->communicator_pt(),
-                                           av_efficiency,
+       get_efficiency_of_mesh_distribution(av_efficiency,
                                            max_efficiency,
                                            min_efficiency);
       
@@ -613,8 +608,7 @@ void parallel_test(const unsigned& n_refine_first,
        }
             
       problem_pt->mesh_pt()->
-       get_efficiency_of_mesh_distribution(problem_pt->communicator_pt(),
-                                           av_efficiency,
+       get_efficiency_of_mesh_distribution(av_efficiency,
                                            max_efficiency,
                                            min_efficiency);
       oomph_info << "Av., min., max. efficiency after redistribution " 

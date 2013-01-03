@@ -494,8 +494,7 @@ void PolarNSProblem<ELEMENT>::output_streamfunction(DocInfo &doc_info,bool eigen
  this->mesh_pt()->get_refinement_pattern(refinement_pattern);
  cout << "Refining streamfunction mesh to same level" << endl;
  stream_problem.actions_before_adapt();
- stream_problem.mesh_pt()->refine_base_mesh(
-  this->communicator_pt(),refinement_pattern);
+ stream_problem.mesh_pt()->refine_base_mesh(refinement_pattern);
  stream_problem.actions_after_adapt();
  cout << "Streamfunction mesh refined to same level" << endl;
  cout << "Number of (streamfunction) equations:" << stream_problem.assign_eqn_numbers() << endl;

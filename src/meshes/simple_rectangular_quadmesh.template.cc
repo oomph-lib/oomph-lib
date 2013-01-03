@@ -28,7 +28,7 @@
 #ifndef OOMPH_SIMPLE_RECTANGULAR_QUADMESH_TEMPLATE_CC
 #define OOMPH_SIMPLE_RECTANGULAR_QUADMESH_TEMPLATE_CC
 
-
+#include "../generic/Qelements.h"
 #include "simple_rectangular_quadmesh.template.h"
 
 
@@ -58,6 +58,8 @@ SimpleRectangularQuadMesh<ELEMENT>::SimpleRectangularQuadMesh(
  const double &Lx, const double &Ly,
  TimeStepper* time_stepper_pt)
 {
+ // Mesh can only be built with 2D Qelements.
+ MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(2);
 
  // Set the internal values
  NX = Nx; 

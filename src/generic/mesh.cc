@@ -1588,10 +1588,8 @@ void Mesh::setup_shared_node_scheme()
   }
 
  // Store number of processors and current process 
- int n_proc=MPI_Helpers::communicator_pt()->nproc(); // hierher use communicator
-                                                     // associated with 
-                                                     // mesh when available
- int my_rank=MPI_Helpers::communicator_pt()->my_rank();
+ int n_proc=Comm_pt->nproc(); 
+ int my_rank=Comm_pt->my_rank();
 
  // Need to clear the shared node scheme first
  Shared_node_pt.clear();
@@ -1753,8 +1751,7 @@ void Mesh::setup_shared_node_scheme()
 /// information can be required, e.g. when synchronising hanging node
 /// schemes over all processors.
 //========================================================================
-void Mesh::synchronise_shared_nodes(OomphCommunicator* comm_pt,
-                                    const bool& report_stats)
+void Mesh::synchronise_shared_nodes(const bool& report_stats)
 {
 
  double t_start=0.0;
@@ -1771,8 +1768,8 @@ void Mesh::synchronise_shared_nodes(OomphCommunicator* comm_pt,
   }
  
  // Storage for current processor and number of processors
- int n_proc=comm_pt->nproc();
- int my_rank=comm_pt->my_rank();
+ int n_proc=Comm_pt->nproc();
+ int my_rank=Comm_pt->my_rank();
 
 
 #ifdef PARANOID
@@ -1893,7 +1890,7 @@ void Mesh::synchronise_shared_nodes(OomphCommunicator* comm_pt,
  
  //Now send numbers of data to be sent between all processors
  MPI_Alltoall(&send_n[0],1,MPI_INT,&receive_n[0],1,MPI_INT,
-              comm_pt->mpi_comm());
+              Comm_pt->mpi_comm());
  
  
  //We now prepare the data to be received
@@ -1922,7 +1919,7 @@ void Mesh::synchronise_shared_nodes(OomphCommunicator* comm_pt,
                &receive_data[0],&receive_n[0],
                &receive_displacement[0],
                MPI_UNSIGNED,
-               comm_pt->mpi_comm());
+               Comm_pt->mpi_comm());
  
  
  if (Global_timings::Doc_comprehensive_timings)
@@ -2123,8 +2120,7 @@ void Mesh::synchronise_shared_nodes(OomphCommunicator* comm_pt,
 //========================================================================
 /// Classify all halo and haloed information in the mesh
 //========================================================================
-void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
-                                          DocInfo& doc_info, 
+void Mesh::classify_halo_and_haloed_nodes(DocInfo& doc_info, 
                                           const bool& report_stats)
 {
 
@@ -2167,8 +2163,8 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
  Haloed_node_pt.clear();
 
  // Storage for number of processors and current processor
- int n_proc=comm_pt->nproc();
- int my_rank=comm_pt->my_rank();
+ int n_proc=Comm_pt->nproc();
+ int my_rank=Comm_pt->my_rank();
  MPI_Status status;
  
  // Determine which processors the nodes are associated with
@@ -2318,11 +2314,11 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
 
 
      // Send the information
-     MPI_Send(&count_data,1,MPI_UNSIGNED,d,0,comm_pt->mpi_comm());
+     MPI_Send(&count_data,1,MPI_UNSIGNED,d,0,Comm_pt->mpi_comm());
      if (count_data!=0)
       {
        MPI_Send(&processors_associated_with_data_on_other_proc[0],count_data,
-                MPI_UNSIGNED,d,1,comm_pt->mpi_comm());   
+                MPI_UNSIGNED,d,1,Comm_pt->mpi_comm());   
       }
     }
    else
@@ -2336,12 +2332,12 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
          Vector<GeneralisedElement*> halo_elem_pt(this->halo_element_pt(dd));
          unsigned n_halo_elem=halo_elem_pt.size();
          unsigned count_data=0;
-         MPI_Recv(&count_data,1,MPI_UNSIGNED,dd,0,comm_pt->mpi_comm(),&status);
+         MPI_Recv(&count_data,1,MPI_UNSIGNED,dd,0,Comm_pt->mpi_comm(),&status);
          if (count_data!=0)
           {
            processors_associated_with_data_on_other_proc.resize(count_data);
            MPI_Recv(&processors_associated_with_data_on_other_proc[0],
-                    count_data,MPI_UNSIGNED,dd,1,comm_pt->mpi_comm(),&status);
+                    count_data,MPI_UNSIGNED,dd,1,Comm_pt->mpi_comm(),&status);
 
            // Reset counter and loop through nodes on halo elements
            count_data=0;
@@ -2690,7 +2686,7 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
  unsigned global_max_n_overlooked_halo=0;
  MPI_Allreduce(&n_overlooked_halo,&global_max_n_overlooked_halo,1,
                MPI_UNSIGNED,MPI_MAX,
-               MPI_Helpers::communicator_pt()->mpi_comm());
+               Comm_pt->mpi_comm());
 
 
  oomph_info << "Global max number of overlooked haloes: " 
@@ -2719,7 +2715,7 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
    
    //Now send numbers of data to be sent between all processors
    MPI_Alltoall(&send_n[0],1,MPI_INT,&receive_n[0],1,MPI_INT,
-                comm_pt->mpi_comm());
+                Comm_pt->mpi_comm());
    
 
 
@@ -2762,7 +2758,7 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
                  &receive_data[0],&receive_n[0],
                  &receive_displacement[0],
                  MPI_INT,
-                 comm_pt->mpi_comm());
+                 Comm_pt->mpi_comm());
 
 
 
@@ -2926,7 +2922,7 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
    
    //Now send numbers of data to be sent between all processors
    MPI_Alltoall(&all_send_n[0],1,MPI_INT,&all_receive_n[0],1,MPI_INT,
-                comm_pt->mpi_comm());   
+                Comm_pt->mpi_comm());   
 
 
 
@@ -2969,7 +2965,7 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
                  &all_receive_data[0],&all_receive_n[0],
                  &all_receive_displacement[0],
                  MPI_INT,
-                 comm_pt->mpi_comm());
+                 Comm_pt->mpi_comm());
 
 
    if (Global_timings::Doc_comprehensive_timings)
@@ -3113,7 +3109,7 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
  //MemoryUsage::doc_memory_usage("before sync halo nodes");
 
   // Synchronise shared nodes
-  synchronise_shared_nodes(comm_pt,report_stats);
+  synchronise_shared_nodes(report_stats);
 
   //MemoryUsage::doc_memory_usage("after sync halo nodes");
 
@@ -3189,7 +3185,7 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
  // where resize_halo_nodes() is called after synchronising hanging nodes.
  if (!Resize_halo_nodes_not_required)
   {
-   resize_halo_nodes(comm_pt);
+   resize_halo_nodes();
   }
 
  //MemoryUsage::doc_memory_usage("after resize halo nodes");
@@ -3218,7 +3214,7 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
 /// halo counterpart (because no FaceElement is attached to the halo
 /// element)
 //=========================================================================
-void Mesh::resize_halo_nodes(OomphCommunicator* comm_pt)
+void Mesh::resize_halo_nodes()
 {
 
 
@@ -3230,183 +3226,188 @@ void Mesh::resize_halo_nodes(OomphCommunicator* comm_pt)
 
  MPI_Status status;
  
- // Storage for current processor and number of processors
- int n_proc=comm_pt->nproc();
- int my_rank=comm_pt->my_rank();
- 
- // Loop over domains on which non-halo counter parts of my halo nodes live
- for (int d=0;d<n_proc;d++)
+ // Nuffink needs to be done if mesh isn't distributed
+ if (Comm_pt!=0)
   {
-   // On current processor: Receive data for my halo nodes with proc d.
-   // Elsewhere: Send haloed data with proc d.
-   if (d==my_rank)
+
+   // Storage for current processor and number of processors
+   int n_proc=Comm_pt->nproc();
+   int my_rank=Comm_pt->my_rank();
+ 
+   // Loop over domains on which non-halo counter parts of my halo nodes live
+   for (int d=0;d<n_proc;d++)
     {
-     // Loop over domains that hold non-halo counterparts of my halo nodes
-     for (int dd=0;dd<n_proc;dd++)
+     // On current processor: Receive data for my halo nodes with proc d.
+     // Elsewhere: Send haloed data with proc d.
+     if (d==my_rank)
       {
-       // Don't talk to yourself
-       if (dd!=d)
+       // Loop over domains that hold non-halo counterparts of my halo nodes
+       for (int dd=0;dd<n_proc;dd++)
         {
-         // How many of my nodes are halo nodes whose non-halo
-         // counterpart is located on processor dd?
-         int nnod_halo=this->nhalo_node(dd);
-         int nnod_ext_halo=this->nexternal_halo_node(dd);
-         if ((nnod_halo+nnod_ext_halo)!=0)
-          {         
-           // Receive from processor dd number of haloed nodes (entry 0),
-           // external haloed nodes (entry 1) and total number of 
-           // unsigneds to be sent below (entry 2)
-           Vector<int> tmp(3);
-           MPI_Recv(&tmp[0],3,MPI_INT,dd,0,comm_pt->mpi_comm(),&status);
+         // Don't talk to yourself
+         if (dd!=d)
+          {
+           // How many of my nodes are halo nodes whose non-halo
+           // counterpart is located on processor dd?
+           int nnod_halo=this->nhalo_node(dd);
+           int nnod_ext_halo=this->nexternal_halo_node(dd);
+           if ((nnod_halo+nnod_ext_halo)!=0)
+            {         
+             // Receive from processor dd number of haloed nodes (entry 0),
+             // external haloed nodes (entry 1) and total number of 
+             // unsigneds to be sent below (entry 2)
+             Vector<int> tmp(3);
+             MPI_Recv(&tmp[0],3,MPI_INT,dd,0,Comm_pt->mpi_comm(),&status);
            
 #ifdef PARANOID
-           // Check that number of halo/haloed nodes match
-           int nnod_haloed=tmp[0];
-           if (nnod_haloed!=nnod_halo)
-            {
-             std::ostringstream error_message;
-             error_message
-              << "Clash in numbers of halo and haloed nodes " 
-              << std::endl;
-             error_message 
-              << " between procs "
-              << dd << " and " << d << ": " 
-              << nnod_haloed << " " << nnod_halo << std::endl;
-             throw OomphLibError(error_message.str(),
-                                 "Mesh::resize_halo_nodes()",
-                                 OOMPH_EXCEPTION_LOCATION);
-            }
-
-           // Check that number of external halo/haloed nodes match
-           int nnod_ext_haloed=tmp[1];
-           if (nnod_ext_haloed!=nnod_ext_halo)
-            {
-             std::ostringstream error_message;
-             error_message
-              << "Clash in numbers of external halo and haloed nodes " 
-              << std::endl;
-             error_message 
-              << " between procs "
-              << dd << " and " << d << ": " 
-              << nnod_ext_haloed << " " << nnod_ext_halo << std::endl;
-             throw OomphLibError(error_message.str(),
-                                 "Mesh::resize_halo_nodes()",
-                                 OOMPH_EXCEPTION_LOCATION);
-            }
-#endif
-           
-           // How many unsigneds are we about to receive
-           unsigned n_rec=tmp[2];
-           
-           // Get strung-together data from other proc
-           Vector<unsigned> unsigned_rec_data(n_rec);
-           MPI_Recv(&unsigned_rec_data[0],n_rec,MPI_UNSIGNED,dd,
-                    0,comm_pt->mpi_comm(),&status);
-           
-           // Step through the flat-packed unsigneds
-           unsigned count=0;
-
-           // Normal and external halo nodes
-           for (unsigned loop=0;loop<2;loop++)
-            {
-             unsigned hi_nod=nnod_halo;
-             if (loop==1)
+             // Check that number of halo/haloed nodes match
+             int nnod_haloed=tmp[0];
+             if (nnod_haloed!=nnod_halo)
               {
-               hi_nod=nnod_ext_halo;
+               std::ostringstream error_message;
+               error_message
+                << "Clash in numbers of halo and haloed nodes " 
+                << std::endl;
+               error_message 
+                << " between procs "
+                << dd << " and " << d << ": " 
+                << nnod_haloed << " " << nnod_halo << std::endl;
+               throw OomphLibError(error_message.str(),
+                                   "Mesh::resize_halo_nodes()",
+                                   OOMPH_EXCEPTION_LOCATION);
               }
-             for (int j=0;j<int(hi_nod);j++)
+
+             // Check that number of external halo/haloed nodes match
+             int nnod_ext_haloed=tmp[1];
+             if (nnod_ext_haloed!=nnod_ext_halo)
               {
-               // Which node are we dealing with
-               Node* nod_pt=0;
-               if (loop==0)
-                {
-                 nod_pt=this->halo_node_pt(dd,j);
-                }
-               else
-                {
-                 nod_pt=this->external_halo_node_pt(dd,j);
-                }
-               
-               // How many values do we have locally?
-               unsigned nval_local=nod_pt->nvalue();
-               
-               // Read number of values on other side
-               unsigned nval_other=unsigned_rec_data[count++];
-               
-               if (nval_local!=nval_other)
-                {
-                 nod_pt->resize(nval_other);
-                }
-               
-               // Read number of entries in resize map
-               unsigned nentry=unsigned_rec_data[count++];
-               if (nentry!=0)
-                {               
-                 // Is current node a boundary node?
-                 BoundaryNodeBase* bnod_pt=
-                  dynamic_cast<BoundaryNodeBase*>(nod_pt);
-#ifdef PARANOID
-                 if (bnod_pt==0)
-                  {                 
-                   throw OomphLibError(
-                    "Failed to cast node to boundary node even though we've received data for boundary node",
-                    "Mesh::resize_halo_nodes()",
-                    OOMPH_EXCEPTION_LOCATION);
-                  }
+               std::ostringstream error_message;
+               error_message
+                << "Clash in numbers of external halo and haloed nodes " 
+                << std::endl;
+               error_message 
+                << " between procs "
+                << dd << " and " << d << ": " 
+                << nnod_ext_haloed << " " << nnod_ext_halo << std::endl;
+               throw OomphLibError(error_message.str(),
+                                   "Mesh::resize_halo_nodes()",
+                                   OOMPH_EXCEPTION_LOCATION);
+              }
 #endif
-                 
-                 // Create storage for map if it doesn't already exist
-                 bool already_existed=true;
-                 if(bnod_pt->
-                    index_of_first_value_assigned_by_face_element_pt()==0)
+           
+             // How many unsigneds are we about to receive
+             unsigned n_rec=tmp[2];
+           
+             // Get strung-together data from other proc
+             Vector<unsigned> unsigned_rec_data(n_rec);
+             MPI_Recv(&unsigned_rec_data[0],n_rec,MPI_UNSIGNED,dd,
+                      0,Comm_pt->mpi_comm(),&status);
+           
+             // Step through the flat-packed unsigneds
+             unsigned count=0;
+
+             // Normal and external halo nodes
+             for (unsigned loop=0;loop<2;loop++)
+              {
+               unsigned hi_nod=nnod_halo;
+               if (loop==1)
+                {
+                 hi_nod=nnod_ext_halo;
+                }
+               for (int j=0;j<int(hi_nod);j++)
+                {
+                 // Which node are we dealing with
+                 Node* nod_pt=0;
+                 if (loop==0)
                   {
-                   bnod_pt->
-                    index_of_first_value_assigned_by_face_element_pt()= 
-                    new std::map<unsigned, unsigned>; 
-                   already_existed=false;
+                   nod_pt=this->halo_node_pt(dd,j);
                   }
-                 
-                 // Get pointer to the map of indices associated with
-                 // additional values created by face elements
-                 std::map<unsigned, unsigned>* map_pt=
-                  bnod_pt->index_of_first_value_assigned_by_face_element_pt();
-                 
-                 // Loop over number of entries in map (as received)
-                 for (unsigned i=0;i<nentry;i++)
+                 else
                   {
-                   // Read out pairs...                
-                   unsigned first_received=unsigned_rec_data[count++];
-                   unsigned second_received=unsigned_rec_data[count++];
-                   
-                   // If it exists check that values are consistent: 
-                   if (already_existed)
-                    {
+                   nod_pt=this->external_halo_node_pt(dd,j);
+                  }
+               
+                 // How many values do we have locally?
+                 unsigned nval_local=nod_pt->nvalue();
+               
+                 // Read number of values on other side
+                 unsigned nval_other=unsigned_rec_data[count++];
+               
+                 if (nval_local!=nval_other)
+                  {
+                   nod_pt->resize(nval_other);
+                  }
+               
+                 // Read number of entries in resize map
+                 unsigned nentry=unsigned_rec_data[count++];
+                 if (nentry!=0)
+                  {               
+                   // Is current node a boundary node?
+                   BoundaryNodeBase* bnod_pt=
+                    dynamic_cast<BoundaryNodeBase*>(nod_pt);
 #ifdef PARANOID
-                     if ((*map_pt)[first_received]!=second_received)
-                      {
-                       std::ostringstream error_message;
-                       error_message
-                        << "Existing map entry for map entry " 
-                        << i << " for node located at ";
-                       unsigned n=nod_pt->ndim();
-                       for (unsigned ii=0;ii<n;ii++)
-                        {
-                         error_message << nod_pt->position(ii) << " ";
-                        }
-                       error_message 
-                        << "Key: " << first_received << " "  
-                        << "Local value: " << (*map_pt)[first_received] << " " 
-                        << "Received value: " << second_received << std::endl;
-                       throw OomphLibError(error_message.str(),
-                                           "Mesh::resize_halo_nodes()",
-                                           OOMPH_EXCEPTION_LOCATION);
-                      }
-#endif
+                   if (bnod_pt==0)
+                    {                 
+                     throw OomphLibError(
+                      "Failed to cast node to boundary node even though we've received data for boundary node",
+                      "Mesh::resize_halo_nodes()",
+                      OOMPH_EXCEPTION_LOCATION);
                     }
-                   // Else assign
-                   else
+#endif
+                 
+                   // Create storage for map if it doesn't already exist
+                   bool already_existed=true;
+                   if(bnod_pt->
+                      index_of_first_value_assigned_by_face_element_pt()==0)
                     {
-                     (*map_pt)[first_received]=second_received;
+                     bnod_pt->
+                      index_of_first_value_assigned_by_face_element_pt()= 
+                      new std::map<unsigned, unsigned>; 
+                     already_existed=false;
+                    }
+                 
+                   // Get pointer to the map of indices associated with
+                   // additional values created by face elements
+                   std::map<unsigned, unsigned>* map_pt=
+                    bnod_pt->index_of_first_value_assigned_by_face_element_pt();
+                 
+                   // Loop over number of entries in map (as received)
+                   for (unsigned i=0;i<nentry;i++)
+                    {
+                     // Read out pairs...                
+                     unsigned first_received=unsigned_rec_data[count++];
+                     unsigned second_received=unsigned_rec_data[count++];
+                   
+                     // If it exists check that values are consistent: 
+                     if (already_existed)
+                      {
+#ifdef PARANOID
+                       if ((*map_pt)[first_received]!=second_received)
+                        {
+                         std::ostringstream error_message;
+                         error_message
+                          << "Existing map entry for map entry " 
+                          << i << " for node located at ";
+                         unsigned n=nod_pt->ndim();
+                         for (unsigned ii=0;ii<n;ii++)
+                          {
+                           error_message << nod_pt->position(ii) << " ";
+                          }
+                         error_message 
+                          << "Key: " << first_received << " "  
+                          << "Local value: " << (*map_pt)[first_received] << " " 
+                          << "Received value: " << second_received << std::endl;
+                         throw OomphLibError(error_message.str(),
+                                             "Mesh::resize_halo_nodes()",
+                                             OOMPH_EXCEPTION_LOCATION);
+                        }
+#endif
+                      }
+                     // Else assign
+                     else
+                      {
+                       (*map_pt)[first_received]=second_received;
+                      }
                     }
                   }
                 }
@@ -3415,98 +3416,98 @@ void Mesh::resize_halo_nodes(OomphCommunicator* comm_pt)
           }
         }
       }
-    }
-   // Send my haloed nodes whose halo counterparts are located on processor d
-   else
-    {
-     // Storage for number of haloed nodes (entry 0), number of external
-     // haloed nodes (entry 1) and total number of unsigneds to be sent below 
-     // (entry 2)
-     Vector<int> tmp(3);
-     int nnod_haloed=this->nhaloed_node(d);
-     tmp[0]=nnod_haloed;
-     int nnod_ext_haloed=this->nexternal_haloed_node(d);
-     tmp[1]=nnod_ext_haloed;
-     if ((nnod_haloed+nnod_ext_haloed)!=0)
-      {     
-       // Now string together the data
-       Vector<unsigned> unsigned_send_data;
+     // Send my haloed nodes whose halo counterparts are located on processor d
+     else
+      {
+       // Storage for number of haloed nodes (entry 0), number of external
+       // haloed nodes (entry 1) and total number of unsigneds to be sent below 
+       // (entry 2)
+       Vector<int> tmp(3);
+       int nnod_haloed=this->nhaloed_node(d);
+       tmp[0]=nnod_haloed;
+       int nnod_ext_haloed=this->nexternal_haloed_node(d);
+       tmp[1]=nnod_ext_haloed;
+       if ((nnod_haloed+nnod_ext_haloed)!=0)
+        {     
+         // Now string together the data
+         Vector<unsigned> unsigned_send_data;
        
-       // Normal and external haloed nodes
-       for (unsigned loop=0;loop<2;loop++)
-        {
-         unsigned hi_nod=nnod_haloed;
-         if (loop==1)
+         // Normal and external haloed nodes
+         for (unsigned loop=0;loop<2;loop++)
           {
-           hi_nod=nnod_ext_haloed;
-          }
-         for (int j=0;j<int(hi_nod);j++)
-          {
-           // Which node are we dealing with?
-           Node* nod_pt=0;
-           if (loop==0)
+           unsigned hi_nod=nnod_haloed;
+           if (loop==1)
             {
-             nod_pt=this->haloed_node_pt(d,j);
+             hi_nod=nnod_ext_haloed;
             }
-           else
+           for (int j=0;j<int(hi_nod);j++)
             {
-             nod_pt=this->external_haloed_node_pt(d,j);
-            }
-           
-           // Add number of values of node
-           unsigned_send_data.push_back(nod_pt->nvalue());
-           
-           // Get pointer to the map of indices associated with
-           // additional values created by face elements
-           
-           // Is it a boundary node?
-           BoundaryNodeBase* bnod_pt=dynamic_cast<BoundaryNodeBase*>(nod_pt);
-           if (bnod_pt==0)
-            {
-             // Not a boundary node -- there are zero map entries to follow
-             unsigned_send_data.push_back(0);
-            }
-           else
-            {           
-             // It's a boundary node: Check if it's been resized
-             std::map<unsigned, unsigned>* map_pt=
-              bnod_pt->index_of_first_value_assigned_by_face_element_pt();
-             
-             // No additional values created -- there are zero map entries 
-             // to follow
-             if (map_pt==0)
+             // Which node are we dealing with?
+             Node* nod_pt=0;
+             if (loop==0)
               {
-               unsigned_send_data.push_back(0);
+               nod_pt=this->haloed_node_pt(d,j);
               }
-             // Created additional values
              else
               {
-               // How many map entries were there
-               unsigned_send_data.push_back(map_pt->size());
-               
-               // Loop over entries in map and add to send data
-               for (std::map<unsigned, unsigned>::iterator p=
-                     map_pt->begin();
-                    p!=map_pt->end();p++)
+               nod_pt=this->external_haloed_node_pt(d,j);
+              }
+           
+             // Add number of values of node
+             unsigned_send_data.push_back(nod_pt->nvalue());
+           
+             // Get pointer to the map of indices associated with
+             // additional values created by face elements
+           
+             // Is it a boundary node?
+             BoundaryNodeBase* bnod_pt=dynamic_cast<BoundaryNodeBase*>(nod_pt);
+             if (bnod_pt==0)
+              {
+               // Not a boundary node -- there are zero map entries to follow
+               unsigned_send_data.push_back(0);
+              }
+             else
+              {           
+               // It's a boundary node: Check if it's been resized
+               std::map<unsigned, unsigned>* map_pt=
+                bnod_pt->index_of_first_value_assigned_by_face_element_pt();
+             
+               // No additional values created -- there are zero map entries 
+               // to follow
+               if (map_pt==0)
                 {
-                 unsigned_send_data.push_back((*p).first);
-                 unsigned_send_data.push_back((*p).second);
+                 unsigned_send_data.push_back(0);
+                }
+               // Created additional values
+               else
+                {
+                 // How many map entries were there
+                 unsigned_send_data.push_back(map_pt->size());
+               
+                 // Loop over entries in map and add to send data
+                 for (std::map<unsigned, unsigned>::iterator p=
+                       map_pt->begin();
+                      p!=map_pt->end();p++)
+                  {
+                   unsigned_send_data.push_back((*p).first);
+                   unsigned_send_data.push_back((*p).second);
+                  }
                 }
               }
             }
           }
+       
+         // How many values are there in total?
+         int n_send=unsigned_send_data.size();
+         tmp[2]=n_send;
+       
+         // Send the counts across to the other processor 
+         MPI_Send(&tmp[0],3,MPI_INT,d,0,Comm_pt->mpi_comm());
+       
+         // Send it across to the processor 
+         MPI_Send(&unsigned_send_data[0],n_send,MPI_UNSIGNED,d,0,
+                  Comm_pt->mpi_comm());
         }
-       
-       // How many values are there in total?
-       int n_send=unsigned_send_data.size();
-       tmp[2]=n_send;
-       
-       // Send the counts across to the other processor 
-       MPI_Send(&tmp[0],3,MPI_INT,d,0,comm_pt->mpi_comm());
-       
-       // Send it across to the processor 
-       MPI_Send(&unsigned_send_data[0],n_send,MPI_UNSIGNED,d,0,
-                comm_pt->mpi_comm());
       }
     }
   }
@@ -3621,14 +3622,13 @@ void Mesh::get_all_halo_data(std::map<unsigned,double*> &map_of_halo_data)
 /// \b Careful: Involves MPI Broadcasts and must therefore
 /// be called on all processors!
 //========================================================================
-void Mesh::get_halo_node_stats(OomphCommunicator* comm_pt,
-                               double& av_number,
+void Mesh::get_halo_node_stats(double& av_number,
                                unsigned& max_number,
                                unsigned& min_number)
 {
  // Storage for number of processors and current processor
- int n_proc=comm_pt->nproc();
- int my_rank=comm_pt->my_rank();
+ int n_proc=Comm_pt->nproc();
+ int my_rank=Comm_pt->my_rank();
 
  // Create vector to hold number of halo nodes
  Vector<int> nhalo_nodes(n_proc);
@@ -3642,7 +3642,7 @@ void Mesh::get_halo_node_stats(OomphCommunicator* comm_pt,
  // the results are to be gathered (in rank order) on root processor.
  MPI_Gather(&nhalo_node_local,1,MPI_INT,
             &nhalo_nodes[0],1, MPI_INT,
-            0,comm_pt->mpi_comm());
+            0,Comm_pt->mpi_comm());
 
  // Initialise stats
  av_number=0.0;
@@ -3662,9 +3662,9 @@ void Mesh::get_halo_node_stats(OomphCommunicator* comm_pt,
   }
 
  // Now broadcast the result back out
- MPI_Bcast(&max,1,MPI_INT,0,comm_pt->mpi_comm());
- MPI_Bcast(&min,1,MPI_INT,0,comm_pt->mpi_comm());
- MPI_Bcast(&av_number,1,MPI_DOUBLE,0,comm_pt->mpi_comm());
+ MPI_Bcast(&max,1,MPI_INT,0,Comm_pt->mpi_comm());
+ MPI_Bcast(&min,1,MPI_INT,0,Comm_pt->mpi_comm());
+ MPI_Bcast(&av_number,1,MPI_DOUBLE,0,Comm_pt->mpi_comm());
  
  max_number=max;
  min_number=min;  
@@ -3677,14 +3677,13 @@ void Mesh::get_halo_node_stats(OomphCommunicator* comm_pt,
 /// \b Careful: Involves MPI Broadcasts and must therefore
 /// be called on all processors!
 //========================================================================
- void  Mesh::get_haloed_node_stats(OomphCommunicator* comm_pt,
-                                   double& av_number,
+ void  Mesh::get_haloed_node_stats(double& av_number,
                                    unsigned& max_number,
                                    unsigned& min_number)
 {
  // Storage for number of processors and current processor
- int n_proc=comm_pt->nproc();
- int my_rank=comm_pt->my_rank();
+ int n_proc=Comm_pt->nproc();
+ int my_rank=Comm_pt->my_rank();
 
  // Create vector to hold number of haloed nodes
  Vector<int> nhaloed_nodes(n_proc);
@@ -3698,7 +3697,7 @@ void Mesh::get_halo_node_stats(OomphCommunicator* comm_pt,
  // the results are to be gathered (in rank order) on root processor.
  MPI_Gather(&nhaloed_node_local,1,MPI_INT,
             &nhaloed_nodes[0],1, MPI_INT,
-            0,comm_pt->mpi_comm());
+            0,Comm_pt->mpi_comm());
 
  // Initialise stats
  av_number=0.0;
@@ -3718,9 +3717,9 @@ void Mesh::get_halo_node_stats(OomphCommunicator* comm_pt,
   }
 
  // Now broadcast the result back out
- MPI_Bcast(&max,1,MPI_INT,0,comm_pt->mpi_comm());
- MPI_Bcast(&min,1,MPI_INT,0,comm_pt->mpi_comm());
- MPI_Bcast(&av_number,1,MPI_DOUBLE,0,comm_pt->mpi_comm());
+ MPI_Bcast(&max,1,MPI_INT,0,Comm_pt->mpi_comm());
+ MPI_Bcast(&min,1,MPI_INT,0,Comm_pt->mpi_comm());
+ MPI_Bcast(&av_number,1,MPI_DOUBLE,0,Comm_pt->mpi_comm());
  
  max_number=max;
  min_number=min;  
@@ -3737,10 +3736,13 @@ void Mesh::get_halo_node_stats(OomphCommunicator* comm_pt,
                        const bool& overrule_keep_as_halo_element_status)
  { 
 
- // Storage for number of processors and current processor
- int n_proc=comm_pt->nproc();
- int my_rank=comm_pt->my_rank();
-
+  // Store communicator
+  Comm_pt=comm_pt;
+  
+  // Storage for number of processors and current processor
+  int n_proc=comm_pt->nproc();
+  int my_rank=comm_pt->my_rank();
+  
  // Storage for number of elements and number of nodes on this mesh
  unsigned nelem=this->nelement();
  unsigned nnod=this->nnode();
@@ -4256,17 +4258,13 @@ void Mesh::get_halo_node_stats(OomphCommunicator* comm_pt,
   }
 
  // Classify nodes 
- classify_halo_and_haloed_nodes(comm_pt,doc_info,report_stats);
+ classify_halo_and_haloed_nodes(doc_info,report_stats);
 
- // Mesh has now been distributed 
- // (required for Z2ErrorEstimator::get_element_errors)
- Mesh_is_distributed=true;
-
- // Doc?
+  // Doc?
  //-----
  if (doc_info.is_doc_enabled())
   {
-   doc_mesh_distribution(comm_pt,doc_info);
+   doc_mesh_distribution(doc_info);
   }
 
 }
@@ -4280,8 +4278,7 @@ void Mesh::get_halo_node_stats(OomphCommunicator* comm_pt,
 /// relative to it will be possible once this function 
 /// has been called.
 //========================================================================
-void Mesh::prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
-                                         Vector<GeneralisedElement*>& 
+void Mesh::prune_halo_elements_and_nodes(Vector<GeneralisedElement*>& 
                                          deleted_element_pt,
                                          DocInfo& doc_info,
                                          const bool& report_stats)
@@ -4302,8 +4299,8 @@ void Mesh::prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
   {
    
    // Storage for number of processors and current processor
-   int n_proc=comm_pt->nproc();
-   int my_rank=comm_pt->my_rank();
+   int n_proc=Comm_pt->nproc();
+   int my_rank=Comm_pt->my_rank();
    
    // Doc stats
    if (report_stats)
@@ -4390,10 +4387,10 @@ void Mesh::prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
    
    MPI_Allreduce(&int_local_min_ref,&int_min_ref,1,
                  MPI_INT,MPI_MIN,
-                 MPI_Helpers::communicator_pt()->mpi_comm());
+                 Comm_pt->mpi_comm());
    MPI_Allreduce(&int_local_max_ref,&int_max_ref,1, 
                  MPI_INT,MPI_MAX, 
-                 MPI_Helpers::communicator_pt()->mpi_comm()); 
+                 Comm_pt->mpi_comm()); 
    
    min_ref=unsigned(int_min_ref);
    max_ref=unsigned(int_max_ref);
@@ -4416,7 +4413,7 @@ void Mesh::prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
    int int_n_ref=0;
    MPI_Allreduce(&local_n_ref,&int_n_ref,1,
                  MPI_INT,MPI_MAX,
-                 comm_pt->mpi_comm());     
+                 Comm_pt->mpi_comm());     
    unsigned n_ref=int(int_n_ref);
    
    
@@ -4484,7 +4481,7 @@ void Mesh::prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
    unsigned n_unif_local=ref_mesh_pt->uniform_refinement_level_when_pruned();
    MPI_Allreduce(&n_unif_local,&n_unif,1, 
                  MPI_UNSIGNED,MPI_MAX, 
-                 MPI_Helpers::communicator_pt()->mpi_comm()); 
+                 Comm_pt->mpi_comm()); 
    ref_mesh_pt->uniform_refinement_level_when_pruned()=n_unif;
    
 
@@ -4593,7 +4590,7 @@ void Mesh::prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
    //MemoryUsage::doc_memory_usage("after setup of retention pattern");
 
    // Make sure everybody finishes this part
-   MPI_Barrier(comm_pt->mpi_comm());
+   MPI_Barrier(Comm_pt->mpi_comm());
 
    // Now all processors have decided (independently) which of their
    // (to-be root) halo elements they wish to retain. Now we need to figure out
@@ -4627,7 +4624,7 @@ void Mesh::prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
            if (nelem!=0)
             {
              MPI_Status status;
-             MPI_Recv(&halo_kept[0],nelem,MPI_INT,dd,0,comm_pt->mpi_comm(),
+             MPI_Recv(&halo_kept[0],nelem,MPI_INT,dd,0,Comm_pt->mpi_comm(),
                       &status);
            
              // Classify haloed element accordingly
@@ -4729,7 +4726,7 @@ void Mesh::prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
              // are to be retained as haloed elements.
              if (nelem!=0)
               {
-               MPI_Send(&halo_kept[0],nelem,MPI_INT,d,0,comm_pt->mpi_comm());
+               MPI_Send(&halo_kept[0],nelem,MPI_INT,d,0,Comm_pt->mpi_comm());
               }
             }
           }
@@ -4951,7 +4948,7 @@ void Mesh::prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
     }
    
    // Classify nodes
-   classify_halo_and_haloed_nodes(comm_pt,doc_info,report_stats);
+   classify_halo_and_haloed_nodes(doc_info,report_stats);
    
    if (Global_timings::Doc_comprehensive_timings)
     {
@@ -4972,7 +4969,7 @@ void Mesh::prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
      oomph_info << "Outputting distribution in "
                 << doc_info.directory() << " " 
                 << doc_info.number() << std::endl;
-     doc_mesh_distribution(comm_pt,doc_info);
+     doc_mesh_distribution(doc_info);
     }
 
    // Finally: Reorder the nodes within the mesh's node vector
@@ -5042,14 +5039,13 @@ void Mesh::prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
 /// elements. Efficieny per processor =  (number of non-halo elements)/
 /// (total number of elements). 
 //========================================================================
-void Mesh::get_efficiency_of_mesh_distribution(OomphCommunicator* comm_pt,
-                                               double& av_efficiency,
+void Mesh::get_efficiency_of_mesh_distribution(double& av_efficiency,
                                                double& max_efficiency,
                                                double& min_efficiency)
 {
  // Storage for number of processors and current processor
- int n_proc=comm_pt->nproc();
- int my_rank=comm_pt->my_rank();
+ int n_proc=Comm_pt->nproc();
+ int my_rank=Comm_pt->my_rank();
 
  // Create vector to hold number of elements and halo elements
  Vector<int> nhalo_elements(n_proc);
@@ -5073,10 +5069,10 @@ void Mesh::get_efficiency_of_mesh_distribution(OomphCommunicator* comm_pt,
  // the results are to be gathered (in rank order) on root processor.
  MPI_Gather(&nhalo_element_local,1,MPI_INT,
             &nhalo_elements[0],1, MPI_INT,
-            0,comm_pt->mpi_comm());
+            0,Comm_pt->mpi_comm());
  MPI_Gather(&n_element_local,1,MPI_INT,
             &n_elements[0],1, MPI_INT,
-            0,comm_pt->mpi_comm());
+            0,Comm_pt->mpi_comm());
 
  // Initialise stats
  av_efficiency=0.0;
@@ -5102,9 +5098,9 @@ void Mesh::get_efficiency_of_mesh_distribution(OomphCommunicator* comm_pt,
   }
 
  // Now broadcast the result back out
- MPI_Bcast(&max,1,MPI_DOUBLE,0,comm_pt->mpi_comm());
- MPI_Bcast(&min,1,MPI_DOUBLE,0,comm_pt->mpi_comm());
- MPI_Bcast(&av_efficiency,1,MPI_DOUBLE,0,comm_pt->mpi_comm());
+ MPI_Bcast(&max,1,MPI_DOUBLE,0,Comm_pt->mpi_comm());
+ MPI_Bcast(&min,1,MPI_DOUBLE,0,Comm_pt->mpi_comm());
+ MPI_Bcast(&av_efficiency,1,MPI_DOUBLE,0,Comm_pt->mpi_comm());
 
  max_efficiency=max;
  min_efficiency=min;
@@ -5116,11 +5112,11 @@ void Mesh::get_efficiency_of_mesh_distribution(OomphCommunicator* comm_pt,
 //========================================================================
 /// Doc the mesh distribution
 //========================================================================
-void Mesh::doc_mesh_distribution(OomphCommunicator* comm_pt,DocInfo& doc_info)
+void Mesh::doc_mesh_distribution(DocInfo& doc_info)
 { 
  // Storage for current processor and number of processors
- int my_rank=comm_pt->my_rank();
- int n_proc=comm_pt->nproc();
+ int my_rank=Comm_pt->my_rank();
+ int n_proc=Comm_pt->nproc();
 
  std::ostringstream filename;
  std::ostringstream filename2;
@@ -5544,7 +5540,7 @@ void Mesh::doc_mesh_distribution(OomphCommunicator* comm_pt,DocInfo& doc_info)
 //========================================================================
 /// Check the halo/haloed/shared node/element schemes on the Mesh
 //========================================================================
-void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
+void Mesh::check_halo_schemes(DocInfo& doc_info,
                               double& max_permitted_error_for_halo_check)
 {
 
@@ -5564,8 +5560,8 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
  std::ofstream ext_haloed_file;
 
  // Storage for current processor and number of processors
- int n_proc=comm_pt->nproc();
- int my_rank=comm_pt->my_rank();
+ int n_proc=Comm_pt->nproc();
+ int my_rank=Comm_pt->my_rank();
 
 
  // Check the shared node scheme first: if this is incorrect then
@@ -5704,7 +5700,7 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
            // Receive from processor dd how many of his nodes are shared
            // with this processor
            int nnod_share=0;
-           MPI_Recv(&nnod_share,1, MPI_INT,dd,0,comm_pt->mpi_comm(),&status);
+           MPI_Recv(&nnod_share,1, MPI_INT,dd,0,Comm_pt->mpi_comm(),&status);
          
            if (nnod_shared!=nnod_share)
             {
@@ -5735,7 +5731,7 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
            // Get strung-together nodal positions from other processor
            Vector<double> other_nodal_positions(nod_dim*nnod_share);
            MPI_Recv(&other_nodal_positions[0],nod_dim*nnod_share,MPI_DOUBLE,dd,
-                    0,comm_pt->mpi_comm(),&status);
+                    0,Comm_pt->mpi_comm(),&status);
 
            // Check
            unsigned count=0;
@@ -5800,7 +5796,7 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
      if (nnod_share!=0)
       {
        // Send it across to the processor whose shared nodes are being checked
-       MPI_Send(&nnod_share,1,MPI_INT,d,0,comm_pt->mpi_comm());
+       MPI_Send(&nnod_share,1,MPI_INT,d,0,Comm_pt->mpi_comm());
 
        unsigned nod_dim=finite_element_pt(0)->node_pt(0)->ndim();
          
@@ -5817,7 +5813,7 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
         }
        // Send it across to the processor whose shared nodes are being checked
        MPI_Send(&nodal_positions[0],nod_dim*nnod_share,MPI_DOUBLE,d,0,
-                comm_pt->mpi_comm());
+                Comm_pt->mpi_comm());
       }
     }
   }
@@ -5833,7 +5829,7 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
    error_message
     << "If you believe this to be acceptable for your problem\n"
     << "increase Problem::Max_permitted_error_for_halo_check and re-run \n";
-   MPI_Barrier(comm_pt->mpi_comm());
+   MPI_Barrier(Comm_pt->mpi_comm());
    throw OomphLibError(error_message.str(),
                        "Mesh::check_halo_schemes()",
                        OOMPH_EXCEPTION_LOCATION);
@@ -5988,7 +5984,7 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
            // Receive from processor dd how many of his elements are halo
            // nodes whose non-halo counterparts are located here
            int nelem_halo=0;
-           MPI_Recv(&nelem_halo,1,MPI_INT,dd,0,comm_pt->mpi_comm(),&status);
+           MPI_Recv(&nelem_halo,1,MPI_INT,dd,0,Comm_pt->mpi_comm(),&status);
            if (nelem_halo!=nelem_haloed)
             {
              std::ostringstream error_message;
@@ -6028,12 +6024,12 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
              //         MPI_DOUBLE,dd,0,comm_pt->mpi_comm(),&status);
              unsigned n_nodal_positions=0;
              MPI_Recv(&n_nodal_positions,1,
-                      MPI_UNSIGNED,dd,0,comm_pt->mpi_comm(),&status);
+                      MPI_UNSIGNED,dd,0,Comm_pt->mpi_comm(),&status);
              Vector<double> other_nodal_positions(n_nodal_positions);
              if (n_nodal_positions>0)
               {
                MPI_Recv(&other_nodal_positions[0],n_nodal_positions,
-                        MPI_DOUBLE,dd,0,comm_pt->mpi_comm(),&status);
+                        MPI_DOUBLE,dd,0,Comm_pt->mpi_comm(),&status);
               }
 
 
@@ -6042,13 +6038,13 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
              unsigned n_other_nodal_hangings=0;
              MPI_Recv(&n_other_nodal_hangings,1,
                       MPI_UNSIGNED,dd,
-                      1,comm_pt->mpi_comm(),&status);
+                      1,Comm_pt->mpi_comm(),&status);
              if (n_other_nodal_hangings>0)
               {
                other_nodal_hangings.resize(n_other_nodal_hangings);
                MPI_Recv(&other_nodal_hangings[0],n_other_nodal_hangings,
                         MPI_INT,dd,
-                        1,comm_pt->mpi_comm(),&status);
+                        1,Comm_pt->mpi_comm(),&status);
               }
 
              //If documenting, open the output files
@@ -6285,7 +6281,7 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
      if (nelem_halo!=0)
       {          
        // Send it across to the processor whose haloed nodes are being checked
-       MPI_Send(&nelem_halo,1,MPI_UNSIGNED,d,0,comm_pt->mpi_comm());
+       MPI_Send(&nelem_halo,1,MPI_UNSIGNED,d,0,Comm_pt->mpi_comm());
 
        //Only bother if the mesh consists of finite elements
        if(dynamic_cast<FiniteElement*>(this->element_pt(0)))
@@ -6369,18 +6365,18 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
          //MPI_Send(&nodal_positions[0],nod_dim*nnod_per_el*nelem_halo,
          //         MPI_DOUBLE,d,0,comm_pt->mpi_comm());
          MPI_Send(&n_nodal_positions,1,
-                  MPI_UNSIGNED,d,0,comm_pt->mpi_comm());
+                  MPI_UNSIGNED,d,0,Comm_pt->mpi_comm());
          if (n_nodal_positions>0)
           {
            MPI_Send(&nodal_positions[0],n_nodal_positions,
-                    MPI_DOUBLE,d,0,comm_pt->mpi_comm());
+                    MPI_DOUBLE,d,0,Comm_pt->mpi_comm());
           }
          MPI_Send(&n_nodal_hangings,1,
-                  MPI_UNSIGNED,d,1,comm_pt->mpi_comm());
+                  MPI_UNSIGNED,d,1,Comm_pt->mpi_comm());
          if (n_nodal_hangings>0)
           {
            MPI_Send(&nodal_hangings[0], n_nodal_hangings,
-                    MPI_INT,d,1,comm_pt->mpi_comm());
+                    MPI_INT,d,1,Comm_pt->mpi_comm());
           }
         }
       }
@@ -6539,7 +6535,7 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
            // Receive from processor dd how many of his nodes are halo
            // nodes whose non-halo counterparts are located here
            int nnod_halo=0;
-           MPI_Recv(&nnod_halo,1,MPI_INT,dd,0,comm_pt->mpi_comm(),&status);
+           MPI_Recv(&nnod_halo,1,MPI_INT,dd,0,Comm_pt->mpi_comm(),&status);
          
            if (nnod_haloed!=nnod_halo)
             {
@@ -6570,7 +6566,7 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
            // Get strung-together nodal positions from other processor
            Vector<double> other_nodal_positions(nod_dim*nnod_halo);
            MPI_Recv(&other_nodal_positions[0],nod_dim*nnod_halo,MPI_DOUBLE,dd,
-                    0,comm_pt->mpi_comm(),&status);
+                    0,Comm_pt->mpi_comm(),&status);
 
            // Check
            unsigned count=0;
@@ -6611,7 +6607,7 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
      if (nnod_halo!=0)
       {     
        // Send it across to the processor whose haloed nodes are being checked
-       MPI_Send(&nnod_halo,1,MPI_INT,d,0,comm_pt->mpi_comm());
+       MPI_Send(&nnod_halo,1,MPI_INT,d,0,Comm_pt->mpi_comm());
 
        unsigned nod_dim=finite_element_pt(0)->node_pt(0)->ndim();
          
@@ -6628,7 +6624,7 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
         }
        // Send it across to the processor whose haloed nodes are being checked
        MPI_Send(&nodal_positions[0],nod_dim*nnod_halo,MPI_DOUBLE,d,0,
-                comm_pt->mpi_comm());
+                Comm_pt->mpi_comm());
       }
     }
   }
@@ -6800,7 +6796,7 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
            // Receive from processor dd how many of his elements are halo
            // nodes whose non-halo counterparts are located here
            int nelem_halo=0;
-           MPI_Recv(&nelem_halo,1,MPI_INT,dd,0,comm_pt->mpi_comm(),&status);
+           MPI_Recv(&nelem_halo,1,MPI_INT,dd,0,Comm_pt->mpi_comm(),&status);
            if (nelem_halo!=nelem_haloed)
             {
              std::ostringstream error_message;
@@ -6838,12 +6834,12 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
              //         MPI_DOUBLE,dd,0,comm_pt->mpi_comm(),&status);
              unsigned n_nodal_positions=0;
              MPI_Recv(&n_nodal_positions,1,
-                      MPI_UNSIGNED,dd,0,comm_pt->mpi_comm(),&status);
+                      MPI_UNSIGNED,dd,0,Comm_pt->mpi_comm(),&status);
              Vector<double> other_nodal_positions(n_nodal_positions);
              if (n_nodal_positions>0)
               {
                MPI_Recv(&other_nodal_positions[0],n_nodal_positions,
-                        MPI_DOUBLE,dd,0,comm_pt->mpi_comm(),&status);
+                        MPI_DOUBLE,dd,0,Comm_pt->mpi_comm(),&status);
               }
 
 
@@ -6852,13 +6848,13 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
              unsigned n_other_nodal_hangings=0;
              MPI_Recv(&n_other_nodal_hangings,1,
                       MPI_UNSIGNED,dd,
-                      1,comm_pt->mpi_comm(),&status);
+                      1,Comm_pt->mpi_comm(),&status);
              if (n_other_nodal_hangings>0)
               {
                other_nodal_hangings.resize(n_other_nodal_hangings);
                MPI_Recv(&other_nodal_hangings[0],n_other_nodal_hangings,
                         MPI_INT,dd,
-                        1,comm_pt->mpi_comm(),&status);
+                        1,Comm_pt->mpi_comm(),&status);
               }
 
              //If documenting, open the output files
@@ -7094,8 +7090,9 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
      
      if (nelem_halo!=0)
       {          
-       // Send it across to the processor whose external haloed nodes are being checked
-       MPI_Send(&nelem_halo,1,MPI_UNSIGNED,d,0,comm_pt->mpi_comm());
+       // Send it across to the processor whose external haloed nodes 
+       // are being checked
+       MPI_Send(&nelem_halo,1,MPI_UNSIGNED,d,0,Comm_pt->mpi_comm());
 
        //Only bother if the mesh consists of finite elements
        FiniteElement* fe_pt=dynamic_cast<FiniteElement*>(ext_halo_elem_pt[0]);
@@ -7158,18 +7155,18 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
          //MPI_Send(&nodal_positions[0],nod_dim*nnod_per_el*nelem_halo,
          //         MPI_DOUBLE,d,0,comm_pt->mpi_comm());
          MPI_Send(&n_nodal_positions,1,
-                  MPI_UNSIGNED,d,0,comm_pt->mpi_comm());
+                  MPI_UNSIGNED,d,0,Comm_pt->mpi_comm());
          if (n_nodal_positions>0)
           {
            MPI_Send(&nodal_positions[0], n_nodal_positions,
-                    MPI_DOUBLE,d,0,comm_pt->mpi_comm());
+                    MPI_DOUBLE,d,0,Comm_pt->mpi_comm());
           }
          MPI_Send(&n_nodal_hangings,1,
-                  MPI_UNSIGNED,d,1,comm_pt->mpi_comm());
+                  MPI_UNSIGNED,d,1,Comm_pt->mpi_comm());
          if (n_nodal_hangings>0)
           {
            MPI_Send(&nodal_hangings[0], n_nodal_hangings,
-                    MPI_INT,d,1,comm_pt->mpi_comm());
+                    MPI_INT,d,1,Comm_pt->mpi_comm());
           }
         }
       }
@@ -7222,13 +7219,12 @@ void Mesh::null_external_halo_node(const unsigned& p, Node* nod_pt)
  /// Consolidate external halo node storage by removing nulled out
  /// pointes in external halo and haloed schemes
 //========================================================================
-void Mesh::remove_null_pointers_from_external_halo_node_storage(
- OomphCommunicator* comm_pt)
+void Mesh::remove_null_pointers_from_external_halo_node_storage()
 {
 
  // Storage for number of processors and current processor
- int n_proc=comm_pt->nproc();
- int my_rank=comm_pt->my_rank();
+ int n_proc=Comm_pt->nproc();
+ int my_rank=Comm_pt->my_rank();
  
  // Loop over all (other) processors and store index of any nulled-out
  // external halo nodes in storage scheme.
@@ -7296,7 +7292,7 @@ void Mesh::remove_null_pointers_from_external_halo_node_storage(
    
  //Now send numbers of data to be sent between all processors
  MPI_Alltoall(&send_n[0],1,MPI_INT,&receive_n[0],1,MPI_INT,
-              comm_pt->mpi_comm());
+              Comm_pt->mpi_comm());
    
 
  //We now prepare the data to be received
@@ -7325,7 +7321,7 @@ void Mesh::remove_null_pointers_from_external_halo_node_storage(
                &receive_data[0],&receive_n[0],
                &receive_displacement[0],
                MPI_INT,
-               comm_pt->mpi_comm());
+               Comm_pt->mpi_comm());
 
  //Now use the received data 
  for (int send_rank=0;send_rank<n_proc;send_rank++)
@@ -7392,145 +7388,139 @@ void Mesh::remove_null_pointers_from_external_halo_node_storage(
 /// \b Careful: Involves MPI Broadcasts and must therefore be called on all
 /// processors!
 // =================================================================
-unsigned Mesh::ndof_types(const OomphCommunicator* const comm_pt) const
+unsigned Mesh::ndof_types() const
 {
-
-  // Remains -1 if we don't have any elements on this processor.
-  int ndof_types = -1;
-  if (nelement() > 0)
-    {
-      ndof_types = element_pt(0)->ndof_types();
+ 
+ // Remains -1 if we don't have any elements on this processor.
+ int int_ndof_types = -1;
+ if (nelement() > 0)
+  {
+   int_ndof_types = element_pt(0)->ndof_types();
 #ifdef PARANOID
-      // Check that every element in this mesh has the same number of
-      // types of DOF.
-      for (unsigned i = 1; i < nelement(); i++)
-	{
-	  if (ndof_types != int(element_pt(i)->ndof_types()) )
-	    {
-	      std::ostringstream error_message;
-	      error_message
-		<< "Every element in the mesh must have the same number of "
-		<< "types of DOF for ndof_types() to work\n"
-		<< "Element 0 has " << ndof_types << " DOF types\n"
-		<< "Element " << i << " has "
-		<< element_pt(i)->ndof_types() << " DOF types";
-	      throw OomphLibError(error_message.str(),
-				  "Mesh::ndof_types",
-				  OOMPH_EXCEPTION_LOCATION);
-	    }
-	}
-#endif
+   // Check that every element in this mesh has the same number of
+   // types of DOF.
+   for (unsigned i = 1; i < nelement(); i++)
+    {
+     if (int_ndof_types != int(element_pt(i)->ndof_types()) )
+      {
+       std::ostringstream error_message;
+       error_message
+        << "Every element in the mesh must have the same number of "
+        << "types of DOF for ndof_types() to work\n"
+        << "Element 0 has " << int_ndof_types << " DOF types\n"
+        << "Element " << i << " has "
+        << element_pt(i)->ndof_types() << " DOF types";
+       throw OomphLibError(error_message.str(),
+                           "Mesh::ndof_types",
+                           OOMPH_EXCEPTION_LOCATION);
+      }
     }
-
+#endif
+  }
+ 
 #ifdef OOMPH_HAS_MPI
-
-  // If we are using MPI then check the comm_pt was assigned
-  if(comm_pt == 0)
+ 
+ // If mesh is distributed
+ if (Comm_pt != 0)
+  {
+   // if more than one processor then
+   // + ensure number of DOFs is consistent on each processor (PARANOID)
+   // + ensure processors with no elements in this mesh have the
+   //   correct number of DOF types
+   if (Comm_pt->nproc() > 1)
     {
-      std::ostringstream error_message;
-      error_message
-	<< "If MPI is in use a communicator pointer must be provided.";
-      throw OomphLibError(error_message.str(),
-			  "Mesh::ndof_types",
-			  OOMPH_EXCEPTION_LOCATION);
-    }
-
-  // if more than one processor then
-  // + ensure number of DOFs is consistent on each processor (PARANOID)
-  // + ensure processors with no elements in this mesh have the
-  //   correct number of DOF types
-  if (comm_pt->nproc() > 1)
-    {
-      unsigned nproc = comm_pt->nproc();
-      unsigned my_rank = comm_pt->my_rank();
-
-      // Collect on root the number of dofs types determined independently
-      // on all processors (-1 indicates that the processor didn't have
-      // any elements and therefore doesn't know!)
-      int* ndof_types_recv = 0;
-      if (my_rank == 0)
-	{
-	  ndof_types_recv = new int[nproc];
-	}
-
-      MPI_Gather(&ndof_types,1,MPI_INT,
-		 ndof_types_recv,1,MPI_INT,0,
-		 comm_pt->mpi_comm());
-
-      // Root: Update own number of dof types, check consistency amongst
-      // all processors (in paranoid mode) and send out the actual
-      // number of dof types to those processors who couldn't figure this
-      // out themselves
-      if (my_rank == 0)
-	{
-	  // Check number of types of all non-root processors
-	  for (unsigned p = 1; p < nproc; p++)
-	    {
-	      if (ndof_types_recv[p] != -1)
-		{
-		  // Processor p was able to figure out how many
-		  // dof types there are, so I root can update
-		  // its own (if required)
-		  if (ndof_types == -1)
-		    {
-		      ndof_types = ndof_types_recv[p];
-		    }
+     unsigned nproc = Comm_pt->nproc();
+     unsigned my_rank = Comm_pt->my_rank();
+     
+     // Collect on root the number of dofs types determined independently
+     // on all processors (-1 indicates that the processor didn't have
+     // any elements and therefore doesn't know!)
+     int* ndof_types_recv = 0;
+     if (my_rank == 0)
+      {
+       ndof_types_recv = new int[nproc];
+      }
+     
+     MPI_Gather(&int_ndof_types,1,MPI_INT,
+                ndof_types_recv,1,MPI_INT,0,
+                Comm_pt->mpi_comm());
+     
+     // Root: Update own number of dof types, check consistency amongst
+     // all processors (in paranoid mode) and send out the actual
+     // number of dof types to those processors who couldn't figure this
+     // out themselves
+     if (my_rank == 0)
+      {
+       // Check number of types of all non-root processors
+       for (unsigned p = 1; p < nproc; p++)
+        {
+         if (ndof_types_recv[p] != -1)
+          {
+           // Processor p was able to figure out how many
+           // dof types there are, so I root can update
+           // its own (if required)
+           if (int_ndof_types == -1)
+            {
+             int_ndof_types = ndof_types_recv[p];
+            }
 #ifdef PARANOID
-		  // Check consistency
-		  else if (ndof_types != ndof_types_recv[p])
-		    {
-		      std::ostringstream error_message;
-		      error_message
-			<< "The elements in this mesh must have the same number "
-			<< "of types of DOF on each processor";
-		      for (unsigned p = 0; p < nproc; p++)
-			{
-			  if (ndof_types_recv[p] != -1)
-			    {
-			      error_message << "Processor " << p << " : "
-					    << ndof_types_recv[p] << "\n";
-			    }
-			  else
-			    {
-			      error_message << "Processor " << p << " : (no elements)\n";
-			    }
-			}
-		      throw OomphLibError(error_message.str(),
-					  "BlockPreconditioner::set_mesh(...)",
-					  OOMPH_EXCEPTION_LOCATION);
-		    }
+           // Check consistency
+           else if (int_ndof_types != ndof_types_recv[p])
+            {
+             std::ostringstream error_message;
+             error_message
+              << "The elements in this mesh must have the same number "
+              << "of types of DOF on each processor";
+             for (unsigned p = 0; p < nproc; p++)
+              {
+               if (ndof_types_recv[p] != -1)
+                {
+                 error_message << "Processor " << p << " : "
+                               << ndof_types_recv[p] << "\n";
+                }
+               else
+                {
+                 error_message << "Processor " << p << " : (no elements)\n";
+                }
+              }
+             throw OomphLibError(error_message.str(),
+                                 "BlockPreconditioner::set_mesh(...)",
+                                 OOMPH_EXCEPTION_LOCATION);
+            }
 #endif
-		}
-	    }
-
-	  // Now send ndof types to non-root processors that don't have it
-	  for (unsigned p = 1; p < nproc; p++)
-	    {
-	      if (ndof_types_recv[p] == -1)
-		{
-		  MPI_Send(&ndof_types,1,MPI_INT,p,0,
-			   comm_pt->mpi_comm());
-		}
-	    }
-	  // clean up
-	  delete[] ndof_types_recv;
-	}
-      // "else if": "else" for non-root; "if" for checking if current
-      // (non-root) processor does not know ndof type and is therefore
-      // about to receive it from root.
-      else if (ndof_types == -1)
-	{
-	  MPI_Recv(&ndof_types,1,MPI_INT,0,0,
-		   comm_pt->mpi_comm(),MPI_STATUS_IGNORE);
-	}
+          }
+        }
+       
+       // Now send ndof types to non-root processors that don't have it
+       for (unsigned p = 1; p < nproc; p++)
+        {
+         if (ndof_types_recv[p] == -1)
+          {
+           MPI_Send(&int_ndof_types,1,MPI_INT,p,0,
+                    Comm_pt->mpi_comm());
+          }
+        }
+       // clean up
+       delete[] ndof_types_recv;
+      }
+     // "else if": "else" for non-root; "if" for checking if current
+     // (non-root) processor does not know ndof type and is therefore
+     // about to receive it from root.
+     else if (int_ndof_types == -1)
+      {
+       MPI_Recv(&int_ndof_types,1,MPI_INT,0,0,
+                Comm_pt->mpi_comm(),MPI_STATUS_IGNORE);
+      }
     }
+  }
 #endif
-
-  // If ndof_types if still -1 then no elements were found for this mesh, so it
-  // has no dofs.
-  if(ndof_types == -1) ndof_types = 0;
-
-  return unsigned(ndof_types);
+ 
+ // If int_ndof_types if still -1 then no elements were found for this mesh, so it
+ // has no dofs.
+ if (int_ndof_types == -1) int_ndof_types = 0; 
+ 
+ return unsigned(int_ndof_types);
+ 
 }
 
 
@@ -7544,7 +7534,7 @@ void Mesh::delete_all_external_storage()
 #ifdef OOMPH_HAS_MPI
 
  //Only do for distributed meshes
- if(Mesh_is_distributed)
+ if(Comm_pt!=0)
   {
 
    //BENFLAG: Some of the external halo/haloed nodes are masters of nodes
@@ -7575,7 +7565,7 @@ void Mesh::delete_all_external_storage()
   
            //Loop over external halo storage with all processors
            bool found_this_master_in_external_halo_storage = false;
-           for(int d=0; d<MPI_Helpers::communicator_pt()->nproc(); d++)
+           for(int d=0; d<Comm_pt->nproc(); d++)
             {
              //Find master in map of external halo nodes
              it = std::find(External_halo_node_pt[d].begin(),

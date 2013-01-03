@@ -100,12 +100,12 @@ namespace oomph
 /// Multi_domain_functions:N{x,y,z}_bin.
 //========================================================================
  void MeshAsGeomObject::construct_it
- (Mesh* const &mesh_pt, OomphCommunicator* comm_pt,
+ (Mesh* const &mesh_pt,
   const bool& compute_extreme_bin_coords)
  {
 #ifdef OOMPH_HAS_MPI
    // Set communicator
-   Communicator_pt=comm_pt;
+  Communicator_pt=mesh_pt->communicator_pt();
 #endif
 
   //Storage for the Lagrangian and Eulerian dimension
@@ -130,12 +130,12 @@ namespace oomph
     //Need a non-null communicator
     if(Communicator_pt!=0)
      {
-      int n_proc=comm_pt->nproc();
+      int n_proc=Communicator_pt->nproc();
       if (n_proc > 1)
        {
         int dim_reduce[2];
         MPI_Allreduce(&dim,&dim_reduce,2,MPI_INT,
-                      MPI_MAX,comm_pt->mpi_comm());
+                      MPI_MAX,Communicator_pt->mpi_comm());
         
         dim[0] = dim_reduce[0]; 
         dim[1] = dim_reduce[1];
@@ -160,7 +160,7 @@ namespace oomph
    for(unsigned e=0;e<n_sub_object;e++)
     {
 
-     // (Try to) cast to a finite elemnet:
+     // (Try to) cast to a finite element:
      Sub_geom_object_pt[e]=
       dynamic_cast<FiniteElement*>(mesh_pt->element_pt(e));
 
@@ -196,19 +196,6 @@ namespace oomph
      Geom_data_pt[count]=*it;
      count++;
     }
-
-   // if (n_sub_object==1)
-   //  {
-   //   if (Multi_domain_functions::Nx_bin*
-   //       Multi_domain_functions::Ny_bin*
-   //       Multi_domain_functions::Nz_bin!=1)
-   //    {
-   //     oomph_info << "hierher SHITE Would have triggered " 
-   //                << Multi_domain_functions::Nx_bin << " " 
-   //                << Multi_domain_functions::Ny_bin << " " 
-   //                << Multi_domain_functions::Nz_bin << "\n";
-   //    }
-   //  }
 
    // Set storage for minimum and maximum coordinates
    const unsigned dim_lagrangian = this->nlagrangian();

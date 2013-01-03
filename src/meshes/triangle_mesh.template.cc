@@ -47,320 +47,323 @@ namespace oomph
   void
   TriangleMesh<ELEMENT>::build_from_scaffold(TimeStepper* time_stepper_pt,
     const bool &use_attributes)
-  {
-   // Create space for elements
-   unsigned nelem = Tmp_mesh_pt->nelement();
-   Element_pt.resize(nelem);
+ {
+  // Mesh can only be built with 2D Telements.
+  MeshChecker::assert_geometric_element<TElementGeometricBase,ELEMENT>(2);
+  
+  // Create space for elements
+  unsigned nelem = Tmp_mesh_pt->nelement();
+  Element_pt.resize(nelem);
+  
+  // Create space for nodes
+  unsigned nnode_scaffold = Tmp_mesh_pt->nnode();
+  
+  // Create a map storing the node_id of the mesh used to update the
+  // node position in the update_triangulateio function
+  std::map<Node*, unsigned> old_global_number;
+  
+  // Store the TriangulateIO node id
+  for (unsigned inod = 0; inod < nnode_scaffold; inod++)
+   {
+    Node* old_node_pt = Tmp_mesh_pt->node_pt(inod);
+    old_global_number[old_node_pt] = inod;
+   }
+  
+  // Initialize the old node id vector
+  Oomph_vertex_nodes_id.resize(nnode_scaffold);
+  
+  // Create space for nodes
+  Node_pt.resize(nnode_scaffold, 0);
+  
+  // Set number of boundaries
+  unsigned nbound = Tmp_mesh_pt->nboundary();
+  
+  // Resize the boundary information
+  set_nboundary(nbound);
+  Boundary_element_pt.resize(nbound);
+  Face_index_at_boundary.resize(nbound);
+  
+  //If we have different regions, then resize the region
+  //information
+  if (use_attributes)
+   {
+    Boundary_region_element_pt.resize(nbound);
+    Face_index_region_at_boundary.resize(nbound);
+   }
 
-   // Create space for nodes
-   unsigned nnode_scaffold = Tmp_mesh_pt->nnode();
+  // Loop over elements in scaffold mesh, visit their nodes
+  for (unsigned e = 0; e < nelem; e++)
+   {
+    Element_pt[e] = new ELEMENT;
+   }
+  
+  //Number of nodes per element from the scaffold mesh
+  unsigned nnod_el = Tmp_mesh_pt->finite_element_pt(0)->nnode();
+  
+  // Setup map to check the (pseudo-)global node number
+  // Nodes whose number is zero haven't been copied across
+  // into the mesh yet.
+  std::map<Node*, unsigned> global_number;
+  unsigned global_count = 0;
+  
+  // Map of Element attribute pairs
+  std::map<double, Vector<FiniteElement*> > element_attribute_map;
+  
+  // Loop over elements in scaffold mesh, visit their nodes
+  for (unsigned e = 0; e < nelem; e++)
+   {
+    // Loop over all nodes in element
+    for (unsigned j = 0; j < nnod_el; j++)
+     {
+      // Pointer to node in the scaffold mesh
+      Node* scaffold_node_pt = Tmp_mesh_pt->finite_element_pt(e)->node_pt(j);
 
-   // Create a map storing the node_id of the mesh used to update the
-   // node position in the update_triangulateio function
-   std::map<Node*, unsigned> old_global_number;
+      // Get the (pseudo-)global node number in scaffold mesh
+      // (It's zero [=default] if not visited this one yet)
+      unsigned j_global = global_number[scaffold_node_pt];
 
-   // Store the TriangulateIO node id
-   for (unsigned inod = 0; inod < nnode_scaffold; inod++)
-    {
-     Node* old_node_pt = Tmp_mesh_pt->node_pt(inod);
-     old_global_number[old_node_pt] = inod;
-    }
+      // Haven't done this one yet
+      if (j_global == 0)
+       {
+        // Find and store the node_id in the old nodes map
+        Oomph_vertex_nodes_id[global_count] =
+         old_global_number[scaffold_node_pt];
 
-   // Initialize the old node id vector
-   Oomph_vertex_nodes_id.resize(nnode_scaffold);
+        // Get pointer to set of mesh boundaries that this
+        // scaffold node occupies; NULL if the node is not on any boundary
+        std::set<unsigned>* boundaries_pt;
+        scaffold_node_pt->get_boundaries_pt(boundaries_pt);
 
-   // Create space for nodes
-   Node_pt.resize(nnode_scaffold, 0);
+        //Storage for the new node
+        Node* new_node_pt = 0;
 
-   // Set number of boundaries
-   unsigned nbound = Tmp_mesh_pt->nboundary();
+        //Is it on boundaries
+        if (boundaries_pt != 0)
+         {
+          //Create new boundary node
+          new_node_pt = finite_element_pt(e)-> construct_boundary_node(j,
+                                                                       time_stepper_pt);
 
-   // Resize the boundary information
-   set_nboundary(nbound);
-   Boundary_element_pt.resize(nbound);
-   Face_index_at_boundary.resize(nbound);
+          // Add to boundaries
+          for (std::set<unsigned>::iterator it = boundaries_pt->begin(); it
+                != boundaries_pt->end(); ++it)
+           {
+            add_boundary_node(*it, new_node_pt);
+           }
+         }
+        //Build normal node
+        else
+         {
+          //Create new normal node
+          new_node_pt = finite_element_pt(e)-> construct_node(j,
+                                                              time_stepper_pt);
+         }
 
-   //If we have different regions, then resize the region
-   //information
-   if (use_attributes)
-    {
-     Boundary_region_element_pt.resize(nbound);
-     Face_index_region_at_boundary.resize(nbound);
-    }
+        // Give it a number (not necessarily the global node
+        // number in the scaffold mesh -- we just need something
+        // to keep track...)
+        global_count++;
+        global_number[scaffold_node_pt] = global_count;
 
-   // Loop over elements in scaffold mesh, visit their nodes
-   for (unsigned e = 0; e < nelem; e++)
-    {
-     Element_pt[e] = new ELEMENT;
-    }
+        // Copy new node, created using the NEW element's construct_node
+        // function into global storage, using the same global
+        // node number that we've just associated with the
+        // corresponding node in the scaffold mesh
+        Node_pt[global_count - 1] = new_node_pt;
 
-   //Number of nodes per element from the scaffold mesh
-   unsigned nnod_el = Tmp_mesh_pt->finite_element_pt(0)->nnode();
+        // Assign coordinates
+        for (unsigned i = 0; i < finite_element_pt(e)->dim(); i++)
+         {
+          new_node_pt->x(i) = scaffold_node_pt->x(i);
+         }
+       }
+      // This one has already been done: Copy accross
+      else
+       {
+        finite_element_pt(e)->node_pt(j) = Node_pt[j_global - 1];
+       }
+     }
 
-   // Setup map to check the (pseudo-)global node number
-   // Nodes whose number is zero haven't been copied across
-   // into the mesh yet.
-   std::map<Node*, unsigned> global_number;
-   unsigned global_count = 0;
+    if (use_attributes)
+     {
+      element_attribute_map[Tmp_mesh_pt->element_attribute(e)].push_back(
+       finite_element_pt(e));
+     }
+   }
 
-   // Map of Element attribute pairs
-   std::map<double, Vector<FiniteElement*> > element_attribute_map;
+  //Now let's construct lists
+  //Find the number of attributes
+  if (use_attributes)
+   {
+    unsigned n_attribute = element_attribute_map.size();
+    //There are n_attribute different regions
+    Region_attribute.resize(n_attribute);
+    //Copy the vectors in the map over to our internal storage
+    unsigned count = 0;
+    for (std::map<double, Vector<FiniteElement*> >::iterator it =
+          element_attribute_map.begin(); it != element_attribute_map.end(); ++it)
+     {
+      Region_attribute[count] = it->first;
+      Region_element_pt[static_cast<unsigned>(Region_attribute[count])] = 
+       it->second;
+      ++count;
+     }
+   }
 
-   // Loop over elements in scaffold mesh, visit their nodes
-   for (unsigned e = 0; e < nelem; e++)
-    {
-     // Loop over all nodes in element
-     for (unsigned j = 0; j < nnod_el; j++)
-      {
-       // Pointer to node in the scaffold mesh
-       Node* scaffold_node_pt = Tmp_mesh_pt->finite_element_pt(e)->node_pt(j);
+  // At this point we've created all the elements and
+  // created their vertex nodes. Now we need to create
+  // the additional (midside and internal) nodes!
 
-       // Get the (pseudo-)global node number in scaffold mesh
-       // (It's zero [=default] if not visited this one yet)
-       unsigned j_global = global_number[scaffold_node_pt];
+  unsigned boundary_id;
 
-       // Haven't done this one yet
-       if (j_global == 0)
-        {
-         // Find and store the node_id in the old nodes map
-         Oomph_vertex_nodes_id[global_count] =
-           old_global_number[scaffold_node_pt];
+  // Get number of nodes along element edge and dimension of element (2)
+  // from first element
+  unsigned n_node_1d = finite_element_pt(0)->nnode_1d();
+  unsigned dim = finite_element_pt(0)->dim();
 
-         // Get pointer to set of mesh boundaries that this
-         // scaffold node occupies; NULL if the node is not on any boundary
-         std::set<unsigned>* boundaries_pt;
-         scaffold_node_pt->get_boundaries_pt(boundaries_pt);
+  // Storage for the local coordinate of the new node
+  Vector<double> s(dim);
 
-         //Storage for the new node
-         Node* new_node_pt = 0;
+  // Get number of nodes in the element from first element
+  unsigned n_node = finite_element_pt(0)->nnode();
 
-         //Is it on boundaries
-         if (boundaries_pt != 0)
-          {
-           //Create new boundary node
-           new_node_pt = finite_element_pt(e)-> construct_boundary_node(j,
-             time_stepper_pt);
+  //Storage for each global edge of the mesh
+  unsigned n_global_edge = Tmp_mesh_pt->nglobal_edge();
+  Vector < Vector<Node*> > nodes_on_global_edge(n_global_edge);
 
-           // Add to boundaries
-           for (std::set<unsigned>::iterator it = boundaries_pt->begin(); it
-             != boundaries_pt->end(); ++it)
-            {
-             add_boundary_node(*it, new_node_pt);
-            }
-          }
-         //Build normal node
-         else
-          {
-           //Create new normal node
-           new_node_pt = finite_element_pt(e)-> construct_node(j,
-             time_stepper_pt);
-          }
+  // Loop over elements
+  for (unsigned e = 0; e < nelem; e++)
+   {
+    //Cache pointers to the elements
+    FiniteElement* const elem_pt = finite_element_pt(e);
+    FiniteElement* const tmp_elem_pt = Tmp_mesh_pt->finite_element_pt(e);
 
-         // Give it a number (not necessarily the global node
-         // number in the scaffold mesh -- we just need something
-         // to keep track...)
-         global_count++;
-         global_number[scaffold_node_pt] = global_count;
+    //The number of edge nodes is  3*(nnode_1d-1)
+    unsigned n_edge_node = 3 * (n_node_1d - 1);
 
-         // Copy new node, created using the NEW element's construct_node
-         // function into global storage, using the same global
-         // node number that we've just associated with the
-         // corresponding node in the scaffold mesh
-         Node_pt[global_count - 1] = new_node_pt;
+    //If there are any more nodes, these are internal and can be
+    //constructed and added directly to the mesh
+    for (unsigned n = n_edge_node; n < n_node; ++n)
+     {
+      // Create new node (it can never be a boundary node)
+      Node* new_node_pt = elem_pt->construct_node(n, time_stepper_pt);
 
-         // Assign coordinates
-         for (unsigned i = 0; i < finite_element_pt(e)->dim(); i++)
-          {
-           new_node_pt->x(i) = scaffold_node_pt->x(i);
-          }
-        }
-       // This one has already been done: Copy accross
-       else
-        {
-         finite_element_pt(e)->node_pt(j) = Node_pt[j_global - 1];
-        }
-      }
+      // What are the node's local coordinates?
+      elem_pt->local_coordinate_of_node(n, s);
 
-     if (use_attributes)
-      {
-       element_attribute_map[Tmp_mesh_pt->element_attribute(e)].push_back(
-         finite_element_pt(e));
-      }
-    }
+      // Find the coordinates of the new node from the existing
+      // and fully-functional element in the scaffold mesh
+      for (unsigned i = 0; i < dim; i++)
+       {
+        new_node_pt->x(i) = tmp_elem_pt->interpolated_x(s, i);
+       }
 
-   //Now let's construct lists
-   //Find the number of attributes
-   if (use_attributes)
-    {
-     unsigned n_attribute = element_attribute_map.size();
-     //There are n_attribute different regions
-     Region_attribute.resize(n_attribute);
-     //Copy the vectors in the map over to our internal storage
-     unsigned count = 0;
-     for (std::map<double, Vector<FiniteElement*> >::iterator it =
-       element_attribute_map.begin(); it != element_attribute_map.end(); ++it)
-      {
-       Region_attribute[count] = it->first;
-       Region_element_pt[static_cast<unsigned>(Region_attribute[count])] = 
-        it->second;
-       ++count;
-      }
-    }
+      //Add the node to the mesh's global look-up scheme
+      Node_pt.push_back(new_node_pt);
+     }
 
-   // At this point we've created all the elements and
-   // created their vertex nodes. Now we need to create
-   // the additional (midside and internal) nodes!
+    //Now loop over the mid-side edge nodes
+    //Start from node number 3
+    unsigned n = 3;
 
-   unsigned boundary_id;
+    // Loop over edges
+    for (unsigned j = 0; j < 3; j++)
+     {
+      //Find the boundary id of the edge
+      boundary_id = Tmp_mesh_pt->edge_boundary(e, j);
 
-   // Get number of nodes along element edge and dimension of element (2)
-   // from first element
-   unsigned n_node_1d = finite_element_pt(0)->nnode_1d();
-   unsigned dim = finite_element_pt(0)->dim();
+      //Find the global edge index
+      unsigned edge_index = Tmp_mesh_pt->edge_index(e, j);
 
-   // Storage for the local coordinate of the new node
-   Vector<double> s(dim);
+      //If the nodes on the edge have not been allocated, construct them
+      if (nodes_on_global_edge[edge_index].size() == 0)
+       {
+        //Loop over the nodes on the edge excluding the ends
+        for (unsigned j2 = 0; j2 < n_node_1d - 2; ++j2)
+         {
+          //Storage for the new node
+          Node* new_node_pt = 0;
 
-   // Get number of nodes in the element from first element
-   unsigned n_node = finite_element_pt(0)->nnode();
+          //If the edge is on a boundary, construct a boundary node
+          if (boundary_id > 0)
+           {
+            new_node_pt = elem_pt->construct_boundary_node(n, time_stepper_pt);
+            //Add it to the boundary
+            this->add_boundary_node(boundary_id - 1, new_node_pt);
+           }
+          //Otherwise construct a normal node
+          else
+           {
+            new_node_pt = elem_pt->construct_node(n, time_stepper_pt);
+           }
 
-   //Storage for each global edge of the mesh
-   unsigned n_global_edge = Tmp_mesh_pt->nglobal_edge();
-   Vector < Vector<Node*> > nodes_on_global_edge(n_global_edge);
+          // What are the node's local coordinates?
+          elem_pt->local_coordinate_of_node(n, s);
 
-   // Loop over elements
-   for (unsigned e = 0; e < nelem; e++)
-    {
-     //Cache pointers to the elements
-     FiniteElement* const elem_pt = finite_element_pt(e);
-     FiniteElement* const tmp_elem_pt = Tmp_mesh_pt->finite_element_pt(e);
+          // Find the coordinates of the new node from the existing
+          // and fully-functional element in the scaffold mesh
+          for (unsigned i = 0; i < dim; i++)
+           {
+            new_node_pt->x(i) = tmp_elem_pt->interpolated_x(s, i);
+           }
 
-     //The number of edge nodes is  3*(nnode_1d-1)
-     unsigned n_edge_node = 3 * (n_node_1d - 1);
+          //Add to the global node list
+          Node_pt.push_back(new_node_pt);
 
-     //If there are any more nodes, these are internal and can be
-     //constructed and added directly to the mesh
-     for (unsigned n = n_edge_node; n < n_node; ++n)
-      {
-       // Create new node (it can never be a boundary node)
-       Node* new_node_pt = elem_pt->construct_node(n, time_stepper_pt);
+          //Add to the edge index
+          nodes_on_global_edge[edge_index].push_back(new_node_pt);
+          //Increment the node number
+          ++n;
+         }
+       }
+      //Otherwise just set the pointers
+      //using the fact that the next time the edge is visited
+      //the nodes must be arranged in the other order because all
+      //triangles have the same orientation
+      else
+       {
+        //Loop over the nodes on the edge excluding the ends
+        for (unsigned j2 = 0; j2 < n_node_1d - 2; ++j2)
+         {
+          //Set the local node from the edge but indexed the other
+          //way around
+          elem_pt->node_pt(n) = nodes_on_global_edge[edge_index][n_node_1d - 3
+                                                                 - j2];
+          ++n;
+         }
+       }
 
-       // What are the node's local coordinates?
-       elem_pt->local_coordinate_of_node(n, s);
+      //Set the elements adjacent to the boundary from the
+      //boundary id information
+      if (boundary_id > 0)
+       {
+        Boundary_element_pt[boundary_id - 1].push_back(elem_pt);
+        //Need to put a shift in here because of an inconsistent naming
+        //convention between triangle and face elements
+        Face_index_at_boundary[boundary_id - 1].push_back((j + 2) % 3);
 
-       // Find the coordinates of the new node from the existing
-       // and fully-functional element in the scaffold mesh
-       for (unsigned i = 0; i < dim; i++)
-        {
-         new_node_pt->x(i) = tmp_elem_pt->interpolated_x(s, i);
-        }
+        //If using regions set up the boundary information
+        if (use_attributes)
+         {
+          unsigned tmp_region =
+           static_cast<unsigned> (Tmp_mesh_pt->element_attribute(e));
+          //Element adjacent to boundary
+          Boundary_region_element_pt[boundary_id - 1]
+           [tmp_region].push_back(elem_pt);
+          //Need to put a shift in here because of an inconsistent naming
+          //convention between triangle and face elements
+          Face_index_region_at_boundary[boundary_id - 1]
+           [tmp_region].push_back((j + 2) % 3);
+         }
+       }
 
-       //Add the node to the mesh's global look-up scheme
-       Node_pt.push_back(new_node_pt);
-      }
+     } //end of loop over edges
+   } //end of loop over elements
 
-     //Now loop over the mid-side edge nodes
-     //Start from node number 3
-     unsigned n = 3;
+  // Lookup scheme has now been setup
+  Lookup_for_elements_next_boundary_is_setup = true;
 
-     // Loop over edges
-     for (unsigned j = 0; j < 3; j++)
-      {
-       //Find the boundary id of the edge
-       boundary_id = Tmp_mesh_pt->edge_boundary(e, j);
-
-       //Find the global edge index
-       unsigned edge_index = Tmp_mesh_pt->edge_index(e, j);
-
-       //If the nodes on the edge have not been allocated, construct them
-       if (nodes_on_global_edge[edge_index].size() == 0)
-        {
-         //Loop over the nodes on the edge excluding the ends
-         for (unsigned j2 = 0; j2 < n_node_1d - 2; ++j2)
-          {
-           //Storage for the new node
-           Node* new_node_pt = 0;
-
-           //If the edge is on a boundary, construct a boundary node
-           if (boundary_id > 0)
-            {
-             new_node_pt = elem_pt->construct_boundary_node(n, time_stepper_pt);
-             //Add it to the boundary
-             this->add_boundary_node(boundary_id - 1, new_node_pt);
-            }
-           //Otherwise construct a normal node
-           else
-            {
-             new_node_pt = elem_pt->construct_node(n, time_stepper_pt);
-            }
-
-           // What are the node's local coordinates?
-           elem_pt->local_coordinate_of_node(n, s);
-
-           // Find the coordinates of the new node from the existing
-           // and fully-functional element in the scaffold mesh
-           for (unsigned i = 0; i < dim; i++)
-            {
-             new_node_pt->x(i) = tmp_elem_pt->interpolated_x(s, i);
-            }
-
-           //Add to the global node list
-           Node_pt.push_back(new_node_pt);
-
-           //Add to the edge index
-           nodes_on_global_edge[edge_index].push_back(new_node_pt);
-           //Increment the node number
-           ++n;
-          }
-        }
-       //Otherwise just set the pointers
-       //using the fact that the next time the edge is visited
-       //the nodes must be arranged in the other order because all
-       //triangles have the same orientation
-       else
-        {
-         //Loop over the nodes on the edge excluding the ends
-         for (unsigned j2 = 0; j2 < n_node_1d - 2; ++j2)
-          {
-           //Set the local node from the edge but indexed the other
-           //way around
-           elem_pt->node_pt(n) = nodes_on_global_edge[edge_index][n_node_1d - 3
-             - j2];
-           ++n;
-          }
-        }
-
-       //Set the elements adjacent to the boundary from the
-       //boundary id information
-       if (boundary_id > 0)
-        {
-         Boundary_element_pt[boundary_id - 1].push_back(elem_pt);
-         //Need to put a shift in here because of an inconsistent naming
-         //convention between triangle and face elements
-         Face_index_at_boundary[boundary_id - 1].push_back((j + 2) % 3);
-
-         //If using regions set up the boundary information
-         if (use_attributes)
-          {
-           unsigned tmp_region =
-             static_cast<unsigned> (Tmp_mesh_pt->element_attribute(e));
-           //Element adjacent to boundary
-           Boundary_region_element_pt[boundary_id - 1]
-                                      [tmp_region].push_back(elem_pt);
-           //Need to put a shift in here because of an inconsistent naming
-           //convention between triangle and face elements
-           Face_index_region_at_boundary[boundary_id - 1]
-                                         [tmp_region].push_back((j + 2) % 3);
-          }
-        }
-
-      } //end of loop over edges
-    } //end of loop over elements
-
-   // Lookup scheme has now been setup
-   Lookup_for_elements_next_boundary_is_setup = true;
-
-  }
+ }
 
  //======================================================================
  /// Setup boundary coordinate on boundary b. Doc Faces
@@ -2321,8 +2324,8 @@ void RefineableTriangleMesh<ELEMENT>::refine_triangulateio(
 /// Adapt problem based on specified elemental error estimates
 //======================================================================
 template <class ELEMENT>
-void RefineableTriangleMesh<ELEMENT>::adapt(OomphCommunicator* comm_pt,
-  const Vector<double>& elem_error)
+void RefineableTriangleMesh<ELEMENT>::adapt(
+const Vector<double>& elem_error)
  {
 
   double t_start_overall=TimingHelpers::timer();

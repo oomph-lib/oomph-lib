@@ -45,9 +45,43 @@
 #include "shape.h"
 #include "integral.h"
 #include "elements.h"
+#include "Qelements.h"
+
 
 namespace oomph
 {
+
+//========================================================================
+/// Empty base class for QHermiteElements (created so that 
+/// we can use dynamic_cast<>() to figure out if a an element
+/// is a QHermiteElement).
+//========================================================================
+ class QHermiteElementBase : public virtual QElementGeometricBase
+{
+
+  public:
+
+ /// Empty default constructor
+ QHermiteElementBase(){} 
+
+ /// Broken copy constructor
+ QHermiteElementBase(const QHermiteElementBase&) 
+  { 
+   BrokenCopy::broken_copy("QHermiteElementBase");
+  } 
+ 
+ /// Broken assignment operator
+ void operator=(const QHermiteElementBase&) 
+  {
+   BrokenCopy::broken_assign("QHermiteElementBase");
+  }
+};
+
+
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+
 
 //=======================================================================
 /// General QHermiteElement class. Local coordinates are not assumed
@@ -59,7 +93,7 @@ namespace oomph
 /// derivatives of the shape functions much cheaper.
 //=======================================================================
 template<unsigned DIM>
-class QHermiteElement : public virtual FiniteElement 
+class QHermiteElement : public virtual QHermiteElementBase
 {
   private:
 

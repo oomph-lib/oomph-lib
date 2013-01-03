@@ -139,8 +139,7 @@ void TreeBasedRefineableMeshBase::get_elements_at_refinement_level(
 /// Refine original, unrefined mesh according to specified refinement 
 /// pattern (relative to original, unrefined mesh).
 //========================================================================
-void TreeBasedRefineableMeshBase::refine_base_mesh(OomphCommunicator* comm_pt,
-                                                   Vector<Vector<unsigned> >& 
+void TreeBasedRefineableMeshBase::refine_base_mesh(Vector<Vector<unsigned> >& 
                                                    to_be_refined)
 {
  // Get mesh back to unrefined state
@@ -160,7 +159,7 @@ void TreeBasedRefineableMeshBase::refine_base_mesh(OomphCommunicator* comm_pt,
  if (this->is_mesh_distributed())
   {
    MPI_Allreduce(&data[0],&global_data[0],2,MPI_UNSIGNED,MPI_MAX,
-                 comm_pt->mpi_comm());
+                 Comm_pt->mpi_comm());
    global_max=global_data[0];
    global_max_level=global_data[1];
 
@@ -175,7 +174,7 @@ void TreeBasedRefineableMeshBase::refine_base_mesh(OomphCommunicator* comm_pt,
 
  for (unsigned i=0;i<global_max;i++)
   {   
-   unrefine_uniformly(comm_pt); 
+   unrefine_uniformly(); 
   }
  
  // Do refinement steps in current mesh
@@ -230,8 +229,7 @@ void TreeBasedRefineableMeshBase::refine_base_mesh(OomphCommunicator* comm_pt,
 
 //       DocInfo doc_info;
 //       doc_info.disable_doc();
-//       classify_halo_and_haloed_nodes(MPI_Helpers::communicator_pt(),
-//                                      doc_info,doc_info.is_doc_enabled());
+//       classify_halo_and_haloed_nodes(doc_info,doc_info.is_doc_enabled());
 
 //      } 
 
@@ -248,8 +246,7 @@ void TreeBasedRefineableMeshBase::refine_base_mesh(OomphCommunicator* comm_pt,
 //========================================================================
 /// Refine base mesh according to refinement pattern in restart file
 //========================================================================
-void TreeBasedRefineableMeshBase::refine(OomphCommunicator* comm_pt,
-                                std::ifstream& restart_file)
+void TreeBasedRefineableMeshBase::refine(std::ifstream& restart_file)
 {
  // Assign storage for refinement pattern
  Vector<Vector<unsigned> > to_be_refined;
@@ -258,7 +255,7 @@ void TreeBasedRefineableMeshBase::refine(OomphCommunicator* comm_pt,
  read_refinement(restart_file,to_be_refined);
 
  // Refine
- refine_base_mesh(comm_pt,to_be_refined);
+ refine_base_mesh(to_be_refined);
 }
 
 
@@ -358,8 +355,7 @@ void TreeBasedRefineableMeshBase::read_refinement(
 /// - Store # of refined/unrefined elements.
 /// - Doc refinement process (if required)
 //========================================================================
-void TreeBasedRefineableMeshBase::adapt(OomphCommunicator* comm_pt,
-                                        const Vector<double>& elemental_error)
+void TreeBasedRefineableMeshBase::adapt(const Vector<double>& elemental_error)
  {
   //Set the refinement tolerance to be the max permissible error
   double refine_tol=max_permitted_error();
@@ -538,7 +534,7 @@ void TreeBasedRefineableMeshBase::adapt(OomphCommunicator* comm_pt,
   if (this->is_mesh_distributed())
    {
     MPI_Allreduce(&n_refine,&total_n_refine,1,MPI_UNSIGNED,MPI_SUM,
-                  comm_pt->mpi_comm());
+                  Comm_pt->mpi_comm());
    }
   else 
    {
@@ -562,7 +558,7 @@ void TreeBasedRefineableMeshBase::adapt(OomphCommunicator* comm_pt,
   if (this->is_mesh_distributed())
    {
     MPI_Allreduce(&n_unrefine,&total_n_unrefine,1,MPI_UNSIGNED,MPI_SUM,
-                  comm_pt->mpi_comm());
+                  Comm_pt->mpi_comm());
    }
   else
    {
@@ -585,12 +581,12 @@ void TreeBasedRefineableMeshBase::adapt(OomphCommunicator* comm_pt,
     // Sanity check: Each processor checks if the enforced unrefinement of
     // its haloed element is matched by enforced unrefinement of the
     // corresponding halo elements on the other processors.
-    if (Mesh_is_distributed)
+    if (Comm_pt!=0)
      {
       // Store number of processors and current process
       MPI_Status status;
-      int n_proc=comm_pt->nproc();
-      int my_rank=comm_pt->my_rank();
+      int n_proc=Comm_pt->nproc();
+      int my_rank=Comm_pt->my_rank();
     
       // Loop over processes: Each processor sends unrefinement pattern
       // for halo elements with processor d to processor d where it's
@@ -627,7 +623,7 @@ void TreeBasedRefineableMeshBase::adapt(OomphCommunicator* comm_pt,
            {
             // Send it across to proc d
             MPI_Send(&halo_to_be_unrefined[0],nhalo,MPI_INT,
-                     d,0,comm_pt->mpi_comm());
+                     d,0,Comm_pt->mpi_comm());
            }
          }
         // else (d=my_rank): Receive unrefinement pattern from all
@@ -654,7 +650,7 @@ void TreeBasedRefineableMeshBase::adapt(OomphCommunicator* comm_pt,
                {
                 // Receive unrefinement pattern of haloes from proc dd
                 MPI_Recv(&halo_to_be_unrefined[0],nhaloed,MPI_INT,dd,0,
-                         comm_pt->mpi_comm(),&status);
+                         Comm_pt->mpi_comm(),&status);
                }
               
               // Check it
@@ -722,7 +718,7 @@ void TreeBasedRefineableMeshBase::adapt(OomphCommunicator* comm_pt,
            {
             // Send it across to proc d
             MPI_Send(&halo_to_be_refined[0],nhalo,MPI_INT,
-                     d,0,comm_pt->mpi_comm());
+                     d,0,Comm_pt->mpi_comm());
            }
          }
         // else (d=my_rank): Receive refinement pattern from all
@@ -749,7 +745,7 @@ void TreeBasedRefineableMeshBase::adapt(OomphCommunicator* comm_pt,
                {
                 // Receive unrefinement pattern of haloes from proc dd
                 MPI_Recv(&halo_to_be_refined[0],nhaloed,MPI_INT,dd,0,
-                         comm_pt->mpi_comm(),&status);
+                         Comm_pt->mpi_comm(),&status);
                }
               
               // Check it
@@ -816,15 +812,13 @@ void TreeBasedRefineableMeshBase::adapt(OomphCommunicator* comm_pt,
 
     // Now (re-)classify halo and haloed nodes and synchronise hanging
     // nodes
-    // hierher replace communicator; get rid of helper version
     //BENFLAG: This is required in cases where delete_all_external_storage()
     //         made slave nodes to external halo nodes nonhanging.
     if (this->is_mesh_distributed())
      {
       DocInfo doc_info;
       doc_info.disable_doc();
-      classify_halo_and_haloed_nodes(MPI_Helpers::communicator_pt(),
-                                     doc_info,doc_info.is_doc_enabled());
+      classify_halo_and_haloed_nodes(doc_info,doc_info.is_doc_enabled());
      } 
 
 #endif
@@ -1760,11 +1754,9 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
 
  // Now (re-)classify halo and haloed nodes and synchronise hanging
  // nodes
- // hierher replace communicator; get rid of helper version
  if (this->is_mesh_distributed())
   {
-   classify_halo_and_haloed_nodes(MPI_Helpers::communicator_pt(),
-                                  doc_info,doc_info.is_doc_enabled());
+   classify_halo_and_haloed_nodes(doc_info,doc_info.is_doc_enabled());
   }
 
 #endif
@@ -1825,7 +1817,7 @@ void TreeBasedRefineableMeshBase::refine_selected_elements(
 { 
  
 #ifdef OOMPH_HAS_MPI
- if(Mesh_is_distributed)
+ if(Comm_pt!=0)
   {
    std::ostringstream warn_stream;
    warn_stream << "You are attempting to refine selected elements of a "
@@ -1863,7 +1855,7 @@ void TreeBasedRefineableMeshBase::refine_selected_elements(
 { 
  
 #ifdef OOMPH_HAS_MPI
- if(Mesh_is_distributed)
+ if(Comm_pt!=0)
   {
    std::ostringstream warn_stream;
    warn_stream << "You are attempting to refine selected elements of a "
@@ -1895,7 +1887,7 @@ void TreeBasedRefineableMeshBase::refine_selected_elements(
 ///
 //========================================================================
 void TreeBasedRefineableMeshBase::refine_base_mesh_as_in_reference_mesh(
- OomphCommunicator* comm_pt, TreeBasedRefineableMeshBase* const &ref_mesh_pt)
+ TreeBasedRefineableMeshBase* const &ref_mesh_pt)
 {
  // Assign storage for refinement pattern
  Vector<Vector<unsigned> > to_be_refined;
@@ -1904,7 +1896,7 @@ void TreeBasedRefineableMeshBase::refine_base_mesh_as_in_reference_mesh(
  ref_mesh_pt->get_refinement_pattern(to_be_refined);
 
  // Refine mesh according to given refinement pattern
- refine_base_mesh(comm_pt,to_be_refined);
+ refine_base_mesh(to_be_refined);
 }
 
 //========================================================================
@@ -2118,7 +2110,7 @@ void TreeBasedRefineableMeshBase::refine_as_in_reference_mesh(
 /// 1 for failure (if unrefinement has reached the coarsest permitted
 /// level)
 //========================================================================
-unsigned TreeBasedRefineableMeshBase::unrefine_uniformly(OomphCommunicator* comm_pt)
+unsigned TreeBasedRefineableMeshBase::unrefine_uniformly()
 { 
 
  // We can't just select all elements for unrefinement
@@ -2146,7 +2138,7 @@ unsigned TreeBasedRefineableMeshBase::unrefine_uniformly(OomphCommunicator* comm
  max_keep_unrefined()=0;
 
   // Do the actual mesh adaptation with fake error vector
- adapt(comm_pt,elemental_error); 
+ adapt(elemental_error); 
 
  // Reset the minimum number of elements that need to be unrefined 
  // to make it worthwhile
@@ -2334,12 +2326,12 @@ complete_hanging_nodes(const int& ncont_interpolated_values)
 /// (i.e. the hanging status of the haloed and halo layers disagrees)
 //========================================================================
 void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
-(OomphCommunicator* comm_pt, const unsigned& ncont_interpolated_values)
+(const unsigned& ncont_interpolated_values)
 {
  // Store number of processors and current process
  MPI_Status status;
- int n_proc=comm_pt->nproc();
- int my_rank=comm_pt->my_rank();
+ int n_proc=Comm_pt->nproc();
+ int my_rank=Comm_pt->my_rank();
 
  double t_start = 0.0;
  double t_end = 0.0;
@@ -2399,7 +2391,7 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
 #ifdef PARANOID
      // Check that number of halo and haloed data match
      unsigned tmp=0;     
-     MPI_Recv(&tmp,1,MPI_UNSIGNED,d,0,comm_pt->mpi_comm(),&status);
+     MPI_Recv(&tmp,1,MPI_UNSIGNED,d,0,Comm_pt->mpi_comm(),&status);
      if (tmp!=count_haloed)
       {
        std::ostringstream error_stream;
@@ -2418,7 +2410,7 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
       {
        halo_hanging[d].resize(count_haloed);
        MPI_Recv(&halo_hanging[d][0],count_haloed,MPI_INT,d,0,
-                comm_pt->mpi_comm(),&status);       
+                Comm_pt->mpi_comm(),&status);       
       }
     }
    else // d==my_rank, i.e. current process: Send halo hanging status 
@@ -2464,14 +2456,14 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
          
 #ifdef PARANOID
          // Check that number of halo and haloed data match
-         MPI_Send(&count_halo,1,MPI_UNSIGNED,dd,0,comm_pt->mpi_comm());
+         MPI_Send(&count_halo,1,MPI_UNSIGNED,dd,0,Comm_pt->mpi_comm());
 #endif
          
          // Send data (if any)
          if (count_halo!=0)
           {
            MPI_Send(&local_halo_hanging[0],count_halo,MPI_INT,
-                    dd,0,comm_pt->mpi_comm());
+                    dd,0,Comm_pt->mpi_comm());
           }
         }
       }
@@ -2987,27 +2979,27 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
      Vector<unsigned> n_all_send(2,0);
      if (discrepancy==0)
       {
-       MPI_Send(&n_all_send[0],2,MPI_UNSIGNED,d,0,comm_pt->mpi_comm());
+       MPI_Send(&n_all_send[0],2,MPI_UNSIGNED,d,0,Comm_pt->mpi_comm());
       }
      else
       {       
        // How much data is there to be sent?
        n_all_send[0]=send_data.size();         
        n_all_send[1]=send_double_data.size();         
-       MPI_Send(&n_all_send[0],2,MPI_UNSIGNED,d,0,comm_pt->mpi_comm());
+       MPI_Send(&n_all_send[0],2,MPI_UNSIGNED,d,0,Comm_pt->mpi_comm());
        
        // Send flat-packed ints
        if (n_all_send[0]!=0)
         {
          MPI_Send(&send_data[0],n_all_send[0],MPI_INT,d,1,
-                  comm_pt->mpi_comm());
+                  Comm_pt->mpi_comm());
         }
        
        // Send flat-packed double data
        if (n_all_send[1]!=0)
         {
          MPI_Send(&send_double_data[0],n_all_send[1],MPI_DOUBLE,d,1,
-                  comm_pt->mpi_comm());
+                  Comm_pt->mpi_comm());
         }
       }
     }
@@ -3024,7 +3016,7 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
          // data to be sent.
          Vector<unsigned> n_all_recv(2,0);
          MPI_Recv(&n_all_recv[0],2,MPI_UNSIGNED,dd,0,
-                  comm_pt->mpi_comm(),&status);
+                  Comm_pt->mpi_comm(),&status);
 
          // Storage for received information
          Vector<int> receive_data;
@@ -3036,7 +3028,7 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
            // Receive the data
            receive_data.resize(n_all_recv[0]);
            MPI_Recv(&receive_data[0],n_all_recv[0],MPI_INT,dd,1,
-                    comm_pt->mpi_comm(),&status);
+                    Comm_pt->mpi_comm(),&status);
           }
 
          // Receive doubles (if any)
@@ -3045,7 +3037,7 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
            // Receive the data
            receive_double_data.resize(n_all_recv[1]);
            MPI_Recv(&receive_double_data[0],n_all_recv[1],MPI_DOUBLE,dd,1,
-                    comm_pt->mpi_comm(),&status);
+                    Comm_pt->mpi_comm(),&status);
           }
          
          // If no information, no need to do anything else  
@@ -3163,12 +3155,10 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
  // processor to that with the current processor
  unsigned n=hang_info.size();
 
-
-
  // Is there anything to do be done?
  unsigned global_n=0;
  MPI_Allreduce(&n,&global_n,1,MPI_UNSIGNED,MPI_MAX,
-               MPI_Helpers::communicator_pt()->mpi_comm());
+               Comm_pt->mpi_comm());
  if (global_n==0)
   {
    oomph_info 
@@ -3249,7 +3239,7 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
     
     //Now send numbers of data to be sent between all processors
     MPI_Alltoall(&send_n[0],1,MPI_INT,&receive_n[0],1,MPI_INT,
-                 comm_pt->mpi_comm());
+                 Comm_pt->mpi_comm());
     
     //We now prepare the data to be received
     //by working out the displacements from the received data
@@ -3277,7 +3267,7 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
                   &receive_data[0],&receive_n[0],
                   &receive_displacement[0],
                   MPI_INT,
-                  comm_pt->mpi_comm());
+                  Comm_pt->mpi_comm());
     
     //Now use the received data to update the halo nodes
     for (int send_rank=0;send_rank<n_proc;send_rank++)
@@ -3410,7 +3400,7 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
     
     //Now send numbers of data to be sent between all processors
     MPI_Alltoall(&send_n[0],1,MPI_INT,&receive_n[0],1,MPI_INT,
-                 comm_pt->mpi_comm());
+                 Comm_pt->mpi_comm());
     
     //We now prepare the data to be received
     //by working out the displacements from the received data
@@ -3438,7 +3428,7 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
                   &receive_data[0],&receive_n[0],
                   &receive_displacement[0],
                   MPI_INT,
-                  comm_pt->mpi_comm());
+                  Comm_pt->mpi_comm());
     
     //Now use the received data to update the halo nodes
     for (int send_rank=0;send_rank<n_proc;send_rank++)
@@ -3521,7 +3511,7 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
  unsigned global_nnode_still_requiring_synchronisation=0;
  MPI_Allreduce(&nnode_still_requiring_synchronisation,
                &global_nnode_still_requiring_synchronisation,
-               1,MPI_UNSIGNED,MPI_MAX,comm_pt->mpi_comm());
+               1,MPI_UNSIGNED,MPI_MAX,Comm_pt->mpi_comm());
  if (global_nnode_still_requiring_synchronisation>0)
   {
 
@@ -3535,7 +3525,7 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
               << std::endl;
 
    // Do additional synchronisation
-   additional_synchronise_hanging_nodes(comm_pt,ncont_interpolated_values);
+   additional_synchronise_hanging_nodes(ncont_interpolated_values);
 
    double tt_end=0.0;
    if (Global_timings::Doc_comprehensive_timings)
@@ -3574,8 +3564,7 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
 /// - p-unrefine those whose errors is less than
 ///   threshold.
 //========================================================================
-void TreeBasedRefineableMeshBase::p_adapt(OomphCommunicator* comm_pt,
- const Vector<double>& elemental_error)
+void TreeBasedRefineableMeshBase::p_adapt(const Vector<double>& elemental_error)
 {
  //Set the refinement tolerance to be the max permissible error
  double refine_tol=this->max_permitted_error();
@@ -3704,7 +3693,7 @@ void TreeBasedRefineableMeshBase::p_adapt(OomphCommunicator* comm_pt,
  if (this->is_mesh_distributed())
   {
    MPI_Allreduce(&n_refine,&total_n_refine,1,MPI_INT,MPI_SUM,
-                 comm_pt->mpi_comm());
+                 Comm_pt->mpi_comm());
   }
  else 
   {
@@ -3728,7 +3717,7 @@ void TreeBasedRefineableMeshBase::p_adapt(OomphCommunicator* comm_pt,
  if (this->is_mesh_distributed())
   {
    MPI_Allreduce(&n_unrefine,&total_n_unrefine,1,MPI_INT,MPI_SUM,
-                 comm_pt->mpi_comm());
+                 Comm_pt->mpi_comm());
   }
  else
   {
@@ -3750,12 +3739,12 @@ void TreeBasedRefineableMeshBase::p_adapt(OomphCommunicator* comm_pt,
    // Sanity check: Each processor checks if the enforced unrefinement of
    // its haloed element is matched by enforced unrefinement of the
    // corresponding halo elements on the other processors.
-   if (Mesh_is_distributed)
+   if (Comm_pt!=0)
     {
      // Store number of processors and current process
      MPI_Status status;
-     int n_proc=comm_pt->nproc();
-     int my_rank=comm_pt->my_rank();
+     int n_proc=Comm_pt->nproc();
+     int my_rank=Comm_pt->my_rank();
      
      // Loop over all other domains/processors
      for (int d=0;d<n_proc;d++)
@@ -3788,7 +3777,7 @@ void TreeBasedRefineableMeshBase::p_adapt(OomphCommunicator* comm_pt,
            {
             // Send it across
             MPI_Send(&halo_to_be_unrefined[0],nhalo,MPI_INT,
-                     d,0,comm_pt->mpi_comm());
+                     d,0,Comm_pt->mpi_comm());
            }
          }
 
@@ -3806,7 +3795,7 @@ void TreeBasedRefineableMeshBase::p_adapt(OomphCommunicator* comm_pt,
           if(nhaloed > 0)
            {
             MPI_Recv(&halo_to_be_unrefined[0],nhaloed,MPI_INT,d,0,
-                     comm_pt->mpi_comm(),&status);
+                     Comm_pt->mpi_comm(),&status);
            }
 
           // Check it
@@ -3869,7 +3858,7 @@ void TreeBasedRefineableMeshBase::p_adapt(OomphCommunicator* comm_pt,
           if(nhalo > 0)
            {
             MPI_Send(&halo_to_be_refined[0],nhalo,MPI_INT,
-                     d,0,comm_pt->mpi_comm());
+                     d,0,Comm_pt->mpi_comm());
            }
          }
 
@@ -3886,7 +3875,7 @@ void TreeBasedRefineableMeshBase::p_adapt(OomphCommunicator* comm_pt,
           if(nhaloed > 0)
            {
             MPI_Recv(&halo_to_be_refined[0],nhaloed,MPI_INT,d,0,
-                     comm_pt->mpi_comm(),&status);
+                     Comm_pt->mpi_comm(),&status);
            }
 
           // Check it
@@ -3951,15 +3940,13 @@ void TreeBasedRefineableMeshBase::p_adapt(OomphCommunicator* comm_pt,
 
     // Now (re-)classify halo and haloed nodes and synchronise hanging
     // nodes
-    // hierher replace communicator; get rid of helper version
     //BENFLAG: This is required in cases where delete_all_external_storage()
     //         made slave nodes to external halo nodes nonhanging.
     if (this->is_mesh_distributed())
      {
       DocInfo doc_info;
       doc_info.disable_doc();
-      classify_halo_and_haloed_nodes(MPI_Helpers::communicator_pt(),
-                                     doc_info,doc_info.is_doc_enabled());
+      classify_halo_and_haloed_nodes(doc_info,doc_info.is_doc_enabled());
      } 
 
 #endif
@@ -4755,11 +4742,9 @@ void TreeBasedRefineableMeshBase::p_adapt_mesh(DocInfo& doc_info)
 
  // Now (re-)classify halo and haloed nodes and synchronise hanging
  // nodes
- // hierher replace communicator; get rid of helper version
  if (this->is_mesh_distributed())
   {
-   classify_halo_and_haloed_nodes(MPI_Helpers::communicator_pt(),
-                                  doc_info,doc_info.is_doc_enabled());
+   classify_halo_and_haloed_nodes(doc_info,doc_info.is_doc_enabled());
   } 
 
 #endif
@@ -4799,7 +4784,7 @@ void TreeBasedRefineableMeshBase::p_refine_selected_elements(
 {
  
 #ifdef OOMPH_HAS_MPI
- if(Mesh_is_distributed)
+ if(Comm_pt!=0)
   {
    std::ostringstream warn_stream;
    warn_stream << "You are attempting to refine selected elements of a "
@@ -4841,7 +4826,7 @@ void TreeBasedRefineableMeshBase::p_refine_selected_elements(
 {
  
 #ifdef OOMPH_HAS_MPI
- if(Mesh_is_distributed)
+ if(Comm_pt!=0)
   {
    std::ostringstream warn_stream;
    warn_stream << "You are attempting to refine selected elements of a "

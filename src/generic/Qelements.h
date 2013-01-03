@@ -52,10 +52,49 @@
 namespace oomph
 {
 
+
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+
+//========================================================================
+/// Empty base class for Qelements (created so that 
+/// we can use dynamic_cast<>() to figure out if a an element
+/// is a Qelement (from a purely geometric point of view).
+//========================================================================
+ class QElementGeometricBase : public virtual FiniteElement
+{
+
+  public:
+
+ /// Empty default constructor
+ QElementGeometricBase(){} 
+
+ /// Broken copy constructor
+ QElementGeometricBase(const QElementGeometricBase&) 
+  { 
+   BrokenCopy::broken_copy("QElementGeometricBase");
+  } 
+ 
+ /// Broken assignment operator
+ void operator=(const QElementGeometricBase&) 
+  {
+   BrokenCopy::broken_assign("QElementGeometricBase");
+  }
+
+
+};
+
+
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+
+
 //========================================================================
 /// Base class for Qelements 
 //========================================================================
-class QElementBase : public virtual FiniteElement
+class QElementBase : public virtual QElementGeometricBase
 {
   public:
 

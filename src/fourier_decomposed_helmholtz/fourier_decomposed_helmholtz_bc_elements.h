@@ -856,8 +856,6 @@ compute_gamma_contribution(
    double dphi_ds=-std::fabs(-interpolated_dxds[1]/interpolated_x[0]);
    
    //define the associated legendre functions
-
-   // hierher can take this one out
    double p_theta = Legendre_functions_helper::plgndr2
     (n,n_fourier_helmholtz,cos(theta));
 
@@ -1096,9 +1094,6 @@ void FourierDecomposedHelmholtzDtNMesh<ELEMENT>::setup_gamma()
          
          unsigned n_node=eel_pt->nnode();
 
-         /* if (nn==0) */ // hierher kill line
-         /*  {  */ // hierher kill line
-
          gamma_vector[ipt]+=q[nn]*gamma_con;
          for(unsigned l=0;l<n_node;l++) 
           {
@@ -1128,40 +1123,6 @@ void FourierDecomposedHelmholtzDtNMesh<ELEMENT>::setup_gamma()
               q[nn]*d_gamma_con[global_eqn_imag];
             }
           }// end of loop over the node
-
-
-         // hierher kill
-       /*  }//End of if */
-       /* else  */
-       /*    {  */
-       /*     gamma_vector[ipt]+=q[nn]*gamma_con; */
-       /*     for(unsigned l=0;l<n_node;l++)  */
-       /*      { */
-       /*       // Add the contribution of the real local data */
-       /*       int local_unknown_real */
-       /*        =eel_pt->nodal_local_eqn( */
-       /*         l,eel_pt->u_index_fourier_decomposed_helmholtz().real()); */
-       /*       if (local_unknown_real >= 0) */
-       /*        {           */
-       /*         int global_eqn_real=eel_pt->eqn_number(local_unknown_real); */
-       /*         d_gamma_vector[ipt][global_eqn_real]+= */
-       /*          q[nn]*d_gamma_con[global_eqn_real]; */
-       /*        }   */
-       /*       // Add the contribution of the imag local data */
-       /*       int local_unknown_imag */
-       /*        =eel_pt->nodal_local_eqn( */
-       /*         l,eel_pt->u_index_fourier_decomposed_helmholtz().imag()); */
-       /*       if (local_unknown_imag >= 0) */
-       /*        {           */
-       /*         int global_eqn_imag=eel_pt->eqn_number(local_unknown_imag); */
-       /*         d_gamma_vector[ipt][global_eqn_imag]+= */
-       /*          q[nn]*d_gamma_con[global_eqn_imag]; */
-       /*        }   */
-       /*      }// end of loop over the node */
-       /*    }//End of else   */
-
-// hierher end kill
-
         }// End of second loop over the elements 
       }// End of loop over Fourier terms  
     }// end of loop over integration point

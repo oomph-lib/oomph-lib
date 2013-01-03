@@ -118,13 +118,10 @@ public:
        int_local_min_ref=INT_MAX;
       }
 
-   
-     oomph_info 
-      << "hierher Warning: Using MPI_Helpers::Communicator_pt in mesh\n";
      int int_min_ref=0;
      MPI_Allreduce(&int_local_min_ref,&int_min_ref,1,
                    MPI_INT,MPI_MIN,
-                   MPI_Helpers::communicator_pt()->mpi_comm());
+                   Comm_pt->mpi_comm());
 
      unsigned min_ref=unsigned(int_min_ref);
 

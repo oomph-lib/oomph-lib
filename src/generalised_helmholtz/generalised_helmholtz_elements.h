@@ -44,8 +44,10 @@
 #include <complex>
 
 // The meshes (needed for building of pml meshes!)
-#include "../meshes/triangle_mesh.h"
-#include "../meshes/rectangular_quadmesh.h"
+// Include template files to avoid unnecessary re-compilation
+// (*.template.h files get included indirectly).
+#include "../meshes/triangle_mesh.template.cc"
+#include "../meshes/rectangular_quadmesh.template.cc"
 
 
 ////////////////////////////////////////////////////////////////////
@@ -1196,10 +1198,7 @@ class PMLCornerQuadMesh : public RectangularQuadMesh<ELEMENT>
 
 //=============================================================
 /// A class for all isoparametric elements that solve the 
-/// Helmholtz equations.
-/// \f[ 
-/// \frac{\partial^2 u}{\partial x_i^2} = f(x_j) hierher update
-/// \f] 
+/// generalised Helmholtz equations.
 /// This contains the generic maths. Shape functions, geometric
 /// mapping etc. must get implemented in derived class.
 //=============================================================
@@ -2153,17 +2152,14 @@ class FaceGeometry<QGeneralisedHelmholtzElement<1,NNODE_1D> >:
      }
     return this->nodal_local_eqn(j,u_nodal_index);     
    }
-
-
-
-
- /// \short hierher Output FE representation of soln: x,y,u or x,y,z,u at 
- /// n_plot^DIM plot points
- void output(std::ostream &outfile, const unsigned &nplot)
- {
-  HELMHOLTZ_ELEMENT::output(outfile,nplot);
- }
- 
+  
+  /// \short Output FE representation of soln: x,y,u or x,y,z,u at 
+  /// n_plot^DIM plot points
+  void output(std::ostream &outfile, const unsigned &nplot)
+  {
+   HELMHOLTZ_ELEMENT::output(outfile,nplot);
+  }
+  
    
  };
 

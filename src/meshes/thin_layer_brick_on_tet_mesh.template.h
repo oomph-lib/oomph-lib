@@ -113,7 +113,8 @@ namespace oomph
   /// mesh boundaries that make up the specified in/outflow boundaries
   Vector<Vector<unsigned> > In_out_boundary_id;
 
-  /// hierher
+  /// \short Function pointer to function that specifies the wall thickness
+  /// as a fct of the coordinates of the inner surface
   ThicknessFctPt Thickness_fct_pt;
 
  };

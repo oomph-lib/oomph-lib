@@ -55,6 +55,9 @@ namespace oomph
   const double &lx, 
   const double &ly)
  {
+
+  // Mesh can only be built with 2D Qelements.
+  MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(2);
   
   // By default nobody's claiming any nodes
   std::map<Node*,bool> keep;

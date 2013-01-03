@@ -856,7 +856,7 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::doc_solution(const
 
  // Doc halo schemes 
  //-----------------
- Bulk_mesh_pt->doc_mesh_distribution(this->communicator_pt(),Doc_info);
+ Bulk_mesh_pt->doc_mesh_distribution(Doc_info);
 
  // Output solution 
  //-----------------

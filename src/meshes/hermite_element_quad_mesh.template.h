@@ -38,6 +38,7 @@
 #endif
 
 //oomph-lib headers
+#include "../generic/hermite_elements.h"
 #include "../generic/mesh.h"
 #include "topologically_rectangular_domain.h"
 
@@ -81,6 +82,9 @@ public:
                  TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
   {
 
+   // Mesh can only be built with 2D QHermiteElements.
+   MeshChecker::assert_geometric_element<QHermiteElementBase,ELEMENT>(2);
+
    // set number of elements in each coordinate direction
    Nelement.resize(2);
    Nelement[0] = nx;
@@ -117,6 +121,8 @@ public:
                  const bool &periodic_in_x = false, 
                  TimeStepper* time_stepper_pt = &Mesh::Default_TimeStepper)
   {
+   // Mesh can only be built with 2D QHermiteElements.
+   MeshChecker::assert_geometric_element<QHermiteElementBase,ELEMENT>(2);
    
    // set number of elements in each coordinate direction
    Nelement.resize(2);

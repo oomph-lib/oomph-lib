@@ -364,8 +364,7 @@ int main(int argc, char **argv)
 #ifdef OOMPH_HAS_MPI
 
     mesh_doc_info.number()=1;
-    problem.mesh_pt()->doc_mesh_distribution(problem.communicator_pt(),
-                                             mesh_doc_info);
+    problem.mesh_pt()->doc_mesh_distribution(mesh_doc_info);
 #endif
    }
 
@@ -438,8 +437,7 @@ int main(int argc, char **argv)
 
 #ifdef OOMPH_HAS_MPI
     mesh_doc_info.number()=1;
-    problem.mesh_pt()->doc_mesh_distribution(problem.communicator_pt(),
-                                             mesh_doc_info);
+    problem.mesh_pt()->doc_mesh_distribution(mesh_doc_info);
 #endif
    }
 

@@ -90,6 +90,7 @@ perfectly matched layers</A>
   - <A HREF="#linear_solvers">Direct and iterative 
     linear solvers and general-purpose 
     preconditioners</A>
+  - <A HREF="#lin_alg">(Distributed) linear algebra</A>
   - <A HREF="#specific_preconditioners">Problem-specific preconditioners</A>
   .
 -# <A HREF="#visualisation">Visualisation</A>
@@ -1238,7 +1239,6 @@ analytic dispersion relation based on linearised disturbances.
 <TD>
 - Boundary Conditions at a free surface
 - Implementation using a pseudo-solid node update approach
--
 </TD>
 <TD>
 <CENTER>complete</CENTER>
@@ -2222,7 +2222,8 @@ We revisit the
 problem of flow in a collapsible channel</a> yet again to 
 demonstrate the use of \c oomph-lib's FSI preconditioner
 for the monolithic solution of fluid-structure
-interaction problems.
+interaction problems in which the node update in the fluid mesh
+is performed by algebraic node updates.
 </TD>
 <TD>
 - How to use \c oomph-lib's \c FSIPreconditioner
@@ -2294,9 +2295,11 @@ We demonstrate how to discretise and solve this benchmark problem with
 </A>
 \n\n
 We demonstrate how to use xfig/triangle-generated unstructured
-meshes for fluid-structure interaction problems.
+meshes (together with a pseudo-solid node update strategy for the fluid mesh) 
+in fluid-structure interaction problems.
 </TD>
 <TD>
+- How to use pseudo-elasticity to update fluid meshes in FSI problems.
 - How to use xfig/triangle-generated unstructured
   meshes for fluid-structure interaction problems.
 - The automatic generation of boundary coordinates for
@@ -2366,6 +2369,27 @@ Modeling Toolkit (VMTK).</a>
 - How to attach multiple \c FaceElements to the same node --
   distinguishing different Lagrange multipliers.
 - How to solve physiological fluid-structure interaction problems.
+</TD>
+<TD>
+<CENTER>complete</CENTER>
+</TD>
+</TR>
+######################################################################
+<TR>
+<TD>
+<A HREF="../../preconditioners/pseudo_solid_fsi/html/index.html"><B>
+<code>oomph-lib</code>'s 
+preconditioner for the solution of fluid-structure interaction problems with
+pseudo-solid node updates for the fluid mesh</B></A> \n\n
+We discuss <code>oomph-lib</code>'s preconditioner for the
+solution of FSI problems in which the fluid node update is performed
+by pseudo-elasticity.
+</TD>
+<TD>
+- How to use <code>oomph-lib</code>'s  for the solution of FSI 
+  problems in which the fluid node update is performed
+  by pseudo-elasticity.
+.
 </TD>
 <TD>
 <CENTER>complete</CENTER>
@@ -2802,6 +2826,74 @@ linear solvers and preconditioners.
 <CENTER>complete</CENTER>
 </TD>
 </TR>
+#####################################################################
+######################################################################
+<TR>
+<TD COLSPAN=3 bgcolor="lightcyan">
+<A NAME="lin_alg"><CENTER><B>(Distributed) linear algebra</B></CENTER></A>
+</TD>
+</TR>
+######################################################################
+<TR>
+<TD>
+<A HREF="../../mpi/distributed_linear_algebra_infrastructure/html/index.html"><B>
+(Distributed) Linear Algebra Infrastructure</B></A> \n\n
+We provide an overview of <code>oomph-lib's</code> (distributed)
+linear algebra infrastructure.
+</TD>
+<TD>
+- The \c OomphCommunicator.
+- The \c LinearAlgebraDistribution and the \c
+  DistributedLinearAlgebraObject base class.
+- The \c CRDoubleMatrix and the \c DoubleVector.
+.
+</TD>
+<TD>
+<CENTER>complete</CENTER>
+</TD>
+</TR>
+#####################################################################
+<TR>
+<TD>
+<A HREF="../../mpi/distributed_block_preconditioners/html/index.html"><B>
+(Distributed) Block preconditioners</B></A> \n\n
+We provide an overview of <code>oomph-lib's</code> (distributed)
+block preconditioning framework and demonstrate how to write
+a new block preconditioner.
+</TD>
+<TD>
+- Theory
+- Block preconditionable elements: Classifying the block and dof
+  types.
+- Master and subsidiary preconditioners.
+- An example: A simple implementation of an FSI preconditioner.
+.
+</TD>
+<TD>
+<CENTER>complete</CENTER>
+</TD>
+</TR>
+#####################################################################
+<TR>
+<TD>
+<A HREF="../../mpi/distributed_general_purpose_block_preconditioners/html/index.html"><B>
+(Distributed) General-purpose block preconditioners</B></A> \n\n
+We provide an overview of <code>oomph-lib's</code> (distributed)
+general purpose block preconditioners
+</TD>
+<TD>
+- Theory
+- Block diagonal and block triangular preconditioners.
+- Two-level parallelisation for block diagonal preconditioning.
+- How to specify subsidiary preconditioners for the (approximate) 
+  solution of the linear systems involving the diagonal blocks.
+- How to specify the dof types.
+.
+</TD>
+<TD>
+<CENTER>complete</CENTER>
+</TD>
+</TR>
 ######################################################################
 #####################################################################
 ######################################################################
@@ -2858,16 +2950,37 @@ preconditioner for the solution of solid mechanics problems with
 prescribed boundary displacements</B></A> \n\n
 We discuss <code>oomph-lib</code>'s preconditioner for the
 solution of solid mechanics problems in which the displacement
-of a boundary is prescribed and imposed by Larange multipliers.
+of a boundary is prescribed and imposed by Lagrange multipliers.
 This preconditioner is an important building block for the
-solution of FSI problems in which the node update is performed
-by pseudo-elastic node updates in the fluid mesh.
+solution of FSI problems in which the fluid node update is performed
+by pseudo-elasticity.
 </TD>
 <TD>
 - How to use <code>oomph-lib</code>'s  for the solution of solid 
   mechanics problems with prescribed boundary displacements.
 - How to specify subsidiary preconditioners (inexact solvers) 
   with any of <code>oomph-lib</code>'s existing block preconditioners.
+.
+</TD>
+<TD>
+<CENTER>complete</CENTER>
+</TD>
+</TR>
+######################################################################
+<TR>
+<TD>
+<A HREF="../../preconditioners/pseudo_solid_fsi/html/index.html"><B>
+<code>oomph-lib</code>'s 
+preconditioner for the solution of fluid-structure interaction problems with
+pseudo-solid node updates for the fluid mesh</B></A> \n\n
+We discuss <code>oomph-lib</code>'s preconditioner for the
+solution of FSI problems in which the fluid node update is performed
+by pseudo-elasticity.
+</TD>
+<TD>
+- How to use <code>oomph-lib</code>'s  for the solution of FSI 
+  problems in which the fluid node update is performed
+  by pseudo-elasticity.
 .
 </TD>
 <TD>

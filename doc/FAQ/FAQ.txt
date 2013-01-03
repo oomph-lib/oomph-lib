@@ -12,6 +12,8 @@ with any problems.
   - \ref apple \n\n
   - \ref apple_link \n\n
   - \ref self_tests \n\n
+  - \ref run1 \n\n
+  - \ref run2 \n\n
   - \ref link \n\n
   - \ref missing_this \n\n 
 - \ref compilation_and_seg \n\n
@@ -282,6 +284,169 @@ If such data is to be included in a self-test the data should be
 sorted first, based on a user-controllable sorting criterion.
 
 
+########################################################################
+<HR>
+
+\subsection run1 How do I compile/run the demo driver codes?
+
+Assume you have followed our advice to explore \c oomph-lib by
+playing with representative demo driver codes, and have ended up
+in a directory that contains the following files:
+\code
+mheil@biolaptop:~/version339/demo_drivers/poisson/one_d_poisson$ ls -l
+total 68
+-rw-rw-r-- 1 mheil mheil 21604 2012-12-31 11:10 Makefile
+-rw-rw-r-- 1 mheil mheil   409 2012-12-08 13:34 Makefile.am
+-rw-rw-r-- 1 mheil mheil 19335 2012-12-31 11:09 Makefile.in
+-rw-rw-r-- 1 mheil mheil  9638 2012-12-08 13:34 one_d_poisson.cc
+drwxrwxr-x 3 mheil mheil  4096 2012-12-08 13:34 validata
+-rwxrwxr-x 1 mheil mheil  2402 2012-12-08 13:34 validate.sh
+\endcode
+The temptation is to compile the driver code \c one_d_poisson.cc
+with your favourite C++ compiler, e.g. \c g++:
+\code
+g++  one_d_poisson.cc
+\endcode
+but this does \b not work:
+\code
+mheil@biolaptop:~/version339/demo_drivers/poisson/one_d_poisson$ g++ one_d_poisson.cc 
+one_d_poisson.cc:31:21: fatal error: generic.h: No such file or directory
+compilation terminated.
+\endcode
+Why? If you look into the code, you notice that it \#includes 
+\c oomph-lib's \c generic.h header file, and \c g++ obviously doesn't
+know where to find this. You can, in principle, find
+out where it (and the associated library files themselves!) live
+but this is rather against the spirit of the 
+<A HREF="http://www.gnu.org/software/automake/">automake</A> 
+machinery. What you should do instead is to use \c make:
+\code
+make one_d_poisson
+\endcode 
+Note the omitted postfix! The argument to \c make is the name of the
+target, i.e. the executable that you wish to build -- which source
+code to compile, where to locate the required headers and which 
+libraries to link against is all encoded in the \c Makefile (which has
+itself been created by <A HREF="http://www.gnu.org/software/automake/">
+automake</A> (during the installation of the \c oomph-lib)
+from the \c Makefile.am file in the directory). As you see
+from the on-screen output, there is a lot of information that needs
+to be passed to the compiler/linker:
+\code
+mheil@biolaptop:~/version339/demo_drivers/poisson/one_d_poisson$ make one_d_poisson
+mpic++ -DHAVE_CONFIG_H -I. -I../../..  -I/home/mheil/local/hypre_default_installation_mpi/include -DOOMPH_HAS_HYPRE -I/home/mheil/local/trilinos_default_installation_mpi/include -DOOMPH_HAS_TRILINOS -I/home/mheil/local/mumps_and_scalapack_default_installation/include -DOOMPH_HAS_MUMPS -DOOMPH_HAS_STACKTRACE -DOOMPH_HAS_MPI -DOOMPH_HAS_TRIANGLE_LIB -DOOMPH_HAS_TETGEN_LIB -DUSING_OOMPH_SUPERLU -DUSING_OOMPH_SUPERLU_DIST -I/home/mheil/version339/build/include  -DgFortran -O3 -Wall -MT one_d_poisson.o -MD -MP -MF .deps/one_d_poisson.Tpo -c -o one_d_poisson.o one_d_poisson.cc
+mv -f .deps/one_d_poisson.Tpo .deps/one_d_poisson.Po
+/bin/bash ../../../libtool --tag=CXX   --mode=link mpic++ -DgFortran -O3 -Wall -L/home/mheil/local/hypre_default_installation_mpi/lib -L/home/mheil/local/trilinos_default_installation_mpi/lib -L/home/mheil/local/mumps_and_scalapack_default_installation/lib  -o one_d_poisson one_d_poisson.o -L/home/mheil/version339/build/lib -lpoisson -lgeneric -lHYPRE -lml -lifpack -lamesos -lanasazi -laztecoo -lepetraext -ltriutils -lepetra -lteuchos -ldmumps -lmumps_common /home/mheil/local/mumps_and_scalapack_default_installation/lib/libscalapack.a /home/mheil/local/mumps_and_scalapack_default_installation/lib/blacs.a /home/mheil/local/mumps_and_scalapack_default_installation/lib/blacsF77.a /home/mheil/local/mumps_and_scalapack_default_installation/lib/blacs_copy.a /home/mheil/local/mumps_and_scalapack_default_installation/lib/libpord.a -loomph_hsl -loomph_arpack -loomph_triangle -loomph_tetgen -loomph_superlu_4.3 -loomph_parmetis_3.1.1 -loomph_superlu_dist_3.0 -loomph_metis_from_parmetis_3.1.1 /home/mheil/local/lib/lapack/lapack.a /home/mheil/local/lib/blas/blas.a -L/usr/lib/openmpi/lib -L/usr/lib/gcc/x86_64-linux-gnu/4.6.1 -L/usr/lib/gcc/x86_64-linux-gnu/4.6.1/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/4.6.1/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/4.6.1/../../.. -lmpi_f77 -lmpi -lopen-rte -lopen-pal -ldl -lnsl -lutil -lgfortran -lm -lquadmath -lpthread 
+libtool: link: mpic++ -DgFortran -O3 -Wall -o one_d_poisson
+one_d_poisson.o
+-L/home/mheil/local/hypre_default_installation_mpi/lib
+-L/home/mheil/local/trilinos_default_installation_mpi/lib
+-L/home/mheil/local/mumps_and_scalapack_default_installation/lib
+-L/home/mheil/version339/build/lib
+/home/mheil/version339/build/lib/libpoisson.a
+/home/mheil/version339/build/lib/libgeneric.a -lHYPRE -lml -lifpack
+-lamesos -lanasazi -laztecoo -lepetraext -ltriutils -lepetra -lteuchos
+-ldmumps -lmumps_common
+/home/mheil/local/mumps_and_scalapack_default_installation/lib/libscalapack.a
+/home/mheil/local/mumps_and_scalapack_default_installation/lib/blacs.a
+/home/mheil/local/mumps_and_scalapack_default_installation/lib/blacsF77.a
+/home/mheil/local/mumps_and_scalapack_default_installation/lib/blacs_copy.a
+/home/mheil/local/mumps_and_scalapack_default_installation/lib/libpord.a
+/home/mheil/version339/build/lib/liboomph_hsl.a
+/home/mheil/version339/build/lib/liboomph_arpack.a
+/home/mheil/version339/build/lib/liboomph_triangle.a
+/home/mheil/version339/build/lib/liboomph_tetgen.a
+/usr/lib/openmpi/lib/libmpi_cxx.so
+/home/mheil/version339/build/lib/liboomph_superlu_4.3.a
+/home/mheil/version339/build/lib/liboomph_parmetis_3.1.1.a
+/home/mheil/version339/build/lib/liboomph_superlu_dist_3.0.a
+/home/mheil/version339/build/lib/liboomph_metis_from_parmetis_3.1.1.a
+/home/mheil/local/lib/lapack/lapack.a
+/home/mheil/local/lib/blas/blas.a -L/usr/lib/openmpi/lib
+-L/usr/lib/gcc/x86_64-linux-gnu/4.6.1
+-L/usr/lib/gcc/x86_64-linux-gnu/4.6.1/../../../x86_64-linux-gnu
+-L/usr/lib/gcc/x86_64-linux-gnu/4.6.1/../../../../lib
+-L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu
+-L/usr/lib/../lib
+-L/usr/lib/gcc/x86_64-linux-gnu/4.6.1/../../.. /usr/lib/openmpi/lib/libmpi_f77.so
+/usr/lib/openmpi/lib/libmpi.so /usr/lib/openmpi/lib/libopen-rte.so
+/usr/lib/openmpi/lib/libopen-pal.so -ldl -lnsl -lutil -lgfortran -lm
+-lquadmath -lpthread -pthread
+\endcode
+Looking at the content of the directory again shows that the
+required executable has now been generated:
+\code
+mheil@biolaptop:~/version339/demo_drivers/poisson/one_d_poisson$ ls -l
+total 9988
+-rw-rw-r-- 1 mheil mheil   21604 2012-12-31 11:10 Makefile
+-rw-rw-r-- 1 mheil mheil     409 2012-12-08 13:34 Makefile.am
+-rw-rw-r-- 1 mheil mheil   19335 2012-12-31 11:09 Makefile.in
+-rwxrwxr-x 1 mheil mheil 9608851 2012-12-31 15:14 one_d_poisson
+-rw-rw-r-- 1 mheil mheil    9638 2012-12-08 13:34 one_d_poisson.cc
+-rw-rw-r-- 1 mheil mheil  548256 2012-12-31 15:14 one_d_poisson.o
+drwxrwxr-x 3 mheil mheil    4096 2012-12-08 13:34 validata
+-rwxrwxr-x 1 mheil mheil    2402 2012-12-08 13:34 validate.s
+\endcode
+
+\n\n
+
+########################################################################
+<HR>
+
+\subsection run2 Why doesn't make make anything? What are the targets called? 
+If you are familiar with makefiles, you are unlikely to have
+fallen into the trap discussed above. You will almost certainly 
+have spotted the \c
+Makefile and tried to build the executable(s) with \c make, but
+oddly this doesn't work as you (probably) expected:
+\code
+mheil@biolaptop:~/version339/demo_drivers/poisson/one_d_poisson$ make
+make: Nothing to be done for `all'.
+\endcode
+The reason for this is that 
+-# <A HREF="http://www.gnu.org/software/automake/">automake</A>
+   distinguishes between several types of targets,
+-# the demo driver codes in the subdirectories of \c demo_drivers
+   double up as self-tests to assert the correct installation of 
+   \c oomph-lib when \c make \c check is run from the top-level
+   directory.
+.
+The latter requires them to be declared (in the \c Makefile.am)
+in the \c check_PROGRAMS variable. You  can either build (and
+automatically run) all executables in a \c demo_driver directory
+by issuing the command
+\code
+make check
+\endcode
+or you can inspect the  \c check_PROGRAMS variable in the
+\c Makefile.am to find out which targets have been declared
+(and can therefore be built by \c make).
+For instance, in the \c one_d_poisson directory the first
+few lines of the \c Makefile.am are
+\code
+mheil@biolaptop:~/version339/demo_drivers/poisson/one_d_poisson$ more Makefile.am 
+
+[...]
+
+# Name of executable
+check_PROGRAMS=one_d_poisson
+
+# Sources for executable
+one_d_poisson_SOURCES = one_d_poisson.cc 
+
+[...]
+\endcode
+This  declares the target (the executable called \c one_d_poisson) 
+and specifies the source code to be compiled (\c one_d_poisson.cc).
+The build target needs to specified explicitly:
+\code
+make one_d_poisson
+\endcode 
+We note that the names of the executable and the source code do not
+have to be as closely related as in this example. While we usually
+create the name of the executable by dropping the
+postifx of the source file, this is not guaranteed! Inspect 
+the \c Makefile.am if \c make doesn't give you what you want.
 
 ########################################################################
 <HR>

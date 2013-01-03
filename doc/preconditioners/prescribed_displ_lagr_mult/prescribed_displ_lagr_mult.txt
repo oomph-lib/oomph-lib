@@ -301,9 +301,9 @@ iterations) as a function of the mesh refinement (represented by the
 total number of unknowns) for different implementations of the
 preconditioner. 
 - <b>"SuperLU"</b> corresponds to the exact implementation of the 
-  preconditioner \f$ E_{\rm PS} \f$ in which the linear system involving 
+  preconditioner \f$ E_{\rm PS} \f$ in which the linear systems involving 
   the matrix \f$ E_{\rm PS} \f$ and the two squared mass matrices, 
-  \f$ M_{\rm x}^2 \f$ and \f$ M_{\rm y}^2 \f$, are performed by SuperLU.
+  \f$ M_{\rm x}^2 \f$ and \f$ M_{\rm y}^2 \f$, are solved by SuperLU.
 - <b>"Upper triangular E"</b> corresponds to the case in which 
   \f$ E_{\rm PS} \f$ is replaced by its upper block-triangular
   approximation (corresponding to \f$ \tilde{\cal P}_{\rm PS} \f$)
@@ -540,13 +540,14 @@ That's it!
   for our preconditioner for large-displacement FSI problems in which 
   the ALE node update of the fluid mesh in response to the deformation
   of the fluid-loaded solid is handled by (pseudo-)elasticity. We
-  refer to <a href="hierher">another tutorial</a> for details.
+  refer to <a href="../../pseudo_solid_fsi/html/index.html">
+  another tutorial</a> for details.
   \n\n
 - Further details of the theory, such as the proof of the optimality of
   the preconditioner, can be found in  
   <a href="http://dx.doi.org/10.1016/j.jcp.2012.07.001">
   Muddle, Mihajlovic & Heil (2012).</a>
-.
+. 
       
 \subsection ex Exercises
 
@@ -575,4 +576,36 @@ That's it!
    deterioration of the GMRES iteration counts -- the point of the
    exercise is to demonstrate how to implement such alternative
    (and hopefully better!) subsidiary preconditioners "from scratch".]
+   \n\n
+-# Inspect (and experiment with) our settings for Hypre's AMG 
+   solver -- defined in
+   the \c Pseudo_Elastic_Preconditioner_Subsidiary_Operator_Helper
+   namespace in \n\n
+   <center>
+   <code> 
+   <a href="../../../../src/multi_physics/pseudo_elastic_preconditioner.h">
+   src/multi_physics/pseudo_elastic_preconditioner.h</a>       
+   </code> 
+   \n\n and  \n\n
+   <code> 
+   <a href="../../../../src/multi_physics/pseudo_elastic_preconditioner.cc">
+   src/multi_physics/pseudo_elastic_preconditioner.cc</a> 
+   </code> 
+   </center>
 .
+<HR>
+<HR>
+
+
+\section sources Source files for this tutorial
+- The source files for this tutorial are located in the directory:\n\n
+<CENTER>
+<A HREF="../../../../demo_drivers/solid/prescribed_displ_lagr_mult">
+demo_drivers/solid/prescribed_displ_lagr_mult
+</A>
+</CENTER>\n
+- The driver code is: \n\n
+<CENTER>
+<A HREF="../../../../demo_drivers/solid/prescribed_displ_lagr_mult/prescribed_displ_lagr_mult_precond.cc">
+demo_drivers/solid/prescribed_displ_lagr_mult/prescribed_displ_lagr_mult_precond.cc</A>
+</CENTER>

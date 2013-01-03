@@ -42,6 +42,9 @@ namespace oomph
 template <class ELEMENT> 
 void SimpleCubicMesh<ELEMENT>::build_mesh(TimeStepper* time_stepper_pt)
 {
+ 
+ // Mesh can only be built with 3D Qelements.
+ MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(3);
 
  if ((Nx==1)||(Ny==1)||(Nz==1))
   {

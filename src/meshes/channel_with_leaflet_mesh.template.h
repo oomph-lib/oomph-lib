@@ -467,6 +467,61 @@ public:
 };
 
 
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+
+
+//==========================================================================
+/// Channel with leaflet mesh upgraded to (pseudo-)solid mesh
+//==========================================================================
+template <class ELEMENT>
+class PseudoElasticChannelWithLeafletMesh : 
+ public virtual ChannelWithLeafletMesh<ELEMENT>, public virtual SolidMesh
+{
+ 
+public:
+ 
+ ///\short Constructor: Pass pointer to GeomObject that represents the 
+ /// leaflet, the length of the domain to left and right of the leaflet, the
+ /// height of the leaflet and the overall height of the channel,
+ /// the number of element columns to the left and right of the leaflet,
+ /// the number of rows of elements from the bottom of the channel to
+ /// the end of the leaflet, the number of rows of elements above the
+ /// end of the leaflet. Timestepper defaults to Steady default
+ /// Timestepper defined in the Mesh base class
+ PseudoElasticChannelWithLeafletMesh(GeomObject* leaflet_pt, 
+                                     const double& lleft,
+                                     const double& lright, 
+                                     const double& hleaflet,
+                                     const double& htot,
+                                     const unsigned& nleft, 
+                                     const unsigned& nright,
+                                     const unsigned& ny1, 
+                                     const unsigned&  ny2,
+                                     TimeStepper* time_stepper_pt=
+                                     &Mesh::Default_TimeStepper) :
+  ChannelWithLeafletMesh<ELEMENT>(leaflet_pt,lleft,lright,hleaflet,htot,
+                                  nleft,nright,ny1,ny2,
+                                  time_stepper_pt)
+  {
+   // Update position of all nodes (the ones haven't been given
+   // positions yet!)
+   bool update_all_solid_nodes=true;
+   node_update(update_all_solid_nodes);
+
+   // Make the current configuration the undeformed one by
+   // setting the nodal Lagrangian coordinates to their current
+   // Eulerian ones
+   set_lagrangian_nodal_coordinates(); 
+  }
+ 
+ /// Destructor : empty
+ virtual ~PseudoElasticChannelWithLeafletMesh(){}
+
+};
+
+
 }
 
 #endif

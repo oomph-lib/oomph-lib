@@ -53,6 +53,9 @@ QuarterCircleSectorMesh<ELEMENT>::QuarterCircleSectorMesh(
  Wall_pt(wall_pt), Xi_lo(xi_lo), Fract_mid(fract_mid), Xi_hi(xi_hi)
 {
  
+ // Mesh can only be built with 2D Qelements.
+ MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(2);
+ 
  // Build macro element-based domain
  Domain_pt = new QuarterCircleSectorDomain(wall_pt,xi_lo,fract_mid,xi_hi);
  

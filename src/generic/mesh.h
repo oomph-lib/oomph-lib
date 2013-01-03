@@ -122,8 +122,8 @@ class Mesh
  /// the halo(ed) lookup scheme between the two lowest-numbered processors)
  std::map<unsigned, Vector<Node*> > Shared_node_pt;
 
- /// bool to say whether the mesh is distributed
- bool Mesh_is_distributed;
+ /// Pointer to communicator -- set to NULL if mesh is not distributed
+ OomphCommunicator* Comm_pt;
 
  /// External halo(ed) elements are created as and when they are needed
  /// to act as source elements for the particular process's mesh.
@@ -197,11 +197,9 @@ public:
  /// is resized on that processor but not on the one that holds the
  /// halo counterpart (because no FaceElement is attached to the halo
  /// element)
- void resize_halo_nodes(OomphCommunicator* comm_pt);
+ void resize_halo_nodes();
      
 #endif
-
-
 
 
  /// \short Typedef for function pointer to function that computes 
@@ -222,8 +220,8 @@ public:
 #ifdef OOMPH_HAS_MPI
    // Set defaults for distributed meshes
 
-   // Mesh hasn't been distributed
-   Mesh_is_distributed=false;
+   // Mesh hasn't been distributed: Null out pointer to communicator
+   Comm_pt=0;
    // Don't keep all objects as halos
    Keep_all_elements_as_halos=false;
    // Don't output halo elements
@@ -500,7 +498,7 @@ public:
  unsigned long nnode() const {return Node_pt.size();}
 
  /// Return number of dof types in mesh
- unsigned ndof_types(const OomphCommunicator* const comm_pt) const;
+ unsigned ndof_types() const;
 
  /// Add a (pointer to a) node to the mesh
  void add_node_pt(Node* const &node_pt) {Node_pt.push_back(node_pt);}
@@ -559,7 +557,7 @@ public:
    // If the bulk mesh has been distributed then the face mesh is too
    if (this->is_mesh_distributed())
     {
-     face_mesh_pt->set_mesh_distributed();
+     face_mesh_pt->set_communicator_pt(this->communicator_pt());
     }
 #endif
   }
@@ -903,14 +901,16 @@ public:
 
 #ifdef OOMPH_HAS_MPI
 
- /// \short Set the flag to indicate that the mesh has been distributed
- void set_mesh_distributed() {Mesh_is_distributed=true;}
+ /// Boolean to indicate if Mesh has been distributed
+ bool is_mesh_distributed() const {return (Comm_pt!=0);}
 
- /// \short Unset the flag to indicate that the mesh has been distributed
- void unset_mesh_distributed() {Mesh_is_distributed=false;}
+ /// Function to set communicator (mesh is then assumed to be distributed)
+ void set_communicator_pt(OomphCommunicator* comm_pt)
+ {Comm_pt=comm_pt;}
 
- /// Access function for Mesh_has_been_distributed
- bool is_mesh_distributed() const {return Mesh_is_distributed;}
+ /// Read-only access fct to communicator (Null if mesh is not distributed)
+ OomphCommunicator* communicator_pt() const
+ {return Comm_pt;}
 
  /// \short Call this function to keep all the elements as halo elements
  void set_keep_all_elements_as_halos() {Keep_all_elements_as_halos=true;}
@@ -950,14 +950,13 @@ public:
  /// mesh will be now regarded as the base mesh and no unrefinement
  /// relative to it will be possible once this function 
  /// has been called.
- void prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
-                                    Vector<GeneralisedElement*>& 
+ void prune_halo_elements_and_nodes(Vector<GeneralisedElement*>& 
                                     deleted_element_pt,
                                     const bool& report_stats=false)
   {
    DocInfo doc_info;
    doc_info.disable_doc();
-   prune_halo_elements_and_nodes(comm_pt,deleted_element_pt,
+   prune_halo_elements_and_nodes(deleted_element_pt,
                                  doc_info,report_stats);
   }
 
@@ -968,8 +967,7 @@ public:
  /// mesh will be now regarded as the base mesh and no unrefinement
  /// relative to it will be possible once this function 
  /// has been called.
- void prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
-                                    Vector<GeneralisedElement*>& 
+ void prune_halo_elements_and_nodes(Vector<GeneralisedElement*>& 
                                     deleted_element_pt,
                                     DocInfo& doc_info,
                                     const bool& report_stats);
@@ -978,34 +976,31 @@ public:
  /// without halo overhead, each processor would only hold its own
  /// elements. Efficieny per processor =  (number of non-halo elements)/
  /// (total number of elements). 
- void get_efficiency_of_mesh_distribution(OomphCommunicator* comm_pt,
-                                          double& av_efficiency,
+ void get_efficiency_of_mesh_distribution(double& av_efficiency,
                                           double& max_efficiency,
                                           double& min_efficiency);
 
  /// Doc the mesh distribution, to be processed with tecplot macros
- void doc_mesh_distribution(OomphCommunicator* comm_pt, DocInfo& doc_info);
+ void doc_mesh_distribution(DocInfo& doc_info);
  
  /// Check halo and shared schemes on the mesh
- void check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info, 
+ void check_halo_schemes(DocInfo& doc_info, 
                          double& max_permitted_error_for_halo_check);
 
  /// \short Classify the halo and haloed nodes in the mesh. Virtual
  /// so it can be overloaded to perform additional functionality
  /// (such as synchronising hanging nodes) in refineable meshes, say.
- virtual void classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
-                                             DocInfo& doc_info,
+ virtual void classify_halo_and_haloed_nodes(DocInfo& doc_info,
                                              const bool& report_stats);
 
  /// Classify the halo and haloed nodes in the mesh. Virtual
  /// so it can be overloaded to perform additional functionality
  /// (such as synchronising hanging nodes) in refineable meshes, say.
- virtual void classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
-                                             const bool& report_stats=false)
+ virtual void classify_halo_and_haloed_nodes(const bool& report_stats=false)
   {
    DocInfo doc_info;
    doc_info.disable_doc();
-   classify_halo_and_haloed_nodes(comm_pt,doc_info,report_stats);
+   classify_halo_and_haloed_nodes(doc_info,report_stats);
   }
  
  /// \short Synchronise shared node lookup schemes to cater for the
@@ -1019,8 +1014,7 @@ public:
  /// necessarily know that it shares a node with processor q. This
  /// information can be required, e.g. when synchronising hanging node
  /// schemes over all processors.
- void synchronise_shared_nodes(OomphCommunicator* comm_pt,
-                               const bool& report_stats);
+ void synchronise_shared_nodes(const bool& report_stats);
 
 
  /// \short Get all the halo data stored in the mesh and add pointers to
@@ -1420,8 +1414,7 @@ public:
  /// Average/max/min number of halo nodes over all processors.
  /// \b Careful: Involves MPI Broadcasts and must therefore
  /// be called on all processors!
- void get_halo_node_stats(OomphCommunicator* comm_pt,
-                          double& av_number,
+ void get_halo_node_stats(double& av_number,
                           unsigned& max_number,
                           unsigned& min_number);
 
@@ -1429,8 +1422,7 @@ public:
  /// Average/max/min number of haloed nodes over all processors.
  /// \b Careful: Involves MPI Broadcasts and must therefore
  /// be called on all processors!
- void get_haloed_node_stats(OomphCommunicator* comm_pt,
-                            double& av_number,
+ void get_haloed_node_stats(double& av_number,
                             unsigned& max_number,
                             unsigned& min_number);
 
@@ -1681,8 +1673,7 @@ public:
 
  /// \short Consolidate external halo node storage by removing nulled out
  /// pointes in external halo and haloed schemes
- void remove_null_pointers_from_external_halo_node_storage(OomphCommunicator* 
-                                                           comm_pt);
+ void remove_null_pointers_from_external_halo_node_storage();
 
  /// \short Total number of external haloed nodes in this Mesh
  unsigned nexternal_haloed_node() 
@@ -2036,6 +2027,109 @@ class SolidMesh : public virtual Mesh
   Node* Node2_pt;
  };
  
+
+
+/////////////////////////////////////////////////////////////////////// 
+///////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////// 
+
+
+
+//=================================================================
+/// Namespace with helper function to check element type in mesh
+/// constructors (say).
+//=================================================================
+namespace MeshChecker
+{
+
+ 
+//=================================================================
+/// \short Helper function to assert that finite element of type ELEMENT
+/// can be cast to base class of type GEOM_ELEMENT_BASE -- useful
+/// to avoid confusion if a mesh that was written for a specific 
+/// element type (e.g. a QElement) is used with another one (e.g. 
+/// a TElement. First argument specifies the required spatial dimension
+/// of the element (i.e. the number of local coordinates). The optional
+/// second argument specifies the required nnode_1d (i.e. the number
+/// of nodes along a 1D element edge). Can be omitted if the mesh
+/// can handle any number in which case this test is skipped.
+//=================================================================
+ template<class GEOM_ELEMENT_BASE, class ELEMENT>
+  void assert_geometric_element(const unsigned& dim, 
+                                const unsigned& nnode_1d=0)
+  {
+   // Only do tests in paranoia mode
+#ifndef PARANOID
+   return;
+#endif
+   
+   // Instantiate element 
+   ELEMENT* el_pt=new ELEMENT;
+   
+   // Can we cast to required geometric element base type
+   if (dynamic_cast<GEOM_ELEMENT_BASE*>(el_pt)==0)
+    {
+     std::stringstream error_message;
+     error_message 
+      << "You have specified an illegal element type! Element is of type \n\n"
+      << typeid(el_pt).name()
+      << "\n\nand cannot be cast to type \n\n "
+      << typeid(GEOM_ELEMENT_BASE).name()
+      << "\n\n";
+     throw OomphLibError(error_message.str(),
+                         "MeshChecker::assert_geometric_element()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+   
+   // Does the dimension match?
+   if (dim!=el_pt->dim())
+    {
+     std::stringstream error_message;
+     error_message 
+      << "You have specified an illegal element type! Element is of type \n\n"
+      << typeid(el_pt).name()
+      << "\n\nand has dimension = " << el_pt->dim()
+      << " but we need dim = " << dim << std::endl;
+     throw OomphLibError(error_message.str(),
+                         "MeshChecker::assert_geometric_element()",
+                         OOMPH_EXCEPTION_LOCATION);
+     
+    }
+   
+   // Does nnode_1d match?
+   if (nnode_1d!=0)
+    {
+     if (nnode_1d!=el_pt->nnode_1d())
+      {
+       std::stringstream error_message;
+       error_message
+        << "You have specified an illegal element type! Element is of type \n\n"
+        << typeid(el_pt).name()
+        << "\n\nand has nnode_1d = " << el_pt->nnode_1d()
+        << " but we need nnode_1d = " << nnode_1d << std::endl;
+       throw OomphLibError(error_message.str(),
+                           "MeshChecker::assert_geometric_element()",
+                           OOMPH_EXCEPTION_LOCATION);
+      }
+    }
+   
+   // Clean up
+   delete el_pt;
+   
+  }
+ 
+}
+
+
+
+/////////////////////////////////////////////////////////////////////// 
+///////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////// 
+
+
+
+
+
 }
 
 #endif

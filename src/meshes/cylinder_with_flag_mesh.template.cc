@@ -57,7 +57,9 @@ CylinderWithFlagMesh<ELEMENT>::CylinderWithFlagMesh(Circle* cylinder_pt,
                                                     TimeStepper* 
                                                     time_stepper_pt) 
 {
-
+ // Mesh can only be built with 2D Qelements.
+ MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(2);
+ 
  //Create the domain
  Domain_pt = new CylinderWithFlagDomain(cylinder_pt,
                                         top_flag_pt,

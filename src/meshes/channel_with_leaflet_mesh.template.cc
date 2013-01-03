@@ -63,7 +63,9 @@ ChannelWithLeafletMesh<ELEMENT>::ChannelWithLeafletMesh(
  : SimpleRectangularQuadMesh<ELEMENT>(nright+nleft,ny1+ny2,lright+lleft, 
                                       htot,time_stepper_pt)
 {
- 
+ // Mesh can only be built with 2D Qelements.
+ MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(2);
+
  // Copy pointer to leaflet into private storage
  Leaflet_pt = leaflet_pt;
  

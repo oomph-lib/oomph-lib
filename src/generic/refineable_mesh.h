@@ -194,13 +194,11 @@ public:
  
  /// \short Adapt mesh: Refine elements whose error is lager than err_max
  /// and (try to) unrefine those whose error is smaller than err_min
- virtual void adapt(OomphCommunicator* comm_pt,
-                    const Vector<double>& elemental_error)=0;
+ virtual void adapt(const Vector<double>& elemental_error)=0;
  
  /// \short p-adapt mesh: Refine elements whose error is lager than err_max
  /// and (try to) unrefine those whose error is smaller than err_min
- virtual void p_adapt(OomphCommunicator* comm_pt,
-                    const Vector<double>& elemental_error)
+ virtual void p_adapt(const Vector<double>& elemental_error)
   {
    //Derived classes must implement this as required. Default throws an error.
    std::ostringstream err_stream;
@@ -251,7 +249,7 @@ public:
  /// \short Unrefine mesh uniformly: Return 0 for success,
  /// 1 for failure (if unrefinement has reached the coarsest permitted
  /// level)
- virtual unsigned unrefine_uniformly(OomphCommunicator* comm_pt)=0;
+ virtual unsigned unrefine_uniformly()=0;
 
  /// \short p-unrefine mesh uniformly
  void p_unrefine_uniformly(DocInfo& doc_info)
@@ -379,13 +377,11 @@ public:
 
  /// \short Adapt mesh: Refine elements whose error is lager than err_max
  /// and (try to) unrefine those whose error is smaller than err_min
- void adapt(OomphCommunicator* comm_pt,
-            const Vector<double>& elemental_error);
+ void adapt(const Vector<double>& elemental_error);
 
  /// \short p-adapt mesh: Refine elements whose error is lager than err_max
  /// and (try to) unrefine those whose error is smaller than err_min
- void p_adapt(OomphCommunicator* comm_pt, 
-              const Vector<double>& elemental_error);
+ void p_adapt(const Vector<double>& elemental_error);
 
  /// Refine mesh uniformly and doc process
  void refine_uniformly(DocInfo& doc_info);
@@ -408,12 +404,12 @@ public:
  /// \short Unrefine mesh uniformly: Return 0 for success,
  /// 1 for failure (if unrefinement has reached the coarsest permitted
  /// level)
- unsigned unrefine_uniformly(OomphCommunicator* comm_pt);
+ unsigned unrefine_uniformly();
  
  /// \short p-unrefine mesh uniformly: Return 0 for success,
  /// 1 for failure (if unrefinement has reached the lowest permitted
  /// level)
- //unsigned p_unrefine_uniformly(OomphCommunicator* comm_pt);
+ //unsigned p_unrefine_uniformly(); // hierher: Ben what happened to unsigned?
  void p_unrefine_uniformly(DocInfo& doc_info);
 
  /// Set up the tree forest associated with the Mesh (if any)
@@ -510,7 +506,7 @@ public:
  /// Refine base mesh to same degree as reference mesh (relative
  /// to original unrefined mesh).
  virtual void refine_base_mesh_as_in_reference_mesh(
-  OomphCommunicator* comm_pt, TreeBasedRefineableMeshBase* const &ref_mesh_pt);
+  TreeBasedRefineableMeshBase* const &ref_mesh_pt);
 
  /// \short Refine mesh once so that its topology etc becomes that of the 
  /// (finer!) reference mesh -- if possible! Useful for meshes in multigrid 
@@ -539,12 +535,10 @@ public:
                                      to_be_refined);
 
  /// Refine base mesh according to specified refinement pattern
- void refine_base_mesh(OomphCommunicator* comm_pt,
-                       Vector<Vector<unsigned> >& to_be_refined);
+ void refine_base_mesh(Vector<Vector<unsigned> >& to_be_refined);
 
  /// Refine mesh according to refinement pattern in restart file
- virtual void refine(OomphCommunicator* comm_pt,
-                     std::ifstream& restart_file);
+ virtual void refine(std::ifstream& restart_file);
 
  /// Dump refinement pattern to allow for rebuild
  virtual void dump_refinement(std::ostream &outfile);
@@ -573,16 +567,14 @@ public:
  /// Classify all halo and haloed information in the mesh (overloaded
  /// version from Mesh base class. Calls that one first, then synchronises
  /// hanging nodes)
- void classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
-                                     DocInfo& doc_info, 
+ void classify_halo_and_haloed_nodes(DocInfo& doc_info, 
                                      const bool& report_stats)
  {
   // Call version in base class but don't bother to call
   // resize_halo_nodes() -- we'll do it ourselves below
   bool backup=Resize_halo_nodes_not_required;
   Resize_halo_nodes_not_required=false;
-  Mesh::classify_halo_and_haloed_nodes(comm_pt, 
-                                       doc_info,
+  Mesh::classify_halo_and_haloed_nodes(doc_info,
                                        report_stats);
   Resize_halo_nodes_not_required=backup;
 
@@ -602,15 +594,14 @@ public:
     local_ncont_interpolated_values=dynamic_cast<RefineableElement*>
      (element_pt(0))->ncont_interpolated_values();
    }
-  // hierher remove MPI helpers communicator!
   unsigned ncont_interpolated_values=0;
   MPI_Allreduce(&local_ncont_interpolated_values,
                 &ncont_interpolated_values,1,
                 MPI_UNSIGNED,MPI_MAX,
-                MPI_Helpers::communicator_pt()->mpi_comm());
+                Comm_pt->mpi_comm());
   
   // Synchronise the hanging nodes 
-  synchronise_hanging_nodes(comm_pt,ncont_interpolated_values);
+  synchronise_hanging_nodes(ncont_interpolated_values);
 
   if (Global_timings::Doc_comprehensive_timings)
    {
@@ -627,18 +618,17 @@ public:
   // declared to be unnecessary by somebody...)
   if (!Resize_halo_nodes_not_required)
    {
-    resize_halo_nodes(comm_pt);
+    resize_halo_nodes();
    }
  }
 
 
  /// Classify the halo and haloed nodes in the mesh. 
- void classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
-                                     const bool& report_stats=false)
+ void classify_halo_and_haloed_nodes(const bool& report_stats=false)
  {
   DocInfo doc_info;
   doc_info.disable_doc();
-  classify_halo_and_haloed_nodes(comm_pt,doc_info,report_stats);
+  classify_halo_and_haloed_nodes(doc_info,report_stats);
  }
 
 #endif
@@ -648,8 +638,7 @@ protected:
 #ifdef OOMPH_HAS_MPI
 
  /// Synchronise the hanging nodes if the mesh is distributed
- void synchronise_hanging_nodes(OomphCommunicator* comm_pt,
-                                const unsigned& ncont_interpolated_values);
+ void synchronise_hanging_nodes(const unsigned& ncont_interpolated_values);
 
  /// Additional synchronisation of hanging nodes
  // BENFLAG: Required for reconcilliation of hanging nodes on the outer
@@ -659,7 +648,6 @@ protected:
  //          template parameter is required for the node-creation functions
  //          in the Missing_masters_functions namespace
  virtual void additional_synchronise_hanging_nodes(
-               OomphCommunicator* comm_pt,
                const unsigned& ncont_interpolated_values)=0;
  
 #endif
@@ -793,7 +781,6 @@ class TreeBasedRefineableMesh : public TreeBasedRefineableMeshBase
   ///          MacroElementNodeUpdateNodes which are added as external halo
   ///          master nodes can be made fully functional
   void additional_synchronise_hanging_nodes(
-        OomphCommunicator* comm_pt,
         const unsigned& ncont_interpolated_values);
 
 #endif

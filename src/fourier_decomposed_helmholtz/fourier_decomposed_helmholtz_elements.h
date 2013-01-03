@@ -866,7 +866,7 @@ namespace oomph
 
 
 
- /// \short hierher Output FE representation of soln: x,y,u or x,y,z,u at 
+ /// \short Output FE representation of soln: x,y,u or x,y,z,u at 
  /// n_plot^DIM plot points
  void output(std::ostream &outfile, const unsigned &nplot)
  {

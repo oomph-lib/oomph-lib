@@ -416,7 +416,7 @@ create_lagrange_multiplier_elements()
  // unknowns at their nodes. Corresponding halo nodes may have to
  // resized for consistency (they're not necessarily touched by
  // a Lagrange multiplier element that would do the resizing for us).
- solid_mesh_pt()->resize_halo_nodes(this->communicator_pt());
+ solid_mesh_pt()->resize_halo_nodes();
 
  // Loop over the elements in the Lagrange multiplier element mesh
  // for elements on the top boundary (boundary 2)

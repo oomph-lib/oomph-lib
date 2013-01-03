@@ -380,9 +380,6 @@ public:
  /// Destructor: clean up memory
  ~TurekProblem()
   {
-
-   oomph_info << "In problem destructor\n";   
-
    // Delete the old MeshAsGeomObjects 
    delete this->fluid_mesh_pt()->bottom_flag_pt();
    delete this->fluid_mesh_pt()->top_flag_pt();
@@ -405,8 +402,6 @@ public:
    delete this->fluid_mesh_pt();
 
    delete Global_Parameters::Constitutive_law_pt;
-
-   oomph_info << "Done problem destructor\n";   
   }
 
  /// Access function for the fluid mesh 
@@ -421,9 +416,6 @@ public:
  SolidMesh*& traction_mesh_pt(const unsigned& i)
   {return Traction_mesh_pt[i];} 
  
- /// Generic actions before
- void generic_actions_before(const bool& called_from_adapt);
-
  /// Generic actions after
  void generic_actions_after(const bool& called_from_adapt);
 
@@ -435,11 +427,7 @@ public:
   }
  
  /// Actions before distribute: Remove traction elements
- void actions_before_distribute()
-  {
-   bool called_from_adapt=false;
-   generic_actions_before(called_from_adapt);
-  }
+ void actions_before_distribute();
  
  /// Actions after distribute: Add traction elements, 
  /// re-setup the fsi lookup scheme
@@ -942,51 +930,48 @@ actions_before_implicit_timestep()
 /// be around while the fluid mesh is adapted.
 //========================================================================
 template<class FLUID_ELEMENT,class SOLID_ELEMENT >
-void TurekProblem<FLUID_ELEMENT,SOLID_ELEMENT>::generic_actions_before(
- const bool& called_from_adapt)
+void TurekProblem<FLUID_ELEMENT,SOLID_ELEMENT>::actions_before_distribute()
 {
-
- if (!called_from_adapt)
+ 
+ // The bulk elements attached to the traction elements need to be kept
+ // as halo elements
+ 
+ // There are 3 traction meshes
+ for (unsigned b=0;b<3;b++)
   {
-   // The bulk elements attached to the traction elements need to be kept
-   // as halo elements
-   
-   // There are 3 traction meshes
-   for (unsigned b=0;b<3;b++)
+   // Loop over elements in traction meshes
+   unsigned n_element=Traction_mesh_pt[b]->nelement();
+   for (unsigned e=0;e<n_element;e++)
     {
-     // Loop over elements in traction meshes
-     unsigned n_element=Traction_mesh_pt[b]->nelement();
-     for (unsigned e=0;e<n_element;e++)
-      {
-       FSISolidTractionElement<SOLID_ELEMENT,2>* traction_elem_pt=
-        dynamic_cast<FSISolidTractionElement<SOLID_ELEMENT,2>* >
-        (Traction_mesh_pt[b]->element_pt(e));
-       
-       // Get the bulk element (which is a SOLID_ELEMENT)
-       SOLID_ELEMENT* solid_elem_pt = dynamic_cast<SOLID_ELEMENT*>
-        (traction_elem_pt->bulk_element_pt());
-       
-       // Require bulk to be kept as a (possible) halo element
-       // Note: The traction element itself will "become" a halo element 
-       // when it is recreated after the distribution has taken place
-       solid_elem_pt->set_must_be_kept_as_halo();
-      }
-    } // end of loop over meshes of fsi traction elements
-   
-   
-   // Flush all the submeshes out but keep the meshes of 
-   // FSISolidTractionElements alive (i.e. don't delete them)
-   flush_sub_meshes();
-   
-   // Add the fluid mesh and the solid mesh back again
-   // Remember that it's important that the fluid mesh is
-   // added before the solid mesh!
-   add_sub_mesh(fluid_mesh_pt());
-   add_sub_mesh(solid_mesh_pt());
+     FSISolidTractionElement<SOLID_ELEMENT,2>* traction_elem_pt=
+      dynamic_cast<FSISolidTractionElement<SOLID_ELEMENT,2>* >
+      (Traction_mesh_pt[b]->element_pt(e));
+     
+     // Get the bulk element (which is a SOLID_ELEMENT)
+     SOLID_ELEMENT* solid_elem_pt = dynamic_cast<SOLID_ELEMENT*>
+      (traction_elem_pt->bulk_element_pt());
+     
+     // Require bulk to be kept as a (possible) halo element
+     // Note: The traction element itself will "become" a halo element 
+     // when it is recreated after the distribution has taken place
+     solid_elem_pt->set_must_be_kept_as_halo();
+    }
+  } // end of loop over meshes of fsi traction elements
+ 
+ 
+ // Flush all the submeshes out but keep the meshes of 
+ // FSISolidTractionElements alive (i.e. don't delete them)
+ flush_sub_meshes();
+ 
+ // Add the fluid mesh and the solid mesh back again
+ // Remember that it's important that the fluid mesh is
+ // added before the solid mesh!
+ add_sub_mesh(fluid_mesh_pt());
+ add_sub_mesh(solid_mesh_pt());
+ 
+ // Rebuild global mesh
+ rebuild_global_mesh();
 
-   // Rebuild global mesh
-   rebuild_global_mesh();
-  }
 } // end of actions before distribute
 
 

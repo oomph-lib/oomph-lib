@@ -63,7 +63,10 @@ namespace oomph
    OneDMesh(const unsigned &n_element, const double &length, 
             TimeStepper* time_stepper_pt=&Mesh::Default_TimeStepper)
     : Xmin(0.0), Xmax(length), N(n_element)
-    {
+   {
+    // Mesh can only be built with 1D Qelements.
+    MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(1);
+    
      build_mesh(time_stepper_pt);
     }
    
@@ -74,6 +77,9 @@ namespace oomph
             TimeStepper* time_stepper_pt=&Mesh::Default_TimeStepper)
     : Xmin(xmin), Xmax(xmax), N(n_element)
     {
+     // Mesh can only be built with 1D Qelements.
+     MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(1);
+    
      build_mesh(time_stepper_pt);
     }
    

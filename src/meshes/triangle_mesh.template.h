@@ -241,6 +241,9 @@ class TriangleMeshParameters
     // Using this constructor no Triangulateio object is built
     Triangulateio_exists=false;
 #endif
+
+    // Mesh can only be built with 2D Telements.
+    MeshChecker::assert_geometric_element<TElementGeometricBase,ELEMENT>(2);
    }
   
   /// \short Constructor with the input files
@@ -250,6 +253,9 @@ class TriangleMeshParameters
                TimeStepper* time_stepper_pt=
                    &Mesh::Default_TimeStepper)
    {
+    // Mesh can only be built with 2D Telements.
+    MeshChecker::assert_geometric_element<TElementGeometricBase,ELEMENT>(2);
+
     // Store Timestepper used to build elements
     Time_stepper_pt=time_stepper_pt;
 
@@ -300,6 +306,9 @@ class TriangleMeshParameters
                    &Mesh::Default_TimeStepper,
                const bool &use_attributes=false)
    {
+    // Mesh can only be built with 2D Telements.
+    MeshChecker::assert_geometric_element<TElementGeometricBase,ELEMENT>(2);
+
     //Store the attributes flag
     Use_attributes = use_attributes;
 
@@ -339,8 +348,10 @@ class TriangleMeshParameters
   /// TriangleMeshParameters
   TriangleMesh(TriangleMeshParameters &triangle_mesh_parameters, 
                TimeStepper* time_stepper_pt=&Mesh::Default_TimeStepper)
-  {
-
+   {
+    // Mesh can only be built with 2D Telements.
+    MeshChecker::assert_geometric_element<TElementGeometricBase,ELEMENT>(2);
+    
    // ********************************************************************
    // First part - Get polylines representations
    // ********************************************************************
@@ -502,7 +513,10 @@ class TriangleMeshParameters
                TimeStepper* time_stepper_pt=
                    &Mesh::Default_TimeStepper,
                const bool &use_attributes=false)
-   {  
+   {
+    // Mesh can only be built with 2D Telements.
+    MeshChecker::assert_geometric_element<TElementGeometricBase,ELEMENT>(2);
+  
     // Disclaimer
     std::string message=
      "This constructor hasn't been tested since last cleanup.\n";
@@ -939,6 +953,9 @@ class TriangleMeshParameters
                            TimeStepper* time_stepper_pt,
                            const bool &use_attributes) 
    {
+    // Mesh can only be built with 2D Telements.
+    MeshChecker::assert_geometric_element<TElementGeometricBase,ELEMENT>(2);
+
     //Store the attribute flag
     Use_attributes = use_attributes;
 
@@ -2684,7 +2701,7 @@ template<class ELEMENT>
    /// \short Unrefine mesh uniformly: Return 0 for success,
    /// 1 for failure (if unrefinement has reached the coarsest permitted
    /// level)
-   unsigned unrefine_uniformly(OomphCommunicator* comm_pt)
+   unsigned unrefine_uniformly()
    {
     throw OomphLibError("unrefine_uniformly() not implemented yet",
                         "RefineableTriangleMesh::unrefine_uniformly()",
@@ -2694,8 +2711,7 @@ template<class ELEMENT>
    }
    
    /// Adapt mesh, based on elemental error provided
-   void adapt(OomphCommunicator* comm_pt,
-              const Vector<double>& elem_error); 
+   void adapt(const Vector<double>& elem_error); 
    
    /// \short Access to function pointer to function that updates the 
    /// mesh following the snapping of boundary nodes to the

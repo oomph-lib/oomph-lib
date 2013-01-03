@@ -1260,8 +1260,7 @@ void DropInChannelProblem<ELEMENT>::compute_error_estimate(double& max_err,
  // Dynamic cast is used because get_element_errors require a Mesh* ans
  // not a SolidMesh*
  Mesh* fluid_mesh_pt=dynamic_cast<Mesh*>(Fluid_mesh_pt);
- err_est_pt->get_element_errors(this->communicator_pt(),
-                                fluid_mesh_pt,
+ err_est_pt->get_element_errors(fluid_mesh_pt,
                                 elemental_error);
 
  // Set errors for post-processing and find extrema

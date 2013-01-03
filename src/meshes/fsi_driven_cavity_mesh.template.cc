@@ -52,8 +52,9 @@ FSIDrivenCavityMesh<ELEMENT>::FSIDrivenCavityMesh(
  : SimpleRectangularQuadMesh<ELEMENT>(nx,ny,lx,ly,time_stepper_pt),
    Nx(nx), Ny(ny), Gap_fraction(gap_fraction), Wall_pt(wall_pt)
 {
-
-
+ // Mesh can only be built with 2D Qelements.
+ MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(2);
+ 
  // Update the boundary numbering scheme and set boundary coordinate 
  //-----------------------------------------------------------------
  

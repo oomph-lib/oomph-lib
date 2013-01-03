@@ -46,7 +46,9 @@ template <class ELEMENT>
 void GeompackQuadMesh<ELEMENT>::
 build_from_scaffold(TimeStepper* time_stepper_pt)
 {   
-
+ // Mesh can only be built with four-noded 2D Qelements.
+ MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(2,2);
+ 
  // Create space for elements
  unsigned nelem=Tmp_mesh_pt->nelement();
  Element_pt.resize(nelem);

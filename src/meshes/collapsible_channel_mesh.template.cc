@@ -60,6 +60,9 @@ CollapsibleChannelMesh<ELEMENT>::CollapsibleChannelMesh(
    Nup(nup), Ncollapsible(ncollapsible), Ndown(ndown), Ny(ny), 
    Wall_pt(wall_pt)
 {
+ // Mesh can only be built with 2D Qelements.
+ MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(2);
+
  //Create the CollapsibleChannelDomain with the wall represented 
  //by the geometric object
  Domain_pt = new CollapsibleChannelDomain(nup, ncollapsible, ndown, ny, 

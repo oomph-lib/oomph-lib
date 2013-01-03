@@ -47,6 +47,9 @@ FullCircleMesh<ELEMENT>::FullCircleMesh(GeomObject* area_pt,
  Area_pt(area_pt)
 {
  
+ // Mesh can only be built with 2D Qelements.
+ MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(2);
+
  // Build macro element-based domain
  Domain_pt = new FullCircleDomain(area_pt,theta_positions,radius_box);
  

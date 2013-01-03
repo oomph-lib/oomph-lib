@@ -487,12 +487,16 @@ namespace oomph
     /// \short Return the number of DOF types in mesh i.
     unsigned ndof_types_in_mesh(const unsigned& i) const
     {
-      // If we have calculated the value then return it. Otherwise get the mesh
-      // to calculate it.
-      if(Ndof_types_in_mesh.size() > 0)
-     return Ndof_types_in_mesh[i];
-      else
-	return mesh_pt(i)->ndof_types(problem_pt()->communicator_pt());
+     // If we have calculated the value then return it. Otherwise get the mesh
+     // to calculate it.
+     if(Ndof_types_in_mesh.size() > 0)
+      {
+       return Ndof_types_in_mesh[i];
+      }
+     else
+      {
+       return mesh_pt(i)->ndof_types();
+      }
     }
 
     /// \short Return true if this preconditioner is a subsidiary
@@ -1204,8 +1208,7 @@ namespace oomph
     Ndof_types_in_mesh.assign(nmesh(),0);
     for(unsigned i=0; i<nmesh(); i++)
       {
-	Ndof_types_in_mesh[i] = mesh_pt(i)->
-	  ndof_types(problem_pt()->communicator_pt());
+	Ndof_types_in_mesh[i] = mesh_pt(i)->ndof_types();
       }
 
 	 

@@ -63,18 +63,6 @@ public:
                    TimeStepper* time_stepper_pt=
                    &Mesh::Default_TimeStepper);
 
-
-/*  /// \short Constructor: Pass number of elements in x-direction, number of */
-/*  /// elements in y-direction, axial length, height of layer, a boolean */
-/*  /// flag to make the mesh periodic in the x-direction, and a pointer  */
-/*  /// to timestepper (defaults to Steady timestepper)  */
-/*  SingleLayerSpineMesh(const unsigned &nx,  */
-/*                    const unsigned &ny, */
-/*                    const double &lx, */
-/*                    const double &h, */
-/*                    const bool& periodic_in_x, */
-/*                    TimeStepper* time_stepper_pt= */
-/*                    &Mesh::Default_TimeStepper); */
  
  /// Access functions for pointers to interface elements
  FiniteElement* &interface_element_pt(const unsigned long &i) 

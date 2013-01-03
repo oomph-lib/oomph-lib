@@ -70,7 +70,9 @@ public:
                   TimeStepper* time_stepper_pt=
                   &Mesh::Default_TimeStepper)
   {
-
+   // Mesh can only be built with 3D Qelements.
+   MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(3);
+   
    // Build temporary tet mesh
    XdaTetMesh<TElement<3,3> >* tmp_mesh_pt= 
     new XdaTetMesh<TElement<3,3> >(xda_file_name,time_stepper_pt);
@@ -91,6 +93,9 @@ public:
                   TimeStepper* time_stepper_pt=
                   &Mesh::Default_TimeStepper)
   {
+   // Mesh can only be built with 3D Qelements.
+   MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(3);
+   
    // Build temporary tet mesh
    xda_tet_mesh_pt=new XdaTetMesh<TElement<3,3> >(xda_file_name,
                                                   time_stepper_pt);
@@ -99,7 +104,6 @@ public:
    build_mesh(xda_tet_mesh_pt,time_stepper_pt);
 
    // Note that we're keeping the tet mesh alive for external use...
-
   }
 
  /// \short Access functions to the Vector of oomph-lib boundary ids

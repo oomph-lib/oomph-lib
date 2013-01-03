@@ -62,6 +62,9 @@ class SimpleCubicMesh : public virtual BrickMeshBase
   Nx(nx), Ny(ny), Nz(nz), Xmin(0.0), Xmax(lx), Ymin(0.0), Ymax(ly),
   Zmin(0.0), Zmax(lz)
   {
+   // Mesh can only be built with 3D Qelements.
+   MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(3);
+   
    //Call the generic build function
    build_mesh(time_stepper_pt);
   }
@@ -76,6 +79,9 @@ class SimpleCubicMesh : public virtual BrickMeshBase
   Nx(nx), Ny(ny), Nz(nz), Xmin(xmin), Xmax(xmax), Ymin(ymin), Ymax(ymax), 
   Zmin(zmin), Zmax(zmax)
   {
+   // Mesh can only be built with 3D Qelements.
+   MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(3);
+   
    //Call the generic mesh constructor
    build_mesh(time_stepper_pt);
   }

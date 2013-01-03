@@ -121,7 +121,7 @@ namespace oomph
   // -------------------------------------------------------------
   //Only if not distributed
 #ifdef OOMPH_HAS_MPI
-  if(this->Mesh_is_distributed==false)
+  if(Comm_pt==0)
 #endif
    {
     // Loop over boundaries

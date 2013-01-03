@@ -52,6 +52,9 @@ public:
                   TimeStepper* time_stepper_pt=
                   &Mesh::Default_TimeStepper)
   {
+   // Mesh can only be built with four-noded 2D Qelements.
+   MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(2,2);
+   
    // Build scaffold
    Tmp_mesh_pt= new 
     GeompackQuadScaffoldMesh(mesh_file_name,curve_file_name);

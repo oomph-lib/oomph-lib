@@ -604,7 +604,9 @@ void HermiteQuadMesh<ELEMENT>::generalised_macro_element_position_of_node
 template<class ELEMENT>
 void HermiteQuadMesh<ELEMENT>::build_mesh(TimeStepper* time_stepper_pt)
 {
- 
+ // Mesh can only be built with 2D QHermiteElements.
+ MeshChecker::assert_geometric_element<QHermiteElementBase,ELEMENT>(2);
+
  //Set the number of boundaries
  set_nboundary(4);
  

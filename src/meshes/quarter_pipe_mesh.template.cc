@@ -22,6 +22,10 @@ namespace oomph
                                            TimeStepper* time_stepper_pt) :
   SimpleCubicMesh<ELEMENT>(ntheta,nr,nz,1.0,1.0,length,time_stepper_pt)
  {
+  
+  // Mesh can only be built with 3D Qelements.
+  MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(3);
+
   //Variables declaration
   Ntheta=ntheta;
   Nr=nr;

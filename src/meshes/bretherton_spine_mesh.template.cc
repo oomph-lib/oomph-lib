@@ -82,6 +82,9 @@ BrethertonSpineMesh<ELEMENT,INTERFACE_ELEMENT>::BrethertonSpineMesh(
  Default_spine_centre_fraction(0.5)
 {
 
+ // Mesh can only be built with 2D Qelements.
+ MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(2);
+ 
  //Initialise start of transition region to zero
  //Zeta_transition_start = 0.0;
 

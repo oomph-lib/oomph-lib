@@ -119,7 +119,10 @@ public:
                      const double &lx, const double &ly, 
                      TimeStepper* time_stepper_pt=&Mesh::Default_TimeStepper) :
   Nx(nx), Ny(ny), Xmin(0.0), Xmax(lx), Ymin(0.0), Ymax(ly), Xperiodic(false)
-  {
+   {
+    // Mesh can only be built with 2D Qelements.
+    MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(2);
+    
    //Call the generic mesh constructor
    build_mesh(time_stepper_pt);
   }
@@ -132,9 +135,12 @@ public:
                      TimeStepper* time_stepper_pt=&Mesh::Default_TimeStepper) :
   Nx(nx), Ny(ny), Xmin(xmin), Xmax(xmax), Ymin(ymin), Ymax(ymax), 
   Xperiodic(false)
-  {
-   //Call the generic mesh constructor
-   build_mesh(time_stepper_pt);
+   {
+    // Mesh can only be built with 2D Qelements.
+    MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(2);
+    
+    //Call the generic mesh constructor
+    build_mesh(time_stepper_pt);
   }
 
  /// \short Simple constructor: nx: number of elements in x direction;
@@ -149,6 +155,9 @@ public:
   Nx(nx), Ny(ny), Xmin(0.0), Xmax(lx), Ymin(0.0), Ymax(ly), 
   Xperiodic(periodic_in_x)
   {
+   // Mesh can only be built with 2D Qelements.
+   MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(2);
+   
    //Call the generic mesh constructor
    build_mesh(time_stepper_pt);
   }
@@ -164,6 +173,9 @@ public:
   Nx(nx), Ny(ny), Xmin(xmin), Xmax(xmax), Ymin(ymin), Ymax(ymax), 
   Xperiodic(periodic_in_x)
   {
+   // Mesh can only be built with 2D Qelements.
+   MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(2);
+   
    //Call the generic mesh constructor
    build_mesh(time_stepper_pt);
   }

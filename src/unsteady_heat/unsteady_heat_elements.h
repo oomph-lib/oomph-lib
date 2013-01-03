@@ -859,8 +859,8 @@ class FaceGeometry<QUnsteadyHeatElement<1,NNODE_1D> >:
 
 
 
- /// \short hierher Output FE representation of soln: x,y,u or x,y,z,u at 
- /// n_plot^DIM plot points
+ /// \short Output FE representation of soln: x,y,u or x,y,z,u at 
+ /// and history values at n_plot^DIM plot points
  void output(std::ostream &outfile, const unsigned &nplot)
  {
   unsigned el_dim=this->dim();

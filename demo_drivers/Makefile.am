@@ -45,6 +45,8 @@ if WANT_MPI
 SUBDIRS += mpi
 endif
 
+list_sub_dirs:
+	@echo $(SUBDIRS)
 
 EXTRA_DIST=run_tests.bash
 

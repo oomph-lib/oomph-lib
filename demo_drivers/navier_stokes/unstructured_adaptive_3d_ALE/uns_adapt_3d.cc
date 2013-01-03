@@ -190,7 +190,7 @@ template<class ELEMENT>
    /// \short Unrefine mesh uniformly: Return 0 for success,
    /// 1 for failure (if unrefinement has reached the coarsest permitted
    /// level)
-   unsigned unrefine_uniformly(OomphCommunicator* comm_pt)
+   unsigned unrefine_uniformly()
    {
     throw OomphLibError("unrefine_uniformly() not implemented yet",
                         "RefineableTriangleMesh::unrefine_uniformly()",
@@ -200,8 +200,7 @@ template<class ELEMENT>
    }
    
    /// Adapt mesh, based on elemental error provided
-   void adapt(OomphCommunicator* comm_pt,
-              const Vector<double>& elem_error);
+   void adapt(const Vector<double>& elem_error);
    
    
    //protected:
@@ -391,8 +390,7 @@ template<class ELEMENT>
 /// Adapt problem based on specified elemental error estimates
 //======================================================================
 template <class ELEMENT>
-void RefineableTetgenMesh<ELEMENT>::adapt(OomphCommunicator* comm_pt,
-                                          const Vector<double>& elem_error)
+void RefineableTetgenMesh<ELEMENT>::adapt(const Vector<double>& elem_error)
  {    
   // Get refinement targets
   Vector<double> target_size(elem_error.size());

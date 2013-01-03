@@ -57,6 +57,9 @@ OneDLagrangianMesh(const unsigned &n_element,
  OneDMesh<ELEMENT>(n_element,length,time_stepper_pt),
  Undef_eulerian_posn_pt(undef_eulerian_posn_pt)
 {
+ // Mesh can only be built with 1D Qelements.
+ MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(1);
+
  //Now set the lagrangian coordinates of the nodes
  set_lagrangian_nodal_coordinates();
 
@@ -86,6 +89,9 @@ OneDLagrangianMesh(const unsigned &n_element,
  OneDMesh<ELEMENT>(n_element,xmin,xmax,time_stepper_pt),
  Undef_eulerian_posn_pt(undef_eulerian_posn_pt)
 {
+ // Mesh can only be built with 1D Qelements.
+ MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(1);
+
  //Now set the lagrangian coordinates of the nodes
  set_lagrangian_nodal_coordinates();
 

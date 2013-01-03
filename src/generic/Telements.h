@@ -1093,12 +1093,49 @@ template<>
   
  };
 
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+
+//========================================================================
+/// Empty base class for Telements (created so that 
+/// we can use dynamic_cast<>() to figure out if a an element
+/// is a Telement (from a purely geometric point of view).
+//========================================================================
+ class TElementGeometricBase : public virtual FiniteElement
+{
+
+  public:
+
+ /// Empty default constructor
+ TElementGeometricBase(){} 
+
+ /// Broken copy constructor
+ TElementGeometricBase(const TElementGeometricBase&) 
+  { 
+   BrokenCopy::broken_copy("TElementGeometricBase");
+  } 
+ 
+ /// Broken assignment operator
+ void operator=(const TElementGeometricBase&) 
+  {
+   BrokenCopy::broken_assign("TElementGeometricBase");
+  }
+
+
+};
+
+
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+
 //========================================================================
 /// Empty base class for Telements (created so that 
 /// we can use dynamic_cast<>() to figure out if a an element
 /// is a Telement).
 //========================================================================
- class TElementBase : public virtual FiniteElement
+ class TElementBase : public virtual TElementGeometricBase
 {
 
   public:
@@ -1200,15 +1237,6 @@ template<>
 
   }
 
-
-/*  /// \short Number of vertex nodes in the element: One more */
-/*  /// than spatial dimension */
-/*  virtual unsigned nvertex_node() const=0; */
- 
-/*  /// \short Pointer to the j-th vertex node in the element */
-/*  virtual Node* vertex_node_pt(const unsigned& j) const=0; */
-
- 
 };
 
 //=======================================================================

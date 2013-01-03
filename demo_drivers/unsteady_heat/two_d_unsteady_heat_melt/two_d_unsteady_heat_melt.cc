@@ -47,9 +47,7 @@ using namespace oomph;
 using namespace MathematicalConstants;
 
 
-/////////////////////////////////////////////////////////////////////// 
-///////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////// 
+
 
 //======start_of_ProblemParameters=====================
 /// Namespace for problem parameters
@@ -333,7 +331,7 @@ int main(int argc, char* argv[])
 
  // Build problem
  UnsteadyHeatProblem<QUnsteadyHeatElement<2,3> > problem;
- 
+
  // Setup labels for output
  DocInfo doc_info;
 

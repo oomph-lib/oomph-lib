@@ -1009,10 +1009,10 @@ template<unsigned NNODE_1D>
    void get_mass_matrix_diagonal(Vector<double> &mass_diag);
    
    /// \short returns the number of DOF types associated with this element:
-   /// 2: displacements and pressure // hierher
+   ///  displacement components and pressure
    unsigned ndof_types()
    {
-    return DIM+1; // hierher
+    return DIM+1; 
     }
  
    /// \short Create a list of pairs for all unknowns in this element,
@@ -1021,9 +1021,8 @@ template<unsigned NNODE_1D>
    /// of the "DOF" that this unknown is associated with.
    /// (Function can obviously only be called if the equation numbering
    /// scheme has been set up.)\n
-   /// There are 2 types of DOF:\n
-   /// 0 - displacement\n
-   /// 1 - pressure\n // hierher
+   /// There are DIM+1 types of DOF: displacement compnents and
+   /// pressure\n 
    void get_dof_numbers_for_unknowns(
     std::list<std::pair<unsigned long,unsigned> >& block_lookup_list)
     {
@@ -1063,7 +1062,6 @@ template<unsigned NNODE_1D>
            
              // add to list
              block_lookup_list.push_front(block_lookup);
-           
             }
           }
         }

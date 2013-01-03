@@ -455,9 +455,8 @@ namespace oomph
         element_domain=element_partition;
        }
 
-
-      // Set the GLOBAL Mesh_is_distributed flag
-      global_mesh_pt->set_mesh_distributed();
+      // Set the GLOBAL Mesh as being distributed
+      global_mesh_pt->set_communicator_pt(this->communicator_pt());
 
       double t_end = 0.0;
       if (Doc_time_in_distribute)
@@ -961,18 +960,16 @@ namespace oomph
       if (n_mesh==0)
        {
         // Prune halo elements and nodes for the (single) global mesh
-        mesh_pt()->prune_halo_elements_and_nodes
-         (this->communicator_pt(),deleted_element_pt,
-          doc_info,report_stats);
+        mesh_pt()->prune_halo_elements_and_nodes(deleted_element_pt,
+                                                 doc_info,report_stats);
        }
       else
        {
         // Loop over individual submeshes and prune separately
         for (unsigned i_mesh=0; i_mesh<n_mesh; i_mesh++)
          {
-          mesh_pt(i_mesh)->prune_halo_elements_and_nodes
-           (this->communicator_pt(),deleted_element_pt,
-            doc_info,report_stats);
+          mesh_pt(i_mesh)->prune_halo_elements_and_nodes(deleted_element_pt,
+                                                         doc_info,report_stats);
          }
 
         // Rebuild the global mesh
@@ -4117,11 +4114,13 @@ void Problem::sparse_assemble_row_or_column_compressed_with_maps(
  //Locally cache pointer to assembly handler
  AssemblyHandler* const assembly_handler_pt = Assembly_handler_pt;
 
+#ifdef OOMPH_HAS_MPI
  bool doing_residuals=false;
  if (dynamic_cast<ParallelResidualsHandler*>(Assembly_handler_pt)!=0)
   {
    doing_residuals=true;
   }
+#endif
  
 //Error check dimensions
 #ifdef PARANOID
@@ -4460,11 +4459,13 @@ void Problem::sparse_assemble_row_or_column_compressed_with_lists(
  //Locally cache pointer to assembly handler
  AssemblyHandler* const assembly_handler_pt = Assembly_handler_pt;
 
+#ifdef OOMPH_HAS_MPI
  bool doing_residuals=false;
  if (dynamic_cast<ParallelResidualsHandler*>(Assembly_handler_pt)!=0)
   {
    doing_residuals=true;
   }
+#endif
 
 //Error check dimensions
 #ifdef PARANOID
@@ -4873,11 +4874,13 @@ void Problem::sparse_assemble_row_or_column_compressed_with_vectors_of_pairs(
  //Locally cache pointer to assembly handler
  AssemblyHandler* const assembly_handler_pt = Assembly_handler_pt;
  
+#ifdef OOMPH_HAS_MPI
  bool doing_residuals=false;
  if (dynamic_cast<ParallelResidualsHandler*>(Assembly_handler_pt)!=0)
   {
    doing_residuals=true;
   }
+#endif
 
 //Error check dimensions
 #ifdef PARANOID
@@ -5231,11 +5234,13 @@ void Problem::sparse_assemble_row_or_column_compressed_with_two_vectors(
  //Locally cache pointer to assembly handler
  AssemblyHandler* const assembly_handler_pt = Assembly_handler_pt;
 
+#ifdef OOMPH_HAS_MPI
  bool doing_residuals=false;
  if (dynamic_cast<ParallelResidualsHandler*>(Assembly_handler_pt)!=0)
   {
    doing_residuals=true;
   }
+#endif
 
 //Error check dimensions
 #ifdef PARANOID
@@ -5596,11 +5601,13 @@ void Problem::sparse_assemble_row_or_column_compressed_with_two_arrays(
  //Locally cache pointer to assembly handler
  AssemblyHandler* const assembly_handler_pt = Assembly_handler_pt;
 
+#ifdef OOMPH_HAS_MPI
  bool doing_residuals=false;
  if (dynamic_cast<ParallelResidualsHandler*>(Assembly_handler_pt)!=0)
   {
    doing_residuals=true;
   }
+#endif
 
 //Error check dimensions
 #ifdef PARANOID
@@ -10743,7 +10750,9 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
 
 
  // Read levels of refinement before pruning
+#ifdef OOMPH_HAS_MPI
  bool refine_and_prune_required=false;
+#endif
  Vector<unsigned> nrefinement_for_mesh(n_mesh);
  for (unsigned i=0;i<n_mesh;i++)
   {
@@ -10802,7 +10811,7 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
        int int_min_ref=0;         
        MPI_Allreduce(&int_local_min_ref,&int_min_ref,1,
                      MPI_INT,MPI_MIN,
-                     MPI_Helpers::communicator_pt()->mpi_comm());
+                     Communicator_pt->mpi_comm());
        
        // Overall min refinement level over all meshes
        min_ref=unsigned(int_min_ref);
@@ -10816,10 +10825,13 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
       }
     }
    
+#ifdef OOMPH_HAS_MPI
    if (nrefinement_for_mesh[i]>0)
     {
      refine_and_prune_required=true;
     }
+#endif
+
   }
  
 
@@ -10836,7 +10848,7 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
     }
    MPI_Allreduce(&local_req_flag,&req_flag,1,
                  MPI_UNSIGNED,MPI_MAX,
-                 MPI_Helpers::communicator_pt()->mpi_comm());
+                 Communicator_pt->mpi_comm());
    refine_and_prune_required=false;
    if (req_flag==1)
     {
@@ -10855,7 +10867,7 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
                    &nrefinement_for_mesh[0],
                    n_mesh,
                    MPI_UNSIGNED,MPI_MAX,
-                   MPI_Helpers::communicator_pt()->mpi_comm());
+                   Communicator_pt->mpi_comm());
      
 #ifdef PARANOID
      // Check it: Reconciliation should only be required for
@@ -11112,7 +11124,7 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
      // specified file and performs refinements until the mesh has
      // reached the same level of refinement as the mesh that existed
      // when the problem was dumped to disk.
-     mmesh_pt->refine(this->communicator_pt(),restart_file);
+     mmesh_pt->refine(restart_file);
     }
 #ifdef OOMPH_HAS_TRIANGLE_LIB  
    // Regenerate mesh from triangulate IO if it's a triangular mesh
@@ -11147,7 +11159,7 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
        // the specified file and performs refinements until the mesh has
        // reached the same level of refinement as the mesh that existed
        // when the problem was dumped to disk.
-       mmesh_pt->refine(this->communicator_pt(),restart_file);
+       mmesh_pt->refine(restart_file);
       }
 #ifdef OOMPH_HAS_TRIANGLE_LIB  
      // Regenerate mesh from triangulate IO if it's a triangular mesh
@@ -11181,14 +11193,17 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
  unsigned local_unsteady_restart_flag=0;
  double local_time=-DBL_MAX;
  unsigned local_n_dt=0;
+#ifdef OOMPH_HAS_MPI
  unsigned local_sync_needed_flag=0;
+#endif
   Vector<double> local_dt;
 
  if (restart_file.is_open())
   {
    oomph_info <<"Restart file exists" << std::endl;
+#ifdef OOMPH_HAS_MPI
    local_sync_needed_flag=0;
-
+#endif
    // Read line up to termination sign
    getline(restart_file,input_string,'#');
    
@@ -11234,7 +11249,9 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
  else
   {
    oomph_info <<"Restart file does not exist" << std::endl;
+#ifdef OOMPH_HAS_MPI
    local_sync_needed_flag=1;
+#endif
   }
 
 
@@ -11623,8 +11640,7 @@ void Problem::bifurcation_adapt_helper(
            if(TreeBasedRefineableMeshBase* original_mesh_pt
               = dynamic_cast<TreeBasedRefineableMeshBase*>(this->mesh_pt(0)))
            {
-            mmesh_pt->refine_base_mesh_as_in_reference_mesh(
-             this->communicator_pt(),original_mesh_pt);
+            mmesh_pt->refine_base_mesh_as_in_reference_mesh(original_mesh_pt);
            }
            else
             {
@@ -11664,8 +11680,7 @@ void Problem::bifurcation_adapt_helper(
                 = dynamic_cast<TreeBasedRefineableMeshBase*>(this->mesh_pt(m)))
               {
                mmesh_pt->
-                refine_base_mesh_as_in_reference_mesh(
-                 this->communicator_pt(),original_mesh_pt);
+                refine_base_mesh_as_in_reference_mesh(original_mesh_pt);
               }
              else
               {
@@ -11950,13 +11965,11 @@ void Problem::adapt(unsigned &n_refined, unsigned &n_unrefined)
        
        if (mmesh_pt->doc_info_pt()==0)
         {
-         error_estimator_pt->get_element_errors(this->communicator_pt(),
-                                                mesh_pt(0),elemental_error);
+         error_estimator_pt->get_element_errors(mesh_pt(0),elemental_error);
         }
        else
         {
-         error_estimator_pt->get_element_errors(this->communicator_pt(),
-                                                mesh_pt(0),elemental_error,
+         error_estimator_pt->get_element_errors(mesh_pt(0),elemental_error,
                                                 *mmesh_pt->doc_info_pt());
         }
        
@@ -11984,7 +11997,7 @@ void Problem::adapt(unsigned &n_refined, unsigned &n_unrefined)
         }
        
        // Adapt mesh
-       mmesh_pt->adapt(this->communicator_pt(),elemental_error);
+       mmesh_pt->adapt(elemental_error);
         
        // Add to counters
        n_refined+=mmesh_pt->nrefined(); 
@@ -12044,14 +12057,12 @@ void Problem::adapt(unsigned &n_refined, unsigned &n_unrefined)
          Vector<double> elemental_error(mmesh_pt->nelement());
          if (mmesh_pt->doc_info_pt()==0)
           {
-           error_estimator_pt->get_element_errors(this->communicator_pt(),
-                                                  mesh_pt(imesh),
+           error_estimator_pt->get_element_errors(mesh_pt(imesh),
                                                   elemental_error);
           }
          else
           {
-           error_estimator_pt->get_element_errors(this->communicator_pt(),
-                                                  mesh_pt(imesh),
+           error_estimator_pt->get_element_errors(mesh_pt(imesh),
                                                   elemental_error,
                                                   *mmesh_pt->doc_info_pt());
           }
@@ -12084,7 +12095,7 @@ void Problem::adapt(unsigned &n_refined, unsigned &n_unrefined)
           }
 
          // Adapt mesh
-         mmesh_pt->adapt(this->communicator_pt(),elemental_error); 
+         mmesh_pt->adapt(elemental_error); 
   
          // Add to counters
          n_refined+=mmesh_pt->nrefined(); 
@@ -12252,13 +12263,11 @@ void Problem::p_adapt(unsigned &n_refined, unsigned &n_unrefined)
        
        if (mmesh_pt->doc_info_pt()==0)
         {
-         error_estimator_pt->get_element_errors(this->communicator_pt(),
-                                                mesh_pt(0),elemental_error);
+         error_estimator_pt->get_element_errors(mesh_pt(0),elemental_error);
         }
        else
         {
-         error_estimator_pt->get_element_errors(this->communicator_pt(),
-                                                mesh_pt(0),elemental_error,
+         error_estimator_pt->get_element_errors(mesh_pt(0),elemental_error,
                                                 *mmesh_pt->doc_info_pt());
         }
        
@@ -12286,7 +12295,7 @@ void Problem::p_adapt(unsigned &n_refined, unsigned &n_unrefined)
         }
        
        // Adapt mesh
-       mmesh_pt->p_adapt(this->communicator_pt(),elemental_error);
+       mmesh_pt->p_adapt(elemental_error);
         
        // Add to counters
        n_refined+=mmesh_pt->nrefined(); 
@@ -12346,14 +12355,12 @@ void Problem::p_adapt(unsigned &n_refined, unsigned &n_unrefined)
          Vector<double> elemental_error(mmesh_pt->nelement());
          if (mmesh_pt->doc_info_pt()==0)
           {
-           error_estimator_pt->get_element_errors(this->communicator_pt(),
-                                                  mesh_pt(imesh),
+           error_estimator_pt->get_element_errors(mesh_pt(imesh),
                                                   elemental_error);
           }
          else
           {
-           error_estimator_pt->get_element_errors(this->communicator_pt(),
-                                                  mesh_pt(imesh),
+           error_estimator_pt->get_element_errors(mesh_pt(imesh),
                                                   elemental_error,
                                                   *mmesh_pt->doc_info_pt());
           }
@@ -12386,7 +12393,7 @@ void Problem::p_adapt(unsigned &n_refined, unsigned &n_unrefined)
           }
 
          // Adapt mesh
-         mmesh_pt->p_adapt(this->communicator_pt(),elemental_error); 
+         mmesh_pt->p_adapt(elemental_error); 
   
          // Add to counters
          n_refined+=mmesh_pt->nrefined(); 
@@ -12504,7 +12511,7 @@ void Problem::adapt_based_on_error_estimates(unsigned &n_refined,
      if (mmesh_pt->is_adaptation_enabled())
       {
        // Adapt mesh
-       mmesh_pt->adapt(this->communicator_pt(),elemental_error[0]);
+       mmesh_pt->adapt(elemental_error[0]);
        
        // Add to counters
        n_refined += mmesh_pt->nrefined();
@@ -12538,7 +12545,7 @@ void Problem::adapt_based_on_error_estimates(unsigned &n_refined,
         if (mmesh_pt->is_adaptation_enabled())
          {
           // Adapt mesh
-          mmesh_pt->adapt(this->communicator_pt(),elemental_error[imesh]); 
+          mmesh_pt->adapt(elemental_error[imesh]); 
           
           // Add to counters
           n_refined += mmesh_pt->nrefined();
@@ -12614,14 +12621,12 @@ void Problem::get_all_error_estimates(Vector<Vector<double> > &elemental_error)
        //Are we documenting the errors or not
        if(mmesh_pt->doc_info_pt()==0)
         {
-         error_estimator_pt->get_element_errors(this->communicator_pt(),
-                                                Problem::mesh_pt(0),
+         error_estimator_pt->get_element_errors(Problem::mesh_pt(0),
                                                 elemental_error[0]);
         }
        else
         {
-         error_estimator_pt->get_element_errors(this->communicator_pt(),
-                                                Problem::mesh_pt(0),
+         error_estimator_pt->get_element_errors(Problem::mesh_pt(0),
                                                 elemental_error[0],
                                                 *mmesh_pt->doc_info_pt());
         }
@@ -12686,14 +12691,12 @@ void Problem::get_all_error_estimates(Vector<Vector<double> > &elemental_error)
          elemental_error[imesh].resize(mmesh_pt->nelement());
          if (mmesh_pt->doc_info_pt()==0)
           {
-           error_estimator_pt->get_element_errors(this->communicator_pt(),
-                                                  Problem::mesh_pt(imesh),
+           error_estimator_pt->get_element_errors(Problem::mesh_pt(imesh),
                                                   elemental_error[imesh]);
           }
          else
           {
-           error_estimator_pt->get_element_errors(this->communicator_pt(),
-                                                  Problem::mesh_pt(imesh),
+           error_estimator_pt->get_element_errors(Problem::mesh_pt(imesh),
                                                   elemental_error[imesh],
                                                   *mmesh_pt->doc_info_pt());
           }
@@ -12774,14 +12777,12 @@ void Problem::doc_errors(DocInfo& doc_info)
      Vector<double> elemental_error(mmesh_pt->nelement());
      if (!doc_info.is_doc_enabled())
       {
-       error_estimator_pt->get_element_errors(this->communicator_pt(),
-                                              mesh_pt(0),
+       error_estimator_pt->get_element_errors(mesh_pt(0),
                                               elemental_error);
       }
      else
       {
-       error_estimator_pt->get_element_errors(this->communicator_pt(),
-                                              mesh_pt(0),
+       error_estimator_pt->get_element_errors(mesh_pt(0),
                                               elemental_error,
                                               doc_info);
       }
@@ -12834,14 +12835,12 @@ void Problem::doc_errors(DocInfo& doc_info)
        Vector<double> elemental_error(mmesh_pt->nelement());
        if (mmesh_pt->doc_info_pt()==0)
         {
-         error_estimator_pt->get_element_errors(this->communicator_pt(),
-                                                mesh_pt(imesh),
+         error_estimator_pt->get_element_errors(mesh_pt(imesh),
                                                 elemental_error);
         }
        else
         {
-         error_estimator_pt->get_element_errors(this->communicator_pt(),
-                                                mesh_pt(imesh),
+         error_estimator_pt->get_element_errors(mesh_pt(imesh),
                                                 elemental_error,
                                                 *mmesh_pt->doc_info_pt());
         }
@@ -13874,7 +13873,7 @@ unsigned Problem::unrefine_uniformly()
    if(RefineableMeshBase* mmesh_pt = 
       dynamic_cast<RefineableMeshBase*>(mesh_pt(0)))
     {
-     success_flag+=mmesh_pt->unrefine_uniformly(this->communicator_pt());
+     success_flag+=mmesh_pt->unrefine_uniformly();
     }
    else
     {
@@ -13892,7 +13891,7 @@ unsigned Problem::unrefine_uniformly()
      if (RefineableMeshBase* mmesh_pt=
          dynamic_cast<RefineableMeshBase*>(mesh_pt(imesh)))
       {
-       success_flag+=mmesh_pt->unrefine_uniformly(this->communicator_pt());
+       success_flag+=mmesh_pt->unrefine_uniformly();
       }
      else
       {
@@ -13955,7 +13954,7 @@ unsigned Problem::unrefine_uniformly(const unsigned& i_mesh)
  if(RefineableMeshBase* mmesh_pt = 
     dynamic_cast<RefineableMeshBase*>(mesh_pt(i_mesh)))
   {
-   success_flag+=mmesh_pt->unrefine_uniformly(this->communicator_pt());
+   success_flag+=mmesh_pt->unrefine_uniformly();
   }
  else
   {
@@ -14445,7 +14444,7 @@ void Problem::check_halo_schemes(DocInfo& doc_info)
   {
    oomph_info << "Checking halo schemes on single mesh" << std::endl;
    doc_info.label()="_one_and_only_mesh_";
-   mesh_pt()->check_halo_schemes(this->communicator_pt(),doc_info,
+   mesh_pt()->check_halo_schemes(doc_info,
                                  Max_permitted_error_for_halo_check);
   }
  else // there are submeshes
@@ -14456,7 +14455,7 @@ void Problem::check_halo_schemes(DocInfo& doc_info)
      std::stringstream tmp;
      tmp << "_mesh" << i_mesh << "_";
      doc_info.label()=tmp.str();
-     mesh_pt(i_mesh)->check_halo_schemes(this->communicator_pt(),doc_info,
+     mesh_pt(i_mesh)->check_halo_schemes(doc_info,
                                          Max_permitted_error_for_halo_check);
     }
   }
@@ -15271,7 +15270,7 @@ void Problem::copy_haloed_eqn_numbers_helper(const bool& do_halos,
    unsigned global_ntarget=0;
    MPI_Allreduce(&local_ntarget,&global_ntarget,1,
                  MPI_UNSIGNED,MPI_MAX,
-                 MPI_Helpers::communicator_pt()->mpi_comm());
+                 Communicator_pt->mpi_comm());
 
    // External prescribed partitioning
    if (global_ntarget>0)
@@ -15499,7 +15498,7 @@ void Problem::copy_haloed_eqn_numbers_helper(const bool& do_halos,
          int int_min_ref=0;         
          MPI_Allreduce(&int_local_min_ref,&int_min_ref,1,
                        MPI_INT,MPI_MIN,
-                       MPI_Helpers::communicator_pt()->mpi_comm());
+                       Communicator_pt->mpi_comm());
          
          // Overall min refinement level over all meshes
          unsigned min_ref=unsigned(int_min_ref);
@@ -15540,8 +15539,8 @@ void Problem::copy_haloed_eqn_numbers_helper(const bool& do_halos,
            int int_min_ref=0;         
            MPI_Allreduce(&int_local_min_ref,&int_min_ref,1,
                          MPI_INT,MPI_MIN,
-                         MPI_Helpers::communicator_pt()->mpi_comm());
-           
+                         Communicator_pt->mpi_comm());
+
            // Overall min refinement level over all meshes
            unsigned min_ref=unsigned(int_min_ref);
            
@@ -15740,7 +15739,7 @@ void Problem::copy_haloed_eqn_numbers_helper(const bool& do_halos,
        if (ref_mesh_pt!=0)
         {
          ref_mesh_pt->prune_halo_elements_and_nodes
-          (this->communicator_pt(),deleted_element_pt,doc_info,report_stats);
+          (deleted_element_pt,doc_info,report_stats);
         }
       }
      else
@@ -15752,7 +15751,7 @@ void Problem::copy_haloed_eqn_numbers_helper(const bool& do_halos,
          if (ref_mesh_pt!=0)
           {
            ref_mesh_pt->prune_halo_elements_and_nodes
-            (this->communicator_pt(),deleted_element_pt,doc_info,report_stats);
+            (deleted_element_pt,doc_info,report_stats);
           }
         }
        // Rebuild the global mesh
@@ -17555,8 +17554,7 @@ void Problem::refine_distributed_base_mesh
     dynamic_cast<TreeBasedRefineableMeshBase*>(my_mesh_pt);
    if (ref_mesh_pt!=0)
     {
-     ref_mesh_pt->refine_base_mesh(this->communicator_pt(),
-                                   to_be_refined_on_this_proc);
+     ref_mesh_pt->refine_base_mesh(to_be_refined_on_this_proc);
     }
   }
  

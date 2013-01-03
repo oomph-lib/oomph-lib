@@ -43,7 +43,10 @@ EighthSphereMesh<ELEMENT>::EighthSphereMesh(const double& radius,
                                             TimeStepper* time_stepper_pt) :
  Radius(radius)
 { 
-
+ 
+ // Mesh can only be built with 3D Qelements.
+ MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(3);
+ 
  //Set the number of boundaries
  this->set_nboundary(4);
 

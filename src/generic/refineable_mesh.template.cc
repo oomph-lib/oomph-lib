@@ -56,9 +56,7 @@ namespace oomph
  //========================================================================
  template<class ELEMENT>
  void TreeBasedRefineableMesh<ELEMENT>::
- additional_synchronise_hanging_nodes(
-  OomphCommunicator* comm_pt,
-  const unsigned& ncont_interpolated_values)
+ additional_synchronise_hanging_nodes(const unsigned& ncont_interpolated_values)
  {
   //This provides all the node-adding helper functions required to reconstruct
   //the missing halo master nodes on this processor
@@ -74,8 +72,8 @@ namespace oomph
 
   // Store number of processors and current process 
   MPI_Status status;
-  int n_proc=comm_pt->nproc();
-  int my_rank=comm_pt->my_rank();
+  int n_proc=Comm_pt->nproc();
+  int my_rank=Comm_pt->my_rank();
 
       
 #ifdef PARANOID
@@ -196,7 +194,7 @@ namespace oomph
 #ifdef PARANOID
       // Check that number of halo and haloed data match
       unsigned tmp=0;     
-      MPI_Recv(&tmp,1,MPI_UNSIGNED,d,0,comm_pt->mpi_comm(),&status);
+      MPI_Recv(&tmp,1,MPI_UNSIGNED,d,0,Comm_pt->mpi_comm(),&status);
       if (tmp!=count_haloed)
        {
         std::ostringstream error_stream;
@@ -215,7 +213,7 @@ namespace oomph
        {
         halo_hanging[d].resize(count_haloed);
         MPI_Recv(&halo_hanging[d][0],count_haloed,MPI_INT,d,0,
-                 comm_pt->mpi_comm(),&status);       
+                 Comm_pt->mpi_comm(),&status);       
        }
      }
     else // d==my_rank, i.e. current process: Send halo hanging status 
@@ -261,14 +259,14 @@ namespace oomph
           
 #ifdef PARANOID
           // Check that number of halo and haloed data match
-          MPI_Send(&count_halo,1,MPI_UNSIGNED,dd,0,comm_pt->mpi_comm());
+          MPI_Send(&count_halo,1,MPI_UNSIGNED,dd,0,Comm_pt->mpi_comm());
 #endif
           
           // Send data (if any)
           if (count_halo!=0)
            {
             MPI_Send(&local_halo_hanging[0],count_halo,MPI_INT,
-                     dd,0,comm_pt->mpi_comm());
+                     dd,0,Comm_pt->mpi_comm());
            }
          }
        }
@@ -400,17 +398,17 @@ namespace oomph
       unsigned send_doubles_count = send_doubles.size();
 
       //Send ammount of data
-      MPI_Send(&send_unsigneds_count,1,MPI_UNSIGNED,d,0,comm_pt->mpi_comm());
-      MPI_Send(&send_doubles_count,1,MPI_UNSIGNED,d,1,comm_pt->mpi_comm());
+      MPI_Send(&send_unsigneds_count,1,MPI_UNSIGNED,d,0,Comm_pt->mpi_comm());
+      MPI_Send(&send_doubles_count,1,MPI_UNSIGNED,d,1,Comm_pt->mpi_comm());
 
       //Send to halo process the number of haloed nodes we processed
       MPI_Send(&nhaloed_nonmaster_nodes_processed,1,MPI_UNSIGNED,d,2,
-               comm_pt->mpi_comm());
+               Comm_pt->mpi_comm());
       if(nhaloed_nonmaster_nodes_processed>0)
        {
         MPI_Send(&haloed_nonmaster_node_index[0],
                  nhaloed_nonmaster_nodes_processed,MPI_UNSIGNED,d,3,
-                 comm_pt->mpi_comm());
+                 Comm_pt->mpi_comm());
        }
 
       //Send data about external halo nodes
@@ -418,13 +416,13 @@ namespace oomph
        {
         //Only send if there is anything to send
         MPI_Send(&send_unsigneds[0],send_unsigneds_count,MPI_UNSIGNED,d,4,
-                 comm_pt->mpi_comm());
+                 Comm_pt->mpi_comm());
        }
       if(send_doubles_count>0)
        {
         //Only send if there is anything to send
         MPI_Send(&send_doubles[0],send_doubles_count,MPI_DOUBLE,d,5,
-                 comm_pt->mpi_comm());
+                 Comm_pt->mpi_comm());
        }
      
      }
@@ -443,21 +441,21 @@ namespace oomph
           unsigned nrecv_unsigneds = 0;
           unsigned nrecv_doubles = 0;
           MPI_Recv(&nrecv_unsigneds,1,MPI_UNSIGNED,dd,0,
-                   comm_pt->mpi_comm(),&status);
+                   Comm_pt->mpi_comm(),&status);
           MPI_Recv(&nrecv_doubles,1,MPI_UNSIGNED,dd,1,
-                   comm_pt->mpi_comm(),&status);
+                   Comm_pt->mpi_comm(),&status);
 
           //Get from haloed process the number of halo nodes we need to process
           unsigned nhalo_nonmaster_nodes_to_process = 0;
           MPI_Recv(&nhalo_nonmaster_nodes_to_process,1,MPI_UNSIGNED,dd,2,
-                   comm_pt->mpi_comm(),&status);
+                   Comm_pt->mpi_comm(),&status);
           Vector<unsigned> halo_nonmaster_node_index(
                             nhalo_nonmaster_nodes_to_process);
           if (nhalo_nonmaster_nodes_to_process!=0)
            {
             MPI_Recv(&halo_nonmaster_node_index[0],
                      nhalo_nonmaster_nodes_to_process,MPI_UNSIGNED,dd,3,
-                     comm_pt->mpi_comm(),&status);
+                     Comm_pt->mpi_comm(),&status);
            }
 
           //Storage for data to be received
@@ -469,13 +467,13 @@ namespace oomph
            {
             //Only send if there is anything to send
             MPI_Recv(&recv_unsigneds[0],nrecv_unsigneds,MPI_UNSIGNED,dd,4,
-                     comm_pt->mpi_comm(),&status);
+                     Comm_pt->mpi_comm(),&status);
            }
           if(nrecv_doubles>0)
            {
             //Only send if there is anything to send
             MPI_Recv(&recv_doubles[0],nrecv_doubles,MPI_DOUBLE,dd,5,
-                     comm_pt->mpi_comm(),&status);
+                     Comm_pt->mpi_comm(),&status);
            }
 
           //Counters for flat packed data counters

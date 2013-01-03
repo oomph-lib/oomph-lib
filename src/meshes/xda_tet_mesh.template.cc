@@ -29,7 +29,7 @@
 #define OOMPH_XDA_TET_MESH_TEMPLATE_CC
 
 
-
+#include "../generic/Telements.h"
 #include "xda_tet_mesh.template.h"
 
 
@@ -50,6 +50,9 @@ namespace oomph
  XdaTetMesh<ELEMENT>::XdaTetMesh(const std::string xda_file_name, 
                                  TimeStepper* time_stepper_pt)
  {
+  // Mesh can only be built with 3D Telements.
+  MeshChecker::assert_geometric_element<TElementGeometricBase,ELEMENT>(3);
+  
   // Open and process xda input file
   std::ifstream infile(xda_file_name.c_str(),std::ios_base::in);
   unsigned n_node;

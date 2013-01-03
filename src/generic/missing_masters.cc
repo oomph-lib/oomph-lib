@@ -609,7 +609,7 @@ namespace Missing_masters_functions
     }
    else
     {
-     send_unsigneds.push_back(MPI_Helpers::communicator_pt()->my_rank());
+     send_unsigneds.push_back(mesh_pt->communicator_pt()->my_rank());
     }
 #ifdef ANNOTATE_MISSING_MASTERS_COMMUNICATION
    Flat_packed_unsigneds_string.push_back("Master node non-halo processor ID");

@@ -53,6 +53,9 @@ QuarterTubeMesh<ELEMENT>::QuarterTubeMesh(GeomObject* wall_pt,
                                           TimeStepper* time_stepper_pt) :  
  Wall_pt(wall_pt), Xi_lo(xi_lo), Fract_mid(fract_mid), Xi_hi(xi_hi)
 {
+
+ // Mesh can only be built with 3D Qelements.
+ MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(3);
  
  // Build macro element-based domain
  Domain_pt = new QuarterTubeDomain(wall_pt,xi_lo,fract_mid,xi_hi,nlayer);

@@ -1366,7 +1366,9 @@ namespace oomph
    // Gets overwritten below if we've actually had any location to do here.
    Vector<double> percentage_coords_located_locally(n_max_level,100.0);
    Vector<double> percentage_coords_located_elsewhere(n_max_level,100.0);
+#ifdef OOMPH_HAS_MPI
    unsigned max_level_reached=1;
+#endif
 
    // Loop over all meshes
    for (unsigned i_mesh=0;i_mesh<n_mesh;i_mesh++)
@@ -1653,14 +1655,14 @@ namespace oomph
      if (problem_pt->communicator_pt()->nproc() > 1)
       {
        unsigned count_local_zetas=n_zeta_not_found;
-       MPI_Allreduce(&count_local_zetas,&n_zeta_not_found,1,MPI_UNSIGNED,MPI_SUM,
+       MPI_Allreduce(&count_local_zetas,&n_zeta_not_found,1,
+                     MPI_UNSIGNED,MPI_SUM,
                      problem_pt->communicator_pt()->mpi_comm());
       }
-#endif
-
      // Specify max level reached for later loop
-      max_level_reached=i_level+1; 
-     
+     max_level_reached=i_level+1; 
+#endif     
+
      /// If it's is now zero then break out of the spirals loop
      if (n_zeta_not_found==0) 
       {

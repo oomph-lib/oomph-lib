@@ -43,7 +43,9 @@ namespace oomph
   XdaTetMesh<TElement<3,3> >* tet_mesh_pt, 
   TimeStepper* time_stepper_pt)
  {
-
+  // Mesh can only be built with 3D Qelements.
+  MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(3);
+  
   // Figure out if the tet mesh is a solid mesh
   bool tet_mesh_is_solid_mesh=false;
   if (dynamic_cast<SolidFiniteElement*>(tet_mesh_pt->element_pt(0))!=0)

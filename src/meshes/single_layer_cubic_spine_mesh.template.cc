@@ -55,6 +55,9 @@ SingleLayerCubicSpineMesh(
  TimeStepper* time_stepper_pt) :
  SimpleCubicMesh<ELEMENT >(nx,ny,nz,lx,ly,h,time_stepper_pt)
 {
+ // Mesh can only be built with 3D Qelements.
+ MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(3);
+
  // Now build the single layer mesh on top of the existing mesh
  build_single_layer_mesh(time_stepper_pt);
 }
@@ -68,6 +71,9 @@ void SingleLayerCubicSpineMesh<ELEMENT, INTERFACE_ELEMENT>::
 build_single_layer_mesh(
  TimeStepper* time_stepper_pt) 
 {
+ // Mesh can only be built with 3D Qelements.
+ MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(3);
+
  //Read out the number of elements in the x-direction
  unsigned n_x = this->Nx;
  //Read out the number of elements in the y-direction

@@ -57,6 +57,9 @@ TwoLayerSpineMesh<ELEMENT,INTERFACE_ELEMENT>::TwoLayerSpineMesh(
  RectangularQuadMesh<ELEMENT >(nx,ny1+ny2,0.0,lx,0.0,h1+h2,false,false,
                                time_stepper_pt)
 {
+ // Mesh can only be built with 2D Qelements.
+ MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(2);
+
  // We've called the "generic" constructor for the RectangularQuadMesh
  // which doesn't do much...
  // Now set up the parameters that characterise the mesh geometry
@@ -99,7 +102,10 @@ TwoLayerSpineMesh<ELEMENT,INTERFACE_ELEMENT>::TwoLayerSpineMesh(
  const bool& periodic_in_x, TimeStepper* time_stepper_pt) :
  RectangularQuadMesh<ELEMENT >(nx,ny1+ny2,0.0,lx,0.0,h1+h2,periodic_in_x,
                                false,time_stepper_pt)
-{
+{ 
+ // Mesh can only be built with 2D Qelements.
+ MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(2);
+
  // We've called the "generic" constructor for the RectangularQuadMesh
  // which doesn't do much...
  // Now set up the parameters that characterise the mesh geometry
@@ -145,6 +151,9 @@ TwoLayerSpineMesh<ELEMENT,INTERFACE_ELEMENT>::TwoLayerSpineMesh(
  RectangularQuadMesh<ELEMENT >(nx,ny1+ny2,0.0,lx,0.0,h1+h2,periodic_in_x,
                                false,time_stepper_pt)
 {
+ // Mesh can only be built with 2D Qelements.
+ MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(2);
+
  // We've called the "generic" constructor for the RectangularQuadMesh
  // which doesn't do much...
  // Now set up the parameters that characterise the mesh geometry
@@ -230,6 +239,8 @@ template<class ELEMENT, class INTERFACE_ELEMENT>
 void TwoLayerSpineMesh<ELEMENT,INTERFACE_ELEMENT>::build_two_layer_mesh(
  TimeStepper* time_stepper_pt) 
 {
+ // Mesh can only be built with 2D Qelements.
+ MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(2);
 
  // Build the underlying quad mesh: 
  RectangularQuadMesh<ELEMENT >::build_mesh(time_stepper_pt);
@@ -635,6 +646,9 @@ Axisym2x6TwoLayerSpineMesh(const unsigned &nxa, const unsigned &nxb,
                                               nya2+nyb2+nyc2,lx,h1,h2,
                                               false,false,time_stepper_pt)
 {
+ // Mesh can only be built with 2D Qelements.
+ MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(2);
+
  // We've called the "generic" constructor for the TwoLayerSpineMesh and
  // set the "build_mesh" flag to false. This is done so that we do not
  // call "build_two_layer_mesh(...)" prematurely. We now set up the
@@ -958,6 +972,9 @@ Axisym3x6TwoLayerSpineMesh(const unsigned &nxa, const unsigned &nxb,
                                               nya2+nyb2+nyc2,lx,h1,h2,
                                               false,false,time_stepper_pt)
 {
+ // Mesh can only be built with 2D Qelements.
+ MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(2);
+
  // We've called the "generic" constructor for the TwoLayerSpineMesh and
  // set the "build_mesh" flag to false. This is done so that we do not
  // call "build_two_layer_mesh(...)" prematurely. We now set up the
@@ -1195,6 +1212,9 @@ Axisym3x8TwoLayerSpineMesh(const unsigned &nxa, const unsigned &nxb,
                            TimeStepper* time_stepper_pt) :
  TwoLayerSpineMesh<ELEMENT, INTERFACE_ELEMENT >()
 {
+ // Mesh can only be built with 2D Qelements.
+ MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(2);
+
  // We've called the "generic" constructor for the RectangularQuadMesh
  // which doesn't do much...
  // Now set up the parameters that characterise the mesh geometry

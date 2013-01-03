@@ -178,9 +178,6 @@ void METIS::partition_mesh(Problem* problem_pt, const unsigned& ndomain,
                            const unsigned& objective,
                            Vector<unsigned>& element_domain)
 {
- // Communicator
- OomphCommunicator* comm_pt=problem_pt->communicator_pt();
-
  // Global mesh
  Mesh* mesh_pt=problem_pt->mesh_pt();
 
@@ -363,7 +360,7 @@ void METIS::partition_mesh(Problem* problem_pt, const unsigned& ndomain,
        // Get error for all elements
        Vector<double> elemental_error(nelem);     
        mmesh_pt->spatial_error_estimator_pt()->
-        get_element_errors(comm_pt,mesh_pt,elemental_error);
+        get_element_errors(mesh_pt,elemental_error);
      
        double max_error=*(std::max_element(elemental_error.begin(),
                                            elemental_error.end()));
@@ -429,7 +426,7 @@ void METIS::partition_mesh(Problem* problem_pt, const unsigned& ndomain,
            unsigned nsub_elem=loop_helper[i_mesh+1]-loop_helper[i_mesh];
            Vector<double> elemental_error(nsub_elem);
            mmesh_pt->spatial_error_estimator_pt()->
-            get_element_errors(comm_pt,problem_pt->mesh_pt(i_mesh),
+            get_element_errors(problem_pt->mesh_pt(i_mesh),
                                elemental_error);
      
            double max_error=*(std::max_element(elemental_error.begin(),

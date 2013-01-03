@@ -306,27 +306,6 @@ class NewMumpsPreconditioner : public Preconditioner
                          "NewMumpsPreconditioner::setup()",             
                          OOMPH_EXCEPTION_LOCATION);        
     }
-   
-   
-/*    // Wipe previously allocated memory */
-/*    Solver.clean_up_memory(); */
-   
-/*    if (dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt) != 0) */
-/*     { */
-/*      this->distribution_pt() */
-/*       ->build(dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt) */
-/*               ->distribution_pt()); */
-/*     } */
-/*    else */
-/*     { */
-/*      this->distribution_pt()->build(problem_pt->communicator_pt(), */
-/*                                     matrix_pt->nrow(),false); */
-/*     } */
-/*    Solver.doc_time() = false; */
-// hierher do we need this?
-/*    Solver.distribution_pt()->build(this->distribution_pt()); */
-/*    Solver.factorise(matrix_pt); */
-    
   }
   
   /// \short Function applies Mumps to vector r for (exact) 

@@ -31,9 +31,11 @@
 
 #include<algorithm>
 
+#include "../generic/Telements.h"
+
 //Simple 2D triangle mesh class
 #include "simple_rectangular_tri_mesh.template.h"
-#include <algorithm>
+
 
 
 namespace oomph
@@ -62,6 +64,9 @@ SimpleRectangularTriMesh<ELEMENT>::SimpleRectangularTriMesh(
 {
 
  using namespace MathematicalConstants;
+
+ // Mesh can only be built with 2D Telements.
+ MeshChecker::assert_geometric_element<TElementGeometricBase,ELEMENT>(2);
 
  // Set number of boundaries
  this->set_nboundary(4);

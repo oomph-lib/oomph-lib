@@ -48,6 +48,10 @@ void CircularCylindricalShellMesh<ELEMENT>::build_mesh(
   const double &lx,
   const double &ly)
  {
+
+  // Mesh can only be built with 2D Qelements.
+  MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(2);
+  
   //Find out how many nodes there are
   unsigned n_node = nnode();
   

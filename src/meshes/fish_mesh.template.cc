@@ -41,6 +41,10 @@ namespace oomph
 template<class ELEMENT>
 FishMesh<ELEMENT>::FishMesh(TimeStepper* time_stepper_pt) 
 { 
+
+ // Mesh can only be built with 2D Qelements.
+ MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(2);
+ 
  // Fish back is a circle of radius 1, centred at (0.5,0.0)
  double x_c=0.5;
  double y_c=0.0;
@@ -64,6 +68,9 @@ template<class ELEMENT>
 FishMesh<ELEMENT>::FishMesh(GeomObject* back_pt, 
                             TimeStepper* time_stepper_pt) : Back_pt(back_pt)
 {
+ // Mesh can only be built with 2D Qelements.
+ MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(2);
+
  // Back_pt has already been set....
  Must_kill_fish_back=false;
 
@@ -79,6 +86,9 @@ FishMesh<ELEMENT>::FishMesh(GeomObject* back_pt,
 template<class ELEMENT>
 void FishMesh<ELEMENT>::build_mesh(TimeStepper* time_stepper_pt)
 {
+ // Mesh can only be built with 2D Qelements.
+ MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(2);
+
  // Build domain: Pass the pointer to the geometric object that
  // represents the fish's back (pointed to by the FishMesh's
  // private data member, Back_pt, and the values of the
@@ -88,7 +98,6 @@ void FishMesh<ELEMENT>::build_mesh(TimeStepper* time_stepper_pt)
  double xi_hi=0.4; 
  Domain_pt=new FishDomain(Back_pt,xi_lo,xi_hi);
  
-
  // Plot the domain? Keep this here in case we need to doc it
  bool plot_it=false;
  if (plot_it)

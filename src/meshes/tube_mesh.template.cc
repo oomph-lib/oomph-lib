@@ -49,7 +49,9 @@ TubeMesh<ELEMENT>::TubeMesh(GeomObject* volume_pt,
                             TimeStepper* time_stepper_pt) :  
  Volume_pt(volume_pt)
 {
- 
+ // Mesh can only be built with 3D Qelements.
+ MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(3);
+
  // Build macro element-based domain
  Domain_pt = new TubeDomain(volume_pt,centreline_limits,theta_positions,
                             radius_box,nlayer);

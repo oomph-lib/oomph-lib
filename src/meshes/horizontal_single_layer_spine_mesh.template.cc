@@ -57,6 +57,9 @@ HorizontalSingleLayerSpineMesh<ELEMENT,INTERFACE_ELEMENT>::HorizontalSingleLayer
  RectangularQuadMesh<ELEMENT>(nx,ny,0.0,lx,0.0,h,false,false,
                                time_stepper_pt)
 {
+ // Mesh can only be built with 2D Qelements.
+ MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(2);
+
  // We've called the "generic" constructor for the RectangularQuadMesh
  // which doesn't do much...
  
@@ -101,9 +104,12 @@ template<class ELEMENT, class INTERFACE_ELEMENT>
 void HorizontalSingleLayerSpineMesh<ELEMENT,INTERFACE_ELEMENT>::build_horizontal_single_layer_mesh(
  TimeStepper* time_stepper_pt) 
 {
-
+ // Mesh can only be built with 2D Qelements.
+ MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(2);
+ 
  // Build the underlying quad mesh: 
  RectangularQuadMesh<ELEMENT >::build_mesh(time_stepper_pt);
+
  //Read out the number of elements in the x-direction
  unsigned n_x = this->Nx;
  unsigned n_y = this->Ny;

@@ -895,8 +895,7 @@ unsigned Z2ErrorEstimator::nrecovery_terms(const unsigned& dim)
 /// - flux_fe*.dat
 /// - flux_rec*.dat 
 //======================================================================
-void Z2ErrorEstimator::get_element_errors(OomphCommunicator* comm_pt,
-                                          Mesh*& mesh_pt,
+void Z2ErrorEstimator::get_element_errors(Mesh*& mesh_pt,
                                           Vector<double>& elemental_error,
                                           DocInfo& doc_info)
  {
@@ -904,8 +903,19 @@ void Z2ErrorEstimator::get_element_errors(OomphCommunicator* comm_pt,
 
 #ifdef OOMPH_HAS_MPI
   // Storage for number of processors and current processor
-  int n_proc=comm_pt->nproc();
-  int my_rank=comm_pt->my_rank();
+  int n_proc=1;
+  int my_rank=0;
+  if (mesh_pt->communicator_pt()!=0)
+   {
+    my_rank=mesh_pt->communicator_pt()->my_rank();
+    n_proc=mesh_pt->communicator_pt()->nproc();
+   }
+  else if (MPI_Helpers::mpi_has_been_initialised())
+   {
+    my_rank=MPI_Helpers::communicator_pt()->my_rank();
+    n_proc =MPI_Helpers::communicator_pt()->nproc();
+   }
+
   MPI_Status status;
 
   // Initialise local values for all processes on mesh
@@ -960,6 +970,9 @@ void Z2ErrorEstimator::get_element_errors(OomphCommunicator* comm_pt,
   // if the mesh has been distributed
   if (mesh_pt->is_mesh_distributed())
    {
+    // Get communicator from mesh
+    OomphCommunicator* comm_pt=mesh_pt->communicator_pt();
+    
     MPI_Allreduce(&num_flux_terms_local,&num_flux_terms,1,MPI_UNSIGNED,
                   MPI_MAX,comm_pt->mpi_comm());
     MPI_Allreduce(&dim_local,&dim,1,MPI_INT,MPI_MAX,comm_pt->mpi_comm());
@@ -1133,6 +1146,9 @@ void Z2ErrorEstimator::get_element_errors(OomphCommunicator* comm_pt,
   if (!mesh_pt->is_mesh_distributed() 
       && MPI_Helpers::mpi_has_been_initialised())
    {
+    // Get communicator from namespace
+    OomphCommunicator* comm_pt=MPI_Helpers::communicator_pt();
+
     // All local recovered fluxes have been calculated, so now share result
     for (int iproc=0;iproc<n_proc;iproc++)
      {
@@ -1527,6 +1543,10 @@ void Z2ErrorEstimator::get_element_errors(OomphCommunicator* comm_pt,
 
   if (mesh_pt->is_mesh_distributed())
    {
+
+    // Get communicator from mesh
+    OomphCommunicator* comm_pt=mesh_pt->communicator_pt();
+    
     for (int iproc=0; iproc<n_proc; iproc++)
      {
       if (iproc!=my_rank) // Not current process, so send
@@ -1644,6 +1664,10 @@ void Z2ErrorEstimator::get_element_errors(OomphCommunicator* comm_pt,
 #ifdef OOMPH_HAS_MPI
     if (mesh_pt->is_mesh_distributed())
      {
+
+      // Get communicator from mesh
+      OomphCommunicator* comm_pt=mesh_pt->communicator_pt();
+
       Vector<double> total_flux_norm(n_compound_flux);
       // every process needs to know the sum
       MPI_Allreduce(&flux_norm[0],&total_flux_norm[0],n_compound_flux,
@@ -1699,7 +1723,7 @@ void Z2ErrorEstimator::get_element_errors(OomphCommunicator* comm_pt,
   // Doc global fluxes?
   if (doc_info.is_doc_enabled())
    {
-    doc_flux(comm_pt,mesh_pt,num_flux_terms,
+    doc_flux(mesh_pt,num_flux_terms,
              rec_flux_map,elemental_error,doc_info);
    }
 
@@ -1709,12 +1733,24 @@ void Z2ErrorEstimator::get_element_errors(OomphCommunicator* comm_pt,
 //==================================================================
 /// Doc FE and recovered flux
 //==================================================================
-void Z2ErrorEstimator::doc_flux(OomphCommunicator* comm_pt, Mesh* mesh_pt,
+void Z2ErrorEstimator::doc_flux(Mesh* mesh_pt,
                                 const unsigned& num_flux_terms,
                                 MapMatrixMixed<Node*,int,double>& rec_flux_map,
                                 const Vector<double>& elemental_error,
                                 DocInfo& doc_info)
 {
+
+#ifdef OOMPH_HAS_MPI
+
+ // Get communicator from mesh
+ OomphCommunicator* comm_pt=mesh_pt->communicator_pt();
+ 
+#else
+ 
+ // Dummy communicator 
+ OomphCommunicator* comm_pt=MPI_Helpers::communicator_pt();
+
+#endif
 
  // Setup output files
  std::ofstream some_file,feflux_file;

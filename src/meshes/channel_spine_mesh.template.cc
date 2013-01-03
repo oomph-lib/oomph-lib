@@ -67,6 +67,10 @@ ChannelSpineMesh<ELEMENT>::ChannelSpineMesh(
  Lx0(lx0), Lx1(lx1), Lx2(lx2), 
  Wall_pt(wall_pt)
 {
+
+ // Mesh can only be built with 2D Qelements.
+ MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(2);
+ 
  // We've called the "generic" constructor for the RectangularQuadMesh
  // which doesn't do much...
 
@@ -109,6 +113,9 @@ ChannelSpineMesh<ELEMENT>::ChannelSpineMesh(
  Lx0(lx0), Lx1(lx1), Lx2(lx2), 
  Wall_pt(wall_pt)
 {
+ // Mesh can only be built with 2D Qelements.
+ MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(2);
+ 
  // We've called the "generic" constructor for the RectangularQuadMesh
  // which doesn't do much...
 
@@ -132,7 +139,9 @@ template<class ELEMENT>
 void ChannelSpineMesh<ELEMENT>::build_channel_spine_mesh(
  TimeStepper* time_stepper_pt) 
 {
-
+ // Mesh can only be built with 2D Qelements.
+ MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(2);
+ 
  // Build the underlying quad mesh: 
  RectangularQuadMesh<ELEMENT >::build_mesh(time_stepper_pt);
 

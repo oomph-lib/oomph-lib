@@ -26,7 +26,7 @@
 //LIC// 
 //LIC//====================================================================
 // Driver for adaptive 2D rectangular driven cavity. Solved with black
-// box adaptation, using Taylor Hood and Crouzeix Raviart elements.
+// box adaptation, using Taylor Hood elements.
 
 // Generic oomph-lib header
 #include "generic.h"
@@ -104,59 +104,12 @@ public:
   } // end_of_actions_before_newton_solve
 
 
- /// After adaptation: Unpin pressure and pin redundant pressure dofs.
+ /// \short After adaptation: Unpin pressures and pin redundant pressure dofs
+ /// and pressure at origin
  void actions_after_adapt()
   {
-   // Unpin all pressure dofs
-   RefineableNavierStokesEquations<2>::
-    unpin_all_pressure_dofs(mesh_pt()->element_pt());
-    
-    // Pin redundant pressure dofs
-   RefineableNavierStokesEquations<2>::
-    pin_redundant_nodal_pressures(mesh_pt()->element_pt());
-   
-   // Now set the first pressure dof in the first element to 0.0
-
-   // Loop over all elements
-   const unsigned n_element=mesh_pt()->nelement();
-   for (unsigned e=0;e<n_element;e++)
-    {
-     // If the lower left node of this element is (0,0), then fix the 
-     // pressure dof in this element to zero
-     if (mesh_pt()->finite_element_pt(e)->node_pt(0)->x(0)==0.0 && 
-         mesh_pt()->finite_element_pt(e)->node_pt(0)->x(1)==0.0) // 2d problem
-      {
-       // Fix the pressure in element e at pdof=0 to 0.0
-       unsigned pdof=0;
-       fix_pressure(e,pdof,0.0);
-      }
-    }
-
-   // Set the boundary conditions for this problem: All nodes are
-   // free by default -- just pin the ones that have Dirichlet conditions
-   // here: All boundaries are Dirichlet boundaries.
-   unsigned num_bound = mesh_pt()->nboundary();
-   for(unsigned ibound=0;ibound<num_bound;ibound++)
-    {
-     unsigned num_nod= mesh_pt()->nboundary_node(ibound);
-     for (unsigned inod=0;inod<num_nod;inod++)
-      {
-       // Loop over values (u and v velocities)
-       for (unsigned i=0;i<2;i++)
-        {
-         mesh_pt()->boundary_node_pt(ibound,inod)->pin(i); 
-        }
-      }
-    } // end loop over boundaries
-   
-  } // end_of_actions_after_adapt
-
- /// hierher I think we need this because of pinning in load balance
- void actions_after_distribute()
-  {
-   // hierher tidy up by calling separate fct.
-   actions_after_adapt();
-  }
+   pin_only_pressure_at_origin();
+  } 
 
  /// Build the mesh
  void build_mesh();
@@ -169,14 +122,38 @@ private:
  /// Doc info object
  DocInfo Doc_info;
 
- ///Fix pressure in element e at pressure dof pdof and set to pvalue
- void fix_pressure(const unsigned &e, const unsigned &pdof, 
-                   const double &pvalue)
+ /// Pin redundant pressures and pressure at origin
+ void pin_only_pressure_at_origin()
   {
-   //Cast to proper element and fix pressure
-   dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e))->
-                          fix_pressure(pdof,pvalue);
-  } // end_of_fix_pressure
+   // Unpin all pressure dofs
+   RefineableNavierStokesEquations<2>::
+    unpin_all_pressure_dofs(mesh_pt()->element_pt());
+   
+   // Pin redundant pressure dofs
+   RefineableNavierStokesEquations<2>::
+    pin_redundant_nodal_pressures(mesh_pt()->element_pt());
+   
+   // Now set the first pressure dof in the first element to 0.0
+   
+   // Loop over all elements
+   const unsigned n_element=mesh_pt()->nelement();
+   for (unsigned e=0;e<n_element;e++)
+    {
+     // If the lower left node of this element is (0,0), then fix the 
+     // pressure dof in this element to zero
+     if (mesh_pt()->finite_element_pt(e)->node_pt(0)->x(0)==0.0 && 
+         mesh_pt()->finite_element_pt(e)->node_pt(0)->x(1)==0.0) // 2d problem
+      {
+       // Fix the pressure in element e at pdof=0 to 0.0
+       unsigned pdof=0;
+       double pvalue=0.0;
+
+       //Cast to proper element and fix pressure
+       dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e))->
+        fix_pressure(pdof,pvalue);
+      }
+    }
+  }
 
 }; // end_of_problem_class
 
@@ -270,17 +247,13 @@ void RefineableDrivenCavityProblem<ELEMENT>::build_mesh()
    el_pt->re_pt() = &Global_Physical_Variables::Re;
   } // end loop over elements
  
- // Pin redudant pressure dofs
- RefineableNavierStokesEquations<2>::
-  pin_redundant_nodal_pressures(mesh_pt()->element_pt());
- 
- // Now set the first pressure dof in the first element to 0.0
- fix_pressure(0,0,0.0);
+ // Pin pressure at origin no matter which processor contains that node
+ pin_only_pressure_at_origin();
 
 }// end_of_build_mesh
 
 
-//==start_of_doc_solution=================================================
+//==start_of_doc_solution================================================
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
@@ -321,8 +294,7 @@ void RefineableDrivenCavityProblem<ELEMENT>::doc_solution(
  some_file.close();
  
 // Output mesh distribution
- mesh_pt()->doc_mesh_distribution(this->communicator_pt(),
-                                  Doc_info);
+ mesh_pt()->doc_mesh_distribution(Doc_info);
 
  // Output boundaries
  sprintf(filename,"%s/boundaries%i_on_proc%i.dat",
@@ -409,10 +381,8 @@ int main(int argc, char **argv)
 {
 
 #ifdef OOMPH_HAS_MPI
-
  // Initialise MPI
  MPI_Helpers::init(argc,argv);
-
 #endif
 
   // Switch off output modifier
@@ -429,23 +399,31 @@ int main(int argc, char **argv)
 
  // Store command line arguments
  CommandLineArgs::setup(argc,argv);
+
+ // Use manual distribution of elements rather than metis
+ CommandLineArgs::specify_command_line_flag("--validate");
  
+ // Parse command line
+ CommandLineArgs::parse_and_assign(); 
+ 
+ // Doc what has actually been specified on the command line
+ CommandLineArgs::doc_specified_flags();
+
  //Build problem
  RefineableDrivenCavityProblem<RefineableQTaylorHoodElement<2> > problem;
- 
 
  // Tell us what you're doing
  bool report_stats=true;
 
- //Are there command-line arguments?
- if (CommandLineArgs::Argc==1)
+ // Metis or manual distribution?
+ if (!CommandLineArgs::command_line_flag_has_been_set("--validate"))
   {
-   // Just distribute
+   // Distribute with metis
    problem.distribute(report_stats);
   }
  else
   {    
-   // Make up some distribution
+   // Make up some pre-determined distribution
    unsigned n_element=problem.mesh_pt()->nelement();
    Vector<unsigned> element_partition(n_element);
    std::string input_string;
@@ -540,9 +518,7 @@ int main(int argc, char **argv)
  
   // Finalise MPI
 #ifdef OOMPH_HAS_MPI
-  
   MPI_Helpers::finalize();
-  
 #endif
   
   
