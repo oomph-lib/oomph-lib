@@ -154,6 +154,9 @@ would return instances of \c HyprePreconditioner, a wrapper to the
   AMG. Later we will pass a pointer to this function to the block
   preconditioner to enable the use of \c HyprePreconditioner as a
   subsidiary preconditioner.
+  Note that the function only creates the subsidiary preconditioner --
+  it will be deleted automatically by the master preconditioner
+  when it is no longer required.
 
 The rest of the section is concerned with the main function, and in
 particular setting up the preconditioner for use.

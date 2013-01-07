@@ -30,7 +30,7 @@ We refer to
 <a href="../../../solid/prescribed_displ_lagr_mult/html/index.html">
 another tutorial</a> for a detailed description of the problem
 setup and its discretisation. Briefly, we consider the deformation of
-an elastic solid body whose shape is parameterised
+an elastic solid body whose shape is parametrised
 by Lagrangian coordinates \f$ \xi^i \f$. A part of the body's boundary, 
 \f$ \partial D_{prescr}\f$, (which is parametrised by the boundary coordinate
 \f$ \zeta\f$) is displaced to a new position given by 
@@ -119,9 +119,9 @@ nodal positions and Lagrange multipliers, respectively. The overbars
 identify the unknown nodal positions that are constrained by the 
 Lagrange multiplier. The matrices \f$M_{\rm x}\f$ and \f$M_{\rm y}\f$ 
 are mass matrices 
-whose entries are formed from products of the basis functions, 
+whose entries are formed from products of the basis functions,
 \f$[M_{{\rm x}}]_{ij}=[M_{{\rm y}}]_{ij} = 
-\int_{\partial D_{\rm prescr}}\overline{\psi_i} \ \overline{\psi_j} \ dS \f$.
+\int_{\partial D_{\rm prescr}} {\psi_i} \ {\psi_j} \ dS \f$.
 
 
 
@@ -519,6 +519,11 @@ solver (with suitable settings) is already implemented in the
 helper namespace and can be activated as follows:
 
 \until #endif
+
+(<a
+href="../../../../doc/mpi/distributed_general_purpose_block_preconditioners/html/index.html#application">Recall</a>
+that subsidiary preconditioners are deleted automatically
+by the master preconditioner when they are no longer required.)
 
 A similar construction is used to specify alternative (approximate) solvers
 for the linear systems involving the mass matrices. To perform the

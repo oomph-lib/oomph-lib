@@ -30,7 +30,12 @@ another tutorial</a> and illustrated in the sketch below:
 
 @I w 0.75\textwidth fsi_channel_with_leaflet "Sketch of the problem. "
 
-We use the same discretisation of the problem (2D quadrilateral
+Flow is driven (via an imposed inflow profile) through a 2D channel 
+which is partially obstructed by a thin-walled elastic leaflet.
+The fluid leaves the domain at the far downstream end of the channel
+where we assume parallel, axially traction-free outflow. 
+
+We use the same discretisation (2D quadrilateral
 Taylor-Hood elements for the fluid; 1D Hermite beam elements for the
 leaflet) as in the 
 <a href="../../../interaction/fsi_channel_with_leaflet/html/index.html">
@@ -39,11 +44,11 @@ in response to the deformation of the elastic leaflet using a pseudo-elastic
 approach. This is done by "wrapping" the underlying  \c
 QTaylorHoodElement into a \c PseudoSolidNodeUpdateElement
 and employing \c ImposeDisplacementByLagrangeMultiplierElements 
-to impose the deformation of the leaflet onto the (pseudo-solid)
+to impose the deformation of the elastic leaflet onto the (pseudo-solid)
 fluid mesh. The following tutorials discuss the
 relevant methodologies:
 - <a href="../../../solid/prescribed_displ_lagr_mult/html/index.html">
-  The use of Lagrange multipliers to impose dispacement constraints
+  The use of Lagrange multipliers to impose displacement constraints
   onto (pseudo-)solids.</a>\n\n
 - <a href="../../../interaction/unstructured_fsi/html/index.html">
   The use of pseudo-elasticity to deform the fluid mesh in FSI
@@ -60,8 +65,9 @@ following types of discrete unknowns:
   beam theory tutorial</a> for details) of the elastic leaflet.\n\n
 - The nodal positions in the fluid mesh. \n\n
 - The nodal values representing the components of the (vector-valued)
-  Lagrange multipliers. These only exist for the fluid nodes on
-  the FSI boundary.
+  Lagrange multipliers which impose the motion of the elastic leaflet
+  on the pseudo-elastic fluid mesh. These unknowns only exist for the
+  fluid nodes on the FSI boundary.
 .
 Using this classification of the unknowns,
 the linear system to be solved in the course 
@@ -196,10 +202,16 @@ implementation of the preconditioner is obtained by
   Least-Squares Commutator (LSC)
   preconditioner</a>,
 .
-and by replacing the remaining block-solves by a small number of
-AMG cycles or CG iterations. With these approximations, the computational
+and by replacing the remaining block-solves within these preconditioners
+by a small number of AMG cycles or CG iterations. We retain
+SuperLU as the (exact) direct solver for the linear system involving
+the real solid's tangent stiffness matrix \f$ S \f$.
+
+With these approximations, the computational
 cost of one application of the preconditioner is linear
-in the number of unknowns. The optimality of the preconditioner
+in the number of unknowns (see comm_and_ex
+for a more detailed discussion of this issue).
+The optimality of the preconditioner
 can therefore be assessed by demonstrating that 
 the number of GMRES iterations remains constant under 
 mesh refinement.
@@ -280,7 +292,10 @@ preconditioner.
 
 
 
-As expected, the GMRES iteration counts are small and mesh independent for the
+As expected from the theory (see 
+<a href="http://dx.doi.org/10.1016/j.jcp.2012.07.001">
+  Muddle, Mihajlovic & Heil (2012)</a>), the GMRES iteration counts 
+are small and virtually mesh independent for the
 exact implementation of the preconditioner. Replacing the (costly) exact 
 solves by (faster) approximate solves leads to a modest
 increase in the (absolute) number of GMRES iterations. The most
@@ -295,8 +310,10 @@ in single-physics Navier-Stokes problems.
 The benefit of switching to the approximate solves becomes apparent
 in the next two tables which shows the average cpu times required 
 for the solution of the linear systems by GMRES.
-(The times labeled as <b>"SuperLU"</b> show the times when the linear 
-systems are solved directly by SuperLU.) For sufficiently 
+(For comparison the times labeled as <b>"SuperLU"</b> show the times 
+when the linear systems (@R[fsi_linear_system]@)
+are solved directly by SuperLU rather than by GMRES; they illustrate
+how quickly direct solvers become uncompetitive.) For sufficiently 
 fine discretisations the larger number of GMRES iterations for the
 inexact solves is more than compensated for by the much lower cost
 of the preconditioning operations. The final
@@ -331,7 +348,7 @@ tutorial.</a> We therefore only discuss the modifications required
 - to perform the fluid mesh update using (pseudo-)elasticity,
 .
 and
-- to employ preconditioned GMRES as the linear solver for the Newton method.
+- to employ preconditioned GMRES as the linear solver in the Newton method.
 .
 <HR>
 
@@ -383,7 +400,7 @@ resolution
 \until --validate
 
 We then assign the command line flags that were specified
-and document the ones that were recognised before building the
+and document the ones that were recognised, before building the
 problem, specifying the heavily wrapped version of the \c
 Navier-Stokes element as the template parameter.
 
@@ -497,9 +514,9 @@ in \f$ W \f$ can be solved using diagonally preconditioned CG:
   of unknowns in the fluid mesh when the meshes are refined uniformly.
   If the solid is modelled as a "proper" solid, the use of a direct
   solver for the solution of the linear systems involving \f$ S \f$
-  becomes a sub-optimal. The member function 
+  becomes sub-optimal. The member function 
   \code
-  PseudoElasticFSIPreconditioner::set_solid_preconditioner(...);
+  PseudoElasticFSIPreconditioner::set_solid_preconditioner(...)
   \endcode
   can then be used to specify a subsidiary preconditioner
   (inexact solver) for the linear systems involving \f$ S \f$.
