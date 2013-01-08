@@ -42,7 +42,7 @@
 #include "../generic/spines.h"
 
 //-------------------------------------------
-// hierher This is still work 
+// NOTE: This is still work 
 // in progress. Need to create versions
 // for axisymmetric and cartesian 3D
 // bulk equations, as well as spine

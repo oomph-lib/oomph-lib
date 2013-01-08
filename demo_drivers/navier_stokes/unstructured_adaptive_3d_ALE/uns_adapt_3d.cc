@@ -826,7 +826,7 @@ void RefineableTetgenMesh<ELEMENT>::adapt(const Vector<double>& elem_error)
             for(unsigned e=0;e<n_boundary_el_in_region;++e)
              {
               this->Boundary_region_element_pt[b][r][e]
-               = new_mesh_pt->boundary_element_pt_in_region(b,r,e);
+               = new_mesh_pt->boundary_element_in_region_pt(b,r,e);
               this->Face_index_region_at_boundary[b][r][e] 
                = new_mesh_pt->face_index_at_boundary_in_region(b,r,e);
              }

@@ -149,13 +149,6 @@ public:
     }
   }
 
-
- /// Set height
- // hierhervoid set_height(const double& height) {*Geom_data_pt[0]->value_pt(0)=height;}
-
- /// Set amplitude
- // hierhervoid set_amplitude(const double& a) {*Geom_data_pt[0]->value_pt(1)=a;}
-
  /// Access function for horizontal half axis
  double& height(){return *Geom_data_pt[0]->value_pt(0);}
 
@@ -331,8 +324,7 @@ public:
  ~ChannelSpineFlowProblem(){}
 
  /// \short Update the problem specs before solve. 
- /// hierher
- /// set velocity boundary conditions just to be on the safe side...
+ /// Set velocity boundary conditions just to be on the safe side...
  void actions_before_newton_solve()
   { 
    // Update the mesh

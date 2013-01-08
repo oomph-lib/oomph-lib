@@ -406,10 +406,7 @@ public:
  /// level)
  unsigned unrefine_uniformly();
  
- /// \short p-unrefine mesh uniformly: Return 0 for success,
- /// 1 for failure (if unrefinement has reached the lowest permitted
- /// level)
- //unsigned p_unrefine_uniformly(); // hierher: Ben what happened to unsigned?
+ /// \short p-unrefine mesh uniformly
  void p_unrefine_uniformly(DocInfo& doc_info);
 
  /// Set up the tree forest associated with the Mesh (if any)

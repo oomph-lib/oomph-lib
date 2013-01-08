@@ -327,24 +327,6 @@ OscEllipseProblem<ELEMENT,TIMESTEPPER>::OscEllipseProblem()
      }
    }
  } // end boundary 1
-
-//   // hierher keep for algebraic element version
-//   unsigned num_nod= mesh_pt()->nboundary_node(ibound);
-//   for (unsigned inod=0;inod<num_nod;inod++)
-//    {
-//     // Pin both velocities
-//     for (unsigned i=0;i<2;i++)
-//      {
-//      // Which node are we dealing with?
-//      Node* node_pt=mesh_pt()->boundary_node_pt(ibound,inod);
- 
-//      // Set auxiliary update function pointer
-//      node_pt->set_auxiliary_node_update_fct_pt(
-//       FSI_functions::apply_no_slip_on_moving_wall);
-
-//      mesh_pt()->boundary_node_pt(ibound,inod)->pin(i);
-//      }
-//    }
  
  // Bottom boundary: 
  ibound=0;

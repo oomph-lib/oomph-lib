@@ -670,7 +670,7 @@ public:
  /// (source fct pointers etc.)
  void finish_problem_setup();
 
- /// hierher
+ /// Actions after adapt
  void actions_after_adapt()
   {
    finish_problem_setup();

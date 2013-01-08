@@ -738,53 +738,6 @@ void BrethertonProblem<ELEMENT>::activate_inflow_dependency()
  outflow_spines[1]=Bulk_mesh_pt->spine_pt(last_spine)->spine_height_pt();;
 
 
-//  // hierher kill
-
-//  unsigned n_bulk=Bulk_mesh_pt->nelement(); //nbulk();
-//  for(unsigned i=0;i<n_bulk;i++)
-//   {
-//    ELEMENT* el_pt=dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(i));
-//                                          //bulk_element_pt(i));
-//    if (el_pt!=0)
-//     {
-//      // Is the element located on inflow boundary (1)?
-//      // Loop over all nodes in element -- if they are
-//      // on the inflow boundary, activate the dependency on the outflow 
-//      // spine heights:
-//      bool on_outflow=false;
-//      unsigned n_nod=el_pt->nnode();
-//      for (unsigned j=0;j<n_nod;j++)
-//       {
-//        Node* nod_pt=el_pt->node_pt(j);
-//        // Get vector containing the boundary numbers that this
-//        // node is located on
-//        Vector<int>* bound_pt=nod_pt->boundaries_pt();
-//        //cout << "bound_pt " << bound_pt << std::endl;
-//        if (bound_pt!=0)
-//         {
-//          Vector<int> boundaries=*bound_pt;
-//          unsigned nbound=boundaries.size();
-//          bool inflow=false;
-//          for (unsigned ibound=0;ibound<nbound;ibound++)
-//           {
-//            //cout << "boundaries[ibound] " << boundaries[ibound] << std::endl;
-//            if (boundaries[ibound]==1)
-//             {
-//              el_pt->activate_inflow_dependency_on_external_data(
-//               outflow_spines,1,&Global_Physical_Variables::inflow);
-//              //cout << "Node is on inflow boundary during setup : "
-//              //     << nod_pt->x(0) << " " << nod_pt->x(1) << std::endl;
-//              on_outflow=true;
-//              break;
-//             }
-//            if (on_outflow) break;
-//           }
-//          if (on_outflow) break;
-//         }
-//       }
-//     }
-//   }
-
 
  /// Loop over elements on inflow boundary (1)
  unsigned ibound=1;
@@ -815,12 +768,6 @@ void BrethertonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
  // Number of plot points
  unsigned npts=5; 
-
- // Number of interface elements
- //unsigned ninterface=Bulk_mesh_pt->ninterface_element();
-
- // Number of spines
- //unsigned nspine=Bulk_mesh_pt->nspine();
 
  // Control coordinate: At bubble tip
  Vector<double> s(2);

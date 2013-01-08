@@ -502,7 +502,6 @@ public:
      //Create the FiniteElement and add to the Element_pt Vector
      Element_pt.push_back(new ELEMENT);
 
-
      // hierher: Sorry Andrew -- this was the only quick
      // way to fix this. The problem arises because when
      // constructing the problem, you're refining

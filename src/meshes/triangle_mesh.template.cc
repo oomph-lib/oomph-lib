@@ -444,7 +444,7 @@ void TriangleMesh<ELEMENT>::setup_boundary_coordinates(const unsigned& b,
          {
           // Get pointer to the bulk element that is adjacent to boundary b
           FiniteElement* bulk_elem_pt =
-           this->boundary_element_pt_in_region(b, region_id, e);
+           this->boundary_element_in_region_pt(b, region_id, e);
           
           //Find the index of the face of element e along boundary b
           int face_index=this->face_index_at_boundary_in_region(b,region_id,e);
@@ -2975,7 +2975,7 @@ const Vector<double>& elem_error)
             for(unsigned e=0;e<n_boundary_el_in_region;++e)
              {
               this->Boundary_region_element_pt[b][r][e]
-              = new_mesh_pt->boundary_element_pt_in_region(b,r,e);
+              = new_mesh_pt->boundary_element_in_region_pt(b,r,e);
               this->Face_index_region_at_boundary[b][r][e]
               = new_mesh_pt->face_index_at_boundary_in_region(b,r,e);
              }

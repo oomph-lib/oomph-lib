@@ -563,12 +563,6 @@ FSIRingProblem::FSIRingProblem(const unsigned& N,
  Fluid_mesh_pt = new AlgebraicRefineableQuarterCircleSectorMesh<FLUID_ELEMENT >
   (wall_mesh_as_geometric_object_pt,
    xi_lo,fract_mid,xi_hi,Fluid_time_stepper_pt);
-
- // Set the error estimator
- //Z2ErrorEstimator* error_estimator_pt=new Z2ErrorEstimator;
- // hierherFluid_mesh_pt->spatial_error_estimator_pt()=error_estimator_pt;
-
-
  
  // Setup fake error estimator: Boundaries of refiment region
  Vector<double> lower_left(2);
@@ -671,7 +665,6 @@ FSIRingProblem::FSIRingProblem(const unsigned& N,
    el_pt->re_pt() = &Global_Physical_Variables::Re;
    el_pt->re_st_pt() = &Global_Physical_Variables::ReSt;
 
-   // hierher
    el_pt->evaluate_shape_derivs_by_direct_fd();       
 
 //   el_pt->evaluate_shape_derivs_by_chain_rule();
@@ -922,7 +915,7 @@ void FSIRingProblem::dynamic_run()
    doc_info.disable_doc();
 
    // Solve
-   unsigned max_adapt=3; // hierher 1;
+   unsigned max_adapt=3; 
    unsteady_newton_solve(dt,max_adapt,first);
 
    // Now we've done the first step

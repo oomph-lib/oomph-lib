@@ -53,89 +53,6 @@ double SphericalNavierStokesEquations::Default_Physical_Ratio_Value = 1.0;
 Vector<double> SphericalNavierStokesEquations::Default_Gravity_vector(3,0.0);
 
 
-//================================================================
-/// Compute the diagonal of the velocity mass matrix
-//================================================================
- void SphericalNavierStokesEquations::
- get_mass_matrix_diagonal(Vector<double> &mass_diag)
- {
-  
-  // Resize and initialise
-  mass_diag.assign(ndof(), 0.0);
-  
-  // find out how many nodes there are
-  const unsigned n_node = nnode();
-  
-  // find number of coordinates
-  const unsigned n_value = 3;
-  
-  // find the indices at which the local velocities are stored
-  Vector<unsigned> u_nodal_index(n_value);
-  for(unsigned i=0; i<n_value; i++)
-   {
-    u_nodal_index[i] = this->u_index_spherical_nst(i);
-   }
-  
-  //Set up memory for test functions
-  Shape test(n_node);
-  
-  //Number of integration points
-  unsigned n_intpt = integral_pt()->nweight();
-  
-  //Integer to store the local equations no
-  int local_eqn=0;
-  
-  //Loop over the integration points
-  for(unsigned ipt=0; ipt<n_intpt; ipt++)
-   {
-    
-    //Get the integral weight
-    double w = integral_pt()->weight(ipt);
-
-    //Get determinant of Jacobian of the mapping
-    double J = J_eulerian_at_knot(ipt);
-    
-    //Premultiply weights and Jacobian
-    double W = w*J;
-
-    //Get the velocity test functions - there is no explicit 
-    // function to give the test function so use shape
-    shape_at_knot(ipt,test);
-    
-    //Need to get the position to sort out the jacobian properly
-    double r = 0.0; double theta = 0.0;
-    for(unsigned l=0;l<n_node;l++)
-     {
-      r += this->nodal_position(l,0)*test(l);
-      theta += this->nodal_position(l,1)*test(l);
-     }
-
-    //Multiply by the geometric factor
-    W *= r*r*sin(theta);
-
-    //Loop over the veclocity test functions
-    for(unsigned l=0; l<n_node; l++)
-     {
-      //Loop over the velocity components
-      for(unsigned i=0; i<n_value; i++)
-       {
-        local_eqn = nodal_local_eqn(l,u_nodal_index[i]);
-
-        //If not a boundary condition
-        if(local_eqn >= 0)
-         {
-          //Add the contribution
-          mass_diag[local_eqn] += test[l]*test[l] * W;
-         } //End of if not boundary condition statement
-       } //End of loop over dimension
-     } //End of loop over test functions
-
-   }
- }
- 
-
-
-
 //======================================================================
 /// Validate against exact velocity solution at given time.
 /// Solution is provided via function pointer.
@@ -2302,47 +2219,6 @@ fill_in_generic_residual_contribution_spherical_nst(
 //////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 
-// //=========================================================================
-// ///  Add to the set \c paired_load_data pairs containing
-// /// - the pointer to a Data object
-// /// and
-// /// - the index of the value in that Data object
-// /// .
-// /// for all values (pressures, velocities) that affect the
-// /// load computed in the \c get_load(...) function.
-// //=========================================================================
-// void QSphericalCrouzeixRaviartElement::
-// add_load_data(std::set<std::pair<Data*,unsigned> > &paired_load_data)
-// {
-//  //Find the index at which the velocity is stored
-//  unsigned u_index[3];
-//  for(unsigned i=0;i<3;i++) {u_index[i] = this->u_index_spherical_nst(i);}
- 
-//  //Loop over the nodes
-//  unsigned n_node = this->nnode();
-//  for(unsigned n=0;n<n_node;n++)
-//   {
-//    //Loop over the velocity components and add pointer to their data
-//    //and indices to the vectors
-//    for(unsigned i=0;i<3;i++)
-//     {
-//      paired_load_data.insert(std::make_pair(this->node_pt(n),u_index[i]));
-//     }
-//   }
-
-//  //Loop over the internal data
-//  unsigned n_internal = this->ninternal_data();
-//  for(unsigned l=0;l<n_internal;l++)
-//   {
-//    unsigned nval=this->internal_data_pt(l)->nvalue();
-//    //Add internal data
-//    for (unsigned j=0;j<nval;j++)
-//     {
-//      paired_load_data.insert(std::make_pair(this->internal_data_pt(l),j));
-//     }
-//   }
-// }
-
       
 //=========================================================================
 ///  Add to the set \c paired_load_data pairs containing
@@ -2354,7 +2230,7 @@ fill_in_generic_residual_contribution_spherical_nst(
 /// load computed in the \c get_load(...) function.
 //=========================================================================
 void QSphericalCrouzeixRaviartElement::
-add_load_data(std::set<std::pair<Data*,unsigned> > &paired_load_data)
+identify_load_data(std::set<std::pair<Data*,unsigned> > &paired_load_data)
 {
  //Find the index at which the velocity is stored
  unsigned u_index[3];
@@ -2373,7 +2249,7 @@ add_load_data(std::set<std::pair<Data*,unsigned> > &paired_load_data)
   }
  
  //Identify the pressure data
- this->add_pressure_data(paired_load_data);
+ this->identify_pressure_data(paired_load_data);
 }
 
 //=========================================================================
@@ -2386,7 +2262,7 @@ add_load_data(std::set<std::pair<Data*,unsigned> > &paired_load_data)
 /// load computed in the \c get_load(...) function.
 //=========================================================================
 void QSphericalCrouzeixRaviartElement::
-add_pressure_data(std::set<std::pair<Data*,unsigned> > &paired_pressure_data)
+identify_pressure_data(std::set<std::pair<Data*,unsigned> > &paired_pressure_data)
 {
  //Loop over the internal data
  unsigned n_internal = this->ninternal_data();
@@ -2498,7 +2374,7 @@ const unsigned QSphericalTaylorHoodElement::Pconv[4]={0,2,6,8};
 /// load computed in the \c get_load(...) function.
 //=========================================================================
 void QSphericalTaylorHoodElement::
-add_load_data(std::set<std::pair<Data*,unsigned> > &paired_load_data)
+identify_load_data(std::set<std::pair<Data*,unsigned> > &paired_load_data)
 {
  //Find the index at which the velocity is stored
  unsigned u_index[3];
@@ -2517,7 +2393,7 @@ add_load_data(std::set<std::pair<Data*,unsigned> > &paired_load_data)
   }
 
  //Identify the pressure data
- this->add_pressure_data(paired_load_data);
+ this->identify_pressure_data(paired_load_data);
 }
 
 //=========================================================================
@@ -2530,7 +2406,7 @@ add_load_data(std::set<std::pair<Data*,unsigned> > &paired_load_data)
 /// load computed in the \c get_load(...) function.
 //=========================================================================
 void QSphericalTaylorHoodElement::
-add_pressure_data(std::set<std::pair<Data*,unsigned> > &paired_pressure_data)
+identify_pressure_data(std::set<std::pair<Data*,unsigned> > &paired_pressure_data)
 {
  //Find the index at which the pressure is stored
  unsigned p_index = static_cast<unsigned>(this->p_nodal_index_spherical_nst());
@@ -2545,47 +2421,6 @@ add_pressure_data(std::set<std::pair<Data*,unsigned> > &paired_pressure_data)
     std::make_pair(this->node_pt(Pconv[l]),p_index));
   }
 }
-
-// //=========================================================================
-// ///  Add to the set \c paired_load_data pairs containing
-// /// - the pointer to a Data object
-// /// and
-// /// - the index of the value in that Data object
-// /// .
-// /// for all values (pressures, velocities) that affect the
-// /// load computed in the \c get_load(...) function.
-// //=========================================================================
-// void QSphericalTaylorHoodElement::
-// add_load_data(std::set<std::pair<Data*,unsigned> > &paired_load_data)
-// {
-//  //Find the index at which the velocity is stored
-//  unsigned u_index[3];
-//  for(unsigned i=0;i<3;i++) {u_index[i] = this->u_index_spherical_nst(i);}
- 
-//  //Loop over the nodes
-//  unsigned n_node = this->nnode();
-//  for(unsigned n=0;n<n_node;n++)
-//   {
-//    //Loop over the velocity components and add pointer to their data
-//    //and indices to the vectors
-//    for(unsigned i=0;i<3;i++)
-//     {
-//      paired_load_data.insert(std::make_pair(this->node_pt(n),u_index[i]));
-//     }
-//   }
-
-//  //Find the index at which the pressure is stored
-//  unsigned p_index = static_cast<unsigned>(this->p_nodal_index_spherical_nst());
-
-//  //Loop over the pressure data
-//  unsigned n_pres= npres_spherical_nst();
-//  for(unsigned l=0;l<n_pres;l++)
-//   {
-//    //The DIMth entry in each nodal data is the pressure, which
-//    //affects the traction
-//    paired_load_data.insert(std::make_pair(this->node_pt(Pconv[l]),p_index));
-//   }
-// }
 
 
 //============================================================================

@@ -57,7 +57,7 @@ namespace oomph
 /// elasticity in Cartesian coordinates.
 /// Combines a few generic functions that are shared by 
 /// TimeHarmonicLinearElasticityEquations
-/// and TimeHarmonicLinearElasticityEquationsWithPressure (hierher: The latter
+/// and TimeHarmonicLinearElasticityEquationsWithPressure (Note: The latter
 /// don't exist yet but will be written as soon as somebody needs them...)
 //=======================================================================
  template <unsigned DIM>

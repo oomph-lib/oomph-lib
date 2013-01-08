@@ -521,7 +521,7 @@ CantileverProblem<ELEMENT>::CantileverProblem(const bool& incompress,
      el_pt->disable_evaluate_jacobian_by_fd();
     }
 
-   // Is it incompressible -- hierher switch to const eqn
+   // Is it incompressible
    if (incompress)
     {     
      PVDEquationsWithPressure<3>* test_pt = 
@@ -540,7 +540,7 @@ CantileverProblem<ELEMENT>::CantileverProblem(const bool& incompress,
  Trace_node_pt=mesh_pt()->node_pt(nnod-1);
 
  // Pin the left boundary (boundary 0) in all directions
- unsigned b=0; // hierher
+ unsigned b=0;
  unsigned n_side = mesh_pt()->nboundary_node(b);
  
 #ifdef REFINE
@@ -745,13 +745,13 @@ int main(int argc, char **argv)
  mesh_doc_info.number()=10;
  mesh_doc_info.set_directory("RESLT_MESH");
 
- // hierher
+ // Use finite differencing
  bool use_fd=false; 
 
  // Number of cases per implementation
  unsigned ncase=5;
 
- // Is the material incomressible hierher switch to const eqn
+ // Is the material incomressible
  bool incompress=true;
 
  // Loop over fd and analytical implementation

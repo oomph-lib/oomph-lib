@@ -666,7 +666,7 @@ public:
  /// Change the boundary conditions to remove the volume constraint
  void remove_volume_constraint()
   {
-   // Ignore all volume constraint stuff from here onwwards
+   // Ignore all volume constraint stuff from here onwards
    Use_volume_constraint=false;
 
    //Unhijack the data in the internal element
@@ -1009,7 +1009,7 @@ DropInChannelProblem<ELEMENT>::DropInChannelProblem()
  Fluid_mesh_pt->min_element_size()=0.001; 
 
  // Use coarser mesh during validation
- // hierherif (CommandLineArgs::command_line_flag_has_been_set("--validation"))
+ if (CommandLineArgs::command_line_flag_has_been_set("--validation"))
   {
    Fluid_mesh_pt->min_element_size()=0.01; 
   }
@@ -1067,7 +1067,7 @@ void DropInChannelProblem<ELEMENT>::create_free_surface_elements()
  unsigned nb=Fluid_mesh_pt->nboundary();
  for(unsigned b=Bottom_wall_boundary_id+1;b<nb;b++)
   {
-   // hierher Note: region is important
+   // Note: region is important
    // How many bulk fluid elements are adjacent to boundary b in region 0?
    unsigned n_element = Fluid_mesh_pt->nboundary_element_in_region(b,0);
    
@@ -1077,7 +1077,7 @@ void DropInChannelProblem<ELEMENT>::create_free_surface_elements()
      // Get pointer to the bulk fluid element that is 
      // adjacent to boundary b in region 0
      ELEMENT* bulk_elem_pt = dynamic_cast<ELEMENT*>(
-      Fluid_mesh_pt->boundary_element_pt_in_region(b,0,e));
+      Fluid_mesh_pt->boundary_element_in_region_pt(b,0,e));
      
      //Find the index of the face of element e along boundary b in region 0
      int face_index = Fluid_mesh_pt->face_index_at_boundary_in_region(b,0,e);
@@ -1142,7 +1142,7 @@ void DropInChannelProblem<ELEMENT>::create_volume_constraint_elements()
  unsigned nb=Fluid_mesh_pt->nboundary();
  for(unsigned b=Bottom_wall_boundary_id+1;b<nb;b++)
   {
-   // hierher Note region is important
+   // Note region is important
    // How many bulk fluid elements are adjacent to boundary b in region 0?
    unsigned n_element = Fluid_mesh_pt->nboundary_element_in_region(b,0);
    
@@ -1151,9 +1151,8 @@ void DropInChannelProblem<ELEMENT>::create_volume_constraint_elements()
     {
      // Get pointer to the bulk fluid element that is 
      // adjacent to boundary b in region 0?
-     // hierher move _pt to end
      ELEMENT* bulk_elem_pt = dynamic_cast<ELEMENT*>(
-      Fluid_mesh_pt->boundary_element_pt_in_region(b,0,e));
+      Fluid_mesh_pt->boundary_element_in_region_pt(b,0,e));
      
      //Find the index of the face of element e along boundary b in region 0
      int face_index = Fluid_mesh_pt->face_index_at_boundary_in_region(b,0,e);
@@ -1337,8 +1336,7 @@ int main(int argc, char **argv)
  // Perform impulsive start from current state
  problem.assign_initial_values_impulsive();
 
- // Output initial conditions // hierher kill this is only in there
- // for constitency with old validata
+ // Output initial conditions
  problem.doc_solution();
 
  // Now switch on the inflow

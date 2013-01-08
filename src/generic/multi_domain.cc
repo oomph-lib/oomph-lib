@@ -1995,9 +1995,7 @@ namespace Multi_domain_functions
   }
 
  //=====================================================================
- // hierher vector based version
-
- /// Locate zeta for current set of missing coordinates
+ /// Locate zeta for current set of missing coordinates; vector-based version
  //=====================================================================
   void locate_zeta_for_missing_coordinates
   (int& iproc, Mesh* const &external_mesh_pt, Problem* problem_pt,
@@ -2485,9 +2483,8 @@ namespace Multi_domain_functions
 
 
  //=====================================================================
- // hierher vector based version
-  
  /// locate zeta for current set of "local" coordinates
+ /// vector-based version
  //=====================================================================
   void locate_zeta_for_local_coordinates
   (const Vector<Mesh*>& mesh_pt, Mesh* const &external_mesh_pt,

@@ -727,7 +727,7 @@ double QAdvectionDiffusionReactionElement<NREAGENT, DIM,NNODE_1D>::
                                           Shape &psi, 
                                           DShape &dpsidx,
                                           Shape &test, 
-                                    DShape &dtestdx) const
+                                          DShape &dtestdx) const
 {
  //Call the geometrical shape functions and derivatives  
  double J = this->dshape_eulerian(s,psi,dpsidx);

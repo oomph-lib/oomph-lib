@@ -697,7 +697,7 @@ public:
    }
 
   /// Return pointer to the e-th element adjacent to boundary b in region r
-  FiniteElement* boundary_element_pt_in_region(const unsigned &b, 
+  FiniteElement* boundary_element_in_region_pt(const unsigned &b, 
                                                const unsigned &r,
                                                const unsigned &e) const
   {

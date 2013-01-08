@@ -144,8 +144,6 @@ public:
     }
    else
     {
-     // hierher
-
      Global_Parameters::Prescribed_flow_rate=
       Global_Parameters::Peak_prescribed_flow_rate*
       cos(2.0*MathematicalConstants::Pi/Global_Parameters::Period*time);  
@@ -158,9 +156,6 @@ public:
  /// Update no slip bc after update of unknowns
  void actions_before_newton_convergence_check()
   {
-   // hierher Fluid_mesh_pt->node_update();
-
-
    // The velocity of the fluid nodes on the fsi boundary
    // is set by the wall motion -- hence the no-slip condition must be
    // re-applied whenever a node update is performed for these nodes. 
@@ -1189,7 +1184,7 @@ doc_solution(DocInfo& doc_info)
 { 
 
 
- // hierher Elements can still be inverted near boundary
+ // Elements can still be inverted near boundary
  // even if they're non-inverted at the 3D Gauss points
  // thus code can die here when evaluating the fluid traction
  // Deal with this later...
@@ -1280,7 +1275,7 @@ int main(int argc, char **argv)
  // Store command line arguments
  CommandLineArgs::setup(argc,argv);
 
- // hierher
+ // Relax tolerance
  TetMeshBase::Tolerance_for_boundary_finding = 1e-10;
 
  // Label for output
@@ -1308,7 +1303,7 @@ int main(int argc, char **argv)
  problem.initialise_dt(dt);
 
  // Increment FSI parameter during steady runs
- unsigned nq=1; // hierher 4;
+ unsigned nq=4; 
  if (CommandLineArgs::Argc==2)
   {
    oomph_info << "Smaller number of steps for test\n";

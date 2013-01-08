@@ -45,7 +45,8 @@
 
 
 
-// hierher 
+// Flag to allow switching between vector-based multi-domain lookup
+// schemes and the old version (kept alive for now...)
 #define USE_VECTOR_BASED_MD
 //#undef USE_VECTOR_BASED_MD
 
@@ -301,7 +302,33 @@ namespace Multi_domain_functions
                                        const unsigned& interaction_index=0);
   
 
-  // hierher vector-based version
+
+  /// \short Function to set up the one-way multi-domain interaction for 
+  /// FSI-like problems. 
+  /// - \c mesh_pt points to the mesh of \c ElemenWithExternalElements for which
+  ///   the interaction is set up. In an FSI example, this mesh would contain
+  ///   the \c FSIWallElements (either beam/shell elements or the
+  ///   \c FSISolidTractionElements that apply the traction to 
+  ///   a "bulk" solid mesh that is loaded by the fluid.)
+  /// - \c external_mesh_pt points to the mesh that contains the elements
+  ///   of type EXT_ELEMENT that provide the "source" for the
+  ///   \c ElementWithExternalElements. In an FSI example, this 
+  ///   mesh would contain the "bulk" fluid elements.
+  /// - \c external_face_mesh_pt points to the mesh of \c FaceElements
+  ///   attached to the \c external_mesh_pt. The mesh pointed to by
+  ///   \c external_face_mesh_pt has the same dimension as \c mesh_pt.
+  ///   The elements contained in \c external_face_mesh_pt are of type 
+  ///   FACE_ELEMENT_GEOM_OBJECT. In an FSI example, these elements
+  ///   are usually the \c FaceElementAsGeomObjects (templated by the
+  ///   type of the "bulk" fluid elements to which they are attached)
+  ///   that define the FSI boundary of the fluid domain.
+  /// - The interaction_index parameter defaults to zero and must otherwise be
+  ///   set by the user if there is more than one mesh that provides "external
+  ///   elements" for the Mesh pointed to by mesh_pt (e.g. in the case
+  ///   when a beam or shell structure is loaded by fluid from both sides.)
+  /// .
+  /// This is the vector-based version which operates simultaneously
+  /// on the meshes contained in the Vector arguments.
   template<class EXT_ELEMENT, class FACE_ELEMENT_GEOM_OBJECT>
    void setup_multi_domain_interaction(Problem* problem_pt,
                                        const Vector<Mesh*>& mesh_pt,
@@ -310,8 +337,7 @@ namespace Multi_domain_functions
                                        const unsigned& interaction_index=0);
 
 
-  /// \short Auxiliary function which is called from the two preceding
-  /// functions 
+  /// Auxiliary helper function 
   template<class EXT_ELEMENT, class GEOM_OBJECT>
    void aux_setup_multi_domain_interaction(Problem* problem_pt,
                                            Mesh* const &mesh_pt,
@@ -319,7 +345,7 @@ namespace Multi_domain_functions
                                            const unsigned& interaction_index,
                                            Mesh* const &external_face_mesh_pt=0);
 
-  /// hierher vector based version
+  /// Auxiliary helper function 
   template<class EXT_ELEMENT, class GEOM_OBJECT>
    void aux_setup_multi_domain_interaction(Problem* problem_pt,
                                            const Vector<Mesh*>& mesh_pt,
@@ -330,20 +356,19 @@ namespace Multi_domain_functions
 
   
   /// \short Helper function to locate "local" zeta coordinates
-   void locate_zeta_for_local_coordinates
+  void locate_zeta_for_local_coordinates
    (Mesh* const &mesh_pt, Mesh* const &external_mesh_pt,
     MeshAsGeomObject* &mesh_geom_obj_pt,
     const unsigned& interaction_index);
-
-
   
-   // hierher vector based version
-   /// \short Helper function to locate "local" zeta coordinates
-   void locate_zeta_for_local_coordinates
-    (const Vector<Mesh*>& mesh_pt, Mesh* const &external_mesh_pt,
-     Vector<MeshAsGeomObject*>& mesh_geom_obj_pt,
-     const unsigned& interaction_index);
-
+  /// \short Helper function to locate "local" zeta coordinates
+  /// This is the vector-based version which operates simultaenously
+  /// on the meshes contained in the Vectors.
+  void locate_zeta_for_local_coordinates
+   (const Vector<Mesh*>& mesh_pt, Mesh* const &external_mesh_pt,
+    Vector<MeshAsGeomObject*>& mesh_geom_obj_pt,
+    const unsigned& interaction_index);
+  
 
 #ifdef OOMPH_HAS_MPI
   /// \short Helper function to send any "missing" zeta coordinates to
@@ -356,8 +381,9 @@ namespace Multi_domain_functions
     MeshAsGeomObject* &mesh_geom_obj_pt);
 
 
-  // hierher vector based version
   /// \short Helper function to locate these "missing" zeta coordinates.
+  /// This is the vector-based function which operates simultaneously
+  /// on the meshes contained in the vectors.
   void locate_zeta_for_missing_coordinates(
    int& iproc, Mesh* const &external_mesh_pt,Problem* problem_pt,
     Vector<MeshAsGeomObject*>& mesh_geom_obj_pt);
@@ -375,9 +401,11 @@ namespace Multi_domain_functions
                                       Problem* problem_pt,
                                       const unsigned& interaction_index);
 
-  // hierher vector based version
-  /// Creates external (halo) elements on the loop process based on the
+
+  /// \short Create external (halo) elements on the loop process based on the
   /// information received from each locate_zeta call on other processes
+  /// This is the vector-based function which operates simultaneously
+  /// on the meshes contained in the vectors.
   template<class EXT_ELEMENT>
   void create_external_halo_elements
   (int& iproc, const Vector<Mesh*>& mesh_pt, Mesh* const &external_mesh_pt,

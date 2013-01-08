@@ -46,7 +46,7 @@ namespace oomph
 
 //========================================================================
 /// A class for elements that solves the equations of Kirchhoff Love shell 
-/// thin-shell theory -- hierher: Annotate
+/// thin-shell theory
 //========================================================================
 class KirchhoffLoveShellEquations : public virtual SolidFiniteElement
 {
@@ -265,7 +265,7 @@ public:
  /// load but this can be overloaded in derived classes
  /// (e.g. in FSI elements) to determine the rate of work done
  /// by individual constituents of this load (e.g. the fluid load
- /// in an FSI problem). hierher spell out nondimensionalisation
+ /// in an FSI problem).
  double load_rate_of_work();
 
  /// Generic FiniteElement output function
@@ -401,7 +401,6 @@ public:
 //=========================================================================
 /// Diag Hermite Kirchhoff Love shell "upgraded" to a FSIWallElement
 /// (and thus, by inheritance, a GeomObject), so it can be used in FSI.
-/// hierher: change in FSI Beam ?
 //=========================================================================
 class FSIDiagHermiteShellElement : public virtual DiagHermiteShellElement,
              public virtual FSIWallElement
@@ -538,19 +537,6 @@ class FSIDiagHermiteShellElement : public virtual DiagHermiteShellElement,
    //Fill in the external interaction by finite differences
    this->fill_in_jacobian_from_external_interaction_by_fd(jacobian);
   }
-
-
-//hierher
-/*  /// \short Find the local coordinate s in this element */
-/*  /// that corresponds to the global "intrinsic" coordinate \f$ \zeta \f$ */
-/*  /// (here identical to the Lagrangian coordinate \f$ \xi \f$). */
-/*  /// If the coordinate is contained within this element, the */
-/*  /// geom_object_pt points to "this" element; if the zeta coordinate */
-/*  /// is not contained in this element geom_object_pt=NULL. */
-/*  void locate_zeta(const Vector<double> &zeta, */
-/*                   GeomObject* &geom_object_pt, Vector<double> &s, */
-/*                   const bool& use_coordinate_as_initial_guess=false); */
-
 
 
  /// \short The number of "blocks" that degrees of freedom in this element

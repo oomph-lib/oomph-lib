@@ -75,8 +75,8 @@
  because some functions in oomph-lib require that all faces with the 
  same boundary ID should be planar. 
 
- hierher: elaborate on enumeration and quadratric nodes file
- hierher: Check that it still works for linear elements! 
+ -- elaborate on enumeration and quadratric nodes file
+ -- check that it still works for linear elements! 
  
 **/
 //=============================================================================

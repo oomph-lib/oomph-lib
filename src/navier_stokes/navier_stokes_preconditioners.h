@@ -392,7 +392,7 @@ namespace oomph
 
    // Pin all non-pressure dofs and pressure dofs along boundaries for
    // validation
-   bool set_pressure_bc_for_validation=true; // hierher rename
+   bool set_pressure_bc_for_validation=true; 
    pin_all_non_pressure_dofs(set_pressure_bc_for_validation); 
       
 
@@ -1137,7 +1137,7 @@ namespace oomph
    /// called again)
    bool Preconditioner_has_been_setup;
 
-   /// \short Helper function to assemble the diagonal of the pressure
+   /// \short Helper function to assemble the inverse diagonals of the pressure
    /// and velocity mass matrices from the elemental contributions defined in
    /// NavierStokesEquations<DIM>.
    /// If do_both=true, both are computed, otherwise only the velocity

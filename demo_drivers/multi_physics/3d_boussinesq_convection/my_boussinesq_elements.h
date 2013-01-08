@@ -786,8 +786,7 @@ public:
     }
   }
 
-
- /// hierher need to rewrite this in parallel
+ /// Number of dof types in this element
  unsigned ndof_types()
   {
    return 1;

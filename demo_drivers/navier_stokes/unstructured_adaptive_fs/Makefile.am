@@ -5,8 +5,8 @@ include $(top_srcdir)/config/makefile_templates/demo_drivers
 check_PROGRAMS=adaptive_bubble_in_channel adaptive_drop_in_channel
 
 # Sources for executable
-adaptive_bubble_in_channel_SOURCES = adaptive_bubble_in_channel.cc \
-                                     volume_constrainer.h
+adaptive_bubble_in_channel_SOURCES = adaptive_bubble_in_channel.cc
+
 # Required libraries: 
 # $(FLIBS) is included in case the solver involves fortran sources.
 adaptive_bubble_in_channel_LDADD = -L@libdir@ \

@@ -655,8 +655,7 @@ void MumpsSolver::factorise(DoubleMatrixBase* const &matrix_pt)
 }
 
 //=========================================================================
-/// Clean up the memory allocated for the MumpsSolver solver -- 
-/// don't think this is needed any more... hierher check
+/// Clean up the memory allocated for the MumpsSolver solver
 //=========================================================================
 void MumpsSolver::clean_up_memory()
 {

@@ -85,7 +85,7 @@ public:
  /// Update the problem specs befor solve (also empty)
  void actions_before_newton_solve() {}
 
- /// hierher kill
+ /// Actions before adapt (essentially empty)
  void actions_before_adapt() {oomph_info << "Min/max about to adapt\n";}
 
  /// \short Overloaded version of the problem's access function to 

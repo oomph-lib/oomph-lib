@@ -172,7 +172,6 @@ UnsteadyHeatProblem<ELEMENT>::UnsteadyHeatProblem()
  build_global_mesh();
  
  
-// hierher
  // Set the initial conditions
  // --------------------------
  unsigned nnod = Bulk_mesh_pt->nnode();

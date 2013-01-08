@@ -374,7 +374,7 @@ int main(int argc, char *argv[])
  // The Capillary number
  Global_Physical_Variables::Ca = 0.01;
  
- // Re/Fr hierher check what Fr is 
+ // Re/Fr 
  Global_Physical_Variables::ReInvFr = 0.0;
  
  //Axial lngth of domain

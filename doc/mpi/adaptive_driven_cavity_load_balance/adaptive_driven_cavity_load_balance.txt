@@ -97,9 +97,9 @@ The load balancing routines then perform the following steps:
    \n\n
 . 
 We note that for "structured" meshes (i.e. meshes whose refinement 
-pattern is represented by <a
-href="../../../the_data_structure/html/index.html#RefineableQuadMesh_setup_section">"tree
-forests"</a>) only complete trees can be
+pattern is represented by 
+<a href="../../../the_data_structure/html/index.html#RefineableQuadMesh_setup_section">
+"tree forests"</a>) only complete trees can be
 moved between processors. If the mesh was refined uniformly after
 being distributed, a more fine-grained tree-forest (which may allow
 better load balancing) can be built
@@ -196,6 +196,10 @@ generating such objects once (in the Problem constructor) and making
 them available to the \c build_mesh() function by storing pointers to
 them in the problem's private member data.
 
+It is not necessary to re-generate the error estimator, though
+the pointer to it (and any non-default target errors) need to be
+passed to all (newly re-generated) adaptive meshes.
+
 \subsubsection pointers Updating pointers
 Since load balancing re-generates the meshes -- and thus 
 their constituent elements and nodes -- pointers to such objects
@@ -235,8 +239,7 @@ where the code crashes.
    We suggest you compare \n\n
    - The original version of the distributed, adaptive driven cavity code \n\n
      <center>
-     <A
-     HREF="../../../../demo_drivers/mpi/distribution/adaptive_driven_cavity/adaptive_driven_cavity.cc">
+     <A HREF="../../../../demo_drivers/mpi/distribution/adaptive_driven_cavity/adaptive_driven_cavity.cc">
      demo_drivers/mpi/distribution/adaptive_driven_cavity/adaptive_driven_cavity.cc
      </A>
      </center>
@@ -244,8 +247,7 @@ where the code crashes.
      and the version with load balancing
      \n\n
      <center>
-     <A
-     HREF="../../../../demo_drivers/mpi/distribution/adaptive_driven_cavity/adaptive_driven_cavity_load_balance.cc">
+     <A HREF="../../../../demo_drivers/mpi/distribution/adaptive_driven_cavity/adaptive_driven_cavity_load_balance.cc">
      demo_drivers/mpi/distribution/adaptive_driven_cavity/adaptive_driven_cavity_load_balance.cc
      </A>
      </center>
@@ -254,8 +256,7 @@ where the code crashes.
      doubly-adaptive solution of the unsteady
      heat equation, \n\n
      <center>
-     <A
-     HREF="../../../../demo_drivers/unsteady_heat/two_d_unsteady_heat_2adapt/two_d_unsteady_heat_2adapt.cc">
+     <A HREF="../../../../demo_drivers/unsteady_heat/two_d_unsteady_heat_2adapt/two_d_unsteady_heat_2adapt.cc">
      demo_drivers/unsteady_heat/two_d_unsteady_heat_2adapt/two_d_unsteady_heat_2adapt.cc
      </A>
      </center>
@@ -263,8 +264,7 @@ where the code crashes.
      and the version with load balancing 
      \n\n
      <center>
-     <A
-     HREF="../../../../demo_drivers/mpi/distribution/restart/two_d_unsteady_heat_2adapt_load_balance.cc">
+     <A HREF="../../../../demo_drivers/mpi/distribution/restart/two_d_unsteady_heat_2adapt_load_balance.cc">
      demo_drivers/mpi/distribution/restart/two_d_unsteady_heat_2adapt_load_balance.cc
      </A>
      </center>
@@ -273,8 +273,7 @@ where the code crashes.
      solution of Turek & Hron's FSI benchmark problem
      heat equation, \n\n
      <center>
-     <A
-     HREF="../../../../demo_drivers/mpi/multi_domain/turek_flag/turek_flag.cc">
+     <A HREF="../../../../demo_drivers/mpi/multi_domain/turek_flag/turek_flag.cc">
      demo_drivers/mpi/multi_domain/turek_flag/turek_flag.cc
      </A>
      </center>
@@ -282,8 +281,7 @@ where the code crashes.
      and the version with load balancing 
      \n\n
      <center>
-     <A
-     HREF="../../../../demo_drivers/mpi/multi_domain/turek_flag/turek_flag_load_balance.cc">
+     <A HREF="../../../../demo_drivers/mpi/multi_domain/turek_flag/turek_flag_load_balance.cc">
      demo_drivers/mpi/multi_domain/turek_flag/turek_flag_load_balance.cc
      </A>
      </center>

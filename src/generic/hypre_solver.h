@@ -740,15 +740,12 @@ namespace oomph
      Hypre_method = BoomerAMG;
      Internal_preconditioner = None;
 
-
      // Initialise private double that accumulates the preconditioner 
      // solve time of thi instantiation of this class. Is reported
      // in destructor if Report_my_cumulative_preconditioner_solve_time
      // is set to true
      My_cumulative_preconditioner_solve_time=0.0;
-
-     // hierher change to false
-     Report_my_cumulative_preconditioner_solve_time=true;
+     Report_my_cumulative_preconditioner_solve_time=false;
     }
    
    /// Destructor.

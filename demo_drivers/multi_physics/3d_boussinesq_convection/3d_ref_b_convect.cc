@@ -308,13 +308,11 @@ void BoussinesqPreconditioner::setup(Problem* problem_pt,
   this->set_nmesh(1);
   this->set_mesh(0,problem_pt,problem_pt->mesh_pt());
 
-  // Get total number of dofs. hierher Offer option to pass in mesh! 
+  // Get total number of dofs. 
   unsigned n_dof=problem_pt->mesh_pt()->finite_element_pt(0)->dim()+2;
 
   // Number of fluid dofs: one less
   unsigned n_fluid_dof = n_dof-1;
-
-  oomph_info << "setup, n_dof=" << n_dof << std::endl;
 
   // This preconditioner has two types of DOF: Fluid dofs and temperature dofs
 
@@ -342,7 +340,7 @@ void BoussinesqPreconditioner::setup(Problem* problem_pt,
    turn_into_subsidiary_block_preconditioner(this,ns_dof_lookup);
 
   // Setup the Navier Stokes preconditioner: Tell it about the
-  // Navier Stokes mesh and set it up. hierher
+  // Navier Stokes mesh and set it up.
   Navier_stokes_preconditioner_pt->set_navier_stokes_mesh
    (problem_pt->mesh_pt()); 
   Navier_stokes_preconditioner_pt->setup(problem_pt,matrix_pt);
@@ -506,17 +504,9 @@ void BoussinesqPreconditioner::preconditioner_solve(const DoubleVector &r,
      // Auxiliary vector to hold the matrix vector product of the
      // fluid-onto-temperature coupling matrices with the fluid solutions:
      DoubleVector aux_vec;
-     
-//      oomph_info << "Block_matrix_1_0 dist: "
-//                 << *Block_matrix_1_0_pt->distribution_pt() << std::endl;
-//      oomph_info << "NNZ = " << Block_matrix_1_0_pt->nnz() << std::endl;
-//      oomph_info << "ncol = " << Block_matrix_1_0_pt->ncol() << std::endl;
-//      oomph_info << "temp vec dist: " << *temp_fluid_vec.distribution_pt()
-//                 << std::endl;
 
      // Multiply C_{tu} by z_u
      Block_matrix_1_0_pt->multiply(temp_fluid_vec, aux_vec);
-//     Mat_vec_operator_1_0_pt->multiply(temp_fluid_vec, aux_vec);
 
      // ...and subtract from r_t:
      temp_temperature_vec-=aux_vec;

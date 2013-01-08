@@ -453,16 +453,16 @@ UnstructuredTorusProblem<ELEMENT>::UnstructuredTorusProblem(
  
  double zeta_start=0.0;
  double zeta_end=MathematicalConstants::Pi;
- unsigned nsegment=8; // hierher check this for consistency with old validata
- unsigned boundary_id=1; // hierher check this for consistency with old validata
+ unsigned nsegment=8; 
+ unsigned boundary_id=1; 
  curvilinear_boundary_pt[0]=new TriangleMeshCurviLine(
   area_pt,zeta_start,zeta_end, 
   nsegment,boundary_id);
  
  zeta_start=MathematicalConstants::Pi;
  zeta_end=2.0*MathematicalConstants::Pi;
- nsegment=8; // hierher check this for consistency with old validata
- boundary_id=2; // hierher check this for consistency with old validata
+ nsegment=8; 
+ boundary_id=2; 
  curvilinear_boundary_pt[1]=new TriangleMeshCurviLine(
   area_pt,zeta_start,zeta_end, 
   nsegment,boundary_id);

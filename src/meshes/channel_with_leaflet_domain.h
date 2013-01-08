@@ -205,7 +205,7 @@ protected :
  /// Length of the domain to the left of the leaflet
  double Lleft;
 
- ///Initial height of the leaflet (hierher: end of lagr coord.?)
+ /// Lagrangian coordinate at end of leaflet
  double Hleaflet;
 
  /// Total width of the channel

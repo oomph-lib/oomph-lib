@@ -371,7 +371,7 @@ CantileverProblem<ELEMENT>::CantileverProblem(const bool& incompress,
      el_pt->disable_evaluate_jacobian_by_fd();
     }
 
-   // Is it incompressible -- hierher switch to const eqn
+   // Is it incompressible 
    if (incompress)
     {     
      PVDEquationsWithPressure<2>* test_pt = 
@@ -394,10 +394,7 @@ CantileverProblem<ELEMENT>::CantileverProblem(const bool& incompress,
  // Refine the mesh uniformly
  dynamic_cast<ElasticRefineableRectangularQuadMesh<ELEMENT>* >(
   solid_mesh_pt())->refine_uniformly();
- 
- // hierher
- //solid_mesh_pt()->set_lagrangian_nodal_coordinates();
- 
+  
 #endif
  
  // Construct the traction element mesh
@@ -763,7 +760,7 @@ int main()
  
  bool use_fd=false;
 
- // Is the material incomressible hierher switch to const eqn
+ // Is the material incomressible
  bool incompress=false;
 
  // Number of cases per implementation

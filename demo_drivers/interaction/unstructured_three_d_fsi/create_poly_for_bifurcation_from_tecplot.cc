@@ -746,7 +746,7 @@ int main(int argc, char* argv[])
   poly_file << "1 " 
             <<  x_centre_inflow  << " "
             <<  y_centre_inflow  << " "
-            <<  z_inflow+0.1  << " " // hierher!
+            <<  z_inflow+0.1  << " " 
             << std::endl;  
   poly_file << "\n#Attributes list\n0" << std::endl;
   poly_file.close();

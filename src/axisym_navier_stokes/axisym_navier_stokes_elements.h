@@ -437,7 +437,7 @@ protected:
                                              const Vector<double> &x,
                                              double &visc_ratio)
   {
-   visc_ratio = *Viscosity_Ratio_pt; // hierher double check all this!
+   visc_ratio = *Viscosity_Ratio_pt;
   } 
  
  ///\short Compute the residuals for the Navier--Stokes equations; 
@@ -643,9 +643,6 @@ public:
  void get_pressure_and_velocity_mass_matrix_diagonal(
   Vector<double> &press_mass_diag, Vector<double> &veloc_mass_diag,
   const unsigned& which_one=0);
-
- /// Compute the diagonal of the velocity mass matrix
- // hierher obsolete void get_mass_matrix_diagonal(Vector<double> &mass_diag);
 
  /// \short Output function: x,y,[z],u,v,[w],p
  /// in tecplot format. Default number of plot points

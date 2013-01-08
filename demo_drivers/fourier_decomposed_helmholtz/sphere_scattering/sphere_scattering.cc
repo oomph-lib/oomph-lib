@@ -159,7 +159,7 @@ namespace PlanarWave
                          &djv[0],&dyv[0]);
   
   
-  // Assemble  exact solution (hierher No need to add terms
+  // Assemble  exact solution (actually no need to add terms
   // below i=N_fourier as Legendre polynomial would be zero anyway)
   complex<double> u_ex(0.0,0.0);
   for(unsigned i=0;i<N_terms;i++)
@@ -281,7 +281,7 @@ namespace ProblemParameters
                          &djv[0],&dyv[0]);
   
   
-  // Assemble  exact solution (hierher No need to add terms
+  // Assemble  exact solution (actually no need to add terms
   // below i=N_fourier as Legendre polynomial would be zero anyway)
   complex<double> u_ex(0.0,0.0);
   for(unsigned i=N_fourier;i<N_terms;i++)
@@ -346,7 +346,7 @@ namespace ProblemParameters
                          &djv[0],&dyv[0]);
   
   
-  // Assemble  exact solution (hierher No need to add terms
+  // Assemble  exact solution (actually no need to add terms
   // below i=N_fourier as Legendre polynomial would be zero anyway)
   complex<double> u_ex(0.0,0.0);
   for(unsigned i=N_fourier;i<N_terms;i++)

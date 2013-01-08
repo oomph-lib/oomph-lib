@@ -153,7 +153,7 @@ namespace oomph
      /*  // We are in charge... */
      /*  else */
      /*   { */
-     /*    // hierher This is very slow but keep code alive -- can be */
+     /*    // NOTE: This is very slow but keep code alive -- can be */
      /*    // recycled if/when we ever make the Jacobians in the */
      /*    // Foeppl von Karman elements analytical. */
      /*    double t_start=TimingHelpers::timer(); */

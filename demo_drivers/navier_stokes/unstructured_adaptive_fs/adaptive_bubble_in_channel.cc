@@ -408,11 +408,6 @@ namespace oomph
   /// of elements on different machines!)
   ofstream Norm_file;
   
-
-  //hierher
-//#include "volume_constrainer.h"
-
-
  } // end_of_namespace
  
 
@@ -846,10 +841,6 @@ BubbleInChannelProblem<ELEMENT>::BubbleInChannelProblem()
    new RefineableSolidTriangleMesh<ELEMENT>(
      triangle_mesh_parameters, this->time_stepper_pt());
 
- // hierher 
- // Fluid_mesh_pt->mesh_update_fct_pt()=
- //  &Problem_Parameter::mesh_update_for_volume_conservation;
-
  // Set error estimator for bulk mesh
  Z2ErrorEstimator* error_estimator_pt=new Z2ErrorEstimator;
  Fluid_mesh_pt->spatial_error_estimator_pt()=error_estimator_pt;
@@ -1157,7 +1148,7 @@ void BubbleInChannelProblem<ELEMENT>::complete_problem_setup()
    Node* nod_pt=this->Fluid_mesh_pt->boundary_node_pt(Inflow_boundary_id,
                                                       inod);
    //Now set the boundary velocity
-   double y = nod_pt->x(1); // hierher multiply by four
+   double y = nod_pt->x(1); 
    nod_pt->set_value(0,Problem_Parameter::Inflow_veloc_magnitude*y*(1-y));
   }
 
@@ -1227,14 +1218,6 @@ void BubbleInChannelProblem<ELEMENT>::doc_solution(const std::string& comment)
  // Get total volume enclosed by face elements (ignore first one)
  double vol=0.0;
  vol=Problem_Parameter::Volume;
- // hierher
- // unsigned n_element = Volume_constraint_mesh_pt->nelement();
- // for(unsigned e=1;e<n_element;e++) 
- //  {
- //   vol+=dynamic_cast<LineVolumeConstraintBoundingSolidElement<ELEMENT>*>(
- //    Volume_constraint_mesh_pt->element_pt(e))->
- //    contribution_to_enclosed_volume();
- //  }
 
  // Write trace file
  Problem_Parameter::Trace_file 
@@ -1317,7 +1300,7 @@ int main(int argc, char **argv)
  // Open trace file
  Problem_Parameter::Trace_file.open("RESLT/trace.dat"); 
 
- // hierher
+ // Increase precision of output
  Problem_Parameter::Trace_file.precision(20);
 
  // Open norm file

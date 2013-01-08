@@ -761,9 +761,10 @@ namespace oomph
 
 
 //========================================================================
-/// Helper function to assemble the diagonal of the velocity
-/// mass matrix from the elemental contributions defined in
-/// NavierStokesEquations<DIM>::get_mass_matrix_diagonal(...).
+/// Helper function to assemble the inverse diagonals of the pressure and
+/// velocity mass matrix from the elemental contributions defined in
+/// NavierStokesElementWithDiagonalMassMatrices::
+/// get_pressure_and_velocity_mass_matrix_diagonal(...)
 /// If do_both=true, both are computed, otherwise only the velocity
 /// mass matrix (the LSC version of the preconditioner only needs
 /// that one)

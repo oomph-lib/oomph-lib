@@ -590,7 +590,7 @@ FSIRingProblem::FSIRingProblem(const unsigned& N,
    el_pt->re_pt() = &Global_Physical_Variables::Re;
    el_pt->re_st_pt() = &Global_Physical_Variables::ReSt;
 
-   // hierher
+
    el_pt->evaluate_shape_derivs_by_direct_fd();       
 
 //   el_pt->evaluate_shape_derivs_by_chain_rule();

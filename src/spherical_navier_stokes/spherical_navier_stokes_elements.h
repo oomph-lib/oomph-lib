@@ -414,8 +414,6 @@ public:
  /// unit normal N (pointing into the fluid!) is actually used
  /// in the computation. 
  void get_load(const Vector<double> &s, 
-//hierher      // const Vector<double> &xi,
-               // const Vector<double> &x, 
                const Vector<double> &N,
                Vector<double> &load)
   {
@@ -425,9 +423,6 @@ public:
    // traction onto the adjacent wall instead!
    get_traction(s,N,load);
   }
- 
- /// Compute the diagonal of the velocity mass matrix
- void get_mass_matrix_diagonal(Vector<double> &mass_diag);
 
  /// \short Output function: x,y,[z],u,v,[w],p
  /// in tecplot format. Default number of plot points
@@ -796,14 +791,7 @@ public:
  /// for all values (pressures, velocities) that affect the
  /// load computed in the \c get_load(...) function.
  void identify_load_data(std::set<std::pair<Data*,unsigned> > 
-                         &paired_load_data)
- {
-  this->add_load_data(paired_load_data);
- }
-
- // hierher: why do we have add_ and insert_ (which simply calls
- // add_??
- void add_load_data(std::set<std::pair<Data*,unsigned> > &paired_load_data);
+                         &paired_load_data);
  
  /// \short  Add to the set \c paired_pressure_data pairs containing
  /// - the pointer to a Data object
@@ -813,16 +801,8 @@ public:
  /// for pressure values that affect the
  /// load computed in the \c get_load(...) function.
  void identify_pressure_data(std::set<std::pair<Data*,unsigned> > 
-                             &paired_pressure_data)
-  {
-   this->add_pressure_data(paired_pressure_data);
-  }
- 
- // hierher: why do we have add_ and insert_ (which simply calls
- // add_??
- void add_pressure_data(
-  std::set<std::pair<Data*,unsigned> > &paired_pressure_data);
- 
+                             &paired_pressure_data);
+
  /// Redirect output to SphericalNavierStokesEquations output
  void output(std::ostream &outfile)
   {SphericalNavierStokesEquations::output(outfile);}
@@ -1063,13 +1043,9 @@ public:
  /// .
  /// for all values (pressures, velocities) that affect the
  /// load computed in the \c get_load(...) function.
- void add_load_data(std::set<std::pair<Data*,unsigned> > &paired_load_data);
+ void identify_load_data(std::set<std::pair<Data*,unsigned> > &
+                         paired_load_data);
 
- void identify_load_data(std::set<std::pair<Data*,unsigned> > 
-                         &paired_load_data)
-  {
-   this->add_load_data(paired_load_data);
-  }
 
  /// \short  Add to the set \c paired_pressure_data pairs containing
  /// - the pointer to a Data object
@@ -1078,14 +1054,8 @@ public:
  /// .
  /// for pressure values that affect the
  /// load computed in the \c get_load(...) function.
- void add_pressure_data(
+ void identify_pressure_data(
   std::set<std::pair<Data*,unsigned> > &paired_pressure_data);
-
- void identify_pressure_data(std::set<std::pair<Data*,unsigned> > 
-                             &paired_pressure_data)
-  {
-   this->add_pressure_data(paired_pressure_data);
-  }
 
  /// Redirect output to SphericalNavierStokesEquations output
  void output(std::ostream &outfile) 

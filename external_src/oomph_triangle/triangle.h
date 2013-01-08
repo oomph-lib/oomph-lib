@@ -295,7 +295,7 @@ struct triangulateio {
 #ifdef ANSI_DECLARATORS
 void triangulate(char *, struct triangulateio *, struct triangulateio *,
                  struct triangulateio *);
-void trifree(int *memptr); // hierher hacked!
+void trifree(int *memptr); // MH hacked!
 #else /* not ANSI_DECLARATORS */
 void triangulate();
 void trifree();

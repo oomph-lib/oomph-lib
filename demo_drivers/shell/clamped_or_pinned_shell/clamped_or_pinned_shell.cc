@@ -512,9 +512,6 @@ int main(int argc, char* argv[])
  //Store command line arguments
  CommandLineArgs::setup(argc,argv);
 
- // hierher
- //FiniteElement::Accept_negative_jacobian=true;
-
  //Length of domain
  double L = 10.0;
  double L_phi=0.5*MathematicalConstants::Pi;
@@ -522,8 +519,6 @@ int main(int argc, char* argv[])
  // Choose problem type: 0: Clamped; 1: Pinned; 2: Pinned & symmetry
  unsigned problem_id=0;
  string dir_name;
-
-
 
  if (CommandLineArgs::Argc==2)
   {

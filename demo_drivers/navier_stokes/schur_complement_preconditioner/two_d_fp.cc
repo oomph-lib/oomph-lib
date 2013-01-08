@@ -608,7 +608,7 @@ int main(int argc, char **argv)
  //Doc number of gmres iterations
  ofstream out_file;
  
- // hierher
+ // Set flags
  bool use_hypre_for_pressure=true;
  bool use_block_diagonal_for_momentum=false;
  bool use_hypre_for_momentum_diagonals=false;
@@ -815,7 +815,7 @@ int main(int argc, char **argv)
           // Loop over Reynolds numbers (limited during validation)
           double start_re = 50.0; 
           if (argc>1) start_re=50;
-          double end_re = 50.0; // hierher 
+          double end_re = 50.0; 
           for (double re = start_re; re <= end_re; re+=50.0)
            {
             

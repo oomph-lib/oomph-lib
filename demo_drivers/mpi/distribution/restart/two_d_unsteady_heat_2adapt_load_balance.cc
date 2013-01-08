@@ -466,14 +466,14 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::build_mesh()
  Bulk_mesh_pt = new RefineableQuarterCircleSectorMesh<ELEMENT>(
   Boundary_pt,xi_lo,fract_mid,xi_hi,time_stepper_pt());
 
- // hierher FLAG UP IN TUTORIAL: Mesh is completely rebuilt in here
+ // Note: Mesh is completely rebuilt in here
  // so target errors etc need to be reassigned
 
  // Set targets for spatial adaptivity
  Bulk_mesh_pt->max_permitted_error()=0.001;
  Bulk_mesh_pt->min_permitted_error()=0.0001;
 
- // hierher need to do this in build_mesh() because it's supposed to
+ // Need to do this in build_mesh() because it's supposed to
  // get the problem into the state it was when it was distributed.
  Bulk_mesh_pt->refine_uniformly();
  Bulk_mesh_pt->refine_uniformly();
@@ -958,10 +958,6 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::doc_solution(const
  if (Communicator_pt->my_rank()==0)
   {
    Vector<double> x(2,0.0);
-// hierher need to re-assess which processor this node exists on 
-// after distribution
-//    x[0]=Doc_node_pt->x(0);
-//    x[1]=Doc_node_pt->x(1);
    double u_exact;
    GlobalParameters::get_exact_u(time_pt()->time(),x,u_exact);
    Vector<double > xi_wall(1);
@@ -969,7 +965,6 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::doc_solution(const
    xi_wall[0]=0.0;
    Boundary_pt->position(xi_wall,r_wall);
    Trace_file << time_pt()->time() 
-//              << " " << Doc_node_pt->value(0)
               << " " << u_exact
               << " " << r_wall[0]
               << " " << time_pt()->dt()
@@ -1003,7 +998,7 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::doc_solution(const
  sprintf(filename,"%s/restart%i_on_proc%i.dat",Doc_info.directory().c_str(),
          Doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
- some_file.precision(20); // hierher exercise
+ some_file.precision(20); 
  dump_it(some_file);
  some_file.close();
 

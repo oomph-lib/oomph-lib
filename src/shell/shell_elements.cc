@@ -1029,7 +1029,7 @@ void KirchhoffLoveShellEquations::get_energy(double& pot_en, double& kin_en)
 /// load but this can be overloaded in derived classes
 /// (e.g. in FSI elements) to determine the rate of work done
 /// by individual constituents of this load (e.g. the fluid load
-/// in an FSI problem). hierher spell out nondimensionalisation
+/// in an FSI problem).
 //===================================================================
 double KirchhoffLoveShellEquations::load_rate_of_work()
 {

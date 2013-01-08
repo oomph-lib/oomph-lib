@@ -209,7 +209,6 @@ public:
  /// Newton method to fail --> the overall method is actually more robust
  /// if we use the nodal positions as determined by the Domain/MacroElement-
  /// based mesh update as initial guesses. 
- //hierher UPDATED LAGRANGIAN?
  void actions_before_newton_solve()
   { 
    bool update_all_solid_nodes=true;

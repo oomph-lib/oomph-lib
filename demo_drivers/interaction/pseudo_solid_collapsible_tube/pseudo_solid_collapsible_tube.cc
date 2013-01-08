@@ -1124,7 +1124,6 @@ create_lagrange_multiplier_elements()
 
 //===========================================================================
 /// Flush mesh of face elements.
-/// hierher: there's no actions_before_adapt for Turek, so why here?
 //===========================================================================
 template<class FLUID_ELEMENT, class SOLID_ELEMENT>
 void PseudoElasticCollapsibleChannelProblem<FLUID_ELEMENT,SOLID_ELEMENT>

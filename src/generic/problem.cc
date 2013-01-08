@@ -2236,7 +2236,7 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
                                      bool& actually_removed_some_data)
  {
 
-//    //   // hierher taken out again by MH -- clutters up output
+//    //   // Taken out again by MH -- clutters up output
 //    // Doc timings if required
 //    double t_start=0.0;
 //    if (Global_timings::Doc_comprehensive_timings)
@@ -2807,7 +2807,7 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
 //              << global_node_pt.size() << std::endl;
 
 //    // Time it...
-//    // hierher taken out again by MH -- clutters up output
+//    // Taken out again by MH -- clutters up output
 //    if (Global_timings::Doc_comprehensive_timings)
 //     {
 //      double t_end = TimingHelpers::timer();

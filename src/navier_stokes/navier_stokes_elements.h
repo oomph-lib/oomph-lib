@@ -929,10 +929,6 @@ public:
    // traction onto the adjacent wall instead!
    get_traction(s,N,load);
   }
- 
- /// Compute the diagonal of the velocity mass matrix hierher obsolete
- /// can go with LSC preconditioner itself.
- void get_mass_matrix_diagonal(Vector<double> &mass_diag);
 
  /// \short Compute the diagonal of the velocity/pressure mass matrices.
  /// If which one=0, both are computed, otherwise only the pressure 

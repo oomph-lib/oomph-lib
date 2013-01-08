@@ -416,10 +416,9 @@ FSICollapsibleChannelProblem<ELEMENT>::FSICollapsibleChannelProblem(
  Ldown=ldown;
  Ly=ly;
 
-//  // hierher
+// Switch to serial solver
  dynamic_cast<SuperLUSolver*>(linear_solver_pt())->set_solver_type(
   SuperLUSolver::Serial);
-
 
  // Overwrite maximum allowed residual to accomodate bad initial guesses
  Problem::Max_residuals=1000.0;
@@ -682,24 +681,6 @@ FSICollapsibleChannelProblem<ELEMENT>::FSICollapsibleChannelProblem(
    bulk_mesh_pt()->boundary_node_pt(ibound, inod)->
     set_auxiliary_node_update_fct_pt(
      FSI_functions::apply_no_slip_on_moving_wall);
-
-// hierher
-// #ifdef MACRO_ELEMENT_NODE_UPDATE
-
-//    static_cast<MacroElementNodeUpdateNode*>(
-//     bulk_mesh_pt()->boundary_node_pt(ibound, inod))->
-//     set_auxiliary_node_update_fct_pt(
-//      FSI_functions::apply_no_slip_on_moving_wall);
-
-// #else
-
-//    static_cast<AlgebraicNode*>(
-//     bulk_mesh_pt()->boundary_node_pt(ibound, inod))->
-//     set_auxiliary_node_update_fct_pt(
-//      FSI_functions::apply_no_slip_on_moving_wall);
-
-// #endif
-
   }
   
   
@@ -968,27 +949,9 @@ void FSICollapsibleChannelProblem<ELEMENT>::actions_after_adapt()
  unsigned num_nod= bulk_mesh_pt()->nboundary_node(ibound);
  for (unsigned inod=0;inod<num_nod;inod++)
   {
-   // hierher
    bulk_mesh_pt()->boundary_node_pt(ibound, inod)->
     set_auxiliary_node_update_fct_pt(
      FSI_functions::apply_no_slip_on_moving_wall);
-
-// #ifdef MACRO_ELEMENT_NODE_UPDATE
-
-//    static_cast<MacroElementNodeUpdateNode*>(
-//     bulk_mesh_pt()->boundary_node_pt(ibound, inod))->
-//     set_auxiliary_node_update_fct_pt(
-//      FSI_functions::apply_no_slip_on_moving_wall);
-
-// #else
-
-//    static_cast<AlgebraicNode*>(
-//     bulk_mesh_pt()->boundary_node_pt(ibound, inod))->
-//     set_auxiliary_node_update_fct_pt(
-//      FSI_functions::apply_no_slip_on_moving_wall);
-
-// #endif
-
   }
 
 } // end of actions_after_adapt

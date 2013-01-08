@@ -191,9 +191,7 @@ UnsteadyHeatProblem<ELEMENT>::UnsteadyHeatProblem()
  // Combine all submeshes into a single global Mesh
  build_global_mesh();
  
- 
-// hierher
- // Set the initial conditions
+  // Set the initial conditions
  // --------------------------
  unsigned nnod = Bulk_mesh_pt->nnode();
  for(unsigned j=0;j<nnod;j++)

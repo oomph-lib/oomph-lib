@@ -567,31 +567,6 @@ impose_traction_free_edge(const unsigned& b)
    // otherwise impose equation elements
    else
     {
-/*
-     // paranoid check to see if element in the elements in the boundary 
-     // element pointer order corresponds to their order along the boundary 
-#ifdef PARANOID
-// hierher
-     if (n > 0 && n < n_node-1)
-      {
-       if (mesh_pt()->boundary_element_pt(b,n-1)->node_pt(1) != 
-           mesh_pt()->boundary_element_pt(b,n)->node_pt(0))
-        {
-         std::ostringstream error_message;
-         error_message << "The elements in "
-                       << "finite_element::Boundary element_pointer(...) "
-                       << "\n must be in order in which they are on the "
-                       << "boundary";
-         throw OomphLibError
-          (
-           error_message.str(),     
-           "BiharmonicFluidProblem::impose_traction_free_edge(...)",
-           OOMPH_EXCEPTION_LOCATION
-           );
-        }
-      }
-#endif
-*/     
      // hijack DOFs in element either side of node
      // boundary 0 
      if (b == 0)

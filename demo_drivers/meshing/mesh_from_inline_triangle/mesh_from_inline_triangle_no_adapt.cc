@@ -391,10 +391,6 @@ UnstructuredPoissonProblem<ELEMENT>::UnstructuredPoissonProblem()
   new TriangleMeshClosedCurve(curvilinear_boundary_pt,
                                                  hole_coords);
  
- // hierher
- // closed_curve_pt->disable_polyline_refinement();
- // closed_curve_pt->disable_polyline_unrefinement();
-
 
  // Now build the mesh
  //===================

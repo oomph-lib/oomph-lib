@@ -704,7 +704,7 @@ int main(int argc, char **argv)
  //Doc number of gmres iterations
  ofstream out_file;
  
- // hierher
+ // Set flags
  bool use_hypre_for_pressure=true;
  bool use_block_diagonal_for_momentum=false;
  bool use_hypre_for_momentum_diagonals=false;

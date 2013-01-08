@@ -28,8 +28,6 @@
 //Driver for a multi-physics problem that couples a Navier--Stokes
 //mesh to an advection diffusion mesh, giving Boussinesq convection
 
-//#define USE_FD_JACOBIAN_NST_hierher
-
 
 //Oomph-lib headers, we require the generic, advection-diffusion,
 //and navier-stokes elements.

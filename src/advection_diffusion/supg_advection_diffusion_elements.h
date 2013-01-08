@@ -142,7 +142,7 @@ public virtual QAdvectionDiffusionElement<DIM,NNODE_1D>
 
    //Get wind
    Vector<double> wind(DIM);
-   //Dummy ipt argument required? hierher
+   //Dummy ipt argument? 
    unsigned ipt=0;
    this->get_wind_adv_diff(ipt,s,interpolated_x,wind);
    double abs_wind = 0;

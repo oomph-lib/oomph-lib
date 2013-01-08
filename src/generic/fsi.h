@@ -651,9 +651,6 @@ namespace FSI_functions
  extern std::ofstream Doc_boundary_coordinate_file;
 
  //============================================================================
-
- // hierher update: vector-based version
-
  /// \short Set up the information that the FSIWallElements
  /// in the specified solid mesh require to obtain the fluid loading from the
  /// adjacent fluid elements in the specified fluid mesh.
@@ -668,6 +665,10 @@ namespace FSI_functions
  /// This routine uses the procedures in the Multi_domain_functions namespace
  /// to set up the interaction by locating the adjacent (source) elements
  /// for each integration point of each solid element
+ /// \n\n
+ /// This is the vector based version it works simultaenously on
+ /// fluid fsi boundaries identified in the vector boundary_in_fluid_mesh
+ /// and the corresponding solid meshes in solid_mesh_pt.
  //============================================================================
  template<class FLUID_ELEMENT, unsigned DIM_FLUID>
   void setup_fluid_load_info_for_solid_elements(
@@ -934,18 +935,21 @@ namespace FSI_functions
 
  
  //============================================================================
- // hierher vector-based version
-
  /// \short Setup multi-domain interaction required for imposition
  /// of solid displacements onto the pseudo-solid fluid mesh by
  /// Lagrange multipliers: This function locates the bulk solid 
  /// elements next to boundary b_solid_fsi (the FSI boundary) 
  /// in the solid mesh pointed to by Solid_mesh_pt. The deformation of 
  /// these elements drives the deformation of the  pseudo-solid fluid 
- /// mesh via the Lagrange multiplier elements stored in l
+ /// mesh via the Lagrange multiplier elements stored in 
  /// lagrange_multiplier_mesh_pt. The template parameters
  /// specify the type of the bulk solid elements and their spatial
  /// dimension. 
+ /// \n\n
+ /// This is the vector based version it works simultaenously on
+ /// solid fsi boundaries identified in the vector b_solid_fsi
+ /// and the corresponding Lagrange multiplier meshes in 
+ /// lagrange_multiplier_mesh_pt.
  //============================================================================
  template<class SOLID_ELEMENT, unsigned DIM_SOLID>
   void setup_solid_elements_for_displacement_bc(

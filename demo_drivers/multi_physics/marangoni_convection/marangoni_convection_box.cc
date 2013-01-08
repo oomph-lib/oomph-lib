@@ -133,10 +133,6 @@ class SpineVolumeConstraintPointElement :
    const DShape &dpsifds,
    const Vector<double> &interpolated_n, 
    const double &W)
- // hierher
-// add_additional_residual_contributions(
-//   Vector<double> &residuals, DenseMatrix<double> &jacobian,
-//   const unsigned &flag) 
   {
    //If we have an external pressure, add the final term
    //to the volumetric constraint equation

@@ -65,7 +65,7 @@ using namespace std;
 namespace GlobalParameters
 {
 
- /// hierher
+ /// Choose shape of outer boundary
  bool Rectangular_outer_boundary=false;
 
  /// \short Square of the wavenumber

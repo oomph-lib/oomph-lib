@@ -481,7 +481,7 @@ public virtual RefineableQElement<2>
  /// load computed in the \c get_load(...) function.
  /// (Overloads non-refineable version and takes hanging nodes
  /// into account)
- void add_load_data(std::set<std::pair<Data*,unsigned> > &paired_load_data)
+ void insert_load_data(std::set<std::pair<Data*,unsigned> > &paired_load_data)
    {
    //Get the nodal indices at which the velocities are stored
    unsigned u_index[2];
@@ -731,7 +731,7 @@ void get_interpolated_values(const unsigned& t,
  /// load computed in the \c get_load(...) function.
  /// (Overloads non-refineable version and takes hanging nodes
  /// into account)
- void add_load_data(std::set<std::pair<Data*,unsigned> > &paired_load_data)
+ void insert_load_data(std::set<std::pair<Data*,unsigned> > &paired_load_data)
   {
    //Get the nodal indices at which the velocities are stored
    unsigned u_index[2];

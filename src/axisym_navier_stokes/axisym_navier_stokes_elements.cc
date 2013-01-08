@@ -3527,9 +3527,6 @@ void AxisymmetricQTaylorHoodElement::get_dof_numbers_for_unknowns(
  // number of nodes
  unsigned n_node = this->nnode();
  
- // local eqn no for pressure unknown
- // hierher not used unsigned p_index = this->p_nodal_index_axi_nst();
- 
  // temporary pair (used to store block lookup prior to being added to list)
  std::pair<unsigned,unsigned> block_lookup;
  

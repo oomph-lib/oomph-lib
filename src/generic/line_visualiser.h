@@ -205,8 +205,7 @@ namespace oomph
          }
        }
    
-   
-      // hierher: Get rid of mpi Helpers
+         // hierher: Get rid of mpi Helpers
    
       // Gather information on root
    

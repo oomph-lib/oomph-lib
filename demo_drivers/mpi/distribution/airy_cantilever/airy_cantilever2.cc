@@ -320,7 +320,7 @@ CantileverProblem<ELEMENT>::CantileverProblem(const bool& incompress,
      el_pt->disable_evaluate_jacobian_by_fd();
     }
   
-   // Is it incompressible -- hierher switch to const eqn
+   // Is it incompressible
    if (incompress)
     {     
      PVDEquationsWithPressure<2>* test_pt = 
@@ -616,7 +616,7 @@ int main(int argc, char **argv)
  
  bool use_fd=false;
 
- // Is the material incomressible hierher switch to const eqn
+ // Is the material incomressible
  bool incompress=false;
 
  // Number of cases per implementation

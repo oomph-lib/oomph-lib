@@ -752,7 +752,7 @@ void OscRingNStProblem<ELEMENT>::unsteady_run(const unsigned& ntsteps,
   }
  else
   {
-   max_adapt=1; // hierher
+   max_adapt=1; 
   }
  
  // Max. and min. error for adaptive refinement/unrefinement
@@ -821,7 +821,7 @@ void OscRingNStProblem<ELEMENT>::unsteady_run(const unsigned& ntsteps,
  doc_info.number()++;
 
  // Now do normal run; allow for one mesh adaptation per timestep
- max_adapt=1; // hierher
+ max_adapt=1; 
 
  //Loop over the remaining timesteps
  for(unsigned t=2;t<=ntsteps;t++)

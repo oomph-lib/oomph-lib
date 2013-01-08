@@ -335,8 +335,6 @@ class FSICollapsibleChannelProblem : public Problem
  /// \short Update no slip before Newton convergence check
  void actions_before_newton_convergence_check()
   {
-   // hierher needed?
-
    // Moving wall: No slip; this implies that the velocity needs
    // to be updated in response to wall motion
    unsigned ibound=3;

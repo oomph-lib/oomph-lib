@@ -196,7 +196,32 @@ namespace oomph
 
 
 //========================================================================
-/// hierher vector based version
+ /// Function to set up the one-way multi-domain interaction for 
+ /// FSI-like problems. 
+ /// - \c mesh_pt points to the mesh of \c ElemenWithExternalElements for which
+ ///   the interaction is set up. In an FSI example, this mesh would contain
+ ///   the \c FSIWallElements (either beam/shell elements or the
+ ///   \c FSISolidTractionElements that apply the traction to 
+ ///   a "bulk" solid mesh that is loaded by the fluid.)
+ /// - \c external_mesh_pt points to the mesh that contains the elements
+ ///   of type EXT_ELEMENT that provide the "source" for the
+ ///   \c ElementWithExternalElements. In an FSI example, this 
+ ///   mesh would contain the "bulk" fluid elements.
+ /// - \c external_face_mesh_pt points to the mesh of \c FaceElements
+ ///   attached to the \c external_mesh_pt. The mesh pointed to by
+ ///   \c external_face_mesh_pt has the same dimension as \c mesh_pt.
+ ///   The elements contained in \c external_face_mesh_pt are of type 
+ ///   FACE_ELEMENT_GEOM_OBJECT. In an FSI example, these elements
+ ///   are usually the \c FaceElementAsGeomObjects (templated by the
+ ///   type of the "bulk" fluid elements to which they are attached)
+ ///   that define the FSI boundary of the fluid domain.
+ /// - The interaction_index parameter defaults to zero and must otherwise be
+ ///   set by the user if there is more than one mesh that provides "external
+ ///   elements" for the Mesh pointed to by mesh_pt (e.g. in the case
+ ///   when a beam or shell structure is loaded by fluid from both sides.)
+ /// . 
+ /// Vector-based version operates simultaneously on the meshes contained
+ /// in the vectors.
 //========================================================================
  template<class EXT_ELEMENT,class FACE_ELEMENT_GEOM_OBJECT>
   void Multi_domain_functions::setup_multi_domain_interaction
@@ -1084,8 +1109,6 @@ namespace oomph
 
 
 //========================================================================
-// hierher vector-based version
-//
 /// This routine calls the locate_zeta routine (simultaneously on each 
 /// processor for each individual processor's element set if necessary)
 /// and sets up the external (halo) element and node storage as
@@ -1095,6 +1118,9 @@ namespace oomph
 /// AdvectionDiffusion elements interact with Navier-Stokes type elements)
 /// or two meshes interact along some boundary of the external mesh,
 /// represented by a "face mesh", such as an FSI problem.
+///
+/// Vector-based version operates simultaneously on the meshes contained
+/// in the vectors.
 //========================================================================
  template<class EXT_ELEMENT,class GEOM_OBJECT>
   void Multi_domain_functions::aux_setup_multi_domain_interaction

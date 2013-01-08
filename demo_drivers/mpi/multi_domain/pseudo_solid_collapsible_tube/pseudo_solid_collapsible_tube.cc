@@ -60,7 +60,7 @@ public:
     RefineableSimpleCubicMesh<ELEMENT>(nr,nphi,nz,1.0,1.0,lz,time_stepper_pt)
   {
 
-   // hierher: Important: Currently wall mesh will not refine
+   // Important: Currently wall mesh will not refine
    // towards cylindrical geometry! Need Domain!
 
    // move the nodes
@@ -975,7 +975,6 @@ create_solid_traction_elements()
 
 //===========================================================================
 /// Flush mesh of face elements.
-/// hierher: there's no actions_before_adapt for Turek, so why here?
 //===========================================================================
 template<class FLUID_ELEMENT, class SOLID_ELEMENT>
 void PseudoElasticCollapsibleChannelProblem<FLUID_ELEMENT,SOLID_ELEMENT>

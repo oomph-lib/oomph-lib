@@ -116,7 +116,7 @@ public:
 
  /// \short Function that squashes the outer two macro elements towards 
  /// the wall by mapping the input value of the "radial" macro element
- /// coordinate to the return value. hierher: range of mapping?
+ /// coordinate to the return value. 
  double s_squashed(const double& s)
   {
    return BL_squash_fct_pt(s);
@@ -529,7 +529,7 @@ void  QuarterTubeDomain::r_centr_L(const unsigned& t,
                                     const unsigned& i_layer,
                                     Vector<double>& f)
 {
- // hierher Note the repetition in the calculation, there is some scope
+ // Note the repetition in the calculation, there is some scope
  // for optimisation
                             
   // Wall coordinates along top edge of wall
@@ -796,8 +796,7 @@ void  QuarterTubeDomain::r_centr_L(const unsigned& t,
   f[0]=0.5*r_bottom[0]*(1.0+s_squashed(0.5*(1.0+zeta[0])));
   f[1]=r_bottom[1];
 
-
-  // Warp it: hierher
+  // Warp it: 
   double rho=s_squashed(0.5*(1.0+zeta[0]));
   f[2]=x[0]+rho*(r_bottom[2]-x[0]);
   //f[2]=r_bottom[2];
