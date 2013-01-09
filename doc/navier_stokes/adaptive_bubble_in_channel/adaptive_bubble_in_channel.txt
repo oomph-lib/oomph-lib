@@ -8,12 +8,12 @@ impose volume constraints on enclosed regions within the fluid.
 <HR> <HR> 
 
 \section example The example problem 
-We will illustrate the solution
+We illustrate the solution
 of the unsteady 2D Navier-Stokes equations by considering the
 propagation of a single bubble along a straight channel as shown in
 the sketch below. We non-dimensionalise all lengths on the channel
-width, \f$ \mathcal{L}=H \f$, velocities on the maximum velocity, 
-\f$ \mathcal{U} \f$, and time on the intrinsic timescale, 
+width, \f$ \mathcal{L}=H \f$, velocities on the maximum (prescribed) 
+inflow velocity, \f$ \mathcal{U} \f$, and time on the intrinsic timescale, 
 \f$ \mathcal{T}=\mathcal{L}/\mathcal{U} \f$ , which corresponds to a
 Strouhal number \f$ St=1.0 \f$ .
 
@@ -131,8 +131,9 @@ This is the equation that determines the unknown bubble pressure
 
 We solve the governing equations using an ALE-based finite-element
 method, discretising the fluid domain with triangular Taylor-Hood 
-elements, and updating the mesh with a pseudo-elastic
-node-update procedure.  ***hierher link to Patrick's tutorial*** 
+elements, and updating the mesh with 
+<a href="../../single_layer_free_surface/html/index.html#kinematic_condition_implementation">a pseudo-elastic
+node-update procedure</a>.  
 As usual, we impose the kinematic and dynamic boundary conditions
 with \c FaceElements. The volume constraint is imposed in a similar
 way: We attach \c LineVolumeConstraintBoundingSolidElements to the 
@@ -150,15 +151,13 @@ performing a steady solve with the inflow switched off. This
 deforms the bubble into its steady state (approximately) circular
 configuration with the required volume. The actual time-dependent 
 simulation is then performed with an impulsive
-start fom this configuration. 
+start from this configuration. 
 
 
 The figure below shows a contour plot of the pressure
 distribution with overlayed streamlines. This is a snapshot of 
 <A HREF="../figures/bubble.avi">an animation of the flow field</A>, 
-for the parameters \f$ Re=ReSt=50.0 \f$ and \f$ Ca=0.05 \f$ .
-
-*** hierher update figs/caption to appropriate Re ***
+for the parameters \f$ Re=ReSt=0.0 \f$ and \f$ Ca=0.05 \f$ .
 
 @I w 0.7\textwidth tutorial "Snapshot of the flow field (streamlines and pressure contours) for a propagating bubble. "
 
@@ -172,11 +171,14 @@ for the parameters \f$ Re=ReSt=50.0 \f$ and \f$ Ca=0.05 \f$ .
 
 As usual, we create a namespace where we define the dimensionless 
 parameters \f$ Re \f$, \f$ Ca \f$ and the non-dimensional channel 
-length \f$ L \f$. As shown in <A HREF="hierher">another tutorial</A>, the
+length \f$ L \f$. As discussed in 
+<a href="../../driven_cavity/html/index.html#params">another tutorial</A>, the
 Strouhal number defaults to one, so that we do not have to set it in
 this case. We also store the initial bubble radius and the bubble
 volume, as well as a scaling factor for the inflow
-velocity. Finally we define the Poisson ratio for the generalised
+velocity (this allows us to "switch off" the inflow when
+computing the initial steady solution). Finally we define 
+the Poisson ratio for the generalised
 Hookean constitutive law that is used by pseudo-elastic mesh update.
 
 
@@ -204,15 +206,15 @@ fluid.
 \until problem.doc_solution()
 
 Next, the timestepper is initialised and an impulsive start
-performed. The inflow is switched on and the first two unsteady Newton
+performed. The inflow is switched on and the first few unsteady Newton
 solves are performed without adaptation. 
 
 \skipline Initialise timestepper
-\until }
+\until // done solution on fixed mesh
  
 
-To limit the distortion of the elements we allow mesh adaptation 
-(which involves the re-generatation of the entire mesh) every few timesteps. 
+To limit the distortion of the elements we allow then mesh adaptation 
+(which involves the re-generation of the entire mesh) every few timesteps. 
 
 \skipline // Now do a proper
 \until End of main
@@ -221,17 +223,16 @@ To limit the distortion of the elements we allow mesh adaptation
 
 \section problem The problem class
 
-Since we are solving the unsteady Navier-Stokes equations, we specify
-the type of element and the type of the timestepper (assumed to be a
-member of the \c BDF family) as template parameters.
+As usual, we template the Problem class by the element type
 
 \dontinclude adaptive_bubble_in_channel.cc
 \skipline start_of_problem_class
 \until ~BubbleInChannelProblem()
 
-As usual we delete and re-attach all \c FaceElements before and after
-each adaptation. Also, as discussed in <A HREF="">another
-tutorial</A>, we re-apply the boundary conditions and complete the
+The \c FaceElements are deleted and re-attached before and after
+each adaptation. Also, as discussed in 
+<A HREF="../../../meshes/mesh_from_inline_triangle/html/index.html#overview">
+another tutorial</A>, we re-apply the boundary conditions and complete the
 build of all elements after each adaptation, using the helper function
 \c complete_problem_setup() (discussed below).
  
@@ -298,7 +299,7 @@ distinct polylines.)
 
 Once the boundary representation in form of polygons is completed the
 mesh is generated using \c Triangle. We specify the error estimator
-and set targets for the spatial adaptivity, and output the intial mesh.
+and set targets for the spatial adaptivity, and output the initial mesh.
 
 
 \skipline Now build the mesh,
@@ -443,7 +444,7 @@ circumstances:
 As discussed above, \c Triangle generates a new mesh, based on (i) the
 polygonal representation of the boundary and (ii) the area targets
 provided by the spatial error estimator for the bulk elements.
-The polyogonal boundary representation defines the minimum 
+The polygonal boundary representation defines the minimum 
 number of bulk elements that are generated next to the boundary --
 we showed above how multiple elements can be erected on a given
 boundary segment. However, since \c Triangle  never merges any
@@ -501,7 +502,7 @@ of the boundary employing a criterion similar to the one used for
 unrefinement discussed above. To assess the need for a boundary
 refinement we consider each boundary segment and compute the
 distance  from segment's mid-point to its counterpart on the
-curvlinear boundary. If the ratio of the distance between these 
+curvilinear boundary. If the ratio of the distance between these 
 points, \f$ d \f$,  to the length of the segment connecting
 the vertices, \f$ l \f$, is larger than a user-specifiable tolerance,
 the  point on the curvilinear boundary becomes an additional 
@@ -556,9 +557,9 @@ TriangleMeshPolygon::enable_redistribution_of_segments_between_polylines()
 \endcode
 
 Note that the redistribution of segments is not possible/sensible for
-\c TriangleMeshClosedCurve formed by \c TriangleMeshCurviLines since them 
-have associated a separate \c GeomObject (with specific start/end 
-coordinates). 
+\c TriangleMeshClosedCurve formed by \c TriangleMeshCurviLines since 
+such boundaries are associated with a specific, continuous 
+\c GeomObject with specific start/end coordinates. 
 
 
 <HR>
@@ -592,7 +593,6 @@ coordinates).
    are adjusted such that each boundary occupies approximately 1/2 of
    the bubble surface when the redistribution of polylines is enabled.
    \n\n
--# hierher change to GeomObject.
 .
 
 <HR> <HR>

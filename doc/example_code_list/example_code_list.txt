@@ -1027,7 +1027,7 @@ demonstrate an alternative node-update procedure, based on
 
 </TD>
 <TD>
-<CENTER>almost complete</CENTER>
+<CENTER>complete</CENTER>
 </TD>
 </TR>
 
@@ -1238,7 +1238,7 @@ analytic dispersion relation based on linearised disturbances.
 </TD>
 <TD>
 - Boundary Conditions at a free surface
-- Implementation using a pseudo-solid node update approach
+- How to solve free-boundary problems using a pseudo-solid node update approach.
 </TD>
 <TD>
 <CENTER>complete</CENTER>
@@ -1256,7 +1256,8 @@ results to the analytic dispersion relation based on linearised disturbances.
 </TD>
 <TD>
 - Boundary conditions at an interface between two immiscible fluids.
-- Adaptivity in free-surface/interfacial problems.
+- Adaptivity in free-surface/interfacial problems with a 
+  pseudo-solid node update approach.
 </TD>
 <TD>
 <CENTER>partially complete</CENTER>
@@ -1365,12 +1366,13 @@ compare our results against those from Bretherton's theoretical
 analysis.
 </TD>
 <TD>
-- ***
-- General conventions:
-  - ***
+- Another example for the solution of a free-surface problem using
+  the Method of Spines.
+- Use of external \c Data to implement non-local interactions
+  between elements.
 </TD>
 <TD>
-<CENTER>driver code and pretty pictures</CENTER>
+<CENTER>complete</CENTER>
 </TD>
 </TR>
 
@@ -1386,10 +1388,19 @@ Uses a pseudo-elastic remesh strategy and unstructured spatial adaptivity in a
 non-trivial free surface problem.
 </TD>
 <TD>
-- Mesh adaptation for closed free boundaries.
+- Mesh adaptation for closed free boundaries -- what happens "under
+  the hood" and how to customise the default behaviour, specifically:
+  - Selecting the refinement and unrefinement tolerances on
+    the free boundaries.
+  - Redistributing segments between polylines in cases when the
+    nodes on the free surface all get convected into one region.
+  .
+- How to impose a volume constraint onto an enclosed "bubble" in 
+  a viscous fluid.
+.
 </TD>
 <TD>
-<CENTER>almost complete</CENTER>
+<CENTER>complete</CENTER>
 </TD>
 </TR>
 #####################################################################

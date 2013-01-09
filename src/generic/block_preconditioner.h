@@ -2737,13 +2737,13 @@ namespace oomph
   {
     // If no mesh has been set then default to the Problem's mesh pointer.
     if (is_master_block_preconditioner())
-    {
-	if (nmesh()==0)
-      {
-       this->set_nmesh(1);
-	    this->set_mesh(0,problem_pt()->mesh_pt());
-        }
-    }
+     {
+      if (nmesh()==0)
+       {
+        this->set_nmesh(1);
+        this->set_mesh(0,problem_pt()->mesh_pt());
+       }
+     }
    
     // Get the number of dof types.
     unsigned n_dof_types = ndof_types();

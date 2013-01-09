@@ -516,7 +516,8 @@ public:
  void actions_before_newton_solve()
   {
    //Reset the Lagrangian coordinates of the nodes to be the current
-   //Eulerian coordinates (an updated Lagrangian approach)
+   //Eulerian coordinates -- this makes the current configuration
+   //stress free
    Fluid_mesh_pt->set_lagrangian_nodal_coordinates();
   }
  
@@ -1355,7 +1356,7 @@ int main(int argc, char **argv)
    // Solve the problem
    problem.unsteady_newton_solve(dt);    
    problem.doc_solution();
-  }
+  } // done solution on fixed mesh
 
 
 

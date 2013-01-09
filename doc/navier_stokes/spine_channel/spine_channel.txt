@@ -51,15 +51,17 @@ a function that involves a finite number of discrete unknowns
 represent the unknown boundary by a \c GeomObject in which the 
 unknowns \f$ H_i \  (i=1,...,N_H)\f$ play the role of "geometric
 \c Data", i.e. \c Data whose values determine the shape of the
-geometric object. *** NEED A REFERENCE *** Once the curvilinear
+geometric object. Once the curvilinear
 boundary is represented by a \c GeomObject, the update of the
 nodal positions in the "bulk" mesh could be performed 
 by the  \c Domain / \c MacroElement - based methods referred to above.
 
 
 How exactly the unknowns \f$ H_i \  (i=1,...,N_H)\f$ are 
-determined is irrelevant for the purpose of this discussion (we refer
-to **** for details) -- we simply assume that there \e are some equations
+determined is irrelevant for the purpose of this discussion (
+in free surface flow problems, the relevant equation is the
+kinematic free-surface condition discusssed in 
+<a href="../../../navier_stokes/single_layer_free_surface/html/index.html#kinematic_condition_theory">another tutorial</a>) -- we simply assume that there \e are some equations
 that determine their values. The feature we wish to focus on here is
 that the solution of the problem by Newton's method requires the
 computation of the derivatives of \e all discrete residuals with 
@@ -95,17 +97,6 @@ The efficient evaluation of the so-called "shape derivatives"
 the elements in the "bulk mesh" with respect to the unknowns
 that determine the position of the domain boundary) 
 
-
-each part of the (unknown) domain
-boundary tends to affect the positions of only a small number of nodes.
-It is important to be able to exploit this sparsity when 
-evaluating the so-called "shape derivatives" during the computation
-of the Jacobian matrix.
-
-
-
-
-----------------------------------------
 
 The idea behind spine-based node updates is illustrated in the sketch
 below. Assume that the position of the domain boundary is parametrised
@@ -311,7 +302,15 @@ assign the equation numbers.
 
 Spine-based meshes have their origin 
 in free-surface fluid-mechanics problems where they were first (?)
-introduced by Kistler & Scriven in their paper ***. \c oomph-lib's
+introduced by Kistler & Scriven in their paper 
+
+<center>
+ Kistler, S.F. & Scriven, L.E. ``Coating Flows.'' In:
+``Computational Analysis of Polymer Processing,'' Pearson, J.R.A. &
+Richardson, S.M. (eds.); Applied Science Publishers, London (1983).
+</center>
+
+\c oomph-lib's
  SpineMeshes provide a generalisation of their node-update
 techniques.
 

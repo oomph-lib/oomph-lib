@@ -61,7 +61,6 @@ namespace Global_Physical_Variables
  /// Direction of gravity
  Vector<double> G(2);
 
-
  /// Pointer to film thickness at outflow on the lower wall
  double* H_lo_pt;
 
@@ -373,7 +372,6 @@ private:
            // Get inflow profile 
            x[0]=nod_pt->x(0);
            x[1]=nod_pt->x(1);
-           //cout << x[0] << " " << x[1] << std::endl;
            Inflow_fct_pt(x,veloc);
            nod_pt->set_value(0,veloc[0]);
            nod_pt->set_value(1,veloc[1]);
@@ -454,6 +452,10 @@ class FaceGeometry<FaceGeometry<BrethertonElement<SpineElement<QTaylorHoodElemen
 
 
 }
+
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
 
 
 //======================================================================
@@ -549,8 +551,6 @@ private:
 template<class ELEMENT>
 BrethertonProblem<ELEMENT>::BrethertonProblem()
 {
-
-
 
  // Number of elements in the deposited film region
  unsigned nx1=24;
@@ -787,17 +787,6 @@ void BrethertonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  Trace_file << " " << 1.0+3.8*pow(Global_Physical_Variables::Ca,2.0/3.0);
  Trace_file << " " << Control_element_pt->interpolated_u_nst(s,0);
  Trace_file << " " << Control_element_pt->interpolated_u_nst(s,1);
- Trace_file << " "  
-//             << abs(dynamic_cast<SpineLineFluidInterfaceElement<ELEMENT>*>(
-//                Bulk_mesh_pt->interface_element_pt(0))->
-//                actual_contact_angle_left())*
-//                180.0/MathematicalConstants::Pi << " " ;
-//  Trace_file << " "  
-//             << abs(dynamic_cast<SpineLineFluidInterfaceElement<ELEMENT>*>(
-//                Bulk_mesh_pt->interface_element_pt(ninterface-1))->
-//                actual_contact_angle_right())*
-//                180.0/MathematicalConstants::Pi 
-            << " ";
  Trace_file << std::endl;
 
 
