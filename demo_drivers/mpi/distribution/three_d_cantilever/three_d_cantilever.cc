@@ -689,9 +689,8 @@ void CantileverProblem<ELEMENT>::run_it(const unsigned& i_case)
  
  //Parameter incrementation
  unsigned nstep=1; 
+ double g_increment=1.0e-5;   
 
- //double p_increment=1.0e-5;   
- double g_increment=1.0e-4;   
  for(unsigned i=0;i<nstep;i++)
   {
    // Increment gravity
@@ -901,37 +900,73 @@ int main(int argc, char **argv)
 #endif
 
 
-// #ifdef REFINE    
-//     {
-//      //Set up the problem with discontinous pressure/displacement
-//      CantileverProblem<RefineableQPVDElementWithPressure<3> > 
-//       problem(incompress,use_fd); 
+
+#ifdef REFINE
+    {
+     //Set up the problem with discontinous pressure/displacement
+     CantileverProblem<RefineableQPVDElementWithPressure<3> > 
+      problem(incompress,use_fd); 
      
-// #ifdef OOMPH_HAS_MPI
-//      //Distribute it
-//      problem.distribute(mesh_doc_info,report_stats);
-//      problem.check_halo_schemes(mesh_doc_info);
-//      mesh_doc_info.number()++;
-// #endif
+#ifdef OOMPH_HAS_MPI
+     //Distribute it
+     std::ifstream input_file;
+     std::ofstream output_file;
+     char filename[100];
+
+     // Get partition from file
+     unsigned n_partition=problem.mesh_pt()->nelement();
+     Vector<unsigned> element_partition(n_partition);
+     sprintf(filename,"three_d_cantilever_%i_partition.dat",1+i*ncase);
+     input_file.open(filename);
+     std::string input_string;
+     for (unsigned e=0;e<n_partition;e++)
+      {
+       getline(input_file,input_string,'\n');
+       element_partition[e]=atoi(input_string.c_str());
+      }
+
+     problem.distribute(element_partition,mesh_doc_info,report_stats);
+
+     problem.check_halo_schemes(mesh_doc_info);
+     mesh_doc_info.number()++;
+#endif
      
-//      problem.run_it(2+i*ncase);
-//     }
-// #else
-//     {
-//      //Set up the problem with discontinous pressure/displacement
-//      CantileverProblem<QPVDElementWithPressure<3> > problem(incompress,use_fd); 
+     problem.run_it(2+i*ncase);
+    }
+#else
+    {
+     //Set up the problem with discontinous pressure/displacement
+     CantileverProblem<QPVDElementWithPressure<3> >  
+      problem(incompress,use_fd); 
      
-// #ifdef OOMPH_HAS_MPI
-//      //Distribute it
-//      problem.distribute(mesh_doc_info,report_stats);
-//      problem.check_halo_schemes(mesh_doc_info);
-//      mesh_doc_info.number()++;
-// #endif
+#ifdef OOMPH_HAS_MPI
+     //Distribute it
+     std::ifstream input_file;
+     std::ofstream output_file;
+     char filename[100];
+
+     // Get partition from file
+     unsigned n_partition=problem.mesh_pt()->nelement();
+     Vector<unsigned> element_partition(n_partition);
+     sprintf(filename,"three_d_cantilever_%i_partition.dat",0+i*ncase);
+     input_file.open(filename);
+     std::string input_string;
+     for (unsigned e=0;e<n_partition;e++)
+      {
+       getline(input_file,input_string,'\n');
+       element_partition[e]=atoi(input_string.c_str());
+      }
+
+     problem.distribute(element_partition,mesh_doc_info,report_stats);
+
+     problem.check_halo_schemes(mesh_doc_info);
+     mesh_doc_info.number()++;
+#endif
      
-//      problem.run_it(2+i*ncase);
-//     }
-// #endif
-    
+     problem.run_it(2+i*ncase);
+    }
+#endif
+
     delete Global_Physical_Variables::Constitutive_law_pt;
     Global_Physical_Variables::Constitutive_law_pt=0;
   }

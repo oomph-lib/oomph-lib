@@ -998,11 +998,11 @@ calculate_second_piola_kirchhoff_stress(
 void IsotropicStrainEnergyFunctionConstitutiveLaw::
 calculate_second_piola_kirchhoff_stress(
  const DenseMatrix<double> &g, const DenseMatrix<double> &G,
- DenseMatrix<double> &sigma, DenseMatrix<double> &Gup, double &detG)
+ DenseMatrix<double> &sigma_dev, DenseMatrix<double> &Gup, double &detG)
 {
 //Error checking
 #ifdef PARANOID
- error_checking_in_input(g,G,sigma);
+ error_checking_in_input(g,G,sigma_dev);
 #endif 
 
  //Find the dimension of the problem
@@ -1083,13 +1083,30 @@ calculate_second_piola_kirchhoff_stress(
  //Now set the values of the functions phi and psi (Green & Zerna notation)
  double phi = 2.0*dWdI[0];
  double psi = 2.0*dWdI[1];
+ //Calculate the trace/dim of the first two terms of the stress tensor
+ // phi g^{ij} + psi B^{ij} (see Green & Zerna)
+ double K;
+ //In two-d, we cannot use the strain invariants directly
+ //but can use symmetry of the tensors involved
+ if(dim==2) 
+  {
+   K = 0.5*((I[0]-1.0)*phi + 
+            psi*(Bup(0,0)*G(0,0)  + Bup(1,1)*G(1,1) + 2.0*Bup(0,1)*G(0,1)));
+  }
+ //In three-d we can make use of the strain invariants, see Green & Zerna
+ else
+  {
+   K = (I[0]*phi + 2.0*I[1]*psi)/3.0;
+  }
 
- //Put it all together to get the stress
+ //Put it all together to get the stress, subtracting the trace of the
+ //first two terms to ensure that the stress is deviatoric, which means
+ //that the computed pressure is the mechanical pressure
  for(unsigned i=0;i<dim;i++)
   {
    for(unsigned j=0;j<dim;j++)
     {
-     sigma(i,j) = phi*gup(i,j) + psi*Bup(i,j);
+     sigma_dev(i,j) = phi*gup(i,j) + psi*Bup(i,j) - K*Gup(i,j);
     }
   }
 }
@@ -1104,14 +1121,14 @@ calculate_second_piola_kirchhoff_stress(
 void IsotropicStrainEnergyFunctionConstitutiveLaw:: 
 calculate_second_piola_kirchhoff_stress(const DenseMatrix<double> &g, 
                                         const DenseMatrix<double> &G, 
-                                        DenseMatrix<double> &sigma, 
+                                        DenseMatrix<double> &sigma_dev, 
                                         DenseMatrix<double> &Gup,
                                         double &gen_dil, double &inv_kappa)
 {
 
 //Error checking
 #ifdef PARANOID
- error_checking_in_input(g,G,sigma);
+ error_checking_in_input(g,G,sigma_dev);
 #endif 
 
  //Find the dimension of the problem
@@ -1195,21 +1212,41 @@ calculate_second_piola_kirchhoff_stress(const DenseMatrix<double> &g,
  double phi = 2.0*dWdI[0];
  double psi = 2.0*dWdI[1];
 
+ //Calculate the trace/dim of the first two terms of the stress tensor
+ // phi g^{ij} + psi B^{ij} (see Green & Zerna)
+ double K;
+ //In two-d, we cannot use the strain invariants directly, 
+ //but we can use symmetry of the tensors involved
+ if(dim==2) 
+  {
+   K = 0.5*((I[0]-1.0)*phi + 
+            psi*(Bup(0,0)*G(0,0)  + Bup(1,1)*G(1,1) + 2.0*Bup(0,1)*G(0,1)));
+  }
+ //In three-d we can make use of the strain invariants 
+ else
+  {
+   K = (I[0]*phi + 2.0*I[1]*psi)/3.0;
+  }
+
  //Choose inverse kappa to be one...
  inv_kappa = 1.0;
 
  //...then the generalised dilation is the same as p  in Green & Zerna's
- // notation, but multiplied by sqrt(I[2])
- gen_dil = 2.0*dWdI[2]*I[2];
+ // notation, but multiplied by sqrt(I[2]) with the addition of the
+ // terms that are subtracted to make the other part of the stress
+ // deviatoric
+ gen_dil = 2.0*dWdI[2]*I[2] + K;
 
- //Calculate the non-isotropic part of the stress
+ //Calculate the deviatoric part of the stress by subtracting
+ //the computed trace/dim
  for(unsigned i=0;i<dim;i++)
   {
    for(unsigned j=0;j<dim;j++)
     {
-     sigma(i,j) = phi*gup(i,j) + psi*Bup(i,j);
+     sigma_dev(i,j) = phi*gup(i,j) + psi*Bup(i,j) - K*Gup(i,j);
     }
   }
+
 }
 
 }

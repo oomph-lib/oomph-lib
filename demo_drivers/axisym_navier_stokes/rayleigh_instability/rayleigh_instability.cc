@@ -325,26 +325,9 @@ doc_solution(DocInfo &doc_info)
  // Output the time
  cout << "Time is now " << time_pt()->time() << std::endl;
 
- // Determine number of 1D interface elements in mesh
- //const unsigned n_interface_element = mesh_pt()->ninterface_element();
-
- // Calculate left contact angle in degrees
- const double contact_angle_left = 0.0; // hierher
-//   dynamic_cast<SpineAxisymmetricFluidInterfaceElement<ELEMENT>*>(
-//    mesh_pt()->interface_element_pt(0))->
-//   actual_contact_angle_left()*180.0/MathematicalConstants::Pi;
-
- // Calculate right contact angle in degrees
- const double contact_angle_right = 0.0; // hierher
-//   dynamic_cast<SpineAxisymmetricFluidInterfaceElement<ELEMENT>*>(
-//    mesh_pt()->interface_element_pt(n_interface_element-1))->
-//   actual_contact_angle_right()*180.0/MathematicalConstants::Pi;
-
  // Document in trace file
  Trace_file << time_pt()->time() << " "
-            << mesh_pt()->spine_pt(0)->height() << " "
-            << contact_angle_left << " "
-            << contact_angle_right << std::endl;
+            << mesh_pt()->spine_pt(0)->height() << std::endl;
 
  ofstream some_file;
  char filename[100];

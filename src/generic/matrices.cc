@@ -2754,22 +2754,22 @@ CRDoubleMatrix* CRDoubleMatrix::global_matrix() const
          Vector<MPI_Status> send_status(n_recv_req);
          MPI_Waitall(n_send_req,&send_req[0],&send_status[0]);
         }
-       if (my_rank == 0)
-        {
-         CRDoubleMatrix* m_pt = this->global_matrix();
-         m_pt->sparse_indexed_output("m1.dat");
-        }
+       // if (my_rank == 0)
+       //  {
+       //   CRDoubleMatrix* m_pt = this->global_matrix();
+       //   m_pt->sparse_indexed_output("m1.dat");
+       //  }
 
        // 
        this->build(dist_pt);
        this->build_without_copy(dist_pt->nrow(),nnz_count,
                                 new_value,new_column_index,
                                        new_row_start);
-       if (my_rank == 0)
-        {
-         CRDoubleMatrix* m_pt = this->global_matrix();
-         m_pt->sparse_indexed_output("m2.dat");
-        }
+       // if (my_rank == 0)
+       //  {
+       //   CRDoubleMatrix* m_pt = this->global_matrix();
+       //   m_pt->sparse_indexed_output("m2.dat");
+       //  }
 //       this->sparse_indexed_output(oomph_info);
        abort();
       }

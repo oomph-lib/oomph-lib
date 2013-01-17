@@ -30,3 +30,4 @@ three_d_cantilever_LDADD = -L@libdir@ -lsolid -lconstitutive \
 
 #------------------------------------------------------------------------
 
+EXTRA_DIST += comp.mcr

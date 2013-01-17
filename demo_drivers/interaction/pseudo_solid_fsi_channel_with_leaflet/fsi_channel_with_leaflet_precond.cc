@@ -758,7 +758,9 @@ void FSIChannelWithLeafletProblem<ELEMENT>::set_iterative_solver()
  linear_solver_pt() = solver_pt;
   
  // Create preconditioner for 2D problem
- PseudoElasticFSIPreconditioner* prec_pt=new PseudoElasticFSIPreconditioner(2);
+ unsigned dim=2;
+ PseudoElasticFSIPreconditioner* prec_pt=
+  new PseudoElasticFSIPreconditioner(dim);
  
  // Set preconditioner
  solver_pt->preconditioner_pt() = prec_pt;
@@ -1077,7 +1079,8 @@ int main(int argc, char **argv)
  // Store command line arguments
  CommandLineArgs::setup(argc,argv);
 
- // Multiplier for number of elements in coordinate directions
+ // Multiplier for number of elements in coordinate directions.
+ // Used for uniform mesh refinement studies.
  unsigned mesh_multiplier = 2; 
  CommandLineArgs::specify_command_line_flag("--mesh_multiplier",
                                             &mesh_multiplier);

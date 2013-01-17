@@ -132,22 +132,8 @@ public:
    //Make the current configuration the undeformed one
    set_lagrangian_nodal_coordinates();
 
-   
-   // hierher: Temporary fix to retain validata 
-   {
-    unsigned n_element = nelement();
-    for(unsigned i=0;i<n_element;i++)
-     {
-      // Upcast from GeneralisedElement to the present element
-      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(element_pt(i));
-      
-      el_pt->enable_use_of_undeformed_macro_element_for_new_lagrangian_coords();
-     }
-    
-    // Refine uniformly
-    this->refine_uniformly();
-   }
-   
+   // Refine uniformly
+   this->refine_uniformly();
    
    //Now worry about the interface elements
    //layer in turn. We determine the layer based on the z coordinate

@@ -14,23 +14,24 @@ with pseudo-solid mesh updates. <em>Journal of Computational Physics</em>
 <a href="http://dx.doi.org/10.1016/j.jcp.2012.07.001">
 10.1016/j.jcp.2012.07.001</a>
 </center>
-where full details of the theory and further results from a 
+where full details of the analysis and further results from a 
 variety of other test problems can be found.
 
-
+ 
 <HR> 
 <HR>
 
-\section model Theory: Problem formulation, the resulting linear system and the preconditioner
+\section model Background: Problem formulation, the resulting linear system and the preconditioner
 
-We will demonstrate the use of the preconditioner using the
+We will demonstrate the development and application 
+of the preconditioner using the
 problem of flow in a 2D channel with an elastic leaflet discussed in
 <a href="../../../interaction/fsi_channel_with_leaflet/html/index.html">
 another tutorial</a> and illustrated in the sketch below:
 
 @I w 0.75\textwidth fsi_channel_with_leaflet "Sketch of the problem. "
 
-Flow is driven (via an imposed inflow profile) through a 2D channel 
+Flow is driven (via an imposed parabolic inflow profile) through a 2D channel 
 which is partially obstructed by a thin-walled elastic leaflet.
 The fluid leaves the domain at the far downstream end of the channel
 where we assume parallel, axially traction-free outflow. 
@@ -71,7 +72,7 @@ following types of discrete unknowns:
 .
 Using this classification of the unknowns,
 the linear system to be solved in the course 
-of the Newton iteration can be (formally) re-ordered 
+of the Newton iteration can be re-ordered 
 into the following block structure:
 \f[
 J_{\rm FSI} \ \Delta {\bf x} = 
@@ -103,7 +104,7 @@ deformation of the fluid-loaded solid, \f${\bf X}\f$ represents
 the nodal positions in the fluid mesh, and \f${\bf L}\f$ contains 
 the discrete Lagrange multipliers which impose
 the deformation of the FSI boundary in the fluid mesh.
-The diagonal blocks in the Jacobian matrix, \f$J_{\rm FSI}\f$, are 
+The three diagonal blocks in the Jacobian matrix, \f$J_{\rm FSI}\f$, are 
 the two ``single-physics'' 
 Jacobian matrices (\f$F\f$, the Navier-Stokes Jacobian; \f$S\f$, the 
 tangent stiffness matrix of the fluid-loaded solid) and 
@@ -122,7 +123,7 @@ problem governing the fluid mesh update, discussed in more detail
 in <a href="../../prescribed_displ_lagr_mult/html/index.html">
 another tutorial</a>.
 The non-zero off-diagonal blocks arise through the interactions between 
-the various 
+the various single-physics
 problems: \f$C_{\rm fx}\f$ represents the effect of the pseudo-solid unknowns 
 (the nodal positions in the fluid mesh) on the discretised 
 Navier--Stokes equations -- this incorporates the so-called shape-derivatives
@@ -136,11 +137,13 @@ is also affected by the nodal positions in the fluid mesh -- this
 dependency gives rise to the matrix \f$C_{\rm sx}\f$. Finally, \f$C_{\rm
 ls}\f$ arises because the prescribed boundary displacement of the fluid 
 mesh depends
-on the displacement field in the fluid-loaded solid. The zero (1,2) block
+on the displacement field in the fluid-loaded solid. The zero \f$ "fs"
+\f$ block
 reflects the fact that the discretised Navier-Stokes equations do not
 depend directly on the displacement field of the actual solid. The
-zero (3,1) and (3,2) blocks indicate that the pseudo-solid equations are
-not affected by the fluid unknowns. The (3,2) block is zero
+zero \f$ "xf" \f$ block indicates that the 
+pseudo-solid equations are not affected by the fluid unknowns. The 
+\f$ "xs"\f$ block is zero
 because the real solid affects the pseudo-solid only indirectly
 via the Lagrange multiplier constraint (which gives rise to  \f$C_{\rm
 ls}\f$). Finally, the non-zero blocks in the last block column
@@ -179,7 +182,7 @@ C_{\rm sf}&S&C_{\rm sx}&\\ \hline
 \ \ \ \ \ \ @E[P_FSI]@
 \f]
 
-The preconditioner has a block triangular structure.
+The preconditioner can be shown to have a block triangular structure.
 Its  application therefore
 requires the solution  of four subsidiary linear systems involving the
 matrices
@@ -209,7 +212,7 @@ the real solid's tangent stiffness matrix \f$ S \f$.
 
 With these approximations, the computational
 cost of one application of the preconditioner is linear
-in the number of unknowns (see comm_and_ex
+in the number of unknowns (see \ref comm_and_ex
 for a more detailed discussion of this issue).
 The optimality of the preconditioner
 can therefore be assessed by demonstrating that 

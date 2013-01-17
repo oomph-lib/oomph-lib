@@ -935,12 +935,50 @@ class ProjectionProblem : public virtual Problem
    //values
    else
     {
-     // Prepare for projection in value 0: hierher Note that this 
-     // assumes that field 0 can actually hold the coordinates
-     // i.e. that it's interpolated isoparametrically!
+     // Prepare for projection in value 0
      this->set_current_field_for_projection(0);
      this->unpin_dofs_of_field(0);
      
+#ifdef PARANOID
+
+     // The machinery used below  assumes that field 0 can actually 
+     // hold the coordinates i.e. that the field is interpolated 
+     // isoparametrically! The method will fail if there are no values
+     // stored at the nodes.  Currently there are no examples of that -- the 
+     // problem would only arise for elements that have all their fields
+     // represented by internal data. Will fix this if/when
+     // such a case arises...
+     unsigned n_element = Problem::mesh_pt()->nelement();
+     for(unsigned e=0;e<n_element;e++)
+      {
+       FiniteElement* el_pt=Problem::mesh_pt()->finite_element_pt(e);
+       unsigned nnod=el_pt->nnode();
+       for (unsigned j=0;j<nnod;j++)
+        {
+         Node* nod_pt=el_pt->node_pt(j);
+         if (nod_pt->nvalue()==0)
+          {
+           std::ostringstream error_stream;
+           error_stream << "Node at  ";
+           unsigned n=nod_pt->ndim();
+           for (unsigned i=0;i<n;i++)
+            {
+             error_stream << nod_pt->x(i) << " ";
+            }
+            error_stream 
+             << "\nhas no values. Projection (of coordinates) doesn't work\n"
+             << "for such cases (at the moment), sorry! Send us the code\n"
+             << "where the problem arises and we'll try to implement this\n"
+             << "(up to now unnecessary) capability...\n";
+            throw OomphLibError(error_stream.str(),
+                                "ProjectionProblem::project()",
+                                OOMPH_EXCEPTION_LOCATION);
+          }
+        }
+      }
+    
+#endif
+
      //Check number of history values for coordinates
      n_history_values = dynamic_cast<PROJECTABLE_ELEMENT*>
       (Problem::mesh_pt()->element_pt(0))->

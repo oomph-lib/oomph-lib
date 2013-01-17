@@ -26,10 +26,12 @@ cp ../*partition.dat .
 echo "Running 3D cantilever problem "
 mkdir RESLT_refine0
 mkdir RESLT_refine1
+mkdir RESLT_refine2
 mkdir RESLT_refine3
 mkdir RESLT_refine4
 mkdir RESLT_refine5
 mkdir RESLT_refine6
+mkdir RESLT_refine7
 mkdir RESLT_refine8
 mkdir RESLT_refine9
 
@@ -47,10 +49,15 @@ echo "Validation directory: " >> validation.log
 echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
-cat RESLT_refine0/soln0_on_proc0.dat RESLT_refine1/soln0_on_proc1.dat \
-    RESLT_refine3/soln1_on_proc1.dat RESLT_refine4/soln0_on_proc0.dat \
-    RESLT_refine5/soln0_on_proc1.dat RESLT_refine6/soln1_on_proc0.dat \
-    RESLT_refine8/soln0_on_proc0.dat RESLT_refine8/soln0_on_proc1.dat \
+cat RESLT_refine0/soln1_on_proc0.dat RESLT_refine0/soln1_on_proc1.dat \
+    RESLT_refine1/soln1_on_proc0.dat RESLT_refine1/soln1_on_proc1.dat \
+    RESLT_refine2/soln1_on_proc0.dat RESLT_refine2/soln1_on_proc1.dat \
+    RESLT_refine3/soln1_on_proc0.dat RESLT_refine3/soln1_on_proc1.dat \
+    RESLT_refine4/soln1_on_proc0.dat RESLT_refine4/soln1_on_proc1.dat \
+    RESLT_refine5/soln1_on_proc0.dat RESLT_refine5/soln1_on_proc1.dat \
+    RESLT_refine6/soln1_on_proc0.dat RESLT_refine6/soln1_on_proc1.dat \
+    RESLT_refine7/soln1_on_proc0.dat RESLT_refine7/soln1_on_proc1.dat \
+    RESLT_refine8/soln1_on_proc0.dat RESLT_refine8/soln1_on_proc1.dat \
     RESLT_refine9/soln1_on_proc0.dat RESLT_refine9/soln1_on_proc1.dat \
     > three_d_cantilever_results.dat
 

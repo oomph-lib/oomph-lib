@@ -502,16 +502,6 @@ public:
      //Create the FiniteElement and add to the Element_pt Vector
      Element_pt.push_back(new ELEMENT);
 
-     // hierher: Sorry Andrew -- this was the only quick
-     // way to fix this. The problem arises because when
-     // constructing the problem, you're refining
-     // the mesh rather than the problem; the mesh 
-     // contains elements of multiple types; etc.
-     // This only needs to be set once and is then passed
-     // on automatically:
-     dynamic_cast<ELEMENT*>(finite_element_pt(e))->
-      enable_use_of_undeformed_macro_element_for_new_lagrangian_coords();
-
      //Read out the number of linear points in the element
      unsigned Np = 
       dynamic_cast<ELEMENT*>(finite_element_pt(e))->nnode_1d();
