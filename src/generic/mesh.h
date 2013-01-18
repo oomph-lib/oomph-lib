@@ -236,6 +236,10 @@ public:
  /// duplicates; no boundary information etc. is created). 
  Mesh(const Vector<Mesh*>& sub_mesh_pt)
   {
+   // Mesh hasn't been distributed: Null out pointer to communicator
+   Comm_pt=0;
+
+   // Now merge the meshes
    merge_meshes(sub_mesh_pt);
   }
 
@@ -1803,6 +1807,9 @@ class SolidMesh : public virtual Mesh
  /// duplicates; no boundary information etc. is created). 
  SolidMesh(const Vector<SolidMesh*>& sub_mesh_pt)
   {
+   // Mesh hasn't been distributed: Null out pointer to communicator
+   Comm_pt=0;
+
    unsigned n=sub_mesh_pt.size();
    Vector<Mesh*> sub_mesh_mesh_pt(n);
    for (unsigned i=0;i<n;i++)

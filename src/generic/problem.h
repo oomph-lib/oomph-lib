@@ -196,6 +196,9 @@ namespace oomph
  /// \short Has default set_initial_condition function been called?
  /// Default: false
  bool Default_set_initial_condition_called;
+
+ /// \short Use the globally convergent newton method
+ bool Use_glob_conv_newton_method;
  
   protected:
 
@@ -537,7 +540,7 @@ namespace oomph
  /// \short Maximum desired residual:
  /// if the maximum residual exceeds this value, the program will exit
  double Max_residuals;
- 
+
  /// Is re-use of Jacobian in Newton iteration enabled? Default: false
  bool Jacobian_reuse_is_enabled;
 
@@ -1608,6 +1611,30 @@ namespace oomph
  /// \short Use Newton method to solve the problem
  void newton_solve();
 
+ /// \short enable globally convergent Newton method
+ void enable_glob_conv_newton_method()
+ {
+  Use_glob_conv_newton_method=true;
+ }
+
+ /// \short disable globally convergent Newton method
+ void disable_glob_conv_newton_method()
+ {
+  Use_glob_conv_newton_method=false;
+ }
+
+  private:
+
+ /// Line search helper for globally convergent Newton method
+ void glob_conv_line_search(const Vector<double>& x_old,
+                            const double& half_residual_squared_old,
+                            DoubleVector& gradient,
+                            DoubleVector& newton_dir,
+                            double& half_residual_squared,
+                            const double stpmax);
+
+  public:
+
  /// \short Adaptive Newton solve: up to max_adapt adaptations of all
  /// refineable submeshes are performed to achieve the 
  /// the error targets specified in the refineable submeshes.
@@ -1984,8 +2011,8 @@ namespace oomph
     first,
     shift);
  }
- 
- 
+
+
  /// \short Unsteady "doubly" adaptive Newton solve: Does temporal
  /// adaptation first, i.e. we try to do a timestep with an increment
  /// of dt, and adjusting dt until the solution on the given mesh satisfies

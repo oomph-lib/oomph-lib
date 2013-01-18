@@ -68,7 +68,7 @@ class Problem;
 /// and the rhs can be specified, but this are not guaranteed to
 /// implemented for all linear solvers (e.g. for frontal solvers).
 //====================================================================
- class LinearSolver : public DistributableLinearAlgebraObject
+class LinearSolver : public DistributableLinearAlgebraObject
 {
   protected:
  
@@ -81,11 +81,23 @@ class Problem;
  // for the solves should be documented
  bool Doc_time;
 
+ /// \short flag that indicates whether the gradient required for the
+ /// globally convergent Newton method should be computed or not
+ bool Compute_gradient;
+
+ /// \short flag that indicates whether the gradient was computed or not
+ bool Gradient_has_been_computed;
+
+ /// \short DoubleVector storing the gradient for the globally convergent
+ /// Newton method
+ DoubleVector Gradient_for_glob_conv_newton_solve;
+
   public:
-
+ 
  /// Empty constructor, initialise the member data
- LinearSolver() : Enable_resolve(false), Doc_time(true) {}
-
+  LinearSolver() : Enable_resolve(false), Doc_time(true), 
+  Compute_gradient(false), Gradient_has_been_computed(false) {}
+ 
  /// Broken copy constructor
  LinearSolver(const LinearSolver& dummy) 
   { 
@@ -182,13 +194,59 @@ class Problem;
  /// \short return the time taken to solve the linear system (needs to be 
  /// overloaded for each linear solver)
  virtual double linear_solver_solution_time()
-  {
-   throw OomphLibError(
-    "linear_solver_solution_time() not implemented for this linear solver",
-    "LinearSolver::linear_solver_solution_time()",
-    OOMPH_EXCEPTION_LOCATION);
-   return 0;
-  }
+ {
+  throw OomphLibError(
+   "linear_solver_solution_time() not implemented for this linear solver",
+   "LinearSolver::linear_solver_solution_time()",
+   OOMPH_EXCEPTION_LOCATION);
+  return 0;
+ }
+
+ /// \short function to enable the computation of the gradient required 
+ /// for the globally convergent Newton method
+ virtual void enable_computation_of_gradient()
+ {
+  throw OomphLibError(
+   "enable_computation_of_gradient() not implemented for "
+   "this linear solver",
+   "LinearSolver::enable_computation_of_gradient()",
+   OOMPH_EXCEPTION_LOCATION);
+ }
+
+ /// \short function to disable the computation of the gradient required 
+ /// for the globally convergent Newton method
+ void disable_computation_of_gradient()
+ {
+  Compute_gradient=false;
+ }
+
+ /// \short function to reset the size of the gradient before each Newton
+ /// solve
+ void reset_gradient()
+ {
+  Gradient_for_glob_conv_newton_solve.clear();
+ }
+
+ /// \short function to access the gradient, provided it has been computed
+ void get_gradient(DoubleVector& gradient)
+ {
+#ifdef PARANOID
+  if(Gradient_has_been_computed)
+   {
+#endif
+    gradient=Gradient_for_glob_conv_newton_solve;
+#ifdef PARANOID
+   }
+  else
+   {
+    throw OomphLibError(
+     "The gradient has not been computed for this linear solver!",
+     "LinearSolver::get_gradient()",
+     OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+ }
+
 };
 
 //=============================================================================
@@ -418,6 +476,12 @@ class SuperLUSolver : public LinearSolver
   {
    clean_up_memory();
   }
+
+ /// function to enable the computation of the gradient
+ void enable_computation_of_gradient()
+ {
+  Compute_gradient=true;
+ }
 
  // SuperLUSolver methods
  ////////////////////////

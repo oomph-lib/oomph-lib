@@ -152,7 +152,7 @@ namespace Global_Physical_Variables
 
  /// Function that prescribes the hydrostatic pressure field at the outlet
  void hydrostatic_pressure(const double &time, const Vector<double> &x, 
-                           Vector<double> &traction)
+                           const Vector<double>& n, Vector<double> &traction)
  {
   traction[0] = -ReInvFr*G[1]*x[1];
   traction[1] = 0.0;

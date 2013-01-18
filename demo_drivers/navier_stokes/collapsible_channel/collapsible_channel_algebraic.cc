@@ -219,6 +219,7 @@ namespace Global_Physical_Variables
  /// Traction required at the left boundary
  void prescribed_traction(const double& t,
                           const Vector<double>& x,
+                          const Vector<double>& n,
                           Vector<double>& traction)
  {
   traction.resize(2);

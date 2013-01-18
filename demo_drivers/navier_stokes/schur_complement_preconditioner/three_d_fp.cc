@@ -90,6 +90,7 @@ namespace Global_Variables
  /// Traction at the outflow boundary
  void prescribed_traction(const double& t,
                           const Vector<double>& x,
+                          const Vector<double> &n,
                           Vector<double>& traction)
  {
   traction.resize(3);

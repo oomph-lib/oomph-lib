@@ -237,6 +237,7 @@ namespace Global_Physical_Variables
  /// Traction applied on the fluid at the left (inflow) boundary
  void prescribed_traction(const double& t,
                           const Vector<double>& x,
+                          const Vector<double>& n,
                           Vector<double>& traction)
  {
   traction.resize(2);

@@ -50,8 +50,8 @@ namespace oomph
  /// chooses strong imposition via hijacking (true) or weak imposition
  /// via addition to momentum equation (false).
 //=========================================================================
- void FluidInterfaceBoundingElement::set_contact_angle(double* const &angle_pt, 
-                                                   const bool &strong)
+ void FluidInterfaceBoundingElement::set_contact_angle(double* const &angle_pt,
+                                                       const bool &strong)
  {
   //Set the pointer to the contact angle
   Contact_angle_pt = angle_pt;

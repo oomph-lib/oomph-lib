@@ -370,7 +370,7 @@ public LineFluidInterfaceElement
   
   int local_eqn=0, local_unknown = 0;
   
-//Loop over the shape functions
+  //Loop over the shape functions
   for(unsigned l=0;l<n_node;l++)
    {
     //Loop over the directions
@@ -418,17 +418,17 @@ public LineFluidInterfaceElement
   //Create a temporary pointer to the appropriate FaceElement
   ElasticPointFluidInterfaceBoundingElement<ELEMENT> *face_el_pt = 
    new ElasticPointFluidInterfaceBoundingElement<ELEMENT>;
-  
+
   //Attach the geometrical information to the new element
   this->build_face_element(face_index,face_el_pt);
-  
+
   //Set the index at which the unknowns are stored from the element
   face_el_pt->u_index_interface_boundary() = this->U_index_interface;
-  
+
   //Set the value of the nbulk_value, the node is not resized
   //in this problem, so it will just be the actual nvalue - 1
   face_el_pt->nbulk_value(0) = face_el_pt->node_pt(0)->nvalue() -1;
-  
+
   //Find the nodes
   std::set<SolidNode*> set_of_solid_nodes;
   unsigned n_node = this->nnode();
@@ -436,14 +436,14 @@ public LineFluidInterfaceElement
    {
     set_of_solid_nodes.insert(static_cast<SolidNode*>(this->node_pt(n)));
    }
-  
+
   //Delete the nodes from the face
   n_node = face_el_pt->nnode();
   for(unsigned n=0;n<n_node;n++)
    {
     set_of_solid_nodes.erase(static_cast<SolidNode*>(face_el_pt->node_pt(n)));
    }
-  
+
   //Now add these as external data
   for(std::set<SolidNode*>::iterator it=set_of_solid_nodes.begin();
       it!=set_of_solid_nodes.end();++it)

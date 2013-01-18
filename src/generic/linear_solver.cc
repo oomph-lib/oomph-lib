@@ -809,7 +809,17 @@ void SuperLUSolver::solve(Problem* const &problem_pt, DoubleVector &result)
      //Get the sparse jacobian and residuals of the problem
      CRDoubleMatrix CR_jacobian(this->distribution_pt());
      problem_pt->get_jacobian(residuals,CR_jacobian);
-     
+
+     // If we want to compute the gradient for the globally convergent
+     // Newton method, then do it here
+     if(Compute_gradient)
+      {
+       // Compute it
+       CR_jacobian.multiply(residuals,Gradient_for_glob_conv_newton_solve);
+       // Set the flag
+       Gradient_has_been_computed=true;
+      }
+
      // Doc time for setup
      double t_end = TimingHelpers::timer();
      Jacobian_setup_time = t_end-t_start;
@@ -851,6 +861,16 @@ void SuperLUSolver::solve(Problem* const &problem_pt, DoubleVector &result)
      //Get the sparse jacobian and residuals of the problem
      CCDoubleMatrix CC_jacobian;
      problem_pt->get_jacobian(residuals,CC_jacobian);
+
+     // If we want to compute the gradient for the globally convergent
+     // Newton method, then do it here
+     if(Compute_gradient)
+      {
+       // Compute it
+       CC_jacobian.multiply(residuals,Gradient_for_glob_conv_newton_solve);
+       // Set the flag
+       Gradient_has_been_computed=true;
+      }
      
      // Doc time for setup
      double t_end = TimingHelpers::timer();
@@ -879,7 +899,8 @@ void SuperLUSolver::solve(Problem* const &problem_pt, DoubleVector &result)
        //Otherwise just solve
        else
         {
-         solve(&CC_jacobian,residuals,result);}
+         solve(&CC_jacobian,residuals,result);
+        }
       }
     }
    

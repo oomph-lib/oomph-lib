@@ -1446,7 +1446,7 @@ namespace Locate_zeta_helpers
  void FiniteElement::check_jacobian(const double &jacobian) const
  {
   //First check for a zero jacobian
-  if(std::fabs(jacobian) < 1.0e-16)
+  if(std::fabs(jacobian) < Tolerance_for_singular_jacobian)
    {
     if (FiniteElement::Suppress_output_while_checking_for_inverted_elements)
      {
@@ -1454,10 +1454,17 @@ namespace Locate_zeta_helpers
      }
     else
      {
-      throw OomphLibError(
-       "Determinant of Jacobian matrix is zero --- singular mapping!",
-       "FiniteElement::check_jacobian()",
-       OOMPH_EXCEPTION_LOCATION);
+      std::ostringstream error_message;
+      error_message << "Determinant of Jacobian matrix is zero --- "
+                    << "singular mapping!\n The determinant of the "
+                    << "jacobian is "<<std::fabs(jacobian)
+                    << "which is smaller than the treshold "
+                    << Tolerance_for_singular_jacobian <<"\n"
+                    << "You can change this treshold, by specifying "
+                    << "FiniteElement::Tolerance_for_singular_jacobian \n";
+      throw OomphLibError(error_message.str(),
+                          "FiniteElement::check_jacobian()",
+                          OOMPH_EXCEPTION_LOCATION);
      }
    }
   //Now check for negative jacobians, if we're not allowing them (default)
@@ -2163,6 +2170,11 @@ assemble_local_to_eulerian_jacobian(const DShape &dpsids,
 /// \short Default value that is used for the tolerance required when 
 /// locating nodes via local coordinates
  const double FiniteElement::Node_location_tolerance = 1.0e-14;
+
+//=======================================================================
+/// Set the default tolerance for a singular jacobian
+//=======================================================================
+ double FiniteElement::Tolerance_for_singular_jacobian = 1.0e-16;
 
 //======================================================================
 /// Set the default value of the Accept_negative_jacobian flag to be 

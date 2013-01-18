@@ -503,7 +503,7 @@ void black_box_fd_newton_solve(ResidualFctPt residual_fct,
      double sum=0.0;
      for (unsigned i=0;i<ndof;i++)
       {
-       sum += sqrt(unknowns[i]);
+       sum += unknowns[i]*unknowns[i];
        half_residual_squared+=residuals[i]*residuals[i];
       }
      half_residual_squared*=0.5;
@@ -515,6 +515,7 @@ void black_box_fd_newton_solve(ResidualFctPt residual_fct,
    double max_res = std::fabs(*std::max_element(residuals.begin(),
                                                residuals.end(),
                                                AbsCmp<double>()));
+   
    
    // Doc progress?
    if (Doc_Progress)
@@ -601,7 +602,10 @@ void black_box_fd_newton_solve(ResidualFctPt residual_fct,
       {
        unknowns[i]-=newton_direction[i];
       }
+
     }
+
+
   }
    
  
@@ -685,9 +689,9 @@ void black_box_fd_newton_solve(ResidualFctPt residual_fct,
       x[i]=x_old[i]+alam*newton_dir[i];
      }
     
-   // Evaluate current residuals
+    // Evaluate current residuals
     Vector<double> residuals(n);
-   residual_fct(params,x,residuals);
+    residual_fct(params,x,residuals);
     half_residual_squared=0.0;
     for (unsigned i=0;i<n;i++)
      {

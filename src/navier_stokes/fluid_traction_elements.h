@@ -40,6 +40,7 @@
 
 //OOMPH-LIB headers
 #include "../generic/Qelements.h"
+#include "../generic/Telements.h"
 
 namespace oomph
 {
@@ -60,7 +61,7 @@ private:
 
  ///Pointer to an imposed traction function
  void (*Traction_fct_pt)(const double& time, const Vector<double> &x, 
-                       Vector<double> &result);
+                         const Vector<double> &n, Vector<double> &result);
 
 protected:
 
@@ -69,8 +70,8 @@ protected:
  /// viewed as part of a geometric object should be given by
  /// the FaceElement representation, by default
  double zeta_nodal(const unsigned &n, const unsigned &k,           
-                          const unsigned &i) const 
-  {return FaceElement::zeta_nodal(n,k,i);}     
+                   const unsigned &i) const 
+ {return FaceElement::zeta_nodal(n,k,i);}     
 
  /// \short Access function that returns the local equation numbers
  /// for velocity components.
@@ -78,7 +79,7 @@ protected:
  /// The default is to asssume that n is the local node number
  /// and the i-th velocity component is the i-th unknown stored at the node.
  virtual inline int u_local_eqn(const unsigned &n, const unsigned &i)
-  {return nodal_local_eqn(n,i);}
+ {return nodal_local_eqn(n,i);}
  
  ///\short Function to compute the shape and test functions and to return 
  ///the Jacobian of mapping 
@@ -99,20 +100,21 @@ protected:
 
  ///Function to calculate the traction applied to the fluid
  void get_traction(const double& time, const Vector<double> &x, 
-                   Vector<double> &result)
-  {
-   //If the function pointer is zero return zero
-   if(Traction_fct_pt == 0)
-    {
-     //Loop over dimensions and set body forces to zero
-     for(unsigned i=0;i<Dim;i++) {result[i] = 0.0;}
-    }
-   //Otherwise call the function
-   else
-    {
-     (*Traction_fct_pt)(time,x,result);
-    }
-  }
+                   const Vector<double> &n, Vector<double> &result)
+ {
+  //If the function pointer is zero return zero
+  if(Traction_fct_pt == 0)
+   {
+    //Loop over dimensions and set body forces to zero
+    for(unsigned i=0;i<Dim;i++) {result[i] = 0.0;}
+   }
+  //Otherwise call the function
+  else
+   {
+    (*Traction_fct_pt)(time,x,n,result);
+   }
+ }
+ 
 
  ///\short This function returns the residuals for the 
  /// traction function.
@@ -173,7 +175,7 @@ public:
 
  //Access function for the imposed traction pointer
  void (*&traction_fct_pt())(const double& t, const Vector<double>& x, 
-                                Vector<double>& result) 
+                            const Vector<double> &n, Vector<double>& result) 
   {return Traction_fct_pt;}
  
  ///This function returns just the residuals
@@ -261,9 +263,13 @@ fill_in_generic_residual_contribution_fluid_traction(
                                    nodal_position(l,i)*psif[l];}
     }
    
+   // Get the outer unit normal
+   Vector<double> interpolated_n(Dim);
+   outer_unit_normal(ipt,interpolated_n);
+
    //Get the user-defined traction terms
    Vector<double> traction(Dim);
-   get_traction(time(),interpolated_x,traction);
+   get_traction(time(),interpolated_x,interpolated_n,traction);
    
    //Now add to the appropriate equations
    
@@ -432,9 +438,13 @@ refineable_fill_in_generic_residual_contribution_fluid_traction(
       }
     }
    
+   // Get the outer unit normal
+   Vector<double> interpolated_n(this->Dim);
+   this->outer_unit_normal(ipt,interpolated_n);
+
    //Get the user-defined traction terms
    Vector<double> traction(this->Dim);
-   this->get_traction(time(),interpolated_x,traction);
+   this->get_traction(time(),interpolated_x,interpolated_n,traction);
    
    //Now add to the appropriate equations
    

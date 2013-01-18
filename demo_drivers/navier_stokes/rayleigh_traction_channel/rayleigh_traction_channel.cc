@@ -93,6 +93,7 @@ namespace ExactSoln
  /// Traction required at the top boundary
  void prescribed_traction(const double& t,
                           const Vector<double>& x,
+                          const Vector<double> &n,
                           Vector<double>& traction)
  {
   double y=x[1];

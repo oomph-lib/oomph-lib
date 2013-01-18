@@ -1581,6 +1581,9 @@ public:
                                             const Vector<double>&, 
                                             Vector<double>&);
 
+ /// \short Tolerance below which the jacobian is considered singular
+ static double Tolerance_for_singular_jacobian;
+
  /// \short Boolean that if set to true allows a negative jacobian 
  /// in the transform between global and local coordinates (negative surface
  /// area = left-handed coordinate system).
