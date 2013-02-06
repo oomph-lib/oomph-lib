@@ -236,9 +236,10 @@ public:
  /// duplicates; no boundary information etc. is created). 
  Mesh(const Vector<Mesh*>& sub_mesh_pt)
   {
+#ifdef OOMPH_HAS_MPI
    // Mesh hasn't been distributed: Null out pointer to communicator
    Comm_pt=0;
-
+#endif
    // Now merge the meshes
    merge_meshes(sub_mesh_pt);
   }
@@ -1807,8 +1808,10 @@ class SolidMesh : public virtual Mesh
  /// duplicates; no boundary information etc. is created). 
  SolidMesh(const Vector<SolidMesh*>& sub_mesh_pt)
   {
+#ifdef OOMPH_HAS_MPI
    // Mesh hasn't been distributed: Null out pointer to communicator
    Comm_pt=0;
+#endif
 
    unsigned n=sub_mesh_pt.size();
    Vector<Mesh*> sub_mesh_mesh_pt(n);
