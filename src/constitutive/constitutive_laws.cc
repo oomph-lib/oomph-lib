@@ -994,6 +994,7 @@ calculate_second_piola_kirchhoff_stress(
 /// Also return the contravariant deformed metric
 /// tensor and the determinant of the deformed metric tensor.
 /// Uses correct 3D invariants for 2D (plane strain) problems.
+/// This is the version for the pure incompressible formulation.
 //============================================================================
 void IsotropicStrainEnergyFunctionConstitutiveLaw::
 calculate_second_piola_kirchhoff_stress(
@@ -1117,6 +1118,7 @@ calculate_second_piola_kirchhoff_stress(
 /// deformed metric tensor, the generalised dilatation, \f$ d, \f$ and
 /// the inverse of the bulk modulus \f$ \kappa\f$. 
 /// Uses correct 3D invariants for 2D (plane strain) problems.
+/// This is the version for the near-incompressible formulation.
 //===========================================================================
 void IsotropicStrainEnergyFunctionConstitutiveLaw:: 
 calculate_second_piola_kirchhoff_stress(const DenseMatrix<double> &g, 

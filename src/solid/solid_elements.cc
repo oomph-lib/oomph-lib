@@ -1929,99 +1929,6 @@ void PVDEquationsWithPressure<DIM>::output(std::ostream &outfile,
 
  // Write tecplot footer (e.g. FE connectivity lists)
  this->write_tecplot_zone_footer(outfile,n_plot);
- //outfile << std::endl;
-
- /*switch(DIM)
-  {
-  case 2:
-   //Tecplot header info 
-   outfile << "ZONE I=" << n_plot << ", J=" << n_plot << std::endl;
-   
-   //Loop over element nodes
-   for(unsigned l2=0;l2<n_plot;l2++)
-    {
-     s[1] = -1.0 + l2*2.0/(n_plot-1);
-     for(unsigned l1=0;l1<n_plot;l1++)
-      {
-       s[0] = -1.0 + l1*2.0/(n_plot-1);
-       
-       // Get Eulerian and Lagrangian coordinates
-       this->interpolated_x(s,x);
-       this->interpolated_xi(s,xi);
-       
-       // Get isotropic growth
-       double gamma;
-       // Dummy integration point
-       unsigned ipt=0;
-       this->get_isotropic_growth(ipt,s,xi,gamma);
-       
-       //Output the x,y,..
-       for(unsigned i=0;i<DIM;i++) 
-        {outfile << x[i] << " ";}
-       // Output xi0,xi1,..
-       for(unsigned i=0;i<DIM;i++) 
-        {outfile << xi[i] << " ";} 
-       // Output growth
-       outfile << gamma << " ";
-       // Output pressure
-       outfile << interpolated_solid_p(s) << " ";
-       outfile << std::endl;
-      }
-    }
-
-   break;
-   
-  case 3:
-   //Tecplot header info 
-   outfile << "ZONE I=" << n_plot 
-           << ", J=" << n_plot 
-           << ", K=" << n_plot << std::endl;
-   
-     //Loop over element nodes
-     for(unsigned l3=0;l3<n_plot;l3++)
-      {
-       s[2] = -1.0 + l3*2.0/(n_plot-1);
-       for(unsigned l2=0;l2<n_plot;l2++)
-        {
-         s[1] = -1.0 + l2*2.0/(n_plot-1);
-         for(unsigned l1=0;l1<n_plot;l1++)
-          {
-           s[0] = -1.0 + l1*2.0/(n_plot-1);
-           
-           // Get Eulerian and Lagrangian coordinates
-           this->interpolated_x(s,x);
-           this->interpolated_xi(s,xi);
-           
-           // Get isotropic growth
-           double gamma;
-           // Dummy integration point
-           unsigned ipt=0;
-           this->get_isotropic_growth(ipt,s,xi,gamma);
-           
-           //Output the x,y,..
-           for(unsigned i=0;i<DIM;i++) 
-            {outfile << x[i] << " ";}
-           // Output xi0,xi1,..
-           for(unsigned i=0;i<DIM;i++) 
-            {outfile << xi[i] << " ";} 
-           // Output growth
-           outfile << gamma << " ";
-           // Output pressure
-           outfile << interpolated_solid_p(s) << " ";
-           outfile << std::endl;           
-          }
-        }
-      }
-     break;
-     
-    default:
-     std::ostringstream error_message;
-     error_message << "No output routine for PVDEquationsWithPressure<" << 
-      DIM << "> elements. Write it yourself!" << std::endl;
-     throw OomphLibError(error_message.str(),
-                         "PVDEquationsWithPressure<DIM>::output()",
-                         OOMPH_EXCEPTION_LOCATION);
-                         }*/
 }
 
 
@@ -2151,6 +2058,84 @@ void PVDEquationsWithPressure<DIM>::output(FILE* file_pt,
                          "PVDEquationsWithPressure<DIM>::output()",
                          OOMPH_EXCEPTION_LOCATION);
   }
+}
+
+
+//=======================================================================
+/// Output: x,y,[z],xi0,xi1,[xi2],gamma strain and stress components
+//=======================================================================
+template <unsigned DIM>
+void PVDEquationsWithPressure<DIM>::extended_output(std::ostream &outfile, 
+                                        const unsigned &n_plot)
+{
+ 
+ Vector<double> x(DIM);
+ Vector<double> xi(DIM);
+ Vector<double> s(DIM);
+ DenseMatrix<double> stress_or_strain(DIM,DIM);
+
+ // Tecplot header info
+ outfile << this->tecplot_zone_string(n_plot);
+ 
+ // Loop over plot points
+ unsigned num_plot_points=this->nplot_points(n_plot);
+ for (unsigned iplot=0;iplot<num_plot_points;iplot++)
+  {
+   // Get local coordinates of plot point
+   this->get_s_plot(iplot,n_plot,s);
+   
+   // Get Eulerian and Lagrangian coordinates
+   this->interpolated_x(s,x);
+   this->interpolated_xi(s,xi);
+   
+   // Get isotropic growth
+   double gamma;
+   // Dummy integration point
+   unsigned ipt=0;
+   this->get_isotropic_growth(ipt,s,xi,gamma);
+   
+   //Output the x,y,..
+   for(unsigned i=0;i<DIM;i++) 
+    {outfile << x[i] << " ";}
+   
+   // Output xi0,xi1,..
+   for(unsigned i=0;i<DIM;i++) 
+    {outfile << xi[i] << " ";} 
+   
+   // Output growth
+   outfile << gamma << " ";
+
+   //Output pressure
+   outfile << interpolated_solid_p(s) << " ";
+
+   //get the strain
+   this->get_strain(s,stress_or_strain);
+   for(unsigned i=0;i<DIM;i++)
+    {
+     for(unsigned j=0;j<=i;j++)
+      {
+       outfile << stress_or_strain(j,i) << " " ;
+      }
+    }
+
+   //get the stress
+   this->get_stress(s,stress_or_strain);
+   for(unsigned i=0;i<DIM;i++)
+    {
+     for(unsigned j=0;j<=i;j++)
+      {
+       outfile << stress_or_strain(j,i) << " " ;
+      }
+    }
+
+
+   outfile << std::endl;
+  }
+ 
+
+ // Write tecplot footer (e.g. FE connectivity lists)
+ this->write_tecplot_zone_footer(outfile,n_plot);
+ outfile << std::endl;
 }
 
 

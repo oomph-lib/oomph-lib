@@ -374,7 +374,7 @@ namespace oomph
     //Set the value of n_intpt
     const unsigned n_intpt = this->integral_pt()->nweight();
     
-    //Storage for the local cooridinate
+    //Storage for the local coordinate
     Vector<double> s(2);
     
     //Loop over the integration points

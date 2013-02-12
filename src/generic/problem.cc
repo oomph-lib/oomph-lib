@@ -3092,17 +3092,34 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
 //=========================================================================
  void Problem::get_inverse_mass_matrix_times_residuals(DoubleVector &Mres)
  {
+  //This function does not make sense for assembly handlers other than the
+  //default, so complain if we try to call it with another handler
+
+#ifdef PARANOID
+    //If we are not the default, then complain
+    if(this->assembly_handler_pt() != Default_assembly_handler_pt)
+     {
+      std::ostringstream error_stream;
+      error_stream 
+       <<
+       "The function get_inverse_mass_matrix_times_residuals() can only be\n"
+       << 
+       "used with the default assembly handler\n\n";
+      throw OomphLibError(error_stream.str(),
+                          "Problem::get_inverse_mass_matrix_times_residuals()",
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+#endif
+
   //Find the number of degrees of freedom in the problem
   const unsigned n_dof = this->ndof();
 
   //Resize the vector
   LinearAlgebraDistribution dist(this->communicator_pt(),n_dof,false);
   Mres.build(&dist,0.0);
- 
-  //Locally cache pointer to assembly handler
-  AssemblyHandler* const assembly_handler_pt = Assembly_handler_pt;
 
   //If we have discontinuous formulation
+  //We can invert the mass matrix element by element
   if(Discontinuous_element_formulation)
    {
     //Loop over the elements and get their residuals
@@ -3114,21 +3131,19 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
       DGElement* const elem_pt =
        dynamic_cast<DGElement*>(Problem::mesh_pt()->element_pt(e));
      
-      // hierher Andrew check this one too, please
-      //const unsigned n_el_dofs = elem_pt->ndof();
-      const unsigned n_el_dofs = assembly_handler_pt->ndof(elem_pt);
-
-      
+      //Find the elemental inverse mass matrix times residuals
+      const unsigned n_el_dofs = elem_pt->ndof();
       elem_pt->get_inverse_mass_matrix_times_residuals(element_Mres);
      
+      //Add contribution to global matrix
       for(unsigned i=0;i<n_el_dofs;i++)
        {
-        // hierher Andrew: assembly handler?
         Mres[elem_pt->eqn_number(i)] = element_Mres[i];
        }
      }
    }
-  //Otherwise it's continous
+  //Otherwise it's continous and we must invert the full
+  //mass matrix via a global linear solve.
   else
    {
     //Now do the linear solve -- recycling Mass matrix if requested
@@ -3160,6 +3175,8 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
         this->linear_solver_pt()->enable_resolve();
        }
      
+      //Use a custom assembly handler to assemble and invert the mass matrix
+
       //Store the old assembly handler
       AssemblyHandler* old_assembly_handler_pt = this->assembly_handler_pt();
       //Set the assembly handler to the explicit timestep handler

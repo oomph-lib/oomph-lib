@@ -10,8 +10,6 @@ mumps_tar_file=MUMPS_4.10.0.tar.gz
 # Define gzipped scalapack installer
 scalapack_tar_file=scalapack_installer.tgz
 
-
-
 # Mumps/scalapack need blas
 if ALREADY_HAVE_BLAS
 blas_lib="$(BLAS_LIB)"
@@ -40,55 +38,69 @@ all:
 	echo "# WARNING: THIS IS AN AUTOMATICALLY GENERATED FILE" >> build_script.bash
 	echo "#          DO NOT EDIT!" >> build_script.bash
 	echo " " >> build_script.bash
+	echo "if [ -e ${INSTALL_DIRECTORY}/include ]; then" >> build_script.bash
+	echo " printf \"Scalapack and MUMPS already appear to have been installed\n\" " >> build_script.bash
+	echo " printf \"because the directory \n\n\" " >> build_script.bash
+	echo " printf \"  ${INSTALL_DIRECTORY}/include \n\n\"" >> build_script.bash
+	echo " printf \"already exits. I\'m not installing them again\n\n\" " >> build_script.bash
+	echo " exit " >> build_script.bash
+	echo " else " >> build_script.bash
+	echo " printf \"Installing Scalapack and MUMPS in \n\n${INSTALL_DIRECTORY} \n\" " >> build_script.bash
+	echo " fi" >> build_script.bash
 	echo "#------------------------" >> build_script.bash
 	echo "#Check settings" >> build_script.bash
 	echo "#------------------------" >> build_script.bash
 	echo "if [ ! -e "$(lapack_lib)" ]" >> build_script.bash
 	echo "then" >> build_script.bash
-	echo "    echo -e \"ERROR: lapack library \n\n   "$(lapack_lib)" \n\ndoesn't exist\"" >> build_script.bash
+	echo "    echo \"ERROR: lapack library  "$(lapack_lib)" doesn't exist\"" >> build_script.bash
 	echo "    exit 1" >> build_script.bash
 	echo "else" >> build_script.bash
-	echo "    echo -e \"Well done! Found the lapack library \n\n   "$(lapack_lib)" \n\n\"" >> build_script.bash
+	echo "    echo \"Well done! Found the lapack library "$(lapack_lib)" \"" >> build_script.bash
 	echo "fi" >> build_script.bash
 	echo "" >> build_script.bash
 	echo "if [ ! -e "$(blas_lib)" ]" >> build_script.bash
 	echo "then" >> build_script.bash
-	echo "    echo -e \"ERROR: blas library \n\n   "$(blas_lib)" \n\ndoesn't exist\"" >> build_script.bash
+	echo "    echo \"ERROR: blas library "$(blas_lib)" doesn't exist\"" >> build_script.bash
 	echo "    exit 1" >> build_script.bash
 	echo "else" >> build_script.bash
-	echo "    echo -e \"Well done! Found the blas library \n\n   "$(blas_lib)" \n\n\"" >> build_script.bash
+	echo "    echo \"Well done! Found the blas library  "$(blas_lib)" \"" >> build_script.bash
 	echo "fi" >> build_script.bash
 	echo "" >> build_script.bash
+	echo "if [ x$(mpi_include) = x ]; then"  >> build_script.bash
+	echo "    echo \"ERROR: mpi include directory not set \"" >> build_script.bash
+	echo "    exit 1" >> build_script.bash
+	echo " else" >> build_script.bash
 	echo "if [ ! -e "$(mpi_include)" ]" >> build_script.bash
 	echo "then" >> build_script.bash
-	echo "    echo -e \"ERROR: mpi include directory \n\n   "$(mpi_include)" \n\ndoesn't exist\"" >> build_script.bash
+	echo "    echo \"ERROR: mpi include directory  "$(mpi_include)" doesn't exist\"" >> build_script.bash
 	echo "    exit 1" >> build_script.bash
 	echo "else" >> build_script.bash
-	echo "    echo -e \"Well done! Found the mpi include directory \n\n   "$(mpi_include)"\n\n\"" >> build_script.bash
+	echo "    echo \"Well done! Found the mpi include directory "$(mpi_include)"\"" >> build_script.bash
 	echo "fi" >> build_script.bash
 	echo "" >> build_script.bash
 	echo "if [ ! -e "$(mpi_include)"/mpi.h ] " >> build_script.bash
 	echo "then" >> build_script.bash
-	echo "    echo -e \"ERROR: mpi header file \n\n   "$(mpi_include)"/mpi.h \n\ndoesn't exist\"" >> build_script.bash
+	echo "    echo \"ERROR: mpi header file "$(mpi_include)"/mpi.h doesn't exist\"" >> build_script.bash
 	echo "    exit 1" >> build_script.bash
 	echo "else" >> build_script.bash
-	echo "    echo -e \"Well done! Found the mpi header file \n\n   "$(mpi_include)"/mpi.h\n\n\"" >> build_script.bash
+	echo "    echo  \"Well done! Found the mpi header file "$(mpi_include)"/mpi.h\"" >> build_script.bash
+	echo "fi" >> build_script.bash
 	echo "fi" >> build_script.bash
 	echo "" >> build_script.bash
 	echo "if [ ! -e "$(scalapack_tar_file)" ]" >> build_script.bash
 	echo "then" >> build_script.bash
-	echo "    echo -e \"ERROR: scalapack installer tar file \n\n  "$(scalapack_tar_file)" \n\ndoesn't exist\"" >> build_script.bash
+	echo "    echo \"ERROR: scalapack installer tar file "$(scalapack_tar_file)" doesn't exist\"" >> build_script.bash
 	echo "    exit 1" >> build_script.bash
 	echo "else" >> build_script.bash
-	echo "    echo -e \"Well done!  scalapack installer tar file \n\n  "$(scalapack_tar_file)" \n\n\"" >> build_script.bash
+	echo "    echo  \"Well done!  scalapack installer tar file "$(scalapack_tar_file)" \"" >> build_script.bash
 	echo "fi" >> build_script.bash
 	echo "" >> build_script.bash
 	echo "if [ ! -e "$(mumps_tar_file)" ]" >> build_script.bash
 	echo "then" >> build_script.bash
-	echo "    echo -e \"ERROR: mumps tar file \n\n  "$(mumps_tar_file)" \n\ndoesn't exist\"" >> build_script.bash
+	echo "    echo  \"ERROR: mumps tar file "$(mumps_tar_file)" doesn't exist\"" >> build_script.bash
 	echo "    exit 1" >> build_script.bash
 	echo "else" >> build_script.bash
-	echo "    echo -e \"Well done! mumps tar file \n\n  "$(mumps_tar_file)" \n\n\"" >> build_script.bash
+	echo "    echo \"Well done! mumps tar file "$(mumps_tar_file)" \"" >> build_script.bash
 	echo "fi" >> build_script.bash
 	echo "" >> build_script.bash
 	echo "#------------------------" >> build_script.bash
@@ -96,10 +108,10 @@ all:
 	echo "#------------------------" >> build_script.bash
 	echo "if [ -d scalapack ]" >> build_script.bash
 	echo "then" >> build_script.bash
-	echo "    echo -e \"Info: \n\n   \"`pwd`\"/scalapack\n\nalready exists; overwriting\n\n\"" >> build_script.bash
+	echo "    echo  \"Info:   \"`pwd`\"/scalapack already exists; overwriting\"" >> build_script.bash
 	echo "else" >> build_script.bash
 	echo "    mkdir scalapack" >> build_script.bash
-	echo "    echo -e \"Made scalapack directory for installation \n\n\" " >> build_script.bash
+	echo "    echo  \"Made scalapack directory for installation \" " >> build_script.bash
 	echo "fi" >> build_script.bash
 	echo "cp  "$(scalapack_tar_file)" scalapack" >> build_script.bash
 	echo "cd scalapack" >> build_script.bash
@@ -113,52 +125,56 @@ all:
 	echo "sed 's/.\/tmpf/date/g' script/framework.py.orig | sed 's/.\/tmpc/date/g' > script/framework.py ">> build_script.bash
 	echo "patch script/blacs.py < ../../build_scripts/blacs.py.patch  ">> build_script.bash
 	echo "echo "Building... [this can take a while!]"" >> build_script.bash
-	echo "./setup.py --downblacs --lapacklib=$(lapack_lib) --blaslib=$(blas_lib) --mpiincdir=$(mpi_include) --mpicc=$(CC) --mpif77=$(F77) > scalapack.log" >> build_script.bash
+	echo "./setup.py --downblacs --lapacklib=$(lapack_lib) --blaslib=$(blas_lib) --mpiincdir=$(mpi_include) --mpicc=$(CC) --mpif77=$(F77) --ccflags=\"$(CFLAGS)\" --fcflags=\"$(FFLAGS)\"  --ldflags_c=\"$(CFLAGS)\" --ldflags_f77=\"$(FFLAGS)\" --noopt=\"$(FFLAGS_NO_OPT)\" > scalapack.log" >> build_script.bash
 	echo "" >> build_script.bash
 	echo "echo "...done!"" >> build_script.bash
 	echo "#Test success" >> build_script.bash
 	echo "success=\`grep 'ScaLAPACK installation completed' scalapack.log | wc -l\`" >> build_script.bash
-	echo -e "if [ \044success -eq 1 ]" >> build_script.bash
+	echo  -e "if [ \044success -eq 1 ]" >> build_script.bash
 	echo "then" >> build_script.bash
-	echo "    echo -e \"\n\nScalapack installation appears to have been successful.\n\n\"" >> build_script.bash
+	echo "    echo  \"Scalapack installation appears to have been successful.\"" >> build_script.bash
+	echo >> build_script.bash
 	echo "else" >> build_script.bash
-	echo "    echo -e \"\n\nERROR(?): Scalapack installation does not seem to have been successful.\n\n\"" >> build_script.bash
+	echo "    echo  \"ERROR(?): Scalapack installation does not seem to have been successful.\"" >> build_script.bash
+	echo >> build_script.bash
 	echo "fi" >> build_script.bash
-	echo "echo -e \"Check \n\n  \"`pwd`\"scalapack/scalapack_installer_0.94/scalapack.log \n\nfor details.\n\n\"" >> build_script.bash
+	echo "echo  \"Check   \"`pwd`\"scalapack/scalapack_installer_0.94/scalapack.log for details.\"" >> build_script.bash
 	echo "" >> build_script.bash
 	echo "# Get handle to scalapack" >> build_script.bash
 	echo "scalapack1=\`grep -A1 'Your ScaLAPACK library is:' scalapack.log  | awk 'END{print $0}'\` " >> build_script.bash
 	echo "" >> build_script.bash
-	echo -e "echo \"Scalapack library: \044scalapack1 \" "  >> build_script.bash
+	echo -e "echo  \"Scalapack library: \044scalapack1 \" "  >> build_script.bash
 	echo "" >> build_script.bash
 	echo "# Handle to blasc" >> build_script.bash
 	echo "blacs1=\`grep -A1 'Your BLACS libraries are:' scalapack.log  | awk 'END{print $0}'\` " >> build_script.bash
 	echo "blacs2=\`grep -A2 'Your BLACS libraries are:' scalapack.log  | awk 'END{print $0}'\`" >> build_script.bash
 	echo "blacs3=\`grep -A3 'Your BLACS libraries are:' scalapack.log  | awk 'END{print $0}'\` " >> build_script.bash
 	echo "" >> build_script.bash
-	echo -e "echo -e \"Blacs libraries: \044blacs1  \044blacs2  \044blacs3 \" "  >> build_script.bash
+	echo -e "echo  \"Blacs libraries: \044blacs1  \044blacs2  \044blacs3 \" "  >> build_script.bash
 	echo " " >> build_script.bash
 	echo "cd ../.." >> build_script.bash
 	echo "" >> build_script.bash
+	echo "# Read out the Fortran mangling from scalapack" >> build_script.bash
+	printf "fortran_mangle=\`grep 'mangling' scalapack/scalapack_installer_*/scalapack.log | awk '{print \044NF;}'\`\n" >> build_script.bash
 	echo "#------------------------" >> build_script.bash
 	echo "# Make/install mumps" >> build_script.bash
 	echo "#------------------------" >> build_script.bash
 	echo "if [ -d mumps ]" >> build_script.bash
 	echo "then" >> build_script.bash
-	echo "    echo -e \"Info: \n\n   \"`pwd`\"/mumps\n\nalready exists; overwriting\n\n\"" >> build_script.bash
+	echo "    echo \"Info:   \"`pwd`\"/mumps already exists; overwriting\"" >> build_script.bash
 	echo "else" >> build_script.bash
 	echo "    mkdir mumps" >> build_script.bash
-	echo "    echo -e \"Made mumps directory for installation \n\n\" " >> build_script.bash
+	echo "    echo  \"Made mumps directory for installation \" " >> build_script.bash
 	echo "fi" >> build_script.bash
-	echo -e "cp "$(mumps_tar_file)" mumps" >> build_script.bash
+	echo "cp "$(mumps_tar_file)" mumps" >> build_script.bash
 	echo "cp build_scripts/Makefile.inc.template mumps" >> build_script.bash
 	echo "cd mumps" >> build_script.bash
-	echo -e "tar xvfz "$(mumps_tar_file) >> build_script.bash
+	echo "tar xvfz "$(mumps_tar_file) >> build_script.bash
 	echo "" >> build_script.bash
 	echo "" >> build_script.bash
 	echo "# Update Makefile" >> build_script.bash
-	echo -e "escaped_blas_lib=\`echo \044blas_lib | awk '{gsub(\"/\",\"\0134\0134\0134/\"); print}' \`" >> build_script.bash
-	echo -e "sed \"s/@mpicc@/"$(CC)"/g\" Makefile.inc.template  | sed \"s/@mpif90@/"$(F77)"/g\"  | sed \"s/@blas_lib@/\044escaped_blas_lib/g\" > MUMPS_4.10.0/Makefile.inc" >> build_script.bash
+	echo "escaped_blas_lib=\`echo $(blas_lib) | awk '{gsub(\"/\",\"\\/\"); print}' \`" >> build_script.bash
+	echo -e "sed \"s/@mpicc@/"$(CC)"/g\" Makefile.inc.template  | sed \"s/@mpif90@/"$(F77)"/g\"  | sed \"s/@blas_lib@/\044escaped_blas_lib/g\" | sed \"s/@fopts@/"$(FFLAGS)"/g\" | sed \"s/@lopts@/"$(FFLAGS)"/g\" | sed \"s/@copts@/"$(CFLAGS)"/g\" | sed \"s/@mangle@/\044fortran_mangle/g\" > MUMPS_4.10.0/Makefile.inc" >> build_script.bash
 	echo "" >> build_script.bash
 	echo "cd MUMPS_4.10.0" >> build_script.bash
 	echo "echo \"Building...\""
@@ -167,7 +183,7 @@ all:
 	echo "mumps1=\`pwd\`/lib/libdmumps.a" >> build_script.bash
 	echo "mumps2=\`pwd\`/lib/libmumps_common.a" >> build_script.bash
 	echo "mumps3=\`pwd\`/lib/libpord.a">> build_script.bash
-	echo -e "echo -e \"Mumps/pord libraries: \044mumps1  \044mumps2  \044mumps3 \" "  >> build_script.bash
+	echo -e "echo  \"Mumps/pord libraries: \044mumps1  \044mumps2  \044mumps3 \" "  >> build_script.bash
 	echo "cd .." >> build_script.bash
 	echo "cd .." >> build_script.bash
 	echo "rm -rf mumps_and_scalapack_default_installation"  >> build_script.bash

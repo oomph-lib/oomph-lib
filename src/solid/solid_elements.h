@@ -1003,6 +1003,11 @@ template<unsigned NNODE_1D>
    /// C-style output: x,y,[z],xi0,xi1,[xi2],p,gamma
    void output(FILE* file_pt, const unsigned &n_plot);
    
+    /// \short Output: x,y,[z],xi0,xi1,[xi2],gamma and the strain and stress
+   /// components
+   void extended_output(std::ostream &outfile, const unsigned &n_plot);
+
+
    /// \short Compute the diagonal of the displacement mass matrix for
    /// LSC preconditioner
    void get_mass_matrix_diagonal(Vector<double> &mass_diag);

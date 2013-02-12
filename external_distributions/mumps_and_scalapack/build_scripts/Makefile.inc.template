@@ -44,12 +44,12 @@ LIBBLAS = @blas_lib@
 LIBOTHERS = 
 
 #Preprocessor defs for calling Fortran from C (-DAdd_ or -DAdd__ or -DUPPER)
-CDEFS   = -DAdd_
+CDEFS   = @mangle@
 
 #Begin Optimized options
-OPTF    = -O6
-OPTL    = -O6 
-OPTC    = -O6
+OPTF    = @fopts@
+OPTL    = @lopts@ 
+OPTC    = @copts@
 
 #End Optimized options
 INC = $(INCPAR)
