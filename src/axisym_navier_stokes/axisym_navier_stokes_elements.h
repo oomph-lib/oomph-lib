@@ -1760,7 +1760,7 @@ public virtual ProjectableElement<TAYLOR_HOOD_ELEMENT>
  
   /// \short Number of history values to be stored for fld-th field. Whatever
   /// the timestepper has set up for the velocity components and
-  /// none for the pressure field.
+  /// none for the pressure field (includes current value!)
   unsigned nhistory_values_for_projection(const unsigned &fld)
    {
     if (fld==3)
@@ -1774,7 +1774,7 @@ public virtual ProjectableElement<TAYLOR_HOOD_ELEMENT>
      }
    }
 
-  ///\short Number of positional history values
+  ///\short Number of positional history values (includes current value!)
   unsigned nhistory_values_for_coordinate_projection()
    {
     return this->node_pt(0)->position_time_stepper_pt()->ntstorage();
@@ -1972,7 +1972,7 @@ public virtual ProjectableElement<TAYLOR_HOOD_ELEMENT>
  
   /// \short Number of history values to be stored for fld-th field. Whatever
   /// the timestepper has set up for the velocity components and
-  /// none for the pressure field.
+  /// none for the pressure field (includes current value!)
   unsigned nhistory_values_for_projection(const unsigned &fld)
    {
     if (fld==3)
@@ -1986,7 +1986,7 @@ public virtual ProjectableElement<TAYLOR_HOOD_ELEMENT>
      }
    }
 
-  ///\short Number of positional history values
+  ///\short Number of positional history values (includes current value!)
   unsigned nhistory_values_for_coordinate_projection()
    {
     return this->node_pt(0)->position_time_stepper_pt()->ntstorage();

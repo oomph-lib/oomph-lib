@@ -28,10 +28,7 @@
 //LIC//======================================================================
 //Driver for a specific  2D Helmholtz problem with flux boundary conditions
 //uses two separate meshes for bulk and surface mesh
-
-
 #include<fenv.h>
-
 
 #include "math.h"
 #include <complex>
@@ -54,7 +51,6 @@ using namespace std;
 
 
 
-
 /////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////
@@ -64,9 +60,6 @@ using namespace std;
 //=====================================================================
 namespace GlobalParameters
 {
-
- /// Choose shape of outer boundary
- bool Rectangular_outer_boundary=false;
 
  /// \short Square of the wavenumber
  double K_squared=10.0; 
@@ -251,12 +244,9 @@ public:
  /// Recompute gamma integral before checking Newton residuals
  void actions_before_newton_convergence_check()
   {
-   if (!GlobalParameters::Rectangular_outer_boundary)
+   if (GlobalParameters::DtN_BC)
     {
-     if (GlobalParameters::DtN_BC)
-      {
-       Helmholtz_outer_boundary_mesh_pt->setup_gamma();
-      }
+     Helmholtz_outer_boundary_mesh_pt->setup_gamma();
     }
   }
 
@@ -350,88 +340,39 @@ ScatteringProblem()
  unsigned n_segments=40;
  Vector<TriangleMeshCurveSection*> outer_boundary_line_pt(2);
  
- if (GlobalParameters::Rectangular_outer_boundary)
-  {
-   
-   // Each polyline only has three vertices -- provide storage for their
-   // coordinates
-   Vector<Vector<double> > vertex_coord(3);
-   for(unsigned i=0;i<3;i++)
-    {
-     vertex_coord[i].resize(2);
-    }
-   
-   // First polyline
-   vertex_coord[0][0]=-2.0;
-   vertex_coord[0][1]=-2.0;
-   vertex_coord[1][0]=-2.0;
-   vertex_coord[1][1]=2.0;
-   vertex_coord[2][0]=2.0;
-   vertex_coord[2][1]=2.0;
-
-   // Build the 1st boundary polyline
-   unsigned boundary_id=2;
-   outer_boundary_line_pt[0] = new TriangleMeshPolyLine(vertex_coord,
-                                                        boundary_id);
+ // The intrinsic coordinates for the beginning and end of the curve
+ double s_start = 0.0;
+ double s_end   = MathematicalConstants::Pi;
+ unsigned boundary_id = 2;
+ outer_boundary_line_pt[0]=
+  new TriangleMeshCurviLine(outer_circle_pt,
+                            s_start,
+                            s_end,
+                            n_segments,
+                            boundary_id);
  
-   // Second boundary polyline
-   vertex_coord[0][0]=2.0;
-   vertex_coord[0][1]=2.0;
-   vertex_coord[1][0]=2.0;
-   vertex_coord[1][1]=-2.0;
-   vertex_coord[2][0]=-2.0;
-   vertex_coord[2][1]=-2.0;
-
-   // Build the 2nd boundary polyline
-   boundary_id=3;
-   outer_boundary_line_pt[1] = new TriangleMeshPolyLine(vertex_coord,
-                                                        boundary_id);
-   
-   // Create the triangle mesh polygon for outer boundary
-   outer_boundary_pt = new TriangleMeshPolygon(outer_boundary_line_pt);
-
-   outer_boundary_pt->output(cout);
-  }
- else
-  {
-
-   // The intrinsic coordinates for the beginning and end of the curve
-   double s_start = 0.0;
-   double s_end   = MathematicalConstants::Pi;
-   unsigned boundary_id = 2;
-   outer_boundary_line_pt[0]=
-    new TriangleMeshCurviLine(outer_circle_pt,
-                              s_start,
-                              s_end,
-                              n_segments,
-                              boundary_id);
-   
-   // The intrinsic coordinates for the beginning and end of the curve
-   s_start = MathematicalConstants::Pi;
-   s_end   = 2.0*MathematicalConstants::Pi;
-   boundary_id = 3;
-   outer_boundary_line_pt[1]=
-    new TriangleMeshCurviLine(outer_circle_pt,
-                              s_start,
-                              s_end,
-                              n_segments,
-                              boundary_id);
-
-   // Create closed curve for outer boundary
-   outer_boundary_pt=new TriangleMeshClosedCurve(outer_boundary_line_pt);
-   
-  }
-
-
+ // The intrinsic coordinates for the beginning and end of the curve
+ s_start = MathematicalConstants::Pi;
+ s_end   = 2.0*MathematicalConstants::Pi;
+ boundary_id = 3;
+ outer_boundary_line_pt[1]=
+  new TriangleMeshCurviLine(outer_circle_pt,
+                            s_start,
+                            s_end,
+                            n_segments,
+                            boundary_id);
+ 
+ // Create closed curve for outer boundary
+ outer_boundary_pt=new TriangleMeshClosedCurve(outer_boundary_line_pt);
 
  // Inner circular boundary
  //------------------------
  Vector<TriangleMeshCurveSection*> inner_boundary_line_pt(2);
 
  // The intrinsic coordinates for the beginning and end of the curve
- double s_start = 0.0;
- double s_end   = MathematicalConstants::Pi;
- unsigned boundary_id = 0;
+ s_start = 0.0;
+ s_end   = MathematicalConstants::Pi;
+ boundary_id = 0;
  inner_boundary_line_pt[0]=
   new TriangleMeshCurviLine(inner_circle_pt,
                             s_start,
@@ -488,25 +429,17 @@ ScatteringProblem()
  Bulk_mesh_pt=new TriangleMesh<ELEMENT>(triangle_mesh_parameters);
 
 #endif
-
-
- if (GlobalParameters::Rectangular_outer_boundary)
-  {
-   // Do nothing -- non-penetration on outer boundary
-  }
- else
-  {
-   // Pointer to mesh containing the Helmholtz outer boundary condition
-   // elements. Specify outer radius and number of Fourier terms to be
-   // used in gamma integral
-   Helmholtz_outer_boundary_mesh_pt = 
-    new HelmholtzDtNMesh<ELEMENT>(a+h,GlobalParameters::N_fourier);
  
-   // Create outer boundary elements from all elements that are 
-   // adjacent to the outer boundary , but add them to a separate mesh.
-   create_outer_bc_elements(2,Bulk_mesh_pt,Helmholtz_outer_boundary_mesh_pt);
-   create_outer_bc_elements(3,Bulk_mesh_pt,Helmholtz_outer_boundary_mesh_pt);
-  }
+ // Pointer to mesh containing the Helmholtz outer boundary condition
+ // elements. Specify outer radius and number of Fourier terms to be
+ // used in gamma integral
+ Helmholtz_outer_boundary_mesh_pt = 
+  new HelmholtzDtNMesh<ELEMENT>(a+h,GlobalParameters::N_fourier);
+ 
+ // Create outer boundary elements from all elements that are 
+ // adjacent to the outer boundary , but add them to a separate mesh.
+ create_outer_bc_elements(2,Bulk_mesh_pt,Helmholtz_outer_boundary_mesh_pt);
+ create_outer_bc_elements(3,Bulk_mesh_pt,Helmholtz_outer_boundary_mesh_pt);
 
  // Pointer to mesh containing the Helmholtz inner boundary condition
  // elements. Specify outer radius
@@ -519,10 +452,7 @@ ScatteringProblem()
  
  // Add the several  sub meshes to the problem
  add_sub_mesh(Bulk_mesh_pt);
- if (!GlobalParameters::Rectangular_outer_boundary) 
-  {
-   add_sub_mesh(Helmholtz_outer_boundary_mesh_pt); 
-  }
+ add_sub_mesh(Helmholtz_outer_boundary_mesh_pt); 
  add_sub_mesh(Helmholtz_inner_boundary_mesh_pt);   
   
  // Build the Problem's global mesh from its various sub-meshes
@@ -542,13 +472,9 @@ ScatteringProblem()
    //Set the k_squared  pointer
    el_pt->k_squared_pt() = &GlobalParameters::K_squared;
   }
- 
 
  // Set up elements on outer boundary
- if (!GlobalParameters::Rectangular_outer_boundary) 
-  {
-   setup_outer_boundary();
-  }
+ setup_outer_boundary();
 
  // Set pointer to prescribed flux function for flux elements
  set_prescribed_incoming_flux_pt();
@@ -565,10 +491,7 @@ template<class ELEMENT>
 void ScatteringProblem<ELEMENT>::actions_before_adapt()
 { 
  // Kill the flux elements and wipe the boundary meshs
- if (!GlobalParameters::Rectangular_outer_boundary) 
-  {
-   delete_face_elements(Helmholtz_outer_boundary_mesh_pt);
-  }
+ delete_face_elements(Helmholtz_outer_boundary_mesh_pt);
  delete_face_elements(Helmholtz_inner_boundary_mesh_pt);
 
  // Rebuild the Problem's global mesh from its various sub-meshes
@@ -605,20 +528,14 @@ void ScatteringProblem<ELEMENT>::actions_after_adapt()
  // Helmholtz_boundary_meshes
  create_flux_elements(0,Bulk_mesh_pt,Helmholtz_inner_boundary_mesh_pt);
  create_flux_elements(1,Bulk_mesh_pt,Helmholtz_inner_boundary_mesh_pt);
- if (!GlobalParameters::Rectangular_outer_boundary) 
-  {
-   create_outer_bc_elements(2,Bulk_mesh_pt,Helmholtz_outer_boundary_mesh_pt);
-   create_outer_bc_elements(3,Bulk_mesh_pt,Helmholtz_outer_boundary_mesh_pt);
-  }
+ create_outer_bc_elements(2,Bulk_mesh_pt,Helmholtz_outer_boundary_mesh_pt);
+ create_outer_bc_elements(3,Bulk_mesh_pt,Helmholtz_outer_boundary_mesh_pt);
 
  // Rebuild the Problem's global mesh from its various sub-meshes
  rebuild_global_mesh();
  
  // Set pointer to prescribed flux function and DtN mesh
- if (!GlobalParameters::Rectangular_outer_boundary) 
-  {
-   setup_outer_boundary();
-  }
+ setup_outer_boundary();
  set_prescribed_incoming_flux_pt(); 
   
  
@@ -708,26 +625,23 @@ void ScatteringProblem<ELEMENT>::doc_solution(DocInfo&
  // Total radiated power
  double power=0.0;
 
- if (!GlobalParameters::Rectangular_outer_boundary) 
+ // Compute/output the radiated power
+ //----------------------------------
+ sprintf(filename,"%s/power%i.dat",doc_info.directory().c_str(),
+         doc_info.number());
+ some_file.open(filename);
+ 
+ // Accumulate contribution from elements
+ unsigned nn_element=Helmholtz_outer_boundary_mesh_pt->nelement(); 
+ for(unsigned e=0;e<nn_element;e++)
   {
-   // Compute/output the radiated power
-   //----------------------------------
-   sprintf(filename,"%s/power%i.dat",doc_info.directory().c_str(),
-           doc_info.number());
-   some_file.open(filename);
-   
-   // Accumulate contribution from elements
-   unsigned nn_element=Helmholtz_outer_boundary_mesh_pt->nelement(); 
-   for(unsigned e=0;e<nn_element;e++)
-    {
-     HelmholtzBCElementBase<ELEMENT> *el_pt = 
-      dynamic_cast< HelmholtzBCElementBase<ELEMENT>*>(
-       Helmholtz_outer_boundary_mesh_pt->element_pt(e)); 
-     power += el_pt->global_power_contribution(some_file);
-    }
-   some_file.close();
-   oomph_info << "Total radiated power: " << power << std::endl; 
+   HelmholtzBCElementBase<ELEMENT> *el_pt = 
+    dynamic_cast< HelmholtzBCElementBase<ELEMENT>*>(
+     Helmholtz_outer_boundary_mesh_pt->element_pt(e)); 
+   power += el_pt->global_power_contribution(some_file);
   }
+ some_file.close();
+ oomph_info << "Total radiated power: " << power << std::endl; 
 
  // Output solution 
  //-----------------

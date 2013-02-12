@@ -12,7 +12,7 @@ unstructured_two_d_helmholtz_SOURCES =  unstructured_two_d_helmholtz.cc
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
-unstructured_two_d_helmholtz_LDADD = -L@libdir@ -lgeneralised_helmholtz -lmeshes -lgeneric  -loomph_crbond_bessel $(EXTERNAL_LIBS) $(FLIBS)
+unstructured_two_d_helmholtz_LDADD = -L@libdir@ -lgeneralised_helmholtz -lmeshes -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
 
 #--------------------------------------
 
@@ -22,7 +22,7 @@ unstructured_two_d_helmholtz_adapt_SOURCES =  unstructured_two_d_helmholtz.cc
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
-unstructured_two_d_helmholtz_adapt_LDADD = -L@libdir@ -lgeneralised_helmholtz -lmeshes -lgeneric  -loomph_crbond_bessel $(EXTERNAL_LIBS) $(FLIBS)
+unstructured_two_d_helmholtz_adapt_LDADD = -L@libdir@ -lgeneralised_helmholtz -lmeshes -lgeneric  $(EXTERNAL_LIBS) $(FLIBS)
 
 unstructured_two_d_helmholtz_adapt_CXXFLAGS = -DADAPTIVE
 

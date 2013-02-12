@@ -60,13 +60,6 @@ namespace FSI_functions
     }
   }
 
-
- /// Output file to document the boundary coordinate 
- /// along the FSI interface of the fluid mesh during call to
- /// setup_fluid_load_info_for_solid_elements()
- std::ofstream Doc_boundary_coordinate_file;
-
-
 }
 
  

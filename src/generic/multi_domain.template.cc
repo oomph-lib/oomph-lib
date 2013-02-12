@@ -48,6 +48,7 @@
 #include "Qelements.h"
 #include "element_with_external_element.h"
 #include "multi_domain.h"
+#include "face_element_as_geometric_object.h"
 
 //BENFLAG: Needed to check if elements have nonuniformlyspaced nodes
 #include "refineable_elements.h"
@@ -56,7 +57,273 @@
 namespace oomph
 {
 
+
 //// Templated helper functions for multi-domain methods using locate_zeta
+
+
+ //============================================================================
+ /// Identify the \c FaceElements (stored in the mesh pointed to by
+ /// \c face_mesh_pt) that are adjacent to the bulk elements next to the
+ /// \c boundary_in_bulk_mesh -th boundary of the mesh pointed to by 
+ /// \c bulk_mesh_pt. The \c FaceElements must be derived
+ /// from the \c ElementWithExternalElement base class and the adjacent
+ /// bulk elements are stored as their external elements.
+ /// \n
+ /// This is the vector-based version which deals with multiple bulk 
+ /// mesh boundaries at the same time.
+ //============================================================================
+ template<class BULK_ELEMENT, unsigned DIM>
+  void Multi_domain_functions::setup_bulk_elements_adjacent_to_face_mesh(
+   Problem* problem_pt,
+   Vector<unsigned>& boundary_in_bulk_mesh,
+   Mesh* const &bulk_mesh_pt,
+   Vector<Mesh*>& face_mesh_pt,
+   const unsigned& interaction=0)
+ {
+  
+  unsigned n_mesh=boundary_in_bulk_mesh.size();
+  
+#ifdef PARANOID
+  // Check sizes match
+  if (boundary_in_bulk_mesh.size()!=face_mesh_pt.size())
+   {
+    std::ostringstream error_message;
+    error_message 
+     << "Sizes of vector of boundary ids in bulk mesh (" 
+     << boundary_in_bulk_mesh.size() << ") and vector of pointers\n"
+     << "to FaceElements (" << face_mesh_pt.size() << " doesn't match.\n";
+    throw OomphLibError(
+     error_message.str(),
+     "Multi_domain_functions::setup_bulk_elements_adjacent_to_face_mesh()",
+     OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+  
+  // Create face meshes adjacent to the bulk mesh's b-th boundary. 
+  // Each face mesh consists of FaceElements that may also be 
+  // interpreted as GeomObjects
+  Vector<Mesh*> bulk_face_mesh_pt(n_mesh);
+
+  // Loop over all meshes
+  for (unsigned i_mesh=0;i_mesh<n_mesh;i_mesh++)
+   {
+    bulk_face_mesh_pt[i_mesh] = new Mesh;
+    bulk_mesh_pt->template build_face_mesh
+     <BULK_ELEMENT,FaceElementAsGeomObject>(boundary_in_bulk_mesh[i_mesh],
+                                            bulk_face_mesh_pt[i_mesh]);
+    
+    // Loop over these new face elements and tell them the boundary number
+    // from the bulk mesh -- this is required to they can
+    // get access to the boundary coordinates!
+    unsigned n_face_element = bulk_face_mesh_pt[i_mesh]->nelement();
+    for(unsigned e=0;e<n_face_element;e++)
+     {
+      //Cast the element pointer to the correct thing!
+      FaceElementAsGeomObject<BULK_ELEMENT>* el_pt=
+       dynamic_cast<FaceElementAsGeomObject<BULK_ELEMENT>*>
+       (bulk_face_mesh_pt[i_mesh]->element_pt(e));
+      
+      // Set bulk boundary number
+      el_pt->set_boundary_number_in_bulk_mesh(boundary_in_bulk_mesh[i_mesh]);
+      
+      // Doc?
+      if (Doc_boundary_coordinate_file.is_open())
+       {
+        Vector<double> s(DIM-1);
+        Vector<double> zeta(DIM-1);
+        Vector<double> x(DIM);
+        unsigned n_plot=5;
+        Doc_boundary_coordinate_file << el_pt->tecplot_zone_string(n_plot);
+        
+        // Loop over plot points
+        unsigned num_plot_points=el_pt->nplot_points(n_plot);
+        for (unsigned iplot=0;iplot<num_plot_points;iplot++)
+         {         
+          // Get local coordinates of plot point
+          el_pt->get_s_plot(iplot,n_plot,s);         
+          el_pt->interpolated_zeta(s,zeta);
+          el_pt->interpolated_x(s,x);
+          for (unsigned i=0;i<DIM;i++)
+           {
+            Doc_boundary_coordinate_file << x[i] << " ";
+           }
+          for (unsigned i=0;i<DIM-1;i++)
+           {
+            Doc_boundary_coordinate_file << zeta[i] << " ";
+           }
+          Doc_boundary_coordinate_file << std::endl;
+         }
+        el_pt->write_tecplot_zone_footer(Doc_boundary_coordinate_file,n_plot);
+       }   
+     }
+    
+    // Now sort the elements based on the boundary coordinates.
+    // This may allow a faster implementation of the locate_zeta
+    // function for the MeshAsGeomObject representation of this
+    // mesh, but also creates a unique ordering of the elements
+    std::sort(bulk_face_mesh_pt[i_mesh]->element_pt().begin(),
+              bulk_face_mesh_pt[i_mesh]->element_pt().end(),
+              CompareBoundaryCoordinate<BULK_ELEMENT>());
+   } // end of loop over meshes
+
+    
+  
+  // Setup the interactions for this problem using the surface mesh
+  // on the fluid mesh.  The interaction parameter in this instance is
+  // given by the "face" parameter.
+  Multi_domain_functions::setup_multi_domain_interaction
+   <BULK_ELEMENT,FaceElementAsGeomObject<BULK_ELEMENT> >
+   (problem_pt,face_mesh_pt,bulk_mesh_pt,
+    bulk_face_mesh_pt,interaction);
+  
+  
+  // Loop over all meshes to clean up
+  for (unsigned i_mesh=0;i_mesh<n_mesh;i_mesh++)
+   {
+    unsigned n_face_element = bulk_face_mesh_pt[i_mesh]->nelement();
+    
+    //The MeshAsGeomObject has already been deleted (in set_external_storage)
+    
+    //Must be careful with the FaceMesh, because we cannot delete the nodes
+    //Loop over the elements backwards (paranoid!) and delete them
+    for(unsigned e=n_face_element;e>0;e--)
+     {
+      delete bulk_face_mesh_pt[i_mesh]->element_pt(e-1);
+      bulk_face_mesh_pt[i_mesh]->element_pt(e-1) = 0;
+     }
+    //Now clear all element and node storage (should maybe fine-grain this)
+    bulk_face_mesh_pt[i_mesh]->flush_element_and_node_storage();
+    
+    //Finally delete the mesh
+    delete bulk_face_mesh_pt[i_mesh];
+    
+   } // end of loop over meshes
+  
+ }
+
+
+//========================================================================
+ /// Identify the \c FaceElements (stored in the mesh pointed to by
+ /// \c face_mesh_pt) that are adjacent to the bulk elements next to the
+ /// \c boundary_in_bulk_mesh -th boundary of the mesh pointed to by 
+ /// \c bulk_mesh_pt. The \c FaceElements must be derived
+ /// from the \c ElementWithExternalElement base class and the adjacent
+ /// bulk elements are stored as their external elements.
+//========================================================================
+ template<class BULK_ELEMENT,unsigned DIM>
+ void Multi_domain_functions::setup_bulk_elements_adjacent_to_face_mesh(
+  Problem* problem_pt,
+  const unsigned& boundary_in_bulk_mesh,
+  Mesh* const& bulk_mesh_pt,
+  Mesh* const& face_mesh_pt,
+  const unsigned& interaction=0)
+ {
+
+#ifdef USE_VECTOR_BASED_MD
+
+   // Convert to vector-based storage
+   Vector<unsigned> boundary_in_bulk_mesh_vect(1);
+   boundary_in_bulk_mesh_vect[0]=boundary_in_bulk_mesh;
+   Vector<Mesh*> face_mesh_pt_vect(1);
+   face_mesh_pt_vect[0]=face_mesh_pt;
+
+   // Call vector-based version
+   setup_bulk_elements_adjacent_to_face_mesh<BULK_ELEMENT,DIM>(
+    problem_pt, boundary_in_bulk_mesh_vect, bulk_mesh_pt,
+    face_mesh_pt_vect,interaction);
+   
+#else
+
+   // Create a face mesh adjacent to the bulk mesh's b-th boundary. 
+   // The face mesh consists of FaceElements that may also be 
+   // interpreted as GeomObjects
+   Mesh* bulk_face_mesh_pt = new Mesh;
+   bulk_mesh_pt->template build_face_mesh
+    <BULK_ELEMENT,FaceElementAsGeomObject>(boundary_in_bulk_mesh,
+                                           bulk_face_mesh_pt);
+   
+   // Loop over these new face elements and tell them the boundary number
+   // from the bulk mesh -- this is required to they can
+   // get access to the boundary coordinates!
+   unsigned n_face_element = bulk_face_mesh_pt->nelement();
+   for(unsigned e=0;e<n_face_element;e++)
+    {
+     //Cast the element pointer to the correct thing!
+     FaceElementAsGeomObject<BULK_ELEMENT>* el_pt=
+      dynamic_cast<FaceElementAsGeomObject<BULK_ELEMENT>*>
+      (bulk_face_mesh_pt->element_pt(e));
+
+     // Set bulk boundary number
+     el_pt->set_boundary_number_in_bulk_mesh(boundary_in_bulk_mesh);
+     
+     // Doc?
+     if (Doc_boundary_coordinate_file.is_open())
+      {
+       Vector<double> s(DIM-1);
+       Vector<double> zeta(DIM-1);
+       Vector<double> x(DIM);
+       unsigned n_plot=5;
+       Doc_boundary_coordinate_file << el_pt->tecplot_zone_string(n_plot);
+       
+       // Loop over plot points
+       unsigned num_plot_points=el_pt->nplot_points(n_plot);
+       for (unsigned iplot=0;iplot<num_plot_points;iplot++)
+        {         
+         // Get local coordinates of plot point
+         el_pt->get_s_plot(iplot,n_plot,s);         
+         el_pt->interpolated_zeta(s,zeta);
+         el_pt->interpolated_x(s,x);
+         for (unsigned i=0;i<DIM;i++)
+          {
+           Doc_boundary_coordinate_file << x[i] << " ";
+          }
+         for (unsigned i=0;i<DIM-1;i++)
+          {
+           Doc_boundary_coordinate_file << zeta[i] << " ";
+          }
+         Doc_boundary_coordinate_file << std::endl;
+        }
+       el_pt->write_tecplot_zone_footer(Doc_boundary_coordinate_file,n_plot);
+      }   
+    }
+
+   // Now sort the elements based on the boundary coordinates.
+   // This may allow a faster implementation of the locate_zeta
+   // function for the MeshAsGeomObject representation of this
+   // mesh, but also creates a unique ordering of the elements
+   std::sort(bulk_face_mesh_pt->element_pt().begin(),
+             bulk_face_mesh_pt->element_pt().end(),
+             CompareBoundaryCoordinate<BULK_ELEMENT>());
+
+   // Setup the interactions for this problem using the surface mesh
+   // on the bulk mesh. 
+   Multi_domain_functions::setup_multi_domain_interaction
+    <BULK_ELEMENT,FaceElementAsGeomObject<BULK_ELEMENT> >
+    (problem_pt,face_mesh_pt,bulk_mesh_pt,bulk_face_mesh_pt,interaction);
+   
+   // The source elements and coordinates have now all been set
+   
+   //Clean up the memory allocated:
+
+   //The MeshAsGeomObject has already been deleted (in set_external_storage)
+   
+   //Must be careful with the FaceMesh, because we cannot delete the nodes
+   //Loop over the elements backwards (paranoid!) and delete them
+   for(unsigned e=n_face_element;e>0;e--)
+    {
+     delete bulk_face_mesh_pt->element_pt(e-1);
+     bulk_face_mesh_pt->element_pt(e-1) = 0;
+    }
+   //Now clear all element and node storage (should maybe fine-grain this)
+   bulk_face_mesh_pt->flush_element_and_node_storage();
+
+   //Finally delete the mesh
+   delete bulk_face_mesh_pt;
+   
+#endif
+
+ }
+
 
 //========================================================================
 /// Set up the two-way multi-domain interactions for the 

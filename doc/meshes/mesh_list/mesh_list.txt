@@ -231,6 +231,33 @@ RectangularQuadMesh<ELEMENT>
 #####################################################################
 <TR>
 <TD>
+<A HREF="classoomph_1_1TwoDAnnularMesh.html"><B>
+TwoDAnnularMesh<ELEMENT>
+</B></A> \n\n
+- This is a "wrapped around" version of 
+  \c RectangularQuadMesh discussed above. It can either be used
+  as a complete annulus (in which case periodicity is enforced)
+  or a gap can appear in the annulus.
+- This mesh can be used with all \c FiniteElements that are derived from
+  the geometric finite element \c QElement<2,NNODE_1D>.
+- A refineable version of this mesh exists.
+.
+<B>Example driver code:</B> \n
+- Thhis mesh is used in the driver code for 
+  <A HREF="../../../helmholtz/scattering/html/index.html">
+  the 2D Helmholtz equation</a >and the 
+  <A HREF="../../../time_harmonic_linear_elasticity/elastic_annulus/html/index.html">time-harmonic 
+  linear elasticity equations</a>.
+  </A>
+.
+</TD>
+<TD>
+@I w 0.75\textwidth annular_meshes " "
+</TD> 
+</TR>
+#####################################################################
+<TR>
+<TD>
 <A NAME="channel_with_leaflet"></A>
 <A HREF="classoomph_1_1ChannelWithLeafletMesh.html"><B>
 ChannelWithLeafletMesh<ELEMENT>

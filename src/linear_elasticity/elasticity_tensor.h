@@ -192,7 +192,22 @@ class ElasticityTensor
     C[0] = 0.0;
     this->set_lame_coefficients(lame[0],lame[1]);
    }
-  
+
+  /// \short Update parameters: Specify values of the Poisson's ratio 
+  /// and (optionally) Young's modulus (interpreted as the ratio of the actual 
+  /// Young's modulus to the Young's modulus (or other reference stiffness)
+  /// used to non-dimensionalise stresses and tractions in the governing
+  /// equations).
+  void update_constitutive_parameters(const double &nu,
+                                      const double &E=1.0)
+   {
+    //Set the three indepdent components
+    C[0] = 0.0;
+    double lambda=E*nu/((1.0+nu)*(1.0-2.0*nu));
+    double mu=E/(2.0*(1.0+nu));
+    this->set_lame_coefficients(lambda,mu);
+   }
+
 
   ///Overload the independent coefficient function
   inline double independent_component(const unsigned &i) const

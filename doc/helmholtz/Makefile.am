@@ -1,3 +1,4 @@
 SUBDIRS = \
-scattering
+scattering \
+unstructured_scattering 
 

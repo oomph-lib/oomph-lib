@@ -874,7 +874,7 @@ UnstructuredFSIProblem<FLUID_ELEMENT,SOLID_ELEMENT>::UnstructuredFSIProblem()
    //Doc boundary coordinates in fluid
    char filename[100];
    sprintf(filename,"RESLT/fluid_boundary_coordinates%i.dat",i);
-   FSI_functions::Doc_boundary_coordinate_file.open(filename);
+   Multi_domain_functions::Doc_boundary_coordinate_file.open(filename);
    
    // Setup FSI: Pass ID of fluid FSI boundary and associated
    // mesh of solid fsi traction elements.
@@ -882,7 +882,7 @@ UnstructuredFSIProblem<FLUID_ELEMENT,SOLID_ELEMENT>::UnstructuredFSIProblem()
     (this,Fluid_fsi_boundary_id[i],Fluid_mesh_pt,Solid_fsi_traction_mesh_pt[i]);
    
    // Close the doc file
-   FSI_functions::Doc_boundary_coordinate_file.close();
+   Multi_domain_functions::Doc_boundary_coordinate_file.close();
   } 
  
  // Setup equation numbering scheme

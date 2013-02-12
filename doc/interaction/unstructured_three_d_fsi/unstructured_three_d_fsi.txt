@@ -501,7 +501,7 @@ that apply the fluid load to the solid. This must be done separately for
 each of the mesh boundaries that make up the physical FSI boundary. 
 To facilitate debugging,  we document the boundary 
 coordinates along the FSI interface (as seen by the fluid) by opening 
-the  \c FSI_functions::Doc_boundary_coordinate_file stream before
+the  \c Multi_domain_functions::Doc_boundary_coordinate_file stream before
 calling  \c
 FSI_functions::setup_fluid_load_info_for_solid_elements(...).
 If this stream is open, the setup routine writes the Eulerian 

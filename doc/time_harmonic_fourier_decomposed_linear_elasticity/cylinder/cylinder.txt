@@ -31,14 +31,16 @@ University of Manchester's EPSRC-funded Knowledge Transfer Account.
 <HR>
 
 \section theory Theory
-Consider a three-dimensional, axisymmetric body occupying the region \f$ D \f$
+Consider a three-dimensional, axisymmetric body (of density \f$ \rho
+\f$, Young's modulus \f$ E \f$, and Poisson's ratio \f$ \nu \f$),
+occupying the region \f$ D \f$
 whose boundary is \f$ \partial D \f$.  Assuming that the body performs
 time-harmonic oscillations of frequency of \f$ \omega \f$, we use cylindrical 
 coordinates \f$ (r^*,\theta,z^*) \f$. The equations of time-harmonic 
 linear elasticity can then be written as
 <CENTER>
 \f[
-\mbox{\boldmath$ \nabla^*\cdot\tau^*$}+\mbox{\boldmath$
+\mbox{\boldmath$ \nabla^*\cdot\tau^*$}+\rho \mbox{\boldmath$
 F^*$}=-\rho\omega^2\mbox{\boldmath$ u^*$},
 \f]
 </CENTER>
@@ -80,8 +82,7 @@ The stresses and displacements are related by the constitutive equations
 \frac{1}{2}(\mbox{\boldmath$ \nabla^* u^*$}+\mbox{\boldmath$ \nabla^* u^*$}^{{\rm T}})\right),
 \f]
 </CENTER>
-where \f$ E \f$ is Young's modulus, \f$ \nu \f$
-is Poisson's ratio and \f$ \mbox{\boldmath$ \nabla^* u^*$}^{{\rm T}}
+where \f$ \mbox{\boldmath$ \nabla^* u^*$}^{{\rm T}}
 \f$ represents the transpose of \f$ \mbox{\boldmath$ \nabla^* u^*$}
 \f$.  Note that in cylindrical coordinates, the second-order
 tensor \f$ \mbox{\boldmath$ \nabla^* u^*$} \f$ is given by
@@ -117,7 +118,7 @@ r^* = {\cal L}\, r, \qquad z^* = {\cal L}\, z
 \f]
 \f[
 \mbox{\boldmath$ u^*$} = {\cal L}\, \mbox{\boldmath$ u$}, \qquad
-\mbox{\boldmath$ F^*$} = \frac{E}{\cal L} \, \mbox{\boldmath$ F$},
+\mbox{\boldmath$ F^*$} = \frac{E}{\rho \cal L} \, \mbox{\boldmath$ F$},
 \qquad
 t^* = {\cal T}\, t.
 \f]

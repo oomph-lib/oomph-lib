@@ -60,7 +60,7 @@ directory).
                introduction to timestepping</A>
     - <A HREF="#wave">The linear wave equation</A>
     - <A HREF="#helmholtz">The Helmholtz equation</A>
-    - <A HREF="#fourier_decomposed_helmholtz"> The Fourier-decomposed
+    - <A HREF="#fourier_decomposed_helmholtz"> The azimuthally Fourier-decomposed
                Helmholtz equation </A>
     - <A HREF="#gen_helmholtz">The generalised Helmholtz equation and
 perfectly matched layers</A>
@@ -70,14 +70,17 @@ perfectly matched layers</A>
     - <A HREF="#free_surface_nst">The free-surface Navier-Stokes equations</A>
     - <A HREF="#solid">Nonlinear solid mechanics problems</A>
     - <A HREF="#linear_elasticity">Linear elasticity</A>
-    - <A HREF="#axisym_linear_elasticity">Axisymmetric linear elasticity</A>
-    - <A HREF="#fourier_decomp_lin_elas"> Fourier-decomposed,
+    - <A HREF="#axisym_linear_elasticity">Axisymmetric linear
+               elasticity</A>
+    - <A HREF="#time_harmonic_lin_elas">Time-harmonic linear elasticity</A>
+    - <A HREF="#fourier_decomp_lin_elas"> Azimuthally Fourier-decomposed,
               time-harmonic linear elasticity </A>
     - <A HREF="#beam">Beam structures</A>
     - <A HREF="#shell">Shell structures</A>
     .
   - Multi-physics problems:
-    - <A HREF="#fsi">(Fluid-structure) interaction problems</A>
+    - <A HREF="#fsi">Large-displacement fluid-structure interaction problems</A>
+    - <A HREF="#acoustic_fsi">Acoustic fluid-structure interaction problems</A>
     - <A HREF="#multi"> Multi-physics problems</A>
     .
   .
@@ -659,12 +662,31 @@ wave from a circular cylinder.
 <CENTER>complete</CENTER>
 </TD>
 </TR>
+######################################################################
+<TR>
+<TD>
+<A HREF="../../helmholtz/unstructured_scattering/html/index.html">
+<B>Solving the Helmholtz equation on an unstructured mesh.
+</B>
+</A>
+\n\n
+We solve a 2D Helmholtz problem, simulating scattering of a planar
+wave from a circular cylinder -- this time using an unstructured mesh.
+</TD>
+<TD>
+- How to solve the Helmholtz equation on an unstructured mesh.
+  \n\n
+</TD>
+<TD>
+<CENTER>complete</CENTER>
+</TD>
+</TR>
 #####################################################################
 ######################################################################
 <TR>
 <TD COLSPAN=3 bgcolor="lightcyan">
 <A NAME="fourier_decomposed_helmholtz"><CENTER><B>The
-  Fourier-decomposed Helmholtz equation</B></CENTER></A>
+ Azimuthally Fourier-decomposed Helmholtz equation</B></CENTER></A>
 </TD>
 </TR>
 ######################################################################
@@ -1394,6 +1416,8 @@ non-trivial free surface problem.
     the free boundaries.
   - Redistributing segments between polylines in cases when the
     nodes on the free surface all get convected into one region.
+  - Why you shouldn't use \c TriangleMeshCurviLines to describe
+    the initial shape of (initially curvilinear) free boundaries.
   .
 - How to impose a volume constraint onto an enclosed "bubble" in 
   a viscous fluid.
@@ -1796,7 +1820,7 @@ spatial adaptivity.
 ######################################################################
 <TR>
 <TD COLSPAN=3 bgcolor="lightcyan">
-<A NAME="axisym_linear_elasticity"><CENTER><B>Axisymmetric inear elasticity</B></CENTER></A>
+<A NAME="axisym_linear_elasticity"><CENTER><B>Axisymmetric linear elasticity</B></CENTER></A>
 </TD>
 </TR>
 ######################################################################
@@ -1827,26 +1851,83 @@ elements and demonstrate their use in time-dependent test problem.
 </TR>
 ######################################################################
 
+######################################################################
+######################################################################
+<TR>
+<TD COLSPAN=3 bgcolor="lightcyan">
+<A NAME="time_harmonic_lin_elas"><CENTER><B>
+Time Harmonic Linear Elasticity</B></CENTER></A>
+</TD>
+</TR>
+######################################################################
+<TR>
+<TD>
+<A HREF="../../time_harmonic_linear_elasticity/elastic_annulus/html/index.html">
+<B>The equations of time-harmonic linear
+elasticity: Theory and implementation
+</B>
+</A>
+\n\n
+In this document we discuss the theoretical background and the
+practical implementation of equations describing forced,
+time-harmonic oscillations of elastic bodies.
+</TD>
+<TD>
+- The time-harmonic equations of linear elasticity and their
+  non-dimensionalisation.
+- Implementation of the equations, based on a displacement formulation.
+- The solution of test problem: The forced oscillations of an
+  annular elastic region, computed with and without spatial adaptation.
+.
+</TD>
+<TD>
+<CENTER>complete</CENTER>
+</TD>
+</TR>
+######################################################################
+<TR>
+<TD>
+<A HREF="../../time_harmonic_linear_elasticity/unstructured_elastic_annulus/html/index.html">
+<B>Solving the equations of time-harmonic linear
+elasticity on unstructured meshes
+</B>
+</A>
+\n\n
+We re-visit the solution of the equations of time-harmonic linear
+elasticity -- this time using an unstructured mesh.
+</TD>
+<TD>
+- Solving the equations of time-harmonic linear
+  elasticity on unstructured meshes, with and without adaptation.
+- How to assign different material properties to different parts of
+  the domain.
+.
+</TD>
+<TD>
+<CENTER>complete</CENTER>
+</TD>
+</TR>
+
 
 ######################################################################
 ######################################################################
 <TR>
 <TD COLSPAN=3 bgcolor="lightcyan">
-<A NAME="fourier_decomp_lin_elas"><CENTER><B>Time Harmonic Fourier
-Decomposed Linear Elasticity</B></CENTER></A>
+<A NAME="fourier_decomp_lin_elas"><CENTER><B>
+Azimuthally Fourier Decomposed Time Harmonic Linear Elasticity</B></CENTER></A>
 </TD>
 </TR>
 ######################################################################
 <TR>
 <TD>
 <A HREF="../../time_harmonic_fourier_decomposed_linear_elasticity/cylinder/html/index.html">
-<B>The azimuthally decomposed equations of time-harmonic linear
+<B>The azimuthally Fourier-decomposed equations of time-harmonic linear
 elasticity: Theory and implementation
 </B>
 </A>
 \n\n
 In this document we discuss the theoretical background and the
-practical implementation of equations to describe the forced,
+practical implementation of equations describing  forced,
 time-harmonic, non-axisymmetric oscillations of axisymmetric elastic
 bodies.
 </TD>
@@ -1855,7 +1936,7 @@ bodies.
 non-dimensionalisation.
 - Fourier decomposition of general three-dimensional disturbances.
 - Implementation of the equations, based on a displacement formulation.
-- The solution of a constructed test problem.
+- The solution of a "manufactured" test problem.
 .
 </TD>
 <TD>
@@ -2004,7 +2085,7 @@ clamped, thin-walled elastic shell.
 ######################################################################
 <TR>
 <TD COLSPAN=3 bgcolor="lightcyan">
-<A NAME="fsi"><CENTER><B>(Fluid-structure) interaction problems</B></CENTER></A>
+<A NAME="fsi"><CENTER><B>Large-displacement fluid-structure interaction problems</B></CENTER></A>
 </TD>
 </TR>
 ######################################################################
@@ -2479,6 +2560,77 @@ asymptotic predictions.
 </TD>
 <TD>
 <CENTER>driver code only</CENTER>
+</TD>
+</TR>
+
+#####################################################################
+######################################################################
+<TR>
+<TD COLSPAN=3 bgcolor="lightcyan">
+<A NAME="acoustic_fsi"><CENTER><B>Acoustic fluid-structure interaction problems</B></CENTER></A>
+</TD>
+</TR>
+######################################################################
+<TR>
+<TD>
+<A HREF="../../acoustic_fsi/acoustic_fsi_annulus/html/index.html">
+<B>
+A time-harmonic acoustic fluid-structure interaction problem: Sound radiation
+from an immersed oscillating cylinder that is coated with an elastic
+layer.
+</B>
+</A>
+\n\n
+We provide an overview of \c oomph-lib's methodology for the
+solution of time-harmonic acoustic fluid-structure interaction problems which
+are based on a coupled solution of the 
+<a href="../../time_harmonic_linear_elasticity/elastic_annulus/html/index.html">time-harmonic equations of linear elasticity</a>
+and
+<a href="../../helmholtz/scattering/html/index.html">the Helmholtz
+equation.</a>
+</TD>
+<TD>
+- Theory: The formulation and non-dimensionalisation 
+  of time-harmonic acoustic fluid-structure 
+  interaction problems. 
+- Coupling 
+  <a href="../../time_harmonic_linear_elasticity/elastic_annulus/html/index.html">time-harmonic equations of linear elasticity</a>
+  and <a href="../../helmholtz/scattering/html/index.html">the Helmholtz
+  equation,</a> using the 
+  \c
+  Multi_domain_functions::setup_bulk_elements_adjacent_to_face_mesh(...)
+  helper function
+- Validation of the methodology via a comparison against an analytical solution.
+</TD>
+<TD>
+<CENTER>complete</CENTER>
+</TD>
+</TR>
+
+######################################################################
+<TR>
+<TD>
+<A HREF="../../acoustic_fsi/unstructured_acoustic_fsi_annulus/html/index.html">
+<B>
+A time-harmonic acoustic fluid-structure interaction problem: Sound radiation
+from an immersed oscillating cylinder that is coated with an elastic
+layer -- this time solved on an unstructured mesh.
+</B>
+</A>
+\n\n
+A brief extension of the 
+<A HREF="../../acoustic_fsi/acoustic_fsi_annulus/html/index.html">
+previous tutorial</a> illustrating how to solve the problem 
+with unstructured meshes.
+</TD>
+<TD>
+- The solution of time-harmonic acoustic fluid-structure interaction
+  problems on unstructured meshes.
+- How to assign different material properties to different regions
+  of the elastic body.
+</TD>
+<TD>
+<CENTER>complete</CENTER>
 </TD>
 </TR>
 ######################################################################

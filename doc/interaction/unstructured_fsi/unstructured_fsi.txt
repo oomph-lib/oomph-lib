@@ -448,7 +448,7 @@ Finally, we set up the fluid-structure interaction by determining
 which "bulk" fluid elements are located next to the FSI traction elements
 that apply the fluid load to the solid. We document the boundary 
 coordinate along the FSI interface by opening the  \c
-FSI_functions::Doc_boundary_coordinate_file stream before
+Multi_domain_functions::Doc_boundary_coordinate_file stream before
 calling  \c
 FSI_functions::setup_fluid_load_info_for_solid_elements(...)
 If this stream is open, the setup routine writes the Eulerian 
@@ -720,7 +720,7 @@ consistent boundary coordinates.
   We do not intend to fix this problem -- if your mesh is that coarse,
   you should refine it! Anyway, if it happens, the problem may be
   diagnosed by plotting the output written to 
-  \c FSI_functions::Doc_boundary_coordinate_file if this stream is
+  \c Multi_domain_functions::Doc_boundary_coordinate_file if this stream is
   open when \c FSI_functions::setup_fluid_load_info_for_solid_elements(...)
   is called. The file (<code>fluid_boundary_test.dat</code> in our
   driver code) contains the \c FaceElements that are attached

@@ -80,7 +80,7 @@ extern "C" {
 
 
 //=========================================================================
-// \short Helper object for dealing with the parameters used for the
+/// \short Helper object for dealing with the parameters used for the
 /// TriangleMesh objects
 //=========================================================================
 class TriangleMeshParameters
@@ -2552,7 +2552,7 @@ private:
 #ifdef OOMPH_HAS_TRIANGLE_LIB  
  
 //=========================================================================
-// Unstructured refineable Triangle Mesh 
+/// Unstructured refineable Triangle Mesh 
 //=========================================================================
 template<class ELEMENT>
  class RefineableTriangleMesh : public virtual TriangleMesh<ELEMENT>,
@@ -2952,6 +2952,17 @@ template<class ELEMENT>
     this->Nrefined=count_refined;
     this->Nunrefined=count_unrefined;
     
+    if (this->Nrefinement_overruled!=0)
+     {
+      oomph_info 
+       << "\nNOTE: Refinement of " 
+       << this->Nrefinement_overruled << " elements was "
+       << "overruled \nbecause the target area would have "
+       << "been below \nthe minimum permitted area of " 
+       << Min_element_size 
+       << ".\nYou can change the minimum permitted area with the\n"
+       << "function RefineableTriangleMesh::min_element_size().\n\n";
+     }
     return min_angle;
    }
   
@@ -2997,7 +3008,7 @@ template<class ELEMENT>
 #ifdef OOMPH_HAS_TRIANGLE_LIB  
 
 //=========================================================================
-// Unstructured Triangle Mesh upgraded to solid mesh
+/// Unstructured Triangle Mesh upgraded to solid mesh
 //=========================================================================
  template<class ELEMENT>
   class SolidTriangleMesh : public virtual TriangleMesh<ELEMENT>,
@@ -3031,7 +3042,7 @@ template<class ELEMENT>
 #ifdef OOMPH_HAS_TRIANGLE_LIB
 
 //=========================================================================
-// Unstructured refineable Triangle Mesh upgraded to solid mesh
+/// Unstructured refineable Triangle Mesh upgraded to solid mesh
 //=========================================================================
  template<class ELEMENT>
   class RefineableSolidTriangleMesh :

@@ -59,7 +59,8 @@ namespace oomph
 /// isoparametric triangular 
 /// DIM-dimensional TimeHarmonicLinearElasticity elements with  
 /// NNODE_1D nodal points along each
-/// element edge. Inherits from TElement and TimeHarmonicLinearElasticityEquations
+/// element edge. Inherits from TElement and 
+/// TimeHarmonicLinearElasticityEquations
 //======================================================================
 template <unsigned DIM, unsigned NNODE_1D>
  class TTimeHarmonicLinearElasticityElement : public TElement<DIM,NNODE_1D>, 
@@ -187,7 +188,8 @@ template <unsigned DIM, unsigned NNODE_1D>
 };
 
 //=======================================================================
-/// Face geometry for the TTimeHarmonicLinearElasticityElement elements: The spatial 
+/// Face geometry for the TTimeHarmonicLinearElasticityElement elements: 
+/// The spatial 
 /// dimension of the face elements is one lower than that of the
 /// bulk element but they have the same number of points
 /// along their 1D edges.
@@ -206,7 +208,8 @@ class FaceGeometry<TTimeHarmonicLinearElasticityElement<DIM,NNODE_1D> >:
 };
 
 //=======================================================================
-/// Face geometry for the 1D TTimeHarmonicLinearElasticityElement elements: Point elements
+/// Face geometry for the 1D TTimeHarmonicLinearElasticityElement elements: 
+/// Point elements
 //=======================================================================
 template<unsigned NNODE_1D>
 class FaceGeometry<TTimeHarmonicLinearElasticityElement<1,NNODE_1D> >: 
@@ -220,6 +223,8 @@ class FaceGeometry<TTimeHarmonicLinearElasticityElement<1,NNODE_1D> >:
  FaceGeometry() : PointElement() {}
 
 };
+
+
 
 
 }

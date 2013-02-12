@@ -24,19 +24,20 @@ from the Chiari and Syringomyelia Foundation.
 <HR>
 
 \section theory Theory
-Consider a three-dimensional, axisymmetric body occupying the region \f$ D \f$
+Consider a three-dimensional, axisymmetric body (of density \f$ \rho
+\f$, Young's modulus \f$ E \f$, and Poisson's ratio \f$ \nu \f$),
+occupying the region \f$ D \f$
 whose boundary is \f$ \partial D \f$. Using cylindrical coordinates \f$
 (r^*,\theta,z^*) \f$, the equations of linear elasticity can be written as
 \f[
-\nabla^* \cdot \bm{\tau}^* + \mathbf{F}^* = \rho\frac{\partial^2\mathbf{u}^*}
+\nabla^* \cdot \bm{\tau}^* + \rho \mathbf{F}^* = \rho\frac{\partial^2\mathbf{u}^*}
 {\partial {t^*}^2},
 \f]
 where \f$\nabla^* = \left(\frac{\partial}{\partial r^*},
 \frac{1}{r^*}\frac{\partial}
 {\partial \theta},\frac{\partial}{\partial z^*}\right)\f$,
 \f$ \bm{\tau}^*(r^*,z^*,t^*) \f$ is the stress tensor,
-\f$\mathbf{F}^*(r^*,z^*,t^*)\f$ is the body force,
-\f$ \rho \f$ is the density and
+\f$\mathbf{F}^*(r^*,z^*,t^*)\f$ is the body force and
 \f$ \mathbf{u^*}(r^*,z^*,t^*) \f$ is the displacement field.
 
 Note that, despite the fact that none of the above physical quantities depend
@@ -65,8 +66,8 @@ The constitutive equations relating the stresses to the displacements are
 \mathbf{I} + \frac{1}{2}\left(\nabla^*\mathbf{u}^* +
 \left(\nabla^*\mathbf{u}^*\right)^\mathrm{T}\right)\right),
 \f]
-where \f$ E \f$ is Young's modulus, \f$ \nu \f$ is Poisson's ratio, \f$
-\mathbf{I} \f$ is the identity tensor and superscript \f$ \mathrm{T} \f$
+where 
+\f$ \mathbf{I} \f$ is the identity tensor and superscript \f$ \mathrm{T} \f$
 denotes the transpose. In cylindrical coordinates, the matrix representation of
 the tensor \f$ \nabla^*\mathbf{u}^* \f$ is
 \f[
@@ -95,7 +96,7 @@ z^* = \mathcal{L}z
 \f]
 \f[
 \mathbf{u}^* = \mathcal{L} \mathbf{u} \qquad
-\mathbf{F}^* = \frac{E}{\mathcal{L}}\mathbf{F},
+\mathbf{F}^* = \frac{E}{\rho \mathcal{L}}\mathbf{F},
 \qquad
 t^* = \mathcal{T}t.
 \f]

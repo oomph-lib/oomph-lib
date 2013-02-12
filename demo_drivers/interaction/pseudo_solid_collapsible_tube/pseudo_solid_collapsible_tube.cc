@@ -909,7 +909,7 @@ PseudoElasticCollapsibleChannelProblem()
  //Doc boundary coordinates in fluid
  char filename[100];
  sprintf(filename,"RESLT/fluid_boundary_coordinates.dat");
- FSI_functions::Doc_boundary_coordinate_file.open(filename);
+ Multi_domain_functions::Doc_boundary_coordinate_file.open(filename);
  
  // Setup FSI: Pass ID of fluid FSI boundary and associated
  // mesh of solid fsi traction elements.
@@ -917,7 +917,7 @@ PseudoElasticCollapsibleChannelProblem()
   (this,3,Fluid_mesh_pt,Solid_fsi_traction_mesh_pt);
  
  // Close the doc file
- FSI_functions::Doc_boundary_coordinate_file.close();
+ Multi_domain_functions::Doc_boundary_coordinate_file.close();
 
  // Setup equation numbering scheme
  std::cout <<"Number of equations: " << assign_eqn_numbers() << std::endl; 

@@ -410,24 +410,24 @@ void TriangleMesh<ELEMENT>::setup_boundary_coordinates(const unsigned& b,
       unsigned nel_in_region = this->nboundary_element_in_region(b, region_id);
       unsigned nel_repetead_in_region = 0;
       
-#ifdef PARANOID
-      if (nel_in_region==0)
-       {
-        std::ostringstream warning_message;
-        warning_message
-         << "There are no elements associated with boundary (" << b << ")\n"
-         << "in region (" << region_id << "). This could happen because:\n"
-         << "1) You did not specify boundaries with this boundary id.\n"
-         << "---- Review carefully the indexing of your boundaries.\n"
-         << "2) The boundary (" << b << ") is not associated with region ("
-         << region_id << ").\n"
-         << "---- The boundary does not touch the region\n.";
-        OomphLibWarning(warning_message.str(),
-                        "TriangleMesh::setup_boundary_coordinates()",
-                        OOMPH_EXCEPTION_LOCATION);
+// #ifdef PARANOID
+//       if (nel_in_region==0)
+//        {
+//         std::ostringstream warning_message;
+//         warning_message
+//          << "There are no elements associated with boundary (" << b << ")\n"
+//          << "in region (" << region_id << "). This could happen because:\n"
+//          << "1) You did not specify boundaries with this boundary id.\n"
+//          << "---- Review carefully the indexing of your boundaries.\n"
+//          << "2) The boundary (" << b << ") is not associated with region ("
+//          << region_id << ").\n"
+//          << "---- The boundary does not touch the region\n.";
+//         OomphLibWarning(warning_message.str(),
+//                         "TriangleMesh::setup_boundary_coordinates()",
+//                         OOMPH_EXCEPTION_LOCATION);
         
-       }
-#endif
+//        }
+// #endif
       
       // Only bother to do anything else, if there are elements
       // associated with the boundary and the current region

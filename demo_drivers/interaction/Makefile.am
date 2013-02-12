@@ -13,4 +13,6 @@ unstructured_three_d_fsi \
 unstructured_adaptive_fsi \
 elastic_bretherton \
 pseudo_solid_collapsible_tube \
-pseudo_solid_fsi_channel_with_leaflet
+pseudo_solid_fsi_channel_with_leaflet \
+acoustic_fsi
+

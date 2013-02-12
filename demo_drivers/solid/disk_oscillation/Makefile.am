@@ -11,7 +11,7 @@ disk_oscillation_SOURCES = disk_oscillation.cc
 # Required libraries: 
 # $(FLIBS) is included in case the solver involves fortran sources.
 disk_oscillation_LDADD = -L@libdir@ -lsolid -lconstitutive -lgeneric \
--loomph_crbond_bessel $(EXTERNAL_LIBS) $(FLIBS)
+ $(EXTERNAL_LIBS) $(FLIBS)
 
 # Sources for executable
 #disk_oscillation_demo_SOURCES = disk_oscillation_demo.cc
@@ -19,4 +19,4 @@ disk_oscillation_LDADD = -L@libdir@ -lsolid -lconstitutive -lgeneric \
 # Required libraries: 
 # $(FLIBS) is included in case the solver involves fortran sources.
 #disk_oscillation_demo_LDADD = -L@libdir@ -lsolid -lconstitutive -lgeneric \
-#-loomph_crbond_bessel $(EXTERNAL_LIBS) $(FLIBS)
+# $(EXTERNAL_LIBS) $(FLIBS)

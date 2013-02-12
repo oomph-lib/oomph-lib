@@ -9,4 +9,4 @@ single_layer_free_surface_axisym_SOURCES = single_layer_free_surface_axisym.cc
 
 # Required libraries: 
 # $(FLIBS) is included in case the solver involves fortran sources.
-single_layer_free_surface_axisym_LDADD = -L@libdir@ -laxisym_navier_stokes -lnavier_stokes -lfluid_interface -lgeneric -loomph_crbond_bessel $(EXTERNAL_LIBS) $(FLIBS)
+single_layer_free_surface_axisym_LDADD = -L@libdir@ -laxisym_navier_stokes -lnavier_stokes -lfluid_interface -lgeneric $(EXTERNAL_LIBS) $(FLIBS)

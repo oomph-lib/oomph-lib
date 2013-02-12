@@ -161,6 +161,77 @@ public:
 
 };
 
+
+ //============================================================================
+ /// \short A class to do comparison of the elements by lexicographic
+ /// ordering, based on the boundary coordinates at the element's first node. 
+ //============================================================================
+ template<class ELEMENT>
+ class CompareBoundaryCoordinate
+  {
+    public:
+   
+   ///The actual comparison operator
+   int operator() (GeneralisedElement* const &element1_pt,
+                   GeneralisedElement* const &element2_pt)
+    {
+     //OK Dynamic cast the elements
+     FaceElementAsGeomObject<ELEMENT> *cast_element1_pt = 
+      dynamic_cast<FaceElementAsGeomObject<ELEMENT>*>(element1_pt);
+     FaceElementAsGeomObject<ELEMENT> *cast_element2_pt = 
+      dynamic_cast<FaceElementAsGeomObject<ELEMENT>*>(element2_pt);
+
+#ifdef PARANOID
+     if (cast_element1_pt==0)
+      {
+       std::ostringstream error_message;
+       error_message 
+        << "Failed to cast element1_pt to a FaceElementAsGeomObject"
+        << std::endl;
+       throw OomphLibError(error_message.str(),
+                           "CompareBoundaryCoordinate::()",
+                           OOMPH_EXCEPTION_LOCATION);
+      }
+
+     if (cast_element2_pt==0)
+      {
+       std::ostringstream error_message;
+       error_message 
+        << "Failed to cast element2_pt to a FaceElementAsGeomObject"
+        << std::endl;
+       throw OomphLibError(error_message.str(),
+                           "CompareBoundaryCoordinate::()",
+                           OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+
+
+     // Warning that this still needs to be generalised to higher
+     // dimensions (don't want to implement it until I can test it
+     // -- at the moment, the ordering isn't particularly important
+     // anyway...
+//      if (cast_element1_pt->dim()!=1)
+//       {
+//        std::ostringstream warn_message;
+//        warn_message
+//         << "Warning: Ordering of elements is currently based on their \n"
+//         << "zero-th surface coordinate. This may not be appropriate for\n"
+//         << cast_element1_pt->dim() << "-dimensional elements. \n";
+//         OomphLibWarning(warn_message.str(),
+//                         "CompareBoundaryCoordinate::()",
+//                         OOMPH_EXCEPTION_LOCATION);
+//       }
+
+
+     return 
+      cast_element1_pt->zeta_nodal(0,0,0) < 
+      cast_element2_pt->zeta_nodal(0,0,0);
+    }
+  };
+ 
+ 
+
+
 }
 
 #endif

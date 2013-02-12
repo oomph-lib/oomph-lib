@@ -107,6 +107,14 @@ public:
    return  Macro_element_pt.size();
   }
 
+ /// Output macro elements
+ void output(const string& filename, const unsigned& nplot)
+  {
+   std::ofstream outfile;
+   outfile.open(filename.c_str());
+   output(outfile,nplot);
+   outfile.close();
+  }
 
  /// Output macro elements
  void output(std::ostream &outfile, const unsigned& nplot)
@@ -140,6 +148,18 @@ public:
    unsigned t=0;
    macro_element_boundary(t,i_macro,i_direct,s,f);
   }
+ 
+
+
+ /// \short Output all macro element boundaries as tecplot zones
+ void output_macro_element_boundaries(const string& filename, 
+                                      const unsigned& nplot)
+ {
+  std::ofstream outfile;
+  outfile.open(filename.c_str());
+  output_macro_element_boundaries(outfile,nplot);
+  outfile.close();
+ }
  
  /// \short Output all macro element boundaries as tecplot zones
  void output_macro_element_boundaries(std::ostream &outfile, 

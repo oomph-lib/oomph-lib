@@ -45,7 +45,11 @@ namespace oomph
 namespace Multi_domain_functions
  {
 
-
+  /// \short Output file to document the boundary coordinate 
+  /// along the mesh boundary of the bulk mesh during call to
+  /// setup_bulk_elements_adjacent_to_face_mesh(...)
+  std::ofstream Doc_boundary_coordinate_file;
+  
   // Workspace for locate zeta methods
   //----------------------------------
 

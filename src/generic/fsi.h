@@ -574,81 +574,6 @@ namespace FSI_functions
  //============================================================================
  extern double Strouhal_for_no_slip;
 
- //============================================================================
- /// \short A class to do comparison of the elements by lexicographic
- /// ordering, based on the boundary coordinates at the element's first node. 
- //============================================================================
- template<class ELEMENT>
- class CompareBoundaryCoordinate
-  {
-    public:
-   
-   ///The actual comparison operator
-   int operator() (GeneralisedElement* const &element1_pt,
-                   GeneralisedElement* const &element2_pt)
-    {
-     //OK Dynamic cast the elements
-     FaceElementAsGeomObject<ELEMENT> *cast_element1_pt = 
-      dynamic_cast<FaceElementAsGeomObject<ELEMENT>*>(element1_pt);
-     FaceElementAsGeomObject<ELEMENT> *cast_element2_pt = 
-      dynamic_cast<FaceElementAsGeomObject<ELEMENT>*>(element2_pt);
-
-#ifdef PARANOID
-     if (cast_element1_pt==0)
-      {
-       std::ostringstream error_message;
-       error_message 
-        << "Failed to cast element1_pt to a FaceElementAsGeomObject"
-        << std::endl;
-       throw OomphLibError(error_message.str(),
-                           "CompareBoundaryCoordinate::()",
-                           OOMPH_EXCEPTION_LOCATION);
-      }
-
-     if (cast_element2_pt==0)
-      {
-       std::ostringstream error_message;
-       error_message 
-        << "Failed to cast element2_pt to a FaceElementAsGeomObject"
-        << std::endl;
-       throw OomphLibError(error_message.str(),
-                           "CompareBoundaryCoordinate::()",
-                           OOMPH_EXCEPTION_LOCATION);
-      }
-#endif
-
-
-     // Warning that this still needs to be generalised to higher
-     // dimensions (don't want to implement it until I can test it
-     // -- at the moment, the ordering isn't particularly important
-     // anyway...
-//      if (cast_element1_pt->dim()!=1)
-//       {
-//        std::ostringstream warn_message;
-//        warn_message
-//         << "Warning: Ordering of elements is currently based on their \n"
-//         << "zero-th surface coordinate. This may not be appropriate for\n"
-//         << cast_element1_pt->dim() << "-dimensional elements. \n";
-//         OomphLibWarning(warn_message.str(),
-//                         "CompareBoundaryCoordinate::()",
-//                         OOMPH_EXCEPTION_LOCATION);
-//       }
-
-
-     return 
-      cast_element1_pt->zeta_nodal(0,0,0) < 
-      cast_element2_pt->zeta_nodal(0,0,0);
-    }
-  };
- 
- 
-
- //================================================================
- /// \short Output file to document the boundary coordinate 
- /// along the FSI interface of the fluid mesh during call to
- /// setup_fluid_load_info_for_solid_elements()
- //================================================================
- extern std::ofstream Doc_boundary_coordinate_file;
 
  //============================================================================
  /// \short Set up the information that the FSIWallElements
@@ -666,7 +591,7 @@ namespace FSI_functions
  /// to set up the interaction by locating the adjacent (source) elements
  /// for each integration point of each solid element
  /// \n\n
- /// This is the vector based version it works simultaenously on
+ /// This is the vector based version it works simultaneously on
  /// fluid fsi boundaries identified in the vector boundary_in_fluid_mesh
  /// and the corresponding solid meshes in solid_mesh_pt.
  //============================================================================
@@ -678,126 +603,13 @@ namespace FSI_functions
    Vector<Mesh*>& solid_mesh_pt,
    const unsigned& face=0)
  {
-  
-  unsigned n_mesh=boundary_in_fluid_mesh.size();
-  
-#ifdef PARANOID
-  // Check sizes match
-  if (boundary_in_fluid_mesh.size()!=solid_mesh_pt.size())
-   {
-    std::ostringstream error_message;
-    error_message 
-     << "Sizes of vector of boundary ids in fluid mesh (" 
-     << boundary_in_fluid_mesh.size() << ") and vector of pointers\n"
-     << "to FSIWallElements (" << solid_mesh_pt.size() << " doesn't match.\n";
-    throw OomphLibError(
-     error_message.str(),
-     "FSI_functions::setup_fluid_load_info_for_solid_elements()",
-     OOMPH_EXCEPTION_LOCATION);
-   }
-#endif
-
-  // Create face meshes adjacent to the fluid mesh's b-th boundary. 
-  // Each face mesh consists of FaceElements that may also be 
-  // interpreted as GeomObjects
-  Vector<Mesh*> fluid_face_mesh_pt(n_mesh);
-
-
-  // Loop over all meshes
-  for (unsigned i_mesh=0;i_mesh<n_mesh;i_mesh++)
-   {
-    fluid_face_mesh_pt[i_mesh] = new Mesh;
-    fluid_mesh_pt->template build_face_mesh
-     <FLUID_ELEMENT,FaceElementAsGeomObject>(boundary_in_fluid_mesh[i_mesh],
-                                             fluid_face_mesh_pt[i_mesh]);
-    
-    // Loop over these new face elements and tell them the boundary number
-    // from the bulk fluid mesh -- this is required to they can
-    // get access to the boundary coordinates!
-    unsigned n_face_element = fluid_face_mesh_pt[i_mesh]->nelement();
-    for(unsigned e=0;e<n_face_element;e++)
-     {
-      //Cast the element pointer to the correct thing!
-      FaceElementAsGeomObject<FLUID_ELEMENT>* el_pt=
-       dynamic_cast<FaceElementAsGeomObject<FLUID_ELEMENT>*>
-       (fluid_face_mesh_pt[i_mesh]->element_pt(e));
-      
-      // Set bulk boundary number
-      el_pt->set_boundary_number_in_bulk_mesh(boundary_in_fluid_mesh[i_mesh]);
-      
-      // Doc?
-      if (Doc_boundary_coordinate_file.is_open())
-       {
-        Vector<double> s(DIM_FLUID-1);
-        Vector<double> zeta(DIM_FLUID-1);
-        Vector<double> x(DIM_FLUID);
-        unsigned n_plot=5;
-        Doc_boundary_coordinate_file << el_pt->tecplot_zone_string(n_plot);
-        
-        // Loop over plot points
-        unsigned num_plot_points=el_pt->nplot_points(n_plot);
-        for (unsigned iplot=0;iplot<num_plot_points;iplot++)
-         {         
-          // Get local coordinates of plot point
-          el_pt->get_s_plot(iplot,n_plot,s);         
-          el_pt->interpolated_zeta(s,zeta);
-          el_pt->interpolated_x(s,x);
-          for (unsigned i=0;i<DIM_FLUID;i++)
-           {
-            Doc_boundary_coordinate_file << x[i] << " ";
-           }
-          for (unsigned i=0;i<DIM_FLUID-1;i++)
-           {
-            Doc_boundary_coordinate_file << zeta[i] << " ";
-           }
-          Doc_boundary_coordinate_file << std::endl;
-         }
-        el_pt->write_tecplot_zone_footer(Doc_boundary_coordinate_file,n_plot);
-       }   
-     }
-    
-    // Now sort the elements based on the boundary coordinates.
-    // This may allow a faster implementation of the locate_zeta
-    // function for the MeshAsGeomObject representation of this
-    // mesh, but also creates a unique ordering of the elements
-    std::sort(fluid_face_mesh_pt[i_mesh]->element_pt().begin(),
-              fluid_face_mesh_pt[i_mesh]->element_pt().end(),
-              CompareBoundaryCoordinate<FLUID_ELEMENT>());
-   } // end of loop over meshes
-
-    
-  
-  // Setup the interactions for this problem using the surface mesh
-  // on the fluid mesh.  The interaction parameter in this instance is
-  // given by the "face" parameter.
-  Multi_domain_functions::setup_multi_domain_interaction
-   <FLUID_ELEMENT,FaceElementAsGeomObject<FLUID_ELEMENT> >
-   (problem_pt,solid_mesh_pt,fluid_mesh_pt,
-    fluid_face_mesh_pt,face);
-  
-
-  // Loop over all meshes to clean up
-  for (unsigned i_mesh=0;i_mesh<n_mesh;i_mesh++)
-   {
-    unsigned n_face_element = fluid_face_mesh_pt[i_mesh]->nelement();
-    
-    //The MeshAsGeomObject has already been deleted (in set_external_storage)
-    
-    //Must be careful with the FaceMesh, because we cannot delete the nodes
-    //Loop over the elements backwards (paranoid!) and delete them
-    for(unsigned e=n_face_element;e>0;e--)
-     {
-      delete fluid_face_mesh_pt[i_mesh]->element_pt(e-1);
-      fluid_face_mesh_pt[i_mesh]->element_pt(e-1) = 0;
-     }
-    //Now clear all element and node storage (should maybe fine-grain this)
-    fluid_face_mesh_pt[i_mesh]->flush_element_and_node_storage();
-    
-    //Finally delete the mesh
-    delete fluid_face_mesh_pt[i_mesh];
-    
-   } // end of loop over meshes
-  
+  // Thin wrapper to multi-domain function
+  Multi_domain_functions::setup_bulk_elements_adjacent_to_face_mesh
+   <FLUID_ELEMENT, DIM_FLUID>(problem_pt,
+                              boundary_in_fluid_mesh,
+                              fluid_mesh_pt,
+                              solid_mesh_pt,
+                              face);  
  }
 
  //============================================================================
@@ -825,110 +637,13 @@ namespace FSI_functions
    const unsigned& face=0)
   {
 
-#ifdef USE_VECTOR_BASED_MD
-
-   // Convert to vector-based storage
-   Vector<unsigned> boundary_in_fluid_mesh_vect(1);
-   boundary_in_fluid_mesh_vect[0]=boundary_in_fluid_mesh;
-   Vector<Mesh*> solid_mesh_pt_vect(1);
-   solid_mesh_pt_vect[0]=solid_mesh_pt;
-
-   // Call vector-based version
-   setup_fluid_load_info_for_solid_elements<FLUID_ELEMENT,DIM_FLUID>(
-    problem_pt, boundary_in_fluid_mesh_vect, fluid_mesh_pt,
-    solid_mesh_pt_vect,face);
-   
-#else
-
-   // Create a face mesh adjacent to the fluid mesh's b-th boundary. 
-   // The face mesh consists of FaceElements that may also be 
-   // interpreted as GeomObjects
-   Mesh* fluid_face_mesh_pt = new Mesh;
-   fluid_mesh_pt->template build_face_mesh
-    <FLUID_ELEMENT,FaceElementAsGeomObject>(boundary_in_fluid_mesh,
-                                            fluid_face_mesh_pt);
-   
-   // Loop over these new face elements and tell them the boundary number
-   // from the bulk fluid mesh -- this is required to they can
-   // get access to the boundary coordinates!
-   unsigned n_face_element = fluid_face_mesh_pt->nelement();
-   for(unsigned e=0;e<n_face_element;e++)
-    {
-     //Cast the element pointer to the correct thing!
-     FaceElementAsGeomObject<FLUID_ELEMENT>* el_pt=
-      dynamic_cast<FaceElementAsGeomObject<FLUID_ELEMENT>*>
-      (fluid_face_mesh_pt->element_pt(e));
-
-     // Set bulk boundary number
-     el_pt->set_boundary_number_in_bulk_mesh(boundary_in_fluid_mesh);
-     
-     // Doc?
-     if (Doc_boundary_coordinate_file.is_open())
-      {
-       Vector<double> s(DIM_FLUID-1);
-       Vector<double> zeta(DIM_FLUID-1);
-       Vector<double> x(DIM_FLUID);
-       unsigned n_plot=5;
-       Doc_boundary_coordinate_file << el_pt->tecplot_zone_string(n_plot);
-       
-       // Loop over plot points
-       unsigned num_plot_points=el_pt->nplot_points(n_plot);
-       for (unsigned iplot=0;iplot<num_plot_points;iplot++)
-        {         
-         // Get local coordinates of plot point
-         el_pt->get_s_plot(iplot,n_plot,s);         
-         el_pt->interpolated_zeta(s,zeta);
-         el_pt->interpolated_x(s,x);
-         for (unsigned i=0;i<DIM_FLUID;i++)
-          {
-           Doc_boundary_coordinate_file << x[i] << " ";
-          }
-         for (unsigned i=0;i<DIM_FLUID-1;i++)
-          {
-           Doc_boundary_coordinate_file << zeta[i] << " ";
-          }
-         Doc_boundary_coordinate_file << std::endl;
-        }
-       el_pt->write_tecplot_zone_footer(Doc_boundary_coordinate_file,n_plot);
-      }   
-    }
-
-   // Now sort the elements based on the boundary coordinates.
-   // This may allow a faster implementation of the locate_zeta
-   // function for the MeshAsGeomObject representation of this
-   // mesh, but also creates a unique ordering of the elements
-   std::sort(fluid_face_mesh_pt->element_pt().begin(),
-             fluid_face_mesh_pt->element_pt().end(),
-             CompareBoundaryCoordinate<FLUID_ELEMENT>());
-
-   // Setup the interactions for this problem using the surface mesh
-   // on the fluid mesh.  The interaction parameter in this instance is
-   // given by the "face" parameter.
-   Multi_domain_functions::setup_multi_domain_interaction
-    <FLUID_ELEMENT,FaceElementAsGeomObject<FLUID_ELEMENT> >
-    (problem_pt,solid_mesh_pt,fluid_mesh_pt,fluid_face_mesh_pt,face);
-
-   // The source elements and coordinates have now all been set
-
-   //Clean up the memory allocated:
-
-   //The MeshAsGeomObject has already been deleted (in set_external_storage)
-
-   //Must be careful with the FaceMesh, because we cannot delete the nodes
-   //Loop over the elements backwards (paranoid!) and delete them
-   for(unsigned e=n_face_element;e>0;e--)
-    {
-     delete fluid_face_mesh_pt->element_pt(e-1);
-     fluid_face_mesh_pt->element_pt(e-1) = 0;
-    }
-   //Now clear all element and node storage (should maybe fine-grain this)
-   fluid_face_mesh_pt->flush_element_and_node_storage();
-
-   //Finally delete the mesh
-   delete fluid_face_mesh_pt;
-
-#endif
-
+   // Thin wrapper to multi-domain function
+   Multi_domain_functions::setup_bulk_elements_adjacent_to_face_mesh
+    <FLUID_ELEMENT, DIM_FLUID>(problem_pt,
+                               boundary_in_fluid_mesh,
+                               fluid_mesh_pt,
+                               solid_mesh_pt,
+                               face);
   }
 
 
@@ -946,7 +661,7 @@ namespace FSI_functions
  /// specify the type of the bulk solid elements and their spatial
  /// dimension. 
  /// \n\n
- /// This is the vector based version it works simultaenously on
+ /// This is the vector based version it works simultaneously on
  /// solid fsi boundaries identified in the vector b_solid_fsi
  /// and the corresponding Lagrange multiplier meshes in 
  /// lagrange_multiplier_mesh_pt.
@@ -958,124 +673,13 @@ namespace FSI_functions
    Mesh* const &solid_mesh_pt, 
    Vector<Mesh*>& lagrange_multiplier_mesh_pt)
  {
-  // Number of meshes
-  unsigned n_mesh=b_solid_fsi.size();
-
-#ifdef PARANOID
-  // Check sizes match
-  if (b_solid_fsi.size()!=lagrange_multiplier_mesh_pt.size())
-   {
-    std::ostringstream error_message;
-    error_message 
-     << "Sizes of vector of boundary ids in solid mesh (" 
-     << b_solid_fsi.size() << ") and vector of pointers\n"
-     << "to Lagrange multiplier elements (" 
-     << lagrange_multiplier_mesh_pt.size() << " doesn't match.\n";
-    throw OomphLibError(
-     error_message.str(),
-     "FSI_functions::setup_solid_elements_for_displacement_bc()",
-     OOMPH_EXCEPTION_LOCATION);
-   }
-#endif
-
-
-  // Create a face mesh adjacent to the solid mesh's b-th boundary. 
-  // The face mesh consists of FaceElements that may also be 
-  // interpreted as GeomObjects
-  Vector<Mesh*> solid_face_mesh_pt(n_mesh);
-
-
-  // Loop over all meshes
-  for (unsigned i_mesh=0;i_mesh<n_mesh;i_mesh++)
-   {
-    solid_face_mesh_pt[i_mesh]=new Mesh;
-    solid_mesh_pt->template build_face_mesh
-     <SOLID_ELEMENT,FaceElementAsGeomObject>(b_solid_fsi[i_mesh],
-                                             solid_face_mesh_pt[i_mesh]);
-  
-    // Loop over these new face elements and tell them the boundary number
-    // from the bulk solid mesh -- this is required to they can
-    // get access to the boundary coordinates!
-    unsigned n_face_element = solid_face_mesh_pt[i_mesh]->nelement();
-    for(unsigned e=0;e<n_face_element;e++)
-     {
-      //Cast the element pointer to the correct thing!
-      FaceElementAsGeomObject<SOLID_ELEMENT>* el_pt=
-       dynamic_cast<FaceElementAsGeomObject<SOLID_ELEMENT>*>
-       (solid_face_mesh_pt[i_mesh]->element_pt(e));
-      
-      // Set bulk boundary number
-      el_pt->set_boundary_number_in_bulk_mesh(b_solid_fsi[i_mesh]);
-      
-      // Doc?
-      if (Doc_boundary_coordinate_file.is_open())
-       {
-        Vector<double> s(DIM_SOLID-1);
-        Vector<double> zeta(DIM_SOLID-1);
-        Vector<double> x(DIM_SOLID);
-        unsigned n_plot=5;
-        Doc_boundary_coordinate_file << el_pt->tecplot_zone_string(n_plot);
-        
-        // Loop over plot points
-        unsigned num_plot_points=el_pt->nplot_points(n_plot);
-        for (unsigned iplot=0;iplot<num_plot_points;iplot++)
-         {         
-          // Get local coordinates of plot point
-          el_pt->get_s_plot(iplot,n_plot,s);         
-          el_pt->interpolated_zeta(s,zeta);
-          el_pt->interpolated_x(s,x);
-          for (unsigned i=0;i<DIM_SOLID;i++)
-           {
-            Doc_boundary_coordinate_file << x[i] << " ";
-           }
-          for (unsigned i=0;i<DIM_SOLID-1;i++)
-           {
-            Doc_boundary_coordinate_file << zeta[i] << " ";
-           }
-          Doc_boundary_coordinate_file << std::endl;
-         }
-        el_pt->write_tecplot_zone_footer(Doc_boundary_coordinate_file,n_plot);
-       }   
-     }
-    
-    // Now sort the elements based on the boundary coordinates.
-    // This may allow a faster implementation of the locate_zeta
-    // function for the MeshAsGeomObject representation of this
-    // mesh, but also creates a unique ordering of the elements
-    std::sort(solid_face_mesh_pt[i_mesh]->element_pt().begin(),
-              solid_face_mesh_pt[i_mesh]->element_pt().end(),
-              CompareBoundaryCoordinate<SOLID_ELEMENT>());
-   } // end of loop over meshes
-  
-  // Setup the interactions for this problem using the surface mesh
-  // on the solid mesh.  We're setting up the 0th "interaction"
-  Multi_domain_functions::setup_multi_domain_interaction
-   <SOLID_ELEMENT,FaceElementAsGeomObject<SOLID_ELEMENT> >
-   (problem_pt,lagrange_multiplier_mesh_pt,solid_mesh_pt,solid_face_mesh_pt,0);
-  
-
-  // Loop over all meshes to clean up
-  for (unsigned i_mesh=0;i_mesh<n_mesh;i_mesh++)
-   {
-    unsigned n_face_element = solid_face_mesh_pt[i_mesh]->nelement();
-    
-    //The MeshAsGeomObject has already been deleted (in set_external_storage)
-    
-    //Must be careful with the FaceMesh, because we cannot delete the nodes
-    //Loop over the elements backwards (paranoid!) and delete them
-    for(unsigned e=n_face_element;e>0;e--)
-     {
-      delete solid_face_mesh_pt[i_mesh]->element_pt(e-1);
-      solid_face_mesh_pt[i_mesh]->element_pt(e-1) = 0;
-     }
-    //Now clear all element and node storage (should maybe fine-grain this)
-    solid_face_mesh_pt[i_mesh]->flush_element_and_node_storage();
-    
-    //Finally delete the mesh
-    delete solid_face_mesh_pt[i_mesh];
- 
-   } // end of loop over meshes
-  
+  // Thin wrapper to multi-domain function
+  Multi_domain_functions::setup_bulk_elements_adjacent_to_face_mesh
+   <SOLID_ELEMENT, DIM_SOLID>(problem_pt,
+                              b_solid_fsi,
+                              solid_mesh_pt,
+                              lagrange_multiplier_mesh_pt,
+                              0);
  }
  
  
@@ -1101,110 +705,13 @@ namespace FSI_functions
    Mesh* const &solid_mesh_pt, 
    Mesh* const &lagrange_multiplier_mesh_pt)
  {
-
-#ifdef USE_VECTOR_BASED_MD
-
-  // Convert to vector-based version storage
-  Vector<unsigned> b_solid_fsi_vector(1);
-  b_solid_fsi_vector[0]=b_solid_fsi;
-  Vector<Mesh*> lagrange_multiplier_mesh_pt_vector(1);
-  lagrange_multiplier_mesh_pt_vector[0]=lagrange_multiplier_mesh_pt;
-
-  // Call vector-based version
-  setup_solid_elements_for_displacement_bc<SOLID_ELEMENT,DIM_SOLID>(
-   problem_pt, b_solid_fsi_vector, 
-   solid_mesh_pt,lagrange_multiplier_mesh_pt_vector);
-  
-#else
-  
-  // Create a face mesh adjacent to the solid mesh's b-th boundary. 
-  // The face mesh consists of FaceElements that may also be 
-  // interpreted as GeomObjects
-  Mesh* solid_face_mesh_pt = new Mesh;
-  solid_mesh_pt->template build_face_mesh
-   <SOLID_ELEMENT,FaceElementAsGeomObject>(b_solid_fsi,
-                                           solid_face_mesh_pt);
-  
-  // Loop over these new face elements and tell them the boundary number
-  // from the bulk solid mesh -- this is required to they can
-  // get access to the boundary coordinates!
-  unsigned n_face_element = solid_face_mesh_pt->nelement();
-  for(unsigned e=0;e<n_face_element;e++)
-   {
-    //Cast the element pointer to the correct thing!
-    FaceElementAsGeomObject<SOLID_ELEMENT>* el_pt=
-     dynamic_cast<FaceElementAsGeomObject<SOLID_ELEMENT>*>
-     (solid_face_mesh_pt->element_pt(e));
-    
-    // Set bulk boundary number
-    el_pt->set_boundary_number_in_bulk_mesh(b_solid_fsi);
-    
-    // Doc?
-    if (Doc_boundary_coordinate_file.is_open())
-     {
-      Vector<double> s(DIM_SOLID-1);
-      Vector<double> zeta(DIM_SOLID-1);
-      Vector<double> x(DIM_SOLID);
-      unsigned n_plot=5;
-      Doc_boundary_coordinate_file << el_pt->tecplot_zone_string(n_plot);
-      
-      // Loop over plot points
-      unsigned num_plot_points=el_pt->nplot_points(n_plot);
-      for (unsigned iplot=0;iplot<num_plot_points;iplot++)
-       {         
-        // Get local coordinates of plot point
-        el_pt->get_s_plot(iplot,n_plot,s);         
-        el_pt->interpolated_zeta(s,zeta);
-        el_pt->interpolated_x(s,x);
-        for (unsigned i=0;i<DIM_SOLID;i++)
-         {
-          Doc_boundary_coordinate_file << x[i] << " ";
-         }
-        for (unsigned i=0;i<DIM_SOLID-1;i++)
-         {
-          Doc_boundary_coordinate_file << zeta[i] << " ";
-         }
-        Doc_boundary_coordinate_file << std::endl;
-       }
-      el_pt->write_tecplot_zone_footer(Doc_boundary_coordinate_file,n_plot);
-     }   
-   }
-  
-  // Now sort the elements based on the boundary coordinates.
-  // This may allow a faster implementation of the locate_zeta
-  // function for the MeshAsGeomObject representation of this
-  // mesh, but also creates a unique ordering of the elements
-  std::sort(solid_face_mesh_pt->element_pt().begin(),
-            solid_face_mesh_pt->element_pt().end(),
-            CompareBoundaryCoordinate<SOLID_ELEMENT>());
-  
-  // Setup the interactions for this problem using the surface mesh
-  // on the solid mesh.  We're setting up the 0th "interaction"
-  Multi_domain_functions::setup_multi_domain_interaction
-   <SOLID_ELEMENT,FaceElementAsGeomObject<SOLID_ELEMENT> >
-   (problem_pt,lagrange_multiplier_mesh_pt,solid_mesh_pt,solid_face_mesh_pt,0);
-  
-  // The source elements and coordinates have now all been set
-  
-  //Clean up the memory allocated:
-  
-  //The MeshAsGeomObject has already been deleted (in set_external_storage)
-  
-  //Must be careful with the FaceMesh, because we cannot delete the nodes
-  //Loop over the elements backwards (paranoid!) and delete them
-  for(unsigned e=n_face_element;e>0;e--)
-   {
-    delete solid_face_mesh_pt->element_pt(e-1);
-    solid_face_mesh_pt->element_pt(e-1) = 0;
-   }
-  //Now clear all element and node storage (should maybe fine-grain this)
-  solid_face_mesh_pt->flush_element_and_node_storage();
-  
-  //Finally delete the mesh
-  delete solid_face_mesh_pt;
-
-#endif
-
+  // Thin wrapper to multi-domain function
+  Multi_domain_functions::setup_bulk_elements_adjacent_to_face_mesh
+   <SOLID_ELEMENT, DIM_SOLID>(problem_pt,
+                              b_solid_fsi,
+                              solid_mesh_pt,
+                              lagrange_multiplier_mesh_pt,
+                              0);
  }
  
  

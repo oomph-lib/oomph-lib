@@ -722,13 +722,12 @@ template<unsigned NNODE_1D>
   /// \short Number of fields to be projected: 0 
   unsigned nfields_for_projection() {return 0;}
  
-  /// \short Number of history values to be stored for fld-th field. Whatever
-  /// the timestepper has set up for the velocity components and
-  /// none for the pressure field.
+  /// \short Number of history values to be stored for fld-th field
+  /// (Includes the current value!). No nodal data.
   unsigned nhistory_values_for_projection(const unsigned &fld)
   {return 0;}
  
-  ///\short Number of positional history values
+  ///\short Number of positional history values (Includes the current value!)
   unsigned nhistory_values_for_coordinate_projection()
    {
     return this->node_pt(0)->position_time_stepper_pt()->ntstorage();
@@ -2364,16 +2363,16 @@ namespace SolidHelpers
   /// the pressure only
   unsigned nfields_for_projection() {return 1;}
  
-  /// \short Number of history values to be stored for fld-th field. Whatever
-  /// the timestepper has set up for the velocity components and
-  /// none for the pressure field.
+  /// \short Number of history values to be stored for fld-th field. 
+  /// (Includes the current value!)
   unsigned nhistory_values_for_projection(const unsigned &fld)
    {
-    //pressure doesn't have history values
+    //pressure doesn't have history values as such so only one value
+    // representing the current value
     return 1; 
    }
 
-  ///\short Number of positional history values
+  ///\short Number of positional history values (Includes the current value!)
   unsigned nhistory_values_for_coordinate_projection()
    {
     return this->node_pt(0)->position_time_stepper_pt()->ntstorage();

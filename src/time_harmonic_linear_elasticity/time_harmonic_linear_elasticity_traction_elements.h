@@ -208,11 +208,51 @@ public virtual FaceGeometry<ELEMENT>,
 
  /// \short Output function
  void output(std::ostream &outfile)
- {FiniteElement::output(outfile);}
+ {
+  unsigned nplot=5;
+  output(outfile,nplot);
+ }
  
  /// \short Output function
- void output(std::ostream &outfile, const unsigned &n_plot)
- {FiniteElement::output(outfile,n_plot);}
+ void output(std::ostream &outfile, const unsigned &nplot)
+ {
+  unsigned ndim=dim();
+  Vector<double> s(ndim);
+  Vector<double> x(ndim+1);
+  Vector<std::complex<double> > traction(ndim+1);
+
+  // Tecplot header info
+  outfile << this->tecplot_zone_string(nplot);
+  
+  // Loop over plot points
+  unsigned num_plot_points=this->nplot_points(nplot);
+  for (unsigned iplot=0;iplot<num_plot_points;iplot++)
+   {
+    // Get local coordinates of plot point
+    this->get_s_plot(iplot,nplot,s);
+    
+    // Get Eulerian coordinates and displacements
+    this->interpolated_x(s,x);
+    this->traction(s,traction);
+    
+    //Output the x,y,..
+    for(unsigned i=0;i<ndim+1;i++) 
+     {outfile << x[i] << " ";}
+
+    // Output u,v,..
+    for(unsigned i=0;i<ndim+1;i++) 
+     {outfile << traction[i].real() << " ";} 
+
+    // Output u,v,..
+    for(unsigned i=0;i<ndim+1;i++) 
+     {outfile << traction[i].imag() << " ";} 
+    
+    outfile << std::endl;
+   }
+  
+  // Write tecplot footer (e.g. FE connectivity lists)
+  this->write_tecplot_zone_footer(outfile,nplot);
+ }
  
  /// \short C_style output function
  void output(FILE* file_pt)

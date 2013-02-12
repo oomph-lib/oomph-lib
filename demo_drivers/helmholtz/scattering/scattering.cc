@@ -43,7 +43,7 @@
 #include "helmholtz.h"
 
 // The mesh
-#include "annular_meshes.h"
+#include "meshes/annular_mesh.h"
 
 // Get the Bessel functions
 #include "oomph_crbond_bessel.h"

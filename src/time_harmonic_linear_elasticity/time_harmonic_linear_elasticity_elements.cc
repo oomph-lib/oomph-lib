@@ -35,10 +35,10 @@ namespace oomph
 {
 
 
-/// Static default value for frequency (1.0 -- for natural scaling) 
+/// Static default value for square of frequency
  template <unsigned DIM>
- double TimeHarmonicLinearElasticityEquationsBase<DIM>::Default_omega_value=1.0;
-
+ double TimeHarmonicLinearElasticityEquationsBase<DIM>::Default_omega_sq_value=1.0;
+ 
 
 //////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////
@@ -238,7 +238,7 @@ get_stress(const Vector<double> &s,
   
 
   // Square of non-dimensional frequency
-  const double omega_sq = this->omega()*this->omega();
+  const double omega_sq_local = this->omega_sq();
   
   //Set up memory for the shape functions
   Shape psi(n_node);
@@ -329,7 +329,7 @@ get_stress(const Vector<double> &s,
          {
           // Acceleration and body force
           residuals[local_eqn] += 
-           (-omega_sq*interpolated_u[a].real()-b[a].real())*psi(l)*W;
+           (-omega_sq_local*interpolated_u[a].real()-b[a].real())*psi(l)*W;
           
           // Stress term
           for(unsigned b=0;b<DIM;b++)
@@ -362,7 +362,7 @@ get_stress(const Vector<double> &s,
                   if (a==c)
                    {
                     jacobian(local_eqn,local_unknown) -=
-                     omega_sq*psi(l)*psi(l2)*W;
+                     omega_sq_local*psi(l)*psi(l2)*W;
                    }
 
                   // Stress term 
@@ -392,7 +392,7 @@ get_stress(const Vector<double> &s,
          {
           // Acceleration and body force
           residuals[local_eqn] += 
-           (-omega_sq*interpolated_u[a].imag()-b[a].imag())*psi(l)*W;
+           (-omega_sq_local*interpolated_u[a].imag()-b[a].imag())*psi(l)*W;
           
           // Stress term
           for(unsigned b=0;b<DIM;b++)
@@ -425,7 +425,7 @@ get_stress(const Vector<double> &s,
                   if (a==c)
                    {
                     jacobian(local_eqn,local_unknown) -=
-                     omega_sq*psi(l)*psi(l2)*W;
+                     omega_sq_local*psi(l)*psi(l2)*W;
                    }
 
                   // Stress term 
@@ -600,7 +600,64 @@ void TimeHarmonicLinearElasticityEquations<DIM>::output(FILE* file_pt,
 }
 
 
+//=======================================================================
+/// Compute norm of the solution
+//=======================================================================
+template <unsigned DIM>
+void TimeHarmonicLinearElasticityEquations<DIM>::compute_norm(double& norm)
+{
+ 
+ // Initialise
+ norm=0.0;
+ 
+ //Vector of local coordinates
+ Vector<double> s(DIM);
+ 
+  // Vector for coordintes
+ Vector<double> x(DIM);
 
+ // Displacement vector
+ Vector<std::complex<double> > disp(DIM);
+
+ //Find out how many nodes there are in the element
+ unsigned n_node = this->nnode();
+ 
+ Shape psi(n_node);
+ 
+ //Set the value of n_intpt
+ unsigned n_intpt = this->integral_pt()->nweight();
+ 
+ //Loop over the integration points
+ for(unsigned ipt=0;ipt<n_intpt;ipt++)
+  {
+   
+   //Assign values of s
+   for(unsigned i=0;i<DIM;i++)
+    {
+     s[i] = this->integral_pt()->knot(ipt,i);
+    }
+   
+   //Get the integral weight
+   double w = this->integral_pt()->weight(ipt);
+   
+   // Get jacobian of mapping
+   double J=this->J_eulerian(s);
+   
+   //Premultiply the weights and the Jacobian
+   double W = w*J;
+   
+   // Get FE function value
+   this->interpolated_u_time_harmonic_linear_elasticity(s,disp);
+
+   // Add to  norm
+   for (unsigned ii=0;ii<DIM;ii++)
+    {
+     norm+=(disp[ii].real()*disp[ii].real()+disp[ii].imag()*disp[ii].imag())*W;
+    }
+  }
+}
+ 
+ 
 //Instantiate the required elements
 template class TimeHarmonicLinearElasticityEquationsBase<2>;
 template class TimeHarmonicLinearElasticityEquations<2>;

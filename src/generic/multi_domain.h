@@ -230,10 +230,46 @@ namespace Multi_domain_functions
   /// \short Boolean to indicate whether to document further info (to screen)
   ///        during setup_multi_domain_interaction() routines
   extern bool Doc_full_stats;
-
+  
+  /// \short Output file to document the boundary coordinate 
+  /// along the mesh boundary of the bulk mesh during call to
+  /// setup_bulk_elements_adjacent_to_face_mesh(...)
+  extern std::ofstream Doc_boundary_coordinate_file;
+  
 
   // Functions for multi-domain method
-
+  
+  /// \short Identify the \c FaceElements (stored in the mesh pointed to by
+  /// \c face_mesh_pt) that are adjacent to the bulk elements next to the
+  /// \c boundary_in_bulk_mesh -th boundary of the mesh pointed to by 
+  /// \c bulk_mesh_pt. The \c FaceElements must be derived
+  /// from the \c ElementWithExternalElement base class and the adjacent
+  /// bulk elements are stored as their external elements.
+  /// \n
+  /// This is the vector-based version which deals with multiple bulk 
+  /// mesh boundaries at the same time.
+  template<class BULK_ELEMENT, unsigned DIM>
+  void setup_bulk_elements_adjacent_to_face_mesh(
+   Problem* problem_pt,
+   Vector<unsigned>& boundary_in_bulk_mesh,
+   Mesh* const &bulk_mesh_pt,
+   Vector<Mesh*>& face_mesh_pt,
+   const unsigned& interaction=0);
+  
+  /// \short Identify the \c FaceElements (stored in the mesh pointed to by
+  /// \c face_mesh_pt) that are adjacent to the bulk elements next to the
+  /// \c boundary_in_bulk_mesh -th boundary of the mesh pointed to by 
+  /// \c bulk_mesh_pt. The \c FaceElements must be derived
+  /// from the \c ElementWithExternalElement base class and the adjacent
+  /// bulk elements are stored as their external elements.
+  template<class BULK_ELEMENT,unsigned DIM>
+   void setup_bulk_elements_adjacent_to_face_mesh(
+    Problem* problem_pt,
+    const unsigned& boundary_in_bulk_mesh,
+    Mesh* const& bulk_mesh_pt,
+    Mesh* const& face_mesh_pt,
+    const unsigned& interaction=0);
+  
   /// \short Set up the two-way multi-domain interactions for the 
   /// problem pointed to by \c problem_pt.
   /// Use this for cases where first_mesh_pt and second_mesh_pt

@@ -173,7 +173,7 @@ namespace oomph
      cast_father_element_pt->elasticity_tensor_pt();
     
     // Set the frequency
-    this->Omega_pt = cast_father_element_pt->omega_pt();
+    this->Omega_sq_pt = cast_father_element_pt->omega_sq_pt();
    }
    
    

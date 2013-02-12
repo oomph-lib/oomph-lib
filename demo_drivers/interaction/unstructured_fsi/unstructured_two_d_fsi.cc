@@ -533,7 +533,8 @@ UnstructuredFSIProblem<FLUID_ELEMENT,SOLID_ELEMENT>::UnstructuredFSIProblem()
  // Document the boundary coordinate  along the FSI interface 
  // of the fluid mesh during call to
  // setup_fluid_load_info_for_solid_elements()
- FSI_functions::Doc_boundary_coordinate_file.open("fluid_boundary_test.dat");
+ Multi_domain_functions::Doc_boundary_coordinate_file.open(
+  "fluid_boundary_test.dat");
 
  // Work out which fluid dofs affect the residuals of the wall elements:
  // We pass the boundary between the fluid and solid meshes and 
@@ -543,7 +544,7 @@ UnstructuredFSIProblem<FLUID_ELEMENT,SOLID_ELEMENT>::UnstructuredFSIProblem()
   (this,3,Fluid_mesh_pt,Traction_mesh_pt);
  
  // Close the doc file
- FSI_functions::Doc_boundary_coordinate_file.close();
+ Multi_domain_functions::Doc_boundary_coordinate_file.close();
 
  // Sanity check: Doc boundary coordinates from solid side
  doc_solid_boundary_coordinates();

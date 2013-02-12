@@ -29,6 +29,9 @@
 #define OOMPH_FSI_PRECONDITIONERS_HEADER
 
 
+
+#include "../navier_stokes/navier_stokes_preconditioners.h"
+
 namespace oomph
 {
 

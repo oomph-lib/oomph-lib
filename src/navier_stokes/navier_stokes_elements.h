@@ -2617,7 +2617,8 @@ public virtual QElement<1,3>
  
   /// \short Number of history values to be stored for fld-th field. Whatever
   /// the timestepper has set up for the velocity components and
-  /// none for the pressure field.
+  /// none for the pressure field.   
+  /// (Note: count includes current value!)
   unsigned nhistory_values_for_projection(const unsigned &fld)
    {
     if (fld==this->dim())
@@ -2631,7 +2632,8 @@ public virtual QElement<1,3>
      }
    }
 
-  ///\short Number of positional history values
+  /// \short Number of positional history values 
+  /// (Note: count includes current value!)
   unsigned nhistory_values_for_coordinate_projection()
    {
     return this->node_pt(0)->position_time_stepper_pt()->ntstorage();
@@ -2835,6 +2837,7 @@ public virtual QElement<1,3>
   /// \short Number of history values to be stored for fld-th field. Whatever
   /// the timestepper has set up for the velocity components and
   /// none for the pressure field.
+  /// (Note: count includes current value!)
   unsigned nhistory_values_for_projection(const unsigned &fld)
    {
     if (fld==this->dim())
@@ -2848,7 +2851,8 @@ public virtual QElement<1,3>
      }
    }
 
-  ///\short Number of positional history values
+  ///\short Number of positional history values.
+  /// (Note: count includes current value!)
   unsigned nhistory_values_for_coordinate_projection()
    {
     return this->node_pt(0)->position_time_stepper_pt()->ntstorage();

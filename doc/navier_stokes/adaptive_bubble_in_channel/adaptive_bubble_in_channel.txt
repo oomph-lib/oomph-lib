@@ -432,6 +432,40 @@ onto the curvilinear boundary that is still defined by the
 
 @I w 0.6\textwidth remesh_3 "Sketch showing the mesh following the snapping of nodes to the curvilinear boundary. "
 
+
+
+<BR>
+<BR>
+<BR>
+<CENTER>
+<TABLE BORDER=1, WIDTH=500px>
+<TR>
+<TD bgcolor="cornsilk">
+<CENTER>
+\n
+\b IMPORTANT: 
+\n
+Note that the initial shape of moving free boundaries 
+\b must \b not be described by \c TriangleMeshCurviLines. While the
+use of  \c TriangleMeshCurviLines would ensure that the nodes are 
+initially located exactly on the curvilinear boundary described by 
+the associated \c GeomObject without having to "snap" them to their desired
+position, a problem arises when the mesh is adapted. When
+this happens, nodes on curvilinear boundaries that are described by
+\c TriangleMeshCurviLines are placed
+on the (presumably unchanged) geometry defined by the associated
+\c GeomObject rather than being placed on the deformed boundary
+as described above -- the free surface therefore keeps jumping
+back to its initial position whenever the mesh is adapted 
+which is unlikely to be desired!
+</CENTER>
+\n
+</TD>
+</TR>
+</TABLE>
+</CENTER>
+
+
 \subsection issues Modifications to the basic mesh re-generation procedure
 The procedure described above is very robust and works satisfactorily 
 in the example problem discussed in this tutorial. Below we discuss a

@@ -719,6 +719,7 @@ class FaceGeometry<QFoepplvonKarmanElement<NNODE_1D> >:
    }
 
   /// \short Number of history values to be stored for fld-th field.
+  /// (Note: count includes current value!)
   unsigned nhistory_values_for_projection(const unsigned &fld)
   {
 #ifdef PARANOID
@@ -739,6 +740,7 @@ class FaceGeometry<QFoepplvonKarmanElement<NNODE_1D> >:
 
 
   ///\short Number of positional history values
+  /// (Note: count includes current value!)
   unsigned nhistory_values_for_coordinate_projection()
    {
     return this->node_pt(0)->position_time_stepper_pt()->ntstorage();

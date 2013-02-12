@@ -288,8 +288,8 @@ template <class ELEMENT>
       {
        //Get the nodal value of the helmholtz unknown
        const std::complex<double> phi_value(
-        raw_nodal_value(l,u_index_helmholtz().real()),
-        raw_nodal_value(l,u_index_helmholtz().imag()));
+        nodal_value(l,u_index_helmholtz().real()),
+        nodal_value(l,u_index_helmholtz().imag()));
        
        interpolated_phi += phi_value*psi(l);
       }
@@ -404,8 +404,8 @@ template <class ELEMENT>
       
       //Get the nodal value of the helmholtz unknown
       const std::complex<double> u_value(
-       this->raw_nodal_value(l,this->U_index_helmholtz.real()),
-       this->raw_nodal_value(l,this->U_index_helmholtz.imag()));
+       this->nodal_value(l,this->U_index_helmholtz.real()),
+       this->nodal_value(l,this->U_index_helmholtz.imag()));
 
       //Add to the interpolated value
       interpolated_u += u_value*psi(l);         
@@ -725,8 +725,8 @@ class HelmholtzAbsorbingBCElement : public  HelmholtzBCElementBase<ELEMENT>
       // Loop over real and imag part
       //Get the nodal value of the helmholtz unknown
       const std::complex<double> u_value(
-       this->raw_nodal_value(l,this->U_index_helmholtz.real()),
-       this->raw_nodal_value(l,this->U_index_helmholtz.imag()));
+       this->nodal_value(l,this->U_index_helmholtz.real()),
+       this->nodal_value(l,this->U_index_helmholtz.imag()));
 
       interpolated_u += u_value*psi[l];
 
@@ -1469,8 +1469,8 @@ template<class ELEMENT>
       
       //Get the nodal value of the helmholtz unknown
       std::complex<double> u_value(
-       this->raw_nodal_value(l,this->U_index_helmholtz.real()),
-       this->raw_nodal_value(l,this->U_index_helmholtz.imag()));
+       this->nodal_value(l,this->U_index_helmholtz.real()),
+       this->nodal_value(l,this->U_index_helmholtz.imag()));
 
       interpolated_u += u_value*psi(l);
      } // End of loop over the nodes

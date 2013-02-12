@@ -361,7 +361,11 @@ WARN_LOGFILE           =
 # directories like "/usr/src/myproject". Separate the files or directories 
 # with spaces.
 
-INPUT =  ../../src/multi_physics  ../../src/navier_stokes ../../src/generic ../../src/poisson ../../src/meshes . ../../src/axisym_navier_stokes ../../src/fluid_interface ../../src/solid ../../src/constitutive ../../src/axisym_spherical_solid  ../../src/beam ../../src/shell  ../../src/advection_diffusion  ../../src/unsteady_heat  ../../src/linear_wave ../../src/womersley ../../src/linear_elasticity ../../src/advection_diffusion_reaction ../../src/rigid_body .
+INPUT = . ../../src/advection_diffusion		../../src/fluid_interface		../../src/Makefile.in			 ../../src/spherical_navier_stokes ../../src/advection_diffusion_reaction	../../src/flux_transport		../../src/meshes			 ../../src/status.txt ../../src/axisym_advection_diffusion	../../src/foeppl_von_karman		../../src/mesh_smoothing		 ../../src/steady_axisym_advection_diffusion ../../src/axisym_linear_elasticity	../../src/fourier_decomposed_helmholtz	../../src/multi_physics			 ../../src/time_harmonic_fourier_decomposed_linear_elasticity ../../src/axisym_navier_stokes		../../src/generalised_helmholtz		../../src/navier_stokes			 ../../src/time_harmonic_linear_elasticity ../../src/axisym_spherical_solid	../../src/generic			../../src/poisson			 ../../src/unsteady_heat ../../src/beam				../../src/helmholtz			../../src/polar_navier_stokes		 ../../src/womersley ../../src/biharmonic			../../src/linear_elasticity		../../src/rigid_body			 ../../src/young_laplace ../../src/constitutive			../../src/linear_wave			../../src/shell ../../src/diff2.txt			../../src/Makefile			../../src/solid ../../src/diff.txt			../../src/Makefile.am			../../src/spherical_advection_diffusion
+
+
+
+#../../src/multi_physics  ../../src/navier_stokes ../../src/generic ../../src/poisson ../../src/meshes . ../../src/axisym_navier_stokes ../../src/fluid_interface ../../src/solid ../../src/constitutive ../../src/axisym_spherical_solid  ../../src/beam ../../src/shell  ../../src/advection_diffusion  ../../src/unsteady_heat  ../../src/linear_wave ../../src/womersley ../../src/linear_elasticity ../../src/advection_diffusion_reaction ../../src/rigid_body .
 
 # If the value of the INPUT tag contains directories, you can use the 
 # FILE_PATTERNS tag to specify one or more wildcard pattern (like *.cpp 
@@ -382,7 +386,8 @@ RECURSIVE              = NO
 # excluded from the INPUT source files. This way you can easily exclude a 
 # subdirectory from a directory tree whose root is specified with the INPUT tag.
 
-EXCLUDE                = ../../src/meshes/simple_rectangular_quadmesh.h ../../src/meshes/one_d_mesh.h ../../src/meshes/fish_mesh.h
+EXCLUDE                = 
+#../../src/meshes/simple_rectangular_quadmesh.h ../../src/meshes/one_d_mesh.h ../../src/meshes/fish_mesh.h
 
 # The EXCLUDE_SYMLINKS tag can be used select whether or not files or directories 
 # that are symbolic links (a Unix filesystem feature) are excluded from the input.
@@ -832,11 +837,11 @@ PERLMOD_MAKEVAR_PREFIX =
 # Configuration options related to the preprocessor   
 #---------------------------------------------------------------------------
 
-# If the ENABLE_PREPROCESSING tag is set to YES (the default) Doxygen will 
+# If the ENABLE_PREPROCESSING   tag is set to YES (the default) Doxygen will 
 # evaluate all C-preprocessor directives found in the sources and include 
 # files.
 
-ENABLE_PREPROCESSING   = YES
+ENABLE_PREPROCESSING = NO #    = YES
 
 # If the MACRO_EXPANSION tag is set to YES Doxygen will expand all macro 
 # names in the source code. If set to NO (the default) only conditional 
@@ -985,14 +990,14 @@ UML_LOOK               = NO
 
 TEMPLATE_RELATIONS     = NO
 
-# If the ENABLE_PREPROCESSING, SEARCH_INCLUDES, INCLUDE_GRAPH, and HAVE_DOT 
+# If the ENABLE_PREPROCESSING  , SEARCH_INCLUDES, INCLUDE_GRAPH, and HAVE_DOT 
 # tags are set to YES then doxygen will generate a graph for each documented 
 # file showing the direct and indirect include dependencies of the file with 
 # other documented files.
 
 INCLUDE_GRAPH          = YES
 
-# If the ENABLE_PREPROCESSING, SEARCH_INCLUDES, INCLUDED_BY_GRAPH, and 
+# If the ENABLE_PREPROCESSING  , SEARCH_INCLUDES, INCLUDED_BY_GRAPH, and 
 # HAVE_DOT tags are set to YES then doxygen will generate a graph for each 
 # documented header file showing the documented files that directly or 
 # indirectly include this file.

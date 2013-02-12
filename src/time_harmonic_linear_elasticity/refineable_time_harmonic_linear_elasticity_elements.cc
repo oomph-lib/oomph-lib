@@ -77,7 +77,7 @@ namespace oomph
    }
   
   // Square of non-dimensional frequency
-  const double omega_sq = this->omega()*this->omega();
+  const double omega_sq_local = this->omega_sq();
   
   //Set up memory for the shape functions
   Shape psi(n_node);
@@ -203,7 +203,7 @@ namespace oomph
            {
             // Acceleration and body force
             residuals[local_eqn] += 
-             (-omega_sq*interpolated_u[a].real()
+             (-omega_sq_local*interpolated_u[a].real()
               -b[a].real())*psi(l)*W*hang_weight;
             
             // Stress term
@@ -277,7 +277,8 @@ namespace oomph
                         if (a==c)
                          {
                           jacobian(local_eqn,local_unknown) -=
-                           omega_sq*psi(l)*psi(l2)*W*hang_weight*hang_weight2;
+                           omega_sq_local*psi(l)*psi(l2)*W*
+                           hang_weight*hang_weight2;
                          }
 
                         // Stress term
@@ -325,7 +326,7 @@ namespace oomph
            {
             // Acceleration and body force
             residuals[local_eqn] += 
-             (-omega_sq*interpolated_u[a].imag()
+             (-omega_sq_local*interpolated_u[a].imag()
               -b[a].imag())*psi(l)*W*hang_weight;
             
             // Stress term
@@ -400,7 +401,8 @@ namespace oomph
                         if (a==c)
                          {
                           jacobian(local_eqn,local_unknown) -=
-                           omega_sq*psi(l)*psi(l2)*W*hang_weight*hang_weight2;
+                           omega_sq_local*psi(l)*psi(l2)*W*
+                           hang_weight*hang_weight2;
                          }
 
                         // Stress term

@@ -12,7 +12,7 @@ adaptive_scattering_SOURCES = scattering.cc
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
-adaptive_scattering_LDADD = -L@libdir@ -lhelmholtz -lgeneric -loomph_crbond_bessel $(EXTERNAL_LIBS) $(FLIBS)
+adaptive_scattering_LDADD = -L@libdir@ -lhelmholtz -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
 
 adaptive_scattering_CXXFLAGS = -DADAPTIVE
 
@@ -23,7 +23,7 @@ scattering_SOURCES = scattering.cc
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
-scattering_LDADD = -L@libdir@ -lhelmholtz -lgeneric -loomph_crbond_bessel $(EXTERNAL_LIBS) $(FLIBS)
+scattering_LDADD = -L@libdir@ -lhelmholtz -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
 
 #--------------------------------------
 
@@ -32,7 +32,7 @@ unstructured_scattering_SOURCES = unstructured_scattering.cc
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
-unstructured_scattering_LDADD = -L@libdir@ -lhelmholtz -lgeneric -loomph_crbond_bessel $(EXTERNAL_LIBS) $(FLIBS)
+unstructured_scattering_LDADD = -L@libdir@ -lhelmholtz -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
 
 #--------------------------------------
 
@@ -41,7 +41,7 @@ adaptive_unstructured_scattering_SOURCES = unstructured_scattering.cc
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
-adaptive_unstructured_scattering_LDADD = -L@libdir@ -lhelmholtz -lgeneric -loomph_crbond_bessel $(EXTERNAL_LIBS) $(FLIBS)
+adaptive_unstructured_scattering_LDADD = -L@libdir@ -lhelmholtz -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
 
 adaptive_unstructured_scattering_CXXFLAGS = -DADAPTIVE
 
@@ -49,4 +49,3 @@ adaptive_unstructured_scattering_CXXFLAGS = -DADAPTIVE
 #--------------------------------------
 
 
-EXTRA_DIST += annular_meshes.h

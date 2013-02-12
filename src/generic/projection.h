@@ -28,8 +28,6 @@
 //Header file for a classes used to represent projectable elements
 
 // TODO:
-// -- Force user to specify which field is interpolated isoparametrically
-//    and can therefore be abused for coordinate projection
 // -- Switch to more efficient solver for projection problem.
    
 
@@ -127,11 +125,12 @@ public:
  /// this would be 3 (for the two velocities and one pressure)
  virtual unsigned nfields_for_projection()=0;
 
- ///Number of history values to be stored for fld-th field
+ /// \short Number of history values to be stored for fld-th field  
+ /// (includes current value!)
  virtual unsigned nhistory_values_for_projection(const unsigned &fld)=0;
 
  ///\short Number of history values to be stored when projecting 
- /// the history values of the nodal coordinates
+ /// the history values of the nodal coordinates (includes current value!)
  virtual unsigned nhistory_values_for_coordinate_projection()=0;
 
  /// \short Return number of values (pinned or not) associated with 

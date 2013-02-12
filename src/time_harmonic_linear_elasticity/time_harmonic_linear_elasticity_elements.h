@@ -49,6 +49,7 @@
 #include "../generic/mesh.h"
 #include "../generic/hermite_elements.h"
 #include "./time_harmonic_elasticity_tensor.h"
+#include "../generic/projection.h"
 
 namespace oomph
 {
@@ -156,7 +157,7 @@ namespace oomph
    /// isotropic growth function. Set physical parameter values to 
    /// default values, and set body force to zero.
     TimeHarmonicLinearElasticityEquationsBase() : Elasticity_tensor_pt(0),
-    Omega_pt(&Default_omega_value), Body_force_fct_pt(0) {}
+    Omega_sq_pt(&Default_omega_sq_value), Body_force_fct_pt(0) {}
    
    /// Return the pointer to the elasticity_tensor
    TimeHarmonicElasticityTensor* &elasticity_tensor_pt()
@@ -169,11 +170,11 @@ namespace oomph
     return (*Elasticity_tensor_pt)(i,j,k,l);
    }
    
-   ///Access function for non-dim frequency
-   const double& omega() const {return *Omega_pt;}
+   ///Access function for square of non-dim frequency
+   const double& omega_sq() const {return *Omega_sq_pt;}
    
-   /// Access function for non-dim frequency
-   double* &omega_pt() {return Omega_pt;}
+   /// Access function for square of non-dim frequency
+   double* &omega_sq_pt() {return Omega_sq_pt;}
    
    /// Access function: Pointer to body force function
    BodyForceFctPt& body_force_fct_pt() {return Body_force_fct_pt;}
@@ -280,14 +281,14 @@ namespace oomph
    /// Pointer to the elasticity tensor
    TimeHarmonicElasticityTensor *Elasticity_tensor_pt;
    
-   /// Nondim frequency
-   double* Omega_pt;
+   /// Square of nondim frequency
+   double* Omega_sq_pt;
 
    /// Pointer to body force function
    BodyForceFctPt Body_force_fct_pt;
    
-   /// Static default value for frequency (1.0 -- for natural scaling) 
-   static double Default_omega_value;
+   /// Static default value for square of frequency 
+   static double Default_omega_sq_value;
    
   };
  
@@ -365,6 +366,9 @@ namespace oomph
    void output(FILE* file_pt, const unsigned &n_plot);
    
    
+   /// \short Compute norm of solution: square of the L2 norm
+   void compute_norm(double& norm);
+
     private:
    
    /// \short Private helper function to compute residuals and (if requested
@@ -491,6 +495,205 @@ namespace oomph
     /// Constructor must call the constructor of the underlying element
      FaceGeometry() : QElement<2,4>() {}
    };
+
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+
+
+//==========================================================
+/// Time-harmonic linear elasticity upgraded to become projectable
+//==========================================================
+ template<class TIME_HARMONIC_LINEAR_ELAST_ELEMENT>
+ class ProjectableTimeHarmonicLinearElasticityElement : 
+  public virtual ProjectableElement<TIME_HARMONIC_LINEAR_ELAST_ELEMENT>
+ {
+  
+ public:
+  
+  /// \short Constructor [this was only required explicitly
+  /// from gcc 4.5.2 onwards...]
+  ProjectableTimeHarmonicLinearElasticityElement(){}
+  
+  
+  /// \short Specify the values associated with field fld. 
+  /// The information is returned in a vector of pairs which comprise 
+  /// the Data object and the value within it, that correspond to field fld. 
+  /// In the underlying time-harmonic linear elasticity elemements the 
+  /// real and complex parts of the displacements are stored
+  /// at the nodal values
+  Vector<std::pair<Data*,unsigned> > data_values_of_field(const unsigned& fld)
+   {   
+    // Create the vector
+    Vector<std::pair<Data*,unsigned> > data_values;
+    
+    // Loop over all nodes and extract the fld-th nodal value
+    unsigned nnod=this->nnode();
+    for (unsigned j=0;j<nnod;j++)
+     {
+      // Add the data value associated with the velocity components
+      data_values.push_back(std::make_pair(this->node_pt(j),fld));
+     }
+    
+    // Return the vector
+    return data_values;
+    
+   }
+
+  /// \short Number of fields to be projected: 2*dim, corresponding to 
+  /// real and imag parts of the displacement components
+  unsigned nfields_for_projection()
+   {
+    return 2*this->dim();
+   }
+  
+  /// \short Number of history values to be stored for fld-th field. 
+  /// (includes present value!)
+  unsigned nhistory_values_for_projection(const unsigned &fld)
+   {
+#ifdef PARANOID
+    if (fld>3)
+     {
+      std::stringstream error_stream;
+      error_stream 
+       << "Elements only store four fields so fld can't be"
+       << " " << fld << std::endl;
+      throw OomphLibError(
+       error_stream.str(),
+       "ProjectableTimeHarmonicLinearElasticityElement::nhistory_values_for_projection()",
+       OOMPH_EXCEPTION_LOCATION);
+     }
+#endif
+   return this->node_pt(0)->ntstorage();   
+   }
+  
+  ///\short Number of positional history values: Read out from
+  /// positional timestepper 
+  /// (Note: count includes current value!)
+  unsigned nhistory_values_for_coordinate_projection()
+   {
+    return this->node_pt(0)->position_time_stepper_pt()->ntstorage();
+   }
+  
+  /// \short Return Jacobian of mapping and shape functions of field fld
+  /// at local coordinate s
+  double jacobian_and_shape_of_field(const unsigned &fld, 
+                                     const Vector<double> &s, 
+                                     Shape &psi)
+   {
+    unsigned n_dim=this->dim();
+    unsigned n_node=this->nnode();
+    DShape dpsidx(n_node,n_dim);
+        
+    // Call the derivatives of the shape functions and return
+    // the Jacobian
+    return this->dshape_eulerian(s,psi,dpsidx);
+   }
+  
+
+
+  /// \short Return interpolated field fld at local coordinate s, at time level
+  /// t (t=0: present; t>0: history values)
+  double get_field(const unsigned &t, 
+                   const unsigned &fld,
+                   const Vector<double>& s)
+   {
+    unsigned n_node=this->nnode();
+
+#ifdef PARANOID
+    unsigned n_dim=this->node_pt(0)->ndim();
+#endif
+    
+    //Local shape function
+    Shape psi(n_node);
+    
+    //Find values of shape function
+    this->shape(s,psi);
+    
+    //Initialise value of u
+    double interpolated_u = 0.0;
+    
+    //Sum over the local nodes at that time
+    for(unsigned l=0;l<n_node;l++) 
+     {
+#ifdef PARANOID
+      unsigned nvalue=this->node_pt(l)->nvalue();
+      if (nvalue!=2*n_dim)
+       {        
+        std::stringstream error_stream;
+        error_stream 
+         << "Current implementation only works for non-resized nodes\n"
+         << "but nvalue= " << nvalue << "!= 2 dim = " << 2*n_dim << std::endl;
+        throw OomphLibError(
+         error_stream.str(),
+         "ProjectableTimeHarmonicLinearElasticityElement::get_field()",
+         OOMPH_EXCEPTION_LOCATION);
+       }
+#endif
+      interpolated_u += this->nodal_value(t,l,fld)*psi[l];
+     }
+    return interpolated_u;     
+   }
+  
+ 
+  ///Return number of values in field fld
+  unsigned nvalue_of_field(const unsigned &fld)
+   {
+    return this->nnode();
+   }
+  
+  
+  ///Return local equation number of value j in field fld.
+  int local_equation(const unsigned &fld,
+                     const unsigned &j)
+   {
+#ifdef PARANOID
+    unsigned n_dim=this->node_pt(0)->ndim();
+    unsigned nvalue=this->node_pt(j)->nvalue();
+    if (nvalue!=2*n_dim)
+     {        
+      std::stringstream error_stream;
+      error_stream 
+       << "Current implementation only works for non-resized nodes\n"
+       << "but nvalue= " << nvalue << "!= 2 dim = " << 2*n_dim << std::endl;
+      throw OomphLibError(
+         error_stream.str(),
+         "ProjectableTimeHarmonicLinearElasticityElement::local_equation()",
+         OOMPH_EXCEPTION_LOCATION);
+     }
+#endif
+    return this->nodal_local_eqn(j,fld);
+   }
+
+  
+ };
+
+
+//=======================================================================
+/// Face geometry for element is the same as that for the underlying
+/// wrapped element
+//=======================================================================
+ template<class ELEMENT>
+ class FaceGeometry<ProjectableTimeHarmonicLinearElasticityElement<ELEMENT> > 
+  : public virtual FaceGeometry<ELEMENT>
+ {
+ public:
+  FaceGeometry() : FaceGeometry<ELEMENT>() {}
+ };
+
+
+//=======================================================================
+/// Face geometry of the Face Geometry for element is the same as 
+/// that for the underlying wrapped element
+//=======================================================================
+ template<class ELEMENT>
+ class FaceGeometry<FaceGeometry<ProjectableTimeHarmonicLinearElasticityElement<ELEMENT> > >
+  : public virtual FaceGeometry<FaceGeometry<ELEMENT> >
+ {
+ public:
+  FaceGeometry() : FaceGeometry<FaceGeometry<ELEMENT> >() {}
+ };
+
 
 }
 

@@ -2,7 +2,7 @@
 
 
 $!VARSET |nstep|=21
-$!VARSET |ampl|=0.05
+$!VARSET |ampl|=0.5
 $!VARSET |PNG|=1
 
 $!NEWLAYOUT 
@@ -17,7 +17,7 @@ $!IF |PNG|==0
        EXPORTREGION = ALLFRAMES 
 $!ENDIF         
 
-$!READDATASET  '"RESLT/elast_soln20.dat" '
+$!READDATASET  '"RESLT/elast_soln0.dat" '
   READDATAOPTION = NEW
   RESETSTYLE = YES
   INCLUDETEXT = NO
