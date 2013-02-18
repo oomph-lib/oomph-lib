@@ -32,8 +32,8 @@ cat RESLT/wall_soln5.dat RESLT/soln5.dat > result_superlu.dat
 if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py 0.1 2.0e-14 ../validata/result_superlu.dat.gz \
-    result_superlu.dat  >> validation.log
+../../../../bin/fpdiff.py  ../validata/result_superlu.dat.gz \
+    result_superlu.dat 0.1 2.0e-14 >> validation.log
 fi
 
 max_iter=`grep iterations RESLT/OUTPUT_STEADY.0  | awk 'BEGIN{max=0}{if ($NF>max) max=$NF}END{print max}'`
@@ -79,8 +79,8 @@ cat RESLT/wall_soln5.dat RESLT/soln5.dat > result_opt.dat
 if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py 0.1 2.0e-14 ../validata/result_opt.dat.gz \
-    result_opt.dat  >> validation.log
+../../../../bin/fpdiff.py ../validata/result_opt.dat.gz \
+    result_opt.dat   0.1 2.0e-14  >> validation.log
 fi
 
 max_iter=`grep iterations RESLT/OUTPUT_STEADY.0  | awk 'BEGIN{max=0}{if ($NF>max) max=$NF}END{print max}'`

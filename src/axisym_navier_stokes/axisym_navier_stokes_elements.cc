@@ -647,6 +647,21 @@ void AxisymmetricNavierStokesEquations::traction(const Vector<double>& s,
  // "AxisymmetricNavierStokesEquations::traction()",
  // OOMPH_EXCEPTION_LOCATION);
 
+ // Pad out normal vector if required
+ Vector<double> n_local(3,0.0);
+ n_local[0]=N[0];
+ n_local[1]=N[1];
+
+#ifdef PARANOID
+ if ((N.size()==3)&&(N[2]!=0.0))
+  {
+   throw OomphLibError(
+    "Unit normal passed into this fct should either be 2D (r,z) or have a zero component in the theta-direction",
+    "AxisymmetricNavierStokesEquations::traction()",
+    OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+
  // Get velocity gradients
  DenseMatrix<double> strainrate(3,3);
  strain_rate(s,strainrate);
@@ -657,10 +672,10 @@ void AxisymmetricNavierStokesEquations::traction(const Vector<double>& s,
  // Loop over traction components
  for (unsigned i=0;i<3;i++)
   {
-   traction[i]=-press*N[i];
+   traction[i]=-press*n_local[i];
    for (unsigned j=0;j<3;j++)
     {
-     traction[i]+=2.0*strainrate(i,j)*N[j];
+     traction[i]+=2.0*strainrate(i,j)*n_local[j];
     }
   }
 }

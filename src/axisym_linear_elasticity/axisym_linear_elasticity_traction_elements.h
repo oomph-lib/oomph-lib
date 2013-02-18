@@ -26,7 +26,7 @@
 //LIC// 
 //LIC//====================================================================
 //Header file for elements that are used to apply surface loads to 
-//the equations of time-harmonic Fourier decomposed linear elasticity
+//the equations of axisymmetric linear elasticity
 
 #ifndef OOMPH_AXISYMMETRIC_LINEAR_ELASTICITY_TRACTION_ELEMENTS_HEADER
 #define OOMPH_AXISYMMETRIC_LINEAR_ELASTICITY_TRACTION_ELEMENTS_HEADER
@@ -46,8 +46,8 @@ namespace oomph
 
 
 //=======================================================================
-/// Namespace containing the zero traction function for time-harmonic
-/// Fourier decomposed linear elasticity traction elements
+/// Namespace containing the zero traction function for
+/// axisymmetric linear elasticity traction elements
 //=======================================================================
 namespace AxisymmetricLinearElasticityTractionElementHelper
  {
@@ -69,7 +69,7 @@ namespace AxisymmetricLinearElasticityTractionElementHelper
 
 //======================================================================
 /// A class for elements that allow the imposition of an applied traction
-/// in the equations of time-harmonic Fourier decomposed linear elasticity.
+/// in the equations of axisymmetric linear elasticity.
 /// The geometrical information can be read from the FaceGeometry<ELEMENT> 
 /// class and and thus, we can be generic enough without the need to have
 /// a separate equations class.
@@ -137,8 +137,7 @@ public virtual FaceGeometry<ELEMENT>,
    
    //Find the index at which the displacement unknowns are stored
    ELEMENT* cast_element_pt = dynamic_cast<ELEMENT*>(element_pt);
-   this->
-    U_index_axisymmetric_linear_elasticity_traction.resize(n_dim+1);
+   this->U_index_axisymmetric_linear_elasticity_traction.resize(n_dim+1);
    for(unsigned i=0;i<n_dim+1;i++)
     {
      this->
@@ -357,9 +356,7 @@ template<class ELEMENT>
   unsigned u_nodal_index[n_dim+1];
   for(unsigned i=0;i<n_dim+1;i++)
    {
-    u_nodal_index[i] = 
-     this->
-     U_index_axisymmetric_linear_elasticity_traction[i];
+    u_nodal_index[i]=this->U_index_axisymmetric_linear_elasticity_traction[i];
    }
   
   //Integer to hold the local equation number
@@ -478,6 +475,363 @@ template<class ELEMENT>
   
  }
 
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
+
+
+//======================================================================
+/// A class for elements that allow the imposition of an applied traction
+/// in the equations of axisymmetric linear elasticity from an adjacent
+/// axisymmetric Navier Stokes element in a linearised FSI problem.
+/// The geometrical information can be read from the FaceGeometry<ELEMENT> 
+/// class and and thus, we can be generic enough without the need to have
+/// a separate equations class.
+//======================================================================
+ template <class ELASTICITY_BULK_ELEMENT, class NAVIER_STOKES_BULK_ELEMENT>
+ class FSIAxisymmetricLinearElasticityTractionElement : 
+  public virtual FaceGeometry<ELASTICITY_BULK_ELEMENT>, 
+  public virtual FaceElement, 
+  public virtual ElementWithExternalElement
+ {
+  
+ protected:
+
+  /// \short Pointer to the ratio, \f$ Q \f$ , of the stress used to
+  /// non-dimensionalise the fluid stresses to the stress used to
+  /// non-dimensionalise the solid stresses.
+  double *Q_pt;
+
+  /// \short Static default value for the ratio of stress scales
+  /// used in the fluid and solid equations (default is 1.0)
+  static double Default_Q_Value;
+  
+  /// Index at which the i-th displacement component is stored
+  Vector<unsigned>  U_index_axisym_fsi_traction;
+  
+  /// \short Helper function that actually calculates the residuals
+  // This small level of indirection is required to avoid calling
+  // fill_in_contribution_to_residuals in fill_in_contribution_to_jacobian
+  // which causes all kinds of pain if overloading later on
+  void fill_in_contribution_to_residuals_axisym_fsi_traction(
+   Vector<double> &residuals);
+  
+ public:
+  
+  /// \short Constructor, which takes a "bulk" element and the 
+  /// value of the index and its limit
+  FSIAxisymmetricLinearElasticityTractionElement(
+   FiniteElement* const &element_pt, 
+   const int &face_index) : 
+  FaceGeometry<ELASTICITY_BULK_ELEMENT>(), FaceElement(), 
+   Q_pt(&Default_Q_Value)
+    { 
+     // Set source element storage: one interaction with an external 
+     // element -- the Navier Stokes bulk element that provides the traction
+     this->set_ninteraction(1); 
+     
+     //Attach the geometrical information to the element. N.B. This function
+     //also assigns nbulk_value from the required_nvalue of the bulk element
+     element_pt->build_face_element(face_index,this);
+     
+     //Find the dimension of the problem
+     unsigned n_dim = element_pt->nodal_dimension();
+     
+     //Find the index at which the displacement unknowns are stored
+     ELASTICITY_BULK_ELEMENT* cast_element_pt = 
+      dynamic_cast<ELASTICITY_BULK_ELEMENT*>(element_pt);
+     this->U_index_axisym_fsi_traction.resize(n_dim+1);
+     for(unsigned i=0;i<n_dim+1;i++)
+      {
+       this->U_index_axisym_fsi_traction[i] = 
+        cast_element_pt->u_index_axisymmetric_linear_elasticity(i);
+      }
+    }
+  
+  
+  /// Return the residuals
+  void fill_in_contribution_to_residuals(Vector<double> &residuals)
+   {
+    fill_in_contribution_to_residuals_axisym_fsi_traction(residuals);
+   }
+  
+  
+
+  /// Fill in contribution from Jacobian
+  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
+                                        DenseMatrix<double> &jacobian)
+   {
+    //Call the residuals
+    fill_in_contribution_to_residuals_axisym_fsi_traction(residuals);
+    
+    //Derivatives w.r.t. external data
+    fill_in_jacobian_from_external_interaction_by_fd(residuals,jacobian);
+   }
+
+  /// \short Return the ratio of the stress scales used to non-dimensionalise
+  /// the fluid and elasticity equations. E.g. 
+  /// \f$ Q = (\omega a)^2 \rho/E \f$, i.e. the
+  /// ratio between the inertial fluid stress and the solid's elastic
+  /// modulus E.
+  const double &q() const {return *Q_pt;}
+  
+  /// \short Return a pointer the ratio of stress scales used to 
+  /// non-dimensionalise the fluid and solid equations.
+  double* &q_pt() {return Q_pt;}
+
+  
+  /// \short Output function
+  void output(std::ostream &outfile)
+   {
+    /// Dummy
+    unsigned nplot=0;
+    output(outfile,nplot);
+   }
+
+  /// \short Output function: Plot traction etc at Gauss points
+  /// nplot is ignored.
+  void output(std::ostream &outfile, const unsigned &n_plot)
+   {
+    // Dimension
+    unsigned n_dim = this->nodal_dimension();
+    
+    // Get FSI parameter
+    const double q_value=q();
+    
+    // Storage for traction (includes swirl!)
+    Vector<double> traction(n_dim+1);
+        
+    outfile << "ZONE\n";
+    
+    //Set the value of n_intpt
+    unsigned n_intpt = integral_pt()->nweight();
+    
+    //Loop over the integration points
+    for(unsigned ipt=0;ipt<n_intpt;ipt++)
+     {    
+      Vector<double> s_int(n_dim-1);
+      s_int[0]=integral_pt()->knot(ipt,0);
+      
+      //Get the outer unit normal
+      Vector<double> interpolated_normal(n_dim);
+      outer_unit_normal(ipt,interpolated_normal);
+      
+      // Boundary coordinate
+      Vector<double> zeta(1);
+      interpolated_zeta(s_int,zeta);
+      
+      // Get bulk element for traction
+      NAVIER_STOKES_BULK_ELEMENT* ext_el_pt=
+       dynamic_cast<NAVIER_STOKES_BULK_ELEMENT*>(external_element_pt(0,ipt));
+      Vector<double> s_ext(external_element_local_coord(0,ipt));
+      
+      // Get traction from bulk element (on fluid scale)
+      ext_el_pt->traction(s_ext, 
+                          interpolated_normal,
+                          traction);
+    
+      outfile << ext_el_pt->interpolated_x(s_ext,0) << " "
+              << ext_el_pt->interpolated_x(s_ext,1) << " "
+              << q_value*traction[0] << " " 
+              << q_value*traction[1] << " " 
+              << q_value*traction[2] << " " 
+              << interpolated_normal[0] << " " 
+              << interpolated_normal[1] << " " 
+              << zeta[0]   << std::endl;
+     }
+   }
+  
+  /// \short C_style output function
+  void output(FILE* file_pt)
+   {FaceGeometry<ELASTICITY_BULK_ELEMENT>::output(file_pt);}
+  
+  /// \short C-style output function
+  void output(FILE* file_pt, const unsigned &n_plot)
+   {FaceGeometry<ELASTICITY_BULK_ELEMENT>::output(file_pt,n_plot);}
+ 
+ }; 
+ 
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+ 
+ 
+
+//=================================================================
+/// Static default value for the ratio of stress scales
+/// used in the fluid and solid equations (default is 1.0)
+//=================================================================
+template <class ELASTICITY_BULK_ELEMENT, class NAVIER_STOKES_BULK_ELEMENT>
+double FSIAxisymmetricLinearElasticityTractionElement<
+ ELASTICITY_BULK_ELEMENT, NAVIER_STOKES_BULK_ELEMENT>::Default_Q_Value=1.0;
+
+
+//=====================================================================
+/// Return the residuals
+//=====================================================================
+template <class ELASTICITY_BULK_ELEMENT, class NAVIER_STOKES_BULK_ELEMENT>
+ void FSIAxisymmetricLinearElasticityTractionElement<
+ ELASTICITY_BULK_ELEMENT, NAVIER_STOKES_BULK_ELEMENT>::
+ fill_in_contribution_to_residuals_axisym_fsi_traction(
+  Vector<double> &residuals)
+ {
+  
+  //Find out how many nodes there are
+  unsigned n_node = nnode();
+  
+#ifdef PARANOID
+  //Find out how many positional dofs there are
+  unsigned n_position_type = this->nnodal_position_type();  
+  if(n_position_type != 1)
+   {
+    throw OomphLibError(
+     "LinearElasticity is not yet implemented for more than one position type.",
+     "FSIAxisymmetricLinearElasticityTractionElement::fill_in_contribution_to_residuals_helmholtz_traction()",
+     OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+  
+  //Find out the dimension of the node
+  unsigned n_dim = this->nodal_dimension();
+  
+  //Cache the nodal indices at which the displacement components are stored
+  unsigned u_nodal_index[n_dim+1];
+  for(unsigned i=0;i<n_dim+1;i++)
+   {
+    u_nodal_index[i] = this->U_index_axisym_fsi_traction[i];
+   }
+  
+  //Integer to hold the local equation number
+  int local_eqn=0;
+  
+  //Set up memory for the shape functions
+  Shape psi(n_node);
+  DShape dpsids(n_node,n_dim-1); 
+  
+  // Get FSI parameter
+  const double q_value=q();
+  
+  // Storage for traction
+  Vector<double> traction(3);
+  
+  //Set the value of n_intpt
+  unsigned n_intpt = integral_pt()->nweight();
+  
+  //Loop over the integration points
+  for(unsigned ipt=0;ipt<n_intpt;ipt++)
+   {
+    //Get the integral weight
+    double w = integral_pt()->weight(ipt);
+    
+    //Only need to call the local derivatives
+    dshape_local_at_knot(ipt,psi,dpsids);
+    
+    //Calculate the coordinates
+    Vector<double> interpolated_x(n_dim,0.0);
+    
+    //Also calculate the surface tangent vectors
+    DenseMatrix<double> interpolated_A(n_dim-1,n_dim,0.0);   
+    
+    //Calculate displacements and derivatives
+    for(unsigned l=0;l<n_node;l++) 
+     {
+      //Loop over directions
+      for(unsigned i=0;i<n_dim;i++)
+       {        
+        //Calculate the Eulerian coords
+        const double x_local = nodal_position(l,i);
+        interpolated_x[i] += x_local*psi(l);
+        
+        //Loop over LOCAL derivative directions, to calculate the tangent(s)
+        for(unsigned j=0;j<n_dim-1;j++)
+         {
+          interpolated_A(j,i) += x_local*dpsids(l,j);
+         }
+       }
+     }
+    
+    //Now find the local metric tensor from the tangent Vectors
+    DenseMatrix<double> A(n_dim-1);
+    for(unsigned i=0;i<n_dim-1;i++)
+     {
+      for(unsigned j=0;j<n_dim-1;j++)
+       {
+        //Initialise surface metric tensor to zero
+        A(i,j) = 0.0;
+        
+        //Take the dot product
+        for(unsigned k=0;k<n_dim;k++)
+         { 
+          A(i,j) += interpolated_A(i,k)*interpolated_A(j,k);
+         }
+       }
+     }
+    
+    //Get the outer unit normal
+    Vector<double> interpolated_normal(n_dim);
+    outer_unit_normal(ipt,interpolated_normal);
+    
+    //Find the determinant of the metric tensor
+    double Adet =0.0;
+    switch(n_dim)
+     {
+     case 2:
+      Adet = A(0,0);
+      break;
+     case 3:
+      Adet = A(0,0)*A(1,1) - A(0,1)*A(1,0);
+      break;
+     default:
+      throw 
+       OomphLibError(
+        "Wrong dimension in TimeHarmonicLinElastLoadedByPressureElement",
+        "TimeHarmonicLinElastLoadedByPressureElement::fill_in_contribution_to_residuals()",
+        OOMPH_EXCEPTION_LOCATION);
+     }
+    
+    //Premultiply the weights and the square-root of the determinant of 
+    //the metric tensor
+    double W = w*sqrt(Adet);
+    
+    // Get bulk element for traction
+    NAVIER_STOKES_BULK_ELEMENT* ext_el_pt=
+     dynamic_cast<NAVIER_STOKES_BULK_ELEMENT*>(external_element_pt(0,ipt));
+    Vector<double> s_ext(external_element_local_coord(0,ipt));
+    
+    // Get traction from bulk element
+    ext_el_pt->traction(s_ext, 
+                        interpolated_normal,
+                        traction);
+    
+    //Loop over the test functions, nodes of the element
+    for(unsigned l=0;l<n_node;l++)
+     {
+      //Loop over the displacement components
+      for(unsigned i=0;i<n_dim+1;i++)
+       {
+        // Equation number
+        local_eqn = this->nodal_local_eqn(l,u_nodal_index[i]);
+        /*IF it's not a boundary condition*/
+        if(local_eqn >= 0)
+         {
+          //Add the loading terms (multiplied by fsi scaling factor)
+          //to the residuals
+          residuals[local_eqn] -= 
+           q_value*traction[i]*psi(l)*interpolated_x[0]*W;
+         }
+       }
+     } //End of loop over shape functions
+    
+   } //End of loop over integration points
+ }
+
+
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 
 
 

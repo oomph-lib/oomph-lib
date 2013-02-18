@@ -51,7 +51,7 @@ namespace oomph
 /// A base class for elements that solve the axisymmetric (in 
 /// cylindrical polars) equations of linear elasticity.
 //=======================================================================
-  class AxisymmetricLinearElasticityEquationsBase : 
+class AxisymmetricLinearElasticityEquationsBase : 
  public virtual FiniteElement
  {
    public:
@@ -61,7 +61,7 @@ namespace oomph
   /// assignment here (u_r, u_z, u_theta) is appropriate for single-physics
   /// problems.
   virtual inline unsigned
-   u_index_axisymmetric_linear_elasticity(const unsigned i) const
+   u_index_axisymmetric_linear_elasticity(const unsigned& i) const
   {
    return i;
   }
@@ -95,6 +95,36 @@ namespace oomph
 
     return d2u_dt2;
    }
+
+
+  /// du/dt at local node n
+  double du_dt_axisymmetric_linear_elasticity(const unsigned &n,
+                                              const unsigned &i) const
+  {
+   // Get the timestepper
+   TimeStepper* time_stepper_pt=node_pt(n)->time_stepper_pt();
+   
+   // Storage for the derivative - initialise to 0
+   double du_dt=0.0;
+   
+   // If we are doing an unsteady solve then calculate the derivative
+   if(!time_stepper_pt->is_steady())
+    {
+     // Get the nodal index
+     const unsigned u_nodal_index=u_index_axisymmetric_linear_elasticity(i);
+     
+     // Get the number of values required to represent history
+     const unsigned n_time=time_stepper_pt->ntstorage();
+     
+     // Loop over history values
+     for(unsigned t=0;t<n_time;t++)
+      {
+       //Add the contribution to the derivative
+       du_dt+=time_stepper_pt->weight(1,t)*nodal_value(t,n,u_nodal_index);
+      }
+    }
+   return du_dt;
+  }
   
   /// Compute vector of FE interpolated displacement u at local coordinate s
   void interpolated_u_axisymmetric_linear_elasticity(
@@ -132,11 +162,9 @@ namespace oomph
    
    /// \short Return FE interpolated displacement u[i] (i=0: r, i=1: z; i=2: 
    /// theta) at local coordinate s
-   double
-    interpolated_u_axisymmetric_linear_elasticity(
-    const Vector<double> &s, 
-    const unsigned &i) const
-    {
+  double interpolated_u_axisymmetric_linear_elasticity(const Vector<double> &s, 
+                                                       const unsigned &i) const
+  {
      //Find number of nodes
      unsigned n_node = nnode();
      
@@ -164,6 +192,35 @@ namespace oomph
      return(interpolated_u);
     }
 
+
+
+  /// Compute vector of FE interpolated velocity du/dt at local coordinate s
+  void interpolated_du_dt_axisymmetric_linear_elasticity(
+   const Vector<double> &s, Vector<double>& du_dt) const
+  {
+   //Find number of nodes
+   unsigned n_node = nnode();
+   
+   //Local shape function
+   Shape psi(n_node);
+   
+   //Find values of shape function
+   shape(s,psi);
+   
+   // Loop over directions
+   for (unsigned i=0;i<3;i++)
+    {     
+     //Initialise value of u
+     du_dt[i] = 0.0;
+     
+     //Loop over the local nodes and sum
+     for(unsigned l=0;l<n_node;l++) 
+      {
+       du_dt[i] += du_dt_axisymmetric_linear_elasticity(l,i)*psi[l];
+      }
+    }
+  }
+  
 
    /// \short Function pointer to function that specifies the body force
    /// as a function of the Cartesian coordinates and time FCT(x,b) -- 
