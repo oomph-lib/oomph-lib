@@ -32,7 +32,6 @@
 #include "navier_stokes.h"
 #include "solid.h"
 #include "fluid_interface.h"
-#include "fix_vol_int_elements.h"
 
 using namespace oomph;
 
@@ -444,11 +443,6 @@ public:
 template<class ELEMENT>
 class CylinderAndInterfaceMesh : public virtual SolidMesh
 {
-private:
- Vector<FiniteElement *> Fluid_element_pt;
- Vector<FiniteElement *> Free_surface_pt;
- Vector<FiniteElement *> Neighbour_element_pt;
- FiniteElement* Point_element_pt;
  double Height;
 
 protected:
@@ -456,25 +450,6 @@ protected:
  CylinderAndInterfaceDomain* Domain_pt;
 
 public:
-
- /// Return pointer to FiniteElement
- FiniteElement* finite_element_pt(const unsigned& ielem) 
-  {return dynamic_cast<FiniteElement*>(Element_pt[ielem]);}
-
- /// Access function for fluid elements
- FiniteElement* &fluid_element_pt(const unsigned &i)
-  {return Fluid_element_pt[i];}
- unsigned nfluid() const {return Fluid_element_pt.size();}
- 
-
- //Access functions for pointers to elements on free surface
- FiniteElement* &free_surface_pt(const unsigned &i) 
-  {return Free_surface_pt[i];}
- unsigned nfree_surface() const {return Free_surface_pt.size();}
-
- //Access function to the point element
- FiniteElement* &point_element_pt()
-  {return Point_element_pt;}
 
  //Access function to the domain
  CylinderAndInterfaceDomain* domain_pt() {return Domain_pt;}
@@ -708,122 +683,6 @@ public:
    }
  }
 
- void get_neighbour_sons_recursively(FiniteElement* const &father_pt, 
-                                     Vector<FiniteElement*> &sons_pt)
-  {
-   //Cast to local element
-   ELEMENT* local_element_pt = dynamic_cast<ELEMENT*>(father_pt);
-   //If the father has no sons, we're done
-   if(local_element_pt->quadtree_pt()->nsons()==0)
-    {
-     sons_pt.push_back(local_element_pt);
-    }
-   //Otherwise
-   else
-    {
-     //Call the recursion on the NW and NE sons
-     using namespace QuadTreeNames;
-     get_neighbour_sons_recursively(
-      local_element_pt->quadtree_pt()->son_pt(NW)->object_pt(), sons_pt);
-     get_neighbour_sons_recursively(
-      local_element_pt->quadtree_pt()->son_pt(NE)->object_pt(), sons_pt);
-    }
-  }
-
- void assign_free_surface(bool first=false)
-  {
-   //Cleaer the fluid element vector
-   Fluid_element_pt.clear();
-
-   //Set up the fluid element vector
-   unsigned Nelement = nelement();
-   for(unsigned e=0;e<Nelement;e++)
-    {
-     //Add to the fluid element vector
-     Fluid_element_pt.push_back(finite_element_pt(e));
-    }
-
-   //If it's the first time, set up neighbours
-   if(first==true)
-    {
-     Neighbour_element_pt.clear();
-     unsigned Nelement = nelement();
-     for(unsigned e=0;e<Nelement;e++)
-      {
-       //Read out the number of linear points in the element
-       unsigned Np = 
-        dynamic_cast<ELEMENT*>(finite_element_pt(e))->nnode_1d();
-       
-       //If the element is on the free-surface (measuring xi)
-       if(element_node_pt(e,Np*Np-2)->xi(1) == Height)
-        {
-         //Add the element to the neighbour array
-         Neighbour_element_pt.push_back(finite_element_pt(e));
-        }
-      }
-    }
-   //Otherwise, calculate the new neighbours from the old neighbours
-   else
-    {
-     //Create storage for the new neighbours
-     Vector<FiniteElement*> New_neighbour_pt;
-
-     //Loop over the existing neighbour element
-     unsigned Nneighbour = Neighbour_element_pt.size();
-     for(unsigned n=0;n<Nneighbour;n++)
-      {
-       get_neighbour_sons_recursively(Neighbour_element_pt[n],
-                                      New_neighbour_pt);
-      }
-     //Set the neighbours
-     Neighbour_element_pt = New_neighbour_pt;
-    }
-      
-
-   //Now loop over neighbours and create the free surface elements
-   unsigned Nneighbour = Neighbour_element_pt.size();
-   for(unsigned n=0;n<Nneighbour;n++)
-    {
-     //Create the free surface element (on face 2)
-     FiniteElement *free_surface_element_pt 
-      = new FixedVolumeElasticLineFluidInterfaceElement<ELEMENT>
-      (Neighbour_element_pt[n],2);
-     //Push it back onto the stack
-      Element_pt.push_back(free_surface_element_pt);       
-      Free_surface_pt.push_back(free_surface_element_pt);
-    }
-   
-   unsigned Nfree = nfree_surface();
-   cout << Nfree << " free surface elements assigned" << std::endl;
-   
-   //Make the edge point
-   Point_element_pt = 
-    dynamic_cast<FixedVolumeElasticLineFluidInterfaceElement<ELEMENT>*>
-    (Free_surface_pt[Nfree-1])->make_bounding_element(1);
-
-   //Add it to the stack
-   Element_pt.push_back(Point_element_pt);
-  }
-
- //Function to delete the free surface elements
- void delete_free_surface_elements()
-  {
-   
-   //Find the number of traction elements
-   unsigned Nfree_surface = nfree_surface();
-   
-   //The traction elements are ALWAYS? stored at the end
-   //So delete and remove them, add one to get rid of the constraint
-   for(unsigned e=0;e<(Nfree_surface+1);e++)
-    {
-     delete Element_pt.back();
-     Element_pt.pop_back();
-    }
-
-   //Now clear the vector of pointers to traction elements
-   Free_surface_pt.clear();
-   Point_element_pt = 0;
-  }
  
 };
 
@@ -848,11 +707,14 @@ public:
     {
      dynamic_cast<ELEMENT*>(this->element_pt(e))->
       set_macro_elem_pt(this->Domain_pt->macro_element_pt(e));
-//                        this->Domain_pt->macro_element_pt(e));
     }
 
    // Setup quadtree forest for mesh refinement
    this->setup_quadtree_forest();
+   
+   // Setup the boundary element info
+   this->setup_boundary_element_info();
+
   }
 
  
@@ -867,11 +729,11 @@ class RefineableRotatingCylinderProblem : public Problem
 {
 private:
  double Length, Height;
-
- bool First;
  
  //Constitutive law used to determine the mesh deformation
  ConstitutiveLaw *Constitutive_law_pt;
+
+ Data* Traded_pressure_data_pt;
 
 public:
 
@@ -882,8 +744,6 @@ public:
  double Volume;
 
  double Angle;
-
- //Vector<double> Wall_normal;
 
  Vector<double> G;
 
@@ -898,24 +758,151 @@ public:
  void actions_before_newton_solve() {set_boundary_conditions();}
 
  /// Strip off the interface before adaptation
- void actions_before_adapt() {mesh_pt()->delete_free_surface_elements();}
+ void actions_before_adapt() 
+  {
+   this->delete_volume_constraint_elements();
+   this->delete_free_surface_elements();
+  }
 
- void actions_after_adapt() {finish_problem_setup();}
+ void actions_after_adapt() {finish_problem_setup(); this->rebuild_global_mesh();}
 
  /// \short Complete problem setup: Setup element-specific things 
  /// (source fct pointers etc.)
  void finish_problem_setup();
 
  //Access function for the mesh
- RefineableCylinderAndInterfaceMesh<ELEMENT>* mesh_pt() 
-  {
-   return dynamic_cast<RefineableCylinderAndInterfaceMesh<ELEMENT>*>
-    (Problem::mesh_pt());
-  }
+ RefineableCylinderAndInterfaceMesh<ELEMENT>* Bulk_mesh_pt;
+
+ //Access function for surface mesh
+ Mesh* Surface_mesh_pt;
+
+ //Access function for point mesh
+ Mesh* Point_mesh_pt;
+
+ /// The volume constraint mesh 
+ Mesh* Volume_constraint_mesh_pt;
 
  void set_boundary_conditions();
 
  void solve();
+
+ /// Create the volume constraint elements
+ void create_volume_constraint_elements()
+  {
+   //The single volume constraint element
+   VolumeConstraintElement* vol_constraint_element = 
+    new VolumeConstraintElement(&Volume,Traded_pressure_data_pt,0);
+   Volume_constraint_mesh_pt->add_element_pt(vol_constraint_element);
+   
+   //Loop over all boundaries (or just 1 and 2 why?)
+   for(unsigned b=0;b<4;b++)
+    {
+     // How many bulk fluid elements are adjacent to boundary b?
+     unsigned n_element = Bulk_mesh_pt->nboundary_element(b);
+     
+     // Loop over the bulk fluid elements adjacent to boundary b?
+     for(unsigned e=0;e<n_element;e++)
+      {
+       // Get pointer to the bulk fluid element that is 
+       // adjacent to boundary b
+       ELEMENT* bulk_elem_pt = dynamic_cast<ELEMENT*>(
+        Bulk_mesh_pt->boundary_element_pt(b,e));
+       
+       //Find the index of the face of element e along boundary b
+       int face_index = Bulk_mesh_pt->face_index_at_boundary(b,e);
+       
+       // Create new element
+       LineVolumeConstraintBoundingSolidElement<ELEMENT>* el_pt =
+        new LineVolumeConstraintBoundingSolidElement<ELEMENT>(
+         bulk_elem_pt,face_index);   
+       
+       //Set the "master" volume control element
+       el_pt->set_volume_constraint_element(vol_constraint_element);
+       
+       // Add it to the mesh
+       Volume_constraint_mesh_pt->add_element_pt(el_pt);     
+      }
+    }
+  }
+
+ void delete_volume_constraint_elements()
+  {
+   unsigned n_element = Volume_constraint_mesh_pt->nelement();
+   for(unsigned e=0;e<n_element;e++)
+    {
+     delete Volume_constraint_mesh_pt->element_pt(e);
+    }
+   Volume_constraint_mesh_pt->flush_element_and_node_storage();
+  }
+ 
+ void create_free_surface_elements()
+  {
+   //Find number of elements adjacent to upper boundary
+   unsigned n_boundary_element = Bulk_mesh_pt->nboundary_element(2);
+   //The boundary elements do no necessarily come in order, so we will
+   //need to detect the element adjacent to boundary 1.
+   //The index of that element in our array will be stored in this variable
+   //(initialised to a negative and therefore invalid number)
+   int final_element_index=-1;
+   //Loop over the elements adjacent to the boundary
+   for(unsigned e=0;e<n_boundary_element;e++)
+    {
+     //Create the free surface element (on face 2)
+     FiniteElement *free_surface_element_pt 
+      = new ElasticLineFluidInterfaceElement<ELEMENT>
+      (Bulk_mesh_pt->boundary_element_pt(2,e),
+       Bulk_mesh_pt->face_index_at_boundary(2,e));
+     //Push it back onto the stack
+     Surface_mesh_pt->add_element_pt(free_surface_element_pt);       
+
+      //Check whether the element is on the boundary 1
+      unsigned n_node = free_surface_element_pt->nnode();
+      //Only need to check the end nodes
+      if((free_surface_element_pt->node_pt(0)->is_on_boundary(1)) ||
+         (free_surface_element_pt->node_pt(n_node-1)->is_on_boundary(1)))
+       {
+          final_element_index=e;
+       }
+    }
+
+   unsigned Nfree = Surface_mesh_pt->nelement();
+    cout << Nfree << " free surface elements assigned" << std::endl;
+
+    if(final_element_index == -1)
+     {
+      throw OomphLibError("No Surface Element adjacent to boundary 1\n",
+                          "CylinderAndInterfaceMesh::assign_free_surface()",
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+   
+    //Make the edge point
+    FiniteElement* point_element_pt= 
+     dynamic_cast<ElasticLineFluidInterfaceElement<ELEMENT>*>
+     (Surface_mesh_pt->element_pt(final_element_index))
+     ->make_bounding_element(1);
+    
+    //Add it to the stack
+    Point_mesh_pt->add_element_pt(point_element_pt);
+  }
+
+ //Function to delete the free surface elements
+ void delete_free_surface_elements()
+  {
+   //Find the number of traction elements
+   unsigned Nfree_surface = Surface_mesh_pt->nelement();
+   
+   //The traction elements are ALWAYS? stored at the end
+   //So delete and remove them, add one to get rid of the constraint
+   for(unsigned e=0;e<Nfree_surface;e++)
+    {
+     delete Surface_mesh_pt->element_pt(e);
+    }
+   Surface_mesh_pt->flush_element_and_node_storage();
+
+   delete Point_mesh_pt->element_pt(0);
+   Point_mesh_pt->flush_element_and_node_storage();
+  }
+
 
 };
 
@@ -928,7 +915,6 @@ public:
 template<class ELEMENT>
 RefineableRotatingCylinderProblem<ELEMENT>::RefineableRotatingCylinderProblem(
  const double &length, const double &height) : Length(length), Height(height),
-                                               First(true),
                                                Re(0.0), Ca(0.001), 
                                                ReInvFr(0.0),
                                                Bo(0.0), Omega(1.0), 
@@ -959,34 +945,51 @@ RefineableRotatingCylinderProblem<ELEMENT>::RefineableRotatingCylinderProblem(
  add_time_stepper_pt(new Steady<0>);
    
  // Build mesh
- Problem::mesh_pt()= 
+ Bulk_mesh_pt= 
   new RefineableCylinderAndInterfaceMesh<ELEMENT>(length,height,
                                                   Problem::time_stepper_pt());
-
+ 
  // Set error estimator
  Z2ErrorEstimator* error_estimator_pt=new Z2ErrorEstimator;
- mesh_pt()->spatial_error_estimator_pt()=error_estimator_pt;
+ Bulk_mesh_pt->spatial_error_estimator_pt()=error_estimator_pt;
   
 
  //Refine the problem a couple of times
- mesh_pt()->refine_uniformly();
- mesh_pt()->node_update(true);
- mesh_pt()->refine_uniformly();
- mesh_pt()->node_update(true);
- //mesh_pt()->refine_uniformly();
+ Bulk_mesh_pt->refine_uniformly();
+ Bulk_mesh_pt->node_update(true);
+ Bulk_mesh_pt->refine_uniformly();
+ Bulk_mesh_pt->node_update(true);
+ //Bulk_mesh_pt->refine_uniformly();
  //refine_uniformly();
  //refine_uniformly();
   
  // Loop over all elements and unset macro element pointer
- unsigned Nelement = mesh_pt()->nelement();
+ unsigned Nelement = Bulk_mesh_pt->nelement();
  for(unsigned e=0;e<Nelement;e++)
   {
-   dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e))->
+   dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e))->
     set_macro_elem_pt(0);
   }
 
+
+ //The external pressure is a piece of global data
+ Traded_pressure_data_pt = new Data(1);
+ this->add_global_data(Traded_pressure_data_pt);
+
  // Complete the build of all elements so they are fully functional
+
+ Surface_mesh_pt = new Mesh;
+ Point_mesh_pt = new Mesh;
+ Volume_constraint_mesh_pt = new Mesh;
+
  finish_problem_setup();
+  
+ this->add_sub_mesh(Bulk_mesh_pt);
+ this->add_sub_mesh(Surface_mesh_pt);
+ this->add_sub_mesh(Point_mesh_pt);
+ this->add_sub_mesh(Volume_constraint_mesh_pt);
+
+ this->build_global_mesh();
 
  //Attach the boundary conditions to the mesh
  cout <<"Number of equations: " << assign_eqn_numbers() << std::endl; 
@@ -1003,159 +1006,135 @@ template<class ELEMENT>
 void RefineableRotatingCylinderProblem<ELEMENT>::finish_problem_setup()
 { 
  //Now sort out the free surface
- mesh_pt()->assign_free_surface(First); 
+ this->create_free_surface_elements();
+ //Create the volume constraint elements
+ this->create_volume_constraint_elements();
  
- //Now set first is false
- First = false;
  // Set the boundary conditions for this problem: All nodes are
  // free by default -- just pin the ones that have Dirichlet conditions
  // here. 
 
  //Pin bottom and cylinder
-  unsigned num_bound = mesh_pt()->nboundary();
+  unsigned num_bound = Bulk_mesh_pt->nboundary();
   for(unsigned ibound=0;ibound<num_bound;ibound+=4)
    {
-    unsigned num_nod= mesh_pt()->nboundary_node(ibound);
+    unsigned num_nod= Bulk_mesh_pt->nboundary_node(ibound);
     for (unsigned inod=0;inod<num_nod;inod++)
      {
-      mesh_pt()->boundary_node_pt(ibound,inod)->pin(0);
-      mesh_pt()->boundary_node_pt(ibound,inod)->pin(1);
+      Bulk_mesh_pt->boundary_node_pt(ibound,inod)->pin(0);
+      Bulk_mesh_pt->boundary_node_pt(ibound,inod)->pin(1);
      }
    }
   
   //Pin u and v on LHS
   {
-   unsigned num_nod= mesh_pt()->nboundary_node(3);
+   unsigned num_nod= Bulk_mesh_pt->nboundary_node(3);
    for (unsigned inod=0;inod<num_nod;inod++)
     {
-     mesh_pt()->boundary_node_pt(3,inod)->pin(0);
-     //mesh_pt()->boundary_node_pt(3,inod)->pin(1);
+     Bulk_mesh_pt->boundary_node_pt(3,inod)->pin(0);
+     //Bulk_mesh_pt->boundary_node_pt(3,inod)->pin(1);
     }
   }
   
   //Pin u and v on RHS
   {
-   unsigned num_nod= mesh_pt()->nboundary_node(1);
+   unsigned num_nod= Bulk_mesh_pt->nboundary_node(1);
    for (unsigned inod=0;inod<num_nod;inod++)
     {
-     mesh_pt()->boundary_node_pt(1,inod)->pin(0);
-     mesh_pt()->boundary_node_pt(1,inod)->pin(1);
+     Bulk_mesh_pt->boundary_node_pt(1,inod)->pin(0);
+     Bulk_mesh_pt->boundary_node_pt(1,inod)->pin(1);
     }
   }
 
   
   dynamic_cast<FluidInterfaceBoundingElement*>
-   (mesh_pt()->element_pt(mesh_pt()->nelement()-1))->
-    set_contact_angle(&Angle);
+   (Point_mesh_pt->element_pt(0))->set_contact_angle(&Angle);
+
+  dynamic_cast<FluidInterfaceBoundingElement*>
+   (Point_mesh_pt->element_pt(0))->ca_pt() = &Ca;
+
   
   dynamic_cast<FluidInterfaceBoundingElement*>
-   (mesh_pt()->element_pt(mesh_pt()->nelement()-1))->
+   (Point_mesh_pt->element_pt(0))->
    wall_unit_normal_fct_pt() = &Global_Physical_Variables::wall_unit_normal_fct;
 
   //Pin one pressure
-  dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(0))->fix_pressure(0,0.0);
-  
-  //The external pressure is a piece of global data
-  Data* load_data_pt=new Data(1);
-  flush_global_data();
-  add_global_data(load_data_pt);
-  
-  //Pin it
-  //global_data_pt(0)->pin(0);
-  
+  dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(0))->fix_pressure(0,0.0);
 
   //Loop over the lower boundary and pin nodal positions in both directions
-  unsigned num_nod= mesh_pt()->nboundary_node(0);
+  unsigned num_nod= Bulk_mesh_pt->nboundary_node(0);
   for (unsigned inod=0;inod<num_nod;inod++)
    {
-    mesh_pt()->boundary_node_pt(0,inod)->pin_position(0);
-    mesh_pt()->boundary_node_pt(0,inod)->pin_position(1);
+    Bulk_mesh_pt->boundary_node_pt(0,inod)->pin_position(0);
+    Bulk_mesh_pt->boundary_node_pt(0,inod)->pin_position(1);
    }
   
   //Loop over the RHS side and pin in x and y
-  num_nod= mesh_pt()->nboundary_node(1);
+  num_nod= Bulk_mesh_pt->nboundary_node(1);
   for (unsigned inod=0;inod<num_nod;inod++)
    {
-    mesh_pt()->boundary_node_pt(1,inod)->pin_position(0);
-    //mesh_pt()->boundary_node_pt(1,inod)->pin_position(1);
+    Bulk_mesh_pt->boundary_node_pt(1,inod)->pin_position(0);
+    //Bulk_mesh_pt->boundary_node_pt(1,inod)->pin_position(1);
   }
   
   
  //Loop over the LHS side and pin in x
-  num_nod= mesh_pt()->nboundary_node(3);
+  num_nod= Bulk_mesh_pt->nboundary_node(3);
  for (unsigned inod=0;inod<num_nod;inod++)
   {
-   mesh_pt()->boundary_node_pt(3,inod)->pin_position(0);
-   //mesh_pt()->boundary_node_pt(3,inod)->pin_position(1);
+   Bulk_mesh_pt->boundary_node_pt(3,inod)->pin_position(0);
+   //Bulk_mesh_pt->boundary_node_pt(3,inod)->pin_position(1);
   }
  
  //Loop over the cylinder and pin nodal positions in both directions
- num_nod= mesh_pt()->nboundary_node(4);
+ num_nod= Bulk_mesh_pt->nboundary_node(4);
  for (unsigned inod=0;inod<num_nod;inod++)
   {
-   mesh_pt()->boundary_node_pt(4,inod)->pin_position(0);
-   mesh_pt()->boundary_node_pt(4,inod)->pin_position(1);
+   Bulk_mesh_pt->boundary_node_pt(4,inod)->pin_position(0);
+   Bulk_mesh_pt->boundary_node_pt(4,inod)->pin_position(1);
   }
 
 
  //Find number of elements in mesh
- unsigned Nelement = mesh_pt()->nelement();
+ unsigned Nfluid = Bulk_mesh_pt->nelement();
  //Find the number of free surface elements
- unsigned Nfree = mesh_pt()->nfree_surface();
- //Find number of fluid elements
- unsigned Nfluid = Nelement - Nfree - 1;
+ unsigned Nfree = Surface_mesh_pt->nelement();
 
- // Loop over the elements to set up element-specific 
- // things that cannot be handled by constructor
- Vector<GeneralisedElement*> fluid_element_pt(Nfluid);
- for(unsigned i=0;i<Nfluid;i++)
-  {
-   // Upcast from FiniteElement to the present element
-   ELEMENT *temp_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
-
-   // Store element
-   fluid_element_pt[i]=temp_pt;
-
-   //Set the source function pointer
-   temp_pt->re_pt() = &Re;
-   temp_pt->re_invfr_pt() = &ReInvFr;
-   temp_pt->g_pt() = &G;
-
-   //Assign the mesh deformation constitutive law
-   temp_pt->constitutive_law_pt() = Constitutive_law_pt;
-  
-  }
-
-
- // Pin the redundant solid pressures (if any)
- PVDEquationsBase<2>::pin_redundant_nodal_solid_pressures(
-  fluid_element_pt);
-
- //Loop over the free surface elements
- for(unsigned i=0;i<Nfree;i++)
-  {
-   // Upcast from FiniteElement to the present element
-   FixedVolumeElasticLineFluidInterfaceElement<ELEMENT> *temp_pt = 
-    dynamic_cast<FixedVolumeElasticLineFluidInterfaceElement<ELEMENT>*>
-    (mesh_pt()->free_surface_pt(i));
-   //Set the Capillary number
-   temp_pt->ca_pt() = &Ca;
-
-   //Pass the Data item that contains the external pressure
-   temp_pt->set_external_pressure_data(global_data_pt(0));
-   //Set the traded pressure
-   temp_pt->set_traded_pressure_data(global_data_pt(0));
-  }
-
-
- //Finally do the point element
- ElasticVolumeConstraintPointElement<ELEMENT>* temp_pt =
-  dynamic_cast<ElasticVolumeConstraintPointElement<ELEMENT>*>
-  (mesh_pt()->element_pt(Nelement-1));
-
-   temp_pt->ca_pt() = &Ca;
-   temp_pt->volume_pt() = &Volume;
-   temp_pt->set_traded_pressure_data(global_data_pt(0));
+    // Loop over the elements to set up element-specific 
+    // things that cannot be handled by constructor
+    for(unsigned i=0;i<Nfluid;i++)
+     {
+      // Upcast from FiniteElement to the present element
+      ELEMENT *temp_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(i));
+      
+      //Set the source function pointer
+      temp_pt->re_pt() = &Re;
+      temp_pt->re_invfr_pt() = &ReInvFr;
+      temp_pt->g_pt() = &G;
+      
+      //Assign the mesh deformation constitutive law
+      temp_pt->constitutive_law_pt() = Constitutive_law_pt;
+      
+     }
+    
+    
+    // Pin the redundant solid pressures (if any)
+    PVDEquationsBase<2>::pin_redundant_nodal_solid_pressures(
+     Bulk_mesh_pt->element_pt());
+    
+    //Loop over the free surface elements
+    for(unsigned i=0;i<Nfree;i++)
+     {
+      // Upcast from FiniteElement to the present element
+      ElasticLineFluidInterfaceElement<ELEMENT> *temp_pt = 
+       dynamic_cast<ElasticLineFluidInterfaceElement<ELEMENT>*>
+       (Surface_mesh_pt->element_pt(i));
+      //Set the Capillary number
+      temp_pt->ca_pt() = &Ca;
+      
+      //Pass the Data item that contains the external pressure
+      temp_pt->set_external_pressure_data(this->global_data_pt(0));
+     }
    
 }
 
@@ -1163,24 +1142,24 @@ template<class ELEMENT>
 void RefineableRotatingCylinderProblem<ELEMENT>::set_boundary_conditions()
 { 
  //Only bother to set non-zero velocity on the cylinder
- unsigned Nnode = mesh_pt()->nboundary_node(4);
+ unsigned Nnode = Bulk_mesh_pt->nboundary_node(4);
  for(unsigned n=0;n<Nnode;n++)
   {
    //Get x and y
-   double x = mesh_pt()->boundary_node_pt(4,n)->x(0);
-   double y = mesh_pt()->boundary_node_pt(4,n)->x(1);
+   double x = Bulk_mesh_pt->boundary_node_pt(4,n)->x(0);
+   double y = Bulk_mesh_pt->boundary_node_pt(4,n)->x(1);
 
    //Now find the vector distance to the centre
-   double len_x = x - mesh_pt()->domain_pt()->centre_x;
-   double len_y = y - mesh_pt()->domain_pt()->centre_y;
+   double len_x = x - Bulk_mesh_pt->domain_pt()->centre_x;
+   double len_y = y - Bulk_mesh_pt->domain_pt()->centre_y;
 
    //Calculate the angle and radius
    double r = sqrt(len_x*len_x + len_y*len_y);
    double theta = atan2(len_y,len_x);
    
    //Now set the velocities
-   mesh_pt()->boundary_node_pt(4,n)->set_value(0,-Omega*r*sin(theta));
-   mesh_pt()->boundary_node_pt(4,n)->set_value(1, Omega*r*cos(theta));
+   Bulk_mesh_pt->boundary_node_pt(4,n)->set_value(0,-Omega*r*sin(theta));
+   Bulk_mesh_pt->boundary_node_pt(4,n)->set_value(1, Omega*r*cos(theta));
   }
 }
 
@@ -1190,14 +1169,18 @@ void RefineableRotatingCylinderProblem<ELEMENT>::solve()
  Newton_solver_tolerance = 1.0e-8;
  //Document the solution
  ofstream filenamee("input.dat");
- mesh_pt()->output(filenamee,5);
+ Bulk_mesh_pt->output(filenamee,5);
+ Surface_mesh_pt->output(filenamee,5);
+ Point_mesh_pt->output(filenamee,5);
  filenamee.close();
 
  //Solve the initial value problem
  newton_solve();
 
  ofstream filename("first.dat"); 
- mesh_pt()->output(filename,5); 
+ Bulk_mesh_pt->output(filename,5); 
+ Surface_mesh_pt->output(filename,5); 
+ Point_mesh_pt->output(filename,5);
  filename.close();
 
  //Initialise the value of the arc-length
@@ -1206,7 +1189,7 @@ void RefineableRotatingCylinderProblem<ELEMENT>::solve()
  ofstream trace("trace.dat");
 
  trace << Ca << " " << ReInvFr << " "
-       << mesh_pt()->boundary_node_pt(2,0)->x(1) << std::endl;
+       << Bulk_mesh_pt->boundary_node_pt(2,0)->x(1) << std::endl;
 
 // bool flag=true, fflag=true;
 
@@ -1239,39 +1222,41 @@ void RefineableRotatingCylinderProblem<ELEMENT>::solve()
 //      ds = arc_length_step_solve(&Ca,ds);
 //     }
 
-//    if(mesh_pt()->boundary_node_pt(2,0)->x(1) < 4.0)
+//    if(Bulk_mesh_pt->boundary_node_pt(2,0)->x(1) < 4.0)
 //     {flag=false;}
 
    trace << Ca << " " << ReInvFr << " " << Angle << " "
-         << mesh_pt()->boundary_node_pt(2,0)->x(1) << std::endl;   
+         << Bulk_mesh_pt->boundary_node_pt(2,0)->x(1) << std::endl;   
    
    char file[100];
    sprintf(file,"step%i.dat",i);
    filename.open(file);
-   mesh_pt()->output(filename,5);
+   Bulk_mesh_pt->output(filename,5);
+   Surface_mesh_pt->output(filename,5);
+   Point_mesh_pt->output(filename,5);
    filename.close();
 
    //Now reset the values of the lagrange multipliers and the xi's
    //An updated lagrangian approach
    
    //Now loop over all the nodes and set their Lagrangian coordinates
-   unsigned Nnode = mesh_pt()->nnode();
+   unsigned Nnode = Bulk_mesh_pt->nnode();
    for(unsigned n=0;n<Nnode;n++)
     {
      //Cast node to an elastic node
-     SolidNode* temp_pt = static_cast<SolidNode*>(mesh_pt()->node_pt(n));
+     SolidNode* temp_pt = static_cast<SolidNode*>(Bulk_mesh_pt->node_pt(n));
      for(unsigned j=0;j<2;j++) {temp_pt->xi(j) = temp_pt->x(j);}
     }
 
    //Find the number of free surface elements
-   unsigned Nfree = mesh_pt()->nfree_surface();
+   unsigned Nfree = Surface_mesh_pt->nelement();
    //Loop over the free surface elements
    for(unsigned n=0;n<Nfree;n++)
     {
      // Upcast from FiniteElement to the present element
-     FixedVolumeElasticLineFluidInterfaceElement<ELEMENT> *temp_pt = 
-      dynamic_cast<FixedVolumeElasticLineFluidInterfaceElement<ELEMENT>*>
-      (mesh_pt()->free_surface_pt(n));
+     ElasticLineFluidInterfaceElement<ELEMENT> *temp_pt = 
+      dynamic_cast<ElasticLineFluidInterfaceElement<ELEMENT>*>
+      (Surface_mesh_pt->element_pt(n));
      unsigned Nnode = temp_pt->nnode();
      //Reset the lagrange multipliers
      for(unsigned j=0;j<Nnode;j++) {temp_pt->lagrange(j) = 0.0;}
@@ -1280,7 +1265,7 @@ void RefineableRotatingCylinderProblem<ELEMENT>::solve()
  
  //Document the solution
  //filename.open("output.dat");
- //mesh_pt()->output(filename,5);
+ //Bulk_mesh_pt->output(filename,5);
  //filename.close();
  trace.close();
 }
@@ -1299,7 +1284,7 @@ void RefineableRotatingCylinderProblem<ELEMENT>::solve()
     RefineableQPVDElementWithContinuousPressure<2> > > problem(3.0,4.0);
    
    //ofstream filename("mesh.dat");
-   //problem.mesh_pt()->output(filename,5);
+   //problem.Bulk_mesh_pt->output(filename,5);
 
    problem.solve();
   }

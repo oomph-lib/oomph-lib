@@ -74,7 +74,7 @@ namespace Global_Physical_Variables
 /// standard single-layer mesh with an additional element that applies
 /// the contact angle condition
 //============================================================================
-template <class ELEMENT>
+/*template <class ELEMENT>
 class StaticSingleLayerMesh : 
  public SingleLayerSpineMesh<
  SpineElement<ELEMENT>, 
@@ -97,6 +97,41 @@ public:
  /// Return pointer to the volumetric constraint element
  FiniteElement* &point_element_pt() {return Point_element_pt;}
  
+
+/// Reorder function
+ void initial_element_reorder()
+  {
+
+ unsigned n_x = this->Nx;
+ unsigned n_y = this->Ny;
+ //Find out how many elements there are
+ unsigned long Nelement = this->nelement();
+ //Find out how many fluid elements there are
+ unsigned long Nfluid = n_x*n_y;
+ //Create a dummy array of elements
+ Vector<FiniteElement *> dummy;
+
+ //Loop over the elements in horizontal order
+ for(unsigned long j=0;j<n_x;j++)
+  {
+   //Loop over the elements in lower layer vertically
+   for(unsigned long i=0;i<n_y;i++)
+    {
+     //Push back onto the new stack
+     dummy.push_back(this->finite_element_pt(n_x*i + j));
+    }
+
+   //Push back the line element onto the stack
+   dummy.push_back(this->finite_element_pt(Nfluid+j));
+  }
+
+ //Now copy the reordered elements into the element_pt
+ for(unsigned long e=0;e<Nelement;e++)
+  {
+   this->Element_pt[e] = dummy[e];
+  }
+  }
+
 };
 
 
@@ -114,8 +149,26 @@ StaticSingleLayerMesh<ELEMENT>::StaticSingleLayerMesh(const unsigned &nx,
  (nx,nh,half_width,1.0)
                                                
 {
+ //Add the interface elements here 
+ 
+ //Loop over the horizontal elements
+ for(unsigned i=0;i<nx;i++)
+  {
+  //Construct a new 1D line element on the face on which the local
+  //coordinate 1 is fixed at its max. value (1) --- This is face 2
+   FiniteElement *interface_element_element_pt =
+    new SpineAxisymmetricFluidInterfaceElement<SpineElement<ELEMENT> >
+(this->finite_element_pt(nx*(nh-1)+i),2);
+
+   //Push it back onto the stack
+   this->Element_pt.push_back(interface_element_element_pt); 
+
+   //Push it back onto the stack of interface elements
+   this->Interface_element_pt.push_back(interface_element_element_pt);
+  }
+
  //Reorder the elements
- this->element_reorder();
+ this->initial_element_reorder();
  
  // Last interface element:
  SpineAxisymmetricFluidInterfaceElement<SpineElement<ELEMENT> >* el_pt=
@@ -126,7 +179,7 @@ StaticSingleLayerMesh<ELEMENT>::StaticSingleLayerMesh(const unsigned &nx,
  Point_element_pt  = el_pt->make_bounding_element(1);
  //Add it to the stack
  this->Element_pt.push_back(Point_element_pt);
-}
+ }*/
 
 
 //============================================================================
@@ -150,7 +203,7 @@ public:
  void parameter_study(const string& dir_name);
 
  /// Update the spine mesh after every Newton step
- void actions_before_newton_convergence_check() {Fluid_mesh_pt->node_update();}
+ void actions_before_newton_convergence_check() {Bulk_mesh_pt->node_update();}
 
  /// Create the volume constraint elements
  void create_volume_constraint_elements();
@@ -173,7 +226,13 @@ private:
  double Angle;
 
  /// The entire fluid mesh: bulk + free surface elements
- StaticSingleLayerMesh<ELEMENT>* Fluid_mesh_pt;
+ SingleLayerSpineMesh<SpineElement<ELEMENT> >* Bulk_mesh_pt;
+ 
+ /// The mesh for the interface elements
+ Mesh* Surface_mesh_pt;
+
+ /// The mesh for the element at the contact point
+ Mesh* Point_mesh_pt;
 
  /// The volume constraint mesh 
  Mesh* Volume_constraint_mesh_pt;
@@ -219,7 +278,40 @@ CapProblem<ELEMENT>::CapProblem(const bool& hijack_internal) :
  double half_width=0.5;
 
  //Construct mesh
- Fluid_mesh_pt = new StaticSingleLayerMesh<ELEMENT>(nx,nh,half_width);
+ Bulk_mesh_pt = new SingleLayerSpineMesh<SpineElement<ELEMENT> >
+  (nx,nh,half_width,1.0);
+
+ //Create the surface mesh that will contain the interface elements
+ //First create storage, but with no elements or nodes
+ Surface_mesh_pt = new Mesh;
+
+ //Loop over the horizontal elements
+ for(unsigned i=0;i<nx;i++)
+  {
+   //Construct a new 1D line element on the face on which the local
+   //coordinate 1 is fixed at its max. value (1) --- This is face 2
+   FiniteElement *interface_element_pt =
+    new SpineAxisymmetricFluidInterfaceElement<SpineElement<ELEMENT> >(
+     Bulk_mesh_pt->finite_element_pt(nx*(nh-1)+i),2);
+   
+   //Push it back onto the stack
+   this->Surface_mesh_pt->add_element_pt(interface_element_pt); 
+  }
+
+ //Create the Point mesh that is responsible for enforcing the contact
+ //angle condition
+ Point_mesh_pt = new Mesh;
+ {
+  //Make the point (contact) element from the last surface element
+  FiniteElement* point_element_pt = 
+   dynamic_cast<SpineAxisymmetricFluidInterfaceElement<
+    SpineElement<ELEMENT> >*>(Surface_mesh_pt->element_pt(nx-1))
+   ->make_bounding_element(1);
+
+  //Add it to the mesh
+  this->Point_mesh_pt->add_element_pt(point_element_pt);
+ }
+
 
  //Create a Data object whose single value stores the
  //external pressure
@@ -242,7 +334,7 @@ CapProblem<ELEMENT>::CapProblem(const bool& hijack_internal) :
    //(Its value will affect the residual of that element but it will not
    //be determined by it, i.e. it's hijacked).
    Traded_pressure_data_pt = dynamic_cast<ELEMENT*>(
-    Fluid_mesh_pt->bulk_element_pt(0))->hijack_internal_value(0,0);
+    Bulk_mesh_pt->element_pt(0))->hijack_internal_value(0,0);
   }
  else
   {
@@ -261,7 +353,7 @@ CapProblem<ELEMENT>::CapProblem(const bool& hijack_internal) :
    // can add an arbitrary constant to all pressures. To make 
    // the solution unique, we pin a single pressure value in the bulk: 
    // We arbitrarily set the pressure dof 0 in element 0 to zero.
-   dynamic_cast<ELEMENT*>(Fluid_mesh_pt->element_pt(0))->fix_pressure(0,0.0);
+   dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(0))->fix_pressure(0,0.0);
   }
 
 
@@ -270,13 +362,13 @@ CapProblem<ELEMENT>::CapProblem(const bool& hijack_internal) :
  // the pointers to the Data items that contains the single
  // (pressure) value that is "traded" for the volume constraint 
  // and the external pressure
- unsigned n_interface = Fluid_mesh_pt->ninterface_element();
+ unsigned n_interface = Surface_mesh_pt->nelement();
  for(unsigned e=0;e<n_interface;e++)
   {
    //Cast to a 1D element
    SpineAxisymmetricFluidInterfaceElement<SpineElement<ELEMENT> >*el_pt=
     dynamic_cast<SpineAxisymmetricFluidInterfaceElement<SpineElement<ELEMENT> >*>
-    (Fluid_mesh_pt->interface_element_pt(e));
+    (Surface_mesh_pt->element_pt(e));
 
    //Set the Capillary number
    el_pt->ca_pt() = &Ca;
@@ -291,32 +383,32 @@ CapProblem<ELEMENT>::CapProblem(const bool& hijack_internal) :
  //Pin the velocities on all boundaries apart from the free surface
  //(boundary 2) where all velocities are free, and apart from the symmetry
  //line (boundary 3) where only the horizontal velocity is pinned
- unsigned n_bound=Fluid_mesh_pt->nboundary();
+ unsigned n_bound=Bulk_mesh_pt->nboundary();
  for (unsigned b=0;b<n_bound;b++)
   {
    if (b!=2)
     {
      //Find the number of nodes on the boundary
-     unsigned n_boundary_node = Fluid_mesh_pt->nboundary_node(b);
+     unsigned n_boundary_node = Bulk_mesh_pt->nboundary_node(b);
      //Loop over the nodes on the boundary
      for(unsigned n=0;n<n_boundary_node;n++)
       {
-       Fluid_mesh_pt->boundary_node_pt(b,n)->pin(0);
-       Fluid_mesh_pt->boundary_node_pt(b,n)->pin(2);
+       Bulk_mesh_pt->boundary_node_pt(b,n)->pin(0);
+       Bulk_mesh_pt->boundary_node_pt(b,n)->pin(2);
        if (b!=3)
         {
-         Fluid_mesh_pt->boundary_node_pt(b,n)->pin(1);
+         Bulk_mesh_pt->boundary_node_pt(b,n)->pin(1);
         }
       }
     }
    /*  else
     {
      //Find the number of nodes on the boundary
-     unsigned n_boundary_node = Fluid_mesh_pt->nboundary_node(b);
+     unsigned n_boundary_node = Bulk_mesh_pt->nboundary_node(b);
      //Loop over the nodes on the boundary
      for(unsigned n=0;n<n_boundary_node;n++)
       {
-       Fluid_mesh_pt->boundary_node_pt(b,n)->unpin(1);
+       Bulk_mesh_pt->boundary_node_pt(b,n)->unpin(1);
       }
       }*/
   }
@@ -325,7 +417,7 @@ CapProblem<ELEMENT>::CapProblem(const bool& hijack_internal) :
  // (pass pointer to double that specifies the contact angle)
  FluidInterfaceBoundingElement *contact_angle_element_pt
   = dynamic_cast<FluidInterfaceBoundingElement*>(
-   Fluid_mesh_pt->point_element_pt());
+   Point_mesh_pt->element_pt(0));
 
  contact_angle_element_pt->set_contact_angle(&Angle);
  contact_angle_element_pt->ca_pt() = &Ca;
@@ -335,7 +427,9 @@ CapProblem<ELEMENT>::CapProblem(const bool& hijack_internal) :
  //Now add the volume constraint
  create_volume_constraint_elements();
 
- this->add_sub_mesh(Fluid_mesh_pt);
+ this->add_sub_mesh(Bulk_mesh_pt);
+ this->add_sub_mesh(Surface_mesh_pt);
+ this->add_sub_mesh(Point_mesh_pt);
  this->add_sub_mesh(Volume_constraint_mesh_pt);
 
  this->build_global_mesh();
@@ -367,8 +461,29 @@ CapProblem<ELEMENT>::~CapProblem()
   {delete Traded_pressure_data_pt;}
   //Next delete the external data
  delete External_pressure_data_pt;
+
+
+ //Loop over the point mesh and delete the elements
+ n_element = Point_mesh_pt->nelement();
+ for(unsigned e=0;e<n_element;e++) 
+  {delete Point_mesh_pt->element_pt(e);}
+ //Now flush the storage
+ Point_mesh_pt->flush_element_and_node_storage();
+ //Then delete the mesh
+ delete Point_mesh_pt;
+
+ //Loop over the surface mesh and delete the elements
+ n_element = Surface_mesh_pt->nelement();
+ for(unsigned e=0;e<n_element;e++) 
+  {delete Surface_mesh_pt->element_pt(e);}
+ //Now flush the storage
+ Surface_mesh_pt->flush_element_and_node_storage();
+ //Then delete the mesh
+ delete Surface_mesh_pt;
+
+
  //Then delete the bulk mesh
- delete Fluid_mesh_pt;
+ delete Bulk_mesh_pt;
 }
 
 
@@ -388,7 +503,7 @@ void CapProblem<ELEMENT>::create_volume_constraint_elements()
  for(unsigned b=0;b<4;b++)
   {
    // How many bulk fluid elements are adjacent to boundary b?
-   unsigned n_element = Fluid_mesh_pt->nboundary_element(b);
+   unsigned n_element = Bulk_mesh_pt->nboundary_element(b);
    
    // Loop over the bulk fluid elements adjacent to boundary b?
    for(unsigned e=0;e<n_element;e++)
@@ -396,10 +511,10 @@ void CapProblem<ELEMENT>::create_volume_constraint_elements()
      // Get pointer to the bulk fluid element that is 
      // adjacent to boundary b
      ELEMENT* bulk_elem_pt = dynamic_cast<ELEMENT*>(
-      Fluid_mesh_pt->boundary_element_pt(b,e));
+      Bulk_mesh_pt->boundary_element_pt(b,e));
      
      //Find the index of the face of element e along boundary b
-     int face_index = Fluid_mesh_pt->face_index_at_boundary(b,e);
+     int face_index = Bulk_mesh_pt->face_index_at_boundary(b,e);
      
      // Create new element
      SpineAxisymmetricVolumeConstraintBoundingElement<ELEMENT>* el_pt =
@@ -479,18 +594,19 @@ void CapProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
- Fluid_mesh_pt->output(some_file,npts);
+ Bulk_mesh_pt->output(some_file,npts);
+ Surface_mesh_pt->output(some_file,npts);
  some_file.close();
 
  // Number of spines
- unsigned nspine=Fluid_mesh_pt->nspine();
+ unsigned nspine=Bulk_mesh_pt->nspine();
 
  // Doc
  Trace_file << Angle*180.0/MathematicalConstants::Pi;
- Trace_file << " "  << Fluid_mesh_pt->spine_pt(0)->height();
- Trace_file << " "  << Fluid_mesh_pt->spine_pt(nspine-1)->height();
+ Trace_file << " "  << Bulk_mesh_pt->spine_pt(0)->height();
+ Trace_file << " "  << Bulk_mesh_pt->spine_pt(nspine-1)->height();
  Trace_file << " " 
-            << dynamic_cast<ELEMENT*>(Fluid_mesh_pt->bulk_element_pt(0))
+            << dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(0))
   ->p_axi_nst(0) - External_pressure_data_pt->value(0);
  Trace_file << " " << -4.0*cos(Angle)/Ca;
  Trace_file << std::endl;

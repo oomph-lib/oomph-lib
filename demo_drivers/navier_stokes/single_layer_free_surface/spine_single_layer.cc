@@ -108,13 +108,11 @@ public:
  /// Do unsteady run up to maximum time t_max with given timestep dt
  void unsteady_run(const double &t_max, const double &dt);
 
- /// \short Access function for the specific mesh
- SingleLayerSpineMesh<ELEMENT,SpineLineFluidInterfaceElement<ELEMENT> >* 
- mesh_pt() 
-  {
-   return dynamic_cast<SingleLayerSpineMesh<ELEMENT,
-    SpineLineFluidInterfaceElement<ELEMENT> >*>(Problem::mesh_pt());
-  }
+ /// \short The bulk fluid mesh, complete with spines and update information
+ SingleLayerSpineMesh<ELEMENT> *Bulk_mesh_pt;
+
+ /// \short The mesh that contains the free surface elements
+ Mesh* Surface_mesh_pt;
 
 private:
 
@@ -124,7 +122,7 @@ private:
  /// we need to update all of them here.
  void actions_before_newton_convergence_check()
   {
-   mesh_pt()->node_update();
+   Bulk_mesh_pt->node_update();
   }
 
  /// No actions required before solve step
@@ -161,9 +159,33 @@ InterfaceProblem(const unsigned &n_x, const unsigned &n_y,
 
  // Build and assign mesh (the "true" boolean flag tells the mesh
  // constructor that the domain is periodic in x)
- Problem::mesh_pt() = new SingleLayerSpineMesh<ELEMENT,
-  SpineLineFluidInterfaceElement<ELEMENT> >
-  (n_x,n_y,l_x,h,true,time_stepper_pt());
+ Bulk_mesh_pt = 
+  new SingleLayerSpineMesh<ELEMENT>(n_x,n_y,l_x,h,true,time_stepper_pt());
+
+
+ //Create the surface mesh that will contain the interface elements
+ //First create storage, but with no elements or nodes
+ Surface_mesh_pt = new Mesh;
+
+ //Loop over the horizontal elements
+ for(unsigned i=0;i<n_x;i++)
+  {
+   //Construct a new 1D line element on the face on which the local
+   //coordinate 1 is fixed at its max. value (1) --- This is face 2
+   FiniteElement *interface_element_pt =
+    new SpineLineFluidInterfaceElement<ELEMENT>(
+     Bulk_mesh_pt->finite_element_pt(n_x*(n_y-1)+i),2);
+   
+   //Push it back onto the stack
+   this->Surface_mesh_pt->add_element_pt(interface_element_pt); 
+  }
+ // Add the two sub-meshes to the problem
+ add_sub_mesh(Bulk_mesh_pt);
+ add_sub_mesh(Surface_mesh_pt);
+
+ // Combine all sub-meshes into a single mesh
+ build_global_mesh();
+
 
  // --------------------------------------------
  // Set the boundary conditions for this problem
@@ -173,13 +195,13 @@ InterfaceProblem(const unsigned &n_x, const unsigned &n_y,
  // Dirichlet conditions here
 
  // Determine number of mesh boundaries
- const unsigned n_boundary = mesh_pt()->nboundary();
+ const unsigned n_boundary = Bulk_mesh_pt->nboundary();
  
  // Loop over mesh boundaries
  for(unsigned b=0;b<n_boundary;b++)
   {
    // Determine number of nodes on boundary b
-   const unsigned n_node = mesh_pt()->nboundary_node(b);
+   const unsigned n_node = Bulk_mesh_pt->nboundary_node(b);
 
    // Loop over nodes on boundary b
    for(unsigned n=0;n<n_node;n++)
@@ -188,15 +210,15 @@ InterfaceProblem(const unsigned &n_x, const unsigned &n_y,
      // the velocity (no slip/penetration)
      if(b==0)
       {
-       mesh_pt()->boundary_node_pt(b,n)->pin(0);
-       mesh_pt()->boundary_node_pt(b,n)->pin(1);
+       Bulk_mesh_pt->boundary_node_pt(b,n)->pin(0);
+       Bulk_mesh_pt->boundary_node_pt(b,n)->pin(1);
       }
      
      // On left and right boundaries, pin x-component of the velocity
      // (no penetration of the periodic boundaries)
      if(b==1 || b==3)
       {
-       mesh_pt()->boundary_node_pt(b,n)->pin(0);
+       Bulk_mesh_pt->boundary_node_pt(b,n)->pin(0);
       }
     } // End of loop over nodes on boundary b
   } // End of loop over mesh boundaries
@@ -206,13 +228,13 @@ InterfaceProblem(const unsigned &n_x, const unsigned &n_y,
  // ----------------------------------------------------------------
  
  // Determine number of bulk elements in mesh
- const unsigned n_element_bulk = mesh_pt()->nbulk();
+ const unsigned n_element_bulk = Bulk_mesh_pt->nelement();
 
  // Loop over the bulk elements
  for(unsigned e=0;e<n_element_bulk;e++)
   {
    // Upcast from GeneralisedElement to the present element
-   ELEMENT *el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->bulk_element_pt(e));
+   ELEMENT *el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
    // Set the Reynolds number
    el_pt->re_pt() = &Global_Physical_Variables::Re;
@@ -240,7 +262,7 @@ InterfaceProblem(const unsigned &n_x, const unsigned &n_y,
  external_pressure_data_pt->set_value(0,1.31);
 
  // Determine number of 1D interface elements in mesh
- const unsigned n_interface_element = mesh_pt()->ninterface_element();
+ const unsigned n_interface_element = Surface_mesh_pt->nelement();
 
  // Loop over the interface elements
  for(unsigned e=0;e<n_interface_element;e++)
@@ -248,7 +270,7 @@ InterfaceProblem(const unsigned &n_x, const unsigned &n_y,
    // Upcast from GeneralisedElement to the present element
    SpineLineFluidInterfaceElement<ELEMENT>* el_pt = 
     dynamic_cast<SpineLineFluidInterfaceElement<ELEMENT>*>
-    (mesh_pt()->interface_element_pt(e));
+    (Surface_mesh_pt->element_pt(e));
 
    // Set the Strouhal number
    el_pt->st_pt() = &Global_Physical_Variables::St;
@@ -281,7 +303,7 @@ template <class ELEMENT, class TIMESTEPPER>
 void InterfaceProblem<ELEMENT,TIMESTEPPER>::set_initial_condition()
 {
  // Determine number of nodes in mesh
- const unsigned n_node = mesh_pt()->nnode();
+ const unsigned n_node = Bulk_mesh_pt->nnode();
  
  // Loop over all nodes in mesh
  for(unsigned n=0;n<n_node;n++)
@@ -290,7 +312,7 @@ void InterfaceProblem<ELEMENT,TIMESTEPPER>::set_initial_condition()
    for(unsigned i=0;i<2;i++)
     {
      // Set velocity component i of node n to zero
-     mesh_pt()->node_pt(n)->set_value(i,0.0);
+     Bulk_mesh_pt->node_pt(n)->set_value(i,0.0);
     }
   }
  
@@ -311,13 +333,13 @@ template <class ELEMENT, class TIMESTEPPER>
 void InterfaceProblem<ELEMENT,TIMESTEPPER>::set_boundary_conditions()
 {
  // Determine number of mesh boundaries
- const unsigned n_boundary = mesh_pt()->nboundary();
+ const unsigned n_boundary = Bulk_mesh_pt->nboundary();
  
  // Loop over mesh boundaries
  for(unsigned b=0;b<n_boundary;b++)
   {
    // Determine number of nodes on boundary b
-   const unsigned n_node = mesh_pt()->nboundary_node(b);
+   const unsigned n_node = Bulk_mesh_pt->nboundary_node(b);
    
    // Loop over nodes on boundary b
    for(unsigned n=0;n<n_node;n++)
@@ -326,13 +348,13 @@ void InterfaceProblem<ELEMENT,TIMESTEPPER>::set_boundary_conditions()
      // other than the free surface
      if(b!=2)
       {
-       mesh_pt()->boundary_node_pt(b,n)->set_value(0,0.0);
+       Bulk_mesh_pt->boundary_node_pt(b,n)->set_value(0,0.0);
       }
      
      // Set y-component of the velocity to zero on the bottom wall
      if(b==0)
       {
-       mesh_pt()->boundary_node_pt(b,n)->set_value(1,0.0);
+       Bulk_mesh_pt->boundary_node_pt(b,n)->set_value(1,0.0);
       }
     } // End of loop over nodes on boundary b
   } // End of loop over mesh boundaries
@@ -349,21 +371,21 @@ void InterfaceProblem<ELEMENT,TIMESTEPPER>::
 deform_free_surface(const double &epsilon,const unsigned &n_periods)
 {
  // Determine number of spines in mesh
- const unsigned n_spine = mesh_pt()->nspine();
+ const unsigned n_spine = Bulk_mesh_pt->nspine();
  
  // Loop over spines in mesh
  for(unsigned i=0;i<n_spine;i++)
   {
    // Determine x coordinate of spine
-   double x_value = mesh_pt()->boundary_node_pt(0,i)->x(0);
+   double x_value = Bulk_mesh_pt->boundary_node_pt(0,i)->x(0);
    
    // Set spine height
-   mesh_pt()->spine_pt(i)->height() = 
+   Bulk_mesh_pt->spine_pt(i)->height() = 
     1.0 + epsilon*(cos(2.0*n_periods*MathematicalConstants::Pi*x_value/Lx));
   }
  
  // Update nodes in bulk mesh
- mesh_pt()->node_update();
+ Bulk_mesh_pt->node_update();
  
 } // End of deform_free_surface
 
@@ -382,7 +404,7 @@ void InterfaceProblem<ELEMENT,TIMESTEPPER>::doc_solution(DocInfo &doc_info)
  // Document time and vertical position of left hand side of interface
  // in trace file
  Trace_file << time_pt()->time() << " "
-            << mesh_pt()->spine_pt(0)->height() << " " << std::endl;
+            << Bulk_mesh_pt->spine_pt(0)->height() << " " << std::endl;
 
  ofstream some_file;
  char filename[100];
@@ -396,7 +418,8 @@ void InterfaceProblem<ELEMENT,TIMESTEPPER>::doc_solution(DocInfo &doc_info)
  some_file.open(filename);
 
  // Output solution to file
- mesh_pt()->output(some_file,npts);
+ Bulk_mesh_pt->output(some_file,npts);
+ Surface_mesh_pt->output(some_file,npts);
 
  // Close solution output file
  some_file.close();

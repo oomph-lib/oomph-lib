@@ -665,20 +665,20 @@ public:
      Surface_pinned = false;
      
      //Unpin the heights of all the spines in the middle
-     unsigned n_spine = mesh_pt()->nspine();
+     unsigned n_spine = Bulk_mesh_pt->nspine();
      for(unsigned n=0;n<n_spine;n++)
       {
-       mesh_pt()->spine_pt(n)->spine_height_pt()->unpin(0);
+       Bulk_mesh_pt->spine_pt(n)->spine_height_pt()->unpin(0);
       }
      
      //If we on the top wall, v velocity is no longer pinned
      unsigned ibound=2;
      //Loop over the number of nodes on the boundary
-     unsigned num_nod= mesh_pt()->nboundary_node(ibound);
+     unsigned num_nod= Bulk_mesh_pt->nboundary_node(ibound);
      for (unsigned inod=0;inod<num_nod;inod++)
       {
        //Loop over the desired values stored at the nodes and unpin
-       mesh_pt()->boundary_node_pt(ibound,inod)->unpin(1);
+       Bulk_mesh_pt->boundary_node_pt(ibound,inod)->unpin(1);
       }
      
      //Unfix the pressure
@@ -686,11 +686,11 @@ public:
 
      // Loop over the elements to set up element-specific 
      // and re-enable ALE
-     unsigned n_element = mesh_pt()->nbulk();
+     unsigned n_element = Bulk_mesh_pt->nelement();
      for(unsigned i=0;i<n_element;i++)
       {
        // Upcast from GeneralsedElement to the present element
-       ELEMENT *el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->bulk_element_pt(i));
+       ELEMENT *el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(i));
 
        el_pt->enable_ALE();
       }
@@ -710,7 +710,7 @@ public:
 
  /// Remember to update the nodes if the surface is not pinned
  void actions_before_newton_convergence_check()
-  {if(!Surface_pinned) {mesh_pt()->node_update();}}
+  {if(!Surface_pinned) {Bulk_mesh_pt->node_update();}}
 
  /// \short Actions before the timestep (update the the time-dependent 
  /// boundary conditions)
@@ -722,7 +722,7 @@ public:
                    const double &pvalue)
   {
    //Cast to specific element and fix pressure
-   dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e))->
+   dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e))->
     fix_pressure(pdof,pvalue);
   } // end_of_fix_pressure
 
@@ -731,7 +731,7 @@ public:
  void unfix_pressure(const unsigned &e, const unsigned &pdof)
   {
    //Cast to specific element and fix pressure
-   dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e))->
+   dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e))->
     unfix_pressure(pdof);
   } // end_of_unfix_pressure
 
@@ -745,11 +745,9 @@ public:
  /// \short Overloaded version of the problem's access function to 
  /// the mesh. Recasts the pointer to the base Mesh object to 
  /// the actual mesh type.
- SingleLayerSpineMesh<ELEMENT,INTERFACE_ELEMENT>* mesh_pt() 
-  {
-   return dynamic_cast<SingleLayerSpineMesh<ELEMENT,INTERFACE_ELEMENT>*>(
-    Problem::mesh_pt());
-  }
+ SingleLayerSpineMesh<ELEMENT>* Bulk_mesh_pt; 
+
+ Mesh* Surface_mesh_pt;
  
 private:
  
@@ -787,18 +785,41 @@ ConvectionProblem(const bool &pin) : Surface_pinned(pin)
  double l_y=1.0;
 
  // Build a standard rectangular quadmesh
- Problem::mesh_pt() = 
-  new SingleLayerSpineMesh<ELEMENT,INTERFACE_ELEMENT>(
-   n_x,n_y,l_x,l_y,time_stepper_pt());
+ Bulk_mesh_pt =
+  new SingleLayerSpineMesh<ELEMENT>(n_x,n_y,l_x,l_y,time_stepper_pt());
+
+
+ //Create the surface mesh that will contain the interface elements
+ //First create storage, but with no elements or nodes
+ Surface_mesh_pt = new Mesh;
+
+ //Loop over the horizontal elements
+ for(unsigned i=0;i<n_x;i++)
+  {
+   //Construct a new 1D line element on the face on which the local
+   //coordinate 1 is fixed at its max. value (1) --- This is face 2
+   FiniteElement *interface_element_pt =
+    new INTERFACE_ELEMENT(
+     Bulk_mesh_pt->finite_element_pt(n_x*(n_y-1)+i),2);
+   
+   //Push it back onto the stack
+   this->Surface_mesh_pt->add_element_pt(interface_element_pt); 
+  }
+ // Add the two sub-meshes to the problem
+ add_sub_mesh(Bulk_mesh_pt);
+ add_sub_mesh(Surface_mesh_pt);
+
+ // Combine all sub-meshes into a single mesh
+ build_global_mesh();
 
  
  //Pin the heights of all the spines if the surface is pinned
  if(Surface_pinned)
   {
-   unsigned n_spine = mesh_pt()->nspine();
+   unsigned n_spine = Bulk_mesh_pt->nspine();
    for(unsigned n=0;n<n_spine;n++)
     {
-     mesh_pt()->spine_pt(n)->spine_height_pt()->pin(0);
+     Bulk_mesh_pt->spine_pt(n)->spine_height_pt()->pin(0);
     }
   }
 
@@ -807,7 +828,7 @@ ConvectionProblem(const bool &pin) : Surface_pinned(pin)
  // conditions here
 
  //Loop over the boundaries
- unsigned num_bound = mesh_pt()->nboundary();
+ unsigned num_bound = Bulk_mesh_pt->nboundary();
  for(unsigned ibound=0;ibound<num_bound;ibound++)
   {
    //Set the minimum index to be pinned (all values by default)
@@ -829,13 +850,13 @@ ConvectionProblem(const bool &pin) : Surface_pinned(pin)
     }
 
    //Loop over the number of nodes on the boundary
-   unsigned num_nod= mesh_pt()->nboundary_node(ibound);
+   unsigned num_nod= Bulk_mesh_pt->nboundary_node(ibound);
    for (unsigned inod=0;inod<num_nod;inod++)
     {
      //Loop over the desired values stored at the nodes and pin
      for(unsigned j=val_min;j<val_max;j++)
       {
-       mesh_pt()->boundary_node_pt(ibound,inod)->pin(j);
+       Bulk_mesh_pt->boundary_node_pt(ibound,inod)->pin(j);
       }
     }
   }
@@ -849,11 +870,11 @@ ConvectionProblem(const bool &pin) : Surface_pinned(pin)
  // Loop over the elements to set up element-specific 
  // things that cannot be handled by the (argument-free!) ELEMENT 
  // constructor.
- unsigned n_element = mesh_pt()->nbulk();
+ unsigned n_element = Bulk_mesh_pt->nelement();
  for(unsigned i=0;i<n_element;i++)
   {
    // Upcast from GeneralsedElement to the present element
-   ELEMENT *el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->bulk_element_pt(i));
+   ELEMENT *el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(i));
 
    // Set the Peclet number
    el_pt->pe_pt() = &Global_Physical_Variables::Peclet;
@@ -887,12 +908,12 @@ ConvectionProblem(const bool &pin) : Surface_pinned(pin)
   // Loop over the interface elements to set up element-specific 
  // things that cannot be handled by the (argument-free!) ELEMENT 
  // constructor.
- unsigned n_interface  = mesh_pt()->ninterface_element();
+ unsigned n_interface  = Surface_mesh_pt->nelement();
  for(unsigned i=0;i<n_interface;i++)
   {
    // Upcast from GeneralsedElement to the present element
    INTERFACE_ELEMENT *el_pt = dynamic_cast<INTERFACE_ELEMENT*>(
-    mesh_pt()->interface_element_pt(i));
+    Surface_mesh_pt->element_pt(i));
    
    // Set the Biot number
    el_pt->bi_pt() = &Global_Physical_Variables::Biot;
@@ -934,33 +955,33 @@ void ConvectionProblem<ELEMENT,INTERFACE_ELEMENT>::set_boundary_conditions(
  //Set initial temperature profile
  if(time <= 0.0)
   {
-   unsigned n_node = mesh_pt()->nnode();
+   unsigned n_node = Bulk_mesh_pt->nnode();
    for(unsigned n=0;n<n_node;n++)
     {
-     Node* nod_pt = mesh_pt()->node_pt(n);
+     Node* nod_pt = Bulk_mesh_pt->node_pt(n);
      //Set linear variation
      nod_pt->set_value(2,2.0 - nod_pt->x(1));
     }
 
    //Set the initial concentration to be one
    unsigned ibound = 2;
-   n_node = mesh_pt()->nboundary_node(ibound);
+   n_node = Bulk_mesh_pt->nboundary_node(ibound);
    for(unsigned n=0;n<n_node;n++)
     {
-     mesh_pt()->boundary_node_pt(ibound,n)->set_value(3,1.0);
+     Bulk_mesh_pt->boundary_node_pt(ibound,n)->set_value(3,1.0);
     }
   }
 
  // Loop over the boundaries
- unsigned num_bound = mesh_pt()->nboundary();
+ unsigned num_bound = Bulk_mesh_pt->nboundary();
  for(unsigned ibound=0;ibound<num_bound;ibound++)
   {
    // Loop over the nodes on boundary 
-   unsigned num_nod=mesh_pt()->nboundary_node(ibound);
+   unsigned num_nod=Bulk_mesh_pt->nboundary_node(ibound);
    for(unsigned inod=0;inod<num_nod;inod++)
     {
      // Get pointer to node
-     Node* nod_pt=mesh_pt()->boundary_node_pt(ibound,inod);
+     Node* nod_pt=Bulk_mesh_pt->boundary_node_pt(ibound,inod);
 
      //Set the number of velocity components
      unsigned vel_max=2;
@@ -1021,10 +1042,10 @@ void ConvectionProblem<ELEMENT,INTERFACE_ELEMENT>::doc_solution(
  sprintf(filename,"%s/soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
- unsigned n_element = mesh_pt()->nbulk();
+ unsigned n_element = Bulk_mesh_pt->nelement();
  for(unsigned e=0;e<n_element;e++)
   {
-   mesh_pt()->bulk_element_pt(e)->output(some_file,npts);
+   Bulk_mesh_pt->finite_element_pt(e)->output(some_file,npts);
   }
  some_file.close();
 
@@ -1033,16 +1054,16 @@ void ConvectionProblem<ELEMENT,INTERFACE_ELEMENT>::doc_solution(
          Doc_info.number());
  some_file.open(filename);
 
- unsigned n_interface  = mesh_pt()->ninterface_element();
+ unsigned n_interface  = Surface_mesh_pt->nelement();
  for(unsigned i=0;i<n_interface;i++)
   {
-   mesh_pt()->interface_element_pt(i)->output(some_file,npts);
+   Surface_mesh_pt->finite_element_pt(i)->output(some_file,npts);
   }
  some_file.close();
 
  trace << time_pt()->time() << " " 
-       << mesh_pt()->boundary_node_pt(2,8)->value(2) << " "
-       << mesh_pt()->boundary_node_pt(2,8)->value(3) << std::endl;
+       << Bulk_mesh_pt->boundary_node_pt(2,8)->value(2) << " "
+       << Bulk_mesh_pt->boundary_node_pt(2,8)->value(3) << std::endl;
 
 
  Doc_info.number()++;

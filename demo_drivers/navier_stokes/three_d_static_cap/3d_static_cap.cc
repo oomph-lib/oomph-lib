@@ -39,7 +39,6 @@
 
 // The mesh
 #include "meshes/quarter_tube_mesh.h"
-#include "fix_vol_int_elements.h"
 
 using namespace std;
 
@@ -320,71 +319,6 @@ public:
         }
       }
     }
-   
-   /*  //Treat the third layer
-   for(unsigned e=0;e<n_element;e++)
-    {
-     //If the element is on the third layer
-     if(std::abs(finite_element_pt(e)->node_pt(0)->x(2)-1.0) < 1.0e-15)
-      {
-       //Find the number of 1d nodes
-       unsigned n_p = finite_element_pt(e)->nnode_1d();
-       //Loop over the lowest layer
-       for(unsigned n=0;n<(n_p*n_p);n++)
-        {
-         //Get pointer to the spine of the nodes
-         Spine* spine_pt = element_node_pt(e,n)->spine_pt();
-         
-         //Loop up the spine and set the other nodes in the element
-         for(unsigned m=1;m<n_p;m++)
-          {
-           SpineNode* nod_pt = element_node_pt(e,(n_p*n_p)*m + n);
-           nod_pt->spine_pt() = spine_pt;
-           nod_pt->fraction() = nod_pt->x(2)/2.0;
-           nod_pt->spine_mesh_pt() = this;
-          }
-        }
-      }
-      }*/
-
-   /*  //Treat the final layer
-   for(unsigned e=0;e<n_element;e++)
-    {
-     //If the element is on the fourth layer
-     if(std::abs(finite_element_pt(e)->node_pt(0)->x(2)-1.5) < 1.0e-15)
-      {
-
-       //We can build the interface elements at the max
-       //of the element
-       FiniteElement *interface_element_pt
-        = new INTERFACE_ELEMENT(finite_element_pt(e),2,1);
-       
-       //push it back onto the stack
-       Element_pt.push_back(interface_element_pt);
-       
-       //Add it to the stack of interface elements
-       Interface_element_pt.push_back(interface_element_pt);
-       
-       //Find the number of 1d nodes
-       unsigned n_p = finite_element_pt(e)->nnode_1d();
-       //Loop over the lowest layer
-       for(unsigned n=0;n<(n_p*n_p);n++)
-        {
-         //Get pointer to the spine of the nodes
-         Spine* spine_pt = element_node_pt(e,n)->spine_pt();
-         
-         //Loop up the spine and set the other nodes in the element
-         for(unsigned m=1;m<n_p;m++)
-          {
-           SpineNode* nod_pt = element_node_pt(e,(n_p*n_p)*m + n);
-           nod_pt->spine_pt() = spine_pt;
-           nod_pt->fraction() = nod_pt->x(2)/2.0;
-           nod_pt->spine_mesh_pt() = this;
-          }
-        }
-      }
-      } */
-
   }
 
 
@@ -440,22 +374,25 @@ public:
  /// nodal positions, so we need to update all of them
  void actions_before_newton_convergence_check()
   {
-   mesh_pt()->node_update();
+   Bulk_mesh_pt->node_update();
   }
 
+ /// Create the volume constraint elements
+ void create_volume_constraint_elements();
 
  /// Doc the solution
  void doc_solution();
 
  /// \short Overload generic access function by one that returns
  /// a pointer to the specific  mesh
- AxialSpineQuarterTubeMesh<ELEMENT,FixedVolumeSpineSurfaceFluidInterfaceElement<ELEMENT> >* mesh_pt() 
-  {
-   return 
-    dynamic_cast<AxialSpineQuarterTubeMesh<ELEMENT,
-    FixedVolumeSpineSurfaceFluidInterfaceElement<ELEMENT> >*>
-    (Problem::mesh_pt());
-  }
+ AxialSpineQuarterTubeMesh<
+  ELEMENT, SpineSurfaceFluidInterfaceElement<ELEMENT> >* Bulk_mesh_pt;
+
+ ///Storage for the elements that compute the enclosed fluid volume
+ Mesh *Volume_computation_mesh_pt;
+
+ ///Storage for the volume constraint element
+ Mesh* Volume_constraint_mesh_pt;
 
 private:
  
@@ -463,6 +400,9 @@ private:
  DocInfo Doc_info;
 
  Data *Pext_pt;
+
+ ///Storage for the pressure that is traded for the volume constraint
+ Data *Traded_pressure_data_pt;
 
 }; // end_of_problem_class
 
@@ -473,14 +413,13 @@ private:
 /// Constructor: Pass DocInfo object and error targets
 //========================================================================
 template<class ELEMENT>
-FreeSurfaceRotationProblem<ELEMENT>::FreeSurfaceRotationProblem(DocInfo& doc_info,
-                                            const double& min_error_target,
-                                            const double& max_error_target,
-                                            const unsigned &hijack_flag) 
+FreeSurfaceRotationProblem<ELEMENT>::
+FreeSurfaceRotationProblem(DocInfo& doc_info,
+                           const double& min_error_target,
+                           const double& max_error_target,
+                           const unsigned &hijack_flag) 
  : Volume(atan(1.0)), Doc_info(doc_info)
 {
- //Pointer to the traded pressure data point
- Data* traded_data_pt;
  //Create a pointer to the external pressure
  Pext_pt = new Data(1);
  Pext_pt->set_value(0,0.0);
@@ -518,24 +457,26 @@ FreeSurfaceRotationProblem<ELEMENT>::FreeSurfaceRotationProblem(DocInfo& doc_inf
  double frac_mid=0.5;
 
  // Build and assign mesh
- Problem::mesh_pt()=
-  new AxialSpineQuarterTubeMesh<ELEMENT,FixedVolumeSpineSurfaceFluidInterfaceElement<ELEMENT> >
+ Bulk_mesh_pt =
+  new AxialSpineQuarterTubeMesh<
+   ELEMENT,
+   SpineSurfaceFluidInterfaceElement<ELEMENT> >
   (Wall_pt,xi_lo,frac_mid,xi_hi,nlayer);
  
  // Set error estimator 
  Z2ErrorEstimator* error_estimator_pt=new Z2ErrorEstimator;
- mesh_pt()->spatial_error_estimator_pt()=error_estimator_pt;
+ Bulk_mesh_pt->spatial_error_estimator_pt()=error_estimator_pt;
  
  // Error targets for adaptive refinement
- mesh_pt()->max_permitted_error()=max_error_target; 
- mesh_pt()->min_permitted_error()=min_error_target; 
+ Bulk_mesh_pt->max_permitted_error()=max_error_target; 
+ Bulk_mesh_pt->min_permitted_error()=min_error_target; 
 
  //Doc the boundaries
  /*ofstream some_file;
  char filename[100];
  sprintf(filename,"boundaries.dat");
  some_file.open(filename);
- mesh_pt()->output_boundaries(some_file);
+ Bulk_mesh_pt->output_boundaries(some_file);
  some_file.close();*/
  
  //Set the boundary conditions
@@ -543,20 +484,20 @@ FreeSurfaceRotationProblem<ELEMENT>::FreeSurfaceRotationProblem(DocInfo& doc_inf
  //Boundary 0 is the bottom of the domain (pinned)
  {
   unsigned b = 0;
-  unsigned n_node = mesh_pt()->nboundary_node(b);
+  unsigned n_node = Bulk_mesh_pt->nboundary_node(b);
   for(unsigned n=0;n<n_node;n++)
    {
-    for(unsigned i=0;i<3;i++) {mesh_pt()->boundary_node_pt(b,n)->pin(i);}
+    for(unsigned i=0;i<3;i++) {Bulk_mesh_pt->boundary_node_pt(b,n)->pin(i);}
    }
  }
  
  //Boundary 1 is the boundary x is zero, so pin the x-velocity
  {
   unsigned b = 1;
-  unsigned n_node = mesh_pt()->nboundary_node(b);
+  unsigned n_node = Bulk_mesh_pt->nboundary_node(b);
   for(unsigned n=0;n<n_node;n++)
    {
-    mesh_pt()->boundary_node_pt(b,n)->pin(0);
+    Bulk_mesh_pt->boundary_node_pt(b,n)->pin(0);
    }
  }
 
@@ -565,27 +506,27 @@ FreeSurfaceRotationProblem<ELEMENT>::FreeSurfaceRotationProblem(DocInfo& doc_inf
  //otherwise free
  {
   unsigned b = 2;
-  unsigned n_node = mesh_pt()->nboundary_node(b);
+  unsigned n_node = Bulk_mesh_pt->nboundary_node(b);
   for(unsigned n=0;n<n_node;n++)
    {
-    mesh_pt()->boundary_node_pt(b,n)->pin(1);
+    Bulk_mesh_pt->boundary_node_pt(b,n)->pin(1);
    }
  }
 
  //Boundary 3 is the wall, so pinned in all coordinates
  {
   unsigned b = 3;
-  unsigned n_node = mesh_pt()->nboundary_node(b);
+  unsigned n_node = Bulk_mesh_pt->nboundary_node(b);
   for(unsigned n=0;n<n_node;n++)
    {
     for(unsigned i=0;i<3;i++)
      {
-      mesh_pt()->boundary_node_pt(b,n)->pin(i);
+      Bulk_mesh_pt->boundary_node_pt(b,n)->pin(i);
      }
     /*if(n==0)
      {
       //Pin one spine heights on the wall
-      static_cast<SpineNode*>(mesh_pt()->boundary_node_pt(b,n))->
+      static_cast<SpineNode*>(Bulk_mesh_pt->boundary_node_pt(b,n))->
        spine_pt()->spine_height_pt()->pin(0);
        }*/
    }
@@ -597,11 +538,11 @@ FreeSurfaceRotationProblem<ELEMENT>::FreeSurfaceRotationProblem(DocInfo& doc_inf
 
  // Loop over the elements to set up element-specific 
  // things that cannot be handled by constructor
- unsigned n_element = mesh_pt()->nbulk();
+ unsigned n_element = Bulk_mesh_pt->nbulk();
  for(unsigned i=0;i<n_element;i++)
   {
    // Upcast from GeneralisedElement to the present element
-   ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
+   ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(i));
 
    //Set the Reynolds number, etc
    el_pt->re_pt() = &Global_Physical_Variables::Re;
@@ -614,21 +555,22 @@ FreeSurfaceRotationProblem<ELEMENT>::FreeSurfaceRotationProblem(DocInfo& doc_inf
  // Pin redudant pressure dofs. This must be done before
  // pinning the single pressure does because it unpins things
  RefineableNavierStokesEquations<3>::
-  pin_redundant_nodal_pressures(mesh_pt()->bulk_element_pt());
+  pin_redundant_nodal_pressures(Bulk_mesh_pt->bulk_element_pt());
  
  
  //If not hijacking the internal pressure
  if(hijack_flag==0)
   {
    //We trade for the external pressu
-   traded_data_pt = Pext_pt;
+   Traded_pressure_data_pt = Pext_pt;
    
    // Since the external pressure is "traded" for the volume constraint,
    // it no longer sets the overall pressure, and we 
    // can add an arbitrary constant to all pressures. To make 
    // the solution unique, we pin a single pressure value in the bulk: 
    // We arbitrarily set the pressure dof 0 in element 0 to zero.
-   dynamic_cast<ELEMENT*>(mesh_pt()->bulk_element_pt(0))->fix_pressure(0,0.0); 
+   dynamic_cast<ELEMENT*>(Bulk_mesh_pt->bulk_element_pt(0))
+    ->fix_pressure(0,0.0); 
   }
  //Otherwise we are hijacking an internal value
  else 
@@ -645,8 +587,8 @@ FreeSurfaceRotationProblem<ELEMENT>::FreeSurfaceRotationProblem(DocInfo& doc_inf
     //as the pressure whose value is determined by the volume constraint.
     //(Its value will affect the residual of that element but it will not
     //be determined by it, i.e. it's hijacked).
-    traded_data_pt = dynamic_cast<ELEMENT*>(
-     mesh_pt()->bulk_element_pt(0))->hijack_nodal_value(0,3);
+    Traded_pressure_data_pt = dynamic_cast<ELEMENT*>(
+     Bulk_mesh_pt->bulk_element_pt(0))->hijack_nodal_value(0,3);
     }
    //Otherwise hijack internal
    else
@@ -655,55 +597,32 @@ FreeSurfaceRotationProblem<ELEMENT>::FreeSurfaceRotationProblem(DocInfo& doc_inf
     //as the pressure whose value is determined by the volume constraint.
     //(Its value will affect the residual of that element but it will not
     //be determined by it, i.e. it's hijacked).
-    traded_data_pt = dynamic_cast<ELEMENT*>(
-     mesh_pt()->bulk_element_pt(0))->hijack_internal_value(0,0);
+    Traded_pressure_data_pt = dynamic_cast<ELEMENT*>(
+     Bulk_mesh_pt->bulk_element_pt(0))->hijack_internal_value(0,0);
    }
   }
 
 
  //Loop over the interface elements and set the capillary number
- unsigned n_interface = mesh_pt()->ninterface_element();
+ unsigned n_interface = Bulk_mesh_pt->ninterface_element();
  for(unsigned e=0;e<n_interface;e++)
   {
-   FixedVolumeSpineSurfaceFluidInterfaceElement<ELEMENT>* el_pt
-    = dynamic_cast<FixedVolumeSpineSurfaceFluidInterfaceElement<ELEMENT>*>(
-     mesh_pt()->interface_element_pt(e));
+   SpineSurfaceFluidInterfaceElement<ELEMENT>* el_pt
+    = dynamic_cast<SpineSurfaceFluidInterfaceElement<ELEMENT>*>(
+     Bulk_mesh_pt->interface_element_pt(e));
    
    //set the capillary number
    el_pt->ca_pt() =  &Global_Physical_Variables::Ca;
    //Set the external pressure
    el_pt->set_external_pressure_data(Pext_pt);
-   //Set the traded pressure
-   el_pt->set_traded_pressure_data(traded_data_pt);
   }
-
- //Loop over the interface edge element
- unsigned n_interface_edge = mesh_pt()->ninterface_edge_element();
- for(unsigned e=0;e<n_interface_edge;e++)
-  {
-   SpineVolumeConstraintLineElement<ELEMENT>* el_pt
-    = dynamic_cast<SpineVolumeConstraintLineElement<ELEMENT>*>(
-     mesh_pt()->interface_edge_element_pt(e));
-
-   //Set the traded pressure
-   el_pt->set_traded_pressure_data(traded_data_pt);
-  }
-
-
- hierherVolumeConstraintElement *Const_el = new hierherVolumeConstraintElement;
- //Set it up
- Const_el->volume_pt() = &Volume;
- Const_el->set_traded_pressure_data(traded_data_pt);
-
- ///Make the final point constraint element
- mesh_pt()->add_element_pt(Const_el);
 
  // Set solid body rotation as initial solution
- unsigned n_nod=mesh_pt()->nnode();
+ unsigned n_nod=Bulk_mesh_pt->nnode();
  for (unsigned j=0;j<n_nod;j++)
   {
    using namespace Global_Physical_Variables;
-   Node* node_pt=mesh_pt()->node_pt(j);
+   Node* node_pt=Bulk_mesh_pt->node_pt(j);
    // Recover coordinates
    double x=node_pt->x(0);
    double y=node_pt->x(1);
@@ -716,13 +635,66 @@ FreeSurfaceRotationProblem<ELEMENT>::FreeSurfaceRotationProblem(DocInfo& doc_inf
    node_pt->set_value(2,0.0);
   }
 
+ this->create_volume_constraint_elements();
 
+ this->add_sub_mesh(Bulk_mesh_pt);
+ this->add_sub_mesh(Volume_computation_mesh_pt);
+ this->add_sub_mesh(Volume_constraint_mesh_pt);
+
+ this->build_global_mesh();
 
  //Attach the boundary conditions to the mesh
  cout <<"Number of equations: " << assign_eqn_numbers() << std::endl; 
 
  
 } // end_of_constructor
+
+
+/// Create the volume constraint elements on all boundaries surrounding
+/// the volume
+template<class ELEMENT>
+void FreeSurfaceRotationProblem<ELEMENT>::
+create_volume_constraint_elements()
+{
+ //The single volume constraint element
+ Volume_constraint_mesh_pt = new Mesh;
+ VolumeConstraintElement* vol_constraint_element = 
+  new VolumeConstraintElement(&Volume,Traded_pressure_data_pt,0);
+ Volume_constraint_mesh_pt->add_element_pt(vol_constraint_element);
+ 
+ //Now create the volume computation elements
+ Volume_computation_mesh_pt = new Mesh;
+
+ //Loop over all boundaries (or a subset why?)
+ for(unsigned b=0;b<5;b++)
+  {
+   // How many bulk fluid elements are adjacent to boundary b?
+   unsigned n_element = Bulk_mesh_pt->nboundary_element(b);
+   
+   // Loop over the bulk fluid elements adjacent to boundary b?
+   for(unsigned e=0;e<n_element;e++)
+    {
+     // Get pointer to the bulk fluid element that is 
+     // adjacent to boundary b
+     ELEMENT* bulk_elem_pt = dynamic_cast<ELEMENT*>(
+      Bulk_mesh_pt->boundary_element_pt(b,e));
+     
+     //Find the index of the face of element e along boundary b
+     int face_index = Bulk_mesh_pt->face_index_at_boundary(b,e);
+     
+     // Create new element
+     SpineSurfaceVolumeConstraintBoundingElement<ELEMENT>* el_pt =
+      new SpineSurfaceVolumeConstraintBoundingElement<ELEMENT>(
+       bulk_elem_pt,face_index);   
+     
+     //Set the "master" volume control element
+     el_pt->set_volume_constraint_element(vol_constraint_element);
+     
+     // Add it to the mesh
+     Volume_computation_mesh_pt->add_element_pt(el_pt);     
+    }
+  }
+}
 
 
 
@@ -744,7 +716,7 @@ void FreeSurfaceRotationProblem<ELEMENT>::doc_solution()
  sprintf(filename,"%s/soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
- mesh_pt()->output(some_file,npts);
+ Bulk_mesh_pt->output(some_file,npts);
  some_file.close();
 
  std::cout << "Pext " << Pext_pt->value(0) << std::endl;

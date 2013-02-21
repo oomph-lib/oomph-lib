@@ -39,16 +39,13 @@ namespace oomph
 /// Spine mesh class derived from standard cubic 3D mesh.
 /// The mesh contains a layer of spinified fluid elements (of type ELEMENT;
 /// e.g  SpineElement<QCrouzeixRaviartElement<3>)
-// and a surface layer of corresponding Spine interface elements, 
-/// of type INTERFACE_ELEMENT, e.g. 
-/// SpineSurfaceFluidInterfaceElement<ELEMENT> 
-/// for 3D problems.
+/// for 3D problems, in which the interface's vertical position can vary
 ///
-/// This mesh has been carefully desihned so that the 
+/// This mesh has been carefully designed so that the 
 /// numeration of the nodes on the boundaries 0 and 5 (bottom and top)
 /// coincides with the numeration of the spines
 //======================================================================
-template <class ELEMENT, class INTERFACE_ELEMENT>
+template <class ELEMENT>
 class SingleLayerCubicSpineMesh : public  SimpleCubicMesh<ELEMENT >, 
  public SpineMesh
 {
@@ -68,21 +65,6 @@ public:
                            TimeStepper* time_stepper_pt=
                            &Mesh::Default_TimeStepper);
 
-
- /// Access functions for pointers to interface elements
- FiniteElement* &interface_element_pt(const unsigned long &i) 
-  {return Interface_element_pt[i];}
-
- /// Number of elements on interface
- unsigned long ninterface_element() const {return Interface_element_pt.size();}
- 
- ///Access functions for pointers to elements in bulk
- FiniteElement* &bulk_element_pt(const unsigned long &i) 
-  {return Bulk_element_pt[i];}
-
- ///Number of elements in bulk 
- unsigned long nbulk() const {return Bulk_element_pt.size();}
- 
  /// \short General node update function implements pure virtual function 
  /// defined in SpineMesh base class and performs specific node update
  /// actions:  along vertical spines
@@ -97,12 +79,6 @@ public:
   }
 
 protected:
-
- /// Vector of pointers to elements in the fluid layer
- Vector <FiniteElement *> Bulk_element_pt;
-
- /// Vector of pointers to interface elements
- Vector<FiniteElement *> Interface_element_pt;
 
  /// \short Helper function to actually build the single-layer spine mesh 
  /// (called from various constructors)

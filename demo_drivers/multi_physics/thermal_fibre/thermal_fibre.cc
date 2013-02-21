@@ -186,9 +186,13 @@ private:
  void delete_flux_elements(Mesh* const &surface_mesh_pt);
 
  /// Pointer to the "bulk" mesh
- HorizontalSingleLayerSpineMesh<ELEMENT,SpineAxisymmetricFluidInterfaceElement<ELEMENT> >* Bulk_mesh_pt;
- /// Pointer to the "surface" mesh
+ HorizontalSingleLayerSpineMesh<ELEMENT>* Bulk_mesh_pt;
+
+ /// Pointer to the "surface" mesh of flux elements
  Mesh* Surface_mesh_pt;
+
+ /// Pointer to the mesh of interface elements
+ Mesh* Interface_mesh_pt;
 
  /// Deform the mesh/free surface to a prescribed function
  void deform_free_surface(const double &Dr)
@@ -237,8 +241,35 @@ AxisymFreeSurfaceNozzleAdvDiffRobinProblem(const unsigned &n_r,
                                                               Height(h)
 {
  // Build and assign mesh
- Bulk_mesh_pt = new HorizontalSingleLayerSpineMesh<ELEMENT,
- SpineAxisymmetricFluidInterfaceElement<ELEMENT> >(n_r,n_z,l_r,h);
+ Bulk_mesh_pt = 
+  new HorizontalSingleLayerSpineMesh<ELEMENT>(n_r,n_z,l_r,h);
+
+ //Create "surface mesh" that will only contain the interface elements
+ Interface_mesh_pt = new Mesh;
+ {
+  // How many bulk elements are adjacent to boundary b?
+  unsigned n_element = Bulk_mesh_pt->nboundary_element(1);
+
+ // Loop over the bulk elements adjacent to boundary b?
+ for(unsigned e=0;e<n_element;e++)
+  {
+   // Get pointer to the bulk element that is adjacent to boundary b
+   ELEMENT* bulk_elem_pt = dynamic_cast<ELEMENT*>(
+    Bulk_mesh_pt->boundary_element_pt(1,e));
+   
+   // Find the index of the face of element e along boundary b
+   int face_index = Bulk_mesh_pt->face_index_at_boundary(1,e);
+
+   // Build the corresponding free surface element
+   SpineAxisymmetricFluidInterfaceElement<ELEMENT>* interface_element_pt = new 
+   SpineAxisymmetricFluidInterfaceElement<ELEMENT>(bulk_elem_pt,face_index);
+
+   //Add the prescribed-flux element to the surface mesh
+   Interface_mesh_pt->add_element_pt(interface_element_pt);
+
+  } //end of loop over bulk elements adjacent to boundary b
+ }
+
 
  // Create "surface mesh" that will contain only the prescribed-flux 
  // elements. The constructor just creates the mesh without
@@ -253,6 +284,7 @@ AxisymFreeSurfaceNozzleAdvDiffRobinProblem(const unsigned &n_r,
 
  // Add the two sub meshes to the problem
  add_sub_mesh(Bulk_mesh_pt);
+ add_sub_mesh(Interface_mesh_pt);
  add_sub_mesh(Surface_mesh_pt);
 
  // Combine all submeshes into a single Mesh
@@ -330,7 +362,7 @@ AxisymFreeSurfaceNozzleAdvDiffRobinProblem(const unsigned &n_r,
  // ----------------------------------------------------------------
  
  //Find number of elements in mesh
- unsigned n_element = Bulk_mesh_pt->nbulk();
+ unsigned n_element = Bulk_mesh_pt->nelement();
 
  // Loop over the elements to set up element-specific 
  // things that cannot be handled by constructor
@@ -369,7 +401,7 @@ AxisymFreeSurfaceNozzleAdvDiffRobinProblem(const unsigned &n_r,
   external_pressure_data_pt->set_value(0,p_ext);
 
  // Determine number of 1D interface elements in mesh
- const unsigned n_interface_element = Bulk_mesh_pt->ninterface_element();
+ const unsigned n_interface_element = Interface_mesh_pt->nelement();
 
  // Loop over the interface elements
  for(unsigned e=0;e<n_interface_element;e++)
@@ -377,7 +409,7 @@ AxisymFreeSurfaceNozzleAdvDiffRobinProblem(const unsigned &n_r,
    // Upcast from GeneralisedElement to the present element
    SpineAxisymmetricFluidInterfaceElement<ELEMENT>* el_pt = 
     dynamic_cast<SpineAxisymmetricFluidInterfaceElement<ELEMENT>*>
-    (Bulk_mesh_pt->interface_element_pt(e));
+    (Interface_mesh_pt->element_pt(e));
 
    // Set the Capillary number
    el_pt->ca_pt() = &Global_Physical_Variables::Ca;
@@ -531,7 +563,7 @@ doc_solution(DocInfo& doc_info)
  some_file.open(filename);
 
  //Find number of elements in mesh
- unsigned n_element = Bulk_mesh_pt->nbulk();
+ unsigned n_element = Bulk_mesh_pt->nelement();
 
  // Loop over the bulk elements
  for(unsigned e=0;e<n_element;e++)

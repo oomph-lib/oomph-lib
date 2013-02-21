@@ -43,15 +43,12 @@ namespace oomph
 ///
 /// The mesh contains a layer of spinified fluid elements (of type ELEMENT;
 /// e.g  SpineElement<QCrouzeixRaviartElement<2>)
-/// and a surface layer of corresponding Spine interface elements
-/// of type INTERFACE_ELEMENT, e.g.
-/// SpineLineFluidInterfaceElement<ELEMENT> for 2D planar
-/// problems.
+/// and information about how the internal nodes positions are affected
+/// by changes in spine length. Additional equations that determine the
+/// spine heights must be specified in order to use this mesh.
 //===========================================================================
-
-
-template<class ELEMENT, class INTERFACE_ELEMENT>
-HorizontalSingleLayerSpineMesh<ELEMENT,INTERFACE_ELEMENT>::HorizontalSingleLayerSpineMesh(
+template<class ELEMENT>
+HorizontalSingleLayerSpineMesh<ELEMENT>::HorizontalSingleLayerSpineMesh(
  const unsigned &nx, const unsigned &ny,
  const double &lx, const double &h, TimeStepper* time_stepper_pt) :
  RectangularQuadMesh<ELEMENT>(nx,ny,0.0,lx,0.0,h,false,false,
@@ -67,41 +64,13 @@ HorizontalSingleLayerSpineMesh<ELEMENT,INTERFACE_ELEMENT>::HorizontalSingleLayer
  build_horizontal_single_layer_mesh(time_stepper_pt);
 }
 
-
-
-//===========================================================================
-/// Constuctor for spine 2D mesh: Pass number of elements in x-direction, 
-/// number of elements in y-direction, axial length and height of layer, 
-/// a boolean flag to make the mesh periodic in the x-direction,
-/// and pointer to timestepper (defaults to Static timestepper).
-///
-/// The mesh contains a layer of elements (of type ELEMENT)
-/// and a surface layer of corresponding Spine interface elements (of type
-/// SpineLineFluidInterfaceElement<ELEMENT>).
-//===========================================================================
-// template<class ELEMENT, class INTERFACE_ELEMENT>
-// SingleLayerSpineMesh<ELEMENT,INTERFACE_ELEMENT>::SingleLayerSpineMesh(
-//  const unsigned &nx, const unsigned &ny,
-//  const double &lx, const double &h,  const bool& periodic_in_x,
-//  TimeStepper* time_stepper_pt) :
-//  RectangularQuadMesh<ELEMENT >(nx,ny,0.0,lx,0.0,h,periodic_in_x,false,
-//                                time_stepper_pt)
-// {
-//  // We've called the "generic" constructor for the RectangularQuadMesh
-//  // which doesn't do much...
- 
-//  // Now build the mesh: 
-//  build_single_layer_mesh(time_stepper_pt);
-// }
-
-
-
 //===========================================================================
 /// Helper function that actually builds the single-layer spine mesh
 /// based on the parameters set in the various constructors
 //===========================================================================
-template<class ELEMENT, class INTERFACE_ELEMENT>
-void HorizontalSingleLayerSpineMesh<ELEMENT,INTERFACE_ELEMENT>::build_horizontal_single_layer_mesh(
+template<class ELEMENT>
+void HorizontalSingleLayerSpineMesh<ELEMENT>::
+build_horizontal_single_layer_mesh(
  TimeStepper* time_stepper_pt) 
 {
  // Mesh can only be built with 2D Qelements.
@@ -114,33 +83,12 @@ void HorizontalSingleLayerSpineMesh<ELEMENT,INTERFACE_ELEMENT>::build_horizontal
  unsigned n_x = this->Nx;
  unsigned n_y = this->Ny;
 
- //Set up the pointers to elements in the bulk
- unsigned nbulk=nelement();
- Bulk_element_pt.reserve(nbulk);
- for(unsigned e=0;e<nbulk;e++)
-  {
-   Bulk_element_pt.push_back(this->finite_element_pt(e));
-  }
-
  //Allocate memory for the spines and fractions along spines
  //---------------------------------------------------------
 
  //Read out number of linear points in the element
  unsigned n_p = dynamic_cast<ELEMENT*>(finite_element_pt(0))->nnode_1d();
-
- //Allocate store for the spines:
-//  if (this->Xperiodic)
-//   {
-//    Spine_pt.reserve((n_p-1)*n_x);
-//   }
-//  else
-//   {
-//  Spine_pt.reserve((n_p-1)*n_y);
  Spine_pt.reserve((n_p-1)*n_y+1);
-//  }
-
-
-//  element_reorder();
 
  // FIRST SPINE
  // -----------
@@ -194,11 +142,6 @@ void HorizontalSingleLayerSpineMesh<ELEMENT,INTERFACE_ELEMENT>::build_horizontal
 
    // Last spine needs special treatment in x-periodic meshes:
    unsigned n_pmax=n_p;
-   //if ((this->Xperiodic)&&(j==n_x-1)) n_pmax=n_p-1;
-   //    if (j==n_x-1) 
-//         {
-//          n_pmax=n_p-1;
-//         }
     
    for(unsigned l2=1;l2<n_pmax;l2++)
     {
@@ -241,112 +184,8 @@ void HorizontalSingleLayerSpineMesh<ELEMENT,INTERFACE_ELEMENT>::build_horizontal
     }
   }
 
-
- // Last spine needs special treatment for periodic meshes
- // because it's the same as the first one...
-//  if (this->Xperiodic)
-//   {
-//    // Last spine is the same as first one...
-//    Spine* final_spine_pt=Spine_pt[0];  
-
-//    // Get the node
-//    SpineNode* nod_pt=element_node_pt((n_x-1),(n_p-1));
-
-//    //Set the pointer for the first node
-//    nod_pt->spine_pt() = final_spine_pt;
-//    //Set the fraction to be the same as for the nodes on the first row
-//    nod_pt->fraction() = element_node_pt(0,0)->fraction();
-//    // Pointer to the mesh that implements the update fct
-//    nod_pt->spine_mesh_pt() = element_node_pt(0,0)->spine_mesh_pt();
-   
-//    //Now loop vertically along the spine
-//    for(unsigned i=0;i<n_y;i++)
-//     {
-//      //Loop over the vertical nodes, apart from the first
-//      for(unsigned l1=1;l1<n_p;l1++)
-//       {
-//        // Get the node
-//        SpineNode* nod_pt=element_node_pt(i*n_x+(n_x-1),l1*n_p+(n_p-1));
-
-//        //Set the pointer to the spine
-//        nod_pt->spine_pt() = final_spine_pt;
-//        //Set the fraction to be the same as in first row
-//        nod_pt->fraction() = element_node_pt(i*n_x,l1*n_p)->fraction();
-//        // Pointer to the mesh that implements the update fct
-//        nod_pt->spine_mesh_pt() = 
-//         element_node_pt(i*n_x,l1*n_p)->spine_mesh_pt();
-//       }
-//     }
-   
-//   }
- 
- //Assign the 1D Line elements
- //---------------------------
-
- // Get the present number of elements
- unsigned long element_count = Element_pt.size();
-
- // Loop over the VERTICAL elements
- for(unsigned i=0;i<n_y;i++)
-  {
- 
-  // FiniteElement *interface_element_element_pt =
-  //  new INTERFACE_ELEMENT(finite_element_pt(n_y*(n_x-1)+i),1);
-
-  // Construct a new 1D line element on the face on which the local
-  // coordinate 0 is fixed at its max. value (0) --- This is face 1
-   FiniteElement *interface_element_element_pt =
-    new INTERFACE_ELEMENT(finite_element_pt(n_x*(i+1)-1),1);
-
-   // Push it back onto the stack
-   Element_pt.push_back(interface_element_element_pt); 
-
-   // Push it back onto the stack of interface elements
-   Interface_element_pt.push_back(interface_element_element_pt);
-
-   element_count++;
-  }
-
 }
 
-
-//======================================================================
-/// Reorder the elements, so we loop over them vertically first
-/// (advantageous in "wide" domains if a frontal solver is used).
-//======================================================================
-template <class ELEMENT, class INTERFACE_ELEMENT>
-void HorizontalSingleLayerSpineMesh<ELEMENT,INTERFACE_ELEMENT>::element_reorder()
-{
-
- unsigned n_x = this->Nx;
- unsigned n_y = this->Ny;
- //Find out how many elements there are
- unsigned long Nelement = nelement();
- //Find out how many fluid elements there are
- unsigned long Nfluid = n_x*n_y;
- //Create a dummy array of elements
- Vector<FiniteElement *> dummy;
-
- //Loop over the elements in horizontal order
- for(unsigned long j=0;j<n_x;j++)
-  {
-   //Loop over the elements in lower layer vertically
-   for(unsigned long i=0;i<n_y;i++)
-    {
-     //Push back onto the new stack
-     dummy.push_back(finite_element_pt(n_x*i+j));
-    }
-
-   //Push back the line element onto the stack
-   dummy.push_back(finite_element_pt(Nfluid+j));
-  }
-
- //Now copy the reordered elements into the element_pt
- for(unsigned long e=0;e<Nelement;e++)
-  {
-   Element_pt[e] = dummy[e];
-  }
-}
 
 }
 #endif

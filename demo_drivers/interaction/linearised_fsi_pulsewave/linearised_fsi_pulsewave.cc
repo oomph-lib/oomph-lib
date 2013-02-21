@@ -220,8 +220,9 @@ namespace Global_Physical_Variables
   Lambda_sq=St*St*Re*Q*Density_ratio;
 
   // Pressure wavespeed in solid
-  Pressure_wavespeed=sqrt( ( (1.0-Nu)/((1.0+Nu)*(1.0-2.0*Nu)) ) /
-                           (Density_ratio*Q*Re) );
+  // Commented out to avoid a division by zero
+  //Pressure_wavespeed=sqrt( ( (1.0-Nu)/((1.0+Nu)*(1.0-2.0*Nu)) ) /
+  //                         (Density_ratio*Q*Re) );
 
  }
 

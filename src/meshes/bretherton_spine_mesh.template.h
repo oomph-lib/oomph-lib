@@ -45,7 +45,7 @@ namespace oomph
 /// 
 //============================================================================
 template <class ELEMENT, class INTERFACE_ELEMENT>
-class BrethertonSpineMesh : public SingleLayerSpineMesh<ELEMENT,INTERFACE_ELEMENT>
+class BrethertonSpineMesh : public SingleLayerSpineMesh<ELEMENT>
 { 
 
 
@@ -80,6 +80,21 @@ public:
                      TimeStepper* time_stepper_pt=
                      &Mesh::Default_TimeStepper);
  
+ 
+ /// Access functions for pointers to interface elements
+ FiniteElement* &interface_element_pt(const unsigned long &i) 
+  {return Interface_element_pt[i];}
+
+ /// Number of elements on interface
+ unsigned long ninterface_element() const {return Interface_element_pt.size();}
+ 
+ ///Access functions for pointers to elements in bulk
+ FiniteElement* &bulk_element_pt(const unsigned long &i) 
+  {return Bulk_element_pt[i];}
+
+ ///Number of elements in bulk 
+ unsigned long nbulk() const {return Bulk_element_pt.size();}
+
  
  /// Number of free-surface spines (i.e. excluding the dummy spines
  /// in the channel region)
@@ -512,6 +527,13 @@ protected:
  /// near the bubble tip; the bubble tip is located at s=[1.0,1.0]
  /// in this element
  ELEMENT* Control_element_pt;
+
+ /// Vector of pointers to element in the fluid layer
+ Vector <FiniteElement *> Bulk_element_pt;
+
+ /// Vector of pointers to interface elements
+ Vector<FiniteElement *> Interface_element_pt;
+
 
 };
 

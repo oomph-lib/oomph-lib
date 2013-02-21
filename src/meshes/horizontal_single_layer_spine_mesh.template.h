@@ -41,12 +41,10 @@ namespace oomph
 /// Horizontal Single-layer spine mesh class derived from standard 2D mesh.
 /// The mesh contains a layer of spinified fluid elements (of type ELEMENT;
 /// e.g  SpineElement<QCrouzeixRaviartElement<2>)
-/// and a surface layer of corresponding Spine interface elements, 
-/// of type INTERFACE_ELEMENT, e.g. 
-/// SpineLineFluidInterfaceElement<ELEMENT> for 2D planar problems.
+/// and the information required to update their position. Additional
+/// equations must be specified in order to determine how the spines move.
 //======================================================================
-
-template <class ELEMENT, class INTERFACE_ELEMENT>
+template <class ELEMENT>
 class HorizontalSingleLayerSpineMesh : public RectangularQuadMesh<ELEMENT >, 
                           public SpineMesh
 {
@@ -63,32 +61,6 @@ public:
                    TimeStepper* time_stepper_pt=
                    &Mesh::Default_TimeStepper);
 
- 
- /// Access functions for pointers to interface elements
- FiniteElement* &interface_element_pt(const unsigned long &i) 
-  {
-   return Interface_element_pt[i];
-  }
-
- /// Number of elements on interface
- unsigned long ninterface_element() const 
-  {
-   return Interface_element_pt.size();
-  }
- 
- ///Access functions for pointers to elements in bulk
- FiniteElement* &bulk_element_pt(const unsigned long &i) 
-  {return Bulk_element_pt[i];}
-
- ///Number of elements in bulk 
- unsigned long nbulk() const 
-  {
-   return Bulk_element_pt.size();
-  }
-
- /// \short Reorder the elements so we loop over them vertically first
- /// (advantageous in "wide" domains if a frontal solver is used).
- void element_reorder();
 
  /// \short General node update function implements pure virtual function 
  /// defined in SpineMesh base class and performs specific node update
@@ -106,12 +78,6 @@ public:
 
 
 protected:
-
- /// Vector of pointers to element in the fluid layer
- Vector <FiniteElement *> Bulk_element_pt;
-
- /// Vector of pointers to interface elements
- Vector<FiniteElement *> Interface_element_pt;
 
  /// \short Helper function to actually build the single-layer spine mesh 
  /// (called from various constructors)

@@ -71,7 +71,7 @@ BrethertonSpineMesh<ELEMENT,INTERFACE_ELEMENT>::BrethertonSpineMesh(
  const double& zeta_transition_end, 
  const double& zeta_end,
  TimeStepper* time_stepper_pt) :
- SingleLayerSpineMesh<ELEMENT,INTERFACE_ELEMENT>
+ SingleLayerSpineMesh<ELEMENT>
 (2*(nx1+nx2+nhalf),nh,1.0,h,time_stepper_pt),
  Nx1(nx1), Nx2(nx2), Nx3(nx3), Nhalf(nhalf), Nh(nh), H(h),
  Upper_wall_pt(upper_wall_pt), Lower_wall_pt(lower_wall_pt),
@@ -81,6 +81,13 @@ BrethertonSpineMesh<ELEMENT,INTERFACE_ELEMENT>::BrethertonSpineMesh(
  Spine_centre_fraction_pt(&Default_spine_centre_fraction),
  Default_spine_centre_fraction(0.5)
 {
+ //Add the created elements to the bulk domain
+ unsigned n_bulk = this->nelement();
+ Bulk_element_pt.resize(n_bulk);
+ for(unsigned e=0;e<n_bulk;e++)
+  {
+   Bulk_element_pt[e] = this->finite_element_pt(e);
+  }
 
  // Mesh can only be built with 2D Qelements.
  MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(2);
@@ -125,6 +132,28 @@ BrethertonSpineMesh<ELEMENT,INTERFACE_ELEMENT>::BrethertonSpineMesh(
         << " and " << r_wall_up[1] << std::endl << std::endl;
    oomph_info << "===================================================\n\n "  << std::endl;
   }
+
+ 
+ //Add the interface elements
+ //Loop over the horizontal elements
+ {
+  unsigned n_x = 2*(nx1+nx2+nhalf);
+  unsigned n_y = nh;
+  for(unsigned i=0;i<n_x;i++)
+   {
+    //Construct a new 1D line element on the face on which the local
+    //coordinate 1 is fixed at its max. value (1) --- This is face 2
+    FiniteElement *interface_element_element_pt =
+     new INTERFACE_ELEMENT(this->finite_element_pt(n_x*(n_y-1)+i),2);
+
+    //Push it back onto the stack
+    this->Element_pt.push_back(interface_element_element_pt); 
+    
+    //Push it back onto the stack of interface elements
+    this->Interface_element_pt.push_back(interface_element_element_pt);
+
+   }
+ }
 
  // Reorder elements: Vertical stacks of elements, each topped by
  // their interface element -- this is (currently) identical to the

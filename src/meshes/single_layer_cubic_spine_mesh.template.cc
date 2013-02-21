@@ -39,16 +39,9 @@ namespace oomph
 /// number of elements in y-direction, number elements in z-direction, 
 /// length, width and height of layer, 
 /// and pointer to timestepper (defaults to Static timestepper).
-///
-/// The mesh contains a layer of spinified fluid elements (of type ELEMENT;
-/// e.g  SpineElement<QCrouzeixRaviartElement<3>)
-/// and a surface layer of corresponding Spine interface elements
-/// of type INTERFACE_ELEMENT, e.g.
-/// SpineSurfaceFluidInterfaceElement<ELEMENT> for 2D planar
-/// problems.
 //===========================================================================
-template<class ELEMENT, class INTERFACE_ELEMENT>
-SingleLayerCubicSpineMesh<ELEMENT, INTERFACE_ELEMENT>::
+template<class ELEMENT>
+SingleLayerCubicSpineMesh<ELEMENT>::
 SingleLayerCubicSpineMesh(
  const unsigned &nx, const unsigned &ny,  const unsigned &nz, 
  const double &lx, const double &ly, const double &h, 
@@ -66,8 +59,8 @@ SingleLayerCubicSpineMesh(
 /// Helper function that actually builds the single-layer spine mesh
 /// based on the parameters set in the various constructors
 //===========================================================================
-template<class ELEMENT, class INTERFACE_ELEMENT>
-void SingleLayerCubicSpineMesh<ELEMENT, INTERFACE_ELEMENT>::
+template<class ELEMENT>
+void SingleLayerCubicSpineMesh<ELEMENT>::
 build_single_layer_mesh(
  TimeStepper* time_stepper_pt) 
 {
@@ -80,14 +73,6 @@ build_single_layer_mesh(
  unsigned n_y = this->Ny;
  //Read out the number of elements in the z-direction
  unsigned n_z = this->Nz;
-
- //Set up the pointers to elements in the bulk
- unsigned nbulk=nelement();
- Bulk_element_pt.reserve(nbulk);
- for(unsigned e=0;e<nbulk;e++)
-  {
-   Bulk_element_pt.push_back(this->finite_element_pt(e));
-  }
 
  //Allocate memory for the spines and fractions along spines
  
@@ -150,7 +135,8 @@ build_single_layer_mesh(
   {
    for(unsigned l1=0;l1<n_p;l1++) //y loop over the nodes
     {
-     // First we copy the last row of nodes into the first row of the new element (and extend to the third dimension)
+     // First we copy the last row of nodes into the 
+     // first row of the new element (and extend to the third dimension)
    for(unsigned l2=1;l2<n_p;l2++)  //x loop over the nodes
     {
      //Node j + i*np
@@ -191,8 +177,9 @@ build_single_layer_mesh(
     }
   }
 
-//REST OF THE ELEMENTS
-// Now we loop over the rest of the elements. We will separe the first of each row being al the rest equal
+ //REST OF THE ELEMENTS
+ // Now we loop over the rest of the elements. 
+ //We will separate the first of each row being al the rest equal
  for(unsigned long i=1;i<n_y;i++)
 {
 //FIRST ELEMENT OF THE ROW
@@ -211,7 +198,8 @@ build_single_layer_mesh(
 
 
      // Get pointer to node
-     SpineNode* nod_pt=element_node_pt(i*n_x,l2+l1*n_p); // Element i*n_x; node l2 + l1*n_p
+     // Element i*n_x; node l2 + l1*n_p
+     SpineNode* nod_pt=element_node_pt(i*n_x,l2+l1*n_p); 
      //Set the pointer to the spine
      nod_pt->spine_pt() = new_spine_pt;
      //Set the fraction
@@ -227,7 +215,8 @@ build_single_layer_mesh(
        for(unsigned l3=1;l3<n_p;l3++)
         {
          // Get pointer to node
-         SpineNode* nod_pt=element_node_pt(i*n_x+k*n_x*n_y,l3*n_p*n_p+l2+l1*n_p);
+         SpineNode* nod_pt=
+          element_node_pt(i*n_x+k*n_x*n_y,l3*n_p*n_p+l2+l1*n_p);
          //Set the pointer to the spine
          nod_pt->spine_pt() = new_spine_pt;
          //Set the fraction
@@ -263,7 +252,8 @@ build_single_layer_mesh(
 
 
        // Get pointer to node
-       SpineNode* nod_pt=element_node_pt(j+i*n_x,l2+l1*n_p); // Element j + i*n_x; node l2 + l1*n_p
+       // Element j + i*n_x; node l2 + l1*n_p
+       SpineNode* nod_pt=element_node_pt(j+i*n_x,l2+l1*n_p); 
        //Set the pointer to the spine
        nod_pt->spine_pt() = new_spine_pt;
        //Set the fraction
@@ -279,7 +269,8 @@ build_single_layer_mesh(
          for(unsigned l3=1;l3<n_p;l3++)
           {
            // Get pointer to node
-           SpineNode* nod_pt=element_node_pt(j+i*n_x+k*n_x*n_y,l3*n_p*n_p+l2+l1*n_p);
+           SpineNode* nod_pt=
+            element_node_pt(j+i*n_x+k*n_x*n_y,l3*n_p*n_p+l2+l1*n_p);
            //Set the pointer to the spine
            nod_pt->spine_pt() = new_spine_pt;
            //Set the fraction
@@ -294,38 +285,9 @@ build_single_layer_mesh(
     }
 
   }
-
-
+ 
 }
 
-
-
- //Assign the 2D Line elements
- //---------------------------
-
- //Get the present number of elements
- unsigned long element_count = Element_pt.size();
-
- //Loop over the elements on the plane
- for(unsigned l1=0;l1<n_y;l1++)
-   for(unsigned l2=0;l2<n_x;l2++)
- {
-  {
-  //Construct a new 2D surface element on the face on which the local
-  //coordinate 2 is fixed at its max. value (1) -- Face 3
-   FiniteElement *interface_element_element_pt =
-    new INTERFACE_ELEMENT(finite_element_pt(n_x*n_y*(n_z-1)+l2+l1*n_x),3);
-
-   //Push it back onto the stack
-   Element_pt.push_back(interface_element_element_pt); 
-
-   //Push it back onto the stack of interface elements
-   Interface_element_pt.push_back(interface_element_element_pt);
-
-   //Now assign the spines to the elements
-   element_count++;
-   }
-  }
 
 }
 

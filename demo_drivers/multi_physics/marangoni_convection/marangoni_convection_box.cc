@@ -515,78 +515,7 @@ template<class ELEMENT>
 double FixedVolumeSpineLineMarangoniFluidInterfaceElement<ELEMENT>::
 Default_Physical_Constant_Value = 1.0;
 
-//============================================================================
-/// Specific mesh for the static cap problem: Essentially a 
-/// standard single-layer mesh with an additional element that applies
-/// the volume constraint.
-//============================================================================
-template <class ELEMENT, class INTERFACE_ELEMENT>
-class StaticSingleLayerSpineMesh : 
- public SingleLayerSpineMesh<ELEMENT,INTERFACE_ELEMENT>
-{
- 
-private:
-
- /// \short Pointer to the point element that is used to enforce
- /// conservation of mass
- FiniteElement *Right_point_element_pt, *Left_point_element_pt;
-
-public:
-
- /// Constructor: Pass number of elements in axial direction, number
- /// of elements in the layers and half-width.
- StaticSingleLayerSpineMesh(const unsigned &nx, const unsigned &nh,
-                            const double &lx, const double &ly,
-                            TimeStepper* time_stepper_pt=
-                            &Mesh::Default_TimeStepper);
- 
- /// Return pointer to the volumetric constraint element
- FiniteElement* &right_point_element_pt() {return Right_point_element_pt;}
-
- /// Return point to the left constraint element
- FiniteElement* &left_point_element_pt() {return Left_point_element_pt;}
- 
-};
-
-
-//======================================================================
-/// Constructor: Pass number of elements in horizontal direction, number
-/// of elements in the two layers and half-width.
-//======================================================================
-template<class ELEMENT, class INTERFACE_ELEMENT>
-StaticSingleLayerSpineMesh<ELEMENT,INTERFACE_ELEMENT>::
-StaticSingleLayerSpineMesh(const unsigned &nx,
-                           const unsigned &nh,
-                           const double & lx,
-                           const double &ly,
-                           TimeStepper* time_stepper_pt) :
- SingleLayerSpineMesh<ELEMENT,INTERFACE_ELEMENT>(nx,nh,lx,ly,
-                                                 time_stepper_pt)
-{
- //Reorder the elements
- this->element_reorder();
-
- // The first interface element:
- INTERFACE_ELEMENT* el_pt=
-  dynamic_cast<INTERFACE_ELEMENT*>(this->Interface_element_pt[0]);
- 
- //Now make our edge (point)  element
- Left_point_element_pt  = el_pt->make_bounding_element(-1);
- //Add it to the stack
- this->Element_pt.push_back(Left_point_element_pt);
-
- 
- // Last interface element:
- el_pt=
-  dynamic_cast<INTERFACE_ELEMENT*>(this->Interface_element_pt[this->Nx-1]);
- 
- //Now make our edge (point)  element
- Right_point_element_pt  = el_pt->make_bounding_element(1);
- //Add it to the stack
- this->Element_pt.push_back(Right_point_element_pt);
-}
-
-} //End of the oomph namespace
+} //end of the oomph namespace
 
 //======start_of_namespace============================================
 /// Namespace for the physical parameters in the problem
@@ -700,7 +629,7 @@ public:
  /// Remember to update the nodes!
  void actions_before_newton_convergence_check()
   {
-   mesh_pt()->node_update();
+   Bulk_mesh_pt->node_update();
    
    // This driver code cannot be allowed to use the analytical form of
    // get_dresidual_dnodal_coordinates(...) that is implemented in the
@@ -711,11 +640,11 @@ public:
    // PATRICKFLAG I'm not sure why I can't just call this in the
    // constructor for this problem, there doesn't seem to be any
    // adaptivity going on...
-   const unsigned n_element = mesh_pt()->nelement();
+   const unsigned n_element = Bulk_mesh_pt->nelement();
    for(unsigned e=0;e<n_element;e++)
     {
      ElementWithMovingNodes* el_pt =
-      dynamic_cast<ElementWithMovingNodes*>(mesh_pt()->element_pt(e));
+      dynamic_cast<ElementWithMovingNodes*>(Bulk_mesh_pt->element_pt(e));
      el_pt->evaluate_shape_derivs_by_direct_fd();
     }
   }
@@ -735,7 +664,7 @@ public:
                    const double &pvalue)
   {
    //Cast to specific element and fix pressure
-   dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e))->
+   dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e))->
     fix_pressure(pdof,pvalue);
   } // end_of_fix_pressure
 
@@ -744,7 +673,7 @@ public:
  void unfix_pressure(const unsigned &e, const unsigned &pdof)
   {
    //Cast to specific element and fix pressure
-   dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e))->
+   dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e))->
     unfix_pressure(pdof);
   } // end_of_unfix_pressure
 
@@ -755,14 +684,14 @@ public:
  /// \short Set the boundary conditions
  void set_boundary_conditions(const double &time);
 
- /// \short Overloaded version of the problem's access function to 
- /// the mesh. Recasts the pointer to the base Mesh object to 
- /// the actual mesh type.
- StaticSingleLayerSpineMesh<ELEMENT,INTERFACE_ELEMENT>* mesh_pt() 
-  {
-   return dynamic_cast<StaticSingleLayerSpineMesh<ELEMENT,INTERFACE_ELEMENT>*>(
-    Problem::mesh_pt());
-  }
+ /// \short Mesh for the bulk fluid elements
+ SingleLayerSpineMesh<ELEMENT> *Bulk_mesh_pt;
+
+ /// The mesh for the interface elements
+ Mesh* Surface_mesh_pt;
+ 
+ /// The mesh for the element at the contact points
+ Mesh* Point_mesh_pt;
  
 private:
  
@@ -772,9 +701,6 @@ private:
  ///Pointer to the external data point
  Data* External_pressure_data_pt;
 
- ///The wall normal (out of the fluid)
-// Vector<double> Wall_normal_left;
-// Vector<double> Wall_normal_right;
 
 }; // end of problem class
 
@@ -784,12 +710,6 @@ private:
 template<class ELEMENT, class INTERFACE_ELEMENT>
 ConvectionProblem<ELEMENT,INTERFACE_ELEMENT>::ConvectionProblem()
 {
- // //Set the wall normal values
- // Wall_normal_left.resize(2);
- // Wall_normal_left[0] = -1.0; Wall_normal_left[1] = 0.0;
- // Wall_normal_right.resize(2);
- // Wall_normal_right[0] = 1.0; Wall_normal_right[1] = 0.0;
-
  //Allocate a timestepper
  add_time_stepper_pt(new BDF<2>);
 
@@ -808,10 +728,45 @@ ConvectionProblem<ELEMENT,INTERFACE_ELEMENT>::ConvectionProblem()
  // Domain length in y-direction
  double l_y=1.0;
 
- // Build a standard rectangular quadmesh
- Problem::mesh_pt() = 
-  new StaticSingleLayerSpineMesh<ELEMENT,INTERFACE_ELEMENT>(
-   n_x,n_y,l_x,l_y,time_stepper_pt());
+ Bulk_mesh_pt =
+  new SingleLayerSpineMesh<ELEMENT>(n_x,n_y,l_x,l_y,time_stepper_pt());
+
+ //Create the surface mesh that will contain the interface elements
+ //First create storage, but with no elements or nodes
+ Surface_mesh_pt = new Mesh;
+
+ //Loop over the horizontal elements
+ for(unsigned i=0;i<n_x;i++)
+  {
+   //Construct a new 1D line element on the face on which the local
+   //coordinate 1 is fixed at its max. value (1) --- This is face 2
+   FiniteElement *interface_element_pt =
+    new INTERFACE_ELEMENT(Bulk_mesh_pt->finite_element_pt(n_x*(n_y-1)+i),2);
+   
+   //Push it back onto the stack
+   this->Surface_mesh_pt->add_element_pt(interface_element_pt); 
+  }
+ 
+ //Create the Point mesh that is responsible for enforcing the contact
+ //angle condition
+ Point_mesh_pt = new Mesh;
+ {
+  //Make the point (contact) element from the first surface element
+  FiniteElement* point_element_pt = 
+   dynamic_cast<INTERFACE_ELEMENT*>(Surface_mesh_pt->element_pt(0))
+                                    ->make_bounding_element(-1);
+ 
+ //Add it to the mesh
+ this->Point_mesh_pt->add_element_pt(point_element_pt);
+ 
+ //Make the point (contact) elemnet from the last surface element
+ point_element_pt = 
+  dynamic_cast<INTERFACE_ELEMENT*>(Surface_mesh_pt->element_pt(n_x-1))
+  ->make_bounding_element(1);
+
+//Add it to the mesh
+this->Point_mesh_pt->add_element_pt(point_element_pt);
+}
 
  //Create a Data object whose single value stores the
  //external pressure
@@ -847,7 +802,7 @@ ConvectionProblem<ELEMENT,INTERFACE_ELEMENT>::ConvectionProblem()
  // conditions here
 
  //Loop over the boundaries
- unsigned num_bound = mesh_pt()->nboundary();
+ unsigned num_bound = Bulk_mesh_pt->nboundary();
  for(unsigned ibound=0;ibound<num_bound;ibound++)
   {
    //Set the minimum index to be pinned (all values by default)
@@ -864,13 +819,13 @@ ConvectionProblem<ELEMENT,INTERFACE_ELEMENT>::ConvectionProblem()
    if(ibound==2) {val_max=0;}
 
    //Loop over the number of nodes on the boundary
-   unsigned num_nod= mesh_pt()->nboundary_node(ibound);
+   unsigned num_nod= Bulk_mesh_pt->nboundary_node(ibound);
    for (unsigned inod=0;inod<num_nod;inod++)
     {
      //Loop over the desired values stored at the nodes and pin
      for(unsigned j=val_min;j<val_max;j++)
       {
-       mesh_pt()->boundary_node_pt(ibound,inod)->pin(j);
+       Bulk_mesh_pt->boundary_node_pt(ibound,inod)->pin(j);
       }
     }
   }
@@ -880,11 +835,11 @@ ConvectionProblem<ELEMENT,INTERFACE_ELEMENT>::ConvectionProblem()
  // Loop over the elements to set up element-specific 
  // things that cannot be handled by the (argument-free!) ELEMENT 
  // constructor.
- unsigned n_element = mesh_pt()->nbulk();
+ unsigned n_element = Bulk_mesh_pt->nelement();
  for(unsigned i=0;i<n_element;i++)
   {
    // Upcast from GeneralsedElement to the present element
-   ELEMENT *el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->bulk_element_pt(i));
+   ELEMENT *el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(i));
 
    // Set the Peclet number
    el_pt->pe_pt() = &Global_Physical_Variables::Peclet;
@@ -915,12 +870,12 @@ ConvectionProblem<ELEMENT,INTERFACE_ELEMENT>::ConvectionProblem()
   // Loop over the interface elements to set up element-specific 
  // things that cannot be handled by the (argument-free!) ELEMENT 
  // constructor.
- unsigned n_interface  = mesh_pt()->ninterface_element();
+ unsigned n_interface  = Surface_mesh_pt->nelement();
  for(unsigned i=0;i<n_interface;i++)
   {
    // Upcast from GeneralsedElement to the present element
    INTERFACE_ELEMENT *el_pt = dynamic_cast<INTERFACE_ELEMENT*>(
-    mesh_pt()->interface_element_pt(i));
+    Surface_mesh_pt->element_pt(i));
    
    // Set the Biot number
    el_pt->bi_pt() = &Global_Physical_Variables::Biot;
@@ -953,7 +908,7 @@ ConvectionProblem<ELEMENT,INTERFACE_ELEMENT>::ConvectionProblem()
  {
   SpineVolumeConstraintPointElement<ELEMENT>* el_pt =
    dynamic_cast<SpineVolumeConstraintPointElement<ELEMENT>*>
-   (mesh_pt()->right_point_element_pt());
+   (Point_mesh_pt->element_pt(1));
   
   el_pt->volume_pt() = &Global_Physical_Variables::Volume;
   el_pt->set_traded_pressure_data(traded_pressure_data_pt);
@@ -962,35 +917,38 @@ ConvectionProblem<ELEMENT,INTERFACE_ELEMENT>::ConvectionProblem()
 
  // Set the contact angle boundary condition for the leftmost element
  // (pass pointer to double that specifies the contact angle)
- dynamic_cast<FluidInterfaceBoundingElement*>(
-  mesh_pt()->left_point_element_pt())->
-  set_contact_angle(&Global_Physical_Variables::Angle);
+{
+ FluidInterfaceBoundingElement* left_element_pt = 
+  dynamic_cast<FluidInterfaceBoundingElement*>(
+   Point_mesh_pt->element_pt(0));
  
- // Set the Capillary number
- dynamic_cast<FluidInterfaceBoundingElement*>(
-  mesh_pt()->left_point_element_pt())->ca_pt() = 
-  &Global_Physical_Variables::Capillary;
-
- dynamic_cast<FluidInterfaceBoundingElement*>(
-  mesh_pt()->left_point_element_pt())->wall_unit_normal_fct_pt() = 
+ left_element_pt->set_contact_angle(&Global_Physical_Variables::Angle);
+// Set the Capillary number
+ left_element_pt->ca_pt() = &Global_Physical_Variables::Capillary;
+// Set the wall normal function
+ left_element_pt->wall_unit_normal_fct_pt() = 
   &Global_Physical_Variables::wall_unit_normal_left_fct; 
-
 
  // Set the contact angle boundary condition for the rightmost element
  // (pass pointer to double that specifies the contact angle)
+ FluidInterfaceBoundingElement* right_element_pt = 
  dynamic_cast<FluidInterfaceBoundingElement*>(
-  mesh_pt()->right_point_element_pt())->
-  set_contact_angle(&Global_Physical_Variables::Angle);
- 
- // Set the Capillary number
- dynamic_cast<FluidInterfaceBoundingElement*>(
-  mesh_pt()->right_point_element_pt())->ca_pt() = 
-  &Global_Physical_Variables::Capillary;
- 
- dynamic_cast<FluidInterfaceBoundingElement*>(
-  mesh_pt()->right_point_element_pt())->wall_unit_normal_fct_pt() = 
-    &Global_Physical_Variables::wall_unit_normal_right_fct; 
+  Point_mesh_pt->element_pt(1));
 
+ right_element_pt->
+  set_contact_angle(&Global_Physical_Variables::Angle);
+  // Set the Capillary number
+ right_element_pt->ca_pt() = &Global_Physical_Variables::Capillary;
+ // Set the wall normal function
+ right_element_pt->wall_unit_normal_fct_pt() = 
+    &Global_Physical_Variables::wall_unit_normal_right_fct; 
+}
+
+ this->add_sub_mesh(Bulk_mesh_pt);
+ this->add_sub_mesh(Surface_mesh_pt);
+ this->add_sub_mesh(Point_mesh_pt);
+ 
+ this->build_global_mesh();
 
  // Setup equation numbering scheme
  cout <<"Number of equations: " << assign_eqn_numbers() << endl; 
@@ -1008,15 +966,15 @@ void ConvectionProblem<ELEMENT,INTERFACE_ELEMENT>::set_boundary_conditions(
  const double &time)
 {
  // Loop over the boundaries
- unsigned num_bound = mesh_pt()->nboundary();
+ unsigned num_bound = Bulk_mesh_pt->nboundary();
  for(unsigned ibound=0;ibound<num_bound;ibound++)
   {
    // Loop over the nodes on boundary 
-   unsigned num_nod=mesh_pt()->nboundary_node(ibound);
+   unsigned num_nod=Bulk_mesh_pt->nboundary_node(ibound);
    for(unsigned inod=0;inod<num_nod;inod++)
     {
      // Get pointer to node
-     Node* nod_pt=mesh_pt()->boundary_node_pt(ibound,inod);
+     Node* nod_pt=Bulk_mesh_pt->boundary_node_pt(ibound,inod);
 
      //Set the number of velocity components
      unsigned vel_max=2;
@@ -1080,7 +1038,8 @@ void ConvectionProblem<ELEMENT,INTERFACE_ELEMENT>::doc_solution()
  sprintf(filename,"%s/soln%i_%g.dat",Doc_info.directory().c_str(),
          Doc_info.number(),angle);
  some_file.open(filename);
- mesh_pt()->output(some_file,npts);
+ Bulk_mesh_pt->output(some_file,npts);
+ Surface_mesh_pt->output(some_file,npts);
  some_file.close();
 
  Doc_info.number()++;

@@ -97,7 +97,7 @@ public:
  /// of them here.
  void actions_before_newton_convergence_check()
   {
-   mesh_pt()->node_update();
+   Bulk_mesh_pt->node_update();
   }
 
  /// Doc the solution
@@ -117,37 +117,34 @@ private:
  void actions_after_newton_solve() {}
 
  /// \short Access function for the specific mesh
- HorizontalSingleLayerSpineMesh<ELEMENT,SpineAxisymmetricFluidInterfaceElement<ELEMENT> >* 
- mesh_pt() 
-  {
-   return dynamic_cast<HorizontalSingleLayerSpineMesh<ELEMENT,
-    SpineAxisymmetricFluidInterfaceElement<ELEMENT> >*>(Problem::mesh_pt());
-  }
+ HorizontalSingleLayerSpineMesh<ELEMENT>* Bulk_mesh_pt; 
 
+ /// \short Mesh for the interface elements
+ Mesh* Interface_mesh_pt;
  
  /// Deform the mesh/free surface to a prescribed function
  void deform_free_surface(const double &Dr)
   {
 
    // Determine number of spines in mesh
-   const unsigned n_spine = mesh_pt()->nspine();
+   const unsigned n_spine = Bulk_mesh_pt->nspine();
 
    // Loop over spines in mesh
    for(unsigned i=0;i<n_spine;i++)
     {
      
      // Determine z coordinate of spine
-     double z_value = mesh_pt()->boundary_node_pt(1,i)->x(1);
+     double z_value = Bulk_mesh_pt->boundary_node_pt(1,i)->x(1);
      if (z_value<=(Height/1.1))
       {
        // Set spine height
-       mesh_pt()->spine_pt(i)->height() = sqrt(exp(-log(Dr)*(1.0-(1.1*z_value/Height))));
+       Bulk_mesh_pt->spine_pt(i)->height() = sqrt(exp(-log(Dr)*(1.0-(1.1*z_value/Height))));
       }
 
     } // End of loop over spines
    
    // Update nodes in bulk mesh
-   mesh_pt()->node_update();
+   Bulk_mesh_pt->node_update();
 
   } // End of deform_free_surface
 
@@ -176,9 +173,42 @@ MeltSpinningProblem(const unsigned &n_r,
 
  // Build and assign mesh (the "false" boolean flag tells the mesh
  // constructor that the domain is not periodic in r)
- Problem::mesh_pt() = new HorizontalSingleLayerSpineMesh<ELEMENT,
-  SpineAxisymmetricFluidInterfaceElement<ELEMENT> >
-  (n_r,n_z,l_r,h);
+ Bulk_mesh_pt = 
+ new HorizontalSingleLayerSpineMesh<ELEMENT>(n_r,n_z,l_r,h);
+
+  //Create "surface mesh" that will only contain the interface elements
+ Interface_mesh_pt = new Mesh;
+ {
+  // How many bulk elements are adjacent to boundary b?
+  unsigned n_element = Bulk_mesh_pt->nboundary_element(1);
+
+ // Loop over the bulk elements adjacent to boundary b?
+ for(unsigned e=0;e<n_element;e++)
+  {
+   // Get pointer to the bulk element that is adjacent to boundary b
+   ELEMENT* bulk_elem_pt = dynamic_cast<ELEMENT*>(
+    Bulk_mesh_pt->boundary_element_pt(1,e));
+   
+   // Find the index of the face of element e along boundary b
+   int face_index = Bulk_mesh_pt->face_index_at_boundary(1,e);
+
+   // Build the corresponding free surface element
+   SpineAxisymmetricFluidInterfaceElement<ELEMENT>* interface_element_pt = new 
+   SpineAxisymmetricFluidInterfaceElement<ELEMENT>(bulk_elem_pt,face_index);
+
+   //Add the prescribed-flux element to the surface mesh
+   Interface_mesh_pt->add_element_pt(interface_element_pt);
+
+  } //end of loop over bulk elements adjacent to boundary b
+ }
+
+ // Add the two sub meshes to the problem
+ add_sub_mesh(Bulk_mesh_pt);
+ add_sub_mesh(Interface_mesh_pt);
+
+ // Combine all submeshes into a single Mesh
+ build_global_mesh();
+
 
  // --------------------------------------------
  // Set the boundary conditions for this problem
@@ -188,31 +218,31 @@ MeltSpinningProblem(const unsigned &n_r,
  // Dirichlet conditions here
 
  //Loop over the boundaries
- unsigned num_bound = mesh_pt()->nboundary();
+ unsigned num_bound = Bulk_mesh_pt->nboundary();
  for(unsigned ibound=0;ibound<num_bound;ibound++)
   {
    //Loop over the number of nodes on the boundary
-   unsigned num_nod= mesh_pt()->nboundary_node(ibound);
+   unsigned num_nod= Bulk_mesh_pt->nboundary_node(ibound);
    switch (ibound) 
     {
     case 0:
      for (unsigned inod=0;inod<num_nod;inod++)
       {
        //Pin all velocities (Wall))
-       mesh_pt()->boundary_node_pt(ibound,inod)->pin(1);
-       mesh_pt()->boundary_node_pt(ibound,inod)->pin(2);
+       Bulk_mesh_pt->boundary_node_pt(ibound,inod)->pin(1);
+       Bulk_mesh_pt->boundary_node_pt(ibound,inod)->pin(2);
       }
      break;
     case 1:
      for (unsigned inod=0;inod<num_nod;inod++)
       {
-       double z_value = mesh_pt()->boundary_node_pt(ibound,inod)->x(1);
+       double z_value = Bulk_mesh_pt->boundary_node_pt(ibound,inod)->x(1);
        //Pin all velocities (Wall)
-       mesh_pt()->boundary_node_pt(ibound,inod)->pin(2);
+       Bulk_mesh_pt->boundary_node_pt(ibound,inod)->pin(2);
        if (z_value>=(Height/1.1))
         {
-         mesh_pt()->boundary_node_pt(ibound,inod)->pin(0);
-         mesh_pt()->boundary_node_pt(ibound,inod)->pin(1);
+         Bulk_mesh_pt->boundary_node_pt(ibound,inod)->pin(0);
+         Bulk_mesh_pt->boundary_node_pt(ibound,inod)->pin(1);
         }
       }
      break;
@@ -220,28 +250,28 @@ MeltSpinningProblem(const unsigned &n_r,
      for (unsigned inod=0;inod<num_nod;inod++)
       {
        //Pin all velocities (Wall)
-       mesh_pt()->boundary_node_pt(ibound,inod)->pin(0);
-       mesh_pt()->boundary_node_pt(ibound,inod)->pin(1);
-       mesh_pt()->boundary_node_pt(ibound,inod)->pin(2);
+       Bulk_mesh_pt->boundary_node_pt(ibound,inod)->pin(0);
+       Bulk_mesh_pt->boundary_node_pt(ibound,inod)->pin(1);
+       Bulk_mesh_pt->boundary_node_pt(ibound,inod)->pin(2);
       }   
      break;
     default: // simmetry axis
      for (unsigned inod=0;inod<num_nod;inod++)
       {
        //Pin all velocities (Wall)
-       mesh_pt()->boundary_node_pt(ibound,inod)->pin(0);
-       mesh_pt()->boundary_node_pt(ibound,inod)->pin(2);
+       Bulk_mesh_pt->boundary_node_pt(ibound,inod)->pin(0);
+       Bulk_mesh_pt->boundary_node_pt(ibound,inod)->pin(2);
       }    
      break;
     }
   }
 
  // Pin spine height at top of domain
- unsigned first_spine = mesh_pt()->nspine()-5;
- unsigned last_spine = mesh_pt()->nspine()-1;
+ unsigned first_spine = Bulk_mesh_pt->nspine()-5;
+ unsigned last_spine = Bulk_mesh_pt->nspine()-1;
  for (unsigned num_spine=first_spine;num_spine<=last_spine;num_spine++)
   {
-   mesh_pt()->spine_pt(num_spine)->spine_height_pt()->pin(0);
+   Bulk_mesh_pt->spine_pt(num_spine)->spine_height_pt()->pin(0);
   }
  
  cout << "First spine is " 
@@ -255,13 +285,13 @@ MeltSpinningProblem(const unsigned &n_r,
  // ----------------------------------------------------------------
  
  // Determine number of bulk elements in mesh
- const unsigned n_bulk = mesh_pt()->nbulk();
+ const unsigned n_bulk = Bulk_mesh_pt->nelement();
 
  // Loop over the bulk elements
  for(unsigned e=0;e<n_bulk;e++)
   {
    // Upcast from GeneralisedElement to the present element
-   ELEMENT *el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->bulk_element_pt(e));
+   ELEMENT *el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
    // Set the Reynolds number
    el_pt->re_pt() = &Global_Physical_Variables::Re;
@@ -286,7 +316,7 @@ MeltSpinningProblem(const unsigned &n_r,
  external_pressure_data_pt->set_value(0,p_ext);
 
  // Determine number of 1D interface elements in mesh
- const unsigned n_interface_element = mesh_pt()->ninterface_element();
+ const unsigned n_interface_element = Interface_mesh_pt->nelement();
 
  // Loop over the interface elements
  for(unsigned e=0;e<n_interface_element;e++)
@@ -294,7 +324,7 @@ MeltSpinningProblem(const unsigned &n_r,
    // Upcast from GeneralisedElement to the present element
    SpineAxisymmetricFluidInterfaceElement<ELEMENT>* el_pt = 
     dynamic_cast<SpineAxisymmetricFluidInterfaceElement<ELEMENT>*>
-    (mesh_pt()->interface_element_pt(e));
+    (Interface_mesh_pt->element_pt(e));
 
    // Set the Capillary number
    el_pt->ca_pt() = &Global_Physical_Variables::Ca;
@@ -322,15 +352,15 @@ actions_before_newton_solve()
  const double Dr = 20.0;
 
  // Determine number of nodes in mesh
- const unsigned n_node = mesh_pt()->nnode();
+ const unsigned n_node = Bulk_mesh_pt->nnode();
 
  // Loop over all nodes in mesh
  for(unsigned n=0;n<n_node;n++)
   {
    // Determine r coordinate of node
-   double r_value = mesh_pt()->node_pt(n)->x(0);
+   double r_value = Bulk_mesh_pt->node_pt(n)->x(0);
    // Determine z coordinate of node
-   double z_value = mesh_pt()->node_pt(n)->x(1);
+   double z_value = Bulk_mesh_pt->node_pt(n)->x(1);
       
    // Initial guess for ur (Multiply by epsilon)
    double ur_value = -0.5*r_value*(1.0/Height)*log(Dr)*exp(log(Dr)*(1.0-(z_value/Height)));
@@ -338,41 +368,41 @@ actions_before_newton_solve()
    double uz_value = -exp(log(Dr)*(1.0-(z_value/Height)));
 
    // Set velocity component i of node n to guess
-   mesh_pt()->node_pt(n)->set_value(0,ur_value);
-   mesh_pt()->node_pt(n)->set_value(1,uz_value);
+   Bulk_mesh_pt->node_pt(n)->set_value(0,ur_value);
+   Bulk_mesh_pt->node_pt(n)->set_value(1,uz_value);
    // Set theta velocity component of node n to zero
-   mesh_pt()->node_pt(n)->set_value(2,0.0);
+   Bulk_mesh_pt->node_pt(n)->set_value(2,0.0);
   } 
 
  // Correct the value in order to imposse boundary conditions
- unsigned num_bound = mesh_pt()->nboundary();
+ unsigned num_bound = Bulk_mesh_pt->nboundary();
  for(unsigned ibound=0;ibound<num_bound;ibound++)
   {
    // Determine number of nodes in the bound mesh
-   const unsigned n_node = mesh_pt()->nboundary_node(ibound);
+   const unsigned n_node = Bulk_mesh_pt->nboundary_node(ibound);
    switch (ibound) 
     {
     case 0:
      for (unsigned inod=0;inod<n_node;inod++)
       {
        // Determine r coordinate of node
-       double r_value = mesh_pt()->boundary_node_pt(ibound,inod)->x(0);
+       double r_value = Bulk_mesh_pt->boundary_node_pt(ibound,inod)->x(0);
        double w_bound0 = -Dr*(1.0 - 0.0*pow(r_value,2.0));
        //Set the velocities at the bottom zone
-       mesh_pt()->boundary_node_pt(ibound,inod)->set_value(0,0.0);
-       mesh_pt()->boundary_node_pt(ibound,inod)->set_value(1,w_bound0);
+       Bulk_mesh_pt->boundary_node_pt(ibound,inod)->set_value(0,0.0);
+       Bulk_mesh_pt->boundary_node_pt(ibound,inod)->set_value(1,w_bound0);
       }
      break;
     case 1:
      for (unsigned inod=0;inod<n_node;inod++)
       {
        // Determine r coordinate of node
-       double z_value = mesh_pt()->boundary_node_pt(ibound,inod)->x(1);
+       double z_value = Bulk_mesh_pt->boundary_node_pt(ibound,inod)->x(1);
        //Set the zero velocity at the nozzle
        if (z_value>=(Height/1.1))
         {
-         mesh_pt()->boundary_node_pt(ibound,inod)->set_value(0,0.0);
-         mesh_pt()->boundary_node_pt(ibound,inod)->set_value(1,0.0);
+         Bulk_mesh_pt->boundary_node_pt(ibound,inod)->set_value(0,0.0);
+         Bulk_mesh_pt->boundary_node_pt(ibound,inod)->set_value(1,0.0);
         }
       }
      break;
@@ -380,18 +410,18 @@ actions_before_newton_solve()
      for (unsigned inod=0;inod<n_node;inod++)
       {
        // Determine r coordinate of node
-       double r_value = mesh_pt()->boundary_node_pt(ibound,inod)->x(0);
+       double r_value = Bulk_mesh_pt->boundary_node_pt(ibound,inod)->x(0);
        double w_bound2 = -2.0*(1.0 - 1.0*pow(r_value,2.0));
        //Set all of the magnitudes at the top zone
-       mesh_pt()->boundary_node_pt(ibound,inod)->set_value(0,0.0);
-       mesh_pt()->boundary_node_pt(ibound,inod)->set_value(1,w_bound2);
+       Bulk_mesh_pt->boundary_node_pt(ibound,inod)->set_value(0,0.0);
+       Bulk_mesh_pt->boundary_node_pt(ibound,inod)->set_value(1,w_bound2);
       }   
      break;
     default: // simmetry axis
      for (unsigned inod=0;inod<n_node;inod++)
       {
        //Set the radial velocity at the axis
-       mesh_pt()->boundary_node_pt(ibound,inod)->set_value(0,0.0);
+       Bulk_mesh_pt->boundary_node_pt(ibound,inod)->set_value(0,0.0);
       }    
      break;
     }
@@ -419,7 +449,8 @@ doc_solution(DocInfo &doc_info)
  some_file.open(filename);
 
  // Output solution to file
- mesh_pt()->output(some_file,npts);
+ Bulk_mesh_pt->output(some_file,npts);
+ Interface_mesh_pt->output(some_file,npts);
 
  // Close solution output file
  some_file.close();

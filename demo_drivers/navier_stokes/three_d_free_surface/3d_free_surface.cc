@@ -101,16 +101,6 @@ public:
  /// is performed automatically after every Newton step.
  void actions_after_newton_solve() {}
 
- ///Fix pressure value l in element e to value p_value
- void fix_pressure(const unsigned &e, const unsigned &l, 
-                   const double &pvalue)
-  {
-   //Fix the pressure at that element
-   dynamic_cast<ELEMENT *>(Bulk_mesh_pt->element_pt(e))->
-    fix_pressure(l,pvalue);
-  }
- 
-
  /// Run an unsteady simulation with specified number of steps
  void unsteady_run(const unsigned& nstep); 
 
@@ -129,9 +119,10 @@ private:
  double Ly;
 
  /// Pointer to bulk mesh
- SingleLayerCubicSpineMesh<ELEMENT,
-                           SpineSurfaceFluidInterfaceElement<ELEMENT> >*
- Bulk_mesh_pt;
+ SingleLayerCubicSpineMesh<ELEMENT>* Bulk_mesh_pt;
+
+ /// Pointer to the surface mes
+ Mesh* Surface_mesh_pt;
 
  /// Is the domain symmetric in the x-direction? 
  bool Symmetric_in_x;
@@ -151,12 +142,40 @@ InterfaceProblem<ELEMENT,TIMESTEPPER>::InterfaceProblem
  //Allocate the timestepper
  add_time_stepper_pt(new TIMESTEPPER); 
 
- //Now create the mesh
- Bulk_mesh_pt = new SingleLayerCubicSpineMesh<ELEMENT,
-  SpineSurfaceFluidInterfaceElement<ELEMENT> >
+ //Now create the bulk mesh
+ Bulk_mesh_pt = new SingleLayerCubicSpineMesh<ELEMENT>
   (nx,ny,nz,lx,ly,h,time_stepper_pt());
- // Make bulk mesh the global mesh
- mesh_pt()=Bulk_mesh_pt;
+
+ //Create the surface mesh that will contain the interface elements
+ //First create storage, but with no elements or nodes
+ Surface_mesh_pt = new Mesh;
+
+ // Loop over those elements adjacent to the free surface,
+ // which we shall choose to be the upper surface
+ for(unsigned e1=0;e1<ny;e1++)
+  {
+   for(unsigned e2=0;e2<nx;e2++)
+    {
+     // Set a pointer to the bulk element we wish to our interface
+     // element to
+     FiniteElement* bulk_element_pt =
+      Bulk_mesh_pt->finite_element_pt(nx*ny*(nz-1) + e2 + e1*nx);
+
+     // Create the interface element (on face 3 of the bulk element)
+     FiniteElement* interface_element_pt =
+      new SpineSurfaceFluidInterfaceElement<ELEMENT>(bulk_element_pt,3);
+
+   // Add the interface element to the surface mesh
+   this->Surface_mesh_pt->add_element_pt(interface_element_pt);
+    }
+  }
+ 
+ // Add the two sub-meshes to the problem
+ add_sub_mesh(Bulk_mesh_pt);
+ add_sub_mesh(Surface_mesh_pt);
+
+ // Combine all sub-meshes into a single mesh
+ build_global_mesh();
  
  //Pin all nodes on the bottom
  unsigned long n_boundary_node = mesh_pt()->nboundary_node(0);
@@ -199,13 +218,12 @@ InterfaceProblem<ELEMENT,TIMESTEPPER>::InterfaceProblem
  //Complete the problem setup to make the elements fully functional
 
  //Loop over the elements in the layer
- unsigned n_bulk=Bulk_mesh_pt->nbulk();
- for(unsigned i=0;i<n_bulk;i++)
+ unsigned n_bulk=Bulk_mesh_pt->nelement();
+ for(unsigned e=0;e<n_bulk;e++)
   {
    //Cast to a fluid element
-   ELEMENT *el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->
-                                           bulk_element_pt(i));
-
+   ELEMENT *el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
+   
    //Set the Reynolds number, etc
    el_pt->re_pt() = &Global_Physical_Variables::Re;
    el_pt->re_st_pt() = &Global_Physical_Variables::ReSt;
@@ -218,13 +236,14 @@ InterfaceProblem<ELEMENT,TIMESTEPPER>::InterfaceProblem
 
  //Loop over 2D interface elements and set capillary number and 
  //the external pressure
- unsigned long interface_element_pt_range = Bulk_mesh_pt->ninterface_element();
- for(unsigned i=0;i<interface_element_pt_range;i++)
+ unsigned long interface_element_pt_range = 
+  Surface_mesh_pt->nelement();
+ for(unsigned e=0;e<interface_element_pt_range;e++)
   {
    //Cast to a interface element
    SpineSurfaceFluidInterfaceElement<ELEMENT>* el_pt = 
     dynamic_cast<SpineSurfaceFluidInterfaceElement<ELEMENT>*>
-    (Bulk_mesh_pt->interface_element_pt(i));
+    (Surface_mesh_pt->element_pt(e));
 
    //Set the Capillary number
    el_pt->ca_pt() = &Global_Physical_Variables::Ca;
@@ -235,7 +254,7 @@ InterfaceProblem<ELEMENT,TIMESTEPPER>::InterfaceProblem
 
  //Do equation numbering
  cout << assign_eqn_numbers() << std::endl; 
-
+ 
 }
 
    
@@ -266,11 +285,12 @@ void InterfaceProblem<ELEMENT,TIMESTEPPER>::doc_solution(DocInfo& doc_info)
  Trace_file << std::endl;
 
 
- // Output solution 
+ // Output solution, bulk elements followed by surface elements
  sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  Bulk_mesh_pt->output(some_file,npts);
+ Surface_mesh_pt->output(some_file,npts);
  some_file.close();
  
 }
