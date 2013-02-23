@@ -5,7 +5,7 @@ include $(top_srcdir)/config/makefile_templates/demo_drivers
 check_PROGRAMS=static_two_layer static_single_layer
 
 # Sources for first executable
-static_two_layer_SOURCES = fix_vol_int_elements.h static_two_layer.cc
+static_two_layer_SOURCES = static_two_layer.cc
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
@@ -14,7 +14,7 @@ static_two_layer_LDADD = -L@libdir@ -lnavier_stokes -lfluid_interface \
                          $(EXTERNAL_LIBS) $(FLIBS)
 
 # Sources for second executable
-static_single_layer_SOURCES = fix_vol_int_elements.h fix_vol_int_elastic_elements.h static_single_layer.cc 
+static_single_layer_SOURCES = static_single_layer.cc 
 
 # Required libraries: 
 # $(FLIBS) is included in case the solver involves fortran sources.

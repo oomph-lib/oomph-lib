@@ -33,10 +33,12 @@
 
 // The mesh
 #include "meshes/rectangular_quadmesh.h"
+#include "meshes/triangle_mesh.h"
 
 using namespace std;
 
 using namespace oomph;
+
 
 //===start_of_namespace=================================================
 /// Namespace for global parameters
@@ -114,6 +116,37 @@ public:
  /// Update after solve is empty
  void actions_after_newton_solve() {}
  
+ /// Delete traction elements
+ void delete_traction_elements();
+ 
+ /// Helper function to complete problem setup
+ void complete_problem_setup();
+
+ /// Actions before adapt: Wipe the mesh of traction elements
+ void actions_before_adapt()
+  {
+   // Kill the traction elements and wipe surface mesh
+   delete_traction_elements();
+   
+   // Rebuild the Problem's global mesh from its various sub-meshes
+   rebuild_global_mesh();
+  }
+
+
+ /// Actions after adapt: Rebuild the mesh of traction elements
+ void actions_after_adapt()
+  {
+   // Create traction elements from all elements that are 
+   // adjacent to FSI boundaries and add them to surface meshes
+   assign_traction_elements();
+   
+   // Rebuild the Problem's global mesh from its various sub-meshes
+   rebuild_global_mesh();
+   
+   // Complete problem setup
+   complete_problem_setup();   
+  }
+
  /// Doc the solution
  void doc_solution(DocInfo& doc_info);
  
@@ -122,8 +155,17 @@ private:
  /// Allocate traction elements on the bottom surface
  void assign_traction_elements();
  
+#ifdef ADAPTIVE
+
+ /// Pointer to the bulk mesh
+ RefineableTriangleMesh<ELEMENT>* Bulk_mesh_pt;
+
+#else
+
  /// Pointer to the bulk mesh
  Mesh* Bulk_mesh_pt;
+
+#endif
  
  /// Pointer to the mesh of traction elements
  Mesh* Surface_mesh_pt;
@@ -141,18 +183,115 @@ FourierDecomposedTimeHarmonicLinearElasticityProblem
  const double &rmin, const double& rmax,
  const double &zmin, const double& zmax)
 {
+
+#ifdef ADAPTIVE
+
+ // The boundary is bounded by four distinct boundaries, each
+ // represented by its own polyline
+ Vector<TriangleMeshCurveSection*> boundary_polyline_pt(4);
+ 
+ // Vertex coordinates on boundary
+ Vector<Vector<double> > bound_coords(2);
+ bound_coords[0].resize(2);
+ bound_coords[1].resize(2);
+     
+ // Horizontal bottom boundary
+ bound_coords[0][0]=rmin;
+ bound_coords[0][1]=zmin;
+ bound_coords[1][0]=rmax;
+ bound_coords[1][1]=zmin;
+ 
+ // Build the boundary polyline
+ unsigned boundary_id=0;
+ boundary_polyline_pt[0]=new TriangleMeshPolyLine(bound_coords,boundary_id);
+ 
+ // Vertical outer boundary
+ bound_coords[0][0]=rmax;
+ bound_coords[0][1]=zmin;
+ bound_coords[1][0]=rmax;
+ bound_coords[1][1]=zmax;
+ 
+ // Build the boundary polyline
+ boundary_id=1;
+ boundary_polyline_pt[1]=new TriangleMeshPolyLine(bound_coords,boundary_id);
+ 
+
+ // Horizontal top boundary
+ bound_coords[0][0]=rmax;
+ bound_coords[0][1]=zmax;
+ bound_coords[1][0]=rmin;
+ bound_coords[1][1]=zmax;
+ 
+ // Build the boundary polyline
+ boundary_id=2;
+ boundary_polyline_pt[2]=new TriangleMeshPolyLine(bound_coords,boundary_id);
+ 
+ // Vertical inner boundary
+ bound_coords[0][0]=rmin;
+ bound_coords[0][1]=zmax;
+ bound_coords[1][0]=rmin;
+ bound_coords[1][1]=zmin;
+ 
+ // Build the boundary polyline
+ boundary_id=3;
+ boundary_polyline_pt[3]=new TriangleMeshPolyLine(bound_coords,boundary_id);
+ 
+ // Pointer to the closed curve that defines the outer boundary
+ TriangleMeshClosedCurve* closed_curve_pt= 
+  new TriangleMeshPolygon(boundary_polyline_pt);
+  
+ // Use the TriangleMeshParameters object for helping on the manage of the
+ // TriangleMesh parameters
+ TriangleMeshParameters triangle_mesh_parameters(closed_curve_pt);
+
+ // Specify the maximum area element
+ double uniform_element_area=0.2;
+ triangle_mesh_parameters.element_area() = uniform_element_area;
+
+ // Create the mesh
+ Bulk_mesh_pt=new RefineableTriangleMesh<ELEMENT>(triangle_mesh_parameters);
+
+ // Set error estimator
+ Bulk_mesh_pt->spatial_error_estimator_pt()=new Z2ErrorEstimator;
+
+#else
+
  //Now create the mesh
  Bulk_mesh_pt = new RectangularQuadMesh<ELEMENT>(nr,nz,rmin,rmax,zmin,zmax);
+
+#endif
 
  //Create the surface mesh of traction elements
  Surface_mesh_pt=new Mesh;
  assign_traction_elements();
  
+ // Complete problem setup
+ complete_problem_setup();
+
+ // Add the submeshes to the problem
+ add_sub_mesh(Bulk_mesh_pt);
+ add_sub_mesh(Surface_mesh_pt);
+
+ // Now build the global mesh
+ build_global_mesh();
+
+ // Assign equation numbers
+ cout << assign_eqn_numbers() << " equations assigned" << std::endl; 
+
+} // end of constructor
+
+
+
+//===start_of_complete_problem_setup=================================
+/// Complete problem setup
+//===================================================================
+template<class ELEMENT>
+void FourierDecomposedTimeHarmonicLinearElasticityProblem<ELEMENT>::
+complete_problem_setup()
+{
  // Set the boundary conditions for this problem: All nodes are
  // free by default -- just pin & set the ones that have Dirichlet 
  // conditions here
-
-
 
  // Pin displacements everywhere apart from boundaries 1 and 3
  //-----------------------------------------------------------
@@ -217,18 +356,7 @@ FourierDecomposedTimeHarmonicLinearElasticityProblem
    
   }// end loop over traction elements
  
- // Add the submeshes to the problem
- add_sub_mesh(Bulk_mesh_pt);
- add_sub_mesh(Surface_mesh_pt);
-
- // Now build the global mesh
- build_global_mesh();
-
- // Assign equation numbers
- cout << assign_eqn_numbers() << " equations assigned" << std::endl; 
-
-} // end of constructor
-
+}
 
 //===start_of_traction===============================================
 /// Make traction elements along the boundary r=rmin
@@ -259,6 +387,29 @@ assign_traction_elements()
 } // end of assign_traction_elements
 
 
+//===start_of_delete_traction========================================
+/// Delete traction elements
+//===================================================================
+template<class ELEMENT>
+void FourierDecomposedTimeHarmonicLinearElasticityProblem<ELEMENT>::
+delete_traction_elements()
+{
+ // How many surface elements are in the surface mesh
+ unsigned n_element = Surface_mesh_pt->nelement();
+ 
+ // Loop over the surface elements
+ for(unsigned e=0;e<n_element;e++)
+  {
+   // Kill surface element
+   delete Surface_mesh_pt->element_pt(e);
+  }
+ 
+ // Wipe the mesh
+ Surface_mesh_pt->flush_element_and_node_storage();
+
+} // end of delete_traction_elements
+
+
 //==start_of_doc_solution=================================================
 /// Doc the solution
 //========================================================================
@@ -270,13 +421,28 @@ doc_solution(DocInfo& doc_info)
  char filename[100];
  
  // Number of plot points
- unsigned npts=10; 
+ unsigned npts=5; 
  
  // Output solution 
  sprintf(filename,"%s/soln.dat",doc_info.directory().c_str());
  some_file.open(filename);
  Bulk_mesh_pt->output(some_file,npts);
  some_file.close();
+
+ // Output norm of solution (to allow validation of solution even
+ // if triangle generates a slightly different mesh)
+ sprintf(filename,"%s/norm.dat",doc_info.directory().c_str());   
+ some_file.open(filename);   
+ double norm=0.0;
+ unsigned nel=Bulk_mesh_pt->nelement();
+ for (unsigned e=0;e<nel;e++)
+  {
+   double el_norm=0.0;
+   Bulk_mesh_pt->compute_norm(el_norm);
+   norm+=el_norm;
+  }
+ some_file << norm << std::endl;
+
 
 } // end_of_doc_solution   
 
@@ -298,6 +464,21 @@ int main(int argc, char* argv[])
  // Set output directory
  doc_info.set_directory("RESLT");
 
+#ifdef ADAPTIVE
+
+ // Set up problem
+ FourierDecomposedTimeHarmonicLinearElasticityProblem
+  <ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement
+   <TTimeHarmonicFourierDecomposedLinearElasticityElement<3> > >
+  problem(nr,nz,Global_Parameters::rmin,Global_Parameters::rmax,
+          Global_Parameters::zmin,Global_Parameters::zmax);
+
+ // Solve
+ unsigned max_adapt=3;
+ problem.newton_solve(max_adapt);
+ 
+#else
+
  // Set up problem
  FourierDecomposedTimeHarmonicLinearElasticityProblem
   <QTimeHarmonicFourierDecomposedLinearElasticityElement<3> > 
@@ -306,6 +487,8 @@ int main(int argc, char* argv[])
  
  // Solve
  problem.newton_solve();
+
+#endif
  
  // Output the solution
  problem.doc_solution(doc_info);

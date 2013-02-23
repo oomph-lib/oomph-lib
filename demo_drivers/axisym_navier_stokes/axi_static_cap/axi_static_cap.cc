@@ -777,13 +777,6 @@ PseudoSolidCapProblem<ELEMENT>::PseudoSolidCapProblem(const bool& hijack_interna
    dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
    
    el_pt->constitutive_law_pt() = Constitutive_law_pt;
-
-   // Get Jacobian by FD -- yes for now
-   // hierher -- change this when Pseudo-solid elements have 
-   // been updated to take availability of analytical solid 
-   // Jacobian into account
-   el_pt->enable_evaluate_jacobian_by_fd();
-  
   }
 
  //Set the boundary conditions

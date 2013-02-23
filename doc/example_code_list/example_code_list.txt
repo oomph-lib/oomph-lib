@@ -60,8 +60,8 @@ directory).
                introduction to timestepping</A>
     - <A HREF="#wave">The linear wave equation</A>
     - <A HREF="#helmholtz">The Helmholtz equation</A>
-    - <A HREF="#fourier_decomposed_helmholtz"> The azimuthally Fourier-decomposed
-               Helmholtz equation </A>
+    - <A HREF="#fourier_decomposed_helmholtz"> The azimuthally 
+               Fourier-decomposed 3D Helmholtz equation </A>
     - <A HREF="#gen_helmholtz">The generalised Helmholtz equation and
 perfectly matched layers</A>
     - <A HREF="#young_laplace">The Young-Laplace equations</A>
@@ -74,13 +74,15 @@ perfectly matched layers</A>
                elasticity</A>
     - <A HREF="#time_harmonic_lin_elas">Time-harmonic linear elasticity</A>
     - <A HREF="#fourier_decomp_lin_elas"> Azimuthally Fourier-decomposed,
-              time-harmonic linear elasticity </A>
+                3D time-harmonic linear elasticity </A>
     - <A HREF="#beam">Beam structures</A>
     - <A HREF="#shell">Shell structures</A>
     .
   - Multi-physics problems:
     - <A HREF="#fsi">Large-displacement fluid-structure interaction problems</A>
     - <A HREF="#acoustic_fsi">Acoustic fluid-structure interaction problems</A>
+    - <A HREF="#fd_acoustic_fsi">Azimuthally Fourier-decomposed 3D
+               acoustic fluid-structure interaction problems</A>
     - <A HREF="#multi"> Multi-physics problems</A>
     .
   .
@@ -686,7 +688,7 @@ wave from a circular cylinder -- this time using an unstructured mesh.
 <TR>
 <TD COLSPAN=3 bgcolor="lightcyan">
 <A NAME="fourier_decomposed_helmholtz"><CENTER><B>The
- Azimuthally Fourier-decomposed Helmholtz equation</B></CENTER></A>
+ azimuthally Fourier-decomposed 3D Helmholtz equation</B></CENTER></A>
 </TD>
 </TR>
 ######################################################################
@@ -697,7 +699,7 @@ wave from a circular cylinder -- this time using an unstructured mesh.
 </B>
 </A>
 \n\n
-We solve the Helmholtz equation in cylindrical polar coordinates,
+We solve the 3D Helmholtz equation in cylindrical polar coordinates,
   using a Fourier-decomposition in the azimuthal direction.
 </TD>
 <TD>
@@ -705,6 +707,27 @@ We solve the Helmholtz equation in cylindrical polar coordinates,
 - Dirichlet to Neumann mapping.
 - Validation with an exact solution formed by a superposition of
   outgoing waves from a sphere.
+  \n\n
+</TD>
+<TD>
+<CENTER>complete</CENTER>
+</TD>
+</TR>
+######################################################################
+<TR>
+<TD>
+<A HREF="../../fourier_decomposed_helmholtz/adaptive_sphere_scattering/html/index.html">
+<B>The spatially adaptive solution of the azimuthally Fourier-decomposed 3D Helmholtz equation on unstructured meshes.
+</B>
+</A>
+\n\n
+We re-visit the 3D Helmholtz equation in cylindrical polar coordinates,
+using a Fourier-decomposition in the azimuthal direction -- this
+time using spatial adaptivity and an unstructured mesh
+</TD>
+<TD>
+- Spatial adaptivity on unstructured meshes for the azimuthally 
+  Fourier-decomposed 3D Helmholtz equation.
   \n\n
 </TD>
 <TD>
@@ -1856,7 +1879,7 @@ elements and demonstrate their use in time-dependent test problem.
 <TR>
 <TD COLSPAN=3 bgcolor="lightcyan">
 <A NAME="time_harmonic_lin_elas"><CENTER><B>
-Time Harmonic Linear Elasticity</B></CENTER></A>
+Time-harmonic linear elasticity</B></CENTER></A>
 </TD>
 </TR>
 ######################################################################
@@ -1914,14 +1937,14 @@ elasticity -- this time using an unstructured mesh.
 <TR>
 <TD COLSPAN=3 bgcolor="lightcyan">
 <A NAME="fourier_decomp_lin_elas"><CENTER><B>
-Azimuthally Fourier Decomposed Time Harmonic Linear Elasticity</B></CENTER></A>
+Azimuthally Fourier-decomposed 3D time-harmonic linear elasticity</B></CENTER></A>
 </TD>
 </TR>
 ######################################################################
 <TR>
 <TD>
 <A HREF="../../time_harmonic_fourier_decomposed_linear_elasticity/cylinder/html/index.html">
-<B>The azimuthally Fourier-decomposed equations of time-harmonic linear
+<B>The azimuthally Fourier-decomposed equations of 3D time-harmonic linear
 elasticity: Theory and implementation
 </B>
 </A>
@@ -1943,7 +1966,29 @@ non-dimensionalisation.
 <CENTER>complete</CENTER>
 </TD>
 </TR>
-
+######################################################################
+<TR>
+<TD>
+<A HREF="../../time_harmonic_fourier_decomposed_linear_elasticity/adaptive_pressure_loaded_cylinder/html/index.html">
+<B>The spatially-adaptive solution of the azimuthally Fourier-decomposed equations of 3D time-harmonic linear
+elasticity on unstructured meshes.
+</B>
+</A>
+\n\n
+We simulate the forced, time-harmonic oscillations of a
+hollow cylinder loaded by a spatially-constant pressure load
+on its inner surface.
+</TD>
+<TD>
+- The use of spatial adaptivity in the solution of the azimuthally 
+  Fourier-decomposed equations of 3D time-harmonic linear 
+  elasticity on unstructured meshes.
+.
+</TD>
+<TD>
+<CENTER>complete</CENTER>
+</TD>
+</TR>
 
 
 #####################################################################
@@ -2564,7 +2609,7 @@ asymptotic predictions.
 </TR>
 
 #####################################################################
-######################################################################
+#####################################################################
 <TR>
 <TD COLSPAN=3 bgcolor="lightcyan">
 <A NAME="acoustic_fsi"><CENTER><B>Acoustic fluid-structure interaction problems</B></CENTER></A>
@@ -2606,7 +2651,6 @@ equation.</a>
 <CENTER>complete</CENTER>
 </TD>
 </TR>
-
 ######################################################################
 <TR>
 <TD>
@@ -2625,6 +2669,81 @@ with unstructured meshes.
 </TD>
 <TD>
 - The solution of time-harmonic acoustic fluid-structure interaction
+  problems on unstructured meshes.
+- How to assign different material properties to different regions
+  of the elastic body.
+</TD>
+<TD>
+<CENTER>complete</CENTER>
+</TD>
+</TR>
+
+#####################################################################
+#####################################################################
+<TR>
+<TD COLSPAN=3 bgcolor="lightcyan">
+<A NAME="fd_acoustic_fsi"><CENTER><B>Azimuthally Fourier-decomposed 
+3D acoustic fluid-structure interaction problems</B></CENTER></A>
+</TD>
+</TR>
+######################################################################
+<TR>
+<TD>
+<A HREF="../../fourier_decomposed_acoustic_fsi/sphere/html/index.html">
+<B>
+An azimuthally Fourier-decomposed time-harmonic acoustic 
+fluid-structure interaction problem: Sound radiation
+from an immersed oscillating sphere that is coated with an elastic
+layer.
+</B>
+</A>
+\n\n
+We provide an overview of \c oomph-lib's methodology for the
+solution of azimuthally Fourier-decomposed 
+time-harmonic acoustic fluid-structure interaction problems which
+are based on a coupled solution of the 
+<a href="../../time_harmonic_fourier_decomposed_linear_elasticity/cylinder/html/index.html">time-harmonic equations of linear elasticity</a>
+and
+<a href="../../fourier_decomposed_helmholtz/sphere_scattering/html/index.html">the Helmholtz
+equation.</a>
+</TD>
+<TD>
+- Theory: The formulation and non-dimensionalisation 
+  of time-harmonic acoustic fluid-structure 
+  interaction problems in cylindrical polar coordinates, using a 
+  Fourier-decomposition of all fields in the azimuthal direction.
+- Coupling 
+  <a href="../../time_harmonic_fourier_decomposed_linear_elasticity/cylinder/html/index.html">time-harmonic equations of linear elasticity</a>
+  and <a href="../../fourier_decomposed_helmholtz/sphere_scattering/html/index.html">the Helmholtz
+  equation,</a> using the 
+  \c
+  Multi_domain_functions::setup_bulk_elements_adjacent_to_face_mesh(...)
+  helper function
+- Validation of the methodology via a comparison against an analytical solution.
+</TD>
+<TD>
+<CENTER>complete</CENTER>
+</TD>
+</TR>
+######################################################################
+<TR>
+<TD>
+<A HREF="../../fourier_decomposed_acoustic_fsi/unstructured_sphere/html/index.html">
+<B>
+A time-harmonic acoustic fluid-structure interaction problem: Sound radiation
+from an immersed oscillating sphere that is coated with an elastic
+layer -- this time solved on an unstructured mesh with spatial adaptivity.
+</B>
+</A>
+\n\n
+A brief extension of the 
+<A HREF="../../fourier_decomposed_acoustic_fsi/sphere/html/index.html">
+previous tutorial</a> illustrating how to solve the problem 
+on adaptive, unstructured meshes.
+</TD>
+<TD>
+- The spatially-adaptive solution of Fourier-decomposed 
+  time-harmonic acoustic fluid-structure interaction
   problems on unstructured meshes.
 - How to assign different material properties to different regions
   of the elastic body.
@@ -2776,7 +2895,7 @@ and a solid element
 </TR>
 <TR>
 <TD COLSPAN=3 bgcolor="lightcyan">
-<A NAME="available_meshes"><CENTER><B>Structured Meshes</B></CENTER></A>
+<A NAME="available_meshes"><CENTER><B>Structured meshes</B></CENTER></A>
 </TD>
 </TR>
 #####################################################################
@@ -2805,7 +2924,7 @@ meshes and provide a quick overview of their common features.
 </TR>
 <TR>
 <TD COLSPAN=3 bgcolor="lightcyan">
-<A NAME="third_party_meshes"><CENTER><B>Unstructured Meshes using
+<A NAME="third_party_meshes"><CENTER><B>Unstructured meshes using
 input from third-party mesh generators</B></CENTER></A>
 </TD>
 </TR>

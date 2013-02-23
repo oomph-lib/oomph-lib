@@ -450,7 +450,7 @@ void FourierDecomposedHelmholtzProblem<ELEMENT>::actions_after_adapt()
    el_pt->k_squared_pt() = &ProblemParameters::K_squared;
 
    // Set pointer to Fourier wave number
-   el_pt->n_fourier_pt()=&ProblemParameters::N_fourier;
+   el_pt->fourier_wavenumber_pt()=&ProblemParameters::N_fourier;
   }
 
  // Create prescribed-flux elements and BC elements 
@@ -620,7 +620,7 @@ FourierDecomposedHelmholtzProblem()
    el_pt->k_squared_pt()=&ProblemParameters::K_squared;
    
    // Set pointer to Fourier wave number
-   el_pt->n_fourier_pt()=&ProblemParameters::N_fourier;
+   el_pt->fourier_wavenumber_pt()=&ProblemParameters::N_fourier;
   }
  
  // Setup equation numbering scheme

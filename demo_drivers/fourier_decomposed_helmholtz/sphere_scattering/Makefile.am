@@ -37,4 +37,5 @@ unstructured_adaptive_sphere_scattering_CXXFLAGS = -DADAPTIVE
 
 #--------------------------------------
 
-EXTRA_DIST += bessel.map
+EXTRA_DIST += bessel.map exact.map
+

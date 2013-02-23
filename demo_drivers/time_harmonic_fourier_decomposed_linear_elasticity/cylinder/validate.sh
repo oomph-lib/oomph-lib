@@ -2,7 +2,7 @@
 
 
 #Set the number of tests to be checked
-NUM_TESTS=1
+NUM_TESTS=5
 
 
 # Setup validation directory
@@ -17,7 +17,7 @@ cd Validation
 
 echo "Running Fourier decomposed time harmonic lin elast validation "
 mkdir RESLT
-../cylinder > OUTPUT
+../cylinder > OUTPUT_structured
 echo "done"
 echo " " >> validation.log
 echo "Fourier decomposed time harmonic lin elast validation" >> validation.log
@@ -35,6 +35,108 @@ else
 ../../../../bin/fpdiff.py ../validata/results.dat.gz   \
     results.dat  >> validation.log
 fi
+
+mv RESLT RESLT_structured
+
+
+echo "Running unstructured Fourier decomposed time harmonic lin elast validation "
+mkdir RESLT
+../unstructured_cylinder > OUTPUT_unstructured
+echo "done"
+echo " " >> validation.log
+echo "Unstructured Fourier decomposed time harmonic lin elast validation" >> validation.log
+echo "------------------------------------------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat RESLT/norm.dat  > results_unstructured.dat
+
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../../bin/fpdiff.py ../validata/results_unstructured.dat.gz   \
+    results_unstructured.dat  >> validation.log
+fi
+
+mv RESLT RESLT_unstructured
+
+
+
+echo "Running unstructured Fourier decomposed time harmonic lin elast validation "
+mkdir RESLT
+../adaptive_unstructured_cylinder > OUTPUT_adaptive_unstructured
+echo "done"
+echo " " >> validation.log
+echo "Adaptive unstructured Fourier decomposed time harmonic lin elast validation" >> validation.log
+echo "---------------------------------------------------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat RESLT/norm.dat  > results_adaptive_unstructured.dat
+
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../../bin/fpdiff.py ../validata/results_adaptive_unstructured.dat.gz   \
+    results_adaptive_unstructured.dat  >> validation.log
+fi
+
+mv RESLT RESLT_adaptive_unstructured
+
+
+
+echo "Running Fourier decomposed time harmonic lin elast (press load)  validation "
+mkdir RESLT
+../pressure_loaded_cylinder > OUTPUT_pressure_loaded_unstructured
+echo "done"
+echo " " >> validation.log
+echo "Fourier decomposed time harmonic lin elast (press load) validation" >> validation.log
+echo "------------------------------------------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat RESLT/soln.dat  > results_press_load.dat
+
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../../bin/fpdiff.py ../validata/results_press_load.dat.gz   \
+    results_press_load.dat  >> validation.log
+fi
+
+mv RESLT RESLT_press_load
+
+
+
+echo "Running unstructured Fourier decomposed time harmonic lin elast (press load) validation "
+mkdir RESLT
+../adaptive_pressure_loaded_cylinder > OUTPUT_press_load_adaptive_unstructured
+echo "done"
+echo " " >> validation.log
+echo "Adaptive unstructured Fourier decomposed time harmonic lin elast (press load) validation" >> validation.log
+echo "----------------------------------------------------------------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat RESLT/norm.dat  > results_press_load_adaptive_unstructured.dat
+
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../../bin/fpdiff.py ../validata/results_press_load_adaptive_unstructured.dat.gz   \
+    results_press_load_adaptive_unstructured.dat  >> validation.log
+fi
+
+mv RESLT RESLT_press_load_adaptive_unstructured
+
 
 
 # Append output to global validation log file

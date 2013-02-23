@@ -5,7 +5,7 @@ include $(top_srcdir)/config/makefile_templates/demo_drivers
 check_PROGRAMS=adaptive_interface
 
 # Sources for executable
-adaptive_interface_SOURCES = fix_vol_int_elements.h adaptive_interface.cc
+adaptive_interface_SOURCES = adaptive_interface.cc
 
 # Required libraries: 
 # $(FLIBS) is included in case the solver involves fortran sources.

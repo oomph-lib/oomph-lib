@@ -1,0 +1,148 @@
+#=============================
+# Maple script to computed
+# radiated power in spherical
+# fsi problem
+#=============================
+
+#-------------------------------------------------
+# Nondim Lame parameters
+#-------------------------------------------------
+lambda:=Nu/((1+Nu)*(1-2*Nu));
+mu:=1/(2*(1+Nu));
+
+
+#-------------------------------------------------
+# Inertia in terms of density ratio and Q
+#-------------------------------------------------
+Omega:=sqrt(Density_ratio*Q);
+
+#-------------------------------------------------
+# Time-harmonic elasticity
+#-------------------------------------------------
+ode:=(lambda+2*mu)*diff(  1/r^2*diff( r^2*u(r), r) ,r ) + Omega^2*u(r);
+
+
+#-------------------------------------------------
+# Construct and test solution
+#-------------------------------------------------
+k:=Omega/sqrt(lambda+2*mu);
+u_exact:=_C1*(cos(r*k)*r*k-sin(r*k))/r^2+ _C2*(cos(r*k) + sin(r*k)*r*k)/r^2;
+test_u:=simplify(eval(subs(u(r)=u_exact,ode)));
+u(r):=u_exact;
+
+
+#-------------------------------------------------
+# Nondim radial stress for boundary condition
+#-------------------------------------------------
+tau_rr:=lambda*1/r^2*diff( r^2*u(r), r) + 2*mu*diff(u(r),r);
+
+
+#-------------------------------------------------
+# Helmholtz equation and solution
+#-------------------------------------------------
+hh_ode:=1/r^2*diff( r^2*diff(phi(r),r) , r) + K_squared*phi(r);
+hh_soln:=dsolve(hh_ode,phi(r));
+phi_exact:=A*exp(I*sqrt(K_squared)*r)/r;
+test:=simplify(eval(subs(phi(r)=phi_exact,hh_ode)));
+
+
+
+#-------------------------------------------------
+# Boundary conditions
+#-------------------------------------------------
+eqn1:=subs(r=1-H_coating,u(r)-Epsilon);
+eqn2:=subs(r=1,tau_rr)+Q*subs(r=1,phi_exact);
+eqn3:=subs(r=1,diff(phi_exact,r))-subs(r=1,u(r));
+
+
+
+#-------------------------------------------------
+# Solve for free coefficients
+#-------------------------------------------------
+coeff_soln:=solve({eqn1,eqn2,eqn3},{_C1,_C2,A});
+assign(coeff_soln);
+
+
+
+#-------------------------------------------------
+# Parameters as in c++ code
+#-------------------------------------------------
+params_without_Q:={Epsilon=1.0,K_squared=10,Density_ratio=1.0,H_coating=0.2,Nu=0.3};
+others:= {Q=10.0};
+params:= params_without_Q union others;
+
+
+#-------------------------------------------------
+# Radial plots and work out some specific numbers
+#-------------------------------------------------
+#plot(evalf(Re(subs(params,eval(phi_exact)))),r=1..2);
+#plot(evalf(Im(subs(params,eval(phi_exact)))),r=1..2);
+#plot(evalf(Re(subs(params,eval(u(r))))),r=0.9..1.0);
+#plot(evalf(Im(subs(params,eval(u(r))))),r=0.9..1.0);
+#evalf(subs(r=1,evalf(Re(subs(params,eval(phi_exact))))));
+#evalf(subs(r=1,evalf(Im(subs(params,eval(phi_exact))))));
+#evalf(subs(r=1,evalf(Re(subs(params,eval(u(r)))))));
+#evalf(subs(r=1,evalf(Im(subs(params,eval(u(r)))))));
+
+
+#-------------------------------------------------
+# Output displacement field
+#-------------------------------------------------
+fd := fopen("maple_u.dat", WRITE);
+for R from 0.8 by 0.025 to 1.0
+do
+        for phi from evalf(-Pi/2) by evalf(Pi/60) to evalf(Pi/2)
+        do
+                U:=evalf(subs(params,eval(subs(r=R,u(r)))));
+                x:=R*cos(phi);
+                y:=R*sin(phi);
+                ux:=evalf(U)*cos(phi);
+                uy:=evalf(U)*sin(phi);
+                fprintf(fd,"%g %g %g %g 0 %g %g 0 \n",x,y,Re(ux),Re(uy),Im(ux),Im(uy));
+         end do;
+end do;
+fclose(fd);
+
+
+
+#-------------------------------------------------
+# Output potential
+#-------------------------------------------------
+fd := fopen("maple_phi.dat", WRITE);
+for R from 1 by 0.025 to 2.0
+do
+        for phi from evalf(-Pi/2) by evalf(Pi/60) to evalf(Pi/2)
+        do
+                phii:=evalf(subs(params,eval(subs(r=R,phi_exact))));
+                x:=R*cos(phi);
+                y:=R*sin(phi);
+                fprintf(fd,"%g %g %g %g \n",x,y,Re(phii),Im(phii));
+         end do;
+end do;
+fclose(fd);
+
+ 
+
+#-------------------------------------------------
+# Radiated power
+#-------------------------------------------------
+# Factor of two comes from the integral over sin(theta)
+power:=2*Pi*a^2*subs(r=a,( Re(phi_exact)*Im(diff(phi_exact,r)) - Im(phi_exact)*Re(diff(phi_exact,r)) ));
+
+
+#-------------------------------------------------
+# Output power
+#-------------------------------------------------
+fd := fopen("maple_power.dat", WRITE);
+for QQQ from 0 by 5 to 105.0
+do
+
+       QQ:=max(1.0e-3,QQQ):
+       fprintf(fd,"%g %g %g %g %g  \n",
+       QQ,
+       evalf(subs(params_without_Q,Q=QQ,params,K_squared)),
+       evalf(subs(params_without_Q,Q=QQ,params,Density_ratio)),
+       evalf(subs(params_without_Q,Q=QQ,params,sqrt(Density_ratio*Q))),
+       evalf(subs(params_without_Q,Q=QQ,params,a=3,power)));
+end do;           
+fclose(fd);

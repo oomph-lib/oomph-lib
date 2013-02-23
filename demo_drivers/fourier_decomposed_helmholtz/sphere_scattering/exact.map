@@ -1,0 +1,135 @@
+#=======================================
+# Maple script to compute the exact
+# radiated power.
+#=======================================
+
+
+#----------------------------------------------------------
+# Exact power computation (done in spherical coordinates!)
+#----------------------------------------------------------
+interface(echo=0);
+kernelopts(printbytes=false);
+
+# From http://ciks.cbt.nist.gov/~garbocz/paper134/node10.html
+
+P00:=1;
+P10:=cos(theta);
+P20:=1/2*(3*cos(theta)^2-1);
+P30:=1/2*cos(theta)*(5*cos(theta)^2-3);
+P40:=1/8*(35*cos(theta)^4-30*cos(theta)^2+3);
+P50:=1/8*cos(theta)*(63*cos(theta)^4-70*cos(theta)^2+15);
+
+P33:=-15*sin(theta)^3;
+P43:=-105*cos(theta)*sin(theta)^3;
+P53:=-105/2*sin(theta)^3*(9*cos(theta)^2-1);
+
+#----------------------------
+# Solution as written in code
+#----------------------------
+soln0:=P00*sqrt(Pi/(2*k*r_spherical))*(BesselJ(0+1/2,k*r_spherical)+I*BesselY(0+1/2,k*r_spherical))+
+       P10*sqrt(Pi/(2*k*r_spherical))*(BesselJ(1+1/2,k*r_spherical)+I*BesselY(1+1/2,k*r_spherical))+
+       P20*sqrt(Pi/(2*k*r_spherical))*(BesselJ(2+1/2,k*r_spherical)+I*BesselY(2+1/2,k*r_spherical))+
+       P30*sqrt(Pi/(2*k*r_spherical))*(BesselJ(3+1/2,k*r_spherical)+I*BesselY(3+1/2,k*r_spherical))+
+       P40*sqrt(Pi/(2*k*r_spherical))*(BesselJ(4+1/2,k*r_spherical)+I*BesselY(4+1/2,k*r_spherical))+
+       P50*sqrt(Pi/(2*k*r_spherical))*(BesselJ(5+1/2,k*r_spherical)+I*BesselY(5+1/2,k*r_spherical));
+
+
+
+soln3:=P33*sqrt(Pi/(2*k*r_spherical))*(BesselJ(3+1/2,k*r_spherical)+I*BesselY(3+1/2,k*r_spherical))+
+       P43*sqrt(Pi/(2*k*r_spherical))*(BesselJ(4+1/2,k*r_spherical)+I*BesselY(4+1/2,k*r_spherical))+
+       P53*sqrt(Pi/(2*k*r_spherical))*(BesselJ(5+1/2,k*r_spherical)+I*BesselY(5+1/2,k*r_spherical));
+
+
+
+
+#--------------------------------------------------------------
+# Power
+#--------------------------------------------------------------
+radius:=3;
+
+power0:=evalf(subs(k=sqrt(10),(Pi*radius^2*subs(r_spherical=radius,
+                int((Im(diff(soln0,r_spherical))*Re(soln0)-
+                     Re(diff(soln0,r_spherical))*Im(soln0))*sin(theta),
+                    theta=0..Pi)))));
+
+power3:=evalf(subs(k=sqrt(10),(Pi*radius^2*subs(r_spherical=radius,
+                int((Im(diff(soln3,r_spherical))*Re(soln3)-
+                     Re(diff(soln3,r_spherical))*Im(soln3))*sin(theta),
+                    theta=0..Pi)))));
+
+
+#ppower0:=evalf(subs(k=sqrt(10),power0));
+#ppower3:=evalf(subs(k=sqrt(10),power3));
+
+
+
+@@@;
+
+#--------------------------------------------------------------
+# Compare that we're dealing with the same Legendre Polynomials
+#--------------------------------------------------------------
+fd := fopen("legendre3_from_maple.dat", WRITE);
+theta_min:=0;
+theta_max:=2*Pi;
+nplot:=100;
+for i from 0 to nplot-1 do
+  ttheta:=theta_min+(theta_max-theta_min)*i/(nplot-1):
+  fprintf(fd,"%g %g %g %g \n",ttheta,subs(theta=ttheta,P33),
+                                     subs(theta=ttheta,P43),        
+                                     subs(theta=ttheta,P53));
+
+end do;
+fclose(fd);
+
+#--------------------------------------------------------------
+# Output exact solution
+#--------------------------------------------------------------
+fd := fopen("exact_soln3.dat", WRITE);
+k:=sqrt(10);
+theta_min:=0;
+theta_max:=Pi;
+r_min:=1;
+r_max:=3;
+nplot:=100;
+for i from 0 to nplot-1 do
+  ttheta:=theta_min+(theta_max-theta_min)*i/(nplot-1):
+for j from 0 to nplot-1 do
+  rr_spherical:=r_min+(r_max-r_min)*j/(nplot-1):
+  
+  r:= rr_spherical*sin(ttheta);
+  z:= rr_spherical*cos(ttheta);
+  plot_soln:=subs(theta=ttheta,r_spherical=rr_spherical,soln3);
+  fprintf(fd,"%g %g %g %g \n",r,z,Re(plot_soln),Im(plot_soln));
+
+end do;
+end do;
+fclose(fd);
+
+
+
+#--------------------------------------------------------------
+# Output exact solution
+#--------------------------------------------------------------
+fd := fopen("exact_soln0.dat", WRITE);
+k:=sqrt(10);
+theta_min:=0;
+theta_max:=Pi;
+r_min:=1;
+r_max:=3;
+nplot:=100;
+for i from 0 to nplot-1 do
+  ttheta:=theta_min+(theta_max-theta_min)*i/(nplot-1):
+for j from 0 to nplot-1 do
+  rr_spherical:=r_min+(r_max-r_min)*j/(nplot-1):
+  
+  r:= rr_spherical*sin(ttheta);
+  z:= rr_spherical*cos(ttheta);
+  plot_soln:=subs(theta=ttheta,r_spherical=rr_spherical,soln0);
+  fprintf(fd,"%g %g %g %g \n",r,z,Re(plot_soln),Im(plot_soln));
+
+end do;
+end do;
+fclose(fd);
+
+
+

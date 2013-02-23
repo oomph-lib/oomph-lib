@@ -13,7 +13,8 @@ incl_cc_files =
 headers =  \
 fsi_preconditioners.h segregated_fsi_solver.h pseudo_elastic_preconditioner.h \
 pseudo_elastic_fsi_preconditioner.h multi_domain_boussinesq_elements.h \
-boussinesq_elements.h helmholtz_time_harmonic_linear_elasticity_interaction.h 
+boussinesq_elements.h helmholtz_time_harmonic_linear_elasticity_interaction.h \
+fourier_decomposed_helmholtz_time_harmonic_linear_elasticity_interaction.h 
 # old_multi_domain_boussinesq_elements.h 
 
 # Template only files. These should be included in include directory

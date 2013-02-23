@@ -144,25 +144,20 @@ public virtual FaceGeometry<ELEMENT>,
   
   /// \short Compute the element's contribution to the time-averaged 
   /// radiated power over the artificial boundary. Also output the
-  /// power density as a fct of the polar angle in the specified 
+  /// power density as a fct of the zenith angle in the specified 
   ///output file if it's open.
   double global_power_contribution(std::ofstream& outfile)
   {   
-   throw OomphLibError(
-    "Broken; please update from cartesian version\n",
-    "FourierDecomposedHelmholtzBCElementBase::global_power_contribution()",
-    OOMPH_EXCEPTION_LOCATION);
-   
    // pointer to the corresponding bulk element
    ELEMENT* bulk_elem_pt = dynamic_cast<ELEMENT*>(this->bulk_element_pt()); 
    
    // Number of nodes in bulk element
    unsigned nnode_bulk=bulk_elem_pt->nnode();
-   const unsigned n_node_local = nnode();
-   
+   const unsigned n_node_local = this->nnode();
+
    //get the dim of the bulk and local nodes
    const unsigned bulk_dim= bulk_elem_pt->dim();    
-   const unsigned local_dim= this->dim();
+   const unsigned local_dim= this->node_pt(0)->ndim();
    
    //Set up memory for the shape and test functions
    Shape psi(n_node_local);
@@ -186,7 +181,7 @@ public virtual FaceGeometry<ELEMENT>,
     {
      outfile << "ZONE\n";
     }
-
+   
    //Loop over the integration points
    //--------------------------------
    for(unsigned ipt=0;ipt<n_intpt;ipt++)
@@ -218,11 +213,11 @@ public virtual FaceGeometry<ELEMENT>,
      this->shape(s,psi);
      
      // Derivs of Eulerian coordinates w.r.t. local coordinates
-     std::complex<double>  dphi_dr(0.0,0.0);
+     std::complex<double>  dphi_dn(0.0,0.0);
      Vector<std::complex <double> > interpolated_dphidx(bulk_dim);
      std::complex<double> interpolated_phi(0.0,0.0);
      Vector<double> x(bulk_dim);
-
+     
      //Calculate function value and derivatives:
      //-----------------------------------------
      // Loop over nodes
@@ -245,30 +240,30 @@ public virtual FaceGeometry<ELEMENT>,
      
      for(unsigned l=0;l<n_node_local;l++) 
       {
-       //Get the nodal value of the helmholtz unknown
+       //Get the nodal value of the Helmholtz unknown
        const std::complex<double> phi_value(
-        raw_nodal_value(l,u_index_fourier_decomposed_helmholtz().real()),
-        raw_nodal_value(l,u_index_fourier_decomposed_helmholtz().imag()));
+        nodal_value(l,u_index_fourier_decomposed_helmholtz().real()),
+        nodal_value(l,u_index_fourier_decomposed_helmholtz().imag()));
        
        interpolated_phi += phi_value*psi(l);
       }
      
-     //define dphi_dr 
+     //define dphi_dn 
      for(unsigned i=0;i<bulk_dim;i++)
       {
-       dphi_dr += interpolated_dphidx[i]*unit_normal[i];
+       dphi_dn += interpolated_dphidx[i]*unit_normal[i];
       }
      
      // Power density
-     double integrand=0.5*
-      (interpolated_phi.real()*dphi_dr.imag()-
-       interpolated_phi.imag()*dphi_dr.real());
+     double integrand=
+      (interpolated_phi.real()*dphi_dn.imag()-
+       interpolated_phi.imag()*dphi_dn.real());
      
+     interpolated_x(s,x);
+     double theta=atan2(x[0],x[1]);
      // Output?
      if (outfile.is_open())
       {
-       interpolated_x(s,x);
-       double theta=atan2(x[0],x[1]);
        outfile << x[0] << " "
                << x[1] << " "
                << theta << " "
@@ -276,9 +271,9 @@ public virtual FaceGeometry<ELEMENT>,
       }
      
      // ...add to integral
-     power+=integrand*W;
+     power+=MathematicalConstants::Pi*x[0]*integrand*W;
     }  
-   
+
    return  power;
   }
   
@@ -733,7 +728,8 @@ public FourierDecomposedHelmholtzBCElementBase<ELEMENT>
              if(external_unknown_imag >= 0)
               {
                // Add the contribution
-               external_global_unk_imag=this->eqn_number(external_unknown_imag); 
+               external_global_unk_imag=
+                this->eqn_number(external_unknown_imag); 
                jacobian(local_eqn_imag,external_unknown_imag)
                 +=d_gamma[ipt][external_global_unk_imag].imag()*test[l]*r*W;
               }
@@ -776,7 +772,7 @@ compute_gamma_contribution(
 {  
  //Parameters
  int n_fourier_helmholtz=
-  dynamic_cast<ELEMENT*>(this->bulk_element_pt())->n_fourier();
+  dynamic_cast<ELEMENT*>(this->bulk_element_pt())->fourier_wavenumber();
  
  // define the imaginary number
  const std::complex<double> I(0.0,1.0);
@@ -837,10 +833,8 @@ compute_gamma_contribution(
      
      //Get the nodal value of the helmholtz unknown
      std::complex<double> u_value(
-      this->raw_nodal_value(l,
-                            this->U_index_fourier_decomposed_helmholtz.real()),
-      this->raw_nodal_value(l,
-                            this->U_index_fourier_decomposed_helmholtz.imag()));
+      this->nodal_value(l,this->U_index_fourier_decomposed_helmholtz.real()),
+      this->nodal_value(l,this->U_index_fourier_decomposed_helmholtz.imag()));
      
      interpolated_u += u_value*psi(l);
      
@@ -995,7 +989,7 @@ void FourierDecomposedHelmholtzDtNMesh<ELEMENT>::setup_gamma()
   (this->element_pt(0));    
  double k=sqrt(dynamic_cast<ELEMENT*>(el_pt->bulk_element_pt())->k_squared());  
  int n_fourier_decomposed=
-  dynamic_cast<ELEMENT*>(el_pt->bulk_element_pt())->n_fourier();
+  dynamic_cast<ELEMENT*>(el_pt->bulk_element_pt())->fourier_wavenumber();
  double n_hankel_order_max=double(N_terms)+0.5;
  double n_hankel_order_tmp=0.0;
  

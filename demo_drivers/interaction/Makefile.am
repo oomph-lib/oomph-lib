@@ -15,4 +15,5 @@ elastic_bretherton \
 pseudo_solid_collapsible_tube \
 linearised_fsi_pulsewave \
 pseudo_solid_fsi_channel_with_leaflet \
-acoustic_fsi
+acoustic_fsi \
+fourier_decomposed_acoustic_fsi 

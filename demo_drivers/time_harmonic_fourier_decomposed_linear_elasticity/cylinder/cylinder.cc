@@ -323,7 +323,7 @@ doc_solution(DocInfo& doc_info)
  char filename[100];
  
  // Number of plot points
- unsigned npts=10; 
+ unsigned npts=5; 
  
  // Output solution 
  sprintf(filename,"%s/soln.dat",doc_info.directory().c_str());

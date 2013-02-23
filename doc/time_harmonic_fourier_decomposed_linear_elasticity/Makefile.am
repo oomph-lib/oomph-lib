@@ -1,5 +1,6 @@
 SUBDIRS = \
-cylinder
+cylinder \
+adaptive_pressure_loaded_cylinder
 
 
 

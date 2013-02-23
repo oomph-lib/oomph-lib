@@ -48,10 +48,186 @@ namespace oomph
  std::complex<double>
  TimeHarmonicFourierDecomposedLinearElasticityEquationsBase::
  Default_youngs_modulus_value(1.0,0.0);
+
  
 //////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////
+
+
+//=======================================================================
+/// Compute norm of the solution
+//=======================================================================
+void TimeHarmonicFourierDecomposedLinearElasticityEquations::
+compute_norm(double& norm)
+ {
+ 
+ // Initialise
+ norm=0.0;
+ 
+ //Vector of local coordinates
+ Vector<double> s(2);
+ 
+  // Vector for coordintes
+ Vector<double> x(2);
+
+ // Displacement vector
+ Vector<std::complex<double> > disp(3);
+
+ //Find out how many nodes there are in the element
+ unsigned n_node = this->nnode();
+ 
+ Shape psi(n_node);
+ 
+ //Set the value of n_intpt
+ unsigned n_intpt = this->integral_pt()->nweight();
+ 
+ //Loop over the integration points
+ for(unsigned ipt=0;ipt<n_intpt;ipt++)
+  {
+   
+   //Assign values of s
+   for(unsigned i=0;i<2;i++)
+    {
+     s[i] = this->integral_pt()->knot(ipt,i);
+    }
+   
+   //Get the integral weight
+   double w = this->integral_pt()->weight(ipt);
+   
+   // Get jacobian of mapping
+   double J=this->J_eulerian(s);
+   
+   //Premultiply the weights and the Jacobian
+   double W = w*J;
+   
+   // Get FE function value
+   this->interpolated_u_time_harmonic_fourier_decomposed_linear_elasticity
+    (s,disp);
+   
+   // Add to  norm
+   for (unsigned ii=0;ii<3;ii++)
+    {
+     norm+=(disp[ii].real()*disp[ii].real()+disp[ii].imag()*disp[ii].imag())*W;
+    }
+  }
+}
+ 
+//=======================================================================
+/// Get strain tensor
+//=======================================================================
+ void TimeHarmonicFourierDecomposedLinearElasticityEquations::
+ get_strain(const Vector<double>& s, DenseMatrix<std::complex<double> >& strain)
+ {
+  //Find out how many nodes there are
+  unsigned n_node = this->nnode();
+  
+#ifdef PARANOID
+  //Find out how many positional dofs there are
+  unsigned n_position_type = this->nnodal_position_type();
+  
+  if(n_position_type != 1)
+   {
+    throw OomphLibError(
+     "TimeHarmonicFourierDecomposedLinearElasticity is not yet implemented for more than one position type",
+     "TimeHarmonicFourierDecomposedLinearElasticityEquationsBase::get_strain()",
+     OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+  
+  //Find the indices at which the local displacements are stored
+  std::complex<unsigned> u_nodal_index[3];
+  for(unsigned i=0;i<3;i++) 
+   {
+    u_nodal_index[i] = this->
+    u_index_time_harmonic_fourier_decomposed_linear_elasticity(i);  
+   }
+  
+  // Fourier wavenumber as double
+  double n = double(this->fourier_wavenumber());
+    
+  //Set up memory for the shape functions
+  Shape psi(n_node);
+
+  // Derivs only w.r.t. r [0] and z [1]
+  DShape dpsidx(n_node,2);
+     
+  //Call the derivatives of the shape functions (ignore Jacobian)
+  this->dshape_eulerian(s,psi,dpsidx);
+    
+  //Storage for Eulerian coordinates (r,z; initialised to zero)
+  Vector<double> interpolated_x(2,0.0);
+  
+  // Displacements u_r,u_z,u_theta
+  Vector<std::complex<double> >
+   interpolated_u(3,std::complex<double>(0.0,0.0));
+  
+  //Calculate interpolated values of the derivatives w.r.t.
+  //Eulerian coordinates
+  DenseMatrix<std::complex<double> > 
+   interpolated_dudx(3,2,std::complex<double>(0.0,0.0));
+  
+  //Calculate displacements and derivatives 
+  for(unsigned l=0;l<n_node;l++)
+   {
+    //Calculate the coordinates 
+    for(unsigned i=0;i<2;i++)
+     {
+      interpolated_x[i] += this->nodal_position(l,i)*psi(l);
+     }
+    //Get the nodal displacements
+    for(unsigned i=0;i<3;i++)
+     {
+      const std::complex<double> u_value 
+       =  std::complex<double>(
+        this->nodal_value(l,u_nodal_index[i].real()),
+        this->nodal_value(l,u_nodal_index[i].imag()));
+      
+      interpolated_u[i]+=u_value*psi(l);
+      
+      //Loop over derivative directions
+      for(unsigned j=0;j<2;j++)
+       {
+        interpolated_dudx(i,j) += u_value*dpsidx(l,j);
+       }
+     }
+   }
+  
+  // define shorthand notation for regularly-occurring terms
+  double r = interpolated_x[0];
+  const std::complex<double> I(0.0,1.0);
+
+  // r component of displacement
+  std::complex<double> ur = interpolated_u[0]; 
+  
+  // z component of displacement
+  std::complex<double> uz = interpolated_u[1];  
+  
+  // theta component of displacement
+  std::complex<double> uth = interpolated_u[2];
+  
+  // derivatives w.r.t. r and z:
+  std::complex<double> durdr = interpolated_dudx(0,0);
+  std::complex<double> durdz = interpolated_dudx(0,1);
+  std::complex<double> duzdr = interpolated_dudx(1,0);
+  std::complex<double> duzdz = interpolated_dudx(1,1);
+  std::complex<double> duthdr = interpolated_dudx(2,0);
+  std::complex<double> duthdz = interpolated_dudx(2,1);
+  
+  strain(0,0)=durdr;
+  strain(2,2)=I*double(n)*uth/r+ur/r;
+  strain(1,1)=duzdz;
+  strain(0,2)=0.5*(I*double(n)*ur/r-uth/r+duthdr);
+  strain(2,0)=0.5*(I*double(n)*ur/r-uth/r+duthdr);
+  strain(0,1)=0.5*(durdz+duzdr);
+  strain(1,0)=0.5*(durdz+duzdr);
+  strain(2,1)=0.5*(duthdz+I*double(n)*uz/r);
+  strain(1,2)=0.5*(duthdz+I*double(n)*uz/r);
+ }
+
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
 
 //=======================================================================
 /// Compute the residuals for the Fourier decomposed (in cyl. polars)
@@ -592,7 +768,8 @@ namespace oomph
                    }
                   else if(c==2)
                    {
-                    jacobian(local_eqn_imag,local_unknown_imag) += G_theta.real();
+                    jacobian(local_eqn_imag,local_unknown_imag) += 
+                     G_theta.real();
                    }
                  }
                }

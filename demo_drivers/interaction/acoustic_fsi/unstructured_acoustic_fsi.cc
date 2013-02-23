@@ -192,10 +192,10 @@ public:
  /// Update function (empty)
  void actions_after_newton_solve() {}
  
- /// Actions before adapt: Wipe the mesh of traction elements
+ /// Actions before adapt: Wipe the face meshes
  void actions_before_adapt();
 
- /// Actions after adapt: Rebuild the mesh of traction elements
+ /// Actions after adapt: Rebuild the face meshes
  void actions_after_adapt();
 
  /// Doc the solution
@@ -214,7 +214,7 @@ private:
  
  /// \short Create Helmholtz FSI flux elements
  void create_helmholtz_fsi_flux_elements();
- 
+
  /// Delete (face) elements in specified mesh 
  void delete_face_elements(Mesh* const & boundary_mesh_pt);
  
@@ -929,7 +929,7 @@ template<class ELASTICITY_ELEMENT, class HELMHOLTZ_ELEMENT>
 void CoatedDiskProblem<ELASTICITY_ELEMENT,HELMHOLTZ_ELEMENT>::
 create_fsi_traction_elements()
 {
- // We're on the outre boundary of the solid mesh
+ // We're on the outer boundary of the solid mesh
  unsigned b=Outer_boundary_id;
 
  // How many bulk elements are adjacent to boundary b?

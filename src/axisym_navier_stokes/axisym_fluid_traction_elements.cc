@@ -68,7 +68,6 @@ namespace AxisymmetricNavierStokesTractionElementHelper
 //=======================================================================
 /// Namespace containing the default Strouhal number of axisymmetric 
 /// linearised FSI.
-// hierher move/copy to cc file
 //=======================================================================
 namespace LinearisedFSIAxisymmetricNStNoSlipBCHelper
  {

@@ -5,7 +5,7 @@ include $(top_srcdir)/config/makefile_templates/demo_drivers
 check_PROGRAMS=3d_static_cap 3d_static_cap_elastic	 
 
 # Sources for executable
-3d_static_cap_SOURCES = 3d_static_cap.cc fix_vol_int_elements.h 
+3d_static_cap_SOURCES = 3d_static_cap.cc
 
 # Required libraries: 
 # $(FLIBS) is included in case the solver involves fortran sources.

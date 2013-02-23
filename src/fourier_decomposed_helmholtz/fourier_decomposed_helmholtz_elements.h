@@ -149,13 +149,13 @@ namespace oomph
   }
   
   /// Get pointer to Fourier wavenumber
-  int*& n_fourier_pt()
+  int*& fourier_wavenumber_pt()
   { 
    return N_fourier_pt;
   }
   
   /// Get the Fourier wavenumber
-  int n_fourier()
+  int fourier_wavenumber()
   { 
    if (N_fourier_pt==0)
     {

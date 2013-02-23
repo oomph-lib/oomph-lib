@@ -299,7 +299,8 @@ consistent with the derivative of the exact solution.
 
 To solve this problem numerically, we discretise the annular
 domain \f$ 1 < \sqrt{r^2 + z^2} < 3 \f$ with finite elements and
-apply the Dirichlet-to-Neumann boundary condition on the artificial
+apply the Sommerfeld radiation condition using a Dirichlet-to-Neumann 
+mapping on the artificial
 outer boundary \f$ \Gamma \f$ located  at \f$ \sqrt{r^2 + z^2}
 = R = 3\f$.
 
@@ -476,6 +477,22 @@ the \f$ \gamma \f$ integral. If computed correctly, its values
 \c FourierDecomposedHelmholtzFluxElement) ought to agree (well) with the
 derivative of the exact solution. They do; see \ref acc.
 
+\until check_gamma
+
+Finally, we output the time-averaged power radiated over the
+outer boundary of the domain, defined as
+\f[
+\overline{\cal P }_N =  \pi R^2 \int_0^\pi 
+\left.
+\bigg( Im \{\frac{\partial u_N}{\partial \rho} \} Re\{u_N \} -
+       Re \{\frac{\partial u_N}{\partial \rho} \} Im\{u_N \} 
+\bigg)\right|_{\rho=R} \sin(\theta) \ d\theta.
+\f]
+We refer to 
+<a href="../../../fourier_decomposed_acoustic_fsi/sphere/html/index.html#appendix">another
+tutorial</a> for the derivation which shows (in the context of
+an acoustic fluid-structure interaction problem) why this is a sensible
+definition of the radiated power. 
 
 \until } // end of doc
 

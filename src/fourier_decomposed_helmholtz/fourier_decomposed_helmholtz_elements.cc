@@ -259,9 +259,9 @@ namespace oomph
     
     double r = interpolated_x[0];
     double rr = r*r;
-    double n = (double)n_fourier();
+    double n = (double)fourier_wavenumber();
     double n_squared = n*n;
-    
+     
     // Assemble residuals and Jacobian
     //--------------------------------
     

@@ -34,10 +34,6 @@
 #include "axisym_linear_elasticity.h"
 #include "meshes/triangle_mesh.h"
 
-// hierher
-//#include "./axisym_fluid_traction_elements.h"
-
-
 #define DO_FSI
 
 using namespace std;
@@ -856,131 +852,21 @@ create_fluid_traction_elements()
 template<class FLUID_ELEMENT, class SOLID_ELEMENT>
 void PressureWaveFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::setup_fsi()
 {
- 
-// hierher replace
-
- // Identify FSI boundaries in the two meshes
- unsigned boundary_in_fluid_mesh=1;
- unsigned boundary_in_solid_mesh=3;
- 
  // Setup fluid traction on FSI wall elements
  //------------------------------------------
- {
-  // Create a face mesh adjacent to the Navier-Stokes mesh's boundary. 
-  // The face mesh consists of FaceElements that may also be 
-  // interpreted as GeomObjects
-  Mesh* fluid_face_mesh_pt = new Mesh;
-  Fluid_mesh_pt->template build_face_mesh
-   <FLUID_ELEMENT,FaceElementAsGeomObject>(boundary_in_fluid_mesh,
-                                           fluid_face_mesh_pt);
-  
-  // Loop over these new face elements and tell them the boundary number
-  // from the bulk fluid mesh -- this is required to they can
-  // get access to the boundary coordinates!
-  unsigned n_face_element = fluid_face_mesh_pt->nelement();
-  for(unsigned e=0;e<n_face_element;e++)
-   {
-    //Cast the element pointer to the correct thing!
-    FaceElementAsGeomObject<FLUID_ELEMENT>* el_pt=
-     dynamic_cast<FaceElementAsGeomObject<FLUID_ELEMENT>*>
-     (fluid_face_mesh_pt->element_pt(e));
-    
-    // Set bulk boundary number
-    el_pt->set_boundary_number_in_bulk_mesh(boundary_in_fluid_mesh);   
-   }
-  
-  // Now sort the elements based on the boundary coordinates.
-  // This may allow a faster implementation of the locate_zeta
-  // function for the MeshAsGeomObject representation of this
-  // mesh, but also creates a unique ordering of the elements
-  std::sort(fluid_face_mesh_pt->element_pt().begin(),
-            fluid_face_mesh_pt->element_pt().end(),
-            CompareBoundaryCoordinate<FLUID_ELEMENT>());
-  
-  // Setup the interactions for this problem using the surface mesh
-  // on the fluid mesh.  
-  Multi_domain_functions::setup_multi_domain_interaction
-   <FLUID_ELEMENT,FaceElementAsGeomObject<FLUID_ELEMENT> >
-   (this,FSI_solid_surface_mesh_pt,Fluid_mesh_pt,fluid_face_mesh_pt);
-  
-  // The source elements and coordinates have now all been set
-  // Clean up the memory allocated:
-  //The MeshAsGeomObject has already been deleted (in set_external_storage)
-  
-  //Must be careful with the FaceMesh, because we cannot delete the nodes
-  //Loop over the elements backwards (paranoid!) and delete them
-  for(unsigned e=n_face_element;e>0;e--)
-   {
-    delete fluid_face_mesh_pt->element_pt(e-1);
-    fluid_face_mesh_pt->element_pt(e-1) = 0;
-   }
-  //Now clear all element and node storage
-  fluid_face_mesh_pt->flush_element_and_node_storage();
-  
-  //Finally delete the mesh
-  delete fluid_face_mesh_pt;
- }
- 
- 
+ unsigned boundary_in_fluid_mesh=1;
+  Multi_domain_functions::setup_bulk_elements_adjacent_to_face_mesh
+  <FLUID_ELEMENT,2>
+  (this,boundary_in_fluid_mesh,Fluid_mesh_pt,FSI_solid_surface_mesh_pt);
+
  // Setup no slip bc for axisym Navier Stokes from adjacent axisym
  //---------------------------------------------------------------
  // elasticity elements
  //-------------------
- {
-  // Create a face mesh adjacent to the solid mesh's boundary. 
-  // The face mesh consists of FaceElements that may also be 
-  // interpreted as GeomObjects
-  Mesh* solid_face_mesh_pt = new Mesh;
-  Solid_mesh_pt->template build_face_mesh
-   <SOLID_ELEMENT,FaceElementAsGeomObject>(boundary_in_solid_mesh,
-                                           solid_face_mesh_pt);
-  
-  // Loop over these new face elements and tell them the boundary number
-  // from the bulk solid mesh -- this is required to they can
-  // get access to the boundary coordinates!
-  unsigned n_face_element = solid_face_mesh_pt->nelement();
-  for(unsigned e=0;e<n_face_element;e++)
-   {
-    //Cast the element pointer to the correct thing!
-    FaceElementAsGeomObject<SOLID_ELEMENT>* el_pt=
-     dynamic_cast<FaceElementAsGeomObject<SOLID_ELEMENT>*>
-     (solid_face_mesh_pt->element_pt(e));
-    
-    // Set bulk boundary number
-    el_pt->set_boundary_number_in_bulk_mesh(boundary_in_solid_mesh);   
-   }
-  
-  // Now sort the elements based on the boundary coordinates.
-  // This may allow a faster implementation of the locate_zeta
-  // function for the MeshAsGeomObject representation of this
-  // mesh, but also creates a unique ordering of the elements
-  std::sort(solid_face_mesh_pt->element_pt().begin(),
-            solid_face_mesh_pt->element_pt().end(),
-            CompareBoundaryCoordinate<SOLID_ELEMENT>());
-  
-  // Setup the interactions for this problem using the surface mesh
-  // on the solid mesh.  
-  Multi_domain_functions::setup_multi_domain_interaction
-   <SOLID_ELEMENT,FaceElementAsGeomObject<SOLID_ELEMENT> >
-   (this,FSI_fluid_surface_mesh_pt,Solid_mesh_pt,solid_face_mesh_pt);
-  
-  // The source elements and coordinates have now all been set
-  // Clean up the memory allocated:
-  // The MeshAsGeomObject has already been deleted (in set_external_storage)
-  
-  //Must be careful with the FaceMesh, because we cannot delete the nodes
-  //Loop over the elements backwards (paranoid!) and delete them
-  for(unsigned e=n_face_element;e>0;e--)
-   {
-    delete solid_face_mesh_pt->element_pt(e-1);
-    solid_face_mesh_pt->element_pt(e-1) = 0;
-   }
-  //Now clear all element and node storage 
-  solid_face_mesh_pt->flush_element_and_node_storage();
-  
-  //Finally delete the mesh
-  delete solid_face_mesh_pt;
- }
+  unsigned boundary_in_solid_mesh=3;
+  Multi_domain_functions::setup_bulk_elements_adjacent_to_face_mesh
+   <SOLID_ELEMENT,2>(
+    this,boundary_in_solid_mesh,Solid_mesh_pt,FSI_fluid_surface_mesh_pt);
 
 }
 

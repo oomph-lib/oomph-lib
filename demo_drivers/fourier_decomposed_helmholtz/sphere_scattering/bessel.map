@@ -61,3 +61,22 @@ end do;
 
 
 fclose(fd);
+
+
+
+fd := fopen("legendre_from_maple.dat", WRITE);
+with(orthopoly):
+x_min:=0.0;
+x_max:=1.0;
+n:=3;
+for i from 0 to nplot-1 do
+
+    x:=x_min+(x_max-x_min)*i/(nplot-1):
+    fprintf(fd,"%g %g %g %g %g\n",x,seq(P(j,x),j=0..3));
+    print(x,seq(P(j,x),j=0..n));
+
+end do;
+
+
+fclose(fd);
+

@@ -197,7 +197,7 @@ public:
 
 
  /// \short Get the load vector: Pass number of integration point (dummy), 
- /// Lagr. coordinate and normal vector and return the load vector
+ /// Lagr. and Eulerian coordinate and normal vector and return the load vector
  /// (not all of the input arguments will be
  /// required for all specific load functions but the list should
  /// cover all cases). This function is virtual so it can be 

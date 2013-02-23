@@ -44,8 +44,10 @@
 
 
 //OOMPH-LIB headers
-#include "src/generic/Qelements.h"
-#include "src/generic/Telements.h"
+#include "../generic/Qelements.h"
+#include "../generic/Telements.h"
+#include "../generic/projection.h"
+#include "../generic/error_estimator.h"
 
 
 namespace oomph
@@ -363,50 +365,57 @@ class TimeHarmonicFourierDecomposedLinearElasticityEquations :
     residuals,jacobian,1);
   }
    
-   
-   ///Output exact solution: r,z, u_r_real, u_z_real, ..., u_theta_imag
-   void output_fct(std::ostream &outfile, 
-                   const unsigned &nplot, 
-                   FiniteElement::SteadyExactSolutionFctPt exact_soln_pt);
-   
-   /// Output: r,z, u_r_real, u_z_real, ..., u_theta_imag
-   void output(std::ostream &outfile) 
-   {
-    unsigned n_plot=5;
-    output(outfile,n_plot);
-   }
-   
-   /// Output: r,z, u_r_real, u_z_real, ..., u_theta_imag
-   void output(std::ostream &outfile, const unsigned &n_plot);
-   
-   /// C-style output: r,z, u_r_real, u_z_real, ..., u_theta_imag
-   void output(FILE* file_pt) 
-   {
-    unsigned n_plot=5;
-    output(file_pt,n_plot);
-   }
-   
-   /// Output:  r,z, u_r_real, u_z_real, ..., u_theta_imag
-   void output(FILE* file_pt, const unsigned &n_plot);
-   
-   /// Validate against exact solution.
-   /// Solution is provided via function pointer.
-   /// Plot at a given number of plot points and compute L2 error
-   /// and L2 norm of displacement solution over element
-   void compute_error(std::ostream &outfile,
-                      FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-                      double& error, double& norm);
 
-
+  /// Get strain tensor
+  void get_strain(const Vector<double>& s,  
+                  DenseMatrix<std::complex<double> >& strain);  
+  
+  /// \short Compute norm of solution: square of the L2 norm
+  void compute_norm(double& norm);
+  
+  ///Output exact solution: r,z, u_r_real, u_z_real, ..., u_theta_imag
+  void output_fct(std::ostream &outfile, 
+                  const unsigned &nplot, 
+                  FiniteElement::SteadyExactSolutionFctPt exact_soln_pt);
+  
+  /// Output: r,z, u_r_real, u_z_real, ..., u_theta_imag
+  void output(std::ostream &outfile) 
+  {
+   unsigned n_plot=5;
+   output(outfile,n_plot);
+  }
+  
+  /// Output: r,z, u_r_real, u_z_real, ..., u_theta_imag
+  void output(std::ostream &outfile, const unsigned &n_plot);
+  
+  /// C-style output: r,z, u_r_real, u_z_real, ..., u_theta_imag
+  void output(FILE* file_pt) 
+  {
+   unsigned n_plot=5;
+   output(file_pt,n_plot);
+  }
+  
+  /// Output:  r,z, u_r_real, u_z_real, ..., u_theta_imag
+  void output(FILE* file_pt, const unsigned &n_plot);
+  
+  /// Validate against exact solution.
+  /// Solution is provided via function pointer.
+  /// Plot at a given number of plot points and compute L2 error
+  /// and L2 norm of displacement solution over element
+  void compute_error(std::ostream &outfile,
+                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
+                     double& error, double& norm);
+  
+  
     private:
-   
-   /// \short Private helper function to compute residuals and (if requested
-   /// via flag) also the Jacobian matrix.
-   virtual void fill_in_generic_contribution_to_residuals_fourier_decomp_time_harmonic_linear_elasticity(
-    Vector<double> &residuals,DenseMatrix<double> &jacobian,unsigned flag);
-   
+  
+  /// \short Private helper function to compute residuals and (if requested
+  /// via flag) also the Jacobian matrix.
+  virtual void fill_in_generic_contribution_to_residuals_fourier_decomp_time_harmonic_linear_elasticity(
+   Vector<double> &residuals,DenseMatrix<double> &jacobian,unsigned flag);
+  
   }; 
- 
+  
 
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
@@ -476,19 +485,20 @@ class TimeHarmonicFourierDecomposedLinearElasticityEquations :
 /// An Element that solves the equations of Fourier decomposed (in cylindrical
 /// polars) time-harmonic linear elasticity, using TElements for the geometry.
 //============================================================================
-  template<unsigned NNODE_1D>
-   class TTimeHarmonicFourierDecomposedLinearElasticityElement : 
+ template<unsigned NNODE_1D>
+  class TTimeHarmonicFourierDecomposedLinearElasticityElement : 
   public virtual TElement<2,NNODE_1D>,
-   public virtual TimeHarmonicFourierDecomposedLinearElasticityEquations
-   {
+  public virtual TimeHarmonicFourierDecomposedLinearElasticityEquations,
+  public virtual ElementWithZ2ErrorEstimator
+  {
     public:
    
    /// Constructor
-   TTimeHarmonicFourierDecomposedLinearElasticityElement() : 
-    TElement<2,NNODE_1D>(), 
+    TTimeHarmonicFourierDecomposedLinearElasticityElement() : 
+   TElement<2,NNODE_1D>(), 
     TimeHarmonicFourierDecomposedLinearElasticityEquations() { }
-    
-    /// Output function
+   
+   /// Output function
    void output(std::ostream &outfile) 
    {TimeHarmonicFourierDecomposedLinearElasticityEquations::output(outfile);}
    
@@ -505,6 +515,78 @@ class TimeHarmonicFourierDecomposedLinearElasticityEquations :
    void output(FILE* file_pt, const unsigned &n_plot)
    {TimeHarmonicFourierDecomposedLinearElasticityEquations::
      output(file_pt,n_plot);}
+   
+   
+   /// \short Number of vertex nodes in the element
+   unsigned nvertex_node() const
+   {return TElement<2,NNODE_1D>::nvertex_node();}
+   
+   /// \short Pointer to the j-th vertex node in the element
+   Node* vertex_node_pt(const unsigned& j) const
+   {
+    return TElement<2,NNODE_1D>::vertex_node_pt(j);
+   }
+   
+   /// \short Order of recovery shape functions for Z2 error estimation:
+   /// Same order as shape functions.
+   unsigned nrecovery_order() {return NNODE_1D-1;}
+   
+   /// Number of 'flux' terms for Z2 error estimation 
+   unsigned num_Z2_flux_terms()
+   {
+    // 3 Diagonal strain rates and 3 off diagonal terms for real and imag part
+    return 12;
+   }
+   
+   /// \short Get 'flux' for Z2 error recovery:   Upper triangular entries
+   /// in strain tensor.
+   void get_Z2_flux(const Vector<double>& s, Vector<double>& flux) 
+   {
+#ifdef PARANOID
+    unsigned num_entries=12;
+    if (flux.size()!=num_entries)
+     {
+      std::ostringstream error_message;
+      error_message << "The flux vector has the wrong number of entries, " 
+                    << flux.size() << ", whereas it should be " 
+                    << num_entries << std::endl;
+      throw OomphLibError(
+       error_message.str(),
+       "RefineableTimeHarmonicFourierDecomposedLinearElasticityEquations::get_Z2_flux()",
+       OOMPH_EXCEPTION_LOCATION);
+     }
+#endif
+    
+    // Get strain matrix
+    DenseMatrix<std::complex<double> > strain(3);
+    this->get_strain(s,strain);
+    
+    // Pack into flux Vector
+    unsigned icount=0;
+    
+    // Start with diagonal terms
+    for(unsigned i=0;i<3;i++)
+     {
+      flux[icount]=strain(i,i).real();
+      icount++;
+      flux[icount]=strain(i,i).imag();
+      icount++;
+     }
+    
+    //Off diagonals row by row
+    for(unsigned i=0;i<3;i++)
+     {
+      for(unsigned j=i+1;j<3;j++)
+       {
+        flux[icount]=strain(i,j).real();
+        icount++;
+        flux[icount]=strain(i,j).imag();
+        icount++;
+       }
+     }
+   }
+
+   
    
   };
  
@@ -523,8 +605,207 @@ class TimeHarmonicFourierDecomposedLinearElasticityEquations :
   };
  
  
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+
+
+//==========================================================
+/// Fourier-decomposed time-harmonic linear elasticity 
+/// upgraded to become projectable
+//==========================================================
+ template<class TIME_HARMONIC_LINEAR_ELAST_ELEMENT>
+ class ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement : 
+  public virtual ProjectableElement<TIME_HARMONIC_LINEAR_ELAST_ELEMENT>
+ {
+  
+ public:
+  
+  /// \short Constructor [this was only required explicitly
+  /// from gcc 4.5.2 onwards...]
+  ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement(){}
+  
+  /// \short Specify the values associated with field fld. 
+  /// The information is returned in a vector of pairs which comprise 
+  /// the Data object and the value within it, that correspond to field fld. 
+  /// In the underlying time-harmonic linear elasticity elemements the 
+  /// real and complex parts of the displacements are stored
+  /// at the nodal values
+  Vector<std::pair<Data*,unsigned> > data_values_of_field(const unsigned& fld)
+  {   
+   // Create the vector
+   Vector<std::pair<Data*,unsigned> > data_values;
+   
+   // Loop over all nodes and extract the fld-th nodal value
+   unsigned nnod=this->nnode();
+   for (unsigned j=0;j<nnod;j++)
+    {
+     // Add the data value associated with the velocity components
+     data_values.push_back(std::make_pair(this->node_pt(j),fld));
+    }
+   
+   // Return the vector
+   return data_values;
+   
+  }
+  
+  /// \short Number of fields to be projected: 3*dim, corresponding to 
+  /// real and imag parts of the displacement components
+  unsigned nfields_for_projection()
+  {
+   return 3*this->dim();
+  }
+  
+  /// \short Number of history values to be stored for fld-th field. 
+  /// (includes present value!)
+  unsigned nhistory_values_for_projection(const unsigned &fld)
+  {
+#ifdef PARANOID
+    if (fld>5)
+     {
+      std::stringstream error_stream;
+      error_stream 
+       << "Elements only store six fields so fld can't be"
+       << " " << fld << std::endl;
+      throw OomphLibError(
+       error_stream.str(),
+       "ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement::nhistory_values_for_projection()",
+       OOMPH_EXCEPTION_LOCATION);
+     }
+#endif
+    return this->node_pt(0)->ntstorage();   
+  }
+  
+  ///\short Number of positional history values: Read out from
+  /// positional timestepper 
+  /// (Note: count includes current value!)
+  unsigned nhistory_values_for_coordinate_projection()
+  {
+   return this->node_pt(0)->position_time_stepper_pt()->ntstorage();
+  }
+  
+  /// \short Return Jacobian of mapping and shape functions of field fld
+  /// at local coordinate s
+  double jacobian_and_shape_of_field(const unsigned &fld, 
+                                     const Vector<double> &s, 
+                                     Shape &psi)
+  {
+   unsigned n_dim=this->dim();
+   unsigned n_node=this->nnode();
+   DShape dpsidx(n_node,n_dim);
+   
+   // Call the derivatives of the shape functions and return
+   // the Jacobian
+   return this->dshape_eulerian(s,psi,dpsidx);
+  }
+  
+  
+  
+  /// \short Return interpolated field fld at local coordinate s, at time level
+  /// t (t=0: present; t>0: history values)
+  double get_field(const unsigned &t, 
+                   const unsigned &fld,
+                   const Vector<double>& s)
+  {
+   unsigned n_node=this->nnode();
+   
+#ifdef PARANOID
+   unsigned n_dim=this->node_pt(0)->ndim();
+#endif
+   
+   //Local shape function
+   Shape psi(n_node);
+   
+   //Find values of shape function
+   this->shape(s,psi);
+   
+   //Initialise value of u
+   double interpolated_u = 0.0;
+   
+   //Sum over the local nodes at that time
+   for(unsigned l=0;l<n_node;l++) 
+    {
+#ifdef PARANOID
+     unsigned nvalue=this->node_pt(l)->nvalue();
+     if (nvalue!=3*n_dim)
+      {        
+       std::stringstream error_stream;
+       error_stream 
+        << "Current implementation only works for non-resized nodes\n"
+        << "but nvalue= " << nvalue << "!= 3 dim = " << 3*n_dim << std::endl;
+       throw OomphLibError(
+        error_stream.str(),
+        "ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement::get_field()",
+        OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+     interpolated_u += this->nodal_value(t,l,fld)*psi[l];
+    }
+   return interpolated_u;     
+  }
+  
+  
+  ///Return number of values in field fld
+  unsigned nvalue_of_field(const unsigned &fld)
+  {
+   return this->nnode();
+  }
+  
+  
+  ///Return local equation number of value j in field fld.
+  int local_equation(const unsigned &fld,
+                     const unsigned &j)
+  {
+#ifdef PARANOID
+   unsigned n_dim=this->node_pt(0)->ndim();
+   unsigned nvalue=this->node_pt(j)->nvalue();
+   if (nvalue!=3*n_dim)
+    {        
+     std::stringstream error_stream;
+     error_stream 
+      << "Current implementation only works for non-resized nodes\n"
+      << "but nvalue= " << nvalue << "!= 3 dim = " << 3*n_dim << std::endl;
+     throw OomphLibError(
+      error_stream.str(),
+      "ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement::local_equation()",
+      OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+   return this->nodal_local_eqn(j,fld);
+  }
+  
+  
+ };
+  
+  
+//=======================================================================
+/// Face geometry for element is the same as that for the underlying
+/// wrapped element
+//=======================================================================
+  template<class ELEMENT>
+   class FaceGeometry<ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement<ELEMENT> > 
+   : public virtual FaceGeometry<ELEMENT>
+  {
+    public:
+    FaceGeometry() : FaceGeometry<ELEMENT>() {}
+  };
+  
+  
+//=======================================================================
+/// Face geometry of the Face Geometry for element is the same as 
+/// that for the underlying wrapped element
+//=======================================================================
+  template<class ELEMENT>
+   class FaceGeometry<FaceGeometry<ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement<ELEMENT> > >
+   : public virtual FaceGeometry<FaceGeometry<ELEMENT> >
+  {
+    public:
+    FaceGeometry() : FaceGeometry<FaceGeometry<ELEMENT> >() {}
+  };
+  
 
 }
+
 
 #endif
 

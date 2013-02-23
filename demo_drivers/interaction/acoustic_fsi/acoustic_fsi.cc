@@ -102,10 +102,10 @@ namespace Global_Parameters
  }
 
 
- // Output directory
+ /// Output directory
  string Directory="RESLT";
  
- // Multiplier for number of elements
+ /// Multiplier for number of elements
  unsigned El_multiplier=1;
 
  /// Interface to Hankel function in maple style

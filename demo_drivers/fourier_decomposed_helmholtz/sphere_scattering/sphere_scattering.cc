@@ -362,6 +362,9 @@ namespace ProblemParameters
  }// end of exact_normal_derivative
  
  
+ /// Multiplier for number of elements
+ unsigned El_multiplier=1;
+ 
 
 } // end of namespace
 
@@ -440,10 +443,10 @@ FourierDecomposedHelmholtzProblem()
 // Build annular mesh
   
 // # of elements in r-direction 
- unsigned n_r=10;
+ unsigned n_r=10*ProblemParameters::El_multiplier;
  
  // # of elements in theta-direction 
- unsigned n_theta=10;
+ unsigned n_theta=10*ProblemParameters::El_multiplier;
  
  // Domain boundaries in theta-direction
  double theta_min=-90.0;
@@ -488,7 +491,7 @@ FourierDecomposedHelmholtzProblem()
    el_pt->k_squared_pt()=&ProblemParameters::K_squared;
    
    // Set pointer to Fourier wave number
-   el_pt->n_fourier_pt()=&ProblemParameters::N_fourier;
+   el_pt->fourier_wavenumber_pt()=&ProblemParameters::N_fourier;
   }
  
  // Setup equation numbering scheme
@@ -615,6 +618,38 @@ void FourierDecomposedHelmholtzProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  // Check gamma computation
  check_gamma(doc_info);
 
+
+ // Compute/output the radiated power
+ //----------------------------------
+ sprintf(filename,"%s/power%i.dat",doc_info.directory().c_str(),
+         doc_info.number());
+ some_file.open(filename);
+ sprintf(filename,"%s/total_power%i.dat",doc_info.directory().c_str(),
+         doc_info.number());
+
+ // Accumulate contribution from elements
+ double power=0.0;
+ unsigned nn_element=Helmholtz_outer_boundary_mesh_pt->nelement(); 
+ for(unsigned e=0;e<nn_element;e++)
+  {
+   FourierDecomposedHelmholtzBCElementBase<ELEMENT> *el_pt = 
+    dynamic_cast<FourierDecomposedHelmholtzBCElementBase<ELEMENT>*>(
+     Helmholtz_outer_boundary_mesh_pt->element_pt(e)); 
+   power += el_pt->global_power_contribution(some_file);
+  }
+ some_file.close();
+
+ // Output total power
+ oomph_info << "Radiated power: " 
+            << ProblemParameters::N_fourier << " " 
+            << ProblemParameters::K_squared << " " 
+            << power << std::endl;
+ some_file.open(filename); 
+ some_file << ProblemParameters::N_fourier << " " 
+           << ProblemParameters::K_squared << " " 
+           << power << std::endl;
+ some_file.close();
+
 } // end of doc
 
 
@@ -697,8 +732,25 @@ create_flux_elements_on_inner_boundary()
 //===== start_of_main=====================================================
 /// Driver code for Fourier decomposed Helmholtz problem
 //========================================================================
-int main()
+int main(int argc, char **argv)
 {
+
+ // Store command line arguments
+ CommandLineArgs::setup(argc,argv);
+
+ // Define possible command line arguments and parse the ones that
+ // were actually specified
+ 
+ // Multiplier for number of elements
+ CommandLineArgs::specify_command_line_flag("--el_multiplier",
+                                            &ProblemParameters::El_multiplier);
+ 
+ // Parse command line
+ CommandLineArgs::parse_and_assign(); 
+ 
+ // Doc what has actually been specified on the command line
+ CommandLineArgs::doc_specified_flags();
+
 
  // Check if the claimed representation of a planar wave in
  // the tutorial is correct -- of course it is!
@@ -782,29 +834,47 @@ int main()
  }
  
  
- // Test Legrendre Polynomials
- //---------------------------
+ // Test Legendre Polynomials
+ //--------------------------
  {
-  // Number of lower indices
+  // Fourier wavenumber
   unsigned n=3;
     
   ofstream some_file("legendre3.dat");
   unsigned nplot=100;
   for (unsigned i=0;i<nplot;i++)
    {
-    double x=double(i)/double(nplot-1);
+    double x=double(i)/double(nplot-1)*2.0*MathematicalConstants::Pi;
 
     some_file << x << " ";
-    for (unsigned j=0;j<=n;j++)
+    for (unsigned j=n;j<=5;j++)
      {
-      some_file <<  Legendre_functions_helper::plgndr2(n,j,x) << " ";
+      some_file <<  Legendre_functions_helper::plgndr2(j,n,cos(x)) << " ";
      }
     some_file << std::endl;
    }
   some_file.close();
  }
 
- 
+
+ {
+  ofstream some_file("legendre.dat");
+  unsigned nplot=100;
+  for (unsigned i=0;i<nplot;i++)
+   {
+    double x=double(i)/double(nplot-1);
+
+    some_file << x << " ";
+    for (unsigned j=0;j<=3;j++)
+     {
+      some_file <<  Legendre_functions_helper::plgndr2(j,0,x) << " ";
+     }
+    some_file << std::endl;
+   }
+  some_file.close();
+ }
+
+
  
  // Create the problem with 2D nine-node elements from the
  // QFourierDecomposedHelmholtzElement family. 

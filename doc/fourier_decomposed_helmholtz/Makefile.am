@@ -1,3 +1,4 @@
 SUBDIRS = \
-sphere_scattering
+sphere_scattering \
+adaptive_sphere_scattering
 
