@@ -175,7 +175,7 @@ This decomposition allows us to
 remove the \f$ \theta \f$-dependence from the equations by writing 
 \f$ \partial (.)/\partial\theta={\rm i} N (.) \f$.
 Since the governing equations are linear, we can solve for each
-Fourier component separately and simply specify the Fourier wavenumber
+Fourier component separately and specify the Fourier wavenumber
 \f$ N \f$ as a parameter.
  
 \subsection bc Boundary conditions
@@ -374,7 +374,7 @@ comparing the non-dimensional time-average radiated power
 (see \ref appendix for details)
 against the analytical solution for spherically symmetric forcing (\f$
 N=0, M=0 \f$) for the parameter values \f$ k^2 = 10 \f$,  
-\f$ \rho_{\rm solid}/\rho_{\rm fluid} \f$, \f$ \nu =0.3 \f$ and 
+\f$ \rho_{\rm solid}/\rho_{\rm fluid} =1.0 \f$, \f$ \nu =0.3 \f$ and 
 a non-dimensional coating thickness of \f$ h = 0.2. \f$ 
 
 
@@ -575,7 +575,7 @@ symmetry boundary (boundaries 1 and 3):
 \until done sym bc
 
 Finally, we set up the fluid-structure interaction, assign the
-equation numbers, define the output directory and open a trace
+equation numbers and open a trace
 file to record the radiated power as a function of the FSI
 parameter \f$ Q \f$.
 
@@ -699,7 +699,8 @@ the total radiated power, and plots the computed solutions
   demonstrate the use of spatial adaptivity.
   This is because the relevant elements have not (yet!) been written
   (Any volunteers?). If you wish to enable spatial adaptivity we
-  suggest using an unstructured adaptive mesh, as demonstrated in 
+  suggest using an unstructured adaptive mesh, using the methodology 
+  demonstrated in 
   <a  href="../../../fourier_decomposed_acoustic_fsi/unstructured_sphere/html/index.html#DtN">another tutorial.</a>
 .
 
@@ -785,7 +786,7 @@ is some curve parameter (e.g. the arclength), we have
        \left(\frac{\partial Z^*}{\partial s^*}\right)^2 }
        R^*(s) \ d\varphi \  ds^* 
 \f]
-The power associated with \f$ N-\f$th azimuthal Fourier mode,
+The power associated with the \f$ N-\f$th azimuthal Fourier mode,
 \f$ \phi^*_N(r^*,z^*) \exp({\rm i}N \varphi) \f$, is then given by
 \f[
 \overline{\cal P }^*_N = \pi \rho_{\rm f} \omega^3  \int 
@@ -798,7 +799,7 @@ The power associated with \f$ N-\f$th azimuthal Fourier mode,
 \f]
 Non-dimensionalising all lengths on \f$ {\cal L}\f$ and the
 displacement potential on \f$ {\cal L}^2 \f$ then yields the
-final expression for the non-dimensional time-averaged radiated power
+following expression for the non-dimensional time-averaged radiated power
 \f[
 \overline{\cal P }_N = 
 \frac{\overline{\cal P }^*_N}{\rho_{\rm f} \omega^3 {\cal L}^5}

@@ -1,9 +1,9 @@
 \mainpage The spatially-adaptive solution of azimuthally Fourier-decomposed time-harmonic 3D acoustic fluid-structure interaction problems on unstructured meshes
 
 
-In this document we discuss the spatially-adaptive solution of 
+In this document we discuss the spatially-adaptive solution of 3D
 time-harmonic acoustic fluid-structure interaction problems
-on unstructured meshes.
+in cylindrical polar coordinates on unstructured meshes.
 
   The driver code is very similar to the one presented in
 <a href=../../sphere/html/index.html>another tutorial</a>
@@ -42,7 +42,7 @@ The figure below shows an animation of the structure's time-harmonic
 oscillation. The blue shaded region shows the shape of the
 oscillating structure while the pink region shows its undeformed configuration.
 The left half of the plot is used to show the (mirror image of
-the) adaptive unstructured mesh on which the solution was computed:
+the) adaptive unstructured mesh on which the displacement field was computed:
 
 @I w 0.8\textwidth anim "Animation of the time-harmonic deformation. "
 
@@ -63,12 +63,12 @@ field (at least in the sphere) to be spherically symmetric, too.
 The animation of the displacement field for this case, shown below,
 shows that this is indeed the case:
 
-@I w 0.8\textwidth anim_alpha0 "Animation of the time-harmonic deformation for uniform pressure load and a very soft and inertia-less rib. "
+@I w 0.8\textwidth anim_alpha0 "Animation of the time-harmonic deformation for a uniform pressure load and a very soft and inertia-less rib. "
 
 Here is a plot of the corresponding fluid displacement potential, a 
 measure of the fluid pressure: 
 
-@I w 0.8\textwidth potential_unstr_alpha0 "The fluid displacement potential, a measure of the fluid pressure for a uniform pressure load and very soft and inertia-less rib. Elevation: real part; contours: imaginary part. "
+@I w 0.8\textwidth potential_unstr_alpha0 "The fluid displacement potential, a measure of the fluid pressure for a uniform pressure load and a very soft and inertia-less rib. Elevation: real part; contours: imaginary part. "
 
 
 <HR> 

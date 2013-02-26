@@ -328,6 +328,18 @@ UnsteadyHeatProblem<ELEMENT>::UnsteadyHeatProblem()
 { 
  
  Problem::Max_residuals=10000.0;
+ Problem::Max_newton_iterations=10000;
+
+ if (CommandLineArgs::command_line_flag_has_been_set("--globally_convergent"))
+  {
+   oomph_info << "Using globally convergent Newton method\n";
+   this->enable_globally_convergent_newton_method();
+  }
+ else
+  {
+   oomph_info << "Not using globally convergent Newton method\n";
+  }
+
 
  // Allocate the timestepper -- this constructs the Problem's 
  // time object with a sufficient amount of storage to store the
@@ -523,6 +535,9 @@ int main(int argc, char* argv[])
  // Disable suppression of refreezing?
  CommandLineArgs::specify_command_line_flag(
   "--disable_suppression_of_refreezing");
+
+ // Use globally convergent Newton solver?
+ CommandLineArgs::specify_command_line_flag("--globally_convergent");
 
  // Parse command line
  CommandLineArgs::parse_and_assign(); 

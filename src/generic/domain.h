@@ -108,7 +108,7 @@ public:
   }
 
  /// Output macro elements
- void output(const string& filename, const unsigned& nplot)
+ void output(const std::string& filename, const unsigned& nplot)
   {
    std::ofstream outfile;
    outfile.open(filename.c_str());
@@ -152,7 +152,7 @@ public:
 
 
  /// \short Output all macro element boundaries as tecplot zones
- void output_macro_element_boundaries(const string& filename, 
+ void output_macro_element_boundaries(const std::string& filename, 
                                       const unsigned& nplot)
  {
   std::ofstream outfile;

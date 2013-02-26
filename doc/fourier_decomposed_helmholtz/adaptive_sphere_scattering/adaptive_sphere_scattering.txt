@@ -2,7 +2,7 @@
 
 
 In this document we discuss the spatially-adaptive
-finite-element-based solution of the 
+finite-element-based solution of the 3D
 Helmholtz equation in cylindrical polar coordinates, using a
 Fourier-decomposition of the solution in the azimuthal direction.
 
@@ -71,9 +71,9 @@ and
 shows the main differences required to discretise the computational
 domain with an adaptive, unstructured mesh:
 - The provision of the functions \c actions_before/after_adapt() to 
-  detach/re-attach the \c FaceElements required to enforce 
+  detach/re-attach the \c FaceElements that are used to enforce 
   the Neumann boundary conditions before and after every spatial
-  adaptation, and to re-assign the element properties to the newly
+  adaptation, and to pass the physical parameters to the newly
   created bulk elements.
   \n\n
 - The generation of an unstructured mesh whose curvilinear boundaries are

@@ -64,7 +64,7 @@ namespace oomph
  Problem::Problem() : 
   Mesh_pt(0), Time_pt(0), Explicit_time_stepper_pt(0), Saved_dof_pt(0), 
   Default_set_initial_condition_called(false),
-  Use_glob_conv_newton_method(false),
+  Use_globally_convergent_newton_method(false),
   Calculate_hessian_products_analytic(false),
 #ifdef OOMPH_HAS_MPI
   Doc_imbalance_in_parallel_assembly(false),
@@ -2257,9 +2257,9 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
   // and removes the duplication by overwriting any data point with an already
   // existing eqn number with the original data point which had the eqn no.
 
-  // Storage for existing nodes, enumerated by first non-negative
-  // global equation number
-  unsigned n_dof=ndof();
+  // // Storage for existing nodes, enumerated by first non-negative
+  // // global equation number
+  // unsigned n_dof=ndof();
 
   // Note: This used to be
   // Vector<Node*> global_node_pt(n_dof,0);
@@ -8292,17 +8292,20 @@ void Problem::newton_solve()
  //Set the loop flag
  unsigned LOOP_FLAG=1;
 
- if(Use_glob_conv_newton_method)
+ if(Use_globally_convergent_newton_method)
   {
 #ifdef OOMPH_HAS_MPI
    // Break if running in parallel
-   std::ostringstream error_stream;
-   error_stream << "Globally convergent Newton method has not been "
-                << "implemented in parallel yet!"
-                << std::endl;
-   throw OomphLibError(error_stream.str(),
-                       "Problem::newton_solve()",
-                       OOMPH_EXCEPTION_LOCATION);
+   if (MPI_Helpers::mpi_has_been_initialised())
+    {
+     std::ostringstream error_stream;
+     error_stream << "Globally convergent Newton method has not been "
+                  << "implemented in parallel yet!"
+                  << std::endl;
+     throw OomphLibError(error_stream.str(),
+                         "Problem::newton_solve()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
 #endif
 
    // Get gradient
@@ -8367,7 +8370,7 @@ void Problem::newton_solve()
 
        // Get half of squared residual and find maximum step length
        // for step length control
-       if (Use_glob_conv_newton_method)
+       if (Use_globally_convergent_newton_method)
         {
          half_residual_squared=0.0;
          double sum=0.0;
@@ -8464,7 +8467,7 @@ void Problem::newton_solve()
    double* dx_pt = dx.values_pt();
    unsigned ndof_local = Dof_distribution_pt->nrow_local();
 
-   if (Use_glob_conv_newton_method)
+   if (Use_globally_convergent_newton_method)
     {
      // Get the gradient
      Linear_solver_pt->get_gradient(gradient);
@@ -8483,7 +8486,7 @@ void Problem::newton_solve()
       }
      
      double half_residual_squared_old=half_residual_squared;
-     glob_conv_line_search(unknowns_old,
+     globally_convergent_line_search(unknowns_old,
                            half_residual_squared_old,
                            gradient,
                            dx,
@@ -8604,12 +8607,13 @@ void Problem::newton_solve()
 //========================================================================
 /// Helper function for the globally convergent Newton solver
 //========================================================================
-void Problem::glob_conv_line_search(const Vector<double>& x_old,
-                                    const double& half_residual_squared_old,
-                                    DoubleVector& gradient,
-                                    DoubleVector& newton_dir,
-                                    double& half_residual_squared,
-                                    const double stpmax)
+void Problem::globally_convergent_line_search(
+ const Vector<double>& x_old,
+ const double& half_residual_squared_old,
+ DoubleVector& gradient,
+ DoubleVector& newton_dir,
+ double& half_residual_squared,
+ const double stpmax)
 {
  const double ALF=1.0e-4;
  double TOLX=1.0e-16;
@@ -8642,7 +8646,7 @@ void Problem::glob_conv_line_search(const Vector<double>& x_old,
                 << " roundoff problem in the linesearch: slope=" 
                 << slope << "\n";
    OomphLibWarning(warn_message.str(),
-                   "Problem::glob_conv_line_search()",
+                   "Problem::globally_convergent_line_search()",
                    OOMPH_EXCEPTION_LOCATION);
   }
  double test=0.0;
@@ -8677,7 +8681,7 @@ void Problem::glob_conv_line_search(const Vector<double>& x_old,
      std::ostringstream warn_message;
      warn_message << "WARNING: Line search converged on x only!\n";
      OomphLibWarning(warn_message.str(),
-                     "Problem::glob_conv_line_search()",
+                     "Problem::globally_convergent_line_search()",
                      OOMPH_EXCEPTION_LOCATION);
      return;
     } 

@@ -198,7 +198,7 @@ namespace oomph
  bool Default_set_initial_condition_called;
 
  /// \short Use the globally convergent newton method
- bool Use_glob_conv_newton_method;
+ bool Use_globally_convergent_newton_method;
  
   protected:
 
@@ -1612,26 +1612,26 @@ namespace oomph
  void newton_solve();
 
  /// \short enable globally convergent Newton method
- void enable_glob_conv_newton_method()
+ void enable_globally_convergent_newton_method()
  {
-  Use_glob_conv_newton_method=true;
+  Use_globally_convergent_newton_method=true;
  }
 
  /// \short disable globally convergent Newton method
- void disable_glob_conv_newton_method()
+ void disable_globally_convergent_newton_method()
  {
-  Use_glob_conv_newton_method=false;
+  Use_globally_convergent_newton_method=false;
  }
 
   private:
 
  /// Line search helper for globally convergent Newton method
- void glob_conv_line_search(const Vector<double>& x_old,
-                            const double& half_residual_squared_old,
-                            DoubleVector& gradient,
-                            DoubleVector& newton_dir,
-                            double& half_residual_squared,
-                            const double stpmax);
+ void globally_convergent_line_search(const Vector<double>& x_old,
+                                      const double& half_residual_squared_old,
+                                      DoubleVector& gradient,
+                                      DoubleVector& newton_dir,
+                                      double& half_residual_squared,
+                                      const double stpmax);
 
   public:
 
