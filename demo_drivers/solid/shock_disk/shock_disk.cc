@@ -580,8 +580,10 @@ void DiskShockWaveProblem<ELEMENT,TIMESTEPPER>::doc_solution()
   }
  Trace_file << std::endl;
 
- // Output principal stress vectors at the centre of all elements
- SolidHelpers::doc_2D_principal_stress<ELEMENT>(Doc_info,solid_mesh_pt());
+
+ // removed until Jacobi eigensolver is re-instated
+ // // Output principal stress vectors at the centre of all elements
+ // SolidHelpers::doc_2D_principal_stress<ELEMENT>(Doc_info,solid_mesh_pt());
 
 //  // Write restart file
 //  sprintf(filename,"%s/restart%i.dat",Doc_info.directory().c_str(),

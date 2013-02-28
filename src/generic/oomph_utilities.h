@@ -220,170 +220,6 @@ class Timer
 //////////////////////////////////////////////////////////////////
 
 
-
-//=====================================================================
-/// Base class for functions whose parameters can be fitted
-/// by Levenberg Marquardt technique.
-//=====================================================================
-class LevenbergMarquardtFittingFunctionObject
-{
- 
-public:
-
-
- /// Constructor: Specify number of fitting parameters
- LevenbergMarquardtFittingFunctionObject(const unsigned& n_param)
-  {
-   Parameter.resize(n_param);
-   for (unsigned i=0;i<n_param;i++)
-    {
-     Parameter[i]=0.0;
-    }
-  }
-
- /// Empty destructor
- virtual ~LevenbergMarquardtFittingFunctionObject() {}
-
- /// \short Evaluate the fitting function for the current set
- /// of parameters: Pure virtual, must be implemented.
- virtual double fitting_function(const double& x)=0;
-
- /// \short Evaluate the fitting function and its derivatives
- /// w.r.t. fitting parameters (done by FD by default; can be
- /// overloaded)
- virtual double fitting_function(const double& x,
-                                 Vector<double>& dfit_dparam);
-                   
- /// \short Number of parameters in fitting function. Pure virtual, must be
- /// implemented.
- virtual unsigned nparameter()=0;
-
- /// Access to i-th fitting parameter
- double& parameter(const unsigned& i)
-  {
-   return Parameter[i];
-  }
-
- /// Access to vector of fitting parameters
- Vector<double>& parameter()
-  {
-   return Parameter;
-  }
-
-
-protected:
-
- /// Vector of fitting parameters
- Vector<double> Parameter;
-
-};
-
-
-
-
-
-//=====================================================================
-/// Damped oscillatory function whose parameters can be
-/// fitted with Levenberg Marquardt.
-//=====================================================================
-class DampedOscillatoryFittingFunctionObject : 
- virtual public LevenbergMarquardtFittingFunctionObject
-{
- 
-public:
- 
- /// Constructor: Number of fitting parameters is five. 
- DampedOscillatoryFittingFunctionObject() :  
-  LevenbergMarquardtFittingFunctionObject(5)
-  {}
-
-
- /// \short Evaluate the fitting function for the current set
- /// of parameters
- double fitting_function(const double& x)
-  {
-   return Parameter[0]+
-    exp(Parameter[1]*x)*Parameter[2]*sin(Parameter[3]*x+Parameter[4]);
-  }
-                                 
- /// \short Overload all interfaces of the fitting function, call the default
- /// finite difference version
- double fitting_function(const double &x,
-                         Vector<double> &dfit_dparam)
-  {
-   return 
-    LevenbergMarquardtFittingFunctionObject::fitting_function(x,dfit_dparam);
-  }
-
- /// Number of parameters in fitting function
- virtual unsigned nparameter()
-  {
-   return 5;
-  }
-
-
-};
-
-
-
-
-// forward declaration
-class DenseDoubleMatrix;
-
-//=====================================================================
-/// Class that allows fitting of free parameters in function
-/// (represented by a LevenbergMarquardtFittingFunctionObject)
-/// to given (x,y) data.
-//=====================================================================
-class LevenbergMarquardtFitter
-{
- 
-public:
-
- /// Empty constructor 
- LevenbergMarquardtFitter(): Fitting_function_object_pt(0)
-  {}
- 
- /// \short Access to pointer to LevenbergMarquardtFittingFunctionObject
- /// whose parameters we want to determine by fit to data.
- LevenbergMarquardtFittingFunctionObject*& fitting_function_object_pt()
-  {
-   return Fitting_function_object_pt;
-  }
-
- /// \short Fit the parameters to the pairs of (x,y) data specified, 
- /// using max_iter Levenberg Marquardt iterations
- void fit_it(const Vector<std::pair<double,double> >& fitting_data,
-             const unsigned& max_iter,
-             const bool& quiet=true);
-
-private:
-
- /// Pointer to LevenbergMarquardtFittingFunctionObject
- LevenbergMarquardtFittingFunctionObject* Fitting_function_object_pt;
-
-
- /// Private helper function -- don't look into it...
- void mrqcof(Vector<double>& x, 
-             Vector<double>& y, 
-             Vector<double>& sig, 
-             Vector<double>& a,
-             std::vector<bool>& ia, 
-             DenseDoubleMatrix& alpha, 
-             Vector<double>& beta, 
-             double& chisq);
-
- 
-};
-
-
-
-//////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////
-
-
-
 //======================================================================
 // Namespace for black-box FD Newton solver.
 //======================================================================
@@ -399,6 +235,9 @@ typedef void (*ResidualFctPt)(const Vector<double>& parameters,
 
 // Maximum number of Newton iterations
 extern unsigned Max_iter;
+
+// Number of Newton iterations taken in most recent invocation
+extern unsigned N_iter_taken;
 
 // Flag to indicate if progress of Newton iteration is to be documented
 // (defaults to false) 
@@ -432,8 +271,7 @@ extern void line_search(const Vector<double>& x_old,
                         Vector<double>& newton_dir,
                         Vector<double>& x, 
                         double& half_residual_squared,
-                        const double stpmax,
-                        bool& check);
+                        const double& stpmax);
 
 }
 

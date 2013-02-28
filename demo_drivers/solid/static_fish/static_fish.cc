@@ -342,8 +342,9 @@ void ElasticFishProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  mesh_pt()->output(some_file,npts);
  some_file.close();
 
- // Output principal stress vectors at the centre of all elements
- SolidHelpers::doc_2D_principal_stress<ELEMENT>(doc_info,mesh_pt());
+ // removed until Jacobi eigensolver is re-instated
+ // // Output principal stress vectors at the centre of all elements
+ // SolidHelpers::doc_2D_principal_stress<ELEMENT>(doc_info,mesh_pt());
 
 }
  

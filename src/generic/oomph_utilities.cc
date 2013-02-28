@@ -158,287 +158,6 @@ namespace CumulativeTimings
 
 }
 
-//////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////
-
-
-
-//=================================================================
-/// Evaluate the fitting function and its derivatives
-/// w.r.t. fitting parameters (done by FD by default; can be
-/// overloaded)
-//=================================================================
-double LevenbergMarquardtFittingFunctionObject::fitting_function(
- const double& x,
- Vector<double>& dfit_dparam)
-{
- // Get reference value
- double fct=fitting_function(x);
- 
- // FD step
- double eps_fd=1.0e-8;
- 
- // Do FD loop
- unsigned n_param=Parameter.size();
- for (unsigned i=0;i<n_param;i++)
-  {
-   double backup=Parameter[i];
-   Parameter[i]+=eps_fd;
-   double fct_pls=fitting_function(x);
-   dfit_dparam[i]=(fct_pls-fct)/eps_fd;
-   Parameter[i]=backup;
-  }
- return fct;
-}
-
-
-
-
-//=====================================================================
-/// Fit the parameters to the pairs of (x,y) data specified, 
-/// using max_iter Levenberg Marquardt iterations
-//=====================================================================
-void LevenbergMarquardtFitter::fit_it(
- const Vector<std::pair<double,double> >& fitting_data,
- const unsigned& max_iter, const bool& quiet)
-{
- if (Fitting_function_object_pt==0)
-  {
-   throw OomphLibError("Fitting_function_object_pt==0",
-                       "Problem::distribute()",
-                       OOMPH_EXCEPTION_LOCATION);    
-  }
-
- // Number of parameters:
- unsigned nparam=Fitting_function_object_pt->nparameter();
-
- // By default regard all parameters as fittable -- can generalise
- // this at some point.
- std::vector<bool> ia(nparam,true);
-   
- // Chi squared
- double chisq=0.0;
-
- // Number of data pairs
- unsigned ndata=fitting_data.size();
-
- // Vector of standard deviations -- just set to one
- Vector<double> sig(ndata,1.0);
-
- // Move to vectors (as required by Num Rec interface
- Vector<double> x(ndata), y(ndata);
- for (unsigned i=0;i<ndata;i++)
-  {
-   x[i]=fitting_data[i].first;
-   y[i]=fitting_data[i].second;
-  }
-
- // "Workspace" for numerical recipes
- int ma = static_cast<int>(nparam); 
- DenseDoubleMatrix covar(ma,ma);
- DenseDoubleMatrix alpha(ma,ma);
-
-
- if (!quiet)
-  {
-   oomph_info << "Chi_squared" << " ";
-   for (unsigned i=0;i<unsigned(ma);i++)
-    { 
-     oomph_info << " parameter " << i << " ";
-    }       
-   oomph_info << std::endl;
-  }
-
- // Start iteration with almda negative for setup
- double alamda=-0.1;
- for (unsigned iter=0;iter<max_iter;iter++)
-  {
-   // This is where Num Rec code starts so now it gets really ugly
-   static int mfit;
-   static double ochisq;
-   int j,k,l;
-          
-   static Vector<double> oneda(ma);
-   static Vector<double> atry(ma), beta(ma), da(ma);
-
-   // Initialisation
-   if (alamda < 0.0)
-    {
-     mfit=0;
-     for (j=0;j<ma;j++)
-      {
-       if (ia[j]) mfit++;
-      }
-     alamda=0.001;
-     mrqcof(x,y,sig,Fitting_function_object_pt->parameter(),ia,
-            alpha,beta,chisq);
-     ochisq=chisq;
-     for (j=0;j<ma;j++)
-      {
-       atry[j]=Fitting_function_object_pt->parameter(j); 
-      }
-    } 
-     
-   DenseDoubleMatrix temp(mfit,mfit);
-   for (j=0;j<mfit;j++)
-    {
-     for (k=0;k<mfit;k++)
-      {
-       covar(j,k)=alpha(j,k);
-      }
-     covar(j,j)=alpha(j,j)*(1.0+alamda);
-     for (k=0;k<mfit;k++)
-      {
-       temp(j,k)=covar(j,k);
-      }
-     oneda[j]=beta[j];
-    }
-     
-   // Linear solver
-   temp.solve(oneda); 
-     
-   for (j=0;j<mfit;j++)
-    {
-     for (k=0;k<mfit;k++)
-      {
-       covar(j,k)=temp(j,k);
-      }
-     da[j]=oneda[j];
-    }
-     
-   // Converged
-   if (alamda == 0.0)
-    {
-     return;
-    }
-     
-          
-   for (j=0,l=0;l<ma;l++)
-    {
-     if (ia[l]) atry[l]=Fitting_function_object_pt->parameter(l)+da[j++];
-    }
-   mrqcof(x,y,sig,atry,ia,covar,da,chisq);
-   if (chisq < ochisq)
-    {
-     alamda *= 0.1;
-     ochisq=chisq;
-     for (j=0;j<mfit;j++)
-      {
-       for (k=0;k<mfit;k++) 
-        {
-         alpha(j,k)=covar(j,k);
-        }
-       beta[j]=da[j];
-      }
-     
-     for (l=0;l<ma;l++)
-      { 
-       Fitting_function_object_pt->parameter(l)=atry[l];
-      }
-       
-     if (!quiet)
-      {
-       //Store the current output flags
-       std::ios_base::fmtflags ff = std::cout.flags();
-       // Output with fixed width
-       std::cout.setf(std::ios_base::scientific,std::ios_base::floatfield);
-       std::cout.width(15);
-       std::cout << chisq << " ";
-       for (l=0;l<ma;l++)
-        { 
-         std::cout << atry[l] << " ";
-        }       
-       std::cout << std::endl;
-       // Reset
-       std::cout.setf(ff, std::ios_base::floatfield);
-       std::cout.width(0);
-      }
-    }
-   else
-    {
-     alamda *= 10.0;
-     chisq=ochisq;
-    }
-     
-  }
-
-}
-
-//==================================================================
-/// Private helper function -- don't look into it...
-//==================================================================
-void LevenbergMarquardtFitter::mrqcof(Vector<double>& x, 
-                                      Vector<double>& y, 
-                                      Vector<double>& sig, 
-                                      Vector<double>& a,
-                                      std::vector<bool>& ia, 
-                                      DenseDoubleMatrix& alpha, 
-                                      Vector<double>& beta, 
-                                      double& chisq)
-{
- int i,j,k,l,m,mfit=0;
- double ymod,wt,sig2i,dy;
- 
- int ndata=x.size();
- int ma=a.size();
- Vector<double> dyda(ma);
- for (j=0;j<ma;j++)
-  {
-   if (ia[j]) mfit++;
-  }
- 
- for (j=0;j<mfit;j++)
-  {
-   for (k=0;k<=j;k++)
-    {
-     alpha(j,k)=0.0;
-    }
-   beta[j]=0.0;
-  }
- 
- chisq=0.0;
- for (i=0;i<ndata;i++) 
-  {
-   Vector<double> backup=Fitting_function_object_pt->parameter();
-   Fitting_function_object_pt->parameter()=a;
-   ymod=Fitting_function_object_pt->fitting_function(x[i],dyda);
-   Fitting_function_object_pt->parameter()=backup;
-   sig2i=1.0/(sig[i]*sig[i]);
-   dy=y[i]-ymod;
-   for (j=0,l=0;l<ma;l++)
-    {
-     if (ia[l])
-      {
-       wt=dyda[l]*sig2i;
-       for (k=0,m=0;m<l+1;m++)
-        {
-         if (ia[m]) alpha(j,k++) += wt*dyda[m];
-        }
-       beta[j++] += dy*wt;
-      }
-    }
-   chisq += dy*dy*sig2i;
-  }
- 
- 
- for (j=1;j<mfit;j++)
-  {
-   for (k=0;k<j;k++)
-    {
-     alpha(k,j)=alpha(j,k);
-    }
-  }
-}
-
-
-
-
-//////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////
-
-
 
 //======================================================================
 /// Namespace for black-box FD Newton solver.
@@ -454,6 +173,9 @@ typedef void (*ResidualFctPt)(const Vector<double>&,
 
  /// Max. # of Newton iterations
  unsigned Max_iter=20;
+ 
+ /// Number of Newton iterations taken in most recent invocation
+ unsigned N_iter_taken=0;
 
  /// \short Flag to indicate if progress of Newton iteration is to be 
  /// documented (defaults to false) 
@@ -489,6 +211,9 @@ void black_box_fd_newton_solve(ResidualFctPt residual_fct,
  double half_residual_squared=0.0;
  double max_step=0.0;
  
+ /// Reset number of Newton iterations taken in most recent invocation
+ N_iter_taken=0;
+
  // Newton iterations
  for (unsigned iloop=0;iloop<Max_iter;iloop++)
   {
@@ -534,7 +259,10 @@ void black_box_fd_newton_solve(ResidualFctPt residual_fct,
     {
      return;
     }
-   
+
+   // Next iteration...
+   N_iter_taken++;
+
    // FD loop for Jacobian
    for (unsigned i=0;i<ndof;i++)
     {
@@ -568,8 +296,7 @@ void black_box_fd_newton_solve(ResidualFctPt residual_fct,
        gradient[i]=sum;
       }
     }
-   
-   
+
    // Solve 
    jacobian.solve(residuals,newton_direction);
    
@@ -583,7 +310,6 @@ void black_box_fd_newton_solve(ResidualFctPt residual_fct,
      // Update with steplength control
      Vector<double> unknowns_old(unknowns);
      double half_residual_squared_old=half_residual_squared;
-     bool check;
      line_search(unknowns_old,
                  half_residual_squared_old,
                  gradient,
@@ -592,8 +318,7 @@ void black_box_fd_newton_solve(ResidualFctPt residual_fct,
                  newton_direction,
                  unknowns,
                  half_residual_squared,
-                 max_step,
-                 check);
+                 max_step);
     }
    else
     {
@@ -607,20 +332,20 @@ void black_box_fd_newton_solve(ResidualFctPt residual_fct,
 
 
   }
-   
  
-   // Failed to converge
-   std::ostringstream error_stream;
-   error_stream<< "Newton solver did not converge in " 
-               << Max_iter << " steps " << std::endl;
-   
-   throw OomphLibError(error_stream.str(),
-                       "black_box_fd_newton_solve()",
-                       OOMPH_EXCEPTION_LOCATION);
+ 
+ // Failed to converge
+ std::ostringstream error_stream;
+ error_stream<< "Newton solver did not converge in " 
+             << Max_iter << " steps " << std::endl;
+ 
+ throw OomphLibError(error_stream.str(),
+                     "black_box_fd_newton_solve()",
+                     OOMPH_EXCEPTION_LOCATION);
 }
-
-
-
+ 
+ 
+ 
 
 
 
@@ -638,16 +363,14 @@ void black_box_fd_newton_solve(ResidualFctPt residual_fct,
                   Vector<double>& newton_dir,
                   Vector<double>& x, 
                   double& half_residual_squared,
-                  const double stpmax,
-                  bool& check)
+                  const double& stpmax)
  {
-  const double ALF=1.0e-4;
-  double TOLX=1.0e-16;
-  double f2=0.0;
-  double alam2=0.0;
-  double tmplam;
+  const double min_fct_decrease=1.0e-4;
+  double convergence_tol_on_x=1.0e-16;
+  double f_aux=0.0;
+  double lambda_aux=0.0;
+  double proposed_lambda=0.0;
   unsigned n=x_old.size();
-  check=false;
   double sum=0.0;
   for (unsigned i=0;i<n;i++)
    {
@@ -680,13 +403,13 @@ void black_box_fd_newton_solve(ResidualFctPt residual_fct,
     double temp=std::fabs(newton_dir[i])/std::max(std::fabs(x_old[i]),1.0);  
     if (temp > test) test=temp;
    }
-  double alamin=TOLX/test;
-  double alam=1.0;
-  for (;;) // hmmm
+  double lambda_min=convergence_tol_on_x/test;
+  double lambda=1.0;
+  while (true)
    {
     for (unsigned i=0;i<n;i++)
      {
-      x[i]=x_old[i]+alam*newton_dir[i];
+      x[i]=x_old[i]+lambda*newton_dir[i];
      }
     
     // Evaluate current residuals
@@ -699,60 +422,66 @@ void black_box_fd_newton_solve(ResidualFctPt residual_fct,
      }
     half_residual_squared*=0.5;
 
-    if (alam < alamin)
+    if (lambda < lambda_min)
      {
       for (unsigned i=0;i<n;i++) x[i]=x_old[i];
-      check=true;
-      oomph_info << "Warning: Line search converged on x only!\n";
+
+      //Create an Oomph Lib warning
+      OomphLibWarning("Warning: Line search converged on x only!",
+                      "BlackBoxFDNewtonSolver::line_search()",
+                      OOMPH_EXCEPTION_LOCATION);
       return;
      } 
-    else if (half_residual_squared <= half_residual_squared_old+ALF*alam*slope)
+    else if (half_residual_squared <= half_residual_squared_old+
+             min_fct_decrease*lambda*slope)
      {
       return;
      }
     else
      {
-      if (alam == 1.0)
+      if (lambda == 1.0)
        {
-        tmplam = -slope/(2.0*(half_residual_squared-
+        proposed_lambda = -slope/(2.0*(half_residual_squared-
                               half_residual_squared_old-slope));
        }
       else
        {
-        double rhs1=half_residual_squared-half_residual_squared_old-alam*slope;
-        double rhs2=f2-half_residual_squared_old-alam2*slope;
-        double a=(rhs1/(alam*alam)-rhs2/(alam2*alam2))/(alam-alam2);
-        double b=(-alam2*rhs1/(alam*alam)+alam*rhs2/
-                  (alam2*alam2))/(alam-alam2);
-        if (a == 0.0)
+        double r1=half_residual_squared-
+         half_residual_squared_old-lambda*slope;
+        double r2=f_aux-half_residual_squared_old-lambda_aux*slope;
+        double a_poly=(r1/(lambda*lambda)-r2/(lambda_aux*lambda_aux))/
+         (lambda-lambda_aux);
+        double b_poly=(-lambda_aux*r1/(lambda*lambda)+lambda*r2/
+                       (lambda_aux*lambda_aux))/(lambda-lambda_aux);
+        if (a_poly == 0.0)
          {
-          tmplam = -slope/(2.0*b);
+          proposed_lambda = -slope/(2.0*b_poly);
          }
         else
          {
-          double disc=b*b-3.0*a*slope;
-          if (disc < 0.0)
+          double discriminant=b_poly*b_poly-3.0*a_poly*slope;
+          if (discriminant < 0.0)
            { 
-            tmplam=0.5*alam;
+            proposed_lambda=0.5*lambda;
            }       
-          else if (b <= 0.0)
+          else if (b_poly <= 0.0)
            {
-            tmplam=(-b+sqrt(disc))/(3.0*a);
+            proposed_lambda=(-b_poly+sqrt(discriminant))/(3.0*a_poly);
            }
           else
            {
-            tmplam=-slope/(b+sqrt(disc));
+            proposed_lambda=-slope/(b_poly+sqrt(discriminant));
            }
          }
-        if (tmplam>0.5*alam)
+        if (proposed_lambda>0.5*lambda)
          {
-          tmplam=0.5*alam;
+          proposed_lambda=0.5*lambda;
          }
        }
      }
-    alam2=alam;
-    f2 = half_residual_squared;
-    alam=std::max(tmplam,0.1*alam);
+    lambda_aux=lambda;
+    f_aux = half_residual_squared;
+    lambda=std::max(proposed_lambda,0.1*lambda);
    }
  }
 }

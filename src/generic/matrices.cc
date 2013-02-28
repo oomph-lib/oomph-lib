@@ -42,134 +42,6 @@
 namespace oomph
 {
 
-//=========================================================================
-/// Namespaces for (Numerical-Recipes-based) functions for
-/// eigensolver, based on Jacobi rotations.
-//=========================================================================
-namespace JacobiEigenSolver
-{
-
- /// Perform one Jacobi rotation on matrix a
- inline void rot(DenseDoubleMatrix&a, const double s, const double tau, 
-                 const unsigned long i, const unsigned long j, 
-                 const unsigned long k, const unsigned long l)
- {
-  double g,h;
-  
-  g=a(i,j);
-  h=a(k,l);
-  a(i,j)=g-s*(h+g*tau);
-  a(k,l)=h+s*(g-h*tau);
-
- }
-
-
-/// \short Use Jacobi rotations to determine eigenvalues and eigenvectors of 
-/// matrix a. d[i]=i-th eigenvalue; v(i,j)=i-th component of j-th eigenvector
-/// (note that this is the transpose of what we'd like to have...);
-/// nrot=number of rotations used. 
- void jacobi(DenseDoubleMatrix& a, Vector<double>& d, 
-             DenseDoubleMatrix& v, unsigned long& nrot)
- {
-#ifdef PARANOID
-  // Check Matrix a is square
-  if (a.ncol()!=a.nrow())
-   {
-    throw OomphLibError(
-     "This matrix is not square, the matrix MUST be square!",
-     "JacobiEigenSolver::jacobi()",
-     OOMPH_EXCEPTION_LOCATION);
-   }
-#endif
- 
-  // If matrix v is wrong size, correct it!
-  if (v.ncol()!=a.ncol() || v.nrow()!=a.nrow())
-   {
-    v.resize(a.nrow(),a.nrow(),0.0);
-   }
-
-  unsigned long i,j,ip,iq;
-  double tresh,theta,tau,t,sm,s,h,g,c;
- 
-  unsigned long n=d.size();
-  Vector<double> b(n);
-  Vector<double> z(n);
-  for (ip=0;ip<n;ip++) {
-   for (iq=0;iq<n;iq++) v(ip,iq)=0.0;
-   v(ip,ip)=1.0;
-  }
-  for (ip=0;ip<n;ip++) {
-   b[ip]=d[ip]=a(ip,ip);
-   z[ip]=0.0;
-  }
-  nrot=0;
-  for (i=1;i<=50;i++) {
-   sm=0.0;
-   for (ip=0;ip<n-1;ip++) {
-    for (iq=ip+1;iq<n;iq++)
-     sm += std::fabs(a(ip,iq));
-   }
-   if (sm == 0.0)
-    return;
-   if (i < 4)
-    tresh=0.2*sm/(n*n);
-   else
-    tresh=0.0;
-   for (ip=0;ip<n-1;ip++) {
-    for (iq=ip+1;iq<n;iq++) {
-     g=100.0*std::fabs(a(ip,iq));
-     if (i > 4 && (std::fabs(d[ip])+g) == std::fabs(d[ip])
-         && (std::fabs(d[iq])+g) == std::fabs(d[iq]))
-      a(ip,iq)=0.0;
-     else if (std::fabs(a(ip,iq)) > tresh) {
-      h=d[iq]-d[ip];
-      if ((std::fabs(h)+g) == std::fabs(h))
-       t=(a(ip,iq))/h;
-      else {
-       theta=0.5*h/(a(ip,iq));
-       t=1.0/(std::fabs(theta)+std::sqrt(1.0+theta*theta));
-       if (theta < 0.0) t = -t;
-      }
-      c=1.0/std::sqrt(1+t*t);
-      s=t*c;
-      tau=s/(1.0+c);
-      h=t*a(ip,iq);
-      z[ip] -= h;
-      z[iq] += h;
-      d[ip] -= h;
-      d[iq] += h;
-      a(ip,iq)=0.0;
-      for (j=0;j<ip;j++)
-       rot(a,s,tau,j,ip,j,iq);
-      for (j=ip+1;j<iq;j++)
-       rot(a,s,tau,ip,j,j,iq);
-      for (j=iq+1;j<n;j++)
-       rot(a,s,tau,ip,j,iq,j);
-      for (j=0;j<n;j++)
-       rot(v,s,tau,j,ip,j,iq);
-      ++nrot;
-     }
-    }
-   }
-   for (ip=0;ip<n;ip++) {
-    b[ip] += z[ip];
-    d[ip]=b[ip];
-    z[ip]=0.0;
-   }
-  }
-  throw OomphLibError(
-   "Too many iterations in routine jacobi",
-   "JacobiEigenSolver::jacobi()",
-   OOMPH_EXCEPTION_LOCATION);
- }
-
-}
-
-/////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////
-
-
 //============================================================================
 /// Complete LU solve (overwrites RHS with solution). This is the
 /// generic version which should not need to be over-written.
@@ -396,11 +268,17 @@ void DenseDoubleMatrix::eigenvalues_by_jacobi(Vector<double> & eigen_vals,
   }
  
  DenseDoubleMatrix aux_eigen_vect(N);
- 
- // Call Numerical recipies 
- unsigned long nrot;
- JacobiEigenSolver::jacobi(working_matrix, eigen_vals, aux_eigen_vect, 
-                           nrot);
+
+ throw OomphLibError(
+  "Sorry JacobiEigenSolver::jacobi() removed because of licencing problems.",
+  "DenseDoubleMatrix::eigenvalues_by_jacobi()",
+  OOMPH_EXCEPTION_LOCATION);
+
+ // // Call eigensolver
+ // unsigned long nrot;
+ // JacobiEigenSolver::jacobi(working_matrix, eigen_vals, aux_eigen_vect, 
+ //                           nrot);
+
  // Copy across (and transpose)
  for (unsigned long i=0;i<N;i++)
   {
@@ -486,6 +364,8 @@ void DenseDoubleMatrix::multiply
                                   this->nrow(),false);
 	soln.build(&dist,0.0);
   }
+
+ // Initialise the solution
  soln.initialise(0.0);
 
  // Multiply the matrix A, by the vector x 
@@ -1675,6 +1555,9 @@ void CRDoubleMatrix::multiply(const DoubleVector &x, DoubleVector &soln) const
    soln.build(this->distribution_pt(),0.0);
   }
 
+ // Initialise
+ soln.initialise(0.0);
+
  // if distributed and on more than one processor use trilinos
  // otherwise use the oomph-lib methods
  if (this->distributed() && 
@@ -1768,6 +1651,9 @@ void CRDoubleMatrix::multiply_transpose(const DoubleVector &x,
    soln.build(dist_pt,0.0);
    delete dist_pt;
   }
+
+ // Initialise
+ soln.initialise(0.0);
 
  if (this->distributed() && 
      this->distribution_pt()->communicator_pt()->nproc() > 1)

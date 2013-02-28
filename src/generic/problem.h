@@ -1631,7 +1631,7 @@ namespace oomph
                                       DoubleVector& gradient,
                                       DoubleVector& newton_dir,
                                       double& half_residual_squared,
-                                      const double stpmax);
+                                      const double& stpmax);
 
   public:
 

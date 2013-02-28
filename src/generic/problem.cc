@@ -8487,11 +8487,11 @@ void Problem::newton_solve()
      
      double half_residual_squared_old=half_residual_squared;
      globally_convergent_line_search(unknowns_old,
-                           half_residual_squared_old,
-                           gradient,
-                           dx,
-                           half_residual_squared,
-                           max_step);
+                                     half_residual_squared_old,
+                                     gradient,
+                                     dx,
+                                     half_residual_squared,
+                                     max_step);
 
     }
    // direct Newton update
@@ -8613,13 +8613,13 @@ void Problem::globally_convergent_line_search(
  DoubleVector& gradient,
  DoubleVector& newton_dir,
  double& half_residual_squared,
- const double stpmax)
+ const double& stpmax)
 {
- const double ALF=1.0e-4;
- double TOLX=1.0e-16;
- double f2=0.0;
- double alam2=0.0;
- double tmplam;
+ const double min_fct_decrease=1.0e-4;
+ double convergence_tol_on_x=1.0e-16;
+ double f_aux=0.0;
+ double lambda_aux=0.0;
+ double proposed_lambda;
  unsigned long n_dof=ndof();
  double sum=0.0;
  for(unsigned i=0;i<n_dof;i++)
@@ -8639,11 +8639,11 @@ void Problem::globally_convergent_line_search(
   {
    slope += gradient[i]*newton_dir[i];
   }
- if(slope >= 1.0e-8)
+ if(slope >= 0.0)
   {
    std::ostringstream warn_message;
    warn_message << "WARNING: Non-negative slope, probably due to a "
-                << " roundoff problem in the linesearch: slope=" 
+                << " roundoff \nproblem in the linesearch: slope=" 
                 << slope << "\n";
    OomphLibWarning(warn_message.str(),
                    "Problem::globally_convergent_line_search()",
@@ -8655,13 +8655,13 @@ void Problem::globally_convergent_line_search(
    double temp=std::fabs(newton_dir[i])/std::max(std::fabs(x_old[i]),1.0);  
    if(temp > test) test=temp;
   }
- double alamin=TOLX/test;
- double alam=1.0;
- for(;;) // hmmm
+ double lambda_min=convergence_tol_on_x/test;
+ double lambda=1.0;
+ while (true)
   {
    for(unsigned i=0;i<n_dof;i++)
     {
-     *Dof_pt[i]=x_old[i]+alam*newton_dir[i];
+     *Dof_pt[i]=x_old[i]+lambda*newton_dir[i];
     }
    
    // Evaluate current residuals
@@ -8674,7 +8674,7 @@ void Problem::globally_convergent_line_search(
     }
    half_residual_squared*=0.5;
    
-   if (alam < alamin)
+   if (lambda < lambda_min)
     {
      for(unsigned i=0;i<n_dof;i++) *Dof_pt[i]=x_old[i];
 
@@ -8685,53 +8685,55 @@ void Problem::globally_convergent_line_search(
                      OOMPH_EXCEPTION_LOCATION);
      return;
     } 
-   else if(half_residual_squared <= half_residual_squared_old+ALF*alam*slope)
+   else if(half_residual_squared <= half_residual_squared_old+
+           min_fct_decrease*lambda*slope)
     {
      return;
     }
    else
     {
-     if(alam == 1.0)
+     if(lambda == 1.0)
       {
-       tmplam = -slope/(2.0*(half_residual_squared-
-                             half_residual_squared_old-slope));
+       proposed_lambda = -slope/(2.0*(half_residual_squared-
+                                      half_residual_squared_old-slope));
       }
      else
       {
-       double rhs1=half_residual_squared-half_residual_squared_old-alam*slope;
-       double rhs2=f2-half_residual_squared_old-alam2*slope;
-       double a=(rhs1/(alam*alam)-rhs2/(alam2*alam2))/(alam-alam2);
-       double b=(-alam2*rhs1/(alam*alam)+alam*rhs2/
-                 (alam2*alam2))/(alam-alam2);
-       if(a == 0.0)
+       double r1=half_residual_squared-half_residual_squared_old-lambda*slope;
+       double r2=f_aux-half_residual_squared_old-lambda_aux*slope;
+       double a_poly=(r1/(lambda*lambda)-r2/(lambda_aux*lambda_aux))/
+        (lambda-lambda_aux);
+       double b_poly=(-lambda_aux*r1/(lambda*lambda)+lambda*r2/
+                      (lambda_aux*lambda_aux))/(lambda-lambda_aux);
+       if(a_poly == 0.0)
         {
-         tmplam = -slope/(2.0*b);
+         proposed_lambda = -slope/(2.0*b_poly);
         }
        else
         {
-         double disc=b*b-3.0*a*slope;
-         if(disc < 0.0)
+         double discriminant=b_poly*b_poly-3.0*a_poly*slope;
+         if(discriminant < 0.0)
           { 
-           tmplam=0.5*alam;
+           proposed_lambda=0.5*lambda;
           }       
-         else if(b <= 0.0)
+         else if(b_poly <= 0.0)
           {
-           tmplam=(-b+sqrt(disc))/(3.0*a);
+           proposed_lambda=(-b_poly+sqrt(discriminant))/(3.0*a_poly);
           }
          else
           {
-           tmplam=-slope/(b+sqrt(disc));
+           proposed_lambda=-slope/(b_poly+sqrt(discriminant));
           }
         }
-       if(tmplam>0.5*alam)
+       if(proposed_lambda>0.5*lambda)
         {
-         tmplam=0.5*alam;
+         proposed_lambda=0.5*lambda;
         }
       }
     }
-   alam2=alam;
-   f2 = half_residual_squared;
-   alam=std::max(tmplam,0.1*alam);
+   lambda_aux=lambda;
+   f_aux = half_residual_squared;
+   lambda=std::max(proposed_lambda,0.1*lambda);
   }
 }
 

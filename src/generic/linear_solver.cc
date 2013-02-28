@@ -123,8 +123,7 @@ void DenseLU::clean_up_memory()
 }
 
 //=============================================================================
-/// LU decompose the matrix. The algorithm is adapted from that in
-/// "Numerical recipes in C" by Press et al.\n
+/// LU decompose the matrix.
 /// WARNING: this class does not perform any PARANOID checks on the vectors - 
 /// these are all performed in the solve(...) method.
 //=============================================================================
@@ -134,10 +133,10 @@ void DenseLU::factorise(DoubleMatrixBase* const &matrix_pt)
  const unsigned long n = matrix_pt->nrow();
  
  //Small constant
- const double TINY=1.0e-20;
+ const double small_number=1.0e-20;
 
- //Vector vv stores the implicit scaling of each row
- Vector<double> vv(n);
+ //Vector scaling stores the implicit scaling of each row
+ Vector<double> scaling(n);
 
  //Integer to store the sign that must multiply the determinant as
  //a consequence of the row/column interchanges
@@ -146,20 +145,20 @@ void DenseLU::factorise(DoubleMatrixBase* const &matrix_pt)
  //Loop over rows to get implicit scaling information
  for(unsigned long i=0;i<n;i++)
   {
-   double big=0.0;
+   double largest_entry=0.0;
    for(unsigned long j=0;j<n;j++)
     {
-     double temp = std::fabs((*matrix_pt)(i,j));
-     if(temp > big) big = temp;
+     double tmp = std::fabs((*matrix_pt)(i,j));
+     if(tmp > largest_entry) largest_entry = tmp;
     }
-   if(big==0.0) 
+   if(largest_entry==0.0) 
     {
      throw OomphLibError("Singular Matrix",
                          "DenseLU::solve()",
                          OOMPH_EXCEPTION_LOCATION);
     }
    //Save the scaling
-   vv[i] = 1.0/big;
+   scaling[i] = 1.0/largest_entry;
   }
 
  //Firsly, we shall delete any previous LU storage.
@@ -201,7 +200,7 @@ void DenseLU::factorise(DoubleMatrixBase* const &matrix_pt)
     }
 
    //Initialise search for largest pivot element
-   double big=0.0;
+   double largest_entry=0.0;
    for(unsigned long i=j;i<n;i++)
     {
      double sum = LU_factors[n*i+j];
@@ -211,10 +210,10 @@ void DenseLU::factorise(DoubleMatrixBase* const &matrix_pt)
       }
      LU_factors[n*i+j] = sum;
      //Set temporary
-     double temp = vv[i]*std::fabs(sum);
-     if(temp >= big)
+     double tmp = scaling[i]*std::fabs(sum);
+     if(tmp >= largest_entry)
       {
-       big = temp;
+       largest_entry = tmp;
        imax = i;
       }
     }
@@ -224,29 +223,30 @@ void DenseLU::factorise(DoubleMatrixBase* const &matrix_pt)
     {
      for(unsigned long k=0;k<n;k++)
       {
-       double temp = LU_factors[n*imax+k];
+       double tmp = LU_factors[n*imax+k];
        LU_factors[n*imax+k] = LU_factors[n*j+k];
-       LU_factors[n*j+k] = temp;
+       LU_factors[n*j+k] = tmp;
       }
      //Change the parity of signature
      signature = -signature;
+
      //Interchange scale factor
-     vv[imax] = vv[j];
+     scaling[imax] = scaling[j];
     }
    
    //Set the index
    Index[j] = imax;
    if(LU_factors[n*j+j] == 0.0) 
     {
-     LU_factors[n*j+j] = TINY;
+     LU_factors[n*j+j] = small_number;
     }
    //Divide by pivot element
    if(j != n-1)
     {
-     double temp = 1.0/LU_factors[n*j+j];
+     double tmp = 1.0/LU_factors[n*j+j];
      for(unsigned long i=j+1;i<n;i++) 
       {
-       LU_factors[n*i+j] *= temp;
+       LU_factors[n*i+j] *= tmp;
       }
     }
   
@@ -263,9 +263,11 @@ void DenseLU::factorise(DoubleMatrixBase* const &matrix_pt)
    //Multiply by the next diagonal entry's mantissa
    //and return the exponent
    determinant_mantissa *= frexp(LU_factors[n*i+i], &iexp);
+
    //Add the new exponent to the current exponent
    determinant_exponent += iexp;
-   /* normalise*/
+
+   // normalise
    determinant_mantissa = frexp(determinant_mantissa,&iexp);
    determinant_exponent += iexp;
   }
@@ -289,6 +291,7 @@ void DenseLU::factorise(DoubleMatrixBase* const &matrix_pt)
 
  //Integer to store the sign of the determinant
  int sign = 0;
+
  //Find the sign of the determinant
  if(determinant_mantissa > 0.0) {sign = 1;}
  if(determinant_mantissa < 0.0) {sign = -1;}
@@ -301,40 +304,41 @@ void DenseLU::factorise(DoubleMatrixBase* const &matrix_pt)
  }
 
 //=============================================================================
-/// Do the backsubstitution for the DenseLU solver. Again the 
-/// algorithm is based on that from "Numerical recipes in C"
-/// by Press et al. \n
+/// Do the backsubstitution for the DenseLU solver. 
 /// WARNING: this class does not perform any PARANOID checks on the vectors - 
 /// these are all performed in the solve(...) method.
 //=============================================================================
 void DenseLU::backsub(const DoubleVector &rhs,
                       DoubleVector &result)
 {
+ // Get pointers to first entries 
  const double* rhs_pt = rhs.values_pt();
  double* result_pt = result.values_pt();
- const unsigned long n = rhs.nrow();
 
  //Copy the rhs vector into the result vector
+ const unsigned long n = rhs.nrow();
  for(unsigned long i=0;i<n;++i) 
-  {result_pt[i] = rhs_pt[i];}
+  {
+   result_pt[i] = rhs_pt[i];
+  }
  
- unsigned long ii=0;
+ // Loop over all rows for forward substition
+ unsigned long k=0;
  for(unsigned long i=0;i<n;i++)
   {
    unsigned long ip = Index[i];
    double sum = result_pt[ip];
    result_pt[ip] = result_pt[i];
-   
-   if(ii != 0)
+   if(k != 0)
     {
-     for(unsigned long j=ii-1;j<i;j++) 
+     for(unsigned long j=k-1;j<i;j++) 
       {
        sum -= LU_factors[n*i+j]*result_pt[j];
       }
     }
    else if(sum != 0.0)
     {
-     ii = i+1;
+     k = i+1;
     }
    result_pt[i] = sum;
   }
@@ -343,16 +347,16 @@ void DenseLU::backsub(const DoubleVector &rhs,
  for (long i=long(n)-1;i>=0;i--)
   {
    double sum = result_pt[i];
-   for(long j=i+1;j<long(n);j++) sum -= LU_factors[n*i+j]*result_pt[j];
+   for(long j=i+1;j<long(n);j++) 
+    {
+     sum -= LU_factors[n*i+j]*result_pt[j];
+    }
    result_pt[i] = sum/LU_factors[n*i+i];
   }
 }
 
 //=============================================================================
-/// Do the backsubstitution for the DenseLU solver. Again the
-/// algorithm is based on that from "Numerical recipes in C"
-/// by Press et al. \n
-/// for Vector<double>
+/// Do the backsubstitution for the DenseLU solver.
 /// WARNING: this class does not perform any PARANOID checks on the vectors -
 /// these are all performed in the solve(...) method. So, if you call backsub
 /// directly, you have been warned...
@@ -360,38 +364,42 @@ void DenseLU::backsub(const DoubleVector &rhs,
 void DenseLU::backsub(const Vector<double> &rhs,
                       Vector<double> &result)
 {
- const unsigned long n = rhs.size();
-
  //Copy the rhs vector into the result vector
+ const unsigned long n = rhs.size();
  for(unsigned long i=0;i<n;++i)
-  {result[i] = rhs[i];}
-
- unsigned long ii=0;
+  {
+   result[i] = rhs[i];
+  }
+ 
+ // Loop over all rows for forward substition
+ unsigned long k=0;
  for(unsigned long i=0;i<n;i++)
   {
    unsigned long ip = Index[i];
    double sum = result[ip];
    result[ip] = result[i];
-
-   if(ii != 0)
+   if(k != 0)
     {
-     for(unsigned long j=ii-1;j<i;j++)
+     for(unsigned long j=k-1;j<i;j++)
       {
        sum -= LU_factors[n*i+j]*result[j];
       }
     }
    else if(sum != 0.0)
     {
-     ii = i+1;
+     k = i+1;
     }
    result[i] = sum;
   }
-
+ 
   //Now do the back substitution
   for (long i=long(n)-1;i>=0;i--)
    {
     double sum = result[i];
-    for(long j=i+1;j<long(n);j++) sum -= LU_factors[n*i+j]*result[j];
+    for(long j=i+1;j<long(n);j++)
+     {
+      sum -= LU_factors[n*i+j]*result[j];
+     }
     result[i] = sum/LU_factors[n*i+i];
    }
 }
@@ -815,7 +823,8 @@ void SuperLUSolver::solve(Problem* const &problem_pt, DoubleVector &result)
      if(Compute_gradient)
       {
        // Compute it
-       CR_jacobian.multiply(residuals,Gradient_for_glob_conv_newton_solve);
+       CR_jacobian.multiply_transpose(residuals,
+                                      Gradient_for_glob_conv_newton_solve);
        // Set the flag
        Gradient_has_been_computed=true;
       }
@@ -867,7 +876,8 @@ void SuperLUSolver::solve(Problem* const &problem_pt, DoubleVector &result)
      if(Compute_gradient)
       {
        // Compute it
-       CC_jacobian.multiply(residuals,Gradient_for_glob_conv_newton_solve);
+       CC_jacobian.multiply_transpose(residuals,
+                                      Gradient_for_glob_conv_newton_solve);
        // Set the flag
        Gradient_has_been_computed=true;
       }

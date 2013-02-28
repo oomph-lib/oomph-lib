@@ -121,7 +121,7 @@ DenseComplexMatrix::~DenseComplexMatrix()
 
 //============================================================================
 /// LU decompose a matrix, over-writing it and recording the pivots
-/// numbers in the Index vector. (Adapted from "Numerical Recipes").
+/// numbers in the Index vector.
 /// Returns the sign of the determinant.
 //============================================================================
 int DenseComplexMatrix::ludecompose()
@@ -138,7 +138,7 @@ int DenseComplexMatrix::ludecompose()
 #endif 
 
  //Small constant
- const double TINY=1.0e-20;
+ const double small_number=1.0e-20;
 
  //If the Index vector has not already been allocated,
  //allocated storage for the index of permutations
@@ -147,8 +147,8 @@ int DenseComplexMatrix::ludecompose()
  //Resize the index vector to the correct length
  Index->resize(N);
 
- //Vector vv stores the implicit scaling of each row
- Vector<double> vv(N);
+ //Vector scaling stores the implicit scaling of each row
+ Vector<double> scaling(N);
 
  //Integer to store the sign that must multiply the determinant as
  //a consequence of the row/column interchanges
@@ -160,8 +160,8 @@ int DenseComplexMatrix::ludecompose()
    double big=0.0;
    for(unsigned long j=0;j<M;j++)
     {
-     double temp = std::abs((*this)(i,j));
-     if(temp > big) big = temp;
+     double tmp = std::abs((*this)(i,j));
+     if(tmp > big) big = tmp;
     }
    if(big==0.0) 
     {
@@ -170,7 +170,7 @@ int DenseComplexMatrix::ludecompose()
                          OOMPH_EXCEPTION_LOCATION);
     }
    //Save the scaling
-   vv[i] = 1.0/big;
+   scaling[i] = 1.0/big;
   }
 
  //Firsly, we shall delete any previous LU storage.
@@ -216,7 +216,7 @@ int DenseComplexMatrix::ludecompose()
     }
 
    //Initialise search for largest pivot element
-   double big=0.0;
+   double largest_entry=0.0;
    for(unsigned long i=j;i<N;i++)
     {
      std::complex<double> sum = LU_factors[M*i+j];
@@ -226,10 +226,10 @@ int DenseComplexMatrix::ludecompose()
       }
      LU_factors[M*i+j] = sum;
      //Set temporary
-     double temp = vv[i]*std::abs(sum);
-     if(temp >= big)
+     double tmp = scaling[i]*std::abs(sum);
+     if(tmp >= largest_entry)
       {
-       big = temp;
+       largest_entry = tmp;
        imax = i;
       }
     }
@@ -239,29 +239,29 @@ int DenseComplexMatrix::ludecompose()
     {
      for(unsigned long k=0;k<N;k++)
       {
-       std::complex<double> temp = LU_factors[M*imax+k];
+       std::complex<double> tmp = LU_factors[M*imax+k];
        LU_factors[M*imax+k] = LU_factors[M*j+k];
-       LU_factors[M*j+k] = temp;
+       LU_factors[M*j+k] = tmp;
       }
      //Change the parity of signature
      signature = -signature;
      //Interchange scale factor
-     vv[imax] = vv[j];
+     scaling[imax] = scaling[j];
     }
    
    //Set the index
    (*Index)[j] = imax;
    if(LU_factors[M*j+j] == 0.0) 
     {
-     LU_factors[M*j+j] = TINY;
+     LU_factors[M*j+j] = small_number;
     }
    //Divide by pivot element
    if(j != N-1)
     {
-     std::complex<double> temp = 1.0/LU_factors[M*j+j];
+     std::complex<double> tmp = 1.0/LU_factors[M*j+j];
      for(unsigned long i=j+1;i<N;i++) 
       {
-       LU_factors[M*i+j] *= temp;
+       LU_factors[M*i+j] *= tmp;
       }
     }
   

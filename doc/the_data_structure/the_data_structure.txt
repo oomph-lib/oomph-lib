@@ -1,8 +1,42 @@
  \mainpage oomph-lib: The data structure
  
- \section prelim_comments Introduction
+\c oomph-lib is big! This document gives a "bottom up" overview of
+the library's data structure and discusses how the various objects interact. 
+In addition to the detailed discussion provided below, the following
+doxygen-generated lists/indices provide quick access to 
+the documentation of \c oomph-lib's classes: clicking on the 
+hyperlinks associated with a class takes you directly to a 
+detailed description of its inheritance structure and
+its members. The first two lists are probably the most useful:
  
- This document provides a "bottom up" overview of the data 
+<ul>
+
+<li><a href="../../to_be_written/html/classes.html"> Alphabetical class index </a></li>
+
+<li><a href="../../to_be_written/html/hierarchy.html"> Hierarchical
+class list </a></li>
+
+</ul>
+
+We don't use the following lists very often but provide them for completeness:
+
+<ul>
+
+<li><a href="../../to_be_written/html/annotated.html"> Tabular class
+list  </a></li>
+
+<li><a href="../../to_be_written/html/functions.html"> Comprehensive
+list of class members </a></li>
+
+<li><a href="../../to_be_written/html/namespaces.html"> List of namespaces </a></li>
+
+<li><a href="../../to_be_written/html/namespacemembers.html"> List of namespace members </a></li>
+
+
+</ul>
+
+ 
+ This rest of this document provides a "bottom up" overview of the data 
  structure in \c oomph-lib and discusses how the various objects interact. 
  For brevity, we usually replace the list of arguments to functions 
  by `(...)' and explain the main input and 
@@ -19,7 +53,7 @@
    or be determined by a boundary condition. 
  - \b Unknown: An \e unknown is a \e value that is not determined by a
    boundary condition.
- - \b Degree \b of \b freedom: Synomym for \e unknown; often
+ - \b Degree \b of \b freedom: Synonym for \e unknown; often
    abbreviated as "dof".
  - \b History \b value: \e History \e values are (double precision)
    numbers that are used by \c TimeSteppers to calculate 
@@ -342,7 +376,7 @@ structure which separates:
    via pointers:
    - \c Data that is internal to each element is accessed via pointers
      to `Internal \c Data'. For instance, in fluid (finite) elements with
-     discontinous pressure interpolations, the pressure degrees of freedom 
+     discontinuous pressure interpolations, the pressure degrees of freedom 
      are local to each element and are stored in 
      the element's 'Internal \c Data'.
    - \c Data that is external to the element. An example is
@@ -1002,9 +1036,9 @@ structure which separates:
  Time-derivatives are generally evaluated by finite difference
  expressions, e.g. by BDF schemes. Hence, within the code, functions are
  only ever evaluated at discrete time levels. The class \c Time contains 
- (a pointer to) the `current' value of the continous time and a 
+ (a pointer to) the `current' value of the continuous time and a 
  vector of current and previous timesteps so that the value of the 
- continous time at any previous timestep can easily be reconstructed. 
+ continuous time at any previous timestep can easily be reconstructed. 
  This is useful/necessary if there are any explicitly time-dependent 
  parameters in the problem. The general convention within all timestepping
  procedures is to associate the values at the `present' time (i.e. the 
@@ -1133,7 +1167,7 @@ structure which separates:
  \c Problem::global_error_norm() must be implemented for
  each specific problem. The error norm is usually 
  constructed from the (estimated) errors of individual
- \c Data values. Estimates for these quantites are given by
+ \c Data values. Estimates for these quantities are given by
  the differences between the actual value and 
  a predicted value, as determined by
  \code TimeStepper::error_in_value(...) \endcode 
@@ -1166,7 +1200,7 @@ structure which separates:
 
  Within the \c Problem::adaptive_unsteady_newton_solve(..) function,
  if the global error norm is too large, the step is rejected, the timestep
- reduced and the step repeated. If the timstep falls below a 
+ reduced and the step repeated. If the timestep falls below a 
  preset tolerance \c Problem::Minimum_dt (which has the default value 
  \c 1.0e-12), the program will terminate. It is also possible to
  set a maximum timestep by over-writing the (large) default
@@ -1245,7 +1279,7 @@ structure which separates:
  \code Problem::set_initial_condition() \endcode
  establishes the interface to the function that sets
  all \c Data to their initial conditions. This function must be overloaded if
- nontrival initial conditions are to be applied. (If mesh adaptations
+ nontrivial initial conditions are to be applied. (If mesh adaptations
  are performed while the first timestep is computed, the initial 
  conditions on the adapted mesh can usually be represented more accurately
  by re-assigning them, rather than by interpolation from the 
@@ -1375,7 +1409,7 @@ structure which separates:
  N/S/W/E neighbours and their relative orientation. Here is an 
  illustration:
  
- \image html QuarterCircleMesh.gif "Mesh consisting of three RefineableQElement<2>s/ QuadTrees. Element/QuadTree numbers are blue, and the QuadTree's `northern' direction is indicated by the red arrows. The QuadTrees are combined to a QuadTreeForest which establishes their adjacency (QuadTree 2 is QuadTree 0's northern neighbour etc.) and their relative orientation (QuadTree 1's North coincides with QuadTree 2's West, etc.) Note that the RefineableQElement<2>'ss local coordinates  s_0 and s_1  are aligned with the QuadTree 's W-->E and S-->N directions, respectively." 
+ \image html QuarterCircleMesh.gif "Mesh consisting of three RefineableQElement<2>s/ QuadTrees. Element/QuadTree numbers are blue, and the QuadTree's `northern' direction is indicated by the red arrows. The QuadTrees are combined to a QuadTreeForest which establishes their adjacency (QuadTree 2 is QuadTree 0's northern neighbour etc.) and their relative orientation (QuadTree 1's North coincides with QuadTree 2's West, etc.) Note that the RefineableQElement<2>'s local coordinates  s_0 and s_1  are aligned with the QuadTree 's W-->E and S-->N directions, respectively." 
 
  \image latex QuarterCircleMesh.eps "Mesh consisting of three RefineableQElements<2>/ QuadTrees. Element/QuadTree numbers are blue, and the QuadTree's `northern' direction is indicated by the red arrows. The QuadTrees are combined into a QuadTreeForest, which establishes their adjacency (QuadTree 2 is QuadTree 0's northern neighbour etc.) and their relative orientation (QuadTree 1's North coincides with QuadTree 2's West, etc.) Note that the RefineableQElement<2>'s local coordinates  s_0 and s_1  are aligned with the QuadTree 's W-->E and S-->N directions, respectively." 
 
@@ -1401,7 +1435,7 @@ structure which separates:
  element -- here \c Nodes 9, 10, 14, 15, 17 and 18) are suitably constrained.
  For instance, the nodal values at \c Node 10 must be linear
  combinations of the values at nodes 4 and 7 if the solution
- is to remain continous across the eastern edge of element 2.
+ is to remain continuous across the eastern edge of element 2.
  We refer to nodes 4 and 7 as the "master nodes" of \c Node
  10. \n
  The hanging node status of the \c Nodes can be determined 
@@ -1494,7 +1528,7 @@ structure which separates:
  calling 
  \code RefineableMesh::complete_hanging_nodes(); \endcode
 
- As mentioned above, the possible occurence of hanging nodes 
+ As mentioned above, the possible occurrence of hanging nodes 
  needs to be reflected in
  the element's equation numbering scheme and in the functions that
  compute the elemental Jacobian matrix because the element
@@ -1628,7 +1662,7 @@ structure which separates:
    are consistent with their current hanging-node constraints and
    then reset their hanging-node status to non-hanging. Finally, we 
    free (unpin) their nodal values. The hanging-node status 
-   of all \c Nodes will be re-asessed later, when the de-refinement 
+   of all \c Nodes will be re-assessed later, when the de-refinement 
    phase is completed.
  - Now we loop over \b all \e "nodes" in the 
    \c QuadTreeForest. If the sons of any \e "non-leaf node" in the
@@ -1831,7 +1865,7 @@ structure which separates:
  We illustrate the macro-element based mesh generation and adaptation 
  process for the case of \c RefineableQuadMesh meshes. 
  Assume that the domain 
- is reprented by an object of type \c Domain. 
+ is represented by an object of type \c Domain. 
  We build a coarse initial mesh which contains as many
  \c RefineableQElement<2>s as there are \c QMacroElements in the \c Domain.
  We associate each \c RefineableQElement<2> with one of the \c QMacroElements
