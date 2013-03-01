@@ -62,8 +62,7 @@ namespace ProblemParameters
  /// Get flux applied along boundary x=0.
  void flux(const double& time, const Vector<double>& x, double& flux)
  {
-  flux = 20.0*sin(2.0*4.0*MathematicalConstants::Pi*time)*
-   x[1]*(1.0-x[1]);
+    flux = 20.0*sin(2.0*4.0*MathematicalConstants::Pi*time);
  }
 
  /// Melt-temperature
@@ -217,25 +216,6 @@ private:
  /// and complete the build of  all elements
  void complete_problem_setup()
   {
-   // Set the boundary conditions for this problem: 
-   // ---------------------------------------------
-   
-   // All nodes are free by default -- just pin the ones that have 
-   // Dirichlet conditions here. 
-   unsigned n_bound = Bulk_mesh_pt->nboundary();
-   for(unsigned b=0;b<n_bound;b++)
-    {
-     if (b!=B_flux) 
-      {
-       unsigned n_node = Bulk_mesh_pt->nboundary_node(b);
-       for (unsigned n=0;n<n_node;n++)
-        {
-         Bulk_mesh_pt->boundary_node_pt(b,n)->pin(0); 
-        }
-      }
-    } // end of set boundary conditions
-   
-   
    // Complete the build of all elements so they are fully functional
    //----------------------------------------------------------------
    
@@ -432,13 +412,8 @@ UnsteadyHeatProblem<ELEMENT>::UnsteadyHeatProblem()
 
  // Set element size limits
  Bulk_mesh_pt->max_element_size()=0.2;
- Bulk_mesh_pt->min_element_size()=0.002; 
+ Bulk_mesh_pt->min_element_size()=0.000002; 
  
-
- Bulk_mesh_pt->output("junk.dat");
- //exit(0);
- 
-
  // Create the surface mesh as an empty mesh
  Surface_melt_mesh_pt=new Mesh;
  Surface_mesh_pt=new Mesh;
@@ -495,6 +470,14 @@ void UnsteadyHeatProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
          doc_info.number());
  some_file.open(filename);
  Bulk_mesh_pt->output(some_file,npts);
+ some_file.close();
+
+ // Output solution coarsely (only element vertices for easier
+ // mesh visualisation)
+ sprintf(filename,"%s/coarse_soln%i.dat",doc_info.directory().c_str(),
+         doc_info.number());
+ some_file.open(filename);
+ Bulk_mesh_pt->output(some_file,2);
  some_file.close();
 
  // Output flux

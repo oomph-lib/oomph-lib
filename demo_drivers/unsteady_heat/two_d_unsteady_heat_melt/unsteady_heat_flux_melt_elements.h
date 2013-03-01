@@ -727,19 +727,43 @@ fill_in_generic_residual_contribution_ust_heat_flux(
      if (u<melt_temperature())
       {
        // melt rate equation
-       residuals[local_eqn] += melt_rate;
-      }
-     // zero temperature
-     else
-      {
-       // Cannot refreeze
-       if ((melt_rate<0.0)&&(!Disable_suppression_of_refreezing))
+
+       // "Lower left" quadrant of (u-U_melt,m) space:
+       // Linear variation with m forces things back to m=0
+       if (melt_rate<=0.0)
         {
          residuals[local_eqn] += melt_rate;
         }
+       // "Uppper left" quadrant of (u-U_melt,m) space:
+       // Linear variation with m forces things back to m=0
+       // (as above); multiplication by (U_melt-u) ensures
+       // continuity of residual with upper right quadrant.
+       else 
+        {
+         residuals[local_eqn]+=melt_rate*(melt_temperature()-u);
+        }
+       
+      }
+     // zero (or positive) temperature
+     else
+      {
+       // Cannot refreeze
+
+        // Lower right quadrant of (u-U_melt,m) space
+       if ((melt_rate<0.0)&&(!Disable_suppression_of_refreezing))
+        {
+         // This doubly linear variation keeps residual negative
+         // everywhere (apart from switchover point at origin
+         // of (u-U_melt,m) space and maintained continuity with
+         // upper right and lower left quadrants
+         residuals[local_eqn] += melt_rate-(u-melt_temperature());
+        }
+       // Upper right quadrant of (u-U_melt,m) space
        else
         {
-         residuals[local_eqn] += u-melt_temperature();
+         // Linear variation forces things back to U_melt and maintains
+         // continuity with upper left and lower right quadrants
+         residuals[local_eqn] -= u-melt_temperature();
         }
       }
     }

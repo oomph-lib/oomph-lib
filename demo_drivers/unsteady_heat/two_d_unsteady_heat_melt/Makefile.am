@@ -30,3 +30,6 @@ two_d_unsteady_heat_melt_mixed_unstr_SOURCES = two_d_unsteady_heat_melt_mixed_un
 two_d_unsteady_heat_melt_mixed_unstr_LDADD = -L@libdir@ -lunsteady_heat -lgeneric \
 				$(EXTERNAL_LIBS) $(FLIBS)
 
+
+EXTRA_DIST += melt.pvsm plot_it.bash
+
