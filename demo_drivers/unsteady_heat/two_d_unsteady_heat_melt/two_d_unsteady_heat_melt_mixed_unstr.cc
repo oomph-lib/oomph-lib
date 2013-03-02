@@ -487,6 +487,25 @@ void UnsteadyHeatProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  Surface_melt_mesh_pt->output(some_file,npts);
  some_file.close();
 
+ bool output_residual_landscape=true;
+ if (output_residual_landscape)
+  {
+   // Output residual landscape
+   sprintf(filename,"%s/residual_landscape%i.dat",doc_info.directory().c_str(),
+           doc_info.number());
+   some_file.open(filename);
+   ofstream some_file2;
+   sprintf(filename,"%s/soln_landscape%i.dat",doc_info.directory().c_str(),
+           doc_info.number());
+   some_file2.open(filename);
+   dynamic_cast<UnsteadyHeatFluxMeltElement<ELEMENT>*>(
+    Surface_melt_mesh_pt->element_pt(0))->plot_residual_landscape(some_file,
+                                                                  some_file2,
+                                                                  this,0);
+   some_file.close();
+   some_file2.close();
+  }
+
 } // end of doc_solution
 
 

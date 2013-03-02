@@ -5,7 +5,7 @@ include $(top_srcdir)/config/makefile_templates/demo_drivers
 check_PROGRAMS=two_d_unsteady_heat_melt two_d_unsteady_heat_melt_mixed two_d_unsteady_heat_melt_mixed_unstr
 
 # Sources for executable
-two_d_unsteady_heat_melt_SOURCES = two_d_unsteady_heat_melt.cc
+two_d_unsteady_heat_melt_SOURCES = two_d_unsteady_heat_melt.cc unsteady_heat_flux_melt_elements.h
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
@@ -14,7 +14,7 @@ two_d_unsteady_heat_melt_LDADD = -L@libdir@ -lunsteady_heat -lgeneric \
 
 
 # Sources for executable
-two_d_unsteady_heat_melt_mixed_SOURCES = two_d_unsteady_heat_melt_mixed.cc
+two_d_unsteady_heat_melt_mixed_SOURCES = two_d_unsteady_heat_melt_mixed.cc unsteady_heat_flux_melt_elements.h
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
@@ -23,7 +23,7 @@ two_d_unsteady_heat_melt_mixed_LDADD = -L@libdir@ -lunsteady_heat -lgeneric \
 
 
 # Sources for executable
-two_d_unsteady_heat_melt_mixed_unstr_SOURCES = two_d_unsteady_heat_melt_mixed_unstr.cc
+two_d_unsteady_heat_melt_mixed_unstr_SOURCES = two_d_unsteady_heat_melt_mixed_unstr.cc unsteady_heat_flux_melt_elements.h
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
@@ -31,5 +31,5 @@ two_d_unsteady_heat_melt_mixed_unstr_LDADD = -L@libdir@ -lunsteady_heat -lgeneri
 				$(EXTERNAL_LIBS) $(FLIBS)
 
 
-EXTRA_DIST += melt.pvsm plot_it.bash
+EXTRA_DIST += melt.pvsm plot_it.bash 
 

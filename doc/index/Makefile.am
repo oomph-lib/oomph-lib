@@ -9,3 +9,5 @@ docfile = oomph_index
 clean-local:
 	rm -rf latex html $(docfile).txt_doxygenified.h $(docfile).pdf $(docfile).txt *~ .tmp
 	rm -rf oomph-lib_header.html
+
+EXTRA_DIST += intro.txt oomph.idx

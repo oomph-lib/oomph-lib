@@ -413,35 +413,6 @@ int main()
     // Bump up Re
     Global_Physical_Variables::Re+=re_increment;
    }  //end_of_parameter_study
-
-  // //Dump the current solution
-  // std::ofstream dump_file("dump.dat");
-  // dump_file.precision(20);
-  // problem.dump(dump_file);
-  // dump_file.close();
-
-  // //Create a brand new probem for the restart
-  // UnstructuredFluidProblem<PseudoSolidNodeUpdateElement<
-  //  TTaylorHoodElement<2>, 
-  //  TPVDElement<2,3> > > reloaded_problem;
-
-  // //Load the previous information from the disk
-  // std::ifstream read_file("dump.dat");
-  // reloaded_problem.read(read_file);
-  // read_file.close();
-  
-  // //Reset the Reynolds number
-  // Global_Physical_Variables::Re -=re_increment;
-  // //(Re) setup new boundary conditions
-  // reloaded_problem.fluid_mesh_pt()->set_lagrangian_nodal_coordinates();
-  // reloaded_problem.fluid_mesh_pt()->identify_boundaries();
-  // reloaded_problem.set_boundary_conditions();
-  // reloaded_problem.rebuild_global_mesh();
-  // std::cout << "Number of equations: " << 
-  //  reloaded_problem.assign_eqn_numbers() << std::endl;
-  // reloaded_problem.newton_solve();
-  // reloaded_problem.doc_solution(doc_info);
-  // doc_info.number()++;
  }
 
 

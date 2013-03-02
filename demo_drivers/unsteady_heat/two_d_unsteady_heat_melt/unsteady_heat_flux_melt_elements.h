@@ -232,6 +232,75 @@ public:
   {FaceGeometry<ELEMENT>::output(file_pt,n_plot);}
 
 
+
+ /// \short Plot landscape of residuals for j-th node
+ void plot_residual_landscape(std::ostream &landscape_outfile, 
+                              std::ostream &soln_outfile, 
+                              Problem* problem_pt,
+                              const unsigned& j)
+ {
+  // Which node?
+  Node* nod_pt=this->node_pt(j);
+   
+  // Cast to a boundary node
+  BoundaryNodeBase *bnod_pt = 
+   dynamic_cast<BoundaryNodeBase*>(nod_pt);
+  
+  // Get the index of the first nodal value associated with
+  // this FaceElement
+  unsigned first_index=
+   bnod_pt->index_of_first_value_assigned_by_face_element(Melt_id);
+  
+  // Backup values
+  double u_back=nod_pt->value(U_index_ust_heat);
+  double m_back=nod_pt->value(first_index);
+
+  int global_eqn_u = nod_pt->eqn_number(U_index_ust_heat); 
+  int global_eqn_m = nod_pt->eqn_number(first_index); 
+
+  if (global_eqn_u<0) abort();
+  if (global_eqn_m<0) abort();
+
+  // Output actual solution
+  DoubleVector residuals;
+  problem_pt->get_residuals(residuals);
+  soln_outfile << u_back << " " 
+               << m_back << " " 
+               << residuals[global_eqn_u] << " " 
+               << residuals[global_eqn_m]<< std::endl;
+
+  // Range of plot values
+  double u_min=melt_temperature()-5.0;
+  double u_max=melt_temperature()+5.0;
+  double m_min=-5.0;
+  double m_max=5.0;
+
+  unsigned nplot=100;
+  landscape_outfile << "ZONE I=" << nplot << ", J=" << nplot << std::endl;
+  for (unsigned i=0;i<nplot;i++)
+   {
+    double x0=u_min+(u_max-u_min)*double(i)/double(nplot-1);
+    for (unsigned j=0;j<nplot;j++)
+     {
+      double x1=m_min+(m_max-m_min)*double(j)/double(nplot-1);
+
+      nod_pt->set_value(U_index_ust_heat,x0);
+      nod_pt->set_value(first_index,x1);
+
+      problem_pt->get_residuals(residuals);
+      landscape_outfile << x0 << " " 
+                        << x1 << " " 
+                        << residuals[global_eqn_u] << " " 
+                        << residuals[global_eqn_m] << std::endl;
+     }
+   }
+
+  // Reset values
+  nod_pt->set_value(U_index_ust_heat,u_back);
+  nod_pt->set_value(first_index,m_back);
+ }
+
+
  /// Melt temperature
  double melt_temperature()
  {
@@ -723,60 +792,87 @@ fill_in_generic_residual_contribution_ust_heat_flux(
      double u=nod_pt->value(u_index_ust_heat);
      double melt_rate=nod_pt->value(first_index);
      
-     // Sub-zero: No melting
-     if (u<melt_temperature())
+     bool single_kink=true; // hierher
+     if (single_kink)
       {
-       // melt rate equation
-
-       // "Lower left" quadrant of (u-U_melt,m) space:
-       // Linear variation with m forces things back to m=0
-       if (melt_rate<=0.0)
+       // Piecewise linear variation
+       if ((melt_temperature()-u)>melt_rate)
         {
-         residuals[local_eqn] += melt_rate;
+         residuals[local_eqn]+=melt_rate;
         }
-       // "Uppper left" quadrant of (u-U_melt,m) space:
-       // Linear variation with m forces things back to m=0
-       // (as above); multiplication by (U_melt-u) ensures
-       // continuity of residual with upper right quadrant.
-       else 
-        {
-         residuals[local_eqn]+=melt_rate*(melt_temperature()-u);
-        }
-       
-      }
-     // zero (or positive) temperature
-     else
-      {
-       // Cannot refreeze
-
-        // Lower right quadrant of (u-U_melt,m) space
-       if ((melt_rate<0.0)&&(!Disable_suppression_of_refreezing))
-        {
-         // This doubly linear variation keeps residual negative
-         // everywhere (apart from switchover point at origin
-         // of (u-U_melt,m) space and maintained continuity with
-         // upper right and lower left quadrants
-         residuals[local_eqn] += melt_rate-(u-melt_temperature());
-        }
-       // Upper right quadrant of (u-U_melt,m) space
        else
         {
-         // Linear variation forces things back to U_melt and maintains
-         // continuity with upper left and lower right quadrants
-         residuals[local_eqn] -= u-melt_temperature();
+         residuals[local_eqn]+=(melt_temperature()-u);
+        }
+      }
+     else
+      {
+       // Sub-zero: No melting
+       if (u<melt_temperature())
+        {
+         // melt rate equation
+
+         // "Lower left" quadrant of (u-U_melt,m) space:
+         // Linear variation with m forces things back to m=0
+         if (melt_rate<=0.0)
+          {
+           residuals[local_eqn]+=melt_rate;
+          }
+         // "Uppper left" quadrant of (u-U_melt,m) space:
+         // Linear variation with m forces things back to m=0
+         // (as above); multiplication by (U_melt-u) ensures
+         // continuity of residual with upper right quadrant.
+         else 
+          {
+           bool bilinear=false;  // hierher
+           if (bilinear)
+            {
+             // Bilinear variation 
+             residuals[local_eqn]+=melt_rate*(melt_temperature()-u);
+            }
+           else
+            {
+             // Piecewise linear variation
+             if ((melt_temperature()-u)>melt_rate)
+              {
+               residuals[local_eqn]+=melt_rate;
+              }
+             else
+              {
+               residuals[local_eqn]+=(melt_temperature()-u);
+              }
+            }
+          }
+       
+        }
+       // zero (or positive) temperature
+       else
+        {
+         // Cannot refreeze
+
+         // Lower right quadrant of (u-U_melt,m) space
+         if ((melt_rate<0.0)&&(!Disable_suppression_of_refreezing))
+          {
+           // This doubly linear variation keeps residual negative
+           // everywhere (apart from switchover point at origin
+           // of (u-U_melt,m) space and maintained continuity with
+           // upper right and lower left quadrants
+           residuals[local_eqn] += melt_rate-(u-melt_temperature());
+          }
+         // Upper right quadrant of (u-U_melt,m) space
+         else
+          {
+           // Linear variation forces things back to U_melt and maintains
+           // continuity with upper left and lower right quadrants
+           residuals[local_eqn] -= u-melt_temperature();
+          }
         }
       }
     }
   }
-
 #endif
 
 }
-
-
-
-
-
 }
 
 #endif
