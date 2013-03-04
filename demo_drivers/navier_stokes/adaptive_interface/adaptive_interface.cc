@@ -467,7 +467,7 @@ public:
    Vector<double> s(2), r(2);
    
    //Setup temporary storage for the Node
-   vector<Node *> Tmp_node_pt;
+   Vector<Node *> Tmp_node_pt;
 
    //Now blindly loop over the macro elements and associate and finite
    //element with each
@@ -866,7 +866,7 @@ public:
     }
 
    unsigned Nfree = Surface_mesh_pt->nelement();
-    cout << Nfree << " free surface elements assigned" << std::endl;
+   oomph_info << Nfree << " free surface elements assigned" << std::endl;
 
     if(final_element_index == -1)
      {
@@ -992,7 +992,7 @@ RefineableRotatingCylinderProblem<ELEMENT>::RefineableRotatingCylinderProblem(
  this->build_global_mesh();
 
  //Attach the boundary conditions to the mesh
- cout <<"Number of equations: " << assign_eqn_numbers() << std::endl; 
+ oomph_info <<"Number of equations: " << assign_eqn_numbers() << std::endl; 
 
 }
 
@@ -1168,7 +1168,7 @@ void RefineableRotatingCylinderProblem<ELEMENT>::solve()
 { 
  Newton_solver_tolerance = 1.0e-8;
  //Document the solution
- ofstream filenamee("input.dat");
+ std::ofstream filenamee("input.dat");
  Bulk_mesh_pt->output(filenamee,5);
  Surface_mesh_pt->output(filenamee,5);
  Point_mesh_pt->output(filenamee,5);
@@ -1177,7 +1177,7 @@ void RefineableRotatingCylinderProblem<ELEMENT>::solve()
  //Solve the initial value problem
  newton_solve();
 
- ofstream filename("first.dat"); 
+ std::ofstream filename("first.dat"); 
  Bulk_mesh_pt->output(filename,5); 
  Surface_mesh_pt->output(filename,5); 
  Point_mesh_pt->output(filename,5);
@@ -1186,7 +1186,7 @@ void RefineableRotatingCylinderProblem<ELEMENT>::solve()
  //Initialise the value of the arc-length
  double ds=0.001;
  
- ofstream trace("trace.dat");
+ std::ofstream trace("trace.dat");
 
  trace << Ca << " " << ReInvFr << " "
        << Bulk_mesh_pt->boundary_node_pt(2,0)->x(1) << std::endl;
