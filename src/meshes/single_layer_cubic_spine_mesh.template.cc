@@ -51,6 +51,9 @@ SingleLayerCubicSpineMesh(
  // Mesh can only be built with 3D Qelements.
  MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(3);
 
+ //Mesh can only be built with spine elements
+ MeshChecker::assert_geometric_element<SpineFiniteElement,ELEMENT>(3);
+
  // Now build the single layer mesh on top of the existing mesh
  build_single_layer_mesh(time_stepper_pt);
 }
@@ -64,9 +67,6 @@ void SingleLayerCubicSpineMesh<ELEMENT>::
 build_single_layer_mesh(
  TimeStepper* time_stepper_pt) 
 {
- // Mesh can only be built with 3D Qelements.
- MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(3);
-
  //Read out the number of elements in the x-direction
  unsigned n_x = this->Nx;
  //Read out the number of elements in the y-direction

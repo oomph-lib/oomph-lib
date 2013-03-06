@@ -1516,8 +1516,8 @@ public:
        int face_index = Fluid_mesh_pt->face_index_at_boundary(b,e);
        
        // Create new element
-       SurfaceVolumeConstraintBoundingSolidElement<ELEMENT>* el_pt =
-        new SurfaceVolumeConstraintBoundingSolidElement<ELEMENT>(
+       ElasticSurfaceVolumeConstraintBoundingElement<ELEMENT>* el_pt =
+        new ElasticSurfaceVolumeConstraintBoundingElement<ELEMENT>(
          bulk_elem_pt,face_index);
 
        //Set the "master" volume control element

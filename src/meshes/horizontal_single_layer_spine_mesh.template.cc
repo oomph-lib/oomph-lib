@@ -57,6 +57,9 @@ HorizontalSingleLayerSpineMesh<ELEMENT>::HorizontalSingleLayerSpineMesh(
  // Mesh can only be built with 2D Qelements.
  MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(2);
 
+ //Mesh can only be built with spine elements
+ MeshChecker::assert_geometric_element<SpineFiniteElement,ELEMENT>(2);
+
  // We've called the "generic" constructor for the RectangularQuadMesh
  // which doesn't do much...
  
@@ -73,9 +76,6 @@ void HorizontalSingleLayerSpineMesh<ELEMENT>::
 build_horizontal_single_layer_mesh(
  TimeStepper* time_stepper_pt) 
 {
- // Mesh can only be built with 2D Qelements.
- MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(2);
- 
  // Build the underlying quad mesh: 
  RectangularQuadMesh<ELEMENT >::build_mesh(time_stepper_pt);
 

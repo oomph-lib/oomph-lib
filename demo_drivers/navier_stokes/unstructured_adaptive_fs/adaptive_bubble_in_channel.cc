@@ -982,8 +982,8 @@ void BubbleInChannelProblem<ELEMENT>::create_volume_constraint_elements()
      int face_index = Fluid_mesh_pt->face_index_at_boundary(b,e);
      
      // Create new element
-     LineVolumeConstraintBoundingSolidElement<ELEMENT>* el_pt =
-      new LineVolumeConstraintBoundingSolidElement<ELEMENT>(
+     ElasticLineVolumeConstraintBoundingElement<ELEMENT>* el_pt =
+      new ElasticLineVolumeConstraintBoundingElement<ELEMENT>(
        bulk_elem_pt,face_index);   
      
      //Set the "master" volume constraint element

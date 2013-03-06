@@ -72,10 +72,11 @@ public virtual LineFluidInterfaceElement
 
 
  /// \short Hijacking the kinematic condition corresponds to hijacking the
- /// spine heights. hierher Andrew please elborate
+ /// variables associated with the spine heights --- only used when
+ /// strong imposition of the contact angle condition is required.
  void hijack_kinematic_conditions(const Vector<unsigned> &bulk_node_number)
  {
-  //Loop over all the passed nodes
+  //Loop over all the node numbers that are passed in
   for(Vector<unsigned>::const_iterator it=bulk_node_number.begin();
       it!=bulk_node_number.end();++it)
    {
@@ -241,17 +242,22 @@ public LineFluidInterfaceElement
  } 
 
 
- /// hierher Andrew please elaborate
+ /// \short Hijacking the kinematic condition corresponds to hijacking the
+ /// variables associated with the Lagrange multipliers that are assigned
+ /// on construction of this element.
  void hijack_kinematic_conditions(const Vector<unsigned> &bulk_node_number)
   {
-   //Loop over all the passed nodes
+   //Loop over all the nodes that are passed in
    for(Vector<unsigned>::const_iterator it=bulk_node_number.begin();
        it!=bulk_node_number.end();++it)
     {
-     //Make sure that we delete the returned value
-     // hierher: Andrew: Change this to Amine's generalisation?
-     // If so, grep for Nbulk_value in entire directory
-     delete this->hijack_nodal_value(*it,Nbulk_value[*it]);  
+     //Get the index associated with the Id for each node
+     //(the Lagrange multiplier)
+     unsigned n_lagr = dynamic_cast<BoundaryNodeBase*>(node_pt(*it))->
+      index_of_first_value_assigned_by_face_element(Id);
+  
+     //Hijack the appropriate value and delete the returned Node
+     delete this->hijack_nodal_value(*it,n_lagr);  
     }
   }
  
@@ -426,8 +432,11 @@ public LineFluidInterfaceElement
   face_el_pt->u_index_interface_boundary() = this->U_index_interface;
 
   //Set the value of the nbulk_value, the node is not resized
-  //in this problem, so it will just be the actual nvalue - 1
-  face_el_pt->nbulk_value(0) = face_el_pt->node_pt(0)->nvalue() -1;
+  //in this problem, so it will just be the actual nvalue 
+  face_el_pt->nbulk_value(0) = this->node_pt(0)->nvalue();
+
+  //Pass the ID down
+  face_el_pt->set_id(Id);
 
   //Find the nodes
   std::set<SolidNode*> set_of_solid_nodes;

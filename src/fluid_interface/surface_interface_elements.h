@@ -71,12 +71,11 @@ namespace oomph
    int kinematic_local_eqn(const unsigned &n) 
    {return this->spine_local_eqn(n);}
    
-   // hierher Andrew please clarify this
    /// \short Hijacking the kinematic condition corresponds to hijacking the
-   /// spine heights.
+   /// variables associated with thespine heights.
    void hijack_kinematic_conditions(const Vector<unsigned> &bulk_node_number)
    {
-    //Loop over all the passed nodes
+    //Loop over all the node numbers that are passed in
     for(Vector<unsigned>::const_iterator it=bulk_node_number.begin();
         it!=bulk_node_number.end();++it)
      {
@@ -247,16 +246,22 @@ namespace oomph
    {return this->nodal_local_eqn(j,Nbulk_value[j]);}
    
    
-   /// hierher Andrew please clarify this
+  /// \short Hijacking the kinematic condition corresponds to hijacking the
+  /// variables associated with the Lagrange multipliers that are assigned
+  /// on construction of this element.
    void hijack_kinematic_conditions(const Vector<unsigned> &bulk_node_number)
    {    
-    //Loop over all the passed nodes
+    //Loop over all the nodes that are passed in
     for(Vector<unsigned>::const_iterator it=bulk_node_number.begin();
         it!=bulk_node_number.end();++it)
      {
-      // Make sure that we delete the returned value
-      // hierher Andrew: generalise to Amine's machinery?
-      delete this->hijack_nodal_value(*it,Nbulk_value[*it]); 
+      //Get the index associated with the Id for each node
+      //(the Lagrange multiplier)
+      unsigned n_lagr = dynamic_cast<BoundaryNodeBase*>(node_pt(*it))->
+       index_of_first_value_assigned_by_face_element(Id);
+      
+      //Hijack the appropriate value and delete the returned Node
+      delete this->hijack_nodal_value(*it,n_lagr);  
      }
    }
    
@@ -435,6 +440,9 @@ namespace oomph
      
      //Attach the geometrical information to the new element
      this->build_face_element(face_index,face_el_pt);
+
+     //Pass the ID down
+     face_el_pt->set_id(Id);
      
      //Find the nodes
      std::set<SolidNode*> set_of_solid_nodes;

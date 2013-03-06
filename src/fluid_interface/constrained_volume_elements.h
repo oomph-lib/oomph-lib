@@ -185,27 +185,6 @@ namespace oomph
 /////////////////////////////////////////////////////////////////////////
 
 
-
-//=======================================================================
-/// Base class for interface elements that allow the application of 
-/// a volume constraint on the region bounded by these elements. 
-//=======================================================================
- class TemplateFreeVolumeConstraintBoundingElementBase :  
- public virtual FaceElement
- {
-   public:
-
-
-  /// Return this element's contribution to the total volume enclosed
-  virtual double contribution_to_enclosed_volume()=0;
-  
- };
-
-/////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////
-
-
 //=======================================================================
 /// Base class for interface elements that allow the application of 
 /// a volume constraint on the region bounded by these elements. The
@@ -356,9 +335,7 @@ namespace oomph
 /// target volume. 
 //=======================================================================
  class LineVolumeConstraintBoundingElement : 
- public virtual VolumeConstraintBoundingElement, 
-  public virtual TemplateFreeVolumeConstraintBoundingElementBase // hierher
- // make base class of VolumeConstraintBoundingElement class
+ public VolumeConstraintBoundingElement
  {
    protected:
   
@@ -378,7 +355,7 @@ namespace oomph
   ~LineVolumeConstraintBoundingElement() {}
   
   /// Return this element's contribution to the total volume enclosed
-  double contribution_to_enclosed_volume();
+  //double contribution_to_enclosed_volume();
 
  };
 
@@ -398,7 +375,7 @@ namespace oomph
 /// and then specify the "pressure" value that is traded for the constraint.
 //=======================================================================
  template<class ELEMENT>
-  class LineVolumeConstraintBoundingSolidElement : public 
+  class ElasticLineVolumeConstraintBoundingElement : public 
    LineVolumeConstraintBoundingElement,
    public virtual FaceGeometry<ELEMENT>
  {
@@ -407,7 +384,7 @@ namespace oomph
   
   /// \short Contructor: Specify bulk element and index of face to which
   /// this face element is to be attached 
-   LineVolumeConstraintBoundingSolidElement(FiniteElement* const &element_pt, 
+   ElasticLineVolumeConstraintBoundingElement(FiniteElement* const &element_pt, 
                                             const int &face_index) : 
   FaceGeometry<ELEMENT>(),
    LineVolumeConstraintBoundingElement()
@@ -550,7 +527,7 @@ namespace oomph
 /// and then specify the "pressure" value that is traded for the constraint.
 //=======================================================================
  template<class ELEMENT>
-  class AxisymmetricVolumeConstraintBoundingSolidElement : public 
+  class ElasticAxisymmetricVolumeConstraintBoundingElement : public 
    AxisymmetricVolumeConstraintBoundingElement,
    public virtual FaceGeometry<ELEMENT>
  {
@@ -559,7 +536,7 @@ namespace oomph
   
   /// \short Contructor: Specify bulk element and index of face to which
   /// this face element is to be attached 
-   AxisymmetricVolumeConstraintBoundingSolidElement(
+   ElasticAxisymmetricVolumeConstraintBoundingElement(
     FiniteElement* const &element_pt, 
     const int &face_index) : 
   FaceGeometry<ELEMENT>(),
@@ -706,7 +683,7 @@ namespace oomph
 /// and then specify the "pressure" value that is traded for the constraint.
 //=======================================================================
  template<class ELEMENT>
- class SurfaceVolumeConstraintBoundingSolidElement : 
+ class ElasticSurfaceVolumeConstraintBoundingElement : 
  public SurfaceVolumeConstraintBoundingElement,
  public virtual FaceGeometry<ELEMENT>
  {
@@ -715,7 +692,7 @@ namespace oomph
   
   /// \short Contructor: Specify bulk element and index of face to which
   /// this face element is to be attached.
-   SurfaceVolumeConstraintBoundingSolidElement(
+   ElasticSurfaceVolumeConstraintBoundingElement(
     FiniteElement* const &element_pt, const int &face_index) :
   FaceGeometry<ELEMENT>(),
    SurfaceVolumeConstraintBoundingElement()

@@ -174,7 +174,9 @@ CapProblem<ELEMENT>::CapProblem(const bool& hijack_internal) :
  //First create storage, but with no elements or nodes
  Surface_mesh_pt = new Mesh;
 
- //Loop over the horizontal elements
+ //Loop over the horizontal elements adjacent to the upper surface
+ //Note that this relies on knowledge of how the elements are arranged
+ //within the mesh
  for(unsigned i=0;i<nx;i++)
   {
    //Construct a new 1D line element on the face on which the local
@@ -876,8 +878,8 @@ void PseudoSolidCapProblem<ELEMENT>::create_volume_constraint_elements()
       int face_index = Bulk_mesh_pt->face_index_at_boundary(b,e);
       
       // Create new element
-      LineVolumeConstraintBoundingSolidElement<ELEMENT>* el_pt =
-       new LineVolumeConstraintBoundingSolidElement<ELEMENT>(
+      ElasticLineVolumeConstraintBoundingElement<ELEMENT>* el_pt =
+       new ElasticLineVolumeConstraintBoundingElement<ELEMENT>(
         bulk_elem_pt,face_index);   
 
       //Set the "master" volume control element

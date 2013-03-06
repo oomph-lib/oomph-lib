@@ -987,8 +987,8 @@ void PseudoSolidCapProblem<ELEMENT>::create_volume_constraint_elements()
       int face_index = Bulk_mesh_pt->face_index_at_boundary(b,e);
       
       // Create new element
-      AxisymmetricVolumeConstraintBoundingSolidElement<ELEMENT>* el_pt =
-       new AxisymmetricVolumeConstraintBoundingSolidElement<ELEMENT>(
+      ElasticAxisymmetricVolumeConstraintBoundingElement<ELEMENT>* el_pt =
+       new ElasticAxisymmetricVolumeConstraintBoundingElement<ELEMENT>(
         bulk_elem_pt,face_index);   
 
       //Set the "master" volume control element

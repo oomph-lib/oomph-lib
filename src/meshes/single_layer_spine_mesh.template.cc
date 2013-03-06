@@ -59,6 +59,9 @@ SingleLayerSpineMesh<ELEMENT>::SingleLayerSpineMesh(
  // Mesh can only be built with 2D Qelements.
  MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(2);
  
+ //Mesh can only be built with spine elements
+ MeshChecker::assert_geometric_element<SpineFiniteElement,ELEMENT>(2);
+ 
  // We've called the "generic" constructor for the RectangularQuadMesh
  // which doesn't do much...
  
@@ -90,6 +93,10 @@ SingleLayerSpineMesh<ELEMENT>::SingleLayerSpineMesh(
 {
  // Mesh can only be built with 2D Qelements.
  MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(2);
+
+ //Mesh can only be built with spine elements
+ MeshChecker::assert_geometric_element<SpineFiniteElement,ELEMENT>(2);
+ 
  
  // We've called the "generic" constructor for the RectangularQuadMesh
  // which doesn't do much...

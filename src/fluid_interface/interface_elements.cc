@@ -41,14 +41,12 @@ namespace oomph
 
 
 
- //=========================================================================
- /// \short Set a pointer to the desired contact angle. Optional boolean
- /// (defaults to true)
- /// 
- /// hierher Andrew : Surely we want weak imposition as default?!)
- /// 
- /// chooses strong imposition via hijacking (true) or weak imposition
- /// via addition to momentum equation (false).
+//=========================================================================
+/// \short Set a pointer to the desired contact angle. Optional boolean
+/// (defaults to true)
+/// chooses strong imposition via hijacking (true) or weak imposition
+/// via addition to momentum equation (false). The default strong imposition
+/// is appropriate for static contact problems.
 //=========================================================================
  void FluidInterfaceBoundingElement::set_contact_angle(double* const &angle_pt,
                                                        const bool &strong)
@@ -57,7 +55,6 @@ namespace oomph
   Contact_angle_pt = angle_pt;
   
   // If we are hijacking the kinematic condition (the default)
-  // hierher Andrew correct if we change the default setting
   // to do the strong (pointwise form of the contact-angle condition)
   if(strong)
    {
@@ -69,9 +66,11 @@ namespace oomph
      ->hijack_kinematic_conditions(Bulk_node_number);
    }
   //Otherwise, we'll impose it weakly via the momentum equations.
-  //This will require that the appropriate velocity node is unpinned
-  // hierher Andrew:what is this last comment supposed to mean? It's either
-  // trivial or suggests that we should do something here that isn't done.
+  //This will require that the appropriate velocity node is unpinned,
+  //which is why this is a bad choice for static contact problems in which
+  //there is a no-slip condition on the wall. In that case, the momentum
+  //equation is never assembled and so the contact angle condition is not
+  //applied unless we use the strong version above.
   else
    {
     Contact_angle_flag = 2;
@@ -166,10 +165,9 @@ namespace oomph
   // the momentum equation
   else
    {
-    // Need to find the outer normal of this point, which 
-    // is the outer unit normal // hierher Andrew nonsensical comment
-    // or am I missing something.
-    // hierher Andrew: Also, how does this differ from the weak imposition?
+    // Need to find the current outer normal from the surface
+    // which does not necessarily correspond to an imposed angle.
+    // It is whatever it is...
     Vector<double> m(spatial_dim);
     this->outer_unit_normal(s_local,m);
     
@@ -177,6 +175,8 @@ namespace oomph
     double ca_local = ca();
     
     //Just add the appropriate contribution to the momentum equations
+    //This will, of course, not be added if the equation is pinned
+    //(no slip)
     for(unsigned i=0;i<2;i++)
      {
       int local_eqn = nodal_local_eqn(0,this->U_index_interface_boundary[i]);

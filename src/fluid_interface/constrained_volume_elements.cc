@@ -131,7 +131,7 @@ namespace oomph
      //Set the value of n_intpt
      const unsigned n_intpt = this->integral_pt()->nweight();
      
-     //Storage for the local cooridinate
+     //Storage for the local coordinate
      Vector<double> s(1);
      
      //Loop over the integration points
@@ -189,7 +189,7 @@ namespace oomph
 //====================================================================
 /// \short Return this element's contribution to the total volume enclosed
 //====================================================================
- double LineVolumeConstraintBoundingElement::contribution_to_enclosed_volume()
+/* double LineVolumeConstraintBoundingElement::contribution_to_enclosed_volume()
  {
 
   // Initialise
@@ -257,7 +257,7 @@ namespace oomph
    }
 
   return vol;
- }
+  }*/
 
 
 //////////////////////////////////////////////////////////////////////

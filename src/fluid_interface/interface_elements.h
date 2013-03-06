@@ -155,11 +155,9 @@ namespace oomph
   
   /// \short Set a pointer to the desired contact angle. Optional boolean
   /// (defaults to true)
-  /// 
-  /// hierher: Andrew Surely we want weak imposition as default?!
-  ///
   /// chooses strong imposition via hijacking (true) or weak imposition
-  /// via addition to momentum equation (false).
+  /// via addition to momentum equation (false). The default strong imposition
+  /// is appropriate for static contact angle problems.
   void set_contact_angle(double* const &angle_pt, 
                          const bool &strong=true);
   
@@ -236,19 +234,7 @@ namespace oomph
    const DShape &dpsifds,
    const Vector<double> &interpolated_n, 
    const double &W) {}
-
   
-// hierher: Andrew: have moved this directly into actions_before/after_fd
-// which appeared the only fct to call this. Not obvious that
-// bulk nodes should be updated automatically in any other context
-// Please check and then delete
-  /* //Update the parent element when updating the nodes locally */
-  /* void node_update() */
-  /* {//Update the parent element */
-  /*  bulk_element_pt()->node_update(); */
-  /*  } */
-  
-
   ///Overload the output function
   void output(std::ostream &outfile) {FiniteElement::output(outfile);}
   
@@ -385,8 +371,16 @@ public:
   public PointFluidInterfaceBoundingElement, public virtual SolidFiniteElement
   
  {
+   private:
+  
+  ///\short ID of the Lagrange multipler (in the collection of nodal values
+  /// accommodated by resizing
+  unsigned Id;
+  
    public:
   
+  ///\short Set the Id
+  void set_id(const unsigned &id) {Id = id;}
   
   /// \short Specify the value of nodal zeta from the face geometry
   /// The "global" intrinsic coordinate of the element when
@@ -434,10 +428,12 @@ public:
   /// associated with local node n.
   int kinematic_local_eqn(const unsigned &n) 
   {
-   // hierher: Andrew are we sure that the kinematic constraint is always
-   // stored at that entry or should we use Amine's more general
-   // machinery? 
-   return this->nodal_local_eqn(n,Nbulk_value[n]);
+   //Read out the index of the kinematic constraint from the Id
+   //set by the constructing element
+   unsigned lagr_index=dynamic_cast<BoundaryNodeBase*>(this->node_pt(n))->
+    index_of_first_value_assigned_by_face_element(Id);
+  
+   return this->nodal_local_eqn(n,lagr_index);
   }
   
  }; 
@@ -493,9 +489,7 @@ class SpineLineFluidInterfaceBoundingElement : public
  /// Local eqn number of the kinematic bc associated with local node n
  int kinematic_local_eqn(const unsigned &n) 
  {
-  // hierher: Andrew: Are we sure that the kinematic constraint is always
-  // stored at that entry or should we use Amine's more general
-  // machinery? 
+  //Kinematic bc is always associated with the n-th spine height
   return this->spine_local_eqn(n);
  }
  
@@ -511,7 +505,14 @@ public  FaceGeometry<FaceGeometry<ELEMENT> > ,
  public LineFluidInterfaceBoundingElement, public virtual SolidFiniteElement
  
 {
-  public:
+  ///\short ID of the Lagrange multipler (in the collection of nodal values
+  /// accommodated by resizing
+  unsigned Id;
+  
+   public:
+  
+  ///\short Set the Id
+  void set_id(const unsigned &id) {Id = id;}
  
  /// Constructor
   ElasticLineFluidInterfaceBoundingElement() : 
@@ -560,10 +561,12 @@ public  FaceGeometry<FaceGeometry<ELEMENT> > ,
  /// Local eqn number of kinematic bc associated with local node n
  int kinematic_local_eqn(const unsigned &n) 
  {
-  // hierher: Andrew: Are we sure that the kinematic constraint is always
-  // stored at that entry or should we use Amine's more general
-  // machinery? 
-  return this->nodal_local_eqn(n,Nbulk_value[n]);
+  //Read out the kinematic constraint from the Id which is passed down
+  //from the constructing element
+   unsigned lagr_index=dynamic_cast<BoundaryNodeBase*>(this->node_pt(n))->
+    index_of_first_value_assigned_by_face_element(Id);
+  
+   return this->nodal_local_eqn(n,lagr_index);
  }
  
 }; 
@@ -836,9 +839,9 @@ public:
   }
 
 
- /// \short Hijack the kinematic condition at the nodes passed in the vector.
- /// hierher Andrew: So the the argument specifies the local numbers of
- /// nodes in the associated bulk element? Please check then delete query.
+ /// \short Hijack the kinematic condition at the node numbers passed in
+ /// the vector. The node numbers correspond to the local numbers of
+ /// nodes in the associated bulk element.
  /// This is required so that contact-angle conditions can be applied
  /// by the FluidInterfaceBoundingElements.
  virtual void hijack_kinematic_conditions(const Vector<unsigned> 
