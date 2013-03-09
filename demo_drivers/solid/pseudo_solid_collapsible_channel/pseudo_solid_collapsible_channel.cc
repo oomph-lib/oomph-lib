@@ -889,9 +889,6 @@ void CollapsibleChannelProblem<ELEMENT>::set_initial_condition()
                        OOMPH_EXCEPTION_LOCATION);
   }
 
- // Update the mesh
- bulk_mesh_pt()->node_update();
- 
  // Loop over the nodes to set initial guess everywhere
  unsigned num_nod = bulk_mesh_pt()->nnode();
  for (unsigned n=0;n<num_nod;n++)
@@ -921,9 +918,6 @@ void CollapsibleChannelProblem<ELEMENT>::set_initial_condition()
 template <class ELEMENT>
 void CollapsibleChannelProblem<ELEMENT>::actions_before_implicit_timestep()
 {
- // Update the domain shape
- bulk_mesh_pt()->node_update();
- 
  // Moving wall: No slip; this implies that the velocity needs
  // to be updated in response to wall motion
  unsigned ibound=3;

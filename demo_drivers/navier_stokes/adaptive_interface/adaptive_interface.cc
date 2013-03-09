@@ -955,10 +955,11 @@ RefineableRotatingCylinderProblem<ELEMENT>::RefineableRotatingCylinderProblem(
   
 
  //Refine the problem a couple of times
+ bool update_all_solid_nodes=true;
  Bulk_mesh_pt->refine_uniformly();
- Bulk_mesh_pt->node_update(true);
+ Bulk_mesh_pt->node_update(update_all_solid_nodes);
  Bulk_mesh_pt->refine_uniformly();
- Bulk_mesh_pt->node_update(true);
+ Bulk_mesh_pt->node_update(update_all_solid_nodes);
  //Bulk_mesh_pt->refine_uniformly();
  //refine_uniformly();
  //refine_uniformly();

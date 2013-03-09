@@ -1014,9 +1014,6 @@ void FSICollapsibleChannelProblem<ELEMENT>::set_initial_condition()
                        "FSICollapsibleChannelProblem::set_initial_condition()",
                        OOMPH_EXCEPTION_LOCATION);
   }
-
- // Update the mesh
- bulk_mesh_pt()->node_update();
  
  // Loop over the nodes to set initial guess everywhere
  unsigned num_nod = bulk_mesh_pt()->nnode();

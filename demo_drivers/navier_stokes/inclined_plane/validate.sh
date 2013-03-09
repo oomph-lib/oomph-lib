@@ -43,18 +43,18 @@ if test "$1" = "no_fpdiff"; then
 else
 echo "Taylor Hood Elements: Spine " >> validation.log
 ../../../../bin/fpdiff.py ../validata/TH_spine.dat.gz  \
-         TH_spine.dat 0.1 1.0e-11 >> validation.log
+         TH_spine.dat 0.5 1.0e-11 >> validation.log
 echo "Taylor Hood Elements: Pseudo-Elastic " >> validation.log
 ../../../../bin/fpdiff.py ../validata/TH_elastic.dat.gz  \
-         TH_elastic.dat 0.1 1.0e-11 >> validation.log
+         TH_elastic.dat 0.5 1.0e-11 >> validation.log
 
 echo "Crouzeix Raviart Elements: Spine " >> validation.log
 ../../../../bin/fpdiff.py ../validata/CR_spine.dat.gz  \
-         CR_spine.dat 0.1 1.0e-12 >> validation.log
+         CR_spine.dat 0.5 1.0e-11 >> validation.log
 
 echo "Crouzeix Raviart Elements: Pseudo-Elastic " >> validation.log
 ../../../../bin/fpdiff.py ../validata/CR_elastic.dat.gz  \
-         CR_elastic.dat 0.1 1.0e-12 >> validation.log
+         CR_elastic.dat 0.5 1.0e-11 >> validation.log
 fi
 
 

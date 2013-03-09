@@ -1479,6 +1479,7 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
                  //Is the Node in our set
                  std::set<Node*>::iterator it = 
                   hanging_nodes_on_boundary_pt[b].find(nod_pt);
+
                  //If we have found the Node then update the position
                  //to be consistent with the macro-element representation
                  if(it!=hanging_nodes_on_boundary_pt[b].end())
@@ -1486,8 +1487,10 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
                    //Specialise local and global coordinates to 3D
                    //because there is only a problem in 3D.
                    Vector<double> s(3), x(3);
+
                    //Find the local coordinate of the ndoe
                    el_pt->local_coordinate_of_node(n,s);
+
                    //Find the number of time history values
                    const unsigned ntstorage = nod_pt->ntstorage();
                    
@@ -1495,41 +1498,31 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
                    SolidNode* solid_node_pt = dynamic_cast<SolidNode*>(nod_pt);
                    if(solid_node_pt)
                     {
-                     std::ostringstream warn_stream;
-                     warn_stream <<
-                      "Solid Node has become unhanging on boundary.\n"
-                                 <<
-                      "The Lagrangian coordinate may be inconsistent with\n"
-                                 <<
-                      "the undeformed macro element, if there is one\n";
-                     OomphLibWarning(warn_stream.str(),
-                                     "TreeBasedRefineableMesh::adapt_mesh()",
-                                     OOMPH_EXCEPTION_LOCATION);
+                     // Assign Lagrangian coordinates from undeformed
+                     // macro element (if it has one -- get_x_and_xi()
+                     // does "the right thing" anyway. Leave actual
+                     // nodal positions alone -- we're doing a solid
+                     // mechanics problem and once we're going
+                     // the nodal positions are always computed, never
+                     // (automatically) reset to macro-element based
+                     // positions; not even on pinned boundaries
+                     // because the user may have other ideas about where
+                     // these should go -- pinning means "don't touch the
+                     // value", not "leave where the macro-element thinks
+                     // it should be"
+                     Vector<double> x_fe(3), xi(3), xi_fe(3);
+                     solid_el_pt->get_x_and_xi(s,x_fe,x,xi_fe,xi);
+                     for(unsigned i=0;i<3;i++) {solid_node_pt->xi(i) = xi[i];}
                     }
                    else
                     {
-#ifdef PARANOID
-                     //Say what we are doing to the node
-                     oomph_info << "Boundary "
-                                <<  b << ": Adjusting position of Node from "
-                                << "(" << nod_pt->x(0) << ", "
-                                << nod_pt->x(1) << ", " << nod_pt->x(2) 
-                                << ") to ";
-#endif
-                     
                      //Set position and history values from the macro-element
                      //representation
                      for(unsigned t=0;t<ntstorage;t++)
                       {
                        //Get the history value from the macro element
                        el_pt->get_x(t,s,x);
-#ifdef PARANOID
-                       if(t==0)
-                        {
-                         oomph_info << "(" << x[0] << ", "
-                                    << x[1] << ", " << x[2] << ")\n";
-                        }
-#endif
+
                        //Set the coordinate to that of the macroelement
                        //representation
                        for(unsigned i=0;i<3;i++) {nod_pt->x(t,i) = x[i];}
@@ -1538,6 +1531,7 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
                    
                    //Now remove the node from the list
                    hanging_nodes_on_boundary_pt[b].erase(it);
+
                    //If there are no Nodes left then exit the loops
                    if(hanging_nodes_on_boundary_pt[b].size()==0)
                     {e=n_boundary_element; break;}
@@ -4482,41 +4476,32 @@ void TreeBasedRefineableMeshBase::p_adapt_mesh(DocInfo& doc_info)
                    SolidNode* solid_node_pt = dynamic_cast<SolidNode*>(nod_pt);
                    if(solid_node_pt)
                     {
-                     std::ostringstream warn_stream;
-                     warn_stream <<
-                      "Solid Node has become unhanging on boundary.\n"
-                                 <<
-                      "The Lagrangian coordinate may be inconsistent with\n"
-                                 <<
-                      "the undeformed macro element, if there is one\n";
-                     OomphLibWarning(warn_stream.str(),
-                                     "TreeBasedRefineableMesh::adapt_mesh()",
-                                     OOMPH_EXCEPTION_LOCATION);
+
+                     // Assign Lagrangian coordinates from undeformed
+                     // macro element (if it has one -- get_x_and_xi()
+                     // does "the right thing" anyway. Leave actual
+                     // nodal positions alone -- we're doing a solid
+                     // mechanics problem and once we're going
+                     // the nodal positions are always computed, never
+                     // (automatically) reset to macro-element based
+                     // positions; not even on pinned boundaries
+                     // because the user may have other ideas about where
+                     // these should go -- pinning means "don't touch the
+                     // value", not "leave where the macro-element thinks
+                     // it should be"
+                     Vector<double> x_fe(3), xi(3), xi_fe(3);
+                     solid_el_pt->get_x_and_xi(s,x_fe,x,xi_fe,xi);
+                     for(unsigned i=0;i<3;i++) {solid_node_pt->xi(i) = xi[i];}
                     }
                    else
                     {
-#ifdef PARANOID
-                     //Say what we are doing to the node
-                     oomph_info << "Boundary "
-                                <<  b << ": Adjusting position of Node from "
-                                << "(" << nod_pt->x(0) << ", "
-                                << nod_pt->x(1) << ", " << nod_pt->x(2) 
-                                << ") to ";
-#endif
-                     
                      //Set position and history values from the macro-element
                      //representation
                      for(unsigned t=0;t<ntstorage;t++)
                       {
                        //Get the history value from the macro element
                        el_pt->get_x(t,s,x);
-#ifdef PARANOID
-                       if(t==0)
-                        {
-                         oomph_info << "(" << x[0] << ", "
-                                    << x[1] << ", " << x[2] << ")\n";
-                        }
-#endif
+
                        //Set the coordinate to that of the macroelement
                        //representation
                        for(unsigned i=0;i<3;i++) {nod_pt->x(t,i) = x[i];}

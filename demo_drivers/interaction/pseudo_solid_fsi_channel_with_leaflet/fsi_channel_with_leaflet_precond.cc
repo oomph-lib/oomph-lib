@@ -381,10 +381,13 @@ public:
  /// \short Update no slip before Newton convergence check
  void actions_before_newton_convergence_check()
   {
-   // The pseudo-elastic mesh doesn't need a node update per se
-   // this simply executes the auxiliary node update function
-   // which applies to the no slip condition
-   Bulk_mesh_pt->node_update();
+   // Loop over the nodes to perform auxiliary node update (no slip) 
+   unsigned nnod=Bulk_mesh_pt->nnode();
+   for (unsigned j=0;j<nnod;j++)
+    {
+     Bulk_mesh_pt->node_pt(j)->perform_auxiliary_node_update_fct();
+    }
+     
   }
  
  /// Actions before implicit timestep: Update the inflow velocity
