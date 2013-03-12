@@ -170,7 +170,7 @@ namespace oomph
    }
   
   /// Setup method for the PseudoElasticPreconditioner.
-  void setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt);
+  void setup();
   
   /// \short Apply the preconditioner. Method implemented in two
   /// other methods (elastic and lagrange multiplier subsidiary
@@ -344,7 +344,7 @@ class PseudoElasticPreconditionerSubsidiaryPreconditioner
   }
  
  // Setup the preconditioner
- void setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt);
+ void setup();
    
  // Apply the preconditioner
  void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
@@ -454,7 +454,7 @@ class PseudoElasticPreconditionerSubsidiaryPreconditioner
   void clean_up_memory();
 
   /// \short Setup the preconditioner 
-  void setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt);
+  void setup();
   
   /// Apply preconditioner to r
   void preconditioner_solve(const DoubleVector &res, DoubleVector &z);
@@ -540,9 +540,13 @@ class PseudoElasticPreconditionerScalingHelper
  /// 2. matrix_pt should point to the jacobian.
  /// 3. The vector dof_list should contain the full list of 
  /// DOFS associated with the solid subsidiary system.
+ /// 4. "solid_mesh_pt" should be a pointer to the solid mesh used in the 
+ ///   master preconditioner.
  PseudoElasticPreconditionerScalingHelper
-  (Problem* problem_pt, BlockPreconditioner<CRDoubleMatrix>* 
-   master_prec_pt, CRDoubleMatrix* matrix_pt, Vector<unsigned>& dof_list)
+ (BlockPreconditioner<CRDoubleMatrix>* master_prec_pt,
+  CRDoubleMatrix* matrix_pt, Vector<unsigned>& dof_list,
+  const Mesh* const solid_mesh_pt,
+  const OomphCommunicator* comm_pt)
   {
    // turn into a subisiary preconditioner
    this->turn_into_subsidiary_block_preconditioner(master_prec_pt,dof_list);
@@ -550,11 +554,19 @@ class PseudoElasticPreconditionerScalingHelper
    // all dofs are of the same block type
    Vector<unsigned> dof_to_block_map(dof_list.size(),0);
      
-   // call block_setup(...)
-   this->block_setup(problem_pt,matrix_pt,dof_to_block_map);
-
    // store the matrix_pt
-   Matrix_pt = matrix_pt;
+   set_matrix_pt(matrix_pt);
+
+   // set the mesh
+   this->set_nmesh(1);
+   this->set_mesh(0,solid_mesh_pt);
+
+   // set the communicator pointer
+   this->set_comm_pt(comm_pt);
+
+   // call block_setup(...)
+   this->block_setup(dof_to_block_map);
+
   }
 
  /// Destructor. 
@@ -582,14 +594,14 @@ class PseudoElasticPreconditionerScalingHelper
  double s_inf_norm()
   {
    CRDoubleMatrix* m_pt = 0;
-   this->get_block(0,0,Matrix_pt,m_pt);
+   this->get_block(0,0,m_pt);
    double s_inf_norm = m_pt->inf_norm();
    delete m_pt;
    return s_inf_norm;
   }
    
  // broken preconditioner setup
- void setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt)
+ void setup()
   {
    std::ostringstream error_message;
    error_message
@@ -614,10 +626,6 @@ class PseudoElasticPreconditionerScalingHelper
     OOMPH_EXCEPTION_LOCATION);
   }
    
-  private:
-   
- /// pointer to the Jacobian
- CRDoubleMatrix* Matrix_pt;
 
 }; // end of PseudoElasticPreconditionerScalingHelper
 

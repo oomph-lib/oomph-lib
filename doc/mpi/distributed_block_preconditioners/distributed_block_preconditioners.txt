@@ -341,7 +341,7 @@ considering \c setup(...).
 
 \dontinclude fsi_channel_with_leaflet.cc
 \skipline start_of_setup
-\until DoubleMatrixBase* matrix_pt)
+\until ::setup()
 
 
 At the simplest level, \c Meshes are just containers for elements. To
@@ -376,7 +376,7 @@ block_setup(...) to complete the setup of the \c BlockPreconditioner infrastruct
 
 \dontinclude fsi_channel_with_leaflet.cc
 \skipline This fsi preconditioner has two types of block
-\until this->block_setup(problem_pt,matrix_pt,dof_to_block_map);
+\until this->block_setup(dof_to_block_map);
 
 The next step is to set up the subsidiary
 operators required by the preconditioner. 
@@ -418,7 +418,7 @@ the relevant sub-blocks, using the lookup schemes established by the
 call to \c  turn_into_subsidiary_block_preconditioner(...).
 \dontinclude fsi_channel_with_leaflet.cc
 \skipline Setup the NavierStokesSchurComplement preconditioner.
-\until Navier_stokes_preconditioner_pt->setup(problem_pt,matrix_pt);
+\until Navier_stokes_preconditioner_pt->setup();
 
 The final operator to set up is the matrix-vector product. This mirrors
 the set up of the solid subsidiary preconditioner. First the subsidiary

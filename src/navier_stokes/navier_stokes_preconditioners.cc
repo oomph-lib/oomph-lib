@@ -28,6 +28,10 @@
 #include "navier_stokes_preconditioners.h"
 
 
+//??ds temporarily needed because of nasty things in GeneralPurposeBlockPreconditioner:
+#include "../generic/general_purpose_block_preconditioners.h"
+
+
 namespace oomph
 {
 
@@ -144,7 +148,7 @@ namespace oomph
 /// this preconditioner needs a CRDoubleMatrix.
 //============================================================================
  void NavierStokesSchurComplementPreconditioner::
- setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt)
+ setup()
  {
 
   // For debugging...
@@ -174,14 +178,15 @@ namespace oomph
 #endif
 
   // set the mesh
-  this->set_mesh(0,problem_pt,Navier_stokes_mesh_pt);
+  this->set_nmesh(1);
+  this->set_mesh(0,Navier_stokes_mesh_pt);
 
   // Get blocks
   // ----------
 
   // In comes the current Jacobian. Recast it to a CR double matrix;
   // shout if that can't be done.
-  CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt);
+  CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt());
 
 
 #ifdef PARANOID
@@ -201,7 +206,7 @@ namespace oomph
   if (doc_block_matrices)
    {
     std::stringstream junk;
-    junk << "j_matrix" << problem_pt->communicator_pt()->my_rank()
+    junk << "j_matrix" << comm_pt()->my_rank()
          << ".dat";
     oomph_info << "About to output " << junk.str() << std::endl;
     cr_matrix_pt->sparse_indexed_output_with_offset(junk.str());
@@ -228,7 +233,7 @@ namespace oomph
    }
   Vector<unsigned> dof_to_block_map(ndof_types);
   dof_to_block_map[ndof_types-1]=1;
-  this->block_setup(problem_pt,matrix_pt,dof_to_block_map);
+  this->block_setup(dof_to_block_map);
   double t_block_finish = TimingHelpers::timer();
   double block_setup_time = t_block_finish - t_block_start;
   if(Doc_time)
@@ -250,7 +255,7 @@ namespace oomph
   // Get B (the divergence block)
   double t_get_B_start = TimingHelpers::timer();
   CRDoubleMatrix* b_pt = 0;
-  this->get_block(1,0,cr_matrix_pt,b_pt);
+  this->get_block(1,0,b_pt);
   double t_get_B_finish = TimingHelpers::timer();
   if(Doc_time)
    {
@@ -263,7 +268,7 @@ namespace oomph
   if (doc_block_matrices)
    {
     std::stringstream junk;
-    junk << "b_matrix" << problem_pt->communicator_pt()->my_rank()
+    junk << "b_matrix" << comm_pt()->my_rank()
          << ".dat";
     b_pt->sparse_indexed_output_with_offset(junk.str());
     oomph_info << "Done output of " << junk.str() << std::endl;
@@ -306,7 +311,7 @@ namespace oomph
    {
     std::stringstream junk;
     junk << "inv_v_mass_matrix" 
-         << problem_pt->communicator_pt()->my_rank()
+         << comm_pt()->my_rank()
          << ".dat";
     inv_v_mass_pt->sparse_indexed_output_with_offset(junk.str());
     oomph_info << "Done output of " << junk.str() << std::endl;
@@ -316,7 +321,7 @@ namespace oomph
   // Get gradient matrix Bt
   CRDoubleMatrix* bt_pt = 0;
   double t_get_Bt_start = TimingHelpers::timer();
-  this->get_block(0,1,cr_matrix_pt,bt_pt);
+  this->get_block(0,1,bt_pt);
   double t_get_Bt_finish = TimingHelpers::timer();
   if(Doc_time)
    {
@@ -329,7 +334,7 @@ namespace oomph
   if (doc_block_matrices)   
    {
     std::stringstream junk;
-    junk << "bt_matrix" << problem_pt->communicator_pt()->my_rank()
+    junk << "bt_matrix" << comm_pt()->my_rank()
          << ".dat";
     bt_pt->sparse_indexed_output_with_offset(junk.str());
     oomph_info << "Done output of " << junk.str() << std::endl;
@@ -398,7 +403,7 @@ namespace oomph
     
     // Now extract the pressure pressure block
     CRDoubleMatrix* fp_matrix_pt=0;
-    this->get_block(1,1,&full_fp_matrix,fp_matrix_pt);
+    this->get_block_other_matrix(1,1,&full_fp_matrix,fp_matrix_pt);
     double t_get_Fp_finish = TimingHelpers::timer();
     if(Doc_time)
      {
@@ -434,7 +439,7 @@ namespace oomph
   // Get momentum block F
   CRDoubleMatrix* f_pt = 0;
   double t_get_F_start = TimingHelpers::timer();
-  this->get_block(0,0,cr_matrix_pt,f_pt);
+  this->get_block(0,0,f_pt);
   double t_get_F_finish = TimingHelpers::timer();
   if(Doc_time)
    {
@@ -465,7 +470,7 @@ namespace oomph
   // it by its product with the inverse velocity mass matrix)
   t_get_Bt_start = TimingHelpers::timer();
   bt_pt = 0;
-  this->get_block(0,1,cr_matrix_pt,bt_pt);
+  this->get_block(0,1,bt_pt);
   t_get_Bt_finish = TimingHelpers::timer();
   if(Doc_time)
    {
@@ -501,13 +506,13 @@ namespace oomph
   if (doc_block_matrices)
    {
     std::stringstream junk;
-    junk << "p_matrix" << problem_pt->communicator_pt()->my_rank()
+    junk << "p_matrix" << comm_pt()->my_rank()
          << ".dat";
     p_matrix_pt->sparse_indexed_output_with_offset(junk.str());
     oomph_info << "Done output of " << junk.str() << std::endl;
    }
   
-  P_preconditioner_pt->setup(problem_pt, p_matrix_pt);
+  P_preconditioner_pt->setup(p_matrix_pt,comm_pt());
   delete p_matrix_pt;
   p_matrix_pt=0;
   double t_p_prec_finish = TimingHelpers::timer();
@@ -541,12 +546,30 @@ namespace oomph
      }
     F_block_preconditioner_pt->
      turn_into_subsidiary_block_preconditioner(this,dof_map);
-    F_block_preconditioner_pt->setup(problem_pt,matrix_pt);
+
+    // Set the mesh in the subsidiary precondtioner. ??ds not entirely sure
+    // this is the correct mesh, previously it used problem_pt->mesh_pt().
+    F_block_preconditioner_pt->set_nmesh(1);
+    F_block_preconditioner_pt->set_mesh(0, Navier_stokes_mesh_pt);
+
+    //??ds Ugly hack because of the stupid of
+    // GeneralPurposeBlockPreconditioners overwriting meshes. Fix asap.
+    {
+     GeneralPurposeBlockPreconditioner<CRDoubleMatrix>* GBBP_F_preconditioner_pt
+      = dynamic_cast<GeneralPurposeBlockPreconditioner<CRDoubleMatrix>* >
+      (F_block_preconditioner_pt);
+     if(GBBP_F_preconditioner_pt !=0)
+      {
+       GBBP_F_preconditioner_pt->add_mesh(Navier_stokes_mesh_pt);
+      }
+    }
+
+    F_block_preconditioner_pt->setup(matrix_pt(),comm_pt());
    }
   // otherwise F is not a block preconditioner
   else
    {
-    F_preconditioner_pt->setup(problem_pt,f_pt);
+    F_preconditioner_pt->setup(f_pt,comm_pt());
     delete f_pt;
    }
   double t_f_prec_finish = TimingHelpers::timer();
@@ -809,13 +832,10 @@ namespace oomph
      }
    }
 
-  // store the problem pt
-  const Problem* problem_pt = this->problem_pt();
-
   // if the problem is distributed
   bool distributed = false;
 #ifdef OOMPH_HAS_MPI
-  if (problem_pt->distributed() || 
+  if (problem_pt()->distributed() ||
       this->master_distribution_pt()->distributed())
    {
     distributed = true;
@@ -829,10 +849,10 @@ namespace oomph
 #ifdef OOMPH_HAS_MPI
 
     // the number of processors
-    unsigned nproc = problem_pt->communicator_pt()->nproc();
+    unsigned nproc = comm_pt()->nproc();
 
     // and my rank
-    unsigned my_rank = problem_pt->communicator_pt()->my_rank();
+    unsigned my_rank = comm_pt()->my_rank();
 
     // determine the rows for which we have lookup rows
 
@@ -992,7 +1012,7 @@ namespace oomph
             // the assumption: the processor for which the master block
             // preconditioner distribution will definitely hold the lookup
             // data for eqn_number (although others may)
-            else if (problem_pt->distributed())
+            else if (problem_pt()->distributed())
              {
               
               // determine which processor requires the block index
@@ -1046,7 +1066,7 @@ namespace oomph
       unsigned* n_unclassified_recv = new unsigned[nproc];
       MPI_Alltoall(n_unclassified_send,1,MPI_UNSIGNED,
                    n_unclassified_recv,1,MPI_UNSIGNED,
-                   problem_pt->communicator_pt()->mpi_comm());
+                   comm_pt()->mpi_comm());
       
       //the base displacement for the sends
       MPI_Aint base_displacement;
@@ -1103,7 +1123,7 @@ namespace oomph
             //and recv
             MPI_Request req;
             MPI_Irecv(v_or_p_values,1,final_recv_type,p,0,
-                      problem_pt->communicator_pt()->mpi_comm(),&req);
+                      comm_pt()->mpi_comm(),&req);
             unclassified_recv_requests.push_back(req);
             unclassified_recv_proc.push_back(p); 
             MPI_Type_free(&recv_types[0]);
@@ -1146,7 +1166,7 @@ namespace oomph
             //and send
             MPI_Request req;
             MPI_Isend(v_or_p_values,1,final_send_type,p,0,
-                      problem_pt->communicator_pt()->mpi_comm(),&req);
+                      comm_pt()->mpi_comm(),&req);
             unclassified_send_requests.push_back(req);
             MPI_Type_free(&send_types[0]);
             MPI_Type_free(&send_types[1]);
@@ -1243,7 +1263,7 @@ namespace oomph
       unsigned* n_classified_recv = new unsigned[nproc];
       MPI_Alltoall(n_classified_send,1,MPI_UNSIGNED,
                    n_classified_recv,1,MPI_UNSIGNED,
-                   problem_pt->communicator_pt()->mpi_comm());
+                   comm_pt()->mpi_comm());
         
       //allocate storage for the data to be received
       //and post the sends and recvs
@@ -1295,7 +1315,7 @@ namespace oomph
             //and recv
             MPI_Request req;
             MPI_Irecv(v_or_p_values,1,final_recv_type,p,0,
-                      problem_pt->communicator_pt()->mpi_comm(),&req);
+                      comm_pt()->mpi_comm(),&req);
             classified_recv_requests.push_back(req);
             classified_recv_proc.push_back(p);
             MPI_Type_free(&recv_types[0]);
@@ -1338,7 +1358,7 @@ namespace oomph
             //and send
             MPI_Request req;
             MPI_Isend(v_or_p_values,1,final_send_type,p,0,
-                      problem_pt->communicator_pt()->mpi_comm(),&req);
+                      comm_pt()->mpi_comm(),&req);
             classified_send_requests.push_back(req);
             MPI_Type_free(&send_types[0]);
             MPI_Type_free(&send_types[1]);

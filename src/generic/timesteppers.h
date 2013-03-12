@@ -127,6 +127,9 @@ class Time
  /// Return the current value of the continuous time
  double& time(){return *Time_pt;}
 
+ /// Const access function for time
+ double time() const {return *Time_pt;}
+
  /// Return the number of timesteps stored
  unsigned ndt() {return Dt.size();}
 

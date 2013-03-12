@@ -172,6 +172,7 @@ fi
 #-----------------------------------
 
 # Backup old file (use -f so it doesn't give an error if the file doesn't exist)
+touch ${MY_HOME_WD}/config/configure.ac_scripts/user_drivers.dir_list
 mv -f ${MY_HOME_WD}/config/configure.ac_scripts/user_drivers.dir_list ${MY_HOME_WD}/config/configure.ac_scripts/user_drivers.dir_list.backup
 
 # Get a list of locations of files named Makefile.am, modify a little and write to user_drivers.dir_list.
@@ -840,9 +841,11 @@ if test "$want_self_tests" = "y" -o "$reply" = "Y" ; then
   # to stop if a single self test fails.
   set -o errexit false
 
+  # Use -k on make check so that make will keep going even if a demo driver
+  # fails to build.
   echo " "
   echo "Running check to build/self-test the demo codes."
-  echo "y" | make $make_options check
+  echo "y" | make $make_options check -k
   echo "Done self test"
 
   # and now turn it back on (just in case...)

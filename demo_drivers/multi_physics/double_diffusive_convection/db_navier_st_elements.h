@@ -358,7 +358,7 @@ public:
      for(unsigned i=0;i<DIM;i++)
       {
        //Get the local velocity equation number
-       local_unknown = nodal_local_eqn(n,u_nodal_nst[i]);
+       local_unknown = this->nodal_local_eqn(n,u_nodal_nst[i]);
 
        //If it's not pinned
        if(local_unknown >= 0)

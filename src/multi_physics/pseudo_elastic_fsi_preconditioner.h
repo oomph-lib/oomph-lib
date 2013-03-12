@@ -65,9 +65,10 @@ namespace oomph {
 
     public:
 
-   /// \short constructor - just set defaults. Specify the spatial dimension 
-   /// of the fluid
-   PseudoElasticFSIPreconditioner(const unsigned& dim)
+   /// \short constructor - just set defaults. Specify the spatial
+   /// dimension of the fluid and a (non-const) problem pointer needed for
+   /// the underlying NavierStokesSchurComplementPreconditioner.
+   PseudoElasticFSIPreconditioner(const unsigned& dim, Problem* problem_pt)
     : Dim(dim)
     {   
      Use_navier_stokes_schur_complement_preconditioner = true;
@@ -87,7 +88,7 @@ namespace oomph {
      // using Schur complement preconditioner for NS
      Navier_stokes_preconditioner_pt = new SuperLUPreconditioner;
      Navier_stokes_schur_complement_preconditioner_pt 
-      = new NavierStokesSchurComplementPreconditioner; 
+      = new NavierStokesSchurComplementPreconditioner(problem_pt); 
 
      // set defaults
      Using_default_solid_preconditioner = true;
@@ -144,7 +145,7 @@ namespace oomph {
    void clean_up_memory();
 
    /// \short Setup the precoonditioner.
-   void setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt);
+   void setup();
 
    ///  \short Apply the preconditioner
    void preconditioner_solve(const DoubleVector& r,

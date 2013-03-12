@@ -226,7 +226,7 @@ namespace oomph
     }
 
    /// Setup the preconditioner
-   void setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt);
+   void setup();
 
    /// Apply preconditioner to Vector r
    void preconditioner_solve(const DoubleVector&r, DoubleVector &z);
@@ -440,7 +440,7 @@ namespace oomph
    
    
    /// Setup the preconditioner
-   void setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt);
+   void setup();
    
    /// Apply preconditioner to r
    void preconditioner_solve(const Vector<double>&r,

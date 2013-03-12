@@ -117,8 +117,7 @@ namespace oomph
  //=============================================================================
  // Setup method for the PseudoElasticPreconditioner.
  //=============================================================================
- void PseudoElasticPreconditioner::setup(Problem* problem_pt, 
-                                         DoubleMatrixBase* matrix_pt)
+ void PseudoElasticPreconditioner::setup()
  {
   // clean
   this->clean_up_memory();
@@ -147,8 +146,8 @@ namespace oomph
   // set the mesh
   unsigned n_solid_dof_types = 0;
   unsigned n_dof_types = 0;
-  this->set_mesh(0,problem_pt,Elastic_mesh_pt);
-  this->set_mesh(1,problem_pt,Lagrange_multiplier_mesh_pt);
+  this->set_mesh(0,Elastic_mesh_pt);
+  this->set_mesh(1,Lagrange_multiplier_mesh_pt);
   if (this->is_master_block_preconditioner())
    {
     
@@ -178,11 +177,11 @@ namespace oomph
   // determine the dimension
   Dim = n_dof_types/3;
   
-  // Call block setup for this preconditioner
-  this->block_setup(problem_pt,matrix_pt);
-
   // Recast Jacobian matrix to CRDoubleMatrix
-  CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt);
+  CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt());
+
+  // Call block setup for this preconditioner
+  this->block_setup();
   
 #ifdef PARANOID
   if (cr_matrix_pt==0)
@@ -205,10 +204,11 @@ namespace oomph
       dof_list[i] = i;
      }
     PseudoElasticPreconditionerScalingHelper* helper_pt = 
-     new PseudoElasticPreconditionerScalingHelper(problem_pt,
-                                                  this,
+     new PseudoElasticPreconditionerScalingHelper(this,
                                                   cr_matrix_pt,
-                                                  dof_list);
+                                                  dof_list,
+                                                  Elastic_mesh_pt,
+                                                  comm_pt());
     Scaling = helper_pt->s_inf_norm();
     delete helper_pt;
    }
@@ -237,7 +237,9 @@ namespace oomph
        (Elastic_subsidiary_preconditioner_function_pt);
      }
     s_prec_pt->scaling() = Scaling;
-    s_prec_pt->setup(problem_pt,matrix_pt);
+    s_prec_pt->set_nmesh(1);
+    s_prec_pt->set_mesh(0, Elastic_mesh_pt);
+    s_prec_pt->Preconditioner::setup(matrix_pt(),comm_pt());
     Elastic_preconditioner_pt = s_prec_pt;
    }
   
@@ -283,7 +285,9 @@ namespace oomph
      }
     
     // setup
-    s_prec_pt->setup(problem_pt,matrix_pt);
+    s_prec_pt->set_nmesh(1);
+    s_prec_pt->set_mesh(0, Elastic_mesh_pt);
+    s_prec_pt->Preconditioner::setup(matrix_pt(),comm_pt());
     Elastic_preconditioner_pt = s_prec_pt;
    }
   
@@ -292,7 +296,7 @@ namespace oomph
   for (unsigned d = 0; d < Dim; d++)
    {
     CRDoubleMatrix* b_pt = 0;
-    this->get_block(2*Dim+d,Dim+d,cr_matrix_pt,b_pt);
+    this->get_block(2*Dim+d,Dim+d,b_pt);
     
     // if a non default preconditioner is specified create 
     // the preconditioners
@@ -309,7 +313,7 @@ namespace oomph
      }
     
     // and setup
-    Lagrange_multiplier_preconditioner_pt[d]->setup(problem_pt,b_pt);
+    Lagrange_multiplier_preconditioner_pt[d]->setup(b_pt,comm_pt());
     delete b_pt;
    }
  }
@@ -383,7 +387,7 @@ namespace oomph
  /// \short Setup the preconditioner
  //=============================================================================
  void PseudoElasticPreconditionerSubsidiaryPreconditioner::
- setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt)
+ setup()
  {
    // clean memory
    this->clean_up_memory();
@@ -412,27 +416,11 @@ namespace oomph
     }
      
    // call block_setup(...)
-   this->block_setup(problem_pt,matrix_pt,dof_to_block_map);
-
-   // Recast Jacobian matrix to CRDoubleMatrix
-   CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt);
-     
-#ifdef PARANOID
-   // paraoind check we could cast to CRDoubleMatrix
-   if (cr_matrix_pt==0)
-    {
-     std::ostringstream error_message;
-     error_message << "FSIPreconditioner only works with"
-                   << " CRDoubleMatrix matrices" << std::endl;
-     throw OomphLibError(error_message.str(),
-                         "FSIPreconditioner::setup()",
-                         OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
+   this->block_setup(dof_to_block_map);
      
    // get block 11
    CRDoubleMatrix* s11_pt = 0;
-   this->get_block(1,1,cr_matrix_pt,s11_pt);
+   this->get_block(1,1,s11_pt);
 
    // add the scaled identity matrix to block 11
    double* s11_values = s11_pt->value();
@@ -456,9 +444,9 @@ namespace oomph
 
    // get the remaining block and build the preconditioner
    DenseMatrix<CRDoubleMatrix* > s_pt(2,2,0);
-   this->get_block(0,0,cr_matrix_pt,s_pt(0,0));
-   this->get_block(0,1,cr_matrix_pt,s_pt(0,1));
-   this->get_block(1,0,cr_matrix_pt,s_pt(1,0));
+   this->get_block(0,0,s_pt(0,0));
+   this->get_block(0,1,s_pt(0,1));
+   this->get_block(1,0,s_pt(1,0));
    s_pt(1,1) = s11_pt;
    CRDoubleMatrix* s_prec_pt = 0;
    this->build_preconditioner_matrix(s_pt,s_prec_pt);
@@ -476,7 +464,7 @@ namespace oomph
     {
      Preconditioner_pt = new SuperLUPreconditioner;
     }
-   Preconditioner_pt->setup(problem_pt,s_prec_pt);
+   Preconditioner_pt->setup(s_prec_pt,comm_pt());
    delete s_prec_pt;
   }
    
@@ -541,7 +529,7 @@ namespace oomph
  /// \short Setup the preconditioner.
  //=============================================================================
  void PseudoElasticPreconditionerSubsidiaryBlockPreconditioner::
- setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt)
+ setup()
  {
   // clean the memory
   this->clean_up_memory();
@@ -573,19 +561,7 @@ namespace oomph
    }
   
   //setup the blocks look up schemes
-  this->block_setup(problem_pt,matrix_pt,dof_to_block_map);
-
-  // Need to recast here -- input type is determined by specs in
-  // base class.
-  CRDoubleMatrix* cast_matrix_pt=dynamic_cast<CRDoubleMatrix*>(matrix_pt);
-#ifdef PARANOID
-  if (cast_matrix_pt==0)
-   {
-    throw OomphLibError("Wasn't able to cast matrix to CRDoubleMatrix.",
-                        "BlockTriangularPreconditioner::setup()",
-                        OOMPH_EXCEPTION_LOCATION);
-   }
-#endif
+  this->block_setup(dof_to_block_map);
   
   // Storage for the diagonal block preconditioners
   Diagonal_block_preconditioner_pt.resize(dim);
@@ -610,7 +586,13 @@ namespace oomph
        (Subsidiary_preconditioner_function_pt);
      }
     Diagonal_block_preconditioner_pt[d]->scaling() = Scaling;
-    Diagonal_block_preconditioner_pt[d]->setup(problem_pt,matrix_pt);
+
+    //??ds probably will work...
+    Diagonal_block_preconditioner_pt[d]->set_nmesh(1);
+    Diagonal_block_preconditioner_pt[d]->set_mesh(0,this->mesh_pt(0));
+
+    Diagonal_block_preconditioner_pt[d]->
+     Preconditioner::setup(matrix_pt(),comm_pt());
     
     // next setup the off diagonal mat vec operators if required
     if (Method == 1 || Method == 2)
@@ -625,7 +607,7 @@ namespace oomph
       for (unsigned j = l; j < u; j++)
        {
         CRDoubleMatrix* block_matrix_pt = 0;
-        this->get_block(d,j,cast_matrix_pt,block_matrix_pt);
+        this->get_block(d,j,block_matrix_pt);
         Off_diagonal_matrix_vector_products(d,j) 
          = new MatrixVectorProduct();
         Off_diagonal_matrix_vector_products(d,j)->setup(block_matrix_pt);

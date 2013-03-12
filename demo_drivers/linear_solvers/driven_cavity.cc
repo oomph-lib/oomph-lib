@@ -278,7 +278,7 @@ RectangularDrivenCavityProblem<ELEMENT>::RectangularDrivenCavityProblem(
    linear_solver_pt() = Solver_pt;
    
    // Set preconditioner
-   Prec_pt=new NavierStokesSchurComplementPreconditioner;
+   Prec_pt=new NavierStokesSchurComplementPreconditioner(this);
    Prec_pt->set_navier_stokes_mesh(this->mesh_pt());
 
 //   Prec_pt->navier_stokes_mesh_pt() = this->mesh_pt();

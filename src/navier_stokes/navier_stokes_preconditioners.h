@@ -684,8 +684,8 @@ namespace oomph
    public :
   
     /// Constructor - sets defaults for control flags
-    NavierStokesSchurComplementPreconditioner() : 
-     BlockPreconditioner<CRDoubleMatrix>()
+    NavierStokesSchurComplementPreconditioner(Problem* problem_pt) :
+     BlockPreconditioner<CRDoubleMatrix>(), Problem_pt(problem_pt)
     {
      // Use Robin BC elements for Fp preconditioner -- yes by default
      Use_robin_for_fp=true;
@@ -750,15 +750,38 @@ namespace oomph
      BrokenCopy::broken_assign("NavierStokesSchurComplementPreconditioner");
     }
 
+   /// Set the problem pointer (non-const pointer, the problem WILL be
+   /// changed) for use in get_pressure_advection_diffusion_matrix().
+   void set_problem_pt(Problem* problem_pt)
+   {Problem_pt = problem_pt;}
+
+  Problem* problem_pt() const
+  {
+#ifdef PARANOID
+   if(Problem_pt == 0)
+    {
+     std::ostringstream error_msg;
+     error_msg << "Problem pointer is null, did you set it yet?";
+     throw OomphLibError(error_msg.str(),
+                         "NavierStokesSchurComplementPreconditioner::problem_pt()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+   return Problem_pt;
+  }
+
    /// Setup the preconditioner
-   void setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt);
+   void setup();
+
+   /// \short for some reason we have to remind the compiler that there is a
+   /// setup() function in Preconditioner base class.
+   using Preconditioner::setup;
 
    /// Apply preconditioner to Vector r
    void preconditioner_solve(const DoubleVector&r, DoubleVector &z);
    
-   /// specify the mesh containing the mesh containing the 
-   /// block-preconditionable Navier-Stokes elements. The dimension of the
-   /// problem must also be specified.
+   /// Specify the mesh containing the block-preconditionable Navier-Stokes
+   /// elements.
    void set_navier_stokes_mesh(Mesh* mesh_pt)
     { 
      Navier_stokes_mesh_pt = mesh_pt;
@@ -876,7 +899,8 @@ namespace oomph
       el_pt->pin_all_non_pressure_dofs(Eqn_number_backup);
      }
    }
-   
+
+
    /// Get the pressure advection diffusion matrix
    void get_pressure_advection_diffusion_matrix(CRDoubleMatrix& fp_matrix)
    {
@@ -884,8 +908,7 @@ namespace oomph
     pin_all_non_pressure_dofs(); 
     
     // Get the spatial dimension
-    unsigned ndim=Navier_stokes_mesh_pt->finite_element_pt(0)->dim();
-
+    unsigned ndim=Navier_stokes_mesh_pt->finite_element_pt(0)->dim(); 
 
     // Backup assembly handler and set new one
     AssemblyHandler* backed_up_assembly_handler_pt=
@@ -952,7 +975,7 @@ namespace oomph
         int pinned_pressure_eqn_global=pinned_pressure_eqn;
         MPI_Allreduce(&pinned_pressure_eqn_local,
                       &pinned_pressure_eqn_global,1,MPI_INT,MPI_MIN,
-                      this->problem_pt()->communicator_pt()->mpi_comm());
+                      this->comm_pt()->mpi_comm());
         pinned_pressure_eqn=pinned_pressure_eqn_global;
        }    
       
@@ -1188,6 +1211,10 @@ namespace oomph
    /// for non-enclosed flows but seems harmless in any case
    bool Pin_first_pressure_dof_in_press_adv_diff;
    
+   /// Storage for the (non-const!) problem pointer for use in
+   /// get_pressure_advection_diffusion_matrix().
+   Problem* Problem_pt;
+
    };
 
 
@@ -1235,7 +1262,8 @@ namespace oomph
    
    
    /// Setup the preconditioner
-   void setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt);
+   void setup();
+
    
    /// Apply preconditioner to r
    void preconditioner_solve(const Vector<double>&r,

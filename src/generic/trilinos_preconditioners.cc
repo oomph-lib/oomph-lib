@@ -54,20 +54,19 @@ namespace oomph
 /// DistributedCRDoubleMatrix\n
 /// This method should be called by oomph-lib solvers and preconditioners
 //=============================================================================
-void TrilinosPreconditionerBase::setup(Problem* problem_pt, 
-                                       DoubleMatrixBase* matrix_pt)
+ void TrilinosPreconditionerBase::setup()
 {
  //clean up the memory
  clean_up_memory();
 
 #ifdef PARANOID
  // check the matrix is square
- if ( matrix_pt->nrow() != matrix_pt->ncol() )
+ if ( matrix_pt()->nrow() != matrix_pt()->ncol() )
   {
    std::ostringstream error_message;
    error_message << "Preconditioners require a square matrix. "
-                 << "Matrix is " << matrix_pt->nrow()
-                 << " by " << matrix_pt->ncol() << std::endl;
+                 << "Matrix is " << matrix_pt()->nrow()
+                 << " by " << matrix_pt()->ncol() << std::endl;
    throw OomphLibError(error_message.str(),
                        "TrilinosPreconditionerBase::setup()",
                        OOMPH_EXCEPTION_LOCATION);
@@ -76,7 +75,7 @@ void TrilinosPreconditionerBase::setup(Problem* problem_pt,
 
 
  // get a pointer to the cr double matrix
- CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt);
+ CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt());
 
 #ifdef PARANOID
  if (cr_matrix_pt == 0)
@@ -95,7 +94,7 @@ void TrilinosPreconditionerBase::setup(Problem* problem_pt,
   (cr_matrix_pt,this->distribution_pt());
  
  // set up preconditioner
- setup_trilinos_preconditioner(problem_pt,matrix_pt,Epetra_matrix_pt);
+ setup_trilinos_preconditioner(Epetra_matrix_pt);
 }
  
 //===========================================================================
@@ -103,16 +102,13 @@ void TrilinosPreconditionerBase::setup(Problem* problem_pt,
 /// by the oomph-lib oomph_matrix_pt and Epetra epetra_matrix_pt matrices.\n
 /// This method is called by Trilinos solvers.
 //===========================================================================
-void TrilinosPreconditionerBase::setup(Problem* problem_pt, 
-                                       DoubleMatrixBase* oomph_matrix_pt, 
-                                       Epetra_CrsMatrix* epetra_matrix_pt)
+void TrilinosPreconditionerBase::setup(Epetra_CrsMatrix* epetra_matrix_pt)
 {
 // clean up old data
  clean_up_memory();
 
  // first try CRDoubleMatrix
- CRDoubleMatrix* cr_matrix_pt = 
-  dynamic_cast<CRDoubleMatrix*>(oomph_matrix_pt);
+ CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt());
  if (cr_matrix_pt==0)
   {
      std::ostringstream error_message;
@@ -124,7 +120,7 @@ void TrilinosPreconditionerBase::setup(Problem* problem_pt,
   }
  
  // setup the specific preconditioner
- setup_trilinos_preconditioner(problem_pt,oomph_matrix_pt,epetra_matrix_pt);
+ setup_trilinos_preconditioner(epetra_matrix_pt);
 }
 
 
@@ -208,9 +204,7 @@ double t_start = TimingHelpers::timer();
 // Function to set up the ML preconditioner.
 //=============================================================================
 void TrilinosMLPreconditioner::
-setup_trilinos_preconditioner(Problem* problem_pt, 
-                              DoubleMatrixBase* oomph_matrix_pt, 
-                              Epetra_CrsMatrix* epetra_matrix_pt)
+setup_trilinos_preconditioner(Epetra_CrsMatrix* epetra_matrix_pt)
 {
 
 
@@ -257,9 +251,7 @@ setup_trilinos_preconditioner(Problem* problem_pt,
 // Function to set up the IFPACK preconditioner.
 //=============================================================================
 void TrilinosIFPACKPreconditioner::
-setup_trilinos_preconditioner(Problem* problem_pt, 
-                              DoubleMatrixBase* oomph_matrix_pt, 
-                              Epetra_CrsMatrix* epetra_matrix_pt)
+setup_trilinos_preconditioner(Epetra_CrsMatrix* epetra_matrix_pt)
 { 
  // set up a parameter list
  Teuchos::ParameterList ifpack_parameters;

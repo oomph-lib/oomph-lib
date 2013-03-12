@@ -573,8 +573,11 @@ public:
  /// Return the i-th spine in the mesh
  Spine*& spine_pt(const unsigned long &i) {return Spine_pt[i];}
 
+ /// Return the i-th spine in the mesh (const version)
+ const Spine* spine_pt(const unsigned long &i) const {return Spine_pt[i];}
+
  /// Return the number of spines in the mesh
- unsigned long nspine() {return Spine_pt.size();}
+ unsigned long nspine() const {return Spine_pt.size();}
 
  /// Add a spine to the mesh
  void add_spine_pt(Spine* const &spine_pt)
@@ -654,7 +657,7 @@ public:
  virtual void spine_node_update(SpineNode* spine_node_pt)=0;
 
  /// \short Overload the dump function so that the spine data is dumped
- void dump(std::ofstream &dump_file);
+ void dump(std::ofstream &dump_file) const;
 
  /// \short Overload the read function so that the spine data is read 
  /// from the restart file

@@ -200,18 +200,18 @@ Specific preconditioners may be implemented by deriving from the
 \c Preconditioner base class, by implementing its two pure virtual functions
 
 \code
-/// Apply preconditioner to z, i.e. z=P^-1 r
-virtual void Preconditioner::preconditioner_solve(const Vector<double > &r, 
-                                                  Vector< double > &z)=0;
+  /// Apply the preconditioner. Pure virtual generic interface
+  /// function. This method should apply the preconditioner operator to the
+  /// vector r and return the vector z.
+  virtual void preconditioner_solve(const DoubleVector &r, DoubleVector &z)=0;
 \endcode
 
 and
 
 \code
-/// Set up the preconditioner. Generic interface allows preconditioner
-/// to be assembled based on Problem or the assembled matrix.
-virtual void Preconditioner::setup(Problem *problem_pt, 
-                                   DoubleMatrixBase *matrix_pt)=0;
+  /// Setup the preconditioner. Pure virtual generic interface
+  /// function.
+  virtual void setup() = 0;
 \endcode
 
 Note that, by default, \c oomph-lib's \c IterativeLinearSolvers 

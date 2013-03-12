@@ -174,7 +174,7 @@ private:
      //-------------------------------------------
      
      //Get the local equation
-     local_eqn_real = nodal_local_eqn(l,this->u_index_helmholtz().real());
+     local_eqn_real = this->nodal_local_eqn(l,this->u_index_helmholtz().real());
      
      /*IF it's not a boundary condition*/
      if(local_eqn_real >= 0)
@@ -186,7 +186,7 @@ private:
      //------------------------------------------------
      
      //Get the local equation
-     local_eqn_imag = nodal_local_eqn(l,this->u_index_helmholtz().imag());
+     local_eqn_imag = this->nodal_local_eqn(l,this->u_index_helmholtz().imag());
      
      /*IF it's not a boundary condition*/
      if(local_eqn_imag >= 0)

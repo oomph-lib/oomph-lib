@@ -2207,7 +2207,7 @@ public:
   
  /// \short Return the number of the node *node_pt if this node
  /// is in the element, else return -1; 
- int get_node_number(Node* const &node_pt);
+ int get_node_number(Node* const &node_pt) const;
 
 
  /// \short If there is a node at this local coordinate, return the pointer to

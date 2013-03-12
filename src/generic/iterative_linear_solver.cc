@@ -159,12 +159,12 @@ void BiCGStab<MATRIX>::solve(Problem* const &problem_pt,
    LinearAlgebraDistribution 
     temp_global_dist(result.distribution_pt());       
    result.build(this->distribution_pt(),0.0);
-   this->solve_helper(Matrix_pt,f,result,problem_pt);
+   this->solve_helper(Matrix_pt,f,result);
    result.redistribute(&temp_global_dist);
   }
  else
   {
-   this->solve_helper(Matrix_pt,f,result,problem_pt);
+   this->solve_helper(Matrix_pt,f,result);
   }
   
  // Kill matrix unless it's still required for resolve
@@ -177,10 +177,7 @@ void BiCGStab<MATRIX>::solve(Problem* const &problem_pt,
 
 //==================================================================
 /// Linear-algebra-type solver: Takes pointer to a matrix and rhs vector 
-/// and returns the solution of the linear system. Problem pointer defaults 
-/// to NULL and can be omitted in linear-algebra-type solves in which
-/// the preconditioner doesn't (mustn't!) require a pointer to an
-/// associated Problem. \n\n
+/// and returns the solution of the linear system.
 /// Algorithm and variable names based on "Numerical Linear Algebra
 /// for High-Performance Computers" by Dongarra, Duff, Sorensen & van 
 /// der Vorst. SIAM  (1998), page 185. 
@@ -188,8 +185,7 @@ void BiCGStab<MATRIX>::solve(Problem* const &problem_pt,
 template<typename MATRIX>
 void BiCGStab<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
                                     const DoubleVector &rhs,
-                                    DoubleVector &solution,
-                                    Problem* problem_pt)
+                                    DoubleVector &solution)
 {
 #ifdef PARANOID
  // check that the rhs vector is setup
@@ -356,7 +352,8 @@ void BiCGStab<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
      //Setup preconditioner from the Jacobian matrix
      double t_start_prec = TimingHelpers::timer(); 
      
-     preconditioner_pt()->setup(problem_pt,matrix_pt);
+     preconditioner_pt()->setup(matrix_pt,
+                                distribution_pt()->communicator_pt());
      
      // Doc time for setup of preconditioner
      double t_end_prec = TimingHelpers::timer(); 
@@ -613,10 +610,7 @@ void BiCGStab<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
 
 //==================================================================
 /// Linear-algebra-type solver: Takes pointer to a matrix and rhs vector 
-/// and returns the solution of the linear system. Problem pointer defaults 
-/// to NULL and can be omitted in linear-algebra-type solves in which
-/// the preconditioner doesn't (mustn't!) require a pointer to an
-/// associated Problem. \n\n
+/// and returns the solution of the linear system.
 /// Algorithm and variable names based on "Matrix Computations,
 /// 2nd Ed." Golub & van Loan, John Hopkins University Press(1989),
 /// page 529.
@@ -624,8 +618,7 @@ void BiCGStab<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
 template<typename MATRIX>
 void CG<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
                               const DoubleVector &rhs,
-                              DoubleVector &solution,
-                              Problem* problem_pt)
+                              DoubleVector &solution)
 {
 #ifdef PARANOID
  // check that the rhs vector is setup
@@ -789,7 +782,8 @@ void CG<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
      //Setup preconditioner from the Jacobian matrix
      double t_start_prec = TimingHelpers::timer(); 
      
-     preconditioner_pt()->setup(problem_pt,matrix_pt);
+     preconditioner_pt()->setup(matrix_pt,
+                                distribution_pt()->communicator_pt());
      
      // Doc time for setup of preconditioner
      double t_end_prec = TimingHelpers::timer(); 
@@ -1024,12 +1018,12 @@ void CG<MATRIX>::solve(Problem* const &problem_pt, DoubleVector &result)
    LinearAlgebraDistribution 
     temp_global_dist(result.distribution_pt());       
    result.build(this->distribution_pt(),0.0);
-   this->solve_helper(Matrix_pt,f,result,problem_pt);
+   this->solve_helper(Matrix_pt,f,result);
    result.redistribute(&temp_global_dist);
   }
  else
   {
-   this->solve_helper(Matrix_pt,f,result,problem_pt);
+   this->solve_helper(Matrix_pt,f,result);
   }
   
  // Kill matrix unless it's still required for resolve
@@ -1134,7 +1128,7 @@ void GS<MATRIX>::solve(Problem* const &problem_pt, DoubleVector &result)
   }
 
  // Call linear algebra-style solver
- this->solve_helper(Matrix_pt,f,result,problem_pt);
+ this->solve_helper(Matrix_pt,f,result);
   
  // Kill matrix unless it's still required for resolve
  if (!Enable_resolve) clean_up_memory();
@@ -1143,16 +1137,12 @@ void GS<MATRIX>::solve(Problem* const &problem_pt, DoubleVector &result)
 
 //==================================================================
 /// Linear-algebra-type solver: Takes pointer to a matrix and rhs vector 
-/// and returns the solution of the linear system. Problem pointer defaults 
-/// to NULL and can be omitted in linear-algebra-type solves in which
-/// the preconditioner doesn't (mustn't!) require a pointer to an
-/// associated Problem. \n\n
+/// and returns the solution of the linear system.
 //==================================================================
 template<typename MATRIX>
 void GS<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
                               const DoubleVector &rhs,
-                              DoubleVector &solution,
-                              Problem* problem_pt)
+                              DoubleVector &solution)
 {
  // Get number of dofs
  unsigned n_dof=rhs.nrow();
@@ -1450,13 +1440,13 @@ void GMRES<MATRIX>::solve(Problem* const &problem_pt, DoubleVector &result)
    LinearAlgebraDistribution 
     temp_global_dist(result.distribution_pt());       
    result.build(this->distribution_pt(),0.0);
-   this->solve_helper(Matrix_pt,f,result,problem_pt);
+   this->solve_helper(Matrix_pt,f,result);
    result.redistribute(&temp_global_dist);
   }
  //Otherwise just solve
  else
   {
-   this->solve_helper(Matrix_pt,f,result,problem_pt);
+   this->solve_helper(Matrix_pt,f,result);
   }
 
  // Kill matrix unless it's still required for resolve
@@ -1467,10 +1457,7 @@ void GMRES<MATRIX>::solve(Problem* const &problem_pt, DoubleVector &result)
 
 //=============================================================================
 /// Linear-algebra-type solver: Takes pointer to a matrix and rhs vector 
-/// and returns the solution of the linear system. Problem pointer defaults 
-/// to NULL and can be omitted in linear-algebra-type solves in which
-/// the preconditioner doesn't (mustn't!) require a pointer to an
-/// associated Problem. \n\n
+/// and returns the solution of the linear system.
 /// based on the algorithm presented in Templates for the
 /// Solution of Linear Systems: Building Blocks for Iterative Methods, Barrett,
 /// Berry et al, SIAM, 2006 and the implementation in the IML++ library :
@@ -1479,8 +1466,7 @@ void GMRES<MATRIX>::solve(Problem* const &problem_pt, DoubleVector &result)
 template <typename MATRIX>
 void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
                                  const DoubleVector &rhs,
-                                 DoubleVector &solution,
-                                 Problem* problem_pt)
+                                 DoubleVector &solution)
 {
  // Get number of dofs
  unsigned n_dof=rhs.nrow();
@@ -1589,8 +1575,9 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
      //Setup preconditioner from the Jacobian matrix
      double t_start_prec = TimingHelpers::timer();
      
-     // do not setup 
-     preconditioner_pt()->setup(problem_pt,matrix_pt);
+     // do not setup
+     preconditioner_pt()->setup(matrix_pt, 
+                                distribution_pt()->communicator_pt());
      
      // Doc time for setup of preconditioner
      double t_end_prec = TimingHelpers::timer();
@@ -1925,6 +1912,5 @@ template class GS<DenseDoubleMatrix>;
 template class GMRES<CCDoubleMatrix>;
 template class GMRES<CRDoubleMatrix>;
 template class GMRES<DenseDoubleMatrix>;
-template class GMRES<SumOfMatrices>;
 
 }

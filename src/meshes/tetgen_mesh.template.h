@@ -70,7 +70,8 @@ public:
             TimeStepper* time_stepper_pt=
             &Mesh::Default_TimeStepper,
             const bool &use_attributes=false)
-              
+   : Tetgenio_exists(false),
+     Tetgenio_pt(0)
   {
    // Mesh can only be built with 3D Telements.
    MeshChecker::assert_geometric_element<TElementGeometricBase,ELEMENT>(3);

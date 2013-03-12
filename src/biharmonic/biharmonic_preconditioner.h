@@ -110,7 +110,7 @@ namespace oomph
     }
    
    /// \short Setup the preconditioner 
-   void setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt);
+   void setup();
    
    /// Apply preconditioner to r
    void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
@@ -212,7 +212,7 @@ class ExactSubBiharmonicPreconditioner
    }
   
   /// \short Setup the preconditioner 
-  void setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt);
+  void setup();
   
   /// Apply preconditioner to r
   void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
@@ -310,7 +310,7 @@ class ExactSubBiharmonicPreconditioner
     }
 
    /// \short Setup the preconditioner 
-   void setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt);
+   void setup();
    
    /// Apply preconditioner to r
    void preconditioner_solve(const DoubleVector &r, DoubleVector &z);

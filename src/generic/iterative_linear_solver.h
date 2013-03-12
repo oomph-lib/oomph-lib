@@ -44,10 +44,16 @@
 #include "linear_solver.h"
 #include "preconditioner.h"
 
+#include "sum_of_matrices.h"
+
 
 
 namespace oomph
 {
+
+ // // Forward definition of SumOfMatrices, only needed because we want to
+ // // force the build of the template later.
+ // class SumOfMatrices;
 
 
 //=============================================================================
@@ -62,7 +68,8 @@ class IterativeLinearSolver : public LinearSolver
   
  /// \short Constructor: Set (default) trivial preconditioner and set
  /// defaults for tolerance and max. number of iterations
- IterativeLinearSolver()
+ IterativeLinearSolver() :
+  Preconditioner_setup_time(0)
   {      
    //Set pointer to default preconditioner
    Preconditioner_pt=&Default_preconditioner;
@@ -108,7 +115,7 @@ class IterativeLinearSolver : public LinearSolver
  unsigned& max_iter() {return Max_iter;}
  
  /// Number of iterations taken 
- virtual unsigned iterations()=0;
+ virtual unsigned iterations() const = 0;
  
  /// Enable documentation of the convergence history
  void enable_doc_convergence_history() {Doc_convergence_history = true;}
@@ -152,19 +159,19 @@ class IterativeLinearSolver : public LinearSolver
 
  ///  \short returns the time taken to assemble the jacobian matrix and 
  /// residual vector
- double jacobian_setup_time()
+ double jacobian_setup_time() const
   {
    return Jacobian_setup_time;
   }
 
  /// \short return the time taken to solve the linear system
- double linear_solver_solution_time()
+ double linear_solver_solution_time() const
   {
    return Solution_time;
   }
 
  /// \short returns the the time taken to setup the preconditioner 
- virtual double preconditioner_setup_time()
+ virtual double preconditioner_setup_time() const
   {
    return Preconditioner_setup_time;
   }
@@ -268,11 +275,8 @@ class CG : public IterativeLinearSolver
  /// the problem's fully assembled Jacobian and residual vector.
  void solve(Problem* const &problem_pt, DoubleVector &result);
  
- /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs 
- /// vector and returns the solution of the linear system. Problem pointer 
- /// defaults to NULL and can be omitted in linear-algebra-type solves in which
- /// the preconditioner doesn't (mustn't!) require a pointer to an
- /// associated Problem.
+ /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs
+ /// vector and returns the solution of the linear system.
  void solve(DoubleMatrixBase* const &matrix_pt,
             const DoubleVector &rhs,
             DoubleVector &solution)
@@ -300,8 +304,8 @@ class CG : public IterativeLinearSolver
      this->build_distribution(rhs.distribution_pt());
     }
 
-   //Call the helper function with no problem
-   this->solve_helper(matrix_pt,rhs,solution,0);
+   // Call the helper function
+   this->solve_helper(matrix_pt,rhs,solution);
   }
  
  /// \short Re-solve the system defined by the last assembled Jacobian
@@ -310,7 +314,7 @@ class CG : public IterativeLinearSolver
  void resolve(const DoubleVector &rhs, DoubleVector &result);
  
  /// Number of iterations taken 
- unsigned iterations() 
+ unsigned iterations() const
   {
    return Iterations;
   }
@@ -321,8 +325,7 @@ class CG : public IterativeLinearSolver
  /// General interface to solve function 
  void solve_helper(DoubleMatrixBase* const &matrix_pt,
                    const DoubleVector &rhs,
-                   DoubleVector &solution,
-                   Problem* problem_pt);
+                   DoubleVector &solution); 
 
  
  /// Cleanup data that's stored for resolve (if any has been stored)
@@ -408,14 +411,11 @@ class BiCGStab : public IterativeLinearSolver
  /// the problem's fully assembled Jacobian and residual vector.
  void solve(Problem* const &problem_pt, DoubleVector &result);
  
- /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs 
- /// vector and returns the solution of the linear system. Problem pointer 
- /// defaults to NULL and can be omitted in linear-algebra-type solves in which
- /// the preconditioner doesn't (mustn't!) require a pointer to an
- /// associated Problem.
+ /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs
+ /// vector and returns the solution of the linear system.
  void solve(DoubleMatrixBase* const &matrix_pt,
             const DoubleVector& rhs,
-            DoubleVector &solution)
+            DoubleVector &solution) 
  {
   // Store the matrix if required
   if ((Enable_resolve)&&(!Resolving))
@@ -440,8 +440,8 @@ class BiCGStab : public IterativeLinearSolver
    this->build_distribution(rhs.distribution_pt());
   }
 
-  //Call the helper function with no problem
-  this->solve_helper(matrix_pt,rhs,solution,0);
+  //Call the helper function
+  this->solve_helper(matrix_pt,rhs,solution);
  }
 
  /// \short Linear-algebra-type solver: Takes pointer to a matrix
@@ -463,7 +463,7 @@ class BiCGStab : public IterativeLinearSolver
  
 
  /// Number of iterations taken 
- unsigned iterations() 
+ unsigned iterations() const
   {
    return Iterations;
   }
@@ -474,8 +474,7 @@ class BiCGStab : public IterativeLinearSolver
   /// General interface to solve function 
  void solve_helper(DoubleMatrixBase* const &matrix_pt,
                    const DoubleVector &rhs,
-                   DoubleVector &solution,
-                   Problem* problem_pt);
+                   DoubleVector &solution);
  
  /// Cleanup data that's stored for resolve (if any has been stored)
  void clean_up_memory()
@@ -559,10 +558,7 @@ class GS : public IterativeLinearSolver
  void solve(Problem* const &problem_pt, DoubleVector &result);
  
  /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs
- /// vector and returns the solution of the linear system. Problem pointer
- /// defaults to NULL and can be omitted in linear-algebra-type solves in which
- /// the preconditioner doesn't (mustn't!) require a pointer to an
- /// associated Problem.
+ /// vector and returns the solution of the linear system.
  void solve(DoubleMatrixBase* const &matrix_pt,
             const DoubleVector &rhs,
             DoubleVector &solution)
@@ -580,8 +576,8 @@ class GS : public IterativeLinearSolver
     Matrix_can_be_deleted=false;
    }
   
-  //Call the helper function with no problem
-  this->solve_helper(matrix_pt,rhs,solution,0);
+  //Call the helper function
+  this->solve_helper(matrix_pt,rhs,solution);
  }
  
  
@@ -614,7 +610,7 @@ class GS : public IterativeLinearSolver
 
 
  /// Number of iterations taken 
- unsigned iterations() 
+ unsigned iterations()  const
   {
    return Iterations;
   }
@@ -625,9 +621,7 @@ class GS : public IterativeLinearSolver
   /// General interface to solve function 
  void solve_helper(DoubleMatrixBase* const &matrix_pt,
                    const DoubleVector &rhs,
-                   DoubleVector &solution,
-                   Problem* problem_pt);
- 
+                   DoubleVector &solution);
 
  /// Cleanup data that's stored for resolve (if any has been stored)
  void clean_up_memory()
@@ -710,10 +704,7 @@ class GMRES : public IterativeLinearSolver
  void solve(Problem* const &problem_pt, DoubleVector &result);
  
  /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs
- /// vector and returns the solution of the linear system. Problem pointer
- /// defaults to NULL and can be omitted in linear-algebra-type solves in which
- /// the preconditioner doesn't (mustn't!) require a pointer to an
- /// associated Problem.
+ /// vector and returns the solution of the linear system.
  void solve(DoubleMatrixBase* const &matrix_pt,
             const DoubleVector &rhs,
             DoubleVector &solution)
@@ -731,8 +722,8 @@ class GMRES : public IterativeLinearSolver
     Matrix_can_be_deleted=false;
    }
 
-  //Call the helper function with no problem
-  this->solve_helper(matrix_pt,rhs,solution,0);
+  // Call the helper function
+  this->solve_helper(matrix_pt,rhs,solution);
  }
  
  
@@ -752,7 +743,7 @@ class GMRES : public IterativeLinearSolver
               DoubleVector &result);
 
  /// Number of iterations taken 
- unsigned iterations() 
+ unsigned iterations() const 
   {
    return Iterations;
   }
@@ -789,8 +780,7 @@ class GMRES : public IterativeLinearSolver
  /// General interface to solve function 
  void solve_helper(DoubleMatrixBase* const &matrix_pt,
                    const DoubleVector &rhs,
-                   DoubleVector &solution,
-                   Problem* problem_pt);
+                   DoubleVector &solution);
  
  /// Cleanup data that's stored for resolve (if any has been stored)
  void clean_up_memory()

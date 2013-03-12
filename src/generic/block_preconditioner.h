@@ -1,31 +1,31 @@
 //LIC// ====================================================================
-//LIC// This file forms part of oomph-lib, the object-oriented, 
-//LIC// multi-physics finite-element library, available 
+//LIC// This file forms part of oomph-lib, the object-oriented,
+//LIC// multi-physics finite-element library, available
 //LIC// at http://www.oomph-lib.org.
-//LIC// 
+//LIC//
 //LIC//           Version 0.90. August 3, 2009.
-//LIC// 
+//LIC//
 //LIC// Copyright (C) 2006-2009 Matthias Heil and Andrew Hazel
-//LIC// 
+//LIC//
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
 //LIC// License as published by the Free Software Foundation; either
 //LIC// version 2.1 of the License, or (at your option) any later version.
-//LIC// 
+//LIC//
 //LIC// This library is distributed in the hope that it will be useful,
 //LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
 //LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 //LIC// Lesser General Public License for more details.
-//LIC// 
+//LIC//
 //LIC// You should have received a copy of the GNU Lesser General Public
 //LIC// License along with this library; if not, write to the Free Software
 //LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
 //LIC// 02110-1301  USA.
-//LIC// 
+//LIC//
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
-//LIC// 
+//LIC//
 //LIC//====================================================================
-//Include guards 
+//Include guards
 #ifndef OOMPH_BLOCK_PRECONDITION_HEADER
 #define OOMPH_BLOCK_PRECONDITION_HEADER
 
@@ -52,24 +52,24 @@ namespace oomph
  //============================================================================
  /// Block Preconditioner base class. The block structure of the
  /// overall problem is determined from the \c Mesh's constituent
- /// elements. Each constituent element must be block-preconditionable - i.e 
- /// must implement the \c GeneralisedElemens functions \c nblock_types() and 
+ /// elements. Each constituent element must be block-preconditionable - i.e
+ /// must implement the \c GeneralisedElemens functions \c nblock_types() and
  /// get_block_numbers_for_unknowns(...). A \c Problem can have several
  /// \c Meshes, but each \c Mesh can only contain a single type of element.
- /// The association between global degrees of freedom and their unique global 
- /// dof numbers is therefore based on information provided by the elements. 
+ /// The association between global degrees of freedom and their unique global
+ /// dof numbers is therefore based on information provided by the elements.
  /// \n\n
  /// By default each type of DOF is assumed to be unqiue type of block,
- /// but DOF types can be grouped together in a single block when 
+ /// but DOF types can be grouped together in a single block when
  /// block_setup(...) is called.
  /// \n\n
  /// This class can function in one of two ways. Either it acts as a
- /// stand-alone block preconditioner which computes and stores 
- /// the association between global degrees of freedom and their unique global 
- /// block numbers itself. Alternatively, the block preconditioner can act as 
- /// a subsidiary block preconditioner within a (larger) master block 
- /// preconditioner (pointed to by Master_block_preconditioner_pt). 
- /// The master block preconditioner 
+ /// stand-alone block preconditioner which computes and stores
+ /// the association between global degrees of freedom and their unique global
+ /// block numbers itself. Alternatively, the block preconditioner can act as
+ /// a subsidiary block preconditioner within a (larger) master block
+ /// preconditioner (pointed to by Master_block_preconditioner_pt).
+ /// The master block preconditioner
  /// must have an equal or greater number of block types. Examples
  /// are the FSI precondititioner which is the 3x3 "master block preconditioner"
  /// for the Navier-Stokes preconditioners which deals with the
@@ -78,1031 +78,1070 @@ namespace oomph
  /// lookup schemes. All block preconditioners compute and store their own
  /// optimised lookup schemes.
  /// \n\n
- /// In cases where a \c Problem contains elements of different element types 
- /// (e.g. fluid and solid elements in a fluid-structure interaction problem), 
- /// access to the elements of the same type must be provided via pointers to 
- /// (possibly auxiliary) \c Meshes that only contain elements of a single 
+ /// In cases where a \c Problem contains elements of different element types
+ /// (e.g. fluid and solid elements in a fluid-structure interaction problem),
+ /// access to the elements of the same type must be provided via pointers to
+ /// (possibly auxiliary) \c Meshes that only contain elements of a single
  /// type. The block preconditioner will then create global block
  /// numbers by concatenating the block types. Consider, e.g. a fluid-structure
- /// interaction problem in which the first \c Mesh contains (fluid) 
- /// elements whose degrees of freedom have been subdivided into 
- /// types "0" (the velocity, say) and "1" (the pressure say), while 
+ /// interaction problem in which the first \c Mesh contains (fluid)
+ /// elements whose degrees of freedom have been subdivided into
+ /// types "0" (the velocity, say) and "1" (the pressure say), while
  /// the second \c Mesh contains (solid) elements whose degrees of freedom
- /// are the nodal displacements, classified as its type "0". 
- /// The combined block preconditioner then has three "block types": 
+ /// are the nodal displacements, classified as its type "0".
+ /// The combined block preconditioner then has three "block types":
  /// "0": Fluid velocity, "1": Fluid pressure, "2": Solid nodal positions.
- /// NOTE: currently this preconditioner uses the same communicator as the 
+ /// NOTE: currently this preconditioner uses the same communicator as the
  /// underlying problem. We may need to change this in the future.
  //============================================================================
  template<typename MATRIX>
-  class BlockPreconditioner : public virtual Preconditioner
+ class BlockPreconditioner : public Preconditioner
+ {
+
+ public :
+
+  /// \short Constructor
+  BlockPreconditioner()
+   : Ndof_types_in_mesh(0), Block_distribution_pt(0),
+     Preconditioner_matrix_distribution_pt(0)
+  {
+   // Initially set the master block preconditioner pointer to zero
+   // indicating that this is stand-alone preconditioner that will
+   // set up its own block lookup schemes etc.
+   Master_block_preconditioner_pt = 0;
+
+   // Initialise number of rows in this block preconditioner.
+   // This information is maintained if used as subsidiary or
+   // stand-alone block preconditoner (in the latter case it
+   // obviously stores the number of rows within the subsidiary
+   // preconditioner
+   Nrow=0;
+
+   // Initialise number of different block types in this preconditioner.
+   // This information is maintained if used as subsidiary or
+   // stand-alone block preconditoner (in the latter case it
+   // obviously stores the number of rows within the subsidiary
+   // preconditioner
+   Nblock_types=0;
+   Ndof_types=0;
+  }
+
+  /// Destructor (empty)
+  virtual ~BlockPreconditioner()
+  {
+   this->clear_block_preconditioner_base();
+  }
+
+  /// Broken copy constructor
+  BlockPreconditioner(const BlockPreconditioner&)
+  {
+   BrokenCopy::broken_copy("BlockPreconditioner");
+  }
+
+  /// Broken assignment operator
+  void operator=(const BlockPreconditioner&)
+  {
+   BrokenCopy::broken_assign("BlockPreconditioner");
+  }
+
+  /// \short Access function to matrix_pt. Cast the matrix pointer to
+  /// MATRIX*, error check and return.
+  MATRIX* matrix_pt() const
+  {
+   MATRIX* m_pt = dynamic_cast<MATRIX*>(Preconditioner::matrix_pt());
+#ifdef PARANOID
+   if(m_pt == 0)
+    {
+     std::ostringstream error_msg;
+     error_msg << "Matrix is not correct type.";
+     throw OomphLibError(error_msg.str(),
+                         "BlockPreconditioner::matrix_pt()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+   return m_pt;
+  }
+
+
+  /// \short Function to turn this preconditioner into a
+  /// subsidiary preconditioner that operates within a bigger
+  /// "master block preconditioner (e.g. a Navier-Stokes 2x2 block
+  /// preconditioner dealing with the fluid sub-blocks within a
+  /// 3x3 FSI preconditioner. Once this is done the master block
+  /// preconditioner deals with the block setup etc. \n
+  /// The vector block_map must specify the block number in the
+  /// master preconditioner that corresponds to a block number in this
+  /// preconditioner.\n
+  /// \b 1. The length of the vector is used to determine the number of
+  /// blocks in this preconditioner therefore it must be correctly sized. \n
+  /// \b 2. block_setup(...) should be called in the master preconditioner
+  /// before this method is called. \n
+  /// \b 3. block_setup(...) should be called in the corresponding subsidiary
+  /// preconditioner after this method is called.
+  void turn_into_subsidiary_block_preconditioner
+  (BlockPreconditioner<MATRIX>* master_block_prec_pt,
+   Vector<unsigned>& block_map);
+
+  /// \short Specify the number of meshes required by this block
+  /// preconditioner.\n
+  /// Note: elements in different meshes correspond to different types
+  /// of DOF.
+  void set_nmesh(const unsigned& n)
+  {
+   Mesh_pt.resize(n,0);
+  }
+
+  /// Compatability layer for old preconditioners where problem and matrix
+  /// pointers were passed around as arguments.
+  void set_mesh(const unsigned& i, Problem* const in_problem_pt,
+                Mesh* mesh_pt)
+  {
+   ObsoleteCode::obsolete();
+   // The problem pointer isn't actually used in set_mesh so we can just
+   // call it normally.
+   set_mesh(i, mesh_pt);
+  }
+
+  /// Set the i-th mesh for this block preconditioner.
+  /// Note.\n
+  /// The method set_nmesh(...) must be called before this method
+  /// to specify the number of meshes.\n
+  /// Each mesh must only contain elements with the same number of
+  /// types of DOF.
+  void set_mesh(const unsigned& i, const Mesh* const mesh_pt)
+  {
+#ifdef PARANOID
+   // paranoid check that mesh i can be set
+   if (i >= nmesh())
+    {
+     std::ostringstream error_message;
+     error_message
+      << "The mesh pointer has space for " << nmesh()
+      << " meshes.\n" << "Cannot store a mesh at entry " << i << "\n"
+      << "Has set_nmesh(...) been called?";
+     throw OomphLibError(error_message.str(),
+                         "BlockPreconditioner::set_mesh(...)",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+   // store the mesh pt and n dof types
+   Mesh_pt[i]=mesh_pt;
+  }
+
+  /// \short Determine the size of the matrix blocks and setup the
+  /// lookup schemes relating the global degrees of freedom with
+  /// their "blocks" and their indices (row/column numbers) in those
+  /// blocks.\n
+  /// The distributions of the preconditioner and the blocks are
+  /// automatically specified (and assumed to be uniform) at this
+  /// stage.\n
+  /// This method should be used if each DOF type corresponds to a
+  /// unique block type.
+  virtual void block_setup();
+
+  /// \short Compatability layer for old preconditioners where problem and
+  /// matrix pointers were passed around as arguments. The problem pointer
+  /// is ignored.
+  virtual void block_setup(Problem* in_problem_pt, DoubleMatrixBase* in_matrix_pt)
+  {
+   ObsoleteCode::obsolete();
+   set_matrix_pt(in_matrix_pt);
+  }
+
+  /// \short Compatability layer for old preconditioners where problem and
+  /// matrix pointers were passed around as arguments. The problem pointer
+  /// is ignored.
+  void block_setup(Problem* in_problem_pt, DoubleMatrixBase* in_matrix_pt,
+                   Vector<unsigned>& dof_to_block_map)
+  {
+   ObsoleteCode::obsolete();
+
+   // We don't need to backup and restore the old matrix pointer in this
+   // function because this function is where it is set in the new object
+   // oriented code.
+   MATRIX* cast_matrix_pt = dynamic_cast<MATRIX*>(in_matrix_pt);
+   block_setup(cast_matrix_pt, dof_to_block_map);
+  }
+
+  /// \short Compatability layer for old preconditioners where problem and
+  /// matrix pointers were passed around as arguments.
+  void get_block(const unsigned& i, const unsigned& j,
+                 MATRIX* in_matrix_pt,
+                 MATRIX*& block_matrix_pt)
+  {
+   ObsoleteCode::obsolete();
+
+   MATRIX* backup_matrix_pt = matrix_pt();
+   MATRIX* cast_matrix_pt = dynamic_cast<MATRIX*>(in_matrix_pt);
+   set_matrix_pt(cast_matrix_pt);
+
+   get_block(i,j,block_matrix_pt);
+
+   if(backup_matrix_pt != 0) set_matrix_pt(backup_matrix_pt);
+  }
+
+  /// \short Compatability layer for old preconditioners where problem and matrix
+  /// pointers were passed around as arguments.
+  void get_blocks(MATRIX* in_matrix_pt,
+                  DenseMatrix<bool>& required_blocks,
+                  DenseMatrix<MATRIX*>& block_matrix_pt)
+  {
+   ObsoleteCode::obsolete();
+
+   MATRIX* backup_matrix_pt = matrix_pt();
+   MATRIX* cast_matrix_pt = dynamic_cast<MATRIX*>(in_matrix_pt);
+   set_matrix_pt(cast_matrix_pt);
+
+   get_blocks(required_blocks,block_matrix_pt);
+
+   if(backup_matrix_pt != 0) set_matrix_pt(backup_matrix_pt);
+  }
+
+  /// \short Get a block from a different matrix using the blocking scheme
+  /// that has already been set up.
+  void get_block_other_matrix(const unsigned& i, const unsigned& j,
+                              MATRIX* in_matrix_pt,
+                              MATRIX*& block_matrix_pt)
+  {
+   MATRIX* backup_matrix_pt = matrix_pt();
+   set_matrix_pt(in_matrix_pt);
+
+   get_block(i,j,block_matrix_pt);
+
+   set_matrix_pt(backup_matrix_pt);
+  }
+
+
+  /// \short Determine the size of the matrix blocks and setup the
+  /// lookup schemes relating the global degrees of freedom with
+  /// their "blocks" and their indices (row/column numbers) in those
+  /// blocks.\n
+  /// The distributions of the preconditioner and the blocks are
+  /// automatically specified (and assumed to be uniform) at this
+  /// stage.\n
+  /// This method should be used if each any block contains more than one
+  /// type of DOF. The argument vector dof_to_block_map should be of length
+  /// ndof. Each element should contain an integer indicating the block number
+  /// corresponding to that type of DOF.
+  void block_setup(Vector<unsigned>& dof_to_block_map);
+
+  /// \short Gets block (i,j) from the original matrix, pointed to by
+  /// Matrix_pt and returns it in block_matrix_pt
+  void get_block(const unsigned& i, const unsigned& j,
+                 MATRIX*& block_matrix_pt) const;
+
+  /// \short Get all the block matrices required by the block preconditioner.
+  /// Takes a pointer to a matrix of bools that indicate if a specified
+  /// sub-block is required for the preconditioning operation. Computes the
+  /// required block matrices, and stores pointers to them in the matrix
+  /// block_matrix_pt. If an entry in block_matrix_pt is equal to NULL on
+  /// return, that sub-block has not been requested and is therefore not
+  /// available.
+  void get_blocks(DenseMatrix<bool>& required_blocks,
+                  DenseMatrix<MATRIX*>& block_matrix_pt) const;
+
+  /// \short Assemble the block preconditioner as a single matrix. This is
+  /// useful because in some cases the block preconditioner cannot be applied
+  /// by linear-algebra-style block elimination, operating on
+  /// individual sub-blocks; this function takes the matrix
+  /// of block pointers and returns a single matrix containing all the
+  /// blocks of the matrix of blocks in a single matrix that can
+  /// be solved directly.
+  void build_preconditioner_matrix(DenseMatrix<MATRIX*>& block_matrix_pt,
+                                   MATRIX*& preconditioner_matrix) const;
+
+  /// \short Takes the naturally ordered vector and rearranges it into a
+  /// vector of sub vectors corresponding to the blocks, so s[b][i] contains
+  /// the i-th entry in the vector associated with block b.
+  /// Note: If the preconditioner is a subsidiary preconditioner then only the
+  /// sub-vectors associated with the blocks of the subsidiary preconditioner
+  /// will be included. Hence the length of v is master_nrow() whereas the
+  /// total length of the s s vectors is Nrow.
+  void get_block_vectors(const DoubleVector& v,
+                         Vector<DoubleVector >& s) const;
+
+  /// \short Takes the vector of block vectors, s, and copies its entries into
+  /// the naturally ordered vector, v. If this is a subsidiary block
+  /// preconditioner only those entries in v that are associated with its
+  /// blocks are affected.
+  void return_block_vectors(const Vector<DoubleVector >& s,
+                            DoubleVector& v) const;
+
+  /// \short Takes the naturally ordered vector, v, and extracts the n-th
+  /// block vector, b. Here n is the block number in the current
+  /// preconditioner.
+  void get_block_vector(const unsigned& n, const DoubleVector& v,
+                        DoubleVector& b) const;
+
+  /// \short Takes the n-th block ordered vector, b,  and copies its entries
+  /// to the appropriate entries in the naturally ordered vector, v.
+  /// Here n is the block number in the current block preconditioner.
+  /// If the preconditioner is a subsidiary block preconditioner
+  /// the other entries in v  that are not associated with it
+  /// are left alone
+  void return_block_vector(const unsigned& n,
+                           const DoubleVector& b,
+                           DoubleVector& v) const;
+
+  /// \short Given the naturally ordered vector, v, return
+  /// the vector rearranged in block order in w.
+  void get_block_ordered_preconditioner_vector(const DoubleVector& v,
+                                               DoubleVector& w) const;
+
+  /// \short Takes the naturally ordered vector, w, and reorders it in block
+  /// order. Reordered vector is returned in v. Note: If the preconditioner is
+  /// a subsidiary preconditioner then only the components of the vector
+  /// associated with the blocks of the subsidiary preconditioner will be
+  /// included. Hence the length of w is master_nrow() whereas that of the v
+  /// is
+  void return_block_ordered_preconditioner_vector(const DoubleVector& w,
+                                                  DoubleVector& v) const;
+
+  /// \short Return the number of block types.
+  unsigned nblock_types() const
+  {
+   return Nblock_types;
+  }
+
+  /// \short Return the total number of DOF types.
+  unsigned ndof_types() const
+  {
+   if (is_subsidiary_block_preconditioner())
+    {
+     return Ndof_types;
+    }
+   else
+    {
+     unsigned ndof = 0;
+     for (unsigned i = 0; i < nmesh(); i++)
+      {ndof += ndof_types_in_mesh(i);}
+     return ndof;
+    }
+  }
+
+  /// \short Access to i-th mesh (of the various meshes that contain block
+  /// preconditionable elements of the same type).
+  const Mesh* mesh_pt(const unsigned& i) const
+  {
+   const Mesh* temp = Mesh_pt[i];
+#ifdef PARANOID
+   if(temp == 0)
+    {
+     std::ostringstream error_msg;
+     error_msg << "Mesh pointer " << i
+               << " is null.";
+     throw OomphLibError(error_msg.str(),
+                         "BlockPreconditioner::mesh_pt",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+   return temp;
+  }
+
+  /// \short Return the number of meshes in Mesh_pt.
+  unsigned nmesh() const {return Mesh_pt.size();}
+
+  /// \short Return the block number corresponding to a global index i_dof.
+  int block_number(const unsigned& i_dof) const
+  {
+   int dn = dof_number(i_dof);
+   if (dn == -1)
+    {
+     return dn;
+    }
+   else
+    {
+     return Dof_number_to_block_number_lookup[dn];
+    }
+  }
+
+  /// \short Return the index in the block corresponding to a global block
+  /// number i_dof.
+  int index_in_block(const unsigned& i_dof) const
   {
 
-   public :
+   // the index in the dof block
+   unsigned index = index_in_dof(i_dof);
 
-    /// \short Constructor
-    BlockPreconditioner()
-      : Ndof_types_in_mesh(0), Matrix_pt(0), Problem_pt(0),
-	Block_distribution_pt(0), Preconditioner_matrix_distribution_pt(0)
-    {
-     // Initially set the master block preconditioner pointer to zero
-     // indicating that this is stand-alone preconditioner that will
-     // set up its own block lookup schemes etc.
-     Master_block_preconditioner_pt = 0;
-
-     // Initialise number of rows in this block preconditioner.
-     // This information is maintained if used as subsidiary or
-     // stand-alone block preconditoner (in the latter case it
-     // obviously stores the number of rows within the subsidiary
-     // preconditioner
-     Nrow=0;
-
-     // Initialise number of different block types in this preconditioner. 
-     // This information is maintained if used as subsidiary or
-     // stand-alone block preconditoner (in the latter case it
-     // obviously stores the number of rows within the subsidiary
-     // preconditioner 
-     Nblock_types=0;
-     Ndof_types=0;
-    }
-
-   /// Destructor (empty)
-   virtual ~BlockPreconditioner()
-    {   
-     this->clear_block_preconditioner_base();
-    }
-
-   /// Broken copy constructor
-   BlockPreconditioner(const BlockPreconditioner&)
-    {
-     BrokenCopy::broken_copy("BlockPreconditioner");
-    }
-
-   /// Broken assignment operator
-   void operator=(const BlockPreconditioner&)
-    {
-     BrokenCopy::broken_assign("BlockPreconditioner");
-    }
-
-    /// Access function for matrix pointer
-    MATRIX* matrix_pt() const {return Matrix_pt;}
-
-    /// \short Set the matrix pointer.
-    void set_matrix_pt(MATRIX* matrix_pt) {Matrix_pt = matrix_pt;}
-
-    /// Access function for problem pointer.
-    Problem* problem_pt() const {return Problem_pt;}
-
-    /// Non-const access function for problem pointer.
-    Problem* &problem_pt() {return Problem_pt;}
-
-   /// \short Function to turn this preconditioner into a 
-   /// subsidiary preconditioner that operates within a bigger
-   /// "master block preconditioner (e.g. a Navier-Stokes 2x2 block
-   /// preconditioner dealing with the fluid sub-blocks within a
-   /// 3x3 FSI preconditioner. Once this is done the master block
-   /// preconditioner deals with the block setup etc. \n
-   /// The vector block_map must specify the block number in the 
-   /// master preconditioner that corresponds to a block number in this 
-   /// preconditioner.\n 
-   /// \b 1. The length of the vector is used to determine the number of 
-   /// blocks in this preconditioner therefore it must be correctly sized. \n
-   /// \b 2. block_setup(...) should be called in the master preconditioner
-   /// before this method is called. \n
-   /// \b 3. block_setup(...) should be called in the corresponding subsidiary 
-   /// preconditioner after this method is called. 
-   void turn_into_subsidiary_block_preconditioner
-    (BlockPreconditioner<MATRIX>* master_block_prec_pt,
-     Vector<unsigned>& block_map);
-
-   /// \short Specify the number of meshes required by this block 
-   /// preconditioner.\n
-    /// Note: elements in different meshes correspond to different types
-   /// of DOF.
-   void set_nmesh(const unsigned& n)
-    {
-      Mesh_pt.resize(n,0);
-    }
-
-    /// Compatability layer for old preconditioners where problem and matrix
-    /// pointers were passed around as arguments.
-    void set_mesh(const unsigned& i, Problem* const in_problem_pt,
-		  Mesh* mesh_pt)
-    {
-      Problem* backup_prob_pt = problem_pt();
-      problem_pt() = in_problem_pt;
-      set_mesh(i, mesh_pt);
-      if(backup_prob_pt != 0) problem_pt() = backup_prob_pt;
-    }
-
-   /// Set the i-th mesh for this block preconditioner.
-   /// Note.\n
-   /// The method set_nmesh(...) must be called before this method
-   /// to specify the number of meshes.\n
-   /// Each mesh must only contain elements with the same number of 
-   /// types of DOF.
-    void set_mesh(const unsigned& i, Mesh* const mesh_pt)
-    {
-#ifdef PARANOID
-     // paranoid check that mesh i can be set
-      if (i >= nmesh())
-      {
-       std::ostringstream error_message;
-       error_message
-	    << "The mesh pointer has space for " << nmesh()
-	    << " meshes.\n" << "Cannot store a mesh at entry " << i << "\n"
-        << "Has set_nmesh(...) been called?";
-       throw OomphLibError(error_message.str(),
-                           "BlockPreconditioner::set_mesh(...)",
-                           OOMPH_EXCEPTION_LOCATION);      
-      }
-#endif
-
-      // store the mesh pt and n dof types
-      Mesh_pt[i]=mesh_pt;
-      }
-
-    /// \short Determine the size of the matrix blocks and setup the
-    /// lookup schemes relating the global degrees of freedom with
-    /// their "blocks" and their indices (row/column numbers) in those
-    /// blocks.\n
-    /// The distributions of the preconditioner and the blocks are
-    /// automatically specified (and assumed to be uniform) at this
-    /// stage.\n
-    /// This method should be used if each DOF type corresponds to a
-    /// unique block type.
-    virtual void block_setup(MATRIX* matrix_pt);
-
-    /// Compatability layer for old preconditioners where problem and matrix
-    /// pointers were passed around as arguments.
-    virtual void block_setup(Problem* in_problem_pt, DoubleMatrixBase* in_matrix_pt)
-        {
-      Problem* backup_prob_pt = problem_pt();
-      problem_pt() = in_problem_pt;
-      MATRIX* cast_matrix_pt = dynamic_cast<MATRIX*>(in_matrix_pt);
-      block_setup(cast_matrix_pt);
-      if(backup_prob_pt != 0) problem_pt() = backup_prob_pt;
-        }
-
-    /// Compatability layer for old preconditioners where problem and matrix
-    /// pointers were passed around as arguments.
-    void block_setup(Problem* in_problem_pt, DoubleMatrixBase* in_matrix_pt,
-		     Vector<unsigned>& dof_to_block_map)
-                  {
-      Problem* backup_prob_pt = problem_pt();
-      problem_pt() = in_problem_pt;
-
-      // We don't need to backup and restore the old matrix pointer in this
-      // function because this function is where it is set in the new object
-      // oriented code.
-      MATRIX* cast_matrix_pt = dynamic_cast<MATRIX*>(in_matrix_pt);
-      block_setup(cast_matrix_pt, dof_to_block_map);
-      if(backup_prob_pt != 0) problem_pt() = backup_prob_pt;
-          }
-
-    /// Compatability layer for old preconditioners where problem and matrix
-    /// pointers were passed around as arguments.
-    void get_block(const unsigned& i, const unsigned& j,
-		   MATRIX* in_matrix_pt,
-		   MATRIX*& block_matrix_pt)
-        {
-      MATRIX* backup_matrix_pt = matrix_pt();
-      MATRIX* cast_matrix_pt = dynamic_cast<MATRIX*>(in_matrix_pt);
-      set_matrix_pt(cast_matrix_pt);
-      get_block(i,j,block_matrix_pt);
-      if(backup_matrix_pt != 0) set_matrix_pt(backup_matrix_pt);
-      }
-
-    /// Compatability layer for old preconditioners where problem and matrix
-    /// pointers were passed around as arguments.
-    void get_blocks(MATRIX* in_matrix_pt,
-		    DenseMatrix<bool>& required_blocks,
-		    DenseMatrix<MATRIX*>& block_matrix_pt)
-    {
-      MATRIX* backup_matrix_pt = matrix_pt();
-      MATRIX* cast_matrix_pt = dynamic_cast<MATRIX*>(in_matrix_pt);
-      set_matrix_pt(cast_matrix_pt);
-      get_blocks(required_blocks,block_matrix_pt);
-      if(backup_matrix_pt != 0) set_matrix_pt(backup_matrix_pt);
-    }
-
-
-   /// \short Determine the size of the matrix blocks and setup the
-   /// lookup schemes relating the global degrees of freedom with
-   /// their "blocks" and their indices (row/column numbers) in those
-   /// blocks.\n
-   /// The distributions of the preconditioner and the blocks are
-   /// automatically specified (and assumed to be uniform) at this
-   /// stage.\n
-   /// This method should be used if each any block contains more than one
-   /// type of DOF. The argument vector dof_to_block_map should be of length
-   /// ndof. Each element should contain an integer indicating the block number
-   /// corresponding to that type of DOF.
-    void block_setup(MATRIX* matrix_pt,
-		     Vector<unsigned>& dof_to_block_map);
-
-   /// \short Gets block (i,j) from the original matrix, pointed to by
-    /// Matrix_pt and returns it in block_matrix_pt
-   void get_block(const unsigned& i, const unsigned& j, 
-		   MATRIX*& block_matrix_pt) const;
-
-   /// \short Get all the block matrices required by the block preconditioner.
-    /// Takes a pointer to a matrix of bools that indicate if a specified
-    /// sub-block is required for the preconditioning operation. Computes the
-    /// required block matrices, and stores pointers to them in the matrix
-    /// block_matrix_pt. If an entry in block_matrix_pt is equal to NULL on
-    /// return, that sub-block has not been requested and is therefore not
-    /// available.
-    void get_blocks(DenseMatrix<bool>& required_blocks,
-		    DenseMatrix<MATRIX*>& block_matrix_pt) const;
-
-   /// \short Assemble the block preconditioner as a single matrix. This is
-   /// useful because in some cases the block preconditioner cannot be applied
-   /// by linear-algebra-style block elimination, operating on
-   /// individual sub-blocks; this function takes the matrix
-   /// of block pointers and returns a single matrix containing all the
-   /// blocks of the matrix of blocks in a single matrix that can
-   /// be solved directly.
-   void build_preconditioner_matrix(DenseMatrix<MATRIX*>& block_matrix_pt,
-				     MATRIX*& preconditioner_matrix) const;
-
-   /// \short Takes the naturally ordered vector and rearranges it into a 
-   /// vector of sub vectors corresponding to the blocks, so s[b][i] contains
-   /// the i-th entry in the vector associated with block b.
-    /// Note: If the preconditioner is a subsidiary preconditioner then only the
-    /// sub-vectors associated with the blocks of the subsidiary preconditioner
-    /// will be included. Hence the length of v is master_nrow() whereas the
-    /// total length of the s s vectors is Nrow.
-   void get_block_vectors(const DoubleVector& v,
-			   Vector<DoubleVector >& s) const;
-
-    /// \short Takes the vector of block vectors, s, and copies its entries into
-    /// the naturally ordered vector, v. If this is a subsidiary block
-    /// preconditioner only those entries in v that are associated with its
-    /// blocks are affected.
-   void return_block_vectors(const Vector<DoubleVector >& s, 
-			      DoubleVector& v) const;
-
-    /// \short Takes the naturally ordered vector, v, and extracts the n-th
-    /// block vector, b. Here n is the block number in the current
-    /// preconditioner.
-   void get_block_vector(const unsigned& n, const DoubleVector& v, 
-			  DoubleVector& b) const;
-
-   /// \short Takes the n-th block ordered vector, b,  and copies its entries
-   /// to the appropriate entries in the naturally ordered vector, v.
-   /// Here n is the block number in the current block preconditioner.
-   /// If the preconditioner is a subsidiary block preconditioner
-   /// the other entries in v  that are not associated with it
-   /// are left alone
-   void return_block_vector(const unsigned& n, 
-                            const DoubleVector& b,
-			     DoubleVector& v) const;
-
-   /// \short Given the naturally ordered vector, v, return
-   /// the vector rearranged in block order in w.
-   void get_block_ordered_preconditioner_vector(const DoubleVector& v,
-						 DoubleVector& w) const;
-
-    /// \short Takes the naturally ordered vector, w, and reorders it in block
-    /// order. Reordered vector is returned in v. Note: If the preconditioner is
-    /// a subsidiary preconditioner then only the components of the vector
-    /// associated with the blocks of the subsidiary preconditioner will be
-    /// included. Hence the length of w is master_nrow() whereas that of the v
-    /// is
-   void return_block_ordered_preconditioner_vector(const DoubleVector& w, 
-						    DoubleVector& v) const;
-
-    /// \short Return the number of block types.
-   unsigned nblock_types() const
-    {
-     return Nblock_types;
-    }
-
-    /// \short Return the number of DOF types.
-   unsigned ndof_types() const
-    {
-      if (is_subsidiary_block_preconditioner())
-      {
-       return Ndof_types;
-      }
-     else
-      {
-       unsigned ndof = 0;
-	  for (unsigned i = 0; i < nmesh(); i++)
-        {
-	      if (mesh_pt(i)==0)
-		{
-		  std::ostringstream error_message;
-		  error_message << "Error: mesh_pt("<< i << ")=0 \n";
-		  throw OomphLibWarning(error_message.str(),
-					"BlockPreconditioner::block_setup",
-					OOMPH_EXCEPTION_LOCATION);
-		}
-	      ndof += ndof_types_in_mesh(i);
-        }
-       return ndof;
-      }
-    }
-
-    /// \short Access to i-th mesh (of the various meshes that contain block
-    /// preconditionable elements of the same type).
-    const Mesh* mesh_pt(const unsigned& i) const
-    {
-     return Mesh_pt[i];
-    }
-
-    /// \short Return the number of meshes in Mesh_pt.
-    unsigned nmesh() const {return Mesh_pt.size();}
-
-    /// \short Return the block number corresponding to a global index i_dof.
-   int block_number(const unsigned& i_dof) const
-    {
-     int dn = dof_number(i_dof);
-     if (dn == -1)
-      {
-       return dn;
-      }
-     else
-      {
-       return Dof_number_to_block_number_lookup[dn];
-      }
-    }
-
-    /// \short Return the index in the block corresponding to a global block
-    /// number i_dof.
-   int index_in_block(const unsigned& i_dof) const
+   // the dof block number
+   int dof_block_number = dof_number(i_dof);
+   if (dof_block_number >= 0)
     {
 
-     // the index in the dof block
-     unsigned index = index_in_dof(i_dof);
+     // the 'actual' block number
+     unsigned blk_number = block_number(i_dof);
 
-     // the dof block number
-     int dof_block_number = dof_number(i_dof);
-     if (dof_block_number >= 0)
+     // compute the index in the block
+     unsigned j = 0;
+     while (int(Block_number_to_dof_number_lookup[blk_number][j]) !=
+            dof_block_number)
       {
-
-       // the 'actual' block number
-       unsigned blk_number = block_number(i_dof);
-
-       // compute the index in the block
-       unsigned j = 0;
-       while (int(Block_number_to_dof_number_lookup[blk_number][j]) != 
-              dof_block_number)
-        {
-         index += 
-          dof_block_dimension
-          (Block_number_to_dof_number_lookup[blk_number][j]);
-         j++;
-        }
-
-       // and return
-       return index;
+       index +=
+        dof_block_dimension
+        (Block_number_to_dof_number_lookup[blk_number][j]);
+       j++;
       }
-     return -1;
-    }
 
-    /// \short Access function to the block distributions.
-   const LinearAlgebraDistribution*
-    block_distribution_pt(const unsigned b) const
+     // and return
+     return index;
+    }
+   return -1;
+  }
+
+  /// \short Access function to the block distributions.
+  const LinearAlgebraDistribution*
+  block_distribution_pt(const unsigned b) const
+  {
+   return Block_distribution_pt[b];
+  }
+
+  /// \short Access function to the distribution of the master
+  /// preconditioner. If this preconditioner does not have a master
+  /// preconditioner then the distribution of this preconditioner is returned.
+  const LinearAlgebraDistribution* master_distribution_pt() const
+  {
+   if (is_master_block_preconditioner())
     {
-     return Block_distribution_pt[b];
-    }
-
-    /// \short Access function to the distribution of the master
-    /// preconditioner. If this preconditioner does not have a master
-    /// preconditioner then the distribution of this preconditioner is returned.
-   const LinearAlgebraDistribution* master_distribution_pt() const
-    {
-      if (is_master_block_preconditioner())
-      {
-       return this->distribution_pt();
-      }
-     else
-      {
-       return Master_block_preconditioner_pt->master_distribution_pt();
-      }
-    }
-
-    /// \short Return the number of DOF types in mesh i.
-    unsigned ndof_types_in_mesh(const unsigned& i) const
-    {
-     // If we have calculated the value then return it. Otherwise get the mesh
-     // to calculate it.
-     if(Ndof_types_in_mesh.size() > 0)
-      {
-       return Ndof_types_in_mesh[i];
-      }
-     else
-      {
-       return mesh_pt(i)->ndof_types();
-      }
-    }
-
-    /// \short Return true if this preconditioner is a subsidiary
-    /// preconditioner.
-    bool is_subsidiary_block_preconditioner() const
-    {return (this->Master_block_preconditioner_pt != 0);}
-
-    /// \short Return true if this preconditioner is the master block
-    /// preconditioner.
-    bool is_master_block_preconditioner() const
-    {return (this->Master_block_preconditioner_pt == 0);}
-
-    /// \short Set the base part of the filename to output blocks to. If it is
-    /// set then all blocks will be output at the end of block_setup. If it is
-    /// left empty nothing will be output.
-    void set_block_output_to_files(const std::string& basefilename)
-    {Output_base_filename = basefilename;}
-
-    /// \short Turn off output of blocks (by clearing the basefilename string).
-    void disable_block_output_to_files()
-    {Output_base_filename.clear();}
-
-    /// \short Test if output of blocks is on or not.
-    bool block_output_on() const
-    {return Output_base_filename.size() > 0;}
-
-    /// Output a block to an output stream.
-    void output_block(const unsigned &i, const unsigned &j,
-		      std::ostream& outstream) const
-      {
-      MATRIX* block_matrix_pt = 0;
-      get_block(i,j,block_matrix_pt);
-      block_matrix_pt->sparse_indexed_output(outstream);
-      delete block_matrix_pt;
-    }
-
-    /// Output all blocks to numbered files. Called at the end of get blocks if
-    /// an output filename has been set.
-    void output_blocks_to_files(const std::string& basefilename,
-				const unsigned& precision = 8) const
-    {
-      unsigned nblocks = nblock_types();
-
-      for(unsigned i=0; i<nblocks; i++)
-	for(unsigned j=0; j<nblocks; j++)
-      {
-	    // Construct the filename.
-	    char filename[100];
-	    sprintf(filename, "%s_block_%u_%u", basefilename.c_str(), i, j);
-
-	    // Write out the block.
-	    std::ofstream some_file;
-	    some_file.open(filename);
-	    some_file.precision(precision);
-	    output_block(i,j,some_file);
-	    some_file.close();
-      }
-    }
-
-   /// \short A helper method to reduce the memory requirements of block 
-   /// preconditioners. Once the methods get_block(...), get_blocks(...)
-   /// and build_preconditioner_matrix(...) have been called in this and 
-   /// all subsidiary block preconditioners this method can be called to 
-    /// clean up.
-   void post_block_matrix_assembly_partial_clear()
-    {
-      if (is_master_block_preconditioner())
-      {
-       Index_in_dof_block_dense.clear();
-       Dof_number_dense.clear();
-#ifdef OOMPH_HAS_MPI
-       Index_in_dof_block_sparse.clear();
-       Dof_number_sparse.clear();
-       Global_index_sparse.clear();
-       Index_in_dof_block_sparse.clear();
-       Dof_number_sparse.clear();
-#endif
-       Dof_dimension.clear();
-      }
-     Ndof_in_block.clear();
-     Dof_number_to_block_number_lookup.clear();
-     Block_number_to_dof_number_lookup.clear();
-    }
-
-    /// \short Access function to the master block preconditioner pt.
-   Preconditioner* master_block_preconditioner_pt()
-    {
-#ifdef OOMPH_HAS_MPI
-      if (is_master_block_preconditioner())
-      {
-       std::ostringstream error_message;
-       error_message << "This block preconditioner does not have "
-                     << "a master preconditioner.";
-       throw OomphLibError(
-        error_message.str(),
-        "BlockPreconditioner::master_block_preconditioner_pt(...)",
-        OOMPH_EXCEPTION_LOCATION);
-      }
-#endif
-     return Master_block_preconditioner_pt;
-    }
-
-   /// \short Clears all BlockPreconditioner data. Called by the destructor
-   /// and the block_setup(...) methods
-   void clear_block_preconditioner_base()
-    {
-
-     // clear the Distributions
-     this->clear_distribution();
-     unsigned nblock = Block_distribution_pt.size();
-     for (unsigned b = 0; b < nblock; b++)
-      {
-       delete Block_distribution_pt[b];
-      }
-     Block_distribution_pt.resize(0);
-
-     // clear the global index
-     Global_index.clear();
-
-     // call the post block matrix assembly clear
-     this->post_block_matrix_assembly_partial_clear();
-
-#ifdef OOMPH_HAS_MPI
-     // storage if the matrix is distributed
-     unsigned nr = Rows_to_send_for_get_block.nrow();
-     unsigned nc = Rows_to_send_for_get_block.ncol();
-     for (unsigned p = 0; p < nc; p++)
-      {
-       delete[] Rows_to_send_for_get_ordered[p];
-       delete[] Rows_to_recv_for_get_ordered[p];
-       for (unsigned b = 0; b < nr; b++)
-        {
-         delete[] Rows_to_recv_for_get_block(b,p);
-         delete[] Rows_to_send_for_get_block(b,p);
-        }
-      }
-     Rows_to_recv_for_get_block.resize(0,0);
-     Nrows_to_recv_for_get_block.resize(0,0);
-     Rows_to_send_for_get_block.resize(0,0);
-     Nrows_to_send_for_get_block.resize(0,0);
-     Rows_to_recv_for_get_ordered.clear();
-     Nrows_to_recv_for_get_ordered.clear();
-     Rows_to_send_for_get_ordered.clear();
-     Nrows_to_send_for_get_ordered.clear();
-
-#endif
-
-     // zero
-      if (is_master_block_preconditioner())
-      {
-       Nrow = 0;
-       Ndof_types = 0;
-       Nblock_types = 0;
-      }
-
-     // delete the prec matrix dist pt
-     delete Preconditioner_matrix_distribution_pt;
-     Preconditioner_matrix_distribution_pt = 0;
-    }
-
-   /// \short debugging method to document the setup.\n
-   /// Should only be called after block_setup(...).
-   void document()
-    {
-     oomph_info << std::endl;
-     oomph_info << "===========================================" << std::endl; 
-     oomph_info << "Block Preconditioner Documentation" << std::endl
-                << std::endl;
-     oomph_info << "Number of DOF types: " << ndof_types() << std::endl;
-     oomph_info << "Number of block types: " << nblock_types() << std::endl;
-     oomph_info << std::endl;
-      if (is_subsidiary_block_preconditioner())
-      {
-       for (unsigned d = 0; d < Ndof_types; d++)
-        {
-         oomph_info << "Master DOF number " << d << " : "
-                    << this->master_dof_number(d) << std::endl;
-        }
-      }
-     oomph_info << std::endl;
-     for (unsigned b = 0; b < nblock_types(); b++)
-      {
-       oomph_info << "Block " << b << " DOF types:";
-       for (unsigned i = 0; i < Block_number_to_dof_number_lookup[b].size(); 
-            i++)
-        {
-         oomph_info << " " << Block_number_to_dof_number_lookup[b][i];
-        }
-       oomph_info << std::endl;
-      }
-     oomph_info << std::endl;
-     oomph_info << "Master block preconditioner distribution:" << std::endl;
-     oomph_info << *master_distribution_pt() << std::endl;
-     oomph_info << "Preconditioner matrix distribution:" << std::endl;
-     oomph_info << *preconditioner_matrix_distribution_pt() << std::endl;
-     for (unsigned b = 0; b < Nblock_types; b++)
-      {
-       oomph_info << "Block " << b << " distribution:" << std::endl;
-       oomph_info << *Block_distribution_pt[b] << std::endl;
-      }
-      if (is_master_block_preconditioner())
-      {
-       oomph_info << "First look-up row: " << this->first_lookup_row()
-                  << std::endl;
-       oomph_info << "Number of look-up rows: " 
-                  << this->nlookup_rows() << std::endl;
-      }
-     oomph_info << "===========================================" << std::endl; 
-     oomph_info << std::endl;
-    }
-
-    private:
-
-   /// \short Private helper function to check that every element in the block 
-   /// matrix (i,j) matches the corresponding element in the original matrix
-    void block_matrix_test(const unsigned& i,
-			   const unsigned& j,
-			   const MATRIX* block_matrix_pt) const;
-
-
-    /// Compatability layer for old preconditioners where problem and matrix
-    /// pointers were passed around as arguments.
-    void block_matrix_test(const MATRIX *in_matrix_pt,
-                          const unsigned& i,
-                          const unsigned& j,
-			   const MATRIX* block_matrix_pt)
-    {
-      MATRIX* backup_matrix_pt = matrix_pt();
-      MATRIX* cast_matrix_pt = dynamic_cast<MATRIX*>(in_matrix_pt);
-      set_matrix_pt(cast_matrix_pt);
-      block_matrix_test(i,j,block_matrix_pt);
-      if(backup_matrix_pt != 0) set_matrix_pt(backup_matrix_pt);
-    }
-
-
-    /// **No comment was on this function** I think it is some kind of binary
-    /// search in the vector vec for value el, it looks like it returns -1 for a
-    /// failure - David.
-    int get_index_of_element(const Vector<unsigned>& vec, const unsigned el) const
-   {
-    int lo = 0;
-    int hi = vec.size();
-    int mid = (hi+lo)/2;
-    while (vec[mid] != el)
-     {
-      if (vec[mid] < el) 
-       {
-        if (hi==mid) return -1;
-        lo = mid;
-       }
-      else 
-       {
-        if (lo==mid) return -1;
-        hi = mid;
-       }
-      mid = (hi+lo)/2;
-    }
-    return mid;
-   }
-
-    protected:
-
-    /// \short Return the number of the block associated with global unknown
-    /// i_dof. If this preconditioner is a subsidiary block preconditioner then
-    /// the block number in the subsidiary block preconditioner is returned. If
-    /// a particular global DOF is not associated with this preconditioner then
-    /// -1 is returned
-   int dof_number(const unsigned& i_dof) const
-    {
-
-      if (is_master_block_preconditioner())
-      {
-#ifdef OOMPH_HAS_MPI
-       unsigned first_row = this->distribution_pt()->first_row();
-       unsigned nrow_local = this->distribution_pt()->nrow_local();
-       unsigned last_row = first_row+nrow_local-1;
-       if (i_dof >= first_row && i_dof <= last_row)
-        {
-         return static_cast<int>(Dof_number_dense[i_dof-first_row]);
-        }
-       else
-        {
-         int index = this->get_index_of_element(Global_index_sparse,i_dof);
-         if (index >= 0)
-          {
-           return Dof_number_sparse[index];
-          }
-        }
-       // if we here we couldn't find the i_dof
-#ifdef PARANOID
-       std::ostringstream error_message;
-       error_message 
-        << "Requested dof_number(...) for global DOF " << i_dof << "\n"
-        << "cannot be found.\n";
-       throw OomphLibError(
-        error_message.str(),
-        "BlockPreconditioner::dof_number(...)",
-        OOMPH_EXCEPTION_LOCATION);
-#endif
-#else
-       return static_cast<int>(Dof_number_dense[i_dof]); 
-#endif
-      }
-     // else this preconditioner  is a subsidiary one, and its Block_number
-     // lookup schemes etc haven't been set up
-     else
-      {
-       // Block number in master prec
-       unsigned blk_num = Master_block_preconditioner_pt->dof_number(i_dof);
-
-       // Search through the Block_number_in_master_preconditioner for master
-       // block blk_num and return the block number in this preconditioner 
-       for (unsigned i = 0; i < this->ndof_types(); i++)
-        {
-         if (Dof_number_in_master_preconditioner[i] == blk_num)
-          {return static_cast<int>(i);}
-        }
-       // if the master block preconditioner number is not found return -1
-       return -1;
-      }
-
-     // Shouldn't get here
-     throw OomphLibError("Never get here\n",
-                         "BlockPreconditioner::dof_number(...)",
-                         OOMPH_EXCEPTION_LOCATION);
-     // Dummy return
-     return -1;
-    }
- 
-    /// \short Return the row/column number of global unknown i_dof within it's
-    /// block.
-   unsigned index_in_dof(const unsigned& i_dof) const
-    {
-      if (is_master_block_preconditioner())
-      {
-#ifdef OOMPH_HAS_MPI
-       unsigned first_row = this->distribution_pt()->first_row();
-       unsigned nrow_local = this->distribution_pt()->nrow_local();
-       unsigned last_row = first_row+nrow_local-1;
-       if (i_dof >= first_row && i_dof <= last_row)
-        {
-         return static_cast<int>(Index_in_dof_block_dense[i_dof-first_row]);
-        }
-       else
-        {
-         int index = this->get_index_of_element(Global_index_sparse,i_dof);
-         if (index >= 0)
-          {
-           return Index_in_dof_block_sparse[index];
-          }
-        }
-       // if we here we couldn't find the i_dof
-#ifdef PARANOID
-       std::ostringstream error_message;
-       error_message 
-        << "Requested index_in_dof(...) for global DOF " << i_dof << "\n"
-        << "cannot be found.\n";
-       throw OomphLibError(
-        error_message.str(),
-        "BlockPreconditioner::dof_number(...)",
-        OOMPH_EXCEPTION_LOCATION);
-#endif
-#else
-       return Index_in_dof_block_dense[i_dof];
-#endif
-      }
-     else
-      {
-       return Master_block_preconditioner_pt->index_in_dof(i_dof);
-      }
-
-     // Shouldn't get here
-     throw OomphLibError("Never get here\n",
-                         "BlockPreconditioner::index_in_dof(...)",
-                         OOMPH_EXCEPTION_LOCATION);
-     // Dummy return
-     return -1;
-    }
-
-    /// \short Return the number of degrees of freedom in block b. Note that if
-    /// this preconditioner acts as a subsidiary preconditioner then b refers
-    /// to the block number in the subsidiary preconditioner not the master
-    /// block preconditioner.
-    unsigned block_dimension(const unsigned& b) const
-    {
-      return Block_distribution_pt[b]->nrow();
-    }
-
-    /// \short Return the size of the dof "block" i, i.e. how many degrees of
-    /// freedom are associated with it. Note that if this preconditioner acts as
-    /// a subsidiary preconditioner, then i refers to the block number in the
-    /// subsidiary preconditioner not the master block preconditioner
-   unsigned dof_block_dimension(const unsigned& i) const
-    {
-
-      // I don't understand the difference between this function and
-      // block_dimension(...) but I'm not going to mess with it... David
-
-      if(is_master_block_preconditioner())
-      {
-       return Dof_dimension[i];
-      }
-     else
-      {
-       unsigned master_i = master_dof_number(i);
-       return Master_block_preconditioner_pt->dof_block_dimension(master_i);
-      }
-    }
-
-    /// \short Return the number of dofs (number of rows or columns) in the
-    /// overall problem. The prefix "master_" is sort of redundant when used as
-    /// a stand-alone block preconditioner but is required to avoid ambiguities.
-    /// The latter is stored (and maintained) separately for each specific block
-    /// preconditioner regardless of its role.
-    unsigned master_nrow() const
-    {
-      if (is_master_block_preconditioner())
-      {
-       return Nrow;
-      }
-     else
-      {
-       return (this->Master_block_preconditioner_pt->master_nrow());
-      }
-    }
-
-   /// \short Takes the block number within this preconditioner and returns the
-   /// corresponding block number in the master preconditioner. If this 
-   /// preconditioner does not have a master block preconditioner then the 
-   /// block number passed is returned
-   unsigned master_dof_number(const unsigned& b) const
-    {
-      if (is_master_block_preconditioner())
-       return b;
-     else
-       return Dof_number_in_master_preconditioner[b];
-      }
-
-   /// \short access function to the preconditioner matrix distribution pt
-   const LinearAlgebraDistribution*  
-    preconditioner_matrix_distribution_pt() const
-    {
-      if (is_master_block_preconditioner())
-       return Preconditioner_matrix_distribution_pt;
-      else
      return this->distribution_pt();
     }
+   else
+    {
+     return Master_block_preconditioner_pt->master_distribution_pt();
+    }
+  }
 
-    private:
+  /// \short Return the number of DOF types in mesh i.
+  unsigned ndof_types_in_mesh(const unsigned& i) const
+  {
+   // If we have calculated the value then return it. Otherwise get the mesh
+   // to calculate it.
+   if(Ndof_types_in_mesh.size() > 0)
+    {
+     return Ndof_types_in_mesh[i];
+    }
+   else
+    {
+     return mesh_pt(i)->ndof_types();
+    }
+  }
 
-    /// \short Vector of pointers to the meshes containing the elements used in
-    /// the block preconditioner. Const pointers to prevent modification of the
-    /// mesh by the preconditioner (this could be relaxed if needed).
-    Vector<const Mesh*> Mesh_pt;
-   
-    /// \short Storage for number of types of degree of freedom of the elements
-    /// in each mesh.
-   Vector<unsigned> Ndof_types_in_mesh;
+  /// \short Return true if this preconditioner is a subsidiary
+  /// preconditioner.
+  bool is_subsidiary_block_preconditioner() const
+  {return (this->Master_block_preconditioner_pt != 0);}
 
-    /// \short Number of dofs (# of rows or columns in the matrix) in this
-    /// preconditioner. Note that this information is maintained if used as a
-    /// subsidiary or stand-alone block preconditoner, in the latter case it
-    /// stores the number of rows within the subsidiary preconditioner.
-   unsigned Nrow; 
+  /// \short Return true if this preconditioner is the master block
+  /// preconditioner.
+  bool is_master_block_preconditioner() const
+  {return (this->Master_block_preconditioner_pt == 0);}
 
-    /// \short Number of different block types in this preconditioner. Note that
-    /// this information is maintained if used as a subsidiary or stand-alone
-    /// block preconditoner, in the latter case it stores the number of blocks
-    /// within the subsidiary preconditioner.
-   unsigned Nblock_types;
+  /// \short Set the base part of the filename to output blocks to. If it is
+  /// set then all blocks will be output at the end of block_setup. If it is
+  /// left empty nothing will be output.
+  void set_block_output_to_files(const std::string& basefilename)
+  {Output_base_filename = basefilename;}
 
-    ///\short Number of different dof types in this preconditioner. Note that
-    /// this information is maintained if used as a subsidiary or stand-alone
-    /// block preconditoner, in the latter case it stores the number of blocks
-    /// within the subsidiary preconditioner.
-   unsigned Ndof_types;
+  /// \short Turn off output of blocks (by clearing the basefilename string).
+  void disable_block_output_to_files()
+  {Output_base_filename.clear();}
 
-    /// \short If the block preconditioner is acting a subsidiary block
-    /// preconditioner then a pointer to the master preconditioner is stored
-    /// here. If the preconditioner does not have a master block preconditioner
-   /// then this  pointer remains null.
-   BlockPreconditioner<MATRIX>* Master_block_preconditioner_pt;
+  /// \short Test if output of blocks is on or not.
+  bool block_output_on() const
+  {return Output_base_filename.size() > 0;}
 
-    /// \short The map between the blocks in the preconditioner and the master
-    /// preconditioner. If there is no master preconditioner it remains empty.
-   Vector<unsigned> Dof_number_in_master_preconditioner;
+  /// Output a block to an output stream.
+  void output_block(const unsigned &i, const unsigned &j,
+                    std::ostream& outstream) const
+  {
+   MATRIX* block_matrix_pt = 0;
+   get_block(i,j,block_matrix_pt);
+   block_matrix_pt->sparse_indexed_output(outstream);
+   delete block_matrix_pt;
+  }
 
-    /// \short **This was uncommented** Presumably a non-distributed analogue of
-    /// Index_in_dof_block_sparse.
-   Vector<unsigned> Index_in_dof_block_dense;
+  /// Output all blocks to numbered files. Called at the end of get blocks if
+  /// an output filename has been set.
+  void output_blocks_to_files(const std::string& basefilename,
+                              const unsigned& precision = 8) const
+  {
+   unsigned nblocks = nblock_types();
 
-    /// \short Vector to store the mapping from the global dof number to its
-    /// block. Empty if this preconditioner has a master preconditioner, in this
-    /// case the information is obtained from the master preconditioner.
-   Vector<unsigned> Dof_number_dense;
+   for(unsigned i=0; i<nblocks; i++)
+    for(unsigned j=0; j<nblocks; j++)
+     {
+      // Construct the filename.
+      std::string filename(basefilename + "_block_"
+                           + StringConversion::to_string(i)
+                           + "_" + StringConversion::to_string(j));
+
+      // Write out the block.
+      std::ofstream some_file;
+      some_file.open(filename.c_str());
+      some_file.precision(precision);
+      output_block(i,j,some_file);
+      some_file.close();
+     }
+  }
+
+  /// \short A helper method to reduce the memory requirements of block
+  /// preconditioners. Once the methods get_block(...), get_blocks(...)
+  /// and build_preconditioner_matrix(...) have been called in this and
+  /// all subsidiary block preconditioners this method can be called to
+  /// clean up.
+  void post_block_matrix_assembly_partial_clear()
+  {
+   if (is_master_block_preconditioner())
+    {
+     Index_in_dof_block_dense.clear();
+     Dof_number_dense.clear();
+#ifdef OOMPH_HAS_MPI
+     Index_in_dof_block_sparse.clear();
+     Dof_number_sparse.clear();
+     Global_index_sparse.clear();
+     Index_in_dof_block_sparse.clear();
+     Dof_number_sparse.clear();
+#endif
+     Dof_dimension.clear();
+    }
+   Ndof_in_block.clear();
+   Dof_number_to_block_number_lookup.clear();
+   Block_number_to_dof_number_lookup.clear();
+  }
+
+  /// \short Access function to the master block preconditioner pt.
+  Preconditioner* master_block_preconditioner_pt()
+  {
+#ifdef OOMPH_HAS_MPI
+   if (is_master_block_preconditioner())
+    {
+     std::ostringstream error_message;
+     error_message << "This block preconditioner does not have "
+                   << "a master preconditioner.";
+     throw OomphLibError(
+                         error_message.str(),
+                         "BlockPreconditioner::master_block_preconditioner_pt(...)",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+   return Master_block_preconditioner_pt;
+  }
+
+  /// \short Clears all BlockPreconditioner data. Called by the destructor
+  /// and the block_setup(...) methods
+  void clear_block_preconditioner_base()
+  {
+
+   // clear the Distributions
+   this->clear_distribution();
+   unsigned nblock = Block_distribution_pt.size();
+   for (unsigned b = 0; b < nblock; b++)
+    {
+     delete Block_distribution_pt[b];
+    }
+   Block_distribution_pt.resize(0);
+
+   // clear the global index
+   Global_index.clear();
+
+   // call the post block matrix assembly clear
+   this->post_block_matrix_assembly_partial_clear();
+
+#ifdef OOMPH_HAS_MPI
+   // storage if the matrix is distributed
+   unsigned nr = Rows_to_send_for_get_block.nrow();
+   unsigned nc = Rows_to_send_for_get_block.ncol();
+   for (unsigned p = 0; p < nc; p++)
+    {
+     delete[] Rows_to_send_for_get_ordered[p];
+     delete[] Rows_to_recv_for_get_ordered[p];
+     for (unsigned b = 0; b < nr; b++)
+      {
+       delete[] Rows_to_recv_for_get_block(b,p);
+       delete[] Rows_to_send_for_get_block(b,p);
+      }
+    }
+   Rows_to_recv_for_get_block.resize(0,0);
+   Nrows_to_recv_for_get_block.resize(0,0);
+   Rows_to_send_for_get_block.resize(0,0);
+   Nrows_to_send_for_get_block.resize(0,0);
+   Rows_to_recv_for_get_ordered.clear();
+   Nrows_to_recv_for_get_ordered.clear();
+   Rows_to_send_for_get_ordered.clear();
+   Nrows_to_send_for_get_ordered.clear();
+
+#endif
+
+   // zero
+   if (is_master_block_preconditioner())
+    {
+     Nrow = 0;
+     Ndof_types = 0;
+     Nblock_types = 0;
+    }
+
+   // delete the prec matrix dist pt
+   delete Preconditioner_matrix_distribution_pt;
+   Preconditioner_matrix_distribution_pt = 0;
+  }
+
+  /// \short debugging method to document the setup.\n
+  /// Should only be called after block_setup(...).
+  void document()
+  {
+   oomph_info << std::endl;
+   oomph_info << "===========================================" << std::endl;
+   oomph_info << "Block Preconditioner Documentation" << std::endl
+              << std::endl;
+   oomph_info << "Number of DOF types: " << ndof_types() << std::endl;
+   oomph_info << "Number of block types: " << nblock_types() << std::endl;
+   oomph_info << std::endl;
+   if (is_subsidiary_block_preconditioner())
+    {
+     for (unsigned d = 0; d < Ndof_types; d++)
+      {
+       oomph_info << "Master DOF number " << d << " : "
+                  << this->master_dof_number(d) << std::endl;
+      }
+    }
+   oomph_info << std::endl;
+   for (unsigned b = 0; b < nblock_types(); b++)
+    {
+     oomph_info << "Block " << b << " DOF types:";
+     for (unsigned i = 0; i < Block_number_to_dof_number_lookup[b].size();
+          i++)
+      {
+       oomph_info << " " << Block_number_to_dof_number_lookup[b][i];
+      }
+     oomph_info << std::endl;
+    }
+   oomph_info << std::endl;
+   oomph_info << "Master block preconditioner distribution:" << std::endl;
+   oomph_info << *master_distribution_pt() << std::endl;
+   oomph_info << "Preconditioner matrix distribution:" << std::endl;
+   oomph_info << *preconditioner_matrix_distribution_pt() << std::endl;
+   for (unsigned b = 0; b < Nblock_types; b++)
+    {
+     oomph_info << "Block " << b << " distribution:" << std::endl;
+     oomph_info << *Block_distribution_pt[b] << std::endl;
+    }
+   if (is_master_block_preconditioner())
+    {
+     oomph_info << "First look-up row: " << this->first_lookup_row()
+                << std::endl;
+     oomph_info << "Number of look-up rows: "
+                << this->nlookup_rows() << std::endl;
+    }
+   oomph_info << "===========================================" << std::endl;
+   oomph_info << std::endl;
+  }
+
+ private:
+
+  /// \short Private helper function to check that every element in the block
+  /// matrix (i,j) matches the corresponding element in the original matrix
+  void block_matrix_test(const unsigned& i,
+                         const unsigned& j,
+                         const MATRIX* block_matrix_pt) const;
+
+
+  /// Compatability layer for old preconditioners where problem and matrix
+  /// pointers were passed around as arguments.
+  void block_matrix_test(const MATRIX *in_matrix_pt,
+                         const unsigned& i,
+                         const unsigned& j,
+                         const MATRIX* block_matrix_pt)
+  {
+   ObsoleteCode::obsolete();
+
+   MATRIX* backup_matrix_pt = matrix_pt();
+   MATRIX* cast_matrix_pt = dynamic_cast<MATRIX*>(in_matrix_pt);
+   set_matrix_pt(cast_matrix_pt);
+   block_matrix_test(i,j,block_matrix_pt);
+   if(backup_matrix_pt != 0) set_matrix_pt(backup_matrix_pt);
+  }
+
+
+  /// **No comment was on this function** I think it is some kind of binary
+  /// search in the vector vec for value el, it looks like it returns -1 for a
+  /// failure - David.
+  int get_index_of_element(const Vector<unsigned>& vec, const unsigned el) const
+  {
+   int lo = 0;
+   int hi = vec.size();
+   int mid = (hi+lo)/2;
+   while (vec[mid] != el)
+    {
+     if (vec[mid] < el)
+      {
+       if (hi==mid) return -1;
+       lo = mid;
+      }
+     else
+      {
+       if (lo==mid) return -1;
+       hi = mid;
+      }
+     mid = (hi+lo)/2;
+    }
+   return mid;
+  }
+
+ protected:
+
+  /// \short Check if any of the meshes are distributed. This is equivalent
+  /// to problem.distributed() and is used as a replacement.
+  bool any_mesh_distributed() const
+  {
+#ifdef OOMPH_HAS_MPI
+   // is_mesh_distributed() is only available with MPI
+   for(unsigned i=0, n=nmesh(); i<n; i++)
+    {
+     if(mesh_pt(i)->is_mesh_distributed()) { return true; }
+    }
+#endif
+   return false;
+  }
+
+  /// \short Return the number of the block associated with global unknown
+  /// i_dof. If this preconditioner is a subsidiary block preconditioner then
+  /// the block number in the subsidiary block preconditioner is returned. If
+  /// a particular global DOF is not associated with this preconditioner then
+  /// -1 is returned
+  int dof_number(const unsigned& i_dof) const
+  {
+
+   if (is_master_block_preconditioner())
+    {
+#ifdef OOMPH_HAS_MPI
+     unsigned first_row = this->distribution_pt()->first_row();
+     unsigned nrow_local = this->distribution_pt()->nrow_local();
+     unsigned last_row = first_row+nrow_local-1;
+     if (i_dof >= first_row && i_dof <= last_row)
+      {
+       return static_cast<int>(Dof_number_dense[i_dof-first_row]);
+      }
+     else
+      {
+       int index = this->get_index_of_element(Global_index_sparse,i_dof);
+       if (index >= 0)
+        {
+         return Dof_number_sparse[index];
+        }
+      }
+     // if we here we couldn't find the i_dof
+#ifdef PARANOID
+     std::ostringstream error_message;
+     error_message
+      << "Requested dof_number(...) for global DOF " << i_dof << "\n"
+      << "cannot be found.\n";
+     throw OomphLibError(
+                         error_message.str(),
+                         "BlockPreconditioner::dof_number(...)",
+                         OOMPH_EXCEPTION_LOCATION);
+#endif
+#else
+     return static_cast<int>(Dof_number_dense[i_dof]);
+#endif
+    }
+   // else this preconditioner  is a subsidiary one, and its Block_number
+   // lookup schemes etc haven't been set up
+   else
+    {
+     // Block number in master prec
+     unsigned blk_num = Master_block_preconditioner_pt->dof_number(i_dof);
+
+     // Search through the Block_number_in_master_preconditioner for master
+     // block blk_num and return the block number in this preconditioner
+     for (unsigned i = 0; i < this->ndof_types(); i++)
+      {
+       if (Dof_number_in_master_preconditioner[i] == blk_num)
+        {return static_cast<int>(i);}
+      }
+     // if the master block preconditioner number is not found return -1
+     return -1;
+    }
+
+   // Shouldn't get here
+   throw OomphLibError("Never get here\n",
+                       "BlockPreconditioner::dof_number(...)",
+                       OOMPH_EXCEPTION_LOCATION);
+   // Dummy return
+   return -1;
+  }
+
+  /// \short Return the row/column number of global unknown i_dof within it's
+  /// block.
+  unsigned index_in_dof(const unsigned& i_dof) const
+  {
+   if (is_master_block_preconditioner())
+    {
+#ifdef OOMPH_HAS_MPI
+     unsigned first_row = this->distribution_pt()->first_row();
+     unsigned nrow_local = this->distribution_pt()->nrow_local();
+     unsigned last_row = first_row+nrow_local-1;
+     if (i_dof >= first_row && i_dof <= last_row)
+      {
+       return static_cast<int>(Index_in_dof_block_dense[i_dof-first_row]);
+      }
+     else
+      {
+       int index = this->get_index_of_element(Global_index_sparse,i_dof);
+       if (index >= 0)
+        {
+         return Index_in_dof_block_sparse[index];
+        }
+      }
+     // if we here we couldn't find the i_dof
+#ifdef PARANOID
+     std::ostringstream error_message;
+     error_message
+      << "Requested index_in_dof(...) for global DOF " << i_dof << "\n"
+      << "cannot be found.\n";
+     throw OomphLibError(
+                         error_message.str(),
+                         "BlockPreconditioner::dof_number(...)",
+                         OOMPH_EXCEPTION_LOCATION);
+#endif
+#else
+     return Index_in_dof_block_dense[i_dof];
+#endif
+    }
+   else
+    {
+     return Master_block_preconditioner_pt->index_in_dof(i_dof);
+    }
+
+   // Shouldn't get here
+   throw OomphLibError("Never get here\n",
+                       "BlockPreconditioner::index_in_dof(...)",
+                       OOMPH_EXCEPTION_LOCATION);
+   // Dummy return
+   return -1;
+  }
+
+  /// \short Return the number of degrees of freedom in block b. Note that if
+  /// this preconditioner acts as a subsidiary preconditioner then b refers
+  /// to the block number in the subsidiary preconditioner not the master
+  /// block preconditioner.
+  unsigned block_dimension(const unsigned& b) const
+  {
+   return Block_distribution_pt[b]->nrow();
+  }
+
+  /// \short Return the size of the dof "block" i, i.e. how many degrees of
+  /// freedom are associated with it. Note that if this preconditioner acts as
+  /// a subsidiary preconditioner, then i refers to the block number in the
+  /// subsidiary preconditioner not the master block preconditioner
+  unsigned dof_block_dimension(const unsigned& i) const
+  {
+
+   // I don't understand the difference between this function and
+   // block_dimension(...) but I'm not going to mess with it... David
+
+   if(is_master_block_preconditioner())
+    {
+     return Dof_dimension[i];
+    }
+   else
+    {
+     unsigned master_i = master_dof_number(i);
+     return Master_block_preconditioner_pt->dof_block_dimension(master_i);
+    }
+  }
+
+  /// \short Return the number of dofs (number of rows or columns) in the
+  /// overall problem. The prefix "master_" is sort of redundant when used as
+  /// a stand-alone block preconditioner but is required to avoid ambiguities.
+  /// The latter is stored (and maintained) separately for each specific block
+  /// preconditioner regardless of its role.
+  unsigned master_nrow() const
+  {
+   if (is_master_block_preconditioner())
+    {
+     return Nrow;
+    }
+   else
+    {
+     return (this->Master_block_preconditioner_pt->master_nrow());
+    }
+  }
+
+  /// \short Takes the block number within this preconditioner and returns the
+  /// corresponding block number in the master preconditioner. If this
+  /// preconditioner does not have a master block preconditioner then the
+  /// block number passed is returned
+  unsigned master_dof_number(const unsigned& b) const
+  {
+   if (is_master_block_preconditioner())
+    return b;
+   else
+    return Dof_number_in_master_preconditioner[b];
+  }
+
+  /// \short access function to the preconditioner matrix distribution pt
+  const LinearAlgebraDistribution*
+  preconditioner_matrix_distribution_pt() const
+  {
+   if (is_master_block_preconditioner())
+    return Preconditioner_matrix_distribution_pt;
+   else
+    return this->distribution_pt();
+  }
+
+ private:
+
+  /// \short Vector of pointers to the meshes containing the elements used in
+  /// the block preconditioner. Const pointers to prevent modification of the
+  /// mesh by the preconditioner (this could be relaxed if needed).
+  Vector<const Mesh*> Mesh_pt;
+
+  /// \short Storage for number of types of degree of freedom of the elements
+  /// in each mesh.
+  Vector<unsigned> Ndof_types_in_mesh;
+
+  /// \short Number of dofs (# of rows or columns in the matrix) in this
+  /// preconditioner. Note that this information is maintained if used as a
+  /// subsidiary or stand-alone block preconditoner, in the latter case it
+  /// stores the number of rows within the subsidiary preconditioner.
+  unsigned Nrow;
+
+  /// \short Number of different block types in this preconditioner. Note that
+  /// this information is maintained if used as a subsidiary or stand-alone
+  /// block preconditoner, in the latter case it stores the number of blocks
+  /// within the subsidiary preconditioner.
+  unsigned Nblock_types;
+
+  ///\short Number of different dof types in this preconditioner. Note that
+  /// this information is maintained if used as a subsidiary or stand-alone
+  /// block preconditoner, in the latter case it stores the number of blocks
+  /// within the subsidiary preconditioner.
+  unsigned Ndof_types;
+
+  /// \short If the block preconditioner is acting a subsidiary block
+  /// preconditioner then a pointer to the master preconditioner is stored
+  /// here. If the preconditioner does not have a master block preconditioner
+  /// then this  pointer remains null.
+  BlockPreconditioner<MATRIX>* Master_block_preconditioner_pt;
+
+  /// \short The map between the blocks in the preconditioner and the master
+  /// preconditioner. If there is no master preconditioner it remains empty.
+  Vector<unsigned> Dof_number_in_master_preconditioner;
+
+  /// \short **This was uncommented** Presumably a non-distributed analogue of
+  /// Index_in_dof_block_sparse.
+  Vector<unsigned> Index_in_dof_block_dense;
+
+  /// \short Vector to store the mapping from the global dof number to its
+  /// block. Empty if this preconditioner has a master preconditioner, in this
+  /// case the information is obtained from the master preconditioner.
+  Vector<unsigned> Dof_number_dense;
 
 #ifdef OOMPH_HAS_MPI
 
-    // The following three vectors store data on the matrix rows/matrix
-    // columns/dofs (the three are equivalent) that are not on this processor.
+  // The following three vectors store data on the matrix rows/matrix
+  // columns/dofs (the three are equivalent) that are not on this processor.
 
-    /// \short For global indices outside of the range this->first_row()
-   /// to this->first_row()+this->nrow_local(), the Index_in_dof_block
-   /// and Dof_number are stored sparsely in the vectors:
-   /// + Index_in_dof_block_sparse;
-   /// + Dof_number_sparse;
-   /// The corresponding global indices are stored in this vector.
-   Vector<unsigned> Global_index_sparse;
-   
-    /// \short Vector to store the mapping from the global dof number to the
-    /// index (row/colum number) within its block (empty if this preconditioner
-    /// has a master preconditioner as this information is obtained from the
-    /// master preconditioner). Sparse version: for global indices outside of the
-    /// range this->first_row() to this->first_row()+this->nrow_local(). The
-    /// global index of an element in this vector is defined in
-   /// Global_index_sparse.
-   Vector<unsigned> Index_in_dof_block_sparse;
-   
-    /// \short Vector to store the mapping from the global dof number to its
-    /// block (empty if this preconditioner has a master preconditioner as this
-    /// information is obtained from the master preconditioner). Sparse
-    /// version: for global indices outside of the range this->first_row() to
-    /// this->first_row()+this->nrow_local(). The global index of an element in
-    /// this vector is defined in Global_index_sparse.
-   Vector<unsigned> Dof_number_sparse;
+  /// \short For global indices outside of the range this->first_row()
+  /// to this->first_row()+this->nrow_local(), the Index_in_dof_block
+  /// and Dof_number are stored sparsely in the vectors:
+  /// + Index_in_dof_block_sparse;
+  /// + Dof_number_sparse;
+  /// The corresponding global indices are stored in this vector.
+  Vector<unsigned> Global_index_sparse;
+
+  /// \short Vector to store the mapping from the global dof number to the
+  /// index (row/colum number) within its block (empty if this preconditioner
+  /// has a master preconditioner as this information is obtained from the
+  /// master preconditioner). Sparse version: for global indices outside of the
+  /// range this->first_row() to this->first_row()+this->nrow_local(). The
+  /// global index of an element in this vector is defined in
+  /// Global_index_sparse.
+  Vector<unsigned> Index_in_dof_block_sparse;
+
+  /// \short Vector to store the mapping from the global dof number to its
+  /// block (empty if this preconditioner has a master preconditioner as this
+  /// information is obtained from the master preconditioner). Sparse
+  /// version: for global indices outside of the range this->first_row() to
+  /// this->first_row()+this->nrow_local(). The global index of an element in
+  /// this vector is defined in Global_index_sparse.
+  Vector<unsigned> Dof_number_sparse;
 #endif
 
-   /// \short Vector containing the size of each block, i.e. the number of
-   /// global dofs associated with it. (Empty if this preconditioner has a 
-   /// master preconditioner as this information is obtain from the master 
-    /// preconditioner.)
-   Vector<unsigned> Dof_dimension;
+  /// \short Vector containing the size of each block, i.e. the number of
+  /// global dofs associated with it. (Empty if this preconditioner has a
+  /// master preconditioner as this information is obtain from the master
+  /// preconditioner.)
+  Vector<unsigned> Dof_dimension;
 
-    /// \short Vectors of vectors for the mapping from block number and block
-    /// row to global row number. Empty if this preconditioner has a master
-    /// preconditioner as this information is obtain from the master
-    /// preconditioner.
-   Vector<Vector<unsigned> > Global_index;
+  /// \short Vectors of vectors for the mapping from block number and block
+  /// row to global row number. Empty if this preconditioner has a master
+  /// preconditioner as this information is obtain from the master
+  /// preconditioner.
+  Vector<Vector<unsigned> > Global_index;
 
-    /// \short Vector of vectors to store the mapping from block number to the
-    /// dof number (each element could be a vector because we allow multiple
-    /// dofs types in a single block).
-   Vector<Vector<unsigned> > Block_number_to_dof_number_lookup;
+  /// \short Vector of vectors to store the mapping from block number to the
+  /// dof number (each element could be a vector because we allow multiple
+  /// dofs types in a single block).
+  Vector<Vector<unsigned> > Block_number_to_dof_number_lookup;
 
-    /// \short Vector to the mapping from dof number to block number.
-   Vector<unsigned> Dof_number_to_block_number_lookup;
+  /// \short Vector to the mapping from dof number to block number.
+  Vector<unsigned> Dof_number_to_block_number_lookup;
 
-    /// \short Number of types of degree of freedom associated with each block.
-   Vector<unsigned> Ndof_in_block;
+  /// \short Number of types of degree of freedom associated with each block.
+  Vector<unsigned> Ndof_in_block;
 
-    /// \short A pointer to the matrix we are preconditioning.
-    MATRIX* Matrix_pt;
-
-    /// \short A pointer to the underlying problem.
-   Problem* Problem_pt;
-
-    /// \short Storage for the default distribution for each block.
-   Vector<LinearAlgebraDistribution*> Block_distribution_pt;
+  /// \short Storage for the default distribution for each block.
+  Vector<LinearAlgebraDistribution*> Block_distribution_pt;
 
 #ifdef OOMPH_HAS_MPI
-    /// \short The global rows to be sent of block b to processor p (matrix
-    /// indexed [b][p]).
-   DenseMatrix<int*> Rows_to_send_for_get_block;
+  /// \short The global rows to be sent of block b to processor p (matrix
+  /// indexed [b][p]).
+  DenseMatrix<int*> Rows_to_send_for_get_block;
 
-    /// \short The number of global rows to be sent of block b to processor p
-    /// (matrix indexed [b][p]).
-   DenseMatrix<unsigned> Nrows_to_send_for_get_block;
+  /// \short The number of global rows to be sent of block b to processor p
+  /// (matrix indexed [b][p]).
+  DenseMatrix<unsigned> Nrows_to_send_for_get_block;
 
-    /// \short The block rows to be received from processor p for block b
-    /// (matrix indexed [b][p]).
-   DenseMatrix<int*> Rows_to_recv_for_get_block;
+  /// \short The block rows to be received from processor p for block b
+  /// (matrix indexed [b][p]).
+  DenseMatrix<int*> Rows_to_recv_for_get_block;
 
-    /// \short The number of block rows to be received from processor p for
-    /// block b (matrix indexed [b][p]).
-   DenseMatrix<unsigned> Nrows_to_recv_for_get_block;
+  /// \short The number of block rows to be received from processor p for
+  /// block b (matrix indexed [b][p]).
+  DenseMatrix<unsigned> Nrows_to_recv_for_get_block;
 
-    /// \short The global rows to be sent to processor p for
-    /// get_block_ordered_... type methods.
-   Vector<int*> Rows_to_send_for_get_ordered;
+  /// \short The global rows to be sent to processor p for
+  /// get_block_ordered_... type methods.
+  Vector<int*> Rows_to_send_for_get_ordered;
 
-    /// \short The number global rows to be sent to processor p for
-    /// get_block_ordered_... type methods.
-   Vector<unsigned> Nrows_to_send_for_get_ordered;
+  /// \short The number global rows to be sent to processor p for
+  /// get_block_ordered_... type methods.
+  Vector<unsigned> Nrows_to_send_for_get_ordered;
 
-    /// \short The preconditioner rows to be received from processor p for
-    /// get_block_ordered_... type methods.
-   Vector<int*> Rows_to_recv_for_get_ordered;
+  /// \short The preconditioner rows to be received from processor p for
+  /// get_block_ordered_... type methods.
+  Vector<int*> Rows_to_recv_for_get_ordered;
 
-    /// \short The number of preconditioner rows to be received from processor
-    /// p for get_block_ordered_... type methods.
-   Vector<unsigned> Nrows_to_recv_for_get_ordered;
+  /// \short The number of preconditioner rows to be received from processor
+  /// p for get_block_ordered_... type methods.
+  Vector<unsigned> Nrows_to_recv_for_get_ordered;
 #endif
 
-    /// \short The distribution of the preconditioner matrix - only used if
-    /// this preconditioner is a master preconditioner. Warning: always use
-   /// the access function preconditioner_matrix_distribution_pt().
-   LinearAlgebraDistribution* Preconditioner_matrix_distribution_pt;
+  /// \short The distribution of the preconditioner matrix - only used if
+  /// this preconditioner is a master preconditioner. Warning: always use
+  /// the access function preconditioner_matrix_distribution_pt().
+  LinearAlgebraDistribution* Preconditioner_matrix_distribution_pt;
 
-   /// \short Static boolean to allow block_matrix_test(...) to be run.
-   /// Defaults to false.
-   static bool Run_block_matrix_test;
+  /// \short Static boolean to allow block_matrix_test(...) to be run.
+  /// Defaults to false.
+  static bool Run_block_matrix_test;
 
-    /// \short String giving the base of the files to write block data into. If
-    /// empty then do not output blocks. Default is empty.
-    std::string Output_base_filename;
-  };
+  /// \short String giving the base of the files to write block data into. If
+  /// empty then do not output blocks. Default is empty.
+  std::string Output_base_filename;
+ };
 
 
 
@@ -1113,66 +1152,66 @@ namespace oomph
 
 
  //============================================================================
- /// \short Function to turn this preconditioner into a 
+ /// \short Function to turn this preconditioner into a
  /// subsidiary preconditioner that operates within a bigger
  /// "master block preconditioner (e.g. a Navier-Stokes 2x2 block
  /// preconditioner dealing with the fluid sub-blocks within a
  /// 3x3 FSI preconditioner. Once this is done the master block
  /// preconditioner deals with the block setup etc. \n
- /// The vector block_map must specify the block number in the 
- /// master preconditioner that corresponds to a block number in this 
- /// preconditioner.\n 
- /// \b 1. The length of the vector is used to determine the number of 
+ /// The vector block_map must specify the block number in the
+ /// master preconditioner that corresponds to a block number in this
+ /// preconditioner.\n
+ /// \b 1. The length of the vector is used to determine the number of
  /// blocks in this preconditioner therefore it must be correctly sized. \n
-  /// \b 2. \c block_setup(...) should be called in the master preconditioner
+ /// \b 2. \c block_setup(...) should be called in the master preconditioner
  /// before this method is called. \n
-  /// \b 3. \c block_setup(...) should be called in the corresponding subsidiary
- /// preconditioner after this method is called. 
+ /// \b 3. \c block_setup(...) should be called in the corresponding subsidiary
+ /// preconditioner after this method is called.
  //============================================================================
-  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
-  turn_into_subsidiary_block_preconditioner
-  (BlockPreconditioner<MATRIX>* master_block_prec_pt,
-   Vector<unsigned>& block_map)
-  {
-   // Set the master block preconditioner pointer
-   Master_block_preconditioner_pt = master_block_prec_pt;
+ template<typename MATRIX> void BlockPreconditioner<MATRIX>::
+ turn_into_subsidiary_block_preconditioner
+ (BlockPreconditioner<MATRIX>* master_block_prec_pt,
+  Vector<unsigned>& block_map)
+ {
+  // Set the master block preconditioner pointer
+  Master_block_preconditioner_pt = master_block_prec_pt;
 
-   // get the number of block types in this preconditioner from the length
-   // of the block_map vector
-   Ndof_types =  block_map.size();
-   Nblock_types = Ndof_types;
+  // get the number of block types in this preconditioner from the length
+  // of the block_map vector
+  Ndof_types =  block_map.size();
+  Nblock_types = Ndof_types;
 
-   // copy the block_map vector to the Block_number_in_master_preconditioner
-   // vector used to store this information
-   Dof_number_in_master_preconditioner.resize(Nblock_types);
-   for (unsigned i = 0; i < Nblock_types; i++)
-    {
-     Dof_number_in_master_preconditioner[i] = block_map[i];
-    }
+  // copy the block_map vector to the Block_number_in_master_preconditioner
+  // vector used to store this information
+  Dof_number_in_master_preconditioner.resize(Nblock_types);
+  for (unsigned i = 0; i < Nblock_types; i++)
+   {
+    Dof_number_in_master_preconditioner[i] = block_map[i];
+   }
 
-   // compute number of rows in this (sub) preconditioner
-   Nrow = 0;
-   for (unsigned b = 0; b < Ndof_types; b++)
-    {
-     Nrow += this->dof_block_dimension(b);
-    }
+  // compute number of rows in this (sub) preconditioner
+  Nrow = 0;
+  for (unsigned b = 0; b < Ndof_types; b++)
+   {
+    Nrow += this->dof_block_dimension(b);
+   }
 
 #ifdef PARANOID
-   if (Nrow==0)
-    {
-     std::ostringstream error_message;
-     error_message 
-      << "Nrow=0 in subsidiary preconditioner. This seems fishy and\n"
-      << "suggests that block_setup() was not called for the \n"
-      << "master block preconditioner before turning this one into \n"
-      << "a subsidiary one\n";
-     throw OomphLibWarning(
-      error_message.str(),
-      "BlockPreconditioner::turn_into_subsidiary_block_preconditioner(...)",
-      OOMPH_EXCEPTION_LOCATION);
-    }
+  if (Nrow==0)
+   {
+    std::ostringstream error_message;
+    error_message
+     << "Nrow=0 in subsidiary preconditioner. This seems fishy and\n"
+     << "suggests that block_setup() was not called for the \n"
+     << "master block preconditioner before turning this one into \n"
+     << "a subsidiary one\n";
+    throw OomphLibWarning(
+                          error_message.str(),
+                          "BlockPreconditioner::turn_into_subsidiary_block_preconditioner(...)",
+                          OOMPH_EXCEPTION_LOCATION);
+   }
 #endif
-  }
+ }
 
 
  //============================================================================
@@ -1183,1540 +1222,1533 @@ namespace oomph
  /// The distributions of the preconditioner and the blocks are
  /// automatically specified (and assumed to be uniform) at this
  /// stage.\n
-  /// This method should be used if any block contains more than one
+ /// This method should be used if any block contains more than one
  /// type of DOF. The argument vector dof_to_block_map should be of length
  /// ndof. Each element should contain an integer indicating the block number
  /// corresponding to that type of DOF.
  //============================================================================
-  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
-  block_setup(MATRIX* in_matrix_pt,
-	      Vector<unsigned>& dof_to_block_map)
-  {
-   // clear the memory
-   this->clear_block_preconditioner_base();
+ template<typename MATRIX> void BlockPreconditioner<MATRIX>::
+ block_setup(Vector<unsigned>& dof_to_block_map)
+ {
 
-    // Store the matrix pointer
-    set_matrix_pt(in_matrix_pt);
-
-   // get my_rank and nproc
-#ifdef OOMPH_HAS_MPI
-    unsigned my_rank = problem_pt()->communicator_pt()->my_rank();
+#ifdef PARANOID
+  // Check that some mesh pointers have been assigned.
+  if(nmesh() == 0)
+   {
+    std::ostringstream error_msg;
+    error_msg << "Can't setup blocks because no meshes have been set.";
+    throw OomphLibError(error_msg.str(),
+                        "BlockPreconditioner::block_setup",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
 #endif
-    unsigned nproc = problem_pt()->communicator_pt()->nproc();
 
-    // Get the number of dof types in each mesh.
-    Ndof_types_in_mesh.assign(nmesh(),0);
-    for(unsigned i=0; i<nmesh(); i++)
-      {
-	Ndof_types_in_mesh[i] = mesh_pt(i)->ndof_types();
-      }
 
-	 
-   /////////////////////////////////////////////////////////////////////////////
-   // start of master block preconditioner only operations
-   /////////////////////////////////////////////////////////////////////////////
+
+  // clear the memory
+  this->clear_block_preconditioner_base();
+
+  // get my_rank and nproc
 #ifdef OOMPH_HAS_MPI
-   unsigned* nreq_sparse = new unsigned[nproc];
-   unsigned* nreq_sparse_for_proc = new unsigned[nproc];
-   unsigned** index_in_dof_block_sparse_send = new unsigned*[nproc];
-   unsigned** dof_number_sparse_send = new unsigned*[nproc];
-   for (unsigned p = 0; p < nproc; p++)
-    {
-     index_in_dof_block_sparse_send[p] = 0;
-     dof_number_sparse_send[p] = 0;
+  unsigned my_rank = comm_pt()->my_rank();
+#endif
+  unsigned nproc = comm_pt()->nproc();
+
+  // Get the number of dof types in each mesh.
+  Ndof_types_in_mesh.assign(nmesh(),0);
+  for(unsigned i=0; i<nmesh(); i++)
+   {
+    Ndof_types_in_mesh[i] = mesh_pt(i)->
+     ndof_types();
+   }
+
+
+  /////////////////////////////////////////////////////////////////////////////
+  // start of master block preconditioner only operations
+  /////////////////////////////////////////////////////////////////////////////
+#ifdef OOMPH_HAS_MPI
+  unsigned* nreq_sparse = new unsigned[nproc];
+  unsigned* nreq_sparse_for_proc = new unsigned[nproc];
+  unsigned** index_in_dof_block_sparse_send = new unsigned*[nproc];
+  unsigned** dof_number_sparse_send = new unsigned*[nproc];
+  for (unsigned p = 0; p < nproc; p++)
+   {
+    index_in_dof_block_sparse_send[p] = 0;
+    dof_number_sparse_send[p] = 0;
+   }
+  Vector<MPI_Request> send_requests_sparse;
+  Vector<MPI_Request> recv_requests_sparse;
+#endif
+
+  // if this preconditioner is the master preconditioner then we need
+  // to assemble the vectors : Dof_number
+  //                           Index_in_dof_block
+  if (is_master_block_preconditioner())
+   {
+
+    // Setup the distribution of this preconditioner, assumed to be the same
+    // as the matrix if the matrix is distribuatable.
+    if (dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt()))
+     {
+      this->build_distribution
+       (dynamic_cast<DistributableLinearAlgebraObject*>
+        (matrix_pt())->distribution_pt());
+     }
+    else
+     {
+      LinearAlgebraDistribution dist(comm_pt(),
+                                     matrix_pt()->nrow(),false);
+      this->build_distribution(dist);
+     }
+    Nrow = matrix_pt()->nrow();
+
+    // boolean to indicate whether the matrix is acutally distributed
+    // ie distributed and on more than one processor
+    bool matrix_distributed =
+     (this->distribution_pt()->distributed() &&
+      this->distribution_pt()->communicator_pt()->nproc() > 1);
+
+
+    // matrix must be CR
+    CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt());
+    if (cr_matrix_pt == 0) {
+     std::ostringstream error_message;
+     error_message << "Block setup for distributed matrices only works "
+                   << "for CRDoubleMatrices";
+     throw OomphLibError(error_message.str(),
+                         "BlockPreconditioner::block_setup(...)",
+                         OOMPH_EXCEPTION_LOCATION);
     }
-   Vector<MPI_Request> send_requests_sparse;
-   Vector<MPI_Request> recv_requests_sparse;
+
+
+
+
+    // my distribution
+    unsigned first_row = this->distribution_pt()->first_row();
+    unsigned nrow_local = this->distribution_pt()->nrow_local();
+    unsigned last_row = first_row+nrow_local-1;
+
+#ifdef OOMPH_HAS_MPI
+
+    // storage for the rows required by each processor in the dense
+    // block lookup storage scheme
+    // dense_required_rows(p,0) is the minimum global index required by proc p
+    //                 ...(p,1) is the maximum global index required by proc p
+    DenseMatrix<unsigned> dense_required_rows(nproc,2);
+    for (unsigned p = 0; p < nproc; p++)
+     {
+      dense_required_rows(p,0) = this->distribution_pt()->first_row(p);
+      dense_required_rows(p,1) = this->distribution_pt()->first_row(p)
+       +this->distribution_pt()->nrow_local(p) - 1;
+     }
+
+    // determine the global rows That are not in the range first_row to
+    // first_row+nrow_local for which we should store the
+    // Dof_index and Index_in_dof_block for
+    // then send the lists to other processors
+    Vector<unsigned> sparse_global_rows_for_block_lookup;
+    if (matrix_distributed)
+     {
+      unsigned nnz = cr_matrix_pt->nnz();
+      int* column_index = cr_matrix_pt->column_index();
+      for (unsigned i = 0; i < nnz; i++)
+       {
+        unsigned ci = column_index[i];
+        if (ci<first_row || ci>last_row)
+         {
+          if (find(sparse_global_rows_for_block_lookup.begin(),
+                   sparse_global_rows_for_block_lookup.end(),
+                   ci) ==
+              sparse_global_rows_for_block_lookup.end())
+           {
+            sparse_global_rows_for_block_lookup.push_back(ci);
+           }
+         }
+       }
+     }
+    sort(sparse_global_rows_for_block_lookup.begin(),
+         sparse_global_rows_for_block_lookup.end());
+    int nsparse = sparse_global_rows_for_block_lookup.size();
+    Global_index_sparse.resize(nsparse);
+    Index_in_dof_block_sparse.resize(nsparse);
+    Dof_number_sparse.resize(nsparse);
+    for (int i = 0; i < nsparse; i++)
+     {
+      Global_index_sparse[i]=sparse_global_rows_for_block_lookup[i];
+     }
+    sparse_global_rows_for_block_lookup.clear();
+
+
+    Vector<MPI_Request> recv_requests_sparse_nreq;
+    if (matrix_distributed)
+     {
+      MPI_Aint base_displacement_sparse;
+      MPI_Address(nreq_sparse,&base_displacement_sparse);
+
+      int zero = 0;
+      for (unsigned p = 0; p < nproc; p++)
+       {
+        nreq_sparse[p] = 0;
+        nreq_sparse_for_proc[p] = 0;
+
+        // determine the global eqn numbers required by this processor
+        // that can be classified by processor p
+        int begin = 0;
+        for (int i = 0; i < nsparse; ++i)
+         {
+          if (Global_index_sparse[i]<dense_required_rows(p,0))
+           {
+            ++begin;
+           }
+          else
+           {
+            if (Global_index_sparse[i]<=dense_required_rows(p,1))
+             {
+              ++nreq_sparse[p];
+             }
+            else
+             {
+              break;
+             }
+           }
+         }
+
+        // if this processor has rows to be classified by proc p
+        if (nreq_sparse[p]>0)
+         {
+
+          // send the number of global eqn numbers
+          MPI_Request req1;
+          MPI_Isend(&nreq_sparse[p],1,MPI_UNSIGNED,p,31,
+                    comm_pt()->mpi_comm(),&req1);
+          send_requests_sparse.push_back(req1);
+
+          // send the global eqn numbers
+          MPI_Request req2;
+          MPI_Isend(&Global_index_sparse[begin],
+                    nreq_sparse[p],MPI_UNSIGNED,p,32,
+                    comm_pt()->mpi_comm(),&req2);
+          send_requests_sparse.push_back(req2);
+
+          // post the recvs for the data that will be returned
+
+          // the datatypes, displacements, lengths for the two datatypes
+          MPI_Datatype types[2];
+          MPI_Aint displacements[2];
+          int lengths[2];
+
+          // index in dof block
+          MPI_Type_contiguous(nreq_sparse[p],MPI_UNSIGNED,&types[0]);
+          MPI_Type_commit(&types[0]);
+          MPI_Address(&Index_in_dof_block_sparse[begin],&displacements[0]);
+          displacements[0] -= base_displacement_sparse;
+          lengths[0] = 1;
+
+          // dof number
+          MPI_Type_contiguous(nreq_sparse[p],MPI_UNSIGNED,&types[1]);
+          MPI_Type_commit(&types[1]);
+          MPI_Address(&Dof_number_sparse[begin],&displacements[1]);
+          displacements[1] -= base_displacement_sparse;
+          lengths[1] = 1;
+
+          // build the final type
+          MPI_Datatype recv_type;
+          MPI_Type_struct(2,lengths,displacements,types,&recv_type);
+          MPI_Type_commit(&recv_type);
+          MPI_Type_free(&types[0]);
+          MPI_Type_free(&types[1]);
+
+          // and recv
+          MPI_Request req;
+          MPI_Irecv(nreq_sparse,1,recv_type,p,33,
+                    comm_pt()->mpi_comm(),&req);
+          recv_requests_sparse.push_back(req);
+          MPI_Type_free(&recv_type);
+         }
+
+        // if no communication required, confirm this
+        if (nreq_sparse[p]==0)
+         {
+          MPI_Request req1;
+          MPI_Isend(&zero,1,MPI_UNSIGNED,p,31,
+                    comm_pt()->mpi_comm(),&req1);
+          send_requests_sparse.push_back(req1);
+         }
+
+        //
+        MPI_Request req;
+        MPI_Irecv(&nreq_sparse_for_proc[p],1,MPI_UNSIGNED,p,31,
+                  comm_pt()->mpi_comm(),&req);
+        recv_requests_sparse_nreq.push_back(req);
+       }
+     }
 #endif
 
-   // if this preconditioner is the master preconditioner then we need
-   // to assemble the vectors : Dof_number
-   //                           Index_in_dof_block
-    if (is_master_block_preconditioner())
-    {
+    // resize the storage
+    Dof_number_dense.resize(nrow_local);
+    Index_in_dof_block_dense.resize(nrow_local);
 
-	// Setup the distribution of this preconditioner, assumed to be the same
-	// as the matrix if the matrix is distribuatable.
-	if (dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt()))
-      {
-       this->build_distribution
-        (dynamic_cast<DistributableLinearAlgebraObject*>
-	       (matrix_pt())->distribution_pt());
-      }
-     else
-      {
-	    LinearAlgebraDistribution dist(problem_pt()->communicator_pt(),
-					   matrix_pt()->nrow(),false);
-       this->build_distribution(dist);
-      } 
-	Nrow = matrix_pt()->nrow();
+    // zero the number of dof types
+    Ndof_types = 0;
 
-     // boolean to indicate whether the matrix is acutally distributed
-     // ie distributed and on more than one processor
-	bool matrix_distributed =
-	  (this->distribution_pt()->distributed() &&
-	   this->distribution_pt()->communicator_pt()->nproc() > 1);
+#ifdef PARANOID
+    // Vector to keep track of previously assigned block numbers
+    // to check consistency between multple assignements.
+    Vector<int> previously_assigned_block_number(nrow_local,
+                                                 Data::Is_unclassified);
+#endif
+
+    // determine whether the problem is distribution
+    bool problem_distributed = false;
+
+    // the problem method distributed() is only accessible with MPI
+#ifdef OOMPH_HAS_MPI
+    problem_distributed = any_mesh_distributed();
+#endif
+
+    // if the problem is not distributed
+    if (!problem_distributed)
+     {
+
+      // Offset for the block type in the overall system.
+      // Different meshes contain different block-preconditionable
+      // elements -- their blocks are added one after the other...
+      unsigned dof_offset=0;
+
+      // std::cout << "Begin looping through meshes: " << std::endl;
+      // Loop over all meshes
+      for (unsigned m=0;m<nmesh();m++)
+       {
+        // Number of elements in this mesh
+        unsigned n_element = mesh_pt(m)->nelement();
+
+        // Find the number of block types that the elements in this mesh
+        // are in charge of
+        unsigned ndof_in_element = ndof_types_in_mesh(m);
+        Ndof_types += ndof_in_element;
+
+        for (unsigned e=0;e<n_element;e++)
+         {
+          // List containing pairs of global equation number and
+          // dof number for each global dof in an element
+          std::list<std::pair<unsigned long,unsigned> > dof_lookup_list;
+
+          // Get list of blocks associated with the element's global unknowns
+          mesh_pt(m)->element_pt(e)->
+           get_dof_numbers_for_unknowns(dof_lookup_list);
+
+          // Loop over all entries in the list
+          // and store the block number
+          typedef std::list<std::pair<unsigned long,unsigned> >::iterator IT;
+          for (IT it=dof_lookup_list.begin();
+               it!=dof_lookup_list.end();it++)
+           {
+
+            unsigned long global_dof = it->first;
+            if (global_dof >= unsigned(first_row) &&
+                global_dof <= unsigned(last_row))
+             {
+              unsigned dof_number = (it->second)+dof_offset;
+              Dof_number_dense[global_dof-first_row]
+               = dof_number;
+
+#ifdef PARANOID
+              // Check consistency of block numbers if assigned multiple times
+              if (previously_assigned_block_number[global_dof-
+                                                   first_row]<0)
+               {
+                previously_assigned_block_number[global_dof-first_row]
+                 =dof_number;
+               }
+
+#endif
+             }
+           }
+         }
+
+        // About to do the next mesh which contains block preconditionable
+        // elements of a different type; all the dofs that these elements are
+        // "in charge of" differ from the ones considered so far.
+        // Bump up the block counter to make sure we're not overwriting
+        // anything here
+        dof_offset+=ndof_in_element;
+       }
+
+#ifdef PARANOID
+      // check that every global equation number has been allocated a dof type
+      for (unsigned i = 0; i < nrow_local; i++)
+       {
+        if (previously_assigned_block_number[i] < 0)
+         {
+          std::ostringstream error_message;
+          error_message << "Not all degrees of freedom have had DOF type "
+                        << "numbers allocated. Dof number " << i
+                        << " is unallocated.";
+          throw OomphLibError(error_message.str(),
+                              "BlockPreconditioner::block_setup(...)",
+                              OOMPH_EXCEPTION_LOCATION);
+         }
+       }
+#endif
+     }
+    // else the problem is distributed
+    else
+     {
+#ifdef OOMPH_HAS_MPI
 
 
-     // matrix must be CR
-	CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt());
-	if (cr_matrix_pt == 0) {
-         std::ostringstream error_message;
-         error_message << "Block setup for distributed matrices only works "
-                       << "for CRDoubleMatrices";
-         throw OomphLibError(error_message.str(),
-                             "BlockPreconditioner::block_setup(...)",
-                             OOMPH_EXCEPTION_LOCATION);                
+      // Offset for the block type in the overall system.
+      // Different meshes contain different block-preconditionable
+      // elements -- their blocks are added one after the other...
+      unsigned dof_offset=0;
+
+      // the set of global degrees of freedom and their corresponding dof
+      // number on this processor
+      // use set because the elements are ordered and unqiue
+      std::set<std::pair<unsigned long,unsigned> > my_dof_set;
+
+      // Loop over all meshes
+      for (unsigned m=0;m<nmesh();m++)
+       {
+        // Number of elements in this mesh
+        unsigned n_element = this->mesh_pt(m)->nelement();
+
+        // Find the number of block types that the elements in this mesh
+        // are in charge of
+        unsigned ndof_in_element = ndof_types_in_mesh(m);
+        Ndof_types += ndof_in_element;
+
+        // Loop over all elements
+        for (unsigned e=0;e<n_element;e++)
+         {
+
+          // if the element is not a halo element
+          if (!this->mesh_pt(m)->element_pt(e)->is_halo())
+           {
+            // List containing pairs of global equation number and
+            // dof number for each global dof in an element
+            std::list<std::pair<unsigned long,unsigned> > dof_lookup_list;
+
+            // Get list of blocks associated with the element's global
+            // unknowns
+            this->mesh_pt(m)->element_pt(e)->
+             get_dof_numbers_for_unknowns(dof_lookup_list);
+
+            // update the block numbers
+            typedef
+             std::list<std::pair<unsigned long,unsigned> >::iterator IT;
+            for (IT it=dof_lookup_list.begin();
+                 it!=dof_lookup_list.end();it++)
+             {
+              it->second = (it->second)+dof_offset;
+             }
+
+            // and insert them into our set
+            my_dof_set.insert(dof_lookup_list.begin(),dof_lookup_list.end());
+           }
+         }
+
+        // About to do the next mesh which contains block preconditionable
+        // elements of a different type; all the dofs that these elements are
+        // "in charge of" differ from the ones considered so far.
+        // Bump up the block counter to make sure we're not overwriting
+        // anything here
+        dof_offset+=ndof_in_element;
+       }
+
+      // next copy the set of my dofs to two vectors to send
+      unsigned my_ndof = my_dof_set.size();
+      unsigned long* my_global_dofs = new unsigned long[my_ndof];
+      unsigned* my_dof_numbers = new unsigned[my_ndof];
+      typedef
+       std::set<std::pair<unsigned long,unsigned> >::iterator IT;
+      unsigned pt = 0;
+      for (IT it = my_dof_set.begin(); it != my_dof_set.end(); it++)
+       {
+        my_global_dofs[pt] = it->first;
+        my_dof_numbers[pt] = it->second;
+        pt++;
+       }
+
+      // and then clear the set
+      my_dof_set.clear();
+
+      // count up how many DOFs need to be sent to each processor
+      int* first_dof_to_send = new int[nproc];
+      int* ndof_to_send = new int[nproc];
+      unsigned ptr = 0;
+      for (unsigned p = 0; p < nproc; p++)
+       {
+        first_dof_to_send[p] = 0;
+        ndof_to_send[p] = 0;
+        while (ptr < my_ndof && my_global_dofs[ptr] < dense_required_rows(p,0))
+         {
+          ptr++;
+         }
+        first_dof_to_send[p] = ptr;
+        while (ptr < my_ndof && my_global_dofs[ptr] <= dense_required_rows(p,1))
+         {
+          ndof_to_send[p]++;
+          ptr++;
+         }
+       }
+
+      // next communicate to each processor how many dofs it expects to recv
+      int* ndof_to_recv = new int[nproc];
+      MPI_Alltoall(ndof_to_send,1,MPI_INT,ndof_to_recv,1,MPI_INT,
+                   comm_pt()->mpi_comm());
+
+      // the base displacements for the sends
+      MPI_Aint base_displacement;
+      MPI_Address(my_global_dofs,&base_displacement);
+
+#ifdef PARANOID
+      // storage for paranoid check to ensure that every row as been
+      // imported
+      std::vector<bool> dof_recv(nrow_local,false);
+#endif
+
+      // next send and recv
+      Vector<MPI_Request> send_requests;
+      Vector<MPI_Request> recv_requests;
+      Vector<unsigned long*> global_dofs_recv(nproc,0);
+      Vector<unsigned*> dof_numbers_recv(nproc,0);
+      Vector<unsigned> proc;
+      for (unsigned p = 0; p < nproc; p++)
+       {
+        if (p != my_rank)
+         {
+
+          // send
+          if (ndof_to_send[p] > 0)
+           {
+            // the datatypes, displacements, lengths for the two datatypes
+            MPI_Datatype types[2];
+            MPI_Aint displacements[2];
+            int lengths[2];
+
+            // my global dofs
+            MPI_Type_contiguous(ndof_to_send[p],MPI_UNSIGNED_LONG,&types[0]);
+            MPI_Type_commit(&types[0]);
+            MPI_Address(my_global_dofs + first_dof_to_send[p],
+                        &displacements[0]);
+            displacements[0] -= base_displacement;
+            lengths[0] = 1;
+
+            // my dof numbers
+            MPI_Type_contiguous(ndof_to_send[p],MPI_UNSIGNED,&types[1]);
+            MPI_Type_commit(&types[1]);
+            MPI_Address(my_dof_numbers + first_dof_to_send[p],
+                        &displacements[1]);
+            displacements[1] -= base_displacement;
+            lengths[1] = 1;
+
+            // build the final type
+            MPI_Datatype send_type;
+            MPI_Type_struct(2,lengths,displacements,types,&send_type);
+            MPI_Type_commit(&send_type);
+            MPI_Type_free(&types[0]);
+            MPI_Type_free(&types[1]);
+
+            // and send
+            MPI_Request req;
+            MPI_Isend(my_global_dofs,1,send_type,p,2,
+                      comm_pt()->mpi_comm(),&req);
+            send_requests.push_back(req);
+            MPI_Type_free(&send_type);
+           }
+
+          // and recv
+          if (ndof_to_recv[p] > 0)
+           {
+            // resize the storage
+            global_dofs_recv[p] = new unsigned long[ndof_to_recv[p]];
+            dof_numbers_recv[p] = new unsigned[ndof_to_recv[p]];
+            proc.push_back(p);
+
+            // the datatypes, displacements, lengths for the two datatypes
+            MPI_Datatype types[2];
+            MPI_Aint displacements[2];
+            int lengths[2];
+
+            // my global dofs
+            MPI_Type_contiguous(ndof_to_recv[p],MPI_UNSIGNED_LONG,&types[0]);
+            MPI_Type_commit(&types[0]);
+            MPI_Address(global_dofs_recv[p],&displacements[0]);
+            displacements[0] -= base_displacement;
+            lengths[0] = 1;
+
+            // my dof numbers
+            MPI_Type_contiguous(ndof_to_recv[p],MPI_UNSIGNED,&types[1]);
+            MPI_Type_commit(&types[1]);
+            MPI_Address(dof_numbers_recv[p],&displacements[1]);
+            displacements[1] -= base_displacement;
+            lengths[1] = 1;
+
+            // build the final type
+            MPI_Datatype recv_type;
+            MPI_Type_struct(2,lengths,displacements,types,&recv_type);
+            MPI_Type_commit(&recv_type);
+            MPI_Type_free(&types[0]);
+            MPI_Type_free(&types[1]);
+
+            // and recv
+            MPI_Request req;
+            MPI_Irecv(my_global_dofs,1,recv_type,p,2,
+                      comm_pt()->mpi_comm(),&req);
+            recv_requests.push_back(req);
+            MPI_Type_free(&recv_type);
+           }
+
+         }
+        // send to self
+        else
+         {
+          unsigned u = first_dof_to_send[p] + ndof_to_recv[p];
+          for (unsigned i = first_dof_to_send[p]; i < u; i++)
+           {
+#ifdef PARANOID
+            // paranoid check
+            // check that if row has been imported the block number is the
+            // same
+            if (dof_recv[my_global_dofs[i]-first_row])
+             {
+              if (Dof_number_dense[my_global_dofs[i]-first_row]
+                  != my_dof_numbers[i])
+               {
+                std::ostringstream error_message;
+                error_message
+                 << "Inconsistency in assigment of block numbers\n"
+                 << "Global dof " <<  my_global_dofs[i]
+                 << "was previously assigned to block "
+                 <<  Dof_number_dense[my_global_dofs[i]-first_row]
+                 << "\nNow it's been reassigned to block "
+                 << my_dof_numbers[i] << ".\n"
+                 << "This is most likely because one of your\n"
+                 << "elements has classified its degrees of freedom\n"
+                 << "wrongly. You should remember that \n"
+                 << "GeneralisedElement::get_block_numbers_for_unknowns()\n"
+                 << "should only classify the element's OWN dofs and not \n"
+                 << "deal with dofs that were created by resizing nodes, \n"
+                 << "say. Check that loops over nodal values in that \n"
+                 << "function do not use Node::nvalue() to determine the\n"
+                 << "dofs to be classified!\n";
+                throw OomphLibWarning(error_message.str(),
+                                      "BlockPreconditioner::block_setup(...)",
+                                      OOMPH_EXCEPTION_LOCATION);
+               }
+             }
+            // indicate that this dof has ben recv
+            dof_recv[my_global_dofs[i]-first_row] = true;
+#endif
+            Dof_number_dense[my_global_dofs[i]-first_row] =
+             my_dof_numbers[i];
+           }
+         }
+       }
+
+      // recv and store the data
+      unsigned c_recv = recv_requests.size();
+      while (c_recv > 0)
+       {
+
+        // wait for any communication to finish
+        int req_number;
+        MPI_Waitany(c_recv,&recv_requests[0],&req_number,MPI_STATUS_IGNORE);
+        recv_requests.erase(recv_requests.begin()+req_number);
+        c_recv--;
+
+        // determine the source processor
+        unsigned p = proc[req_number];
+        proc.erase(proc.begin()+req_number);
+
+        // import the data
+        for (int i  = 0; i < ndof_to_recv[p]; i++)
+         {
+#ifdef PARANOID
+          // paranoid check
+          // check that if row has been imported the block number is the same
+          if (dof_recv[global_dofs_recv[p][i]-first_row])
+           {
+            if (Dof_number_dense[global_dofs_recv[p][i]-first_row]
+                != dof_numbers_recv[p][i])
+             {
+              std::ostringstream error_message;
+              error_message
+               << "Inconsistency in assignment of block numbers\n"
+               << "Global dof "
+               <<  global_dofs_recv[p][i]
+               << " was previously assigned to block "
+               <<  Dof_number_dense[global_dofs_recv[p][i]
+                                    -first_row]
+               << "\nNow it's been reassigned to block "
+               << dof_numbers_recv[p][i] << ".\n"
+               << "This is most likely because one of your\n"
+               << "elements has classified its degrees of freedom\n"
+               << "wrongly. You should remember that \n"
+               << "GeneralisedElement::get_block_numbers_for_unknowns()\n"
+               << "should only classify the element's OWN dofs and not \n"
+               << "deal with dofs that were created by resizing nodes, \n"
+               << "say. Check that loops over nodal values in that \n"
+               << "function do not use Node::nvalue() to determine the\n"
+               << "dofs to be classified!\n";
+              throw OomphLibWarning(error_message.str(),
+                                    "BlockPreconditioner::block_setup(...)",
+                                    OOMPH_EXCEPTION_LOCATION);
+             }
+           }
+          // indicate that this dof has ben recv
+          dof_recv[global_dofs_recv[p][i]-first_row] = true;
+#endif
+          Dof_number_dense[global_dofs_recv[p][i]-first_row]
+           = dof_numbers_recv[p][i];
+         }
+
+        // delete the data
+        delete[] global_dofs_recv[p];
+        delete[] dof_numbers_recv[p];
+       }
+
+      // finally wait for the send requests to complete as we are leaving
+      // an MPI block of code
+      unsigned csr = send_requests.size();
+      if (csr)
+       {
+        MPI_Waitall(csr,&send_requests[0],MPI_STATUS_IGNORE);
+       }
+
+      // clean up
+      delete[] ndof_to_send;
+      delete[] first_dof_to_send;
+      delete[] ndof_to_recv;
+      delete[] my_global_dofs;
+      delete[] my_dof_numbers;
+#ifdef PARANOID
+      unsigned all_recv = true;
+      for (unsigned i = 0; i < nrow_local; i++)
+       {
+        if (!dof_recv[i])
+         {
+          all_recv = false;
+         }
+       }
+      if (!all_recv)
+       {
+        std::ostringstream error_message;
+        error_message << "Not all the DOF numbers required were received";
+        throw OomphLibError(error_message.str(),
+                            "BlockPreconditioner::block_setup()",
+                            OOMPH_EXCEPTION_LOCATION);
+       }
+#endif
+#else
+      std::ostringstream error_message;
+      error_message
+       << "The problem appears to be distributed, MPI is required";
+      throw OomphLibError(error_message.str(),
+                          "BlockPreconditioner::block_setup()",
+                          OOMPH_EXCEPTION_LOCATION);
+#endif
+     }
+
+#ifdef OOMPH_HAS_MPI
+    Vector<unsigned*> sparse_rows_for_proc(nproc,0);
+    Vector<MPI_Request> sparse_rows_for_proc_requests;
+    if (matrix_distributed)
+     {
+      // wait for number of sparse rows each processor requires
+      // post recvs for that data
+      if (recv_requests_sparse_nreq.size()>0)
+       {
+        MPI_Waitall(recv_requests_sparse_nreq.size(),
+                    &recv_requests_sparse_nreq[0],
+                    MPI_STATUS_IGNORE);
+       }
+      for (unsigned p = 0; p < nproc; ++p)
+       {
+        if (nreq_sparse_for_proc[p] > 0)
+         {
+          MPI_Request req;
+          sparse_rows_for_proc[p] = new unsigned[nreq_sparse_for_proc[p]];
+          MPI_Irecv(sparse_rows_for_proc[p],nreq_sparse_for_proc[p],
+                    MPI_UNSIGNED,p,32,
+                    comm_pt()->mpi_comm(),&req);
+          sparse_rows_for_proc_requests.push_back(req);
+         }
+       }
+     }
+#endif
+
+
+    // for every global degree of freedom required by this processor we now
+    // have the corresponding dof number
+
+    // clear the Ndof_in_dof_block storage
+    Dof_dimension.resize(Ndof_types);
+    Dof_dimension.initialise(0);
+
+    // first consider a non distributed matrix
+    if (!matrix_distributed)
+     {
+
+      // set the Index_in_dof_block
+      unsigned nrow  = this->distribution_pt()->nrow();
+      Index_in_dof_block_dense.resize(nrow);
+      Index_in_dof_block_dense.initialise(0);
+      for (unsigned i = 0; i < nrow; i++)
+       {
+        Index_in_dof_block_dense[i] = Dof_dimension[Dof_number_dense[i]];
+        Dof_dimension[Dof_number_dense[i]]++;
+       }
+     }
+
+    // next a distributed matrix
+    else
+     {
+#ifdef OOMPH_HAS_MPI
+
+      // first compute how many instances of each dof are on this
+      // processor
+      unsigned* my_nrows_in_dof_block = new unsigned[Ndof_types];
+      for (unsigned i = 0; i < Ndof_types; i++)
+       {
+        my_nrows_in_dof_block[i] = 0;
+       }
+      for (unsigned i = 0; i < nrow_local; i++)
+       {
+        my_nrows_in_dof_block[Dof_number_dense[i]]++;
+       }
+
+      // next share the data
+      unsigned* nrow_in_dof_block_recv = new unsigned[Ndof_types*nproc];
+      MPI_Allgather(my_nrows_in_dof_block,Ndof_types,MPI_UNSIGNED,
+                    nrow_in_dof_block_recv,Ndof_types,MPI_UNSIGNED,
+                    comm_pt()->mpi_comm());
+      delete[] my_nrows_in_dof_block;
+
+      // compute my first dof index and Nrows_in_dof_block
+      Vector<unsigned> my_first_dof_index(Ndof_types,0);
+      for (unsigned i = 0; i < Ndof_types; i++)
+       {
+        for (unsigned p = 0; p < my_rank; p++)
+         {
+          my_first_dof_index[i] += nrow_in_dof_block_recv[p*Ndof_types + i];
+         }
+        Dof_dimension[i] = my_first_dof_index[i];
+        for (unsigned p = my_rank; p < nproc; p++)
+         {
+          Dof_dimension[i] += nrow_in_dof_block_recv[p*Ndof_types + i];
+         }
+       }
+      delete[] nrow_in_dof_block_recv;
+
+      // next compute Index in dof block
+      Index_in_dof_block_dense.resize(nrow_local);
+      Index_in_dof_block_dense.initialise(0);
+      Vector<unsigned> dof_counter(Ndof_types,0);
+      for (unsigned i = 0; i < nrow_local; i++)
+       {
+        Index_in_dof_block_dense[i] =
+         my_first_dof_index[Dof_number_dense[i]] +
+         dof_counter[Dof_number_dense[i]];
+        dof_counter[Dof_number_dense[i]]++;
+       }
+
+      // the base displacements for the sends
+      if (sparse_rows_for_proc_requests.size()>0)
+       {
+        MPI_Waitall(sparse_rows_for_proc_requests.size(),
+                    &sparse_rows_for_proc_requests[0],
+                    MPI_STATUS_IGNORE);
+       }
+      MPI_Aint base_displacement;
+      MPI_Address(dof_number_sparse_send,&base_displacement);
+      unsigned first_row = this->distribution_pt()->first_row();
+      for (unsigned p = 0; p < nproc; ++p)
+       {
+        if (nreq_sparse_for_proc[p]>0)
+         {
+          // construct the data
+          index_in_dof_block_sparse_send[p] =
+           new unsigned[nreq_sparse_for_proc[p]];
+          dof_number_sparse_send[p] =
+           new unsigned[nreq_sparse_for_proc[p]];
+          for (unsigned i = 0; i < nreq_sparse_for_proc[p]; ++i)
+           {
+            unsigned r = sparse_rows_for_proc[p][i];
+            r -= first_row;
+            index_in_dof_block_sparse_send[p][i]
+             = Index_in_dof_block_dense[r];
+            dof_number_sparse_send[p][i]
+             = Dof_number_dense[r];
+           }
+          delete[] sparse_rows_for_proc[p];
+
+          // send the data
+          // the datatypes, displacements, lengths for the two datatypes
+          MPI_Datatype types[2];
+          MPI_Aint displacements[2];
+          int lengths[2];
+
+          // index in dof block
+          MPI_Type_contiguous(nreq_sparse_for_proc[p],MPI_UNSIGNED,&types[0]);
+          MPI_Type_commit(&types[0]);
+          MPI_Address(index_in_dof_block_sparse_send[p],&displacements[0]);
+          displacements[0] -= base_displacement;
+          lengths[0] = 1;
+
+          // dof number
+          MPI_Type_contiguous(nreq_sparse_for_proc[p],MPI_UNSIGNED,&types[1]);
+          MPI_Type_commit(&types[1]);
+          MPI_Address(dof_number_sparse_send[p],&displacements[1]);
+          displacements[1] -= base_displacement;
+          lengths[1] = 1;
+
+          // build the final type
+          MPI_Datatype send_type;
+          MPI_Type_struct(2,lengths,displacements,types,&send_type);
+          MPI_Type_commit(&send_type);
+          MPI_Type_free(&types[0]);
+          MPI_Type_free(&types[1]);
+
+          // and recv
+          MPI_Request req;
+          MPI_Isend(dof_number_sparse_send,1,send_type,p,33,
+                    comm_pt()->mpi_comm(),&req);
+          send_requests_sparse.push_back(req);
+          MPI_Type_free(&send_type);
+         }
+        else
+         {
+          index_in_dof_block_sparse_send[p] = 0;
+          dof_number_sparse_send[p] = 0;
+         }
+       }
+#endif
+     }
+   }
+
+  /////////////////////////////////////////////////////////////////////////////
+  // end of master block preconditioner only operations
+  /////////////////////////////////////////////////////////////////////////////
+
+  // compute the number of rows in each block
+
+#ifdef PARANOID
+  //check the vector is the correct length
+  if (dof_to_block_map.size() != Ndof_types)
+   {
+    std::ostringstream error_message;
+    error_message
+     << "The dof_to_block_map vector (size="
+     << dof_to_block_map.size() << ") must be of size Ndof_types="
+     << Ndof_types;
+    throw OomphLibError(
+                        error_message.str(),
+                        "BlockPreconditioner::block_setup(...)",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+
+  // find the maximum block number
+  unsigned max_block_number = 0;
+  for (unsigned i = 0; i < Ndof_types; i++)
+   {
+    if (dof_to_block_map[i] > max_block_number)
+     {
+      max_block_number = dof_to_block_map[i];
+     }
+   }
+
+  // resize the storage the the block to dof map
+  Block_number_to_dof_number_lookup.clear();
+  Block_number_to_dof_number_lookup.resize(max_block_number+1);
+  Ndof_in_block.clear();
+  Ndof_in_block.resize(max_block_number+1);
+
+  // resize storage
+  Dof_number_to_block_number_lookup.resize(Ndof_types);
+
+  // build the storage for the two maps (block to dof) and (dof to block)
+  for (unsigned i = 0; i < Ndof_types; i++)
+   {
+    Dof_number_to_block_number_lookup[i] = dof_to_block_map[i];
+    Block_number_to_dof_number_lookup[dof_to_block_map[i]].push_back(i);
+    Ndof_in_block[dof_to_block_map[i]]++;
+   }
+
+#ifdef PARANOID
+  // paranoid check that every block number has at least one DOF associated
+  // with it
+  for (unsigned i = 0; i < max_block_number+1; i++)
+   {
+    if (Block_number_to_dof_number_lookup[i].size() == 0)
+     {
+      std::ostringstream error_message;
+      error_message  << "block number " << i
+                     << " does not have any DOFs associated with it";
+      throw OomphLibWarning(
+                            error_message.str(),
+                            "BlockPreconditioner::block_setup(...)",
+                            OOMPH_EXCEPTION_LOCATION);
+     }
+   }
+#endif
+
+  // update the number of blocks types
+  Nblock_types = max_block_number+1;
+
+  // distributed or not depends on if we have more than one processor
+  bool distributed = this->master_distribution_pt()->distributed();
+
+  // create the new block distributions
+  Block_distribution_pt.resize(Nblock_types);
+  for (unsigned i = 0; i < Nblock_types; i++)
+   {
+    unsigned block_dim = 0;
+    for (unsigned j = 0; j < Ndof_in_block[i]; j++)
+     {
+      block_dim +=
+       dof_block_dimension(Block_number_to_dof_number_lookup[i][j]);
+     }
+    Block_distribution_pt[i] = new
+     LinearAlgebraDistribution(comm_pt(),
+                               block_dim,distributed);
+   }
+
+  // create the distribution of the preconditioner matrix
+  // if this preconditioner is a subsidiary preconditioner then it stored
+  // at Distribution_pt.
+  // if this preconditioner is a master preconditioner then it is stored
+  // at Preconditioner_matrix_distribution_pt
+
+  // first determine nrow local for this processor
+  unsigned p_matrix_first_row = 0;
+  unsigned p_matrix_nrow_local = 0;
+  for (unsigned b = 0; b < Nblock_types; b++)
+   {
+    p_matrix_nrow_local += Block_distribution_pt[b]->nrow_local();
+   }
+
+  // determine the first row for the p matrix
+  if (distributed)
+   {
+#ifdef OOMPH_HAS_MPI
+    unsigned *p_matrix_nrow_local_all = new unsigned[nproc];
+    MPI_Allgather(&p_matrix_nrow_local,1,MPI_UNSIGNED,
+                  p_matrix_nrow_local_all,1,MPI_UNSIGNED,
+                  comm_pt()->mpi_comm());
+    for (unsigned p = 0; p < my_rank; p++)
+     {
+      p_matrix_first_row += p_matrix_nrow_local_all[p];
+     }
+    delete[] p_matrix_nrow_local_all;
+#endif
+   }
+  else
+   {
+    p_matrix_first_row = 0;
+   }
+
+  // build the distribution
+  if (is_subsidiary_block_preconditioner())
+   {
+    if (nproc == 1 || !distributed)
+     {
+      LinearAlgebraDistribution dist(comm_pt(),Nrow,false);
+      this->build_distribution(dist);
+     }
+    else
+     {
+      LinearAlgebraDistribution dist(comm_pt(),
+                                     p_matrix_first_row,
+                                     p_matrix_nrow_local,Nrow);
+      this->build_distribution(dist);
+     }
+   }
+  else
+   {
+    if (nproc == 1 || !distributed)
+     {
+      Preconditioner_matrix_distribution_pt = new
+       LinearAlgebraDistribution(comm_pt(),Nrow,false);
+     }
+    else
+     {
+      Preconditioner_matrix_distribution_pt = new
+       LinearAlgebraDistribution(comm_pt(),
+                                 p_matrix_first_row,
+                                 p_matrix_nrow_local,Nrow);
+     }
+   }
+
+  // clearing up after comm to assemble sparse lookup schemes
+#ifdef OOMPH_HAS_MPI
+  if (send_requests_sparse.size()>0)
+   {
+    MPI_Waitall(send_requests_sparse.size(),
+                &send_requests_sparse[0],MPI_STATUS_IGNORE);
+   }
+  if (recv_requests_sparse.size()>0)
+   {
+    MPI_Waitall(recv_requests_sparse.size(),
+                &recv_requests_sparse[0],MPI_STATUS_IGNORE);
+   }
+  for (unsigned p = 0; p < nproc; p++)
+   {
+    delete[] index_in_dof_block_sparse_send[p];
+    delete[] dof_number_sparse_send[p];
+   }
+  delete[] index_in_dof_block_sparse_send;
+  delete[] dof_number_sparse_send;
+  delete[] nreq_sparse;
+  delete[] nreq_sparse_for_proc;
+#endif
+
+  // next we assemble the lookup schemes for the rows
+  // if the matrix is not distributed then we assemble Global_index
+  // if the matrix is distributed then Rows_to_send_..., Rows_to_recv_... etc
+  if (!distributed)
+   {
+    // resize the storage
+    Global_index.resize(Nblock_types);
+    for (unsigned b = 0; b < Nblock_types; b++)
+     {
+      Global_index[b].resize(Block_distribution_pt[b]->nrow());
+     }
+
+    // compute
+    unsigned nrow = this->master_nrow();
+    for (unsigned i = 0; i < nrow; i++)
+     {
+      // the dof type number
+      int dof_number = this->dof_number(i);
+      if (dof_number >= 0)
+       {
+
+        // the block number
+        unsigned block_number = Dof_number_to_block_number_lookup[dof_number];
+
+        // compute the index in the block
+        unsigned index_in_block = 0;
+        unsigned ptr = 0;
+        while (int(Block_number_to_dof_number_lookup[block_number][ptr])
+               != dof_number)
+         {
+          index_in_block +=
+           dof_block_dimension(Block_number_to_dof_number_lookup[block_number]
+                               [ptr]);
+          ptr++;
+         }
+        index_in_block += index_in_dof(i);
+        Global_index[block_number][index_in_block] = i;
+       }
+     }
+   }
+  // otherwise the matrix is distributed
+  else
+   {
+#ifdef OOMPH_HAS_MPI
+
+    // the pointer to the master distribution
+    const LinearAlgebraDistribution* master_distribution_pt =
+     this->master_distribution_pt();
+
+    // resize the nrows... storage
+    Nrows_to_send_for_get_block.resize(Nblock_types,nproc);
+    Nrows_to_send_for_get_block.initialise(0);
+    Nrows_to_send_for_get_ordered.resize(nproc);
+    Nrows_to_send_for_get_ordered.initialise(0);
+
+    // loop over my rows
+    unsigned nrow_local = master_distribution_pt->nrow_local();
+    unsigned first_row = master_distribution_pt->first_row();
+    for (unsigned i = 0; i < nrow_local; i++)
+     {
+
+      // the block number
+      int b = this->block_number(first_row + i);
+
+      // check that the DOF i is associated with this preconditioner
+      if (b >= 0)
+       {
+        // the block index
+        unsigned j = this->index_in_block(first_row + i);
+
+        // the processor this row will be sent to
+        unsigned block_p = 0;
+        while(!(Block_distribution_pt[b]->first_row(block_p) <= j &&
+                (Block_distribution_pt[b]->first_row(block_p) +
+                 Block_distribution_pt[b]->nrow_local(block_p) > j)))
+         {
+          block_p++;
+         }
+
+        // and increment the counter
+        Nrows_to_send_for_get_block(b,block_p)++;
+        Nrows_to_send_for_get_ordered[block_p]++;
+       }
+     }
+
+    // resize the storage for Nrows_to_recv
+    Nrows_to_recv_for_get_block.resize(Nblock_types,nproc);
+    Nrows_to_recv_for_get_block.initialise(0);
+    Nrows_to_recv_for_get_ordered.resize(nproc);
+    Nrows_to_recv_for_get_ordered.initialise(0);
+
+    // next we send the number of rows that will be sent by this processor
+    Vector<unsigned*> nrows_to_send(nproc,0);
+    Vector<unsigned*> nrows_to_recv(nproc,0);
+    Vector<MPI_Request> send_requests_nrow;
+    Vector<MPI_Request> recv_requests_nrow;
+    Vector<unsigned> proc;
+    for (unsigned p = 0; p < nproc; p++)
+     {
+      if (p != my_rank)
+       {
+        // send
+        proc.push_back(p);
+        nrows_to_send[p] = new unsigned[Nblock_types];
+        for (unsigned b = 0; b < Nblock_types; b++)
+         {
+          nrows_to_send[p][b] =
+           Nrows_to_send_for_get_block(b,p);
+         }
+        MPI_Request s_req;
+        MPI_Isend(nrows_to_send[p],Nblock_types,MPI_UNSIGNED,p,3,
+                  comm_pt()->mpi_comm(),&s_req);
+        send_requests_nrow.push_back(s_req);
+
+        // recv
+        nrows_to_recv[p] = new unsigned[Nblock_types];
+        MPI_Request r_req;
+        MPI_Irecv(nrows_to_recv[p],Nblock_types,MPI_UNSIGNED,p,3,
+                  comm_pt()->mpi_comm(),&r_req);
+        recv_requests_nrow.push_back(r_req);
+       }
+      // send to self
+      else
+       {
+        for (unsigned b = 0; b < Nblock_types; b++)
+         {
+          Nrows_to_recv_for_get_block(b,p) =
+           Nrows_to_send_for_get_block(b,p);
+         }
+        Nrows_to_recv_for_get_ordered[p] = Nrows_to_send_for_get_ordered[p];
+       }
+     }
+
+    // create some temporary storage for the global row indices that will
+    // be received from another processor.
+    DenseMatrix<int*> block_rows_to_send(Nblock_types,nproc,0);
+    Vector<int*> ordered_rows_to_send(nproc,0);
+
+    // resize the rows... storage
+    Rows_to_send_for_get_block.resize(Nblock_types,nproc);
+    Rows_to_send_for_get_block.initialise(0);
+    Rows_to_send_for_get_ordered.resize(nproc);
+    Rows_to_send_for_get_ordered.initialise(0);
+    Rows_to_recv_for_get_block.resize(Nblock_types,nproc);
+    Rows_to_recv_for_get_block.initialise(0);
+
+    // resize the storage
+    for (unsigned p = 0; p < nproc; p++)
+     {
+      for (unsigned b = 0; b < Nblock_types; b++)
+       {
+        Rows_to_send_for_get_block(b,p)
+         = new int[Nrows_to_send_for_get_block(b,p)];
+        if (p != my_rank)
+         {
+          block_rows_to_send(b,p)
+           = new int[Nrows_to_send_for_get_block(b,p)];
+         }
+        else
+         {
+          Rows_to_recv_for_get_block(b,p)
+           = new int[Nrows_to_send_for_get_block(b,p)];
+         }
+       }
+      Rows_to_send_for_get_ordered[p]
+       = new int [Nrows_to_send_for_get_ordered[p]];
      }
 
 
-     
 
-     // my distribution
-     unsigned first_row = this->distribution_pt()->first_row();
-     unsigned nrow_local = this->distribution_pt()->nrow_local();
-     unsigned last_row = first_row+nrow_local-1;
+    // loop over my rows to allocate the nrows
+    DenseMatrix<unsigned> ptr_block(Nblock_types,nproc,0);
+    for (unsigned i = 0; i < nrow_local; i++)
+     {
+      // the block number
+      int b = this->block_number(first_row + i);
 
-#ifdef OOMPH_HAS_MPI 
+      // check that the DOF i is associated with this preconditioner
+      if (b >= 0)
+       {
 
-     // storage for the rows required by each processor in the dense
-     // block lookup storage scheme
-     // dense_required_rows(p,0) is the minimum global index required by proc p
-     //                 ...(p,1) is the maximum global index required by proc p
-     DenseMatrix<unsigned> dense_required_rows(nproc,2);
-     for (unsigned p = 0; p < nproc; p++)
-      {
-       dense_required_rows(p,0) = this->distribution_pt()->first_row(p);
-       dense_required_rows(p,1) = this->distribution_pt()->first_row(p)
-        +this->distribution_pt()->nrow_local(p) - 1;
-      }
+        // the block index
+        unsigned j = this->index_in_block(first_row + i);
 
-     // determine the global rows That are not in the range first_row to 
-     // first_row+nrow_local for which we should store the 
-     // Dof_index and Index_in_dof_block for
-     // then send the lists to other processors
-     Vector<unsigned> sparse_global_rows_for_block_lookup;
-     if (matrix_distributed)
-      {
-       unsigned nnz = cr_matrix_pt->nnz();
-       int* column_index = cr_matrix_pt->column_index();
-       for (unsigned i = 0; i < nnz; i++)
-        {
-         unsigned ci = column_index[i];
-         if (ci<first_row || ci>last_row) 
-          {
-           if (find(sparse_global_rows_for_block_lookup.begin(),
-                    sparse_global_rows_for_block_lookup.end(),
-                    ci) == 
-               sparse_global_rows_for_block_lookup.end())
-            {
-             sparse_global_rows_for_block_lookup.push_back(ci);
-            }
-          }
-        }
-      }
-     sort(sparse_global_rows_for_block_lookup.begin(),
-          sparse_global_rows_for_block_lookup.end());
-     int nsparse = sparse_global_rows_for_block_lookup.size();
-     Global_index_sparse.resize(nsparse);
-     Index_in_dof_block_sparse.resize(nsparse);
-     Dof_number_sparse.resize(nsparse);
-     for (int i = 0; i < nsparse; i++)
-      {
-       Global_index_sparse[i]=sparse_global_rows_for_block_lookup[i];
-      }
-     sparse_global_rows_for_block_lookup.clear();
+        // the processor this row will be sent to
+        unsigned block_p = 0;
+        while(!(Block_distribution_pt[b]->first_row(block_p) <= j &&
+                (Block_distribution_pt[b]->first_row(block_p) +
+                 Block_distribution_pt[b]->nrow_local(block_p) > j)))
+         {
+          block_p++;
+         }
+
+        // and store the row
+        Rows_to_send_for_get_block(b,block_p)[ptr_block(b,block_p)] = i;
+        if (block_p != my_rank)
+         {
+          block_rows_to_send(b,block_p)[ptr_block(b,block_p)]
+           = j - Block_distribution_pt[b]->first_row(block_p);
+         }
+        else
+         {
+          Rows_to_recv_for_get_block(b,block_p)[ptr_block(b,block_p)]
+           = j - Block_distribution_pt[b]->first_row(block_p);
+         }
+        ptr_block(b,block_p)++;
+       }
+     }
+
+    // next block ordered
+    for (unsigned p = 0; p < nproc; ++p)
+     {
+      int pt = 0;
+      for (unsigned b = 0; b < Nblock_types; ++b)
+       {
+
+        for (unsigned i = 0; i < Nrows_to_send_for_get_block(b,p); ++i)
+         {
+          Rows_to_send_for_get_ordered[p][pt] =
+           Rows_to_send_for_get_block(b,p)[i];
+          pt++;
+         }
+       }
+     }
+
+    // next process the nrow recvs as they complete
+
+    // recv and store the data
+    unsigned c = recv_requests_nrow.size();
+    while (c > 0)
+     {
+
+      // wait for any communication to finish
+      int req_number;
+      MPI_Waitany(c,&recv_requests_nrow[0],&req_number,MPI_STATUS_IGNORE);
+      recv_requests_nrow.erase(recv_requests_nrow.begin()+req_number);
+      c--;
+
+      // determine the source processor
+      unsigned p = proc[req_number];
+      proc.erase(proc.begin()+req_number);
+
+      // copy the data to its final storage
+      Nrows_to_recv_for_get_ordered[p]=0;
+      for (unsigned b = 0; b < Nblock_types; b++)
+       {
+        Nrows_to_recv_for_get_block(b,p) = nrows_to_recv[p][b];
+        Nrows_to_recv_for_get_ordered[p] += nrows_to_recv[p][b];
+       }
+
+      // and clear
+      delete[] nrows_to_recv[p];
+     }
+
+    // resize the storage for the incoming rows data
+    Rows_to_recv_for_get_ordered.resize(nproc,0);
+    for (unsigned p = 0; p < nproc; p++)
+     {
+      if (p != my_rank)
+       {
+        for (unsigned b = 0; b < Nblock_types; b++)
+         {
+          Rows_to_recv_for_get_block(b,p)
+           = new int[Nrows_to_recv_for_get_block(b,p)];
+         }
+       }
+     }
+
+    // compute the number of sends and recv from this processor
+    // to each other processor
+    Vector<unsigned> nsend_for_rows(nproc,0);
+    Vector<unsigned> nrecv_for_rows(nproc,0);
+    for (unsigned p = 0; p < nproc; p++)
+     {
+      if (p != my_rank)
+       {
+        for (unsigned b = 0; b < Nblock_types; b++)
+         {
+          if (Nrows_to_send_for_get_block(b,p) > 0)
+           {
+            nsend_for_rows[p]++;
+           }
+          if (Nrows_to_recv_for_get_block(b,p) > 0)
+           {
+            nrecv_for_rows[p]++;
+           }
+         }
+       }
+     }
+
+    // finally post the sends and recvs
+    MPI_Aint base_displacement;
+    MPI_Address(matrix_pt(),&base_displacement);
+    Vector<MPI_Request> req_rows;
+    for (unsigned p = 0; p < nproc; p++)
+     {
+      if (p != my_rank)
+       {
+        // send
+        if (nsend_for_rows[p] > 0)
+         {
+          MPI_Datatype send_types[nsend_for_rows[p]];
+          MPI_Aint send_displacements[nsend_for_rows[p]];
+          int send_sz[nsend_for_rows[p]];
+          unsigned send_ptr = 0;
+          for (unsigned b = 0; b < Nblock_types; b++)
+           {
+            if (Nrows_to_send_for_get_block(b,p) > 0)
+             {
+              MPI_Type_contiguous(Nrows_to_send_for_get_block(b,p),
+                                  MPI_INT,&send_types[send_ptr]);
+              MPI_Type_commit(&send_types[send_ptr]);
+              MPI_Address(block_rows_to_send(b,p),
+                          &send_displacements[send_ptr]);
+              send_displacements[send_ptr] -= base_displacement;
+              send_sz[send_ptr] = 1;
+              send_ptr++;
+             }
+           }
+          MPI_Datatype final_send_type;
+          MPI_Type_struct(nsend_for_rows[p],send_sz,send_displacements,
+                          send_types,&final_send_type);
+          MPI_Type_commit(&final_send_type);
+          for (unsigned i = 0; i < nsend_for_rows[p]; i++)
+           {
+            MPI_Type_free(&send_types[i]);
+           }
+          MPI_Request send_req;
+          MPI_Isend(matrix_pt(),1,final_send_type,p,4,
+                    comm_pt()->mpi_comm(),&send_req);
+          req_rows.push_back(send_req);
+          MPI_Type_free(&final_send_type);
+         }
+
+        // recv
+        if (nrecv_for_rows[p] > 0)
+         {
+          MPI_Datatype recv_types[nrecv_for_rows[p]];
+          MPI_Aint recv_displacements[nrecv_for_rows[p]];
+          int recv_sz[nrecv_for_rows[p]];
+          unsigned recv_ptr = 0;
+          for (unsigned b = 0; b < Nblock_types; b++)
+           {
+            if (Nrows_to_recv_for_get_block(b,p) > 0)
+             {
+              MPI_Type_contiguous(Nrows_to_recv_for_get_block(b,p),
+                                  MPI_INT,&recv_types[recv_ptr]);
+              MPI_Type_commit(&recv_types[recv_ptr]);
+              MPI_Address(Rows_to_recv_for_get_block(b,p),
+                          &recv_displacements[recv_ptr]);
+              recv_displacements[recv_ptr] -= base_displacement;
+              recv_sz[recv_ptr] = 1;
+              recv_ptr++;
+             }
+           }
+          MPI_Datatype final_recv_type;
+          MPI_Type_struct(nrecv_for_rows[p],recv_sz,recv_displacements,
+                          recv_types,&final_recv_type);
+          MPI_Type_commit(&final_recv_type);
+          for (unsigned i = 0; i < nrecv_for_rows[p]; i++)
+           {
+            MPI_Type_free(&recv_types[i]);
+           }
+          MPI_Request recv_req;
+          MPI_Irecv(matrix_pt(),1,final_recv_type,p,4,
+                    comm_pt()->mpi_comm(),&recv_req);
+          req_rows.push_back(recv_req);
+          MPI_Type_free(&final_recv_type);
+         }
+       }
+     }
+
+    // cleaning up Waitalls
 
 
-     Vector<MPI_Request> recv_requests_sparse_nreq;
-     if (matrix_distributed)
-      {
-       MPI_Aint base_displacement_sparse;
-       MPI_Address(nreq_sparse,&base_displacement_sparse);
+    // wait for the recv requests so we can compute
+    // Nrows_to_recv_for_get_ordered
+    unsigned n_req_rows = req_rows.size();
+    if (n_req_rows)
+     {
+      MPI_Waitall(n_req_rows,&req_rows[0],MPI_STATUS_IGNORE);
+     }
 
-       int zero = 0;
-       for (unsigned p = 0; p < nproc; p++)
-        {
-         nreq_sparse[p] = 0;
-         nreq_sparse_for_proc[p] = 0;
+    // resize the storage
+    Rows_to_recv_for_get_ordered.resize(nproc);
+    Rows_to_recv_for_get_ordered.initialise(0);
 
-         // determine the global eqn numbers required by this processor
-         // that can be classified by processor p
-         int begin = 0;
-         for (int i = 0; i < nsparse; ++i)
-          {
-           if (Global_index_sparse[i]<dense_required_rows(p,0))
-            {
-             ++begin;
-            }
-           else
-            {
-             if (Global_index_sparse[i]<=dense_required_rows(p,1))
-              {
-               ++nreq_sparse[p];
-              }
-             else
-              {
-               break;
-              }
-            }
-          }
+    // construct block offset
+    Vector<int> vec_offset(Nblock_types,0);
+    for (unsigned b = 1; b < Nblock_types; ++b)
+     {
+      vec_offset[b]=vec_offset[b-1]+Block_distribution_pt[b-1]->nrow_local();
+     }
 
-         // if this processor has rows to be classified by proc p
-         if (nreq_sparse[p]>0)
-          {
-         
-           // send the number of global eqn numbers
-           MPI_Request req1;
-           MPI_Isend(&nreq_sparse[p],1,MPI_UNSIGNED,p,31,
-			      problem_pt()->communicator_pt()->mpi_comm(),&req1);
-           send_requests_sparse.push_back(req1);
-         
-           // send the global eqn numbers
-           MPI_Request req2;
-           MPI_Isend(&Global_index_sparse[begin],
-                     nreq_sparse[p],MPI_UNSIGNED,p,32,
-			      problem_pt()->communicator_pt()->mpi_comm(),&req2);
-           send_requests_sparse.push_back(req2);
-         
-           // post the recvs for the data that will be returned
-         
-           // the datatypes, displacements, lengths for the two datatypes
-           MPI_Datatype types[2];
-           MPI_Aint displacements[2];
-           int lengths[2];
-           
-           // index in dof block
-           MPI_Type_contiguous(nreq_sparse[p],MPI_UNSIGNED,&types[0]);
-           MPI_Type_commit(&types[0]);
-           MPI_Address(&Index_in_dof_block_sparse[begin],&displacements[0]);
-           displacements[0] -= base_displacement_sparse;
-           lengths[0] = 1;
-         
-           // dof number
-           MPI_Type_contiguous(nreq_sparse[p],MPI_UNSIGNED,&types[1]);
-           MPI_Type_commit(&types[1]);
-           MPI_Address(&Dof_number_sparse[begin],&displacements[1]);
-           displacements[1] -= base_displacement_sparse;
-           lengths[1] = 1;           
-         
-           // build the final type
-           MPI_Datatype recv_type;
-           MPI_Type_struct(2,lengths,displacements,types,&recv_type);
-           MPI_Type_commit(&recv_type);
-           MPI_Type_free(&types[0]);
-           MPI_Type_free(&types[1]);
-         
-           // and recv
-           MPI_Request req;
-           MPI_Irecv(nreq_sparse,1,recv_type,p,33,
-			      problem_pt()->communicator_pt()->mpi_comm(),&req);
-           recv_requests_sparse.push_back(req);
-           MPI_Type_free(&recv_type);
-          }
+    //
+    for (unsigned p = 0; p < nproc; p++)
+     {
+      int pt = 0;
+      Rows_to_recv_for_get_ordered[p]
+       = new int[Nrows_to_recv_for_get_ordered[p]];
+      for (unsigned b = 0; b < Nblock_types; b++)
+       {
+        for (unsigned i = 0; i < Nrows_to_recv_for_get_block(b,p); i++)
+         {
+          Rows_to_recv_for_get_ordered[p][pt] =
+           Rows_to_recv_for_get_block(b,p)[i]+vec_offset[b];
+          pt++;
+         }
+       }
+     }
 
-         // if no communication required, confirm this
-         if (nreq_sparse[p]==0)
-          {
-           MPI_Request req1;
-           MPI_Isend(&zero,1,MPI_UNSIGNED,p,31,
-			      problem_pt()->communicator_pt()->mpi_comm(),&req1);
-           send_requests_sparse.push_back(req1);
-          }
+    // clean up
+    for (unsigned p = 0; p < nproc; p++)
+     {
+      if (p!= my_rank)
+       {
+        for (unsigned b = 0; b < Nblock_types; b++)
+         {
+          delete[] block_rows_to_send(b,p);
+         }
+        if (Nrows_to_send_for_get_ordered[p] > 0)
+         {
+          delete[] ordered_rows_to_send[p];
+         }
+       }
+     }
 
-         //
-         MPI_Request req;
-         MPI_Irecv(&nreq_sparse_for_proc[p],1,MPI_UNSIGNED,p,31,
-			  problem_pt()->communicator_pt()->mpi_comm(),&req);
-         recv_requests_sparse_nreq.push_back(req);
-        }
-      } 
+    // and the send reqs
+    unsigned n_req_send_nrow = send_requests_nrow.size();
+    if (n_req_send_nrow)
+     {
+      MPI_Waitall(n_req_send_nrow,&send_requests_nrow[0],MPI_STATUS_IGNORE);
+     }
+    for (unsigned p = 0; p < nproc; p++)
+     {
+      delete[] nrows_to_send[p];
+     }
 #endif
-
-     // resize the storage
-     Dof_number_dense.resize(nrow_local);
-     Index_in_dof_block_dense.resize(nrow_local);
-
-     // Set Mesh_pt to the Problem' Mesh if nobody has made any
-     // other assigment1
-	if (nmesh()==0)
-      {
-       this->set_nmesh(1);
-	    this->set_mesh(0,problem_pt()->mesh_pt());
-      }
-
-     // zero the number of dof types
-     Ndof_types = 0;
-
-#ifdef PARANOID
-	for (unsigned i=0;i<nmesh();i++)
-      {
-	    if (mesh_pt(i)==0)
-        {
-         std::ostringstream error_message;
-		error_message << "Error: mesh_pt("<< i << ") = 0 \n";
-         throw OomphLibWarning(error_message.str(),
-                               "BlockPreconditioner::block_setup",
-                               OOMPH_EXCEPTION_LOCATION);
-        }
-      }
-     // Vector to keep track of previously assigned block numbers
-     // to check consistency between multple assignements.
-     Vector<int> previously_assigned_block_number(nrow_local,
-                                                  Data::Is_unclassified);
-#endif
-
-     // determine whether the problem is distribution
-     bool problem_distributed = false;
-
-     // the problem method distributed() is only accessible with MPI
-#ifdef OOMPH_HAS_MPI
-	problem_distributed = problem_pt()->distributed();
-#endif
-
-     // if the problem is not distributed
-     if (!problem_distributed)
-      {
-
-       // Offset for the block type in the overall system.
-       // Different meshes contain different block-preconditionable
-       // elements -- their blocks are added one after the other...
-       unsigned dof_offset=0;
-
-	    // std::cout << "Begin looping through meshes: " << std::endl;
-       // Loop over all meshes
-	    for (unsigned m=0;m<nmesh();m++)
-        {
-         // Number of elements in this mesh
-		unsigned n_element = mesh_pt(m)->nelement();
-
-         // Find the number of block types that the elements in this mesh
-         // are in charge of
-		unsigned ndof_in_element = ndof_types_in_mesh(m);
-         Ndof_types += ndof_in_element;
-
-         for (unsigned e=0;e<n_element;e++)
-          {
-           // List containing pairs of global equation number and
-           // dof number for each global dof in an element
-           std::list<std::pair<unsigned long,unsigned> > dof_lookup_list;
-
-           // Get list of blocks associated with the element's global unknowns
-		    mesh_pt(m)->element_pt(e)->
-            get_dof_numbers_for_unknowns(dof_lookup_list);
-
-           // Loop over all entries in the list
-           // and store the block number
-           typedef std::list<std::pair<unsigned long,unsigned> >::iterator IT;
-           for (IT it=dof_lookup_list.begin();
-                it!=dof_lookup_list.end();it++)
-            {
-
-             unsigned long global_dof = it->first;
-             if (global_dof >= unsigned(first_row) &&
-                 global_dof <= unsigned(last_row))
-              {
-               unsigned dof_number = (it->second)+dof_offset;
-               Dof_number_dense[global_dof-first_row] 
-                = dof_number;
-               
-#ifdef PARANOID
-               // Check consistency of block numbers if assigned multiple times
-               if (previously_assigned_block_number[global_dof-
-                                                    first_row]<0)
-                {
-                 previously_assigned_block_number[global_dof-first_row]
-                  =dof_number;
-                }
-
-#endif
-              }
-            }
-          }
-
-         // About to do the next mesh which contains block preconditionable
-         // elements of a different type; all the dofs that these elements are
-         // "in charge of" differ from the ones considered so far.
-         // Bump up the block counter to make sure we're not overwriting
-         // anything here
-         dof_offset+=ndof_in_element;
-        }
-
-#ifdef PARANOID
-	    // check that every global equation number has been allocated a dof type
-       for (unsigned i = 0; i < nrow_local; i++)
-        {
-         if (previously_assigned_block_number[i] < 0)
-          {
-         std::ostringstream error_message;
-         error_message << "Not all degrees of freedom have had DOF type "
-				  << "numbers allocated. Dof number " << i
-				  << " is unallocated.";
-         throw OomphLibError(error_message.str(),
-                             "BlockPreconditioner::block_setup(...)",
-                             OOMPH_EXCEPTION_LOCATION);
-        }
-	      }
-#endif
-      }
-     // else the problem is distributed
-     else
-      {
-#ifdef OOMPH_HAS_MPI
-
-
-       // Offset for the block type in the overall system.
-       // Different meshes contain different block-preconditionable
-       // elements -- their blocks are added one after the other...
-       unsigned dof_offset=0;
-
-       // the set of global degrees of freedom and their corresponding dof 
-       // number on this processor
-       // use set because the elements are ordered and unqiue
-       std::set<std::pair<unsigned long,unsigned> > my_dof_set;
-
-       // Loop over all meshes
-	    for (unsigned m=0;m<nmesh();m++)
-        {
-         // Number of elements in this mesh
-		unsigned n_element = this->mesh_pt(m)->nelement();
-
-         // Find the number of block types that the elements in this mesh
-         // are in charge of
-		unsigned ndof_in_element = ndof_types_in_mesh(m);
-         Ndof_types += ndof_in_element;
-
-         // Loop over all elements
-         for (unsigned e=0;e<n_element;e++)
-          {
-
-           // if the element is not a halo element
-		    if (!this->mesh_pt(m)->element_pt(e)->is_halo())
-            {
-             // List containing pairs of global equation number and
-             // dof number for each global dof in an element
-             std::list<std::pair<unsigned long,unsigned> > dof_lookup_list;
-
-             // Get list of blocks associated with the element's global
-             // unknowns
-			this->mesh_pt(m)->element_pt(e)->
-              get_dof_numbers_for_unknowns(dof_lookup_list);
-
-             // update the block numbers
-             typedef 
-              std::list<std::pair<unsigned long,unsigned> >::iterator IT;
-             for (IT it=dof_lookup_list.begin();
-                  it!=dof_lookup_list.end();it++)
-              {
-               it->second = (it->second)+dof_offset;
-              }
-
-             // and insert them into our set
-             my_dof_set.insert(dof_lookup_list.begin(),dof_lookup_list.end());
-            }
-          }
-
-         // About to do the next mesh which contains block preconditionable
-         // elements of a different type; all the dofs that these elements are
-         // "in charge of" differ from the ones considered so far.
-         // Bump up the block counter to make sure we're not overwriting
-         // anything here
-         dof_offset+=ndof_in_element;
-        }
-
-       // next copy the set of my dofs to two vectors to send
-       unsigned my_ndof = my_dof_set.size();
-       unsigned long* my_global_dofs = new unsigned long[my_ndof];
-       unsigned* my_dof_numbers = new unsigned[my_ndof];
-       typedef 
-        std::set<std::pair<unsigned long,unsigned> >::iterator IT;       
-       unsigned pt = 0;
-       for (IT it = my_dof_set.begin(); it != my_dof_set.end(); it++)
-        {
-         my_global_dofs[pt] = it->first;
-         my_dof_numbers[pt] = it->second;
-         pt++;
-        }
-
-       // and then clear the set
-       my_dof_set.clear();
-
-       // count up how many DOFs need to be sent to each processor
-       int* first_dof_to_send = new int[nproc];
-       int* ndof_to_send = new int[nproc];
-       unsigned ptr = 0;
-       for (unsigned p = 0; p < nproc; p++)
-        {
-         first_dof_to_send[p] = 0;
-         ndof_to_send[p] = 0;
-         while (ptr < my_ndof && my_global_dofs[ptr] < dense_required_rows(p,0)) 
-          {
-           ptr++;
-          }
-         first_dof_to_send[p] = ptr;
-         while (ptr < my_ndof && my_global_dofs[ptr] <= dense_required_rows(p,1))
-          {
-           ndof_to_send[p]++;
-           ptr++;
-          }
-        }
-
-       // next communicate to each processor how many dofs it expects to recv
-       int* ndof_to_recv = new int[nproc];
-       MPI_Alltoall(ndof_to_send,1,MPI_INT,ndof_to_recv,1,MPI_INT,
-			 problem_pt()->communicator_pt()->mpi_comm());
-
-       // the base displacements for the sends
-       MPI_Aint base_displacement;
-       MPI_Address(my_global_dofs,&base_displacement);
-
-#ifdef PARANOID
-       // storage for paranoid check to ensure that every row as been
-       // imported
-       std::vector<bool> dof_recv(nrow_local,false);
-#endif
-
-       // next send and recv
-       Vector<MPI_Request> send_requests;
-       Vector<MPI_Request> recv_requests;
-       Vector<unsigned long*> global_dofs_recv(nproc,0);
-       Vector<unsigned*> dof_numbers_recv(nproc,0);
-       Vector<unsigned> proc;
-       for (unsigned p = 0; p < nproc; p++)
-        {
-         if (p != my_rank)
-          {
-
-           // send
-           if (ndof_to_send[p] > 0)
-            {
-             // the datatypes, displacements, lengths for the two datatypes
-             MPI_Datatype types[2];
-             MPI_Aint displacements[2];
-             int lengths[2];
-
-             // my global dofs
-             MPI_Type_contiguous(ndof_to_send[p],MPI_UNSIGNED_LONG,&types[0]);
-             MPI_Type_commit(&types[0]);
-             MPI_Address(my_global_dofs + first_dof_to_send[p],
-                         &displacements[0]);
-             displacements[0] -= base_displacement;
-             lengths[0] = 1;
-
-             // my dof numbers
-             MPI_Type_contiguous(ndof_to_send[p],MPI_UNSIGNED,&types[1]);
-             MPI_Type_commit(&types[1]);
-             MPI_Address(my_dof_numbers + first_dof_to_send[p],
-                         &displacements[1]);
-             displacements[1] -= base_displacement;
-             lengths[1] = 1;           
-
-             // build the final type
-             MPI_Datatype send_type;
-             MPI_Type_struct(2,lengths,displacements,types,&send_type);
-             MPI_Type_commit(&send_type);
-             MPI_Type_free(&types[0]);
-             MPI_Type_free(&types[1]);
-
-             // and send
-             MPI_Request req;
-             MPI_Isend(my_global_dofs,1,send_type,p,2,
-				  problem_pt()->communicator_pt()->mpi_comm(),&req);
-             send_requests.push_back(req);
-             MPI_Type_free(&send_type);
-            }
-
-           // and recv
-           if (ndof_to_recv[p] > 0)
-            {
-             // resize the storage
-             global_dofs_recv[p] = new unsigned long[ndof_to_recv[p]];
-             dof_numbers_recv[p] = new unsigned[ndof_to_recv[p]];
-             proc.push_back(p);
-
-             // the datatypes, displacements, lengths for the two datatypes
-             MPI_Datatype types[2];
-             MPI_Aint displacements[2];
-             int lengths[2];
-
-             // my global dofs
-             MPI_Type_contiguous(ndof_to_recv[p],MPI_UNSIGNED_LONG,&types[0]);
-             MPI_Type_commit(&types[0]);
-             MPI_Address(global_dofs_recv[p],&displacements[0]);
-             displacements[0] -= base_displacement;
-             lengths[0] = 1;
-
-             // my dof numbers
-             MPI_Type_contiguous(ndof_to_recv[p],MPI_UNSIGNED,&types[1]);
-             MPI_Type_commit(&types[1]);
-             MPI_Address(dof_numbers_recv[p],&displacements[1]);
-             displacements[1] -= base_displacement;
-             lengths[1] = 1;           
-
-             // build the final type
-             MPI_Datatype recv_type;
-             MPI_Type_struct(2,lengths,displacements,types,&recv_type);
-             MPI_Type_commit(&recv_type);
-             MPI_Type_free(&types[0]);
-             MPI_Type_free(&types[1]);
-
-             // and recv
-             MPI_Request req;
-             MPI_Irecv(my_global_dofs,1,recv_type,p,2,
-				  problem_pt()->communicator_pt()->mpi_comm(),&req);
-             recv_requests.push_back(req);
-             MPI_Type_free(&recv_type);
-            }
-           
-          }
-         // send to self
-         else
-          {
-           unsigned u = first_dof_to_send[p] + ndof_to_recv[p];
-           for (unsigned i = first_dof_to_send[p]; i < u; i++)
-            {
-#ifdef PARANOID
-             // paranoid check
-             // check that if row has been imported the block number is the 
-             // same
-             if (dof_recv[my_global_dofs[i]-first_row])
-              {
-               if (Dof_number_dense[my_global_dofs[i]-first_row] 
-                   != my_dof_numbers[i])
-                {
-                 std::ostringstream error_message;
-                 error_message 
-                  << "Inconsistency in assigment of block numbers\n"
-                  << "Global dof " <<  my_global_dofs[i]
-                  << "was previously assigned to block " 
-                  <<  Dof_number_dense[my_global_dofs[i]-first_row]
-                  << "\nNow it's been reassigned to block "
-                  << my_dof_numbers[i] << ".\n"
-                  << "This is most likely because one of your\n"
-                  << "elements has classified its degrees of freedom\n"
-                  << "wrongly. You should remember that \n"
-                  << "GeneralisedElement::get_block_numbers_for_unknowns()\n"
-                  << "should only classify the element's OWN dofs and not \n"
-                  << "deal with dofs that were created by resizing nodes, \n"
-                  << "say. Check that loops over nodal values in that \n"
-                  << "function do not use Node::nvalue() to determine the\n"
-                  << "dofs to be classified!\n";
-                 throw OomphLibWarning(error_message.str(),
-                                       "BlockPreconditioner::block_setup(...)",
-                                       OOMPH_EXCEPTION_LOCATION);
-                }
-              }
-             // indicate that this dof has ben recv
-             dof_recv[my_global_dofs[i]-first_row] = true;
-#endif
-             Dof_number_dense[my_global_dofs[i]-first_row] = 
-              my_dof_numbers[i];   
-            }
-          }
-        }
-
-       // recv and store the data
-       unsigned c_recv = recv_requests.size();
-       while (c_recv > 0)
-        {
-
-         // wait for any communication to finish
-         int req_number;
-         MPI_Waitany(c_recv,&recv_requests[0],&req_number,MPI_STATUS_IGNORE);
-         recv_requests.erase(recv_requests.begin()+req_number);
-         c_recv--;
-
-         // determine the source processor
-         unsigned p = proc[req_number];
-         proc.erase(proc.begin()+req_number);
-
-         // import the data
-         for (int i  = 0; i < ndof_to_recv[p]; i++)
-          {
-#ifdef PARANOID
-           // paranoid check
-           // check that if row has been imported the block number is the same
-           if (dof_recv[global_dofs_recv[p][i]-first_row])
-            {
-             if (Dof_number_dense[global_dofs_recv[p][i]-first_row] 
-                 != dof_numbers_recv[p][i])
-              {
-               std::ostringstream error_message;
-               error_message 
-                << "Inconsistency in assignment of block numbers\n"
-                << "Global dof " 
-                <<  global_dofs_recv[p][i]
-                << " was previously assigned to block " 
-                <<  Dof_number_dense[global_dofs_recv[p][i]
-                               -first_row]
-                << "\nNow it's been reassigned to block "
-                << dof_numbers_recv[p][i] << ".\n" 
-                << "This is most likely because one of your\n"
-                << "elements has classified its degrees of freedom\n"
-                << "wrongly. You should remember that \n"
-                << "GeneralisedElement::get_block_numbers_for_unknowns()\n"
-                << "should only classify the element's OWN dofs and not \n"
-                << "deal with dofs that were created by resizing nodes, \n"
-                << "say. Check that loops over nodal values in that \n"
-                << "function do not use Node::nvalue() to determine the\n"
-                << "dofs to be classified!\n";
-               throw OomphLibWarning(error_message.str(),
-                                     "BlockPreconditioner::block_setup(...)",
-                                     OOMPH_EXCEPTION_LOCATION);
-              }
-            }
-           // indicate that this dof has ben recv
-           dof_recv[global_dofs_recv[p][i]-first_row] = true;
-#endif
-           Dof_number_dense[global_dofs_recv[p][i]-first_row] 
-            = dof_numbers_recv[p][i];
-          }
-
-         // delete the data
-         delete[] global_dofs_recv[p];
-         delete[] dof_numbers_recv[p];
-        }
-
-       // finally wait for the send requests to complete as we are leaving
-       // an MPI block of code
-       unsigned csr = send_requests.size();
-       if (csr)
-        {
-         MPI_Waitall(csr,&send_requests[0],MPI_STATUS_IGNORE);
-        }
-
-       // clean up
-       delete[] ndof_to_send;
-       delete[] first_dof_to_send;
-       delete[] ndof_to_recv;
-       delete[] my_global_dofs;
-       delete[] my_dof_numbers;
-#ifdef PARANOID
-       unsigned all_recv = true;
-       for (unsigned i = 0; i < nrow_local; i++)
-        {
-         if (!dof_recv[i])
-          {
-           all_recv = false;
-          }
-        }
-       if (!all_recv)
-        {
-         std::ostringstream error_message;
-         error_message << "Not all the DOF numbers required were received";
-         throw OomphLibError(error_message.str(),
-                             "BlockPreconditioner::block_setup()",
-                             OOMPH_EXCEPTION_LOCATION);
-        }
-#endif
-#else
-       std::ostringstream error_message;
-       error_message
-        << "The problem appears to be distributed, MPI is required";
-       throw OomphLibError(error_message.str(),
-                           "BlockPreconditioner::block_setup()",
-                           OOMPH_EXCEPTION_LOCATION);
-#endif
-      }
-
-#ifdef OOMPH_HAS_MPI
-     Vector<unsigned*> sparse_rows_for_proc(nproc,0);
-     Vector<MPI_Request> sparse_rows_for_proc_requests;     
-     if (matrix_distributed)
-      {
-       // wait for number of sparse rows each processor requires 
-       // post recvs for that data
-       if (recv_requests_sparse_nreq.size()>0)
-        {
-         MPI_Waitall(recv_requests_sparse_nreq.size(),
-                     &recv_requests_sparse_nreq[0],
-                     MPI_STATUS_IGNORE);
-        }
-       for (unsigned p = 0; p < nproc; ++p)
-        {
-         if (nreq_sparse_for_proc[p] > 0)
-          {
-           MPI_Request req;
-           sparse_rows_for_proc[p] = new unsigned[nreq_sparse_for_proc[p]];
-           MPI_Irecv(sparse_rows_for_proc[p],nreq_sparse_for_proc[p],
-                     MPI_UNSIGNED,p,32,
-			      problem_pt()->communicator_pt()->mpi_comm(),&req);
-           sparse_rows_for_proc_requests.push_back(req);
-          }
-        }
-      } 
-#endif
-
-
-     // for every global degree of freedom required by this processor we now 
-     // have the corresponding dof number
-
-     // clear the Ndof_in_dof_block storage
-     Dof_dimension.resize(Ndof_types);
-     Dof_dimension.initialise(0);
-
-     // first consider a non distributed matrix
-     if (!matrix_distributed)
-      {
-
-       // set the Index_in_dof_block
-       unsigned nrow  = this->distribution_pt()->nrow();
-       Index_in_dof_block_dense.resize(nrow);
-       Index_in_dof_block_dense.initialise(0);
-       for (unsigned i = 0; i < nrow; i++)
-        {
-         Index_in_dof_block_dense[i] = Dof_dimension[Dof_number_dense[i]];
-         Dof_dimension[Dof_number_dense[i]]++;
-        }
-      }
-
-     // next a distributed matrix
-     else
-      {
-#ifdef OOMPH_HAS_MPI
-
-       // first compute how many instances of each dof are on this 
-       // processor
-       unsigned* my_nrows_in_dof_block = new unsigned[Ndof_types];
-       for (unsigned i = 0; i < Ndof_types; i++)
-        {
-         my_nrows_in_dof_block[i] = 0;
-        }
-       for (unsigned i = 0; i < nrow_local; i++)
-        {
-         my_nrows_in_dof_block[Dof_number_dense[i]]++;
-        }
-
-       // next share the data
-       unsigned* nrow_in_dof_block_recv = new unsigned[Ndof_types*nproc];
-       MPI_Allgather(my_nrows_in_dof_block,Ndof_types,MPI_UNSIGNED,
-                     nrow_in_dof_block_recv,Ndof_types,MPI_UNSIGNED,
-			  problem_pt()->communicator_pt()->mpi_comm());
-       delete[] my_nrows_in_dof_block;
-
-       // compute my first dof index and Nrows_in_dof_block
-       Vector<unsigned> my_first_dof_index(Ndof_types,0);
-       for (unsigned i = 0; i < Ndof_types; i++)
-        {
-         for (unsigned p = 0; p < my_rank; p++)
-          {
-           my_first_dof_index[i] += nrow_in_dof_block_recv[p*Ndof_types + i];
-          }
-         Dof_dimension[i] = my_first_dof_index[i];
-         for (unsigned p = my_rank; p < nproc; p++)
-          {
-           Dof_dimension[i] += nrow_in_dof_block_recv[p*Ndof_types + i];
-          }
-        }
-       delete[] nrow_in_dof_block_recv;
-
-       // next compute Index in dof block
-       Index_in_dof_block_dense.resize(nrow_local);
-       Index_in_dof_block_dense.initialise(0);
-       Vector<unsigned> dof_counter(Ndof_types,0);
-       for (unsigned i = 0; i < nrow_local; i++)
-        {
-         Index_in_dof_block_dense[i] = 
-          my_first_dof_index[Dof_number_dense[i]] + 
-          dof_counter[Dof_number_dense[i]];
-         dof_counter[Dof_number_dense[i]]++;
-        }
-
-       // the base displacements for the sends
-       if (sparse_rows_for_proc_requests.size()>0) 
-        {
-         MPI_Waitall(sparse_rows_for_proc_requests.size(),
-                     &sparse_rows_for_proc_requests[0],
-                     MPI_STATUS_IGNORE);
-        }
-       MPI_Aint base_displacement;
-       MPI_Address(dof_number_sparse_send,&base_displacement);
-       unsigned first_row = this->distribution_pt()->first_row();
-       for (unsigned p = 0; p < nproc; ++p)
-        {
-         if (nreq_sparse_for_proc[p]>0)
-          {
-           // construct the data
-           index_in_dof_block_sparse_send[p] = 
-            new unsigned[nreq_sparse_for_proc[p]];
-           dof_number_sparse_send[p] = 
-            new unsigned[nreq_sparse_for_proc[p]];
-           for (unsigned i = 0; i < nreq_sparse_for_proc[p]; ++i)
-            {
-             unsigned r = sparse_rows_for_proc[p][i];
-             r -= first_row;
-             index_in_dof_block_sparse_send[p][i]
-              = Index_in_dof_block_dense[r];
-             dof_number_sparse_send[p][i]
-              = Dof_number_dense[r];
-            }
-           delete[] sparse_rows_for_proc[p];
-
-           // send the data
-           // the datatypes, displacements, lengths for the two datatypes
-           MPI_Datatype types[2];
-           MPI_Aint displacements[2];
-           int lengths[2];
-           
-           // index in dof block
-           MPI_Type_contiguous(nreq_sparse_for_proc[p],MPI_UNSIGNED,&types[0]);
-           MPI_Type_commit(&types[0]);
-           MPI_Address(index_in_dof_block_sparse_send[p],&displacements[0]);
-           displacements[0] -= base_displacement;
-           lengths[0] = 1;
-           
-           // dof number
-           MPI_Type_contiguous(nreq_sparse_for_proc[p],MPI_UNSIGNED,&types[1]);
-           MPI_Type_commit(&types[1]);
-           MPI_Address(dof_number_sparse_send[p],&displacements[1]);
-           displacements[1] -= base_displacement;
-           lengths[1] = 1;           
-           
-           // build the final type
-           MPI_Datatype send_type;
-           MPI_Type_struct(2,lengths,displacements,types,&send_type);
-           MPI_Type_commit(&send_type);
-           MPI_Type_free(&types[0]);
-           MPI_Type_free(&types[1]);
-           
-           // and recv
-           MPI_Request req;
-           MPI_Isend(dof_number_sparse_send,1,send_type,p,33,
-			      problem_pt()->communicator_pt()->mpi_comm(),&req);
-           send_requests_sparse.push_back(req);
-           MPI_Type_free(&send_type);
-          }
-         else 
-          {
-           index_in_dof_block_sparse_send[p] = 0;
-           dof_number_sparse_send[p] = 0;
-          }
-        }
-#endif
-      }
-    }
-
-   /////////////////////////////////////////////////////////////////////////////
-   // end of master block preconditioner only operations
-   /////////////////////////////////////////////////////////////////////////////
-
-   // compute the number of rows in each block
-
-#ifdef PARANOID
-   //check the vector is the correct length
-   if (dof_to_block_map.size() != Ndof_types) 
-    {
-     std::ostringstream error_message;
-     error_message  
-      << "The dof_to_block_map vector (size="
-      << dof_to_block_map.size() << ") must be of size Ndof_types="
-      << Ndof_types;
-     throw OomphLibError(
-      error_message.str(),
-      "BlockPreconditioner::block_setup(...)",
-      OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-
-   // find the maximum block number
-   unsigned max_block_number = 0;
-   for (unsigned i = 0; i < Ndof_types; i++)
-    {
-     if (dof_to_block_map[i] > max_block_number)
-      {
-       max_block_number = dof_to_block_map[i];
-      }
-    }
-
-   // resize the storage the the block to dof map
-   Block_number_to_dof_number_lookup.clear();
-   Block_number_to_dof_number_lookup.resize(max_block_number+1);
-   Ndof_in_block.clear();
-   Ndof_in_block.resize(max_block_number+1);
-
-   // resize storage
-   Dof_number_to_block_number_lookup.resize(Ndof_types);
-
-   // build the storage for the two maps (block to dof) and (dof to block)
-   for (unsigned i = 0; i < Ndof_types; i++)
-    {
-     Dof_number_to_block_number_lookup[i] = dof_to_block_map[i];
-     Block_number_to_dof_number_lookup[dof_to_block_map[i]].push_back(i);
-     Ndof_in_block[dof_to_block_map[i]]++;
-    }
-
-#ifdef PARANOID
-   // paranoid check that every block number has at least one DOF associated
-   // with it
-   for (unsigned i = 0; i < max_block_number+1; i++)
-    {
-     if (Block_number_to_dof_number_lookup[i].size() == 0)
-      {
-       std::ostringstream error_message;
-       error_message  << "block number " << i 
-                      << " does not have any DOFs associated with it";
-       throw OomphLibWarning(
-        error_message.str(),
-        "BlockPreconditioner::block_setup(...)",
-        OOMPH_EXCEPTION_LOCATION);
-      }
-    }
-#endif
-
-   // update the number of blocks types
-   Nblock_types = max_block_number+1;
-
-   // distributed or not depends on if we have more than one processor
-   bool distributed = this->master_distribution_pt()->distributed();
-
-   // create the new block distributions
-   Block_distribution_pt.resize(Nblock_types);
-   for (unsigned i = 0; i < Nblock_types; i++)
-    {
-     unsigned block_dim = 0;
-     for (unsigned j = 0; j < Ndof_in_block[i]; j++)
-      {
-       block_dim += 
-        dof_block_dimension(Block_number_to_dof_number_lookup[i][j]);
-      }
-     Block_distribution_pt[i] = new 
-	  LinearAlgebraDistribution(problem_pt()->communicator_pt(),
-                                block_dim,distributed);
-    }
-
-   // create the distribution of the preconditioner matrix
-   // if this preconditioner is a subsidiary preconditioner then it stored 
-   // at Distribution_pt.
-   // if this preconditioner is a master preconditioner then it is stored
-   // at Preconditioner_matrix_distribution_pt
-   
-   // first determine nrow local for this processor
-   unsigned p_matrix_first_row = 0;
-   unsigned p_matrix_nrow_local = 0;
-   for (unsigned b = 0; b < Nblock_types; b++)
-    {
-     p_matrix_nrow_local += Block_distribution_pt[b]->nrow_local();
-    }
-
-   // determine the first row for the p matrix
-   if (distributed)
-    {
-#ifdef OOMPH_HAS_MPI
-     unsigned *p_matrix_nrow_local_all = new unsigned[nproc];
-     MPI_Allgather(&p_matrix_nrow_local,1,MPI_UNSIGNED,
-                   p_matrix_nrow_local_all,1,MPI_UNSIGNED,
-		      problem_pt()->communicator_pt()->mpi_comm());
-     for (unsigned p = 0; p < my_rank; p++)
-      {
-       p_matrix_first_row += p_matrix_nrow_local_all[p];
-      }
-     delete[] p_matrix_nrow_local_all;
-#endif
-    }
-   else
-    {
-     p_matrix_first_row = 0;
-    }
-
-   // build the distribution
-    if (is_subsidiary_block_preconditioner())
-    {
-     if (nproc == 1 || !distributed)
-      {
-	    LinearAlgebraDistribution dist(problem_pt()->communicator_pt(),Nrow,false);
-       this->build_distribution(dist);
-      }
-     else
-      {
-	    LinearAlgebraDistribution dist(problem_pt()->communicator_pt(),
-                                      p_matrix_first_row,
-                                      p_matrix_nrow_local,Nrow);
-       this->build_distribution(dist);
-      }
-    }
-   else
-    {
-     if (nproc == 1 || !distributed)
-      {
-       Preconditioner_matrix_distribution_pt = new
-	      LinearAlgebraDistribution(problem_pt()->communicator_pt(),Nrow,false);
-      }
-     else
-      {
-       Preconditioner_matrix_distribution_pt = new
-	      LinearAlgebraDistribution(problem_pt()->communicator_pt(),
-                                  p_matrix_first_row,
-                                  p_matrix_nrow_local,Nrow);
-      }
-    }
-
-   // clearing up after comm to assemble sparse lookup schemes
-#ifdef OOMPH_HAS_MPI
-   if (send_requests_sparse.size()>0)
-    {
-     MPI_Waitall(send_requests_sparse.size(),
-                 &send_requests_sparse[0],MPI_STATUS_IGNORE);
-    }
-   if (recv_requests_sparse.size()>0)
-    {
-     MPI_Waitall(recv_requests_sparse.size(),
-                 &recv_requests_sparse[0],MPI_STATUS_IGNORE);
-    }
-   for (unsigned p = 0; p < nproc; p++)
-    {
-     delete[] index_in_dof_block_sparse_send[p];
-     delete[] dof_number_sparse_send[p];
-    }
-   delete[] index_in_dof_block_sparse_send;
-   delete[] dof_number_sparse_send;
-   delete[] nreq_sparse;
-   delete[] nreq_sparse_for_proc;
-#endif
-
-   // next we assemble the lookup schemes for the rows
-   // if the matrix is not distributed then we assemble Global_index
-   // if the matrix is distributed then Rows_to_send_..., Rows_to_recv_... etc
-   if (!distributed)
-    {
-     // resize the storage
-     Global_index.resize(Nblock_types);
-     for (unsigned b = 0; b < Nblock_types; b++)
-      {
-       Global_index[b].resize(Block_distribution_pt[b]->nrow());
-      }
-
-     // compute 
-     unsigned nrow = this->master_nrow();
-     for (unsigned i = 0; i < nrow; i++)
-      {
-       // the dof type number
-       int dof_number = this->dof_number(i);
-       if (dof_number >= 0)
-        {
-
-         // the block number
-         unsigned block_number = Dof_number_to_block_number_lookup[dof_number];
-
-         // compute the index in the block
-         unsigned index_in_block = 0;
-         unsigned ptr = 0;
-         while (int(Block_number_to_dof_number_lookup[block_number][ptr]) 
-                != dof_number)
-          {
-           index_in_block +=
-            dof_block_dimension(Block_number_to_dof_number_lookup[block_number]
-                                [ptr]);
-           ptr++;
-          }
-         index_in_block += index_in_dof(i);
-         Global_index[block_number][index_in_block] = i;
-        }
-      }
-    }
-   // otherwise the matrix is distributed
-   else
-    {
-#ifdef OOMPH_HAS_MPI
-
-     // the pointer to the master distribution
-     const LinearAlgebraDistribution* master_distribution_pt = 
-      this->master_distribution_pt();
-
-     // resize the nrows... storage
-     Nrows_to_send_for_get_block.resize(Nblock_types,nproc);
-     Nrows_to_send_for_get_block.initialise(0);
-     Nrows_to_send_for_get_ordered.resize(nproc);
-     Nrows_to_send_for_get_ordered.initialise(0);
-
-     // loop over my rows
-     unsigned nrow_local = master_distribution_pt->nrow_local();
-     unsigned first_row = master_distribution_pt->first_row();
-     for (unsigned i = 0; i < nrow_local; i++)
-      {
-
-       // the block number
-       int b = this->block_number(first_row + i);
-
-       // check that the DOF i is associated with this preconditioner
-       if (b >= 0)
-        {
-         // the block index
-         unsigned j = this->index_in_block(first_row + i);
-
-         // the processor this row will be sent to
-         unsigned block_p = 0;
-         while(!(Block_distribution_pt[b]->first_row(block_p) <= j &&
-                 (Block_distribution_pt[b]->first_row(block_p) +
-                  Block_distribution_pt[b]->nrow_local(block_p) > j)))
-          {
-           block_p++;
-          }
-
-         // and increment the counter
-         Nrows_to_send_for_get_block(b,block_p)++;
-         Nrows_to_send_for_get_ordered[block_p]++;
-        }
-      }
-
-     // resize the storage for Nrows_to_recv
-     Nrows_to_recv_for_get_block.resize(Nblock_types,nproc);
-     Nrows_to_recv_for_get_block.initialise(0);
-     Nrows_to_recv_for_get_ordered.resize(nproc);
-     Nrows_to_recv_for_get_ordered.initialise(0);
-
-     // next we send the number of rows that will be sent by this processor
-     Vector<unsigned*> nrows_to_send(nproc,0);
-     Vector<unsigned*> nrows_to_recv(nproc,0);
-     Vector<MPI_Request> send_requests_nrow;
-     Vector<MPI_Request> recv_requests_nrow;
-     Vector<unsigned> proc;
-     for (unsigned p = 0; p < nproc; p++)
-      {
-       if (p != my_rank)
-        {
-         // send 
-         proc.push_back(p);
-         nrows_to_send[p] = new unsigned[Nblock_types];
-         for (unsigned b = 0; b < Nblock_types; b++)
-          {
-           nrows_to_send[p][b] = 
-            Nrows_to_send_for_get_block(b,p);
-          }
-         MPI_Request s_req;
-         MPI_Isend(nrows_to_send[p],Nblock_types,MPI_UNSIGNED,p,3,
-			  problem_pt()->communicator_pt()->mpi_comm(),&s_req);
-         send_requests_nrow.push_back(s_req);
-
-         // recv
-         nrows_to_recv[p] = new unsigned[Nblock_types];
-         MPI_Request r_req;
-         MPI_Irecv(nrows_to_recv[p],Nblock_types,MPI_UNSIGNED,p,3,
-			  problem_pt()->communicator_pt()->mpi_comm(),&r_req);
-         recv_requests_nrow.push_back(r_req);
-        }
-       // send to self
-       else
-        {
-         for (unsigned b = 0; b < Nblock_types; b++)
-          {
-           Nrows_to_recv_for_get_block(b,p) =
-            Nrows_to_send_for_get_block(b,p);
-          }         
-         Nrows_to_recv_for_get_ordered[p] = Nrows_to_send_for_get_ordered[p];
-        }
-      }
-
-     // create some temporary storage for the global row indices that will
-     // be received from another processor. 
-     DenseMatrix<int*> block_rows_to_send(Nblock_types,nproc,0);
-     Vector<int*> ordered_rows_to_send(nproc,0);
-
-     // resize the rows... storage
-     Rows_to_send_for_get_block.resize(Nblock_types,nproc);
-     Rows_to_send_for_get_block.initialise(0);
-     Rows_to_send_for_get_ordered.resize(nproc);
-     Rows_to_send_for_get_ordered.initialise(0);
-     Rows_to_recv_for_get_block.resize(Nblock_types,nproc);
-     Rows_to_recv_for_get_block.initialise(0);
-
-     // resize the storage
-     for (unsigned p = 0; p < nproc; p++)
-      {
-       for (unsigned b = 0; b < Nblock_types; b++)
-        {
-         Rows_to_send_for_get_block(b,p)
-          = new int[Nrows_to_send_for_get_block(b,p)];
-         if (p != my_rank)
-          {
-           block_rows_to_send(b,p)
-            = new int[Nrows_to_send_for_get_block(b,p)];
-          }
-         else
-          {
-           Rows_to_recv_for_get_block(b,p)
-            = new int[Nrows_to_send_for_get_block(b,p)];
-          }
-        }
-       Rows_to_send_for_get_ordered[p] 
-        = new int [Nrows_to_send_for_get_ordered[p]];
-      }
-
- 
-
-     // loop over my rows to allocate the nrows
-     DenseMatrix<unsigned> ptr_block(Nblock_types,nproc,0);
-     for (unsigned i = 0; i < nrow_local; i++)
-      {
-       // the block number
-       int b = this->block_number(first_row + i);
-
-       // check that the DOF i is associated with this preconditioner
-       if (b >= 0)
-        {       
-
-         // the block index
-         unsigned j = this->index_in_block(first_row + i);
-
-         // the processor this row will be sent to
-         unsigned block_p = 0;
-         while(!(Block_distribution_pt[b]->first_row(block_p) <= j &&
-                 (Block_distribution_pt[b]->first_row(block_p) +
-                  Block_distribution_pt[b]->nrow_local(block_p) > j)))
-          {
-           block_p++;
-          }
-
-         // and store the row
-         Rows_to_send_for_get_block(b,block_p)[ptr_block(b,block_p)] = i;
-         if (block_p != my_rank)
-          {
-           block_rows_to_send(b,block_p)[ptr_block(b,block_p)] 
-            = j - Block_distribution_pt[b]->first_row(block_p);
-          }
-         else
-          {
-           Rows_to_recv_for_get_block(b,block_p)[ptr_block(b,block_p)] 
-            = j - Block_distribution_pt[b]->first_row(block_p);
-          }
-         ptr_block(b,block_p)++;
-        }
-      }
-
-     // next block ordered
-     for (unsigned p = 0; p < nproc; ++p)
-      {
-       int pt = 0;
-       for (unsigned b = 0; b < Nblock_types; ++b)
-        {
-         
-         for (unsigned i = 0; i < Nrows_to_send_for_get_block(b,p); ++i)
-          {
-           Rows_to_send_for_get_ordered[p][pt] = 
-            Rows_to_send_for_get_block(b,p)[i];
-           pt++;
-          }
-        }
-      }
-
-     // next process the nrow recvs as they complete
-
-     // recv and store the data
-     unsigned c = recv_requests_nrow.size();
-     while (c > 0)
-      {
-
-       // wait for any communication to finish
-       int req_number;
-       MPI_Waitany(c,&recv_requests_nrow[0],&req_number,MPI_STATUS_IGNORE);
-       recv_requests_nrow.erase(recv_requests_nrow.begin()+req_number);
-       c--;
-
-       // determine the source processor
-       unsigned p = proc[req_number];
-       proc.erase(proc.begin()+req_number);
-
-       // copy the data to its final storage
-       Nrows_to_recv_for_get_ordered[p]=0;
-       for (unsigned b = 0; b < Nblock_types; b++)
-        {
-         Nrows_to_recv_for_get_block(b,p) = nrows_to_recv[p][b];
-         Nrows_to_recv_for_get_ordered[p] += nrows_to_recv[p][b];
-        }
-
-       // and clear
-       delete[] nrows_to_recv[p];
-      }
-
-     // resize the storage for the incoming rows data
-     Rows_to_recv_for_get_ordered.resize(nproc,0);
-     for (unsigned p = 0; p < nproc; p++)
-      {
-       if (p != my_rank)
-        {
-         for (unsigned b = 0; b < Nblock_types; b++)
-          {
-           Rows_to_recv_for_get_block(b,p)
-            = new int[Nrows_to_recv_for_get_block(b,p)];
-          }
-        }
-      }
-
-     // compute the number of sends and recv from this processor
-     // to each other processor
-     Vector<unsigned> nsend_for_rows(nproc,0);
-     Vector<unsigned> nrecv_for_rows(nproc,0);
-     for (unsigned p = 0; p < nproc; p++)
-      {
-       if (p != my_rank)
-        {
-         for (unsigned b = 0; b < Nblock_types; b++)
-          {
-           if (Nrows_to_send_for_get_block(b,p) > 0)
-            {
-             nsend_for_rows[p]++;
-            }
-           if (Nrows_to_recv_for_get_block(b,p) > 0)
-            {
-             nrecv_for_rows[p]++;
-            }
-          }
-        }
-      }
-
-     // finally post the sends and recvs
-     MPI_Aint base_displacement;
-	MPI_Address(matrix_pt(),&base_displacement);
-     Vector<MPI_Request> req_rows;
-     for (unsigned p = 0; p < nproc; p++)
-      {
-       if (p != my_rank)
-        {
-         // send
-         if (nsend_for_rows[p] > 0)
-          {
-           MPI_Datatype send_types[nsend_for_rows[p]];
-           MPI_Aint send_displacements[nsend_for_rows[p]];
-           int send_sz[nsend_for_rows[p]];
-           unsigned send_ptr = 0;
-           for (unsigned b = 0; b < Nblock_types; b++)
-            {
-             if (Nrows_to_send_for_get_block(b,p) > 0)
-              {
-               MPI_Type_contiguous(Nrows_to_send_for_get_block(b,p),
-                                   MPI_INT,&send_types[send_ptr]);
-               MPI_Type_commit(&send_types[send_ptr]);
-               MPI_Address(block_rows_to_send(b,p),
-                           &send_displacements[send_ptr]);
-               send_displacements[send_ptr] -= base_displacement;
-               send_sz[send_ptr] = 1;
-               send_ptr++;
-              }
-            }
-           MPI_Datatype final_send_type;
-           MPI_Type_struct(nsend_for_rows[p],send_sz,send_displacements,
-                           send_types,&final_send_type);
-           MPI_Type_commit(&final_send_type);
-           for (unsigned i = 0; i < nsend_for_rows[p]; i++)
-            {
-             MPI_Type_free(&send_types[i]);
-            }
-           MPI_Request send_req;
-		    MPI_Isend(matrix_pt(),1,final_send_type,p,4,
-			      problem_pt()->communicator_pt()->mpi_comm(),&send_req);
-           req_rows.push_back(send_req);
-           MPI_Type_free(&final_send_type);
-          }
-
-         // recv
-         if (nrecv_for_rows[p] > 0)
-          {
-           MPI_Datatype recv_types[nrecv_for_rows[p]];
-           MPI_Aint recv_displacements[nrecv_for_rows[p]];
-           int recv_sz[nrecv_for_rows[p]];
-           unsigned recv_ptr = 0;
-           for (unsigned b = 0; b < Nblock_types; b++)
-            {
-             if (Nrows_to_recv_for_get_block(b,p) > 0)
-              {
-               MPI_Type_contiguous(Nrows_to_recv_for_get_block(b,p),
-                                   MPI_INT,&recv_types[recv_ptr]);
-               MPI_Type_commit(&recv_types[recv_ptr]);
-               MPI_Address(Rows_to_recv_for_get_block(b,p),
-                           &recv_displacements[recv_ptr]);
-               recv_displacements[recv_ptr] -= base_displacement;
-               recv_sz[recv_ptr] = 1;
-               recv_ptr++;
-              }
-            }
-           MPI_Datatype final_recv_type;
-           MPI_Type_struct(nrecv_for_rows[p],recv_sz,recv_displacements,
-                           recv_types,&final_recv_type);
-           MPI_Type_commit(&final_recv_type);
-           for (unsigned i = 0; i < nrecv_for_rows[p]; i++)
-            {
-             MPI_Type_free(&recv_types[i]);
-            }
-           MPI_Request recv_req;
-		    MPI_Irecv(matrix_pt(),1,final_recv_type,p,4,
-			      problem_pt()->communicator_pt()->mpi_comm(),&recv_req);
-           req_rows.push_back(recv_req);
-           MPI_Type_free(&final_recv_type);
-          }
-        }
-      }
-
-     // cleaning up Waitalls
-
-
-     // wait for the recv requests so we can compute 
-     // Nrows_to_recv_for_get_ordered
-     unsigned n_req_rows = req_rows.size();
-     if (n_req_rows)
-      {
-       MPI_Waitall(n_req_rows,&req_rows[0],MPI_STATUS_IGNORE);
-      }
-     
-     // resize the storage
-     Rows_to_recv_for_get_ordered.resize(nproc);
-     Rows_to_recv_for_get_ordered.initialise(0);
-
-     // construct block offset
-     Vector<int> vec_offset(Nblock_types,0);
-     for (unsigned b = 1; b < Nblock_types; ++b)
-      {
-       vec_offset[b]=vec_offset[b-1]+Block_distribution_pt[b-1]->nrow_local();
-      }
-
-     //
-     for (unsigned p = 0; p < nproc; p++)
-      {
-       int pt = 0;
-       Rows_to_recv_for_get_ordered[p]
-        = new int[Nrows_to_recv_for_get_ordered[p]];
-       for (unsigned b = 0; b < Nblock_types; b++)
-        {
-         for (unsigned i = 0; i < Nrows_to_recv_for_get_block(b,p); i++)
-          {
-           Rows_to_recv_for_get_ordered[p][pt] = 
-            Rows_to_recv_for_get_block(b,p)[i]+vec_offset[b];
-           pt++;
-          }
-        }
-      }
-         
-     // clean up
-     for (unsigned p = 0; p < nproc; p++)
-      {
-       if (p!= my_rank)
-        {
-         for (unsigned b = 0; b < Nblock_types; b++)
-          {
-	    delete[] block_rows_to_send(b,p);
-          }
-         if (Nrows_to_send_for_get_ordered[p] > 0)
-          {
-           delete[] ordered_rows_to_send[p];
-          }
-        }
-      }
-
-     // and the send reqs
-     unsigned n_req_send_nrow = send_requests_nrow.size();
-     if (n_req_send_nrow)
-      {
-       MPI_Waitall(n_req_send_nrow,&send_requests_nrow[0],MPI_STATUS_IGNORE);
-      }
-     for (unsigned p = 0; p < nproc; p++)
-      {
-       delete[] nrows_to_send[p];
-      }
-#endif
-    }
-   
-    // If we asked for output of blocks to a file then do it.
-    if(block_output_on())
-      output_blocks_to_files(Output_base_filename);
-  }
+   }
+
+  // If we asked for output of blocks to a file then do it.
+  if(block_output_on())
+   output_blocks_to_files(Output_base_filename);
+ }
 
 
 
@@ -2729,1320 +2761,1310 @@ namespace oomph
  /// The distributions of the preconditioner and the blocks are
  /// automatically specified (and assumed to be uniform) at this
  /// stage.\n
- /// This method should be used if each DOF type corresponds to a 
+ /// This method should be used if each DOF type corresponds to a
  /// unique block type.
  //============================================================================
  template<typename MATRIX>
-  void BlockPreconditioner<MATRIX>::block_setup(MATRIX* matrix_pt)
-  {
-    // If no mesh has been set then default to the Problem's mesh pointer.
-    if (is_master_block_preconditioner())
-     {
-      if (nmesh()==0)
-       {
-        this->set_nmesh(1);
-        this->set_mesh(0,problem_pt()->mesh_pt());
-       }
-     }
-   
-    // Get the number of dof types.
-    unsigned n_dof_types = ndof_types();
+ void BlockPreconditioner<MATRIX>::block_setup()
+ {
+  // Get the number of dof types.
+  unsigned n_dof_types = ndof_types();
 
-    // Build the dof to block map - assume that each type of dof corresponds
-    // to a different type of block.
-    Vector<unsigned> dof_to_block_lookup(n_dof_types);
-    for (unsigned i = 0; i < n_dof_types; i++)
-    {
-     dof_to_block_lookup[i] = i;
-    }
-   
-   // call the block setup method
-    this->block_setup(matrix_pt,dof_to_block_lookup);
-  }
+  // Build the dof to block map - assume that each type of dof corresponds
+  // to a different type of block.
+  Vector<unsigned> dof_to_block_lookup(n_dof_types);
+  for (unsigned i = 0; i < n_dof_types; i++)
+   {
+    dof_to_block_lookup[i] = i;
+   }
+
+  // call the block setup method
+  this->block_setup(dof_to_block_lookup);
+ }
 
 
  //============================================================================
-  /// Get the block matrices required for the block preconditioner. Takes a
-  /// pointer to a matrix of bools that indicate if a specified sub-block is
-  /// required for the preconditioning operation. Computes the required block
-  /// matrices, and stores pointers to them in the matrix block_matrix_pt. If an
-  /// entry in block_matrix_pt is equal to NULL that sub-block has not been
-  /// requested and is therefore not available.
+ /// Get the block matrices required for the block preconditioner. Takes a
+ /// pointer to a matrix of bools that indicate if a specified sub-block is
+ /// required for the preconditioning operation. Computes the required block
+ /// matrices, and stores pointers to them in the matrix block_matrix_pt. If an
+ /// entry in block_matrix_pt is equal to NULL that sub-block has not been
+ /// requested and is therefore not available.
  //============================================================================
-  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
-  get_blocks(DenseMatrix<bool>& required_blocks,
-	     DenseMatrix<MATRIX*>& block_matrix_pt) const
-  {
+ template<typename MATRIX> void BlockPreconditioner<MATRIX>::
+ get_blocks(DenseMatrix<bool>& required_blocks,
+            DenseMatrix<MATRIX*>& block_matrix_pt) const
+ {
 
-   // Cache number of block types
-   const unsigned n_block_types=this->Nblock_types;
+  // Cache number of block types
+  const unsigned n_block_types=this->Nblock_types;
 
 #ifdef PARANOID
-    // If required blocks matrix pointer is not the correct size then abort.
-   if ((required_blocks.nrow() != n_block_types) || 
-       (required_blocks.ncol() != n_block_types))
-    {
+  // If required blocks matrix pointer is not the correct size then abort.
+  if ((required_blocks.nrow() != n_block_types) ||
+      (required_blocks.ncol() != n_block_types))
+   {
 
-     std::ostringstream error_message;
-     error_message << "The size of the matrix of bools required_blocks" 
-                   << "(which indicates which blocks are required) is not the "
-                   << "right size, required_blocks is " 
-                   << required_blocks.ncol()
-                   << " x " << required_blocks.nrow() << ", whereas it should "
-                   << "be " << n_block_types << " x " << n_block_types;
-     throw OomphLibError(error_message.str(),
-                         "BlockPreconditioner<MATRIX>::get_blocks()",
-                         OOMPH_EXCEPTION_LOCATION);
-    }
+    std::ostringstream error_message;
+    error_message << "The size of the matrix of bools required_blocks"
+                  << "(which indicates which blocks are required) is not the "
+                  << "right size, required_blocks is "
+                  << required_blocks.ncol()
+                  << " x " << required_blocks.nrow() << ", whereas it should "
+                  << "be " << n_block_types << " x " << n_block_types;
+    throw OomphLibError(error_message.str(),
+                        "BlockPreconditioner<MATRIX>::get_blocks()",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
 
-    // If block matrix pointer is not the correct size then abort.
-   if ((block_matrix_pt.nrow() != n_block_types) ||
-       (block_matrix_pt.ncol() != n_block_types))
-    {
-     std::ostringstream error_message;
-     error_message << "The size of the block matrix pt is not the "
-                   << "right size, block_matrix_pt is "
-                   << block_matrix_pt.ncol()
-                   << " x " << block_matrix_pt.nrow() << ", whereas it should "
-                   << "be " << n_block_types << " x " << n_block_types;
-     throw OomphLibError(error_message.str(),
-                         "BlockPreconditioner<MATRIX>::get_blocks()",
-                         OOMPH_EXCEPTION_LOCATION);
-    }
+  // If block matrix pointer is not the correct size then abort.
+  if ((block_matrix_pt.nrow() != n_block_types) ||
+      (block_matrix_pt.ncol() != n_block_types))
+   {
+    std::ostringstream error_message;
+    error_message << "The size of the block matrix pt is not the "
+                  << "right size, block_matrix_pt is "
+                  << block_matrix_pt.ncol()
+                  << " x " << block_matrix_pt.nrow() << ", whereas it should "
+                  << "be " << n_block_types << " x " << n_block_types;
+    throw OomphLibError(error_message.str(),
+                        "BlockPreconditioner<MATRIX>::get_blocks()",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
 
 #endif
 
-    // Loop over the blocks
-   for (unsigned i = 0; i < n_block_types; i++)
-    {
-     for (unsigned j = 0; j < n_block_types; j++)
-      {
-	    // If block(i,j) is required then get it.
-       if (required_blocks(i,j))
-	      get_block(i,j,block_matrix_pt(i,j));
-	    // Otherwise set pointer to null.
-       else
-         block_matrix_pt(i,j) = 0;	
-        }
-      }
-    }
+  // Loop over the blocks
+  for (unsigned i = 0; i < n_block_types; i++)
+   {
+    for (unsigned j = 0; j < n_block_types; j++)
+     {
+      // If block(i,j) is required then get it.
+      if (required_blocks(i,j))
+       get_block(i,j,block_matrix_pt(i,j));
+      // Otherwise set pointer to null.
+      else
+       block_matrix_pt(i,j) = 0;
+     }
+   }
+ }
 
  //============================================================================
  /// \short Takes the naturally ordered vector and rearranges it into a vector
-  /// of sub vectors corresponding to the blocks, so s[b][i] contains the i-th
-  /// entry in the vector associated with block b. Note: If the preconditioner
-  /// is a subsidiary preconditioner then only the sub-vectors associated with
-  /// the blocks of the subsidiary preconditioner will be included. Hence the
-  /// length of v is master_nrow() whereas the total length of the s s vectors
-  /// is Nrow.
+ /// of sub vectors corresponding to the blocks, so s[b][i] contains the i-th
+ /// entry in the vector associated with block b. Note: If the preconditioner
+ /// is a subsidiary preconditioner then only the sub-vectors associated with
+ /// the blocks of the subsidiary preconditioner will be included. Hence the
+ /// length of v is master_nrow() whereas the total length of the s s vectors
+ /// is Nrow.
  //============================================================================
-  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
-  get_block_vectors(const DoubleVector& v, Vector<DoubleVector >& s) const
-  {
+ template<typename MATRIX> void BlockPreconditioner<MATRIX>::
+ get_block_vectors(const DoubleVector& v, Vector<DoubleVector >& s) const
+ {
 #ifdef PARANOID
-   if (!v.built())
-    {
-     std::ostringstream error_message;
-     error_message << "The distribution of the global vector v must be setup.";
-     throw OomphLibError(error_message.str(),
-                         "BlockPreconditioner::get_block_vectors(...)",
-                         OOMPH_EXCEPTION_LOCATION);    
-    }
-    if (*(v.distribution_pt()) != *(this->master_distribution_pt()))
-    {
-     std::ostringstream error_message;
-     error_message << "The distribution of the global vector v must match the "
-                   << " specified master_distribution_pt(). \n"
-                   << "i.e. Distribution_pt in the master preconditioner";
-     throw OomphLibError(error_message.str(),
-                         "BlockPreconditioner::get_block_vectors(...)",
-                         OOMPH_EXCEPTION_LOCATION);  
-    }
+  if (!v.built())
+   {
+    std::ostringstream error_message;
+    error_message << "The distribution of the global vector v must be setup.";
+    throw OomphLibError(error_message.str(),
+                        "BlockPreconditioner::get_block_vectors(...)",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+  if (*(v.distribution_pt()) != *(this->master_distribution_pt()))
+   {
+    std::ostringstream error_message;
+    error_message << "The distribution of the global vector v must match the "
+                  << " specified master_distribution_pt(). \n"
+                  << "i.e. Distribution_pt in the master preconditioner";
+    throw OomphLibError(error_message.str(),
+                        "BlockPreconditioner::get_block_vectors(...)",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
 #endif
 
-   // Number of block types
-   const unsigned nblock = this->nblock_types();
+  // Number of block types
+  const unsigned nblock = this->nblock_types();
 
-   // if + only one processor
-   //    + more than one processor but matrix_pt is not distributed
-   // then use the serial get_block method
-   if (this->distribution_pt()->communicator_pt()->nproc() == 1 ||
-       !this->distribution_pt()->distributed())
-    {
+  // if + only one processor
+  //    + more than one processor but matrix_pt is not distributed
+  // then use the serial get_block method
+  if (this->distribution_pt()->communicator_pt()->nproc() == 1 ||
+      !this->distribution_pt()->distributed())
+   {
 
-     // Vector of vectors for each section of residual vector
-     s.resize(nblock);
+    // Vector of vectors for each section of residual vector
+    s.resize(nblock);
 
-     // pointer to the data in v
-     const double* v_pt = v.values_pt();
+    // pointer to the data in v
+    const double* v_pt = v.values_pt();
 
-     // setup the block vector and then insert the data
-     for (unsigned b = 0; b < nblock; b++)
-      {
-       s[b].build(Block_distribution_pt[b],0.0);
-       double* s_pt = s[b].values_pt();
-       unsigned nrow = s[b].nrow();
-       for (unsigned i = 0; i < nrow; i++)
-        {
-         s_pt[i] = v_pt[this->Global_index[b][i]];
-        }
-      }
-    }
-   // otherwise use mpi
-   else 
-    {
+    // setup the block vector and then insert the data
+    for (unsigned b = 0; b < nblock; b++)
+     {
+      s[b].build(Block_distribution_pt[b],0.0);
+      double* s_pt = s[b].values_pt();
+      unsigned nrow = s[b].nrow();
+      for (unsigned i = 0; i < nrow; i++)
+       {
+        s_pt[i] = v_pt[this->Global_index[b][i]];
+       }
+     }
+   }
+  // otherwise use mpi
+  else
+   {
 #ifdef OOMPH_HAS_MPI
-     // my rank
-     unsigned my_rank = this->distribution_pt()->communicator_pt()->my_rank();
+    // my rank
+    unsigned my_rank = this->distribution_pt()->communicator_pt()->my_rank();
 
-     // the number of processors
-     unsigned nproc = this->distribution_pt()->communicator_pt()->nproc();
+    // the number of processors
+    unsigned nproc = this->distribution_pt()->communicator_pt()->nproc();
 
-     // build the vectors
-     s.resize(nblock);
-     for (unsigned b = 0; b < nblock; b++)
-      {
-       s[b].build(Block_distribution_pt[b],0.0);
-      }
+    // build the vectors
+    s.resize(nblock);
+    for (unsigned b = 0; b < nblock; b++)
+     {
+      s[b].build(Block_distribution_pt[b],0.0);
+     }
 
-     // determine the maximum number of rows to be sent or recv
-     // and determine the number of blocks each processor will send and recv
-     // communication for
-     Vector<int> nblock_send(nproc,0);
-     Vector<int> nblock_recv(nproc,0);
-     unsigned max_n_send_or_recv = 0;
-     for (unsigned p = 0; p < nproc; p++)
-      {
-       for (unsigned b = 0; b < nblock; b++)
-        {
-         max_n_send_or_recv = 
-          std::max(max_n_send_or_recv,Nrows_to_send_for_get_block(b,p));
-         max_n_send_or_recv = 
-          std::max(max_n_send_or_recv,Nrows_to_recv_for_get_block(b,p));
-         if (Nrows_to_send_for_get_block(b,p) > 0)
-          {
-           nblock_send[p]++;
-          }
-         if (Nrows_to_recv_for_get_block(b,p) > 0)
-          {
-           nblock_recv[p]++;
-          }       
-        }
-      }
+    // determine the maximum number of rows to be sent or recv
+    // and determine the number of blocks each processor will send and recv
+    // communication for
+    Vector<int> nblock_send(nproc,0);
+    Vector<int> nblock_recv(nproc,0);
+    unsigned max_n_send_or_recv = 0;
+    for (unsigned p = 0; p < nproc; p++)
+     {
+      for (unsigned b = 0; b < nblock; b++)
+       {
+        max_n_send_or_recv =
+         std::max(max_n_send_or_recv,Nrows_to_send_for_get_block(b,p));
+        max_n_send_or_recv =
+         std::max(max_n_send_or_recv,Nrows_to_recv_for_get_block(b,p));
+        if (Nrows_to_send_for_get_block(b,p) > 0)
+         {
+          nblock_send[p]++;
+         }
+        if (Nrows_to_recv_for_get_block(b,p) > 0)
+         {
+          nblock_recv[p]++;
+         }
+       }
+     }
 
-     // create a vectors of 1s the size of the nblock for the mpi indexed
-     // data types
-     int* block_lengths = new int[max_n_send_or_recv];
-     for (unsigned i = 0; i < max_n_send_or_recv; i++)
-      {
-       block_lengths[i] = 1;
-      }
+    // create a vectors of 1s the size of the nblock for the mpi indexed
+    // data types
+    int* block_lengths = new int[max_n_send_or_recv];
+    for (unsigned i = 0; i < max_n_send_or_recv; i++)
+     {
+      block_lengths[i] = 1;
+     }
 
-     // perform the sends and receives
-     Vector<MPI_Request> requests;
-     for (unsigned p = 0; p < nproc; p++)
-      {
-       // send and recv with other processors
-       if (p != my_rank)
-        {
-         // send
-         if (nblock_send[p] > 0)
-          {
-           // create the datatypes vector
-           MPI_Datatype block_send_types[nblock_send[p]];
+    // perform the sends and receives
+    Vector<MPI_Request> requests;
+    for (unsigned p = 0; p < nproc; p++)
+     {
+      // send and recv with other processors
+      if (p != my_rank)
+       {
+        // send
+        if (nblock_send[p] > 0)
+         {
+          // create the datatypes vector
+          MPI_Datatype block_send_types[nblock_send[p]];
 
-           // create the datatypes
-           unsigned ptr = 0;
-           for (unsigned b = 0; b < nblock; b++)
-            {
-             if (Nrows_to_send_for_get_block(b,p) > 0)
-              {
-               MPI_Type_indexed(Nrows_to_send_for_get_block(b,p),block_lengths,
-                                Rows_to_send_for_get_block(b,p),MPI_DOUBLE,
-                                &block_send_types[ptr]);
-               MPI_Type_commit(&block_send_types[ptr]);
-               ptr++;
-              }
-            }
+          // create the datatypes
+          unsigned ptr = 0;
+          for (unsigned b = 0; b < nblock; b++)
+           {
+            if (Nrows_to_send_for_get_block(b,p) > 0)
+             {
+              MPI_Type_indexed(Nrows_to_send_for_get_block(b,p),block_lengths,
+                               Rows_to_send_for_get_block(b,p),MPI_DOUBLE,
+                               &block_send_types[ptr]);
+              MPI_Type_commit(&block_send_types[ptr]);
+              ptr++;
+             }
+           }
 
-           // compute the displacements and lengths
-           MPI_Aint displacements[nblock_send[p]];
-           int lengths[nblock_send[p]];
-           for (int i = 0; i < nblock_send[p]; i++)
-            {
-             lengths[i] = 1;
-             displacements[i] = 0;
-            }
+          // compute the displacements and lengths
+          MPI_Aint displacements[nblock_send[p]];
+          int lengths[nblock_send[p]];
+          for (int i = 0; i < nblock_send[p]; i++)
+           {
+            lengths[i] = 1;
+            displacements[i] = 0;
+           }
 
-           // build the final datatype
-           MPI_Datatype type_send;
-           MPI_Type_struct(nblock_send[p],lengths,displacements,
-                           block_send_types,&type_send);
-           MPI_Type_commit(&type_send);
+          // build the final datatype
+          MPI_Datatype type_send;
+          MPI_Type_struct(nblock_send[p],lengths,displacements,
+                          block_send_types,&type_send);
+          MPI_Type_commit(&type_send);
 
-           // send
-           MPI_Request send_req;
-           MPI_Isend(const_cast<double*>(v.values_pt()),1,type_send,p,0,
-                     this->distribution_pt()->communicator_pt()->mpi_comm(),
-                     &send_req);
-           MPI_Type_free(&type_send);
-           for (int i = 0; i < nblock_send[p]; i++)
-            {
-             MPI_Type_free(&block_send_types[i]);
-            }
-           requests.push_back(send_req);
-          }
+          // send
+          MPI_Request send_req;
+          MPI_Isend(const_cast<double*>(v.values_pt()),1,type_send,p,0,
+                    this->distribution_pt()->communicator_pt()->mpi_comm(),
+                    &send_req);
+          MPI_Type_free(&type_send);
+          for (int i = 0; i < nblock_send[p]; i++)
+           {
+            MPI_Type_free(&block_send_types[i]);
+           }
+          requests.push_back(send_req);
+         }
 
-         // recv
-         if (nblock_recv[p] > 0)
-          {
-           // create the datatypes vector
-           MPI_Datatype block_recv_types[nblock_recv[p]];
+        // recv
+        if (nblock_recv[p] > 0)
+         {
+          // create the datatypes vector
+          MPI_Datatype block_recv_types[nblock_recv[p]];
 
-           // and the displacements
-           MPI_Aint displacements[nblock_recv[p]];
+          // and the displacements
+          MPI_Aint displacements[nblock_recv[p]];
 
-           // and the lengths
-           int lengths[nblock_recv[p]];
+          // and the lengths
+          int lengths[nblock_recv[p]];
 
-           // all displacements are computed relative to s[0] values
-           MPI_Aint displacements_base;
-           MPI_Address(s[0].values_pt(),&displacements_base);
+          // all displacements are computed relative to s[0] values
+          MPI_Aint displacements_base;
+          MPI_Address(s[0].values_pt(),&displacements_base);
 
-           // now build
-           unsigned ptr = 0;
-           for (unsigned b = 0; b < nblock; b++)
-            {
-             if (Nrows_to_recv_for_get_block(b,p) > 0)
-              {
-               MPI_Type_indexed(Nrows_to_recv_for_get_block(b,p),block_lengths,
-                                Rows_to_recv_for_get_block(b,p),MPI_DOUBLE,
-                                &block_recv_types[ptr]);
-               MPI_Type_commit(&block_recv_types[ptr]);
-               MPI_Address(s[b].values_pt(),&displacements[ptr]);
-               displacements[ptr] -= displacements_base;
-               lengths[ptr] = 1;
-               ptr++;
-              }
-            }
+          // now build
+          unsigned ptr = 0;
+          for (unsigned b = 0; b < nblock; b++)
+           {
+            if (Nrows_to_recv_for_get_block(b,p) > 0)
+             {
+              MPI_Type_indexed(Nrows_to_recv_for_get_block(b,p),block_lengths,
+                               Rows_to_recv_for_get_block(b,p),MPI_DOUBLE,
+                               &block_recv_types[ptr]);
+              MPI_Type_commit(&block_recv_types[ptr]);
+              MPI_Address(s[b].values_pt(),&displacements[ptr]);
+              displacements[ptr] -= displacements_base;
+              lengths[ptr] = 1;
+              ptr++;
+             }
+           }
 
-           // build the final data type
-           MPI_Datatype type_recv;
-           MPI_Type_struct(nblock_recv[p],lengths,displacements,
-                           block_recv_types,&type_recv);
-           MPI_Type_commit(&type_recv);         
+          // build the final data type
+          MPI_Datatype type_recv;
+          MPI_Type_struct(nblock_recv[p],lengths,displacements,
+                          block_recv_types,&type_recv);
+          MPI_Type_commit(&type_recv);
 
-           // recv
-           MPI_Request recv_req;
-           MPI_Irecv(s[0].values_pt(),1,type_recv,p,0,
-                     this->distribution_pt()->communicator_pt()->mpi_comm(),
-                     &recv_req);
-           MPI_Type_free(&type_recv);
-           for (int i = 0; i < nblock_recv[p]; i++)
-            {
-             MPI_Type_free(&block_recv_types[i]);
-            }
-           requests.push_back(recv_req);
-          }
-        }
+          // recv
+          MPI_Request recv_req;
+          MPI_Irecv(s[0].values_pt(),1,type_recv,p,0,
+                    this->distribution_pt()->communicator_pt()->mpi_comm(),
+                    &recv_req);
+          MPI_Type_free(&type_recv);
+          for (int i = 0; i < nblock_recv[p]; i++)
+           {
+            MPI_Type_free(&block_recv_types[i]);
+           }
+          requests.push_back(recv_req);
+         }
+       }
 
-       // communicate wih self
-       else
-        {
-         const double* v_values_pt = v.values_pt();
-         for (unsigned b = 0; b < nblock; b++)
-          {
-           double* w_values_pt = s[b].values_pt();
-           for (unsigned i = 0; i < Nrows_to_send_for_get_block(b,p); i++)
-            {
-             w_values_pt[Rows_to_recv_for_get_block(b,p)[i]] = 
-              v_values_pt[Rows_to_send_for_get_block(b,p)[i]];
-            }
-          }
-        }
-      }
+      // communicate wih self
+      else
+       {
+        const double* v_values_pt = v.values_pt();
+        for (unsigned b = 0; b < nblock; b++)
+         {
+          double* w_values_pt = s[b].values_pt();
+          for (unsigned i = 0; i < Nrows_to_send_for_get_block(b,p); i++)
+           {
+            w_values_pt[Rows_to_recv_for_get_block(b,p)[i]] =
+             v_values_pt[Rows_to_send_for_get_block(b,p)[i]];
+           }
+         }
+       }
+     }
 
-     // and then just wait
-     unsigned c = requests.size();
-     Vector<MPI_Status> stat(c);
-     if (c)
-      {
-       MPI_Waitall(c,&requests[0],&stat[0]);
-      }
-     delete[] block_lengths;
+    // and then just wait
+    unsigned c = requests.size();
+    Vector<MPI_Status> stat(c);
+    if (c)
+     {
+      MPI_Waitall(c,&requests[0],&stat[0]);
+     }
+    delete[] block_lengths;
 
 #else
-     // throw error
-     std::ostringstream error_message;
-     error_message << "The preconditioner is distributed and on more than one "
-                   << "processor. MPI is required.";
-     throw OomphLibError(error_message.str(),
-                         "BlockPreconditioner<MATRIX>::get_block_vector(...)",
-                         OOMPH_EXCEPTION_LOCATION);
+    // throw error
+    std::ostringstream error_message;
+    error_message << "The preconditioner is distributed and on more than one "
+                  << "processor. MPI is required.";
+    throw OomphLibError(error_message.str(),
+                        "BlockPreconditioner<MATRIX>::get_block_vector(...)",
+                        OOMPH_EXCEPTION_LOCATION);
 #endif
-    }
-  }
+   }
+ }
 
  //============================================================================
-  /// \short Takes the vector of block vectors, s, and copies its entries into
-  /// the naturally ordered vector, v. If this is a subsidiary block
-  /// preconditioner only those entries in v that are associated with its blocks
-  /// are affected.
+ /// \short Takes the vector of block vectors, s, and copies its entries into
+ /// the naturally ordered vector, v. If this is a subsidiary block
+ /// preconditioner only those entries in v that are associated with its blocks
+ /// are affected.
  //============================================================================
-  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
-  return_block_vectors (const Vector<DoubleVector >& s, DoubleVector& v) const
-  {
-   // the number of blocks
-   unsigned nblock = this->nblock_types();
+ template<typename MATRIX> void BlockPreconditioner<MATRIX>::
+ return_block_vectors (const Vector<DoubleVector >& s, DoubleVector& v) const
+ {
+  // the number of blocks
+  unsigned nblock = this->nblock_types();
 
 #ifdef PARANOID
-   if (!v.built())
-    {
-     std::ostringstream error_message;
-     error_message << "The distribution of the global vector v must be setup.";
-     throw OomphLibError(error_message.str(),
-                         "BlockPreconditioner::return_block_vectors(...)",
-                         OOMPH_EXCEPTION_LOCATION);    
-    }
-    if (*(v.distribution_pt()) != *(this->master_distribution_pt()))
-    {
-     std::ostringstream error_message;
-     error_message << "The distribution of the global vector v must match the "
-                   << " specified master_distribution_pt(). \n"
-                   << "i.e. Distribution_pt in the master preconditioner";
-     throw OomphLibError(error_message.str(),
-                         "BlockPreconditioner::return_block_vectors(...)",
-                         OOMPH_EXCEPTION_LOCATION);  
-    }
-   for (unsigned b = 0; b < nblock; b++)
-    {
-     if (!s[b].built())
-      {
-       std::ostringstream error_message;
-       error_message << "The distribution of the block vector " << b 
-                     << " must be setup.";
-       throw OomphLibError(error_message.str(),
-                           "BlockPreconditioner::return_block_vectors(...)",
-                           OOMPH_EXCEPTION_LOCATION);    
-      }
-	if (*(s[b].distribution_pt()) != *(Block_distribution_pt[b]))
-      {
-       std::ostringstream error_message;
-       error_message << "The distribution of the block vector " << b 
-                     << "must match the"
-                     << " specified distribution at Block_distribution_pt["
-                     << b << "]";
-       throw OomphLibError(error_message.str(),
-                           "BlockPreconditioner::return_block_vectors(...)",
-                           OOMPH_EXCEPTION_LOCATION);  
-      }
-    }
+  if (!v.built())
+   {
+    std::ostringstream error_message;
+    error_message << "The distribution of the global vector v must be setup.";
+    throw OomphLibError(error_message.str(),
+                        "BlockPreconditioner::return_block_vectors(...)",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+  if (*(v.distribution_pt()) != *(this->master_distribution_pt()))
+   {
+    std::ostringstream error_message;
+    error_message << "The distribution of the global vector v must match the "
+                  << " specified master_distribution_pt(). \n"
+                  << "i.e. Distribution_pt in the master preconditioner";
+    throw OomphLibError(error_message.str(),
+                        "BlockPreconditioner::return_block_vectors(...)",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+  for (unsigned b = 0; b < nblock; b++)
+   {
+    if (!s[b].built())
+     {
+      std::ostringstream error_message;
+      error_message << "The distribution of the block vector " << b
+                    << " must be setup.";
+      throw OomphLibError(error_message.str(),
+                          "BlockPreconditioner::return_block_vectors(...)",
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+    if (*(s[b].distribution_pt()) != *(Block_distribution_pt[b]))
+     {
+      std::ostringstream error_message;
+      error_message << "The distribution of the block vector " << b
+                    << "must match the"
+                    << " specified distribution at Block_distribution_pt["
+                    << b << "]";
+      throw OomphLibError(error_message.str(),
+                          "BlockPreconditioner::return_block_vectors(...)",
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+   }
 #endif
 
-   // if + only one processor
-   //    + more than one processor but matrix_pt is not distributed
-   // then use the serial get_block method
-   if (this->distribution_pt()->communicator_pt()->nproc() == 1 ||
-       !this->distribution_pt()->distributed())
-    {
-     double* v_pt = v.values_pt();
-     for (unsigned b = 0; b < nblock; b++)
-      {
-       const double* s_pt = s[b].values_pt();
-       unsigned nrow = this->block_dimension(b);
-       for (unsigned i = 0; i < nrow; i++)
-        {
-         v_pt[this->Global_index[b][i]] = s_pt[i];
-        }
-      }
-    }
-   // otherwise use mpi
-   else 
-    {
+  // if + only one processor
+  //    + more than one processor but matrix_pt is not distributed
+  // then use the serial get_block method
+  if (this->distribution_pt()->communicator_pt()->nproc() == 1 ||
+      !this->distribution_pt()->distributed())
+   {
+    double* v_pt = v.values_pt();
+    for (unsigned b = 0; b < nblock; b++)
+     {
+      const double* s_pt = s[b].values_pt();
+      unsigned nrow = this->block_dimension(b);
+      for (unsigned i = 0; i < nrow; i++)
+       {
+        v_pt[this->Global_index[b][i]] = s_pt[i];
+       }
+     }
+   }
+  // otherwise use mpi
+  else
+   {
 #ifdef OOMPH_HAS_MPI
 
-     // my rank
-     unsigned my_rank = this->distribution_pt()->communicator_pt()->my_rank();
+    // my rank
+    unsigned my_rank = this->distribution_pt()->communicator_pt()->my_rank();
 
-     // the number of processors
-     unsigned nproc = this->distribution_pt()->communicator_pt()->nproc();
+    // the number of processors
+    unsigned nproc = this->distribution_pt()->communicator_pt()->nproc();
 
-     // determine the maximum number of rows to be sent or recv
-     // and determine the number of blocks each processor will send and recv
-     // communication for
-     Vector<int> nblock_send(nproc,0);
-     Vector<int> nblock_recv(nproc,0);
-     unsigned max_n_send_or_recv = 0;
-     for (unsigned p = 0; p < nproc; p++)
-      {
-       for (unsigned b = 0; b < nblock; b++)
-        {
-         max_n_send_or_recv = 
-          std::max(max_n_send_or_recv,Nrows_to_send_for_get_block(b,p));
-         max_n_send_or_recv = 
-          std::max(max_n_send_or_recv,Nrows_to_recv_for_get_block(b,p));
-         if (Nrows_to_send_for_get_block(b,p) > 0)
-          {
-           nblock_recv[p]++;
-          }
-         if (Nrows_to_recv_for_get_block(b,p) > 0)
-          {
-           nblock_send[p]++;
-          }       
-        }
-      }
+    // determine the maximum number of rows to be sent or recv
+    // and determine the number of blocks each processor will send and recv
+    // communication for
+    Vector<int> nblock_send(nproc,0);
+    Vector<int> nblock_recv(nproc,0);
+    unsigned max_n_send_or_recv = 0;
+    for (unsigned p = 0; p < nproc; p++)
+     {
+      for (unsigned b = 0; b < nblock; b++)
+       {
+        max_n_send_or_recv =
+         std::max(max_n_send_or_recv,Nrows_to_send_for_get_block(b,p));
+        max_n_send_or_recv =
+         std::max(max_n_send_or_recv,Nrows_to_recv_for_get_block(b,p));
+        if (Nrows_to_send_for_get_block(b,p) > 0)
+         {
+          nblock_recv[p]++;
+         }
+        if (Nrows_to_recv_for_get_block(b,p) > 0)
+         {
+          nblock_send[p]++;
+         }
+       }
+     }
 
-     // create a vectors of 1s the size of the nblock for the mpi indexed
-     // data types
-     int* block_lengths = new int[max_n_send_or_recv];
-     for (unsigned i = 0; i < max_n_send_or_recv; i++)
-      {
-       block_lengths[i] = 1;
-      }
+    // create a vectors of 1s the size of the nblock for the mpi indexed
+    // data types
+    int* block_lengths = new int[max_n_send_or_recv];
+    for (unsigned i = 0; i < max_n_send_or_recv; i++)
+     {
+      block_lengths[i] = 1;
+     }
 
-     // perform the sends and receives
-     Vector<MPI_Request> requests;
-     for (unsigned p = 0; p < nproc; p++)
-      {
-       // send and recv with other processors
-       if (p != my_rank)
-        {
-         // recv
-         if (nblock_recv[p] > 0)
-          {
-           // create the datatypes vector
-           MPI_Datatype block_recv_types[nblock_recv[p]];
+    // perform the sends and receives
+    Vector<MPI_Request> requests;
+    for (unsigned p = 0; p < nproc; p++)
+     {
+      // send and recv with other processors
+      if (p != my_rank)
+       {
+        // recv
+        if (nblock_recv[p] > 0)
+         {
+          // create the datatypes vector
+          MPI_Datatype block_recv_types[nblock_recv[p]];
 
-           // create the datatypes
-           unsigned ptr = 0;
-           for (unsigned b = 0; b < nblock; b++)
-            {
-             if (Nrows_to_send_for_get_block(b,p) > 0)
-              {
-               MPI_Type_indexed(Nrows_to_send_for_get_block(b,p),block_lengths,
-                                Rows_to_send_for_get_block(b,p),MPI_DOUBLE,
-                                &block_recv_types[ptr]);
-               MPI_Type_commit(&block_recv_types[ptr]);
-               ptr++;
-              }
-            }
+          // create the datatypes
+          unsigned ptr = 0;
+          for (unsigned b = 0; b < nblock; b++)
+           {
+            if (Nrows_to_send_for_get_block(b,p) > 0)
+             {
+              MPI_Type_indexed(Nrows_to_send_for_get_block(b,p),block_lengths,
+                               Rows_to_send_for_get_block(b,p),MPI_DOUBLE,
+                               &block_recv_types[ptr]);
+              MPI_Type_commit(&block_recv_types[ptr]);
+              ptr++;
+             }
+           }
 
-           // compute the displacements and lengths
-           MPI_Aint displacements[nblock_recv[p]];
-           int lengths[nblock_recv[p]];
-           for (int i = 0; i < nblock_recv[p]; i++)
-            {
-             lengths[i] = 1;
-             displacements[i] = 0;
-            }
+          // compute the displacements and lengths
+          MPI_Aint displacements[nblock_recv[p]];
+          int lengths[nblock_recv[p]];
+          for (int i = 0; i < nblock_recv[p]; i++)
+           {
+            lengths[i] = 1;
+            displacements[i] = 0;
+           }
 
-           // build the final datatype
-           MPI_Datatype type_recv;
-           MPI_Type_struct(nblock_recv[p],lengths,displacements,
-                           block_recv_types,&type_recv);
-           MPI_Type_commit(&type_recv);
+          // build the final datatype
+          MPI_Datatype type_recv;
+          MPI_Type_struct(nblock_recv[p],lengths,displacements,
+                          block_recv_types,&type_recv);
+          MPI_Type_commit(&type_recv);
 
-           // recv
-           MPI_Request recv_req;
-           MPI_Irecv(v.values_pt(),1,type_recv,p,0,
-                     this->distribution_pt()->communicator_pt()->mpi_comm(),
-                     &recv_req);
-           MPI_Type_free(&type_recv);
-           for (int i = 0; i < nblock_recv[p]; i++)
-            {
-             MPI_Type_free(&block_recv_types[i]);
-            }
-           requests.push_back(recv_req);
-          }
+          // recv
+          MPI_Request recv_req;
+          MPI_Irecv(v.values_pt(),1,type_recv,p,0,
+                    this->distribution_pt()->communicator_pt()->mpi_comm(),
+                    &recv_req);
+          MPI_Type_free(&type_recv);
+          for (int i = 0; i < nblock_recv[p]; i++)
+           {
+            MPI_Type_free(&block_recv_types[i]);
+           }
+          requests.push_back(recv_req);
+         }
 
-         // send
-         if (nblock_send[p] > 0)
-          {
-           // create the datatypes vector
-           MPI_Datatype block_send_types[nblock_send[p]];
+        // send
+        if (nblock_send[p] > 0)
+         {
+          // create the datatypes vector
+          MPI_Datatype block_send_types[nblock_send[p]];
 
-           // and the displacements
-           MPI_Aint displacements[nblock_send[p]];
+          // and the displacements
+          MPI_Aint displacements[nblock_send[p]];
 
-           // and the lengths
-           int lengths[nblock_send[p]];
+          // and the lengths
+          int lengths[nblock_send[p]];
 
-           // all displacements are computed relative to s[0] values
-           MPI_Aint displacements_base;
-           MPI_Address(const_cast<double*>(s[0].values_pt()),
-                       &displacements_base);
+          // all displacements are computed relative to s[0] values
+          MPI_Aint displacements_base;
+          MPI_Address(const_cast<double*>(s[0].values_pt()),
+                      &displacements_base);
 
-           // now build
-           unsigned ptr = 0;
-           for (unsigned b = 0; b < nblock; b++)
-            {
-             if (Nrows_to_recv_for_get_block(b,p) > 0)
-              {
-               MPI_Type_indexed(Nrows_to_recv_for_get_block(b,p),block_lengths,
-                                Rows_to_recv_for_get_block(b,p),MPI_DOUBLE,
-                                &block_send_types[ptr]);
-               MPI_Type_commit(&block_send_types[ptr]);
-               MPI_Address(const_cast<double*>(s[b].values_pt()),
-                           &displacements[ptr]);
-               displacements[ptr] -= displacements_base;
-               lengths[ptr] = 1;
-               ptr++;
-              }
-            }
+          // now build
+          unsigned ptr = 0;
+          for (unsigned b = 0; b < nblock; b++)
+           {
+            if (Nrows_to_recv_for_get_block(b,p) > 0)
+             {
+              MPI_Type_indexed(Nrows_to_recv_for_get_block(b,p),block_lengths,
+                               Rows_to_recv_for_get_block(b,p),MPI_DOUBLE,
+                               &block_send_types[ptr]);
+              MPI_Type_commit(&block_send_types[ptr]);
+              MPI_Address(const_cast<double*>(s[b].values_pt()),
+                          &displacements[ptr]);
+              displacements[ptr] -= displacements_base;
+              lengths[ptr] = 1;
+              ptr++;
+             }
+           }
 
-           // build the final data type
-           MPI_Datatype type_send;
-           MPI_Type_struct(nblock_send[p],lengths,displacements,
-                           block_send_types,&type_send);
-           MPI_Type_commit(&type_send);         
+          // build the final data type
+          MPI_Datatype type_send;
+          MPI_Type_struct(nblock_send[p],lengths,displacements,
+                          block_send_types,&type_send);
+          MPI_Type_commit(&type_send);
 
-           // send
-           MPI_Request send_req;
-           MPI_Isend(const_cast<double*>(s[0].values_pt()),1,type_send,p,0,
-                     this->distribution_pt()->communicator_pt()->mpi_comm(),
-                     &send_req);
-           MPI_Type_free(&type_send);
-           for (int i = 0; i < nblock_send[p]; i++)
-            {
-             MPI_Type_free(&block_send_types[i]);
-            }
-           requests.push_back(send_req);
-          }
-        }
+          // send
+          MPI_Request send_req;
+          MPI_Isend(const_cast<double*>(s[0].values_pt()),1,type_send,p,0,
+                    this->distribution_pt()->communicator_pt()->mpi_comm(),
+                    &send_req);
+          MPI_Type_free(&type_send);
+          for (int i = 0; i < nblock_send[p]; i++)
+           {
+            MPI_Type_free(&block_send_types[i]);
+           }
+          requests.push_back(send_req);
+         }
+       }
 
-       // communicate wih self
-       else
-        {
-         double* v_values_pt = v.values_pt();
-         for (unsigned b = 0; b < nblock; b++)
-          {
-           const double* w_values_pt = s[b].values_pt();
-           for (unsigned i = 0; i < Nrows_to_send_for_get_block(b,p); i++)
-            {
-             v_values_pt[Rows_to_send_for_get_block(b,p)[i]] =
-              w_values_pt[Rows_to_recv_for_get_block(b,p)[i]]; 
+      // communicate wih self
+      else
+       {
+        double* v_values_pt = v.values_pt();
+        for (unsigned b = 0; b < nblock; b++)
+         {
+          const double* w_values_pt = s[b].values_pt();
+          for (unsigned i = 0; i < Nrows_to_send_for_get_block(b,p); i++)
+           {
+            v_values_pt[Rows_to_send_for_get_block(b,p)[i]] =
+             w_values_pt[Rows_to_recv_for_get_block(b,p)[i]];
 
-            }
-          }
-        }
-      }
+           }
+         }
+       }
+     }
 
-     // and then just wait
-     unsigned c = requests.size();
-     Vector<MPI_Status> stat(c);
-     if (c)
-      {
-       MPI_Waitall(c,&requests[0],&stat[0]);
-      }
-     delete[] block_lengths;
+    // and then just wait
+    unsigned c = requests.size();
+    Vector<MPI_Status> stat(c);
+    if (c)
+     {
+      MPI_Waitall(c,&requests[0],&stat[0]);
+     }
+    delete[] block_lengths;
 
 #else
-     // throw error
-     std::ostringstream error_message;
-     error_message << "The preconditioner is distributed and on more than one "
-                   << "processor. MPI is required.";
-     throw OomphLibError(error_message.str(),
-                         "BlockPreconditioner<MATRIX>::get_block_vector(...)",
-                         OOMPH_EXCEPTION_LOCATION);
+    // throw error
+    std::ostringstream error_message;
+    error_message << "The preconditioner is distributed and on more than one "
+                  << "processor. MPI is required.";
+    throw OomphLibError(error_message.str(),
+                        "BlockPreconditioner<MATRIX>::get_block_vector(...)",
+                        OOMPH_EXCEPTION_LOCATION);
 #endif
-    }
-  }
+   }
+ }
 
  //============================================================================
-  /// \short Takes the naturally ordered vector, v, and extracts the n-th block
-  /// vector, b. Here n is the block number in the current preconditioner.
+ /// \short Takes the naturally ordered vector, v, and extracts the n-th block
+ /// vector, b. Here n is the block number in the current preconditioner.
  //============================================================================
-  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
-  get_block_vector(const unsigned& b, const DoubleVector& v, DoubleVector& w)
-    const
-  {
+ template<typename MATRIX> void BlockPreconditioner<MATRIX>::
+ get_block_vector(const unsigned& b, const DoubleVector& v, DoubleVector& w)
+  const
+ {
 #ifdef PARANOID
-   // the number of blocks
-   unsigned n_blocks = this->nblock_types();
+  // the number of blocks
+  unsigned n_blocks = this->nblock_types();
 
-   // paranoid check that block i is in this block preconditioner
-   if (b >= n_blocks)
-    {
-     std::ostringstream error_message;
-     error_message << "Requested block  vector " << b  
-                   << ", however this preconditioner has nblock_types() "
-                   << "= " << nblock_types() << std::endl;
-     throw OomphLibError(error_message.str(),
-                         "BlockPreconditioner::get_block_vector(...)",
-                         OOMPH_EXCEPTION_LOCATION);
-    }
-   if (!v.built())
-    {
-     std::ostringstream error_message;
-     error_message << "The distribution of the global vector v must be setup.";
-     throw OomphLibError(error_message.str(),
-                         "BlockPreconditioner::get_block_vector(...)",
-                         OOMPH_EXCEPTION_LOCATION);    
-    }
-    if (*(v.distribution_pt()) != *(this->master_distribution_pt()))
-    {
-     std::ostringstream error_message;
-     error_message << "The distribution of the global vector v must match the "
-                   << " specified master_distribution_pt(). \n"
-                   << "i.e. Distribution_pt in the master preconditioner";
-     throw OomphLibError(error_message.str(),
-                         "BlockPreconditioner::get_block_vector(...)",
-                         OOMPH_EXCEPTION_LOCATION);  
-    }
+  // paranoid check that block i is in this block preconditioner
+  if (b >= n_blocks)
+   {
+    std::ostringstream error_message;
+    error_message << "Requested block  vector " << b
+                  << ", however this preconditioner has nblock_types() "
+                  << "= " << nblock_types() << std::endl;
+    throw OomphLibError(error_message.str(),
+                        "BlockPreconditioner::get_block_vector(...)",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+  if (!v.built())
+   {
+    std::ostringstream error_message;
+    error_message << "The distribution of the global vector v must be setup.";
+    throw OomphLibError(error_message.str(),
+                        "BlockPreconditioner::get_block_vector(...)",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+  if (*(v.distribution_pt()) != *(this->master_distribution_pt()))
+   {
+    std::ostringstream error_message;
+    error_message << "The distribution of the global vector v must match the "
+                  << " specified master_distribution_pt(). \n"
+                  << "i.e. Distribution_pt in the master preconditioner";
+    throw OomphLibError(error_message.str(),
+                        "BlockPreconditioner::get_block_vector(...)",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
 #endif
 
-   // rebuild the block vector
-   w.build(Block_distribution_pt[b],0.0);
+  // rebuild the block vector
+  w.build(Block_distribution_pt[b],0.0);
 
-   // if + only one processor
-   //    + more than one processor but matrix_pt is not distributed
-   // then use the serial get_block method
-   if (this->distribution_pt()->communicator_pt()->nproc() == 1 ||
-       !this->distribution_pt()->distributed())
-    {
-     double* w_pt = w.values_pt();
-     const double* v_pt = v.values_pt();
-     unsigned n_row = w.nrow();
-     for (unsigned i = 0; i < n_row; i++)
-      {
-       w_pt[i] = v_pt[this->Global_index[b][i]];
-      }
-    }
-   // otherwise use mpi
-   else 
-    {
+  // if + only one processor
+  //    + more than one processor but matrix_pt is not distributed
+  // then use the serial get_block method
+  if (this->distribution_pt()->communicator_pt()->nproc() == 1 ||
+      !this->distribution_pt()->distributed())
+   {
+    double* w_pt = w.values_pt();
+    const double* v_pt = v.values_pt();
+    unsigned n_row = w.nrow();
+    for (unsigned i = 0; i < n_row; i++)
+     {
+      w_pt[i] = v_pt[this->Global_index[b][i]];
+     }
+   }
+  // otherwise use mpi
+  else
+   {
 #ifdef OOMPH_HAS_MPI
 
-     // my rank
-     unsigned my_rank = this->distribution_pt()->communicator_pt()->my_rank();
+    // my rank
+    unsigned my_rank = this->distribution_pt()->communicator_pt()->my_rank();
 
-     // the number of processors
-     unsigned nproc = this->distribution_pt()->communicator_pt()->nproc();
+    // the number of processors
+    unsigned nproc = this->distribution_pt()->communicator_pt()->nproc();
 
-     // determine the maximum number of rows to be sent or recv
-     unsigned max_n_send_or_recv = 0;
-     for (unsigned p = 0; p < nproc; p++)
-      {
-       max_n_send_or_recv = 
-        std::max(max_n_send_or_recv,Nrows_to_send_for_get_block(b,p));
-       max_n_send_or_recv = 
-        std::max(max_n_send_or_recv,Nrows_to_recv_for_get_block(b,p));
-      }
+    // determine the maximum number of rows to be sent or recv
+    unsigned max_n_send_or_recv = 0;
+    for (unsigned p = 0; p < nproc; p++)
+     {
+      max_n_send_or_recv =
+       std::max(max_n_send_or_recv,Nrows_to_send_for_get_block(b,p));
+      max_n_send_or_recv =
+       std::max(max_n_send_or_recv,Nrows_to_recv_for_get_block(b,p));
+     }
 
-     // create a vectors of 1s (the size of the nblock for the mpi indexed
-     // data types
-     int* block_lengths = new int[max_n_send_or_recv];
-     for (unsigned i = 0; i < max_n_send_or_recv; i++)
-      {
-       block_lengths[i] = 1;
-      }
+    // create a vectors of 1s (the size of the nblock for the mpi indexed
+    // data types
+    int* block_lengths = new int[max_n_send_or_recv];
+    for (unsigned i = 0; i < max_n_send_or_recv; i++)
+     {
+      block_lengths[i] = 1;
+     }
 
-     // perform the sends and receives
-     Vector<MPI_Request> requests;
-     for (unsigned p = 0; p < nproc; p++)
-      {
-       // send and recv with other processors
-       if (p != my_rank)
-        {
-         if (Nrows_to_send_for_get_block(b,p) > 0)
-          {
-           // create the send datatype
-           MPI_Datatype type_send;
-           MPI_Type_indexed(Nrows_to_send_for_get_block(b,p),block_lengths,
-                            Rows_to_send_for_get_block(b,p),MPI_DOUBLE,
-                            &type_send);
-           MPI_Type_commit(&type_send);
+    // perform the sends and receives
+    Vector<MPI_Request> requests;
+    for (unsigned p = 0; p < nproc; p++)
+     {
+      // send and recv with other processors
+      if (p != my_rank)
+       {
+        if (Nrows_to_send_for_get_block(b,p) > 0)
+         {
+          // create the send datatype
+          MPI_Datatype type_send;
+          MPI_Type_indexed(Nrows_to_send_for_get_block(b,p),block_lengths,
+                           Rows_to_send_for_get_block(b,p),MPI_DOUBLE,
+                           &type_send);
+          MPI_Type_commit(&type_send);
 
-           // send
-           MPI_Request send_req;
-           MPI_Isend(const_cast<double*>(v.values_pt()),1,type_send,p,0,
-                     this->distribution_pt()->communicator_pt()->mpi_comm(),
-                     &send_req);
-           MPI_Type_free(&type_send);
-           requests.push_back(send_req);
-          }
+          // send
+          MPI_Request send_req;
+          MPI_Isend(const_cast<double*>(v.values_pt()),1,type_send,p,0,
+                    this->distribution_pt()->communicator_pt()->mpi_comm(),
+                    &send_req);
+          MPI_Type_free(&type_send);
+          requests.push_back(send_req);
+         }
 
-         if (Nrows_to_recv_for_get_block(b,p) > 0)
-          {
-           // create the recv datatype
-           MPI_Datatype type_recv;
-           MPI_Type_indexed(Nrows_to_recv_for_get_block(b,p),block_lengths,
-                            Rows_to_recv_for_get_block(b,p),MPI_DOUBLE,
-                            &type_recv);
-           MPI_Type_commit(&type_recv);
+        if (Nrows_to_recv_for_get_block(b,p) > 0)
+         {
+          // create the recv datatype
+          MPI_Datatype type_recv;
+          MPI_Type_indexed(Nrows_to_recv_for_get_block(b,p),block_lengths,
+                           Rows_to_recv_for_get_block(b,p),MPI_DOUBLE,
+                           &type_recv);
+          MPI_Type_commit(&type_recv);
 
-           // recv
-           MPI_Request recv_req;
-           MPI_Irecv(w.values_pt(),1,type_recv,p,0,
-                     this->distribution_pt()->communicator_pt()->mpi_comm(),
-                     &recv_req);
-           MPI_Type_free(&type_recv);
-           requests.push_back(recv_req);
-          }
-        }
+          // recv
+          MPI_Request recv_req;
+          MPI_Irecv(w.values_pt(),1,type_recv,p,0,
+                    this->distribution_pt()->communicator_pt()->mpi_comm(),
+                    &recv_req);
+          MPI_Type_free(&type_recv);
+          requests.push_back(recv_req);
+         }
+       }
 
-       // communicate wih self
-       else
-        {
-         double* w_values_pt = w.values_pt();
-         const double* v_values_pt = v.values_pt();
-         for (unsigned i = 0; i < Nrows_to_send_for_get_block(b,p); i++)
-          {
-           w_values_pt[Rows_to_recv_for_get_block(b,p)[i]] = 
-            v_values_pt[Rows_to_send_for_get_block(b,p)[i]];
-          }
-        }
-      }
+      // communicate wih self
+      else
+       {
+        double* w_values_pt = w.values_pt();
+        const double* v_values_pt = v.values_pt();
+        for (unsigned i = 0; i < Nrows_to_send_for_get_block(b,p); i++)
+         {
+          w_values_pt[Rows_to_recv_for_get_block(b,p)[i]] =
+           v_values_pt[Rows_to_send_for_get_block(b,p)[i]];
+         }
+       }
+     }
 
-     // and then just wait
-     unsigned c = requests.size();
-     Vector<MPI_Status> stat(c);
-     if (c)
-      {
-       MPI_Waitall(c,&requests[0],&stat[0]);
-      }
-     delete[] block_lengths;
+    // and then just wait
+    unsigned c = requests.size();
+    Vector<MPI_Status> stat(c);
+    if (c)
+     {
+      MPI_Waitall(c,&requests[0],&stat[0]);
+     }
+    delete[] block_lengths;
 
 #else
-     // throw error
-     std::ostringstream error_message;
-     error_message << "The preconditioner is distributed and on more than one "
-                   << "processor. MPI is required.";
-     throw OomphLibError(error_message.str(),
-                         "BlockPreconditioner<MATRIX>::get_block_vector(...)",
-                         OOMPH_EXCEPTION_LOCATION);
+    // throw error
+    std::ostringstream error_message;
+    error_message << "The preconditioner is distributed and on more than one "
+                  << "processor. MPI is required.";
+    throw OomphLibError(error_message.str(),
+                        "BlockPreconditioner<MATRIX>::get_block_vector(...)",
+                        OOMPH_EXCEPTION_LOCATION);
 #endif
-    }
-  }
+   }
+ }
 
  //============================================================================
-  /// \short Takes the n-th block ordered vector, b, and copies its entries to
-  /// the appropriate entries in the naturally ordered vector, v. Here n is the
-  /// block number in the current block preconditioner. If the preconditioner is
-  /// a subsidiary block preconditioner the other entries in v that are not
-  /// associated with it are left alone
+ /// \short Takes the n-th block ordered vector, b, and copies its entries to
+ /// the appropriate entries in the naturally ordered vector, v. Here n is the
+ /// block number in the current block preconditioner. If the preconditioner is
+ /// a subsidiary block preconditioner the other entries in v that are not
+ /// associated with it are left alone
  //============================================================================
-  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
-  return_block_vector(const unsigned& b, const DoubleVector& w, DoubleVector& v)
-    const
-  {
+ template<typename MATRIX> void BlockPreconditioner<MATRIX>::
+ return_block_vector(const unsigned& b, const DoubleVector& w, DoubleVector& v)
+  const
+ {
 #ifdef PARANOID
-   // the number of blocks
-   unsigned n_blocks = this->nblock_types();
+  // the number of blocks
+  unsigned n_blocks = this->nblock_types();
 
-   // paranoid check that block i is in this block preconditioner
-   if (b >= n_blocks)
-    {
-     std::ostringstream error_message;
-     error_message << "Requested block  vector " << b  
-                   << ", however this preconditioner has nblock_types() "
-                   << "= " << nblock_types() << std::endl;
-     throw OomphLibError(error_message.str(),
-                         "BlockPreconditioner::return_block_vector(...)",
-                         OOMPH_EXCEPTION_LOCATION);
-    }
-   if (!v.built())
-    {
-     std::ostringstream error_message;
-     error_message << "The distribution of the global vector v must be setup.";
-     throw OomphLibError(error_message.str(),
-                         "BlockPreconditioner::return_block_vector(...)",
-                         OOMPH_EXCEPTION_LOCATION);    
-    }
-   if (*v.distribution_pt() != *this->master_distribution_pt())
-    {
-     std::ostringstream error_message;
-     error_message << "The distribution of the global vector v must match the "
-                   << " specified master_distribution_pt(). \n"
-                   << "i.e. Distribution_pt in the master preconditioner";
-     throw OomphLibError(error_message.str(),
-                         "BlockPreconditioner::return_block_vector(...)",
-                         OOMPH_EXCEPTION_LOCATION);  
-    }
-   if (!w.built())
-    {
-     std::ostringstream error_message;
-     error_message << "The distribution of the block vector w must be setup.";
-     throw OomphLibError(error_message.str(),
-                         "BlockPreconditioner::return_block_vector(...)",
-                         OOMPH_EXCEPTION_LOCATION);    
-    }
-   if (*w.distribution_pt() != *Block_distribution_pt[b])
-    {
-     std::ostringstream error_message;
-     error_message << "The distribution of the block vector w must match the "
-                   << " specified distribution at Block_distribution_pt[b]";
-     throw OomphLibError(error_message.str(),
-                         "BlockPreconditioner::return_block_vector(...)",
-                         OOMPH_EXCEPTION_LOCATION);  
-    }
+  // paranoid check that block i is in this block preconditioner
+  if (b >= n_blocks)
+   {
+    std::ostringstream error_message;
+    error_message << "Requested block  vector " << b
+                  << ", however this preconditioner has nblock_types() "
+                  << "= " << nblock_types() << std::endl;
+    throw OomphLibError(error_message.str(),
+                        "BlockPreconditioner::return_block_vector(...)",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+  if (!v.built())
+   {
+    std::ostringstream error_message;
+    error_message << "The distribution of the global vector v must be setup.";
+    throw OomphLibError(error_message.str(),
+                        "BlockPreconditioner::return_block_vector(...)",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+  if (*v.distribution_pt() != *this->master_distribution_pt())
+   {
+    std::ostringstream error_message;
+    error_message << "The distribution of the global vector v must match the "
+                  << " specified master_distribution_pt(). \n"
+                  << "i.e. Distribution_pt in the master preconditioner";
+    throw OomphLibError(error_message.str(),
+                        "BlockPreconditioner::return_block_vector(...)",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+  if (!w.built())
+   {
+    std::ostringstream error_message;
+    error_message << "The distribution of the block vector w must be setup.";
+    throw OomphLibError(error_message.str(),
+                        "BlockPreconditioner::return_block_vector(...)",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+  if (*w.distribution_pt() != *Block_distribution_pt[b])
+   {
+    std::ostringstream error_message;
+    error_message << "The distribution of the block vector w must match the "
+                  << " specified distribution at Block_distribution_pt[b]";
+    throw OomphLibError(error_message.str(),
+                        "BlockPreconditioner::return_block_vector(...)",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
 #endif
 
-   // if + only one processor
-   //    + more than one processor but matrix_pt is not distributed
-   // then use the serial get_block method
-   if (this->distribution_pt()->communicator_pt()->nproc() == 1 ||
-       !this->distribution_pt()->distributed())
-    {
+  // if + only one processor
+  //    + more than one processor but matrix_pt is not distributed
+  // then use the serial get_block method
+  if (this->distribution_pt()->communicator_pt()->nproc() == 1 ||
+      !this->distribution_pt()->distributed())
+   {
 
-     // length of vector
-     unsigned n_row = this->block_dimension(b);
+    // length of vector
+    unsigned n_row = this->block_dimension(b);
 
-     // copy back from the block vector to the naturally ordered vector
-     double* v_pt = v.values_pt();
-     const double* w_pt = w.values_pt();
-     for (unsigned i = 0; i < n_row; i++)
-      {
-       v_pt[this->Global_index[b][i]] = w_pt[i];
-      }
-    }
-   // otherwise use mpi
-   else 
-    {
+    // copy back from the block vector to the naturally ordered vector
+    double* v_pt = v.values_pt();
+    const double* w_pt = w.values_pt();
+    for (unsigned i = 0; i < n_row; i++)
+     {
+      v_pt[this->Global_index[b][i]] = w_pt[i];
+     }
+   }
+  // otherwise use mpi
+  else
+   {
 #ifdef OOMPH_HAS_MPI
 
-     // my rank
-     unsigned my_rank = this->distribution_pt()->communicator_pt()->my_rank();
+    // my rank
+    unsigned my_rank = this->distribution_pt()->communicator_pt()->my_rank();
 
-     // the number of processors
-     unsigned nproc = this->distribution_pt()->communicator_pt()->nproc();
+    // the number of processors
+    unsigned nproc = this->distribution_pt()->communicator_pt()->nproc();
 
-     // determine the maximum number of rows to be sent or recv
-     unsigned max_n_send_or_recv = 0;
-     for (unsigned p = 0; p < nproc; p++)
-      {
-       max_n_send_or_recv = 
-        std::max(max_n_send_or_recv,Nrows_to_send_for_get_block(b,p));
-       max_n_send_or_recv = 
-        std::max(max_n_send_or_recv,Nrows_to_recv_for_get_block(b,p));
-      }
+    // determine the maximum number of rows to be sent or recv
+    unsigned max_n_send_or_recv = 0;
+    for (unsigned p = 0; p < nproc; p++)
+     {
+      max_n_send_or_recv =
+       std::max(max_n_send_or_recv,Nrows_to_send_for_get_block(b,p));
+      max_n_send_or_recv =
+       std::max(max_n_send_or_recv,Nrows_to_recv_for_get_block(b,p));
+     }
 
-     // create a vectors of 1s (the size of the nblock for the mpi indexed
-     // data types
-     int* block_lengths = new int[max_n_send_or_recv];
-     for (unsigned i = 0; i < max_n_send_or_recv; i++)
-      {
-       block_lengths[i] = 1;
-      }
+    // create a vectors of 1s (the size of the nblock for the mpi indexed
+    // data types
+    int* block_lengths = new int[max_n_send_or_recv];
+    for (unsigned i = 0; i < max_n_send_or_recv; i++)
+     {
+      block_lengths[i] = 1;
+     }
 
-     // perform the sends and receives
-     Vector<MPI_Request> requests;
-     for (unsigned p = 0; p < nproc; p++)
-      {
-       // send and recv with other processors
-       if (p != my_rank)
-        {
-         if (Nrows_to_recv_for_get_block(b,p) > 0)
-          {
-           // create the send datatype
-           MPI_Datatype type_send;
-           MPI_Type_indexed(Nrows_to_recv_for_get_block(b,p),block_lengths,
-                            Rows_to_recv_for_get_block(b,p),MPI_DOUBLE,
-                            &type_send);
-           MPI_Type_commit(&type_send);
+    // perform the sends and receives
+    Vector<MPI_Request> requests;
+    for (unsigned p = 0; p < nproc; p++)
+     {
+      // send and recv with other processors
+      if (p != my_rank)
+       {
+        if (Nrows_to_recv_for_get_block(b,p) > 0)
+         {
+          // create the send datatype
+          MPI_Datatype type_send;
+          MPI_Type_indexed(Nrows_to_recv_for_get_block(b,p),block_lengths,
+                           Rows_to_recv_for_get_block(b,p),MPI_DOUBLE,
+                           &type_send);
+          MPI_Type_commit(&type_send);
 
-           // send
-           MPI_Request send_req;
-           MPI_Isend(const_cast<double*>(w.values_pt()),1,type_send,p,0,
-                     this->distribution_pt()->communicator_pt()->mpi_comm(),
-                     &send_req);
-           MPI_Type_free(&type_send);
-           requests.push_back(send_req);
-          }
+          // send
+          MPI_Request send_req;
+          MPI_Isend(const_cast<double*>(w.values_pt()),1,type_send,p,0,
+                    this->distribution_pt()->communicator_pt()->mpi_comm(),
+                    &send_req);
+          MPI_Type_free(&type_send);
+          requests.push_back(send_req);
+         }
 
-         if (Nrows_to_send_for_get_block(b,p) > 0)
-          {
-           // create the recv datatype
-           MPI_Datatype type_recv;
-           MPI_Type_indexed(Nrows_to_send_for_get_block(b,p),block_lengths,
-                            Rows_to_send_for_get_block(b,p),MPI_DOUBLE,
-                            &type_recv);
-           MPI_Type_commit(&type_recv);
+        if (Nrows_to_send_for_get_block(b,p) > 0)
+         {
+          // create the recv datatype
+          MPI_Datatype type_recv;
+          MPI_Type_indexed(Nrows_to_send_for_get_block(b,p),block_lengths,
+                           Rows_to_send_for_get_block(b,p),MPI_DOUBLE,
+                           &type_recv);
+          MPI_Type_commit(&type_recv);
 
-           // recv
-           MPI_Request recv_req;
-           MPI_Irecv(v.values_pt(),1,type_recv,p,0,
-                     this->distribution_pt()->communicator_pt()->mpi_comm(),
-                     &recv_req);
-           MPI_Type_free(&type_recv);
-           requests.push_back(recv_req);
-          }
-        }
+          // recv
+          MPI_Request recv_req;
+          MPI_Irecv(v.values_pt(),1,type_recv,p,0,
+                    this->distribution_pt()->communicator_pt()->mpi_comm(),
+                    &recv_req);
+          MPI_Type_free(&type_recv);
+          requests.push_back(recv_req);
+         }
+       }
 
-       // communicate wih self
-       else
-        {
-         const double* w_values_pt = w.values_pt();
-         double* v_values_pt = v.values_pt();
-         for (unsigned i = 0; i < Nrows_to_send_for_get_block(b,p); i++)
-          {
-           v_values_pt[Rows_to_send_for_get_block(b,p)[i]] =
-            w_values_pt[Rows_to_recv_for_get_block(b,p)[i]];
-          }
-        }
-      }
+      // communicate wih self
+      else
+       {
+        const double* w_values_pt = w.values_pt();
+        double* v_values_pt = v.values_pt();
+        for (unsigned i = 0; i < Nrows_to_send_for_get_block(b,p); i++)
+         {
+          v_values_pt[Rows_to_send_for_get_block(b,p)[i]] =
+           w_values_pt[Rows_to_recv_for_get_block(b,p)[i]];
+         }
+       }
+     }
 
-     // and then just wait
-     unsigned c = requests.size();
-     Vector<MPI_Status> stat(c);
-     if (c)
-      {
-       MPI_Waitall(c,&requests[0],&stat[0]);
-      }
-     delete[] block_lengths;
+    // and then just wait
+    unsigned c = requests.size();
+    Vector<MPI_Status> stat(c);
+    if (c)
+     {
+      MPI_Waitall(c,&requests[0],&stat[0]);
+     }
+    delete[] block_lengths;
 
 #else
-     // throw error
-     std::ostringstream error_message;
-     error_message << "The preconditioner is distributed and on more than one "
-                   << "processor. MPI is required.";
-     throw OomphLibError(error_message.str(),
-                         "BlockPreconditioner<MATRIX>::get_block_vector(...)",
-                         OOMPH_EXCEPTION_LOCATION);
+    // throw error
+    std::ostringstream error_message;
+    error_message << "The preconditioner is distributed and on more than one "
+                  << "processor. MPI is required.";
+    throw OomphLibError(error_message.str(),
+                        "BlockPreconditioner<MATRIX>::get_block_vector(...)",
+                        OOMPH_EXCEPTION_LOCATION);
 #endif
-    }
-  }
+   }
+ }
 
  //=============================================================================
-  /// \short Given the naturally ordered vector, v, return the vector rearranged
-  /// in block order in w.
+ /// \short Given the naturally ordered vector, v, return the vector rearranged
+ /// in block order in w.
  //=============================================================================
-  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
-  get_block_ordered_preconditioner_vector(const DoubleVector& v, DoubleVector& w)
-    const
-  {
+ template<typename MATRIX> void BlockPreconditioner<MATRIX>::
+ get_block_ordered_preconditioner_vector(const DoubleVector& v, DoubleVector& w)
+  const
+ {
 #ifdef PARANOID
-   if (!v.built())
-    {
-     std::ostringstream error_message;
-     error_message << "The distribution of the global vector v must be setup.";
-     throw OomphLibError(error_message.str(),
-                         "BlockPreconditioner::get_block_vector(...)",
-                         OOMPH_EXCEPTION_LOCATION);    
-    }
-   if (*v.distribution_pt() != *this->master_distribution_pt())
-    {
-     std::ostringstream error_message;
-     error_message << "The distribution of the global vector v must match the "
-                   << " specified master_distribution_pt(). \n"
-                   << "i.e. Distribution_pt in the master preconditioner";
-     throw OomphLibError(error_message.str(),
-                         "BlockPreconditioner::get_block_vector(...)",
-                         OOMPH_EXCEPTION_LOCATION);  
-    }
+  if (!v.built())
+   {
+    std::ostringstream error_message;
+    error_message << "The distribution of the global vector v must be setup.";
+    throw OomphLibError(error_message.str(),
+                        "BlockPreconditioner::get_block_vector(...)",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+  if (*v.distribution_pt() != *this->master_distribution_pt())
+   {
+    std::ostringstream error_message;
+    error_message << "The distribution of the global vector v must match the "
+                  << " specified master_distribution_pt(). \n"
+                  << "i.e. Distribution_pt in the master preconditioner";
+    throw OomphLibError(error_message.str(),
+                        "BlockPreconditioner::get_block_vector(...)",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
 #endif
 
-   //  Cleared and resized w for reordered vector
-   w.build(this->preconditioner_matrix_distribution_pt(),0.0);
+  //  Cleared and resized w for reordered vector
+  w.build(this->preconditioner_matrix_distribution_pt(),0.0);
 
-   // if + only one processor
-   //    + more than one processor but matrix_pt is not distributed
-   // then use the serial get_block method
-   if (this->distribution_pt()->communicator_pt()->nproc() == 1 ||
-       !this->distribution_pt()->distributed())
-    {
+  // if + only one processor
+  //    + more than one processor but matrix_pt is not distributed
+  // then use the serial get_block method
+  if (this->distribution_pt()->communicator_pt()->nproc() == 1 ||
+      !this->distribution_pt()->distributed())
+   {
 
-     // number of blocks
-     unsigned nblock = this->Nblock_types;
+    // number of blocks
+    unsigned nblock = this->Nblock_types;
 
-     // copy to w
-     unsigned block_offset = 0;
-     double* w_pt = w.values_pt();
-     const double* v_pt = v.values_pt();
-     for (unsigned b = 0; b < nblock;b++)
-      {
-       unsigned block_nrow = this->block_dimension(b);
-       for (unsigned i = 0; i < block_nrow; i++)
-        {
-         w_pt[block_offset+i] = v_pt[this->Global_index[b][i]];
-        }
-       block_offset += block_nrow;
-      }
-    }
-   // otherwise use mpi
-   else 
-    {
+    // copy to w
+    unsigned block_offset = 0;
+    double* w_pt = w.values_pt();
+    const double* v_pt = v.values_pt();
+    for (unsigned b = 0; b < nblock;b++)
+     {
+      unsigned block_nrow = this->block_dimension(b);
+      for (unsigned i = 0; i < block_nrow; i++)
+       {
+        w_pt[block_offset+i] = v_pt[this->Global_index[b][i]];
+       }
+      block_offset += block_nrow;
+     }
+   }
+  // otherwise use mpi
+  else
+   {
 #ifdef OOMPH_HAS_MPI
 
-     // my rank
-     unsigned my_rank = this->distribution_pt()->communicator_pt()->my_rank();
+    // my rank
+    unsigned my_rank = this->distribution_pt()->communicator_pt()->my_rank();
 
-     // the number of processors
-     unsigned nproc = this->distribution_pt()->communicator_pt()->nproc();
+    // the number of processors
+    unsigned nproc = this->distribution_pt()->communicator_pt()->nproc();
 
-     // determine the maximum number of rows to be sent or recv
-     unsigned max_n_send_or_recv = 0;
-     for (unsigned p = 0; p < nproc; p++)
-      {
-       max_n_send_or_recv = 
-        std::max(max_n_send_or_recv,Nrows_to_send_for_get_ordered[p]);
-       max_n_send_or_recv = 
-        std::max(max_n_send_or_recv,Nrows_to_recv_for_get_ordered[p]);
-      }
+    // determine the maximum number of rows to be sent or recv
+    unsigned max_n_send_or_recv = 0;
+    for (unsigned p = 0; p < nproc; p++)
+     {
+      max_n_send_or_recv =
+       std::max(max_n_send_or_recv,Nrows_to_send_for_get_ordered[p]);
+      max_n_send_or_recv =
+       std::max(max_n_send_or_recv,Nrows_to_recv_for_get_ordered[p]);
+     }
 
-     // create a vectors of 1s (the size of the nblock for the mpi indexed
-     // data types
-     int* block_lengths = new int[max_n_send_or_recv];
-     for (unsigned i = 0; i < max_n_send_or_recv; i++)
-      {
-       block_lengths[i] = 1;
-      }
+    // create a vectors of 1s (the size of the nblock for the mpi indexed
+    // data types
+    int* block_lengths = new int[max_n_send_or_recv];
+    for (unsigned i = 0; i < max_n_send_or_recv; i++)
+     {
+      block_lengths[i] = 1;
+     }
 
-     // perform the sends and receives
-     Vector<MPI_Request> requests;
-     for (unsigned p = 0; p < nproc; p++)
-      {
-       // send and recv with other processors
-       if (p != my_rank)
-        {
-         if (Nrows_to_send_for_get_ordered[p] > 0)
-          {
-           // create the send datatype
-           MPI_Datatype type_send;
-           MPI_Type_indexed(Nrows_to_send_for_get_ordered[p],block_lengths,
-                            Rows_to_send_for_get_ordered[p],MPI_DOUBLE,
-                            &type_send);
-           MPI_Type_commit(&type_send);
+    // perform the sends and receives
+    Vector<MPI_Request> requests;
+    for (unsigned p = 0; p < nproc; p++)
+     {
+      // send and recv with other processors
+      if (p != my_rank)
+       {
+        if (Nrows_to_send_for_get_ordered[p] > 0)
+         {
+          // create the send datatype
+          MPI_Datatype type_send;
+          MPI_Type_indexed(Nrows_to_send_for_get_ordered[p],block_lengths,
+                           Rows_to_send_for_get_ordered[p],MPI_DOUBLE,
+                           &type_send);
+          MPI_Type_commit(&type_send);
 
-           // send
-           MPI_Request send_req;
-           MPI_Isend(const_cast<double*>(v.values_pt()),1,type_send,p,0,
-                     this->distribution_pt()->communicator_pt()->mpi_comm(),
-                     &send_req);
-           MPI_Type_free(&type_send);
-           requests.push_back(send_req);
-          }
+          // send
+          MPI_Request send_req;
+          MPI_Isend(const_cast<double*>(v.values_pt()),1,type_send,p,0,
+                    this->distribution_pt()->communicator_pt()->mpi_comm(),
+                    &send_req);
+          MPI_Type_free(&type_send);
+          requests.push_back(send_req);
+         }
 
-         if (Nrows_to_recv_for_get_ordered[p] > 0)
-          {
-           // create the recv datatype
-           MPI_Datatype type_recv;
-           MPI_Type_indexed(Nrows_to_recv_for_get_ordered[p],block_lengths,
-                            Rows_to_recv_for_get_ordered[p],MPI_DOUBLE,
-                            &type_recv);
-           MPI_Type_commit(&type_recv);
+        if (Nrows_to_recv_for_get_ordered[p] > 0)
+         {
+          // create the recv datatype
+          MPI_Datatype type_recv;
+          MPI_Type_indexed(Nrows_to_recv_for_get_ordered[p],block_lengths,
+                           Rows_to_recv_for_get_ordered[p],MPI_DOUBLE,
+                           &type_recv);
+          MPI_Type_commit(&type_recv);
 
-           // recv
-           MPI_Request recv_req;
-           MPI_Irecv(w.values_pt(),1,type_recv,p,0,
-                     this->distribution_pt()->communicator_pt()->mpi_comm(),
-                     &recv_req);
-           MPI_Type_free(&type_recv);
-           requests.push_back(recv_req);
-          }
-        }
+          // recv
+          MPI_Request recv_req;
+          MPI_Irecv(w.values_pt(),1,type_recv,p,0,
+                    this->distribution_pt()->communicator_pt()->mpi_comm(),
+                    &recv_req);
+          MPI_Type_free(&type_recv);
+          requests.push_back(recv_req);
+         }
+       }
 
-       // communicate wih self
-       else
-        {
-         double* w_values_pt = w.values_pt();
-         const double* v_values_pt = v.values_pt();
-         for (unsigned i = 0; i < Nrows_to_send_for_get_ordered[p]; i++)
-          {
-           w_values_pt[Rows_to_recv_for_get_ordered[p][i]] = 
-            v_values_pt[Rows_to_send_for_get_ordered[p][i]];
-          }
-        }
-      }
+      // communicate wih self
+      else
+       {
+        double* w_values_pt = w.values_pt();
+        const double* v_values_pt = v.values_pt();
+        for (unsigned i = 0; i < Nrows_to_send_for_get_ordered[p]; i++)
+         {
+          w_values_pt[Rows_to_recv_for_get_ordered[p][i]] =
+           v_values_pt[Rows_to_send_for_get_ordered[p][i]];
+         }
+       }
+     }
 
-     // and then just wait
-     unsigned c = requests.size();
-     Vector<MPI_Status> stat(c);
-     if (c)
-      {
-       MPI_Waitall(c,&requests[0],&stat[0]);
-      }
-     delete[] block_lengths;
+    // and then just wait
+    unsigned c = requests.size();
+    Vector<MPI_Status> stat(c);
+    if (c)
+     {
+      MPI_Waitall(c,&requests[0],&stat[0]);
+     }
+    delete[] block_lengths;
 
 #else
-     // throw error
-     std::ostringstream error_message;
-     error_message << "The preconditioner is distributed and on more than one "
-                   << "processor. MPI is required.";
-     throw OomphLibError(error_message.str(),
-                         "BlockPreconditioner<MATRIX>::get_block_vector(...)",
-                         OOMPH_EXCEPTION_LOCATION);
+    // throw error
+    std::ostringstream error_message;
+    error_message << "The preconditioner is distributed and on more than one "
+                  << "processor. MPI is required.";
+    throw OomphLibError(error_message.str(),
+                        "BlockPreconditioner<MATRIX>::get_block_vector(...)",
+                        OOMPH_EXCEPTION_LOCATION);
 #endif
-    }
-  }
+   }
+ }
 
  //============================================================================
-  /// \short Takes the naturally ordered vector, w, and reorders it in block
-  /// order. Reordered vector is returned in v. Note: If the preconditioner is a
-  /// subsidiary preconditioner then only the components of the vector
-  /// associated with the blocks of the subsidiary preconditioner will be
-  /// included.
+ /// \short Takes the naturally ordered vector, w, and reorders it in block
+ /// order. Reordered vector is returned in v. Note: If the preconditioner is a
+ /// subsidiary preconditioner then only the components of the vector
+ /// associated with the blocks of the subsidiary preconditioner will be
+ /// included.
  //============================================================================
-  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
-  return_block_ordered_preconditioner_vector(const DoubleVector& w, 
-                                             DoubleVector& v) const
-  {
+ template<typename MATRIX> void BlockPreconditioner<MATRIX>::
+ return_block_ordered_preconditioner_vector(const DoubleVector& w,
+                                            DoubleVector& v) const
+ {
 #ifdef PARANOID
-   if (!v.built())
-    {
-     std::ostringstream error_message;
-     error_message << "The distribution of the global vector v must be setup.";
-     throw OomphLibError(error_message.str(),
-                         "BlockPreconditioner::return_block_vector(...)",
-                         OOMPH_EXCEPTION_LOCATION);    
-    }
-   if (*v.distribution_pt() != *this->master_distribution_pt())
-    {
-     std::ostringstream error_message;
-     error_message << "The distribution of the global vector v must match the "
-                   << " specified master_distribution_pt(). \n"
-                   << "i.e. Distribution_pt in the master preconditioner";
-     throw OomphLibError(error_message.str(),
-                         "BlockPreconditioner::return_block_vector(...)",
-                         OOMPH_EXCEPTION_LOCATION);  
-    }
-   if (!w.built())
-    {
-     std::ostringstream error_message;
-     error_message << "The distribution of the block vector w must be setup.";
-     throw OomphLibError(error_message.str(),
-                         "BlockPreconditioner::return_block_vector(...)",
-                         OOMPH_EXCEPTION_LOCATION);    
-    }
-   if (*w.distribution_pt() != *this->preconditioner_matrix_distribution_pt())
-    {
-     std::ostringstream error_message;
-     error_message << "The distribution of the block vector w must match the "
-                   << " specified distribution at Distribution_pt[b]";
-     throw OomphLibError(error_message.str(),
-                         "BlockPreconditioner::return_block_vector(...)",
-                         OOMPH_EXCEPTION_LOCATION);  
-    }
+  if (!v.built())
+   {
+    std::ostringstream error_message;
+    error_message << "The distribution of the global vector v must be setup.";
+    throw OomphLibError(error_message.str(),
+                        "BlockPreconditioner::return_block_vector(...)",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+  if (*v.distribution_pt() != *this->master_distribution_pt())
+   {
+    std::ostringstream error_message;
+    error_message << "The distribution of the global vector v must match the "
+                  << " specified master_distribution_pt(). \n"
+                  << "i.e. Distribution_pt in the master preconditioner";
+    throw OomphLibError(error_message.str(),
+                        "BlockPreconditioner::return_block_vector(...)",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+  if (!w.built())
+   {
+    std::ostringstream error_message;
+    error_message << "The distribution of the block vector w must be setup.";
+    throw OomphLibError(error_message.str(),
+                        "BlockPreconditioner::return_block_vector(...)",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+  if (*w.distribution_pt() != *this->preconditioner_matrix_distribution_pt())
+   {
+    std::ostringstream error_message;
+    error_message << "The distribution of the block vector w must match the "
+                  << " specified distribution at Distribution_pt[b]";
+    throw OomphLibError(error_message.str(),
+                        "BlockPreconditioner::return_block_vector(...)",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
 #endif
 
 
-   // if + only one processor
-   //    + more than one processor but matrix_pt is not distributed
-   // then use the serial get_block method
-   if (this->distribution_pt()->communicator_pt()->nproc() == 1 ||
-       !this->distribution_pt()->distributed())
-    {    
-     // number of blocks
-     unsigned nblock = this->Nblock_types;
+  // if + only one processor
+  //    + more than one processor but matrix_pt is not distributed
+  // then use the serial get_block method
+  if (this->distribution_pt()->communicator_pt()->nproc() == 1 ||
+      !this->distribution_pt()->distributed())
+   {
+    // number of blocks
+    unsigned nblock = this->Nblock_types;
 
-     // copy to w
-     unsigned block_offset = 0;
-     const double* w_pt = w.values_pt();
-     double* v_pt = v.values_pt();
-     for (unsigned b = 0; b < nblock;b++)
-      {
-       unsigned block_nrow = this->block_dimension(b);
-       for (unsigned i = 0; i < block_nrow; i++)
-        {
-         v_pt[this->Global_index[b][i]] = w_pt[block_offset+i];
-        }
-       block_offset += block_nrow;
-      }
-    }
-   // otherwise use mpi
-   else 
-    {
+    // copy to w
+    unsigned block_offset = 0;
+    const double* w_pt = w.values_pt();
+    double* v_pt = v.values_pt();
+    for (unsigned b = 0; b < nblock;b++)
+     {
+      unsigned block_nrow = this->block_dimension(b);
+      for (unsigned i = 0; i < block_nrow; i++)
+       {
+        v_pt[this->Global_index[b][i]] = w_pt[block_offset+i];
+       }
+      block_offset += block_nrow;
+     }
+   }
+  // otherwise use mpi
+  else
+   {
 #ifdef OOMPH_HAS_MPI
 
-     // my rank
-     unsigned my_rank = this->distribution_pt()->communicator_pt()->my_rank();
+    // my rank
+    unsigned my_rank = this->distribution_pt()->communicator_pt()->my_rank();
 
-     // the number of processors
-     unsigned nproc = this->distribution_pt()->communicator_pt()->nproc();
+    // the number of processors
+    unsigned nproc = this->distribution_pt()->communicator_pt()->nproc();
 
-     // determine the maximum number of rows to be sent or recv
-     unsigned max_n_send_or_recv = 0;
-     for (unsigned p = 0; p < nproc; p++)
-      {
-       max_n_send_or_recv = 
-        std::max(max_n_send_or_recv,Nrows_to_send_for_get_ordered[p]);
-       max_n_send_or_recv = 
-        std::max(max_n_send_or_recv,Nrows_to_recv_for_get_ordered[p]);
-      }
+    // determine the maximum number of rows to be sent or recv
+    unsigned max_n_send_or_recv = 0;
+    for (unsigned p = 0; p < nproc; p++)
+     {
+      max_n_send_or_recv =
+       std::max(max_n_send_or_recv,Nrows_to_send_for_get_ordered[p]);
+      max_n_send_or_recv =
+       std::max(max_n_send_or_recv,Nrows_to_recv_for_get_ordered[p]);
+     }
 
-     // create a vectors of 1s (the size of the nblock for the mpi indexed
-     // data types
-     int* block_lengths = new int[max_n_send_or_recv];
-     for (unsigned i = 0; i < max_n_send_or_recv; i++)
-      {
-       block_lengths[i] = 1;
-      }
+    // create a vectors of 1s (the size of the nblock for the mpi indexed
+    // data types
+    int* block_lengths = new int[max_n_send_or_recv];
+    for (unsigned i = 0; i < max_n_send_or_recv; i++)
+     {
+      block_lengths[i] = 1;
+     }
 
-     // perform the sends and receives
-     Vector<MPI_Request> requests;
-     for (unsigned p = 0; p < nproc; p++)
-      {
-       // send and recv with other processors
-       if (p != my_rank)
-        {
-         if (Nrows_to_recv_for_get_ordered[p] > 0)
-          {
-           // create the send datatype
-           MPI_Datatype type_send;
-           MPI_Type_indexed(Nrows_to_recv_for_get_ordered[p],block_lengths,
-                            Rows_to_recv_for_get_ordered[p],MPI_DOUBLE,
-                            &type_send);
-           MPI_Type_commit(&type_send);
+    // perform the sends and receives
+    Vector<MPI_Request> requests;
+    for (unsigned p = 0; p < nproc; p++)
+     {
+      // send and recv with other processors
+      if (p != my_rank)
+       {
+        if (Nrows_to_recv_for_get_ordered[p] > 0)
+         {
+          // create the send datatype
+          MPI_Datatype type_send;
+          MPI_Type_indexed(Nrows_to_recv_for_get_ordered[p],block_lengths,
+                           Rows_to_recv_for_get_ordered[p],MPI_DOUBLE,
+                           &type_send);
+          MPI_Type_commit(&type_send);
 
-           // send
-           MPI_Request send_req;
-           MPI_Isend(const_cast<double*>(w.values_pt()),1,type_send,p,0,
-                     this->distribution_pt()->communicator_pt()->mpi_comm(),
-                     &send_req);
-           MPI_Type_free(&type_send);
-           requests.push_back(send_req);
-          }
+          // send
+          MPI_Request send_req;
+          MPI_Isend(const_cast<double*>(w.values_pt()),1,type_send,p,0,
+                    this->distribution_pt()->communicator_pt()->mpi_comm(),
+                    &send_req);
+          MPI_Type_free(&type_send);
+          requests.push_back(send_req);
+         }
 
-         if (Nrows_to_send_for_get_ordered[p] > 0)
-          {
-           // create the recv datatype
-           MPI_Datatype type_recv;
-           MPI_Type_indexed(Nrows_to_send_for_get_ordered[p],block_lengths,
-                            Rows_to_send_for_get_ordered[p],MPI_DOUBLE,
-                            &type_recv);
-           MPI_Type_commit(&type_recv);
+        if (Nrows_to_send_for_get_ordered[p] > 0)
+         {
+          // create the recv datatype
+          MPI_Datatype type_recv;
+          MPI_Type_indexed(Nrows_to_send_for_get_ordered[p],block_lengths,
+                           Rows_to_send_for_get_ordered[p],MPI_DOUBLE,
+                           &type_recv);
+          MPI_Type_commit(&type_recv);
 
-           // recv
-           MPI_Request recv_req;
-           MPI_Irecv(v.values_pt(),1,type_recv,p,0,
-                     this->distribution_pt()->communicator_pt()->mpi_comm(),&recv_req);
-           MPI_Type_free(&type_recv);
-           requests.push_back(recv_req);
-          }
-        }
+          // recv
+          MPI_Request recv_req;
+          MPI_Irecv(v.values_pt(),1,type_recv,p,0,
+                    this->distribution_pt()->communicator_pt()->mpi_comm(),&recv_req);
+          MPI_Type_free(&type_recv);
+          requests.push_back(recv_req);
+         }
+       }
 
-       // communicate wih self
-       else
-        {
-         const double* w_values_pt = w.values_pt();
-         double* v_values_pt = v.values_pt();
-         for (unsigned i = 0; i < Nrows_to_send_for_get_ordered[p]; i++)
-          {
-           v_values_pt[Rows_to_send_for_get_ordered[p][i]] =
-            w_values_pt[Rows_to_recv_for_get_ordered[p][i]];
-          }
-        }
-      }
+      // communicate wih self
+      else
+       {
+        const double* w_values_pt = w.values_pt();
+        double* v_values_pt = v.values_pt();
+        for (unsigned i = 0; i < Nrows_to_send_for_get_ordered[p]; i++)
+         {
+          v_values_pt[Rows_to_send_for_get_ordered[p][i]] =
+           w_values_pt[Rows_to_recv_for_get_ordered[p][i]];
+         }
+       }
+     }
 
-     // and then just wait
-     unsigned c = requests.size();
-     Vector<MPI_Status> stat(c);
-     if (c)
-      {
-       MPI_Waitall(c,&requests[0],&stat[0]);
-      }
-     delete[] block_lengths;
+    // and then just wait
+    unsigned c = requests.size();
+    Vector<MPI_Status> stat(c);
+    if (c)
+     {
+      MPI_Waitall(c,&requests[0],&stat[0]);
+     }
+    delete[] block_lengths;
 
 #else
-     // throw error
-     std::ostringstream error_message;
-     error_message << "The preconditioner is distributed and on more than one "
-                   << "processor. MPI is required.";
-     throw OomphLibError(error_message.str(),
-                         "BlockPreconditioner<MATRIX>::get_block_vector(...)",
-                         OOMPH_EXCEPTION_LOCATION);
+    // throw error
+    std::ostringstream error_message;
+    error_message << "The preconditioner is distributed and on more than one "
+                  << "processor. MPI is required.";
+    throw OomphLibError(error_message.str(),
+                        "BlockPreconditioner<MATRIX>::get_block_vector(...)",
+                        OOMPH_EXCEPTION_LOCATION);
 #endif
-    }
-  }
+   }
+ }
 }
 #endif

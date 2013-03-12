@@ -237,7 +237,7 @@ TorusProblem<ELEMENT>::TorusProblem(const unsigned &max_refinement_level,
  iterative_linear_solver_pt->tolerance() = 1.0e-8;   
  
  NavierStokesSchurComplementPreconditioner* prec_pt = 
-  new NavierStokesSchurComplementPreconditioner;
+  new NavierStokesSchurComplementPreconditioner(this);
  //Set the mesh
  prec_pt->set_navier_stokes_mesh(this->mesh_pt());
 

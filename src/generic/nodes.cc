@@ -464,7 +464,7 @@ void Data::copy(Data* orig_data_pt)
 //================================================================
 ///Dump data object to a file 
 //================================================================
-void Data::dump(std::ostream& dump_file)
+void Data::dump(std::ostream& dump_file) const
 {
  //Find the amount of storage used
  const unsigned value_pt_range = nvalue();
@@ -1660,7 +1660,7 @@ void Node::copy(Node* orig_node_pt)
 //================================================================
 ///Dump nodal positions and associated data to file for restart
 //================================================================
-void Node::dump(std::ostream& dump_file)
+void Node::dump(std::ostream& dump_file) const
 {
  // Number of positional values
  const unsigned npos_storage = Ndim*Nposition_type;
@@ -3112,7 +3112,7 @@ void SolidNode::copy(SolidNode* orig_node_pt)
 //================================================================
 ///Dump nodal positions and associated data to file for restart
 //================================================================
-void SolidNode::dump(std::ostream& dump_file)
+void SolidNode::dump(std::ostream& dump_file) const
 {
  //Dump out the Lagrangian coordinates
  // Number of lagrangian values

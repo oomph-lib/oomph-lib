@@ -365,7 +365,7 @@ switch_to_iterative_linear_solver()
  // Set tolerance
  iterative_linear_solver_pt->tolerance() = 1.0e-8;   
 
- FSIPreconditioner* prec_pt=new FSIPreconditioner; 
+ FSIPreconditioner* prec_pt=new FSIPreconditioner(this); 
  
  // Tell preconditioner about meshes
  prec_pt->set_navier_stokes_mesh(Nst_mesh_pt);

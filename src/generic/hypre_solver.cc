@@ -408,6 +408,100 @@ namespace oomph
    delete[] ncols_per_row;
    delete[] row_map;
   }
+
+  //====================================================================
+  /// \short Helper function to set Euclid options using a command line
+  /// like array.
+  //=====================================================================
+  void euclid_settings_helper(const bool &use_block_jacobi,
+                              const bool &use_row_scaling,
+                              const bool &use_ilut,
+                              const int &level,
+                              const double &drop_tol,
+                              const int &print_level,
+                              HYPRE_Solver &euclid_object)
+  {
+   // Easier to use C-arrays rather than std::strings because Euclid takes
+   // char** as argument and because C++ doesn't provide decent number to
+   // std::string conversion functions.
+
+   int n_args = 0;
+   const char* args[22];
+
+   // first argument is empty string
+   args[n_args++] = "";
+  
+   // switch on/off Block Jacobi ILU
+   args[n_args++] = "-bj";
+   if (use_block_jacobi)
+    {
+     args[n_args++] = "1";
+    }
+   else
+    {
+     args[n_args++] = "0";
+    }
+
+   // switch on/off row scaling
+   args[n_args++] = "-rowScale";
+   if (use_row_scaling)
+    {
+     args[n_args++] = "1";
+    }
+   else
+    {
+     args[n_args++] = "0";
+    }
+
+   // set level for ILU(k)
+   args[n_args++] = "-level";
+   char level_value[10];
+   sprintf(level_value,"%d",level);
+   args[n_args++] = level_value;
+
+   // // set drop tol for ILU(k) factorization
+   // args[n_args++] = "-sparseA";
+   // char droptol[20];
+   // sprintf(droptol,"%f",drop_tol);
+   // args[n_args++] = droptol;
+
+   // // set ILUT factorization if required
+   // if (use_ilut)
+   //  {
+   //   args[n_args++] = "-ilut";
+   //   args[n_args++] = droptol;
+   //  }
+
+   // set printing of Euclid data
+   if (print_level == 0)
+    {
+     args[n_args++] = "-eu_stats";
+     args[n_args++] = "0";
+     args[n_args++] = "-eu_mem";
+     args[n_args++] = "0";
+    }
+   if (print_level == 1)
+    {
+     args[n_args++] = "-eu_stats";
+     args[n_args++] = "1";
+     args[n_args++] = "-eu_mem";
+     args[n_args++] = "0";
+    }
+   if (print_level == 2)
+    {
+     args[n_args++] = "-eu_stats";
+     args[n_args++] = "1";
+     args[n_args++] = "-eu_mem";
+     args[n_args++] = "1";
+    }
+
+   // set next entry in array to null
+   args[n_args] = 0;
+
+   // Send the parameters
+   HYPRE_EuclidSetParams(euclid_object, n_args, const_cast<char**>(args));
+  }
+
  }
 
 
@@ -532,10 +626,23 @@ namespace oomph
        }
       else
        {
+
         HYPRE_BoomerAMGSetSmoothType(Preconditioner, AMG_complex_smoother);
         HYPRE_BoomerAMGSetSmoothNumLevels(Preconditioner, AMG_max_levels);
         HYPRE_BoomerAMGSetSmoothNumSweeps(Preconditioner,
                                           AMG_smoother_iterations);
+        
+        // If we are using Euclid then set up additional Euclid only options
+        if(AMG_complex_smoother == 9)
+         {
+          HypreHelpers::euclid_settings_helper
+           (AMGEuclidSmoother_use_block_jacobi,
+            AMGEuclidSmoother_use_row_scaling,
+            AMGEuclidSmoother_use_ilut,
+            AMGEuclidSmoother_level,
+            AMGEuclidSmoother_drop_tol,
+            AMGEuclidSmoother_print_level, Preconditioner);
+         }
        }       
 
       Existing_preconditioner = BoomerAMG;
@@ -551,81 +658,10 @@ namespace oomph
       HYPRE_EuclidCreate(MPI_COMM_WORLD, &Preconditioner);
 #endif
 
-      // set Euclid parameters using command line like array
-      int n_args = 0;
-      const char* args[22];
-
-      // first argument is empty string
-      args[n_args++] = "";
-  
-      // switch on/off Block Jacobi ILU
-      args[n_args++] = "-bj";
-      if (Euclid_using_BJ)
-      {
-       args[n_args++] = "1";
-      }
-      else
-      {
-       args[n_args++] = "0";
-      }
-
-      // switch on/off row scaling
-      args[n_args++] = "-rowScale";
-      if (Euclid_rowScale)
-      {
-       args[n_args++] = "1";
-      }
-      else
-      {
-       args[n_args++] = "0";
-      }
-
-      // set level for ILU(k)
-      args[n_args++] = "-level";
-      char level_value[10];
-      sprintf(level_value,"%d",Euclid_level);
-      args[n_args++] = level_value;
-
-      // set drop tol for ILU(k) factorization
-      args[n_args++] = "-sparseA";
-      char droptol[20];
-      sprintf(droptol,"%f",Euclid_droptol);
-      args[n_args++] = droptol;
-
-      // set ILUT factorization if required
-      if (Euclid_using_ILUT)
-      {
-       args[n_args++] = "-ilut";
-       args[n_args++] = droptol;
-      }
-
-      // set printing of Euclid data
-      if (Euclid_print_level == 0)
-      {
-       args[n_args++] = "-eu_stats";
-       args[n_args++] = "0";
-       args[n_args++] = "-eu_mem";
-       args[n_args++] = "0";
-      }
-      if (Euclid_print_level == 1)
-      {
-       args[n_args++] = "-eu_stats";
-       args[n_args++] = "1";
-       args[n_args++] = "-eu_mem";
-       args[n_args++] = "0";
-      }
-      if (Euclid_print_level == 2)
-      {
-       args[n_args++] = "-eu_stats";
-       args[n_args++] = "1";
-       args[n_args++] = "-eu_mem";
-       args[n_args++] = "1";
-      }
-
-      // set next entry in array to null
-      args[n_args] = 0;
-
-      HYPRE_EuclidSetParams(Preconditioner, n_args, const_cast<char**>(args));
+      // Set parameters
+      HypreHelpers::euclid_settings_helper
+       (Euclid_using_BJ, Euclid_rowScale, Euclid_using_ILUT, Euclid_level,
+        Euclid_droptol, Euclid_print_level, Preconditioner);
 
       Existing_preconditioner = Euclid;
      }
@@ -707,6 +743,29 @@ namespace oomph
       HYPRE_BoomerAMGSetSmoothType(Solver, AMG_complex_smoother);
       HYPRE_BoomerAMGSetSmoothNumLevels(Solver, AMG_max_levels);
       HYPRE_BoomerAMGSetSmoothNumSweeps(Solver, AMG_smoother_iterations);
+
+      /* Other settings
+      * 6 &	Schwarz smoothers & HYPRE_BoomerAMGSetDomainType, HYPRE_BoomerAMGSetOverlap, \\
+       *  &  & HYPRE_BoomerAMGSetVariant, HYPRE_BoomerAMGSetSchwarzRlxWeight \\
+       * 7 &	Pilut & HYPRE_BoomerAMGSetDropTol, HYPRE_BoomerAMGSetMaxNzPerRow \\
+       * 8 &	ParaSails & HYPRE_BoomerAMGSetSym, HYPRE_BoomerAMGSetLevel, \\
+       * &  &  HYPRE_BoomerAMGSetFilter, HYPRE_BoomerAMGSetThreshold \\
+       * 9 &	Euclid & HYPRE_BoomerAMGSetEuclidFile \\
+       */
+
+      // If we are using Euclid then set up additional Euclid only options
+      if(AMG_complex_smoother == 9)
+       {
+        HypreHelpers::euclid_settings_helper
+         (AMGEuclidSmoother_use_block_jacobi,
+          AMGEuclidSmoother_use_row_scaling,
+          AMGEuclidSmoother_use_ilut,
+          AMGEuclidSmoother_level,
+          AMGEuclidSmoother_drop_tol,
+          AMGEuclidSmoother_print_level, Preconditioner);
+       }
+
+      // Add any others here as required... 
      }  
 
 //     MemoryUsage::doc_memory_usage("before amg setup [solver]");
@@ -737,82 +796,10 @@ namespace oomph
     HYPRE_EuclidCreate(MPI_COMM_WORLD, &Solver);
 #endif
 
-    // set Euclid parameters using command line like array
-    int n_args = 0;
-    const char* args[20];
-
-    // first argument is empty string
-    args[n_args++] = "";
-
-    // switch on/off Block Jacobi ILU
-    args[n_args++] = "-bj";
-    if (Euclid_using_BJ)
-     {
-      args[n_args++] = "1";
-     }
-    else
-     {
-      args[n_args++] = "0";
-     }
-
-    // switch on/off row scaling
-    args[n_args++] = "-rowScale";
-    if (Euclid_rowScale)
-    {
-     args[n_args++] = "1";
-    }
-    else
-    {
-     args[n_args++] = "0";
-    }
-
-    // set level for ILU(k)
-    args[n_args++] = "-level";
-    char level_value[10];
-    sprintf(level_value,"%d",Euclid_level);
-    args[n_args++] = level_value;
-
-    // set drop tol for ILU(k) factorization
-    args[n_args++] = "-sparseA";
-    char droptol[20];
-    sprintf(droptol,"%f",Euclid_droptol);
-    args[n_args++] = droptol;
-
-    // set ILUT factorization if required
-    if (Euclid_using_ILUT)
-    {
-     args[n_args++] = "-ilut";
-     args[n_args++] = droptol;
-    }
-
-    // set printing of Euclid data
-    if (Euclid_print_level == 0)
-    {
-     args[n_args++] = "-eu_stats";
-     args[n_args++] = "0";
-     args[n_args++] = "-eu_mem";
-     args[n_args++] = "0";
-    }
-
-    if (Euclid_print_level == 1)
-    {
-     args[n_args++] = "-eu_stats";
-     args[n_args++] = "1";
-     args[n_args++] = "-eu_mem";
-     args[n_args++] = "0";
-    }
-    if (Euclid_print_level == 2)
-    {
-     args[n_args++] = "-eu_stats";
-     args[n_args++] = "1";
-     args[n_args++] = "-eu_mem";
-     args[n_args++] = "1";
-    }
-
-    // set next entry in array to null
-    args[n_args] = 0;
-
-    HYPRE_EuclidSetParams(Solver, n_args, const_cast<char**>(args));
+    // Set parameters
+    HypreHelpers::euclid_settings_helper
+     (Euclid_using_BJ, Euclid_rowScale, Euclid_using_ILUT, Euclid_level,
+      Euclid_droptol, Euclid_print_level, Preconditioner);
 
     HYPRE_EuclidSetup(Solver,
                       Matrix_par,
@@ -1705,20 +1692,19 @@ std::map<std::string,double> HyprePreconditioner::Context_based_cumulative_solve
 /// for the oomph-lib IterativeLinearSolver class.
 /// Matrix has to be of type CRDoubleMatrix or DistributedCRDoubleMatrix.
 //=============================================================================
- void HyprePreconditioner::setup(Problem* problem_pt, 
-                                 DoubleMatrixBase* matrix_pt)
+ void HyprePreconditioner::setup()
  {
   // Set Output_info flag for HypreInterface
   Output_info = Doc_time;
   
 #ifdef PARANOID
   // check the matrix is square
-  if ( matrix_pt->nrow() != matrix_pt->ncol() )
+  if ( matrix_pt()->nrow() != matrix_pt()->ncol() )
    {
     std::ostringstream error_message;
     error_message << "HyprePreconditioner require a square matrix. "
-                  << "Matrix is " << matrix_pt->nrow()
-                  << " by " << matrix_pt->ncol() << std::endl;
+                  << "Matrix is " << matrix_pt()->nrow()
+                  << " by " << matrix_pt()->ncol() << std::endl;
     throw OomphLibError(error_message.str(),
                         "HyprePreconditioner::setup()",
                         OOMPH_EXCEPTION_LOCATION);
@@ -1733,7 +1719,7 @@ std::map<std::string,double> HyprePreconditioner::Context_based_cumulative_solve
   Delete_input_data = Delete_matrix;
   
   // Try casting to a CRDoubleMatrix
-  CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt);
+  CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt());
   
   // If cast successful set things up for a serial solve
   if (cr_matrix_pt)

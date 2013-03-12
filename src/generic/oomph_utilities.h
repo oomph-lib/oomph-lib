@@ -103,6 +103,25 @@ public:
 };
 
 
+// =================================================================
+/// Conversion functions for easily making strings (e.g. for filenames - to
+/// avoid stack smashing problems with cstrings and long filenames.
+// =================================================================
+namespace StringConversion
+{
+ 
+ /// \short Conversion function that should work for anything with
+ /// operator<< defined (at least all basic types).
+ template<class T> std::string to_string(T object)
+ {
+  std::stringstream ss;
+  ss << object;
+  return ss.str();
+ }
+ 
+}
+
+
 
 
 
@@ -143,6 +162,57 @@ namespace CumulativeTimings
  extern Vector<clock_t> Start_time;
 
 }
+
+
+ // ============================================================
+ // Automatically checked casting functions (from boost)
+ // ============================================================ 
+
+ /// \short Runtime checked dynamic cast. This is the safe but slightly slower
+ /// cast. Use it in any of these cases:
+ /// - You aren't entirely sure the cast is always safe.
+ /// - You have strange inheritence structures (e.g. the "Diamond of Death" in element inheritence).
+ /// - Efficiency is not critical. 
+ /// Note that if you just want to check if a pointer can be converted to
+ /// some type you will need to use a plain dynamic_cast. Adapted from
+ /// polymorphic_cast in boost/cast.hpp, see
+ /// http://www.boost.org/doc/libs/1_52_0/libs/conversion/cast.htm for more
+ /// details.
+ template <class Target, class Source>
+ inline Target checked_dynamic_cast(Source* x)
+ {
+  Target tmp = dynamic_cast<Target>(x);
+#ifdef PARANOID
+  if(tmp == 0)
+   {
+    throw OomphLibError("Bad cast.", "checked_dynamic_cast",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+  return tmp;
+ }
+
+ /// \short Checked static cast. Only use this cast if ALL of these are true:
+ /// - You are sure that the cast will always succeed.
+ /// - You aren't using any strange inheritence structures (e.g. the "Diamond of
+ /// Death" in element inheritence, if you aren't sure just try compiling).
+ /// - You need efficiency.
+ /// Adapted from polymorphic_downcast in boost/cast.hpp, See
+ /// http://www.boost.org/doc/libs/1_52_0/libs/conversion/cast.htm for more
+ /// details.
+ template <class Target, class Source>
+ inline Target check_static_cast(Source* x)
+ {
+#ifdef PARANOID
+  // Check that the cast will work as expected.
+  if(dynamic_cast<Target>(x) != x)
+   {
+    throw OomphLibError("Bad cast." "check_static_cast",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+  return static_cast<Target>(x);
+ }
 
 //////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////
@@ -322,6 +392,12 @@ public:
 
  /// Number used (e.g.) for labeling output files. Const version.
  unsigned number() const {return Number;}
+
+ /// Get number as a string (useful to completely avoid C-strings).
+ std::string number_as_string() const
+ {
+  return StringConversion::to_string(Number); 
+ } 
 
  /// String used (e.g.) for labeling output files
  std::string& label() {return Label;}
@@ -708,17 +784,11 @@ namespace MemoryUsage
  /// file whose name is specified by My_memory_usage_filename.
  void empty_my_memory_usage_file();
  
-#ifdef OOMPH_HAS_UNISTDH
-
  /// \short Doc my memory usage, prepended by string (which allows
  /// identification from where the function is called, say) that records 
  /// memory usage in file whose name is specified by My_memory_usage_filename.
  /// Data is appended to that file; wipe it with empty_my_memory_usage_file().
- /// Note: This requires getpid() which is defined in unistd.h so if you
- /// don't have that we won't build that function!
  void doc_my_memory_usage(const std::string& prefix_string=0);
-
-#endif
  
  /// \short String containing system command that obtains total memory usage.
  /// Default assigment for linux. [Disclaimer: works on my machine(s) --
@@ -792,8 +862,6 @@ namespace MemoryUsage
 
  
 } // end of namespace MemoryUsage
-
-
 
 
 

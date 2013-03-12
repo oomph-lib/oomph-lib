@@ -1369,6 +1369,18 @@ else if(dynamic_cast<CCDoubleMatrix*>(matrix_pt))
                        "SuperLUSolver::factorise()",
                        OOMPH_EXCEPTION_LOCATION);
   }
+
+   // Throw an error if superLU returned an error status in info.
+   if(Dist_info != 0)
+    {
+     std::ostringstream error_msg;
+     error_msg << "SuperLU returned the error status code "
+	       << Dist_info
+	       << " . See the SuperLU documentation for what this means.";
+     throw OomphLibError(error_msg.str(),
+			 "SuperLUSolver::factorise_distributed",
+			 OOMPH_EXCEPTION_LOCATION);
+    }
 }
 #endif
 
@@ -1480,6 +1492,19 @@ void SuperLUSolver::factorise_serial(DoubleMatrixBase* const &matrix_pt)
                                                  0, &n,  &transpose, &doc,
                                                  &Serial_f_factors, 
                                                  &Serial_info);
+
+ // Throw an error if superLU returned an error status in info.
+ if(Serial_info != 0)
+  {
+   std::ostringstream error_msg;
+   error_msg << "SuperLU returned the error status code "
+	     << Serial_info
+	     << " . See the SuperLU documentation for what this means.";
+   throw OomphLibError(error_msg.str(),
+		       "SuperLUSolver::factorise_serial",
+		       OOMPH_EXCEPTION_LOCATION);
+  }
+
 
  //Set the number of degrees of freedom in the linear system
  Serial_n_dof = n;
@@ -1618,6 +1643,17 @@ void SuperLUSolver::backsub_distributed(const DoubleVector &rhs,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
+ // Throw an error if superLU returned an error status in info.
+ if(Dist_info != 0)
+  {
+   std::ostringstream error_msg;
+   error_msg << "SuperLU returned the error status code "
+	     << Dist_info << " . See the SuperLU documentation for what this means.";
+   throw OomphLibError(error_msg.str(),
+		       "SuperLUSolver::backsub_distributed",
+		       OOMPH_EXCEPTION_LOCATION);
+  }
+
  //Redistribute to original distribution
  //Have to cast away const-ness (which tells us that we shouldn't really
  //be doing this!)
@@ -1642,7 +1678,7 @@ void SuperLUSolver::backsub_serial(const DoubleVector &rhs,
    error_message_stream                                        
     << "The rhs vector distribution must be setup.";               
    throw OomphLibError(error_message_stream.str(),                  
-                       "SuperLU::backsub()",                             
+                       "SuperLU::backsub_serial()",
                        OOMPH_EXCEPTION_LOCATION);         
   }
  // PARANOID check that the rhs has the right number of global rows
@@ -1650,7 +1686,7 @@ void SuperLUSolver::backsub_serial(const DoubleVector &rhs,
   {
    throw OomphLibError(
     "RHS does not have the same dimension as the linear system",
-    "SuperLU::backsub()",
+    "SuperLU::backsub_serial()",
     OOMPH_EXCEPTION_LOCATION);
   }
  // PARANOID check that the rhs is not distributed
@@ -1660,7 +1696,7 @@ void SuperLUSolver::backsub_serial(const DoubleVector &rhs,
    error_message_stream                                        
     << "The rhs vector must not be distributed.";               
    throw OomphLibError(error_message_stream.str(),                  
-                       "SuperLU::backsub()",                             
+                       "SuperLU::backsub_serial()",
                        OOMPH_EXCEPTION_LOCATION);         
   }
  // PARANOID check that if the result is setup it matches the distribution
@@ -1674,7 +1710,7 @@ void SuperLUSolver::backsub_serial(const DoubleVector &rhs,
       << "If the result distribution is setup then it must be the same as the "
       << "rhs distribution";               
      throw OomphLibError(error_message_stream.str(),                  
-                         "SuperLU::backsub()",                             
+                         "SuperLU::backsub_serial()",
                          OOMPH_EXCEPTION_LOCATION);         
     }
   }
@@ -1696,6 +1732,18 @@ void SuperLUSolver::backsub_serial(const DoubleVector &rhs,
          0, 0, 0,
          result.values_pt(), &n,  &transpose, &doc,
          &Serial_f_factors, &Serial_info);
+
+ // Throw an error if superLU returned an error status in info.
+ if(Serial_info != 0)
+   {
+    std::ostringstream error_msg;
+    error_msg << "SuperLU returned the error status code "
+	      << Serial_info
+	      << " . See the SuperLU documentation for what this means.";
+    throw OomphLibError(error_msg.str(),
+			"SuperLU::backsub_serial()",
+			OOMPH_EXCEPTION_LOCATION);
+   }
 }
 
 

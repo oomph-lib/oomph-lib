@@ -422,28 +422,33 @@ class RefineableSolidQElement<3> : public virtual RefineableQElement<3>,
          SolidNode* elastic_node_pt = 
           static_cast<SolidNode*>(node_pt(jnod));
          
+         // Eulerian coordinate: Based on "current" MacroElement representation
+         // if the nodal position is constrained by displacement boundary 
+         // conditions (because the "current" Domain provides an exact 
+         // representation of the deformed domain). If the position is 
+         // free, its current value is based on the FE interpolation which
+         // provides the best "guess" to the so far unknown nodal position
          for (unsigned i=0;i<3;i++)
           {
-           // x_fe is the FE representation -- this is all we can
-           // work with in a solid mechanics problem. If you wish
-           // to reposition nodes on curvilinear boundaries of 
-           // a domain to their exact positions on those boundaries 
-           // you'll have to do this yourself! [Note: We used to 
-           // use the macro-element-based representation 
-           // to assign the position of pinned nodes but this is not always
-           // correct since pinning doesn't mean "pin in place" or
-           // "pin to the curvilinear boundary". For instance, we could impose
-           // the boundary displacement manually.
-           elastic_node_pt->x(i) = x_fe[i];
-           
-           // Lagrangian coordinates can come from undeformed macro element
-           if (Use_undeformed_macro_element_for_new_lagrangian_coords)
+           if (elastic_node_pt->position_is_pinned(i))
             {
+             // x is based on the "current" MacroElement representation 
+             // (if the element has one...)
+             elastic_node_pt->x(i) = x[i];
              elastic_node_pt->xi(i) = xi[i];
             }
            else
             {
-             elastic_node_pt->xi(i) = xi_fe[i];
+             // x_fe is the FE representation
+             elastic_node_pt->x(i) = x_fe[i];
+             if (Use_undeformed_macro_element_for_new_lagrangian_coords)
+              {
+               elastic_node_pt->xi(i) = xi[i];
+              }
+             else
+              {
+               elastic_node_pt->xi(i) = xi_fe[i];
+              }
             }
           }
          
@@ -462,11 +467,29 @@ class RefineableSolidQElement<3> : public virtual RefineableQElement<3>,
              // History values can (and in the case of Newmark timestepping,
              // the scheme most likely to be used for Solid computations, do)
              // include non-positional values, e.g. velocities and accels.
+             // These cannot be obtained from the MacroElement representation
+             // so the best we can do is to interpolate them based on the
+             // FE representation in the father. This is precisely what
+             // the time-dependent version of get_x does :)
+             Vector<double> x_prev(3);
+             father_el_pt->get_x(t,s,x_prev);
              
              // Set previous positions of the new node
              for(unsigned i=0;i<3;i++)
               {
-               elastic_node_pt->x(t,i) = father_el_pt->interpolated_x(t,s,i);
+               // If the nodal position is pinned, we may set its history
+               // values based on the macro element representation
+               if (elastic_node_pt->position_is_pinned(i))
+                {
+                 elastic_node_pt->x(t,i) = x_prev[i];
+                }
+               // If it's not pinned we must obtain the history values
+               // by FE interpolation from the father because its
+               // position is not (ever!) determined by macro elements
+               else
+                {
+                 elastic_node_pt->x(t,i) = father_el_pt->interpolated_x(t,s,i);
+                }
               }
             }
           }       

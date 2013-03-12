@@ -44,7 +44,8 @@ double_multi_vector.cc \
 double_vector_with_halo.cc \
 iterative_linear_solver.cc \
 general_purpose_preconditioners.cc block_preconditioner.cc \
-matrix_vector_product.cc 
+matrix_vector_product.cc \
+sum_of_matrices.cc
 #face_element_as_geometric_object.cc
 
 if OOMPH_HAS_MUMPS
@@ -101,7 +102,9 @@ missing_masters.h \
 preconditioner.h \
 general_purpose_preconditioners.h block_preconditioner.h \
 general_purpose_block_preconditioners.h SuperLU_preconditioner.h \
-matrix_vector_product.h projection.h line_visualiser.h
+matrix_vector_product.h projection.h line_visualiser.h \
+sum_of_matrices.h convergence_data.h
+
 
 if OOMPH_HAS_MUMPS
 headers+=mumps_solver.h

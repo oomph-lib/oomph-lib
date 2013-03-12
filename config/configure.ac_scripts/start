@@ -182,23 +182,6 @@ if test x$have_execinfo = xtrue; then \
 fi;
 
 
-#Check for the unistd.h header (needed for getpid() in memory monitoring)
-AC_CHECK_HEADER(unistd.h,[have_unistdh=true;
-                            echo "Found unistd.h -- can do memory monitoring";],
-                           [have_unistdh=false;
-                            echo "Didn't find unistd.h -- cannot do memory monitoring";])
-
-# Pass result of test to automake (makefiles can now check for 
-# status of HAVE_UNISTDH in any Makefile.am:
-AM_CONDITIONAL(HAVE_UNISTDH, test x$have_unistdh = xtrue)
-
-# Add flag (don't use the obvious HAVE_UNISTDH as this is used by
-# other packages too and leads to clashes!)
-if test x$have_unistdh = xtrue; then \
-    accumulated_cpp_flags=`echo $accumulated_cpp_flags " -DOOMPH_HAS_UNISTDH"`; \
-fi;
-
-
 # Does C compiler support const?
 AC_C_CONST
 

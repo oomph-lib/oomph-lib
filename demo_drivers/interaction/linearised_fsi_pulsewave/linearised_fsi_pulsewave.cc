@@ -1,29 +1,29 @@
 //LIC// ====================================================================
-//LIC// This file forms part of oomph-lib, the object-oriented, 
-//LIC// multi-physics finite-element library, available 
+//LIC// This file forms part of oomph-lib, the object-oriented,
+//LIC// multi-physics finite-element library, available
 //LIC// at http://www.oomph-lib.org.
-//LIC// 
+//LIC//
 //LIC//           Version 0.90. August 3, 2009.
-//LIC// 
+//LIC//
 //LIC// Copyright (C) 2006-2009 Matthias Heil and Andrew Hazel
-//LIC// 
+//LIC//
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
 //LIC// License as published by the Free Software Foundation; either
 //LIC// version 2.1 of the License, or (at your option) any later version.
-//LIC// 
+//LIC//
 //LIC// This library is distributed in the hope that it will be useful,
 //LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
 //LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 //LIC// Lesser General Public License for more details.
-//LIC// 
+//LIC//
 //LIC// You should have received a copy of the GNU Lesser General Public
 //LIC// License along with this library; if not, write to the Free Software
 //LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
 //LIC// 02110-1301  USA.
-//LIC// 
+//LIC//
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
-//LIC// 
+//LIC//
 //LIC//====================================================================
 //
 // Linearised FSI problem -- flow in a cylindrical tube
@@ -68,7 +68,7 @@ namespace Global_Physical_Variables
  double Density_ratio=0.0;
 
  /// Square of the nondimensional "density" -- dependent parameter; compute
- double Lambda_sq = 0.0; 
+ double Lambda_sq = 0.0;
 
  /// Inner radius of tube
  double Inner_radius=0.5;
@@ -88,7 +88,7 @@ namespace Global_Physical_Variables
 
  /// \short Pressure growth factor for pressure acting on the outside
  /// of the solid wall
- double P_outside_scale=0.0; 
+ double P_outside_scale=0.0;
 
  /// FSI parameter
  double Q=1.0e-6;
@@ -120,7 +120,7 @@ namespace Global_Physical_Variables
    }
   //oomph_info << "ramp factor: " << ramp_factor << std::endl;
   result[0]=0.0;
-  result[1]=P_inlet_const*ramp_factor; 
+  result[1]=P_inlet_const*ramp_factor;
   result[2]=0;
  }
 
@@ -168,20 +168,20 @@ namespace Global_Physical_Variables
  double Pressure_wavespeed=0.0;
 
  /// "Exact" solution for propagating pulse wave
- void pulse_wave_solution(const double& time, 
-                          const Vector<double>& x, 
+ void pulse_wave_solution(const double& time,
+                          const Vector<double>& x,
                           Vector<double>& soln)
  {
   // Three velocities and pressure
   soln.resize(4,0.0);
-  
+
   // Wave position
   double z_wave=Length-Wavespeed*time;
 
   // Just do the pressure
   if (x[1]>z_wave)
    {
-    soln[3]=P_inlet_const; 
+    soln[3]=P_inlet_const;
    }
   else
    {
@@ -199,16 +199,16 @@ namespace Global_Physical_Variables
     throw OomphLibError(
      "Inner radius must be 1/2 for non-dimensionalisation to be consistent.",
      "Global_Physical_Variables::update_dependent_parameters()",
-     OOMPH_EXCEPTION_LOCATION); 
+     OOMPH_EXCEPTION_LOCATION);
    }
 #endif
 
   // Non-dim wall thickness
   double h=Outer_radius-Inner_radius;
-  
+
   //Wavespeed
   Wavespeed=sqrt(h/(2.0*Inner_radius)/(Q*Re));
-  
+
   // The Womersley number
   Wo = Re*St;
 
@@ -229,9 +229,9 @@ namespace Global_Physical_Variables
   oomph_info << std::endl;
   oomph_info << "Problem parameters" << std::endl;
   oomph_info << "==================" << std::endl;
-  oomph_info << "Womersley number (ReSt)           : " 
+  oomph_info << "Womersley number (ReSt)           : "
              << Wo << std::endl;
-  oomph_info << "Wall inertia parameter (Lambda^2) : " 
+  oomph_info << "Wall inertia parameter (Lambda^2) : "
              << Lambda_sq << std::endl;
   oomph_info << "Moens-Korteweg wavespeed          : "
              << Wavespeed << std::endl;
@@ -254,9 +254,9 @@ class PressureWaveFSIProblem : public Problem
 
 public:
 
- /// \short Constructor 
+ /// \short Constructor
  PressureWaveFSIProblem();
- 
+
  /// Create the fluid traction elements
  void create_fluid_traction_elements();
 
@@ -265,7 +265,7 @@ public:
 
  /// \short Update the problem specs before next timestep: Emtpy
  void actions_before_implicit_timestep() {}
- 
+
  /// Doc solution
  void doc_solution(DocInfo& doc_info);
 
@@ -308,7 +308,7 @@ private:
 
  /// Id for Lagrange multiplier constraint
  unsigned Lagrange_id;
- 
+
 };
 
 
@@ -318,7 +318,7 @@ private:
 template<class FLUID_ELEMENT, class SOLID_ELEMENT>
 PressureWaveFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::PressureWaveFSIProblem()
 {
- 
+
  // Create timesteppers
  Solid_time_stepper_pt = new NewmarkBDF<2>;
  add_time_stepper_pt(Solid_time_stepper_pt);
@@ -351,7 +351,7 @@ PressureWaveFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::PressureWaveFSIProblem()
  fluid_vertex_coords[4][0]=0.0;
  fluid_vertex_coords[4][1]=0.0;
 
- 
+
  //Loop over the vertices and create a polyline between each consecutive pair
  Vector<TriangleMeshCurveSection*> fluid_outer_polyline_boundary_pt(4);
  for(unsigned i=0;i<4;i++)
@@ -404,10 +404,10 @@ PressureWaveFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::PressureWaveFSIProblem()
 
      // Pointer to GeomObject that contains this point
      GeomObject* geom_obj_pt=0;
-     
+
      // Get it
      Fluid_mesh_geom_obj_pt->locate_zeta(x,geom_obj_pt,s);
-     
+
      // Store it
      Regularly_spaced_plot_point[count].first=
       dynamic_cast<FLUID_ELEMENT*>(geom_obj_pt);
@@ -501,7 +501,7 @@ PressureWaveFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::PressureWaveFSIProblem()
    //There is no need for ALE
    el_pt->disable_ALE();
 
-   //Set the Reynolds number for each element 
+   //Set the Reynolds number for each element
    el_pt->re_pt() = &Global_Physical_Variables::Re;
 
    //Set the product of Reynolds and Strouhal numbers
@@ -526,7 +526,7 @@ PressureWaveFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::PressureWaveFSIProblem()
 
    // Set the pointer to Poisson's ratio
    el_pt->nu_pt() = &Global_Physical_Variables::Nu;
-   
+
    // Set the pointer to non-dim Young's modulus
    el_pt->youngs_modulus_pt() = &Global_Physical_Variables::E;
 
@@ -576,7 +576,7 @@ PressureWaveFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::PressureWaveFSIProblem()
       }
     }
    // Completely pin the velocity on the FSI boundary
-   else if (Global_Physical_Variables::Pin_fluid_on_fsi) 
+   else if (Global_Physical_Variables::Pin_fluid_on_fsi)
     {
      unsigned n_boundary_node = Fluid_mesh_pt->nboundary_node(b);
      for(unsigned n=0;n<n_boundary_node;++n)
@@ -587,8 +587,8 @@ PressureWaveFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::PressureWaveFSIProblem()
       }
     }
   }
- 
- 
+
+
  //Set the solid boundary conditions
  n_boundary = Solid_mesh_pt->nboundary();
 
@@ -606,7 +606,7 @@ PressureWaveFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::PressureWaveFSIProblem()
       }
     }
   }
- 
+
 
  // Pin theta Lagrange multipliers (no swirl) and radial and axial Lagrange
  // multiplier for nodes on in and outflow boundaries (b=0 and 2)
@@ -619,24 +619,24 @@ PressureWaveFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::PressureWaveFSIProblem()
     traction_element_pt=dynamic_cast<
     LinearisedFSIAxisymmetricNStNoSlipBCElementElement<FLUID_ELEMENT,SOLID_ELEMENT>*>
     (FSI_fluid_surface_mesh_pt->element_pt(e));
-   
+
    // Loop over nodes
    unsigned n_node = traction_element_pt->nnode();
    for(unsigned n=0;n<n_node;n++)
     {
      Node *nod_pt = traction_element_pt->node_pt(n);
-     
+
      // Cast to a boundary node
      BoundaryNodeBase *bnod_pt=dynamic_cast<BoundaryNodeBase*>(nod_pt);
-     
+
      // Get the index of the first nodal value associated with
      // this FaceElement
      unsigned first_index=
       bnod_pt->index_of_first_value_assigned_by_face_element(Lagrange_id);
-          
+
      // Pin swirl component
      nod_pt->pin(first_index+2);
-     
+
      // Pin all Lagrange multipliers if we're pinning the fluid
      // on the fsi boundary (for validation)
      if (Global_Physical_Variables::Pin_fluid_on_fsi)
@@ -644,7 +644,7 @@ PressureWaveFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::PressureWaveFSIProblem()
        nod_pt->pin(first_index+0);
        nod_pt->pin(first_index+1);
       }
-     
+
      // Pin radial and axial component if on in or outflow boundary
      if (bnod_pt->is_on_boundary(0))
       {
@@ -670,7 +670,7 @@ PressureWaveFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::PressureWaveFSIProblem()
  add_sub_mesh(FSI_fluid_surface_mesh_pt);
  add_sub_mesh(Solid_surface_mesh_pt);
  add_sub_mesh(FSI_solid_surface_mesh_pt);
- 
+
  build_global_mesh();
 
  //Setup all the equation numbering and look-up schemes
@@ -691,44 +691,44 @@ create_solid_traction_elements()
  unsigned bound=3;
 
  // Now loop over bulk elements and create the face elements
- unsigned nel=Solid_mesh_pt->nboundary_element(bound); 
+ unsigned nel=Solid_mesh_pt->nboundary_element(bound);
  for(unsigned n=0;n<nel;n++)
   {
 
 #ifdef DO_FSI
 
    // Create the face element
-   FSIAxisymmetricLinearElasticityTractionElement<SOLID_ELEMENT,FLUID_ELEMENT>* 
-    traction_element_pt = new 
+   FSIAxisymmetricLinearElasticityTractionElement<SOLID_ELEMENT,FLUID_ELEMENT>*
+    traction_element_pt = new
     FSIAxisymmetricLinearElasticityTractionElement<SOLID_ELEMENT,FLUID_ELEMENT>
     (Solid_mesh_pt->boundary_element_pt(bound,n),
      Solid_mesh_pt->face_index_at_boundary(bound,n));
-   
+
    // Add to mesh
    FSI_solid_surface_mesh_pt->add_element_pt(traction_element_pt);
 
    // Set the FSI parameter
    traction_element_pt->q_pt() = &Global_Physical_Variables::Q;
-   
+
    // Associate element with bulk boundary (to allow it to access
    // the boundary coordinates in the bulk mesh)
-   traction_element_pt->set_boundary_number_in_bulk_mesh(bound); 
-   
+   traction_element_pt->set_boundary_number_in_bulk_mesh(bound);
+
 #else
 
    // Create the face element
-   AxisymmetricLinearElasticityTractionElement<SOLID_ELEMENT>* 
-    traction_element_pt 
+   AxisymmetricLinearElasticityTractionElement<SOLID_ELEMENT>*
+    traction_element_pt
     = new AxisymmetricLinearElasticityTractionElement<SOLID_ELEMENT>
     (Solid_mesh_pt->boundary_element_pt(bound,n),
      Solid_mesh_pt->face_index_at_boundary(bound,n));
-   
+
    // Add to mesh
    FSI_solid_surface_mesh_pt->add_element_pt(traction_element_pt);
-   
+
    // Set the applied traction
    traction_element_pt->traction_fct_pt() =
-    &Global_Physical_Variables::validation_solid_fsi_boundary_traction;  
+    &Global_Physical_Variables::validation_solid_fsi_boundary_traction;
 
 #endif
 
@@ -739,17 +739,17 @@ create_solid_traction_elements()
  bound=1;
 
  // Now loop over bulk elements and create the face elements
- nel=Solid_mesh_pt->nboundary_element(bound); 
+ nel=Solid_mesh_pt->nboundary_element(bound);
  for(unsigned n=0;n<nel;n++)
   {
-   
+
    // Create the face element
-   AxisymmetricLinearElasticityTractionElement<SOLID_ELEMENT>* 
-    traction_element_pt 
+   AxisymmetricLinearElasticityTractionElement<SOLID_ELEMENT>*
+    traction_element_pt
     = new AxisymmetricLinearElasticityTractionElement<SOLID_ELEMENT>
     (Solid_mesh_pt->boundary_element_pt(bound,n),
      Solid_mesh_pt->face_index_at_boundary(bound,n));
-   
+
    // Add to mesh
    Solid_surface_mesh_pt->add_element_pt(traction_element_pt);
 
@@ -758,7 +758,7 @@ create_solid_traction_elements()
 
    // Set the applied traction
    traction_element_pt->traction_fct_pt() =
-    &Global_Physical_Variables::outside_solid_boundary_traction;  
+    &Global_Physical_Variables::outside_solid_boundary_traction;
   }
 
 
@@ -774,17 +774,17 @@ create_fluid_traction_elements()
 {
  // Inflow:
  unsigned bound=2;
- 
+
  // Now loop over bulk elements and create the face elements
- unsigned nel=Fluid_mesh_pt->nboundary_element(bound); 
+ unsigned nel=Fluid_mesh_pt->nboundary_element(bound);
  for(unsigned e=0;e<nel;e++)
   {
    // Create the face element
-   AxisymmetricNavierStokesTractionElement<FLUID_ELEMENT>* traction_element_pt 
+   AxisymmetricNavierStokesTractionElement<FLUID_ELEMENT>* traction_element_pt
     = new AxisymmetricNavierStokesTractionElement<FLUID_ELEMENT>
     (Fluid_mesh_pt->boundary_element_pt(bound,e),
      Fluid_mesh_pt->face_index_at_boundary(bound,e));
-   
+
    // Add to mesh
    Inflow_fluid_surface_mesh_pt->add_element_pt(traction_element_pt);
 
@@ -799,42 +799,42 @@ create_fluid_traction_elements()
 
  // FSI boundary:
  bound=1;
- 
+
  // Now loop over bulk elements and create the face elements
- nel=Fluid_mesh_pt->nboundary_element(bound); 
+ nel=Fluid_mesh_pt->nboundary_element(bound);
  for(unsigned e=0;e<nel;e++)
   {
 
 #ifdef DO_FSI
-   
+
    // Create the face element
    LinearisedFSIAxisymmetricNStNoSlipBCElementElement<FLUID_ELEMENT,SOLID_ELEMENT>*
-    traction_element_pt = new 
+    traction_element_pt = new
     LinearisedFSIAxisymmetricNStNoSlipBCElementElement<FLUID_ELEMENT,SOLID_ELEMENT>
     (Fluid_mesh_pt->boundary_element_pt(bound,e),
      Fluid_mesh_pt->face_index_at_boundary(bound,e),Lagrange_id);
-   
+
    // Add to mesh
    FSI_fluid_surface_mesh_pt->add_element_pt(traction_element_pt);
-   
+
    // Associate element with bulk boundary (to allow it to access
    // the boundary coordinates in the bulk mesh)
-   traction_element_pt->set_boundary_number_in_bulk_mesh(bound); 
-   
+   traction_element_pt->set_boundary_number_in_bulk_mesh(bound);
+
    // Set Strouhal number
    traction_element_pt->st_pt()=&Global_Physical_Variables::St;
-   
+
 #else
 
    // Create the face element
-   AxisymmetricNavierStokesTractionElement<FLUID_ELEMENT>* traction_element_pt 
+   AxisymmetricNavierStokesTractionElement<FLUID_ELEMENT>* traction_element_pt
     = new AxisymmetricNavierStokesTractionElement<FLUID_ELEMENT>
     (Fluid_mesh_pt->boundary_element_pt(bound,e),
      Fluid_mesh_pt->face_index_at_boundary(bound,e));
-   
+
    // Add to mesh
    FSI_fluid_surface_mesh_pt->add_element_pt(traction_element_pt);
-   
+
    // Set the applied traction
    traction_element_pt->traction_fct_pt() =
     &Global_Physical_Variables::fluid_fsi_boundary_traction;
@@ -885,7 +885,7 @@ void PressureWaveFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::doc_solution(
  //Define an output filestream
  ofstream file;
 
- // Fluid 
+ // Fluid
  sprintf(filename,"%s/soln-fluid%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
@@ -919,7 +919,7 @@ void PressureWaveFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::doc_solution(
  // tmp_FSI_fluid_surface_mesh_pt->output(file,5);
  // file.close();
 
- // Solid 
+ // Solid
  sprintf(filename,"%s/soln-solid%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
@@ -969,7 +969,7 @@ void PressureWaveFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::doc_solution(
    // Get velocity
    el_pt->interpolated_u_axi_nst(s,veloc);
 
-   file << x[0] << " " 
+   file << x[0] << " "
         << x[1] << " "
         << veloc[0] << " "
         << veloc[1] << " "
@@ -979,14 +979,14 @@ void PressureWaveFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::doc_solution(
  file.close();
 
 
- // Output "exact" pulse wave solution 
+ // Output "exact" pulse wave solution
  //-----------------------------------
  sprintf(filename,"%s/pulse_wave%i.dat",
          doc_info.directory().c_str(),
          doc_info.number());
  file.open(filename);
  Fluid_mesh_pt->output_fct(file,5,time_pt()->time(),
-                           Global_Physical_Variables::pulse_wave_solution); 
+                           Global_Physical_Variables::pulse_wave_solution);
  file.close();
 
  // Bump up counter
@@ -1000,19 +1000,19 @@ void PressureWaveFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::doc_solution(
 //================================================================
 int main(int argc, char **argv)
 {
- 
+
  // Store command line arguments
  CommandLineArgs::setup(argc,argv);
- 
+
  // Define possible command line arguments and parse the ones that
  // were actually specified
- 
+
  // Validation run?
  CommandLineArgs::specify_command_line_flag("--validation");
- 
+
  // Parse command line
- CommandLineArgs::parse_and_assign(); 
- 
+ CommandLineArgs::parse_and_assign();
+
  // Doc what has actually been specified on the command line
  CommandLineArgs::doc_specified_flags();
 
@@ -1023,7 +1023,7 @@ int main(int argc, char **argv)
  // Create problem
  PressureWaveFSIProblem<AxisymmetricTTaylorHoodElement,
                         TAxisymmetricLinearElasticityElement<3> > problem;
- 
+
 
  // Update dependent problem parameters
  Global_Physical_Variables::update_dependent_parameters();
@@ -1064,18 +1064,17 @@ int main(int argc, char **argv)
   {
    //Solve the problem
    problem.unsteady_newton_solve(dt);
-   
+
    // Output
    problem.doc_solution(doc_info);
-   
+
    if (Global_Physical_Variables::Pin_fluid_on_fsi)
     {
      Global_Physical_Variables::P_inlet_const*=1.1;
-     oomph_info << "incrementing P_inlet_const to " 
+     oomph_info << "incrementing P_inlet_const to "
                 <<  Global_Physical_Variables::P_inlet_const << std::endl;
     }
 
   }
 
 }
-

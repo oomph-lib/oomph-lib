@@ -330,7 +330,7 @@ class Data
  void copy(Data* orig_data_pt);
 
  /// Dump the data object to a file. 
- void dump(std::ostream& dump_file);
+ void dump(std::ostream& dump_file) const;
 
  /// Read data object from a file.
  void read(std::ifstream& restart_file);
@@ -1057,7 +1057,7 @@ public:
  void copy(Node* orig_node_pt);
 
  /// Dump nodal position and associated data to file for restart
- virtual void dump(std::ostream& dump_file);
+ virtual void dump(std::ostream& dump_file) const;
 
 ///Read nodal position and associated data from file for restart
  void read(std::ifstream& restart_file);
@@ -1568,7 +1568,7 @@ public:
 
  /// \short Dump nodal positions (variable and fixed) and associated 
  /// data to file for restart
- void dump(std::ostream& dump_file);
+ void dump(std::ostream& dump_file) const;
 
  /// \short Read nodal positions (variable and fixed) and associated 
  /// data from file for restart

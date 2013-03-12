@@ -93,8 +93,7 @@ namespace Biharmonic_schur_complement_Hypre_defaults
 //===========================================================================
 /// setup for the biharmonic preconditioner
 //===========================================================================
-void BiharmonicPreconditioner::setup(Problem* problem_pt, 
-                                     DoubleMatrixBase* matrix_pt)
+ void BiharmonicPreconditioner::setup()
 {
  // clean up
  this->clean_up_memory();
@@ -113,10 +112,10 @@ void BiharmonicPreconditioner::setup(Problem* problem_pt,
 #endif
 
  // setup the mesh
- this->set_mesh(0,problem_pt,Bulk_element_mesh_pt);
+ this->set_mesh(0,Bulk_element_mesh_pt);
 
  //setup the blocks look up schemes
- this->block_setup(problem_pt,matrix_pt);
+ this->block_setup();
 
  // determine whether this preconditioner has 4 or 5 block types and set
  // Nblock_types if neccessary
@@ -128,18 +127,6 @@ void BiharmonicPreconditioner::setup(Problem* problem_pt,
 //  }
 // if (nblock_type_check) { Nblock_types = 4; }
 //
-
- // Need to recast here -- input type is determined by specs in
- // base class.
- CRDoubleMatrix* cast_matrix_pt=dynamic_cast<CRDoubleMatrix*>(matrix_pt);
-#ifdef PARANOID
- if (cast_matrix_pt==0)
-  {
-   throw OomphLibError("Wasn't able to cast matrix to specific type.",
-                       "BiharmonicPreconditioner::setup()",
-                       OOMPH_EXCEPTION_LOCATION);
-  }
-#endif
 
  // check the preconditioner type is acceptable
 #ifdef PARANOID
@@ -160,7 +147,7 @@ void BiharmonicPreconditioner::setup(Problem* problem_pt,
  // create the preconditioners
  if (Preconditioner_type == 0)
   {
-   Sub_preconditioner_1_pt = new ExactSubBiharmonicPreconditioner(this);
+   Sub_preconditioner_1_pt = new ExactSubBiharmonicPreconditioner(this); 
    Sub_preconditioner_2_pt = new SuperLUPreconditioner;
   }
  else
@@ -174,14 +161,22 @@ void BiharmonicPreconditioner::setup(Problem* problem_pt,
     new InexactSubBiharmonicPreconditioner(this,use_amg);
    Sub_preconditioner_2_pt = new MatrixBasedDiagPreconditioner;
   }
+
+ // Set meshes for block preconditioner ??ds not entirely sure it's this
+ // one, previously it used problem_pt->mesh_pt() as a default mesh.
+ BlockPreconditioner<CRDoubleMatrix>* Block_sub_prec_1_pt =
+  checked_dynamic_cast<BlockPreconditioner<CRDoubleMatrix>* >
+  (Sub_preconditioner_1_pt);
+ Block_sub_prec_1_pt->set_nmesh(1);
+ Block_sub_prec_1_pt->set_mesh(0,Bulk_element_mesh_pt);
  
  // setup sub preconditioner pt 1
- Sub_preconditioner_1_pt->setup(problem_pt,matrix_pt);
+ Sub_preconditioner_1_pt->setup(matrix_pt(),comm_pt());
  
  // get the matrix ans setup sub preconditioner pt 2
  CRDoubleMatrix* j_33_pt = 0;
- this->get_block(3,3,cast_matrix_pt,j_33_pt);
- Sub_preconditioner_2_pt->setup(problem_pt,j_33_pt);
+ this->get_block(3,3,j_33_pt);
+ Sub_preconditioner_2_pt->setup(j_33_pt,comm_pt());
  delete j_33_pt;
 
  // if the block preconditioner has 5 block types setup the preconditioner
@@ -192,11 +187,11 @@ void BiharmonicPreconditioner::setup(Problem* problem_pt,
   {
    // get the matrix for block J_33
    CRDoubleMatrix* j_44_pt = 0;
-   this->get_block(4,4,cast_matrix_pt,j_44_pt);
+   this->get_block(4,4,j_44_pt);
 
    // setup the hijacked sub preconditioner
    Hijacked_sub_block_preconditioner_pt = new MatrixBasedDiagPreconditioner;
-   Hijacked_sub_block_preconditioner_pt->setup(problem_pt,j_44_pt);
+   Hijacked_sub_block_preconditioner_pt->setup(j_44_pt,comm_pt());
    delete j_44_pt;
    j_44_pt = 0;
   }
@@ -238,15 +233,13 @@ void BiharmonicPreconditioner::setup(Problem* problem_pt,
 //============================================================================
 /// setup for the exact sub biharmonic preconditioner
 //============================================================================
-void ExactSubBiharmonicPreconditioner::setup(Problem* problem_pt, 
-                                             DoubleMatrixBase* 
-                                             matrix_pt)
+void ExactSubBiharmonicPreconditioner::setup()
 {
  // clean up memory first
  this->clean_up_memory();
 
  // setup
- this->block_setup(problem_pt,matrix_pt);
+ this->block_setup();
 
  // Mumber of block types
  unsigned n_block_types = this->nblock_types();
@@ -275,25 +268,12 @@ void ExactSubBiharmonicPreconditioner::setup(Problem* problem_pt,
   required_blocks(2,0) = true;
   required_blocks(2,2) = true;
  
-  // Need to recast here -- input type is determined by specs in
-  // base class.
-  CRDoubleMatrix* cast_matrix_pt=dynamic_cast<CRDoubleMatrix*>(matrix_pt);
-  
-#ifdef PARANOID
-  if (cast_matrix_pt==0)
-   {
-    throw OomphLibError("Wasn't able to cast matrix to specific type.",
-                        "BiharmonicPreconditioner::setup()",
-                        OOMPH_EXCEPTION_LOCATION);
-   }
-#endif
-  
   // Matrix of block matrix pointers
   DenseMatrix<CRDoubleMatrix*> 
    matrix_of_block_pointers(n_block_types,n_block_types,0);
 
   // get the blocks
-  this->get_blocks(cast_matrix_pt, required_blocks, matrix_of_block_pointers);
+  this->get_blocks(required_blocks, matrix_of_block_pointers);
 
   // build the precondiitoner matrix
   CRDoubleMatrix* preconditioner_matrix_pt = 0;
@@ -315,7 +295,7 @@ void ExactSubBiharmonicPreconditioner::setup(Problem* problem_pt,
 
   // setup the preconditioner
   Sub_preconditioner_pt = new SuperLUPreconditioner;
-  Sub_preconditioner_pt->setup(problem_pt,preconditioner_matrix_pt);
+  Sub_preconditioner_pt->setup(preconditioner_matrix_pt,comm_pt());
   delete preconditioner_matrix_pt;
 }
 
@@ -344,14 +324,13 @@ void ExactSubBiharmonicPreconditioner::preconditioner_solve
 //============================================================================
 /// setup for the inexact sub biharmonic preconditioner
 //============================================================================
-void InexactSubBiharmonicPreconditioner::setup
-(Problem* problem_pt, DoubleMatrixBase* matrix_pt)
+void InexactSubBiharmonicPreconditioner::setup()
 {
  // clean up memory first
  this->clean_up_memory();
 
  // setup
- this->block_setup(problem_pt,matrix_pt);
+ this->block_setup();
 
  // Number of block types
  unsigned n_block_types = this->nblock_types();
@@ -370,19 +349,6 @@ void InexactSubBiharmonicPreconditioner::setup
   }
 #endif
  
-   // Need to recast here -- input type is determined by specs in
-  // base class.
-  CRDoubleMatrix* cast_matrix_pt=dynamic_cast<CRDoubleMatrix*>(matrix_pt);
-  
-#ifdef PARANOID
-  if (cast_matrix_pt==0)
-   {
-    throw OomphLibError("Wasn't able to cast matrix to specific type.",
-                        "BiharmonicPreconditioner::setup()",
-                        OOMPH_EXCEPTION_LOCATION);
-   }
-#endif
-  
   // required blocks
   DenseMatrix<bool> required_blocks(n_block_types,n_block_types,false);
   required_blocks(0,0) = true;
@@ -397,21 +363,21 @@ void InexactSubBiharmonicPreconditioner::setup
   Matrix_of_block_pointers.resize(n_block_types,n_block_types,0);
   
   // get the blocks
-  this->get_blocks(cast_matrix_pt, required_blocks, Matrix_of_block_pointers);
+  this->get_blocks(required_blocks, Matrix_of_block_pointers);
 
   // lump the matrix J_11
   Lumped_J_11_preconditioner_pt = 
    new MatrixBasedLumpedPreconditioner<CRDoubleMatrix>;
-  Lumped_J_11_preconditioner_pt->setup(problem_pt,
-                                       Matrix_of_block_pointers(1,1));
+  Lumped_J_11_preconditioner_pt->
+   setup(Matrix_of_block_pointers(1,1),comm_pt());
+
   delete Matrix_of_block_pointers(1,1);
   Matrix_of_block_pointers(1,1) = 0;
 
   // lump the matrix J_22
   Lumped_J_22_preconditioner_pt = 
    new MatrixBasedLumpedPreconditioner<CRDoubleMatrix>;
-  Lumped_J_22_preconditioner_pt->setup(problem_pt,
-                                       Matrix_of_block_pointers(2,2));
+  Lumped_J_22_preconditioner_pt->setup(Matrix_of_block_pointers(2,2),comm_pt());
   delete Matrix_of_block_pointers(2,2);
   Matrix_of_block_pointers(2,2) = 0;
 
@@ -441,7 +407,7 @@ void InexactSubBiharmonicPreconditioner::setup
    }
 
   // setup the preconditioner
-  S_00_preconditioner_pt->setup(problem_pt,S_00_pt);
+  S_00_preconditioner_pt->setup(S_00_pt,comm_pt());
 
   // clean up
   delete S_00_pt;

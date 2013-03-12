@@ -900,7 +900,7 @@ namespace oomph
 #endif
 
   // determine the number of processors
-  unsigned nproc = Problem_pt->communicator_pt()->nproc();
+  unsigned nproc = comm_pt()->nproc();
 
    // determine the number of nnzs
    unsigned p_nnz = 0;

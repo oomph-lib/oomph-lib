@@ -109,13 +109,12 @@ namespace oomph
    /// \b NOTE 1. matrix_pt must point to an object of class CRDoubleMatrix or 
    /// DistributedCRDoubleMatrix\n
    /// This method should be called by oomph-lib solvers and preconditioners
-   void setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt);
+   void setup();
 
    /// \short Function to setup a preconditioner for the linear system defined
    /// by the oomph-lib oomph_matrix_pt and Epetra epetra_matrix_pt matrices.\n
    /// This method is called by Trilinos solvers.
-   void setup(Problem* problem_pt, DoubleMatrixBase* oomph_matrix_pt, 
-              Epetra_CrsMatrix* epetra_matrix_pt);
+   void setup(Epetra_CrsMatrix* epetra_matrix_pt);
    
    /// \short applies the preconditioner
    void preconditioner_solve(const DoubleVector& r,
@@ -140,8 +139,7 @@ namespace oomph
    /// \short Function to set up a specific Trilinos preconditioner.
    /// This is called by setup(...).
    virtual void setup_trilinos_preconditioner
-    (Problem* problem_pt, DoubleMatrixBase* oomph_matrix_pt, 
-     Epetra_CrsMatrix* epetra_matrix_pt)=0;
+    (Epetra_CrsMatrix* epetra_matrix_pt)=0;
 
    /// \short The preconditioner which will be set up using function
    /// setup_trilinos_preconditioner(...)
@@ -269,9 +267,7 @@ namespace oomph
 
    /// \short Function to set up the ML preconditioner. It is assumed
    /// Trilinos_matrix_pt points to a suitable matrix.
-   void setup_trilinos_preconditioner
-    (Problem* problem_pt, DoubleMatrixBase* oomph_matrix_pt, 
-     Epetra_CrsMatrix* epetra_matrix_pt);
+   void setup_trilinos_preconditioner(Epetra_CrsMatrix* epetra_matrix_pt);
 
    // Parameter list of control flags for the preconditioner
    Teuchos::ParameterList ML_parameters;
@@ -343,9 +339,7 @@ namespace oomph
 
    /// \short Function to set up an IFPACK preconditioner. It is assumed
    /// Trilinos_matrix_pt points to a suitable matrix.
-   void setup_trilinos_preconditioner
-       (Problem* problem_pt, DoubleMatrixBase* oomph_matrix_pt, 
-        Epetra_CrsMatrix* epetra_matrix_pt);
+   void setup_trilinos_preconditioner(Epetra_CrsMatrix* epetra_matrix_pt);
 
    /// Type of ILU preconditioner
    string Preconditioner_type;

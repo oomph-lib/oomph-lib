@@ -285,7 +285,7 @@ FpTestProblem::FpTestProblem(
 
  // Build preconditoner
  NavierStokesSchurComplementPreconditioner* prec_pt 
-  = new NavierStokesSchurComplementPreconditioner;  
+  = new NavierStokesSchurComplementPreconditioner(this);
  Prec_pt=prec_pt;
  
  // By default, the LSC Preconditioner uses SuperLU as

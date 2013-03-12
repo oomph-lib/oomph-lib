@@ -51,8 +51,7 @@ namespace oomph {
  //=============================================================================
  /// \short Setup the precoonditioner.
  //=============================================================================
- void PseudoElasticFSIPreconditioner::setup(Problem* problem_pt, 
-                                            DoubleMatrixBase* matrix_pt)
+ void PseudoElasticFSIPreconditioner::setup()
  {
   // clean the memory
   this->clean_up_memory();
@@ -86,11 +85,10 @@ namespace oomph {
    }
 #endif
   
-
   // add the meshes
-  this->set_mesh(0,problem_pt,Fluid_and_pseudo_elastic_mesh_pt);
-  this->set_mesh(1,problem_pt,Solid_mesh_pt);
-  this->set_mesh(2,problem_pt,Lagrange_multiplier_mesh_pt);
+  this->set_mesh(0,Fluid_and_pseudo_elastic_mesh_pt);
+  this->set_mesh(1,Solid_mesh_pt);
+  this->set_mesh(2,Lagrange_multiplier_mesh_pt);
   
   // determine the number of fluid dofs
   unsigned nfluid_dof = Dim + 1;
@@ -130,11 +128,8 @@ namespace oomph {
     c++;
    } 
   
-  // Call block setup for this preconditioner
-  this->block_setup(problem_pt,matrix_pt,dof_to_block_map);
-
   // Recast Jacobian matrix to CRDoubleMatrix
-  CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt);
+  CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt());
 #ifdef PARANOID
   if (cr_matrix_pt==0)
    {
@@ -146,6 +141,9 @@ namespace oomph {
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif
+  
+  // Call block setup for this preconditioner
+  this->block_setup(dof_to_block_map);
   
   // SETUP THE PRECONDITIONERS
   // =========================
@@ -165,15 +163,15 @@ namespace oomph {
     Navier_stokes_schur_complement_preconditioner_pt->
      turn_into_subsidiary_block_preconditioner(this,ns_dof_list);
 
-    Navier_stokes_schur_complement_preconditioner_pt->setup(problem_pt,
-                                                            matrix_pt);
+    Navier_stokes_schur_complement_preconditioner_pt->
+     Preconditioner::setup(matrix_pt(),comm_pt());
    }
   else
    {
     CRDoubleMatrix* ns_matrix_pt = 0;
-    this->get_block(0,0,cr_matrix_pt,ns_matrix_pt);
+    this->get_block(0,0,ns_matrix_pt);
 
-    Navier_stokes_preconditioner_pt->setup(problem_pt,ns_matrix_pt);
+    Navier_stokes_preconditioner_pt->setup(ns_matrix_pt,comm_pt());
     delete ns_matrix_pt;
    }
   
@@ -198,13 +196,13 @@ namespace oomph {
       solid_block_preconditioner_pt
        ->turn_into_subsidiary_block_preconditioner(this,
                                                    solid_prec_dof_list);
-      solid_block_preconditioner_pt->add_mesh(Solid_mesh_pt);
+      solid_block_preconditioner_pt->add_mesh(Solid_mesh_pt); 
       if (Solid_preconditioner_dof_to_block_map.size()>0)
        {
         solid_block_preconditioner_pt->set_dof_to_block_map
          (Solid_preconditioner_dof_to_block_map);
        }
-      solid_block_preconditioner_pt->setup(problem_pt,cr_matrix_pt);
+      solid_block_preconditioner_pt->setup(cr_matrix_pt,comm_pt());
      }
     else
      {
@@ -222,8 +220,8 @@ namespace oomph {
    {
     Solid_preconditioner_is_block_preconditioner=false;
     CRDoubleMatrix* s_matrix_pt = 0;
-    this->get_block(1,1,cr_matrix_pt,s_matrix_pt);
-    Solid_preconditioner_pt->setup(problem_pt,s_matrix_pt);
+    this->get_block(1,1,s_matrix_pt);
+    Solid_preconditioner_pt->setup(s_matrix_pt,comm_pt());
     delete s_matrix_pt;
    }
   
@@ -246,32 +244,33 @@ namespace oomph {
    set_elastic_mesh(this->Fluid_and_pseudo_elastic_mesh_pt);
   Pseudo_elastic_preconditioner_pt->
    set_lagrange_multiplier_mesh(this->Lagrange_multiplier_mesh_pt);
-  Pseudo_elastic_preconditioner_pt->setup(problem_pt,matrix_pt);
+  Pseudo_elastic_preconditioner_pt->
+   Preconditioner::setup(matrix_pt(),comm_pt());
   
   // SETUP THE MATRIX VECTOR PRODUCT OPERATORS
   // =========================================
   
   // setup the fluid pseudo-solid matvec operator
   CRDoubleMatrix* fp_matrix_pt = 0;
-  get_block(0,2,cr_matrix_pt,fp_matrix_pt);
+  get_block(0,2,fp_matrix_pt);
   Fluid_pseudo_elastic_matvec_pt->setup(fp_matrix_pt);
   delete fp_matrix_pt;
   
   // setup the solid fluid matvec operator
   CRDoubleMatrix* sf_matrix_pt = 0;
-  get_block(1,0,cr_matrix_pt,sf_matrix_pt);
+  get_block(1,0,sf_matrix_pt);
   Solid_fluid_matvec_pt->setup(sf_matrix_pt);
   delete sf_matrix_pt;
   
   // setup the solid pseudo-solid matvec operator
   CRDoubleMatrix* sp_matrix_pt = 0;
-  get_block(1,2,cr_matrix_pt,sp_matrix_pt);
+  get_block(1,2,sp_matrix_pt);
   Solid_pseudo_elastic_matvec_pt->setup(sp_matrix_pt);
   delete sp_matrix_pt;
   
   // build the lagrange solid matvec operator
   CRDoubleMatrix* ls_matrix_pt = 0;
-  get_block(3,1,cr_matrix_pt,ls_matrix_pt);
+  get_block(3,1,ls_matrix_pt);
   Lagrange_solid_matvec_pt->setup(ls_matrix_pt);
   delete ls_matrix_pt;
 

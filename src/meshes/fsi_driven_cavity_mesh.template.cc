@@ -114,7 +114,7 @@ FSIDrivenCavityMesh<ELEMENT>::FSIDrivenCavityMesh(
     {
      for (unsigned i=0;i<nnode_1d;i++)
       {
-       add_boundary_node(0, this->finite_element_pt(e)->node_pt(i));
+       this->add_boundary_node(0, this->finite_element_pt(e)->node_pt(i));
       }
     }
    // Collapsible bit
@@ -122,8 +122,8 @@ FSIDrivenCavityMesh<ELEMENT>::FSIDrivenCavityMesh(
     {
      for (unsigned i=0;i<nnode_1d;i++)
       {
-       add_boundary_node(3,
-                         this->finite_element_pt(e)->node_pt(2*nnode_1d+i));
+       this->add_boundary_node(3,
+                               this->finite_element_pt(e)->node_pt(2*nnode_1d+i));
        
        // What column of elements are we in?
        unsigned ix=e-(ny-1)*nx;

@@ -445,7 +445,7 @@ class TrilinosAztecOOSolver : public IterativeLinearSolver
  unsigned& max_iter() {return Max_iter;}
 
  /// Acess function to Iterations
- unsigned iterations() {return Iterations;}
+ unsigned iterations() const {return Iterations;}
 
  /// Access function to Tolerance
  double& tolerance() {return Tolerance;}

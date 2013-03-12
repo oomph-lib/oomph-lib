@@ -85,6 +85,11 @@ namespace oomph
  //Forward definition for the assembly handler
  class AssemblyHandler;
 
+ //Forward definition for sum of matrices class
+ class SumOfMatrices;
+
+ //Forward definition for the ConvergenceData class
+ class ConvergenceData;
 
 //=======================================================================
 /// \short The Problem class
@@ -195,7 +200,10 @@ namespace oomph
 
  /// \short Has default set_initial_condition function been called?
  /// Default: false
- bool Default_set_initial_condition_called;
+ bool Default_set_initial_condition_called; 
+
+ /// \short Pointer to storage for problem convergence data.
+ ConvergenceData* Convergence_data_pt;
 
  /// \short Use the globally convergent newton method
  bool Use_globally_convergent_newton_method;
@@ -534,12 +542,8 @@ namespace oomph
  /// converged
  double Newton_solver_tolerance;
 
- /// Maximum number of Newton iterations
+ /// Maximum number of Newton Iterations
  unsigned Max_newton_iterations;
-
- /// \short Actual number of Newton iterations taken during the most recent
- /// iteration
- unsigned Nnewton_iter_taken;
 
  /// \short Maximum desired residual:
  /// if the maximum residual exceeds this value, the program will exit
@@ -551,6 +555,7 @@ namespace oomph
  /// \short Has a Jacobian been computed (and can therefore be re-used 
  /// if required)? Default: false
  bool Jacobian_has_been_computed;
+
 
  /// \short Boolean flag indicating if we're dealing with a linear or nonlinear
  /// Problem -- if set to false the Newton solver will not check
@@ -1267,8 +1272,15 @@ namespace oomph
  /// Return a pointer to the global time object
  Time* &time_pt() {return Time_pt;}
 
+ /// Return a pointer to the global time object (const version).
+ Time* time_pt() const {return Time_pt;}
+
  /// Return the current value of continuous time
  double& time(); 
+
+ /// Return the current value of continuous time (const version)
+ double time() const;
+
 
  /// \short Access function for the pointer to the first (presumably only) 
  /// timestepper
@@ -1309,6 +1321,18 @@ namespace oomph
 
  /// \short Access function to max Newton iterations before giving up.
  unsigned& max_newton_iterations() {return Max_newton_iterations;}
+
+ /// \short Access function to storage for convergence data.
+ ConvergenceData*& convergence_data_pt() {return Convergence_data_pt;}
+
+ /// \short Const access function to storage for convergence data.
+ const ConvergenceData* convergence_data_pt() const
+ {return Convergence_data_pt;}
+
+ /// \short Check if we can record convergence data (if a pointer exists
+ /// then record it).
+ bool record_convergence_data() const
+ {return convergence_data_pt() != 0;}
 
  /// \short Access function to max residuals in Newton iterations before giving
  /// up.
@@ -1687,7 +1711,7 @@ namespace oomph
 
  /// \short Dump refinement pattern of all refineable meshes and all generic
  /// Problem data to file for restart. 
- virtual void dump(std::ofstream& dump_file);
+ virtual void dump(std::ofstream& dump_file) const;
 
 #ifdef OOMPH_HAS_MPI
 
@@ -2512,5 +2536,6 @@ class NewtonSolverError
 
 
 }
+
 
 #endif

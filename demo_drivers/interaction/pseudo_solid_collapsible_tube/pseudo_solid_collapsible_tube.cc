@@ -931,6 +931,10 @@ template<class FLUID_ELEMENT,class SOLID_ELEMENT>
 void PseudoElasticCollapsibleChannelProblem<FLUID_ELEMENT,SOLID_ELEMENT>::
 set_initial_condition()
 { 
+ // Update the mesh
+ Fluid_mesh_pt->node_update();
+ 
+
  // Set Poiseuille flow
  unsigned nnode = Fluid_mesh_pt->nnode();
  for (unsigned i = 0; i < nnode; i++)
@@ -1616,7 +1620,7 @@ void set_pseudo_elastic_fsi_solver(PseudoElasticFSIProblem& problem)
 
  // preconditioner
  PseudoElasticFSIPreconditioner* prec_pt = new
-  PseudoElasticFSIPreconditioner(3);
+  PseudoElasticFSIPreconditioner(3, &problem);
 
  // meshes
  prec_pt->set_fluid_and_pseudo_elastic_mesh_pt(problem.fluid_mesh_pt());

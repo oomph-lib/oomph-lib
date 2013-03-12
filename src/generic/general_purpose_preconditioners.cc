@@ -44,13 +44,12 @@ namespace oomph
 /// diagonal entries from the fully
 /// assembled matrix.
 //=============================================================
-void MatrixBasedDiagPreconditioner::setup(Problem* problem_pt, 
-                                          DoubleMatrixBase* matrix_pt)
+void MatrixBasedDiagPreconditioner::setup()
 {
 
  // first attempt to cast to DistributableLinearAlgebraObject
  DistributableLinearAlgebraObject* dist_matrix_pt = 
-  dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt);
+  dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt());
 
  // if it is a distributable matrix
  if (dist_matrix_pt != 0)
@@ -67,7 +66,7 @@ void MatrixBasedDiagPreconditioner::setup(Problem* problem_pt,
     {
      unsigned index = i + first_row;
 #ifdef PARANOID
-     if ((*matrix_pt)(i,index)==0.0)
+     if ((*matrix_pt())(i,index)==0.0)
       {
        throw OomphLibError(
         "Zero diagonal in matrix --> Cannot use diagonal preconditioner.",
@@ -75,7 +74,7 @@ void MatrixBasedDiagPreconditioner::setup(Problem* problem_pt,
         OOMPH_EXCEPTION_LOCATION);
       }
 #endif
-     Inv_diag[i] = 1.0/(*matrix_pt)(i,index);
+     Inv_diag[i] = 1.0/(*matrix_pt())(i,index);
     }
    
    // store the distribution
@@ -86,7 +85,7 @@ void MatrixBasedDiagPreconditioner::setup(Problem* problem_pt,
  else
   {
    // # of rows in the matrix
-   unsigned n_row=matrix_pt->nrow();
+   unsigned n_row=matrix_pt()->nrow();
    
    // Resize the Inv_diag vector to accommodate the # of 
    //diagonal entries
@@ -96,7 +95,7 @@ void MatrixBasedDiagPreconditioner::setup(Problem* problem_pt,
    for(unsigned i=0;i<n_row;i++)
     {
 #ifdef PARANOID
-     if ((*matrix_pt)(i,i)==0.0) 
+     if ((*matrix_pt())(i,i)==0.0)
       {
        throw OomphLibError(
         "Zero diagonal in matrix --> Cannot use diagonal preconditioner.",
@@ -106,12 +105,12 @@ void MatrixBasedDiagPreconditioner::setup(Problem* problem_pt,
      else
 #endif
       {
-       Inv_diag[i]=1.0/(*matrix_pt)(i,i);
+       Inv_diag[i]=1.0/(*matrix_pt())(i,i);
       }   
     }
 
    // create the distribution
-   LinearAlgebraDistribution dist(problem_pt->communicator_pt(),n_row,false);
+   LinearAlgebraDistribution dist(comm_pt(),n_row,false);
    this->build_distribution(dist);
   }
 }
@@ -168,15 +167,14 @@ void MatrixBasedDiagPreconditioner::setup(Problem* problem_pt,
 }
 
 //=============================================================================
-/// \short Setup the lumped preconditioner (problem_pt not used)
-/// Specialisation for CCDoubleMatrix 
+/// \short Setup the lumped preconditioner. Specialisation for CCDoubleMatrix.
 //=============================================================================
 template<>
 void MatrixBasedLumpedPreconditioner<CCDoubleMatrix>::
-setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt)
+setup()
 {
  // # of rows in the matrix
- Nrow=matrix_pt->nrow();
+ Nrow=matrix_pt()->nrow();
  
  // Create the vector for the inverse lumped
  if (Inv_lumped_diag_pt !=0) { delete[] this->Inv_lumped_diag_pt; }
@@ -189,7 +187,7 @@ setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt)
   }
 
  // cast the Double Base Matrix to Compressed Column Double Matrix
- CCDoubleMatrix* cc_matrix_pt = dynamic_cast<CCDoubleMatrix*>(matrix_pt);
+ CCDoubleMatrix* cc_matrix_pt = dynamic_cast<CCDoubleMatrix*>(matrix_pt());
 
  // get the matrix
  int* m_row_index = cc_matrix_pt->row_index();
@@ -216,21 +214,20 @@ setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt)
   }
  
  // create the distribution
- LinearAlgebraDistribution dist(problem_pt->communicator_pt(),Nrow,false);
+ LinearAlgebraDistribution dist(comm_pt(),Nrow,false);
  this->build_distribution(dist);
 }
 
 //=============================================================================
-/// \short Setup the lumped preconditioner (problem_pt not used)
-/// Specialisation for CRDoubleMatrix 
+/// \short Setup the lumped preconditioner. Specialisation for CRDoubleMatrix.
 //=============================================================================
 template<>
 void MatrixBasedLumpedPreconditioner<CRDoubleMatrix>::
-setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt)
+setup()
 {
  // first attempt to cast to CRDoubleMatrix
  CRDoubleMatrix* cr_matrix_pt = 
-  dynamic_cast<CRDoubleMatrix*>(matrix_pt);
+  dynamic_cast<CRDoubleMatrix*>(matrix_pt());
 
  // # of rows in the matrix
  Nrow=cr_matrix_pt->nrow_local();
@@ -325,12 +322,11 @@ template class MatrixBasedLumpedPreconditioner<CRDoubleMatrix>;
 //=============================================================================
 /// setup ILU(0) preconditioner for Matrices of CCDoubleMatrix type
 //=============================================================================
-void ILUZeroPreconditioner<CCDoubleMatrix>::setup(Problem* problem_pt, 
-                                                  DoubleMatrixBase* matrix_pt)
+ void ILUZeroPreconditioner<CCDoubleMatrix>::setup()
 {	
  
  // cast the Double Base Matrix to Compressed Column Double Matrix
- CCDoubleMatrix* cc_matrix_pt = dynamic_cast<CCDoubleMatrix*>(matrix_pt);
+ CCDoubleMatrix* cc_matrix_pt = dynamic_cast<CCDoubleMatrix*>(matrix_pt());
  
 #ifdef PARANOID
  if(cc_matrix_pt == 0)
@@ -347,7 +343,7 @@ void ILUZeroPreconditioner<CCDoubleMatrix>::setup(Problem* problem_pt,
  int n_row=cc_matrix_pt->nrow();
  
  // set the distribution
- LinearAlgebraDistribution dist(problem_pt->communicator_pt(),n_row,false);
+ LinearAlgebraDistribution dist(comm_pt(),n_row,false);
  this->build_distribution(dist);
 
  // declares variables to store number of non zero entires in L and U
@@ -471,11 +467,10 @@ void ILUZeroPreconditioner<CCDoubleMatrix>::setup(Problem* problem_pt,
 //=============================================================================
 /// setup ILU(0) preconditioner for Matrices of CRDoubleMatrix Type
 //=============================================================================
-void ILUZeroPreconditioner<CRDoubleMatrix>::setup(Problem* problem_pt, 
-                                                  DoubleMatrixBase* matrix_pt)
+void ILUZeroPreconditioner<CRDoubleMatrix>::setup()
 {	
  // cast the Double Base Matrix to Compressed Column Double Matrix
- CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt);
+ CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt());
  
 #ifdef PARANOID
  if(cr_matrix_pt == 0)

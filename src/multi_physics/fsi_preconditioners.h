@@ -53,14 +53,15 @@ namespace oomph
 /// the solid block. By default we retain the fluid on solid off
 /// diagonal blocks. 
 //=============================================================================
-class FSIPreconditioner : public virtual BlockPreconditioner<CRDoubleMatrix>
+class FSIPreconditioner : public BlockPreconditioner<CRDoubleMatrix>
 {
  
 public :
  
- /// \short Constructor: By default use block triangular form with 
- /// retained fluid on solid terms.
- FSIPreconditioner()
+ /// \short Constructor: By default use block triangular form with retained
+ /// fluid on solid terms. A problem pointer is required for the underlying
+ /// NavierStokesSchurComplementPreconditioner.
+ FSIPreconditioner(Problem* problem_pt)
   {
    // set the mesh pointers
    this->set_nmesh(2);
@@ -74,7 +75,7 @@ public :
 
    // Create the Navier Stokes Schur complement preconditioner
    Navier_stokes_preconditioner_pt = 
-    new NavierStokesSchurComplementPreconditioner;
+    new NavierStokesSchurComplementPreconditioner(problem_pt);
 
    // Create the Solid preconditioner
    Solid_preconditioner_pt = new SuperLUPreconditioner;
@@ -175,8 +176,7 @@ public :
   }
 
  /// \short Setup the preconditioner
- void setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt);
- 
+ void setup();
  
  /// \short Apply preconditioner to r
  void preconditioner_solve(const DoubleVector &r,
@@ -244,7 +244,7 @@ private:
 //=============================================================================
 /// Setup the preconditioner. Note: Matrix must be a CRDoubleMatrix.
 //=============================================================================
-void FSIPreconditioner::setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt)
+ void FSIPreconditioner::setup()
  {
 
   // check the meshes have been set
@@ -268,8 +268,8 @@ void FSIPreconditioner::setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt)
 #endif
 
   // setup the meshes
-  this->set_mesh(0,problem_pt,Navier_stokes_mesh_pt);
-  this->set_mesh(1,problem_pt,Wall_mesh_pt);
+  this->set_mesh(0,Navier_stokes_mesh_pt);
+  this->set_mesh(1,Wall_mesh_pt);
 
  // get the number of fluid dofs from teh first element in the mesh
   unsigned n_fluid_dof = this->ndof_types_in_mesh(0);
@@ -283,7 +283,7 @@ void FSIPreconditioner::setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt)
    }
 
   // Call block setup for this preconditioner
-  this->block_setup(problem_pt,matrix_pt,dof_to_block_map);
+  this->block_setup(dof_to_block_map);
 
   // Block mapping for the subsidiary Navier Stokes preconditioner:
   // blocks 0 and 1 in the FSI preconditioner are also blocks 0 and 1
@@ -303,34 +303,19 @@ void FSIPreconditioner::setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt)
   // Navier Stokes mesh and set it up.
   Navier_stokes_preconditioner_pt->
    set_navier_stokes_mesh(Navier_stokes_mesh_pt);
-  Navier_stokes_preconditioner_pt->setup(problem_pt,matrix_pt);
-
-  // Recast Jacobian matrix to CRDoubleMatrix
-  CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt);
-
-#ifdef PARANOID
-  if (cr_matrix_pt==0)
-   {
-    std::ostringstream error_message;
-    error_message << "FSIPreconditioner only works with"
-                  << " CRDoubleMatrix matrices" << std::endl;
-    throw OomphLibError(error_message.str(),
-                     	"FSIPreconditioner::setup()",
-                        OOMPH_EXCEPTION_LOCATION);
-   }
-#endif
+  Navier_stokes_preconditioner_pt->setup(matrix_pt(),comm_pt());
 
   // Extract the additional blocks we need for FSI:
   
   // Solid tangent stiffness matrix
   CRDoubleMatrix* block_matrix_1_1_pt = 0;
-  this->get_block(1,1,cr_matrix_pt,block_matrix_1_1_pt);
+  this->get_block(1,1,block_matrix_1_1_pt);
 
   // Solid on fluid terms (if needed)
   if (Retain_solid_onto_fluid_terms)
    {
     CRDoubleMatrix* block_matrix_0_1_pt=0;
-    this->get_block(0,1,cr_matrix_pt,block_matrix_0_1_pt);
+    this->get_block(0,1,block_matrix_0_1_pt);
     Matrix_vector_product_0_1_pt->setup(block_matrix_0_1_pt);
     delete block_matrix_0_1_pt;
    }
@@ -339,14 +324,14 @@ void FSIPreconditioner::setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt)
   if (Retain_fluid_onto_solid_terms)
    {
     CRDoubleMatrix* block_matrix_1_0_pt=0;
-    this->get_block(1,0,cr_matrix_pt,block_matrix_1_0_pt);
+    this->get_block(1,0,block_matrix_1_0_pt);
     Matrix_vector_product_1_0_pt->setup(block_matrix_1_0_pt);
     delete block_matrix_1_0_pt;
    }
   
   // Setup the solid preconditioner (inexact solver)
   double t_start = TimingHelpers::timer();
-  Solid_preconditioner_pt->setup(problem_pt,block_matrix_1_1_pt);
+  Solid_preconditioner_pt->setup(block_matrix_1_1_pt,comm_pt());
   double t_end = TimingHelpers::timer();
   double setup_time= t_end-t_start;
   delete block_matrix_1_1_pt;
@@ -547,7 +532,7 @@ public :
   }
  
  /// \short Setup the preconditioner
- void setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt);
+ void setup();
   
  /// \short Apply preconditioner to r
  void preconditioner_solve(const DoubleVector &r,
@@ -672,7 +657,7 @@ void SimpleFSIPreconditioner<MATRIX>::identify_required_blocks(
 //=============================================================================
  template<typename MATRIX>
  void SimpleFSIPreconditioner<MATRIX>::
- setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt)
+ setup()
  {
 
   // Clean up memory
@@ -701,8 +686,8 @@ void SimpleFSIPreconditioner<MATRIX>::identify_required_blocks(
 #endif
 
   // setup the meshes
-  this->set_mesh(0,problem_pt,Navier_stokes_mesh_pt);
-  this->set_mesh(1,problem_pt,Wall_mesh_pt);
+  this->set_mesh(0,Navier_stokes_mesh_pt);
+  this->set_mesh(1,Wall_mesh_pt);
 
  // get the number of fluid dofs from teh first element in the mesh
   unsigned n_fluid_dof = this->ndof_types_in_mesh(0);
@@ -717,7 +702,7 @@ void SimpleFSIPreconditioner<MATRIX>::identify_required_blocks(
    }
 
   // Set up the blocks look up schemes
-  this->block_setup(problem_pt,matrix_pt,dof_to_block_map);
+  this->block_setup(dof_to_block_map);
 
   // find number of block types
   n_dof = this->nblock_types();
@@ -730,13 +715,12 @@ void SimpleFSIPreconditioner<MATRIX>::identify_required_blocks(
 
   // Get pointers to the blocks
   DenseMatrix<MATRIX*> block_matrix_pt(n_dof,n_dof,0);
-  this->get_blocks(dynamic_cast<MATRIX*>(matrix_pt),
-                   required_blocks,
+  this->get_blocks(required_blocks,
                    block_matrix_pt);
 
   // Build a big matrix from the blocks
   MATRIX* P_matrix_pt=0;
-  build_preconditioner_matrix(block_matrix_pt,P_matrix_pt);
+  this->build_preconditioner_matrix(block_matrix_pt,P_matrix_pt);
 
   // Delete blocks -- they're no longer needed.
   for (unsigned i = 0 ; i < n_dof; i++)
@@ -750,7 +734,7 @@ void SimpleFSIPreconditioner<MATRIX>::identify_required_blocks(
 
   // Setup preconditoner (i.e. inexact solver) -- does the LU decomposition
   Preconditioner_pt = new SuperLUPreconditioner;
-  Preconditioner_pt->setup(problem_pt,P_matrix_pt);
+  Preconditioner_pt->setup(P_matrix_pt,this->comm_pt());
 
   // Now throw away the big matrix
   delete P_matrix_pt;

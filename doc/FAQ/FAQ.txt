@@ -851,6 +851,31 @@ and to edit the copied sources. Follow the instructions on the
 installation page</A> to turn these sources into a separate
 library against which you can link.
 
+\n\n
+
+#########################################################################
+<HR>
+
+\n\n
+
+\subsection build_not_run_demos How do I build the self tests without running them?
+
+The default behaviour when using \c make \c check is to compile and run the
+self tests one test at a time. This means that compilation failures may
+take a long time to appear which can be frustrating when making changes to
+the main library. The alternative is to first complile all self tests using
+
+\code
+make check TESTS_ENVIRONMENT=true
+\endcode
+
+and then once you are sure everything compiles run the self tests as
+normal.
+
+Note: this "trick" relies on undocumented behaviour in automake and so it
+is possible (but unlikely) that it will not work in new versions (tested
+and working with GNU automake 1.11.3).
+
  
 #########################################################################
 \n\n

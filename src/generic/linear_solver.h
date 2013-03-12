@@ -182,7 +182,7 @@ class LinearSolver : public DistributableLinearAlgebraObject
  
  ///  \short returns the time taken to assemble the Jacobian matrix and 
  /// residual vector (needs to be overloaded for each solver)
- virtual double jacobian_setup_time()
+ virtual double jacobian_setup_time() const
   {
    throw OomphLibError(
     "jacobian_setup_time has not been implemented for this linear solver",
@@ -193,7 +193,7 @@ class LinearSolver : public DistributableLinearAlgebraObject
 
  /// \short return the time taken to solve the linear system (needs to be 
  /// overloaded for each linear solver)
- virtual double linear_solver_solution_time()
+ virtual double linear_solver_solution_time() const
  {
   throw OomphLibError(
    "linear_solver_solution_time() not implemented for this linear solver",
@@ -305,14 +305,14 @@ class DenseLU : public LinearSolver
 
  ///  \short returns the time taken to assemble the jacobian matrix and 
  /// residual vector
- double jacobian_setup_time()
+ double jacobian_setup_time() const
   {
    return Jacobian_setup_time;
   }
 
  /// \short return the time taken to solve the linear system (needs to be 
  /// overloaded for each linear solver)
- virtual double linear_solver_solution_time()
+ virtual double linear_solver_solution_time() const
   {
    return Solution_time;
   }
@@ -531,14 +531,14 @@ class SuperLUSolver : public LinearSolver
 
  /// \short returns the time taken to assemble the jacobian matrix and 
  /// residual vector
- double jacobian_setup_time()
+ double jacobian_setup_time() const
   {
    return Jacobian_setup_time;
   }
 
  /// \short return the time taken to solve the linear system (needs to be 
  /// overloaded for each linear solver)
- virtual double linear_solver_solution_time()
+ virtual double linear_solver_solution_time() const
   {
    return Solution_time;
   }

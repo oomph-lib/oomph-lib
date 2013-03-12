@@ -108,6 +108,17 @@ namespace oomph
                             HYPRE_IJMatrix& hypre_ij_matrix,
                             HYPRE_ParCSRMatrix& hypre_par_matrix,
                             LinearAlgebraDistribution* dist_pt);
+
+   /// \short Helper function to set Euclid options using a command line
+   /// like array.
+   void euclid_settings_helper(const bool &use_block_jacobi,
+                               const bool &use_row_scaling,
+                               const bool &use_ilut,
+                               const int &level,
+                               const double &drop_tol,
+                               const int &print_level,
+                               HYPRE_Solver &euclid_object);
+
   }
 
 
@@ -188,6 +199,15 @@ namespace oomph
      AMG_max_row_sum = 1.0;
      AMG_print_level = 0;
      
+     // Parameters for using Euclicd as an AMG smoother (defaults copied
+     // from the normal defaults listed in the manual).
+     AMGEuclidSmoother_use_block_jacobi = false;
+     AMGEuclidSmoother_use_row_scaling = false;
+     AMGEuclidSmoother_use_ilut = false;
+     AMGEuclidSmoother_level = 1;
+     AMGEuclidSmoother_drop_tol = 0; // No dropping
+     AMGEuclidSmoother_print_level = 0;
+     
      // Print level for CG, GMRES and BiCGStab
      Krylov_print_level = 0;
      
@@ -253,6 +273,14 @@ namespace oomph
 
    /// Function return value of which preconditioner (if any) is stored.
    unsigned existing_preconditioner() {return Existing_preconditioner;}
+
+   //??ds comment, write access functions and move to protected?
+   bool AMGEuclidSmoother_use_block_jacobi;
+   bool AMGEuclidSmoother_use_row_scaling;
+   bool AMGEuclidSmoother_use_ilut;
+   unsigned AMGEuclidSmoother_level;
+   double AMGEuclidSmoother_drop_tol;
+   unsigned AMGEuclidSmoother_print_level;
 
     protected:
 
@@ -968,7 +996,7 @@ namespace oomph
    /// However, this will not be the expected behaviour and therefore
    /// needs to be requested explicitly by the user by calling the
    /// enable_delete_matrix() function.
-   void setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt);
+   void setup();
 
    /// \short Function applies solver to vector r for preconditioning.
    /// This requires a call to setup(...) first.\n  \n

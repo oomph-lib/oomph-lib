@@ -220,12 +220,15 @@ def fpdiff(filename1,filename2,relative_error,small):
   print
   print "   [FAILED]"
   print
+  # Return non-zero since it failed
+  return 2
  else:
   print
   print "   [OK] for fpdiff.py parameters: - max. rel. error = ",maxreld,"%"
   print "                                  - numerical zero  = ",small
   print
- return
+  # Success: return 0
+  return 0
 
 #What to do if this is run as a script, rather than loaded as a module
 if __name__ == "__main__":
@@ -259,4 +262,8 @@ if __name__ == "__main__":
   if narg == 4:
    small = float(sys.argv[3])
  
- fpdiff(sys.argv[0],sys.argv[1],maxreld,small)
+ # Run the diff
+ return_val = fpdiff(sys.argv[0],sys.argv[1],maxreld,small)
+
+ # Return whether it succeeded or not
+ sys.exit(return_val)

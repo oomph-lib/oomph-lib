@@ -283,18 +283,18 @@ class NewMumpsPreconditioner : public Preconditioner
   /// before using preconditioner_solve.
   /// Note: matrix_pt must point to an object of class
   /// CRDoubleMatrix or CCDoubleMatrix
-  void setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt)
+ void setup()
   {
    oomph_info << "Setting up Mumps (exact) preconditioner" 
               << std::endl;
    
    DistributableLinearAlgebraObject* dist_matrix_pt=
-    dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt);
+    dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt());
    if (dist_matrix_pt!=0)
     {
      LinearAlgebraDistribution dist(dist_matrix_pt->distribution_pt());
      this->build_distribution(dist);
-     Solver.factorise(matrix_pt);
+     Solver.factorise(matrix_pt());
     }
    else
     {

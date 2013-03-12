@@ -1,8 +1,8 @@
 #!MC 1120
 
 
-#$!VARSET |dir|="Validation/RESLT"
-$!VARSET |dir|="RESLT"
+$!VARSET |dir|="Validation/RESLT"
+#$!VARSET |dir|="RESLT"
 #$!VARSET |dir|="RESLT_proc0"
 
 # Use png output (otherwise avi)

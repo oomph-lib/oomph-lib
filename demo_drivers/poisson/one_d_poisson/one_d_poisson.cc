@@ -216,34 +216,29 @@ void OneDPoissonProblem<ELEMENT>::actions_before_newton_solve()
 template<class ELEMENT>
 void OneDPoissonProblem<ELEMENT>::doc_solution(const unsigned& label)
 { 
-
- ofstream some_file;
- char filename[100];
+ using namespace StringConversion;
 
  // Number of plot points
  unsigned npts;
  npts=5; 
 
  // Output solution with specified number of plot points per element
- sprintf(filename,"soln%i.dat",label);
- some_file.open(filename);
- mesh_pt()->output(some_file,npts);
- some_file.close();
+ ofstream solution_file(("soln" + to_string(label) + ".dat").c_str());
+ mesh_pt()->output(solution_file,npts);
+ solution_file.close();
 
  // Output exact solution at much higher resolution (so we can
  // see how well the solutions agree between nodal points)
- sprintf(filename,"exact_soln%i.dat",label);
- some_file.open(filename);
- mesh_pt()->output_fct(some_file,20*npts,FishSolnOneDPoisson::get_exact_u); 
- some_file.close();
+ ofstream exact_file(("exact_soln" + to_string(label) + ".dat").c_str());
+ mesh_pt()->output_fct(exact_file,20*npts,FishSolnOneDPoisson::get_exact_u); 
+ exact_file.close();
 
  // Doc pointwise error and compute norm of error and of the solution
  double error,norm;
- sprintf(filename,"error%i.dat",label);
- some_file.open(filename);
- mesh_pt()->compute_error(some_file,FishSolnOneDPoisson::get_exact_u,
+ ofstream error_file(("error" + to_string(label) + ".dat").c_str());
+ mesh_pt()->compute_error(error_file,FishSolnOneDPoisson::get_exact_u,
                           error,norm); 
- some_file.close();
+ error_file.close();
 
  // Doc error norm:
  cout << "\nNorm of error    : " << sqrt(error) << std::endl; 

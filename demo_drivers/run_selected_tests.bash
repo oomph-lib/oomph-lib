@@ -25,5 +25,6 @@ echo " "
 
 for dir in `echo $list`; do
     cd $dir
-    make check; cd $backup
+    make check
+    cd $backup
 done

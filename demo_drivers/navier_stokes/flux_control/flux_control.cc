@@ -1895,7 +1895,7 @@ int main(int argc, char *argv[])
    if (outflow==2)
     {
      // Construct the FSI preconditioner
-     fsi_preconditioner_pt = new FSIPreconditioner;
+     fsi_preconditioner_pt = new FSIPreconditioner(&problem);
      fsi_preconditioner_pt->enable_doc_time();
 
      // Get a pointer to the LSC preconditioner
@@ -1917,7 +1917,8 @@ int main(int argc, char *argv[])
    else
     {
      // Construct the LSC preconditioner
-     ns_preconditioner_pt = new NavierStokesSchurComplementPreconditioner;
+     ns_preconditioner_pt = new
+      NavierStokesSchurComplementPreconditioner(&problem);
 
      // Setup the fluid mesh
      ns_preconditioner_pt->set_navier_stokes_mesh(

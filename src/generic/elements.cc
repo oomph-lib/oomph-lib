@@ -3391,7 +3391,7 @@ void FiniteElement::get_dresidual_dnodal_coordinates(
 /// Return the number of the node located at *node_pt 
 /// if this node is in the element, else return -1; 
 //===============================================================
- int FiniteElement::get_node_number(Node* const &global_node_pt)
+ int FiniteElement::get_node_number(Node* const &global_node_pt) const
  {
    //Initialise the number to -1
    int number = -1;
@@ -4033,7 +4033,6 @@ void FiniteElement::get_dresidual_dnodal_coordinates(
 
      }
    } //End of non-zero dimension check
-
    
   // Return verdict
   if (passed) {return 0;}

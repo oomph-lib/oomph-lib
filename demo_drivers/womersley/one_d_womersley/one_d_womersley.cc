@@ -1560,15 +1560,19 @@ int main(int argc, char *argv[])
  unsigned solver=1;
  unsigned p_solver=2;
  unsigned f_solver=2;
- unsigned f_bamg_smoother=1;
- double f_bamg_damping=1.0;
- double f_bamg_strength=0.25;
- unsigned f_ml_settings=1;
  unsigned refinement=0;
  unsigned nsteps=200;
  double amplitude=1.0e-2;
  double period=0.45;
  bool validation_run=false;
+
+ // Set Hypre default values
+#ifdef OOMPH_HAS_HYPRE
+ unsigned f_bamg_smoother=1;
+ double f_bamg_damping=1.0;
+ double f_bamg_strength=0.25;
+ unsigned f_ml_settings=1;
+#endif
 
  // Parse command line
  int arg_index = 0;
@@ -1607,6 +1611,7 @@ int main(int argc, char *argv[])
      arg_index++;
      f_solver = atoi(argv[arg_index++]);
     }
+#ifdef OOMPH_HAS_HYPRE
    else if ( strcmp(argv[arg_index], "-f_bamg_smoother") == 0 )
     {
      arg_index++;
@@ -1626,7 +1631,8 @@ int main(int argc, char *argv[])
     {
      arg_index++;
      f_ml_settings = atoi(argv[arg_index++]);
-    }  
+    }
+#endif
    else if ( strcmp(argv[arg_index], "-refine") == 0 )
     {
      arg_index++;
@@ -1847,14 +1853,10 @@ int main(int argc, char *argv[])
  oomph_info << "Amplitude=" << amplitude
             << "\nPeriod=" << period << "\n";
  
- // Solver stuff (definitions needed if hypre and trilinos are around)
- Preconditioner* p_preconditioner_pt;
- p_preconditioner_pt=0;
- Preconditioner* f_preconditioner_pt;
- f_preconditioner_pt=0;
+ // Solver stuff
  GMRES<CRDoubleMatrix>* iterative_solver_pt=0;
- NavierStokesSchurComplementPreconditioner* ns_preconditioner_pt=0; 
- 
+ NavierStokesSchurComplementPreconditioner* ns_preconditioner_pt=0;
+
  // Don't build the problem with Crouzeix Raviart Elements if using the 
  // SchurComplement preconditioner!
  CollapsibleChannelProblem<RefineableQTaylorHoodElement<2> > 
@@ -1886,7 +1888,7 @@ int main(int argc, char *argv[])
    if (outflow==2)
     {
      // Construct the FSI preconditioner
-     fsi_preconditioner_pt = new FSIPreconditioner;
+     fsi_preconditioner_pt = new FSIPreconditioner(&problem);
      fsi_preconditioner_pt->enable_doc_time();
 
      // Get a pointer to the preconditioner
@@ -1908,8 +1910,9 @@ int main(int argc, char *argv[])
     }
    else
     {
-     // Construct the preconditioner
-     ns_preconditioner_pt = new NavierStokesSchurComplementPreconditioner;
+     // Construct the preconditioner and pass in the problem pointer.
+     ns_preconditioner_pt = new NavierStokesSchurComplementPreconditioner
+      (&problem);
 
      // Setup the fluid mesh
      ns_preconditioner_pt->set_navier_stokes_mesh
@@ -1929,7 +1932,7 @@ int main(int argc, char *argv[])
    if (p_solver==0)
     {
 #ifdef OOMPH_HAS_HYPRE
-     p_preconditioner_pt = new HyprePreconditioner;
+     Preconditioner* p_preconditioner_pt = new HyprePreconditioner;
      HyprePreconditioner* hypre_preconditioner_pt = 
       static_cast<HyprePreconditioner*>(p_preconditioner_pt);
      Hypre_default_settings::
@@ -1943,7 +1946,7 @@ int main(int argc, char *argv[])
    if (p_solver==1)
     {
 #ifdef OOMPH_HAS_TRILINOS
-     p_preconditioner_pt = new TrilinosMLPreconditioner;
+     Preconditioner* p_preconditioner_pt = new TrilinosMLPreconditioner;
      ns_preconditioner_pt->set_p_preconditioner(p_preconditioner_pt);
 #endif
     }
@@ -1954,7 +1957,7 @@ int main(int argc, char *argv[])
    if (f_solver==0)
     {
 #ifdef OOMPH_HAS_HYPRE
-     f_preconditioner_pt = new HyprePreconditioner;
+     Preconditioner* f_preconditioner_pt = new HyprePreconditioner;
      HyprePreconditioner* hypre_preconditioner_pt = 
       static_cast<HyprePreconditioner*>(f_preconditioner_pt);
      hypre_preconditioner_pt->use_BoomerAMG();
@@ -1972,7 +1975,7 @@ int main(int argc, char *argv[])
    if (f_solver==1)
     {
 #ifdef OOMPH_HAS_TRILINOS
-     f_preconditioner_pt = new TrilinosMLPreconditioner;
+     Preconditioner* f_preconditioner_pt = new TrilinosMLPreconditioner;
      TrilinosMLPreconditioner* trilinos_preconditioner_pt = 
       static_cast<TrilinosMLPreconditioner*>(f_preconditioner_pt);
      if (f_ml_settings==1)

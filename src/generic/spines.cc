@@ -151,7 +151,7 @@ unsigned long SpineMesh::assign_global_eqn_numbers
 //=======================================================================
 /// Overload the dump function so that the spine data is also dumped
 //=======================================================================
-void SpineMesh::dump(std::ofstream &dump_file)
+void SpineMesh::dump(std::ofstream &dump_file) const
 {
  //Call the standard mesh dump function
  Mesh::dump(dump_file);

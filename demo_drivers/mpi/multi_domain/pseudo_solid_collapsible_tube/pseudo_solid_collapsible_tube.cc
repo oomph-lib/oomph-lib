@@ -765,6 +765,10 @@ template<class FLUID_ELEMENT,class SOLID_ELEMENT>
 void PseudoElasticCollapsibleChannelProblem<FLUID_ELEMENT,SOLID_ELEMENT>::
 set_initial_condition()
 { 
+ // Update the mesh
+ Fluid_mesh_pt->node_update();
+ 
+
  // Set Poiseuille flow
  unsigned nnode = Fluid_mesh_pt->nnode();
  for (unsigned i = 0; i < nnode; i++)

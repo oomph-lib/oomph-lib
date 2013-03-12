@@ -78,7 +78,7 @@ class MatrixBasedDiagPreconditioner : public Preconditioner
 
   /// \short Setup the preconditioner (store diagonal) from the fully
   /// assembled matrix.
-  void setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt);
+  void setup();
 
  private:
 
@@ -127,7 +127,11 @@ class MatrixBasedLumpedPreconditioner : public Preconditioner
 
   /// \short Setup the preconditioner (store diagonal) from the fully
   /// assembled matrix. Problem pointer is ignored.
-  void setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt);
+  void setup();
+
+ /// \short For some reason we need to remind the compiler that there is
+ /// also a function named setup in the base class.
+ using Preconditioner::setup;
 
   /// \short Access function to the Positive_matrix which indicates whether 
   /// lumped matrix was positive
@@ -173,6 +177,7 @@ class MatrixBasedLumpedPreconditioner : public Preconditioner
    {
     delete[] Inv_lumped_diag_pt;
    }
+
  private:
 
 
@@ -305,7 +310,7 @@ class ILUZeroPreconditioner<CCDoubleMatrix> : public Preconditioner
 
  /// \short Setup the preconditioner (store diagonal) from the fully
  /// assembled matrix. Problem pointer is ignored.
- void setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt);
+ void setup();
  
   private:
 
@@ -359,7 +364,7 @@ class ILUZeroPreconditioner<CRDoubleMatrix> : public Preconditioner
  
  /// \short Setup the preconditioner (store diagonal) from the fully
  /// assembled matrix. Problem pointer is ignored.
- void setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt);
+ void setup();
  
  
   private:
@@ -444,26 +449,29 @@ class InnerIterationPreconditioner : public Preconditioner
 
  /// \short Preconditioner setup method. Setup the preconditioner for the inner
  /// iteration solver.
- void setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt)
+ void setup()
   {
    
    // set the distribution
    DistributableLinearAlgebraObject* dist_pt = 
     dynamic_cast<DistributableLinearAlgebraObject*>
-    (matrix_pt);
+    (matrix_pt());
    if (dist_pt != 0)
     {
      this->build_distribution(dist_pt->distribution_pt());
     }
    else
     {
-     LinearAlgebraDistribution dist(problem_pt->communicator_pt(),
-                                    matrix_pt->nrow(),false);
+     LinearAlgebraDistribution dist(comm_pt(),
+                                    matrix_pt()->nrow(),false);
      this->build_distribution(dist);
     }
 
-   // setup the inner iteration preconditioner
-   Preconditioner_pt->setup(problem_pt,matrix_pt);
+   // Setup the inner iteration preconditioner (For some reason we need to
+   // remind the compiler that there is also a function named setup in the
+   // base class.)
+   Preconditioner_pt->Preconditioner::setup(matrix_pt(),
+                                            comm_pt());
 
    // setup the solverready for resolve
    unsigned max_iter = Solver_pt->max_iter();
@@ -471,7 +479,7 @@ class InnerIterationPreconditioner : public Preconditioner
    DoubleVector x(this->distribution_pt(),0.0);
    DoubleVector y(x);
    Solver_pt->enable_resolve();
-   Solver_pt->solve(matrix_pt,x,y);
+   Solver_pt->solve(matrix_pt(),x,y);
    Solver_pt->max_iter() = max_iter;
   }
  

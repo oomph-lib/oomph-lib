@@ -796,7 +796,7 @@ TurekProblem(const double &length,
  linear_solver_pt()=iterative_linear_solver_pt;
 
  // Build preconditioner
- FSIPreconditioner* prec_pt=new FSIPreconditioner;
+ FSIPreconditioner* prec_pt=new FSIPreconditioner(this);
 
  // Set Navier Stokes mesh:
  prec_pt->set_navier_stokes_mesh(Fluid_mesh_pt);

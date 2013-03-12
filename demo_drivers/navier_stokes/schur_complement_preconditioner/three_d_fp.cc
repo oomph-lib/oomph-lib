@@ -391,7 +391,7 @@ FpTestProblem::FpTestProblem(const unsigned& n_el,
  
  // Build preconditoner
  NavierStokesSchurComplementPreconditioner* prec_pt = 
-  new NavierStokesSchurComplementPreconditioner;     
+  new NavierStokesSchurComplementPreconditioner(this);
  Prec_pt=prec_pt;
    
  

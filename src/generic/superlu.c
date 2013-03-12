@@ -148,9 +148,15 @@ int superlu(int *op_flag, int *n, int *nnz, int *nrhs,
                      mem_usage.for_lu/1e6, mem_usage.total_needed/1e6);
                      //mem_usage.expansions);
              }
-	} else {
+	}
+        else {
 	    printf("dgstrf() error returns INFO= %d\n", *info);
-	    if ( *info <= *n ) { /* factorization completes */
+            if ( *info < 0) {
+                printf("Argument number %d had an illegal value", *info);
+            }
+	    else if ( *info <= *n ) { /* factorization completes */
+                printf("U(%i,%i) is exactly zero so U is exactly singular.",
+                       *n, *n);
 	       dQuerySpace(L, U, &mem_usage);
 	       printf(" L\\U MB %.3f\ttotal MB needed %.3f\n",
                       //\texpansions %d\n\n",
