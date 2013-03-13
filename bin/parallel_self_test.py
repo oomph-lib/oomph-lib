@@ -329,8 +329,12 @@ def main():
                              '-C', str(dir), '-j', str(args.ncores)])
 
         # Kill the old "previous_run_passes_list" in case we cancel
-        # before writing out a new one.
-        os.remove(previous_run_filename)
+        # before writing out a new one. It's ok if it doesn't exist.
+        try:
+            os.remove(previous_run_filename)
+        except OSError:
+            pass
+
 
     # Grab data from past runs and wrap into test function
     previous_run_passes_list = get_previous_passes(previous_run_filename)
