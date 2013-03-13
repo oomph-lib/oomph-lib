@@ -33,7 +33,7 @@
 #include <limits.h>
 #include <cstring>
 
-#ifdef HAVE_UNISTDH
+#ifdef OOMPH_HAS_UNISTDH
 #include <unistd.h> // for getpid()
 #endif
 
