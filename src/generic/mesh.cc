@@ -397,17 +397,13 @@ void Mesh::node_update(const bool& update_all_solid_nodes)
            // It's a SolidNode:
            if (solid_node_pt!=0)
             {
-             // Update nodal positon (only if it's pinned -- otherwise
-             // the nodal position is determined by the equations of
-             // solid mechanics)
-             if (update_all_solid_nodes||
-                 (solid_node_pt->position_is_pinned(i)&&
-                  !solid_node_pt->is_hanging() ) )
+             // only do it if explicitly requested!
+             if (update_all_solid_nodes)
               {
                solid_node_pt->x(i) = r[i];
               }
             }
-           // Not a SolidNode: Update regardless
+           // Not a SolidNode: Definitely update
            else
             {
              nod_pt->x(i) = r[i];

@@ -504,6 +504,12 @@ void UnsteadyHeatProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
                                                                   this,0);
    some_file.close();
    some_file2.close();
+   sprintf(filename,"%s/newton_iter%i.dat",doc_info.directory().c_str(),
+           doc_info.number());
+   some_file.open(filename);
+   some_file << "0 0 0 " << Nnewton_iter_taken << std::endl;
+   some_file.close();
+
   }
 
 } // end of doc_solution

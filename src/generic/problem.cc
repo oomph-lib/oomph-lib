@@ -52,7 +52,6 @@
 namespace oomph
 {
 
-
 //////////////////////////////////////////////////////////////////
 //Non-inline functions for the problem class
 //////////////////////////////////////////////////////////////////
@@ -8323,6 +8322,10 @@ void Problem::newton_solve()
  // Set up recording for this new newton solve
  if(record_convergence_data()) convergence_data_pt()->new_newton_solve();
 
+
+ // Reset number of Newton iterations taken
+ Nnewton_iter_taken=0;
+
  //Now do the Newton loop
  do
   {
@@ -8418,6 +8421,10 @@ void Problem::newton_solve()
       }
     }
 
+
+   // Increment number of Newton iterations taken
+   Nnewton_iter_taken++;
+   
    // Initialise timer for linear solver
    double t_solver_start = TimingHelpers::timer();
 

@@ -526,10 +526,12 @@ public:
  /// Virtual, so it can be overloaded by specific meshes,
  /// such as AlgebraicMeshes or SpineMeshes. \n\n
  /// Generally, this function updates the position of all nodes
- /// in response to changes in the boundary position. For
- /// SolidNodes it only applies the update to those SolidNodes
- /// whose position is determined by the boundary position, unless
- /// the bool flag is set to true.
+ /// in response to changes in the boundary position. 
+ /// However, we ignore all SolidNodes since their
+ /// position is computed as part of the solution -- unless
+ /// the bool flag is set to true. Such calls are typically made
+ /// when the initial mesh is created and/or after a mesh has been
+ /// refined repeatedly before the start of the computation.
  virtual void node_update(const bool& update_all_solid_nodes=false);
 
  /// \short Re-order nodes in the order in which they appear in elements --

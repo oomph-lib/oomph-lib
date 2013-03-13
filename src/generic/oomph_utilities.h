@@ -784,11 +784,17 @@ namespace MemoryUsage
  /// file whose name is specified by My_memory_usage_filename.
  void empty_my_memory_usage_file();
  
+#ifdef OOMPH_HAS_UNISTDH
+
  /// \short Doc my memory usage, prepended by string (which allows
  /// identification from where the function is called, say) that records 
  /// memory usage in file whose name is specified by My_memory_usage_filename.
  /// Data is appended to that file; wipe it with empty_my_memory_usage_file().
+ /// Note: This requires getpid() which is defined in unistd.h so if you
+ /// don't have that we won't build that function!
  void doc_my_memory_usage(const std::string& prefix_string=0);
+
+#endif
  
  /// \short String containing system command that obtains total memory usage.
  /// Default assigment for linux. [Disclaimer: works on my machine(s) --

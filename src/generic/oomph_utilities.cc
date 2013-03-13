@@ -1,29 +1,29 @@
 //LIC// ====================================================================
-//LIC// This file forms part of oomph-lib, the object-oriented, 
-//LIC// multi-physics finite-element library, available 
+//LIC// This file forms part of oomph-lib, the object-oriented,
+//LIC// multi-physics finite-element library, available
 //LIC// at http://www.oomph-lib.org.
-//LIC// 
+//LIC//
 //LIC//           Version 0.90. August 3, 2009.
-//LIC// 
+//LIC//
 //LIC// Copyright (C) 2006-2009 Matthias Heil and Andrew Hazel
-//LIC// 
+//LIC//
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
 //LIC// License as published by the Free Software Foundation; either
 //LIC// version 2.1 of the License, or (at your option) any later version.
-//LIC// 
+//LIC//
 //LIC// This library is distributed in the hope that it will be useful,
 //LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
 //LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 //LIC// Lesser General Public License for more details.
-//LIC// 
+//LIC//
 //LIC// You should have received a copy of the GNU Lesser General Public
 //LIC// License along with this library; if not, write to the Free Software
 //LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
 //LIC// 02110-1301  USA.
-//LIC// 
+//LIC//
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
-//LIC// 
+//LIC//
 //LIC//====================================================================
 #ifdef OOMPH_HAS_MPI
 #include "mpi.h"
@@ -32,7 +32,10 @@
 #include <algorithm>
 #include <limits.h>
 #include <cstring>
-#include "unistd.h"
+
+#ifdef HAVE_UNISTDH
+#include <unistd.h> // for getpid()
+#endif
 
 #include "oomph_utilities.h"
 #include "Vector.h"
@@ -57,14 +60,14 @@ namespace BrokenCopy
    error_message += "\n\n";
    error_message += "is deliberately broken to avoid the accidental \n";
    error_message += "use of the inappropriate C++ default.\n";
-   error_message += "If you really need an assignment operator\n"; 
+   error_message += "If you really need an assignment operator\n";
    error_message += "for this class, write it yourself...\n";
-   
+
    throw OomphLibError(error_message,"broken_assign()",
                        OOMPH_EXCEPTION_LOCATION);
   }
- 
- 
+
+
  /// Issue error message and terminate execution
  void broken_copy(const std::string& class_name)
   {
@@ -74,9 +77,9 @@ namespace BrokenCopy
    error_message += "\n\n";
    error_message += "is deliberately broken to avoid the accidental\n";
    error_message += "use of the inappropriate C++ default.\n";
-   error_message += 
-    "All function arguments should be passed by reference or\n"; 
-   error_message += 
+   error_message +=
+    "All function arguments should be passed by reference or\n";
+   error_message +=
     "constant reference. If you really need a copy constructor\n";
    error_message += "for this class, write it yourself...\n";
 
@@ -173,12 +176,12 @@ typedef void (*ResidualFctPt)(const Vector<double>&,
 
  /// Max. # of Newton iterations
  unsigned Max_iter=20;
- 
+
  /// Number of Newton iterations taken in most recent invocation
  unsigned N_iter_taken=0;
 
- /// \short Flag to indicate if progress of Newton iteration is to be 
- /// documented (defaults to false) 
+ /// \short Flag to indicate if progress of Newton iteration is to be
+ /// documented (defaults to false)
  bool Doc_Progress=false;
 
  /// FD step
@@ -188,15 +191,15 @@ typedef void (*ResidualFctPt)(const Vector<double>&,
  double Tol=1.0e-8;
 
  /// Use steplength control do make globally convergent (default false)
- bool Use_step_length_control=false; 
+ bool Use_step_length_control=false;
 
 /// \short Black-box FD Newton solver:
 /// Calling sequence for residual function is
 /// \code residual_fct(parameters,unknowns,residuals) \endcode
 /// where all arguments are double Vectors.
-/// unknowns.size() = residuals.size() 
-void black_box_fd_newton_solve(ResidualFctPt residual_fct, 
-                               const Vector<double>& params, 
+/// unknowns.size() = residuals.size()
+void black_box_fd_newton_solve(ResidualFctPt residual_fct,
+                               const Vector<double>& params,
                                Vector<double>& unknowns)
 {
  // Jacobian, current and advanced residual Vectors
@@ -207,10 +210,10 @@ void black_box_fd_newton_solve(ResidualFctPt residual_fct,
  Vector<double> dx(ndof);
  Vector<double> gradient(ndof);
  Vector<double> newton_direction(ndof);
-    
+
  double half_residual_squared=0.0;
  double max_step=0.0;
- 
+
  /// Reset number of Newton iterations taken in most recent invocation
  N_iter_taken=0;
 
@@ -219,7 +222,7 @@ void black_box_fd_newton_solve(ResidualFctPt residual_fct,
   {
    // Evaluate current residuals
    residual_fct(params,unknowns,residuals);
-   
+
    // Get half of squared residual and find maximum step length
    // for step length control
    if (Use_step_length_control)
@@ -234,28 +237,28 @@ void black_box_fd_newton_solve(ResidualFctPt residual_fct,
      half_residual_squared*=0.5;
      max_step=100.0*std::max(sqrt(sum),double(ndof));
     }
-   
-   
+
+
    // Check max. residuals
    double max_res = std::fabs(*std::max_element(residuals.begin(),
                                                residuals.end(),
                                                AbsCmp<double>()));
-   
-   
+
+
    // Doc progress?
    if (Doc_Progress)
     {
-     oomph_info << "\nNewton iteration iter=" << iloop 
+     oomph_info << "\nNewton iteration iter=" << iloop
                 << "\ni residual[i] unknown[i] " << std::endl;
      for (unsigned i=0;i<ndof;i++)
       {
-       oomph_info << i << " " << residuals[i] 
+       oomph_info << i << " " << residuals[i]
                   << " " << unknowns[i] << std::endl;
       }
     }
-   
+
    // Converged?
-   if (max_res<Tol) 
+   if (max_res<Tol)
     {
      return;
     }
@@ -268,21 +271,21 @@ void black_box_fd_newton_solve(ResidualFctPt residual_fct,
     {
      double backup=unknowns[i];
      unknowns[i]+=FD_step;
-     
+
      // Evaluate advanced residuals
      residual_fct(params,unknowns,residuals_pls);
-     
+
      // Do FD
      for (unsigned j=0;j<ndof;j++)
       {
        jacobian(j,i)=(residuals_pls[j]-residuals[j])/FD_step;
       }
-     
+
      // Reset fd step
      unknowns[i]=backup;
     }
-   
-   
+
+
    // Get gradient
    if (Use_step_length_control)
     {
@@ -297,12 +300,12 @@ void black_box_fd_newton_solve(ResidualFctPt residual_fct,
       }
     }
 
-   // Solve 
+   // Solve
    jacobian.solve(residuals,newton_direction);
-   
+
    // Update
    if (Use_step_length_control)
-    {     
+    {
      for (unsigned i=0;i<ndof;i++)
       {
        newton_direction[i]*=-1.0;
@@ -313,7 +316,7 @@ void black_box_fd_newton_solve(ResidualFctPt residual_fct,
      line_search(unknowns_old,
                  half_residual_squared_old,
                  gradient,
-                 residual_fct, 
+                 residual_fct,
                  params,
                  newton_direction,
                  unknowns,
@@ -332,20 +335,20 @@ void black_box_fd_newton_solve(ResidualFctPt residual_fct,
 
 
   }
- 
- 
+
+
  // Failed to converge
  std::ostringstream error_stream;
- error_stream<< "Newton solver did not converge in " 
+ error_stream<< "Newton solver did not converge in "
              << Max_iter << " steps " << std::endl;
- 
+
  throw OomphLibError(error_stream.str(),
                      "black_box_fd_newton_solve()",
                      OOMPH_EXCEPTION_LOCATION);
 }
- 
- 
- 
+
+
+
 
 
 
@@ -355,13 +358,13 @@ void black_box_fd_newton_solve(ResidualFctPt residual_fct,
 //=======================================================================
 /// Line search helper for globally convergent Newton method
 //=======================================================================
- void line_search(const Vector<double>& x_old, 
-                  const double half_residual_squared_old, 
-                  const Vector<double>& gradient, 
-                  ResidualFctPt residual_fct, 
+ void line_search(const Vector<double>& x_old,
+                  const double half_residual_squared_old,
+                  const Vector<double>& gradient,
+                  ResidualFctPt residual_fct,
                   const Vector<double>& params,
                   Vector<double>& newton_dir,
-                  Vector<double>& x, 
+                  Vector<double>& x,
                   double& half_residual_squared,
                   const double& stpmax)
  {
@@ -400,7 +403,7 @@ void black_box_fd_newton_solve(ResidualFctPt residual_fct,
   double test=0.0;
   for (unsigned i=0;i<n;i++)
    {
-    double temp=std::fabs(newton_dir[i])/std::max(std::fabs(x_old[i]),1.0);  
+    double temp=std::fabs(newton_dir[i])/std::max(std::fabs(x_old[i]),1.0);
     if (temp > test) test=temp;
    }
   double lambda_min=convergence_tol_on_x/test;
@@ -411,7 +414,7 @@ void black_box_fd_newton_solve(ResidualFctPt residual_fct,
      {
       x[i]=x_old[i]+lambda*newton_dir[i];
      }
-    
+
     // Evaluate current residuals
     Vector<double> residuals(n);
     residual_fct(params,x,residuals);
@@ -431,7 +434,7 @@ void black_box_fd_newton_solve(ResidualFctPt residual_fct,
                       "BlackBoxFDNewtonSolver::line_search()",
                       OOMPH_EXCEPTION_LOCATION);
       return;
-     } 
+     }
     else if (half_residual_squared <= half_residual_squared_old+
              min_fct_decrease*lambda*slope)
      {
@@ -461,9 +464,9 @@ void black_box_fd_newton_solve(ResidualFctPt residual_fct,
          {
           double discriminant=b_poly*b_poly-3.0*a_poly*slope;
           if (discriminant < 0.0)
-           { 
+           {
             proposed_lambda=0.5*lambda;
-           }       
+           }
           else if (b_poly <= 0.0)
            {
             proposed_lambda=(-b_poly+sqrt(discriminant))/(3.0*a_poly);
@@ -506,7 +509,7 @@ void DocInfo::set_directory(const std::string& directory_)
    error_message += "I suspect you haven't created the output directory ";
    error_message += directory_;
    error_message += "\n";
-   
+
    //Issue a warning if the directory does not have to exist
    if(!Directory_must_exist)
     {
@@ -548,19 +551,19 @@ namespace CommandLineArgs
  std::map<std::string,bool> Specified_command_line_flag;
 
  /// Map to associate an input flag with a double -- specified via pointer
- std::map<std::string,std::pair<bool,double*> > 
+ std::map<std::string,std::pair<bool,double*> >
  Specified_command_line_double_pt;
 
  /// Map to associate an input flag with an int -- specified via pointer
- std::map<std::string,std::pair<bool,int*> > 
+ std::map<std::string,std::pair<bool,int*> >
  Specified_command_line_int_pt;
 
  /// Map to associate an input flag with an unsigned -- specified via pointer
- std::map<std::string,std::pair<bool,unsigned*> > 
+ std::map<std::string,std::pair<bool,unsigned*> >
  Specified_command_line_unsigned_pt;
 
  /// Map to associate an input flag with a string -- specified via pointer
- std::map<std::string,std::pair<bool,std::string*> > 
+ std::map<std::string,std::pair<bool,std::string*> >
  Specified_command_line_string_pt;
 
  /// Set values
@@ -573,7 +576,7 @@ namespace CommandLineArgs
  /// Doc the command line arguments
  void output()
  {
-  oomph_info << "You are running the program: " 
+  oomph_info << "You are running the program: "
             << CommandLineArgs::Argv[0] << std::endl;
   oomph_info << "with the following command line args: " << std::endl;
   std::stringstream str;
@@ -609,7 +612,7 @@ namespace CommandLineArgs
    std::make_pair(false,arg_pt);
  }
 
- /// \short Specify possible command line flag that specifies an unsigned, 
+ /// \short Specify possible command line flag that specifies an unsigned,
  /// accessed via pointer
  void specify_command_line_flag(const std::string& command_line_flag,
                                 unsigned* arg_pt)
@@ -618,7 +621,7 @@ namespace CommandLineArgs
    std::make_pair(false,arg_pt);
  }
 
- /// \short Specify possible command line flag that specifies a string, 
+ /// \short Specify possible command line flag that specifies a string,
  /// accessed via pointer
  void specify_command_line_flag(const std::string& command_line_flag,
                                 std::string* arg_pt)
@@ -681,23 +684,23 @@ namespace CommandLineArgs
         Specified_command_line_double_pt.begin();
        it!=Specified_command_line_double_pt.end();it++)
    {
-    if (((*it).second).first) oomph_info << (*it).first << " " 
-                                         << *(((*it).second).second) 
+    if (((*it).second).first) oomph_info << (*it).first << " "
+                                         << *(((*it).second).second)
                                          << std::endl;
    }
   for (std::map<std::string,std::pair<bool,int*> >::iterator it=
         Specified_command_line_int_pt.begin();
        it!=Specified_command_line_int_pt.end();it++)
    {
-    if (((*it).second).first) oomph_info << (*it).first << " " 
-                                         << *(((*it).second).second) 
+    if (((*it).second).first) oomph_info << (*it).first << " "
+                                         << *(((*it).second).second)
                                          << std::endl;
    }
   for (std::map<std::string,std::pair<bool,unsigned*> >::iterator it=
         Specified_command_line_unsigned_pt.begin();
        it!=Specified_command_line_unsigned_pt.end();it++)
    {
-    if (((*it).second).first) oomph_info << (*it).first << " " 
+    if (((*it).second).first) oomph_info << (*it).first << " "
                                          << *(((*it).second).second)
                                          << std::endl;
    }
@@ -705,7 +708,7 @@ namespace CommandLineArgs
         Specified_command_line_string_pt.begin();
        it!=Specified_command_line_string_pt.end();it++)
    {
-    if (((*it).second).first) oomph_info << (*it).first << " " 
+    if (((*it).second).first) oomph_info << (*it).first << " "
                                          << *(((*it).second).second)
                                          << std::endl;
    }
@@ -758,7 +761,7 @@ namespace CommandLineArgs
  void check_arg_index(const int& argc,const int& arg_index)
  {
   if (arg_index>=argc)
-   {    
+   {
     output();
     doc_available_flags();
     std::stringstream error_stream;
@@ -778,7 +781,7 @@ namespace CommandLineArgs
 
 
 
- /// \short Parse command line, check for recognised flags and assign 
+ /// \short Parse command line, check for recognised flags and assign
  /// associated values
  void parse_and_assign(int argc, char *argv[])
  {
@@ -810,7 +813,7 @@ namespace CommandLineArgs
 
 
     //Check if the flag has been previously specified as a simple argument free
-    //command line argument 
+    //command line argument
     for (std::map<std::string,bool>::iterator it=
           Specified_command_line_flag.begin();
          it!=Specified_command_line_flag.end();it++)
@@ -818,14 +821,14 @@ namespace CommandLineArgs
       if ((*it).first==argv[arg_index])
        {
         Specified_command_line_flag[argv[arg_index]]=true;
-        found_match=true;      
+        found_match=true;
         break;
        }
      }
-     
+
     if (!found_match)
-     {      
-      //Check if the flag has been previously specified as a 
+     {
+      //Check if the flag has been previously specified as a
       //command line argument that specifies (and is followed by) a double
       for (std::map<std::string,std::pair<bool,double*> >::iterator it=
             Specified_command_line_double_pt.begin();
@@ -839,7 +842,7 @@ namespace CommandLineArgs
           check_arg_index(argc,arg_index);
           ((*it).second).first=true;
           *(((*it).second).second)=atof(argv[arg_index]);
-          found_match=true;      
+          found_match=true;
           break;
          }
        }
@@ -847,8 +850,8 @@ namespace CommandLineArgs
 
 
     if (!found_match)
-     {      
-      //Check if the flag has been previously specified as a 
+     {
+      //Check if the flag has been previously specified as a
       //command line argument that specifies (and is followed by) an int
       for (std::map<std::string,std::pair<bool,int*> >::iterator it=
             Specified_command_line_int_pt.begin();
@@ -862,7 +865,7 @@ namespace CommandLineArgs
           check_arg_index(argc,arg_index);
           ((*it).second).first=true;
           *(((*it).second).second)=atoi(argv[arg_index]);
-          found_match=true;      
+          found_match=true;
           break;
          }
        }
@@ -870,8 +873,8 @@ namespace CommandLineArgs
 
 
     if (!found_match)
-     {      
-      //Check if the flag has been previously specified as a 
+     {
+      //Check if the flag has been previously specified as a
       //command line argument that specifies (and is followed by) an unsigned
       for (std::map<std::string,std::pair<bool,unsigned*> >::iterator it=
             Specified_command_line_unsigned_pt.begin();
@@ -885,7 +888,7 @@ namespace CommandLineArgs
           check_arg_index(argc,arg_index);
           ((*it).second).first=true;
           *(((*it).second).second)=unsigned(atoi(argv[arg_index]));
-          found_match=true;      
+          found_match=true;
           break;
          }
        }
@@ -893,8 +896,8 @@ namespace CommandLineArgs
 
 
     if (!found_match)
-     {      
-      //Check if the flag has been previously specified as a 
+     {
+      //Check if the flag has been previously specified as a
       //command line argument that specifies (and is followed by) a string
       for (std::map<std::string,std::pair<bool,std::string*> >::iterator it=
             Specified_command_line_string_pt.begin();
@@ -908,7 +911,7 @@ namespace CommandLineArgs
           check_arg_index(argc,arg_index);
           ((*it).second).first=true;
           *(((*it).second).second)=argv[arg_index];
-          found_match=true;      
+          found_match=true;
           break;
          }
        }
@@ -918,7 +921,7 @@ namespace CommandLineArgs
     // Oh dear, we still haven't found the argument in the list.
     // Maybe it was specified wrongly -- issue warning.
     if (!found_match)
-     {      
+     {
 
       //Construct the error message
       std::string error_message = "Command line argument\n\n";
@@ -932,7 +935,7 @@ namespace CommandLineArgs
       OomphLibWarning(error_message,
                       "CommandLineArgs::parse_and_assign()",
                       OOMPH_EXCEPTION_LOCATION);
-      
+
      }
 
 
@@ -943,7 +946,7 @@ namespace CommandLineArgs
 
 
 
- /// \short Parse previously specified command line, check for 
+ /// \short Parse previously specified command line, check for
  /// recognised flags and assign associated values
  void parse_and_assign()
  {
@@ -964,11 +967,11 @@ MPIOutputModifier oomph_mpi_output;
  bool MPIOutputModifier::operator()(std::ostream &stream)
   {
    int my_rank = Communicator_pt->my_rank();
-   
+
    if (!Output_from_single_processor)
     {
      stream << "Processor " << my_rank << ":   ";
-     // Continue processing 
+     // Continue processing
      return true;
     }
    else
@@ -976,7 +979,7 @@ MPIOutputModifier oomph_mpi_output;
      if (unsigned(my_rank)==Output_rank)
       {
        stream << "Processor " << my_rank << ":   ";
-       // Continue processing        
+       // Continue processing
        return true;
       }
      else
@@ -992,7 +995,7 @@ MPIOutputModifier oomph_mpi_output;
 /// Initialize mpi. If optional boolean flag is set to false, we use
 /// MPI_COMM_WORLD itself as oomph-lib's communicator. Defaults to true.
 //=============================================================================
- void MPI_Helpers::init(int argc, char **argv, 
+ void MPI_Helpers::init(int argc, char **argv,
                         const bool& make_duplicate_of_mpi_comm_world)
 {
 #ifdef OOMPH_HAS_MPI
@@ -1005,7 +1008,7 @@ MPIOutputModifier oomph_mpi_output;
  MPI_Comm oomph_comm_world=MPI_COMM_WORLD;
  if (make_duplicate_of_mpi_comm_world)
   {
-   MPI_Comm_dup(MPI_COMM_WORLD,&oomph_comm_world); 
+   MPI_Comm_dup(MPI_COMM_WORLD,&oomph_comm_world);
   }
 
  if (MPI_COMM_WORLD!=oomph_comm_world)
@@ -1016,16 +1019,16 @@ MPIOutputModifier oomph_mpi_output;
   {
    oomph_info << "Oomph-lib communiator is MPI_COMM_WORLD\n";
   }
- 
+
  // create the oomph-lib communicator
- // note: oomph_comm_world is deleted when the destructor of 
+ // note: oomph_comm_world is deleted when the destructor of
  // Communicator_pt is called
  Communicator_pt = new OomphCommunicator(oomph_comm_world,true);
- 
+
  // Change MPI error handler so that error will return
  // rather than aborting
  MPI_Errhandler_set(oomph_comm_world, MPI_ERRORS_RETURN);
- 
+
  // Use MPI output modifier: Each processor preceeds its output
  // by its rank
  oomph_mpi_output.communicator_pt() = Communicator_pt;
@@ -1044,7 +1047,7 @@ void MPI_Helpers::finalize()
 {
  // delete the communicator
  delete Communicator_pt;
- 
+
  // and call MPI_Finalize
 #ifdef OOMPH_HAS_MPI
  MPI_Finalize();
@@ -1060,7 +1063,7 @@ OomphCommunicator* MPI_Helpers::communicator_pt()
  if (!MPI_has_been_initialised)
   {
    std::ostringstream error_message_stream;
-   error_message_stream 
+   error_message_stream
     << "MPI has not been initialised.\n Call MPI_Helpers::init(...)";
    throw OomphLibError(error_message_stream.str(),
                        "MPI_Helpers::communicator_pt()",
@@ -1079,7 +1082,7 @@ OomphCommunicator* MPI_Helpers::Communicator_pt = 0;
 //====================================================================
 namespace ObsoleteCode
 {
- 
+
  /// Flag up obsolete parts of the code
  bool FlagObsoleteCode=true;
 
@@ -1093,18 +1096,18 @@ namespace ObsoleteCode
     oomph_info << "You are using obsolete code " << std::endl;
     oomph_info << "--------------------------------------------\n\n";
     oomph_info << "Enter: \"s\" to suppress further messages" << std::endl;
-    oomph_info << 
-     "       \"k\" to crash the code to allow a trace back in the debugger" 
+    oomph_info <<
+     "       \"k\" to crash the code to allow a trace back in the debugger"
          << std::endl;
 
     oomph_info << "       any other key to continue\n \n";
-    oomph_info << 
+    oomph_info <<
      "                    [Note: Insert \n \n ";
-    oomph_info << 
+    oomph_info <<
      "                            ObsoleteCode::FlagObsoleteCode=false;\n \n";
-    oomph_info << 
+    oomph_info <<
      "                     into your code to suppress these messages \n";
-    oomph_info << 
+    oomph_info <<
      "                     altogether.] \n";
 
     std::cin >> junk;
@@ -1129,7 +1132,7 @@ namespace ObsoleteCode
     oomph_info << "\n\n------------------------------------" << std::endl;
     oomph_info << message << std::endl;
     oomph_info << "----------------------------------------" << std::endl;
-    
+
     obsolete();
    }
  }
@@ -1145,7 +1148,7 @@ namespace ObsoleteCode
 namespace TecplotNames
 {
 
-  /// Tecplot colours 
+  /// Tecplot colours
   Vector<std::string> colour;
 
 
@@ -1203,29 +1206,29 @@ namespace LeakCheckNames
 
  void doc()
  {
-  oomph_info << 
+  oomph_info <<
    "\n Leak check: # of builds - # of deletes for the following objects: \n\n";
-   oomph_info << "LeakCheckNames::QuadTree_build " 
+   oomph_info << "LeakCheckNames::QuadTree_build "
         << LeakCheckNames::QuadTree_build << std::endl;
-   oomph_info << "LeakCheckNames::QuadTreeForest_build "  
+   oomph_info << "LeakCheckNames::QuadTreeForest_build "
         << LeakCheckNames::QuadTreeForest_build << std::endl;
-   oomph_info << "LeakCheckNames::OcTree_build " 
+   oomph_info << "LeakCheckNames::OcTree_build "
         << LeakCheckNames::OcTree_build << std::endl;
-   oomph_info << "LeakCheckNames::OcTreeForest_build "  
+   oomph_info << "LeakCheckNames::OcTreeForest_build "
         << LeakCheckNames::OcTreeForest_build << std::endl;
-   oomph_info << "LeakCheckNames::RefineableQElement<2>_build " 
+   oomph_info << "LeakCheckNames::RefineableQElement<2>_build "
         << LeakCheckNames::RefineableQElement<2>_build << std::endl;
-   oomph_info << "LeakCheckNames::RefineableQElement<3>_build " 
+   oomph_info << "LeakCheckNames::RefineableQElement<3>_build "
         << LeakCheckNames::RefineableQElement<3>_build << std::endl;
-   oomph_info << "LeakCheckNames::MacroElement_build " 
+   oomph_info << "LeakCheckNames::MacroElement_build "
         <<  LeakCheckNames::MacroElement_build<< std::endl;
-   oomph_info << "LeakCheckNames::HangInfo_build " 
+   oomph_info << "LeakCheckNames::HangInfo_build "
         <<  LeakCheckNames::HangInfo_build<< std::endl;
-   oomph_info << "LeakCheckNames::Node_build " 
+   oomph_info << "LeakCheckNames::Node_build "
         <<  LeakCheckNames::Node_build<< std::endl;
-   oomph_info << "LeakCheckNames::GeomReference_build " 
+   oomph_info << "LeakCheckNames::GeomReference_build "
         <<  LeakCheckNames::GeomReference_build<< std::endl;
-   oomph_info << "LeakCheckNames::AlgebraicNode_build " 
+   oomph_info << "LeakCheckNames::AlgebraicNode_build "
         <<  LeakCheckNames::AlgebraicNode_build<< std::endl;
    oomph_info << std::endl;
  }
@@ -1248,7 +1251,7 @@ namespace LeakCheckNames
 //====================================================================
 namespace PauseFlags
 {
- 
+
  /// Flag to enable pausing code -- pause the code by default
  bool PauseFlag=true;
 
@@ -1262,7 +1265,7 @@ void pause(std::string message)
    std::string junk;
    if (PauseFlags::PauseFlag)
     {
-     oomph_info << message 
+     oomph_info << message
           << "\n hit any key to continue [hit \"S\" "
           << "to suppress further interruptions]\n";
      std::cin >> junk;
@@ -1321,20 +1324,20 @@ namespace TimingHelpers
 /// provides the overall machinery with default settings for
 /// our own (linux machines). Uses the system command
 /// to spawn a command that computes the total memory usage
-/// on the machine where this is called.  [Disclaimer: works 
-/// on my machine(s) -- no guarantees for any other platform; 
+/// on the machine where this is called.  [Disclaimer: works
+/// on my machine(s) -- no guarantees for any other platform;
 /// linux or not. MH]
 //===============================================================
 namespace MemoryUsage
 {
- 
+
  /// \short Boolean to suppress synchronisation of doc memory
  /// usage on processors (via mpi barriers). True (i.e. sync is
  /// suppressed) by default because not all processors may
  /// reach the relevant doc memory usage statements
  /// causing the code to hang).
  bool Suppress_mpi_synchronisation=true;
- 
+
   /// \short String containing system command that obtains memory usage
   /// of all processes.
   /// Default assigment for linux. [Disclaimer: works on my machine(s) --
@@ -1346,11 +1349,11 @@ namespace MemoryUsage
  /// "instrumented" without incurring the heavy penalties associated
  /// with the system calls and i/o. Default setting: false.
  bool Bypass_all_memory_usage_monitoring=false;
- 
+
   /// \short String containing name of file in which we document
   /// my memory usage -- you may want to change this to allow different
-  /// processors to write to separate files (especially in mpi 
-  /// context). Note that file is appended to 
+  /// processors to write to separate files (especially in mpi
+  /// context). Note that file is appended to
   /// so it ought to be emptied (either manually or by calling
   /// helper function empty_memory_usage_file()
   std::string My_memory_usage_filename="my_memory_usage.dat";
@@ -1370,11 +1373,14 @@ namespace MemoryUsage
   }
 
 
-  
+#ifdef OOMPH_HAS_UNISTDH
+
   /// \short Doc my memory usage, prepended by string (which allows
-  /// identification from where the function is called, say) that records 
+  /// identification from where the function is called, say) that records
   /// memory usage in file whose name is specified by My_memory_usage_filename.
   /// Data is appended to that file; wipe it with empty_my_memory_usage_file().
+  /// Note: This requires getpid() which is defined in unistd.h so if you
+  /// don't have that we won't build that function!
   void doc_my_memory_usage(const std::string& prefix_string)
   {
    // bail out straight away?
@@ -1383,9 +1389,9 @@ namespace MemoryUsage
    // Write prefix
    std::ofstream the_file;
    the_file.open(My_memory_usage_filename.c_str(),std::ios::app);
-   the_file << prefix_string << " "; 
+   the_file << prefix_string << " ";
    the_file.close();
-  
+
    // Sync all processors if in parallel (unless supressed)
 #ifdef OOMPH_HAS_MPI
    if ((MPI_Helpers::mpi_has_been_initialised())&&
@@ -1397,8 +1403,8 @@ namespace MemoryUsage
 
    // Process memory usage command and write to file
    std::stringstream tmp;
-   tmp << My_memory_usage_system_string 
-       << " | awk '{if ($2==" << getpid() << "){print $4}}' >> " 
+   tmp << My_memory_usage_system_string
+       << " | awk '{if ($2==" << getpid() << "){print $4}}' >> "
        << My_memory_usage_filename;
    int success=system(tmp.str().c_str());
 
@@ -1406,20 +1412,22 @@ namespace MemoryUsage
    success+=1;
   }
 
+#endif
+
  /// \short String containing system command that obtains total memory usage.
  /// Default assigment for linux. [Disclaimer: works on my machine(s) --
  /// no guarantees for any other platform; linux or not. MH]
  std::string Total_memory_usage_system_string=
   "ps aux | awk 'BEGIN{sum=0}{sum+=$4}END{print sum}'";
- 
+
  /// \short String containing name of file in which we document total
  /// memory usage -- you may want to change this to allow different
- /// processors to write to separate files (especially in mpi 
- /// context). Note that file is appended to 
+ /// processors to write to separate files (especially in mpi
+ /// context). Note that file is appended to
  /// so it ought to be emptied (either manually or by calling
  /// helper function empty_memory_usage_file()
  std::string Total_memory_usage_filename="memory_usage.dat";
- 
+
  /// \short Function to empty file that records total memory usage in
  /// file whose name is specified by Total_memory_usage_filename.
  void empty_total_memory_usage_file()
@@ -1433,9 +1441,9 @@ namespace MemoryUsage
   the_file << "# Total memory usage: \n";
   the_file.close();
  }
- 
+
  /// \short Doc total memory usage, prepended by string (which allows
- /// identification from where the function is called, say) that records 
+ /// identification from where the function is called, say) that records
  /// memory usage in file whose name is specified by Total_memory_usage_filename.
  /// Data is appended to that file; wipe it with empty_memory_usage_file().
  void doc_total_memory_usage(const std::string& prefix_string)
@@ -1446,9 +1454,9 @@ namespace MemoryUsage
   // Write prefix
   std::ofstream the_file;
   the_file.open(Total_memory_usage_filename.c_str(),std::ios::app);
-  the_file << prefix_string << " "; 
+  the_file << prefix_string << " ";
   the_file.close();
-  
+
   // Sync all processors if in parallel
 #ifdef OOMPH_HAS_MPI
   if ((MPI_Helpers::mpi_has_been_initialised())&&
@@ -1457,13 +1465,13 @@ namespace MemoryUsage
     MPI_Barrier(MPI_Helpers::communicator_pt()->mpi_comm());
    }
 #endif
-  
+
   // Process memory usage command and write to file
   std::stringstream tmp;
-  tmp << Total_memory_usage_system_string << " >> " 
+  tmp << Total_memory_usage_system_string << " >> "
       << Total_memory_usage_filename;
   int success=system(tmp.str().c_str());
-  
+
   // Dummy command to shut up compiler warnings
   success+=1;
  }
@@ -1481,15 +1489,19 @@ namespace MemoryUsage
   empty_total_memory_usage_file();
   empty_top_file();
  }
- 
+
  /// \short Doc total and local memory usage, prepended by string (which allows
- /// identification from where the function is called, say)
+ /// identification from where the function is called, say). NOTE: Local
+ /// memory usage only works if we have unistd.h header
  void doc_memory_usage(const std::string& prefix_string)
  {
   // bail out straight away?
   if (Bypass_all_memory_usage_monitoring) return;
 
+#ifdef OOMPH_HAS_UNISTDH
   doc_my_memory_usage(prefix_string);
+#endif
+
   doc_total_memory_usage(prefix_string);
  }
 
@@ -1501,22 +1513,22 @@ namespace MemoryUsage
  /// Default assigment for linux. [Disclaimer: works on my machine(s) --
  /// no guarantees for any other platform; linux or not. MH]
  std::string Top_system_string="while true; do top -b -n 2 ; done  ";
- 
+
  /// \short  String containing name of file in which we document "continuous"
- /// output from "top" (or equivalent)-- you may want to change this to 
- /// allow different processors to write to separate files (especially in mpi 
- /// context). Note that file is appended to 
+ /// output from "top" (or equivalent)-- you may want to change this to
+ /// allow different processors to write to separate files (especially in mpi
+ /// context). Note that file is appended to
  /// so it ought to be emptied (either manually or by calling
  /// helper function empty_top_file()
          std::string Top_output_filename="top_output.dat";
- 
+
  /// \short Function to empty file that records continuous output from top in
  /// file whose name is specified by Top_output_filename
  void empty_top_file()
  {
   // bail out straight away?
   if (Bypass_all_memory_usage_monitoring) return;
-  
+
   // Open without appending and write header
   std::ofstream the_file;
   the_file.open(Top_output_filename.c_str());
@@ -1524,10 +1536,10 @@ namespace MemoryUsage
   the_file << "# " << Top_system_string << "\n";
   the_file.close();
  }
- 
 
- /// \short Start running top continously and output (append) into 
- /// file specified by Top_output_filename. Wipe that file  with 
+
+ /// \short Start running top continously and output (append) into
+ /// file specified by Top_output_filename. Wipe that file  with
  /// empty_top_file() if you wish. Note that this is again quite linux specific
  /// and unlikely to work on other operating systems.
  /// Insert optional comment into output file before starting.
@@ -1535,7 +1547,7 @@ namespace MemoryUsage
   {
    // bail out straight away?
    if (Bypass_all_memory_usage_monitoring) return;
-  
+
    // Sync all processors if in parallel
    std::string modifier="";
 
@@ -1544,7 +1556,7 @@ namespace MemoryUsage
     {
      if (!Suppress_mpi_synchronisation)
       {
-       MPI_Barrier(MPI_Helpers::communicator_pt()->mpi_comm());     
+       MPI_Barrier(MPI_Helpers::communicator_pt()->mpi_comm());
       }
      std::stringstream tmp;
      tmp << "_proc" << MPI_Helpers::communicator_pt()->my_rank();
@@ -1560,14 +1572,14 @@ namespace MemoryUsage
    std::string dollar="$";
 
    // Create files that spawn and kill continuous top
-   tmp << "echo \"#/bin/bash\" > run_continuous_top" << modifier 
+   tmp << "echo \"#/bin/bash\" > run_continuous_top" << modifier
        << ".bash; "
-       << "echo \" echo " << backslash << "\" kill " 
-       << backslash << dollar 
-       << backslash << dollar << " " << backslash << "\" > kill_continuous_top" 
-       << modifier << ".bash; chmod a+x kill_continuous_top" 
-       << modifier << ".bash; "  << Top_system_string 
-       << " \" >> run_continuous_top" << modifier 
+       << "echo \" echo " << backslash << "\" kill "
+       << backslash << dollar
+       << backslash << dollar << " " << backslash << "\" > kill_continuous_top"
+       << modifier << ".bash; chmod a+x kill_continuous_top"
+       << modifier << ".bash; "  << Top_system_string
+       << " \" >> run_continuous_top" << modifier
        << ".bash; chmod a+x run_continuous_top" << modifier << ".bash ";
    int success=system(tmp.str().c_str());
 
@@ -1579,7 +1591,7 @@ namespace MemoryUsage
 
    // Start spawning
    std::stringstream tmp2;
-   tmp2 << "./run_continuous_top" << modifier << ".bash  >> " 
+   tmp2 << "./run_continuous_top" << modifier << ".bash  >> "
         << Top_output_filename << " & ";
    success=system(tmp2.str().c_str());
 
@@ -1589,14 +1601,14 @@ namespace MemoryUsage
 
 
 
- /// \short Stop running top continously. Note that this is 
- /// again quite linux specific and unlikely to work on other operating 
+ /// \short Stop running top continously. Note that this is
+ /// again quite linux specific and unlikely to work on other operating
  /// systems. Insert optional comment into output file before stopping.
  void stop_continous_top(const std::string& comment)
   {
    // bail out straight away?
    if (Bypass_all_memory_usage_monitoring) return;
-  
+
    // Sync all processors if in parallel
    std::string modifier="";
 
@@ -1605,7 +1617,7 @@ namespace MemoryUsage
     {
      if (!Suppress_mpi_synchronisation)
       {
-       MPI_Barrier(MPI_Helpers::communicator_pt()->mpi_comm());     
+       MPI_Barrier(MPI_Helpers::communicator_pt()->mpi_comm());
       }
      std::stringstream tmp;
      tmp << "_proc" << MPI_Helpers::communicator_pt()->my_rank();
@@ -1618,10 +1630,10 @@ namespace MemoryUsage
     {
      insert_comment_to_continous_top(comment);
     }
- 
+
    // Kill
    std::stringstream tmp2;
-   tmp2 << "./kill_continuous_top" << modifier << ".bash  >> " 
+   tmp2 << "./kill_continuous_top" << modifier << ".bash  >> "
         << Top_output_filename << " & ";
    int success=system(tmp2.str().c_str());
 
@@ -1635,12 +1647,12 @@ namespace MemoryUsage
  {
    // bail out straight away?
    if (Bypass_all_memory_usage_monitoring) return;
-  
+
   std::stringstream tmp;
-  tmp << " echo \"OOMPH-LIB EVENT: " << comment << "\"  >> " 
+  tmp << " echo \"OOMPH-LIB EVENT: " << comment << "\"  >> "
       << Top_output_filename;
   int success=system(tmp.str().c_str());
-  
+
   // Dummy command to shut up compiler warnings
   success+=1;
  }

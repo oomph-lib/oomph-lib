@@ -43,18 +43,18 @@ if test "$1" = "no_fpdiff"; then
 else
 echo "Taylor Hood Elements: Spine " >> validation.log
 ../../../../bin/fpdiff.py ../validata/TH_spine.dat.gz  \
-         TH_spine.dat 0.1 1.0e-9 >> validation.log
+         TH_spine.dat 0.5 1.0e-9 >> validation.log
 echo "Taylor Hood Elements: Pseudo-Elastic " >> validation.log
 ../../../../bin/fpdiff.py ../validata/TH_elastic.dat.gz  \
-         TH_elastic.dat 0.1 1.0e-9 >> validation.log
+         TH_elastic.dat 0.5 1.0e-9 >> validation.log
 
 echo "Crouzeix Raviart Elements: Spine " >> validation.log
 ../../../../bin/fpdiff.py ../validata/CR_spine.dat.gz  \
-         CR_spine.dat 0.1 1.0e-9 >> validation.log
+         CR_spine.dat 0.5 1.0e-9 >> validation.log
 
 echo "Crouzeix Raviart Elements: Pseudo-Elastic " >> validation.log
 ../../../../bin/fpdiff.py ../validata/CR_elastic.dat.gz  \
-         CR_elastic.dat 0.1 1.0e-9 >> validation.log
+         CR_elastic.dat 0.5 1.0e-9 >> validation.log
 fi
 
 
@@ -73,36 +73,36 @@ OK_COUNT=`grep -c 'OK' Validation/validation.log`
 if  [ $OK_COUNT -eq $NUM_TESTS ]; then
  echo " "
  echo "======================================================================"
- echo " " 
- echo "All tests in" 
- echo " " 
+ echo " "
+ echo "All tests in"
+ echo " "
  echo "    `pwd`    "
  echo " "
  echo "passed successfully."
  echo " "
  echo "======================================================================"
- echo " " 
+ echo " "
  exit 0
 else
   if [ $OK_COUNT -lt $NUM_TESTS ]; then
    echo " "
    echo "======================================================================"
-   echo " " 
+   echo " "
    echo "Only $OK_COUNT of $NUM_TESTS test(s) passed; see"
-   echo " " 
+   echo " "
    echo "    `pwd`/Validation/validation.log"
-   echo " " 
-   echo "for details" 
-   echo " " 
+   echo " "
+   echo "for details"
+   echo " "
    echo "======================================================================"
    echo " "
    exit 1
-  else 
+  else
    echo " "
    echo "======================================================================"
-   echo " " 
+   echo " "
    echo "More OKs than tests! Need to update NUM_TESTS in"
-   echo " " 
+   echo " "
    echo "    `pwd`/validate.sh"
    echo " "
    echo "======================================================================"

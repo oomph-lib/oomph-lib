@@ -542,8 +542,12 @@ namespace oomph
  /// converged
  double Newton_solver_tolerance;
 
- /// Maximum number of Newton Iterations
+ /// Maximum number of Newton iterations
  unsigned Max_newton_iterations;
+
+ /// \short Actual number of Newton iterations taken during the most recent
+ /// iteration
+ unsigned Nnewton_iter_taken;
 
  /// \short Maximum desired residual:
  /// if the maximum residual exceeds this value, the program will exit
@@ -555,7 +559,6 @@ namespace oomph
  /// \short Has a Jacobian been computed (and can therefore be re-used 
  /// if required)? Default: false
  bool Jacobian_has_been_computed;
-
 
  /// \short Boolean flag indicating if we're dealing with a linear or nonlinear
  /// Problem -- if set to false the Newton solver will not check
