@@ -19,6 +19,13 @@ for file in `echo $file_list`; do
 done
 cd ../../..
 
+# Fix "this->" for gcc 4.7
+#---------------------------------------
+echo "Fixing this pointers in Trilinos"
+sed -i -e 's|\(^\s*\)innerProdMat|\1this->innerProdMat|g' -e 's|\(^\s*\)normMat|\1this->normMat|g'\
+  ./packages/anasazi/src/AnasaziBasicOrthoManager.hpp\
+  ./packages/anasazi/src/AnasaziSVQBOrthoManager.hpp
+
 #Otherwise it's Trilinos 10+
 else
 
