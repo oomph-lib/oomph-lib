@@ -141,7 +141,7 @@ def nested_output(doc_root_directory,index,level=0,anchor=""):
    if len(entry) > 1:
     if entry[1][0]=='%':
      if entry[1].lstrip('%') != key[1]:
-      print "Multiple links for the same key\n"
+      print "Multiple links for the same key", key[1], "\n"
       assert 0
     elif entry[1][0]=='^':
      #Error trapping here will be a pain, but should be done

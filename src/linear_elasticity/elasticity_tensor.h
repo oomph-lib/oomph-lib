@@ -55,18 +55,17 @@ namespace oomph
  //=====================================================================
 class ElasticityTensor
  {
+
+   protected:
   
   ///\short Translation table from the four indices to the corresponding
   ///independent component
   static const unsigned Index[3][3][3][3];
 
-   protected:
-
   ///Member function that returns the i-th independent component of the
   ///elasticity tensor
   virtual inline double independent_component(const unsigned &i) const 
    {return 0.0;}
-
 
   ///\short Helper range checking function 
   /// (Note that this only captures over-runs in 3D but
@@ -108,7 +107,6 @@ class ElasticityTensor
      }
    }
 
-
   ///Empty Constructor
   ElasticityTensor() {}
 
@@ -130,6 +128,7 @@ class ElasticityTensor
 #endif
     return independent_component(Index[i][j][k][l]);
    } 
+  
  };
 
 
@@ -225,6 +224,44 @@ class ElasticityTensor
    }
 
  };
+
+
+
+//========================================================================
+/// A general elasticity tensor that provides storage for all 21 independent
+/// components
+//===================================================================
+class GeneralElasticityTensor : public ElasticityTensor
+{
+ //Storage for the independent components of the elasticity tensor
+ double C[21];
+ 
+  public:
+ 
+ /// \short Empy Constructor. 
+  GeneralElasticityTensor() : ElasticityTensor() 
+  {
+   //Initialise all independent components to zero
+   for(unsigned i=0;i<21;i++) {C[i] = 0.0;}
+  }
+ 
+ ///Overload the independent coefficient function
+ inline double independent_component(const unsigned &i) const
+ {return C[i];}
+
+ /// \short Allow the values to be set
+ void set_value(const unsigned &i, const unsigned &j, 
+                const unsigned &k, const unsigned &l, const double &value)
+ {
+  C[this->Index[i][j][k][l]] = value;
+ }
+
+
+ };
+
+
+
+
 
 }
 #endif

@@ -91,8 +91,8 @@ class TriangleMeshParameters
  /// Constructor: It can take all the parameters or just the outer boundary
  TriangleMeshParameters(TriangleMeshClosedCurve *outer_boundary_pt)
   : Outer_boundary_pt(outer_boundary_pt),
-    Element_area(0.2),
-    Use_attributes(false)
+  Element_area(0.2),
+  Use_attributes(false), Boundary_refinement(true)
   { }
  
  /// Empty destructor
@@ -189,7 +189,17 @@ class TriangleMeshParameters
  /// \short Helper function for getting the status of use_attributes 
  /// variable
  bool is_use_attributes() const {return Use_attributes;}
+
+ /// \short Helper function for enabling the use of boundary refinement
+ void enable_boundary_refinement() {Boundary_refinement=true;}
  
+ /// \short Helper function for disabling the use of boundary refinement
+ void disable_boundary_refinement() {Boundary_refinement=false;}
+
+ /// \short Helper function for getting the status of boundary refinement
+ bool is_boundary_refinement_allowed() const {return Boundary_refinement;}
+
+
   protected:
  
  /// The outer boundary
@@ -213,6 +223,10 @@ class TriangleMeshParameters
  
  /// Define the use of attributes (regions)
  bool Use_attributes;
+ 
+ /// Do not allow refinement of nodes on the boundary
+ bool Boundary_refinement;
+
 
 };
 
@@ -484,6 +498,9 @@ class TriangleMeshParameters
    // If we use regions then we use attributes
    const bool use_attributes = triangle_mesh_parameters.is_use_attributes();
 
+   const bool refine_boundary = 
+    triangle_mesh_parameters.is_boundary_refinement_allowed();
+
    this->generic_constructor(outer_boundary_polygon_pt,
                              internal_polygon_pt,
                              internal_open_curve_poly_pt,
@@ -491,7 +508,8 @@ class TriangleMeshParameters
                              extra_holes_coordinates,
                              regions,
                              time_stepper_pt,
-                             use_attributes);
+                             use_attributes,
+                             refine_boundary);
 
    // Setup boundary coordinates for boundaries
    unsigned nb=nboundary();
@@ -951,7 +969,8 @@ class TriangleMeshParameters
                            std::map<unsigned, Vector<double> >
                            &regions_coordinates,
                            TimeStepper* time_stepper_pt,
-                           const bool &use_attributes) 
+                           const bool &use_attributes,
+                           const bool &refine_boundary) 
    {
     // Mesh can only be built with 2D Telements.
     MeshChecker::assert_geometric_element<TElementGeometricBase,ELEMENT>(2);
@@ -1001,6 +1020,8 @@ class TriangleMeshParameters
     // Input string for triangle
     std::stringstream input_string_stream;
     input_string_stream<<"-pA -a" << element_area << " -q30";
+
+    if(refine_boundary==false) {input_string_stream << "-Y";}
     
     // Convert the Input string in *char required by the triangulate function
     char triswitches[100];

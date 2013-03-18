@@ -40,7 +40,8 @@ time_harmonic_fourier_decomposed_linear_elasticity \
 fourier_decomposed_helmholtz \
 foeppl_von_karman \
 generalised_helmholtz \
-axisym_linear_elasticity
+axisym_linear_elasticity \
+homogenisation
 if WANT_MPI
 SUBDIRS += mpi
 endif

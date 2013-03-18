@@ -998,8 +998,6 @@ void BubbleInChannelProblem<ELEMENT>::create_volume_constraint_elements()
 
 
 
-     
-
 //==start_of_complete_problem_setup=======================================
 /// Set boundary conditions and complete the build of all elements
 //========================================================================
@@ -1321,14 +1319,14 @@ int main(int argc, char **argv)
  // a proper circular bubble. We do this by setting the inflow to zero
  // and doing a steady solve (with one adaptation)
  Problem_Parameter::Inflow_veloc_magnitude=0.0;
-
+ 
  problem.steady_newton_solve(1);
 
  // If all went well, this should show us a nice circular bubble
  // in a stationary fluid
  problem.doc_solution();
 
-  // Initialise timestepper
+ // Initialise timestepper
  double dt=0.025;
  problem.initialise_dt(dt);
  
@@ -1359,8 +1357,6 @@ int main(int argc, char **argv)
   } // done solution on fixed mesh
 
 
-
-
  // Now do a proper loop, doing nstep timesteps before adapting/remeshing
  // and repeating the lot ncycle times
  unsigned ncycle=1000;
@@ -1389,7 +1385,7 @@ int main(int argc, char **argv)
      problem.doc_solution(label.str());
 
      // No more refinement for the next nstep steps
-     max_adapt=0;   
+     max_adapt=0;
     }
 
   }

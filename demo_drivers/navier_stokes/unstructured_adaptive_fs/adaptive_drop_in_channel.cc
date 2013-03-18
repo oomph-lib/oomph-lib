@@ -25,7 +25,6 @@
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 //LIC// 
 //LIC//====================================================================
-#include <fenv.h> 
 
 //Generic routines
 #include "generic.h"
@@ -42,55 +41,11 @@
 
 using namespace std;
 using namespace oomph;
-
+ 
 
 namespace oomph
 {
-//==start_of_namespace==============================
-/// Namespace for Problem Parameter
-//==================================================
- namespace Problem_Parameter
- {    
-  /// Doc info
-  DocInfo Doc_info;
-  
-  /// Reynolds number
-  double Re=0.0;
 
-  /// Capillary number
-  double Ca = 1.0; 
-
-  /// Pseudo-solid Poisson ratio
-  double Nu=0.3;
-
-  /// Initial radius of drop
-  double Radius = 0.25;
-
-  /// Volume of the interface
-  /// (Negative because the constraint is computed from the bulk side)
-  double Volume = -MathematicalConstants::Pi*Radius*Radius;
-
-  /// \short Scaling factor for inflow velocity (allows it to be switched off
-  /// to do hydrostatics)
-  double Inflow_veloc_magnitude = 0.0;
-
-  /// \short Length of the channel
-  double Length = 3.0;
-
-  /// Constitutive law used to determine the mesh deformation
-  ConstitutiveLaw *Constitutive_law_pt=0;
-
-  /// Trace file
-  ofstream Trace_file;
-
-  /// \short File to document the norm of the solution (for validation 
-  /// purposes -- triangle doesn't give fully reproducible results so
-  /// mesh generation/adaptation may generate slightly different numbers
-  /// of elements on different machines!)
-  ofstream Norm_file;
-
- } // end_of_namespace
- 
 
 //==============================================================
 /// Overload CrouzeixRaviart element to modify output
@@ -398,9 +353,58 @@ namespace oomph
 ///////////////////////////////////////////////////////////
 
 
+//==start_of_namespace==============================
+/// Namespace for Problem Parameter
+//==================================================
+ namespace Problem_Parameter
+ {    
+  /// Doc info
+  DocInfo Doc_info;
+  
+  /// Reynolds number
+  double Re=0.0;
+
+  /// Capillary number
+  double Ca = 1.0; 
+
+  /// Pseudo-solid Poisson ratio
+  double Nu=0.3;
+
+  /// Initial radius of drop
+  double Radius = 0.25;
+
+  /// Viscosity ratio of the droplet to the surrounding fluid
+  double Viscosity_ratio = 10.0;
+
+  /// Volume of the interface
+  /// (Negative because the constraint is computed from the bulk side)
+  double Volume = -MathematicalConstants::Pi*Radius*Radius;
+
+  /// \short Scaling factor for inflow velocity (allows it to be switched off
+  /// to do hydrostatics)
+  double Inflow_veloc_magnitude = 0.0;
+
+  /// \short Length of the channel
+  double Length = 3.0;
+
+  /// Constitutive law used to determine the mesh deformation
+  ConstitutiveLaw *Constitutive_law_pt=0;
+
+  /// Trace file
+  ofstream Trace_file;
+
+  /// \short File to document the norm of the solution (for validation 
+  /// purposes -- triangle doesn't give fully reproducible results so
+  /// mesh generation/adaptation may generate slightly different numbers
+  /// of elements on different machines!)
+  ofstream Norm_file;
+
+ } // end_of_namespace
+
+
 
 //==start_of_problem_class============================================
-/// Problem class to simulate inviscid drop propagating along 2D channel
+/// Problem class to simulate viscous drop propagating along 2D channel
 //====================================================================
 template<class ELEMENT>
 class DropInChannelProblem : public Problem
@@ -474,13 +478,10 @@ public:
  /// Actions after adapt: Rebuild the mesh of free surface elements
  void actions_after_adapt()
   {
-   //Reset the Lagrangian coordinates of the nodes to be the current
-   //Eulerian coordinates (an updated Lagrangian approach)
-   Fluid_mesh_pt->set_lagrangian_nodal_coordinates();
-
    // Create the elements that impose the displacement constraint 
-   create_volume_constraint_elements();
    create_free_surface_elements();
+   create_volume_constraint_elements();
+
 
    // Rebuild the Problem's global mesh from its various sub-meshes
    this->rebuild_global_mesh();
@@ -489,9 +490,6 @@ public:
    // completely rebuilt and its element's don't have any
    // pointers to Re etc. yet
    complete_problem_setup();
-
-   // Output solution after adaptation/projection
-   //doc_solution("new mesh with projected solution");
    
   }// end of actions_after_adapt
 
@@ -499,161 +497,17 @@ public:
  /// Update the after solve (empty)
  void actions_after_newton_solve(){}
 
- /// Update the problem specs before solve (empty)
- void actions_before_newton_solve(){}
- 
+ /// Update the problem specs before solve 
+ void actions_before_newton_solve()
+  {
+   //Reset the Lagrangian coordinates of the nodes to be the current
+   //Eulerian coordinates -- this makes the current configuration
+   //stress free
+   Fluid_mesh_pt->set_lagrangian_nodal_coordinates();
+  }
  
  /// \short Set boundary conditions and complete the build of all elements
- void complete_problem_setup()
-  {      
-   // Map to record if a given boundary is on a drop or not
-   map<unsigned,bool> is_on_drop_bound;
-   
-   // Loop over the drops 
-   unsigned ndrop=Drop_polygon_pt.size();
-   for(unsigned idrop=0;idrop<ndrop;idrop++)
-    {
-     // Get the vector all boundary IDs associated with the polylines that
-     // make up the closed polygon
-     Vector<unsigned> drop_bound_id=this->Drop_polygon_pt[idrop]->
-      polygon_boundary_id();
-     
-     // Get the number of boundary
-     unsigned nbound=drop_bound_id.size();
-     
-     // Fill in the map
-     for(unsigned ibound=0;ibound<nbound;ibound++)
-      {
-       // This boundary...
-       unsigned bound_id=drop_bound_id[ibound];
-       
-       // ...is on the drop
-       is_on_drop_bound[bound_id]=true;
-      }
-    }
-   
-   // Re-set the boundary conditions for fluid problem: All nodes are
-   // free by default -- just pin the ones that have Dirichlet conditions
-   // here. 
-   unsigned nbound=Fluid_mesh_pt->nboundary();
-   for(unsigned ibound=0;ibound<nbound;ibound++)
-    {
-     unsigned num_nod=Fluid_mesh_pt->nboundary_node(ibound);
-     for (unsigned inod=0;inod<num_nod;inod++)
-      {
-       // Get node
-       Node* nod_pt=Fluid_mesh_pt->boundary_node_pt(ibound,inod);
-       
-       //Pin both velocities on inflow (0) and side boundaries (1 and 3)
-       if((ibound==0) || (ibound==1) || (ibound==3))
-        {
-         nod_pt->pin(0);
-         nod_pt->pin(1);
-        }
-       
-       //If it's the outflow pin only the vertical velocity
-       if(ibound==2) {nod_pt->pin(1);}
-       
-       // Pin pseudo-solid positions apart from drop boundary which
-       // we allow to move
-       SolidNode* solid_node_pt = dynamic_cast<SolidNode*>(nod_pt);
-       if(is_on_drop_bound[ibound])
-        {
-         solid_node_pt->unpin_position(0);
-         solid_node_pt->unpin_position(1);
-        }
-       else
-        {
-         solid_node_pt->pin_position(0);
-         solid_node_pt->pin_position(1);
-        }
-      }
-    } // end loop over boundaries
-   
-   // Complete the build of all elements so they are fully functional
-   // Remember that adaptation for triangle meshes involves a complete
-   // regneration of the mesh (rather than splitting as in tree-based
-   // meshes where such parameters can be passed down from the father
-   // element!)
-   unsigned n_element = Fluid_mesh_pt->nelement();
-   for(unsigned e=0;e<n_element;e++)
-    {
-     // Upcast from GeneralisedElement to the present element
-     ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Fluid_mesh_pt->element_pt(e));
-     
-     // Set pointer to continous time
-     el_pt->time_pt()=this->time_pt();
-     
-     // Set the Reynolds number
-     el_pt->re_pt() = &Problem_Parameter::Re;
-
-     // Set the Womersley number (same as Re since St=1)
-     el_pt->re_st_pt() = &Problem_Parameter::Re;
-     
-     // Set the constitutive law for pseudo-elastic mesh deformation
-     el_pt->constitutive_law_pt()=Problem_Parameter::Constitutive_law_pt;
-    }
-   
-   // Re-apply boundary values on Dirichlet boundary conditions 
-   // (Boundary conditions are ignored when the solution is transferred
-   // from the old to the new mesh by projection; this leads to a slight
-   // change in the boundary values (which are, of course, never changed,
-   // unlike the actual unknowns for which the projected values only
-   // serve as an initial guess)
-
-   // Set velocity and history values of velocity on walls
-   nbound=this->Fluid_mesh_pt->nboundary();
-   for(unsigned ibound=0;ibound<nbound;++ibound)
-    {
-     if ((ibound==Upper_wall_boundary_id)||
-         (ibound==Bottom_wall_boundary_id)||
-         (ibound==Outflow_boundary_id))
-      {
-       // Loop over nodes on this boundary
-       unsigned num_nod=this->Fluid_mesh_pt->nboundary_node(ibound);
-       for (unsigned inod=0;inod<num_nod;inod++)
-        {
-         // Get node
-         Node* nod_pt=this->Fluid_mesh_pt->boundary_node_pt(ibound,inod);
-         
-         // Get number of previous (history) values
-         unsigned n_prev=nod_pt->time_stepper_pt()->nprev_values();
-         
-         // Velocity is and was zero at all previous times
-         for (unsigned t=0;t<=n_prev;t++)
-          {
-           // Parallel outflow
-           if (ibound!=Outflow_boundary_id)
-            {
-             nod_pt->set_value(t,0,0.0); 
-            }
-           nod_pt->set_value(t,1,0.0);
-          }
-        }
-      }
-    }
-
-   // Set the inlet velocity
-   set_inlet_velocity();
-  }
-     
-
- ///Set the inlet velocity
- void set_inlet_velocity()
-  {
-   // Re-assign prescribed inflow velocity at inlet
-   unsigned num_nod=this->Fluid_mesh_pt->nboundary_node(Inflow_boundary_id);
-   for (unsigned inod=0;inod<num_nod;inod++)
-    {
-     // Get node
-     Node* nod_pt=this->Fluid_mesh_pt->boundary_node_pt(Inflow_boundary_id,
-                                                        inod);
-     
-     //Now set the boundary velocity
-     double y = nod_pt->x(1);
-     nod_pt->set_value(0,Problem_Parameter::Inflow_veloc_magnitude*y*(1-y));
-    }
-  }
+ void complete_problem_setup();
 
  /// Doc the solution
  void doc_solution(const std::string& comment="");
@@ -681,10 +535,6 @@ public:
    // Kill the mesh too
    delete Volume_constraint_mesh_pt;
    Volume_constraint_mesh_pt=0;
-
-   // Delete free surface elements and rebuild from scratch
-   delete_free_surface_elements();
-   create_free_surface_elements();
 
    //Remove the sub meshes
    this->flush_sub_meshes();
@@ -1173,6 +1023,175 @@ void DropInChannelProblem<ELEMENT>::create_volume_constraint_elements()
 // end of create_volume_constraint_elements
 
 
+//==start_of_complete_problem_setup=======================================
+/// Set boundary conditions and complete the build of all elements
+//========================================================================
+template<class ELEMENT>
+void DropInChannelProblem<ELEMENT>::complete_problem_setup()
+  {      
+   // Map to record if a given boundary is on a drop or not
+   map<unsigned,bool> is_on_drop_bound;
+   
+   // Loop over the drops 
+   unsigned ndrop=Drop_polygon_pt.size();
+   for(unsigned idrop=0;idrop<ndrop;idrop++)
+    {
+     // Get the vector all boundary IDs associated with the polylines that
+     // make up the closed polygon
+     Vector<unsigned> drop_bound_id=this->Drop_polygon_pt[idrop]->
+      polygon_boundary_id();
+     
+     // Get the number of boundary
+     unsigned nbound=drop_bound_id.size();
+     
+     // Fill in the map
+     for(unsigned ibound=0;ibound<nbound;ibound++)
+      {
+       // This boundary...
+       unsigned bound_id=drop_bound_id[ibound];
+       
+       // ...is on the drop
+       is_on_drop_bound[bound_id]=true;
+      }
+    }
+   
+   // Re-set the boundary conditions for fluid problem: All nodes are
+   // free by default -- just pin the ones that have Dirichlet conditions
+   // here. 
+   unsigned nbound=Fluid_mesh_pt->nboundary();
+   for(unsigned ibound=0;ibound<nbound;ibound++)
+    {
+     unsigned num_nod=Fluid_mesh_pt->nboundary_node(ibound);
+     for (unsigned inod=0;inod<num_nod;inod++)
+      {
+       // Get node
+       Node* nod_pt=Fluid_mesh_pt->boundary_node_pt(ibound,inod);
+       
+       //Pin both velocities on inflow (0) and side boundaries (1 and 3)
+       if((ibound==0) || (ibound==1) || (ibound==3))
+        {
+         nod_pt->pin(0);
+         nod_pt->pin(1);
+        }
+       
+       //If it's the outflow pin only the vertical velocity
+       if(ibound==2) {nod_pt->pin(1);}
+       
+       // Pin pseudo-solid positions apart from drop boundary which
+       // we allow to move
+       SolidNode* solid_node_pt = dynamic_cast<SolidNode*>(nod_pt);
+       if(is_on_drop_bound[ibound])
+        {
+         solid_node_pt->unpin_position(0);
+         solid_node_pt->unpin_position(1);
+        }
+       else
+        {
+         solid_node_pt->pin_position(0);
+         solid_node_pt->pin_position(1);
+        }
+      }
+    } // end loop over boundaries
+   
+   // Complete the build of all elements so they are fully functional
+   // Remember that adaptation for triangle meshes involves a complete
+   // regneration of the mesh (rather than splitting as in tree-based
+   // meshes where such parameters can be passed down from the father
+   // element!)
+   unsigned n_element = Fluid_mesh_pt->nelement();
+   for(unsigned e=0;e<n_element;e++)
+    {
+     // Upcast from GeneralisedElement to the present element
+     ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Fluid_mesh_pt->element_pt(e));
+     
+     // Set pointer to continous time
+     el_pt->time_pt()=this->time_pt();
+     
+     // Set the Reynolds number
+     el_pt->re_pt() = &Problem_Parameter::Re;
+
+     // Set the Womersley number (same as Re since St=1)
+     el_pt->re_st_pt() = &Problem_Parameter::Re;
+     
+     // Set the constitutive law for pseudo-elastic mesh deformation
+     el_pt->constitutive_law_pt()=Problem_Parameter::Constitutive_law_pt;
+    }
+
+   //For the elements within the droplet (region 1),
+   //set the viscosity ratio
+   n_element = Fluid_mesh_pt->nregion_element(1);
+   for(unsigned e=0;e<n_element;e++)
+    {
+     // Upcast from GeneralisedElement to the present element
+     ELEMENT* el_pt = 
+      dynamic_cast<ELEMENT*>(Fluid_mesh_pt->region_element_pt(1,e));
+     
+     el_pt->viscosity_ratio_pt() = &Problem_Parameter::Viscosity_ratio;
+    }
+
+   
+   // Re-apply boundary values on Dirichlet boundary conditions 
+   // (Boundary conditions are ignored when the solution is transferred
+   // from the old to the new mesh by projection; this leads to a slight
+   // change in the boundary values (which are, of course, never changed,
+   // unlike the actual unknowns for which the projected values only
+   // serve as an initial guess)
+
+   // Set velocity and history values of velocity on walls
+   nbound=this->Fluid_mesh_pt->nboundary();
+   for(unsigned ibound=0;ibound<nbound;++ibound)
+    {
+     if ((ibound==Upper_wall_boundary_id)||
+         (ibound==Bottom_wall_boundary_id)||
+         (ibound==Outflow_boundary_id) ||
+         (ibound==Inflow_boundary_id))
+      {
+       // Loop over nodes on this boundary
+       unsigned num_nod=this->Fluid_mesh_pt->nboundary_node(ibound);
+       for (unsigned inod=0;inod<num_nod;inod++)
+        {
+         // Get node
+         Node* nod_pt=this->Fluid_mesh_pt->boundary_node_pt(ibound,inod);
+         
+         // Get number of previous (history) values
+         unsigned n_prev=nod_pt->time_stepper_pt()->nprev_values();
+         
+         // Velocity is and was zero at all previous times
+         for (unsigned t=0;t<=n_prev;t++)
+          {
+           if (ibound!=Inflow_boundary_id)
+            {
+             // Parallel outflow
+             if (ibound!=Outflow_boundary_id)
+              {
+               nod_pt->set_value(t,0,0.0); 
+              }
+             nod_pt->set_value(t,1,0.0);
+            }
+           
+           // Nodes have always been there...
+           nod_pt->x(t,0)=nod_pt->x(0,0);
+           nod_pt->x(t,1)=nod_pt->x(0,1);
+          }
+        }
+      }
+    }
+
+   // Re-assign prescribed inflow velocity at inlet
+   unsigned num_nod=this->Fluid_mesh_pt->nboundary_node(Inflow_boundary_id);
+   for (unsigned inod=0;inod<num_nod;inod++)
+    {
+     // Get node
+     Node* nod_pt=this->Fluid_mesh_pt->boundary_node_pt(Inflow_boundary_id,
+                                                        inod);
+     //Now set the boundary velocity
+     double y = nod_pt->x(1); 
+     nod_pt->set_value(0,Problem_Parameter::Inflow_veloc_magnitude*y*(1-y));
+    }
+  }
+
+
+
 //==start_of_doc_solution=================================================
 /// Doc the solution
 //========================================================================
@@ -1218,6 +1237,15 @@ void DropInChannelProblem<ELEMENT>::doc_solution(const std::string& comment)
            << Problem_Parameter::Doc_info.number() << "  " 
            << comment << "\"\n";
  some_file.close();
+ 
+ // Output boundaries
+ sprintf(filename,"%s/boundaries%i.dat",
+         Problem_Parameter::Doc_info.directory().c_str(),
+         Problem_Parameter::Doc_info.number());
+ some_file.open(filename);
+ this->Fluid_mesh_pt->output_boundaries(some_file);
+ some_file.close();
+
 
  // Get max/min area
  double max_area;
@@ -1283,8 +1311,6 @@ void DropInChannelProblem<ELEMENT>::compute_error_estimate(double& max_err,
 int main(int argc, char **argv)
 {
  
- // feenableexcept(FE_INVALID | FE_DIVBYZERO | FE_OVERFLOW | FE_UNDERFLOW);
- 
  // Store command line arguments
  CommandLineArgs::setup(argc,argv);
 
@@ -1319,8 +1345,12 @@ int main(int argc, char **argv)
  // a proper circular drop. We do this by setting the inflow to zero
  // and doing a steady solve (with one adaptation)
  Problem_Parameter::Inflow_veloc_magnitude=0.0;
- problem.set_inlet_velocity();
+
  problem.steady_newton_solve(1); 
+
+ //Set the Capillary number to 10 and resolve
+ Problem_Parameter::Ca = 10.0;
+ problem.steady_newton_solve();
 
  // If all went well, this should show us a nice circular drop 
  // in a stationary fluid
@@ -1329,6 +1359,7 @@ int main(int argc, char **argv)
  // Switch off volume constraint
  problem.remove_volume_constraint();
 
+ 
  // Initialise timestepper
  double dt=0.025;
  problem.initialise_dt(dt);
@@ -1339,22 +1370,28 @@ int main(int argc, char **argv)
  // Output initial conditions
  problem.doc_solution();
 
- // Now switch on the inflow
+ // Now switch on the inflow and re-assign the boundary conditions
+ // (Call to complete_problem_setup() is a bit expensive given that we
+ // we only want to set the inflow velocity but who cares -- it's just
+ // a one off.
  Problem_Parameter::Inflow_veloc_magnitude=1.0;
- problem.set_inlet_velocity();
+ problem.complete_problem_setup();
  
- // Solve problem once on fixed mesh
- unsigned nstep=1;
+ // Solve problem on fixed mesh
+ unsigned nstep=6;
+ if (CommandLineArgs::command_line_flag_has_been_set("--validation"))
+  {
+   nstep=2;
+   oomph_info << "Remeshing after every second step during validation\n";
+  }
  for (unsigned i=0;i<nstep;i++)
   {
    // Solve the problem
    problem.unsteady_newton_solve(dt);    
    problem.doc_solution();
-  }
+  } // done solution on fixed mesh
 
 
- // Now do a couple of steps before remeshing
- nstep=2;
  // Now do a proper loop, doing nstep timesteps before adapting/remeshing
  // and repeating the lot ncycle times
  unsigned ncycle=1000;
@@ -1364,22 +1401,27 @@ int main(int argc, char **argv)
    oomph_info << "Only doing one cycle during validation\n";
   }
 
+
  // Do the cycles
  for(unsigned j=0;j<ncycle;j++)
   {       
-   // Adapt
-   problem.adapt();
-   
+   // Allow up to one level of refinement for next solve
+   unsigned max_adapt=1;
+ 
    //Solve problem a few times
    for (unsigned i=0;i<nstep;i++)
     {     
      // Solve the problem
-     problem.unsteady_newton_solve(dt); 
+     problem.unsteady_newton_solve(dt,max_adapt,false); 
      
-     // Build the label for doc
+
+     // Build the label for doc and output solution
      std::stringstream label;
      label << "Adaptation " <<j << " Step "<< i;
      problem.doc_solution(label.str());
+
+     // No more refinement for the next nstep steps
+     max_adapt=0;
     }
   }
 

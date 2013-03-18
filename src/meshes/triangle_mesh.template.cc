@@ -2451,6 +2451,52 @@ const Vector<double>& elem_error)
        }
      }
 
+    // Update the region information by setting the coordinates from the
+    // centroid of the first element in each region (which should allow
+    // automatic updates when the regions deform)
+    {
+     unsigned n_region = this->nregion();
+     if(n_region > 1)
+      {
+       for(std::map<unsigned, Vector<double> >::iterator it =
+            this->Regions_coordinates.begin();
+           it!=this->Regions_coordinates.end(); ++it)
+        {
+         //Storage for the approximate centroid
+         Vector<double> centroid(2,0.0);
+
+         //Get the region id
+         unsigned region_id = it->first;
+
+          //Report information
+         std::cout << "Region " << region_id << ": "
+                   << it->second[0] << " " << it->second[1] << " ";
+         
+         //Check that there is at least one element in the region
+         unsigned n_region_element = this->nregion_element(region_id);
+         if(n_region_element > 0)
+          {
+           //Cache pointer to the first element
+           FiniteElement* const elem_pt = this->region_element_pt(region_id,0);
+
+           //Loop over the corners of the triangle and average
+           for(unsigned n=0;n<3;n++)
+            {
+             Node* const nod_pt = elem_pt->node_pt(n);
+             for(unsigned i=0;i<2;i++) {centroid[i] += nod_pt->x(i);}
+            }
+             for(unsigned i=0;i<2;i++) {centroid[i] /= 3;} 
+             //Now we have the centroid set it
+             it->second = centroid;
+
+             std::cout << "   ,    " << 
+              it->second[0] << " " << it->second[1] << std::endl;
+            } //end of case when there is at least one element
+                }
+          }
+        }
+              
+
     // Are we dealing with a solid mesh?
     SolidMesh* solid_mesh_pt=dynamic_cast<SolidMesh*>(this);
 

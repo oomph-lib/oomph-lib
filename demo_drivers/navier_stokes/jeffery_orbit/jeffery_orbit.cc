@@ -568,6 +568,10 @@ UnstructuredImmersedEllipseProblem<ELEMENT>::
   }
  delete Outer_boundary_polygon_pt;
  
+ //Flush the drag mesh from the rigid body
+ dynamic_cast<ImmersedRigidBodyElement*>(Rigid_body_pt[0])->
+  flush_drag_mesh();
+
  // Flush Lagrange multiplier mesh
  delete_lagrange_multiplier_elements();
  delete Lagrange_multiplier_mesh_pt;
@@ -594,12 +598,16 @@ UnstructuredImmersedEllipseProblem<ELEMENT>::
 template<class ELEMENT>
 void UnstructuredImmersedEllipseProblem<ELEMENT>::actions_before_adapt()
 {
- // Kill the  elements and wipe surface mesh
- delete_lagrange_multiplier_elements();
- 
+ //Flush the drag mesh from the rigid body
+ dynamic_cast<ImmersedRigidBodyElement*>(Rigid_body_pt[0])->
+  flush_drag_mesh();
+
  //Kill the drag element
  delete_drag_elements();
- 
+
+ // Kill the  elements and wipe surface mesh
+ delete_lagrange_multiplier_elements();
+
  // Rebuild the Problem's global mesh from its various sub-meshes
  this->rebuild_global_mesh();
 } // end of actions_before_adapt

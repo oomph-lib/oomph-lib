@@ -29,9 +29,10 @@ namespace Global_Physical_Variables
  double Re=0.0;
 
  ///The product of Reynolds number and inverse Froude number 
- ///is set to three in this problem, which gives the average velocity
- ///down the plane as sin(alpha).
- double ReInvFr=3.0;
+ ///is set to two in this problem, which gives the free surface velocity
+ ///to be sin(alpha). [Set to three in order to get the same scale as 
+ ///used by Yih, Benjamin, etc]
+ double ReInvFr=2.0;
 
  ///Angle of incline of the slope (45 degrees)
  double Alpha = 1.0*atan(1.0);
@@ -160,7 +161,7 @@ public:
      double value = sin(arg)*epsilon*time*exp(-time);
      nod_pt->set_value(1,value);
     }
-  }
+  } //end_of_actions_before_implicit_timestep
 
  ///\short Function to add the traction boundary elements to boundaries
  /// 3(inlet) and 1(outlet) of the mesh
@@ -743,7 +744,7 @@ int main(int argc, char **argv)
 #endif 
 
  //Initialise physical parameters
- //Scale Reynolds number to match that used by Yih
+ //Scale Reynolds number to be independent of alpha.
  Re = 4.0/sin(Alpha); 
 
  //Set the direction of gravity

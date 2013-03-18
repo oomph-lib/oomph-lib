@@ -11456,7 +11456,8 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
    rebuild_global_mesh();
   }
 
- //Any actions after adapt
+ //Any actions after adapt 
+ //ALH: Why is the global mesh rebuilt before this function?
  actions_after_adapt();
 
  // Setup equation numbering scheme

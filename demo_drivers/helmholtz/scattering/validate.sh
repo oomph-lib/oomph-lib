@@ -71,7 +71,7 @@ mkdir RESLT
 ../adaptive_scattering --case 2 > OUTPUT_adapt_2
 echo "done"
 echo " " >> validation.log
-echo "Adpatie scattering validation (second order ABC)" >> validation.log
+echo "Adapative scattering validation (second order ABC)" >> validation.log
 echo "------------------------------------------------" >> validation.log
 echo " " >> validation.log
 echo "Validation directory: " >> validation.log
