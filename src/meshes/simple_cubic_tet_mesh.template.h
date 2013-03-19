@@ -29,6 +29,7 @@
 #define OOMPH_SIMPLE_CUBIC_TET_MESH_HEADER
 
 #include "../generic/Telements.h"
+#include "../generic/tet_mesh.h"
 #include "../generic/simple_cubic_scaffold_tet_mesh.h"
 
 namespace oomph
@@ -38,7 +39,7 @@ namespace oomph
 /// MySimple 3D tet mesh for TElements
 //===================================================================
 template <class ELEMENT>
-class SimpleCubicTetMesh : public Mesh 
+class SimpleCubicTetMesh : public TetMeshBase
 {
  
   public:
@@ -54,6 +55,17 @@ class SimpleCubicTetMesh : public Mesh
    // Mesh can only be built with 3D Telements.
    MeshChecker::assert_geometric_element<TElementGeometricBase,ELEMENT>(3);
 
+
+   std::ostringstream warn_message;
+   warn_message << "Note: The SimpleCubicTetMesh() is quite inefficient.\n"
+                << "      If your code takes a long time in the constructor\n"
+                << "      consider using another tet mesh\n";
+   OomphLibWarning(warn_message.str(),
+                   "SimpleCubicTetMesh::SimpleCubicTetMesh()",
+                   OOMPH_EXCEPTION_LOCATION);
+   oomph_info << "Starting mesh construction..." << std::endl;
+   double start_t = TimingHelpers::timer();
+
    // Build scaffold mesh
    Tmp_mesh_pt = new SimpleCubicScaffoldTetMesh(n_x,n_y,n_z,
                                                 l_x,l_y,l_z);
@@ -62,18 +74,11 @@ class SimpleCubicTetMesh : public Mesh
    build_from_scaffold(time_stepper_pt);
 
    delete Tmp_mesh_pt;
+
+   double end_t = TimingHelpers::timer();
+   oomph_info << "...finished mesh construction. Total time [sec] " 
+              << end_t-start_t << std::endl;
   }
-
-
- /// Setup the boundary element information
- void setup_boundary_element_info() 
-  {
-   std::ofstream outfile;
-   setup_boundary_element_info(outfile);
-  }
-
- /// Setup the boundary element information
- void setup_boundary_element_info(std::ostream &outfile); 
 
 
 private:
