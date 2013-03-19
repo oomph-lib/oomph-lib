@@ -31,5 +31,6 @@ two_d_unsteady_heat_melt_mixed_unstr_LDADD = -L@libdir@ -lunsteady_heat -lgeneri
 				$(EXTERNAL_LIBS) $(FLIBS)
 
 
-EXTRA_DIST += melt.pvsm plot_it.bash plot_landscape.bash residual_landscape.pvsm
+EXTRA_DIST += melt.pvsm plot_it.bash plot_landscape.bash \
+              residual_landscape.pvsm melt_with_iter_count.pvsm
 

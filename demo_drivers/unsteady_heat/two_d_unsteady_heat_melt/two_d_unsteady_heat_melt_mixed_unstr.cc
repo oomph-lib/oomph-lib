@@ -58,17 +58,17 @@ using namespace MathematicalConstants;
 //=====================================================
 namespace ProblemParameters
 {
-
+ 
  /// Get flux applied along boundary x=0.
  void flux(const double& time, const Vector<double>& x, double& flux)
  {
-    flux = 20.0*sin(2.0*4.0*MathematicalConstants::Pi*time);
+  flux = 20.0*sin(2.0*4.0*MathematicalConstants::Pi*time);
  }
-
+ 
  /// Melt-temperature
  double Melt_temperature=0.0;
-
-
+ 
+ 
 } // end of ProblemParameters
 
 ////////////////////////////////////////////////////////////////////////
@@ -85,19 +85,19 @@ class UnsteadyHeatProblem : public Problem
 
 public:
 
-  /// Constructor
+ /// Constructor
  UnsteadyHeatProblem();
-
+ 
  /// Destructor (empty)
  ~UnsteadyHeatProblem(){}
-
+ 
  /// Update the problem specs after solve (empty)
  void actions_after_newton_solve() {}
-
+ 
  /// \short Update the problem specs before solve (empty)
  void actions_before_newton_solve() {}
-
-
+ 
+ 
  /// Actions before adapt: wipe flux elements
  void actions_before_adapt() 
   {
@@ -181,7 +181,6 @@ private:
  /// Delete flux elements
  void delete_flux_elements()
   {
-
    // How many surface elements are in the surface mesh
    unsigned n_element = Surface_melt_mesh_pt->nelement();
    
@@ -194,7 +193,6 @@ private:
    
    // Wipe the mesh
    Surface_melt_mesh_pt->flush_element_and_node_storage();
-   
 
    // How many surface elements are in the surface mesh
    n_element = Surface_mesh_pt->nelement();
@@ -487,7 +485,7 @@ void UnsteadyHeatProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  Surface_melt_mesh_pt->output(some_file,npts);
  some_file.close();
 
- bool output_residual_landscape=true;
+ bool output_residual_landscape=false;
  if (output_residual_landscape)
   {
    // Output residual landscape
@@ -504,14 +502,16 @@ void UnsteadyHeatProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
                                                                   this,0);
    some_file.close();
    some_file2.close();
-   sprintf(filename,"%s/newton_iter%i.dat",doc_info.directory().c_str(),
-           doc_info.number());
-   some_file.open(filename);
-   some_file << "0 0 0 " << Nnewton_iter_taken << std::endl;
-   some_file.close();
-
   }
 
+ // Output Number of Newton iterations in form that can be visualised
+ // as vector in paraview
+ sprintf(filename,"%s/newton_iter%i.dat",doc_info.directory().c_str(),
+         doc_info.number());
+ some_file.open(filename);
+ some_file << "0 0 0 " << Nnewton_iter_taken << std::endl;
+ some_file.close();
+ 
 } // end of doc_solution
 
 
@@ -554,8 +554,8 @@ int main(int argc, char* argv[])
  CommandLineArgs::doc_specified_flags();
 
  // Build problem
- UnsteadyHeatProblem<ProjectableUnsteadyHeatElement<TUnsteadyHeatElement<2,3> > >
-  problem;
+ UnsteadyHeatProblem<ProjectableUnsteadyHeatElement
+                     <TUnsteadyHeatElement<2,3> > > problem;
  
  // Setup labels for output
  DocInfo doc_info;
