@@ -162,8 +162,11 @@ PreconditionedFSICollapsibleChannelProblem(const unsigned& nup,
       ExactBlockPreconditioner<CRDoubleMatrix>* prec_pt=
        new  ExactBlockPreconditioner<CRDoubleMatrix>;
       
-      // Set Navier Stokes mesh:
-      prec_pt->add_mesh(this->bulk_mesh_pt());
+      // We have two meshes
+      prec_pt->set_nmesh(2);
+
+      // Set Navier Stokes mesh
+      prec_pt->set_mesh(0,this->bulk_mesh_pt());
       
       // Build  the mesh that contains all solid elements:
       
@@ -178,10 +181,11 @@ PreconditionedFSICollapsibleChannelProblem(const unsigned& nup,
       
       // Build "combined" mesh from vector of solid submeshes
       Mesh* solid_mesh_pt = new Mesh(s_mesh_pt);
-      
-      // Set solid mesh:
-      prec_pt->add_mesh(solid_mesh_pt);      
 
+      // Set solid mesh
+      prec_pt->set_mesh(1,solid_mesh_pt);
+
+      // Set preconditioner
       iterative_linear_solver_pt->preconditioner_pt()= prec_pt;
      }
      

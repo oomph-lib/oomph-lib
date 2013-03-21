@@ -751,12 +751,6 @@ namespace oomph
     m_values[i] = 0;
    }
 
-  // ??ds why was this ever needed???
-// #ifdef OOMPH_HAS_MPI
-//   // store the problem pt
-//   const Problem* problem_pt = this->problem_pt();
-// #endif  
-
   // if the problem is distributed
   bool distributed = false;
 #ifdef OOMPH_HAS_MPI
@@ -778,28 +772,9 @@ namespace oomph
     unsigned my_rank = this->comm_pt()->my_rank();
 
     // determine the rows for which we have lookup rows
-
-//     // if the problem is NOT distributed then we only classify global equation
-//     // on this processor to avoid duplication (as every processor holds 
-//     // elvery element)
-//     unsigned first_lookup_row = 0; 
-//     unsigned last_lookup_row = 0;
-//     if (!problem_pt->distributed())
-//      {
-//       first_lookup_row = this->master_distribution_pt()->first_row();
-//       last_lookup_row = first_lookup_row + 
-//        this->master_distribution_pt()->nrow_local() - 1;
-//      }
-//     // attempt to classify every degree of freedom
-//     else
-//      {
-//       first_lookup_row = this->first_lookup_row();
-//       last_lookup_row = first_lookup_row + this->nlookup_rows() - 1;
-//      }
-
     // if the problem is NOT distributed then we only classify global equation
     // on this processor to avoid duplication (as every processor holds 
-    // elvery element)
+    // every element)
     unsigned first_lookup_row = 0; 
     unsigned last_lookup_row = 0;
     first_lookup_row = this->master_distribution_pt()->first_row();

@@ -27,11 +27,6 @@
 //LIC//====================================================================
 #include "navier_stokes_preconditioners.h"
 
-
-//??ds temporarily needed because of nasty things in GeneralPurposeBlockPreconditioner:
-#include "../generic/general_purpose_block_preconditioners.h"
-
-
 namespace oomph
 {
 
@@ -547,22 +542,9 @@ namespace oomph
     F_block_preconditioner_pt->
      turn_into_subsidiary_block_preconditioner(this,dof_map);
 
-    // Set the mesh in the subsidiary precondtioner. ??ds not entirely sure
-    // this is the correct mesh, previously it used problem_pt->mesh_pt().
+    // Set the mesh in the subsidiary precondtioner. 
     F_block_preconditioner_pt->set_nmesh(1);
     F_block_preconditioner_pt->set_mesh(0, Navier_stokes_mesh_pt);
-
-    //??ds Ugly hack because of the stupid of
-    // GeneralPurposeBlockPreconditioners overwriting meshes. Fix asap.
-    {
-     GeneralPurposeBlockPreconditioner<CRDoubleMatrix>* GBBP_F_preconditioner_pt
-      = dynamic_cast<GeneralPurposeBlockPreconditioner<CRDoubleMatrix>* >
-      (F_block_preconditioner_pt);
-     if(GBBP_F_preconditioner_pt !=0)
-      {
-       GBBP_F_preconditioner_pt->add_mesh(Navier_stokes_mesh_pt);
-      }
-    }
 
     F_block_preconditioner_pt->setup(matrix_pt(),comm_pt());
    }

@@ -79,7 +79,7 @@ namespace oomph
   = 0;
 
   /// \short Setup the preconditioner: store the matrix pointer and the
-  /// communcator pointer then call preconditioner specific setup()
+  /// communicator pointer then call preconditioner specific setup()
   /// function. If not in parallel then it is safe to use the default null
   /// communicator pointer.
   void setup(DoubleMatrixBase* matrix_pt,
@@ -202,7 +202,6 @@ namespace oomph
      // store the distribution
      this->build_distribution(dist_matrix_pt->distribution_pt());
     }
-
    // else it is not a distributable matrix
    else
     {

@@ -192,16 +192,9 @@ namespace oomph {
        {
         solid_prec_dof_list[i]=offset+i;
        }
-
       solid_block_preconditioner_pt
        ->turn_into_subsidiary_block_preconditioner(this,
                                                    solid_prec_dof_list);
-      solid_block_preconditioner_pt->add_mesh(Solid_mesh_pt); 
-      if (Solid_preconditioner_dof_to_block_map.size()>0)
-       {
-        solid_block_preconditioner_pt->set_dof_to_block_map
-         (Solid_preconditioner_dof_to_block_map);
-       }
       solid_block_preconditioner_pt->setup(cr_matrix_pt,comm_pt());
      }
     else

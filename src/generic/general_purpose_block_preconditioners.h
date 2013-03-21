@@ -95,12 +95,6 @@ namespace oomph
    Subsidiary_preconditioner_function_pt = sub_prec_fn;
   };
 
-  /// \short adds a mesh to this exact block preconditioner
-  void add_mesh(Mesh* new_mesh_pt)
-  {
-   this->Prec_mesh_pt.push_back(new_mesh_pt);
-  }
-
   /// \short specify a DOF to block map
   void set_dof_to_block_map(Vector<unsigned>& dof_to_block_map)
   {
@@ -111,18 +105,10 @@ namespace oomph
      Dof_to_block_map[i] = dof_to_block_map[i];
     }
   }
-
-  /// modified block setup for general purpose block preconditioners
+  
+  /// Modified block setup for general purpose block preconditioners
   void block_setup()
   {
-   //??ds this is stupid!
-   unsigned nmesh = Prec_mesh_pt.size();
-   this->set_nmesh(nmesh);
-   for (unsigned m = 0; m < nmesh; m++)
-    {
-     this->set_mesh(m,Prec_mesh_pt[m]);
-    }
-
    if (Dof_to_block_map.size() > 0)
     {
      BlockPreconditioner<MATRIX>::block_setup(Dof_to_block_map);
@@ -132,16 +118,14 @@ namespace oomph
      BlockPreconditioner<MATRIX>::block_setup();
     }
   }
-
+  
+  
  protected:
 
   /// the SubisidaryPreconditionerFctPt 
   SubsidiaryPreconditionerFctPt Subsidiary_preconditioner_function_pt;
 
  private:
-
-  /// the set of meshes for this preconditioner
-  Vector<Mesh*> Prec_mesh_pt;
 
   /// the set of dof to block maps for this preconditioner
   Vector<unsigned> Dof_to_block_map;

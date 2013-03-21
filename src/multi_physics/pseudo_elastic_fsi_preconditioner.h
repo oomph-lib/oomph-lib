@@ -205,23 +205,6 @@ namespace oomph {
    void disable_navier_stokes_schur_complement_preconditioner()
     {Use_navier_stokes_schur_complement_preconditioner=false;}
 
-
-   /// \short This preconditioner allows any solid elements to be used
-   /// for the "real" solid, and for the "real" solid subsidiary system
-   /// to be preconditioned with a GeneralPurposeBlockPreconditioner. 
-   /// Use this method to specify the DOF to block map for this subsidiary
-   /// block preconditioner.
-   void set_solid_preconditioner_dof_to_block_map
-    (const Vector<unsigned>& dof_to_block_map)
-    {
-     unsigned n = dof_to_block_map.size();
-     Solid_preconditioner_dof_to_block_map.resize(n);
-     for (unsigned i = 0; i < n; ++i)
-      {
-       Solid_preconditioner_dof_to_block_map[i]=dof_to_block_map[i];
-      }
-    }
-
     private:
 
    /// \short pointer to the pseudo solid preconditioner
@@ -275,8 +258,7 @@ namespace oomph {
    /// Navier Stokes subsidiary system.
    bool Use_navier_stokes_schur_complement_preconditioner;
 
-   /// \short
-   Vector<unsigned> Solid_preconditioner_dof_to_block_map;
   }; // end of class FSILagrangeMultiplierPreconditioner
+
 } // end of oomph namespace
 #endif

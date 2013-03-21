@@ -17,7 +17,9 @@ namespace oomph
  // =================================================================
  class NodeGlobalNumbersLookup
  {
+
  public:
+
   /// Default constructor
   NodeGlobalNumbersLookup() {}
 

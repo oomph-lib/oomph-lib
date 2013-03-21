@@ -652,6 +652,7 @@ namespace ObsoleteCode
  // Output warning message
  extern void obsolete();
 
+ // Output specified warning message
  extern void obsolete(const std::string &message);
 
 }

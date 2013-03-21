@@ -732,9 +732,13 @@ int main(int argc, char* argv[])
    (Hypre_Subsidiary_Preconditioner_Helper::get_hypre_preconditioner);
 #endif
 
- // set the mesh
- prec_pt->add_mesh(problem.solid_mesh_pt());
 
+ // We have one mesh
+ prec_pt->set_nmesh(1);
+ 
+ // Set mesh
+ prec_pt->set_mesh(0,problem.solid_mesh_pt());
+ 
  // set the DOF to block map
  Vector<unsigned> dof_to_block_map(2);
  dof_to_block_map[0] = 0;
