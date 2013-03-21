@@ -214,7 +214,7 @@ procedure which checks that \c oomph-lib was installed correctly. The
 self-tests can either be initiated at the end of the 
 <CODE>autogen.sh</CODE> - based installation or by typing
 \code
-make check
+make check -k
 \endcode
 in \c oomph-lib's top-level directory. The self-test builds
 and runs all demo codes and compares their results against the reference
@@ -417,7 +417,7 @@ in the \c check_PROGRAMS variable. You  can either build (and
 automatically run) all executables in a \c demo_driver directory
 by issuing the command
 \code
-make check
+make check -k
 \endcode
 or you can inspect the  \c check_PROGRAMS variable in the
 \c Makefile.am to find out which targets have been declared
@@ -867,7 +867,7 @@ take a long time to appear which can be frustrating when making changes to
 the main library. The alternative is to first complile all self tests using
 
 \code
-make check TESTS_ENVIRONMENT=true
+make check -k TESTS_ENVIRONMENT=true
 \endcode
 
 and then once you are sure everything compiles run the self tests as

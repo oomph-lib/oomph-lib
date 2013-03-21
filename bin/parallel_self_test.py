@@ -282,9 +282,13 @@ def main():
         two cores for mpi). Only run the tests if a rebuild was needed or
         if they failed last time.
 
-        Note that to abort C-c will not work (due to limitations of
+        Note: to abort C-c will not work (due to limitations of
         python's multiprocessing module). If you want to abort you will
         probably have to close the terminal emulator entirely.
+
+        Also note: eigensolver tests will fail if you don't have arpack
+        installed. I haven't found a way to not run them without arpack
+        yet.
         """
 
     # Parse inputs
