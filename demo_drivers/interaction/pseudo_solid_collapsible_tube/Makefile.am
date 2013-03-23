@@ -19,7 +19,7 @@ pseudo_solid_collapsible_tube_LDADD = -L@libdir@ -lmulti_physics -lnavier_stokes
 #---------------------------------------------------------------------
 
 # Sources for executable
-pseudo_solid_collapsible_tube_work_SOURCES = pseudo_solid_collapsible_tube.cc
+pseudo_solid_collapsible_tube_work_SOURCES = pseudo_solid_collapsible_tube_work.cc
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.

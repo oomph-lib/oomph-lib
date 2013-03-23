@@ -1626,22 +1626,37 @@ set_pseudo_elastic_fsi_solver()
   prec_pt->pseudo_elastic_preconditioner_pt()->elastic_preconditioner_type()
    = PseudoElasticPreconditioner::
    Block_upper_triangular_preconditioner;
+
+#ifdef OOMPH_HAS_HYPRE
+
   prec_pt->pseudo_elastic_preconditioner_pt()
    ->set_elastic_subsidiary_preconditioner
    (Pseudo_Elastic_Preconditioner_Subsidiary_Operator_Helper
     ::get_elastic_preconditioner);
+
+#endif
+
+
+#ifdef OOMPH_HAS_TRILINOS
 
   prec_pt->pseudo_elastic_preconditioner_pt()
    ->set_lagrange_multiplier_subsidiary_preconditioner
    (Pseudo_Elastic_Preconditioner_Subsidiary_Operator_Helper
     ::get_lagrange_multiplier_preconditioner);
   
+#endif
+
   // inexact "real" solid preconditioning
   BlockTriangularPreconditioner<CRDoubleMatrix>*
    solid_prec_pt = new BlockTriangularPreconditioner<CRDoubleMatrix>;
   prec_pt->set_solid_preconditioner(solid_prec_pt);
+
+#ifdef OOMPH_HAS_HYPRE
+
   solid_prec_pt->set_subsidiary_preconditioner_function
    (Real_Solid_Preconditioner_Helper::get_preconditioner);
+
+#endif
   
   // inexact navier stokes preconditioning
   NavierStokesSchurComplementPreconditioner*
@@ -1651,10 +1666,19 @@ set_pseudo_elastic_fsi_solver()
   // ns momentum
   BlockDiagonalPreconditioner<CRDoubleMatrix>*
    f_prec_pt = new BlockDiagonalPreconditioner<CRDoubleMatrix>;
+
+#ifdef OOMPH_HAS_HYPRE
+
   f_prec_pt->set_subsidiary_preconditioner_function
    (LSC_Preconditioner_Helper::set_hypre_preconditioner);
+
+#endif
+
   ns_prec_pt->set_f_preconditioner(f_prec_pt);
+
   
+#ifdef OOMPH_HAS_HYPRE
+
   // ns pressure poisson
   HyprePreconditioner* p_prec_pt = new HyprePreconditioner;
   p_prec_pt->set_amg_iterations(2);
@@ -1666,6 +1690,8 @@ set_pseudo_elastic_fsi_solver()
   p_prec_pt->amg_coarsening() = 6; 
   p_prec_pt->disable_doc_time();
   ns_prec_pt->set_p_preconditioner(p_prec_pt);
+
+#endif
   
   // and pass prec to solver and solver to problem
   solver_pt->preconditioner_pt() = prec_pt;
