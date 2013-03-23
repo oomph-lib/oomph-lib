@@ -263,6 +263,9 @@ if (test -d  $build_dir); then
        echo " "
        ls -l  $build_dir
        echo " "
+       echo "What you should see above are the include and lib directories, "
+       echo "nothing else! "
+       echo " "
        OptionPrompt "Are you still sure you want to wipe it [y/n -- default: n]"
        reply2=`OptionRead`
        if test "$reply2" = "y" -o "$reply2" = "Y" ; then 

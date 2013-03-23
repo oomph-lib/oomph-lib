@@ -29,7 +29,7 @@ mkdir RESLT_proc1
 # the existence of the new directory
 sleep 5
 
-$MPI_RUN_COMMAND ../pseudo_solid_collapsible_tube validate > OUTPUT
+$MPI_RUN_COMMAND ../pseudo_solid_collapsible_tube --validate  > OUTPUT
 echo "done"
 echo " " >> validation.log
 echo "Pseudo-elastic collapsible tube validation" >> validation.log

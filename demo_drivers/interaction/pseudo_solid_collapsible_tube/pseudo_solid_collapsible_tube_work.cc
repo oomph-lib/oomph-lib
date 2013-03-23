@@ -42,7 +42,7 @@
 using namespace std;
 using namespace oomph;
 
-
+//#define DISTRIBUTE
 
 namespace oomph {
 
@@ -189,17 +189,11 @@ namespace Real_Solid_Preconditioner_Helper
   hypre_preconditioner_pt->amg_strength() = 0.25;
   hypre_preconditioner_pt->amg_coarsening() = 6;
   hypre_preconditioner_pt->disable_doc_time();
-  return hypre_preconditioner_pt;
+  return hypre_preconditioner_pt;;
  }
 }
 
 #endif
-
-////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
-
-
 
 
 //=========================================================================
@@ -220,7 +214,7 @@ public:
     RefineableSimpleCubicMesh<ELEMENT>(nr,nphi,nz,1.0,1.0,lz,time_stepper_pt)
   {
 
-   // Important: Currently wall mesh will not refine
+   // hierher: Important: Currently wall mesh will not refine
    // towards cylindrical geometry! Need Domain!
 
    // move the nodes
@@ -453,13 +447,14 @@ public:
   {
    delete Fluid_time_stepper_pt;
    delete Wall_pt;
-   delete Wall_time_stepper_pt;
+   delete Wall_time_stepper_pt; 
    delete Fluid_mesh_pt->spatial_error_estimator_pt();
    delete Fluid_mesh_pt;
    delete Solid_mesh_pt->spatial_error_estimator_pt();
    delete Solid_mesh_pt;
    delete Solid_fsi_traction_mesh_pt;
    delete Lagrange_multiplier_mesh_pt;
+   delete Solid_fsi_boundary_pt;
    delete Solid_traction_mesh_pt;
   }
 
@@ -506,6 +501,8 @@ public:
  /// After adapt: Rebuild face element submeshes and re-setup FSI
  void actions_after_adapt();
 
+#ifdef DISTRIBUTE
+
  /// \short Before distribute: Flush face submeshes and keep all
  /// solid elements adjacent to the fluid as halos.
  void actions_before_distribute();
@@ -514,13 +511,10 @@ public:
  /// FSI
  void actions_after_distribute();
 
+#endif
+
  /// Helper function to delete elements from a mesh
  void empty_mesh(Mesh* const &surface_mesh_pt);
-
-
-/// Switch to GMRES preconditioned with the pseudo-elastic 
-/// FSI preconditioner
- void set_pseudo_elastic_fsi_solver();
 
  /// Doc parameters
  void doc_parameters()
@@ -573,6 +567,10 @@ private:
 
  /// Solid traction elements (prescibed external pressure on solid wall)
  SolidMesh* Solid_traction_mesh_pt;
+
+ /// GeomObject incarnations of the FSI boundary in the solid mesh
+ MeshAsGeomObject*
+ Solid_fsi_boundary_pt;
 
  /// \short Geometric Object defining the undeformed boundary of the
  /// fluid mesh
@@ -639,7 +637,7 @@ PseudoElasticCollapsibleChannelProblem()
   
 
  // Setup error estimator
- if (!CommandLineArgs::command_line_flag_has_been_set("--validate"))
+ if (CommandLineArgs::Argc==1)
   {
    Fluid_mesh_pt->spatial_error_estimator_pt()=new Z2ErrorEstimator;
    Fluid_mesh_pt->max_permitted_error()=0.004;
@@ -675,16 +673,16 @@ PseudoElasticCollapsibleChannelProblem()
  unsigned nphi=2; 
  unsigned nz=Global_Parameters::N_slice;
  // Try non-matching discretisation if validation
- if (CommandLineArgs::command_line_flag_has_been_set("--validate"))
+ if (CommandLineArgs::Argc!=1)
   {
-   nz=unsigned(double(nz)*1.5);
+   nz*=1.5;
   }
  Solid_mesh_pt = new WallMesh<SOLID_ELEMENT>(r_min,r_max,lz,
                                              nr,nphi,nz,Wall_time_stepper_pt);
  
 
  // Setup error estimator
- if (!CommandLineArgs::command_line_flag_has_been_set("--validate"))
+ if (CommandLineArgs::Argc==1)
   {
    Solid_mesh_pt->spatial_error_estimator_pt()=new Z2ErrorEstimator;
    Solid_mesh_pt->max_permitted_error()=0.21;
@@ -718,6 +716,8 @@ PseudoElasticCollapsibleChannelProblem()
  
  // Create elements
  Lagrange_multiplier_mesh_pt = new SolidMesh;
+ //initialise pointer to solid boundary
+ Solid_fsi_boundary_pt=0;
  create_lagrange_multiplier_elements();
 
  // Create solid traction elements for external pressure
@@ -907,8 +907,9 @@ PseudoElasticCollapsibleChannelProblem()
  // pointers to the meshes. 
    
  //Doc boundary coordinates in fluid
- Multi_domain_functions::Doc_boundary_coordinate_file.open(
- 	"RESLT/fluid_boundary_coordinates.dat");
+ char filename[100];
+ sprintf(filename,"RESLT/fluid_boundary_coordinates.dat");
+ Multi_domain_functions::Doc_boundary_coordinate_file.open(filename);
  
  // Setup FSI: Pass ID of fluid FSI boundary and associated
  // mesh of solid fsi traction elements.
@@ -990,113 +991,6 @@ create_fsi_traction_elements()
 } // end of create_fsi_traction_elements
 
 
-//============start_of_create_lagrange_multiplier_elements===============
-/// Create elements that impose the prescribed boundary displacement
-/// for the pseudo-solid fluid mesh
-//=======================================================================
-template<class FLUID_ELEMENT, class SOLID_ELEMENT>
-void PseudoElasticCollapsibleChannelProblem<FLUID_ELEMENT,SOLID_ELEMENT>::
-create_lagrange_multiplier_elements()
-{
- // Create Lagrange multiplier elements on boundary 3 of fluid mesh
- unsigned b=3;
- 
- // How many bulk fluid elements are adjacent to boundary b?
- unsigned n_element = Fluid_mesh_pt->nboundary_element(b);
- 
- // Loop over the bulk fluid elements adjacent to boundary b 
- // to create elements
- for(unsigned e=0;e<n_element;e++)
-  {
-   // Get pointer to the bulk fluid element that is adjacent to boundary b
-   FLUID_ELEMENT* bulk_elem_pt = dynamic_cast<FLUID_ELEMENT*>(
-    Fluid_mesh_pt->boundary_element_pt(b,e));
-   
-   //Find the index of the face of element e along boundary b
-   int face_index = Fluid_mesh_pt->face_index_at_boundary(b,e);
-   
-   // Create new element
-   RefineableFSIImposeDisplacementByLagrangeMultiplierElement<FLUID_ELEMENT>* 
-    el_pt =
-    new RefineableFSIImposeDisplacementByLagrangeMultiplierElement
-    <FLUID_ELEMENT>(bulk_elem_pt,face_index);
-   
-   // Add it to the mesh
-   Lagrange_multiplier_mesh_pt->add_element_pt(el_pt);
-   
-   // Specify boundary number
-   el_pt->set_boundary_number_in_bulk_mesh(b);
-  }
- 
- 
- // Locate bulk solid elements next to boundary b_solid_fsi (the FSI boundary) 
- // in the mesh pointed to by Solid_mesh_pt that drive the deformation of the 
- // pseudo-solid fluid mesh via the Lagrange multiplier elements
- // stored in Lagrange_multiplier_mesh_pt
- unsigned b_solid=4;
- FSI_functions::setup_solid_elements_for_displacement_bc<SOLID_ELEMENT,3>
-  (this,b_solid,Solid_mesh_pt,Lagrange_multiplier_mesh_pt);
- 
- // Loop over the bulk fluid elements adjacent to boundary b
- // to apply boundary conditions
- for(unsigned e=0;e<n_element;e++)
-  {
-   // Get element
-   RefineableFSIImposeDisplacementByLagrangeMultiplierElement<FLUID_ELEMENT>* 
-    el_pt=
-    dynamic_cast<RefineableFSIImposeDisplacementByLagrangeMultiplierElement
-    <FLUID_ELEMENT>*>(
-     Lagrange_multiplier_mesh_pt->finite_element_pt(e));
-   
-   // Loop over the nodes 
-   unsigned nnod=el_pt->nnode();
-   for (unsigned i=0;i<nnod;i++)
-    {
-     // How many nodal values were used by the "bulk" element
-     // that originally created this node?
-     unsigned n_bulk_value=el_pt->nbulk_value(i);
-     Node* node_pt = el_pt->node_pt(i);
-     
-     // The remaining ones are Lagrange multipliers and we pin them.
-     unsigned nval=node_pt->nvalue();
-     for (unsigned j=n_bulk_value;j<nval;j++)
-      {
-       // Direction of Lagrange multiplier force
-       int d=j-n_bulk_value;
-       
-       
-       // Boundary 0 (inflow): Pseudo-solid displacement is fixed so pin
-       // all Lagrange multipliers
-       if (node_pt->is_on_boundary(0))
-        {
-         if (d==0||d==1||d==2) node_pt->pin(j);
-        }
-       // Boundary 1 (symm BC, x=const.): Pseudo-solid displacement is 
-       // fixed in x-direction so pin corresponding Lagrange multiplier
-       if (node_pt->is_on_boundary(1))
-        {
-         if (d==0) node_pt->pin(j);
-        }
-       // Boundary 2 (symm BC, y=const.): Pseudo-solid displacement is 
-       // fixed in y-direction so pin corresponding Lagrange multiplier
-       if (node_pt->is_on_boundary(2))
-        {
-         if (d==1) node_pt->pin(j);
-        }
-       // Boundary 4 (outflow): Pseudo-solid displacement is fixed so pin
-       // all Lagrange multipliers
-       if (node_pt->is_on_boundary(4))
-        {
-         if (d==0||d==1||d==2) node_pt->pin(j);
-        }
-      }       
-    }
-  }
-
-} // end of create_lagrange_multiplier_elements
-
-
-
 //==================start_of_create_solid_traction_elements===============
 /// Create face elements that apply external pressure load onto
 /// wall
@@ -1133,6 +1027,96 @@ create_solid_traction_elements()
    Solid_traction_mesh_pt->add_element_pt(el_pt);
   }
 }
+
+//============start_of_create_lagrange_multiplier_elements===============
+/// Create elements that impose the prescribed boundary displacement
+/// for the pseudo-solid fluid mesh
+//=======================================================================
+template<class FLUID_ELEMENT, class SOLID_ELEMENT>
+void PseudoElasticCollapsibleChannelProblem<FLUID_ELEMENT,SOLID_ELEMENT>::
+create_lagrange_multiplier_elements()
+{
+ // boundary 3 of fluid mesh
+ unsigned b=3;
+
+ // create the geom object for the wall
+ //delete existing object, if it already exists
+ if(Solid_fsi_boundary_pt!=0) {delete Solid_fsi_boundary_pt;}
+ //Now create new object
+ Solid_fsi_boundary_pt= new MeshAsGeomObject(Solid_fsi_traction_mesh_pt);
+
+ // How many bulk fluid elements are adjacent to boundary b?
+ unsigned n_element = Fluid_mesh_pt->nboundary_element(b);
+   
+ // Loop over the bulk fluid elements adjacent to boundary b?
+ for(unsigned e=0;e<n_element;e++)
+  {
+   // Get pointer to the bulk fluid element that is adjacent to boundary b
+   FLUID_ELEMENT* bulk_elem_pt = dynamic_cast<FLUID_ELEMENT*>(
+    Fluid_mesh_pt->boundary_element_pt(b,e));
+   
+   //Find the index of the face of element e along boundary b
+   int face_index = Fluid_mesh_pt->face_index_at_boundary(b,e);
+   
+   // Create new element
+   RefineableImposeDisplacementByLagrangeMultiplierElement<FLUID_ELEMENT>* 
+    el_pt =
+    new  RefineableImposeDisplacementByLagrangeMultiplierElement<FLUID_ELEMENT>(
+     bulk_elem_pt,face_index);
+   
+   // Add it to the mesh
+   Lagrange_multiplier_mesh_pt->add_element_pt(el_pt);
+   
+   // Set the GeomObject that defines the boundary shape and set
+   // which bulk boundary we are attached to (needed to extract
+   // the boundary coordinate from the bulk nodes)
+   el_pt->set_boundary_shape_geom_object_pt(Solid_fsi_boundary_pt,b);
+
+   // Loop over the nodes 
+   unsigned nnod=el_pt->nnode();
+   for (unsigned i=0;i<nnod;i++)
+    {
+     // How many nodal values were used by the "bulk" element
+     // that originally created this node?
+     unsigned n_bulk_value=el_pt->nbulk_value(i);
+     Node* node_pt = el_pt->node_pt(i);
+
+     // The remaining ones are Lagrange multipliers and we pin them.
+     unsigned nval=node_pt->nvalue();
+     for (unsigned j=n_bulk_value;j<nval;j++)
+      {
+       // Direction of Lagrange multiplier force
+       int d=j-n_bulk_value;
+
+
+       // Boundary 0 (inflow): Pseudo-solid displacement is fixed so pin
+       // all Lagrange multipliers
+       if (node_pt->is_on_boundary(0))
+        {
+         if (d==0||d==1||d==2) node_pt->pin(j);
+        }
+       // Boundary 1 (symm BC, x=const.): Pseudo-solid displacement is 
+       // fixed in x-direction so pin corresponding Lagrange multiplier
+       if (node_pt->is_on_boundary(1))
+        {
+         if (d==0) node_pt->pin(j);
+        }
+       // Boundary 2 (symm BC, y=const.): Pseudo-solid displacement is 
+       // fixed in y-direction so pin corresponding Lagrange multiplier
+       if (node_pt->is_on_boundary(2))
+        {
+         if (d==1) node_pt->pin(j);
+        }
+       // Boundary 4 (outflow): Pseudo-solid displacement is fixed so pin
+       // all Lagrange multipliers
+       if (node_pt->is_on_boundary(4))
+        {
+         if (d==0||d==1||d==2) node_pt->pin(j);
+        }
+      }       
+    }
+  }
+} // end of create_lagrange_multiplier_elements
 
 //===========================================================================
 /// Flush mesh of face elements.
@@ -1187,7 +1171,7 @@ void PseudoElasticCollapsibleChannelProblem<FLUID_ELEMENT,SOLID_ELEMENT>
 
  // Rebuild the global mesh
  rebuild_global_mesh();
-
+ 
  // Unpin all pressure dofs
  RefineableNavierStokesEquations<3>::
   unpin_all_pressure_dofs(Fluid_mesh_pt->element_pt());
@@ -1250,6 +1234,9 @@ void PseudoElasticCollapsibleChannelProblem<FLUID_ELEMENT,SOLID_ELEMENT>
 } 
 
 
+#ifdef DISTRIBUTE
+
+
 //===========================================================================
 /// Retain all bulk solid elements adjacent to fluid mesh as halos
 /// then remove face-elements from problem.
@@ -1258,6 +1245,23 @@ template<class FLUID_ELEMENT, class SOLID_ELEMENT>
 void PseudoElasticCollapsibleChannelProblem<FLUID_ELEMENT,SOLID_ELEMENT>
 ::actions_before_distribute()
 {
+ // Loop over elements in traction meshes
+ unsigned n_element=Solid_fsi_traction_mesh_pt->nelement();
+ for (unsigned e=0;e<n_element;e++)
+  {
+   RefineableFSISolidTractionElement<SOLID_ELEMENT,3>* traction_elem_pt=
+    dynamic_cast<RefineableFSISolidTractionElement<SOLID_ELEMENT,3>* >
+    (Solid_fsi_traction_mesh_pt->element_pt(e));
+
+   // Get the bulk element (which is a SOLID_ELEMENT)
+   SOLID_ELEMENT* solid_elem_pt = dynamic_cast<SOLID_ELEMENT*>
+    (traction_elem_pt->bulk_element_pt());
+
+   // Require bulk to be kept as a (possible) halo element
+   // Note: The traction element itself will "become" a halo element 
+   // when it is recreated after the distribution has taken place
+   solid_elem_pt->set_must_be_kept_as_halo();
+  }
 
  // Flush all the submeshes out but keep the meshes of 
  // RefineableFSISolidTractionElements alive (i.e. don't delete them)
@@ -1318,6 +1322,8 @@ void PseudoElasticCollapsibleChannelProblem<FLUID_ELEMENT,SOLID_ELEMENT>
      FSI_functions::apply_no_slip_on_moving_wall);
   }
 } 
+
+#endif
 
 
 //============start_of_empty_mesh========================================
@@ -1383,7 +1389,9 @@ doc_solid_boundary_coordinates()
 {
  
  //Doc boundary coordinates in fluid
- std::ofstream the_file("RESLT/solid_boundary_coordinates.dat");
+ char filename[100];
+ sprintf(filename,"RESLT/solid_boundary_coordinates.dat");
+ std::ofstream the_file(filename);
  
  // Loop over traction elements
  unsigned n_face_element = Solid_fsi_traction_mesh_pt->nelement();
@@ -1436,8 +1444,11 @@ template<class FLUID_ELEMENT, class SOLID_ELEMENT>
 void PseudoElasticCollapsibleChannelProblem<FLUID_ELEMENT,SOLID_ELEMENT>::
 doc_solution(DocInfo& doc_info)
 { 
- std::ofstream some_file;
- std::ostringstream filename;
+
+ if (this->communicator_pt()->my_rank()!=0) return;
+
+ ofstream some_file;
+ char filename[100];
 
  // Number of plot points
  unsigned npts;
@@ -1445,68 +1456,62 @@ doc_solution(DocInfo& doc_info)
  
  // Output solid boundaries
  //------------------------
- filename << doc_info.directory() << "/solid_boundaries"
-          << doc_info.number() << ".dat";
- some_file.open(filename.str().c_str());
+ sprintf(filename,"%s/solid_boundaries%i.dat",doc_info.directory().c_str(),
+         doc_info.number());
+ some_file.open(filename);
  Solid_mesh_pt->output_boundaries(some_file);
  some_file.close();
  
  
  // Output solid solution
  //-----------------------
- filename.str("");
- filename << doc_info.directory() << "/solid_soln"
-          << doc_info.number() << ".dat";
- some_file.open(filename.str().c_str());
+ sprintf(filename,"%s/solid_soln%i.dat",doc_info.directory().c_str(),
+         doc_info.number());
+ some_file.open(filename);
  Solid_mesh_pt->output(some_file,npts);
  some_file.close();
 
  
  // Output fluid boundaries
  //------------------------
- filename.str("");
- filename << doc_info.directory() << "/fluid_boundaries"
-          << doc_info.number() << ".dat";
- some_file.open(filename.str().c_str());
+ sprintf(filename,"%s/fluid_boundaries%i.dat",doc_info.directory().c_str(),
+         doc_info.number());
+ some_file.open(filename);
  Fluid_mesh_pt->output_boundaries(some_file);
  some_file.close();
  
  
  // Output fluid solution
  //-----------------------
- filename.str("");
- filename << doc_info.directory() << "/fluid_soln"
-          << doc_info.number() << ".dat";
- some_file.open(filename.str().c_str());
+ sprintf(filename,"%s/fluid_soln%i.dat",doc_info.directory().c_str(),
+         doc_info.number());
+ some_file.open(filename);
  Fluid_mesh_pt->output(some_file,npts);
  some_file.close();
   
    
  // Output fsi traction
  //--------------------
- filename.str("");
- filename << doc_info.directory() << "/fsi_traction"
-          << doc_info.number() << ".dat";
- some_file.open(filename.str().c_str());
+ sprintf(filename,"%s/fsi_traction%i.dat",doc_info.directory().c_str(),
+         doc_info.number());
+ some_file.open(filename);
  Solid_fsi_traction_mesh_pt->output(some_file,npts);
  some_file.close();
 
  // Output fsi traction
  //--------------------
- filename.str("");
- filename << doc_info.directory() << "/solid_traction"
-          << doc_info.number() << ".dat";
- some_file.open(filename.str().c_str());
+ sprintf(filename,"%s/solid_traction%i.dat",doc_info.directory().c_str(),
+         doc_info.number());
+ some_file.open(filename);
  Solid_traction_mesh_pt->output(some_file,npts);
  some_file.close();
 
 
  // Output Lagrange multipliers
  //----------------------------
- filename.str("");
- filename << doc_info.directory() << "/lagrange"
-          << doc_info.number() << ".dat";
- some_file.open(filename.str().c_str());
+ sprintf(filename,"%s/lagrange%i.dat",doc_info.directory().c_str(),
+         doc_info.number());
+ some_file.open(filename);
  Lagrange_multiplier_mesh_pt->output(some_file,npts);
  some_file.close();
 
@@ -1537,7 +1542,7 @@ steady_run(DocInfo& doc_info)
    Global_Parameters::P+=p_increment;
 
    cout << "Doing steady solve: " << count << std::endl;
-   if (CommandLineArgs::command_line_flag_has_been_set("--validate"))
+   if (CommandLineArgs::Argc!=1)
     {
      this->steady_newton_solve();
     }
@@ -1550,7 +1555,7 @@ steady_run(DocInfo& doc_info)
    this->doc_solution(doc_info);
    doc_info.number()++;
    count++;
-   if (CommandLineArgs::command_line_flag_has_been_set("--validate"))
+   if (CommandLineArgs::Argc!=1)
     {
      oomph_info << "Just doing one steady solve during validation.\n";
      break;
@@ -1570,7 +1575,7 @@ unsteady_run(DocInfo& doc_info)
 
  // Set number of timesteps
  unsigned nstep=Global_Parameters::Nstep_per_period*Global_Parameters::Nperiod;
- if (CommandLineArgs::command_line_flag_has_been_set("--validate"))
+ if (CommandLineArgs::Argc!=1)
   {
    oomph_info << "Just doing one timestep during validation.\n";
    nstep=1;
@@ -1589,94 +1594,96 @@ unsteady_run(DocInfo& doc_info)
 }
 
 
+// typdef problem to shorten
+typedef PseudoElasticCollapsibleChannelProblem<
+ RefineablePseudoSolidNodeUpdateElement<RefineableQTaylorHoodElement<3>, 
+                                        PseudoElasticBulkElement<RefineableQPVDElement<3,3> > >,RefineableQPVDElement<3,3> > PseudoElasticFSIProblem;
+
+
 //==============================================================================
-/// Switch to GMRES preconditioned with the pseudo-elastic 
+/// helper method to return GMRES preconditioned with the pseudo-elastic 
 /// FSI preconditioner
 //==============================================================================
-template<class FLUID_ELEMENT, class SOLID_ELEMENT>
-void PseudoElasticCollapsibleChannelProblem<FLUID_ELEMENT,SOLID_ELEMENT>::
-set_pseudo_elastic_fsi_solver()
+void set_pseudo_elastic_fsi_solver(PseudoElasticFSIProblem& problem)
 {
-
 //setup the solver
+
 #ifdef OOMPH_HAS_TRILINOS
-  
-  TrilinosAztecOOSolver* solver_pt = new
-   TrilinosAztecOOSolver;
-  solver_pt->solver_type() = TrilinosAztecOOSolver::GMRES;
-  
+
+TrilinosAztecOOSolver* solver_pt = new
+ TrilinosAztecOOSolver;
+solver_pt->solver_type() = TrilinosAztecOOSolver::GMRES;
+
 #else
-  
-  GMRES<CRDoubleMatrix>* solver_pt = new GMRES<CRDoubleMatrix>;
-  
+
+ GMRES<CRDoubleMatrix>* solver_pt = new GMRES<CRDoubleMatrix>;
+
 #endif
-  
-  solver_pt->tolerance()=1e-8;
-  
-  // preconditioner
-  PseudoElasticFSIPreconditioner* prec_pt = new
-   PseudoElasticFSIPreconditioner(3,this);
-  
+
+ solver_pt->tolerance()=1e-8;
+
+ // preconditioner
+ PseudoElasticFSIPreconditioner* prec_pt = new
+  PseudoElasticFSIPreconditioner(3, &problem);
+
  // meshes
-  prec_pt->set_fluid_and_pseudo_elastic_mesh_pt(fluid_mesh_pt());
-  prec_pt->set_solid_mesh_pt(wall_mesh_pt());
-  prec_pt->set_lagrange_multiplier_mesh_pt(lagrange_multiplier_mesh_pt());
-  
-  // inexact pseudo-solid preconditioning
-  prec_pt->pseudo_elastic_preconditioner_pt()->elastic_preconditioner_type()
-   = PseudoElasticPreconditioner::
-   Block_upper_triangular_preconditioner;
-  prec_pt->pseudo_elastic_preconditioner_pt()
-   ->set_elastic_subsidiary_preconditioner
-   (Pseudo_Elastic_Preconditioner_Subsidiary_Operator_Helper
-    ::get_elastic_preconditioner);
+ prec_pt->set_fluid_and_pseudo_elastic_mesh_pt(problem.fluid_mesh_pt());
+ prec_pt->set_solid_mesh_pt(problem.wall_mesh_pt());
+ prec_pt->set_lagrange_multiplier_mesh_pt(
+  problem.lagrange_multiplier_mesh_pt());
 
-  prec_pt->pseudo_elastic_preconditioner_pt()
-   ->set_lagrange_multiplier_subsidiary_preconditioner
-   (Pseudo_Elastic_Preconditioner_Subsidiary_Operator_Helper
-    ::get_lagrange_multiplier_preconditioner);
-  
-  // inexact "real" solid preconditioning
-  BlockTriangularPreconditioner<CRDoubleMatrix>*
-   solid_prec_pt = new BlockTriangularPreconditioner<CRDoubleMatrix>;
-  prec_pt->set_solid_preconditioner(solid_prec_pt);
-  solid_prec_pt->set_subsidiary_preconditioner_function
-   (Real_Solid_Preconditioner_Helper::get_preconditioner);
-  
-  // inexact navier stokes preconditioning
-  NavierStokesSchurComplementPreconditioner*
-   ns_prec_pt = prec_pt->navier_stokes_schur_complement_preconditioner_pt();
-  prec_pt->enable_navier_stokes_schur_complement_preconditioner();
-  
-  // ns momentum
-  BlockDiagonalPreconditioner<CRDoubleMatrix>*
-   f_prec_pt = new BlockDiagonalPreconditioner<CRDoubleMatrix>;
-  f_prec_pt->set_subsidiary_preconditioner_function
-   (LSC_Preconditioner_Helper::set_hypre_preconditioner);
-  ns_prec_pt->set_f_preconditioner(f_prec_pt);
-  
-  // ns pressure poisson
-  HyprePreconditioner* p_prec_pt = new HyprePreconditioner;
-  p_prec_pt->set_amg_iterations(2);
-  p_prec_pt->amg_using_simple_smoothing();
-  p_prec_pt->amg_simple_smoother() = 3;
-  p_prec_pt->hypre_method() = HyprePreconditioner::BoomerAMG;
-  p_prec_pt->amg_strength() = 0.25;
-  // Use 6 for parallel (Falgout) or 3 (Ruge Stuben) for serial
-  p_prec_pt->amg_coarsening() = 6; 
-  p_prec_pt->disable_doc_time();
-  ns_prec_pt->set_p_preconditioner(p_prec_pt);
-  
-  // and pass prec to solver and solver to problem
-  solver_pt->preconditioner_pt() = prec_pt;
-  linear_solver_pt() = solver_pt;
- }
+ // hierher start
+
+ // inexact pseudo-solid preconditioning
+ prec_pt->pseudo_elastic_preconditioner_pt()->elastic_preconditioner_type()
+  = PseudoElasticPreconditioner::
+  Block_upper_triangular_preconditioner;
+ prec_pt->pseudo_elastic_preconditioner_pt()
+  ->set_elastic_subsidiary_preconditioner
+  (Pseudo_Elastic_Preconditioner_Subsidiary_Operator_Helper
+   ::get_elastic_preconditioner);
+ prec_pt->pseudo_elastic_preconditioner_pt()
+  ->set_lagrange_multiplier_subsidiary_preconditioner
+  (Pseudo_Elastic_Preconditioner_Subsidiary_Operator_Helper
+   ::get_lagrange_multiplier_preconditioner);
  
-////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
+ // inexact "real" solid preconditioning
+ BlockTriangularPreconditioner<CRDoubleMatrix>*
+  solid_prec_pt = new BlockTriangularPreconditioner<CRDoubleMatrix>;
+ prec_pt->set_solid_preconditioner(solid_prec_pt);
+ solid_prec_pt->set_subsidiary_preconditioner_function
+  (Real_Solid_Preconditioner_Helper::get_preconditioner);
 
+ // inexact navier stokes preconditioning
+  NavierStokesSchurComplementPreconditioner*
+  ns_prec_pt = prec_pt->navier_stokes_schur_complement_preconditioner_pt();
+ prec_pt->enable_navier_stokes_schur_complement_preconditioner();
 
+ // ns momentum
+ BlockDiagonalPreconditioner<CRDoubleMatrix>*
+  f_prec_pt = new BlockDiagonalPreconditioner<CRDoubleMatrix>;
+ f_prec_pt->set_subsidiary_preconditioner_function
+  (LSC_Preconditioner_Helper::set_hypre_preconditioner);
+ ns_prec_pt->set_f_preconditioner(f_prec_pt);
+
+ // ns pressure poisson
+ HyprePreconditioner* p_prec_pt = new HyprePreconditioner;
+ p_prec_pt->set_amg_iterations(2);
+ p_prec_pt->amg_using_simple_smoothing();
+ p_prec_pt->amg_simple_smoother() = 3;
+ p_prec_pt->hypre_method() = HyprePreconditioner::BoomerAMG;
+ p_prec_pt->amg_strength() = 0.25;
+ // Use 6 for parallel (Falgout) or 3 (Ruge Stuben)or serial
+ p_prec_pt->amg_coarsening() = 6; 
+ p_prec_pt->disable_doc_time();
+ ns_prec_pt->set_p_preconditioner(p_prec_pt);
+ 
+ // hierher end
+
+ // and pass prec to solver and solver to problem
+ solver_pt->preconditioner_pt() = prec_pt;
+ problem.linear_solver_pt() = solver_pt;
+}
 
 //========================= start_of_main=================================
 /// Demonstrate how to solve a 3D FSI problem with pseudo-solid
@@ -1684,28 +1691,13 @@ set_pseudo_elastic_fsi_solver()
 //========================================================================
 int main(int argc, char* argv[])                                        
 {       
-                                                                
+                                  
 #ifdef OOMPH_HAS_MPI                                                    
-   MPI_Helpers::init(argc,argv);                                          
+ MPI_Helpers::init(argc,argv,false);                                          
 #endif         
- 
+
  // Store command line arguments
  CommandLineArgs::setup(argc,argv);
-
- // Define possible command line arguments and parse the ones that
- // were actually specified
- 
- // Validation run?
- CommandLineArgs::specify_command_line_flag("--validate");
- 
- // Use iterative solver?
- CommandLineArgs::specify_command_line_flag("--use_iterative_solver");
-  
- // Doc available command line flags
- CommandLineArgs::doc_available_flags();
-
- // Parse command line
- CommandLineArgs::parse_and_assign(); 
 
  // Create generalised Hookean constitutive equations
  Global_Parameters::Constitutive_law_wall_pt = 
@@ -1714,52 +1706,13 @@ int main(int argc, char* argv[])
 Global_Parameters::Constitutive_law_pseudo_elastic_pt = 
   new GeneralisedHookean(&Global_Parameters::Nu_pseudo_elastic);
 
-//Set up the problem
-PseudoElasticCollapsibleChannelProblem
- <RefineablePseudoSolidNodeUpdateElement
-  <RefineableQTaylorHoodElement<3>, 
-   PseudoElasticBulkElement<RefineableQPVDElement<3,3> > >,
-  RefineableQPVDElement<3,3> >  problem; 
+ //Set up the problem
+ PseudoElasticFSIProblem problem; 
 
  // Doc info
  DocInfo doc_info;
+ doc_info.set_directory("RESLT");
 
- // Use separate directory for output from each processor
- std::ostringstream dir_name;
- dir_name << "RESLT_proc" << MPI_Helpers::communicator_pt()->my_rank();
- doc_info.set_directory(dir_name.str());
-
-#ifdef OOMPH_HAS_MPI
- // Distribute the problem
- oomph_info << "Problem is being distributed." << std::endl;
-
- // Validation: manufacture distribution so that domain is split in two in a 
- // controllable way
- if (CommandLineArgs::command_line_flag_has_been_set("--validate"))
-  {
-   unsigned nel=problem.mesh_pt()->nelement();
-   Vector<unsigned> element_partition(nel);
-   for (unsigned e=0;e<nel;e++)
-    {
-     if (problem.mesh_pt()->finite_element_pt(e)->node_pt(0)->x(2)<
-         0.5*Global_Parameters::L)
-      {
-       element_partition[e]=0;
-      }
-     else
-      {
-       element_partition[e]=1;
-      }
-    }
-   problem.distribute(element_partition);
-  }
- // Use METIS to determine the partitioning
- else
-  {
-   problem.distribute(); 
-  }
- oomph_info << "Problem has been distributed." << std::endl;
-#endif
  // Doc initial configuration
  problem.doc_solution(doc_info);
  oomph_info << "Before manual refine: doc_info.number()=" 
@@ -1767,7 +1720,7 @@ PseudoElasticCollapsibleChannelProblem
  doc_info.number()++;
 
  // Do manual non-uniform refinement
- if (CommandLineArgs::command_line_flag_has_been_set("--validate"))
+ if (CommandLineArgs::Argc!=1)
   {
    problem.adapt(); 
   }
@@ -1784,16 +1737,10 @@ PseudoElasticCollapsibleChannelProblem
  problem.initialise_dt(dt);
  problem.set_initial_condition();
 
-
- // Switch solver if required
- if (CommandLineArgs::command_line_flag_has_been_set("--use_iterative_solver"))
+  // set
+ if (CommandLineArgs::Argc>2) 
   {
-   oomph_info << "switching to iterative solver\n";
-   problem.set_pseudo_elastic_fsi_solver();
-  }
- else
-  {
-   oomph_info << "Using direct solver\n";
+   set_pseudo_elastic_fsi_solver(problem);
   }
 
  // Steady run
@@ -1802,9 +1749,11 @@ PseudoElasticCollapsibleChannelProblem
  // Unteady run
  problem.unsteady_run(doc_info);
 
-                                                         
-#ifdef OOMPH_HAS_MPI                                                    
- MPI_Helpers::finalize();
-#endif         
- 
+ // // clean up
+ // if (CommandLineArgs::Argc>2) 
+ //  {
+ //   IterativeLinearSolver* solver_pt = dynamic_cast<IterativeLinearSolver*>(problem.linear_solver_pt());
+ //   delete solver_pt->preconditioner_pt();
+ //   delete solver_pt;
+ //  }
 } // end_of_main
