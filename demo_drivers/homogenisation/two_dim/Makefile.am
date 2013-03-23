@@ -7,7 +7,7 @@ check_PROGRAMS=two_dim
 # Sources for executable
 two_dim_SOURCES = homo_lin_elasticity_elements.h \
 homo_lin_elasticity_elements.cc  Thomo_lin_elasticity_elements.h \
-Thomo_lin_elasticity_elements.cc homo_lin_elasticity_traction_elemetns.h \
+Thomo_lin_elasticity_elements.cc homo_lin_elasticity_traction_elements.h \
 two_dim.cc 
 
 # Required libraries:
