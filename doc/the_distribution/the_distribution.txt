@@ -20,14 +20,15 @@ The latest version of the library is 0.90.
    -# \ref external_dist
       -# \ref hypre
       -# \ref trilinos
+      -# \ref mumps
       .
    .
 -# \ref own
-  -# \ref have_auto_fuck
+  -# \ref have_auto_tools
     -# \ref add_driver
     -# \ref add_src
     .
-  -# \ref dont_have_auto_fuck
+  -# \ref dont_have_auto_tools
   .
 .
 
@@ -413,8 +414,11 @@ typically because they are too big and/or take (too?) long to build.
 they are available and their location is specified during the
 configuration stage (or if the appropriate tar file 
 is dropped into the required directory in which case \c oomph-lib's
-build process will build and install the library for you).
-
+build process will build and install the library for you). In the
+latter case, the compiler flags used to build \c oomph-lib will
+be passed directly to the third-party libraries, so you may wish to compile
+the libraries separately if you wish to specify different compiler
+flags, e.g. no debugging information.
 
 
 \subsection external_src External (third-party) libraries that are distributed with oomph-lib
@@ -518,7 +522,7 @@ preserve it for future use. Once this is done you simply specify the
 (new) location of the library with the \c --with-hypre flag, as 
 discussed above. (Also make sure to delete the tar file
 from \c external_distributions/hypre, otherwise the library
-will be re-built again.) Note that \c make \c clean will delete the
+will be re-built.) Note that \c make \c clean will delete the
 unpacked \c Hypre sources but not the tar file and the library itself.
 
 
@@ -584,7 +588,7 @@ preserve it for future use. Once this is done you simply specify the
 (new) location of the library with the \c --with-trilinos flag, as 
 discussed above. (Also make sure to delete the tar file from
 \c external_distributions/trilinos, otherwise the library
-will be re-built again.) Note that \c make \c clean will delete the
+will be re-built.) Note that \c make \c clean will delete the
 unpacked \c Trilinos sources but not the tar file and the library itself.
 
 
@@ -609,6 +613,85 @@ instance.
 
 <HR>
 
+
+\subsubsection mumps MUMPS and ScaLAPACK
+
+\c oomph-lib also provides wrappers to the 
+<a href="http://graal.ens-lyon.fr/MUMPS/"> MUMPS
+</a> multifronal solver, if it is available on your system. 
+\c MUMPS needs the linear algebra library
+<a
+href="http://www.netlib.org/scalapack/"> 
+ ScaLAPACK </a> which must also be installed on your system.
+The
+configure options
+\code
+--with-mumps=/opt/mumps
+--with-scalapack=/opt/scalapack
+\endcode
+will compile \c oomph-lib's wrappers and link against the \c MUMPS
+solver provided that \c MUMPS and ScaLAPACK </a> are installed in the 
+directories 
+\code
+/opt/mumps
+/opt/scalapack
+\endcode
+i.e. these directories contain the \c lib and \c include directories that
+result from successful installations of \c MUMPS and \c ScaLAPACK,
+respectively.
+
+
+If you do not have \c MUMPS available you can download the latest
+version <a
+href="http://graal.ens-lyon.fr/MUMPS/index.php?page=dwnld"> here. </a>
+You can build and install the library yourself, or get \c oomph-lib to build it
+during part of its own build process. Simply place a copy of the tar file
+\c MUMPS_4.10.0.tar.gz in the directory
+\code
+external_distributions/mumps_and_scalapack
+\endcode
+You will also need to download the \c scalapack_installer.tgz from 
+<a
+href="http://www.netlib.org/scalapack/#_scalapack_installer_for_linux">
+here, </a> and place a copy in the same directory
+\code
+external_distributions/mumps_and_scalapack
+\endcode
+Note that the configure option
+\code
+--with-mpi-include=/usr/lib/openmpi/include
+\endcode
+<b> must </b> be specified in order to build \c MUMPS, where \c
+/usr/lib/openmpi/include is the directory that contains the file \c mpi.h.
+
+Once the files have been placed in the \c
+external_distributions/mumps_and_scalapack directory, simply (re-)run
+\c autogen.sh, which will detect and build the libraries and install
+then in directory
+\code
+external_distributions/mumps_and_scalapack/mumps_and_scalapack_default_installation
+\endcode
+
+Note that the installation of \c ScaLAPACK requires an
+active Internet connection because it automatically downloads
+additional files.
+
+Unless you explicitly specified a library location using
+the \c --with-mumps and \c --with-scalapack flags, 
+\c oomph-lib will then link against
+the newly created versions of the libraries. However, we strongly
+recommend moving the libraries outside the \c oomph-lib distribution to 
+preserve them for future use. Once this is done you simply specify the 
+(new) location of the library with the \c --with-mumps and \c
+--with-scalapack flags, as 
+discussed above. (Also make sure to delete the tar files from
+\c external_distributions/mumps_and_scalapack, otherwise the libraries
+will be built again.) Note that \c make \c clean will delete the
+unpacked sources but not the tar files nor the installed libraries.
+
+
+<HR>
+
 \section own How to write your own code and link it against oomph-lib's library/libraries
 
 If you followed the instructions so far, you will be able to install
@@ -622,7 +705,7 @@ whether you have (or are willing to install) the gnu autotools
 and <A HREF="http://www.gnu.org/software/libtool/">libtool</A>
 on your machine. 
 
-\subsection have_auto_fuck Writing/linking your own driver codes under autotools control
+\subsection have_auto_tools Writing/linking your own driver codes under autotools control
 
 \subsubsection add_driver Adding your own driver codes
 Let's start with the straightforward case: You want to use \c
@@ -820,7 +903,7 @@ that uses a user library.
 
 
 
-\subsection dont_have_auto_fuck Writing/linking user code without autotools
+\subsection dont_have_auto_tools Writing/linking user code without autotools
 Linking directly against \c oomph-lib's (sub-)libraries 
 is slightly complicated by cross-compilation issues arising from
 the fact that the \c oomph-lib distribution includes a few C and Fortran 

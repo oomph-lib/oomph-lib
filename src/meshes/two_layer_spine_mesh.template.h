@@ -43,7 +43,7 @@ namespace oomph
 /// e.g  SpineElement<QCrouzeixRaviartElement<2>).
 ///
 /// This mesh paritions the elements into those above and below a 
-/// notional interface and relabels boundries so that the mesh is as follows
+/// notional interface and relabels boundaries so that the mesh is as follows
 ///                                 3
 ///               ---------------------------------------
 ///               |                                     |

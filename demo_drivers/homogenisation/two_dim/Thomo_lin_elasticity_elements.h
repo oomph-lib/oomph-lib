@@ -14,7 +14,6 @@
 #include "generic/oomph_utilities.h"
 #include "generic/Telements.h"
 #include "homo_lin_elasticity_elements.h"
-#include "homo_lin_elasticity_traction_elements.h"
 
 namespace oomph
 {
@@ -114,20 +113,6 @@ namespace oomph
  void output(FILE* file_pt, const unsigned &n_plot)
   {
    HomogenisedLinearElasticityEquations<DIM>::output(file_pt,n_plot);
-  }
- 
- /// \short make the appropriate face element
- FaceElement* make_face_element(const int &face_index)
-  {
-   HomogenisedLinearElasticityTractionElement<
-    THomogenisedLinearElasticityElement<DIM,NNODE_1D> > *Temp_pt
-    = new HomogenisedLinearElasticityTractionElement<
-    THomogenisedLinearElasticityElement<DIM,NNODE_1D> >(
-     this,face_index);
-   
-   //Temp_pt->elasticity_tensor_pt() = this->Elasticity_tensor_pt;
-   
-   return Temp_pt;
   }
 
 };

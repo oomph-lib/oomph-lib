@@ -2547,12 +2547,6 @@ const Vector<double>& elem_error)
     triangle_mesh_parameters.regions_coordinates() =
       this->Regions_coordinates;
 
-    //Pass information about the using of regions
-    if (triangle_mesh_parameters.is_use_attributes())
-     {
-      triangle_mesh_parameters.enable_use_attributes();
-     }
-
     // *****************************************************************
 
     if (solid_mesh_pt!=0)

@@ -128,6 +128,20 @@ class ElasticityTensor
 #endif
     return independent_component(Index[i][j][k][l]);
    } 
+
+ /// \short Allow the values to be set (virtual function that must be
+ /// overloaded if values can be set directly
+  virtual void set_value(const unsigned &i, const unsigned &j, 
+                         const unsigned &k, const unsigned &l, 
+                         const double &value)
+  {
+   std::stringstream error_stream;
+   error_stream << "Broken base implementation.\n"
+                << "Must be overloaded for specific storage schemes.\n";
+   throw OomphLibError(error_stream.str().c_str(),
+                       "ElasticityTensor::set_value()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
   
  };
 

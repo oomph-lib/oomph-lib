@@ -20,12 +20,9 @@
 namespace oomph
 {
 //=======================================================================
-/// A base class for elements that solve the equations of linaer 
-/// solid mechanics, 
-/// based on the principle of virtual displacements in Cartesian coordinates.
-/// Combines a few generic functions that are shared by 
-/// HomogenisedLinearElasticityEquations
-/// and HomogenisedLinearElasticityEquationsWithPressure.
+/// A base class for elements that solve the equations for homogenised
+/// linear elasticity. This is a template-free base class that
+/// includes dimension-independent generic functions.
 //=======================================================================
   class HomogenisedLinearElasticityEquationsBase : 
    public virtual FiniteElement
@@ -240,7 +237,9 @@ template<unsigned DIM>
      this->fill_in_generic_contribution_to_residuals_linear_elasticity(
       residuals,jacobian,1);
     }
-   
+
+   /// Compute contribution to the effective modulus
+   void calculate_effective_modulus(DenseMatrix<double> &H);
    
    /// Output: x,y,[z],xi0,xi1,[xi2],gamma
    void output(std::ostream &outfile) 

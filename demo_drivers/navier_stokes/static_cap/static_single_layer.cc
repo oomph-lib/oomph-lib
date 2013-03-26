@@ -173,35 +173,40 @@ CapProblem<ELEMENT>::CapProblem(const bool& hijack_internal) :
  //Create the surface mesh that will contain the interface elements
  //First create storage, but with no elements or nodes
  Surface_mesh_pt = new Mesh;
+ //Also create storage for a point mesh that contain the single element
+ //responsible for  enforcing the contact angle condition
+ Point_mesh_pt = new Mesh;
 
  //Loop over the horizontal elements adjacent to the upper surface
- //Note that this relies on knowledge of how the elements are arranged
- //within the mesh
- for(unsigned i=0;i<nx;i++)
+ //(boundary 2) and create the surface elements
+ unsigned n_boundary_element = Bulk_mesh_pt->nboundary_element(2);
+ for(unsigned e=0;e<n_boundary_element;e++)
   {
-   //Construct a new 1D line element on the face on which the local
-   //coordinate 1 is fixed at its max. value (1) --- This is face 2
+   //Construct a new 1D line element adjacent to boundary 2
    FiniteElement *interface_element_pt =
     new SpineLineFluidInterfaceElement<SpineElement<ELEMENT> >(
-     Bulk_mesh_pt->finite_element_pt(nx*(nh-1)+i),2);
+     Bulk_mesh_pt->boundary_element_pt(2,e),
+     Bulk_mesh_pt->face_index_at_boundary(2,e));
    
    //Push it back onto the stack
    this->Surface_mesh_pt->add_element_pt(interface_element_pt); 
+
+   //Find the (single) node that is on the solid boundary (boundary 1)
+   unsigned n_node = interface_element_pt->nnode();
+   //We only need to check the right-hand nodes (because I know the
+   //ordering of the nodes within the element)
+   if(interface_element_pt->node_pt(n_node-1)->is_on_boundary(1))
+    {
+     //Make the point (contact) element from right-hand edge of the element
+     FiniteElement* point_element_pt = 
+      dynamic_cast<SpineLineFluidInterfaceElement<
+       SpineElement<ELEMENT> >*>(interface_element_pt)
+      ->make_bounding_element(1);
+
+     //Add it to the mesh
+     this->Point_mesh_pt->add_element_pt(point_element_pt);
+    }
   }
-
- //Create the Point mesh that is responsible for enforcing the contact
- //angle condition
- Point_mesh_pt = new Mesh;
- {
-  //Make the point (contact) element from the last surface element
-  FiniteElement* point_element_pt = 
-   dynamic_cast<SpineLineFluidInterfaceElement<
-    SpineElement<ELEMENT> >*>(Surface_mesh_pt->element_pt(nx-1))
-   ->make_bounding_element(1);
-
-  //Add it to the mesh
-  this->Point_mesh_pt->add_element_pt(point_element_pt);
- }
 
  //Create a Data object whose single value stores the
  //external pressure
@@ -290,19 +295,7 @@ CapProblem<ELEMENT>::CapProblem(const bool& hijack_internal) :
         }
       }
     }
-   /*  else
-    {
-     //Find the number of nodes on the boundary
-     unsigned n_boundary_node = Bulk_mesh_pt->nboundary_node(b);
-     //Loop over the nodes on the boundary
-     for(unsigned n=0;n<n_boundary_node;n++)
-      {
-       Bulk_mesh_pt->boundary_node_pt(b,n)->unpin(1);
-      }
-      }*/
   }
-
-
 
  // Set the contact angle boundary condition for the rightmost element
  // (pass pointer to double that specifies the contact angle)
@@ -503,6 +496,7 @@ void CapProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  Trace_file << std::endl;
  
 }
+
 
 //===========start_of_pseudo_elastic_class====================================
 ///\short A class that solves the Navier--Stokes equations
@@ -904,6 +898,7 @@ void PseudoSolidCapProblem<ELEMENT>::create_contact_angle_element()
  unsigned n_free_surface = Free_surface_mesh_pt->nelement();
   
  //Make the bounding element for the contact angle constraint
+ //which works because the order of elements in the mesh is known
  FluidInterfaceBoundingElement* el_pt = 
   dynamic_cast<ElasticLineFluidInterfaceElement<ELEMENT>*> 
   (Free_surface_mesh_pt->element_pt(n_free_surface-1))->
@@ -1059,11 +1054,3 @@ int main()
   }
 
 } //end_of_main
-
-
-
-
-
-
-
-

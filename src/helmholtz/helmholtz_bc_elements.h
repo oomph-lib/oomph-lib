@@ -1488,7 +1488,11 @@ template<class ELEMENT>
     double dphi_ds=std::fabs(nom/denom);
     
     // compute the element contribution to gamma
-    gamma_con+=(dphi_ds)*w*exp(I*(phi-phi_p)*double(n))*interpolated_u;
+    // ALH: The awkward construction with pow and the static_cast is to
+    // avoid a floating point error on my machine when running unoptimised
+    // (no idea why!)
+    gamma_con+=(dphi_ds)*w*pow(exp(I*(phi-phi_p)),static_cast<double>(n))
+     *interpolated_u;
     
     // compute the contribution to each node to the map   
     for(unsigned l=0;l<n_node;l++) 
@@ -1509,8 +1513,11 @@ template<class ELEMENT>
      if (local_unknown_imag >= 0)
       {   
        global_unknown_imag=this->eqn_number(local_unknown_imag);
+       // ALH: The awkward construction with pow and the static_cast is to
+       // avoid a floating point error on my machine when running unoptimised
+       // (no idea why!)
        d_gamma_con[global_unknown_imag]+=
-        I* (dphi_ds)*w*exp(I*(phi-phi_p)*double(n))*psi(l);
+        I* (dphi_ds)*w*pow(exp(I*(phi-phi_p)),static_cast<double>(n))*psi(l);
       }
      }// end of loop over the node
    }//End of loop over integration points    

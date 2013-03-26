@@ -383,7 +383,6 @@ UnstructuredFvKProblem<ELEMENT>::UnstructuredFvKProblem(double element_area)
  mesh_parameters.add_region_coordinates(2,right_region_coords);
  Bubble_regions.push_back(1);
  Bubble_regions.push_back(2);
- mesh_parameters.enable_use_attributes();
  mesh_parameters.element_area() = element_area;
 
  My_mesh_pt = new RefineableTriangleMesh<ELEMENT>(mesh_parameters);

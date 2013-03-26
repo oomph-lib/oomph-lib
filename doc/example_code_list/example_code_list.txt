@@ -1309,26 +1309,6 @@ results to the analytic dispersion relation based on linearised disturbances.
 </TD>
 </TR>
 ##############################################################
-<TR>
-<TD>
-<A HREF="../../navier_stokes/inclined_plane/html/index.html">
-<B>Flow of a fluid film down an inclined plane</B>
-</A>
-\n\n
-A classical fluid mechanics problem: We study the flow of a film of fluid 
-down an inclined plane and compare the results to the exact solution
-of Nusselt. The stability is assessed by simulating the time-evolution
-of a perturbation to the free surface.
-</TD>
-<TD>
-- Comparison between spine-based and pseudo-solid
-node update strategies for free surface problems.
-- Open flow boundary conditions.
-</TD>
-<TD>
-<CENTER>almost complete</CENTER>
-</TD>
-</TR>
 
 ######################################################################
 
@@ -1343,7 +1323,7 @@ bounds a layer of viscous fluid -- harder than you might think!
 </TD>
 <TD>
  - Imposing a volume constraint in steady free-surface problems.
- - Imposing static contact angle constriants when a free-surface meets
+ - Imposing static contact angle constraints when a free-surface meets
  a solid boundary.
  - Hijacking (overwriting) data from within elements.
 </TD>
@@ -1362,18 +1342,38 @@ A hydrostatics problem: Compute the static interface between two
 viscous fluids -- harder than you might think!
 </TD>
 <TD>
-- ***
-- General conventions:
-  - ***
+- Adapting an existing mesh to include an interface.
+- Imposing a static contact angle when an interface meets a solid boundary.
 </TD>
 <TD>
-<CENTER>driver code only</CENTER>
+<CENTER>complete</CENTER>
 </TD>
 </TR>
 
-
 ######################################################################
+<TR>
+<TD>
+<A HREF="../../navier_stokes/inclined_plane/html/index.html">
+<B>Flow of a fluid film down an inclined plane</B>
+</A>
+\n\n
+A classical fluid mechanics problem: We study the flow of a film of fluid 
+down an inclined plane and compare the results to the exact solution
+of Nusselt. The stability is assessed by simulating the time-evolution
+of a perturbation to the free surface.
+</TD>
+<TD>
+- Comparison between spine-based and pseudo-solid
+node update strategies for free surface problems.
+- Applying time-dependent perturbations to steady solutions.
+- Open flow boundary conditions.
+</TD>
+<TD>
+<CENTER>complete</CENTER>
+</TD>
+</TR>
 
+########################################################################
 <!-- <TR>
 <TD>
 <A HREF="../../navier_stokes/adaptive_interface/html/index.html">
@@ -1444,6 +1444,29 @@ non-trivial free surface problem.
   .
 - How to impose a volume constraint onto an enclosed "bubble" in 
   a viscous fluid.
+.
+</TD>
+<TD>
+<CENTER>complete</CENTER>
+</TD>
+</TR>
+#####################################################################
+######################################################################
+
+<TR>
+<TD>
+<A HREF="../../navier_stokes/adaptive_droplet_in_channel/html/index.html">
+<B>A finite droplet propagates in a 2D fluid-filled channel.</B>
+</A>
+\n\n
+Uses a pseudo-elastic remesh strategy and unstructured spatial
+adaptivity in 
+a non-trivial interfacial (two-fluid) problem.
+</TD>
+<TD>
+- How to use regions in an unstructured  two-fluid problem.
+- How to impose and then remove a volume constraint onto an enclosed
+"droplet" in a viscous fluid.
 .
 </TD>
 <TD>

@@ -92,7 +92,8 @@ class TriangleMeshParameters
  TriangleMeshParameters(TriangleMeshClosedCurve *outer_boundary_pt)
   : Outer_boundary_pt(outer_boundary_pt),
   Element_area(0.2),
-  Use_attributes(false), Boundary_refinement(true)
+  Use_attributes(false), Boundary_refinement(true), 
+  Internal_boundary_refinement(true)
   { }
  
  /// Empty destructor
@@ -173,18 +174,12 @@ class TriangleMeshParameters
    // If it does not exist then create the map
    Regions_coordinates[i] = region_coordinates;
    // Automatically set the using of attributes to enable
-   enable_use_attributes();
+   this->Use_attributes = true;
   }
  
  /// Helper function for getting access to the regions coordinates
  std::map<unsigned, Vector<double> >&regions_coordinates()
   {return Regions_coordinates;}
- 
- /// \short Helper function for enabling the use of attributes
- void enable_use_attributes() {Use_attributes=true;}
- 
- /// \short Helper function for disabling the use of attributes
- void disable_use_attributes() {Use_attributes=false;}
 
  /// \short Helper function for getting the status of use_attributes 
  /// variable
@@ -198,6 +193,17 @@ class TriangleMeshParameters
 
  /// \short Helper function for getting the status of boundary refinement
  bool is_boundary_refinement_allowed() const {return Boundary_refinement;}
+
+ /// \short Helper function for enabling the use of boundary refinement
+ void enable_internal_boundary_refinement() {Internal_boundary_refinement=true;}
+ 
+ /// \short Helper function for disabling the use of boundary refinement
+ void disable_internal_boundary_refinement() 
+ {Internal_boundary_refinement=false;}
+
+ /// \short Helper function for getting the status of boundary refinement
+ bool is_internal_boundary_refinement_allowed() const 
+ {return Internal_boundary_refinement;}
 
 
   protected:
@@ -226,6 +232,9 @@ class TriangleMeshParameters
  
  /// Do not allow refinement of nodes on the boundary
  bool Boundary_refinement;
+
+  /// Do not allow refinement of nodes on the internal boundary
+ bool Internal_boundary_refinement;
 
 
 };
@@ -501,6 +510,30 @@ class TriangleMeshParameters
    const bool refine_boundary = 
     triangle_mesh_parameters.is_boundary_refinement_allowed();
 
+   const bool refine_internal_boundary = 
+    triangle_mesh_parameters.is_internal_boundary_refinement_allowed();
+
+   if(!refine_internal_boundary && refine_boundary)
+    {
+     std::ostringstream error_stream;
+     error_stream 
+      << 
+      "You have specified that Triangle may refine the outer boundary, but\n"
+      << 
+      "not internal boundaries. Triangle does not support this combination.\n"
+      << 
+      "If you do not want Triangle to refine internal boundaries, it can't\n"
+      <<
+      "refine outer boundaries either!\n"
+      << "Please either disable all boundary refinement\n"
+      << "(call TriangleMeshParameters::disable_boundary_refinement()\n"
+      << "or enable internal boundary refinement (the default)\n";
+
+     throw OomphLibError(error_stream.str().c_str(),
+                         "TriangleMesh()::TriangleMesh()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+   
    this->generic_constructor(outer_boundary_polygon_pt,
                              internal_polygon_pt,
                              internal_open_curve_poly_pt,
@@ -509,7 +542,8 @@ class TriangleMeshParameters
                              regions,
                              time_stepper_pt,
                              use_attributes,
-                             refine_boundary);
+                             refine_boundary,
+                             refine_internal_boundary);
 
    // Setup boundary coordinates for boundaries
    unsigned nb=nboundary();
@@ -970,7 +1004,8 @@ class TriangleMeshParameters
                            &regions_coordinates,
                            TimeStepper* time_stepper_pt,
                            const bool &use_attributes,
-                           const bool &refine_boundary) 
+                           const bool &refine_boundary,
+                           const bool &refine_internal_boundary) 
    {
     // Mesh can only be built with 2D Telements.
     MeshChecker::assert_geometric_element<TElementGeometricBase,ELEMENT>(2);
@@ -1021,8 +1056,14 @@ class TriangleMeshParameters
     std::stringstream input_string_stream;
     input_string_stream<<"-pA -a" << element_area << " -q30";
 
-    if(refine_boundary==false) {input_string_stream << "-Y";}
-    
+    //Suppress insertion of additional points on outer boundary
+    if(refine_boundary==false) 
+     {
+      input_string_stream << "-Y";
+      //Add the extra flag to suppress additional points on interior segments
+      if(refine_internal_boundary==false) {input_string_stream << "Y";}
+     }
+
     // Convert the Input string in *char required by the triangulate function
     char triswitches[100];
     sprintf(triswitches,"%s",input_string_stream.str().c_str());

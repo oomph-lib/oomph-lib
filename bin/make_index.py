@@ -187,24 +187,24 @@ def make_index(filename,doc_root_directory):
    main_index.append(out)
 
  #Sort the list
- main_index.sort()
+# main_index.sort()
 
  #Dump the output to a sorted file
- sorted_index=open("sorted.idx",'w')
- for entry in main_index:
-  n = len(entry)
-  for index,field in enumerate(entry):
-   #If we have a link write a newline first
-   if field[0]=='^' or field[0]=='%':
-    sorted_index.write("\n")
-   #Write the entry
-   sorted_index.write(field)
-   #Write the separator
-   if index!=n-1:
-    sorted_index.write(" @ ")
-   else:
-    sorted_index.write(" @end \n\n")
- sorted_index.close()
+ #sorted_index=open("sorted.idx",'w')
+ #for entry in main_index:
+ # n = len(entry)
+ # for index,field in enumerate(entry):
+ #  #If we have a link write a newline first
+ #  if field[0]=='^' or field[0]=='%':
+ #   sorted_index.write("\n")
+ #  #Write the entry
+ #  sorted_index.write(field)
+ #  #Write the separator
+ #  if index!=n-1:
+ #   sorted_index.write(" @ ")
+ #  else:
+ #   sorted_index.write(" @end \n\n")
+ #sorted_index.close()
 
  #Add first letters of each key as the first entry in the list
  for line in main_index:

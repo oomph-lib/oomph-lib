@@ -25,8 +25,7 @@
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 //LIC// 
 //LIC//====================================================================
-
-// Driver code for a unit (square) cell homogenisation problem, solved in
+// Driver code for a unit (hexagonal) cell homogenisation problem, solved in
 // Willoughby et al (2012) IJSS, 49 pp 1421-1422
 
 //Generic routines
@@ -329,19 +328,23 @@ HomogenisationProblem<ELEMENT>::HomogenisationProblem() :  M(0), P(0)
  this->add_time_stepper_pt(new Steady<0>);
 
  //Set the number of elements on each side
- unsigned n_element_on_side = 40;
+ unsigned n_element_on_side = 10;
 
- //Each side has uniform length so calculate the spacing between vertices
- double vertex_spacing = 1.0 / (double)(n_element_on_side); 
+ //The length of the side of a hexagon with unit area is
+ const double l = sqrt(2.0)/(pow(3.0,0.75));
+
+ //The height of the equilateral triangle adjacent to each side is the
+ const double l_h = 1.0/(pow(12.0,0.25));
 
  //Set the volume fraction of the (single) fibre
- double volume_fraction = 0.05;
+ double volume_fraction = 0.15;
+
 
  // Build the boundary segments for outer boundary, consisting of
  //--------------------------------------------------------------
- // four separate polylines
+ // six separate polylines
  //------------------------
- Vector<TriangleMeshCurveSection*> boundary_polyline_pt(4);
+ Vector<TriangleMeshCurveSection*> boundary_polyline_pt(6);
  
  //Each polyline has n_element_on_side + 1 vertices
  unsigned n_vertex= n_element_on_side + 1;
@@ -351,45 +354,120 @@ HomogenisationProblem<ELEMENT>::HomogenisationProblem() :  M(0), P(0)
    vertex_coord[i].resize(2);
   }
 
+ //Set the start and end positions
+ Vector<double> start(2), end(2);
+ start[0] = -0.5*l;
+ start[1] = -l_h;
+ end[0] = -l;
+ end[1] = 0.0;
+
  // First polyline: Left-hand edge, set the nodal positions
  for(unsigned i=0;i<n_vertex;i++)
   {
-   vertex_coord[i][0]=0.0;
-   vertex_coord[i][1] = i*vertex_spacing;
+   for(unsigned j=0;j<2;j++)
+    {
+     vertex_coord[i][j] = 
+      start[j] + i*(end[j] - start[j])/(double)(n_vertex-1);
+    }
   }
  
  // Build the 1st boundary polyline
- boundary_polyline_pt[0] = new TriangleMeshPolyLine(vertex_coord,3);
+ boundary_polyline_pt[0] = new TriangleMeshPolyLine(vertex_coord,5);
+
+ //Set new start and end positions
+ start = end;
+ end[0] = -0.5*l;
+ end[1] = l_h;
+
+ // Second polyline: Left-hand edge, set the nodal positions
+ for(unsigned i=0;i<n_vertex;i++)
+  {
+   for(unsigned j=0;j<2;j++)
+    {
+     vertex_coord[i][j] = 
+      start[j] + i*(end[j] - start[j])/(double)(n_vertex-1);
+    }
+  }
  
- // Second boundary polyline: Top edge
+ // Build the 1st boundary polyline
+ boundary_polyline_pt[1] = new TriangleMeshPolyLine(vertex_coord,4);
+
+ 
+ //Set new start and end positions
+ start = end;
+ end[0] = 0.5*l;
+ end[1] = l_h;
+
+ // Second polyline: Left-hand edge, set the nodal positions
  for(unsigned i=0;i<n_vertex;i++)
   {
-   vertex_coord[i][0]= i*vertex_spacing;
-   vertex_coord[i][1]=1.0;
+   for(unsigned j=0;j<2;j++)
+    {
+     vertex_coord[i][j] = 
+      start[j] + i*(end[j] - start[j])/(double)(n_vertex-1);
+    }
   }
+ 
+ // Build the 1st boundary polyline
+ boundary_polyline_pt[2] = new TriangleMeshPolyLine(vertex_coord,3);
+ 
 
- // Build the 2nd boundary polyline
- boundary_polyline_pt[1] = new TriangleMeshPolyLine(vertex_coord,2);
+ //Set new start and end positions
+ start = end;
+ end[0] = l;
+ end[1] = 0.0;
 
- // Third boundary polyline: Right-hand edge
+ // Second polyline: Left-hand edge, set the nodal positions
  for(unsigned i=0;i<n_vertex;i++)
   {
-   vertex_coord[i][0]=1.0;
-   vertex_coord[i][1]=1.0 - i*vertex_spacing;
+   for(unsigned j=0;j<2;j++)
+    {
+     vertex_coord[i][j] = 
+      start[j] + i*(end[j] - start[j])/(double)(n_vertex-1);
+    }
   }
+ 
+ // Build the 1st boundary polyline
+ boundary_polyline_pt[3] = new TriangleMeshPolyLine(vertex_coord,2);
 
- // Build the 3rd boundary polyline
- boundary_polyline_pt[2] = new TriangleMeshPolyLine(vertex_coord,1);
 
- // Fourth boundary polyline: Bottom edge
+ //Set new start and end positions
+ start = end;
+ end[0] = 0.5*l;
+ end[1] = -l_h;
+
+ // Second polyline: Left-hand edge, set the nodal positions
  for(unsigned i=0;i<n_vertex;i++)
   {
-   vertex_coord[i][0] = 1.0 - i*vertex_spacing;
-   vertex_coord[i][1] = 0.0;
+   for(unsigned j=0;j<2;j++)
+    {
+     vertex_coord[i][j] = 
+      start[j] + i*(end[j] - start[j])/(double)(n_vertex-1);
+    }
   }
+ 
+ // Build the 1st boundary polyline
+ boundary_polyline_pt[4] = new TriangleMeshPolyLine(vertex_coord,1);
 
- // Build the 4th boundary polyline
- boundary_polyline_pt[3] = new TriangleMeshPolyLine(vertex_coord,0);
+ //Set new start and end positions
+ start = end;
+ end[0] = -0.5*l;
+ end[1] = -l_h;
+
+ // Second polyline: Left-hand edge, set the nodal positions
+ for(unsigned i=0;i<n_vertex;i++)
+  {
+   for(unsigned j=0;j<2;j++)
+    {
+     vertex_coord[i][j] = 
+      start[j] + i*(end[j] - start[j])/(double)(n_vertex-1);
+    }
+  }
+ 
+ // Build the 1st boundary polyline
+ boundary_polyline_pt[5] = new TriangleMeshPolyLine(vertex_coord,0);
+
+
  
  // Create the triangle mesh polygon for outer boundary
  Outer_boundary_polyline_pt = new TriangleMeshPolygon(boundary_polyline_pt);
@@ -401,16 +479,16 @@ HomogenisationProblem<ELEMENT>::HomogenisationProblem() :  M(0), P(0)
  // Now define initial shape of inclusion with a geometric object
  //---------------------------------------------------------------
  // Build an inclusion 
- Internal_circle_pt.resize(1);
+ Internal_circle_pt.resize(2);
  double rad = std::sqrt(volume_fraction/(4.0*atan(1.0)));
- double Radius[2] = {rad,rad}; //{0.5*rad,rad};
+ double Radius[2] = {0.5*rad,rad};
 
- Vector<TriangleMeshClosedCurve*> curvilinear_inclusion_pt(1);
+ Vector<TriangleMeshClosedCurve*> curvilinear_inclusion_pt(2);
 
- for(unsigned h=0;h<1;h++)
+ for(unsigned h=0;h<2;h++)
   {
    Internal_circle_pt[h] = 
-    new Circle(0.5,0.5,Radius[h],this->time_stepper_pt());
+    new Circle(0.0,0.0,Radius[h],this->time_stepper_pt());
    
    // Build the two parts of the curvilinear boundary
    //Note that there could well be a memory leak here owing to some stupid 
@@ -421,8 +499,8 @@ HomogenisationProblem<ELEMENT>::HomogenisationProblem() :  M(0), P(0)
    //-----------------------------------
    double zeta_start=0.0;
    double zeta_end=MathematicalConstants::Pi;
-   unsigned nsegment=20;
-   unsigned boundary_id=4+2*h;
+   unsigned nsegment=10;
+   unsigned boundary_id=6+2*h;
    curvilinear_boundary_pt[0]=new TriangleMeshCurviLine(
     Internal_circle_pt[h],zeta_start,zeta_end, 
     nsegment,boundary_id);
@@ -431,8 +509,8 @@ HomogenisationProblem<ELEMENT>::HomogenisationProblem() :  M(0), P(0)
    //-------------------------------------
    zeta_start=MathematicalConstants::Pi;
    zeta_end=2.0*MathematicalConstants::Pi;
-   nsegment=20;
-   boundary_id=5 + 2*h;
+   nsegment=10;
+   boundary_id=7 + 2*h;
    curvilinear_boundary_pt[1]=new TriangleMeshCurviLine(
     Internal_circle_pt[h],zeta_start,zeta_end, 
     nsegment,boundary_id);
@@ -455,6 +533,7 @@ HomogenisationProblem<ELEMENT>::HomogenisationProblem() :  M(0), P(0)
  triangle_mesh_parameters.internal_closed_curve_pt() =
    curvilinear_inclusion_pt;
 
+
  double uniform_element_area = 0.001;
 
  // Define the maximum element area
@@ -462,20 +541,23 @@ HomogenisationProblem<ELEMENT>::HomogenisationProblem() :  M(0), P(0)
    uniform_element_area;
 
  //Coordinates 
- Vector<double> region1(2,0.5);
+ Vector<double> region1(2,0.0);
 
  // Define the region (the internal fibre)
  triangle_mesh_parameters.add_region_coordinates(1, region1);
  
- //Vector<double> region2(2);
- //region2[0] = 0.5;
- //region2[1] = 0.5 + 0.5*(Radius[1] + Radius[0]);
+  Vector<double> region2(2);
+  region2[0] = 0.0;
+  region2[1] = 0.5*(Radius[1] + Radius[0]);
 
  //Set the second region (the annulus)
- //triangle_mesh_parameters.add_region_coordinates(2, region2);
+ triangle_mesh_parameters.add_region_coordinates(2, region2);
 
- //Prevent refinement on the boundaries
+ //Prevent refinement on the boundaries so that we can apply periodic 
+ //conditions
  triangle_mesh_parameters.disable_boundary_refinement();
+ //Disable internal boundary refinement as well for precise control
+ //triangle_mesh_parameters.disable_internal_boundary_refinement();
 
  // Create the mesh
  Bulk_mesh_pt =
@@ -580,9 +662,9 @@ template<class ELEMENT>
 void HomogenisationProblem<ELEMENT>::complete_problem_setup()
   {      
    //Collect vectors of the nodes on the mesh boundaries
-   Vector<Vector<Node*> > boundary_nodes_pt(4);
+   Vector<Vector<Node*> > boundary_nodes_pt(6);
    
-   for(unsigned b=0;b<4;b++)
+   for(unsigned b=0;b<6;b++)
     {
      unsigned n_node = this->Bulk_mesh_pt->nboundary_node(b);
      boundary_nodes_pt[b].resize(n_node);
@@ -598,10 +680,13 @@ void HomogenisationProblem<ELEMENT>::complete_problem_setup()
    std::sort(boundary_nodes_pt[1].begin(), boundary_nodes_pt[1].end(),
              CompareNodeCoordinatesY());
    std::sort(boundary_nodes_pt[2].begin(), boundary_nodes_pt[2].end(),
-             CompareNodeCoordinatesX());
-   std::sort(boundary_nodes_pt[3].begin(), boundary_nodes_pt[3].end(),
              CompareNodeCoordinatesY());
-
+   std::sort(boundary_nodes_pt[3].begin(), boundary_nodes_pt[3].end(),
+             CompareNodeCoordinatesX());
+   std::sort(boundary_nodes_pt[4].begin(), boundary_nodes_pt[4].end(),
+             CompareNodeCoordinatesY());
+   std::sort(boundary_nodes_pt[5].begin(), boundary_nodes_pt[5].end(),
+             CompareNodeCoordinatesY());
 
    //Now we can make it periodic
    double tol = 1.0e-7;
@@ -610,14 +695,14 @@ void HomogenisationProblem<ELEMENT>::complete_problem_setup()
     {
      //If we have different x coordinates complain
      if(std::abs(boundary_nodes_pt[0][n]->x(0) 
-                 - boundary_nodes_pt[2][n]->x(0)) > tol)
+                 - boundary_nodes_pt[3][n]->x(0)) > tol)
        {
         std::ostringstream error_stream;
         error_stream << 
          "Trying to make periodic nodes across the top/bottom boundary,\n"
                      << "but the nodes have x-coordinates "
                      << boundary_nodes_pt[0][n]->x(0) << " and "
-                     << boundary_nodes_pt[2][n]->x(0);
+                     << boundary_nodes_pt[3][n]->x(0);
                 
         throw OomphLibError(error_stream.str(),
                             "HomogenisationProblem",
@@ -625,48 +710,54 @@ void HomogenisationProblem<ELEMENT>::complete_problem_setup()
        }
 
      //Make it periodic
-     boundary_nodes_pt[0][n]->make_periodic(boundary_nodes_pt[2][n]);
+     boundary_nodes_pt[0][n]->make_periodic(boundary_nodes_pt[3][n]);
     }
    
    n_node = boundary_nodes_pt[1].size();
    for(unsigned n=1;n<n_node-1;n++)
     {
-     //If we have different y coordinates complain
-     if(std::abs(boundary_nodes_pt[1][n]->x(1) - boundary_nodes_pt[3][n]->x(1)) > tol)
-       {
-        std::ostringstream error_stream;
-        error_stream << 
-         "Trying to make periodic nodes across the left/right boundary,\n"
-                     << "but the nodes have y-coordinates "
-                     << boundary_nodes_pt[1][n]->x(1) << " and "
-                     << boundary_nodes_pt[3][n]->x(1);
-                
-        throw OomphLibError(error_stream.str(),
-                            "HomogenisationProblem",
-                            OOMPH_EXCEPTION_LOCATION);
-       }
+     //Test?
 
      //Make it periodic
-     boundary_nodes_pt[1][n]->make_periodic(boundary_nodes_pt[3][n]);
+     boundary_nodes_pt[1][n]->make_periodic(boundary_nodes_pt[4][n]);
+    }
+
+   n_node = boundary_nodes_pt[2].size();
+   for(unsigned n=1;n<n_node-1;n++)
+    {
+     //Test?
+
+     //Make it periodic
+     boundary_nodes_pt[2][n]->make_periodic(boundary_nodes_pt[5][n]);
     }
 
 
     //Vector of corner nodes
-   Vector<Node*> corner_nodes_pt(4);
-   corner_nodes_pt[0] = boundary_nodes_pt[1][0];
+   Vector<Node*> corner_nodes_pt(3);
+   corner_nodes_pt[0] = boundary_nodes_pt[0][0];
    corner_nodes_pt[1] = boundary_nodes_pt[1][n_node-1];
    corner_nodes_pt[2] = boundary_nodes_pt[3][0];
-   corner_nodes_pt[3] = boundary_nodes_pt[3][n_node-1];
    
-    //PUT IN A TEST TO CHECK THAT THE CORNERS ARE REALLY THE CORNERS!
+   //PUT IN A TEST TO CHECK THAT THE CORNERS ARE REALLY THE CORNERS!
+   
+   //Make these nodes periodic from the bottom node
+   corner_nodes_pt[0]->make_periodic_nodes(corner_nodes_pt);
+   
+   //Vector of other corner nodes
+   Vector<Node*> corner_nodes1_pt(3);
+   corner_nodes1_pt[0] = boundary_nodes_pt[0][n_node-1];
+   corner_nodes1_pt[1] = boundary_nodes_pt[4][0];
+   corner_nodes1_pt[2] = boundary_nodes_pt[3][n_node-1];
+   
+   //PUT IN A TEST TO CHECK THAT THE CORNERS ARE REALLY THE CORNERS!
+   
+   //Make these nodes periodic from the bottom node
+   corner_nodes1_pt[0]->make_periodic_nodes(corner_nodes1_pt);
 
-    //Make these nodes periodic from the bottom node
-    corner_nodes_pt[0]->make_periodic_nodes(corner_nodes_pt);
-
-    //Pin the corner to suppress rigid body motions
-    corner_nodes_pt[0]->pin(0);
-    corner_nodes_pt[0]->pin(1);
-    corner_nodes_pt[0]->pin(2);
+   //Pin the corner to suppress rigid body motions
+   corner_nodes_pt[0]->pin(0);
+   corner_nodes_pt[0]->pin(1);
+   corner_nodes_pt[0]->pin(2);
    
    // Complete the build of all elements so they are fully functional
    // Remember that adaptation for triangle meshes involves a complete
@@ -760,6 +851,7 @@ int main(int argc, char **argv)
  // Create problem in initial configuration
  // which solves the required problem
  HomogenisationProblem<THomogenisedLinearElasticityElement<2,3> > problem;  
- 
+
+ problem.doc_solution();
 
 } //End of main

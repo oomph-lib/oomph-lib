@@ -370,6 +370,23 @@ boundary. The definition of holes, internal boundaries and regions is
 explained in 
 <A HREF="../../../../doc/meshes/mesh_from_inline_triangle_internal_boundaries/html/index.html">
 another tutorial</a>.
+The object can also be used to control whether
+additional refinement may be performed on the mesh boundaries. The
+default behaviour is that such refinement will occur so that 
+the highest quality mesh is obtained. In some cases,
+e.g. periodic boundary conditions, you may wish to ensure that each
+input boundary segment corresponds to a single element edge in the
+final mesh. This can be achieved for the outer boundary by calling 
+\c TriangleMeshParameters::disable_boundary_refinement(). However, Triangle
+will still add additional points to any internal boundaries unless the
+additional function 
+\c TriangleMeshParameters::disable_internal_boundary_refinement() is
+also called. 
+The functions \c TriangleMeshParameters::enable_boundary_refinement()
+and \c TriangleMeshParameters::enable_internal_boundary_refinement()
+can be used to return to the default behaviour. Note that it is not 
+currently possible to suppress refinement on the internal boundaries,
+but refine the outer boundary.
 
 We can specify a target for the element sizes and pass it to the
 \c TriangleMeshParameters object as showed next:

@@ -15,7 +15,7 @@ mkdir Validation
 cd Validation
 
 echo "Running 2D static two layer validation "
-mkdir RESLT
+mkdir RESLT RESLT_elastic
 ../static_two_layer > OUTPUT_static_two_layer
 echo "done"
 echo " " >> validation.log
@@ -27,6 +27,7 @@ echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat  RESLT/soln5.dat RESLT/trace.dat > static_two_layer.dat
+cat  RESLT_elastic/soln5.dat RESLT_elastic/trace.dat >> static_two_layer.dat
 
 
 if test "$1" = "no_fpdiff"; then
@@ -37,6 +38,8 @@ else
 fi
 
 mv RESLT RESLT_static_two_layer
+mv RESLT_elastic RESLT_elastic_static_two_layer
+
 
 
 

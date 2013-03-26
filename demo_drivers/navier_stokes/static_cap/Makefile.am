@@ -10,6 +10,7 @@ static_two_layer_SOURCES = static_two_layer.cc
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
 static_two_layer_LDADD = -L@libdir@ -lnavier_stokes -lfluid_interface \
+                         -lsolid -lconstitutive \
                          -lgeneric \
                          $(EXTERNAL_LIBS) $(FLIBS)
 

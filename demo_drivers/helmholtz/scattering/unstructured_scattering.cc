@@ -28,7 +28,6 @@
 //LIC//======================================================================
 //Driver for a specific  2D Helmholtz problem with flux boundary conditions
 //uses two separate meshes for bulk and surface mesh
-#include<fenv.h>
 
 #include "math.h"
 #include <complex>
@@ -135,13 +134,15 @@ namespace GlobalParameters
   
   // Compute the sum: Separate the computation of the negative 
   // and positive terms
+  // ALH: The construction with the static cast to a double is to avoid
+  // a floating point exception when running unoptimised on my machine
   for (unsigned i=0;i<N_fourier;i++)
    {
-    u_ex-=pow(I,i)*h[i]*((jnp_a[i])/hp_a[i])*pow(exp(I*theta),i);
+    u_ex-=pow(I,i)*h[i]*jnp_a[i]*pow(exp(I*theta),static_cast<double>(i))/hp_a[i];
    }
   for (unsigned i=1;i<N_fourier;i++)
    {
-    u_ex-=pow(I,i)*h[i]*((jnp_a[i])/hp_a[i])*pow(exp(-I*theta),i);
+    u_ex-=pow(I,i)*h[i]*jnp_a[i]*pow(exp(-I*theta),static_cast<double>(i))/hp_a[i];
    }
   
   // Get the real & imaginary part of the result
@@ -811,7 +812,6 @@ delete_face_elements(Mesh* const & boundary_mesh_pt)
 //========================================================================
 int main(int argc, char **argv)
 {
- 
  // Store command line arguments
  CommandLineArgs::setup(argc,argv);
 

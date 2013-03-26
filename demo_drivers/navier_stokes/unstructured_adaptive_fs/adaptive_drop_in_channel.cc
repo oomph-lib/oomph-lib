@@ -840,9 +840,6 @@ DropInChannelProblem<ELEMENT>::DropInChannelProblem()
  // Define the region
  triangle_mesh_parameters.add_region_coordinates(1, drop_center);
  
- // Establish the use of regions when setting use attributes = true
- triangle_mesh_parameters.enable_use_attributes();
-
  // Create the mesh
  Fluid_mesh_pt =
    new RefineableSolidTriangleMesh<ELEMENT>(

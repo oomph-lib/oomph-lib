@@ -339,7 +339,7 @@ container.
  \until (vol_constraint_element);
 
  We next build and attach \c
- LineVolumeConstraintBoundingSolidElements to all the boundaries of
+ ElasticLineVolumeConstraintBoundingElements to all the boundaries of
  the domain. These elements compute the contribution to the boundary
  integral with integrand \f$ \mbox{\boldmath$x\cdot n$} \f$, 
  described above. The sign
@@ -402,11 +402,8 @@ between each solution and documenting the solution after each solve.
  mesh. The formulation is somewhat more cumbersome because the permitted
  deformation must be specified for each different problem and is
  specifically tied to a given domain geometry. The overall approach
- is exactly the same and large sections of the code are identical, 
- but it is more natural to include the free
- surface and contact angle elements within the bulk fluid mesh because
- a \c SpineMesh cannot be used without these elements. The advantage
- of using \c SpineElements is that fewer degrees of freedom are
+ is exactly the same and large sections of the code are identical. 
+ The advantage of using \c SpineElements is that fewer degrees of freedom are
  required to update the position of the fluid mesh.
 
 - The weak imposition of the contact angle condition is enabled by
