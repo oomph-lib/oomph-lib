@@ -524,7 +524,6 @@ void PRefineableQElement<1,INITIAL_NNODE_1D>::p_refine(
      // In a 1D mesh any node which lies on the boundary must exist in
      // the initial (coarse) mesh, so any newly-built nodes cannot be
      // boundary nodes. Therefore we always create a normal "bulk" node.
-     // PATRICKFLAG: Should I write a check for this?
      
      // Create node and set the pointer to it from the element 
      created_node_pt = this->construct_node(n,time_stepper_pt);

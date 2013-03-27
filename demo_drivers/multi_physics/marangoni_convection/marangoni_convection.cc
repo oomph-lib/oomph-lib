@@ -407,9 +407,6 @@ public:
    // contributions from external data which is not taken into account
    // by that routine. We therefore force the bulk elements to use the
    // fully-finite differenced version.
-   // PATRICKFLAG I'm not sure why I can't just call this in the
-   // constructor for this problem, there doesn't seem to be any
-   // adaptivity going on...
    const unsigned n_element = mesh_pt()->nelement();
    for(unsigned e=0;e<n_element;e++)
     {

@@ -36,186 +36,23 @@
 #endif
 
 //OOMPH-LIB headers 
-//#include "../generic/Qelements.h" // PATRICKFLAG PUT THESE BACK IN WHEN THIS FILE GOES INTO SRC
-//#include "../generic/fsi.h" // PATRICKFLAG PUT THESE BACK IN WHEN THIS FILE GOES INTO SRC
-#include "generic.h" // PATRICKFLAG TAKE THIS OUT WHEN THIS FILE GOES INTO SRC
+#include "generic.h"
 
 
 namespace oomph
 {
 
  
-//======================================================================PATRICKFLAG REWRITE THIS
-/// A class for elements that solve the unsteady 
-/// axisymmetric Navier--Stokes equations in 
-/// cylindrical polar coordinates, \f$ x_0^* = r^*\f$ and \f$ x_1^* = z^*  \f$
+//======================================================================
+/// A class for elements that solve the linearised unsteady 
+/// axisymmetric Navier--Stokes equations in cylindrical polar
+/// coordinates, \f$ x_0^* = r^*\f$ and \f$ x_1^* = z^*  \f$
 /// with \f$ \partial / \partial \theta = 0 \f$. We're solving for the
 /// radial, axial and azimuthal (swirl) velocities, 
 /// \f$ u_0^* = u_r^*(r^*,z^*,t^*) = u^*(r^*,z^*,t^*), 
 ///  \ u_1^* = u_z^*(r^*,z^*,t^*) = w^*(r^*,z^*,t^*)\f$ and 
 /// \f$ u_2^* = u_\theta^*(r^*,z^*,t^*) = v^*(r^*,z^*,t^*) \f$,
 /// respectively, and the pressure \f$ p(r^*,z^*,t^*) \f$.
-/// This class contains the generic maths -- any concrete 
-/// implementation must be derived from this.
-///
-/// In dimensional form the axisymmetric Navier-Stokes equations are given
-/// by the momentum equations (for the \f$ r^* \f$, \f$ z^* \f$ and \f$ \theta
-/// \f$
-/// directions, respectively)
-/// \f[ 
-/// \rho\left(\frac{\partial u^*}{\partial t^*} + {u^*}\frac{\partial
-///   u^*}{\partial r^*} - \frac{{v^*}^2}{r^*}
-///   + {w^*}\frac{\partial u^*}{\partial z^*} \right) =
-///   B_r^*\left(r^*,z^*,t^*\right)+ \rho G_r^*+
-///   \frac{1}{r^*}
-///   \frac{\partial\left({r^*}\sigma_{rr}^*\right)}{\partial r^*}
-///   - \frac{\sigma_{\theta\theta}^*}{r^*} +
-///   \frac{\partial\sigma_{rz}^*}{\partial z^*},
-/// \f] 
-/// \f[ 
-/// \rho\left(\frac{\partial w^*}{\partial t^*} + {u^*}\frac{\partial
-///   w^*}{\partial r^*} + {w^*}\frac{\partial
-///   w^*}{\partial z^*} \right) =
-///   B_z^*\left(r^*,z^*,t^*\right)+\rho G_z^*+ 
-///   \frac{1}{r^*}\frac{\partial\left({r^*}\sigma_{zr}^*\right)}{\partial
-///   r^*} + \frac{\partial\sigma_{zz}^*}{\partial z^*},
-/// \f] 
-/// \f[ 
-/// \rho\left(\frac{\partial v^*}{\partial t^*} +
-///   {u^*}\frac{\partial v^*}{\partial r^*} +
-///   \frac{u^* v^*}{r^*}
-///   +{w^*}\frac{\partial v^*}{\partial z^*} \right)=
-///   B_\theta^*\left(r^*,z^*,t^*\right)+ \rho G_\theta^*+
-///   \frac{1}{r^*}\frac{\partial\left({r^*}\sigma_{\theta
-///   r}^*\right)}{\partial r^*} + \frac{\sigma_{r\theta}^*}{r^*} +
-///   \frac{\partial\sigma_{\theta z}^*}{\partial z^*},
-/// \f] 
-/// and
-/// \f[ 
-/// \frac{1}{r^*}\frac{\partial\left(r^*u^*\right)}{\partial r^*} +
-/// \frac{\partial w^*}{\partial z^*} = Q^*.
-/// \f] 
-/// The dimensional, symmetric stress tensor is defined as:
-/// \f[ 
-/// \sigma_{rr}^* = -p^* + 2\mu\frac{\partial u^*}{\partial r^*}, 
-/// \qquad
-/// \sigma_{\theta\theta}^* = -p^* +2\mu\frac{u^*}{r^*},
-/// \f] 
-/// \f[ 
-/// \sigma_{zz}^* = -p^* + 2\mu\frac{\partial w^*}{\partial z^*},
-/// \qquad
-/// \sigma_{rz}^* = \mu\left(\frac{\partial u^*}{\partial z^*} +
-///                 \frac{\partial w^*}{\partial r^*}\right),
-/// \f] 
-/// \f[ 
-/// \sigma_{\theta r}^* = \mu r^*\frac{\partial}{\partial r^*}
-///                       \left(\frac{v^*}{r^*}\right),
-/// \qquad
-/// \sigma_{\theta z}^* = \mu\frac{\partial v^*}{\partial z^*}.
-/// \f] 
-/// Here, the (dimensional) velocity components are denoted 
-/// by \f$ u^* \f$, \f$ w^* \f$
-/// and \f$ v^* \f$ for the radial, axial and azimuthal velocities,
-/// respectively, and we
-/// have split the body force into two components: A constant
-/// vector \f$ \rho \ G_i^* \f$ which typically represents gravitational
-/// forces; and a variable body force, \f$ B_i^*(r^*,z^*,t^*) \f$.
-/// \f$ Q^*(r^*,z^*,t^*)  \f$ is a volumetric source term for the 
-/// continuity equation and is typically equal to zero. 
-/// \n\n
-/// We non-dimensionalise the equations, using problem-specific reference
-/// quantities for the velocity, \f$ U \f$, length, \f$ L \f$, and time,
-/// \f$ T \f$, and scale the constant body force vector on the 
-/// gravitational acceleration, \f$ g \f$, so that
-/// \f[ 
-/// u^* = U\, u, \qquad
-/// w^* = U\, w, \qquad
-/// v^* = U\, v, 
-/// \f] 
-/// \f[ 
-/// r^* = L\, r, \qquad
-/// z^* = L\, z, \qquad
-/// t^* = T\, t, 
-/// \f] 
-/// \f[ 
-/// G_i^* = g\, G_i, \qquad
-/// B_i^* = \frac{U\mu_{ref}}{L^2}\, B_i, \qquad
-/// p^* = \frac{\mu_{ref} U}{L}\, p, \qquad
-/// Q^* = \frac{U}{L}\, Q.
-/// \f] 
-/// where we note that the pressure and the variable body force have
-/// been non-dimensionalised on the viscous scale. \f$ \mu_{ref} \f$
-/// and \f$ \rho_{ref} \f$ (used below) are reference values 
-/// for the fluid viscosity and density, respectively. In single-fluid
-/// problems, they are identical to the viscosity \f$ \mu \f$ and 
-/// density \f$ \rho \f$ of the (one and only) fluid in the problem.
-/// \n\n
-/// The non-dimensional form of the axisymmetric Navier-Stokes equations
-/// is then given by
-/// \f[ 
-/// R_{\rho} Re\left(St\frac{\partial u}{\partial t} + {u}\frac{\partial
-///   u}{\partial r} - \frac{{v}^2}{r}
-///   + {w}\frac{\partial u}{\partial z} \right) =
-///   B_r\left(r,z,t\right)+  R_\rho \frac{Re}{Fr} G_r +
-///   \frac{1}{r}
-///   \frac{\partial\left({r}\sigma_{rr}\right)}{\partial r}
-///   - \frac{\sigma_{\theta\theta}}{r} +
-///   \frac{\partial\sigma_{rz}}{\partial z},
-/// \f] 
-/// \f[ 
-/// R_{\rho} Re\left(St\frac{\partial w}{\partial t} + {u}\frac{\partial
-///   w}{\partial r} + {w}\frac{\partial
-///   w}{\partial z} \right) =
-///    B_z\left(r,z,t\right)+ R_\rho \frac{Re}{Fr} G_z+ 
-///   \frac{1}{r}\frac{\partial\left({r}\sigma_{zr}\right)}{\partial
-///   r} + \frac{\partial\sigma_{zz}}{\partial z},
-/// \f] 
-/// \f[ 
-/// R_{\rho} Re\left(St\frac{\partial v}{\partial t} +
-///   {u}\frac{\partial v}{\partial r} +
-///   \frac{u v}{r}
-///   +{w}\frac{\partial v}{\partial z} \right)=
-///   B_\theta\left(r,z,t\right)+  R_\rho \frac{Re}{Fr} G_\theta+
-///   \frac{1}{r}\frac{\partial\left({r}\sigma_{\theta
-///   r}\right)}{\partial r} + \frac{\sigma_{r\theta}}{r} +
-///   \frac{\partial\sigma_{\theta z}}{\partial z},
-/// \f] 
-/// and
-/// \f[ 
-/// \frac{1}{r}\frac{\partial\left(ru\right)}{\partial r} +
-/// \frac{\partial w}{\partial z} = Q.
-/// \f] 
-/// Here the non-dimensional, symmetric stress tensor is defined as:
-/// \f[ 
-/// \sigma_{rr} = -p + 2R_\mu \frac{\partial u}{\partial r}, 
-/// \qquad
-/// \sigma_{\theta\theta} = -p +2R_\mu \frac{u}{r},
-/// \f] 
-/// \f[ 
-/// \sigma_{zz} = -p + 2R_\mu \frac{\partial w}{\partial z},
-/// \qquad
-/// \sigma_{rz} = R_\mu \left(\frac{\partial u}{\partial z} +
-///                 \frac{\partial w}{\partial r}\right), 
-/// \f] 
-/// \f[ 
-/// \sigma_{\theta r} = R_\mu r
-///       \frac{\partial}{\partial r}\left(\frac{v}{r}\right),
-/// \qquad
-/// \sigma_{\theta z} = R_\mu \frac{\partial v}{\partial z}.
-/// \f] 
-/// and the dimensionless parameters
-/// \f[ 
-/// Re = \frac{UL\rho_{ref}}{\mu_{ref}}, \qquad
-/// St = \frac{L}{UT}, \qquad
-/// Fr = \frac{U^2}{gL},
-/// \f] 
-/// are the Reynolds number, Strouhal number and Froude number
-/// respectively. \f$ R_\rho=\rho/\rho_{ref} \f$ and 
-/// \f$ R_\mu =\mu/\mu_{ref}\f$ represent the ratios
-/// of the fluid's density and its dynamic viscosity, relative to the
-/// density and viscosity values used to form the non-dimensional
-/// parameters (By default, \f$ R_\rho  = R_\mu = 1 \f$; other values
-/// tend to be used in problems involving multiple fluids). 
 //======================================================================
  class LinearisedAxisymmetricNavierStokesEquations
   : public virtual FiniteElement
@@ -500,31 +337,11 @@ namespace oomph
    virtual inline int p_index_linearised_axi_nst(const unsigned &i)
     const { return Pressure_not_stored_at_node; }
 
-   /// Integral of pressure over element
-   double pressure_integral() const;
-
-   /// Return integral of dissipation over element
-   double dissipation() const;
- 
-   /// Return dissipation at local coordinate s
-   double dissipation(const Vector<double>& s) const;
-
-   /// Get integral of kinetic energy over element
-   double kin_energy() const;
-
    /// \short Strain-rate tensor: \f$ e_{ij} \f$
    /// where \f$ i,j = r,z,\theta \f$ (in that order)
    void strain_rate(const Vector<double>& s, 
                     DenseMatrix<double>& strain_rate) const;
  
-   /// \short Compute traction (on the viscous scale) at local coordinate s 
-   /// for outer unit normal N
-   void traction(const Vector<double>& s, const Vector<double>& N, 
-                 Vector<double>& traction);
-   
-   /// Compute the diagonal of the velocity mass matrix
-   void get_velocity_mass_matrix_diagonal(Vector<double> &mass_diag);
-
    /// \short Output function: r, z, U^C, U^S, V^C, V^S, W^C, W^S, P^C, P^S
    /// in tecplot format. Default number of plot points
    void output(std::ostream &outfile)
@@ -554,36 +371,6 @@ namespace oomph
    /// at timestep t (t=0: present; t>0: previous timestep)
    void output_veloc(std::ostream &outfile, const unsigned &nplot,
                      const unsigned& t);
-   
-   /// \short Output exact solution specified via function pointer
-   /// at a given number of plot points. Function prints as
-   /// many components as are returned in solution Vector
-   void output_fct(std::ostream &outfile, const unsigned &nplot,
-                   FiniteElement::SteadyExactSolutionFctPt exact_soln_pt);
-   
-   /// \short Output exact solution specified via function pointer
-   /// at a given time and at a given number of plot points.
-   /// Function prints as many components as are returned in solution Vector.
-   void output_fct(std::ostream &outfile, const unsigned &nplot, 
-                   const double& time,
-                   FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt);
-   
-   /// \short Validate against exact solution at given time
-   /// Solution is provided via function pointer.
-   /// Plot at a given number of plot points and compute L2 error
-   /// and L2 norm of velocity solution over element
-   void compute_error(std::ostream &outfile,
-                      FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
-                      const double& time,
-                      double& error, double& norm);
-
-   /// \short Validate against exact solution.
-   /// Solution is provided via function pointer.
-   /// Plot at a given number of plot points and compute L2 error
-   /// and L2 norm of velocity solution over element
-   void compute_error(std::ostream &outfile,
-                      FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-                      double& error, double& norm);
    
    /// Compute the element's residual Vector
    void fill_in_contribution_to_residuals(Vector<double> &residuals)
@@ -705,7 +492,6 @@ namespace oomph
    /// pressure values are stored. We note that there are two pressure
    /// values, corresponding to the functions P^C(r,z,t) and P^S(r,z,t)
    /// which multiply the cosine and sine terms respectively.
-   //  PATRICKFLAG Does this want to be initialised to a magic number?
    Vector<unsigned> P_linearised_axi_nst_internal_index;
    
    /// \short Velocity shape and test functions and their derivatives 
@@ -739,7 +525,6 @@ namespace oomph
    /// of the two pressure components
    LinearisedAxisymmetricQCrouzeixRaviartElement() : QElement<2,3>(),
     LinearisedAxisymmetricNavierStokesEquations(), P_linearised_axi_nst_internal_index(2)
-    //  PATRICKFLAG Does this want to be initialised to a magic number?
     {
      // Loop over the two pressure components
      for(unsigned i=0;i<2;i++)
@@ -782,11 +567,6 @@ namespace oomph
       }
     }
    
-    /// \short Compute traction at local coordinate s for outer unit normal N
-    void get_traction(const Vector<double>& s,
-                      const Vector<double>& N,
-                      Vector<double>& traction);
-    
     /// \short Overload the access function for the i-th component of the 
     /// pressure's local equation numbers
     inline int p_local_eqn(const unsigned &n, const unsigned &i) 
@@ -813,15 +593,6 @@ namespace oomph
     /// \short The number of "blocks" that degrees of freedom in this
     /// element are sub-divided into: Velocity and pressure.
     unsigned ndof_types() { return 8; }
-    
-    /// \short Create a list of pairs for all unknowns in this element,
-    /// so that the first entry in each pair contains the global equation
-    /// number of the unknown, while the second one contains the number
-    /// of the "block" that this unknown is associated with.
-    /// (Function can obviously only be called if the equation numbering
-    /// scheme has been set up.) Velocity=0; Pressure=1
-    void get_dof_numbers_for_unknowns(
-     std::list<std::pair<unsigned long,unsigned> >& block_lookup_list);
     
   }; // End of LinearisedAxisymmetricQCrouzeixRaviartElement class definition
  
@@ -1028,11 +799,6 @@ namespace oomph
         ->set_value(p_index_linearised_axi_nst(i),pvalue);
       }
     }
-   
-    /// \short Compute traction at local coordinate s for outer unit normal N
-    void get_traction(const Vector<double>& s,
-                      const Vector<double>& N,
-                      Vector<double>& traction);
     
     /// \short Overload the access function for the i-th component of the
     /// pressure's local equation numbers
@@ -1060,15 +826,6 @@ namespace oomph
     /// \short Returns the number of "blocks" that degrees of freedom
     /// in this element are sub-divided into: Velocity and pressure.
     unsigned ndof_types() { return 8; }
-    
-    /// \short Create a list of pairs for all unknowns in this element,
-    /// so that the first entry in each pair contains the global equation
-    /// number of the unknown, while the second one contains the number
-    /// of the "block" that this unknown is associated with.
-    /// (Function can obviously only be called if the equation numbering
-    /// scheme has been set up.) Velocity=0; Pressure=1
-    void get_dof_numbers_for_unknowns(
-     std::list<std::pair<unsigned long, unsigned> >& block_lookup_list);
     
   }; // End of LinearisedAxisymmetricQCrouzeixRaviartElement class definition
  

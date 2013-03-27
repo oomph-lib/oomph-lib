@@ -36,10 +36,8 @@
 #endif
 
 //Oomph lib includes
-//#include "../generic/refineable_quad_element.h" // PATRICKFLAG PUT THESE BACK IN WHEN THIS FILE GOES INTO SRC
-//#include "../generic/error_estimator.h" // PATRICKFLAG PUT THESE BACK IN WHEN THIS FILE GOES INTO SRC
-#include "linearised_axisym_navier_stokes_elements.h" // PATRICKFLAG KEEP WHEN FILE GOES INTO SRC
-#include "generic.h" // PATRICKFLAG TAKE THIS OUT WHEN THIS FILE GOES INTO SRC
+#include "linearised_axisym_navier_stokes_elements.h"
+#include "generic.h"
 
 
 namespace oomph
@@ -404,7 +402,7 @@ public virtual RefineableQElement<2>
  ///  \short Perform additional hanging node procedures for variables
  /// that are not interpolated by all nodes. The two pressure components
  /// are stored at the 6th and 7th location in each node
- void further_setup_hanging_nodes() // PATRICKFLAG CHECK THIS
+ void further_setup_hanging_nodes()
   {
    const unsigned DIM=3;
    for(unsigned i=0;i<2;i++)
@@ -423,7 +421,7 @@ public virtual RefineableQElement<2>
   {
    const int DIM=3;
    // The only different nodes are the pressure nodes
-   if(n_value==(2*DIM) || n_value==((2*DIM)+1)) // PATRICKFLAG CHECK THIS
+   if(n_value==(2*DIM) || n_value==((2*DIM)+1))
     {
      return this->node_pt(this->Pconv[n]);
     }
@@ -435,10 +433,10 @@ public virtual RefineableQElement<2>
  /// the fraction is the same as the 1d node number, 0 or 1.
  double local_one_d_fraction_of_interpolating_node(const unsigned &n1d,
                                                    const unsigned &i, 
-                                                   const int &n_value) // PATRICKFLAG CHECK THIS
+                                                   const int &n_value)
   {
    const int DIM=3;
-   if(n_value==(2*DIM) || n_value==((2*DIM)+1)) // PATRICKFLAG CHECK THIS
+   if(n_value==(2*DIM) || n_value==((2*DIM)+1))
     {
      // The pressure nodes are just located on the boundaries at 0 or 1
      return double(n1d); 
@@ -455,7 +453,7 @@ public virtual RefineableQElement<2>
  /// the geometric nodes, but by recalling that there are only two pressure
  /// nodes per edge.
  Node* get_interpolating_node_at_local_coordinate(const Vector<double> &s,   
-                                                  const int &n_value) // PATRICKFLAG CHECK THIS
+                                                  const int &n_value)
   {
    const int DIM=3;
 
@@ -707,8 +705,6 @@ public virtual RefineableQElement<2>
      internal_data_pt(P_linearised_axi_nst_internal_index[i])->
       set_value(2,0.5*(slope1[i]+slope2[i]));
     } // End of loop over pressure components
-   // PATRICKFLAG CHECK THAT I'M DEFINATELY ABLE TO DO THIS AND THEN MAYBE
-   // CHANGE SLOPE1 AND 2 BACK TO DOUBLES -- NO NEED FOR VECTOR!
   }
  
 /// \short Order of recovery shape functions for Z2 error estimation:
@@ -871,7 +867,7 @@ public virtual RefineableQElement<2>
       set_value(2,0.5*cast_father_el_pt
                 ->internal_data_pt(P_linearised_axi_nst_internal_index[i])
                 ->value(2));
-    } // End of loop over pressure components PATRICKFLAG CAN TIDY THIS UP
+    } // End of loop over pressure components
   }
 
 };

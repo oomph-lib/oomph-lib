@@ -205,9 +205,6 @@ InterfaceProblem(const unsigned &n_x, const unsigned &n_y1,
  // All nodes are free by default -- just pin the ones that have
  // Dirichlet conditions here
 
- // Determine number of mesh boundaries
- const unsigned n_boundary = Bulk_mesh_pt->nboundary();
-
  // Loop over mesh boundaries
  for(unsigned b=0;b<5;b++)
   {
@@ -365,8 +362,6 @@ void InterfaceProblem<ELEMENT,TIMESTEPPER>::set_initial_condition()
 template <class ELEMENT, class TIMESTEPPER>
 void InterfaceProblem<ELEMENT,TIMESTEPPER>::set_boundary_conditions()
 {
- // Determine number of mesh boundaries
- const unsigned n_boundary = Bulk_mesh_pt->nboundary();
  
  // Loop over mesh boundaries
  for(unsigned b=0;b<5;b++)

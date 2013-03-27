@@ -43,7 +43,7 @@ mv RESLT RESLT_spine_two_layer_interface
 
 echo "Running elastic two layer interface Navier Stokes validation "
 mkdir RESLT
-../elastic_two_layer_interface dummy_input > OUTPUT_elastic_two_layer_interface
+../elastic_two_layer_interface --validation > OUTPUT_elastic_two_layer_interface
 echo "done"
 echo " " >> validation.log
 echo "Elastic two layer interface Navier--Stokes validation" >> validation.log

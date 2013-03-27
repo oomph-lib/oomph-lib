@@ -72,7 +72,7 @@ namespace oomph
 
   // Local array of booleans that are true if the l-th pressure value is
   // hanging (avoid repeated virtual function calls)
-  bool pressure_dof_is_hanging[n_pres]; // PATRICKFLAG CHECK!
+  bool pressure_dof_is_hanging[n_pres];
 
   // Loop over two pressure components
 //  for(unsigned i=0;i<2;i++)
@@ -408,7 +408,7 @@ namespace oomph
                   sum += 
                    scaled_re_st*r*mesh_velocity[j]
                    *interpolated_dudx(0,j)*testf_*W*hang_weight;
-                 } // PATRICKFLAG IS THIS CORRECT?
+                 }
                }
 
               break;
@@ -455,7 +455,7 @@ namespace oomph
                   sum += 
                    scaled_re_st*r*mesh_velocity[j]
                    *interpolated_dudx(1,j)*testf_*W*hang_weight;
-                 } // PATRICKFLAG IS THIS CORRECT?
+                 }
                }
 
               break;
@@ -499,7 +499,7 @@ namespace oomph
                   sum += 
                    scaled_re_st*r*mesh_velocity[j]
                    *interpolated_dudx(2,j)*testf_*W*hang_weight;
-                 } // PATRICKFLAG IS THIS CORRECT?
+                 }
                }
 
               break;
@@ -543,7 +543,7 @@ namespace oomph
                   sum += 
                    scaled_re_st*r*mesh_velocity[j]
                    *interpolated_dudx(3,j)*testf_*W*hang_weight;
-                 } // PATRICKFLAG IS THIS CORRECT?
+                 }
                }
         
               break;
@@ -592,7 +592,7 @@ namespace oomph
                   sum += 
                    scaled_re_st*r*mesh_velocity[j]
                    *interpolated_dudx(4,j)*testf_*W*hang_weight;
-                 } // PATRICKFLAG IS THIS CORRECT?
+                 }
                }
               
               break;
@@ -641,7 +641,7 @@ namespace oomph
                   sum += 
                    scaled_re_st*r*mesh_velocity[j]
                    *interpolated_dudx(5,j)*testf_*W*hang_weight;
-                 } // PATRICKFLAG IS THIS CORRECT?
+                 }
                }
               
               break;
@@ -666,7 +666,7 @@ namespace oomph
               for(unsigned l2=0;l2<n_node;l2++)
                {
                 // Cache velocity shape functions and their derivatives
-                const double psif_ = psif[l2];// PATRICKFLAG CHECK THAT I REALLY WANT TO DO THIS HERE
+                const double psif_ = psif[l2];
                 const double dpsifdr = dpsifdx(l2,0);
                 const double dpsifdz = dpsifdx(l2,1);
 
@@ -778,7 +778,7 @@ namespace oomph
                               jacobian(local_eqn,local_unknown) += 
                                scaled_re_st*r*mesh_velocity[j]
                                *dpsifdx(l2,j)*testf_*W*hang_weight*hang_weight2;
-                             } // PATRICKFLAG IS THIS CORRECT?
+                             }
                            }
                           
                           break;
@@ -864,7 +864,7 @@ namespace oomph
                            {
                             mass_matrix(local_eqn,local_unknown) +=
                              scaled_re_st*r*psif_*testf_*W*hang_weight*hang_weight2;
-                           } // PATRICKFLAG IS THIS CORRECT?
+                           }
                           
                           // Add contributions to the Jacobian matrix
                           
@@ -897,7 +897,7 @@ namespace oomph
                               jacobian(local_eqn,local_unknown) += 
                                scaled_re_st*r*mesh_velocity[j]
                                *dpsifdx(l2,j)*testf_*W*hang_weight*hang_weight2;
-                             } // PATRICKFLAG IS THIS CORRECT?
+                             }
                            }
                           
                           break;
@@ -984,7 +984,7 @@ namespace oomph
                            {
                             mass_matrix(local_eqn,local_unknown) +=
                              scaled_re_st*r*psif_*testf_*W*hang_weight*hang_weight2;
-                           } // PATRICKFLAG IS THIS CORRECT?
+                           }
                           
                           // Add contributions to the Jacobian matrix
                           
@@ -1018,7 +1018,7 @@ namespace oomph
                               jacobian(local_eqn,local_unknown) += 
                                scaled_re_st*r*mesh_velocity[j]
                                *dpsifdx(l2,j)*testf_*W*hang_weight*hang_weight2;
-                             } // PATRICKFLAG IS THIS CORRECT?
+                             }
                            }
                           
                           break;
@@ -1100,7 +1100,7 @@ namespace oomph
                            {
                             mass_matrix(local_eqn,local_unknown) +=
                              scaled_re_st*r*psif_*testf_*W*hang_weight*hang_weight2;
-                           } // PATRICKFLAG IS THIS CORRECT?
+                           }
                           
                           // Add contributions to the Jacobian matrix
                           
@@ -1134,7 +1134,7 @@ namespace oomph
                               jacobian(local_eqn,local_unknown) += 
                                scaled_re_st*r*mesh_velocity[j]
                                *dpsifdx(l2,j)*testf_*W*hang_weight*hang_weight2;
-                             } // PATRICKFLAG IS THIS CORRECT?
+                             }
                            }
                           
                           break;
@@ -1217,7 +1217,7 @@ namespace oomph
                            {
                             mass_matrix(local_eqn,local_unknown) +=
                              scaled_re_st*r*psif_*testf_*W*hang_weight*hang_weight2;
-                           } // PATRICKFLAG IS THIS CORRECT?
+                           }
                           
                           // Add contributions to the Jacobian matrix
                           
@@ -1251,7 +1251,7 @@ namespace oomph
                               jacobian(local_eqn,local_unknown) += 
                                scaled_re_st*r*mesh_velocity[j]
                                *dpsifdx(l2,j)*testf_*W*hang_weight*hang_weight2;
-                             } // PATRICKFLAG IS THIS CORRECT?
+                             }
                            }
                           
                           break;
@@ -1338,7 +1338,7 @@ namespace oomph
                            {
                             mass_matrix(local_eqn,local_unknown) +=
                              scaled_re_st*r*psif_*testf_*W*hang_weight*hang_weight2;
-                           } // PATRICKFLAG IS THIS CORRECT?
+                           }
                           
                           // Add contributions to the Jacobian matrix
                           
@@ -1372,7 +1372,7 @@ namespace oomph
                               jacobian(local_eqn,local_unknown) += 
                                scaled_re_st*r*mesh_velocity[j]
                                *dpsifdx(l2,j)*testf_*W*hang_weight*hang_weight2;
-                             } // PATRICKFLAG IS THIS CORRECT?
+                             }
                            }
                           
                           break;
@@ -1394,7 +1394,7 @@ namespace oomph
                  {
                   // Pressure dof is hanging so it must be nodal-based
                   hang_info2_pt = 
-                   pressure_node_pt(l2)->hanging_pt(p_index[0]); // PATRICKFLAG WHAT TO DO ABOUT THIS!?
+                   pressure_node_pt(l2)->hanging_pt(p_index[0]);
                   
                   // Get the number of master nodes from the pressure node
                   n_master2 = hang_info2_pt->nmaster();
@@ -1598,7 +1598,7 @@ namespace oomph
       if(pressure_dof_is_hanging[l])
        {
         // Pressure dof is hanging so it must be nodal-based
-        hang_info_pt = pressure_node_pt(l)->hanging_pt(p_index[0]); // PATRICKFLAG WHAT TO DO ABOUT THIS!?
+        hang_info_pt = pressure_node_pt(l)->hanging_pt(p_index[0]);
 
         //Get the number of master nodes from the pressure node
         n_master = hang_info_pt->nmaster();
@@ -1686,7 +1686,7 @@ namespace oomph
               for(unsigned l2=0;l2<n_node;l2++)
                {
                 // Cache velocity shape functions and their derivatives
-                const double psif_ = psif[l2];// PATRICKFLAG CHECK THAT I REALLY WANT TO DO THIS HERE
+                const double psif_ = psif[l2];
                 const double dpsifdr = dpsifdx(l2,0);
                 const double dpsifdz = dpsifdx(l2,1);
 

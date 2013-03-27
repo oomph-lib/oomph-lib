@@ -53,375 +53,8 @@ namespace oomph
  double LinearisedAxisymmetricNavierStokesEquations::
  Default_Physical_Ratio_Value = 1.0;
  
- //================================================================
- /// Compute the diagonal of the velocity mass matrix
- // PATRICKFLAG This function has not been validated.
- //================================================================
- void LinearisedAxisymmetricNavierStokesEquations::
- get_velocity_mass_matrix_diagonal(Vector<double> &mass_diag)
- {
-  // Resize and initialise
-  mass_diag.assign(ndof(),0.0);
-  
-  // Determine number of nodes in element
-  const unsigned n_node = nnode();
-  
-  // Determine number of velocity components
-  const unsigned n_value = 6;
-  
-  // Determine indices at which the local velocities are stored
-  Vector<unsigned> u_nodal_index(n_value);
-  for(unsigned i=0;i<n_value;i++)
-   {
-    u_nodal_index[i] = this->u_index_linearised_axi_nst(i);
-   }
-  
-  // Set up memory for test functions
-  Shape test(n_node);
-  
-  // Determine number of integration points
-  const unsigned n_intpt = integral_pt()->nweight();
-  
-  // Integer to store the local equation number
-  int local_eqn = 0;
-  
-  // Loop over the integration points
-  for(unsigned ipt=0; ipt<n_intpt; ipt++)
-   {
-    
-    // Get the integral weight
-    const double w = integral_pt()->weight(ipt);
-
-    // Get determinant of Jacobian of the mapping
-    const double J = J_eulerian_at_knot(ipt);
-    
-    // Premultiply weights and Jacobian
-    double W = w*J;
-
-    // Get the velocity test functions - there is no explicit 
-    // function to give the test function so use shape
-    shape_at_knot(ipt,test);
-    
-    // Need to get the position to sort out the Jacobian properly
-    double r = 0.0;
-    for(unsigned l=0;l<n_node;l++)
-     {
-      r += this->nodal_position(l,0)*test(l);
-     }
-
-    // Multiply by the geometric factor
-    W *= r;
-
-    // Loop over the velocity test functions
-    for(unsigned l=0;l<n_node;l++)
-     {
-      // Loop over the velocity components
-      for(unsigned i=0;i<n_value;i++)
-       {
-        local_eqn = nodal_local_eqn(l,u_nodal_index[i]);
-
-        // If not a boundary condition
-        if(local_eqn >= 0)
-         {
-          // Add the contribution
-          mass_diag[local_eqn] += test[l]*test[l] * W;
-         } // End of if not boundary condition statement
-       } // End of loop over dimension
-     } // End of loop over test functions
-   } // End of loop over integration points
- }
 
 
-
- //======================================================================
- /// Validate against exact velocity solution at given time.
- /// Solution is provided via function pointer.
- /// Plot at a given number of plot points and compute L2 error
- /// and L2 norm of velocity solution over element.
- // PATRICKFLAG This function has not been validated.
- //=======================================================================
- void LinearisedAxisymmetricNavierStokesEquations::
- compute_error(std::ostream &outfile,
-               FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
-               const double& time,
-               double& error, double& norm)
- {
-  // Initialise error and norm to zero
-  error = 0.0;
-  norm = 0.0;
-  
-  // Allocate storage for vector of local coordinates
-  Vector<double> s(2);
-  
-  // Allocate storage for vector of global coordintes
-  Vector<double> x(2);
-  
-  // Determine number of integration points
-  const unsigned n_intpt = integral_pt()->nweight();
-  
-  outfile << "ZONE" << std::endl;
-
-  // Allocate storage for exact solution vector
-  // (U^C, U^S, V^C, V^S, W^C, W^S, P^C, P^S)
-  Vector<double> exact_soln(8);
-  
-  // Loop over the integration points
-  for(unsigned ipt=0;ipt<n_intpt;ipt++)
-   {
-    // Assign values of the local coordinates (s)
-    for(unsigned i=0;i<2;i++) { s[i] = integral_pt()->knot(ipt,i); }
-    
-    // Get the integral weight
-    const double w = integral_pt()->weight(ipt);
-    
-    // Get Jacobian of mapping between local and global coordinates
-    const double J = J_eulerian(s);
-    
-    // Get global coordinates of the integration point
-    interpolated_x(s,x);
-    
-    // Premultiply the weights and the Jacobian and r
-    const double W = w*J*x[0];
-    
-    // Get exact solution at this point
-    (*exact_soln_pt)(time,x,exact_soln);
-    
-    // Determine the velocity error
-    // ----------------------------
-
-    // Loop over the velocity components
-    for(unsigned i=0;i<6;i++)
-     {
-      // Add contribution to norm
-      norm += exact_soln[i]*exact_soln[i]*W;
-
-      // Add contribution to error
-      error += (exact_soln[i]-interpolated_u_linearised_axi_nst(s,i))*
-       (exact_soln[i]-interpolated_u_linearised_axi_nst(s,i))*W;
-     }
-    
-    // Output global coordinates at the integration point
-    for(unsigned i=0;i<2;i++) { outfile << x[i] << " "; }
-    
-    // Output errors of velocity components
-    for(unsigned i=0;i<6;i++)
-     {
-      outfile << exact_soln[i]-interpolated_u_linearised_axi_nst(s,i)
-              << " ";
-     }
-    
-    outfile << std::endl;
-
-   } // End of loop over integration points
- }
-
-
- 
- //======================================================================
- /// Validate against exact velocity solution
- /// Solution is provided via function pointer.
- /// Plot at a given number of plot points and compute L2 error
- /// and L2 norm of velocity solution over element.
- // PATRICKFLAG This function has not been validated.
- //=======================================================================
- void LinearisedAxisymmetricNavierStokesEquations::
- compute_error(std::ostream &outfile,
-               FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-               double& error, double& norm)
- {
-  // Initialise error and norm to zero
-  error = 0.0;
-  norm = 0.0;
-  
-  // Allocate storage for vector of local coordinates
-  Vector<double> s(2);
-  
-  // Allocate storage for vector of global coordintes
-  Vector<double> x(2);
-  
-  // Determine number of integration points
-  const unsigned n_intpt = integral_pt()->nweight();
-  
-  outfile << "ZONE" << std::endl;
-  
-  // Allocate storage for exact solution vector
-  // (U^C, U^S, V^C, V^S, W^C, W^S, P^C, P^S)
-  Vector<double> exact_soln(8);
-  
-  // Loop over the integration points
-  for(unsigned ipt=0;ipt<n_intpt;ipt++)
-   {
-    
-    // Assign values of the local coordinates (s)
-    for(unsigned i=0;i<2;i++) { s[i] = integral_pt()->knot(ipt,i); }
-    
-    // Get the integral weight
-    const double w = integral_pt()->weight(ipt);
-    
-    // Get Jacobian of mapping between local and global coordinates
-    const double J = J_eulerian(s);
-    
-    // Get global coordinates of the integration point
-    interpolated_x(s,x);
-    
-    // Premultiply the weights and the Jacobian and r
-    const double W = w*J*x[0];
-    
-    // Get exact solution at this point
-    (*exact_soln_pt)(x,exact_soln);
-    
-    // Determine the velocity error
-    // ----------------------------
-
-    // Loop over the velocity components
-    for(unsigned i=0;i<6;i++)
-     {
-      // Add contribution to norm
-      norm += exact_soln[i]*exact_soln[i]*W;
-
-      // Add contribution to error
-      error += (exact_soln[i]-interpolated_u_linearised_axi_nst(s,i))*
-       (exact_soln[i]-interpolated_u_linearised_axi_nst(s,i))*W;
-     }
-    
-    // Output global coordinates at the integration point
-    for(unsigned i=0;i<2;i++) { outfile << x[i] << " "; }
-    
-    // Output errors of velocity components
-    for(unsigned i=0;i<6;i++)
-     {
-      outfile << exact_soln[i]-interpolated_u_linearised_axi_nst(s,i)
-              << " ";
-     }
-    
-    outfile << std::endl;
-
-   } // End of loop over integration points
- }
-
-
- 
- //======================================================================
- /// Output "exact" solution at a given time
- /// Solution is provided via function pointer.
- /// Plot at a given number of plot points.
- /// Function prints as many components as are returned in solution Vector.
- // PATRICKFLAG This function has not been validated.
- //=======================================================================
- void LinearisedAxisymmetricNavierStokesEquations::
- output_fct(std::ostream &outfile,
-            const unsigned &nplot, 
-            const double& time,
-            FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)
- {
-  
-  // Allocate storage for vector of local coordinates
-  Vector<double> s(2);
-  
-  // Allocate storage for vector of global coordintes
-  Vector<double> x(2);
-  
-  // Write tecplot header
-  outfile << tecplot_zone_string(nplot);
-  
-  // Allocate storage for exact solution vector
-  Vector<double> exact_soln;
-  
-  // Determine number of plot points
-  const unsigned n_plot_points = nplot_points(nplot);
-
-  // Loop over plot points
-  for(unsigned iplot=0;iplot<n_plot_points;iplot++)
-   {
-    // Get local coordinates of plot point
-    get_s_plot(iplot,nplot,s);
-    
-    // Get global coordinates of plot point from local coordinates
-    interpolated_x(s,x);
-    
-    // Get exact solution at this point
-    (*exact_soln_pt)(time,x,exact_soln);
-    
-    // Output global coordinates of plot point
-    for(unsigned i=0;i<2;i++) { outfile << x[i] << " "; }
-    
-    // Determine number of components in exact solution vector
-    const unsigned n_comp = exact_soln.size();
-
-    // Output exact solution
-    for(unsigned i=0;i<n_comp;i++) { outfile << exact_soln[i] << " "; }
-    
-    outfile << std::endl;
-    
-   } // End of loop over plot points
-  
-  // Write tecplot footer (e.g. FE connectivity lists)
-  write_tecplot_zone_footer(outfile,nplot);
-  
- }
-
-
-
- //======================================================================
- /// Output "exact" solution
- /// Solution is provided via function pointer.
- /// Plot at a given number of plot points.
- /// Function prints as many components as are returned in solution Vector.
- // PATRICKFLAG This function has not been validated.
- //=======================================================================
- void LinearisedAxisymmetricNavierStokesEquations::
- output_fct(std::ostream &outfile, 
-            const unsigned &nplot, 
-            FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
- {
-  
-  // Allocate storage for vector of local coordinates
-  Vector<double> s(2);
-  
-  // Allocate storage for vector of global coordintes
-  Vector<double> x(2);
-  
-  // Write tecplot header
-  outfile << tecplot_zone_string(nplot);
-  
-  // Allocate storage for exact solution vector
-  Vector<double> exact_soln;
-  
-  // Determine number of plot points
-  const unsigned n_plot_points = nplot_points(nplot);
-
-  // Loop over plot points
-  for(unsigned iplot=0;iplot<n_plot_points;iplot++)
-   {
-    // Get local coordinates of plot point
-    get_s_plot(iplot,nplot,s);
-    
-    // Get global coordinates of plot point from local coordinates
-    interpolated_x(s,x);
-    
-    // Get exact solution at this point
-    (*exact_soln_pt)(x,exact_soln);
-    
-    // Output global coordinates of plot point
-    for(unsigned i=0;i<2;i++) { outfile << x[i] << " "; }
-    
-    // Determine number of components in exact solution vector
-    const unsigned n_comp = exact_soln.size();
-
-    // Output exact solution
-    for(unsigned i=0;i<n_comp;i++) { outfile << exact_soln[i] << " "; }
-    
-    outfile << std::endl;
-    
-   } // End of loop over plot points
-  
-  // Write tecplot footer (e.g. FE connectivity lists)
-  write_tecplot_zone_footer(outfile,nplot);
-  
- }
-
-
- 
  //==============================================================
  /// Output function: Velocities only  
  /// r, z, U^C, U^S, V^C, V^S, W^C, W^S
@@ -689,128 +322,6 @@ namespace oomph
  } // End of output(...)
 
 
-
- //==============================================================
- /// Return integral of dissipation over element
- // PATRICKFLAG This has not been updated since copying across from
- // axisym_navier_stokes_elements.cc
- //==============================================================
- double LinearisedAxisymmetricNavierStokesEquations::dissipation() const
- {  
-  throw OomphLibError(
-   "Check the dissipation calculation for linearised_axisymmetric NSt",
-   "LinearisedAxisymmetricNavierStokesEquations::dissipation()",
-   OOMPH_EXCEPTION_LOCATION);
-  
-  // Initialise
-  double diss=0.0;
-  
-  //Set the value of n_intpt
-  unsigned n_intpt = integral_pt()->nweight();
-  
-  //Set the Vector to hold local coordinates
-  Vector<double> s(2);
-  
-  //Loop over the integration points
-  for(unsigned ipt=0;ipt<n_intpt;ipt++)
-   {
-    
-    //Assign values of s
-    for(unsigned i=0;i<2;i++)
-     {
-      s[i] = integral_pt()->knot(ipt,i);
-     }
-    
-    //Get the integral weight
-    double w = integral_pt()->weight(ipt);
-    
-    // Get Jacobian of mapping
-    double J = J_eulerian(s);
-    
-    // Get strain rate matrix
-    DenseMatrix<double> strainrate(3,3);
-    strain_rate(s,strainrate);
-    
-    // Initialise
-    double local_diss=0.0;
-    for(unsigned i=0;i<3;i++) 
-     {
-      for(unsigned j=0;j<3;j++) 
-       {    
-        local_diss+=2.0*strainrate(i,j)*strainrate(i,j);
-       }
-     }
-    
-    diss+=local_diss*w*J;
-   }
-  
-  return diss;
-  
- }
- 
- //==============================================================
- /// \short Compute traction (on the viscous scale) at local
- /// coordinate s for outer unit normal N
- // PATRICKFLAG This has not been updated since copying across from
- // axisym_navier_stokes_elements.cc
- //==============================================================
- void LinearisedAxisymmetricNavierStokesEquations::traction(
-  const Vector<double>& s,
-  const Vector<double>& N, 
-  Vector<double>& traction)
- {
-  throw OomphLibError(
-   "Check the traction calculation for linearised_axisymmetric NSt",
-   "LinearisedAxisymmetricNavierStokesEquations::traction()",
-   OOMPH_EXCEPTION_LOCATION);
-  
-//   // Get velocity gradients
-//   DenseMatrix<double> strainrate(3,3);
-//   strain_rate(s,strainrate);
-  
-//   // Get pressure
-//   double press=interpolated_p_linearised_axi_nst(s);
-  
-//   // Loop over traction components
-//   for (unsigned i=0;i<3;i++)
-//    {
-//     traction[i]=-press*N[i];
-//     for (unsigned j=0;j<3;j++)
-//      {
-//       traction[i]+=2.0*strainrate(i,j)*N[j];
-//      }
-//    }
- }
- 
- //==============================================================
- /// Return dissipation at local coordinate s
- // PATRICKFLAG This has not been updated since copying across from
- // axisym_navier_stokes_elements.cc
- //==============================================================
- double LinearisedAxisymmetricNavierStokesEquations::
- dissipation(const Vector<double>& s) const
- {  
-  throw OomphLibError(
-   "Check the dissipation calculation for linearised_axisymmetric NSt",
-   "LinearisedAxisymmetricNavierStokesEquations::dissipation()",
-   OOMPH_EXCEPTION_LOCATION);
-  
-  // Get strain rate matrix
-  DenseMatrix<double> strainrate(3,3);
-  strain_rate(s,strainrate);
-  
-  // Initialise
-  double local_diss=0.0;
-  for(unsigned i=0;i<3;i++) 
-   {
-    for(unsigned j=0;j<3;j++) 
-     {    
-      local_diss+=2.0*strainrate(i,j)*strainrate(i,j);
-     }
-   }
-  
-  return local_diss;
- }
  
  //==============================================================
  /// Get strain-rate tensor: \f$ e_{ij} \f$  where 
@@ -854,7 +365,7 @@ namespace oomph
   double UC = 0.0, US = 0.0;
   double dUCdr = 0.0, dUSdr = 0.0;
   double dUCdz = 0.0, dUSdz = 0.0;
-  double WC = 0.0, WS = 0.0; // PATRICKFLAG don't need this
+  double WC = 0.0, WS = 0.0;
   double dWCdr = 0.0, dWSdr = 0.0;
   double dWCdz = 0.0, dWSdz = 0.0;
   double VC = 0.0, VS = 0.0;
@@ -873,8 +384,8 @@ namespace oomph
     
     UC += nodal_value(l,u_nodal_index[0])*psi[l];
     US += nodal_value(l,u_nodal_index[1])*psi[l];
-    WC += nodal_value(l,u_nodal_index[2])*psi[l]; // PATRICKFLAG don't need this
-    WS += nodal_value(l,u_nodal_index[3])*psi[l]; // PATRICKFLAG don't need this
+    WC += nodal_value(l,u_nodal_index[2])*psi[l];
+    WS += nodal_value(l,u_nodal_index[3])*psi[l];
     VC += nodal_value(l,u_nodal_index[4])*psi[l];
     VS += nodal_value(l,u_nodal_index[4])*psi[l];
     
@@ -906,7 +417,6 @@ namespace oomph
   // Assemble velocities and their derivatives w.r.t. r, z and theta
   // from real and imaginary parts
   const double ur = UC*cosktheta + US*sinktheta;
-//  const double uz = WC*cosktheta + WS*sinktheta; // PATRICKFLAG don't need this
   const double utheta = VC*cosktheta + VS*sinktheta;
 
   const double durdr = dUCdr*cosktheta + dUSdr*sinktheta;
@@ -949,105 +459,6 @@ namespace oomph
  }
  
  
- //==============================================================
- ///  \short Get integral of kinetic energy over element:
- // PATRICKFLAG This has not been updated since copying across from
- // axisym_navier_stokes_elements.cc
- //==============================================================
- double LinearisedAxisymmetricNavierStokesEquations::kin_energy() const
- {  
-  
-  throw OomphLibError(
-   "Check the kinetic energy calculation for linearised_axisymmetric NSt",
-   "LinearisedAxisymmetricNavierStokesEquations::kin_energy()",
-   OOMPH_EXCEPTION_LOCATION);
-  
-  // Initialise
-  double kin_en=0.0;
-  
-  //Set the value of n_intpt
-  unsigned n_intpt = integral_pt()->nweight();
-  
-  //Set the Vector to hold local coordinates
-  Vector<double> s(2);
-  
-  //Loop over the integration points
-  for(unsigned ipt=0;ipt<n_intpt;ipt++)
-   {   
-    //Assign values of s
-    for(unsigned i=0;i<2;i++) {s[i] = integral_pt()->knot(ipt,i);}
-    
-    //Get the integral weight
-    double w = integral_pt()->weight(ipt);
-    
-    //Get Jacobian of mapping
-    double J = J_eulerian(s);
-    
-    // Loop over directions
-    double veloc_squared=0.0;
-    for(unsigned i=0;i<3;i++) 
-     {
-      veloc_squared+=interpolated_u_linearised_axi_nst(s,i)*interpolated_u_linearised_axi_nst(s,i);
-     }
-    
-    kin_en+=0.5*veloc_squared*w*J*interpolated_x(s,0);
-   }
-  
-  return kin_en;
-  
- }
- 
- //==============================================================
- /// Return pressure integrated over the element
- // PATRICKFLAG This has not been updated since copying across from
- // axisym_navier_stokes_elements.cc
- //==============================================================
- double LinearisedAxisymmetricNavierStokesEquations::pressure_integral() const
- {
-   throw OomphLibError(
-   "Deliberately broken function (not implemented yet)",
-   "LinearisedAxisymmetricNavierStokesEquations::pressure_integral()",
-   OOMPH_EXCEPTION_LOCATION);
-
-//   // Initialise 
-//   double press_int=0;
-  
-//   //Set the value of n_intpt
-//   unsigned n_intpt = integral_pt()->nweight();
-  
-//   //Set the Vector to hold local coordinates
-//   Vector<double> s(2);
-  
-//   //Loop over the integration points
-//   for(unsigned ipt=0;ipt<n_intpt;ipt++)
-//    {
-    
-//     //Assign values of s
-//     for(unsigned i=0;i<2;i++)
-//      {
-//       s[i] = integral_pt()->knot(ipt,i);
-//      }
-    
-//     //Get the integral weight
-//     double w = integral_pt()->weight(ipt);
-    
-//     //Get Jacobian of mapping
-//     double J = J_eulerian(s);
-    
-//     //Premultiply the weights and the Jacobian
-//     double W = w*J*interpolated_x(s,0);
-    
-//     // Get pressure
-//     double press=interpolated_p_linearised_axi_nst(s);
-    
-//     // Add
-//     press_int+=press*W;
-    
-//    }
-  
-//   return press_int;
-  
- }
  
  //==============================================================
  /// Compute the residuals for the Navier--Stokes 
@@ -1325,7 +736,7 @@ namespace oomph
             residuals[local_eqn] += 
              scaled_re_st*r*mesh_velocity[j]
              *interpolated_dudx(0,j)*testf_*W;
-           } // PATRICKFLAG IS THIS CORRECT?
+           }
          }
         
         // Calculate the Jacobian
@@ -1350,7 +761,7 @@ namespace oomph
                 // Add the mass matrix
                 mass_matrix(local_eqn,local_unknown) +=
                  scaled_re_st*r*psif_*testf_*W;
-               } // PATRICKFLAG IS THIS CORRECT?
+               }
               
               // Add contributions to the Jacobian matrix
 
@@ -1383,7 +794,7 @@ namespace oomph
                   jacobian(local_eqn,local_unknown) += 
                    scaled_re_st*r*mesh_velocity[j]
                    *dpsifdx(l2,j)*testf_*W;
-                 } // PATRICKFLAG IS THIS CORRECT?
+                 }
                }
              }
             
@@ -1496,7 +907,7 @@ namespace oomph
             residuals[local_eqn] += 
              scaled_re_st*r*mesh_velocity[j]
              *interpolated_dudx(1,j)*testf_*W;
-           } // PATRICKFLAG IS THIS CORRECT?
+           }
          }
         
         // Calculate the Jacobian
@@ -1530,7 +941,7 @@ namespace oomph
                 // Add the mass matrix
                 mass_matrix(local_eqn,local_unknown) +=
                  scaled_re_st*r*psif_*testf_*W;
-               } // PATRICKFLAG IS THIS CORRECT?
+               }
               
               // Add contributions to the Jacobian matrix
 
@@ -1563,7 +974,7 @@ namespace oomph
                   jacobian(local_eqn,local_unknown) += 
                    scaled_re_st*r*mesh_velocity[j]
                    *dpsifdx(l2,j)*testf_*W;
-                 } // PATRICKFLAG IS THIS CORRECT?
+                 }
                }
              }
 
@@ -1664,7 +1075,7 @@ namespace oomph
             residuals[local_eqn] += 
              scaled_re_st*r*mesh_velocity[j]
              *interpolated_dudx(2,j)*testf_*W;
-           } // PATRICKFLAG IS THIS CORRECT?
+           }
          }
         
         // Calculate the Jacobian
@@ -1705,7 +1116,7 @@ namespace oomph
                 // Add the mass matrix
                 mass_matrix(local_eqn,local_unknown) +=
                  scaled_re_st*r*psif_*testf_*W;
-               } // PATRICKFLAG IS THIS CORRECT?
+               }
               
               // Add contributions to the Jacobian matrix
 
@@ -1739,7 +1150,7 @@ namespace oomph
                   jacobian(local_eqn,local_unknown) += 
                    scaled_re_st*r*mesh_velocity[j]
                    *dpsifdx(l2,j)*testf_*W;
-                 } // PATRICKFLAG IS THIS CORRECT?
+                 }
                }
              }
             
@@ -1827,7 +1238,7 @@ namespace oomph
             residuals[local_eqn] += 
              scaled_re_st*r*mesh_velocity[j]
              *interpolated_dudx(3,j)*testf_*W;
-           } // PATRICKFLAG IS THIS CORRECT?
+           }
          }
         
         // Calculate the Jacobian
@@ -1877,7 +1288,7 @@ namespace oomph
                 // Add the mass matrix
                 mass_matrix(local_eqn,local_unknown) +=
                  scaled_re_st*r*psif_*testf_*W;
-               } // PATRICKFLAG IS THIS CORRECT?
+               }
 
               // Add contributions to the Jacobian matrix
               
@@ -1911,7 +1322,7 @@ namespace oomph
                   jacobian(local_eqn,local_unknown) += 
                    scaled_re_st*r*mesh_velocity[j]
                    *dpsifdx(l2,j)*testf_*W;
-                 } // PATRICKFLAG IS THIS CORRECT?
+                 }
                }
              }
             
@@ -1995,7 +1406,7 @@ namespace oomph
             residuals[local_eqn] += 
              scaled_re_st*r*mesh_velocity[j]
              *interpolated_dudx(4,j)*testf_*W;
-           } // PATRICKFLAG IS THIS CORRECT?
+           }
          }
         
         // Calculate the Jacobian
@@ -2057,7 +1468,7 @@ namespace oomph
                 // Add the mass matrix
                 mass_matrix(local_eqn,local_unknown) +=
                  scaled_re_st*r*psif_*testf_*W;
-               } // PATRICKFLAG IS THIS CORRECT?
+               }
               
               // Add contributions to the Jacobian matrix
 
@@ -2091,7 +1502,7 @@ namespace oomph
                   jacobian(local_eqn,local_unknown) += 
                    scaled_re_st*r*mesh_velocity[j]
                    *dpsifdx(l2,j)*testf_*W;
-                 } // PATRICKFLAG IS THIS CORRECT?
+                 }
                }
              }
 
@@ -2171,7 +1582,7 @@ namespace oomph
             residuals[local_eqn] += 
              scaled_re_st*r*mesh_velocity[j]
              *interpolated_dudx(5,j)*testf_*W;
-           } // PATRICKFLAG IS THIS CORRECT?
+           }
          }
         
         // Calculate the Jacobian
@@ -2242,7 +1653,7 @@ namespace oomph
                 // Add the mass matrix
                 mass_matrix(local_eqn,local_unknown) +=
                  scaled_re_st*r*psif_*testf_*W;
-               } // PATRICKFLAG IS THIS CORRECT?
+               }
               
               // Add contributions to the Jacobian matrix
 
@@ -2276,7 +1687,7 @@ namespace oomph
                   jacobian(local_eqn,local_unknown) += 
                    scaled_re_st*r*mesh_velocity[j]
                    *dpsifdx(l2,j)*testf_*W;
-                 } // PATRICKFLAG IS THIS CORRECT?
+                 }
                }
              }
            } // End of loop over velocity shape functions
@@ -2318,7 +1729,7 @@ namespace oomph
       // --------------------------------------
 
       // Get local equation number of first pressure value at this node
-      local_eqn = p_local_eqn(l,0);// PATRICKFLAG IS THIS DEFINATELY THE CORRECT WAY TO DO THIS?
+      local_eqn = p_local_eqn(l,0);
 
       // If it's not a boundary condition
       if(local_eqn >= 0)
@@ -2387,7 +1798,7 @@ namespace oomph
       // -------------------------------------
 
       // Get local equation number of second pressure value at this node
-      local_eqn = p_local_eqn(l,1);// PATRICKFLAG IS THIS DEFINATELY THE CORRECT WAY TO DO THIS?
+      local_eqn = p_local_eqn(l,1);
 
       // If it's not a boundary condition
       if(local_eqn >= 0)
@@ -2466,88 +1877,6 @@ namespace oomph
 
 
 
- //=========================================================================
- /// Create a list of pairs for all unknowns in this element,
- /// so that the first entry in each pair contains the global equation
- /// number of the unknown, while the second one contains the number
- /// of the "block" that this unknown is associated with.
- /// (Function can obviously only be called if the equation numbering
- /// scheme has been set up.)
- // PATRICKFLAG This function has not been validated.
- //=========================================================================
- void LinearisedAxisymmetricQCrouzeixRaviartElement::
- get_dof_numbers_for_unknowns(
-  std::list<std::pair<unsigned long,unsigned> >& block_lookup_list)
- {
-  // Determine number of nodes in element
-  const unsigned n_node = this->nnode();
-  
-  // Determine number of pressure values corresponding to a single pressure
-  // component
-  const unsigned n_pres = this->npres_linearised_axi_nst();
-  
-  // Temporary pair (used to store block lookup prior to being added to list)
-  std::pair<unsigned,unsigned> block_lookup;
-  
-  // pressure dof number (is this really OK?)
-//  unsigned pressure_dof_number = 4; // PATRICKFLAG DODGY...
-  
-  // Loop over pressure degrees of freedom (associated with a single
-  // pressure component) in the element
-  for(unsigned l=0;l<n_pres;l++)
-   {
-    // Loop over the two pressure components
-    for(unsigned i=0;i<2;i++)
-     {
-      // Determine local eqn number
-      const int local_eqn_number = this->p_local_eqn(l,i);
-   
-      // Ignore pinned values: far away degrees of freedom resulting 
-      // from hanging nodes can be ignored since these are be dealt
-      // with by the element containing their master nodes
-      if(local_eqn_number >= 0)
-       {
-        // Store block lookup in temporary pair: First entry in pair
-        // is global equation number; second entry is block type
-        block_lookup.first = this->eqn_number(local_eqn_number);
-        block_lookup.second = (6+i); // PATRICKFLAG THIS IS A BIT DODGY...
-     
-        // Add to list
-        block_lookup_list.push_front(block_lookup);
-       }
-     }
-   } // End of loop over pressure dofs
- 
-  // Loop over the element's nodes
-  for(unsigned n=0;n<n_node;n++)
-   {
-    // Determine the number of values at this node
-    const unsigned n_value = this->node_pt(n)->nvalue();
-   
-    // Loop over these values
-    for(unsigned v=0;v<n_value;v++)
-     {
-      // Determine local eqn number
-      const int local_eqn_number = this->nodal_local_eqn(n,v);
-     
-      // Ignore pinned values
-      if(local_eqn_number >= 0)
-       {
-        // Store block lookup in temporary pair: First entry in pair
-        // is global equation number; second entry is block type
-        block_lookup.first = this->eqn_number(local_eqn_number);
-        block_lookup.second = v;
-       
-        // Add to list
-        block_lookup_list.push_front(block_lookup);
-        
-       }
-     }
-   } // End of loop over the element's nodes
- } // End of get_dof_numbers_for_unknowns(...)
- 
- 
-
  /// Axisymmetric Crouzeix-Raviart elements
  //  Set the data for the number of variables at each node
  const unsigned LinearisedAxisymmetricQCrouzeixRaviartElement::
@@ -2562,74 +1891,13 @@ namespace oomph
  required_nvalue(const unsigned &n) const { return Initial_Nvalue[n]; }
  
  
- 
- //========================================================================
- /// Compute traction at local coordinate s for outer unit normal N
- //========================================================================
- void LinearisedAxisymmetricQCrouzeixRaviartElement::get_traction(
-  const Vector<double>& s, const Vector<double>& N, 
-  Vector<double>& traction)
- {
-  LinearisedAxisymmetricNavierStokesEquations::traction(s,N,traction);
- }
- 
- 
- 
+  
 ///////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
  
+
  
-
- //========================================================================
- /// Create a list of pairs for all unknowns in this element,
- /// so the first entry in each pair contains the global equation
- /// number of the unknown, while the second one contains the number
- /// of the "block" that this unknown is associated with.
- /// (Function can obviously only be called if the equation numbering
- /// scheme has been set up.)
- // PATRICKFLAG This function has not been validated.
- //========================================================================
- void LinearisedAxisymmetricQTaylorHoodElement::get_dof_numbers_for_unknowns(
-  std::list<std::pair<unsigned long,unsigned> >& block_lookup_list)
- {
-  // Determine number of nodes in element
-  const unsigned n_node = this->nnode();
- 
-  // Temporary pair (used to store block lookup prior to being added to list)
-  std::pair<unsigned,unsigned> block_lookup;
- 
-  // Loop over the element's nodes
-  for(unsigned n=0;n<n_node;n++)
-   {
-    // Determine the number of values at this node
-    unsigned n_value = this->node_pt(n)->nvalue();
-   
-    // Loop over these values
-    for(unsigned v=0;v<n_value;v++)
-     {
-      // Determine local eqn number
-      const int local_eqn_number = this->nodal_local_eqn(n,v);
-     
-      // Ignore pinned values: far away degrees of freedom resulting 
-      // from hanging nodes can be ignored since these are be dealt
-      // with by the element containing their master nodes
-      if(local_eqn_number >= 0)
-       {
-        // Store block lookup in temporary pair: First entry in pair
-        // is global equation number; second entry is block type
-        block_lookup.first = this->eqn_number(local_eqn_number);
-        block_lookup.second = v;
-       
-        // Add to list
-        block_lookup_list.push_front(block_lookup);
-       }
-     }
-   }
- } // End of get_dof_numbers_for_unknowns(...)
-
-
-
  /// Axisymmetric Taylor--Hood
  // Set the data for the number of variables at each node
  const unsigned LinearisedAxisymmetricQTaylorHoodElement::
@@ -2639,15 +1907,5 @@ namespace oomph
  const unsigned LinearisedAxisymmetricQTaylorHoodElement::Pconv[4]={0,2,6,8};
 
 
- //========================================================================
- /// Compute traction at local coordinate s for outer unit normal N
- //========================================================================
- void LinearisedAxisymmetricQTaylorHoodElement::get_traction(
-  const Vector<double>& s, const Vector<double>& N, 
-  Vector<double>& traction)
- {
-  LinearisedAxisymmetricNavierStokesEquations::traction(s,N,traction);
- }
- 
 
 } // End of oomph namespace

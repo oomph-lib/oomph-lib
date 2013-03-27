@@ -151,14 +151,14 @@ public virtual LinearisedAxisymmetricQTaylorHoodElement,
   void fill_in_contribution_to_jacobian(Vector<double> &residuals,
                                         DenseMatrix<double> &jacobian)
   {
-   // Get the analytical contribution from the basic patricklinearised element
+   // Get the analytical contribution from the basic element
    LinearisedAxisymmetricQTaylorHoodElement::
     fill_in_contribution_to_jacobian(residuals,jacobian);
    
 //#ifdef USE_FD_FOR_DERIVATIVES_WRT_EXTERNAL_DATA
    
    // Get the off-diagonal terms by finite differencing
-   this->fill_in_jacobian_from_external_interaction_by_fd(residuals,jacobian); // PATRICKFLAG
+   this->fill_in_jacobian_from_external_interaction_by_fd(residuals,jacobian);
    
 //#else
    
@@ -283,14 +283,15 @@ public virtual LinearisedAxisymmetricQCrouzeixRaviartElement,
   void fill_in_contribution_to_jacobian(Vector<double> &residuals,
                                         DenseMatrix<double> &jacobian)
   {
-   // Get the analytical contribution from the basic patricklinearised element
+   // Get the analytical contribution from the basic
+   // LinearisedAxisymmetricQCrouzeixRaviartElement
    LinearisedAxisymmetricQCrouzeixRaviartElement::
     fill_in_contribution_to_jacobian(residuals,jacobian);
    
 //#ifdef USE_FD_FOR_DERIVATIVES_WRT_EXTERNAL_DATA
    
    // Get the off-diagonal terms by finite differencing
-   this->fill_in_jacobian_from_external_interaction_by_fd(residuals,jacobian); // PATRICKFLAG
+   this->fill_in_jacobian_from_external_interaction_by_fd(residuals,jacobian);
    
 //#else
    
@@ -416,14 +417,15 @@ public virtual RefineableLinearisedAxisymmetricQTaylorHoodElement,
   void fill_in_contribution_to_jacobian(Vector<double> &residuals,
                                         DenseMatrix<double> &jacobian)
   {
-   // Get the analytical contribution from the basic patricklinearised element
+   // Get the analytical contribution from the basic
+   // RefineableLinearisedAxisymmetricQTaylorHoodElement
    RefineableLinearisedAxisymmetricQTaylorHoodElement::
     fill_in_contribution_to_jacobian(residuals,jacobian);
    
 //#ifdef USE_FD_FOR_DERIVATIVES_WRT_EXTERNAL_DATA
    
    // Get the off-diagonal terms by finite differencing
-   this->fill_in_jacobian_from_external_interaction_by_fd(residuals,jacobian); // PATRICKFLAG
+   this->fill_in_jacobian_from_external_interaction_by_fd(residuals,jacobian);
    
 //#else
    
@@ -551,14 +553,15 @@ public virtual RefineableLinearisedAxisymmetricQCrouzeixRaviartElement,
   void fill_in_contribution_to_jacobian(Vector<double> &residuals,
                                         DenseMatrix<double> &jacobian)
   {
-   // Get the analytical contribution from the basic patricklinearised element
+   // Get the analytical contribution from the basic
+   // RefineableLinearisedAxisymmetricQCrouzeixRaviartElement
    RefineableLinearisedAxisymmetricQCrouzeixRaviartElement::
     fill_in_contribution_to_jacobian(residuals,jacobian);
    
 //#ifdef USE_FD_FOR_DERIVATIVES_WRT_EXTERNAL_DATA
    
    // Get the off-diagonal terms by finite differencing
-   this->fill_in_jacobian_from_external_interaction_by_fd(residuals,jacobian); // PATRICKFLAG
+   this->fill_in_jacobian_from_external_interaction_by_fd(residuals,jacobian);
    
 //#else
    

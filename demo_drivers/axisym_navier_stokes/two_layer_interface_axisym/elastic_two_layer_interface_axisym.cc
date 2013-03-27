@@ -67,11 +67,11 @@ namespace Global_Physical_Variables
  /// Strouhal number
  double St = 1.0;
 
- /// Womersley number (Reynolds x Strouhal, computed automatically)
- double ReSt;
- 
+ /// Womersley number (Reynolds x Strouhal)
+ double ReSt = 5.0;
+
  /// Product of Reynolds number and inverse of Froude number
- double ReInvFr = 5.0; // (Fr = 1)
+ double ReInvFr = 5.0;
 
  /// \short Ratio of viscosity in upper fluid to viscosity in lower
  /// fluid. Reynolds number etc. is based on viscosity in lower fluid.
@@ -100,10 +100,9 @@ namespace Global_Physical_Variables
 
 //==start_of_specific_mesh_class==========================================
 /// Two layer mesh which employs a pseudo-solid node-update strategy.
-/// This class is essentially a wrapper to an ElasticRectangularQuadMesh,
-/// with additional members to keep track of which elements are in the
-/// lower or upper fluid. The class also contains Vectors of (pointers to)
-/// "root" elements in both fluids (for use with spatial adaptivity).
+/// This class is essentially a wrapper to an
+/// ElasticRefineableRectangularQuadMesh, with an additional boundary
+/// to represent the interface between the two fluid layers.
 //========================================================================
 template <class ELEMENT>
 class ElasticRefineableTwoLayerMesh :
@@ -155,143 +154,12 @@ public:
        this->convert_to_boundary_node(nod_pt);
        this->add_boundary_node(4,nod_pt);
       }
-    }
+    } // End of loop over horizontal elements
 
-   // -------------------------------------------------
-   // Populate Vectors of (pointers to) "root" elements
-   // -------------------------------------------------
-
-   // Determine number of elements in lower and upper fluids
-   const unsigned long n_lower = nx*ny1;
-   const unsigned long n_upper = nx*ny2;
-   
-   // Add all the bulk elements in the lower fluid to the vector of
-   // "root" elements of the lower layer
-   Lower_layer_root_element_pt.reserve(n_lower);
-   for(unsigned e=0;e<n_lower;e++)
-    {
-     Lower_layer_root_element_pt.push_back(this->finite_element_pt(e));
-    }
-   
-   // Add all the bulk elements in the upper fluid to the vector of
-   // "root" elements of the upper layer
-   Upper_layer_root_element_pt.reserve(n_upper);
-   for(unsigned e=n_lower;e<(n_lower+n_upper);e++)
-    {
-     Upper_layer_root_element_pt.push_back(this->finite_element_pt(e));
-    }
-   
-   // Update the "current" lower/upper element pt vectors
-   this->update_lower_and_upper_element_pt_vectors();
-
-  } // End of constructor
-
- /// \short Update the lower and upper layer element pointer vectors.
- /// This needs to be called when the mesh is adapted so that they
- /// contain pointers to all newly created elements (and pointers to
- /// now deleted elements are removed)
- void update_lower_and_upper_element_pt_vectors()
- {
-  // Clear the element pt vectors
-  Lower_layer_element_pt.clear();
-  Upper_layer_element_pt.clear();
-
-  // Determine number of "root" elements in lower/upper layers
-  const unsigned n_root_lower = Lower_layer_root_element_pt.size();
-  const unsigned n_root_upper = Upper_layer_root_element_pt.size();
-
-  // Loop over the lower layer "root" elements and call function which
-  // will add the "leaf" elements to Lower_layer_element_pt
-  for(unsigned e=0;e<n_root_lower;e++)
-   {
-    get_sons_recursively(Lower_layer_root_element_pt[e],
-                         Lower_layer_element_pt);
-   }
-
-  // Loop over the upper layer "root" elements and call function which
-  // will add the "leaf" elements to Upper_layer_element_pt
-  for(unsigned e=0;e<n_root_upper;e++)
-   {
-    get_sons_recursively(Upper_layer_root_element_pt[e],
-                         Upper_layer_element_pt);
-   }
-
- } // End of update_lower_and_upper_element_pt_vectors
-
- /// Access function for number of elements in lower layer
- unsigned long nlower() const { return Lower_layer_element_pt.size(); }
-
- /// Access function for number of elements in upper layer
- unsigned long nupper() const { return Upper_layer_element_pt.size(); }
-
- /// Access function for pointers to elements in bottom layer
- FiniteElement* &lower_layer_element_pt(const unsigned long &i) 
-  {
-   return Lower_layer_element_pt[i];
+   // Set up the boundary element information
+   this->setup_boundary_element_info();
   }
-
- /// Access function for pointers to elements in upper layer
- FiniteElement* &upper_layer_element_pt(const unsigned long &i) 
-  {
-   return Upper_layer_element_pt[i];
-  }
-
-
-private:
-
- /// Vector of pointers to elements in the lower layer
- Vector<FiniteElement*> Lower_layer_element_pt;
-
- /// Vector of pointers to elements in the upper layer
- Vector<FiniteElement*> Upper_layer_element_pt;
  
- /// \short Vector of pointers to those elements in the lower
- /// layer which were created with the initial mesh. Since the mesh
- /// can never unrefine past these they can be used to update
- /// Lower_layer_element_pt after mesh adaptation.
- Vector<FiniteElement*> Lower_layer_root_element_pt;
-
- /// \short Vector of pointers to those elements in the upper
- /// layer which were created with the initial mesh. Since the mesh
- /// can never unrefine past these they can be used to update
- /// Upper_layer_element_pt after mesh adaptation.
- Vector<FiniteElement*> Upper_layer_root_element_pt;
-
- /// \short Helper function to recursively get the sons of the element
- /// pointed to by father_pt and, if they are a "leaf" of the quadtree,
- /// add them to the vector of pointers sons_which_are_leaves_pt
- void get_sons_recursively(
-  FiniteElement* const &father_pt, 
-  Vector<FiniteElement*> &sons_which_are_leaves_pt)
-  {
-   // Cast to local element
-   ELEMENT* local_element_pt = dynamic_cast<ELEMENT*>(father_pt);
-   
-   // If the father has no sons, we're done
-   if(local_element_pt->quadtree_pt()->nsons()==0)
-    {
-     sons_which_are_leaves_pt.push_back(local_element_pt);
-    }
-   // Otherwise, call the recursion on all four sons
-   else
-    {
-     using namespace QuadTreeNames;
-     
-     get_sons_recursively(local_element_pt->quadtree_pt()
-                          ->son_pt(NW)->object_pt(),
-                          sons_which_are_leaves_pt);
-     get_sons_recursively(local_element_pt->quadtree_pt()
-                          ->son_pt(NE)->object_pt(),
-                          sons_which_are_leaves_pt);
-     get_sons_recursively(local_element_pt->quadtree_pt()
-                          ->son_pt(SE)->object_pt(),
-                          sons_which_are_leaves_pt);
-     get_sons_recursively(local_element_pt->quadtree_pt()
-                          ->son_pt(SW)->object_pt(),
-                           sons_which_are_leaves_pt);
-    }
-  } // End of get_sons_recursively
-
 }; // End of specific mesh class
 
 
@@ -309,13 +177,8 @@ class InterfaceProblem : public Problem
 
 public:
  
- /// Constructor: Pass the number of elements and the width of the
- /// domain in the r direction. Also pass the number of elements in
- /// the z direction of the bottom (fluid 1) and top (fluid 2) layers,
- /// along with the heights of both layers.
- InterfaceProblem(const unsigned &n_r, const unsigned &n_z1, 
-                  const unsigned &n_z2, const double &l_r, 
-                  const double &h1, const double &h2);
+ /// Constructor
+ InterfaceProblem();
 
  /// Destructor (empty)
  ~InterfaceProblem() {}
@@ -326,7 +189,7 @@ public:
  /// Set boundary conditions
  void set_boundary_conditions();
 
- /// Doc the solution
+ /// Document the solution
  void doc_solution(DocInfo &doc_info);
 
  /// Do unsteady run up to maximum time t_max with given timestep dt
@@ -362,13 +225,6 @@ private:
  /// Deform the mesh/free surface to a prescribed function
  void deform_free_surface(const double &epsilon, const double &k);
  
- /// \short Helper function to recursively get the NW and NE sons of the
- /// element pointer to by father_pt and, if they are a "leaf" of the
- /// quadtree, add them to the vector of pointers sons_which_are_leaves_pt
- void get_neighbour_sons_recursively(
-  FiniteElement* const &father_pt,
-  Vector<FiniteElement*> &sons_which_are_leaves_pt);
-
  /// Fix pressure in element e at pressure dof pdof and set to pvalue
  void fix_pressure(const unsigned &e,
                    const unsigned &pdof, 
@@ -388,10 +244,6 @@ private:
  // Pointer to the constitutive law used to determine the mesh deformation
  ConstitutiveLaw* Constitutive_law_pt;
 
- /// \short Vector of pointers to "root" elements (in the lower layer)
- /// which are adjacent to the interface
- Vector<FiniteElement*> Root_neighbour_element_pt;
-
  /// Width of domain
  double Lr;
 
@@ -407,15 +259,31 @@ private:
 //========================================================================
 template <class ELEMENT, class TIMESTEPPER>
 InterfaceProblem<ELEMENT,TIMESTEPPER>::
-InterfaceProblem(const unsigned &n_r, const unsigned &n_z1,
-                 const unsigned &n_z2, const double &l_r,
-                 const double& h1, const double &h2) : Lr(l_r)
+InterfaceProblem()
 {
-
  // Allocate the timestepper (this constructs the time object as well)
  add_time_stepper_pt(new TIMESTEPPER); 
 
- // Build and assign "bulk" mesh
+ // Define number of elements in r direction
+ const unsigned n_r = 3;
+   
+ // Define number of elements in z direction in lower fluid (fluid 1)
+ const unsigned n_z1 = 3;
+
+ // Define number of elements in z direction in upper fluid (fluid 2)
+ const unsigned n_z2 = 3;
+
+ // Define width of domain and store as class member data
+ const double l_r = 1.0;
+ this->Lr = l_r;
+
+ // Define height of lower fluid layer
+ const double h1 = 1.0;
+
+ // Define height of upper fluid layer
+ const double h2 = 1.0;
+
+ // Build and assign the "bulk" mesh
  Bulk_mesh_pt = new ElasticRefineableTwoLayerMesh<ELEMENT>
   (n_r,n_z1,n_z2,l_r,h1,h2,time_stepper_pt());
 
@@ -504,16 +372,15 @@ InterfaceProblem(const unsigned &n_r, const unsigned &n_z1,
  // Complete the problem setup to make the elements fully functional
  // ----------------------------------------------------------------
 
- // Determine number of bulk elements in lower/upper fluids
- const unsigned n_lower = Bulk_mesh_pt->nlower();
- const unsigned n_upper = Bulk_mesh_pt->nupper();
+ // Compute number of bulk elements in lower/upper fluids
+ const unsigned n_lower = n_r*n_z1;
+ const unsigned n_upper = n_r*n_z2;
 
  // Loop over bulk elements in lower fluid
  for(unsigned e=0;e<n_lower;e++)
   {
    // Upcast from GeneralisedElement to the present element
-   ELEMENT *el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->
-                                           lower_layer_element_pt(e));
+   ELEMENT *el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
    // Set the Reynolds number
    el_pt->re_pt() = &Global_Physical_Variables::Re;
@@ -537,11 +404,10 @@ InterfaceProblem(const unsigned &n_r, const unsigned &n_z1,
   } // End of loop over bulk elements in lower fluid
 
  // Loop over bulk elements in upper fluid 
- for(unsigned e=0;e<n_upper;e++)
+ for(unsigned e=n_lower;e<(n_lower+n_upper);e++)
   {
    // Upcast from GeneralisedElement to the present element
-   ELEMENT *el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->
-                                           upper_layer_element_pt(e));
+   ELEMENT *el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
 
    // Set the Reynolds number
    el_pt->re_pt() = &Global_Physical_Variables::Re;
@@ -580,31 +446,7 @@ InterfaceProblem(const unsigned &n_r, const unsigned &n_z1,
  // Apply the boundary conditions
  set_boundary_conditions();
 
- // Now we set up the information about which of the "root" elements (i.e.
- // those that were created with the original mesh) in the lower layer
- // are adjacent to the interface. Pointers to these elements are stored
- // in a Vector which is then used by create_interface_elements() as a
- // starting point for determining, at any particular state of mesh
- // adaptation, which of the current elements are adjacent to the interface.
- // We use this as a starting point since ONLY "root" elements are
- // guarenteed to exist at any particular state of mesh adaptation.
- // PATRICKFLAG MOVE ABOVE INTO DESCRIPTION IN DOCUMENTATION
-
- // ----------------------------------------------------------------
- // Populate vector which stores (pointers to) "root" elements in
- // the lower layer which are adjacent to the interface
- // ----------------------------------------------------------------
-
- // Loop over horizontal elements
- for(unsigned e=0;e<n_r;e++)
-  {
-   // Add those elements adjacent to the interface to the vector of
-   // pointers to neighbouring "root" elements
-   Root_neighbour_element_pt.push_back(Bulk_mesh_pt->
-                                       finite_element_pt(n_r*(n_z1-1)+e));
-  }
- 
- // Setup equation numbering scheme
+ // Set up equation numbering scheme
  cout << "Number of equations: " << assign_eqn_numbers() << std::endl;
 
 } // End of constructor
@@ -702,10 +544,6 @@ void InterfaceProblem<ELEMENT,TIMESTEPPER>::actions_before_adapt()
 template<class ELEMENT, class TIMESTEPPER>
 void InterfaceProblem<ELEMENT,TIMESTEPPER>::actions_after_adapt()
 {
- // Update the vectors of pointers to elements in the lower/upper
- // fluid layers so that they remain consistent after adaptation
- Bulk_mesh_pt->update_lower_and_upper_element_pt_vectors();
- 
  // Create the interface elements
  this->create_interface_elements();
  
@@ -746,40 +584,33 @@ void InterfaceProblem<ELEMENT,TIMESTEPPER>::actions_after_adapt()
 template <class ELEMENT, class TIMESTEPPER>
 void InterfaceProblem<ELEMENT,TIMESTEPPER>::create_interface_elements()
 {
- // ---------------------------------------------------------------
- // Determine which bulk elements (in the lower fluid) are adjacent
- // to the interface (we will call these "neighbours")
- // ---------------------------------------------------------------
-
- // Create storage for the neighbours
- Vector<FiniteElement*> neighbour_pt;
-
- // Determine the number of "root" neighbours (i.e. those elements which
- // were neighbours in the original mesh, before mesh adaptation)
- const unsigned n_root_neighbour = Root_neighbour_element_pt.size();
-
- // Loop over the "root" neighbours to determine current neighbours
- for(unsigned e=0;e<n_root_neighbour;e++)
+ // Determine number of bulk elements adjacent to interface (boundary 4)
+ const unsigned n_element = this->Bulk_mesh_pt->nboundary_element(4);
+ 
+ // Loop over those elements adjacent to the interface
+ for(unsigned e=0;e<n_element;e++)
   {
-   get_neighbour_sons_recursively(Root_neighbour_element_pt[e],neighbour_pt);
-  }
-  
- // --------------------------------------------------------------
- // Now loop over the neighbours and create the interface elements
- // --------------------------------------------------------------
+   // Get pointer to the bulk element that is adjacent to the interface
+   ELEMENT* bulk_elem_pt = dynamic_cast<ELEMENT*>(
+    this->Bulk_mesh_pt->boundary_element_pt(4,e));
 
- // Determine the number of neighbours
- const unsigned n_neighbour = neighbour_pt.size();
+   // We only want to attach interface elements to the bulk elements
+   // which are BELOW the interface, and so we filter out those above by
+   // referring to the viscosity_ratio_pt
+   if(bulk_elem_pt->viscosity_ratio_pt()
+      !=&Global_Physical_Variables::Viscosity_Ratio)
+    {
+     // Find index of the face of element e that corresponds to the interface
+     const int face_index = this->Bulk_mesh_pt->face_index_at_boundary(4,e);
+     
+     // Create the interface element
+     FiniteElement* interface_element_element_pt =
+      new ElasticAxisymmetricFluidInterfaceElement<ELEMENT>(bulk_elem_pt,
+                                                            face_index);
 
- // Loop over the neighbours
- for(unsigned e=0;e<n_neighbour;e++)
-  {
-   // Create the interface element (on face 2 of the bulk element)
-   FiniteElement* interface_element_element_pt =
-    new ElasticAxisymmetricFluidInterfaceElement<ELEMENT>(neighbour_pt[e],2);
-
-   // Add the interface element to the surface mesh
-   this->Surface_mesh_pt->add_element_pt(interface_element_element_pt);
+     // Add the interface element to the surface mesh
+     this->Surface_mesh_pt->add_element_pt(interface_element_element_pt);
+    }
   }
 
  // --------------------------------------------------------
@@ -862,39 +693,6 @@ deform_free_surface(const double &epsilon,const double &k)
    Bulk_mesh_pt->node_pt(n)->x(1) = new_z_pos;
   }
 } // End of deform_free_surface
-
-
-
-//==start_of_get_neighbour_sons_recursively===============================
-/// \short Helper function to recursively get the NW and NE sons of the
-/// element pointer to by father_pt and, if they are a "leaf" of the
-/// quadtree, add them to the vector of pointers sons_which_are_leaves_pt
-//========================================================================
-template <class ELEMENT, class TIMESTEPPER>
-void InterfaceProblem<ELEMENT,TIMESTEPPER>::get_neighbour_sons_recursively(
- FiniteElement* const &father_pt,
- Vector<FiniteElement*> &sons_which_are_leaves_pt)
-{
- // Upcast from GeneralisedElement to the present element
- ELEMENT* local_element_pt = dynamic_cast<ELEMENT*>(father_pt);
-
- // If the father has no sons, we're done
- if(local_element_pt->quadtree_pt()->nsons()==0)
-  {
-   sons_which_are_leaves_pt.push_back(local_element_pt);
-  }
- // Otherwise call the recursion on the NW and NE sons
- else
-  {
-   using namespace QuadTreeNames;
-   get_neighbour_sons_recursively(local_element_pt->quadtree_pt()
-                                  ->son_pt(NW)->object_pt(),
-                                  sons_which_are_leaves_pt);
-   get_neighbour_sons_recursively(local_element_pt->quadtree_pt()
-                                  ->son_pt(NE)->object_pt(),
-                                  sons_which_are_leaves_pt);
-  }
-} // End of get_neighbour_sons_recursively
 
 
 
@@ -1047,9 +845,32 @@ int main(int argc, char* argv[])
  // Store command line arguments
  CommandLineArgs::setup(argc,argv);
 
- // Compute the Womersley number
- Global_Physical_Variables::ReSt =
-  Global_Physical_Variables::Re*Global_Physical_Variables::St;
+ // -----------------------------------------------------------------
+ // Define possible command line arguments and parse the ones that
+ // were actually specified
+ // -----------------------------------------------------------------
+
+ // Are we performing a validation run?
+ CommandLineArgs::specify_command_line_flag("--validation");
+
+ // Parse command line
+ CommandLineArgs::parse_and_assign();
+
+ // Doc what has actually been specified on the command line
+ CommandLineArgs::doc_specified_flags();
+
+ // Check that definition of Womersley number is consistent with those
+ // of the Reynolds and Strouhal numbers
+ if(Global_Physical_Variables::ReSt !=
+    Global_Physical_Variables::Re*Global_Physical_Variables::St)
+  {
+   std::ostringstream error_stream;
+   error_stream << "Definition of Global_Physical_Variables::ReSt is "
+                << "inconsistant with those\n"
+                << "of Global_Physical_Variables::Re and "
+                << "Global_Physical_Variables::St." << std::endl;
+   throw OomphLibError(error_stream.str(),"main()",OOMPH_EXCEPTION_LOCATION);
+  }
 
  /// Maximum time
  double t_max = 1.2;
@@ -1058,37 +879,21 @@ int main(int argc, char* argv[])
  const double dt = 0.005;
 
  // If we are doing validation run, use smaller number of timesteps
- if(CommandLineArgs::Argc>1) { t_max = 0.01; }
-
- // Number of elements in radial (r) direction
- const unsigned n_r = 3;
-   
- // Number of elements in axial (z) direction in bottom fluid (fluid 1)
- const unsigned n_z1 = 3;
-   
- // Number of elements in axial (z) direction in top fluid (fluid 2)
- const unsigned n_z2 = 3;
-
- // Width of domain
- const double l_r = 1.0;
-
- // Height of lower fluid layer
- const double h1 = 1.0;
-
- // Height of upper fluid layer
- const double h2 = 1.0;
+ if(CommandLineArgs::command_line_flag_has_been_set("--validation"))
+  {
+   t_max = 0.01;
+  }
 
  // Set direction of gravity (vertically downwards)
  Global_Physical_Variables::G[0] = 0.0;
  Global_Physical_Variables::G[1] = -1.0;
  Global_Physical_Variables::G[2] = 0.0;
 
- // Set up the spine test problem with AxisymmetricQCrouzeixRaviartElements,
+ // Set up the elastic test problem with AxisymmetricQCrouzeixRaviartElements,
  // using the BDF<2> timestepper
  InterfaceProblem<RefineablePseudoSolidNodeUpdateElement<
  RefineableAxisymmetricQCrouzeixRaviartElement,
-  RefineableQPVDElement<2,3> >,BDF<2> >
-  problem(n_r,n_z1,n_z2,l_r,h1,h2);
+  RefineableQPVDElement<2,3> >,BDF<2> > problem;
    
  // Run the unsteady simulation
  problem.unsteady_run(t_max,dt);

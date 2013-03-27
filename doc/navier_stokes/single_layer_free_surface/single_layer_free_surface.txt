@@ -218,6 +218,10 @@ example below. It can be accessed using the function:
 double FluidInterfaceElement::pext().
 \endcode
 
+The way in which the dynamic condition is incorporated within our
+finite element structure is discussed in more detail in the 
+<A HREF="#application_of_dbc">comments</A> at the end of this tutorial.
+
 <HR>
 <HR>
 
@@ -325,18 +329,62 @@ the domain.
 \section validation Validation
 
 The free surface boundary conditions for the Cartesian Navier--Stokes
-equations have been validated against an analytical test
-case, and we present the results in the figure
-below. The lines represent the real and imaginary parts of a
-dispersion relation \f$ \lambda(k) \f$, which correspond to the growth
-rate and the frequency of the oscillating free surface
-respectively. The points have 
-been obtained by running the driver code for given wavenumbers \f$ k
-\f$ and determining the growth rate and frequency from a time-trace of
-the left-hand edge of the free surface. Since the analytics assume
-that the initial deformation of the free surface is very small, we use
-the value \f$ \epsilon = 0.01 \f$ when calling \c
-deform_free_surface(...) in the code.
+equations have been validated against an analytical test case, and we
+present the results in the figure below. For sufficiently small
+amplitudes, \f$ \epsilon \ll 1 \f$, we can linearise the governing
+equations by proposing that we can write the fluid velocities and
+pressure, \f$ u(x,y,t) \f$, \f$ v(x,y,t) \f$ and \f$ p(x,y,t) \f$, as
+well as the `height' of the interface, \f$ h(x,t) \f$, in the form \f$
+x = \bar{x} + \epsilon \hat{x} \f$, where the barred quantities
+correspond to the `base' state, chosen here to be the trivial solution \f$
+\bar{h} = \bar{u} = \bar{v} = \bar{p} = 0 \f$. Once the linearised
+forms of the governing equations and boundary conditions have been
+determined we propose a seperable solution of the form
+\f[
+\hat{h}(x,t) = H e^{\lambda t + ikx},
+\f]
+\f[
+\hat{u}(x,y,t) = U(y) e^{\lambda t + ikx},
+\f]
+\f[
+\hat{v}(x,y,t) = V(y) e^{\lambda t + ikx},
+\f]
+and
+\f[
+\hat{p}(x,y,t) = P(y) e^{\lambda t + ikx}.
+\f]
+Substituting the above ansatz into the governing equations results in
+a system of coupled ordinary differential equations for \f$ U(y) \f$,
+\f$ V(y) \f$ and \f$ P(y) \f$ which we solve to find their general
+solutions up to a set of unknown constants \f$ A \f$, \f$ B \f$, \f$ C
+\f$ and \f$ D \f$. By substituting these general forms into the set of
+(linearised and seperated) boundary conditions we obtain a linear
+system of five equations in the five unknowns \f$ A \f$, \f$ B \f$,
+\f$ C \f$, \f$ D \f$ and \f$ H \f$, from which we can assemble a
+homogeneous linear system of the form
+\f[
+  \mathbf{M} \left[
+    \begin{array}{c}
+      A \\  B \\  C \\  D \\ H
+    \end{array}
+  \right] = \left[
+    \begin{array}{c}
+      0 \\  0 \\  0 \\  0 \\ 0
+    \end{array}
+  \right],
+\f]
+where \f$ \mathbf{M} \f$ is a \f$ 5 \times 5 \f$ matrix whose entries
+are the coefficients of the unknowns in our five conditions. This
+system only has a non-trivial solution if \f$ \left| \mathbf{M}
+\right| = 0 \f$, and solving this equation gives us \f$ \lambda \f$ as a
+function of \f$ k \f$. This is a dispersion relation and describes how wave
+propagation varies as a function of its wavenumber. More specifically,
+the real part of \f$ \lambda \f$ is the growth rate of the wave and the
+imaginary part is its frequency. This analytical result can now be
+compared to numerical results computed for given values of the
+wavenumber \f$ k \f$. We choose an initial deflection amplitude of \f$
+\epsilon = 0.01 \f$ and determine the growth rate and frequency of the
+oscillation from a time-trace of the left-hand edge of the interface.
 
 @I w 0.95\textwidth single_layer_code_validation "Validation of the code (points) by comparison with an analytical dispersion relation (lines). "
 
@@ -647,21 +695,81 @@ the solution documented.
 
 \section comments Comments
 
-- Note that in the example above we do not explicitly apply any boundary
-  conditions at either end of the free surface. We neglect these
-  contributions because the natural condition is such that the
-  contact angle between the surface and the domain edge is
-  constrained to be \f$ 90^o \f$, and this is the appropriate
-  condition in this case. Contact angles of arbitrary size can be
-  enforced using \c FluidInterfaceEdgeElements, which are discussed
-  in <A HREF="../../../to_be_written/to_be_written/html/index.html">another tutorial</A>.
+\subsection application_of_dbc The application of the dynamic boundary condition within the FEM
 
-- Specifying the contact angle is not the only condition that can be
-  applied at the edges of an interface. The alternative boundary
-  condition is to pin the contact line so that its position is fixed
-  for all time. Since this is a Dirichlet condition it causes the
-  integral over the contact line to vanish. Further details are again
-  discussed in <A HREF="../../../to_be_written/to_be_written/html/index.html">another tutorial</A>.
+As discussed in an <A HREF="../../rayleigh_traction_channel/html/index.html#traction_theory">earlier tutorial</A>, 
+the finite element solution of the Navier--Stokes equations is based
+on their weak form, which is obtained by weighting the
+stress-divergence form of the momentum equations with the global test
+functions \f$ \psi_l \f$, and integrating by parts to obtain the
+discrete residuals
+\f[
+f_{il} = 
+\int_D \left[
+Re\left(St\frac{\partial u_i}{\partial t} + 
+u_j\frac{\partial u_i}{\partial x_j} - \frac{G_i}{Fr}\right)  \ \psi_l +
+ \tau_{ij} \ \frac{\partial \psi_l}{\partial x_j}   \right] \, dV -
+\int_{\partial D}  \tau_{ij} \ n_j \ \psi_l \ dS = 0.
+ \ \ \ \ \ \ \ \ \ \ @E[Weak2DNavierStokes_Stress]@
+\f]
+Weighting the dynamic condition (@R[eqn:dynamicBC]@) by the same
+global test functions \f$ \psi_l \f$ and integrating over the domain
+boundary \f$ \partial D\f$ gives
+\f[
+\int_{\partial D} \tau_{ij} n_j \ \psi_l \ dS =
+- \int_{\partial D} p_{ext} n_i \ \psi_l \ dS
+- \int_{\partial D} \frac{1}{Ca} \kappa \ \psi_l \ dS.
+ \ \ \ \ \ \ \ \ \ \ @E[weak_dynamic_bc1]@
+\f]
+In a two-dimensional problem, such as the one considered in this
+tutorial, the domain boundary reduces to a one-dimensional curve, \f$
+C \f$. A further integration by parts of (@R[weak_dynamic_bc1]@)
+therefore gives
+\f[
+\int_{\partial D} \tau_{ij} n_j \ \psi_l \ dS =
+- \int_C p_{ext} n_i \ \psi_l \ dS
++ \int_C \frac{1}{Ca} t_i \ \frac{\partial\psi_l}{\partial S} \ dS
+- \frac{1}{Ca} \left[ t_i \ \psi_l \right]^{c_2}_{c_1},
+ \ \ \ \ \ \ \ \ \ \ @E[weak_dynamic_bc2]@
+\f]
+where \f$ t_i \f$, \f$ (i=1,2) \f$ is the \f$ i \f$-th component of a
+unit vector tangent to \f$ C \f$ and pointing in the direction of
+increasing \f$ S \f$, and \f$ c_1 \f$ and \f$ c_2 \f$ are the two
+endpoints of \f$ C \f$.
+
+In the problem considered in this tutorial, the domain boundary \f$ C
+\f$ can be written as \f$ C = C_{solid} \ \cup \ C_{surface} \f$, where
+\f$ C_{solid} \f$ represents the portion of the domain boundary
+corresponding to a rigid wall and \f$ C_{surface} \f$ represents the
+portion corresponding to the free surface. The velocity along \f$
+C_{solid} \f$ is prescribed by Dirichlet boundary conditions, and we <A HREF="../../../intro/html/index.html#galerkin">recall</A> 
+that the global test functions \f$ \psi_l \f$ vanish in this case. On
+non-Dirichlet boundaries we must either specify the external pressure \f$
+p_{ext} \f$, or deliberately neglect this term to obtain the `natural'
+condition \f$ p_{ext} = 0 \f$.
+
+\subsection contact_line The contact line
+
+In this two-dimensional case, the contact `line' actually reduces to
+two contact points, \f$ c_1 \f$ and \f$ c_2 \f$, which are located at
+either side of the portion of the domain boundary corresponding to the
+free surface \f$ C_{surface} \f$. The two point contributions are
+added by specifying the the tangent to the surface \f$ t_i \f$ at
+each of the contact points, which is equivalent to prescribing the
+contact angle that the free surface makes with the 
+neighbouring domain boundary. We note that in the problem considered
+here we do not explicitly apply any boundary conditions at either end
+of the free surface. Neglecting these contributions corresponds to the
+`natural' condition of prescribing a \f$ 90^o \f$ contact angle, which
+happens to be the appropriate condition in this case. Contact angles
+of arbitrary size can be enforced using \c FluidInterfaceBoundingElements,
+which are discussed in a <A HREF="../../static_single_layer/html/index.html#contact_angle">later tutorial</A>.
+
+Specifying the contact angle is not the only condition that can be
+applied at the edges of an interface. The alternative boundary 
+condition is to pin the contact line so that its position is fixed
+for all time. Since this is a Dirichlet condition it causes the
+integral over the contact line to vanish.
 
 <HR>
 <HR>
