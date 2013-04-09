@@ -137,7 +137,7 @@ the non-dimensional wall density, therefore \f$ \Lambda=0 \f$
 corresponds to the case without wall inertia. 
 
 
-
+\anchor hermite
 \c oomph-lib's \c HermiteBeamElement provides a discretisation of the
 variational principle  (@R[pvd]@) with one-dimensional, isoparametric, 
 two-node Hermite solid mechanics elements. In these elements, the Eulerian
@@ -181,7 +181,7 @@ the variational principle (@R[pvd]@) which contains second derivatives
 of \f$ {\bf R}_w \f$. Physically, the inter-element continuity 
 of the slope is enforced by the beam's nonzero bending stiffness. 
 
-
+\anchor solid_bound
 The two "types" of "generalised" positional degrees of freedom
 are accessible via the function \c Node::x_gen(k,i), where
 \c Node::x_gen(0,i) \f$ \equiv \f$ \c Node::x(i). 
@@ -669,7 +669,7 @@ pressure to the trace file.
    in the loop in the \c Problem constructor.
    You will have to adjust the number of elements
    to fully resolve the bending boundary layers. \n\n
--# \c oomph-lib's default nonlinear solver, \c
+-# \c oomph-lib's default \anchor newton_cust nonlinear solver, \c
    Problem::newton_solve(...), provides an implementation of
    the Newton method, which has the attractive feature
    that it converges quadratically -- provided 

@@ -30,7 +30,7 @@ def get_key_and_link(entry):
   #also provide the synonym to which we are referring in synonym
   elif entry[1][0]=='^':
    anchor = entry[1].lstrip('^').strip().replace(' ','')
-   synonym = ", see " + entry[1].lstrip('^').strip().replace('.',':')
+   synonym = "see entry on " + entry[1].lstrip('^').strip().replace('.',':')
    link = "index/html/index.html#" + anchor[0].upper() + '.' + anchor 
  return (key,link,synonym)  
 
@@ -85,12 +85,17 @@ def print_key(doc_root_directory,key,level,anchor):
 
  #Otherwise just print the link and key
  else:
-  output_key = key[0] + key[2]
   link_target = doc_root_directory + "/" + key[1]
-  print begin_tag, \
-  anchor_string, \
-  "<a href=\"",link_target,"\">",output_key,"</a>",end_tag
-
+  if key[2]=='':
+   output_key = key[0]
+   print begin_tag, \
+   anchor_string, \
+   "<a href=\"",link_target,"\">",output_key,"</a>",end_tag
+  else:
+   output_key = key[2]
+   print begin_tag, \
+   anchor_string, \
+   key[0], "<br> &nbsp; &nbsp; &nbsp;  <a href=\"", link_target,"\">",output_key,"</a>",end_tag
 
 #The main nested output function. The idea is to loop through the list
 #Output the keys and subkeys and keep going until we hit a link

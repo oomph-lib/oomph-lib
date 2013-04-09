@@ -1416,6 +1416,31 @@ public virtual PointElement
  FaceGeometry() : PointElement() {}
 };
 
+//======================================================================
+/// FaceGeometry of 3D QPVDElementWithPressure
+//======================================================================
+template<>
+class FaceGeometry<QPVDElementWithPressure<3> >: 
+public virtual SolidQElement<2,3>
+{
+  public:
+ /// Constructor must call constructor of underlying solid element
+ FaceGeometry() : SolidQElement<2,3>() {}
+};
+
+
+//======================================================================
+/// FaceGeometry of FaceGeometry of 3D QPVDElementWithPressure
+//======================================================================
+template<>
+class FaceGeometry<FaceGeometry<QPVDElementWithPressure<3> > >: 
+public virtual SolidQElement<1,3>
+{
+  public:
+ /// Constructor must call constructor of underlying solid element
+  FaceGeometry() : SolidQElement<1,3>() {}
+};
+
 
 ///////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////

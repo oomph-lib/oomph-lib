@@ -2,7 +2,7 @@
 
 
 #Set the number of tests to be checked
-NUM_TESTS=1
+NUM_TESTS=2
 
 # Setup validation directory
 #---------------------------
@@ -15,7 +15,7 @@ mkdir Validation
 cd Validation
 
 echo "Running three-dimensional free surface Navier Stokes validation "
-mkdir RESLT
+mkdir RESLT RESLT_elastic
 ../3d_free_surface lalala > OUTPUT_3d_free_surface
 echo "done"
 echo " " >> validation.log
@@ -26,14 +26,23 @@ echo "Validation directory: " >> validation.log
 echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
-cat  RESLT/soln0.dat  RESLT/soln1.dat  \
-     RESLT/soln2.dat > results.dat
+cat  RESLT/soln2.dat  RESLT/trace.dat > results_spine.dat
+cat  RESLT_elastic/soln2.dat  RESLT_elastic/trace.dat > results_elastic.dat
 
+echo " Spine representation " >> validation.log
 if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/results.dat.gz  \
-         results.dat 0.1 1.0e-12 >> validation.log
+../../../../bin/fpdiff.py ../validata/results_spine.dat.gz  \
+         results_spine.dat 0.1 1.0e-12 >> validation.log
+fi
+
+echo " Pseudo-elastic representation " >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../../bin/fpdiff.py ../validata/results_elastic.dat.gz  \
+         results_elastic.dat 0.1 1.0e-12 >> validation.log
 fi
 
 # Append log to main validation log

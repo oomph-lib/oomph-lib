@@ -72,8 +72,8 @@ namespace Global_Physical_Variables
 
 
 //============================================================================
-///A Problem class that solves the Navier--Stokes equations
-///in an 2D geometry
+///A Problem class that solves the Navier--Stokes equations + free surface
+///in a 2D geometry using a spine-based node update
 //============================================================================
 template<class ELEMENT>
 class CapProblem : public Problem
@@ -310,14 +310,14 @@ CapProblem<ELEMENT>::CapProblem(const bool& hijack_internal) :
 
  //Now add the volume constraint
  create_volume_constraint_elements();
- 
+
  this->add_sub_mesh(Bulk_mesh_pt);
  this->add_sub_mesh(Surface_mesh_pt);
  this->add_sub_mesh(Point_mesh_pt);
  this->add_sub_mesh(Volume_constraint_mesh_pt);
- 
+
  this->build_global_mesh();
- 
+
  //Setup all the equation numbering and look-up schemes 
  cout << "Number of unknowns: " << assign_eqn_numbers() << std::endl; 
  
@@ -490,8 +490,7 @@ void CapProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  Trace_file << " "  << Bulk_mesh_pt->spine_pt(nspine-1)->height();
  Trace_file << " " 
             << dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(0))
-  ->p_nst(0)-
-  External_pressure_data_pt->value(0);
+  ->p_nst(0)- External_pressure_data_pt->value(0);
  Trace_file << " " << -2.0*cos(Angle)/Ca;
  Trace_file << std::endl;
  
@@ -508,8 +507,8 @@ class PseudoSolidCapProblem : public Problem
 {
 public:
 
- //Constructor: Boolean flag indicates if volume constraint is
- //applied by hijacking internal or external pressure
+ ///Constructor: Boolean flag indicates if volume constraint is
+ ///applied by hijacking internal or external pressure
  PseudoSolidCapProblem(const bool& hijack_internal);
 
  /// Destructor: clean up memory allocated by the object
@@ -521,7 +520,6 @@ public:
 
  /// Doc the solution
  void doc_solution(DocInfo& doc_info);
-
 
 private:
  
@@ -652,7 +650,7 @@ PseudoSolidCapProblem<ELEMENT>::PseudoSolidCapProblem(const bool& hijack_interna
   }
 
  //Set the constituive law
- Constitutive_law_pt =  
+ Constitutive_law_pt = 
   new GeneralisedHookean(&Global_Physical_Variables::Nu);
  
  //Loop over the elements to set the consitutive law and jacobian

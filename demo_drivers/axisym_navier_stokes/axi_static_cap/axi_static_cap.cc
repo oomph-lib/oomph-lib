@@ -70,13 +70,15 @@ namespace Global_Physical_Variables
 } //end_of_namespace
 
 
+
 //============================================================================
-///A Problem class that solves the Navier--Stokes equations
-///in an 2D geometry
+///A Problem class that solves the Navier--Stokes equations + free surface
+///in an axisymmetric geometry using a spine-based node update
 //============================================================================
 template<class ELEMENT>
 class CapProblem : public Problem
 {
+
 public:
 
  //Constructor: Boolean flag indicates if volume constraint is
@@ -113,9 +115,9 @@ private:
  /// The contact angle
  double Angle;
 
- /// The entire fluid mesh: bulk + free surface elements
+ /// The bulk mesh of fluid elements
  SingleLayerSpineMesh<SpineElement<ELEMENT> >* Bulk_mesh_pt;
- 
+
  /// The mesh for the interface elements
  Mesh* Surface_mesh_pt;
 
@@ -165,41 +167,47 @@ CapProblem<ELEMENT>::CapProblem(const bool& hijack_internal) :
  // Halfwidth of domain
  double half_width=0.5;
 
- //Construct mesh
- Bulk_mesh_pt = new SingleLayerSpineMesh<SpineElement<ELEMENT> >
-  (nx,nh,half_width,1.0);
+ //Construct bulk mesh
+ Bulk_mesh_pt = 
+  new SingleLayerSpineMesh<SpineElement<ELEMENT> >(nx,nh,half_width,1.0);
 
  //Create the surface mesh that will contain the interface elements
  //First create storage, but with no elements or nodes
  Surface_mesh_pt = new Mesh;
+ //Also create storage for a point mesh that contain the single element
+ //responsible for  enforcing the contact angle condition
+ Point_mesh_pt = new Mesh;
 
- //Loop over the horizontal elements
- for(unsigned i=0;i<nx;i++)
+ //Loop over the horizontal elements adjacent to the upper surface
+ //(boundary 2) and create the surface elements
+ unsigned n_boundary_element = Bulk_mesh_pt->nboundary_element(2);
+ for(unsigned e=0;e<n_boundary_element;e++)
   {
-   //Construct a new 1D line element on the face on which the local
-   //coordinate 1 is fixed at its max. value (1) --- This is face 2
+   //Construct a new 1D line element adjacent to boundary 2
    FiniteElement *interface_element_pt =
     new SpineAxisymmetricFluidInterfaceElement<SpineElement<ELEMENT> >(
-     Bulk_mesh_pt->finite_element_pt(nx*(nh-1)+i),2);
+     Bulk_mesh_pt->boundary_element_pt(2,e),
+     Bulk_mesh_pt->face_index_at_boundary(2,e));
    
    //Push it back onto the stack
    this->Surface_mesh_pt->add_element_pt(interface_element_pt); 
+
+   //Find the (single) node that is on the solid boundary (boundary 1)
+   unsigned n_node = interface_element_pt->nnode();
+   //We only need to check the right-hand nodes (because I know the
+   //ordering of the nodes within the element)
+   if(interface_element_pt->node_pt(n_node-1)->is_on_boundary(1))
+    {
+     //Make the point (contact) element from right-hand edge of the element
+     FiniteElement* point_element_pt = 
+      dynamic_cast<SpineAxisymmetricFluidInterfaceElement<
+       SpineElement<ELEMENT> >*>(interface_element_pt)
+      ->make_bounding_element(1);
+
+     //Add it to the mesh
+     this->Point_mesh_pt->add_element_pt(point_element_pt);
+    }
   }
-
- //Create the Point mesh that is responsible for enforcing the contact
- //angle condition
- Point_mesh_pt = new Mesh;
- {
-  //Make the point (contact) element from the last surface element
-  FiniteElement* point_element_pt = 
-   dynamic_cast<SpineAxisymmetricFluidInterfaceElement<
-    SpineElement<ELEMENT> >*>(Surface_mesh_pt->element_pt(nx-1))
-   ->make_bounding_element(1);
-
-  //Add it to the mesh
-  this->Point_mesh_pt->add_element_pt(point_element_pt);
- }
-
 
  //Create a Data object whose single value stores the
  //external pressure
@@ -289,16 +297,6 @@ CapProblem<ELEMENT>::CapProblem(const bool& hijack_internal) :
         }
       }
     }
-   /*  else
-    {
-     //Find the number of nodes on the boundary
-     unsigned n_boundary_node = Bulk_mesh_pt->nboundary_node(b);
-     //Loop over the nodes on the boundary
-     for(unsigned n=0;n<n_boundary_node;n++)
-      {
-       Bulk_mesh_pt->boundary_node_pt(b,n)->unpin(1);
-      }
-      }*/
   }
 
  // Set the contact angle boundary condition for the rightmost element
@@ -350,7 +348,6 @@ CapProblem<ELEMENT>::~CapProblem()
   //Next delete the external data
  delete External_pressure_data_pt;
 
-
  //Loop over the point mesh and delete the elements
  n_element = Point_mesh_pt->nelement();
  for(unsigned e=0;e<n_element;e++) 
@@ -368,7 +365,6 @@ CapProblem<ELEMENT>::~CapProblem()
  Surface_mesh_pt->flush_element_and_node_storage();
  //Then delete the mesh
  delete Surface_mesh_pt;
-
 
  //Then delete the bulk mesh
  delete Bulk_mesh_pt;
@@ -500,6 +496,7 @@ void CapProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  Trace_file << std::endl;
  
 }
+
 
 //===========start_of_pseudo_elastic_class====================================
 ///\short A class that solves the Navier--Stokes equations
@@ -655,7 +652,8 @@ PseudoSolidCapProblem<ELEMENT>::PseudoSolidCapProblem(const bool& hijack_interna
   }
 
  //Set the constituive law
- Constitutive_law_pt = new GeneralisedHookean(&Global_Physical_Variables::Nu);
+ Constitutive_law_pt = 
+  new GeneralisedHookean(&Global_Physical_Variables::Nu);
  
  //Loop over the elements to set the consitutive law and jacobian
  unsigned n_bulk = Bulk_mesh_pt->nelement();
@@ -752,6 +750,7 @@ PseudoSolidCapProblem<ELEMENT>::PseudoSolidCapProblem(const bool& hijack_interna
  
 } //end_of_constructor
 
+
 //==========================================================================
 /// Destructor. Make sure to clean up all allocated memory, so that multiple
 /// instances of the problem don't lead to excessive memory usage.
@@ -793,7 +792,6 @@ PseudoSolidCapProblem<ELEMENT>::~PseudoSolidCapProblem()
  //Then delete the bulk mesh
  delete Bulk_mesh_pt;
 }
-
 
 //============create_free_surface_element================================
 /// Create the free surface elements
@@ -901,6 +899,7 @@ void PseudoSolidCapProblem<ELEMENT>::create_contact_angle_element()
  unsigned n_free_surface = Free_surface_mesh_pt->nelement();
   
  //Make the bounding element for the contact angle constraint
+ //which works because the order of elements in the mesh is known
  FluidInterfaceBoundingElement* el_pt = 
   dynamic_cast<ElasticAxisymmetricFluidInterfaceElement<ELEMENT>*> 
   (Free_surface_mesh_pt->element_pt(n_free_surface-1))->
@@ -1003,22 +1002,22 @@ void PseudoSolidCapProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
   ->node_pt(np-1)->x(1);
  Trace_file << " " 
             << 
-  dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(0))
-  ->p_axi_nst(0)-
+  dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(0))->p_axi_nst(0)-
                External_pressure_data_pt->value(0);
  Trace_file << " " << -4.0*cos(Angle)/Ca;
  Trace_file << std::endl;
 
 } //end_of_doc_solution
 
+
+
  
-
-
 //===start_of_main=======================================================
 ///Main driver: Build problem and initiate parameter study
 //======================================================================
 int main()
 {
+
  // Solve the problem twice, once hijacking an internal, once
  // hijacking the external pressure
  for (unsigned i=0;i<2;i++)
@@ -1058,11 +1057,3 @@ int main()
   }
 
 } //end_of_main
-
-
-
-
-
-
-
-

@@ -69,8 +69,8 @@ namespace Global_Physical_Variables
 }
 
 //============================================================================
-///A Problem class that solves the Navier--Stokes equations
-///in an 2D geometry
+///A Problem class that solves the Navier--Stokes equations + free surface
+///in a 2D geometry using a spine-based node update
 //============================================================================
 template<class ELEMENT>
 class CapProblem : public Problem

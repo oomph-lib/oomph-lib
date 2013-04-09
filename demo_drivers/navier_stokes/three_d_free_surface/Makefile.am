@@ -9,5 +9,5 @@ check_PROGRAMS=3d_free_surface
 
 # Required libraries: 
 # $(FLIBS) is included in case the solver involves fortran sources.
-3d_free_surface_LDADD = -L@libdir@ -lnavier_stokes -lfluid_interface -lgeneric \
+3d_free_surface_LDADD = -L@libdir@ -lnavier_stokes -lsolid -lconstitutive -lfluid_interface -lgeneric \
                      $(EXTERNAL_LIBS) $(FLIBS)
