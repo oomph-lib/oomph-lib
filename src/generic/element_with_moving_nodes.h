@@ -80,12 +80,18 @@ namespace oomph
        Shape_derivs_by_fastest_method};
        
  ///Constructor 
- ElementWithMovingNodes() : Geometric_data_local_eqn(0) , 
+ ElementWithMovingNodes() : 
+ Geometric_data_local_eqn(0) , 
   Bypass_fill_in_jacobian_from_geometric_data(false),
   Evaluate_dresidual_dnodal_coordinates_by_fd(false),
-  Method_for_shape_derivs(Shape_derivs_by_direct_fd) // hierher: temp fix
-  // until more systematic timings have been performed. Should really use this:
-  // Method_for_shape_derivs(Shape_derivs_by_fastest_method) 
+  Method_for_shape_derivs(Shape_derivs_by_direct_fd) 
+ // hierher: Anything other than the fd-based method is currently broken;
+ // at least for refineable elements -- this all needs to be checked
+ // VERY carefully again (see instructions in commit log). Until this
+ // has all been fixed/re-validated, we've frozen the default assignment
+ // (by breaking the functions that change the setting). Ultimately,
+ // we should use:
+ // Method_for_shape_derivs(Shape_derivs_by_fastest_method) 
   {}
  
  /// Broken copy constructor
@@ -195,21 +201,58 @@ namespace oomph
  /// Evaluate shape derivatives by direct finite differencing
  void evaluate_shape_derivs_by_direct_fd()
   {
+   // hierher: Harmless; simply re-sets the current (and currently only
+   // legal) default
    Method_for_shape_derivs=Shape_derivs_by_direct_fd;
   }
 
- /// Evaluate shape derivatives by chain rule
- void evaluate_shape_derivs_by_chain_rule()
+ /// \short Evaluate shape derivatives by chain rule. Currently disabled by
+ /// default because it's broken; can re-enable use by setting optional 
+ /// boolean to true.
+ void evaluate_shape_derivs_by_chain_rule(
+  const bool& i_know_what_i_am_doing=false)
   {
+   if (!i_know_what_i_am_doing)
+    {
+     std::ostringstream error_message;
+     error_message 
+      << "Evaluation of shape derivatives by chain rule is currently \n" 
+      << "disabled because it's broken, at least for refineable \n"
+      << "elements. This all needs to be checked again very carefully\n"
+      << "following the instructions in the commit log\n"
+      << "If you know what you're doing and want to force this methodology\n"
+      << "call this function with the optional boolean set to true.\n";
+     throw OomphLibError(
+      error_message.str(),
+      "ElementWithMovingNodes::evaluate_shape_derivs_by_chain_rule()",
+      OOMPH_EXCEPTION_LOCATION);
+    }
    Method_for_shape_derivs=Shape_derivs_by_chain_rule;
   }
 
- /// Evaluate shape derivatives by (anticipated) fastest method
- void evaluate_shape_derivs_by_fastest_method()
+ /// \short Evaluate shape derivatives by (anticipated) fastest method. 
+ /// Currently disabled by default because it's broken; can re-enable 
+ /// use by setting optional boolean to true.
+ void evaluate_shape_derivs_by_fastest_method(
+  const bool& i_know_what_i_am_doing=false)
   {
+   if (!i_know_what_i_am_doing)
+    {
+     std::ostringstream error_message;
+     error_message 
+      << "Evaluation of shape derivatives by fastest method is currently \n" 
+      << "disabled because it's broken, at least for refineable \n"
+      << "elements. This all needs to be checked again very carefully\n"
+      << "following the instructions in the commit log\n"
+      << "If you know what you're doing and want to force this methodology\n"
+      << "call this function with the optional boolean set to true.\n";
+     throw OomphLibError(
+      error_message.str(),
+      "ElementWithMovingNodes::evaluate_shape_derivs_by_fastest_method()",
+      OOMPH_EXCEPTION_LOCATION);
+    }
    Method_for_shape_derivs=Shape_derivs_by_fastest_method;
   }
-
 
  /// Access to method (enumerated flag) for determination of shape derivs
  int& method_for_shape_derivs() {return Method_for_shape_derivs;}
