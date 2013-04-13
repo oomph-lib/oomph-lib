@@ -204,20 +204,6 @@ UnsteadyHeatProblem<ELEMENT>::UnsteadyHeatProblem()
  // Complete the build of all elements so they are fully functional
  //----------------------------------------------------------------
 
- // Find number of elements in mesh
- n_element = Bulk_mesh_pt->nelement();
-
- // Loop over the elements to set up element-specific 
- // things that cannot be handled by constructor
- for(unsigned i=0;i<n_element;i++)
-  {
-   // Upcast from FiniteElement to the present element
-   ELEMENT *el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(i));
-
-   // Set pointer to continous time
-   el_pt->time_pt()=time_pt();
-  }
-
  // Loop over the flux elements to pass pointer to prescribed flux function
  n_element=Surface_mesh_pt->nelement();
  for(unsigned e=0;e<n_element;e++)
@@ -229,9 +215,6 @@ UnsteadyHeatProblem<ELEMENT>::UnsteadyHeatProblem()
 
    // Set the pointer to the prescribed flux function
    el_pt->flux_fct_pt() = &ProblemParameters::flux;
-
-   // Set pointer to continous time
-   el_pt->time_pt()=time_pt();
 
    // Set melt temperature
    el_pt->melt_temperature_pt()=&ProblemParameters::Melt_temperature;

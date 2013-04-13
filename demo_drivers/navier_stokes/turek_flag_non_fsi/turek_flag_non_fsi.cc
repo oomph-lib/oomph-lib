@@ -469,9 +469,6 @@ TurekNonFSIProblem<ELEMENT>::TurekNonFSIProblem(
     
     //Set the Womersley number (assuming St=1)
     el_pt->re_st_pt() = &Global_Parameters::Re;
-   
-    // Set pointer to continous time
-    el_pt->time_pt()=time_pt();    
    }
   
 

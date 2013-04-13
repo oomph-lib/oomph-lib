@@ -74,10 +74,7 @@ namespace oomph
 class GeneralisedElement
 {
   private:
- 
- /// Pointer to global time.
- Time* Time_pt;
- 
+  
  /// \short Storage for the global equation numbers represented by the 
  /// degrees of freedom in the element.
  unsigned long *Eqn_number;
@@ -564,7 +561,8 @@ class GeneralisedElement
 public:
 
  /// \short Constructor: Initialise all pointers and all values to zero
- GeneralisedElement() : Time_pt(0), Eqn_number(0), Data_pt(0),
+  GeneralisedElement() : 
+  Eqn_number(0), Data_pt(0),
   Data_local_eqn(0), Ndof(0), Ninternal_data(0), Nexternal_data(0)
 #ifdef OOMPH_HAS_MPI
   , Non_halo_proc_ID(-1) , Must_be_kept_as_halo(false)
@@ -586,16 +584,6 @@ public:
    BrokenCopy::broken_assign("GeneralisedElement");
   }
  
-
- /// Retun the pointer to the global time
- Time* &time_pt() {return Time_pt;}
- 
- /// Return the pointer to the global time (const version)
- Time* const &time_pt() const {return Time_pt;}
-
- /// Return the global time, accessed via the time pointer
- double time() const;
-
  /// Return a pointer to i-th internal data object.
  Data*& internal_data_pt(const unsigned &i)
   {
@@ -2600,6 +2588,7 @@ public:
  /// \short Evaluate integral of a Vector-valued, time-dependent function 
  /// \f$ {\bf f}(t,{\bf x}) \f$ over the element.
  void integrate_fct(FiniteElement::UnsteadyExactSolutionFctPt integrand_fct_pt,
+                    const double& time,
                     Vector<double>& integral);
 
  /// \short Function for building a lower dimensional FaceElement

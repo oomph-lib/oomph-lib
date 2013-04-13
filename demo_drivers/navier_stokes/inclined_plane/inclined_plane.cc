@@ -293,8 +293,6 @@ public:
      temp_pt->re_invfr_pt() = &ReInvFr;
      //Set the direction of gravity
      temp_pt->g_pt() = &G;
-     //Assign the global time
-     temp_pt->time_pt() = time_pt();
     }
    
    //------------Set the boundary conditions for this problem----------

@@ -214,9 +214,6 @@ BaseStateProblem(const unsigned& n_r,
    
    // Set the direction of gravity
    el_pt->g_pt() = &GlobalPhysicalVariables::G;
-
-   // Assign the time pointer
-   el_pt->time_pt() = time_pt();
    
    // The mesh remains fixed
    el_pt->disable_ALE();
@@ -542,9 +539,6 @@ PerturbedStateProblem(const unsigned& n_r,
    // Set the Womersley number
    el_pt->re_st_pt() = &GlobalPhysicalVariables::ReSt;
    
-   // Assign the time pointer
-   el_pt->time_pt() = time_pt();
-
    // The mesh remains fixed
    el_pt->disable_ALE();
 

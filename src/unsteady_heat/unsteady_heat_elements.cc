@@ -66,6 +66,9 @@ fill_in_generic_residual_contribution_ust_heat(Vector<double> &residuals,
 {
  //Find out how many nodes there are
  unsigned n_node = nnode();
+
+ // Get continuous time from timestepper of first node
+ double time=node_pt(0)->time_stepper_pt()->time_pt()->time();
   
  //Find the index at which the variable is stored
  unsigned u_nodal_index = u_index_ust_heat();
@@ -141,8 +144,8 @@ fill_in_generic_residual_contribution_ust_heat(Vector<double> &residuals,
 
    //Get source function
    //-------------------
-   double source;
-   get_source_ust_heat(time(),ipt,interpolated_x,source);
+   double source=0.0;
+   get_source_ust_heat(time,ipt,interpolated_x,source);
 
    // Assemble residuals and Jacobian
    //--------------------------------

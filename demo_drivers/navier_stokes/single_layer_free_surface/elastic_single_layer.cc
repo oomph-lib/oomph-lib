@@ -288,9 +288,6 @@ InterfaceProblem(const unsigned &n_x, const unsigned &n_y,
    // Set the constitutive law
    el_pt->constitutive_law_pt() = Constitutive_law_pt;
 
-   // Assign the time pointer
-   el_pt->time_pt() = time_pt();
-
   } // End of loop over bulk elements
 
  // Create a Data object whose single value stores the external pressure

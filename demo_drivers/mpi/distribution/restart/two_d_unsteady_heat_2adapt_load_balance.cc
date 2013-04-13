@@ -540,9 +540,6 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::build_mesh()
 
    //Set the source function pointer
    el_pt->source_fct_pt() = Source_fct_pt;
-
-   // Set pointer to continous time
-   el_pt->time_pt()=time_pt();
   }
 
 
@@ -558,9 +555,6 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::build_mesh()
    // Set the pointer to the prescribed flux function
    el_pt->flux_fct_pt() = 
     &GlobalParameters::prescribed_flux_on_fixed_y_boundary;
-
-   // Set pointer to continous time
-   el_pt->time_pt()=time_pt();
   }
 
 } // end of build_mesh
@@ -647,9 +641,6 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::generic_actions_after()
    // Set the pointer to the prescribed flux function
    el_pt->flux_fct_pt() = 
     &GlobalParameters::prescribed_flux_on_fixed_y_boundary;
-   
-   // Set pointer to continous time
-   el_pt->time_pt()=time_pt();
   }
 
 } // end of generic_actions_after

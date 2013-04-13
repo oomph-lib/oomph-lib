@@ -259,16 +259,16 @@ namespace oomph
       }
      else
       {
-       // Get body force
-       if (time_pt()!=0)
-        {
-         (*Body_force_fct_pt)(time_pt()->time(),xi,b);
-        }
-       else
-        {
-         (*Body_force_fct_pt)(0.0,xi,b);
-        }
+       // Get time from timestepper of first node (note that this must
+       // work -- body force only makes sense for elements that can be
+       // deformed and given that the deformation of solid finite elements
+       // is controlled by their nodes, nodes must exist!)
+       double time=node_pt(0)->time_stepper_pt()->time_pt()->time();
+       
+       // Now evaluate the body force
+       (*Body_force_fct_pt)(time,xi,b);
       }
+     
     }
 
 

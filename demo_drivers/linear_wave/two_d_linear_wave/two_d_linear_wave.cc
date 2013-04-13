@@ -244,9 +244,6 @@ for(unsigned i=0;i<n_element;i++)
 
    //Set the source function pointer
    el_pt->source_fct_pt() = source_fct_pt;
-
-   // Set pointer to continous time
-   el_pt->time_pt()=time_pt();
   }
 
  // Setup equation numbering scheme

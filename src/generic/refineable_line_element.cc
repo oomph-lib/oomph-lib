@@ -243,9 +243,6 @@ namespace oomph
        OOMPH_EXCEPTION_LOCATION);
      }
     
-    // Pass pointer to time object
-    time_pt() = father_el_pt->time_pt();
-
     // Set up vertex coordinates in the father element:
     // ------------------------------------------------    
 

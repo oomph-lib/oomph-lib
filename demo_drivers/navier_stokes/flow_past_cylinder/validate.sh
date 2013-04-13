@@ -30,7 +30,6 @@ echo " " >> validation.log
 if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-echo "Hello"
 ../../../../bin/fpdiff.py ../validata/soln.dat.gz  \
          ./soln.dat 0.1 1.0e-8 >> validation.log
 fi

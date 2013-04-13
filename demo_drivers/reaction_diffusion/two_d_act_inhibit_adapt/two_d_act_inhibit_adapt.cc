@@ -168,9 +168,6 @@ RefineableActivatorInhibitorProblem() : Dt(0.1)
   {
    // Upcast from GeneralsedElement to the present element
    ELEMENT *elem_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
-
-   //Set the element's time pointer
-   elem_pt->time_pt() = time_pt();
    
    //Set the timescales
    elem_pt->tau_pt() = &GlobalVariables::Tau;

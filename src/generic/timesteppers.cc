@@ -47,6 +47,9 @@ double Steady<NSTEPS>::One=1.0;
 template<unsigned NSTEPS>
 double Steady<NSTEPS>::Zero=0.0;
 
+template<unsigned NSTEPS>
+Time Steady<NSTEPS>::Dummy_time(NSTEPS);
+
 // Force the instantiation for all NSTEPS values that may be
 // required in other timesteppers
  template class Steady<0>;
@@ -54,18 +57,6 @@ double Steady<NSTEPS>::Zero=0.0;
  template class Steady<2>;
  template class Steady<3>;
  template class Steady<4>;
-
-
-// ////////////////////////////////////////////////////////////////////////
-// ////////////////////////////////////////////////////////////////////////
-// // Static variables for steady timestepper: (Give it one dt to make sure
-// // dt() can return something)
-// ////////////////////////////////////////////////////////////////////////
-// ////////////////////////////////////////////////////////////////////////
-
-// double Steady::One=1.0;
-// double Steady::Zero=0.0;
-// Time* Steady::Default_time_pt=new Time(1);
 
 
 ////////////////////////////////////////////////////////////////////////
@@ -93,10 +84,6 @@ template<>
 template<>
 void BDF<1>::set_predictor_weights()
 {
- //Read the value of the previous timesteps
- //double dt=Time_pt->dt(0);
- //double dtprev=Time_pt->dt(1);
-
  throw OomphLibError("Not implemented yet",
                      "BDF<1>::set_predictor_weights()",
                      OOMPH_EXCEPTION_LOCATION);

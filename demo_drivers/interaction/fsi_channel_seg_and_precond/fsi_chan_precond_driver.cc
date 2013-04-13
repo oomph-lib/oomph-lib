@@ -291,7 +291,8 @@ PreconditionedFSICollapsibleChannelProblem(const unsigned& nup,
      
      {
 
-      // Create an instance of the FSI preconditioner
+      // Create an instance of the FSI preconditioner -- pass the pointer
+      // to the problem
       FSIPreconditioner* prec_pt=new FSIPreconditioner(this);
 
       // Set Navier Stokes mesh:
@@ -395,7 +396,8 @@ PreconditionedFSICollapsibleChannelProblem(const unsigned& nup,
      
      {
 
-      // Create an instance of the FSI preconditioner
+      // Create an instance of the FSI preconditioner -- pass the pointer
+      // to the problem
       FSIPreconditioner* prec_pt=new FSIPreconditioner(this);
 
       // Set Navier Stokes mesh:

@@ -240,9 +240,6 @@ UnsteadyHeatProblem<ELEMENT>::UnsteadyHeatProblem(
 
    //Set the source function pointer
    el_pt->source_fct_pt() = Source_fct_pt;
-
-   // Set pointer to continous time
-   el_pt->time_pt()=time_pt();
   }
 
  // Do equation numbering

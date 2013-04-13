@@ -399,9 +399,6 @@ ShellProblem<ELEMENT>::ShellProblem(const unsigned &nx, const unsigned &ny,
    // Pass pointer to square of timescale ratio (non-dimensional density)
    el_pt->lambda_sq_pt() = &Global_Physical_Variables::Lambda_sq;
 
-   // Assign the time pointer
-   el_pt->time_pt() = time_pt();
-
    //Pre-compute the second derivatives wrt Lagrangian coordinates
    //for the first element only
    if(e==0)

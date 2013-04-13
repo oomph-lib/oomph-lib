@@ -1024,9 +1024,6 @@ ConvectionProblem(const bool &pin) : Surface_pinned(pin)
 
    //If the mesh is fixed, we can disable ALE
    if(Surface_pinned) {el_pt->disable_ALE();}
-
-   // Set pointer to the continuous time
-   el_pt->time_pt() = time_pt();
   }
 
 
@@ -1063,9 +1060,6 @@ ConvectionProblem(const bool &pin) : Surface_pinned(pin)
 
    // Set the diffustion ratio
    el_pt->d_pt() = &Global_Physical_Variables::DD_s;
-
-   // Set pointer to the continuous time
-   el_pt->time_pt() = time_pt();
   }
 
  // Setup equation numbering scheme

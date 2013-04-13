@@ -18,21 +18,21 @@ We illustrate the solution
 of the unsteady 2D Navier-Stokes equations by considering the
 propagation of a single droplet along a straight channel as shown in
 the sketch below. The non-dimensionalisation is
-the same as in the <a
-href="../../adaptive_bubble_in_channel/html/index.html"> bubble
+the same as in the 
+<a href="../../adaptive_bubble_in_channel/html/index.html"> bubble
 tutorial, </a> and we choose the viscosity and density of the
 surrounding liquid to be the reference values.
 
 @I w 0.9\textwidth problem "The problem setup. "
 
 The governing equations and boundary conditions are 
-the same as those in the  <a
-href="../../adaptive_bubble_in_channel/html/index.html"> bubble
+the same as those in the  
+<a href="../../adaptive_bubble_in_channel/html/index.html"> bubble
 tutorial. </a>
 The only difference is that the Navier--Stokes equations must also be
 solved within the droplet. In fact, this is a two-fluid problem, a
-class of problems that is first introduced in <A
-HREF="../../two_layer_interface/html/index.html"> another tutorial. </A>
+class of problems that is first introduced in 
+<A HREF="../../two_layer_interface/html/index.html"> another tutorial. </A>
 
 <HR>
 
@@ -48,8 +48,8 @@ must always be explicitly enforced in that case.
 
 \section implementation Implementation
 
-We use the same method as in the <a
-href="../../adaptive_bubble_in_channel/html/index.html"> bubble
+We use the same method as in the 
+<a href="../../adaptive_bubble_in_channel/html/index.html"> bubble
 problem, </a> an ALE-based finite-element method with
 <a href="../../single_layer_free_surface/html/index.html#kinematic_condition_implementation">a pseudo-elastic
 node-update procedure</a>.  In this case,
@@ -62,8 +62,8 @@ is also imposed in a similar
 way: we attach \c LineVolumeConstraintBoundingSolidElements to the 
 droplet surface and create an additional \c VolumeConstraintElement. 
 Here, a pressure degree of
-freedom within the droplet is hijacked, see <A
-HREF="../../static_two_layer/html/index.html"> another tutorial, </A> 
+freedom within the droplet is hijacked, see 
+<A HREF="../../static_two_layer/html/index.html"> another tutorial, </A> 
 to be used as the unknown associated with the volume constraint. Once
 the static initial problem has been solved, the
 "volume constraint" elements are deleted and the pressure degree of
@@ -118,8 +118,8 @@ Ca = 1 \f$, solve the steady problem, set \f$ Ca=10\f$ and then resolve.
 \until problem.steady_newton_solve()
 
 After documenting the solution, we remove the (explicit) volume
-constraint and then the remainder of the code is identical to that in the  <a
-href="../../adaptive_bubble_in_channel/html/index.html"> bubble
+constraint and then the remainder of the code is identical to that in
+the <a href="../../adaptive_bubble_in_channel/html/index.html"> bubble
 tutorial. </a>
 
 \skipline Switch off
@@ -131,16 +131,15 @@ tutorial. </a>
 
 Other than trivial name changes from "bubble" to "drop", there are
 a few significant changes between this problem and that in 
-the  <a
-href="../../adaptive_bubble_in_channel/html/index.html"> bubble
+the  
+<a href="../../adaptive_bubble_in_channel/html/index.html"> bubble
 tutorial. </a> There is an additional boolean \c Use_volume_constraint
 and an additional function \c
 remove_volume_constraint(), which are used to manage the switch from
 the explicit enforcement of the volume constraint in the static case
 to the implicit enforcement in the time simulations. The other key
-difference is that we use \c Triangle's <a href
-="../../../meshes/mesh_from_inline_triangle_internal_boundaries/html/index.html#
-def_extra_regions"> region attributes </a> 
+difference is that we use \c Triangle's 
+<a href="../../../meshes/mesh_from_inline_triangle_internal_boundaries/html/index.html#def_extra_regions"> region attributes </a> 
 to distinguish the elements inside
 the droplet from those outside. The default behaviour is that all
 elements are in region 0, but we label those element within the drop
@@ -151,8 +150,7 @@ as region 1.
 \section constructor The problem constructor 
 
  The construction of the mesh proceeds in exactly the same way as in
-  <a
-href="../../adaptive_bubble_in_channel/html/index.html"> bubble
+ <a href="../../adaptive_bubble_in_channel/html/index.html"> bubble
 tutorial, </a> except that we add a region tag "1" to label the
   elements within the droplet (so we specify a coordinate within the drop)
   and we must tell \c Triangle to use the assigned attributes.

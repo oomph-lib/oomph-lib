@@ -617,9 +617,6 @@ public:
     {
      // Upcast from GeneralisedElement to the present element
      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Fluid_mesh_pt->element_pt(e));
-
-     // Set pointer to continous time
-     el_pt->time_pt()=this->time_pt();
    
      // Set the Reynolds number
      el_pt->re_pt() = &Problem_Parameter::Re;

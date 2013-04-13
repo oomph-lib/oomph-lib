@@ -8,9 +8,6 @@ time-dependent problems only requires a few additional steps:
   employ multiple \c TimeSteppers -- a key requirement for the simulation
   of multiphysics problems.)
 - The initialisation of the timestep, \c dt.
-- Passing the pointer to the \c Problem's \c Time object (created when
-  the first \c TimeStepper is passed to the \c Problem) to the \c Problem's
-  constituent elements. 
 - Setting the initial conditions by assigning suitable values for
   the \c Data objects' "history values" and the \c Nodes' "positional
   history values".
@@ -312,12 +309,7 @@ at all boundary nodes.
 \until end of set boundary conditions 
 
 Finally, we loop over the elements and pass the pointer to the source
-function and the pointer to the \c Problem's \c Time object. The pointer
-to the \c Time object gives the elements access to the current
-value of the "continuous" time [via \c
-GeneralisedElement::time_pt()->time()] which allows them to evaluate
-the time-dependent source function during the computation
-of the elemental residual vector and the Jacobian matrix.
+function.
 
 
 \skipline Complete the build of all elements so they are fully

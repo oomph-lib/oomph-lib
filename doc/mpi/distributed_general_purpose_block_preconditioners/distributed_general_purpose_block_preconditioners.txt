@@ -241,12 +241,13 @@ is implemented at an elemental level so we pass a pointer to the mesh
 containing the elements to the preconditioner. This problem in fact
 contains two meshes containing the bulk elements and the traction
 elements. All the DOFs are classified by the bulk elements and
-therefore we do not need to pass the traction element mesh to the block preconditioner.
+therefore we do not need to pass the traction element mesh to 
+the block preconditioner.
 
 \dontinclude airy_cantilever.cc
-\skipline set the mesh
-\until prec_pt->add_mesh(problem.solid_mesh_pt());
-
+\skipline The preconditioner only requires the bulk mesh since its
+\until prec_pt->set_mesh(0,problem.solid_mesh_pt());
+ 
 
 The next stage is to specify the map from DOF type number in the
 element to block type in the preconditioner. In the solid elements

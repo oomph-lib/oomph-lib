@@ -858,9 +858,6 @@ this->Point_mesh_pt->add_element_pt(point_element_pt);
 
    //Set Gravity vector
    el_pt->g_pt() = &Global_Physical_Variables::Direction_of_gravity;
-
-   // Set pointer to the continuous time
-   el_pt->time_pt() = time_pt();
   }
 
 
@@ -890,9 +887,6 @@ this->Point_mesh_pt->add_element_pt(point_element_pt);
    // that has been "traded" for the volume constraint to the
    // surface elements -- hacky! 
    el_pt->set_traded_pressure_data(traded_pressure_data_pt);
-   
-   // Set pointer to the continuous time
-   el_pt->time_pt() = time_pt();
   }
 
  

@@ -385,9 +385,6 @@ InterfaceProblem()
    // Set the constitutive law
    el_pt->constitutive_law_pt() = Constitutive_law_pt;
 
-   // Assign the time pointer
-   el_pt->time_pt() = time_pt();
-
   } // End of loop over bulk elements in lower fluid
 
  // Loop over bulk elements in upper fluid
@@ -417,9 +414,6 @@ InterfaceProblem()
 
    // Set the constitutive law
    el_pt->constitutive_law_pt() = Constitutive_law_pt;
-
-   // Assign the time pointer
-   el_pt->time_pt() = time_pt();
 
   } // End of loop over bulk elements in upper fluid
 

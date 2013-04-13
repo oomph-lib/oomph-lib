@@ -347,21 +347,6 @@ void BoussinesqPreconditioner::setup()
   // Setup the Navier Stokes preconditioner:
   Navier_stokes_preconditioner_pt->setup(matrix_pt(),comm_pt());
 
-  // Recast Jacobian matrix to CRDoubleMatrix
-  CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt());
-
-#ifdef PARANOID
-  if (cr_matrix_pt==0)
-   {
-    std::ostringstream error_message;
-    error_message << "BoussinesqPreconditioner only works with"
-                  << " CRDoubleMatrix matrices" << std::endl;
-    throw OomphLibError(error_message.str(),
-                        "BoussinesqPreconditioner::setup()",
-                        OOMPH_EXCEPTION_LOCATION);
-   }
-#endif
-
   // Extract the additional blocks we need for Boussinesq:
 
   // Temperature matrix

@@ -246,8 +246,6 @@ SphericalSpinUpProblem<ELEMENT>::SphericalSpinUpProblem()
     //Disable ALE
    el_pt->disable_ALE();
 
-   // Set pointer to continuous time
-   el_pt->time_pt()=time_pt();
   } // end loop over elements
 
  // Now set the first pressure value in element 0 to 0.0

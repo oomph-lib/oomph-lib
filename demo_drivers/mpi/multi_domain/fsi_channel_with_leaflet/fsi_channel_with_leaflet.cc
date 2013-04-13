@@ -409,10 +409,6 @@ FSIChannelWithLeafletProblem<ELEMENT>::FSIChannelWithLeafletProblem(
 
    //Set the Womersley number
    el_pt->re_st_pt() = &Global_Physical_Variables::ReSt;
-
-      // Set pointer to continous time
-   el_pt->time_pt()=time_pt();
-
   }// end loop over elements
 
 

@@ -233,9 +233,6 @@ UnsteadyHeatProblem<ELEMENT>::UnsteadyHeatProblem(
 
    //Set the source function pointer
    el_pt->source_fct_pt() = Source_fct_pt;
-
-   // Set pointer to continous time
-   el_pt->time_pt()=time_pt();
   }
 
  // Do equation numbering
@@ -245,7 +242,7 @@ UnsteadyHeatProblem<ELEMENT>::UnsteadyHeatProblem(
 
 
 
-//=========start of actions_before_implicit_timestep===============================
+//=========start of actions_before_implicit_timestep======================
 /// \short Actions before timestep: update the domain, then reset the 
 /// boundary conditions for the current time.
 //========================================================================

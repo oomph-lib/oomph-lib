@@ -341,8 +341,11 @@ public:
     }
    else
     {
+     // Get continuous time from timestepper of first node
+     double time=node_pt(0)->time_stepper_pt()->time_pt()->time();
+  
      // Get wind
-     (*Wind_fct_pt)(time(),x,wind);
+     (*Wind_fct_pt)(time,x,wind);
     }
   }
 

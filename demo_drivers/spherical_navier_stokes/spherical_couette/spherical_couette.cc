@@ -313,8 +313,6 @@ RefineableSphericalCouetteProblem<ELEMENT>::RefineableSphericalCouetteProblem()
    //Disable ALE
    el_pt->disable_ALE();
    
-   // Set pointer to continuous time
-   el_pt->time_pt()=time_pt();
   } // end loop over elements
 
  // Pin redudant pressure dofs

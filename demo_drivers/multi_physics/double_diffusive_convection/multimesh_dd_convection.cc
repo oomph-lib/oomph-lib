@@ -888,9 +888,6 @@ DDConvectionProblem<NST_ELEMENT,AD_ELEMENT>::DDConvectionProblem()
 
    //The mesh is fixed, so we can disable ALE
    el_pt->disable_ALE();
-
-   // Set pointer to the continuous time
-   el_pt->time_pt() = time_pt();
   }
 
  unsigned n_temp_element = temp_mesh_pt()->nelement();
@@ -909,9 +906,6 @@ DDConvectionProblem<NST_ELEMENT,AD_ELEMENT>::DDConvectionProblem()
 
    //The mesh is fixed, so we can disable ALE
    el_pt->disable_ALE();
-
-   // Set pointer to the continuous time
-   el_pt->time_pt() = time_pt();
   }
 
  unsigned n_conc_element = conc_mesh_pt()->nelement();
@@ -929,9 +923,6 @@ DDConvectionProblem<NST_ELEMENT,AD_ELEMENT>::DDConvectionProblem()
 
    //The mesh is fixed, so we can disable ALE
    el_pt->disable_ALE();
-
-   // Set pointer to the continuous time
-   el_pt->time_pt() = time_pt();
   }
 
 

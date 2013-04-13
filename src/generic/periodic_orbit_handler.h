@@ -192,11 +192,14 @@ class PeriodicOrbitEquations : public virtual FiniteElement
  //Pointer to the global variable that represents the frequency
  double *Omega_pt;
 
+ /// Pointer to global time.
+ Time* Time_pt;
+
 public:
 
 
  //Constructor, do nothing
-  PeriodicOrbitEquations():  Ntstorage(0), Omega_pt(0) {}
+  PeriodicOrbitEquations():  Ntstorage(0), Omega_pt(0),Time_pt(0) {}
  
  /// Broken copy constructor
  PeriodicOrbitEquations(const PeriodicOrbitEquations& dummy) 
@@ -219,6 +222,19 @@ public:
  ///Set the total number of time storage values
  void set_ntstorage(const unsigned &n_tstorage) {Ntstorage = n_tstorage;}
 
+ /// Retun the pointer to the global time
+ Time* &time_pt() {return Time_pt;}
+ 
+ /// Return the pointer to the global time (const version)
+ Time* const &time_pt() const {return Time_pt;}
+
+ /// Return the global time, accessed via the time pointer
+ double time() const
+ {
+  //If no Time_pt, return 0.0
+  if(Time_pt==0) {return 0.0;}
+  else {return Time_pt->time();}
+ }
 
  /// Add the element's contribution to its residual vector (wrapper)
  void fill_in_contribution_to_integrated_residuals(
@@ -1706,6 +1722,7 @@ void PeriodicOrbitEquations::orbit_output(GeneralisedElement* const &elem_pt,
 
      //Need to multiply by period and the set global time
      this->time_pt()->time() = interpolated_time;
+
      //Set the weights of the timestepper
      this->set_timestepper_weights(psi,dpsidt);
 

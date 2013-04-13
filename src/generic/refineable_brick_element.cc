@@ -1262,9 +1262,6 @@ void RefineableQElement<3>::build(Mesh*& mesh_pt,
       OOMPH_EXCEPTION_LOCATION);
     }
 
-   // Pass pointer to time object:
-   time_pt()=father_el_pt->time_pt();
-
    Vector<int> s_lo(3);
    Vector<int> s_hi(3);
    Vector<double> s(3);

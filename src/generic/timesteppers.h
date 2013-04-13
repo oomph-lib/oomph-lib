@@ -242,18 +242,6 @@ public:
    //Resize Weights matrix and initialise each weight to zero 
    Weight.resize(max_deriv+1,tstorage,0.0);
 
-/*    Weight = new double*[first idex]; */
-/*    double* temp = new double[first_index*second_index]; */
-/*    for (unsigned i=0;i<first_index;i++) */
-/*     { */
-/*      Weight[i]= temp; */
-/*      temp+=second_index; */
-/*     } */
-
-   // in destructor
-   // delete [] Weight[0];
-   // delete [] Weight;
-
    // Set the weight for zero-th derivative, which is always 1.0
    Weight(0,0)=1.0;
   }
@@ -416,7 +404,10 @@ public:
  Time* const &time_pt() const {return Time_pt;}
 
  ///Access function for the pointer to time
- Time*& time_pt() {return Time_pt;}
+ Time*& time_pt() 
+  {
+   return Time_pt;
+  }
 
  /// Access function for j-th weight for the i-th derivative
  virtual double weight(const unsigned &i, const unsigned &j) const
@@ -499,6 +490,7 @@ public:
  Steady() : TimeStepper(NSTEPS+1,2)
   {
    Type="Steady";
+   Time_pt=&Dummy_time;
 
    //Overwrite default assignment in base constructor -- this TimeStepper
    //actually is steady all the time.
@@ -681,9 +673,6 @@ public:
  /// Number of timestep increments that need to be stored by the scheme
  unsigned ndt() {return NSTEPS;}
 
-/*  /// Dummy: Access function for i-th weight (for the highest derivative) */
-/*  double weight(const unsigned &i) {return Zero;} */
-
  /// Dummy: Access function for j-th weight for the i-th derivative
  double weight(const unsigned &i, const unsigned &j) const
   {
@@ -706,7 +695,7 @@ private:
  static double Zero;
  
  // Default Time object
- static Time* Default_time_pt;
+ static Time Dummy_time;
  
 };
 

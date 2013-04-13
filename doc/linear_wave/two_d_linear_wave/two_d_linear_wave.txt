@@ -155,9 +155,7 @@ required by the timestepper.
 
 Finally, we complete the 
 build of the elements by passing the pointer to the source
-function and the \c Problem's \c Time object (created when the 
-first (and only) timestepper was added to the \c Problem
-at the beginning of the constructor) to the elements, and 
+function to the elements, and 
 set up the equation numbering scheme.
 
 
@@ -352,8 +350,8 @@ and document the results.
 
 \subsection default Default parameters for the linear wave equations
 The linear wave equation does not contain any parameters, therefore
-the \c Problem constructor only passed the pointer to the global
-\c Time object and the pointer to the source function to the elements.
+the \c Problem constructor only passed the pointer to
+the pointer to the source function to the elements.
 Passing the pointer to the source function is optional -- if no
 source function pointer is specified, the linear-wave elements will
 use the default \f$ f(x_1,x_2,t)=0 \f$ , so that the unforced
@@ -364,24 +362,6 @@ correct results. This is because the travelling-wave solution (@R[ExactSoln1]@)
 is in fact a solution of the \e unforced wave equation -- the source function 
 defined in the namespace \c TanhSolnForLinearWave implements
 \f$ f(x_1,x_2,t)=0 \f$ .
-
-
-Passing the pointer to the \c Time object is optional too, but
-it is important to understand \c oomph-lib's behaviour if this step
-is omitted. The \c GeneralisedElement class -- the base class
-for all elements in \c oomph-lib -- provides storage for a pointer to 
-a \c Time object, to give elements access to the "global" time
-which is usually maintained by the \c Problem. By default, the pointer
-is set to NULL, and the access function to the continuous time,
-\c GeneralisedElement::time() returns zero -- a sensible/harmless default
-for elements that discretise equations without explicit
-time-dependence. (Note that a default behaviour is required as we do not 
-want to force users who solve steady-state equations to worry about
-irrelevant time-stepping issues). If we use a non-trivial source
-function (i.e. a source function that has a genuine time-dependence)
-but omit the assignment of the pointer to the \c Problem's
-\c Time object, the source function would always be evaluated at \f$ t =
-0. \f$  This is unlikely to be the desired behaviour!
 
 
 \subsection imp_soln The errors induced by an impulsive start

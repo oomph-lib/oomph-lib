@@ -255,11 +255,8 @@ Problem::mesh_pt()=new RefineableAlgebraicChannelWithLeafletMesh<ELEMENT>(
    // We're assuming a Strouhal number of one, corresponding to
    // a non-dimensionalisation of time on the flow's natural timescale.
    el_pt->re_st_pt() = &Global_Physical_Variables::Re;
-   
-   // Set pointer to continous time
-   el_pt->time_pt()=time_pt();
-   
-  }// end loop over elements
+  
+  } // end loop over elements
 
 
  //Pin the boundary nodes

@@ -583,9 +583,6 @@ FSIRingProblem::FSIRingProblem(const unsigned& N,
    FLUID_ELEMENT *el_pt 
     = dynamic_cast<FLUID_ELEMENT*>(Fluid_mesh_pt->element_pt(e));
 
-   //Assign the pointer to time
-   el_pt->time_pt() = time_pt();
-
    //Set the Reynolds number, etc
    el_pt->re_pt() = &Global_Physical_Variables::Re;
    el_pt->re_st_pt() = &Global_Physical_Variables::ReSt;

@@ -243,9 +243,6 @@ InterfaceProblem<ELEMENT,TIMESTEPPER>::InterfaceProblem
    el_pt->re_st_pt() = &Global_Physical_Variables::ReSt;
    el_pt->re_invfr_pt() = &Global_Physical_Variables::ReInvFr;
    el_pt->g_pt() = &Global_Physical_Variables::G;
-
-   //Assign the time pointer
-   el_pt->time_pt() = time_pt();
   }
 
  //Loop over 2D interface elements and set capillary number and 
@@ -584,9 +581,6 @@ ElasticInterfaceProblem<ELEMENT,TIMESTEPPER>::ElasticInterfaceProblem
 
    el_pt->constitutive_law_pt() = 
     Global_Physical_Variables::Constitutive_law_pt;
-
-   //Assign the time pointer
-   el_pt->time_pt() = time_pt();
   }
 
  //Loop over 2D interface elements and set capillary number and 

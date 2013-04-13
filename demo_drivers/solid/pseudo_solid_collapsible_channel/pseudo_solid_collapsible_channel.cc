@@ -542,10 +542,7 @@ CollapsibleChannelProblem<ELEMENT>::CollapsibleChannelProblem(
   {
    // Upcast from GeneralisedElement to the present element
    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(e));
-   
-   // Set pointer to continous time
-   el_pt->time_pt()=time_pt();
-   
+      
    //Set the Reynolds number
    el_pt->re_pt() = &Global_Physical_Variables::Re;
 
@@ -983,9 +980,6 @@ void CollapsibleChannelProblem<ELEMENT>::actions_after_adapt()
    
    // Set the pointer to the prescribed traction function
    el_pt->traction_fct_pt() = &Global_Physical_Variables::prescribed_traction;
-      
-   // Set pointer to continous time
-   el_pt->time_pt()=time_pt();
   }
 
 } // end of actions_after_adapt

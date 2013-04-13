@@ -259,9 +259,8 @@ boundaries.
 \until end loop over boundaries
 
 Finally we pass the pointers to the Reynolds and Strouhal numbers,
-\f$ Re \f$ and \f$ Re\, St \f$ , and the pointer to the global time
-object (created when we called \c Problem::add_time_stepper_pt(...)
-above)  to the elements. Since no traction boundary conditions are
+\f$ Re \f$ and \f$ Re\, St \f$ , to the elements. Since no 
+traction boundary conditions are
 applied anywhere, the pressure is only determined up to an arbitrary
 constant. To ensure a unique solution we pin a single pressure value 
 before setting up the equation numbering scheme.

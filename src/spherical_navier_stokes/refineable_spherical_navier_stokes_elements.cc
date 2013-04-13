@@ -47,6 +47,9 @@ fill_in_generic_residual_contribution_spherical_nst(Vector<double> &residuals,
  //Find out how many nodes there are
  const unsigned n_node = nnode();
  
+ // Get continuous time from timestepper of first node
+ double time=node_pt(0)->time_stepper_pt()->time_pt()->time();
+  
  //Find out how many pressure dofs there are
  const unsigned n_pres = npres_spherical_nst();
  
@@ -187,7 +190,7 @@ int local_eqn=0, local_unknown=0;
    
    //Get the user-defined body force terms
    Vector<double> body_force(3);
-   this->get_body_force_spherical_nst(time(),ipt,s,interpolated_x,body_force);
+   this->get_body_force_spherical_nst(time,ipt,s,interpolated_x,body_force);
    
    //Get the user-defined source function
    //double source=this->get_source_spherical_nst(time(),ipt,interpolated_x);

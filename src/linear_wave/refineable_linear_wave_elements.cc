@@ -46,29 +46,32 @@ fill_in_generic_residual_contribution_lin_wave(Vector<double> &residuals,
                                                unsigned flag)
 {
 
-//Find out how many nodes there are in the element
-unsigned n_node = nnode();
-
-//Find the index at which the unknown is stored
+ //Find out how many nodes there are in the element
+ unsigned n_node = nnode();
+ 
+ // Get continuous time from timestepper of first node
+ double time=node_pt(0)->time_stepper_pt()->time_pt()->time();
+ 
+ //Find the index at which the unknown is stored
  unsigned u_nodal_index = this->u_index_lin_wave();
-
-//Set up memory for the shape and test functions
+ 
+ //Set up memory for the shape and test functions
  Shape psi(n_node), test(n_node);
  DShape dpsidx(n_node,DIM), dtestdx(n_node,DIM);
-
-//Set the value of n_intpt
-unsigned n_intpt = integral_pt()->nweight();
-
-//Set the Vector to hold local coordinates
-Vector<double> s(DIM);
-
-//Integers used to store the local equation number and local unknown
-//indices for the residuals and jacobians
-int local_eqn=0, local_unknown=0;
-
-// Local storage for pointers to hang_info objects
+ 
+ //Set the value of n_intpt
+ unsigned n_intpt = integral_pt()->nweight();
+ 
+ //Set the Vector to hold local coordinates
+ Vector<double> s(DIM);
+ 
+ //Integers used to store the local equation number and local unknown
+ //indices for the residuals and jacobians
+ int local_eqn=0, local_unknown=0;
+ 
+ // Local storage for pointers to hang_info objects
  HangInfo *hang_info_pt=0, *hang_info2_pt=0;
-
+ 
 //Loop over the integration points
 for(unsigned ipt=0;ipt<n_intpt;ipt++)
 {
@@ -115,7 +118,7 @@ for(unsigned ipt=0;ipt<n_intpt;ipt++)
 
  //Get body force
  double source;
- this->get_source_lin_wave(time(),ipt,interpolated_x,source);
+ this->get_source_lin_wave(time,ipt,interpolated_x,source);
 
 
  // Assemble residuals and Jacobian

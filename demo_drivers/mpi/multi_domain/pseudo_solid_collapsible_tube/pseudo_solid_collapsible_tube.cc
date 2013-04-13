@@ -816,9 +816,6 @@ PseudoElasticCollapsibleChannelProblem()
    el_pt->lambda_sq_pt() =
     &Global_Parameters::Lambda_sq;
 
-   // Set pointer to time
-   el_pt->time_pt()=time_pt();   
-
   } // end loop over elements
 
  // pin the rundundant nodal pressures
@@ -875,9 +872,6 @@ PseudoElasticCollapsibleChannelProblem()
    // Set the timescale ratio 
    el_pt->lambda_sq_pt() =
     &Global_Parameters::Lambda_sq;
-
-   // Set pointer to time
-   el_pt->time_pt()=time_pt();   
   }
 
  // Setup FSI

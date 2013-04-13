@@ -533,9 +533,6 @@ PressureWaveFSIProblem<FLUID_ELEMENT, SOLID_ELEMENT>::PressureWaveFSIProblem()
    // Set the pointer to the Lambda parameter
    el_pt->lambda_sq_pt() = &Global_Physical_Variables::Lambda_sq;
 
-   // Set the pointer to the time
-   el_pt->time_pt() = time_pt();
-
    // Loop over all nodes in the element and pin the theta displacement
    unsigned n_node = el_pt->nnode();
    for(unsigned i_node=0;i_node<n_node;i_node++)
@@ -753,9 +750,6 @@ create_solid_traction_elements()
    // Add to mesh
    Solid_surface_mesh_pt->add_element_pt(traction_element_pt);
 
-   // Add pointer to the problem's time object
-   traction_element_pt->time_pt()=time_pt();
-
    // Set the applied traction
    traction_element_pt->traction_fct_pt() =
     &Global_Physical_Variables::outside_solid_boundary_traction;
@@ -791,9 +785,6 @@ create_fluid_traction_elements()
    // Set the applied traction
    traction_element_pt->traction_fct_pt() =
     &Global_Physical_Variables::fluid_inflow_boundary_traction;
-
-   // Set the pointer to the time
-   traction_element_pt->time_pt() = time_pt();
   }
 
 

@@ -604,9 +604,6 @@ UniformTranspiration<ELEMENT>::UniformTranspiration
 
    //Set the Reynolds number
    temp_pt->re_pt() = &Re;
-
-   //Set the time time pointer
-   temp_pt->time_pt() = time_pt();
   }
 
  //Top and bottom are dirichlet in first variable, but free in second

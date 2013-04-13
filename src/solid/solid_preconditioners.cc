@@ -74,22 +74,6 @@ namespace oomph
   // Get blocks
   // ----------
 
-  // In comes the current Jacobian. Recast it to a CR double matrix;
-  // shout if that can't be done.
-  CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt());
-
-#ifdef PARANOID
-  if (cr_matrix_pt==0)
-   {
-    std::ostringstream error_message;
-    error_message << "PressureBasedSolidLSCPreconditioner only works with "
-                  << "CRDoubleMatrix matrices" << std::endl;
-    throw OomphLibError(error_message.str(),
-                     	"PressureBasedSolidLSCPreconditioner::setup()",
-                        OOMPH_EXCEPTION_LOCATION);
-   }
-#endif
-
   // Set up block look up schemes (done automatically in the
   // BlockPreconditioner base class, based on the information 
   // provided in the block-preconditionable elements in the problem)

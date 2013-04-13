@@ -1730,10 +1730,7 @@ void PRefineableQElement<2,INITIAL_NNODE_1D>::pre_build(
    
    // Number of history values (incl. present)
    unsigned ntstorage=time_stepper_pt->ntstorage();
-   
-   // Pass pointer to time object:
-   this->time_pt()=father_el_pt->time_pt();
-   
+      
    Vector<double> s_lo(2);
    Vector<double> s_hi(2);
    Vector<double> s(2);

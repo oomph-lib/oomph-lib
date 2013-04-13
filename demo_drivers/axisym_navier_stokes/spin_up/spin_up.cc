@@ -219,9 +219,6 @@ RotatingCylinderProblem(const unsigned& n_r, const unsigned& n_z,
    // Set the Womersley number
    el_pt->re_st_pt() = &Global_Physical_Variables::ReSt;
 
-   // Assign the time pointer
-   el_pt->time_pt() = time_pt();
-
    // The mesh remains fixed
    el_pt->disable_ALE();
 

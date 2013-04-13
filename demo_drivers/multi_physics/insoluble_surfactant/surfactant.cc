@@ -899,9 +899,6 @@ ConvectionProblem(const bool &pin) : Surface_pinned(pin)
 
    //If the mesh is fixed, we can disable ALE
    if(Surface_pinned) {el_pt->disable_ALE();}
-
-   // Set pointer to the continuous time
-   el_pt->time_pt() = time_pt();
   }
 
 
@@ -932,9 +929,6 @@ ConvectionProblem(const bool &pin) : Surface_pinned(pin)
 
    // Set the surface peclect number multiplied by strouhal number
    el_pt->peclet_strouhal_s_pt() = &Global_Physical_Variables::Peclet_St_S;
-
-   // Set pointer to the continuous time
-   el_pt->time_pt() = time_pt();
   }
 
  // Setup equation numbering scheme

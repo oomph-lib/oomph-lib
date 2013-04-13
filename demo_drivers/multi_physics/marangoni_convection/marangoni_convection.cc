@@ -602,9 +602,6 @@ ConvectionProblem(const bool &pin) : Surface_pinned(pin)
 
    //If the mesh is fixed, we can disable ALE
    if(Surface_pinned) {el_pt->disable_ALE();}
-
-   // Set pointer to the continuous time
-   el_pt->time_pt() = time_pt();
   }
 
 
@@ -626,9 +623,6 @@ ConvectionProblem(const bool &pin) : Surface_pinned(pin)
 
    // Set the Capillary number
    el_pt->ca_pt() = &Global_Physical_Variables::Capillary;
-
-   // Set pointer to the continuous time
-   el_pt->time_pt() = time_pt();
   }
 
  // Setup equation numbering scheme

@@ -637,10 +637,7 @@ FSIChannelWithLeafletProblem<ELEMENT>::FSIChannelWithLeafletProblem
    
    //Set the Womersley number
    el_pt->re_st_pt() = &Global_Parameters::ReSt;
-   
-   // Set pointer to continous time
-   el_pt->time_pt()=time_pt();
-   
+      
    //Set the constitutive law
    el_pt->constitutive_law_pt() = Constitutive_law_pt;
    

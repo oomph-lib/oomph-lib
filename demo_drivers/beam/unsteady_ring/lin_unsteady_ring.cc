@@ -177,9 +177,6 @@ ElasticRingProblem<ELEMENT,TIMESTEPPER>::ElasticRingProblem
 
    // Assign the undeformed surface
    elem_pt->undeformed_beam_pt() = Undef_geom_pt;
-
-   // Assign the time pointer
-   elem_pt->time_pt() = time_pt();
   }
 
  // Establish control displacment: (even though no displacement 

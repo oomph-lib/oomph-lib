@@ -195,16 +195,6 @@ DenseMatrix<double> GeneralisedElement::Dummy_matrix;
 //=========================================================================
  double GeneralisedElement::Default_fd_jacobian_step=1.0e-8;
 
-//=======================================================================
-/// Return the global time, accessed via the time pointer
-//======================================================================
- double GeneralisedElement::time() const
- {
-  //If no Time_pt, return 0.0
-  if(Time_pt==0) {return 0.0;}
-  else {return Time_pt->time();}
- }
-
 //==========================================================================
 /// Destructor for generalised elements: Wipe internal data. Pointers 
 /// to external data get NULLed  but are not deleted because they 
@@ -3796,6 +3786,7 @@ void FiniteElement::get_dresidual_dnodal_coordinates(
 //==================================================================
  void FiniteElement::
  integrate_fct(FiniteElement::UnsteadyExactSolutionFctPt integrand_fct_pt,
+               const double& time,
                Vector<double>& integral)
  {
   //Initialise all components of integral Vector and setup integrand vector
@@ -3833,7 +3824,7 @@ void FiniteElement::get_dresidual_dnodal_coordinates(
     double J = J_eulerian(s);
      
     // Evaluate the integrand at the knot points
-    integrand_fct_pt(time(),x,integrand);
+    integrand_fct_pt(time,x,integrand);
 
     //Add to components of integral Vector
     for (unsigned i=0;i<ncomponents;i++) {integral[i]+=integrand[i]*w*J;}

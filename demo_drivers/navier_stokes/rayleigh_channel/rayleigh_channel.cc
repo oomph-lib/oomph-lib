@@ -235,9 +235,6 @@ RayleighProblem<ELEMENT,TIMESTEPPER>::RayleighProblem
    //Set the Reynolds number, etc
    el_pt->re_pt() = &Global_Parameters::Re;
    el_pt->re_st_pt() = &Global_Parameters::ReSt;
-
-   //Assign the time pointer
-   el_pt->time_pt() = time_pt();
   }
 
  // Now pin the pressure in first element at value 0 to 0.0

@@ -197,6 +197,9 @@ public virtual FaceGeometry<ELEMENT>,
    //Find out how many nodes there are
    const unsigned n_node = nnode();
 
+   // Get continuous time from timestepper of first node
+   double time=node_pt(0)->time_stepper_pt()->time_pt()->time();
+  
    //Set up memory for the shape functions
    Shape psi(n_node);
 
@@ -243,7 +246,7 @@ public virtual FaceGeometry<ELEMENT>,
      //Dummy integration point
      unsigned ipt=0;
 
-     get_traction(time(),ipt,interpolated_x,unit_normal,traction);
+     get_traction(time,ipt,interpolated_x,unit_normal,traction);
 
      //Output the x,y,..
      for(unsigned i=0;i<n_dim;i++) 
@@ -330,6 +333,9 @@ template<class ELEMENT>
   //Find out how many nodes there are
   unsigned n_node = nnode();
     
+  // Get continuous time from timestepper of first node
+  double time=node_pt(0)->time_stepper_pt()->time_pt()->time();
+  
  #ifdef PARANOID
   //Find out how many positional dofs there are
   unsigned n_position_type = this->nnodal_position_type();  
@@ -442,7 +448,7 @@ template<class ELEMENT>
 
     //Now calculate the load
     Vector<double> traction(n_dim+1);
-    get_traction(time(),
+    get_traction(time,
                  ipt,
                  interpolated_x,
                  interpolated_normal,

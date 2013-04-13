@@ -166,9 +166,6 @@ EultingSphereProblem<ELEMENT>::EultingSphereProblem()
    
    //Set the wind function
    el_pt->wind_fct_pt() = Wind_Function::get_wind;
-
-   // Set pointer to continuous time
-   el_pt->time_pt()=time_pt();
   } // end loop over elements
 
 

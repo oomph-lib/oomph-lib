@@ -259,6 +259,9 @@ fill_in_generic_residual_contribution(Vector<double> &residuals,
  //Find out how many nodes there are
  unsigned n_node = nnode();
  
+ // Get continuous time from timestepper of first node
+ double time=node_pt(0)->time_stepper_pt()->time_pt()->time();
+  
  //Set up memory for the shape and test functions
  Shape psif(n_node), testf(n_node);
  
@@ -345,7 +348,7 @@ fill_in_generic_residual_contribution(Vector<double> &residuals,
    
    //Get the user-defined traction terms
    Vector<double> traction(Dim);
-   get_traction(time(),interpolated_x,traction);
+   get_traction(time,interpolated_x,traction);
    
    //Now add to the appropriate equations
    

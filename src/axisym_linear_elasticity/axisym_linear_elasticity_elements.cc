@@ -62,6 +62,9 @@ namespace oomph
   //Find out how many nodes there are
   unsigned n_node = this->nnode();
   
+  // Get continuous time from timestepper of first node
+  double time=node_pt(0)->time_stepper_pt()->time_pt()->time();
+  
 #ifdef PARANOID
   //Find out how many positional dofs there are
   unsigned n_position_type = this->nnodal_position_type();
@@ -168,7 +171,7 @@ namespace oomph
    
     //Get body force
     Vector<double> b(3);
-    this->body_force(time(),interpolated_x,b);
+    this->body_force(time,interpolated_x,b);
     
     //Premultiply the weights and the Jacobian
     double W = w*J; 

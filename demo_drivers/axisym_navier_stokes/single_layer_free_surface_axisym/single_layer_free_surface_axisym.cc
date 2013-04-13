@@ -300,9 +300,6 @@ InterfaceProblem(const unsigned &n_r, const unsigned &n_z,
    // Set the direction of gravity
    el_pt->g_pt() = &Global_Physical_Variables::G;
 
-   // Assign the time pointer
-   el_pt->time_pt() = time_pt();
-
   } // End of loop over bulk elements
 
  // Create a Data object whose single value stores the external pressure

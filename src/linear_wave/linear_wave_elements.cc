@@ -97,6 +97,9 @@ fill_in_generic_residual_contribution_lin_wave(Vector<double> &residuals,
  //Find out how many nodes there are
  unsigned n_node = nnode();
 
+ // Get continuous time from timestepper of first node
+ double time=node_pt(0)->time_stepper_pt()->time_pt()->time();
+  
  // Find the index at which the linear wave unknown is stored
  unsigned u_nodal_index = u_index_lin_wave();
   
@@ -156,7 +159,7 @@ fill_in_generic_residual_contribution_lin_wave(Vector<double> &residuals,
    //Get source function
    //-------------------
    double source;
-   get_source_lin_wave(time(),ipt,interpolated_x,source);
+   get_source_lin_wave(time,ipt,interpolated_x,source);
 
    // Assemble residuals and Jacobian
    //--------------------------------

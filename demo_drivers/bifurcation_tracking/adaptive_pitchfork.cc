@@ -411,9 +411,6 @@ RefineablePorousChannelProblem<ELEMENT>::RefineablePorousChannelProblem()
    
    //The Mesh does not move
    el_pt->disable_ALE();
-
-   // Set pointer to continuous time
-   el_pt->time_pt()=time_pt();
   } // end loop over elements
 
  // Pin redudant pressure dofs

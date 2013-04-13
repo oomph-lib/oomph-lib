@@ -593,6 +593,9 @@ fill_in_generic_residual_contribution_nst(Vector<double> &residuals,
 //Find out how many nodes there are
 unsigned n_node = nnode();
 
+// Get continuous time from timestepper of first node
+double time=node_pt(0)->time_stepper_pt()->time_pt()->time();
+  
 //Find out how many pressure dofs there are
 unsigned n_pres = this->npres_nst();
 
@@ -725,10 +728,10 @@ for(unsigned ipt=0;ipt<n_intpt;ipt++)
 
  //Get the user-defined body force terms
  Vector<double> body_force(DIM);
- this->get_body_force_nst(time(),ipt,s,interpolated_x,body_force);
+ this->get_body_force_nst(time,ipt,s,interpolated_x,body_force);
  
  //Get the user-defined source function
- double source = this->get_source_nst(time(),ipt,interpolated_x);
+ double source = this->get_source_nst(time,ipt,interpolated_x);
  
  //MOMENTUM EQUATIONS
  //==================
@@ -1125,6 +1128,9 @@ void RefineableNavierStokesEquations<DIM>::get_dresidual_dnodal_coordinates(
  // Determine number of nodes in element
  const unsigned n_node = nnode();
  
+ // Get continuous time from timestepper of first node
+ double time=node_pt(0)->time_stepper_pt()->time_pt()->time();
+  
  // Determine number of pressure dofs in element
  const unsigned n_pres = this->npres_nst();
 
@@ -1355,19 +1361,19 @@ void RefineableNavierStokesEquations<DIM>::get_dresidual_dnodal_coordinates(
 
    // Get the user-defined body force terms
    Vector<double> body_force(DIM);
-   this->get_body_force_nst(time(),ipt,s,interpolated_x,body_force);
+   this->get_body_force_nst(time,ipt,s,interpolated_x,body_force);
    
    // Get the user-defined source function
-   const double source = this->get_source_nst(time(),ipt,interpolated_x);
+   const double source = this->get_source_nst(time,ipt,interpolated_x);
 
    // Get gradient of body force function
    DenseMatrix<double> d_body_force_dx(DIM,DIM,0.0);
-   this->get_body_force_gradient_nst(time(),ipt,s,
+   this->get_body_force_gradient_nst(time,ipt,s,
                                      interpolated_x, d_body_force_dx);
 
    // Get gradient of source function
    Vector<double> source_gradient(DIM,0.0);
-   this->get_source_gradient_nst(time(),ipt,interpolated_x, source_gradient);
+   this->get_source_gradient_nst(time,ipt,interpolated_x, source_gradient);
 
 
    // Assemble shape derivatives

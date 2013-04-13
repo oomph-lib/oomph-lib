@@ -217,22 +217,8 @@ private:
    // Complete the build of all elements so they are fully functional
    //----------------------------------------------------------------
    
-   // Find number of elements in mesh
-   unsigned n_element = Bulk_mesh_pt->nelement();
-   
-   // Loop over the elements to set up element-specific 
-   // things that cannot be handled by constructor
-   for(unsigned i=0;i<n_element;i++)
-    {
-     // Upcast from FiniteElement to the present element
-     ELEMENT *el_pt = dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(i));
-     
-     // Set pointer to continous time
-     el_pt->time_pt()=time_pt();
-    }
-   
    // Loop over the flux elements to pass pointer to prescribed flux function
-   n_element=Surface_melt_mesh_pt->nelement();
+   unsigned n_element=Surface_melt_mesh_pt->nelement();
    for(unsigned e=0;e<n_element;e++)
     {
      // Upcast from GeneralisedElement to UnsteadyHeat flux element
@@ -242,10 +228,7 @@ private:
      
      // Set the pointer to the prescribed flux function
      el_pt->flux_fct_pt() = &ProblemParameters::flux;
-     
-     // Set pointer to continous time
-     el_pt->time_pt()=time_pt();
-     
+          
      // Set melt temperature
      el_pt->melt_temperature_pt()=&ProblemParameters::Melt_temperature;
      
@@ -276,16 +259,13 @@ private:
      
      // Set the pointer to the prescribed flux function
      el_pt->flux_fct_pt() = &ProblemParameters::flux;
-     
-     // Set pointer to continous time
-     el_pt->time_pt()=time_pt();
     }
-
+   
   }
  
  /// Pointers to specific mesh
  RefineableTriangleMesh<ELEMENT>* Bulk_mesh_pt;
-
+ 
  /// Pointer to the "surface" mesh
  Mesh* Surface_melt_mesh_pt;
 

@@ -51,6 +51,9 @@ namespace oomph
   // Determine number of nodes in the element
   const unsigned n_node = nnode();  
 
+  // Get continuous time from timestepper of first node
+  double time=node_pt(0)->time_stepper_pt()->time_pt()->time();
+  
   // Determine how many pressure values there are associated with
   // a single pressure component
   const unsigned n_pres = npres_linearised_axi_nst();  
@@ -239,7 +242,7 @@ namespace oomph
     Vector<double> base_flow_u(3,0.0);
 
     // Get the user-defined base state solution velocity components
-    get_base_flow_u(time(),ipt,interpolated_x,base_flow_u);
+    get_base_flow_u(time,ipt,interpolated_x,base_flow_u);
 
     // Allocate storage for the derivatives of the base state solution's
     // velocity components w.r.t. global coordinate (r and z)
@@ -250,7 +253,7 @@ namespace oomph
 
     // Get the derivatives of the user-defined base state solution
     // velocity components w.r.t. global coordinates
-    get_base_flow_dudx(time(),ipt,interpolated_x,base_flow_dudx);
+    get_base_flow_dudx(time,ipt,interpolated_x,base_flow_dudx);
 
     // Cache base flow velocities and their derivatives
     const double interpolated_ur = base_flow_u[0];

@@ -371,9 +371,6 @@ OscEllipseProblem<ELEMENT,TIMESTEPPER>::OscEllipseProblem()
    //Set the Reynolds number, etc
    el_pt->re_pt() = &Global_Physical_Variables::Re;
    el_pt->re_st_pt() = &Global_Physical_Variables::ReSt;
-
-   // Set pointer to continous time
-   el_pt->time_pt()=time_pt();
   }
 
  // Pin redundant pressure dofs

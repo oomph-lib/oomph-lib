@@ -251,9 +251,6 @@ RayleighProblem<ELEMENT,TIMESTEPPER>::RayleighProblem
    el_pt->re_pt() = &Global_Parameters::Re;
    el_pt->re_st_pt() = &Global_Parameters::ReSt;
 
-   //Assign the time pointer
-   el_pt->time_pt() = time_pt();
-
    // Enable/disable ALE?
    if (Use_ALE)
     {

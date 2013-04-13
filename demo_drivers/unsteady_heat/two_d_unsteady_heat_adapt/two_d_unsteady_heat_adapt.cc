@@ -408,9 +408,6 @@ RefineableUnsteadyHeatProblem<ELEMENT>::RefineableUnsteadyHeatProblem(
 
    //Set the source function pointer
    el_pt->source_fct_pt() = Source_fct_pt;
-
-   // Set pointer to continous time
-   el_pt->time_pt()=time_pt();
   }
 
  // Loop over the flux elements to pass pointer to prescribed flux function
@@ -425,9 +422,6 @@ RefineableUnsteadyHeatProblem<ELEMENT>::RefineableUnsteadyHeatProblem(
    // Set the pointer to the prescribed flux function
    el_pt->flux_fct_pt() = 
     &TanhSolnForUnsteadyHeat::prescribed_flux_on_fixed_y_boundary;
-
-   // Set pointer to continous time
-   el_pt->time_pt()=time_pt();
   }
 
  // Do equation numbering
@@ -522,9 +516,6 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::actions_after_adapt()
    // Set the pointer to the prescribed flux function
    el_pt->flux_fct_pt() = 
     &TanhSolnForUnsteadyHeat::prescribed_flux_on_fixed_y_boundary;
-   
-   // Set pointer to continous time
-   el_pt->time_pt()=time_pt();
   }
 } // end of actions_after_adapt
 

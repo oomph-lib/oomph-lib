@@ -833,9 +833,6 @@ OscRingNStProblem<ELEMENT, TIMESTEPPER>::OscRingNStProblem(
    // Upcast from FiniteElement to the present element
    ELEMENT *el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
 
-   // Set pointer to time
-   el_pt->time_pt() = time_pt();
-
    //Set the Reynolds number, etc
    el_pt->re_pt() = &Global_Physical_Variables::Re;
    el_pt->re_st_pt() = &Global_Physical_Variables::ReSt;

@@ -288,9 +288,6 @@ ConvectionProblem<NST_ELEMENT,AD_ELEMENT>::ConvectionProblem()
 
    //The mesh is fixed, so we can disable ALE
    el_pt->disable_ALE();
-
-   // Set pointer to the continuous time
-   el_pt->time_pt() = time_pt();
   }
 
  unsigned n_ad_element = adv_diff_mesh_pt()->nelement();
@@ -308,9 +305,6 @@ ConvectionProblem<NST_ELEMENT,AD_ELEMENT>::ConvectionProblem()
 
    //The mesh is fixed, so we can disable ALE
    el_pt->disable_ALE();
-
-   // Set pointer to the continuous time
-   el_pt->time_pt() = time_pt();
 
    // We can ignore the external geometric data in the "external"
    // advection diffusion element when computing the Jacobian matrix

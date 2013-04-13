@@ -131,6 +131,9 @@ public:
   // Locally cache the index at which the variable is stored
   const unsigned u_index_ust_heat = U_index_ust_heat;
   
+  // Get continuous time from timestepper of first node
+  double time=node_pt(0)->time_stepper_pt()->time_pt()->time();
+    
   //Find out how many nodes there are
   const unsigned n_node = nnode();
   
@@ -200,7 +203,7 @@ public:
    
    //Get the imposed flux
    double flux;
-   get_flux(time(),interpolated_x,flux);
+   get_flux(time,interpolated_x,flux);
    
    //Output the x,y,..
    for(unsigned i=0;i<Dim;i++) 
@@ -610,6 +613,9 @@ fill_in_generic_residual_contribution_ust_heat_flux(
  //Find out how many nodes there are
  const unsigned n_node = nnode();
    
+ // Get continuous time from timestepper of first node
+ double time=node_pt(0)->time_stepper_pt()->time_pt()->time();
+  
  //Set up memory for the shape and test functions
  Shape psif(n_node), testf(n_node);
    
@@ -692,7 +698,7 @@ fill_in_generic_residual_contribution_ust_heat_flux(
    
    //Get the imposed flux
    double flux;
-   get_flux(time(),interpolated_x,flux);
+   get_flux(time,interpolated_x,flux);
    
    //Now add to the appropriate equations
    

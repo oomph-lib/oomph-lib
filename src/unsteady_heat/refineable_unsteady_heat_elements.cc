@@ -48,6 +48,9 @@ fill_in_generic_residual_contribution_ust_heat(Vector<double> &residuals,
 //Find out how many nodes there are in the element
 unsigned n_node = nnode();
 
+// Get continuous time from timestepper of first node
+double time=node_pt(0)->time_stepper_pt()->time_pt()->time();
+
 //Find the index at which the unknown is stored
  unsigned u_nodal_index = this->u_index_ust_heat(); 
 
@@ -134,7 +137,7 @@ for(unsigned ipt=0;ipt<n_intpt;ipt++)
 
  //Get body force
  double source;
- this->get_source_ust_heat(time(),ipt,interpolated_x,source);
+ this->get_source_ust_heat(time,ipt,interpolated_x,source);
 
 
  // Assemble residuals and Jacobian

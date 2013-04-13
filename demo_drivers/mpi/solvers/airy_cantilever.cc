@@ -733,7 +733,8 @@ int main(int argc, char* argv[])
 #endif
 
 
- // We have one mesh
+ // The preconditioner only requires the bulk mesh since its
+ // elements are capable of classifying all degrees of freedom
  prec_pt->set_nmesh(1);
  
  // Set mesh

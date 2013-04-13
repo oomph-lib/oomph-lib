@@ -244,9 +244,6 @@ RayleighTractionProblem<ELEMENT,TIMESTEPPER>::RayleighTractionProblem
    //Set the Reynolds number, etc
    el_pt->re_pt() = &Global_Parameters::Re;
    el_pt->re_st_pt() = &Global_Parameters::ReSt;
-
-   //Assign the time pointer
-   el_pt->time_pt() = time_pt();
   }
 
  // Loop over the flux elements to pass pointer to prescribed traction function
@@ -262,9 +259,6 @@ RayleighTractionProblem<ELEMENT,TIMESTEPPER>::RayleighTractionProblem
    // Set the pointer to the prescribed traction function
    el_pt->traction_fct_pt() = 
     &ExactSoln::prescribed_traction;
-
-   // Assign time pointer
-   el_pt->time_pt() = time_pt();
   }
 
  //Assgn equation numbers
