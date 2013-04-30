@@ -11,9 +11,6 @@
 
 # How do hypre/trilinos interact with the tests?
 
-# Allow input of test sub directoy on command line + say where we are
-# looking for tests.
-
 # Replace searching for mpi string in dir name with checking for
 # $MPI_RUN_COMMAND in validate.sh?
 
@@ -21,9 +18,6 @@
 
 # Eigenproblems fail because there is no good way to determine if we have
 # arpack or not.
-
-# Doesn't record successes until it gets to the end. Would perhaps be nice
-# if it did it immediately.
 
 
 import subprocess as subp
@@ -35,7 +29,6 @@ import os.path
 import multiprocessing
 import itertools as it
 
-from datetime import datetime as dt
 from functools import partial as pt
 
 
@@ -60,12 +53,10 @@ class Colours:
 # Make a GLOBAL colours object to tell print functions how to make things
 # pretty. Easier to make it global because we want to be able to disable it
 # from inside main() without passing around a Colours object all over the
-# place...
+# place.
 COLOURS = Colours()
 
 # Various functions for printing with pretty colours
-
-
 def highlight(directorypath):
     return os.path.dirname(directorypath) + "/" + COLOURS.Header + \
         os.path.basename(directorypath) + COLOURS.Endc
@@ -109,19 +100,6 @@ def partition(pred, iterable):
     return trues, falses
 
 
-def move_to_front(front_list, full_list):
-    """Make a new list with anything in front_list first.
-
-    Not at all efficient, but ok for now.
-    """
-    new_list = []
-    for item in full_list:
-        if any(s in full_list for s in front_list):
-            new_list.insert(0, item)
-        else:
-            new_list.append(item)
-
-
 def split_validation_dirs_mpi(all_validation_dirs):
     """ Split a list of validation directories into those containing "mpi"
     (case-insensitive) and the rest. e.g.
@@ -138,37 +116,36 @@ def mygrep(file, searchstring):
             return line
     return None
 
-# Storing/reading "previous passes" lists
-# ============================================================
 
-def get_previous_passes(previous_run_filename):
-    """Read list of previously passed tests from
-    "$ROOT/demo_drivers/passed_tests_list"
-    """
+def variable_from_makefile(variable_name, makefile_path="Makefile"):
+    """Extract a variable from a makefile (using make)."""
 
-    try:
-        with open(previous_run_filename, 'r') as f:
-            passes_list = f.readlines()
+    if not os.path.isfile(makefile_path):
+        raise IOError
 
-    # If there is no file there then the list is empty. Use try/catch
-    # rather than explcitly checking for a file to avoid race conditions.
-    except IOError as e:
-        passes_list = []
+    # Run make using both a real makefile and a dummy one we are about to
+    # create. Call the "print-var" command which will be in the dummy
+    # makefile.
+    process = subp.Popen(["make", "-f", "-", "-f", makefile_path, "print-var"],
+                         stdin=subp.PIPE, stdout=subp.PIPE)
 
-    return [dir.strip() for dir in passes_list]
+    # Send in a dummy makefile with a print command, output should be the
+    # value of the variable.
+    stdout, _ = process.communicate("print-var:; @echo $(" + variable_name + ")")
+
+    # Check that make exited with a success code (0)
+    returncode = process.wait()
+    if returncode != 0:
+        raise subp.CalledProcessError
+
+    # Get rid of trailing newline/whitespace and return
+    return stdout.rstrip()
 
 
-def write_previous_passes(passes, previous_run_filename):
-    """Write list of tests that passed to
-    "$ROOT/demo_drivers/passed_tests_list"
-    """
-
-    with open(previous_run_filename, 'w') as f:
-        for item in passes:
-            f.write("%s\n" % item)
-
-    return
-
+def error(*args):
+    """Write an error message to stderr."""
+    sys.stderr.write("\nERROR:\n" + "\n".join(args) + "\n")
+    sys.exit(2)
 
 # Validation functions
 # ============================================================
@@ -219,13 +196,13 @@ def mpi_cores_used(oomph_root):
 
 # The function doing the bulk of the actual work (called many times in
 # parallel by main).
-def make_check_in_dir(directory, previous_run_passes_list):
+def make_check_in_dir(directory):
     """
-    Rebuild binaries in the directory using make if needed. Then run the
-    tests if we did a rebuild or if the tests failed previously.
+    Rebuild binaries in the directory using make if needed then run the
+    tests.
 
-    Since everything important is written to validation logs just summarise
-    passes/fails on stdout.
+    Since everything important is written to validation logs so just
+    summarise passes/fails on stdout.
 
     Output from compilation is sent to /dev/null since it is trivial to
     rerun make and get it again.
@@ -253,46 +230,41 @@ def make_check_in_dir(directory, previous_run_passes_list):
         build_fail_message(directory)
         return False
 
-    # Check if previous run of the tests failed
-    if directory not in previous_run_passes_list:
-        previous_run_failed = True
-    else:
-        previous_run_failed = False
-
-    # If we rebuilt anything or if this test didn't pass earlier then run
-    # 'make check'.
-    if rebuilt or previous_run_failed:
-        test_result = subp.call(['make', 'check', '-C', str(directory)],
-                                stdout=open(os.devnull, 'w'),
-                                stderr=open(os.devnull, 'w'))
-        if test_result == 0:
-            check_success_message(directory)
-            return directory
-        else:
-            check_fail_message(directory)
-            return False
-
-    # Otherwise no test is needed
-    else:
-        no_check_message(directory)
+    # Run make check
+    test_result = subp.call(['make', 'check', '-C', str(directory)],
+                            stdout=open(os.devnull, 'w'),
+                            stderr=open(os.devnull, 'w'))
+    if test_result == 0:
+        check_success_message(directory)
         return directory
-
+    else:
+        check_fail_message(directory)
+        return False
 
 # Function dealing with parsing of arguments, getting everything set up and
 # dispatching jobs to processes.
 def main():
     """
     Run self tests in parallel (one per core for serial tests, one per
-    two cores for mpi). Only run the tests if a rebuild was needed or
-    if they failed last time.
+    two cores for mpi).
 
-    Note: to abort C-c will not work (due to limitations of
+    Note: aborting with C-c will not work (due to limitations of
     python's multiprocessing module). If you want to abort you will
     probably have to close the terminal emulator entirely.
 
     Also note: eigensolver tests will fail if you don't have arpack
     installed. I haven't found a way to not run them without arpack
     yet.
+
+    Typical usage is just:
+
+        parallel_self_test.py
+
+    from within an oomph-lib directory, or
+
+        parallel_self_test.py -C /abs/path/to/oomph/root
+
+    from anywhere.
     """
 
     # Parse inputs
@@ -305,9 +277,9 @@ def main():
         )
 
     # make uses -C for "run make in this directory"
-    parser.add_argument('-C', default="../",
-                        dest='oomph_root',
-                        help='Set the root directory of oomph-lib, default is "../" which will work if you are running this while in the "oomph-lib/bin" directory.')
+    parser.add_argument('-C', dest='oomph_root',
+                        help='Set the root directory of oomph-lib, by default try to \
+    extract it from a Makefile.')
 
     parser.add_argument('-a', action='store_true', dest='makeclean',
                         help='Run make clean on test folders before starting.')
@@ -325,9 +297,20 @@ def main():
     if args.no_colours:
         COLOURS.disable()
 
-    # Construct the filename where data on what passed last time is stored.
-    previous_run_filename = os.path.join(
-        args.oomph_root, "demo_drivers/previous_run_passes_list")
+
+    # Attempt to get the oomph-lib root dir from a Makefile in the current
+    # directory.
+    if args.oomph_root is None:
+        try:
+            print("Trying to extract the root dir from a Makefile in the pwd.")
+            args.oomph_root = variable_from_makefile("abs_top_srcdir")
+            print("Extracted oomph_root = " + args.oomph_root)
+
+            # If no makefile exists we are stuck:
+        except IOError:
+            error("You must either run this script from within an oomph-lib",
+                  "directory or specify the path to oomph_root using -C.")
+
 
     # Gather directory lists etc.
     # ============================================================
@@ -341,19 +324,6 @@ def main():
             subp.check_call(['make', 'clean', '-k',
                              '-C', str(dir), '-j', str(args.ncores)])
 
-        # Kill the old "previous_run_passes_list" in case we cancel
-        # before writing out a new one. It's ok if it doesn't exist.
-        try:
-            os.remove(previous_run_filename)
-        except OSError:
-            pass
-
-
-    # Grab data from past runs and wrap into test function
-    previous_run_passes_list = get_previous_passes(previous_run_filename)
-    check_func = pt(make_check_in_dir,
-                    previous_run_passes_list=previous_run_passes_list)
-
     # Construct a list of validation directories
     validation_dirs, mpi_dirs = find_validate_dirs(base_dirs)
 
@@ -362,7 +332,7 @@ def main():
     # Start all non-mpi tests first. Run "make_check_in_dir" on all
     # directories in "validation_dirs".
     pool = Pool()
-    test_results = pool.map_async(check_func, validation_dirs).get(None)
+    test_results = pool.map_async(make_check_in_dir, validation_dirs).get(None)
     pool.close()                # Tell python there are no more jobs coming
 
     # Now run the MPI tests
@@ -374,7 +344,7 @@ def main():
 
         # Now run the mpi checks
         mpipool = Pool(mpi_ncores)
-        mpi_test_results = mpipool.map_async(check_func, mpi_dirs).get(None)
+        mpi_test_results = mpipool.map_async(make_check_in_dir, mpi_dirs).get(None)
         mpipool.close()         # Tell python there are no more jobs coming
         mpipool.join()          # Wait for everything to finish
 
@@ -385,12 +355,6 @@ def main():
         mpi_test_results = []
 
     pool.join()       # Wait for everything to finish
-
-    # Record what passed (collect all results and remove any "False" then
-    # write to file).
-    all_results = it.ifilter(lambda x: x,
-                             it.chain(test_results, mpi_test_results))
-    write_previous_passes(all_results, previous_run_filename)
 
     # Done!
     return 0
