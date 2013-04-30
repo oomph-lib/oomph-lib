@@ -39,6 +39,7 @@
 
 // c++ headers
 #include <algorithm>
+#include <ostream>
 
 // oomph headers
 #include "linear_algebra_distribution.h"
@@ -237,8 +238,17 @@ class CRDoubleMatrix;
  /// \short -= operator with another vector
  void operator-=(const DoubleVector& v);
 
+ /// \short multiply by a double
+ void operator*=(const double& d);
+
+ /// \short divide by a double
+ void operator/=(const double& d);
+
  /// \short [] access function to the (local) values of this vector
  const double& operator[](int i) const;
+
+ /// \short Ouput operator for DoubleVector
+ friend std::ostream& operator<< (std::ostream &out, const DoubleVector& v);
 
  /// \short returns the maximum coefficient
  double max() const;
@@ -283,6 +293,7 @@ class CRDoubleMatrix;
  /// indicates that the vector has been built and is usable
  bool Built;
 
-}; //end of DoubleVector                 
+}; //end of DoubleVector
+
 } // end of oomph namespace
 #endif

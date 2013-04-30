@@ -27,6 +27,8 @@
 //LIC//====================================================================
 #include "double_vector.h"
 #include "matrices.h"
+#include "oomph_assert.h"
+
 
 namespace oomph
 {
@@ -550,6 +552,35 @@ namespace oomph
     }
   }
 
+
+ //============================================================================
+ /// Multiply by double
+ //============================================================================
+ void DoubleVector::operator*=(const double& d)
+ {
+  OOMPH_ASSERT(this->distribution_built());
+
+  for(unsigned i=0, ni=this->nrow_local(); i<ni; i++)
+   {
+    Values_pt[i] *= d;
+   }
+ }
+
+ //============================================================================
+ /// Divide by double
+ //============================================================================
+ void DoubleVector::operator/=(const double& d)
+ {
+  OOMPH_ASSERT(this->distribution_built());
+  OOMPH_ASSERT(d != 0.0);
+
+  for(unsigned i=0, ni=this->nrow_local(); i<ni; i++)
+   {
+    Values_pt[i] /= d;
+   }
+
+ }
+
  //============================================================================
  /// [] access function to the (local) values of this vector
  //============================================================================
@@ -828,5 +859,23 @@ namespace oomph
    matrix_pt->multiply(*this,x);
    return sqrt(this->dot(x));
   }
+
+
+ /// \short output operator
+ std::ostream& operator<< (std::ostream &out, const DoubleVector& v)
+ {
+  // Do the first value outside the loop to get the ", "s right.
+  out << "[" << v[0];
+
+  for(unsigned i=1, ni=v.nrow_local(); i<ni; i++)
+   {
+    out << ", " << v[i];
+   }
+  out << "]";
+
+  return out;
+ }
+
+
 
 }//end of oomph namespace
