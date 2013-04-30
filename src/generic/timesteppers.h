@@ -61,10 +61,10 @@ namespace oomph
 //====================================================================
 class Time
 {
-  private:
+private:
  
  /// Pointer to the value of the continuous time.
- double* Time_pt;
+ double Continuous_time;
 
  /// Vector that stores the values of the current and previous timesteps.
  Vector<double> Dt;
@@ -73,14 +73,12 @@ class Time
 
  /// \short Constructor: Do not allocate any storage for previous timesteps,
  /// but set the initial value of the time to zero
- Time() {Time_pt = new double(0.0);}
+ Time() : Continuous_time(0.0) {}
 
  /// \short Constructor: Pass the number of timesteps to be stored
  /// and set the initial value of time to zero.
- Time(const unsigned &ndt)
+ Time(const unsigned &ndt) : Continuous_time(0.0)
   {
-   //Allocate and initialise the value of the continuous time
-   Time_pt=new double(0.0);
    // Allocate memory for the timestep storage and initialise values to one
    // to avoid division by zero.
    Dt.resize(ndt,1.0);
@@ -104,54 +102,58 @@ class Time
 
  /// \short Set all timesteps to the same value, dt.
  void initialise_dt(const double& dt_)
-  {
-   unsigned n_dt=Dt.size();
-   for (unsigned i=0;i<n_dt;i++) {Dt[i]=dt_;}
-  }
+ {
+  unsigned ndt = Dt.size();
+  Dt.assign(ndt, dt_);
+ }
 
  /// \short Set the value of the timesteps to be equal to the values passed in 
  /// a vector 
  void initialise_dt(const Vector<double>& dt_)
-  {
-   //Assign the values from the vector
-   //By using the size of the passed vector, we can handle the case when
-   //the size of passed vector is smaller than that amount of storage allocated
-   //in the object.
-   unsigned n_dt=dt_.size();
-   for (unsigned i=0;i<n_dt;i++) {Dt[i]=dt_[i];}
-  }
+ {
+  // Assign the values from the vector dt_, but preserve the size of Dt and
+  // any Dt[i] s.t. i > dt_.size() (which is why we can't just use
+  // assignment operator).
+  unsigned n_dt=dt_.size();
+  for (unsigned i=0;i<n_dt;i++) {Dt[i]=dt_[i];}
+ }
 
- /// Destructor: Deallocate the memory allocated in the Object
- ~Time(){delete Time_pt;}
+ /// Destructor: empty
+ ~Time() {}
 
  /// Return the current value of the continuous time
- double& time() {return *Time_pt;}
-
- /// Const access function for time
- double time() const {return *Time_pt;}
+ double& time() {return Continuous_time;}
 
  /// Return the number of timesteps stored
- unsigned ndt() {return Dt.size();}
+ unsigned ndt() const {return Dt.size();}
 
- /// Return the value of the current timestep
- double& dt(){return Dt[0];}
+ /// Return the value of the t-th stored timestep (t=0: present; t>0:
+ /// previous).
+ double& dt(const unsigned &t=0) {return Dt[t];}
 
- /// Return the value of the current timestep (const)
- double dt() const {return Dt[0];}
-
- /// Return the value of the t-th stored timestep (t=0: present; t>0; previous)
- double& dt(const unsigned &t) {return Dt[t];}
+ /// Return the value of the t-th stored timestep (t=0: present; t>0:
+ /// previous), const version.
+ double dt(const unsigned &t=0) const {return Dt[t];}
 
  /// \short Return the value of the continuous time at the t-th previous 
- /// time level (t=0: current; t>0 previous)
- double time(const unsigned &t)
-  {
-   //Load the current value of the time
-   double time_local = *Time_pt;
-   //Loop over the t previous timesteps and subtract each dt
-   for (unsigned i=0;i<t;i++) {time_local -= Dt[i];}
-   return time_local;
-  }
+ /// time level (t=0: current; t>0 previous).
+ double time(const unsigned &t=0) const
+ {
+#ifdef PARANOID
+  if(t > ndt())
+   {
+    using namespace StringConversion;
+    std::string error_msg = "Timestep " + to_string(t) + " out of range!";
+    throw OomphLibError(error_msg, OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+  //Load the current value of the time
+  double time_local = Continuous_time;
+  //Loop over the t previous timesteps and subtract each dt
+  for (unsigned i=0;i<t;i++) {time_local -= Dt[i];}
+  return time_local;
+ }
 
  /// \short Update all stored values of dt by shifting each value along 
  /// the array. This function must be called before starting to solve at a 
@@ -280,10 +282,25 @@ public:
  virtual unsigned order() {return 0;}
 
  /// Return current value of continous time
+ // (can't have a paranoid test for null pointers because this could be
+ // used as a set function)
  double& time(){return Time_pt->time();}
 
  /// Number of timestep increments that are required by the scheme
  virtual unsigned ndt()=0;
+ // ??ds I think this MUST be equal to nprev_values() otherwise a typical
+ // set_initial_conditions() function will go wrong! (see e.g. unsteady
+ // heat -- previous values are initialised from the exact solution using
+ // times calculated using previous dt values (see the Time::time(t)
+ // function), if ndt() < nprev_values() then the dt values are
+ // out of range)
+
+ /// \short Number of previous values needed to calculate the value at the
+ /// current time. i.e. how many previous values must we loop over to
+ /// calculate the values at the evaluation time. For most methods this is
+ /// 1, i.e. just use the value at t_{n+1}. See midpoint method for a
+ /// counter-example.
+ virtual unsigned nprev_values_for_evaluation_time() {return 1;}
 
  /// Number of previous values available: 0 for static, 1 for BDF<1>,...
  virtual unsigned nprev_values()=0;
@@ -311,11 +328,14 @@ public:
 
  /// \short Flag to indicate if a timestepper has been made steady (possibly
  /// temporarily to switch off time-dependence)
- bool is_steady()
+ bool is_steady() const
   {
    return Is_steady;
   }
  
+ /// \short Get a (const) pointer to the weights.
+ const DenseMatrix<double>* weights_pt() const {return &Weight;}
+
  /// \short Pure virtual function to reset the is_steady status
  /// of a specific TimeStepper to its default and to re-assign
  /// the weights.
@@ -323,7 +343,7 @@ public:
 
  /// \short Return string that indicates the type of the timestepper 
  /// (e.g. "BDF", "Newmark", etc.)
- std::string type() {return Type;}
+ std::string type() const {return Type;}
 
  /// \short Evaluate i-th derivative of all values in Data and return in 
  /// Vector deriv[]
@@ -407,13 +427,21 @@ public:
 
 
  ///Access function for the pointer to time (const version)
- Time* const &time_pt() const {return Time_pt;}
+ Time* const &time_pt() const {
+#ifdef PARANOID
+  if(Time_pt == 0)
+   {
+    std::string error_msg("Time_pt is null, probably because it is a steady time stepper.");
+    throw OomphLibError(error_msg, OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+  return Time_pt;
+ }
 
- ///Access function for the pointer to time
- Time*& time_pt() 
-  {
-   return Time_pt;
-  }
+ /// Access function for the pointer to time (can't have a paranoid test
+ /// for null pointers because this is used as a set function).
+ Time*& time_pt() {return Time_pt;}
 
  /// Access function for j-th weight for the i-th derivative
  virtual double weight(const unsigned &i, const unsigned &j) const
