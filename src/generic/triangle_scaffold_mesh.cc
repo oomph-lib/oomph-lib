@@ -173,7 +173,23 @@ namespace oomph
      }
    }
   element_file.close();
-   
+
+#ifdef PARANOID
+  // Determine if the node numbering starts at 0 or 1 (triangle can do
+  // either depending on input arguments). We can't (currently) handle
+  // 0-based indexing so throw an error if it is being used.
+  if(*std::min_element(Global_node.begin(),
+                       Global_node.end()) != 1)
+   {
+    std::string err("Triangle is using 0-based indexing, ");
+    err += "however the oomph-lib interface can only handle 1-based indexing in Triangle.\n";
+    err += "This is likely to be due to the input file using 0-based indexing.";
+    err += "Alternatively you may have specified the -z flag when running Triangle.";
+    throw OomphLibError(err, OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+
   // Resize the Element vector
   Element_pt.resize(n_element);
    
