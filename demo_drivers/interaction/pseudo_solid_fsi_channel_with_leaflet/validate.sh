@@ -119,6 +119,7 @@ cd ..
 #######################################################################
 
 
+
 #Check that we get the correct number of OKs
 OK_COUNT=`grep -c 'OK' Validation/validation.log`
 if  [ $OK_COUNT -eq $NUM_TESTS ]; then
@@ -133,6 +134,7 @@ if  [ $OK_COUNT -eq $NUM_TESTS ]; then
  echo " "
  echo "======================================================================"
  echo " " 
+ exit 0
 else
   if [ $OK_COUNT -lt $NUM_TESTS ]; then
    echo " "
@@ -146,6 +148,7 @@ else
    echo " " 
    echo "======================================================================"
    echo " "
+   exit 1
   else 
    echo " "
    echo "======================================================================"
@@ -156,6 +159,8 @@ else
    echo " "
    echo "======================================================================"
    echo " "
+  exit 2
   fi
 fi
-
+# Never get here
+exit 10

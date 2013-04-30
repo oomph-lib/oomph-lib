@@ -265,6 +265,12 @@ def main():
         parallel_self_test.py -C /abs/path/to/oomph/root
 
     from anywhere.
+
+    
+    For this script to work correctly ALL validate.sh scripts must return
+    an exit status. A simple command to check for this is:
+
+       find -name "validate.sh" | xargs grep -i -L "exit" | xargs grep -i -L "set -o errexit"
     """
 
     # Parse inputs
