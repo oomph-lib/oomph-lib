@@ -105,7 +105,7 @@ public:
 
 // =================================================================
 /// Conversion functions for easily making strings (e.g. for filenames - to
-/// avoid stack smashing problems with cstrings and long filenames.
+/// avoid stack smashing problems with cstrings and long filenames).
 // =================================================================
 namespace StringConversion
 {
@@ -119,6 +119,12 @@ namespace StringConversion
   return ss.str();
  }
  
+ /// \short Convert a string to lower case (outputs a copy).
+ std::string to_lower(const std::string& input);
+
+ /// \short Convert a string to upper case (outputs a copy).
+ std::string to_upper(const std::string& input);
+
 }
 
 
@@ -201,7 +207,7 @@ namespace CumulativeTimings
  /// http://www.boost.org/doc/libs/1_52_0/libs/conversion/cast.htm for more
  /// details.
  template <class Target, class Source>
- inline Target check_static_cast(Source* x)
+ inline Target checked_static_cast(Source* x)
  {
 #ifdef PARANOID
   // Check that the cast will work as expected.

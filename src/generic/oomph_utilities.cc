@@ -536,6 +536,36 @@ void DocInfo::set_directory(const std::string& directory_)
 }
 
 
+// =================================================================
+/// Conversion functions for easily making strings (e.g. for filenames - to
+/// avoid stack smashing problems with cstrings and long filenames).
+// =================================================================
+namespace StringConversion
+{
+ /// \short Convert a string to lower case (outputs a copy).
+ std::string to_lower(const std::string& input)
+  {
+   std::string output(input);
+   std::string::iterator it;
+   for(it = output.begin(); it!= output.end(); ++it)
+    { ::tolower(*it); }
+
+   return output;
+  }
+
+ /// \short Convert a string to upper case (outputs a copy).
+ std::string to_upper(const std::string& input)
+  {
+   std::string output(input);
+   std::string::iterator it;
+   for(it = output.begin(); it!= output.end(); ++it)
+    { ::toupper(*it); }
+   return output;
+  }
+
+}
+
+
 
 //====================================================================
 /// Namespace for command line arguments
@@ -1082,17 +1112,17 @@ OomphCommunicator* MPI_Helpers::communicator_pt()
 
  if(Communicator_pt == 0) {Communicator_pt = new OomphCommunicator;}
 
-#ifdef PARANOID
- if(!Communicator_pt->serial_communicator())
-  {
-   std::string error_msg =
-    "MPI_Helpers has somehow ended up with a non-serial\n"
-    + "communicator pointer even though MPI is disabled!";
-   throw OomphLibError(error_msg.str(),
-                       OOMPH_CURRENT_FUNCTION,
-                       OOMPH_EXCEPTION_LOCATION);
-  }
-#endif
+// #ifdef PARANOID
+//  if(!Communicator_pt->serial_communicator())
+//   {
+//    std::string error_msg =
+//     "MPI_Helpers has somehow ended up with a non-serial\n"
+//     + "communicator pointer even though MPI is disabled!";
+//    throw OomphLibError(error_msg.str(),
+//                        OOMPH_CURRENT_FUNCTION,
+//                        OOMPH_EXCEPTION_LOCATION);
+//   }
+// #endif
 
  return Communicator_pt;
 
