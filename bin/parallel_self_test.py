@@ -11,6 +11,12 @@
 
 # How do hypre/trilinos interact with the tests?
 
+# Allow input of test sub directoy on command line + say where we are
+# looking for tests.
+
+# Replace searching for mpi string in dir name with checking for
+# $MPI_RUN_COMMAND in validate.sh?
+
 # Caveats:
 
 # Eigenproblems fail because there is no good way to determine if we have
@@ -116,6 +122,15 @@ def move_to_front(front_list, full_list):
             new_list.append(item)
 
 
+def split_validation_dirs_mpi(all_validation_dirs):
+    """ Split a list of validation directories into those containing "mpi"
+    (case-insensitive) and the rest. e.g.
+
+    serial_dirs, mpi_dirs = split_validation_dirs_mpi(all_validation_dirs)
+    """
+    return partition(lambda x: not "mpi" in x.lower(), all_validation_dirs)
+
+
 def mygrep(file, searchstring):
     """(F)Grep for a line in file, return None if not found."""
     for line in open(file):
@@ -125,7 +140,6 @@ def mygrep(file, searchstring):
 
 # Storing/reading "previous passes" lists
 # ============================================================
-
 
 def get_previous_passes(previous_run_filename):
     """Read list of previously passed tests from
@@ -163,14 +177,6 @@ def find_validate_dirs(base_dirs):
     """Construct a list of validation directories by searching for
     validate.sh scripts."""
 
-    # Identify the really slow drivers so they can be pushed to the front of
-    # the list.
-    slow_driver_dirs = ['pseudo_solid_collapsible_tube',
-                        'fsi_channel_seg_and_precond',
-                        'fsi_collapsible_channel',
-                        'vmtk_fsi']
-    slow_mpi_driver_dirs = []
-
     all_validation_dirs = []
     for base in base_dirs:
         for root, dirs, files in os.walk(base):
@@ -178,10 +184,7 @@ def find_validate_dirs(base_dirs):
                 all_validation_dirs.append(root)
 
     # Seperate into mpi directory lists and other
-    mpi_dirs, validation_dirs = partition(lambda x: "mpi" in x.lower(),
-                                          all_validation_dirs)
-
-    return validation_dirs, mpi_dirs
+    return split_validation_dirs_mpi(all_validation_dirs)
 
 
 def mpi_cores_used(oomph_root):
