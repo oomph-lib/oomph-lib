@@ -125,7 +125,7 @@ class Time
  ~Time(){delete Time_pt;}
 
  /// Return the current value of the continuous time
- double& time(){return *Time_pt;}
+ double& time() {return *Time_pt;}
 
  /// Const access function for time
  double time() const {return *Time_pt;}
@@ -135,6 +135,9 @@ class Time
 
  /// Return the value of the current timestep
  double& dt(){return Dt[0];}
+
+ /// Return the value of the current timestep (const)
+ double dt() const {return Dt[0];}
 
  /// Return the value of the t-th stored timestep (t=0: present; t>0; previous)
  double& dt(const unsigned &t) {return Dt[t];}
@@ -367,6 +370,9 @@ public:
   {
    // Number of values stored in the Data object
    unsigned nvalue = node_pt->nvalue();
+   deriv.assign(nvalue, 0.0);
+
+
    unsigned n_tstorage = ntstorage();
    // Loop over all values
    for (unsigned j=0;j<nvalue;j++)
@@ -978,23 +984,12 @@ class BDF : public TimeStepper
      //N.B. The size is correct for BDF<2>, but may be wrong for others
      Predictor_weight.resize(NSTEPS+2);
      
-     //The order of the scheme is 1, i.e. Weights has two entries
-
      //Resize the weights to the appropriate size
-     Weight.resize(2,NSTEPS+3);
-
-     // Initialise
-     for(unsigned i=0;i<2;i++)
-      {
-       //Initialise each weight to zero
-       for(unsigned j=0;j<NSTEPS+3;j++)
-        {
-         Weight(i,j) = 0.0;
-        }
-      }
-     //Set the weight for the zero-th derivative
-     Weight(0,0) = 1.0;
+     Weight.resize(2, NSTEPS+3, 0.0);
     }
+
+   //Set the weight for the zero-th derivative
+   Weight(0,0) = 1.0;
   }
 
 
