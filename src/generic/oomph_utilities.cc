@@ -1059,6 +1059,7 @@ void MPI_Helpers::finalize()
 //=============================================================================
 OomphCommunicator* MPI_Helpers::communicator_pt()
 {
+#ifdef MPI
 #ifdef PARANOID
  if (!MPI_has_been_initialised)
   {
@@ -1071,6 +1072,28 @@ OomphCommunicator* MPI_Helpers::communicator_pt()
   }
 #endif
  return Communicator_pt;
+
+#else // ifndef MPI
+
+ // If MPI is not enabled then we are unlikely to have called init, so to
+ // be nice to users create a new serial comm_pt if none exits.
+
+ if(Communicator_pt == 0) {Communicator_pt = new OomphCommunicator;}
+
+#ifdef PARANOID
+ if(!Communicator_pt->serial_communicator())
+  {
+   std::string error_msg =
+    "MPI_Helpers has somehow ended up with a non-serial\n"
+    + "communicator pointer even though MPI is disabled!";
+   throw OomphLibError(error_msg.str(),
+                       OOMPH_CURRENT_FUNCTION,
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+ return Communicator_pt;
+
+#endif // end ifdef MPI
 }
 
 bool MPI_Helpers::MPI_has_been_initialised = false;
