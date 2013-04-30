@@ -463,7 +463,7 @@ namespace oomph
  //============================================================================
  /// \short += operator
  //============================================================================
- void DoubleVector::operator+=(DoubleVector v)
+ void DoubleVector::operator+=(const DoubleVector& v)
   {
 #ifdef PARANOID
    // PARANOID check that this vector is setup
@@ -508,7 +508,7 @@ namespace oomph
  //============================================================================
  /// -= operator
  //============================================================================
- void DoubleVector::operator-=(DoubleVector v)
+ void DoubleVector::operator-=(const DoubleVector& v)
   {
 #ifdef PARANOID
    // PARANOID check that this vector is setup

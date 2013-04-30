@@ -231,11 +231,11 @@ class CRDoubleMatrix;
  /// \short == operator
  bool operator==(const DoubleVector& v);
 
- /// \short += operator
- void operator+=(DoubleVector v);
+ /// \short += operator with another vector
+ void operator+=(const DoubleVector& v);
 
- /// -= operator
- void operator-=(DoubleVector v);
+ /// \short -= operator with another vector
+ void operator-=(const DoubleVector& v);
 
  /// \short [] access function to the (local) values of this vector
  const double& operator[](int i) const;
