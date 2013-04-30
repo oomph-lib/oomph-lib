@@ -1,33 +1,32 @@
 //LIC// ====================================================================
-//LIC// This file forms part of oomph-lib, the object-oriented, 
-//LIC// multi-physics finite-element library, available 
+//LIC// This file forms part of oomph-lib, the object-oriented,
+//LIC// multi-physics finite-element library, available
 //LIC// at http://www.oomph-lib.org.
-//LIC// 
+//LIC//
 //LIC//           Version 0.90. August 3, 2009.
-//LIC// 
+//LIC//
 //LIC// Copyright (C) 2006-2009 Matthias Heil and Andrew Hazel
-//LIC// 
+//LIC//
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
 //LIC// License as published by the Free Software Foundation; either
 //LIC// version 2.1 of the License, or (at your option) any later version.
-//LIC// 
+//LIC//
 //LIC// This library is distributed in the hope that it will be useful,
 //LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
 //LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 //LIC// Lesser General Public License for more details.
-//LIC// 
+//LIC//
 //LIC// You should have received a copy of the GNU Lesser General Public
 //LIC// License along with this library; if not, write to the Free Software
 //LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
 //LIC// 02110-1301  USA.
-//LIC// 
+//LIC//
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
-//LIC// 
+//LIC//
 //LIC//====================================================================
 #include "double_vector.h"
 #include "matrices.h"
-#include "oomph_assert.h"
 
 
 namespace oomph
@@ -42,10 +41,10 @@ namespace oomph
     {
      // the vector owns the internal data
      Internal_values = true;
-     
+
      // reset the distribution and resize the data
      this->build(old_vector.distribution_pt(),0.0);
-     
+
      // copy the data
      if (this->distribution_built())
       {
@@ -60,10 +59,10 @@ namespace oomph
   }
 
  //============================================================================
- /// Assembles a DoubleVector with distribution dist, if v is specified 
+ /// Assembles a DoubleVector with distribution dist, if v is specified
  /// each row is set to v
  //============================================================================
- void DoubleVector::build(const LinearAlgebraDistribution* const &dist_pt, 
+ void DoubleVector::build(const LinearAlgebraDistribution* const &dist_pt,
                             const double& v)
   {
    // clean the memory
@@ -80,7 +79,7 @@ namespace oomph
     {
      unsigned nrow = this->nrow_local();
      Values_pt = new double[nrow];
-     
+
      // set the data
      for (unsigned i = 0; i < nrow; i++)
       {
@@ -113,7 +112,7 @@ namespace oomph
 
    // use the initialise method to populate the vector
    this->initialise(v);
-   
+
    // indicate that its built
    Built=true;
  }
@@ -127,7 +126,7 @@ namespace oomph
     {
      // cache nrow local
      unsigned nrow_local = this->nrow_local();
-     
+
      // set the residuals
      for (unsigned i = 0; i < nrow_local; i++)
       {
@@ -138,14 +137,14 @@ namespace oomph
 
  //============================================================================
  /// \short initialise the vector with coefficient from the vector v.\n
- /// Note: The vector v must be of length 
+ /// Note: The vector v must be of length
  //============================================================================
  void DoubleVector::initialise(const Vector<double> v)
  {
 #ifdef PARANOID
   if (v.size()!=this->nrow())
    {
-    std::ostringstream error_message;    
+    std::ostringstream error_message;
     error_message << "The vector passed to initialise(...) must be of length "
                   << "nrow()";
     throw OomphLibError(error_message.str(),
@@ -169,7 +168,7 @@ namespace oomph
  /// \b NOTE 2: The current distribution and the new distribution must have
  /// the same Communicator.
  //============================================================================
- void DoubleVector::redistribute(const LinearAlgebraDistribution* 
+ void DoubleVector::redistribute(const LinearAlgebraDistribution*
                                  const& dist_pt)
  {
 #ifdef OOMPH_HAS_MPI
@@ -178,25 +177,25 @@ namespace oomph
    {
     // if this vector does not own the double* values then it cannot be
     // distributed.
-    // note: this is not stictly necessary - would just need to be careful 
+    // note: this is not stictly necessary - would just need to be careful
     // with delete[] below.
-     std::ostringstream error_message;    
+     std::ostringstream error_message;
      error_message << "This vector does not own its data (i.e. it has been "
                    << "passed in via set_external_values() and therefore "
-                   << "cannot be redistributed"; 
+                   << "cannot be redistributed";
      throw OomphLibError(error_message.str(),
                          "DoubleVector::redistribute(...)",
                          OOMPH_EXCEPTION_LOCATION);
    }
-   // paranoid check that the nrows for both distributions is the 
+   // paranoid check that the nrows for both distributions is the
    // same
    if (dist_pt->nrow() != this->nrow())
     {
-     std::ostringstream error_message;    
+     std::ostringstream error_message;
      error_message << "The number of global rows in the new distribution ("
                    << dist_pt->nrow() << ") is not equal to the number"
                    << " of global rows in the current distribution ("
-                   << this->nrow() << ").\n"; 
+                   << this->nrow() << ").\n";
      throw OomphLibError(error_message.str(),
                          "DoubleVector::redistribute(...)",
                          OOMPH_EXCEPTION_LOCATION);
@@ -206,7 +205,7 @@ namespace oomph
    OomphCommunicator temp_comm(*dist_pt->communicator_pt());
    if (!(temp_comm == *this->distribution_pt()->communicator_pt()))
     {
-     std::ostringstream error_message;  
+     std::ostringstream error_message;
      error_message << "The new distribution and the current distribution must "
                    << "have the same communicator.";
      throw OomphLibError(error_message.str(),
@@ -218,7 +217,7 @@ namespace oomph
    // check the distributions are not the same
    if (!((*this->distribution_pt()) == *dist_pt))
     {
-     
+
      // get the rank and the number of processors
      int my_rank = this->distribution_pt()->communicator_pt()->my_rank();
      int nproc = this->distribution_pt()->communicator_pt()->nproc();
@@ -239,8 +238,8 @@ namespace oomph
          current_first_row_data[i] = this->first_row(i);
          current_nrow_local_data[i] = this->nrow_local(i);
         }
-       
-       // compute which local rows are expected to be received from each 
+
+       // compute which local rows are expected to be received from each
        // processor / sent to each processor
        Vector<unsigned> new_first_row_for_proc(nproc);
        Vector<unsigned> new_nrow_local_for_proc(nproc);
@@ -257,65 +256,65 @@ namespace oomph
              (current_first_row_data[my_rank] < (new_first_row_data[p] +
                                                  new_nrow_local_data[p])))
          {
-          new_first_row_for_proc[p] = 
+          new_first_row_for_proc[p] =
            std::max(current_first_row_data[my_rank],
                     new_first_row_data[p]);
-          new_nrow_local_for_proc[p] = 
+          new_nrow_local_for_proc[p] =
            std::min((current_first_row_data[my_rank] +
                      current_nrow_local_data[my_rank]),
                     (new_first_row_data[p] +
                      new_nrow_local_data[p])) - new_first_row_for_proc[p];
          }
-         
+
          // and data to be received
          if ((new_first_row_data[my_rank] < (current_first_row_data[p] +
-                                                 current_nrow_local_data[p])) 
+                                                 current_nrow_local_data[p]))
              && (current_first_row_data[p] < (new_first_row_data[my_rank] +
                                               new_nrow_local_data[my_rank])))
          {
-          new_first_row_from_proc[p] = 
+          new_first_row_from_proc[p] =
            std::max(current_first_row_data[p],
                     new_first_row_data[my_rank]);
-          new_nrow_local_from_proc[p] = 
+          new_nrow_local_from_proc[p] =
            std::min((current_first_row_data[p] +
                      current_nrow_local_data[p]),
                     (new_first_row_data[my_rank] +
                      new_nrow_local_data[my_rank]))-new_first_row_from_proc[p];
-         }         
+         }
         }
 
        // temporary storage for the new data
        double* temp_data = new double[new_nrow_local_data[my_rank]];
-       
+
        // "send to self" or copy Data that does not need to be sent else where
        // to temp_data
        if (new_nrow_local_for_proc[my_rank] != 0)
         {
-         unsigned j = new_first_row_for_proc[my_rank] - 
+         unsigned j = new_first_row_for_proc[my_rank] -
           current_first_row_data[my_rank];
-         unsigned k = new_first_row_for_proc[my_rank] - 
+         unsigned k = new_first_row_for_proc[my_rank] -
           new_first_row_data[my_rank];
          for (unsigned i = 0; i < new_nrow_local_for_proc[my_rank]; i++)
           {
            temp_data[k+i] = Values_pt[j+i];
           }
         }
-       
+
        // send and receive circularly
        for (int p = 1; p < nproc; p++)
         {
          // next processor to send to
          unsigned dest_p = (my_rank + p)%nproc;
-         
+
          // next processor to receive from
          unsigned source_p = (nproc + my_rank - p)%nproc;
-         
+
          // send and receive the value
          MPI_Status status;
          MPI_Sendrecv(Values_pt + new_first_row_for_proc[dest_p] -
                       current_first_row_data[my_rank],
                       new_nrow_local_for_proc[dest_p],MPI_DOUBLE,dest_p,1,
-                      temp_data + new_first_row_from_proc[source_p] - 
+                      temp_data + new_first_row_from_proc[source_p] -
                       new_first_row_data[my_rank],
                       new_nrow_local_from_proc[source_p],MPI_DOUBLE,source_p,1,
                       this->distribution_pt()->communicator_pt()->mpi_comm(),
@@ -344,11 +343,11 @@ namespace oomph
         {
          temp_data[i] = Values_pt[i];
         }
-       
+
        // clear and resize Values_pt
        delete[] Values_pt;
        Values_pt = new double[this->nrow()];
-       
+
        // create a int vector of first rows
        int* dist_first_row = new int[nproc];
        int* dist_nrow_local =  new int[nproc];
@@ -357,13 +356,13 @@ namespace oomph
          dist_first_row[p] = this->first_row(p);
          dist_nrow_local[p] = this->nrow_local(p);
         }
-       
+
        // gather the local vectors from all processors on all processors
        int my_nrow_local(this->nrow_local());
        MPI_Allgatherv(temp_data,my_nrow_local,MPI_DOUBLE,
                       Values_pt,dist_nrow_local,dist_first_row,MPI_DOUBLE,
                       this->distribution_pt()->communicator_pt()->mpi_comm());
-       
+
        // update the distribution
        this->build_distribution(dist_pt);
 
@@ -374,26 +373,26 @@ namespace oomph
        delete[] dist_first_row;
        delete[] dist_nrow_local;
       }
-     
+
      // if this vector is not distrubted but the target vector is
      else if (!this->distributed() && dist_pt->distributed())
-      {   
+      {
 
        // cache the new nrow_local
        unsigned nrow_local = dist_pt->nrow_local();
-       
+
        // and first_row
        unsigned first_row = dist_pt->first_row();
 
        // temp storage for the new data
        double* temp_data = new double[nrow_local];
-       
+
        // copy the data
        for (unsigned i = 0; i < nrow_local; i++)
         {
          temp_data[i] = Values_pt[first_row + i];
         }
-       
+
        //copy to Values_pt
        delete[] Values_pt;
        Values_pt= temp_data;
@@ -402,7 +401,7 @@ namespace oomph
        this->build_distribution(dist_pt);
 
       }
-     
+
      // copy the Distribution
      this->build_distribution(dist_pt);
     }
@@ -416,11 +415,11 @@ namespace oomph
   {
 #ifdef RANGE_CHECKING
    if (i >= int(this->nrow_local()))
-    {   
+    {
      std::ostringstream error_message;
-     error_message << "Range Error: " << i 
-                   << " is not in the range (0," 
-                   << this->nrow_local()-1 << ")"; 
+     error_message << "Range Error: " << i
+                   << " is not in the range (0,"
+                   << this->nrow_local()-1 << ")";
      throw OomphLibError(error_message.str(),
                          "DoubleVector::operator[]",
                          OOMPH_EXCEPTION_LOCATION);
@@ -434,7 +433,7 @@ namespace oomph
  //============================================================================
  bool DoubleVector::operator==(const DoubleVector& v)
   {
-   // if v is not setup return false 
+   // if v is not setup return false
    if (v.built() && !this->built())
     {
      return false;
@@ -472,7 +471,7 @@ namespace oomph
    if (!this->built())
     {
      std::ostringstream error_message;
-     error_message << "This vector must be setup."; 
+     error_message << "This vector must be setup.";
      throw OomphLibError(error_message.str(),
                          "DoubleVector::operator+=",
                          OOMPH_EXCEPTION_LOCATION);
@@ -481,7 +480,7 @@ namespace oomph
    if (!v.built())
     {
      std::ostringstream error_message;
-     error_message << "The vector v must be setup."; 
+     error_message << "The vector v must be setup.";
      throw OomphLibError(error_message.str(),
                          "DoubleVector::operator+=",
                          OOMPH_EXCEPTION_LOCATION);
@@ -491,7 +490,7 @@ namespace oomph
     {
      std::ostringstream error_message;
      error_message << "The vector v and this vector must have the same "
-                   << "distribution."; 
+                   << "distribution.";
      throw OomphLibError(error_message.str(),
                          "DoubleVector::operator+=",
                          OOMPH_EXCEPTION_LOCATION);
@@ -517,7 +516,7 @@ namespace oomph
    if (!this->distribution_built())
     {
      std::ostringstream error_message;
-     error_message << "This vector must be setup."; 
+     error_message << "This vector must be setup.";
      throw OomphLibError(error_message.str(),
                          "DoubleVector::operator-=",
                          OOMPH_EXCEPTION_LOCATION);
@@ -526,7 +525,7 @@ namespace oomph
    if (!v.built())
     {
      std::ostringstream error_message;
-     error_message << "The vector v must be setup."; 
+     error_message << "The vector v must be setup.";
      throw OomphLibError(error_message.str(),
                          "DoubleVector::operator-=",
                          OOMPH_EXCEPTION_LOCATION);
@@ -536,7 +535,7 @@ namespace oomph
     {
      std::ostringstream error_message;
      error_message << "The vector v and this vector must have the same "
-                   << "distribution."; 
+                   << "distribution.";
      throw OomphLibError(error_message.str(),
                          "DoubleVector::operator-=",
                          OOMPH_EXCEPTION_LOCATION);
@@ -558,8 +557,6 @@ namespace oomph
  //============================================================================
  void DoubleVector::operator*=(const double& d)
  {
-  OOMPH_ASSERT(this->distribution_built());
-
   for(unsigned i=0, ni=this->nrow_local(); i<ni; i++)
    {
     Values_pt[i] *= d;
@@ -571,8 +568,6 @@ namespace oomph
  //============================================================================
  void DoubleVector::operator/=(const double& d)
  {
-  OOMPH_ASSERT(this->distribution_built());
-  OOMPH_ASSERT(d != 0.0);
 
   for(unsigned i=0, ni=this->nrow_local(); i<ni; i++)
    {
@@ -588,11 +583,11 @@ namespace oomph
   {
 #ifdef RANGE_CHECKING
    if (i >= int(this->nrow_local()))
-    {   
+    {
      std::ostringstream error_message;
-     error_message << "Range Error: " << i 
-                   << " is not in the range (0," 
-                   << this->nrow_local()-1 << ")"; 
+     error_message << "Range Error: " << i
+                   << " is not in the range (0,"
+                   << this->nrow_local()-1 << ")";
      throw OomphLibError(error_message.str(),
                          "DoubleVector::operator[]",
                          OOMPH_EXCEPTION_LOCATION);
@@ -653,17 +648,17 @@ namespace oomph
   {
    // temp pointer to values
    double* temp;
- 
+
    // number of global row
    unsigned nrow = this->nrow();
-  
+
 #ifdef OOMPH_HAS_MPI
 
    // number of local rows
    int nrow_local = this->nrow_local();
 
    // gather from all processors
-   if (this->distributed() && 
+   if (this->distributed() &&
        this->distribution_pt()->communicator_pt()->nproc() > 1)
     {
      // number of processors
@@ -707,7 +702,7 @@ namespace oomph
 
    // clean up if requires
 #ifdef OOMPH_HAS_MPI
-   if (this->distributed() && 
+   if (this->distributed() &&
        this->distribution_pt()->communicator_pt()->nproc() > 1)
     {
      delete[] temp;
@@ -725,7 +720,7 @@ namespace oomph
     if (!this->built())
     {
      std::ostringstream error_message;
-     error_message << "This vector must be setup."; 
+     error_message << "This vector must be setup.";
      throw OomphLibError(error_message.str(),
                          "DoubleVector::dot()",
                          OOMPH_EXCEPTION_LOCATION);
@@ -733,14 +728,14 @@ namespace oomph
    if (!vec.built())
     {
      std::ostringstream error_message;
-     error_message << "The input vector be setup."; 
+     error_message << "The input vector be setup.";
      throw OomphLibError(error_message.str(),
                          "DoubleVector::dot()",
                          OOMPH_EXCEPTION_LOCATION);
     }
    if (*this->distribution_pt() != *vec.distribution_pt())
     {
-     std::ostringstream error_message;    
+     std::ostringstream error_message;
      error_message << "The distribution of this vector and the vector vec "
                    << "must be the same."
                    << "\n\n  this: " << *this->distribution_pt()
@@ -763,7 +758,7 @@ namespace oomph
    // if this vector is distributed and on multiple processors then gather
 #ifdef OOMPH_HAS_MPI
    double n2 = n;
-   if (this->distributed() && 
+   if (this->distributed() &&
        this->distribution_pt()->communicator_pt()->nproc() > 1)
     {
      MPI_Allreduce(&n,&n2,1,MPI_DOUBLE,MPI_SUM,
@@ -777,7 +772,7 @@ namespace oomph
   }
 
  //============================================================================
- /// compute the 2 norm of this vector 
+ /// compute the 2 norm of this vector
  //============================================================================
  double DoubleVector::norm() const
   {
@@ -786,7 +781,7 @@ namespace oomph
    if (!this->built())
     {
      std::ostringstream error_message;
-     error_message << "This vector must be setup."; 
+     error_message << "This vector must be setup.";
      throw OomphLibError(error_message.str(),
                          "DoubleVector::norm()",
                          OOMPH_EXCEPTION_LOCATION);
@@ -804,7 +799,7 @@ namespace oomph
    // if this vector is distributed and on multiple processors then gather
 #ifdef OOMPH_HAS_MPI
    double n2 = n;
-   if (this->distributed() && 
+   if (this->distributed() &&
        this->distribution_pt()->communicator_pt()->nproc() > 1)
     {
      MPI_Allreduce(&n,&n2,1,MPI_DOUBLE,MPI_SUM,
@@ -830,7 +825,7 @@ namespace oomph
    if (!this->built())
     {
      std::ostringstream error_message;
-     error_message << "This vector must be setup."; 
+     error_message << "This vector must be setup.";
      throw OomphLibError(error_message.str(),
                          "DoubleVector::dot()",
                          OOMPH_EXCEPTION_LOCATION);
@@ -838,14 +833,14 @@ namespace oomph
    if (!matrix_pt->built())
     {
      std::ostringstream error_message;
-     error_message << "The input matrix be built."; 
+     error_message << "The input matrix be built.";
      throw OomphLibError(error_message.str(),
                          "DoubleVector::dot()",
                          OOMPH_EXCEPTION_LOCATION);
     }
    if (*this->distribution_pt() != *matrix_pt->distribution_pt())
     {
-     std::ostringstream error_message;    
+     std::ostringstream error_message;
      error_message << "The distribution of this vector and the matrix at "
                    << "matrix_pt must be the same";
      throw OomphLibError(error_message.str(),

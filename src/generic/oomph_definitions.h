@@ -1,32 +1,32 @@
 //LIC// ====================================================================
-//LIC// This file forms part of oomph-lib, the object-oriented, 
-//LIC// multi-physics finite-element library, available 
+//LIC// This file forms part of oomph-lib, the object-oriented,
+//LIC// multi-physics finite-element library, available
 //LIC// at http://www.oomph-lib.org.
-//LIC// 
+//LIC//
 //LIC//           Version 0.90. August 3, 2009.
-//LIC// 
+//LIC//
 //LIC// Copyright (C) 2006-2009 Matthias Heil and Andrew Hazel
-//LIC// 
+//LIC//
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
 //LIC// License as published by the Free Software Foundation; either
 //LIC// version 2.1 of the License, or (at your option) any later version.
-//LIC// 
+//LIC//
 //LIC// This library is distributed in the hope that it will be useful,
 //LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
 //LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 //LIC// Lesser General Public License for more details.
-//LIC// 
+//LIC//
 //LIC// You should have received a copy of the GNU Lesser General Public
 //LIC// License along with this library; if not, write to the Free Software
 //LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
 //LIC// 02110-1301  USA.
-//LIC// 
+//LIC//
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
-//LIC// 
+//LIC//
 //LIC//====================================================================
 //A header containing the definition of the Oomph run-time
-//exception classes and our standard (info) output stream 
+//exception classes and our standard (info) output stream
 //(essentially a wrapper to cout but it can be customised,
 // e.g. for mpi runs.
 
@@ -50,19 +50,43 @@ namespace oomph
 {
 
 //Pre-processor magic for error reporting
-//Macro that converts argument to string 
+//Macro that converts argument to string
 #define OOMPH_MAKE_STRING(x) #x
+
 //Macro wrapper to MAKE_STRING, required because calling
 //OOMPH_MAKE_STRING(__LINE__) directly returns __LINE__
 //i.e. the conversion of __LINE__ into a number must be performed before
 //its conversion into a string
 #define OOMPH_TO_STRING(x) OOMPH_MAKE_STRING(x)
+
 //Combine the FILE and LINE built-in macros into a string that can
 //be used in erorr messages.
 #define OOMPH_EXCEPTION_LOCATION __FILE__ ":" OOMPH_TO_STRING(__LINE__)
 
+/// Get the current function name. All the mess is due to different
+/// compilers naming the macro we need differently.
+#if defined(__GNUC__) || (defined(__MWERKS__) && (__MWERKS__ >= 0x3000)) || (defined(__ICC) && (__ICC >= 600)) || defined(__ghs__)
+# define OOMPH_CURRENT_FUNCTION __PRETTY_FUNCTION__
 
+#elif defined(__DMC__) && (__DMC__ >= 0x810)
+# define OOMPH_CURRENT_FUNCTION __PRETTY_FUNCTION__
 
+#elif defined(__FUNCSIG__)
+# define OOMPH_CURRENT_FUNCTION __FUNCSIG__
+
+#elif (defined(__INTEL_COMPILER) && (__INTEL_COMPILER >= 600)) || (defined(__IBMCPP__) && (__IBMCPP__ >= 500))
+# define OOMPH_CURRENT_FUNCTION __FUNCTION__
+
+#elif defined(__BORLANDC__) && (__BORLANDC__ >= 0x550)
+# define OOMPH_CURRENT_FUNCTION __FUNC__
+
+#elif defined(__STDC_VERSION__) && (__STDC_VERSION__ >= 199901)
+# define OOMPH_CURRENT_FUNCTION __func__
+
+#else
+# define OOMPH_CURRENT_FUNCTION "[Unknown function -- unrecognised compiler]"
+
+#endif
 
 
 ///////////////////////////////////////////////////////////////////////
@@ -75,11 +99,11 @@ namespace oomph
 //======================================================================
  namespace Global_timings
   {
-   /// \short Global boolean to switch on comprehensive timing -- can 
+   /// \short Global boolean to switch on comprehensive timing -- can
    /// probably be declared const false when development on hector
    /// is complete
    extern bool Doc_comprehensive_timings;
-   
+
   };
 
 ///////////////////////////////////////////////////////////////////////
@@ -91,13 +115,13 @@ namespace oomph
 /// A class for handling oomph-lib run-time exceptions quietly.
 //======================================================================
 class OomphLibQuietException : public std::runtime_error
-{ 
+{
  public:
- 
- ///\short Constructor 
+
+ ///\short Constructor
  OomphLibQuietException();
- 
- ///The destructor cannot throw an exception (C++ STL standard) 
+
+ ///The destructor cannot throw an exception (C++ STL standard)
  ~OomphLibQuietException() throw() {}
 };
 
@@ -107,19 +131,19 @@ class OomphLibQuietException : public std::runtime_error
 
 
 ///=====================================================================
-/// A Base class for oomph-lib run-time exception (error and warning) 
+/// A Base class for oomph-lib run-time exception (error and warning)
 /// handling.
 ///
-/// The class can only be instantiated by the derived classes 
-/// OomphLibError and OomphLibWarning. The (protected) constructor 
-/// combines its string arguments into a standard format 
-/// for uniform exception reports which are written to the specified 
+/// The class can only be instantiated by the derived classes
+/// OomphLibError and OomphLibWarning. The (protected) constructor
+/// combines its string arguments into a standard format
+/// for uniform exception reports which are written to the specified
 /// output stream.
 //======================================================================
 class OomphLibException : public std::runtime_error
-{ 
+{
  protected:
- 
+
  ///\short Constructor takes the error description, function name
  ///and a location string provided by the OOMPH_EXCEPTION_LOCATION
  ///macro and combines them into a standard header. The exception type
@@ -133,14 +157,14 @@ class OomphLibException : public std::runtime_error
                    std::ostream &exception_stream,
                    const unsigned &output_width,
                    bool list_trace_back);
- 
-  ///The destructor cannot throw an exception (C++ STL standard) 
+
+  ///The destructor cannot throw an exception (C++ STL standard)
   ~OomphLibException() throw() {}
 };
 
 //====================================================================
 /// An OomphLibError object which should be thrown when an run-time
-/// error is encountered. The error stream and stream width can be 
+/// error is encountered. The error stream and stream width can be
 /// specified. The default is cout with a width of 70 characters.
 //====================================================================
 class OomphLibError : public OomphLibException
@@ -154,7 +178,7 @@ class OomphLibError : public OomphLibException
   public:
 
  ///\short Constructor requires the error description and the function
- ///in which the error occured and the location provided by the 
+ ///in which the error occured and the location provided by the
  ///OOMPH_EXCEPTION_LOCATION macro
  OomphLibError(const std::string &error_description,
                const std::string &function_name,
@@ -176,7 +200,7 @@ class OomphLibError : public OomphLibException
 
 //====================================================================
 /// An OomphLibWarning object which should be created as a temporary
-/// object to issue a warning. The warning stream and stream width can be 
+/// object to issue a warning. The warning stream and stream width can be
 /// specified. The default is cout with a width of 70 characters.
 //====================================================================
 class OomphLibWarning : public OomphLibException
@@ -188,16 +212,16 @@ class OomphLibWarning : public OomphLibException
  static unsigned Output_width;
 
   public:
- 
+
  ///\short Constructor requires the warning description and the function
- ///in which the warning occurred. 
+ ///in which the warning occurred.
  OomphLibWarning(const std::string &warning_description,
                  const std::string &function_name,
                  const char* location) :
                  OomphLibException(warning_description,function_name,
                                    location,
                                    "WARNING",*Stream_pt,Output_width,false) { }
-                 
+
  /// \short Static member function used to specify the error stream,
  /// which must be passed as a pointer because streams cannot be copied.
  static inline void set_stream_pt(std::ostream* const &stream_pt)
@@ -220,11 +244,11 @@ class OomphLibWarning : public OomphLibException
 //=====================================================================
 /// A small nullstream class that throws away everything sent to it.
 //=====================================================================
-class Nullstream : public std::ostream 
+class Nullstream : public std::ostream
 {
 public:
  ///Constructor sets the buffer sizes to zero, suppressing all output
- Nullstream(): std::ios(0), std::ostream(0) {} 
+ Nullstream(): std::ios(0), std::ostream(0) {}
 };
 
 
@@ -245,9 +269,9 @@ extern Nullstream oomph_nullstream;
 
 
 //========================================================================
-/// A base class that contains a single virtual member function: 
-/// The () operator that may be used to modify the output in 
-/// OomphOutput objects. The default implementation 
+/// A base class that contains a single virtual member function:
+/// The () operator that may be used to modify the output in
+/// OomphOutput objects. The default implementation
 ///=======================================================================
 class OutputModifier
 {
@@ -260,10 +284,10 @@ public:
  ///Empty virtual destructor
  virtual ~OutputModifier() {}
 
- /// \short Function that will be called before output from an 
+ /// \short Function that will be called before output from an
  /// OomphOutput object. It returns a bool (true in this default
  /// implementation) to indicate that output should be continued.
- virtual bool operator()(std::ostream &stream) 
+ virtual bool operator()(std::ostream &stream)
   {return true;}
 
 };
@@ -358,17 +382,17 @@ private:
  ///Pointer to the output stream -- defaults to std::cout
  std::ostream *Stream_pt;
 
- ///Pointer to the output modifier object -- defaults to no modification 
+ ///Pointer to the output modifier object -- defaults to no modification
  OutputModifier* Output_modifier_pt;
 
 public:
 
- ///\short Set default values for the output stream (cout) 
+ ///\short Set default values for the output stream (cout)
  ///and modifier (no modification)
- OomphInfo() : Stream_pt(&std::cout), 
+ OomphInfo() : Stream_pt(&std::cout),
                Output_modifier_pt(&default_output_modifier) {}
 
- ///\short Overload the << operator, writing output to the stream addressed by 
+ ///\short Overload the << operator, writing output to the stream addressed by
  ///Stream_pt and calling the function defined by the object addressed by
  ///Output_modifier_pt
  template<class _Tp>
@@ -392,8 +416,8 @@ public:
  std::ostream &operator<<(std::ostream& (*f)(std::ostream &))
   {
    return f(*Stream_pt);
-  } 
- 
+  }
+
  ///Access function for the output modifier pointer
  OutputModifier* &output_modifier_pt() {return Output_modifier_pt;}
 
