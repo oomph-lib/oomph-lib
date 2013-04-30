@@ -645,6 +645,11 @@ namespace oomph
  /// schemes
  double DTSF_max_increase;
 
+ /// \short Minimum allowed decrease of dt between time-steps in adaptive
+ /// schemes. Lower scaling values will reject the time-step (and retry
+ /// with a smaller dt).
+ double DTSF_min_decrease;
+
  /// \short If  Minimum_dt_but_still_proceed positive, then dt will not be 
  /// reduced below this value during adaptive timestepping and the 
  /// computation will continue with this value, accepting the larger 

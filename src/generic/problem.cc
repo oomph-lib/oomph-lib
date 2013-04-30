@@ -87,6 +87,7 @@ namespace oomph
   Discontinuous_element_formulation(false),
   Minimum_dt(1.0e-12), Maximum_dt(1.0e12),
   DTSF_max_increase(4.0),
+  DTSF_min_decrease(0.8),
   Minimum_dt_but_still_proceed(-1.0),
   Scale_arc_length(true), Desired_proportion_of_arc_length(0.5),
   Theta_squared(1.0), Sign_of_jacobian(0), Continuation_direction(1.0),
@@ -10209,13 +10210,9 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
      oomph_info << "Timestep scaling factor is  " << dt_rescaling_factor << std::endl;
      oomph_info << "Estimated timestepping error is " << error << std::endl;
 
-
-     // Threshold for rejecting timestep
-     double dtsf_threshold=0.8;
-
      // Impose lower bound on timestep (i.e. accept timestep
      // even though tolerance isn't satisfied)
-     if(dt_rescaling_factor <= dtsf_threshold)
+     if(dt_rescaling_factor <= DTSF_min_decrease)
       {
        double new_timestep=dt_actual*dt_rescaling_factor;
 
@@ -10234,7 +10231,7 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
 
      //Now decide what to do based upon dt_rescaling_factor
      //If it's small reject the timestep
-     if(dt_rescaling_factor <= dtsf_threshold)
+     if(dt_rescaling_factor <= DTSF_min_decrease)
       {
        oomph_info << "TIMESTEP REJECTED" << std::endl;
        //Reject the timestep
