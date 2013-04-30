@@ -5,6 +5,15 @@
 /*
 
 
+TODO: This, along with all output from the newton solve could be better
+implemented using the observer pattern. That way we only need a single hook
+in the newton solve at ouput points and all the "junk" that makes the
+algorithm itself harder to understand would go elsewhere. 
+
+Could be a problem using this for general output because debugging could
+get misleading (output to stdout would not be immediate). So maybe not that
+part...
+
 
 */
 
@@ -47,13 +56,13 @@ namespace oomph
   /// Add all the data for a single Newton step.
   void add_step(const double& max_residual,
                 const LinearSolver* const lin_solver_pt,
-                const double &dt=0.0)
+                const Time* const time_pt)
   {
    // Store dt for this Newton solve. In time-adaptive methods we want to
    // store the final choice of dt so we need to overwrite the value
    // everytime we take a Newton step (which is why this doesn't go in
    // "new_newton_solve()").
-   Dt_list.back() = dt;
+   if(time_pt != 0) Dt_list.back() = time_pt->dt();
 
    // Make a new data structure.
    NewtonStepConvergenceData conv;

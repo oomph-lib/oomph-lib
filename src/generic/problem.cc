@@ -8551,11 +8551,7 @@ void Problem::newton_solve()
    // Store convergence data if a pointer for it exists
    if(record_convergence_data())
     {
-     if(time_pt() != 0)
-      {
-       convergence_data_pt()->add_step(maxres, Linear_solver_pt, time_pt()->dt());
-      }
-     else convergence_data_pt()->add_step(maxres, Linear_solver_pt);
+     convergence_data_pt()->add_step(maxres, Linear_solver_pt, time_pt());
     }
 
    //If we have converged jump straight to the test at the end of the loop
