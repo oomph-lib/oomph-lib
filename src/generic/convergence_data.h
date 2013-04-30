@@ -5,7 +5,7 @@
 /*
 
 
-TODO: This, along with all output from the newton solve could be better
+??ds: This, along with all output from the newton solve could be better
 implemented using the observer pattern. That way we only need a single hook
 in the newton solve at ouput points and all the "junk" that makes the
 algorithm itself harder to understand would go elsewhere. 

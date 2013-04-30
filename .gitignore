@@ -35,6 +35,14 @@ Makefile.in
 # Other version control systems
 .svn/
 
+# Callgrind output
+callgrind.out.*
+
+# Doxygen output
+latex/
+html/
+*header.html
+*txt_doxygenified.*
 
 ########################################
 # Oomph-lib specific generated files
@@ -73,7 +81,6 @@ old_symbolic_links.txt
 oomph-lib-config.h
 stamp-h1
 config.cache
-previous_run_passes_list
 
 # Hypre/Trilinos build files
 external_distributions/hypre/hypre-*
@@ -542,3 +549,5 @@ demo_drivers/interaction/pseudo_solid_collapsible_tube/pseudo_solid_collapsible_
 demo_drivers/homogenisation/two_dim/two_dim
 demo_drivers/homogenisation/two_dim/two_dim_hex
 demo_drivers/navier_stokes/schur_complement_preconditioner/two_d_iter_driven_cavity_simple.dat
+demo_drivers/unsteady_heat/two_d_unsteady_heat_melt/plot_landscape.bash
+demo_drivers/unsteady_heat/two_d_unsteady_heat_melt/residual_landscape.pvsm

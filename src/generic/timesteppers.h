@@ -288,19 +288,13 @@ public:
 
  /// Number of timestep increments that are required by the scheme
  virtual unsigned ndt()=0;
- // ??ds I think this MUST be equal to nprev_values() otherwise a typical
- // set_initial_conditions() function will go wrong! (see e.g. unsteady
- // heat -- previous values are initialised from the exact solution using
- // times calculated using previous dt values (see the Time::time(t)
- // function), if ndt() < nprev_values() then the dt values are
- // out of range)
 
  /// \short Number of previous values needed to calculate the value at the
  /// current time. i.e. how many previous values must we loop over to
  /// calculate the values at the evaluation time. For most methods this is
  /// 1, i.e. just use the value at t_{n+1}. See midpoint method for a
  /// counter-example.
- virtual unsigned nprev_values_for_evaluation_time() {return 1;}
+ virtual unsigned nprev_values_for_values_at_evaluation_time() {return 1;}
 
  /// Number of previous values available: 0 for static, 1 for BDF<1>,...
  virtual unsigned nprev_values()=0;

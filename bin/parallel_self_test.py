@@ -14,10 +14,28 @@
 # Replace searching for mpi string in dir name with checking for
 # $MPI_RUN_COMMAND in validate.sh?
 
+# Print timing information?
+
 # Caveats:
 
 # Eigenproblems fail because there is no good way to determine if we have
 # arpack or not.
+
+
+
+
+# ASSUMPTIONS:
+
+# All validate.sh scripts return an appropriate exit status. Otherwise this
+# script cannot know if the test failed!
+
+# All mpi drivers have "mpi" in their path name. If this is not true it
+# should still work but things might be slow because we will have more
+# processes than cores.
+
+# All mpi drivers use the number of cores specified by MPI_RUN_COMMAND.
+
+# MPI_RUN_COMMAND has a '-np' argument specifying the number of cores.
 
 
 import subprocess as subp
@@ -208,38 +226,29 @@ def make_check_in_dir(directory):
     rerun make and get it again.
     """
 
-    # Check if anything needs to rebuild (it has to be 'make check' because
-    # 'make' alone does nothing with demo drivers).
-    rebuild_return = subp.call(['make', 'check', '-q', '-C', str(directory)],
-                               stdout=open(os.devnull, 'w'),
-                               stderr=open(os.devnull, 'w'))
-
-    # 'make -q' returns non-zero if we need to rebuild anything, get a bool
-    # saying if it was non-zero.
-    rebuilt = (rebuild_return != 0)
-
-    # Rebuild but don't run the test yet.
-    build_return = subp.call(['make', 'check', '-k',
-                              'TESTS_ENVIRONMENT=true',
-                              '-C', str(directory)],
-                             stdout=open(os.devnull, 'w'),
-                             stderr=open(os.devnull, 'w'))
+    # Rebuild (but don't run the test yet).
+    build_return = subp.call(['make', 'check',
+                              'TESTS_ENVIRONMENT=true'],
+                              cwd = directory,
+                              stdout=open(os.devnull, 'w'),
+                              stderr=open(os.devnull, 'w'))
 
     # If it failed then return a failure immediately
     if build_return != 0:
         build_fail_message(directory)
-        return False
+        return
 
     # Run make check
-    test_result = subp.call(['make', 'check', '-C', str(directory)],
+    test_result = subp.call(['make', 'check'],
+                            cwd = directory,
                             stdout=open(os.devnull, 'w'),
                             stderr=open(os.devnull, 'w'))
     if test_result == 0:
         check_success_message(directory)
-        return directory
+        return
     else:
         check_fail_message(directory)
-        return False
+        return
 
 # Function dealing with parsing of arguments, getting everything set up and
 # dispatching jobs to processes.
@@ -248,9 +257,10 @@ def main():
     Run self tests in parallel (one per core for serial tests, one per
     two cores for mpi).
 
-    Note: aborting with C-c will not work (due to limitations of
-    python's multiprocessing module). If you want to abort you will
-    probably have to close the terminal emulator entirely.
+    Note: aborting with C-c will not work due to limitations of python's
+    multiprocessing module. The easiest way to abort is probably to kill
+    the terminal emulator itself. Alternatively background the python
+    process with C-z then kill it (i.e. run "kill %%").
 
     Also note: eigensolver tests will fail if you don't have arpack
     installed. I haven't found a way to not run them without arpack
@@ -266,7 +276,7 @@ def main():
 
     from anywhere.
 
-    
+
     For this script to work correctly ALL validate.sh scripts must return
     an exit status. A simple command to check for this is:
 
@@ -334,12 +344,16 @@ def main():
     validation_dirs, mpi_dirs = find_validate_dirs(base_dirs)
 
     # Run tests
-    # ============================================================
+    # =========================================================================
     # Start all non-mpi tests first. Run "make_check_in_dir" on all
-    # directories in "validation_dirs".
+    # directories in "validation_dirs". Set chunksize to 1 (i.e. each "make
+    # check" call is in its own "chunk of work") to avoid the situation
+    # where multiple slow "make check"s end up in the same chunk and we
+    # have to wait ages for it to finish.
     pool = Pool()
-    test_results = pool.map_async(make_check_in_dir, validation_dirs).get(None)
+    pool.map(make_check_in_dir, validation_dirs, 1)
     pool.close()                # Tell python there are no more jobs coming
+    pool.join()       # Wait for everything to finish
 
     # Now run the MPI tests
     basempicores = mpi_cores_used(args.oomph_root)
@@ -350,7 +364,7 @@ def main():
 
         # Now run the mpi checks
         mpipool = Pool(mpi_ncores)
-        mpi_test_results = mpipool.map_async(make_check_in_dir, mpi_dirs).get(None)
+        mpipool.map(make_check_in_dir, mpi_dirs, 1)
         mpipool.close()         # Tell python there are no more jobs coming
         mpipool.join()          # Wait for everything to finish
 
@@ -358,9 +372,6 @@ def main():
         # Otherwise just print a list of tests that were not run (with a
         # useful message).
         map(no_mpi_message, mpi_dirs)
-        mpi_test_results = []
-
-    pool.join()       # Wait for everything to finish
 
     # Done!
     return 0
