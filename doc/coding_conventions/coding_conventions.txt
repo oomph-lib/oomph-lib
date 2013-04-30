@@ -310,7 +310,7 @@ guards and library includes.
   \code
 
 #ifdef PARANOID
- //Has a global mesh already been built?
+ // Has a global mesh already been built?
  if(Mesh_pt!=0)
   {
    std::string error_message = 
@@ -319,7 +319,7 @@ guards and library includes.
    error_message += "Problem::Mesh_pt is not zero!\n";
 
    throw OomphLibError(error_message,
-                       "Problem::build_global_mesh()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
   \endcode
@@ -336,7 +336,7 @@ guards and library includes.
                        <<" is a duplicate \n and was ignored when assembling " 
                        <<"global mesh." << std::endl;
        OomphLibWarning(warning_stream.str(),
-                       "Problem::rebuild_global_mesh()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
       }
    \endcode
@@ -374,7 +374,7 @@ guards and library includes.
 
 
 \subsection constness Const-ness
-- Use const whereever applicable (arguments, member functions,...)
+- Use const wherever applicable (arguments, member functions,...)
 - Always provide const and non-const overloaded subscript operators.
 - Example:
 \code
@@ -493,11 +493,11 @@ guards and library includes.
    \endcode
 
 \subsection dont_use_macros Macros
-- Don't use macros! There is a single exception to this rule:
-  We use the macro  \c OOMPH_EXCEPTION_LOCATION to make
-  the file name and line number available to the
-  \c OomphLibException object -- the object that is
-  thrown if a run-time error is detected.
+- Don't use macros! There are two exceptions to this rule: We use the
+  macros \c OOMPH_EXCEPTION_LOCATION and \c OOMPH_CURRENT_FUNCTION to make
+  the file name, line number and current function name available to the \c
+  OomphLibException object -- the object that is thrown if a run-time error
+  is detected.
 
 
  \subsection inlining Inlining

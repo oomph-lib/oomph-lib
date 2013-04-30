@@ -1190,7 +1190,7 @@ the tests to be disabled. Here is an example:
      error_stream << "The pointer some_pt points to an object of type: " <<
                   << typeid(some_pt).name() << std::endl; 
      throw OomphLibError(error_stream.str(),
-                         "main()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
  #endif 
