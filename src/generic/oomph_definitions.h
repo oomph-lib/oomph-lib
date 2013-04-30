@@ -165,7 +165,7 @@ class OomphLibException : public std::runtime_error
 //====================================================================
 /// An OomphLibError object which should be thrown when an run-time
 /// error is encountered. The error stream and stream width can be
-/// specified. The default is cout with a width of 70 characters.
+/// specified. The default is cerr with a width of 70 characters.
 //====================================================================
 class OomphLibError : public OomphLibException
 {
@@ -201,7 +201,7 @@ class OomphLibError : public OomphLibException
 //====================================================================
 /// An OomphLibWarning object which should be created as a temporary
 /// object to issue a warning. The warning stream and stream width can be
-/// specified. The default is cout with a width of 70 characters.
+/// specified. The default is cerr with a width of 70 characters.
 //====================================================================
 class OomphLibWarning : public OomphLibException
 {

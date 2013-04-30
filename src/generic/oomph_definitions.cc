@@ -134,9 +134,9 @@ OomphLibException::OomphLibException(const std::string &error_description,
 }
 
 //========================================================================
-/// Default output stream for OomphLibErorrs (cout)
+/// Default output stream for OomphLibErorrs (cerr)
 //========================================================================
-std::ostream *OomphLibError::Stream_pt = &std::cout;
+std::ostream *OomphLibError::Stream_pt = &std::cerr;
 
 //=======================================================================
 /// Default output width for OomphLibErrors (70)
@@ -144,9 +144,9 @@ std::ostream *OomphLibError::Stream_pt = &std::cout;
 unsigned OomphLibError::Output_width = 70;
 
 //=======================================================================
-/// Default output stream for OomphLibWarnings(cout)
+/// Default output stream for OomphLibWarnings(cerr)
 //=======================================================================
-std::ostream *OomphLibWarning::Stream_pt = &std::cout;
+std::ostream *OomphLibWarning::Stream_pt = &std::cerr;
 
 //=======================================================================
 /// Default output width for OomphLibWarnings (70)
