@@ -53,7 +53,7 @@ namespace oomph
                    << "passed in via set_external_values() and therefore "
                    << "cannot be redistributed"; 
      throw OomphLibError(error_message.str(),
-                         "DoubleMultiVector::redistribute(...)",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
    }
    // paranoid check that the nrows for both distributions is the 
@@ -66,7 +66,7 @@ namespace oomph
                    << " of global rows in the current distribution ("
                    << this->nrow() << ").\n"; 
      throw OomphLibError(error_message.str(),
-                         "DoubleMultiVector::redistribute(...)",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    // paranoid check that the current distribution and the new distribution
@@ -78,7 +78,7 @@ namespace oomph
      error_message << "The new distribution and the current distribution must "
                    << "have the same communicator.";
      throw OomphLibError(error_message.str(),
-                         "DoubleMultiVector::redistribute(...)",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif

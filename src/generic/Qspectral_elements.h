@@ -364,7 +364,7 @@ public:
       " but must be from 0 to 1\n";
 
      throw OomphLibError(error_message.str(),
-                         "QSpectralElement::vertex_node_pt()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    return nod_pt;
@@ -526,7 +526,7 @@ void QSpectralElement<1,NNODE_1D>::d2shape_local(const Vector<double> &s, Shape 
  std::ostringstream error_message;
  error_message <<"\nd2shpe_local currently not implemented for this element\n";
  throw OomphLibError(error_message.str(),
-                     "QSpectralElement<1,NNODE_1D>::d2shape_local()",
+                     OOMPH_CURRENT_FUNCTION,
                      OOMPH_EXCEPTION_LOCATION);
 
 /*  //Call the shape functions and derivatives */
@@ -612,7 +612,7 @@ public:
       " but must be from 0 to 3\n";
 
      throw OomphLibError(error_message.str(),
-                         "QSpectralElement::vertex_node_pt()",
+OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    return nod_pt;
@@ -806,7 +806,7 @@ void QSpectralElement<2,NNODE_1D>::d2shape_local(const Vector<double> &s, Shape 
  std::ostringstream error_message;
  error_message <<"\nd2shpe_local currently not implemented for this element\n";
  throw OomphLibError(error_message.str(),
-                     "QSpectralElement<2,NNODE_1D>::d2shape_local()",
+                     OOMPH_CURRENT_FUNCTION,
                      OOMPH_EXCEPTION_LOCATION);
 
 /*  //Call the shape functions and derivatives */
@@ -904,7 +904,7 @@ public:
       " but must be from 0 to 7\n";
      
      throw OomphLibError(error_message.str(),
-                         "QSpectralElement::vertex_node_pt()",
+OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    return nod_pt;
@@ -1126,7 +1126,7 @@ void QSpectralElement<3,NNODE_1D>::d2shape_local(const Vector<double> &s, Shape 
  std::ostringstream error_message;
  error_message <<"\nd2shpe_local currently not implemented for this element\n";
  throw OomphLibError(error_message.str(),
-                     "QSpectralElement<3,NNODE_1D>::d2shape_local()",
+                     OOMPH_CURRENT_FUNCTION,
                      OOMPH_EXCEPTION_LOCATION);
 
 /*  //Call the shape functions and derivatives */

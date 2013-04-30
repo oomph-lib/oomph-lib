@@ -79,7 +79,7 @@ class AxisymmetricPVDEquations : public virtual SolidFiniteElement
       "set one using the constitutive_law_pt() member function\n";
 
      throw OomphLibError(error_message,
-                         "AxisymmetricPVDEquations::get_stress()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -677,7 +677,7 @@ public virtual SolidFiniteElement
       "set one using the constitutive_law_pt() member function\n";
      
      throw OomphLibError(error_message,
-                         "AxisymmetricPVDEquationsWithPressure::get_stress()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -703,7 +703,7 @@ public virtual SolidFiniteElement
       "set one using the constitutive_law_pt() member function\n";
      
      throw OomphLibError(error_message,
-                         "AxisymmetricPVDEquationsWithPressure::get_stress()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif

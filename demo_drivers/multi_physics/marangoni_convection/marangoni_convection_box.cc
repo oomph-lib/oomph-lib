@@ -165,7 +165,8 @@ class SpineVolumeConstraintPointElement :
       "SpineVolumConstraintPointElement::\n";
      function_name += "set_traded_pressure_data()";
      
-     throw OomphLibError(error_stream.str(),function_name,
+     throw OomphLibError(error_stream.str(),
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -453,7 +454,8 @@ public:
       "FixedVolumeSpineLineFluidInterfaceElement::\n";
      function_name += "set_traded_pressure_data()";
      
-     throw OomphLibError(error_stream.str(),function_name,
+     throw OomphLibError(error_stream.str(),
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif

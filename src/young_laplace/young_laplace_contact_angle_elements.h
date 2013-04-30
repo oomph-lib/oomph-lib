@@ -67,7 +67,7 @@ public:
   {
    throw OomphLibError(
     "Don't call empty constructor for YoungLaplaceContactAngleElement",
-    "YoungLaplaceContactAngleElement::YoungLaplaceContactAngleElement",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 

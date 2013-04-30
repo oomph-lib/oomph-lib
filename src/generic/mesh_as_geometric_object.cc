@@ -173,7 +173,7 @@ namespace oomph
         << "into a FiniteElement: GeomObject representation is not possible\n";
        throw OomphLibError(
         error_message.str(),
-        "MeshAsGeomObject::MeshAsGeomObject(...)",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
       }
 #endif
@@ -228,7 +228,7 @@ namespace oomph
                   << ", X_max=" << Multi_domain_functions::X_max << "\n";
      throw OomphLibError
       (error_stream.str(),
-       "MeshAsGeomObject::construct_it()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
     }
    if (dim_lagrangian>=2)
@@ -244,7 +244,7 @@ namespace oomph
                     << ", Y_max=" << Multi_domain_functions::Y_max << "\n";
        throw OomphLibError
         (error_stream.str(),
-         "MeshAsGeomObject::construct_it()",
+         OOMPH_CURRENT_FUNCTION,
          OOMPH_EXCEPTION_LOCATION);
       }
     }
@@ -261,7 +261,7 @@ namespace oomph
                     << ", Z_max=" << Multi_domain_functions::Z_max << "\n";
        throw OomphLibError
         (error_stream.str(),
-         "MeshAsGeomObject::construct_it()",
+         OOMPH_CURRENT_FUNCTION,
          OOMPH_EXCEPTION_LOCATION);
       }
     }
@@ -478,8 +478,8 @@ namespace oomph
       error_message_stream                                        
        << "Bin " << i << " is still empty\n"
        << "after trying to fill it by diffusion\n";
-      throw OomphLibError(error_message_stream.str(),                  
-                          "MeshAsGeomObject::fill_bin_by_diffusion(..)",
+      throw OomphLibError(error_message_stream.str(),
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
    }  
@@ -800,8 +800,8 @@ namespace oomph
        error_message_stream                                        
         << "Communicator not set for a MeshAsGeomObject\n"
         << "that was created from a distributed Mesh";
-       throw OomphLibError(error_message_stream.str(),                  
-                           "MeshAsGeomObject::get_min_and_max_coordinates(..)",
+       throw OomphLibError(error_message_stream.str(),
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
     }
@@ -1027,7 +1027,7 @@ namespace oomph
             << Multi_domain_functions::Percentage_offset << "\n";
            throw OomphLibError(
             error_message.str(),
-            "MeshAsGeomObject::create_bins_of_objects()",
+            OOMPH_CURRENT_FUNCTION,
             OOMPH_EXCEPTION_LOCATION);
           }
           
@@ -1309,7 +1309,7 @@ namespace oomph
      << "Can't deal with bins in dimension " << n_lagrangian << "\n";
     throw OomphLibError(
      error_message.str(),
-     "MeshAsGeomObject::min_distance()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
 

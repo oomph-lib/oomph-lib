@@ -328,7 +328,7 @@ namespace oomph
                  << "and actions_after_distribute() are correctly set up.\n"
                  << std::endl;
     throw OomphLibError(error_stream.str(),
-                        "Problem::distribute()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
   else
@@ -388,7 +388,7 @@ namespace oomph
                    << "only be called while meshes are uniformly refined.\n"
                    << std::endl;
       throw OomphLibError(error_stream.str(),
-                          "Problem::distribute()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
     else
@@ -402,7 +402,7 @@ namespace oomph
                      << "This is not likely to work...\n"
                      << std::endl;
         throw OomphLibError(error_stream.str(),
-                            "Problem::distribute()",
+                            OOMPH_CURRENT_FUNCTION,
                             OOMPH_EXCEPTION_LOCATION);
        }
 
@@ -653,7 +653,7 @@ namespace oomph
          << "distribute functions, e.g. to pin redundant pressure dofs"
          << " etc.\n";
         throw OomphLibError(error_stream.str(),
-                            "Problem::distribute()",
+                            OOMPH_CURRENT_FUNCTION,
                             OOMPH_EXCEPTION_LOCATION);
        }
 #endif
@@ -780,7 +780,7 @@ namespace oomph
                      << "Suggest rerunning with more refinement.\n"
                      << std::endl;
         throw OomphLibError(error_stream.str(),
-                            "Problem::partition_global_mesh()",
+                            OOMPH_CURRENT_FUNCTION,
                             OOMPH_EXCEPTION_LOCATION);
 
        }
@@ -1114,7 +1114,7 @@ namespace oomph
                << " with previous value: " << n_new_root_back[e] << std::endl;
               throw OomphLibError(
                error_stream.str(),
-               "Problem::prune_halo_elements_and_nodes()",
+               OOMPH_CURRENT_FUNCTION,
                OOMPH_EXCEPTION_LOCATION);
              }
            }
@@ -1224,7 +1224,7 @@ namespace oomph
            << "\nadapt/distribute functions, e.g. to pin redundant pressure"
            << " dofs etc.\n";
           throw OomphLibError(error_stream.str(),
-                              "Problem::prune_halo_elements_and_nodes()",
+                              OOMPH_CURRENT_FUNCTION,
                               OOMPH_EXCEPTION_LOCATION);
          }
        }
@@ -1257,7 +1257,7 @@ namespace oomph
     error_message += "Problem::Mesh_pt is not zero!\n";
 
     throw OomphLibError(error_message,
-                        "Problem::build_global_mesh()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
   //Check that there are submeshes
@@ -1269,7 +1269,7 @@ namespace oomph
     error_message += "Problem::Sub_mesh_pt has no entries\n";
 
     throw OomphLibError(error_message,
-                        "Problem::build_global_mesh()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -1715,7 +1715,7 @@ namespace oomph
     if (wrong)
      {
       throw OomphLibError(error_stream.str(),
-                          "Problem::recompute_load_balanced_assembly()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
 
@@ -1878,7 +1878,7 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
                 << "from the sub-meshes.\n\n";
 
    throw OomphLibError(error_stream.str(),
-                       "Problem::assign_eqn_numbers()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -2621,7 +2621,7 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
 
 
                       throw OomphLibError(error_stream.str(),
-                                          "Problem::remove_duplicate_data()",
+                                          OOMPH_CURRENT_FUNCTION,
                                           OOMPH_EXCEPTION_LOCATION);
                      }
                    }
@@ -2766,7 +2766,7 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
                           oomph_info.stream_pt()->flush();
                           throw OomphLibError(
                            error_stream.str(),
-                           "Problem::remove_duplicate_data()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
                          }
 #endif
@@ -3062,7 +3062,7 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
                  << "does not equal number of degrees of freedom in problem "
                  << n_dof;
     throw OomphLibError(error_stream.str(),
-                        "Problem::set_dofs()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -3107,7 +3107,7 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
        <<
        "used with the default assembly handler\n\n";
       throw OomphLibError(error_stream.str(),
-                          "Problem::get_inverse_mass_matrix_times_residuals()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
 #endif
@@ -3228,7 +3228,7 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
        "number of global rows\n";
 
       throw OomphLibError(error_stream.str(),
-                          "Problem::get_residuals()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
    }
@@ -3399,7 +3399,7 @@ else
        << "If the DoubleVector residuals is setup then it must not "
        << "be distributed.";
       throw OomphLibError(error_stream.str(),
-                          "Problem::get_jacobian(...)",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
     if (residuals.distribution_pt()->nrow() != n_dof)
@@ -3409,7 +3409,7 @@ else
        << "If the DoubleVector residuals is setup then it must have"
        << " the correct number of rows";
       throw OomphLibError(error_stream.str(),
-                          "Problem::get_jacobian(...)",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
     if (!(*Communicator_pt == *residuals.distribution_pt()->communicator_pt()))
@@ -3419,7 +3419,7 @@ else
        << "If the DoubleVector residuals is setup then it must have"
        << " the same communicator as the problem.";
       throw OomphLibError(error_stream.str(),
-                          "Problem::get_jacobian(...)",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
    }
@@ -3529,7 +3529,7 @@ else
       error_stream << "The distribution of the residuals must "
                    << "be the same as the distribution of the jacobian.";
       throw OomphLibError(error_stream.str(),
-                          "Problem::get_jacobian(...)",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
     if (jacobian.distribution_pt()->nrow() != this->ndof())
@@ -3538,7 +3538,7 @@ else
       error_stream << "The distribution of the jacobian and residuals does not"
                    << "have the correct number of global rows.";
       throw OomphLibError(error_stream.str(),
-                          "Problem::get_jacobian(...)",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
    }
@@ -3549,7 +3549,7 @@ else
     error_stream << "The distribution of the jacobian and residuals must "
                  << "both be setup or both not setup";
     throw OomphLibError(error_stream.str(),
-                        "Problem::get_jacobian(...)",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -3729,7 +3729,7 @@ else
        << "If the DoubleVector residuals is setup then it must not "
        << "be distributed.";
       throw OomphLibError(error_stream.str(),
-                          "Problem::get_jacobian(...)",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
     if (residuals.distribution_pt()->nrow() != n_dof)
@@ -3739,7 +3739,7 @@ else
        << "If the DoubleVector residuals is setup then it must have"
        << " the correct number of rows";
       throw OomphLibError(error_stream.str(),
-                          "Problem::get_jacobian(...)",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
     if (!(*Communicator_pt == *residuals.distribution_pt()->communicator_pt()))
@@ -3749,7 +3749,7 @@ else
        << "If the DoubleVector residuals is setup then it must have"
        << " the same communicator as the problem.";
       throw OomphLibError(error_stream.str(),
-                          "Problem::get_jacobian(...)",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
    }
@@ -3807,7 +3807,7 @@ else
     << "Cannot assemble a CCDoubleMatrix Jacobian on more "
     << "than one processor.";
    throw OomphLibError(error_stream.str(),
-                       "Problem::get_jacobian(...)",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -4071,7 +4071,7 @@ void Problem::sparse_assemble_row_or_column_compressed(
     << "It should be one of the enumeration Problem::Assembly_method"
     << std::endl;
    throw OomphLibError(error_stream.str(),
-                       "Problem::sparse_assemble_row_or_column_compressed",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 }
@@ -4158,7 +4158,7 @@ void Problem::sparse_assemble_row_or_column_compressed_with_maps(
     <<  column_or_row_index.size() << std::endl;
    throw OomphLibError(
     error_stream.str(),
-    "Problem::sparse_assemble_row_or_column_compressed_with_maps",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -4174,7 +4174,7 @@ void Problem::sparse_assemble_row_or_column_compressed_with_maps(
     << std::endl;
    throw OomphLibError(
     error_stream.str(),
-    "Problem::sparse_assemble_row_or_column_compressed_with_maps",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -4503,7 +4503,7 @@ void Problem::sparse_assemble_row_or_column_compressed_with_lists(
     <<  column_or_row_index.size() << std::endl;
    throw OomphLibError(
     error_stream.str(),
-    "Problem::sparse_assemble_row_or_column_compressed_with_lists",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -4519,7 +4519,7 @@ void Problem::sparse_assemble_row_or_column_compressed_with_lists(
     << std::endl;
    throw OomphLibError(
     error_stream.str(),
-    "Problem::sparse_assemble_row_or_column_compressed_with_lists",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -4918,7 +4918,7 @@ void Problem::sparse_assemble_row_or_column_compressed_with_vectors_of_pairs(
     <<  column_or_row_index.size() << std::endl;
    throw OomphLibError(
     error_stream.str(),
-    "Problem::sparse_assemble_row_or_column_compressed_with_vectors_of_pairs",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -4934,7 +4934,7 @@ void Problem::sparse_assemble_row_or_column_compressed_with_vectors_of_pairs(
     << std::endl;
    throw OomphLibError(
     error_stream.str(),
-    "Problem::sparse_assemble_row_or_column_compressed_with_vectors_of_pairs",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -5278,7 +5278,7 @@ void Problem::sparse_assemble_row_or_column_compressed_with_two_vectors(
     <<  column_or_row_index.size() << std::endl;
    throw OomphLibError(
     error_stream.str(),
-    "Problem::sparse_assemble_row_or_column_compressed_with_lists",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -5294,7 +5294,7 @@ void Problem::sparse_assemble_row_or_column_compressed_with_two_vectors(
     << std::endl;
    throw OomphLibError(
     error_stream.str(),
-    "Problem::sparse_assemble_row_or_column_compressed_with_two_vectors",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -5645,7 +5645,7 @@ void Problem::sparse_assemble_row_or_column_compressed_with_two_arrays(
     <<  column_or_row_index.size() << std::endl;
    throw OomphLibError(
     error_stream.str(),
-    "Problem::sparse_assemble_row_or_column_compressed_with_lists",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -5661,7 +5661,7 @@ void Problem::sparse_assemble_row_or_column_compressed_with_two_arrays(
     << std::endl;
    throw OomphLibError(
     error_stream.str(),
-    "Problem::sparse_assemble_row_or_column_compressed_with_two_vectors",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -6163,7 +6163,7 @@ void Problem::parallel_sparse_assemble
     <<  column_indices.size() << std::endl;
    throw OomphLibError(
     error_stream.str(),
-    "Problem::parallel_sparse_assemble()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -6179,7 +6179,7 @@ void Problem::parallel_sparse_assemble
     << std::endl;
    throw OomphLibError(
     error_stream.str(),
-    "Problem::parallel_sparse_assemble()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -6369,7 +6369,7 @@ void Problem::parallel_sparse_assemble
                << "at least one entry in the residual vector is nonzero.";
               throw OomphLibError(
                error_stream.str(),
-               "Problem::parallel_sparse_assemble()",
+               OOMPH_CURRENT_FUNCTION,
                OOMPH_EXCEPTION_LOCATION);
              }
             else
@@ -7882,7 +7882,7 @@ void Problem::get_eigenproblem_matrices(CRDoubleMatrix &mass_matrix,
       << "The distributions of the jacobian and mass matrix are\n"
       << "not the same and they must be.\n";
      throw OomphLibError(error_stream.str(),
-                         "Problem::get_eigenproblem_matrices()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -7893,7 +7893,7 @@ void Problem::get_eigenproblem_matrices(CRDoubleMatrix &mass_matrix,
       << "mass_matrix has a distribution, but the number of rows is not "
       << "equal to the number of degrees of freedom in the problem.";
      throw OomphLibError(error_stream.str(),
-                         "Problem::get_eigen_problem_matrices(...)",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -7904,7 +7904,7 @@ void Problem::get_eigenproblem_matrices(CRDoubleMatrix &mass_matrix,
       << "main_matrix has a distribution, but the number of rows is not "
       << "equal to the number of degrees of freedom in the problem.";
      throw OomphLibError(error_stream.str(),
-                         "Problem::get_eigen_problem_matrices(...)",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }
@@ -7915,7 +7915,7 @@ void Problem::get_eigenproblem_matrices(CRDoubleMatrix &mass_matrix,
    error_stream << "The distribution of the jacobian and mass matrix must "
                 << "both be setup or both not setup";
    throw OomphLibError(error_stream.str(),
-                       "Problem::get_eigenproblem_matrices(...)",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -8140,7 +8140,7 @@ void Problem::restore_dof_values()
   {
    throw OomphLibError(
     "There are no stored values, use store_current_dof_values()\n",
-    "Problem::restore_dof_values()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -8158,7 +8158,7 @@ void Problem::restore_dof_values()
       {
        throw OomphLibError(
         "The number of stored values is not equal to the current number of dofs\n",
-        "Problem::restore_dof_values()",
+OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
       }
 
@@ -8179,7 +8179,7 @@ void Problem::restore_dof_values()
       {
        throw OomphLibError(
         "The number of stored values is not equal to the current number of dofs\n",
-        "Problem::restore_dof_values()",
+OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
       }
 
@@ -8207,7 +8207,7 @@ void Problem::assign_eigenvector_to_dofs(DoubleVector &eigenvector)
                  << n_dof << std::endl;
 
    throw OomphLibError(error_message.str(),
-                       "Problem::assign_eigenvector_to_dofs()",
+OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -8241,7 +8241,7 @@ void Problem::add_eigenvector_to_dofs(const double &epsilon,
                  << n_dof << std::endl;
 
    throw OomphLibError(error_message.str(),
-                       "Problem::assign_eigenvector_to_dofs()",
+OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -8304,7 +8304,7 @@ void Problem::newton_solve()
                   << "implemented in parallel yet!"
                   << std::endl;
      throw OomphLibError(error_stream.str(),
-                         "Problem::newton_solve()",
+OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -8822,7 +8822,7 @@ void Problem::steady_newton_solve(unsigned const &max_adapt)
    error_stream << "Error occured in Newton solver. "
                 << std::endl;
    throw OomphLibError(error_stream.str(),
-                       "Problem::steady_newton_solve()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -9695,7 +9695,7 @@ double Problem::arc_length_step_solve(double* const &parameter_pt,
                    << Minimum_ds << std::endl;
 
      throw OomphLibError(error_message.str(),
-                         "Problem::arc_length_step_solve()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -9725,7 +9725,7 @@ double Problem::arc_length_step_solve(double* const &parameter_pt,
                     << "USER-DEFINED ERROR IN NEWTON SOLVER " << std::endl;
        oomph_info << "ERROR IN THE LINEAR SOLVER" << std::endl;
        throw OomphLibError(error_stream.str(),
-                           "Problem::arc_length_step_solve()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
      //Otherwise mark the step as having failed
@@ -10013,7 +10013,7 @@ void Problem::unsteady_newton_solve(const double &dt, const bool &shift_values)
    error_stream << "Error occured in unsteady Newton solver. "
                 << std::endl;
    throw OomphLibError(error_stream.str(),
-                       "Problem::unsteady_newton_solve()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -10134,7 +10134,7 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
 
          //Die
          throw OomphLibError(error_message,
-                             "Problem::adaptive_unsteady_newton_solve()",
+                             OOMPH_CURRENT_FUNCTION,
                              OOMPH_EXCEPTION_LOCATION);
         }
        else
@@ -10175,7 +10175,7 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
         << Minimum_dt << std::endl;
 
        throw OomphLibError(error_message.str(),
-                           "Problem::adaptive_unsteady_newton_solve()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
 
@@ -10466,7 +10466,7 @@ double& Problem::time()
  if(Time_pt==0)
   {
    throw OomphLibError("Time object has not been set",
-                       "Problem::time()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
  else {return Time_pt->time();}
@@ -10481,7 +10481,7 @@ double Problem::time() const
  if(Time_pt==0)
   {
    throw OomphLibError("Time object has not been set",
-                       "Problem::time()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
  else {return Time_pt->time();}
@@ -10650,7 +10650,7 @@ void Problem::copy(Problem* orig_problem_pt)
                    << n_node_orig << std::endl;
 
      throw OomphLibError(error_message.str(),
-                         "Problem::copy()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -10689,7 +10689,7 @@ void Problem::copy(Problem* orig_problem_pt)
                  << n_global_orig << std::endl;
 
    throw OomphLibError(error_message.str(),
-                       "Problem::copy()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -10724,7 +10724,7 @@ void Problem::copy(Problem* orig_problem_pt)
                        << n_internal_orig << std::endl;
 
          throw OomphLibError(error_message.str(),
-                             "Problem::copy()",
+                             OOMPH_CURRENT_FUNCTION,
                              OOMPH_EXCEPTION_LOCATION);
         }
        for (unsigned i=0;i<n_internal;i++)
@@ -10754,7 +10754,7 @@ Problem* Problem::make_copy()
   << "by a call to the constructor with exactly the same arguments as used\n";
 
  throw OomphLibError(error_stream.str(),
-                     "Problem::make_copy()",
+                     OOMPH_CURRENT_FUNCTION,
                      OOMPH_EXCEPTION_LOCATION);
 }
 
@@ -11011,7 +11011,7 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
       << "Make sure all sub-meshes have been added to the global mesh\n"
       << "when calling the Problem::dump() function.\n";
      throw OomphLibError(error_message.str(),
-                         "Problem::read()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }
@@ -11055,7 +11055,8 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
                     << "prune unstructured meshes [though I can't see why\n"
                     << "we would want to do this, given that they are \n"
                     << "currently totally re-generated...]\n";
-       throw OomphLibError(error_stream.str(),"Problem::read()",
+       throw OomphLibError(error_stream.str(),
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
     }
@@ -11195,7 +11196,7 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
       << "Error in reading restart data: Uniform refinement when pruned \n"
       << "flags should be followed by 9999.\n";
      throw OomphLibError(error_message.str(),
-                         "Problem::read()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }
@@ -11241,7 +11242,7 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
       << "About to read " << n_base_element_read_in << " base elements \n"
       << "though we only have " << nbase << " base elements in mesh.\n";
      throw OomphLibError(error_message.str(),
-                         "Problem::read()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }
@@ -11277,7 +11278,7 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
       << "Error in reading restart data: Target proc for base elements \n"
       << "should be followed by 8888.\n";
      throw OomphLibError(error_message.str(),
-                         "Problem::read()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }
@@ -11321,7 +11322,7 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
            if (el_number_in_base_mesh_plus_one==0)
             {
              throw OomphLibError("el_number_in_base_mesh_plus_one=0 for bulk",
-                                 "Problem::read()",
+                                 OOMPH_CURRENT_FUNCTION,
                                  OOMPH_EXCEPTION_LOCATION);
             }
           }
@@ -11332,7 +11333,7 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
        if (el_number_in_base_mesh_plus_one==0)
         {
          throw OomphLibError("el_number_in_base_mesh_plus_one=0",
-                             "Problem::read()",
+                             OOMPH_CURRENT_FUNCTION,
                              OOMPH_EXCEPTION_LOCATION);
         }
 
@@ -11559,7 +11560,7 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
       << "Synchronisation of temporal restart data \n"
       << "required even though Problem hasn't been distributed -- very odd!\n";
       throw OomphLibError(error_message.str(),
-                          "Problem::read()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -11606,7 +11607,7 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
     << "Synchronisation of temporal restart data \n"
     << "required even though we don't have mpi support -- very odd!\n";
     throw OomphLibError(error_message.str(),
-                       "Problem::read()",
+                        OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
 
 #endif
@@ -11715,7 +11716,7 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
                    <<   check_nglobal << std::endl;
 
      throw OomphLibError(error_message.str(),
-                         "Problem::read()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }
@@ -12008,7 +12009,7 @@ void Problem::bifurcation_adapt_helper(
         << " (copy)\n";
 
        throw OomphLibError(error_stream.str(),
-                           "Problem::bifurcation_adapt_helper()",
+                           OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
       }
 #endif
@@ -12047,7 +12048,7 @@ void Problem::bifurcation_adapt_helper(
                   << " : Eigenproblem : "
                   << eigenfunction_error.size() << "\n";
      throw OomphLibError(error_stream.str(),
-                         "Problem::bifurcation_adapt_helper()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -12065,7 +12066,7 @@ void Problem::bifurcation_adapt_helper(
                     << "Base: " << n_element << " :  Eigenproblem: "
                     << eigenfunction_error[m].size() << "\n";
        throw OomphLibError(error_stream.str(),
-                           "Problem::bifurcation_adapt_helper()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
 #endif
@@ -12126,7 +12127,7 @@ void Problem::bifurcation_adapt_helper(
    error_stream << "Bifurcation type " << bifurcation_type << " not known\n"
                 << "1: Fold, 2: Pitchfork, 3: Hopf\n";
    throw OomphLibError(error_stream.str(),
-                       "Problem::bifurcation_adapt_helper()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 }
@@ -12229,7 +12230,7 @@ void Problem::adapt(unsigned &n_refined, unsigned &n_unrefined)
         {
          throw OomphLibError(
           "Error estimator hasn't been set yet",
-          "Problem::adapt()",
+          OOMPH_CURRENT_FUNCTION,
           OOMPH_EXCEPTION_LOCATION);
         }
 #endif
@@ -12320,7 +12321,7 @@ void Problem::adapt(unsigned &n_refined, unsigned &n_unrefined)
         {
          throw OomphLibError(
           "Error estimator hasn't been set yet",
-          "Problem::adapt()",
+          OOMPH_CURRENT_FUNCTION,
           OOMPH_EXCEPTION_LOCATION);
         }
 #endif
@@ -12527,7 +12528,7 @@ void Problem::p_adapt(unsigned &n_refined, unsigned &n_unrefined)
         {
          throw OomphLibError(
           "Error estimator hasn't been set yet",
-          "Problem::p_adapt()",
+          OOMPH_CURRENT_FUNCTION,
           OOMPH_EXCEPTION_LOCATION);
         }
 #endif
@@ -12618,7 +12619,7 @@ void Problem::p_adapt(unsigned &n_refined, unsigned &n_unrefined)
         {
          throw OomphLibError(
           "Error estimator hasn't been set yet",
-          "Problem::p_adapt()",
+          OOMPH_CURRENT_FUNCTION,
           OOMPH_EXCEPTION_LOCATION);
         }
 #endif
@@ -12885,7 +12886,7 @@ void Problem::get_all_error_estimates(Vector<Vector<double> > &elemental_error)
           {
            throw OomphLibError(
             "Error estimator hasn't been set yet",
-            "Problem::get_all_error_estimates()",
+            OOMPH_CURRENT_FUNCTION,
             OOMPH_EXCEPTION_LOCATION);
           }
 #endif
@@ -12954,7 +12955,7 @@ void Problem::get_all_error_estimates(Vector<Vector<double> > &elemental_error)
         {
          throw OomphLibError(
           "Error estimator hasn't been set yet",
-          "Problem::get_all_error_estimates()",
+          OOMPH_CURRENT_FUNCTION,
           OOMPH_EXCEPTION_LOCATION);
         }
 #endif
@@ -13042,7 +13043,7 @@ void Problem::doc_errors(DocInfo& doc_info)
       {
        throw OomphLibError(
         "Error estimator hasn't been set yet",
-        "Problem::doc_errors()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
       }
 #endif
@@ -13100,7 +13101,7 @@ void Problem::doc_errors(DocInfo& doc_info)
         {
          throw OomphLibError(
           "Error estimator hasn't been set yet",
-          "Problem::doc_errors()",
+          OOMPH_CURRENT_FUNCTION,
           OOMPH_EXCEPTION_LOCATION);
         }
 #endif
@@ -13180,7 +13181,7 @@ void Problem::refine_selected_elements(const Vector<unsigned>&
                  << "or a Vector of Vectors for each submesh.\n"
                  << std::endl;
    throw OomphLibError(error_message.str(),
-                       "Problem::refine_selected_elements()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -13229,7 +13230,7 @@ void Problem::refine_selected_elements(const Vector<RefineableElement*>&
                  << "or a Vector of Vectors for each submesh.\n"
                  << std::endl;
    throw OomphLibError(error_message.str(),
-                       "Problem::refine_selected_elements()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -13261,7 +13262,7 @@ void Problem::refine_selected_elements(const unsigned& i_mesh,
      "Problem only has " << n_mesh << " submeshes. Cannot refine submesh "
                          << i_mesh << std::endl;
     throw OomphLibError(error_message.str(),
-                        "Problem::refine_selected_elements()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 
@@ -13312,7 +13313,7 @@ void Problem::refine_selected_elements(const unsigned& i_mesh,
     "Problem only has " << n_mesh << " submeshes. Cannot refine submesh "
                  << i_mesh << std::endl;
    throw OomphLibError(error_message.str(),
-                       "Problem::refine_selected_elements()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -13459,7 +13460,7 @@ void Problem::p_refine_selected_elements(const Vector<unsigned>&
                  << "or a Vector of Vectors for each submesh.\n"
                  << std::endl;
    throw OomphLibError(error_message.str(),
-                       "Problem::p_refine_selected_elements()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -13508,7 +13509,7 @@ void Problem::p_refine_selected_elements(const Vector<PRefineableElement*>&
                  << "or a Vector of Vectors for each submesh.\n"
                  << std::endl;
    throw OomphLibError(error_message.str(),
-                       "Problem::p_refine_selected_elements()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -13545,7 +13546,7 @@ void Problem::p_refine_selected_elements(const unsigned& i_mesh,
      "Problem only has " << n_mesh << " submeshes. Cannot p-refine submesh "
                          << i_mesh << std::endl;
     throw OomphLibError(error_message.str(),
-                        "Problem::p_refine_selected_elements()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 
@@ -13601,7 +13602,7 @@ void Problem::p_refine_selected_elements(const unsigned& i_mesh,
     "Problem only has " << n_mesh << " submeshes. Cannot p-refine submesh "
                  << i_mesh << std::endl;
    throw OomphLibError(error_message.str(),
-                       "Problem::p_refine_selected_elements()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -14046,7 +14047,7 @@ void Problem::refine_uniformly(const unsigned& i_mesh,
                   << nsub_mesh() << std::endl;
 
    throw OomphLibError(error_message.str(),
-                       "Problem::refine_uniformly()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -14094,7 +14095,7 @@ void Problem::p_refine_uniformly(const unsigned& i_mesh,
                   << nsub_mesh() << std::endl;
 
    throw OomphLibError(error_message.str(),
-                       "Problem::refine_uniformly()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -14219,7 +14220,7 @@ unsigned Problem::unrefine_uniformly(const unsigned& i_mesh)
                   << nsub_mesh() << std::endl;
 
    throw OomphLibError(error_message.str(),
-                       "Problem::unrefine_uniformly()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -14290,7 +14291,7 @@ void Problem::p_unrefine_uniformly(DocInfo& doc_info)
   {
    //Not tested:
    throw OomphLibError("This functionality has not yet been tested.",
-                       "Problem::p_unrefine_uniformly()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
    // Loop over submeshes
    for (unsigned imesh=0;imesh<n_mesh;imesh++)
@@ -14339,7 +14340,7 @@ void Problem::p_unrefine_uniformly(const unsigned& i_mesh,
                   << nsub_mesh() << std::endl;
 
    throw OomphLibError(error_message.str(),
-                       "Problem::p_unrefine_uniformly()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -14621,7 +14622,7 @@ void Problem::newton_solve(const unsigned &max_adapt)
       error_stream << "Error occured in adaptive Newton solver. "
                    << std::endl;
       throw OomphLibError(error_stream.str(),
-                          "Problem::newton_solve()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
 
@@ -15487,7 +15488,7 @@ void Problem::copy_haloed_eqn_numbers_helper(const bool& do_halos,
                   << "make sense -- go distribute your problem first."
                   << std::endl;
      throw OomphLibError(error_stream.str(),
-                         "Problem::load_balance()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -15919,7 +15920,7 @@ void Problem::copy_haloed_eqn_numbers_helper(const bool& do_halos,
        if (e_bulk==0)
         {
          throw OomphLibError("Base_mesh_element_number_plus_one[...]=0",
-                             "Problem::load_balance()",
+                             OOMPH_CURRENT_FUNCTION,
                              OOMPH_EXCEPTION_LOCATION);
         }
 #endif
@@ -15943,7 +15944,8 @@ void Problem::copy_haloed_eqn_numbers_helper(const bool& do_halos,
                     << mesh_pt()->nelement() << " elements with info for "
                     << new_domain_for_base_element.size()
                     << std::endl;
-       throw OomphLibError(error_stream.str(),"Problem::distribute()",
+       throw OomphLibError(error_stream.str(),
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
 #endif
@@ -16150,7 +16152,8 @@ void Problem::copy_haloed_eqn_numbers_helper(const bool& do_halos,
       << "Check that you've implemented any necessary actions_before/after\n"
       << "adapt/distribute functions, e.g. to pin redundant pressure dofs"
       << " etc.\n";
-     throw OomphLibError(error_stream.str(),"Problem::load_balance()",
+     throw OomphLibError(error_stream.str(),
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -16228,7 +16231,7 @@ void Problem::send_refinement_info_helper(
        if (e==0)
         {
          throw OomphLibError("Base_mesh_element_number_plus_one[...]=0",
-                             "Problem::send_refinement_info_helper()",
+                             OOMPH_CURRENT_FUNCTION,
                              OOMPH_EXCEPTION_LOCATION);
         }
 #endif
@@ -16340,7 +16343,7 @@ void Problem::send_refinement_info_helper(
                        << " doesn't match that actually send: " << local_count
                        << std::endl;
          throw OomphLibError(error_message.str(),
-                             "Problem::send_refinement_info_helper",
+                             OOMPH_CURRENT_FUNCTION,
                              OOMPH_EXCEPTION_LOCATION);
         }
 #endif
@@ -16564,7 +16567,7 @@ void Problem::send_refinement_info_helper(
                        << " doesn't match that actually send: " << check_count
                        << std::endl;
          throw OomphLibError(error_message.str(),
-                             "Problem::send_refinement_info_helper",
+                             OOMPH_CURRENT_FUNCTION,
                              OOMPH_EXCEPTION_LOCATION);
         }
 #endif
@@ -16870,7 +16873,7 @@ void Problem::send_data_to_be_sent_during_load_balancing(
             << nel << "\n";
            throw OomphLibError(
             error_message.str(),
-            "Problem::send_data_to_be_sent_during_load_balancing()",
+            OOMPH_CURRENT_FUNCTION,
             OOMPH_EXCEPTION_LOCATION);
           }
 #endif
@@ -16894,7 +16897,7 @@ void Problem::send_data_to_be_sent_during_load_balancing(
             << " one element but nel=" << nel << "\n";
            throw OomphLibError(
             error_message.str(),
-            "Problem::send_data_to_be_sent_during_load_balancing()",
+            OOMPH_CURRENT_FUNCTION,
             OOMPH_EXCEPTION_LOCATION);
           }
 #endif
@@ -16938,7 +16941,7 @@ void Problem::send_data_to_be_sent_during_load_balancing(
                  << ". Something's wrong!\n";
                 throw OomphLibError(
                  error_message.str(),
-                 "Problem::send_data_to_be_sent_during_load_balancing()",
+                 OOMPH_CURRENT_FUNCTION,
                  OOMPH_EXCEPTION_LOCATION);
                }
 #endif
@@ -16966,7 +16969,7 @@ void Problem::send_data_to_be_sent_during_load_balancing(
                     << "for non-boundary node\n";
                    throw OomphLibError(
                     error_message.str(),
-                    "Problem::send_data_to_be_sent_during_load_balancing()",
+                    OOMPH_CURRENT_FUNCTION,
                     OOMPH_EXCEPTION_LOCATION);
                   }
 #endif
@@ -17021,7 +17024,7 @@ void Problem::send_data_to_be_sent_during_load_balancing(
                     << "sent is for boundary node.\n";
                    throw OomphLibError(
                     error_message.str(),
-                    "Problem::send_data_to_be_sent_during_load_balancing()",
+                    OOMPH_CURRENT_FUNCTION,
                     OOMPH_EXCEPTION_LOCATION);
                   }
                 }
@@ -17196,7 +17199,7 @@ void Problem::get_data_to_be_sent_during_load_balancing(
        if (element_number_in_base_mesh==0)
         {
          throw OomphLibError("Base_mesh_element_number_plus_one[...]=0",
-                             "Problem::load_balance()",
+                             OOMPH_CURRENT_FUNCTION,
                              OOMPH_EXCEPTION_LOCATION);
         }
 #endif
@@ -17232,7 +17235,7 @@ void Problem::get_data_to_be_sent_during_load_balancing(
          if (element_number_in_base_mesh==0)
           {
            throw OomphLibError("Base_mesh_element_number_plus_one[...]=0",
-                               "Problem::load_balance()",
+                               OOMPH_CURRENT_FUNCTION,
                                OOMPH_EXCEPTION_LOCATION);
           }
 #endif
@@ -17298,7 +17301,7 @@ void Problem::get_data_to_be_sent_during_load_balancing(
             << "during load balancing\n";
            throw OomphLibError(
             error_message.str(),
-            "Problem::get_data_to_be_sent_during_load_balancing()",
+            OOMPH_CURRENT_FUNCTION,
             OOMPH_EXCEPTION_LOCATION);
           }
         }
@@ -17322,7 +17325,7 @@ void Problem::get_data_to_be_sent_during_load_balancing(
     << "that are removed in actions_before_distribute()...\n";
    throw OomphLibError(
     error_message.str(),
-    "Problem::get_data_to_be_sent_during_load_balancing()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -17370,7 +17373,7 @@ void Problem::get_data_to_be_sent_during_load_balancing(
       << "appear to have been assigned by any processor\n";
      throw OomphLibError(
       error_message.str(),
-      "Problem::get_data_to_be_sent_during_load_balancing()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -17385,7 +17388,7 @@ void Problem::get_data_to_be_sent_during_load_balancing(
       << "appear to have been assigned by any processor\n";
      throw OomphLibError(
       error_message.str(),
-      "Problem::get_data_to_be_sent_during_load_balancing()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -17566,7 +17569,7 @@ void Problem::get_data_to_be_sent_during_load_balancing(
         << el_count << "\n";
        throw OomphLibError(
         error_message.str(),
-        "Problem::get_data_to_be_sent_during_load_balancing()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
       }
 #endif
@@ -17629,7 +17632,7 @@ void Problem::get_flat_packed_refinement_pattern_for_load_balancing(
         {
          throw OomphLibError(
           "Base_mesh_element_number_plus_one[...]=0",
-          "Problem::get_flat_packed_refinement_pattern_for_load_balancing()",
+          OOMPH_CURRENT_FUNCTION,
           OOMPH_EXCEPTION_LOCATION);
         }
 #endif
@@ -17653,7 +17656,7 @@ void Problem::get_flat_packed_refinement_pattern_for_load_balancing(
           {
            throw OomphLibError(
             "Base_mesh_element_number_plus_one[...]=0",
-            "Problem::get_flat_packed_refinement_pattern_for_load_balancing()",
+            OOMPH_CURRENT_FUNCTION,
             OOMPH_EXCEPTION_LOCATION);
           }
 #endif
@@ -17783,7 +17786,7 @@ void Problem::refine_distributed_base_mesh
         {
          throw OomphLibError(
           "Base_mesh_element_number_plus_one[...]=0",
-          "Problem::refine_distributed_base_mesh()",
+          OOMPH_CURRENT_FUNCTION,
           OOMPH_EXCEPTION_LOCATION);
         }
 #endif

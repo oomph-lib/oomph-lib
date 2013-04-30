@@ -130,7 +130,7 @@ public:
                    << ndim << std::endl;
 
      throw OomphLibError(error_message.str(),
-                         "GeomObject::GeomObject()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -155,7 +155,7 @@ public:
                    << ndim << std::endl;
      
      throw OomphLibError(error_message.str(),
-                         "GeomObject::GeomObject()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -216,7 +216,7 @@ public:
     << "for the MeshAsGeomObject representing the lower-dimensional mesh \n"
     << "in a problem with multiple meshes. \n";
    throw OomphLibError(error_message.str(),
-                       "GeomObject::ngeom_data()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
  
@@ -238,7 +238,7 @@ public:
     << "for the MeshAsGeomObject representing the lower-dimensional mesh \n"
     << "in a problem with multiple meshes. \n";
    throw OomphLibError(error_message.str(),
-                       "GeomObject::geom_data_pt()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
  
@@ -257,7 +257,7 @@ public:
     {
      throw OomphLibError(
       "Calling steady position() from discrete unsteady position()",
-      "GeomObject::position()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
    position(zeta,r);
@@ -299,7 +299,7 @@ public:
   {
    throw OomphLibError(
     "You must specify dposition() for your own object! \n",
-    "GeomObject::dposition()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -313,7 +313,7 @@ public:
   {
    throw OomphLibError(
     "You must specify d2position() for your own object! \n",
-    "GeomObject::d2position()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -330,7 +330,7 @@ public:
   {
    throw OomphLibError(
     "You must specify d2position() for your own object! \n",
-    "GeomObject::d2position()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -384,7 +384,7 @@ public:
       << "This doesn't make sense! You probably have to \n"
       << "overload this function in your specific GeomObject\n";
    throw OomphLibError(error_message.str(),
-                       "GeomObject::interpolated_zeta()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -449,7 +449,7 @@ public:
     }
    
    throw OomphLibError(error_message.str(),
-                       "StraightLine::StraightLine()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -530,7 +530,7 @@ public:
                    << std::endl;
      
      throw OomphLibError(error_message.str(),
-                         "StraightLine::position()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -652,7 +652,7 @@ public:
       }
    
      throw OomphLibError(error_message.str(),
-                         "Ellipse::Ellipse()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -754,7 +754,7 @@ public:
                    << std::endl;
      
      throw OomphLibError(error_message.str(),
-                         "Ellipse::position()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -957,7 +957,7 @@ public:
       }
      
      throw OomphLibError(error_message.str(),
-                         "Circle::Circle()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -1042,7 +1042,7 @@ public:
                      << std::endl;
        
        throw OomphLibError(error_message.str(),
-                           "Circle::position()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
 #endif

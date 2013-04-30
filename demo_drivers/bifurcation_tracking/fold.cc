@@ -232,7 +232,7 @@ class GelfandBratuElement : public QElement<1,NNODE_1D>
                   << Lambda_pt << ") or mu (" << Mu_pt << ")\n";
      throw OomphLibError(
       error_stream.str(),
-      "GelfandBratuElement::fill_in_generic_dresiduals_contribution()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
 

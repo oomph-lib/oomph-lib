@@ -63,7 +63,7 @@ namespace oomph {
     std::ostringstream error_message;
     error_message << "The fluid and pseudo elastic mesh must be set.";
     throw OomphLibError(error_message.str(),
-                        "PseudoElasticFSIPreconditioner",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
     
    }
@@ -72,7 +72,7 @@ namespace oomph {
     std::ostringstream error_message;
     error_message << "The solid mesh must be set.";
     throw OomphLibError(error_message.str(),
-                        "PseudoElasticFSIPreconditioner",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
   if (Lagrange_multiplier_mesh_pt==0)
@@ -80,7 +80,7 @@ namespace oomph {
     std::ostringstream error_message;
     error_message << "The Lagrange multiplier mesh must be set.";
     throw OomphLibError(error_message.str(),
-                        "PseudoElasticFSIPreconditioner",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -137,7 +137,7 @@ namespace oomph {
     error_message << "FSIPreconditioner only works with"
                   << " CRDoubleMatrix matrices" << std::endl;
     throw OomphLibError(error_message.str(),
-                        "PseudoElasticFSIPreconditioner::setup()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -207,7 +207,7 @@ namespace oomph {
                     << "BlockPreconditioner then is must be a "
                     << "GeneralPurposeBlockPreconditioner";
       throw OomphLibError(error_message.str(),
-                          "PseudoSolidFSIPreconditioner::setup()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
    }

@@ -106,7 +106,7 @@ namespace Biharmonic_schur_complement_Hypre_defaults
    error_message
     << "The bulk element mesh has not been passed to bulk_element_mesh_pt()";
    throw OomphLibError(error_message.str(),
-                       "BiharmonicPreconditioner::setup()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -139,7 +139,7 @@ namespace Biharmonic_schur_complement_Hypre_defaults
     << "Preconditioner_type must be equal to 0 (exact), 1 (inexact with LU) or"
     << " 2 (inexact with AMG).";
    throw OomphLibError(error_message.str(),
-                       "BiharmonicPreconditioner::setup()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);   
   }
 #endif
@@ -253,7 +253,7 @@ void ExactSubBiharmonicPreconditioner::setup()
     << "This preconditioner requires 3 block types.\n"
     << "It is sub preconditioner for the BiharmonicPreconditioner.\n";
    throw OomphLibError(error_message.str(),
-                       "ExactSubBiharmonicPreconditioner::setup()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -344,7 +344,7 @@ void InexactSubBiharmonicPreconditioner::setup()
     << "This preconditioner requires 3 block types.\n"
     << "It is sub preconditioner for the BiharmonicPreconditioner.\n";
    throw OomphLibError(error_message.str(),
-                       "ExactSubBiharmonicPreconditionerx`::setup()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -397,7 +397,7 @@ void InexactSubBiharmonicPreconditioner::setup()
    error_message
     << "Request AMG solver but oomph-lib does not have HYPRE";
    throw OomphLibError(error_message.str(),
-                       "BiharmonicPreconditioner::setup()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
 #endif
    }

@@ -198,7 +198,7 @@ namespace Global_Physical_Variables
    {
     throw OomphLibError(
      "Inner radius must be 1/2 for non-dimensionalisation to be consistent.",
-     "Global_Physical_Variables::update_dependent_parameters()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
 #endif

@@ -199,7 +199,7 @@ void MumpsSolver::factorise(DoubleMatrixBase* const &matrix_pt)
  else
   {
    throw OomphLibError("Matrix must be distributable",
-                       "MumpsSolver::factorise()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
  
@@ -215,7 +215,7 @@ void MumpsSolver::factorise(DoubleMatrixBase* const &matrix_pt)
                         << "N, M " << n << " " << m << std::endl;
    
    throw OomphLibError(error_message_stream.str(),
-                       "MumpsSolver::factorise()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
  if (!Suppress_warning_about_MPI_COMM_WORLD)
@@ -274,7 +274,7 @@ void MumpsSolver::factorise(DoubleMatrixBase* const &matrix_pt)
     {
      throw OomphLibError
       ("To apply MumpsSolver to a CRDoubleMatrix - it must be built",
-       "MumpsSolver::factorise()",OOMPH_EXCEPTION_LOCATION);
+       OOMPH_CURRENT_FUNCTION,OOMPH_EXCEPTION_LOCATION);
     }
 #endif
    
@@ -446,7 +446,7 @@ void MumpsSolver::factorise(DoubleMatrixBase* const &matrix_pt)
      error_message_stream << "MumpsSolver only works for a "
                           << " distributed CRDoubleMatrix\n";
      throw OomphLibError(error_message_stream.str(),
-                         "MumpsSolver::factorise()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
 
     }
@@ -458,7 +458,7 @@ void MumpsSolver::factorise(DoubleMatrixBase* const &matrix_pt)
    error_message_stream << "MumpsSolver implemented only for "
                         << "distributed CRDoubleMatrix. \n";
    throw OomphLibError(error_message_stream.str(),
-                       "MumpsSolver::factorise()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -517,7 +517,7 @@ void MumpsSolver::factorise(DoubleMatrixBase* const &matrix_pt)
     error_message_stream 
      << "Mumps has not been initialised.";
     throw OomphLibError(error_message_stream.str(),
-                        "MumpsSolver::backsub()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
   
@@ -528,7 +528,7 @@ void MumpsSolver::factorise(DoubleMatrixBase* const &matrix_pt)
     error_message_stream 
      << "The vectors rhs must be setup";
     throw OomphLibError(error_message_stream.str(),
-                        "MumpsSolver::resolve()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
   
@@ -578,7 +578,7 @@ void MumpsSolver::factorise(DoubleMatrixBase* const &matrix_pt)
       << "The result vector distribution has been setup; it must have the "
       << "same distribution as the rhs vector.";
      throw OomphLibError(error_message_stream.str(),
-                         "MumpsSolver::resolve()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }   
@@ -711,7 +711,7 @@ void MumpsSolver::solve(DoubleMatrixBase* const &matrix_pt,
    error_message_stream 
     << "The vectors rhs must be setup";
    throw OomphLibError(error_message_stream.str(),
-                       "MumpsSolver::solve()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -722,7 +722,7 @@ void MumpsSolver::solve(DoubleMatrixBase* const &matrix_pt,
    error_message_stream 
     << "The matrix at matrix_pt must be square.";
    throw OomphLibError(error_message_stream.str(),
-                       "MumpsSolver::solve()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);    
   }
 
@@ -733,7 +733,7 @@ void MumpsSolver::solve(DoubleMatrixBase* const &matrix_pt,
    error_message_stream 
     << "The matrix and the rhs vector must have the same number of rows.";
    throw OomphLibError(error_message_stream.str(),
-                       "MumpsSolver::solve()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -751,7 +751,7 @@ void MumpsSolver::solve(DoubleMatrixBase* const &matrix_pt,
       << "The matrix matrix_pt must have the same distribution as the "
       << "rhs vector.";
      throw OomphLibError(error_message_stream.str(),
-                         "MumpsSolver::solve()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }
@@ -766,7 +766,7 @@ void MumpsSolver::solve(DoubleMatrixBase* const &matrix_pt,
       << "The matrix (matrix_pt) is not distributable and therefore the rhs"
       << " vector must not be distributed";
      throw OomphLibError(error_message_stream.str(),
-                         "MumpsSolver::solve()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }
@@ -781,7 +781,7 @@ void MumpsSolver::solve(DoubleMatrixBase* const &matrix_pt,
       << "The result vector distribution has been setup; it must have the "
       << "same distribution as the rhs vector.";
      throw OomphLibError(error_message_stream.str(),
-                         "MumpsSolver::solve()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }   

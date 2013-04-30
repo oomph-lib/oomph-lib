@@ -516,7 +516,8 @@ class PVDEquations : public virtual PVDEquationsBase<DIM>
        error_message +=
         "set one using the constitutive_law_pt() member function";
        //Throw the error
-       throw OomphLibError(error_message,"PVDEquations<DIM>::get_stress()",
+       throw OomphLibError(error_message,
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
 #endif
@@ -544,7 +545,7 @@ class PVDEquations : public virtual PVDEquationsBase<DIM>
         "set one using the constitutive_law_pt() member function";
        //Throw the error
        throw OomphLibError(error_message,
-                           "PVDEquations<DIM>::get_d_stress_dG()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
 #endif
@@ -872,7 +873,7 @@ template<unsigned NNODE_1D>
         
        throw OomphLibError(
         error_message,
-        "PVDEquationsWithPressure<DIM>::fill_in_contribution_to_jacobian()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
       }
      
@@ -922,7 +923,7 @@ template<unsigned NNODE_1D>
         
        throw OomphLibError(
         error_message,
-        "PVDEquationsWithPressure<DIM>::fill_in_contribution_to_jacobian()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
       }
      
@@ -1116,7 +1117,7 @@ template<unsigned NNODE_1D>
         "set one using the constitutive_law_pt() member function";
        //Throw the error
        throw OomphLibError(error_message,
-                           "PVDEquationsWithPressure<DIM>::get_stress()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
 #endif
@@ -1153,7 +1154,7 @@ template<unsigned NNODE_1D>
         "set one using the constitutive_law_pt() member function";
        //Throw the error
        throw OomphLibError(error_message,
-                           "PVDEquationsWithPressure<DIM>::get_d_stress_dG()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
 #endif
@@ -1222,7 +1223,7 @@ template<unsigned NNODE_1D>
         "set one using the constitutive_law_pt() member function";
        //Throw the error
        throw OomphLibError(error_message,
-                           "PVDEquationsWithPressure<DIM>::get_stress()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
 #endif
@@ -1255,7 +1256,7 @@ template<unsigned NNODE_1D>
         "set one using the constitutive_law_pt() member function";
        //Throw the error
        throw OomphLibError(error_message,
-                           "PVDEquationsWithPressure<DIM>::get_d_stress_dG()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
 #endif
@@ -1729,7 +1730,7 @@ template<unsigned DIM, unsigned NNODE_1D>
                  << flux.size() << ", whereas it should be "
                  << num_entries << std::endl;
    throw OomphLibError(error_message.str(),
-                       "TPVDElement::get_Z2_flux()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -1886,7 +1887,7 @@ public virtual SolidTBubbleEnrichedElement<DIM,NNODE_1D>,
                  << flux.size() << ", whereas it should be "
                  << num_entries << std::endl;
    throw OomphLibError(error_message.str(),
-                       "TPVDElement::get_Z2_flux()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -2111,7 +2112,7 @@ public:
                  << flux.size() << ", whereas it should be "
                  << num_entries << std::endl;
    throw OomphLibError(error_message.str(),
-                       "TPVDElement::get_Z2_flux()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif

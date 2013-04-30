@@ -32,7 +32,7 @@ double HomogenisedLinearElasticityEquationsBase::Default_lambda_sq_value=1.0;
    {
     throw OomphLibError(
      "HomogenisedLinearElasticity is not yet implemented for more than one position type",
-     "HomogenisedLinearElasticityEquationsBase::fill_in_generic_contribution_to_residuals_lin_elast()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
 
@@ -194,7 +194,7 @@ double HomogenisedLinearElasticityEquationsBase::Default_lambda_sq_value=1.0;
    {
     throw OomphLibError(
      "HomogenisedLinearElasticity is not yet implemented for more than one position type",
-     "HomogenisedLinearElasticityEquationsBase::calculate_effective_E()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
 

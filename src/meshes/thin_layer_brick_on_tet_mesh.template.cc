@@ -356,7 +356,7 @@ namespace oomph
            << "quadratic tets." 
            << std::endl;
           throw OomphLibError(error_stream.str(),
-                              "ThinBrickOnTetMesh::ThinBrickOnTetMesh()",
+                              OOMPH_CURRENT_FUNCTION,
                               OOMPH_EXCEPTION_LOCATION);
          }
 #endif         
@@ -375,7 +375,7 @@ namespace oomph
            << "quadratic tets." 
            << std::endl;
           throw OomphLibError(error_stream.str(),
-                              "ThinBrickOnTetMesh::ThinBrickOnTetMesh()",
+                              OOMPH_CURRENT_FUNCTION,
                               OOMPH_EXCEPTION_LOCATION);
          }
 #endif            
@@ -1589,7 +1589,7 @@ namespace oomph
         error_stream 
          << "Null node in element " << e << " node " << j << std::endl;
         throw OomphLibError(error_stream.str(),
-                            "XdaTetMesh::XdaTetMesh()",
+                            OOMPH_CURRENT_FUNCTION,
                             OOMPH_EXCEPTION_LOCATION);
        }
      }

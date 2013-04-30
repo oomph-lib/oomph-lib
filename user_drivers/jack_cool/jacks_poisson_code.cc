@@ -1,29 +1,29 @@
 //LIC// ====================================================================
-//LIC// This file forms part of oomph-lib, the object-oriented, 
-//LIC// multi-physics finite-element library, available 
+//LIC// This file forms part of oomph-lib, the object-oriented,
+//LIC// multi-physics finite-element library, available
 //LIC// at http://www.oomph-lib.org.
-//LIC// 
+//LIC//
 //LIC//           Version 0.90. August 3, 2009.
-//LIC// 
+//LIC//
 //LIC// Copyright (C) 2006-2009 Matthias Heil and Andrew Hazel
-//LIC// 
+//LIC//
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
 //LIC// License as published by the Free Software Foundation; either
 //LIC// version 2.1 of the License, or (at your option) any later version.
-//LIC// 
+//LIC//
 //LIC// This library is distributed in the hope that it will be useful,
 //LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
 //LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 //LIC// Lesser General Public License for more details.
-//LIC// 
+//LIC//
 //LIC// You should have received a copy of the GNU Lesser General Public
 //LIC// License along with this library; if not, write to the Free Software
 //LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
 //LIC// 02110-1301  USA.
-//LIC// 
+//LIC//
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
-//LIC// 
+//LIC//
 //LIC//====================================================================
 //Driver for a simple 1D poisson problem
 
@@ -48,7 +48,7 @@ using namespace oomph;
 namespace FishSolnOneDPoisson
 {
 
- /// \short Sign of the source function 
+ /// \short Sign of the source function
  /// (- gives the upper half of the fish, + the lower half)
  int Sign=-1;
 
@@ -60,7 +60,7 @@ namespace FishSolnOneDPoisson
  }
 
 
- /// Source function required to make the fish shape an exact solution 
+ /// Source function required to make the fish shape an exact solution
  void source_function(const Vector<double>& x, double& source)
  {
   source = double(Sign)*30.0*sin(sqrt(30.0)*x[0]);
@@ -77,14 +77,14 @@ namespace FishSolnOneDPoisson
 //==start_of_problem_class============================================
 /// 1D Poisson problem in unit interval.
 //====================================================================
-template<class ELEMENT> 
+template<class ELEMENT>
 class OneDPoissonProblem : public Problem
 {
 
 public:
 
  /// Constructor: Pass number of elements and pointer to source function
- OneDPoissonProblem(const unsigned& n_element, 
+ OneDPoissonProblem(const unsigned& n_element,
                     PoissonEquations<1>::PoissonSourceFctPt source_fct_pt);
 
  /// Destructor (empty -- all the cleanup is done in the base class)
@@ -114,28 +114,28 @@ private:
 //=====start_of_constructor===============================================
 /// \short Constructor for 1D Poisson problem in unit interval.
 /// Discretise the 1D domain with n_element elements of type ELEMENT.
-/// Specify function pointer to source function. 
+/// Specify function pointer to source function.
 //========================================================================
 template<class ELEMENT>
 OneDPoissonProblem<ELEMENT>::OneDPoissonProblem(const unsigned& n_element,
- PoissonEquations<1>::PoissonSourceFctPt source_fct_pt) : 
+ PoissonEquations<1>::PoissonSourceFctPt source_fct_pt) :
  Source_fct_pt(source_fct_pt)
-{ 
- // Set domain length 
+{
+ // Set domain length
  double L=1.0;
 
  // Build mesh and store pointer in Problem
  Problem::mesh_pt() = new OneDMesh<ELEMENT>(n_element,L);
 
  // Set the boundary conditions for this problem: By default, all nodal
- // values are free -- we only need to pin the ones that have 
- // Dirichlet conditions. 
+ // values are free -- we only need to pin the ones that have
+ // Dirichlet conditions.
 
- // Pin the single nodal value at the single node on mesh 
+ // Pin the single nodal value at the single node on mesh
  // boundary 0 (= the left domain boundary at x=0)
  mesh_pt()->boundary_node_pt(0,0)->pin(0);
- 
- // Pin the single nodal value at the single node on mesh 
+
+ // Pin the single nodal value at the single node on mesh
  // boundary 1 (= the right domain boundary at x=1)
  mesh_pt()->boundary_node_pt(1,0)->pin(0);
 
@@ -146,12 +146,12 @@ OneDPoissonProblem<ELEMENT>::OneDPoissonProblem(const unsigned& n_element,
   {
    // Upcast from GeneralisedElement to the present element
    ELEMENT *elem_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
-   
+
    //Set the source function pointer
    elem_pt->source_fct_pt() = Source_fct_pt;
   }
 
- 
+
  // Setup equation numbering scheme
  assign_eqn_numbers();
 
@@ -162,12 +162,12 @@ OneDPoissonProblem<ELEMENT>::OneDPoissonProblem(const unsigned& n_element,
 
 //===start_of_actions_before_newton_solve========================================
 /// \short Update the problem specs before solve: (Re)set boundary values
-/// from the exact solution. 
+/// from the exact solution.
 //========================================================================
 template<class ELEMENT>
 void OneDPoissonProblem<ELEMENT>::actions_before_newton_solve()
 {
- 
+
  // Assign boundary values for this problem by reading them out
  // from the exact solution.
 
@@ -178,12 +178,12 @@ void OneDPoissonProblem<ELEMENT>::actions_before_newton_solve()
  // requires the coordinate in a 1D vector!)
  Vector<double> x(1);
  x[0]=left_node_pt->x(0);
- 
+
  // Boundary value (read in from exact solution which returns
  // the solution in a 1D vector)
  Vector<double> u(1);
  FishSolnOneDPoisson::get_exact_u(x,u);
- 
+
  // Assign the boundary condition to one (and only) nodal value
  left_node_pt->set_value(0,u[0]);
 
@@ -194,15 +194,15 @@ void OneDPoissonProblem<ELEMENT>::actions_before_newton_solve()
 
  // Determine the position of the boundary node
  x[0]=right_node_pt->x(0);
- 
+
  // Boundary value (read in from exact solution which returns
  // the solution in a 1D vector)
  FishSolnOneDPoisson::get_exact_u(x,u);
- 
+
  // Assign the boundary condition to one (and only) nodal value
  right_node_pt->set_value(0,u[0]);
 
- 
+
 } // end of actions before solve
 
 
@@ -212,14 +212,14 @@ void OneDPoissonProblem<ELEMENT>::actions_before_newton_solve()
 //========================================================================
 template<class ELEMENT>
 void OneDPoissonProblem<ELEMENT>::doc_solution(const unsigned& label)
-{ 
+{
 
  ofstream some_file;
  char filename[100];
 
  // Number of plot points
  unsigned npts;
- npts=5; 
+ npts=5;
 
  // Output solution with specified number of plot points per element
  sprintf(filename,"soln%i.dat",label);
@@ -231,7 +231,7 @@ void OneDPoissonProblem<ELEMENT>::doc_solution(const unsigned& label)
  // see how well the solutions agree between nodal points)
  sprintf(filename,"exact_soln%i.dat",label);
  some_file.open(filename);
- mesh_pt()->output_fct(some_file,20*npts,FishSolnOneDPoisson::get_exact_u); 
+ mesh_pt()->output_fct(some_file,20*npts,FishSolnOneDPoisson::get_exact_u);
  some_file.close();
 
  // Doc pointwise error and compute norm of error and of the solution
@@ -239,17 +239,17 @@ void OneDPoissonProblem<ELEMENT>::doc_solution(const unsigned& label)
  sprintf(filename,"error%i.dat",label);
  some_file.open(filename);
  mesh_pt()->compute_error(some_file,FishSolnOneDPoisson::get_exact_u,
-                          error,norm); 
+                          error,norm);
  some_file.close();
 
  // Doc error norm:
- cout << "\nNorm of error    : " << sqrt(error) << std::endl; 
+ cout << "\nNorm of error    : " << sqrt(error) << std::endl;
  cout << "Norm of solution : " << sqrt(norm) << std::endl << std::endl;
  cout << std::endl;
 
 } // end of doc
 
- 
+
 
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
@@ -264,7 +264,7 @@ void OneDPoissonProblem<ELEMENT>::doc_solution(const unsigned& label)
 int main()
 {
 
- // Set up the problem: 
+ // Set up the problem:
  // Solve a 1D Poisson problem using a source function that generates
  // a fish shaped exact solution
  unsigned n_element=40; //Number of elements
@@ -273,14 +273,14 @@ int main()
 
  // Check whether the problem can be solved
  cout << "\n\n\nProblem self-test ";
- if (problem.self_test()==0)  
+ if (problem.self_test()==0)
   {
    cout << "passed: Problem can be solved." << std::endl;
   }
- else 
+ else
   {
    throw OomphLibError("failed!",
-                       "main()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -306,14 +306,5 @@ int main()
 
  //Output solution for this case (label output files with "1")
  problem.doc_solution(1);
-  
+
 } // end of main
-
-
-
-
-
-
-
-
-

@@ -42,7 +42,7 @@ namespace oomph
       std::ostringstream error_msg;
       error_msg << "Pinned equation numbers do not relate to nodes.";
       throw OomphLibError(error_msg.str(),
-                          "NodeGlobalNumbersLookup::global_to_node",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
 #endif
@@ -121,7 +121,7 @@ namespace oomph
       std::ostringstream error_msg;
       error_msg << "Must set up Node_to_global_mapping first.";
       throw OomphLibError(error_msg.str(),
-                          "NodeGlobalNumbersLookup::construct_reverse_mapping",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
 #endif
@@ -322,7 +322,7 @@ namespace oomph
         > added_matrix_pt_in->nrow())
      {
       throw OomphLibError("Row mapping size should be less than or equal to nrow (less than if it is a sparse matrix and there are some empty rows).",
-                          "SumOfMatrices::add_matrix",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
 
@@ -330,7 +330,7 @@ namespace oomph
         > added_matrix_pt_in->ncol())
      {
       throw OomphLibError("Col mapping size should be less than or equal to ncol (less than if it is a sparse matrix and there are some empty cols).",
-                          "SumOfMatrices::add_matrix",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
 #endif
@@ -385,7 +385,7 @@ namespace oomph
   double& entry(const unsigned long& i, const unsigned long& j) const
    {
     throw OomphLibError("Broken write to entry: it does not make sense to write to a sum, you must write to one of the component matrices.",
-                        "non-constant SumOfMatrices::operator()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 
@@ -420,7 +420,7 @@ namespace oomph
     std::ostringstream error_msg;
     error_msg << "Function not yet implemented.";
     throw OomphLibError(error_msg.str(),
-                        "SumOfMatrices::multiply_transpose",
+OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
 
     // Possible implementations (not really thought through):

@@ -70,7 +70,7 @@ void MatrixBasedDiagPreconditioner::setup()
       {
        throw OomphLibError(
         "Zero diagonal in matrix --> Cannot use diagonal preconditioner.",
-        "MatrixBasedDiagPreconditioner::setup()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
       }
 #endif
@@ -99,7 +99,7 @@ void MatrixBasedDiagPreconditioner::setup()
       {
        throw OomphLibError(
         "Zero diagonal in matrix --> Cannot use diagonal preconditioner.",
-        "MatrixBasedDiagPreconditioner::setup()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
       }
      else
@@ -131,7 +131,7 @@ void MatrixBasedDiagPreconditioner::setup()
      << "(this is the same as the matrix passed to setup())";
     throw OomphLibError
      (error_message_stream.str(),
-      "MatrixBasedDiagPreconditioner::preconditioner_solve()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
    }
   if (z.built())
@@ -144,7 +144,7 @@ void MatrixBasedDiagPreconditioner::setup()
        << "same distribution as the r vector (and preconditioner).";
       throw OomphLibError
        (error_message_stream.str(),
-        "MatrixBasedDiagPreconditioner::preconditioner_solve()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
      }
    }
@@ -286,7 +286,7 @@ void MatrixBasedLumpedPreconditioner<MATRIX>::preconditioner_solve(
      << "(this is the same as the matrix passed to setup())";
     throw OomphLibError
      (error_message_stream.str(),
-      "MatrixBasedLumpedPreconditioner::preconditioner_solve()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
    }
   if (z.built())
@@ -299,7 +299,7 @@ void MatrixBasedLumpedPreconditioner<MATRIX>::preconditioner_solve(
        << "same distribution as the r vector (and preconditioner).";
       throw OomphLibError
        (error_message_stream.str(),
-        "MatrixBasedLumpedPreconditioner::preconditioner_solve()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
      }
    }
@@ -334,7 +334,7 @@ template class MatrixBasedLumpedPreconditioner<CRDoubleMatrix>;
      std::ostringstream error_msg;
      error_msg << "Failed to conver matrix_pt to CCDoubleMatrix*.";
      throw OomphLibError(error_msg.str(),
-                         "ILUZeroPreconditioner<CCDoubleMatrix>::setup",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -478,7 +478,7 @@ void ILUZeroPreconditioner<CRDoubleMatrix>::setup()
      std::ostringstream error_msg;
      error_msg << "Failed to conver matrix_pt to CRDoubleMatrix*.";
      throw OomphLibError(error_msg.str(),
-                         "ILUZeroPreconditioner<CRDoubleMatrix>::setup",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
    }
 #endif

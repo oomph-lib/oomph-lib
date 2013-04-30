@@ -135,7 +135,7 @@ public:
   {
    throw OomphLibError(
     "There is no time-dependent output_fct() for Poisson elements ",
-    "PoissonEquations<DIM>::output_fct()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -153,7 +153,7 @@ public:
   {
    throw OomphLibError(
     "There is no time-dependent compute_error() for Poisson elements",
-    "PoissonEquations<DIM>::compute_error()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -670,7 +670,7 @@ class FaceGeometry<QPoissonElement<1,NNODE_1D> >:
        << " than " << fld << std::endl;
       throw OomphLibError(
        error_stream.str(),
-       "ProjectablePoissonElement::data_values_of_field()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif
@@ -709,7 +709,7 @@ class FaceGeometry<QPoissonElement<1,NNODE_1D> >:
        << " than " << fld << std::endl;
       throw OomphLibError(
        error_stream.str(),
-       "ProjectablePoissonElement::nhistory_values_for_projection()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif
@@ -738,7 +738,7 @@ class FaceGeometry<QPoissonElement<1,NNODE_1D> >:
        << " than " << fld << std::endl;
       throw OomphLibError(
        error_stream.str(),
-       "ProjectablePoissonElement::jacobian_and_shape_of_field()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif
@@ -768,7 +768,7 @@ class FaceGeometry<QPoissonElement<1,NNODE_1D> >:
        << " than " << fld << std::endl;
       throw OomphLibError(
        error_stream.str(),
-       "ProjectablePoissonElement::jget_field()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif
@@ -808,7 +808,7 @@ class FaceGeometry<QPoissonElement<1,NNODE_1D> >:
        << " than " << fld << std::endl;
       throw OomphLibError(
        error_stream.str(),
-       "ProjectablePoissonElement::nvalue_of_field()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif
@@ -829,7 +829,7 @@ class FaceGeometry<QPoissonElement<1,NNODE_1D> >:
        << " than " << fld << std::endl;
       throw OomphLibError(
        error_stream.str(),
-       "ProjectablePoissonElement::local_equation()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif

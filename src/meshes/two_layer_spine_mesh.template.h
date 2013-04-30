@@ -174,7 +174,7 @@ public:
      error_message << "Unknown id passed to spine_node_update " << id 
                    << std::endl;
      throw OomphLibError(error_message.str(),
-                         "TwoLayerSpineMesh::spine_node_update()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }

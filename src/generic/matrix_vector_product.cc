@@ -105,7 +105,7 @@ namespace oomph
     error_message_stream 
      << "The distribution of the vector x must be setup";
     throw OomphLibError(error_message_stream.str(),
-                        "MatrixVectorProduct::multiply()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 
@@ -117,7 +117,7 @@ namespace oomph
      << "This class assumes that the x vector has a uniform "
      << "distributed distribution.";
     throw OomphLibError(error_message_stream.str(),
-                        "MatrixVectorProduct::multiply()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
   // if y is setup then it should have the same distribution as x
@@ -130,7 +130,7 @@ namespace oomph
        << "The y vector is setup and therefore must have the same "
        << "distribution as the vector x";
       throw OomphLibError(error_message_stream.str(),
-                          "MatrixVectorProduct::multiply()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
    }
@@ -171,7 +171,7 @@ namespace oomph
     error_message_stream 
      << "The distribution of the vector x must be setup";
     throw OomphLibError(error_message_stream.str(),
-                        "MatrixVectorProduct::multiply()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
   // Check to see if x.size() = ncol()
@@ -182,7 +182,7 @@ namespace oomph
      << "This class assumes that the y vector has a uniform "
      << "distributed distribution.";
     throw OomphLibError(error_message_stream.str(),
-                        "MatrixVectorProduct::multiply()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
   // if y is setup then it should have the same distribution as x
@@ -195,7 +195,7 @@ namespace oomph
        << "The y vector is setup and therefore must have the same "
        << "distribution as the vector x";
       throw OomphLibError(error_message_stream.str(),
-                          "MatrixVectorProduct::multiply()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
    }
@@ -256,7 +256,7 @@ namespace oomph
      << "Epetra Matrix Vector Multiply Error : epetra_error_flag = " 
      << epetra_error_flag;
     throw OomphLibError(error_message.str(),
-                        "TrilinosHelpersMPI::multiply(...)",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -303,7 +303,7 @@ namespace oomph
      << "Epetra Matrix Vector Multiply Error : epetra_error_flag = " 
      << epetra_error_flag;
     throw OomphLibError(error_message.str(),
-                        "TrilinosHelpersMPI::multiply(...)",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif

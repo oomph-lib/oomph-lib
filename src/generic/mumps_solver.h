@@ -302,8 +302,8 @@ class NewMumpsPreconditioner : public Preconditioner
      error_message_stream                                        
       << "NewMumpsPreconditioner can only be applied to matrices derived \n"
       << "DistributableLinearAlgebraObject.\n";
-     throw OomphLibError(error_message_stream.str(),     
-                         "NewMumpsPreconditioner::setup()",             
+     throw OomphLibError(error_message_stream.str(),
+                         OOMPH_CURRENT_FUNCTION,             
                          OOMPH_EXCEPTION_LOCATION);        
     }
   }

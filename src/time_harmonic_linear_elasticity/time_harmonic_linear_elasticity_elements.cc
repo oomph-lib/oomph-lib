@@ -60,7 +60,7 @@ namespace oomph
                   << strain.nrow() << ", but dimension of the equations is " 
                   << DIM << std::endl;
     throw OomphLibError(error_message.str(),
-                        "TimeHarmonicLinearElasticityEquationsBase<DIM>::get_strain()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
   
@@ -71,7 +71,7 @@ namespace oomph
    {
     throw OomphLibError(
      "TimeHarmonicLinearElasticity is not yet implemented for more than one position type",
-     "TimeHarmonicLinearElasticityEquationsBase<DIM>::get_strain()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -166,7 +166,7 @@ get_stress(const Vector<double> &s,
                  << stress.nrow() << ", but dimension of the equations is " 
                  << DIM << std::endl;
    throw OomphLibError(error_message.str(),
-                       "TimeHarmonicLinearElasticityEquationsBase<DIM>::get_stress()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -215,7 +215,7 @@ get_stress(const Vector<double> &s,
    {
     throw OomphLibError(
      "TimeHarmonicLinearElasticity is not yet implemented for more than one position type",
-     "TimeHarmonicLinearElasticityEquationsBase<DIM>::fill_in_generic_contribution_to_residuals_lin_elast()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
 
@@ -224,7 +224,7 @@ get_stress(const Vector<double> &s,
    {
     throw OomphLibError(
      "No elasticity tensor set.",
-     "TimeHarmonicLinearElasticityEquationsBase<DIM>::fill_in_generic_contribution_to_residuals_lin_elast()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
 #endif

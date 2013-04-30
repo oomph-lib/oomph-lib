@@ -168,7 +168,7 @@ public :
     {
      throw OomphLibError(
       "Trouble in building quadtree forest ",
-      "RefineableFullCircleMesh::RefineableFullCircleMesh()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
 #endif

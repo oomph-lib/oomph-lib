@@ -401,7 +401,7 @@ template<class EXT_ELEMENT>
          {
           throw OomphLibError(
            "Failed to cast new node to boundary node\n",
-           "Missing_masters_functions::add_external_halo_master_node_helper()",
+           OOMPH_CURRENT_FUNCTION,
            OOMPH_EXCEPTION_LOCATION);
          }
 #endif
@@ -621,7 +621,7 @@ template<class EXT_ELEMENT>
          {
           throw OomphLibError(
            "Failed to cast new node to boundary node\n",
-           "Missing_masters_functions::construct_new_external_halo_master_node_helper()",
+           OOMPH_CURRENT_FUNCTION,
            OOMPH_EXCEPTION_LOCATION);
          }
 #endif
@@ -764,7 +764,7 @@ template<class EXT_ELEMENT>
                        << "yet been implemented.\n";
           throw OomphLibError
            (error_stream.str(),
-            "Missing_masters_functions::construct_new_external_halo_master_...()",
+            OOMPH_CURRENT_FUNCTION,
             OOMPH_EXCEPTION_LOCATION);
          }
        }
@@ -908,7 +908,7 @@ template<class EXT_ELEMENT>
        {
         throw OomphLibError(
          "Failed to cast new node to boundary node\n",
-         "Missing_masters_functions::construct_new_external_halo_master_node_helper()",
+         OOMPH_CURRENT_FUNCTION,
          OOMPH_EXCEPTION_LOCATION);
        }
 #endif
@@ -1057,7 +1057,7 @@ template<class EXT_ELEMENT>
          {
           throw OomphLibError(
            "Failed to cast new node to boundary node\n",
-           "Missing_masters_functions::construct_new_external_halo_master_node_helper()",
+           OOMPH_CURRENT_FUNCTION,
            OOMPH_EXCEPTION_LOCATION);
          }
 #endif

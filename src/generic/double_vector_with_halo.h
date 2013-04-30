@@ -125,7 +125,7 @@ public:
      error_stream << "Global equation " << global_eqn << " "
                   << "has not been set as halo\n";
      throw OomphLibError(error_stream.str(),
-                         "DoubleVectorHaloScheme::local_index()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
      return 0;
     }
@@ -244,7 +244,7 @@ class DoubleVectorWithHaloEntries : public DoubleVector
           "Problem::setup_dof_halo_scheme()\n";
          
          throw OomphLibError(error_stream.str(),
-                             "DoubleVectorWithHaloEntries::global_value()",
+                             OOMPH_CURRENT_FUNCTION,
                              OOMPH_EXCEPTION_LOCATION);
         }
 #endif
@@ -291,7 +291,7 @@ class DoubleVectorWithHaloEntries : public DoubleVector
           "Problem::setup_dof_halo_scheme()\n";
          
          throw OomphLibError(error_stream.str(),
-                             "DoubleVectorWithHaloEntries::global_value()",
+                             OOMPH_CURRENT_FUNCTION,
                              OOMPH_EXCEPTION_LOCATION);
         }
 #endif

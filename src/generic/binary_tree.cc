@@ -71,7 +71,7 @@ namespace oomph
      << "\nBinaryTree::OMEGA=" << BinaryTree::OMEGA 
      << std::endl;
     throw OomphLibError(error_stream.str(),
-                        "BinaryTree::setup_static_data()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -162,7 +162,7 @@ namespace oomph
                  << " is not L or R" << std::endl;
 
     throw OomphLibError(error_stream.str(),
-                        "BinaryTree:gteq_edge_neighbour()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -247,7 +247,7 @@ namespace oomph
                  << " is not L or R" << std::endl;
 
     throw OomphLibError(error_stream.str(),
-                        "BinaryTree:gteq_edge_neighbour()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -437,7 +437,7 @@ namespace oomph
    {
     throw OomphLibError(
      "Trying to setup the neighbour scheme for an empty forest\n",
-     "BinaryTreeForest::find_neighbours()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
 
@@ -565,7 +565,7 @@ namespace oomph
          }
         
         throw OomphLibError(error_stream.str(),
-                            "BinaryTreeForest::check_all_neighbours()",
+                            OOMPH_CURRENT_FUNCTION,
                             OOMPH_EXCEPTION_LOCATION);
    }
   else

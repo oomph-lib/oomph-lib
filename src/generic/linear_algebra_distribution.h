@@ -248,7 +248,7 @@ class LinearAlgebraDistribution
     { 
      throw OomphLibError(
       "LinearAlgebraDistribution has not been built : Comm_pt == 0.",
-      "LinearAlgebraDistribution::nrow_local()",     
+      OOMPH_CURRENT_FUNCTION,     
       OOMPH_EXCEPTION_LOCATION);
     }                 
    if (p >= unsigned(Comm_pt->nproc()))
@@ -258,7 +258,7 @@ class LinearAlgebraDistribution
       << "Requested nrow_local(" << p << "), but this distribution is defined "
       << "on " << Comm_pt->nproc() << "processors.";  
      throw OomphLibError(error_message.str(),
-                         "LinearAlgebraDistribution::nrow_local()",     
+                         OOMPH_CURRENT_FUNCTION,     
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -286,7 +286,7 @@ class LinearAlgebraDistribution
     { 
      throw OomphLibError
       ("LinearAlgebraDistribution has not been built : Comm_pt == 0.",
-       "LinearAlgebraDistribution::first_row()",     
+       OOMPH_CURRENT_FUNCTION,     
        OOMPH_EXCEPTION_LOCATION);
     }                                             
 #endif 
@@ -314,7 +314,7 @@ class LinearAlgebraDistribution
     { 
      throw OomphLibError
       ("LinearAlgebraDistribution has not been built : Comm_pt == 0.",
-       "LinearAlgebraDistribution::first_row()",     
+       OOMPH_CURRENT_FUNCTION,     
        OOMPH_EXCEPTION_LOCATION);
     }                  
    if (p >= unsigned(Comm_pt->nproc()))
@@ -324,7 +324,7 @@ class LinearAlgebraDistribution
       << "Requested first_row(" << p << "), but this distribution is defined "
       << "on " << Comm_pt->nproc() << "processors.";  
      throw OomphLibError(error_message.str(),
-                         "LinearAlgebraDistribution::first_row()",     
+                         OOMPH_CURRENT_FUNCTION,     
                          OOMPH_EXCEPTION_LOCATION);
     }
                                          
@@ -390,7 +390,7 @@ class LinearAlgebraDistribution
     {
      throw OomphLibError
       ("Requested global row outside the number of global rows",
-       "LinearAlgebraDistribution::global_to_local_row_map()",     
+       OOMPH_CURRENT_FUNCTION,     
        OOMPH_EXCEPTION_LOCATION);      
     }
 #endif

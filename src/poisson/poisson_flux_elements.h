@@ -70,7 +70,7 @@ public:
   {
    throw OomphLibError(
     "Don't call empty constructor for PoissonFluxElement",
-    "PoissonFluxElement::PoissonFluxElement()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -301,7 +301,7 @@ PoissonFluxElement(FiniteElement* const &bulk_el_pt,
         "If you desire this functionality, you must implement it yourself\n";
        
        throw OomphLibError(error_string,
-                           "PoissonFluxElement::PoissonFluxElement()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
      //Otherwise read out the value
@@ -330,7 +330,7 @@ PoissonFluxElement(FiniteElement* const &bulk_el_pt,
         "If you desire this functionality, you must implement it yourself\n";
        
        throw OomphLibError(error_string,
-                        "PoissonFluxElement::PoissonFluxElement()",
+                           OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
       }
      else
@@ -358,7 +358,7 @@ PoissonFluxElement(FiniteElement* const &bulk_el_pt,
         "If you desire this functionality, you must implement it yourself\n";
        
        throw OomphLibError(error_string,
-                        "PoissonFluxElement::PoissonFluxElement()",
+                           OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
        
       }
@@ -377,7 +377,7 @@ PoissonFluxElement(FiniteElement* const &bulk_el_pt,
                   << ". It should be 1,2, or 3!" << std::endl;
      
      throw OomphLibError(error_stream.str(),
-                         "PoissonFluxElement::PoissonFluxElement()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
      break;
     }

@@ -406,7 +406,7 @@ void DGFaceElement::add_flux_contributions(Vector<double> &residuals,
       "that this information is included in the jacobian\n";
       
      throw OomphLibError(error_stream.str(),
-      "DGFaceElement::add_flux_contributions()",
+                         OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
   }
@@ -597,7 +597,7 @@ get_inverse_mass_matrix_times_residuals(Vector<double> &minv_res)
     "Do not call Problem::enable_discontinuous_formulation()\n";
 
    throw OomphLibError(error_stream.str(),
-                       "DGElement::get_inverse_mass_matrix_times_residuals()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -691,7 +691,7 @@ void DGElement::slope_limit(SlopeLimiter* const &slope_limiter_pt)
    error_stream <<"Slope limiting is not implemented for this dimension: "
                 << n_dim;
    throw OomphLibError(error_stream.str(),
-                       "DGElement::slope_limit()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
   }

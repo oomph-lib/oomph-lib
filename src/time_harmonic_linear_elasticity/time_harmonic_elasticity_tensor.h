@@ -103,7 +103,7 @@ class TimeHarmonicElasticityTensor
       
       //Throw the error
       throw OomphLibError(error_message.str(),
-                          "ElasticityTensor::range_check()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
    }

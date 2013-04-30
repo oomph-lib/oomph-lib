@@ -235,7 +235,7 @@ void BrickMeshBase::setup_boundary_element_info(std::ostream &outfile)
             {
              throw OomphLibError(
               "Trouble: Multiple boundary identifiers!\n",
-              "BrickMeshBase::setup_boundary_element_info()",
+              OOMPH_CURRENT_FUNCTION,
               OOMPH_EXCEPTION_LOCATION);
             }
            found=true;
@@ -296,7 +296,7 @@ void BrickMeshBase::setup_boundary_element_info(std::ostream &outfile)
         default:
          
          throw OomphLibError("Never get here",
-                             "BrickMeshBase::setup_boundary_element_info()",
+                             OOMPH_CURRENT_FUNCTION,
                              OOMPH_EXCEPTION_LOCATION);
         }
        

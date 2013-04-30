@@ -316,7 +316,8 @@ public:
      function_name += 
       "MacroElementNodeUpdateRefineableQuaterCircleSectorMesh()";
 
-     throw OomphLibError(error_message.str(),function_name,
+     throw OomphLibError(error_message.str(),
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    delete el_pt;
@@ -351,7 +352,8 @@ public:
       "MacroElementNodeUpdateRefineableQuaterCircleSectorMesh::\n";
      function_name += "node_update()";
 
-     throw OomphLibError(error_message,function_name,
+     throw OomphLibError(error_message,
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -388,7 +390,8 @@ public:
         "MacroElementNodeUpdateRefineableQuaterCircleSectorMesh::\n";
        function_name += "setup_macro_element_node_update()";
        
-       throw OomphLibError(error_message.str(),function_name,
+       throw OomphLibError(error_message.str(),
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
 #endif       
@@ -505,7 +508,8 @@ public:
       " AlgebraicRefineableQuarterCircleSectorMesh::\n";
      function_name += "AlgebraicRefineableQuarterCircleSectorMesh()";
      
-     throw OomphLibError(error_message.str(),function_name,
+     throw OomphLibError(error_message.str(),
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    delete el_pt;
@@ -544,7 +548,8 @@ public:
       " AlgebraicRefineableQuarterCircleSectorMesh::";
      function_name += "node_update()";
      
-     throw OomphLibError(error_message,function_name,
+     throw OomphLibError(error_message,
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -598,7 +603,8 @@ public:
       " AlgebraicRefineableQuarterCircleSectorMesh::";
      function_name += "algebraic_node_update()";
      
-     throw OomphLibError(error_message.str(),function_name,
+     throw OomphLibError(error_message.str(),
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -653,7 +659,8 @@ public:
         " AlgebraicRefineableQuarterCircleSectorMesh::";
        function_name += "update_node_update()";
        
-       throw OomphLibError(error_message.str(),function_name,
+       throw OomphLibError(error_message.str(),
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
     }

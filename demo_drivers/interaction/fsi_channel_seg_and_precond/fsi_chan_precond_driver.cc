@@ -266,7 +266,7 @@ PreconditionedFSICollapsibleChannelProblem(const unsigned& nup,
         error_stream << "Error: Wrong solver_sub_flag: " 
                      << solver_sub_flag << std::endl;
         throw OomphLibError(error_stream.str(),
-                            "PreconditionedFSICollapsibleChannelProblem::Constructor()",
+                            OOMPH_CURRENT_FUNCTION,
                             OOMPH_EXCEPTION_LOCATION);
         break;
         
@@ -368,7 +368,7 @@ PreconditionedFSICollapsibleChannelProblem(const unsigned& nup,
         error_stream << "Error: Wrong solver_sub_flag: " 
                      << solver_sub_flag << std::endl;
         throw OomphLibError(error_stream.str(),
-                            "PreconditionedFSICollapsibleChannelProblem::Constructor()",
+                            OOMPH_CURRENT_FUNCTION,
                             OOMPH_EXCEPTION_LOCATION);
         break;
 
@@ -504,7 +504,7 @@ PreconditionedFSICollapsibleChannelProblem(const unsigned& nup,
         error_stream << "Error: Wrong solver_sub_flag: " 
                      << solver_sub_flag << std::endl;
         throw OomphLibError(error_stream.str(),
-                            "PreconditionedFSICollapsibleChannelProblem::Constructor()",
+                            OOMPH_CURRENT_FUNCTION,
                             OOMPH_EXCEPTION_LOCATION);
         break;
 
@@ -525,7 +525,7 @@ PreconditionedFSICollapsibleChannelProblem(const unsigned& nup,
      error_stream << "Error: Wrong solver_flag: " 
                   << solver_flag << std::endl;
      throw OomphLibError(error_stream.str(),
-                         "PreconditionedFSICollapsibleChannelProblem::Constructor()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
      break;
     }

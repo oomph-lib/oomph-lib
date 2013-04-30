@@ -75,7 +75,7 @@ namespace oomph
   if (broken)
    {
     throw OomphLibError(error_stream.str(),
-                        "TriangleScaffoldMesh::check_mesh_integrity()()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
   
@@ -113,7 +113,7 @@ namespace oomph
      << n_local_node << "-noded triangles" << std::endl;
 
     throw OomphLibError(error_stream.str(),
-                        "TriangleScaffoldMesh::TriangleScaffoldMesh()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
    
@@ -199,7 +199,7 @@ namespace oomph
   if(dimension!=2)
    {
     throw OomphLibError("The dimension must be 2\n",
-                        "TriangleScaffoldMesh::TriangleScaffoldMesh()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -540,7 +540,7 @@ namespace oomph
        {
         throw OomphLibError(
          "Nodes in scaffold mesh share more than one global edge",
-         "TriangleScaffoldMesh::TriangleScaffoldMesh()",
+         OOMPH_CURRENT_FUNCTION,
          OOMPH_EXCEPTION_LOCATION);
        }
       
@@ -595,7 +595,7 @@ namespace oomph
   if (broken)
    {
     throw OomphLibError(error_stream.str(),
-                        "TriangleScaffoldMesh::TriangleScaffoldMesh()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 
@@ -628,7 +628,7 @@ namespace oomph
      << n_local_node << "-noded triangles" << std::endl;
     
     throw OomphLibError(error_stream.str(),
-                        "TriangleScaffoldMesh::TriangleScaffoldMesh()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 
@@ -909,7 +909,7 @@ namespace oomph
        {
         throw OomphLibError(
          "Nodes in scaffold mesh share more than one global edge",
-         "TriangleScaffoldMesh::TriangleScaffoldMesh()",
+         OOMPH_CURRENT_FUNCTION,
          OOMPH_EXCEPTION_LOCATION);
        }
 
@@ -965,7 +965,7 @@ namespace oomph
   if (broken)
    {
     throw OomphLibError(error_stream.str(),
-                        "TriangleScaffoldMesh::TriangleScaffoldMesh()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 

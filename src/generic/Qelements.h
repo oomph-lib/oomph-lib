@@ -217,7 +217,7 @@ class QElementBase : public virtual QElementGeometricBase
    if (S_macro_ll_pt==0)
     {
      throw OomphLibError("S_macro_ll_pt has not been set\n",
-                         "QElementBase::s_macro_ll()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif   
@@ -234,7 +234,7 @@ class QElementBase : public virtual QElementGeometricBase
    if (S_macro_ur_pt==0)
     {
      throw OomphLibError("S_macro_ur_pt has not been set\n",
-                         "QElementBase::s_macro_ur()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif   
@@ -251,7 +251,7 @@ class QElementBase : public virtual QElementGeometricBase
    if (S_macro_ll_pt==0)
     {
      throw OomphLibError("S_macro_ll_pt has not been set\n",
-                         "QElementBase::s_macro_ll()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif   
@@ -268,7 +268,7 @@ class QElementBase : public virtual QElementGeometricBase
    if (S_macro_ur_pt==0)
     {
      throw OomphLibError("S_macro_ur_pt has not been set\n",
-                         "QElementBase::s_macro_ur()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif   
@@ -285,7 +285,7 @@ class QElementBase : public virtual QElementGeometricBase
     {
      throw OomphLibError(
       "Macro Element pointer not set in this element\n",
-      "QElementBase::get_x_from_macro_element()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
    
@@ -310,7 +310,7 @@ class QElementBase : public virtual QElementGeometricBase
     {
      throw OomphLibError(
       "Macro Element pointer not set in this element\n",
-      "QElementBase::get_x_from_macro_element()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -581,7 +581,7 @@ public:
       " but must be from 0 to 1\n";
      
      throw OomphLibError(error_message.str(),
-                         "QElement::vertex_node_pt()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    return nod_pt;
@@ -794,7 +794,7 @@ public:
       " but must be from 0 to 3\n";
      
      throw OomphLibError(error_message.str(),
-                         "QElement::vertex_node_pt()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    return nod_pt;
@@ -1034,7 +1034,7 @@ public:
      " but must be from 0 to 7\n";
     
     throw OomphLibError(error_message.str(),
-                        "QElement::vertex_node_pt()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
   return nod_pt;

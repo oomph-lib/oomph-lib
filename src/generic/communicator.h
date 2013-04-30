@@ -237,8 +237,8 @@ class OomphCommunicator
      std::ostringstream error_message_stream;                           
      error_message_stream                                        
       << "Attempted to split a serial communicator.";               
-     throw OomphLibError(error_message_stream.str(),                  
-                         "OomphCommunicator::split()",
+     throw OomphLibError(error_message_stream.str(),
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);         
     }
 #endif
@@ -273,8 +273,8 @@ class OomphCommunicator
      std::ostringstream error_message_stream;                           
      error_message_stream                                        
       << "Requested the MPI_Comm object for a serial communicator.";
-     throw OomphLibError(error_message_stream.str(),                  
-                         "OomphCommunicator::mpi_comm()",
+     throw OomphLibError(error_message_stream.str(),
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);         
     }
 #endif

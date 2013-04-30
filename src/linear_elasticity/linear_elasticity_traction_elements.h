@@ -280,7 +280,7 @@ template<class ELEMENT>
    {
     throw OomphLibError(
      "LinearElasticity is not yet implemented for more than one position type",
-     "LinearElasticityEquationsBase<DIM>:: fill_in_contribution_to_residuals_linear_elasticity_traction()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
 #endif

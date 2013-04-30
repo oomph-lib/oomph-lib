@@ -333,7 +333,7 @@ void Mesh::node_update(const bool& update_all_solid_nodes)
                     << std::endl;
 
          throw OomphLibError(err_stream.str(),
-                             "Mesh::node_update()",
+                             OOMPH_CURRENT_FUNCTION,
                              OOMPH_EXCEPTION_LOCATION);
         }
       }
@@ -543,7 +543,7 @@ void Mesh::reorder_nodes()
   {
    throw OomphLibError(
     "Trouble: Number of nodes hasn't stayed constant during reordering!\n",
-    "Mesh::reorder_nodes()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -615,7 +615,7 @@ void Mesh::get_node_reordering(Vector<Node*> &reordering) const
   {
    throw OomphLibError(
                        "Trouble: Number of nodes hasn't stayed constant during reordering!\n",
-                       "Mesh::reorder_nodes()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -1075,7 +1075,7 @@ void Mesh::read(std::ifstream &restart_file)
                 << check_n_node << std::endl;
 
    throw OomphLibError(error_stream.str(),
-                       "Mesh::read()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -1121,7 +1121,7 @@ void Mesh::read(std::ifstream &restart_file)
                     << check_n_internal << std::endl;
 
        throw OomphLibError(error_stream.str(),
-                           "Mesh::read()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
 
@@ -1596,7 +1596,7 @@ void Mesh::convert_to_boundary_node
                 << "How was it created then?" << std::endl;
 
    throw OomphLibError(error_stream.str(),
-                       "Mesh::convert_to_boundary_node()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -1873,7 +1873,7 @@ void Mesh::synchronise_shared_nodes(const bool& report_stats)
   {
    throw OomphLibError(
     "Processor has shared nodes with itself! Something's gone wrong!",
-    "Mesh::synchronise_shared_nodes()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -2130,7 +2130,7 @@ void Mesh::synchronise_shared_nodes(const bool& report_stats)
                       << "; previous one: " << previous_one << "\n"
                       << "Need to rewrite this...\n";
          throw OomphLibError(error_stream.str(),
-                             "Mesh::synchronise_shared_nodes()",
+                             OOMPH_CURRENT_FUNCTION,
                              OOMPH_EXCEPTION_LOCATION);
         }
        previous_one=(*it).first;
@@ -2183,7 +2183,7 @@ void Mesh::synchronise_shared_nodes(const bool& report_stats)
   {
    throw OomphLibError(
     "Processor has shared nodes with itself! Something's gone wrong!",
-    "Mesh::synchronise_shared_nodes()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -2942,7 +2942,7 @@ void Mesh::classify_halo_and_haloed_nodes(DocInfo& doc_info,
                           << ") \n in shared node lookup scheme with processor "
                           << proc_in_charge << " which is in charge.\n";
              throw OomphLibError(error_stream.str(),
-                                 "Mesh::classify_halo_and_haloed_nodes()",
+                                 OOMPH_CURRENT_FUNCTION,
                                  OOMPH_EXCEPTION_LOCATION);
             }
           }
@@ -3213,7 +3213,7 @@ void Mesh::classify_halo_and_haloed_nodes(DocInfo& doc_info,
   {
    throw OomphLibError(
     "Processor has haloed nodes with itself! Something's gone wrong!",
-    "Mesh::classify_halo_and_haloed_nodes()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
  // Has some twit filled in halo nodes with own process?!
@@ -3221,7 +3221,7 @@ void Mesh::classify_halo_and_haloed_nodes(DocInfo& doc_info,
   {
    throw OomphLibError(
     "Processor has halo nodes with itself! Something's gone wrong!",
-    "Mesh::classify_halo_and_haloed_nodes()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
  // Has some twit filled in root haloed elements with own process?!
@@ -3229,7 +3229,7 @@ void Mesh::classify_halo_and_haloed_nodes(DocInfo& doc_info,
   {
    throw OomphLibError(
     "Processor has root haloed elements with itself! Something's gone wrong!",
-    "Mesh::classify_halo_and_haloed_nodes()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
  // Has some twit filled in root halo elements with own process?!
@@ -3237,7 +3237,7 @@ void Mesh::classify_halo_and_haloed_nodes(DocInfo& doc_info,
   {
    throw OomphLibError(
     "Processor has root halo elements with itself! Something's gone wrong!",
-    "Mesh::classify_halo_and_haloed_nodes()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -3367,7 +3367,7 @@ void Mesh::resize_halo_nodes()
                 << dd << " and " << d << ": "
                 << nnod_haloed << " " << nnod_halo << std::endl;
                throw OomphLibError(error_message.str(),
-                                   "Mesh::resize_halo_nodes()",
+                                   OOMPH_CURRENT_FUNCTION,
                                    OOMPH_EXCEPTION_LOCATION);
               }
 
@@ -3384,7 +3384,7 @@ void Mesh::resize_halo_nodes()
                 << dd << " and " << d << ": "
                 << nnod_ext_haloed << " " << nnod_ext_halo << std::endl;
                throw OomphLibError(error_message.str(),
-                                   "Mesh::resize_halo_nodes()",
+                                   OOMPH_CURRENT_FUNCTION,
                                    OOMPH_EXCEPTION_LOCATION);
               }
 #endif
@@ -3444,7 +3444,7 @@ void Mesh::resize_halo_nodes()
                     {
                      throw OomphLibError(
                       "Failed to cast node to boundary node even though we've received data for boundary node",
-                      "Mesh::resize_halo_nodes()",
+                      OOMPH_CURRENT_FUNCTION,
                       OOMPH_EXCEPTION_LOCATION);
                     }
 #endif
@@ -3492,7 +3492,7 @@ void Mesh::resize_halo_nodes()
                           << "Local value: " << (*map_pt)[first_received] << " "
                           << "Received value: " << second_received << std::endl;
                          throw OomphLibError(error_message.str(),
-                                             "Mesh::resize_halo_nodes()",
+                                             OOMPH_CURRENT_FUNCTION,
                                              OOMPH_EXCEPTION_LOCATION);
                         }
 #endif
@@ -4156,7 +4156,7 @@ void Mesh::get_halo_node_stats(double& av_number,
           << " as root halo element\n"
           << std::endl;
          throw OomphLibError(error_message.str(),
-                             "Mesh::distribute()",
+                             OOMPH_CURRENT_FUNCTION,
                              OOMPH_EXCEPTION_LOCATION);
         }
        done[number]=true;
@@ -4286,7 +4286,7 @@ void Mesh::get_halo_node_stats(double& av_number,
             << " as root haloed element\n"
             << std::endl;
            throw OomphLibError(error_message.str(),
-                               "Mesh::distribute()",
+                               OOMPH_CURRENT_FUNCTION,
                                OOMPH_EXCEPTION_LOCATION);
           }
          done[number]=true;
@@ -5306,7 +5306,7 @@ void Mesh::doc_mesh_distribution(DocInfo& doc_info)
               }
              error_message << "\n";
              throw OomphLibError(error_message.str(),
-                                 "Mesh::doc_mesh_distribution()",
+                                 OOMPH_CURRENT_FUNCTION,
                                  OOMPH_EXCEPTION_LOCATION);
             }
           }
@@ -5378,7 +5378,7 @@ void Mesh::doc_mesh_distribution(DocInfo& doc_info)
               }
              error_message << "\n";
              throw OomphLibError(error_message.str(),
-                                 "Mesh::doc_mesh_distribution()",
+                                 OOMPH_CURRENT_FUNCTION,
                                  OOMPH_EXCEPTION_LOCATION);
             }
           }
@@ -5815,7 +5815,7 @@ void Mesh::check_halo_schemes(DocInfo& doc_info,
              error_message
               << "to identify the problem" << std::endl;
              throw OomphLibError(error_message.str(),
-                                 "Mesh::check_halo_schemes()",
+                                 OOMPH_CURRENT_FUNCTION,
                                  OOMPH_EXCEPTION_LOCATION);
             }
 
@@ -5925,7 +5925,7 @@ void Mesh::check_halo_schemes(DocInfo& doc_info,
     << "increase Problem::Max_permitted_error_for_halo_check and re-run \n";
    MPI_Barrier(Comm_pt->mpi_comm());
    throw OomphLibError(error_message.str(),
-                       "Mesh::check_halo_schemes()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -6025,7 +6025,7 @@ void Mesh::check_halo_schemes(DocInfo& doc_info,
                 }
                error_message << "\n";
                throw OomphLibError(error_message.str(),
-                                   "Mesh::check_halo_schemes()",
+                                   OOMPH_CURRENT_FUNCTION,
                                    OOMPH_EXCEPTION_LOCATION);
               }
             }
@@ -6097,7 +6097,7 @@ void Mesh::check_halo_schemes(DocInfo& doc_info,
              error_message
               << "to identify the problem" << std::endl;
              throw OomphLibError(error_message.str(),
-                                 "Mesh::check_halo_schemes()",
+                                 OOMPH_CURRENT_FUNCTION,
                                  OOMPH_EXCEPTION_LOCATION);
             }
 
@@ -6321,7 +6321,7 @@ void Mesh::check_halo_schemes(DocInfo& doc_info,
                       default:
                        throw OomphLibError(
                         "Nodal dimension not equal to 1, 2 or 3\n",
-                        "Mesh::check_halo_schemes()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
                       }
 
@@ -6418,7 +6418,7 @@ void Mesh::check_halo_schemes(DocInfo& doc_info,
 
                  //Throw error
                  throw OomphLibError("Node doesn't exist!",
-                                     "Mesh::check_halo_schemes()",
+OOMPH_CURRENT_FUNCTION,
                                      OOMPH_EXCEPTION_LOCATION);
                 }
 
@@ -6493,7 +6493,7 @@ void Mesh::check_halo_schemes(DocInfo& doc_info,
  if (shout_and_terminate)
   {
    throw OomphLibError("Error in halo checking",
-                       "Mesh::check_halo_schemes()",
+OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -6650,7 +6650,7 @@ void Mesh::check_halo_schemes(DocInfo& doc_info,
              error_message
               << "to identify the problem" << std::endl;
              throw OomphLibError(error_message.str(),
-                                 "Mesh::check_halo_schemes()",
+                                 OOMPH_CURRENT_FUNCTION,
                                  OOMPH_EXCEPTION_LOCATION);
             }
 
@@ -6736,7 +6736,7 @@ void Mesh::check_halo_schemes(DocInfo& doc_info,
     << "If you believe this to be acceptable for your problem\n"
     << "increase Problem::Max_permitted_error_for_halo_check and re-run \n";
    throw OomphLibError(error_message.str(),
-                       "Mesh::check_halo_schemes()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -6909,7 +6909,7 @@ void Mesh::check_halo_schemes(DocInfo& doc_info,
              error_message
               << "to identify the problem" << std::endl;
              throw OomphLibError(error_message.str(),
-                                 "Mesh::check_halo_schemes()",
+                                 OOMPH_CURRENT_FUNCTION,
                                  OOMPH_EXCEPTION_LOCATION);
             }
 
@@ -7131,7 +7131,7 @@ void Mesh::check_halo_schemes(DocInfo& doc_info,
                       default:
                        throw OomphLibError(
                         "Nodal dimension not equal to 1, 2 or 3\n",
-                        "Mesh::check_halo_schemes()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
                       }
 
@@ -7283,7 +7283,7 @@ void Mesh::check_halo_schemes(DocInfo& doc_info,
  if (shout_and_terminate)
   {
    throw OomphLibError("Error in halo checking",
-                       "Mesh::check_halo_schemes()",
+OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 }
@@ -7506,7 +7506,7 @@ unsigned Mesh::ndof_types() const
         << "Element " << i << " has "
         << element_pt(i)->ndof_types() << " DOF types";
        throw OomphLibError(error_message.str(),
-                           "Mesh::ndof_types",
+OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
     }
@@ -7579,7 +7579,7 @@ unsigned Mesh::ndof_types() const
                 }
               }
              throw OomphLibError(error_message.str(),
-                                 "BlockPreconditioner::set_mesh(...)",
+OOMPH_CURRENT_FUNCTION,
                                  OOMPH_EXCEPTION_LOCATION);
             }
 #endif

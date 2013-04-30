@@ -143,7 +143,7 @@ class MatrixBasedLumpedPreconditioner : public Preconditioner
    {
     throw OomphLibError(
      "The preconditioner has not been setup.",
-     "MatrixBasedDiagPreconditioner::positive_matrix()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -161,7 +161,7 @@ class MatrixBasedLumpedPreconditioner : public Preconditioner
    {
     throw OomphLibError(
      "The inverse lumped vector has not been created. Created in setup(...)",
-     "MatrixBasedLumpedPreconditioner::inverse_lumped_vector_pt()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -414,14 +414,14 @@ class InnerIterationPreconditioner : public Preconditioner
     {
      throw OomphLibError(
       "The template argument SOLVER must be of type IterativeLinearSolver",
-      "InnerIterationPreconditioner::InnerIterationPreconditioner()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);     
     }
    if (dynamic_cast<Preconditioner*>(Preconditioner_pt) == 0)
     {
      throw OomphLibError(
       "The template argument PRECONDITIONER must be of type Preconditioner",
-      "InnerIterationPreconditioner::InnerIterationPreconditioner()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);     
     }
 #endif

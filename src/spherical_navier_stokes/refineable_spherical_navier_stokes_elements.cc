@@ -177,7 +177,7 @@ int local_eqn=0, local_unknown=0;
       {
        throw OomphLibError(
         "ALE is not properly implemented for Refineable Spherical NS yet",
-        "RefineableNS::fill_in_contribution",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
 
        //Loop over directions (only DIM (2) of these)

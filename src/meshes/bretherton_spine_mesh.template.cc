@@ -1112,7 +1112,7 @@ find_distance_to_free_surface(GeomObject* const &fs_geom_object_pt,
   if(count > 100) 
    {
     throw OomphLibError("Failed to converge after 100 steps",
-                        "BrethertonSpineMesh::find_distance_to_free_surface()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 

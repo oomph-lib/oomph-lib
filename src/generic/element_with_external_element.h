@@ -486,7 +486,7 @@ class ElementWithExternalElement: public virtual FiniteElement
           << "     ElementWithExternalElement::set_ninteraction(...)\n\n";
          throw OomphLibError(
           error_stream.str(),
-          "ElementWithExternalElement::check_storage_allocated()",
+          OOMPH_CURRENT_FUNCTION,
           OOMPH_EXCEPTION_LOCATION);
         }
     }
@@ -523,7 +523,7 @@ class ElementWithExternalElement: public virtual FiniteElement
      if(range_error)
       {
        throw OomphLibError(error_message.str(),
-                           "ElementWithExternalElement::range_check()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
     }

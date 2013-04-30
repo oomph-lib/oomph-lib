@@ -156,7 +156,7 @@ public:
   {
    throw OomphLibError(
     "There is no time-dependent output_fct() for Helmholtz elements ",
-    "HelmholtzEquations<DIM>::output_fct()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -186,7 +186,7 @@ public:
   {
    throw OomphLibError(
     "There is no time-dependent compute_error() for Helmholtz elements",
-    "HelmholtzEquations<DIM>::compute_error()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -627,7 +627,7 @@ class FaceGeometry<QHelmholtzElement<1,NNODE_1D> >:
        << fld << " is illegal \n";
       throw OomphLibError(
        error_stream.str(),
-       "ProjectableHelmholtzElement::data_values_of_field()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif
@@ -666,7 +666,7 @@ class FaceGeometry<QHelmholtzElement<1,NNODE_1D> >:
        << fld << " is illegal\n";
       throw OomphLibError(
        error_stream.str(),
-       "ProjectableHelmholtzElement::nhistory_values_for_projection()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif
@@ -695,7 +695,7 @@ class FaceGeometry<QHelmholtzElement<1,NNODE_1D> >:
        << fld << " is illegal.\n";
       throw OomphLibError(
        error_stream.str(),
-       "ProjectableHelmholtzElement::jacobian_and_shape_of_field()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif
@@ -725,7 +725,7 @@ class FaceGeometry<QHelmholtzElement<1,NNODE_1D> >:
        << fld << " is illegal\n";
       throw OomphLibError(
        error_stream.str(),
-       "ProjectableHelmholtzElement::jget_field()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif
@@ -775,7 +775,7 @@ class FaceGeometry<QHelmholtzElement<1,NNODE_1D> >:
        << fld << " is illegal\n";
       throw OomphLibError(
        error_stream.str(),
-       "ProjectableHelmholtzElement::nvalue_of_field()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif
@@ -796,7 +796,7 @@ class FaceGeometry<QHelmholtzElement<1,NNODE_1D> >:
        << fld << " is illegal\n";
       throw OomphLibError(
        error_stream.str(),
-       "ProjectableHelmholtzElement::local_equation()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif

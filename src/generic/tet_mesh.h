@@ -135,7 +135,7 @@ class TetgenMeshFacetedSurface : public TetgenMeshClosedSurface
         << Vertex_coordinate[i].size() 
         << "-dimensional coordinates." << std::endl;
        throw OomphLibError(error_stream.str(),
-                           "TetgenMeshPoly::TetgenMeshPoly()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
     }
@@ -173,7 +173,7 @@ class TetgenMeshFacetedSurface : public TetgenMeshClosedSurface
         << Vertex_coordinate[i].size() 
         << "-dimensional coordinates." << std::endl;
        throw OomphLibError(error_stream.str(),
-                           "TetgenMeshPoly::TetgenMeshPoly()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
     }

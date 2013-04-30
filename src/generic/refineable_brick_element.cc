@@ -305,7 +305,7 @@ void  RefineableQElement<3>::get_bcs(int bound,
    
   default :
    throw OomphLibError("Make sure you are not giving  OMEGA as bound",
-                       " RefineableQElement<3>::get_bcs()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 }
@@ -379,7 +379,7 @@ void RefineableQElement<3>::get_face_bcs(const int& face,
    error_stream << "Wrong edge " << face << " passed\n";
 
    throw OomphLibError(error_stream.str(),
-                       "RefineableQElement<3>::get_face_bcs()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -514,7 +514,7 @@ void RefineableQElement<3>::get_boundaries(const int& element,
    break;
   default :
    throw OomphLibError("Make sure you are not giving OMEGA as boundary",
-                       "RefineableQElement<3>::get_boundaries()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -602,7 +602,7 @@ interpolated_zeta_on_face(const unsigned &boundary,
                  << " is not on Left face\n";
      
      throw OomphLibError(error_stream.str(),
-                         "RefineableQElement<3>::interpolated_zeta_on_edge()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -621,7 +621,7 @@ interpolated_zeta_on_face(const unsigned &boundary,
                  << " is not on Right face\n";
      
      throw OomphLibError(error_stream.str(),
-                         "RefineableQElement<3>::interpolated_zeta_on_edge()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -641,7 +641,7 @@ interpolated_zeta_on_face(const unsigned &boundary,
                  << " is not on Bottom face\n";
      
      throw OomphLibError(error_stream.str(),
-                         "RefineableQElement<3>::interpolated_zeta_on_edge()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -659,7 +659,7 @@ interpolated_zeta_on_face(const unsigned &boundary,
                  << " is not on Upper face\n";
      
      throw OomphLibError(error_stream.str(),
-                         "RefineableQElement<3>::interpolated_zeta_on_edge()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -678,7 +678,7 @@ interpolated_zeta_on_face(const unsigned &boundary,
                  << " is not on Back face\n";
      
      throw OomphLibError(error_stream.str(),
-                         "RefineableQElement<3>::interpolated_zeta_on_edge()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -696,7 +696,7 @@ interpolated_zeta_on_face(const unsigned &boundary,
                  << " is not on Front face\n";
      
      throw OomphLibError(error_stream.str(),
-                         "RefineableQElement<3>::interpolated_zeta_on_edge()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -715,7 +715,7 @@ interpolated_zeta_on_face(const unsigned &boundary,
                  << " is not on Front-Left edge\n";
      
      throw OomphLibError(error_stream.str(),
-                         "RefineableQElement<3>::interpolated_zeta_on_edge()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -732,7 +732,7 @@ case LD:
                  << " is not on Bottom-Left edge\n";
      
      throw OomphLibError(error_stream.str(),
-                         "RefineableQElement<3>::interpolated_zeta_on_edge()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -748,7 +748,7 @@ case LU:
                  << " is not on Upper-Left edge\n";
      
      throw OomphLibError(error_stream.str(),
-                         "RefineableQElement<3>::interpolated_zeta_on_edge()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -765,7 +765,7 @@ case LB:
                  << " is not on Back-Left edge\n";
      
      throw OomphLibError(error_stream.str(),
-                         "RefineableQElement<3>::interpolated_zeta_on_edge()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -781,7 +781,7 @@ case LB:
                  << " is not on Front-Right edge\n";
      
      throw OomphLibError(error_stream.str(),
-                         "RefineableQElement<3>::interpolated_zeta_on_edge()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -798,7 +798,7 @@ case RD:
                  << " is not on Bottom-Right edge\n";
      
      throw OomphLibError(error_stream.str(),
-                         "RefineableQElement<3>::interpolated_zeta_on_edge()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -815,7 +815,7 @@ case RU:
                  << " is not on Upper-Right edge\n";
      
      throw OomphLibError(error_stream.str(),
-                         "RefineableQElement<3>::interpolated_zeta_on_edge()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -832,7 +832,7 @@ case RB:
                  << " is not on Back-Right edge\n";
      
      throw OomphLibError(error_stream.str(),
-                         "RefineableQElement<3>::interpolated_zeta_on_edge()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -849,7 +849,7 @@ case DB:
                  << " is not on Back-Bottom edge\n";
      
      throw OomphLibError(error_stream.str(),
-                         "RefineableQElement<3>::interpolated_zeta_on_edge()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -864,7 +864,7 @@ case DB:
                  << " is not on Front-Bottom edge\n";
      
      throw OomphLibError(error_stream.str(),
-                         "RefineableQElement<3>::interpolated_zeta_on_edge()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -880,7 +880,7 @@ case UB:
                  << " is not on Back-Upper edge\n";
      
      throw OomphLibError(error_stream.str(),
-                         "RefineableQElement<3>::interpolated_zeta_on_edge()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -896,7 +896,7 @@ case UB:
                  << " is not on Upper-Front edge\n";
      
      throw OomphLibError(error_stream.str(),
-                         "RefineableQElement<3>::interpolated_zeta_on_edge()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -917,7 +917,7 @@ default:
               << x[0] << " " << x[1] << " " << x[2]
               << "]\n";
  throw OomphLibError(error_stream.str(),
-                     "RefineableQElement<3>::interpolated_zeta_on_edge()",
+                     OOMPH_CURRENT_FUNCTION,
                      OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -1232,7 +1232,7 @@ void RefineableQElement<3>::build(Mesh*& mesh_pt,
       "I have no nodes. Who has created me then?!\n";
 
      throw OomphLibError(error_message,
-                         "RefineableQElement<3>::build()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -1258,7 +1258,7 @@ void RefineableQElement<3>::build(Mesh*& mesh_pt,
     {
      throw OomphLibError(
       "Can't handle generalised nodal positions (yet).",
-      "RefineableQElement<3>::build()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -1309,7 +1309,7 @@ void RefineableQElement<3>::build(Mesh*& mesh_pt,
     {
      throw OomphLibError(
       "Trouble: father_el_pt->node_pt(0)==0\n Can't build son element!\n",
-      "RefineableQElement<3>::build()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
    else
@@ -1353,7 +1353,7 @@ void RefineableQElement<3>::build(Mesh*& mesh_pt,
              {
               throw OomphLibError(
                "Can't handle periodic nodes (yet).",
-               "RefineableQElement<3>::build()",
+               OOMPH_CURRENT_FUNCTION,
                OOMPH_EXCEPTION_LOCATION);
              }
            }
@@ -1466,7 +1466,7 @@ void RefineableQElement<3>::build(Mesh*& mesh_pt,
             {
              throw OomphLibError(
               "boundaries.size()>2 seems a bit strange..\n",
-              "RefineableQElement<3>::build()",
+              OOMPH_CURRENT_FUNCTION,
               OOMPH_EXCEPTION_LOCATION);
             }
 #endif
@@ -1526,7 +1526,7 @@ void RefineableQElement<3>::build(Mesh*& mesh_pt,
                     "during mesh refinement -- this doesn't make sense";
                    
                    throw OomphLibError(error_message,
-                                       "RefineableQElement<3>::build()",
+                                       OOMPH_CURRENT_FUNCTION,
                                        OOMPH_EXCEPTION_LOCATION);
                   }
 #endif
@@ -1697,7 +1697,7 @@ void RefineableQElement<3>::build(Mesh*& mesh_pt,
          error_message += "the son should be too....\n";
          
          throw OomphLibError(error_message,
-                             "RefineableQElement<3>::build()",
+                             OOMPH_CURRENT_FUNCTION,
                              OOMPH_EXCEPTION_LOCATION);
         }
 #endif
@@ -1742,7 +1742,7 @@ void RefineableQElement<3>::build(Mesh*& mesh_pt,
           error_message += "the father should be too....\n";
 
          throw OomphLibError(error_message,
-                             "RefineableQElement<3>::build()",
+                             OOMPH_CURRENT_FUNCTION,
                              OOMPH_EXCEPTION_LOCATION);
         }
 #endif
@@ -1793,7 +1793,7 @@ void RefineableQElement<3>::setup_hanging_nodes(Vector<std::ofstream*>
  if(output_stream.size() != 6)
   {
    throw OomphLibError("There must be six output streams",
-                       "RefineableQElement<3>::setup_hanging_nodes",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -1932,7 +1932,7 @@ oc_hang_helper(const int &value_id,
 
           default:
            throw OomphLibError("my_face not U, D, L, R, B, F\n",
-                               "RefineableQElement<3>::oc_hang_helper()",
+                               OOMPH_CURRENT_FUNCTION,
                                OOMPH_EXCEPTION_LOCATION);
           }
 
@@ -2021,8 +2021,8 @@ oc_hang_helper(const int &value_id,
                    break;
                   default:
                    throw OomphLibError(
-                    "neigh_face not U, D, L, R, B, F\n",
-                    "RefineableQElement<3>::oc_hang_helper()",
+                    "neigh_face not U, L, R, B, F\n",
+                    OOMPH_CURRENT_FUNCTION,
                     OOMPH_EXCEPTION_LOCATION);
                   }
                  
@@ -2428,7 +2428,7 @@ void  RefineableSolidQElement<3>::get_solid_bcs(int bound,
    
   default :
    throw OomphLibError("Make sure you are not giving  OMEGA as bound",
-                       " RefineableSolidQElement<3>::get_solid_bcs()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 }
@@ -2503,7 +2503,7 @@ void RefineableSolidQElement<3>::get_face_solid_bcs(
    error_stream << "Wrong edge " << face << " passed\n";
 
    throw OomphLibError(error_stream.str(),
-                       "RefineableQElement<3>::get_face_bcs()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -2518,7 +2518,7 @@ void RefineableSolidQElement<3>::get_face_solid_bcs(
   {
    throw OomphLibError(
     "Corner node 1 cannot be cast to SolidNode --> something is wrong",
-    "RefineableSolidQElement<3>::get_face_solid_bcs()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -2526,7 +2526,7 @@ void RefineableSolidQElement<3>::get_face_solid_bcs(
   {
    throw OomphLibError(
     "Corner node 2 cannot be cast to SolidNode --> something is wrong",
-    "RefineableSolidQElement<3>::get_face_solid_bcs()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -2534,7 +2534,7 @@ void RefineableSolidQElement<3>::get_face_solid_bcs(
   {
    throw OomphLibError(
     "Corner node 3 cannot be cast to SolidNode --> something is wrong",
-    "RefineableSolidQElement<3>::get_face_solid_bcs()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -2542,7 +2542,7 @@ void RefineableSolidQElement<3>::get_face_solid_bcs(
   {
    throw OomphLibError(
     "Corner node 4 cannot be cast to SolidNode --> something is wrong",
-    "RefineableSolidQElement<3>::get_face_solid_bcs()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 

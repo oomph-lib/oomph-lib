@@ -691,7 +691,7 @@ class FaceGeometry<QUnsteadyHeatElement<1,NNODE_1D> >:
        << " than " << fld << std::endl;
       throw OomphLibError(
        error_stream.str(),
-       "ProjectableUnsteadyHeatElement::data_values_of_field()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif
@@ -730,7 +730,7 @@ class FaceGeometry<QUnsteadyHeatElement<1,NNODE_1D> >:
        << " than " << fld << std::endl;
       throw OomphLibError(
        error_stream.str(),
-       "ProjectableUnsteadyHeatElement::nhistory_values_for_projection()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif
@@ -759,7 +759,7 @@ class FaceGeometry<QUnsteadyHeatElement<1,NNODE_1D> >:
        << " than " << fld << std::endl;
       throw OomphLibError(
        error_stream.str(),
-       "ProjectableUnsteadyHeatElement::jacobian_and_shape_of_field()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif
@@ -789,7 +789,7 @@ class FaceGeometry<QUnsteadyHeatElement<1,NNODE_1D> >:
        << " than " << fld << std::endl;
       throw OomphLibError(
        error_stream.str(),
-       "ProjectableUnsteadyHeatElement::jget_field()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif
@@ -829,7 +829,7 @@ class FaceGeometry<QUnsteadyHeatElement<1,NNODE_1D> >:
        << " than " << fld << std::endl;
       throw OomphLibError(
        error_stream.str(),
-       "ProjectableUnsteadyHeatElement::nvalue_of_field()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif
@@ -850,7 +850,7 @@ class FaceGeometry<QUnsteadyHeatElement<1,NNODE_1D> >:
        << " than " << fld << std::endl;
       throw OomphLibError(
        error_stream.str(),
-       "ProjectableUnsteadyHeatElement::local_equation()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif

@@ -814,7 +814,7 @@ void SphericalNavierStokesEquations::full_output(std::ostream &outfile,
 {
 
  throw OomphLibError("Probably Broken",
-                     "SphericalNavierStokesEquations::full_output()",
+                     OOMPH_CURRENT_FUNCTION,
                      OOMPH_EXCEPTION_LOCATION);
 
  //Vector of local coordinates
@@ -1201,7 +1201,7 @@ get_vorticity(const Vector<double>& s, Vector<double>& vorticity) const
 
  throw OomphLibError(
   "Not tested for spherical Navier-Stokes elements",
-  "SphericalNavierStokesEquations::get_vorticity()",
+  OOMPH_CURRENT_FUNCTION,
   OOMPH_EXCEPTION_LOCATION);
 
 #ifdef PARANOID
@@ -1215,7 +1215,7 @@ get_vorticity(const Vector<double>& s, Vector<double>& vorticity) const
       << vorticity.size() << std::endl;
      
      throw OomphLibError(error_message.str(),
-                         "SphericalNavierStokesEquations<2>::get_vorticity()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -1317,7 +1317,7 @@ double SphericalNavierStokesEquations::d_kin_energy_dt() const
 {
  throw OomphLibError(
   "Not tested for spherical Navier-Stokes elements",
-  "SphericalNavierStokesEquations::d_kin_energy_dt()",
+  OOMPH_CURRENT_FUNCTION,
   OOMPH_EXCEPTION_LOCATION);
  
   

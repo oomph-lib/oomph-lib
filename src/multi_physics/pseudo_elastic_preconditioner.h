@@ -609,7 +609,7 @@ class PseudoElasticPreconditionerScalingHelper
     << "preconditioner.";
    throw OomphLibError(
     error_message.str(),
-    "PrecribedBoundaryDisplacementSubidiaryPreconditioner::setup(...)",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
    
@@ -622,7 +622,7 @@ class PseudoElasticPreconditionerScalingHelper
     << "preconditioner.";
    throw OomphLibError(
     error_message.str(),
-    "PseudoElasticPreconditionerScalingHelper::preconditioner_solve(...)",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
    

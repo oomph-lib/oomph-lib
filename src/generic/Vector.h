@@ -92,7 +92,8 @@ private:
                    << this->size()-1 << ")"; 
  
      //Throw an Oomph-lib error
-     throw OomphLibError(error_message.str(),"Vector::error_checked_access",
+     throw OomphLibError(error_message.str(),
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
      
      //This is a dummy return to keep the Intel compiler happy
@@ -118,7 +119,8 @@ private:
                    << this->size()-1 << ")";
      
      //Throw an Oomph-lib error
-     throw OomphLibError(error_message.str(),"Vector::error_checked_access",
+     throw OomphLibError(error_message.str(),
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
 
      //This is a dummy return to keep the Intel compiler happy
@@ -212,7 +214,7 @@ public:
   {
    //Throw an Oomph-lib error
    throw OomphLibError("Please use vector<bool> instead of Vector<bool>",
-                       "Vector:: dummy constructor",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
  

@@ -142,7 +142,7 @@ protected:
    {
     throw OomphLibError
      ("Don't call an empty constructor for a BinaryTree object",
-      "BinaryTree::BinaryTree()",OOMPH_EXCEPTION_LOCATION);
+      OOMPH_CURRENT_FUNCTION,OOMPH_EXCEPTION_LOCATION);
    }
   
   /// \short Default constructor for empty (root) tree: no father, no sons;
@@ -221,7 +221,8 @@ protected:
        "Call BinaryTree::setup_static_data() before creating\n";
       error_message += "any BinaryTreeRoots\n";
       
-      throw OomphLibError(error_message,"BinaryTreeRoot::BinaryTreeRoot()",
+      throw OomphLibError(error_message,
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
 #endif
@@ -271,7 +272,7 @@ protected:
     //Throw an error
     throw OomphLibError(
      "Don't call an empty constructor for a BinaryTreeForest object",
-     "BinaryTreeForest::BinaryTreeForest()",OOMPH_EXCEPTION_LOCATION);
+     OOMPH_CURRENT_FUNCTION,OOMPH_EXCEPTION_LOCATION);
    }
   
   /// \short Constructor: Pass vector of pointers to the roots of the

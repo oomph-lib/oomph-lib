@@ -282,7 +282,7 @@ namespace oomph
      std::ostringstream error_message;
      error_message << "The matrix has not been built";
      throw OomphLibError(error_message.str(),
-                         "HypreHelpers::create_HYPRE_Matrix()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    // check the matrix is square
@@ -293,7 +293,7 @@ namespace oomph
                    << "Matrix is " << oomph_matrix->nrow()
                    << " by " << oomph_matrix->ncol() << std::endl;
      throw OomphLibError(error_message.str(),
-                         "HypreHelpers::create_HYPRE_Matrix()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -311,7 +311,7 @@ namespace oomph
                   << "Call MPI_Helpers::init() in the "
                   << "main() function of your driver code\n";
      throw OomphLibError(error_stream.str(),
-                         "HypreHelpers::create_HYPRE_Matrix()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -1059,7 +1059,7 @@ namespace oomph
     error_message << "Solver has been set to an invalid value. "
                   << "current value=" << Solver;
     throw OomphLibError(error_message.str(),
-                     	"Hypre_Solver::hypre_solver_setup()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
 
    }
@@ -1427,7 +1427,7 @@ namespace oomph
                   << "Matrix is " << matrix_pt->nrow()
                   << " by " << matrix_pt->ncol() << std::endl;
     throw OomphLibError(error_message.str(),
-                        "HypreSolver::solve()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -1460,7 +1460,7 @@ namespace oomph
     error_message << "The distribution of the rhs vector and the matrix "
                   << " must be the same" << std::endl;
     throw OomphLibError(error_message.str(),
-                        "HypreInterface::hypre_solve()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
   // if the solution is setup make sure it has the same distribution as
@@ -1474,7 +1474,7 @@ namespace oomph
                     << "there it must be the same as the matrix."
                     << std::endl;
       throw OomphLibError(error_message.str(),
-                          "HypreInterface::hypre_solve()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
    }
@@ -1490,7 +1490,7 @@ namespace oomph
                   << "CRDoubleMatrix matrices"
                   << std::endl;
     throw OomphLibError(error_message.str(),
-                     	"HypreSolver::solve()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
 #endif
    }
@@ -1525,7 +1525,7 @@ namespace oomph
                   << "set up by a previous call to solve(...) after "
                   << "a call to enable_resolve()" << std::endl;
     throw OomphLibError(error_message.str(),
-                     	  "HypreSolver::resolve()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
   // check that rhs has the same distribution as the matrix (now stored
@@ -1536,7 +1536,7 @@ namespace oomph
     error_message << "The distribution of the rhs vector and the matrix "
                   << " must be the same" << std::endl;
     throw OomphLibError(error_message.str(),
-                        "HypreInterface::hypre_solve()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
   // if the solution is setup make sure it has the same distribution as
@@ -1550,7 +1550,7 @@ namespace oomph
                     << "there it must be the same as the matrix."
                     << std::endl;
       throw OomphLibError(error_message.str(),
-                          "HypreInterface::hypre_solve()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
    }
@@ -1706,7 +1706,7 @@ std::map<std::string,double> HyprePreconditioner::Context_based_cumulative_solve
                   << "Matrix is " << matrix_pt()->nrow()
                   << " by " << matrix_pt()->ncol() << std::endl;
     throw OomphLibError(error_message.str(),
-                        "HyprePreconditioner::setup()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -1735,7 +1735,7 @@ std::map<std::string,double> HyprePreconditioner::Context_based_cumulative_solve
                   << "CRDoubleMatrix matrices"
                   << std::endl;
     throw OomphLibError(error_message.str(),
-                     	"HyprePreconditioner::setup()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
 #endif
    }
@@ -1773,7 +1773,7 @@ std::map<std::string,double> HyprePreconditioner::Context_based_cumulative_solve
     error_message << "preconditioner_solve(...) requires that data has "
                   << "been set up using the function setup(...)" << std::endl;
     throw OomphLibError(error_message.str(),
-                     	"HyprePreconditioner::preconditioner_solve()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
   // check that rhs has the same distribution as the matrix (now stored
@@ -1784,7 +1784,7 @@ std::map<std::string,double> HyprePreconditioner::Context_based_cumulative_solve
     error_message << "The distribution of the rhs vector and the matrix "
                   << " must be the same" << std::endl;
     throw OomphLibError(error_message.str(),
-                        "HypreInterface::hypre_solve()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 
@@ -1799,7 +1799,7 @@ std::map<std::string,double> HyprePreconditioner::Context_based_cumulative_solve
                     << "there it must be the same as the matrix."
                     << std::endl;
       throw OomphLibError(error_message.str(),
-                          "HypreInterface::hypre_solve()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
    }

@@ -436,7 +436,7 @@ public:
     {
      //Error
      throw OomphLibError("Failed cast to FiniteElement* ",
-                         "Mesh::finite_element_pt()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
      //Dummy return to keep intel compiler happy
      return el_pt;
@@ -492,7 +492,7 @@ public:
                    << Boundary_coordinate_exists.size()-1 << std::endl;
 
      throw OomphLibError(error_message.str(),
-                         "Mesh::boundary_coordinate_exists()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -690,7 +690,7 @@ public:
     {
      throw OomphLibError(
       "Lookup scheme for elements next to boundary hasn't been set up yet!\n",
-      "Mesh::boundary_element_pt()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -714,7 +714,7 @@ public:
   std::ostringstream error_msg;
   error_msg << "No non-boundary nodes in the mesh.";
   throw OomphLibError(error_msg.str(),
-                      "Mesh::get_some_non_boundary_node",
+                      OOMPH_CURRENT_FUNCTION,
                       OOMPH_EXCEPTION_LOCATION);
   // Never get here!
   return 0;
@@ -728,7 +728,7 @@ public:
     {
      throw OomphLibError(
       "Lookup scheme for elements next to boundary hasn't been set up yet!\n",
-      "Mesh::n_boundary_element()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -746,7 +746,7 @@ public:
     {
      throw OomphLibError(
       "Lookup scheme for elements next to boundary hasn't been set up yet!\n",
-      "Mesh::face_index_at_boundary()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -877,7 +877,7 @@ public:
       {
        throw OomphLibError(
         "Can't execute compute_error(...) for non FiniteElements",
-        "Mesh::compute_error()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
       }
 
@@ -918,7 +918,7 @@ public:
       {
        throw OomphLibError(
         "Can't execute compute_error(...) for non FiniteElements",
-        "Mesh::compute_error()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
       }
      // Reset elemental errors and norms
@@ -1646,7 +1646,7 @@ public:
      << n_total << " doesn't match number of entries \n in vector, "
      << external_halo_node_pt.size() << std::endl;
     throw OomphLibError(error_stream.str(),
-                        "Mesh::get_external_halo_node_pt()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -1866,7 +1866,7 @@ class SolidMesh : public virtual Mesh
                    << typeid(Node_pt[n]).name()
                    << ", not an SolidNode" << std::endl;
      throw OomphLibError(error_stream.str(),
-                         "SolidMesh::node_pt()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -1887,7 +1887,7 @@ class SolidMesh : public virtual Mesh
       << typeid(Mesh::boundary_node_pt(b,n)).name()
       << ", not an SolidNode" << std::endl;
      throw OomphLibError(error_stream.str(),
-                         "SolidMesh::boundary_node_pt()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -1907,7 +1907,7 @@ class SolidMesh : public virtual Mesh
     {
      //Error
      throw OomphLibError("Failed cast to FiniteElement* ",
-                         "SolidMesh::element_node_pt()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    if(!dynamic_cast<SolidNode*>(el_pt->node_pt(n)))
@@ -1918,7 +1918,7 @@ class SolidMesh : public virtual Mesh
                    << ", not an SolidNode" << std::endl;
 
      throw OomphLibError(error_message.str(),
-                         "SolidMesh::element_node_pt()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -1977,7 +1977,7 @@ class SolidMesh : public virtual Mesh
       error_stream << "Edge cannot have two identical vertex nodes\n";
       throw OomphLibError(
        error_stream.str(),
-       "Edge::Edge()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
 #endif
      }
@@ -2119,7 +2119,7 @@ namespace MeshChecker
       << typeid(GEOM_ELEMENT_BASE).name()
       << "\n\n";
      throw OomphLibError(error_message.str(),
-                         "MeshChecker::assert_geometric_element()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -2133,7 +2133,7 @@ namespace MeshChecker
       << "\n\nand has dimension = " << el_pt->dim()
       << " but we need dim = " << dim << std::endl;
      throw OomphLibError(error_message.str(),
-                         "MeshChecker::assert_geometric_element()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
 
     }
@@ -2150,7 +2150,7 @@ namespace MeshChecker
         << "\n\nand has nnode_1d = " << el_pt->nnode_1d()
         << " but we need nnode_1d = " << nnode_1d << std::endl;
        throw OomphLibError(error_message.str(),
-                           "MeshChecker::assert_geometric_element()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
     }

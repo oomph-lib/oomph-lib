@@ -590,7 +590,7 @@ void FishMesh<ELEMENT>::build_mesh(TimeStepper* time_stepper_pt)
     << "that get 'merged' : " << Max_tol_in_node_killing << std::endl;
    
    throw OomphLibError(error_message.str(),
-                       "FishMesh::build_mesh()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -674,7 +674,7 @@ void FishMesh<ELEMENT>::build_mesh(TimeStepper* time_stepper_pt)
      << "Max. tolerance: " << Max_tol_in_node_killing << std::endl;
     
     throw OomphLibError(error_message.str(),
-                        "FishMesh::build_mesh()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -740,7 +740,7 @@ void AlgebraicFishMesh<ELEMENT>::setup_algebraic_node_update()
                  << typeid(Mesh::element_pt(0)).name() << std::endl;
 
    throw OomphLibError(error_message.str(),
-                       "AlgebraicFishMesh::setup_algebraic_node_update()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif

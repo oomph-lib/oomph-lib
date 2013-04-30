@@ -50,7 +50,7 @@ fill_in_generic_contribution_to_residuals_pvd(Vector<double> &residuals,
   {
    throw OomphLibError(
     "RefineablePVDEquations cannot be used with incompressible constitutive laws.",
-    "RefineablePVDEquations<DIM>::fill_in_generic_contribution_to_residuals_pvd()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);   
   }
 #endif
@@ -686,7 +686,7 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
   {
    throw OomphLibError(
     "The constitutive law requires the use of the incompressible formulation by setting the element's member function set_incompressible()",
-    "RefineablePVDEquationsWithPressure<DIM>::fill_in_generic_contribution_to_residuals_pvd_with_pressure()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);   
   }
 #endif

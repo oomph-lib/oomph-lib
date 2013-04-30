@@ -119,7 +119,7 @@ namespace GlobalParameters
                  << n_actual << " rather than " << N_fourier 
                  << " Bessel functions.\n";    
     throw OomphLibError(error_stream.str(),
-                        "GlobalParameters::prescribed_incoming_flux()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -186,7 +186,7 @@ namespace GlobalParameters
                  << n_actual << " rather than " << N_fourier 
                  << " Bessel functions.\n";    
     throw OomphLibError(error_stream.str(),
-                        "GlobalParameters::prescribed_incoming_flux()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif

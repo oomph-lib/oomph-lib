@@ -54,7 +54,7 @@ void SimpleCubicMesh<ELEMENT>::build_mesh(TimeStepper* time_stepper_pt)
     << "coordinate direction. You have specified \n"
     << "Nx=" << Nx << "; Ny=" << Ny << "; Nz=" << Nz << std::endl; 
    throw OomphLibError(error_message.str(),
-                       "SimpleCubicMesh::build_mesh()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 

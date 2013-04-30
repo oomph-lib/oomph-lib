@@ -228,7 +228,7 @@ Vector<double> ImmersedRigidBodyElement::Default_Gravity_vector(2,0.0);
     if(bulk_elem_pt==0)
      {
       throw OomphLibError("Drag mesh must consist of FSIFluidElements\n",
-                          "ImmersedRigidBodyElement::set_drag_mesh()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
     

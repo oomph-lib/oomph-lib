@@ -1032,7 +1032,7 @@ TubeMesh<ELEMENT>::TubeMesh(GeomObject* volume_pt,
                 << "topologically consistent with a quarter tube with a\n"
                 << "non-curved centreline.\n";
    throw OomphLibError(error_stream.str(),
-                       "QuaterTubeMesh::TubeMesh()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 

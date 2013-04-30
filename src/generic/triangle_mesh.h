@@ -693,7 +693,7 @@ public:
       << Vertex_coordinate[i].size()
       << "-dimensional coordinates." << std::endl;
       throw OomphLibError(error_stream.str(),
-        "TriangleMeshPolyLine::TriangleMeshPolyLine()",
+                          OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
      }
    }
@@ -1124,7 +1124,7 @@ public:
     << "access to this objects and review that you are not introducing "
     << "any other objects than TriangleMeshPolyLines" << std::endl;
     throw OomphLibError(error_stream.str(),
-      "TriangleMeshPolygon::polyline_pt()",
+                        OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -1149,7 +1149,7 @@ public:
     << "access to this objects and review that you are not introducing "
     << "any other objects than TriangleMeshPolyLines" << std::endl;
     throw OomphLibError(error_stream.str(),
-      "TriangleMeshPolygon::polyline_pt()",
+                        OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -1206,7 +1206,7 @@ public:
 
    throw OomphLibError(
        error_stream.str(),
-       "TriangleMeshPolygon::reset_reference_configuration()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
  }
 
@@ -1307,7 +1307,7 @@ class TriangleMeshOpenCurve : public virtual TriangleMeshCurve
     << "TriangleCurveSection is a TriangleMeshPolyLine."
     << std::endl;
     throw OomphLibError(error_stream.str(),
-      "TriangleMeshOpenCurve::polyline_pt()",
+                        OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -1330,7 +1330,7 @@ class TriangleMeshOpenCurve : public virtual TriangleMeshCurve
     << "TriangleCurveSection is a TriangleMeshPolyLine."
     << std::endl;
     throw OomphLibError(error_stream.str(),
-      "TriangleMeshOpenCurve::polyline_pt()",
+                        OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -1430,7 +1430,7 @@ public:
    error_stream << "Empty default remesh function called.\n";
    error_stream << "This should be overloaded in a specific TriangleMesh\n";
    throw OomphLibError(error_stream.str(),
-                       "TriangleBaseMesh::remesh_from_triangulateio()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 

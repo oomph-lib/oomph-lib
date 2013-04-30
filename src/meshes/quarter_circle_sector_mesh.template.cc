@@ -588,7 +588,8 @@ setup_algebraic_node_update()
    std::string function_name =
     "AlgebraicRefineableQuarterCircleSectorMesh::";
    function_name += "setup_algebraic_node_update()";
-   throw OomphLibError(error_message.str(),function_name,
+   throw OomphLibError(error_message.str(),
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -894,7 +895,8 @@ node_update_in_central_box(const unsigned& t, AlgebraicNode*& node_pt)
    std::string function_name =
     "AlgebraicRefineableQuarterCircleSectorMesh::";
    function_name += "node_update_in_central_box()",
-    throw OomphLibError(error_message,function_name,
+    throw OomphLibError(error_message,
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -984,7 +986,8 @@ node_update_in_lower_right_box(const unsigned& t, AlgebraicNode*& node_pt)
     std::string function_name =
      "AlgebraicRefineableQuarterCircleSectorMesh::";
     function_name += "node_update_in_lower_right_box()",
-     throw OomphLibError(error_message,function_name,
+     throw OomphLibError(error_message,
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
 
   }
@@ -1096,7 +1099,8 @@ node_update_in_upper_left_box(const unsigned& t, AlgebraicNode*& node_pt)
     "AlgebraicRefineableQuarterCircleSectorMesh::";
    function_name += "node_update_in_upper_left_box()";
 
-   throw OomphLibError(error_message,function_name,
+   throw OomphLibError(error_message,
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif

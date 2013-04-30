@@ -552,7 +552,7 @@ template<class ELEMENT, class INTERFACE_ELEMENT> void  STSpineMesh<ELEMENT, INTE
  
   if(bound2 == -1) {
    throw OomphLibError("Error setting the shared boundary conditions\n",
-                       "STSpineMesh::add_mesh()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -569,7 +569,7 @@ template<class ELEMENT, class INTERFACE_ELEMENT> void  STSpineMesh<ELEMENT, INTE
      <<addmesh_pt->nboundary_node(bound2)<<" nodes.\n";
     
     throw OomphLibError(error_stream.str(),
-                       "STSpineMesh::add_mesh()",
+                        OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);                        
    }
 
@@ -620,7 +620,7 @@ template<class ELEMENT, class INTERFACE_ELEMENT> void  STSpineMesh<ELEMENT, INTE
        <<addmesh_pt->boundary_node_pt(bound2,i)->x(2)<<"\n";
 
       throw OomphLibError(error_stream.str(),
-                          "STSpineMesh::add_mesh()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);                       
      }
      else
@@ -691,7 +691,7 @@ template<class ELEMENT, class INTERFACE_ELEMENT> void  STSpineMesh<ELEMENT, INTE
      <<"(This control should be removed in case we do not want to copy all the nodes of the shared boundaries)\n";
     
     throw OomphLibError(error_stream.str(),
-                        "STSpineMesh::add_mesh()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);                       
    }
 

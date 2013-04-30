@@ -945,7 +945,7 @@ void CollapsibleChannelProblem<ELEMENT>::set_initial_condition()
     << time_stepper_pt()->type() << " family" << std::endl;
 
    throw OomphLibError(error_stream.str(),
-                       "CollapsibleChannelProblem::set_initial_condition()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -1282,7 +1282,7 @@ void CollapsibleChannelProblem<ELEMENT>::setup_outflow_impedance_elements()
     << time_stepper_pt()->time() << " ?\n";
    
    throw OomphLibError(error_stream.str(),
-                       "CollapsibleChannelProblem::setup_outflow_impedance_elements()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
  

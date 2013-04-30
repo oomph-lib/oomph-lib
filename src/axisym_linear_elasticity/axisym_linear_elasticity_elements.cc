@@ -73,7 +73,7 @@ namespace oomph
    {
     throw OomphLibError(
      "AxisymmetricLinearElasticity is not yet implemented for more than one position type",
-     "AxisymmetricLinearElasticityEquationsBase::fill_in_generic_ ... ()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -266,7 +266,7 @@ namespace oomph
            {
             throw OomphLibError(
              "a should equal 0, 1 or 2",
-             "AxisymmetricLinearElasticityEquationsBase::fill_in_generic_contribution_...()",
+             OOMPH_CURRENT_FUNCTION,
              OOMPH_EXCEPTION_LOCATION);
            }     
 

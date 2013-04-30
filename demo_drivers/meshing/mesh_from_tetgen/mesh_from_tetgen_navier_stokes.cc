@@ -251,7 +251,7 @@ int main(int argc, char* argv[])
     "filename.node then filename.ele then filename.face\n";
 
    throw OomphLibError(error_message,
-                       "main()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 

@@ -51,7 +51,7 @@ namespace oomph
    {
     throw OomphLibError(
      "LinearElasticity is not yet implemented for more than one position type",
-     "LinearElasticityEquationsBase<DIM>::fill_in_generic_contribution_to_residuals_lin_elast()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
   
@@ -60,7 +60,7 @@ namespace oomph
    {
     throw OomphLibError(
      "No elasticity tensor set",
-     "LinearElasticityEquationsBase<DIM>::fill_in_generic_contribution_to_residuals_lin_elast()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
  

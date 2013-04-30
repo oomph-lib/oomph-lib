@@ -803,7 +803,7 @@ void NavierStokesEquations<DIM>::output_vorticity(std::ostream &outfile,
    error_message += "by the 1D Navier-Stokes equations?\n";
 
    throw OomphLibError(error_message,
-                       "NavierStokesEquations::output_vorticity()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -1011,7 +1011,7 @@ void NavierStokesEquations<DIM>::strain_rate(const Vector<double>& s,
                     << strainrate.nrow() << " Not " << DIM << std::endl;
 
      throw OomphLibError(error_message.str(),
-                         "NavierStokeEquations::strain_rate()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -1088,7 +1088,7 @@ void NavierStokesEquations<2>::get_vorticity(const Vector<double>& s,
       << vorticity.size() << std::endl;
      
      throw OomphLibError(error_message.str(),
-                         "NavierStokesEquations<2>::get_vorticity()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -1161,7 +1161,7 @@ void NavierStokesEquations<3>::get_vorticity(const Vector<double>& s,
       << vorticity.size() << std::endl;
      
      throw OomphLibError(error_message.str(),
-                         "NavierStokesEquations<3>::get_vorticity()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -1896,7 +1896,7 @@ fill_in_generic_dresidual_contribution_nst(
  unsigned flag)
 {
  throw OomphLibError("Not yet implemented\n",
-                     "NavierStokes::fill_in_generic_dresidual",
+                     OOMPH_CURRENT_FUNCTION,
                      OOMPH_EXCEPTION_LOCATION);
 }
 
@@ -1913,7 +1913,7 @@ fill_in_contribution_to_hessian_vector_products(
 {
  throw OomphLibError(
   "Not yet implemented\n",
-  "NavierStokes::fill_in_contribution_to_hessian_vector_products",
+  OOMPH_CURRENT_FUNCTION,
   OOMPH_EXCEPTION_LOCATION);
 }
 

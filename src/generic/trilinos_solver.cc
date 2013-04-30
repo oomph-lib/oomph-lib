@@ -156,7 +156,7 @@ void TrilinosAztecOOSolver::solve(DoubleMatrixBase* const& matrix_pt,
    error_message_stream
     << "The matrix at matrix_pt must be square.";
    throw OomphLibError(error_message_stream.str(),
-                       "TrilinosAztecOOSolver::solve()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
  // check that the matrix and the rhs vector have the same nrow()
@@ -166,7 +166,7 @@ void TrilinosAztecOOSolver::solve(DoubleMatrixBase* const& matrix_pt,
    error_message_stream
     << "The matrix and the rhs vector must have the same number of rows.";
    throw OomphLibError(error_message_stream.str(),
-                       "TrilinosAztecOOSolver::solve()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -183,14 +183,14 @@ void TrilinosAztecOOSolver::solve(DoubleMatrixBase* const& matrix_pt,
       << "The matrix matrix_pt must have the same communicator as the vectors"
       << " rhs and result must have the same communicator";
      throw OomphLibError(error_message_stream.str(),
-                         "TrilinosAztecOOSolver::solve()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }
  else
   {
    throw OomphLibError("Matrix must be of type CRDoubleMatrix",
-                       "TrilinosAztecOOSolver::factorise()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -205,7 +205,7 @@ void TrilinosAztecOOSolver::solve(DoubleMatrixBase* const& matrix_pt,
       << "The result vector distribution has been setup; it must have the "
       << "same distribution as the rhs vector.";
      throw OomphLibError(error_message_stream.str(),
-                         "TrilinosAztecOOSolver::solve()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }
@@ -318,7 +318,7 @@ void TrilinosAztecOOSolver::solver_setup(DoubleMatrixBase* const& matrix_pt)
        error_message << "The oomph-lib preconditioner and the solver must "
                      << "have the same distribution";
        throw OomphLibError(error_message.str(),
-                           "TrilinosAztecOOSolver::solver_setup()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
 #endif
@@ -389,7 +389,7 @@ void TrilinosAztecOOSolver::solver_setup(DoubleMatrixBase* const& matrix_pt)
      error_message << "Preconditioner_pt == 0. (Remember default "
                    << "preconditioner is IdentityPreconditioner)";
      throw OomphLibError(error_message.str(),
-                         "TrilinosAztecOOSolver::solver_setup()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -471,7 +471,7 @@ void TrilinosAztecOOSolver::solver_setup(DoubleMatrixBase* const& matrix_pt)
                  << CG << ", " << GMRES << " and " << BiCGStab
                  << ". Current value is " << Solver_type << ".";
    throw OomphLibError(error_message.str(),
-                       "TrilinosAztecOOSolver::solver_setup()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 }
@@ -498,7 +498,7 @@ void TrilinosAztecOOSolver::resolve(const DoubleVector &rhs,
                  << "The matrix has " << Epetra_matrix_pt->NumGlobalRows()
                  << " rows.\n";
    throw OomphLibError(error_message.str(),
-                       "TrilinosAztecOOSolver::solve()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -513,7 +513,7 @@ void TrilinosAztecOOSolver::resolve(const DoubleVector &rhs,
       << "The result vector distribution has been setup; it must have the "
       << "same distribution as the rhs vector.";
      throw OomphLibError(error_message_stream.str(),
-                         "TrilinosAztecOOSolver::solve()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }
@@ -576,7 +576,7 @@ void TrilinosAztecOOSolver::solve_using_AztecOO(Epetra_Vector* &rhs_pt,
    error_message << "Solver must be called with solve(...) "
                  << "before resolve(...) to set it up.\n";
     throw OomphLibError(error_message.str(),
-                        "TrilinosAztecOOSolver::solve_using_AztecOO()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
   }
 #endif

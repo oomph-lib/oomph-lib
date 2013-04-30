@@ -138,7 +138,7 @@ void ARPACK::solve_eigenproblem(Problem* const &problem_pt,
     << "Not " << Spectrum << std::endl;
 
    throw OomphLibError(error_stream.str(),
-                       "ARPACK::solve_eigenproblem()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 

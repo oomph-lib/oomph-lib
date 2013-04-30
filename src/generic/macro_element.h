@@ -91,7 +91,7 @@ class MacroElement
  MacroElement()
   {
    throw OomphLibError("Don't call empty constructor for MacroElement!",
-                       "MacroElement::MacroElement()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -165,7 +165,7 @@ class MacroElement
                  << "implemented for this element\n" << std::endl;
    // throw error
    throw OomphLibError(error_message.str(),
-                       "MacroElement::assemble_macro_to_eulerian_jacobian(..)",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -183,7 +183,7 @@ class MacroElement
                  << "implemented for this element\n" << std::endl;
    // throw error
    throw OomphLibError(error_message.str(),
-                      "MacroElement::assemble_macro_to_eulerian_jacobian2(..)",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
   
@@ -285,7 +285,7 @@ public:
  QMacroElement()
   {
    throw OomphLibError("Don't call empty constructor for QMacroElement!",
-                       "QMacroElement::QMacroElement()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -385,7 +385,7 @@ public:
  QMacroElement()
   {
    throw OomphLibError("Don't call empty constructor for QMacroElement!",
-                       "QMacroElement::QMacroElement()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
  

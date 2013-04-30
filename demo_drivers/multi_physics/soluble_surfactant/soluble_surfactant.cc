@@ -466,7 +466,7 @@ protected:
    if(ndim != u_index.size())
     {
      throw OomphLibError("Dimension Incompatibility",
-                         "SurfactantElement",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 

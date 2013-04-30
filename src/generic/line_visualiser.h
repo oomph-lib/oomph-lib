@@ -526,7 +526,7 @@ namespace oomph
         std::ostringstream error_message;
         error_message << "Cannot open file " << file_name << "\n";
         throw OomphLibError(error_message.str(),
-                            "LineVisualiser::LineVisualiser()",
+                            OOMPH_CURRENT_FUNCTION,
                             OOMPH_EXCEPTION_LOCATION);
        }
       if (!file_input.is_open())
@@ -534,7 +534,7 @@ namespace oomph
         std::ostringstream error_message;
         error_message << "Cannot open file " << file_name << "\n";
         throw OomphLibError(error_message.str(),
-                            "LineVisualiser::LineVisualiser()",
+                            OOMPH_CURRENT_FUNCTION,
                             OOMPH_EXCEPTION_LOCATION);
        }
       

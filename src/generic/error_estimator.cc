@@ -95,7 +95,7 @@ void Z2ErrorEstimator::shape_rec(const Vector<double>& x,
       << std::endl;
 
      throw OomphLibError(error_stream.str(),
-                         "Z2ErrorEstimator::shape_rec()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
    }
    break;
@@ -150,7 +150,7 @@ void Z2ErrorEstimator::shape_rec(const Vector<double>& x,
       << std::endl;
 
      throw OomphLibError(error_stream.str(),
-                         "Z2ErrorEstimator::shape_rec()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
    }
    break;
@@ -220,7 +220,7 @@ void Z2ErrorEstimator::shape_rec(const Vector<double>& x,
       << std::endl;
 
      throw OomphLibError(error_stream.str(),
-                         "Z2ErrorEstimator::shape_rec()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -234,7 +234,7 @@ void Z2ErrorEstimator::shape_rec(const Vector<double>& x,
    error_stream << "No recovery shape functions for dim " 
                 << dim << std::endl;
    throw OomphLibError(error_stream.str(),
-                       "Z2ErrorEstimator::shape_rec()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
    break;
   }
@@ -300,7 +300,7 @@ void Z2ErrorEstimator::shape_rec(const Vector<double>& x,
       << std::endl;
 
      throw OomphLibError(error_stream.str(),
-                         "Z2ErrorEstimator::integral_rec()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
    }
    break;
@@ -342,7 +342,7 @@ void Z2ErrorEstimator::shape_rec(const Vector<double>& x,
       << std::endl;
 
      throw OomphLibError(error_stream.str(),
-                         "Z2ErrorEstimator::integral_rec()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
    }
    break;
@@ -384,7 +384,7 @@ void Z2ErrorEstimator::shape_rec(const Vector<double>& x,
       << std::endl;
 
      throw OomphLibError(error_stream.str(),
-                         "Z2ErrorEstimator::integral_rec()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -398,7 +398,7 @@ void Z2ErrorEstimator::shape_rec(const Vector<double>& x,
    error_stream << "No recovery shape functions for dim " 
                 << dim << std::endl;
    throw OomphLibError(error_stream.str(),
-                       "Z2ErrorEstimator::integral_rec()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
    break;
   }
@@ -432,7 +432,7 @@ double Z2ErrorEstimator::get_combined_error_estimate(
   {
    throw OomphLibError(
     "No compound errors have been passed, so maximum cannot be found.",
-    "Z2ErrorEstimator::get_combined_error_estimate()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -769,7 +769,8 @@ unsigned Z2ErrorEstimator::nrecovery_terms(const unsigned& dim)
     "THIS HASN'T BEEN USED/VALIDATED YET -- CHECK NUMBER OF RECOVERY TERMS!\n";
    error_message += "Then remove this break and continue\n";
 
-   throw OomphLibError(error_message,"Z2ErrorEstimator::nrecovery_terms()",
+   throw OomphLibError(error_message,
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -800,7 +801,7 @@ unsigned Z2ErrorEstimator::nrecovery_terms(const unsigned& dim)
      
     default:
      throw OomphLibError("Dim must be 1, 2 or 3",
-                         "Z2ErrorEstimator::nrecovery_terms()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    break;
@@ -829,7 +830,7 @@ unsigned Z2ErrorEstimator::nrecovery_terms(const unsigned& dim)
      
     default:
      throw OomphLibError("Dim must be 1, 2 or 3",
-                         "Z2ErrorEstimator::nrecovery_terms()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    break;
@@ -864,7 +865,7 @@ unsigned Z2ErrorEstimator::nrecovery_terms(const unsigned& dim)
 
     default:
      throw OomphLibError("Dim must be 1, 2 or 3",
-                         "Z2ErrorEstimator::nrecovery_terms()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    break;
@@ -879,7 +880,7 @@ unsigned Z2ErrorEstimator::nrecovery_terms(const unsigned& dim)
     << "Wrong Recovery_order " << Recovery_order << std::endl;
    
    throw OomphLibError(error_stream.str(),
-                       "Z2ErrorEstimator::nrecovery_terms()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
    
@@ -944,7 +945,7 @@ void Z2ErrorEstimator::get_element_errors(Mesh*& mesh_pt,
      {
       throw OomphLibError(
        "Element needs to inherit from ElementWithZ2ErrorEstimator!",
-       "Z2ErrorEstimator::get_element_errors()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif
@@ -1002,7 +1003,7 @@ void Z2ErrorEstimator::get_element_errors(Mesh*& mesh_pt,
    {
     throw OomphLibError(
      "Element needs to inherit from ElementWithZ2ErrorEstimator!",
-     "Z2ErrorEstimator::get_element_errors()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
 #endif

@@ -92,7 +92,7 @@ public:
                  << flux.size() << ", whereas it should be " 
                  << num_entries << std::endl;
    throw OomphLibError(error_message.str(),
-                       "RefineablePVDEquations::get_Z2_flux()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -317,7 +317,7 @@ void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
                   << flux.size() << ", whereas it should be " 
                   << num_entries << std::endl;
     throw OomphLibError(error_message.str(),
-                        "RefineablePVDEquationsWithPressure::get_Z2_flux()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif

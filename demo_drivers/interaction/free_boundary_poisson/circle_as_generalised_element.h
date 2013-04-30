@@ -109,7 +109,7 @@ public:
                   << "This one contains " << load_pt->nvalue() << std::endl;
 
      throw OomphLibError(error_stream.str(),
-                         "ElasticallySupportedRingElement::set_load_pt()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -242,7 +242,7 @@ public:
         {
          throw OomphLibError(
           "Load is pinned and yet n_dof=2?\n This is very fishy!\n",
-          "ElasticallySupportedRingElement::get_residuals_generic()",
+          OOMPH_CURRENT_FUNCTION,
           OOMPH_EXCEPTION_LOCATION);
         }
 #endif

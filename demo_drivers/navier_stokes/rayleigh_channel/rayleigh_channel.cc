@@ -264,7 +264,7 @@ void RayleighProblem<ELEMENT,TIMESTEPPER>::set_initial_condition()
                 << time_stepper_pt()->type() << " family" << std::endl;
 
    throw OomphLibError(error_stream.str(),
-                       "RayleighProblem::set_initial_conditions()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -521,7 +521,8 @@ int main(int argc, char* argv[])
    error_message +=
     "Arg2: Impulsive_start_flag [0/1]\n";
 
-   throw OomphLibError(error_message,"main()",
+   throw OomphLibError(error_message,
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
  cout << "Long run flag: " 

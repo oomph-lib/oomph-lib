@@ -1105,7 +1105,7 @@ void ModalPRefineableQElement<1>::initial_setup(Tree* const &adopted_father_pt)
   {
    throw OomphLibError(
           "Element not in a tree, and no adopted father has been specified!",
-          "PRefineableQElement<1,INITIAL_NNODE_1D>::initial_setup()",
+          OOMPH_CURRENT_FUNCTION,
           OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -1304,7 +1304,7 @@ void ModalPRefineableQElement<DIM>::d2shape_local(const Vector<double> &s, Shape
  std::ostringstream error_message;
  error_message <<"\nd2shape_local currently not implemented for this element\n";
  throw OomphLibError(error_message.str(),
-                     "ModalPRefineableQElement<DIM>::d2shape_local()",
+                     OOMPH_CURRENT_FUNCTION,
                      OOMPH_EXCEPTION_LOCATION);
 }
 
@@ -1315,7 +1315,7 @@ void ModalPRefineableQElement<DIM>::d2basis_local(const Vector<double> &s, Shape
  std::ostringstream error_message;
  error_message <<"\nd2basis_local currently not implemented for this element\n";
  throw OomphLibError(error_message.str(),
-                     "ModalPRefineableQElement<DIM>::d2shape_local()",
+                     OOMPH_CURRENT_FUNCTION,
                      OOMPH_EXCEPTION_LOCATION);
 }
 
@@ -1991,7 +1991,7 @@ int main()
  else 
   {
    throw OomphLibError("Self test failed",
-                       "main()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
  
@@ -2064,7 +2064,7 @@ int main()
  else 
   {
    throw OomphLibError("Self test failed",
-                       "main()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
  

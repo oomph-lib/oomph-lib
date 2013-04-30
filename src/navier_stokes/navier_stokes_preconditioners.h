@@ -246,7 +246,7 @@ namespace oomph
                      << "bulk elements\n";
        throw OomphLibError(
         error_message.str(),
-        "FpPressureAdvectionDiffusionProblem::reset_pin_status()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
       }
 #endif
@@ -293,7 +293,7 @@ namespace oomph
                      << "bulk elements\n";
        throw OomphLibError(
         error_message.str(),
-        "FpPressureAdvectionDiffusionProblem::pin_all_non_pressure_dofs()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
       }
 #endif
@@ -306,7 +306,7 @@ namespace oomph
        error_message << "Cannot use Fp preconditioner with discontinuous\n"
                      << "pressures.\n";
        throw OomphLibError(error_message.str(),
-                           "NavierStokesFpPreconditioner::validate()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
 
@@ -763,7 +763,7 @@ namespace oomph
      std::ostringstream error_msg;
      error_msg << "Problem pointer is null, did you set it yet?";
      throw OomphLibError(error_msg.str(),
-                         "NavierStokesSchurComplementPreconditioner::problem_pt()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif

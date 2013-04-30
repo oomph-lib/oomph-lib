@@ -75,7 +75,7 @@ namespace oomph
              "one boundary, yet this node claims to.";
             
             throw OomphLibError(error_message,
-                                "LineMeshBase::setup_boundary_element_info()",
+                                OOMPH_CURRENT_FUNCTION,
                                 OOMPH_EXCEPTION_LOCATION);
            }
           // If the node lives on just one boundary
@@ -138,7 +138,7 @@ namespace oomph
         std::ostringstream error_stream;
         error_stream << "Boundary " << b << " has no element adjacent to it\n";
         throw OomphLibError(error_stream.str(),
-                            "LineMeshBase::setup_boundary_element_info()",
+                            OOMPH_CURRENT_FUNCTION,
                             OOMPH_EXCEPTION_LOCATION);
         break;
        }
@@ -154,7 +154,7 @@ namespace oomph
                      << " elements adjacent to it.\n"
                      << "This shouldn't occur in a 1D mesh.\n";
         throw OomphLibError(error_stream.str(),
-                            "LineMeshBase::setup_boundary_element_info()",
+                            OOMPH_CURRENT_FUNCTION,
                             OOMPH_EXCEPTION_LOCATION);
         break;
        }
@@ -176,7 +176,7 @@ namespace oomph
          << "In a 1D mesh its size should always be one since only\n"
          << "one element can be adjacent to any particular boundary";
         throw OomphLibError(error_stream.str(),
-                            "LineMeshBase::setup_boundary_element_info()",
+                            OOMPH_CURRENT_FUNCTION,
                             OOMPH_EXCEPTION_LOCATION);
        }
      } // End of loop over boundaries

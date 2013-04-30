@@ -201,7 +201,7 @@ class QuadTree : public virtual Tree
  QuadTree()
   {
    throw OomphLibError("Don't call an empty constructor for a QuadTree object",
-                       "QuadTree::QuadTree()",OOMPH_EXCEPTION_LOCATION);
+                       OOMPH_CURRENT_FUNCTION,OOMPH_EXCEPTION_LOCATION);
   }
 
  /// \short Default constructor for empty (root) tree: 
@@ -318,7 +318,8 @@ class QuadTreeRoot : public virtual QuadTree, public virtual TreeRoot
       "Call QuadTree::setup_static_data() before creating\n";
      error_message += "any QuadTreeRoots\n";
  
-     throw OomphLibError(error_message,"QuadTreeRoot::QuadTreeRoot()",
+     throw OomphLibError(error_message,
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -369,7 +370,7 @@ class QuadTreeRoot : public virtual QuadTree, public virtual TreeRoot
                    << Direct_string[neighbour] << std::endl;
 
      throw OomphLibError(error_message.str(),
-                         "QuadTreeRoot::north_equivalent()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -410,7 +411,7 @@ class QuadTreeForest : public TreeForest
    //Throw an error
    throw OomphLibError(
     "Don't call an empty constructor for a QuadTreeForest object",
-    "QuadTreeForest::QuadTreeForest()",OOMPH_EXCEPTION_LOCATION);
+    OOMPH_CURRENT_FUNCTION,OOMPH_EXCEPTION_LOCATION);
   }
  
  /// \short Constructor: Pass vector of pointers to the roots of the

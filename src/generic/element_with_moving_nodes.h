@@ -132,7 +132,7 @@ namespace oomph
                    << " is not in the range (0,"
                    << n_data-1 << ")";
      throw OomphLibError(error_message.str(),
-                         "ElementWithMovingNodes::geometric_data_local_eqn()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    else
@@ -145,7 +145,7 @@ namespace oomph
                      << " is not in the range (0,"
                      << n_value -1 << ")";
        throw OomphLibError(error_message.str(),
-                           "ElementWithMovingNodes::geometric_data_local_eqn()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
     }
@@ -156,7 +156,7 @@ namespace oomph
     {
      throw OomphLibError(
       "Geometric data local equation numbers have not been allocated",
-      "ElementWithMovingNodes::geometric_data_local_eqn()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
 #endif

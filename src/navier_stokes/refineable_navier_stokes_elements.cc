@@ -343,7 +343,7 @@ int p_index = this->p_nodal_index_nst();
    // pressure advection diffusion doesn't work for this one!
    throw OomphLibError(
     "Pressure advection diffusion does not work in this case\n",
-    "RefineableNavierStokesEquations<ELEMENT>::fill_in_generic_pressure_advection_diffusion_contribution_nst()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
 
    for(unsigned l=0;l<n_pres;++l)
@@ -1842,7 +1842,7 @@ void PRefineableQCrouzeixRaviartElement<2>::further_build()
      default:
        throw OomphLibError(
         "Invalid son type in",
-        "PRefineableQCrouzeixRaviartElement<2>::further_build()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
        break;
       }

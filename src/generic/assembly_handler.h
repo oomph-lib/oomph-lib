@@ -390,7 +390,7 @@ public:
   {
    throw OomphLibError(
     "Linear-algebra interface does not make sense for this linear solver\n",
-    "AugmentedBlockFoldLinearSolver::solve()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -402,7 +402,7 @@ public:
   {
    throw OomphLibError(
     "Linear-algebra interface does not make sense for this linear solver\n",
-    "AugmentedBlockFoldLinearSolver::solve()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -586,7 +586,7 @@ public:
   {
    throw OomphLibError(
     "Linear-algebra interface does not make sense for this linear solver\n",
-    "BlockPitchForkLinearSolver::solve()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -598,7 +598,7 @@ public:
   {
    throw OomphLibError(
     "Linear-algebra interface does not make sense for this linear solver\n",
-    "BlockPitchForkLinearSolver::solve()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -653,7 +653,7 @@ public:
   {
    throw OomphLibError(
     "Linear-algebra interface does not make sense for this linear solver\n",
-    "AugmentedBlockPitchForkLinearSolver::solve()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -665,7 +665,7 @@ public:
   {
    throw OomphLibError(
     "Linear-algebra interface does not make sense for this linear solver\n",
-    "AugmentedBlockPitchForkLinearSolver::solve()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -919,7 +919,7 @@ public:
   {
    throw OomphLibError(
     "Linear-algebra interface does not make sense for this linear solver\n",
-    "BlockHopfLinearSolver::solve()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -931,7 +931,7 @@ public:
   {
    throw OomphLibError(
     "Linear-algebra interface does not make sense for this linear solver\n",
-    "BlockHopfLinearSolver::solve()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 

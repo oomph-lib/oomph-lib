@@ -464,7 +464,8 @@ int main(int argc, char* argv[])
    error_message += "Arg2: Impulsive_start_flag [0/1]\n";
    error_message += "Arg3: Restart_flag [restart_file] (optional)\n";
 
-   throw OomphLibError(error_message,"main()",
+   throw OomphLibError(error_message,
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   } // too many arguments
  cout << "Setting Newmark IC consistently: "

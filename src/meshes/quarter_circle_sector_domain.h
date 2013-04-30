@@ -281,7 +281,7 @@ void QuarterCircleSectorDomain::macro_element_boundary(
 
      throw OomphLibError(
       error_stream.str(),
-      "QuarterCircleSectorDomain::macro_element_boundary()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
    
@@ -315,7 +315,7 @@ void QuarterCircleSectorDomain::macro_element_boundary(
      
      throw OomphLibError(
       error_stream.str(),
-      "QuarterCircleSectorDomain::macro_element_boundary()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
    
@@ -349,7 +349,7 @@ void QuarterCircleSectorDomain::macro_element_boundary(
 
      throw OomphLibError(
       error_stream.str(),
-      "QuarterCircleSectorDomain::macro_element_boundary()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
    
@@ -362,7 +362,7 @@ void QuarterCircleSectorDomain::macro_element_boundary(
    error_stream << "Wrong imacro " << imacro << std::endl;
 
    throw OomphLibError(error_stream.str(),
-                       "QuarterCircleSectorDomain::macro_element_boundary()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
  

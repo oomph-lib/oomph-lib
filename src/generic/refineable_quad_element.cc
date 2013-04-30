@@ -177,7 +177,7 @@ void  RefineableQElement<2>::get_bcs(int bound,
 
   default:
    throw OomphLibError("Wrong boundary",
-                       "RefineableQElement<2>::get_bcs()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 }
@@ -230,7 +230,7 @@ void RefineableQElement<2>::get_edge_bcs(const int& edge,
     << "Wrong edge " << edge << " passed to get_edge_bcs(..)" << std::endl;
 
    throw OomphLibError(error_stream.str(),
-                       "RefineableQElement<2>::get_edge_bcs()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -313,7 +313,7 @@ void RefineableQElement<2>::get_boundaries(const int& edge,
     << "Wrong edge " << edge << " passed" << std::endl;
 
    throw OomphLibError(error_stream.str(),
-                       "RefineableQElement<2>::get_boundaries()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -394,7 +394,7 @@ interpolated_zeta_on_edge(const unsigned &boundary,
                  << " is not on South edge\n";
      
      throw OomphLibError(error_stream.str(),
-                         "RefineableQuad::interpolated_zeta_on_edge()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -410,7 +410,7 @@ interpolated_zeta_on_edge(const unsigned &boundary,
                  << " is not on North edge\n";
      
      throw OomphLibError(error_stream.str(),
-                         "RefineableQuad::interpolated_zeta_on_edge()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -427,7 +427,7 @@ interpolated_zeta_on_edge(const unsigned &boundary,
                  << " is not on West edge\n";
      
      throw OomphLibError(error_stream.str(),
-                         "RefineableQuad::interpolated_zeta_on_edge()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -444,7 +444,7 @@ interpolated_zeta_on_edge(const unsigned &boundary,
                  << " is not on East edge\n";
      
      throw OomphLibError(error_stream.str(),
-                         "RefineableQuad::interpolated_zeta_on_edge()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -461,7 +461,7 @@ interpolated_zeta_on_edge(const unsigned &boundary,
     << "Wrong edge " << edge << " passed" << std::endl;
 
    throw OomphLibError(error_stream.str(),
-                       "RefineableQuad::interpolated_zeta_on_edge()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -630,7 +630,7 @@ void RefineableQElement<2>::build(Mesh*& mesh_pt,
       "I have no nodes. Who has created me then?!\n";
 
      throw OomphLibError(error_message,
-                         "RefineableQElement<2>::build()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -656,7 +656,7 @@ void RefineableQElement<2>::build(Mesh*& mesh_pt,
     {
      throw OomphLibError(
       "Can't handle generalised nodal positions (yet).",
-      "RefineableQElement<2>::build()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -721,7 +721,7 @@ void RefineableQElement<2>::build(Mesh*& mesh_pt,
     {
      throw OomphLibError(
       "Trouble: father_el_pt->node_pt(0)==0\n Can't build son element!\n",
-      "RefineableQElement<2>::build()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
    else
@@ -757,7 +757,7 @@ void RefineableQElement<2>::build(Mesh*& mesh_pt,
            {
             throw OomphLibError(
              "Can't handle periodic nodes (yet).",
-             "RefineableQElement<2>::build()",
+             OOMPH_CURRENT_FUNCTION,
              OOMPH_EXCEPTION_LOCATION);
            }
            }*/
@@ -854,7 +854,7 @@ void RefineableQElement<2>::build(Mesh*& mesh_pt,
                 {
                  throw OomphLibError(
                   "boundaries.size()!=1 seems a bit strange..\n",
-                  "RefineableQElement<2>::build()",
+                  OOMPH_CURRENT_FUNCTION,
                   OOMPH_EXCEPTION_LOCATION);
                 }
 
@@ -869,7 +869,7 @@ void RefineableQElement<2>::build(Mesh*& mesh_pt,
                   << created_node_pt->x(1) << "\n";
                  throw OomphLibError(
                   error_stream.str(),
-                  "RefineableQElement<2>::build()",
+                  OOMPH_CURRENT_FUNCTION,
                   OOMPH_EXCEPTION_LOCATION);
                 }
 #endif
@@ -982,7 +982,7 @@ void RefineableQElement<2>::build(Mesh*& mesh_pt,
                   {
                    throw OomphLibError(
                     "boundaries.size()!=1 seems a bit strange..\n",
-                    "RefineableQElement<2>::build()",
+                    OOMPH_CURRENT_FUNCTION,
                     OOMPH_EXCEPTION_LOCATION);
                   }
   
@@ -997,7 +997,7 @@ void RefineableQElement<2>::build(Mesh*& mesh_pt,
                     << created_node_pt->x(1) << "\n";
                    throw OomphLibError(
                     error_stream.str(),
-                    "RefineableQElement<2>::build()",
+                    OOMPH_CURRENT_FUNCTION,
                     OOMPH_EXCEPTION_LOCATION);
                   }
 #endif
@@ -1098,7 +1098,7 @@ void RefineableQElement<2>::build(Mesh*& mesh_pt,
             {
              throw OomphLibError(
               "boundaries.size()!=1 seems a bit strange..\n",
-              "RefineableQElement<2>::build()",
+              OOMPH_CURRENT_FUNCTION,
               OOMPH_EXCEPTION_LOCATION);
             }
 #endif
@@ -1147,7 +1147,7 @@ void RefineableQElement<2>::build(Mesh*& mesh_pt,
                   "during mesh refinement -- this doesn't make sense";
 
                  throw OomphLibError(error_message,
-                                     "RefineableQElement<2>::build()",
+                                     OOMPH_CURRENT_FUNCTION,
                                      OOMPH_EXCEPTION_LOCATION);
                 }
 #endif
@@ -1308,7 +1308,7 @@ void RefineableQElement<2>::build(Mesh*& mesh_pt,
           error_message += "the son should be too....\n";
 
          throw OomphLibError(error_message,
-                             "RefineableQElement<2>::build()",
+                             OOMPH_CURRENT_FUNCTION,
                              OOMPH_EXCEPTION_LOCATION);
         }
 #endif
@@ -1350,7 +1350,7 @@ void RefineableQElement<2>::build(Mesh*& mesh_pt,
           error_message += "the father should be too....\n";
 
          throw OomphLibError(error_message,
-                             "RefineableQElement<2>::build()",
+                             OOMPH_CURRENT_FUNCTION,
                              OOMPH_EXCEPTION_LOCATION);
         }
 #endif
@@ -1444,7 +1444,7 @@ void RefineableQElement<2>::setup_hanging_nodes(Vector<std::ofstream*>
  if(output_stream.size() != 4)
   {
    throw OomphLibError("There must be four output streams",
-                       "RefineableQElement<2>::setup_hanging_nodes",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -1621,7 +1621,7 @@ quad_hang_helper(const int &value_id,
 
         default:
          throw OomphLibError("my_edge not N, S, W, E\n",
-                             "RefineableQElement<2>::quad_hang_helper()",
+                             OOMPH_CURRENT_FUNCTION,
                              OOMPH_EXCEPTION_LOCATION);
         }
        
@@ -1701,7 +1701,7 @@ quad_hang_helper(const int &value_id,
                
               default:
                throw OomphLibError("neigh_edge not N, S, W, E\n",
-                                   "RefineableQElement<2>::quad_hang_helper()",
+                                   OOMPH_CURRENT_FUNCTION,
                                    OOMPH_EXCEPTION_LOCATION);
               }
           
@@ -2067,7 +2067,7 @@ void  RefineableSolidQElement<2>::get_solid_bcs(int bound,
 
   default:
    throw OomphLibError("Wrong boundary",
-                       "RefinableSolidQElement<2>::get_solid_bcs()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 }
@@ -2123,7 +2123,7 @@ void RefineableSolidQElement<2>::get_edge_solid_bcs(const int& edge,
     << std::endl;
 
    throw OomphLibError(error_stream.str(),
-                       "RefineableQuadSolidElement::get_solid_edge_bcs()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -2136,14 +2136,14 @@ void RefineableSolidQElement<2>::get_edge_solid_bcs(const int& edge,
   {
    throw OomphLibError(
     "Left node cannot be cast to SolidNode --> something is wrong",
-    "RefineableQuadSolidElement::get_solid_edge_bcs()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
  if (right_node_pt==0)
   {
    throw OomphLibError(
     "Right node cannot be cast to SolidNode --> something is wrong",
-    "RefineableQuadSolidElement::get_solid_edge_bcs()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 #endif

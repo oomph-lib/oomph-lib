@@ -125,7 +125,7 @@ public:
       }
      
      throw OomphLibError(error_stream.str(),
-                         "SpikedLine::SpikedLine()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -163,7 +163,7 @@ public:
    if (r.size()!=Ndim)
     {
      throw OomphLibError("The vector r has the wrong dimension\n",
-                         "SpikedLine::position()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -195,7 +195,7 @@ public:
       << Geom_data_pt[0]->time_stepper_pt()->nprev_values() << std::endl;
 
      throw OomphLibError(error_stream.str(),
-                         "SpikedLine::position()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif

@@ -250,7 +250,7 @@ private:
        
        throw OomphLibError(
         error_stream.str(),
-        "FullCircleDomain::macro_element_boundary()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
        break;
       }
@@ -296,7 +296,7 @@ private:
      
      throw OomphLibError(
       error_stream.str(),
-      "FullCircleDomain::macro_element_boundary()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
      break;
     }
@@ -341,7 +341,7 @@ private:
 
      throw OomphLibError(
       error_stream.str(),
-      "FullCircleDomain::macro_element_boundary()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
    
@@ -384,7 +384,7 @@ private:
        
        throw OomphLibError(
         error_stream.str(),
-        "FullCircleDomain::macro_element_boundary()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
       }
    
@@ -431,7 +431,7 @@ private:
        
        throw OomphLibError(
         error_stream.str(),
-        "FullCircleDomain::macro_element_boundary()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
       }
      break;
@@ -443,7 +443,7 @@ private:
    error_stream << "Wrong imacro " << imacro << std::endl;
    throw OomphLibError(
     error_stream.str(),
-    "FullCircleDomain::macro_element_boundary()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
    

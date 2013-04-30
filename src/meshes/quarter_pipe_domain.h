@@ -281,7 +281,7 @@ void QuarterPipeDomain::macro_element_boundary(
     
     throw OomphLibError(
      error_stream.str(),
-     "TubeMesh::macro_element_boundary()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
 

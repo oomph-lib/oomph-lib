@@ -82,7 +82,7 @@ namespace Hankel_functions_for_helmholtz_problem
                  << n_actual << " rather than " << n
                  << " Bessel functions.\n";    
     throw OomphLibError(error_stream.str(),
-                        "Hankel_functions_for_helmholtz_problem::Hankel_first",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -124,7 +124,7 @@ template <class ELEMENT>
    {
     throw OomphLibError(
      "Don't call empty constructor for HelmholtzBCElementBase",
-     "HelmholtzBCElementBase::HelmholtzBCElementBase()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
   
@@ -340,7 +340,7 @@ template <class ELEMENT>
                  << "the same size. \n";
     throw OomphLibError(
      error_stream.str(),
-     "HelmholtzBCElementBase::compute_contribution_to_fourier_components",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -653,7 +653,7 @@ class HelmholtzAbsorbingBCElement : public  HelmholtzBCElementBase<ELEMENT>
    {
     throw OomphLibError(
      "Order of ABC hasn't been set!",
-     "HelmholtzAbsorbingBCElement::fill_in_generic_residual_contribution_helmholtz_abc",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
   
@@ -661,7 +661,7 @@ class HelmholtzAbsorbingBCElement : public  HelmholtzBCElementBase<ELEMENT>
    {
     throw OomphLibError(
      "Pointer to outer radius hasn't been set!",
-     "HelmholtzAbsorbingBCElement::fill_in_generic_residual_contribution_helmholtz_abc",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
   
@@ -1578,7 +1578,7 @@ void HelmholtzDtNMesh<ELEMENT>::compute_fourier_components(
                  << "the same size. \n";
     throw OomphLibError(
      error_stream.str(),
-     "HelmholtzDtNMesh::compute_fourier_components(...)",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -1652,7 +1652,7 @@ void HelmholtzDtNMesh<ELEMENT>::setup_gamma()
        {
         throw OomphLibError(
          "Outer radius for DtN BC must not be zero!",
-         "HelmholtzDtNMesh::setup_gamma()",
+         OOMPH_CURRENT_FUNCTION,
          OOMPH_EXCEPTION_LOCATION);
        }
       
@@ -1670,7 +1670,7 @@ void HelmholtzDtNMesh<ELEMENT>::setup_gamma()
                      << "or recompile without PARANOID.\n";
         throw OomphLibError(
          error_stream.str(),
-         "HelmholtzDtNMesh::setup_gamma()",
+         OOMPH_CURRENT_FUNCTION,
          OOMPH_EXCEPTION_LOCATION);
        }
      }
@@ -1892,7 +1892,7 @@ template<class ELEMENT>
         "If you desire this functionality, you must implement it yourself\n";
        
        throw OomphLibError(error_string,
-                           "HelmholtzFluxElement::HelmholtzFluxElement()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
      //Otherwise read out the value
@@ -1921,7 +1921,7 @@ template<class ELEMENT>
         "If you desire this functionality, you must implement it yourself\n";
        
        throw OomphLibError(error_string,
-                           "HelmholtzFluxElement::HelmholtzFluxElement()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
      else
@@ -1950,7 +1950,7 @@ template<class ELEMENT>
         "If you desire this functionality, you must implement it yourself\n";
        
        throw OomphLibError(error_string,
-                        "HelmholtzFluxElement::HelmholtzFluxElement()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION); 
       }
      else 
@@ -1968,7 +1968,7 @@ template<class ELEMENT>
                   << ". It should be 1,2, or 3!" << std::endl;
      
      throw OomphLibError(error_stream.str(),
-                         "HelmholtzFluxElement::HelmholtzFluxElement()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
      break;
     }

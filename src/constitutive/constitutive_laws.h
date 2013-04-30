@@ -67,7 +67,7 @@ class StrainEnergyFunction
     "gamma, is not implemented for this strain energy function.\n";
     
    throw OomphLibError(error_message,
-                       "StrainEnergyFunction::W()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
    return 0.0;
   }
@@ -83,7 +83,7 @@ class StrainEnergyFunction
    error_message +=  "energy function\n";
    
    throw OomphLibError(error_message,
-                       "StrainEnergyFunction::W()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
    return 0.0;
   }
@@ -97,7 +97,7 @@ class StrainEnergyFunction
   {
    throw OomphLibError(
     "Sorry, the FD setup of dW/dgamma hasn't been implemented yet",
-    "StrainEnergyFunction::derivative",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
  
@@ -567,7 +567,7 @@ class ConstitutiveLaw
    {
     throw OomphLibError(
      "Incompressible formulation not implemented for this constitutive law",
-     "ConstitutiveLaw::calculate_second_piola_kichhoff_stress()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
 
@@ -608,7 +608,7 @@ class ConstitutiveLaw
    {
     throw OomphLibError(
      "Near-incompressible formulation not implemented for constitutive law",
-     "ConstitutiveLaw::calculate_second_piola_kichhoff_stress()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
 

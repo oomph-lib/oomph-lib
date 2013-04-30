@@ -155,7 +155,7 @@ namespace oomph
      std::ostringstream error_msg;
      error_msg << "Matrix is not correct type.";
      throw OomphLibError(error_msg.str(),
-                         "BlockPreconditioner::matrix_pt()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -220,7 +220,7 @@ namespace oomph
       << " meshes.\n" << "Cannot store a mesh at entry " << i << "\n"
       << "Has set_nmesh(...) been called?";
      throw OomphLibError(error_message.str(),
-                         "BlockPreconditioner::set_mesh(...)",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -432,7 +432,7 @@ namespace oomph
      error_msg << "Mesh pointer " << i
                << " is null.";
      throw OomphLibError(error_msg.str(),
-                         "BlockPreconditioner::mesh_pt",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -621,7 +621,7 @@ namespace oomph
                    << "a master preconditioner.";
      throw OomphLibError(
                          error_message.str(),
-                         "BlockPreconditioner::master_block_preconditioner_pt(...)",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -838,7 +838,7 @@ namespace oomph
       << "cannot be found.\n";
      throw OomphLibError(
                          error_message.str(),
-                         "BlockPreconditioner::dof_number(...)",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
 #endif
 #else
@@ -865,7 +865,7 @@ namespace oomph
 
    // Shouldn't get here
    throw OomphLibError("Never get here\n",
-                       "BlockPreconditioner::dof_number(...)",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
    // Dummy return
    return -1;
@@ -901,7 +901,7 @@ namespace oomph
       << "cannot be found.\n";
      throw OomphLibError(
                          error_message.str(),
-                         "BlockPreconditioner::dof_number(...)",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
 #endif
 #else
@@ -915,7 +915,7 @@ namespace oomph
 
    // Shouldn't get here
    throw OomphLibError("Never get here\n",
-                       "BlockPreconditioner::index_in_dof(...)",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
    // Dummy return
    return -1;
@@ -1238,7 +1238,7 @@ namespace oomph
     std::ostringstream error_msg;
     error_msg << "Can't setup blocks because no meshes have been set.";
     throw OomphLibError(error_msg.str(),
-                        "BlockPreconditioner::block_setup",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -1316,7 +1316,7 @@ namespace oomph
      error_message << "Block setup for distributed matrices only works "
                    << "for CRDoubleMatrices";
      throw OomphLibError(error_message.str(),
-                         "BlockPreconditioner::block_setup(...)",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -1585,7 +1585,7 @@ namespace oomph
                         << "numbers allocated. Dof number " << i
                         << " is unallocated.";
           throw OomphLibError(error_message.str(),
-                              "BlockPreconditioner::block_setup(...)",
+                              OOMPH_CURRENT_FUNCTION,
                               OOMPH_EXCEPTION_LOCATION);
          }
        }
@@ -1937,7 +1937,7 @@ namespace oomph
         std::ostringstream error_message;
         error_message << "Not all the DOF numbers required were received";
         throw OomphLibError(error_message.str(),
-                            "BlockPreconditioner::block_setup()",
+                            OOMPH_CURRENT_FUNCTION,
                             OOMPH_EXCEPTION_LOCATION);
        }
 #endif
@@ -1946,7 +1946,7 @@ namespace oomph
       error_message
        << "The problem appears to be distributed, MPI is required";
       throw OomphLibError(error_message.str(),
-                          "BlockPreconditioner::block_setup()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
 #endif
      }
@@ -2145,7 +2145,7 @@ namespace oomph
      << Ndof_types;
     throw OomphLibError(
                         error_message.str(),
-                        "BlockPreconditioner::block_setup(...)",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -2813,7 +2813,7 @@ namespace oomph
                   << " x " << required_blocks.nrow() << ", whereas it should "
                   << "be " << n_block_types << " x " << n_block_types;
     throw OomphLibError(error_message.str(),
-                        "BlockPreconditioner<MATRIX>::get_blocks()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 
@@ -2828,7 +2828,7 @@ namespace oomph
                   << " x " << block_matrix_pt.nrow() << ", whereas it should "
                   << "be " << n_block_types << " x " << n_block_types;
     throw OomphLibError(error_message.str(),
-                        "BlockPreconditioner<MATRIX>::get_blocks()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 
@@ -2867,7 +2867,7 @@ namespace oomph
     std::ostringstream error_message;
     error_message << "The distribution of the global vector v must be setup.";
     throw OomphLibError(error_message.str(),
-                        "BlockPreconditioner::get_block_vectors(...)",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
   if (*(v.distribution_pt()) != *(this->master_distribution_pt()))
@@ -2877,7 +2877,7 @@ namespace oomph
                   << " specified master_distribution_pt(). \n"
                   << "i.e. Distribution_pt in the master preconditioner";
     throw OomphLibError(error_message.str(),
-                        "BlockPreconditioner::get_block_vectors(...)",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -3099,7 +3099,7 @@ namespace oomph
     error_message << "The preconditioner is distributed and on more than one "
                   << "processor. MPI is required.";
     throw OomphLibError(error_message.str(),
-                        "BlockPreconditioner<MATRIX>::get_block_vector(...)",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
 #endif
    }
@@ -3123,7 +3123,7 @@ namespace oomph
     std::ostringstream error_message;
     error_message << "The distribution of the global vector v must be setup.";
     throw OomphLibError(error_message.str(),
-                        "BlockPreconditioner::return_block_vectors(...)",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
   if (*(v.distribution_pt()) != *(this->master_distribution_pt()))
@@ -3133,7 +3133,7 @@ namespace oomph
                   << " specified master_distribution_pt(). \n"
                   << "i.e. Distribution_pt in the master preconditioner";
     throw OomphLibError(error_message.str(),
-                        "BlockPreconditioner::return_block_vectors(...)",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
   for (unsigned b = 0; b < nblock; b++)
@@ -3144,7 +3144,7 @@ namespace oomph
       error_message << "The distribution of the block vector " << b
                     << " must be setup.";
       throw OomphLibError(error_message.str(),
-                          "BlockPreconditioner::return_block_vectors(...)",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
     if (*(s[b].distribution_pt()) != *(Block_distribution_pt[b]))
@@ -3155,7 +3155,7 @@ namespace oomph
                     << " specified distribution at Block_distribution_pt["
                     << b << "]";
       throw OomphLibError(error_message.str(),
-                          "BlockPreconditioner::return_block_vectors(...)",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
    }
@@ -3364,7 +3364,7 @@ namespace oomph
     error_message << "The preconditioner is distributed and on more than one "
                   << "processor. MPI is required.";
     throw OomphLibError(error_message.str(),
-                        "BlockPreconditioner<MATRIX>::get_block_vector(...)",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
 #endif
    }
@@ -3390,7 +3390,7 @@ namespace oomph
                   << ", however this preconditioner has nblock_types() "
                   << "= " << nblock_types() << std::endl;
     throw OomphLibError(error_message.str(),
-                        "BlockPreconditioner::get_block_vector(...)",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
   if (!v.built())
@@ -3398,7 +3398,7 @@ namespace oomph
     std::ostringstream error_message;
     error_message << "The distribution of the global vector v must be setup.";
     throw OomphLibError(error_message.str(),
-                        "BlockPreconditioner::get_block_vector(...)",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
   if (*(v.distribution_pt()) != *(this->master_distribution_pt()))
@@ -3408,7 +3408,7 @@ namespace oomph
                   << " specified master_distribution_pt(). \n"
                   << "i.e. Distribution_pt in the master preconditioner";
     throw OomphLibError(error_message.str(),
-                        "BlockPreconditioner::get_block_vector(...)",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -3531,7 +3531,7 @@ namespace oomph
     error_message << "The preconditioner is distributed and on more than one "
                   << "processor. MPI is required.";
     throw OomphLibError(error_message.str(),
-                        "BlockPreconditioner<MATRIX>::get_block_vector(...)",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
 #endif
    }
@@ -3560,7 +3560,7 @@ namespace oomph
                   << ", however this preconditioner has nblock_types() "
                   << "= " << nblock_types() << std::endl;
     throw OomphLibError(error_message.str(),
-                        "BlockPreconditioner::return_block_vector(...)",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
   if (!v.built())
@@ -3568,7 +3568,7 @@ namespace oomph
     std::ostringstream error_message;
     error_message << "The distribution of the global vector v must be setup.";
     throw OomphLibError(error_message.str(),
-                        "BlockPreconditioner::return_block_vector(...)",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
   if (*v.distribution_pt() != *this->master_distribution_pt())
@@ -3578,7 +3578,7 @@ namespace oomph
                   << " specified master_distribution_pt(). \n"
                   << "i.e. Distribution_pt in the master preconditioner";
     throw OomphLibError(error_message.str(),
-                        "BlockPreconditioner::return_block_vector(...)",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
   if (!w.built())
@@ -3586,7 +3586,7 @@ namespace oomph
     std::ostringstream error_message;
     error_message << "The distribution of the block vector w must be setup.";
     throw OomphLibError(error_message.str(),
-                        "BlockPreconditioner::return_block_vector(...)",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
   if (*w.distribution_pt() != *Block_distribution_pt[b])
@@ -3595,7 +3595,7 @@ namespace oomph
     error_message << "The distribution of the block vector w must match the "
                   << " specified distribution at Block_distribution_pt[b]";
     throw OomphLibError(error_message.str(),
-                        "BlockPreconditioner::return_block_vector(...)",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -3719,7 +3719,7 @@ namespace oomph
     error_message << "The preconditioner is distributed and on more than one "
                   << "processor. MPI is required.";
     throw OomphLibError(error_message.str(),
-                        "BlockPreconditioner<MATRIX>::get_block_vector(...)",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
 #endif
    }
@@ -3739,7 +3739,7 @@ namespace oomph
     std::ostringstream error_message;
     error_message << "The distribution of the global vector v must be setup.";
     throw OomphLibError(error_message.str(),
-                        "BlockPreconditioner::get_block_vector(...)",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
   if (*v.distribution_pt() != *this->master_distribution_pt())
@@ -3749,7 +3749,7 @@ namespace oomph
                   << " specified master_distribution_pt(). \n"
                   << "i.e. Distribution_pt in the master preconditioner";
     throw OomphLibError(error_message.str(),
-                        "BlockPreconditioner::get_block_vector(...)",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -3882,7 +3882,7 @@ namespace oomph
     error_message << "The preconditioner is distributed and on more than one "
                   << "processor. MPI is required.";
     throw OomphLibError(error_message.str(),
-                        "BlockPreconditioner<MATRIX>::get_block_vector(...)",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
 #endif
    }
@@ -3905,7 +3905,7 @@ namespace oomph
     std::ostringstream error_message;
     error_message << "The distribution of the global vector v must be setup.";
     throw OomphLibError(error_message.str(),
-                        "BlockPreconditioner::return_block_vector(...)",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
   if (*v.distribution_pt() != *this->master_distribution_pt())
@@ -3915,7 +3915,7 @@ namespace oomph
                   << " specified master_distribution_pt(). \n"
                   << "i.e. Distribution_pt in the master preconditioner";
     throw OomphLibError(error_message.str(),
-                        "BlockPreconditioner::return_block_vector(...)",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
   if (!w.built())
@@ -3923,7 +3923,7 @@ namespace oomph
     std::ostringstream error_message;
     error_message << "The distribution of the block vector w must be setup.";
     throw OomphLibError(error_message.str(),
-                        "BlockPreconditioner::return_block_vector(...)",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
   if (*w.distribution_pt() != *this->preconditioner_matrix_distribution_pt())
@@ -3932,7 +3932,7 @@ namespace oomph
     error_message << "The distribution of the block vector w must match the "
                   << " specified distribution at Distribution_pt[b]";
     throw OomphLibError(error_message.str(),
-                        "BlockPreconditioner::return_block_vector(...)",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -4061,7 +4061,7 @@ namespace oomph
     error_message << "The preconditioner is distributed and on more than one "
                   << "processor. MPI is required.";
     throw OomphLibError(error_message.str(),
-                        "BlockPreconditioner<MATRIX>::get_block_vector(...)",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
 #endif
    }

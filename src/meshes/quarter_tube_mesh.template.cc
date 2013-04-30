@@ -644,7 +644,7 @@ QuarterTubeMesh<ELEMENT>::QuarterTubeMesh(GeomObject* wall_pt,
                 << "topologically consistent with a quarter tube with a\n"
                 << "non-curved centreline.\n";
    throw OomphLibError(error_stream.str(),
-                       "QuatrerTubeMesh::QuarterTubeMesh()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -705,7 +705,8 @@ setup_algebraic_node_update()
    std::string function_name =
     "AlgebraicRefineableQuarterTubeMesh::";
    function_name += "setup_algebraic_node_update()";
-   throw OomphLibError(error_message.str(),function_name,
+   throw OomphLibError(error_message.str(),
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -1024,7 +1025,8 @@ node_update_central_region(const unsigned& t, AlgebraicNode*& node_pt)
    std::string function_name =
     "AlgebraicRefineableQuarterTubeMesh::";
    function_name += "node_update_central_region()",
-    throw OomphLibError(error_message,function_name,
+    throw OomphLibError(error_message,
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -1114,7 +1116,8 @@ node_update_lower_right_region(const unsigned& t, AlgebraicNode*& node_pt)
    std::string function_name =
     "AlgebraicRefineableQuarterTubeSectorMesh::";
    function_name += "node_update_lower_right_region()",
-    throw OomphLibError(error_message,function_name,
+    throw OomphLibError(error_message,
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -1234,7 +1237,8 @@ node_update_upper_left_region(const unsigned& t, AlgebraicNode*& node_pt)
     "AlgebraicRefineableQuarterTubeMesh::";
    function_name += "node_update_upper_left_region()";
 
-   throw OomphLibError(error_message,function_name,
+   throw OomphLibError(error_message,
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif

@@ -381,7 +381,8 @@ int main(int argc, char* argv[])
    error_message +=
     "One arg: Required number of refinements\n";
 
-   throw OomphLibError(error_message,"main()",
+   throw OomphLibError(error_message,
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
  

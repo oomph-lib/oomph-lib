@@ -1081,7 +1081,7 @@ void FSICollapsibleChannelProblem<ELEMENT>::set_initial_condition()
                   << time_stepper_pt()->type() << " family" << std::endl;
      
      throw OomphLibError(error_stream.str(),
-                       "FSICollapsibleChannelProblem::set_initial_condition()",
+                         OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
     }
   }
@@ -1114,7 +1114,7 @@ void FSICollapsibleChannelProblem<ELEMENT>::set_initial_condition()
 
      throw OomphLibError(
       error_stream.str(),
-      "set_initial_condition()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
   }

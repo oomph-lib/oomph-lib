@@ -216,7 +216,7 @@ void TetgenMesh<ELEMENT>::build_from_scaffold(TimeStepper* time_stepper_pt,
    error_message << "for nnode_1d=" << n_node_1d << std::endl;
    
    throw OomphLibError(error_message.str(),
-                       "TetgenMesh::build_from_scaffold()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -557,7 +557,7 @@ void TetgenMesh<ELEMENT>::build_from_scaffold(TimeStepper* time_stepper_pt,
       default:
 
        throw OomphLibError("More than ten edge nodes in Tet Element",
-                           "TetgenMesh::build_from_scaffold()",
+       OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
      
@@ -665,7 +665,7 @@ void TetgenMesh<ELEMENT>::build_from_scaffold(TimeStepper* time_stepper_pt,
         default:
          
          throw OomphLibError("More than four face nodes in Tet Element",
-                             "TetgenMesh::build_from_scaffold()",
+         OOMPH_CURRENT_FUNCTION,
                              OOMPH_EXCEPTION_LOCATION);
         }
        
@@ -981,7 +981,7 @@ void TetgenMesh<ELEMENT>::build_from_scaffold(TimeStepper* time_stepper_pt,
       if(n_hole > 0) 
        {
         throw OomphLibError("Don't know how to handle holes yet\n",
-                            "TetgenMesh::deep_copy_of_tetgenio()",
+                            OOMPH_CURRENT_FUNCTION,
                             OOMPH_EXCEPTION_LOCATION);
        }
      } //end of loop over facets
@@ -1253,7 +1253,7 @@ void TetgenMesh<ELEMENT>::setup_boundary_coordinates_generic(
         << "You can suppress this error message by recompiling \n"
         << "recompiling without PARANOID or by changing the tolerance.\n";
        throw OomphLibError(error_message.str(),
-                           "TetgenMesh::setup_boundary_coordinates_generic()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
     }
@@ -1308,7 +1308,7 @@ void TetgenMesh<ELEMENT>::setup_boundary_coordinates_generic(
         << "You can suppress this error message by recompiling \n"
         << "recompiling without PARANOID or by changing the tolerance.\n";
        throw OomphLibError(error_message.str(),
-                           "TetgenMesh::setup_boundary_coordinates_generic()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
 #endif
@@ -1392,7 +1392,7 @@ void TetgenMesh<ELEMENT>::snap_to_quadratic_surface(
     << "specified in boundary_id which is " << boundary_id.size() 
     << std::endl;
    throw OomphLibError(error_message.str(),
-                       "TetgenMesh::snap_to_quadratic_surface()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
  
@@ -1607,7 +1607,7 @@ void TetgenMesh<ELEMENT>::snap_to_quadratic_surface(
         << "You can suppress this error message by recompiling \n"
         << "recompiling without PARANOID or by changing the tolerance.\n";
        throw OomphLibError(error_message.str(),
-                           "TetgenMesh::snap_to_quadratic_surface()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
 #endif
@@ -1803,7 +1803,7 @@ void TetgenMesh<ELEMENT>::snap_to_quadratic_surface(
     << "set wrongly.\n";
    throw OomphLibError(
     error_message.str(),
-    "TetgenMesh::snap_to_quadratic_surface()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
  
@@ -1860,7 +1860,7 @@ void TetgenMesh<ELEMENT>::split_elements_in_corners(
    error_message << "for nnode_1d=" << nnode_1d << std::endl;
    
    throw OomphLibError(error_message.str(),
-                       "TetgenMesh::split_elements_in_corners()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
  

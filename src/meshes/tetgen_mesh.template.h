@@ -164,7 +164,7 @@ public:
       "\n Please fix this!\n\n";
      
      throw OomphLibError(error_stream.str(),
-                         "TetgenMesh::TetgenMesh()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -230,7 +230,7 @@ public:
       "\n Please fix this!\n\n";
      
      throw OomphLibError(error_stream.str(),
-                         "TetgenMesh::TetgenMesh()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    
@@ -735,7 +735,7 @@ public:
       error_message 
        << "This probably means that the boundary is not adjacent to region\n";
       throw OomphLibError(error_message.str(),
-                          "TetgenMesh::face_index_at_boundary_in_region()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
    }

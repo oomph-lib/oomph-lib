@@ -240,7 +240,8 @@ public:
      function_name += 
       "MacroElementNodeUpdateRefineableFishMesh()";
 
-     throw OomphLibError(error_message.str(),function_name,
+     throw OomphLibError(error_message.str(),
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    delete el_pt;
@@ -273,7 +274,8 @@ public:
         "MacroElementNodeUpdateRefineableFishMesh::\n";
        function_name += "MacroElementNodeUpdateRefinableFishMesh()";
 
-       throw OomphLibError(error_message.str(),function_name,
+       throw OomphLibError(error_message.str(),
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
 #endif       
@@ -319,7 +321,8 @@ public:
       "MacroElementNodeUpdateRefineableFishMesh::";
      function_name += "node_update()";
      
-     throw OomphLibError(error_message,function_name,
+     throw OomphLibError(error_message,
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -407,7 +410,8 @@ public:
                    << this->Upper_fin  << std::endl;
      std::string function_name = "AlgebraicFishMesh::algebraic_node_update()";
      
-     throw OomphLibError(error_message.str(),function_name,
+     throw OomphLibError(error_message.str(),
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }
@@ -432,7 +436,8 @@ public:
      std::string function_name =
       "AlgebraicFishMesh::node_update()";
      
-     throw OomphLibError(error_message,function_name,
+     throw OomphLibError(error_message,
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -482,7 +487,7 @@ public:
       << "zeta[0]    : " << zeta[0]  << std::endl;
 
      throw OomphLibError(error_message.str(),
-                         "AlgebraicFishMesh::update_node_update()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif

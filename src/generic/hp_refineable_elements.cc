@@ -118,8 +118,8 @@ local_one_d_fraction_of_node(const unsigned &n1d, const unsigned &i)
     error_message <<"\nERROR: Exceeded maximum polynomial order for";
     error_message <<"\n       shape functions.\n";
     throw OomphLibError(error_message.str(),
-                  "PRefineableQElement<1,INITIAL_NNODE_1D>::local_one_d_fraction_of_node()",
-                  OOMPH_EXCEPTION_LOCATION);
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
     return 0.0;
    }
  }
@@ -217,7 +217,7 @@ initial_setup(Tree* const &adopted_father_pt)
   {
    throw OomphLibError(
           "Element not in a tree, and no adopted father has been specified!",
-          "PRefineableQElement<1,INITIAL_NNODE_1D>::initial_setup()",
+          OOMPH_CURRENT_FUNCTION,
           OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -268,7 +268,7 @@ initial_setup(Tree* const &adopted_father_pt)
     error_message <<"\nERROR: Exceeded maximum polynomial order for";
     error_message <<"\n       integration scheme.\n";
     throw OomphLibError(error_message.str(),
-                        "PRefineableQElement<1,INITIAL_NNODE_1D>::initial_setup()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
   }
@@ -303,7 +303,7 @@ void PRefineableQElement<1,INITIAL_NNODE_1D>::pre_build(
      std::ostringstream error_message;
      error_message <<"\nERROR: Dynamic cast failed!\n";
      throw OomphLibError(error_message.str(),
-                         "PRefineableQElement<1,INITIAL_NNODE_1D>::pre_build()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }
@@ -329,7 +329,7 @@ void PRefineableQElement<1,INITIAL_NNODE_1D>::p_refine(
   {
    throw OomphLibError(
           "Cloned copy must be a PRefineableQElement<1,INITIAL_NNODE_1D>!",
-          "PRefineableQElement<1,INITIAL_NNODE_1D>::p_refine()",
+          OOMPH_CURRENT_FUNCTION,
           OOMPH_EXCEPTION_LOCATION);
   }
 #ifdef PARANOID
@@ -350,7 +350,7 @@ void PRefineableQElement<1,INITIAL_NNODE_1D>::p_refine(
                 << "but it is supposed to be a copy!" << std::endl;
      
      throw OomphLibError(err_stream.str(),
-                         "PRefineableQElement<1,INITIAL_NNODE_1D>::p_refine()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -365,7 +365,7 @@ void PRefineableQElement<1,INITIAL_NNODE_1D>::p_refine(
                 << "but it is supposed to be a copy!" << std::endl;
      
      throw OomphLibError(err_stream.str(),
-                         "PRefineableQElement<1,INITIAL_NNODE_1D>::p_refine()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    
@@ -383,7 +383,7 @@ void PRefineableQElement<1,INITIAL_NNODE_1D>::p_refine(
                 << "from mine, but it is supposed to be a copy!" << std::endl;
      
      throw OomphLibError(err_stream.str(),
-                         "PRefineableQElement<1,INITIAL_NNODE_1D>::p_refine()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -398,7 +398,7 @@ void PRefineableQElement<1,INITIAL_NNODE_1D>::p_refine(
   {
    throw OomphLibError(
           "Can't handle generalised nodal positions (yet).",
-          "PRefineableQElement<1,INITIAL_NNODE_1D>::p_refine()",
+          OOMPH_CURRENT_FUNCTION,
           OOMPH_EXCEPTION_LOCATION);
   }
  
@@ -439,7 +439,7 @@ void PRefineableQElement<1,INITIAL_NNODE_1D>::p_refine(
   error_message <<"\nERROR: Exceeded maximum polynomial order for";
   error_message <<"\n       integration scheme.\n";
   throw OomphLibError(error_message.str(),
-                      "PRefineableQElement<1,INITIAL_NNODE_1D>::p_refine()",
+                      OOMPH_CURRENT_FUNCTION,
                       OOMPH_EXCEPTION_LOCATION);
  }
  
@@ -677,7 +677,7 @@ void PRefineableQElement<1,INITIAL_NNODE_1D>::p_refine(
      error_message += "then I should be too....\n";
 
      throw OomphLibError(error_message,
-                         "PRefineableQElement<1,INITIAL_NNODE_1D>::p_refine()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -900,7 +900,7 @@ d2shape_local(const Vector<double> &s, Shape &psi, DShape &dpsids,
  std::ostringstream error_message;
  error_message <<"\nd2shape_local currently not implemented for this element\n";
  throw OomphLibError(error_message.str(),
-                     "PRefineableQElement<1,INITIAL_NNODE_1D>::d2shape_local()",
+                     OOMPH_CURRENT_FUNCTION,
                      OOMPH_EXCEPTION_LOCATION);
 }
 
@@ -965,7 +965,7 @@ rebuild_from_sons(Mesh* &mesh_pt)
    error_message <<"\nERROR: Exceeded maximum polynomial order for";
    error_message <<"\n       integration scheme.\n";
    throw OomphLibError(error_message.str(),
-                       "PRefineableQPoissonElement<1>::rebuild_from_sons()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -995,7 +995,7 @@ rebuild_from_sons(Mesh* &mesh_pt)
  if(this->node_pt(0)==0)
   {
    throw OomphLibError("The vertex node (0) does not exist",
-                       "PRefineableQElement<1,INITIAL_NNODE_1D>::rebuild_from_sons()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
      
@@ -1035,7 +1035,7 @@ rebuild_from_sons(Mesh* &mesh_pt)
         {
          throw OomphLibError(
                 "Cannot handle periodic nodes yet",
-                "PRefineableQElement<1,INITIAL_NNODE_1D>::rebuild_from_sons()",
+                OOMPH_CURRENT_FUNCTION,
                 OOMPH_EXCEPTION_LOCATION);
         }
        // Non-periodic case, just set the pointer
@@ -1087,7 +1087,7 @@ rebuild_from_sons(Mesh* &mesh_pt)
              
          throw OomphLibError(
                 error_message,
-                "PRefineableQElement<1,INITIAL_NNODE_1D>::rebuild_from_sons()",
+                OOMPH_CURRENT_FUNCTION,
                 OOMPH_EXCEPTION_LOCATION);
         }
 #endif
@@ -1233,7 +1233,7 @@ local_coordinate_of_node(const unsigned& n, Vector<double>& s)
     error_message <<"\nERROR: Exceeded maximum polynomial order for";
     error_message <<"\n       shape functions.\n";
     throw OomphLibError(error_message.str(),
-                        "PRefineableQElement<2,INITIAL_NNODE_1D>::local_coordinate_of_node()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
     break;
    }
@@ -1278,8 +1278,8 @@ local_one_d_fraction_of_node(const unsigned &n1d, const unsigned &i)
     error_message <<"\nERROR: Exceeded maximum polynomial order for";
     error_message <<"\n       shape functions.\n";
     throw OomphLibError(error_message.str(),
-                  "PRefineableQElement<2,INITIAL_NNODE_1D>::local_one_d_fraction_of_node()",
-                  OOMPH_EXCEPTION_LOCATION);
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
     return 0.0;
    }
  }
@@ -1623,7 +1623,7 @@ initial_setup(Tree* const &adopted_father_pt)
   {
    throw OomphLibError(
           "Element not in a tree, and no adopted father has been specified!",
-          "PRefineableQElement<2,INITIAL_NNODE_1D>::initial_setup()",
+          OOMPH_CURRENT_FUNCTION,
           OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -1674,7 +1674,7 @@ initial_setup(Tree* const &adopted_father_pt)
     error_message <<"\nERROR: Exceeded maximum polynomial order for";
     error_message <<"\n       integration scheme.\n";
     throw OomphLibError(error_message.str(),
-                        "PRefineableQElement<2,INITIAL_NNODE_1D>::initial_setup()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
   }
@@ -1715,7 +1715,7 @@ void PRefineableQElement<2,INITIAL_NNODE_1D>::pre_build(
       "I have no nodes. Who has created me then?!\n";
    
      throw OomphLibError(error_message,
-                         "PRefineableQElement<2,INITIAL_NNODE_1D>::pre_build()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -1792,7 +1792,7 @@ void PRefineableQElement<2,INITIAL_NNODE_1D>::pre_build(
     {
      throw OomphLibError(
       "Trouble: father_el_pt->node_pt(0)==0\n Can't build son element!\n",
-      "PRefineableQElement<2,INITIAL_NNODE_1D>::pre_build()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
    else
@@ -1828,7 +1828,7 @@ void PRefineableQElement<2,INITIAL_NNODE_1D>::pre_build(
            {
             throw OomphLibError(
              "Can't handle periodic nodes (yet).",
-             "PRefineableQElement<2,INITIAL_NNODE_1D>::pre_build()",
+             OOMPH_CURRENT_FUNCTION,
              OOMPH_EXCEPTION_LOCATION);
            }
            }*/
@@ -1904,7 +1904,7 @@ void PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine(
   {
    throw OomphLibError(
           "Cloned copy must be a PRefineableQElement<2,INITIAL_NNODE_1D>!",
-          "PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine()",
+          OOMPH_CURRENT_FUNCTION,
           OOMPH_EXCEPTION_LOCATION);
   }
 #ifdef PARANOID
@@ -1925,7 +1925,7 @@ void PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine(
                 << "but it is supposed to be a copy!" << std::endl;
      
      throw OomphLibError(err_stream.str(),
-                         "PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -1940,7 +1940,7 @@ void PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine(
                 << "but it is supposed to be a copy!" << std::endl;
      
      throw OomphLibError(err_stream.str(),
-                         "PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    
@@ -1958,7 +1958,7 @@ void PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine(
                 << "from mine, but it is supposed to be a copy!" << std::endl;
      
      throw OomphLibError(err_stream.str(),
-                         "PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -1973,7 +1973,7 @@ void PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine(
   {
    throw OomphLibError(
           "Can't handle generalised nodal positions (yet).",
-          "PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine()",
+          OOMPH_CURRENT_FUNCTION,
           OOMPH_EXCEPTION_LOCATION);
   }
  
@@ -2014,7 +2014,7 @@ void PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine(
   error_message <<"\nERROR: Exceeded maximum polynomial order for";
   error_message <<"\n       integration scheme.\n";
   throw OomphLibError(error_message.str(),
-                      "PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine()",
+                      OOMPH_CURRENT_FUNCTION,
                       OOMPH_EXCEPTION_LOCATION);
  }
  
@@ -2153,7 +2153,7 @@ void PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine(
             {
              throw OomphLibError(
               "boundaries.size()!=1 seems a bit strange..\n",
-              "PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine()",
+              OOMPH_CURRENT_FUNCTION,
               OOMPH_EXCEPTION_LOCATION);
             }
          
@@ -2168,7 +2168,7 @@ void PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine(
               << created_node_pt->x(1) << "\n";
              throw OomphLibError(
               error_stream.str(),
-              "PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine()",
+              OOMPH_CURRENT_FUNCTION,
               OOMPH_EXCEPTION_LOCATION);
             }
 #endif
@@ -2283,7 +2283,7 @@ void PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine(
               {
                throw OomphLibError(
                 "boundaries.size()!=1 seems a bit strange..\n",
-                "PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine()",
+                OOMPH_CURRENT_FUNCTION,
                 OOMPH_EXCEPTION_LOCATION);
               }
              
@@ -2298,7 +2298,7 @@ void PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine(
                 << created_node_pt->x(1) << "\n";
                throw OomphLibError(
                 error_stream.str(),
-                "PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine()",
+                OOMPH_CURRENT_FUNCTION,
                 OOMPH_EXCEPTION_LOCATION);
               }
 #endif
@@ -2398,7 +2398,7 @@ void PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine(
         {
          throw OomphLibError(
                 "boundaries.size()!=1 seems a bit strange..\n",
-                "PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine()",
+                OOMPH_CURRENT_FUNCTION,
                 OOMPH_EXCEPTION_LOCATION);
         }
 #endif
@@ -2446,7 +2446,7 @@ void PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine(
 
              throw OomphLibError(
                     error_message,
-                    "PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine()",
+                    OOMPH_CURRENT_FUNCTION,
                     OOMPH_EXCEPTION_LOCATION);
             }
 #endif
@@ -2657,7 +2657,7 @@ void PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine(
      error_message += "then I should be too....\n";
 
      throw OomphLibError(error_message,
-                         "PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -2795,7 +2795,7 @@ shape(const Vector<double> &s, Shape &psi) const
   error_message <<"\nERROR: Exceeded maximum polynomial order for";
   error_message <<"\n       polynomial order for shape functions.\n";
   throw OomphLibError(error_message.str(),
-                      "PRefineableQElement<2,INITIAL_NNODE_1D>::shape()",
+                      OOMPH_CURRENT_FUNCTION,
                       OOMPH_EXCEPTION_LOCATION);
  }
  
@@ -2959,7 +2959,7 @@ dshape_local(const Vector<double> &s, Shape &psi, DShape &dpsids) const
   error_message <<"\nERROR: Exceeded maximum polynomial order for";
   error_message <<"\n       polynomial order for shape functions.\n";
   throw OomphLibError(error_message.str(),
-                      "PRefineableQElement<2,INITIAL_NNODE_1D>::dshape_local()",
+                      OOMPH_CURRENT_FUNCTION,
                       OOMPH_EXCEPTION_LOCATION);
  }
  
@@ -2977,7 +2977,7 @@ d2shape_local(const Vector<double> &s, Shape &psi, DShape &dpsids,
  std::ostringstream error_message;
  error_message <<"\nd2shape_local currently not implemented for this element\n";
  throw OomphLibError(error_message.str(),
-                     "PRefineableQElement<2,INITIAL_NNODE_1D>::d2shape_local()",
+                     OOMPH_CURRENT_FUNCTION,
                      OOMPH_EXCEPTION_LOCATION);
 }
 
@@ -3034,7 +3034,7 @@ rebuild_from_sons(Mesh* &mesh_pt)
    error_message <<"\nERROR: Exceeded maximum polynomial order for";
    error_message <<"\n       integration scheme.\n";
    throw OomphLibError(error_message.str(),
-                       "PRefineableQPoissonElement<2>::rebuild_from_sons()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -3088,7 +3088,7 @@ rebuild_from_sons(Mesh* &mesh_pt)
  if(this->node_pt(0)==0)
   {
    throw OomphLibError("The Corner node (0) does not exist",
-                       "PRefineableQElement<2,INITIAL_NNODE_1D>::rebuild_from_sons()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
    
@@ -3155,7 +3155,7 @@ rebuild_from_sons(Mesh* &mesh_pt)
           {
            throw OomphLibError(
                   "Cannot handle periodic nodes yet",
-                  "PRefineableQElement<2,INITIAL_NNODE_1D>::rebuild_from_sons()",
+                  OOMPH_CURRENT_FUNCTION,
                   OOMPH_EXCEPTION_LOCATION);
           }
          //Non-periodic case, just set the pointer
@@ -3320,7 +3320,7 @@ rebuild_from_sons(Mesh* &mesh_pt)
 
              throw OomphLibError(
                     error_message,
-                    "PRefineableQElement<2,INITIAL_NNODE_1D>::rebuild_from_sons()",
+                    OOMPH_CURRENT_FUNCTION,
                     OOMPH_EXCEPTION_LOCATION);
             }
 #endif
@@ -3821,7 +3821,7 @@ quad_hang_helper(const int &value_id, const int &my_edge,
     {
      throw OomphLibError(
             "Cannot transform coordinates",
-            "PRefineableQElement<2,INITIAL_NNODE_1D>::quad_hang_helper()",
+            OOMPH_CURRENT_FUNCTION,
             OOMPH_EXCEPTION_LOCATION);
     }
    
@@ -3877,7 +3877,7 @@ quad_hang_helper(const int &value_id, const int &my_edge,
       {
        throw OomphLibError(
               "Cannot do mortaring with periodic hanging nodes yet!",
-              "PRefineableQElement<2,INITIAL_NNODE_1D>::quad_hang_helper()",
+              OOMPH_CURRENT_FUNCTION,
               OOMPH_EXCEPTION_LOCATION);
       } //End of special treatment for periodic hanging nodes
      
@@ -3915,7 +3915,7 @@ quad_hang_helper(const int &value_id, const int &my_edge,
 
         default:
          throw OomphLibError("my_edge not N, S, W, E\n",
-                             "PRefineableQElement<2,INITIAL_NNODE_1D>::quad_hang_helper()",
+                             OOMPH_CURRENT_FUNCTION,
                              OOMPH_EXCEPTION_LOCATION);
         }
        // Add to set
@@ -3979,7 +3979,7 @@ quad_hang_helper(const int &value_id, const int &my_edge,
 
       default:
        throw OomphLibError("my_edge not N, S, W, E\n",
-                           "PRefineableQElement<2,INITIAL_NNODE_1D>::quad_hang_helper()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
      // Add node to vector of slave element nodes
@@ -4074,7 +4074,7 @@ quad_hang_helper(const int &value_id, const int &my_edge,
        
      throw OomphLibError(
             error_message,
-            "PRefineableQElement<2,INITIAL_NNODE_1D>::quad_hang_helper()",
+            OOMPH_CURRENT_FUNCTION,
             OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -4534,7 +4534,7 @@ interpolated_zeta_on_edge_before_p_refinement(const unsigned &boundary,
    error_message <<"\nERROR: Exceeded maximum polynomial order for";
    error_message <<"\n       polynomial order for shape functions.\n";
    throw OomphLibError(error_message.str(),
-                       "PRefineableQElement<2,INITIAL_NNODE_1D>::shape()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
  
@@ -4554,7 +4554,7 @@ interpolated_zeta_on_edge_before_p_refinement(const unsigned &boundary,
                  << " is not on South edge\n";
      
      throw OomphLibError(error_stream.str(),
-                         "PRefineableQElement<2,INITIAL_NNODE_1D>::interpolated_zeta_on_edge_before_p_refinement()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -4570,7 +4570,7 @@ interpolated_zeta_on_edge_before_p_refinement(const unsigned &boundary,
                  << " is not on North edge\n";
      
      throw OomphLibError(error_stream.str(),
-                         "PRefineableQElement<2,INITIAL_NNODE_1D>::interpolated_zeta_on_edge_before_p_refinement()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -4587,7 +4587,7 @@ interpolated_zeta_on_edge_before_p_refinement(const unsigned &boundary,
                  << " is not on West edge\n";
      
      throw OomphLibError(error_stream.str(),
-                         "PRefineableQElement<2,INITIAL_NNODE_1D>::interpolated_zeta_on_edge_before_p_refinement()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -4604,7 +4604,7 @@ interpolated_zeta_on_edge_before_p_refinement(const unsigned &boundary,
                  << " is not on East edge\n";
      
      throw OomphLibError(error_stream.str(),
-                         "PRefineableQElement<2,INITIAL_NNODE_1D>::interpolated_zeta_on_edge_before_p_refinement()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -4621,7 +4621,7 @@ interpolated_zeta_on_edge_before_p_refinement(const unsigned &boundary,
     << "Wrong edge " << edge << " passed" << std::endl;
 
    throw OomphLibError(error_stream.str(),
-                       "PRefineableQElement<2,INITIAL_NNODE_1D>::interpolated_zeta_on_edge_before_p_refinement()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -4706,7 +4706,7 @@ local_coordinate_of_node(const unsigned& n, Vector<double>& s)
     error_message <<"\nERROR: Exceeded maximum polynomial order for";
     error_message <<"\n       shape functions.\n";
     throw OomphLibError(error_message.str(),
-                        "PRefineableQElement<3,INITIAL_NNODE_1D>::local_coordinate_of_node()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
     break;
    }
@@ -4762,7 +4762,7 @@ local_one_d_fraction_of_node(const unsigned &n1d, const unsigned &i)
     error_message <<"\nERROR: Exceeded maximum polynomial order for";
     error_message <<"\n       shape functions.\n";
     throw OomphLibError(error_message.str(),
-                  "PRefineableQElement<3,INITIAL_NNODE_1D>::local_one_d_fraction_of_node()",
+                        OOMPH_CURRENT_FUNCTION,
                   OOMPH_EXCEPTION_LOCATION);
     return 0.0;
    }
@@ -5083,7 +5083,7 @@ initial_setup(Tree* const &adopted_father_pt)
   {
    throw OomphLibError(
           "Element not in a tree, and no adopted father has been specified!",
-          "PRefineableQElement<2,INITIAL_NNODE_1D>::initial_setup()",
+          OOMPH_CURRENT_FUNCTION,
           OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -5134,7 +5134,7 @@ initial_setup(Tree* const &adopted_father_pt)
     error_message <<"\nERROR: Exceeded maximum polynomial order for";
     error_message <<"\n       integration scheme.\n";
     throw OomphLibError(error_message.str(),
-                        "PRefineableQElement<3,INITIAL_NNODE_1D>::initial_setup()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
   }
@@ -5302,7 +5302,7 @@ void PRefineableQElement<3,INITIAL_NNODE_1D>::pre_build(
      std::ostringstream error_message;
      error_message <<"\nERROR: Dynamic cast failed!\n";
      throw OomphLibError(error_message.str(),
-                         "PRefineableQElement<3,INITIAL_NNODE_1D>::pre_build()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }
@@ -5332,7 +5332,7 @@ void PRefineableQElement<3,INITIAL_NNODE_1D>::p_refine(
   {
    throw OomphLibError(
           "Cloned copy must be a PRefineableQElement<3,INITIAL_NNODE_1D>!",
-          "PRefineableQElement<3,INITIAL_NNODE_1D>::p_refine()",
+          OOMPH_CURRENT_FUNCTION,
           OOMPH_EXCEPTION_LOCATION);
   }
 #ifdef PARANOID
@@ -5353,7 +5353,7 @@ void PRefineableQElement<3,INITIAL_NNODE_1D>::p_refine(
                 << "but it is supposed to be a copy!" << std::endl;
      
      throw OomphLibError(err_stream.str(),
-                         "PRefineableQElement<3,INITIAL_NNODE_1D>::p_refine()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -5368,7 +5368,7 @@ void PRefineableQElement<3,INITIAL_NNODE_1D>::p_refine(
                 << "but it is supposed to be a copy!" << std::endl;
      
      throw OomphLibError(err_stream.str(),
-                         "PRefineableQElement<3,INITIAL_NNODE_1D>::p_refine()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    
@@ -5386,7 +5386,7 @@ void PRefineableQElement<3,INITIAL_NNODE_1D>::p_refine(
                 << "from mine, but it is supposed to be a copy!" << std::endl;
      
      throw OomphLibError(err_stream.str(),
-                         "PRefineableQElement<3,INITIAL_NNODE_1D>::p_refine()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -5401,7 +5401,7 @@ void PRefineableQElement<3,INITIAL_NNODE_1D>::p_refine(
   {
    throw OomphLibError(
           "Can't handle generalised nodal positions (yet).",
-          "PRefineableQElement<3,INITIAL_NNODE_1D>::p_refine()",
+          OOMPH_CURRENT_FUNCTION,
           OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -5498,7 +5498,7 @@ void PRefineableQElement<3,INITIAL_NNODE_1D>::p_refine(
   error_message <<"\nERROR: Exceeded maximum polynomial order for";
   error_message <<"\n       integration scheme.\n";
   throw OomphLibError(error_message.str(),
-                      "PRefineableQElement<3,INITIAL_NNODE_1D>::p_refine()",
+                      OOMPH_CURRENT_FUNCTION,
                       OOMPH_EXCEPTION_LOCATION);
  }
  
@@ -5693,7 +5693,7 @@ shape(const Vector<double> &s, Shape &psi) const
   error_message <<"\nERROR: Exceeded maximum polynomial order for";
   error_message <<"\n       polynomial order for shape functions.\n";
   throw OomphLibError(error_message.str(),
-                      "PRefineableQElement<3,INITIAL_NNODE_1D>::shape()",
+                      OOMPH_CURRENT_FUNCTION,
                       OOMPH_EXCEPTION_LOCATION);
  }
  
@@ -5886,7 +5886,7 @@ dshape_local(const Vector<double> &s, Shape &psi, DShape &dpsids) const
   error_message <<"\nERROR: Exceeded maximum polynomial order for";
   error_message <<"\n       polynomial order for shape functions.\n";
   throw OomphLibError(error_message.str(),
-                      "PRefineableQElement<3,INITIAL_NNODE_1D>::dshape_local()",
+                      OOMPH_CURRENT_FUNCTION,
                       OOMPH_EXCEPTION_LOCATION);
  }
  
@@ -5904,7 +5904,7 @@ d2shape_local(const Vector<double> &s, Shape &psi, DShape &dpsids,
  std::ostringstream error_message;
  error_message <<"\nd2shape_local currently not implemented for this element\n";
  throw OomphLibError(error_message.str(),
-                     "PRefineableQElement<3,INITIAL_NNODE_1D>::d2shape_local()",
+                     OOMPH_CURRENT_FUNCTION,
                      OOMPH_EXCEPTION_LOCATION);
 }
 
@@ -5980,7 +5980,7 @@ oc_hang_helper(const int &value_id, const int &my_edge,
 //{
 // throw OomphLibError(
 //  "This function has not been implemented yet.",
-//  "PRefineableQElement<3,INITIAL_NNODE_1D>::interpolated_zeta_on_face_before_p_refinement()",
+//  OOMPH_CURRENT_FUNCTION,
 //  OOMPH_EXCEPTION_LOCATION);
 //}
 

@@ -280,7 +280,7 @@ double TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement<
    {
     throw OomphLibError(
      "LinearElasticity is not yet implemented for more than one position type.",
-     "TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement::fill_in_contribution_to_residuals_helmholtz_traction()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -723,7 +723,7 @@ double TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement<
       
       throw OomphLibError(
        error_string,
-       "HelmholtzFluxFromNormalDisplacementBCElement constructor",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
     //Otherwise read out the value
@@ -753,7 +753,7 @@ double TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement<
       
       throw OomphLibError(
        error_string,
-       "HelmholtzFluxFromNormalDisplacementBCElement constructor",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
     else
@@ -782,7 +782,7 @@ double TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement<
       
       throw OomphLibError(
        error_string,
-       "HelmholtzFluxFromNormalDisplacementBCElement constructor",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
       
      }
@@ -803,7 +803,7 @@ double TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement<
     
     throw OomphLibError(
      error_stream.str(),
-     "HelmholtzFluxFromNormalDisplacementBCElement constructor",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
     break;
    }

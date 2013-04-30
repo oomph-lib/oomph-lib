@@ -527,7 +527,7 @@ public:
   {
    throw OomphLibError(
     "Don't call empty constructor for ClampedSlidingHermiteBeamBoundaryConditionElement ",
-    "ClampedSlidingHermiteBeamBoundaryConditionElement::ClampedSlidingHermiteBeamBoundaryConditionElement ()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
  

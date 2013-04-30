@@ -118,7 +118,7 @@ namespace oomph
      std::ostringstream error_msg;
      error_msg << "Matrix pointer is null.";
      throw OomphLibError(error_msg.str(),
-                         "BlockPreconditioner::matrix_pt()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -140,7 +140,7 @@ namespace oomph
       << "trying to use it in a non-parallel case. Or it might mean you haven't\n"
       << "set it properly.";
      throw OomphLibError(error_msg.str(),
-                         "BlockPreconditioner::comm_pt()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -226,7 +226,7 @@ namespace oomph
       << "(this is the same as the matrix passed to setup())";
      throw OomphLibError
       (error_message_stream.str(),
-       "IdentityPreconditioner::preconditioner_solve()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
     }
    if (z.built())
@@ -239,7 +239,7 @@ namespace oomph
         << "same distribution as the r vector (and preconditioner).";
        throw OomphLibError
         (error_message_stream.str(),
-         "IdentityPreconditioner::preconditioner_solve()",
+         OOMPH_CURRENT_FUNCTION,
          OOMPH_EXCEPTION_LOCATION);
       }
     }

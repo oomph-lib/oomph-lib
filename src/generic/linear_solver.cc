@@ -154,7 +154,7 @@ void DenseLU::factorise(DoubleMatrixBase* const &matrix_pt)
    if(largest_entry==0.0) 
     {
      throw OomphLibError("Singular Matrix",
-                         "DenseLU::solve()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    //Save the scaling
@@ -421,7 +421,7 @@ void DenseLU::backsub(const Vector<double> &rhs,
    error_message_stream 
     << "The vectors rhs and result must not be distributed";
    throw OomphLibError(error_message_stream.str(),
-                       "DenseLU::solve()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -432,7 +432,7 @@ void DenseLU::backsub(const Vector<double> &rhs,
    error_message_stream 
     << "The matrix at matrix_pt must be square.";
    throw OomphLibError(error_message_stream.str(),
-                       "DenseLU::solve()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);    
   }
  // check that the matrix and the rhs vector have the same nrow()
@@ -442,7 +442,7 @@ void DenseLU::backsub(const Vector<double> &rhs,
    error_message_stream 
     << "The matrix and the rhs vector must have the same number of rows.";
    throw OomphLibError(error_message_stream.str(),
-                       "DenseLU::solve()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
  
@@ -457,7 +457,7 @@ void DenseLU::backsub(const Vector<double> &rhs,
     {
      throw OomphLibError(
       "Matrix must not be distributed or only one processor",
-      "DenseLU::factorise()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);   
     }
    OomphCommunicator temp_comm(*rhs.distribution_pt()->communicator_pt());
@@ -468,7 +468,7 @@ void DenseLU::backsub(const Vector<double> &rhs,
       << "The matrix matrix_pt must have the same communicator as the vectors"
       << " rhs and result must have the same communicator";
      throw OomphLibError(error_message_stream.str(),
-                         "DenseLU::solve()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }
@@ -483,7 +483,7 @@ void DenseLU::backsub(const Vector<double> &rhs,
       << "The result vector distribution has been setup; it must have the "
       << "same distribution as the rhs vector.";
      throw OomphLibError(error_message_stream.str(),
-                         "DenseLU::solve()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }   
@@ -569,7 +569,7 @@ void FD_LU::solve(Problem* const &problem_pt, DoubleVector &result)
      error_message_stream 
       << "The result vector must not be distributed";
      throw OomphLibError(error_message_stream.str(),
-                         "FD_LU::solve()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }   
@@ -943,7 +943,7 @@ void SuperLUSolver::solve(DoubleMatrixBase* const &matrix_pt,
    error_message_stream 
     << "The vectors rhs must be setup";
    throw OomphLibError(error_message_stream.str(),
-                       "SuperLUSolver::solve()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -954,7 +954,7 @@ void SuperLUSolver::solve(DoubleMatrixBase* const &matrix_pt,
    error_message_stream 
     << "The matrix at matrix_pt must be square.";
    throw OomphLibError(error_message_stream.str(),
-                       "SuperLUSolver::solve()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);    
   }
 
@@ -965,7 +965,7 @@ void SuperLUSolver::solve(DoubleMatrixBase* const &matrix_pt,
    error_message_stream 
     << "The matrix and the rhs vector must have the same number of rows.";
    throw OomphLibError(error_message_stream.str(),
-                       "SuperLUSolver::solve()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
  
@@ -982,7 +982,7 @@ void SuperLUSolver::solve(DoubleMatrixBase* const &matrix_pt,
       << "The matrix matrix_pt must have the same distribution as the "
       << "rhs vector.";
      throw OomphLibError(error_message_stream.str(),
-                         "SuperLUSolver::solve()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }
@@ -997,7 +997,7 @@ void SuperLUSolver::solve(DoubleMatrixBase* const &matrix_pt,
       << "The matrix (matrix_pt) is not distributable and therefore the rhs"
       << " vector must not be distributed";
      throw OomphLibError(error_message_stream.str(),
-                         "SuperLUSolver::solve()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }
@@ -1012,7 +1012,7 @@ void SuperLUSolver::solve(DoubleMatrixBase* const &matrix_pt,
       << "The result vector distribution has been setup; it must have the "
       << "same distribution as the rhs vector.";
      throw OomphLibError(error_message_stream.str(),
-                         "SuperLUSolver::solve()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }   
@@ -1140,7 +1140,7 @@ void SuperLUSolver::factorise_distributed(DoubleMatrixBase* const &matrix_pt)
                         << "N, M " << n << " " << m << std::endl;
    
    throw OomphLibError(error_message_stream.str(),
-                       "SuperLUSolver::factorise()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -1195,7 +1195,7 @@ void SuperLUSolver::factorise_distributed(DoubleMatrixBase* const &matrix_pt)
     {
      throw OomphLibError
       ("To apply SuperLUSolver to a CRDoubleMatrix - it must be built",
-       "SuperLUSolver::factorise()",OOMPH_EXCEPTION_LOCATION);
+       OOMPH_CURRENT_FUNCTION,OOMPH_EXCEPTION_LOCATION);
     }
 #endif
    
@@ -1366,7 +1366,7 @@ else if(dynamic_cast<CCDoubleMatrix*>(matrix_pt))
                         << " CCDoubleMatrix, CRDoubleMatrix\n"
                         << "and DistributedCRDoubleMatrix matrices\n";
    throw OomphLibError(error_message_stream.str(),
-                       "SuperLUSolver::factorise()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -1378,7 +1378,7 @@ else if(dynamic_cast<CCDoubleMatrix*>(matrix_pt))
 	       << Dist_info
 	       << " . See the SuperLU documentation for what this means.";
      throw OomphLibError(error_msg.str(),
-			 "SuperLUSolver::factorise_distributed",
+                         OOMPH_CURRENT_FUNCTION,
 			 OOMPH_EXCEPTION_LOCATION);
     }
 }
@@ -1402,8 +1402,8 @@ void SuperLUSolver::factorise_serial(DoubleMatrixBase* const &matrix_pt)
      std::ostringstream error_message_stream;                         
      error_message_stream                                        
       << "The matrix must not be distributed.";  
-     throw OomphLibError(error_message_stream.str(),     
-                         "SuperLUSolver::factorise()",             
+     throw OomphLibError(error_message_stream.str(),
+                         OOMPH_CURRENT_FUNCTION,             
                          OOMPH_EXCEPTION_LOCATION);        
     }
   }
@@ -1422,7 +1422,7 @@ void SuperLUSolver::factorise_serial(DoubleMatrixBase* const &matrix_pt)
                         << "N, M " << n << " " << m << std::endl;
    
    throw OomphLibError(error_message_stream.str(),
-                       "SuperLU::factorise()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -1477,7 +1477,7 @@ void SuperLUSolver::factorise_serial(DoubleMatrixBase* const &matrix_pt)
  else
   {
    throw OomphLibError("SuperLU only works with CR or CC Double matrices",
-                       "SuperLU::factorise()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
  
@@ -1501,7 +1501,7 @@ void SuperLUSolver::factorise_serial(DoubleMatrixBase* const &matrix_pt)
 	     << Serial_info
 	     << " . See the SuperLU documentation for what this means.";
    throw OomphLibError(error_msg.str(),
-		       "SuperLUSolver::factorise_serial",
+                       OOMPH_CURRENT_FUNCTION,
 		       OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -1554,7 +1554,7 @@ void SuperLUSolver::backsub_distributed(const DoubleVector &rhs,
    error_message_stream 
     << "The vectors rhs must be setup";
    throw OomphLibError(error_message_stream.str(),
-                       "SuperLUSolver::resolve()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -1600,7 +1600,7 @@ void SuperLUSolver::backsub_distributed(const DoubleVector &rhs,
       << "The result vector distribution has been setup; it must have the "
       << "same distribution as the rhs vector.";
      throw OomphLibError(error_message_stream.str(),
-                         "SuperLUSolver::resolve()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }   
@@ -1639,7 +1639,7 @@ void SuperLUSolver::backsub_distributed(const DoubleVector &rhs,
  else
   {
    throw OomphLibError("The matrix factors have not been stored",
-                       "SuperLUSolver::backsub()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -1650,7 +1650,7 @@ void SuperLUSolver::backsub_distributed(const DoubleVector &rhs,
    error_msg << "SuperLU returned the error status code "
 	     << Dist_info << " . See the SuperLU documentation for what this means.";
    throw OomphLibError(error_msg.str(),
-		       "SuperLUSolver::backsub_distributed",
+                       OOMPH_CURRENT_FUNCTION,
 		       OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -1677,8 +1677,8 @@ void SuperLUSolver::backsub_serial(const DoubleVector &rhs,
    std::ostringstream error_message_stream;                           
    error_message_stream                                        
     << "The rhs vector distribution must be setup.";               
-   throw OomphLibError(error_message_stream.str(),                  
-                       "SuperLU::backsub_serial()",
+   throw OomphLibError(error_message_stream.str(),
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);         
   }
  // PARANOID check that the rhs has the right number of global rows
@@ -1686,7 +1686,7 @@ void SuperLUSolver::backsub_serial(const DoubleVector &rhs,
   {
    throw OomphLibError(
     "RHS does not have the same dimension as the linear system",
-    "SuperLU::backsub_serial()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
  // PARANOID check that the rhs is not distributed
@@ -1695,8 +1695,8 @@ void SuperLUSolver::backsub_serial(const DoubleVector &rhs,
    std::ostringstream error_message_stream;                           
    error_message_stream                                        
     << "The rhs vector must not be distributed.";               
-   throw OomphLibError(error_message_stream.str(),                  
-                       "SuperLU::backsub_serial()",
+   throw OomphLibError(error_message_stream.str(),
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);         
   }
  // PARANOID check that if the result is setup it matches the distribution
@@ -1709,8 +1709,8 @@ void SuperLUSolver::backsub_serial(const DoubleVector &rhs,
      error_message_stream                                        
       << "If the result distribution is setup then it must be the same as the "
       << "rhs distribution";               
-     throw OomphLibError(error_message_stream.str(),                  
-                         "SuperLU::backsub_serial()",
+     throw OomphLibError(error_message_stream.str(),
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);         
     }
   }
@@ -1741,7 +1741,7 @@ void SuperLUSolver::backsub_serial(const DoubleVector &rhs,
 	      << Serial_info
 	      << " . See the SuperLU documentation for what this means.";
     throw OomphLibError(error_msg.str(),
-			"SuperLU::backsub_serial()",
+                        OOMPH_CURRENT_FUNCTION,
 			OOMPH_EXCEPTION_LOCATION);
    }
 }

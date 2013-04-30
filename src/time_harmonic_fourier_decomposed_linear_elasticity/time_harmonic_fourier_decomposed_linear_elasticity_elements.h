@@ -183,7 +183,7 @@ namespace oomph
       error_message << "No pointer to Poisson's ratio set. Please set one!\n";
       throw OomphLibError(
        error_message.str(),
-       "TimeHarmonicFourierDecomposedLinearElasticityEquationsBase::nu()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif    
@@ -204,7 +204,7 @@ namespace oomph
        << "No pointer to Fourier wavenumber set. Please set one!\n";
       throw OomphLibError(
        error_message.str(),
-       "TimeHarmonicFourierDecomposedLinearElasticityEquationsBase::fourier_wavenumber()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif    
@@ -552,7 +552,7 @@ class TimeHarmonicFourierDecomposedLinearElasticityEquations :
                     << num_entries << std::endl;
       throw OomphLibError(
        error_message.str(),
-       "RefineableTimeHarmonicFourierDecomposedLinearElasticityEquations::get_Z2_flux()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif
@@ -669,7 +669,7 @@ class TimeHarmonicFourierDecomposedLinearElasticityEquations :
        << " " << fld << std::endl;
       throw OomphLibError(
        error_stream.str(),
-       "ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement::nhistory_values_for_projection()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif
@@ -735,7 +735,7 @@ class TimeHarmonicFourierDecomposedLinearElasticityEquations :
         << "but nvalue= " << nvalue << "!= 3 dim = " << 3*n_dim << std::endl;
        throw OomphLibError(
         error_stream.str(),
-        "ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement::get_field()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
       }
 #endif
@@ -767,7 +767,7 @@ class TimeHarmonicFourierDecomposedLinearElasticityEquations :
       << "but nvalue= " << nvalue << "!= 3 dim = " << 3*n_dim << std::endl;
      throw OomphLibError(
       error_stream.str(),
-      "ProjectableTimeHarmonicFourierDecomposedLinearElasticityElement::local_equation()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
 #endif

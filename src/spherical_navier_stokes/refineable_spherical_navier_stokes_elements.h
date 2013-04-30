@@ -95,7 +95,7 @@ public virtual ElementWithZ2ErrorEstimator
                    << num_entries << std::endl;
      throw OomphLibError(
       error_message.str(),
-      "RefineableSphericalNavierStokesEquations::get_Z2_flux()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
 #endif

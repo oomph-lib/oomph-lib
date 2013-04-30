@@ -267,7 +267,7 @@ void construct_and_solve_problem(const unsigned &i)
  else 
   {
    throw OomphLibError("Self test failed",
-                       "main()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 

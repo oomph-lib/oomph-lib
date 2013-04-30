@@ -1879,7 +1879,8 @@ int main(int argc, char* argv[])
       << "ERROR while trying to open " << CommandLineArgs::Argv[1] << 
       " for restart." << std::endl;
 
-     throw OomphLibError(error_stream.str(),"main()",
+     throw OomphLibError(error_stream.str(),
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    // Do the actual restart

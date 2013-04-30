@@ -85,7 +85,7 @@ SimpleRectangularTriMesh<ELEMENT>::SimpleRectangularTriMesh(
   {
    throw OomphLibError(
     "Currently this mesh only works for 3, 6 & 10-noded triangles",
-    "SimpleRectangularTriMesh::SimpleRectangularTriMesh()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
  

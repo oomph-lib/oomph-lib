@@ -188,7 +188,7 @@ GeompackQuadScaffoldMesh::GeompackQuadScaffoldMesh(
 
      throw OomphLibError(
       error_stream.str(),
-      "GeompackQuadScaffoldMesh::GeompackQuadScaffoldMesh()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
   }

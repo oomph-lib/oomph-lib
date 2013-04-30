@@ -41,7 +41,7 @@ void gll_nodes(const unsigned &Nnode, Vector<double> &x)
   if(Nnode<2) 
    {
     throw OomphLibError("Invalid number of nodes",
-                        "Orthpoly::gll_nodes()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
   else if (Nnode==2){
@@ -99,7 +99,7 @@ void gl_nodes(const unsigned &Nnode, Vector<double> &x)
  if(Nnode<2)
   {
    throw OomphLibError("Invalid number of nodes",
-                       "Orthpoly::gl_nodes()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
  else if (Nnode==2){

@@ -224,7 +224,7 @@ public:
      
     default:
    throw OomphLibError("Coordinate is on no face or not on a unique face",
-                       "DGMesh::neighbour_finder()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
    break;
  }

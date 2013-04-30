@@ -79,7 +79,7 @@ public:
   {
    throw OomphLibError(
     "Don't call empty constructor for AdvectionDiffusionFluxElement",
-    "AdvectionDiffusionFluxElement::AdvectionDiffusionFluxElement()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -301,7 +301,7 @@ AdvectionDiffusionFluxElement(FiniteElement* const &bulk_el_pt,
      
        throw OomphLibError(
         error_string,
-        "AdvectionDiffusionFluxElement::AdvectionDiffusionFluxElement()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
     }
    //Otherwise read out the value
@@ -331,7 +331,7 @@ AdvectionDiffusionFluxElement(FiniteElement* const &bulk_el_pt,
      
      throw OomphLibError(
       error_string,
-      "AdvectionDiffusionFluxElement::AdvectionDiffusionFluxElement()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
    else
@@ -360,7 +360,7 @@ AdvectionDiffusionFluxElement(FiniteElement* const &bulk_el_pt,
      
      throw OomphLibError(
       error_string,
-      "AdvectionDiffusionFluxElement::AdvectionDiffusionFluxElement()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
      
     }
@@ -380,7 +380,7 @@ AdvectionDiffusionFluxElement(FiniteElement* const &bulk_el_pt,
    
    throw OomphLibError(
     error_stream.str(),
-    "AdvectionDiffusionFluxElement::AdvectionDiffusionFluxElement()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
    break;
   }

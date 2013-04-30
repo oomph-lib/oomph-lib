@@ -863,7 +863,8 @@ int main(int argc, char* argv[])
                 << "inconsistant with those\n"
                 << "of Global_Physical_Variables::Re and "
                 << "Global_Physical_Variables::St." << std::endl;
-   throw OomphLibError(error_stream.str(),"main()",OOMPH_EXCEPTION_LOCATION);
+   throw OomphLibError(error_stream.str(),
+                       OOMPH_CURRENT_FUNCTION,OOMPH_EXCEPTION_LOCATION);
   }
 
  /// Maximum time

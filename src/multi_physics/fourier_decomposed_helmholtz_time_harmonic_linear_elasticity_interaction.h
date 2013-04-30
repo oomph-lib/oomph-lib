@@ -270,7 +270,7 @@ double FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement<
    {
     throw OomphLibError(
      "LinearElasticity is not yet implemented for more than one position type.",
-     "TimeHarmonicLinElastLoadedByHelmholtzPressureBCElement::fill_in_contribution_to_residuals_helmholtz_traction()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -707,7 +707,7 @@ double FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement<
       
       throw OomphLibError(
        error_string,
-       "HelmholtzFluxFromNormalDisplacementBCElement constructor",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
       
      }

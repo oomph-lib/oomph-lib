@@ -788,7 +788,7 @@ namespace Multi_domain_functions
       {
        throw OomphLibError(
         "Failed to cast new node to boundary node\n",
-        "Multi_domain_functions::get_required_nodal_information_helper()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
       }
 #endif
@@ -1062,7 +1062,7 @@ namespace Multi_domain_functions
       {
        throw OomphLibError(
         "Failed to cast new node to boundary node\n",
-        "Multi_domain_functions::get_required_master_nodal_information_helper()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
       }
 #endif
@@ -1239,7 +1239,7 @@ namespace Multi_domain_functions
                         << "yet been implemented.\n";
            throw OomphLibError
             (error_stream.str(),
-             "Multi_domain_functions::get_required_master_nodal_...()",
+             OOMPH_CURRENT_FUNCTION,
              OOMPH_EXCEPTION_LOCATION);
           }
 
@@ -1480,7 +1480,7 @@ namespace Multi_domain_functions
        {
         throw OomphLibError(
          "Failed to cast new node to boundary node\n",
-         "Multi_domain_functions::construct_new_external_halo_node_helper()",
+         OOMPH_CURRENT_FUNCTION,
          OOMPH_EXCEPTION_LOCATION);
        }
 #endif
@@ -1886,7 +1886,7 @@ namespace Multi_domain_functions
                             << "yet been implemented.\n";
                throw OomphLibError
                 (error_stream.str(),
-                 "Multi_domain_functions::locate_zeta_for_missing_coordinates()",
+                 OOMPH_CURRENT_FUNCTION,
                  OOMPH_EXCEPTION_LOCATION);
               }
               
@@ -2086,7 +2086,7 @@ namespace Multi_domain_functions
                        << Dim << " zeta coordinates have been set to DBX_MAX\n";
          throw OomphLibError
           (error_stream.str(),
-           "Multi_domain_functions::locate_zeta_for_missing_coordinates(...)",
+           OOMPH_CURRENT_FUNCTION,
            OOMPH_EXCEPTION_LOCATION);
         }
 #endif
@@ -2224,7 +2224,7 @@ namespace Multi_domain_functions
                               << "yet been implemented.\n";
                  throw OomphLibError
                   (error_stream.str(),
-                   "Multi_domain_functions::locate_zeta_for_missing_coordinates()",
+                   OOMPH_CURRENT_FUNCTION,
                    OOMPH_EXCEPTION_LOCATION);
                 }
              
@@ -2510,7 +2510,7 @@ namespace Multi_domain_functions
                   << "mesh_pt [ " << n_mesh << " ] don't match.\n";
      throw OomphLibError
       (error_stream.str(),
-       "Multi_domain_functions::locate_zeta_for_local_coordinates(...)",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -2552,7 +2552,7 @@ namespace Multi_domain_functions
             << " in multidomain namespace, " << Dim << std::endl;
            throw OomphLibError
             (error_stream.str(),
-             "Multi_domain_functions::locate_zeta_for_local_coordinates(...)",
+             OOMPH_CURRENT_FUNCTION,
              OOMPH_EXCEPTION_LOCATION);
           }
 #endif
@@ -2739,7 +2739,7 @@ namespace Multi_domain_functions
                   << "\n";
      throw OomphLibError
       (error_stream.str(),
-       "Multi_domain_functions::get_dim_helper(...)",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
     }
 

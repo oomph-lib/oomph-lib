@@ -106,7 +106,7 @@ namespace oomph
     if(P_pt==0) 
      {
       throw OomphLibError("Integer P pointer not set\n",
-                          "HomogenisedLinearElasticityEquationsBase::get_p()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
       return 0;
      }
@@ -122,7 +122,7 @@ namespace oomph
     if(M_pt==0) 
      {
       throw OomphLibError("Integer M pointer not set\n",
-                          "HomogenisedLinearElasticityEquationsBase::get_m()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
       return 0;
      }
@@ -145,7 +145,7 @@ namespace oomph
     if(this->Elasticity_tensor_fct_pt==0)
      {
       throw OomphLibError("Elasticity tensor function pointer not set\n",
-                          "HomogenisedLinearElasticityEquationsBase::get_E()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
     else
@@ -171,7 +171,7 @@ namespace oomph
     {
      throw OomphLibError(
       "make_face_element not implemented",
-      "HomogenisedLinearElasticityEquationsBase::make_face_element()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
    

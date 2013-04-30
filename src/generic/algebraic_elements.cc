@@ -355,7 +355,7 @@ unsigned AlgebraicNode::self_test()
                    << nnode_update << " and " << id.size()
                    << std::endl; 
      throw OomphLibError(error_stream.str(),
-                         "AlgebraicNode::self_test()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif

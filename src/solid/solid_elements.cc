@@ -60,7 +60,7 @@ void PVDEquationsBase<DIM>::get_strain(const Vector<double> &s,
                  << strain.nrow() << ", but dimension of the equations is " 
                  << DIM << std::endl;
    throw OomphLibError(error_message.str(),
-                       "PVDEquationsBase<DIM>::get_strain()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -183,7 +183,7 @@ fill_in_generic_contribution_to_residuals_pvd(Vector<double> &residuals,
   {
    throw OomphLibError(
     "PVDEquations cannot be used with incompressible constitutive laws.",
-    "PVDEquations<DIM>::fill_in_generic_contribution_to_residuals_pvd()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);   
   }
 #endif
@@ -720,7 +720,8 @@ void PVDEquations<DIM>::output(FILE* file_pt, const unsigned &n_plot)
      std::ostringstream error_message;
      error_message << "No output routine for PVDEquations<" << 
       DIM << "> elements --  write it yourself!" << std::endl;
-     throw OomphLibError(error_message.str(),"PVDEquations<DIM>::output()",
+     throw OomphLibError(error_message.str(),
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }
@@ -1246,7 +1247,7 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
   {
    throw OomphLibError(
     "The constitutive law requires the use of the incompressible formulation by setting the element's member function set_incompressible()",
-    "PVDEquationsWithPressure<DIM>::fill_in_generic_contribution_to_residuals_pvd_with_pressure()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);   
   }
 #endif
@@ -2055,7 +2056,7 @@ void PVDEquationsWithPressure<DIM>::output(FILE* file_pt,
      error_message << "No output routine for PVDEquationsWithPressure<" << 
       DIM << "> elements. Write it yourself!" << std::endl;
      throw OomphLibError(error_message.str(),
-                         "PVDEquationsWithPressure<DIM>::output()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
   }
 }

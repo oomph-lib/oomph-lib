@@ -200,7 +200,7 @@ public:
    if(Average_gradient==0)
     {
      throw OomphLibError("Averages not calculated yet",
-                         "FluxTransportEquations<DIM>::average_gradient",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    return Average_gradient[DIM*i+j];
@@ -212,7 +212,7 @@ public:
    if(Average_prim_value==0)
     {
      throw OomphLibError("Averages not calculated yet",
-                         "FluxTransportEquations<DIM>::average_value",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    return Average_prim_value[i];

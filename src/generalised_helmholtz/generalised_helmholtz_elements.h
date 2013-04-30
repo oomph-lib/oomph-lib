@@ -1262,7 +1262,7 @@ public:
    {
     throw OomphLibError(
      "Please set pointer to omega using access fct to pointer!",
-     "GeneralisedHelmholtzEquations<DIM>::omega()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION); 
    } 
 #endif
@@ -1321,7 +1321,7 @@ public:
   {
    throw OomphLibError(
   "There is no time-dependent output_fct() for GeneralisedHelmholtz elements ",
-    "GeneralisedHelmholtzEquations<DIM>::output_fct()",
+  OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -1361,7 +1361,7 @@ public:
   {
    throw OomphLibError(
 "There is no time-dependent compute_error() for GeneralisedHelmholtz elements",
-    "GeneralisedHelmholtzEquations<DIM>::compute_error()",
+OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -1415,7 +1415,7 @@ public:
     {
      throw OomphLibError(
       "Please set function pointer that sets wave speed.!",
-      "GeneralisedHelmholtzEquations<DIM>::get_c_helmholtz()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION); 
     } 
 #endif
@@ -1969,7 +1969,7 @@ class FaceGeometry<QGeneralisedHelmholtzElement<1,NNODE_1D> >:
        << fld << " is illegal \n";
       throw OomphLibError(
        error_stream.str(),
-       "ProjectableGeneralisedHelmholtzElement::data_values_of_field()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif
@@ -2008,7 +2008,7 @@ class FaceGeometry<QGeneralisedHelmholtzElement<1,NNODE_1D> >:
        << fld << " is illegal\n";
       throw OomphLibError(
        error_stream.str(),
-    "ProjectableGeneralisedHelmholtzElement::nhistory_values_for_projection()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif
@@ -2037,7 +2037,7 @@ class FaceGeometry<QGeneralisedHelmholtzElement<1,NNODE_1D> >:
        << fld << " is illegal.\n";
       throw OomphLibError(
        error_stream.str(),
-       "ProjectableGeneralisedHelmholtzElement::jacobian_and_shape_of_field()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif
@@ -2067,7 +2067,7 @@ class FaceGeometry<QGeneralisedHelmholtzElement<1,NNODE_1D> >:
        << fld << " is illegal\n";
       throw OomphLibError(
        error_stream.str(),
-       "ProjectableGeneralisedHelmholtzElement::jget_field()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif
@@ -2117,7 +2117,7 @@ class FaceGeometry<QGeneralisedHelmholtzElement<1,NNODE_1D> >:
        << fld << " is illegal\n";
       throw OomphLibError(
        error_stream.str(),
-       "ProjectableGeneralisedHelmholtzElement::nvalue_of_field()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif
@@ -2138,7 +2138,7 @@ class FaceGeometry<QGeneralisedHelmholtzElement<1,NNODE_1D> >:
        << fld << " is illegal\n";
       throw OomphLibError(
        error_stream.str(),
-       "ProjectableGeneralisedHelmholtzElement::local_equation()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif

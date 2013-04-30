@@ -377,7 +377,7 @@ Vector<double>& f)
 
      throw OomphLibError(
       error_stream.str(),
-      "QuarterTubeDomain::macro_element_boundary()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
    
@@ -421,7 +421,7 @@ Vector<double>& f)
 
      throw OomphLibError(
       error_stream.str(),
-      "QuarterTubeDomain::macro_element_boundary()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
    
@@ -465,7 +465,7 @@ Vector<double>& f)
 
      throw OomphLibError(
       error_stream.str(),
-      "QuarterTubeDomain::macro_element_boundary()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
    
@@ -478,7 +478,7 @@ Vector<double>& f)
    error_stream << "Wrong imacro " << imacro << std::endl;
    throw OomphLibError(
     error_stream.str(),
-    "QuarterTubeDomain::macro_element_boundary()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
    

@@ -315,7 +315,7 @@ int main()
                   <<"  in this well commented code, good luck ;)  \n";     
      throw OomphLibError(
       error_stream.str(),
-      "create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
         
@@ -367,7 +367,7 @@ int main()
     default :
      throw OomphLibError(
       "Unexcpected side number in your '.xda' input file\n",
-      "create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
    

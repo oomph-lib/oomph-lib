@@ -105,7 +105,7 @@ namespace Global_Physical_Variables
   if(throw_error)
    {
     throw OomphLibError(error_stream.str(),
-                        "Global_Physical_Variables::inflow()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -364,7 +364,7 @@ private:
                 << std::endl;
 
                throw OomphLibError(error_stream.str(),
-                                   "BrethertonElement::reassign_inflow()",
+                                   OOMPH_CURRENT_FUNCTION,
                                    OOMPH_EXCEPTION_LOCATION);
               }
             }

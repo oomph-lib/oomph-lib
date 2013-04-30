@@ -182,7 +182,7 @@ template<class ELEMENT>
    void refine_uniformly(DocInfo& doc_info)
    {
     throw OomphLibError("refine_uniformly() not implemented yet",
-                        "RefineableTriangleMesh::refine_uniformly()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION); 
    }    
    
@@ -193,7 +193,7 @@ template<class ELEMENT>
    unsigned unrefine_uniformly()
    {
     throw OomphLibError("unrefine_uniformly() not implemented yet",
-                        "RefineableTriangleMesh::unrefine_uniformly()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION); 
     // dummy return
     return 0;
@@ -523,7 +523,7 @@ void RefineableTetgenMesh<ELEMENT>::adapt(const Vector<double>& elem_error)
     if (this->Problem_pt==0) 
      {
       throw OomphLibError("Problem pointer must be set with problem_pt()",
-                          "TetgenMesh::adapt()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
 #endif

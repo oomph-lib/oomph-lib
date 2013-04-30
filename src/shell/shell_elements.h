@@ -613,7 +613,7 @@ public:
   {
    throw OomphLibError(
     "Don't call empty constructor for ClampedHermiteShellBoundaryConditionElement",
-    "ClampedHermiteShellBoundaryConditionElement::ClampedHermiteShellBoundaryConditionElement()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
  

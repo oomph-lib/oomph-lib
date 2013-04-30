@@ -168,7 +168,7 @@ public:
                   << "This one contains " << load_pt->nvalue() << std::endl;
 
      throw OomphLibError(error_stream.str(),
-                         "ElasticFishBack::set_load_pt()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif

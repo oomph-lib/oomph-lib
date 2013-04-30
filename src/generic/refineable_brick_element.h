@@ -324,7 +324,7 @@ class RefineableSolidQElement<3> : public virtual RefineableQElement<3>,
     {
      throw OomphLibError(
       "We can't handle generalised nodal positions (yet).\n",
-      "RefineableSolidQElement<3>::build()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
 #endif

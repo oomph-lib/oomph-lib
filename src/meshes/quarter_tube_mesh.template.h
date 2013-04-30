@@ -218,7 +218,7 @@ public :
     {
      throw OomphLibError(
       "Trouble in building octree forest ",
-      "RefineableQuarterTubeMesh::RefineableQuarterTubeMesh()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -294,7 +294,8 @@ public:
      function_name += 
       "MacroElementNodeUpdateRefineableQuaterCircleSectorMesh()";
 
-     throw OomphLibError(error_message.str(),function_name,
+     throw OomphLibError(error_message.str(),
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    delete el_pt;
@@ -329,7 +330,8 @@ public:
       "MacroElementNodeUpdateRefineableQuaterCircleSectorMesh::\n";
      function_name += "node_update()";
 
-     throw OomphLibError(error_message,function_name,
+     throw OomphLibError(error_message,
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -366,7 +368,8 @@ public:
         "MacroElementNodeUpdateRefineableQuaterCircleSectorMesh::\n";
        function_name += "setup_macro_element_node_update()";
        
-       throw OomphLibError(error_message.str(),function_name,
+       throw OomphLibError(error_message.str(),
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
 #endif       
@@ -500,7 +503,8 @@ public:
       " AlgebraicRefineableQuarterTubeMesh::\n";
      function_name += "AlgebraicRefineableQuarterTubeMesh()";
 
-     throw OomphLibError(error_message.str(),function_name,
+     throw OomphLibError(error_message.str(),
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    delete el_pt;
@@ -536,7 +540,8 @@ public:
    std::string function_name =
     " AlgebraicRefineableQuarterTubeMesh::AxialSpacingFctPt()";
 
-   throw OomphLibError(error_message.str(),function_name,
+   throw OomphLibError(error_message.str(),
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
 
    return this->Domain_pt->axial_spacing_fct_pt();
@@ -562,7 +567,8 @@ public:
       " AlgebraicRefineableQuarterTubeMesh::";
      function_name += "node_update()";
 
-     throw OomphLibError(error_message,function_name,
+     throw OomphLibError(error_message,
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -613,7 +619,8 @@ public:
       " AlgebraicRefineableQuarterTubeMesh::";
      function_name += "algebraic_node_update()";
 
-     throw OomphLibError(error_message.str(),function_name,
+     throw OomphLibError(error_message.str(),
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }

@@ -60,7 +60,7 @@ double LinearElasticityEquationsBase<DIM>::Default_lambda_sq_value=1.0;
                   << strain.nrow() << ", but dimension of the equations is " 
                   << DIM << std::endl;
     throw OomphLibError(error_message.str(),
-                        "LinearElasticityEquationsBase<DIM>::get_strain()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 
@@ -71,7 +71,7 @@ double LinearElasticityEquationsBase<DIM>::Default_lambda_sq_value=1.0;
    {
     throw OomphLibError(
      "LinearElasticity is not yet implemented for more than one position type",
-     "LinearElasticityEquationsBase<DIM>::get_strain()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -160,7 +160,7 @@ void LinearElasticityEquations<DIM>::get_stress(const Vector<double> &s,
                  << stress.nrow() << ", but dimension of the equations is " 
                  << DIM << std::endl;
    throw OomphLibError(error_message.str(),
-                       "LinearElasticityEquationsBase<DIM>::get_stress()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -209,7 +209,7 @@ void LinearElasticityEquations<DIM>::get_stress(const Vector<double> &s,
    {
     throw OomphLibError(
      "LinearElasticity is not yet implemented for more than one position type",
-     "LinearElasticityEquationsBase<DIM>::fill_in_generic_contribution_to_residuals_lin_elast()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
 
@@ -218,7 +218,7 @@ void LinearElasticityEquations<DIM>::get_stress(const Vector<double> &s,
    {
     throw OomphLibError(
      "No elasticity tensor set.",
-     "LinearElasticityEquationsBase<DIM>::fill_in_generic_contribution_to_residuals_lin_elast()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
 #endif

@@ -323,7 +323,7 @@ public:
       }
      error_message << std::endl;
      throw OomphLibError(error_message.str(),
-                         "MeshAsGeomObject::position()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    //Call that sub-object's position function
@@ -335,7 +335,7 @@ public:
  void dposition(const Vector<double> &xi, DenseMatrix<double> &drdxi) const
   {
    throw OomphLibError("dposition() not implemented",
-                       "MeshAsGeomObject::dposition()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 

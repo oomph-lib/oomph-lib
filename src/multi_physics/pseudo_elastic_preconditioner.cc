@@ -129,7 +129,7 @@ namespace oomph
     std::ostringstream error_message;
     error_message << "The elastic mesh must be set.";
     throw OomphLibError(error_message.str(),
-                        "PseudoElasticPreconditioner",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
     
    }
@@ -138,7 +138,7 @@ namespace oomph
     std::ostringstream error_message;
     error_message << "The Lagrange multiplier mesh must be set.";
     throw OomphLibError(error_message.str(),
-                        "PseudoElasticPreconditioner",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -169,7 +169,7 @@ namespace oomph
     std::ostringstream error_message;
     error_message << "This preconditioner requires DIM*3 types of DOF";
     throw OomphLibError(error_message.str(),
-                        "PseudoElasticPreconditioner",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -190,7 +190,7 @@ namespace oomph
     error_message << "FSIPreconditioner only works with"
                   << " CRDoubleMatrix matrices" << std::endl;
     throw OomphLibError(error_message.str(),
-                        "PseudoElasticPreconditioner",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -402,7 +402,7 @@ namespace oomph
       << "types of DOF";
      throw OomphLibError(
       error_message.str(),
-      "PrecribedBoundaryDisplacementSubisiaryPreconditioner::setup(...)",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -544,7 +544,7 @@ namespace oomph
     std::ostringstream error_message;
     error_message << "This preconditioner requires DIM*3 types of DOF";
     throw OomphLibError(error_message.str(),
-                        "PseudoElasticPreconditioner",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif

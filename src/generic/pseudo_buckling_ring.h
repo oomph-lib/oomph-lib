@@ -74,7 +74,7 @@ public:
   {
    throw OomphLibError(
     "Don't call empty constructor for PseudoBucklingRing!",
-    "PseudoBucklingRing::PseudoBucklingRing()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -102,7 +102,7 @@ public:
       << geom_data_pt.size() << std::endl;
 
      throw OomphLibError(error_message.str(),
-                         "PseudoBucklingRing::PseudoBucklingRing()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    if (geom_data_pt[0]->nvalue()!=5)
@@ -113,7 +113,7 @@ public:
       << geom_data_pt[0]->nvalue() << std::endl;
 
      throw OomphLibError(error_message.str(),
-                         "PseudoBucklingRing::PseudoBucklingRing()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -340,7 +340,7 @@ public:
    if (r.size()!=Ndim)
     {
      throw OomphLibError("The position vector r has the wrong dimension",
-                         "PseudoBucklingRing::position()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -377,7 +377,7 @@ public:
     {
      throw OomphLibError(
       "The vector veloc has the wrong size",
-      "PseudoBucklingRing::veloc()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -410,7 +410,7 @@ public:
    if (accel.size()!=Ndim)
     {
      throw OomphLibError("The vector accel has the wrong dimension",
-                         "PseudoBucklingRing::accel()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -445,14 +445,14 @@ public:
    if (r.size()!=Ndim)
     {
      throw OomphLibError("The position vector r has the wrong dimension",
-                         "PseudoBucklingRing::position()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    if (t>Geom_object_time_stepper_pt->nprev_values())
     {
      throw OomphLibError(
       "The time value t is greater than the number of previous steps",
-      "PseudoBucklingRing::position()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -514,7 +514,7 @@ public:
      error_message << j << "th derivative not implemented\n";
      
      throw OomphLibError(error_message.str(),
-                         "PseudoBucklingRing::dposition_dt()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }

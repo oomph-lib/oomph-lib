@@ -235,7 +235,7 @@ public:
         default:
          throw OomphLibError(
           "Coordinate is not on any face",
-          "OneDimMesh::neighbour_finder()",
+          OOMPH_CURRENT_FUNCTION,
           OOMPH_EXCEPTION_LOCATION);
         }
        

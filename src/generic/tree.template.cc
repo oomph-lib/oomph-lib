@@ -74,7 +74,8 @@ void Tree::split_if_required()
      error_message += 
       "why you would want me to... If you're sure, then hack me... \n";
 
-     throw OomphLibError(error_message,"Tree::split_if_required()",
+     throw OomphLibError(error_message,
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -95,7 +96,8 @@ void Tree::split_if_required()
         }
        error_message << "\n";
       } 
-     throw OomphLibError(error_message.str(),"Tree::split_if_required()",
+     throw OomphLibError(error_message.str(),
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -164,7 +166,8 @@ void Tree::p_refine_if_required(Mesh* &mesh_pt)
      error_message += 
       "why you would want me to... If you're sure, then hack me... \n";
 
-     throw OomphLibError(error_message,"Tree::p_refine_if_required()",
+     throw OomphLibError(error_message,
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -185,7 +188,8 @@ void Tree::p_refine_if_required(Mesh* &mesh_pt)
         }
        error_message << "\n";
       } 
-     throw OomphLibError(error_message.str(),"Tree::p_refine_if_required()",
+     throw OomphLibError(error_message.str(),
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -199,7 +203,7 @@ void Tree::p_refine_if_required(Mesh* &mesh_pt)
  if (p_ref_obj_pt==0)
   {
    throw OomphLibError("Element cannot be p-refined",
-                       "Tree::p_refine_if_required()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 

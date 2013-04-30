@@ -205,7 +205,7 @@ public:
       "You may be trying to hijack a non-elastic element\n";
 
      throw OomphLibError(error_message,
-                         "HijackedElement::hijack_nodal_position_value",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   
@@ -235,7 +235,7 @@ public:
       "You may be trying to hijack a non-spine element\n";
 
      throw OomphLibError(error_message,
-                         "HijackedElement::hijack_nodal_spine_value",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   

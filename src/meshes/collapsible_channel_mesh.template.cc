@@ -118,7 +118,7 @@ CollapsibleChannelMesh<ELEMENT>::CollapsibleChannelMesh(
      error_message << "Node " << j << "is still on boundary " << std::endl;
      
      throw OomphLibError(error_message.str(),
-                         "CollapsibleChannelMesh::CollapsibleChannelMesh()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }
@@ -268,7 +268,8 @@ void AlgebraicCollapsibleChannelMesh<ELEMENT>::algebraic_node_update(
     "AlgebraicCollapsibleChannelMesh::";
    function_name += "algebraic_node_update()";
 
-   throw OomphLibError(error_message,function_name,
+   throw OomphLibError(error_message,
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -380,7 +381,7 @@ void AlgebraicCollapsibleChannelMesh<ELEMENT>::setup_algebraic_node_update()
        
        throw OomphLibError(
         error_stream.str(),
-        "CollapsibleChannelMesh::setup_algebraic_node_update()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
       }
 #endif 

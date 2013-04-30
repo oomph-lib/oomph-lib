@@ -312,7 +312,7 @@ void TElement<1,NNODE_1D>::build_face_element(const int &face_index,
                  << "the values +/-1, not " << face_index << std::endl;
 
    throw OomphLibError(error_message.str(),
-                       "TElement<1,..>::build_face_element()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 }
@@ -535,7 +535,7 @@ namespace TElement2BulkCoordinateDerivatives
                   << "the values 0, 1 or 2 not " << face_index << std::endl;
     
     throw OomphLibError(error_message.str(),
-                        "TElement<2,..>::build_face_element()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    } //end switch
  
@@ -1037,7 +1037,7 @@ const unsigned TElement<3,3>::NodeOnFace[4][6] =
                  << face_index << std::endl;
        
     throw OomphLibError(error_message.str(),
-                        "TElement<3,..>::build_face_element()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    } //end switch
  

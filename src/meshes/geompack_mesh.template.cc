@@ -79,7 +79,7 @@ build_from_scaffold(TimeStepper* time_stepper_pt)
    error_message += "Do you want to volunteer? \n";
    
    throw OomphLibError(error_message,
-                       "GeompackQuadMesh::build_from_scaffold()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 

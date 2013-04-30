@@ -690,7 +690,7 @@ private:
       
 
       throw OomphLibError(error_message.str(),
-                          "TriangleMeshPolygon::position()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
 

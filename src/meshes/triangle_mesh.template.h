@@ -150,7 +150,7 @@ class TriangleMeshParameters
      error_message << "Please use another region id different from zero.\n"
                    << "It is internally used as the default region number.\n";
      throw OomphLibError(error_message.str(),
-                         "TriangleMeshParameters::add_region_coordinates()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);     
     }
 /*
@@ -167,7 +167,7 @@ class TriangleMeshParameters
                    << "region id and verify that you are not re-using\n"
                    <<" previously defined regions id's\n"<<std::endl;
      throw OomphLibError(error_message.str(),
-                         "TriangleMeshParameters::add_region_coordinates()",
+     OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 */
@@ -530,7 +530,7 @@ class TriangleMeshParameters
       << "or enable internal boundary refinement (the default)\n";
 
      throw OomphLibError(error_stream.str().c_str(),
-                         "TriangleMesh()::TriangleMesh()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    
@@ -748,7 +748,7 @@ class TriangleMeshParameters
      error_message
      << "This probably means that the boundary is not adjacent to region\n";
      throw OomphLibError(error_message.str(),
-       "TriangleMesh::face_index_at_boundary_in_region()",
+                         OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
     }
   }
@@ -793,7 +793,7 @@ class TriangleMeshParameters
       error_message
        << "This probably means that you are using a non defined region id\n";
       throw OomphLibError(error_message.str(),
-                          "TriangleMesh::region_element_pt()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
    }
@@ -825,7 +825,7 @@ class TriangleMeshParameters
      {
       throw OomphLibError(
        "No coordinate limits associated with this boundary\n",
-       "TESTER",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
     else
@@ -1535,7 +1535,7 @@ class TriangleMeshParameters
    if (f)
     {
      throw OomphLibError(error_message.str(),
-       "TriangleMesh::create_vertex_coordinates_for_polyline_connections()",
+                         OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -1709,7 +1709,7 @@ class TriangleMeshParameters
          << "of assigned vertices is (" << n_assigned_vertices << ")."
          << std::endl << std::endl;
          throw OomphLibError(error_message.str(),
-         "TriangleMesh::create_vertex_coordinates_for_polyline_connections()",
+                             OOMPH_CURRENT_FUNCTION,
            OOMPH_EXCEPTION_LOCATION);
         }
 #endif
@@ -1894,7 +1894,7 @@ class TriangleMeshParameters
          << "of assigned vertices is (" << n_assigned_vertices << ")."
          << std::endl << std::endl;
          throw OomphLibError(error_message.str(),
-         "TriangleMesh::create_vertex_coordinates_for_polyline_connections()",
+                             OOMPH_CURRENT_FUNCTION,
            OOMPH_EXCEPTION_LOCATION);
         }
 #endif
@@ -2205,7 +2205,7 @@ private:
         << "connection value (" << target_s_value << ") using\n"
         << "this tolerance: " << s_tolerance << std::endl;
         throw OomphLibError(error_message.str(),
-            "TriangleMesh::get_associated_vertex_to_svalue()",
+                            OOMPH_CURRENT_FUNCTION,
             OOMPH_EXCEPTION_LOCATION);
       }
 #endif
@@ -2239,7 +2239,7 @@ private:
      << "to allow the automatic set up boundary coordinates.\n"
      << "Yours only has (" << nb << ")" << std::endl;
      throw OomphLibError(error_message.str(),
-       "TriangleMesh::closed_curve_to_polygon_helper()",
+                         OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -2347,7 +2347,7 @@ private:
          << std::endl;
          throw OomphLibError(
            error_stream.str(),
-           "TriangleMesh::closed_curve_to_polygon_helper()",
+           OOMPH_CURRENT_FUNCTION,
            OOMPH_EXCEPTION_LOCATION);
         }
 
@@ -2464,7 +2464,7 @@ private:
        << "polyline: What is it?\n"
        << std::endl;
        throw OomphLibError(error_stream.str(),
-         "TriangleMesh::create_open_curve_with_polyline_helper()",
+                           OOMPH_CURRENT_FUNCTION,
          OOMPH_EXCEPTION_LOCATION);
       }
 
@@ -2507,7 +2507,7 @@ private:
      << "to allow the automatic set up boundary coordinates.\n"
      << "Yours only has " << nb << std::endl;
      throw OomphLibError(error_message.str(),
-       "TriangleMesh::set_geom_objects_and_coordinate_limits_on_close_curve()",
+                         OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -2755,7 +2755,7 @@ template<class ELEMENT>
    void refine_uniformly(DocInfo& doc_info)
    {
     throw OomphLibError("refine_uniformly() not implemented yet",
-                        "RefineableTriangleMesh::refine_uniformly()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION); 
    }    
    
@@ -2766,7 +2766,7 @@ template<class ELEMENT>
    unsigned unrefine_uniformly()
    {
     throw OomphLibError("unrefine_uniformly() not implemented yet",
-                        "RefineableTriangleMesh::unrefine_uniformly()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION); 
     // dummy return
     return 0;

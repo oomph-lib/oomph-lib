@@ -100,7 +100,7 @@ class PeriodicOrbitTimeDiscretisation : public TimeStepper
   {
    throw OomphLibError(
     "Cannot perform impulsive start for PeriodicOrbitTimeDiscretisation",
-    "PeriodicOrbitTimeDiscretisation::assign_initial_values_impulsive",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
  
@@ -110,7 +110,7 @@ class PeriodicOrbitTimeDiscretisation : public TimeStepper
   {
    throw OomphLibError(
     "Cannot perform impulsive start for PeriodicOrbitTimeDiscretisation",
-    "PeriodicOrbitTimeDiscretisation::assign_initial_positions_impulsive",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -152,7 +152,7 @@ class PeriodicOrbitTimeDiscretisation : public TimeStepper
   {
    throw OomphLibError(
     "Cannot shift time values for PeriodicOrbitTimeDiscretisation",
-    "PeriodicOrbitTimeDiscretisation::shift_time_values",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -161,7 +161,7 @@ class PeriodicOrbitTimeDiscretisation : public TimeStepper
   {
    throw OomphLibError(
     "Cannot shift time positions for PeriodicOrbitTimeDiscretisation",
-    "PeriodicOrbitTimeDiscretisation::shift_time_positions",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -780,7 +780,7 @@ private:
     {
      throw OomphLibError(
       "PeriodicOrbitHandler can't cope with submeshes yet",
-      "PeriodicORbitHandler::Constructor()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -1276,7 +1276,7 @@ private:
     {
      throw OomphLibError(
       "PeriodicOrbitHandler can't cope with submeshes yet",
-      "PeriodicORbitHandler::Constructor()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
 

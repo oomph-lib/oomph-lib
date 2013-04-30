@@ -277,7 +277,7 @@ void AlgebraicChannelWithLeafletMesh<ELEMENT>::setup_algebraic_node_update()
       << std::endl;
      throw OomphLibError(
       error_stream.str(),
-      "AlgebraicChannelWithLeafletMesh::setup_algebraic_node_update()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
    
@@ -454,7 +454,8 @@ void AlgebraicChannelWithLeafletMesh<ELEMENT>::algebraic_node_update(
    std::string function_name = 
     "AlgebraicChannelWithLeafletMesh::algebraic_node_update()";
    
-   throw OomphLibError(error_message.str(),function_name,
+   throw OomphLibError(error_message.str(),
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 

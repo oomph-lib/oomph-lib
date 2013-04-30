@@ -522,7 +522,7 @@ void get_inverse_mass_matrix_times_residuals(Vector<double> &minv_res)
     "Do not call Problem::enable_discontinuous_formulation()\n";
 
    throw OomphLibError(error_stream.str(),
-                       "DGElement::get_inverse_mass_matrix_times_residuals()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 

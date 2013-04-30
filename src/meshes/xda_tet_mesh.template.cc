@@ -66,7 +66,7 @@ namespace oomph
      << "Failed to open " << xda_file_name 
      << "\n";
     throw OomphLibError(error_stream.str(),
-                        "XdaTetMesh::XdaTetMesh()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
   
@@ -126,7 +126,7 @@ namespace oomph
      << "with 10 nodes. The specified mesh file has " << nnod_el 
      << "nodes per element.\n";
     throw OomphLibError(error_stream.str(),
-                        "XdaTetMesh::XdaTetMesh()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
     
@@ -250,7 +250,7 @@ namespace oomph
      default :
       throw OomphLibError(
        "Unexcpected side number in your '.xda' input file\n",
-       "XdaTetMesh::XdaTetMesh()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
       
@@ -536,7 +536,7 @@ namespace oomph
          << "You can suppress this error message by recompiling \n"
          << "recompiling without PARANOID or by changing the tolerance.\n";
         throw OomphLibError(error_message.str(),
-                            "XdaTetMesh::setup_boundary_coordinates()",
+                            OOMPH_CURRENT_FUNCTION,
                             OOMPH_EXCEPTION_LOCATION);
        }
      }
@@ -588,7 +588,7 @@ namespace oomph
          << "You can suppress this error message by recompiling \n"
          << "recompiling without PARANOID or by changing the tolerance.\n";
         throw OomphLibError(error_message.str(),
-                            "XdaTetMesh::setup_boundary_coordinates()",
+                            OOMPH_CURRENT_FUNCTION,
                             OOMPH_EXCEPTION_LOCATION);
        }
 #endif

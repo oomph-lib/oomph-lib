@@ -146,7 +146,7 @@ void METIS::uniform_partition_mesh(Problem* problem_pt,
                 << nelem << " " << element_domain.size() << std::endl;
 
    throw OomphLibError(error_stream.str(),
-                       "METIS::uniform_partition_mesh()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -192,7 +192,7 @@ void METIS::partition_mesh(Problem* problem_pt, const unsigned& ndomain,
                 << nelem << " " << element_domain.size() << std::endl;
    
    throw OomphLibError(error_stream.str(),
-                       "METIS::partition_mesh()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -483,7 +483,8 @@ void METIS::partition_mesh(Problem* problem_pt, const unsigned& ndomain,
    error_stream 
     << "Wrong objective for METIS. objective = " << objective << std::endl;
 
-   throw OomphLibError(error_stream.str(),"METIS::partition_mesh()",
+   throw OomphLibError(error_stream.str(),
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
    
@@ -520,7 +521,7 @@ void METIS::partition_mesh(Problem* problem_pt, const unsigned& ndomain,
  if (shout)
   {      
    throw OomphLibError(error_stream.str(),
-                       " METIS::partition_mesh()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -609,7 +610,7 @@ void METIS::partition_mesh(Problem* problem_pt, const unsigned& ndomain,
     << "number of elemental assembly times: "
     << n_elem << " " << n << std::endl;   
    throw OomphLibError(error_stream.str(),
-                       "METIS::partition_distributed_mesh()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -1130,7 +1131,7 @@ void METIS::partition_mesh(Problem* problem_pt, const unsigned& ndomain,
        error_stream
         << "Minimum assemble time for element is zero!\n";
        throw OomphLibError(error_stream.str(),
-                           "METIS::partition_distributed_mesh()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
 #endif
@@ -1326,7 +1327,7 @@ void METIS::partition_mesh(Problem* problem_pt, const unsigned& ndomain,
     << std::endl;
    
    throw OomphLibError(error_stream.str(),
-                       "METIS::partition_distributed_mesh()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif

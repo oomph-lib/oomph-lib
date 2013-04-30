@@ -152,7 +152,7 @@ public:
                   << geom_data_pt->nvalue() << std::endl;
 
      throw OomphLibError(error_stream.str(),
-                         "GeneralCircle::GeneralCircle()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif

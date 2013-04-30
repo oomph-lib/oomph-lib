@@ -488,7 +488,7 @@ namespace TriangleHelper
   if(dimension!=2)
    {
     throw OomphLibError("The dimension must be 2\n",
-                        "TriangleScaffoldMesh::TriangleScaffoldMesh()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -668,7 +668,7 @@ namespace TriangleHelper
       error_message << "Please use another region id different from zero.\n"
                     << "It is internally used as the default region number.\n";
       throw OomphLibError(error_message.str(),
-       "TriangleHelper::create_triangulateio_from_polyfiles()",
+                          OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
  
@@ -1130,7 +1130,7 @@ void TriangleMeshCurveSection::connect_initial_vertex_to_polyline(
    << "to destination boundary (" << polyline_pt->boundary_id()
    << ")" << std::endl;
    throw OomphLibError(error_stream.str(),
-     "TriangleMeshCurveSection::connect_initial_vertex_to_polyline()",
+                       OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -1159,7 +1159,7 @@ void TriangleMeshCurveSection::connect_initial_vertex_to_polyline(
    << "allowed\ntolerance is: (" << tolerance_for_connection <<")"
    << std::endl;
    throw OomphLibError(error_stream.str(),
-     "TriangleMeshCurveSection::connect_initial_vertex_to_curviline()",
+                       OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -1199,7 +1199,7 @@ void TriangleMeshCurveSection::connect_final_vertex_to_polyline(
    << "to destination boundary (" << polyline_pt->boundary_id()
    << ")" << std::endl;
    throw OomphLibError(error_stream.str(),
-     "TriangleMeshCurveSection::connect_final_vertex_to_polyline()",
+                       OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -1228,7 +1228,7 @@ void TriangleMeshCurveSection::connect_final_vertex_to_polyline(
    << "allowed\ntolerance is: (" << tolerance_for_connection <<")"
    << std::endl;
    throw OomphLibError(error_stream.str(),
-     "TriangleMeshCurveSection::connect_final_vertex_to_polyline()",
+                       OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -1269,7 +1269,7 @@ void TriangleMeshCurveSection::connect_initial_vertex_to_curviline(
    << "to destination boundary (" << curviline_pt->boundary_id()
    << ")" << std::endl;
    throw OomphLibError(error_stream.str(),
-     "TriangleMeshCurveSection::connect_initial_vertex_to_curviline()",
+                       OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -1299,7 +1299,7 @@ void TriangleMeshCurveSection::connect_initial_vertex_to_curviline(
    << "allowed\ntolerance is: (" << tolerance_for_connection <<")"
    << std::endl;
    throw OomphLibError(error_stream.str(),
-     "TriangleMeshCurveSection::connect_initial_vertex_to_curviline()",
+                       OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -1349,7 +1349,7 @@ void TriangleMeshCurveSection::connect_final_vertex_to_curviline(
    << "to destination boundary (" << curviline_pt->boundary_id()
    << ")" << std::endl;
    throw OomphLibError(error_stream.str(),
-     "TriangleMeshCurveSection::connect_final_vertex_to_curviline()",
+                       OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -1381,7 +1381,7 @@ void TriangleMeshCurveSection::connect_final_vertex_to_curviline(
    << "allowed\ntolerance is: (" << tolerance_for_connection <<")"
    << std::endl;
    throw OomphLibError(error_stream.str(),
-     "TriangleMeshCurveSection::connect_final_vertex_to_curviline()",
+                       OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -1446,7 +1446,7 @@ TriangleMeshClosedCurve::TriangleMeshClosedCurve(
    << "specified by at least two separate CurveSections.\n"
    << "You've only specified (" << n_boundaries << ")" << std::endl;
    throw OomphLibError(error_stream.str(),
-     "TriangleMeshClosedCurve::TriangleMeshClosedCurve()",
+                       OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -1484,7 +1484,7 @@ TriangleMeshClosedCurve::TriangleMeshClosedCurve(
      << std::endl;
      throw OomphLibError(
        error_stream.str(),
-       "TriangleMeshClosedCurve::TriangleMeshClosedCurve()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
     }
    else
@@ -1534,7 +1534,7 @@ TriangleMeshClosedCurve::TriangleMeshClosedCurve(
    << std::endl;
    throw OomphLibError(
      error_stream.str(),
-     "TriangleMeshClosedCurve::TriangleMeshClosedCurve()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
   }
  else
@@ -1611,7 +1611,7 @@ TriangleMeshPolygon::TriangleMeshPolygon(
       << "TriangleMeshPolygon\nare instantiated as "
       << "TriangleMeshPolyLines." << std::endl;
       throw OomphLibError(error_stream.str(),
-          "TriangleMeshPolygon::TriangleMeshPolygon()",
+                          OOMPH_CURRENT_FUNCTION,
           OOMPH_EXCEPTION_LOCATION);
      }
    }
@@ -1629,7 +1629,7 @@ TriangleMeshPolygon::TriangleMeshPolygon(
       << "by at least two separate PolyLines. You've only specied "
       << nbound << std::endl;
       throw OomphLibError(error_stream.str(),
-          "TriangleMeshPolygon::TriangleMeshPolygon()",
+                          OOMPH_CURRENT_FUNCTION,
           OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -1702,7 +1702,7 @@ TriangleMeshPolygon::TriangleMeshPolygon(
       << "paranoia if you think this is OK...\n"
       << std::endl;
       throw OomphLibError(error_stream.str(),
-          "TriangleMeshPolygon::TriangleMeshPolygon()",
+                          OOMPH_CURRENT_FUNCTION,
           OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -1755,7 +1755,7 @@ TriangleMeshPolygon::TriangleMeshPolygon(
                       << std::endl;
                       throw OomphLibError(
                           error_stream.str(),
-                          "TriangleMeshPolygon::TriangleMeshPolygon()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
                     }
                 }
@@ -1835,7 +1835,7 @@ TriangleMeshPolygon::TriangleMeshPolygon(
           << "why triangle doesn't do that automatically....\n";
           throw OomphLibError(
               error_stream.str(),
-              "TriangleMeshPolygon::TriangleMeshPolygon()",
+              OOMPH_CURRENT_FUNCTION,
               OOMPH_EXCEPTION_LOCATION);
         }
 
@@ -1905,7 +1905,7 @@ TriangleMeshOpenCurve::TriangleMeshOpenCurve(
      << std::endl;
      throw OomphLibError(
        error_stream.str(),
-       "TriangleMeshOpenCurve::TriangleMeshOpenCurve()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
     }
    else
@@ -2049,7 +2049,7 @@ namespace TriangleBoundaryHelper
                  << "derived mesh constructor (or after calling \nit)? If so,"
                  << " the dump/restart won't work as written at the moment.";
     throw OomphLibError(error_stream.str(),
-                        "TriangleMeshBase::remesh_from_triangulateio()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -2094,7 +2094,7 @@ namespace TriangleBoundaryHelper
                      << " doesn't match number of nodes on boundary " 
                      << b << ": " << nnod << std::endl;
         throw OomphLibError(error_stream.str(),
-                            "TriangleMeshBase::remesh_from_triangulateio()",
+                            OOMPH_CURRENT_FUNCTION,
                             OOMPH_EXCEPTION_LOCATION);
        }
 
@@ -2125,7 +2125,7 @@ namespace TriangleBoundaryHelper
         std::ostringstream error_stream;
         error_stream << "Haven't read all nodes on boundary "<< b << std::endl; 
         throw OomphLibError(error_stream.str(),
-                            "TriangleMeshBase::remesh_from_triangulateio()",
+                            OOMPH_CURRENT_FUNCTION,
                             OOMPH_EXCEPTION_LOCATION);
        }
      }
@@ -2527,7 +2527,7 @@ void TriangleMeshBase::setup_boundary_element_info(std::ostream &outfile)
          error_stream << "This is rather strange, so I'm going to die\n";
          throw OomphLibError(
           error_stream.str(),
-          "TriangleMeshBase::setup_boundary_element_info()",
+          OOMPH_CURRENT_FUNCTION,
           OOMPH_EXCEPTION_LOCATION);
         }
       }

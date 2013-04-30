@@ -148,7 +148,7 @@ class LinearSolver : public DistributableLinearAlgebraObject
   {
    throw OomphLibError(
     "DoubleVector based solve function not implemented for this solver",
-    "LinearSolver::solve()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -160,7 +160,7 @@ class LinearSolver : public DistributableLinearAlgebraObject
   {
    throw OomphLibError(
     "Vector<double> based solve function not implemented for this solver",
-    "LinearSolver::solve()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
  
@@ -171,7 +171,7 @@ class LinearSolver : public DistributableLinearAlgebraObject
   {
    throw OomphLibError(
     "Resolve function not implemented for this linear solver",
-    "LinearSolver::resolve()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -186,7 +186,7 @@ class LinearSolver : public DistributableLinearAlgebraObject
   {
    throw OomphLibError(
     "jacobian_setup_time has not been implemented for this linear solver",
-    "LinearSolver::jacobian_setup_time()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
    return 0;
   }
@@ -197,7 +197,7 @@ class LinearSolver : public DistributableLinearAlgebraObject
  {
   throw OomphLibError(
    "linear_solver_solution_time() not implemented for this linear solver",
-   "LinearSolver::linear_solver_solution_time()",
+   OOMPH_CURRENT_FUNCTION,
    OOMPH_EXCEPTION_LOCATION);
   return 0;
  }
@@ -209,7 +209,7 @@ class LinearSolver : public DistributableLinearAlgebraObject
   throw OomphLibError(
    "enable_computation_of_gradient() not implemented for "
    "this linear solver",
-   "LinearSolver::enable_computation_of_gradient()",
+   OOMPH_CURRENT_FUNCTION,
    OOMPH_EXCEPTION_LOCATION);
  }
 
@@ -241,7 +241,7 @@ class LinearSolver : public DistributableLinearAlgebraObject
    {
     throw OomphLibError(
      "The gradient has not been computed for this linear solver!",
-     "LinearSolver::get_gradient()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
 #endif

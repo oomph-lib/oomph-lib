@@ -123,8 +123,7 @@ public:
   {
    throw OomphLibError(
     "Local coordinate vector is of size zero, so this should never be called.",
-    "PointIntegral::knot()",
-    OOMPH_EXCEPTION_LOCATION);
+    OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
 
    // Dummy return
    return 0.0;

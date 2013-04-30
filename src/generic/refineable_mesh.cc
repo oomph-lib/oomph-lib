@@ -380,7 +380,7 @@ void TreeBasedRefineableMeshBase::adapt(const Vector<double>& elemental_error)
                  << "this beautiful code!" << std::endl;
     
     throw OomphLibError(error_stream.str(),
-                        "TreeBasedRefineableMeshBase::adapt()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 
@@ -674,7 +674,7 @@ void TreeBasedRefineableMeshBase::adapt(const Vector<double>& elemental_error)
                    << "elements -- it ought to!\n";
                   throw OomphLibError(
                    error_message.str(),
-                   "TreeBasedRefineableMeshBase::adapt",
+                   OOMPH_CURRENT_FUNCTION,
                    OOMPH_EXCEPTION_LOCATION);
                  }
                }
@@ -769,7 +769,7 @@ void TreeBasedRefineableMeshBase::adapt(const Vector<double>& elemental_error)
                    << "elements -- it ought to!\n";
                   throw OomphLibError(
                    error_message.str(),
-                   "TreeBasedRefineableMeshBase::adapt",
+                   OOMPH_CURRENT_FUNCTION,
                    OOMPH_EXCEPTION_LOCATION);
                  } 
                } 
@@ -1349,7 +1349,7 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
      error_stream << "Doced problem mesh in ProblemMesh.dat" << std::endl;
 
      throw OomphLibError(error_stream.str(),
-                         "TreeBasedRefineableMeshBase::adapt_mesh()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    else
@@ -1924,7 +1924,7 @@ void TreeBasedRefineableMeshBase::refine_as_in_reference_mesh(
     << "max. refinement levels: "<< ref_max << " " << my_max << std::endl;
 
    throw OomphLibError(error_stream.str(),
-                       "TreeBasedRefineableMeshBase::refine_as_in_reference_mesh()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -2090,7 +2090,7 @@ void TreeBasedRefineableMeshBase::refine_as_in_reference_mesh(
  
      throw OomphLibError(
       "Bailing out. Doced refined_mesh.dat finer_mesh.dat\n",
-      "TreeBasedRefineableMeshBase::refine_as_in_reference_mesh()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -2394,7 +2394,7 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
                      << count_haloed << std::endl;
        throw OomphLibError(
         error_stream.str(),
-        "TreeBasedRefineableMeshBase::synchronise_hanging_nodes(...)",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
       }
 #endif
@@ -2877,7 +2877,7 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
 
                throw OomphLibError(
                 error_stream.str(),
-                "TreeBasedRefineableMeshBase::synchronise_hanging_nodes(...)",
+                OOMPH_CURRENT_FUNCTION,
                 OOMPH_EXCEPTION_LOCATION);
               }
              */
@@ -2960,7 +2960,7 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
                          << std::endl;
            throw OomphLibError(
             error_stream.str(),
-            "TreeBasedRefineableMeshBase::synchronise_hanging_nodes(...)",
+            OOMPH_CURRENT_FUNCTION,
             OOMPH_EXCEPTION_LOCATION);
           }
          // Increment counter for number of haloed data
@@ -3328,7 +3328,7 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
              << send_rank << std::endl;
             throw OomphLibError(
              error_stream.str(),
-             "TreeBasedRefineableMeshBase::synchronise_hanging_nodes(...)",
+             OOMPH_CURRENT_FUNCTION,
              OOMPH_EXCEPTION_LOCATION);
             */
            }
@@ -3583,7 +3583,7 @@ void TreeBasedRefineableMeshBase::p_adapt(const Vector<double>& elemental_error)
                 << "this beautiful code!" << std::endl;
    
    throw OomphLibError(error_stream.str(),
-                       "TreeBasedRefineableMeshBase::p_adapt()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
  
@@ -3812,7 +3812,7 @@ void TreeBasedRefineableMeshBase::p_adapt(const Vector<double>& elemental_error)
                << "has not assigned the same errors to halo and haloed\n"
                << "elements -- it ought to!\n";
               throw OomphLibError(error_message.str(),
-                                  "TreeBasedRefineableMeshBase::adapt_mesh()",
+                                  OOMPH_CURRENT_FUNCTION,
                                   OOMPH_EXCEPTION_LOCATION);
              }
            }
@@ -3892,7 +3892,7 @@ void TreeBasedRefineableMeshBase::p_adapt(const Vector<double>& elemental_error)
                << "has not assigned the same errors to halo and haloed\n"
                << "elements -- it ought to!\n";
               throw OomphLibError(error_message.str(),
-                                  "TreeBasedRefineableMeshBase::p_adapt_mesh()",
+                                  OOMPH_CURRENT_FUNCTION,
                                   OOMPH_EXCEPTION_LOCATION);
              }
            }
@@ -4325,7 +4325,7 @@ void TreeBasedRefineableMeshBase::p_adapt_mesh(DocInfo& doc_info)
      error_stream << "Doced problem mesh in ProblemMesh.dat" << std::endl;
  
      throw OomphLibError(error_stream.str(),
-                         "TreeBasedRefineableMeshBase::p_adapt_mesh()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    else

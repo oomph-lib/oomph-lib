@@ -130,7 +130,7 @@ compute_norm(double& norm)
    {
     throw OomphLibError(
      "TimeHarmonicFourierDecomposedLinearElasticity is not yet implemented for more than one position type",
-     "TimeHarmonicFourierDecomposedLinearElasticityEquationsBase::get_strain()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -249,7 +249,7 @@ compute_norm(double& norm)
    {
     throw OomphLibError(
      "TimeHarmonicFourierDecomposedLinearElasticity is not yet implemented for more than one position type",
-     "TimeHarmonicFourierDecomposedLinearElasticityEquationsBase::fill_in_generic_ ... ()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -482,7 +482,7 @@ compute_norm(double& norm)
            {
             throw OomphLibError(
              "a should equal 0, 1 or 2",
-             "TimeHarmonicFourierDecomposedLinearElasticityEquationsBase::fill_in_generic_contribution_...()",
+             OOMPH_CURRENT_FUNCTION,
              OOMPH_EXCEPTION_LOCATION);
            }     
 
@@ -677,7 +677,7 @@ compute_norm(double& norm)
            {
             throw OomphLibError(
              "a should equal 0, 1 or 2",
-             "TimeHarmonicFourierDecomposedLinearElasticityEquationsBase::fill_in_generic_contribution_to...()",
+             OOMPH_CURRENT_FUNCTION,
              OOMPH_EXCEPTION_LOCATION);
            }     
           

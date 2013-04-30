@@ -298,7 +298,7 @@ void UnsteadyHeatProblem<ELEMENT>::set_initial_condition()
 
      throw OomphLibError(
       error_stream.str(),
-      "UnsteadyHeatProblem<ELEMENT>::set_initial_condition()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
   }
@@ -313,7 +313,7 @@ void UnsteadyHeatProblem<ELEMENT>::set_initial_condition()
 
    throw OomphLibError( 
     error_stream.str(),
-    "UnsteadyHeatProblem<ELEMENT>::set_initial_condition()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 

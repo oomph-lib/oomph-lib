@@ -125,7 +125,7 @@ build_face_element(const int &face_index,
                    FaceElement *face_element_pt)
 {
  /*throw OomphLibError("Untested",
-                     "QSpectralElement::build_face_element()",
+   OOMPH_CURRENT_FUNCTION,
                      OOMPH_EXCEPTION_LOCATION);*/
 
  // Overload the nodal dimension by reading out the value from the node
@@ -212,7 +212,7 @@ build_face_element(const int &face_index,
                  << "the values +/-1, not " << face_index << std::endl;
    
    throw OomphLibError(error_message.str(),
-                       "QSpectralElement<1,..>::build_face_element()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 }
@@ -440,7 +440,7 @@ void QSpectralElement<2,NNODE_1D>::build_face_element(
    error_message << "Face index should only take the values +/- 1 or +/- 2,"
                  << " not " << face_index << std::endl;
    throw OomphLibError(error_message.str(),
-                       "QSpectralElement<2,..>::build_face_element",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 }
@@ -763,7 +763,7 @@ output(std::ostream &outfile, const unsigned &n_plot)
      << "Face index should only take the values +/- 1, +/- 2 or +/- 3,"
      << " not " << face_index << std::endl;
     throw OomphLibError(error_message.str(),
-                        "QSpectralElement<3,..>::build_face_element()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    } //end switch
 }

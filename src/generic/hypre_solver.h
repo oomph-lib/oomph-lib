@@ -152,7 +152,7 @@ namespace oomph
        error_message << "When using the MPI version of Hypre please first\n"
                      << "call function MPI_Helpers::setup()\n";
        throw OomphLibError(error_message.str(),
-                           "HypreInterface::HypreInterface()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
        
       }

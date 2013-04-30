@@ -115,7 +115,7 @@ protected:
                     << std::endl;
       }
      throw OomphLibError(error_stream.str(),
-                         "Shape::range_check()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }
@@ -153,7 +153,7 @@ public:
                   << ", RHS: " << shape.Index1 << " " << shape.Index2
                   << std::endl;
      throw OomphLibError(error_stream.str(),
-                         "Shape::operator=()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -177,7 +177,7 @@ public:
                   << shape_pt->Index2
                   << std::endl;
      throw OomphLibError(error_stream.str(),
-                         "Shape::operator=()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -307,7 +307,7 @@ class DShape
                     << std::endl;
       }
      throw OomphLibError(error_stream.str(),
-                         "DShape::range_check()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }
@@ -347,7 +347,7 @@ class DShape
                   << dshape.Index2 << " " << dshape.Index3
                   << std::endl;
      throw OomphLibError(error_stream.str(),
-                         "DShape::operator=()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -374,7 +374,7 @@ class DShape
                   << dshape_pt->Index3
                   << std::endl;
      throw OomphLibError(error_stream.str(),
-                         "DShape::operator=()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -509,60 +509,58 @@ namespace OneDimLagrange
  /// value of all the shape functions at the local coordinate s
  /// are returned in the array Psi.
  template<unsigned NNODE_1D>
-  void shape(const double &s, double *Psi)
-  {
-   std::ostringstream error_stream;
-   error_stream << "One dimensional Lagrange shape functions "
-                << "have not been defined "
-                << "for " << NNODE_1D << " nodes." << std::endl;
-   throw OomphLibError(error_stream.str()<
-                       "OneDimLagrange::shape()",
-                       OOMPH_EXCEPTION_LOCATION);
-  }
- 
+ void shape(const double &s, double *Psi)
+ {
+  std::ostringstream error_stream;
+  error_stream << "One dimensional Lagrange shape functions "
+               << "have not been defined "
+               << "for " << NNODE_1D << " nodes." << std::endl;
+  throw OomphLibError(error_stream.str(),
+                      OOMPH_CURRENT_FUNCTION,
+                      OOMPH_EXCEPTION_LOCATION);
+ }
 
- /// \short Definition for derivatives of 1D Lagrange shape functions. The
- /// value of all the shape function derivatives at the local coordinate s
- /// are returned in the array DPsi.
- template<unsigned NNODE_1D>
-  void dshape(const double &s, double *DPsi)
+  /// \short Definition for derivatives of 1D Lagrange shape functions. The
+  /// value of all the shape function derivatives at the local coordinate s
+  /// are returned in the array DPsi.
+  template<unsigned NNODE_1D>
+   void dshape(const double &s, double *DPsi)
   {
    std::ostringstream error_stream;
    error_stream << "One dimensional Lagrange shape function derivatives "
                 << "have not been defined "
                 << "for " << NNODE_1D << " nodes." << std::endl;
-   throw OomphLibError(error_stream.str()<
-                       "OneDimLagrange::dshape()",
+   throw OomphLibError(error_stream.str(),
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
- 
 
- /// \short Definition for second derivatives of 
- /// 1D Lagrange shape functions. The
- /// value of all the shape function derivatives at the local coordinate s
- /// are returned in the array DPsi.
- template<unsigned NNODE_1D>
-  void d2shape(const double &s, double *DPsi)
+  /// \short Definition for second derivatives of 
+  /// 1D Lagrange shape functions. The
+  /// value of all the shape function derivatives at the local coordinate s
+  /// are returned in the array DPsi.
+  template<unsigned NNODE_1D>
+   void d2shape(const double &s, double *DPsi)
   {
    std::ostringstream error_stream;
    error_stream << "One dimensional Lagrange shape function "
                 << "second derivatives "
                 << "have not been defined "
                 << "for " << NNODE_1D << " nodes." << std::endl;
-   throw OomphLibError(error_stream.str()<
-                       "OneDimLagrangeShape::d2shape()",
+   throw OomphLibError(error_stream.str(),
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
- /// \short 1D shape functions specialised to linear order (2 Nodes)
- // Note that the numbering is such that shape[0] is at s = -1.0.
- // and shape[1] is at s = 1.0
- template<>
-  inline void shape<2>(const double &s, double *Psi)
-  {
-   Psi[0] = 0.5*(1.0-s);
-   Psi[1] = 0.5*(1.0+s);
-  }
+   /// \short 1D shape functions specialised to linear order (2 Nodes)
+   // Note that the numbering is such that shape[0] is at s = -1.0.
+   // and shape[1] is at s = 1.0
+   template<>
+    inline void shape<2>(const double &s,double *Psi)
+   {
+    Psi[0] = 0.5*(1.0-s);
+    Psi[1] = 0.5*(1.0+s);
+   }
 
  /// Derivatives of 1D shape functions specialised to linear order (2 Nodes)
  template<>

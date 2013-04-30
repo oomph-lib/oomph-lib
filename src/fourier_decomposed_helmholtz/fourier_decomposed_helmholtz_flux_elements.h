@@ -78,7 +78,7 @@ namespace oomph
     {
      throw OomphLibError(
       "Don't call empty constructor for FourierDecomposedHelmholtzFluxElement",
-      "FourierDecomposedHelmholtzFluxElement::FourierDecomposedHelmholtzFluxElement()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
    
@@ -274,7 +274,7 @@ namespace oomph
       "Bulk element must inherit from FourierDecomposedHelmholtzEquations.";
      throw OomphLibError(
       error_string,
-      "FourierDecomposedHelmholtzFluxElement::FourierDecomposedHelmholtzFluxElement()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
    else

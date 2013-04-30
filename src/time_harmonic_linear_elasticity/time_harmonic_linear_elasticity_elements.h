@@ -558,7 +558,7 @@ namespace oomph
        << " " << fld << std::endl;
       throw OomphLibError(
        error_stream.str(),
-       "ProjectableTimeHarmonicLinearElasticityElement::nhistory_values_for_projection()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif
@@ -624,7 +624,7 @@ namespace oomph
          << "but nvalue= " << nvalue << "!= 2 dim = " << 2*n_dim << std::endl;
         throw OomphLibError(
          error_stream.str(),
-         "ProjectableTimeHarmonicLinearElasticityElement::get_field()",
+         OOMPH_CURRENT_FUNCTION,
          OOMPH_EXCEPTION_LOCATION);
        }
 #endif
@@ -656,7 +656,7 @@ namespace oomph
        << "but nvalue= " << nvalue << "!= 2 dim = " << 2*n_dim << std::endl;
       throw OomphLibError(
          error_stream.str(),
-         "ProjectableTimeHarmonicLinearElasticityElement::local_equation()",
+         OOMPH_CURRENT_FUNCTION,
          OOMPH_EXCEPTION_LOCATION);
      }
 #endif

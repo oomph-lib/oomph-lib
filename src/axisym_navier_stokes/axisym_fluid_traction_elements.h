@@ -343,7 +343,7 @@ template<class ELEMENT>
    {
     throw OomphLibError(
      "AxisymmetricNavierStokes is not yet implemented for more than one position type",
-     "AxisymmetricNavierStokesEquationsBase:: fill_in_contribution_to_residuals_axisymmetric_nst_traction()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
 #endif

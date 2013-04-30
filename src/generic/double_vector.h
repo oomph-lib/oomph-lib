@@ -206,7 +206,7 @@ class CRDoubleMatrix;
      error_message << "The distribution of the vector must be setup before "
                    << "external values can be set"; 
      throw OomphLibError(error_message.str(),
-                         "DoubleVector::set_external_values(...)",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif

@@ -127,7 +127,7 @@ namespace oomph
                << "uses this storage (for now).";
     throw OomphLibError(
      err_stream.str(),
-     "TreeBasedRefineableMesh<ELEMENT>::additional_synchronise_hanging_nodes()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -203,7 +203,7 @@ namespace oomph
                       << count_haloed << std::endl;
         throw OomphLibError(
          error_stream.str(),
-         "TreeBasedRefineableMeshBase::additional_synchronise_hanging_nodes(...)",
+         OOMPH_CURRENT_FUNCTION,
          OOMPH_EXCEPTION_LOCATION);
        }
 #endif
@@ -388,7 +388,7 @@ namespace oomph
          {
           throw OomphLibError(
                  "Haloed node not found in haloed node storage",
-                 "TreeBasedRefineableMesh<ELEMENT>::additional_synchronise_hanging_nodes()",
+                 OOMPH_CURRENT_FUNCTION,
                  OOMPH_EXCEPTION_LOCATION);
          }
        }
@@ -512,7 +512,7 @@ namespace oomph
                          << "the missing halo nodes which will be added"
                          << std::endl;
               throw OomphLibError(err_stream.str(),
-                                  "TreeBasedRefineableMesh<ELEMENT>::additional_synchronise_hanging_nodes()",
+                                  OOMPH_CURRENT_FUNCTION,
                                   OOMPH_EXCEPTION_LOCATION);
              }
 #endif
@@ -680,7 +680,7 @@ namespace oomph
 
     throw OomphLibError(
      err_stream.str(),
-     "TreeBasedRefineableMesh<ELEMENT>::additional_synchronise_hanging_nodes()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
 

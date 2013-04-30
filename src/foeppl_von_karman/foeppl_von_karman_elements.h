@@ -118,7 +118,7 @@ public:
    {
     throw OomphLibError(
      "Data object that contains volume control pressure should only contain a single value. ",
-     "FoepplvonKarmanEquations::set_volume_constraint_pressure_data_as_external_data()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -178,7 +178,7 @@ public:
    throw OomphLibError(
     "There is no time-dependent output_fct() for Foeppl von Karman"
     "elements ",
-    "FoepplvonKarmanEquations<DIM>::output_fct()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -197,7 +197,7 @@ public:
    throw OomphLibError(
     "There is no time-dependent compute_error() for Foeppl von Karman"
     "elements",
-    "FoepplvonKarmanEquations<DIM>::compute_error()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -692,7 +692,7 @@ class FaceGeometry<QFoepplvonKarmanElement<NNODE_1D> >:
        << "0 to 7 rather than " << fld << std::endl;
       throw OomphLibError(
        error_stream.str(),
-       "ProjectableFoepplvonKarmanElement::data_values_of_field()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif
@@ -731,7 +731,7 @@ class FaceGeometry<QFoepplvonKarmanElement<NNODE_1D> >:
        << "0 to 7 rather than " << fld << std::endl;
       throw OomphLibError(
        error_stream.str(),
-       "ProjectableFoepplvonKarmanElement::nhistory_values_for_projection()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif
@@ -761,7 +761,7 @@ class FaceGeometry<QFoepplvonKarmanElement<NNODE_1D> >:
        << "0 to 7 rather than " << fld << std::endl;
       throw OomphLibError(
        error_stream.str(),
-       "ProjectableFoepplvonKarmanElement::jacobian_and_shape_of_field()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif
@@ -792,7 +792,7 @@ class FaceGeometry<QFoepplvonKarmanElement<NNODE_1D> >:
        << "0 to 7 rather than " << fld << std::endl;
       throw OomphLibError(
        error_stream.str(),
-       "ProjectableFoepplvonKarmanElement::jget_field()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif
@@ -832,7 +832,7 @@ class FaceGeometry<QFoepplvonKarmanElement<NNODE_1D> >:
        << "0 to 7 rather than " << fld << std::endl;
       throw OomphLibError(
        error_stream.str(),
-       "ProjectableFoepplvonKarmanElement::nvalue_of_field()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif
@@ -853,7 +853,7 @@ class FaceGeometry<QFoepplvonKarmanElement<NNODE_1D> >:
        << "0 to 7 rather than " << fld << std::endl;
       throw OomphLibError(
        error_stream.str(),
-       "ProjectableFoepplvonKarmanElement::local_equation()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif

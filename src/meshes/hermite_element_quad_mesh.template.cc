@@ -1456,7 +1456,7 @@ setup_boundary_element_info(std::ostream &outfile)
 
              throw OomphLibError(
               error_message,
-              "QuadMeshBase::setup_boundary_element_info()",
+              OOMPH_CURRENT_FUNCTION,
               OOMPH_EXCEPTION_LOCATION);
             }
            found=true;
@@ -1504,7 +1504,7 @@ setup_boundary_element_info(std::ostream &outfile)
         default:
 
          throw OomphLibError("Never get here",
-                             "QuadMeshBase::setup_boundary_element_info",
+                             OOMPH_CURRENT_FUNCTION,
                              OOMPH_EXCEPTION_LOCATION);
         }
 

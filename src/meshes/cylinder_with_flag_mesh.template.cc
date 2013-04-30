@@ -1410,7 +1410,7 @@ void AlgebraicCylinderWithFlagMesh<ELEMENT>::algebraic_node_update(
    error_message << "Wrong id " << id << std::endl;
    throw OomphLibError(
     error_message.str(),
-    "AlgebraicCylinderWithFlagMesh::algebraic_node_update()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 

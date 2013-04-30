@@ -128,7 +128,7 @@ public:
                          FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)
   {
    throw OomphLibError("These equations are steady => no time dependence",
-                       "YoungLaplaceEquations::output_fct()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -144,7 +144,7 @@ public:
                     const double& time, double& error, double& norm)
   {
    throw OomphLibError("These equations are steady => no time dependence",
-                       "YoungLaplaceEquations::compute_error()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -177,7 +177,7 @@ public:
    if (kappa_pt->nvalue()!=1)
   {
    throw OomphLibError("kappa must only store a single value!",
-                       "YoungLaplaceEquations::set_kappa()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -404,7 +404,7 @@ public:
    {
 
    throw OomphLibError("Vectors must be of dimension 3 for cross-product!",
-                       "YoungLaplaceEquations::cross_product()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
    }
 #endif

@@ -43,8 +43,7 @@ namespace oomph
   {
    throw OomphLibError(
     "This matrix is not square, the matrix MUST be square!",
-    "ComplexMatrixBase::solve()",
-    OOMPH_EXCEPTION_LOCATION);
+    OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
   }
  // Check that size of rhs = nrow()
  if (rhs.size()!=nrow())
@@ -55,7 +54,7 @@ namespace oomph
     << ", it should be " << nrow() << std::endl;
 
    throw OomphLibError(error_message_stream.str(),
-                       "ComplexMatrixBase::solve()",
+OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -132,8 +131,7 @@ int DenseComplexMatrix::ludecompose()
    {
     throw OomphLibError(
      "This matrix is not square, the matrix MUST be square!",
-     "DenseComplexMatrix::ludecompose()",
-     OOMPH_EXCEPTION_LOCATION);
+     OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
    }
 #endif 
 
@@ -166,7 +164,7 @@ int DenseComplexMatrix::ludecompose()
    if(big==0.0) 
     {
      throw OomphLibError("Singular Matrix",
-                         "DenseComplexMatrix::ludecompose()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    //Save the scaling
@@ -374,9 +372,8 @@ void DenseComplexMatrix::lubksub(Vector<std::complex<double> > &rhs)
  if (N!=M)
   {
    throw OomphLibError(
-    "This matrix is not square, the matrix MUST be square!",
-    "DenseComplexMatrix::lubksub()",
-    OOMPH_EXCEPTION_LOCATION);
+    "This matrix is not square,  the matrix MUST be square!",
+    OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
   }
  // Check that size of rhs=nrow() and index=nrow() are correct!
  if (rhs.size()!=N)
@@ -387,14 +384,14 @@ void DenseComplexMatrix::lubksub(Vector<std::complex<double> > &rhs)
     << ", it should be " << N << std::endl;
    
    throw OomphLibError(error_message_stream.str(),
-                       "DenseComplexMatrix::lubksub()",
+OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
  if(Index == 0) 
   {
    throw OomphLibError(
     "Index vector has not been allocated. Have you called ludecompse()\n",
-    "DenseComplexMatrix::lubksub()",
+OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
  if(Index->size()!=N)
@@ -405,7 +402,7 @@ void DenseComplexMatrix::lubksub(Vector<std::complex<double> > &rhs)
     << ", it should be " << N << std::endl;
 
    throw OomphLibError(error_message_stream.str(),
-                       "DenseComplexMatrix::lubksub()",
+OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif 
@@ -454,8 +451,7 @@ void DenseComplexMatrix::residual(const Vector<std::complex<double> >&x,
   {
    throw OomphLibError(
     "This matrix is not square, the matrix MUST be square!",
-    "DenseComplexMatrix::residual()",
-    OOMPH_EXCEPTION_LOCATION);
+    OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
   }
  // Check that size of rhs = nrow() 
  if (rhs.size()!=N)
@@ -466,7 +462,7 @@ void DenseComplexMatrix::residual(const Vector<std::complex<double> >&x,
     << ", it should be " << N << std::endl;
    
    throw OomphLibError(error_message_stream.str(),
-                       "DenseComplexMatrix::residual()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
  // Check that the size of x is correct
@@ -478,7 +474,7 @@ void DenseComplexMatrix::residual(const Vector<std::complex<double> >&x,
     << ", it should be " << N << std::endl;
    
    throw OomphLibError(error_message_stream.str(),
-                       "DenseComplexMatrix::residual()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -519,7 +515,7 @@ void DenseComplexMatrix::multiply(const Vector<std::complex<double> > &x,
     << ", it should be " << M << std::endl;
    
    throw OomphLibError(error_message_stream.str(),
-                       "DenseComplexMatrix::multiply()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -562,7 +558,7 @@ void DenseComplexMatrix::multiply_transpose(
     << ", it should be " << N << std::endl;
 
    throw OomphLibError(error_message_stream.str(),
-                       "DenseComplexMatrix::multiply_transpose()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -621,7 +617,7 @@ int CCComplexMatrix::ludecompose()
                         << "N, M " << N << " " << M << std::endl;
 
    throw OomphLibError(error_message_stream.str(),
-                       "CCComplexMatrix::ludecompose()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -668,7 +664,7 @@ void CCComplexMatrix::lubksub(Vector<std::complex<double> > &rhs)
                        << std::endl;
 
    throw OomphLibError(error_message_stream.str(),
-                       "CCComplexMatrix::lubksub()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
  if (N!=M)
@@ -678,7 +674,7 @@ void CCComplexMatrix::lubksub(Vector<std::complex<double> > &rhs)
                         << "N, M " << N << " " << M << std::endl;
 
    throw OomphLibError(error_message_stream.str(),
-                       "CCComplexMatrix::lubksub()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -772,8 +768,7 @@ void CCComplexMatrix::residual(const Vector<std::complex<double> > &x,
   {
    throw OomphLibError(
     "This matrix is not square, the matrix MUST be square!",
-    "CCComplexMatrix::residual()",
-    OOMPH_EXCEPTION_LOCATION);
+    OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
   }
  // Check that size of rhs = nrow() 
  if (rhs.size()!=N)
@@ -784,7 +779,7 @@ void CCComplexMatrix::residual(const Vector<std::complex<double> > &x,
     << ", it should be " << N << std::endl;
 
    throw OomphLibError(error_message_stream.str(),
-                       "CCComplexMatrix::residual()",
+OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
  // Check that the size of x is correct
@@ -796,7 +791,7 @@ void CCComplexMatrix::residual(const Vector<std::complex<double> > &x,
     << ", it should be " << N << std::endl;
    
    throw OomphLibError(error_message_stream.str(),
-                       "CCComplexMatrix::residual()",
+OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -841,7 +836,7 @@ void CCComplexMatrix::multiply(const Vector<std::complex<double> > &x,
     << ", it should be " << M << std::endl;
    
    throw OomphLibError(error_message_stream.str(),
-                       "CCComplexMatrix::multiply()",
+OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -888,7 +883,7 @@ void CCComplexMatrix::multiply_transpose(
     << ", it should be " << N << std::endl;
 
    throw OomphLibError(error_message_stream.str(),
-                       "CCComplexMatrix::multiply_transpose()",
+OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -939,7 +934,7 @@ int CRComplexMatrix::ludecompose()
                         << "N, M " << N << " " << M << std::endl;
 
    throw OomphLibError(error_message_stream.str(),
-                       "CRComplexMatrix::ludecompose()",
+OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -986,7 +981,7 @@ void CRComplexMatrix::lubksub(Vector<std::complex<double> > &rhs)
                         << std::endl;
    
    throw OomphLibError(error_message_stream.str(),
-                       "CRComplexMatrix::lubksub()",
+OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
  if (N!=M)
@@ -996,7 +991,7 @@ void CRComplexMatrix::lubksub(Vector<std::complex<double> > &rhs)
                         << "N, M " << N << " " << M << std::endl;
 
    throw OomphLibError(error_message_stream.str(),
-                       "CRComplexMatrix::lubksub()",
+OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -1091,7 +1086,7 @@ void CRComplexMatrix::residual(const Vector<std::complex<double> > &x,
     << ", it should be " << N << std::endl;
    
    throw OomphLibError(error_message_stream.str(),
-                       "CRComplexMatrix::residual()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
  // Check that the size of x is correct
@@ -1103,7 +1098,7 @@ void CRComplexMatrix::residual(const Vector<std::complex<double> > &x,
     << ", it should be " << M << std::endl;
    
    throw OomphLibError(error_message_stream.str(),
-                       "CRComplexMatrix::residual()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -1143,7 +1138,7 @@ void CRComplexMatrix::multiply(
     << ", it should be " << M << std::endl;
    
    throw OomphLibError(error_message_stream.str(),
-                       "CRComplexMatrix::multiply()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -1187,7 +1182,7 @@ void CRComplexMatrix::multiply_transpose(
     << ", it should be " << N << std::endl;
 
    throw OomphLibError(error_message_stream.str(),
-                       "CRComplexMatrix::multiply_transpose()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif

@@ -432,7 +432,7 @@ namespace Missing_masters_functions
       {
        throw OomphLibError(
         "Failed to cast new node to boundary node\n",
-        "Missing_masters::get_required_nodal_information_helper()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
       }
 #endif
@@ -685,7 +685,7 @@ namespace Missing_masters_functions
       {
        throw OomphLibError(
         "Failed to cast new node to boundary node\n",
-        "Missing_masters::get_required_master_nodal_information_helper()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
       }
 #endif
@@ -862,7 +862,7 @@ namespace Missing_masters_functions
                         << "yet been implemented.\n";
            throw OomphLibError
             (error_stream.str(),
-             "Missing_masters::get_required_master_nodal_...()",
+             OOMPH_CURRENT_FUNCTION,
              OOMPH_EXCEPTION_LOCATION);
           }
 
@@ -1096,7 +1096,7 @@ namespace Missing_masters_functions
        {
         throw OomphLibError(
          "Failed to cast new node to boundary node\n",
-         "Missing_masters::construct_new_external_halo_node_helper()",
+         OOMPH_CURRENT_FUNCTION,
          OOMPH_EXCEPTION_LOCATION);
        }
 #endif

@@ -220,7 +220,7 @@ namespace oomph
               std::ofstream &new_nodes_file)
     {
      throw OomphLibError("This function has not been implemented yet:",
-                         "RefineableSolidQElement<1>::build()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 

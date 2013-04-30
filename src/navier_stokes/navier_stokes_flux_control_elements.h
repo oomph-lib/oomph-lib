@@ -259,7 +259,7 @@ class NetFluxControlElement : public virtual GeneralisedElement
     {
      throw OomphLibError(
       "Element must be used with a mesh of NavierStokesFluxControlElements",
-      "NetFluxControlElement::fill_in_generic_residual_contribution_flux_control()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -348,7 +348,7 @@ class NavierStokesFluxControlElement :
            << "instead.\n";
           throw OomphLibError(
            error_message.str(),
-           "NavierStokesFluxControlElement::Constructor",
+           OOMPH_CURRENT_FUNCTION,
            OOMPH_EXCEPTION_LOCATION);
          }
        }

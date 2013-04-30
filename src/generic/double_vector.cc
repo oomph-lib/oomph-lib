@@ -148,7 +148,7 @@ namespace oomph
     error_message << "The vector passed to initialise(...) must be of length "
                   << "nrow()";
     throw OomphLibError(error_message.str(),
-                        "DoubleVector::initialise(...)",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -184,7 +184,7 @@ namespace oomph
                    << "passed in via set_external_values() and therefore "
                    << "cannot be redistributed";
      throw OomphLibError(error_message.str(),
-                         "DoubleVector::redistribute(...)",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
    }
    // paranoid check that the nrows for both distributions is the
@@ -197,7 +197,7 @@ namespace oomph
                    << " of global rows in the current distribution ("
                    << this->nrow() << ").\n";
      throw OomphLibError(error_message.str(),
-                         "DoubleVector::redistribute(...)",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    // paranoid check that the current distribution and the new distribution
@@ -209,7 +209,7 @@ namespace oomph
      error_message << "The new distribution and the current distribution must "
                    << "have the same communicator.";
      throw OomphLibError(error_message.str(),
-                         "DoubleVector::redistribute(...)",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -421,7 +421,7 @@ namespace oomph
                    << " is not in the range (0,"
                    << this->nrow_local()-1 << ")";
      throw OomphLibError(error_message.str(),
-                         "DoubleVector::operator[]",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -473,7 +473,7 @@ namespace oomph
      std::ostringstream error_message;
      error_message << "This vector must be setup.";
      throw OomphLibError(error_message.str(),
-                         "DoubleVector::operator+=",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    // PARANOID check that the vector v is setup
@@ -482,7 +482,7 @@ namespace oomph
      std::ostringstream error_message;
      error_message << "The vector v must be setup.";
      throw OomphLibError(error_message.str(),
-                         "DoubleVector::operator+=",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    // PARANOID check that the vectors have the same distribution
@@ -492,7 +492,7 @@ namespace oomph
      error_message << "The vector v and this vector must have the same "
                    << "distribution.";
      throw OomphLibError(error_message.str(),
-                         "DoubleVector::operator+=",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif//
@@ -518,7 +518,7 @@ namespace oomph
      std::ostringstream error_message;
      error_message << "This vector must be setup.";
      throw OomphLibError(error_message.str(),
-                         "DoubleVector::operator-=",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    // PARANOID check that the vector v is setup
@@ -527,7 +527,7 @@ namespace oomph
      std::ostringstream error_message;
      error_message << "The vector v must be setup.";
      throw OomphLibError(error_message.str(),
-                         "DoubleVector::operator-=",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    // PARANOID check that the vectors have the same distribution
@@ -537,7 +537,7 @@ namespace oomph
      error_message << "The vector v and this vector must have the same "
                    << "distribution.";
      throw OomphLibError(error_message.str(),
-                         "DoubleVector::operator-=",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -589,7 +589,7 @@ namespace oomph
                    << " is not in the range (0,"
                    << this->nrow_local()-1 << ")";
      throw OomphLibError(error_message.str(),
-                         "DoubleVector::operator[]",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -722,7 +722,7 @@ namespace oomph
      std::ostringstream error_message;
      error_message << "This vector must be setup.";
      throw OomphLibError(error_message.str(),
-                         "DoubleVector::dot()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    if (!vec.built())
@@ -730,7 +730,7 @@ namespace oomph
      std::ostringstream error_message;
      error_message << "The input vector be setup.";
      throw OomphLibError(error_message.str(),
-                         "DoubleVector::dot()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    if (*this->distribution_pt() != *vec.distribution_pt())
@@ -741,7 +741,7 @@ namespace oomph
                    << "\n\n  this: " << *this->distribution_pt()
                    << "\n  vec:  " << *vec.distribution_pt();
      throw OomphLibError(error_message.str(),
-                         "DoubleVector::dot(...)",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -783,7 +783,7 @@ namespace oomph
      std::ostringstream error_message;
      error_message << "This vector must be setup.";
      throw OomphLibError(error_message.str(),
-                         "DoubleVector::norm()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -827,7 +827,7 @@ namespace oomph
      std::ostringstream error_message;
      error_message << "This vector must be setup.";
      throw OomphLibError(error_message.str(),
-                         "DoubleVector::dot()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    if (!matrix_pt->built())
@@ -835,7 +835,7 @@ namespace oomph
      std::ostringstream error_message;
      error_message << "The input matrix be built.";
      throw OomphLibError(error_message.str(),
-                         "DoubleVector::dot()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    if (*this->distribution_pt() != *matrix_pt->distribution_pt())
@@ -844,7 +844,7 @@ namespace oomph
      error_message << "The distribution of this vector and the matrix at "
                    << "matrix_pt must be the same";
      throw OomphLibError(error_message.str(),
-                         "DoubleVector::matrix_norm(...)",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif

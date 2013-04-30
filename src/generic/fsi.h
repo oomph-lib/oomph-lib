@@ -1025,7 +1025,7 @@ void doc_fsi(Mesh* fluid_mesh_pt,
             << "I don't think this should happen..."
             << std::endl;
            throw OomphLibError(error_message.str(),
-                               "FSI_functions::doc_fsi()",
+                               OOMPH_CURRENT_FUNCTION,
                                OOMPH_EXCEPTION_LOCATION);
           }
         }

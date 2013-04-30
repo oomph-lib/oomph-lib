@@ -256,7 +256,7 @@ class AxisymmetricLinearElasticityEquationsBase :
       error_message << "No pointer to Poisson's ratio set. Please set one!\n";
       throw OomphLibError(
        error_message.str(),
-       "AxisymmetricLinearElasticityEquationsBase::nu()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif    

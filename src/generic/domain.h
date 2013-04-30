@@ -184,7 +184,7 @@ public:
                                       Vector<double>& f)
   {
    throw OomphLibError("Domain::dmacro_element_boundary() is broken virtual.",
-                       "Domain::dmacro_element_boundary()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -211,7 +211,7 @@ public:
                                        Vector<double>& f)
   {
    throw OomphLibError("Domain::d2macro_element_boundary() is broken virtual.",
-                       "Domain::d2macro_element_boundary()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 

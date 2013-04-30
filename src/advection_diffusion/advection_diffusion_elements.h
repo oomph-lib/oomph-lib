@@ -185,7 +185,7 @@ public:
   {
    throw OomphLibError(
     "There is no time-dependent output_fct() for Advection Diffusion elements",
-    "AdvectionDiffusionEquations<DIM>::output_fct()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -204,7 +204,7 @@ public:
   {
    throw OomphLibError(
     "No time-dependent compute_error() for Advection Diffusion elements",
-    "AdvectionDiffusionEquations<DIM>::compute_error()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 

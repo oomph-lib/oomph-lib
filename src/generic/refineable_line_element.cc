@@ -126,7 +126,7 @@ namespace oomph
         error_message +=
          "it is missing (a least) a node at its edge.\n";
         throw OomphLibError(error_message,
-         "RefineableQElement<1>::node_created_by_neighbour()",
+                            OOMPH_CURRENT_FUNCTION,
          OOMPH_EXCEPTION_LOCATION);
        }
       // Otherwise, carry on
@@ -213,7 +213,7 @@ namespace oomph
        "I have no nodes. Who has created me then?!\n";
       
       throw OomphLibError(error_message,
-                          "RefineableQElement<1>::build()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
 #endif
@@ -239,7 +239,7 @@ namespace oomph
      {
       throw OomphLibError(
        "Can't handle generalised nodal positions (yet).",
-       "RefineableQElement<1>::build()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
     
@@ -290,7 +290,7 @@ namespace oomph
      {
       throw OomphLibError(
        "Trouble: father_el_pt->node_pt(0)==0\n Can't build son element!\n",
-       "RefineableQElement<1>::build()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
     // Otherwise, carry on
@@ -401,7 +401,7 @@ namespace oomph
                "in the initial (coarse) mesh.";
               
               throw OomphLibError(error_message,
-                                  "RefineableQElement<1>::build()",
+                                  OOMPH_CURRENT_FUNCTION,
                                   OOMPH_EXCEPTION_LOCATION);
              }
 #endif
@@ -530,7 +530,7 @@ namespace oomph
           error_message += "the son should be too....\n";
           
           throw OomphLibError(error_message,
-                              "RefineableQElement<1>::build()",
+                              OOMPH_CURRENT_FUNCTION,
                               OOMPH_EXCEPTION_LOCATION);
          }
 #endif
@@ -571,7 +571,7 @@ namespace oomph
           error_message += "the father should be too....\n";
           
           throw OomphLibError(error_message,
-                              "RefineableQElement<1>::build()",
+                              OOMPH_CURRENT_FUNCTION,
                               OOMPH_EXCEPTION_LOCATION);
          }
 #endif

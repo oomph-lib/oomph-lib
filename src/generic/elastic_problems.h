@@ -596,7 +596,7 @@ SolidFiniteElement::MultiplierFctPt multiplier_fct_pt)
       {
        throw OomphLibError(
         "No positional dofs should be pinned at this stage!",
-        "SolidICProblem::set_newmark_initial_condition_consistently()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
       }
 #endif
@@ -633,7 +633,7 @@ SolidFiniteElement::MultiplierFctPt multiplier_fct_pt)
 
    throw OomphLibError(
     error_message.str(),
-    "SolidICProblem::set_newmark_initial_condition_consistently()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 #endif

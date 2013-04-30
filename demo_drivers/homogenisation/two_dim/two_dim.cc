@@ -61,7 +61,7 @@ public:
    if(n_dim != node2_pt->ndim())
     {
      throw OomphLibError("Can't compare two nodes of different dimension",
-                         "CompareNodeCoordinates::operator()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -82,7 +82,7 @@ public:
    if(n_dim != node2_pt->ndim())
     {
      throw OomphLibError("Can't compare two nodes of different dimension",
-                         "CompareNodeCoordinates::operator()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -620,7 +620,7 @@ void HomogenisationProblem<ELEMENT>::complete_problem_setup()
                      << boundary_nodes_pt[2][n]->x(0);
                 
         throw OomphLibError(error_stream.str(),
-                            "HomogenisationProblem",
+                            OOMPH_CURRENT_FUNCTION,
                             OOMPH_EXCEPTION_LOCATION);
        }
 
@@ -642,7 +642,7 @@ void HomogenisationProblem<ELEMENT>::complete_problem_setup()
                      << boundary_nodes_pt[3][n]->x(1);
                 
         throw OomphLibError(error_stream.str(),
-                            "HomogenisationProblem",
+                            OOMPH_CURRENT_FUNCTION,
                             OOMPH_EXCEPTION_LOCATION);
        }
 

@@ -188,8 +188,8 @@ assign_undeformed_positions(GeomObject* const &undeformed_midplane_pt)
           << "It may be possible to generalise the mesh generator to \n"
           << "deal with this case -- feel free to have a go...\n";
          throw OomphLibError(
-          error_stream.str(),          
-          "CircularCylindricalShellMesh::assign_undeformed_positions()",
+          error_stream.str(),
+          OOMPH_CURRENT_FUNCTION,
           OOMPH_EXCEPTION_LOCATION);
         }
       }

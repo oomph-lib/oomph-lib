@@ -350,7 +350,7 @@ template<class ELEMENT>
    {
     throw OomphLibError(
      "AxisymmetricLinearElasticity is not yet implemented for more than one position type",
-     "AxisymmetricLinearElasticityEquationsBase:: fill_in_contribution_to_residuals_axisymmetric_linear_elasticity_traction()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -694,7 +694,7 @@ template <class ELASTICITY_BULK_ELEMENT, class NAVIER_STOKES_BULK_ELEMENT>
    {
     throw OomphLibError(
      "LinearElasticity is not yet implemented for more than one position type.",
-     "FSIAxisymmetricLinearElasticityTractionElement::fill_in_contribution_to_residuals_helmholtz_traction()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
 #endif

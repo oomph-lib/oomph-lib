@@ -118,7 +118,7 @@ namespace oomph
                     << flux.size() << ", whereas it should be " 
                     << num_entries << std::endl;
       throw OomphLibError(error_message.str(),
-                          "RefineableLinearElasticityEquations::get_Z2_flux()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
 #endif

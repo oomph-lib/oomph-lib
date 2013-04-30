@@ -96,7 +96,7 @@ class ComplexMatrixBase
   {
    throw OomphLibError(
     "ludecompose() has not been written for this matrix class\n",
-    "ComplexMatrixBase::ludecompose()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
 
    /// Dummy return 
@@ -109,7 +109,7 @@ class ComplexMatrixBase
   {
    throw OomphLibError(
     "lubksub() has not been written for this matrix class\n",
-    "ComplexMatrixBase::lubksub()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
  

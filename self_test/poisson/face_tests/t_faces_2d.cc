@@ -83,7 +83,7 @@ namespace MeshDeformation
     error_stream << "Called with boundary number " << boundary << "\n";
     
     throw OomphLibError(error_stream.str(),
-                        "Exact::exact_normal()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
     break;
    }

@@ -142,8 +142,8 @@ TopologicallyRectangularDomain::TopologicallyRectangularDomain
   {
    throw OomphLibError
     (
-     error_message.str(),     
-     "TopologicallyRectangularDomain::TopologicallyRectangularDomain",
+     error_message.str(),
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION
      );
   }

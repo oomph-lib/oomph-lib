@@ -51,7 +51,7 @@ create_distributed_epetra_vector(const DoubleVector& oomph_vec)
    std::ostringstream error_message;
    error_message << "The oomph-lib vector (oomph_v) must be setup.";
    throw OomphLibError(error_message.str(),
-                       "TrilinosHelpers::create_distributed_epetra_vector()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -112,7 +112,7 @@ Epetra_Vector* TrilinosEpetraHelpers::create_distributed_epetra_vector
    std::ostringstream error_message;
    error_message << "The LinearAlgebraDistribution dist_pt must be setup.";
    throw OomphLibError(error_message.str(),
-                       "TrilinosHelpers::create_distributed_epetra_vector()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -161,7 +161,7 @@ create_epetra_vector_view_data(DoubleVector& oomph_vec)
    std::ostringstream error_message;
    error_message << "The oomph-lib vector (oomph_v) must be setup.";
    throw OomphLibError(error_message.str(),
-                       "TrilinosHelpers::create_epetra_vector_view_data()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -196,7 +196,7 @@ void TrilinosEpetraHelpers::copy_to_oomphlib_vector
    std::ostringstream error_message;
    error_message << "The oomph-lib vector (oomph_v) must be setup.";
    throw OomphLibError(error_message.str(),
-                       "TrilinosHelpers::copy_to_oomphlib_vector()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -289,7 +289,7 @@ Epetra_CrsMatrix* TrilinosEpetraHelpers::create_distributed_epetra_matrix
    error_message << "The oomph-lib matrix must be built.";
    throw OomphLibError
     (error_message.str(),
-     "TrilinosEpetraHelpers::create_distributed_epetra_matrix()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
   }
  if (!oomph_matrix_pt->built())
@@ -298,7 +298,7 @@ Epetra_CrsMatrix* TrilinosEpetraHelpers::create_distributed_epetra_matrix
    error_message << "The oomph-lib matrix must be built.";
    throw OomphLibError
     (error_message.str(),
-     "TrilinosEpetraHelpers::create_distributed_epetra_matrix()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
   }
  if (!oomph_matrix_pt->built())
@@ -307,7 +307,7 @@ Epetra_CrsMatrix* TrilinosEpetraHelpers::create_distributed_epetra_matrix
    error_message << "The oomph-lib matrix must be built.";
    throw OomphLibError
     (error_message.str(),
-     "TrilinosEpetraHelpers::create_distributed_epetra_matrix()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -381,7 +381,7 @@ Epetra_CrsMatrix* TrilinosEpetraHelpers::create_distributed_epetra_matrix
       << err;
      throw OomphLibError
       (error_message.str(),
-       "TrilinosHelpers::create_distributed_epetra_matrix(...)",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);       
     }
 #endif
@@ -414,7 +414,7 @@ Epetra_CrsMatrix* TrilinosEpetraHelpers::create_distributed_epetra_matrix
     << err;
    throw OomphLibError
     (error_message.str(),
-     "TrilinosHelpers::create_distributed_epetra_matrix(...)",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -490,7 +490,7 @@ create_distributed_epetra_matrix_for_aztecoo
    error_message << "The oomph-lib matrix must be built.";
    throw OomphLibError
     (error_message.str(),
-     "TrilinosEpetraHelpers::create_distributed_epetra_matrix()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -625,7 +625,7 @@ create_distributed_epetra_matrix_for_aztecoo
       << err;
      throw OomphLibError
       (error_message.str(),
-       "TrilinosHelpers::create_distributed_epetra_matrix(...)",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);       
     }
 #endif
@@ -647,7 +647,7 @@ create_distributed_epetra_matrix_for_aztecoo
     << err;
    throw OomphLibError
     (error_message.str(),
-     "TrilinosHelpers::create_distributed_epetra_matrix(...)",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -686,7 +686,7 @@ void TrilinosEpetraHelpers::multiply(const CRDoubleMatrix* oomph_matrix_pt,
    error_message_stream 
     << "This matrix has not been built";
    throw OomphLibError(error_message_stream.str(),
-                       "TrilinosHelpers::multiply()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -699,7 +699,7 @@ void TrilinosEpetraHelpers::multiply(const CRDoubleMatrix* oomph_matrix_pt,
      error_message_stream 
       << "The soln vector and this matrix must have the same distribution.";
      throw OomphLibError(error_message_stream.str(),
-                       "TrilinosHelpers::multiply()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }
@@ -711,7 +711,7 @@ void TrilinosEpetraHelpers::multiply(const CRDoubleMatrix* oomph_matrix_pt,
      error_message_stream 
       << "The x vector must be setup";
      throw OomphLibError(error_message_stream.str(),
-                       "TrilinosHelpers::multiply()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -755,7 +755,7 @@ void TrilinosEpetraHelpers::multiply(const CRDoubleMatrix* oomph_matrix_pt,
     << "Epetra Matrix Vector Multiply Error : epetra_error_flag = " 
     << epetra_error_flag;
    throw OomphLibError(error_message.str(),
-                       "TrilinosHelpersMPI::multiply(...)",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -789,7 +789,7 @@ void TrilinosEpetraHelpers::multiply(const CRDoubleMatrix &matrix_1,
    error_message_stream 
     << "This matrix matrix_1 has not been built";
    throw OomphLibError(error_message_stream.str(),
-                       "TrilinosHelpers::multiply()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
  // check that matrix 2 is built
@@ -799,7 +799,7 @@ void TrilinosEpetraHelpers::multiply(const CRDoubleMatrix &matrix_1,
    error_message_stream 
     << "This matrix matrix_2 has not been built";
    throw OomphLibError(error_message_stream.str(),
-                       "TrilinosHelpers::multiply()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
  // check matrix dimensions are compatable
@@ -811,7 +811,7 @@ void TrilinosEpetraHelpers::multiply(const CRDoubleMatrix &matrix_1,
     << "ncol() for first matrix: " << matrix_1.ncol()
     << "nrow() for second matrix: " << matrix_2.nrow();
    throw OomphLibError(error_message.str(),
-                       "TrilinosHelpers::multiply(...)",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -825,7 +825,7 @@ void TrilinosEpetraHelpers::multiply(const CRDoubleMatrix &matrix_1,
     << "ncol() for first matrix: " << matrix_1.ncol()
     << "nrow() for second matrix: " << matrix_2.nrow();
    throw OomphLibError(error_message.str(),
-                       "TrilinosHelpers::multiply(...)",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
  // check that the distribution of the matrix and the soln are the same
@@ -837,7 +837,7 @@ void TrilinosEpetraHelpers::multiply(const CRDoubleMatrix &matrix_1,
      error_message_stream 
       << "The solution matrix and matrix_1 must have the same distribution.";
      throw OomphLibError(error_message_stream.str(),
-                       "TrilinosHelpers::multiply()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }
@@ -913,7 +913,7 @@ void TrilinosEpetraHelpers::multiply(const CRDoubleMatrix &matrix_1,
                   << " from TrilinosHelpers::multiply"
                   << std::endl;
     throw OomphLibError(error_message.str(),
-                        "TrilinosHelpers::multiply(...)",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -937,7 +937,7 @@ void TrilinosEpetraHelpers::multiply(const CRDoubleMatrix &matrix_1,
      << "nrow() for first input matrix: " << matrix_1.nrow()
      << " nrow() for solution: " << solution_pt->NumGlobalRows();
   throw OomphLibError(error_message.str(),
-                      "TrilinosHelpers::multiply()",
+                      OOMPH_CURRENT_FUNCTION,
                       OOMPH_EXCEPTION_LOCATION);
  }
 
@@ -950,7 +950,7 @@ void TrilinosEpetraHelpers::multiply(const CRDoubleMatrix &matrix_1,
      << "nrow_local() for first input matrix: " << matrix_1.nrow_local()
      << " nrow_local() for solution: " << solution_pt->NumMyRows();
   throw OomphLibError(error_message.str(),
-                      "TrilinosHelpers::multiply()",
+                      OOMPH_CURRENT_FUNCTION,
                       OOMPH_EXCEPTION_LOCATION);
  }
 
@@ -963,7 +963,7 @@ void TrilinosEpetraHelpers::multiply(const CRDoubleMatrix &matrix_1,
      << "ncol() for second input matrix: " << matrix_2.ncol()
      << " ncol() for solution: " << solution_pt->NumGlobalCols();
   throw OomphLibError(error_message.str(),
-                      "TrilinosHelpers::multiply()",
+                      OOMPH_CURRENT_FUNCTION,
                       OOMPH_EXCEPTION_LOCATION);
  }
 
@@ -976,7 +976,7 @@ void TrilinosEpetraHelpers::multiply(const CRDoubleMatrix &matrix_1,
      << "first_row() for first input matrix : " << matrix_1.first_row()
      << " first_row() for solution: " << solution_pt->GRID(0);
   throw OomphLibError(error_message.str(),
-                      "TrilinosHelpers::multiply()",
+                      OOMPH_CURRENT_FUNCTION,
                       OOMPH_EXCEPTION_LOCATION);
  }                     
 #endif

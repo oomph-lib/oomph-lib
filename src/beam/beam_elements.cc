@@ -89,7 +89,7 @@ void KirchhoffLoveBeamEquations::get_normal(const Vector<double>& s,
                   << N.size() << std::endl;
 
     throw OomphLibError(error_message.str(),
-                        "KirchhoffLoveBeamEquations::get_normal()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
   if (r.size()!=2)
@@ -99,7 +99,7 @@ void KirchhoffLoveBeamEquations::get_normal(const Vector<double>& s,
                   << r.size() << std::endl;
 
     throw OomphLibError(error_message.str(),
-                        "KirchhoffLoveBeamEquations::get_normal()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
   
@@ -110,7 +110,7 @@ void KirchhoffLoveBeamEquations::get_normal(const Vector<double>& s,
                   << s.size() << std::endl;
     
     throw OomphLibError(error_message.str(),
-                        "KirchhoffLoveBeamEquations::get_normal()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -198,7 +198,7 @@ void KirchhoffLoveBeamEquations::get_non_unit_tangent(const Vector<double>& s,
                   << drds.size() << std::endl;
 
     throw OomphLibError(error_message.str(),
-                        "KirchhoffLoveBeamEquations::get_normal()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
   if (r.size()!=2)
@@ -208,7 +208,7 @@ void KirchhoffLoveBeamEquations::get_non_unit_tangent(const Vector<double>& s,
                   << r.size() << std::endl;
 
     throw OomphLibError(error_message.str(),
-                        "KirchhoffLoveBeamEquations::get_normal()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
   
@@ -219,7 +219,7 @@ void KirchhoffLoveBeamEquations::get_non_unit_tangent(const Vector<double>& s,
                   << s.size() << std::endl;
     
     throw OomphLibError(error_message.str(),
-                        "KirchhoffLoveBeamEquations::get_normal()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif

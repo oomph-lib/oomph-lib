@@ -110,7 +110,7 @@ public :
   {
    throw OomphLibError(
     "Don't call empty constructor for PoissonFluxElement",
-    "BiharmonicFluxElement<DIM>::BiharmonicFluxElement()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 

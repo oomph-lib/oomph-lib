@@ -667,7 +667,7 @@ FullCircleMesh<ELEMENT>::FullCircleMesh(GeomObject* area_pt,
                 << "topologically consistent with a quarter tube with a\n"
                 << "non-curved centreline.\n";
    throw OomphLibError(error_stream.str(),
-                       "QuaterFullCircleMesh::FullCircleMesh()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 

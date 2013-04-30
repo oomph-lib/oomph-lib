@@ -65,7 +65,7 @@ void SolidICProblem::setup_problem()
    if (node_pt==0)
     {
      throw OomphLibError("Wasn't able to cast to SolidNode\n",
-                         "SolidICProblem::setup_problem()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -81,7 +81,7 @@ void SolidICProblem::setup_problem()
    if (elem_pt==0)
     {
      throw OomphLibError("Wasn't able to cast to SolidFiniteElement\n",
-                         "SolidICProblem::setup_problem()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -122,7 +122,7 @@ void SolidICProblem::setup_problem()
    if (elem_pt==0)
     {
      throw OomphLibError("Wasn't able to cast to SolidFiniteElement\n",
-                         "SolidICProblem::setup_problem()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -167,7 +167,7 @@ void SolidICProblem::setup_problem()
       "for elasticity elements with internal solid dofs (pressures)\n";
      
      throw OomphLibError(error_message,
-                         "SolidICProblem::setup_problem()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -220,7 +220,7 @@ void SolidICProblem::backup_original_state()
    if (node_pt==0)
     {
      throw OomphLibError("Wasn't able to cast to SolidNode\n",
-                         "SolidICProblem::backup_original_state()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -236,7 +236,7 @@ void SolidICProblem::backup_original_state()
    if (elem_pt==0)
     {
      throw OomphLibError("Wasn't able to cast to SolidFiniteElement\n",
-                         "SolidICProblem::backup_original_state()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -277,7 +277,7 @@ void SolidICProblem::backup_original_state()
    if (elem_pt==0)
     {
      throw OomphLibError("Wasn't able to cast to SolidFiniteElement\n",
-                         "SolidICProblem::backup_original_state()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -323,7 +323,7 @@ void SolidICProblem::backup_original_state()
       "for elasticity elements with internal solid dofs (pressures)\n";
      
      throw OomphLibError(error_message,
-                         "SolidICProblem::backup_orginal_state()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -373,7 +373,7 @@ void SolidICProblem::reset_original_state()
    if (node_pt==0)
     {
      throw OomphLibError("Wasn't able to cast to SolidNode\n",
-                         "SolidICProblem::reset_original_state()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -389,7 +389,7 @@ void SolidICProblem::reset_original_state()
    if (elem_pt==0)
     {
      throw OomphLibError("Wasn't able to cast to SolidFiniteElement\n",
-                         "SolidICProblem::reset_original_state()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -437,7 +437,7 @@ void SolidICProblem::reset_original_state()
    if (elem_pt==0)
     {
      throw OomphLibError("Wasn't able to cast to SolidFiniteElement\n",
-                         "SolidICProblem::reset_original_state()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -499,7 +499,7 @@ void SolidICProblem::reset_original_state()
       "for elasticity elements with internal solid dofs (pressures)\n";
      
      throw OomphLibError(error_message,
-                         "SolidICProblem::reset_orginal_state()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif

@@ -102,7 +102,7 @@ class ElasticityTensor
       
       //Throw the error
       throw OomphLibError(error_message.str(),
-                          "ElasticityTensor::range_check()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
    }
@@ -139,7 +139,7 @@ class ElasticityTensor
    error_stream << "Broken base implementation.\n"
                 << "Must be overloaded for specific storage schemes.\n";
    throw OomphLibError(error_stream.str().c_str(),
-                       "ElasticityTensor::set_value()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
   

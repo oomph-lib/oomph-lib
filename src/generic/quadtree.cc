@@ -136,7 +136,7 @@ void QuadTree::setup_static_data()
                                << "\nQuadTree::OMEGA=" << QuadTree::OMEGA 
     << std::endl;
    throw OomphLibError(error_stream.str(),
-                       "QuadTree::setup_static_data()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -433,7 +433,7 @@ gteq_edge_neighbour(const int& direction, Vector<unsigned>& translate_s,
                   << " is not N, S, E, W" << std::endl;
 
      throw OomphLibError(error_stream.str(),
-                         "QuadTree:gteq_edge_neighbour()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -520,7 +520,7 @@ gteq_edge_neighbour(const int& direction, Vector<unsigned>& translate_s,
                    << " is not N, S, E, W" << std::endl;
       
       throw OomphLibError(error_stream.str(),
-                          "QuadTree:gteq_edge_neighbour()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
 
@@ -605,7 +605,7 @@ QuadTree* QuadTree::gteq_edge_neighbour(
                   << " is not N, S, E, W" << std::endl;
 
      throw OomphLibError(error_stream.str(),
-                         "QuadTree:gteq_edge_neighbour()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -883,7 +883,7 @@ void QuadTreeForest::find_neighbours()
   {
    throw OomphLibError(
     "Trying to setup the neighbour scheme for an empty forest\n",
-    "QuadTreeForest::find_neighbours()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -1088,7 +1088,7 @@ void QuadTreeForest::construct_north_equivalents()
         << std::endl;
 
        throw OomphLibError(error_stream.str(),
-                           "QuadTreeForest::construct_north_equivalents()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
     }
@@ -1129,7 +1129,7 @@ void QuadTreeForest::construct_north_equivalents()
         << std::endl;
        
        throw OomphLibError(error_stream.str(),
-                           "QuadTreeForest::construct_north_equivalents()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
     }
@@ -1170,7 +1170,7 @@ void QuadTreeForest::construct_north_equivalents()
         << std::endl;
        
        throw OomphLibError(error_stream.str(),
-                           "QuadTreeForest::construct_north_equivalents()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
     }
@@ -1211,7 +1211,7 @@ void QuadTreeForest::construct_north_equivalents()
         << std::endl;
        
        throw OomphLibError(error_stream.str(),
-                           "QuadTreeForest::construct_north_equivalents()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
     }
@@ -1272,7 +1272,7 @@ void QuadTreeForest::check_all_neighbours(DocInfo &doc_info)
     }
    
    throw OomphLibError(error_stream.str(),
-                       "QuadTreeForest::check_all_neighbours()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
  else

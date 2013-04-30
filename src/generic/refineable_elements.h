@@ -273,7 +273,7 @@ class RefineableElement : public virtual FiniteElement
                    << " is not in the range (0,"
                    << ncont_interpolated_values()-1 << ")";
      throw OomphLibError(error_message.str(),
-                         "RefineableElement::local_hang_eqn()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -702,7 +702,7 @@ public:
      error_message << "This function is broken as it's only needed/used \n"
                    << "during \"proper\" refinement\n";
      throw OomphLibError(error_message.str(),
-                         "NonRefineableElementWithHangingNodes::build()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    
@@ -717,7 +717,7 @@ public:
                    << "during \"proper\" refinement\n";
      throw OomphLibError(
       error_message.str(),
-      "NonRefineableElementWithHangingNodes::get_interpolated_values()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
    
@@ -731,7 +731,7 @@ public:
                    << "during \"proper\" refinement\n";
      throw OomphLibError(
       error_message.str(),
-      "NonRefineableElementWithHangingNodes::get_interpolated_values()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
    
@@ -744,7 +744,7 @@ public:
                    << "during \"proper\" refinement\n";
      throw OomphLibError(
       error_message.str(),
-      "NonRefineableElementWithHangingNodes::check_integrity()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
    
@@ -756,7 +756,7 @@ public:
                    << "during \"proper\" refinement\n";
      throw OomphLibError(
       error_message.str(),
-      "NonRefineableElementWithHangingNodes::rebuild_from_sons()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
    

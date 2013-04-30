@@ -703,7 +703,7 @@ class HangInfo
    if (Nmaster==0)
     {
      throw OomphLibError("Hanging node data hasn't been setup yet \n",
-                         "HangInfo::master_node_pt()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -720,7 +720,7 @@ class HangInfo
    if (Nmaster==0)
     {
      throw OomphLibError("Hanging node data hasn't been setup yet \n",
-                         "HangInfo::master_weight()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -1095,7 +1095,7 @@ public:
     {
      throw OomphLibError(
       "Vector of pointers to hanging data is not setup yet\n",
-      "Node::hanging_pt()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -1124,7 +1124,7 @@ public:
       }
      throw OomphLibError(
       error_message.str(),
-      "Node::hanging_pt()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -1139,7 +1139,7 @@ public:
      error_message << "Range Error: Value " << i
                    << " is not in the range (-1," << n_value << ")";
      throw OomphLibError(error_message.str(),
-                         "Node::is_hanging()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -1175,7 +1175,7 @@ public:
      error_message << "Range Error: Value " << i
                    << " is not in the range (-1," << n_value << ")";
      throw OomphLibError(error_message.str(),
-                         "Node::is_hanging()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif   
@@ -1832,7 +1832,7 @@ class BoundaryNodeBase
      << "  BoundaryNode::index_of_first_value_assigned_by_face_element_pt(), \n\n" 
      << "typically from FaceElement::add_additional_values(...).";
     throw OomphLibError(error_message.str(),
-                        "BoundaryNode::index_of_first_value_assigned_by_face_element()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
     return UINT_MAX;
    }
@@ -1889,7 +1889,7 @@ class BoundaryNodeBase
        {
         throw OomphLibError(
          error_message.str(),
-         "BoundaryNode::index_of_first_value_assigned_by_face_element()",
+         OOMPH_CURRENT_FUNCTION,
          OOMPH_EXCEPTION_LOCATION);
        }
       return UINT_MAX;
@@ -1986,7 +1986,7 @@ class BoundaryNode: public NODE_TYPE, public BoundaryNodeBase
    if(Copied_node_pt==0)
     {
      throw OomphLibError("BoundaryNode has not been copied",
-                         "BoundaryNode::reset_copied_pointers()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -2015,7 +2015,7 @@ class BoundaryNode: public NODE_TYPE, public BoundaryNodeBase
       << "Copied_node_pt is not of type BoundaryNode*"
       << std::endl;
      throw OomphLibError(error_stream.str(),
-                         "BoundaryNode::reset_copied_pointers()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }
@@ -2070,7 +2070,7 @@ class BoundaryNode: public NODE_TYPE, public BoundaryNodeBase
    if(Copied_node_pt==0)
     {
      throw OomphLibError("BoundaryNode has not been copied",
-                         "BoundaryNode::clear_copied_pointers()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -2354,7 +2354,7 @@ class BoundaryNode: public NODE_TYPE, public BoundaryNodeBase
         << "Call to resize copied node before original has been resized!"
         << std::endl;
        throw OomphLibError(error_stream.str(),
-                           "Data::resize()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
 #endif

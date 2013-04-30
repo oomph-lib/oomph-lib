@@ -42,7 +42,7 @@ public:
         << "Failed to cast element1_pt to an ELEMENT" 
         << std::endl;
        throw OomphLibError(error_message.str(),
-                           "CompareElementCoordinate::()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
 
@@ -53,7 +53,7 @@ public:
         << "Failed to cast element2_pt to an ELEMENT"
         << std::endl;
        throw OomphLibError(error_message.str(),
-                           "CompareElementCoordinate::()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
 #endif
@@ -707,7 +707,7 @@ void run_test(const unsigned &i)
      else 
       {
        throw OomphLibError("Self test failed",
-                           "main()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
    

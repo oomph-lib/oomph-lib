@@ -233,7 +233,7 @@ namespace oomph
                    << " reqired as halo is not stored in halo_data_pt\n";
 
       throw OomphLibError(error_stream.str(),
-                          "DoubleVectorHaloScheme::setup_halo_dofs()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
    }

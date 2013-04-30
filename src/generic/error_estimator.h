@@ -137,7 +137,7 @@ class ElementWithZ2ErrorEstimator : public virtual FiniteElement
    outfile << error_message;
    
    throw OomphLibError(error_message,
-                       "FiniteElement::compute_error()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -492,7 +492,7 @@ class Z2ErrorEstimator : public virtual ErrorEstimator
     {
      throw OomphLibError(
       "Can't use this error estimator on distributed meshes!",
-      "Mesh::compute_error()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -503,7 +503,7 @@ class Z2ErrorEstimator : public virtual ErrorEstimator
      {
       throw OomphLibError(
        "Can't build error estimator if there are no elements in mesh\n",
-       "DummyErrorEstimator::DummyErrorEstimator(...)",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif
@@ -578,7 +578,7 @@ class Z2ErrorEstimator : public virtual ErrorEstimator
      {
       throw OomphLibError(
        "Can't build error estimator if there are no elements in mesh\n",
-       "DummyErrorEstimator::DummyErrorEstimator(...)",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif

@@ -228,7 +228,7 @@ namespace oomph
        << "ten-noded tets.\n";
       throw OomphLibError(
        error_stream.str(),
-       "BrickFromTetMesh::build_mesh()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif
@@ -4568,7 +4568,7 @@ namespace oomph
           error_stream << "TFace should only be on one boundary.\n";
           throw OomphLibError(
            error_stream.str(),
-           "BrickFromTetMesh::build_mesh()",
+           OOMPH_CURRENT_FUNCTION,
            OOMPH_EXCEPTION_LOCATION);
          }
 #endif
@@ -4589,7 +4589,7 @@ namespace oomph
                << "mesh containing quadratic tets.\n" 
                << std::endl;
               throw OomphLibError(error_stream.str(),
-                                  "BrickFromTetMesh::build_mesh()",
+                                  OOMPH_CURRENT_FUNCTION,
                                   OOMPH_EXCEPTION_LOCATION);
              }
 #endif      
@@ -4609,7 +4609,7 @@ namespace oomph
                << "mesh containing quadratic tets.\n" 
                << std::endl;
               throw OomphLibError(error_stream.str(),
-                                  "BrickFromTetMesh::build_mesh()",
+                                  OOMPH_CURRENT_FUNCTION,
                                   OOMPH_EXCEPTION_LOCATION);
              }
 #endif          
@@ -4848,7 +4848,7 @@ namespace oomph
                << std::endl;
               throw OomphLibError(
                error_stream.str(),
-               "BrickFromTetMesh::build_mesh()",
+               OOMPH_CURRENT_FUNCTION,
                OOMPH_EXCEPTION_LOCATION);
              }
 #endif

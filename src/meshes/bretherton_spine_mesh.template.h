@@ -170,7 +170,7 @@ public:
      error_message << "Incorrect spine update id " << id << std::endl;
      
      throw OomphLibError(error_message.str(),
-                         "BrethertonSpineMesh::spine_node_update()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }

@@ -375,7 +375,7 @@ void CollapsibleChannelDomain::macro_element_boundary(const unsigned& t,
  
      throw OomphLibError(
       error_stream.str(),
-      "CollapsibleChannelDomain::macro_element_boundary()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
   }
@@ -404,7 +404,7 @@ void CollapsibleChannelDomain::macro_element_boundary(const unsigned& t,
  
      throw OomphLibError(
       error_stream.str(),
-      "CollapsibleChannelDomain::macro_element_boundary()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
   }
@@ -433,7 +433,7 @@ void CollapsibleChannelDomain::macro_element_boundary(const unsigned& t,
  
      throw OomphLibError(
       error_stream.str(),
-      "CollapsibleChannelDomain::macro_element_boundary()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
   }
@@ -463,7 +463,7 @@ void CollapsibleChannelDomain::macro_element_boundary(const unsigned& t,
  
      throw OomphLibError(
       error_stream.str(),
-      "CollapsibleChannelDomain::macro_element_boundary()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
   }
@@ -520,7 +520,7 @@ void CollapsibleChannelDomain::r_W_straight(const Vector<double>& zeta,
    error_stream << "Never get here! part=" << part << std::endl;
 
    throw OomphLibError(error_stream.str(),
-                       "CollapsibleChannel::",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
  
@@ -577,7 +577,7 @@ void CollapsibleChannelDomain::r_E_straight(const Vector<double>& zeta,
    error_stream << "Never get here! part=" << part << std::endl;
 
    throw OomphLibError(error_stream.str(),
-                       "CollapsibleChannel::",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 }
@@ -633,7 +633,7 @@ void CollapsibleChannelDomain::r_N_straight(const Vector<double>& zeta,
    error_stream << "Never get here! part=" << part << std::endl;
    
    throw OomphLibError(error_stream.str(),
-                       "CollapsibleChannel::",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 }
@@ -689,7 +689,7 @@ void CollapsibleChannelDomain::r_S_straight(const Vector<double>& zeta,
    error_stream << "Never get here! part=" << part << std::endl;
    
    throw OomphLibError(error_stream.str(),
-                       "CollapsibleChannel::",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
    
   }

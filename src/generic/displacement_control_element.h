@@ -142,7 +142,7 @@ public:
     {
      throw OomphLibError(
       "Displacement control data must only contain a single value!\n",
-      "DisplacmentControlElement::DisplacementControlElement()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
 #endif 

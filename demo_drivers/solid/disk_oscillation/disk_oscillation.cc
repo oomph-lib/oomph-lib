@@ -135,7 +135,7 @@ public:
      error_message << j << "th derivative not implemented\n";
      
      throw OomphLibError(error_message.str(),
-                         "AxisymOscillatingDisk::dposition_dt()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }
@@ -385,7 +385,7 @@ public:
     {
      throw OomphLibError(
       "Element needs to be derived from SolidFiniteElement\n",
-      "ElasticRefineableQuarterCircleSectorMesh::Constructor()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
 #endif

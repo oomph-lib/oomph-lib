@@ -344,7 +344,7 @@ int main()
  else 
   {
    throw OomphLibError("Self test failed",
-                       "main()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 

@@ -78,7 +78,7 @@ public virtual FaceGeometry<ELEMENT>,
    {
     throw OomphLibError(
      "Don't call empty constructor for FourierDecomposedHelmholtzBCElementBase",
-     "FourierDecomposedHelmholtzBCElementBase::FourierDecomposedHelmholtzBCElementBase()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
   
@@ -955,7 +955,7 @@ void FourierDecomposedHelmholtzDtNMesh<ELEMENT>::setup_gamma()
        {
         throw OomphLibError(
          "Outer radius for DtN BC must not be zero!",
-         "FourierDecomposedHelmholtzDtNMesh::setup_gamma()",
+         OOMPH_CURRENT_FUNCTION,
          OOMPH_EXCEPTION_LOCATION);
        }
       
@@ -974,7 +974,7 @@ void FourierDecomposedHelmholtzDtNMesh<ELEMENT>::setup_gamma()
          << "or recompile without PARANOID.\n";
         throw OomphLibError(
          error_stream.str(),
-         "FourierDecomposedHelmholtzDtNMesh::setup_gamma()",
+         OOMPH_CURRENT_FUNCTION,
          OOMPH_EXCEPTION_LOCATION);
        }
      }
@@ -1158,7 +1158,7 @@ FourierDecomposedHelmholtzBCElementBase(FiniteElement* const &bulk_el_pt,
      "Bulk element must inherit from FourierDecomposedHelmholtzEquations.";
     throw OomphLibError(
      error_string,
-     "FourierDecomposedHelmholtzFluxElement::FourierDecomposedHelmholtzFluxElement()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
   //Otherwise read out the value

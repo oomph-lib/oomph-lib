@@ -75,7 +75,7 @@ protected:
                 << "This should be overloaded with a specific flux function\n"
                 << "in a derived class\n";
    throw OomphLibError(error_stream.str(),
-                       "FluxTransportEquations::flux()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 

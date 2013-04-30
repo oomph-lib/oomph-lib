@@ -1031,7 +1031,7 @@ namespace oomph
       error_stream << "Error occured in Segregated solver. "
                    << std::endl;
       throw OomphLibError(error_stream.str(),
-                          "Problem::steady_segregated_solve()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
     else
@@ -1124,7 +1124,7 @@ namespace oomph
       error_stream << "Error occured in Segregated solver. "
                    << std::endl;
       throw OomphLibError(error_stream.str(),
-                          "Problem::unsteady_segregated_solve()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
     else

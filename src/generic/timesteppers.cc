@@ -85,7 +85,7 @@ template<>
 void BDF<1>::set_predictor_weights()
 {
  throw OomphLibError("Not implemented yet",
-                     "BDF<1>::set_predictor_weights()",
+                     OOMPH_CURRENT_FUNCTION,
                      OOMPH_EXCEPTION_LOCATION);
 }
 
@@ -99,7 +99,7 @@ template<>
 void BDF<1>::calculate_predicted_values(Data* const &data_pt)
 {
  throw OomphLibError("Not implemented yet",
-                     "BDF<1>::calculate_predicted_weights()",
+                     OOMPH_CURRENT_FUNCTION,
                      OOMPH_EXCEPTION_LOCATION);
 }
 
@@ -111,7 +111,7 @@ template<>
 void BDF<1>::calculate_predicted_positions(Node* const &node_pt)
   {
    throw OomphLibError("Not implemented yet",
-                       "BDF<1>::calculate_predicted_positions()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -123,7 +123,7 @@ template<>
 void BDF<1>::set_error_weights()
 {
  throw OomphLibError("Not implemented yet",
-                     "BDF<1>::set_error_weights()",
+                     OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
 }
 
@@ -135,7 +135,7 @@ double BDF<1>::temporal_error_in_position(Node* const &node_pt,
                                           const unsigned &i)
 {
  throw OomphLibError("Not implemented yet",
-                     "BDF<1>::temporal_error_in_position()",
+                     OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
  return 0.0;
 }
@@ -148,7 +148,7 @@ template<>
 double BDF<1>::temporal_error_in_value(Data* const &data_pt, const unsigned &i)
 {
  throw OomphLibError("Not implemented yet",
-                     "BDF<1>::temporal_error_in_value()",
+                     OOMPH_CURRENT_FUNCTION,
                      OOMPH_EXCEPTION_LOCATION);
  return 0.0;
 }
@@ -338,7 +338,7 @@ double BDF<2>::temporal_error_in_value(Data* const &data_pt, const unsigned &i)
       {
        throw OomphLibError(
         "BDF4 currently only works for fixed timesteps \n",
-        "BDF<4>::set_weights()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
       }
     }
@@ -363,7 +363,7 @@ void BDF<4>::set_predictor_weights()
  //double dtprev=Time_pt->dt(1);
 
  throw OomphLibError("Not implemented yet",
-                     "BDF<4>::set_predictor_weights()",
+                     OOMPH_CURRENT_FUNCTION,
                      OOMPH_EXCEPTION_LOCATION);
 }
 
@@ -376,7 +376,7 @@ template<>
 void BDF<4>::calculate_predicted_values(Data* const &data_pt)
 {
  throw OomphLibError("Not implemented yet",
-                     "BDF<4>::calculate_predicted_values()",
+                     OOMPH_CURRENT_FUNCTION,
                      OOMPH_EXCEPTION_LOCATION);
  
 }
@@ -386,7 +386,7 @@ template<>
 void BDF<4>::calculate_predicted_positions(Node* const &node_pt)
   {
    throw OomphLibError("Not implemented yet",
-                       "BDF<4>::calculate_predicted_positions()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -395,7 +395,7 @@ template<>
 void BDF<4>::set_error_weights()
 {
  throw OomphLibError("Not implemented yet",
-                     "BDF<4>::set_error_weights()",
+                     OOMPH_CURRENT_FUNCTION,
                      OOMPH_EXCEPTION_LOCATION);
 }
 
@@ -407,7 +407,7 @@ double BDF<4>::temporal_error_in_position(Node* const &node_pt,
                                           const unsigned &i)
 {
  throw OomphLibError("Not implemented yet",
-                     "BDF<4>::temporal_error_in_position()",
+                     OOMPH_CURRENT_FUNCTION,
                      OOMPH_EXCEPTION_LOCATION);
  return 0.0;
 }
@@ -420,7 +420,7 @@ template<>
 double BDF<4>::temporal_error_in_value(Data* const &data_pt, const unsigned &i)
 {
  throw OomphLibError("Not implemented yet",
-                     "BDF<4>::temporal_error_in_value()",
+                     OOMPH_CURRENT_FUNCTION,
                      OOMPH_EXCEPTION_LOCATION);
  return 0.0;
 }
@@ -728,7 +728,7 @@ void Newmark<NSTEPS>::assign_initial_data_values_stage1(const unsigned t_deriv,
 
      throw OomphLibError(
       error_message_stream.str(),
-      "Newmark<NSTEPS>::assign_initial_data_values_stage1()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
   }
@@ -1005,7 +1005,7 @@ void  NewmarkBDF<4>::set_weights()
     {
      throw OomphLibError(
       "BDF4 currently only works for fixed timesteps \n",
-      "NewmarkBDF<4>::set_weights()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
   }

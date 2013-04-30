@@ -298,7 +298,7 @@ public:
         << "indicated as such by optional boolean flag."
         << std::endl;
        throw OomphLibError(error_message.str(),
-                           "AlgebraicNode::add_node_update_info()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
     }
@@ -406,7 +406,7 @@ private:
      error_message <<
       "There is no reference mesh for node update fct id" << id << std::endl;
      throw OomphLibError(error_message.str(),
-                         "AlgebraicNode::set_default_node_update()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -420,7 +420,7 @@ private:
      error_message <<
       "There is no Geom_object_pt for node update fct id" << id << std::endl;
      throw OomphLibError(error_message.str(),
-                         "AlgebraicNode::set_default_node_update()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -434,7 +434,7 @@ private:
      error_message <<
       "There is no Ref_value for node update fct id" << id << std::endl;
      throw OomphLibError(error_message.str(),
-                         "AlgebraicNode::set_default_node_update()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -666,7 +666,7 @@ class AlgebraicMesh : public virtual Mesh
                    << typeid(Node_pt[n]).name() 
                    << ", not an AlgebraicNode" << std::endl; 
      throw OomphLibError(error_stream.str(),
-                         "AlgebraicMesh::node_pt()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     } 
 #endif
@@ -702,7 +702,7 @@ class AlgebraicMesh : public virtual Mesh
      error_message += "doesn't make sense either\n";
 
      throw OomphLibError(error_message,
-                         "AlgebraicMesh::node_update()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif

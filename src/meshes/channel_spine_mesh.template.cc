@@ -187,7 +187,7 @@ void ChannelSpineMesh<ELEMENT>::build_channel_spine_mesh(
  if (nelement()!=nleft+ncentre+nright)
   {
    throw OomphLibError("Incorrect number of element pointers!",
-                       "ChannelSpineMesh::build_channel_spine_mesh()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif

@@ -156,7 +156,7 @@ class FpPressureAdvDiffRobinBCElement : public virtual FaceGeometry<ELEMENT>,
     << "which calls the relevant helper function directly.\n";
    throw OomphLibError(
     error_message.str(),
-    "FpPressureAdvDiffRobinBCElement::fill_in_contribution_to_residuals()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -171,7 +171,7 @@ class FpPressureAdvDiffRobinBCElement : public virtual FaceGeometry<ELEMENT>,
     << "which calls the relevant helper function directly.\n";
    throw OomphLibError(
     error_message.str(),
-    "FpPressureAdvDiffRobinBCElement::fill_in_contribution_to_jacobian()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
  

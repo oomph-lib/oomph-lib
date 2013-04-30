@@ -363,7 +363,7 @@ void QHermiteElement<1>::build_face_element(const int &face_index,
                  << "the values +/-1, not " << face_index << std::endl;
 
    throw OomphLibError(error_message.str(),
-                       "QHermiteElement<1,..>::build_face_element()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 }
@@ -1081,7 +1081,7 @@ void QHermiteElement<2>::build_face_element(const int &face_index,
    error_message << "Face index should only take the values +/- 1 or +/- 2,"
                  << " not " << face_index << std::endl;
    throw OomphLibError(error_message.str(),
-                       "QHermiteElement<2,..>::build_face_element",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
 
    }

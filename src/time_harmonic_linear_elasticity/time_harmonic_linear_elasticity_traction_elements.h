@@ -323,7 +323,7 @@ template<class ELEMENT>
    {
     throw OomphLibError(
      "TimeHarmonicLinearElasticity is not yet implemented for more than one position type",
-     "TimeHarmonicLinearElasticityEquationsBase<DIM>:: fill_in_contribution_to_residuals_time_harmonic_linear_elasticity_traction()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
 #endif

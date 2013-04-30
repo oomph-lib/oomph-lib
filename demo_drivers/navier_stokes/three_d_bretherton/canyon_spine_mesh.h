@@ -106,7 +106,7 @@ public:
       << "Choose a different radius (actual scaled radius = "<<scaled_R<<
        std::endl;
      throw OomphLibError(error_stream.str(),
-                         "MyCanyonMesh::change_radius()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }

@@ -516,7 +516,7 @@ UnsteadyHeatFluxMeltElement(FiniteElement* const &bulk_el_pt,
       "If you desire this functionality, you must implement it yourself\n";
      
      throw OomphLibError(error_string,
-                         "UnsteadyHeatFluxMeltElement::UnsteadyHeatFluxMeltElement()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    //Otherwise read out the value
@@ -545,7 +545,7 @@ UnsteadyHeatFluxMeltElement(FiniteElement* const &bulk_el_pt,
       "If you desire this functionality, you must implement it yourself\n";
      
      throw OomphLibError(error_string,
-                         "UnsteadyHeatFluxMeltElement::UnsteadyHeatFluxMeltElement()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    else
@@ -573,7 +573,7 @@ UnsteadyHeatFluxMeltElement(FiniteElement* const &bulk_el_pt,
       "If you desire this functionality, you must implement it yourself\n";
      
      throw OomphLibError(error_string,
-                         "UnsteadyHeatFluxMeltElement::UnsteadyHeatFluxMeltElement()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
      
     }
@@ -592,7 +592,7 @@ UnsteadyHeatFluxMeltElement(FiniteElement* const &bulk_el_pt,
                 << ". It should be 1,2, or 3!" << std::endl;
    
    throw OomphLibError(error_stream.str(),
-                       "UnsteadyHeatFluxMeltElement::UnsteadyHeatFluxMeltElement()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
    break;
   }

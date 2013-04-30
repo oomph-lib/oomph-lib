@@ -366,7 +366,7 @@ void RayleighProblem<ELEMENT,TIMESTEPPER>::set_initial_condition()
                 << time_stepper_pt()->type() << " family" << std::endl;
 
    throw OomphLibError(error_stream.str(),
-                       "RayleighProblem::set_initial_conditions()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 

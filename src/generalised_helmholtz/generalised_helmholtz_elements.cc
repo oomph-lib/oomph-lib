@@ -148,7 +148,7 @@ namespace PMLHelper
                  << "nodes along the element edge. Please fix this...  "
                  << std::endl;
     throw OomphLibError(error_stream.str(),
-                        "PMLMeshHelper::create_right_pml_mesh()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 
@@ -280,7 +280,7 @@ namespace PMLHelper
                 << "nodes along the element edge. Please fix this...  "
                 << std::endl;
    throw OomphLibError(error_stream.str(),
-                       "PMLMeshHelper::create_top_pml_mesh()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
   
@@ -412,7 +412,7 @@ namespace PMLHelper
                 << "nodes along the element edge. Please fix this...  "
                 << std::endl;
    throw OomphLibError(error_stream.str(),
-                       "PMLMeshHelper::create_left_pml_mesh()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
   
@@ -546,7 +546,7 @@ namespace PMLHelper
                 << "nodes along the element edge. Please fix this...  "
                 << std::endl;
    throw OomphLibError(error_stream.str(),
-                       "PMLMeshHelper::create_bottom_pml_mesh()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
   
@@ -701,7 +701,7 @@ Mesh* create_top_right_pml_mesh(Mesh* pml_right_mesh_pt,
                 << "nodes along the element edge. Please fix this...  "
                 << std::endl;
    throw OomphLibError(error_stream.str(),
-                       "PMLMeshHelper::create_top_right_pml_mesh()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -856,7 +856,7 @@ Mesh* create_top_right_pml_mesh(Mesh* pml_right_mesh_pt,
                 << "nodes along the element edge. Please fix this...  "
                 << std::endl;
    throw OomphLibError(error_stream.str(),
-                       "PMLMeshHelper::create_bottom_right_pml_mesh()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
   
@@ -1017,7 +1017,7 @@ Mesh* create_top_right_pml_mesh(Mesh* pml_right_mesh_pt,
                  << "nodes along the element edge. Please fix this...  "
                  << std::endl;
     throw OomphLibError(error_stream.str(),
-                        "PMLMeshHelper::create_top_left_pml_mesh()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 
@@ -1172,7 +1172,7 @@ Mesh* create_top_right_pml_mesh(Mesh* pml_right_mesh_pt,
                 << "nodes along the element edge. Please fix this...  "
                 << std::endl;
    throw OomphLibError(error_stream.str(),
-                       "PMLMeshHelper::create_bottom_left_pml_mesh()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
   

@@ -989,7 +989,7 @@ int main(int argc, char* argv[])
                   << " for restart." << std::endl;
 
      throw OomphLibError(error_stream.str(),
-                         "main()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    // Do the actual restart

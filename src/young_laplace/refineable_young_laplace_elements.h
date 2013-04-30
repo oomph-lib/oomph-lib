@@ -133,7 +133,7 @@ void get_interpolated_values(const Vector<double>&s,  Vector<double>& values)
     {
      throw OomphLibError(
       "These equations are steady => No time dependence",
-      "RefineableYoungLaplaceEquations::get_interpolated_values()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
    else

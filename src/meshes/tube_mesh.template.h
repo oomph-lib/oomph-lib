@@ -185,7 +185,7 @@ public :
     {
      throw OomphLibError(
       "Trouble in building octree forest ",
-      "RefineableTubeMesh::RefineableTubeMesh()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
 #endif

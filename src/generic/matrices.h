@@ -47,6 +47,7 @@
 #include "linear_algebra_distribution.h"
 #include "double_vector.h"
 
+
 #ifdef OOMPH_HAS_TRILINOS
 #include "trilinos_helpers.h"
 #endif
@@ -84,7 +85,7 @@ class Matrix
                    << nrow()-1 << ")." << std::endl;
    
      throw OomphLibError(error_message.str(),
-                         "Matrix::range_check()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    else if (j>=ncol())
@@ -94,7 +95,7 @@ class Matrix
                    << ncol()-1 << ")." << std::endl;
 
       throw OomphLibError(error_message.str(),
-                         "Matrix::range_check()",
+                          OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }
@@ -162,7 +163,7 @@ class Matrix
   {
    throw OomphLibError(
     "Output function is not implemented for this matrix class",
-    "Matrix::output()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -569,7 +570,7 @@ class SparseMatrix : public Matrix<T,MATRIX_TYPE>
      "It must be overloaded for specific sparse matrix storage formats\n";
     
     throw OomphLibError(error_message,
-                        "SparseMatrix::sparse_indexed_output()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
   
@@ -701,7 +702,7 @@ class CRMatrix : public SparseMatrix<T, CRMatrix<T> >
    error_string += "Then read_M(i,j) is permitted\n";
 
    throw OomphLibError(error_string,
-                       "CRMatrix<T>::entry()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
 
    // Dummy return
@@ -1222,7 +1223,7 @@ class RankThreeTensor
                    << N-1 << ")." << std::endl;
    
      throw OomphLibError(error_message.str(),
-                         "RankThreeTensor::range_check()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    else if (j>=M)
@@ -1232,7 +1233,7 @@ class RankThreeTensor
                    << M-1 << ")." << std::endl;
 
       throw OomphLibError(error_message.str(),
-                         "RankThreeTensor::range_check()",
+                          OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    else if (k>=P)
@@ -1242,7 +1243,7 @@ class RankThreeTensor
                    << P-1 << ")." << std::endl;
 
       throw OomphLibError(error_message.str(),
-                         "RankThreeTensor::range_check()",
+                          OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }
@@ -1514,7 +1515,7 @@ class RankFourTensor
                    << N-1 << ")." << std::endl;
    
      throw OomphLibError(error_message.str(),
-                         "RankFourTensor::range_check()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    else if (j>=M)
@@ -1524,7 +1525,7 @@ class RankFourTensor
                    << M-1 << ")." << std::endl;
 
       throw OomphLibError(error_message.str(),
-                         "RankFourTensor::range_check()",
+                          OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    else if (k>=P)
@@ -1534,7 +1535,7 @@ class RankFourTensor
                    << P-1 << ")." << std::endl;
 
       throw OomphLibError(error_message.str(),
-                         "RankFourTensor::range_check()",
+                          OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    else if (l>=Q)
@@ -1544,7 +1545,7 @@ class RankFourTensor
                    << Q-1 << ")." << std::endl;
 
       throw OomphLibError(error_message.str(),
-                         "RankFourTensor::range_check()",
+                          OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }
@@ -1869,7 +1870,7 @@ class RankFiveTensor
                    << N-1 << ")." << std::endl;
      
      throw OomphLibError(error_message.str(),
-                         "RankFiveTensor::range_check()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    else if (j>=M)
@@ -1879,7 +1880,7 @@ class RankFiveTensor
                    << M-1 << ")." << std::endl;
 
       throw OomphLibError(error_message.str(),
-                         "RankFiveTensor::range_check()",
+                          OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    else if (k>=P)
@@ -1889,7 +1890,7 @@ class RankFiveTensor
                    << P-1 << ")." << std::endl;
 
       throw OomphLibError(error_message.str(),
-                         "RankFiveTensor::range_check()",
+                          OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    else if (l>=Q)
@@ -1899,7 +1900,7 @@ class RankFiveTensor
                    << Q-1 << ")." << std::endl;
      
      throw OomphLibError(error_message.str(),
-                         "RankFiveTensor::range_check()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    else if (m>=R)
@@ -1909,7 +1910,7 @@ class RankFiveTensor
                    << R-1 << ")." << std::endl;
      
      throw OomphLibError(error_message.str(),
-                         "RankFiveTensor::range_check()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }
@@ -2332,7 +2333,7 @@ class CCMatrix : public SparseMatrix<T, CCMatrix<T> >
    error_string += "Then read_M(i,j) is permitted\n";
 
    throw OomphLibError(error_string,
-                       "CCMatrix<T>::entry()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
 
    // Dummy return
@@ -2923,7 +2924,7 @@ void CCMatrix<T>::build(const Vector<T>& value,
     << std::endl;
 
    throw OomphLibError(error_message.str(),
-                       "CCMatrix::build()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -3065,7 +3066,8 @@ void CRMatrix<T>::build(const Vector<T>& value,
 		      << "we have " << value.size() << " values and "
 		      << column_index_.size() << " column inidicies."
 		      << std::endl;
-	throw OomphLibError(error_message.str(),"CRMatrix<T>::build",
+	throw OomphLibError(error_message.str(),
+                            OOMPH_CURRENT_FUNCTION,
 			    OOMPH_EXCEPTION_LOCATION);
       }
 #endif

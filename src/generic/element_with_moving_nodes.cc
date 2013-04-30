@@ -480,7 +480,7 @@ namespace oomph
       error_message << "Never get here: method " << method;
       throw OomphLibError(
        error_message.str(),
-       "ElementWithMovingNodes::fill_in_jacobian_from_geometric_data()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
       
      }

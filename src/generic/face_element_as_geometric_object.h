@@ -124,7 +124,7 @@ public:
     << "FaceElementAsGeomObject::geom_data_pt() is deliberately broken\n"
     << "as it does not depend on any geometric Data" << std::endl;
     throw OomphLibError(error_message.str(),
-                        "FaceElementAsGeomObject::geom_data_pt()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
     // Dummy return
     return 0;
@@ -189,7 +189,7 @@ public:
         << "Failed to cast element1_pt to a FaceElementAsGeomObject"
         << std::endl;
        throw OomphLibError(error_message.str(),
-                           "CompareBoundaryCoordinate::()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
 
@@ -200,7 +200,7 @@ public:
         << "Failed to cast element2_pt to a FaceElementAsGeomObject"
         << std::endl;
        throw OomphLibError(error_message.str(),
-                           "CompareBoundaryCoordinate::()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
 #endif

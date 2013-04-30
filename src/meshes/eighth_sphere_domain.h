@@ -147,7 +147,7 @@ public:
                      << "not one of L, R, U, D, B, F" << std::endl;
 
        throw OomphLibError(error_message.str(),
-                           "Domain::macro_element_boundary()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
      
@@ -190,7 +190,7 @@ public:
                      << "not one of L, R, U, D, B, F" << std::endl;
 
        throw OomphLibError(error_message.str(),
-                           "Domain::macro_element_boundary()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
      
@@ -232,7 +232,7 @@ public:
                      << "not one of L, R, U, D, B, F" << std::endl;
        
        throw OomphLibError(error_message.str(),
-                           "Domain::macro_element_boundary()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
      
@@ -273,7 +273,7 @@ public:
                      << "not one of L, R, U, D, B, F" << std::endl;
        
        throw OomphLibError(error_message.str(),
-                           "Domain::macro_element_boundary()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
      
@@ -287,7 +287,7 @@ public:
                    << ", but should be in the range 0-3" << std::endl;
      
      throw OomphLibError(error_message.str(),
-                         "Domain::macro_element_boundary()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 

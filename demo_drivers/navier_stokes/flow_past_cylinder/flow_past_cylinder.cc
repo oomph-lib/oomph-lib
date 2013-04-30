@@ -302,7 +302,7 @@ public:
       std::ostringstream error_stream;
       error_stream << "Direction is incorrect:  " << direction << std::endl;
       throw OomphLibError(error_stream.str(),
-                          "RectangleWithHoleDomain::macro_element_boundary()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
     
@@ -339,7 +339,7 @@ public:
       std::ostringstream error_stream;
       error_stream << "Direction is incorrect:  " << direction << std::endl;
       throw OomphLibError(error_stream.str(),
-                          "RectangleWithHoleDomain::macro_element_boundary()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
     
@@ -376,7 +376,7 @@ public:
       std::ostringstream error_stream;
       error_stream << "Direction is incorrect:  " << direction << std::endl;
       throw OomphLibError(error_stream.str(),
-                          "RectangleWithHoleDomain::macro_element_boundary()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
 
@@ -413,7 +413,7 @@ public:
       std::ostringstream error_stream;
       error_stream << "Direction is incorrect:  " << direction << std::endl;
       throw OomphLibError(error_stream.str(),
-                          "RectangleWithHoleDomain::macro_element_boundary()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }  
 
@@ -445,7 +445,7 @@ public:
       std::ostringstream error_stream;
       error_stream << "Direction is incorrect:  " << direction << std::endl;
       throw OomphLibError(error_stream.str(),
-                          "RectangleWithHoleDomain::macro_element_boundary()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }  
 
@@ -477,7 +477,7 @@ public:
       std::ostringstream error_stream;
       error_stream << "Direction is incorrect:  " << direction << std::endl;
       throw OomphLibError(error_stream.str(),
-                          "RectangleWithHoleDomain::macro_element_boundary()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
 
@@ -509,7 +509,7 @@ public:
       std::ostringstream error_stream;
       error_stream << "Direction is incorrect:  " << direction << std::endl;
       throw OomphLibError(error_stream.str(),
-                          "RectangleWithHoleDomain::macro_element_boundary()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
 
@@ -541,7 +541,7 @@ public:
       std::ostringstream error_stream;
       error_stream << "Direction is incorrect:  " << direction << std::endl;
       throw OomphLibError(error_stream.str(),
-                          "RectangleWithHoleDomain::macro_element_boundary()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
     
@@ -552,7 +552,7 @@ public:
     std::ostringstream error_stream;
     error_stream << "Wrong macro element number" << m << std::endl;
     throw OomphLibError(error_stream.str(),
-                        "RectangleWithHoleDomain::macro_element_boundary()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
  }

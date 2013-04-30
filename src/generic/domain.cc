@@ -100,7 +100,7 @@ void WarpedCubeDomain::macro_element_boundary(
 
      throw OomphLibError(
       error_stream.str(),
-      "WarpedCubeDomain::macro_element_boundary()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
   }
  

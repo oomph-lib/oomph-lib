@@ -603,7 +603,7 @@ class GS : public IterativeLinearSolver
   {
    throw OomphLibError(
     "Gauss Seidel is not a preconditionable iterative solver",
-    "GS<MATRIX>::preconditioner_setup_time()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
    return 0;
   }

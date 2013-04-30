@@ -69,7 +69,7 @@ namespace oomph
      }
     //Throw the error
     throw OomphLibError(error_message.str(),
-                        "Data::range_check()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
  }
@@ -123,7 +123,7 @@ namespace oomph
                  << " is not stored as a copy of the data object " << this 
                  << std::endl;
     throw OomphLibError(error_stream.str(),
-                        "Data::remove_copy()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 
@@ -163,7 +163,7 @@ namespace oomph
  void Data::reset_copied_pointers() 
  {
   throw OomphLibError("Data can never be a copy",
-                      "Data::reset_copied_pointers()",
+                      OOMPH_CURRENT_FUNCTION,
                       OOMPH_EXCEPTION_LOCATION);
  }
 
@@ -177,7 +177,7 @@ namespace oomph
  void Data::clear_copied_pointers() 
  {
   throw OomphLibError("Data can never be a copy",
-                      "Data::clear_copied_pointers()",
+                      OOMPH_CURRENT_FUNCTION,
                       OOMPH_EXCEPTION_LOCATION);
  }
 
@@ -434,7 +434,7 @@ void Data::copy(Data* orig_data_pt)
                 << n_value_orig << std::endl;
    
    throw OomphLibError(error_stream.str(),
-                       "Data::copy()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
  const unsigned long n_time_orig=orig_data_pt->ntstorage();
@@ -446,7 +446,7 @@ void Data::copy(Data* orig_data_pt)
                 << n_time_orig << std::endl;
    
    throw OomphLibError(error_stream.str(),
-                       "Data::copy()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -544,7 +544,7 @@ void Data::read(std::ifstream& restart_file)
      if (check_nvalues<value_pt_range)
       {
        throw OomphLibError(error_stream.str(),
-                           "Data::read()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
     }
@@ -805,7 +805,7 @@ void Data::resize(const unsigned &n_value)
    error_stream 
     << "Warning : Data cannot be resized to a smaller value!" << std::endl;
    throw OomphLibError(error_stream.str(),
-                       "Data::resize()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -976,7 +976,7 @@ void Data::read_values_from_vector(const Vector<double> &vector_of_values,
                 << "sent and local n_value: " << orig_n_value << " " 
                 << n_value << std::endl;
    throw OomphLibError(error_stream.str(),
-                      "Data::read_values_from_vector",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -1113,7 +1113,7 @@ HijackedData(const unsigned &copied_index, Data* const &data_pt) :
                 << " but not today" << std::endl;
 
    throw OomphLibError(error_stream.str(),
-                       "HijackedData::HijackedData()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
  
@@ -1132,7 +1132,7 @@ HijackedData(const unsigned &copied_index, Data* const &data_pt) :
 void HijackedData::resize(const unsigned &n_value)
 {
  throw OomphLibError("HijackedData cannot be resized",
-                     "HijackedData::resize()",
+                     OOMPH_CURRENT_FUNCTION,
                      OOMPH_EXCEPTION_LOCATION);
 }
 
@@ -1189,7 +1189,7 @@ CopiedData::CopiedData(Data* const &data_pt) :
                 << " but not today" << std::endl;
 
    throw OomphLibError(error_stream.str(),
-                       "CopiedData::CopiedData()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
  
@@ -1207,7 +1207,7 @@ CopiedData::CopiedData(Data* const &data_pt) :
 void CopiedData::resize(const unsigned &n_value)
 {
  throw OomphLibError("CopiedData cannot be resized",
-                     "CopiedData::resize()",
+                     OOMPH_CURRENT_FUNCTION,
                      OOMPH_EXCEPTION_LOCATION);
 }
 
@@ -1234,7 +1234,7 @@ void HangInfo::range_check(const unsigned &i) const
                  << " is not in the range (0,"
                  << Nmaster-1 << ")";
    throw OomphLibError(error_message.str(),
-                       "HangInfo::range_check()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 }
@@ -1328,7 +1328,7 @@ void Node::x_gen_range_check(const unsigned &t, const unsigned &k,
     }
    //Throw the error
    throw OomphLibError(error_message.str(),
-                       "Node::x_gen_range_check()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 }
@@ -1619,7 +1619,7 @@ void Node::copy(Node* orig_node_pt)
                 << npos_storage_orig << std::endl;
 
    throw OomphLibError(error_stream.str(),
-                       "Node::copy()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
  
@@ -1638,7 +1638,7 @@ void Node::copy(Node* orig_node_pt)
                   << n_time_orig << std::endl;
      
      throw OomphLibError(error_stream.str(),
-                         "Node::copy()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -1710,7 +1710,7 @@ void Node::read(std::ifstream& restart_file)
                   << check_npos_storage << std::endl;
      
      throw OomphLibError(error_stream.str(),
-                         "Node::read()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
    
     }
@@ -1734,7 +1734,7 @@ void Node::read(std::ifstream& restart_file)
     << " " << time_steps_range << std::endl;
 
    throw OomphLibError(error_stream.str(),
-                       "Node::read()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -1951,7 +1951,7 @@ void Node::resize(const unsigned &n_value)
 void Node::make_periodic(Node* const &node_pt)
 {
  throw OomphLibError("Only BoundaryNodes can be made periodic",
-                     "Node::make_periodic()",
+                     OOMPH_CURRENT_FUNCTION,
                      OOMPH_EXCEPTION_LOCATION);
 }
 
@@ -1964,7 +1964,7 @@ void Node::make_periodic(Node* const &node_pt)
 void Node::make_periodic_nodes(const Vector<Node*> &periodic_nodes_pt)
 {
  throw OomphLibError("Only BoundaryNodes can make periodic nodes",
-                     "Node::make_periodic_nodes()",
+                     OOMPH_CURRENT_FUNCTION,
                      OOMPH_EXCEPTION_LOCATION);
 }
 
@@ -2014,7 +2014,7 @@ void Node::set_nonhanging()
 void Node::add_to_boundary(const unsigned &b)
 {
  throw OomphLibError("Cannot add non BoundaryNode<NODE> to boundary",
-                     "Node::add_to_boundary()",
+                     OOMPH_CURRENT_FUNCTION,
                      OOMPH_EXCEPTION_LOCATION);
 }
 
@@ -2027,7 +2027,7 @@ void Node::add_to_boundary(const unsigned &b)
 void Node::remove_from_boundary(const unsigned &b)
 {
  throw OomphLibError("Cannot remove non BoundaryNode<NODE> to boundary",
-                     "Node::remove_from_boundary()",
+                     OOMPH_CURRENT_FUNCTION,
                      OOMPH_EXCEPTION_LOCATION);
 }
 
@@ -2040,7 +2040,7 @@ void Node::remove_from_boundary(const unsigned &b)
 unsigned Node::ncoordinates_on_boundary(const unsigned &b)
 {
  throw OomphLibError("Non-boundary Node cannot have boundary coordinates",
-                     "Node::ncoordinates_on_boundary()",
+                     OOMPH_CURRENT_FUNCTION,
                      OOMPH_EXCEPTION_LOCATION);
  // dummy return
  return 0;
@@ -2057,7 +2057,7 @@ void Node::get_coordinates_on_boundary(const unsigned &b, const unsigned& k,
                                        Vector<double> &boundary_zeta)
 {
  throw OomphLibError("Non-boundary Node cannot have boundary coordinates",
-                     "Node::get_coordinate_on_boundary()",
+                     OOMPH_CURRENT_FUNCTION,
                      OOMPH_EXCEPTION_LOCATION);
 }
 
@@ -2071,7 +2071,7 @@ void Node::set_coordinates_on_boundary(const unsigned &b, const unsigned& k,
                                        const Vector<double> &boundary_zeta)
 {
  throw OomphLibError("Non-boundary Node cannot have boundary coordinates",
-                     "Node::set_coordinate_on_boundary()",
+                     OOMPH_CURRENT_FUNCTION,
                      OOMPH_EXCEPTION_LOCATION);
 }
 
@@ -2504,7 +2504,7 @@ void Node::read_values_from_vector(const Vector<double> &vector_of_values,
                 << "sent and local n_storage: " << orig_n_storage << " " 
                 << n_storage << std::endl;
    throw OomphLibError(error_stream.str(),
-                       "Node::read_values_from_vector",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -2568,7 +2568,7 @@ void BoundaryNodeBase::make_nodes_periodic(
     "Or you are trying to make a copy of another already periodic node\n";
    error_stream << "Please copy the original data if you can\n";
    throw OomphLibError(error_stream.str(),
-                       "BoundaryNodeBase::make_nodes_periodic()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
 
   }
@@ -2620,7 +2620,7 @@ void BoundaryNodeBase::make_node_periodic(Node* const &node_pt,
    error_stream << "You should use the function \n\n"
                 << "Node::make_periodic_nodes()\n";
    throw OomphLibError(error_stream.str(),
-                       "BoundaryNodeBase::make_node_periodic()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -2713,7 +2713,7 @@ void BoundaryNodeBase::remove_from_boundary(const unsigned &b)
    error_stream << "Node is not on boundary " << b << std::endl;
 
    throw OomphLibError(error_stream.str(),
-                       "Node::remove_from_boundary()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -2766,7 +2766,7 @@ unsigned BoundaryNodeBase::ncoordinates_on_boundary(const unsigned &b)
  if(Boundaries_pt==0)
   {
    throw OomphLibError("Node does not lie on any boundary",
-                       "Node::ncoordinates_on_boundary()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -2778,7 +2778,7 @@ unsigned BoundaryNodeBase::ncoordinates_on_boundary(const unsigned &b)
    error_stream << "Node is not on boundary " << b << std::endl;
 
    throw OomphLibError(error_stream.str(),
-                       "Node::get_coordinates_on_boundary()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -2792,7 +2792,7 @@ unsigned BoundaryNodeBase::ncoordinates_on_boundary(const unsigned &b)
                 << "       if Mesh::Boundary_coordinate_exists[...] has been\n"
                 << "       set to true!]\n";
    throw OomphLibError(error_stream.str(),
-                       "Node::ncoordinates_on_boundary()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -2817,7 +2817,7 @@ get_coordinates_on_boundary(const unsigned &b, const unsigned& k,
  if(Boundaries_pt==0)
   {
    throw OomphLibError("Node does not lie on any boundary",
-                       "Node::coordinate_on_boundary()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -2829,7 +2829,7 @@ get_coordinates_on_boundary(const unsigned &b, const unsigned& k,
    error_stream << "Node is not on boundary " << b << std::endl;
 
    throw OomphLibError(error_stream.str(),
-                       "Node::get_coordinates_on_boundary()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -2845,7 +2845,7 @@ get_coordinates_on_boundary(const unsigned &b, const unsigned& k,
                 << "       if Mesh::Boundary_coordinate_exists[...] has been\n"
                 << "       set to true!]\n";
    throw OomphLibError(error_stream.str(),
-                       "Node::get_coordinates_on_boundary()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -2865,7 +2865,7 @@ get_coordinates_on_boundary(const unsigned &b, const unsigned& k,
     << std::endl;
 
    throw OomphLibError(error_stream.str(),
-                       "Node::coordinate_on_boundary()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -2889,7 +2889,7 @@ set_coordinates_on_boundary(const unsigned &b,  const unsigned& k,
  if(Boundaries_pt==0)
   {
    throw OomphLibError("Node does not lie on any boundary",
-                       "Node::set_coordinates_on_boundary()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -2901,7 +2901,7 @@ set_coordinates_on_boundary(const unsigned &b,  const unsigned& k,
    error_stream << "Node is not on boundary " << b << std::endl;
 
    throw OomphLibError(error_stream.str(),
-                       "Node::set_coordinates_on_boundary()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -2980,7 +2980,7 @@ void SolidNode::xi_gen_range_check(const unsigned &k, const unsigned &i) const
     }
    
    throw OomphLibError(error_message.str(),
-                       "SolidNode::xi_gen_range_check()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 }
@@ -3093,7 +3093,7 @@ void SolidNode::copy(SolidNode* orig_node_pt)
                 << nlagrangian_storage_orig << std::endl;
 
    throw OomphLibError(error_stream.str(),
-                       "Node::copy()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
  
@@ -3154,7 +3154,7 @@ void SolidNode::read(std::ifstream& restart_file)
                 << check_nlagrangian_storage << std::endl;
      
    throw OomphLibError(error_stream.str(),
-                       "SolidNode::read()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
    
   }
@@ -3348,7 +3348,7 @@ void SolidNode::read_values_from_vector(const Vector<double> &vector_of_values,
                 << orig_n_lagrangian_storage << " " 
                 << n_lagrangian_storage << std::endl;
    throw OomphLibError(error_stream.str(),
-                       "SolidNode::read_values_from_vector",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif

@@ -280,7 +280,7 @@ void StorableShapeElementBase::pre_compute_shape_at_knots()
     "zero before calling pre_compute_shape_at_knots()";
    
    throw OomphLibError(error_message,
-                       "StorableShapeElementBase::pre_compute_shape_at_knots()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -342,7 +342,7 @@ void StorableShapeElementBase::pre_compute_dshape_local_at_knots()
    
    throw OomphLibError(
     error_message,
-    "StorableShapeElementBase::pre_compute_dshape_local_at_knots()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -415,7 +415,7 @@ void StorableShapeElementBase::pre_compute_d2shape_local_at_knots()
    
    throw OomphLibError(
     error_message,
-    "StorableShapeElementBase::pre_compute_d2shape_local_at_knots()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -806,7 +806,7 @@ set_shape_local_stored_from_element(StorableShapeElementBase*
 
    throw OomphLibError(
     error_message,
-    "StorableShapeElementBase::set_shape_local_stored_from_element(..)",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 #endif

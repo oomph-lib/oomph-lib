@@ -73,7 +73,7 @@ namespace oomph
       error_stream << "TFace cannot have two identical vertex nodes\n";
       throw OomphLibError(
        error_stream.str(),
-       "TFace::TFace()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
 #endif
      }
@@ -262,7 +262,7 @@ template<>
                     << j << std::endl;
       
       throw OomphLibError(error_message.str(),
-                          "TElement::local_coordinate_of_node()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
    }
@@ -341,7 +341,7 @@ template<>
        << j << std::endl;
       
       throw OomphLibError(error_message.str(),
-                          "TElement::local_coordinate_of_node()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
    }
@@ -427,7 +427,7 @@ template<>
                  << j << std::endl;
    
    throw OomphLibError(error_message.str(),
-                       "TElement::local_coordinate_of_node()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 }
@@ -469,7 +469,7 @@ void d2shape_local(const Vector<double> &s,
                    DShape &d2psids) const
 {
  throw OomphLibError("Not checked yet",
-                     "TElement::d2shape_local()",
+                     OOMPH_CURRENT_FUNCTION,
                      OOMPH_EXCEPTION_LOCATION);
 
  //ALH: Don't know why object qualifier is needed
@@ -518,7 +518,7 @@ template<>
                     << j << std::endl;
       
       throw OomphLibError(error_message.str(),
-                          "TElement::local_coordinate_of_node()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
    }
@@ -623,7 +623,7 @@ template<>
                     << j << std::endl;
       
       throw OomphLibError(error_message.str(),
-                          "TElement::local_coordinate_of_node()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
    }
@@ -782,7 +782,7 @@ template<>
                  << j << std::endl;
    
    throw OomphLibError(error_message.str(),
-                       "TElement::local_coordinate_of_node()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 }
@@ -854,7 +854,7 @@ void d2shape_local(const Vector<double> &s,
                    DShape &d2psids) const
 {
  throw OomphLibError("Not checked yet",
-                     "TElement::d2shape_local()",
+                     OOMPH_CURRENT_FUNCTION,
                      OOMPH_EXCEPTION_LOCATION);
 
  //ALH: Don't know why object qualifier is needed
@@ -977,7 +977,7 @@ template<>
                     << j << std::endl;
       
       throw OomphLibError(error_message.str(),
-                          "TEnrichedElement::local_coordinate_of_node()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
    }
@@ -1288,7 +1288,7 @@ public:
       "three and six nodes, i.e. NNODE_1D=2 , 3 , 4\n";
      
      throw OomphLibError(error_message,
-                         "TElement::TElement()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -1350,7 +1350,7 @@ public:
       << "Element only has two vertex nodes; called with node number " 
       << j << std::endl;     
      throw OomphLibError(error_message.str(),
-                         "TElement::vertex_node_pt()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }
@@ -1485,7 +1485,7 @@ public:
       "three and six nodes, i.e. NNODE_1D=2 , 3 , 4\n";
      
      throw OomphLibError(error_message,
-                         "TElement::TElement()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -1536,7 +1536,7 @@ public:
       << "Element only has three vertex nodes; called with node number " 
       << j << std::endl;     
      throw OomphLibError(error_message.str(),
-                         "TElement::vertex_node_pt()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -1760,7 +1760,7 @@ class TElementShape<3,2>
                    << j << std::endl;
      
      throw OomphLibError(error_message.str(),
-                         "TElement::local_coordinate_of_node()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }
@@ -1918,7 +1918,7 @@ template<>
                  << j << std::endl;
    
    throw OomphLibError(error_message.str(),
-                       "TElement::local_coordinate_of_node()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 }
@@ -2226,7 +2226,7 @@ template<>
                  << j << std::endl;
    
    throw OomphLibError(error_message.str(),
-                       "TElement::local_coordinate_of_node()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 }
@@ -2831,7 +2831,7 @@ public:
       "four and ten nodes, i.e. NNODE_1D=2 , 3 \n";
      
      throw OomphLibError(error_message,
-                         "TElement::TElement()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -2885,7 +2885,7 @@ public:
       << "Element only has four vertex nodes; called with node number " 
       << j << std::endl;     
      throw OomphLibError(error_message.str(),
-                         "TElement::vertex_node_pt()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif

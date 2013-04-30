@@ -370,7 +370,7 @@ class OcTree : public virtual Tree
   {
    throw OomphLibError(
     "Don't call empty constructor for OcTree!",
-    "OcTree::OcTree()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -645,7 +645,8 @@ class OcTreeRoot : public virtual OcTree, public virtual TreeRoot
       "Call OcTree::setup_static_data() before creating\n";
      error_message += "any OcTreeRoots\n";
  
-     throw OomphLibError(error_message,"OcTreeRoot::OcTreeRoot()",
+     throw OomphLibError(error_message,
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -684,7 +685,7 @@ class OcTreeRoot : public virtual OcTree, public virtual TreeRoot
      error_stream << "Wrong edge_direction: " << Direct_string[edge_direction] 
                   << std::endl;
      throw OomphLibError(error_stream.str(),
-                         "OcTreeRoot::edge_neighbour_pt()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -711,7 +712,7 @@ class OcTreeRoot : public virtual OcTree, public virtual TreeRoot
      error_stream << "Wrong edge_direction: " << Direct_string[edge_direction] 
                   << std::endl;
      throw OomphLibError(error_stream.str(),
-                         "OcTreeRoot::nedge_neighbour()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -737,7 +738,7 @@ class OcTreeRoot : public virtual OcTree, public virtual TreeRoot
      error_stream << "Wrong edge_direction: " << Direct_string[edge_direction] 
                   << std::endl;
      throw OomphLibError(error_stream.str(),
-                         "OcTreeRoot::add_edge_neighbour_pt()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -894,7 +895,7 @@ class OcTreeForest : public TreeForest
  OcTreeForest()
   {
    throw OomphLibError("Don't call empty constructor for OcTreeForest!",
-                       "OcTreeForest::OcTreeForest()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -956,7 +957,7 @@ class OcTreeForest : public TreeForest
                   << OcTree::Direct_string[direction] 
                   << std::endl;
      throw OomphLibError(error_stream.str(),
-                         "OcTreeRoot::oc_face_neigh_pt()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif

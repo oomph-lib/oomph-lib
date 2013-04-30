@@ -92,8 +92,8 @@ class SuperLUPreconditioner : public Preconditioner
        << "DistributableLinearAlgebraObject.\n"
        << "You are most likely to be here because you are using the\n "
        << "soon to be obsolete CCDoubleMatrix\n";
-      throw OomphLibError(error_message_stream.str(),     
-                          "SuperLUPreconditioner::setup()",             
+      throw OomphLibError(error_message_stream.str(),
+                          OOMPH_CURRENT_FUNCTION,             
                          OOMPH_EXCEPTION_LOCATION);        
      }
    }

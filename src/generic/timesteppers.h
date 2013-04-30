@@ -253,7 +253,7 @@ public:
  TimeStepper()
   { 
    throw OomphLibError("Don't call default constructor for TimeStepper!",
-                       "TimeStepper::TimeStepper()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   } 
 

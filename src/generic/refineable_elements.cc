@@ -66,7 +66,7 @@ namespace oomph
                  << std::endl;
     
     throw OomphLibError(error_stream.str(),
-                        "RefineableElement::check_value_id()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
  }
@@ -102,7 +102,7 @@ namespace oomph
                   << std::endl;
     throw OomphLibError(
      error_message.str(),
-     "RefineableElement::assemble_local_to_eulerian_jacobian()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -243,7 +243,7 @@ namespace oomph
                   << " for the jacobian of the mapping to be well-defined"
                   << std::endl;
     throw OomphLibError(error_message.str(),
-                        "FiniteElement::local_to_eulerian_jacobian_diagonal()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -374,7 +374,7 @@ namespace oomph
 
                 throw OomphLibError(
                  error_stream.str(),
-                 "RefineableElement::assign_hanging_local_eqn_numbers()",
+                 OOMPH_CURRENT_FUNCTION,
                  OOMPH_EXCEPTION_LOCATION);
                }
 #endif

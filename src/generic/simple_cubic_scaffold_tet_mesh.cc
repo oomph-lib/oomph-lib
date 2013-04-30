@@ -805,7 +805,7 @@ SimpleCubicScaffoldTetMesh::SimpleCubicScaffoldTetMesh(const unsigned &n_x,
 
    throw OomphLibError(
     error_stream.str(),
-    "SimpleCubicScaffoldTetMesh::SimpleCubicScaffoldTetMesh()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }     
 
@@ -821,7 +821,7 @@ SimpleCubicScaffoldTetMesh::SimpleCubicScaffoldTetMesh(const unsigned &n_x,
 
    throw OomphLibError(
     error_stream.str(),
-    "SimpleCubicScaffoldTetMesh::SimpleCubicScaffoldTetMesh()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }     
 

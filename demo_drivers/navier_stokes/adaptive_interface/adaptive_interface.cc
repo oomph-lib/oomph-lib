@@ -255,7 +255,7 @@ public:
       error_stream << "Direction is incorrect: " << direction << std::endl;
 
       throw OomphLibError(error_stream.str(),
-                          "CylinderAndInterfaceDomain::set_macro_boundary()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
     
@@ -288,7 +288,7 @@ public:
       error_stream << "Direction is incorrect: " << direction << std::endl;
       
       throw OomphLibError(error_stream.str(),
-                          "CylinderAndInterfaceDomain::set_macro_boundary()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
     
@@ -321,7 +321,7 @@ public:
       error_stream << "Direction is incorrect: " << direction << std::endl;
       
       throw OomphLibError(error_stream.str(),
-                          "CylinderAndInterfaceDomain::set_macro_boundary()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
     
@@ -354,7 +354,7 @@ public:
       error_stream << "Direction is incorrect: " << direction << std::endl;
 
       throw OomphLibError(error_stream.str(),
-                          "CylinderAndInterfaceDomain::set_macro_boundary()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
 
@@ -388,7 +388,7 @@ public:
       error_stream << "Direction is incorrect: " << direction << std::endl;
 
       throw OomphLibError(error_stream.str(),
-                          "CylinderAndInterfaceDomain::set_macro_boundary()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }  
 
@@ -420,7 +420,7 @@ public:
       error_stream << "Direction is incorrect: " << direction << std::endl;
 
       throw OomphLibError(error_stream.str(),
-                          "CylinderAndInterfaceDomain::set_macro_boundary()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
 
@@ -431,7 +431,7 @@ public:
       error_stream << "Wrong domain number: " << m<< std::endl;
 
       throw OomphLibError(error_stream.str(),
-                          "CylinderAndInterfaceDomain::set_macro_boundary()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
    }
 
@@ -871,7 +871,7 @@ public:
     if(final_element_index == -1)
      {
       throw OomphLibError("No Surface Element adjacent to boundary 1\n",
-                          "CylinderAndInterfaceMesh::assign_free_surface()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
    

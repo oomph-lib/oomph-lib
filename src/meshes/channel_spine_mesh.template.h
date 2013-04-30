@@ -177,7 +177,7 @@ public:
    else
     {
      throw OomphLibError("Should not have got here",
-                         "ChannelSpineMesh::x_spacing_function()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    // Dummy return to keep compiler from barking
@@ -191,7 +191,7 @@ public:
    if (i>Nleft_spine)
     {
      throw OomphLibError("Arguemnt out of range",
-                         "ChannelSpineMesh::left_spine_pt()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -204,7 +204,7 @@ public:
    if (i>Ncentre_spine)
     {
      throw OomphLibError("Arguemnt out of range",
-                         "ChannelSpineMesh::centre_spine_pt()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    else
@@ -219,7 +219,7 @@ public:
    if (i>Nright_spine)
     {
      throw OomphLibError("Arguemnt out of range",
-                         "ChannelSpineMesh::right_spine_pt()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    else

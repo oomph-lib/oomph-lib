@@ -112,7 +112,7 @@ public virtual ElementWithZ2ErrorEstimator
                    << flux.size() << ", whereas it should be " 
                    << num_entries << std::endl;
      throw OomphLibError(error_message.str(),
-                         "RefineablePolarNavierStokesEquations::get_Z2_flux()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -308,7 +308,7 @@ public virtual RefineableQElement<2>
 
      throw OomphLibError(
       error_message.str(),
-      "RefineablePolarTaylorHoodElement::get_interpolated_values()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -680,7 +680,7 @@ void get_interpolated_values(const unsigned& t,
 
      throw OomphLibError(
       error_message.str(),
-      "RefineablePolarCrouzeixRaviartElement::get_interpolated_values()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
 #endif

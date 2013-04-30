@@ -99,7 +99,7 @@ void SpineMesh::node_update(const bool& update_all_solid_nodes)
      error_message += "doesn't make sense either\n";
 
      throw OomphLibError(error_message,
-                         "SpineMesh::node_update()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -116,7 +116,7 @@ void SpineMesh::node_update(const bool& update_all_solid_nodes)
       << "Error: Node " << l << "is a " << typeid(Node_pt[l]).name() 
       << ", not a SpineNode" << std::endl;
      throw OomphLibError(error_stream.str(),
-                         "SpineMesh::node_update()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     } 
 #endif
@@ -205,7 +205,7 @@ void SpineMesh::read(std::ifstream &restart_file)
      << n_spine << std::endl;
 
     throw OomphLibError(error_stream.str(),
-                        "SpineMesh::read()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
   }
 

@@ -89,7 +89,7 @@ template<class BASIC, class SOLID>
     {
      throw OomphLibError(
       "Cannot handle (non-refineable) continuous solid pressure interpolation",
-      "PseudoSolidNodeUpdateElement::solid_p_nodal_index()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -172,7 +172,7 @@ template<class BASIC, class SOLID>
       {
        throw OomphLibError(
         "Shape derivatives do not (yet) allow for generalised position dofs\n",
-        "PseudoSolid::fill_in_shape_derivatives()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
       }
      

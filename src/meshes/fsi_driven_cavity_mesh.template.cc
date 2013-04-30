@@ -85,7 +85,7 @@ FSIDrivenCavityMesh<ELEMENT>::FSIDrivenCavityMesh(
      error_message << "Node " << j << "is still on boundary " << std::endl;
      
      throw OomphLibError(error_message.str(),
-                         "FSIDrivenCavityMesh::FSIDrivenCavityMesh()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }
@@ -231,7 +231,8 @@ void AlgebraicFSIDrivenCavityMesh<ELEMENT>::algebraic_node_update(
     "AlgebraicFSIDrivenCavityMesh::";
    function_name += "algebraic_node_update()";
 
-   throw OomphLibError(error_message,function_name,
+   throw OomphLibError(error_message,
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -337,7 +338,7 @@ void AlgebraicFSIDrivenCavityMesh<ELEMENT>::setup_algebraic_node_update()
      
      throw OomphLibError(
       error_stream.str(),
-      "FSIDrivenCavityMesh::setup_algebraic_node_update()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
 #endif       

@@ -68,7 +68,7 @@ void ConstitutiveLaw::error_checking_in_input(const DenseMatrix<double> &g,
   {
    throw OomphLibError(
     "Undeformed metric tensor not square",
-    "ConstitutiveLaw::errror_checking_in_input()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
  
@@ -82,7 +82,7 @@ void ConstitutiveLaw::error_checking_in_input(const DenseMatrix<double> &g,
     "not have same dimensions as the undeformed metric tensor\n";
 
    throw OomphLibError(error_message,
-    "ConstitutiveLaw::errror_checking_in_input()",
+                       OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -96,7 +96,7 @@ void ConstitutiveLaw::error_checking_in_input(const DenseMatrix<double> &g,
     "not have same dimensions as the undeformed metric tensor\n";
 
    throw OomphLibError(error_message,
-    "ConstitutiveLaw::errror_checking_in_input()",
+                       OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 }
@@ -116,7 +116,7 @@ calculate_contravariant( const DenseMatrix<double> &Gdown,
   {
    throw OomphLibError(
     "Matrices passed to calculate_contravariant() are not of equal dimension",
-    "ConstitutiveLaw::calculate_contravariant()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -134,7 +134,7 @@ calculate_contravariant( const DenseMatrix<double> &Gdown,
      "non-square matrix inversion not implemented yet!\n";
     
     throw OomphLibError(error_message,
-                        "ConstitutiveLaw::calculate_contravariant()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -148,7 +148,8 @@ calculate_contravariant( const DenseMatrix<double> &Gdown,
    //Zero dimensions
   case 0:
    throw OomphLibError(
-    "Zero dimensional matrix","ConstitutiveLaw::calculate_contravariant()",
+    "Zero dimensional matrix",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
    break;
    
@@ -195,8 +196,8 @@ calculate_contravariant( const DenseMatrix<double> &Gdown,
    break;
    
   default:
-   throw OomphLibError("Dimension of matrix must be 0, 1,2 or 3\n",  
-                       "ConstitutiveLaw::calculate_contravariant()",
+   throw OomphLibError("Dimension of matrix must be 0, 1, 2 or 3\n",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
    break;
   }
@@ -229,7 +230,7 @@ calculate_d_contravariant_dG(const DenseMatrix<double> &Gdown,
      "non-square matrix inversion not implemented yet!\n";
     
     throw OomphLibError(error_message,
-                        "ConstitutiveLaw::calculate_d_contravariant_dG()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -243,7 +244,8 @@ calculate_d_contravariant_dG(const DenseMatrix<double> &Gdown,
    //Zero dimensions
   case 0:
    throw OomphLibError(
-    "Zero dimensional matrix","ConstitutiveLaw::calculate_contravariant()",
+    "Zero dimensional matrix",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
    break;
    
@@ -294,7 +296,7 @@ calculate_d_contravariant_dG(const DenseMatrix<double> &Gdown,
    //This is not yet implemented
    throw OomphLibError(
     "Analytic derivatives of metric tensors not yet implemented in 3D\n",
-    "ConstitutiveLaw::calculate_d_contravariant_dG()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
 
    //Calculate the determinant of the matrix
@@ -318,8 +320,8 @@ calculate_d_contravariant_dG(const DenseMatrix<double> &Gdown,
    break;
    
   default:
-   throw OomphLibError("Dimension of matrix must be 0, 1,2 or 3\n",  
-                       "ConstitutiveLaw::calculate_d_contravariant_dG()",
+   throw OomphLibError("Dimension of matrix must be 0, 1, 2 or 3\n",
+                       OOMPH_CURRENT_FUNCTION,  
                        OOMPH_EXCEPTION_LOCATION);
    break;
   }
@@ -350,7 +352,7 @@ void ConstitutiveLaw::calculate_d_second_piola_kirchhoff_stress_dG(
   {
    throw OomphLibError(
     "Matrices passed are not of equal dimension",
-    "ConstitutiveLaw::calculate_d_second_piola_kirchhoff_stress_dG()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -453,7 +455,7 @@ void ConstitutiveLaw::calculate_d_second_piola_kirchhoff_stress_dG(
   {
    throw OomphLibError(
     "Matrices passed are not of equal dimension",
-    "ConstitutiveLaw::calculate_d_second_piola_kirchhoff_stress_dG()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -566,7 +568,7 @@ void ConstitutiveLaw::calculate_d_second_piola_kirchhoff_stress_dG(
   {
    throw OomphLibError(
     "Matrices passed are not of equal dimension",
-    "ConstitutiveLaw::calculate_d_second_piola_kirchhoff_stress_dG()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -903,7 +905,7 @@ calculate_second_piola_kirchhoff_stress(
 
    throw OomphLibError(
     "Check constitutive equations carefully when dim=1",
-    function_name, OOMPH_EXCEPTION_LOCATION);
+    OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
   }
 #endif
 
@@ -1019,7 +1021,7 @@ calculate_second_piola_kirchhoff_stress(
    
    throw OomphLibError(
     "Check constitutive equations carefully when dim=1",
-    function_name, OOMPH_EXCEPTION_LOCATION);
+    OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
   }
 #endif
 
@@ -1145,7 +1147,7 @@ calculate_second_piola_kirchhoff_stress(const DenseMatrix<double> &g,
    
    throw OomphLibError(
     "Check constitutive equations carefully when dim=1",
-    function_name, OOMPH_EXCEPTION_LOCATION);
+    OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
   }
 #endif
 

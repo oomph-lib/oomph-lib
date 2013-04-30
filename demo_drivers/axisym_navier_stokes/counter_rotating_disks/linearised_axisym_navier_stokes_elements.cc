@@ -343,7 +343,7 @@ namespace oomph
                    << strainrate.nrow() << " Not 3" << std::endl;
     
     throw OomphLibError(error_message.str(),
-                        "AxisymmetricNavierStokeEquations::strain_rate()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif

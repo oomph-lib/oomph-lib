@@ -1336,7 +1336,7 @@ get_dbody_force_nst_dexternal_element_data(const unsigned &ipt,
   {
    throw OomphLibError(
     "External element could not be cast to AD_ELEMENT\n",
-    "NavierStokesBoussinesqElement::get_dbody_force_nst_dexternal_element_data",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -1393,7 +1393,7 @@ get_dbody_force_nst_dexternal_element_data(const unsigned &ipt,
   {
    throw OomphLibError(
     "External element could not be cast to AD_ELEMENT\n",
-    "RefineableNavierStokesBoussinesqElement::get_dbody_force_nst_dexternal_element_data",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 #endif

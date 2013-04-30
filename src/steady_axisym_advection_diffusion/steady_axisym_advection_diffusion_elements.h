@@ -654,7 +654,7 @@ public:
   {
    throw OomphLibError(
     "Don't call empty constructor for SteadyAxisymAdvectionDiffusionFluxElement",
-    "AdvectionDiffusionFluxElement::AdvectionDiffusionFluxElement()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -905,7 +905,7 @@ FaceGeometry<ELEMENT>(), FaceElement()
      
      throw OomphLibError(
       error_string,
-      "AdvectionDiffusionFluxElement::AdvectionDiffusionFluxElement()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
   }
  else

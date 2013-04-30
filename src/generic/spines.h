@@ -471,7 +471,7 @@ public:
                    << " is not in the range (0,"
                    << n_node-1 << ")";
      throw OomphLibError(error_message.str(),
-                         "SpineElement::spine_local_eqn()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -486,7 +486,7 @@ public:
       << "so you can't get its local equation number.\n"
       << "Check that the Mesh is correctly associating Spines with is Nodes\n";
      throw OomphLibError(error_stream.str(),
-                         "SpineElement<ELEMENT>::spine_local_eqn()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -596,7 +596,7 @@ public:
                    << ", not a SpineNode" << std::endl;
      
      throw OomphLibError(error_message.str(),
-                         "SpineMesh::node_pt()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     } 
 #endif
@@ -616,7 +616,7 @@ public:
     {
      throw OomphLibError(
       "Can't execute element_node_pt(...) for non FiniteElements",
-      "SpineMesh::element_node_pt()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
    if(!dynamic_cast<SpineNode*>(el_pt->node_pt(n)))
@@ -627,7 +627,7 @@ public:
                    << ", not a SpineNode" << std::endl;
      
      throw OomphLibError(error_message.str(),
-                         "SpineMesh::node_pt()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif

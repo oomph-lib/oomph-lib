@@ -64,7 +64,7 @@ namespace oomph
     error_message << "The PreconditionerArray requires at least 2 "
                   << "preconditioners";
     throw OomphLibError(error_message.str(),
-                        "PreconditionerArray::setup_preconditioners(...)",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
   // first check that the vector matrix_pt is the correct length
@@ -74,7 +74,7 @@ namespace oomph
     error_message << "The same number of preconditioners and matrices must "
                   << "be passed to the setup_preconditioners(...).";
     throw OomphLibError(error_message.str(),
-                        "PreconditionerArray::setup_preconditioners(...)",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 
@@ -95,7 +95,7 @@ namespace oomph
       std::ostringstream error_message;
       error_message << "matrix_pt[" << i << "] = NULL.";
       throw OomphLibError(error_message.str(),
-                          "PreconditionerArray::setup_preconditioners(...)",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
 
@@ -105,7 +105,7 @@ namespace oomph
       std::ostringstream error_message;
       error_message << "Matrix " << i << " has not been built.";
       throw OomphLibError(error_message.str(),
-                          "PreconditionerArray::setup_preconditioners(...)",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
 
      }
@@ -129,7 +129,7 @@ namespace oomph
         std::ostringstream error_message;
         error_message << "All matrices must have the same communicator.";
         throw OomphLibError(error_message.str(),
-                            "PreconditionerArray::setup_preconditioners(...)",
+                            OOMPH_CURRENT_FUNCTION,
                             OOMPH_EXCEPTION_LOCATION);
        }
      }
@@ -173,7 +173,7 @@ namespace oomph
       std::ostringstream error_message;
       error_message << "Not enough processors for the preconditioners.";
       throw OomphLibError(error_message.str(),
-                          "PreconditionerArray::setup_preconditioners(...)",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
    }
@@ -2418,7 +2418,7 @@ namespace oomph
     std::ostringstream error_message;
     error_message << "The preconditioners have not been setup.";
     throw OomphLibError(error_message.str(),
-                        "PreconditionerArray::solve_preconditioners(...)",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 
@@ -2430,7 +2430,7 @@ namespace oomph
                   << " preconditioners but r only contains "
                   << r.size() << " preconditioners.";
     throw OomphLibError(error_message.str(),
-                        "PreconditionerArray::solve_preconditioners(...)",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 
@@ -2442,7 +2442,7 @@ namespace oomph
                   << " preconditioners but z only contains "
                   << z.size() << " preconditioners.";
     throw OomphLibError(error_message.str(),
-                        "PreconditionerArray::solve_preconditioners(...)",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
   // check that the vector has the same distribution as the
@@ -2456,7 +2456,7 @@ namespace oomph
                     << " the same distribution as the matrix_pt[" << i
                     << "] that was passed to setup_preconditioners(...)";
       throw OomphLibError(error_message.str(),
-                          "PreconditionerArray::solve_preconditioners(...)",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
    }

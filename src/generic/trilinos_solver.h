@@ -109,7 +109,7 @@ namespace oomph
                   << std::endl;
     throw OomphLibError(
      error_message.str(),
-     "OomphLibPreconditionerEpetraOperator::SetUseTranspose()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
 
@@ -121,7 +121,7 @@ namespace oomph
                   << "that is not required for a Preconditioner" << std::endl;
     throw OomphLibError(
      error_message.str(),
-     "OomphLibPreconditionerEpetraOperator::Apply()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
 
@@ -198,7 +198,7 @@ namespace oomph
                   << "that is not required for a Preconditioner" << std::endl;
     throw OomphLibError(
      error_message.str(),
-     "OomphLibPreconditionerEpetraOperator::NormInf()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
 
@@ -216,7 +216,7 @@ namespace oomph
                   << "that is not required for a Preconditioner" << std::endl;
     throw OomphLibError(
      error_message.str(),
-     "OomphLibPreconditionerEpetraOperator::UseTranspose()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
 
@@ -228,7 +228,7 @@ namespace oomph
                   << "that is not required for a Preconditioner" << std::endl;
     throw OomphLibError(
      error_message.str(),
-     "OomphLibPreconditionerEpetraOperator::HasNormInf()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
 

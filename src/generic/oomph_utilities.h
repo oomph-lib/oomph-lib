@@ -185,7 +185,7 @@ namespace CumulativeTimings
 #ifdef PARANOID
   if(tmp == 0)
    {
-    throw OomphLibError("Bad cast.", "checked_dynamic_cast",
+    throw OomphLibError("Bad cast.", OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -207,7 +207,7 @@ namespace CumulativeTimings
   // Check that the cast will work as expected.
   if(dynamic_cast<Target>(x) != x)
    {
-    throw OomphLibError("Bad cast." "check_static_cast",
+    throw OomphLibError("Bad cast.", OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif

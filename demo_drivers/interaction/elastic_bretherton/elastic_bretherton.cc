@@ -1075,7 +1075,7 @@ public:
       << "This one contains " << traded_pressure_data_pt->nvalue()<<"\n";;
      
      throw OomphLibError(error_stream.str(),
-                         "FixSpineHeightElement::set_traded_pressure_data()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -1105,7 +1105,7 @@ fill_in_contribution_to_residuals(Vector<double>&residuals)
   {
    throw OomphLibError(
     "Please set the pointer to the prescribed height",
-    "FixSpineHeightElement::fill_in_contribution_to_residuals()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 #endif

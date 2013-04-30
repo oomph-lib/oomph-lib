@@ -823,7 +823,7 @@ void PolarNavierStokesEquations::strain_rate(const Vector<double>& s,
      error_stream << "Wrong size " << strainrate.ncol() << " " 
                   << strainrate.nrow() << std::endl;
      throw OomphLibError(error_stream.str(),
-                         "PolarNavierStokesEquations::strain_rate()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -906,7 +906,7 @@ void PolarNavierStokesEquations::strain_rate_by_r(const Vector<double>& s,
      error_stream << "Wrong size " << strainrate.ncol() << " " 
                   << strainrate.nrow() << std::endl;
      throw OomphLibError(error_stream.str(),
-                         "PolarNavierStokesEquations::strain_rate_by_r()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif

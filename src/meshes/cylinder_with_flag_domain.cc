@@ -319,7 +319,7 @@ namespace oomph
     default:
      error_message << "Direction is incorrect: " << direction << std::endl;
      throw OomphLibError(error_message.str(),
-                         "CylinderWithFlagDomain::macro_element_boundary()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
 
     }
@@ -353,7 +353,7 @@ namespace oomph
     default:
      error_message << "Direction is incorrect: " << direction << std::endl;
      throw OomphLibError(error_message.str(),
-                         "CylinderWithFlagDomain::macro_element_boundary()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
     
@@ -386,7 +386,7 @@ namespace oomph
     default:
      error_message << "Direction is incorrect: " << direction << std::endl;
      throw OomphLibError(error_message.str(),
-                         "CylinderWithFlagDomain::macro_element_boundary()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -421,7 +421,7 @@ namespace oomph
     default:
      error_message << "Direction is incorrect: " << direction << std::endl;
      throw OomphLibError(error_message.str(),
-                         "CylinderWithFlagDomain::macro_element_boundary()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }  
 
@@ -455,7 +455,7 @@ namespace oomph
     default:
      error_message << "Direction is incorrect: " << direction << std::endl;
      throw OomphLibError(error_message.str(),
-                         "CylinderWithFlagDomain::macro_element_boundary()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -488,7 +488,7 @@ namespace oomph
     default:
      error_message << "Direction is incorrect: " << direction << std::endl;
      throw OomphLibError(error_message.str(),
-                         "CylinderWithFlagDomain::macro_element_boundary()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -521,7 +521,7 @@ namespace oomph
     default:
      error_message << "Direction is incorrect: " << direction << std::endl;
      throw OomphLibError(error_message.str(),
-                         "CylinderWithFlagDomain::macro_element_boundary()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -551,7 +551,7 @@ namespace oomph
     default:
      error_message << "Direction is incorrect: " << direction << std::endl;
      throw OomphLibError(error_message.str(),
-                         "CylinderWithFlagDomain::macro_element_boundary()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -581,7 +581,7 @@ namespace oomph
     default:
      error_message << "Direction is incorrect: " << direction << std::endl;
      throw OomphLibError(error_message.str(),
-                         "CylinderWithFlagDomain::macro_element_boundary()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -610,7 +610,7 @@ namespace oomph
     default:
      error_message << "Direction is incorrect: " << direction << std::endl;
      throw OomphLibError(error_message.str(),
-                         "CylinderWithFlagDomain::macro_element_boundary()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -639,7 +639,7 @@ namespace oomph
     default:
      error_message << "Direction is incorrect: " << direction << std::endl;
      throw OomphLibError(error_message.str(),
-                         "CylinderWithFlagDomain::macro_element_boundary()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -667,7 +667,7 @@ namespace oomph
     default:
      error_message << "Direction is incorrect: " << direction << std::endl;
      throw OomphLibError(error_message.str(),
-                         "CylinderWithFlagDomain::macro_element_boundary()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -698,7 +698,7 @@ namespace oomph
     default:
      error_message << "Direction is incorrect: " << direction << std::endl;
      throw OomphLibError(error_message.str(),
-                         "CylinderWithFlagDomain::macro_element_boundary()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -728,7 +728,7 @@ namespace oomph
     default:
      error_message << "Direction is incorrect: " << direction << std::endl;
      throw OomphLibError(error_message.str(),
-                         "CylinderWithFlagDomain::macro_element_boundary()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -757,7 +757,7 @@ namespace oomph
     default:
      error_message << "Direction is incorrect: " << direction << std::endl;
      throw OomphLibError(error_message.str(),
-                         "CylinderWithFlagDomain::macro_element_boundary()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -786,7 +786,7 @@ namespace oomph
     default:
      error_message << "Direction is incorrect: " << direction << std::endl;
      throw OomphLibError(error_message.str(),
-                         "CylinderWithFlagDomain::macro_element_boundary()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -816,7 +816,7 @@ namespace oomph
     default:
      error_message << "Direction is incorrect: " << direction << std::endl;
      throw OomphLibError(error_message.str(),
-                         "CylinderWithFlagDomain::macro_element_boundary()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -846,7 +846,7 @@ namespace oomph
     default:
      error_message << "Direction is incorrect: " << direction << std::endl;
      throw OomphLibError(error_message.str(),
-                         "CylinderWithFlagDomain::macro_element_boundary()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -875,7 +875,7 @@ namespace oomph
     default:
      error_message << "Direction is incorrect: " << direction << std::endl;
      throw OomphLibError(error_message.str(),
-                         "CylinderWithFlagDomain::macro_element_boundary()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -905,7 +905,7 @@ namespace oomph
     default:
      error_message << "Direction is incorrect: " << direction << std::endl;
      throw OomphLibError(error_message.str(),
-                         "CylinderWithFlagDomain::macro_element_boundary()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -935,7 +935,7 @@ namespace oomph
     default:
      error_message << "Direction is incorrect: " << direction << std::endl;
      throw OomphLibError(error_message.str(),
-                         "CylinderWithFlagDomain::macro_element_boundary()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -964,7 +964,7 @@ namespace oomph
     default:
      error_message << "Direction is incorrect: " << direction << std::endl;
      throw OomphLibError(error_message.str(),
-                         "CylinderWithFlagDomain::macro_element_boundary()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -994,7 +994,7 @@ namespace oomph
     default:
      error_message << "Direction is incorrect: " << direction << std::endl;
      throw OomphLibError(error_message.str(),
-                         "CylinderWithFlagDomain::macro_element_boundary()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -1023,7 +1023,7 @@ namespace oomph
     default:
      error_message << "Direction is incorrect: " << direction << std::endl;
      throw OomphLibError(error_message.str(),
-                         "CylinderWithFlagDomain::macro_element_boundary()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -1052,7 +1052,7 @@ namespace oomph
     default:
      error_message << "Direction is incorrect: " << direction << std::endl;
      throw OomphLibError(error_message.str(),
-                         "CylinderWithFlagDomain::macro_element_boundary()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -1081,7 +1081,7 @@ namespace oomph
     default:
      error_message << "Direction is incorrect: " << direction << std::endl;
      throw OomphLibError(error_message.str(),
-                         "CylinderWithFlagDomain::macro_element_boundary()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -1110,7 +1110,7 @@ namespace oomph
     default:
      error_message << "Direction is incorrect: " << direction << std::endl;
      throw OomphLibError(error_message.str(),
-                         "CylinderWithFlagDomain::macro_element_boundary()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -1139,7 +1139,7 @@ namespace oomph
     default:
      error_message << "Direction is incorrect: " << direction << std::endl;
      throw OomphLibError(error_message.str(),
-                         "CylinderWithFlagDomain::macro_element_boundary()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -1168,7 +1168,7 @@ namespace oomph
     default:
      error_message << "Direction is incorrect: " << direction << std::endl;
      throw OomphLibError(error_message.str(),
-                         "CylinderWithFlagDomain::macro_element_boundary()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -1197,7 +1197,7 @@ namespace oomph
     default:
      error_message << "Direction is incorrect: " << direction << std::endl;
      throw OomphLibError(error_message.str(),
-                         "CylinderWithFlagDomain::macro_element_boundary()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -1226,7 +1226,7 @@ namespace oomph
     default:
      error_message << "Direction is incorrect: " << direction << std::endl;
      throw OomphLibError(error_message.str(),
-                         "CylinderWithFlagDomain::macro_element_boundary()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -1236,7 +1236,7 @@ namespace oomph
 
    error_message << "Wrong macro element number" << m << std::endl;
    throw OomphLibError(error_message.str(),
-                       "CylinderWithFlagDomain::macro_element_boundary()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 

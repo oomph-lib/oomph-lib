@@ -177,7 +177,7 @@ namespace oomph
                   << "), however this preconditioner has nblock_types() "
                   << "= " << nblock_types() << std::endl;
     throw OomphLibError(error_message.str(),
-                        "BlockPreconditioner::get_block(...)",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -690,7 +690,7 @@ namespace oomph
     error_message << "The matrix is distributed and on more than one "
                   << "processor. MPI is required.";
     throw OomphLibError(error_message.str(),
-                        "BlockPreconditioner<MATRIX>::get_block(...)",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
 #endif 
    }
@@ -753,7 +753,7 @@ namespace oomph
     error_message << "The require elements have not been successfully copied"
                   << " from the original matrix to the block matrices";
     throw OomphLibError(error_message.str(),
-                        "BlockPreconditioner<MATRIX>::block_matrix_test()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
  }
@@ -894,7 +894,7 @@ namespace oomph
 		  << block_matrix_pt.nrow() << " x " << block_matrix_pt.ncol()
 		  << std::endl;
     throw OomphLibError(error_message.str(),
-                        "BlockPreconditioner::get_block(...)",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif

@@ -66,7 +66,7 @@ namespace oomph
      error_stream << "Bad arguments in routine plgndr1: x=" << x 
                   << " but should be less than 1 in absolute value.\n";  
      throw OomphLibError(error_stream.str(),
-                         "Legendre_functions_helper::plgndr1()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -115,7 +115,7 @@ namespace oomph
      error_stream << "Bad arguments in routine plgndr2: x=" << x 
                   << " but should be less than 1 in absolute value.\n";  
      throw OomphLibError(error_stream.str(),
-                         "Legendre_functions_helper::plgndr2()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif

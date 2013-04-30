@@ -248,7 +248,7 @@ public:
                   << flux.size() << ", whereas it should be at least " 
                   << num_entries << std::endl;
     throw OomphLibError(error_message.str(),
-                        "RefineableNavierStokesEquations::get_Z2_flux()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -920,7 +920,7 @@ public:
                   << flux.size() << ", whereas it should be at least " 
                   << num_entries << std::endl;
     throw OomphLibError(error_message.str(),
-                        "RefineableNavierStokesEquations::get_Z2_flux()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif

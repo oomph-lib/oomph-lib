@@ -200,7 +200,7 @@ void TetMeshBase::setup_boundary_element_info(std::ostream &outfile)
          error_stream << "may be screwed up...\n";
          throw OomphLibError(
           error_stream.str(),
-          "TetMeshBase::setup_boundary_element_info()",
+          OOMPH_CURRENT_FUNCTION,
           OOMPH_EXCEPTION_LOCATION);
         }
 

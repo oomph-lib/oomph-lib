@@ -125,7 +125,7 @@ class DGFaceElement : public virtual FaceElement
      << "This function should be overloaded with a specific flux\n"
      << "that is appropriate to the equations being solved.\n";
     throw OomphLibError(error_stream.str(),
-                        "DGFaceElement::numerical_flux()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 
@@ -284,7 +284,7 @@ protected:
       << n_node << "\n";
      
      throw OomphLibError(error_stream.str(),
-                         "DGElement::construct_boundary_nodes_and_faces",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -394,7 +394,7 @@ void add_flux_contributions_to_residuals(Vector<double> &residuals,
  virtual void calculate_element_averages(double* &average_values) 
   {
    throw OomphLibError("Default (empty) version called",
-                       "DGElement::calculate_element_averages()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
  
@@ -408,7 +408,7 @@ void add_flux_contributions_to_residuals(Vector<double> &residuals,
    if(Average_value==0)
     {
      throw OomphLibError("Averages not calculated yet",
-                         "DGElements::average_value",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    return Average_value[i];
@@ -421,7 +421,7 @@ void add_flux_contributions_to_residuals(Vector<double> &residuals,
    if(Average_value==0)
     {
      throw OomphLibError("Averages not calculated yet",
-                         "DGElements::average_value",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    return Average_value[i];
@@ -455,7 +455,7 @@ public:
     "It must be overloaded in a specific DGMesh\n";
    
    throw OomphLibError(error_message,
-                       "DGMesh::neighbour_finder()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   } 
 
@@ -514,7 +514,7 @@ class SlopeLimiter
                     const Vector<DGElement*> &required_element_pt)
   {
    throw OomphLibError("Calling default empty limiter\n",
-                       "SlopeLimiter::limit()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 };

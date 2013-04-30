@@ -336,7 +336,7 @@ void PoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
 
   default:
    throw OomphLibError("Never get here",
-                       "PoissonProblem::doc_solution()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 

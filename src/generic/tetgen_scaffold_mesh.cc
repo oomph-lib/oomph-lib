@@ -66,7 +66,7 @@ TetgenScaffoldMesh::TetgenScaffoldMesh(const std::string& node_file_name,
     << n_local_node << "-noded tetrahedra" << std::endl;
 
    throw OomphLibError(error_stream.str(),
-                       "TetgenScaffoldMesh::TetgenScaffoldMesh()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
  
@@ -142,7 +142,7 @@ TetgenScaffoldMesh::TetgenScaffoldMesh(const std::string& node_file_name,
  if(dimension!=3)
   {
    throw OomphLibError("The dimesion of the nodes must be 3\n",
-                       "TetgenScaffoldMesh::TetgenScaffoldMesh()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -476,7 +476,7 @@ TetgenScaffoldMesh::TetgenScaffoldMesh(const std::string& node_file_name,
       {
        throw OomphLibError(
         "Nodes in scaffold mesh share more than one global face",
-        "TetgenScaffoldMesh::TetgenScaffoldMesh()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
       }
      
@@ -548,7 +548,7 @@ TetgenScaffoldMesh::TetgenScaffoldMesh(const std::string& node_file_name,
       {
        throw OomphLibError(
         "Nodes in scaffold mesh share more than one global edge",
-        "TetgenScaffoldMesh::TetgenScaffoldMesh()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
       }
       
@@ -604,7 +604,7 @@ TetgenScaffoldMesh::TetgenScaffoldMesh(const std::string& node_file_name,
      {
       throw OomphLibError(
        "Nodes in scaffold mesh face do not share exactly one global edge",
-       "TetgenScaffoldMesh::TetgenScaffoldMesh()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
     else
@@ -631,7 +631,7 @@ TetgenScaffoldMesh::TetgenScaffoldMesh(const std::string& node_file_name,
      {
       throw OomphLibError(
        "Nodes in scaffold mesh face do not share exactly one global edge",
-       "TetgenScaffoldMesh::TetgenScaffoldMesh()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
     else
@@ -658,7 +658,7 @@ TetgenScaffoldMesh::TetgenScaffoldMesh(const std::string& node_file_name,
      {
       throw OomphLibError(
        "Nodes in scaffold mesh face do not share exactly one global edge",
-       "TetgenScaffoldMesh::TetgenScaffoldMesh()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
     else
@@ -698,7 +698,7 @@ TetgenScaffoldMesh::TetgenScaffoldMesh(const std::string& node_file_name,
     << n_local_node << "-noded tetrahedra" << std::endl;
 
    throw OomphLibError(error_stream.str(),
-                       "TetgenScaffoldMesh::TetgenScaffoldMesh()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
     
@@ -1055,7 +1055,7 @@ TetgenScaffoldMesh::TetgenScaffoldMesh(const std::string& node_file_name,
       {
        throw OomphLibError(
         "Nodes in scaffold mesh share more than one global face",
-        "TetgenScaffoldMesh::TetgenScaffoldMesh()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
       }
      
@@ -1127,7 +1127,7 @@ TetgenScaffoldMesh::TetgenScaffoldMesh(const std::string& node_file_name,
       {
        throw OomphLibError(
         "Nodes in scaffold mesh share more than one global edge",
-        "TetgenScaffoldMesh::TetgenScaffoldMesh()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
       }
       
@@ -1182,7 +1182,7 @@ TetgenScaffoldMesh::TetgenScaffoldMesh(const std::string& node_file_name,
      {
       throw OomphLibError(
        "Nodes in scaffold mesh face do not share exactly one global edge",
-       "TetgenScaffoldMesh::TetgenScaffoldMesh()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
     else
@@ -1209,7 +1209,7 @@ TetgenScaffoldMesh::TetgenScaffoldMesh(const std::string& node_file_name,
      {
       throw OomphLibError(
        "Nodes in scaffold mesh face do not share exactly one global edge",
-       "TetgenScaffoldMesh::TetgenScaffoldMesh()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
     else
@@ -1236,7 +1236,7 @@ TetgenScaffoldMesh::TetgenScaffoldMesh(const std::string& node_file_name,
      {
       throw OomphLibError(
        "Nodes in scaffold mesh face do not share exactly one global edge",
-       "TetgenScaffoldMesh::TetgenScaffoldMesh()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
     else

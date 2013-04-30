@@ -287,7 +287,8 @@ public:
      function_name += 
       "MacroElementNodeUpdateCollapsibleChannelMesh()";
      
-     throw OomphLibError(error_message.str(),function_name,
+     throw OomphLibError(error_message.str(),
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    delete el_pt;
@@ -320,7 +321,8 @@ public:
        function_name += 
         "MacroElementNodeUpdateCollapsibleChannelMesh()";
        
-       throw OomphLibError(error_message.str(),function_name,
+       throw OomphLibError(error_message.str(),
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
 #endif       
@@ -523,7 +525,8 @@ public:
     std::string function_name =
     "AlgebraicCollapsibleChannelMesh::bl_squash_fct_pt()\n";
    
-   throw OomphLibError(error_message.str(),function_name,
+   throw OomphLibError(error_message.str(),
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
 
    // Dummy return
@@ -548,7 +551,8 @@ public:
     std::string function_name =
      "AlgebraicCollapsibleChannelMesh::axial_spacing_fct_pt()\n";
     
-    throw OomphLibError(error_message.str(),function_name,
+    throw OomphLibError(error_message.str(),
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
     
    // Dummy return

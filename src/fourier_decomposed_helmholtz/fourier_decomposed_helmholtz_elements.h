@@ -211,7 +211,7 @@ namespace oomph
   {
    throw OomphLibError(
     "There is no time-dependent output_fct() for FourierDecomposedHelmholtz elements ",
-    "FourierDecomposedHelmholtzEquations::output_fct()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
  
@@ -240,7 +240,7 @@ namespace oomph
  {
   throw OomphLibError(
    "There is no time-dependent compute_error() for FourierDecomposedHelmholtz elements",
-   "FourierDecomposedHelmholtzEquations::compute_error()",
+   OOMPH_CURRENT_FUNCTION,
    OOMPH_EXCEPTION_LOCATION);
  }
 
@@ -676,7 +676,7 @@ namespace oomph
        << fld << " is illegal \n";
       throw OomphLibError(
        error_stream.str(),
-       "ProjectableFourierDecomposedHelmholtzElement::data_values_of_field()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif
@@ -715,7 +715,7 @@ namespace oomph
        << fld << " is illegal\n";
       throw OomphLibError(
        error_stream.str(),
-       "ProjectableFourierDecomposedHelmholtzElement::nhistory_values_for_projection()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif
@@ -744,7 +744,7 @@ namespace oomph
        << fld << " is illegal.\n";
       throw OomphLibError(
        error_stream.str(),
-       "ProjectableFourierDecomposedHelmholtzElement::jacobian_and_shape_of_field()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif
@@ -775,7 +775,7 @@ namespace oomph
        << fld << " is illegal\n";
       throw OomphLibError(
        error_stream.str(),
-       "ProjectableFourierDecomposedHelmholtzElement::jget_field()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif
@@ -826,7 +826,7 @@ namespace oomph
        << fld << " is illegal\n";
       throw OomphLibError(
        error_stream.str(),
-       "ProjectableFourierDecomposedHelmholtzElement::nvalue_of_field()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif
@@ -847,7 +847,7 @@ namespace oomph
        << fld << " is illegal\n";
       throw OomphLibError(
        error_stream.str(),
-       "ProjectableFourierDecomposedHelmholtzElement::local_equation()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif

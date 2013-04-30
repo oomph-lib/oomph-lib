@@ -254,7 +254,7 @@ private:
     std::ostringstream error_message;
     error_message << "Pointer to fluid mesh hasn't been set!\n";
     throw OomphLibError(error_message.str(),
-                        "FSIPreconditioner::setup()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
   if (Wall_mesh_pt==0)
@@ -262,7 +262,7 @@ private:
     std::ostringstream error_message;
     error_message << "Pointer to solid mesh hasn't been set!\n";
     throw OomphLibError(error_message.str(),
-                        "FSIPreconditioner::setup()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -642,7 +642,7 @@ void SimpleFSIPreconditioner<MATRIX>::identify_required_blocks(
      std::ostringstream error_message;
      error_message << "Can't retain all off-diagonal blocks!\n";
      throw OomphLibError(error_message.str(),
-                         "SimpleFSIPreconditioner::required_blocks()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }
@@ -672,7 +672,7 @@ void SimpleFSIPreconditioner<MATRIX>::identify_required_blocks(
     std::ostringstream error_message;
     error_message << "Pointer to fluid mesh hasn't been set!\n";
     throw OomphLibError(error_message.str(),
-                        "FSIPreconditioner::setup()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
   if (Wall_mesh_pt==0)
@@ -680,7 +680,7 @@ void SimpleFSIPreconditioner<MATRIX>::identify_required_blocks(
     std::ostringstream error_message;
     error_message << "Pointer to solid mesh hasn't been set!\n";
     throw OomphLibError(error_message.str(),
-                        "FSIPreconditioner::setup()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif

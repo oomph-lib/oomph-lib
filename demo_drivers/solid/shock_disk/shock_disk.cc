@@ -126,7 +126,7 @@ public:
     {
      throw OomphLibError(
       "Element needs to be derived from SolidFiniteElement\n",
-      "ElasticRefineableQuarterCircleSectorMesh::constructor()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
 #endif

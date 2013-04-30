@@ -77,7 +77,7 @@ void BiCGStab<MATRIX>::resolve(const DoubleVector &rhs,
   {
    throw OomphLibError(
     "No matrix was stored -- cannot re-solve",
-    "BiCGStab<MATRIX>::resolve()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -195,7 +195,7 @@ void BiCGStab<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
    error_message_stream 
     << "The vectors rhs must be setup";
    throw OomphLibError(error_message_stream.str(),
-                       "BiCGStab::solve_helper()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -206,7 +206,7 @@ void BiCGStab<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
    error_message_stream 
     << "The matrix at matrix_pt must be square.";
    throw OomphLibError(error_message_stream.str(),
-                       "BiCGStab::solve_helper()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);    
   }
 
@@ -217,7 +217,7 @@ void BiCGStab<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
    error_message_stream 
     << "The matrix and the rhs vector must have the same number of rows.";
    throw OomphLibError(error_message_stream.str(),
-                       "BiCGStab::solve_helper()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
  
@@ -234,7 +234,7 @@ void BiCGStab<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
       << "The matrix matrix_pt must have the same communicator as the vectors"
       << " rhs and result must have the same communicator";
      throw OomphLibError(error_message_stream.str(),
-                         "BiCGStab::solve_helper()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }
@@ -249,7 +249,7 @@ void BiCGStab<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
       << "The matrix (matrix_pt) is not distributable and therefore the rhs"
       << " vector must not be distributed";
      throw OomphLibError(error_message_stream.str(),
-                         "BiCGStab::solve_helper()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }
@@ -264,7 +264,7 @@ void BiCGStab<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
       << "The solution vector distribution has been setup; it must have the "
       << "same distribution as the rhs vector.";
      throw OomphLibError(error_message_stream.str(),
-                         "BiCGStab::solve_helper()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }   
@@ -628,7 +628,7 @@ void CG<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
    error_message_stream 
     << "The vectors rhs must be setup";
    throw OomphLibError(error_message_stream.str(),
-                       "CG::solve_helper()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -639,7 +639,7 @@ void CG<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
    error_message_stream 
     << "The matrix at matrix_pt must be square.";
    throw OomphLibError(error_message_stream.str(),
-                       "CG::solve_helper()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);    
   }
 
@@ -650,7 +650,7 @@ void CG<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
    error_message_stream 
     << "The matrix and the rhs vector must have the same number of rows.";
    throw OomphLibError(error_message_stream.str(),
-                       "CG::solve_helper()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
  
@@ -667,7 +667,7 @@ void CG<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
       << "The matrix matrix_pt must have the same communicator as the vectors"
       << " rhs and result must have the same communicator";
      throw OomphLibError(error_message_stream.str(),
-                         "CG::solve_helper()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }
@@ -682,7 +682,7 @@ void CG<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
       << "The matrix (matrix_pt) is not distributable and therefore the rhs"
       << " vector must not be distributed";
      throw OomphLibError(error_message_stream.str(),
-                         "CG::solve_helper()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }
@@ -697,7 +697,7 @@ void CG<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
       << "The solution vector distribution has been setup; it must have the "
       << "same distribution as the rhs vector.";
      throw OomphLibError(error_message_stream.str(),
-                         "CG::solve_helper()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }   
@@ -942,7 +942,7 @@ void CG<MATRIX>::resolve(const DoubleVector &rhs,
   {
    throw OomphLibError(
     "No matrix was stored -- cannot re-solve",
-    "CG<MATRIX>::resolve()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -1059,7 +1059,7 @@ void GS<MATRIX>::resolve(const DoubleVector &rhs,
   {
    throw OomphLibError(
     "No matrix was stored -- cannot re-solve",
-    "GS<MATRIX>::resolve()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -1158,8 +1158,8 @@ void GS<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
      std::ostringstream error_message_stream;                         
      error_message_stream                                        
       << "The matrix must not be distributed.";  
-     throw OomphLibError(error_message_stream.str(),     
-                         "GS::solve_helper()",             
+     throw OomphLibError(error_message_stream.str(),
+                         OOMPH_CURRENT_FUNCTION,             
                          OOMPH_EXCEPTION_LOCATION);        
     }
   }
@@ -1169,8 +1169,8 @@ void GS<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
    std::ostringstream error_message_stream;                           
    error_message_stream                                        
     << "The rhs vector distribution must be setup.";               
-   throw OomphLibError(error_message_stream.str(),                  
-                       "GS::solve_helper()",                            
+   throw OomphLibError(error_message_stream.str(),
+                       OOMPH_CURRENT_FUNCTION,                            
                        OOMPH_EXCEPTION_LOCATION);         
   }
  // PARANOID check that the rhs has the right number of global rows
@@ -1178,7 +1178,7 @@ void GS<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
   {
    throw OomphLibError(
     "RHS does not have the same dimension as the linear system",
-    "SuperLU::backsub()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
  // PARANOID check that the rhs is not distributed
@@ -1187,8 +1187,8 @@ void GS<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
    std::ostringstream error_message_stream;                           
    error_message_stream                                        
     << "The rhs vector must not be distributed.";               
-   throw OomphLibError(error_message_stream.str(),                  
-                       "GS::solve_helper()",                           
+   throw OomphLibError(error_message_stream.str(),
+                       OOMPH_CURRENT_FUNCTION,                           
                        OOMPH_EXCEPTION_LOCATION);         
   }
  // PARANOID check that if the result is setup it matches the distribution
@@ -1201,8 +1201,8 @@ void GS<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
      error_message_stream                                        
       << "If the result distribution is setup then it must be the same as the "
       << "rhs distribution";               
-     throw OomphLibError(error_message_stream.str(),                  
-                         "GS::solve_helper()",                            
+     throw OomphLibError(error_message_stream.str(),
+                         OOMPH_CURRENT_FUNCTION,                            
                          OOMPH_EXCEPTION_LOCATION);         
     }
   }
@@ -1362,7 +1362,7 @@ void GMRES<MATRIX>::resolve(const DoubleVector &rhs,
   {
    throw OomphLibError(
     "No matrix was stored -- cannot re-solve",
-    "GMRES<MATRIX>::resolve()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -1482,8 +1482,8 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
      std::ostringstream error_message_stream;                         
      error_message_stream                                        
       << "The matrix must not be distributed.";  
-     throw OomphLibError(error_message_stream.str(),     
-                         "GMRES::solve_helper()",             
+     throw OomphLibError(error_message_stream.str(),
+                         OOMPH_CURRENT_FUNCTION,             
                          OOMPH_EXCEPTION_LOCATION);        
     }
   }
@@ -1493,8 +1493,8 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
    std::ostringstream error_message_stream;                           
    error_message_stream                                        
     << "The rhs vector distribution must be setup.";               
-   throw OomphLibError(error_message_stream.str(),                  
-                       "GMRES::solve_helper()",                            
+   throw OomphLibError(error_message_stream.str(),
+                       OOMPH_CURRENT_FUNCTION,                            
                        OOMPH_EXCEPTION_LOCATION);         
   }
  // PARANOID check that the rhs has the right number of global rows
@@ -1502,7 +1502,7 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
   {
    throw OomphLibError(
     "RHS does not have the same dimension as the linear system",
-    "SuperLU::backsub()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
  // PARANOID check that the rhs is not distributed
@@ -1511,8 +1511,8 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
    std::ostringstream error_message_stream;                           
    error_message_stream                                        
     << "The rhs vector must not be distributed.";               
-   throw OomphLibError(error_message_stream.str(),                  
-                       "GMRES::solve_helper()",                           
+   throw OomphLibError(error_message_stream.str(),
+                       OOMPH_CURRENT_FUNCTION,                           
                        OOMPH_EXCEPTION_LOCATION);         
   }
  // PARANOID check that if the result is setup it matches the distribution
@@ -1525,8 +1525,8 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
      error_message_stream                                        
       << "If the result distribution is setup then it must be the same as the "
       << "rhs distribution";               
-     throw OomphLibError(error_message_stream.str(),                  
-                         "GMRES::solve_helper()",                            
+     throw OomphLibError(error_message_stream.str(),
+                         OOMPH_CURRENT_FUNCTION,                            
                          OOMPH_EXCEPTION_LOCATION);         
     }
   }

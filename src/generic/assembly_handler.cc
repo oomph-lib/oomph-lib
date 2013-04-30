@@ -139,7 +139,7 @@ namespace oomph
    << "\n";
   
   throw OomphLibError(error_stream.str(),
-                      "AssemblyHandler::get_bifurcation_parameter_pt()",
+                      OOMPH_CURRENT_FUNCTION,
                       OOMPH_EXCEPTION_LOCATION);
   return 0;
  }
@@ -162,7 +162,7 @@ namespace oomph
    << "\n";
   
   throw OomphLibError(error_stream.str(),
-                      "AssemblyHandler::get_eigenfunction()",
+                      OOMPH_CURRENT_FUNCTION,
                       OOMPH_EXCEPTION_LOCATION);
  }
 
@@ -222,7 +222,7 @@ namespace oomph
    {
     throw OomphLibError(
      "ExplicitTimeSteps should return one matrix",
-     "ExplicitTimeStepHandler::get_all_vectors_and_matrices()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -260,7 +260,7 @@ namespace oomph
  {
   throw OomphLibError(
    "An eigenproblem does not have a get_residuals function",
-   "EigenProblemHandler::get_residuals()",
+   OOMPH_CURRENT_FUNCTION,
    OOMPH_EXCEPTION_LOCATION);
  }
  
@@ -273,7 +273,7 @@ namespace oomph
  {
   throw OomphLibError(
    "An eigenproblem does not have a get_jacobian function",
-   "EigenProblemHandler::get_jacobian()",
+   OOMPH_CURRENT_FUNCTION,
    OOMPH_EXCEPTION_LOCATION);
  }
 
@@ -291,7 +291,7 @@ namespace oomph
   if(matrix.size() != 2) 
    {
     throw OomphLibError("EigenProblems should return two matrices",
-                        "EigenProblemHandler::get_all_vectors_and_matrices()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -340,7 +340,7 @@ namespace oomph
     if (result.distributed())
      {
       throw OomphLibError("The result vector must not be distributed",
-                          "BlockFoldLinearSolver::solve()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
    }
@@ -588,7 +588,7 @@ namespace oomph
   if(Alpha_pt==0)
    {
     throw OomphLibError("The required vectors have not been stored",
-                        "AugmentedBlockFoldLinearSolver::resolve()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
   
@@ -611,7 +611,7 @@ namespace oomph
     if (result.distributed())
      {
       throw OomphLibError("The result vector must not be distributed",
-                          "BlockFoldLinearSolver::resolve()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
    }
@@ -619,7 +619,7 @@ namespace oomph
   if (!rhs.built())
    {
       throw OomphLibError("The rhs vector must be setup",
-                          "BlockFoldLinearSolver::resolve()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -886,7 +886,7 @@ namespace oomph
     error_stream << "The Solve_which_system flag can only take values 0, 1, 2"
                  << " not " << Solve_which_system << "\n";
     throw OomphLibError(error_stream.str(),
-                        "FoldHandler::ndof()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
  }
@@ -989,7 +989,7 @@ namespace oomph
     error_stream << "The Solve_which_system flag can only take values 0, 1, 2"
                  << " not " << Solve_which_system << "\n";
     throw OomphLibError(error_stream.str(),
-                        "FoldHandler::get_residuals()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
  }
@@ -1188,7 +1188,7 @@ namespace oomph
     error_stream << "The Solve_which_system flag can only take values 0, 1, 2"
                  << " not " << Solve_which_system << "\n";
     throw OomphLibError(error_stream.str(),
-                        "FoldHandler::get_jacobian()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
     
    }
@@ -1258,7 +1258,7 @@ namespace oomph
     error_stream << "The Solve_which_system flag can only take values 0, 1, 2"
                  << " not " << Solve_which_system << "\n";
     throw OomphLibError(error_stream.str(),
-                        "FoldHandler::get_dresiduals_dparameter()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
  }
@@ -1282,7 +1282,7 @@ namespace oomph
    "If you find that you need it, you will have to implement it!\n\n";
 
   throw OomphLibError(error_stream.str(),
-                      "FoldHander::get_djacobian_dparameter()",
+                      OOMPH_CURRENT_FUNCTION,
                       OOMPH_EXCEPTION_LOCATION);
  }
 
@@ -1305,7 +1305,7 @@ namespace oomph
    "If you find that you need it, you will have to implement it!\n\n";
 
   throw OomphLibError(error_stream.str(),
-                      "FoldHander::get_hessian_vector_products()",
+                      OOMPH_CURRENT_FUNCTION,
                       OOMPH_EXCEPTION_LOCATION);
  }
 
@@ -1469,7 +1469,7 @@ namespace oomph
   if(!result.built())
    {
     throw OomphLibError("Result vector must be built\n",
-                        "BlockPitchForkLinearSolver::solve()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 
@@ -1731,7 +1731,7 @@ namespace oomph
   if(B_pt==0)
    {
     throw OomphLibError("The required vectors have not been stored",
-                        "BlockPitchForkLinearSolver::resolve()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 
@@ -1980,7 +1980,7 @@ namespace oomph
     if (result.distributed())
      {
       throw OomphLibError("The result vector must not be distributed",
-                          "AugmentedBlockPitchForkLinearSolver::solve()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
    }
@@ -2192,7 +2192,7 @@ namespace oomph
   if(Alpha_pt==0)
    {
     throw OomphLibError("The required vectors have not been stored",
-                        "AugmentedBlockPitchForkLinearSolver::resolve()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
   
@@ -2454,7 +2454,7 @@ namespace oomph
    {
     throw OomphLibError
      ("The symmetry vector must have the same distribution as the dofs\n",
-      "PitchForkHandler::PitchForkHandler()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -2629,7 +2629,7 @@ namespace oomph
     error_stream << "The Solve_which_system flag can only take values 0, 1, 2"
                  << " not " << Solve_which_system << "\n";
     throw OomphLibError(error_stream.str(),
-                        "PitchForkHandler::ndof()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
  }
@@ -2658,7 +2658,7 @@ namespace oomph
      {
       throw OomphLibError(
        "Block Augmented solver not implemented for distributed case\n",
-       "PitchForkHandler::eqn_number()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif
@@ -2788,7 +2788,7 @@ namespace oomph
     error_stream << "The Solve_which_system flag can only take values 0, 1, 2"
                  << " not " << Solve_which_system << "\n";
     throw OomphLibError(error_stream.str(),
-                        "PitchForkHandler::get_residuals()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 
@@ -2964,7 +2964,7 @@ namespace oomph
       error_stream << "The Solve_which_system flag can only take values 0, 1, 2"
                    << " not " << Solve_which_system << "\n";
       throw OomphLibError(error_stream.str(),
-                          "PitchForkHandler::get_jacobian()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
 
@@ -3040,7 +3040,7 @@ namespace oomph
     error_stream << "The Solve_which_system flag can only take values 0, 1, 2"
                  << " not " << Solve_which_system << "\n";
     throw OomphLibError(error_stream.str(),
-                        "PitchForkHandler::get_dresiduals_dparameter()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 
@@ -3067,7 +3067,7 @@ namespace oomph
    "If you find that you need it, you will have to implement it!\n\n";
 
   throw OomphLibError(error_stream.str(),
-                      "PitchForkHandler::get_djacobian_dparameter()",
+                      OOMPH_CURRENT_FUNCTION,
                       OOMPH_EXCEPTION_LOCATION);
  }
 
@@ -3281,7 +3281,7 @@ namespace oomph
     if (result.distributed())
      {
       throw OomphLibError("The result vector must not be distributed",
-                          "BlockHopfLinearSolver::solve()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
    }
@@ -3602,7 +3602,7 @@ namespace oomph
     if (result.distributed())
      {
       throw OomphLibError("The result vector must not be distributed",
-                          "BlockHopfLinearSolver::solve()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
    }
@@ -3611,7 +3611,7 @@ namespace oomph
     if (result2.distributed())
      {
       throw OomphLibError("The result2 vector must not be distributed",
-                          "BlockHopfLinearSolver::solve()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
    }
@@ -4009,7 +4009,7 @@ namespace oomph
                                      DoubleVector &result)
  {
   throw OomphLibError("resolve() is not implemented for this solver",
-                      "BlockHopfLinearSolver::resolve()",
+                      OOMPH_CURRENT_FUNCTION,
                       OOMPH_EXCEPTION_LOCATION);
 
  }
@@ -4269,7 +4269,7 @@ namespace oomph
 
    default:
     throw OomphLibError("Solve_which_system can only be 0,1 or 2",
-                        "HopfHander::ndof()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
  }
@@ -4356,7 +4356,7 @@ namespace oomph
   else
    {
     throw OomphLibError("Solve_which_system can only be 0",
-                        "HopfHander::get_residuals()",
+OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
     
    }
@@ -4510,7 +4510,7 @@ namespace oomph
   else
    {
     throw OomphLibError("Solve_which_system can only be 0,1 or 2",
-                        "HopfHander::get_residuals()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
  }
@@ -4563,7 +4563,7 @@ namespace oomph
   else
    {
     throw OomphLibError("Solve_which_system can only be 0",
-                        "HopfHander::get_dresiduals_dparameter()",
+OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
     
    }
@@ -4591,7 +4591,7 @@ namespace oomph
    "If you find that you need it, you will have to implement it!\n\n";
 
   throw OomphLibError(error_stream.str(),
-                      "HopfHander::get_djacobian_dparameter()",
+OOMPH_CURRENT_FUNCTION,
                       OOMPH_EXCEPTION_LOCATION);
  }
 
@@ -4614,7 +4614,7 @@ namespace oomph
    "If you find that you need it, you will have to implement it!\n\n";
 
   throw OomphLibError(error_stream.str(),
-                      "HopfHander::get_hessian_vector_products()",
+OOMPH_CURRENT_FUNCTION,
                       OOMPH_EXCEPTION_LOCATION);
  }
 

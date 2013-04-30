@@ -275,7 +275,7 @@ class ProjectableElement : public virtual ELEMENT,
         {
          throw OomphLibError(
           "Trying to project Lagrangian coordinates in non-SolidElement\n",
-          "ProjectableElement::residual_for_projection()",
+          OOMPH_CURRENT_FUNCTION,
           OOMPH_EXCEPTION_LOCATION);
         }
 
@@ -396,7 +396,7 @@ class ProjectableElement : public virtual ELEMENT,
               {
                throw OomphLibError(
                 "Trying to project generalised positions not in SolidElement\n",
-                "ProjectableElement::residual_for_projection()",
+                OOMPH_CURRENT_FUNCTION,
                 OOMPH_EXCEPTION_LOCATION);
               }
              local_eqn = local_equation(fld,l);
@@ -495,7 +495,7 @@ class ProjectableElement : public virtual ELEMENT,
       default:
        throw OomphLibError(
         "Wrong type specificied in Projection_type. This should never happen\n",
-        "ProjectableElement::residuals_for_projection()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
       } //End of the switch statement
 
@@ -841,7 +841,7 @@ class ProjectionProblem : public virtual Problem
             << "Projection cannot be done at the moment, sorry.\n";
            
            throw OomphLibError(error_stream.str(),
-                               "ProjectionProblem::project()",
+                               OOMPH_CURRENT_FUNCTION,
                                OOMPH_EXCEPTION_LOCATION);
           }
 
@@ -970,7 +970,7 @@ class ProjectionProblem : public virtual Problem
              << "where the problem arises and we'll try to implement this\n"
              << "(up to now unnecessary) capability...\n";
             throw OomphLibError(error_stream.str(),
-                                "ProjectionProblem::project()",
+                                OOMPH_CURRENT_FUNCTION,
                                 OOMPH_EXCEPTION_LOCATION);
           }
         }

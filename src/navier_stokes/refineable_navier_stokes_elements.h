@@ -155,7 +155,7 @@ fill_in_generic_residual_contribution_fp_press_adv_diff_robin_bc(
    // pressure advection diffusion doesn't work for this one!
    throw OomphLibError(
     "Pressure advection diffusion does not work in this case\n",
-    "RefineableFpPressureAdvDiffRobinBCElement<ELEMENT>::fill_in_generic_residual_contribution_fp_press_adv_diff_robin_bc()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
 
    for(unsigned l=0;l<n_pres;++l)
@@ -427,7 +427,7 @@ public virtual ElementWithZ2ErrorEstimator
                    << flux.size() << ", whereas it should be at least " 
                    << num_entries << std::endl;
      throw OomphLibError(error_message.str(),
-                         "RefineableNavierStokesEquations::get_Z2_flux()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif

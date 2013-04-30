@@ -60,7 +60,7 @@ namespace oomph
    {
     throw OomphLibError(
      "YoungLaplaceContactAngleElement only work with 2D nodes",
-     "YoungLaplaceContactAngleElement<ELEMENT>::YoungLaplaceContactAngleElement<ELEMENT>",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -225,7 +225,7 @@ namespace oomph
      {
       throw OomphLibError(
        "YoungLaplaceContactAngleElements only work with 2D bulk elements",
-       "YoungLaplaceContactAngleElement::actual_cos_contact_angle",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif
@@ -297,7 +297,7 @@ void YoungLaplaceContactAngleElement<ELEMENT>::contact_line_vectors(
   {
    throw OomphLibError(
     "YoungLaplaceContactAngleElements only work with 2D bulk elements",
-    "YoungLaplaceContactAngleElement::contact_line_vectors",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 #endif

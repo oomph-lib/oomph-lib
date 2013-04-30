@@ -105,7 +105,7 @@ public:
       <<"Choose a different radius (actual scaled radius = "<<scaled_R<<"\n";
 
      throw OomphLibError(error_stream.str(),
-                         "MyTipMesh::change_radius()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }

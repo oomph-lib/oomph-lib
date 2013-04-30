@@ -207,7 +207,7 @@ public:
               << "This needs to be implemented in the derived class."
               << std::endl;
    throw OomphLibError(err_stream.str(),
-                       "RefineableMeshBase::p_adapt()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -233,7 +233,7 @@ public:
               << "This needs to be implemented in the derived class."
               << std::endl;
    throw OomphLibError(err_stream.str(),
-                       "RefineableMeshBase::p_refine_uniformly()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
  
@@ -261,7 +261,7 @@ public:
               << "This needs to be implemented in the derived class."
               << std::endl;
    throw OomphLibError(err_stream.str(),
-                       "RefineableMeshBase::p_unrefine_uniformly()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 

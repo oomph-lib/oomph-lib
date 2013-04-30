@@ -160,7 +160,7 @@ class NavierStokesSurfaceDragTorqueElement :
                     << std::endl;
        throw OomphLibError(
         error_stream.str(),
-        "NavierStokesSurfaceDragTorqueElement::get_drag_and_torque()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
       }
 #endif
@@ -207,7 +207,7 @@ class NavierStokesSurfaceDragTorqueElement :
       {
        throw OomphLibError(
         "Dimension of a surface element must be 1 or 2\n",
-        "NavierStokesSurfaceDragTorqueElement::get_drag_and_torque()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
       }
     }

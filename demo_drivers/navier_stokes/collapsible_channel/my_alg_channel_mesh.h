@@ -135,7 +135,8 @@ public:
     std::string function_name =
     "MyAlgebraicCollapsibleChannelMesh::bl_squash_fct_pt()\n";
    
-   throw OomphLibError(error_message.str(),function_name,
+   throw OomphLibError(error_message.str(),
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
 
    // Dummy return
@@ -310,7 +311,7 @@ void MyAlgebraicCollapsibleChannelMesh<ELEMENT>::setup_algebraic_node_update()
        
        throw OomphLibError(
         error_stream.str(),
-        "MyCollapsibleChannelMesh::setup_algebraic_node_update()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
       }
 #endif       

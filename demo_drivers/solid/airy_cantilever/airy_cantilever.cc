@@ -104,7 +104,8 @@ public:
 
      std::ostringstream error_message;
      error_message << "Output for dim !=2 not implemented" << std::endl;
-     throw OomphLibError(error_message.str(),"MySolidElement::output()",
+     throw OomphLibError(error_message.str(),
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   

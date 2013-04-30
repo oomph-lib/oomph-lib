@@ -232,7 +232,7 @@ public:
     {
      throw OomphLibError(
       "Pressure gradient Data must only contain a single value!\n",
-      "WomersleyEquations::set_pressure_gradient_pt()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -1195,7 +1195,7 @@ public:
                      << "NavierStokesImpedanceTractionElementBase.\n";
        throw OomphLibError(
         error_message.str(),
-        "WomersleyImpedanceTubeBase::WomersleyImpedanceTubeBase()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
       }
     }
@@ -1906,7 +1906,7 @@ public:
         {
          throw OomphLibError(
           "Cannot build WomersleyMesh from mesh with hanging nodes!",
-          "WomersleyMesh",
+          OOMPH_CURRENT_FUNCTION,
           OOMPH_EXCEPTION_LOCATION);       
         }      
       }
@@ -1929,7 +1929,7 @@ public:
       {
        throw OomphLibError(
         "Number of nodes in existing and new elements don't match",
-        "WomersleyMesh",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);       
       }
 #endif
@@ -2008,7 +2008,7 @@ public:
       {
        throw OomphLibError(
         "Number of nodes in the new mesh don't match that in the old one",
-        "WomersleyMesh",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);       
       }
 #endif
@@ -2369,7 +2369,7 @@ class NavierStokesImpedanceTractionElement :
                     << std::endl;
        throw OomphLibError(
         error_stream.str(),
-        "NavierStokesImpedenceTractionElement::get_volume_flux()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
       }
 #endif
@@ -2463,7 +2463,7 @@ class NavierStokesImpedanceTractionElement :
     {
      throw OomphLibError(
       "Navier_stokes_outflow_mesh_pt==0 -- set it with \n set_external_data_from_navier_stokes_outflow_mesh() before calling this function!\n",
-      "NavierStokesImpedanceTractionElement::total_volume_flux_into_downstream_tube()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);    }
 #endif
 

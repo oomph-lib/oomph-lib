@@ -53,7 +53,7 @@ namespace oomph
   
   
   throw OomphLibError(error_stream.str(),
-                      "ExplicitTimeSteppableObject::get_inverse_mass_matrix_times_residuals()",
+                      OOMPH_CURRENT_FUNCTION,
                       OOMPH_EXCEPTION_LOCATION);
  }
  
@@ -71,7 +71,7 @@ namespace oomph
    << "of the vector\n";
   
   throw OomphLibError(error_stream.str(),
-                      "ExplicitTimeSteppableObject::get_dofs()",
+                      OOMPH_CURRENT_FUNCTION,
                       OOMPH_EXCEPTION_LOCATION);
   
  }
@@ -88,7 +88,7 @@ namespace oomph
    << "freedom in the object.\n";
   
   throw OomphLibError(error_stream.str(),
-                      "ExplicitTimeSteppableObject::set_dofs()",
+                      OOMPH_CURRENT_FUNCTION,
                       OOMPH_EXCEPTION_LOCATION);
   
  }
@@ -112,7 +112,7 @@ namespace oomph
    << "      returned by get_inverse_mass_matrix_times_residuals()\n";
   
   throw OomphLibError(error_stream.str(),
-                      "ExplicitTimeSteppableObject::add_to_dofs()",
+                      OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   
  }
@@ -129,7 +129,7 @@ namespace oomph
    << "The function must return a reference to the local time in the object\n";
   
    throw OomphLibError(error_stream.str(),
-                       "ExplicitTimeSteppableObject::time()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
 
   return Dummy_time_value;
@@ -166,7 +166,7 @@ void RungeKutta<ORDER>::timestep(ExplicitTimeSteppableObject* const &object_pt,
  std::ostringstream error_stream;
  error_stream << "Timestep not implemented for order " << ORDER << "\n";
  throw OomphLibError(error_stream.str(),
-                     "RungeKutta::timestep()",
+                     OOMPH_CURRENT_FUNCTION,
                      OOMPH_EXCEPTION_LOCATION);
 }
 
@@ -246,7 +246,7 @@ void LowStorageRungeKutta<ORDER>::timestep(
  std::ostringstream error_stream;
  error_stream << "Timestep not implemented for order " << ORDER << "\n";
  throw OomphLibError(error_stream.str(),
-                     "LowStorageRungeKutta::timestep()",
+                     OOMPH_CURRENT_FUNCTION,
                      OOMPH_EXCEPTION_LOCATION);
 }
 

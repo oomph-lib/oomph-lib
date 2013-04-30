@@ -168,7 +168,7 @@ public:
                     << std::endl;
        throw OomphLibError(
         error_stream.str(),
-        "NavierStokesSurfacePowerElement::get_drag()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
       }
 #endif
@@ -304,7 +304,7 @@ public:
                     << std::endl;
        throw OomphLibError(
         error_stream.str(),
-        "NavierStokesSurfacePowerElement::get_rate_of_traction_work()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
       }
 #endif
@@ -473,7 +473,7 @@ public:
                     << std::endl;
        throw OomphLibError(
         error_stream.str(),
-        "NavierStokesSurfacePowerElement::get_rate_of_traction_work()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
       }
 #endif
@@ -657,7 +657,7 @@ public:
                     << std::endl;
        throw OomphLibError(
         error_stream.str(),
-        "NavierStokesSurfacePowerElement::get_kin_energy_flux()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
       }
 #endif
@@ -802,7 +802,7 @@ public:
                     << std::endl;
        throw OomphLibError(
         error_stream.str(),
-        "NavierStokesSurfacePowerElement::get_volume_flux()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
       }
 #endif

@@ -275,7 +275,8 @@ int main()
   }
  else 
   {
-   throw OomphLibError("failed!","main()",OOMPH_EXCEPTION_LOCATION);
+   throw OomphLibError("failed!",
+                       OOMPH_CURRENT_FUNCTION,OOMPH_EXCEPTION_LOCATION);
   }
 
  // Set the sign of the source function:

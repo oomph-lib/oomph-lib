@@ -88,7 +88,7 @@ public:
    if(this->node_pt(0)==0)
     {
      throw OomphLibError("The Corner node (0) does not exist",
-                         "RefineableQSpectralElement::rebuild_from_sons()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    
@@ -132,7 +132,7 @@ public:
             {
              throw OomphLibError(
               "Cannot handle periodic nodes in refineable spectral elements yet",
-              "RefineableQuadSpectralElement::rebuild_from_sons()",
+              OOMPH_CURRENT_FUNCTION,
               OOMPH_EXCEPTION_LOCATION);
             }
            //Non-periodic case, just set the pointer
@@ -294,7 +294,7 @@ public:
 
                  throw OomphLibError(
                   error_message,
-                  "RefineableQSpectralElements::rebuild_from_sons()",
+                  OOMPH_CURRENT_FUNCTION,
                   OOMPH_EXCEPTION_LOCATION);
                 }
 #endif

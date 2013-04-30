@@ -417,7 +417,7 @@ class MacroElementNodeUpdateMesh : public virtual Mesh
      error_message += "doesn't make sense either\n";
 
      throw OomphLibError(error_message,
-                         "MacroElementNodeUpdateMesh::node_update()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -439,7 +439,7 @@ class MacroElementNodeUpdateMesh : public virtual Mesh
         << "Node is of type: " << typeid(node_pt(n)).name() << std::endl;
        
        throw OomphLibError(error_message.str(),
-                           "MacroElementNodeUpdateMesh::node_update()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
 #endif      
@@ -467,7 +467,7 @@ class MacroElementNodeUpdateMesh : public virtual Mesh
           << "Node is of type: " << typeid(node_pt(n)).name() << std::endl;
        
          throw OomphLibError(error_message.str(),
-                             "MacroElementNodeUpdateMesh::node_update()",
+                             OOMPH_CURRENT_FUNCTION,
                              OOMPH_EXCEPTION_LOCATION);
         }
 #endif

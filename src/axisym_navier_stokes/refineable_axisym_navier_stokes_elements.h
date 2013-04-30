@@ -96,7 +96,7 @@ public virtual ElementWithZ2ErrorEstimator
                    << num_entries << std::endl;
      throw OomphLibError(
       error_message.str(),
-      "RefineableAxisymmetricNavierStokesEquations::get_Z2_flux()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -374,7 +374,7 @@ public virtual ElementWithZ2ErrorEstimator
   unsigned flag)
   {
    throw OomphLibError("Not yet implemented\n",
-                       "RefineableAxiNavierStokes::fill_in_generic_dresidual",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -387,7 +387,7 @@ public virtual ElementWithZ2ErrorEstimator
   {
    throw OomphLibError(
     "Not yet implemented\n",
-    "RefineableAxiNavierStokes::fill_in_contribution_to_hessian_vector_products",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 

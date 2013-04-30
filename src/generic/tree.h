@@ -245,7 +245,7 @@ class Tree
   {
    //Throw an error
    throw OomphLibError("Don't call an empty constructor for a Tree object",
-                       "Tree::Tree()",OOMPH_EXCEPTION_LOCATION);
+                       OOMPH_CURRENT_FUNCTION,OOMPH_EXCEPTION_LOCATION);
   }
 
  /// \short Default constructor for empty (root) tree: 
@@ -394,7 +394,7 @@ class TreeForest
    //Throw an error
    throw OomphLibError(
     "Don't call an empty constructor for a TreeForest object",
-    "TreeForest::TreeForest()",OOMPH_EXCEPTION_LOCATION);
+    OOMPH_CURRENT_FUNCTION,OOMPH_EXCEPTION_LOCATION);
   }
 
  /// Broken copy constructor

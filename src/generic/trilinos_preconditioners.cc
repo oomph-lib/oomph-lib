@@ -68,7 +68,7 @@ namespace oomph
                  << "Matrix is " << matrix_pt()->nrow()
                  << " by " << matrix_pt()->ncol() << std::endl;
    throw OomphLibError(error_message.str(),
-                       "TrilinosPreconditionerBase::setup()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -81,7 +81,7 @@ namespace oomph
  if (cr_matrix_pt == 0)
   {
    throw OomphLibError("Matrix must be of type CRDoubleMatrix",
-                       "TrilinosAztecOOSolver::factorise()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);   
   }
 #endif
@@ -115,7 +115,7 @@ void TrilinosPreconditionerBase::setup(Epetra_CrsMatrix* epetra_matrix_pt)
      error_message << "TrilinosSolver only work with "
                    << "DistributedCRDoubleMatrix matrices" << std::endl;
      throw OomphLibError(error_message.str(),
-                         "TrilinosSolver::solve()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
   }
  
@@ -144,7 +144,7 @@ double t_start = TimingHelpers::timer();
   error_message << "preconditioner_solve requires that solver data has "
                 << "been set up" << std::endl;
   throw OomphLibError(error_message.str(),
-                      "TrilinosPreconditionerBase::preconditioner_solve()",
+                      OOMPH_CURRENT_FUNCTION,
                       OOMPH_EXCEPTION_LOCATION);
  }
 
@@ -154,7 +154,7 @@ double t_start = TimingHelpers::timer();
    error_message << "The rhs vector and the matrix must have the same "
                  << "distribution.\n"; 
    throw OomphLibError(error_message.str(),
-                       "TrilinosPreconditionerBase::preconditioner_solve()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif

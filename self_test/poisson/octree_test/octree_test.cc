@@ -44,7 +44,7 @@ namespace oomph
 //         << "Failed to cast element1_pt to an ELEMENT" 
 //         << std::endl;
 //        throw OomphLibError(error_message.str(),
-//                            "CompareElementCoordinate::()",
+//                            OOMPH_CURRENT_FUNCTION,
 //                            OOMPH_EXCEPTION_LOCATION);
 //       }
 
@@ -55,7 +55,7 @@ namespace oomph
 //         << "Failed to cast element2_pt to an ELEMENT"
 //         << std::endl;
 //        throw OomphLibError(error_message.str(),
-//                            "CompareElementCoordinate::()",
+//                            OOMPH_CURRENT_FUNCTION,
 //                            OOMPH_EXCEPTION_LOCATION);
 //       }
 // #endif
@@ -385,7 +385,7 @@ public:
                   << rotated_element << " " << this->nelement()
                   << std::endl;
      throw OomphLibError(error_stream.str(),
-                         "RotateableRefineableCubicMesh::CONSTRUCTOR()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 

@@ -73,7 +73,7 @@ public:
   {
    throw OomphLibError(
     "Don't call empty constructor for HelmholtzFluxElement",
-    "HelmholtzFluxElement::HelmholtzFluxElement()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -312,7 +312,7 @@ HelmholtzFluxElement(FiniteElement* const &bulk_el_pt,
         "If you desire this functionality, you must implement it yourself\n";
        
        throw OomphLibError(error_string,
-                           "HelmholtzFluxElement::HelmholtzFluxElement()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
      //Otherwise read out the value
@@ -341,7 +341,7 @@ HelmholtzFluxElement(FiniteElement* const &bulk_el_pt,
         "If you desire this functionality, you must implement it yourself\n";
        
        throw OomphLibError(error_string,
-                        "HelmholtzFluxElement::HelmholtzFluxElement()",
+                           OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
       }
      else
@@ -370,7 +370,7 @@ HelmholtzFluxElement(FiniteElement* const &bulk_el_pt,
         "If you desire this functionality, you must implement it yourself\n";
        
        throw OomphLibError(error_string,
-                        "HelmholtzFluxElement::HelmholtzFluxElement()",
+                           OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION); 
       }
      else 
@@ -388,7 +388,7 @@ HelmholtzFluxElement(FiniteElement* const &bulk_el_pt,
                   << ". It should be 1,2, or 3!" << std::endl;
      
      throw OomphLibError(error_stream.str(),
-                         "HelmholtzFluxElement::HelmholtzFluxElement()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
      break;
     }

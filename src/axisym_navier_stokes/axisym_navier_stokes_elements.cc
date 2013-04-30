@@ -74,7 +74,7 @@ Default_Gravity_vector(3,0.0);
    {
     throw OomphLibError(
      "Computation of diagonal of pressure mass matrix is not impmented yet.\n",
-     "AxisymmetricNavierStokesEquations::get_pressure_and_velocity_mass_matrix_diagonal()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
 #endif  
@@ -585,7 +585,7 @@ double AxisymmetricNavierStokesEquations::dissipation() const
 {  
  throw OomphLibError(
   "Check the dissipation calculation for axisymmetric NSt",
-  "AxisymmetricNavierStokesEquations::dissipation()",
+  OOMPH_CURRENT_FUNCTION,
   OOMPH_EXCEPTION_LOCATION);
  
  // Initialise
@@ -644,7 +644,7 @@ void AxisymmetricNavierStokesEquations::traction(const Vector<double>& s,
 {
  //throw OomphLibError(
  // "Check the traction calculation for axisymmetric NSt",
- // "AxisymmetricNavierStokesEquations::traction()",
+ // OOMPH_CURRENT_FUNCTION,
  // OOMPH_EXCEPTION_LOCATION);
 
  // Pad out normal vector if required
@@ -657,7 +657,7 @@ void AxisymmetricNavierStokesEquations::traction(const Vector<double>& s,
   {
    throw OomphLibError(
     "Unit normal passed into this fct should either be 2D (r,z) or have a zero component in the theta-direction",
-    "AxisymmetricNavierStokesEquations::traction()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -688,7 +688,7 @@ dissipation(const Vector<double>& s) const
 {  
  throw OomphLibError(
   "Check the dissipation calculation for axisymmetric NSt",
-  "AxisymmetricNavierStokesEquations::dissipation()",
+OOMPH_CURRENT_FUNCTION,
   OOMPH_EXCEPTION_LOCATION);
 
  // Get strain rate matrix
@@ -725,7 +725,7 @@ strain_rate(const Vector<double>& s, DenseMatrix<double>& strainrate) const
                   << strainrate.nrow() << " Not 3" << std::endl;
    
    throw OomphLibError(error_message.str(),
-                       "AxisymmetricNavierStokeEquations::strain_rate()",
+OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -814,7 +814,7 @@ double AxisymmetricNavierStokesEquations::kin_energy() const
 
  throw OomphLibError(
   "Check the kinetic energy calculation for axisymmetric NSt",
-  "AxisymmetricNavierStokesEquations::kin_energy()",
+OOMPH_CURRENT_FUNCTION,
   OOMPH_EXCEPTION_LOCATION);
 
  // Initialise
@@ -2374,7 +2374,7 @@ fill_in_generic_dresidual_contribution_axi_nst(
                 << Re_pt << ")\n";
    throw OomphLibError(
       error_stream.str(),
-      "AxisymmetricNavierStokesEquations::fill_in_generic_dresiduals_contribution()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -3138,7 +3138,7 @@ fill_in_contribution_to_hessian_vector_products(
    if(!ALE_is_disabled)
     {
      throw OomphLibError("Moving nodes not implemented\n",
-                         "AxiNavierStokes::fill_in_hessian\n",
+                         OOMPH_CURRENT_FUNCTION,
                                      OOMPH_EXCEPTION_LOCATION);
     }
 

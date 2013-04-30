@@ -63,7 +63,7 @@ namespace oomph
      if(this->node_pt(0)==0)
       {
        throw OomphLibError("The vertex node (0) does not exist",
-                           "RefineableQSpectralElement::rebuild_from_sons()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
      
@@ -103,7 +103,7 @@ namespace oomph
             {
              throw OomphLibError(
               "Cannot handle periodic nodes in refineable spectral elements",
-              "RefineableQuadSpectralElement<1>::rebuild_from_sons()",
+              OOMPH_CURRENT_FUNCTION,
               OOMPH_EXCEPTION_LOCATION);
             }
            // Non-periodic case, just set the pointer
@@ -155,7 +155,7 @@ namespace oomph
              
              throw OomphLibError(
               error_message,
-              "RefineableQSpectralElement<1>::rebuild_from_sons()",
+              OOMPH_CURRENT_FUNCTION,
               OOMPH_EXCEPTION_LOCATION);
             }
 #endif

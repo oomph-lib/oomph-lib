@@ -198,7 +198,8 @@ public virtual MacroElementNodeUpdateMesh,
      function_name += 
       "MacroElementNodeUpdateChannelWithLeafletMesh()";
      
-     throw OomphLibError(error_message.str(),function_name,
+     throw OomphLibError(error_message.str(),
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    delete el_pt;
@@ -231,7 +232,8 @@ public virtual MacroElementNodeUpdateMesh,
        function_name += 
         "MacroElementNodeUpdateChannelWithLeafletMesh()";
        
-       throw OomphLibError(error_message.str(),function_name,
+       throw OomphLibError(error_message.str(),
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
 #endif       

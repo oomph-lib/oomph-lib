@@ -349,7 +349,7 @@ void FishDomain::macro_element_boundary(const unsigned& t,
      
      throw OomphLibError(
       error_stream.str(),
-      "FishDomain::macro_element_boundary()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
    
@@ -383,7 +383,7 @@ void FishDomain::macro_element_boundary(const unsigned& t,
 
      throw OomphLibError(
       error_stream.str(),
-      "FishDomain::macro_element_boundary()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
    
@@ -418,7 +418,7 @@ void FishDomain::macro_element_boundary(const unsigned& t,
 
      throw OomphLibError(
       error_stream.str(),
-      "FishDomain::macro_element_boundary()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
    
@@ -453,7 +453,7 @@ void FishDomain::macro_element_boundary(const unsigned& t,
 
      throw OomphLibError(
       error_stream.str(),
-      "FishDomain::macro_element_boundary()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
    
@@ -467,7 +467,7 @@ void FishDomain::macro_element_boundary(const unsigned& t,
 
    throw OomphLibError(
     error_stream.str(),
-    "FishDomain::macro_element_boundary()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
  

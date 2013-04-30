@@ -553,7 +553,7 @@ refineable_fill_in_contribution_to_residuals_solid_traction(
    {
     throw OomphLibError(
      "RefineableSolidTractionElement only works for n_position_type=1",
-     "RefineableSolidTractionElement::refineable_fill_in_contribution_to_residuals_solid_traction()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -650,7 +650,7 @@ refineable_fill_in_contribution_to_residuals_solid_traction(
     default:
      throw OomphLibError(
       "Wrong dimension in RefineableSolidTractionElement",
-      "RefineableSolidTractionElement::refineable_fill_in_contribution_to_residuals_solid_traction()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
    
@@ -833,7 +833,7 @@ refineable_fill_in_contribution_to_residuals_solid_traction(
   {
    throw OomphLibError(
     "Broken -- who calls this? \n",
-    "FSISolidTractionElement::dposition_dlagrangian_at_local_coordinate()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }  
 
@@ -953,7 +953,7 @@ refineable_fill_in_contribution_to_residuals_solid_traction(
   {   
    throw OomphLibError(
     "It doesn't make sense to specify an external traction in an FSI context",
-    "FSISolidTractionElement::traction_fct_pt()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
 
    // Dummy return to shut up the compiler
@@ -1174,7 +1174,7 @@ public:
      {      
       throw OomphLibError(
        "ImposeDisplacementByLagrangeMultiplierElement cannot (currently) be used with elements that have generalised positional dofs",
-       "ImposeDisplacementByLagrangeMultiplierElement::ImposeDisplacementByLagrangeMultiplierElement()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
    }
@@ -1256,7 +1256,7 @@ public:
                      << std::endl;
        throw OomphLibError(
         error_message.str(),
-        "ImposeDisplacementByLagrangeMultiplierElement::set_boundary_shape_geom_object_pt()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
       }
 #endif
@@ -1304,7 +1304,7 @@ public:
                      << std::endl;
        throw OomphLibError(
         error_message.str(),
-        "ImposeDisplacementByLagrangeMultiplierElement::set_boundary_shape_geom_object_pt()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
       }
 #endif
@@ -1429,7 +1429,7 @@ public:
     {      
      throw OomphLibError(
       "ImposeDisplacementByLagrangeMultiplierElement cannot (currently) be used with elements that have generalised positional dofs",
-      "ImposeDisplacementByLagrangeMultiplierElement::output()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -1540,7 +1540,7 @@ public:
     {      
      throw OomphLibError(
       "ImposeDisplacementByLagrangeMultiplierElement cannot (currently) be used with elements that have generalised positional dofs",
-      "ImposeDisplacementByLagrangeMultiplierElement::fill_in_generic_contribution_to_residuals_displ_lagr_multiplier()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -1704,7 +1704,7 @@ protected:
     {      
      throw OomphLibError(
       "ImposeDisplacementByLagrangeMultiplierElement cannot (currently) be used with elements that have generalised positional dofs",
-      "ImposeDisplacementByLagrangeMultiplierElement::fill_in_generic_contribution_to_residuals_displ_lagr_multiplier()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -2095,9 +2095,9 @@ protected:
   if(n_position_type!=1)
    {      
     throw OomphLibError(
-     "RefineableImposeDisplacementByLagrangeMultiplierElement \n cannot (currently) be used with elements that have generalised\n positional dofs. Upgrade should be straightforward though the code is in a \n bit of state, with generalised degrees of freedom sometimes half taken into \n account, sometimes completely ignored...",
-      "RefineableImposeDisplacementByLagrangeMultiplierElement::refineable_fill_in_generic_contribution_to_residuals_displ_lagr_multiplier()",
-      OOMPH_EXCEPTION_LOCATION);
+                        "RefineableImposeDisplacementByLagrangeMultiplierElement \n cannot (currently) be used with elements that have generalised\n positional dofs. Upgrade should be straightforward though the code is in a \n bit of state, with generalised degrees of freedom sometimes half taken into \n account, sometimes completely ignored...",
+     OOMPH_CURRENT_FUNCTION,
+     OOMPH_EXCEPTION_LOCATION);
     }
 #endif
   
@@ -2600,7 +2600,7 @@ public:
      {      
       throw OomphLibError(
        "FSIImposeDisplacementByLagrangeMultiplierElement cannot (currently) be used with elements that have generalised positional dofs",
-       "FSIImposeDisplacementByLagrangeMultiplierElement::FSIImposeDisplacementByLagrangeMultiplierElement()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
      }
    }
@@ -2685,7 +2685,7 @@ public:
     {      
      throw OomphLibError(
       "FSIImposeDisplacementByLagrangeMultiplierElement cannot (currently) be used with elements that have generalised positional dofs",
-      "FSIImposeDisplacementByLagrangeMultiplierElement::output()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -2789,7 +2789,7 @@ protected:
     {      
      throw OomphLibError(
       "FSIImposeDisplacementByLagrangeMultiplierElement cannot (currently) be used with elements that have generalised positional dofs",
-      "FSIImposeDisplacementByLagrangeMultiplierElement::fill_in_fsi_generic_contribution_to_residuals_displ_lagr_multiplier()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -3138,8 +3138,8 @@ protected:
     {      
      throw OomphLibError(
       "RefineableImposeDisplacementByLagrangeMultiplierElement \n cannot (currently) be used with elements that have generalised\n positional dofs. Upgrade should be straightforward though the code is in a \n bit of state, with generalised degrees of freedom sometimes half taken into \n account, sometimes completely ignored...",
-      "RefineableImposeDisplacementByLagrangeMultiplierElement::refineable_fill_in_generic_contribution_to_residuals_displ_lagr_multiplier()",
-      OOMPH_EXCEPTION_LOCATION);
+       OOMPH_CURRENT_FUNCTION,
+       OOMPH_EXCEPTION_LOCATION);
     }
 #endif
    

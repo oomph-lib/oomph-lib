@@ -435,7 +435,7 @@ public:
        if(face_element_pt==0) 
         {
          throw OomphLibError("Something wrong",
-                             "neighbour_finder()",
+                             OOMPH_CURRENT_FUNCTION,
                              OOMPH_EXCEPTION_LOCATION);
                              }
       }
@@ -466,7 +466,7 @@ public:
      
     default:
    throw OomphLibError("Coordinate is on no face or not on a unique face",
-                       "DGMesh::neighbour_finder()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
    break;
     }
@@ -719,7 +719,7 @@ public:
             (std::abs(centre_x(0,1) - centre_x(n,1)) > eps))
          {
           throw OomphLibError("Mesh is not conforming in limiter",
-                              "Problem::limit()",
+                              OOMPH_CURRENT_FUNCTION,
                               OOMPH_EXCEPTION_LOCATION);
          }
         }
@@ -1091,7 +1091,7 @@ public:
          if(average_E < 0) 
           {
            throw OomphLibError("Real problem energy negative\n",
-                               "limit()",
+                               OOMPH_CURRENT_FUNCTION,
                                OOMPH_EXCEPTION_LOCATION);
           }
          

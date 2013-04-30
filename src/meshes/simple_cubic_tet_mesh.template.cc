@@ -179,7 +179,7 @@ void SimpleCubicTetMesh<ELEMENT>::build_from_scaffold(
    error_message << "for nnode_1d=" << nnode_1d << std::endl;
    
    throw OomphLibError(error_message.str(),
-                       "SimpleCubicTetMesh::build_from_scaffold()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
  
@@ -330,7 +330,7 @@ void SimpleCubicTetMesh<ELEMENT>::build_from_scaffold(
         
        default:
         throw OomphLibError("More than ten nodes in Tet Element",
-                            "SimpleCubicTetMesh::build_from_scaffold()",
+                            OOMPH_CURRENT_FUNCTION,
                             OOMPH_EXCEPTION_LOCATION);
        }
       
@@ -484,7 +484,7 @@ void SimpleCubicTetMesh<ELEMENT>::build_from_scaffold(
            
           default:
            throw OomphLibError("More than ten nodes in Tet Element",
-                               "SimpleCubicTetMesh::build_from_scaffold()",
+                               OOMPH_CURRENT_FUNCTION,
                                OOMPH_EXCEPTION_LOCATION);
           }
          

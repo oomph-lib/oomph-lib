@@ -63,7 +63,7 @@ namespace oomph
     error_message << "The solid mesh pointer must be set.\n"
                   << "Use method set_solid_mesh(...)";
     throw OomphLibError(error_message.str(),
-                     	"PressureBasedSolidLSCPreconditioner::setup()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -511,7 +511,7 @@ namespace oomph
     error_message << "setup must be called before using preconditioner_solve";
     throw OomphLibError(
      error_message.str(),
-     "PressureBasedSolidLSCPreconditioner::preconditioner_solve()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
   if (z.built())
@@ -523,7 +523,7 @@ namespace oomph
                     << "of global rows";
       throw OomphLibError(
        error_message.str(),
-       "PressureBasedSolidLSCPreconditioner::preconditioner_solve()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);      
      }
    }
@@ -571,7 +571,7 @@ namespace oomph
     error_message << "P_preconditioner_pt has not been set.";
     throw OomphLibError(
      error_message.str(),
-     "PressureBasedSolidLSCPreconditioner::preconditioner_solve()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -684,7 +684,7 @@ namespace oomph
     error_message << "F_preconditioner_pt has not been set."; 
     throw OomphLibError(
      error_message.str(),
-     "PressureBasedSolidLSCPreconditioner::preconditioner_solve()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
 #endif

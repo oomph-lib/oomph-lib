@@ -94,7 +94,7 @@ namespace oomph
      << "to FaceElements (" << face_mesh_pt.size() << " doesn't match.\n";
     throw OomphLibError(
      error_message.str(),
-     "Multi_domain_functions::setup_bulk_elements_adjacent_to_face_mesh()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -393,7 +393,7 @@ namespace oomph
                   << "The dimension is: " << Dim << "\n";
      throw OomphLibError
       (error_stream.str(),
-       "Multi_domain_functions::setup_multi_domain_interaction(...)",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -450,7 +450,7 @@ namespace oomph
                   << "The dimension is: " << Dim << "\n";
      throw OomphLibError
       (error_stream.str(),
-       "Multi_domain_functions::setup_multi_domain_interaction(...)",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -509,7 +509,7 @@ namespace oomph
                  << "mesh_pt [ " << n_mesh << " ] don't match.\n";
     throw OomphLibError
      (error_stream.str(),
-      "Multi_domain_functions::setup_multi_domain_interaction(...)",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -541,7 +541,7 @@ namespace oomph
        << "while mesh 0 has Dim="<< old_dim << std::endl;
       throw OomphLibError
        (error_stream.str(),
-        "Multi_domain_functions::setup_multi_domain_interaction(...)",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
      }
    }  
@@ -556,7 +556,7 @@ namespace oomph
                  << "The dimension is: " << Dim << "\n";
     throw OomphLibError
      (error_stream.str(),
-      "Multi_domain_functions::setup_multi_domain_interaction(...)",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
    }
   
@@ -631,7 +631,7 @@ namespace oomph
     {
      throw OomphLibError(
             "Multi-domain setup does not work with spectral elements.",
-            "Multi_domain_functions::aux_setup_multi_domain_interaction()",
+            OOMPH_CURRENT_FUNCTION,
             OOMPH_EXCEPTION_LOCATION);
     }
    
@@ -641,7 +641,7 @@ namespace oomph
     {
      throw OomphLibError(
             "Multi-domain setup does not work with hp-refineable elements.",
-            "Multi_domain_functions::aux_setup_multi_domain_interaction()",
+            OOMPH_CURRENT_FUNCTION,
             OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -1181,7 +1181,7 @@ namespace oomph
       << "coordinates in missing_coords*.dat\n";
      throw OomphLibError
       (error_stream.str(),
-       "Multi_domain_functions::locate_zeta_for_local_coordinates()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);     
     }
    
@@ -1411,7 +1411,7 @@ namespace oomph
                  << "mesh_pt [ " << n_mesh << " ] don't match.\n";
     throw OomphLibError
      (error_stream.str(),
-      "Multi_domain_functions::aux_setup_multi_domain_interaction(...)",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -1449,7 +1449,7 @@ namespace oomph
       {
        throw OomphLibError(
         "Multi-domain setup does not work with spectral elements.",
-        "Multi_domain_functions::aux_setup_multi_domain_interaction()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
       }
      
@@ -1459,7 +1459,7 @@ namespace oomph
       {
        throw OomphLibError(
         "Multi-domain setup does not work with hp-refineable elements.",
-        "Multi_domain_functions::aux_setup_multi_domain_interaction()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
       }
     } // end over initial loop over meshes
@@ -1517,7 +1517,7 @@ namespace oomph
           << "be costly in parallel because of global comms. \n";
          throw OomphLibError
           (error_stream.str(),
-           "Multi_domain_functions::aux_setup_multi_domain_interaction(...)",
+           OOMPH_CURRENT_FUNCTION,
            OOMPH_EXCEPTION_LOCATION);
         }
        
@@ -1553,7 +1553,7 @@ namespace oomph
                       << old_el_dim_lag << "\n";
          throw OomphLibError
           (error_stream.str(),
-           "Multi_domain_functions::auxsetup_multi_domain_interaction(...)",
+           OOMPH_CURRENT_FUNCTION,
            OOMPH_EXCEPTION_LOCATION);
         }
       }
@@ -2113,7 +2113,7 @@ namespace oomph
       << "coordinates in missing_coords*.dat\n";
      throw OomphLibError
       (error_stream.str(),
-       "Multi_domain_functions::locate_zeta_for_local_coordinates()",
+       OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);     
     }
    
@@ -2442,7 +2442,7 @@ namespace oomph
                                 << "has not yet been implemented.\n";
                    throw OomphLibError
                     (error_stream.str(),
-                     "Multi_domain_functions::create_external_elements()",
+                     OOMPH_CURRENT_FUNCTION,
                      OOMPH_EXCEPTION_LOCATION);
 
                   }
@@ -2483,7 +2483,7 @@ namespace oomph
                 {                 
                  throw OomphLibError(
                   "External halo element is not a FiniteElement\n",
-                  "Multi_domain_functions::create_external_halo_elements",
+                  OOMPH_CURRENT_FUNCTION,
                   OOMPH_EXCEPTION_LOCATION);
                 }
               }
@@ -2678,7 +2678,7 @@ namespace oomph
                                   << "has not yet been implemented.\n";
                      throw OomphLibError
                       (error_stream.str(),
-                       "Multi_domain_functions::create_external_elements()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
                      
                     }
@@ -2720,7 +2720,7 @@ namespace oomph
                   {                 
                    throw OomphLibError(
                     "External halo element is not a FiniteElement\n",
-                    "Multi_domain_functions::create_external_halo_elements",
+                    OOMPH_CURRENT_FUNCTION,
                     OOMPH_EXCEPTION_LOCATION);
                   }
                 }
@@ -3072,7 +3072,7 @@ template<class EXT_ELEMENT>
          {
           throw OomphLibError(
            "Failed to cast new node to boundary node\n",
-           "Multi_domain_functions::add_external_halo_master_node_helper()",
+           OOMPH_CURRENT_FUNCTION,
            OOMPH_EXCEPTION_LOCATION);
          }
 #endif
@@ -3292,7 +3292,7 @@ template<class EXT_ELEMENT>
          {
           throw OomphLibError(
            "Failed to cast new node to boundary node\n",
-           "Multi_domain_functions::construct_new_external_halo_master_node_helper()",
+           OOMPH_CURRENT_FUNCTION,
            OOMPH_EXCEPTION_LOCATION);
          }
 #endif
@@ -3435,7 +3435,7 @@ template<class EXT_ELEMENT>
                        << "yet been implemented.\n";
           throw OomphLibError
            (error_stream.str(),
-            "Multi_domain_functions::construct_new_external_halo_master_...()",
+            OOMPH_CURRENT_FUNCTION,
             OOMPH_EXCEPTION_LOCATION);
          }
        }
@@ -3575,7 +3575,7 @@ template<class EXT_ELEMENT>
        {
         throw OomphLibError(
          "Failed to cast new node to boundary node\n",
-         "Multi_domain_functions::construct_new_external_halo_master_node_helper()",
+         OOMPH_CURRENT_FUNCTION,
          OOMPH_EXCEPTION_LOCATION);
        }
 #endif
@@ -3724,7 +3724,7 @@ template<class EXT_ELEMENT>
          {
           throw OomphLibError(
            "Failed to cast new node to boundary node\n",
-           "Multi_domain_functions::construct_new_external_halo_master_node_helper()",
+           OOMPH_CURRENT_FUNCTION,
            OOMPH_EXCEPTION_LOCATION);
          }
 #endif

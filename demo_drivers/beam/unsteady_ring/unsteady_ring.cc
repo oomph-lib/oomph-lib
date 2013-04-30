@@ -411,7 +411,7 @@ void ElasticRingProblem<ELEMENT,TIMESTEPPER>::set_initial_conditions()
                   << " for restart." << std::endl;
 
      throw OomphLibError(error_stream.str(),
-                         "ElasticRingProblem::set_initial_conditions()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -461,7 +461,8 @@ void ElasticRingProblem<ELEMENT,TIMESTEPPER>::unsteady_run()
    error_message += "Arg2: Name of restart_file (optional)\n";
    error_message += "No arguments specified --> default run\n";
    
-   throw OomphLibError(error_message,"ElasticRingProblem::unsteady_run()",
+   throw OomphLibError(error_message,
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 

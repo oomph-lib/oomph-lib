@@ -68,7 +68,7 @@ set_dirichlet_boundary_condition(const unsigned& b, DirichletBCFctPt u_fn,
    
   default:
    throw OomphLibError("Face Index not +/-1 or +/-2: Need 2D QElements",
-                       "BiharmonicProblem::impose_clamped_edge()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   } 
  
@@ -526,7 +526,7 @@ impose_traction_free_edge(const unsigned& b)
    
   default:
    throw OomphLibError("Face Index not +/-1 or +/-2: Need 2D QElements",
-                       "BiharmonicFluidProblem::impose_traction_free_edge()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
  
@@ -710,7 +710,7 @@ impose_fluid_flow_on_edge(const unsigned& b,FluidBCFctPt u_imposed_fn)
    
   default:
    throw OomphLibError("Face Index not +/-1 or +/-2: Need 2D QElements",
-                       "BiharmonicProblem::impose_clamped_edge()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 

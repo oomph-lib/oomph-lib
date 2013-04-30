@@ -73,7 +73,7 @@ public:
   {
    throw OomphLibError(
     "Don't call empty constructor for LinearWaveFluxElement",
-    "LinearWaveFluxElement::LinearWaveFlushElement()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -280,7 +280,7 @@ LinearWaveFluxElement<ELEMENT>::LinearWaveFluxElement(FiniteElement *bulk_el_pt,
        
        throw OomphLibError(
         error_string,
-        "LinearWaveFluxElement::LinearWaveFluxElement()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
       }
      //Otherwise read out the value
@@ -310,7 +310,7 @@ LinearWaveFluxElement<ELEMENT>::LinearWaveFluxElement(FiniteElement *bulk_el_pt,
        
        throw OomphLibError(
         error_string,
-        "LinearWaveFluxElement::LinearWaveFluxElement()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
       }
      else
@@ -339,7 +339,7 @@ LinearWaveFluxElement<ELEMENT>::LinearWaveFluxElement(FiniteElement *bulk_el_pt,
        
        throw OomphLibError(
         error_string,
-        "LinearWaveFluxElement::LinearWaveFluxElement()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
        
       }
@@ -359,7 +359,7 @@ LinearWaveFluxElement<ELEMENT>::LinearWaveFluxElement(FiniteElement *bulk_el_pt,
      
      throw OomphLibError(
       error_stream.str(),
-      "LinearWaveFluxElement::LinearWaveFluxElement()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
      break;
     }

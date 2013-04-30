@@ -706,7 +706,7 @@ void TriangleMesh<ELEMENT>::setup_boundary_coordinates(const unsigned& b,
        << "oomph-lib believes to be located on the boundary.\n" << std::endl;
       throw OomphLibError(
        error_message.str(),
-       "TriangleMesh::setup_boundary_coordinates()", OOMPH_EXCEPTION_LOCATION);
+       OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
      }
     
     // First node
@@ -888,7 +888,7 @@ void TriangleMesh<ELEMENT>::setup_boundary_coordinates(const unsigned& b,
          << "This probably means that things are way soff.\n"
          << "The errors are " << error << " and " << rev_error << "\n";
         throw OomphLibError(error_stream.str(),
-                            "TriangleMesh::setup_boundary_coordinates()",
+                            OOMPH_CURRENT_FUNCTION,
                             OOMPH_EXCEPTION_LOCATION);
        }
       
@@ -977,7 +977,7 @@ void TriangleMesh<ELEMENT>::setup_boundary_coordinates(const unsigned& b,
                << "\nPlease check your mesh carefully and increase the\n"
                << "threshold if you're sure this is appropriate\n";
               throw OomphLibError(error_stream.str(),
-                                  "TriangleMesh::setup_boundary_coordinates()",
+                                  OOMPH_CURRENT_FUNCTION,
                                   OOMPH_EXCEPTION_LOCATION);
              }
 #endif
@@ -1241,7 +1241,7 @@ void TriangleMesh<ELEMENT>::setup_boundary_coordinates(const unsigned& b,
     << "the number of segments is " << n_outer_segments
     << std::endl;
     throw OomphLibError(error_message.str(),
-      "TriangleMesh::build_triangulateio()",
+                        OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
    }
 
@@ -1255,7 +1255,7 @@ void TriangleMesh<ELEMENT>::setup_boundary_coordinates(const unsigned& b,
     << " and the number of segments is "
     << n_internal_closed_segments << std::endl;
     throw OomphLibError(error_message.str(),
-      "TriangleMesh::build_triangulateio()",
+                        OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -1794,7 +1794,7 @@ void TriangleMesh<ELEMENT>::setup_boundary_coordinates(const unsigned& b,
       << "list (holes) and TriangleMeshPolyLine (open curves)"
       <<std::endl;
     throw OomphLibError(error_stream.str(),
-      "TriangleMesh::build_triangulateio()",
+                        OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
    }
 
@@ -1896,7 +1896,7 @@ void TriangleMesh<ELEMENT>::setup_boundary_coordinates(const unsigned& b,
    if(!poly_file)
     {
      throw OomphLibError("Error opening .poly file\n",
-       "TriangleMesh<ELEMENT>::build_triangulateio()",
+                         OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -1928,7 +1928,7 @@ void TriangleMesh<ELEMENT>::setup_boundary_coordinates(const unsigned& b,
    if(mesh_dim!=2)
     {
      throw OomphLibError("The dimension must be 2\n",
-       "TriangleMesh<ELEMENT>::create_triangle_input_data()",
+                         OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -2031,7 +2031,7 @@ void TriangleMesh<ELEMENT>::setup_boundary_coordinates(const unsigned& b,
      <<"In order to assign each segment to a boundary \n "<< std::endl;
 
      throw OomphLibError(error_stream.str(),
-       "TriangleMesh<ELEMENT>::create_triangle_input_data",
+                         OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -2268,7 +2268,7 @@ void RefineableTriangleMesh<ELEMENT>::refine_triangulateio(
     << target_area.size() << ")\n";
     throw OomphLibError(
       err.str(),
-      "RefineableTriangleMesh::refine_triangulateio(",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -2782,7 +2782,7 @@ const Vector<double>& elem_error)
                 error_message
                 << "Point not found within bin structure\n";
                 throw OomphLibError(error_message.str(),
-                  "RefineableTriangleMesh::adapt()",
+                                    OOMPH_CURRENT_FUNCTION,
                   OOMPH_EXCEPTION_LOCATION);
                }
              }
@@ -3373,7 +3373,7 @@ update_polygon_using_face_mesh(TriangleMeshPolygon* polygon_pt,
                  << bound << ").\nThis should have failed when first trying to "
                  << "construct the\npolygon.\n";
                throw OomphLibError(error_stream.str(),
-                 "TriangleMesh::update_polygon_using_face_mesh()",
+                                   OOMPH_CURRENT_FUNCTION,
                  OOMPH_EXCEPTION_LOCATION);
 
               }
@@ -3412,7 +3412,7 @@ update_polygon_using_face_mesh(TriangleMeshPolygon* polygon_pt,
              << "This should have failed when first trying to construct the\n"
              << "polygon.\n";
            throw OomphLibError(error_stream.str(),
-             "TriangleMesh::update_polygon_using_face_mesh()",
+                               OOMPH_CURRENT_FUNCTION,
              OOMPH_EXCEPTION_LOCATION);
           }
 
@@ -3788,7 +3788,7 @@ bool RefineableTriangleMesh<ELEMENT>::update_open_curve_using_face_mesh(
                <<"This should have failed when first trying to construct\n"
                <<"the open curve.\n";
               throw OomphLibError(error_stream.str(),
-               "TriangleMesh::update_open_curve_using_face_mesh()",
+                                  OOMPH_CURRENT_FUNCTION,
                OOMPH_EXCEPTION_LOCATION);
              }
             else // We have to reverse both
@@ -4607,7 +4607,7 @@ restore_connections_on_internal_boundary(
         << "Initial vertex connection\n";
        throw OomphLibError(
         error_message.str(),
-        "RefineableTriangleMesh::restore_connections_on_internal_boundaries()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
 #endif
       }
@@ -4653,7 +4653,7 @@ restore_connections_on_internal_boundary(
       << "Final vertex connection\n";
      throw OomphLibError(
       error_message.str(),
-      "RefineableTriangleMesh::restore_connections_on_internal_boundaries()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
 #endif
     }
@@ -4835,7 +4835,7 @@ create_sorted_face_mesh_representation(
     << std::endl;
     throw OomphLibError(
       error_message.str(),
-      "RefineableTriangleMesh::create_sorted_face_mesh_representation()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
    }
 
@@ -5114,7 +5114,7 @@ get_face_mesh_representation(TriangleMeshPolygon* polygon_pt,
       << std::endl;
       throw OomphLibError(
         error_message.str(),
-        "RefineableTriangleMesh::get_face_mesh_representation()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
      }
 
@@ -5256,7 +5256,7 @@ get_face_mesh_representation(TriangleMeshPolygon* polygon_pt,
     << " polylines to be fitted in.\n";
     throw OomphLibError(
       error_message.str(),
-      "RefineableTriangleMesh::get_face_mesh_representation()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -5794,7 +5794,7 @@ void RefineableTriangleMesh<ELEMENT>::snap_nodes_onto_boundary(
      {
       throw OomphLibError(
         "New boundary coordinate not assigned\n",
-        "RefineableTriangleMesh::snap_nodes_onto_boundary()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
      }
 
@@ -5881,7 +5881,7 @@ void RefineableTriangleMesh<ELEMENT>::snap_nodes_onto_boundary(
        {
         throw OomphLibError(
           "Have a three-noded element that's not a TElement<2,2>",
-          "RefineableTriangleMesh::snap_nodes_onto_boundary()",
+          OOMPH_CURRENT_FUNCTION,
           OOMPH_EXCEPTION_LOCATION);
        }
       // If I get there I must not have thrown :)
@@ -5902,14 +5902,14 @@ void RefineableTriangleMesh<ELEMENT>::snap_nodes_onto_boundary(
          {
           throw OomphLibError(
             "Have a six-noded element that's not a TElement<2,3>",
-            "RefineableTriangleMesh::snap_nodes_onto_boundary()",
+            OOMPH_CURRENT_FUNCTION,
             OOMPH_EXCEPTION_LOCATION);
          }
         else
          {
           throw OomphLibError(
             "Have a seven-noded element that's not a TElement<2,3>",
-            "RefineableTriangleMesh::snap_nodes_onto_boundary()",
+            OOMPH_CURRENT_FUNCTION,
             OOMPH_EXCEPTION_LOCATION);
          }
        }
@@ -6014,7 +6014,7 @@ void RefineableTriangleMesh<ELEMENT>::snap_nodes_onto_boundary(
          {
           throw OomphLibError(
             "Have seven-noded element that's not a TBubbleEnrichedElement<2,3>",
-            "RefineableTriangleMesh::snap_nodes_onto_boundary()",
+            OOMPH_CURRENT_FUNCTION,
             OOMPH_EXCEPTION_LOCATION);
          }
 
@@ -6049,7 +6049,7 @@ void RefineableTriangleMesh<ELEMENT>::snap_nodes_onto_boundary(
       << "-noded element yet.\n"
       << "Please implement this yourself.\n";
       throw OomphLibError(error_stream.str(),
-        "RefineableTriangleMesh::snap_nodes_onto_boundary()",
+OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
      }
    }

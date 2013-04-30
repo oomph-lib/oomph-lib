@@ -64,7 +64,7 @@ void HSL_MA42::solve_for_one_dof(Problem* const &problem_pt,
   {
    throw OomphLibError(
     "You can only call this if the problem has just one dof!",
-    "HSL_MA42::solve_for_one_dof()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -518,7 +518,7 @@ void HSL_MA42::solve(Problem* const &problem_pt, DoubleVector &result)
      if (!W)
       {
        throw OomphLibError("Out of memory in allocation of w\n",
-                           "HSL_MA42::solve()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
     }
@@ -535,7 +535,7 @@ void HSL_MA42::solve(Problem* const &problem_pt, DoubleVector &result)
      if (!IW)
       {
        throw OomphLibError("Out of memory in allocation of iw\n",
-                           "HSL_MA42::solve()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
     }
@@ -822,7 +822,7 @@ void HSL_MA42::resolve(const DoubleVector &rhs, DoubleVector &result)
  if(W==0) 
   {
    throw OomphLibError("Resolve called without first solving",
-                       "HSL_MA42::resolve()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -835,7 +835,7 @@ void HSL_MA42::resolve(const DoubleVector &rhs, DoubleVector &result)
   {
    throw OomphLibError(
     "RHS does not have the same dimension as the linear system",
-    "HSL_MA42::resolve()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 #endif

@@ -83,7 +83,8 @@ namespace BrokenCopy
     "constant reference. If you really need a copy constructor\n";
    error_message += "for this class, write it yourself...\n";
 
-   throw OomphLibError(error_message,"broken_copy()",
+   throw OomphLibError(error_message,
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 }
@@ -343,7 +344,7 @@ void black_box_fd_newton_solve(ResidualFctPt residual_fct,
              << Max_iter << " steps " << std::endl;
 
  throw OomphLibError(error_stream.str(),
-                     "black_box_fd_newton_solve()",
+                     OOMPH_CURRENT_FUNCTION,
                      OOMPH_EXCEPTION_LOCATION);
 }
 
@@ -397,7 +398,7 @@ void black_box_fd_newton_solve(ResidualFctPt residual_fct,
     std::ostringstream error_stream;
     error_stream << "Roundoff problem in lnsrch: slope=" << slope << "\n";
     throw OomphLibError(error_stream.str(),
-                        "BlackBoxFDNewtonSolver::line_search()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
   double test=0.0;
@@ -521,7 +522,8 @@ void DocInfo::set_directory(const std::string& directory_)
    else
     {
      error_message += "and the Directory_must_exist flag is true.\n";
-     throw OomphLibError(error_message,"set_directory()",
+     throw OomphLibError(error_message,
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }
@@ -774,7 +776,7 @@ namespace CommandLineArgs
                  << "command line arguments above.\n";
     throw OomphLibError(
      error_stream.str(),
-     "check_arg_index()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
  }
@@ -1067,7 +1069,7 @@ OomphCommunicator* MPI_Helpers::communicator_pt()
    error_message_stream
     << "MPI has not been initialised.\n Call MPI_Helpers::init(...)";
    throw OomphLibError(error_message_stream.str(),
-                       "MPI_Helpers::communicator_pt()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -1091,6 +1093,7 @@ OomphCommunicator* MPI_Helpers::communicator_pt()
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
+
  return Communicator_pt;
 
 #endif // end ifdef MPI
@@ -1140,7 +1143,8 @@ namespace ObsoleteCode
      }
     if (junk=="k")
      {
-      throw OomphLibError("Killed","ObsoleteCode::obsolete()",
+      throw OomphLibError("Killed",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
    }

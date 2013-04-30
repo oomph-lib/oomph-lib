@@ -637,7 +637,7 @@ int main(int argc, char *argv[])
   {
    throw OomphLibError(
     "Code needs one argument to specify which solver to use",
-    "main()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -797,7 +797,7 @@ int main(int argc, char *argv[])
 
      throw OomphLibError(
       "Invalid command line argument: solver flag: ",
-      "main()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
      break;
    

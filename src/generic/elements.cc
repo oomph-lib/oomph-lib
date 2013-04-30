@@ -762,7 +762,7 @@ DenseMatrix<double> GeneralisedElement::Dummy_matrix;
 
 
     throw OomphLibError(error_stream.str(),
-                        "GeneralisedElement::assign_local_eqn_numbers()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -1453,7 +1453,7 @@ namespace Locate_zeta_helpers
                     << "You can change this treshold, by specifying "
                     << "FiniteElement::Tolerance_for_singular_jacobian \n";
       throw OomphLibError(error_message.str(),
-                          "FiniteElement::check_jacobian()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
    }
@@ -1531,7 +1531,7 @@ namespace Locate_zeta_helpers
                    << std::endl << std::endl;
       
       throw OomphLibError(error_stream.str(),
-                          "FiniteElement::check_jacobian()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
    }
@@ -1567,7 +1567,7 @@ assemble_local_to_eulerian_jacobian(const DShape &dpsids,
                  << " for the jacobian of the mapping to be well-defined"
                  << std::endl;
    throw OomphLibError(error_message.str(),
-                       "FiniteElement::assemble_local_to_eulerian_jacobian()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -1828,7 +1828,7 @@ assemble_local_to_eulerian_jacobian(const DShape &dpsids,
      << std::endl;
   
     throw OomphLibError(error_stream.str(),
-                        "FiniteElement::invert_jacobian_mapping(..)",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
   //Dummy return for Intel compiler
@@ -2220,7 +2220,7 @@ bool FiniteElement::Suppress_output_while_checking_for_inverted_elements=false;
                  << " for the jacobian of the mapping to be well-defined"
                  << std::endl;
    throw OomphLibError(error_message.str(),
-                       "FiniteElement::local_to_eulerian_jacobian_diagonal()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -2289,7 +2289,7 @@ void FiniteElement::dJ_eulerian_dnodal_coordinates(
    error_message << "djacobian_dX must have the same number of rows as the"
                  << "\nspatial dimension of the element.";
    throw OomphLibError(error_message.str(),
-                       "FiniteElement::dJ_eulerian_dnodal_coordinates()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
  // Check that djacobian_dX has the correct number of columns (= n_node)
@@ -2299,7 +2299,7 @@ void FiniteElement::dJ_eulerian_dnodal_coordinates(
    error_message << "djacobian_dX must have the same number of columns as the"
                  << "\nnumber of nodes in the element.";
    throw OomphLibError(error_message.str(),
-                       "FiniteElement::dJ_eulerian_dnodal_coordinates()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -2332,7 +2332,7 @@ void FiniteElement::dJ_eulerian_dnodal_coordinates(
     << std::endl;
    
    throw OomphLibError(error_stream.str(),
-                       "FiniteElement::dJ_eulerian_dnodal_coordinates(..)",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 }
@@ -2380,7 +2380,7 @@ void FiniteElement::d_dshape_eulerian_dnodal_coordinates(
    error_message << "d_dpsidx_dX must be of the following dimensions:"
                  << "\nd_dpsidx_dX(el_dim,n_node,n_node,el_dim)";
    throw OomphLibError(error_message.str(),
-                       "FiniteElement::d_dshape_eulerian_dnodal_coordinates(...)",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -2413,7 +2413,7 @@ void FiniteElement::d_dshape_eulerian_dnodal_coordinates(
     << std::endl;
    
    throw OomphLibError(error_stream.str(),
-                       "FiniteElement::d_dshape_eulerian_dnodal_coordinates(...)",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 }
@@ -2746,7 +2746,7 @@ void FiniteElement::d_dshape_eulerian_dnodal_coordinates(
          
    case 3:
     throw OomphLibError("Not implemented yet ... maybe one day",
-                        "FiniteElement::transform_second_derivative()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
 
     //transform_second_derivatives_template<3>(dphids,d2phids,jacobian,
@@ -2761,7 +2761,7 @@ void FiniteElement::d_dshape_eulerian_dnodal_coordinates(
      << std::endl;
 
     throw OomphLibError(error_stream.str(),
-                        "FiniteElement::transform_second_derivatives(..)",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
  }
@@ -3421,7 +3421,7 @@ void FiniteElement::get_dresidual_dnodal_coordinates(
                    << "That seems very odd." << std::endl;
       
       throw OomphLibError(error_stream.str(),
-                          "FiniteElement::get_node_number()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
    }
@@ -3661,7 +3661,7 @@ void FiniteElement::get_dresidual_dnodal_coordinates(
    {
    case 0:
     throw OomphLibError("Cannot calculate J_eulerian() for point element\n",
-                        "FiniteElement::J_eulerian()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
     break;
    case 1:
@@ -3734,7 +3734,7 @@ void FiniteElement::get_dresidual_dnodal_coordinates(
    {
    case 0:
     throw OomphLibError("Cannot calculate J_eulerian() for point element\n",
-                        "FiniteElement::J_eulerian_at_knot()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
     break;
    case 1:
@@ -3984,7 +3984,7 @@ void FiniteElement::get_dresidual_dnodal_coordinates(
          default:
 
           throw OomphLibError("Never get here",
-                              "FiniteElement::self_test()",
+                              OOMPH_CURRENT_FUNCTION,
                               OOMPH_EXCEPTION_LOCATION);
          }
 
@@ -4249,7 +4249,7 @@ void FiniteElement::locate_zeta(const Vector<double> &zeta,
            std::ostringstream error_stream;
            error_stream << "Element dimension is not equal to 1, 2 or 3 - ?\n";
            throw OomphLibError(error_stream.str(),
-                               "FiniteElement::locate_zeta()",
+                               OOMPH_CURRENT_FUNCTION,
                                OOMPH_EXCEPTION_LOCATION);
           }
         }
@@ -4402,7 +4402,7 @@ void FiniteElement::locate_zeta(const Vector<double> &zeta,
 //                         << "which does not take hangingness into account\n"
 //                         << "It will work if n_position_type=1\n";
 //            throw OomphLibError(error_stream.str(),
-//                                "FiniteElement::locate_zeta()",
+//         OOMPH_CURRENT_FUNCTION,
 //                                OOMPH_EXCEPTION_LOCATION);
 //           }
 // #endif
@@ -4761,7 +4761,7 @@ void FiniteElement::identify_field_data_for_interactions(
      << "but element dimension is " << element_dim << std::endl;
    
     throw OomphLibError(error_stream.str(),
-                        "FaceElement::outer_unit_normal()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
  
@@ -4775,7 +4775,7 @@ void FiniteElement::identify_field_data_for_interactions(
      << "but spatial dimension is " << spatial_dim << std::endl;
    
     throw OomphLibError(error_stream.str(),
-                        "FaceElement::outer_unit_normal()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif   
@@ -4999,7 +4999,7 @@ void FiniteElement::identify_field_data_for_interactions(
                    << "coordinates at the nodes of this 2D FaceElement,\n"
                    << "which must have come from a 3D Bulk element\n";
       throw OomphLibError(error_stream.str(),
-                          "FaceElement::outer_unit_normal()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
 #endif
@@ -5059,7 +5059,7 @@ void FiniteElement::identify_field_data_for_interactions(
 
     throw OomphLibError(
      "Cannot have a FaceElement with dimension higher than 2",
-     "FaceElement::outer_unit_normal()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
     break;
    }
@@ -5111,7 +5111,7 @@ Vector<double> FaceElement::local_coordinate_in_bulk(
   else
    {
     throw OomphLibError("Face_to_bulk_coordinate mapping not set",
-                        "FaceElement::local_coordinate_in_bulk()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
   
@@ -5138,7 +5138,7 @@ void FaceElement::get_local_coordinate_in_bulk(
   else
    {
         throw OomphLibError("Face_to_bulk_coordinate mapping not set",
-                        "FaceElement::local_coordinate_in_bulk()",
+                            OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
  }
@@ -5165,7 +5165,7 @@ void FaceElement::get_local_coordinate_in_bulk(
    {
     throw OomphLibError(
      "No function for derivatives of bulk coords wrt face coords set",
-     "FaceElement::get_ds_bulk_ds_face()",
+     OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
    }
  }
@@ -5207,7 +5207,7 @@ void FaceElement::get_local_coordinate_in_bulk(
                  << " for the jacobian of the mapping to be well-defined"
                  << std::endl;
    throw OomphLibError(error_message.str(),
-    "SolidFiniteElement::assemble_local_to_lagrangian_jacobian()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -5845,7 +5845,7 @@ fill_in_jacobian_for_newmark_accel(DenseMatrix<double> &jacobian)
    error_stream << "Solid_ic_pt: " << Solid_ic_pt << std::endl;
 
    throw OomphLibError(error_stream.str(),
-                       "SolidFinitElement::fill_in_jacobian_for_newmark_accel()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -5890,7 +5890,7 @@ fill_in_jacobian_for_newmark_accel(DenseMatrix<double> &jacobian)
     << timestepper_pt->type() << std::endl;
 
    throw OomphLibError(error_stream.str(),
-                       "SolidFinitElement::fill_in_jacobian_for_newmark_accel()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif

@@ -265,7 +265,7 @@ public:
   {
    throw OomphLibError(
     "3-dimensional PRefineableQElements are not fully implemented yet!\n",
-    "PRefineableQElement<3,INITIAL_NNODE_1D>::PRefineableQElement()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
  

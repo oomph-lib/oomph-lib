@@ -150,7 +150,7 @@ class GeneralisedElement
                    << " is not in the range (0,"
                    << Ninternal_data-1 << ")";
      throw OomphLibError(error_message.str(),
-                         "GeneralisedElement::internal_data_fd()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -171,7 +171,7 @@ class GeneralisedElement
                    << " is not in the range (0,"
                    << Ninternal_data-1 << ")";
      throw OomphLibError(error_message.str(),
-                         "GeneralisedElement::exclude_internal_data_fd()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -191,7 +191,7 @@ class GeneralisedElement
                    << " is not in the range (0,"
                    << Ninternal_data-1 << ")";
      throw OomphLibError(error_message.str(),
-                         "GeneralisedElement::include_internal_data_fd()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -253,7 +253,7 @@ class GeneralisedElement
                    << " is not in the range (0,"
                    << Ninternal_data-1 << ")";
      throw OomphLibError(error_message.str(),
-                         "GeneralisedElement::internal_local_eqn()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    else
@@ -267,7 +267,7 @@ class GeneralisedElement
                      << " is not in the range (0,"
                      << n_value -1 << ")";
        throw OomphLibError(error_message.str(),
-                           "GeneralisedElement::internal_local_eqn()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
     }
@@ -278,7 +278,7 @@ class GeneralisedElement
     {
      throw OomphLibError(
       "Internal local equation numbers have not been allocated",
-      "Data::internal_local_eqn()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -299,7 +299,7 @@ class GeneralisedElement
                    << " is not in the range (0,"
                    << Nexternal_data-1 << ")";
      throw OomphLibError(error_message.str(),
-                         "GeneralisedElement::external_local_eqn()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    else
@@ -313,7 +313,7 @@ class GeneralisedElement
                      << " is not in the range (0,"
                      << n_value -1 << ")";
        throw OomphLibError(error_message.str(),
-                           "GeneralisedElement::external_local_eqn()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
     }
@@ -323,7 +323,7 @@ class GeneralisedElement
     {
      throw OomphLibError(
       "External local equation numbers have not been allocated",
-      "Data::external_local_eqn()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -358,7 +358,7 @@ class GeneralisedElement
     "N.B. the default get_jacobian() function employs finite differencing\n";
    
     throw OomphLibError(error_message,
-                        "GeneralisedElement::fill_in_contribution_to_residuals()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
   }
  
@@ -595,7 +595,7 @@ public:
                    << " is not in the range (0,"
                    << Ninternal_data - 1 << ")";
      throw OomphLibError(error_message.str(),
-                         "GeneralisedElement::internal_data_pt()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
      
     }
@@ -614,7 +614,7 @@ public:
                    << " is not in the range (0,"
                    << Ninternal_data - 1 << ")";
      throw OomphLibError(error_message.str(),
-                         "GeneralisedElement::internal_data_pt()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
      
     }
@@ -634,7 +634,7 @@ public:
                    << " is not in the range (0,"
                    << Nexternal_data - 1 << ")";
      throw OomphLibError(error_message.str(),
-                         "GeneralisedElement::external_data_pt()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
      
     }
@@ -653,7 +653,7 @@ public:
                    << " is not in the range (0,"
                    << Nexternal_data - 1 << ")";
      throw OomphLibError(error_message.str(),
-                         "GeneralisedElement::external_data_pt()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
      
     }
@@ -681,7 +681,7 @@ public:
                    << " is not in the range (0,"
                    << Ndof - 1 << ")";
      throw OomphLibError(error_message.str(),
-                         "GeneralisedElement::eqn_number()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif 
@@ -731,7 +731,7 @@ public:
                    << " is not in the range (0,"
                    << Nexternal_data-1 << ")";
      throw OomphLibError(error_message.str(),
-                         "GeneralisedElement::external_data_fd()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -753,7 +753,7 @@ public:
                    << " is not in the range (0,"
                    << Nexternal_data - 1 << ")";
      throw OomphLibError(error_message.str(),
-                         "GeneralisedElement::exclude_external_data_fd()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
      
     }
@@ -774,7 +774,7 @@ public:
                    << " is not in the range (0,"
                    << Nexternal_data - 1 << ")";
      throw OomphLibError(error_message.str(),
-                         "GeneralisedElement::include_external_data_fd()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
      
     }
@@ -977,7 +977,7 @@ public:
   {
    std::string error_message = "compute_norm undefined for this element \n";
    throw OomphLibError(error_message,
-                       "GeneralisedElement::compute_norm()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
 
   }
@@ -1030,7 +1030,7 @@ public:
                  << "element\n" << std::endl;
    // throw error
    throw OomphLibError(error_message.str(),
-                       "GeneralisedElement::ndof_types())",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -1050,7 +1050,7 @@ public:
                  << " implemented for this element\n" << std::endl;
    // throw error
    throw OomphLibError(error_message.str(),
-                       "GeneralisedElement::get_block_numbers_for_unknowns())",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -1232,7 +1232,7 @@ class FiniteElement : public virtual GeneralisedElement, public GeomObject
                    << " is not in the range (0,"
                    << Nnode-1 << ")";
      throw OomphLibError(error_message.str(),
-                         "FiniteElement::nodal_local_eqn()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    else
@@ -1245,7 +1245,7 @@ class FiniteElement : public virtual GeneralisedElement, public GeomObject
                      << " is not in the range (0,"
                      << n_value -1 << ")";
        throw OomphLibError(error_message.str(),
-                           "FiniteElement::nodal_local_eqn()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
     }
@@ -1256,7 +1256,7 @@ class FiniteElement : public virtual GeneralisedElement, public GeomObject
     {
      throw OomphLibError(
       "Nodal local equation numbers have not been allocated",
-      "FiniteElement::nodal_local_eqn()",
+      OOMPH_CURRENT_FUNCTION,
       OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -1610,7 +1610,7 @@ public:
   {
    throw OomphLibError(
     "local_coord_is_valid is not implemented for this element\n",
-    "FiniteElement::local_coord_is_valid()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
    return true;
   }
@@ -1623,7 +1623,7 @@ public:
   {
    throw OomphLibError(
     "local_coord_is_valid is not implemented for this element\n",
-    "FiniteElement::local_coord_is_valid()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
    return true;
   }
@@ -1634,7 +1634,7 @@ public:
   {
    throw OomphLibError(
     "local_coordinate_of_node(...) is not implemented for this element\n",
-    "FiniteElement::local_coordinate_of_node()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -1654,7 +1654,7 @@ public:
     "It only makes sense for elements that use tensor-product expansions\n";
    
    throw OomphLibError(error_message,
-                       "FiniteElement::local_one_d_fraction_of_node()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -1711,7 +1711,7 @@ public:
   {
    throw OomphLibError(
     "get_x_from_macro_element(...) is not implemented for this element\n",
-    "FiniteElement::get_x_from_macro_element()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
  
@@ -1726,7 +1726,7 @@ public:
   {
    throw OomphLibError(
     "get_x_from_macro_element(...) is not implemented for this element\n",
-    "FiniteElement::get_x_from_macro_element()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -1754,7 +1754,7 @@ public:
   {
    throw OomphLibError(
     "dshape_local() is not implemented for this element\n",
-    "FiniteElement::dshape_local()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -1789,7 +1789,7 @@ public:
   {
    throw OomphLibError(
     "d2shape_local() is not implemented for this element\n",
-    "FiniteElement::d2shape_local()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -1913,7 +1913,7 @@ public:
                    << " is not in the range (0,"
                    << Nnode-1 << ")";
      throw OomphLibError(error_message.str(),
-                         "FiniteElement::node_pt()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -1931,7 +1931,7 @@ public:
                    << " is not in the range (0,"
                    << Nnode-1 << ")";
      throw OomphLibError(error_message.str(),
-                         "FiniteElement::node_pt()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -2385,7 +2385,7 @@ public:
   {
    throw OomphLibError(
     "s_min() isn't implemented for this element\n",
-    "FiniteElement::s_min()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
    // Dummy return
    return 0.0;
@@ -2396,7 +2396,7 @@ public:
   {
     throw OomphLibError(
     "s_max() isn't implemented for this element\n",
-    "FiniteElement::s_max()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
     // Dummy return
    return 0.0;
@@ -2486,7 +2486,7 @@ public:
   {
    throw OomphLibError(
     "get_s_plot(...) is not implemented for this element\n",
-    "FiniteElement::get_s_plot()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   };
  
@@ -2496,7 +2496,7 @@ public:
   {
    throw OomphLibError(
     "tecplot_zone_string(...) is not implemented for this element\n",
-    "FiniteElement::tecplot_zone_string()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
    return "dummy return";
   }
@@ -2521,7 +2521,7 @@ public:
   {
    throw OomphLibError(
     "nplot_points(...) is not implemented for this element",
-    "FiniteElement::nplot_points()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
    // Dummy return
    return 0;
@@ -2541,7 +2541,7 @@ public:
    outfile << error_message;
 
    throw OomphLibError(error_message,
-                       "FiniteElement::compute_error()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
 
   }
@@ -2558,7 +2558,7 @@ public:
    outfile << error_message;
 
    throw OomphLibError(error_message,
-                       "FiniteElement::compute_error()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -2575,7 +2575,7 @@ public:
    outfile << error_message;
    
    throw OomphLibError(error_message,
-                       "FiniteElement::compute_abs_error()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -2601,7 +2601,7 @@ public:
   {
    throw OomphLibError(
     "build_face_element() undefined for this element type",
-    "FiniteElement::build_face_element()\n",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -2865,7 +2865,7 @@ public:
   {
    throw OomphLibError(
     "get_x_and_xi(...) is not implemented for this element\n",
-    "SolidFiniteElement::get_x_and_xi()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -3105,7 +3105,7 @@ public:
   {
    // Must be implemented and overloaded in FaceElements
    throw OomphLibError("Function not implemented yet",
-                       "SolidFiniteElement::J_lagrangian()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
  
@@ -3115,7 +3115,7 @@ public:
   {
    // Must be implemented and overloaded in FaceElements
    throw OomphLibError("Function not implemented yet",
-                       "SolidFiniteElement::J_lagrangian_at_knot()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
  
@@ -3338,7 +3338,7 @@ public:
     {
      //Throw the error
      throw OomphLibError(error_message.str(),
-                         "SolidFiniteElement::position_local_eqn()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif

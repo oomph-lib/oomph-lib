@@ -54,7 +54,7 @@ namespace oomph
      if(bound2 == -1) 
       {
        throw OomphLibError("Error setting the shared boundary conditions",
-                           "MeshHelper::merge_spine_meshes()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
      
@@ -72,7 +72,7 @@ namespace oomph
         <<addmesh_pt->nboundary_node(bound2)<<" nodes."<<std::endl;
        
     throw OomphLibError(error_stream.str(),
-                        "MeshHelper::merge_spine_meshes()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
       }
 #endif
@@ -122,7 +122,7 @@ namespace oomph
        <<addmesh_pt->boundary_node_pt(bound2,i)->x(2)<<"\n";
 
       throw OomphLibError(error_stream.str(),
-                          "MeshHelper::merge_spine_meshes()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
      else
@@ -139,7 +139,7 @@ namespace oomph
         {
          throw OomphLibError(
           "There are nodes on the shared boundary of the added mesh which are not Spine Nodes\n",
-          "MeshHelper::merge_spine_meshes()",
+          OOMPH_CURRENT_FUNCTION,
           OOMPH_EXCEPTION_LOCATION);
          }
       
@@ -147,7 +147,7 @@ namespace oomph
          {
           throw OomphLibError(
            "There are nodes on the shared boundary of the original mesh which are not Spine Nodes\n",
-           "MeshHelper::merge_spine_meshes()",
+           OOMPH_CURRENT_FUNCTION,
            OOMPH_EXCEPTION_LOCATION);
          } //mesh3_pt
 #endif
@@ -169,7 +169,7 @@ namespace oomph
               {
                throw OomphLibError(
                 "The spines map could not be performed because the shared spines are pointing to different nodes\n",
-                "MeshHelper::merge_spine_meshes()",
+                OOMPH_CURRENT_FUNCTION,
                 OOMPH_EXCEPTION_LOCATION);
               }
 #endif
@@ -267,7 +267,7 @@ namespace oomph
      <<"(This control should be removed in case we do not want to copy all the nodes of the shared boundaries)\n";
 
     throw OomphLibError(error_stream.str(),
-                        "MeshHelper::merge_spine_meshes()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);                        
    }
 

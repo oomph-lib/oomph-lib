@@ -259,7 +259,7 @@ Vector<int> OcTree::vertex_node_to_vector(const unsigned& n,
                 << nnode1d << " nodes along each edge!";
    
    throw OomphLibError(error_stream.str(),
-                       "OcTree::vertex_node_to_vector()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -299,7 +299,7 @@ unsigned OcTree::vertex_to_node_number(const int& vertex,
      error_stream << "Wrong vertex: " << Direct_string[vertex] 
                   << std::endl;
      throw OomphLibError(error_stream.str(),
-                         "OcTree::vertex_to_node_number()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -348,7 +348,7 @@ unsigned OcTree::vertex_to_node_number(const int& vertex,
    error_stream << "Never get here. vertex: " << Direct_string[vertex] 
                 << std::endl;
    throw OomphLibError(error_stream.str(),
-                       "OcTree::vertex_to_node_number()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
    break;
   }
@@ -359,7 +359,7 @@ unsigned OcTree::vertex_to_node_number(const int& vertex,
  error_stream << "Never get here. vertex: " << Direct_string[vertex] 
               << std::endl;
  throw OomphLibError(error_stream.str(),
-                     "OcTree::vertex_to_node_number()",
+                     OOMPH_CURRENT_FUNCTION,
                      OOMPH_EXCEPTION_LOCATION);
 
 
@@ -391,7 +391,7 @@ unsigned OcTree::vertex_to_node_number(const int& vertex,
                 << nnode1d << " nodes along each edge!";
    
    throw OomphLibError(error_stream.str(),
-                       "OcTree::node_number_to_vertex()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -412,7 +412,7 @@ unsigned OcTree::vertex_to_node_number(const int& vertex,
                 << nnode1d << " nodes along each edge!"
                 << std::endl;
    throw OomphLibError(error_stream.str(),
-                       "OcTree::node_number_to_vertex",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 } 
@@ -455,7 +455,7 @@ int OcTree::get_the_other_face(const unsigned& n1,
       (vect_other_face[i]!=0))
     {
      throw OomphLibError("The nodes given are not vertices",
-                         "OcTree::get_the_other_face()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -484,7 +484,7 @@ void OcTree::construct_rotation_matrix(int& axis, int& angle,
     case F : a=0; b=1; c=2; break;
     default : 
      throw OomphLibError("Bad Axis",
-                         "OcTree::construct_rotation_matrix()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
   for(i=0;i<3;i++)
@@ -566,7 +566,7 @@ int OcTree::rotate(const int& new_up, const int& new_right,
      error_stream << "Wrong new_up: " << Direct_string[new_up] 
                   << std::endl;
      throw OomphLibError(error_stream.str(),
-                         "OcTree::rotate()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
     if ((new_right!=L)&&(new_right!=R)&&
@@ -577,7 +577,7 @@ int OcTree::rotate(const int& new_up, const int& new_right,
      error_stream << "Wrong new_right: " << Direct_string[new_right] 
                   << std::endl;
      throw OomphLibError(error_stream.str(),
-                         "OcTree::rotate()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -613,7 +613,7 @@ Vector<int> OcTree::rotate(const int& new_up,const int& new_right,
      error_stream << "Wrong new_up: " << Direct_string[new_up] 
                   << std::endl;
      throw OomphLibError(error_stream.str(),
-                         "OcTree::rotate()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
     if ((new_right!=L)&&(new_right!=R)&&
@@ -624,7 +624,7 @@ Vector<int> OcTree::rotate(const int& new_up,const int& new_right,
      error_stream << "Wrong new_right: " << Direct_string[new_right] 
                   << std::endl;
      throw OomphLibError(error_stream.str(),
-                         "OcTree::rotate()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -655,7 +655,7 @@ Vector<int> OcTree::rotate(const int& new_up,const int& new_right,
                       << ") "
                       << "it should be R, B, L, or F" << std::endl;
          throw OomphLibError(error_stream.str(),
-                             "OcTree::rotate()",
+                             OOMPH_CURRENT_FUNCTION,
                              OOMPH_EXCEPTION_LOCATION);
 	}
     }
@@ -687,7 +687,7 @@ Vector<int> OcTree::rotate(const int& new_up,const int& new_right,
                       << ") "
                       << "it should be R, B, L, or F" << std::endl;
          throw OomphLibError(error_stream.str(),
-                             "OcTree::rotate()",
+                             OOMPH_CURRENT_FUNCTION,
                              OOMPH_EXCEPTION_LOCATION);
          
 	}
@@ -720,7 +720,7 @@ Vector<int> OcTree::rotate(const int& new_up,const int& new_right,
                       << ") "
                       << "it should be D, B, U, or F" << std::endl;
          throw OomphLibError(error_stream.str(),
-                             "OcTree::rotate()",
+                             OOMPH_CURRENT_FUNCTION,
                              OOMPH_EXCEPTION_LOCATION); 
 	}
     }
@@ -752,7 +752,7 @@ Vector<int> OcTree::rotate(const int& new_up,const int& new_right,
                       << ") "
                       << "it should be D, B, U, or F" << std::endl;
          throw OomphLibError(error_stream.str(),
-                             "OcTree::rotate()",
+                             OOMPH_CURRENT_FUNCTION,
                              OOMPH_EXCEPTION_LOCATION); 
         }
     }
@@ -784,7 +784,7 @@ Vector<int> OcTree::rotate(const int& new_up,const int& new_right,
                         << ") "
                         << "it should be R, L, U, or D" << std::endl;
            throw OomphLibError(error_stream.str(),
-                             "OcTree::rotate()",
+                               OOMPH_CURRENT_FUNCTION,
                              OOMPH_EXCEPTION_LOCATION); 
 	  }
       }
@@ -815,7 +815,7 @@ Vector<int> OcTree::rotate(const int& new_up,const int& new_right,
                       << ") "
                       << "it should be R, L, U, or D" << std::endl;
          throw OomphLibError(error_stream.str(),
-                             "OcTree::rotate()",
+                             OOMPH_CURRENT_FUNCTION,
                              OOMPH_EXCEPTION_LOCATION); 
 	}
     }
@@ -875,7 +875,7 @@ void OcTree::setup_static_data()
                                << "\nOcTree::OMEGA=" << OcTree::OMEGA 
     << std::endl;
    throw OomphLibError(error_stream.str(),
-                       "OcTree::setup_static_data()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -3104,7 +3104,7 @@ bool OcTree::edge_neighbour_is_face_neighbour(const int& edge,
    error_stream << "Never get here! Edge:" << Direct_string[edge]
                 << " " << edge << std::endl;
    throw OomphLibError(error_stream.str(),
-                       "OcTree::edge_neighbour_is_face_neighbour",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
 
 
@@ -3182,7 +3182,7 @@ OcTree* OcTree::gteq_face_neighbour(const int& direction,
      error_stream << "Wrong direction: " << Direct_string[direction] 
                   << std::endl;
      throw OomphLibError(error_stream.str(),
-                         "OcTree::gteq_face_neighbour()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -3436,7 +3436,7 @@ OcTree* OcTree::gteq_true_edge_neighbour(const int& direction,
      error_stream << "Wrong direction: " << Direct_string[direction] 
                   << std::endl;
      throw OomphLibError(error_stream.str(),
-                         "OcTree::gteq_true_edge_neighbour()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -3663,7 +3663,7 @@ using namespace OcTreeNames;
      error_stream << "Wrong direction: " << Direct_string[direction] 
                   << std::endl;
      throw OomphLibError(error_stream.str(),
-                         "OcTree::gteq_face_neighbour()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -3851,7 +3851,7 @@ using namespace OcTreeNames;
    error_stream << "Wrong direction: " << Direct_string[direction] 
                 << std::endl;
    throw OomphLibError(error_stream.str(),
-                       "OcTree::gteq_edge_neighbour()",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -4705,7 +4705,7 @@ void OcTreeForest::find_neighbours()
   {
    throw OomphLibError(
     "Trying to setup the neighbour scheme for an empty forest",
-    "OcTreeForest::find_neighbours()",
+    OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -5102,7 +5102,7 @@ void OcTreeForest::construct_up_right_equivalents()
         << std::endl;
 
        throw OomphLibError(error_stream.str(),
-                           "OcTreeForest::construct_up_right_equivalents()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
     }
@@ -5158,7 +5158,7 @@ void OcTreeForest::construct_up_right_equivalents()
         << std::endl;
 
        throw OomphLibError(error_stream.str(),
-                           "OcTreeForest::construct_up_right_equivalents()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
     }
@@ -5212,7 +5212,7 @@ void OcTreeForest::construct_up_right_equivalents()
         << std::endl;
 
        throw OomphLibError(error_stream.str(),
-                           "OcTreeForest::construct_up_right_equivalents()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
     }
@@ -5268,7 +5268,7 @@ void OcTreeForest::construct_up_right_equivalents()
         << std::endl;
 
        throw OomphLibError(error_stream.str(),
-                           "OcTreeForest::construct_up_right_equivalents()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
     }
@@ -5334,7 +5334,7 @@ void OcTreeForest::construct_up_right_equivalents()
         << std::endl;
 
        throw OomphLibError(error_stream.str(),
-                           "OcTreeForest::construct_up_right_equivalents()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
     }
@@ -5400,7 +5400,7 @@ void OcTreeForest::construct_up_right_equivalents()
         << std::endl;
 
        throw OomphLibError(error_stream.str(),
-                           "OcTreeForest::construct_up_right_equivalents()",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
     }
@@ -5597,7 +5597,7 @@ void OcTreeForest::check_all_neighbours(DocInfo &doc_info)
      }
     
     throw OomphLibError(error_stream.str(),
-                        "OcTreeForest::check_all_neighbours",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
   else
@@ -5663,7 +5663,7 @@ void OcTreeForest::check_all_neighbours(DocInfo &doc_info)
      }
 
     throw OomphLibError(error_stream.str(),
-                        "OcTreeForest::check_all_neighbours",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
   else

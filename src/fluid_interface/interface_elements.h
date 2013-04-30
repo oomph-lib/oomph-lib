@@ -198,7 +198,7 @@ namespace oomph
       error_message += 
        "Please use FluidInterfaceBoundingElement::set_contact_angle()\n";
       throw OomphLibError(error_message,
-                          "FluidInterfaceBoundingElement::contact_angle()",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
 #endif
@@ -624,7 +624,7 @@ class FluidInterfaceElement : public virtual FaceElement
   if (External_data_number_of_external_pressure<0)
    {
     throw OomphLibError("No external pressure has been set\n",
-                        "FluidInterfaceElement:: pext_local_eqn()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -765,7 +765,7 @@ public:
       << external_pressure_data_pt->nvalue() << std::endl;
 
      throw OomphLibError(error_message.str(),
-                         "FluidInterfaceElement::set_external_pressure_data()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -809,7 +809,7 @@ public:
       << "You have declared value " << index_of_external_pressure_value
       << " to be the value representing the pressure\n" << std::endl;
      throw OomphLibError(error_message.str(),
-                         "FluidInterfaceElement::set_external_pressure_data()",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -833,7 +833,7 @@ public:
   const int &face_index)
  {
   throw OomphLibError("Virtual function not yet implemented",
-                      "FluidInterfaceElement::make_bounding_element()",
+                      OOMPH_CURRENT_FUNCTION,
                       OOMPH_EXCEPTION_LOCATION);
   return 0;
   }
