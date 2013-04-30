@@ -4,7 +4,7 @@
 # Licensed under the GNU LGPL Version 2.1
 #
 # Script for converting from oomph-lib tecplot format to VTK XML
-# 
+#
 # Report bugs to a.simone@tudelft.nl
 #
 # The script can convert
@@ -34,6 +34,8 @@
 #           - Added point-only extraction (if there are zones that cannot
 #             be handled or an invalid file)
 #
+# 20130419: David Shepherd
+#           - Send errors to stderr not stdout.
 ###############################################################################
 
 import getopt
@@ -94,9 +96,9 @@ def main(argv):
     print "* oomph-convert.py, ver. 20110615"
 
     # Check python version. Bark at user if < 2.3 or if major is > 2
-    if sys.version_info<(2,3): 
-        print >>sys.stderr, "You need at least Python 2.3 " 
-        sys.exit(3) 
+    if sys.version_info<(2,3):
+        print >>sys.stderr, "You need at least Python 2.3 "
+        sys.exit(3)
 
     major = sys.version_info[0]
     if major > 2:
@@ -109,7 +111,7 @@ def main(argv):
     except getopt.GetoptError:
         usage()
         sys.exit(2)
-        
+
     # Get options
     flag = 0
     flag2 = 0
@@ -122,10 +124,10 @@ def main(argv):
         if opt in ("-p"):
             flag2 = 1
             argdim = arg
-            if argdim not in ("2","3"):    
+            if argdim not in ("2","3"):
                 usage()
-                sys.exit() 
-        
+                sys.exit()
+
     if len(args) == 1:
         # Get filename and suffix
         ifilename = args[0]
@@ -137,14 +139,14 @@ def main(argv):
             ofilename = ifilename[:lenBaseName]+".vtu"
         else:
             ofilename = ifilename[:lenBaseName]+".vtp"
-        osuffix = ofilename.split(".")[-1]      
+        osuffix = ofilename.split(".")[-1]
     elif len(args) == 2:
         # Get filenames and suffixes
         ifilename = args[0]
         ofilename = args[1]
         isuffix = ifilename.split(".")[-1]
         osuffix = ofilename.split(".")[-1]
-            
+
     else:
         usage()
         sys.exit(2)
@@ -166,8 +168,8 @@ def main(argv):
         tecplot_to_vtpxml(ifilename, ofilename,string.atoi(argdim))
         end = time.time()
         print "* Conversion done in %d seconds" % (end - start)
-        print '* Output file name: %(fn)s ' %{'fn': ofilename}       
-    else:   
+        print '* Output file name: %(fn)s ' %{'fn': ofilename}
+    else:
         error("Sorry, cannot convert between .%s and .%s file formats." % (isuffix, osuffix))
 
 #
@@ -238,7 +240,7 @@ def tecplot_to_vtkxml(inputFilename, outputFilename):
         except TecplotParsingError, e:
             input.close()
             error(str(e))
-        
+
         if zone:
             zones.append(zone)
             ignoredlines+=line-linetmp-1-zone.nodesCount()
@@ -258,7 +260,7 @@ def tecplot_to_vtkxml(inputFilename, outputFilename):
             output = open(outputFilename, "w")
         except:
             error("Failed to open output file for writing !")
-        
+
         output.close()
         error("The input file does not contain any Tecplot zone ! Created an empty file... \n You may want to try converting this file to point \n data with -p2 option if dim == 2 or -p3 option if dim == 3")
 
@@ -377,7 +379,7 @@ def tecplot_to_vtkxml(inputFilename, outputFilename):
                     pos += 1
                 # Next zone
                 pos += dimI
-        
+
             if zone.dimension[0] == 3: # Hexahedron
                 indexes = 8 * [0]
                 dimJ = zone.edges[1]
@@ -436,8 +438,8 @@ def tecplot_to_vtkxml(inputFilename, outputFilename):
     sys.stdout.write("Write cell types.........................")
     sys.stdout.flush()
 
-    output.write(VtkXml.typesHeader)    
-    
+    output.write(VtkXml.typesHeader)
+
     cellType0 = zones[0].cellType[0]
     warn = 0
     for zone in zones:
@@ -495,9 +497,9 @@ def tecplot_to_vtkxml(inputFilename, outputFilename):
 def error(message):
     """ Write an error message
     """
-    print "\nCONVERSION FAILED"
+    sys.stderr.write("\nCONVERSION FAILED\n")
     for line in message.split("\n"):
-        print "*** %s" % line
+        sys.stderr.write("*** %s\n" % line)
     sys.exit(2)
 
 #
@@ -572,7 +574,7 @@ class TecplotZone:
         #-----------------------------------------------------------------------
         # Seek to the next Tecplot zone
         #-----------------------------------------------------------------------
-        
+
         while 1:
             header = file.readline()
             line += 1
@@ -598,7 +600,7 @@ class TecplotZone:
         # ZONE N=15, E=16, F=FEPOINT, ET=TRIANGLE
         # In this case, edges = ['N=15', ' E=16', ' F=FEPOINT', ' ET=TRIANGLE']
         # This zone has been coded for two ET keywords: TRIANGLE and TETRAHEDRON
-        # The second (format 2) is defined in terms of the IJK indexes and a 
+        # The second (format 2) is defined in terms of the IJK indexes and a
         # typical zone reads
         # ZONE I=5, J=5, K=5
         # One index, I, indicates a line element, 2 indexes, I and J, indicate
@@ -682,7 +684,7 @@ class TecplotZone:
             nodesCount = 1
             for edge in zone.edges:
                 nodesCount *= edge
-                
+
             #-------------------------------------------------------------------
             # Cell count in zone
             #-------------------------------------------------------------------
@@ -854,7 +856,7 @@ def tecplot_to_vtpxml(inputFilename, outputFilename, dim):
         output.write("%f %f %f\n" %(point.coordinates[0], point.coordinates[1], point.coordinates[2]))
     output.write(VtpXml.pointsFooter)
     print "done"
- 
+
     #---------------------------------------------------------------------------
     # Fields
     #---------------------------------------------------------------------------
@@ -908,7 +910,7 @@ class InputPoints:
         """
 
     @staticmethod
-    def parse(file, line, dim): 
+    def parse(file, line, dim):
 
         #-----------------------------------------------------------------------
         # Create the point
@@ -940,7 +942,7 @@ class InputPoints:
                     # We got a point !
                     break
 
-        
+
         #Stores values
         for i, value in enumerate(values):
             try:
