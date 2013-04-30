@@ -278,32 +278,38 @@ def make_check_in_dir(directory, previous_run_passes_list):
 # Function dealing with parsing of arguments, getting everything set up and
 # dispatching jobs to processes.
 def main():
-    """ Run self tests in parallel (one per core for serial tests, one per
-        two cores for mpi). Only run the tests if a rebuild was needed or
-        if they failed last time.
+    """
+    Run self tests in parallel (one per core for serial tests, one per
+    two cores for mpi). Only run the tests if a rebuild was needed or
+    if they failed last time.
 
-        Note: to abort C-c will not work (due to limitations of
-        python's multiprocessing module). If you want to abort you will
-        probably have to close the terminal emulator entirely.
+    Note: to abort C-c will not work (due to limitations of
+    python's multiprocessing module). If you want to abort you will
+    probably have to close the terminal emulator entirely.
 
-        Also note: eigensolver tests will fail if you don't have arpack
-        installed. I haven't found a way to not run them without arpack
-        yet.
-        """
+    Also note: eigensolver tests will fail if you don't have arpack
+    installed. I haven't found a way to not run them without arpack
+    yet.
+    """
 
     # Parse inputs
     # ============================================================
-    parser = argparse.ArgumentParser(description=main.__doc__)
+    parser = argparse.ArgumentParser(
+        description=main.__doc__,
+
+        # Don't mess up my formating in the help message
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        )
 
     # make uses -C for "run make in this directory"
-    parser.add_argument('-C', default="/home/david/oomph-lib",
+    parser.add_argument('-C', default="../",
                         dest='oomph_root',
-                        help='Set the root directory of oomph-lib.')
+                        help='Set the root directory of oomph-lib, default is "../" which will work if you are running this while in the "oomph-lib/bin" directory.')
 
     parser.add_argument('-a', action='store_true', dest='makeclean',
                         help='Run make clean on test folders before starting.')
 
-    parser.add_argument('-n', '-j', dest='ncores',
+    parser.add_argument('-j', '-n', dest='ncores',
                         help='Specifiy how many cores should be used altogether \
                         (taking mpi runs into account). By default use all cores.',
                         default=multiprocessing.cpu_count())
