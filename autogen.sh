@@ -44,7 +44,7 @@ EchoUsage()
         echo "Usage: "
         echo "------ "
         echo " "
-        echo "[without flags]: Normal \"./configure; make; make install; make check\" sequence."
+        echo "[without flags]: Normal \"./configure; make; make install; make check -k\" sequence."
         echo " "
         echo " --rebuild     : Complete re-configure, followed by normal build sequence."
         echo " "
@@ -69,7 +69,7 @@ echo " "
 # Do you want to rebuild from scratch?
 #-------------------------------------
 #If so specify --rebuild as command line argument. Default is 
-# to just do the normal ".configure, make, make install, make check" sequence.
+# to just do the normal ".configure, make, make install, make check -k" sequence.
 
 #Bail out if more than two command line arguments
 if (test $# -gt 2); then 
@@ -555,7 +555,7 @@ want_self_tests=`OptionRead`
 
 if test "$want_self_tests" = "y" -o "$want_self_tests" = "Y" ; then 
   echo " "
-  echo "\"make check\" will be run at the end of the build procedure"
+  echo "\"make check -k\" will be run at the end of the build procedure"
   echo "to build/self-test the demo codes."
   echo " "
   echo "The results of the self-tests will be written to the"
@@ -580,7 +580,7 @@ if test "$want_self_tests" = "y" -o "$want_self_tests" = "Y" ; then
 else
   echo " "
   echo "The self-test procedure will not be run automatically."
-  echo "You may initiate the self-tests manually by typing \"make check\" "
+  echo "You may initiate the self-tests manually by typing \"make check -k\" "
   echo "in the top-level oomph-lib directory when the build process "
   echo "is complete."
   echo " "
@@ -872,7 +872,7 @@ if test "$want_self_tests" = "y" -o "$reply" = "Y" ; then
 else
   echo " "
   echo "The build process is complete. You may now "
-  echo "initiate the self-tests by typing \"make check\". "
+  echo "initiate the self-tests by typing \"make check -k\". "
   echo " "
 
 

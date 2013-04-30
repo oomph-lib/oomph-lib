@@ -154,10 +154,13 @@ double BDF<1>::temporal_error_in_value(Data* const &data_pt, const unsigned &i)
 }
 
 //=======================================================================
-/// Assign the values of the weights; pass the value of the timestep
+/// Assign the values of the weights. The scheme used is from Gresho &
+/// Sani, Incompressible Flow and the Finite Element Method
+/// (advection-diffusion and isothermal laminar flow), 1998, pg. 715 (with
+/// some algebraic rearrangement).
 //=======================================================================
 template<>
-void  BDF<2>::set_weights()
+void BDF<2>::set_weights()
   {
    double dt=Time_pt->dt(0);
    double dtprev=Time_pt->dt(1);
@@ -172,9 +175,11 @@ void  BDF<2>::set_weights()
     }
   }
 
-//======================================================================
-///Calculate the predictor weights
-//======================================================================
+//========================================================================
+/// Calculate the predictor weights. The scheme used is from Gresho &
+/// Sani, Incompressible Flow and the Finite Element Method
+/// (advection-diffusion and isothermal laminar flow), 1998, pg. 715.
+//========================================================================
 template<>
 void BDF<2>::set_predictor_weights()
 {
