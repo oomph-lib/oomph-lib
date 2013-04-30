@@ -360,14 +360,15 @@ public:
  /// \short Constructor. Default settings: Current directory, step `0',
  /// label="", full documentation enabled and output directory is not required
  /// to exist when set_directory() is called.
- DocInfo()
-  {
-   Directory=".";
-   Number=0;
-   Label="";
-   Doc_flag=true;
-   Directory_must_exist=false;
-  }
+ DocInfo() : Directory("."), Doc_flag(true), Number(0),
+             Label(""), Directory_must_exist(false)
+ {}
+
+ /// \short Constructor with specific directory.
+ DocInfo(const std::string& directory) :
+  Directory(directory), Doc_flag(true), Number(0),
+  Label(""), Directory_must_exist(false)
+ {}
 
  /// Output directory
  std::string directory() const {return Directory;}
