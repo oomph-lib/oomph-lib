@@ -557,6 +557,17 @@ namespace oomph
  //============================================================================
  void DoubleVector::operator*=(const double& d)
  {
+  #ifdef PARANOID
+  if(!this->distribution_built())
+   {
+    std::ostringstream error_msg;
+    error_msg << "DoubleVector must be set up.";
+    throw OomphLibError(error_msg.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+
   for(unsigned i=0, ni=this->nrow_local(); i<ni; i++)
    {
     Values_pt[i] *= d;
@@ -568,12 +579,9 @@ namespace oomph
  //============================================================================
  void DoubleVector::operator/=(const double& d)
  {
-
-  for(unsigned i=0, ni=this->nrow_local(); i<ni; i++)
-   {
-    Values_pt[i] /= d;
-   }
-
+  // PARANOID checks are done inside operator *=
+  double divisor = (1.0/d);
+  this->operator*=(divisor);
  }
 
  //============================================================================
