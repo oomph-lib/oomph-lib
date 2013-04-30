@@ -48,6 +48,18 @@ TetgenScaffoldMesh::TetgenScaffoldMesh(const std::string& node_file_name,
  // --------------------------
  std::ifstream element_file(element_file_name.c_str(),std::ios_base::in);
 
+ // Check that the file actually opened correctly
+#ifdef PARANOID
+ if(!element_file.is_open())
+  {
+   std::string error_msg("Failed to open element file: ");
+   error_msg += "\"" + element_file_name + "\".";
+   throw OomphLibError(error_msg, OOMPH_CURRENT_FUNCTION,
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+
+
  //Read in number of elements
  unsigned n_element;
  element_file>>n_element;
@@ -124,6 +136,19 @@ TetgenScaffoldMesh::TetgenScaffoldMesh(const std::string& node_file_name,
  //Process node file
  //--------------------
  std::ifstream node_file(node_file_name.c_str(),std::ios_base::in);
+
+ // Check that the file actually opened correctly
+#ifdef PARANOID
+ if(!node_file.is_open())
+  {
+   std::string error_msg("Failed to open node file: ");
+   error_msg += "\"" + node_file_name + "\".";
+   throw OomphLibError(error_msg, OOMPH_CURRENT_FUNCTION,
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+
+
  //Read in the number of nodes
  unsigned n_node;
  node_file>>n_node;
@@ -246,6 +271,17 @@ TetgenScaffoldMesh::TetgenScaffoldMesh(const std::string& node_file_name,
  // Open face file
  std::ifstream face_file(face_file_name.c_str(),std::ios_base::in);
   
+ // Check that the file actually opened correctly
+#ifdef PARANOID
+ if(!face_file.is_open())
+  {
+   std::string error_msg("Failed to open face file: ");
+   error_msg += "\"" + face_file_name + "\".";
+   throw OomphLibError(error_msg, OOMPH_CURRENT_FUNCTION,
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+
  // Number of faces in face file
  unsigned n_face;
  face_file>>n_face;
