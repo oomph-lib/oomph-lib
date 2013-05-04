@@ -599,13 +599,15 @@ private:
  /// Pointer to element that imposes volume constraint for bubble
  VolumeConstraintElement* Vol_constraint_el_pt;
  
- /// Enumeration of channel boundaries
+ /// Enumeration of mesh boundaries
  enum 
  {
   Inflow_boundary_id=0,
   Upper_wall_boundary_id=1,
   Outflow_boundary_id=2,
-  Bottom_wall_boundary_id=3
+  Bottom_wall_boundary_id=3,
+  First_bubble_boundary_id=4,
+  Second_bubble_boundary_id=5
  };
  
 
@@ -729,10 +731,6 @@ BubbleInChannelProblem<ELEMENT>::BubbleInChannelProblem()
  // Now define initial shape of bubble(s) with polygon
  //---------------------------------------------------
 
- // Counter for number of boundaries (bit over the top but future
- // proof for multiple bubbles...)
- unsigned boundary_id=Bottom_wall_boundary_id+1;
-
  // We have one bubble
  Bubble_polygon_pt.resize(1);
 
@@ -775,7 +773,8 @@ BubbleInChannelProblem<ELEMENT>::BubbleInChannelProblem()
   }
  
  // Build the 1st bubble polyline
- bubble_polyline_pt[0] = new TriangleMeshPolyLine(bubble_vertex,boundary_id++);
+ bubble_polyline_pt[0] = new TriangleMeshPolyLine(bubble_vertex,
+                                                  First_bubble_boundary_id);
 
  // Second boundary of bubble
  for(unsigned ipoint=0; ipoint<npoints;ipoint++)
@@ -793,7 +792,8 @@ BubbleInChannelProblem<ELEMENT>::BubbleInChannelProblem()
   }
 
  // Build the 2nd bubble polyline
- bubble_polyline_pt[1] = new TriangleMeshPolyLine(bubble_vertex,boundary_id++);
+ bubble_polyline_pt[1] = new TriangleMeshPolyLine(bubble_vertex,
+                                                  Second_bubble_boundary_id);
 
 
  // Define coordinates of a point inside the bubble
@@ -909,7 +909,7 @@ void BubbleInChannelProblem<ELEMENT>::create_free_surface_elements()
 
  //Loop over the free surface boundaries
  unsigned nb=Fluid_mesh_pt->nboundary();
- for(unsigned b=Bottom_wall_boundary_id+1;b<nb;b++)
+ for(unsigned b=First_bubble_boundary_id;b<nb;b++)
   {
    // How many bulk fluid elements are adjacent to boundary b?
    unsigned n_element = Fluid_mesh_pt->nboundary_element(b);
@@ -965,7 +965,7 @@ void BubbleInChannelProblem<ELEMENT>::create_volume_constraint_elements()
  
  //Loop over the free surface boundaries
  unsigned nb=Fluid_mesh_pt->nboundary();
- for(unsigned b=Bottom_wall_boundary_id+1;b<nb;b++)
+ for(unsigned b=First_bubble_boundary_id;b<nb;b++)
   {
    // How many bulk fluid elements are adjacent to boundary b?
    unsigned n_element = Fluid_mesh_pt->nboundary_element(b);

@@ -648,7 +648,9 @@ private:
   Inflow_boundary_id=0,
   Upper_wall_boundary_id=1,
   Outflow_boundary_id=2,
-  Bottom_wall_boundary_id=3
+  Bottom_wall_boundary_id=3,
+  First_drop_boundary_id=4,
+  Second_drop_boundary_id=5
  };
  
 
@@ -732,10 +734,6 @@ DropInChannelProblem<ELEMENT>::DropInChannelProblem()
  // Now define initial shape of drop(s) with polygon
  //---------------------------------------------------
 
- // Counter for number of boundaries (bit over the top but future
- // proof for multiple drops...)
- unsigned boundary_id=Bottom_wall_boundary_id+1;
-
  // We have one drop
  Drop_polygon_pt.resize(1);
 
@@ -778,7 +776,8 @@ DropInChannelProblem<ELEMENT>::DropInChannelProblem()
   }
  
  // Build the 1st drop polyline
- drop_polyline_pt[0] = new TriangleMeshPolyLine(drop_vertex,boundary_id++);
+ drop_polyline_pt[0] = new TriangleMeshPolyLine(drop_vertex,
+                                                First_drop_boundary_id);
 
  // Second boundary of drop
  for(unsigned ipoint=0; ipoint<npoints;ipoint++)
@@ -796,7 +795,8 @@ DropInChannelProblem<ELEMENT>::DropInChannelProblem()
   }
 
  // Build the 2nd drop polyline
- drop_polyline_pt[1] = new TriangleMeshPolyLine(drop_vertex,boundary_id++);
+ drop_polyline_pt[1] = new TriangleMeshPolyLine(drop_vertex,
+                                                Second_drop_boundary_id);
  
  // Create closed polygon from two polylines
  Drop_polygon_pt[0] = new TriangleMeshPolygon(
@@ -912,7 +912,7 @@ void DropInChannelProblem<ELEMENT>::create_free_surface_elements()
 
  //Loop over the free surface boundaries
  unsigned nb=Fluid_mesh_pt->nboundary();
- for(unsigned b=Bottom_wall_boundary_id+1;b<nb;b++)
+ for(unsigned b=First_drop_boundary_id;b<nb;b++)
   {
    // Note: region is important
    // How many bulk fluid elements are adjacent to boundary b in region 0?
@@ -987,7 +987,7 @@ void DropInChannelProblem<ELEMENT>::create_volume_constraint_elements()
  
  //Loop over the free surface boundaries
  unsigned nb=Fluid_mesh_pt->nboundary();
- for(unsigned b=Bottom_wall_boundary_id+1;b<nb;b++)
+ for(unsigned b=First_drop_boundary_id;b<nb;b++)
   {
    // Note region is important
    // How many bulk fluid elements are adjacent to boundary b in region 0?
