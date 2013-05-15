@@ -4123,7 +4123,7 @@ namespace oomph
                                        (Block_to_block_map[b][b_i]));
     }
 
-   Vector<DoubleVector*> tmp_block_vector_pt;
+   Vector<DoubleVector*> tmp_block_vector_pt(nblocks_to_split_into,0);
    for (unsigned b_i = 0; b_i < nblocks_to_split_into; b_i++) 
    {
      tmp_block_vector_pt[b_i] = &tmp_block_vector[b_i];
