@@ -246,19 +246,9 @@ namespace oomph
        // # of processors
        int nproc = Comm_pt->nproc();
  
-       // resize storage
-       First_row.clear();
-       First_row.resize(nproc);
-       Nrow_local.clear();
-       Nrow_local.resize(nproc);
+       First_row = new_dist.first_row_vector();
+       Nrow_local = new_dist.nrow_local_vector();
        
-       // copy contents of first_row and nrow_local
-       for (int i = 0; i < nproc; i++)
-        {
-         First_row[i] = new_dist.first_row(i);
-         Nrow_local[i] = new_dist.nrow_local(i); 
-        }
-
        Distributed = true;
       }
      // else if the new ditribution is not distributed
@@ -335,6 +325,210 @@ namespace oomph
   return stream;
  }
 
+//=============================================================================
+/// Namespace for helper functions for LinearAlgebraDistributions
+//=============================================================================
+ namespace LinearAlgebraDistributionHelpers
+ {
 
+  //===========================================================================
+  /// \short Takes a vector of LinearAlgebraDistribution objects and 
+  /// concatenates them such that the nrow_local of the out_distribution
+  /// is the sum of the nrow_local of all the in_distributions and the number
+  /// of global rows of the out_distribution is the sum of the number of global
+  /// rows of all the in_distributions. \n
+  /// This results in a permuation of the rows in the out_distribution. 
+  /// Think of this in terms of DoubleVectors, if we have DoubleVectors with 
+  /// distributions A and B, distributed across two processors (p0 and p1),\n
+  /// A: [a0] (on p0)    B: [b0] (on p0) \n
+  ///    [a1] (on p1)       [b1] (on P1), \n
+  /// \n
+  /// then the out_distribution is\n
+  /// [a0  (on p0) \n
+  ///  b0] (on p0) \n
+  /// [a1  (on p1) \n
+  ///  b1] (on p1), \n
+  /// \n
+  /// as opposed to \n
+  /// [a0  (on p0) \n
+  ///  a1] (on p0) \n
+  /// [b0  (on p1) \n
+  ///  b1] (on p1). \n
+  /// \n
+  /// Note (1): The out_distribution may not be uniformly distributed even
+  /// if the the in_distributions are uniform distributions.\n 
+  /// Try this out with two distributions of global rows 3 and 5, uniformly
+  /// distributed across two processors. Compare this against a distribution
+  /// of global row 8 distributed across two processors.\n
+  /// \n
+  /// Note (2): There is no equivalent function which takes a Vector of
+  /// LinearAlgebraDistribution objects (as opposed to pointers), there should
+  /// not be one since we do not want to invoke the assignment operator when
+  /// creating the Vector of LinearAlgebraDistribution objects.\n
+  //===========================================================================
+  void concatenate(const Vector<LinearAlgebraDistribution*>&in_distribution_pt,
+                   LinearAlgebraDistribution &out_distribution)
+  {
+   // How many distributions are in in_distribution?
+   unsigned ndistributions=in_distribution_pt.size();
+
+#ifdef PARANOID
+   
+   // Are any of the in_distribution pointers null? 
+   // We do not want null pointers.
+   for (unsigned dist_i = 0; dist_i < ndistributions; dist_i++) 
+    {
+     if(in_distribution_pt[dist_i]==0)
+      {
+       std::ostringstream error_message;
+       error_message
+        << "The pointer in_distribution_pt[" << dist_i << "] is null.\n";
+       throw OomphLibError(error_message.str(),
+                           "RAYRAYERR",
+                           OOMPH_EXCEPTION_LOCATION);
+      }
+    }
+
+   ////////////////////////////////
+    
+   // Check that all in distributions are built.
+   for (unsigned dist_i = 0; dist_i < ndistributions; dist_i++)
+    {
+     if(!in_distribution_pt[dist_i]->built())
+      {
+       std::ostringstream error_message;
+       error_message
+        << "The in_distribution_pt[" << dist_i << "] is not built.\n";
+       throw OomphLibError(error_message.str(),
+                           "RAYRAYERR",
+                           OOMPH_EXCEPTION_LOCATION);
+      }
+    }
+
+   ////////////////////////////////
+   
+   // Check that all communicators to concatenate are the same 
+   // by comparing all communicators against the first one.
+   const OomphCommunicator first_comm 
+    = *(in_distribution_pt[0]->communicator_pt());
+   
+   for (unsigned dist_i = 0; dist_i < ndistributions; dist_i++) 
+    {
+     // Get the Communicator for the current vector.
+     const OomphCommunicator another_comm
+      = *(in_distribution_pt[dist_i]->communicator_pt());
+     
+     if(!(first_comm == another_comm))
+      {
+       std::ostringstream error_message;
+       error_message << "The communicator in position "<<dist_i<<" is \n"
+                     << "not the same as the first one.\n";
+       throw OomphLibError(error_message.str(),
+                           "RAYRAYERR",
+                           OOMPH_EXCEPTION_LOCATION);
+      }
+    }
+   
+   ////////////////////////////////
+
+   // Ensure that all distributions are either distributed or not. 
+   // This is because we use the distributed() function from the first 
+   // distribution to indicate if the result distribution should be distributed
+   // or not.
+   bool first_distributed = in_distribution_pt[0]->distributed();
+   for (unsigned dist_i = 0; dist_i < ndistributions; dist_i++) 
+    {
+     // Is the current distribution distributed?
+     bool another_distributed = in_distribution_pt[dist_i]->distributed();
+     if(first_distributed != another_distributed)
+      {
+       std::ostringstream error_message;
+       error_message 
+        <<"The distribution in position "<<dist_i<<" has a different\n"
+        <<"different distributed boolean than the distribution.\n";
+       throw OomphLibError(error_message.str(),
+                           "RAYRAYERR",
+                           OOMPH_EXCEPTION_LOCATION);
+      }
+    }      
+
+   ////////////////////////////////
+   
+   // Check that the out distribution is not built.
+   if(out_distribution.built())
+    {
+     std::ostringstream error_message;
+     error_message
+      << "The out distribution is built.\n"
+      << "Please clear it.\n";
+     throw OomphLibError(error_message.str(),
+                         "RAYRAYERR",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+     
+#endif
+ 
+   // Get the communicator pointer
+   const OomphCommunicator* const comm_pt 
+    = in_distribution_pt[0]->communicator_pt();
+   
+   // Number of processors
+   unsigned nproc = comm_pt->nproc();
+   
+   // My rank
+   unsigned my_rank = comm_pt->my_rank();
+   
+   // First determine the out_nrow_local and the out_nrow (the global nrow)
+   unsigned out_nrow_local = 0;
+   unsigned out_nrow = 0;
+   for (unsigned in_dist_i = 0; in_dist_i < ndistributions; in_dist_i++) 
+    {
+     out_nrow_local += in_distribution_pt[in_dist_i]->nrow_local();
+     out_nrow += in_distribution_pt[in_dist_i]->nrow();
+    }
+   
+   // Now calculate the first row for this processor. We need to know the 
+   // out_nrow_local for all the other processors, MPI_Allgather must be used.
+   unsigned out_first_row = 0;
+   
+   // Distributed case: We need to gather all the out_nrow_local from all
+   // processors, the out_first_row for this processors is the partial sum up 
+   // of the out_nrow_local to my_rank.
+   bool distributed = in_distribution_pt[0]->distributed();
+   if(distributed)
+    {
+#ifdef OOMPH_HAS_MPI
+     unsigned *out_nrow_local_all = new unsigned[nproc];
+     MPI_Allgather(&out_nrow_local,1,MPI_UNSIGNED,
+                   out_nrow_local_all,1,MPI_UNSIGNED,
+                   comm_pt->mpi_comm());
+     for (unsigned proc_i = 0; proc_i < my_rank; proc_i++) 
+      {
+       out_first_row += out_nrow_local_all[proc_i];
+      }
+     delete [] out_nrow_local_all;
+#endif
+    }
+   // Non-distributed case
+   else
+    {
+     out_first_row = 0;
+    }
+   
+   // Build the distribution.
+   if(nproc == 1 || !distributed)
+    {
+     // Some ambiguity here -- on a single processor it doesn't really
+     // matter if we think of ourselves as distributed or not but this
+     // follows the pattern used elsewhere.
+     out_distribution.build(comm_pt,out_nrow,false);
+    }
+   else
+    {
+     out_distribution.build(comm_pt,out_first_row,out_nrow_local,out_nrow);
+    }
+  } // function concatenate
+
+ } // end of namespace LinearAlgebraDistributionHelpers
 
 }//end of oomph namespace

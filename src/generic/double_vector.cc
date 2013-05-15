@@ -77,11 +77,11 @@ namespace oomph
    // update the values
    if (dist_pt->built())
     {
-     unsigned nrow = this->nrow_local();
-     Values_pt = new double[nrow];
-
+     unsigned nrow_local = this->nrow_local();
+     Values_pt = new double[nrow_local];
+     
      // set the data
-     for (unsigned i = 0; i < nrow; i++)
+     for (unsigned i = 0; i < nrow_local; i++)
       {
        Values_pt[i] = v;
       }
@@ -719,6 +719,42 @@ namespace oomph
   }
 
  //============================================================================
+ /// output the local contents of the vector
+ //============================================================================
+ void DoubleVector::output_local_values(std::ostream &outfile)
+  {
+   // Number of local rows.
+   unsigned nrow_local = this->nrow_local();
+  
+   // output
+   for (unsigned i = 0; i < nrow_local; i++)
+    {
+     outfile << i << " " << Values_pt[i] << std::endl;
+    }
+  }
+
+ //============================================================================
+ /// output the local contents of the vector with the first row offset.
+ //============================================================================
+ void DoubleVector::output_local_values_with_offset(std::ostream &outfile)
+  {
+   // Number of local rows.
+   unsigned nrow_local = this->nrow_local();
+
+   // First row on this processor.
+   unsigned first_row = this->first_row();
+   oomph_info << "nrow_loca: " << nrow_local << std::endl;
+   oomph_info << "first row: " << first_row << std::endl; 
+   
+   
+   // output
+   for (unsigned i = 0; i < nrow_local; i++)
+    {
+     outfile << (i + first_row) << " " << Values_pt[i] << std::endl;
+    }
+  }
+
+ //============================================================================
  /// compute the dot product of this vector with the vector vec
  //============================================================================
  double DoubleVector::dot(const DoubleVector& vec) const
@@ -863,7 +899,6 @@ namespace oomph
    return sqrt(this->dot(x));
   }
 
-
  /// \short output operator
  std::ostream& operator<< (std::ostream &out, const DoubleVector& v)
  {
@@ -879,6 +914,1123 @@ namespace oomph
   return out;
  }
 
+//=================================================================
+/// Namespace for helper functions for DoubleVectors
+//=================================================================
+ namespace DoubleVectorHelpers
+ {
+  //===========================================================================
+  /// \short Concatenate DoubleVectors.
+  /// Takes a Vector of DoubleVectors. If the out vector is built, we will not
+  /// build a new distribution. Otherwise we build a uniform distribution.
+  /// 
+  /// The rows of the out vector is seen "as it is" in the in vectors.
+  /// For example, if we have DoubleVectors with distributions A and B, 
+  /// distributed across two processors (p0 and p1),
+  /// 
+  /// A: [a0] (on p0)    B: [b0] (on p0)
+  ///    [a1] (on p1)       [b1] (on P1),
+  /// 
+  /// then the out_vector is
+  ///
+  /// [a0  (on p0)
+  ///  a1] (on p0)
+  /// [b0]  (on p1)
+  ///  b1] (on p1),
+  ///
+  /// Communication is required between processors. The sum of the global number
+  /// of rows in the in vectors must equal to the global number of rows in the
+  /// out vector. This condition must be met if one is to supply an out vector
+  /// with a distribution, otherwise we can let the function generate the
+  /// out vector distribution itself. 
+  //===========================================================================
+  void concatenate(const Vector<DoubleVector*> &in_vector_pt,
+                   DoubleVector &out_vector)
+  {
+   // How many in vectors to concatenate? 
+   unsigned nvectors = in_vector_pt.size();
 
+   // PARANIOD checks which involves the in vectors only
+#ifdef PARANOID
+   // Check that there is at least one vector.
+   if(nvectors == 0)
+    {
+     std::ostringstream error_message;
+     error_message << "There is no vector to concatenate...\n"
+                   << "Perhaps you forgot to fill in_vector_pt?\n";
+     throw OomphLibError(error_message.str(),
+                         "RAYRAYERR",
+                         OOMPH_EXCEPTION_LOCATION);
+    } 
+
+   // Does this vector need concatenating?
+   if(nvectors == 1)
+    {
+     std::ostringstream warning_message;
+     warning_message << "There is only one vector to concatenate...\n"
+                     << "This does not require concatenating...\n";
+     OomphLibWarning(warning_message.str(),
+                     "RAYRAYERR",
+                     OOMPH_EXCEPTION_LOCATION);
+    }
+  
+   // Check that all the DoubleVectors in in_vector_pt are built
+   for(unsigned vec_i = 0; vec_i < nvectors; vec_i++)
+    {
+     if(!in_vector_pt[vec_i]->built())
+      {
+       std::ostringstream error_message;
+       error_message << "The vector in position " <<vec_i<< " is not built.\n"
+                     << "I cannot concatenate an unbuilt vector.\n";
+       throw OomphLibError(error_message.str(),
+                           "RAYRAYERR",
+                           OOMPH_EXCEPTION_LOCATION);
+      }
+    }
+#endif
+
+   // The communicator pointer for the first in vector.
+   const OomphCommunicator* const comm_pt 
+    = in_vector_pt[0]->distribution_pt()->communicator_pt();
+
+   // Check if the first in vector is distributed.
+   bool distributed = in_vector_pt[0]->distributed(); 
+   
+   // If the out vector is not built, build it with a uniform distribution.
+   if(!out_vector.built())
+    {
+     // Nrow for the out vector is the sum of the nrow of the in vectors.
+     unsigned tmp_nrow = 0;
+     for (unsigned vec_i = 0; vec_i < nvectors; vec_i++) 
+      {
+       tmp_nrow += in_vector_pt[vec_i]->nrow();
+      }
+     
+     // Build the out vector with uniform distribution.
+     out_vector.build(LinearAlgebraDistribution(comm_pt,tmp_nrow,distributed)
+                      ,0.0);
+    }
+   else
+    {
+#ifdef PARANOID
+     // Check that the sum of nrow of in vectors match the nrow in the out
+     // vectors.
+     unsigned in_nrow = 0;
+     for (unsigned vec_i = 0; vec_i < nvectors; vec_i++) 
+      {
+       in_nrow += in_vector_pt[vec_i]->nrow();
+      }
+  
+     if(in_nrow != out_vector.nrow())
+      {
+       std::ostringstream error_message;
+       error_message << "The sum of nrow of the in vectors does not match\n"
+                     << "the nrow of the out vector.\n";
+       throw OomphLibError(error_message.str(),
+                           "RAYRAYERR",
+                           OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+    }
+   
+#ifdef PARANOID
+   // Check that all communicators of the vectors to concatenate are the same 
+   // by comparing all communicators against the out vector.
+   const OomphCommunicator out_comm
+    = *(out_vector.distribution_pt()->communicator_pt());
+
+   for (unsigned vec_i = 0; vec_i < nvectors; vec_i++) 
+    {
+     // Get the Communicator for the current vector.
+     const OomphCommunicator in_comm
+      = *(in_vector_pt[vec_i]->distribution_pt()->communicator_pt());
+
+     if(out_comm != in_comm)
+      {
+       std::ostringstream error_message;
+       error_message << "The vector in position "<<vec_i <<" has a\n"
+                     << "different communicator from the out vector.\n";
+       throw OomphLibError(error_message.str(),
+                           "RAYRAYERR",
+                           OOMPH_EXCEPTION_LOCATION);
+      }
+    }
+
+   // Check that the distributed boolean is the same for all vectors.
+   if(out_comm.nproc() != 1)
+    {
+     const bool out_distributed = out_vector.distributed();
+     for (unsigned vec_i = 0; vec_i < nvectors; vec_i++) 
+      {
+       if(out_distributed != in_vector_pt[vec_i]->distributed())
+        {
+         std::ostringstream error_message;
+         error_message << "The vector in position "<<vec_i <<" has a\n"
+                       << "different distributed boolean from "
+                       << "the out vector.\n";
+         throw OomphLibError(error_message.str(),
+                             "RAYRAYERR",
+                             OOMPH_EXCEPTION_LOCATION);
+        } 
+      }
+    }
+#endif
+
+
+   // Now we do the concatenation.
+   if((comm_pt->nproc() == 1) || !distributed )
+    {
+     // Serial version of the code.
+     // This is trivial, we simply loop through the in vectors and 
+     // fill in the out vector.
+
+     // Out vector index.
+     unsigned out_i = 0;
+     
+     // Out vector values.
+     double* out_value_pt = out_vector.values_pt();
+
+     // Loop through the in vectors.
+     for (unsigned vec_i = 0; vec_i < nvectors; vec_i++) 
+      {
+       // Nrow of current in vector.
+       unsigned in_nrow = in_vector_pt[vec_i]->nrow();
+       
+       // In vector values.
+       double* in_value_pt = in_vector_pt[vec_i]->values_pt();
+
+       // Loop through the entries of this in vector.
+       for (unsigned i = 0; i < in_nrow; i++) 
+        {
+         out_value_pt[out_i++] = in_value_pt[i];
+        }
+      }
+    }
+   // Otherwise we are dealing with a distributed vector.
+   else
+    {
+#ifdef OOMPH_HAS_MPI 
+     // Get the number of processors
+     unsigned nproc = comm_pt->nproc();
+
+     // My rank
+     unsigned my_rank = comm_pt->my_rank();
+
+     // Storage for the data (per processor) to send
+     Vector<Vector<double> > values_to_send(nproc);
+
+     // The sum of the nrow for the in vectors (so far). This is used as an 
+     // offset to calculate the global equation number in the out vector
+     unsigned long sum_of_vec_nrow = 0;
+      
+     // Loop over the in vectors and work out:
+     // out_p: the rank the of receiving processor
+     // out_local_eqn: the local equation number of the receiving processor
+     //
+     // Then put the value and out_local_eqn at out_p in values_to_send
+     LinearAlgebraDistribution* out_distribution_pt
+      = out_vector.distribution_pt();
+     for (unsigned in_vec_i = 0; in_vec_i < nvectors; in_vec_i++) 
+      {
+       // Loop through the local equations
+       unsigned in_vec_nrow_local = in_vector_pt[in_vec_i]->nrow_local();
+       unsigned in_vec_first_row = in_vector_pt[in_vec_i]->first_row();
+
+       for (unsigned in_row_i = 0;
+            in_row_i < in_vec_nrow_local; in_row_i++) 
+        {
+         // Calculate the global equation number for this in_row_i
+         unsigned out_global_eqn = in_row_i 
+          + in_vec_first_row + sum_of_vec_nrow;
+          
+         // Get the processor that this global row belongs to.
+         // The rank_of_global_row(...) function loops through all the 
+         // processors and does two unsigned comparisons. Since we have to do
+         // this for every row, it may be better to store a list mapping for
+         // very large number of processors.
+         unsigned out_p = out_distribution_pt
+          ->rank_of_global_row(out_global_eqn);
+
+         // Knowing out_p enables us to work out the out_first_row and
+         // out_local_eqn.
+         unsigned out_first_row = out_distribution_pt->first_row(out_p);
+         unsigned out_local_eqn = out_global_eqn - out_first_row;
+
+         // Now push back the out_local_eqn and the value
+         values_to_send[out_p].push_back(out_local_eqn);
+         values_to_send[out_p].push_back((*in_vector_pt[in_vec_i])[in_row_i]);
+        }
+
+       // Update the offset.
+       sum_of_vec_nrow += in_vector_pt[in_vec_i]->nrow();
+      }
+     
+     // Prepare to send the data!
+
+     // Storage for the number of data to be sent to each processor.
+     Vector<int>send_n(nproc,0);
+
+     // Storage for all the values to be send to each processor.
+     Vector<double> send_values_data;
+
+     // Storage location within send_values_data
+     Vector<int> send_displacement(nproc,0);
+
+     // Get the total amount of data which needs to be sent, so we can reserve
+     // space for it.
+     unsigned total_ndata = 0;
+     for (unsigned rank = 0; rank < nproc; rank++) 
+      {
+       if(rank != my_rank)
+        {
+         total_ndata += values_to_send[rank].size();
+        }
+      }
+      
+     // Now we don't have to re-allocate data/memory when push_back is called.
+     // Nb. Using push_back without reserving memory may cause multiple
+     // re-allocation behind the scenes, this is expensive.
+     send_values_data.reserve(total_ndata);
+      
+     // Loop over all the processors to "flat pack" the data for sending.
+     for (unsigned rank = 0; rank < nproc; rank++) 
+      {
+       // Set the offset for the current processor
+       send_displacement[rank] = send_values_data.size();
+
+       // Don't bother to do anything if
+       // the processor in the loop is the current processor.
+       if (rank != my_rank) 
+        {
+         // Put the values into the send data vector.
+         unsigned n_data = values_to_send[rank].size();
+         for (unsigned j = 0; j < n_data; j++) 
+          {
+           send_values_data.push_back(values_to_send[rank][j]);
+          } // Loop over the data
+        } // if rank != my_rank
+
+       // Find the number of data to be added to the vector.
+       send_n[rank] = send_values_data.size() - send_displacement[rank];
+      } // Loop over processors
+
+     // Storage for the number of data to be received from each processor.
+     Vector<int> receive_n(nproc,0);
+     MPI_Alltoall(&send_n[0],1,MPI_INT,&receive_n[0],1,MPI_INT,
+                  comm_pt->mpi_comm());
+
+     // Prepare the data to be received
+     // by working out the displacement from the received data.
+     Vector<int> receive_displacement(nproc,0);
+     int receive_data_count = 0;
+     for (unsigned rank = 0; rank < nproc; rank++) 
+      {
+       receive_displacement[rank] = receive_data_count;
+       receive_data_count += receive_n[rank];
+      }
+
+     // Now resize the receive buffer for all data from all processors.
+     // Make sure that it has size of at least one.
+     if(receive_data_count == 0){receive_data_count++;}
+     Vector<double> receive_values_data(receive_data_count);
+
+     // Make sure that the send buffer has size at least one
+     // so that we don't get a segmentation fault.
+     if(send_values_data.size() == 0){send_values_data.resize(1);}
+
+     // Now send the data between all processors
+     MPI_Alltoallv(&send_values_data[0],&send_n[0],&send_displacement[0],
+                   MPI_DOUBLE,
+                   &receive_values_data[0],&receive_n[0],
+                   &receive_displacement[0],
+                   MPI_DOUBLE,
+                   comm_pt->mpi_comm());
+
+
+     // Data from all other processors are stored in:
+     // receive_values_data
+     // Data already on this processor is stored in:
+     // values_to_send[my_rank]
+ 
+     // Loop through the data on this processor.
+     unsigned location_i = 0;
+     unsigned my_values_to_send_size = values_to_send[my_rank].size();
+     while(location_i < my_values_to_send_size)
+      {
+       out_vector[unsigned(values_to_send[my_rank][location_i])] 
+        = values_to_send[my_rank][location_i+1];
+
+       location_i += 2;
+      }
+
+     // Before we loop through the data on other processors, we need to check
+     // if any data has been received.
+     bool data_has_been_received = false;
+     unsigned send_rank = 0;
+     while(send_rank < nproc)
+      {
+       if(receive_n[send_rank] > 0)
+        {
+         data_has_been_received = true;
+         break;
+        }
+       send_rank++;
+      }
+
+     location_i = 0;
+     if(data_has_been_received)
+      {
+       unsigned receive_values_data_size = receive_values_data.size();
+       while(location_i < receive_values_data_size)
+        {
+         out_vector[unsigned(receive_values_data[location_i])]
+          = receive_values_data[location_i+1];
+         location_i += 2;
+        }
+      }
+#else
+     {
+      std::ostringstream error_message;
+      error_message << "I don't know what to do with distributed vectors\n"
+                    << "without MPI... :(";
+      throw OomphLibError(error_message.str(),
+                          "RAYRAYERR",
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+#endif
+
+    } 
+  } // function concatenate
+
+  //===========================================================================
+  /// \short Split a DoubleVector into the out DoubleVectors.
+  /// Let vec_A be the in Vector, and let vec_B and vec_C be the out vectors.
+  /// Then the splitting of vec_A is depicted below:
+  /// vec_A: [a0  (on p0)
+  ///         a1] (on p0)
+  ///        [a2  (on p1)
+  ///         a3] (on p1)
+  ///
+  /// vec_B: [a0] (on p0)    vec_C: [a2] (on p0)
+  ///        [a1] (on p1)           [a3] (on p1)
+  /// 
+  /// Communication is required between processors.
+  /// The out_vector_pt must contain pointers to DoubleVector which has already
+  /// been built with the correct distribution; the sum of the number of global 
+  /// row of the out vectors must be the same the the number of global rows of
+  /// the in vector.
+  //===========================================================================
+  void split(const DoubleVector & in_vector, 
+             Vector<DoubleVector*> &out_vector_pt)
+  {
+   // How many out vectors do we have?
+   unsigned nvec = out_vector_pt.size();
+#ifdef PARANOID
+   
+   // Check that the in vector is built.
+   if(!in_vector.built())
+    {
+     std::ostringstream error_message;
+     error_message << "The in_vector is not built.\n"
+                   << "Please build it!.\n";
+     throw OomphLibError(error_message.str(),
+                         "RAYRAYERR",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+
+   // Check that all the out vectors are built.
+   for (unsigned vec_i = 0; vec_i < nvec; vec_i++) 
+    {
+     if(!out_vector_pt[vec_i]->built())
+      {
+       std::ostringstream error_message;
+       error_message << "The vector at position " << vec_i
+                     << "  is not built.\n"
+                     << "Please build it!.\n";
+       throw OomphLibError(error_message.str(),
+                           "RAYRAYERR",
+                           OOMPH_EXCEPTION_LOCATION);
+      }
+    }
+
+   // Check that the sum of the nrow from out vectors is the same as the 
+   // nrow from in_vector.
+   unsigned out_nrow_sum = 0;
+   for (unsigned vec_i = 0; vec_i < nvec; vec_i++) 
+    {
+     out_nrow_sum += out_vector_pt[vec_i]->nrow();
+    }
+
+   if(in_vector.nrow() != out_nrow_sum)
+    {
+     std::ostringstream error_message;
+     error_message << "The global number of rows in the in_vector\n"
+                   << "is not equal to the sum of the global nrows\n"
+                   << "of the in vectors.\n";
+     throw OomphLibError(error_message.str(),
+                         "RAYRAYERR",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+ 
+   // Check that all communicators are the same. We use a communicator to
+   // get the number of processors and my_rank. So we would like them to be
+   // the same for in_vector and all out vectors.
+   const OomphCommunicator in_vector_comm
+    = *(in_vector.distribution_pt()->communicator_pt());
+   for (unsigned vec_i = 0; vec_i < nvec; vec_i++)
+    {
+     const OomphCommunicator dist_i_comm
+      = *(out_vector_pt[vec_i]->distribution_pt()->communicator_pt());
+      
+     if(in_vector_comm != dist_i_comm)
+      {
+       std::ostringstream error_message;
+       error_message << "The communicator for the distribution in the \n"
+                     <<"position " << vec_i << " is not the same as the in_vector\n";
+       throw OomphLibError(error_message.str(),
+                           "RAYRAYERR",
+                           OOMPH_EXCEPTION_LOCATION);
+      }
+    }
+
+   // Check that the distributed boolean is the same for all vectors.
+   bool para_distributed = in_vector.distributed();
+
+   for (unsigned vec_i = 0; vec_i < nvec; vec_i++) 
+    {
+     if(para_distributed != out_vector_pt[vec_i]->distributed())
+      {
+       std::ostringstream error_message;
+       error_message << "The vector in position " << vec_i << " does not \n"
+                     <<" have the same distributed boolean as the in_vector\n";
+       throw OomphLibError(error_message.str(),
+                           "RAYRAYERR",
+                           OOMPH_EXCEPTION_LOCATION);
+      }
+    }
+  
+#endif
+   
+   // The communicator.
+   const OomphCommunicator* const comm_pt 
+    = in_vector.distribution_pt()->communicator_pt();
+
+   // Is this distributed?
+   bool distributed = in_vector.distributed();
+
+   // The serial code.
+   if((comm_pt->nproc() == 1) || !distributed)
+    {
+     // Serial version of the code: loop through all the out vectors and 
+     // insert the elements of in_vector.
+     
+     // index for in vector, and in vector values.
+     unsigned in_vec_i = 0;
+     double* in_value_pt = in_vector.values_pt();
+
+     // Fill in the out vectors.
+     for (unsigned out_vec_i = 0; out_vec_i < nvec; out_vec_i++) 
+      {
+       // out vector nrow and values.
+       unsigned out_nrow = out_vector_pt[out_vec_i]->nrow();
+       double* out_value_pt = out_vector_pt[out_vec_i]->values_pt();
+
+       // Fill in the current out vector.
+       for (unsigned out_val_i = 0; out_val_i < out_nrow; out_val_i++) 
+        {
+         out_value_pt[out_val_i] = in_value_pt[in_vec_i++];
+        }
+      }
+    }
+   // Otherwise we are dealing with a distributed vector.
+   else
+    {
+#ifdef OOMPH_HAS_MPI
+     // For each entry in the in_vector, we need to work out:
+     // 1) Which out vector this entry belongs to,
+     // 2) which processor to send the data to and 
+     // 3) the local equation number in the out vector.
+     //
+     // We know the in_local_eqn, we can work out the in_global_eqn.
+     // 
+     // From in_global_eqn we can work out the out vector and 
+     // the out_global_eqn.
+     // 
+     // The out_global_eqn allows us to determine which processor to send to.
+     // With the out_p (processor to send data to) and out vector, we get the
+     // out_first_row which then allows us to work out the out_local_eqn.
+      
+
+     // Get the number of processors
+     unsigned nproc = comm_pt->nproc();
+
+     // My rank
+     unsigned my_rank = comm_pt->my_rank();
+
+     // Storage for the data (per processor) to send.
+     Vector<Vector<double> > values_to_send(nproc);
+
+     // Sum of the nrow of the out vectors so far. This is used to work out
+     // which out_vector a in_global_eqn belongs to.
+     Vector<unsigned> sum_of_out_nrow(nvec+1);
+     for (unsigned vec_i = 0; vec_i < nvec; vec_i++) 
+      {
+       sum_of_out_nrow[vec_i+1] = sum_of_out_nrow[vec_i]
+        + out_vector_pt[vec_i]->nrow();
+      }
+    
+     // Loop through the in_vector local values.
+     unsigned in_nrow_local = in_vector.nrow_local();
+     for (unsigned in_local_eqn = 0; 
+          in_local_eqn < in_nrow_local; in_local_eqn++) 
+      {
+       // The global equation number of this row.
+       unsigned in_global_eqn = in_local_eqn + in_vector.first_row();
+
+       // Which out_vector does this in_global_eqn belong to?
+       unsigned out_vector_i = 0;
+       while(in_global_eqn < sum_of_out_nrow[out_vector_i] 
+             || in_global_eqn >= sum_of_out_nrow[out_vector_i+1])
+        {
+         out_vector_i++;
+        }
+
+       // The out_global_eqn 
+       // (this is the global equation in the current out vector)
+       unsigned out_global_eqn = in_global_eqn 
+        - sum_of_out_nrow[out_vector_i];
+
+       // The processor to send this row to.
+       unsigned out_p 
+        = out_vector_pt[out_vector_i]->distribution_pt()
+        ->rank_of_global_row(out_global_eqn);
+
+       // The local_eqn in the out_vector_i
+       unsigned out_local_eqn 
+        = out_global_eqn - out_vector_pt[out_vector_i]
+        ->distribution_pt()->first_row(out_p);
+
+        
+       // Fill in the data to send
+        
+       // Which out vector to put this data in.
+       values_to_send[out_p].push_back(out_vector_i);
+        
+       // The local equation of the data.
+       values_to_send[out_p].push_back(out_local_eqn);
+
+       // The actual data.
+       values_to_send[out_p].push_back(in_vector[in_local_eqn]);
+      }
+ 
+     // Prepare to send the data!
+
+     // Storage for the number of data to be sent to each processor.
+     Vector<int>send_n(nproc,0);
+
+     // Storage for all the values to be send to each processor.
+     Vector<double> send_values_data;
+
+     // Storage location within send_values_data
+     Vector<int> send_displacement(nproc,0);
+
+     // Get the total amount of data which needs to be sent, so we can reserve
+     // space for it.
+     unsigned total_ndata = 0;
+     for (unsigned rank = 0; rank < nproc; rank++) 
+      {
+       if(rank != my_rank)
+        {
+         total_ndata += values_to_send[rank].size();
+        }
+      }
+
+     // Now we don't have to re-allocate data/memory when push_back is called.
+     // Nb. Using push_back without reserving memory may cause multiple
+     // re-allocation behind the scenes, this is expensive.
+     send_values_data.reserve(total_ndata);
+
+     // Loop over all the processors to "flat pack" the data for sending.
+     for (unsigned rank = 0; rank < nproc; rank++) 
+      {
+       // Set the offset for the current processor
+       send_displacement[rank] = send_values_data.size();
+
+       // Don't bother to do anything if
+       // the processor in the loop is the current processor.
+       if (rank != my_rank) 
+        {
+         // Put the values into the send data vector.
+         unsigned n_data = values_to_send[rank].size();
+         for (unsigned j = 0; j < n_data; j++) 
+          {
+           send_values_data.push_back(values_to_send[rank][j]);
+          } // Loop over the data
+        } // if rank != my_rank
+
+       // Find the number of data to be added to the vector.
+       send_n[rank] = send_values_data.size() - send_displacement[rank];
+      } // Loop over processors
+
+     // Storage for the number of data to be received from each processor.
+     Vector<int> receive_n(nproc,0);
+     MPI_Alltoall(&send_n[0],1,MPI_INT,&receive_n[0],1,MPI_INT,
+                  comm_pt->mpi_comm());
+
+     // Prepare the data to be received
+     // by working out the displacement from the received data.
+     Vector<int> receive_displacement(nproc,0);
+     int receive_data_count = 0;
+     for (unsigned rank = 0; rank < nproc; rank++) 
+      {
+       receive_displacement[rank] = receive_data_count;
+       receive_data_count += receive_n[rank];
+      }
+
+     // Now resize the receive buffer for all data from all processors.
+     // Make sure that it has size of at least one.
+     if(receive_data_count == 0){receive_data_count++;}
+     Vector<double> receive_values_data(receive_data_count);
+
+     // Make sure that the send buffer has size at least one
+     // so that we don't get a segmentation fault.
+     if(send_values_data.size() == 0){send_values_data.resize(1);}
+
+     // Now send the data between all processors
+     MPI_Alltoallv(&send_values_data[0],&send_n[0],&send_displacement[0],
+                   MPI_DOUBLE,
+                   &receive_values_data[0],&receive_n[0],
+                   &receive_displacement[0],
+                   MPI_DOUBLE,
+                   comm_pt->mpi_comm());
+
+
+     // Data from all other processors are stored in:
+     // receive_values_data
+     // Data already on this processor is stored in:
+     // values_to_send[my_rank]
+     //
+
+     // Index for values_to_send Vector.
+     unsigned location_i = 0;
+     // Loop through the data on this processor
+     unsigned my_values_to_send_size = values_to_send[my_rank].size();
+     while(location_i < my_values_to_send_size)
+      {
+       // The vector to put the values in.
+       unsigned out_vector_i 
+        = unsigned(values_to_send[my_rank][location_i++]);
+
+       // Where to put the value.
+       unsigned out_local_eqn 
+        = unsigned(values_to_send[my_rank][location_i++]);
+
+       // The actual value!
+       double out_value = values_to_send[my_rank][location_i++];
+       
+       // Insert the value in the out vector.
+       (*out_vector_pt[out_vector_i])[out_local_eqn] = out_value;
+      }
+
+     // Before we loop through the data on other processors, we need to check
+     // if any data has been received. This is because the receive_values_data
+     // has been resized to at least one, even if no data is sent.
+     bool data_has_been_received = false;
+     unsigned send_rank = 0;
+     while(send_rank < nproc)
+      {
+       if(receive_n[send_rank] > 0)
+        {
+         data_has_been_received = true;
+         break;
+        }
+       send_rank++;
+      }
+
+     // Reset the index, it is now being used to index the receive_values_data
+     // vector.
+     location_i = 0;
+     if(data_has_been_received)
+      {
+       // Extract the data and put it into the out vector.
+       unsigned receive_values_data_size = receive_values_data.size();
+       while(location_i < receive_values_data_size)
+        {
+         // Which out vector to put the value in?
+         unsigned out_vector_i = unsigned(receive_values_data[location_i++]);
+
+         // Where in the out vector to put the value?
+         unsigned out_local_eqn = unsigned(receive_values_data[location_i++]);
+
+         // The value to put in.
+         double out_value = receive_values_data[location_i++];
+
+         // Insert the value in the out vector.
+         (*out_vector_pt[out_vector_i])[out_local_eqn] = out_value;
+        }
+      }
+#else
+     {
+      std::ostringstream error_message;
+      error_message << "You have a distributed vector but with no mpi...\n"
+                    << "I don't know what to do :( \n";
+      throw OomphLibError(error_message.str(),
+                          "RYARAYERR",
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+#endif
+    }
+  } // function split(...)
+
+  //===========================================================================
+  /// \short Concatenate DoubleVectors.
+  /// Takes a Vector of DoubleVectors. If the out vector is built, we will not
+  /// build a new distribution. Otherwise a new distribution will be built
+  /// using LinearAlgebraDistribution::concatenate(...).
+  /// 
+  /// The out vector has its rows permuted according to the individual 
+  /// distributions of the in vectors. For example, if we have DoubleVectors 
+  /// with distributions A and B, distributed across two processors 
+  /// (p0 and p1),
+  /// 
+  /// A: [a0] (on p0)    B: [b0] (on p0)
+  ///    [a1] (on p1)       [b1] (on P1),
+  /// 
+  /// then the out_vector is
+  ///
+  /// [a0  (on p0)
+  ///  b0] (on p0)
+  /// [a1  (on p1)
+  ///  b1] (on p1),
+  ///
+  /// as opposed to
+  ///
+  /// [a0  (on p0)
+  ///  a1] (on p0)
+  /// [b0  (on p1)
+  ///  b1] (on p1).
+  ///
+  /// Note (1): The out vector may not be uniformly distributed even
+  /// if the the in vectors have uniform distributions. The nrow_local of the
+  /// out vector will be the sum of the nrow_local of the in vectors.
+  /// Try this out with two distributions of global rows 3 and 5, uniformly
+  /// distributed across two processors. Compare this against a distribution
+  /// of global row 8 distributed across two processors.
+  ///
+  /// There are no MPI send and receive, the data stays on the processor
+  /// as defined by the distributions from the in vectors.
+  //===========================================================================
+  void concatenate_without_communication(
+   const Vector<DoubleVector*> &in_vector_pt, DoubleVector &out_vector)
+  {
+
+   // How many in vectors do we want to concatenate?
+   unsigned nvectors = in_vector_pt.size();
+   
+   // PARANOID checks which involves the in vectors only.
+#ifdef PARANOID
+   // Check that there is at least one vector.
+   if(nvectors == 0)
+    {
+     std::ostringstream error_message;
+     error_message << "There is no vector to concatenate...\n"
+                   << "Perhaps you forgot to fill in_vector_pt?\n";
+     throw OomphLibError(error_message.str(),
+                         "RAYRAYERR",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+
+   // Does this vector need concatenating?
+   if(nvectors == 1)
+    {
+     std::ostringstream warning_message;
+     warning_message << "There is only one vector to concatenate...\n"
+                     << "This does not require concatenating...\n";
+     OomphLibWarning(warning_message.str(),
+                     "RAYRAYERR",
+                     OOMPH_EXCEPTION_LOCATION);
+    }
+
+   // Check that all the DoubleVectors in in_vector_pt are built
+   for(unsigned vec_i = 0; vec_i < nvectors; vec_i++)
+    {
+     if(!in_vector_pt[vec_i]->built())
+      {
+       std::ostringstream error_message;
+       error_message << "The vector in position " <<vec_i<< " is not built.\n"
+                     << "I cannot concatenate an unbuilt vector.\n";
+       throw OomphLibError(error_message.str(),
+                           "RAYRAYERR",
+                           OOMPH_EXCEPTION_LOCATION);
+      }
+    }
+#endif
+
+   // If the out vector is not built, build it with the correct distribution.
+   if(!out_vector.built())
+    {
+     Vector<LinearAlgebraDistribution*> in_distribution_pt(nvectors,0);
+     for (unsigned vec_i = 0; vec_i < nvectors; vec_i++) 
+      {
+       in_distribution_pt[vec_i] = in_vector_pt[vec_i]->distribution_pt();
+      }
+
+     LinearAlgebraDistribution tmp_distribution;
+     LinearAlgebraDistributionHelpers::concatenate(in_distribution_pt,
+                                                   tmp_distribution);
+     out_vector.build(tmp_distribution,0.0);
+    }
+
+   // PARANOID checks which involves all in vectors and out vectors.
+#ifdef PARANOID   
+   
+   // Check that all communicators of the vectors to concatenate are the same 
+   // by comparing all communicators against the out vector.
+   const OomphCommunicator out_comm
+    = *(out_vector.distribution_pt()->communicator_pt());
+
+   for (unsigned vec_i = 0; vec_i < nvectors; vec_i++) 
+    {
+     // Get the Communicator for the current vector.
+     const OomphCommunicator in_comm
+      = *(in_vector_pt[vec_i]->distribution_pt()->communicator_pt());
+
+     if(out_comm != in_comm)
+      {
+       std::ostringstream error_message;
+       error_message << "The vector in position "<<vec_i <<" has a\n"
+                     << "different communicator from the out vector.\n";
+       throw OomphLibError(error_message.str(),
+                           "RAYRAYERR",
+                           OOMPH_EXCEPTION_LOCATION);
+      }
+    }
+
+   // Check that the distributed boolean is the same for all vectors.
+   if(out_comm.nproc() > 1)
+    {
+     const bool out_distributed = out_vector.distributed();
+     for (unsigned vec_i = 0; vec_i < nvectors; vec_i++) 
+      {
+       if(out_distributed != in_vector_pt[vec_i]->distributed())
+        {
+         std::ostringstream error_message;
+         error_message << "The vector in position "<<vec_i <<" has a\n"
+                       << "different distributed boolean from the "
+                       << "out vector.\n";
+         throw OomphLibError(error_message.str(),
+                             "RAYRAYERR",
+                             OOMPH_EXCEPTION_LOCATION);
+        } 
+      }
+    }
+   
+   // Check that the distribution from the out vector is indeed the 
+   // same as the one created by 
+   // LinearAlgebraDistributionHelpers::concatenate(...). This test is 
+   // redundant if the out_vector is not built to begin with.
+   
+   // Create tmp_distribution, a concatenation of all distributions from
+   // the in vectors.
+   Vector<LinearAlgebraDistribution*> in_distribution_pt(nvectors,0);
+   for (unsigned vec_i = 0; vec_i < nvectors; vec_i++) 
+    {
+     in_distribution_pt[vec_i] = in_vector_pt[vec_i]->distribution_pt();
+    }
+   
+   LinearAlgebraDistribution tmp_distribution;
+   LinearAlgebraDistributionHelpers::concatenate(in_distribution_pt,
+                                                 tmp_distribution);
+   // The the distribution from the out vector.
+   LinearAlgebraDistribution out_distribution
+    = *(out_vector.distribution_pt());
+
+   // Compare them!
+   if(tmp_distribution != out_distribution)
+    {
+     std::ostringstream error_message;
+     error_message << "The distribution of the out vector is not correct.\n"
+                   << "Please call the function with a cleared out vector,\n"
+                   << "or compare the distribution of the out vector with\n"
+                   << "the distribution created by\n"
+                   << "LinearAlgebraDistributionHelpers::concatenate(...)\n";
+     throw OomphLibError(error_message.str(),
+                         "RAYRAYERR",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+
+   // Do not need these distributions.
+   tmp_distribution.clear();
+   out_distribution.clear();
+#endif
+ 
+   unsigned out_value_offset = 0;
+
+   double* out_value_pt = out_vector.values_pt();
+
+   // Loop through the vectors.
+   for (unsigned vec_i = 0; vec_i < nvectors; vec_i++) 
+    {
+     // Get the nrow_local and 
+     // pointer to the values for the current in vector.
+     unsigned in_vector_nrow_local = in_vector_pt[vec_i]->nrow_local();
+     double* in_vector_value_pt = in_vector_pt[vec_i]->values_pt();
+
+     // Loop through the local values and inset them into the out_vector.
+     for (unsigned val_i = 0; val_i < in_vector_nrow_local; val_i++) 
+      {
+       out_value_pt[out_value_offset + val_i] = in_vector_value_pt[val_i];
+      }
+
+     // Update the offset.
+     out_value_offset += in_vector_nrow_local;
+    }
+  } // function concatenate_without_communication
+
+  //===========================================================================
+  /// \short Split a DoubleVector into the out DoubleVectors.
+  /// Data stays on its current processor, no data is sent between processors.
+  /// This results in our vectors which are a permutation of the in vector.
+  /// 
+  /// Let vec_A be the in Vector, and let vec_B and vec_C be the out vectors.
+  /// Then the splitting of vec_A is depicted below:
+  /// vec_A: [a0  (on p0)
+  ///         a1] (on p0)
+  ///        [a2  (on p1)
+  ///         a3] (on p1)
+  ///
+  /// vec_B: [a0] (on p0)    vec_C: [a1] (on p0)
+  ///        [a2] (on p1)           [a3] (on p1).
+  ///
+  /// This means that the distribution of the in vector MUST be a 
+  /// concatenation of the out vector distributions, refer to
+  /// LinearAlgebraDistributionHelpers::concatenate(...) to concatenate
+  /// distributions.
+  //===========================================================================
+  void split_without_communication(const DoubleVector &in_vector, 
+                                   Vector<DoubleVector*> &out_vector_pt)
+  {
+   // How many out vectors do we need?
+   unsigned nvec = out_vector_pt.size();
+   
+#ifdef PARANOID
+   // Check that in_vector is built
+   if(!in_vector.built())
+    {
+     std::ostringstream error_message;
+     error_message << "The in_vector is not built.\n"
+                   << "Please build it!.\n";
+     throw OomphLibError(error_message.str(),
+                         "RAYRAYERR",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+
+   // Check that all out vectors are built.
+   for (unsigned vec_i = 0; vec_i < nvec; vec_i++) 
+    {
+     if(!out_vector_pt[vec_i]->built())
+      {
+       std::ostringstream error_message;
+       error_message << "The vector at position " << vec_i
+                     << " is not built.\n"
+                     << "Please build it!.\n";
+       throw OomphLibError(error_message.str(),
+                           "RAYRAYERR",
+                           OOMPH_EXCEPTION_LOCATION);
+      }
+    }
+   
+   // Check that the concatenation of distributions from the out vectors is 
+   // the same as the distribution from in_vector.
+   
+   // Create the distribution from out_distribution.
+   Vector<LinearAlgebraDistribution*> tmp_out_distribution_pt(nvec,0);
+   for (unsigned vec_i = 0; vec_i < nvec; vec_i++) 
+    {
+     tmp_out_distribution_pt[vec_i] = out_vector_pt[vec_i]->distribution_pt();
+    }
+   
+   LinearAlgebraDistribution tmp_distribution;
+   LinearAlgebraDistributionHelpers::concatenate(tmp_out_distribution_pt,
+                                                 tmp_distribution);
+   // Compare the distributions
+   if(tmp_distribution != *(in_vector.distribution_pt()))
+    {
+     std::ostringstream error_message;
+     error_message << "The distribution from the in vector is incorrect.\n" 
+                   << "It must be a concatenation of all the distributions\n"
+                   << "from the out vectors.\n";
+     throw OomphLibError(error_message.str(),
+                         "RAYRAYERR",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+
+   // Clear the distribution.
+   tmp_distribution.clear();
+   
+   // Check that all communicators are the same. We use a communicator to
+   // get the number of processors and my_rank. So we would like them to be
+   // the same for the in vector and all the out vectors.
+   const OomphCommunicator in_vector_comm
+    = *(in_vector.distribution_pt()->communicator_pt());
+   for (unsigned vec_i = 0; vec_i < nvec; vec_i++)
+    {
+     const OomphCommunicator vec_i_comm
+      = *(out_vector_pt[vec_i]->distribution_pt()->communicator_pt());
+      
+     if(in_vector_comm != vec_i_comm)
+      {
+       std::ostringstream error_message;
+       error_message << "The communicator for the vector in position\n"
+                     << vec_i << " is not the same as the in_vector\n"
+                     << "communicator.";
+       throw OomphLibError(error_message.str(),
+                           "RAYRAYERR",
+                           OOMPH_EXCEPTION_LOCATION);
+      }
+    }
+
+   // Check that if the in vector is distributed, then all the out vectors are
+   // also distributed.
+   if(in_vector_comm.nproc()>1)
+    {
+     bool in_distributed = in_vector.distributed();
+     for (unsigned vec_i = 0; vec_i < nvec; vec_i++) 
+      {
+       if(in_distributed != out_vector_pt[vec_i]->distributed())
+        {
+         std::ostringstream error_message;
+         error_message << "The vector in position " << vec_i
+                       << " does not have\n"
+                       << "the same distributed boolean as the in vector";
+         throw OomphLibError(error_message.str(),
+                             "RAYRAYERR",
+                             OOMPH_EXCEPTION_LOCATION);
+        }
+      }
+    }
+#endif
+
+   // Loop through the sub vectors and insert the values from the
+   // in vector.
+   double* in_value_pt = in_vector.values_pt();
+   unsigned in_value_offset = 0;
+   for (unsigned vec_i = 0; vec_i < nvec; vec_i++) 
+    {
+     // The nrow_local and values for the current out vector.
+     unsigned out_nrow_local = out_vector_pt[vec_i]->nrow_local();
+     double* out_value_pt = out_vector_pt[vec_i]->values_pt();
+      
+     // Loop through the local values of out vector.
+     for (unsigned val_i = 0; val_i < out_nrow_local; val_i++) 
+      {
+       out_value_pt[val_i] = in_value_pt[in_value_offset + val_i];
+      }
+
+     // Update the offset.
+     in_value_offset += out_nrow_local;
+    }
+  } // function split_distribution_vector
+ } // end of DoubleVectorHelpers namespace
 
 }//end of oomph namespace

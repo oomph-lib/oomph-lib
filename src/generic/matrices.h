@@ -1058,6 +1058,14 @@ class CRDoubleMatrix : public Matrix<double, CRDoubleMatrix >,
  /// \short returns the inf-norm of this matrix
  double inf_norm() const;
 
+ /// \short returns a Vector of diagonal entries of this matrix.
+ /// This only works with square matrices. This condition may be relaxed
+ /// in the future if need be.
+ Vector<double> diagonal_entries() const;
+
+ /// \short element-wise addition of this matrix with matrix_in.
+ void add(const CRDoubleMatrix &matrix_in, CRDoubleMatrix &result_matrix) const;
+
  private:
 
  /// \short Flag to determine which matrix-matrix multiplication method is used
@@ -3117,9 +3125,94 @@ void CRMatrix<T>::build(const Vector<T>& value,
 template<class T,class MATRIX_TYPE>
  T SparseMatrix<T,MATRIX_TYPE>::Zero=T(0);
 
+
+//=================================================================
+/// Namespace for helper functions for CRDoubleMatrices
+//=================================================================
+namespace CRDoubleMatrixHelpers
+{
+
+ /// \short Builds a uniformly distributed matrix.
+ /// A locally replicated matrix is constructed then redistributed using 
+ /// OOMPH-LIB's default uniform row distribution.
+ /// This is memory intensive thus should be used for 
+ /// testing or small problems only.
+ /// The resulting matrix (mat_out) must not have been built.
+ void create_uniformly_distributed_matrix(
+  const unsigned &nrow, const unsigned &ncol,
+  const OomphCommunicator* const comm_pt,
+  const Vector<double> &values, 
+  const Vector<int> &column_indicies, const Vector<int> &row_start,
+  CRDoubleMatrix &mat_out);
+
+ /// \short Concatenate CRDoubleMatrix matrices. 
+ /// The in matrices are concatenated such that the block structure of the
+ /// in matrices are preserved in the result matrix. Communication between 
+ /// processors is required. If the block structure of the sub matrices does
+ /// not need to be preserved, consider using
+ /// CRDoubleMatrixHelpers::concatenate_without_communication(...).
+ /// \n
+ /// The matrix manipulation functions
+ /// CRDoubleMatrixHelpers::concatenate(...) and
+ /// CRDoubleMatrixHelpers::concatenate_without_communication(...)
+ /// are analogous to the Vector manipulation functions
+ /// DoubleVectorHelpers::concatenate(...) and
+ /// DoubleVectorHelpers::concatenate_without_communication(...).
+ /// Please look at the DoubleVector functions for an illustration of the 
+ /// differences between concatenate(...) and 
+ /// concatenate_without_communication(...).
+ /// \n
+ /// Distribution of the result matrix:
+ /// If the result matrix does not have a distribution built, then it will be
+ /// given a uniform row distribution. Otherwise we use the existing 
+ /// distribution. This gives the user the ability to define their own 
+ /// distribution, or save computing power if a distribution has 
+ /// been pre-built.
+ void concatenate(const DenseMatrix<CRDoubleMatrix*> &matrix_pt,
+                  CRDoubleMatrix &result_matrix);
+  
+ /// \short Concatenate CRDoubleMatrix matrices. The vector 
+ /// block_distribution_pt contains the LinearAlgebraDistribution of each
+ /// block row. This is required so that the sub matrices in matrix_pt can
+ /// be null to represent a zero matrix.\n
+ /// \n
+ /// The result matrix is a permutation of the in matrices such that the data
+ /// stays on the same processor when the result matrix is built, there is no
+ /// communication between processors.\n
+ /// Thus the block structure of the sub matrices are NOT preserved in the
+ /// result matrix, instead we observe a permutation, defined by the 
+ /// distribution of the sub matrices.The columns are permuted accordingly.
+ /// If one wishes to preserve the block structure of the sub matrices in the
+ /// result matrix, consider using CRDoubleMatrixHelpers::concatenate(...),
+ /// which uses communication between processors to ensure that the block
+ /// structure of the sub matrices are preserved.\n
+ /// \n
+ /// The matrix manipulation functions
+ /// CRDoubleMatrixHelpers::concatenate(...) and
+ /// CRDoubleMatrixHelpers::concatenate_without_communication(...)
+ /// are analogous to the Vector manipulation functions
+ /// DoubleVectorHelpers::concatenate(...) and
+ /// DoubleVectorHelpers::concatenate_without_communication(...).
+ /// Please look at the DoubleVector functions for an illustration of the 
+ /// differences between concatenate(...) and 
+ /// concatenate_without_communication(...).
+ /// \n
+ /// Distribution of the result matrix:
+ /// If the result matrix does not have a distribution built, then it will be
+ /// given a distribution built from the concatenation of the distributions
+ /// of the first block column using 
+ /// LinearAlgebraDistributionHelpers::concatenate(...). 
+ /// Otherwise we use the existing distribution. If there is an existing 
+ /// distribution then it must be the same as the distribution from the 
+ /// concatenation of distributions as described above. 
+ /// Why don't we always compute the distribution "on the fly"?
+ /// Because a non-uniform distribution requires communication.
+ void concatenate_without_communication(
+  const Vector<LinearAlgebraDistribution*> &block_distribution_pt,
+  const DenseMatrix<CRDoubleMatrix*> &matrix_pt,
+  CRDoubleMatrix &result_matrix);
+} // CRDoubleMatrixHelpers
+
 }
 #endif
-
-
-
 

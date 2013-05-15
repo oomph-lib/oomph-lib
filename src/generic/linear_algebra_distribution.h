@@ -86,7 +86,7 @@ class LinearAlgebraDistribution
  
  /// \short Constructor. Takes the number of global rows and uniformly 
  /// distributes them over the processors if distributed = true (default),
- /// if distributed = false every row is duplicated on every processor
+ /// if distributed = false then every row is duplicated on every processor
  LinearAlgebraDistribution(const OomphCommunicator& comm, 
                            const unsigned &n_row,
                            const bool &distributed_ = true)
@@ -109,7 +109,7 @@ class LinearAlgebraDistribution
  
  /// \short Constructor. Takes the number of global rows and uniformly 
  /// distributes them over the processors if distributed = true (default),
- /// if distributed = false every row is duplicated on every processor
+ /// if distributed = false then every row is duplicated on every processor
  LinearAlgebraDistribution(const OomphCommunicator* const comm_pt, 
                            const unsigned &n_row,
                            const bool &distributed_ = true)
@@ -164,7 +164,7 @@ class LinearAlgebraDistribution
  /// (default) then uniformly distribute nrow over all processors where 
  /// processors 0 holds approximately the first nrow/n_proc, processor 
  /// 1 holds the next nrow/n_proc and so on... or if distributed = false
- /// the every row is held on every processor
+ /// then every row is held on every processor
  void build(const OomphCommunicator& comm_pt,
 	    const unsigned& nrow,
 	    const bool& distributed = true);
@@ -173,7 +173,7 @@ class LinearAlgebraDistribution
  /// (default) then uniformly distribute nrow over all processors where 
  /// processors 0 holds approximately the first nrow/n_proc, processor 
  /// 1 holds the next nrow/n_proc and so on... or if distributed = false
- /// the every row is held on every processor
+ /// then every row is held on every processor
  void build(const OomphCommunicator* const comm_pt,
 	    const unsigned& nrow,
 	    const bool& distributed = true);
@@ -306,7 +306,7 @@ class LinearAlgebraDistribution
 #endif
   }
 
- /// \short access function for the first row on this processor
+ /// \short access function for the first row on the p-th processor
  unsigned first_row(const unsigned& p) const
   {
 #ifdef PARANOID
@@ -415,6 +415,18 @@ class LinearAlgebraDistribution
    return p;
   }
  
+ /// \short return the nrow_local Vector
+ Vector<unsigned> nrow_local_vector() const
+  {
+   return Nrow_local;
+  }
+
+ /// \short return the first_row Vector
+ Vector<unsigned> first_row_vector() const
+  {
+   return First_row;
+  }
+
   private:
  
  /// the number of global rows
@@ -548,5 +560,47 @@ class LinearAlgebraDistribution
    /// the LinearAlgebraDistribution object
    LinearAlgebraDistribution* Distribution_pt;
   }; // end of DistributableLinearAlgebraObject
+
+//=============================================================================
+/// Namespace for helper functions for LinearAlgebraDistributions
+//=============================================================================
+ namespace LinearAlgebraDistributionHelpers
+ {
+  /// \short Takes a vector of LinearAlgebraDistribution objects and 
+  /// concatenates them such that the nrow_local of the out_distribution
+  /// is the sum of the nrow_local of all the in_distributions and the number
+  /// of global rows of the out_distribution is the sum of the number of global
+  /// rows of all the in_distributions. \n
+  /// This results in a permuation of the rows in the out_distribution. 
+  /// Think of this in terms of DoubleVectors, if we have DoubleVectors with 
+  /// distributions A and B, distributed across two processors (p0 and p1),\n
+  /// A: [a0] (on p0)    B: [b0] (on p0) \n
+  ///    [a1] (on p1)       [b1] (on P1), \n
+  /// \n
+  /// then the out_distribution is\n
+  /// [a0  (on p0) \n
+  ///  b0] (on p0) \n
+  /// [a1  (on p1) \n
+  ///  b1] (on p1), \n
+  /// \n
+  /// as opposed to \n
+  /// [a0  (on p0) \n
+  ///  a1] (on p0) \n
+  /// [b0  (on p1) \n
+  ///  b1] (on p1). \n
+  /// \n
+  /// Note (1): The out_distribution may not be uniformly distributed even
+  /// if the the in_distributions are uniform distributions.\n 
+  /// Try this out with two distributions of global rows 3 and 5, uniformly
+  /// distributed across two processors. Compare this against a distribution
+  /// of global row 8 distributed across two processors.\n
+  /// \n
+  /// Note (2): There is no equivalent function which takes a Vector of
+  /// LinearAlgebraDistribution objects (as opposed to pointers), there should
+  /// not be one since we do not want to invoke the assignment operator when
+  /// creating the Vector of LinearAlgebraDistribution objects.\n
+  void concatenate(const Vector<LinearAlgebraDistribution*> &in_distribution_pt,
+                   LinearAlgebraDistribution &out_distribution);
+ }
 } // end of oomph namespace
 #endif

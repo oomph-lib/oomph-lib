@@ -2321,6 +2321,8 @@ CRDoubleMatrix* CRDoubleMatrix::global_matrix() const
    // =========================================
    if (!((*this->distribution_pt()) == *dist_pt))
     {
+     // Get the number of columns to build the matrix.
+     unsigned long ncol = this->ncol();    
      
      // current data
      int* current_row_start = this->row_start();
@@ -2648,7 +2650,7 @@ CRDoubleMatrix* CRDoubleMatrix::global_matrix() const
 
        // 
        this->build(dist_pt);
-       this->build_without_copy(dist_pt->nrow(),nnz_count,
+       this->build_without_copy(ncol,nnz_count,
                                 new_value,new_column_index,
                                        new_row_start);
        // if (my_rank == 0)
@@ -2883,7 +2885,7 @@ CRDoubleMatrix* CRDoubleMatrix::global_matrix() const
         LinearAlgebraDistribution(this->distribution_pt()->communicator_pt(),
                                   nrow,false);
        this->build(dist_pt);
-       this->build_without_copy(dist_pt->nrow(),nnz_count,
+       this->build_without_copy(ncol,nnz_count,
                                 global_value,global_column_index,
                                 global_row_start);
 
@@ -2924,7 +2926,7 @@ CRDoubleMatrix* CRDoubleMatrix::global_matrix() const
        int offset = global_row_start[first_row];
        for (unsigned i = 0; i <= nrow_local; i++)
         {
-         dist_row_start[i] = global_row_start[first_row+1]-offset;
+         dist_row_start[i] = global_row_start[first_row+i]-offset;
         }
        for (unsigned i = 0; i < nnz; i++)
         {
@@ -2934,7 +2936,7 @@ CRDoubleMatrix* CRDoubleMatrix::global_matrix() const
 
        // rebuild
        this->build(dist_pt);
-       this->build_without_copy(dist_pt->nrow(),nnz,dist_value,
+       this->build_without_copy(ncol,nnz,dist_value,
                                 dist_column_index,dist_row_start);
       }
     }
@@ -2989,4 +2991,1684 @@ double CRDoubleMatrix::inf_norm() const
    return n;
   }
 
+//=============================================================================
+/// Return the diagonal entries of the matrix. 
+/// This only works with square matrices. This condition may be relaxed 
+/// in the future if need be.
+//=============================================================================
+Vector<double> CRDoubleMatrix::diagonal_entries() const
+{
+
+#ifdef PARANOID
+ // Check if the matrix has been built.
+ if(!this->built())
+  {
+   std::ostringstream error_message;
+   error_message << "The matrix has not been built.\n"
+                 << "Please build it...\n";
+   throw OomphLibError(error_message.str(),
+                       "diagonal_entries(...)",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+
+ // Check if this is a square matrix.
+ if(this->nrow() != this->ncol())
+  {
+   std::ostringstream error_message;
+   error_message << "The matrix is not square. Can only get the diagonal\n"
+                 << "entries of a square matrix.\n";
+   throw OomphLibError(error_message.str(),
+                       "diagonal_entries(...)",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+  
+ // We get the diagonal entries on this processor.
+ unsigned nrow_local = this->nrow_local();
+
+ // Create storage for the diagonal entries.
+ Vector<double> result_vec;
+ result_vec.reserve(nrow_local);
+  
+ // Get the first row for the column offset.
+ unsigned first_row = this->first_row();
+
+ // Loop through the local rows.
+ for (unsigned i = 0; i < nrow_local; i++) 
+  {
+   // The column entries are globally indexed.
+   unsigned diag_entry_col = first_row + i;
+    
+   // Push back the diagonal entry.
+   result_vec.push_back(CR_matrix.get_entry(i, diag_entry_col));
+  }
+  
+ return result_vec;
 }
+
+//=============================================================================
+/// Element-wise addition of this matrix with matrix_in.
+//=============================================================================
+void CRDoubleMatrix::add(const CRDoubleMatrix &matrix_in, 
+                         CRDoubleMatrix &result_matrix) const
+{
+#ifdef PARANOID
+ // Check if this matrix is built.
+ if(!this->built())
+  {
+   std::ostringstream error_message;
+   error_message << "The matrix is not built.\n"
+                 << "Please build the matrix!\n";
+   throw OomphLibError(error_message.str(),
+                       "RAYRAYERR",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+  
+ // Check if this matrix_in is built.
+ if(!matrix_in.built())
+  {
+   std::ostringstream error_message;
+   error_message << "The matrix matrix_in is not built.\n"
+                 << "Please build the matrix!\n";
+   throw OomphLibError(error_message.str(),
+                       "RAYRAYERR",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+
+ // Check if the dimensions of this matrix and matrix_in are the same.
+ unsigned long this_nrow = this->nrow();
+ unsigned long matrix_in_nrow = matrix_in.nrow();
+ if(this_nrow != matrix_in_nrow)
+  {
+   std::ostringstream error_message;
+   error_message << "matrix_in has a different number of rows than\n"
+                 << "this matrix.\n";
+   throw OomphLibError(error_message.str(),
+                       "RAYRAYERR",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+
+ unsigned long this_ncol = this->ncol();
+ unsigned long matrix_in_ncol = matrix_in.ncol();
+ if(this_ncol != matrix_in_ncol)
+  {
+   std::ostringstream error_message;
+   error_message << "matrix_in has a different number of columns than\n"
+                 << "this matrix.\n";
+   throw OomphLibError(error_message.str(),
+                       "RAYRAYERR",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+
+ // Check if the distribution is the same (Otherwise we may have to send and 
+ // receive data from other processors - which is not implemented!)
+ if(*(this->distribution_pt()) != *(matrix_in.distribution_pt()))
+  {
+   std::ostringstream error_message;
+   error_message << "matrix_in must have the same distribution as\n"
+                 << "this matrix.\n";
+   throw OomphLibError(error_message.str(),
+                       "RAYRAYERR",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+
+ // Check if the result matrix is clear. 
+ // We forced the user to give us an empty matrix.
+ if(result_matrix.built())
+  {
+   std::ostringstream error_message;
+   error_message << "The result_matrix is built. "
+                 << "Please supply an empty matrix.\n"
+                 << "(call clear on the matrix, I do not want to over "
+                 << "write your data by accident)\n";
+   throw OomphLibError(error_message.str(),
+                       "RAYRAYERR",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+
+ // Addition of two compressed row form matrices, we need to know the union of
+ // their sparcity patterns. This is determined from the column indices.
+ // First we loop through the rows for both this matrix and matrix_in
+ // and insert their column indices in a set.
+ // NB. when the number of duplicates is large enough, it's actually faster 
+ // to convert to a set and then dump the data back into a vector. This has
+ // been tested.
+
+ unsigned nrow_local = this->nrow_local();
+
+ //Vector of union of column indices
+ Vector< std::set<int> > column_set(nrow_local);
+
+ // The row_start and column_indices
+ const int* this_column_indices = this->column_index();
+ const int* this_row_start = this->row_start();
+ const int* in_column_indices = matrix_in.column_index();
+ const int* in_row_start = matrix_in.row_start();
+
+ // Also take this opportunity to work out the row_start.
+ int nnz_running_sum = 0;
+ Vector<int> res_row_start;
+ res_row_start.reserve(nrow_local+1);
+
+ // Loop through the rows of both matrices and insert the column indices.
+ for (unsigned row_i = 0; row_i < nrow_local; row_i++) 
+  {
+   // Insert the start of this row for the result matrix.
+   res_row_start.push_back(nnz_running_sum);
+
+   // Insert the column indices for this matrix.
+   for (int i = this_row_start[row_i]; i < this_row_start[row_i+1]; i++) 
+    {
+     column_set[row_i].insert(this_column_indices[i]);
+    }
+
+   // Insert the column indices for matrix_in.
+   for (int i = in_row_start[row_i]; i < in_row_start[row_i+1]; i++) 
+    {
+     column_set[row_i].insert(in_column_indices[i]);
+    }
+
+   // Update the nnz.
+   nnz_running_sum += column_set[row_i].size();
+  }
+
+ // Insert the last row start.
+ res_row_start.push_back(nnz_running_sum);
+
+ // Put the values of column_set into res_column_indices
+ Vector<int> res_column_indices;
+ res_column_indices.reserve(nnz_running_sum);
+ for (unsigned row_i = 0; row_i < nrow_local; row_i++) 
+  {
+   res_column_indices.insert(res_column_indices.end(),
+                             column_set[row_i].begin(),
+                             column_set[row_i].end());
+  }
+
+ // Values for the result matrix.
+ Vector<double> res_values(nnz_running_sum,0);
+ 
+ // Values from this matrix and matrix_in.
+ const double* this_values = this->value();
+ const double* in_values = matrix_in.value();
+
+ // Add the values of both matrices.
+ for (unsigned row_i = 0; row_i < nrow_local; row_i++) 
+  {
+   // Adding this matrix to the result matrix.
+   // Loop through the entries on this matrix.
+   for (int this_entry_i = this_row_start[row_i]; 
+        this_entry_i < this_row_start[row_i+1]; this_entry_i++) 
+    {
+     // Is the column index found?
+     bool found = false;
+
+     // Loop through the entries in the result matrix.
+     for (int res_entry_i = res_row_start[row_i]; 
+          res_entry_i < res_row_start[row_i+1] && !found; res_entry_i++) 
+      {
+       if(this_column_indices[this_entry_i] 
+          == res_column_indices[res_entry_i])
+        { 
+         res_values[res_entry_i] += this_values[this_entry_i];
+         found = true;
+        }
+      }
+    }
+
+   // Adding matrix_in values to result_matrix values.
+   for (int in_entry_i = in_row_start[row_i]; 
+        in_entry_i < in_row_start[row_i+1]; in_entry_i++) 
+    {
+     // Is the column index found?
+     bool found = false;
+
+     // Loop through the entries in the result matrix.
+     for (int res_entry_i = res_row_start[row_i]; 
+          res_entry_i < res_row_start[row_i+1] && !found; res_entry_i++) 
+      {
+       if(in_column_indices[in_entry_i] 
+          == res_column_indices[res_entry_i])
+        {
+         res_values[res_entry_i] += in_values[in_entry_i];
+         found = true;
+        }
+      }
+    }
+  }
+
+ // Finally build the result_matrix.
+ result_matrix.build(this->distribution_pt(),this->ncol(),res_values,
+                     res_column_indices,res_row_start);
+}
+
+//=================================================================
+/// Namespace for helper functions for CRDoubleMatrices
+//=================================================================
+namespace CRDoubleMatrixHelpers
+{
+ //============================================================================
+ /// \short Builds a uniformly distributed matrix.
+ /// A locally replicated matrix is constructed then redistributed using 
+ /// OOMPH-LIB's default uniform row distribution.
+ /// This is memory intensive thus should be used for 
+ /// testing or small problems only.
+ //============================================================================
+ void create_uniformly_distributed_matrix(
+  const unsigned &nrow, const unsigned &ncol,
+  const OomphCommunicator* const comm_pt,
+  const Vector<double> &values, 
+  const Vector<int> &column_indices, const Vector<int> &row_start,
+  CRDoubleMatrix &matrix_out)
+ {
+#ifdef PARANOID
+  // Check if the communicator exists.
+  if(comm_pt == 0)
+   {
+    std::ostringstream error_message;
+    error_message << "Please supply the communicator.\n";
+    throw OomphLibError(error_message.str(),
+                        "create_uniformly_distributed_matrix(...)",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+  // Is the out matrix built? We need an empty matrix!
+  if(matrix_out.built())
+   {
+    std::ostringstream error_message;
+    error_message << "The result matrix has been built.\n"
+                  << "Please clear the matrix.\n";
+    throw OomphLibError(error_message.str(),
+                        "create_uniformly_distributed_matrix(...)",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+
+  // Create the locally replicated distribution.
+  bool distributed = false;
+  LinearAlgebraDistribution 
+   locally_replicated_distribution(comm_pt,nrow,distributed);
+
+  // Create the matrix.
+  matrix_out.build(&locally_replicated_distribution,ncol,
+                   values,column_indices,row_start);
+
+  // Create the distributed distribution.
+  distributed = true;
+  LinearAlgebraDistribution 
+   distributed_distribution(comm_pt,nrow,distributed);
+
+  // Redistribute the matrix.
+  matrix_out.redistribute(&distributed_distribution);
+ }
+
+ //============================================================================
+ /// \short Concatenate CRDoubleMatrix matrices. 
+ /// The in matrices are concatenated such that the block structure of the
+ /// in matrices are preserved in the result matrix. Communication between 
+ /// processors is required. If the block structure of the sub matrices does
+ /// not need to be preserved, consider using
+ /// CRDoubleMatrixHelpers::concatenate_without_communication(...).
+ /// \n
+ /// The matrix manipulation functions
+ /// CRDoubleMatrixHelpers::concatenate(...) and
+ /// CRDoubleMatrixHelpers::concatenate_without_communication(...)
+ /// are analogous to the Vector manipulation functions
+ /// DoubleVectorHelpers::concatenate(...) and
+ /// DoubleVectorHelpers::concatenate_without_communication(...).
+ /// Please look at the DoubleVector functions for an illustration of the 
+ /// differences between concatenate(...) and 
+ /// concatenate_without_communication(...).
+ /// \n
+ /// Distribution of the result matrix:
+ /// If the result matrix does not have a distribution built, then it will be
+ /// given a uniform row distribution. Otherwise we use the existing 
+ /// distribution. This gives the user the ability to define their own 
+ /// distribution, or save computing power if a distribution has 
+ /// been pre-built.
+ //============================================================================
+ void concatenate(const DenseMatrix<CRDoubleMatrix*> &matrix_pt,
+                  CRDoubleMatrix &result_matrix)
+ {
+  
+  // The number of block rows and block columns.
+  unsigned matrix_nrow = matrix_pt.nrow();
+  unsigned matrix_ncol = matrix_pt.ncol();
+  
+  // PARANOID checks involving only the in matrices.
+#ifdef PARANOID
+  // Are there matrices to concatenate?
+  if(matrix_nrow == 0)
+   {
+    std::ostringstream error_message;
+    error_message << "There are no matrices to concatenate.\n";
+    throw OomphLibError(error_message.str(),
+                        "RAYRAYERR",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+
+  // Does this matrix need concatenating?
+  if((matrix_nrow == 1) && (matrix_ncol == 1))
+   {
+    std::ostringstream warning_message;
+    warning_message << "There is only one matrix to concatenate...\n"
+                    << "This does not require concatenating...\n";
+    OomphLibWarning(warning_message.str(),
+                    "RAYRAYERR",
+                    OOMPH_EXCEPTION_LOCATION);
+   }
+
+  // Are all sub matrices built?
+  for(unsigned block_row_i = 0; block_row_i < matrix_nrow; block_row_i++)
+   {
+    for(unsigned block_col_i = 0; block_col_i < matrix_ncol; block_col_i++)
+     {
+      if (!(matrix_pt(block_row_i,block_col_i)->built()))
+       {
+        std::ostringstream error_message;
+        error_message
+         << "The sub matrix (" << block_row_i << "," << block_col_i << ")\n"
+         << "is not built. \n";
+        throw OomphLibError(error_message.str(),
+                            "RAYRAYERR",
+                            OOMPH_EXCEPTION_LOCATION);
+       }
+     }
+   }
+
+  // Do all dimensions of sub matrices "make sense"?
+  // Compare the number of rows of each block matrix in a block row.
+  for(unsigned block_row_i = 0; block_row_i < matrix_nrow; block_row_i++)
+   {
+    // Use the first column to compare against the rest.
+    unsigned long current_block_nrow = matrix_pt(block_row_i,0)->nrow();
+
+    // Compare against columns 1 to matrix_ncol - 1
+    for(unsigned block_col_i = 1; block_col_i < matrix_ncol; block_col_i++)
+     {
+      // Get the nrow for this sub block.
+      unsigned long subblock_nrow 
+       = matrix_pt(block_row_i,block_col_i)->nrow();
+
+      if(current_block_nrow != subblock_nrow)
+       {
+        std::ostringstream error_message;
+        error_message
+         << "The sub matrix (" << block_row_i << "," << block_col_i << ")\n"
+         << "requires nrow = " << current_block_nrow 
+         << ", but has nrow = " << subblock_nrow <<".\n";
+        throw OomphLibError(error_message.str(),
+                            "RAYRAYERR",
+                            OOMPH_EXCEPTION_LOCATION);
+       }
+     }
+   }
+
+  // Compare the number of colmns of each block matrix in a block column.
+  for(unsigned block_col_i = 0; block_col_i < matrix_ncol; block_col_i++)
+   {
+    // Use the first row to compare against the rest.
+    unsigned long current_block_ncol = matrix_pt(0,block_col_i)->ncol();
+
+    // Compare against rows 1 to matrix_nrow - 1
+    for(unsigned block_row_i = 1; block_row_i < matrix_nrow; block_row_i++)
+     {
+      // Get the ncol for this sub block.
+      unsigned long subblock_ncol 
+       = matrix_pt(block_row_i,block_col_i)->ncol();
+
+      if(current_block_ncol != subblock_ncol)
+       {
+        std::ostringstream error_message;
+        error_message
+         << "The sub matrix (" << block_row_i << "," << block_col_i << ")\n"
+         << "requires ncol = " << current_block_ncol
+         << ", but has ncol = " << subblock_ncol << ".\n";
+        throw OomphLibError(error_message.str(),
+                            "RAYRAYERR",
+                            OOMPH_EXCEPTION_LOCATION);
+       }
+     }
+   }
+#endif
+  
+  // The communicator pointer from block (0,0)
+  const OomphCommunicator* const comm_pt 
+   = matrix_pt(0,0)->distribution_pt()->communicator_pt();
+
+  // Check if the block (0,0) is distributed or not.
+  bool distributed = matrix_pt(0,0)->distributed(); 
+  
+  // If the result matrix does not have a distribution, we create a uniform
+  // distribution.
+  if(!result_matrix.distribution_pt()->built())
+   {
+    // Sum of sub matrix nrow. We use the first column.
+    unsigned tmp_nrow = 0;
+    for (unsigned block_row_i = 0; block_row_i < matrix_nrow; block_row_i++) 
+     {
+      tmp_nrow +=matrix_pt(block_row_i,0)->nrow();
+     }
+
+    LinearAlgebraDistribution tmp_distribution(comm_pt,tmp_nrow,distributed);
+
+    result_matrix.build(&tmp_distribution);
+   }
+  else
+   // A distribution is supplied for the result matrix.
+   {
+#ifdef PARANOID
+    // Check if the sum of the nrow from the sub matrices is the same as the 
+    // the nrow from the result matrix.
+
+    // Sum of sub matrix nrow. We use the first column.
+    unsigned tmp_nrow = 0;
+    for (unsigned block_row_i = 0; block_row_i < matrix_nrow; block_row_i++) 
+     {
+      tmp_nrow +=matrix_pt(block_row_i,0)->nrow();
+     }
+
+    if(tmp_nrow != result_matrix.nrow())
+     {
+      std::ostringstream error_message;
+      error_message << "The total number of rows from the matrices to\n"
+                    << "concatenate does not match the nrow from the\n"
+                    << "result matrix\n";
+      throw OomphLibError(error_message.str(),
+                          "RAYRAYERR",
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+#endif
+   }
+
+#ifdef PARANOID
+  
+  // Are all the communicators the same?
+  // Compare the communicator for sub matrices (against the result matrix).
+  {
+   const OomphCommunicator communicator 
+    = *(result_matrix.distribution_pt()->communicator_pt());
+
+   // Are all communicator pointers the same?
+   for(unsigned block_row_i = 0; block_row_i < matrix_nrow; block_row_i++)
+    {
+     for(unsigned block_col_i = 0; block_col_i < matrix_ncol; block_col_i++)
+      {
+       const OomphCommunicator another_communicator 
+        = *(matrix_pt(block_row_i,block_col_i)
+            ->distribution_pt()->communicator_pt());
+
+       if(!(communicator == another_communicator))
+        {
+         std::ostringstream error_message;
+         error_message
+          << "The OomphCommunicator of the sub matrix (" 
+          << block_row_i << "," << block_col_i << ")\n"
+          << "does not have the same communicator as the result matrix. \n";
+         throw OomphLibError(error_message.str(),
+                             "RAYRAYERR",
+                             OOMPH_EXCEPTION_LOCATION); 
+        }
+      }
+    }
+  }
+
+  // Are all the distributed boolean the same? This only applies if we have
+  // more than one processor. If there is only one processor, then it does
+  // not matter if it is distributed or not - they are conceptually the same.
+  if(comm_pt->nproc() != 1)
+   {
+    // Compare distributed for sub matrices (against the result matrix).
+    const bool res_distributed = result_matrix.distributed();
+
+    // Loop over all sub blocks.
+    for(unsigned block_row_i = 0; block_row_i < matrix_nrow; block_row_i++)
+     {
+      for(unsigned block_col_i = 0; block_col_i < matrix_ncol; block_col_i++)
+       {
+        const bool another_distributed 
+         = matrix_pt(block_row_i,block_col_i)->distributed();
+
+        if(res_distributed != another_distributed)
+         {
+          std::ostringstream error_message;
+          error_message
+           << "The distributed boolean of the sub matrix (" 
+           << block_row_i << "," << block_col_i << ")\n"
+           << "is not the same as the result matrix. \n";
+          throw OomphLibError(error_message.str(),
+                              "RAYRAYERR",
+                              OOMPH_EXCEPTION_LOCATION); 
+         }
+       }
+     }
+   }
+#endif
+
+  // Flag to enable timing. This is for debugging 
+  // and/or testing purposes only.
+  bool enable_timing = false;
+
+  // Get the number of columns up to each block for offset 
+  // in calculating the result column indices.
+  // Since the number of columns in each block column is the same,
+  // we only loop through the first block row (row zero).
+  Vector<unsigned long> sum_of_ncol_up_to_block(matrix_ncol);
+
+  // Also compute the total number of columns to build the resulting matrix.
+  unsigned long res_ncol = 0;
+
+  for(unsigned block_col_i = 0; block_col_i < matrix_ncol; block_col_i++)
+   {
+    sum_of_ncol_up_to_block[block_col_i] = res_ncol;
+    res_ncol += matrix_pt(0,block_col_i)->ncol();
+   }
+    
+  // We begin the process of extracting and ordering the values, 
+  // column_indices and row_start of all the sub blocks.
+  if((comm_pt->nproc() == 1) || !distributed)
+   // Serial version of the code.
+   {
+    // Get the total number of non zero entries so we can reserve storage for
+    // the values and column_indices vectors.
+    unsigned long res_nnz = 0;
+    for (unsigned block_row_i = 0; 
+         block_row_i < matrix_nrow; block_row_i++) 
+     {
+      for (unsigned block_col_i = 0; 
+           block_col_i < matrix_ncol; block_col_i++) 
+       {
+        res_nnz+=matrix_pt(block_row_i,block_col_i)->nnz();
+       }
+     }
+      
+    // Declare the vectors required to build a CRDoubleMatrix
+    Vector<double> res_values;
+    Vector<int> res_column_indices;
+    Vector<int> res_row_start;
+
+    // Reserve space for the vectors.
+    res_values.reserve(res_nnz);
+    res_column_indices.reserve(res_nnz);
+    res_row_start.reserve(result_matrix.nrow()+1);
+
+    // Now we fill in the data.
+
+    // Running sum of nnz per row.
+    int nnz_running_sum = 0;
+
+    // Loop through the block rows.
+    for (unsigned block_row_i = 0; block_row_i < matrix_nrow; block_row_i++) 
+     {
+      // Get the number of rows in this block row, from the first block.
+      unsigned long block_row_nrow = matrix_pt(block_row_i,0)->nrow();
+
+      // Loop through the number of rows in this block row
+      for (unsigned row_i = 0; row_i < block_row_nrow; row_i++) 
+       {
+        // The row start is the nnz at the start of the row.
+        res_row_start.push_back(nnz_running_sum);
+
+        // Loop through the block columns
+        for (unsigned block_col_i = 0; 
+             block_col_i < matrix_ncol; block_col_i++) 
+         {
+          // Get the current block.
+          CRDoubleMatrix* current_block_pt
+           = matrix_pt(block_row_i,block_col_i);
+
+          // Get the values, column_indices and row_start for this block.
+          double* current_block_values = current_block_pt->value();
+          int* current_block_column_indices 
+           = current_block_pt->column_index();
+          int* current_block_row_start = current_block_pt->row_start();
+
+          for (unsigned val_i = current_block_row_start[row_i]; 
+               val_i < current_block_row_start[row_i+1]; val_i++)
+           {
+            res_values.push_back(current_block_values[val_i]);
+            res_column_indices.push_back(current_block_column_indices[val_i]
+                                         + sum_of_ncol_up_to_block[block_col_i]);
+           }
+
+          // Update the running sum of nnz per row
+          nnz_running_sum += current_block_row_start[row_i+1] 
+           - current_block_row_start[row_i];
+         } // for block cols
+       } // for rows
+     } // for block rows
+
+    // Fill in the last row start
+    res_row_start.push_back(res_nnz);
+
+    // Build the matrix
+    result_matrix.build(res_ncol,res_values,res_column_indices, res_row_start);
+   }
+  // Otherwise we are dealing with a distributed matrix.
+  else
+   {
+#ifdef OOMPH_HAS_MPI
+    // Get the number of processors
+    unsigned nproc = comm_pt->nproc();
+
+    // My rank
+    unsigned my_rank = comm_pt->my_rank();
+
+    // Storage for the data (per processor) to send.
+    Vector<Vector<unsigned> > column_indices_to_send(nproc);
+    Vector<Vector<double> > values_to_send(nproc);
+      
+    // The sum of the nrow for the sub blocks (so far). This is used as an
+    // offset to calculate the global equation number in the result matrix.
+    unsigned long sum_of_block_nrow = 0;
+        
+    double t_prep_data_start;
+    if(enable_timing)
+     {
+      t_prep_data_start = TimingHelpers::timer();
+     }
+
+    // Get the pointer to the result distribution, for convenience...
+    LinearAlgebraDistribution* res_distribution_pt
+     = result_matrix.distribution_pt();
+
+    // loop over the sub blocks to calculate the global_eqn, get the values
+    // and column indices.
+    for (unsigned block_row_i = 0; block_row_i < matrix_nrow; block_row_i++) 
+     {
+      // Get the number of local rows in this block_row from the first block.
+      unsigned current_block_nrow_local = matrix_pt(block_row_i,0)
+       ->nrow_local();
+
+      // Get the first_row for this block_row
+      unsigned current_block_row_first_row = matrix_pt(block_row_i,0)
+       ->first_row();
+
+      // Loop through the number of local rows
+      for(unsigned sub_local_eqn = 0;
+          sub_local_eqn < current_block_nrow_local; sub_local_eqn++)
+       {
+        // Calculate the corresponding (res_global_eqn) equation number 
+        // for this local row number in this block.
+        unsigned long res_global_eqn = sub_local_eqn 
+         + current_block_row_first_row + sum_of_block_nrow;
+
+        // Get the processor that this global row belongs to.
+        // The rank_of_global_row(...) function loops through all the 
+        // processors and does two unsigned comparisons. Since we have to do
+        // this for every row, it may be better to store a list mapping for
+        // very large number of processors.
+        unsigned res_p = res_distribution_pt
+         ->rank_of_global_row(res_global_eqn);
+
+        // With the res_p, we get the res_first_row to 
+        // work out the res_local_eqn
+        unsigned res_first_row = res_distribution_pt->first_row(res_p);
+        unsigned res_local_eqn = res_global_eqn - res_first_row;
+
+        // Loop through the block columns, calculate the nnz. This is used to
+        // reserve space for the value and column_indices Vectors.
+        unsigned long current_row_nnz = 0;
+        for (unsigned block_col_i = 0; 
+             block_col_i < matrix_ncol; block_col_i++) 
+         {
+          // Get the row_start
+          int* current_block_row_start = matrix_pt(block_row_i,block_col_i)
+           ->row_start();
+            
+          // Update the nnz for this row.
+          current_row_nnz += current_block_row_start[sub_local_eqn+1] 
+           - current_block_row_start[sub_local_eqn];
+         } // for block column, get nnz.
+
+        // Reserve space for efficiency.
+        //unsigned capacity_in_res_p_vec 
+        //  = column_indices_to_send[res_p].capacity();
+
+        // Reserve memory for nnz+2, since we need to store the res_local_eqn
+        // and nnz as well as the data (values/column indices). 
+        // Note: The two reserve functions are called per row. 
+        // If the matrix is very sparse (just a few elements per row), it
+        // will be more efficient to not reserve and let the STL vector 
+        // handle this. On average, this implementation is more efficient.
+        //column_indices_to_send[res_p].reserve(capacity_in_res_p_vec 
+        //    + current_row_nnz+2);
+        //values_to_send[res_p].reserve(capacity_in_res_p_vec
+        //    + current_row_nnz+2);
+
+        // Push back the res_local_eqn and nnz
+        column_indices_to_send[res_p].push_back(res_local_eqn);
+        column_indices_to_send[res_p].push_back(current_row_nnz);
+        values_to_send[res_p].push_back(res_local_eqn);
+        values_to_send[res_p].push_back(current_row_nnz);
+
+        // Loop through the block columns again and get the values 
+        // and column_indices
+        for (unsigned block_col_i = 0; 
+             block_col_i < matrix_ncol; block_col_i++) 
+         {
+          // Cache the pointer to the current block for convenience.
+          CRDoubleMatrix* current_block_pt
+           = matrix_pt(block_row_i,block_col_i);
+
+          // Values, column indices and row_start for the current block.
+          double* current_block_values = current_block_pt->value();
+          int* current_block_column_indices 
+           = current_block_pt->column_index();
+          int* current_block_row_start = current_block_pt->row_start();
+
+          // Loop though the values and column_indices
+          for (int val_i = current_block_row_start[sub_local_eqn]; 
+               val_i < current_block_row_start[sub_local_eqn+1]; val_i++) 
+           {
+            // Push back the value.
+            values_to_send[res_p].push_back(current_block_values[val_i]);
+
+            // Push back the (offset) column index.
+            column_indices_to_send[res_p].push_back(
+             current_block_column_indices[val_i]
+             + sum_of_ncol_up_to_block[block_col_i]);
+           } // for block columns
+         } // for block column, get values and column_indices.
+       } // for sub_local_eqn
+
+      // update the sum_of_block_nrow
+      sum_of_block_nrow += matrix_pt(block_row_i,0)->nrow();
+
+     } // for block_row
+      
+    if(enable_timing)
+     {
+      double t_prep_data_finish = TimingHelpers::timer();
+      double t_prep_data_time = t_prep_data_finish - t_prep_data_start;
+      oomph_info << "Time for prep data: " << t_prep_data_time << std::endl; 
+     }
+
+    // Prepare to send data!
+
+    // Storage for the number of data to be sent to each processor.
+    Vector<int> send_n(nproc,0);
+
+    // Storage for all the values/column indices to be sent 
+    // to each processor.
+    Vector<double> send_values_data;
+    Vector<unsigned> send_column_indices_data;
+
+    // Storage location within send_values_data 
+    // (and send_column_indices_data) for data to be sent to each processor.
+    Vector<int> send_displacement(nproc,0);
+
+    double t_total_ndata_start;
+    if(enable_timing)
+     t_total_ndata_start = TimingHelpers::timer();
+
+    // Get the total amount of data which needs to be sent, so we can reserve
+    // space for it.
+    unsigned total_ndata = 0;
+    for (unsigned rank = 0; rank < nproc; rank++) 
+     {
+      if(rank != my_rank)
+       {
+        total_ndata += values_to_send[rank].size();
+       }
+     }
+
+    if(enable_timing)
+     {
+      double t_total_ndata_finish = TimingHelpers::timer();
+      double t_total_ndata_time= t_total_ndata_finish - t_total_ndata_start;
+      oomph_info << "Time for total_ndata: " << t_total_ndata_time << std::endl; 
+     }
+
+    double t_flat_pack_start;
+    if(enable_timing)
+     t_flat_pack_start = TimingHelpers::timer();
+
+    // Now we don't have to re-allocate data/memory when push_back is called.
+    // Nb. Using push_back without reserving memory may cause multiple
+    // re-allocation behind the scenes, this is expensive.
+    send_values_data.reserve(total_ndata);
+    send_column_indices_data.reserve(total_ndata);
+
+    // Loop over all the processors to "flat pack" the data for sending.
+    for (unsigned rank = 0; rank < nproc; rank++) 
+     {
+      // Set the offset for the current processor
+      // This only has to be done once for both values and column indices.
+      send_displacement[rank] = send_values_data.size();
+
+      // Don't bother to do anything if 
+      // the processor in the loop is the current processor.
+      if(rank != my_rank)
+       {
+        // Put the values into the send data vector.
+        // n_data is the same for both values and column indices.
+        unsigned n_data = values_to_send[rank].size();
+        for (unsigned j = 0; j < n_data; j++) 
+         {
+          send_values_data.push_back(values_to_send[rank][j]);
+          send_column_indices_data.push_back(
+           column_indices_to_send[rank][j]);
+         } // for
+       } // if rank != my_rank
+
+      // Find the number of data to be added to the vector.
+      // send_n is the same for both values and column indices.
+      send_n[rank] = send_values_data.size() - send_displacement[rank];
+     } // loop over processors
+
+    if(enable_timing)
+     {
+      double t_flat_pack_finish = TimingHelpers::timer();
+      double t_flat_pack_time = t_flat_pack_finish - t_flat_pack_start;
+      oomph_info << "t_flat_pack_time: " << t_flat_pack_time << std::endl; 
+     }
+
+    double t_sendn_start;
+    if(enable_timing)
+     t_sendn_start = TimingHelpers::timer();
+
+    // Strorage for the number of data to be received from each processor
+    Vector<int> receive_n(nproc,0);
+
+    MPI_Alltoall(&send_n[0],1,MPI_INT,&receive_n[0],1,MPI_INT,
+                 comm_pt->mpi_comm());
+
+    if(enable_timing)
+     {
+      double t_sendn_finish = TimingHelpers::timer();
+      double t_sendn_time = t_sendn_finish - t_sendn_start;
+      oomph_info << "t_sendn_time: " << t_sendn_time << std::endl; 
+     }
+
+
+    // Prepare the data to be received
+    // by working out the displacement from the received data
+    // receive_displacement is the same for both values and column indices.
+    Vector<int> receive_displacement(nproc,0);
+    int receive_data_count = 0;
+    for (unsigned rank = 0; rank < nproc; rank++) 
+     {
+      receive_displacement[rank] = receive_data_count;
+      receive_data_count += receive_n[rank];
+     }
+
+    // Now resize the receive buffer for all data from all processors.
+    // Make sure that it has a size of at least one.
+    if(receive_data_count == 0){receive_data_count++;}
+    Vector<double> receive_values_data(receive_data_count);
+    Vector<unsigned> receive_column_indices_data(receive_data_count);
+
+    // Make sure that the send buffer has size at least one
+    // so that we don't get a segmentation fault.
+    if(send_values_data.size()==0){send_values_data.resize(1);}
+
+    double t_send_data_start;
+    if(enable_timing)
+     t_send_data_start = TimingHelpers::timer();
+
+    // Now send the data between all processors
+    MPI_Alltoallv(&send_values_data[0],&send_n[0],&send_displacement[0],
+                  MPI_DOUBLE,
+                  &receive_values_data[0],&receive_n[0],
+                  &receive_displacement[0],
+                  MPI_DOUBLE,
+                  comm_pt->mpi_comm());
+
+    // Now send the data between all processors
+    MPI_Alltoallv(&send_column_indices_data[0],&send_n[0],
+                  &send_displacement[0],
+                  MPI_UNSIGNED,
+                  &receive_column_indices_data[0],&receive_n[0],
+                  &receive_displacement[0],
+                  MPI_UNSIGNED,
+                  comm_pt->mpi_comm());
+
+    if(enable_timing)
+     {
+      double t_send_data_finish = TimingHelpers::timer();
+      double t_send_data_time = t_send_data_finish - t_send_data_start;
+      oomph_info << "t_send_data_time: " << t_send_data_time << std::endl; 
+     }
+
+    // All the rows for this processor are stored in:
+    // from other processors:
+    // receive_column_indices_data and receive_values_data
+    // from this processor:
+    // column_indices_to_send[my_rank] and values_to_send[my_rank]
+    //
+    // They are in some order determined by the distribution. 
+    // We need to re-arrange them. To do this, we do some pre-processing.
+
+    // nrow_local for this processor.
+    unsigned res_nrow_local = res_distribution_pt->nrow_local();
+
+    // Per row, store:
+    // 1) where this row came from, 0 - this proc, 1 - other procs.
+    // 2) the nnz,
+    // 3) the offset - where the values/columns in the receive data vectors 
+    //                 begins. This is different from the offset of where 
+    //                 the data from a certain processor starts.
+    Vector<Vector<unsigned> > value_column_locations(res_nrow_local,
+                                                     Vector<unsigned>(3,0));
+
+    // Store the local nnz so we can reserve space for 
+    // the values and column indices.
+    unsigned long res_nnz_local = 0;
+
+    double t_locations_start;
+    if(enable_timing)
+     t_locations_start = TimingHelpers::timer();
+
+    // Loop through the data currently on this processor.
+    unsigned location_i = 0;
+    unsigned my_column_indices_to_send_size
+     = column_indices_to_send[my_rank].size();
+    while(location_i < my_column_indices_to_send_size)
+     {
+      unsigned current_local_eqn 
+       = column_indices_to_send[my_rank][location_i++];
+
+      unsigned current_nnz 
+       = column_indices_to_send[my_rank][location_i++];
+
+      // No need to fill [*][0] with 0 since it is already initialised to 0.
+
+      // Store the nnz.
+      value_column_locations[current_local_eqn][1] = current_nnz;
+
+      // Also increment the res_local_nnz
+      res_nnz_local += current_nnz;
+
+      // Store the offset.
+      value_column_locations[current_local_eqn][2] = location_i;
+
+      // Update the location_i so it starts at the next row.
+      location_i += current_nnz;
+     }
+
+    // Loop through the data from different processors.
+
+    // Check to see if data has been received.
+    bool data_has_been_received = false;
+    unsigned send_rank = 0;
+    while(send_rank < nproc)
+     {
+      if(receive_n[send_rank] > 0)
+       {
+        data_has_been_received = true;
+        break;
+       }
+      send_rank++;
+     }
+
+    location_i = 0; // start at 0.
+    if(data_has_been_received)
+     {
+      unsigned receive_column_indices_data_size
+       = receive_column_indices_data.size();
+      while(location_i < receive_column_indices_data_size)
+       {
+        unsigned current_local_eqn 
+         = receive_column_indices_data[location_i++];
+        unsigned current_nnz = receive_column_indices_data[location_i++];
+
+        // These comes from other processors.
+        value_column_locations[current_local_eqn][0] = 1;
+
+        // Store the nnz.
+        value_column_locations[current_local_eqn][1] = current_nnz;
+
+        // Also increment the res_local_nnz
+        res_nnz_local += current_nnz;
+
+        // Store the offset.
+        value_column_locations[current_local_eqn][2] = location_i;
+
+        // Update the location_i so it starts at the next row.
+        location_i += current_nnz;
+       }
+     } 
+
+    if(enable_timing)
+     {
+      double t_locations_finish = TimingHelpers::timer();
+      double t_locations_time = t_locations_finish - t_locations_start;
+      oomph_info << "t_locations_time: " << t_locations_time << std::endl; 
+     }
+
+    double t_fillvecs_start;
+    if(enable_timing)
+     t_fillvecs_start = TimingHelpers::timer();
+
+    // Now loop through the locations and store the values 
+    // the column indices in the correct order.
+    Vector<int> res_column_indices;
+    Vector<double> res_values;
+    Vector<int> res_row_start;
+
+    res_column_indices.reserve(res_nnz_local);
+    res_values.reserve(res_nnz_local);
+    res_row_start.reserve(res_nrow_local+1);
+
+    // Running sum of nnz for the row_start. Must be int because
+    // res_row_start is templated with int.
+    int nnz_running_sum = 0;
+
+    // Now insert the rows.
+    for (unsigned local_row_i = 0; 
+         local_row_i < res_nrow_local; local_row_i++) 
+     {
+      // Fill the res_row_start with the nnz so far.
+      res_row_start.push_back(nnz_running_sum);
+
+      bool data_is_from_other_proc 
+       = bool(value_column_locations[local_row_i][0]);
+
+      unsigned row_i_nnz = value_column_locations[local_row_i][1];
+
+      unsigned row_i_offset = value_column_locations[local_row_i][2];
+
+      if(data_is_from_other_proc)
+       {
+        // Insert range [offset, offset+nnz) from 
+        // receive_column_indices_data and receive_values_data into
+        // res_column_indices and res_values respectively.
+        res_column_indices.insert(res_column_indices.end(),
+                                  receive_column_indices_data.begin()
+                                  +row_i_offset,
+                                  receive_column_indices_data.begin()
+                                  +row_i_offset+row_i_nnz);
+
+        res_values.insert(res_values.end(),
+                          receive_values_data.begin()+row_i_offset,
+                          receive_values_data.begin()+row_i_offset+row_i_nnz);
+       }
+      else
+       {
+        res_column_indices.insert(res_column_indices.end(),
+                                  column_indices_to_send[my_rank].begin()
+                                  +row_i_offset,
+                                  column_indices_to_send[my_rank].begin()
+                                  +row_i_offset+row_i_nnz);
+
+        res_values.insert(res_values.end(),
+                          values_to_send[my_rank].begin()+row_i_offset,
+                          values_to_send[my_rank].begin()+row_i_offset+row_i_nnz);
+       }
+
+      // Update the running sum of nnz
+      nnz_running_sum += row_i_nnz;
+     }
+
+    // Insert the last row_start value
+    res_row_start.push_back(res_nnz_local);
+
+    if(enable_timing)
+     {
+      double t_fillvecs_finish = TimingHelpers::timer();
+      double t_fillvecs_time = t_fillvecs_finish - t_fillvecs_start;
+      oomph_info << "t_fillvecs_time: " << t_fillvecs_time << std::endl; 
+     }
+
+    double t_buildres_start;
+    if(enable_timing)
+     t_buildres_start = TimingHelpers::timer();
+
+    // build the matrix.
+    result_matrix.build(res_ncol,res_values,res_column_indices,res_row_start);
+
+    if(enable_timing)
+     {
+      double t_buildres_finish = TimingHelpers::timer();
+      double t_buildres_time = t_buildres_finish - t_buildres_start;
+      oomph_info << "t_buildres_time: " << t_buildres_time << std::endl; 
+     }
+    //  */
+#endif
+   }
+ }
+
+ //============================================================================
+ /// \short Concatenate CRDoubleMatrix matrices. The vector 
+ /// block_distribution_pt contains the LinearAlgebraDistribution of each
+ /// block row. This is required so that the sub matrices in matrix_pt can
+ /// be null to represent a zero matrix.\n
+ /// \n
+ /// The result matrix is a permutation of the in matrices such that the data
+ /// stays on the same processor when the result matrix is built, there is no
+ /// communication between processors.\n
+ /// Thus the block structure of the sub matrices are NOT preserved in the
+ /// result matrix, instead we observe a permutation, defined by the 
+ /// distribution of the sub matrices.The columns are permuted accordingly.
+ /// If one wishes to preserve the block structure of the sub matrices in the
+ /// result matrix, consider using CRDoubleMatrixHelpers::concatenate(...),
+ /// which uses communication between processors to ensure that the block
+ /// structure of the sub matrices are preserved.\n
+ /// \n
+ /// The matrix manipulation functions
+ /// CRDoubleMatrixHelpers::concatenate(...) and
+ /// CRDoubleMatrixHelpers::concatenate_without_communication(...)
+ /// are analogous to the Vector manipulation functions
+ /// DoubleVectorHelpers::concatenate(...) and
+ /// DoubleVectorHelpers::concatenate_without_communication(...).
+ /// Please look at the DoubleVector functions for an illustration of the 
+ /// differences between concatenate(...) and 
+ /// concatenate_without_communication(...).
+ /// \n
+ /// Distribution of the result matrix:
+ /// If the result matrix does not have a distribution built, then it will be
+ /// given a distribution built from the concatenation of the distributions
+ /// of the first block column using 
+ /// LinearAlgebraDistributionHelpers::concatenate(...). 
+ /// Otherwise we use the existing distribution. If there is an existing 
+ /// distribution then it must be the same as the distribution from the 
+ /// concatenation of distributions as described above. 
+ /// Why don't we always compute the distribution "on the fly"?
+ /// Because a non-uniform distribution requires communication.
+ //============================================================================
+ void concatenate_without_communication(
+  const Vector<LinearAlgebraDistribution*> &block_distribution_pt,
+  const DenseMatrix<CRDoubleMatrix*> &matrix_pt,
+  CRDoubleMatrix &result_matrix)
+ {
+  // The number of block rows and block columns.
+  unsigned matrix_nrow = matrix_pt.nrow();
+  unsigned matrix_ncol = matrix_pt.ncol();
+ 
+  // PARANOID checks involving in matrices and block_dsitribution only.
+  // PARANOID checks involving the result matrix will come later since
+  // we have to create the result matrix distribution from the in distribution
+  // if it does not already exist.
+#ifdef PARANOID
+
+  // Are there matrices to concatenate?
+  if(matrix_nrow == 0)
+   {
+    std::ostringstream error_message;
+    error_message << "There are no matrices to concatenate.\n";
+    throw OomphLibError(error_message.str(),
+                        "RAYRAYERR",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+
+  // Does this matrix need concatenating?
+  if((matrix_nrow == 1) && (matrix_ncol == 1))
+   {
+    std::ostringstream warning_message;
+    warning_message << "There is only one matrix to concatenate...\n"
+                    << "This does not require concatenating...\n";
+    OomphLibWarning(warning_message.str(),
+                    "RAYRAYERR",
+                    OOMPH_EXCEPTION_LOCATION);
+   }
+
+  // Ensure that the in matrices is a square block matrix.
+  if(matrix_nrow != matrix_ncol)
+   {
+    std::ostringstream error_message;
+    error_message<<"The number of block rows and block columns\n"
+                 <<"must be the same since we permute the rows and columns.\n";
+    throw OomphLibError(error_message.str(),
+                        "RAYRAYERR",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+
+  // The distribution for each block row is stored in block_distribution_pt.
+  // So the number of distributions in block_distribution_pt must be the
+  // same as matrix_nrow.
+  if(matrix_nrow != block_distribution_pt.size())
+   {
+    std::ostringstream error_message;
+    error_message << "The number of distributions must be the same as\n"
+                  << "the number of block rows.";
+    throw OomphLibError(error_message.str(),
+                        "RAYRAYERR",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+
+  // Check that all pointers in block_distribution_pt is not null.
+  for (unsigned block_row_i = 0; block_row_i < matrix_nrow; block_row_i++) 
+   {
+    if(block_distribution_pt[block_row_i] == 0)
+     {
+      std::ostringstream error_message;
+      error_message << "The distribution pointer in position "
+                    << block_row_i <<" is null.\n";
+      throw OomphLibError(error_message.str(),
+                          "RAYRAYERR",
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+   }
+
+  // Check that all distributions are built.
+  for (unsigned block_row_i = 0; block_row_i < matrix_nrow; block_row_i++) 
+   {
+    if(!block_distribution_pt[block_row_i]->built())
+     {
+      std::ostringstream error_message;
+      error_message << "The distribution pointer in position "
+                    << block_row_i <<" is not built.\n";
+      throw OomphLibError(error_message.str(),
+                          "RAYRAYERR",
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+   }
+
+  // Check that all communicators in block_distribution_pt is are the same.
+  const OomphCommunicator first_comm
+   = *(block_distribution_pt[0]->communicator_pt());
+
+  for (unsigned block_row_i = 1; block_row_i < matrix_nrow; block_row_i++) 
+  {
+    const OomphCommunicator current_comm 
+      = *(block_distribution_pt[block_row_i]->communicator_pt());
+
+    if(first_comm != current_comm)
+     {
+      std::ostringstream error_message;
+      error_message << "The communicator from the distribution in position "
+                    << block_row_i << " is not the same as the first one.";
+      throw OomphLibError(error_message.str(),
+                          "RAYRAYERR",
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+  }
+
+  // Are all sub matrices built? If the matrix_pt is not null, make sure
+  // that it is built.
+  for(unsigned block_row_i = 0; block_row_i < matrix_nrow; block_row_i++)
+   {
+    for(unsigned block_col_i = 0; block_col_i < matrix_ncol; block_col_i++)
+     {
+      if (matrix_pt(block_row_i,block_col_i) != 0 &&
+          !(matrix_pt(block_row_i,block_col_i)->built()))
+       {
+        std::ostringstream error_message;
+        error_message
+         << "The sub matrix (" << block_row_i << "," << block_col_i << ")\n"
+         << "is not built.\n";
+        throw OomphLibError(error_message.str(),
+                            "RAYRAYERR",
+                            OOMPH_EXCEPTION_LOCATION);
+       }
+     }
+   }
+ 
+  // For the matrices which are built, do they have the same communicator as
+  // the first communicator from block_distribution_pt?
+  for (unsigned block_row_i = 0; block_row_i < matrix_nrow; block_row_i++) 
+   {
+    for (unsigned block_col_i = 0; block_col_i < matrix_ncol; block_col_i++) 
+     {
+       if(matrix_pt(block_row_i,block_col_i) != 0)
+        {
+          const OomphCommunicator current_comm
+          = *(matrix_pt(block_row_i,block_col_i)
+              ->distribution_pt()
+              ->communicator_pt());
+          if(first_comm != current_comm)
+           {
+            std::ostringstream error_message;
+            error_message
+             << "The sub matrix (" << block_row_i << ","<<block_col_i<< ")\n"
+             << "does not have the same communicator pointer as those in\n"
+             << "block_distribution_pt.\n";
+            throw OomphLibError(error_message.str(),
+                                "RAYRAYERR",
+                                OOMPH_EXCEPTION_LOCATION);
+           }
+        }
+     }
+   }
+  
+  // Do all dimensions of sub matrices "make sense"?
+  // Compare the number of rows of each block matrix in a block row.
+  for(unsigned block_row_i = 0; block_row_i < matrix_nrow; block_row_i++)
+   {
+    // Use the first column to compare against the rest.
+    unsigned long current_block_nrow = block_distribution_pt[block_row_i]
+                                       ->nrow();
+
+    // Compare against columns 0 to matrix_ncol - 1
+    for(unsigned block_col_i = 0; block_col_i < matrix_ncol; block_col_i++)
+     {
+      // Perform the check if the matrix_pt is not null.
+      if(matrix_pt(block_row_i,block_col_i) != 0)
+       {
+        // Get the nrow for this sub block.
+        unsigned long subblock_nrow 
+          = matrix_pt(block_row_i,block_col_i)->nrow();
+
+        if(current_block_nrow != subblock_nrow)
+         {
+          std::ostringstream error_message;
+          error_message
+           << "The sub matrix (" << block_row_i << "," << block_col_i << ")\n"
+           << "requires nrow = " << current_block_nrow 
+           << ", but has nrow = " << subblock_nrow <<".\n";
+          throw OomphLibError(error_message.str(),
+                              "RAYRAYERR",
+                              OOMPH_EXCEPTION_LOCATION);
+         }
+       }
+     }
+   }
+
+  // Compare the number of colmns of each block matrix in a block column.
+  for(unsigned block_col_i = 0; block_col_i < matrix_ncol; block_col_i++)
+   {
+    // Get the current block ncol from the first non-null block matrix in
+    // this block column.
+    unsigned current_block_ncol = 0;
+    unsigned first_nonnull_block = 0;
+    for (unsigned block_row_i = 0; 
+         block_row_i < matrix_nrow || first_nonnull_block == 0; block_row_i++) 
+     {
+      // If matrix_pt is not null, get the ncol for this block column.
+      // Also store the index of where the block is.
+      if(matrix_pt(block_row_i,block_col_i) != 0)
+       {
+        current_block_ncol = matrix_pt(block_row_i,block_col_i)->ncol();
+        first_nonnull_block = block_row_i;
+       }
+     }
+
+    // Compare against first_nonnull_block until matrix_nrow - 1
+    for(unsigned block_row_i = first_nonnull_block; 
+        block_row_i < matrix_nrow; block_row_i++)
+     {
+      if(matrix_pt(block_row_i,block_col_i) != 0)
+       {
+        // Get the ncol for this sub block.
+        unsigned long subblock_ncol 
+         = matrix_pt(block_row_i,block_col_i)->ncol();
+  
+        if(current_block_ncol != subblock_ncol)
+         {
+          std::ostringstream error_message;
+          error_message
+           << "The sub matrix (" << block_row_i << "," << block_col_i << ")\n"
+           << "requires ncol = " << current_block_ncol
+           << ", but has ncol = " << subblock_ncol << ".\n";
+          throw OomphLibError(error_message.str(),
+                              "RAYRAYERR",
+                              OOMPH_EXCEPTION_LOCATION);
+         }
+       }
+     }
+   }
+  
+  // Ensure that the distributions for all sub matrices in the same block row
+  // are the same. This is because we permute the row across several matrices.
+
+  // Loop through each block row.
+  for (unsigned block_row_i = 0; block_row_i < matrix_nrow; block_row_i++) 
+   {
+    // Get the distribution from the first block in this row.
+    LinearAlgebraDistribution* row_distribution_pt
+     = block_distribution_pt[block_row_i];
+
+    // Loop through the block columns
+    for (unsigned block_col_i = 0; block_col_i < matrix_ncol; block_col_i++) 
+     {
+      if(matrix_pt(block_row_i,block_col_i) != 0)
+       {
+        // Get the distirbution for this block.
+        LinearAlgebraDistribution* block_distribution_pt
+         = matrix_pt(block_row_i,block_col_i)->distribution_pt();
+   
+        // Ensure that the in matrices is a square block matrix.
+        if((*row_distribution_pt) != (*block_distribution_pt))
+         {
+          std::ostringstream error_message;
+          error_message << "Sub block("<<block_row_i<<","<<block_col_i<<")"
+                        << "does not have the same distributoin as the first"
+                        << "block in this block row.\n"
+                        << "All distributions on a block row must be the same"
+                        << "for this function to concatenate matrices.\n";
+          throw OomphLibError(error_message.str(),
+                              "RAYRAYERR",
+                              OOMPH_EXCEPTION_LOCATION);
+         }
+       }
+     }
+   }
+#endif
+  
+  // The communicator pointer from the first block_distribution_pt
+  const OomphCommunicator* const comm_pt 
+   = block_distribution_pt[0]->communicator_pt();
+
+  // The number of blocks.
+  unsigned nblocks = matrix_pt.nrow(); 
+  
+  // If the result matrix does not have a distribution, then we concatenate
+  // the sub matrix distributions.
+  if(!result_matrix.distribution_pt()->built())
+   {
+    // Concatenate the distributions.
+    Vector<LinearAlgebraDistribution*> many_distribution_pt(nblocks,0);
+    for (unsigned block_i = 0; block_i < nblocks; block_i++) 
+     {
+      many_distribution_pt[block_i] = matrix_pt(block_i,0)->distribution_pt();
+     }
+    
+    // The result distribution
+    LinearAlgebraDistribution tmp_distribution;
+
+    LinearAlgebraDistributionHelpers::concatenate(many_distribution_pt,
+                                                  tmp_distribution);
+
+    result_matrix.build(&tmp_distribution);
+   }
+  else
+   // A distribution is supplied for the result matrix.
+   {
+#ifdef PARANOID
+    // Check that the result distribution is a concatenation of the 
+    // distributions of the sub matrices.
+
+    LinearAlgebraDistribution wanted_distribution;
+
+    LinearAlgebraDistributionHelpers::concatenate(block_distribution_pt,
+                                                  wanted_distribution);
+
+    if(*(result_matrix.distribution_pt()) != wanted_distribution)
+     {
+      std::ostringstream error_message;
+      error_message << "The result distribution is not correct.\n"
+                    << "Please call the function without a result\n"
+                    << "distribution (clear the result matrix) or check the\n"
+                    << "distribution of the result matrix.\n"
+                    << "The result distribution must be the same as the one \n"
+                    << "created by\n"
+                    << "LinearAlgebraDistributionHelpers::concatenate(...)";
+      throw OomphLibError(error_message.str(),
+                          "RAYRAYERR",
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+#endif
+   }
+
+  // The rest of the paranoid checks.
+#ifdef PARANOID
+   
+  // Make sure that the communicator from the result matrix is the same as
+  // all the others. This test is redundant if this function created the
+  // result matrix distribution, since then it is guaranteed that the 
+  // communicators are the same.
+  {
+   // Communicator from the result matrix.
+   const OomphCommunicator res_comm
+    = *(result_matrix.distribution_pt()->communicator_pt());
+
+   // Is the result communicator pointer the same as the others?
+   // Since we have already tested the others, we only need to compare against
+   // one of them. Say the first communicator from block_distribution_pt.
+   const OomphCommunicator first_comm 
+     = *(block_distribution_pt[0]->communicator_pt());
+
+   if(res_comm != first_comm)
+    {
+     std::ostringstream error_message;
+     error_message
+     << "The OomphCommunicator of the result matrix is not the same as the "
+     << "others!"; 
+     throw OomphLibError(error_message.str(),
+                         "RAYRAYERR",
+                         OOMPH_EXCEPTION_LOCATION); 
+    }
+  }
+  
+  // Are all the distributed boolean the same? This only applies if we have
+  // more than one processor. If there is only one processor, then it does
+  // not matter if it is distributed or not - they are conceptually the same.
+  if(comm_pt->nproc() != 1)
+   {
+    // Compare distributed for sub matrices (against the result matrix).
+    const bool res_distributed = result_matrix.distributed();
+
+    // Loop over all sub blocks.
+    for(unsigned block_row_i = 0; block_row_i < matrix_nrow; block_row_i++)
+     {
+      for(unsigned block_col_i = 0; block_col_i < matrix_ncol; block_col_i++)
+       {
+        if(matrix_pt(block_row_i,block_col_i) != 0)
+         {
+          const bool another_distributed 
+            = matrix_pt(block_row_i,block_col_i)->distributed();
+
+          if(res_distributed != another_distributed)
+           {
+            std::ostringstream error_message;
+            error_message
+             << "The distributed boolean of the sub matrix (" 
+             << block_row_i << "," << block_col_i << ")\n"
+             << "is not the same as the result matrix. \n";
+            throw OomphLibError(error_message.str(),
+                                "RAYRAYERR",
+                                OOMPH_EXCEPTION_LOCATION); 
+           }
+         }
+       }
+     }
+   }
+#endif
+
+  ////////////////// END OF PARANOID TESTS ////////////////////////////////////
+  
+  // The number of processors.
+  unsigned nproc = comm_pt->nproc();
+  
+  // Cache the result distribution pointer for convenience.
+  LinearAlgebraDistribution* res_distribution_pt
+   = result_matrix.distribution_pt();
+
+  // nrow_local and nrow (the global row) for the result matrix
+  unsigned res_nrow_local = res_distribution_pt->nrow_local();
+  unsigned res_nrow = res_distribution_pt->nrow();
+    
+  // determine nnz of all blocks on this processor only.
+  unsigned res_nnz = 0;
+  for (unsigned row_i = 0; row_i < nblocks; row_i++) 
+   {
+    for (unsigned col_i = 0; col_i < nblocks; col_i++) 
+     {
+      if(matrix_pt(row_i,col_i) !=0)
+       {
+        res_nnz += matrix_pt(row_i,col_i)->nnz();
+       }
+     }
+   }
+
+  // construct the block offset
+  DenseMatrix<unsigned> col_offset(nproc,nblocks,0);
+  unsigned off = 0;
+  for (unsigned proc_i = 0; proc_i < nproc; proc_i++) 
+   {
+    for (unsigned block_i = 0; block_i < nblocks; block_i++) 
+     {
+      col_offset(proc_i,block_i) = off;
+      off +=block_distribution_pt[block_i]->nrow_local(proc_i);
+     }
+   }
+
+  // storage for the result matrix.
+  int* res_row_start = new int[res_nrow_local+1];
+  int* res_column_index = new int[res_nnz];
+  double* res_value = new double[res_nnz];
+    
+  // initialise the zero-th entry
+  res_row_start[0] = 0;
+    
+  // loop over the block rows
+  unsigned res_i = 0; // index for the result matrix.
+  unsigned res_row_i = 0; // index for the row
+  for (unsigned i = 0; i < nblocks; i++) 
+   {
+    // loop over the rows of the current block local rows.
+    unsigned block_nrow = block_distribution_pt[i]->nrow_local();
+    for (unsigned k = 0; k < block_nrow; k++) 
+     {
+      // initialise res_row_start
+      res_row_start[res_row_i+1] = res_row_start[res_row_i];
+
+      // Loop over the block columns
+      for (unsigned j = 0; j < nblocks; j++) 
+       {
+        // if block(i,j) pointer is not null then
+        if (matrix_pt(i,j) != 0) 
+         {
+          // get pointers for the elements in the current block
+          int* b_row_start = matrix_pt(i,j)->row_start();
+          int* b_column_index = matrix_pt(i,j)->column_index();
+          double* b_value = matrix_pt(i,j)->value();
+
+          // Loop through the current local row.
+          for (int l = b_row_start[k]; l < b_row_start[k+1]; l++)
+           {
+
+            // if b_column_index[l] was a row index, what processor
+            // would it be on
+            unsigned p = 0;
+            int b_first_row = block_distribution_pt[j]->first_row(0);
+            int b_nrow_local = block_distribution_pt[j]->nrow_local(0);
+
+            while (b_column_index[l] < b_first_row || 
+                   b_column_index[l] >= b_nrow_local+b_first_row)
+             {
+              p++;
+              b_first_row = block_distribution_pt[j]->first_row(p);
+              b_nrow_local = block_distribution_pt[j]->nrow_local(p);
+             }
+
+            // determine the local equation number in the block j/processor p
+            // "column block"
+            unsigned eqn = b_column_index[l]-b_first_row;
+
+            // add to the preconditioner matrix
+            res_value[res_i] = b_value[l];
+            res_column_index[res_i] = col_offset(p,j)+eqn;
+            res_row_start[res_row_i+1]++;
+            res_i++;
+           }
+         }
+       }
+
+      // increment the row pt
+      res_row_i++;
+
+     }
+   }
+  
+  // Build the result matrix.
+  result_matrix.build_without_copy(res_nrow,res_nnz,
+                                   res_value,
+                                   res_column_index,
+                                   res_row_start);
+ }
+
+} // CRDoubleMatrixHelpers
+
+} // namespace oomph

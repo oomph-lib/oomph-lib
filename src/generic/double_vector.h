@@ -259,16 +259,42 @@ class CRDoubleMatrix;
  /// \short access function to the underlying values (const version)
  double* values_pt() const {return Values_pt;}
 
- /// output the contents of the vector
+ /// output the global contents of the vector
  void output(std::ostream &outfile);
 
- /// output the contents of the vector
+ /// output the global contents of the vector
  void output(std::string filename)
   {
     // Open file
     std::ofstream some_file;
     some_file.open(filename.c_str());
     output(some_file);
+    some_file.close();
+  }
+
+ /// output the local contents of the vector
+ void output_local_values(std::ostream &outfile);
+
+ /// output the local contents of the vector
+ void output_local_values(std::string filename)
+  {
+    // Open file
+    std::ofstream some_file;
+    some_file.open(filename.c_str());
+    output_local_values(some_file);
+    some_file.close();
+  }
+
+ /// output the local contents of the vector
+ void output_local_values_with_offset(std::ostream &outfile);
+
+ /// output the local contents of the vector
+ void output_local_values_with_offset(std::string filename)
+  {
+    // Open file
+    std::ofstream some_file;
+    some_file.open(filename.c_str());
+    output_local_values_with_offset(some_file);
     some_file.close();
   }
 
@@ -294,6 +320,118 @@ class CRDoubleMatrix;
  bool Built;
 
 }; //end of DoubleVector
+
+//=================================================================
+/// Namespace for helper functions for DoubleVectors
+//=================================================================
+namespace DoubleVectorHelpers
+{
+ /// \short Concatenate DoubleVectors.
+ /// Takes a Vector of DoubleVectors. If the out vector is built, we will not
+ /// build a new distribution. Otherwise we build a uniform distribution.
+ /// 
+ /// The rows of the out vector is seen "as it is" in the in vectors.
+ /// For example, if we have DoubleVectors with distributions A and B, 
+ /// distributed across two processors (p0 and p1),
+ /// 
+ /// A: [a0] (on p0)    B: [b0] (on p0)
+ ///    [a1] (on p1)       [b1] (on P1),
+ /// 
+ /// then the out_vector is
+ ///
+ /// [a0  (on p0)
+ ///  a1] (on p0)
+ /// [b0]  (on p1)
+ ///  b1] (on p1),
+ ///
+ /// Communication is required between processors. The sum of the global number
+ /// of rows in the in vectors must equal to the global number of rows in the
+ /// out vector. This condition must be met if one is to supply an out vector
+ /// with a distribution, otherwise we can let the function generate the
+ /// out vector distribution itself. 
+ void concatenate(const Vector<DoubleVector*> &in_vector_pt,
+                  DoubleVector &out_vector);
+
+ /// \short Split a DoubleVector into the out DoubleVectors.
+ /// Let vec_A be the in Vector, and let vec_B and vec_C be the out vectors.
+ /// Then the splitting of vec_A is depicted below:
+ /// vec_A: [a0  (on p0)
+ ///         a1] (on p0)
+ ///        [a2  (on p1)
+ ///         a3] (on p1)
+ ///
+ /// vec_B: [a0] (on p0)    vec_C: [a2] (on p0)
+ ///        [a1] (on p1)           [a3] (on p1)
+ /// 
+ /// Communication is required between processors.
+ /// The out_vector_pt must contain pointers to DoubleVector which has already
+ /// been built with the correct distribution; the sum of the number of global 
+ /// row of the out vectors must be the same the the number of global rows of
+ /// the in vector.
+ void split(const DoubleVector &in_vector, 
+            Vector<DoubleVector*> &out_vector_pt);
+
+ /// \short Concatenate DoubleVectors.
+ /// Takes a Vector of DoubleVectors. If the out vector is built, we will not
+ /// build a new distribution. Otherwise a new distribution will be built
+ /// using LinearAlgebraDistribution::concatenate(...).
+ /// 
+ /// The out vector has its rows permuted according to the individual 
+ /// distributions of the in vectors. For example, if we have DoubleVectors 
+ /// with distributions A and B, distributed across two processors 
+ /// (p0 and p1),
+ /// 
+ /// A: [a0] (on p0)    B: [b0] (on p0)
+ ///    [a1] (on p1)       [b1] (on P1),
+ /// 
+ /// then the out_vector is
+ ///
+ /// [a0  (on p0)
+ ///  b0] (on p0)
+ /// [a1  (on p1)
+ ///  b1] (on p1),
+ ///
+ /// as opposed to
+ ///
+ /// [a0  (on p0)
+ ///  a1] (on p0)
+ /// [b0  (on p1)
+ ///  b1] (on p1).
+ ///
+ /// Note (1): The out vector may not be uniformly distributed even
+ /// if the the in vectors have uniform distributions. The nrow_local of the
+ /// out vector will be the sum of the nrow_local of the in vectors.
+ /// Try this out with two distributions of global rows 3 and 5, uniformly
+ /// distributed across two processors. Compare this against a distribution
+ /// of global row 8 distributed across two processors.
+ ///
+ /// There are no MPI send and receive, the data stays on the processor
+ /// as defined by the distributions from the in vectors.
+ void concatenate_without_communication(
+  const Vector<DoubleVector*> &in_vector_pt, DoubleVector &out_vector);
+
+ /// \short Split a DoubleVector into the out DoubleVectors.
+ /// Data stays on its current processor, no data is sent between processors.
+ /// This results in our vectors which are a permutation of the in vector.
+ /// 
+ /// Let vec_A be the in Vector, and let vec_B and vec_C be the out vectors.
+ /// Then the splitting of vec_A is depicted below:
+ /// vec_A: [a0  (on p0)
+ ///         a1] (on p0)
+ ///        [a2  (on p1)
+ ///         a3] (on p1)
+ ///
+ /// vec_B: [a0] (on p0)    vec_C: [a1] (on p0)
+ ///        [a2] (on p1)           [a3] (on p1).
+ ///
+ /// This means that the distribution of the in vector MUST be a 
+ /// concatenation of the out vector distributions, refer to
+ /// LinearAlgebraDistributionHelpers::concatenate(...) to concatenate
+ /// distributions.
+ void split_without_communication(const DoubleVector &in_vector, 
+                                  Vector<DoubleVector*> &out_vector_pt);
+
+} // end of DoubleVectorHelpers namespace
 
 } // end of oomph namespace
 #endif
