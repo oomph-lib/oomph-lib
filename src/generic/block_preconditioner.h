@@ -366,8 +366,8 @@ namespace oomph
   /// of block pointers and returns a single matrix containing all the
   /// blocks of the matrix of blocks in a single matrix that can
   /// be solved directly.
-  void build_preconditioner_matrix(DenseMatrix<MATRIX*>& block_matrix_pt,
-                                   MATRIX*& preconditioner_matrix) const;
+//  void build_preconditioner_matrix(DenseMatrix<MATRIX*>& block_matrix_pt,
+//                                   MATRIX*& preconditioner_matrix) const;
 
   /// \short Takes the naturally ordered vector and rearranges it into a
   /// vector of sub vectors corresponding to the blocks, so s[b][i] contains
@@ -1587,7 +1587,7 @@ namespace oomph
                         OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
-/* 
+ 
   // Each mesh must contain elements with the same number of dof.
   // A stricter check is to ensure that the mesh contains only one type of
   // elements. This is relaxed in same cases.
@@ -1673,7 +1673,7 @@ namespace oomph
        }
      }
    }
- */
+
 #endif
 
 

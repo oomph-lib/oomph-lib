@@ -759,6 +759,7 @@ namespace oomph
  }
 
 
+/*
 //=============================================================================
 /// Assemble the block preconditioner as a single matrix. 
 /// In some cases the block preconditioner cannot be applied in 
@@ -1014,7 +1015,7 @@ namespace oomph
                                                p_column_index, 
                                                p_row_start);   
  }
+*/
 
-
-}
+} // Namespace: oomph
 
