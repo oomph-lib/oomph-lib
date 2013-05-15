@@ -276,9 +276,11 @@ void ExactSubBiharmonicPreconditioner::setup()
   this->get_blocks(required_blocks, matrix_of_block_pointers);
 
   // build the precondiitoner matrix
-  CRDoubleMatrix* preconditioner_matrix_pt = 0;
-  this->build_preconditioner_matrix(matrix_of_block_pointers,
-                                    preconditioner_matrix_pt);
+  CRDoubleMatrix* preconditioner_matrix_pt 
+    = new CRDoubleMatrix(this->preconditioner_matrix_distribution_pt());
+  
+  CRDoubleMatrixHelpers::concatenate_without_communication
+    (Block_distribution_pt,matrix_of_block_pointers,*preconditioner_matrix_pt);
 
   // delete the block matrices
   for (unsigned i = 0; i < n_block_types; i++)
