@@ -222,11 +222,13 @@ namespace oomph
   }
 
   /// Set the i-th mesh for this block preconditioner.
-  /// Note.\n
+  /// Note:\n
   /// The method set_nmesh(...) must be called before this method
   /// to specify the number of meshes.\n
-  /// Each mesh must only contain elements with the same number of
-  /// types of DOF.
+  /// By default, it is assumed that each mesh only contains elements of the 
+  /// same type. This condition may be relaxed by setting the boolean
+  /// multiple_element_type_in_mesh to true, however, each mesh must only 
+  /// contain elements with the same number of types of DOF.
   void set_mesh(const unsigned& i, const Mesh* const mesh_pt,
                 const bool &multiple_element_type_in_mesh = false)
   {
@@ -387,6 +389,9 @@ namespace oomph
   /// sub-vectors associated with the blocks of the subsidiary preconditioner
   /// will be included. Hence the length of v is master_nrow() whereas the
   /// total length of the s s vectors is Nrow.
+  /// NOTE: If the preconditioner blocks are precomputed, then this function
+  /// calls get_block_vectors_with_precomputed_block_ordering(...),
+  /// otherwise get_block_vector_with_original_matrix_ordering(...) is called.
   void get_block_vectors(const DoubleVector& v,
                          Vector<DoubleVector >& s) const;
 
@@ -394,20 +399,20 @@ namespace oomph
   /// the naturally ordered vector, v. If this is a subsidiary block
   /// preconditioner only those entries in v that are associated with its
   /// blocks are affected.
+  /// NOTE: If the preconditioner blocks are precomputed, then this function
+  /// calls return_block_vectors_with_precomputed_block_ordering(...),
+  /// otherwise return_block_vector_with_original_matrix_ordering(...) 
+  /// is called.
   void return_block_vectors(const Vector<DoubleVector >& s,
                             DoubleVector& v) const;
   
-
-
   /// \short Takes the naturally ordered vector, v and returns the n-th
   /// block vector, b. Here n is the block number in the current
   /// preconditioner. If blocks for this preconditioner has been precomputed
-  /// then this function calls the function get_precomputed_block_vector.
-  /// Otherwise it calls get_block_vector_from_original_matrix.
+  /// then this function calls the function get_precomputed_block_vector(...).
+  /// Otherwise it calls get_block_vector_from_original_matrix(...).
   void get_block_vector(const unsigned& n, const DoubleVector& v,
                         DoubleVector& b) const;
-
-
 
   /// \short Takes the n-th block vector, b, and copies its entries
   /// to the appropriate entries in the naturally ordered vector, v, either
@@ -1101,12 +1106,54 @@ namespace oomph
   void get_block_vector_with_precomputed_block_ordering(
     const unsigned& n, const DoubleVector& v, DoubleVector& b) const;
 
-  /// \short Takes the naturally ordered vector, v, and extracts the n-th
-  /// block vector, b. Here n is the block number in the current
-  /// preconditioner. NOTE: The ordering of the vector b is the same as the 
+  /// \short A helper function, takes the naturally ordered vector, v, 
+  /// and extracts the n-th block vector, b. 
+  /// Here n is the block number in the current preconditioner. 
+  /// NOTE: The ordering of the vector b is the same as the 
   /// ordering of the block matrix from get_block_from_original_matrix(...).
   void get_block_vector_with_original_matrix_ordering(
     const unsigned& n, const DoubleVector& v, DoubleVector& b) const;
+
+  /// \short A helper function, takes the naturally ordered vector and 
+  /// rearranges it into a vector of sub vectors corresponding to the 
+  /// PRECOMPUTED blocks, so s[b][i] contains the i-th entry in the vector 
+  /// associated with the precomputed block b.
+  /// Note: If the preconditioner is a subsidiary preconditioner then only the
+  /// sub-vectors associated with the blocks of the subsidiary preconditioner
+  /// will be included. Hence the length of v is master_nrow() whereas the
+  /// total length of the s vectors is Nrow.
+  void get_block_vectors_with_precomputed_block_ordering(
+      const DoubleVector& v, Vector<DoubleVector >& s) const;
+
+  /// \short A helper function, takes the naturally ordered vector and 
+  /// rearranges it into a vector of sub vectors corresponding to the blocks, 
+  /// so s[b][i] contains the i-th entry in the vector associated with block b. 
+  /// These blocks and vectors are those corresponding to the original block 
+  /// matrix ordering, i.e. there are no precomputed blocks.
+  /// Note: If the preconditioner is a subsidiary preconditioner then only the
+  /// sub-vectors associated with the blocks of the subsidiary preconditioner
+  /// will be included. Hence the length of v is master_nrow() whereas the
+  /// total length of the s s vectors is Nrow.
+  void get_block_vectors_with_original_matrix_ordering(
+      const DoubleVector& v, Vector<DoubleVector >& s) const;
+
+  /// \short A helper function, takes the vector of block vectors, s, 
+  /// and copies its entries into the naturally ordered vector, v. 
+  /// This function assume that there are nblocks_precomputed block vectors 
+  /// and they have the precomputed block ordering. If this is a subsidiary 
+  /// block preconditioner only those entries in v that are associated with 
+  /// its blocks are affected.
+  void return_block_vectors_with_precomputed_block_ordering(
+      const Vector<DoubleVector >& s, DoubleVector& v) const;
+
+  /// \short A helper function, takes the vector of block vectors, s, and 
+  /// copies its entries into the naturally ordered vector, v. 
+  /// The block vectors are assumed to have the ordering of the original 
+  /// block matrices. I.e. there are no precomputed blocks. 
+  /// If this is a subsidiary block preconditioner only those entries in v 
+  /// that are associated with its blocks are affected.
+  void return_block_vectors_with_original_matrix_ordering(
+      const Vector<DoubleVector >& s, DoubleVector& v) const;
 
   /// \short Gets block (i,j) from the original matrix, pointed to by
   /// Matrix_pt and returns it in block_matrix_pt
@@ -3300,16 +3347,50 @@ namespace oomph
  }
 
  //============================================================================
- /// \short Takes the naturally ordered vector and rearranges it into a vector
- /// of sub vectors corresponding to the blocks, so s[b][i] contains the i-th
- /// entry in the vector associated with block b. Note: If the preconditioner
- /// is a subsidiary preconditioner then only the sub-vectors associated with
- /// the blocks of the subsidiary preconditioner will be included. Hence the
- /// length of v is master_nrow() whereas the total length of the s s vectors
- /// is Nrow.
+ /// \short Takes the naturally ordered vector and rearranges it into a
+ /// vector of sub vectors corresponding to the blocks, so s[b][i] contains
+ /// the i-th entry in the vector associated with block b.
+ /// Note: If the preconditioner is a subsidiary preconditioner then only the
+ /// sub-vectors associated with the blocks of the subsidiary preconditioner
+ /// will be included. Hence the length of v is master_nrow() whereas the
+ /// total length of the s s vectors is Nrow.
+ /// NOTE: If the preconditioner blocks are precomputed, then this function
+ /// calls get_block_vectors_with_precomputed_block_ordering(...),
+ /// otherwise get_block_vector_with_original_matrix_ordering(...) is called.
  //============================================================================
  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
  get_block_vectors(const DoubleVector& v, Vector<DoubleVector >& s) const
+ {
+   // If preconditioner_blocks have been precomputed then we call
+   // get_block_vectors_with_precomputed_block_ordering(...) to ensure that
+   // the distribution of the block vectors s are the same as the 
+   // precomputed block distributions.
+   if(Preconditioner_blocks_have_been_precomputed)
+    {
+     get_block_vectors_with_precomputed_block_ordering(v,s);
+    }
+   else
+   // Otherwise the n-th block matrix came from the original matrix, so we
+   // call get_block_vectors_with_original_matrix_ordering(...)
+    {
+     get_block_vectors_with_original_matrix_ordering(v,s);
+    }
+ }
+
+ //============================================================================
+ /// \short A helper function, takes the naturally ordered vector and 
+ /// rearranges it into a vector of sub vectors corresponding to the blocks, 
+ /// so s[b][i] contains the i-th entry in the vector associated with block b. 
+ /// These blocks and vectors are those corresponding to the original block 
+ /// matrix ordering, i.e. there are no precomputed blocks.
+ /// Note: If the preconditioner is a subsidiary preconditioner then only the
+ /// sub-vectors associated with the blocks of the subsidiary preconditioner
+ /// will be included. Hence the length of v is master_nrow() whereas the
+ /// total length of the s s vectors is Nrow.
+ //============================================================================
+ template<typename MATRIX> void BlockPreconditioner<MATRIX>::
+ get_block_vectors_with_original_matrix_ordering(
+     const DoubleVector& v, Vector<DoubleVector >& s) const
  {
 #ifdef PARANOID
   if (!v.built())
@@ -3556,13 +3637,102 @@ namespace oomph
  }
 
  //============================================================================
- /// \short Takes the vector of block vectors, s, and copies its entries into
- /// the naturally ordered vector, v. If this is a subsidiary block
- /// preconditioner only those entries in v that are associated with its blocks
- /// are affected.
+ /// \short A helper function, takes the naturally ordered vector and 
+ /// rearranges it into a vector of sub vectors corresponding to the 
+ /// PRECOMPUTED blocks, so s[b][i] contains the i-th entry in the vector 
+ /// associated with the precomputed block b.
+ /// Note: If the preconditioner is a subsidiary preconditioner then only the
+ /// sub-vectors associated with the blocks of the subsidiary preconditioner
+ /// will be included. Hence the length of v is master_nrow() whereas the
+ /// total length of the s vectors is Nrow. 
  //============================================================================
  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
- return_block_vectors (const Vector<DoubleVector >& s, DoubleVector& v) const
+ get_block_vectors_with_precomputed_block_ordering(
+     const DoubleVector& v, Vector<DoubleVector >& s) const
+ {
+#ifdef PARANOID
+  if (!v.built())
+   {
+    std::ostringstream error_message;
+    error_message << "The distribution of the global vector v must be setup.";
+    throw OomphLibError(error_message.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+  if (*(v.distribution_pt()) != *(this->master_distribution_pt()))
+   {
+    std::ostringstream error_message;
+    error_message << "The distribution of the global vector v must match the "
+                  << " specified master_distribution_pt(). \n"
+                  << "i.e. Distribution_pt in the master preconditioner";
+    throw OomphLibError(error_message.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+  if(!Preconditioner_blocks_have_been_precomputed)
+   {
+    std::ostringstream error_message;
+    error_message << "You have not set precomputed blocks. It does not make "
+                  << "sense to get vectors with precomputed block ordering.\n";
+    throw OomphLibError(error_message.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+
+  const unsigned nprecomputed_blocks = Block_to_block_map.size();
+  s.resize(nprecomputed_blocks);
+  
+  for (unsigned b_i = 0; b_i < nprecomputed_blocks; b_i++) 
+  {
+    get_block_vector_with_precomputed_block_ordering(b_i,v,s[b_i]);
+  }
+
+ }
+
+ //============================================================================
+ /// \short Takes the vector of block vectors, s, and copies its entries into
+ /// the naturally ordered vector, v. If this is a subsidiary block
+ /// preconditioner only those entries in v that are associated with its
+ /// blocks are affected.
+ /// NOTE: If the preconditioner blocks are precomputed, then this function
+ /// calls return_block_vectors_with_precomputed_block_ordering(...),
+ /// otherwise return_block_vector_with_original_matrix_ordering(...) 
+ /// is called.
+ //============================================================================
+ template<typename MATRIX> void BlockPreconditioner<MATRIX>::
+ return_block_vectors(const Vector<DoubleVector >& s, DoubleVector& v) const
+ {
+   // If the preconditioner blocks have been precomputed then it is assumed
+   // that the block vectors s have the precomputed block ordering i.e. they 
+   // have the same distributions as the block vectors from
+   // get_block_vectors_with_precomputed_block_ordering(...). We call
+   // return_block_vectors_with_precomputed_block_ordering(...)  ensure that
+   // the entries are returned in the correct place.
+   if(Preconditioner_blocks_have_been_precomputed)
+    {
+     return_block_vectors_with_precomputed_block_ordering(s,v);
+    }
+   else
+   // Otherwise we assume that the block vectors s have the same distribution
+   // as Block_distribution_pt.
+    {
+     return_block_vectors_with_original_matrix_ordering(s,v);
+    }
+ }
+
+
+ //============================================================================
+ /// \short A helper function, takes the vector of block vectors, s, and 
+ /// copies its entries into the naturally ordered vector, v. 
+ /// The block vectors are assumed to have the ordering of the original 
+ /// block matrices. I.e. there are no precomputed blocks. 
+ /// If this is a subsidiary block preconditioner only those entries in v 
+ /// that are associated with its blocks are affected.
+ //============================================================================
+ template<typename MATRIX> void BlockPreconditioner<MATRIX>::
+ return_block_vectors_with_original_matrix_ordering(
+     const Vector<DoubleVector >& s, DoubleVector& v) const
  {
   // the number of blocks
   unsigned nblock = this->nblock_types();
@@ -3821,8 +3991,101 @@ namespace oomph
  }
 
  //============================================================================
- /// \short Takes the naturally ordered vector, v, and extracts the n-th block
- /// vector, b. Here n is the block number in the current preconditioner.
+ /// \short A helper function, takes the vector of block vectors, s, 
+ /// and copies its entries into the naturally ordered vector, v. 
+ /// This function assume that there are nblocks_precomputed block vectors 
+ /// and they have the precomputed block ordering. If this is a subsidiary 
+ /// block preconditioner only those entries in v that are associated with 
+ /// its blocks are affected.
+ //============================================================================
+ template<typename MATRIX> void BlockPreconditioner<MATRIX>::
+ return_block_vectors_with_precomputed_block_ordering(
+   const Vector<DoubleVector >& s, DoubleVector& v) const
+ {
+  // the number of blocks
+  unsigned nprecomputedblock = Block_to_block_map.size();
+
+#ifdef PARANOID
+  if(!Preconditioner_blocks_have_been_precomputed)
+   {
+    std::ostringstream error_message;
+    error_message << "Precomputed blocks are not set. I cannot return block "
+                  << "vectors with precomputed ordering.\n";
+    throw OomphLibError(error_message.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+  if (!v.built())
+   {
+    std::ostringstream error_message;
+    error_message << "The distribution of the global vector v must be setup.";
+    throw OomphLibError(error_message.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+  
+  if (*(v.distribution_pt()) != *(this->master_distribution_pt()))
+   {
+    std::ostringstream error_message;
+    error_message << "The distribution of the global vector v must match the "
+                  << " specified master_distribution_pt(). \n"
+                  << "i.e. Distribution_pt in the master preconditioner";
+    throw OomphLibError(error_message.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+  
+  if(s.size() > nprecomputedblock)
+   {
+    std::ostringstream error_message;
+    error_message << "You have supplied " << s.size()
+                  << " block vectors. I require " << nprecomputedblock
+                  << " block vectors.";
+    throw OomphLibError(error_message.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+
+  for (unsigned b = 0; b < nprecomputedblock; b++)
+   {
+    if (!s[b].built())
+     {
+      std::ostringstream error_message;
+      error_message << "The distribution of the block vector " << b
+                    << " must be setup.";
+      throw OomphLibError(error_message.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+    
+    if (*(s[b].distribution_pt()) != *(Precomputed_block_distribution_pt[b]))
+     {
+      std::ostringstream error_message;
+      error_message << "The distribution of the block vector " << b
+                    << "must match the"
+                    << " specified distribution at "
+                    << "Precomputed_block_distribution_pt["
+                    << b << "]";
+      throw OomphLibError(error_message.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+   }
+#endif
+
+  for (unsigned b_i = 0; b_i < nprecomputedblock; b_i++) 
+   {
+    return_block_vector_with_precomputed_block_ordering(b_i,s[b_i],v);
+   }
+
+ }
+
+ //============================================================================
+ /// \short A helper function, takes the naturally ordered vector, v, 
+ /// and extracts the n-th block vector, b. 
+ /// Here n is the block number in the current preconditioner. 
+ /// NOTE: The ordering of the vector b is the same as the 
+ /// ordering of the block matrix from get_precomputed_block(...).
  //============================================================================
  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
   get_block_vector_with_precomputed_block_ordering(const unsigned& b, 
@@ -3894,11 +4157,11 @@ namespace oomph
     }
 
    // Build w with the correct distribution.
-   w.build(Precomputed_block_distribution_pt[b]);
+   w.build(Precomputed_block_distribution_pt[b],0);
 
    // Concatenate the vectors
-   DoubleVectorHelpers::concatenate_without_communication(
-       tmp_block_vector_pt,w);
+   DoubleVectorHelpers::concatenate_without_communication
+     (tmp_block_vector_pt,w);
 
    // No longer need the sub vectors. Calling clear on the Vector will invoke
    // the destructors in the DoubleVectors.
@@ -3906,8 +4169,11 @@ namespace oomph
   }
 
  //============================================================================
- /// \short Takes the naturally ordered vector, v, and extracts the n-th block
- /// vector, b. Here n is the block number in the current preconditioner.
+ /// \short A helper function, takes the naturally ordered vector, v, 
+ /// and extracts the n-th block vector, b. 
+ /// Here n is the block number in the current preconditioner. 
+ /// NOTE: The ordering of the vector b is the same as the 
+ /// ordering of the block matrix from get_block_from_original_matrix(...).
  //============================================================================
  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
   get_block_vector_with_original_matrix_ordering(const unsigned& b, 
@@ -4075,8 +4341,11 @@ namespace oomph
   }
 
  //============================================================================
- /// \short Takes the naturally ordered vector, v, and extracts the n-th block
- /// vector, b. Here n is the block number in the current preconditioner.
+ /// \short Takes the naturally ordered vector, v and returns the n-th
+ /// block vector, b. Here n is the block number in the current
+ /// preconditioner. If blocks for this preconditioner has been precomputed
+ /// then this function calls the function get_precomputed_block_vector(...).
+ /// Otherwise it calls get_block_vector_from_original_matrix(...).
  //============================================================================
  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
   get_block_vector(const unsigned& b, const DoubleVector& v, DoubleVector& w)
@@ -4099,12 +4368,14 @@ namespace oomph
   }
 
  //============================================================================
- /// \short Takes the n-th block ordered vector, b, and copies its entries to
- /// the appropriate entries in the naturally ordered vector, v. b is assumed 
- /// to have the same ordering as the corresponding block in 
- /// Precomputed_block_pt. Here n is the block number in the current block 
- /// preconditioner. If the preconditioner is a subsidiary block preconditioner
- /// the other entries in v that are not associated with it are left alone.
+ /// \short A helper function to return a block vector if the preconditioner
+ /// blocks have been precomputed.
+ /// Takes the n-th block ordered vector, b, and copies its entries
+ /// to the appropriate entries in the naturally ordered vector, v.
+ /// Here n is the block number in the current block preconditioner.
+ /// If the preconditioner is a subsidiary block preconditioner
+ /// the other entries in v  that are not associated with it
+ /// are left alone.
  //============================================================================
  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
   return_block_vector_with_precomputed_block_ordering(
@@ -4196,11 +4467,14 @@ namespace oomph
 
 
  //============================================================================
- /// \short Takes the n-th block ordered vector, b, and copies its entries to
- /// the appropriate entries in the naturally ordered vector, v. Here n is the
- /// block number in the current block preconditioner. If the preconditioner is
- /// a subsidiary block preconditioner the other entries in v that are not
- /// associated with it are left alone
+ /// \short A helper function to return a block if no preconditioner blocks
+ /// were precomputed.
+ /// Takes the n-th block ordered vector, b,  and copies its entries
+ /// to the appropriate entries in the naturally ordered vector, v.
+ /// Here n is the block number in the current block preconditioner.
+ /// If the preconditioner is a subsidiary block preconditioner
+ /// the other entries in v  that are not associated with it
+ /// are left alone.
  //============================================================================
  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
   return_block_vector_with_original_matrix_ordering(const unsigned& b, 
@@ -4386,11 +4660,15 @@ namespace oomph
   }
 
  //============================================================================
- /// \short Takes the n-th block ordered vector, b, and copies its entries to
- /// the appropriate entries in the naturally ordered vector, v. Here n is the
- /// block number in the current block preconditioner. If the preconditioner is
- /// a subsidiary block preconditioner the other entries in v that are not
- /// associated with it are left alone
+ /// \short Takes the n-th block vector, b, and copies its entries
+ /// to the appropriate entries in the naturally ordered vector, v, either
+ /// by calling return_block_vector_with_precomputed_block_ordering(...)
+ /// if the preconditioner blocks have been precomputed or
+ /// return_block_vector_with_original_matrix_ordering(...) otherwise.
+ /// Here n is the block number in the current block preconditioner.
+ /// If the preconditioner is a subsidiary block preconditioner
+ /// the other entries in v  that are not associated with it
+ /// are left alone.
  //============================================================================
  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
   return_block_vector(const unsigned& b, const DoubleVector& w, DoubleVector& v)

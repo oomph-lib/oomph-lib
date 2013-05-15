@@ -277,8 +277,16 @@ namespace oomph
   // Set up the block look up schemes
   GeneralPurposeBlockPreconditioner<MATRIX>::block_setup();
 
-  // number of types of degree of freedom
-  unsigned nblock_types = this->nblock_types();
+  // number of types of blocks.
+  unsigned nblock_types = 0;
+  if(this->Preconditioner_blocks_have_been_precomputed)
+   {
+    nblock_types = this->nblocks_precomputed();
+   }
+  else
+   {
+    nblock_types = this->nblock_types();
+   }
 
   // Resize the storage for the diagonal blocks
   Diagonal_block_preconditioner_pt.resize(nblock_types);
@@ -321,6 +329,7 @@ namespace oomph
 
       // Done with this block now so delete it
       delete block_pt;
+      block_pt = 0;
      }
    }
 
@@ -338,6 +347,7 @@ namespace oomph
     for (unsigned i = 0; i < nblock_types; i++)
      {
       delete block_diagonal_matrices[i];
+      block_diagonal_matrices[i] = 0;
      }
    }
 #endif
@@ -545,8 +555,16 @@ namespace oomph
   // Set up the block look up schemes
   this->block_setup();
    
-  // number of types of degree of freedom
-  unsigned nblock_types = this->nblock_types();
+  // number of block types
+  unsigned nblock_types = 0;
+  if(this->Preconditioner_blocks_have_been_precomputed)
+   {
+    nblock_types = this->nblocks_precomputed();
+   }
+  else
+   {
+    nblock_types = this->nblock_types();
+   }
 
   // Storage for the diagonal block preconditioners
   Diagonal_block_preconditioner_pt.resize(nblock_types);
@@ -557,7 +575,6 @@ namespace oomph
   // build the preconditioners and matrix vector products
   for (unsigned i = 0; i < nblock_types; i++)
    {
-
     // create the preconditioner
     if (this->Subsidiary_preconditioner_function_pt == 0)
      {
@@ -574,8 +591,10 @@ namespace oomph
     // delete the matrix
     CRDoubleMatrix* block_matrix_pt = 0;
     this->get_block(i,i,block_matrix_pt);
-    Diagonal_block_preconditioner_pt[i]->setup(block_matrix_pt,this->comm_pt());
+    Diagonal_block_preconditioner_pt[i]
+      ->setup(block_matrix_pt,this->comm_pt());
     delete block_matrix_pt;
+    block_matrix_pt = 0;
      
     // next setup the off diagonal mat vec operators
     unsigned l = i+1;
@@ -591,7 +610,15 @@ namespace oomph
       this->get_block(i,j,block_matrix_pt);
       Off_diagonal_matrix_vector_products(i,j) 
        = new MatrixVectorProduct();
-      Off_diagonal_matrix_vector_products(i,j)->setup(block_matrix_pt);
+      if(this->Preconditioner_blocks_have_been_precomputed)
+       {
+        Off_diagonal_matrix_vector_products(i,j)->setup
+          (block_matrix_pt,this->Precomputed_block_distribution_pt[j]);
+       }
+      else
+       {
+        Off_diagonal_matrix_vector_products(i,j)->setup(block_matrix_pt);
+       }
       delete block_matrix_pt;
      }
    }

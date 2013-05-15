@@ -486,18 +486,61 @@ namespace oomph
     
     // set the scaling
     s_prec_pt->scaling() = Scaling;
-    
+  
+    BlockDiagonalPreconditioner<CRDoubleMatrix>* ray_D_prec_pt
+      = new BlockDiagonalPreconditioner<CRDoubleMatrix>;
+
+    BlockTriangularPreconditioner<CRDoubleMatrix>* ray_T_prec_pt
+      = new BlockTriangularPreconditioner<CRDoubleMatrix>;
+
+    if(RayNamespace::UseRayCode)
+    {
+     ray_T_prec_pt->turn_into_subsidiary_block_preconditioner
+       (this,dof_list_for_subsidiary_prec);
+     if(Elastic_subsidiary_preconditioner_function_pt != 0)
+      {
+       ray_T_prec_pt->set_subsidiary_preconditioner_function
+         (Elastic_subsidiary_preconditioner_function_pt);
+      }
+     ray_T_prec_pt->set_nmesh(1);
+     ray_T_prec_pt->set_mesh(0,Elastic_mesh_pt);
+    }
+  
     // set the block preconditioning method
     switch (E_preconditioner_type)
      {
      case Block_diagonal_preconditioner:
-      s_prec_pt->use_block_diagonal_approximation();
+      {
+        if(RayNamespace::UseRayCode)
+         {
+          ray_D_prec_pt->turn_into_subsidiary_block_preconditioner
+            (this,dof_list_for_subsidiary_prec);
+          if(Elastic_subsidiary_preconditioner_function_pt != 0)
+           {
+            ray_D_prec_pt->set_subsidiary_preconditioner_function
+              (Elastic_subsidiary_preconditioner_function_pt);
+           }
+          ray_D_prec_pt->set_nmesh(1);
+          ray_D_prec_pt->set_mesh(0,Elastic_mesh_pt);
+         }
+        else
+         {
+          s_prec_pt->use_block_diagonal_approximation();
+         }
+
+      }
       break;
      case Block_upper_triangular_preconditioner:
-      s_prec_pt->use_upper_triangular_approximation();
+      {
+        ray_T_prec_pt->upper_triangular();
+        s_prec_pt->use_upper_triangular_approximation();
+      }
       break;
      case Block_lower_triangular_preconditioner:
-      s_prec_pt->use_lower_triangular_approximation();
+      {
+       ray_T_prec_pt->lower_triangular();
+       s_prec_pt->use_lower_triangular_approximation();
+      }
       break;
      default:
       break;
@@ -529,9 +572,17 @@ namespace oomph
     pause("outputted block to block map"); 
 */    
      
-    s_prec_pt->set_precomputed_blocks(solid_matrix_pt,block_to_block_map);
-    s_prec_pt->Preconditioner::setup(matrix_pt(),comm_pt());
-    Elastic_preconditioner_pt = s_prec_pt;
+    //s_prec_pt->set_precomputed_blocks(solid_matrix_pt,block_to_block_map);
+    //ray_D_prec_pt->set_precomputed_blocks(solid_matrix_pt,block_to_block_map);
+    ray_T_prec_pt->set_precomputed_blocks(solid_matrix_pt,block_to_block_map);
+
+    //s_prec_pt->Preconditioner::setup(matrix_pt(),comm_pt());
+    //ray_D_prec_pt->Preconditioner::setup(matrix_pt(),comm_pt());
+    ray_T_prec_pt->Preconditioner::setup(matrix_pt(),comm_pt());
+
+    //Elastic_preconditioner_pt = s_prec_pt;
+    //Elastic_preconditioner_pt = ray_D_prec_pt;
+    Elastic_preconditioner_pt = ray_T_prec_pt;
 
      }
     else
