@@ -717,14 +717,18 @@ namespace oomph
   DenseMatrix<bool> required_blocks(nblock_types, nblock_types,true);
 
   // matrix of block pt
-  DenseMatrix<MATRIX* > block_matrix_pt(nblock_types, nblock_types,0);
+  DenseMatrix<CRDoubleMatrix* > block_matrix_pt(nblock_types, nblock_types,0);
 
   // Get pointers to the blocks
   this->get_blocks(required_blocks, block_matrix_pt);
 
   // Build the preconditioner matrix
-  MATRIX* exact_block_matrix_pt = 0;
-  this->build_preconditioner_matrix(block_matrix_pt,exact_block_matrix_pt);
+  CRDoubleMatrix* exact_block_matrix_pt 
+    = new CRDoubleMatrix(this->preconditioner_matrix_distribution_pt());
+
+  //this->build_preconditioner_matrix(block_matrix_pt,exact_block_matrix_pt);
+  CRDoubleMatrixHelpers::concatenate_without_communication
+    (this->Block_distribution_pt,block_matrix_pt,*exact_block_matrix_pt);
 
   // need to delete the matrix of block matrices
   for (unsigned i = 0; i < nblock_types; i++)
