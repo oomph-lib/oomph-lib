@@ -3060,7 +3060,7 @@ void CRDoubleMatrix::add(const CRDoubleMatrix &matrix_in,
    error_message << "The matrix is not built.\n"
                  << "Please build the matrix!\n";
    throw OomphLibError(error_message.str(),
-                       "RAYRAYERR",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
   
@@ -3071,7 +3071,7 @@ void CRDoubleMatrix::add(const CRDoubleMatrix &matrix_in,
    error_message << "The matrix matrix_in is not built.\n"
                  << "Please build the matrix!\n";
    throw OomphLibError(error_message.str(),
-                       "RAYRAYERR",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -3084,7 +3084,7 @@ void CRDoubleMatrix::add(const CRDoubleMatrix &matrix_in,
    error_message << "matrix_in has a different number of rows than\n"
                  << "this matrix.\n";
    throw OomphLibError(error_message.str(),
-                       "RAYRAYERR",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -3096,7 +3096,7 @@ void CRDoubleMatrix::add(const CRDoubleMatrix &matrix_in,
    error_message << "matrix_in has a different number of columns than\n"
                  << "this matrix.\n";
    throw OomphLibError(error_message.str(),
-                       "RAYRAYERR",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -3108,7 +3108,7 @@ void CRDoubleMatrix::add(const CRDoubleMatrix &matrix_in,
    error_message << "matrix_in must have the same distribution as\n"
                  << "this matrix.\n";
    throw OomphLibError(error_message.str(),
-                       "RAYRAYERR",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -3122,7 +3122,7 @@ void CRDoubleMatrix::add(const CRDoubleMatrix &matrix_in,
                  << "(call clear on the matrix, I do not want to over "
                  << "write your data by accident)\n";
    throw OomphLibError(error_message.str(),
-                       "RAYRAYERR",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -3346,7 +3346,7 @@ namespace CRDoubleMatrixHelpers
     std::ostringstream error_message;
     error_message << "There are no matrices to concatenate.\n";
     throw OomphLibError(error_message.str(),
-                        "RAYRAYERR",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 
@@ -3357,7 +3357,7 @@ namespace CRDoubleMatrixHelpers
     warning_message << "There is only one matrix to concatenate...\n"
                     << "This does not require concatenating...\n";
     OomphLibWarning(warning_message.str(),
-                    "RAYRAYERR",
+                    OOMPH_CURRENT_FUNCTION,
                     OOMPH_EXCEPTION_LOCATION);
    }
 
@@ -3373,7 +3373,7 @@ namespace CRDoubleMatrixHelpers
          << "The sub matrix (" << block_row_i << "," << block_col_i << ")\n"
          << "is not built. \n";
         throw OomphLibError(error_message.str(),
-                            "RAYRAYERR",
+                            OOMPH_CURRENT_FUNCTION,
                             OOMPH_EXCEPTION_LOCATION);
        }
      }
@@ -3401,7 +3401,7 @@ namespace CRDoubleMatrixHelpers
          << "requires nrow = " << current_block_nrow 
          << ", but has nrow = " << subblock_nrow <<".\n";
         throw OomphLibError(error_message.str(),
-                            "RAYRAYERR",
+                            OOMPH_CURRENT_FUNCTION,
                             OOMPH_EXCEPTION_LOCATION);
        }
      }
@@ -3428,7 +3428,7 @@ namespace CRDoubleMatrixHelpers
          << "requires ncol = " << current_block_ncol
          << ", but has ncol = " << subblock_ncol << ".\n";
         throw OomphLibError(error_message.str(),
-                            "RAYRAYERR",
+                            OOMPH_CURRENT_FUNCTION,
                             OOMPH_EXCEPTION_LOCATION);
        }
      }
@@ -3478,7 +3478,7 @@ namespace CRDoubleMatrixHelpers
                     << "concatenate does not match the nrow from the\n"
                     << "result matrix\n";
       throw OomphLibError(error_message.str(),
-                          "RAYRAYERR",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
 #endif
@@ -3509,7 +3509,7 @@ namespace CRDoubleMatrixHelpers
           << block_row_i << "," << block_col_i << ")\n"
           << "does not have the same communicator as the result matrix. \n";
          throw OomphLibError(error_message.str(),
-                             "RAYRAYERR",
+                             OOMPH_CURRENT_FUNCTION,
                              OOMPH_EXCEPTION_LOCATION); 
         }
       }
@@ -3540,7 +3540,7 @@ namespace CRDoubleMatrixHelpers
            << block_row_i << "," << block_col_i << ")\n"
            << "is not the same as the result matrix. \n";
           throw OomphLibError(error_message.str(),
-                              "RAYRAYERR",
+                              OOMPH_CURRENT_FUNCTION,
                               OOMPH_EXCEPTION_LOCATION); 
          }
        }
@@ -4205,7 +4205,7 @@ namespace CRDoubleMatrixHelpers
     std::ostringstream error_message;
     error_message << "There are no matrices to concatenate.\n";
     throw OomphLibError(error_message.str(),
-                        "RAYRAYERR",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 
@@ -4216,7 +4216,7 @@ namespace CRDoubleMatrixHelpers
     warning_message << "There is only one matrix to concatenate...\n"
                     << "This does not require concatenating...\n";
     OomphLibWarning(warning_message.str(),
-                    "RAYRAYERR",
+                    OOMPH_CURRENT_FUNCTION,
                     OOMPH_EXCEPTION_LOCATION);
    }
 
@@ -4231,7 +4231,7 @@ namespace CRDoubleMatrixHelpers
     error_message << "The number of row distributions must be the same as\n"
                   << "the number of block rows.";
     throw OomphLibError(error_message.str(),
-                        "RAYRAYERR",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 
@@ -4243,7 +4243,7 @@ namespace CRDoubleMatrixHelpers
     error_message << "The number of column distributions must be the same as\n"
                   << "the number of block columns.";
     throw OomphLibError(error_message.str(),
-                        "RAYRAYERR",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 
@@ -4256,7 +4256,7 @@ namespace CRDoubleMatrixHelpers
       error_message << "The row distribution pointer in position "
                     << block_row_i <<" is null.\n";
       throw OomphLibError(error_message.str(),
-                          "RAYRAYERR",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
    }
@@ -4270,7 +4270,7 @@ namespace CRDoubleMatrixHelpers
       error_message << "The column distribution pointer in position "
                     << block_col_i <<" is null.\n";
       throw OomphLibError(error_message.str(),
-                          "RAYRAYERR",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
    }
@@ -4285,7 +4285,7 @@ namespace CRDoubleMatrixHelpers
       error_message << "The distribution pointer in position "
                     << block_row_i <<" is not built.\n";
       throw OomphLibError(error_message.str(),
-                          "RAYRAYERR",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
    }
@@ -4298,7 +4298,7 @@ namespace CRDoubleMatrixHelpers
       error_message << "The distribution pointer in position "
                     << block_col_i <<" is not built.\n";
       throw OomphLibError(error_message.str(),
-                          "RAYRAYERR",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
    }
@@ -4319,7 +4319,7 @@ namespace CRDoubleMatrixHelpers
                     << block_row_i << " is not the same as the first "
                     << "communicator from row_distribution_pt";
       throw OomphLibError(error_message.str(),
-                          "RAYRAYERR",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
    }
@@ -4338,7 +4338,7 @@ namespace CRDoubleMatrixHelpers
                     << block_col_i << " is not the same as the first "
                     << "communicator from row_distribution_pt";
       throw OomphLibError(error_message.str(),
-                          "RAYRAYERR",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
    }
@@ -4357,7 +4357,7 @@ namespace CRDoubleMatrixHelpers
          << "The sub matrix_pt(" << block_row_i << "," << block_col_i << ")\n"
          << "is not built.\n";
         throw OomphLibError(error_message.str(),
-                            "RAYRAYERR",
+                            OOMPH_CURRENT_FUNCTION,
                             OOMPH_EXCEPTION_LOCATION);
        }
      }
@@ -4383,7 +4383,7 @@ namespace CRDoubleMatrixHelpers
            << "does not have the same communicator pointer as those in\n"
            << "(row|col)_distribution_pt.\n";
           throw OomphLibError(error_message.str(),
-                              "RAYRAYERR",
+                              OOMPH_CURRENT_FUNCTION,
                               OOMPH_EXCEPTION_LOCATION);
          }
        }
@@ -4416,7 +4416,7 @@ namespace CRDoubleMatrixHelpers
            << "requires nrow = " << current_block_nrow 
            << ", but has nrow = " << subblock_nrow <<".\n";
           throw OomphLibError(error_message.str(),
-                              "RAYRAYERR",
+                              OOMPH_CURRENT_FUNCTION,
                               OOMPH_EXCEPTION_LOCATION);
          }
        }
@@ -4448,7 +4448,7 @@ namespace CRDoubleMatrixHelpers
            << "requires ncol = " << current_block_ncol
            << ", but has ncol = " << subblock_ncol << ".\n";
           throw OomphLibError(error_message.str(),
-                              "RAYRAYERR",
+                              OOMPH_CURRENT_FUNCTION,
                               OOMPH_EXCEPTION_LOCATION);
          }
        }
@@ -4484,7 +4484,7 @@ namespace CRDoubleMatrixHelpers
                         << "All distributions on a block row must be the same"
                         << "for this function to concatenate matrices.\n";
           throw OomphLibError(error_message.str(),
-                              "RAYRAYERR",
+                              OOMPH_CURRENT_FUNCTION,
                               OOMPH_EXCEPTION_LOCATION);
          }
        }
@@ -4534,7 +4534,7 @@ namespace CRDoubleMatrixHelpers
                     << "created by\n"
                     << "LinearAlgebraDistributionHelpers::concatenate(...)";
       throw OomphLibError(error_message.str(),
-                          "RAYRAYERR",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
 #endif
@@ -4565,7 +4565,7 @@ namespace CRDoubleMatrixHelpers
       << "The OomphCommunicator of the result matrix is not the same as the "
       << "others!"; 
      throw OomphLibError(error_message.str(),
-                         "RAYRAYERR",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION); 
     }
   }
@@ -4596,7 +4596,7 @@ namespace CRDoubleMatrixHelpers
              << block_row_i << "," << block_col_i << ")\n"
              << "is not the same as the result matrix. \n";
             throw OomphLibError(error_message.str(),
-                                "RAYRAYERR",
+                                OOMPH_CURRENT_FUNCTION,
                                 OOMPH_EXCEPTION_LOCATION); 
            }
          }
@@ -4620,7 +4620,7 @@ namespace CRDoubleMatrixHelpers
          << block_row_i << "]\n"
          << "is not the same as the one from row_distribution_pt[0]. \n";
         throw OomphLibError(error_message.str(),
-                            "RAYRAYERR",
+                            OOMPH_CURRENT_FUNCTION,
                             OOMPH_EXCEPTION_LOCATION); 
        }
      }
@@ -4639,7 +4639,7 @@ namespace CRDoubleMatrixHelpers
          << block_col_i << "]\n"
          << "is not the same as the one from row_distribution_pt[0]. \n";
         throw OomphLibError(error_message.str(),
-                            "RAYRAYERR",
+                            OOMPH_CURRENT_FUNCTION,
                             OOMPH_EXCEPTION_LOCATION); 
        }
      }
@@ -4787,7 +4787,7 @@ namespace CRDoubleMatrixHelpers
     std::ostringstream error_message;
     error_message << "There are no matrices to concatenate.\n";
     throw OomphLibError(error_message.str(),
-                        "RAYRAYERR",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 
@@ -4801,7 +4801,7 @@ namespace CRDoubleMatrixHelpers
                  <<"a Vector of distributions describing how to permute the\n"
                  <<"columns.";
     throw OomphLibError(error_message.str(),
-                        "RAYRAYERR",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif

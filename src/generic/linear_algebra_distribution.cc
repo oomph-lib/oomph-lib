@@ -384,7 +384,7 @@ namespace oomph
        error_message
         << "The pointer in_distribution_pt[" << dist_i << "] is null.\n";
        throw OomphLibError(error_message.str(),
-                           "RAYRAYERR",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
     }
@@ -400,7 +400,7 @@ namespace oomph
        error_message
         << "The in_distribution_pt[" << dist_i << "] is not built.\n";
        throw OomphLibError(error_message.str(),
-                           "RAYRAYERR",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
     }
@@ -424,7 +424,7 @@ namespace oomph
        error_message << "The communicator in position "<<dist_i<<" is \n"
                      << "not the same as the first one.\n";
        throw OomphLibError(error_message.str(),
-                           "RAYRAYERR",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
     }
@@ -447,7 +447,7 @@ namespace oomph
         <<"The distribution in position "<<dist_i<<" has a different\n"
         <<"different distributed boolean than the distribution.\n";
        throw OomphLibError(error_message.str(),
-                           "RAYRAYERR",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
     }      
@@ -462,7 +462,7 @@ namespace oomph
       << "The out distribution is built.\n"
       << "Please clear it.\n";
      throw OomphLibError(error_message.str(),
-                         "RAYRAYERR",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
      

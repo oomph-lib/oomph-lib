@@ -1585,7 +1585,7 @@ namespace oomph
               << "which is set by calling set_precomputed_blocks(...) from "
               << "outside of this preconditioner.";
     throw OomphLibError(error_msg.str(),
-                        "RAYRAYERR",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 
@@ -1649,7 +1649,7 @@ namespace oomph
             << first_element_string << ", \n"
             << "with ndof types: " << first_element_ndof_type << ".\n";
           throw OomphLibError(error_message.str(),
-                              "RAYRAYERR",
+                              OOMPH_CURRENT_FUNCTION,
                               OOMPH_EXCEPTION_LOCATION);
          }
        }
@@ -1682,7 +1682,7 @@ namespace oomph
             << "Note: A minimal requirement is that the elements in the same\n"
             << "mesh MUST have the same number types DOFs.";
           throw OomphLibError(error_message.str(),
-                              "RAYRAYERR",
+                              OOMPH_CURRENT_FUNCTION,
                               OOMPH_EXCEPTION_LOCATION);
          }
        }
@@ -3839,7 +3839,7 @@ namespace oomph
                    << " specified master_distribution_pt(). \n"
                    << "i.e. Distribution_pt in the master preconditioner";
      throw OomphLibError(error_message.str(),
-                         "RAYRAYERR",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -3850,7 +3850,7 @@ namespace oomph
      warning_message << "There are no precomputed blocks set."
                      << "This function may not give the ordering you desire.";
      OomphLibWarning(warning_message.str(),
-                     "RAYRAYERR",
+                     OOMPH_CURRENT_FUNCTION,
                      OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -4098,7 +4098,7 @@ namespace oomph
                    << ", however this preconditioner has nblock_types() "
                    << "= " << nblock_types() << std::endl;
      throw OomphLibError(error_message.str(),
-                         "RAYRAYERR",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    if (!v.built())
@@ -4106,7 +4106,7 @@ namespace oomph
      std::ostringstream error_message;
      error_message << "The distribution of the global vector v must be setup.";
      throw OomphLibError(error_message.str(),
-                         "RAYRAYERR",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    if (*v.distribution_pt() != *this->master_distribution_pt())
@@ -4116,7 +4116,7 @@ namespace oomph
                    << " specified master_distribution_pt(). \n"
                    << "i.e. Distribution_pt in the master preconditioner";
      throw OomphLibError(error_message.str(),
-                         "RAYRAYERR",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    if (!w.built())
@@ -4124,7 +4124,7 @@ namespace oomph
      std::ostringstream error_message;
      error_message << "The distribution of the block vector w must be setup.";
      throw OomphLibError(error_message.str(),
-                         "RAYRAYERR",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -4135,7 +4135,7 @@ namespace oomph
      warning_message << "There are no precomputed blocks set."
                      << "This function may not give the ordering you desire.";
      OomphLibWarning(warning_message.str(),
-                     "RAYRAYERR",
+                     OOMPH_CURRENT_FUNCTION,
                      OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -4242,7 +4242,7 @@ namespace oomph
                    << ", however this preconditioner has nblock_types() "
                    << "= " << nblock_types() << std::endl;
      throw OomphLibError(error_message.str(),
-                         "RAYRAYERR",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    if (!v.built())
@@ -4250,7 +4250,7 @@ namespace oomph
      std::ostringstream error_message;
      error_message << "The distribution of the global vector v must be setup.";
      throw OomphLibError(error_message.str(),
-                         "RAYRAYERR",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    if (*v.distribution_pt() != *this->master_distribution_pt())
@@ -4260,7 +4260,7 @@ namespace oomph
                    << " specified master_distribution_pt(). \n"
                    << "i.e. Distribution_pt in the master preconditioner";
      throw OomphLibError(error_message.str(),
-                         "RAYRAYERR",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    if (!w.built())
@@ -4268,7 +4268,7 @@ namespace oomph
      std::ostringstream error_message;
      error_message << "The distribution of the block vector w must be setup.";
      throw OomphLibError(error_message.str(),
-                         "RAYRAYERR",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    if (*w.distribution_pt() != *Block_distribution_pt[b])
@@ -4277,7 +4277,7 @@ namespace oomph
      error_message << "The distribution of the block vector w must match the "
                    << " specified distribution at Block_distribution_pt[b]";
      throw OomphLibError(error_message.str(),
-                         "RAYRAYERR",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif

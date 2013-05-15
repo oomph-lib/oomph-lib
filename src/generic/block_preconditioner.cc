@@ -175,7 +175,7 @@ namespace oomph
                   << "), however this preconditioner has nblock_types() "
                   << "= " << nblocks << std::endl;
     throw OomphLibError(error_message.str(),
-                        "RAYRAYERR",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 
@@ -185,7 +185,7 @@ namespace oomph
     error_message << "There are no precomputed blocks. Please call "
                   << "set_precomputed_blocks(...)  ";
     throw OomphLibError(error_message.str(),
-                        "RAYRAYERR",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
   }
 #endif

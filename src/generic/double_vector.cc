@@ -959,7 +959,7 @@ namespace oomph
      error_message << "There is no vector to concatenate...\n"
                    << "Perhaps you forgot to fill in_vector_pt?\n";
      throw OomphLibError(error_message.str(),
-                         "RAYRAYERR",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     } 
 
@@ -970,7 +970,7 @@ namespace oomph
      warning_message << "There is only one vector to concatenate...\n"
                      << "This does not require concatenating...\n";
      OomphLibWarning(warning_message.str(),
-                     "RAYRAYERR",
+                     OOMPH_CURRENT_FUNCTION,
                      OOMPH_EXCEPTION_LOCATION);
     }
   
@@ -983,7 +983,7 @@ namespace oomph
        error_message << "The vector in position " <<vec_i<< " is not built.\n"
                      << "I cannot concatenate an unbuilt vector.\n";
        throw OomphLibError(error_message.str(),
-                           "RAYRAYERR",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
     }
@@ -1027,7 +1027,7 @@ namespace oomph
        error_message << "The sum of nrow of the in vectors does not match\n"
                      << "the nrow of the out vector.\n";
        throw OomphLibError(error_message.str(),
-                           "RAYRAYERR",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
 #endif
@@ -1051,7 +1051,7 @@ namespace oomph
        error_message << "The vector in position "<<vec_i <<" has a\n"
                      << "different communicator from the out vector.\n";
        throw OomphLibError(error_message.str(),
-                           "RAYRAYERR",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
     }
@@ -1069,7 +1069,7 @@ namespace oomph
                        << "different distributed boolean from "
                        << "the out vector.\n";
          throw OomphLibError(error_message.str(),
-                             "RAYRAYERR",
+                             OOMPH_CURRENT_FUNCTION,
                              OOMPH_EXCEPTION_LOCATION);
         } 
       }
@@ -1294,7 +1294,7 @@ namespace oomph
       error_message << "I don't know what to do with distributed vectors\n"
                     << "without MPI... :(";
       throw OomphLibError(error_message.str(),
-                          "RAYRAYERR",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
 #endif
@@ -1334,7 +1334,7 @@ namespace oomph
      error_message << "The in_vector is not built.\n"
                    << "Please build it!.\n";
      throw OomphLibError(error_message.str(),
-                         "RAYRAYERR",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -1348,7 +1348,7 @@ namespace oomph
                      << "  is not built.\n"
                      << "Please build it!.\n";
        throw OomphLibError(error_message.str(),
-                           "RAYRAYERR",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
     }
@@ -1368,7 +1368,7 @@ namespace oomph
                    << "is not equal to the sum of the global nrows\n"
                    << "of the in vectors.\n";
      throw OomphLibError(error_message.str(),
-                         "RAYRAYERR",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
  
@@ -1388,7 +1388,7 @@ namespace oomph
        error_message << "The communicator for the distribution in the \n"
                      <<"position " << vec_i << " is not the same as the in_vector\n";
        throw OomphLibError(error_message.str(),
-                           "RAYRAYERR",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
     }
@@ -1404,7 +1404,7 @@ namespace oomph
        error_message << "The vector in position " << vec_i << " does not \n"
                      <<" have the same distributed boolean as the in_vector\n";
        throw OomphLibError(error_message.str(),
-                           "RAYRAYERR",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
     }
@@ -1736,7 +1736,7 @@ namespace oomph
      error_message << "There is no vector to concatenate...\n"
                    << "Perhaps you forgot to fill in_vector_pt?\n";
      throw OomphLibError(error_message.str(),
-                         "RAYRAYERR",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -1747,7 +1747,7 @@ namespace oomph
      warning_message << "There is only one vector to concatenate...\n"
                      << "This does not require concatenating...\n";
      OomphLibWarning(warning_message.str(),
-                     "RAYRAYERR",
+                     OOMPH_CURRENT_FUNCTION,
                      OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -1760,7 +1760,7 @@ namespace oomph
        error_message << "The vector in position " <<vec_i<< " is not built.\n"
                      << "I cannot concatenate an unbuilt vector.\n";
        throw OomphLibError(error_message.str(),
-                           "RAYRAYERR",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
     }
@@ -1801,7 +1801,7 @@ namespace oomph
        error_message << "The vector in position "<<vec_i <<" has a\n"
                      << "different communicator from the out vector.\n";
        throw OomphLibError(error_message.str(),
-                           "RAYRAYERR",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
     }
@@ -1819,7 +1819,7 @@ namespace oomph
                        << "different distributed boolean from the "
                        << "out vector.\n";
          throw OomphLibError(error_message.str(),
-                             "RAYRAYERR",
+                             OOMPH_CURRENT_FUNCTION,
                              OOMPH_EXCEPTION_LOCATION);
         } 
       }
@@ -1855,7 +1855,7 @@ namespace oomph
                    << "the distribution created by\n"
                    << "LinearAlgebraDistributionHelpers::concatenate(...)\n";
      throw OomphLibError(error_message.str(),
-                         "RAYRAYERR",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -1921,7 +1921,7 @@ namespace oomph
      error_message << "The in_vector is not built.\n"
                    << "Please build it!.\n";
      throw OomphLibError(error_message.str(),
-                         "RAYRAYERR",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -1935,7 +1935,7 @@ namespace oomph
                      << " is not built.\n"
                      << "Please build it!.\n";
        throw OomphLibError(error_message.str(),
-                           "RAYRAYERR",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
     }
@@ -1961,7 +1961,7 @@ namespace oomph
                    << "It must be a concatenation of all the distributions\n"
                    << "from the out vectors.\n";
      throw OomphLibError(error_message.str(),
-                         "RAYRAYERR",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -1985,7 +1985,7 @@ namespace oomph
                      << vec_i << " is not the same as the in_vector\n"
                      << "communicator.";
        throw OomphLibError(error_message.str(),
-                           "RAYRAYERR",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
     }
@@ -2004,7 +2004,7 @@ namespace oomph
                        << " does not have\n"
                        << "the same distributed boolean as the in vector";
          throw OomphLibError(error_message.str(),
-                             "RAYRAYERR",
+                             OOMPH_CURRENT_FUNCTION,
                              OOMPH_EXCEPTION_LOCATION);
         }
       }
