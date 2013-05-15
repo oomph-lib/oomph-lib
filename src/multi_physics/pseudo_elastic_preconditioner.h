@@ -281,6 +281,207 @@ namespace oomph
   Mesh* Lagrange_multiplier_mesh_pt;
  };
  
+ ///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
+
+
+
+//=============================================================================
+/// \short A subsidiary preconditioner for the pseudo-elastic FSI
+/// preconditioner. Also a stand-alone preconditioner for the problem of
+/// non-linear elasticity subject to prescribed displacement by Lagrange
+/// multiplier..\n\n
+/// \b Enumeration of Elastic DOF types in the Pseudo-Elastic Elements \n
+/// The method get_dof_types_for_unknowns() must be implemented such that
+/// DOFs subject be Lagrange multiplier and DOFs NOT subject to Lagrange
+/// multiplier have different labels. For example in a 3D problem there are
+/// 6 DOF types and the following labelling must be implemented:
+/// 0 - x displacement (without lagr mult traction)\n
+/// 1 - y displacement (without lagr mult traction)\n
+/// 2 - z displacement (without lagr mult traction)\n
+/// 4 - x displacement (with lagr mult traction)\n
+/// 5 - y displacement (with lagr mult traction)\n
+/// 6 - z displacement (with lagr mult traction)\n
+//=============================================================================
+ class PseudoElasticPreconditionerOld
+  : public BlockPreconditioner<CRDoubleMatrix>
+ {
+  /// \short PseudoElasticFSIPreconditioner is a friend to access the private
+  /// *_preconditioner_solve(...) method
+  friend class PseudoElasticFSIPreconditioner;
+
+   public:
+  
+  /// \short This preconditioner includes the option to use subsidiary 
+  /// operators other than SuperLUPreconditioner for this problem. 
+  /// This is the typedef of a function that should return an instance
+  /// of a subsidiary preconditioning operator.  This preconditioner is 
+  /// responsible for the destruction of the subsidiary preconditioners.
+  typedef Preconditioner* (*SubsidiaryPreconditionerFctPt)();
+  
+  /// \short The augmented elasticity system can be preconditioned in one
+  /// of four ways. \n
+  /// 0 - Exact preconditioner \n
+  /// 1 - Block diagonal preconditioning \n 
+  /// 2 - Block upper triangular preconditioner \n
+  /// 3 - Block lower triangular preconditioner \n
+  /// We group together the different components of the displacement vector 
+  /// field for the block decomposition.
+  enum Elastic_preconditioner_type { Exact_block_preconditioner,
+                                     Block_diagonal_preconditioner,
+                                     Block_lower_triangular_preconditioner,
+                                     Block_upper_triangular_preconditioner };
+  
+  /// \short Default (and only) constructor.
+  PseudoElasticPreconditionerOld()
+   {
+    // null pointers
+    Lagrange_multiplier_subsidiary_preconditioner_function_pt = 0;
+    Elastic_subsidiary_preconditioner_function_pt = 0;
+    Elastic_preconditioner_pt = 0;
+    
+    // set defaults
+    Use_inf_norm_of_s_scaling = true;
+    E_preconditioner_type = Exact_block_preconditioner;
+    
+    // resize the Mesh_pt
+    this->set_nmesh(2);
+    Lagrange_multiplier_mesh_pt = 0;
+    Elastic_mesh_pt = 0;
+   }
+  
+  /// destructor
+  virtual ~PseudoElasticPreconditionerOld()
+   {
+    this->clean_up_memory();
+   }
+  
+  /// Broken copy constructor
+  PseudoElasticPreconditionerOld
+   (const PseudoElasticPreconditionerOld&)
+   { 
+    BrokenCopy::broken_copy("PseudoElasticPreconditionerOld");
+   } 
+  
+  /// Broken assignment operator
+  void operator=
+   (const PseudoElasticPreconditionerOld&) 
+   {
+    BrokenCopy::broken_assign(" PseudoElasticPreconditionerOld");
+   }
+  
+  /// Setup method for the PseudoElasticPreconditionerOld.
+  void setup();
+  
+  /// \short Apply the preconditioner. Method implemented in two
+  /// other methods (elastic and lagrange multiplier subsidiary
+  /// preocnditioner) for the PseudoElasticFSIPreconditioner
+  void preconditioner_solve(const DoubleVector& r, DoubleVector& z)
+  {
+   this->elastic_preconditioner_solve(r,z);
+   this->lagrange_multiplier_preconditioner_solve(r,z);
+  }
+  
+  /// \short Access function to mesh containing the block-preconditionable
+  /// elastic elements
+  void set_elastic_mesh(Mesh* mesh_pt) 
+  {
+   Elastic_mesh_pt = mesh_pt;
+  }
+  
+  /// \short Access function to mesh containing the block-preconditionable
+  /// lagrange multiplier elements 
+  void set_lagrange_multiplier_mesh(Mesh* mesh_pt) 
+  {
+   Lagrange_multiplier_mesh_pt = mesh_pt;
+  }
+  
+  /// \short Call to use the inf norm of S as scaling
+  void enable_inf_norm_of_s_scaling() 
+  {Use_inf_norm_of_s_scaling=true;}
+
+  /// \short Call to use no scaling
+  void disable_inf_norm_of_s_scaling() 
+  {Use_inf_norm_of_s_scaling=false;}
+  
+  /// \short By default the Lagrange multiplier subsidiary systems are 
+  /// preconditioner with SuperLUPreconditioner. For a different 
+  /// preconditioner, pass a function to this 
+  /// method returning a different subsidiary operator.
+  void set_lagrange_multiplier_subsidiary_preconditioner
+   (SubsidiaryPreconditionerFctPt prec_fn)
+  {
+   Lagrange_multiplier_subsidiary_preconditioner_function_pt = prec_fn;
+  }
+  
+  /// \short By default the elastic subsidiary systems are 
+  /// preconditioner with SuperLUPreconditioner. For a different 
+  /// preconditioner, pass a function to this 
+  /// method returning a different subsidiary operator.
+  void set_elastic_subsidiary_preconditioner
+   (SubsidiaryPreconditionerFctPt prec_fn)
+  {
+   Elastic_subsidiary_preconditioner_function_pt = prec_fn;
+  }
+  
+  /// \short Set the type of preconditioner applied to the elastic: \n
+  /// 0 - Exact preconditioner \n
+  /// 1 - Block diagonal preconditioning \n 
+  /// 2 - Block upper triangular preconditioner \n
+  /// 3 - Block lower triangular preconditioner \n
+  /// We group together the different components of the displacement vector 
+  /// field for the block decomposition.
+  Elastic_preconditioner_type& elastic_preconditioner_type()
+   {
+    return E_preconditioner_type;
+   }
+  
+  /// \short Clears the memory.
+  void clean_up_memory();
+  
+   private:
+  
+  /// \short Apply the elastic subsidiary preconditioner.
+  void elastic_preconditioner_solve(const DoubleVector& r, DoubleVector& z);
+  
+  /// \short  Apply the lagrange multiplier subsidiary preconditioner.
+  void lagrange_multiplier_preconditioner_solve(const DoubleVector& r,
+                                                DoubleVector& z);
+  
+  /// The scaling. Defaults to infinity norm of S.
+  double Scaling;
+  
+  /// \short boolean indicating whether the inf-norm of S should be used as 
+  /// scaling. Default = true;
+  bool Use_inf_norm_of_s_scaling;
+  
+  /// \short An unsigned indicating which method should be used for 
+  /// preconditioning the solid component.
+  Elastic_preconditioner_type E_preconditioner_type;
+  
+  /// \short the dimension of the problem
+  unsigned Dim;
+  
+  /// \short storage for the preconditioner for the solid system
+  Preconditioner* Elastic_preconditioner_pt;
+  
+  /// \short lagrange multiplier preconditioner pt
+  Vector<Preconditioner*> Lagrange_multiplier_preconditioner_pt;
+  
+  /// The Lagrange multiplier subsidary preconditioner function pointer
+  SubsidiaryPreconditionerFctPt 
+   Lagrange_multiplier_subsidiary_preconditioner_function_pt;
+  
+  /// The solid subsidiary preconditioner function pointer
+  SubsidiaryPreconditionerFctPt Elastic_subsidiary_preconditioner_function_pt;
+  
+  /// Pointer to the mesh containing the solid elements
+  Mesh* Elastic_mesh_pt;
+  
+  /// Pointer to the mesh containing the Lagrange multiplier elements
+  Mesh* Lagrange_multiplier_mesh_pt;
+ };
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -301,86 +502,86 @@ namespace oomph
 /// with lagrange multiplier tractions applied.\n 
 /// 3. By default this preconditioner uses a superlu preconditioner.
 //=============================================================================
-class PseudoElasticPreconditionerSubsidiaryPreconditioner 
-: public BlockPreconditioner<CRDoubleMatrix>
-{
+ class PseudoElasticPreconditionerSubsidiaryPreconditionerOld
+  : public BlockPreconditioner<CRDoubleMatrix>
+ {
    
-  public:
+   public:
    
- /// \short typedef for a function that allows other preconditioners to be
- /// emplyed to solve the subsidiary linear systems. \n
- /// The function should return a pointer to the requred subsidiary
- /// preconditioner generated using new. This preconditioner is responsible
- /// for the destruction of the subsidiary preconditioners.
- typedef Preconditioner* (*SubsidiaryPreconditionerFctPt)();
+  /// \short typedef for a function that allows other preconditioners to be
+  /// emplyed to solve the subsidiary linear systems. \n
+  /// The function should return a pointer to the requred subsidiary
+  /// preconditioner generated using new. This preconditioner is responsible
+  /// for the destruction of the subsidiary preconditioners.
+  typedef Preconditioner* (*SubsidiaryPreconditionerFctPt)();
 
- /// Constructor
- PseudoElasticPreconditionerSubsidiaryPreconditioner()
-  {
-   Scaling = 1.0;
-   Preconditioner_pt = 0;
-   Subsidiary_preconditioner_function_pt = 0;
-  }
+  /// Constructor
+  PseudoElasticPreconditionerSubsidiaryPreconditionerOld()
+   {
+    Scaling = 1.0;
+    Preconditioner_pt = 0;
+    Subsidiary_preconditioner_function_pt = 0;
+   }
    
- /// Destructor
- ~PseudoElasticPreconditionerSubsidiaryPreconditioner()
-  {
-   this->clean_up_memory();
-  }
+  /// Destructor
+  ~PseudoElasticPreconditionerSubsidiaryPreconditionerOld()
+   {
+    this->clean_up_memory();
+   }
    
- /// Broken copy constructor
- PseudoElasticPreconditionerSubsidiaryPreconditioner 
-  (const PseudoElasticPreconditionerSubsidiaryPreconditioner &)
-  { 
-   BrokenCopy::broken_copy
-    ("PseudoElasticPreconditionerSubsidiaryPreconditioner ");
-  } 
+  /// Broken copy constructor
+  PseudoElasticPreconditionerSubsidiaryPreconditionerOld 
+   (const PseudoElasticPreconditionerSubsidiaryPreconditionerOld &)
+   { 
+    BrokenCopy::broken_copy
+     ("PseudoElasticPreconditionerSubsidiaryPreconditionerOld ");
+   } 
  
- /// Broken assignment operator
- void operator=(const PseudoElasticPreconditionerSubsidiaryPreconditioner&) 
-  {
-   BrokenCopy::broken_assign
-   (" PseudoElasticPreconditionerSubsidiaryPreconditioner");
-  }
+  /// Broken assignment operator
+  void operator=(const PseudoElasticPreconditionerSubsidiaryPreconditionerOld&) 
+   {
+    BrokenCopy::broken_assign
+    (" PseudoElasticPreconditionerSubsidiaryPreconditionerOld");
+   }
  
- // Setup the preconditioner
- void setup();
+  // Setup the preconditioner
+  void setup();
    
- // Apply the preconditioner
- void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
+  // Apply the preconditioner
+  void preconditioner_solve(const DoubleVector& r, DoubleVector& z);
    
- /// \short Specify the scaling. Default is 1.0  Must be called before 
- /// setup(...).
- double& scaling()
+  /// \short Specify the scaling. Default is 1.0  Must be called before 
+  /// setup(...).
+  double& scaling()
   {
    return Scaling;
   }
    
- /// access function to set the subsidiary preconditioner function.
- void set_subsidiary_preconditioner_function
-  (SubsidiaryPreconditionerFctPt sub_prec_fn)
+  /// access function to set the subsidiary preconditioner function.
+  void set_subsidiary_preconditioner_function
+   (SubsidiaryPreconditionerFctPt sub_prec_fn)
   {
    Subsidiary_preconditioner_function_pt = sub_prec_fn;
   }
 
-  private:
+   private:
    
- /// clears the memory
- void clean_up_memory()
+  /// clears the memory
+  void clean_up_memory()
   {
    delete Preconditioner_pt;
    Preconditioner_pt = 0;
   }
    
- // the augmentation scaling
- double Scaling;
+  // the augmentation scaling
+  double Scaling;
    
- /// the preconditioner pt 
- Preconditioner* Preconditioner_pt;
+  /// the preconditioner pt 
+  Preconditioner* Preconditioner_pt;
 
- /// the SubisidaryPreconditionerFctPt 
- SubsidiaryPreconditionerFctPt Subsidiary_preconditioner_function_pt;
-}; // end of PseudoElasticPreconditionerSubsidiaryPreconditioner 
+  /// the SubisidaryPreconditionerFctPt 
+  SubsidiaryPreconditionerFctPt Subsidiary_preconditioner_function_pt;
+ }; // end of PseudoElasticPreconditionerSubsidiaryPreconditionerOld 
 
 
 
@@ -402,7 +603,7 @@ class PseudoElasticPreconditionerSubsidiaryPreconditioner
 /// with lagrange multiplier tractions applied.\n 
 /// 3. By default this preconditioner uses a superlu preconditioner.
 //=============================================================================
- class PseudoElasticPreconditionerSubsidiaryBlockPreconditioner 
+ class PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld 
   : public BlockPreconditioner<CRDoubleMatrix>
  {
    public :
@@ -415,7 +616,7 @@ class PseudoElasticPreconditionerSubsidiaryPreconditioner
   typedef Preconditioner* (*SubsidiaryPreconditionerFctPt)();
   
   /// Constructor. (By default this preconditioner is upper triangular).
-  PseudoElasticPreconditionerSubsidiaryBlockPreconditioner ()
+  PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld ()
    : BlockPreconditioner<CRDoubleMatrix>()
    {
     // null the subsidiary preconditioner function pointer
@@ -429,25 +630,25 @@ class PseudoElasticPreconditionerSubsidiaryPreconditioner
    };
   
   /// Destructor
-  ~PseudoElasticPreconditionerSubsidiaryBlockPreconditioner ()
+  ~PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld ()
    {
     this->clean_up_memory();
    }
   
   /// Broken copy constructor
-  PseudoElasticPreconditionerSubsidiaryBlockPreconditioner 
-   (const PseudoElasticPreconditionerSubsidiaryBlockPreconditioner &)
+  PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld 
+   (const PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld &)
    { 
     BrokenCopy::broken_copy
-     ("PseudoElasticPreconditionerSubsidiaryBlockPreconditioner ");
+     ("PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld ");
    } 
   
   /// Broken assignment operator
   void operator=
-   (const PseudoElasticPreconditionerSubsidiaryBlockPreconditioner&) 
+   (const PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld&) 
    {
     BrokenCopy::broken_assign
-    (" PseudoElasticPreconditionerSubsidiaryBlockPreconditioner");
+    (" PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld");
    }
   
   /// clean up the memory
@@ -495,7 +696,7 @@ class PseudoElasticPreconditionerSubsidiaryPreconditioner
   
   /// \short Vector of SuperLU preconditioner pointers for storing the 
   /// preconditioners for each diagonal block
-  Vector<PseudoElasticPreconditionerSubsidiaryPreconditioner*> 
+  Vector<PseudoElasticPreconditionerSubsidiaryPreconditionerOld*> 
    Diagonal_block_preconditioner_pt;   
   
   /// Matrix of matrix vector product operators for the off diagonals
@@ -527,71 +728,71 @@ class PseudoElasticPreconditionerSubsidiaryPreconditioner
 ///  Note that this is NOT actually a functioning preconditioner.
 /// We simply derive from this class to get access to the blocks.
 //=============================================================================
-class PseudoElasticPreconditionerScalingHelper
-: public BlockPreconditioner<CRDoubleMatrix>
-{
+ class PseudoElasticPreconditionerScalingHelperOld
+  : public BlockPreconditioner<CRDoubleMatrix>
+ {
 
-  public:
+   public:
 
- /// The constructor.\n
- /// NOTE: \n
- /// 1. master_prec_pt should point to the 
- /// PseudoElasticPreconditioner.
- /// 2. matrix_pt should point to the jacobian.
- /// 3. The vector dof_list should contain the full list of 
- /// DOFS associated with the solid subsidiary system.
- /// 4. "solid_mesh_pt" should be a pointer to the solid mesh used in the 
- ///   master preconditioner.
- PseudoElasticPreconditionerScalingHelper
- (BlockPreconditioner<CRDoubleMatrix>* master_prec_pt,
-  CRDoubleMatrix* matrix_pt, Vector<unsigned>& dof_list,
-  const Mesh* const solid_mesh_pt,
-  const OomphCommunicator* comm_pt)
-  {
-   // turn into a subisiary preconditioner
-   this->turn_into_subsidiary_block_preconditioner(master_prec_pt,dof_list);
+  /// The constructor.\n
+  /// NOTE: \n
+  /// 1. master_prec_pt should point to the 
+  /// PseudoElasticPreconditioner.
+  /// 2. matrix_pt should point to the jacobian.
+  /// 3. The vector dof_list should contain the full list of 
+  /// DOFS associated with the solid subsidiary system.
+  /// 4. "solid_mesh_pt" should be a pointer to the solid mesh used in the 
+  ///   master preconditioner.
+  PseudoElasticPreconditionerScalingHelperOld
+   (BlockPreconditioner<CRDoubleMatrix>* master_prec_pt,
+    CRDoubleMatrix* matrix_pt, Vector<unsigned>& dof_list,
+    const Mesh* const solid_mesh_pt,
+    const OomphCommunicator* comm_pt)
+   {
+    // turn into a subisiary preconditioner
+    this->turn_into_subsidiary_block_preconditioner(master_prec_pt,dof_list);
      
-   // all dofs are of the same block type
-   Vector<unsigned> dof_to_block_map(dof_list.size(),0);
+    // all dofs are of the same block type
+    Vector<unsigned> dof_to_block_map(dof_list.size(),0);
      
-   // store the matrix_pt
-   set_matrix_pt(matrix_pt);
+    // store the matrix_pt
+    set_matrix_pt(matrix_pt);
 
-   // set the mesh
-   this->set_nmesh(1);
-   this->set_mesh(0,solid_mesh_pt);
+    // set the mesh
+    this->set_nmesh(1);
+    this->set_mesh(0,solid_mesh_pt);
 
-   // set the communicator pointer
-   this->set_comm_pt(comm_pt);
+    // set the communicator pointer
+    this->set_comm_pt(comm_pt);
 
-   // call block_setup(...)
-   this->block_setup(dof_to_block_map);
+    // call block_setup(...)
+    this->block_setup(dof_to_block_map);
 
-  }
+   }
 
- /// Destructor. 
- ~PseudoElasticPreconditionerScalingHelper() 
-  {
-   this->clear_block_preconditioner_base();
-  }
+  /// Destructor. 
+  ~PseudoElasticPreconditionerScalingHelperOld() 
+   {
+    this->clear_block_preconditioner_base();
+   }
  
- /// Broken copy constructor
- PseudoElasticPreconditionerScalingHelper
-  (const PseudoElasticPreconditionerScalingHelper&)
-  {
-   BrokenCopy::
-    broken_copy("PseudoElasticPreconditionerScalingHelper");
-  }
+  /// Broken copy constructor
+  PseudoElasticPreconditionerScalingHelperOld
+   (const PseudoElasticPreconditionerScalingHelperOld&)
+   {
+    BrokenCopy::
+     broken_copy("PseudoElasticPreconditionerScalingHelper");
+   }
 
- /// Broken assignment operator
- void operator=(const PseudoElasticPreconditionerScalingHelper&)
-  {
-   BrokenCopy::
+  /// Broken assignment operator
+  void operator=(const PseudoElasticPreconditionerScalingHelperOld&)
+   {
+    BrokenCopy::
     broken_assign("PseudoElasticPreconditionerScalingHelper");
-  }
+   }
 
- /// returns the infinite norm of S
- double s_inf_norm()
+  /// returns the infinite norm of S
+  double s_inf_norm()
   {
    CRDoubleMatrix* m_pt = 0;
    this->get_block(0,0,m_pt);
@@ -600,8 +801,8 @@ class PseudoElasticPreconditionerScalingHelper
    return s_inf_norm;
   }
    
- // broken preconditioner setup
- void setup()
+  // broken preconditioner setup
+  void setup()
   {
    std::ostringstream error_message;
    error_message
@@ -613,8 +814,8 @@ class PseudoElasticPreconditionerScalingHelper
     OOMPH_EXCEPTION_LOCATION);
   }
    
- // broken preconditioner solve
- void preconditioner_solve(const DoubleVector& r, DoubleVector& z)
+  // broken preconditioner solve
+  void preconditioner_solve(const DoubleVector& r, DoubleVector& z)
   {
    std::ostringstream error_message;
    error_message
@@ -627,7 +828,7 @@ class PseudoElasticPreconditionerScalingHelper
   }
    
 
-}; // end of PseudoElasticPreconditionerScalingHelper
+ }; // end of PseudoElasticPreconditionerScalingHelperOld
 // */
 
 }

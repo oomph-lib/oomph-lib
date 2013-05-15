@@ -1626,9 +1626,6 @@ solver_pt->solver_type() = TrilinosAztecOOSolver::GMRES;
  prec_pt->set_lagrange_multiplier_mesh_pt(
   problem.lagrange_multiplier_mesh_pt());
 
- // hierher start
-
- // RAYRAY
  // inexact pseudo-solid preconditioning
  // 0 - Exact
  // 1 - Block diagonal
