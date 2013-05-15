@@ -38,7 +38,8 @@ namespace oomph
  /// function as expected, but there will be no computational speed gain.\n
  /// By default the Epetra_CrsMatrix::multiply(...) are employed.\n
  //============================================================================
- void MatrixVectorProduct::setup(CRDoubleMatrix* matrix_pt)
+ void MatrixVectorProduct::setup(CRDoubleMatrix* matrix_pt,
+                             LinearAlgebraDistribution* col_dist_pt)
  {
   // clean memory
   this->clean_up_memory();
@@ -63,10 +64,17 @@ namespace oomph
 #endif
 
   // create the cols map
-  Column_distribution_pt = new LinearAlgebraDistribution
-   (matrix_pt->distribution_pt()->communicator_pt(),
-    matrix_pt->ncol(),matrix_pt->distribution_pt()->distributed());
-  
+  if(col_dist_pt == 0)
+   {
+    Column_distribution_pt = new LinearAlgebraDistribution
+     (matrix_pt->distribution_pt()->communicator_pt(),
+      matrix_pt->ncol(),matrix_pt->distribution_pt()->distributed());
+   }
+  else
+   {
+    Column_distribution_pt = new LinearAlgebraDistribution(col_dist_pt);
+   }
+
   // setup the operator
   if (Using_trilinos)
    {
@@ -109,18 +117,21 @@ namespace oomph
                         OOMPH_EXCEPTION_LOCATION);
    }
 
-  // Check to see if x.size() = ncol().
+  // Check to see if the distribution of the matrix column is the same as the
+  // distribution of the vector to be operated on.
   if (*this->Column_distribution_pt != *x.distribution_pt())
    {
     std::ostringstream error_message_stream;
     error_message_stream 
-     << "This class assumes that the x vector has a uniform "
-     << "distributed distribution.";
+     << "The distribution of the x Vector is not the same as"
+     << "the column distribution.";
     throw OomphLibError(error_message_stream.str(),
                         OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
-  // if y is setup then it should have the same distribution as x
+
+  // if y is setup then it should have the same distribution as
+  // the matrix used to set this up.
   if (y.built())
    {
     if (!(*y.distribution_pt() == *this->distribution_pt()))
@@ -128,7 +139,7 @@ namespace oomph
       std::ostringstream error_message_stream;
       error_message_stream 
        << "The y vector is setup and therefore must have the same "
-       << "distribution as the vector x";
+       << "distribution as the matrix used to set up the MatrixVectorProduct";
       throw OomphLibError(error_message_stream.str(),
                           OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);

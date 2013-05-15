@@ -669,6 +669,15 @@ namespace oomph
     }
    Block_distribution_pt.resize(0);
 
+   if(Preconditioner_blocks_have_been_precomputed)
+    {
+     for (unsigned b = 0; b < nblock; b++) 
+      {
+       delete Precomputed_block_distribution_pt[b];
+      }
+    }
+   Precomputed_block_distribution_pt.resize(0);
+
    // clear the global index
    Global_index.clear();
 
@@ -786,40 +795,41 @@ namespace oomph
   void set_precomputed_blocks(DenseMatrix<CRDoubleMatrix*>&precomputed_block_pt,
                               Vector<Vector<unsigned> > & block_to_block_map)
   {
+   unsigned precomputed_block_nrow = precomputed_block_pt.nrow();
+
 #ifdef PARANOID
-   unsigned precomputed_blocks_nrow = precomputed_block_pt.nrow();
 
    // Ensure that a square block matrix is given.
-   if(precomputed_blocks_nrow != precomputed_block_pt.ncol())
+   if(precomputed_block_nrow != precomputed_block_pt.ncol())
     {
      std::ostringstream error_message;
      error_message << "The number of block rows and block columns are "
                    << "not the same." << std::endl;
      throw OomphLibError(error_message.str(),
-                         "BlockPreconditioner::set_blocks(...)",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
    // Check that this is the most fine grain .
-   if(precomputed_blocks_nrow != this->ndof_types())
+   if(precomputed_block_nrow != this->ndof_types())
     {
      std::ostringstream error_message;
      error_message << "This must be the most fine grain block matrix.\n"
                    << "It must have ndof_types number of rows / columns.\n"
-                   << "You have given me a " << precomputed_blocks_nrow
-                   << " by " << precomputed_blocks_nrow << " matrix.\n"
+                   << "You have given me a " << precomputed_block_nrow
+                   << " by " << precomputed_block_nrow << " matrix.\n"
                    << "I want a " << ndof_types() << " by "<< ndof_types()
                    << " matrix." << std::endl;
      throw OomphLibError(error_message.str(),
-                         "BlockPreconditioner::set_blocks(...)",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
    // Check that all matrices have been set and have been built.
-   for (unsigned block_row_i = 0; block_row_i < precomputed_blocks_nrow;
+   for (unsigned block_row_i = 0; block_row_i < precomputed_block_nrow;
         block_row_i++)
     {
-     for (unsigned block_col_i = 0; block_col_i < precomputed_blocks_nrow;
+     for (unsigned block_col_i = 0; block_col_i < precomputed_block_nrow;
           block_col_i++)
       {
        // Check that the block matrix has been set.
@@ -830,7 +840,7 @@ namespace oomph
                        << "," << block_col_i << ")"
                        << " is NULL." << std::endl;
          throw OomphLibError(error_message.str(),
-                             "BlockPreconditioner::set_blocks(...)",
+                             OOMPH_CURRENT_FUNCTION,
                              OOMPH_EXCEPTION_LOCATION);
         }
 
@@ -842,7 +852,7 @@ namespace oomph
                        << "," << block_col_i << ")"
                        << " is not built." << std::endl;
          throw OomphLibError(error_message.str(),
-                             "BlockPreconditioner::set_blocks(...)",
+                             OOMPH_CURRENT_FUNCTION,
                              OOMPH_EXCEPTION_LOCATION);
         }
       }
@@ -850,7 +860,7 @@ namespace oomph
 
    // Check that the size of all matrices "make sense".
    // First do the rows.
-   for (unsigned block_row_i = 0; block_row_i < precomputed_blocks_nrow;
+   for (unsigned block_row_i = 0; block_row_i < precomputed_block_nrow;
         block_row_i++)
     {
 
@@ -861,7 +871,7 @@ namespace oomph
       = this->dof_block_dimension(block_row_i);
 
      // Loop through the columns
-     for(unsigned block_col_i = 0; block_col_i < precomputed_blocks_nrow;
+     for(unsigned block_col_i = 0; block_col_i < precomputed_block_nrow;
          block_col_i++)
       {
        // Get the global row of this block.
@@ -875,14 +885,14 @@ namespace oomph
                        << " does not have the correct number of rows."
                        << std::endl;
          throw OomphLibError(error_message.str(),
-                             "BlockPreconditioner::set_blocks(...)",
+                             OOMPH_CURRENT_FUNCTION,
                              OOMPH_EXCEPTION_LOCATION);
         }
       }
     }
 
    // Now check the columns
-   for(unsigned block_col_i = 0; block_col_i < precomputed_blocks_nrow;
+   for(unsigned block_col_i = 0; block_col_i < precomputed_block_nrow;
        block_col_i++)
     {
      // Get the number of columns for this block column
@@ -890,7 +900,7 @@ namespace oomph
       = precomputed_block_pt(0,block_col_i)->ncol();
 
      // Loop through the rows
-     for(unsigned block_row_i = 0; block_row_i < precomputed_blocks_nrow;
+     for(unsigned block_row_i = 0; block_row_i < precomputed_block_nrow;
          block_row_i++)
       {
        // Get the number of columns for this block.
@@ -904,7 +914,7 @@ namespace oomph
                        << " does not have the correct number of columns."
                        << std::endl;
          throw OomphLibError(error_message.str(),
-                             "BlockPreconditioner::set_blocks(...)",
+                             OOMPH_CURRENT_FUNCTION,
                              OOMPH_EXCEPTION_LOCATION);
         }
       }
@@ -919,7 +929,7 @@ namespace oomph
      warning_message << "Warning: This is a master preconditioner\n"
                      << "This function should not be called." << std::endl;
      throw OomphLibWarning(warning_message.str(),
-                           "BlockPreconditioner::set_blocks",
+                           OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -946,14 +956,14 @@ namespace oomph
                        << " is already inserted."
                        << std::endl;
          throw OomphLibError(error_message.str(),
-                             "BlockPreconditioner::set_blocks",
+                             OOMPH_CURRENT_FUNCTION,
                              OOMPH_EXCEPTION_LOCATION);
         }
       }
     }
      
    // All block types described in block_to_block_map must be unique.
-   if(precomputed_blocks_nrow != block_map_set.size())
+   if(precomputed_block_nrow != block_map_set.size())
     {
      std::ostringstream error_message;
      error_message << "Error: all blocks must be assigned. \n"
@@ -961,7 +971,7 @@ namespace oomph
                    << " blocks have been assigned."
                    << std::endl;
      throw OomphLibError(error_message.str(),
-                         "BlockPreconditioner::set_blocks",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -973,6 +983,31 @@ namespace oomph
    // Set the Block_to_block_map.
    Block_to_block_map = block_to_block_map;
 
+   // Work out the distributions of the concatenated blocks.
+   unsigned super_block_size = Block_to_block_map.size();
+   Precomputed_block_distribution_pt.resize(super_block_size,0);
+   for (unsigned super_block_i = 0; 
+        super_block_i < super_block_size; super_block_i++)
+    {
+     unsigned sub_block_size = Block_to_block_map[super_block_i].size();
+     Vector<LinearAlgebraDistribution*> tmp_dist_pt(sub_block_size,0);
+     
+     for (unsigned sub_block_i = 0; 
+          sub_block_i < sub_block_size; sub_block_i++) 
+      {
+       tmp_dist_pt[sub_block_i] 
+         = Precomputed_block_pt(
+             Block_to_block_map[super_block_i][sub_block_i],0)
+               ->distribution_pt();
+      }
+
+     Precomputed_block_distribution_pt[super_block_i] 
+       = new LinearAlgebraDistribution;
+
+     LinearAlgebraDistributionHelpers::concatenate(
+       tmp_dist_pt,*Precomputed_block_distribution_pt[super_block_i]);
+    }
+
    // Flag indicating that the preconditioner blocks has been precomputed.
    Preconditioner_blocks_have_been_precomputed = true;
   }
@@ -980,12 +1015,12 @@ namespace oomph
 
  void set_precomputed_blocks(DenseMatrix<CRDoubleMatrix*>&precomputed_block_pt)
   {
-   unsigned precomputed_blocks_nrow = precomputed_block_pt.nrow();
+   unsigned precomputed_block_nrow = precomputed_block_pt.nrow();
 
-   Vector<Vector<unsigned> > block_to_block_map(precomputed_blocks_nrow,
+   Vector<Vector<unsigned> > block_to_block_map(precomputed_block_nrow,
                                                 Vector<unsigned>(1,0));
 
-   for (unsigned i = 0; i < precomputed_blocks_nrow; i++) 
+   for (unsigned i = 0; i < precomputed_block_nrow; i++) 
     {
      block_to_block_map[i][0] = i;
     }
@@ -1310,6 +1345,9 @@ namespace oomph
 
   /// \short Precomputed (and possibly modified) blocks.
   DenseMatrix<CRDoubleMatrix*> Precomputed_block_pt;
+  
+  /// \short The distribution for precomputed blocks.
+  Vector<LinearAlgebraDistribution*> Precomputed_block_distribution_pt;
 
   /// \short Mapping for blocks passed down from the above preconditioner.
   Vector<Vector<unsigned> > Block_to_block_map;
@@ -1541,7 +1579,7 @@ namespace oomph
      << "a subsidiary one\n";
     throw OomphLibWarning(
                           error_message.str(),
-                          "BlockPreconditioner::turn_into_subsidiary_block_preconditioner(...)",
+                          OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -2280,7 +2318,7 @@ namespace oomph
                  << "function do not use Node::nvalue() to determine the\n"
                  << "dofs to be classified!\n";
                 throw OomphLibWarning(error_message.str(),
-                                      "BlockPreconditioner::block_setup(...)",
+                                      OOMPH_CURRENT_FUNCTION,
                                       OOMPH_EXCEPTION_LOCATION);
                }
              }
@@ -2339,7 +2377,7 @@ namespace oomph
                << "function do not use Node::nvalue() to determine the\n"
                << "dofs to be classified!\n";
               throw OomphLibWarning(error_message.str(),
-                                    "BlockPreconditioner::block_setup(...)",
+                                    OOMPH_CURRENT_FUNCTION,
                                     OOMPH_EXCEPTION_LOCATION);
              }
            }
@@ -2635,7 +2673,7 @@ namespace oomph
                      << " does not have any DOFs associated with it";
       throw OomphLibWarning(
                             error_message.str(),
-                            "BlockPreconditioner::block_setup(...)",
+                            OOMPH_CURRENT_FUNCTION,
                             OOMPH_EXCEPTION_LOCATION);
      }
    }
@@ -3791,7 +3829,7 @@ namespace oomph
                    << ", however this preconditioner has merged blocks "
                    << "= " << n_blocks << std::endl;
      throw OomphLibError(error_message.str(),
-                         "BlockPreconditioner::get_block_vector(...)",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    if (!v.built())
@@ -3799,7 +3837,7 @@ namespace oomph
      std::ostringstream error_message;
      error_message << "The distribution of the global vector v must be setup.";
      throw OomphLibError(error_message.str(),
-                         "BlockPreconditioner::get_block_vector(...)",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    if (*(v.distribution_pt()) != *(this->master_distribution_pt()))
@@ -3838,9 +3876,12 @@ namespace oomph
    
    Vector<DoubleVector*> tmp_block_vector_pt(nblocks_to_cat,0);
    for (unsigned b_i = 0; b_i < nblocks_to_cat; b_i++) 
-   {
+    {
      tmp_block_vector_pt[b_i] = &tmp_block_vector[b_i];
-   }
+    }
+
+   // Build w with the correct distribution.
+   w.build(Precomputed_block_distribution_pt[b]);
 
    // Concatenate the vectors
    DoubleVectorHelpers::concatenate_without_communication(
@@ -3873,7 +3914,7 @@ namespace oomph
                    << ", however this preconditioner has nblock_types() "
                    << "= " << nblock_types() << std::endl;
      throw OomphLibError(error_message.str(),
-                         "BlockPreconditioner::get_block_vector(...)",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    if (!v.built())
@@ -3881,7 +3922,7 @@ namespace oomph
      std::ostringstream error_message;
      error_message << "The distribution of the global vector v must be setup.";
      throw OomphLibError(error_message.str(),
-                         "BlockPreconditioner::get_block_vector(...)",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
    if (*(v.distribution_pt()) != *(this->master_distribution_pt()))
@@ -3891,7 +3932,7 @@ namespace oomph
                    << " specified master_distribution_pt(). \n"
                    << "i.e. Distribution_pt in the master preconditioner";
      throw OomphLibError(error_message.str(),
-                         "BlockPreconditioner::get_block_vector(...)",
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif

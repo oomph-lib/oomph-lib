@@ -102,7 +102,8 @@ namespace oomph {
    /// multiply methods, if Trilinos is not installed then this class will
    /// function as expected, but there will be no computational speed gain.\n
    /// By default the Epetra_CrsMatrix::multiply(...) are employed.\n
-   void setup(CRDoubleMatrix* matrix_pt);
+   void setup(CRDoubleMatrix* matrix_pt,
+              LinearAlgebraDistribution* col_dist_pt=0);
 
    /// \short Apply the operator to the vector x and return the result in 
    /// the vector y

@@ -1085,7 +1085,17 @@ namespace oomph
         this->get_block(d,j,block_matrix_pt);
         Off_diagonal_matrix_vector_products(d,j) 
          = new MatrixVectorProduct();
-        Off_diagonal_matrix_vector_products(d,j)->setup(block_matrix_pt);
+        if(this->Preconditioner_blocks_have_been_precomputed)
+         {
+          Off_diagonal_matrix_vector_products(d,j)
+            ->setup(block_matrix_pt,
+                    this->Precomputed_block_distribution_pt[j]);
+         }
+        else
+         {
+          Off_diagonal_matrix_vector_products(d,j)->setup(block_matrix_pt);
+         }
+
         delete block_matrix_pt;
        }
      }

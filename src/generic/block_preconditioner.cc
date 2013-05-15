@@ -299,7 +299,7 @@ namespace oomph
   // hierher There are similar constructions elsewhere -- change them too!
   if(block_pt == 0)
    {
-    block_pt = new CRDoubleMatrix;
+    block_pt = new CRDoubleMatrix(Precomputed_block_distribution_pt[block_i]);
    }
 
   // Concatenate the matrix.
