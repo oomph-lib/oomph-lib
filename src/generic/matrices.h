@@ -3167,7 +3167,10 @@ namespace CRDoubleMatrixHelpers
  /// given a uniform row distribution. Otherwise we use the existing 
  /// distribution. This gives the user the ability to define their own 
  /// distribution, or save computing power if a distribution has 
- /// been pre-built.
+ /// been pre-built.\n
+ /// \n
+ /// NOTE: ALL the matrices pointed to by matrix_pt has to be built. This is
+ /// not the case with concatenate_without_communication(...)
  void concatenate(const DenseMatrix<CRDoubleMatrix*> &matrix_pt,
                   CRDoubleMatrix &result_matrix);
   
