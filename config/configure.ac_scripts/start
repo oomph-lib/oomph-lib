@@ -590,28 +590,7 @@ AC_ARG_WITH(mpi-self-tests,
 AC_SUBST(MPI_RUN_COMMAND)
 
 
-
-# Do we want to run self tests which involve more than two processors? 
-# If yes, run configure as './configure --enable-MPI_VARIABLENP'
-AC_ARG_ENABLE(MPI_VARIABLENP,
-              [  --enable-MPI_VARIABLENP Run self tests which involves more than two processor],
-              [want_mpi_variablenp=true],
-              [want_mpi_variablenp=false])
-# Pass result of test to automake (makefiles can now check for 
-# status of WANT_MPI_VARIABLENP in any Makefile.am, like this:
-#
-#   # WANT_MPI_VARIABLENP flag is set by autoconf
-#   #---------------------------------
-#   if WANT_MPI_VARIABLENP
-#     SUBDIRS = $(non_mpi_variablenp_sub_dirs) $(mpi_variablenp_sub_dirs) 
-#   else
-#     SUBDIRS = $(non_mpi_variablenp_sub_dirs)
-#   endif
-#
-AM_CONDITIONAL(WANT_MPI_VARIABLENP, test x$want_mpi_variablenp = xtrue)
-
-
-
+# Do we want to run the mpi self tests which involves more than two cores?
 AC_ARG_WITH(mpi-self-tests-variablenp,
 [  --with-mpi-self-tests-variablenp[=MPI_VARIABLENP_RUN_COMMAND] run mpi self-tests on multiple processors
                           using MPI_VARIABLENP_RUN_COMMAND. E.g. if a parallel executable
@@ -621,12 +600,22 @@ AC_ARG_WITH(mpi-self-tests-variablenp,
 
                           then set MPI_VARIABLENP_RUN_COMMAND to "mpirun -np OOMPHNP"],[
   if test "$withval" != "no" -a "$withval" != "yes"; then
-    run_mpi_self_tests-variablenp=true
+    run_mpi_self_tests_variablenp=true
     MPI_VARIABLENP_RUN_COMMAND=$withval
   fi
-])
+],[run_mpi_self_tests_variablenp=false])
+
+# Perform the substitution
 AC_SUBST(MPI_VARIABLENP_RUN_COMMAND)
 
+#   # WANT_MPI_VARIABLENP flag is set by autoconf
+#   #---------------------------------
+#   if WANT_MPI_VARIABLENP
+#     SUBDIRS = $(non_mpi_variablenp_sub_dirs) $(mpi_variablenp_sub_dirs) 
+#   else
+#     SUBDIRS = $(non_mpi_variablenp_sub_dirs)
+#   endif
+AM_CONDITIONAL(WANT_MPI_VARIABLENP, test x$run_mpi_self_tests_variablenp = xtrue)
 
 
 
