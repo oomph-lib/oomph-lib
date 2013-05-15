@@ -1631,8 +1631,9 @@ solver_pt->solver_type() = TrilinosAztecOOSolver::GMRES;
  // RAYRAY
  // inexact pseudo-solid preconditioning
  // 0 - Exact
- // 1 - Block upper triangular
- // 2 - Block lower triangular
+ // 1 - Block diagonal
+ // 2 - Block upper triangular
+ // 3 - Block lower triangular
  if(pe_prec_type == 0)
   {
    prec_pt->pseudo_elastic_preconditioner_pt()->elastic_preconditioner_type()
@@ -1641,9 +1642,14 @@ solver_pt->solver_type() = TrilinosAztecOOSolver::GMRES;
  else if(pe_prec_type == 1)
   {
    prec_pt->pseudo_elastic_preconditioner_pt()->elastic_preconditioner_type()
-     = PseudoElasticPreconditioner::Block_upper_triangular_preconditioner;
+     = PseudoElasticPreconditioner::Block_diagonal_preconditioner;
   }
  else if(pe_prec_type == 2)
+  {
+   prec_pt->pseudo_elastic_preconditioner_pt()->elastic_preconditioner_type()
+     = PseudoElasticPreconditioner::Block_upper_triangular_preconditioner;
+  }
+ else if(pe_prec_type == 3)
   {
    prec_pt->pseudo_elastic_preconditioner_pt()->elastic_preconditioner_type()
      = PseudoElasticPreconditioner::Block_lower_triangular_preconditioner;
