@@ -3645,7 +3645,7 @@ namespace CRDoubleMatrixHelpers
     res_row_start.push_back(res_nnz);
 
     // Build the matrix
-    result_matrix.build(res_ncol,res_values,res_column_indices, res_row_start);
+    result_matrix.build(res_ncol,res_values,res_column_indices,res_row_start);
    }
   // Otherwise we are dealing with a distributed matrix.
   else
@@ -4133,17 +4133,27 @@ namespace CRDoubleMatrixHelpers
  }
 
  //============================================================================
- /// \short Concatenate CRDoubleMatrix matrices. The vector 
- /// block_distribution_pt contains the LinearAlgebraDistribution of each
- /// block row. This is required so that the sub matrices in matrix_pt can
- /// be null to represent a zero matrix.\n
+ /// \short Concatenate CRDoubleMatrix matrices.\n
  /// \n
- /// The result matrix is a permutation of the in matrices such that the data
+ /// The Vector row_distribution_pt contains the LinearAlgebraDistribution 
+ /// of each block row.\n
+ /// The Vector col_distribution_pt contains the LinearAlgebraDistribution 
+ /// of each block column.\n
+ /// The DenseMatrix matrix_pt contains pointers to the CRDoubleMatrices 
+ /// to concatenate.\n
+ /// The CRDoubleMatrix result_matrix is the result matrix.\n
+ /// \n
+ /// The result matrix is a permutation of the sub matrices such that the data
  /// stays on the same processor when the result matrix is built, there is no
  /// communication between processors.\n
  /// Thus the block structure of the sub matrices are NOT preserved in the
- /// result matrix, instead we observe a permutation, defined by the 
- /// distribution of the sub matrices.The columns are permuted accordingly.
+ /// result matrix. The rows are block-permuted, defined by the concatenation
+ /// of the distributions in row_distribution_pt. Similarly, the columns are 
+ /// block-permuted, defined by the concatenation of the distributions in 
+ /// col_distribution_pt. 
+ /// For more details on the block-permutation, see 
+ /// LinearAlgebraDistributionHelpers::concatenate(...).\n
+ /// \n
  /// If one wishes to preserve the block structure of the sub matrices in the
  /// result matrix, consider using CRDoubleMatrixHelpers::concatenate(...),
  /// which uses communication between processors to ensure that the block
@@ -4162,16 +4172,20 @@ namespace CRDoubleMatrixHelpers
  /// Distribution of the result matrix:
  /// If the result matrix does not have a distribution built, then it will be
  /// given a distribution built from the concatenation of the distributions
- /// of the first block column using 
- /// LinearAlgebraDistributionHelpers::concatenate(...). 
- /// Otherwise we use the existing distribution. If there is an existing 
- /// distribution then it must be the same as the distribution from the 
- /// concatenation of distributions as described above. 
+ /// from row_distribution_pt, see 
+ /// LinearAlgebraDistributionHelpers::concatenate(...) for more detail. 
+ /// Otherwise we use the existing distribution.\n 
+ /// If there is an existing distribution then it must be the same as the 
+ /// distribution from the concatenation of row distributions as described 
+ /// above. 
  /// Why don't we always compute the distribution "on the fly"?
- /// Because a non-uniform distribution requires communication.
+ /// Because a non-uniform distribution requires communication. 
+ /// All block preconditioner distributions are concatenations of the 
+ /// distributions of the individual blocks.
  //============================================================================
  void concatenate_without_communication(
-  const Vector<LinearAlgebraDistribution*> &block_distribution_pt,
+  const Vector<LinearAlgebraDistribution*> &row_distribution_pt,
+  const Vector<LinearAlgebraDistribution*> &col_distribution_pt,
   const DenseMatrix<CRDoubleMatrix*> &matrix_pt,
   CRDoubleMatrix &result_matrix)
  {
@@ -4186,7 +4200,7 @@ namespace CRDoubleMatrixHelpers
 #ifdef PARANOID
   
   // Are there matrices to concatenate?
-  if(matrix_nrow == 0)
+  if(matrix_nrow == 0 || matrix_ncol == 0)
    {
     std::ostringstream error_message;
     error_message << "There are no matrices to concatenate.\n";
@@ -4206,37 +4220,40 @@ namespace CRDoubleMatrixHelpers
                     OOMPH_EXCEPTION_LOCATION);
    }
 
-  // Ensure that the in matrices is a square block matrix.
-  if(matrix_nrow != matrix_ncol)
-   {
-    std::ostringstream error_message;
-    error_message<<"The number of block rows and block columns\n"
-                 <<"must be the same since we permute the rows and columns.\n";
-    throw OomphLibError(error_message.str(),
-                        "RAYRAYERR",
-                        OOMPH_EXCEPTION_LOCATION);
-   }
 
-  // The distribution for each block row is stored in block_distribution_pt.
-  // So the number of distributions in block_distribution_pt must be the
+
+  // The distribution for each block row is stored in row_distribution_pt.
+  // So the number of distributions in row_distribution_pt must be the
   // same as matrix_nrow.
-  if(matrix_nrow != block_distribution_pt.size())
+  if(matrix_nrow != row_distribution_pt.size())
    {
     std::ostringstream error_message;
-    error_message << "The number of distributions must be the same as\n"
+    error_message << "The number of row distributions must be the same as\n"
                   << "the number of block rows.";
     throw OomphLibError(error_message.str(),
                         "RAYRAYERR",
                         OOMPH_EXCEPTION_LOCATION);
    }
 
-  // Check that all pointers in block_distribution_pt is not null.
+  // The number of distributions for the columns must match the number of
+  // block columns.
+  if(matrix_ncol != col_distribution_pt.size())
+   {
+    std::ostringstream error_message;
+    error_message << "The number of column distributions must be the same as\n"
+                  << "the number of block columns.";
+    throw OomphLibError(error_message.str(),
+                        "RAYRAYERR",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+
+  // Check that all pointers in row_distribution_pt is not null.
   for (unsigned block_row_i = 0; block_row_i < matrix_nrow; block_row_i++) 
    {
-    if(block_distribution_pt[block_row_i] == 0)
+    if(row_distribution_pt[block_row_i] == 0)
      {
       std::ostringstream error_message;
-      error_message << "The distribution pointer in position "
+      error_message << "The row distribution pointer in position "
                     << block_row_i <<" is null.\n";
       throw OomphLibError(error_message.str(),
                           "RAYRAYERR",
@@ -4244,10 +4261,25 @@ namespace CRDoubleMatrixHelpers
      }
    }
 
+  // Check that all pointers in row_distribution_pt is not null.
+  for (unsigned block_col_i = 0; block_col_i < matrix_ncol; block_col_i++) 
+   {
+    if(col_distribution_pt[block_col_i] == 0)
+     {
+      std::ostringstream error_message;
+      error_message << "The column distribution pointer in position "
+                    << block_col_i <<" is null.\n";
+      throw OomphLibError(error_message.str(),
+                          "RAYRAYERR",
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+   }
+
   // Check that all distributions are built.
+  // First the row distributions
   for (unsigned block_row_i = 0; block_row_i < matrix_nrow; block_row_i++) 
    {
-    if(!block_distribution_pt[block_row_i]->built())
+    if(!row_distribution_pt[block_row_i]->built())
      {
       std::ostringstream error_message;
       error_message << "The distribution pointer in position "
@@ -4257,26 +4289,59 @@ namespace CRDoubleMatrixHelpers
                           OOMPH_EXCEPTION_LOCATION);
      }
    }
-
-  // Check that all communicators in block_distribution_pt is are the same.
-  const OomphCommunicator first_comm
-   = *(block_distribution_pt[0]->communicator_pt());
-
-  for (unsigned block_row_i = 1; block_row_i < matrix_nrow; block_row_i++) 
-  {
-    const OomphCommunicator current_comm 
-      = *(block_distribution_pt[block_row_i]->communicator_pt());
-
-    if(first_comm != current_comm)
+  // Now the column distributions
+  for (unsigned block_col_i = 0; block_col_i < matrix_ncol; block_col_i++) 
+   {
+    if(!col_distribution_pt[block_col_i]->built())
      {
       std::ostringstream error_message;
-      error_message << "The communicator from the distribution in position "
-                    << block_row_i << " is not the same as the first one.";
+      error_message << "The distribution pointer in position "
+                    << block_col_i <<" is not built.\n";
       throw OomphLibError(error_message.str(),
                           "RAYRAYERR",
                           OOMPH_EXCEPTION_LOCATION);
      }
-  }
+   }
+
+  // Check that all communicators in row_distribution_pt are the same.
+  const OomphCommunicator first_row_comm
+   = *(row_distribution_pt[0]->communicator_pt());
+
+  for (unsigned block_row_i = 1; block_row_i < matrix_nrow; block_row_i++) 
+   {
+    const OomphCommunicator current_comm 
+     = *(row_distribution_pt[block_row_i]->communicator_pt());
+
+    if(first_row_comm != current_comm)
+     {
+      std::ostringstream error_message;
+      error_message <<"The communicator from the row distribution in position "
+                    << block_row_i << " is not the same as the first "
+                    << "communicator from row_distribution_pt";
+      throw OomphLibError(error_message.str(),
+                          "RAYRAYERR",
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+   }
+
+  // Check that all communicators in col_distribution_pt are the same as the 
+  // first row communicator from above.
+  for (unsigned block_col_i = 0; block_col_i < matrix_ncol; block_col_i++) 
+   {
+    const OomphCommunicator current_comm 
+     = *(col_distribution_pt[block_col_i]->communicator_pt());
+
+    if(first_row_comm != current_comm)
+     {
+      std::ostringstream error_message;
+      error_message <<"The communicator from the col distribution in position "
+                    << block_col_i << " is not the same as the first "
+                    << "communicator from row_distribution_pt";
+      throw OomphLibError(error_message.str(),
+                          "RAYRAYERR",
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+   }
 
   // Are all sub matrices built? If the matrix_pt is not null, make sure
   // that it is built.
@@ -4289,7 +4354,7 @@ namespace CRDoubleMatrixHelpers
        {
         std::ostringstream error_message;
         error_message
-         << "The sub matrix (" << block_row_i << "," << block_col_i << ")\n"
+         << "The sub matrix_pt(" << block_row_i << "," << block_col_i << ")\n"
          << "is not built.\n";
         throw OomphLibError(error_message.str(),
                             "RAYRAYERR",
@@ -4299,29 +4364,29 @@ namespace CRDoubleMatrixHelpers
    }
  
   // For the matrices which are built, do they have the same communicator as
-  // the first communicator from block_distribution_pt?
+  // the first communicator from row_distribution_pt?
   for (unsigned block_row_i = 0; block_row_i < matrix_nrow; block_row_i++) 
    {
     for (unsigned block_col_i = 0; block_col_i < matrix_ncol; block_col_i++) 
      {
-       if(matrix_pt(block_row_i,block_col_i) != 0)
-        {
-          const OomphCommunicator current_comm
-          = *(matrix_pt(block_row_i,block_col_i)
-              ->distribution_pt()
-              ->communicator_pt());
-          if(first_comm != current_comm)
-           {
-            std::ostringstream error_message;
-            error_message
-             << "The sub matrix (" << block_row_i << ","<<block_col_i<< ")\n"
-             << "does not have the same communicator pointer as those in\n"
-             << "block_distribution_pt.\n";
-            throw OomphLibError(error_message.str(),
-                                "RAYRAYERR",
-                                OOMPH_EXCEPTION_LOCATION);
-           }
-        }
+      if(matrix_pt(block_row_i,block_col_i) != 0)
+       {
+        const OomphCommunicator current_comm
+         = *(matrix_pt(block_row_i,block_col_i)
+             ->distribution_pt()
+             ->communicator_pt());
+        if(first_row_comm != current_comm)
+         {
+          std::ostringstream error_message;
+          error_message
+           << "The sub matrix_pt(" << block_row_i << ","<<block_col_i<< ")\n"
+           << "does not have the same communicator pointer as those in\n"
+           << "(row|col)_distribution_pt.\n";
+          throw OomphLibError(error_message.str(),
+                              "RAYRAYERR",
+                              OOMPH_EXCEPTION_LOCATION);
+         }
+       }
      }
    }
  
@@ -4330,8 +4395,8 @@ namespace CRDoubleMatrixHelpers
   for(unsigned block_row_i = 0; block_row_i < matrix_nrow; block_row_i++)
    {
     // Use the first column to compare against the rest.
-    unsigned long current_block_nrow = block_distribution_pt[block_row_i]
-                                       ->nrow();
+    unsigned long current_block_nrow = row_distribution_pt[block_row_i]
+     ->nrow();
 
     // Compare against columns 0 to matrix_ncol - 1
     for(unsigned block_col_i = 0; block_col_i < matrix_ncol; block_col_i++)
@@ -4341,7 +4406,7 @@ namespace CRDoubleMatrixHelpers
        {
         // Get the nrow for this sub block.
         unsigned long subblock_nrow 
-          = matrix_pt(block_row_i,block_col_i)->nrow();
+         = matrix_pt(block_row_i,block_col_i)->nrow();
 
         if(current_block_nrow != subblock_nrow)
          {
@@ -4361,24 +4426,12 @@ namespace CRDoubleMatrixHelpers
   // Compare the number of colmns of each block matrix in a block column.
   for(unsigned block_col_i = 0; block_col_i < matrix_ncol; block_col_i++)
    {
-    // Get the current block ncol from the first non-null block matrix in
-    // this block column.
-    unsigned current_block_ncol = 0;
-    unsigned first_nonnull_block = 0;
-    for (unsigned block_row_i = 0; 
-         block_row_i < matrix_nrow && current_block_ncol == 0; block_row_i++) 
-     {
-      // If matrix_pt is not null, get the ncol for this block column.
-      // Also store the index of where the block is.
-      if(matrix_pt(block_row_i,block_col_i) != 0)
-       {
-        current_block_ncol = matrix_pt(block_row_i,block_col_i)->ncol();
-        first_nonnull_block = block_row_i;
-       }
-     }
+    // Get the current block ncol from the linear algebra distribution.
+    // Note that we assume that the dimensions are symmetrical.
+    unsigned current_block_ncol = col_distribution_pt[block_col_i]
+     ->nrow();
 
-    // Compare against first_nonnull_block until matrix_nrow - 1
-    for(unsigned block_row_i = first_nonnull_block; 
+    for(unsigned block_row_i = 0; 
         block_row_i < matrix_nrow; block_row_i++)
      {
       if(matrix_pt(block_row_i,block_col_i) != 0)
@@ -4409,8 +4462,8 @@ namespace CRDoubleMatrixHelpers
   for (unsigned block_row_i = 0; block_row_i < matrix_nrow; block_row_i++) 
    {
     // Get the distribution from the first block in this row.
-    LinearAlgebraDistribution* row_distribution_pt
-     = block_distribution_pt[block_row_i];
+    LinearAlgebraDistribution* block_row_distribution_pt
+     = row_distribution_pt[block_row_i];
 
     // Loop through the block columns
     for (unsigned block_col_i = 0; block_col_i < matrix_ncol; block_col_i++) 
@@ -4422,7 +4475,7 @@ namespace CRDoubleMatrixHelpers
          = matrix_pt(block_row_i,block_col_i)->distribution_pt();
    
         // Ensure that the in matrices is a square block matrix.
-        if((*row_distribution_pt) != (*current_block_distribution_pt))
+        if((*block_row_distribution_pt) != (*current_block_distribution_pt))
          {
           std::ostringstream error_message;
           error_message << "Sub block("<<block_row_i<<","<<block_col_i<<")"
@@ -4439,28 +4492,21 @@ namespace CRDoubleMatrixHelpers
    }
 #endif
   
-  // The communicator pointer from the first block_distribution_pt
+  // The communicator pointer from the first row_distribution_pt
   const OomphCommunicator* const comm_pt 
-   = block_distribution_pt[0]->communicator_pt();
+   = row_distribution_pt[0]->communicator_pt();
 
-  // The number of blocks.
-  unsigned nblocks = matrix_pt.nrow(); 
+  // Renamed for so it makes more sense.
+  unsigned nblock_row = matrix_nrow; 
 
   // If the result matrix does not have a distribution, then we concatenate
   // the sub matrix distributions.
   if(!result_matrix.distribution_pt()->built())
    {
-    // Concatenate the distributions.
-    Vector<LinearAlgebraDistribution*> many_distribution_pt(nblocks,0);
-    for (unsigned block_i = 0; block_i < nblocks; block_i++) 
-     {
-      many_distribution_pt[block_i] = matrix_pt(block_i,0)->distribution_pt();
-     }
-    
     // The result distribution
     LinearAlgebraDistribution tmp_distribution;
 
-    LinearAlgebraDistributionHelpers::concatenate(many_distribution_pt,
+    LinearAlgebraDistributionHelpers::concatenate(row_distribution_pt,
                                                   tmp_distribution);
 
     result_matrix.build(&tmp_distribution);
@@ -4474,7 +4520,7 @@ namespace CRDoubleMatrixHelpers
 
     LinearAlgebraDistribution wanted_distribution;
 
-    LinearAlgebraDistributionHelpers::concatenate(block_distribution_pt,
+    LinearAlgebraDistributionHelpers::concatenate(row_distribution_pt,
                                                   wanted_distribution);
 
     if(*(result_matrix.distribution_pt()) != wanted_distribution)
@@ -4508,16 +4554,16 @@ namespace CRDoubleMatrixHelpers
 
    // Is the result communicator pointer the same as the others?
    // Since we have already tested the others, we only need to compare against
-   // one of them. Say the first communicator from block_distribution_pt.
+   // one of them. Say the first communicator from row_distribution_pt.
    const OomphCommunicator first_comm 
-     = *(block_distribution_pt[0]->communicator_pt());
+    = *(row_distribution_pt[0]->communicator_pt());
 
    if(res_comm != first_comm)
     {
      std::ostringstream error_message;
      error_message
-     << "The OomphCommunicator of the result matrix is not the same as the "
-     << "others!"; 
+      << "The OomphCommunicator of the result matrix is not the same as the "
+      << "others!"; 
      throw OomphLibError(error_message.str(),
                          "RAYRAYERR",
                          OOMPH_EXCEPTION_LOCATION); 
@@ -4540,7 +4586,7 @@ namespace CRDoubleMatrixHelpers
         if(matrix_pt(block_row_i,block_col_i) != 0)
          {
           const bool another_distributed 
-            = matrix_pt(block_row_i,block_col_i)->distributed();
+           = matrix_pt(block_row_i,block_col_i)->distributed();
 
           if(res_distributed != another_distributed)
            {
@@ -4554,6 +4600,47 @@ namespace CRDoubleMatrixHelpers
                                 OOMPH_EXCEPTION_LOCATION); 
            }
          }
+       }
+     }
+
+    // Do this test for row_distribution_pt
+    const bool first_row_distribution_distributed
+     = row_distribution_pt[0]->distributed();
+
+    for (unsigned block_row_i = 1; block_row_i < matrix_nrow; block_row_i++) 
+     {
+      const bool another_distributed 
+       = row_distribution_pt[block_row_i]->distributed();
+      
+      if(first_row_distribution_distributed != another_distributed)
+       {
+        std::ostringstream error_message;
+        error_message
+         << "The distributed boolean of row_distribution_pt[" 
+         << block_row_i << "]\n"
+         << "is not the same as the one from row_distribution_pt[0]. \n";
+        throw OomphLibError(error_message.str(),
+                            "RAYRAYERR",
+                            OOMPH_EXCEPTION_LOCATION); 
+       }
+     }
+    
+    // Repeat for col_distribution_pt
+    for (unsigned block_col_i = 0; block_col_i < matrix_ncol; block_col_i++) 
+     {
+      const bool another_distributed 
+       = col_distribution_pt[block_col_i]->distributed();
+      
+      if(first_row_distribution_distributed != another_distributed)
+       {
+        std::ostringstream error_message;
+        error_message
+         << "The distributed boolean of col_distribution_pt[" 
+         << block_col_i << "]\n"
+         << "is not the same as the one from row_distribution_pt[0]. \n";
+        throw OomphLibError(error_message.str(),
+                            "RAYRAYERR",
+                            OOMPH_EXCEPTION_LOCATION); 
        }
      }
    }
@@ -4571,29 +4658,33 @@ namespace CRDoubleMatrixHelpers
   // nrow_local and nrow (the global row) for the result matrix
   unsigned res_nrow_local = res_distribution_pt->nrow_local();
   unsigned res_nrow = res_distribution_pt->nrow();
-    
-  // determine nnz of all blocks on this processor only.
-  unsigned res_nnz = 0;
-  for (unsigned row_i = 0; row_i < nblocks; row_i++) 
+  
+  // renamed for readibility.
+  unsigned nblock_col = matrix_ncol;
+
+  // construct the block offset
+  DenseMatrix<unsigned> col_offset(nproc,nblock_col,0);
+  unsigned off = 0;
+  for (unsigned proc_i = 0; proc_i < nproc; proc_i++) 
    {
-    for (unsigned col_i = 0; col_i < nblocks; col_i++) 
+    for (unsigned block_i = 0; block_i < nblock_col; block_i++) 
+     {
+      col_offset(proc_i,block_i) = off;
+      off +=col_distribution_pt[block_i]->nrow_local(proc_i);
+     }
+   }
+
+  // determine nnz of all blocks on this processor only.
+  // This is used to create storage space.
+  unsigned res_nnz = 0;
+  for (unsigned row_i = 0; row_i < nblock_row; row_i++) 
+   {
+    for (unsigned col_i = 0; col_i < nblock_col; col_i++) 
      {
       if(matrix_pt(row_i,col_i) !=0)
        {
         res_nnz += matrix_pt(row_i,col_i)->nnz();
        }
-     }
-   }
-
-  // construct the block offset
-  DenseMatrix<unsigned> col_offset(nproc,nblocks,0);
-  unsigned off = 0;
-  for (unsigned proc_i = 0; proc_i < nproc; proc_i++) 
-   {
-    for (unsigned block_i = 0; block_i < nblocks; block_i++) 
-     {
-      col_offset(proc_i,block_i) = off;
-      off +=block_distribution_pt[block_i]->nrow_local(proc_i);
      }
    }
 
@@ -4608,17 +4699,17 @@ namespace CRDoubleMatrixHelpers
   // loop over the block rows
   unsigned res_i = 0; // index for the result matrix.
   unsigned res_row_i = 0; // index for the row
-  for (unsigned i = 0; i < nblocks; i++) 
+  for (unsigned i = 0; i < nblock_row; i++) 
    {
     // loop over the rows of the current block local rows.
-    unsigned block_nrow = block_distribution_pt[i]->nrow_local();
+    unsigned block_nrow = row_distribution_pt[i]->nrow_local();
     for (unsigned k = 0; k < block_nrow; k++) 
      {
       // initialise res_row_start
       res_row_start[res_row_i+1] = res_row_start[res_row_i];
 
       // Loop over the block columns
-      for (unsigned j = 0; j < nblocks; j++) 
+      for (unsigned j = 0; j < nblock_col; j++) 
        {
         // if block(i,j) pointer is not null then
         if (matrix_pt(i,j) != 0) 
@@ -4635,15 +4726,15 @@ namespace CRDoubleMatrixHelpers
             // if b_column_index[l] was a row index, what processor
             // would it be on
             unsigned p = 0;
-            int b_first_row = block_distribution_pt[j]->first_row(0);
-            int b_nrow_local = block_distribution_pt[j]->nrow_local(0);
+            int b_first_row = col_distribution_pt[j]->first_row(0);
+            int b_nrow_local = col_distribution_pt[j]->nrow_local(0);
 
             while (b_column_index[l] < b_first_row || 
                    b_column_index[l] >= b_nrow_local+b_first_row)
              {
               p++;
-              b_first_row = block_distribution_pt[j]->first_row(p);
-              b_nrow_local = block_distribution_pt[j]->nrow_local(p);
+              b_first_row = col_distribution_pt[j]->first_row(p);
+              b_nrow_local = col_distribution_pt[j]->nrow_local(p);
              }
 
             // determine the local equation number in the block j/processor p
@@ -4670,6 +4761,53 @@ namespace CRDoubleMatrixHelpers
                                    res_value,
                                    res_column_index,
                                    res_row_start);
+ }
+
+
+
+ //============================================================================
+ /// \short Concatenate CRDoubleMatrix matrices.
+ /// This calls the other concatenate_without_communication(...) function,
+ /// passing block_distribution_pt as both the row_distribution_pt and
+ /// col_distribution_pt. This should only be called for block square matrices.
+ //============================================================================
+ void concatenate_without_communication(
+  const Vector<LinearAlgebraDistribution*> &block_distribution_pt,
+  const DenseMatrix<CRDoubleMatrix*> &matrix_pt,
+  CRDoubleMatrix &result_matrix)
+ {
+  // The number of block rows and block columns.
+  unsigned matrix_nrow = matrix_pt.nrow();
+  unsigned matrix_ncol = matrix_pt.ncol();
+ 
+#ifdef PARANOID
+  // Are there matrices to concatenate?
+  if(matrix_nrow == 0)
+   {
+    std::ostringstream error_message;
+    error_message << "There are no matrices to concatenate.\n";
+    throw OomphLibError(error_message.str(),
+                        "RAYRAYERR",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+
+  // Ensure that the sub matrices is a square block matrix.
+  if(matrix_nrow != matrix_ncol)
+   {
+    std::ostringstream error_message;
+    error_message<<"The number of block rows and block columns\n"
+                 <<"must be the same. Otherwise, call the other\n"
+                 <<"concatenate_without_communication function, passing in\n"
+                 <<"a Vector of distributions describing how to permute the\n"
+                 <<"columns.";
+    throw OomphLibError(error_message.str(),
+                        "RAYRAYERR",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+  
+  concatenate_without_communication(
+   block_distribution_pt,block_distribution_pt,matrix_pt,result_matrix);
  }
 
 } // CRDoubleMatrixHelpers

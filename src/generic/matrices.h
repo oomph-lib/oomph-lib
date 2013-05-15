@@ -970,7 +970,7 @@ class CRDoubleMatrix : public Matrix<double, CRDoubleMatrix >,
  /// Access to C-style value array (const version)
  const double* value() const {return CR_matrix.value();}
 
- /// Return the number of nonzero entries
+ /// Return the number of nonzero entries (the local nnz)
  inline unsigned long nnz() const {return CR_matrix.nnz();}
  
  /// \short LU decomposition using SuperLU if matrix is not distributed or
@@ -3174,17 +3174,27 @@ namespace CRDoubleMatrixHelpers
  void concatenate(const DenseMatrix<CRDoubleMatrix*> &matrix_pt,
                   CRDoubleMatrix &result_matrix);
   
- /// \short Concatenate CRDoubleMatrix matrices. The vector 
- /// block_distribution_pt contains the LinearAlgebraDistribution of each
- /// block row. This is required so that the sub matrices in matrix_pt can
- /// be null to represent a zero matrix.\n
+ /// \short Concatenate CRDoubleMatrix matrices.\n
  /// \n
- /// The result matrix is a permutation of the in matrices such that the data
+ /// The Vector row_distribution_pt contains the LinearAlgebraDistribution 
+ /// of each block row.\n
+ /// The Vector col_distribution_pt contains the LinearAlgebraDistribution 
+ /// of each block column.\n
+ /// The DenseMatrix matrix_pt contains pointers to the CRDoubleMatrices 
+ /// to concatenate.\n
+ /// The CRDoubleMatrix result_matrix is the result matrix.\n
+ /// \n
+ /// The result matrix is a permutation of the sub matrices such that the data
  /// stays on the same processor when the result matrix is built, there is no
  /// communication between processors.\n
  /// Thus the block structure of the sub matrices are NOT preserved in the
- /// result matrix, instead we observe a permutation, defined by the 
- /// distribution of the sub matrices.The columns are permuted accordingly.
+ /// result matrix. The rows are block-permuted, defined by the concatenation
+ /// of the distributions in row_distribution_pt. Similarly, the columns are 
+ /// block-permuted, defined by the concatenation of the distributions in 
+ /// col_distribution_pt. 
+ /// For more details on the block-permutation, see 
+ /// LinearAlgebraDistributionHelpers::concatenate(...).\n
+ /// \n
  /// If one wishes to preserve the block structure of the sub matrices in the
  /// result matrix, consider using CRDoubleMatrixHelpers::concatenate(...),
  /// which uses communication between processors to ensure that the block
@@ -3203,17 +3213,31 @@ namespace CRDoubleMatrixHelpers
  /// Distribution of the result matrix:
  /// If the result matrix does not have a distribution built, then it will be
  /// given a distribution built from the concatenation of the distributions
- /// of the first block column using 
- /// LinearAlgebraDistributionHelpers::concatenate(...). 
- /// Otherwise we use the existing distribution. If there is an existing 
- /// distribution then it must be the same as the distribution from the 
- /// concatenation of distributions as described above. 
+ /// from row_distribution_pt, see 
+ /// LinearAlgebraDistributionHelpers::concatenate(...) for more detail. 
+ /// Otherwise we use the existing distribution.\n 
+ /// If there is an existing distribution then it must be the same as the 
+ /// distribution from the concatenation of row distributions as described 
+ /// above. 
  /// Why don't we always compute the distribution "on the fly"?
- /// Because a non-uniform distribution requires communication.
+ /// Because a non-uniform distribution requires communication. 
+ /// All block preconditioner distributions are concatenations of the 
+ /// distributions of the individual blocks.
+ void concatenate_without_communication(
+  const Vector<LinearAlgebraDistribution*> &row_distribution_pt,
+  const Vector<LinearAlgebraDistribution*> &col_distribution_pt,
+  const DenseMatrix<CRDoubleMatrix*> &matrix_pt,
+  CRDoubleMatrix &result_matrix);
+
+ /// \short Concatenate CRDoubleMatrix matrices.
+ /// This calls the other concatenate_without_communication(...) function,
+ /// passing block_distribution_pt as both the row_distribution_pt and
+ /// col_distribution_pt. This should only be called for block square matrices.
  void concatenate_without_communication(
   const Vector<LinearAlgebraDistribution*> &block_distribution_pt,
   const DenseMatrix<CRDoubleMatrix*> &matrix_pt,
   CRDoubleMatrix &result_matrix);
+
 } // CRDoubleMatrixHelpers
 
 }
