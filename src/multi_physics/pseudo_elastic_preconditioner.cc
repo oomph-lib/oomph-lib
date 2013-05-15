@@ -261,26 +261,9 @@ namespace oomph
    }
 
   // compute the scaling (if required)
-  // RAYRAY - I have a function which computes the inf norm of 
-  // sub blocks of matrices. Perhaps I should put this in...
   if (Use_inf_norm_of_s_scaling)
    {
-    Vector<LinearAlgebraDistribution*> 
-     solid_block_distribution_pt(n_solid_dof_types, 0);
-    for (unsigned row_i = 0; row_i < n_solid_dof_types; row_i++) 
-     {
-      solid_block_distribution_pt[row_i] = Block_distribution_pt[row_i];
-     }
- 
-    CRDoubleMatrix tmp_mat;
-  
-    CRDoubleMatrixHelpers::
-     concatenate_without_communication(solid_block_distribution_pt,
-                                       solid_matrix_pt,tmp_mat);
-  
-    Scaling = tmp_mat.inf_norm();
-  
-    tmp_mat.clear();
+    Scaling = CRDoubleMatrixHelpers::inf_norm(solid_matrix_pt);
    }
   else
    {
@@ -386,7 +369,18 @@ namespace oomph
      }
      break;
      default:
-      break;
+     {
+      std::ostringstream error_msg;
+      error_msg << "There is no such block based preconditioner.\n"
+      << "Candidates are:\n"
+      << "PseudoElasticPreconditioner::Block_diagonal_preconditioner\n"
+      << "PseudoElasticPreconditioner::Block_upper_triangular_preconditioner\n"
+      << "PseudoElasticPreconditioner::Block_lower_triangular_preconditioner\n";
+      throw OomphLibError(error_msg.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+     break;
      }
      
     s_prec_pt->turn_into_subsidiary_block_preconditioner

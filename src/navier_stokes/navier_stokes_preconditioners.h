@@ -732,7 +732,7 @@ namespace oomph
 
      // Initially assume that there are no multiple element types in the 
      // Navier-Stokes mesh
-     Multiple_element_type_in_navier_stokes_mesh = false;
+     Allow_multiple_element_type_in_navier_stokes_mesh = false;
     }
 
    /// Destructor
@@ -787,15 +787,16 @@ namespace oomph
    /// Specify the mesh containing the block-preconditionable Navier-Stokes
    /// elements. The optional argument indicates if there are multiple types
    /// of elements in the same mesh.
-   void set_navier_stokes_mesh(
-     Mesh* mesh_pt, bool multiple_element_type_in_navier_stokes_mesh = false)
+   void set_navier_stokes_mesh
+     (Mesh* mesh_pt, 
+      const bool& allow_multiple_element_type_in_navier_stokes_mesh = false)
     { 
      // Store the mesh pointer.
      Navier_stokes_mesh_pt = mesh_pt;
      
      // Are there multiple element types in this mesh?
-     Multiple_element_type_in_navier_stokes_mesh 
-       = multiple_element_type_in_navier_stokes_mesh;
+     Allow_multiple_element_type_in_navier_stokes_mesh 
+       = allow_multiple_element_type_in_navier_stokes_mesh;
     }
 
    /// Function to set a new pressure matrix preconditioner (inexact solver)
@@ -1207,7 +1208,7 @@ namespace oomph
    
    /// \short Flag to indicate if there are multiple element types in the
    /// Navier-Stokes mesh.
-   bool Multiple_element_type_in_navier_stokes_mesh;
+   bool Allow_multiple_element_type_in_navier_stokes_mesh;
 
    /// Boolean to indicate use of LSC (true) or Fp (false) variant
    bool Use_LSC;

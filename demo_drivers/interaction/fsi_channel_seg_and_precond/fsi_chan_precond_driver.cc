@@ -182,8 +182,8 @@ PreconditionedFSICollapsibleChannelProblem(const unsigned& nup,
       // Build "combined" mesh from vector of solid submeshes
       Mesh* solid_mesh_pt = new Mesh(s_mesh_pt);
 
-      // Set solid mesh, with true indicating that there are multiple
-      // element types in this mesh.
+      // Set solid mesh with "true" to tolerate multiple element types
+      // in the mesh.
       prec_pt->set_mesh(1,solid_mesh_pt,true);
 
       // Set preconditioner
@@ -220,8 +220,8 @@ PreconditionedFSICollapsibleChannelProblem(const unsigned& nup,
       // Build "combined" mesh from vector of solid submeshes
       Mesh* solid_mesh_pt = new Mesh(s_mesh_pt);
       
-      // Set solid mesh and indicate that there are multiple element types in
-      // this mesh with true:
+      // Set solid mesh with "true" to tolerate multiple element types in
+      // the mesh.
       prec_pt->set_wall_mesh(solid_mesh_pt,true);
             
       
@@ -316,8 +316,7 @@ PreconditionedFSICollapsibleChannelProblem(const unsigned& nup,
       // Build compound mesh from vector of solid submeshes
       Mesh* combined_solid_mesh_pt = new Mesh(s_mesh_pt);
 
-      // Set solid mesh, and indicate that it contains multiple
-      // element types:
+      // Set solid mesh and tolerate multiple element types this is mesh.
       prec_pt->set_wall_mesh(combined_solid_mesh_pt,true);
 
 
@@ -422,8 +421,8 @@ PreconditionedFSICollapsibleChannelProblem(const unsigned& nup,
       // Build compound mesh from vector of solid submeshes
       Mesh* combined_solid_mesh_pt = new Mesh(s_mesh_pt);
 
-      // Set solid mesh, and indicate that it contains multiple types of
-      // elements
+      // Set solid mesh with true to tolerate multiple element types in
+      // the mesh.
       prec_pt->set_wall_mesh(combined_solid_mesh_pt,true);
 
 #ifdef OOMPH_HAS_HYPRE

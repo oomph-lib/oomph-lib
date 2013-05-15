@@ -847,7 +847,7 @@ namespace oomph
     error_message << "The matrix is distributed and on more than one "
                   << "processor. MPI is required.";
     throw OomphLibError(error_message.str(),
-                        "BlockPreconditioner<MATRIX>::get_block(...)",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
 #endif 
    }
@@ -933,7 +933,7 @@ namespace oomph
     error_message << "The require elements have not been successfully copied"
                   << " from the original matrix to the block matrices";
     throw OomphLibError(error_message.str(),
-                        "BlockPreconditioner<MATRIX>::block_matrix_test()",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
  }

@@ -275,7 +275,7 @@ void ExactSubBiharmonicPreconditioner::setup()
   // get the blocks
   this->get_blocks(required_blocks, matrix_of_block_pointers);
 
-  // build the precondiitoner matrix
+  // build the preconditioner matrix
   CRDoubleMatrix* preconditioner_matrix_pt 
     = new CRDoubleMatrix(this->preconditioner_matrix_distribution_pt());
   

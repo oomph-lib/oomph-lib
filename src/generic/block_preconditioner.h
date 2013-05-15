@@ -207,7 +207,7 @@ namespace oomph
   void set_nmesh(const unsigned& n)
   {
    Mesh_pt.resize(n,0);
-   Multiple_element_type_in_mesh.resize(n,0);
+   Allow_multiple_element_type_in_mesh.resize(n,0);
   }
 
   /// Compatability layer for old preconditioners where problem and matrix
@@ -251,7 +251,8 @@ namespace oomph
    Mesh_pt[i]=mesh_pt;
 
    // Does this mesh contain multiple element types?
-   Multiple_element_type_in_mesh[i] = unsigned(multiple_element_type_in_mesh);
+   Allow_multiple_element_type_in_mesh[i] 
+     = unsigned(multiple_element_type_in_mesh);
   }
 
   /// \short Determine the size of the matrix blocks and setup the
@@ -268,7 +269,8 @@ namespace oomph
   /// \short Compatability layer for old preconditioners where problem and
   /// matrix pointers were passed around as arguments. The problem pointer
   /// is ignored.
-  virtual void block_setup(Problem* in_problem_pt, DoubleMatrixBase* in_matrix_pt)
+  virtual void block_setup(Problem* in_problem_pt, 
+                           DoubleMatrixBase* in_matrix_pt)
   {
    ObsoleteCode::obsolete();
    set_matrix_pt(in_matrix_pt);
@@ -306,8 +308,8 @@ namespace oomph
    if(backup_matrix_pt != 0) set_matrix_pt(backup_matrix_pt);
   }
 
-  /// \short Compatability layer for old preconditioners where problem and matrix
-  /// pointers were passed around as arguments.
+  /// \short Compatability layer for old preconditioners 
+  /// where problem and matrix pointers were passed around as arguments.
   void get_blocks(MATRIX* in_matrix_pt,
                   DenseMatrix<bool>& required_blocks,
                   DenseMatrix<MATRIX*>& block_matrix_pt)
@@ -1374,7 +1376,7 @@ namespace oomph
 
   /// \short Vector of unsigned to indicate which meshes contain multiple
   /// element types.
-  Vector<unsigned> Multiple_element_type_in_mesh;
+  Vector<unsigned> Allow_multiple_element_type_in_mesh;
   
  private:
 
@@ -1668,7 +1670,7 @@ namespace oomph
   
     // If there are multiple element types in the current mesh, we can at least
     // make sure that they contain the same types of DOFs.
-    if(bool(Multiple_element_type_in_mesh[mesh_i]))
+    if(bool(Allow_multiple_element_type_in_mesh[mesh_i]))
      {
       // The ndof types of the first element.
       unsigned first_element_ndof_type = 

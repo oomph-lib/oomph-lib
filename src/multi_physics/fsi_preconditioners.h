@@ -69,8 +69,8 @@ public :
    Wall_mesh_pt = 0;
 
    // Initially assume that there are no multiple element types in the meshes.
-   Multiple_element_type_in_navier_stokes_mesh = false;
-   Multiple_element_type_in_wall_mesh = false;
+   Allow_multiple_element_type_in_navier_stokes_mesh = false;
+   Allow_multiple_element_type_in_wall_mesh = false;
 
    // Default setting: Fluid onto solid as it this was shown to be
    // marginally faster than solid onto fluid; see Heil CMAME 193 (2004)
@@ -167,29 +167,31 @@ public :
  
  /// \short Setter function for the mesh containing the block-preconditionable
  /// Navier-Stokes elements. The optional argument indicates if there are more
- /// than one type of elements in same.
- void set_navier_stokes_mesh(
-   Mesh* mesh_pt, bool multiple_element_type_in_navier_stokes_mesh = false) 
+ /// than one type of elements in same mesh.
+ void set_navier_stokes_mesh
+   (Mesh* mesh_pt, 
+    const bool& allow_multiple_element_type_in_navier_stokes_mesh = false) 
   {
    // Store the mesh pointer.
    Navier_stokes_mesh_pt = mesh_pt;
    
    // Are there multiple element types in the Navier-Stokes mesh?
-   Multiple_element_type_in_navier_stokes_mesh 
-     = multiple_element_type_in_navier_stokes_mesh;
+   Allow_multiple_element_type_in_navier_stokes_mesh 
+     = allow_multiple_element_type_in_navier_stokes_mesh;
   }
 
  /// \short Setter function for the mesh containing the block-preconditionable
  /// FSI solid elements. The optional argument indicates if there are more
  /// than one type of elements in the same mesh.
  void set_wall_mesh(
-   Mesh* mesh_pt, bool multiple_element_type_in_wall_mesh = false)
+   Mesh* mesh_pt, const bool& allow_multiple_element_type_in_wall_mesh = false)
   {
    // Store the mesh pointer
    Wall_mesh_pt = mesh_pt;
 
    // Are there multiple element types in the wall mesh?
-   Multiple_element_type_in_wall_mesh = multiple_element_type_in_wall_mesh;
+   Allow_multiple_element_type_in_wall_mesh 
+     = allow_multiple_element_type_in_wall_mesh;
   }
 
  /// \short Setup the preconditioner
@@ -249,10 +251,10 @@ private:
 
  /// Flag to indicate if there are multiple element types in the Navier-Stokes
  /// mesh.
- bool Multiple_element_type_in_navier_stokes_mesh;
+ bool Allow_multiple_element_type_in_navier_stokes_mesh;
 
  // Flag to indicate if there are multiple element types in the Wall mesh.
- bool Multiple_element_type_in_wall_mesh;
+ bool Allow_multiple_element_type_in_wall_mesh;
  };
 
 
@@ -293,8 +295,8 @@ private:
 
   // setup the meshes
   this->set_mesh(0,Navier_stokes_mesh_pt,
-                 Multiple_element_type_in_navier_stokes_mesh);
-  this->set_mesh(1,Wall_mesh_pt,Multiple_element_type_in_wall_mesh);
+                 Allow_multiple_element_type_in_navier_stokes_mesh);
+  this->set_mesh(1,Wall_mesh_pt,Allow_multiple_element_type_in_wall_mesh);
 
  // get the number of fluid dofs from teh first element in the mesh
   unsigned n_fluid_dof = this->ndof_types_in_mesh(0);
@@ -516,8 +518,8 @@ public :
 
    // Initially assume that there are no multiple element types in 
    // the same mesh.
-   Multiple_element_type_in_navier_stokes_mesh = false;
-   Multiple_element_type_in_wall_mesh = false;
+   Allow_multiple_element_type_in_navier_stokes_mesh = false;
+   Allow_multiple_element_type_in_wall_mesh = false;
   }
  
  
@@ -549,27 +551,30 @@ public :
   
  /// \short Setter function for the mesh containing the block-preconditionable
  /// Navier-Stokes elements. 
- void set_navier_stokes_mesh(
-   Mesh* mesh_pt, bool multiple_element_type_in_navier_stokes_mesh = false) 
+ void set_navier_stokes_mesh
+   (Mesh* mesh_pt, 
+    const bool& allow_multiple_element_type_in_navier_stokes_mesh = false) 
   {
    // Store the mesh pointer.
    Navier_stokes_mesh_pt = mesh_pt;
 
    // Are there multiple elements in this mesh?
-   Multiple_element_type_in_navier_stokes_mesh 
-     = multiple_element_type_in_navier_stokes_mesh;
+   Allow_multiple_element_type_in_navier_stokes_mesh 
+     = allow_multiple_element_type_in_navier_stokes_mesh;
   }
 
  /// \short Setter function for the mesh containing the block-preconditionable
  /// FSI solid elements. 
- void set_wall_mesh(Mesh* mesh_pt,
-                    bool multiple_element_type_in_wall_mesh = false) 
+ void set_wall_mesh
+   (Mesh* mesh_pt, 
+    const bool& allow_multiple_element_type_in_wall_mesh = false) 
   {
    // Store the mesh pointer
    Wall_mesh_pt = mesh_pt;
 
    // Are the multiple elements in this mesh?
-   Multiple_element_type_in_wall_mesh = multiple_element_type_in_wall_mesh;
+   Allow_multiple_element_type_in_wall_mesh 
+     = allow_multiple_element_type_in_wall_mesh;
   }
  
  /// \short Setup the preconditioner
@@ -628,10 +633,10 @@ private:
  Mesh* Wall_mesh_pt;
 
  /// Flag for multiple element types in the Navier-Stokes mesh.
- bool Multiple_element_type_in_navier_stokes_mesh;
+ bool Allow_multiple_element_type_in_navier_stokes_mesh;
 
  /// Flag for multiple element types in the Wall mesh
- bool Multiple_element_type_in_wall_mesh;
+ bool Allow_multiple_element_type_in_wall_mesh;
 };
 
 
@@ -734,8 +739,8 @@ void SimpleFSIPreconditioner<MATRIX>::identify_required_blocks(
 
   // setup the meshes
   this->set_mesh(0,Navier_stokes_mesh_pt,
-                 Multiple_element_type_in_navier_stokes_mesh);
-  this->set_mesh(1,Wall_mesh_pt,Multiple_element_type_in_wall_mesh);
+                 Allow_multiple_element_type_in_navier_stokes_mesh);
+  this->set_mesh(1,Wall_mesh_pt,Allow_multiple_element_type_in_wall_mesh);
 
   // get the number of fluid dofs from teh first element in the mesh
   unsigned n_fluid_dof = this->ndof_types_in_mesh(0);

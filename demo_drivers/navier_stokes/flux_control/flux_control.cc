@@ -1897,8 +1897,8 @@ int main(int argc, char *argv[])
       dynamic_cast<NavierStokesSchurComplementPreconditioner*>
       (fsi_preconditioner_pt->navier_stokes_preconditioner_pt());
 
-     // Set solid mesh, indicate that the mesh may contain multiple
-     // element types
+     // Set solid mesh with "true" to tolerate multiple element types 
+     // in the mesh.
      fsi_preconditioner_pt->set_wall_mesh(
       problem.outflow_impedance_master_mesh_pt(),true);
 
@@ -1915,8 +1915,8 @@ int main(int argc, char *argv[])
      ns_preconditioner_pt = new
       NavierStokesSchurComplementPreconditioner(&problem);
 
-     // Setup the fluid mesh, indicate that it may contain multiple
-     // element types
+     // Setup the fluid mesh with "true" to tolerate multiple element types 
+     // in the mesh
      ns_preconditioner_pt->set_navier_stokes_mesh(
       problem.create_mesh_for_navier_stokes_preconditioner(),true);
      
@@ -1924,8 +1924,8 @@ int main(int argc, char *argv[])
      iterative_solver_pt->preconditioner_pt() = ns_preconditioner_pt;
     }
 
-   // Settings for the LCS preconditioner, indicate that the mesh
-   // may contain multiple element types
+   // Settings for the LCS preconditioner, tolerate multiple element types 
+   // in this mesh.
    ns_preconditioner_pt->set_navier_stokes_mesh(
     problem.create_mesh_for_navier_stokes_preconditioner(),true);
    ns_preconditioner_pt->enable_doc_time();

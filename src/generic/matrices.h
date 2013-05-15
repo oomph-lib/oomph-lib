@@ -3145,6 +3145,14 @@ namespace CRDoubleMatrixHelpers
   const Vector<int> &column_indicies, const Vector<int> &row_start,
   CRDoubleMatrix &mat_out);
 
+
+ /// \short Calculates the infinity (maximum) norm of a DenseMartrix of 
+ /// CRDoubleMatrices as if it was one large matrix. 
+ /// This avoids creating a concatenation of the sub-blocks just to calculate 
+ /// the infinity norm.
+ double inf_norm(const DenseMatrix<CRDoubleMatrix*> &matrix_pt);
+
+
  /// \short Concatenate CRDoubleMatrix matrices. 
  /// The in matrices are concatenated such that the block structure of the
  /// in matrices are preserved in the result matrix. Communication between 

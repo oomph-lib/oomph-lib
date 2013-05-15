@@ -28,15 +28,59 @@ echo `cat $1 | sed 's/#.*$//' | sed '/^$/d' | tr '\012' ' '`
 }
 
 
+
+#Check that the "--" options preceed other configure options.
+CheckOptions()
+{
+   awk '
+   BEGIN{encountered_first_minus_minus=0
+         encountered_first_non_minus_minus_after_first_minus_minus=0}
+   {
+   # Ignore any comments (first entry in row starts with "#")
+   if (substr($1,1,1)!="#")
+    { 
+     # Does the first entry in the line start with "--"?
+     if (substr($1,1,2)=="--"){encountered_first_minus_minus=1}
+
+     # Have we encountered the first "--" entry already?
+     if (encountered_first_minus_minus==1)
+       {
+        # Does the first entry in the line not start with "--"?
+        if (substr($1,1,2)!="--")
+         {
+          encountered_first_non_minus_minus_after_first_minus_minus=1
+         }
+       }
+     # Should if this is followed by another "--" entry!
+     if ((encountered_first_minus_minus==1)&&
+         (encountered_first_non_minus_minus_after_first_minus_minus==1))
+      {
+       if (substr($1,1,2)=="--")
+        {
+         ok=0
+         print "ERROR: The entry\n\n" $0 "\n"
+         print "is in the wrong place. All the \"--\" prefixed options should go first!\n\n"
+        }
+      }
+    }
+    }' config/configure_options/current
+
+
+#old echo `echo -n $@ | sed 's/^/ /' | sed -n '/[ ].[^-].* --/p'`
+#echo `echo $@ | sed 's/^/ /' | sed -n '/[ ].[^-].* --/p'`
+# echo `printf "$@" | sed 's/^/ /' | sed -n '/[ ].[^-].* --/p'`
+}
+
+
 #This function returns a match (non-null string) if the input string 
 #contains a long option (starting with --) after a short option 
 #(no --)
-CheckOptions()
-{
-#old echo `echo -n $@ | sed 's/^/ /' | sed -n '/[ ].[^-].* --/p'`
-echo `echo $@ | sed 's/^/ /' | sed -n '/[ ].[^-].* --/p'`
+#CheckOptions()
+#{
+##old echo `echo -n $@ | sed 's/^/ /' | sed -n '/[ ].[^-].* --/p'`
+#echo `echo $@ | sed 's/^/ /' | sed -n '/[ ].[^-].* --/p'`
 # echo `printf "$@" | sed 's/^/ /' | sed -n '/[ ].[^-].* --/p'`
-}
+#}
 
 #This little function echo's the usage information
 EchoUsage()
@@ -408,14 +452,15 @@ configure_options=`ProcessOptionsFile config/configure_options/current`
 
 
 #Check that the options are in the correct order
-if test "`CheckOptions $configure_options`" != ""; then
+configure_options_are_ok=`CheckOptions config/configure_options/current`
+if test "$configure_options_are_ok" != ""; then
 
   echo " "
   echo "==============================================================="
   echo "Error message from autogen.sh:"
   echo " " 
-  echo "        Configure options (starting with \"--\") must be specified"
-  echo "        before any flags!"
+  echo $configure_options_are_ok
+  echo " " 
   reply="n"
   OptionRead #This is just a pause
 
