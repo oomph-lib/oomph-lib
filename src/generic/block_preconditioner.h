@@ -370,18 +370,6 @@ namespace oomph
   void get_blocks(DenseMatrix<bool>& required_blocks,
                   DenseMatrix<MATRIX*>& block_matrix_pt) const;
  
-  // RAYRAY to remove. This is replaced by 
-  // CRDoubleMatrixHelpers::concatenate_without_communication(...)
-  /// \short Assemble the block preconditioner as a single matrix. This is
-  /// useful because in some cases the block preconditioner cannot be applied
-  /// by linear-algebra-style block elimination, operating on
-  /// individual sub-blocks; this function takes the matrix
-  /// of block pointers and returns a single matrix containing all the
-  /// blocks of the matrix of blocks in a single matrix that can
-  /// be solved directly.
-//  void build_preconditioner_matrix(DenseMatrix<MATRIX*>& block_matrix_pt,
-//                                   MATRIX*& preconditioner_matrix) const;
-
   /// \short Takes the naturally ordered vector and rearranges it into a
   /// vector of sub vectors corresponding to the blocks, so s[b][i] contains
   /// the i-th entry in the vector associated with block b.
@@ -994,7 +982,8 @@ namespace oomph
    Preconditioner_blocks_have_been_precomputed = true;
   }
   
-
+ // Calls set_precomputed_block(...) with the "identity" block_to_block_map.
+ // See the other set_precomputed_block(...) function for more details.
  void set_precomputed_blocks(DenseMatrix<CRDoubleMatrix*>&precomputed_block_pt)
   {
    unsigned precomputed_block_nrow = precomputed_block_pt.nrow();
