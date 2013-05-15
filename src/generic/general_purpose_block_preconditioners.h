@@ -652,124 +652,124 @@ namespace oomph
  /// associated with the preconditioner and solved by SuperLU.
  //=============================================================================
  template<typename MATRIX> 
- class ExactBlockPreconditioner 
+  class ExactBlockPreconditioner 
   : public GeneralPurposeBlockPreconditioner<MATRIX>
- {
+  {
  
- public :
+    public :
   
-  /// constructor
-  ExactBlockPreconditioner() 
-   : GeneralPurposeBlockPreconditioner<MATRIX>()
-  {
-   Preconditioner_pt = 0;
-  }
+   /// constructor
+    ExactBlockPreconditioner() 
+     : GeneralPurposeBlockPreconditioner<MATRIX>()
+    {
+     Preconditioner_pt = 0;
+    }
    
-  /// Destructor - delete the subisidariry preconditioner
-  ~ExactBlockPreconditioner()
-  {
-   delete Preconditioner_pt;
-  }
+   /// Destructor - delete the subisidariry preconditioner
+   ~ExactBlockPreconditioner()
+    {
+     delete Preconditioner_pt;
+    }
    
-  /// Broken copy constructor
-  ExactBlockPreconditioner(const ExactBlockPreconditioner&) 
-  { 
-   BrokenCopy::broken_copy("ExactBlockPreconditioner");
-  } 
+   /// Broken copy constructor
+   ExactBlockPreconditioner(const ExactBlockPreconditioner&) 
+    { 
+     BrokenCopy::broken_copy("ExactBlockPreconditioner");
+    } 
   
-  /// Broken assignment operator
-  void operator=(const ExactBlockPreconditioner&) 
-  {
-   BrokenCopy::broken_assign("ExactBlockPreconditioner");
-  }
+   /// Broken assignment operator
+   void operator=(const ExactBlockPreconditioner&) 
+    {
+     BrokenCopy::broken_assign("ExactBlockPreconditioner");
+    }
   
-  /// Apply preconditioner to r
-  void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
+   /// Apply preconditioner to r
+   void preconditioner_solve(const DoubleVector &r, DoubleVector &z);
   
-  /// \short Setup the preconditioner 
-  void setup();
+   /// \short Setup the preconditioner 
+   void setup();
   
- private :
+    private :
 
-  /// \short Vector of SuperLU preconditioner pointers for storing the 
-  /// preconditioners for each diagonal block
-  Preconditioner* Preconditioner_pt;
- };
+   /// \short Vector of SuperLU preconditioner pointers for storing the 
+   /// preconditioners for each diagonal block
+   Preconditioner* Preconditioner_pt;
+  };
 
  //=============================================================================
  /// Setup for the block diagonal preconditioner
  //=============================================================================
  template<typename MATRIX> 
- void ExactBlockPreconditioner<MATRIX>::setup()
- {
-  // clean up
-  delete Preconditioner_pt;
-  Preconditioner_pt = 0;
+  void ExactBlockPreconditioner<MATRIX>::setup()
+  {
+   // clean up
+   delete Preconditioner_pt;
+   Preconditioner_pt = 0;
      
-  // Set up the block look up schemes
-  this->block_setup();
+   // Set up the block look up schemes
+   this->block_setup();
 
-  // get the number of DOF types
-  unsigned nblock_types = this->nblock_types();
+   // get the number of DOF types
+   unsigned nblock_types = this->nblock_types();
 
-  // Build the preconditioner matrix
-  CRDoubleMatrix* exact_block_matrix_pt 
+   // Build the preconditioner matrix
+   CRDoubleMatrix* exact_block_matrix_pt 
     = new CRDoubleMatrix(this->preconditioner_matrix_distribution_pt());
   
-  // If precomputed blocks are set, we use the precomputed blocks.
-  // There is no need to delete the precomputed blocks, this should be handled
-  // by the master preconditioner of THIS preconditioner.
-  if(this->Preconditioner_blocks_have_been_precomputed)
-   {
-    CRDoubleMatrixHelpers::concatenate_without_communication
+   // If precomputed blocks are set, we use the precomputed blocks.
+   // There is no need to delete the precomputed blocks, this should be handled
+   // by the master preconditioner of THIS preconditioner.
+   if(this->Preconditioner_blocks_have_been_precomputed)
+    {
+     CRDoubleMatrixHelpers::concatenate_without_communication
       (this->Block_distribution_pt,this->Precomputed_block_pt,
        *exact_block_matrix_pt);
-   }
-  else
-  // Extract the blocks from the jacobian.
-   {
-    // Set the diagonal elements of required block to true for block diagonal
-    // preconditioner
-    DenseMatrix<bool> required_blocks(nblock_types, nblock_types,true);
+    }
+   else
+    // Extract the blocks from the jacobian.
+    {
+     // Set the diagonal elements of required block to true for block diagonal
+     // preconditioner
+     DenseMatrix<bool> required_blocks(nblock_types, nblock_types,true);
   
-    // matrix of block pt
-    DenseMatrix<CRDoubleMatrix* > block_matrix_pt(nblock_types, 
-                                                  nblock_types,0);
+     // matrix of block pt
+     DenseMatrix<CRDoubleMatrix* > block_matrix_pt(nblock_types, 
+                                                   nblock_types,0);
     
-    // Get pointers to the blocks
-    this->get_blocks(required_blocks, block_matrix_pt);
+     // Get pointers to the blocks
+     this->get_blocks(required_blocks, block_matrix_pt);
   
-    CRDoubleMatrixHelpers::concatenate_without_communication
+     CRDoubleMatrixHelpers::concatenate_without_communication
       (this->Block_distribution_pt,block_matrix_pt,*exact_block_matrix_pt);
 
-    // need to delete the matrix of block matrices
-    for (unsigned i = 0; i < nblock_types; i++)
-     {
-      for (unsigned j = 0; j < nblock_types; j++)
-       {
-        delete block_matrix_pt(i,j);
-        block_matrix_pt(i,j) = 0;
-       }
-     }
+     // need to delete the matrix of block matrices
+     for (unsigned i = 0; i < nblock_types; i++)
+      {
+       for (unsigned j = 0; j < nblock_types; j++)
+        {
+         delete block_matrix_pt(i,j);
+         block_matrix_pt(i,j) = 0;
+        }
+      }
 
-   } // else
+    } // else
 
-  // create the preconditioner
-  if (this->Subsidiary_preconditioner_function_pt == 0)
-   {
-    Preconditioner_pt = new SuperLUPreconditioner;
-   }
-  else
-   {
-    Preconditioner_pt = (*(this->Subsidiary_preconditioner_function_pt))();
-   }
+   // create the preconditioner
+   if (this->Subsidiary_preconditioner_function_pt == 0)
+    {
+     Preconditioner_pt = new SuperLUPreconditioner;
+    }
+   else
+    {
+     Preconditioner_pt = (*(this->Subsidiary_preconditioner_function_pt))();
+    }
 
-  // Setup the preconditioner.
-  Preconditioner_pt->setup(exact_block_matrix_pt, this->comm_pt());
+   // Setup the preconditioner.
+   Preconditioner_pt->setup(exact_block_matrix_pt, this->comm_pt());
    
-  // delete the exact block preconditioner matrix
-  delete exact_block_matrix_pt;
- }
+   // delete the exact block preconditioner matrix
+   delete exact_block_matrix_pt;
+  }
  
  //=============================================================================
  /// Preconditioner solve for the block diagonal preconditioner
