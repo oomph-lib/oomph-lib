@@ -448,8 +448,13 @@ namespace oomph
    this->get_block(0,1,s_pt(0,1));
    this->get_block(1,0,s_pt(1,0));
    s_pt(1,1) = s11_pt;
-   CRDoubleMatrix* s_prec_pt = 0;
-   this->build_preconditioner_matrix(s_pt,s_prec_pt);
+   
+   CRDoubleMatrix* s_prec_pt 
+     = new CRDoubleMatrix(this->preconditioner_matrix_distribution_pt());
+
+   CRDoubleMatrixHelpers::concatenate_without_communication(
+     Block_distribution_pt,s_pt,*s_prec_pt);
+
    delete s_pt(0,0);
    delete s_pt(0,1);
    delete s_pt(1,0);
