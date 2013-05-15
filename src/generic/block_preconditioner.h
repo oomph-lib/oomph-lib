@@ -103,7 +103,7 @@ namespace oomph
 
   /// \short Constructor
   BlockPreconditioner()
-   : Ndof_types_in_mesh(0), Block_distribution_pt(0),
+   : Block_distribution_pt(0), Ndof_types_in_mesh(0),
      Preconditioner_matrix_distribution_pt(0)
   {
    // Initially set the master block preconditioner pointer to zero
