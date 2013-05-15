@@ -174,8 +174,9 @@ namespace oomph
 
   // set the mesh
   this->set_nmesh(1);
-  this->set_mesh(0,Navier_stokes_mesh_pt);
-
+  this->set_mesh(0,Navier_stokes_mesh_pt,
+                 Multiple_element_type_in_navier_stokes_mesh);
+  
   // Get blocks
   // ----------
 
