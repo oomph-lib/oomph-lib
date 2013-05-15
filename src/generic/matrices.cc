@@ -3007,7 +3007,7 @@ Vector<double> CRDoubleMatrix::diagonal_entries() const
    error_message << "The matrix has not been built.\n"
                  << "Please build it...\n";
    throw OomphLibError(error_message.str(),
-                       "diagonal_entries(...)",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -3018,7 +3018,7 @@ Vector<double> CRDoubleMatrix::diagonal_entries() const
    error_message << "The matrix is not square. Can only get the diagonal\n"
                  << "entries of a square matrix.\n";
    throw OomphLibError(error_message.str(),
-                       "diagonal_entries(...)",
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -3269,7 +3269,7 @@ namespace CRDoubleMatrixHelpers
     std::ostringstream error_message;
     error_message << "Please supply the communicator.\n";
     throw OomphLibError(error_message.str(),
-                        "create_uniformly_distributed_matrix(...)",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
   // Is the out matrix built? We need an empty matrix!
@@ -3279,7 +3279,7 @@ namespace CRDoubleMatrixHelpers
     error_message << "The result matrix has been built.\n"
                   << "Please clear the matrix.\n";
     throw OomphLibError(error_message.str(),
-                        "create_uniformly_distributed_matrix(...)",
+                        OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif
