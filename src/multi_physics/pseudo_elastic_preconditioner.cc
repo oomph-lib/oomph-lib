@@ -30,6 +30,14 @@
 
 namespace oomph
 {
+ 
+ //=============================================================================
+ /// \short Namespace to contain a flag to switch between new code and old.
+ //=============================================================================
+ namespace RayNamespace
+ {
+   bool UseRayCode;
+ }
 
  //=============================================================================
  /// \short Functions to create instances of optimal subsidiary operators for
@@ -161,7 +169,7 @@ namespace oomph
   else
    {
     n_dof_types = this->ndof_types();
-    n_solid_dof_types = (int)(((double)2*n_dof_types)/3);
+    n_solid_dof_types = n_dof_types - (n_dof_types/3);
    }
 #ifdef PARANOID
   if (n_dof_types%3 != 0)
@@ -180,9 +188,6 @@ namespace oomph
   // Recast Jacobian matrix to CRDoubleMatrix
   CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt());
 
-  // Call block setup for this preconditioner
-  this->block_setup();
-  
 #ifdef PARANOID
   if (cr_matrix_pt==0)
    {
@@ -194,58 +199,343 @@ namespace oomph
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif
-  
+
+  RayNamespace::UseRayCode = false;
+
+  // RAYRAY 
+  // Setup the dof_list scheme for block_setup. 
+  // The dof types are currently in the order (in 3D):
+  // 0 1 2 3  4  5  6  7  8
+  // x y z xc yc zc lx ly lz
+  // 
+  // We need to group the directional displacements together:
+  // x xc y yc xz zc lx ly lz
+  // The mapping required is:
+  // 0 2 4 1 3 5 6 7 8
+  // Think of this as 
+  // "Where do I want to move the dof type in this position to?"
+  Vector<unsigned> dof_list_for_block_setup(n_dof_types);
+  for (unsigned dim_i = 0; dim_i < Dim; dim_i++) 
+   {
+    // bulk solid dof types
+    dof_list_for_block_setup[dim_i] = 2*dim_i;
+
+    // constrained solid dof types
+    dof_list_for_block_setup[dim_i + Dim] = 2*dim_i + 1;
+
+    // lagr dof types
+    dof_list_for_block_setup[dim_i + 2*Dim] = 2*Dim + dim_i;
+   }
+
+  // Setup the block ordering. If UseRayCode, then we have the following:
+  // Block types [0, 2*Dim) are the solid blocks.
+  // Block types [2*Dim, 3*Dim) are the lagrange multiplier dof types.
+  // 
+  // For d = 0, 1, 2,
+  // Bulk solid doftypes: 2*d
+  // Constrained solid doftypes: 2*d+1
+  // Lagr doftyoes: 2*Dim + d
+  if(RayNamespace::UseRayCode)
+  {
+    this->block_setup(dof_list_for_block_setup);
+  }
+  else
+  {
+    this->block_setup();
+  }
+
+  // Create dof_list for subsidiary preconditioner. This will be used later
+  // in turn_into_subsidiary_block_preconditioner(...)
+  Vector<unsigned> dof_list_for_subsidiary_prec(n_solid_dof_types);
+  if(RayNamespace::UseRayCode)
+  {
+    // RAYRAY 
+    // Setup the dof_list scheme for block_setup. 
+    // The dof types are currently in the order (in 3D):
+    // 0 1 2 3  4  5  6  7  8
+    // x y z xc yc zc lx ly lz
+    // 
+    // We need to group the directional displacements together:
+    // x xc y yc xz zc lx ly lz
+    // The mapping required is:
+    // 0 3 1 4 2 5
+    // Think of this as: 
+    // "Which dof type do I want to move into this position?"
+    for (unsigned dim_i = 0; dim_i < Dim; dim_i++) 
+    {
+      // bulk solid dof 
+      dof_list_for_subsidiary_prec[2*dim_i] = dim_i;
+
+      // constrained solid dof
+      dof_list_for_subsidiary_prec[2*dim_i+1] = dim_i + Dim;
+    }
+  }
+  else
+  {
+    // old code
+    for (unsigned i = 0; i < n_solid_dof_types; i++)
+    {
+      dof_list_for_subsidiary_prec[i] = i;
+    }
+  } 
+
+  // Get the solid blocks
+  DenseMatrix<CRDoubleMatrix*> solid_matrix_pt(n_solid_dof_types,
+      n_solid_dof_types,0);
+
+  for (unsigned row_i = 0; row_i < n_solid_dof_types; row_i++) 
+   {
+    for (unsigned col_i = 0; col_i < n_solid_dof_types; col_i++) 
+     {
+      this->get_block(row_i,col_i,solid_matrix_pt(row_i,col_i));
+     }
+   }
+
   // compute the scaling (if required)
   if (Use_inf_norm_of_s_scaling)
    {
-    Vector<unsigned> dof_list(n_solid_dof_types);
-    for (unsigned i = 0; i < n_solid_dof_types; i++)
+
+    if(RayNamespace::UseRayCode)
      {
-      dof_list[i] = i;
-     }
-    PseudoElasticPreconditionerScalingHelper* helper_pt = 
-     new PseudoElasticPreconditionerScalingHelper(this,
-                                                  cr_matrix_pt,
-                                                  dof_list,
-                                                  Elastic_mesh_pt,
-                                                  comm_pt());
-    Scaling = helper_pt->s_inf_norm();
-    delete helper_pt;
+      Vector<LinearAlgebraDistribution*> 
+        solid_block_distribution_pt(n_solid_dof_types, 0);
+      for (unsigned row_i = 0; row_i < n_solid_dof_types; row_i++) 
+       {
+        solid_block_distribution_pt[row_i] = Block_distribution_pt[row_i];
+       }
+ 
+      CRDoubleMatrix tmp_mat;
+  
+      CRDoubleMatrixHelpers::
+        concatenate_without_communication(solid_block_distribution_pt,
+                                          solid_matrix_pt,tmp_mat);
+  
+      Scaling = tmp_mat.inf_norm();
+  
+      tmp_mat.clear();
+
+     } // UseRayCode
+    else
+     {
+      Vector<unsigned> dof_list(n_solid_dof_types);
+      for (unsigned i = 0; i < n_solid_dof_types; i++)
+       {
+        dof_list[i] = i;
+       }
+
+      PseudoElasticPreconditionerScalingHelper* helper_pt = 
+       new PseudoElasticPreconditionerScalingHelper(this,
+                                                    cr_matrix_pt,
+                                                    dof_list,
+                                                    Elastic_mesh_pt,
+                                                    comm_pt());
+      Scaling = helper_pt->s_inf_norm();
+      delete helper_pt;
+     } // !UseRayCode
    }
   else
    {
     Scaling = 1.0;
    }
   
-  // setup the solid subsidiary preconditioner
+  // Add the scaled identify matrix to the constrained solid blocks.
+  for(unsigned d = 0; d < Dim; d++)
+   {
+    // Where is the constained block located?
+    unsigned block_i = 2*d+1;
+
+    // Data from the constrained block.
+    double* s_values = solid_matrix_pt(block_i,block_i)->value();
+    int* s_column_index = solid_matrix_pt(block_i,block_i)->column_index();
+    int* s_row_start = solid_matrix_pt(block_i,block_i)->row_start();
+    int s_nrow_local = solid_matrix_pt(block_i,block_i)->nrow_local();
+    int s_first_row = solid_matrix_pt(block_i,block_i)->first_row();
+
+    // Loop through the diagonal entries and add the scaling.
+    for (int i = 0; i < s_nrow_local; i++)
+     {
+      bool found = false;
+      for (int j = s_row_start[i]; 
+           j < s_row_start[i+1] && !found; j++)
+       {
+        if (s_column_index[j] == i + s_first_row)
+         {
+          s_values[j] += Scaling;
+          found = true;
+         } // if
+       } // for row start
+      
+      // Check if the diagonal entry is found.
+      if(!found)
+       {
+        std::ostringstream error_message;
+        error_message << "The diagonal entry for the constained block("
+                      << block_i<<","<<block_i<<")\n"
+                     << "on local row " << i << " does not exist."
+                     << std::endl;
+        throw OomphLibError(error_message.str(),
+                            "PseudoElasticPreconditioner",
+                            OOMPH_EXCEPTION_LOCATION);
+       }
+     } // for nrow_local
+   } // for Dim 
+  // setup the solid subsidiary preconditioner ////////////////////////////////
+/* 
+  // RAYRAY output the nrows.
+  for (unsigned i = 0; i < n_solid_dof_types; i++) 
+  {
+    CRDoubleMatrix* tmpmat_pt = 0;
+    this->get_block(i,0,tmpmat_pt);
+
+    unsigned myrank = tmpmat_pt->distribution_pt()
+                      ->communicator_pt()->my_rank();
+
+    std::stringstream tmpmat_sstream;
+    tmpmat_sstream << "nrowtest_block"<<i<<"r"<<myrank;
+    std::ofstream tmpmat_fstream;
+    tmpmat_fstream.open (tmpmat_sstream.str().c_str());
+    tmpmat_fstream << tmpmat_pt->nrow_local()<<std::endl;
+    tmpmat_fstream.close();
+  }
+  pause("done output"); 
   
+// */
   // this preconditioner uses the full S matrix
   if (E_preconditioner_type == Exact_block_preconditioner)
    {
-    PseudoElasticPreconditionerSubsidiaryPreconditioner* s_prec_pt = 
-     new PseudoElasticPreconditionerSubsidiaryPreconditioner;
-    Vector<unsigned> dof_list(n_solid_dof_types);
-    for (unsigned i = 0; i < n_solid_dof_types; i++)
+    if(RayNamespace::UseRayCode)
      {
-      dof_list[i] = i;
+      ExactBlockPreconditioner<CRDoubleMatrix>* s_prec_pt = 
+        new ExactBlockPreconditioner<CRDoubleMatrix>;
+
+      s_prec_pt->turn_into_subsidiary_block_preconditioner(
+          this,dof_list_for_subsidiary_prec);
+
+      if (Elastic_subsidiary_preconditioner_function_pt != 0)
+       {
+        s_prec_pt->
+         set_subsidiary_preconditioner_function
+         (Elastic_subsidiary_preconditioner_function_pt);
+       }
+
+      s_prec_pt->set_nmesh(1);
+      s_prec_pt->set_mesh(0, Elastic_mesh_pt);
+      s_prec_pt->set_precomputed_blocks(solid_matrix_pt);
+
+      s_prec_pt->Preconditioner::setup(matrix_pt(),comm_pt());
+      Elastic_preconditioner_pt = s_prec_pt;
      }
-    s_prec_pt->turn_into_subsidiary_block_preconditioner(this,dof_list);
+    else
+     {
+      PseudoElasticPreconditionerSubsidiaryPreconditioner* s_prec_pt = 
+       new PseudoElasticPreconditionerSubsidiaryPreconditioner;
+      Vector<unsigned> dof_list(n_solid_dof_types);
+      for (unsigned i = 0; i < n_solid_dof_types; i++)
+       {
+        dof_list[i] = i;
+       }
+      s_prec_pt->turn_into_subsidiary_block_preconditioner(this,dof_list);
+      if (Elastic_subsidiary_preconditioner_function_pt != 0)
+       {
+        s_prec_pt->
+         set_subsidiary_preconditioner_function
+         (Elastic_subsidiary_preconditioner_function_pt);
+       }
+      s_prec_pt->scaling() = Scaling;
+      s_prec_pt->set_nmesh(1);
+      s_prec_pt->set_mesh(0, Elastic_mesh_pt);
+      s_prec_pt->Preconditioner::setup(matrix_pt(),comm_pt());
+      Elastic_preconditioner_pt = s_prec_pt;
+      }
+   }
+  
+  // otherwise it is a block based preconditioner
+  else 
+   {
+    if(RayNamespace::UseRayCode)
+     {
+    // create the preconditioner
+    PseudoElasticPreconditionerSubsidiaryBlockPreconditioner* 
+     s_prec_pt = 
+     new PseudoElasticPreconditionerSubsidiaryBlockPreconditioner;
+    
+    if(RayNamespace::UseRayCode)
+     {
+      s_prec_pt->turn_into_subsidiary_block_preconditioner(
+          this,dof_list_for_subsidiary_prec);
+     }
+    else
+     {
+      Vector<unsigned> dof_list(n_solid_dof_types);
+
+      for (unsigned i = 0; i < n_solid_dof_types; i++)
+       {
+        dof_list[i] = i;
+       }
+
+      s_prec_pt->turn_into_subsidiary_block_preconditioner(this,dof_list);
+     }
+    
+    // set the subsidiary solve method
     if (Elastic_subsidiary_preconditioner_function_pt != 0)
      {
       s_prec_pt->
        set_subsidiary_preconditioner_function
        (Elastic_subsidiary_preconditioner_function_pt);
      }
+    
+    // set the scaling
     s_prec_pt->scaling() = Scaling;
+    
+    // set the block preconditioning method
+    switch (E_preconditioner_type)
+     {
+     case Block_diagonal_preconditioner:
+      s_prec_pt->use_block_diagonal_approximation();
+      break;
+     case Block_upper_triangular_preconditioner:
+      s_prec_pt->use_upper_triangular_approximation();
+      break;
+     case Block_lower_triangular_preconditioner:
+      s_prec_pt->use_lower_triangular_approximation();
+      break;
+     default:
+      break;
+     }
+    
+    // setup
     s_prec_pt->set_nmesh(1);
     s_prec_pt->set_mesh(0, Elastic_mesh_pt);
+
+    // The block to block map
+    Vector<Vector<unsigned> > block_to_block_map(
+        Dim,Vector<unsigned>(2,0));
+    unsigned tmp_index = 0;
+    for (unsigned d = 0; d < Dim; d++) 
+     {
+      block_to_block_map[d][0] = tmp_index++;
+      block_to_block_map[d][1] = tmp_index++;
+     }
+
+/* 
+    for (unsigned i = 0; i < block_to_block_map.size(); i++) 
+    {
+      for (unsigned j = 0; j < block_to_block_map[i].size(); j++) 
+      {
+        std::cout << block_to_block_map[i][j] << " ";
+      }
+      std::cout << std::endl; 
+    }
+    pause("outputted block to block map"); 
+*/    
+     
+    s_prec_pt->set_precomputed_blocks(solid_matrix_pt,block_to_block_map);
     s_prec_pt->Preconditioner::setup(matrix_pt(),comm_pt());
     Elastic_preconditioner_pt = s_prec_pt;
-   }
-  
-  // otherwise it is a block based preconditioner
-  else 
-   {
+
+     }
+    else
+     {
     // create the preconditioner
     PseudoElasticPreconditionerSubsidiaryBlockPreconditioner* 
      s_prec_pt = 
@@ -289,15 +579,33 @@ namespace oomph
     s_prec_pt->set_mesh(0, Elastic_mesh_pt);
     s_prec_pt->Preconditioner::setup(matrix_pt(),comm_pt());
     Elastic_preconditioner_pt = s_prec_pt;
+
+     }
    }
-  
+
+  // No longer require the solid blocks
+  for (unsigned row_i = 0; row_i < n_solid_dof_types; row_i++) 
+   {
+    for (unsigned col_i = 0; col_i < n_solid_dof_types; col_i++) 
+     {
+      delete solid_matrix_pt(row_i,col_i);
+     }
+   }
+ 
   // next setup the lagrange multiplier preconditioners
   Lagrange_multiplier_preconditioner_pt.resize(Dim);
   for (unsigned d = 0; d < Dim; d++)
    {
     CRDoubleMatrix* b_pt = 0;
-    this->get_block(2*Dim+d,Dim+d,b_pt);
-    
+    if(RayNamespace::UseRayCode)
+     {
+      this->get_block(2*Dim+d,2*d+1,b_pt);
+     }
+    else
+     {
+      this->get_block(2*Dim+d,Dim+d,b_pt);
+     }
+
     // if a non default preconditioner is specified create 
     // the preconditioners
     if (Lagrange_multiplier_subsidiary_preconditioner_function_pt != 0)
@@ -316,6 +624,7 @@ namespace oomph
     Lagrange_multiplier_preconditioner_pt[d]->setup(b_pt,comm_pt());
     delete b_pt;
    }
+
  }
  
  //=============================================================================
@@ -407,6 +716,87 @@ namespace oomph
     }
 #endif
      
+   if(RayNamespace::UseRayCode)
+    {
+     this->block_setup();
+
+     unsigned ndof_types = this->ndof_types();
+     unsigned n_constrained_doftypes = ndof_types/2;
+// /* 
+     // Get all blocks.
+     DenseMatrix<CRDoubleMatrix*> s_pt(ndof_types,ndof_types,0);
+     for (unsigned row_i = 0; row_i < ndof_types; row_i++) 
+      {
+       for (unsigned col_i = 0; col_i < ndof_types; col_i++) 
+        {
+         this->get_block(row_i,col_i,s_pt(row_i,col_i));
+        }
+      }
+     
+
+     
+
+// */
+/* 
+     // add the scaled identity matrix to the constrained blocks
+     for(unsigned constrained_i = 0; constrained_i < n_constrained_doftypes; 
+         constrained_i++)
+      {
+       // Locate the constrained block.
+       unsigned block_i = 2*constrained_i + 1;
+
+       // Data for the constrained block.
+       double* s_values = s_pt(block_i,block_i)->value();
+       int* s_column_index = s_pt(block_i,block_i)->column_index();
+       int* s_row_start = s_pt(block_i,block_i)->row_start();
+       int s_nrow_local = s_pt(block_i,block_i)->nrow_local();
+       int s_first_row = s_pt(block_i,block_i)->first_row();
+
+       // Add the scaling to the diagonal entries.
+       for (int i = 0; i < s_nrow_local; i++)
+        {
+         bool found = false;
+         for (int j = s_row_start[i]; 
+              j < s_row_start[i+1] && !found; j++)
+          {
+           if (s_column_index[j] == i + s_first_row)
+            {
+             s_values[j] += Scaling;
+             found = true;
+            }
+          }
+        }
+      }
+// */
+     CRDoubleMatrix* s_prec_pt
+       = new CRDoubleMatrix(this->preconditioner_matrix_distribution_pt());
+
+     CRDoubleMatrixHelpers::concatenate_without_communication(
+       Block_distribution_pt,s_pt,*s_prec_pt);
+
+     for (unsigned row_i = 0; row_i < ndof_types; row_i++) 
+      {
+       for (unsigned col_i = 0; col_i < ndof_types; col_i++) 
+        {
+         delete s_pt(row_i,col_i);
+        }
+      }
+
+     // setup the preconditioner
+     if (Subsidiary_preconditioner_function_pt != 0)
+      {
+       Preconditioner_pt = (*Subsidiary_preconditioner_function_pt)();
+      }
+     else
+      {
+       Preconditioner_pt = new SuperLUPreconditioner;
+      }
+
+     Preconditioner_pt->setup(s_prec_pt,comm_pt());
+     delete s_prec_pt;
+    }
+   else
+    {
    // assemble dof_to_block_map
    unsigned ndof_types = this->ndof_types();
    Vector<unsigned> dof_to_block_map(ndof_types,0);
@@ -414,10 +804,9 @@ namespace oomph
     {
      dof_to_block_map[i] = 1;
     }
-     
-   // call block_setup(...)
+
    this->block_setup(dof_to_block_map);
-     
+
    // get block 11
    CRDoubleMatrix* s11_pt = 0;
    this->get_block(1,1,s11_pt);
@@ -449,7 +838,7 @@ namespace oomph
    this->get_block(1,0,s_pt(1,0));
    s_pt(1,1) = s11_pt;
    
-   CRDoubleMatrix* s_prec_pt 
+   CRDoubleMatrix* s_prec_pt
      = new CRDoubleMatrix(this->preconditioner_matrix_distribution_pt());
 
    CRDoubleMatrixHelpers::concatenate_without_communication(
@@ -471,6 +860,8 @@ namespace oomph
     }
    Preconditioner_pt->setup(s_prec_pt,comm_pt());
    delete s_prec_pt;
+    } // !UseRayCode
+
   }
    
  //=============================================================================
@@ -559,27 +950,81 @@ namespace oomph
   
   // assemble the dof to block lookup scheme
   Vector<unsigned> dof_to_block_map(n_dof_types,0);
-  for (unsigned d = 0; d < dim; d++)
-   {
-    dof_to_block_map[d] = d;
-    dof_to_block_map[d+dim] = d;
-   }
+  if(RayNamespace::UseRayCode)
+  {
+    for (unsigned d = 0; d < dim; d++) 
+    {
+      dof_to_block_map[d*2] = d;
+      dof_to_block_map[d*2 + 1] = d;
+    }
+   
+    //setup the blocks look up schemes
+//    this->block_setup(dof_to_block_map);
+    this->block_setup();
+
+  }
+  else
+  {
+    for (unsigned d = 0; d < dim; d++)
+     {
+      dof_to_block_map[d] = d;
+      dof_to_block_map[d+dim] = d;
+     }
+    
+    //setup the blocks look up schemes
+    this->block_setup(dof_to_block_map);
+
+  }
   
-  //setup the blocks look up schemes
-  this->block_setup(dof_to_block_map);
-  
+
+/* 
+  // RAYRAY
+  for (unsigned i = 0; i < dim; i++) 
+  {
+    CRDoubleMatrix* tmp_mat_pt = 0;
+    this->get_block(i,0,tmp_mat_pt);
+    unsigned tmp_mat_nrow = tmp_mat_pt->nrow();
+    std::cout << "block " << i << ", nrow: " << tmp_mat_nrow << std::endl; 
+  }
+  //pause("From block preconditioner setup"); 
+// */
+
   // Storage for the diagonal block preconditioners
   Diagonal_block_preconditioner_pt.resize(dim);
   
   // storage for the off diagonal matrix vector products
   Off_diagonal_matrix_vector_products.resize(dim,dim,0);
+
+  std::cout << "About to setup block prec from exact" << std::endl; 
+
+/*
+  for (unsigned i = 0; i < this->Block_to_block_map.size(); i++) 
+  {
+    for (unsigned j = 0; j < this->Block_to_block_map[i].size(); j++) 
+    {
+      std::cout << this->Block_to_block_map[i][j] << " "; 
+    }
+    std::cout << std::endl; 
+  }
+  pause("done!!!"); 
+*/
+  
   
   // setup the subsidiary preconditioners
   for (unsigned d = 0; d < dim; d++)
    {
     Vector<unsigned> dof_list(2);
-    dof_list[0]=d;
-    dof_list[1]=d+dim;
+    if(RayNamespace::UseRayCode)
+    {
+      dof_list[0] = 2*d;
+      dof_list[1] = 2*d+1;
+    }
+    else
+    {
+      dof_list[0]=d;
+      dof_list[1]=d+dim;
+    }
+
     Diagonal_block_preconditioner_pt[d] = new 
      PseudoElasticPreconditionerSubsidiaryPreconditioner; 
     Diagonal_block_preconditioner_pt[d]->
@@ -595,11 +1040,36 @@ namespace oomph
     //??ds probably will work...
     Diagonal_block_preconditioner_pt[d]->set_nmesh(1);
     Diagonal_block_preconditioner_pt[d]->set_mesh(0,this->mesh_pt(0));
+    if(RayNamespace::UseRayCode)
+    {
+      // Set precomputed blocks.
+      DenseMatrix<CRDoubleMatrix*>prec_block_pt(2,2,0);
+      for (unsigned i = 0; i < 2; i++) 
+      {
+        unsigned block_i = this->Block_to_block_map[d][i];
+
+        for (unsigned j = 0; j < 2; j++) 
+        {
+          unsigned block_j = this->Block_to_block_map[d][j];
+
+          prec_block_pt(i,j) 
+            = this->Precomputed_block_pt(block_i,block_j);
+        }
+        
+      }
+      Diagonal_block_preconditioner_pt[d]->set_precomputed_blocks(
+        prec_block_pt);
+    }
 
     Diagonal_block_preconditioner_pt[d]->
      Preconditioner::setup(matrix_pt(),comm_pt());
     
+    // the preconditioning method.\n
+    // 0 - block diagonal\n
+    // 1 - upper triangular\n
+    // 2 - lower triangular\n 
     // next setup the off diagonal mat vec operators if required
+    // RAYRAY need to look at this later
     if (Method == 1 || Method == 2)
      {
       unsigned l = d+1;
@@ -619,8 +1089,10 @@ namespace oomph
         delete block_matrix_pt;
        }
      }
-   }
- }
+   } // setup the subsidiary preconditioner.
+
+  
+ } // preconditioner setup
  
  //=============================================================================
  /// Apply preconditioner to r
@@ -630,10 +1102,19 @@ namespace oomph
   {
    // copy r
    DoubleVector r(res);
+
+   unsigned n_block;
    
    // Cache umber of block types (also the spatial DIM)
-   const unsigned n_block = this->nblock_types();
-     
+   if(RayNamespace::UseRayCode)
+   {
+     n_block = this->nblocks_precomputed();
+   }
+   else
+   {
+     n_block = this->nblock_types();
+   }
+
    // loop parameters
    int start = n_block-1;
    int end = -1;
@@ -645,7 +1126,20 @@ namespace oomph
      step = 1;
     }
 
+   // the preconditioning method.
+   // 0 - block diagonal
+   // 1 - upper triangular
+   // 2 - lower triangular
+   //
    // loop over the DIM
+   // 
+   // For Method = 0 or 2 (diagonal, lower)
+   // start = 2, end = -1, step = -1
+   // i = 2,1,0
+   // 
+   // For Method = 1 (upper)
+   // start = 0, end = 3 step = 1
+   // i = 0, 1, 2
    for (int i = start; i != end; i+=step)
     {
        
@@ -657,6 +1151,7 @@ namespace oomph
       {
 
        // substitute
+       //
        for (int j = i + step; j !=end; j+=step)
         {
          DoubleVector x;
@@ -667,8 +1162,8 @@ namespace oomph
          this->get_block_vector(j,r,x);
          x -= y;
          this->return_block_vector(j,x,r);
-        }
-      }
-    }
-  }
-}
+        } // substitute
+      } // if upper or lower
+    } // for loop over DIM
+  } // Block preconditioner solve
+} // namespace oomph

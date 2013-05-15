@@ -34,16 +34,16 @@
 #include "../generic/preconditioner.h"
 #include "../generic/SuperLU_preconditioner.h"
 #include "../generic/matrix_vector_product.h"
+#include "../generic/general_purpose_preconditioners.h"
+#include "../generic/general_purpose_block_preconditioners.h"
 #ifdef OOMPH_HAS_HYPRE
 #include "../generic/hypre_solver.h"
 #endif
-#include "../generic/general_purpose_preconditioners.h"
 #ifdef OOMPH_HAS_TRILINOS
 #include "../generic/trilinos_solver.h"
 #endif
 namespace oomph
 {
-
  //=============================================================================
  /// \short Functions to create instances of optimal subsidiary operators for
  /// the PseudoElasticPreconditioner. By default we use hypre for the
@@ -521,7 +521,7 @@ class PseudoElasticPreconditionerSubsidiaryPreconditioner
 ///////////////////////////////////////////////////////////////////////////////
 
 
-
+// /* 
 //=============================================================================
 /// \short A helper class for PseudoElasticPreconditioner.
 ///  Note that this is NOT actually a functioning preconditioner.
@@ -628,6 +628,7 @@ class PseudoElasticPreconditionerScalingHelper
    
 
 }; // end of PseudoElasticPreconditionerScalingHelper
+// */
 
 }
 #endif
