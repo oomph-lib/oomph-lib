@@ -1597,7 +1597,8 @@ typedef PseudoElasticCollapsibleChannelProblem<
 /// helper method to return GMRES preconditioned with the pseudo-elastic 
 /// FSI preconditioner
 //==============================================================================
-void set_pseudo_elastic_fsi_solver(PseudoElasticFSIProblem& problem)
+void set_pseudo_elastic_fsi_solver(PseudoElasticFSIProblem& problem, 
+                                   unsigned pe_prec_type)
 {
 //setup the solver
 
@@ -1627,10 +1628,30 @@ solver_pt->solver_type() = TrilinosAztecOOSolver::GMRES;
 
  // hierher start
 
+ // RAYRAY
  // inexact pseudo-solid preconditioning
- prec_pt->pseudo_elastic_preconditioner_pt()->elastic_preconditioner_type()
-  = PseudoElasticPreconditioner::
-  Block_upper_triangular_preconditioner;
+ // 0 - Exact
+ // 1 - Block upper triangular
+ // 2 - Block lower triangular
+ if(pe_prec_type == 0)
+  {
+   prec_pt->pseudo_elastic_preconditioner_pt()->elastic_preconditioner_type()
+     = PseudoElasticPreconditioner::Exact_block_preconditioner;
+  }
+ else if(pe_prec_type == 1)
+  {
+   prec_pt->pseudo_elastic_preconditioner_pt()->elastic_preconditioner_type()
+     = PseudoElasticPreconditioner::Block_upper_triangular_preconditioner;
+  }
+ else if(pe_prec_type == 2)
+  {
+   prec_pt->pseudo_elastic_preconditioner_pt()->elastic_preconditioner_type()
+     = PseudoElasticPreconditioner::Block_lower_triangular_preconditioner;
+  }
+ else
+  {
+   pause("I do not know what to do"); 
+  }
 
 #ifdef OOMPH_HAS_HYPRE
 
@@ -1757,10 +1778,12 @@ Global_Parameters::Constitutive_law_pseudo_elastic_pt =
  problem.initialise_dt(dt);
  problem.set_initial_condition();
 
+ unsigned pe_prec_type = std::atoi(argv[3]);
+
   // set
  if (CommandLineArgs::Argc>2) 
   {
-   set_pseudo_elastic_fsi_solver(problem);
+   set_pseudo_elastic_fsi_solver(problem,pe_prec_type);
   }
 
  // Steady run
