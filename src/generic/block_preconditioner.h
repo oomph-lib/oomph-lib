@@ -783,14 +783,14 @@ namespace oomph
   /// jacobian. A typical use would be if this is a subsidiary preconditioner
   /// and a master preconditioner has to pass down modified blocks for the 
   /// subidiary preconditioner to use.
-  void set_precomputed_blocks(DenseMatrix<CRDoubleMatrix*> precomputed_block_pt,
+  void set_precomputed_blocks(DenseMatrix<CRDoubleMatrix*>&precomputed_block_pt,
                               Vector<Vector<unsigned> > & block_to_block_map)
   {
 #ifdef PARANOID
-   unsigned given_blocks_nrow = precomputed_block_pt.nrow();
+   unsigned precomputed_blocks_nrow = precomputed_block_pt.nrow();
 
    // Ensure that a square block matrix is given.
-   if(given_blocks_nrow != precomputed_block_pt.ncol())
+   if(precomputed_blocks_nrow != precomputed_block_pt.ncol())
     {
      std::ostringstream error_message;
      error_message << "The number of block rows and block columns are "
@@ -801,13 +801,13 @@ namespace oomph
     }
 
    // Check that this is the most fine grain .
-   if(given_blocks_nrow != this->ndof_types())
+   if(precomputed_blocks_nrow != this->ndof_types())
     {
      std::ostringstream error_message;
      error_message << "This must be the most fine grain block matrix.\n"
                    << "It must have ndof_types number of rows / columns.\n"
-                   << "You have given me a " << given_blocks_nrow
-                   << " by " << given_blocks_nrow << " matrix.\n"
+                   << "You have given me a " << precomputed_blocks_nrow
+                   << " by " << precomputed_blocks_nrow << " matrix.\n"
                    << "I want a " << ndof_types() << " by "<< ndof_types()
                    << " matrix." << std::endl;
      throw OomphLibError(error_message.str(),
@@ -816,10 +816,10 @@ namespace oomph
     }
 
    // Check that all matrices have been set and have been built.
-   for (unsigned block_row_i = 0; block_row_i < given_blocks_nrow;
+   for (unsigned block_row_i = 0; block_row_i < precomputed_blocks_nrow;
         block_row_i++)
     {
-     for (unsigned block_col_i = 0; block_col_i < given_blocks_nrow;
+     for (unsigned block_col_i = 0; block_col_i < precomputed_blocks_nrow;
           block_col_i++)
       {
        // Check that the block matrix has been set.
@@ -850,7 +850,7 @@ namespace oomph
 
    // Check that the size of all matrices "make sense".
    // First do the rows.
-   for (unsigned block_row_i = 0; block_row_i < given_blocks_nrow;
+   for (unsigned block_row_i = 0; block_row_i < precomputed_blocks_nrow;
         block_row_i++)
     {
 
@@ -861,7 +861,7 @@ namespace oomph
       = this->dof_block_dimension(block_row_i);
 
      // Loop through the columns
-     for(unsigned block_col_i = 0; block_col_i < given_blocks_nrow;
+     for(unsigned block_col_i = 0; block_col_i < precomputed_blocks_nrow;
          block_col_i++)
       {
        // Get the global row of this block.
@@ -882,7 +882,7 @@ namespace oomph
     }
 
    // Now check the columns
-   for(unsigned block_col_i = 0; block_col_i < given_blocks_nrow;
+   for(unsigned block_col_i = 0; block_col_i < precomputed_blocks_nrow;
        block_col_i++)
     {
      // Get the number of columns for this block column
@@ -890,7 +890,7 @@ namespace oomph
       = precomputed_block_pt(0,block_col_i)->ncol();
 
      // Loop through the rows
-     for(unsigned block_row_i = 0; block_row_i < given_blocks_nrow;
+     for(unsigned block_row_i = 0; block_row_i < precomputed_blocks_nrow;
          block_row_i++)
       {
        // Get the number of columns for this block.
@@ -953,7 +953,7 @@ namespace oomph
     }
      
    // All block types described in block_to_block_map must be unique.
-   if(given_blocks_nrow != block_map_set.size())
+   if(precomputed_blocks_nrow != block_map_set.size())
     {
      std::ostringstream error_message;
      error_message << "Error: all blocks must be assigned. \n"
@@ -964,7 +964,6 @@ namespace oomph
                          "BlockPreconditioner::set_blocks",
                          OOMPH_EXCEPTION_LOCATION);
     }
-
 
 #endif
     
@@ -978,6 +977,22 @@ namespace oomph
    Preconditioner_blocks_have_been_precomputed = true;
   }
   
+
+ void set_precomputed_blocks(DenseMatrix<CRDoubleMatrix*>&precomputed_block_pt)
+  {
+   unsigned precomputed_blocks_nrow = precomputed_block_pt.nrow();
+
+   Vector<Vector<unsigned> > block_to_block_map(precomputed_blocks_nrow,
+                                                Vector<unsigned>(1,0));
+
+   for (unsigned i = 0; i < precomputed_blocks_nrow; i++) 
+    {
+     block_to_block_map[i][0] = i;
+    }
+
+   set_precomputed_blocks(precomputed_block_pt,block_to_block_map);
+  }
+
   /// \short the number of blocks precomputed. If the preconditioner blocks are
   /// precomputed then it should be the same as the nblock_types 
   /// required by this preconditioner.

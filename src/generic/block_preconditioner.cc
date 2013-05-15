@@ -154,6 +154,145 @@ namespace oomph
    }
  }
 
+//=============================================================================
+/// \short Gets block (i,j) from Precomputed_block_pt and returns it in
+/// block_matrix_pt.
+//=============================================================================
+ template<> 
+ void BlockPreconditioner<CRDoubleMatrix>:: 
+ get_precomputed_block(const unsigned& block_i, const unsigned& block_j, 
+                       CRDoubleMatrix*& block_pt) const
+ {
+#ifdef PARANOID
+  // the number of blocks
+  unsigned nblocks = Block_to_block_map.size();
+  
+  // paranoid check that block i is in this block preconditioner
+  if (block_i >= nblocks || block_j >= nblocks)
+   {
+    std::ostringstream error_message;
+    error_message << "Requested block (" << block_i << "," << block_j   
+                  << "), however this preconditioner has nblock_types() "
+                  << "= " << nblocks << std::endl;
+    throw OomphLibError(error_message.str(),
+                        "RAYRAYERR",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+
+  if(!Preconditioner_blocks_have_been_precomputed)
+  {
+    std::ostringstream error_message;
+    error_message << "There are no precomputed blocks. Please call "
+                  << "set_precomputed_blocks(...)  ";
+    throw OomphLibError(error_message.str(),
+                        "RAYRAYERR",
+                        OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+
+  // Create the dense matrix required for the merge.
+  // How many block rows and columns?
+  const unsigned nblock_in_row = Block_to_block_map[block_i].size();
+  const unsigned nblock_in_col = Block_to_block_map[block_j].size();
+  
+  if((nblock_in_row == 1) && (nblock_in_col == 1))
+   {
+     
+    // Do not need to invoke concatenate function.
+    unsigned prec_block_i = Block_to_block_map[block_i][0];
+    unsigned prec_block_j = Block_to_block_map[block_j][0];
+
+    // Cache the pointer to the precomputed block.
+    CRDoubleMatrix* precom_block_pt 
+      = Precomputed_block_pt(prec_block_i,prec_block_j);
+
+    // Create a new matrix with the precomputed block
+    // (prec_block_i,prec_block_j)
+
+    // Temp storage.
+    Vector<double> tmp_values;
+    Vector<int> tmp_column_indices;
+    Vector<int> tmp_row_start;
+    
+    // The precomputed block nrow and nnz
+    unsigned precom_nrow = precom_block_pt->nrow();
+    unsigned long precom_nnz = precom_block_pt->nnz();
+    
+    // Reserve space.
+    tmp_values.reserve(precom_nnz);
+    tmp_column_indices.reserve(precom_nnz);
+    tmp_row_start.reserve(precom_nrow + 1);
+
+    // The data to copy over.
+    double* precom_values = precom_block_pt->value();
+    int* precom_column_indices = precom_block_pt->column_index();
+    int* precom_row_start = precom_block_pt->row_start();
+    
+    // Copy the values and column indices.
+    for (unsigned i = 0; i < precom_nnz; i++) 
+     {
+      tmp_values.push_back(precom_values[i]);
+      tmp_column_indices.push_back(precom_column_indices[i]);
+     }
+
+    // Copy the row start
+    for (unsigned i = 0; i < precom_nrow + 1; i++) 
+     {
+      tmp_row_start.push_back(precom_row_start[i]);
+     }
+
+    unsigned precom_ncol
+      = precom_block_pt->ncol();
+
+    // RAYRAY Need to change this so that it doesn't use new.
+    // hierher There are similar constructions elsewhere -- change them too!
+    if(block_pt == 0)
+     {
+      block_pt = new CRDoubleMatrix;
+     }
+
+    block_pt->build(precom_block_pt->distribution_pt(),
+                    precom_ncol,
+                    tmp_values,
+                    tmp_column_indices,
+                    tmp_row_start);
+   }
+  else
+   {
+  DenseMatrix<CRDoubleMatrix*> tmp_block_pt(nblock_in_row,nblock_in_col,0);
+  Vector<LinearAlgebraDistribution*> tmp_distribution_pt(nblock_in_row,0);
+
+  // Fill in the corresponding matrices.
+  for (unsigned block_row_i = 0; block_row_i < nblock_in_row; block_row_i++) 
+   {
+    unsigned prec_block_i = Block_to_block_map[block_i][block_row_i];
+    tmp_distribution_pt[block_row_i] 
+      = Precomputed_block_pt(prec_block_i,0)->distribution_pt();
+
+    for (unsigned block_col_i = 0; block_col_i < nblock_in_col; block_col_i++) 
+     {
+      unsigned prec_block_j = Block_to_block_map[block_j][block_col_i];
+
+      tmp_block_pt(block_row_i,block_col_i) 
+       = Precomputed_block_pt(prec_block_i, prec_block_j);
+     }
+   }
+
+  // RAYRAY Need to change this so that it doesn't use new.
+  // hierher There are similar constructions elsewhere -- change them too!
+  if(block_pt == 0)
+   {
+    block_pt = new CRDoubleMatrix;
+   }
+
+  // Concatenate the matrix.
+  // For now, we use concatenate_without_communication(...) since none of the
+  // current preconditioners require the block matrix to be in a particular
+  // arrangement. We could use concatenate(...) which requires communication.
+  CRDoubleMatrixHelpers::concatenate_without_communication(
+    tmp_distribution_pt, tmp_block_pt, *block_pt);
+   }
+ }
 
 //=============================================================================
 /// \short Gets block (i,j) from the original matrix and returns it in
