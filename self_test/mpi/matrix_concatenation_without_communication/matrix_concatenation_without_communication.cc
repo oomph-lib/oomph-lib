@@ -213,7 +213,34 @@ void create_matrices_to_cat
 }
 
 //===start_of_main======================================================
-/// Driver code
+/// Driver code: Testing 
+/// CRDoubleMatrixHelpers::concatenate_without_communication(...)
+/// We concatenate uniformly distributed matrices.
+/// 
+/// Let (x,y) be a matrix with x rows and y columns, 
+/// with entries increasing along the columns, then along the rows.
+/// For example, (3,3) is
+/// [1 2 3
+///  4 5 6
+///  7 8 9].
+/// 
+/// We concatenate the following matrices:
+/// (7,7)(7,5)(7,3)
+/// (5,7)(5,5)(5,3)
+/// (3,7)(3,5)(3,3)
+///
+/// (7,7)(7,5)
+/// (5,7)(5,5)
+/// (3,7)(3,5)
+/// 
+/// (7,7)(7,5)(7,3)
+/// (5,7)(5,5)(5,3)
+///
+/// Communication between processors is NOT required, but the block structure
+/// of the sub blocks are NOT preserved in the result matrix. Please see
+/// self_test/mpi/vector_concatenation_without_communication/ for more detail.
+///
+/// The script validate.sh should run this self test on 1, 2, 3 and 4 cores. 
 //======================================================================
 int main(int argc, char* argv[])
 {

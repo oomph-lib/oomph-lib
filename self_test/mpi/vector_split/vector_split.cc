@@ -110,6 +110,47 @@ void create_vectors_to_split
 
 //===start_of_main======================================================
 /// Driver code: Testing DoubleVectorHelpers::split(...)
+/// This is the reverse of DoubleVectorsHelpers::concatenate(...),
+/// which is demonstrated in self_test/mpi/vector_concatenation/
+/// Given a vector with length = 7+5+3 = 15
+/// [1
+///  2
+///  3
+///  4
+///  5
+///  6
+///  7
+///  8
+///  9
+///  10
+///  11
+///  12
+///  13
+///  14
+///  15],
+/// 
+/// we split it into vectors v1, v2 and v3 of lengths 7, 5 and 3 respectively.
+/// The script validate.sh should run this on 1, 2, 3 and 4 cores.
+/// 
+/// Communication is required and the order of the entries is preserved
+/// across the vectors. We demonstrate this on two cores, p0 and p1:
+/// v1, p0: [1
+///          2
+///          3]
+/// v1, p1: [4
+///          5
+///          6
+///          7]
+///
+/// v2, p0: [8
+///          9]
+/// v2, p1: [10
+///          11
+///          12]
+///
+/// v2, p0: [13]
+/// v2, p1: [14
+///          15]
 //======================================================================
 int main(int argc, char* argv[])
 {

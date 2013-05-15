@@ -141,7 +141,42 @@ void create_vectors_to_split
 }
 
 //===start_of_main======================================================
-/// Driver code
+/// Driver code: Testing 
+/// DoubleVectorHelpers::split_without_communication(...)
+/// This is the reverse of 
+/// DoubleVectorHelpers::concatenate_without_communication(...), demonstrated
+/// in self_test/mpi/vector_concatenation_without_communication/
+///
+/// There is a "strong" relationship between the distributions of the in_vector 
+/// and the out vectors: The distribution of the in_vector must be the same
+/// as the concatenation of the out vectors as defined by
+/// LinearAlgebraDistributionHelpers::concatenate(...).
+///
+/// To see why, we demonstrate this on two cores, p0 and p1, and 
+/// out vectors v1, v2 and v3 with lengths 7, 5 and 3 respectively.
+/// As seen in the driver code distribution_concatenation, we have:
+///
+/// v1: nrow = 7
+///     nrow_local p0 = 3
+///     nrow_local p1 = 4
+///
+/// v2: nrow = 5
+///     nrow_local p0 = 2
+///     nrow_local p1 = 3
+///
+/// v3: nrow = 3
+///     nrow_local p0 = 1
+///     nrow_local p1 = 2
+///
+/// If no communication takes place, i.e. all data on p0 stays on p0 
+/// (and similarly for p1), the in vector MUST have the following distribution:
+/// in_vec: nrow = 15
+///         nrow_local p0 = 3+2+1 = 6
+///         nrow_local p1 = 4+3+2 = 9
+///
+/// In this driver test, we split a vector of length 15 into vectors of
+/// length 7, 5 and 3, ensuring that the above relationship is maintained. 
+/// The script validate.sh should run this program on 1, 2, 3 and 4 cores.
 //======================================================================
 int main(int argc, char* argv[])
 {

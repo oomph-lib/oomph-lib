@@ -32,7 +32,8 @@
 using namespace oomph;
 
 //===start_of_main======================================================
-/// Driver code
+/// Driver code: Testing LinearAlgebraDistributionHelpers::concatenate(...)
+///
 /// We concatenate three uniformly distributed distributions 
 /// with nrow = 7, 5, and 3 respectively.
 ///
@@ -121,6 +122,8 @@ using namespace oomph;
 ///         nrow_local rank1 = 4
 ///         nrow_local rank1 = 4 
 ///         nrow_local rank1 = 5 
+///
+/// The script validate.sh should run this test on 1, 2, 3 and4 cores.
 //======================================================================
 int main(int argc, char* argv[])
 {

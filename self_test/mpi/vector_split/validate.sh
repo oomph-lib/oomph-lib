@@ -4,9 +4,10 @@
 #Set the number of tests to be checked
 NUM_TESTS=1
 
-# Doc what we're using to run tests on two processors
+# Doc what we're using to run tests on variable processors
 echo " " 
-echo "Running mpi tests with mpi run command: " $MPI_RUN_COMMAND
+echo "Running mpi tests with mpi run command: " $MPI_VARIABLENP_RUN_COMMAND
+echo "OOMPHNP = 1, 2, 3, 4"
 echo " " 
 
 # Setup validation directory
@@ -23,19 +24,19 @@ cd Validation
 
 echo "Running vector split test "
 # one processor
-MPI_RUN_ON_NP_COMMAND=`echo $MPI_RUN_COMMAND | sed -e "s/2/1/g"`
+MPI_RUN_ON_NP_COMMAND=`echo $MPI_VARIABLENP_RUN_COMMAND | sed -e "s/OOMPHNP/1/g"`
 $MPI_RUN_ON_NP_COMMAND ../vector_split
 
 # two processors
-MPI_RUN_ON_NP_COMMAND=`echo $MPI_RUN_COMMAND | sed -e "s/2/2/g"`
+MPI_RUN_ON_NP_COMMAND=`echo $MPI_VARIABLENP_RUN_COMMAND | sed -e "s/OOMPHNP/2/g"`
 $MPI_RUN_ON_NP_COMMAND ../vector_split
 
 # three processors
-MPI_RUN_ON_NP_COMMAND=`echo $MPI_RUN_COMMAND | sed -e "s/2/3/g"`
+MPI_RUN_ON_NP_COMMAND=`echo $MPI_VARIABLENP_RUN_COMMAND | sed -e "s/OOMPHNP/3/g"`
 $MPI_RUN_ON_NP_COMMAND ../vector_split
 
 # four processors
-MPI_RUN_ON_NP_COMMAND=`echo $MPI_RUN_COMMAND | sed -e "s/2/4/g"`
+MPI_RUN_ON_NP_COMMAND=`echo $MPI_VARIABLENP_RUN_COMMAND | sed -e "s/OOMPHNP/4/g"`
 $MPI_RUN_ON_NP_COMMAND ../vector_split
 
 echo "done"

@@ -124,7 +124,50 @@ void create_vectors_to_cat
 }
 
 //===start_of_main======================================================
-/// Driver code
+/// Driver code: Testing DoubleVectorHelpers::concatenate(...)
+///
+/// We concatenate uniformly distributed DoubleVectors.
+/// The vectors v1, v2, and v3 have increasing entries 
+/// with lengths 7, 5 and 3 as depicted below:
+///
+/// v1   v2   v3
+/// [1   [1   [1
+///  2    2    2
+///  3    3    3]
+///  4    4
+///  5    5]
+///  6
+///  7]
+///
+/// The script validate.sh should run this driver on 1, 2, 3 and 4 cores.
+/// 
+/// Communication is required and the order of the entries is preserved.
+/// We demonstrate this on two cores, p0 and p1:
+/// v1 p0   p1
+///    [1   [4
+///     2    5
+///     3]   6
+///          7]
+///
+/// v2 p0   p1
+///    [1   [3
+///     2]   4
+///          5]
+///
+/// v3 p0   p1
+///    [1]  [2
+///          3]
+/// 
+/// Result vector:
+///    p0   p1
+///    [1   [1
+///     2    2
+///     3    3
+///     4    4
+///     5    5
+///     6    1
+///     7]   2
+///          3]
 //======================================================================
 int main(int argc, char* argv[])
 {
