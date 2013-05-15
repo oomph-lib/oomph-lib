@@ -220,9 +220,15 @@ int main(int argc, char* argv[])
 
   // Get the global oomph-lib communicator 
   const OomphCommunicator* const comm_pt = MPI_Helpers::communicator_pt();
+  
+  // my rank and number of processors. This is used later for putting the data.
+  unsigned my_rank = comm_pt->my_rank();
+  unsigned nproc = comm_pt->nproc();
 
-  unsigned nblock_row = 3;
-  unsigned nblock_col = 3;
+  // The number of block rows and columns, these will be set to the correct
+  // value per test below.
+  unsigned nblock_row = 0;
+  unsigned nblock_col = 0;
 
   // Supply the dimensions of the matrices to concatenate.
   // The matrices must be in the order: top row, then along the columns,
@@ -230,32 +236,117 @@ int main(int argc, char* argv[])
   // The number of elements in this must be 2*nblock_row*nblock_col.
   unsigned dimarray[] = {7,7,7,5,7,3,5,7,5,5,5,3,3,7,3,5,3,3};
 
+  /////////////////////////////////////////////////////////////////////////////
+  // Test 0: Concatenate the sub matrices with the sizes
+  // (7,7)(7,5)(7,3)
+  // (5,7)(5,5)(5,3)
+  // (3,7)(3,5)(3,3)
+  
+  // This is a 3 by 3 block matrix.
+  nblock_row = 3;
+  nblock_col = 3;
+
   // The data structure to store the pointers to matrices.
-  DenseMatrix<CRDoubleMatrix*> mat_pt(nblock_row,nblock_col,0);
+  DenseMatrix<CRDoubleMatrix*> mat0_pt(nblock_row,nblock_col,0);
 
   // Create the matrice to concatenate.
   create_matrices_to_cat(nblock_row,nblock_col,dimarray,
-                         comm_pt,mat_pt);
+                         comm_pt,mat0_pt);
   
   // The result matrix.
-  CRDoubleMatrix result_matrix;
+  CRDoubleMatrix result_matrix0;
 
   // Call the concatenate function.
-  CRDoubleMatrixHelpers::concatenate(mat_pt,result_matrix);
+  CRDoubleMatrixHelpers::concatenate(mat0_pt,result_matrix0);
 
   // output the result matrix
-  unsigned my_rank = comm_pt->my_rank();
-  unsigned nproc = comm_pt->nproc();
-  std::ostringstream result_mat_stream;
-  result_mat_stream << "out_NP" << nproc << "R" << my_rank;
-  result_matrix.sparse_indexed_output(result_mat_stream.str().c_str());
+  std::ostringstream result_mat0_stream;
+  result_mat0_stream << "out0_NP" << nproc << "R" << my_rank;
+  result_matrix0.sparse_indexed_output(result_mat0_stream.str().c_str());
 
-  // Delete the matrices.
-  for (unsigned row_i = 0; row_i < mat_pt.nrow(); row_i++) 
+  // No longer need the result matrix.
+  result_matrix0.clear();
+
+  /////////////////////////////////////////////////////////////////////////////
+  // Test 1: Concatenate the sub matrices with the sizes
+  // (7,7)(7,5)
+  // (5,7)(5,5)
+  // (3,7)(3,5)
+  
+  // This is a 3 by 3 block matrix.
+  nblock_row = 3;
+  nblock_col = 2;
+
+  // The data structure to store the pointers to matrices.
+  DenseMatrix<CRDoubleMatrix*> mat1_pt(nblock_row,nblock_col,0);
+  
+  // Get the matrices from mat0_pt
+  for(unsigned block_row_i = 0; block_row_i < nblock_row; block_row_i++) 
   {
-    for (unsigned col_i = 0; col_i < mat_pt.ncol(); col_i++) 
+    for (unsigned block_col_i = 0; block_col_i < nblock_col; block_col_i++) 
     {
-      delete mat_pt(row_i,col_i);
+      mat1_pt(block_row_i,block_col_i) = mat0_pt(block_row_i,block_col_i);
+    }
+  }
+
+  // The result matrix.
+  CRDoubleMatrix result_matrix1;
+
+  // Call the concatenate function.
+  CRDoubleMatrixHelpers::concatenate(mat1_pt,result_matrix1);
+
+  // output the result matrix
+  std::ostringstream result_mat1_stream;
+  result_mat1_stream << "out1_NP" << nproc << "R" << my_rank;
+  result_matrix1.sparse_indexed_output(result_mat1_stream.str().c_str());
+
+  // No longer need the result matrix.
+  result_matrix1.clear();
+
+  /////////////////////////////////////////////////////////////////////////////
+  // Test 2: Concatenate the sub matrices with the sizes
+  // (7,7)(7,5)(7,3)
+  // (5,7)(5,5)(5,3)
+  
+  // This is a 3 by 3 block matrix.
+  nblock_row = 2;
+  nblock_col = 3;
+
+  // The data structure to store the pointers to matrices.
+  DenseMatrix<CRDoubleMatrix*> mat2_pt(nblock_row,nblock_col,0);
+  
+  // Get the matrices from mat0_pt
+  for(unsigned block_row_i = 0; block_row_i < nblock_row; block_row_i++) 
+  {
+    for (unsigned block_col_i = 0; block_col_i < nblock_col; block_col_i++) 
+    {
+      mat2_pt(block_row_i,block_col_i) = mat0_pt(block_row_i,block_col_i);
+    }
+  }
+
+  // The result matrix.
+  CRDoubleMatrix result_matrix2;
+
+  // Call the concatenate function.
+  CRDoubleMatrixHelpers::concatenate(mat2_pt,result_matrix2);
+
+  // output the result matrix
+  std::ostringstream result_mat2_stream;
+  result_mat2_stream << "out2_NP" << nproc << "R" << my_rank;
+  result_matrix2.sparse_indexed_output(result_mat2_stream.str().c_str());
+
+  // No longer need the result matrix.
+  result_matrix2.clear();
+
+  /////////////////////////////////////////////////////////////////////////////
+  // Delete the sub block matrices, we only need to delete them from mat0_pt.
+  nblock_row = mat0_pt.nrow();
+  nblock_col = mat0_pt.ncol();
+  for (unsigned block_row_i = 0; block_row_i < nblock_row; block_row_i++) 
+  {
+    for (unsigned block_col_i = 0; block_col_i < nblock_col; block_col_i++) 
+    {
+      delete mat0_pt(block_row_i,block_col_i);
     } // for col_i
   } // for row_i
 

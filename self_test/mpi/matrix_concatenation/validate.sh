@@ -51,10 +51,71 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 
 # Cat all the outputs into one file.
-cat out_NP1R0 out_NP2R0 out_NP2R1 out_NP3R0 out_NP3R1 out_NP3R2 out_NP4R0 out_NP4R1 out_NP4R2 out_NP4R3 > matrix_concatenation.dat
+cat \
+out0_NP1R0 \
+out0_NP2R0 \
+out0_NP2R1 \
+out0_NP3R0 \
+out0_NP3R1 \
+out0_NP3R2 \
+out0_NP4R0 \
+out0_NP4R1 \
+out0_NP4R2 \
+out0_NP4R3 \
+out1_NP1R0 \
+out1_NP2R0 \
+out1_NP2R1 \
+out1_NP3R0 \
+out1_NP3R1 \
+out1_NP3R2 \
+out1_NP4R0 \
+out1_NP4R1 \
+out1_NP4R2 \
+out1_NP4R3 \
+out2_NP1R0 \
+out2_NP2R0 \
+out2_NP2R1 \
+out2_NP3R0 \
+out2_NP3R1 \
+out2_NP3R2 \
+out2_NP4R0 \
+out2_NP4R1 \
+out2_NP4R2 \
+out2_NP4R3 \
+> matrix_concatenation.dat
 
 # Remove the individual outputs.
-rm -rf out_NP1R0 out_NP2R0 out_NP2R1 out_NP3R0 out_NP3R1 out_NP3R2 out_NP4R0 out_NP4R1 out_NP4R2 out_NP4R3
+rm -rf \
+out0_NP1R0 \
+out0_NP2R0 \
+out0_NP2R1 \
+out0_NP3R0 \
+out0_NP3R1 \
+out0_NP3R2 \
+out0_NP4R0 \
+out0_NP4R1 \
+out0_NP4R2 \
+out0_NP4R3 \
+out1_NP1R0 \
+out1_NP2R0 \
+out1_NP2R1 \
+out1_NP3R0 \
+out1_NP3R1 \
+out1_NP3R2 \
+out1_NP4R0 \
+out1_NP4R1 \
+out1_NP4R2 \
+out1_NP4R3 \
+out2_NP1R0 \
+out2_NP2R0 \
+out2_NP2R1 \
+out2_NP3R0 \
+out2_NP3R1 \
+out2_NP3R2 \
+out2_NP4R0 \
+out2_NP4R1 \
+out2_NP4R2 \
+out2_NP4R3
 
 if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log

@@ -3783,7 +3783,6 @@ namespace oomph
    // the number of blocks
    unsigned n_blocks = Block_to_block_map.size();
 
-<<<<<<< HEAD
   // paranoid check that block i is in this block preconditioner
   if (b >= n_blocks)
    {
@@ -3813,7 +3812,7 @@ namespace oomph
                         OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
-=======
+
    // paranoid check that block i is in this block preconditioner
    if (b >= n_blocks)
     {
@@ -3854,7 +3853,6 @@ namespace oomph
                      "RAYRAYERR",
                      OOMPH_EXCEPTION_LOCATION);
     }
->>>>>>> In src/generic/linear_algebra_distribution h and cc, the following
 #endif
 
    // How many block vectors do we need to concatenate?
@@ -4140,7 +4138,6 @@ namespace oomph
                      "RAYRAYERR",
                      OOMPH_EXCEPTION_LOCATION);
     }
->>>>>>> In src/generic/linear_algebra_distribution h and cc, the following
 #endif
   
    // How many dof types does this block type represent?
