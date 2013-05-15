@@ -128,14 +128,25 @@ namespace oomph
    
    // No preconditioner blocks has been computed yet.
    Preconditioner_blocks_have_been_precomputed = false;
+   Precomputed_block_distribution_pt.resize(0);
 
    // Clear the Block_to_block_map
    Block_to_block_map.clear();
   }
 
-  /// Destructor (empty)
+  /// Destructor
   virtual ~BlockPreconditioner()
   {
+   // Delete any existing precomputed block distributions.
+   unsigned n_existing_precom_block_dist 
+     = Precomputed_block_distribution_pt.size();
+    for (unsigned dist_i = 0; dist_i < n_existing_precom_block_dist; dist_i++) 
+    {
+      delete Precomputed_block_distribution_pt[dist_i];
+    }
+
+    Precomputed_block_distribution_pt.clear();
+
    this->clear_block_preconditioner_base();
   }
 
@@ -669,15 +680,6 @@ namespace oomph
     }
    Block_distribution_pt.resize(0);
 
-   if(Preconditioner_blocks_have_been_precomputed)
-    {
-     for (unsigned b = 0; b < nblock; b++) 
-      {
-       delete Precomputed_block_distribution_pt[b];
-      }
-    }
-   Precomputed_block_distribution_pt.resize(0);
-
    // clear the global index
    Global_index.clear();
 
@@ -982,31 +984,6 @@ namespace oomph
 
    // Set the Block_to_block_map.
    Block_to_block_map = block_to_block_map;
-
-   // Work out the distributions of the concatenated blocks.
-   unsigned super_block_size = Block_to_block_map.size();
-   Precomputed_block_distribution_pt.resize(super_block_size,0);
-   for (unsigned super_block_i = 0; 
-        super_block_i < super_block_size; super_block_i++)
-    {
-     unsigned sub_block_size = Block_to_block_map[super_block_i].size();
-     Vector<LinearAlgebraDistribution*> tmp_dist_pt(sub_block_size,0);
-     
-     for (unsigned sub_block_i = 0; 
-          sub_block_i < sub_block_size; sub_block_i++) 
-      {
-       tmp_dist_pt[sub_block_i] 
-         = Precomputed_block_pt(
-             Block_to_block_map[super_block_i][sub_block_i],0)
-               ->distribution_pt();
-      }
-
-     Precomputed_block_distribution_pt[super_block_i] 
-       = new LinearAlgebraDistribution;
-
-     LinearAlgebraDistributionHelpers::concatenate(
-       tmp_dist_pt,*Precomputed_block_distribution_pt[super_block_i]);
-    }
 
    // Flag indicating that the preconditioner blocks has been precomputed.
    Preconditioner_blocks_have_been_precomputed = true;
@@ -2698,6 +2675,42 @@ namespace oomph
     Block_distribution_pt[i] = new
      LinearAlgebraDistribution(comm_pt(),
                                block_dim,distributed);
+   }
+
+  if(Preconditioner_blocks_have_been_precomputed)
+   {
+    // Delete any existing distributions in Precomputed_block_distribution_pt.
+    unsigned n_existing_precom_block_dist 
+      = Precomputed_block_distribution_pt.size();
+    for (unsigned dist_i = 0; dist_i < n_existing_precom_block_dist; dist_i++) 
+    {
+      delete Precomputed_block_distribution_pt[dist_i];
+    }
+
+    // Work out the distributions of the concatenated blocks.
+    unsigned super_block_size = Block_to_block_map.size();
+    Precomputed_block_distribution_pt.resize(super_block_size,0);
+    for (unsigned super_block_i = 0; 
+         super_block_i < super_block_size; super_block_i++)
+     {
+      unsigned sub_block_size = Block_to_block_map[super_block_i].size();
+      Vector<LinearAlgebraDistribution*> tmp_dist_pt(sub_block_size,0);
+      
+      for (unsigned sub_block_i = 0; 
+           sub_block_i < sub_block_size; sub_block_i++) 
+       {
+        tmp_dist_pt[sub_block_i] 
+          = Precomputed_block_pt(
+              Block_to_block_map[super_block_i][sub_block_i],0)
+                ->distribution_pt();
+       }
+  
+      Precomputed_block_distribution_pt[super_block_i] 
+        = new LinearAlgebraDistribution;
+  
+      LinearAlgebraDistributionHelpers::concatenate(
+        tmp_dist_pt,*Precomputed_block_distribution_pt[super_block_i]);
+     }
    }
 
   // create the distribution of the preconditioner matrix
