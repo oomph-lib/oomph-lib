@@ -1894,9 +1894,10 @@ int main(int argc, char *argv[])
       dynamic_cast<NavierStokesSchurComplementPreconditioner*>
       (fsi_preconditioner_pt->navier_stokes_preconditioner_pt());
      
-     // Set solid mesh
+     // Set solid mesh, indicate that the mesh may contain multiple element
+     // types with "true".
      fsi_preconditioner_pt->
-      set_wall_mesh(problem.outflow_impedance_master_mesh_pt());
+      set_wall_mesh(problem.outflow_impedance_master_mesh_pt(),true);
 
      // Set fluid mesh
      fsi_preconditioner_pt->
