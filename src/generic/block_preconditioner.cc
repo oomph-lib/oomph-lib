@@ -131,7 +131,7 @@ namespace oomph
            }
          }
        }
-     }								
+     }
     
     // creates a new compressed column sparse matrix for the pointer for
     // the current block 
@@ -260,22 +260,39 @@ namespace oomph
   else
    {
   DenseMatrix<CRDoubleMatrix*> tmp_block_pt(nblock_in_row,nblock_in_col,0);
-  Vector<LinearAlgebraDistribution*> tmp_distribution_pt(nblock_in_row,0);
+  Vector<LinearAlgebraDistribution*> tmp_row_distribution_pt(nblock_in_row,0);
+  Vector<LinearAlgebraDistribution*> tmp_col_distribution_pt(nblock_in_col,0);
 
   // Fill in the corresponding matrices.
   for (unsigned block_row_i = 0; block_row_i < nblock_in_row; block_row_i++) 
    {
     unsigned prec_block_i = Block_to_block_map[block_i][block_row_i];
-    tmp_distribution_pt[block_row_i] 
-      = Precomputed_block_pt(prec_block_i,0)->distribution_pt();
 
     for (unsigned block_col_i = 0; block_col_i < nblock_in_col; block_col_i++) 
      {
       unsigned prec_block_j = Block_to_block_map[block_j][block_col_i];
-
+    
       tmp_block_pt(block_row_i,block_col_i) 
        = Precomputed_block_pt(prec_block_i, prec_block_j);
      }
+   }
+
+  // Fill in the row distributions, use the first block column.
+  for (unsigned block_row_i = 0; block_row_i < nblock_in_row; block_row_i++) 
+   {
+    tmp_row_distribution_pt[block_row_i] 
+      = tmp_block_pt(block_row_i,0)->distribution_pt();
+   }
+
+  // Fill in the col distributions, use the first block row.
+  // This is a bit more tricky, we need the distributions of the block
+  // rows that these block columns correspond to.
+  for (unsigned block_col_i = 0; block_col_i < nblock_in_col; block_col_i++) 
+   {
+    unsigned prec_row_block_i = Block_to_block_map[block_j][block_col_i];
+
+    tmp_col_distribution_pt[block_col_i] 
+      = Precomputed_block_pt(prec_row_block_i,0)->distribution_pt();
    }
 
   // RAYRAY Need to change this so that it doesn't use new.
@@ -290,9 +307,10 @@ namespace oomph
   // current preconditioners require the block matrix to be in a particular
   // arrangement. We could use concatenate(...) which requires communication.
   CRDoubleMatrixHelpers::concatenate_without_communication(
-    tmp_distribution_pt, tmp_block_pt, *block_pt);
+    tmp_row_distribution_pt,tmp_col_distribution_pt, tmp_block_pt, *block_pt);
    }
  }
+
 
 //=============================================================================
 /// \short Gets block (i,j) from the original matrix and returns it in
@@ -300,8 +318,8 @@ namespace oomph
 //=============================================================================
  template<> 
  void BlockPreconditioner<CRDoubleMatrix>:: 
- get_block(const unsigned& block_i, const unsigned& block_j, 
-	    CRDoubleMatrix*& block_pt) const
+ get_block_from_original_matrix(const unsigned& block_i, const unsigned& block_j, 
+                                CRDoubleMatrix*& block_pt) const
  {
 
 #ifdef PARANOID
@@ -834,7 +852,30 @@ namespace oomph
 #endif 
    }
  }
- 
+
+//=============================================================================
+/// \short Gets block (i,j) from the original matrix and returns it in
+/// block_matrix_pt (Specialisation for CRDoubleMatrix). This function calls
+/// get_precomputed_block(..) if the preconditioner blocks are precomputed
+/// or get_block_from_original_matrix(...) otherwise.
+//=============================================================================
+ template<> 
+ void BlockPreconditioner<CRDoubleMatrix>:: 
+ get_block(const unsigned& block_i, const unsigned& block_j, 
+           CRDoubleMatrix*& block_pt) const
+ {
+  // Assume that if the preconditioner blocks have been precomputed, we
+  // would want to use them.
+  if(Preconditioner_blocks_have_been_precomputed)
+   {
+    get_precomputed_block(block_i,block_j,block_pt);
+   }
+  else
+   {
+    get_block_from_original_matrix(block_i,block_j,block_pt);
+   }
+ } 
+
 
 //=============================================================================
 /// \short test function to check that every element in the block matrix
@@ -896,7 +937,6 @@ namespace oomph
                         OOMPH_EXCEPTION_LOCATION);
    }
  }
-
 
 /*
 //=============================================================================
@@ -1155,6 +1195,5 @@ namespace oomph
                                                p_row_start);   
  }
 */
-
 } // Namespace: oomph
 

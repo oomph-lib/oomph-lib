@@ -3783,36 +3783,6 @@ namespace oomph
    // the number of blocks
    unsigned n_blocks = Block_to_block_map.size();
 
-  // paranoid check that block i is in this block preconditioner
-  if (b >= n_blocks)
-   {
-    std::ostringstream error_message;
-    error_message << "Requested block  vector " << b
-                  << ", however this preconditioner has nblock_types() "
-                  << "= " << nblock_types() << std::endl;
-    throw OomphLibError(error_message.str(),
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
-   }
-  if (!v.built())
-   {
-    std::ostringstream error_message;
-    error_message << "The distribution of the global vector v must be setup.";
-    throw OomphLibError(error_message.str(),
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
-   }
-  if (*(v.distribution_pt()) != *(this->master_distribution_pt()))
-   {
-    std::ostringstream error_message;
-    error_message << "The distribution of the global vector v must match the "
-                  << " specified master_distribution_pt(). \n"
-                  << "i.e. Distribution_pt in the master preconditioner";
-    throw OomphLibError(error_message.str(),
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
-   }
-
    // paranoid check that block i is in this block preconditioner
    if (b >= n_blocks)
     {
@@ -4188,52 +4158,6 @@ namespace oomph
    // the number of blocks
    unsigned n_blocks = this->nblock_types();
 
-  // paranoid check that block i is in this block preconditioner
-  if (b >= n_blocks)
-   {
-    std::ostringstream error_message;
-    error_message << "Requested block  vector " << b
-                  << ", however this preconditioner has nblock_types() "
-                  << "= " << nblock_types() << std::endl;
-    throw OomphLibError(error_message.str(),
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
-   }
-  if (!v.built())
-   {
-    std::ostringstream error_message;
-    error_message << "The distribution of the global vector v must be setup.";
-    throw OomphLibError(error_message.str(),
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
-   }
-  if (*v.distribution_pt() != *this->master_distribution_pt())
-   {
-    std::ostringstream error_message;
-    error_message << "The distribution of the global vector v must match the "
-                  << " specified master_distribution_pt(). \n"
-                  << "i.e. Distribution_pt in the master preconditioner";
-    throw OomphLibError(error_message.str(),
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
-   }
-  if (!w.built())
-   {
-    std::ostringstream error_message;
-    error_message << "The distribution of the block vector w must be setup.";
-    throw OomphLibError(error_message.str(),
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
-   }
-  if (*w.distribution_pt() != *Block_distribution_pt[b])
-   {
-    std::ostringstream error_message;
-    error_message << "The distribution of the block vector w must match the "
-                  << " specified distribution at Block_distribution_pt[b]";
-    throw OomphLibError(error_message.str(),
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
-   }
    // paranoid check that block i is in this block preconditioner
    if (b >= n_blocks)
     {

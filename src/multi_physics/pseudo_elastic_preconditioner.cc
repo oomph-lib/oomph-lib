@@ -200,7 +200,7 @@ namespace oomph
    }
 #endif
 
-  RayNamespace::UseRayCode = false;
+  RayNamespace::UseRayCode = true;
 
   // RAYRAY 
   // Setup the dof_list scheme for block_setup. 
@@ -474,7 +474,7 @@ namespace oomph
        }
 
       s_prec_pt->turn_into_subsidiary_block_preconditioner(this,dof_list);
-     }
+     } // !UseRayCode
     
     // set the subsidiary solve method
     if (Elastic_subsidiary_preconditioner_function_pt != 0)
@@ -1090,8 +1090,6 @@ namespace oomph
        }
      }
    } // setup the subsidiary preconditioner.
-
-  
  } // preconditioner setup
  
  //=============================================================================

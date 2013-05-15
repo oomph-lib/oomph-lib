@@ -3626,7 +3626,7 @@ namespace CRDoubleMatrixHelpers
            = current_block_pt->column_index();
           int* current_block_row_start = current_block_pt->row_start();
 
-          for (unsigned val_i = current_block_row_start[row_i]; 
+          for (int val_i = current_block_row_start[row_i]; 
                val_i < current_block_row_start[row_i+1]; val_i++)
            {
             res_values.push_back(current_block_values[val_i]);
@@ -4414,7 +4414,9 @@ namespace CRDoubleMatrixHelpers
           error_message
            << "The sub matrix (" << block_row_i << "," << block_col_i << ")\n"
            << "requires nrow = " << current_block_nrow 
-           << ", but has nrow = " << subblock_nrow <<".\n";
+           << ", but has nrow = " << subblock_nrow <<".\n"
+           << "Either the row_distribution_pt is incorrect or "
+           << "the sub matrices are incorrect.\n";
           throw OomphLibError(error_message.str(),
                               OOMPH_CURRENT_FUNCTION,
                               OOMPH_EXCEPTION_LOCATION);
@@ -4446,7 +4448,9 @@ namespace CRDoubleMatrixHelpers
           error_message
            << "The sub matrix (" << block_row_i << "," << block_col_i << ")\n"
            << "requires ncol = " << current_block_ncol
-           << ", but has ncol = " << subblock_ncol << ".\n";
+           << ", but has ncol = " << subblock_ncol << ".\n"
+           << "Either the col_distribution_pt is incorrect or "
+           << "the sub matrices are incorrect.\n";
           throw OomphLibError(error_message.str(),
                               OOMPH_CURRENT_FUNCTION,
                               OOMPH_EXCEPTION_LOCATION);
@@ -4655,9 +4659,8 @@ namespace CRDoubleMatrixHelpers
   LinearAlgebraDistribution* res_distribution_pt
    = result_matrix.distribution_pt();
 
-  // nrow_local and nrow (the global row) for the result matrix
+  // nrow_local for the result matrix
   unsigned res_nrow_local = res_distribution_pt->nrow_local();
-  unsigned res_nrow = res_distribution_pt->nrow();
   
   // renamed for readibility.
   unsigned nblock_col = matrix_ncol;
@@ -4755,9 +4758,16 @@ namespace CRDoubleMatrixHelpers
 
      }
    }
+
+  // Get the number of columns of the result matrix.
+  unsigned res_ncol = 0;
+  for (unsigned block_col_i = 0; block_col_i < matrix_ncol; block_col_i++) 
+  {
+    res_ncol += col_distribution_pt[block_col_i]->nrow();
+  }
   
   // Build the result matrix.
-  result_matrix.build_without_copy(res_nrow,res_nnz,
+  result_matrix.build_without_copy(res_ncol,res_nnz,
                                    res_value,
                                    res_column_index,
                                    res_row_start);
