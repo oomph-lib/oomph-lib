@@ -176,10 +176,10 @@ namespace oomph
   // determine the dimension
   Dim = n_dof_types/3;
   
+#ifdef PARANOID
   // Recast Jacobian matrix to CRDoubleMatrix
   CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt());
 
-#ifdef PARANOID
   if (cr_matrix_pt==0)
    {
     std::ostringstream error_message;

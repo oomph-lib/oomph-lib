@@ -3795,9 +3795,6 @@ namespace CRDoubleMatrixHelpers
    }
 #endif
 
-  // Flag to enable timing. This is for debugging 
-  // and/or testing purposes only.
-  bool enable_timing = false;
 
   // Get the number of columns up to each block for offset 
   // in calculating the result column indices.
@@ -3898,6 +3895,11 @@ namespace CRDoubleMatrixHelpers
   else
    {
 #ifdef OOMPH_HAS_MPI
+    
+    // Flag to enable timing. This is for debugging 
+    // and/or testing purposes only.
+    bool enable_timing = false;
+
     // Get the number of processors
     unsigned nproc = comm_pt->nproc();
 
@@ -5033,11 +5035,12 @@ namespace CRDoubleMatrixHelpers
   const DenseMatrix<CRDoubleMatrix*> &matrix_pt,
   CRDoubleMatrix &result_matrix)
  {
+ 
+#ifdef PARANOID
   // The number of block rows and block columns.
   unsigned matrix_nrow = matrix_pt.nrow();
   unsigned matrix_ncol = matrix_pt.ncol();
- 
-#ifdef PARANOID
+
   // Are there matrices to concatenate?
   if(matrix_nrow == 0)
    {

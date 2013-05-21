@@ -242,10 +242,6 @@ namespace oomph
      // the new distribution is distributed
      if (new_dist.distributed())
       {
-       
-       // # of processors
-       int nproc = Comm_pt->nproc();
- 
        First_row = new_dist.first_row_vector();
        Nrow_local = new_dist.nrow_local_vector();
        

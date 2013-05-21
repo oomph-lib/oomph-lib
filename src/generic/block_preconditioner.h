@@ -792,9 +792,10 @@ namespace oomph
   void set_precomputed_blocks(DenseMatrix<CRDoubleMatrix*>&precomputed_block_pt,
                               Vector<Vector<unsigned> > & block_to_block_map)
   {
-   unsigned precomputed_block_nrow = precomputed_block_pt.nrow();
 
 #ifdef PARANOID
+   // How many block rows are there?
+   unsigned precomputed_block_nrow = precomputed_block_pt.nrow();
 
    // Ensure that a square block matrix is given.
    if(precomputed_block_nrow != precomputed_block_pt.ncol())
