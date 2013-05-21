@@ -24,6 +24,8 @@ cp ../*partition.dat .
 # Validation for circular driven cavity (TH and CR problems)
 #-----------------------------------------------------------
 mkdir RESLT
+mkdir RESLT_MESH
+mkdir RESLT_ERROR
 
 # Wait for a bit to allow parallel file systems to realise
 # the existence of the new directory

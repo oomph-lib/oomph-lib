@@ -26,6 +26,7 @@ cp ../*partition.dat .
 echo "Running 3D entry flow (TH & CR) validation "
 mkdir RESLT_TH
 mkdir RESLT_CR
+mkdir RESLT_MESH
 
 # Wait for a bit to allow parallel file systems to realise
 # the existence of the new directory

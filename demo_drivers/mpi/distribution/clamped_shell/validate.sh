@@ -19,6 +19,7 @@ cd Validation
 
 mkdir RESLT
 cd RESLT
+mkdir RESLT_MESH
 
 echo "Running clamped_shell with arclength continuation validation  "
 $MPI_RUN_COMMAND ../../clamped_shell_with_arclength_cont > ../OUTPUT_clamped_shell_with_arclength_cont

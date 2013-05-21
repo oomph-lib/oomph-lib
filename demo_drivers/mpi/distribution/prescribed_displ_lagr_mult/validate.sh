@@ -75,6 +75,7 @@ mv RESLT RESLT_prescribed_displ_lagr_mult
 # Validation for testing resizing halo nodes
 #-------------------------------------------
 mkdir RESLT_resize_test
+mkdir RESLT
 
 echo "Running test for resizing halo nodes "
 $MPI_RUN_COMMAND ../resize_hanging_node_tester --validation > OUTPUT_resize_hanging_node_tester

@@ -26,6 +26,9 @@ cp ../*partition.dat .
 
 echo "Running fish poisson validation "
 mkdir RESLT_select_refine
+mkdir RESLT_select_mesh
+mkdir RESLT_adapt_mesh
+mkdir RESLT_incr_mesh
 mkdir RESLT_incremental2
 mkdir RESLT_fully_automatic
 

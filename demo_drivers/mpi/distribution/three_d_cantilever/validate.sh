@@ -24,6 +24,7 @@ cp ../*partition.dat .
 #-------------------------------------------------
 
 echo "Running 3D cantilever problem "
+mkdir RESLT_MESH
 mkdir RESLT_refine0
 mkdir RESLT_refine1
 mkdir RESLT_refine2

@@ -62,6 +62,8 @@ namespace ProblemParameters
  /// Get flux applied along boundary x=0.
  void flux(const double& time, const Vector<double>& x, double& flux)
  {
+  oomph_info << "Evaluating flux at " << x[0] << " " << x[1] << std::endl;
+
   flux = 20.0*sin(2.0*4.0*MathematicalConstants::Pi*time);
  }
  

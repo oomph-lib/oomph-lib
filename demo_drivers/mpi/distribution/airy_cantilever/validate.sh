@@ -25,6 +25,7 @@ cp ../*partition.dat .
 #------------------------------------------------------
 
 echo "Running airy cantilever validation "
+mkdir RESLT_MESH
 mkdir RESLT_refine0
 mkdir RESLT_refine1
 mkdir RESLT_refine2

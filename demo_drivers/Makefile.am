@@ -7,6 +7,7 @@
 SUBDIRS = \
 poisson \
 unsteady_heat \
+heat_transfer_and_melting \
 advection_diffusion \
 helmholtz \
 time_harmonic_linear_elasticity \

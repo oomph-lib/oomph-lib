@@ -148,6 +148,8 @@ public:
    ALE_is_disabled=false;
   }
 
+ /// Compute norm of fe solution
+ void compute_norm(double& norm);
 
  /// Output with default number of plot points
  void output(std::ostream &outfile) 

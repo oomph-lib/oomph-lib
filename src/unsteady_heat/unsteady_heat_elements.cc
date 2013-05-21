@@ -215,6 +215,57 @@ fill_in_generic_residual_contribution_ust_heat(Vector<double> &residuals,
 
 
 
+//======================================================================
+ /// Compute norm of fe solution
+//======================================================================
+template <unsigned DIM>
+void UnsteadyHeatEquations<DIM>::compute_norm(double& norm)
+{ 
+ 
+ // Initialise
+ norm=0.0;
+ 
+ //Vector of local coordinates
+ Vector<double> s(DIM);
+ 
+ // Vector for coordintes
+ Vector<double> x(DIM);
+ 
+ //Find out how many nodes there are in the element
+  unsigned n_node = nnode();
+  
+  Shape psi(n_node);
+  
+  //Set the value of n_intpt
+  unsigned n_intpt = integral_pt()->nweight();
+  
+  //Loop over the integration points
+  for(unsigned ipt=0;ipt<n_intpt;ipt++)
+   {
+    
+    //Assign values of s
+    for(unsigned i=0;i<DIM;i++)
+     {
+      s[i] = integral_pt()->knot(ipt,i);
+     }
+    
+    //Get the integral weight
+    double w = integral_pt()->weight(ipt);
+    
+    // Get jacobian of mapping
+    double J=J_eulerian(s);
+    
+    //Premultiply the weights and the Jacobian
+    double W = w*J;
+    
+    // Get FE function value
+    double u=interpolated_u_ust_heat(s);
+    
+    // Add to  norm
+    norm+=u*u*W;
+    
+   }
+ }
 
 //======================================================================
 /// Self-test:  Return 0 for OK
