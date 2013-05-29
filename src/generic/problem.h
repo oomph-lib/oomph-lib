@@ -699,8 +699,11 @@ namespace oomph
  /// Minimum desired value of arc-length
  double Minimum_ds;
 
- /// Boolean to control bifurcation detection
+ /// Boolean to control bifurcation detection via determinant of Jacobian
  bool Bifurcation_detection;
+
+ /// Boolean to control wheter bisection is used to located bifurcation
+ bool Bisect_to_find_bifurcation;
 
  /// Boolean to indicate whether a sign change has occured in the Jacobian
  bool First_jacobian_sign_change;

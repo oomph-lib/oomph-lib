@@ -292,7 +292,7 @@ void TElement<1,NNODE_1D>::build_face_element(const int &face_index,
    //Set the pointer to the function that determines the bulk coordinates
    //in the face element
    face_element_pt->face_to_bulk_coordinate_fct_pt() = 
-    &TElement1FaceToBulkCoordinates::face0;
+    &TElement1FaceToBulkCoordinates::face1;
 
    //Set the pointer to the function that determines the mapping of
    //derivatives

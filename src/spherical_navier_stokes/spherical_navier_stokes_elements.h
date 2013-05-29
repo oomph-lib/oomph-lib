@@ -55,7 +55,8 @@ namespace oomph
 /// in FSI problems, by deriving it from the FSIFluidElement base
 /// class. 
 //======================================================================
- class SphericalNavierStokesEquations : public virtual FSIFluidElement
+ class SphericalNavierStokesEquations : public virtual FSIFluidElement,
+    public virtual NavierStokesElementWithDiagonalMassMatrices
 {
 
   public:
@@ -423,6 +424,17 @@ public:
    // traction onto the adjacent wall instead!
    get_traction(s,N,load);
   }
+
+ /// \short Compute the diagonal of the velocity/pressure mass matrices.
+ /// If which one=0, both are computed, otherwise only the pressure 
+ /// (which_one=1) or the velocity mass matrix (which_one=2 -- the 
+ /// LSC version of the preconditioner only needs that one)
+ /// NOTE: pressure versions isn't implemented yet because this
+ ///       element has never been tried with Fp preconditoner.
+ void get_pressure_and_velocity_mass_matrix_diagonal(
+  Vector<double> &press_mass_diag, Vector<double> &veloc_mass_diag,
+  const unsigned& which_one=0);
+
 
  /// \short Output function: x,y,[z],u,v,[w],p
  /// in tecplot format. Default number of plot points

@@ -53,6 +53,107 @@ double SphericalNavierStokesEquations::Default_Physical_Ratio_Value = 1.0;
 Vector<double> SphericalNavierStokesEquations::Default_Gravity_vector(3,0.0);
 
 
+//================================================================
+/// Compute the diagonal of the velocity/pressure mass matrices.
+/// If which one=0, both are computed, otherwise only the pressure 
+/// (which_one=1) or the velocity mass matrix (which_one=2 -- the 
+/// LSC version of the preconditioner only needs that one)
+/// NOTE: pressure versions isn't implemented yet because this
+///       element has never been tried with Fp preconditoner.
+//================================================================
+ void SphericalNavierStokesEquations::
+ get_pressure_and_velocity_mass_matrix_diagonal(
+  Vector<double> &press_mass_diag, Vector<double> &veloc_mass_diag,
+  const unsigned& which_one)
+ {
+
+#ifdef PARANOID
+  if ((which_one==0)||(which_one==1)) 
+   {
+    throw OomphLibError(
+     "Computation of diagonal of pressure mass matrix is not impmented yet.\n",
+     OOMPH_CURRENT_FUNCTION,
+     OOMPH_EXCEPTION_LOCATION);
+   }
+#endif  
+
+  // Resize and initialise
+  veloc_mass_diag.assign(ndof(), 0.0);
+  
+  // find out how many nodes there are
+  const unsigned n_node = nnode();
+  
+  // find number of coordinates
+  const unsigned n_value = 3;
+  
+  // find the indices at which the local velocities are stored
+  Vector<unsigned> u_nodal_index(n_value);
+  for(unsigned i=0; i<n_value; i++)
+   {
+    u_nodal_index[i] = this->u_index_spherical_nst(i);
+   }
+  
+  //Set up memory for test functions
+  Shape test(n_node);
+  
+  //Number of integration points
+  unsigned n_intpt = integral_pt()->nweight();
+  
+  //Integer to store the local equations no
+  int local_eqn=0;
+  
+  //Loop over the integration points
+  for(unsigned ipt=0; ipt<n_intpt; ipt++)
+   {
+    
+    //Get the integral weight
+    double w = integral_pt()->weight(ipt);
+
+    //Get determinant of Jacobian of the mapping
+    double J = J_eulerian_at_knot(ipt);
+    
+    //Premultiply weights and Jacobian
+    double W = w*J;
+
+    //Get the velocity test functions - there is no explicit 
+    // function to give the test function so use shape
+    shape_at_knot(ipt,test);
+    
+    //Need to get the position to sort out the jacobian properly
+    double r = 0.0;
+    double theta = 0.0;
+    for(unsigned l=0;l<n_node;l++)
+     {
+      r += this->nodal_position(l,0)*test(l);
+      theta += this->nodal_position(l,1)*test(l);
+     }
+
+    //Multiply by the geometric factor
+    W *= r*r*sin(theta);
+
+    //Loop over the veclocity test functions
+    for(unsigned l=0; l<n_node; l++)
+     {
+      //Loop over the velocity components
+      for(unsigned i=0; i<n_value; i++)
+       {
+        local_eqn = nodal_local_eqn(l,u_nodal_index[i]);
+
+        //If not a boundary condition
+        if(local_eqn >= 0)
+         {
+          //Add the contribution
+          veloc_mass_diag[local_eqn] += test[l]*test[l] * W;
+         } //End of if not boundary condition statement
+       } //End of loop over dimension
+     } //End of loop over test functions
+
+   }
+ }
+
+
+
+
 //======================================================================
 /// Validate against exact velocity solution at given time.
 /// Solution is provided via function pointer.

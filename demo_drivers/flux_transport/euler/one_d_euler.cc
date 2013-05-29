@@ -247,7 +247,7 @@ public:
            face_element_pt = 
             dynamic_cast<ELEMENT*>(Element_pt[e-1])->face_element_pt(1);
           }
-         //Otherwie make periodic
+         //Otherwie just set the face to be the face of the first element
          else
           {
            face_element_pt = 

@@ -639,6 +639,9 @@ void ShellProblem<ELEMENT>::solve()
  //Set the proportion of the arc length
  Desired_proportion_of_arc_length = 0.2;
 
+ //Check for any bifurcations using the sign of the determinant of the Jacobian
+ Bifurcation_detection = true;
+
  //Set an initial value for the step size
  double ds = -0.5;
 

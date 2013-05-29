@@ -94,6 +94,7 @@ namespace oomph
   Parameter_derivative(1.0), Parameter_current(0.0),
   Ds_current(0.0), Desired_newton_iterations_ds(5),
   Minimum_ds(1.0e-10), Bifurcation_detection(false),
+  Bisect_to_find_bifurcation(false),
   First_jacobian_sign_change(false),Arc_length_step_taken(false),
   Use_finite_differences_for_continuation_derivatives(false),
 #ifdef OOMPH_HAS_MPI
@@ -9750,69 +9751,73 @@ double Problem::arc_length_step_solve(double* const &parameter_pt,
   {
 
    //--------------------CHECK FOR POTENTIAL BIFURCATIONS-------------
-   //If the sign of the jacobian is zero issue a warning
-   if(Sign_of_jacobian == 0)
+   if(Bifurcation_detection)
     {
-     std::string error_message =
-      "The sign of the jacobian is zero after a linear solve\n";
-     error_message +=
-      "Either the matrix is singular (unlikely),\n";
-     error_message +=
-      "or the linear solver cannot compute the determinant of the matrix;\n";
-     error_message += "e.g. an iterative linear solver.\n";
-     error_message +=
-      "If the latter, bifurcation detection must be via an eigensolver\n";
-     OomphLibWarning(error_message,
-                     "Problem::arc_length_step_solve",
-                     OOMPH_EXCEPTION_LOCATION);
-    }
-   //If this is the first step, we cannot rely on the previous value
-   //of the jacobian so set the previous sign to the present sign
-   if(!Arc_length_step_taken) {previous_sign = Sign_of_jacobian;}
-   //If we have detected a sign change in the last converged Jacobian,
-   //it must be a turning point or bifurcation
-   if(Sign_of_jacobian != previous_sign)
-    {
-
-     //There has been, at least, one sign change
-     First_jacobian_sign_change = true;
-
-     //The sign has changed this time
-     SIGN_CHANGE=true;
-
-     //Calculate the dot product of the approximate null vector
-     //of the Jacobian matrix ((badly) approximated by z)
-     //and the vectors of derivatives of the residuals wrt the global parameter
-     //If this is small it is a bifurcation rather than a turning point.
-     //Get the derivative wrt global parameter
-     //DoubleVector dparam;
-     //get_derivative_wrt_global_parameter(parameter_pt,dparam);
-     //Calculate the dot product
-     //double dot=0.0;
-     //for(unsigned long n=0;n<n_dofs;++n) {dot += dparam[n]*z[n];}
-     //z.dot(dparam);
-
-     //Write the output message
-     std::ostringstream message;
-     message << "-----------------------------------------------------------";
-     message << std::endl << "SIGN CHANGE IN DETERMINANT OF JACOBIAN: "
-             << std::endl;
-     message << "BIFURCATION OR TURNING POINT DETECTED BETWEEN "
-             << Parameter_current << " AND " << *parameter_pt << std::endl;
-     //message << "APPROXIMATE DOT PRODUCT : " << dot << "," << std::endl;
-     //message << "IF CLOSE TO ZERO WE HAVE A BIFURCATION; ";
-     //message << "OTHERWISE A TURNING POINT" << std::endl;
-     message << "-----------------------------------------------------------"
-             << std::endl;
-
-     //Write the message to standard output
-     oomph_info << message.str();
-
-     //Open the information file for appending
-     std::ofstream bifurcation_info("bifurcation_info",std::ios_base::app);
-     //Write the message to the file
-     bifurcation_info << message.str();
-     bifurcation_info.close();
+     //If the sign of the jacobian is zero issue a warning
+     if(Sign_of_jacobian == 0)
+      {
+       std::string error_message =
+        "The sign of the jacobian is zero after a linear solve\n";
+       error_message +=
+        "Either the matrix is singular (unlikely),\n";
+       error_message +=
+        "or the linear solver cannot compute the determinant of the matrix;\n";
+       error_message += "e.g. an iterative linear solver.\n";
+       error_message +=
+        "If the latter, bifurcation detection must be via an eigensolver\n";
+       OomphLibWarning(error_message,
+                       "Problem::arc_length_step_solve",
+                       OOMPH_EXCEPTION_LOCATION);
+      }
+     //If this is the first step, we cannot rely on the previous value
+     //of the jacobian so set the previous sign to the present sign
+     if(!Arc_length_step_taken) {previous_sign = Sign_of_jacobian;}
+     //If we have detected a sign change in the last converged Jacobian,
+     //it must be a turning point or bifurcation
+     if(Sign_of_jacobian != previous_sign)
+      {
+       
+       //There has been, at least, one sign change
+       First_jacobian_sign_change = true;
+       
+       //The sign has changed this time
+       SIGN_CHANGE=true;
+       
+       //Calculate the dot product of the approximate null vector
+       //of the Jacobian matrix ((badly) approximated by z)
+       //and the vectors of derivatives of the residuals wrt the 
+       //global parameter
+       //If this is small it is a bifurcation rather than a turning point.
+       //Get the derivative wrt global parameter
+       //DoubleVector dparam;
+       //get_derivative_wrt_global_parameter(parameter_pt,dparam);
+       //Calculate the dot product
+       //double dot=0.0;
+       //for(unsigned long n=0;n<n_dofs;++n) {dot += dparam[n]*z[n];}
+       //z.dot(dparam);
+       
+       //Write the output message
+       std::ostringstream message;
+       message << "-----------------------------------------------------------";
+       message << std::endl << "SIGN CHANGE IN DETERMINANT OF JACOBIAN: "
+               << std::endl;
+       message << "BIFURCATION OR TURNING POINT DETECTED BETWEEN "
+               << Parameter_current << " AND " << *parameter_pt << std::endl;
+       //message << "APPROXIMATE DOT PRODUCT : " << dot << "," << std::endl;
+       //message << "IF CLOSE TO ZERO WE HAVE A BIFURCATION; ";
+       //message << "OTHERWISE A TURNING POINT" << std::endl;
+       message << "-----------------------------------------------------------"
+               << std::endl;
+       
+       //Write the message to standard output
+       oomph_info << message.str();
+       
+       //Open the information file for appending
+       std::ofstream bifurcation_info("bifurcation_info",std::ios_base::app);
+       //Write the message to the file
+       bifurcation_info << message.str();
+       bifurcation_info.close();
+      }
     }
 
    //Calculate the derivatives required for the next stage of continuation
@@ -9871,7 +9876,8 @@ double Problem::arc_length_step_solve(double* const &parameter_pt,
 
  //If we are trying to find a bifurcation and the first sign change
  //has occured, use bisection
- if((Bifurcation_detection) && (First_jacobian_sign_change))
+ if((Bifurcation_detection) && 
+    (Bisect_to_find_bifurcation) && (First_jacobian_sign_change))
   {
    //If there has been a sign change we need to half the step size
    //and reverse the direction
