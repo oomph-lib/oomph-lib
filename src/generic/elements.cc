@@ -5022,16 +5022,6 @@ void FaceElement::continuous_tangent_and_outer_unit_normal
                          OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
-     
-   // Check that the general direction is not null
-   if(Tangent_direction_pt == 0)
-    {
-     std::ostringstream error_stream;
-     error_stream << "The Tangent_direction_pt is null.\n";
-     throw OomphLibError(error_stream.str(),
-                         OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
-    }
 #endif
 
    //Find the number of nodes in the element
@@ -5072,71 +5062,135 @@ void FaceElement::continuous_tangent_and_outer_unit_normal
       }
     }
 
-   //We now take the cross product of the two normal vectors
+   // We now take the cross product of the two normal vectors
    VectorHelpers::cross(interpolated_dxds[0],interpolated_dxds[1],
                         unit_normal);
 
-   //Finally normalise unit normal
+   // Finally normalise unit normal
    double normal_length = VectorHelpers::magnitude(unit_normal);
 
    for(unsigned i=0;i<spatial_dim;i++) 
     {unit_normal[i] *= Normal_sign/normal_length;}
 
-   // Project the Tangent direction onto the surface.
-   // Project Tangent_direction_pt onto the plane P defined by
-   // T1 and T2.
-   // proj_P(D) = proj_T1(D) + proj_2(D), where D is Tangent_direction_pt,
-   // recall that proj_u(v) = (u.v)/(u.u) * u
+   // Next we create the conintuous tangent vectors!
+   if(Tangent_direction_pt != 0)
+    // There is a general direction that the first tangent vector should follow.
+    {
 
-   // Get the direction vector. The vector is NOT copied! :)
-   Vector<double> &direction_vector = *Tangent_direction_pt;
+     // Project the Tangent direction vector onto the surface.
+     // Project Tangent_direction_pt D onto the plane P defined by
+     // T1 and T2:
+     // proj_P(D) = proj_T1(D) + proj_T2(D), where D is Tangent_direction_pt,
+     // recall that proj_u(v) = (u.v)/(u.u) * u
+
+     // Get the direction vector. The vector is NOT copied! :)
+     Vector<double> &direction_vector = *Tangent_direction_pt;
 
 #ifdef PARANOID
-   // Check that the angle between the direction vector and the normal
-   // is not less than 10 degrees
-   double pi=4.0*std::atan(1.0);
+     // Check that the angle between the direction vector and the normal
+     // is not less than 10 degrees
+     double pi=4.0*std::atan(1.0);
 
-   if(VectorHelpers::angle(direction_vector,unit_normal) < 
-      (10.0 * pi/180.0))
-    {
-     std::ostringstream err_stream;
-     err_stream << "The angle between the unit normal and the \n"
-                << "direction vector is less than 10 degrees.";
-     throw OomphLibError(err_stream.str(),
-                         OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
-    }
+     if(VectorHelpers::angle(direction_vector,unit_normal) < 
+        (10.0 * pi/180.0))
+      {
+       std::ostringstream err_stream;
+       err_stream << "The angle between the unit normal and the \n"
+                  << "direction vector is less than 10 degrees.";
+       throw OomphLibError(err_stream.str(),
+                           OOMPH_CURRENT_FUNCTION,
+                           OOMPH_EXCEPTION_LOCATION);
+      }
 #endif
 
-   // Calculate the two scalings, (u.v) / (u.u)
-   double t1_scaling 
-    = VectorHelpers::dot(interpolated_dxds[0],direction_vector) / 
-    VectorHelpers::dot(interpolated_dxds[0],interpolated_dxds[0]);
+     // Calculate the two scalings, (u.v) / (u.u)
+     double t1_scaling 
+      = VectorHelpers::dot(interpolated_dxds[0],direction_vector) / 
+      VectorHelpers::dot(interpolated_dxds[0],interpolated_dxds[0]);
 
-   double t2_scaling 
-    = VectorHelpers::dot(interpolated_dxds[1],direction_vector) / 
-    VectorHelpers::dot(interpolated_dxds[1],interpolated_dxds[1]);
+     double t2_scaling 
+      = VectorHelpers::dot(interpolated_dxds[1],direction_vector) / 
+      VectorHelpers::dot(interpolated_dxds[1],interpolated_dxds[1]);
 
-   // Finish off the projection.
-   tang_vec[0][0] = t1_scaling*interpolated_dxds[0][0] 
-    + t2_scaling*interpolated_dxds[1][0];
-   tang_vec[0][1] = t1_scaling*interpolated_dxds[0][1] 
-    + t2_scaling*interpolated_dxds[1][1];
-   tang_vec[0][2] = t1_scaling*interpolated_dxds[0][2] 
-    + t2_scaling*interpolated_dxds[1][2];
+     // Finish off the projection.
+     tang_vec[0][0] = t1_scaling*interpolated_dxds[0][0] 
+      + t2_scaling*interpolated_dxds[1][0];
+     tang_vec[0][1] = t1_scaling*interpolated_dxds[0][1] 
+      + t2_scaling*interpolated_dxds[1][1];
+     tang_vec[0][2] = t1_scaling*interpolated_dxds[0][2] 
+      + t2_scaling*interpolated_dxds[1][2];
 
-   // The second tangent vector is the cross product of
-   // tang_vec[0] and the normal vector N.
-   VectorHelpers::cross(tang_vec[0],unit_normal,tang_vec[1]);
+     // The second tangent vector is the cross product of
+     // tang_vec[0] and the normal vector N.
+     VectorHelpers::cross(tang_vec[0],unit_normal,tang_vec[1]);
 
-   // Normalise the tangent vectors 
-   for(unsigned vec_i=0; vec_i<2; vec_i++)
+     // Normalise the tangent vectors 
+     for(unsigned vec_i=0; vec_i<2; vec_i++)
+      {
+       // Get the length...
+       double tang_length = VectorHelpers::magnitude(tang_vec[vec_i]);
+
+       for(unsigned dim_i=0;dim_i<spatial_dim;dim_i++) 
+        {tang_vec[vec_i][dim_i] /= tang_length;}
+      }
+    }
+   else
+    // A direction for the first tangent vector is not supplied, we do our best
+    // to keep it continuous. But if the normal vector is aligned with the 
+    // z axis, then the tangent vector may "flip", even within elements.
+    // This is because we check this by comparing doubles.
+    // The code is copied from impose_parallel_outflow_element.h,
+    // NO modification is done except for a few variable name changes.
     {
-     // Get the length...
-     double tang_length = VectorHelpers::magnitude(tang_vec[vec_i]);
+     double a,b,c;
+     a=unit_normal[0];
+     b=unit_normal[1];
+     c=unit_normal[2]; 
 
-     for(unsigned dim_i=0;dim_i<spatial_dim;dim_i++) 
-      {tang_vec[vec_i][dim_i] /= tang_length;}
+     if(a!=0.0 || b!=0.0)
+      {
+       double a_sq=a*a;
+       double b_sq=b*b;
+       double c_sq=c*c;
+       
+       tang_vec[0][0]=-b/sqrt(a_sq+b_sq);
+       tang_vec[0][1]= a/sqrt(a_sq+b_sq);
+       tang_vec[0][2]=0;
+	  
+       double z=(a_sq +b_sq)
+        /sqrt(a_sq*c_sq +b_sq*c_sq +(a_sq +b_sq)*(a_sq +b_sq)) ;
+	
+       tang_vec[1][0]=-(a*c*z)/(a_sq + b_sq) ;
+       tang_vec[1][1]= -(b*c*z)/(a_sq + b_sq);
+       tang_vec[1][2]= z;
+       // NB : we didn't use the fact that N is normalized,
+       // that's why we have these insimplified formulas
+      }
+     else if (c!=0.0)
+      {
+       std::ostringstream warning_stream;
+       warning_stream << "I have detected that your normal vector is [0,0,1].\n"
+                      << "Since this function compares against 0.0, you may\n"
+                      << "get non-continuous tangent vectors.";
+       OomphLibWarning(warning_stream.str(),
+                       OOMPH_CURRENT_FUNCTION,
+                       OOMPH_EXCEPTION_LOCATION);
+
+       tang_vec[0][0]= 1.0;
+       tang_vec[0][1]= 0.0;	  
+       tang_vec[0][2]= 0.0;
+	  
+       tang_vec[1][0]=0.0;
+       tang_vec[1][1]= 1.0;	  
+       tang_vec[1][2]= 0.0;
+      }
+     else
+      {
+       throw 
+        OomphLibError("You have a zero normal vector!! ",
+                      OOMPH_CURRENT_FUNCTION,
+                      OOMPH_EXCEPTION_LOCATION);
+      }
     }
 
   }

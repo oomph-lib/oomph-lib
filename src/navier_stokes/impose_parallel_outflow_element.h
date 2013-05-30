@@ -207,20 +207,7 @@ namespace oomph
           }
         }
        
-       // If the Tangent_direction_pt is set, we want to create tangents
-       // in this direction
-       if(this->tangent_direction_pt() == 0)
-        {
-         // compute the normal vector
-         outer_unit_normal(ipt,norm_vec);
-
-         // compute the tangantial vectors
-         get_tang_vec(dim_el,norm_vec,tang_vec );
-        }
-       else
-        {
-         this->continuous_tangent_and_outer_unit_normal(ipt,tang_vec,norm_vec);
-        }
+       this->continuous_tangent_and_outer_unit_normal(ipt,tang_vec,norm_vec);
 
        // Assemble residuals and jacobian
 
@@ -320,70 +307,81 @@ namespace oomph
         }
       }
     }
-   
-   /// function to compute the tangantial vectors from the normal vector
-   void get_tang_vec(const unsigned &dim_el, const Vector<double> &N,
-                     Vector<Vector<double> > &T)
-    {
-     T.resize(dim_el,Vector<double>(dim_el+1));
-     double a,b,c;
-     switch(dim_el)
-      {
-      case 1:
-       T[0][0]=-N[1];
-       T[0][1]=N[0];
-       break;
-      case 2:
-       a=N[0];
-       b=N[1];
-       c=N[2]; 
-      
-       if(a!=0.0 || b!=0.0)
-       	{
-         double a_sq=a*a;
-         double b_sq=b*b;
-         double c_sq=c*c;
-         
-         T[0][0]=-b/sqrt(a_sq+b_sq);
-         T[0][1]= a/sqrt(a_sq+b_sq);
-         T[0][2]=0;
-	  
-         double z=(a_sq +b_sq)
-          /sqrt(a_sq*c_sq +b_sq*c_sq +(a_sq +b_sq)*(a_sq +b_sq)) ;
-	  
-         T[1][0]=-(a*c*z)/(a_sq + b_sq) ;
-         T[1][1]= -(b*c*z)/(a_sq + b_sq);
-         T[1][2]= z;
-         // NB : we didn't use the fact that N is normalized,
-         // that's why we have these insimplified formulas
-        }
-       else if (c!=0.0)
-	{
-         T[0][0]=1.0;
-         T[0][1]= 0.0;	  
-         T[0][2]= 0.0;
-	  
-         T[1][0]=0.0;
-         T[1][1]= 1.0;	  
-         T[1][2]= 0.0;
-	}
-       else
-	{
-         throw 
-          OomphLibError("You have a zero normal vector!! ",
-                        "ImposeParallelOutflowElement::get_tang_vec",
-                        OOMPH_EXCEPTION_LOCATION);
-	}
-       break;
 
-      default:
-       throw 
-        OomphLibError(
-         " unexcpected lagrange elements's dimension ",
-         "ImposeParallelOutflowElement::get_tang_vec",
-         OOMPH_EXCEPTION_LOCATION);
-      }
-    }
+// RAYRAY This has been moved into continuous_tangent_and_outer_unit_normal()
+// in elements.cc / h   
+//
+//   /// function to compute the tangantial vectors from the normal vector
+//   void get_tang_vec(const unsigned &dim_el, const Vector<double> &N,
+//                     Vector<Vector<double> > &T)
+//    {
+//     T.resize(dim_el,Vector<double>(dim_el+1));
+//     double a,b,c;
+//     switch(dim_el)
+//      {
+//      case 1:
+//       T[0][0]=-N[1];
+//       T[0][1]=N[0];
+//       break;
+//      case 2:
+//       a=N[0];
+//       b=N[1];
+//       c=N[2]; 
+//      
+//       if(a!=0.0 || b!=0.0)
+//       	{
+//         double a_sq=a*a;
+//         double b_sq=b*b;
+//         double c_sq=c*c;
+//         
+//         T[0][0]=-b/sqrt(a_sq+b_sq);
+//         T[0][1]= a/sqrt(a_sq+b_sq);
+//         T[0][2]=0;
+//	  
+//         double z=(a_sq +b_sq)
+//          /sqrt(a_sq*c_sq +b_sq*c_sq +(a_sq +b_sq)*(a_sq +b_sq)) ;
+//	  
+//         T[1][0]=-(a*c*z)/(a_sq + b_sq) ;
+//         T[1][1]= -(b*c*z)/(a_sq + b_sq);
+//         T[1][2]= z;
+//         // NB : we didn't use the fact that N is normalized,
+//         // that's why we have these insimplified formulas
+//        }
+//       else if (c!=0.0)
+//	{
+//      std::ostringstream warning_stream;
+//      warning_stream << "I have detected that your normal vector is [0,0,1].\n"
+//                     << "Since this function compares against 0, you may\n"
+//                     << "get non-continuous tangent vectors.";
+//      OomphLibWarning(warning_stream.str(),
+//                      OOMPH_CURRENT_FUNCTION,
+//                      OOMPH_EXCEPTION_LOCATION);
+//
+//         T[0][0]=1.0;
+//         T[0][1]= 0.0;	  
+//         T[0][2]= 0.0;
+//	  
+//         T[1][0]=0.0;
+//         T[1][1]= 1.0;	  
+//         T[1][2]= 0.0;
+//	}
+//       else
+//	{
+//         throw 
+//          OomphLibError("You have a zero normal vector!! ",
+//                        OOMPH_CURRENT_FUNCTION,
+//                        OOMPH_EXCEPTION_LOCATION);
+//	}
+//       break;
+//
+//      default:
+//       throw 
+//        OomphLibError(
+//         " unexcpected lagrange elements's dimension ",
+//         "ImposeParallelOutflowElement::get_tang_vec",
+//         OOMPH_EXCEPTION_LOCATION);
+//      }
+//    }
   };
 
 }
