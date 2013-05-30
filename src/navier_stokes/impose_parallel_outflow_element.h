@@ -206,12 +206,21 @@ namespace oomph
            lambda[l]+=nod_pt->value(first_index+l) * psi(j);
           }
         }
+       
+       // If the Tangent_direction_pt is set, we want to create tangents
+       // in this direction
+       if(this->tangent_direction_pt() == 0)
+        {
+         // compute the normal vector
+         outer_unit_normal(ipt,norm_vec);
 
-       // compute the normal vector
-       outer_unit_normal(ipt,norm_vec);
-
-       // compute the tangantial vectors
-       get_tang_vec(dim_el,norm_vec,tang_vec );
+         // compute the tangantial vectors
+         get_tang_vec(dim_el,norm_vec,tang_vec );
+        }
+       else
+        {
+         this->continuous_tangent_and_outer_unit_normal(ipt,tang_vec,norm_vec);
+        }
 
        // Assemble residuals and jacobian
 

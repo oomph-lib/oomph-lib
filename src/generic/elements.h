@@ -3584,6 +3584,13 @@ class FaceElement: public virtual FiniteElement
  // face!
  Vector<unsigned> Nbulk_value;
 
+ /// \short A general direction pointer for the tangent vectors.
+ /// This is used in the function continuous_tangent_and_outer_unit_normal()
+ /// for creating continuous tangent vectors in spatial dimensions. 
+ /// The general direction is projected on to the surface. This technique is
+ /// not required in two spatial dimensions.
+ Vector<double>* Tangent_direction_pt;
+
  /// \short Helper function adding additional values for the unknowns
  /// associated with the FaceElement. This function also sets the map 
  /// containing the position of the first entry of this face element's
@@ -3650,8 +3657,7 @@ class FaceElement: public virtual FiniteElement
  /// Constructor: Initialise all appropriate member data
  FaceElement() : Face_to_bulk_coordinate_fct_pt(0), 
   Bulk_coordinate_derivatives_fct_pt(0), Normal_sign(0), Face_index(0),
-  Boundary_number_in_bulk_mesh(0),
-  Bulk_element_pt(0)
+  Boundary_number_in_bulk_mesh(0), Bulk_element_pt(0), Tangent_direction_pt(0)
   {
    //Check whether things have been set
 #ifdef PARANOID
@@ -3821,6 +3827,79 @@ class FaceElement: public virtual FiniteElement
  /// in the element) (const version)
  int face_index() const {return Face_index;}
 
+ /// \short Public access function for the tangent direction pointer.
+ const Vector<double> * tangent_direction_pt() const
+ {
+  return Tangent_direction_pt;
+ }
+
+ /// \short Set the tangent direction vector.
+ void set_tangent_direction(Vector<double>* tangent_direction_pt)
+ {
+#ifdef PARANOID
+  // Check that tangent_direction_pt is not null.
+  if(tangent_direction_pt == 0)
+   {
+    std::ostringstream error_message;
+    error_message
+     << "The pointer tangent_direction_pt is null.\n";
+    throw OomphLibError(error_message.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+
+  // Check that the vector is the correct size.
+  // The size of the tangent vector.
+  unsigned tang_dir_size = tangent_direction_pt->size();
+  unsigned spatial_dimension = this->nodal_dimension();
+  if(tang_dir_size != spatial_dimension)
+   {
+    std::ostringstream error_message;
+    error_message
+     << "The tangent direction vector has size " << tang_dir_size << "\n"
+     << "but this element has spatial dimension " << spatial_dimension 
+     << ".\n";
+    throw OomphLibError(error_message.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+
+  if(tang_dir_size == 2)
+   {
+    std::ostringstream warning_message;
+    warning_message
+     << "The spatial dimension is " << spatial_dimension << ".\n"
+     << "I do not need a tangent direction vector to create \n"
+     << "continuous tangent vectors in two spatial dimensions.";
+    OomphLibWarning(warning_message.str(),
+                    OOMPH_CURRENT_FUNCTION,
+                    OOMPH_EXCEPTION_LOCATION);
+
+   }
+#endif
+
+  // Set the direction vector for the tangent.
+  Tangent_direction_pt = tangent_direction_pt;
+ }
+
+ /// \short Compute the tangent vector(s) and the outer unit normal
+ /// vector at the specified local coordinate.
+ /// In two spatial dimensions, a "tangent direction" is not required.
+ /// In three spatial dimensions, a tangent direction is required
+ /// (set via set_tangent_direction(...)), and we project the tanent direction
+ /// on to the surface. The second tangent vector is taken to be the cross
+ /// product of the projection and the unit normal.
+ void continuous_tangent_and_outer_unit_normal
+  (const Vector<double> &s, Vector<Vector<double> > &tang_vec, 
+   Vector<double> &unit_normal) const;
+
+ /// \short Compute the tangent vector(s) and the outer unit normal
+ /// vector at the ipt-th integration point. This is a wrapper around
+ /// continuous_tangent_and_outer_unit_normal(...) with the integration points
+ /// converted into local coordinates.
+ void continuous_tangent_and_outer_unit_normal
+  (const unsigned &ipt, Vector<Vector<double> > &tang_vec, 
+   Vector<double> &unit_normal) const;
 
  /// \short Compute outer unit normal at the specified local coordinate
  void outer_unit_normal(const Vector<double> &s, 

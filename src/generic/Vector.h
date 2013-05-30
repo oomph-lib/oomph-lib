@@ -39,6 +39,7 @@
 //Standard library includes
 #include<vector>
 #include<sstream>
+#include<cmath>
 
 //Oomph-libe error handler
 #include "oomph_definitions.h"
@@ -248,6 +249,99 @@ public:
 
 };
 
-}
+
+//=================================================================
+/// Namespace for helper functions for Vector<double>
+//=================================================================
+namespace VectorHelpers
+{
+ /// Check the lengths if two Vectors are the same length
+ inline void check_lengths_match(const Vector<double> &a, 
+                                 const Vector<double> &b)
+ {
+#ifdef PARANOID
+  if (a.size() != b.size())
+   {
+    std::ostringstream err;
+    err << "Vectors must be the same length."
+        << "len(a) = " << a.size() << ", "
+        << "len(b) = " << b.size() << ".";
+
+    throw OomphLibError(err.str(), OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+ }
+
+
+ /// Probably not always best/fastest because not optimised for dimension but
+ /// useful...
+ inline double dot(const Vector<double>& a, const Vector<double>& b)
+ {
+  check_lengths_match(a,b);
+  double temp = 0;
+  for(unsigned i=0, ni=a.size(); i<ni; i++)
+   {
+    temp += a[i] * b[i];
+   }
+  return temp;
+ }
+  
+ /// Get the magnitude of a vector.
+ inline double magnitude(const Vector<double> &a)
+ {
+  return(std::sqrt(dot(a,a)));
+ }
+
+ /// Get the angle between two vector.
+ inline double angle(const Vector<double> &a, const Vector<double> &b)
+ {
+  // Notice that we use one square root operation by avoiding the
+  // call to magnitude(...)
+  return std::acos(dot(a,b) / std::sqrt(dot(a,a) * dot(b,b)));
+ }
+
+
+ /// Cross product using "proper" output (move semantics means this is ok
+ /// nowadays).
+ inline void cross(const Vector<double>& A, const Vector<double>& B, 
+                   Vector<double>&C) 
+ {
+#ifdef PARANOID
+  if((A.size() != 3) || (B.size() != 3) || (C.size() !=3))
+   {
+    std::ostringstream err;
+    err << "Cross product only defined for vectors of length 3.\n"
+        << "len(a) = " << A.size() << ", "
+        << "len(b) = " << B.size() << ", "
+        << "len(c) = " << C.size() << ".";
+
+    throw OomphLibError(err.str(), OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+    
+  C[0] = A[1]*B[2] - A[2]*B[1];
+  C[1] = A[2]*B[0] - A[0]*B[2];
+  C[2] = A[0]*B[1] - A[1]*B[0];
+ }
+
+ /// Cross product using "proper" output (move semantics means this is ok
+ /// nowadays). This calls the other cross(...) function.
+ inline Vector<double> cross(const Vector<double>& A, 
+                             const Vector<double>& B) 
+ {
+  Vector<double> output(3,0.0);
+  cross(A,B,output);
+
+  return output;
+ }
+
+} // End of VectorHelpers
+
+
+} // End of oomph namespace
+
+
 
 #endif

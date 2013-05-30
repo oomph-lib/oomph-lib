@@ -4736,6 +4736,441 @@ void FiniteElement::identify_field_data_for_interactions(
   return sqrt(Adet);
  }
 
+//=======================================================================
+/// \short Compute the tangent vector(s) and the outer unit normal
+/// vector at the specified local coordinate.
+/// In two spatial dimensions, a "tangent direction" is not required.
+/// In three spatial dimensions, a tangent direction is required
+/// (set via set_tangent_direction(...)), and we project the tanent direction
+/// on to the surface. The second tangent vector is taken to be the cross
+/// product of the projection and the unit normal.
+//=======================================================================
+void FaceElement::continuous_tangent_and_outer_unit_normal
+(const Vector<double> &s, Vector<Vector<double> > &tang_vec, 
+ Vector<double> &unit_normal) const
+{
+ //Find the spatial dimension of the FaceElement
+ const unsigned element_dim = dim();
+
+ //Find the overall dimension of the problem 
+ //(assume that it's the same for all nodes)
+ const unsigned spatial_dim = nodal_dimension();
+ 
+#ifdef PARANOID
+ //Check the number of local coordinates passed
+ if(s.size()!=element_dim)
+  {
+   std::ostringstream error_stream;
+   error_stream
+    << "Local coordinate s passed to outer_unit_normal() has dimension " 
+    << s.size() << std::endl
+    << "but element dimension is " << element_dim << std::endl;
+   
+   throw OomphLibError(error_stream.str(),
+                       OOMPH_CURRENT_FUNCTION,
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+
+ // Check that if the Tangent_direction_pt is set, then
+ // it is the same length as the spatial dimension.
+ if(Tangent_direction_pt != 0 && Tangent_direction_pt->size()!=spatial_dim)
+  {
+   std::ostringstream error_stream;
+   error_stream
+    << "Tangent direction vector has dimension " 
+    << Tangent_direction_pt->size() << std::endl
+    << "but spatial dimension is " << spatial_dim << std::endl;
+
+   throw OomphLibError(error_stream.str(),
+                       OOMPH_CURRENT_FUNCTION,
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+ 
+ //Check the dimension of the normal vector
+ if(unit_normal.size()!=spatial_dim)
+  {
+   std::ostringstream error_stream;
+   error_stream
+    << "Unit normal passed to outer_unit_normal() has dimension " 
+    << unit_normal.size() << std::endl
+    << "but spatial dimension is " << spatial_dim << std::endl;
+   
+   throw OomphLibError(error_stream.str(),
+                       OOMPH_CURRENT_FUNCTION,
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+
+
+ // The number of tangent vectors.
+ unsigned ntangent_vec = tang_vec.size();
+
+ // For the tangent vector, 
+ // if element_dim = 2, tang_vec is a 2D Vector of length 3.
+ // if element_dim = 1, tang_vec is a 1D Vector of length 2.
+ // if element_dim = 0, tang_vec is a 1D Vector of length 1.
+ switch(element_dim)
+  {
+   //Point element, derived from a 1D element.
+  case 0:
+  {
+   // Check that tang_vec is a 1D vector.
+   if(ntangent_vec != 1)
+    {
+     std::ostringstream error_stream;
+     error_stream
+      << "This is a 0D FaceElement, we need one tangent vector.\n" 
+      << "You have given me " << tang_vec.size() << " vector(s).\n";
+     throw OomphLibError(error_stream.str(),
+                         OOMPH_CURRENT_FUNCTION,
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+  }
+  break;
+
+  //Line element, derived from a 2D element.
+  case 1:
+  {
+   // Check that tang_vec is a 1D vector.
+   if(ntangent_vec != 1)
+    {
+     std::ostringstream error_stream;
+     error_stream
+      << "This is a 1D FaceElement, we need one tangent vector.\n" 
+      << "You have given me " << tang_vec.size() << " vector(s).\n";
+     throw OomphLibError(error_stream.str(),
+                         OOMPH_CURRENT_FUNCTION,
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+  }
+  break;
+
+  //Plane element, derived from 3D element.
+  case 2:
+  {
+   // Check that tang_vec is a 2D vector.
+   if(ntangent_vec != 2)
+    {
+     std::ostringstream error_stream;
+     error_stream
+      << "This is a 2D FaceElement, we need two tangent vectors.\n" 
+      << "You have given me " << tang_vec.size() << " vector(s).\n";
+     throw OomphLibError(error_stream.str(),
+                         OOMPH_CURRENT_FUNCTION,
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+  }
+  break;
+  // There are no other elements!
+  default:
+
+   throw OomphLibError(
+    "Cannot have a FaceElement with dimension higher than 2",
+    OOMPH_CURRENT_FUNCTION,
+    OOMPH_EXCEPTION_LOCATION);
+   break;
+  }
+
+ // Check the lengths of each sub vectors.
+ for(unsigned vec_i = 0; vec_i < ntangent_vec; vec_i++)
+  {
+   if(tang_vec[vec_i].size() != spatial_dim)
+    {
+     std::ostringstream error_stream;
+     error_stream
+      << "This problem has " << spatial_dim << " spatial dimensions.\n" 
+      << "But the " << vec_i << " tangent vector has size " 
+      << tang_vec[vec_i].size() << std::endl;
+     throw OomphLibError(error_stream.str(),
+                         OOMPH_CURRENT_FUNCTION,
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+  }
+
+#endif   
+
+
+ //Now let's consider the different element dimensions
+ switch(element_dim)
+  {
+
+   //Point element, derived from a 1D element.
+  case 0:
+  {
+   std::ostringstream error_stream;
+   error_stream
+    << "It is unclear how to calculate a tangent and normal vectors for "
+    << "a point element.\n"; 
+   throw OomphLibError(error_stream.str(),
+                       OOMPH_CURRENT_FUNCTION,
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+  break;
+
+  //Line element, derived from a 2D element, in this case
+  //the normal is a mess of cross products
+  //We need an interior direction, so we must find the local
+  //derivatives in the BULK element
+  case 1:
+  {
+   //Find the number of nodes in the bulk element
+   const unsigned n_node_bulk = Bulk_element_pt->nnode();
+   //Find the number of position types in the bulk element
+   const unsigned n_position_type_bulk = 
+    Bulk_element_pt->nnodal_position_type();
+    
+   //Construct the local coordinate in the bulk element
+   Vector<double> s_bulk(2);
+   //Get the local coordinates in the bulk element
+   get_local_coordinate_in_bulk(s,s_bulk);
+    
+   //Allocate storage for the shape functions and their derivatives wrt
+   //local coordinates
+   Shape psi(n_node_bulk,n_position_type_bulk);
+   DShape dpsids(n_node_bulk,n_position_type_bulk,2);
+   //Get the value of the shape functions at the given local coordinate
+   Bulk_element_pt->dshape_local(s_bulk,psi,dpsids);
+ 
+   //Calculate all derivatives of the spatial coordinates 
+   //wrt local coordinates
+   DenseMatrix<double> interpolated_dxds(2,spatial_dim,0.0);
+    
+   //Loop over all parent nodes
+   for(unsigned l=0;l<n_node_bulk;l++)
+    {
+     //Loop over all position types in the bulk
+     for(unsigned k=0;k<n_position_type_bulk;k++)
+      {
+       //Loop over derivative direction
+       for(unsigned j=0;j<2;j++)
+        {
+         //Loop over coordinate directions
+         for(unsigned i=0;i<spatial_dim;i++)
+          {
+           //Compute the spatial derivative
+           interpolated_dxds(j,i) += 
+            Bulk_element_pt->nodal_position_gen(l,k,i)*dpsids(l,k,j);
+          }
+        }
+      }
+    }
+    
+   //Initialise the tangent, interior tangent and normal vectors to zero
+   //The idea is that even if the element is in a two-dimensional space,
+   //the normal cannot be calculated without embedding the element in three
+   //dimensions, in which case, the tangent and interior tangent will have
+   //zero z-components.
+   Vector<double> tangent(3,0.0), interior_tangent(3,0.0), normal(3,0.0);
+    
+   //We must get the relationship between the coordinate along the face
+   //and the local coordinates in the bulk element
+   //We must also find an interior direction
+   DenseMatrix<double> dsbulk_dsface(2,1,0.0);
+   unsigned interior_direction=0;
+   get_ds_bulk_ds_face(s,dsbulk_dsface,interior_direction);
+   //Load in the values for the tangents
+   for(unsigned i=0;i<spatial_dim;i++)
+    {
+     //Tangent to the face is the derivative wrt to the face coordinate
+     //which is calculated using dsbulk_dsface and the chain rule
+     tangent[i] = interpolated_dxds(0,i)*dsbulk_dsface(0,0)
+      + interpolated_dxds(1,i)*dsbulk_dsface(1,0);
+     //Interior tangent to the face is the derivative in the interior 
+     //direction
+     interior_tangent[i] = interpolated_dxds(interior_direction,i);
+    }
+
+   //Now the (3D) normal to the element is the interior tangent 
+   //crossed with the tangent
+   VectorHelpers::cross(interior_tangent,tangent,normal);
+
+   //We find the line normal by crossing the element normal with the tangent
+   Vector<double> full_normal(3);
+   VectorHelpers::cross(normal,tangent,full_normal);
+    
+   //Copy the appropriate entries into the unit normal
+   //Two or Three depending upon the spatial dimension of the system
+   for(unsigned i=0;i<spatial_dim;i++) {unit_normal[i] = full_normal[i];}
+
+   //Finally normalise unit normal and multiply by the Normal_sign
+   double length = VectorHelpers::magnitude(unit_normal);
+   for(unsigned i=0;i<spatial_dim;i++) 
+    {unit_normal[i] *= Normal_sign/length;}
+
+   // Create the tangent vector
+   tang_vec[0][0]=-unit_normal[1];
+   tang_vec[0][1]=unit_normal[0]; 
+  }
+  break;
+
+  //Plane element, derived from 3D element, in this case the normal
+  //is just the cross product of the two surface tangents
+  //We assume, therefore, that we have three spatial coordinates
+  //and two surface coordinates
+  //Then we need only to get the derivatives wrt the local coordinates
+  //in this face element
+  case 2:
+  {
+#ifdef PARANOID
+   //Check that we actually have three spatial dimensions
+   if(spatial_dim != 3)
+    {
+     std::ostringstream error_stream;
+     error_stream << "There are only " << spatial_dim
+                  << "coordinates at the nodes of this 2D FaceElement,\n"
+                  << "which must have come from a 3D Bulk element\n";
+     throw OomphLibError(error_stream.str(),
+                         OOMPH_CURRENT_FUNCTION,
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+     
+   // Check that the general direction is not null
+   if(Tangent_direction_pt == 0)
+    {
+     std::ostringstream error_stream;
+     error_stream << "The Tangent_direction_pt is null.\n";
+     throw OomphLibError(error_stream.str(),
+                         OOMPH_CURRENT_FUNCTION,
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+   //Find the number of nodes in the element
+   const unsigned n_node  = this->nnode();
+   //Find the number of position types
+   const unsigned n_position_type = this->nnodal_position_type();
+    
+   //Allocate storage for the shape functions and their derivatives wrt
+   //local coordinates
+   Shape psi(n_node,n_position_type);
+   DShape dpsids(n_node,n_position_type,2);
+   //Get the value of the shape functions at the given local coordinate
+   this->dshape_local(s,psi,dpsids);
+ 
+   //Calculate all derivatives of the spatial coordinates 
+   //wrt local coordinates
+   Vector<Vector<double> > interpolated_dxds(2,Vector<double>(3,0));
+    
+   //Loop over all nodes
+   for(unsigned l=0;l<n_node;l++)
+    {
+     //Loop over all position types
+     for(unsigned k=0;k<n_position_type;k++)
+      {
+       //Loop over derivative directions
+       for(unsigned j=0;j<2;j++)
+        {
+         //Loop over coordinate directions
+         for(unsigned i=0;i<3;i++)
+          {
+           //Compute the spatial derivative
+           //Remember that we need to translate the position type
+           //to its location in the bulk node
+           interpolated_dxds[j][i] += 
+            this->nodal_position_gen(l,bulk_position_type(k),i)*dpsids(l,k,j);
+          }
+        }
+      }
+    }
+
+   //We now take the cross product of the two normal vectors
+   VectorHelpers::cross(interpolated_dxds[0],interpolated_dxds[1],
+                        unit_normal);
+
+   //Finally normalise unit normal
+   double normal_length = VectorHelpers::magnitude(unit_normal);
+
+   for(unsigned i=0;i<spatial_dim;i++) 
+    {unit_normal[i] *= Normal_sign/normal_length;}
+
+   // Project the Tangent direction onto the surface.
+   // Project Tangent_direction_pt onto the plane P defined by
+   // T1 and T2.
+   // proj_P(D) = proj_T1(D) + proj_2(D), where D is Tangent_direction_pt,
+   // recall that proj_u(v) = (u.v)/(u.u) * u
+
+   // Get the direction vector. The vector is NOT copied! :)
+   Vector<double> &direction_vector = *Tangent_direction_pt;
+
+#ifdef PARANOID
+   // Check that the angle between the direction vector and the normal
+   // is not less than 10 degrees
+   double pi=4.0*std::atan(1.0);
+
+   if(VectorHelpers::angle(direction_vector,unit_normal) < 
+      (10.0 * pi/180.0))
+    {
+     std::ostringstream err_stream;
+     err_stream << "The angle between the unit normal and the \n"
+                << "direction vector is less than 10 degrees.";
+     throw OomphLibError(err_stream.str(),
+                         OOMPH_CURRENT_FUNCTION,
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+   // Calculate the two scalings, (u.v) / (u.u)
+   double t1_scaling 
+    = VectorHelpers::dot(interpolated_dxds[0],direction_vector) / 
+    VectorHelpers::dot(interpolated_dxds[0],interpolated_dxds[0]);
+
+   double t2_scaling 
+    = VectorHelpers::dot(interpolated_dxds[1],direction_vector) / 
+    VectorHelpers::dot(interpolated_dxds[1],interpolated_dxds[1]);
+
+   // Finish off the projection.
+   tang_vec[0][0] = t1_scaling*interpolated_dxds[0][0] 
+    + t2_scaling*interpolated_dxds[1][0];
+   tang_vec[0][1] = t1_scaling*interpolated_dxds[0][1] 
+    + t2_scaling*interpolated_dxds[1][1];
+   tang_vec[0][2] = t1_scaling*interpolated_dxds[0][2] 
+    + t2_scaling*interpolated_dxds[1][2];
+
+   // The second tangent vector is the cross product of
+   // tang_vec[0] and the normal vector N.
+   VectorHelpers::cross(tang_vec[0],unit_normal,tang_vec[1]);
+
+   // Normalise the tangent vectors 
+   for(unsigned vec_i=0; vec_i<2; vec_i++)
+    {
+     // Get the length...
+     double tang_length = VectorHelpers::magnitude(tang_vec[vec_i]);
+
+     for(unsigned dim_i=0;dim_i<spatial_dim;dim_i++) 
+      {tang_vec[vec_i][dim_i] /= tang_length;}
+    }
+
+  }
+  break;
+
+  default:
+
+   throw OomphLibError(
+    "Cannot have a FaceElement with dimension higher than 2",
+    OOMPH_CURRENT_FUNCTION,
+    OOMPH_EXCEPTION_LOCATION);
+   break;
+  }
+   
+}
+
+//=======================================================================
+/// \short Compute the tangent vector(s) and the outer unit normal
+/// vector at the ipt-th integration point. This is a wrapper around
+/// continuous_tangent_and_outer_unit_normal(...) with the integration points
+/// converted into local coordinates.
+//=======================================================================
+void FaceElement::continuous_tangent_and_outer_unit_normal
+(const unsigned &ipt, Vector<Vector<double> > &tang_vec,
+ Vector<double> &unit_normal) const
+{
+ //Find the dimension of the element
+ const unsigned element_dim = dim();
+ //Find the local coordiantes of the ipt-th integration point
+ Vector<double> s(element_dim);
+ for(unsigned i=0;i<element_dim;i++) {s[i] = integral_pt()->knot(ipt,i);}
+ //Call the outer unit normal function
+ continuous_tangent_and_outer_unit_normal(s, tang_vec,unit_normal);
+}
 
 //=======================================================================
 /// Compute the outer unit normal at the specified local coordinate
@@ -4963,18 +5398,11 @@ void FiniteElement::identify_field_data_for_interactions(
 
     //Now the (3D) normal to the element is the interior tangent 
     //crossed with the tangent
-    normal[0] = 
-     interior_tangent[1]*tangent[2] - interior_tangent[2]*tangent[1];
-    normal[1] = 
-     interior_tangent[2]*tangent[0] - interior_tangent[0]*tangent[2];
-    normal[2] = 
-     interior_tangent[0]*tangent[1] - interior_tangent[1]*tangent[0];
+    VectorHelpers::cross(interior_tangent,tangent,normal);
    
     //We find the line normal by crossing the element normal with the tangent
     Vector<double> full_normal(3);
-    full_normal[0] = normal[1]*tangent[2] - normal[2]*tangent[1];
-    full_normal[1] = normal[2]*tangent[0] - normal[0]*tangent[2];
-    full_normal[2] = normal[0]*tangent[1] - normal[1]*tangent[0];
+    VectorHelpers::cross(normal,tangent,full_normal);
 
     //Copy the appropriate entries into the unit normal
     //Two or Three depending upon the spatial dimension of the system
@@ -5018,7 +5446,7 @@ void FiniteElement::identify_field_data_for_interactions(
  
     //Calculate all derivatives of the spatial coordinates 
     //wrt local coordinates
-    DenseMatrix<double> interpolated_dxds(2,3,0.0);
+    Vector<Vector<double> > interpolated_dxds(2,Vector<double>(3,0));
     
     //Loop over all nodes
     for(unsigned l=0;l<n_node;l++)
@@ -5035,7 +5463,7 @@ void FiniteElement::identify_field_data_for_interactions(
             //Compute the spatial derivative
             //Remember that we need to translate the position type
             //to its location in the bulk node
-            interpolated_dxds(j,i) += 
+            interpolated_dxds[j][i] += 
              this->nodal_position_gen(l,bulk_position_type(k),i)*dpsids(l,k,j);
            }
          }
@@ -5043,15 +5471,8 @@ void FiniteElement::identify_field_data_for_interactions(
      }
 
     //We now take the cross product of the two normal vectors
-    unit_normal[0] = 
-     interpolated_dxds(0,1)*interpolated_dxds(1,2) -
-     interpolated_dxds(0,2)*interpolated_dxds(1,1);
-    unit_normal[1] = 
-     interpolated_dxds(0,2)*interpolated_dxds(1,0) -
-     interpolated_dxds(0,0)*interpolated_dxds(1,2);
-    unit_normal[2] = 
-     interpolated_dxds(0,0)*interpolated_dxds(1,1) -
-     interpolated_dxds(0,1)*interpolated_dxds(1,0);
+    VectorHelpers::cross(interpolated_dxds[0],interpolated_dxds[1],
+                         unit_normal);
    }
     break;
 
@@ -5065,11 +5486,9 @@ void FiniteElement::identify_field_data_for_interactions(
    }
    
   //Finally normalise unit normal
-  double length = 0.0;
+  double length = VectorHelpers::magnitude(unit_normal);
   for(unsigned i=0;i<spatial_dim;i++) 
-   {length += unit_normal[i]*unit_normal[i];}
-  for(unsigned i=0;i<spatial_dim;i++) 
-   {unit_normal[i] *= Normal_sign/sqrt(length);}
+   {unit_normal[i] *= Normal_sign/length;}
  }
 
 //=======================================================================
