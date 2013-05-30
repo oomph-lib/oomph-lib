@@ -4,38 +4,27 @@
 # TODO:
 
 # Different message for dummy oks due to missing code? But we can't see
-# what's missing from outside the code...
+# what's missing from outside the code! So unfortunately can't do anything
+# fancy with hypre tests etc..
 
-# Interrupt handling? Would be nice for C-c to kill all processes not just
-# the current one.
-
-# How do hypre/trilinos interact with the tests?
-
-# Replace searching for mpi string in dir name with checking for
-# $MPI_RUN_COMMAND in validate.sh?
-
-# Print timing information?
-
-# Caveats:
-
-# Eigenproblems fail because there is no good way to determine if we have
-# arpack or not.
-
-
-
+# Add a check for arpack... at the moment we jsut assume it's not there.
 
 # ASSUMPTIONS:
 
 # All validate.sh scripts return an appropriate exit status. Otherwise this
 # script cannot know if the test failed!
 
-# All mpi drivers have "mpi" in their path name. If this is not true it
-# should still work but things might be slow because we will have more
-# processes than cores.
+# Driver requirements are determined by:
+# mpi driver <=> has "mpi" in the path.
+# arpack drivers <=> has "eigenproblem" in the path.
 
-# All mpi drivers use the number of cores specified by MPI_RUN_COMMAND.
 
-# MPI_RUN_COMMAND has a '-np' argument specifying the number of cores.
+
+# Some python 3 compatability. With these imports most scripts should work
+# in both python 2.7 and python 3.
+from __future__ import print_function
+from __future__ import division
+from __future__ import absolute_import
 
 
 import subprocess as subp
@@ -47,6 +36,7 @@ import os.path
 import multiprocessing
 import itertools as it
 
+from os.path import join as pjoin
 from functools import partial as pt
 
 
@@ -81,59 +71,32 @@ def highlight(directorypath):
 
 
 def build_fail_message(directory):
-    print COLOURS.MakeFail+"[BUILD FAIL] " + highlight(directory) + COLOURS.Endc
+    print(COLOURS.MakeFail+"[BUILD FAIL] " + highlight(directory) +
+          COLOURS.Endc)
 
 
 def check_fail_message(directory):
-    print COLOURS.TestFail+"[FAILED]     " + highlight(directory) + COLOURS.Endc
+    print(COLOURS.TestFail+"[FAILED]     " + highlight(directory) +
+          COLOURS.Endc)
 
 
 def check_success_message(directory):
-    print COLOURS.Okgreen + "[OK]         " + highlight(directory) + COLOURS.Endc
+    print(COLOURS.Okgreen + "[OK]         " + highlight(directory) +
+          COLOURS.Endc)
 
 
 def no_check_message(directory):
-    print COLOURS.Okgreen + "[NO CHECK]   " + highlight(directory) + COLOURS.Endc
+    print(COLOURS.Okgreen + "[NO CHECK]   " + highlight(directory) +
+          COLOURS.Endc)
 
 
-def no_mpi_message(directory):
-    print COLOURS.Okgreen + "[NO MPI]     " + highlight(directory) + COLOURS.Endc
+def missing_feature_message(directory, feature):
+    print(COLOURS.Okgreen + "[NO " + feature.upper() + "]     " +
+          highlight(directory) + COLOURS.Endc)
 
 
 # Some general utility functions
 # ============================================================
-
-def partition(pred, iterable):
-    """Apply a predicate function "pred" to each item in "iterable". Output
-    two lists, the first with all items for which the function returned
-    true and the second list containing the rest.
-    """
-    trues = []
-    falses = []
-    for item in iterable:
-        if pred(item):
-            trues.append(item)
-        else:
-            falses.append(item)
-    return trues, falses
-
-
-def split_validation_dirs_mpi(all_validation_dirs):
-    """ Split a list of validation directories into those containing "mpi"
-    (case-insensitive) and the rest. e.g.
-
-    serial_dirs, mpi_dirs = split_validation_dirs_mpi(all_validation_dirs)
-    """
-    return partition(lambda x: not "mpi" in x.lower(), all_validation_dirs)
-
-
-def mygrep(file, searchstring):
-    """(F)Grep for a line in file, return None if not found."""
-    for line in open(file):
-        if searchstring in line:
-            return line
-    return None
-
 
 def variable_from_makefile(variable_name, makefile_path="Makefile"):
     """Extract a variable from a makefile (using make)."""
@@ -154,14 +117,14 @@ def variable_from_makefile(variable_name, makefile_path="Makefile"):
     # Check that make exited with a success code (0)
     returncode = process.wait()
     if returncode != 0:
-        raise subp.CalledProcessError
+        raise subp.CalledProcessError(returncode, "make print-var ....")
 
     # Get rid of trailing newline/whitespace and return
     return stdout.rstrip()
 
 
 def error(*args):
-    """Write an error message to stderr."""
+    """Write an error message to stderr and exit."""
     sys.stderr.write("\nERROR:\n" + "\n".join(args) + "\n")
     sys.exit(2)
 
@@ -178,38 +141,28 @@ def find_validate_dirs(base_dirs):
             if 'validate.sh' in files:
                 all_validation_dirs.append(root)
 
-    # Seperate into mpi directory lists and other
-    return split_validation_dirs_mpi(all_validation_dirs)
+    return all_validation_dirs
 
 
-def mpi_cores_used(oomph_root):
-    """ Find how many cores oomph-lib is configured to use for each mpi
-    self test."""
+def dispatch_dir(dirname, features):
+    """Check for missing features and print the appropriate message if
+    needed. Otherwise run the check function."""
 
-    # Find the line in the Makefile which specifies the mpi run command.
-    makefilepath = os.path.join(oomph_root, "Makefile")
-    line = mygrep(makefilepath, "MPI_RUN_COMMAND")
+    # For each possible feature in features check if we have it. If not
+    # check if this directory needs it and if so print a message, otherwise
+    # run the check.
+    for feature in features:
+        if not feature['have_feature']:
+           if feature['check_driver_function'](dirname):
+               missing_feature_message(dirname, feature['feature_name'])
+               return
 
-    # Get out the command in list of strings format
-    try:
-        mpicommand = line.rstrip().rsplit(" = ", 1)[1].split()
-    except IndexError:
-        # If we get an index error there is no mpi command
-        return None
+    make_check_in_dir(dirname)
 
-    # Parse the mpi command for the -np argument
-    parser = argparse.ArgumentParser(description='mpirun parser')
-    parser.add_argument('--n', '-np', '-c', '-n', dest='np')
-    args, unknown = parser.parse_known_args(mpicommand)
 
-    # Check the mpi run command is ok (it must be 2)
-    if int(args.np) != 2:
-        print """##### MPIRUN COMMAND MUST TWO CORES (-np 2) #####"""
-        print """Otherwise the meshes used are not valid."""
-        sys.exit(11)
-
-    # Return as an integer
-    return int(args.np)
+# Functions for checking if a test needs a certain feature
+def check_if_mpi_driver(d): return "mpi" in d
+def check_if_arpack_driver(d): return "eigenproblems" in d
 
 
 # The function doing the bulk of the actual work (called many times in
@@ -250,21 +203,12 @@ def make_check_in_dir(directory):
         check_fail_message(directory)
         return
 
+
 # Function dealing with parsing of arguments, getting everything set up and
 # dispatching jobs to processes.
 def main():
     """
-    Run self tests in parallel (one per core for serial tests, one per
-    two cores for mpi).
-
-    Note: aborting with C-c will not work due to limitations of python's
-    multiprocessing module. The easiest way to abort is probably to kill
-    the terminal emulator itself. Alternatively background the python
-    process with C-z then kill it (i.e. run "kill %%").
-
-    Also note: eigensolver tests will fail if you don't have arpack
-    installed. I haven't found a way to not run them without arpack
-    yet.
+    Run oomph-lib self tests in parallel.
 
     Typical usage is just:
 
@@ -278,9 +222,13 @@ def main():
 
 
     For this script to work correctly ALL validate.sh scripts must return
-    an exit status. A simple command to check for this is:
+    an exit status. Use the --check-scripts option to check this.
 
-       find -name "validate.sh" | xargs grep -i -L "exit" | xargs grep -i -L "set -o errexit"
+    Note: aborting with C-c will not work due to limitations of python2's
+    multiprocessing module. The easiest way to abort is probably to kill
+    the terminal emulator itself. Alternatively background the python
+    process with C-z then kill it (i.e. run "kill %%"). Or just upgrade to
+    python3.
     """
 
     # Parse inputs
@@ -300,19 +248,27 @@ def main():
     parser.add_argument('-a', action='store_true', dest='makeclean',
                         help='Run make clean on test folders before starting.')
 
+    parser.add_argument('-l', '--base-dirs', action='append', dest='base_dirs',
+                        help='Specify directories relative to the root to (recursively)'
+                        + ' look for tests in.'
+                        + ' Uses "demo_drivers" and "self_test" by default.')
+
     parser.add_argument('-j', '-n', dest='ncores',
                         help='Specifiy how many cores should be used altogether \
                         (taking mpi runs into account). By default use all cores.',
                         default=multiprocessing.cpu_count())
 
-    parser.add_argument('--no-colour', action='store_true', dest='no_colours',
+    parser.add_argument('--no-colour', action='store_true',
                         help='Disable colours in output.')
+
+    parser.add_argument('--check-scripts', action='store_true',
+                        help='Check all the validate.sh scripts using a simple '
+                        + 'regex to make sure that they set an exit status.')
 
     args = parser.parse_args()
 
-    if args.no_colours:
+    if args.no_colour:
         COLOURS.disable()
-
 
     # Attempt to get the oomph-lib root dir from a Makefile in the current
     # directory.
@@ -328,53 +284,90 @@ def main():
                   "directory or specify the path to oomph_root using -C.")
 
 
+    if args.base_dirs is None:
+        args.base_dirs = ["demo_drivers", "self_test"]
+
+
+    # Grep for some way of returning an exit status in validate.sh scripts,
+    # print out those that don't contain one.
+    if args.check_scripts:
+        print("Checking validate.sh scripts. Any scripts printed below do not set\n"+
+              "their exit status properly and so the results cannot be correctly\n"+
+              "reported by this script.")
+        print("Look in other validate scripts to see how to fix this.")
+        subp.call('find -name "validate.sh" | xargs grep -i -L "^exit \|^set -o errexit"',
+                  shell=True, cwd=args.oomph_root)
+        return 0
+
+
+    # Figure out if we have various features
+    # ============================================================
+
+    #??ds there MUST be a ways to detect this somehow...
+    have_arpack = False
+
+    # Find out if we have mpi by looking for "OOMPH_HAS_MPI" in flags in
+    # Makefile.
+    have_mpi = "OOMPH_HAS_MPI" in \
+      variable_from_makefile("AM_CPPFLAGS", pjoin(args.oomph_root, "Makefile"))
+
+    # List of possible features. Each one must contain: "feature_name",
+    # check_driver_function--a function to find out if a directory requires
+    # this feature and have_feature--a boolean for if we have this feature
+    # or not.
+    oomph_features =\
+      ([ {'feature_name' : "arpack",
+          'check_driver_function' : check_if_arpack_driver,
+          'have_feature' : have_arpack
+       },
+
+       {'feature_name' : "mpi",
+        'check_driver_function' : check_if_mpi_driver,
+        'have_feature' : have_mpi
+        }
+        ])
+
+    # Print our findings:
+    print("Checked for the following features:")
+    for feature in oomph_features:
+        print("    ", feature['feature_name'], ":", feature['have_feature'])
+
     # Gather directory lists etc.
     # ============================================================
     # Create a list of absolute paths to demo driver directories
-    base_dirs = [os.path.join(args.oomph_root, base_dir)
-                 for base_dir in ["demo_drivers", "self_test"]]
+    base_dirs = [os.path.join(args.oomph_root, b)
+                 for b in args.base_dirs]
 
     # Clean up from past runs if requested
     if args.makeclean:
-        for dir in base_dirs:
+        print("Running (recursive) make clean in", *base_dirs)
+        for directory in base_dirs:
+            # Make clean in "directory" with stdout thrown away.
             subp.check_call(['make', 'clean', '-k',
-                             '-C', str(dir), '-j', str(args.ncores)])
+                             '-j', str(args.ncores)],
+                             stdout = open(os.devnull, 'w'),
+                             cwd = directory)
 
-    # Construct a list of validation directories
-    validation_dirs, mpi_dirs = find_validate_dirs(base_dirs)
 
     # Run tests
     # =========================================================================
-    # Start all non-mpi tests first. Run "make_check_in_dir" on all
-    # directories in "validation_dirs". Set chunksize to 1 (i.e. each "make
-    # check" call is in its own "chunk of work") to avoid the situation
-    # where multiple slow "make check"s end up in the same chunk and we
-    # have to wait ages for it to finish.
-    pool = Pool()
-    pool.map(make_check_in_dir, validation_dirs, 1)
-    pool.close()                # Tell python there are no more jobs coming
-    pool.join()       # Wait for everything to finish
 
-    # Now run the MPI tests
-    basempicores = mpi_cores_used(args.oomph_root)
-    if basempicores is not None:
-        # Figure out how many cores to use. Each mpi test uses some number
-        # of cores per test already.
-        mpi_ncores = int(int(args.ncores) / basempicores)
+    # Construct a list of validation directories
+    validation_dirs = find_validate_dirs(base_dirs)
 
-        # Now run the mpi checks
-        mpipool = Pool(mpi_ncores)
-        mpipool.map(make_check_in_dir, mpi_dirs, 1)
-        mpipool.close()         # Tell python there are no more jobs coming
-        mpipool.join()          # Wait for everything to finish
+    # Construct function to call
+    f = pt(dispatch_dir, features=oomph_features)
 
-    else:
-        # Otherwise just print a list of tests that were not run (with a
-        # useful message).
-        map(no_mpi_message, mpi_dirs)
+    # Run the function we just constructed on all directories in
+    # "validation_dirs" in parallel.
+    # Set chunksize to 1 (i.e. each "make check" call is in its own "chunk
+    # of work") to avoid the situation where multiple slow "make check"s
+    # end up in the same chunk and we have to wait ages for it to finish.
+    Pool().map(f, validation_dirs, 1)
 
     # Done!
     return 0
+
 
 # If this script is run from a shell then run main() and return the result.
 if __name__ == "__main__":

@@ -353,6 +353,69 @@ extern void line_search(const Vector<double>& x_old,
 
 
 //====================================================================
+/// \short Collection of data structures for storing information about
+/// linear solves. Currently only contains storage for the
+/// iteration counts and the linear solver time.
+//====================================================================
+class DocLinearSolverInfo
+{
+ 
+public:
+
+ /// \short Constructor. Initialised the Iterations_and_times vector of vector
+ /// of pairs.
+ DocLinearSolverInfo() : Iterations_and_times()
+ {}
+
+ /// \short Set up a new vector of pairs for a new time step.
+ void setup_new_time_step()
+ {
+   // For each new time step, we have a new vector consisting of pairs of
+   // unsigned (for the iteration) and double (for the timing results).
+   Iterations_and_times.push_back(Vector<std::pair<unsigned,double> >());
+ }
+
+ /// \short Add a new iteration and time pair.
+ void add_iteration_and_time(unsigned required_iter, double required_time)
+ {
+#ifdef PARANOID
+   if(Iterations_and_times.size() == 0)
+   {
+     std::ostringstream error_message;
+     error_message << "Iterations_and_times is empty. "
+                   << "Call setup_new_time_step()\n";
+     throw OomphLibError(
+      error_message.str(),OOMPH_CURRENT_FUNCTION,
+      OOMPH_EXCEPTION_LOCATION);
+   }
+#endif 
+   std::pair<unsigned, double> iter_time_pair(required_iter,required_time);
+   Iterations_and_times.back().push_back(iter_time_pair);
+ }
+
+ /// The number of time steps
+ unsigned current_ntime_step() const 
+   {return Iterations_and_times.size();}
+
+ /// The number of Newton steps.
+ unsigned current_nnewton_step() const 
+   {return Iterations_and_times.back().size();}
+
+ /// \short Accessor function for the iteration and times.
+ Vector<Vector<std::pair<unsigned,double> > >& iterations_and_times()
+   {return Iterations_and_times;}
+
+ /// \short Accessor function for the iteration and times (const version).
+ Vector<Vector<std::pair<unsigned,double> > > iterations_and_times() const 
+   {return Iterations_and_times;}
+ 
+private:
+
+ /// Storage for number of iterations during Newton steps 
+ Vector<Vector<std::pair<unsigned, double> > > Iterations_and_times;
+};
+
+//====================================================================
 /// \short Information for documentation of results: 
 /// Directory and file number to enable output
 /// in the form RESLT/filename11.dat, say.
@@ -417,7 +480,7 @@ public:
 
  /// \short Call to issue a warning if the directory does not exists
  void disable_error_if_directory_does_not_exist() {Directory_must_exist=false;}
- 
+
 private:
 
  /// Directory name

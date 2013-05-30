@@ -1724,7 +1724,7 @@ void CRDoubleMatrix::multiply(const CRDoubleMatrix& matrix_in,
    error_message_stream 
     << "This matrix has not been built";
    throw OomphLibError(error_message_stream.str(),
-OOMPH_CURRENT_FUNCTION,
+                       OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
  // check that this matrix is built
@@ -3111,16 +3111,17 @@ void CRDoubleMatrix::add(const CRDoubleMatrix &matrix_in,
                        OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
-
- // Check if the result matrix is clear. 
- // We forced the user to give us an empty matrix.
- if(result_matrix.built())
+ 
+ // If the matrix is built, check that it's existing distribution is the
+ // same as the in matrix. Since we'll use the same distribution instead
+ // of completely rebuilding it.
+ if(result_matrix.built() && 
+    (*result_matrix.distribution_pt() != *matrix_in.distribution_pt()))
   {
    std::ostringstream error_message;
    error_message << "The result_matrix is built. "
-                 << "Please supply an empty matrix.\n"
-                 << "(call clear on the matrix, I do not want to over "
-                 << "write your data by accident)\n";
+                 << "But has a different distribution from matrix_in \n"
+                 << "They need to be the same.\n";
    throw OomphLibError(error_message.str(),
                        OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
@@ -3239,8 +3240,18 @@ void CRDoubleMatrix::add(const CRDoubleMatrix &matrix_in,
   }
 
  // Finally build the result_matrix.
- result_matrix.build(this->distribution_pt(),this->ncol(),res_values,
-                     res_column_indices,res_row_start);
+ if(result_matrix.distribution_pt()->built())
+  {
+   // Use the existing distribution.
+   result_matrix.build(this->ncol(),res_values,
+                       res_column_indices,res_row_start);
+  }
+ else
+  {
+   // Build with THIS distribution
+   result_matrix.build(this->distribution_pt(),this->ncol(),res_values,
+                       res_column_indices,res_row_start);
+  }
 }
 
 //=================================================================

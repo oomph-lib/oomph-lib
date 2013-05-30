@@ -4563,6 +4563,9 @@ void FiniteElement::identify_field_data_for_interactions(
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 
+/// Initialise the static variable. 
+/// Do not ignore warning for discontinuous tangent vectors.
+bool FaceElement::Ignore_discontinuous_tangent_warning = false;
 
 //========================================================================
 /// \short Calculate the Jacobian of the mapping between local and global
@@ -5168,13 +5171,16 @@ void FaceElement::continuous_tangent_and_outer_unit_normal
       }
      else if (c!=0.0)
       {
-       std::ostringstream warning_stream;
-       warning_stream << "I have detected that your normal vector is [0,0,1].\n"
-                      << "Since this function compares against 0.0, you may\n"
-                      << "get non-continuous tangent vectors.";
-       OomphLibWarning(warning_stream.str(),
-                       OOMPH_CURRENT_FUNCTION,
-                       OOMPH_EXCEPTION_LOCATION);
+       if(!FaceElement::Ignore_discontinuous_tangent_warning)
+        {
+         std::ostringstream warn_stream;
+         warn_stream << "I have detected that your normal vector is [0,0,1].\n"
+                     << "Since this function compares against 0.0, you may\n"
+                     << "get discontinuous tangent vectors.";
+         OomphLibWarning(warn_stream.str(),
+                         OOMPH_CURRENT_FUNCTION,
+                         OOMPH_EXCEPTION_LOCATION);
+        }
 
        tang_vec[0][0]= 1.0;
        tang_vec[0][1]= 0.0;	  

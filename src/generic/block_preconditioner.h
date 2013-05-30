@@ -1571,11 +1571,7 @@ namespace oomph
 
   // copy the block_map vector to the Block_number_in_master_preconditioner
   // vector used to store this information
-  Dof_number_in_master_preconditioner.resize(Nblock_types);
-  for (unsigned i = 0; i < Nblock_types; i++)
-   {
-    Dof_number_in_master_preconditioner[i] = block_map[i];
-   }
+  Dof_number_in_master_preconditioner = block_map;
 
   // compute number of rows in this (sub) preconditioner
   Nrow = 0;
@@ -2716,6 +2712,8 @@ namespace oomph
                                block_dim,distributed);
    }
 
+  // If blocks have been precomputed, compute the precomputed 
+  // block distributions.
   if(Preconditioner_blocks_have_been_precomputed)
    {
     // Delete any existing distributions in Precomputed_block_distribution_pt.

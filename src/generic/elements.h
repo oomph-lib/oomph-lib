@@ -3554,6 +3554,13 @@ class FaceElement: public virtual FiniteElement
  /// \short Index of the face
  int Face_index;
  
+ /// \short Ignores the warning when the tangent vectors from
+ /// continuous_tangent_and_outer_unit_normal may not be continuous
+ /// as a result of the unit normal being aligned with the z axis.
+ /// This can be avoided by supplying a general direction vector for
+ /// the tangent vector via set_tangent_direction(...).
+ static bool Ignore_discontinuous_tangent_warning;
+
   protected:
  
  /// The boundary number in the bulk mesh to which this element is attached
@@ -3659,12 +3666,12 @@ class FaceElement: public virtual FiniteElement
   Bulk_coordinate_derivatives_fct_pt(0), Normal_sign(0), Face_index(0),
   Boundary_number_in_bulk_mesh(0), Bulk_element_pt(0), Tangent_direction_pt(0)
   {
-   //Check whether things have been set
+   // Check whether things have been set
 #ifdef PARANOID
    Boundary_number_in_bulk_mesh_has_been_set = false;
 #endif
 
-   //Bulk_position_type[0] is always 0 (the position)
+   // Bulk_position_type[0] is always 0 (the position)
    Bulk_position_type.push_back(0);
   }
 
@@ -3881,6 +3888,20 @@ class FaceElement: public virtual FiniteElement
   // Set the direction vector for the tangent.
   Tangent_direction_pt = tangent_direction_pt;
  }
+
+ /// \short Turn on warning for when there may be discontinuous tangent vectors
+ /// from continuous_tangent_and_outer_unit_normal(...)
+ void turn_on_warning_for_discontinuous_tangent()
+  {
+    FaceElement::Ignore_discontinuous_tangent_warning = true;
+  }
+
+ /// \short Turn off warning for when there may be discontinuous tangent 
+ /// vectors from continuous_tangent_and_outer_unit_normal(...)
+ void turn_off_warning_for_discontinuous_tangent()
+  {
+    FaceElement::Ignore_discontinuous_tangent_warning = false;
+  }
 
  /// \short Compute the tangent vector(s) and the outer unit normal
  /// vector at the specified local coordinate.

@@ -98,12 +98,7 @@ namespace oomph
   /// \short specify a DOF to block map
   void set_dof_to_block_map(Vector<unsigned>& dof_to_block_map)
   {
-   unsigned ndof_type = dof_to_block_map.size();
-   Dof_to_block_map.resize(ndof_type);
-   for (unsigned i = 0; i < ndof_type; i++)
-    {
-     Dof_to_block_map[i] = dof_to_block_map[i];
-    }
+   Dof_to_block_map = dof_to_block_map;
   }
   
   /// Modified block setup for general purpose block preconditioners

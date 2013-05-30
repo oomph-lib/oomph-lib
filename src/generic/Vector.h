@@ -255,7 +255,7 @@ public:
 //=================================================================
 namespace VectorHelpers
 {
- /// Check the lengths if two Vectors are the same length
+ /// \short Check the lengths if two Vectors are the same length
  inline void check_lengths_match(const Vector<double> &a, 
                                  const Vector<double> &b)
  {
@@ -274,8 +274,8 @@ namespace VectorHelpers
  }
 
 
- /// Probably not always best/fastest because not optimised for dimension but
- /// useful...
+ /// \short Probably not always best/fastest because not optimised for 
+ /// dimension but useful...
  inline double dot(const Vector<double>& a, const Vector<double>& b)
  {
   check_lengths_match(a,b);
@@ -287,13 +287,13 @@ namespace VectorHelpers
   return temp;
  }
   
- /// Get the magnitude of a vector.
+ /// \short Get the magnitude of a vector.
  inline double magnitude(const Vector<double> &a)
  {
   return(std::sqrt(dot(a,a)));
  }
 
- /// Get the angle between two vector.
+ /// \short Get the angle between two vector.
  inline double angle(const Vector<double> &a, const Vector<double> &b)
  {
   // Notice that we use one square root operation by avoiding the
@@ -302,8 +302,8 @@ namespace VectorHelpers
  }
 
 
- /// Cross product using "proper" output (move semantics means this is ok
- /// nowadays).
+ /// \short Cross product using "proper" output (move semantics means this is 
+ /// ok nowadays).
  inline void cross(const Vector<double>& A, const Vector<double>& B, 
                    Vector<double>&C) 
  {
@@ -326,8 +326,8 @@ namespace VectorHelpers
   C[2] = A[0]*B[1] - A[1]*B[0];
  }
 
- /// Cross product using "proper" output (move semantics means this is ok
- /// nowadays). This calls the other cross(...) function.
+ /// \short Cross product using "proper" output (move semantics means this is 
+ /// ok This calls the other cross(...) function.
  inline Vector<double> cross(const Vector<double>& A, 
                              const Vector<double>& B) 
  {
