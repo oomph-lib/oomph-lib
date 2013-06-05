@@ -45,14 +45,23 @@
 #include "problem.h"
 #include "block_preconditioner.h"
 #include "SuperLU_preconditioner.h"
-#ifdef OOMPH_HAS_MPI
 #include "preconditioner_array.h"
-#endif
 #include "matrix_vector_product.h"
+
 
 namespace oomph
 {
  
+ namespace PreconditionerCreationFunctions
+ {
+  /// \short Helper function to create a SuperLu preconditioner (for use as
+  /// the default subsididary preconditioner creator in
+  /// GeneralPurposeBlockPreconditioners).
+  inline Preconditioner* create_super_lu_preconditioner()
+  { return new SuperLUPreconditioner; }
+ }
+
+
  //============================================================================
  /// helper base class for general purpose block preconditioners
  //============================================================================
@@ -70,11 +79,41 @@ namespace oomph
   typedef Preconditioner* (*SubsidiaryPreconditionerFctPt)();
 
   /// constructor
-  GeneralPurposeBlockPreconditioner() : BlockPreconditioner<MATRIX>()
+  GeneralPurposeBlockPreconditioner() 
+   : BlockPreconditioner<MATRIX>(),
+     Subsidiary_preconditioner_creation_function_pt
+     (&PreconditionerCreationFunctions::create_super_lu_preconditioner)
+  {}
+
+  /// Destructor: clean up memory then delete all subsidiary
+  /// preconditioners.
+  virtual ~GeneralPurposeBlockPreconditioner()
   {
-   // null the subsidiary preconditioner function pointer
-   Subsidiary_preconditioner_function_pt = 0;
+   this->clean_up_memory();
+
+   for(unsigned j=0, nj=Subsidiary_preconditioner_pts.size(); j<nj; j++)
+     {
+      delete Subsidiary_preconditioner_pts[j];
+     }
   }
+  
+  /// \short ??ds I think clean_up_memory is supposed to clear out any stuff that
+  /// doesn't need to be stored between solves.
+  /// Call clean up on any non-null subsidiary preconditioners.
+  virtual void clean_up_memory()
+   {
+    // Call clean up in any subsidiary precondtioners that are set.
+    for(unsigned j=0, nj=Subsidiary_preconditioner_pts.size(); j<nj; j++)
+     {
+      if(Subsidiary_preconditioner_pts[j] != 0)
+       {
+        Subsidiary_preconditioner_pts[j]->clean_up_memory();
+       }
+     }
+
+    // Clean up the block preconditioner base class stuff
+    this->clear_block_preconditioner_base();
+   }
 
   /// Broken copy constructor
   GeneralPurposeBlockPreconditioner(const GeneralPurposeBlockPreconditioner&) 
@@ -92,8 +131,8 @@ namespace oomph
   void set_subsidiary_preconditioner_function
   (SubsidiaryPreconditionerFctPt sub_prec_fn)
   {
-   Subsidiary_preconditioner_function_pt = sub_prec_fn;
-  };
+   Subsidiary_preconditioner_creation_function_pt = sub_prec_fn;
+  }
 
   /// \short specify a DOF to block map
   void set_dof_to_block_map(Vector<unsigned>& dof_to_block_map)
@@ -117,8 +156,53 @@ namespace oomph
   
  protected:
 
-  /// the SubisidaryPreconditionerFctPt 
-  SubsidiaryPreconditionerFctPt Subsidiary_preconditioner_function_pt;
+  /// \short Create any subsidiary preconditioners needed. Usually
+  /// nprec_needed = nblock_types, except for the ExactBlockPreconditioner
+  /// which only requires one preconditioner.
+  void fill_in_subsidiary_preconditioners(const unsigned &nprec_needed)
+  {
+
+   // If it's empty then fill it in with null pointers.
+   if(Subsidiary_preconditioner_pts.empty())
+    {
+     Subsidiary_preconditioner_pts.assign(nprec_needed, 0); 
+    }
+   else
+    {
+     // Otherwise check we have the right number of them
+#ifdef PARANOID
+     if(Subsidiary_preconditioner_pts.size() != nprec_needed)
+      {
+       using namespace StringConversion;
+       std::string error_msg = "Wrong number of precondtioners in";
+       error_msg += "Subsidiary_preconditioner_pts, should have ";
+       error_msg += to_string(nprec_needed) + " but we actually have ";
+       error_msg += to_string(Subsidiary_preconditioner_pts.size());
+       throw OomphLibError(error_msg, OOMPH_CURRENT_FUNCTION,
+                           OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+    }
+
+
+   // Now replace any null pointers with new preconditioners
+   for(unsigned j=0, nj=Subsidiary_preconditioner_pts.size(); j<nj; j++)
+    {
+     if(Subsidiary_preconditioner_pts[j] == 0)
+      {
+       Subsidiary_preconditioner_pts[j] = 
+        (*Subsidiary_preconditioner_creation_function_pt)();
+      }
+    }
+
+  }
+
+  /// List of preconditioners to use for the blocks to be solved.
+  Vector<Preconditioner*> Subsidiary_preconditioner_pts;
+
+  /// Function to create any subsidiary preconditioners not set in
+  /// Subsidiary_preconditioner_pts.
+  SubsidiaryPreconditionerFctPt Subsidiary_preconditioner_creation_function_pt;
 
  private:
 
@@ -145,50 +229,33 @@ namespace oomph
   /// constructor - when the preconditioner is used as a master preconditioner
   BlockDiagonalPreconditioner() : GeneralPurposeBlockPreconditioner<MATRIX>()
   {
- 
-#ifdef OOMPH_HAS_MPI
    // by default we do not use two level parallelism
    Use_two_level_parallelisation = false;
 
    // null the Preconditioner array pt
    Preconditioner_array_pt = 0;
-#endif
 
    // Don't doc by default
    Doc_time_during_preconditioner_solve=false;
   }
  
   /// Destructor - delete the preconditioner matrices
-  ~BlockDiagonalPreconditioner()
+  virtual ~BlockDiagonalPreconditioner()
   {
    this->clean_up_memory();
   }
 
   /// clean up the memory
-  void clean_up_memory()
+  virtual void clean_up_memory()
   {
-#ifdef OOMPH_HAS_MPI
    if (Use_two_level_parallelisation)
     {
      delete Preconditioner_array_pt;  
      Preconditioner_array_pt = 0;
     }
-   else
-#endif
-    {
-     //number of block types
-     unsigned n_block = Diagonal_block_preconditioner_pt.size();
-   
-     //delete diagonal blocks
-     for (unsigned i = 0 ; i < n_block; i++)
-      {
-       delete Diagonal_block_preconditioner_pt[i];
-       Diagonal_block_preconditioner_pt[i] = 0;
-      }
-    }
-     
-   // clean up the block preconditioner
-   this->clear_block_preconditioner_base();
+
+   // Clean up the base class too
+   GeneralPurposeBlockPreconditioner<MATRIX>::clean_up_memory();
   }
  
   /// Broken copy constructor
@@ -208,28 +275,20 @@ namespace oomph
  
   /// \short Setup the preconditioner 
   virtual void setup();
- 
-  /// \short Access function to the i-th subsidiary preconditioner,
-  /// i.e. the preconditioner for the i-th block.
-  Preconditioner* subsidiary_block_preconditioner_pt(const unsigned& i)
-   const
-  {return Diagonal_block_preconditioner_pt[i];}
-
-  /// \short Write access function to the i-th subsidiary preconditioner,
-  /// i.e. the preconditioner for the i-th block.
-  Preconditioner*& subsidiary_block_preconditioner_pt(const unsigned& i)
-  {return Diagonal_block_preconditioner_pt[i];}
    
-#ifdef OOMPH_HAS_MPI
   /// \short Use two level parallelisation 
-  void enable_two_level_parallelisation() 
-  { Use_two_level_parallelisation = true;}
+   void enable_two_level_parallelisation() 
+  {
+#ifndef OOMPH_HAS_MPI
+   throw OomphLibError("Cannot do any parallelism since we don't have MPI.",
+                       OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+#endif
+   Use_two_level_parallelisation = true;
+  }
 
   /// \short Don't use two-level parallelisation
   void disable_two_level_parallelisation() 
   { Use_two_level_parallelisation = false;}
-
-#endif
 
   /// Enable Doc timings in application of block sub-preconditioners
   void enable_doc_time_during_preconditioner_solve()
@@ -239,22 +298,45 @@ namespace oomph
   void disable_doc_time_during_preconditioner_solve()
   {Doc_time_during_preconditioner_solve=false;}
 
+  void fill_in_subsidiary_preconditioners(const unsigned &nblock_types)
+  {
+#ifdef PARANOID
+   if((Use_two_level_parallelisation) && 
+      !this->Subsidiary_preconditioner_pts.empty())
+    {
+     std::string err_msg = 
+      "Two level parallelism diagonal block preconditioners cannot have";
+     err_msg += " any preset preconditioners (due to weird memory management";
+     err_msg += " in the PreconditionerArray, you could try fixing it).";
+     throw OomphLibError(err_msg, OOMPH_CURRENT_FUNCTION,
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+   
+   // Now call the real function
+   GeneralPurposeBlockPreconditioner<MATRIX>::
+    fill_in_subsidiary_preconditioners(nblock_types);
+  }
+
+protected:
+
+  /// This is a helper function to allow us to implement AntiDiagonal
+  /// preconditioner by only changing this function. Get the second index
+  /// for block number i. Obviously for a diagonal preconditioner we want
+  /// the blocks (i,i), (for anti diagonal we will want blocks (i, nblock -
+  /// i), see that class).
+  virtual unsigned get_other_diag_ds(const unsigned &i,
+                                     const unsigned &nblock) const
+  { return i; }
+
 
  private :
-  
-  /// \short Vector of SuperLU preconditioner pointers for storing the 
-  /// preconditioners for each diagonal block
-  Vector<Preconditioner*> Diagonal_block_preconditioner_pt;
-   
-#ifdef OOMPH_HAS_MPI
+
   /// pointer for the PreconditionerArray
   PreconditionerArray* Preconditioner_array_pt;
-#endif   
 
-#ifdef OOMPH_HAS_MPI
   /// Use two level parallelism using the PreconditionerArray
   bool Use_two_level_parallelisation;
-#endif
 
   /// Doc timings in application of block sub-preconditioners?
   bool Doc_time_during_preconditioner_solve;
@@ -283,69 +365,64 @@ namespace oomph
     nblock_types = this->nblock_types();
    }
 
-  // Resize the storage for the diagonal blocks
-  Diagonal_block_preconditioner_pt.resize(nblock_types);
+   // Create any subsidiary preconditioners needed
+   this->fill_in_subsidiary_preconditioners(nblock_types);
 
-  // create the subsidiary preconditioners
-  for (unsigned i=0;i<nblock_types;i++)
+  // If using two level parallelisation then we need to use a
+  // PrecondtionerArray which requires very different setup. ??ds possibly
+  // it should have it's own class?
+  if(Use_two_level_parallelisation)
    {
-    if (this->Subsidiary_preconditioner_function_pt == 0)
+    // Get the blocks. We have to use new because you can't have containers
+    // of matrices because the copy constructor is buggy (so we create a
+    // container of pointers instead). ??ds
+    Vector<CRDoubleMatrix*> block_diagonal_matrix_pts(nblock_types, 0);
+    for(unsigned i=0; i<nblock_types; i++)
      {
-      Diagonal_block_preconditioner_pt[i] = new SuperLUPreconditioner;
+      block_diagonal_matrix_pts[i] = new CRDoubleMatrix;
+      this->get_block(i, get_other_diag_ds(i, nblock_types),
+                      block_diagonal_matrix_pts[i]);
      }
-    else
+
+    // Construct the preconditioner array
+    Preconditioner_array_pt = new PreconditionerArray;
+
+    Preconditioner_array_pt->
+     setup_preconditioners(block_diagonal_matrix_pts,
+                           this->Subsidiary_preconditioner_pts,
+                           this->comm_pt());
+
+    // and delete the blocks
+    for(unsigned i=0; i<nblock_types; i++)
      {
-      Diagonal_block_preconditioner_pt[i] = 
-       (*(this->Subsidiary_preconditioner_function_pt))();
+      delete block_diagonal_matrix_pts[i];
+      block_diagonal_matrix_pts[i] = 0;
      }
+
+    // Preconditioner array is weird, it calls delete on all the
+    // preconditioners you give it and requires new ones each time!
+    this->Subsidiary_preconditioner_pts.clear();
    }
 
-  // if using two level parallelisation just get the matrices
-  // otherwise get the matrices and setup the preconditioners
-  Vector<CRDoubleMatrix*> block_diagonal_matrices(nblock_types);
-  for (unsigned i=0;i<nblock_types;i++)
+
+  // Otherwise just set up each block's preconditioner in order
+  else
    {
-    CRDoubleMatrix* block_pt = 0;
-    this->get_block(i,i,block_pt);
-#ifdef OOMPH_HAS_MPI
-    if (Use_two_level_parallelisation)
+    for(unsigned i=0; i<nblock_types; i++)
      {
-      block_diagonal_matrices[i] = block_pt;
-     }
-    else
-#endif
-     {
-      // Set up preconditioner (i.e. solve the block)
+      // Get the block
+      unsigned j = get_other_diag_ds(i, nblock_types);
+      CRDoubleMatrix block = this->get_block(i, j);
+
+      // Set up preconditioner (i.e. approximately solve the block + store solution)
       double superlusetup_start = TimingHelpers::timer();
-      Diagonal_block_preconditioner_pt[i]->setup(block_pt,this->comm_pt());
+      this->Subsidiary_preconditioner_pts[i]->setup(&block,this->comm_pt());
       double superlusetup_end = TimingHelpers::timer();
       oomph_info << "Took " << superlusetup_end - superlusetup_start
                  << "s to setup."<< std::endl;
-
-      // Done with this block now so delete it
-      delete block_pt;
-      block_pt = 0;
      }
    }
 
-  // create the PreconditionerArray
-  // set it up
-  // delete the block matrices
-#ifdef OOMPH_HAS_MPI
-  if (Use_two_level_parallelisation)
-   {
-    Preconditioner_array_pt = new PreconditionerArray;
-    Preconditioner_array_pt->
-     setup_preconditioners(block_diagonal_matrices,
-                           Diagonal_block_preconditioner_pt,
-                           this->comm_pt());
-    for (unsigned i = 0; i < nblock_types; i++)
-     {
-      delete block_diagonal_matrices[i];
-      block_diagonal_matrices[i] = 0;
-     }
-   }
-#endif
  }
  
  //=============================================================================
@@ -381,13 +458,11 @@ namespace oomph
   // vector of vectors for the solution block vectors
   Vector<DoubleVector> block_z(n_block);
 
-#ifdef OOMPH_HAS_MPI
   if (Use_two_level_parallelisation)
    {
-    Preconditioner_array_pt->solve_preconditioners(block_r,block_z);
+    Preconditioner_array_pt->solve_preconditioners(block_r, block_z);
    }
   else
-#endif
    {
     // solve each diagonal block
     for (unsigned i = 0; i < n_block; i++)
@@ -397,8 +472,8 @@ namespace oomph
        {
         t_start=TimingHelpers::timer();
        }
-      Diagonal_block_preconditioner_pt[i]->preconditioner_solve(block_r[i],
-                                                                block_z[i]);
+      this->Subsidiary_preconditioner_pts[i]->preconditioner_solve(block_r[i],
+                                                                   block_z[i]);
       if (Doc_time_during_preconditioner_solve)
        {
         oomph_info << "Time for application of " << i 
@@ -438,40 +513,30 @@ namespace oomph
  {
  
  public :
-  
-  /// \short typedef for a function that allows other preconditioners to be
-  /// emplyed to solve the subsidiary linear systems. \n
-  /// The function should return a pointer to the requred subsidiary
-  /// preconditioner generated using new. This preconditioner is responsible
-  /// for the destruction of the subsidiary preconditioners.
-  typedef Preconditioner* (*SubsidiaryPreconditionerFctPt)();
  
   /// Constructor. (By default this preconditioner is upper triangular).
   BlockTriangularPreconditioner() 
    : GeneralPurposeBlockPreconditioner<MATRIX>()
   {
- 
    // default to upper triangular
    Upper_triangular = true;
   }
  
   /// Destructor - delete the preconditioner matrices
-  ~BlockTriangularPreconditioner()
+  virtual ~BlockTriangularPreconditioner()
   {
-   this->clean_memory();
+   this->clean_up_memory();
   }
 
   /// clean up the memory
-  void clean_memory()
+  virtual void clean_up_memory()
   {
    //number of block types
-   unsigned n_block = Diagonal_block_preconditioner_pt.size();
+   unsigned n_block = this->Subsidiary_preconditioner_pts.size();
      
    //delete diagonal blocks
    for (unsigned i = 0 ; i < n_block; i++)
     {
-     delete Diagonal_block_preconditioner_pt[i];
-     Diagonal_block_preconditioner_pt[i] = 0;
      if (Upper_triangular)
       {
        for (unsigned j = i+1; j < n_block; j++)
@@ -489,9 +554,9 @@ namespace oomph
         }
       }
     }
-     
-   // clean up the block preconditioner
-   this->clean_up_memory();
+
+   // Clean up the base class too
+   GeneralPurposeBlockPreconditioner<MATRIX>::clean_up_memory(); 
   }
  
   /// Broken copy constructor
@@ -524,11 +589,7 @@ namespace oomph
    Upper_triangular = false;
   }
 
- private:
-   
-  /// \short Vector of SuperLU preconditioner pointers for storing the 
-  /// preconditioners for each diagonal block
-  Vector<Preconditioner*> Diagonal_block_preconditioner_pt;   
+ private:  
 
   /// Matrix of matrix vector product operators for the off diagonals
   DenseMatrix<MatrixVectorProduct*> Off_diagonal_matrix_vector_products;
@@ -545,7 +606,7 @@ namespace oomph
  setup()
  {
   // clean the memory
-  this->clean_memory();
+  this->clean_up_memory();
 
   // Set up the block look up schemes
   this->block_setup();
@@ -561,35 +622,21 @@ namespace oomph
     nblock_types = this->nblock_types();
    }
 
-  // Storage for the diagonal block preconditioners
-  Diagonal_block_preconditioner_pt.resize(nblock_types);
-
   // storage for the off diagonal matrix vector products
   Off_diagonal_matrix_vector_products.resize(nblock_types,nblock_types,0);
+
+  // Fill in any null subsidiary preconditioners
+  this->fill_in_subsidiary_preconditioners(nblock_types);
 
   // build the preconditioners and matrix vector products
   for (unsigned i = 0; i < nblock_types; i++)
    {
-    // create the preconditioner
-    if (this->Subsidiary_preconditioner_function_pt == 0)
-     {
-      Diagonal_block_preconditioner_pt[i] = new SuperLUPreconditioner;
-     }
-    else
-     {
-      Diagonal_block_preconditioner_pt[i] = 
-       (*(this->Subsidiary_preconditioner_function_pt))();
-     }
-
-    // get the diagonal block
-    // setup the preconditioner
-    // delete the matrix
-    CRDoubleMatrix* block_matrix_pt = 0;
-    this->get_block(i,i,block_matrix_pt);
-    Diagonal_block_preconditioner_pt[i]
-      ->setup(block_matrix_pt,this->comm_pt());
-    delete block_matrix_pt;
-    block_matrix_pt = 0;
+    // Get the block and set up the preconditioner.
+    {
+     CRDoubleMatrix block_matrix = this->get_block(i,i);
+     this->Subsidiary_preconditioner_pts[i]
+      ->setup(&block_matrix, this->comm_pt());
+    }
      
     // next setup the off diagonal mat vec operators
     unsigned l = i+1;
@@ -599,22 +646,29 @@ namespace oomph
       l = 0;
       u = i;
      }
+
     for (unsigned j = l; j < u; j++)
      {
-      CRDoubleMatrix* block_matrix_pt = 0;
-      this->get_block(i,j,block_matrix_pt);
-      Off_diagonal_matrix_vector_products(i,j) 
-       = new MatrixVectorProduct();
+      // Get the block
+      CRDoubleMatrix block_matrix = this->get_block(i,j);
+
+      // Copy the block into a "multiplier" class. If trilinos is being
+      // used this should also be faster than oomph-lib's multiplys.
+      Off_diagonal_matrix_vector_products(i,j) = new MatrixVectorProduct();
+
+      // If we have a distribution (e.g. because we have precomputed
+      // blocks) then we need to set it here
       if(this->Preconditioner_blocks_have_been_precomputed)
        {
         Off_diagonal_matrix_vector_products(i,j)->setup
-          (block_matrix_pt,this->Precomputed_block_distribution_pt[j]);
+          (&block_matrix, this->Precomputed_block_distribution_pt[j]);
        }
+
+      // Otherwise assume uniform distribution
       else
        {
-        Off_diagonal_matrix_vector_products(i,j)->setup(block_matrix_pt);
+        Off_diagonal_matrix_vector_products(i,j)->setup(&block_matrix);
        }
-      delete block_matrix_pt;
      }
    }
  }
@@ -660,8 +714,8 @@ namespace oomph
   for (int i = start; i != end; i+=step)
    {
     // solve
-    Diagonal_block_preconditioner_pt[i]->preconditioner_solve(block_r[i],
-                                                              block_z[i]);
+    this->Subsidiary_preconditioner_pts[i]->preconditioner_solve(block_r[i],
+                                                           block_z[i]);
 
     // substitute
     for (int j = i + step; j !=end; j+=step)
@@ -698,16 +752,10 @@ namespace oomph
   
    /// constructor
     ExactBlockPreconditioner() 
-     : GeneralPurposeBlockPreconditioner<MATRIX>()
-    {
-     Preconditioner_pt = 0;
-    }
+     : GeneralPurposeBlockPreconditioner<MATRIX>() {}
    
-   /// Destructor - delete the subisidariry preconditioner
-   ~ExactBlockPreconditioner()
-    {
-     delete Preconditioner_pt;
-    }
+   /// Destructor
+   virtual ~ExactBlockPreconditioner() {}
    
    /// Broken copy constructor
    ExactBlockPreconditioner(const ExactBlockPreconditioner&) 
@@ -726,12 +774,13 @@ namespace oomph
   
    /// \short Setup the preconditioner 
    void setup();
-  
-    private :
 
-   /// \short Vector of SuperLU preconditioner pointers for storing the 
-   /// preconditioners for each diagonal block
-   Preconditioner* Preconditioner_pt;
+   /// \short Access for the preconditioner pointer used to solve the
+   /// system (stored in the vector of pointers in the base class);
+   Preconditioner*& preconditioner_pt()
+   {
+    return this->Subsidiary_preconditioner_pts[0];
+   }
   };
 
  //=============================================================================
@@ -740,10 +789,6 @@ namespace oomph
  template<typename MATRIX> 
   void ExactBlockPreconditioner<MATRIX>::setup()
   {
-   // clean up
-   delete Preconditioner_pt;
-   Preconditioner_pt = 0;
-     
    // Set up the block look up schemes
    this->block_setup();
 
@@ -771,8 +816,8 @@ namespace oomph
      DenseMatrix<bool> required_blocks(nblock_types, nblock_types,true);
   
      // matrix of block pt
-     DenseMatrix<CRDoubleMatrix* > block_matrix_pt(nblock_types, 
-                                                   nblock_types,0);
+     DenseMatrix<CRDoubleMatrix*> block_matrix_pt(nblock_types, 
+                                                  nblock_types,0);
     
      // Get pointers to the blocks
      this->get_blocks(required_blocks, block_matrix_pt);
@@ -790,20 +835,11 @@ namespace oomph
         }
       }
 
-    } // else
-
-   // create the preconditioner
-   if (this->Subsidiary_preconditioner_function_pt == 0)
-    {
-     Preconditioner_pt = new SuperLUPreconditioner;
-    }
-   else
-    {
-     Preconditioner_pt = (*(this->Subsidiary_preconditioner_function_pt))();
     }
 
    // Setup the preconditioner.
-   Preconditioner_pt->setup(exact_block_matrix_pt, this->comm_pt());
+   this->fill_in_subsidiary_preconditioners(1); // Only need one preconditioner
+   preconditioner_pt()->setup(exact_block_matrix_pt, this->comm_pt());
    
    // delete the exact block preconditioner matrix
    delete exact_block_matrix_pt;
@@ -824,11 +860,33 @@ namespace oomph
   DoubleVector block_order_z;
 
   // apply the preconditioner
-  Preconditioner_pt->preconditioner_solve(block_order_r,block_order_z);
+  preconditioner_pt()->preconditioner_solve(block_order_r,block_order_z);
 
   // copy solution back to z vector
   this->return_block_ordered_preconditioner_vector(block_order_z,z);
  }
+
+
+ /// \short Block "anti-diagonal" preconditioner, i.e. same as block
+ /// diagonal but along the other diagonal of the matrix (top-right to
+ /// bottom-left).
+ template<typename MATRIX> 
+ class BlockAntiDiagonalPreconditioner 
+  : public BlockDiagonalPreconditioner<MATRIX>
+ {
+  protected:
+  
+  /// This is a helper function to allow us to implement AntiDiagonal
+  /// preconditioner by only changing this function. Get the second index
+  /// for block number i. Obviously for a diagonal preconditioner we want
+  /// the blocks (i,i). For anti diagonal we will want blocks (i, nblock -
+  /// i).
+  unsigned get_other_diag_ds(const unsigned &i,
+                             const unsigned &nblock) const
+  { return nblock - i; }
+ 
+ };
+
 
 
  // =================================================================
@@ -842,11 +900,11 @@ namespace oomph
 
  public :
 
-  /// constructor
+  /// Constructor
   DummyBlockPreconditioner()
    : GeneralPurposeBlockPreconditioner<MATRIX>() {}
 
-  /// Destructor - delete the subisidariry preconditioner
+  /// Destructor
   ~DummyBlockPreconditioner() {}
 
   /// Broken copy constructor

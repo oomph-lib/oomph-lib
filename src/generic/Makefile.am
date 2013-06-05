@@ -45,7 +45,8 @@ double_vector_with_halo.cc \
 iterative_linear_solver.cc \
 general_purpose_preconditioners.cc block_preconditioner.cc \
 matrix_vector_product.cc \
-sum_of_matrices.cc
+sum_of_matrices.cc \
+preconditioner_array.cc
 #face_element_as_geometric_object.cc
 
 if OOMPH_HAS_MUMPS
@@ -53,7 +54,7 @@ sources+=mumps_fortran_solver.F mumps_solver.cc
 endif
 
 if WANT_MPI
-sources += superlu_dist.c preconditioner_array.cc
+sources += superlu_dist.c
 endif
 
 
@@ -103,15 +104,12 @@ preconditioner.h \
 general_purpose_preconditioners.h block_preconditioner.h \
 general_purpose_block_preconditioners.h SuperLU_preconditioner.h \
 matrix_vector_product.h projection.h line_visualiser.h \
-sum_of_matrices.h convergence_data.h midpoint_method.h poly_interp.h
+sum_of_matrices.h convergence_data.h midpoint_method.h poly_interp.h \
+preconditioner_array.h
 
 
 if OOMPH_HAS_MUMPS
 headers+=mumps_solver.h
-endif
-
-if WANT_MPI
-headers += preconditioner_array.h
 endif
 
 if HAVE_STACKTRACE

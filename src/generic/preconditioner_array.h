@@ -34,17 +34,44 @@
   #include <oomph-lib-config.h>
 #endif
 
-
-#ifdef OOMPH_HAS_MPI
-#include "mpi.h"
-#endif
-
 // oomph-lib includes
 #include "Vector.h"
 #include "double_vector.h"
 #include "matrices.h"
 #include "preconditioner.h"
 
+
+// Preconditioner array is only really possible and useful if we have MPI
+// (and it uses a lot of MPI functions in the .cc file so changing that
+// would be hard). So if we don't have MPI just define a dummy
+// implementation that throws an error if you try to use it.
+#ifndef OOMPH_HAS_MPI
+namespace oomph
+{
+ class PreconditionerArray
+ {
+ public:
+  void setup_preconditioners(Vector<CRDoubleMatrix*> matrix_pt,
+                             Vector<Preconditioner*> prec_pt,
+                             const OomphCommunicator* comm_pt)
+  {
+   throw OomphLibError("PreconditionerArray requires MPI",
+                       OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+  }
+
+  void solve_preconditioners(const Vector<DoubleVector> &r,
+                             Vector<DoubleVector> &z)
+  {
+   throw OomphLibError("PreconditionerArray requires MPI",
+                       OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+  }
+ };
+}
+
+// Otherwise (if we have MPI do the real implementation)
+#else
+
+#include "mpi.h"
 
 
 namespace oomph
@@ -215,4 +242,8 @@ namespace oomph
   };//PreconditionerArray
 }
 
+// End of "if we have MPI"
+#endif
+
+// End of include guard
 #endif
