@@ -15,7 +15,7 @@ incl_cc_files =
 # Define the headers
 headers =  \
 unsteady_heat_elements.h  unsteady_heat_flux_elements.h \
-refineable_unsteady_heat_elements.h Tunsteady_heat_elements.h
+refineable_unsteady_heat_elements.h Tunsteady_heat_elements.h interpolator.h
 
 # Define name of library
 libname = unsteady_heat

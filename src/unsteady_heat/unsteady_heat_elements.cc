@@ -652,8 +652,6 @@ void UnsteadyHeatEquations<DIM>::compute_error(std::ostream &outfile,
 }
 
 
-
-
 //====================================================================
 // Force build of templates
 //====================================================================

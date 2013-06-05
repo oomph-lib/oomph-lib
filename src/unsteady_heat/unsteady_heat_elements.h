@@ -42,6 +42,10 @@
 #include "../generic/oomph_utilities.h"
 
 
+//??ds
+#include "./interpolator.h"
+
+
 namespace oomph
 {
 
@@ -960,6 +964,328 @@ class FaceGeometry<QUnsteadyHeatElement<1,NNODE_1D> >:
 
 
 
+
+
+
+/// \short Simple wrapper class to provide a nice interface to the
+/// interpolator class for unsteady heat equations.
+class UnsteadyHeatInterpolator : public GeneralInterpolator
+{
+
+  public:
+
+ /// Default constructor
+ UnsteadyHeatInterpolator(const FiniteElement* const this_element,
+                          const Vector<double> &s,
+                          const unsigned &u_index_unsteady_heat)
+  : GeneralInterpolator(this_element, s),
+    U_index_unsteady_heat(u_index_unsteady_heat)
+ {}
+
+ double u() { return this->value(U_index_unsteady_heat); }
+ double dudt() {return this->dvaluedt(U_index_unsteady_heat); }
+ const Vector<double>& dudx() {return this->dvaluedx(U_index_unsteady_heat); }
+
+ private:
+ double U_index_unsteady_heat;
+};
+
+
+/// \short A class for the unsteady heat equations using my new
+/// interpolator class to work with midpoint method (can't replace the old
+/// unsteady heat because the implementation isn't "readable" enough?)
+template<unsigned DIM>
+class MidpointSafeUnsteadyHeatEquations : public UnsteadyHeatEquations<DIM>
+{
+ public:
+ /// \short Compute element residual Vector only (if flag=and/or element 
+ /// Jacobian matrix 
+ void fill_in_generic_residual_contribution_ust_heat(Vector<double> &residuals,
+                                                     DenseMatrix<double> &jacobian,
+                                                     unsigned flag)
+ {
+  //Find out how many nodes there are
+  unsigned n_node = this->nnode();
+
+  //Find the index at which the variable is stored
+  unsigned u_nodal_index = this->u_index_ust_heat();
+
+  //Set the value of n_intpt
+  unsigned n_intpt = this->integral_pt()->nweight();
+   
+  //Set the Vector to hold local coordinates
+  Vector<double> s(DIM);
+
+  //Get Alpha and beta parameters number
+  double alpha_local = this->alpha();
+  double beta_local = this->beta();
+
+  //Integers to hold the local equation and unknowns
+  int local_eqn=0, local_unknown=0;
+
+  // Cache time stepper weights needed in Jacobian (??ds write some
+  // documentation on this? needs proper maths really...)  Assuming that
+  // all nodes have the same time stepper, which they probably should.
+  double d_value_evaltime_by_dvalue_np1 = 
+   this->node_pt(0)->time_stepper_pt()->weight(0,0);
+  double d_valuederivative_evaltime_by_dvalue_np1 =
+   this->node_pt(0)->time_stepper_pt()->weight(1,0);
+
+  //Loop over the integration points
+  for(unsigned ipt=0;ipt<n_intpt;ipt++)
+   {
+
+    //Assign values of s
+    for(unsigned i=0;i<DIM;i++) s[i] = this->integral_pt()->knot(ipt,i);
+
+    UnsteadyHeatInterpolator intp(this, s, u_nodal_index);
+
+    //Get the integral weight
+    double w = this->integral_pt()->weight(ipt);
+
+    //Premultiply the weights and the Jacobian
+    double W = w*intp.j();
+
+    //Get source function
+    //-------------------
+    double source=0.0;
+    this->get_source_ust_heat(intp.time(), ipt, intp.x(), source);
+
+    // Assemble residuals and Jacobian
+    //--------------------------------
+       
+    // Loop over the test functions
+    for(unsigned l=0;l<n_node;l++)
+     {
+      local_eqn = this->nodal_local_eqn(l,u_nodal_index);
+      /*IF it's not a boundary condition*/
+      if(local_eqn >= 0)
+       {
+
+        // Add body force/source term and time derivative
+        residuals[local_eqn] += (alpha_local * intp.dudt() + source) 
+         * intp.test(l)*W;
+           
+        // The mesh velocity bit
+        if (!this->ALE_is_disabled)
+         {
+          for(unsigned k=0;k<DIM;k++)
+           {
+            residuals[local_eqn] -= alpha_local*
+             intp.dxdt()[k] * intp.dudx()[k] * intp.test(l)*W;
+           }
+         }
+
+        // Laplace operator
+        for(unsigned k=0;k<DIM;k++)
+         {
+          residuals[local_eqn] += beta_local*
+           intp.dudx()[k]*intp.dtestdx(l,k)*W;
+         }
+
+
+        // Calculate the jacobian
+        //-----------------------
+        if(flag)
+         {
+          //Loop over the velocity shape functions again
+          for(unsigned l2=0;l2<n_node;l2++)
+           { 
+            local_unknown = this->nodal_local_eqn(l2,u_nodal_index);
+            //If at a non-zero degree of freedom add in the entry
+            if(local_unknown >= 0)
+             {
+              // Mass matrix
+              jacobian(local_eqn,local_unknown) 
+               += alpha_local * intp.test(l) * intp.psi(l2) * 
+               d_valuederivative_evaltime_by_dvalue_np1 * W;
+
+              // Laplace operator & mesh velocity bit
+              for(unsigned i=0;i<DIM;i++)
+               {
+                double tmp = intp.dtestdx(l,i);
+                if (!this->ALE_is_disabled)
+                 {
+                  tmp += alpha_local * intp.dxdt()[i] * intp.test(l);
+                 }
+                jacobian(local_eqn,local_unknown) += 
+                 d_value_evaltime_by_dvalue_np1 *
+                 beta_local * intp.dpsidx(l2,i) * tmp * W;
+               }
+             }
+           }
+         }
+       }
+     }
+
+
+   } // End of loop over integration points
+ }
+
+};
+
+
+//======================================================================
+/// QMidpointSafeUnsteadyHeatElement elements are linear/quadrilateral/brick-shaped 
+/// MidpointSafeUnsteadyHeat elements with isoparametric interpolation for the function.
+//======================================================================
+template <unsigned DIM, unsigned NNODE_1D>
+class QMidpointSafeUnsteadyHeatElement : public virtual QElement<DIM,NNODE_1D>,
+                                         public virtual MidpointSafeUnsteadyHeatEquations<DIM>
+{
+
+public:
+ 
+ ///\short  Constructor: Call constructors for QElement and 
+ /// MidpointSafeUnsteadyHeat equations
+ QMidpointSafeUnsteadyHeatElement() : QElement<DIM,NNODE_1D>(), 
+                          MidpointSafeUnsteadyHeatEquations<DIM>()
+ { }
+
+ /// Broken copy constructor
+ QMidpointSafeUnsteadyHeatElement(const QMidpointSafeUnsteadyHeatElement<DIM,NNODE_1D>& dummy) 
+ { 
+  BrokenCopy::broken_copy("QMidpointSafeUnsteadyHeatElement");
+ } 
+ 
+ /// Broken assignment operator
+ void operator=(const QMidpointSafeUnsteadyHeatElement<DIM,NNODE_1D>&) 
+ {
+  BrokenCopy::broken_assign("QMidpointSafeUnsteadyHeatElement");
+ }
+
+ /// \short  Required  # of `values' (pinned or dofs) 
+ /// at node n
+ inline unsigned required_nvalue(const unsigned &n) const 
+  {return 1;}
+
+ /// \short Output function:  
+ ///  x,y,u   or    x,y,z,u
+ void output(std::ostream &outfile)
+ {UnsteadyHeatEquations<DIM>::output(outfile);}
+
+
+ ///  \short Output function:  
+ ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
+ void output(std::ostream &outfile, const unsigned &n_plot)
+ {UnsteadyHeatEquations<DIM>::output(outfile,n_plot);}
+
+
+ /// \short C-style output function:  
+ ///  x,y,u   or    x,y,z,u
+ void output(FILE* file_pt)
+ {UnsteadyHeatEquations<DIM>::output(file_pt);}
+
+
+ ///  \short C-style output function:  
+ ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
+ void output(FILE* file_pt, const unsigned &n_plot)
+ {UnsteadyHeatEquations<DIM>::output(file_pt,n_plot);}
+
+
+ /// \short Output function for an exact solution:
+ ///  x,y,u_exact   or    x,y,z,u_exact at n_plot^DIM plot points
+ void output_fct(std::ostream &outfile, const unsigned &n_plot,
+                 FiniteElement::SteadyExactSolutionFctPt 
+                 exact_soln_pt)
+ {UnsteadyHeatEquations<DIM>::output_fct(outfile,n_plot,exact_soln_pt);}
+
+
+
+ /// \short Output function for a time-dependent exact solution.
+ ///  x,y,u_exact   or    x,y,z,u_exact at n_plot^DIM plot points
+ /// (Calls the steady version)
+ void output_fct(std::ostream &outfile, const unsigned &n_plot,
+                 const double& time,
+                 FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)
+ {UnsteadyHeatEquations<DIM>::output_fct(outfile,n_plot,time,exact_soln_pt);}
+
+
+
+protected:
+
+ /// Shape, test functions & derivs. w.r.t. to global coords. Return Jacobian.
+ inline double dshape_and_dtest_eulerian_ust_heat(const Vector<double> &s, 
+                                                  Shape &psi, 
+                                                  DShape &dpsidx, 
+                                                  Shape &test, 
+                                                  DShape &dtestdx) const;
+ 
+
+ /// \short Shape/test functions and derivs w.r.t. to global coords at 
+ /// integration point ipt; return  Jacobian of mapping
+ inline double dshape_and_dtest_eulerian_at_knot_ust_heat(const unsigned &ipt, 
+                                                          Shape &psi, 
+                                                          DShape &dpsidx,
+                                                          Shape &test, 
+                                                          DShape &dtestdx)
+  const;
+
+};
+
+
+//Inline functions:
+
+
+//======================================================================
+/// Define the shape functions and test functions and derivatives
+/// w.r.t. global coordinates and return Jacobian of mapping.
+///
+/// Galerkin: Test functions = shape functions
+//======================================================================
+template<unsigned DIM, unsigned NNODE_1D>
+double QMidpointSafeUnsteadyHeatElement<DIM,NNODE_1D>::
+dshape_and_dtest_eulerian_ust_heat(const Vector<double> &s,
+                                   Shape &psi, 
+                                   DShape &dpsidx,
+                                   Shape &test, 
+                                   DShape &dtestdx) const
+{
+ //Call the geometrical shape functions and derivatives  
+ double J = this->dshape_eulerian(s,psi,dpsidx);
+ 
+ //Loop over the test functions and derivatives and set them equal to the
+ //shape functions
+ for(unsigned i=0;i<NNODE_1D;i++)
+  {
+   test[i] = psi[i]; 
+   for(unsigned j=0;j<DIM;j++)
+    {
+     dtestdx(i,j) = dpsidx(i,j);
+    }
+  }
+ 
+ //Return the jacobian
+ return J;
+}
+
+
+//======================================================================
+/// Define the shape functions and test functions and derivatives
+/// w.r.t. global coordinates and return Jacobian of mapping.
+///
+/// Galerkin: Test functions = shape functions
+//======================================================================
+template<unsigned DIM,unsigned NNODE_1D>
+double QMidpointSafeUnsteadyHeatElement<DIM,NNODE_1D>::
+dshape_and_dtest_eulerian_at_knot_ust_heat(
+                                           const unsigned &ipt,
+                                           Shape &psi, 
+                                           DShape &dpsidx,
+                                           Shape &test, 
+                                           DShape &dtestdx) const
+{
+ //Call the geometrical shape functions and derivatives  
+ double J = this->dshape_eulerian_at_knot(ipt,psi,dpsidx);
+
+ //Set the test functions equal to the shape functions 
+ //(sets internal pointers)
+ test = psi;
+ dtestdx = dpsidx;
+
+ //Return the jacobian
+ return J;
+}
 
 }
 
