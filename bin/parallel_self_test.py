@@ -21,10 +21,17 @@
 
 
 # Some python 3 compatability. With these imports most scripts should work
-# in both python 2.7 and python 3.
+# in both python 2.7 and python 3.x.
 from __future__ import print_function
 from __future__ import division
 from __future__ import absolute_import
+from __future__ import unicode_literals
+
+# Other compatability notes:
+
+# Anything passed too/from subprocesses as a stream must be encoded (with
+# x.encode()) / decoded (with str(y)) in python3. e.g. see
+# variable_from_makefile.
 
 
 import subprocess as subp
@@ -36,8 +43,8 @@ import os.path
 import multiprocessing
 import itertools as it
 
-from os.path import join as pjoin
 from functools import partial as pt
+from os.path import join as pjoin
 
 
 class Colours:
@@ -113,7 +120,7 @@ def variable_from_makefile(variable_name, makefile_path="Makefile"):
 
     # Send in a dummy makefile with a print command, output should be the
     # value of the variable.
-    stdout, _ = process.communicate("print-var:; @echo $(" + variable_name + ")")
+    stdout, _ = process.communicate(("print-var:; @echo $(" + variable_name + ")").encode())
 
     # Check that make exited with a success code (0)
     returncode = process.wait()
@@ -121,7 +128,7 @@ def variable_from_makefile(variable_name, makefile_path="Makefile"):
         raise subp.CalledProcessError(returncode, "make print-var ....")
 
     # Get rid of trailing newline/whitespace and return
-    return stdout.rstrip()
+    return str(stdout).rstrip()
 
 
 def error(*args):
