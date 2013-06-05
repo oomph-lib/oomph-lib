@@ -815,7 +815,7 @@ namespace CommandLineArgs
 
  /// \short Parse command line, check for recognised flags and assign
  /// associated values
- void parse_and_assign(int argc, char *argv[])
+ void parse_and_assign(int argc, char *argv[], bool throw_on_unrecognised_args)
  {
 
   //Keep looping over command line arguments
@@ -963,11 +963,18 @@ namespace CommandLineArgs
       error_message += "If it should have been recognised, make sure you\n";
       error_message += "used the right number of \"-\" signs...\n";
 
-      //Create an Oomph Lib warning
-      OomphLibWarning(error_message,
-                      "CommandLineArgs::parse_and_assign()",
-                      OOMPH_EXCEPTION_LOCATION);
-
+      if(throw_on_unrecognised_args)
+       {
+        error_message += "Throwing an error because you requested it with throw_on_unrecognised_args option.";
+         throw OomphLibError(error_message, OOMPH_CURRENT_FUNCTION,
+                             OOMPH_EXCEPTION_LOCATION);        
+       }
+      else
+       {
+        //Create an Oomph Lib warning
+        OomphLibWarning(error_message,OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+       }
      }
 
 
@@ -980,9 +987,9 @@ namespace CommandLineArgs
 
  /// \short Parse previously specified command line, check for
  /// recognised flags and assign associated values
- void parse_and_assign()
+ void parse_and_assign(bool throw_on_unrecognised_args)
  {
-  parse_and_assign(Argc,Argv);
+  parse_and_assign(Argc, Argv, throw_on_unrecognised_args);
  }
 
 }

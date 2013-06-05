@@ -578,11 +578,11 @@ namespace CommandLineArgs
 
  /// \short Parse command line, check for recognised flags and assign 
  /// associated values
- extern void parse_and_assign(int argc, char *argv[]);
+ extern void parse_and_assign(int argc, char *argv[], bool throw_on_unrecognised_args=false);
 
  /// \short Parse previously specified command line, check for 
  /// recognised flags and assign associated values
- extern void parse_and_assign();
+ extern void parse_and_assign(bool throw_on_unrecognised_args=false);
 
 }
 
