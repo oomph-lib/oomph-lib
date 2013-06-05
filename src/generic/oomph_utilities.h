@@ -125,11 +125,19 @@ namespace StringConversion
  /// \short Convert a string to upper case (outputs a copy).
  std::string to_upper(const std::string& input);
 
+ /// \short Split a string, s, into a vector of strings where ever there is
+ /// an instance of delimiter (i.e. is delimiter is " " will give a list of
+ /// words). Note that mutliple delimiters in a row will give empty
+ /// strings.
+ void split_string(const std::string &s, char delim, Vector<std::string> &elems);
+
+ /// \short Split a string, s, into a vector of strings where ever there is
+ /// an instance of delimiter (i.e. is delimiter is " " will give a list of
+ /// words). Note that mutliple delimiters in a row will give empty
+ /// strings. Return by value.
+ Vector<std::string> split_string(const std::string &s, char delim);
+
 }
-
-
-
-
 
 //////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////

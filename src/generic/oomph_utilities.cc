@@ -563,6 +563,33 @@ namespace StringConversion
    return output;
   }
 
+ /// \short Split a string, s, into a vector of strings where ever there is
+ /// an instance of delimiter (i.e. is delimiter is " " will give a list of
+ /// words). Note that mutliple delimiters in a row will give empty
+ /// strings.
+ void split_string(const std::string &s, char delim, Vector<std::string> &elems)
+ {
+  // From http://stackoverflow.com/questions/236129/splitting-a-string-in-c
+  std::stringstream ss(s);
+  std::string item;
+  while (std::getline(ss, item, delim))
+   {
+    elems.push_back(item);
+   }
+ }
+
+ /// \short Split a string, s, into a vector of strings where ever there is
+ /// an instance of delimiter (i.e. is delimiter is " " will give a list of
+ /// words). Note that mutliple delimiters in a row will give empty
+ /// strings. Return by value.
+ Vector<std::string> split_string(const std::string &s, char delim) 
+ {
+  // From http://stackoverflow.com/questions/236129/splitting-a-string-in-c
+  Vector<std::string> elems;
+  split_string(s, delim, elems);
+  return elems;
+ }
+
 }
 
 
