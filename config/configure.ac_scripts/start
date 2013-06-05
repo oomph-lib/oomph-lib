@@ -1211,7 +1211,7 @@ else \
   else \
     external_dist_libraries=`echo $external_dist_libraries " -lHYPRE"` ; \
     external_dist_libraries_lib=`echo $external_dist_libraries_lib "-L"$HYPRE_LIB` ; \
-    external_dist_libraries_include=`echo $external_dist_libraries_include "-I"$HYPRE_INCLUDE -DOOMPH_HAS_HYPRE` ; \
+    external_dist_libraries_include=`echo $external_dist_libraries_include "-isystem "$HYPRE_INCLUDE -DOOMPH_HAS_HYPRE` ; \
   fi 
 fi
 
@@ -1357,7 +1357,7 @@ else \
   else \
     external_dist_libraries=`echo $external_dist_libraries " -lml -lifpack -lamesos -lanasazi -laztecoo -lepetraext -ltriutils -lepetra -lteuchos"` ; \
     external_dist_libraries_lib=`echo $external_dist_libraries_lib "-L"$TRILINOS_LIB` ; \
-    external_dist_libraries_include=`echo $external_dist_libraries_include "-I"$TRILINOS_INCLUDE -DOOMPH_HAS_TRILINOS` ; \
+    external_dist_libraries_include=`echo $external_dist_libraries_include "-isystem "$TRILINOS_INCLUDE -DOOMPH_HAS_TRILINOS` ; \
   fi
 fi
 
@@ -1763,7 +1763,7 @@ else \
   else \
     external_dist_libraries=`echo $external_dist_libraries " -ldmumps -lmumps_common "` ; \
     external_dist_libraries_lib=`echo $external_dist_libraries_lib "-L"$MUMPS_LIB` ; \
-    external_dist_libraries_include=`echo $external_dist_libraries_include "-I"$MUMPS_INCLUDE -DOOMPH_HAS_MUMPS` ; \
+    external_dist_libraries_include=`echo $external_dist_libraries_include "-isystem "$MUMPS_INCLUDE -DOOMPH_HAS_MUMPS` ; \
   fi
 fi
 
