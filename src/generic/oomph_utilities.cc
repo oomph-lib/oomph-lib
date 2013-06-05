@@ -518,7 +518,7 @@ void DocInfo::set_directory(const std::string& directory_)
      OomphLibWarning(error_message,"set_directory()",
                      OOMPH_EXCEPTION_LOCATION);
     }
-   //Otherwise throw an erro
+   //Otherwise throw an error
    else
     {
      error_message += "and the Directory_must_exist flag is true.\n";

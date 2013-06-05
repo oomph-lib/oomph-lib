@@ -1748,8 +1748,8 @@ namespace oomph
   // get my_rank and nproc
 #ifdef OOMPH_HAS_MPI
   unsigned my_rank = comm_pt()->my_rank();
-#endif
   unsigned nproc = comm_pt()->nproc();
+#endif
 
   // Get the number of dof types in each mesh.
   Ndof_types_in_mesh.assign(nmesh(),0);

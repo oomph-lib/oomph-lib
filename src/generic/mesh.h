@@ -701,7 +701,7 @@ public:
  /// \short Find a node not on any boundary in mesh_pt (useful for pinning
  /// a single node in a purely Neumann problem so that it is fully
  /// determined).
- Node* get_some_non_boundary_node()
+ Node* get_some_non_boundary_node() const
  {
   for(unsigned nd=0, nnd=nnode(); nd<nnd; nd++)
    {

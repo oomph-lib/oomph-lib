@@ -2136,6 +2136,15 @@ public:
  /// Return the required Eulerian dimension of the nodes in this element
  unsigned nodal_dimension() const {return Nodal_dimension;}
 
+ /// Return the number of vertex nodes in this element. Broken virtual
+ /// function in "pure" finite elements.
+ virtual unsigned nvertex_node() const
+  {
+     std::string error_msg = "Not implemented for FiniteElement.";
+     throw OomphLibError(error_msg, OOMPH_CURRENT_FUNCTION,
+                         OOMPH_EXCEPTION_LOCATION);
+  }
+
  /// \short Construct the local node n and return a pointer to the newly 
  /// created node object.
  virtual Node* construct_node(const unsigned &n)

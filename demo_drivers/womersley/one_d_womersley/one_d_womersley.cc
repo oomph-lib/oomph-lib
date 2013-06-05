@@ -1561,9 +1561,9 @@ int main(int argc, char *argv[])
  bool validation_run=false;
 
 // Trilinos settings
-#ifdef OOMPH_HAS_TRILINOS
+// #ifdef OOMPH_HAS_TRILINOS
  unsigned f_ml_settings=1;
-#endif
+// #endif
 
  // Set Hypre default values
 #ifdef OOMPH_HAS_HYPRE

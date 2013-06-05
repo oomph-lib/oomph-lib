@@ -74,7 +74,9 @@ namespace oomph
   Halo_scheme_pt(0),
 #endif
   Newton_solver_tolerance(1.0e-8),
-  Max_newton_iterations(10), Max_residuals(10.0),
+  Max_newton_iterations(10),
+  Nnewton_iter_taken(0),
+  Max_residuals(10.0),
   Jacobian_reuse_is_enabled(false), Jacobian_has_been_computed(false),
   Problem_is_nonlinear(true),
   Pause_at_end_of_sparse_assembly(false),
@@ -8306,7 +8308,7 @@ void Problem::newton_solve()
                   << "implemented in parallel yet!"
                   << std::endl;
      throw OomphLibError(error_stream.str(),
-OOMPH_CURRENT_FUNCTION,
+                         OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
