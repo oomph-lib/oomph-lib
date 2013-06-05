@@ -433,6 +433,12 @@ fi
 # Create configure options file
 #------------------------------
 
+# If "current" configure options file does not exist then copy in the
+# default one:
+if (test ! -f config/configure_options/current); then
+    cp config/configure_options/default config/configure_options/current
+fi
+
 # Process configure options from the file config/configure_options/current
 # Ignore any line that starts with "#";
 # Add continuation slash at the end of each
