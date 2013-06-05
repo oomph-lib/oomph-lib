@@ -45,6 +45,21 @@
 namespace oomph
 {
 
+/// Base class so that we don't need to know the dimension just to set the
+/// source function!
+class UnsteadyHeatEquationsBase: public virtual FiniteElement
+{
+public:
+ /// \short Function pointer to source function fct(t,x,f(x,t)) --
+ /// x is a Vector!
+ typedef void (*UnsteadyHeatSourceFctPt)(const double& time,
+                                         const Vector<double>& x,
+                                         double& u);
+
+ /// Access function: Pointer to source function
+ virtual UnsteadyHeatSourceFctPt& source_fct_pt()=0;
+};
+
 //=============================================================
 /// A class for all isoparametric elements that solve the 
 /// UnsteadyHeat equations.
@@ -58,7 +73,7 @@ namespace oomph
 /// as the position.
 //=============================================================
 template <unsigned DIM>
-class UnsteadyHeatEquations : public virtual FiniteElement
+class UnsteadyHeatEquations : public virtual UnsteadyHeatEquationsBase
 {
 
 public:
@@ -449,7 +464,7 @@ protected:
 //======================================================================
 template <unsigned DIM, unsigned NNODE_1D>
  class QUnsteadyHeatElement : public virtual QElement<DIM,NNODE_1D>,
- public virtual UnsteadyHeatEquations<DIM>
+                              public virtual UnsteadyHeatEquations<DIM>
 {
   private:
 
