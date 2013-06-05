@@ -97,6 +97,15 @@ namespace oomph
   //---------------------
   std::ifstream element_file(ele_file_name.c_str(),std::ios_base::in);
    
+  // Check that the file actually opened correctly
+  if(!element_file.is_open())
+   {
+    std::string error_msg("Failed to open element file: ");
+    error_msg += "\"" + ele_file_name + "\".";
+    throw OomphLibError(error_msg, OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+
   // Number of elements
   unsigned n_element;
   element_file>>n_element;
@@ -196,6 +205,15 @@ namespace oomph
   // Process node file
   // -----------------
   std::ifstream node_file(node_file_name.c_str(),std::ios_base::in);
+
+  // Check that the file actually opened correctly
+  if(!node_file.is_open())
+   {
+    std::string error_msg("Failed to open node file: ");
+    error_msg += "\"" + node_file_name + "\".";
+    throw OomphLibError(error_msg, OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
 
   // Read number of nodes
   unsigned n_node;
@@ -310,6 +328,15 @@ namespace oomph
    
   // Open poly file
   std::ifstream poly_file(poly_file_name.c_str(),std::ios_base::in);
+
+  // Check that the file actually opened correctly
+  if(!poly_file.is_open())
+   {
+    std::string error_msg("Failed to open poly file: ");
+    error_msg += "\"" + poly_file_name + "\".";
+    throw OomphLibError(error_msg, OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
 
   // Number of nodes in poly file
   unsigned n_node_poly;

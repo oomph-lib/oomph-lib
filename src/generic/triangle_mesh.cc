@@ -417,6 +417,15 @@ namespace TriangleHelper
   
   // Process element file
   std::ifstream element_file(element_file_name.c_str(),std::ios_base::in);
+
+  // Check that the file actually opened correctly
+  if(!element_file.is_open())
+   {
+    std::string error_msg("Failed to open element file: ");
+    error_msg += "\"" + element_file_name + "\".";
+    throw OomphLibError(error_msg, OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
    
   // Read in the number of elements
   element_file >> triangle_io.numberoftriangles;
@@ -474,6 +483,15 @@ namespace TriangleHelper
   // Process node file
   // -----------------
   std::ifstream node_file(node_file_name.c_str(),std::ios_base::in);
+
+  // Check that the file actually opened correctly
+  if(!node_file.is_open())
+   {
+    std::string error_msg("Failed to open node file: ");
+    error_msg += "\"" + node_file_name + "\".";
+    throw OomphLibError(error_msg, OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
 
   // Read number of nodes
   node_file >> triangle_io.numberofpoints;
@@ -544,6 +562,15 @@ namespace TriangleHelper
    
   // Open poly file
   std::ifstream poly_file(poly_file_name.c_str(),std::ios_base::in);
+
+  // Check that the file actually opened correctly
+  if(!poly_file.is_open())
+   {
+    std::string error_msg("Failed to open poly file: ");
+    error_msg += "\"" + poly_file_name + "\".";
+    throw OomphLibError(error_msg, OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
 
   // Number of nodes in poly file --- these will be ignore
   unsigned n_node_poly;
