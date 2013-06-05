@@ -98,8 +98,45 @@ namespace oomph
  template<typename MATRIX>
  class BlockPreconditioner : public Preconditioner
  {
+  public:
 
- public :
+  // Obsolete due to removal of "new" from inside get_block(...)
+  // ============================================================
+  
+  /// \short Obsolete: Get a block from a different matrix using the
+  /// blocking scheme that has already been set up.
+  void get_block_other_matrix(const unsigned& i, const unsigned& j,
+                              MATRIX* in_matrix_pt,
+                              MATRIX*& block_matrix_pt)
+  {
+   ObsoleteCode::obsolete();
+   MATRIX* backup_matrix_pt = matrix_pt();
+   set_matrix_pt(in_matrix_pt);
+
+   get_block(i,j,block_matrix_pt);
+
+   set_matrix_pt(backup_matrix_pt);
+  }
+
+  /// \short Obsolete: Compatability layer for old preconditioners when the
+  /// block preconditioner created matrices with new.
+  ///
+  /// WARNING: the matrix pointer is created using new so you must delete
+  /// it manually!
+  ///
+  /// WARNING 2: the matrix pointer must either be null or a pointer to an
+  /// existing matrix.
+  void get_block(const unsigned& i, const unsigned& j,
+                 MATRIX*& block_matrix_pt)
+  {
+   ObsoleteCode::obsolete();
+   if(block_matrix_pt == 0)
+    {
+     block_matrix_pt = new MATRIX;
+    }
+   
+   get_block(i, j, *block_matrix_pt);
+  }
 
   /// \short Constructor
   BlockPreconditioner()
@@ -210,16 +247,6 @@ namespace oomph
    Allow_multiple_element_type_in_mesh.resize(n,0);
   }
 
-  /// Compatability layer for old preconditioners where problem and matrix
-  /// pointers were passed around as arguments.
-  void set_mesh(const unsigned& i, Problem* const in_problem_pt,
-                Mesh* mesh_pt)
-  {
-   ObsoleteCode::obsolete();
-   // The problem pointer isn't actually used in set_mesh so we can just
-   // call it normally.
-   set_mesh(i, mesh_pt);
-  }
 
   /// Set the i-th mesh for this block preconditioner.
   /// Note:\n
@@ -266,80 +293,6 @@ namespace oomph
   /// unique block type.
   virtual void block_setup();
 
-  /// \short Compatability layer for old preconditioners where problem and
-  /// matrix pointers were passed around as arguments. The problem pointer
-  /// is ignored.
-  virtual void block_setup(Problem* in_problem_pt, 
-                           DoubleMatrixBase* in_matrix_pt)
-  {
-   ObsoleteCode::obsolete();
-   set_matrix_pt(in_matrix_pt);
-  }
-
-  /// \short Compatability layer for old preconditioners where problem and
-  /// matrix pointers were passed around as arguments. The problem pointer
-  /// is ignored.
-  void block_setup(Problem* in_problem_pt, DoubleMatrixBase* in_matrix_pt,
-                   Vector<unsigned>& dof_to_block_map)
-  {
-   ObsoleteCode::obsolete();
-
-   // We don't need to backup and restore the old matrix pointer in this
-   // function because this function is where it is set in the new object
-   // oriented code.
-   MATRIX* cast_matrix_pt = dynamic_cast<MATRIX*>(in_matrix_pt);
-   block_setup(cast_matrix_pt, dof_to_block_map);
-  }
-
-  /// \short Compatability layer for old preconditioners where problem and
-  /// matrix pointers were passed around as arguments.
-  void get_block(const unsigned& i, const unsigned& j,
-                 MATRIX* in_matrix_pt,
-                 MATRIX*& block_matrix_pt)
-  {
-   ObsoleteCode::obsolete();
-
-   MATRIX* backup_matrix_pt = matrix_pt();
-   MATRIX* cast_matrix_pt = dynamic_cast<MATRIX*>(in_matrix_pt);
-   set_matrix_pt(cast_matrix_pt);
-
-   get_block(i,j,block_matrix_pt);
-
-   if(backup_matrix_pt != 0) set_matrix_pt(backup_matrix_pt);
-  }
-
-  /// \short Compatability layer for old preconditioners 
-  /// where problem and matrix pointers were passed around as arguments.
-  void get_blocks(MATRIX* in_matrix_pt,
-                  DenseMatrix<bool>& required_blocks,
-                  DenseMatrix<MATRIX*>& block_matrix_pt)
-  {
-   ObsoleteCode::obsolete();
-
-   MATRIX* backup_matrix_pt = matrix_pt();
-   MATRIX* cast_matrix_pt = dynamic_cast<MATRIX*>(in_matrix_pt);
-   set_matrix_pt(cast_matrix_pt);
-
-   get_blocks(required_blocks,block_matrix_pt);
-
-   if(backup_matrix_pt != 0) set_matrix_pt(backup_matrix_pt);
-  }
-
-  /// \short Get a block from a different matrix using the blocking scheme
-  /// that has already been set up.
-  void get_block_other_matrix(const unsigned& i, const unsigned& j,
-                              MATRIX* in_matrix_pt,
-                              MATRIX*& block_matrix_pt)
-  {
-   MATRIX* backup_matrix_pt = matrix_pt();
-   set_matrix_pt(in_matrix_pt);
-
-   get_block(i,j,block_matrix_pt);
-
-   set_matrix_pt(backup_matrix_pt);
-  }
-
-
   /// \short Determine the size of the matrix blocks and setup the
   /// lookup schemes relating the global degrees of freedom with
   /// their "blocks" and their indices (row/column numbers) in those
@@ -354,21 +307,66 @@ namespace oomph
   void block_setup(const Vector<unsigned>& dof_to_block_map, 
                    bool called_from_argument_free_version = false);
 
-  /// \short Gets block (i,j). If the preconditioner blocks for this
-  /// preconditioner has been precomputed 
-  /// (Preconditioner_blocks_have_been_precomputed is true), then this function 
-  /// calls get_precomputed_block(...), otherwise 
+  /// \short Put block (i,j) into output_matrix.
+  ///
+  /// If the preconditioner blocks for this preconditioner has
+  /// been precomputed (Preconditioner_blocks_have_been_precomputed is
+  /// true), then this function calls get_precomputed_block(...), otherwise
   /// get_block_from_original_matrix(...) is called.
   void get_block(const unsigned& i, const unsigned& j,
-                 MATRIX*& block_matrix_pt) const;
+                 MATRIX& output_matrix) const
+  {
+   // Assume that if the preconditioner blocks have been precomputed, we
+   // would want to use them.
+   if(Preconditioner_blocks_have_been_precomputed)
+    { get_precomputed_block(i, j, output_matrix); }
+   else
+    { get_block_from_original_matrix(i, j, output_matrix); }
+  }
 
-  /// \short Get all the block matrices required by the block preconditioner.
-  /// Takes a pointer to a matrix of bools that indicate if a specified
-  /// sub-block is required for the preconditioning operation. Computes the
-  /// required block matrices, and stores pointers to them in the matrix
-  /// block_matrix_pt. If an entry in block_matrix_pt is equal to NULL on
-  /// return, that sub-block has not been requested and is therefore not
-  /// available.
+  /// \short Return block (i,j).
+  ///
+  /// If the preconditioner blocks for this preconditioner has
+  /// been precomputed (Preconditioner_blocks_have_been_precomputed is
+  /// true), then this function calls get_precomputed_block(...), otherwise
+  /// get_block_from_original_matrix(...) is called.
+  MATRIX get_block(const unsigned& i, const unsigned& j) const
+   {
+    MATRIX output_matrix;
+    get_block(i, j, output_matrix);
+    return output_matrix;
+   }
+
+
+  /// \short Get a block from a different matrix using the blocking scheme
+  /// that has already been set up.
+  void get_block_other_matrix(const unsigned& i, const unsigned& j,
+                              MATRIX* in_matrix_pt,
+                              MATRIX& output_matrix)
+  {
+   MATRIX* backup_matrix_pt = matrix_pt();
+   set_matrix_pt(in_matrix_pt);
+
+   get_block(i, j, output_matrix);
+
+   set_matrix_pt(backup_matrix_pt);
+  }
+
+  /// \short Get all the block matrices required by the block
+  /// preconditioner.  Takes a pointer to a matrix of bools that indicate
+  /// if a specified sub-block is required for the preconditioning
+  /// operation. Computes the required block matrices, and stores pointers
+  /// to them in the matrix block_matrix_pt. If an entry in block_matrix_pt
+  /// is equal to NULL on return, that sub-block has not been requested and
+  /// is therefore not available.
+  ///
+  /// WARNING: the matrix pointers are created using new so you must delete
+  /// them all manually!
+  ///
+  /// WARNING 2: the matrix pointers in block_matrix_pt MUST be null
+  /// because Richard in all his wisdom decided to call delete on any
+  /// non-null pointers. Presumably to avoid fixing his memory leaks
+  /// properly...
   void get_blocks(DenseMatrix<bool>& required_blocks,
                   DenseMatrix<MATRIX*>& block_matrix_pt) const;
  
@@ -588,10 +586,7 @@ namespace oomph
   void output_block(const unsigned &i, const unsigned &j,
                     std::ostream& outstream) const
   {
-   MATRIX* block_matrix_pt = 0;
-   get_block(i,j,block_matrix_pt);
-   block_matrix_pt->sparse_indexed_output(outstream);
-   delete block_matrix_pt;
+   get_block(i,j).sparse_indexed_output(outstream);
   }
 
   /// Output all blocks to numbered files. Called at the end of get blocks if
@@ -1022,23 +1017,6 @@ namespace oomph
                          const MATRIX* block_matrix_pt) const;
 
 
-  /// Compatability layer for old preconditioners where problem and matrix
-  /// pointers were passed around as arguments.
-  void block_matrix_test(const MATRIX *in_matrix_pt,
-                         const unsigned& i,
-                         const unsigned& j,
-                         const MATRIX* block_matrix_pt)
-  {
-   ObsoleteCode::obsolete();
-
-   MATRIX* backup_matrix_pt = matrix_pt();
-   MATRIX* cast_matrix_pt = dynamic_cast<MATRIX*>(in_matrix_pt);
-   set_matrix_pt(cast_matrix_pt);
-   block_matrix_test(i,j,block_matrix_pt);
-   if(backup_matrix_pt != 0) set_matrix_pt(backup_matrix_pt);
-  }
-
-
   /// **No comment was on this function** I think it is some kind of binary
   /// search in the vector vec for value el, it looks like it returns -1 for a
   /// failure - David.
@@ -1148,16 +1126,16 @@ namespace oomph
       const Vector<DoubleVector >& s, DoubleVector& v) const;
 
   /// \short Gets block (i,j) from the original matrix, pointed to by
-  /// Matrix_pt and returns it in block_matrix_pt
+  /// Matrix_pt and returns it in output_block.
   void get_block_from_original_matrix(const unsigned& i, const unsigned& j,
-                                      MATRIX*& block_matrix_pt) const;
+                                      MATRIX& output_block) const;
 
-  /// \short Gets block (i,j) from the Precomputed_block_pt, 
-  /// which is a DenseMatrix of pointers to precomputed (and possibly modified)
-  /// blocks. Necessary concatenation handled by this function and the result
-  /// is returned in block_matrix_pt.
+  /// \short Gets block (i,j) from the Precomputed_block_pt, which is a
+  /// DenseMatrix of pointers to precomputed (and possibly modified)
+  /// blocks. Necessary concatenation handled by this function and the
+  /// result is returned in output_block.
   void get_precomputed_block(const unsigned& i, const unsigned& j,
-                             MATRIX*& block_matrix_pt) const;
+                             MATRIX& output_block) const;
   
   /// \short Check if any of the meshes are distributed. This is equivalent
   /// to problem.distributed() and is used as a replacement.
@@ -1540,21 +1518,18 @@ namespace oomph
 
 
  //============================================================================
+ //??ds
  /// \short Function to turn this preconditioner into a
  /// subsidiary preconditioner that operates within a bigger
  /// "master block preconditioner (e.g. a Navier-Stokes 2x2 block
  /// preconditioner dealing with the fluid sub-blocks within a
  /// 3x3 FSI preconditioner. Once this is done the master block
  /// preconditioner deals with the block setup etc. \n
- /// The vector block_map must specify the block number in the
+ /// The vector block_map must specify the dof number in the
  /// master preconditioner that corresponds to a block number in this
- /// preconditioner.\n
- /// \b 1. The length of the vector is used to determine the number of
+ /// preconditioner.\n ??ds horribly misleading comment!
+ /// The length of the vector is used to determine the number of
  /// blocks in this preconditioner therefore it must be correctly sized. \n
- /// \b 2. \c block_setup(...) should be called in the master preconditioner
- /// before this method is called. \n
- /// \b 3. \c block_setup(...) should be called in the corresponding subsidiary
- /// preconditioner after this method is called.
  //============================================================================
  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
  turn_into_subsidiary_block_preconditioner
@@ -3326,12 +3301,19 @@ namespace oomph
    {
     for (unsigned j = 0; j < n_block_types; j++)
      {
-      // If block(i,j) is required then get it.
+      // If block(i,j) is required then create a matrix and fill it in.
       if (required_blocks(i,j))
-       get_block(i,j,block_matrix_pt(i,j));
+       {
+        //??ds might want to remove this use of new as well?
+        block_matrix_pt(i,j) = new MATRIX;
+        get_block(i, j, *block_matrix_pt(i,j));
+       }
+
       // Otherwise set pointer to null.
       else
-       block_matrix_pt(i,j) = 0;
+       {
+        block_matrix_pt(i,j) = 0;
+       }
      }
    }
  }

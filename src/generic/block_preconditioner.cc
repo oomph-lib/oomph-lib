@@ -34,125 +34,6 @@ namespace oomph
  /// Defaults to false.
  template<typename MATRIX> 
  bool BlockPreconditioner<MATRIX>::Run_block_matrix_test=false;
- 
-//=============================================================================
-/// \short Gets block (i,j) from the original matrix and returns it in
-/// block_matrix_pt (Specialisation for CCDoubleMatrix)
-//=============================================================================
- template<> 
- void BlockPreconditioner<CCDoubleMatrix>:: 
- get_block(const unsigned& i, const unsigned& j, 
-	    CCDoubleMatrix*& block_pt) const
- {
-
-  // pointers for the jacobian matrix is compressed column sparse format 
-  int* j_column_start;
-  int* j_row_index;
-  double* j_value;
-  
-    // Cast the matrix pointer
-    CCDoubleMatrix* cc_matrix_pt = dynamic_cast<CCDoubleMatrix*>(matrix_pt());
-
-  // sets pointers to jacobian matrix
-    j_column_start = cc_matrix_pt->column_start();
-    j_row_index = cc_matrix_pt->row_index();
-    j_value = cc_matrix_pt->value();
-
-  // get the block dimensions
-  unsigned block_nrow = this->block_dimension(i);
-  unsigned block_ncol = this->block_dimension(j);
-
-  // allocate temporary storage for the component vectors of block (i,j)
-  // temp_ptr is used to point to an element in each column - required as
-  // cannot assume that order of block's rows in jacobian and the block
-  // matrix will be the same
-  Vector<int> temp_row_index;
-  Vector<int> temp_column_start(block_ncol+1);
-  Vector<int> temp_ptr(block_ncol+1);
-  Vector<double> temp_value;
-  int block_nnz = 0;
-  
-  // get number of rows in source matrix
-  unsigned master_nrow = this->master_nrow();
-  
-  // determine how many non zeros there are in the block (i,j)
-  // also determines how many non zeros are stored in each row or column - 
-  // stored in temp_ptr temporarily
-  for (unsigned k = 0; k < master_nrow; k++)
-   {
-    if (block_number(k) == static_cast<int>(j))
-     {
-      for (int l = j_column_start[k]; 
-           l < j_column_start[k+1]; l++)
-       {
-        if (block_number(j_row_index[l]) == 
-            static_cast<int>(i))
-         {
-          block_nnz++;
-          temp_ptr[index_in_block(k)+1]++;
-         }
-       }
-     }
-   }
-
-  // if the block matrix is not empty
-  if (block_nnz > 0)
-   {
-
-    // uses number of elements in each column of block to determine values
-    // for the block column start (temp_column_start)
-    temp_column_start[0] = 0;
-    for (unsigned k = 1; k <= block_ncol; k++)
-     {
-      
-      temp_column_start[k] = temp_column_start[k-1]+temp_ptr[k];
-      temp_ptr[k] = temp_column_start[k];
-     }
-    
-    // resizes the block row index and value to store all non zeros
-    temp_row_index.resize(block_nnz);
-    temp_value.resize(block_nnz);
-    
-    // copies the relevant elements of the jacobian to the correct entries 
-    // of the block matrix
-    for (unsigned k = 0; k < master_nrow; k++)
-     {
-      if (block_number(k) == static_cast<int>(j))
-       {
-        for (int l = j_column_start[k]; 
-             l < j_column_start[k+1]; l++)
-         {
-          if (block_number(j_row_index[l]) == 
-              static_cast<int>(i))
-           {
-            int kk = temp_ptr[index_in_block(k)]++;
-            temp_value[kk] = j_value[l];
-            temp_row_index[kk] = index_in_block(j_row_index[l]); 
-           }
-         }
-       }
-     }
-    
-    // creates a new compressed column sparse matrix for the pointer for
-    // the current block 
-    block_pt = new CCDoubleMatrix(temp_value,temp_row_index,
-                                  temp_column_start,block_nrow,block_ncol);
-
-#ifdef PARANOID
-    if (Run_block_matrix_test)
-     {
-      // checks to see if block matrix has been set up correctly 
-	    block_matrix_test(i,j,block_pt);
-     }
-#endif
-   }
- 
-  // else the matrix is empty
-  else
-   {
-    block_pt = 0;
-   }
- }
 
 //=============================================================================
 /// \short Gets block (i,j) from Precomputed_block_pt and returns it in
@@ -161,7 +42,7 @@ namespace oomph
  template<> 
  void BlockPreconditioner<CRDoubleMatrix>:: 
  get_precomputed_block(const unsigned& block_i, const unsigned& block_j, 
-                       CRDoubleMatrix*& block_pt) const
+                       CRDoubleMatrix& output_block) const
  {
 #ifdef PARANOID
   // the number of blocks
@@ -244,18 +125,11 @@ namespace oomph
     unsigned precom_ncol
       = precom_block_pt->ncol();
 
-    // RAYRAY Need to change this so that it doesn't use new.
-    // hierher There are similar constructions elsewhere -- change them too!
-    if(block_pt == 0)
-     {
-      block_pt = new CRDoubleMatrix;
-     }
-
-    block_pt->build(precom_block_pt->distribution_pt(),
-                    precom_ncol,
-                    tmp_values,
-                    tmp_column_indices,
-                    tmp_row_start);
+    output_block.build(precom_block_pt->distribution_pt(),
+                       precom_ncol,
+                       tmp_values,
+                       tmp_column_indices,
+                       tmp_row_start);
    }
   else
    {
@@ -295,19 +169,14 @@ namespace oomph
       = Precomputed_block_pt(prec_row_block_i,0)->distribution_pt();
    }
 
-  // RAYRAY Need to change this so that it doesn't use new.
-  // hierher There are similar constructions elsewhere -- change them too!
-  if(block_pt == 0)
-   {
-    block_pt = new CRDoubleMatrix(Precomputed_block_distribution_pt[block_i]);
-   }
+  output_block.build(Precomputed_block_distribution_pt[block_i]);
 
   // Concatenate the matrix.
   // For now, we use concatenate_without_communication(...) since none of the
   // current preconditioners require the block matrix to be in a particular
   // arrangement. We could use concatenate(...) which requires communication.
   CRDoubleMatrixHelpers::concatenate_without_communication(
-    tmp_row_distribution_pt,tmp_col_distribution_pt, tmp_block_pt, *block_pt);
+    tmp_row_distribution_pt,tmp_col_distribution_pt, tmp_block_pt, output_block);
    }
  }
 
@@ -319,7 +188,7 @@ namespace oomph
  template<> 
  void BlockPreconditioner<CRDoubleMatrix>:: 
  get_block_from_original_matrix(const unsigned& block_i, const unsigned& block_j, 
-                                CRDoubleMatrix*& block_pt) const
+                                CRDoubleMatrix& output_block) const
  {
 
 #ifdef PARANOID
@@ -435,15 +304,13 @@ namespace oomph
      }
       
       
-    // creates a new compressed column sparse matrix for the pointer for
-    // the current block 
-    if (block_pt == 0)
-     {
-      block_pt = new CRDoubleMatrix(Block_distribution_pt[block_i]);
-     }
-    block_pt->build_without_copy(block_ncol,block_nnz,
-                                 temp_value,temp_column_index,
-                                 temp_row_start);
+    // Fill in the compressed row matrix ??ds Note: I kept the calls to
+    // build as close as I could to before (had to replace new(dist) with
+    // .build(dist) ).
+    output_block.build(Block_distribution_pt[block_i]);
+    output_block.build_without_copy(block_ncol,block_nnz,
+                                    temp_value,temp_column_index,
+                                    temp_row_start);
  
 #ifdef PARANOID
     // checks to see if block matrix has been set up correctly 
@@ -451,9 +318,9 @@ namespace oomph
     if (Run_block_matrix_test)
      {
       // checks to see if block matrix has been set up correctly 
-	    block_matrix_test(block_i,block_j,block_pt);
+      block_matrix_test(block_i, block_j, &output_block);
      }
-#endif 
+#endif
    }
 
 
@@ -813,17 +680,13 @@ namespace oomph
       MPI_Waitall(c_recv,&recv2_req[0],MPI_STATUS_IGNORE);   
      }
 
-    // create the matrix
-    // creates a new compressed column sparse matrix for the pointer for
-    // the current block 
-    if (block_pt == 0)
-     {
-      block_pt = new CRDoubleMatrix(Block_distribution_pt[block_i]);
-     }
-    block_pt->build_without_copy(this->block_dimension(block_j),
-                                 local_block_nnz,
-                                 values_recv,column_index_recv,
-                                 row_start_recv);
+    // Fill in the compressed row matrix
+    output_block.build(Block_distribution_pt[block_i]);
+    output_block.build_without_copy(this->block_dimension(block_j),
+                                    local_block_nnz,
+                                    values_recv,
+                                    column_index_recv,
+                                    row_start_recv);
     
     // wait for the send to complete (nnz / row_start)
     int c_send = send_req.size();
@@ -852,29 +715,6 @@ namespace oomph
 #endif 
    }
  }
-
-//=============================================================================
-/// \short Gets block (i,j) from the original matrix and returns it in
-/// block_matrix_pt (Specialisation for CRDoubleMatrix). This function calls
-/// get_precomputed_block(..) if the preconditioner blocks are precomputed
-/// or get_block_from_original_matrix(...) otherwise.
-//=============================================================================
- template<> 
- void BlockPreconditioner<CRDoubleMatrix>:: 
- get_block(const unsigned& block_i, const unsigned& block_j, 
-           CRDoubleMatrix*& block_pt) const
- {
-  // Assume that if the preconditioner blocks have been precomputed, we
-  // would want to use them.
-  if(Preconditioner_blocks_have_been_precomputed)
-   {
-    get_precomputed_block(block_i,block_j,block_pt);
-   }
-  else
-   {
-    get_block_from_original_matrix(block_i,block_j,block_pt);
-   }
- } 
 
 
 //=============================================================================
