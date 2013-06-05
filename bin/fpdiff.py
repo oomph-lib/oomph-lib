@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 
 def gettype(a): 
  """ Distinguish between a number and a string:
