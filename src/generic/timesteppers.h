@@ -463,7 +463,7 @@ public:
  virtual void shift_time_positions(Node* const &node_pt)=0;
   
  /// Function to indicate whether the scheme is adaptive (false by default)
- bool adaptive_flag() {return Adaptive_Flag;}
+ bool adaptive_flag() const {return Adaptive_Flag;}
 
  /// \short Set the weights for the predictor 
  /// previous timestep (currently empty -- overwrite for specific scheme)

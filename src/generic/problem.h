@@ -1306,6 +1306,19 @@ namespace oomph
    return Time_stepper_pt[0];
   }
 
+ /// \short Access function for the pointer to the first (presumably only) 
+ /// timestepper
+ const TimeStepper* time_stepper_pt() const
+ {
+  if (Time_stepper_pt.size()==0)
+   {
+    throw OomphLibError("No timestepper allocated yet\n",
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+  return Time_stepper_pt[0];
+ }
+
  /// Return a pointer to the i-th timestepper
  TimeStepper* &time_stepper_pt(const unsigned &i)
   {return Time_stepper_pt[i];}
