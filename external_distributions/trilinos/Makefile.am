@@ -28,7 +28,7 @@ run_command2 += " --with-lapack=$(oomph_abs_top_srcdir)/external_src/oomph_flapa
 endif
 run_command2 += "--with-gnumake --disable-default-packages --enable-teuchos --enable-epetra --enable-epetraext  --enable-triutils --enable-ifpack --enable-aztecoo --enable-amesos --enable-ml --enable-anasazi"
 
-run_command2 += " F77=$(F77)  CC=$(CC) CXX=$(CXX) FFLAGS=\"$(FFLAGS)\"  CFLAGS=\"$(CFLAGS)\" CXXFLAGS=\"$(CXXFLAGS)\" LDFLAGS=\"$(LDFLAGS)\" " 
+run_command2 += " F77=\"$(F77)\"  CC=\"$(CC)\" CXX=\"$(CXX)\" FFLAGS=\"$(FFLAGS)\"  CFLAGS=\"$(CFLAGS)\" CXXFLAGS=\"$(CXXFLAGS)\" LDFLAGS=\"$(LDFLAGS)\" " 
 
 #===============================TRILINOS 10================================
 
@@ -57,7 +57,7 @@ else
 run_command4 += " -D TPL_ENABLE_LAPACK:BOOL=ON -D TPL_LAPACK_LIBRARIES:STRING=\"$(oomph_abs_top_srcdir)/external_src/oomph_flapack/.libs/liboomph_flapack.a\" " 
 endif
 run_command4 += " -D Trilinos_ENABLE_ALL_PACKAGES:BOOL=OFF -D Trilinos_ENABLE_ALL_OPTIONAL_PACKAGES:BOOL=OFF -D Trilinos_ENABLE_Teuchos:BOOL=ON -D Trilinos_ENABLE_Epetra:BOOL=ON -D Trilinos_ENABLE_EpetraExt:BOOL=ON -D Trilinos_ENABLE_Triutils:BOOL=ON -D Trilinos_ENABLE_Ifpack:BOOL=ON -D Trilinos_ENABLE_AztecOO:BOOL=ON -D Trilinos_ENABLE_Amesos:BOOL=ON -D Trilinos_ENABLE_ML:BOOL=ON -D Trilinos_ENABLE_Anasazi:BOOL=ON "
-run_command4 += " -D CMAKE_Fortran_COMPILER=$(F77)  -D CMAKE_C_COMPILER=$(CC) -D CMAKE_CXX_COMPILER=$(CXX) -D CMAKE_Fortran_FLAGS:STRING=\"$(FFLAGS)\"  -D CMAKE_C_CFLAGS:STRING=\"$(CFLAGS)\" -D CMAKE_CXX_FLAGS:STRING=\"$(CXXFLAGS)\" \\"
+run_command4 += " -D CMAKE_Fortran_COMPILER=\"$(F77)\"  -D CMAKE_C_COMPILER=\"$(CC)\" -D CMAKE_CXX_COMPILER=\"$(CXX)\" -D CMAKE_Fortran_FLAGS:STRING=\"$(FFLAGS)\"  -D CMAKE_C_CFLAGS:STRING=\"$(CFLAGS)\" -D CMAKE_CXX_FLAGS:STRING=\"$(CXXFLAGS)\" \\"
 
 
 all:
