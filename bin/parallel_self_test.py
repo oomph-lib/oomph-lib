@@ -105,17 +105,28 @@ def missing_feature_message(directory, feature):
 # Some general utility functions
 # ============================================================
 
+class NoMakefileError(IOError):
+    pass
+
 def variable_from_makefile(variable_name, makefile_path="Makefile"):
     """Extract a variable from a makefile (using make)."""
 
     if not os.path.isfile(makefile_path):
-        raise IOError
+        raise NoMakefileError("Makefile not found at path: " + makefile_path +
+                              " , maybe you haven't built the Makefile yet or" +
+                              " you are in the wrong folder?")
+
+    # Find out which directory it's in (and handle the case where it's in
+    # the pwd, which dirname fails a bit on...
+    makefile_dir = os.path.dirname(makefile_path)
+    if makefile_dir == "":
+        makefile_dir = pjoin('.','')
 
     # Run make using both a real makefile and a dummy one we are about to
     # create. Call the "print-var" command which will be in the dummy
     # makefile.
     process = subp.Popen(["make", "-f", "-", "-f", makefile_path, "print-var"],
-                         cwd=os.path.dirname(makefile_path),
+                         cwd=makefile_dir,
                          stdin=subp.PIPE, stdout=subp.PIPE)
 
     # Send in a dummy makefile with a print command, output should be the
@@ -127,8 +138,9 @@ def variable_from_makefile(variable_name, makefile_path="Makefile"):
     if returncode != 0:
         raise subp.CalledProcessError(returncode, "make print-var ....")
 
-    # Get rid of trailing newline/whitespace and return
-    return str(stdout).rstrip()
+    # Convert to python string (for python3), strip trailing
+    # newline/whitespace and return.
+    return stdout.decode().rstrip()
 
 
 def error(*args):
@@ -286,10 +298,12 @@ def main():
             args.oomph_root = variable_from_makefile("abs_top_srcdir")
             print("Extracted oomph_root = " + args.oomph_root)
 
-            # If no makefile exists we are stuck:
-        except IOError:
+        # If no makefile exists we are stuck:
+        except NoMakefileError as e:
+            print(str(e))
             error("You must either run this script from within an oomph-lib",
                   "directory or specify the path to oomph_root using -C.")
+
 
 
     if args.base_dirs is None:
