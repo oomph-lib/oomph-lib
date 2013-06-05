@@ -108,6 +108,7 @@ def variable_from_makefile(variable_name, makefile_path="Makefile"):
     # create. Call the "print-var" command which will be in the dummy
     # makefile.
     process = subp.Popen(["make", "-f", "-", "-f", makefile_path, "print-var"],
+                         cwd=os.path.dirname(makefile_path),
                          stdin=subp.PIPE, stdout=subp.PIPE)
 
     # Send in a dummy makefile with a print command, output should be the
