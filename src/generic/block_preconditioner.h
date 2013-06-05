@@ -1537,37 +1537,14 @@ namespace oomph
   // Set the master block preconditioner pointer
   Master_block_preconditioner_pt = master_block_prec_pt;
 
-  // get the number of block types in this preconditioner from the length
-  // of the block_map vector
-  Ndof_types =  block_map.size();
-  Nblock_types = Ndof_types;
-
-  // copy the block_map vector to the Block_number_in_master_preconditioner
-  // vector used to store this information
+  // Set the mapping from the master preconditioner blocks to the
+  // subsidiary preconditioner blocks.
   Dof_number_in_master_preconditioner = block_map;
 
-  // compute number of rows in this (sub) preconditioner
-  Nrow = 0;
-  for (unsigned b = 0; b < Ndof_types; b++)
-   {
-    Nrow += this->dof_block_dimension(b);
-   }
-
-#ifdef PARANOID
-  if (Nrow==0)
-   {
-    std::ostringstream error_message;
-    error_message
-     << "Nrow=0 in subsidiary preconditioner. This seems fishy and\n"
-     << "suggests that block_setup() was not called for the \n"
-     << "master block preconditioner before turning this one into \n"
-     << "a subsidiary one\n";
-    throw OomphLibWarning(
-                          error_message.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-   }
-#endif
+  // Get the number of block types (and dof types) in this preconditioner
+  // from the length of the block_map vector.
+  Ndof_types = block_map.size();
+  Nblock_types = Ndof_types;
  }
 
 
@@ -1588,6 +1565,31 @@ namespace oomph
  block_setup(const Vector<unsigned>& dof_to_block_map,
              bool called_from_arg_free_version)
  {
+
+  if(is_subsidiary_block_preconditioner())
+   {
+    // Compute number of rows in this (sub) preconditioner using data from
+    // the master.
+    Nrow = 0;
+    for (unsigned b = 0; b < Ndof_types; b++)
+     {
+      Nrow += this->dof_block_dimension(b);
+     }
+
+#ifdef PARANOID
+    if (Nrow==0)
+     {
+      std::ostringstream error_message;
+      error_message
+       << "Nrow=0 in subsidiary preconditioner. This seems fishy and\n"
+       << "suggests that block_setup() was not called for the \n"
+       << "master block preconditioner yet.";
+      throw OomphLibWarning(error_message.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+     }
+#endif
+   }
 
   // If the preconditioner blocks have been computed, 
   // the subsidiary preconditioner (THIS preconditioner) always work with the
