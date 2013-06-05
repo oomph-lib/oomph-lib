@@ -286,6 +286,20 @@ public:
  // used as a set function)
  double& time(){return Time_pt->time();}
 
+ /// Return current value of continous time.
+ double time() const
+ {
+#ifdef PARANOID
+  if(Time_pt == 0)
+   {
+    std::string error_msg = "Time pointer is null!";
+    throw OomphLibError(error_msg, OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+  return Time_pt->time();
+ }
+
  /// Number of timestep increments that are required by the scheme
  virtual unsigned ndt()=0;
 

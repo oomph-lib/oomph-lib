@@ -222,12 +222,10 @@ namespace oomph
     {
      std::ostringstream error_message_stream;
      error_message_stream
-      << "The r vector must have teh same distribution as the preconditioner. "
+      << "The r vector must have the same distribution as the preconditioner. "
       << "(this is the same as the matrix passed to setup())";
-     throw OomphLibError
-      (error_message_stream.str(),
-       OOMPH_CURRENT_FUNCTION,
-       OOMPH_EXCEPTION_LOCATION);
+     throw OomphLibError(error_message_stream.str(), OOMPH_CURRENT_FUNCTION,
+                         OOMPH_EXCEPTION_LOCATION);
     }
    if (z.built())
     {
@@ -237,10 +235,8 @@ namespace oomph
        error_message_stream
         << "The z vector distribution has been setup; it must have the "
         << "same distribution as the r vector (and preconditioner).";
-       throw OomphLibError
-        (error_message_stream.str(),
-         OOMPH_CURRENT_FUNCTION,
-         OOMPH_EXCEPTION_LOCATION);
+       throw OomphLibError(error_message_stream.str(), OOMPH_CURRENT_FUNCTION,
+                           OOMPH_EXCEPTION_LOCATION);
       }
     }
 #endif
