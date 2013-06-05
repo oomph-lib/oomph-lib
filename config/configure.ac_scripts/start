@@ -1752,6 +1752,8 @@ fi
 #---------------------------------------------------------
 # external distributions; if not wipe the variables
 #--------------------------------------------------
+# Note: for some reason we can't use -isystem (rather than -I) to include
+# MUMPS libraries without showing warnings.
 if test x$have_mumps = xfalse; then 
   MUMPS_LIB='' ; \
   MUMPS_INCLUDE='' ;\
@@ -1763,7 +1765,7 @@ else \
   else \
     external_dist_libraries=`echo $external_dist_libraries " -ldmumps -lmumps_common "` ; \
     external_dist_libraries_lib=`echo $external_dist_libraries_lib "-L"$MUMPS_LIB` ; \
-    external_dist_libraries_include=`echo $external_dist_libraries_include "-isystem "$MUMPS_INCLUDE -DOOMPH_HAS_MUMPS` ; \
+    external_dist_libraries_include=`echo $external_dist_libraries_include "-I"$MUMPS_INCLUDE -DOOMPH_HAS_MUMPS` ; \
   fi
 fi
 
