@@ -641,15 +641,13 @@ namespace oomph
   /// \short Access function to the master block preconditioner pt.
   Preconditioner* master_block_preconditioner_pt()
   {
-#ifdef OOMPH_HAS_MPI
+#ifdef PARANOID
    if (is_master_block_preconditioner())
     {
      std::ostringstream error_message;
      error_message << "This block preconditioner does not have "
                    << "a master preconditioner.";
-     throw OomphLibError(
-                         error_message.str(),
-                         OOMPH_CURRENT_FUNCTION,
+     throw OomphLibError(error_message.str(), OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
