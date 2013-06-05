@@ -131,7 +131,7 @@ public :
       set_f_preconditioner(F_preconditioner_pt);
 
      //Set the Temperature preconditioner to also use AMG
-     delete Temperature_preconditioner_pt;
+     delete Temperature_preconditioner_pt; Temperature_preconditioner_pt = 0;
 
      Temperature_preconditioner_pt = new HyprePreconditioner;
      Hypre_default_settings::set_defaults_for_navier_stokes_momentum_block(
@@ -168,16 +168,16 @@ public :
    clean_up_memory();
 
    //Delete the P block preconditioners
-   delete P_preconditioner_pt;
+   delete P_preconditioner_pt;  P_preconditioner_pt = 0;
 
    //Delete the F block preconditioner
-   delete F_preconditioner_pt;
+   delete F_preconditioner_pt; F_preconditioner_pt = 0;
 
    //Delete the Navier-Stokes preconditioner (inexact solver)
-   delete Navier_stokes_preconditioner_pt;
+   delete Navier_stokes_preconditioner_pt; Navier_stokes_preconditioner_pt = 0;
 
    //Delete the temperature preconditioner (inexact solver)
-   delete Temperature_preconditioner_pt;
+   delete Temperature_preconditioner_pt; Temperature_preconditioner_pt = 0;
   }
 
 
@@ -350,20 +350,24 @@ void BoussinesqPreconditioner::setup()
   // Extract the additional blocks we need for Boussinesq:
 
   // Temperature matrix
-  CRDoubleMatrix* block_matrix_1_1_pt = 0;
-  this->get_block(1,1,block_matrix_1_1_pt);
+  CRDoubleMatrix* block_matrix_1_1_pt = new CRDoubleMatrix;
+  this->get_block(1,1,*block_matrix_1_1_pt);
 
   // Temperature on fluid terms (if needed)
 
   if (Retain_temperature_onto_fluid_terms)
    {
-    this->get_block(0,1,Block_matrix_0_1_pt);
+    delete Block_matrix_0_1_pt; Block_matrix_0_1_pt = 0;
+    Block_matrix_0_1_pt = new CRDoubleMatrix;
+    this->get_block(0,1,*Block_matrix_0_1_pt);
    }
 
   // Fluid on temperature terms (if needed)
   if (Retain_fluid_onto_temperature_terms)
    {
-    this->get_block(1,0,Block_matrix_1_0_pt);
+    delete Block_matrix_1_0_pt; Block_matrix_1_0_pt = 0;
+    Block_matrix_1_0_pt = new CRDoubleMatrix;
+    this->get_block(1,0,*Block_matrix_1_0_pt);
    }
 
 
@@ -372,8 +376,7 @@ void BoussinesqPreconditioner::setup()
   Temperature_preconditioner_pt->setup(block_matrix_1_1_pt, comm_pt());
   double t_end = TimingHelpers::timer();
   double setup_time= t_end-t_start;
-  delete block_matrix_1_1_pt;
-  block_matrix_1_1_pt = 0;
+  delete block_matrix_1_1_pt; block_matrix_1_1_pt = 0;
 
 
  // Output times

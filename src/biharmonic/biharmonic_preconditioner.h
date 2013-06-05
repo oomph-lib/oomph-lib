@@ -196,7 +196,7 @@ class ExactSubBiharmonicPreconditioner
   /// delete the subsidiary preconditioner pointer
   void clean_up_memory()
    {
-    delete Sub_preconditioner_pt;
+    delete Sub_preconditioner_pt; Sub_preconditioner_pt = 0;
    }
   
   /// Broken copy constructor

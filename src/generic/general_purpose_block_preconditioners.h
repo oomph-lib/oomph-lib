@@ -381,7 +381,7 @@ protected:
      {
       block_diagonal_matrix_pts[i] = new CRDoubleMatrix;
       this->get_block(i, get_other_diag_ds(i, nblock_types),
-                      block_diagonal_matrix_pts[i]);
+                      *block_diagonal_matrix_pts[i]);
      }
 
     // Construct the preconditioner array

@@ -174,10 +174,10 @@ namespace Biharmonic_schur_complement_Hypre_defaults
  Sub_preconditioner_1_pt->setup(matrix_pt(),comm_pt());
  
  // get the matrix ans setup sub preconditioner pt 2
- CRDoubleMatrix* j_33_pt = 0;
- this->get_block(3,3,j_33_pt);
+ CRDoubleMatrix* j_33_pt = new CRDoubleMatrix;
+ this->get_block(3,3,*j_33_pt);
  Sub_preconditioner_2_pt->setup(j_33_pt,comm_pt());
- delete j_33_pt;
+ delete j_33_pt; j_33_pt = 0;
 
  // if the block preconditioner has 5 block types setup the preconditioner
  // for the 5th block diagonal block (Matrix is also diagonal hence a diagonal
@@ -186,14 +186,13 @@ namespace Biharmonic_schur_complement_Hypre_defaults
  if (this->nblock_types() == 5)
   {
    // get the matrix for block J_33
-   CRDoubleMatrix* j_44_pt = 0;
-   this->get_block(4,4,j_44_pt);
+   CRDoubleMatrix* j_44_pt = new CRDoubleMatrix;
+   this->get_block(4,4,*j_44_pt);
 
    // setup the hijacked sub preconditioner
    Hijacked_sub_block_preconditioner_pt = new MatrixBasedDiagPreconditioner;
    Hijacked_sub_block_preconditioner_pt->setup(j_44_pt,comm_pt());
-   delete j_44_pt;
-   j_44_pt = 0;
+   delete j_44_pt; j_44_pt = 0;
   }
 }
 
@@ -298,7 +297,7 @@ void ExactSubBiharmonicPreconditioner::setup()
   // setup the preconditioner
   Sub_preconditioner_pt = new SuperLUPreconditioner;
   Sub_preconditioner_pt->setup(preconditioner_matrix_pt,comm_pt());
-  delete preconditioner_matrix_pt;
+  delete preconditioner_matrix_pt; preconditioner_matrix_pt = 0;
 }
 
 

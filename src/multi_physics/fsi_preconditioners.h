@@ -335,14 +335,14 @@ private:
   // Extract the additional blocks we need for FSI:
   
   // Solid tangent stiffness matrix
-  CRDoubleMatrix* block_matrix_1_1_pt = 0;
-  this->get_block(1,1,block_matrix_1_1_pt);
+  CRDoubleMatrix* block_matrix_1_1_pt = new CRDoubleMatrix;
+  this->get_block(1,1,*block_matrix_1_1_pt);
 
   // Solid on fluid terms (if needed)
   if (Retain_solid_onto_fluid_terms)
    {
-    CRDoubleMatrix* block_matrix_0_1_pt=0;
-    this->get_block(0,1,block_matrix_0_1_pt);
+    CRDoubleMatrix* block_matrix_0_1_pt = new CRDoubleMatrix;
+    this->get_block(0,1,*block_matrix_0_1_pt);
     Matrix_vector_product_0_1_pt->setup(block_matrix_0_1_pt);
     delete block_matrix_0_1_pt;
    }
@@ -350,8 +350,8 @@ private:
   // Fluid on solid terms (if needed)
   if (Retain_fluid_onto_solid_terms)
    {
-    CRDoubleMatrix* block_matrix_1_0_pt=0;
-    this->get_block(1,0,block_matrix_1_0_pt);
+    CRDoubleMatrix* block_matrix_1_0_pt = new CRDoubleMatrix;
+    this->get_block(1,0,*block_matrix_1_0_pt);
     Matrix_vector_product_1_0_pt->setup(block_matrix_1_0_pt);
     delete block_matrix_1_0_pt;
    }

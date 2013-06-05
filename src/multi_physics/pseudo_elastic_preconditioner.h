@@ -794,8 +794,8 @@ namespace oomph
   /// returns the infinite norm of S
   double s_inf_norm()
   {
-   CRDoubleMatrix* m_pt = 0;
-   this->get_block(0,0,m_pt);
+   CRDoubleMatrix* m_pt = new CRDoubleMatrix;
+   this->get_block(0,0,*m_pt);
    double s_inf_norm = m_pt->inf_norm();
    delete m_pt;
    return s_inf_norm;

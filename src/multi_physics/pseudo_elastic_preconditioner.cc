@@ -256,7 +256,8 @@ namespace oomph
    {
     for (unsigned col_i = 0; col_i < n_solid_dof_types; col_i++) 
      {
-      this->get_block(row_i,col_i,solid_matrix_pt(row_i,col_i));
+      solid_matrix_pt(row_i,col_i) = new CRDoubleMatrix;
+      this->get_block(row_i,col_i,*solid_matrix_pt(row_i,col_i));
      }
    }
 
@@ -416,7 +417,7 @@ namespace oomph
    {
     for (unsigned col_i = 0; col_i < n_solid_dof_types; col_i++) 
      {
-      delete solid_matrix_pt(row_i,col_i);
+      delete solid_matrix_pt(row_i,col_i); solid_matrix_pt(row_i,col_i) = 0;
      }
    }
  
@@ -424,8 +425,8 @@ namespace oomph
   Lagrange_multiplier_preconditioner_pt.resize(Dim);
   for (unsigned d = 0; d < Dim; d++)
    {
-    CRDoubleMatrix* b_pt = 0;
-    this->get_block(2*Dim+d,2*d+1,b_pt);
+    CRDoubleMatrix* b_pt = new CRDoubleMatrix;
+    this->get_block(2*Dim+d,2*d+1,*b_pt);
 
     // if a non default preconditioner is specified create 
     // the preconditioners
@@ -442,7 +443,7 @@ namespace oomph
     
     // and setup
     Lagrange_multiplier_preconditioner_pt[d]->setup(b_pt,comm_pt());
-    delete b_pt;
+    delete b_pt; b_pt = 0;
    }
 
  }
@@ -491,8 +492,7 @@ namespace oomph
   this->clear_block_preconditioner_base();
   
   // delete the solid preconditioner
-  delete Elastic_preconditioner_pt;
-  Elastic_preconditioner_pt = 0;
+  delete Elastic_preconditioner_pt; Elastic_preconditioner_pt = 0;
   
   // delete the lagrange multiplier preconditioner pt
   unsigned sz = Lagrange_multiplier_preconditioner_pt.size();
@@ -612,7 +612,7 @@ namespace oomph
                                                      Elastic_mesh_pt,
                                                      comm_pt());
     Scaling = helper_pt->s_inf_norm();
-    delete helper_pt;
+    delete helper_pt; helper_pt = 0;
    }
   else
    {
@@ -698,8 +698,8 @@ namespace oomph
   Lagrange_multiplier_preconditioner_pt.resize(Dim);
   for (unsigned d = 0; d < Dim; d++)
    {
-    CRDoubleMatrix* b_pt = 0;
-    this->get_block(2*Dim+d,Dim+d,b_pt);
+    CRDoubleMatrix* b_pt = new CRDoubleMatrix;
+    this->get_block(2*Dim+d,Dim+d,*b_pt);
 
     // if a non default preconditioner is specified create 
     // the preconditioners
@@ -717,7 +717,7 @@ namespace oomph
     
     // and setup
     Lagrange_multiplier_preconditioner_pt[d]->setup(b_pt,comm_pt());
-    delete b_pt;
+    delete b_pt; b_pt = 0;
    }
 
  }
@@ -822,8 +822,8 @@ namespace oomph
   this->block_setup(dof_to_block_map);
 
   // get block 11
-  CRDoubleMatrix* s11_pt = 0;
-  this->get_block(1,1,s11_pt);
+  CRDoubleMatrix* s11_pt = new CRDoubleMatrix;
+  this->get_block(1,1,*s11_pt);
 
   // add the scaled identity matrix to block 11
   double* s11_values = s11_pt->value();
@@ -847,9 +847,15 @@ namespace oomph
 
   // get the remaining block and build the preconditioner
   DenseMatrix<CRDoubleMatrix* > s_pt(2,2,0);
-  this->get_block(0,0,s_pt(0,0));
-  this->get_block(0,1,s_pt(0,1));
-  this->get_block(1,0,s_pt(1,0));
+  s_pt(0,0) = new CRDoubleMatrix;
+  this->get_block(0,0,*s_pt(0,0));
+
+  s_pt(0,1) = new CRDoubleMatrix;
+  this->get_block(0,1,*s_pt(0,1));
+
+  s_pt(1,0) = new CRDoubleMatrix;
+  this->get_block(1,0,*s_pt(1,0));
+
   s_pt(1,1) = s11_pt;
    
   CRDoubleMatrix* s_prec_pt
@@ -858,10 +864,10 @@ namespace oomph
   CRDoubleMatrixHelpers::concatenate_without_communication(
    Block_distribution_pt,s_pt,*s_prec_pt);
 
-  delete s_pt(0,0);
-  delete s_pt(0,1);
-  delete s_pt(1,0);
-  delete s_pt(1,1);
+  delete s_pt(0,0); s_pt(0,0) = 0;
+  delete s_pt(0,1); s_pt(0,1) = 0;
+  delete s_pt(1,0); s_pt(1,0) = 0;
+  delete s_pt(1,1); s_pt(1,1) = 0;
    
   // setup the preconditioner
   if (Subsidiary_preconditioner_function_pt != 0)
@@ -873,7 +879,7 @@ namespace oomph
     Preconditioner_pt = new SuperLUPreconditioner;
    }
   Preconditioner_pt->setup(s_prec_pt,comm_pt());
-  delete s_prec_pt;
+  delete s_prec_pt; s_prec_pt = 0;
  }
    
  //=============================================================================
@@ -1018,13 +1024,13 @@ namespace oomph
        }
       for (unsigned j = l; j < u; j++)
        {
-        CRDoubleMatrix* block_matrix_pt = 0;
-        this->get_block(d,j,block_matrix_pt);
+        CRDoubleMatrix* block_matrix_pt = new CRDoubleMatrix;
+        this->get_block(d,j,*block_matrix_pt);
         Off_diagonal_matrix_vector_products(d,j) 
          = new MatrixVectorProduct();
         Off_diagonal_matrix_vector_products(d,j)->setup(block_matrix_pt);
 
-        delete block_matrix_pt;
+        delete block_matrix_pt; block_matrix_pt = 0;
        }
      }
    } // setup the subsidiary preconditioner.

@@ -114,8 +114,8 @@ namespace oomph
   
   // Get B (the divergence block)
   double t_get_B_start = TimingHelpers::timer();
-  CRDoubleMatrix* b_pt = 0;
-  this->get_block(1,0,b_pt);
+  CRDoubleMatrix* b_pt = new CRDoubleMatrix;
+  this->get_block(1,0,*b_pt);
   double t_get_B_finish = TimingHelpers::timer();
   if(Doc_time)
    {
@@ -125,13 +125,13 @@ namespace oomph
    }
   
   // the pointer for f
-  CRDoubleMatrix* f_pt = 0;
+  CRDoubleMatrix* f_pt = new CRDoubleMatrix;
   
   // the pointer for the p matrix 
   CRDoubleMatrix* p_matrix_pt = new CRDoubleMatrix;
 
   // the pointer for bt
-  CRDoubleMatrix* bt_pt = 0;
+  CRDoubleMatrix* bt_pt = new CRDoubleMatrix;
 
   // if BFBt is to be formed 
   if (Form_BFBt_product)
@@ -158,7 +158,7 @@ namespace oomph
       double t_BQ_start = TimingHelpers::timer();
       CRDoubleMatrix* temp_matrix_pt = new CRDoubleMatrix;
       b_pt->multiply(*ivmm_pt,*temp_matrix_pt);
-      delete b_pt;
+      delete b_pt; b_pt = 0;
       b_pt = temp_matrix_pt;
       double t_BQ_finish = TimingHelpers::timer();
       if(Doc_time)
@@ -171,7 +171,7 @@ namespace oomph
     
     // Get Bt
     double t_get_Bt_start = TimingHelpers::timer();
-    this->get_block(0,1,bt_pt);
+    this->get_block(0,1,*bt_pt);
     double t_get_Bt_finish = TimingHelpers::timer();
     if(Doc_time)
      {
@@ -199,7 +199,7 @@ namespace oomph
       CRDoubleMatrix* temp_matrix_pt = new CRDoubleMatrix;
       double t_QBt_start = TimingHelpers::timer();
       ivmm_pt->multiply(*bt_pt,*temp_matrix_pt);
-      delete bt_pt;
+      delete bt_pt; bt_pt = 0;
       bt_pt = temp_matrix_pt;
       double t_QBt_finish = TimingHelpers::timer();
       
@@ -217,7 +217,7 @@ namespace oomph
 
     // get block 0 0 
     double t_get_F_start = TimingHelpers::timer();
-    this->get_block(0,0,f_pt);
+    this->get_block(0,0,*f_pt);
     double t_get_F_finish = TimingHelpers::timer();
     if(Doc_time)
      {
@@ -275,8 +275,8 @@ namespace oomph
 
     // and rebuild Bt
     t_get_Bt_start = TimingHelpers::timer();
-    bt_pt = 0;
-    this->get_block(0,1,bt_pt);
+    bt_pt = new CRDoubleMatrix;
+    this->get_block(0,1,*bt_pt);
     t_get_Bt_finish = TimingHelpers::timer();
     if(Doc_time)
      {
@@ -313,7 +313,7 @@ namespace oomph
 
     // Get Bt
     double t_get_Bt_start = TimingHelpers::timer();
-    this->get_block(0,1,bt_pt);
+    this->get_block(0,1,*bt_pt);
     double t_get_Bt_finish = TimingHelpers::timer();
     if(Doc_time)
      {
@@ -328,7 +328,7 @@ namespace oomph
       double t_QBt_matrix_start = TimingHelpers::timer();
       CRDoubleMatrix* qbt_pt = new CRDoubleMatrix;
       ivmm_pt->multiply(*bt_pt, *qbt_pt);
-      delete bt_pt;
+      delete bt_pt; bt_pt = 0;
       bt_pt = qbt_pt;
       double t_QBt_matrix_finish = TimingHelpers::timer();
       if(Doc_time)
@@ -350,7 +350,7 @@ namespace oomph
       oomph_info << "Time to generate P [sec]: "
                  << t_p_time << std::endl;
      }
-    delete b_pt;
+    delete b_pt; b_pt = 0;
     
     // build the matvec operator for QBt
     double t_QBt_MV_start = TimingHelpers::timer();
@@ -363,11 +363,11 @@ namespace oomph
       oomph_info << "Time to build QBt matrix vector operator [sec]: "
                  << t_p_time << std::endl;
      }
-    delete bt_pt;
+    delete bt_pt; bt_pt = 0;
 
     // get F
     double t_get_F_start = TimingHelpers::timer();
-    this->get_block(0,0,f_pt);
+    this->get_block(0,0,*f_pt);
     double t_get_F_finish = TimingHelpers::timer();
     if(Doc_time)
      {
@@ -391,13 +391,13 @@ namespace oomph
     // if F is a block preconditioner then we can delete the F matrix
     if (F_preconditioner_is_block_preconditioner)
      {
-      delete f_pt;
+      delete f_pt; f_pt = 0;
      }
   
     // and rebuild Bt
     t_get_Bt_start = TimingHelpers::timer();
-    bt_pt = 0;
-    this->get_block(0,1,bt_pt);
+    bt_pt = new CRDoubleMatrix;
+    this->get_block(0,1,*bt_pt);
     t_get_Bt_finish = TimingHelpers::timer();
     if(Doc_time)
      {
@@ -422,7 +422,7 @@ namespace oomph
     oomph_info << "Time to build Bt Matrix Vector Operator [sec]: "
                << t_Bt_MV_time << std::endl;
    }
-  delete bt_pt;
+  delete bt_pt; bt_pt = 0;
 
   // if the P preconditioner has not been setup
   if (P_preconditioner_pt == 0)
@@ -440,7 +440,7 @@ namespace oomph
   // Setup the preconditioner for the Pressure matrix
   double t_p_prec_start = TimingHelpers::timer();
   P_preconditioner_pt->setup(p_matrix_pt,comm_pt());
-  delete p_matrix_pt;
+  delete p_matrix_pt; p_matrix_pt = 0;
   p_matrix_pt=0;
   double t_p_prec_finish = TimingHelpers::timer();
   if(Doc_time)
@@ -479,7 +479,7 @@ namespace oomph
   else
    {
     F_preconditioner_pt->setup(f_pt,comm_pt());
-    delete f_pt;
+    delete f_pt; f_pt = 0;
    }
   double t_f_prec_finish = TimingHelpers::timer();
   if(Doc_time)
@@ -1390,34 +1390,28 @@ namespace oomph
   if (Preconditioner_has_been_setup)
    {
     // delete matvecs
-    delete Bt_mat_vec_pt;
-    Bt_mat_vec_pt = 0;
+    delete Bt_mat_vec_pt; Bt_mat_vec_pt = 0;
 
     if (!Form_BFBt_product)
      {
-      delete F_mat_vec_pt;
-      F_mat_vec_pt = 0;
-      delete QBt_mat_vec_pt;
-      QBt_mat_vec_pt = 0;
+      delete F_mat_vec_pt; F_mat_vec_pt = 0;
+      delete QBt_mat_vec_pt; QBt_mat_vec_pt = 0;
      }
     else
      {
-      delete E_mat_vec_pt;
-      E_mat_vec_pt = 0;
+      delete E_mat_vec_pt; E_mat_vec_pt = 0;
      }
 
     // delete stuff from displacement/position solve
     if (Using_default_f_preconditioner)
      {
-      delete F_preconditioner_pt;
-      F_preconditioner_pt = 0;
+      delete F_preconditioner_pt; F_preconditioner_pt = 0;
      }
 
     // delete stuff from Schur complement approx
     if (Using_default_p_preconditioner)
      {
-      delete P_preconditioner_pt;
-      P_preconditioner_pt = 0;
+      delete P_preconditioner_pt; P_preconditioner_pt = 0;
      }
    }
  }

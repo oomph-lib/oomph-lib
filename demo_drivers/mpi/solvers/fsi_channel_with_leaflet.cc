@@ -682,13 +682,13 @@ public :
  ~SimpleFSIPreconditioner()
   {
    //Delete the Navier-Stokes preconditioner
-   delete Navier_stokes_preconditioner_pt;
+   delete Navier_stokes_preconditioner_pt; Navier_stokes_preconditioner_pt = 0;
 
    //Delete the solid preconditioner
-   delete Solid_preconditioner_pt;
+   delete Solid_preconditioner_pt; Solid_preconditioner_pt = 0;
 
    // Delete the matrix vector product operator
-   delete Fluid_solid_coupling_matvec_pt;
+   delete Fluid_solid_coupling_matvec_pt; Fluid_solid_coupling_matvec_pt = 0;
   }//end_of_destructor
  
  
@@ -789,13 +789,13 @@ void SimpleFSIPreconditioner::setup()
   //===============================
 
   // get the solid block matrix (1,1)
-  CRDoubleMatrix* solid_matrix_pt=0;
-  this->get_block(1,1,solid_matrix_pt);
+  CRDoubleMatrix* solid_matrix_pt = new CRDoubleMatrix;
+  this->get_block(1,1,*solid_matrix_pt);
 
   // setup the solid preconditioner
   // (perform the LU decomposition)
   Solid_preconditioner_pt->setup(solid_matrix_pt, comm_pt());
-  delete solid_matrix_pt;
+  delete solid_matrix_pt; solid_matrix_pt = 0;
 
   // Next the fluid preconditioner
   //==============================
@@ -824,12 +824,12 @@ void SimpleFSIPreconditioner::setup()
   //============================================================
 
   // Similar to the solid preconditioner get the matrix
-  CRDoubleMatrix* fluid_onto_solid_matrix_pt=0;
-  this->get_block(1,0,fluid_onto_solid_matrix_pt);
+  CRDoubleMatrix* fluid_onto_solid_matrix_pt = new CRDoubleMatrix;
+  this->get_block(1,0,*fluid_onto_solid_matrix_pt);
 
   // And setup the matrix vector product operator
   Fluid_solid_coupling_matvec_pt->setup(fluid_onto_solid_matrix_pt);
-  delete fluid_onto_solid_matrix_pt;
+  delete fluid_onto_solid_matrix_pt; fluid_onto_solid_matrix_pt = 0;
  }
 
 

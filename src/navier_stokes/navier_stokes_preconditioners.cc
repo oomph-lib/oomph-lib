@@ -250,8 +250,8 @@ namespace oomph
   
   // Get B (the divergence block)
   double t_get_B_start = TimingHelpers::timer();
-  CRDoubleMatrix* b_pt = 0;
-  this->get_block(1,0,b_pt);
+  CRDoubleMatrix* b_pt = new CRDoubleMatrix;
+  this->get_block(1,0,*b_pt);
   double t_get_B_finish = TimingHelpers::timer();
   if(Doc_time)
    {
@@ -315,9 +315,9 @@ namespace oomph
   
   
   // Get gradient matrix Bt
-  CRDoubleMatrix* bt_pt = 0;
+  CRDoubleMatrix* bt_pt = new CRDoubleMatrix;
   double t_get_Bt_start = TimingHelpers::timer();
-  this->get_block(0,1,bt_pt);
+  this->get_block(0,1,*bt_pt);
   double t_get_Bt_finish = TimingHelpers::timer();
   if(Doc_time)
    {
@@ -344,7 +344,7 @@ namespace oomph
   double t_QBt_matrix_start = TimingHelpers::timer();
   CRDoubleMatrix* qbt_pt = new CRDoubleMatrix;
   inv_v_mass_pt->multiply(*bt_pt, *qbt_pt);
-  delete bt_pt;
+  delete bt_pt; bt_pt = 0;
 
   // Store product in bt_pt 
   bt_pt = qbt_pt;
@@ -355,7 +355,7 @@ namespace oomph
     oomph_info << "Time to generate QBt [sec]: "
                << t_QBt_time << std::endl;
    }
-  delete inv_v_mass_pt;
+  delete inv_v_mass_pt; inv_v_mass_pt = 0;
   
   
   // Multiply B from left by divergence matrix B and store result in 
@@ -370,7 +370,7 @@ namespace oomph
                << t_p_time << std::endl;
    }
   // Kill divergence matrix because we don't need it any more
-  delete b_pt;
+  delete b_pt; b_pt = 0;
   
   // Build the matvec operator for QBt
   double t_QBt_MV_start = TimingHelpers::timer();
@@ -385,7 +385,7 @@ namespace oomph
    }
   // Kill gradient matrix B^T (it's been overwritten anyway and
   // needs to be recomputed afresh below)
-  delete bt_pt;
+  delete bt_pt; bt_pt = 0;
   
 
   // Do we need the Fp stuff?
@@ -398,8 +398,8 @@ namespace oomph
     get_pressure_advection_diffusion_matrix(full_fp_matrix);
     
     // Now extract the pressure pressure block
-    CRDoubleMatrix* fp_matrix_pt=0;
-    this->get_block_other_matrix(1,1,&full_fp_matrix,fp_matrix_pt);
+    CRDoubleMatrix* fp_matrix_pt = new CRDoubleMatrix;
+    this->get_block_other_matrix(1,1,&full_fp_matrix,*fp_matrix_pt);
     double t_get_Fp_finish = TimingHelpers::timer();
     if(Doc_time)
      {
@@ -425,17 +425,15 @@ namespace oomph
                  << t_p_time << std::endl;
      }
     // Kill pressure advection diffusion and inverse pressure mass matrices
-    delete inv_p_mass_pt;
-    inv_p_mass_pt=0;
-    delete fp_qp_inv_pt;
-    fp_qp_inv_pt=0;
+    delete inv_p_mass_pt; inv_p_mass_pt = 0;
+    delete fp_qp_inv_pt; fp_qp_inv_pt = 0;
    }
 
 
   // Get momentum block F
-  CRDoubleMatrix* f_pt = 0;
+  CRDoubleMatrix* f_pt = new CRDoubleMatrix;
   double t_get_F_start = TimingHelpers::timer();
-  this->get_block(0,0,f_pt);
+  this->get_block(0,0,*f_pt);
   double t_get_F_finish = TimingHelpers::timer();
   if(Doc_time)
    {
@@ -459,14 +457,14 @@ namespace oomph
   // if F is a block preconditioner then we can delete the F matrix
   if (F_preconditioner_is_block_preconditioner)
    {
-    delete f_pt;
+    delete f_pt; f_pt = 0;
    }
   
   // Rebuild Bt (remember that we temporarily overwrote
   // it by its product with the inverse velocity mass matrix)
   t_get_Bt_start = TimingHelpers::timer();
-  bt_pt = 0;
-  this->get_block(0,1,bt_pt);
+  bt_pt = new CRDoubleMatrix;
+  this->get_block(0,1,*bt_pt);
   t_get_Bt_finish = TimingHelpers::timer();
   if(Doc_time)
    {
@@ -487,7 +485,7 @@ namespace oomph
     oomph_info << "Time to build Bt Matrix Vector Operator [sec]: "
                << t_Bt_MV_time << std::endl;
    }
-  delete bt_pt;
+  delete bt_pt; bt_pt = 0;
 
   // if the P preconditioner has not been setup
   if (P_preconditioner_pt == 0)
@@ -509,8 +507,7 @@ namespace oomph
    }
   
   P_preconditioner_pt->setup(p_matrix_pt,comm_pt());
-  delete p_matrix_pt;
-  p_matrix_pt=0;
+  delete p_matrix_pt; p_matrix_pt = 0;
   double t_p_prec_finish = TimingHelpers::timer();
   if(Doc_time)
    {
@@ -553,7 +550,7 @@ namespace oomph
   else
    {
     F_preconditioner_pt->setup(f_pt,comm_pt());
-    delete f_pt;
+    delete f_pt; f_pt = 0;
    }
   double t_f_prec_finish = TimingHelpers::timer();
   if(Doc_time)

@@ -100,44 +100,6 @@ namespace oomph
  {
   public:
 
-  // Obsolete due to removal of "new" from inside get_block(...)
-  // ============================================================
-  
-  /// \short Obsolete: Get a block from a different matrix using the
-  /// blocking scheme that has already been set up.
-  void get_block_other_matrix(const unsigned& i, const unsigned& j,
-                              MATRIX* in_matrix_pt,
-                              MATRIX*& block_matrix_pt)
-  {
-   ObsoleteCode::obsolete();
-   MATRIX* backup_matrix_pt = matrix_pt();
-   set_matrix_pt(in_matrix_pt);
-
-   get_block(i,j,block_matrix_pt);
-
-   set_matrix_pt(backup_matrix_pt);
-  }
-
-  /// \short Obsolete: Compatability layer for old preconditioners when the
-  /// block preconditioner created matrices with new.
-  ///
-  /// WARNING: the matrix pointer is created using new so you must delete
-  /// it manually!
-  ///
-  /// WARNING 2: the matrix pointer must either be null or a pointer to an
-  /// existing matrix.
-  void get_block(const unsigned& i, const unsigned& j,
-                 MATRIX*& block_matrix_pt)
-  {
-   ObsoleteCode::obsolete();
-   if(block_matrix_pt == 0)
-    {
-     block_matrix_pt = new MATRIX;
-    }
-   
-   get_block(i, j, *block_matrix_pt);
-  }
-
   /// \short Constructor
   BlockPreconditioner()
    : Block_distribution_pt(0), Ndof_types_in_mesh(0),

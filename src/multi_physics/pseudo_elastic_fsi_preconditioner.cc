@@ -168,11 +168,11 @@ namespace oomph {
    }
   else
    {
-    CRDoubleMatrix* ns_matrix_pt = 0;
-    this->get_block(0,0,ns_matrix_pt);
+    CRDoubleMatrix* ns_matrix_pt = new CRDoubleMatrix;
+    this->get_block(0,0,*ns_matrix_pt);
 
     Navier_stokes_preconditioner_pt->setup(ns_matrix_pt,comm_pt());
-    delete ns_matrix_pt;
+    delete ns_matrix_pt; ns_matrix_pt = 0;
    }
   
   // next the solid preconditioner
@@ -215,10 +215,10 @@ namespace oomph {
   else
    {
     Solid_preconditioner_is_block_preconditioner=false;
-    CRDoubleMatrix* s_matrix_pt = 0;
-    this->get_block(1,1,s_matrix_pt);
+    CRDoubleMatrix* s_matrix_pt = new CRDoubleMatrix;
+    this->get_block(1,1,*s_matrix_pt);
     Solid_preconditioner_pt->setup(s_matrix_pt,comm_pt());
-    delete s_matrix_pt;
+    delete s_matrix_pt; s_matrix_pt = 0;
    }
   
   // next the pseudo solid preconditioner
@@ -247,28 +247,28 @@ namespace oomph {
   // =========================================
   
   // setup the fluid pseudo-solid matvec operator
-  CRDoubleMatrix* fp_matrix_pt = 0;
-  get_block(0,2,fp_matrix_pt);
+  CRDoubleMatrix* fp_matrix_pt = new CRDoubleMatrix;
+  get_block(0,2,*fp_matrix_pt);
   Fluid_pseudo_elastic_matvec_pt->setup(fp_matrix_pt);
-  delete fp_matrix_pt;
+  delete fp_matrix_pt; fp_matrix_pt = 0;
   
   // setup the solid fluid matvec operator
-  CRDoubleMatrix* sf_matrix_pt = 0;
-  get_block(1,0,sf_matrix_pt);
+  CRDoubleMatrix* sf_matrix_pt = new CRDoubleMatrix;
+  get_block(1,0,*sf_matrix_pt);
   Solid_fluid_matvec_pt->setup(sf_matrix_pt);
-  delete sf_matrix_pt;
+  delete sf_matrix_pt; sf_matrix_pt = 0;
   
   // setup the solid pseudo-solid matvec operator
-  CRDoubleMatrix* sp_matrix_pt = 0;
-  get_block(1,2,sp_matrix_pt);
+  CRDoubleMatrix* sp_matrix_pt = new CRDoubleMatrix;
+  get_block(1,2,*sp_matrix_pt);
   Solid_pseudo_elastic_matvec_pt->setup(sp_matrix_pt);
-  delete sp_matrix_pt;
+  delete sp_matrix_pt; sp_matrix_pt = 0;
   
   // build the lagrange solid matvec operator
-  CRDoubleMatrix* ls_matrix_pt = 0;
-  get_block(3,1,ls_matrix_pt);
+  CRDoubleMatrix* ls_matrix_pt = new CRDoubleMatrix;
+  get_block(3,1,*ls_matrix_pt);
   Lagrange_solid_matvec_pt->setup(ls_matrix_pt);
-  delete ls_matrix_pt;
+  delete ls_matrix_pt; ls_matrix_pt = 0;
 
  }
 
