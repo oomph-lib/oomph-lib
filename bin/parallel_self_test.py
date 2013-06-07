@@ -42,6 +42,7 @@ import os
 import os.path
 import multiprocessing
 import itertools as it
+import pprint
 
 from functools import partial as pt
 from os.path import join as pjoin
@@ -268,10 +269,15 @@ def main():
     parser.add_argument('-a', action='store_true', dest='makeclean',
                         help='Run make clean on test folders before starting.')
 
-    parser.add_argument('-l', '--base-dirs', action='append', dest='base_dirs',
+    parser.add_argument('-l', '--base-dir', action='append', dest='base_dirs',
+                        default=[],
                         help='Specify directories relative to the root to (recursively)'
                         + ' look for tests in.'
                         + ' Uses "demo_drivers" and "self_test" by default.')
+
+    parser.add_argument('-L', '--base-dirs-file', action='append', dest='base_dirs_files',
+                        default=[],
+                        help='Specify files containing a list of directories relative to the root to (recursively) look for tests in. Uses "demo_drivers" and "self_test" by default.')
 
     parser.add_argument('-j', '-n', dest='ncores',
                         help='Specifiy how many cores should be used altogether \
@@ -305,14 +311,11 @@ def main():
                   "directory or specify the path to oomph_root using -C.")
 
 
-
-    if args.base_dirs is None:
-        args.base_dirs = ["demo_drivers", "self_test"]
-
-
-    # Grep for some way of returning an exit status in validate.sh scripts,
-    # print out those that don't contain one.
+    # If we requested just checking the validate.sh scripts instead of
+    # running the tests
     if args.check_scripts:
+        # Grep for some way of returning an exit status in validate.sh scripts,
+        # print out those that don't contain one.
         print("Checking validate.sh scripts. Any scripts printed below do not set\n"+
               "their exit status properly and so the results cannot be correctly\n"+
               "reported by this script.")
@@ -350,42 +353,58 @@ def main():
         ])
 
     # Print our findings:
-    print("Checked for the following features:")
+    print("\nChecked for the following features:")
     for feature in oomph_features:
         print("    ", feature['feature_name'], ":", feature['have_feature'])
 
+
     # Gather directory lists etc.
     # ============================================================
-    # Create a list of absolute paths to demo driver directories
-    base_dirs = [os.path.join(args.oomph_root, b)
-                 for b in args.base_dirs]
+    base_dirs = args.base_dirs
+
+    # If given any files with lists of dirnames then read in those too
+    for dirs_file_name in args.base_dirs_files:
+        with open(dirs_file_name) as f:
+            # Strip whitespace and ignore blank lines
+            base_dirs = base_dirs + \
+              [l.strip() for l in f.readlines() if l.strip() != ""]
+
+    # If there are no base dirs given in either list then use defaults:
+    if len(base_dirs) == 0:
+        base_dirs = ["demo_drivers", "self_test"]
+
+    # Convert to absolute paths
+    abs_base_dirs = [os.path.join(args.oomph_root, b) for b in base_dirs]
+
+    print("\nLooking for validate.sh scripts in directories:")
+    pprint.pprint(abs_base_dirs)
+    print()
+
+
+    # Run tests
+    # =========================================================================
 
     # Clean up from past runs if requested
     if args.makeclean:
-        print("Running (recursive) make clean in", *base_dirs)
-        for directory in base_dirs:
+        print("Running (recursive) make clean in", *abs_base_dirs)
+        for directory in abs_base_dirs:
             # Make clean in "directory" with stdout thrown away.
             subp.check_call(['make', 'clean', '-k',
                              '-j', str(args.ncores)],
                              stdout = open(os.devnull, 'w'),
                              cwd = directory)
 
-
-    # Run tests
-    # =========================================================================
-
     # Construct a list of validation directories
-    validation_dirs = find_validate_dirs(base_dirs)
+    validation_dirs = find_validate_dirs(abs_base_dirs)
 
-    # Construct function to call
+    # Construct final function to run on each directory
     f = pt(dispatch_dir, features=oomph_features)
 
-    # Run the function we just constructed on all directories in
-    # "validation_dirs" in parallel.
+    # Run it in parallel.
+    Pool().map(f, validation_dirs, 1)
     # Set chunksize to 1 (i.e. each "make check" call is in its own "chunk
     # of work") to avoid the situation where multiple slow "make check"s
     # end up in the same chunk and we have to wait ages for it to finish.
-    Pool().map(f, validation_dirs, 1)
 
     # Done!
     return 0
