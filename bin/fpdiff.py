@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 
 def gettype(a): 
  """ Distinguish between a number and a string:
@@ -23,6 +23,32 @@ def stuff(string,symbol,number):
  string += " "
  return string 
 
+def read_file(filename):
+ """ Read file into a list of strings, uncluding direct reading of ".gz" files
+ Different operations required for gzip files in Python 3 because they are
+ read as binary (rather than text) files
+ """
+ import gzip
+
+ #If the first file is a gzipped file, open it via the gzip module
+ try:
+  if(filename.find(".gz") != -1):
+   F=gzip.open(filename)
+   filedata = [l.decode() for l in F.readlines() ] 
+   F.close()
+ #Otherwise open as normal
+  else:
+   F=open(filename);
+   filedata = F.readlines();
+   F.close() 
+ #If there has been an IO error fail
+ except IOError:
+   sys.stdout.write("\n   [FAILED] : Unable to open the input file %s \n\n" \
+   % filename)
+   sys.exit(5)
+
+ return filedata
+
 def fpdiff(filename1,filename2,relative_error,small):
  """ Calculate the floating-point difference between two data files.
      The idea is to use a looser tolerance than the UNIX diff command,
@@ -33,41 +59,11 @@ def fpdiff(filename1,filename2,relative_error,small):
  """
 
  import math
- import gzip
+
  
  #Open the files
-
- #If the first file is a gzipped file, open it via the gzip module
- try:
-  if(filename1.find(".gz") != -1):
-   F1=gzip.open(filename1)
- #Otherwise open as normal
-  else:
-   F1=open(filename1);
- #If there has been an IO error fail
- except IOError:
-   print 
-   print "   [FAILED] : Unable to open the input file", filename1
-   print
-
- #read contents of file1 into a list and close
- tmpfile1 = F1.readlines(); F1.close()
-
- #If the second file is a gzipped file, open it via the gzip module
- try:
-  if(filename2.find(".gz") != -1):
-   F2=gzip.open(filename2)
- #Otherwise open as normal
-  else:
-   F2=open(filename2);
- #If there has been an IO error, fail
- except IOError:
-   print
-   print "   [FAILED] : Unable to open the input file", filename2
-   print
-
- #read contents of file2 into a list and close
- tmpfile2 = F2.readlines(); F2.close()
+ tmpfile1 = read_file(filename1)
+ tmpfile2 = read_file(filename2)
 
  #Find the number of lines in each file
  n1 = len(tmpfile1)
@@ -93,9 +89,8 @@ def fpdiff(filename1,filename2,relative_error,small):
   count += 1
   #If we've run over the end of the file2, issue a warning and end the loop
   if count >= n:
-   print
-   print "Warning: files have different numbers of lines"
-   print "Results are for first", count, "lines of both files" 
+   sys.stdout.write("\nWarning: files have different numbers of lines")
+   sys.stdout.write("\nResults are for first %d lines of both files\n" % count)
    nerr += 1
    break
   #Read the next line from file2
@@ -113,9 +108,10 @@ def fpdiff(filename1,filename2,relative_error,small):
 
    #If the number of fields is not the same, report it as an error
    if nfields1 != nfields2:
-     print "\n =====> line", count+1,": different number of fields"
-     print nfields1, "fields:", line1; 
-     print nfields2, "fields:", line2
+     sys.stdout.write("\n =====> line %d: different number of fields\n" \
+     % (count+1))
+     sys.stdout.write("%s fields: %s" % (nfields1, line1)) 
+     sys.stdout.write("%s fields: %s" % (nfields2, line2))
      nerr += 1
      continue
     
@@ -188,45 +184,43 @@ def fpdiff(filename1,filename2,relative_error,small):
         #If the relative error is smaller than the tolerance, that's fine
         if diff <= maxreld:
          #Put spaces into the error line
-	 outputline2 = stuff(outputline2," ",fieldlength)
+         outputline2 = stuff(outputline2," ",fieldlength)
         #Otherwise issue an error
         else:
          problem = 1
-	 nerr += 1
+         nerr += 1
          #Put the appropriate symbols into the error line 
          outputline2 = stuff(outputline2,"-",fieldlength)
    
    #If there has been any sort of error, print it
    if problem == 1:
     nline_error += 1
-    print "\n =====> line", count+1
-    print outputline1, "\n", outputline2, "\n", outputline3	
+    sys.stdout.write("\n =====> line %d\n" % (count+1))
+    sys.stdout.write("%s\n%s\n%s\n" % (outputline1, outputline2, outputline3))
  
  #Final print out, once loop over lines is complete
  if nerr > 0: 
-  print
-  print "number of lines processed: ", count
-  print "number of lines containing errors: ", nline_error
-  print "number of errors: ", nerr
-  print "========================================================"
-  print "    Parameters used:"
-  print "        threshold for numerical zero : ", small
-  print "        maximum rel. difference [percent] : ", maxreld
-  print "    Legend: "
-  print "        *******  means differences in data type (string vs number)"
-  print "        -------  means real data exceeded the relative difference maximum" 
-  print "        %%%%%%%  means that two strings are different"
-  print "========================================================"
-  print
-  print "   [FAILED]"
-  print
+  sys.stdout.write("\n number of lines processed: %d" % count)
+  sys.stdout.write("\n number of lines containing errors: %d" % nline_error)
+  sys.stdout.write("\n number of errors: %d " % nerr)
+  sys.stdout.write("\n========================================================")
+  sys.stdout.write("\n    Parameters used:")
+  sys.stdout.write("\n        threshold for numerical zero : %g" % small)
+  sys.stdout.write("\n        maximum rel. difference [percent] : %g" % maxreld)
+  sys.stdout.write("\n    Legend: ")
+  sys.stdout.write("\n        *******  means differences in data type (string vs number)")
+  sys.stdout.write("\n        -------  means real data exceeded the relative difference maximum") 
+  sys.stdout.write("\n        %%%%%%%  means that two strings are different")
+  sys.stdout.write("\n========================================================")
+  sys.stdout.write("\n\n   [FAILED]\n")
   # Return non-zero since it failed
   return 2
  else:
-  print
-  print "   [OK] for fpdiff.py parameters: - max. rel. error = ",maxreld,"%"
-  print "                                  - numerical zero  = ",small
-  print
+  sys.stdout.write(\
+  "\n\n   [OK] for fpdiff.py parameters: - max. rel. error = %g " % maxreld)
+  sys.stdout.write("%")
+  sys.stdout.write(\
+  "\n                                  - numerical zero  = %g\n" % small)
   # Success: return 0
   return 0
 
@@ -247,14 +241,14 @@ if __name__ == "__main__":
 
  #If we're out of range, issue a usage message 
  if narg < 2 or narg > 4:
-  print "\n      *********   ERROR   **********\n"
-  print "Must specify 2, 3 or 4 keywords on the command line. ",
-  print "You have specified", narg, "\n" 
-  print "   Proper usage:  "
-  print "         fpdiff file1 file2 [max_rel_diff_percent] [small]\n"
-  print "      *********  PROGRAM TERMINATING   ***********"
-  print "   [FAILED] "
-  assert 0
+  sys.stdout.write("\n      *********   ERROR   **********\n")
+  sys.stdout.write("\nMust specify 2, 3 or 4 keywords on the command line. ")
+  sys.stdout.write("You have specified %d" % narg) 
+  sys.stdout.write("\n   Proper usage:  ")
+  sys.stdout.write("\n         fpdiff file1 file2 [max_rel_diff_percent] [small]\n")
+  sys.stdout.write("\n      *********  PROGRAM TERMINATING   ***********")
+  sys.stdout.write("\n   [FAILED] \n")
+  sys.exit(4)
  
  #Read any optional arguments
  if narg >= 3:
