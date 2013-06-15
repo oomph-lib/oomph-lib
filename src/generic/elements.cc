@@ -4445,10 +4445,14 @@ void FiniteElement::locate_zeta(const Vector<double> &zeta,
         }
        catch(OomphLibError &error)
         {
+         // I've caught the error so shut up!
+         error.disable_error_message();
+#ifdef PARANOID
          oomph_info << "Error in linear solve for "
-                    << "FiniteElement::locate_zeta"
+                    << "FiniteElement::locate_zeta()"
                     << std::endl;
          oomph_info << "Should not affect the result!" << std::endl;
+#endif
         }
 
        //Add the correction to the local coordinates

@@ -520,7 +520,7 @@ void TriangleMesh<ELEMENT>::setup_boundary_coordinates(const unsigned& b,
       std::ostringstream warning_message;
       warning_message
        << "There are no elements associated with boundary (" << b << ").\n"
-       << "This could happen because you did not specified boundaries with\n"
+       << "This could happen because you did not specify boundaries with\n"
        << "this boundary id. Review carefully the indexing of your\n"
        << "boundaries.";
       OomphLibWarning(warning_message.str(),

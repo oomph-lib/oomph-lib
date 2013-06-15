@@ -687,6 +687,11 @@ namespace oomph
     NavierStokesSchurComplementPreconditioner(Problem* problem_pt) :
      BlockPreconditioner<CRDoubleMatrix>(), Problem_pt(problem_pt)
     {
+     // Insist that all elements are of type 
+     // NavierStokesElementWithDiagonalMassMatrices and issue a warning
+     // if one is not.
+     Accept_non_NavierStokesElementWithDiagonalMassMatrices_elements=false;
+
      // Use Robin BC elements for Fp preconditioner -- yes by default
      Use_robin_for_fp=true;
 
@@ -773,14 +778,30 @@ namespace oomph
 #endif
    return Problem_pt;
   }
+  
+  /// \short Accept presence of elements that are not of type
+  /// NavierStokesElementWithDiagonalMassMatrices without issuing a warning.
+  void enable_accept_non_NavierStokesElementWithDiagonalMassMatrices_elements()
+  {
+   Accept_non_NavierStokesElementWithDiagonalMassMatrices_elements=true;
+  }
 
-   /// Setup the preconditioner
-   void setup();
 
-   /// \short for some reason we have to remind the compiler that there is a
-   /// setup() function in Preconditioner base class.
-   using Preconditioner::setup;
+  /// \short Do not accept presence of elements that are not of type
+  /// NavierStokesElementWithDiagonalMassMatrices without issuing a warning.
+  void disable_accept_non_NavierStokesElementWithDiagonalMassMatrices_elements()
+  {
+   Accept_non_NavierStokesElementWithDiagonalMassMatrices_elements=false;
+  }
 
+
+  /// Setup the preconditioner
+  void setup();
+  
+  /// \short for some reason we have to remind the compiler that there is a
+  /// setup() function in Preconditioner base class.
+  using Preconditioner::setup;
+  
    /// Apply preconditioner to Vector r
    void preconditioner_solve(const DoubleVector&r, DoubleVector &z);
    
@@ -1171,6 +1192,11 @@ namespace oomph
    /// (used so we can wipe the data when the preconditioner is
    /// called again)
    bool Preconditioner_has_been_setup;
+
+   /// \short Boolean to indicate that presence of elements that are not of type
+   /// NavierStokesElementWithDiagonalMassMatrices is acceptable (suppresses
+   /// warning that issued otherwise).
+   bool Accept_non_NavierStokesElementWithDiagonalMassMatrices_elements;
 
    /// \short Helper function to assemble the inverse diagonals of the pressure
    /// and velocity mass matrices from the elemental contributions defined in

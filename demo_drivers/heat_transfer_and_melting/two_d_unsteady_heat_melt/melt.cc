@@ -88,6 +88,10 @@ namespace ExactSolution
 
  /// Growth rate for interface
  double Growth_rate=1.0;
+ 
+ /// \short Frequency of co-sinusoidal oscillation of incoming heat flux
+ /// (to assess suppression of re-freezing). Set to zero for validation.
+ double Omega_cos=0.0;
 
  /// Exact solution as a Vector
  void get_exact_u_for_unsteady_heat_validation(const double& t, 
@@ -128,6 +132,7 @@ t*Y*Y*Growth_rate*pow(sin(2.0*X*0.3141592653589793E1),2.0)*0.3141592653589793E1
 0.3141592653589793E1+2.0*t*t*(Y-1.0+Growth_rate*t*t*(1.0-cos(2.0*X*
 0.3141592653589793E1)))*cos(2.0*X*0.3141592653589793E1)+4.0*t*t*Y*cos(2.0*X*
 0.3141592653589793E1);
+
  }
 
 
@@ -158,7 +163,7 @@ Y*cos(2.0*X*0.3141592653589793E1))*Ny;
 *Growth_rate*Growth_rate*t*t*t*t*pow(sin(2.0*X*0.3141592653589793E1),2.0)*
 0.3141592653589793E1*0.3141592653589793E1);
 
-  flux+=melt_flux;
+  flux+=melt_flux*cos(Omega_cos*t);
  }
 
  /// Height of melting surface
@@ -695,9 +700,14 @@ int main(int argc, char* argv[])
  // Suppress melt flux?
  CommandLineArgs::specify_command_line_flag("--disable_melt_flux");
   
- // Suppress melt flux?
+ // Non-default initial temperature
  CommandLineArgs::specify_command_line_flag("--theta_init",
                                             &ExactSolution::U0);
+
+ //  Frequency of co-sinusoidal oscillation of incoming heat flux
+ // (to assess suppression of re-freezing).
+ CommandLineArgs::specify_command_line_flag("--omega_cos",
+                                            &ExactSolution::Omega_cos);
   
  // Validation
  CommandLineArgs::specify_command_line_flag("--validate");

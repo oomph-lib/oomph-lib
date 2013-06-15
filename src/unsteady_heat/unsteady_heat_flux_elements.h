@@ -209,31 +209,35 @@ UnsteadyHeatFluxElement(FiniteElement* const &bulk_el_pt,
  FaceGeometry<ELEMENT>(), FaceElement()
 { 
 
-#ifdef PARANOID
- {
-  //Check that the element is not a refineable 3d element
-  ELEMENT* elem_pt = new ELEMENT;
-  //If it's three-d
-  if(elem_pt->dim()==3)
-   {
-    //Is it refineable
-    if(dynamic_cast<RefineableElement*>(elem_pt))
-     {
-      //Issue a warning
-      OomphLibWarning(
-       "This flux element will not work correctly if nodes are hanging\n",
-       "UnsteadyHeatFluxElement::Constructor",
-       OOMPH_EXCEPTION_LOCATION);
-     }
-   }
- }
-#endif
-  
  // Let the bulk element build the FaceElement, i.e. setup the pointers 
  // to its nodes (by referring to the appropriate nodes in the bulk
  // element), etc.
  bulk_el_pt->build_face_element(face_index,this);
  
+#ifdef PARANOID
+ {
+  //Check that the element is not a refineable 3d element
+  ELEMENT* elem_pt = dynamic_cast<ELEMENT*>(bulk_el_pt);
+
+  //If it's three-d
+  if(elem_pt->dim()==3)
+   {
+    //Is it refineable
+    RefineableElement* ref_el_pt=dynamic_cast<RefineableElement*>(elem_pt);
+    if(ref_el_pt!=0)
+     {
+      if (this->has_hanging_nodes())
+       {
+        throw OomphLibError(
+         "This flux element will not work correctly if nodes are hanging\n",
+         OOMPH_CURRENT_FUNCTION,
+         OOMPH_EXCEPTION_LOCATION);
+       }
+     }
+   }
+ }
+#endif
+  
  // Initialise the prescribed-flux function pointer to zero
  Flux_fct_pt = 0;
  

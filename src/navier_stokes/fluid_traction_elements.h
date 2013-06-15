@@ -137,6 +137,11 @@ public:
                              called_from_refineable_constructor=false) : 
   FaceGeometry<ELEMENT>(), FaceElement()
   { 
+
+   //Attach the geometrical information to the element. N.B. This function
+   //also assigns nbulk_value from the required_nvalue of the bulk element
+   element_pt->build_face_element(face_index,this);
+ 
 #ifdef PARANOID
    {
     //Check that the element is not a refineable 3d element
@@ -146,23 +151,23 @@ public:
       if(element_pt->dim()==3)
        {
         //Is it refineable
-        if(dynamic_cast<RefineableElement*>(element_pt))
+        RefineableElement* ref_el_pt=
+         dynamic_cast<RefineableElement*>(element_pt);
+        if(ref_el_pt!=0)
          {
-          //Issue a warning
-          OomphLibWarning(
-           "This flux element will not work correctly if nodes are hanging\n",
-           "NavierStokesTractionElement::Constructor",
-           OOMPH_EXCEPTION_LOCATION);
+          if (this->has_hanging_nodes())
+           {
+            throw OomphLibError(
+             "This flux element will not work correctly if nodes are hanging\n",
+             OOMPH_CURRENT_FUNCTION,
+             OOMPH_EXCEPTION_LOCATION);
+           }
          }
        }
      }
    }
 #endif
 
-   //Attach the geometrical information to the element. N.B. This function
-   //also assigns nbulk_value from the required_nvalue of the bulk element
-   element_pt->build_face_element(face_index,this);
- 
    //Set the body force function pointer to zero
    Traction_fct_pt = 0;
  

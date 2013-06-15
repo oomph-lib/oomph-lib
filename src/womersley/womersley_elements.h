@@ -2247,27 +2247,7 @@ class NavierStokesImpedanceTractionElement :
  NavierStokesImpedanceTractionElement(FiniteElement* const &element_pt, 
                                       const int &face_index) : 
   FaceGeometry<BULK_NAVIER_STOKES_ELEMENT>(), FaceElement()
-  { 
-#ifdef PARANOID
- {
-  //Check that the element is not a refineable 3d element
-  BULK_NAVIER_STOKES_ELEMENT* elem_pt = new BULK_NAVIER_STOKES_ELEMENT;
-  //If it's three-d
-  if(elem_pt->dim()==3)
-   {
-    //Is it refineable
-    if(dynamic_cast<RefineableElement*>(elem_pt))
-     {
-      //Issue a warning
-      OomphLibWarning(
-       "This flux element will not work correctly if nodes are hanging\n",
-       "NavierStokesImpedanceTractionElement::Constructor",
-       OOMPH_EXCEPTION_LOCATION);
-     }
-   }
-  delete elem_pt;
- }
-#endif
+   { 
 
    //Attach the geometrical information to the element. N.B. This function
    //also assigns nbulk_value from the required_nvalue of the bulk element
@@ -2287,6 +2267,30 @@ class NavierStokesImpedanceTractionElement :
 
    //Set the dimension from the dimension of the first node
    //Dim = this->node_pt(0)->ndim();
+
+#ifdef PARANOID
+    {
+     //Check that the element is not a refineable 3d element
+     BULK_NAVIER_STOKES_ELEMENT* elem_pt = 
+      dynamic_cast<BULK_NAVIER_STOKES_ELEMENT*>(element_pt);
+     //If it's three-d
+     if(elem_pt->dim()==3)
+      {
+       //Is it refineable
+       RefineableElement* ref_el_pt=dynamic_cast<RefineableElement*>(elem_pt);
+       if(ref_el_pt!=0)
+        {
+         if (this->has_hanging_nodes())
+          {
+           throw OomphLibError(
+            "This flux element will not work correctly if nodes are hanging\n",
+            OOMPH_CURRENT_FUNCTION,
+            OOMPH_EXCEPTION_LOCATION);
+          }
+        }
+      }
+    }
+#endif
  }
 
 

@@ -7,8 +7,9 @@ adv_diff_iterative_linear_solver_tester \
 two_d_poisson_dense_lu \
 two_d_poisson_cg \
 driven_cavity \
-direct_solver_test 
-
+direct_solver_test \
+two_d_linear_elasticity_with_simple_block_diagonal_preconditioner 
+#driven_cavity_with_simple_lsc_preconditioner 
 
 
 
@@ -34,6 +35,20 @@ if !WANT_MPI
 check_PROGRAMS += TrilinosSolver_test
 endif
 endif
+
+
+#-------------------------------------------------------------------
+
+# Sources for executable
+#driven_cavity_with_simple_lsc_preconditioner_SOURCES = \
+#driven_cavity_with_simple_lsc_preconditioner.cc
+
+# Required libraries:
+# $(FLIBS) is included in case the solver involves fortran sources.
+#driven_cavity_with_simple_lsc_preconditioner_LDADD = \
+#                -L@libdir@ -lnavier_stokes  \
+#                -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
+
 
 #-------------------------------------------------------------------
 
@@ -63,6 +78,19 @@ adv_diff_iterative_linear_solver_tester_LDADD = \
 
 
 # Sources for executable
+two_d_linear_elasticity_with_simple_block_diagonal_preconditioner_SOURCES = \
+two_d_linear_elasticity_with_simple_block_diagonal_preconditioner.cc
+
+# Required libraries:
+# $(FLIBS) is included in case the solver involves fortran sources.
+two_d_linear_elasticity_with_simple_block_diagonal_preconditioner_LDADD = \
+                -L@libdir@ -llinear_elasticity  \
+                -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
+
+#----------------------------------------------------------------------
+
+
+# Sources for executable
 two_d_poisson_dense_lu_SOURCES = two_d_poisson_dense_lu.cc
 
 # Required libraries:
@@ -70,6 +98,8 @@ two_d_poisson_dense_lu_SOURCES = two_d_poisson_dense_lu.cc
 two_d_poisson_dense_lu_LDADD = \
                 -L@libdir@ -lpoisson  \
                 -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
+
+
 #----------------------------------------------------------------------
 
 
@@ -148,7 +178,7 @@ INCLUDES =   -I@includedir@
 
 
 
-EXTRA_DIST+=time_driven_cavity.bash
+EXTRA_DIST+=time_driven_cavity.bash driven_cavity_with_simple_lsc_preconditioner.cc
 
 # Additional cleanup commands -- just in case there are serial versions
 # of the Trilinos and Hypre test codes hanging around...

@@ -106,6 +106,34 @@ namespace oomph
 
   };
 
+
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+
+//=======================================================================
+/// Helper namespace for set_terminate function -- used to spawn
+/// messages from uncaught errors (their destructor may not be called)
+///=======================================================================
+namespace TerminateHelper
+{
+ /// Setup terminate helper
+ extern void setup();
+
+ /// \short Suppress error messages (e.g. because error has been caught)
+ extern void suppress_exception_error_messages();
+
+ /// Function to spawn messages from uncaught errors
+ extern void spawn_errors_from_uncaught_errors();
+
+ /// Stream to output error messages
+ extern std::ostream* Error_message_stream_pt;
+
+ /// String stream that records the error message
+ extern std::stringstream* Exception_stringstream_pt;
+
+}
+
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
@@ -142,6 +170,20 @@ class OomphLibQuietException : public std::runtime_error
 //======================================================================
 class OomphLibException : public std::runtime_error
 {
+
+  public:
+
+ /// \short Suppress issueing of the error message in destructor
+ /// (useful if error is caught successfully!)
+ void disable_error_message()
+ {
+  // Suppress output of message in destructor...
+  Suppress_error_message=true;
+
+  // ...and in the big cleanup operation at the end
+  TerminateHelper::suppress_exception_error_messages();
+ }
+
  protected:
 
  ///\short Constructor takes the error description, function name
@@ -159,7 +201,18 @@ class OomphLibException : public std::runtime_error
                    bool list_trace_back);
 
   ///The destructor cannot throw an exception (C++ STL standard)
-  ~OomphLibException() throw() {}
+ ~OomphLibException() throw(); 
+
+ /// Exception stream to which we write message in destructor        
+ std::ostream* Exception_stream_pt;
+
+ /// String stream that records the error message
+ std::stringstream* Exception_stringstream_pt;
+
+ /// \short Boolean to suppress issuing of the error message in destructor
+ /// (useful if error is caught successfully!)
+ bool Suppress_error_message;
+
 };
 
 //====================================================================
@@ -184,7 +237,8 @@ class OomphLibError : public OomphLibException
                const std::string &function_name,
                const char *location) :
   OomphLibException(error_description,function_name,location,"ERROR",
-                    *Stream_pt,Output_width,true) { }
+                    *Stream_pt,Output_width,true) 
+   {}
 
  /// \short Static member function used to specify the error stream,
  /// which must be passed as a pointer because streams cannot be copied.

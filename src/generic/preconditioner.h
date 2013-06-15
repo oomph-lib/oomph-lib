@@ -106,9 +106,6 @@ namespace oomph
   /// \short Clean up memory (empty). Generic interface function.
   virtual void clean_up_memory(){};
 
-  // Access functions
-  // ============================================================
-
   /// Get function for matrix pointer.
   DoubleMatrixBase* matrix_pt() const
   {
@@ -146,18 +143,18 @@ namespace oomph
 #endif
    return Comm_pt;
   }
-
+  
   /// \short Set the communicator pointer
   void set_comm_pt(const OomphCommunicator* const comm_pt)
   {Comm_pt = comm_pt;}
-
+  
  private:
 
   /// Storage for a pointer to the matrix.
   DoubleMatrixBase* Matrix_pt;
 
-  /// Storage for a pointer to the communicator. Null if the preconditioner
-  /// should not be distributed.
+  /// \short Storage for a pointer to the communicator. Null 
+  /// if the preconditioner should not be distributed.
   const OomphCommunicator* Comm_pt;
 
  };//Preconditioner

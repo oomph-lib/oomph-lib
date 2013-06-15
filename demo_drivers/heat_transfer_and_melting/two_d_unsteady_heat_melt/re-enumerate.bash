@@ -1,7 +1,8 @@
 #stem="original_contact"
 #stem="single_kink_contact"
 #stem="pseudo_melt_half"
-stem="proper_melt"
+#stem="proper_melt"
+stem="melt_without_refreeze"
 
 mkdir re_enumerated
 list=`ls $stem.*.png`

@@ -357,7 +357,7 @@ HelmholtzPointSourceProblem()
  // The intrinsic coordinates for the beginning and end of the curve
  double s_start = 0.0;
  double s_end   = MathematicalConstants::Pi;
- unsigned boundary_id = 2;
+ unsigned boundary_id = 0;
  outer_boundary_line_pt[0]=
   new TriangleMeshCurviLine(outer_circle_pt,
                             s_start,
@@ -368,7 +368,7 @@ HelmholtzPointSourceProblem()
  // The intrinsic coordinates for the beginning and end of the curve
  s_start = MathematicalConstants::Pi;
  s_end   = 2.0*MathematicalConstants::Pi;
- boundary_id = 3;
+ boundary_id = 1;
  outer_boundary_line_pt[1]=
   new TriangleMeshCurviLine(outer_circle_pt,
                             s_start,
@@ -414,8 +414,8 @@ HelmholtzPointSourceProblem()
  
  // Create outer boundary elements from all elements that are 
  // adjacent to the outer boundary , but add them to a separate mesh.
- create_outer_bc_elements(2,Bulk_mesh_pt,Helmholtz_outer_boundary_mesh_pt);
- create_outer_bc_elements(3,Bulk_mesh_pt,Helmholtz_outer_boundary_mesh_pt);
+ create_outer_bc_elements(0,Bulk_mesh_pt,Helmholtz_outer_boundary_mesh_pt);
+ create_outer_bc_elements(1,Bulk_mesh_pt,Helmholtz_outer_boundary_mesh_pt);
  
  // Add the several  sub meshes to the problem
  add_sub_mesh(Bulk_mesh_pt);
@@ -491,8 +491,8 @@ void HelmholtzPointSourceProblem<ELEMENT>::actions_after_adapt()
  // Create BC elements 
  // from all elements that are adjacent to the boundaries and add them to 
  // Helmholtz_boundary_meshes
- create_outer_bc_elements(2,Bulk_mesh_pt,Helmholtz_outer_boundary_mesh_pt);
- create_outer_bc_elements(3,Bulk_mesh_pt,Helmholtz_outer_boundary_mesh_pt);
+ create_outer_bc_elements(0,Bulk_mesh_pt,Helmholtz_outer_boundary_mesh_pt);
+ create_outer_bc_elements(1,Bulk_mesh_pt,Helmholtz_outer_boundary_mesh_pt);
 
  // Rebuild the Problem's global mesh from its various sub-meshes
  rebuild_global_mesh();

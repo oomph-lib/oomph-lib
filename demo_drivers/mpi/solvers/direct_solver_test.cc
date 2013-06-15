@@ -275,7 +275,10 @@ void OneDPoissonProblem<ELEMENT>::doc_solution(DocInfo& doc)
 int main(int argc, char **argv)
 {
 #ifdef OOMPH_HAS_MPI
- MPI_Helpers::init(argc,argv);
+ // Setup mpi but don't make a copy of mpi_comm_world because
+ // mumps wants to work with the real thing.
+ bool make_copy_of_mpi_comm_world=false;
+ MPI_Helpers::init(argc,argv,make_copy_of_mpi_comm_world);
 #endif
 
  //Number of elements

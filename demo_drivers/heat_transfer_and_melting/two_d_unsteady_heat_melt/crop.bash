@@ -1,6 +1,7 @@
 #stem="original_contact"
 #stem="single_kink_contact"
-stem="kuhn_tucker_contact"
+#stem="kuhn_tucker_contact"
+stem="sb_rays"
 
 mkdir cropped
 list=`ls $stem.*.png`

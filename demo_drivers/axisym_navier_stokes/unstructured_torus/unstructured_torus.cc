@@ -404,7 +404,7 @@ UnstructuredTorusProblem<ELEMENT>::UnstructuredTorusProblem(
   }
  
  // Specify 1st boundary id
- unsigned bound_id = 1;
+ unsigned bound_id = 0;
  
  // Build the 1st boundary segment
  boundary_segment_pt[0] = new TriangleMeshPolyLine(bound_seg,bound_id);
@@ -423,7 +423,7 @@ UnstructuredTorusProblem<ELEMENT>::UnstructuredTorusProblem(
   }
  
  // Specify 2nd boundary id
- bound_id = 2;
+ bound_id = 1;
  
  // Build the 2nd boundary segment
  boundary_segment_pt[1] = new TriangleMeshPolyLine(bound_seg,bound_id);
@@ -454,7 +454,7 @@ UnstructuredTorusProblem<ELEMENT>::UnstructuredTorusProblem(
  double zeta_start=0.0;
  double zeta_end=MathematicalConstants::Pi;
  unsigned nsegment=8; 
- unsigned boundary_id=1; 
+ unsigned boundary_id=0; 
  curvilinear_boundary_pt[0]=new TriangleMeshCurviLine(
   area_pt,zeta_start,zeta_end, 
   nsegment,boundary_id);
@@ -462,7 +462,7 @@ UnstructuredTorusProblem<ELEMENT>::UnstructuredTorusProblem(
  zeta_start=MathematicalConstants::Pi;
  zeta_end=2.0*MathematicalConstants::Pi;
  nsegment=8; 
- boundary_id=2; 
+ boundary_id=1; 
  curvilinear_boundary_pt[1]=new TriangleMeshCurviLine(
   area_pt,zeta_start,zeta_end, 
   nsegment,boundary_id);

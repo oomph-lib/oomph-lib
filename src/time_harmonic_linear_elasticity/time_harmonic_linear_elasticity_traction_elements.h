@@ -124,25 +124,6 @@ public virtual FaceGeometry<ELEMENT>,
                                              const int &face_index) : 
  FaceGeometry<ELEMENT>(), FaceElement()
   { 
-#ifdef PARANOID
-   {
-    //Check that the element is not a refineable 3d element
-    ELEMENT* elem_pt = new ELEMENT;
-    //If it's three-d
-    if(elem_pt->dim()==3)
-     {
-      //Is it refineable
-      if(dynamic_cast<RefineableElement*>(elem_pt))
-       {
-        //Issue a warning
-        OomphLibWarning(
-         "This flux element will not work correctly if nodes are hanging\n",
-         "TimeHarmonicLinearElasticityTractionElement::Constructor",
-         OOMPH_EXCEPTION_LOCATION);
-       }
-     }
-   }
-#endif
    
    //Attach the geometrical information to the element. N.B. This function
    //also assigns nbulk_value from the required_nvalue of the bulk element
@@ -156,12 +137,6 @@ public virtual FaceGeometry<ELEMENT>,
    this->U_index_time_harmonic_linear_elasticity_traction.resize(n_dim);
    for(unsigned i=0;i<n_dim;i++)
     {
-     //this->U_index_time_harmonic_linear_elasticity_traction[i].real() = 
-     // cast_element_pt->u_index_time_harmonic_linear_elasticity(i).real();
-     //
-     //this->U_index_time_harmonic_linear_elasticity_traction[i].imag() = 
-     // cast_element_pt->u_index_time_harmonic_linear_elasticity(i).imag();
-
      this->U_index_time_harmonic_linear_elasticity_traction[i] =
       cast_element_pt->u_index_time_harmonic_linear_elasticity(i);
     }
@@ -169,6 +144,29 @@ public virtual FaceGeometry<ELEMENT>,
    // Zero traction
    Traction_fct_pt=
     &TimeHarmonicLinearElasticityTractionElementHelper::Zero_traction_fct;
+
+#ifdef PARANOID
+   {
+    //Check that the element is not a refineable 3d element
+    ELEMENT* elem_pt = dynamic_cast<ELEMENT*>(element_pt);
+    //If it's three-d
+    if(elem_pt->dim()==3)
+     {
+      //Is it refineable
+      RefineableElement* ref_el_pt=dynamic_cast<RefineableElement*>(elem_pt);
+      if(ref_el_pt!=0)
+       {
+        if (this->has_hanging_nodes())
+         {
+          throw OomphLibError(
+           "This flux element will not work correctly if nodes are hanging\n",
+           OOMPH_CURRENT_FUNCTION,
+           OOMPH_EXCEPTION_LOCATION);
+         }
+       }
+     }
+   }
+#endif
   }
  
  

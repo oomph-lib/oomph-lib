@@ -52,6 +52,7 @@
 namespace oomph
 {
 
+
 //////////////////////////////////////////////////////////////////
 //Non-inline functions for the problem class
 //////////////////////////////////////////////////////////////////
@@ -109,6 +110,10 @@ namespace oomph
   Shut_up_in_newton_solve(false),
   Always_take_one_newton_step(false)
  {
+
+  /// Setup terminate helper
+  TerminateHelper::setup();
+
   // By default no submeshes:
   Sub_mesh_pt.resize(0);
   // No timesteppers

@@ -2204,6 +2204,19 @@ public virtual FaceGeometry<ELEMENT>,
     // Extract index of nodal value that stores temperature from
     // bulk element
     this->extract_temperature_index_from_bulk_element(bulk_el_pt); 
+    
+#ifdef PARANOID
+    // Check spatial dimension
+    if (this->Dim!=2)
+     {
+      //Issue a warning
+      throw OomphLibError(
+       "This element will almost certainly not work in non-2D problems, though it should be easy enough to upgrade... Volunteers?\n",
+       OOMPH_CURRENT_FUNCTION,
+       OOMPH_EXCEPTION_LOCATION);
+     }
+#endif
+
    }
   
   

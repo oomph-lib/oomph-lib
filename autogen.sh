@@ -35,7 +35,7 @@ CheckOptions()
    awk '
    BEGIN{encountered_first_minus_minus=0
          encountered_first_non_minus_minus_after_first_minus_minus=0}
-   {
+   NF {# pattern NF ignores blank lines since it expands to 0 for empty lines!
    # Ignore any comments (first entry in row starts with "#")
    if (substr($1,1,1)!="#")
     { 
@@ -63,7 +63,7 @@ CheckOptions()
         }
       }
     }
-    }' config/configure_options/current
+    }' `echo $1`
 
 
 #old echo `echo -n $@ | sed 's/^/ /' | sed -n '/[ ].[^-].* --/p'`

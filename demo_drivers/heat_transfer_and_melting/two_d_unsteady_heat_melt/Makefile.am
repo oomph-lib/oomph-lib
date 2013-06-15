@@ -2,7 +2,7 @@
 include $(top_srcdir)/config/makefile_templates/demo_drivers
 
 # Name of executables that should run during the self-test
-check_PROGRAMS=pretend_melt spring_contact melt
+check_PROGRAMS=pretend_melt spring_contact melt stefan_boltzmann stefan_boltzmann_melt
 
 #-------------------------------------------------
 
@@ -36,13 +36,37 @@ melt_LDADD = -L@libdir@ -lconstitutive -lsolid -lunsteady_heat -lgeneric \
 
 #-------------------------------------------------
 
+# Sources for executable
+stefan_boltzmann_SOURCES = stefan_boltzmann.cc temporary_stefan_boltzmann_elements.h
+
+# Required libraries:
+# $(FLIBS) is included in case the solver involves fortran sources.
+stefan_boltzmann_LDADD = -L@libdir@ -lconstitutive -lsolid -lunsteady_heat -lgeneric \
+				$(EXTERNAL_LIBS) $(FLIBS)
+
+#-------------------------------------------------
+
+# Sources for executable
+stefan_boltzmann_melt_SOURCES = stefan_boltzmann_melt.cc heat_transfer_and_melt_elements.h temporary_stefan_boltzmann_elements.h
+
+# Required libraries:
+# $(FLIBS) is included in case the solver involves fortran sources.
+stefan_boltzmann_melt_LDADD = -L@libdir@ -lconstitutive -lsolid -lunsteady_heat -lgeneric \
+				$(EXTERNAL_LIBS) $(FLIBS)
+
+#-------------------------------------------------
 
 
 
-EXTRA_DIST += pseudo_melt.pvsm  plot_pseudo_melt.bash \
-crop.bash plot_spring_contact_landscape.bash spring_contact_landscape.pvsm \
-run_spring_contact.bash exact.map melt.pvsm plot_melt.bash re-enumerate.bash \
-proper_melt.pvsm
+
+EXTRA_DIST += \
+crop.bash  plot_melt.bash  plot_pseudo_melt.bash  plot_sb.bash	plot_spring_contact_landscape.bash  re-enumerate.bash  run_spring_contact.bash
+
+EXTRA_DIST+= \
+melt.pvsm  proper_melt.pvsm  pseudo_melt.pvsm  spring_contact_landscape.pvsm  stefan_boltzmann.pvsm  stefan_boltzmann_rays.pvsm stefan_boltzmann_validation.map
+
+EXTRA_DIST+= \
+exact.map
 
 
 

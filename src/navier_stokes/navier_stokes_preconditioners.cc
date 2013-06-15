@@ -1453,24 +1453,30 @@ namespace oomph
       else
        {
 #ifdef PARANOID
-        std::ostringstream error_message;
-        error_message 
-         << "Navier-Stokes mesh contains element that is not of type \n"
-         << "NavierStokesElementWithDiagonalMassMatrices. \n"
-         << "The element is in fact of type " 
-         << typeid(*el_pt).name() 
-         << "\nWe'll assume that it does not make a used contribution \n" 
-         << "to the inverse diagonal mass matrix used in the preconditioner\n" 
-         << "and (to avoid divisions by zero) fill in dummy unit entries.\n"
-         << "[This case currently arises with flux control problems\n"
-         << "where for simplicity the NetFluxControlElement has been added \n"
-         << "to the Navier Stokes mesh -- this should probably be changed at\n"
-         << "some point -- if you get this warning in any other context\n"
-         << "you should check your code very carefully]\n";
-        OomphLibWarning(
-         error_message.str(),
-         "NavierStokesSchurComplementPreconditioner::assemble_inv_press_and_veloc_mass_matrix_diagonal()",
-         OOMPH_EXCEPTION_LOCATION);       
+        if (!Accept_non_NavierStokesElementWithDiagonalMassMatrices_elements)
+         {
+          std::ostringstream error_message;
+          error_message 
+           << "Navier-Stokes mesh contains element that is not of type \n"
+           << "NavierStokesElementWithDiagonalMassMatrices. \n"
+           << "The element is in fact of type " 
+           << typeid(*el_pt).name() 
+           << "\nWe'll assume that it does not make a used contribution \n" 
+           << "to the inverse diagonal mass matrix used in the preconditioner\n" 
+           << "and (to avoid divisions by zero) fill in dummy unit entries.\n"
+           << "[This case currently arises with flux control problems\n"
+           << "where for simplicity the NetFluxControlElement has been added \n"
+           << "to the Navier Stokes mesh -- this should probably be changed at\n"
+           << "some point -- if you get this warning in any other context\n"
+           << "you should check your code very carefully].\n"
+           << "You can suppress this error message by calling \n\n"
+           << "     NavierStokesSchurComplementPreconditioner::enable_accept_non_NavierStokesElementWithDiagonalMassMatrices_elements()\n\n"
+           << std::endl;
+          OomphLibWarning(
+           error_message.str(),
+           OOMPH_CURRENT_FUNCTION,
+           OOMPH_EXCEPTION_LOCATION);       
+         }
 #endif 
 
         // Fill in dummy entries to stop division by zero below

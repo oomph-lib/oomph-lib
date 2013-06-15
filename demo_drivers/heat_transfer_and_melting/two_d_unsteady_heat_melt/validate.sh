@@ -2,7 +2,7 @@
 
 
 #Set the number of tests to be checked
-NUM_TESTS=6
+NUM_TESTS=7
 
 
 # Setup validation directory
@@ -10,11 +10,38 @@ NUM_TESTS=6
 touch Validation
 rm -r -f Validation
 mkdir Validation
+cd Validation
+
+
+# Validation for demo Stefan Boltzmann problem
+#---------------------------------------------
+
+echo "Running 2D Stefan Boltzmann validation"
+mkdir RESLT
+../stefan_boltzmann > RESLT/OUTPUT
+echo "done"
+echo " " >> validation.log
+echo "2D Stefan Boltzmann validation" >> validation.log
+echo "------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat RESLT/trace.dat  > result_sb.dat
+
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../../bin/fpdiff.py ../validata/result_sb.dat.gz \
+    result_sb.dat  >> validation.log
+fi
+
+mv RESLT RESLT_sb
 
 
 # Validation for demo unsteady heat with pretend melting
 #-------------------------------------------------------
-cd Validation
 
 echo "Running 2D pretend melt validation "
 mkdir RESLT

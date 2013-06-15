@@ -4061,6 +4061,21 @@ class FaceElement: public virtual FiniteElement
     } //End of loop over nodes
   }
 
+
+ /// \short Return boolean to indicate if any of the FaceElement's nodes
+ /// are geometrically hanging (Same as version in RefineableElement
+ /// but we can't inherit because FaceElements don't know if they
+ /// are refineable (they're not).
+ bool has_hanging_nodes()
+ {
+  unsigned nnod=nnode();
+  for (unsigned j=0;j<nnod;j++)
+   {
+    if (node_pt(j)->is_hanging()) return true;
+   }
+  return false;
+ }
+ 
 };
 
 

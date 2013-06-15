@@ -126,33 +126,39 @@ public:
                       const bool& called_from_refineable_constructor=false) : 
   FaceGeometry<ELEMENT>(), FaceElement()
   { 
-#ifdef PARANOID
-   {
-    //Check that the element is not a refineable 3d element
-    if (!called_from_refineable_constructor)
-     {
-      if(element_pt->dim()==3)
-       {
-        //Is it refineable
-        if(dynamic_cast<RefineableElement*>(element_pt))
-         {
-          //Issue a warning
-          OomphLibWarning(
-           "This face element will not work correctly if nodes are hanging.\nUse the refineable version instead. ",
-           "SolidTractionElement::Constructor",
-           OOMPH_EXCEPTION_LOCATION);
-         }
-       }
-     }
-   }
-#endif
- 
+
    //Attach the geometrical information to the element. N.B. This function
    //also assigns nbulk_value from the required_nvalue of the bulk element
    element_pt->build_face_element(face_index,this);
  
    // Zero traction
    Traction_fct_pt=&SolidTractionElementHelper::Zero_traction_fct;
+
+#ifdef PARANOID
+   {
+    //Check that the bulk element is not a refineable 3d element
+    if (!called_from_refineable_constructor)
+     {
+      if(element_pt->dim()==3)
+       {
+        //Is it refineable
+        RefineableElement* ref_el_pt=
+         dynamic_cast<RefineableElement*>(element_pt);
+        if(ref_el_pt!=0)
+         {
+          if (this->has_hanging_nodes())
+           {
+            throw OomphLibError(
+             "This face element will not work correctly if nodes are hanging.\nUse the refineable version instead. ",
+             OOMPH_CURRENT_FUNCTION,
+             OOMPH_EXCEPTION_LOCATION);
+           }
+         }
+       }
+     }
+   }
+#endif
+
   }
  
 
@@ -1144,6 +1150,9 @@ public:
    // this element's residuals.
    Sparsify=true; 
    
+   //Build the face element
+   element_pt->build_face_element(face_index,this);
+
 #ifdef PARANOID
    { 
     // Initialise number of assigned geom Data.
@@ -1155,13 +1164,17 @@ public:
       if(element_pt->dim()==3)
        {
         //Is it refineable
-        if(dynamic_cast<RefineableElement*>(element_pt))
+        RefineableElement* ref_el_pt=
+         dynamic_cast<RefineableElement*>(element_pt);
+        if(ref_el_pt!=0)
          {
-          //Issue a warning
-          OomphLibWarning(
-           "This face element will not work correctly if nodes are hanging\nUse the refineable version instead. ",
-           "ImposeDisplacementByLagrangeMultiplierElement::Constructor",
-           OOMPH_EXCEPTION_LOCATION);
+          if (this->has_hanging_nodes())
+           {
+            throw OomphLibError(
+             "This face element will not work correctly if nodes are hanging\nUse the refineable version instead. ",
+             OOMPH_CURRENT_FUNCTION,
+             OOMPH_EXCEPTION_LOCATION);
+           }
          }
        }
      }
@@ -1180,9 +1193,6 @@ public:
    }
 #endif
  
-   //Build the face element
-   element_pt->build_face_element(face_index,this);
-
    // Dimension of the bulk element
    unsigned dim=element_pt->dim();
  
@@ -2572,7 +2582,10 @@ public:
    //  Store the ID of the FaceElement -- this is used to distinguish
    // it from any others
    Id=id;
-   
+ 
+   //Build the face element
+   element_pt->build_face_element(face_index,this);
+  
 #ifdef PARANOID
    { 
     //Check that the bulk element is not a refineable 3d element
@@ -2581,13 +2594,17 @@ public:
       if(element_pt->dim()==3)
        {
         //Is it refineable
-        if(dynamic_cast<RefineableElement*>(element_pt))
+        RefineableElement* ref_el_pt=
+         dynamic_cast<RefineableElement*>(element_pt);
+        if(ref_el_pt!=0)
          {
-          //Issue a warning
-          OomphLibWarning(
-           "This face element will not work correctly if nodes are hanging\nUse the refineable version instead. ",
-           "FSIImposeDisplacementByLagrangeMultiplierElement::Constructor",
-           OOMPH_EXCEPTION_LOCATION);
+          if (this->has_hanging_nodes())
+           {
+            throw OomphLibError(
+             "This face element will not work correctly if nodes are hanging\nUse the refineable version instead. ",
+             OOMPH_CURRENT_FUNCTION,
+             OOMPH_EXCEPTION_LOCATION);
+           }
          }
        }
      }
@@ -2606,9 +2623,6 @@ public:
    }
 #endif
  
-   //Build the face element
-   element_pt->build_face_element(face_index,this);
-
    // Dimension of the bulk element
    unsigned dim=element_pt->dim();
  

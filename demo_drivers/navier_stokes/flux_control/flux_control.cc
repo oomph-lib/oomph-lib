@@ -1897,6 +1897,11 @@ int main(int argc, char *argv[])
       dynamic_cast<NavierStokesSchurComplementPreconditioner*>
       (fsi_preconditioner_pt->navier_stokes_preconditioner_pt());
 
+     // Suppress warning about elements that don't make contribution
+     // to diagonal mass matrix
+     ns_preconditioner_pt->
+      enable_accept_non_NavierStokesElementWithDiagonalMassMatrices_elements();
+
      // Set solid mesh with "true" to tolerate multiple element types 
      // in the mesh.
      fsi_preconditioner_pt->set_wall_mesh(
@@ -1914,6 +1919,12 @@ int main(int argc, char *argv[])
      // Construct the LSC preconditioner
      ns_preconditioner_pt = new
       NavierStokesSchurComplementPreconditioner(&problem);
+
+
+     // Suppress warning about elements that don't make contribution
+     // to diagonal mass matrix
+     ns_preconditioner_pt->
+      enable_accept_non_NavierStokesElementWithDiagonalMassMatrices_elements();
 
      // Setup the fluid mesh with "true" to tolerate multiple element types 
      // in the mesh
