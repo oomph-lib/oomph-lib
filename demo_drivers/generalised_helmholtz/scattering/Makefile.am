@@ -2,7 +2,19 @@
 include $(top_srcdir)/config/makefile_templates/demo_drivers
 
 # Name of executable
-check_PROGRAMS=unstructured_two_d_helmholtz unstructured_two_d_helmholtz_adapt
+check_PROGRAMS=unstructured_two_d_helmholtz \
+unstructured_two_d_helmholtz_adapt \
+unstructured_two_d_helmholtz_scattering
+
+#--------------------------------------
+
+# Sources for executable
+unstructured_two_d_helmholtz_scattering_SOURCES =  unstructured_two_d_helmholtz_scattering.cc
+
+
+# Required libraries:
+# $(FLIBS) is included in case the solver involves fortran sources.
+unstructured_two_d_helmholtz_scattering_LDADD = -L@libdir@ -lgeneralised_helmholtz -lmeshes -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
 
 #--------------------------------------
 

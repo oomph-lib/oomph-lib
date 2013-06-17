@@ -11,6 +11,7 @@ incl_cc_files =
 # Define the headers
 headers =  \
 generalised_helmholtz_elements.h \
+generalised_helmholtz_flux_elements.h \
 Tgeneralised_helmholtz_elements.h
 
 # Define name of library 

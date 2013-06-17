@@ -177,11 +177,7 @@ template <class ELEMENT>
     return std::complex<unsigned>(U_index_helmholtz.real(),
                                   U_index_helmholtz.imag());
    }
-  
-  /// \short Return he spatial dimension of the problem
-  virtual inline unsigned dim() const 
-  {return Dim;}
-  
+    
   /// \short Compute the element's contribution to the time-averaged 
   /// radiated power over the artificial boundary
   double global_power_contribution()
@@ -222,7 +218,7 @@ template <class ELEMENT>
    const unsigned n_intpt = integral_pt()->nweight();
    
    //Set the Vector to hold local coordinates
-   Vector<double> s(local_dim-1);
+   Vector<double> s(local_dim);
    double power=0.0;    
    
    // Output?
@@ -236,7 +232,7 @@ template <class ELEMENT>
    for(unsigned ipt=0;ipt<n_intpt;ipt++)
     { 
      //Assign values of s
-     for(unsigned i=0;i<(local_dim-1);i++)
+     for(unsigned i=0;i<local_dim;i++)
       {
        s[i] = integral_pt()->knot(ipt,i);
       }
@@ -262,7 +258,7 @@ template <class ELEMENT>
      this->shape(s,psi);
      
      // Derivs of Eulerian coordinates w.r.t. local coordinates
-     std::complex<double>  dphi_dr(0.0,0.0);
+     std::complex<double>  dphi_dn(0.0,0.0);
      Vector<std::complex <double> > interpolated_dphidx(bulk_dim);
      std::complex<double> interpolated_phi(0.0,0.0);
      Vector<double> x(bulk_dim);
@@ -294,16 +290,16 @@ template <class ELEMENT>
        interpolated_phi += phi_value*psi(l);
       }
      
-     //define dphi_dr 
+     //define dphi_dn 
      for(unsigned i=0;i<bulk_dim;i++)
       {
-       dphi_dr += interpolated_dphidx[i]*unit_normal[i];
+       dphi_dn += interpolated_dphidx[i]*unit_normal[i];
       }
 
      // Power density
      double integrand=0.5*
-      (interpolated_phi.real()*dphi_dr.imag()-
-       interpolated_phi.imag()*dphi_dr.real());
+      (interpolated_phi.real()*dphi_dn.imag()-
+       interpolated_phi.imag()*dphi_dn.real());
      
      // Output?
      if (outfile.is_open())
@@ -1716,12 +1712,13 @@ void HelmholtzDtNMesh<ELEMENT>::setup_gamma()
     //Loop over the integration points
     for(unsigned ipt=0;ipt<n_intpt;ipt++)
      {
-      //Allocate and initialise coordiante
-      Vector<double> x(el_pt->dim(),0.0);
+      //Allocate and initialise coordinate
+      unsigned ndim_local=el_pt->dim();
+      Vector<double> x(ndim_local+1,0.0);
       
       //Set the Vector to hold local coordinates
-      Vector<double> s(el_pt->dim()-1,0.0);
-      for(unsigned i=0;i<(el_pt->dim()-1);i++) 
+      Vector<double> s(ndim_local,0.0);
+      for(unsigned i=0;i<ndim_local;i++) 
        {
         s[i]=el_pt->integral_pt()->knot(ipt,i);
        }

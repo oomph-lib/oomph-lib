@@ -211,10 +211,11 @@ class PMLQuadMesh : public RectangularQuadMesh<ELEMENT>
 
   /// \short Constructor: Pass pointer to unstructured "bulk" mesh,
   /// the boundary ID of axis aligned boundary to which the
-  /// mesh is supposed to be attached and flag indicating which
-  /// coordinate is constant (-2: constant x, bulk mesh to the right,
-  /// -1: constant y, bulk mesh above; 1: constant x, bulk mesh to left;
-  /// 2: constant y, bulk mesh below.
+  /// mesh is supposed to be attached and the boundary ID in the
+  /// rectangular quad mesh that contains the pml elements.
+  /// (1: constant x, bulk mesh to the right,
+  /// 2: constant y, bulk mesh above; 3: constant x, bulk mesh to left;
+  /// 0: constant y, bulk mesh below.
   PMLQuadMesh(Mesh* triangle_mesh_pt, 
               const unsigned& boundary_id, const unsigned& quad_boundary_id, 
               const unsigned& n_pml_x, const unsigned& n_pml_y,
@@ -239,7 +240,7 @@ class PMLQuadMesh : public RectangularQuadMesh<ELEMENT>
    /// Sort them depending on the boundary being used
    
    // Right boundary
-   if (boundary_id == 4)
+   if (quad_boundary_id == 3)
     {
      std::sort(ordered_boundary_node_pt.begin(),
                ordered_boundary_node_pt.end(),
@@ -247,7 +248,7 @@ class PMLQuadMesh : public RectangularQuadMesh<ELEMENT>
    }
 
    /// Top boundary
-   if (boundary_id == 3)
+   if (quad_boundary_id == 0)
     {
      std::sort(ordered_boundary_node_pt.begin(),
                ordered_boundary_node_pt.end(),
@@ -255,7 +256,7 @@ class PMLQuadMesh : public RectangularQuadMesh<ELEMENT>
    }
 
    /// Left boundary
-   if (boundary_id == 2)
+   if (quad_boundary_id == 1)
     {
      std::sort(ordered_boundary_node_pt.begin(),
                ordered_boundary_node_pt.end(),
@@ -263,7 +264,7 @@ class PMLQuadMesh : public RectangularQuadMesh<ELEMENT>
    }
 
    /// Bottom boundary
-   if (boundary_id == 5)
+   if (quad_boundary_id == 2)
     {
      std::sort(ordered_boundary_node_pt.begin(),
                ordered_boundary_node_pt.end(),
@@ -308,7 +309,7 @@ class PMLQuadMesh : public RectangularQuadMesh<ELEMENT>
 
    // Each boundary requires a specific treatment
    // Right boundary
-   if (boundary_id == 4) {
+   if (quad_boundary_id == 3) {
     for(unsigned e=0; e<n_pml_element; e++)
      {
       // If element is on the right boundary
@@ -337,7 +338,7 @@ class PMLQuadMesh : public RectangularQuadMesh<ELEMENT>
    }
 
    // Top boundary
-   if (boundary_id == 3) {
+   if (quad_boundary_id == 0) {
     for(unsigned e=0; e<n_pml_element; e++)
      {
       // If element is on the right boundary
@@ -366,7 +367,7 @@ class PMLQuadMesh : public RectangularQuadMesh<ELEMENT>
    }
 
    // Left boundary
-   if (boundary_id == 2) {
+   if (quad_boundary_id == 1) {
     for(unsigned e=interior_element_nr_helper_1; e < n_pml_element; e--)
      {
       // If element is on the right boundary
@@ -396,7 +397,7 @@ class PMLQuadMesh : public RectangularQuadMesh<ELEMENT>
    }
 
    // Bottom boundary
-   if (boundary_id == 5) {
+   if (quad_boundary_id == 2) {
     for(unsigned e=interior_element_nr_helper_1; e < n_pml_element; e--)
      {
       // If element is on the top boundary
@@ -1215,7 +1216,7 @@ public:
  typedef void (*GeneralisedHelmholtzSourceFctPt)(const Vector<double>& x, 
                                       std::complex<double>& f);
 
- /// \short Function pointer to soundspeed field -- 
+ /// \short Function pointer to sound speed field hierher
  /// x is a Vector! 
  typedef void (*CFctPt)(const Vector<double>& x, double& f);
 
@@ -1396,15 +1397,15 @@ OOMPH_CURRENT_FUNCTION,
     }
   }
 
- /// Access function: Pointer to source function
+ /// Access function: Pointer to sound speed function
  CFctPt& c_fct_pt() {return C_fct_pt;}
 
- /// Access function: Pointer to source function. Const version
+ /// Access function: Pointer to sound speed function. Const version
  CFctPt c_fct_pt() const {return C_fct_pt;}
 
  /// Get soundspeed term at (Eulerian) position x. This function is
  /// virtual to allow overloading in multi-physics problems where
- /// the strength of the source function might be determined by
+ /// the strength of the sound speed function might be determined by
  /// another system of equations.
  inline virtual void get_c_helmholtz(const unsigned& ipt,
                                         const Vector<double>& x,
@@ -1424,13 +1425,13 @@ OOMPH_CURRENT_FUNCTION,
    (*C_fct_pt)(x,c);
   }
 
- /// Access function: Pointer to source function
+ /// Access function: Pointer to damping function
  AlphaFctPt& alpha_fct_pt() {return Alpha_fct_pt;}
 
- /// Access function: Pointer to source function. Const version
+ /// Access function: Pointer to damping function. Const version
  AlphaFctPt alpha_fct_pt() const {return Alpha_fct_pt;}
 
- /// Get absorption term at (Eulerian) position x. This function is
+ /// \short Get absorption term at (Eulerian) position x. This function is
  /// virtual to allow overloading in multi-physics problems where
  /// the strength of the source function might be determined by
  /// another system of equations.
@@ -1439,7 +1440,10 @@ OOMPH_CURRENT_FUNCTION,
                                         double& alpha) const
   {
    //If no damping function has been set, return zero
-   if(Alpha_fct_pt==0) {alpha = 0.0;}
+   if(Alpha_fct_pt==0)
+    {
+     alpha = 0.0;
+    }
    else
     {
      // Get damping

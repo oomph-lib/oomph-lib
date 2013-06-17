@@ -444,10 +444,9 @@ fill_in_generic_residual_contribution_helmholtz_flux(
    //Need to find position to feed into flux function, initialise to zero
    Vector<double> interpolated_x(Dim,0.0);
    
-   //Calculate velocities and derivatives
+   //Calculate Eulerian position of integration point
    for(unsigned l=0;l<n_node;l++) 
     {
-     //Loop over velocity components
      for(unsigned i=0;i<Dim;i++)
       {
        interpolated_x[i] += nodal_position(l,i)*psif[l];

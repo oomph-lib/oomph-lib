@@ -223,7 +223,7 @@ namespace PMLHelper
      bulk_mesh_pt->boundary_node_pt(top_boundary_id,n);
    }
   
-  // Sort them from lowest to highest (in y coordinate)
+  // Sort them from lowest to highest (in x coordinate)
   std::sort(ordered_top_boundary_node_pt.begin(),
             ordered_top_boundary_node_pt.end(),
             sorter_top_boundary);
