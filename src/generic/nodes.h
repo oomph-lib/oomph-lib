@@ -2193,12 +2193,18 @@ class BoundaryNode: public NODE_TYPE, public BoundaryNodeBase
       {
        cast_node_pt->clear_additional_copied_pointers();
       }
+     //Otherwise there is a problem if it's not Hijacked Data
 #ifdef PARANOID
      else
       {
-       OomphLibError("Copy of a BoundaryNode is not a BoundaryNode",
-                     "BoundaryNode::~BoundaryNode",
-                     OOMPH_EXCEPTION_LOCATION);
+       if(dynamic_cast<HijackedData*>(this->Copy_of_data_pt[i])==0)
+        {
+         
+         OomphLibError(
+          "Copy of a BoundaryNode is not a BoundaryNode or HijackedData",
+          "BoundaryNode::~BoundaryNode",
+          OOMPH_EXCEPTION_LOCATION);
+        }
       }
 #endif
     }

@@ -525,9 +525,9 @@ void RotatingProblem<ELEMENT>::solve_system()
  ofstream trace(trace_filename.str().c_str());
  ofstream file;
  //Loop over paramters
- for(unsigned l=0;l<1;l++)
+ for(unsigned l=0;l<2;l++)
   {
-   Re += 25.0;
+   Re += 12.50;
    try
     {
      steady_newton_solve();

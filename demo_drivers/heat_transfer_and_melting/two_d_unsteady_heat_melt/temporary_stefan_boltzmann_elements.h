@@ -390,7 +390,9 @@ double StefanBoltzmannRadiationBase::contribution_to_stefan_boltzmann_radiation(
  DShape dpsids(n_node,1);
  
  // Local coordinate
- Vector<double> s(1);
+ //ALH: Commented out because it's not used and caused a memory error
+ //below
+ //Vector<double> s(1);
 
  // Loop over contributing integration points
  unsigned nint=visible_intpts_in_current_element.size();
@@ -420,7 +422,8 @@ double StefanBoltzmannRadiationBase::contribution_to_stefan_boltzmann_radiation(
      //Loop over directions
      for(unsigned i=0;i<2;i++)
       {
-       s[i]=this->integral_pt()->knot(ipt,i);
+       //ALH: Commented out because this is the memory error
+       //s[i]=this->integral_pt()->knot(ipt,i);
        r_illuminating[i] += nodal_position(l,i)*psi(l);
        interpolated_dxds[i] += nodal_position(l,i)*dpsids(l,0);
       }
