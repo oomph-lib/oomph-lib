@@ -50,7 +50,6 @@
 #include<map>
 #include<ctime>
 
-
 //oomph-lib headers
 #include "Vector.h"
 #include "oomph_definitions.h"
@@ -380,11 +379,12 @@ public:
  {
    // For each new time step, we have a new vector consisting of pairs of
    // unsigned (for the iteration) and double (for the timing results).
-   Iterations_and_times.push_back(Vector<std::pair<unsigned,double> >());
+   Iterations_and_times.push_back(Vector<Vector<double> >());
  }
 
  /// \short Add a new iteration and time pair.
- void add_iteration_and_time(unsigned required_iter, double required_time)
+ void add_iteration_and_time
+   (unsigned iter, double prec_setup_time, double linear_solver_time)
  {
 #ifdef PARANOID
    if(Iterations_and_times.size() == 0)
@@ -397,8 +397,11 @@ public:
       OOMPH_EXCEPTION_LOCATION);
    }
 #endif 
-   std::pair<unsigned, double> iter_time_pair(required_iter,required_time);
-   Iterations_and_times.back().push_back(iter_time_pair);
+   Vector<double> tmp_iter_time_vec(3,0);
+   tmp_iter_time_vec[0] = (double)iter;
+   tmp_iter_time_vec[1] = prec_setup_time;
+   tmp_iter_time_vec[2] = linear_solver_time;
+   Iterations_and_times.back().push_back(tmp_iter_time_vec);
  }
 
  /// The number of time steps
@@ -410,17 +413,17 @@ public:
    {return Iterations_and_times.back().size();}
 
  /// \short Accessor function for the iteration and times.
- Vector<Vector<std::pair<unsigned,double> > >& iterations_and_times()
+ Vector<Vector<Vector<double> > >& iterations_and_times()
    {return Iterations_and_times;}
 
  /// \short Accessor function for the iteration and times (const version).
- Vector<Vector<std::pair<unsigned,double> > > iterations_and_times() const 
+ Vector<Vector<Vector<double> > > iterations_and_times() const 
    {return Iterations_and_times;}
  
 private:
 
  /// Storage for number of iterations during Newton steps 
- Vector<Vector<std::pair<unsigned, double> > > Iterations_and_times;
+ Vector<Vector<Vector<double> > > Iterations_and_times;
 };
 
 //====================================================================

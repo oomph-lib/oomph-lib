@@ -738,6 +738,9 @@ namespace oomph
      // Initially assume that there are no multiple element types in the 
      // Navier-Stokes mesh
      Allow_multiple_element_type_in_navier_stokes_mesh = false;
+
+     // Set the current setup time to 0.
+     Current_setup_time = 0.0;
     }
 
    /// Destructor
@@ -879,7 +882,6 @@ namespace oomph
 
    ///Disable documentation of time
    void disable_doc_time() {Doc_time = false;}
-
 
    /// \short Helper function to delete preconditioner data.
    void clean_up_memory();
@@ -1222,6 +1224,9 @@ namespace oomph
 
    /// Set Doc_time to true for outputting results of timings
    bool Doc_time;
+
+   /// The current set up time.
+   double Current_setup_time;
 
    /// MatrixVectorProduct operator for Qv^{-1} Bt 
    MatrixVectorProduct* QBt_mat_vec_pt;

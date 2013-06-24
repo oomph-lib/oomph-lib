@@ -1730,7 +1730,6 @@ namespace oomph
    }
 
   Mapping_info_calculated = true;
-  
  } // end of LagrangeEnforcedflowPreconditioner::setup
 
 
