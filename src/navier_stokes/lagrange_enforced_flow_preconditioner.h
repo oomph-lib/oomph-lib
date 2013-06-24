@@ -304,9 +304,10 @@ namespace oomph
 
   void set_meshes(Vector<Mesh*> &mesh_pt)
   {
-#ifdef PARANOID
    // There should be at least two meshes for this preconditioner.
    unsigned nmesh = mesh_pt.size();
+
+#ifdef PARANOID
    if(nmesh < 2)
     {
      std::ostringstream err_msg;
@@ -357,10 +358,11 @@ namespace oomph
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
-  
-   this->set_nmesh(mesh_pt.size());
+   
+   // Set the number of meshes 
+   this->set_nmesh(nmesh);
 
-   // Set the mesh
+   // Set the meshes
    for(unsigned mesh_i = 0; mesh_i < nmesh; mesh_i++)
     {
      this->set_mesh(mesh_i,mesh_pt[mesh_i]);
