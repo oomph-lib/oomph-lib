@@ -219,18 +219,29 @@ namespace oomph
   /// multiple_element_type_in_mesh to true, however, each mesh must only 
   /// contain elements with the same number of types of DOF.
   void set_mesh(const unsigned& i, const Mesh* const mesh_pt,
-                const bool &multiple_element_type_in_mesh = false)
+                const bool &allow_multiple_element_type_in_mesh = false)
   {
 #ifdef PARANOID
    // paranoid check that mesh i can be set
    if (i >= nmesh())
     {
-     std::ostringstream error_message;
-     error_message
+     std::ostringstream err_msg;
+     err_msg
       << "The mesh pointer has space for " << nmesh()
       << " meshes.\n" << "Cannot store a mesh at entry " << i << "\n"
       << "Has set_nmesh(...) been called?";
-     throw OomphLibError(error_message.str(),
+     throw OomphLibError(err_msg.str(),
+                         OOMPH_CURRENT_FUNCTION,
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+
+   // Check that the mesh pointer is not null.
+   if(mesh_pt == 0)
+    {
+     std::ostringstream err_msg;
+     err_msg
+      << "The mesh pointer is null.";
+     throw OomphLibError(err_msg.str(),
                          OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
@@ -241,7 +252,7 @@ namespace oomph
 
    // Does this mesh contain multiple element types?
    Allow_multiple_element_type_in_mesh[i] 
-     = unsigned(multiple_element_type_in_mesh);
+     = unsigned(allow_multiple_element_type_in_mesh);
   }
 
   /// \short Determine the size of the matrix blocks and setup the
@@ -1316,23 +1327,15 @@ namespace oomph
   /// \short Vector of unsigned to indicate which meshes contain multiple
   /// element types.
   Vector<unsigned> Allow_multiple_element_type_in_mesh;
-  
- private:
 
   /// \short Vector of pointers to the meshes containing the elements used in
   /// the block preconditioner. Const pointers to prevent modification of the
   /// mesh by the preconditioner (this could be relaxed if needed).
   Vector<const Mesh*> Mesh_pt;
-
+  
   /// \short Storage for number of types of degree of freedom of the elements
   /// in each mesh.
   Vector<unsigned> Ndof_types_in_mesh;
-
-  /// \short Number of dofs (# of rows or columns in the matrix) in this
-  /// preconditioner. Note that this information is maintained if used as a
-  /// subsidiary or stand-alone block preconditoner, in the latter case it
-  /// stores the number of rows within the subsidiary preconditioner.
-  unsigned Nrow;
 
   /// \short Number of different block types in this preconditioner. Note that
   /// this information is maintained if used as a subsidiary or stand-alone
@@ -1345,6 +1348,14 @@ namespace oomph
   /// block preconditoner, in the latter case it stores the number of blocks
   /// within the subsidiary preconditioner.
   unsigned Ndof_types;
+ 
+ private:
+
+  /// \short Number of dofs (# of rows or columns in the matrix) in this
+  /// preconditioner. Note that this information is maintained if used as a
+  /// subsidiary or stand-alone block preconditoner, in the latter case it
+  /// stores the number of rows within the subsidiary preconditioner.
+  unsigned Nrow;
 
   /// \short If the block preconditioner is acting a subsidiary block
   /// preconditioner then a pointer to the master preconditioner is stored
@@ -1578,13 +1589,16 @@ namespace oomph
 
 #ifdef PARANOID
 
+  // This is declared as local_nmesh because there are other variables
+  // called nmesh floating about... but this will not exist if PARANOID is
+  // switched on.
   unsigned local_nmesh = nmesh();
   
   // Check that some mesh pointers have been assigned.
   if(local_nmesh == 0)
    {
     std::ostringstream error_msg;
-    error_msg << "Can't setup blocks because no meshes have been set.";
+    error_msg << "Cannot setup blocks because no meshes have been set.";
     throw OomphLibError(error_msg.str(),
                         OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
@@ -2417,8 +2431,7 @@ namespace oomph
     // have the corresponding dof number
 
     // clear the Ndof_in_dof_block storage
-    Dof_dimension.resize(Ndof_types);
-    Dof_dimension.initialise(0);
+    Dof_dimension.assign(Ndof_types,0);
 
     // first consider a non distributed matrix
     if (!matrix_distributed)
