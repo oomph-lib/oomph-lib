@@ -72,11 +72,15 @@ cd ..
 
 #######################################################################
 
+
+#Check that we get the correct number of OKs
 # validate_ok_count will exit with status
 # 0 if all tests has passed.
 # 1 if some tests failed.
 # 2 if there are more 'OK' than expected.
-. ../../../bin/validate_ok_count
+OOMPH_ROOT_DIR=$(echo `grep abs_top_srcdir Makefile` | sed -e "s/abs_top_srcdir = //g")
+
+. $OOMPH_ROOT_DIR/bin/validate_ok_count
 
 # Never get here
 exit 10

@@ -72,6 +72,8 @@ cd ..
 
 #######################################################################
 
+
+#Check that we get the correct number of OKs
 # validate_ok_count will exit with status
 # 0 if all tests has passed.
 # 1 if some tests failed.

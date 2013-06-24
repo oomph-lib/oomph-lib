@@ -1,5 +1,7 @@
 
-#Check that we get the correct number of OKs
+# Check that we get the correct number of OKs
+# This is to be sourced from validate.sh files.
+# The variable NUM_TESTS should be set in the validate.sh files.
 OK_COUNT=`grep -c 'OK' Validation/validation.log`
 if  [ $OK_COUNT -eq $NUM_TESTS ]; then
  echo " "
