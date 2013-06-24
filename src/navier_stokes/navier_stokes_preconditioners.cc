@@ -145,6 +145,8 @@ namespace oomph
  void NavierStokesSchurComplementPreconditioner::
  setup()
  {
+  oomph_info << "RAYRAY Starting LSC prec setup." << std::endl; 
+  
   // For debugging...
   bool doc_block_matrices=false;
 
@@ -643,6 +645,8 @@ namespace oomph
   // the stored information can be wiped when we
   // come here next...
   Preconditioner_has_been_setup = true;
+  oomph_info << "RAYRAY Done LSC prec setup" << std::endl; 
+  
  }
 
 
@@ -702,6 +706,8 @@ namespace oomph
   // LSC version
   if (Use_LSC)
    {
+     oomph_info << "RAYRAY starting pressure solve" << std::endl; 
+     
     // Solve first pressure Poisson system
 #ifdef PARANOID
     // check a solver has been set
@@ -738,6 +744,9 @@ namespace oomph
     // NOTE: The vector another_temp_vec now contains z_p = P^{-1} E P^{-1} r_p
     //       as required (apart from the sign which we'll fix in the
     //       next step.
+
+    oomph_info << "RAYRAY finished pressure solve" << std::endl; 
+    
 
    }
   // Fp version
@@ -829,7 +838,11 @@ namespace oomph
    }
   else
    {
+     oomph_info << "RAYRAY Starting F block solve" << std::endl; 
+     
     F_preconditioner_pt->preconditioner_solve(another_temp_vec, temp_vec);
+    oomph_info << "RAYRAY Finsihed F block solve" << std::endl; 
+    
     return_block_vector(0,temp_vec,z);
    }
  }
