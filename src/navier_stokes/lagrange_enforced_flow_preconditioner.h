@@ -119,6 +119,9 @@ class LagrangeEnforcedflowPreconditioner
     // Set default preconditioners
     Navier_stokes_preconditioner_pt = 0;
 
+    // new temp exact prec
+    Exact_prec_pt = 0;
+
     // flag to indicate whether the default w preconditioner is used
     Using_superlu_w_preconditioner = true;
 
@@ -207,6 +210,15 @@ class LagrangeEnforcedflowPreconditioner
   /// r is the residual (rhs), z will contain the solution.
   void preconditioner_solve(const DoubleVector& r, DoubleVector& z)
   {
+// Testing stuff
+//    DoubleVector block_order_r;
+//    this->get_block_ordered_preconditioner_vector(r,block_order_r);
+//
+//    DoubleVector block_order_z;
+//
+//    Exact_prec_pt->preconditioner_solve(block_order_r,block_order_z);
+//
+//    this->return_block_ordered_preconditioner_vector(block_order_z,z);
 
     // // Counter for the current linear solver iteration.
     // // This is used when dumping the rhs block vector,
@@ -501,6 +513,7 @@ class LagrangeEnforcedflowPreconditioner
 
   // Pointer to the 'preconditioner' for the Navier-Stokes block
   Preconditioner* Navier_stokes_preconditioner_pt;
+  Preconditioner* Exact_prec_pt;
   // Same W solvers are used in both exact and LSC.
   // Pointer to the 'preconditoner' for the W matrix
   Vector<Preconditioner*> W_preconditioner_pts;
@@ -1138,27 +1151,31 @@ class LagrangeEnforcedflowPreconditioner
 //  pause("Done the block_setup_bcpl"); 
 
 this->block_setup(block_setup_bcpl);
-unsigned my_rank = master_distribution_pt()->communicator_pt()->my_rank();
+unsigned my_rank 
+  = master_distribution_pt()->communicator_pt()->my_rank();
+unsigned nproc 
+  = master_distribution_pt()->communicator_pt()->nproc();
+
 
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
 
   // Recast Jacobian matrix to CRDoubleMatrix
-#ifdef PARANOID
-  CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt());
-  if (cr_matrix_pt==0)
-  {
-    std::ostringstream error_message;
-    error_message << "PrallelOutflowPreconditioner only works with"
-                  << " CRDoubleMatrix matrices" << std::endl;
-    throw OomphLibError(error_message.str(),
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
-  }
-#else
-  CRDoubleMatrix* cr_matrix_pt = static_cast<CRDoubleMatrix*>(matrix_pt());
-#endif
+//#ifdef PARANOID
+//  CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt());
+//  if (cr_matrix_pt==0)
+//  {
+//    std::ostringstream error_message;
+//    error_message << "LagrangeEnforcedflowPreconditioner only works with"
+//                  << " CRDoubleMatrix matrices" << std::endl;
+//    throw OomphLibError(error_message.str(),
+//                        OOMPH_CURRENT_FUNCTION,
+//                        OOMPH_EXCEPTION_LOCATION);
+//  }
+//#else
+//  CRDoubleMatrix* cr_matrix_pt = static_cast<CRDoubleMatrix*>(matrix_pt());
+//#endif
 
   // RAYRAY this may be wrong - I may not need this at all with the new
   // framework.
@@ -1184,14 +1201,17 @@ unsigned my_rank = master_distribution_pt()->communicator_pt()->my_rank();
   Pressure_block_size = Doftype_block_size[N_velocity_doftypes];
 
   Fluid_block_size = Velocity_block_size + Pressure_block_size;
-
+  
   if(Doc_prec)
   {
     // This is for bebugging purposes.
-    std::string currentsetting 
-      = *Label_pt + "NS"
-        + StringConversion::to_string(Doc_linear_solver_info_pt
-                                      ->current_nnewton_step());
+    std::stringstream curr_setting_stream;
+    curr_setting_stream << "NP" << nproc << "R" << my_rank;
+    std::string currentsetting = curr_setting_stream.str();
+//    std::string currentsetting 
+//      = *Label_pt + "NS"
+//        + StringConversion::to_string(Doc_linear_solver_info_pt
+//                                      ->current_nnewton_step());
 
     // Output the spatial dimension,
     // on a new line, output the number of dof types in each mesh
@@ -1220,10 +1240,10 @@ unsigned my_rank = master_distribution_pt()->communicator_pt()->my_rank();
         CRDoubleMatrix* sub_matrix_pt = 0;
         this->get_block(Mi,Mj,sub_matrix_pt);
         std::stringstream blockname;
-        blockname << "j_"<< currentsetting<< "_"
+        blockname << "matlab/rawdata/j_"<< currentsetting<< "_"
           << std::setw(2) << std::setfill('0') << Mi
           << std::setw(2) << std::setfill('0') << Mj;
-        sub_matrix_pt->sparse_indexed_output(blockname.str());
+        sub_matrix_pt->sparse_indexed_output(blockname.str(),true);
         delete sub_matrix_pt;
         sub_matrix_pt = 0;
       }//for
@@ -1252,7 +1272,37 @@ unsigned my_rank = master_distribution_pt()->communicator_pt()->my_rank();
 //      delete inv_v_mass_pt;
 //    }
   }// if Doc_prec
+  
 
+  /////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////
+  // New testing...
+//  DenseMatrix<CRDoubleMatrix*> full_jac(N_doftypes,N_doftypes,0);
+//  for (unsigned i = 0; i < N_doftypes; i++) 
+//  {
+//    for (unsigned j = 0; j < N_doftypes; j++) 
+//    {
+//      this->get_block(i,j,full_jac(i,j));
+//    }
+//  }
+//
+//  CRDoubleMatrix* full_jac_concat_pt 
+//    = new CRDoubleMatrix(this->preconditioner_matrix_distribution_pt());
+//  
+//  CRDoubleMatrixHelpers::concatenate_without_communication
+//    (this->Block_distribution_pt,full_jac,*full_jac_concat_pt);
+//
+//  Exact_prec_pt = new SuperLUPreconditioner;
+//  
+//  Exact_prec_pt->setup(full_jac_concat_pt,this->comm_pt());
+    
+
+  ///// END OF NEW TESTING
 
   ///////////////////////////////////////////////////////////////////////////
   // Need to create the norms, used for Sigma, if required
@@ -1340,7 +1390,6 @@ unsigned my_rank = master_distribution_pt()->communicator_pt()->my_rank();
                        << std::setprecision(cout_precision)
                        << std::endl;
 
-
   ///////////////////////////////////////////////////////////////////////////
   //                Now create the augmented fluid matrix.                 //
   ///////////////////////////////////////////////////////////////////////////
@@ -1405,6 +1454,15 @@ unsigned my_rank = master_distribution_pt()->communicator_pt()->my_rank();
       }
     } // loop through the columns of the lagrange row.
 
+//    for (unsigned i = 0; i < n_mm; i++) 
+//    {
+//      std::stringstream mmstream;
+//      mmstream << "mm_NP" << nproc <<"R"<<my_rank;
+//      mm_pt[i]->sparse_indexed_output_with_offset(mmstream.str());
+//    }
+//    pause("got all mass matrices"); 
+    
+
 #ifdef PARANOID
   if (n_mm == 0) 
   {
@@ -1450,6 +1508,7 @@ unsigned my_rank = master_distribution_pt()->communicator_pt()->my_rank();
       // Get the number of local rows for this lagrange block.
       // We shall use the block in the first column.
       unsigned long l_i_nrow_local = mm_pt[0]->nrow_local();
+      unsigned l_i_first_row = mm_pt[0]->first_row();
       
       // A vector to contain the results of mass matrices squared.
       Vector<double> w_i_diag_values(l_i_nrow_local,0);
@@ -1469,13 +1528,21 @@ unsigned my_rank = master_distribution_pt()->communicator_pt()->my_rank();
         // IT'S TRANSPOSE, THEN TAKE THE DIAGONAL ENTRIES OF THAT.
         // Get the diagonal entries for the mass matrix.
         Vector<double> m_diag = mm_pt[m_i]->diagonal_entries();
+
+//        std::stringstream mmstream;
+//        mmstream << "mmdiag_NP" << nproc <<"R"<<my_rank;
+//        std::ofstream mmfile;
+//        mmfile.open(mmstream.str().c_str());
         
         // Loop through the entries, square and add them.
         for(unsigned long row_i = 0; row_i < l_i_nrow_local; row_i++)
         {
+//          mmfile << std::setprecision(15) << m_diag[row_i]<<"\n";
           w_i_diag_values[row_i] += m_diag[row_i]*m_diag[row_i];
         }
+//        mmfile.close();
       }
+      
 
       // Divide by Scaling_sigma and create the inverse of w.
       for(unsigned long row_i = 0; row_i < l_i_nrow_local; row_i++)
@@ -1485,7 +1552,7 @@ unsigned my_rank = master_distribution_pt()->communicator_pt()->my_rank();
         // w_i is a diagonal matrix, so take the inverse to
         // invert the matrix.
         invw_i_diag_values[row_i] = 1.0/w_i_diag_values[row_i];
-        w_i_column_indices[row_i] = row_i;
+        w_i_column_indices[row_i] = row_i + l_i_first_row;
         w_i_row_start[row_i] = row_i;
       }
       
@@ -1500,6 +1567,18 @@ unsigned my_rank = master_distribution_pt()->communicator_pt()->my_rank();
                       invw_i_diag_values,
                       w_i_column_indices,
                       w_i_row_start);
+      
+//      std::stringstream wstream;
+//      wstream << "w_NP" <<nproc << "R" << my_rank;
+//      w_pt(0,l_i)->sparse_indexed_output_with_offset(wstream.str());
+//      std::stringstream invwstream;
+//      invwstream << "invw_NP" <<nproc << "R" << my_rank;
+//      inv_w_pt->sparse_indexed_output_with_offset(invwstream.str());
+//      pause("dum dum "); 
+      
+
+
+
     }
     else
     {
