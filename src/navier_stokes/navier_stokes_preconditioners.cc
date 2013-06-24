@@ -334,7 +334,7 @@ namespace oomph
        // We only need the velocity mass matrix
        assemble_inv_press_and_veloc_mass_matrix_diagonal(inv_p_mass_pt,
                                                          inv_v_mass_pt,
-                                                         false, 0);
+                                                         false);
       }
    }
   else
@@ -342,7 +342,7 @@ namespace oomph
     // We need both mass matrices
     assemble_inv_press_and_veloc_mass_matrix_diagonal(inv_p_mass_pt,
                                                       inv_v_mass_pt,
-                                                      true,0);
+                                                      true);
    }
 
 //   unsigned my_rank 
@@ -445,7 +445,6 @@ namespace oomph
   // Build the matvec operator for QBt
   double t_QBt_MV_start = TimingHelpers::timer();
   QBt_mat_vec_pt = new MatrixVectorProduct;
-  oomph_info << "QBt ncol: " << bt_pt->ncol() << std::endl; 
   
   QBt_mat_vec_pt->setup(bt_pt);
   double t_QBt_MV_finish = TimingHelpers::timer();
@@ -834,6 +833,829 @@ namespace oomph
  }
 
 
+//========================================================================
+/// Helper function to assemble the inverse diagonals of the pressure and
+/// velocity mass matrix from the elemental contributions defined in
+/// NavierStokesElementWithDiagonalMassMatrices::
+/// get_pressure_and_velocity_mass_matrix_diagonal(...)
+/// If do_both=true, both are computed, otherwise only the velocity
+/// mass matrix (the LSC version of the preconditioner only needs
+/// that one)
+//========================================================================
+ void NavierStokesSchurComplementPreconditioner:: 
+ assemble_inv_press_and_veloc_mass_matrix_diagonal(
+  CRDoubleMatrix*& inv_p_mass_pt,
+  CRDoubleMatrix*& inv_v_mass_pt,
+  const bool& do_both)
+ {
+
+  // determine the velocity rows required by this processor
+  unsigned v_first_row = this->block_distribution_pt(0)->first_row();
+  unsigned v_nrow_local = this->block_distribution_pt(0)->nrow_local();
+  unsigned v_nrow = this->block_distribution_pt(0)->nrow();
+  
+  // create storage for the diagonals
+  double* v_values = new double[v_nrow_local];
+  for (unsigned i = 0; i < v_nrow_local; i++)
+   {
+    v_values[i] = 0.0;
+   }
+
+  // Equivalent information for pressure mass matrix (only needed for 
+  // Fp version)
+  unsigned p_first_row=0;
+  unsigned p_nrow_local=0;
+  unsigned p_nrow=0;
+  double* p_values = 0;
+  if (!Use_LSC)
+   {
+    // determine the pressure rows required by this processor
+    p_first_row = this->block_distribution_pt(1)->first_row();
+    p_nrow_local = this->block_distribution_pt(1)->nrow_local();
+    p_nrow = this->block_distribution_pt(1)->nrow();
+  
+    // create storage for the diagonals
+    p_values = new double[p_nrow_local];
+    for (unsigned i = 0; i < p_nrow_local; i++)
+     {
+      p_values[i] = 0.0;
+     }
+   }
+
+  // if the problem is distributed
+  bool distributed = false;
+#ifdef OOMPH_HAS_MPI
+  if (problem_pt()->distributed() ||
+      this->master_distribution_pt()->distributed())
+   {
+    distributed = true;
+   }
+#endif
+
+  // next we get the diagonal velocity mass matrix data
+  if (distributed)
+   {
+
+#ifdef OOMPH_HAS_MPI
+
+    // the number of processors
+    unsigned nproc = comm_pt()->nproc();
+
+    // and my rank
+    unsigned my_rank = comm_pt()->my_rank();
+
+    // determine the rows for which we have lookup rows
+
+    // if the problem is NOT distributed then we only classify global equations
+    // on this processor to avoid duplication (as every processor holds 
+    // every element)
+    unsigned first_lookup_row = 0; 
+    unsigned last_lookup_row = 0;
+    first_lookup_row = this->master_distribution_pt()->first_row();
+    last_lookup_row = first_lookup_row + 
+     this->master_distribution_pt()->nrow_local() - 1;
+
+    // find number of local elements
+    unsigned n_el = Navier_stokes_mesh_pt->nelement();
+    
+    // get the master distribution pt
+    const LinearAlgebraDistribution* master_distribution_pt = 
+     this->master_distribution_pt();
+
+    // Do the two blocks (0: veloc; 1: press)
+    unsigned max_block=0;
+    if (!Use_LSC) max_block=1;
+    for (unsigned block_index=0;block_index<=max_block;block_index++)
+     {
+      
+      // Local working variables: Default to velocity
+      unsigned v_or_p_first_row=v_first_row;
+      double* v_or_p_values=v_values;
+      // Switch to pressure
+      if (block_index==1)
+       {
+        v_or_p_first_row=p_first_row;
+        v_or_p_values=p_values;
+       }
+    
+
+      // the diagonal mass matrix contributions that have been
+      // classified and should be sent to another processor
+      Vector<double>* classified_contributions_send 
+       = new Vector<double>[nproc];
+      
+      // the corresponding block indices
+      Vector<unsigned>* classified_indices_send
+       = new Vector<unsigned>[nproc];
+      
+      // the matrix contributions that cannot be classified by this processor
+      // and therefore must be sent to another for classification
+      Vector<double>* unclassified_contributions_send
+       = new Vector<double>[nproc];
+      
+      // the corresponding global indices that require classification
+      Vector<unsigned>* unclassified_indices_send
+       = new Vector<unsigned>[nproc];
+      
+      // get the velocity or pressure distribution pt
+      const LinearAlgebraDistribution* velocity_or_press_dist_pt 
+       = this->block_distribution_pt(block_index);
+      
+      // get the contribution for each element
+      for (unsigned e = 0; e < n_el; e++)
+       {
+        
+        // Get element
+        GeneralisedElement* el_pt=Navier_stokes_mesh_pt->element_pt(e);
+
+        // check that the element is not halo
+        if (!el_pt->is_halo())
+         {
+          
+          // find number of degrees of freedom in the element
+          // (this is slightly too big because it includes the
+          // pressure dofs but this doesn't matter)
+          unsigned el_dof = el_pt->ndof();
+          
+          // Allocate local storage for the element's contribution to the
+          // mass matrix diagonal
+          Vector<double> el_vmm_diagonal(el_dof,0.0);
+          Vector<double> el_pmm_diagonal(el_dof,0.0);
+          
+          unsigned which_one=2;
+          if (block_index==1) which_one=1;
+
+          NavierStokesElementWithDiagonalMassMatrices* cast_el_pt=0;
+          cast_el_pt=dynamic_cast<NavierStokesElementWithDiagonalMassMatrices*>
+           (el_pt);
+          if (cast_el_pt!=0)
+           {
+            cast_el_pt->get_pressure_and_velocity_mass_matrix_diagonal( 
+             el_pmm_diagonal,el_vmm_diagonal,which_one);
+           }
+
+          // get the contribution for each dof
+          for (unsigned i = 0; i < el_dof; i++)
+           {
+            
+            //Get the equation number
+            unsigned eqn_number = el_pt->eqn_number(i);
+            
+            // if I have lookup information on this processor
+            if ((eqn_number >= first_lookup_row) && 
+                (eqn_number <= last_lookup_row)    )
+             {
+              
+              // Only use the dofs that we're dealing with here
+              if ( this->block_number(eqn_number)==int(block_index) )
+               {
+                
+                // get the index in the block
+                unsigned index = this->index_in_block(eqn_number);
+                
+                // determine which processor requires the block index
+                for (unsigned p = 0; p < nproc; p++)
+                 {
+                  if ( (index >= velocity_or_press_dist_pt->first_row(p)) &&
+                       (index < (velocity_or_press_dist_pt->first_row(p)
+                                 +velocity_or_press_dist_pt->nrow_local(p)) ) )
+                   {
+                    
+                    // if it is required by this processor then add the 
+                    // contribution
+                    if (p == my_rank)
+                     {
+                      if (block_index==0)
+                       {
+                        v_or_p_values[index-v_or_p_first_row] 
+                         += el_vmm_diagonal[i];
+                       }
+                      else if (block_index==1)
+                       {
+                        v_or_p_values[index-v_or_p_first_row] 
+                         += el_pmm_diagonal[i];
+                       }
+                     }
+                    // otherwise store it for communication
+                    else
+                     {
+                      if (block_index==0)
+                       {
+                        classified_contributions_send[p]
+                         .push_back(el_vmm_diagonal[i]);
+                        classified_indices_send[p].push_back(index);
+                       }
+                      else if (block_index==1)
+                       {
+                        classified_contributions_send[p]
+                         .push_back(el_pmm_diagonal[i]);
+                        classified_indices_send[p].push_back(index);
+                       }
+                     }
+                   }
+                 }
+               }
+             }
+            // if we do not have the lookup information on this processor
+            // then we send the mass matrix contribution to a processor
+            // which we know to have the lookup information
+            // the assumption: the processor for which the master block
+            // preconditioner distribution will definitely hold the lookup
+            // data for eqn_number (although others may)
+            else if (problem_pt()->distributed())
+             {
+              
+              // determine which processor requires the block index
+              unsigned p = 0;
+              while (!(eqn_number >=master_distribution_pt->first_row(p) &&
+                       (eqn_number<(master_distribution_pt->first_row(p)
+                                    +master_distribution_pt->nrow_local(p)))))
+               {
+                p++;
+               }
+              
+              // store the data
+              if (block_index==0)
+               {
+                unclassified_contributions_send[p]
+                 .push_back(el_vmm_diagonal[i]);
+                unclassified_indices_send[p].push_back(eqn_number);
+               }
+              else if (block_index==1)
+               {
+                unclassified_contributions_send[p]
+                 .push_back(el_pmm_diagonal[i]);
+                unclassified_indices_send[p].push_back(eqn_number);
+               }
+              
+             }
+           }
+         }
+       }
+      
+      //next the unclassified contributions are communicated to 
+      //processors that can classify them
+      
+      //first determine how many unclassified rows are to be sent to
+      //each processor
+      unsigned* n_unclassified_send = new unsigned[nproc];
+      for (unsigned p = 0; p < nproc; p++)
+       {
+        if (p == my_rank)
+         {
+          n_unclassified_send[p] = 0;
+         }
+        else
+         {
+          n_unclassified_send[p] 
+           = unclassified_contributions_send[p].size();
+         }
+       }
+      
+      //then all-to-all com number of unclassified to be sent / recv
+      unsigned* n_unclassified_recv = new unsigned[nproc];
+      MPI_Alltoall(n_unclassified_send,1,MPI_UNSIGNED,
+                   n_unclassified_recv,1,MPI_UNSIGNED,
+                   comm_pt()->mpi_comm());
+      
+      //the base displacement for the sends
+      MPI_Aint base_displacement;
+      MPI_Address(v_or_p_values,&base_displacement); 
+      
+      //allocate storage for the data to be received
+      //and post the sends and recvs
+      Vector<double*> unclassified_contributions_recv(nproc);
+      Vector<unsigned*> unclassified_indices_recv(nproc);
+      Vector<MPI_Request> unclassified_recv_requests;
+      Vector<MPI_Request> unclassified_send_requests;
+      Vector<unsigned> unclassified_recv_proc;
+      for (unsigned p = 0; p < nproc; p++)
+       {
+        if (p != my_rank)
+         {
+          //recv
+          if (n_unclassified_recv[p] > 0)
+           {
+            unclassified_contributions_recv[p] 
+             = new double[n_unclassified_recv[p]];
+            unclassified_indices_recv[p] = new 
+             unsigned[n_unclassified_recv[p]];
+              
+            //data for the struct data type
+            MPI_Datatype recv_types[2];
+            MPI_Aint recv_displacements[2];
+            int recv_sz[2];
+              
+            //contributions
+            MPI_Type_contiguous(n_unclassified_recv[p],MPI_DOUBLE,
+                                &recv_types[0]);
+            MPI_Type_commit(&recv_types[0]);
+            MPI_Address(unclassified_contributions_recv[p],
+                        &recv_displacements[0]);
+            recv_displacements[0] -= base_displacement;
+            recv_sz[0] = 1;
+              
+            //indices
+            MPI_Type_contiguous(n_unclassified_recv[p],MPI_UNSIGNED,
+                                &recv_types[1]);
+            MPI_Type_commit(&recv_types[1]);
+            MPI_Address(unclassified_indices_recv[p],
+                        &recv_displacements[1]);
+            recv_displacements[1] -= base_displacement;
+            recv_sz[1] = 1;
+              
+            //build the final recv type
+            MPI_Datatype final_recv_type;
+            MPI_Type_struct(2,recv_sz,recv_displacements,recv_types,
+                            &final_recv_type);
+            MPI_Type_commit(&final_recv_type);
+              
+            //and recv
+            MPI_Request req;
+            MPI_Irecv(v_or_p_values,1,final_recv_type,p,0,
+                      comm_pt()->mpi_comm(),&req);
+            unclassified_recv_requests.push_back(req);
+            unclassified_recv_proc.push_back(p); 
+            MPI_Type_free(&recv_types[0]);
+            MPI_Type_free(&recv_types[1]);
+            MPI_Type_free(&final_recv_type);
+           }
+            
+          //send
+          if (n_unclassified_send[p] > 0)
+           {
+            //data for the struct data type
+            MPI_Datatype send_types[2];
+            MPI_Aint send_displacements[2];
+            int send_sz[2];
+              
+            //contributions
+            MPI_Type_contiguous(n_unclassified_send[p],MPI_DOUBLE,
+                                &send_types[0]);
+            MPI_Type_commit(&send_types[0]);
+            MPI_Address(&unclassified_contributions_send[p][0],
+                        &send_displacements[0]);
+            send_displacements[0] -= base_displacement;
+            send_sz[0] = 1;
+              
+            //indices
+            MPI_Type_contiguous(n_unclassified_send[p],MPI_UNSIGNED,
+                                &send_types[1]);
+            MPI_Type_commit(&send_types[1]);
+            MPI_Address(&unclassified_indices_send[p][0],
+                        &send_displacements[1]);
+            send_displacements[1] -= base_displacement;
+            send_sz[1] = 1;
+              
+            //build the final send type
+            MPI_Datatype final_send_type;
+            MPI_Type_struct(2,send_sz,send_displacements,send_types,
+                            &final_send_type);
+            MPI_Type_commit(&final_send_type);
+              
+            //and send
+            MPI_Request req;
+            MPI_Isend(v_or_p_values,1,final_send_type,p,0,
+                      comm_pt()->mpi_comm(),&req);
+            unclassified_send_requests.push_back(req);
+            MPI_Type_free(&send_types[0]);
+            MPI_Type_free(&send_types[1]);
+            MPI_Type_free(&final_send_type);
+           }
+         }
+       }
+        
+      //next classify the data as it is received
+      unsigned n_unclassified_recv_req = unclassified_recv_requests.size();
+      while (n_unclassified_recv_req > 0)
+       {
+        //get the processor number and remove the completed request
+        //for the vector of requests
+        int req_num;
+        MPI_Waitany(n_unclassified_recv_req,&unclassified_recv_requests[0],
+                    &req_num,MPI_STATUS_IGNORE);
+        unsigned p = unclassified_recv_proc[req_num];
+        unclassified_recv_requests.erase(unclassified_recv_requests.begin()
+                                         +req_num);    
+        unclassified_recv_proc.erase(unclassified_recv_proc.begin()+req_num);
+        n_unclassified_recv_req--;
+          
+        //next classify the dofs 
+        //and store them for sending to other processors if required
+        unsigned n_recv = n_unclassified_recv[p];
+        for (unsigned i = 0; i < n_recv; i++)
+         {
+          unsigned eqn_number = unclassified_indices_recv[p][i];
+          //Only deal with our block unknowns
+          if ( this->block_number(eqn_number)==int(block_index) )
+           {
+              
+            //get the index in the block
+            unsigned index = this->index_in_block(eqn_number);
+              
+            //determine which processor requires the block index
+            for (unsigned pp = 0; pp < nproc; pp++)
+             {
+                
+                
+              if ( (index >= velocity_or_press_dist_pt->first_row(pp)) && 
+                   (index < (velocity_or_press_dist_pt->first_row(pp)          
+                             +velocity_or_press_dist_pt->nrow_local(pp)) ) )
+               {
+                
+                //if it is required by this processor then add the 
+                //contribution
+                if (pp == my_rank)
+                 {
+                  v_or_p_values[index-v_or_p_first_row] 
+                   += unclassified_contributions_recv[p][i];
+                 }
+                //otherwise store it for communication
+                else
+                 {
+                  double v = unclassified_contributions_recv[p][i];
+                  classified_contributions_send[pp].push_back(v);
+                  classified_indices_send[pp].push_back(index);
+                 }
+               }
+             }
+           }
+         }
+          
+        //clean up
+        delete[] unclassified_contributions_recv[p];
+        delete[] unclassified_indices_recv[p];
+       }
+      delete[] n_unclassified_recv;
+        
+      //now all indices have been classified
+        
+      //next the classified contributions are communicated to 
+      //processors that require them
+        
+      //first determine how many classified rows are to be sent to
+      //each processor
+      unsigned* n_classified_send = new unsigned[nproc];
+      for (unsigned p = 0; p < nproc; p++)
+       {
+        if (p == my_rank)
+         {
+          n_classified_send[p] = 0;
+         }
+        else
+         {
+          n_classified_send[p] 
+           = classified_contributions_send[p].size();
+         }
+       }
+        
+      //then all-to-all number of classified to be sent / recv
+      unsigned* n_classified_recv = new unsigned[nproc];
+      MPI_Alltoall(n_classified_send,1,MPI_UNSIGNED,
+                   n_classified_recv,1,MPI_UNSIGNED,
+                   comm_pt()->mpi_comm());
+        
+      //allocate storage for the data to be received
+      //and post the sends and recvs
+      Vector<double*> classified_contributions_recv(nproc);
+      Vector<unsigned*> classified_indices_recv(nproc);
+      Vector<MPI_Request> classified_recv_requests;
+      Vector<MPI_Request> classified_send_requests;
+      Vector<unsigned> classified_recv_proc;
+      for (unsigned p = 0; p < nproc; p++)
+       {
+        if (p != my_rank)
+         {
+          //recv
+          if (n_classified_recv[p] > 0)
+           {
+            classified_contributions_recv[p] 
+             = new double[n_classified_recv[p]];
+            classified_indices_recv[p] = new unsigned[n_classified_recv[p]];
+              
+            //data for the struct data type
+            MPI_Datatype recv_types[2];
+            MPI_Aint recv_displacements[2];
+            int recv_sz[2];
+              
+            //contributions
+            MPI_Type_contiguous(n_classified_recv[p],MPI_DOUBLE,
+                                &recv_types[0]);
+            MPI_Type_commit(&recv_types[0]);
+            MPI_Address(classified_contributions_recv[p],
+                        &recv_displacements[0]);
+            recv_displacements[0] -= base_displacement;
+            recv_sz[0] = 1;
+              
+            //indices
+            MPI_Type_contiguous(n_classified_recv[p],MPI_UNSIGNED,
+                                &recv_types[1]);
+            MPI_Type_commit(&recv_types[1]);
+            MPI_Address(classified_indices_recv[p],
+                        &recv_displacements[1]);
+            recv_displacements[1] -= base_displacement;
+            recv_sz[1] = 1;
+              
+            //build the final recv type
+            MPI_Datatype final_recv_type;
+            MPI_Type_struct(2,recv_sz,recv_displacements,recv_types,
+                            &final_recv_type);
+            MPI_Type_commit(&final_recv_type);
+              
+            //and recv
+            MPI_Request req;
+            MPI_Irecv(v_or_p_values,1,final_recv_type,p,0,
+                      comm_pt()->mpi_comm(),&req);
+            classified_recv_requests.push_back(req);
+            classified_recv_proc.push_back(p);
+            MPI_Type_free(&recv_types[0]);
+            MPI_Type_free(&recv_types[1]);
+            MPI_Type_free(&final_recv_type);
+           }
+            
+          //send
+          if (n_classified_send[p] > 0)
+           {
+            //data for the struct data type
+            MPI_Datatype send_types[2];
+            MPI_Aint send_displacements[2];
+            int send_sz[2];
+              
+            //contributions
+            MPI_Type_contiguous(n_classified_send[p],MPI_DOUBLE,
+                                &send_types[0]);
+            MPI_Type_commit(&send_types[0]);
+            MPI_Address(&classified_contributions_send[p][0],
+                        &send_displacements[0]);
+            send_displacements[0] -= base_displacement;
+            send_sz[0] = 1;
+              
+            //indices
+            MPI_Type_contiguous(n_classified_send[p],MPI_UNSIGNED,
+                                &send_types[1]);
+            MPI_Type_commit(&send_types[1]);
+            MPI_Address(&classified_indices_send[p][0],
+                        &send_displacements[1]);
+            send_displacements[1] -= base_displacement;
+            send_sz[1] = 1;
+              
+            //build the final send type
+            MPI_Datatype final_send_type;
+            MPI_Type_struct(2,send_sz,send_displacements,send_types,
+                            &final_send_type);
+            MPI_Type_commit(&final_send_type);
+              
+            //and send
+            MPI_Request req;
+            MPI_Isend(v_or_p_values,1,final_send_type,p,0,
+                      comm_pt()->mpi_comm(),&req);
+            classified_send_requests.push_back(req);
+            MPI_Type_free(&send_types[0]);
+            MPI_Type_free(&send_types[1]);
+            MPI_Type_free(&final_send_type);
+           }
+         }
+       }
+        
+      //next classify the data as it is received
+      unsigned n_classified_recv_req = classified_recv_requests.size();
+      while (n_classified_recv_req > 0)
+       {
+        //get the processor number and remove the completed request
+        //for the vector of requests
+        int req_num;
+        MPI_Waitany(n_classified_recv_req,&classified_recv_requests[0],
+                    &req_num,MPI_STATUS_IGNORE);
+        unsigned p = classified_recv_proc[req_num];
+        classified_recv_requests.erase(classified_recv_requests.begin()
+                                       +req_num);    
+        classified_recv_proc.erase(classified_recv_proc.begin()+req_num);
+        n_classified_recv_req--;
+          
+        //next classify the dofs 
+        //and store them for sending to other processors if required
+        unsigned n_recv = n_classified_recv[p];
+        for (unsigned i = 0; i < n_recv; i++)
+         {
+          v_or_p_values[classified_indices_recv[p][i]-v_or_p_first_row] 
+           += classified_contributions_recv[p][i];
+         }
+          
+        //clean up
+        delete[] classified_contributions_recv[p];
+        delete[] classified_indices_recv[p];
+       }
+        
+      //wait for the unclassified sends to complete
+      unsigned n_unclassified_send_req = unclassified_send_requests.size();
+      if (n_unclassified_send_req > 0)
+       {
+        MPI_Waitall(n_unclassified_send_req,&unclassified_send_requests[0],
+                    MPI_STATUS_IGNORE);
+       }
+      delete[] unclassified_contributions_send;
+      delete[] unclassified_indices_send;
+      delete[] n_unclassified_send;
+        
+      //wait for the classified sends to complete
+      unsigned n_classified_send_req = classified_send_requests.size();
+      if (n_classified_send_req > 0) 
+       {
+        MPI_Waitall(n_classified_send_req,&classified_send_requests[0],
+                    MPI_STATUS_IGNORE);
+       }
+      delete[] classified_indices_send;
+      delete[] classified_contributions_send;
+      delete[] n_classified_recv;
+      delete[] n_classified_send;
+
+      // Copy the values back where they belong
+      if (block_index==0)
+       {
+        v_values=v_or_p_values;
+       }
+      else if (block_index==1)
+       {
+        p_values=v_or_p_values;
+       }
+        
+     }
+    
+#endif
+    
+   }
+  // or if the problem is not distributed
+  else
+   {
+
+    // find number of elements
+    unsigned n_el = Navier_stokes_mesh_pt->nelement();
+    
+    // Fp needs pressure and velocity mass matrices
+    unsigned which_one=0;
+    if (Use_LSC) which_one=2;
+
+    // get the contribution for each element
+    for (unsigned e = 0; e < n_el; e++)
+     {
+
+      // Get element
+      GeneralisedElement* el_pt=Navier_stokes_mesh_pt->element_pt(e);
+      
+      // find number of degrees of freedom in the element
+      // (this is slightly too big because it includes the
+      // pressure dofs but this doesn't matter)
+      unsigned el_dof = el_pt->ndof();
+      
+      // allocate local storage for the element's contribution to the
+      // pressure and velocity mass matrix diagonal
+      Vector<double> el_vmm_diagonal(el_dof,0.0);
+      Vector<double> el_pmm_diagonal(el_dof,0.0);
+      
+      NavierStokesElementWithDiagonalMassMatrices* cast_el_pt=0;
+      cast_el_pt=dynamic_cast<NavierStokesElementWithDiagonalMassMatrices*>(
+       el_pt);
+      if (cast_el_pt!=0)
+       {
+        cast_el_pt->get_pressure_and_velocity_mass_matrix_diagonal( 
+         el_pmm_diagonal,el_vmm_diagonal,which_one);
+       }
+      else
+       {
+#ifdef PARANOID
+        std::ostringstream error_message;
+        error_message 
+         << "Navier-Stokes mesh contains element that is not of type \n"
+         << "NavierStokesElementWithDiagonalMassMatrices. \n"
+         << "The element is in fact of type " 
+         << typeid(*el_pt).name() 
+         << "\nWe'll assume that it does not make a used contribution \n" 
+         << "to the inverse diagonal mass matrix used in the preconditioner\n" 
+         << "and (to avoid divisions by zero) fill in dummy unit entries.\n"
+         << "[This case currently arises with flux control problems\n"
+         << "where for simplicity the NetFluxControlElement has been added \n"
+         << "to the Navier Stokes mesh -- this should probably be changed at\n"
+         << "some point -- if you get this warning in any other context\n"
+         << "you should check your code very carefully]\n";
+        OomphLibWarning(
+         error_message.str(),
+         "NavierStokesSchurComplementPreconditioner::assemble_inv_press_and_veloc_mass_matrix_diagonal()",
+         OOMPH_EXCEPTION_LOCATION);       
+#endif 
+
+        // Fill in dummy entries to stop division by zero below
+        for (unsigned j=0;j<el_dof;j++)
+         {
+          el_vmm_diagonal[j]=1.0;
+          el_pmm_diagonal[j]=1.0;
+         }
+       }
+      
+      // Get the contribution for each dof
+      for (unsigned i = 0; i < el_dof; i++)
+       {
+        //Get the equation number
+        unsigned eqn_number = el_pt->eqn_number(i);
+        
+        // Get the velocity dofs
+        if (this->block_number(eqn_number)==0)
+         {
+          // get the index in the block
+          unsigned index = this->index_in_block(eqn_number);
+          
+          // if it is required on this processor
+          if ((index >= v_first_row) &&
+              (index < (v_first_row + v_nrow_local) ) )
+           {
+            v_values[index-v_first_row] += el_vmm_diagonal[i];
+           }
+         }
+        // Get the pressure dofs
+        else if (this->block_number(eqn_number)==1)
+         {
+          if (!Use_LSC)
+           {
+            // get the index in the block
+            unsigned index = this->index_in_block(eqn_number);
+            
+            // if it is required on this processor
+            if ((index >= p_first_row)&&
+                (index < (p_first_row + p_nrow_local)) )
+             {
+              p_values[index-p_first_row] += el_pmm_diagonal[i];
+             }
+           }
+         }
+       } 
+     }
+   }
+  
+  // Create column index and row start for velocity mass matrix
+  int* v_column_index = new int[v_nrow_local]; 
+  int* v_row_start = new int[v_nrow_local+1];
+  for (unsigned i = 0; i < v_nrow_local; i++)
+   {
+#ifdef PARANOID
+    if (v_values[i]==0.0)
+     {
+      std::ostringstream error_message;
+      error_message << "Zero entry in diagonal of velocity mass matrix\n"
+                    << "Index: " << i << std::endl;
+      throw OomphLibError(
+       error_message.str(),
+       OOMPH_CURRENT_FUNCTION,
+       OOMPH_EXCEPTION_LOCATION);
+     }
+#endif
+    v_values[i] = 1.0/v_values[i];   
+    v_column_index[i] = v_first_row + i;
+    v_row_start[i] = i;
+   }
+  v_row_start[v_nrow_local] = v_nrow_local;
+  
+  // Build the velocity mass matrix
+  inv_v_mass_pt = new CRDoubleMatrix(this->block_distribution_pt(0));
+  inv_v_mass_pt->build_without_copy(v_nrow,v_nrow_local,
+                                    v_values,v_column_index,
+                                    v_row_start);
+  
+  // Create pressure mass matrix
+  if (!Use_LSC)
+   {
+    // Create column index and row start for pressure mass matrix
+    int* p_column_index = new int[p_nrow_local];
+    int* p_row_start = new int[p_nrow_local+1];
+    for (unsigned i = 0; i < p_nrow_local; i++)
+     {
+      
+#ifdef PARANOID
+      if (p_values[i]==0.0)
+       {
+        std::ostringstream error_message;
+        error_message << "Zero entry in diagonal of pressure mass matrix\n"
+                      << "Index: " << i << std::endl;
+        throw OomphLibError(
+         error_message.str(),
+         OOMPH_CURRENT_FUNCTION,
+         OOMPH_EXCEPTION_LOCATION);
+       }
+#endif
+      p_values[i] = 1.0/p_values[i];
+      
+      p_column_index[i] = p_first_row + i;
+      p_row_start[i] = i;
+     }
+    p_row_start[p_nrow_local] = p_nrow_local;
+    
+    // Build the pressure mass matrix
+    inv_p_mass_pt = new CRDoubleMatrix(this->block_distribution_pt(1));
+    inv_p_mass_pt->build_without_copy(p_nrow,p_nrow_local,
+                                      p_values,p_column_index,
+                                      p_row_start);
+
+   }
+  
+ }
 
 
 //========================================================================
