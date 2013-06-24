@@ -1145,8 +1145,8 @@ namespace oomph
      {
       for(unsigned Mj=0; Mj<nblock_types; Mj++)
        {
-        CRDoubleMatrix* sub_matrix_pt = 0;
-        this->get_block(Mi,Mj,sub_matrix_pt);
+        CRDoubleMatrix* sub_matrix_pt = new CRDoubleMatrix;
+        this->get_block(Mi,Mj,*sub_matrix_pt);
         std::stringstream blockname;
         blockname << "matlab/rawdata/j_"<< currentsetting<< "_"
                   << std::setw(2) << std::setfill('0') << Mi
@@ -1195,7 +1195,8 @@ namespace oomph
    {
     for(unsigned col_i = 0; col_i < N_velocity_doftypes; col_i++)
      {
-      this->get_block(row_i,col_i,v_aug_pt(row_i,col_i));
+      v_aug_pt(row_i,col_i) = new CRDoubleMatrix;
+      this->get_block(row_i,col_i,*v_aug_pt(row_i,col_i));
      } // for
    } // for
 
@@ -1317,8 +1318,8 @@ namespace oomph
     for(unsigned col_i = 0; col_i < N_velocity_doftypes; col_i++)
      {
       // Get the block matrix for this block column.
-      CRDoubleMatrix* mm_temp_pt = 0;
-      this->get_block(l_doftype, col_i, mm_temp_pt);
+      CRDoubleMatrix* mm_temp_pt = new CRDoubleMatrix;
+      this->get_block(l_doftype, col_i, *mm_temp_pt);
 
       if(mm_temp_pt->nnz() > 0)
        {
@@ -1558,15 +1559,17 @@ namespace oomph
     // Fill in the pressure block B
     for(unsigned col_i = 0; col_i < N_velocity_doftypes; col_i++)
      {
+      f_subblock_pt(N_velocity_doftypes,col_i) = new CRDoubleMatrix;
       this->get_block(N_velocity_doftypes,col_i,
-                      f_subblock_pt(N_velocity_doftypes,col_i));
+                      *f_subblock_pt(N_velocity_doftypes,col_i));
      }
 
     // Fill in the pressure block B^T
     for(unsigned row_i = 0; row_i < N_velocity_doftypes; row_i++)
      {
+      f_subblock_pt(row_i,N_velocity_doftypes) = new CRDoubleMatrix;
       this->get_block(row_i,N_velocity_doftypes,
-                      f_subblock_pt(row_i,N_velocity_doftypes));
+                      *f_subblock_pt(row_i,N_velocity_doftypes));
      }
 
     // Concatenate the sub matrices.
@@ -1622,15 +1625,19 @@ namespace oomph
     // Fill in the pressure block B plus 1
     for(unsigned col_i = 0; col_i < N_fluid_doftypes; col_i++)
      {
+      f_subblock_pt(N_velocity_doftypes,col_i) = new CRDoubleMatrix;
+
       this->get_block(N_velocity_doftypes,col_i,
-                      f_subblock_pt(N_velocity_doftypes,col_i));
+                      *f_subblock_pt(N_velocity_doftypes,col_i));
      }
 
     // Fill in the pressure block B^T
     for(unsigned row_i = 0; row_i < N_velocity_doftypes; row_i++)
      {
+      f_subblock_pt(row_i,N_velocity_doftypes) = new CRDoubleMatrix;
+
       this->get_block(row_i,N_velocity_doftypes,
-                      f_subblock_pt(row_i,N_velocity_doftypes));
+                      *f_subblock_pt(row_i,N_velocity_doftypes));
      }
 
     Vector<unsigned> ns_dof_list(N_fluid_doftypes,0);
