@@ -56,12 +56,8 @@ namespace Global_Parameters
  /// Default Reynolds number
  double Re=100.0;
 
- /// Magnitude of fluid pressure on inflow boundary
- //double P_in=1.0;
+ /// Fluid pressure on inflow boundary
  double P_in=0.5;
-
- /// Period
- double Period = 1.0;
 
  /// Applied traction on fluid at the inflow boundary
  void prescribed_inflow_traction(const double& t,
@@ -69,34 +65,27 @@ namespace Global_Parameters
                                  const Vector<double>& n,
                                  Vector<double>& traction)
  {
-  // RAYRAY - this does not make sense at the boundaries...
   traction[0]=0.0;
   traction[1]=0.0;
-  //traction[2]=P_in*(1.0 - cos((2.0*MathematicalConstants::Pi*t)/Period));
   traction[2]=P_in;
  } 
 
 
-  /// Fluid pressure on outflow boundary
-  double P_out=-0.5; 
+ /// Fluid pressure on outflow boundary
+ double P_out=-0.5; 
 
-  /// Applied traction on fluid at the inflow boundary
-  void prescribed_outflow_traction(const double& t,
-                                   const Vector<double>& x,
-                                   const Vector<double>& n,
-                                   Vector<double>& traction)
-  {
-   // RAYRAY - What do I do here?
-   traction[0]=0.0;
-   traction[1]=0.0;
-   //traction[2]= - P_in*(1.0 - cos((2.0*MathematicalConstants::Pi*t)/Period));
-   traction[2]=-P_out;
-  } 
-
-
- bool Impulsive_start_flag = true;
+ /// Applied traction on fluid at the inflow boundary
+ void prescribed_outflow_traction(const double& t,
+                                  const Vector<double>& x,
+                                  const Vector<double>& n,
+                                  Vector<double>& traction)
+ {
+  traction[0]=0.0;
+  traction[1]=0.0;
+  traction[2]=-P_out;
+ } 
  
-} //end Global_Parameters namespace
+} //end namespace
 
 
 
@@ -120,9 +109,6 @@ public:
 
  /// Doc the solution
  void doc_solution(DocInfo& doc_info);
-
- /// Run an unsteady simulation
- void unsteady_run(DocInfo& doc_info); 
  
  /// Return total number of fluid inflow traction boundaries
  unsigned nfluid_inflow_traction_boundary()
@@ -161,9 +147,6 @@ public:
  /// are applied
  Vector<unsigned> Outflow_boundary_id;
 
- /// Trace file
- ofstream Trace_file;
-
 };
 
 
@@ -173,11 +156,8 @@ public:
 //========================================================================
 template<class ELEMENT>
 UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
-{  
- // RAYRAY
- // Allocate the timestepper
- add_time_stepper_pt(new BDF<2>);
-
+{ 
+ 
  //Create fluid bulk mesh, sub-dividing "corner" elements
  string node_file_name="fsi_bifurcation_fluid.1.node";
  string element_file_name="fsi_bifurcation_fluid.1.ele";
@@ -186,7 +166,6 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
  Fluid_mesh_pt =  new TetgenMesh<ELEMENT>(node_file_name,
                                           element_file_name,
                                           face_file_name,
-                                          time_stepper_pt(), // RAYRAY
                                           split_corner_elements);
  
  // Find elements next to boundaries
@@ -339,11 +318,8 @@ void UnstructuredFluidProblem<ELEMENT>::create_fluid_traction_elements()
  // Counter for number of fluid traction meshes
  unsigned count=0;
 
- // Loop over inflow/outflow boundaries // hierher only in 
- // in = 0
- // out = 1
+ // Loop over inflow/outflow boundaries
  for (unsigned in_out=0;in_out<2;in_out++)
- //unsigned in_out = 0;
   {
    // Loop over boundaries with fluid traction elements
    unsigned n=nfluid_inflow_traction_boundary();
@@ -427,56 +403,7 @@ void UnstructuredFluidProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
   
 }
 
-//========================================================================
-/// Unsteady run...
-//========================================================================
-template<class ELEMENT>
-void UnstructuredFluidProblem<ELEMENT>::unsteady_run(DocInfo& doc_info)
-{
-  // OPen trace file
-  std::stringstream filename;
-  filename << doc_info.directory() << "/trace.dat";
 
-  Trace_file.open(filename.str().c_str());
-
-  Trace_file << "Hello!\n";
-
-  double time_max = Global_Parameters::Period / 2.0;
-  double time_min = 0;
-  unsigned ntsteps = 80;
-  double dt = (time_max - time_min)/ntsteps;
-
-  if(Global_Parameters::Impulsive_start_flag)
-   {
-    assign_initial_values_impulsive(dt);
-    std::cout << "IC = impulsive start" << std::endl; 
-   }
-
-  // Doc initial condition
-  doc_solution(doc_info);
-
-  // increment counter
-  doc_info.number()++;
-
-  // Loop over timesteps
-  for (unsigned t = 0; t < ntsteps; t++) 
-  {
-    std::cout << "TIMESTEP " << t << std::endl; 
-    
-    // Take one fixed timestep
-    unsteady_newton_solve(dt);
-
-    // Output the time
-    std::cout << "Time is now " << time_pt()->time() << std::endl; 
-
-    // Doc solution
-    doc_solution(doc_info);
-
-    // increment counter
-    doc_info.number()++;
-  }
-  
-}
 
 
 
@@ -492,13 +419,13 @@ int main(int argc, char **argv)
  DocInfo doc_info;
  
  // Parameter study
-// double Re_increment=100.0;
-// unsigned nstep=4;
-// if (CommandLineArgs::Argc==2)
-//  {
-//   std::cout << "Validation -- only doing two steps" << std::endl;
-//   nstep=2;
-//  }
+ double Re_increment=100.0;
+ unsigned nstep=4;
+ if (CommandLineArgs::Argc==2)
+  {
+   std::cout << "Validation -- only doing two steps" << std::endl;
+   nstep=2;
+  }
  
  
  //Taylor--Hood
@@ -508,65 +435,60 @@ int main(int argc, char **argv)
   
   //Set up the problem
   UnstructuredFluidProblem<TTaylorHoodElement<3> > problem;
-
-  problem.unsteady_run(doc_info);
   
   //Output initial guess
-//  problem.doc_solution(doc_info);
-//  doc_info.number()++;
-
-
+  problem.doc_solution(doc_info);
+  doc_info.number()++;   
   
-//  // Parameter study: Crank up the pressure drop along the vessel
-//  for (unsigned istep=0;istep<nstep;istep++)
-//   {
-//    // Solve the problem
-//    problem.newton_solve();
-//    
-//    //Output solution
-//    problem.doc_solution(doc_info);
-//    doc_info.number()++;
-//    
-//    // Bump up Reynolds number (equivalent to increasing the imposed pressure
-//    // drop)
-//    Global_Parameters::Re+=Re_increment;   
-//   }
+  // Parameter study: Crank up the pressure drop along the vessel
+  for (unsigned istep=0;istep<nstep;istep++)
+   {
+    // Solve the problem
+    problem.newton_solve();
+    
+    //Output solution
+    problem.doc_solution(doc_info);
+    doc_info.number()++;
+    
+    // Bump up Reynolds number (equivalent to increasing the imposed pressure
+    // drop)
+    Global_Parameters::Re+=Re_increment;   
+   }
  }
 
-// //Crouzeix Raviart
-// {
-//  //Reset to default Reynolds number
-//  Global_Parameters::Re = 100.0;
-//
-//  //Reset doc info number
-//  doc_info.number()=0;   
-//
-//  // Output directory
-//  doc_info.set_directory("RESLT_CR");
-//  
-//  //Set up the problem
-//  UnstructuredFluidProblem<TCrouzeixRaviartElement<3> > problem;
-//
-//  //Output initial guess
-//  problem.doc_solution(doc_info);
-//  doc_info.number()++;   
-//
-//
-//  // Parameter study: Crank up the pressure drop along the vessel
-//  for (unsigned istep=0;istep<nstep;istep++)
-//   {
-//    // Solve the problem
-//    problem.newton_solve();
-//    
-//    //Output solution
-//    problem.doc_solution(doc_info);
-//    doc_info.number()++;
-//    
-//    // Bump up Reynolds number (equivalent to increasing the imposed pressure
-//    // drop)
-//    Global_Parameters::Re+=Re_increment;   
-//   }
-// }
+ //Crouzeix Raviart
+ {
+  //Reset to default Reynolds number
+  Global_Parameters::Re = 100.0;
+
+  //Reset doc info number
+  doc_info.number()=0;   
+
+  // Output directory
+  doc_info.set_directory("RESLT_CR");
+  
+  //Set up the problem
+  UnstructuredFluidProblem<TCrouzeixRaviartElement<3> > problem;
+
+  //Output initial guess
+  problem.doc_solution(doc_info);
+  doc_info.number()++;   
+  
+  // Parameter study: Crank up the pressure drop along the vessel
+  for (unsigned istep=0;istep<nstep;istep++)
+   {
+    // Solve the problem
+    problem.newton_solve();
+    
+    //Output solution
+    problem.doc_solution(doc_info);
+    doc_info.number()++;
+    
+    // Bump up Reynolds number (equivalent to increasing the imposed pressure
+    // drop)
+    Global_Parameters::Re+=Re_increment;   
+   }
+ }
  
 } // end_of_main
 
