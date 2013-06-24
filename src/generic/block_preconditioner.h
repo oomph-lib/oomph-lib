@@ -4088,31 +4088,40 @@ namespace oomph
 
    // How many block vectors do we need to concatenate?
    unsigned nblocks_to_cat = Block_to_block_map[b].size();
-
-   // Get the DoubleVectors to be concatenated.
-   Vector<DoubleVector> tmp_block_vector(nblocks_to_cat);
-   for (unsigned b_i = 0; b_i < nblocks_to_cat; b_i++) 
+   if(nblocks_to_cat == 1)
+    // If there is only one block vector, we simply extract it.
     {
      this->get_block_vector_with_original_matrix_ordering(
-      Block_to_block_map[b][b_i], v,tmp_block_vector[b_i]);
+       Block_to_block_map[b][0],v,w);
     }
-   
-   Vector<DoubleVector*> tmp_block_vector_pt(nblocks_to_cat,0);
-   for (unsigned b_i = 0; b_i < nblocks_to_cat; b_i++) 
+   else
+    // We need to concatenate multiple block vectors.
     {
-     tmp_block_vector_pt[b_i] = &tmp_block_vector[b_i];
+     // Get the DoubleVectors to be concatenated.
+     Vector<DoubleVector> tmp_block_vector(nblocks_to_cat);
+     for (unsigned b_i = 0; b_i < nblocks_to_cat; b_i++) 
+      {
+       this->get_block_vector_with_original_matrix_ordering(
+        Block_to_block_map[b][b_i], v,tmp_block_vector[b_i]);
+      }
+     
+     Vector<DoubleVector*> tmp_block_vector_pt(nblocks_to_cat,0);
+     for (unsigned b_i = 0; b_i < nblocks_to_cat; b_i++) 
+      {
+       tmp_block_vector_pt[b_i] = &tmp_block_vector[b_i];
+      }
+  
+     // Build w with the correct distribution.
+     w.build(Precomputed_block_distribution_pt[b],0);
+  
+     // Concatenate the vectors
+     DoubleVectorHelpers::concatenate_without_communication
+       (tmp_block_vector_pt,w);
+  
+     // No longer need the sub vectors. Calling clear on the Vector will invoke
+     // the destructors in the DoubleVectors.
+     tmp_block_vector.clear();
     }
-
-   // Build w with the correct distribution.
-   w.build(Precomputed_block_distribution_pt[b],0);
-
-   // Concatenate the vectors
-   DoubleVectorHelpers::concatenate_without_communication
-     (tmp_block_vector_pt,w);
-
-   // No longer need the sub vectors. Calling clear on the Vector will invoke
-   // the destructors in the DoubleVectors.
-   tmp_block_vector.clear();
   }
 
  //============================================================================
@@ -4385,30 +4394,42 @@ namespace oomph
    // How many dof types does this block type represent?
    unsigned nblocks_to_split_into = Block_to_block_map[b].size();
 
-   // Temp vector to be returned to v.
-   Vector<DoubleVector> tmp_block_vector(nblocks_to_split_into);
-
-   // Fill it with the corresponding ditributions.
-   for (unsigned b_i = 0; b_i < nblocks_to_split_into; b_i++) 
-    {
-     tmp_block_vector[b_i].build(this->block_distribution_pt
-                                       (Block_to_block_map[b][b_i]));
-    }
-
-   Vector<DoubleVector*> tmp_block_vector_pt(nblocks_to_split_into,0);
-   for (unsigned b_i = 0; b_i < nblocks_to_split_into; b_i++) 
-   {
-     tmp_block_vector_pt[b_i] = &tmp_block_vector[b_i];
-   }
-
-   // Perform the splitting of w into tmp_block_vector.
-   DoubleVectorHelpers::split_without_communication(w,tmp_block_vector_pt);
-
-   // return to v
-   for (unsigned b_i = 0; b_i < nblocks_to_split_into; b_i++) 
+   if(nblocks_to_split_into == 1)
+    // If there is one block vector to return, we simply return the one block
+    // vector
     {
      this->return_block_vector_with_original_matrix_ordering(
-      Block_to_block_map[b][b_i], tmp_block_vector[b_i],v);
+             Block_to_block_map[b][0],w,v);
+    }
+   else
+    // Otherwise this block vector correspondings to more than one dof types.
+    // We need to split this.
+    {
+     // Temp vector to be returned to v.
+     Vector<DoubleVector> tmp_block_vector(nblocks_to_split_into);
+  
+     // Fill it with the corresponding ditributions.
+     for (unsigned b_i = 0; b_i < nblocks_to_split_into; b_i++) 
+      {
+       tmp_block_vector[b_i].build(this->block_distribution_pt
+                                         (Block_to_block_map[b][b_i]));
+      }
+  
+     Vector<DoubleVector*> tmp_block_vector_pt(nblocks_to_split_into,0);
+     for (unsigned b_i = 0; b_i < nblocks_to_split_into; b_i++) 
+     {
+       tmp_block_vector_pt[b_i] = &tmp_block_vector[b_i];
+     }
+  
+     // Perform the splitting of w into tmp_block_vector.
+     DoubleVectorHelpers::split_without_communication(w,tmp_block_vector_pt);
+  
+     // return to v
+     for (unsigned b_i = 0; b_i < nblocks_to_split_into; b_i++) 
+      {
+       this->return_block_vector_with_original_matrix_ordering(
+        Block_to_block_map[b][b_i], tmp_block_vector[b_i],v);
+      }
     }
   }
 

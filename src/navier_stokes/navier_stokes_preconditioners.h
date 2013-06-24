@@ -1208,7 +1208,13 @@ namespace oomph
     CRDoubleMatrix*& inv_p_mass_pt, 
     CRDoubleMatrix*& inv_v_mass_pt, 
     const bool& do_both);
-   
+ 
+   void assemble_inv_press_and_veloc_mass_matrix_diagonal(
+    CRDoubleMatrix*& inv_p_mass_pt, 
+    CRDoubleMatrix*& inv_v_mass_pt, 
+    const bool& do_both,
+    const unsigned& block_i);
+  
    /// \short Boolean indicating whether the momentum system preconditioner 
    /// is a block preconditioner
    bool F_preconditioner_is_block_preconditioner;

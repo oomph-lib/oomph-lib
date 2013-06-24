@@ -145,7 +145,6 @@ namespace oomph
  void NavierStokesSchurComplementPreconditioner::
  setup()
  {
-
   // For debugging...
   bool doc_block_matrices=false;
 
@@ -219,7 +218,12 @@ namespace oomph
   // type 1: pressure - corresponding to DOF n-1
   double t_block_start = TimingHelpers::timer();
   unsigned ndof_types = 0;
-  if (this->is_subsidiary_block_preconditioner())
+
+  if (this->Preconditioner_blocks_have_been_precomputed)
+   {
+    ndof_types = this->nblocks_precomputed();
+   }
+  else if (this->is_subsidiary_block_preconditioner())
    {
     ndof_types = this->ndof_types();
    }
@@ -227,9 +231,18 @@ namespace oomph
    {
     ndof_types = this->ndof_types_in_mesh(0);
    }
-  Vector<unsigned> dof_to_block_map(ndof_types);
-  dof_to_block_map[ndof_types-1]=1;
-  this->block_setup(dof_to_block_map);
+
+  if(this->Preconditioner_blocks_have_been_precomputed)
+   {
+    this->block_setup();
+   }
+  else
+   {
+    Vector<unsigned> dof_to_block_map(ndof_types);
+    dof_to_block_map[ndof_types-1]=1;
+    this->block_setup(dof_to_block_map);
+   }
+
   double t_block_finish = TimingHelpers::timer();
   double block_setup_time = t_block_finish - t_block_start;
   if(Doc_time)
@@ -260,7 +273,6 @@ namespace oomph
                << get_B_time << "\n";
    }
 
-
   if (doc_block_matrices)
    {
     std::stringstream junk;
@@ -274,23 +286,83 @@ namespace oomph
   // get the inverse velocity and pressure mass matrices
   CRDoubleMatrix* inv_v_mass_pt = 0;
   CRDoubleMatrix* inv_p_mass_pt = 0;
+
+  unsigned n_velocity_doftypes = this->ndof_types() - 1;
+
+  DenseMatrix<CRDoubleMatrix*> inv_v_mass_sub_pt(n_velocity_doftypes,
+                                                 n_velocity_doftypes,0);
+
   double ivmm_assembly_start_t = TimingHelpers::timer();
   if (Use_LSC)
    {
-    // We only need the velocity mass matrix
-    bool do_both=false;
-    assemble_inv_press_and_veloc_mass_matrix_diagonal(inv_p_mass_pt,
-                                                      inv_v_mass_pt,
-                                                      do_both);
+     if(this->Preconditioner_blocks_have_been_precomputed)
+      {
+        for (unsigned block_i = 0; block_i < n_velocity_doftypes; block_i++) 
+         {
+          // We only need the velocity mass matrix
+          assemble_inv_press_and_veloc_mass_matrix_diagonal
+            (inv_p_mass_pt, inv_v_mass_sub_pt(block_i,block_i), 
+             false, block_i);
+         }
+
+        // We now have all the vmm. We need to concatenate them.
+
+        // Build the matrix with just the distribution.
+        inv_v_mass_pt = 
+          new CRDoubleMatrix(this->Precomputed_block_distribution_pt[0]);
+
+        // Get the linear algebra distributions of the blocks we require.
+        Vector<LinearAlgebraDistribution*> tmp_dist_pt(n_velocity_doftypes,0);
+
+        for (unsigned dist_i = 0; dist_i < n_velocity_doftypes; dist_i++) 
+         {
+          tmp_dist_pt[dist_i] 
+            = inv_v_mass_sub_pt(dist_i,dist_i)->distribution_pt();
+         }
+
+        CRDoubleMatrixHelpers::concatenate_without_communication(
+          tmp_dist_pt,tmp_dist_pt,inv_v_mass_sub_pt,*inv_v_mass_pt);
+
+        // Delete the inv_v_mass_sub_pt
+        for (unsigned block_i = 0; block_i < n_velocity_doftypes; block_i++) 
+        {
+          delete inv_v_mass_sub_pt(block_i,block_i);
+        }
+      }
+     else
+      {
+       // We only need the velocity mass matrix
+       assemble_inv_press_and_veloc_mass_matrix_diagonal(inv_p_mass_pt,
+                                                         inv_v_mass_pt,
+                                                         false, 0);
+      }
    }
   else
    {
-    // We only need both mass matrices
-    bool do_both=true;
+    // We need both mass matrices
     assemble_inv_press_and_veloc_mass_matrix_diagonal(inv_p_mass_pt,
                                                       inv_v_mass_pt,
-                                                      do_both);
+                                                      true,0);
    }
+
+//   unsigned my_rank 
+//    = master_distribution_pt()->communicator_pt()->my_rank();
+//   unsigned nproc 
+//    = master_distribution_pt()->communicator_pt()->nproc();
+//
+//  for (unsigned i = 0; i < n_velocity_doftypes; i++) 
+//   {
+//
+//    std::stringstream foostream;
+//    foostream << "vmm"<<i<<"_NP"<<nproc<<"R"<<my_rank;
+//    inv_v_mass_sub_pt[i]->sparse_indexed_output_with_offset(foostream.str());
+//   }
+//
+//  std::stringstream vmm_cat_stream;
+//  vmm_cat_stream << "vmm_cat_NP" <<nproc<<"R"<<my_rank;
+//  inv_v_mass_pt->sparse_indexed_output_with_offset(vmm_cat_stream.str());
+//  pause("got all vmm"); 
+  
   double ivmm_assembly_finish_t = TimingHelpers::timer();
   if (Doc_time)
    {
@@ -300,8 +372,6 @@ namespace oomph
                << "mass matrices) [sec]: "
                << ivmm_assembly_time << "\n";
    }
-  
-
 
   if (doc_block_matrices)
    {
@@ -375,6 +445,8 @@ namespace oomph
   // Build the matvec operator for QBt
   double t_QBt_MV_start = TimingHelpers::timer();
   QBt_mat_vec_pt = new MatrixVectorProduct;
+  oomph_info << "QBt ncol: " << bt_pt->ncol() << std::endl; 
+  
   QBt_mat_vec_pt->setup(bt_pt);
   double t_QBt_MV_finish = TimingHelpers::timer();
   if(Doc_time)
@@ -445,7 +517,14 @@ namespace oomph
   // form the matrix vector product helper
   double t_F_MV_start = TimingHelpers::timer();
   F_mat_vec_pt = new MatrixVectorProduct;
-  F_mat_vec_pt->setup(f_pt);
+  if(this->Preconditioner_blocks_have_been_precomputed)
+   {
+    F_mat_vec_pt->setup(f_pt,this->Precomputed_block_distribution_pt[0]);
+   }
+  else
+   {
+    F_mat_vec_pt->setup(f_pt);
+   }
   double t_F_MV_finish = TimingHelpers::timer();
   if(Doc_time)
    {
@@ -574,7 +653,6 @@ namespace oomph
  void NavierStokesSchurComplementPreconditioner:: 
  preconditioner_solve(const DoubleVector &r, DoubleVector &z)
  {
-
 #ifdef PARANOID
   if (Preconditioner_has_been_setup==false)
    {
@@ -621,11 +699,9 @@ namespace oomph
 
   // NOTE: The vector temp_vec now contains the vector r_p.
 
-
   // LSC version
   if (Use_LSC)
    {
-    
     // Solve first pressure Poisson system
 #ifdef PARANOID
     // check a solver has been set
@@ -652,7 +728,6 @@ namespace oomph
     F_mat_vec_pt->multiply(temp_vec,another_temp_vec);
     temp_vec.clear();
     QBt_mat_vec_pt->multiply_transpose(another_temp_vec, temp_vec);
-    
     
     // NOTE: The vector temp_vec now contains E P^{-1} r_p
     
@@ -706,7 +781,6 @@ namespace oomph
   temp_vec.build(another_temp_vec.distribution_pt(),0.0);
   temp_vec -= another_temp_vec;
   return_block_vector(1,temp_vec,z);
-  
 
     
   // Step 2 - apply preconditioner to velocity unknowns (block 0)
@@ -776,13 +850,16 @@ namespace oomph
  assemble_inv_press_and_veloc_mass_matrix_diagonal(
   CRDoubleMatrix*& inv_p_mass_pt,
   CRDoubleMatrix*& inv_v_mass_pt,
-  const bool& do_both)
+  const bool& do_both, const unsigned& block_i)
  {
-
   // determine the velocity rows required by this processor
-  unsigned v_first_row = this->block_distribution_pt(0)->first_row();
-  unsigned v_nrow_local = this->block_distribution_pt(0)->nrow_local();
-  unsigned v_nrow = this->block_distribution_pt(0)->nrow();
+  unsigned v_first_row = this->block_distribution_pt(block_i)->first_row();
+  unsigned v_nrow_local = this->block_distribution_pt(block_i)->nrow_local();
+  unsigned v_nrow = this->block_distribution_pt(block_i)->nrow();
+
+//  std::cout << "v_first_row: " << v_first_row << std::endl; 
+//  std::cout << "v_nrow_local: " << v_nrow_local << std::endl; 
+//  std::cout << "v_nrow: " << v_nrow << std::endl; 
   
   // create storage for the diagonals
   double* v_values = new double[v_nrow_local];
@@ -799,6 +876,7 @@ namespace oomph
   double* p_values = 0;
   if (!Use_LSC)
    {
+    // RAYRAY change this, uses the pressure block, NOT 1.
     // determine the pressure rows required by this processor
     p_first_row = this->block_distribution_pt(1)->first_row();
     p_nrow_local = this->block_distribution_pt(1)->nrow_local();
@@ -820,12 +898,12 @@ namespace oomph
    {
     distributed = true;
    }
+
 #endif
 
   // next we get the diagonal velocity mass matrix data
   if (distributed)
    {
-
 #ifdef OOMPH_HAS_MPI
 
     // the number of processors
@@ -839,6 +917,7 @@ namespace oomph
     // if the problem is NOT distributed then we only classify global equations
     // on this processor to avoid duplication (as every processor holds 
     // every element)
+    // RAYRAY does this needs to be changed to work with sub blocks?
     unsigned first_lookup_row = 0; 
     unsigned last_lookup_row = 0;
     first_lookup_row = this->master_distribution_pt()->first_row();
@@ -853,8 +932,8 @@ namespace oomph
      this->master_distribution_pt();
 
     // Do the two blocks (0: veloc; 1: press)
-    unsigned max_block=0;
-    if (!Use_LSC) max_block=1;
+    unsigned max_block=0; // RAYRAY Maybe change this?
+    if (!Use_LSC) max_block=1; // so block_index = 0,1
     for (unsigned block_index=0;block_index<=max_block;block_index++)
      {
       
@@ -862,12 +941,12 @@ namespace oomph
       unsigned v_or_p_first_row=v_first_row;
       double* v_or_p_values=v_values;
       // Switch to pressure
-      if (block_index==1)
-       {
-        v_or_p_first_row=p_first_row;
-        v_or_p_values=p_values;
-       }
-    
+      // RAYRAY this is commented out.
+//      if (block_index==1)
+//       {
+//        v_or_p_first_row=p_first_row;
+//        v_or_p_values=p_values;
+//       }
 
       // the diagonal mass matrix contributions that have been
       // classified and should be sent to another processor
@@ -888,9 +967,11 @@ namespace oomph
        = new Vector<unsigned>[nproc];
       
       // get the velocity or pressure distribution pt
+//      const LinearAlgebraDistribution* velocity_or_press_dist_pt 
+//       = this->block_distribution_pt(block_index);
       const LinearAlgebraDistribution* velocity_or_press_dist_pt 
-       = this->block_distribution_pt(block_index);
-      
+       = this->block_distribution_pt(block_i);
+     
       // get the contribution for each element
       for (unsigned e = 0; e < n_el; e++)
        {
@@ -912,6 +993,11 @@ namespace oomph
           Vector<double> el_vmm_diagonal(el_dof,0.0);
           Vector<double> el_pmm_diagonal(el_dof,0.0);
           
+          // which_one = 0: Both pressure and velocity mm are computed.
+          // which_one = 1: Only pressure mm is computed.
+          // which_one = 2: Only velocity mm is computed.
+          // RAYRAY Change this so that which_one = 2 for block_index = 0,1,2... n_velocity_dof_types?
+          // Actually, maybe not.... since block_index = 0 only signifies that it's a velocity block I guess.
           unsigned which_one=2;
           if (block_index==1) which_one=1;
 
@@ -937,7 +1023,9 @@ namespace oomph
              {
               
               // Only use the dofs that we're dealing with here
-              if ( this->block_number(eqn_number)==int(block_index) )
+              // No, we definitely have to change the block_index to 0... nv - 1.
+              //if ( this->block_number(eqn_number)==int(block_index) ) // RAYRAY
+              if ( this->block_number(eqn_number)==int(block_i) )
                {
                 
                 // get the index in the block
@@ -955,32 +1043,32 @@ namespace oomph
                     // contribution
                     if (p == my_rank)
                      {
-                      if (block_index==0)
+//                      if (block_index==0) // RAYRAY change this to 0... nv-1 or block_i
                        {
                         v_or_p_values[index-v_or_p_first_row] 
                          += el_vmm_diagonal[i];
                        }
-                      else if (block_index==1)
-                       {
-                        v_or_p_values[index-v_or_p_first_row] 
-                         += el_pmm_diagonal[i];
-                       }
+//                      else if (block_index==1)
+//                       {
+//                        v_or_p_values[index-v_or_p_first_row] 
+//                         += el_pmm_diagonal[i];
+//                       }
                      }
                     // otherwise store it for communication
                     else
                      {
-                      if (block_index==0)
+//                      if (block_index==0) // RAYRAY this as well.
                        {
                         classified_contributions_send[p]
                          .push_back(el_vmm_diagonal[i]);
                         classified_indices_send[p].push_back(index);
                        }
-                      else if (block_index==1)
-                       {
-                        classified_contributions_send[p]
-                         .push_back(el_pmm_diagonal[i]);
-                        classified_indices_send[p].push_back(index);
-                       }
+//                      else if (block_index==1)
+//                       {
+//                        classified_contributions_send[p]
+//                         .push_back(el_pmm_diagonal[i]);
+//                        classified_indices_send[p].push_back(index);
+//                       }
                      }
                    }
                  }
@@ -1005,18 +1093,18 @@ namespace oomph
                }
               
               // store the data
-              if (block_index==0)
+//              if (block_index==0) // RAYRAY this as well.
                {
                 unclassified_contributions_send[p]
                  .push_back(el_vmm_diagonal[i]);
                 unclassified_indices_send[p].push_back(eqn_number);
                }
-              else if (block_index==1)
-               {
-                unclassified_contributions_send[p]
-                 .push_back(el_pmm_diagonal[i]);
-                unclassified_indices_send[p].push_back(eqn_number);
-               }
+//              else if (block_index==1)
+//               {
+//                unclassified_contributions_send[p]
+//                 .push_back(el_pmm_diagonal[i]);
+//                unclassified_indices_send[p].push_back(eqn_number);
+//               }
               
              }
            }
@@ -1177,7 +1265,8 @@ namespace oomph
          {
           unsigned eqn_number = unclassified_indices_recv[p][i];
           //Only deal with our block unknowns
-          if ( this->block_number(eqn_number)==int(block_index) )
+//          if ( this->block_number(eqn_number)==int(block_index) ) // RAYRAY change this?
+          if ( this->block_number(eqn_number)==int(block_i) ) // RAYRAY change this?
            {
               
             //get the index in the block
@@ -1400,24 +1489,22 @@ namespace oomph
       delete[] n_classified_send;
 
       // Copy the values back where they belong
-      if (block_index==0)
+//      if (block_index==0) // RAYRAY change this?
        {
         v_values=v_or_p_values;
        }
-      else if (block_index==1)
-       {
-        p_values=v_or_p_values;
-       }
+//      else if (block_index==1)
+//       {
+//        p_values=v_or_p_values;
+//       }
         
      }
     
 #endif
-    
    }
   // or if the problem is not distributed
   else
    {
-
     // find number of elements
     unsigned n_el = Navier_stokes_mesh_pt->nelement();
     
@@ -1494,7 +1581,7 @@ namespace oomph
         unsigned eqn_number = el_pt->eqn_number(i);
         
         // Get the velocity dofs
-        if (this->block_number(eqn_number)==0)
+        if (this->block_number(eqn_number)==block_i) // THIS HAS CHANGED
          {
           // get the index in the block
           unsigned index = this->index_in_block(eqn_number);
@@ -1507,7 +1594,7 @@ namespace oomph
            }
          }
         // Get the pressure dofs
-        else if (this->block_number(eqn_number)==1)
+        else if (this->block_number(eqn_number)==1) // RAYRAY to change.
          {
           if (!Use_LSC)
            {
@@ -1550,7 +1637,7 @@ namespace oomph
   v_row_start[v_nrow_local] = v_nrow_local;
   
   // Build the velocity mass matrix
-  inv_v_mass_pt = new CRDoubleMatrix(this->block_distribution_pt(0));
+  inv_v_mass_pt = new CRDoubleMatrix(this->block_distribution_pt(block_i));
   inv_v_mass_pt->build_without_copy(v_nrow,v_nrow_local,
                                     v_values,v_column_index,
                                     v_row_start);

@@ -124,7 +124,7 @@ namespace oomph
     std::ostringstream error_message_stream;
     error_message_stream 
      << "The distribution of the x Vector is not the same as"
-     << "the column distribution.";
+     << " the column distribution.";
     throw OomphLibError(error_message_stream.str(),
                         OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
