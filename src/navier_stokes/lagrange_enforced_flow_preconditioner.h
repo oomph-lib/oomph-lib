@@ -237,9 +237,6 @@ namespace oomph
    DoubleVector another_temp_vec;
    DoubleVector yet_another_temp_vec;
 
-   oomph_info << "RAYRAY Starting all W solves" << std::endl; 
-   
-
    // First we solve all the w blocks:
    // Loop through all of the Lagrange multipliers
    for(unsigned l_i = 0; l_i < N_lagrange_doftypes; l_i++)
@@ -256,16 +253,12 @@ namespace oomph
      temp_vec.clear();
      another_temp_vec.clear();
     }
-   oomph_info << "RAYRAY Done all W solves" << std::endl; 
    
-
    // Now solve the Navier-Stokes block.
 
    // At this point, all vectors are cleared.
    if(Using_superlu_ns_preconditioner)
     {
-     oomph_info << "RAYRAY Using SuperLU for NS block." << std::endl; 
-     
      // Concatenate the fluid block vectors
      Vector<DoubleVector*> fluid_sub_vec_pt(N_fluid_doftypes,0);
 
@@ -277,28 +270,21 @@ namespace oomph
       } // for
      
      // Perform the concatenation. 
-     oomph_info << "RAYRAY concatenating NS vectors" << std::endl; 
-     
      DoubleVectorHelpers::concatenate_without_communication
       (fluid_sub_vec_pt,temp_vec);
 
      // Do not clear the sub vectors since we need them to split the result
      // back.
      
-     oomph_info << "RAYRAY About to perform SuperLU solve." << std::endl; 
-     
      // temp_vec contains the (concatenated) fluid rhs.
      Navier_stokes_preconditioner_pt
        ->preconditioner_solve(temp_vec,another_temp_vec);
-     oomph_info << "RAYRAY Done SuperLU solve." << std::endl; 
      
      temp_vec.clear();
-     oomph_info << "RAYRAY Starting NS vec split." << std::endl; 
      
      // We now have to put the block vectors in another_temp_vec back!
      DoubleVectorHelpers::split_without_communication
        (another_temp_vec,fluid_sub_vec_pt);
-     oomph_info << "RAYRAY Done NS vec split." << std::endl; 
      
      another_temp_vec.clear();
 
@@ -312,14 +298,8 @@ namespace oomph
     }
    else
     {
-      oomph_info << "RAYRAY Going into LSC prec." << std::endl; 
-      
      Navier_stokes_preconditioner_pt->preconditioner_solve(r,z);
-     oomph_info << "RAYRAY Got out of LSC prec." << std::endl; 
-     
     }
-   std::cout << "RAYRAY FINISHED L PREC SOLVE" << std::endl; 
-   
   } // end of preconditioner_solve
 
   void set_meshes(Vector<Mesh*> &mesh_pt)
@@ -1311,8 +1291,6 @@ namespace oomph
   // Storage for the W block.
   Vector<CRDoubleMatrix*> w_pt(N_lagrange_doftypes,0);
 
-  oomph_info << "RAYRAY Creating W and the augmented block." << std::endl; 
-  
   // Note that we do not need to store all the inverse w_i since they
   // are only used once per lagrage multiplier.
   for(unsigned l_i = 0; l_i < N_lagrange_doftypes; l_i++)
@@ -1542,8 +1520,6 @@ namespace oomph
       delete mm_pt[m_i];
      }
    } // loop through Lagrange multipliers.
-  oomph_info << "RAYRAY Created W and augmented block" << std::endl; 
-  
 
   // AT this point, we have created the aumented fluid block in v_aug_pt
   // and the w block in w_pt.
@@ -1564,8 +1540,6 @@ namespace oomph
   //
   if(Using_superlu_ns_preconditioner)
    {
-     oomph_info << "RAYRAY Using superLU for NS prec... getting the rest of the NS block." << std::endl; 
-     
     DenseMatrix<CRDoubleMatrix* > f_subblock_pt(N_fluid_doftypes,
                                                 N_fluid_doftypes,0);
     // put in v_aug_pt:
@@ -1592,8 +1566,6 @@ namespace oomph
       this->get_block(row_i,N_velocity_doftypes,
                       f_subblock_pt(row_i,N_velocity_doftypes));
      }
-    oomph_info << "RAYRAY Got all the NS block, now concatenating." << std::endl; 
-    
 
     // Concatenate the sub matrices.
     CRDoubleMatrix* f_aug_pt = new CRDoubleMatrix;
@@ -1606,9 +1578,6 @@ namespace oomph
 
     CRDoubleMatrixHelpers::concatenate_without_communication
      (f_dist_pt,f_subblock_pt,*f_aug_pt);
-
-    oomph_info << "RAYRAY Done concatenation." << std::endl; 
-    
 
     // delete the sub F pointers
     for(unsigned row_i = 0; row_i < N_fluid_doftypes; row_i++)
@@ -1624,12 +1593,9 @@ namespace oomph
      {
       Navier_stokes_preconditioner_pt = new SuperLUPreconditioner;
      }
-    oomph_info << "RAYRAY Setting up SuperLU for NS block." << std::endl; 
     
     Navier_stokes_preconditioner_pt->setup(f_aug_pt, comm_pt());
 
-    oomph_info << "RAYRAY Done SuperLU setup for NS block." << std::endl; 
-    
     delete f_aug_pt;
     f_aug_pt = 0;
    }
@@ -1729,8 +1695,6 @@ namespace oomph
 
 ///////////////////////////////////////////////////////////////////////////////
 
-  oomph_info << "RAYRAY setting up SuperLU for W solver" << std::endl; 
-  
   // Solver for the W block.
   double t_w_prec_start = TimingHelpers::timer();
   W_preconditioner_pts.resize(N_lagrange_doftypes);
@@ -1750,7 +1714,6 @@ namespace oomph
       pause("Other W preconditioners are not yet implemented.");
      }
    }
-  oomph_info << "RAYRAY done W SuperLU setup." << std::endl; 
   
   double t_w_prec_finish = TimingHelpers::timer();
   if(Doc_time)
@@ -1767,7 +1730,6 @@ namespace oomph
    }
 
   Mapping_info_calculated = true;
-  oomph_info << "RAYRAY done Lgr Prec setup" << std::endl; 
   
  } // end of LagrangeEnforcedflowPreconditioner::setup
 
