@@ -140,7 +140,9 @@ cd ..
 # 0 if all tests has passed.
 # 1 if some tests failed.
 # 2 if there are more 'OK' than expected.
-. ../../../bin/validate_ok_count
+MAKEFLAGS=s
+OOMPH_ROOT_DIR=$(make print-top_builddir)
+. $OOMPH_ROOT_DIR/bin/validate_ok_count
 
 # Never get here
 exit 10
