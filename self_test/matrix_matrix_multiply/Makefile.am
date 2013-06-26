@@ -1,3 +1,6 @@
+#Include commands common to every Makefile.am that includes self tests
+include $(top_srcdir)/config/makefile_templates/demo_drivers
+
 # Name of executables
 check_PROGRAMS=matrix_multiply_test 
 
@@ -31,10 +34,3 @@ else
   TESTS = matrix_multiply_test
 endif
 
-
-# Distribute validation script and validation data
-EXTRA_DIST = validate.sh validata
-
-#Add in additional cleanup commands
-clean-local: 
-	rm -rf Validation
