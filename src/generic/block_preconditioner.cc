@@ -206,6 +206,17 @@ namespace oomph
                         OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
+
+  // Check that the matrix is the same as that of the master
+  if(is_subsidiary_block_preconditioner())
+   {
+    if(master_block_preconditioner_pt()->matrix_pt() != matrix_pt())
+     {
+        std::string err = "Master and subs should have same matrix.";
+        throw OomphLibError(err, OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+     }
+   }
 #endif
 
     // Cast the pointer
