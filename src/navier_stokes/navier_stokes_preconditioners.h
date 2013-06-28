@@ -710,9 +710,6 @@ namespace oomph
      // Pin pressure dof in press adv diff problem for Fp precond
      Pin_first_pressure_dof_in_press_adv_diff=true;
 
-     // resize the mesh pt
-     // note: meaningless if subsidiary preconditioner
-     this->set_nmesh(1);
      Navier_stokes_mesh_pt = 0;
 
      // Set default preconditioners (inexact solvers) -- they are 

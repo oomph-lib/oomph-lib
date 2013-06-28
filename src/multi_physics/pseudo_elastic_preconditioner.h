@@ -144,7 +144,6 @@ namespace oomph
     E_preconditioner_type = Exact_block_preconditioner;
     
     // resize the Mesh_pt
-    this->set_nmesh(2);
     Lagrange_multiplier_mesh_pt = 0;
     Elastic_mesh_pt = 0;
    }
@@ -346,7 +345,6 @@ namespace oomph
     E_preconditioner_type = Exact_block_preconditioner;
     
     // resize the Mesh_pt
-    this->set_nmesh(2);
     Lagrange_multiplier_mesh_pt = 0;
     Elastic_mesh_pt = 0;
    }
@@ -759,8 +757,11 @@ namespace oomph
     set_matrix_pt(matrix_pt);
 
     // set the mesh
-    this->set_nmesh(1);
-    this->set_mesh(0,solid_mesh_pt);
+    if(this->is_master_block_preconditioner())
+     {
+      this->set_nmesh(1);
+      this->set_mesh(0,solid_mesh_pt);
+     }
 
     // set the communicator pointer
     this->set_comm_pt(comm_pt);

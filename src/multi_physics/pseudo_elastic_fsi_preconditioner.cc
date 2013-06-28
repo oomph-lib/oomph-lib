@@ -184,8 +184,6 @@ namespace oomph {
      solid_block_preconditioner_pt =
      dynamic_cast<GeneralPurposeBlockPreconditioner<CRDoubleMatrix>* >
      (Solid_preconditioner_pt);
-    solid_block_preconditioner_pt->set_nmesh(1);
-    solid_block_preconditioner_pt->set_mesh(0,Solid_mesh_pt);
 
     if (solid_block_preconditioner_pt != 0)
      {

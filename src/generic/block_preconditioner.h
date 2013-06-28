@@ -205,6 +205,17 @@ namespace oomph
   /// of DOF.
   void set_nmesh(const unsigned& n)
   {
+#ifdef PARANOID
+   // Check that this preconditioner is not a subsidiary
+   if(is_subsidiary_block_preconditioner())
+    {
+     std::string err_msg;
+     err_msg = "Tried to set nmesh in subsidiary preconditioner but subsidiary";
+     err_msg += "but subsidiary preconditioners do not store meshes.";
+     throw OomphLibError(err_msg, OOMPH_CURRENT_FUNCTION, 
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
    Mesh_pt.resize(n,0);
    Allow_multiple_element_type_in_mesh.resize(n,0);
   }
@@ -243,6 +254,16 @@ namespace oomph
       << "The mesh pointer is null.";
      throw OomphLibError(err_msg.str(),
                          OOMPH_CURRENT_FUNCTION,
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+
+   // Check that this preconditioner is not a subsidiary
+   if(is_subsidiary_block_preconditioner())
+    {
+     std::string err_msg;
+     err_msg = "Tried to set a mesh in subsidiary preconditioner but subsidiary";
+     err_msg += "but subsidiary preconditioners do not store meshes.";
+     throw OomphLibError(err_msg, OOMPH_CURRENT_FUNCTION, 
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -425,18 +446,38 @@ namespace oomph
   }
 
   /// \short Access to i-th mesh (of the various meshes that contain block
-  /// preconditionable elements of the same type).
+  /// preconditionable elements of the same type). If this is a subsidiary
+  /// preconditioner then the master Mesh_pt is used.
   const Mesh* mesh_pt(const unsigned& i) const
   {
-   const Mesh* temp = Mesh_pt[i];
+   // Get the mesh pointer either from here or from the master
+   const Mesh* temp;
+   if(is_subsidiary_block_preconditioner())
+    {
+     temp = master_block_preconditioner_pt()->mesh_pt(i);
+    }
+   else
+    {
+     temp = Mesh_pt[i];
+    }
+
 #ifdef PARANOID
    if(temp == 0)
     {
      std::ostringstream error_msg;
-     error_msg << "Mesh pointer " << i
-               << " is null.";
+     error_msg << "Mesh pointer " << i << " is null.";
      throw OomphLibError(error_msg.str(),
                          OOMPH_CURRENT_FUNCTION,
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+
+   // Warn if any meshes have been set in subsidiary block preconditioners
+   // (because they are ignored and could have been set before it became a
+   // subsidiary block preconditioner).
+   if(is_subsidiary_block_preconditioner() && ! Mesh_pt.empty())
+    {
+     std::string error_msg = "Meshes have been set in a subsidiary preconditioner!";
+     throw OomphLibError(error_msg, OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -444,8 +485,28 @@ namespace oomph
    return temp;
   }
 
-  /// \short Return the number of meshes in Mesh_pt.
-  unsigned nmesh() const {return Mesh_pt.size();}
+  /// \short Return the number of meshes in Mesh_pt. If this is a
+  /// subsidiary preconditioner then the master Mesh_pt is used.
+  unsigned nmesh() const 
+  {
+#ifdef PARANOID
+   if(is_subsidiary_block_preconditioner() && ! Mesh_pt.empty())
+    {
+     std::string error_msg = "Meshes have been set in a subsidiary preconditioner!";
+     throw OomphLibError(error_msg, OOMPH_CURRENT_FUNCTION,
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+   if(is_subsidiary_block_preconditioner())
+    {
+     return master_block_preconditioner_pt()->nmesh();
+    }
+   else
+    {
+     return Mesh_pt.size();
+    }
+  }
 
   /// \short Return the block number corresponding to a global index i_dof.
   int block_number(const unsigned& i_dof) const
@@ -519,9 +580,14 @@ namespace oomph
   /// \short Return the number of DOF types in mesh i.
   unsigned ndof_types_in_mesh(const unsigned& i) const
   {
-   // If we have calculated the value then return it. Otherwise get the mesh
-   // to calculate it.
-   if(Ndof_types_in_mesh.size() > 0)
+   // If we have a master preconditioner then ask it for the
+   // result. Otherwise if we have calculated the value then return
+   // it, if not then get the mesh to calculate it.
+   if(is_subsidiary_block_preconditioner())
+    {
+     return master_block_preconditioner_pt()->ndof_types_in_mesh(i);
+    }
+   else if(Ndof_types_in_mesh.size() > 0)
     {
      return Ndof_types_in_mesh[i];
     }

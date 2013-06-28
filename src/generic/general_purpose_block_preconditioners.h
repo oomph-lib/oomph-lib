@@ -177,7 +177,7 @@ namespace oomph
   {
    Dof_to_block_map = dof_to_block_map;
   }
-  
+
   /// Modified block setup for general purpose block preconditioners
   void block_setup()
   {

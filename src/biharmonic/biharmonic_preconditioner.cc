@@ -161,14 +161,6 @@ namespace Biharmonic_schur_complement_Hypre_defaults
     new InexactSubBiharmonicPreconditioner(this,use_amg);
    Sub_preconditioner_2_pt = new MatrixBasedDiagPreconditioner;
   }
-
- // Set meshes for block preconditioner ??ds not entirely sure it's this
- // one, previously it used problem_pt->mesh_pt() as a default mesh.
- BlockPreconditioner<CRDoubleMatrix>* Block_sub_prec_1_pt =
-  checked_dynamic_cast<BlockPreconditioner<CRDoubleMatrix>* >
-  (Sub_preconditioner_1_pt);
- Block_sub_prec_1_pt->set_nmesh(1);
- Block_sub_prec_1_pt->set_mesh(0,Bulk_element_mesh_pt);
  
  // setup sub preconditioner pt 1
  Sub_preconditioner_1_pt->setup(matrix_pt(),comm_pt());

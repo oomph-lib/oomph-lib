@@ -171,10 +171,14 @@ namespace oomph
    }
 #endif
 
-  // set the mesh
-  this->set_nmesh(1);
-  this->set_mesh(0,Navier_stokes_mesh_pt,
-                 Allow_multiple_element_type_in_navier_stokes_mesh);
+  // Set the mesh if this is the master preconditioner, otherwise no need
+  // and could be confusing so don't set it.
+  if(is_master_block_preconditioner())
+   {
+    this->set_nmesh(1);
+    this->set_mesh(0,Navier_stokes_mesh_pt,
+                   Allow_multiple_element_type_in_navier_stokes_mesh);
+   }
   
   // Get blocks
   // ----------
@@ -617,10 +621,6 @@ namespace oomph
      }
     F_block_preconditioner_pt->
      turn_into_subsidiary_block_preconditioner(this,dof_map);
-
-    // Set the mesh in the subsidiary precondtioner. 
-    F_block_preconditioner_pt->set_nmesh(1);
-    F_block_preconditioner_pt->set_mesh(0, Navier_stokes_mesh_pt);
 
     F_block_preconditioner_pt->setup(matrix_pt(),comm_pt());
    }

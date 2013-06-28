@@ -145,10 +145,12 @@ namespace oomph
   // set the mesh
   unsigned n_solid_dof_types = 0;
   unsigned n_dof_types = 0;
-  this->set_mesh(0,Elastic_mesh_pt);
-  this->set_mesh(1,Lagrange_multiplier_mesh_pt);
+
   if (this->is_master_block_preconditioner())
    {
+    this->set_nmesh(2);
+    this->set_mesh(0,Elastic_mesh_pt);
+    this->set_mesh(1,Lagrange_multiplier_mesh_pt);
     
     // get the number of solid dof types from the first element
     n_solid_dof_types = this->ndof_types_in_mesh(0);
@@ -331,8 +333,6 @@ namespace oomph
        (Elastic_subsidiary_preconditioner_function_pt);
      }
 
-    s_prec_pt->set_nmesh(1);
-    s_prec_pt->set_mesh(0, Elastic_mesh_pt);
     s_prec_pt->set_precomputed_blocks(solid_matrix_pt);
 
     s_prec_pt->Preconditioner::setup(matrix_pt(),comm_pt());
@@ -392,8 +392,6 @@ namespace oomph
       s_prec_pt->set_subsidiary_preconditioner_function
        (Elastic_subsidiary_preconditioner_function_pt);
      }
-    s_prec_pt->set_nmesh(1);
-    s_prec_pt->set_mesh(0,Elastic_mesh_pt);
    
     // The block to block map
     Vector<Vector<unsigned> > block_to_block_map(
@@ -639,8 +637,6 @@ namespace oomph
        (Elastic_subsidiary_preconditioner_function_pt);
      }
     s_prec_pt->scaling() = Scaling;
-    s_prec_pt->set_nmesh(1);
-    s_prec_pt->set_mesh(0, Elastic_mesh_pt);
     s_prec_pt->Preconditioner::setup(matrix_pt(),comm_pt());
     Elastic_preconditioner_pt = s_prec_pt;
    }
@@ -687,8 +683,6 @@ namespace oomph
      }
     
     // setup
-    s_prec_pt->set_nmesh(1);
-    s_prec_pt->set_mesh(0, Elastic_mesh_pt);
     s_prec_pt->Preconditioner::setup(matrix_pt(),comm_pt());
     Elastic_preconditioner_pt = s_prec_pt;
 
@@ -1002,9 +996,6 @@ namespace oomph
      }
     Diagonal_block_preconditioner_pt[d]->scaling() = Scaling;
 
-    //??ds probably will work...
-    Diagonal_block_preconditioner_pt[d]->set_nmesh(1);
-    Diagonal_block_preconditioner_pt[d]->set_mesh(0,this->mesh_pt(0));
     Diagonal_block_preconditioner_pt[d]->
      Preconditioner::setup(matrix_pt(),comm_pt());
     
