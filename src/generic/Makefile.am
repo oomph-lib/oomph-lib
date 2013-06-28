@@ -46,7 +46,7 @@ iterative_linear_solver.cc \
 general_purpose_preconditioners.cc block_preconditioner.cc \
 matrix_vector_product.cc \
 sum_of_matrices.cc \
-preconditioner_array.cc
+preconditioner_array.cc general_purpose_block_preconditioners.cc
 #face_element_as_geometric_object.cc
 
 if OOMPH_HAS_MUMPS

@@ -612,7 +612,7 @@ namespace oomph
   }
 
   /// \short Access function to the master block preconditioner pt.
-  Preconditioner* master_block_preconditioner_pt()
+  BlockPreconditioner<MATRIX>* master_block_preconditioner_pt() const
   {
 #ifdef PARANOID
    if (is_master_block_preconditioner())
