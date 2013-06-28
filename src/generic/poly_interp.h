@@ -2,7 +2,7 @@
 #define OOMPH_POLY_INTERP_H
 
 
-#include "generic.h"
+#include "Vector.h"
 
 using namespace oomph;
 
@@ -80,6 +80,9 @@ namespace PolyInterpHelpers
     virtual void eval_derivative(const double& x, const unsigned &deriv_order,
                                  Vector<double>& result) const =0;
 
+    /// Empty virtual destructor
+    virtual ~PolynomialInterpolatorBase() {}
+
   };
 
 
@@ -95,6 +98,9 @@ namespace PolyInterpHelpers
                                     const Vector<Vector<double> >& values)
       : Locations(locations), Values(values)
     { build(); }
+
+    /// Empty virtual destructor
+    virtual ~BarycentricLagrangeInterpolator() {}
 
     /// Get value at point
     void eval(const double& x, Vector<double>& result) const;
