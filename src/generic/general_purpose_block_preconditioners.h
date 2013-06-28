@@ -37,12 +37,12 @@
 #endif
 
 // c++ include
-#include<list>
+// #include<list>
 
 // oomph-lib includes
 #include "matrices.h"
-#include "mesh.h"
-#include "problem.h"
+// #include "mesh.h"
+// #include "problem.h"
 #include "block_preconditioner.h"
 #include "SuperLU_preconditioner.h"
 #include "preconditioner_array.h"
