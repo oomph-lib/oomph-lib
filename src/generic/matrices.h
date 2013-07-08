@@ -41,6 +41,10 @@
 #include "mpi.h"
 #endif
 
+
+//Needed for g++ in some cases
+#include<iomanip>
+
 //oomph-lib headers
 #include "Vector.h"
 #include "oomph_utilities.h"
