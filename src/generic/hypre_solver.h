@@ -871,7 +871,13 @@ namespace oomph
     {
      Max_iter = amg_iterations;
     }
-   
+
+   /// Return function for Max_iter
+   unsigned& amg_iterations()
+    {
+     return Max_iter;
+    }
+  
    /// \short Function to select use of 'simple' AMG smoothers as controlled
    /// by the flag AMG_simple_smoother 
    void amg_using_simple_smoothing() {AMG_using_simple_smoothing = true;}
@@ -885,6 +891,12 @@ namespace oomph
    
    /// Access function to AMG_complex_smoother flag
    unsigned& amg_complex_smoother() {return AMG_complex_smoother;}
+
+   /// \short Return function for the AMG_using_simple_smoothing_flag 
+   bool& amg_using_simple_smoothing_flag()
+    {
+      return AMG_using_simple_smoothing;
+    }
    
    /// Access function to AMG_print_level
    unsigned& amg_print_level() {return AMG_print_level;}

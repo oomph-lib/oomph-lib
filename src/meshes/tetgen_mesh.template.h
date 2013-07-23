@@ -194,6 +194,14 @@ public:
     {
      split_elements_in_corners();
     }
+
+   // Setup boundary coordinates 
+   unsigned nb=nboundary();
+   for (unsigned b=0;b<nb;b++)
+    {
+     bool switch_normal=false;
+     setup_boundary_coordinates(b,switch_normal); 
+    }
   }
 
  /// \short Constructor with tetgen data structure Setting the boolean

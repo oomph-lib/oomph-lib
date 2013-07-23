@@ -260,45 +260,49 @@ class CRDoubleMatrix;
  double* values_pt() const {return Values_pt;}
 
  /// output the global contents of the vector
- void output(std::ostream &outfile);
+ void output(std::ostream &outfile,const int& output_precision = -1);
 
  /// output the global contents of the vector
- void output(std::string filename)
+ void output(std::string filename,const int& output_precision = -1)
   {
     // Open file
     std::ofstream some_file;
     some_file.open(filename.c_str());
-    output(some_file);
+    output(some_file,output_precision);
     some_file.close();
   }
 
  /// output the local contents of the vector
- void output_local_values(std::ostream &outfile);
+ void output_local_values(std::ostream &outfile,
+                          const int& output_precision = -1);
 
  /// output the local contents of the vector
- void output_local_values(std::string filename)
+ void output_local_values(std::string filename,
+                          const int& output_precision = -1)
   {
     // Open file
     std::ofstream some_file;
     some_file.open(filename.c_str());
-    output_local_values(some_file);
+    output_local_values(some_file,output_precision);
     some_file.close();
   }
 
  /// output the local contents of the vector
- void output_local_values_with_offset(std::ostream &outfile);
+ void output_local_values_with_offset(std::ostream &outfile,
+                                      const int& output_precision = -1);
 
  /// output the local contents of the vector
- void output_local_values_with_offset(std::string filename)
+ void output_local_values_with_offset(std::string filename,
+                                      const int& output_precision = -1)
   {
     // Open file
     std::ofstream some_file;
     some_file.open(filename.c_str());
-    output_local_values_with_offset(some_file);
+    output_local_values_with_offset(some_file,output_precision);
     some_file.close();
   }
 
- /// compute the 2 norm of this vector
+ /// compute the dot product of this vector with the vector vec.
  double dot(const DoubleVector& vec) const;
 
  /// compute the 2 norm of this vector 

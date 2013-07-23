@@ -1104,7 +1104,22 @@ namespace oomph
   // Call the block setup
   this->block_setup(block_setup_bcpl);
 
-
+//  // Check the block size.
+//  for (unsigned i = 0; i < this->nblock_types(); i++) 
+//  {
+//    // Go along the first column.
+//    unsigned raycol = 0;
+//
+//    CRDoubleMatrix* tmpblockpt = new CRDoubleMatrix;
+//    this->get_block(i,raycol,*tmpblockpt);
+//
+//    unsigned raynrow = tmpblockpt->nrow();
+//    std::cout << "block: " << i << ", nrow: " << raynrow << std::endl; 
+//    
+//
+//  }
+//  pause("now!"); 
+  
 
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
@@ -1303,6 +1318,7 @@ namespace oomph
    {
     // Storage for the current lagrange block mass matrices.
     Vector<CRDoubleMatrix*> mm_pt;
+    Vector<CRDoubleMatrix*> mmt_pt;
 
     // Get the current lagrange doftype.
     unsigned l_doftype = N_fluid_doftypes + l_i;
@@ -1351,8 +1367,39 @@ namespace oomph
      }
 #endif
 
-    // The mass matrices for the current Lagrange block is
-    // in mm_pt. Now create the w_i and put it in w_pt.
+    // Get the transpose of the mass matrices.
+    for(unsigned mm_i = 0; mm_i < n_mm; mm_i++)
+     {
+      // Get the block matrix for this block column.
+      CRDoubleMatrix* mm_temp_pt = new CRDoubleMatrix;
+      this->get_block(mm_locations[mm_i],l_doftype,*mm_temp_pt);
+
+      if(mm_temp_pt->nnz() > 0)
+       {
+        mmt_pt.push_back(mm_temp_pt);
+       }
+      else
+      {
+        // There should be a non-zero mass matrix here, since we are getting
+        // mass matrices from the L^T block, corresponding to L.
+#ifdef PARANOID
+        {
+          std::ostringstream warning_stream;
+          warning_stream << "WARNING:\n"
+            << "The mass matrix block " << mm_locations[mm_i] 
+            << "in L^T block " << l_i << "is zero.\n"
+            << "Perhaps the problem setup is incorrect." << std::endl;
+          OomphLibWarning(warning_stream.str(),
+              OOMPH_CURRENT_FUNCTION,
+              OOMPH_EXCEPTION_LOCATION);
+        }
+#endif
+      }
+     } // loop through the ROW of the lagrange COLUMN.
+
+    // The mass matrices for the current Lagrange block row is in mm_pt. 
+    // The mass matrices for the current Lagrange block col is in mmt_pt. 
+    // Now create the w_i and put it in w_pt.
     
     unsigned long l_i_nrow_global 
       = this->Block_distribution_pt[l_doftype]->nrow();
@@ -1375,7 +1422,6 @@ namespace oomph
     if(Use_diagonal_w_block)
      {
       // Get the number of local rows for this lagrange block.
-      // We shall use the block in the first column.
       unsigned long l_i_nrow_local 
         = this->Block_distribution_pt[l_doftype]->nrow_local();
 
@@ -1400,12 +1446,17 @@ namespace oomph
         // WE CAN GET AROUND THIS MY MULTIPLYING THE MASS MATRIX BY
         // IT'S TRANSPOSE, THEN TAKE THE DIAGONAL ENTRIES OF THAT.
         // Get the diagonal entries for the mass matrix.
-        Vector<double> m_diag = mm_pt[m_i]->diagonal_entries();
+        CRDoubleMatrix* temp_mm_sqrd_pt = new CRDoubleMatrix;
+        temp_mm_sqrd_pt->build(mm_pt[m_i]->distribution_pt());
+        mm_pt[m_i]->multiply(*mmt_pt[m_i],*temp_mm_sqrd_pt);
+
+        //Vector<double> m_diag = mm_pt[m_i]->diagonal_entries();
+        Vector<double> m_diag = temp_mm_sqrd_pt->diagonal_entries();
 
         // Loop through the entries, square and add them.
         for(unsigned long row_i = 0; row_i < l_i_nrow_local; row_i++)
          {
-          w_i_diag_values[row_i] += m_diag[row_i]*m_diag[row_i];
+          w_i_diag_values[row_i] += m_diag[row_i];
          }
        }
       
@@ -1500,7 +1551,6 @@ namespace oomph
      {
       unsigned aug_i = mm_locations[ii];
 
-      // We assume that the mass matrices are symmetric.
       for(unsigned jj = 0; jj < n_mm; jj++)
        {
         unsigned aug_j = mm_locations[jj];
@@ -1508,7 +1558,7 @@ namespace oomph
         // A temp pointer to store the intermediate results.
         CRDoubleMatrix* aug_pt = new CRDoubleMatrix;
 
-        mm_pt[ii]->multiply((*inv_w_pt),(*aug_pt));
+        mmt_pt[ii]->multiply((*inv_w_pt),(*aug_pt));
         CRDoubleMatrix* another_mat_pt = new CRDoubleMatrix;
 
         aug_pt->multiply(*mm_pt[jj],(*another_mat_pt));
@@ -1524,6 +1574,7 @@ namespace oomph
     for(unsigned m_i = 0; m_i < n_mm; m_i++)
      {
       delete mm_pt[m_i];
+      delete mmt_pt[m_i];
      }
    } // loop through Lagrange multipliers.
 

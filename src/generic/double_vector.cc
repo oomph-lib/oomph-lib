@@ -652,7 +652,7 @@ namespace oomph
  //============================================================================
  /// output the contents of the vector
  //============================================================================
- void DoubleVector::output(std::ostream &outfile)
+ void DoubleVector::output(std::ostream &outfile, const int &output_precision)
   {
    // temp pointer to values
    double* temp;
@@ -703,9 +703,23 @@ namespace oomph
 #endif
 
    // output
+   // Store the precision so we can revert it.
+   std::streamsize old_precision; 
+   if(output_precision > 0)
+    {
+     old_precision = outfile.precision();
+     outfile << std::setprecision(output_precision);
+    }
+   
    for (unsigned i = 0; i < nrow; i++)
     {
      outfile << i << " " << temp[i] << std::endl;
+    }
+
+   // Revert the precision.
+   if(output_precision > 0)
+    {
+     outfile << std::setprecision(old_precision);
     }
 
    // clean up if requires
@@ -721,36 +735,63 @@ namespace oomph
  //============================================================================
  /// output the local contents of the vector
  //============================================================================
- void DoubleVector::output_local_values(std::ostream &outfile)
+ void DoubleVector::output_local_values(std::ostream &outfile,
+                                        const int &output_precision)
   {
    // Number of local rows.
    unsigned nrow_local = this->nrow_local();
-  
+
    // output
+   // Store the precision so we can revert it.
+   std::streamsize old_precision; 
+   if(output_precision > 0)
+    {
+     old_precision = outfile.precision();
+     outfile << std::setprecision(output_precision);
+    } 
+
    for (unsigned i = 0; i < nrow_local; i++)
     {
      outfile << i << " " << Values_pt[i] << std::endl;
+    }
+
+   // Revert the precision.
+   if(output_precision > 0)
+    {
+     outfile << std::setprecision(old_precision);
     }
   }
 
  //============================================================================
  /// output the local contents of the vector with the first row offset.
  //============================================================================
- void DoubleVector::output_local_values_with_offset(std::ostream &outfile)
+ void DoubleVector::output_local_values_with_offset(
+     std::ostream &outfile, const int &output_precision)
   {
    // Number of local rows.
    unsigned nrow_local = this->nrow_local();
 
    // First row on this processor.
    unsigned first_row = this->first_row();
-   oomph_info << "nrow_loca: " << nrow_local << std::endl;
-   oomph_info << "first row: " << first_row << std::endl; 
-   
    
    // output
+   // Store the precision so we can revert it.
+   std::streamsize old_precision; 
+   if(output_precision > 0)
+    {
+     old_precision = outfile.precision();
+     outfile << std::setprecision(output_precision);
+    } 
+
    for (unsigned i = 0; i < nrow_local; i++)
     {
      outfile << (i + first_row) << " " << Values_pt[i] << std::endl;
+    }
+
+   // Revert the precision.
+   if(output_precision > 0)
+    {
+     outfile << std::setprecision(old_precision);
     }
   }
 

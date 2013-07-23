@@ -49,6 +49,7 @@
 #include "../generic/refineable_brick_mesh.h"
 #include "../generic/Telements.h"
 #include "xda_tet_mesh.template.h"
+#include "tetgen_mesh.template.h"
 
 namespace oomph
 {
@@ -76,6 +77,34 @@ public:
    // Build temporary tet mesh
    XdaTetMesh<TElement<3,3> >* tmp_mesh_pt= 
     new XdaTetMesh<TElement<3,3> >(xda_file_name,time_stepper_pt);
+   
+   // Actually build the mesh
+   build_mesh(tmp_mesh_pt,time_stepper_pt);
+
+   // Now kill the temporary mesh
+   delete tmp_mesh_pt;
+  }
+
+ /// Constructor: Pass the files required for the tetgen mesh.
+ BrickFromTetMesh(const std::string& node_file_name,
+                  const std::string& element_file_name,
+                  const std::string& face_file_name,
+                  const bool& split_corner_elements,
+                  TimeStepper* time_stepper_pt=
+                  &Mesh::Default_TimeStepper,
+                  const bool &use_attributes=false)
+  {
+   // Mesh can only be built with 3D Qelements.
+   MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(3);
+   
+   // Build temporary tet mesh
+   TetgenMesh<TElement<3,3> >* tmp_mesh_pt= 
+    new TetgenMesh<TElement<3,3> >(node_file_name,
+                                   element_file_name,
+                                   face_file_name,
+                                   split_corner_elements,
+                                   time_stepper_pt,
+                                   use_attributes);
    
    // Actually build the mesh
    build_mesh(tmp_mesh_pt,time_stepper_pt);
@@ -120,7 +149,10 @@ private:
  void build_mesh(XdaTetMesh<TElement<3,3> >* tet_mesh_pt, 
                  TimeStepper* time_stepper_pt);
 
- 
+ /// Build fct: Pass pointer to existing tet mesh.
+ void build_mesh(TetgenMesh<TElement<3,3> >* tet_mesh_pt, 
+                 TimeStepper* time_stepper_pt);
+
  /// \short Vector of vectors containing the boundary IDs of
  /// the overall boundary specified in the xda file.
  Vector<Vector<unsigned> > Boundary_id;
