@@ -5603,6 +5603,725 @@ surface_remesh_for_inner_hole_boundaries(Vector<Vector<double> >
 
  } //End of the loop of internal boundaries
 
+ //======================================================================
+ /// Create the polylines and fill associate data structures, used when
+ /// creating from a mesh from polyfiles
+ //======================================================================
+ template<class ELEMENT>
+ void RefineableTriangleMesh<ELEMENT>::
+ create_polylines_from_polyfiles(const std::string& node_file_name,
+                                 const std::string& poly_file_name)
+ {
+  // Get the nodes coordinates (the index of the nodes to build the
+  // polylines is the one used in the node_file_name file)
+  // Process node file
+  // -----------------
+  std::ifstream node_file(node_file_name.c_str(),std::ios_base::in);
+
+  // Check that the file actually opened correctly
+  if(!node_file.is_open())
+   {
+    std::string error_msg("Failed to open node file: ");
+    error_msg += "\"" + node_file_name + "\".";
+    throw OomphLibError(error_msg, OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+
+  // Read number of nodes
+  unsigned nnodes;
+  node_file >> nnodes;
+   
+  // Spatial dimension of nodes
+  unsigned dimension;
+  node_file >> dimension;
+  
+#ifdef PARANOID
+  if(dimension!=2)
+   {
+    throw OomphLibError("The dimension must be 2\n",
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+   
+  // Storage the nodes vertices
+  Vector<double> x_node(nnodes);
+  Vector<double> y_node(nnodes);
+
+  // Number of attributes
+  unsigned npoint_attributes;
+  node_file >> npoint_attributes;;
+  
+  // Flag for boundary markers
+  unsigned boundary_markers_flag;
+  node_file >> boundary_markers_flag;
+
+  // Dummy for node number
+  unsigned dummy_node_number;
+  // Dummy for node attribute
+  unsigned dummy_node_attribute;
+  // Dummy for node boundary
+  unsigned dummy_node_boundary;
+   
+  // Load in nodal posititions, point attributes
+  // and boundary markers
+  for(unsigned i=0;i<nnodes;i++)
+   {
+    node_file>>dummy_node_number;
+    node_file>>x_node[i];
+    node_file>>y_node[i];
+    for(unsigned j=0;j<npoint_attributes;++j)
+     {
+      node_file>>dummy_node_attribute;
+     }
+    if(boundary_markers_flag)
+     {
+      node_file>>dummy_node_boundary;
+     }
+   }
+  node_file.close();
+
+  // Get the segments information and use that info. to create the
+  // polylines
+
+  // A map to store the segments associated to a boundary, non sorted
+  std::map<unsigned,Vector<std::pair<unsigned,unsigned> > > 
+   unsorted_boundary_segments;
+
+  // Process poly file to extract edges
+  //-----------------------------------
+   
+  // Open poly file
+  std::ifstream poly_file(poly_file_name.c_str(),std::ios_base::in);
+
+  // Check that the file actually opened correctly
+  if(!poly_file.is_open())
+   {
+    std::string error_msg("Failed to open poly file: ");
+    error_msg += "\"" + poly_file_name + "\".";
+    throw OomphLibError(error_msg, OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+
+  // Number of nodes in poly file --- these will be ignore
+  unsigned n_node_poly;
+  poly_file >> n_node_poly;
+
+  // Dimension
+  poly_file >> dimension;
+
+  // Attribute flag
+  unsigned attribute_flag;
+  poly_file >> attribute_flag;
+
+  // Flag for boundary markers
+  poly_file >> boundary_markers_flag;
+  
+  // Ignore node information: Note: No, we can't extract the
+  // actual nodes themselves from here!
+  unsigned dummy;
+  for(unsigned i=0;i<n_node_poly;i++)
+   {
+    //Read in (and discard) node number and x and y coordinates
+    poly_file>>dummy;
+    poly_file>>dummy;
+    poly_file>>dummy;
+    //read in the attributes
+    for(unsigned j=0;j<attribute_flag;++j)
+     {
+      poly_file >> dummy;
+     }
+    //read in the boundary marker
+    if(boundary_markers_flag==1)
+     {
+      poly_file>>dummy;
+     }
+   }
+  
+  // Variable used to read the values from the input file
+  unsigned read_value;
+  
+  // Number of segments
+  poly_file >> read_value;
+  const unsigned nglobal_segments = read_value;
+  
+  // Boundary marker flag
+  poly_file >> boundary_markers_flag;
+  
+  // Global segment number
+  unsigned global_segment_number;
+
+  // Node identifier set (used to identify possible internal boundaries)
+  std::set<unsigned> nodes_ids;
+
+  // Extract information for each segment
+  for(unsigned i=0;i<nglobal_segments;i++)
+   {
+    // Node id on the edge of the segment
+    unsigned lnode_id; // left node
+    unsigned rnode_id; // right node
+    unsigned bnd_id;   // boundary id associated to the current segment
+    poly_file >> global_segment_number;
+    poly_file >> lnode_id;
+    poly_file >> rnode_id;
+    nodes_ids.insert(lnode_id);
+    nodes_ids.insert(rnode_id);
+    if(boundary_markers_flag)
+     {
+      poly_file >> bnd_id;
+     }
+    
+    // Store the segments info. (use bnd_id - 1 because the nodes and
+    // elements associated the bnd_id have been associated by external
+    // methods to bnd_id - 1)
+    unsorted_boundary_segments[bnd_id-1].push_back(
+     std::make_pair(lnode_id, rnode_id));
+   }
+  
+#ifdef PARANOID
+  if (nglobal_segments != nodes_ids.size())
+   {
+    std::ostringstream error_message;
+    error_message
+     << "The number of nodes (" << nodes_ids.size() << ") and segments (" 
+     << nglobal_segments << ") is different.\nThis could mean that there "
+     << "are internal non-closed boundaries defined in\nthe polyfile, "
+     << "to support this feature please use the TriangleMeshPoyLine\n"
+     << "and TriangleMeshCurviLine objects\n\n";
+    throw OomphLibError(error_message.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+
+  // Now sort the segments associated to a boundary to create a contiguous
+  // polyline, but first check that the number of found boundaries be the
+  // same as the current number of boundaries in the mesh
+  const unsigned nboundary = unsorted_boundary_segments.size();
+  
+#ifdef PARANOID
+  if (nboundary != this->nboundary())
+   {
+    std::ostringstream error_message;
+    error_message
+     << "The number of boundaries on the mesh (" << this->nboundary() 
+     << ") is different from the number of\nboundaries read from the "
+     << "polyfiles (" << unsorted_boundary_segments.size() << ")!!!\n\n\n";
+    throw OomphLibError(error_message.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+  
+  // Sorted segments (to create a polyline -- boundary)
+  std::map<unsigned, std::list<unsigned> > sorted_boundary_segments;
+  
+  // Go through all the found boundaries
+  std::map<unsigned,Vector<std::pair<unsigned,unsigned> > >::iterator it;
+  
+  for (it = unsorted_boundary_segments.begin(); 
+       it != unsorted_boundary_segments.end(); 
+       it++)
+   {
+    // Get the current boundary id, only look for the segments
+    // associated with this boundary
+    const unsigned bnd_id = (*it).first;
+    Vector<std::pair<unsigned, unsigned> > segments_edges = (*it).second;
+
+    // Now sort the segments associated to this boundary
+    std::map<std::pair<unsigned, unsigned>, bool> segment_done;
+    const unsigned nsegments = segments_edges.size();
+    
+    // Sorted nodes for the current segment
+    std::list<unsigned> sorted_segments;
+    
+    // Get the left and right node of the zero segment
+    unsigned left_node_id = segments_edges[0].first;
+    unsigned right_node_id = segments_edges[0].second;
+    
+    // ...  and add it to the sorted segments structure
+    sorted_segments.push_back(left_node_id);
+    sorted_segments.push_back(right_node_id);
+
+    // Mark the current segment as done
+    segment_done[segments_edges[0]] = true;
+
+    // Set the number of sorted segments
+    unsigned nsorted_segments = 1;
+
+    while(nsorted_segments < nsegments)
+     {
+      for (unsigned i = 1; i < nsegments; i++)
+       {
+        // Check if the i-th segments has been done
+        if (!segment_done[segments_edges[i]])
+         {
+          // Get the left and right node id
+          unsigned current_left_node_id = segments_edges[i].first;
+          unsigned current_right_node_id = segments_edges[i].second;
+          
+          // Now check if the current segment can be added to the left
+          // or right side of the sorted segments
+          if (current_left_node_id == right_node_id)
+           {
+            // Add the current_right_node_id to the right of the sorted
+            // segments
+            sorted_segments.push_back(current_right_node_id);
+            // Increase the number of sorted segments
+            nsorted_segments++;
+            // Mark the segment as done
+            segment_done[segments_edges[i]] = true;
+            // Update the right most node
+            right_node_id = current_right_node_id;
+            // Break the for loop
+            break;
+           }
+          else if (current_right_node_id == left_node_id)
+           {
+            // Add the current_left_node_id to the left of the sorted
+            // segments
+            sorted_segments.push_front(current_left_node_id);
+            // Increase the number of sorted segments
+            nsorted_segments++;
+            // Mark the segment as done
+            segment_done[segments_edges[i]] = true;
+            // Update the left most node
+            left_node_id = current_left_node_id;
+            // Break the for loop
+            break;
+           }
+          else if (current_left_node_id == left_node_id)
+           {
+            // Add the current_right_node_id to the left of the sorted
+            // segments
+            sorted_segments.push_front(current_right_node_id);
+            // Increase the number of sorted segments
+            nsorted_segments++;
+            // Mark the segment as done
+            segment_done[segments_edges[i]] = true;
+            // Update the left most node
+            left_node_id = current_right_node_id;
+            // Break the for loop
+            break;
+           }
+          else if (current_right_node_id == right_node_id)
+           {
+            // Add the current_left_node_id to the right of the sorted
+            // segments
+            sorted_segments.push_back(current_left_node_id);
+            // Increase the number of sorted segments
+            nsorted_segments++;
+            // Mark the segment as done
+            segment_done[segments_edges[i]] = true;
+            // Update the left most node
+            right_node_id = current_left_node_id;
+            // Break the for loop
+            break;
+           }
+         } // if (!segment_done[segments_edges[i]])
+       } // for (i < nsegments)
+     } // while(nsorted_segments < nsegments)
+    
+    sorted_boundary_segments[bnd_id] = sorted_segments;
+    
+   } // for (unsorted_boundary_segments.begin(); 
+     //      unsorted_boundary_segments.end())
+
+#ifdef PARANOID
+  if (sorted_boundary_segments.size() != this->nboundary())
+   {
+    std::ostringstream error_message;
+    error_message
+     << "The number of boundaries on the mesh (" << this->nboundary() 
+     << ") is different from the number\nof sorted boundaries to create the "
+     << "polylines (" << sorted_boundary_segments.size() << ")\n\n";
+    throw OomphLibError(error_message.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+
+  // Now we have the sorted nodes, we can create the polylines by
+  // getting the vertices of the nodes
+  Vector<TriangleMeshPolyLine*> polylines_pt(nboundary);
+  unsigned current_polyline = 0;
+  
+  // Go through the sorted boundaries
+  std::map<unsigned, std::list<unsigned> >::iterator it_sorted;
+  for (it_sorted = sorted_boundary_segments.begin();
+       it_sorted != sorted_boundary_segments.end();
+       it_sorted++)
+   {
+    // Get the boundary id
+    const unsigned bnd_id = (*it_sorted).first;
+    
+    // Create a vector representation for ease to use
+    // Get the vertices of the nodes that create the boundary / polyline
+    Vector<unsigned> nodes_ids;
+    for (std::list<unsigned>::iterator it_list = (*it_sorted).second.begin();
+         it_list != (*it_sorted).second.end(); it_list++)
+     {nodes_ids.push_back((*it_list));}
+    
+    // Get the number of vertices for the polyline
+    const unsigned nvertices = nodes_ids.size();
+
+    // The storage for the vertices
+    Vector<Vector<double> > vertices(nvertices);
+    
+    // Now get the vertices of the nodes of the current boundary
+    for (unsigned i = 0; i < nvertices; i++)
+     {
+      // Get the vertices
+      vertices[i].resize(2);
+      vertices[i][0] = x_node[nodes_ids[i]-1];
+      vertices[i][1] = y_node[nodes_ids[i]-1];
+     }
+    
+    // Now create the polyline 
+     
+    // Note: The bnd_id is the real bnd_id (from the input file) - 1
+    // since nodes and elements of the current boundary have been
+    // associated to bnd_id - 1)
+    polylines_pt[current_polyline] = 
+     new TriangleMeshPolyLine(vertices, bnd_id);
+    
+    // Updates bnd_id<--->curve section map
+    this->Boundary_curve_section_pt[bnd_id] = 
+     dynamic_cast<TriangleMeshCurveSection*>(polylines_pt[current_polyline]);
+    
+    // Increase the index for the polyline storage
+    current_polyline++;
+    
+   } // for (it_sorted = sorted_boundary_segments.begin();
+     //      it_sorted != sorted_boundary_segments.end())
+  
+  // Now create the polygons or closed curves
+  // Sort the polylines to create polygons
+  unsigned nsorted_polylines = 0;
+
+  // Number of created polygons
+  unsigned npolygons = 0;
+
+  // Storage for the polygons
+  Vector<TriangleMeshPolygon*> polygons_pt;
+  
+  // Mark the already done polylines
+  std::map<unsigned, bool> polyline_done;
+  while(nsorted_polylines < nboundary)
+   {
+    // Storage for the curve sections that create a polygon
+    std::list<TriangleMeshCurveSection*> sorted_curve_sections_pt;
+    
+    unsigned init_poly = 0;
+    bool found_root_polyline = false;
+    // Get the left and right node of the current polyline
+    for (unsigned i = 0; i < nboundary; i++)
+     {
+      if (!polyline_done[i])
+       {
+        init_poly = i;
+        // Increase the number of sorted polylines
+        nsorted_polylines++;
+        // Mark as found the root polyline
+        found_root_polyline = true;
+        // Mark the polyline as done
+        polyline_done[i] = true;
+        // Add the polyline to the curve sections storage
+        sorted_curve_sections_pt.push_back(polylines_pt[i]);
+        // Break the loop to set we have found a root polyline
+        break;
+       }
+     }
+    
+#ifdef PARANOID
+    if (!found_root_polyline)
+     {
+      std::ostringstream error_message;
+      error_message
+       << "Was not possible to found the root polyline to create polygons\n\n";
+      throw OomphLibError(error_message.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+#endif
+    
+    // Get the associated boundary to the current polyline
+    const unsigned bnd_id = polylines_pt[init_poly]->boundary_id();
+    // Get the number of vertices on the current polyline
+    const unsigned nvertices = polylines_pt[init_poly]->nvertex();
+    // Get the initial and final node id of the current polyline
+    unsigned left_node_id = sorted_boundary_segments[bnd_id].front();
+    unsigned right_node_id = sorted_boundary_segments[bnd_id].back();
+
+    // Flag to know that we already have a closed polygon
+    bool closed_polygon = false;
+
+    do
+     {
+      // Go through all the polylines
+      for (unsigned i = init_poly; i < nboundary; i++)
+       {
+        // Check that the polyline has not been currently done
+        if (!polyline_done[i])
+         {
+          // Get the initial and final nodes id of the current polyline
+        
+          // Get the associated boundary to the current polyline
+          const unsigned cbnd_id = polylines_pt[i]->boundary_id();
+          // Get the number of vertices on the current polyline
+          const unsigned cnvertices = polylines_pt[i]->nvertex();
+          // Get the initial and final node id of the current polyline
+          unsigned cleft_node_id = sorted_boundary_segments[cbnd_id].front();
+          unsigned cright_node_id = sorted_boundary_segments[cbnd_id].back();
+        
+          // Check if the polyline goes to the left or right of the
+          // current sorted polylines
+          if (cleft_node_id == right_node_id)
+           {
+            // Add the polyline to the curve section storage
+            sorted_curve_sections_pt.push_back(polylines_pt[i]);
+            // Mark the polyline as done
+            polyline_done[i] = true;
+            // Update the right node
+            right_node_id = cright_node_id;
+            // Increase the number of done polyines
+            nsorted_polylines++;
+            // Break the for loop
+            break;
+           }
+          else if (cright_node_id == left_node_id)
+           {
+            // Add the polyline to the curve section storage
+            sorted_curve_sections_pt.push_front(polylines_pt[i]);
+            // Mark the polyline as done
+            polyline_done[i] = true;
+            // Update the right node
+            left_node_id = cleft_node_id;
+            // Increase the number of done polyines
+            nsorted_polylines++;
+            // Break the for loop
+            break;
+           }
+          else if (cleft_node_id == left_node_id)
+           {
+            // First reverse the polyline
+            polylines_pt[i]->reverse();
+            // Add the polyline to the curve section storage
+            sorted_curve_sections_pt.push_front(polylines_pt[i]);
+            // Mark the polyline as done
+            polyline_done[i] = true;
+            // Update the right node
+            left_node_id = cright_node_id;
+            // Increase the number of done polyines
+            nsorted_polylines++;
+            // Break the for loop
+            break;
+           }
+          else if (cright_node_id == right_node_id)
+           {
+            // First reverse the polyline
+            polylines_pt[i]->reverse();
+            // Add the polyline to the curve section storage
+            sorted_curve_sections_pt.push_back(polylines_pt[i]);
+            // Mark the polyline as done
+            polyline_done[i] = true;
+            // Update the right node
+            right_node_id = cleft_node_id;
+            // Increase the number of done polyines
+            nsorted_polylines++;
+            // Break the for loop
+            break;
+           }
+         } // if (!polyline_done[i])
+      
+       } // for (i < nboundary)
+
+      // We have created a polygon
+      if (left_node_id == right_node_id)
+       {
+        // Set the flag as true
+        closed_polygon = true;  
+       }
+
+     }while(nsorted_polylines < nboundary && !closed_polygon);
+
+#ifdef PARANOID
+    if (!closed_polygon)
+     {
+      std::ostringstream error_message;
+      error_message
+       << "It was not possible to create a closed curve, these are the "
+       << "vertices of the already sorted polylines\n\n";
+      unsigned cpolyline = 0;
+      for (std::list<TriangleMeshCurveSection*>::iterator it_list = 
+            sorted_curve_sections_pt.begin(); 
+           it_list != sorted_curve_sections_pt.end(); 
+           it_list++)
+       {
+        error_message << "Polyline (" << cpolyline << ")\n";
+        TriangleMeshPolyLine *tmp_poly_pt =
+         dynamic_cast<TriangleMeshPolyLine*>((*it_list));
+        const unsigned nvertex = tmp_poly_pt->nvertex();
+        for (unsigned v = 0; v < nvertex; v++)
+         {
+          error_message <<"("<<tmp_poly_pt->vertex_coordinate(v)[0] 
+                        <<", "<<tmp_poly_pt->vertex_coordinate(v)[1]<<")\n";
+         }
+        error_message << "\n";
+        cpolyline++;
+       }
+      throw OomphLibError(error_message.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+#endif
+    
+    // Create a vector version to create the polygon from the sorted
+    // polyines
+    Vector<TriangleMeshCurveSection*> tmp_sorted_curve_sections_pt;
+    for (std::list<TriangleMeshCurveSection*>::iterator it_list = 
+          sorted_curve_sections_pt.begin(); 
+         it_list != sorted_curve_sections_pt.end();
+         it_list++)
+     {tmp_sorted_curve_sections_pt.push_back((*it_list));}
+    
+    // Create a new polygon by using the new created polylines
+    TriangleMeshPolygon *polygon_pt =
+     new TriangleMeshPolygon(tmp_sorted_curve_sections_pt);
+    
+    // Keep track of new created polygons that need to be deleted!!!
+    this->Free_polygon_pt.insert(polygon_pt);
+    
+    // Store the polygon in the polygons storages
+    polygons_pt.push_back(polygon_pt);
+    
+    npolygons++;
+    
+   } // while(nsorted_polylines < nboundary)
+  
+  // ------------------------------------------------------------------
+  // Now fill the data structures  
+  
+  // Store outer polygon
+  this->Outer_boundary_pt = polygons_pt[0];
+  
+  this->Internal_polygon_pt.resize(npolygons-1);
+  for (unsigned i = 1; i < npolygons; i++)
+   {
+    // Store internal polygons by copy constructor
+    this->Internal_polygon_pt[i-1] = polygons_pt[i];
+   }
+  
+  // Holes information
+  unsigned nholes;
+  poly_file >> nholes;
+
+#ifdef PARANOID
+  if (npolygons > 1 && (npolygons - 1) != nholes)
+   {
+    std::ostringstream error_message;
+    error_message
+     << "The number of holes (" << nholes << ") does not correspond "
+     << "with the number\nof internal polygons (" 
+     << npolygons - 1 <<")\n\n"
+     << "Using polyfiles as input does not currently allows the\n"
+     << "definition of more than one outer polygon\n\n";
+    throw OomphLibError(error_message.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+  
+  // Storage for the holes
+  Vector<Vector<double> > hole_coordinates(nholes);
+  
+  // Dummy for hole number
+  unsigned dummy_hole;
+  // Loop over the holes to get centre coords
+  for(unsigned ihole=0;ihole<nholes;ihole++)
+   {
+    hole_coordinates[ihole].resize(2);
+    // Read the centre value
+    poly_file >> dummy_hole;
+    poly_file >> hole_coordinates[ihole][0];
+    poly_file >> hole_coordinates[ihole][1];
+   }
+
+  // Assign the holes coordinates to the internal polygons
+  for (unsigned ihole = 0; ihole < nholes; ihole++)
+   {
+    // Set the hole coordinate for the internal polygon
+    this->Internal_polygon_pt[ihole]->internal_point() = 
+     hole_coordinates[ihole];
+   }
+
+  // Ignore the first line with structure description
+  poly_file.ignore(80,'\n');
+  
+  // Regions information
+  unsigned nregions;
+  
+  // Extract regions information
+  // But first check if there are regions or not
+  std::string regions_info_string;
+  
+  // Read line up to termination sign
+  getline(poly_file, regions_info_string);
+  
+  // Check if the read string is a number or a comment wrote by triangle,
+  // if it is a number then that is the number of regions 
+  if (isdigit(regions_info_string.c_str()[0]))
+   {
+    nregions = std::atoi(regions_info_string.c_str());
+   }
+  else
+   {
+    nregions = 0;
+   }
+  
+  // The regions coordinates
+  std::map<unsigned, Vector<double> > regions_coordinates;
+
+  // Dummy for regions number
+  unsigned dummy_region;
+
+  unsigned region_id;
+
+  // Loop over the regions to get their coords
+  for(unsigned iregion=0;iregion<nregions;iregion++)
+   {
+    Vector<double> tmp_region_coordinates(2);
+    // Read the regions coordinates
+    poly_file >> dummy_region;
+    poly_file >> tmp_region_coordinates[0];
+    poly_file >> tmp_region_coordinates[1];
+    poly_file >> region_id;
+    regions_coordinates[region_id].resize(2);
+    regions_coordinates[region_id][0] = tmp_region_coordinates[0];
+    regions_coordinates[region_id][1] = tmp_region_coordinates[1];
+    
+    // Ignore the first line with structure description
+    poly_file.ignore(80,'\n');
+    
+    // Verify if not using the default region number (zero)
+    if (region_id == 0) 
+     {
+      std::ostringstream error_message;
+      error_message << "Please use another region id different from zero.\n"
+                    << "It is internally used as the default region number.\n";
+      throw OomphLibError(error_message.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+    
+   }
+
+  // Store the extra regions coordinates
+  this->Regions_coordinates = regions_coordinates;
+
+  poly_file.close();
+  
+ }
 
 //======================================================================
 /// Move the boundary nodes onto the boundary defined by the old mesh

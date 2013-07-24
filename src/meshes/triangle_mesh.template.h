@@ -460,10 +460,6 @@ class TriangleMeshParameters
    // Second part - Get associated geom objects and coordinate limits
    // ********************************************************************
 
-   // Now resize the storage for geometric objects and coordinate limits
-   Boundary_geom_object_pt.resize(max_boundary_id+1,0);
-   Boundary_coordinate_limits.resize(max_boundary_id+1);
-
    // ***************************************************************
    // Part 2.1 Outer boundary
    // ***************************************************************
@@ -802,35 +798,39 @@ class TriangleMeshParameters
   /// null if the boundary has associated geometric object.
   GeomObject* boundary_geom_object_pt(const unsigned &b)
    {
-    if(Boundary_geom_object_pt.size()==0) 
+    std::map<unsigned,GeomObject*>::iterator it;
+    it = Boundary_geom_object_pt.find(b);
+    if(it == Boundary_geom_object_pt.end()) 
      {return 0;}
     else 
-     {return Boundary_geom_object_pt[b];}
+     {return (*it).second;}
    }
   
   /// \short Return direct access to the geometric object storage
-  Vector<GeomObject*> &boundary_geom_object_pt() 
+  std::map<unsigned,GeomObject*> &boundary_geom_object_pt()  
    {return Boundary_geom_object_pt;}
   
   /// \short Return access to the vector of boundary coordinates associated
   /// with each geometric object
-  Vector<Vector<double> > &boundary_coordinate_limits()
+  std::map<unsigned,Vector<double> > &boundary_coordinate_limits()
    {return Boundary_coordinate_limits;}
   
   /// \short Return access to the coordinate limits associated with 
   /// the geometric object associated with boundary b
   Vector<double> &boundary_coordinate_limits(const unsigned &b)
    {
-    if(Boundary_coordinate_limits.size()==0)
+    std::map<unsigned,Vector<double> >::iterator it;
+    it = Boundary_coordinate_limits.find(b);
+    if(it == Boundary_coordinate_limits.end())
      {
       throw OomphLibError(
        "No coordinate limits associated with this boundary\n",
-       OOMPH_CURRENT_FUNCTION,
+       "TESTER",
        OOMPH_EXCEPTION_LOCATION);
      }
     else
      {
-      return Boundary_coordinate_limits[b];
+      return (*it).second;
      }
    }
   
@@ -1956,8 +1956,7 @@ class TriangleMeshParameters
   Vector<TriangleMeshOpenCurve*> Internal_open_curve_pt;
 
   /// \short Storage for the geometric objects associated with any boundaries
-  /// hierher should this be a map?
-  Vector<GeomObject*> Boundary_geom_object_pt;
+  std::map<unsigned, GeomObject*> Boundary_geom_object_pt;
 
   /// Storage for extra coordinates for holes
   Vector<Vector<double> > Extra_holes_coordinates;
@@ -1986,8 +1985,8 @@ class TriangleMeshParameters
 
   /// \short  Storage for the limits of the boundary coordinates 
   /// defined by the of geometric objects. Only used for curvilinear
-  /// boundaries. hierher should this be a map?
-  Vector<Vector<double> > Boundary_coordinate_limits;
+  /// boundaries.
+  std::map<unsigned, Vector<double> > Boundary_coordinate_limits;
 
   /// \short Storage for pairs of doubles representing:
   /// .first: the arclength along the polygonal representation of
@@ -2639,7 +2638,26 @@ template<class ELEMENT>
         // Initialise the data associated with adaptation
         initialise_adaptation_data();
       }
-
+   
+   /// \short Build mesh, based on the polyfiles
+    RefineableTriangleMesh(const std::string& node_file_name,
+                           const std::string& element_file_name,
+                           const std::string& poly_file_name,
+                           TimeStepper* time_stepper_pt=
+                           &Mesh::Default_TimeStepper)
+     : TriangleMesh<ELEMENT>(node_file_name, 
+                             element_file_name, 
+                             poly_file_name, 
+                             time_stepper_pt)
+     {
+      // Create and fill the data structures to give rise to polylines so that
+      // the mesh can use the adapt methods
+      create_polylines_from_polyfiles(node_file_name, poly_file_name);
+      
+      // Initialise the data associated with adaptation
+      initialise_adaptation_data();
+     }
+    
    /// \short Build mesh from specified triangulation and
    /// associated target areas for elements in it
    RefineableTriangleMesh(const Vector<double> &target_area,
@@ -2786,6 +2804,11 @@ template<class ELEMENT>
 
     protected:
 
+   /// Helper function to create polylines and fill associate data 
+   // structures, used when creating from a mesh from polyfiles
+   void create_polylines_from_polyfiles(const std::string& node_file_name,
+                                        const std::string& poly_file_name);
+   
    /// \short Helper function that performs the unrefinement process
    /// on the specified boundary by using the provided vertices
    /// representation. Optional boolean is used to run it as test only (if
