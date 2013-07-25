@@ -42,7 +42,8 @@ fourier_decomposed_helmholtz \
 foeppl_von_karman \
 generalised_helmholtz \
 axisym_linear_elasticity \
-homogenisation
+homogenisation \
+darcy
 if WANT_MPI
 SUBDIRS += mpi
 endif

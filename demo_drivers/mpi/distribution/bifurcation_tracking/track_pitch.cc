@@ -534,6 +534,7 @@ void RotatingProblem<ELEMENT>::solve_system()
     }
    catch (OomphLibError &error)
     {
+     error.disable_error_message();
      cout << "Caught solver error -- continuing regardless \n.";
     }
 
@@ -649,6 +650,7 @@ void RotatingProblem<ELEMENT>::solve_system()
   }
  catch (OomphLibError &error)
   {
+   error.disable_error_message();
    cout << "Caught solver error -- continuing regardless \n.";
   }
  
@@ -676,6 +678,7 @@ void RotatingProblem<ELEMENT>::solve_system()
   }
  catch (OomphLibError &error)
   {
+   error.disable_error_message();      
    cout << "Caught solver error -- continuing regardless \n.";
   }
  

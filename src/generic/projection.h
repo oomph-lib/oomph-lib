@@ -198,7 +198,7 @@ class ProjectableElement : public virtual ELEMENT,
  {
   //Do projection
   if (Do_projection)
-   {  
+   {
     this->residual_for_projection(residuals,jacobian,1);
    }
   else
@@ -215,11 +215,12 @@ class ProjectableElement : public virtual ELEMENT,
  /// from gcc 4.5.2 onwards...]
  ProjectableElement(){}
 
- /// Residual for the projection step. Flag indicates if we
- /// want the Jacobian (1) or not (0)
- void residual_for_projection(Vector<double> &residuals, 
-                              DenseMatrix<double> &jacobian, 
-                              const unsigned& flag)
+ /// \short Residual for the projection step. Flag indicates if we
+ /// want the Jacobian (1) or not (0). Virtual so it can be 
+ /// overloaded if necessary
+ virtual void residual_for_projection(Vector<double> &residuals, 
+                                      DenseMatrix<double> &jacobian, 
+                                      const unsigned& flag)
   {
    //Am I a solid element
    SolidFiniteElement* solid_el_pt = 
@@ -466,7 +467,6 @@ class ProjectableElement : public virtual ELEMENT,
        //Loop over dofs of field fld
        for(unsigned l=0;l<n_value;l++)
         {
-         //If we're projecting the coordinates
          local_eqn = local_equation(fld,l);      
          if(local_eqn >= 0)
           {
@@ -1062,6 +1062,10 @@ class ProjectionProblem : public virtual Problem
    //Loop over fields 
    for (unsigned fld=0; fld<n_fields ;fld++)
     {
+     //Let us first pin every degree of freedom
+     //We shall unpin selected dofs for each different projection problem
+     this->pin_all();
+
      //Do actions for this field
      this->set_current_field_for_projection(fld);
      this->unpin_dofs_of_field(fld);
@@ -1085,7 +1089,7 @@ class ProjectionProblem : public virtual Problem
 
        //Set time_level we are dealing with
        this->set_time_level_for_projection(time_level);
-       
+
        //Assign equation number
        unsigned ndof_tmp=assign_eqn_numbers();
        if (!Output_during_projection_suppressed)
@@ -1122,9 +1126,7 @@ class ProjectionProblem : public virtual Problem
           }
         }
       } //End of loop over time levels
-  
-     //Repin the dofs of the field
-     this->pin_dofs_of_field(fld);
+       
     } //End of loop over fields
    
    
@@ -1267,25 +1269,27 @@ class ProjectionProblem : public virtual Problem
   const unsigned n_element = Problem::mesh_pt()->nelement();
   for(unsigned e=0;e<n_element;++e)
    {
-    //Cast the first element
-    PROJECTABLE_ELEMENT * new_el_pt = 
-     dynamic_cast<PROJECTABLE_ELEMENT*>
-     (Problem::mesh_pt()->element_pt(e));
-    //Find the number of fields
-    unsigned n_fields = new_el_pt->nfields_for_projection();
-
-    //Now loop over all fields
-    for(unsigned f=0;f<n_fields;f++)
+    FiniteElement* el_pt=Problem::mesh_pt()->finite_element_pt(e);
+    unsigned nint=el_pt->ninternal_data();
+    for (unsigned j=0;j<nint;j++)
      {
-      //Extract the data and value for the field
-      Vector<std::pair<Data*,unsigned> >
-       data=new_el_pt->data_values_of_field(f);
-      //Now loop over all the data and pin the appropriate values
-      unsigned d_size=data.size();     
-      for(unsigned d=0;d<d_size;d++)
+      Data* int_data_pt = el_pt->internal_data_pt(j);
+      unsigned nval=int_data_pt->nvalue();
+      for (unsigned i=0;i<nval;i++)
        {
-        data[d].first->pin(data[d].second);
-       }   
+        int_data_pt->pin(i);
+       }
+     }
+
+    unsigned nnod=el_pt->nnode();
+    for (unsigned j=0;j<nnod;j++)
+     {
+      Node* nod_pt = el_pt->node_pt(j);
+      unsigned nval=nod_pt->nvalue();
+      for (unsigned i=0;i<nval;i++)
+       {
+        nod_pt->pin(i);
+       }
      }
    }
 

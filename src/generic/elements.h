@@ -243,7 +243,7 @@ class GeneralisedElement
 
  /// \short Return the local equation number corresponding to the j-th
  /// value stored at the i-th internal data
- inline int internal_local_eqn(const unsigned &i, const unsigned &j) 
+ inline int internal_local_eqn(const unsigned &i, const unsigned &j) const
   {
 #ifdef RANGE_CHECKING
    if(i >= Ninternal_data)
@@ -693,7 +693,7 @@ public:
  ///global equation number. Returns minus one (-1) if there is no
  ///local degree of freedom corresponding to the chosen global equation
  ///number
- int local_eqn_number(const unsigned long &ieqn_global)
+ int local_eqn_number(const unsigned long &ieqn_global) const
   {
    //Cache the number of degrees of freedom in the element
    const unsigned n_dof = this->Ndof;
@@ -2573,6 +2573,48 @@ public:
 
  /// \short Plot the error when compared 
  /// against a given exact solution \f$ {\bf f}({\bf x}) \f$.
+ /// Also calculates the norm of the
+ /// error and that of the exact solution. 
+ /// Version with vectors of norms and errors so that different variables' norms
+ /// and errors can be returned individually
+ virtual void compute_error(std::ostream &outfile, 
+                            FiniteElement::SteadyExactSolutionFctPt 
+                            exact_soln_pt,
+                            Vector<double>& error, Vector<double>& norm)
+  {
+   std::string error_message = "compute_error undefined for this element \n";
+   outfile << error_message;
+
+   throw OomphLibError(error_message,
+                       "FiniteElement::compute_error()",
+                       OOMPH_EXCEPTION_LOCATION);
+
+  }
+
+ /// \short Plot the error when compared 
+ /// against a given time-dependent exact solution \f$ {\bf f}(t,{\bf x}) \f$.
+ /// Also calculates the norm of the error and that of the exact solution.
+ /// Version with vectors of norms and errors so that different variables' norms
+ /// and errors can be returned individually
+ virtual void compute_error(std::ostream &outfile, 
+                            FiniteElement::UnsteadyExactSolutionFctPt 
+                            exact_soln_pt,
+                            const double& time,
+                            Vector<double>& error,
+                            Vector<double>& norm)
+  {
+   std::string error_message =
+    "time-dependent compute_error undefined for this element \n";
+   outfile << error_message;
+
+   throw OomphLibError(error_message,
+                       "FiniteElement::compute_error()",
+                       OOMPH_EXCEPTION_LOCATION);
+
+  }
+
+ /// \short Plot the error when compared 
+ /// against a given exact solution \f$ {\bf f}({\bf x}) \f$.
  /// Also calculates the maximum absolute error
  virtual void compute_abs_error(std::ostream &outfile, 
 				FiniteElement::SteadyExactSolutionFctPt 
@@ -3314,7 +3356,7 @@ public:
  /// corresponds to the j-th coordinate of the k-th position-type at the 
  /// n-th local node.
  inline int position_local_eqn(const unsigned &n, const unsigned &k,
-                               const unsigned &j)
+                               const unsigned &j) const
   {
 #ifdef RANGE_CHECKING
    std::ostringstream error_message;

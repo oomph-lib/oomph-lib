@@ -936,6 +936,134 @@ public:
     }
   }
 
+ /// \short Plot error when compared against a given time-depdendent
+ ///  exact solution. Also returns the norm  of the error and
+ ///  that of the exact solution. Version with vectors of norms and errors so
+ ///  that different variables' norms and errors can be returned individually
+ virtual void compute_error(
+   std::ostream &outfile,
+   FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
+   const double& time,
+   Vector<double>& error, Vector<double>& norm)
+  {
+   //Initialise norm and error
+   unsigned n_error=error.size();
+   unsigned n_norm=norm.size();
+   for(unsigned i=0;i<n_error;i++)
+    {
+     error[i]=0.0;
+    }
+   for(unsigned i=0;i<n_norm;i++)
+    {
+     norm[i]=0.0;
+    }
+   //Per-element norm and error
+   Vector<double> el_error(n_error),el_norm(n_norm);
+
+   //Loop over the elements
+   unsigned long Element_pt_range = Element_pt.size();
+   for(unsigned long e=0;e<Element_pt_range;e++)
+    {
+     // Try to cast to FiniteElement
+     FiniteElement* el_pt=dynamic_cast<FiniteElement*>(Element_pt[e]);
+     if (el_pt==0)
+      {
+       throw OomphLibError(
+        "Can't execute compute_error(...) for non FiniteElements",
+        OOMPH_CURRENT_FUNCTION,
+        OOMPH_EXCEPTION_LOCATION);
+      }
+     // Reset elemental errors and norms
+     for(unsigned i=0;i<n_error;i++)
+      {
+       el_error[i]=0.0;
+      }
+     for(unsigned i=0;i<n_norm;i++)
+      {
+       el_norm[i]=0.0;
+      }
+     //Calculate the elemental errors for each non-halo element
+#ifdef OOMPH_HAS_MPI
+     if (!(el_pt->is_halo()))
+#endif
+      {
+       el_pt->compute_error(outfile,exact_soln_pt,time,el_error,el_norm);
+      }
+     //Add each elemental error to the global error
+     for(unsigned i=0;i<n_error;i++)
+      {
+       error[i]+=el_error[i];
+      }
+     for(unsigned i=0;i<n_norm;i++)
+      {
+       norm[i]+=el_norm[i];
+      }
+    }
+  }
+
+ /// \short Plot error when compared against a given time-depdendent
+ ///  exact solution. Also returns the norm  of the error and
+ ///  that of the exact solution. Version with vectors of norms and errors so
+ ///  that different variables' norms and errors can be returned individually
+ virtual void compute_error(std::ostream &outfile,
+                            FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
+                            Vector<double>& error, Vector<double>& norm)
+  {
+   //Initialise norm and error
+   unsigned n_error=error.size();
+   unsigned n_norm=norm.size();
+   for(unsigned i=0;i<n_error;i++)
+    {
+     error[i]=0.0;
+    }
+   for(unsigned i=0;i<n_norm;i++)
+    {
+     norm[i]=0.0;
+    }
+   //Per-element norm and error
+   Vector<double> el_error(n_error),el_norm(n_norm);
+
+   //Loop over the elements
+   unsigned long Element_pt_range = Element_pt.size();
+   for(unsigned long e=0;e<Element_pt_range;e++)
+    {
+     // Try to cast to FiniteElement
+     FiniteElement* el_pt=dynamic_cast<FiniteElement*>(Element_pt[e]);
+     if (el_pt==0)
+      {
+       throw OomphLibError(
+        "Can't execute compute_error(...) for non FiniteElements",
+        OOMPH_CURRENT_FUNCTION,
+        OOMPH_EXCEPTION_LOCATION);
+      }
+     // Reset elemental errors and norms
+     for(unsigned i=0;i<n_error;i++)
+      {
+       el_error[i]=0.0;
+      }
+     for(unsigned i=0;i<n_norm;i++)
+      {
+       el_norm[i]=0.0;
+      }
+     //Calculate the elemental errors for each non-halo element
+#ifdef OOMPH_HAS_MPI
+     if (!(el_pt->is_halo()))
+#endif
+      {
+       el_pt->compute_error(outfile,exact_soln_pt,el_error,el_norm);
+      }
+     //Add each elemental error to the global error
+     for(unsigned i=0;i<n_error;i++)
+      {
+       error[i]+=el_error[i];
+      }
+     for(unsigned i=0;i<n_norm;i++)
+      {
+       norm[i]+=el_norm[i];
+      }
+    }
+  }
+
 #ifdef OOMPH_HAS_MPI
 
  /// Boolean to indicate if Mesh has been distributed
