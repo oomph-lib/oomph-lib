@@ -1009,7 +1009,21 @@ class TriangleMeshParameters
    {
     // Mesh can only be built with 2D Telements.
     MeshChecker::assert_geometric_element<TElementGeometricBase,ELEMENT>(2);
-
+    
+#ifdef PARANOID
+    if (element_area < 10e-14)
+     {
+      std::ostringstream warning_message;
+      warning_message
+       << "The current elements area was stated to (" << element_area 
+       << ").\nThe current precision to generate the input to triangle "
+       << "is fixed to 14 digits\n\n";
+       OomphLibWarning(warning_message.str(),
+                       OOMPH_CURRENT_FUNCTION,
+                       OOMPH_EXCEPTION_LOCATION);
+     }    
+#endif
+    
     //Store the attribute flag
     Use_attributes = use_attributes;
 
@@ -1024,19 +1038,19 @@ class TriangleMeshParameters
 
     // Store internal polylines by copy constructor
     Internal_open_curve_pt = open_polylines_pt;
-
+    
     // Store the extra holes coordinates
     Extra_holes_coordinates = extra_holes_coordinates;
-
+    
     // Store the extra regions coordinates
     Regions_coordinates = regions_coordinates;
-
+    
     // Create the data structures required to call the triangulate function
     TriangulateIO triangulate_io;
     
     // Initialize TriangulateIO structure
     TriangleHelper::initialise_triangulateio(triangulate_io);
-
+    
     // Convert TriangleMeshPolyLine and TriangleMeshClosedCurvePolyLine
     // to a triangulateio object
     build_triangulateio(outer_boundary_pt,
@@ -1051,11 +1065,15 @@ class TriangleMeshParameters
 
     // Triangulation has been created -- remember to wipe it!
     Triangulateio_exists=true;
-
+    
     // Input string for triangle
     std::stringstream input_string_stream;
+    input_string_stream.precision(14);
+    input_string_stream.setf(std::ios_base::fixed, 
+                             std::ios_base::floatfield);
+    
     input_string_stream<<"-pA -a" << element_area << " -q30";
-
+    
     //Suppress insertion of additional points on outer boundary
     if(refine_boundary==false) 
      {
