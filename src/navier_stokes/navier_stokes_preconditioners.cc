@@ -223,11 +223,7 @@ namespace oomph
   double t_block_start = TimingHelpers::timer();
   unsigned ndof_types = 0;
 
-  if (this->Preconditioner_blocks_have_been_precomputed)
-   {
-    ndof_types = this->nblocks_precomputed();
-   }
-  else if (this->is_subsidiary_block_preconditioner())
+  if (this->is_subsidiary_block_preconditioner())
    {
     ndof_types = this->ndof_types();
    }
@@ -285,7 +281,7 @@ namespace oomph
   CRDoubleMatrix* inv_v_mass_pt = 0;
   CRDoubleMatrix* inv_p_mass_pt = 0;
 
-  unsigned n_velocity_doftypes = this->ndof_types() - 1;
+  unsigned n_velocity_doftypes = this->ndof_types(true) - 1;
 
   DenseMatrix<CRDoubleMatrix*> inv_v_mass_sub_pt(n_velocity_doftypes,
                                                  n_velocity_doftypes,0);
@@ -343,24 +339,6 @@ namespace oomph
                                                       true);
    }
 
-//   unsigned my_rank 
-//    = master_distribution_pt()->communicator_pt()->my_rank();
-//   unsigned nproc 
-//    = master_distribution_pt()->communicator_pt()->nproc();
-//
-//  for (unsigned i = 0; i < n_velocity_doftypes; i++) 
-//   {
-//
-//    std::stringstream foostream;
-//    foostream << "vmm"<<i<<"_NP"<<nproc<<"R"<<my_rank;
-//    inv_v_mass_sub_pt[i]->sparse_indexed_output_with_offset(foostream.str());
-//   }
-//
-//  std::stringstream vmm_cat_stream;
-//  vmm_cat_stream << "vmm_cat_NP" <<nproc<<"R"<<my_rank;
-//  inv_v_mass_pt->sparse_indexed_output_with_offset(vmm_cat_stream.str());
-//  pause("got all vmm"); 
-  
   double ivmm_assembly_finish_t = TimingHelpers::timer();
   if (Doc_time)
    {
@@ -443,8 +421,7 @@ namespace oomph
   // Build the matvec operator for QBt
   double t_QBt_MV_start = TimingHelpers::timer();
   QBt_mat_vec_pt = new MatrixVectorProduct;
-  
-  QBt_mat_vec_pt->setup(bt_pt);
+  this->setup_matrix_vector_product(QBt_mat_vec_pt,bt_pt,1);
   double t_QBt_MV_finish = TimingHelpers::timer();
   if(Doc_time)
    {
@@ -485,7 +462,7 @@ namespace oomph
     // Build the matvec operator for E = F_p Q_p^{-1}
     double t_Fp_Qp_inv_MV_start = TimingHelpers::timer();
     E_mat_vec_pt = new MatrixVectorProduct;
-    E_mat_vec_pt->setup(fp_qp_inv_pt);
+    this->setup_matrix_vector_product(E_mat_vec_pt,fp_qp_inv_pt,1);
     double t_Fp_Qp_inv_MV_finish = TimingHelpers::timer();
     if(Doc_time)
      {
@@ -514,14 +491,7 @@ namespace oomph
   // form the matrix vector product helper
   double t_F_MV_start = TimingHelpers::timer();
   F_mat_vec_pt = new MatrixVectorProduct;
-  if(this->Preconditioner_blocks_have_been_precomputed)
-   {
-    F_mat_vec_pt->setup(f_pt,this->Precomputed_block_distribution_pt[0]);
-   }
-  else
-   {
-    F_mat_vec_pt->setup(f_pt);
-   }
+  this->setup_matrix_vector_product(F_mat_vec_pt,f_pt,0);
   double t_F_MV_finish = TimingHelpers::timer();
   if(Doc_time)
    {
@@ -553,7 +523,7 @@ namespace oomph
   // form the matrix vector operator for Bt
   double t_Bt_MV_start = TimingHelpers::timer();
   Bt_mat_vec_pt = new MatrixVectorProduct;
-  Bt_mat_vec_pt->setup(bt_pt);
+  this->setup_matrix_vector_product(Bt_mat_vec_pt,bt_pt,1);
   double t_Bt_MV_finish = TimingHelpers::timer();
   if(Doc_time)
    {
@@ -606,7 +576,7 @@ namespace oomph
   double t_f_prec_start = TimingHelpers::timer();
   if (F_preconditioner_is_block_preconditioner)
    {
-    unsigned ndof_types = this->ndof_types();
+    unsigned ndof_types = this->ndof_types(true);
     ndof_types--;
     Vector<unsigned> dof_map(ndof_types);
     for (unsigned i = 0; i < ndof_types; i++)

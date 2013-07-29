@@ -46,6 +46,7 @@
 // #include "problem.h"
 #include "preconditioner.h"
 #include "SuperLU_preconditioner.h"
+#include "matrix_vector_product.h"
 
 namespace oomph
 {
@@ -423,24 +424,62 @@ namespace oomph
                                                   DoubleVector& v) const;
 
   /// \short Return the number of block types.
-  unsigned nblock_types() const
+  unsigned nblock_types(const bool &real_nblock_types = false) const
   {
-   return Nblock_types;
-  }
-
-  /// \short Return the total number of DOF types.
-  unsigned ndof_types() const
-  {
-   if (is_subsidiary_block_preconditioner())
-    {
-     return Ndof_types;
+   if(real_nblock_types)
+    {  
+     return Nblock_types;
     }
    else
     {
-     unsigned ndof = 0;
-     for (unsigned i = 0; i < nmesh(); i++)
-      {ndof += ndof_types_in_mesh(i);}
-     return ndof;
+     if(Preconditioner_blocks_have_been_precomputed)
+      {
+       return nblock_types_precomputed();
+      }
+     else
+      {
+       return Nblock_types;
+      }
+    }
+  }
+
+  /// \short Return the total number of DOF types.
+  unsigned ndof_types(const bool &real_ndof_types = false) const
+  {
+   if(real_ndof_types)
+    {
+     if (is_subsidiary_block_preconditioner())
+      {
+       return Ndof_types;
+      }
+     else
+      {
+       unsigned ndof = 0;
+       for (unsigned i = 0; i < nmesh(); i++)
+        {ndof += ndof_types_in_mesh(i);}
+       return ndof;
+      }
+    }
+   else
+    {
+     if(Preconditioner_blocks_have_been_precomputed)
+      {
+       return ndof_types_precomputed();
+      }
+     else
+      {
+       if (is_subsidiary_block_preconditioner())
+        {
+         return Ndof_types;
+        }
+       else
+        {
+         unsigned ndof = 0;
+         for (unsigned i = 0; i < nmesh(); i++)
+          {ndof += ndof_types_in_mesh(i);}
+         return ndof;
+        }
+      }
     }
   }
 
@@ -632,7 +671,7 @@ namespace oomph
   void output_blocks_to_files(const std::string& basefilename,
                               const unsigned& precision = 8) const
   {
-   unsigned nblocks = nblock_types();
+   unsigned nblocks = nblock_types(true);
 
    for(unsigned i=0; i<nblocks; i++)
     for(unsigned j=0; j<nblocks; j++)
@@ -758,8 +797,8 @@ namespace oomph
    oomph_info << "===========================================" << std::endl;
    oomph_info << "Block Preconditioner Documentation" << std::endl
               << std::endl;
-   oomph_info << "Number of DOF types: " << ndof_types() << std::endl;
-   oomph_info << "Number of block types: " << nblock_types() << std::endl;
+   oomph_info << "Number of DOF types: " << ndof_types(true) << std::endl;
+   oomph_info << "Number of block types: " << nblock_types(true) << std::endl;
    oomph_info << std::endl;
    if (is_subsidiary_block_preconditioner())
     {
@@ -770,7 +809,7 @@ namespace oomph
       }
     }
    oomph_info << std::endl;
-   for (unsigned b = 0; b < nblock_types(); b++)
+   for (unsigned b = 0; b < nblock_types(true); b++)
     {
      oomph_info << "Block " << b << " DOF types:";
      for (unsigned i = 0; i < Block_number_to_dof_number_lookup[b].size();
@@ -852,14 +891,15 @@ namespace oomph
     }
 
    // Check that this is the most fine grain .
-   if(precomputed_block_nrow != this->ndof_types())
+   if(precomputed_block_nrow != this->ndof_types(true))
     {
      std::ostringstream error_message;
      error_message << "This must be the most fine grain block matrix.\n"
                    << "It must have ndof_types number of rows / columns.\n"
                    << "You have given me a " << precomputed_block_nrow
                    << " by " << precomputed_block_nrow << " matrix.\n"
-                   << "I want a " << ndof_types() << " by "<< ndof_types()
+                   << "I want a " << ndof_types(true) << " by "
+                   << ndof_types(true)
                    << " matrix." << std::endl;
      throw OomphLibError(error_message.str(),
                          OOMPH_CURRENT_FUNCTION,
@@ -1049,10 +1089,40 @@ namespace oomph
 
   /// \short the number of blocks precomputed. If the preconditioner blocks are
   /// precomputed then it should be the same as the nblock_types 
-  /// required by this preconditioner.
-  unsigned nblocks_precomputed() const
+  /// REQUIRED by this preconditioner.
+  unsigned nblock_types_precomputed() const
+  {
+   return Block_to_block_map.size();
+  }
+
+  /// \short the number of dof types precomputed. 
+  /// If the preconditioner blocks are precomputed then it should be the same 
+  /// as the ndof_types REQUIRED by this preconditioner.
+  unsigned ndof_types_precomputed() const
   {
    return Doftype_to_doftype_map.size();
+  }
+
+  /// \short Setup a matrix vector product.
+  /// The distribution of the block column must be the same as the 
+  /// RHS vector being solved. By default, OOMPH-LIB's uniform row distribution
+  /// is employed. When blocks are precomputed, this is no longer true, the RHS
+  /// vector is now a concatenation of the corresponding block distributions.
+  /// To solve this problem, we have stored the precomputed block distributions
+  /// which are available for such instances!
+  void setup_matrix_vector_product(MatrixVectorProduct* matvec_prod_pt,
+                                   CRDoubleMatrix* block_pt,
+                                   unsigned block_col_index)
+  {
+    if(this->Preconditioner_blocks_have_been_precomputed)
+     {
+      matvec_prod_pt->setup(block_pt,
+                            Precomputed_block_distribution_pt[block_col_index]);
+     }
+    else
+     {
+      matvec_prod_pt->setup(block_pt);
+     }
   }
 
 
@@ -1251,7 +1321,7 @@ namespace oomph
 
      // Search through the Block_number_in_master_preconditioner for master
      // block blk_num and return the block number in this preconditioner
-     for (unsigned i = 0; i < this->ndof_types(); i++)
+     for (unsigned i = 0; i < this->ndof_types(true); i++)
       {
        if (Dof_number_in_master_preconditioner[i] == blk_num)
         {return static_cast<int>(i);}

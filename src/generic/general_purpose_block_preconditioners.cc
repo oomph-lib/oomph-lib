@@ -48,15 +48,7 @@ namespace oomph
   GeneralPurposeBlockPreconditioner<MATRIX>::block_setup();
 
   // number of types of blocks.
-  unsigned nblock_types = 0;
-  if(this->Preconditioner_blocks_have_been_precomputed)
-   {
-    nblock_types = this->nblocks_precomputed();
-   }
-  else
-   {
-    nblock_types = this->nblock_types();
-   }
+  unsigned nblock_types = this->nblock_types();
 
   // Create any subsidiary preconditioners needed
   this->fill_in_subsidiary_preconditioners(nblock_types);
@@ -126,15 +118,7 @@ namespace oomph
  preconditioner_solve(const DoubleVector& r, DoubleVector& z)
  {
   // Cache umber of block types
-  unsigned n_block = 0;
-  if(this->Preconditioner_blocks_have_been_precomputed)
-   {
-    n_block = this->nblocks_precomputed();
-   }
-  else
-   {
-    n_block = this->nblock_types();
-   }
+  unsigned n_block = this->nblock_types();
 
   // Get the right hand side vector (b in Ax = b) in block form.
   Vector<DoubleVector> block_r;
@@ -191,15 +175,7 @@ namespace oomph
   this->block_setup();
    
   // number of block types
-  unsigned nblock_types = 0;
-  if(this->Preconditioner_blocks_have_been_precomputed)
-   {
-    nblock_types = this->nblocks_precomputed();
-   }
-  else
-   {
-    nblock_types = this->nblock_types();
-   }
+  unsigned nblock_types = this->nblock_types();
 
   // storage for the off diagonal matrix vector products
   Off_diagonal_matrix_vector_products.resize(nblock_types,nblock_types,0);
@@ -235,19 +211,9 @@ namespace oomph
       // used this should also be faster than oomph-lib's multiplys.
       Off_diagonal_matrix_vector_products(i,j) = new MatrixVectorProduct();
 
-      // If we have a distribution (e.g. because we have precomputed
-      // blocks) then we need to set it here
-      if(this->Preconditioner_blocks_have_been_precomputed)
-       {
-        Off_diagonal_matrix_vector_products(i,j)->setup
-         (&block_matrix, this->Precomputed_block_distribution_pt[j]);
-       }
-
-      // Otherwise assume uniform distribution
-      else
-       {
-        Off_diagonal_matrix_vector_products(i,j)->setup(&block_matrix);
-       }
+      this->setup_matrix_vector_product(
+              Off_diagonal_matrix_vector_products(i,j),
+              &block_matrix,j);
      }
    }
  }
@@ -259,15 +225,7 @@ namespace oomph
  preconditioner_solve(const DoubleVector& r, DoubleVector& z)
  {
   // Cache number of block types
-  unsigned n_block = 0;
-  if(this->Preconditioner_blocks_have_been_precomputed)
-   {
-    n_block = this->nblocks_precomputed();
-   }
-  else
-   {
-    n_block = this->nblock_types();
-   }
+  unsigned n_block = this->nblock_types();
 
   //
   int start = n_block-1;

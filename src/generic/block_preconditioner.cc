@@ -1836,7 +1836,7 @@ namespace oomph
  void BlockPreconditioner<MATRIX>::block_setup()
  {
   // Get the number of dof types.
-  unsigned n_dof_types = ndof_types();
+  unsigned n_dof_types = ndof_types(true);
 
   // Build the dof to block map - assume that each type of dof corresponds
   // to a different type of block.
@@ -1992,7 +1992,7 @@ namespace oomph
 #endif
 
   // Number of block types
-  const unsigned nblock = this->nblock_types();
+  const unsigned nblock = this->nblock_types(true);
 
   // if + only one processor
   //    + more than one processor but matrix_pt is not distributed
@@ -2313,7 +2313,7 @@ namespace oomph
                                                     const Vector<DoubleVector >& s, DoubleVector& v) const
  {
   // the number of blocks
-  unsigned nblock = this->nblock_types();
+  unsigned nblock = this->nblock_types(true);
 
 #ifdef PARANOID
   if (!v.built())
@@ -2770,15 +2770,15 @@ namespace oomph
  {
 #ifdef PARANOID
   // the number of blocks
-  unsigned n_blocks = this->nblock_types();
+  unsigned n_blocks = this->nblock_types(true);
 
   // paranoid check that block i is in this block preconditioner
   if (b >= n_blocks)
    {
     std::ostringstream error_message;
     error_message << "Requested block  vector " << b
-                  << ", however this preconditioner has nblock_types() "
-                  << "= " << nblock_types() << std::endl;
+                  << ", however this preconditioner has nblock_types(true) "
+                  << "= " << nblock_types(true) << std::endl;
     throw OomphLibError(error_message.str(),
                         OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
@@ -2970,15 +2970,15 @@ namespace oomph
  {
 #ifdef PARANOID
   // the number of blocks
-  unsigned n_blocks = Block_to_block_map.size();
+  unsigned n_blocks = nblock_types_precomputed();
 
   // paranoid check that block i is in this block preconditioner
   if (b >= n_blocks)
    {
     std::ostringstream error_message;
     error_message << "Requested block  vector " << b
-                  << ", however this preconditioner has nblock_types() "
-                  << "= " << nblock_types() << std::endl;
+                  << ", however this preconditioner has nblock_types_precomputed() "
+                  << "= " << nblock_types_precomputed() << std::endl;
     throw OomphLibError(error_message.str(),
                         OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
@@ -3083,15 +3083,15 @@ namespace oomph
  {
 #ifdef PARANOID
   // the number of blocks
-  unsigned n_blocks = this->nblock_types();
+  unsigned n_blocks = this->nblock_types(true);
 
   // paranoid check that block i is in this block preconditioner
   if (b >= n_blocks)
    {
     std::ostringstream error_message;
     error_message << "Requested block  vector " << b
-                  << ", however this preconditioner has nblock_types() "
-                  << "= " << nblock_types() << std::endl;
+                  << ", however this preconditioner has nblock_types(true) "
+                  << "= " << nblock_types(true) << std::endl;
     throw OomphLibError(error_message.str(),
                         OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
@@ -3641,14 +3641,14 @@ namespace oomph
  {
 #ifdef PARANOID
   // the number of blocks
-  unsigned nblocks = Block_to_block_map.size();
+  unsigned nblocks = nblock_types_precomputed();
   
   // paranoid check that block i is in this block preconditioner
   if (block_i >= nblocks || block_j >= nblocks)
    {
     std::ostringstream error_message;
     error_message << "Requested block (" << block_i << "," << block_j   
-                  << "), however this preconditioner has nblock_types() "
+                  << "), however this preconditioner has nblock_types_precomputed() "
                   << "= " << nblocks << std::endl;
     throw OomphLibError(error_message.str(),
                         OOMPH_CURRENT_FUNCTION,
@@ -3788,15 +3788,15 @@ namespace oomph
 
 #ifdef PARANOID
   // the number of blocks
-  unsigned n_blocks = this->nblock_types();
+  unsigned n_blocks = this->nblock_types(true);
 
   // paranoid check that block i is in this block preconditioner
   if (block_i >= n_blocks || block_j >= n_blocks)
    {
     std::ostringstream error_message;
     error_message << "Requested block (" << block_i << "," << block_j   
-                  << "), however this preconditioner has nblock_types() "
-                  << "= " << nblock_types() << std::endl;
+                  << "), however this preconditioner has nblock_types(true) "
+                  << "= " << nblock_types(true) << std::endl;
     throw OomphLibError(error_message.str(),
                         OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
