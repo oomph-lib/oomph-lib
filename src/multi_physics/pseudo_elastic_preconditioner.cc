@@ -395,16 +395,19 @@ namespace oomph
    
     // The block to block map
     Vector<Vector<unsigned> > block_to_block_map(
-     Dim,Vector<unsigned>(2,0));
+      Dim,Vector<unsigned>(2,0));
+    Vector<unsigned> s_prec_dof_to_block_map(Dim,0);
+
     unsigned tmp_index = 0;
     for (unsigned d = 0; d < Dim; d++) 
      {
+      s_prec_dof_to_block_map[d] = d;
       block_to_block_map[d][0] = tmp_index++;
       block_to_block_map[d][1] = tmp_index++;
      }
 
     s_prec_pt->set_precomputed_blocks(solid_matrix_pt,block_to_block_map);
-
+    s_prec_pt->set_dof_to_block_map(s_prec_dof_to_block_map);
     s_prec_pt->Preconditioner::setup(matrix_pt(),comm_pt());
 
     Elastic_preconditioner_pt = s_prec_pt;

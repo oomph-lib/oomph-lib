@@ -51,8 +51,7 @@ namespace oomph
  /// corresponding to that type of DOF.
  //============================================================================
  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
- block_setup(const Vector<unsigned>& dof_to_block_map,
-             bool called_from_arg_free_version)
+ block_setup(Vector<unsigned>& dof_to_block_map)
  {
 
   if(is_subsidiary_block_preconditioner())
@@ -80,27 +79,105 @@ namespace oomph
 #endif
    }
 
-  // If the preconditioner blocks have been computed, 
-  // the subsidiary preconditioner (THIS preconditioner) always work with the
-  // most fine-grain block types from the master preconditioner (so the number
-  // of block types equals the number of dof types). If several dof types are
-  // required for one block, then the get_block(...) function will call
-  // get_precomputed_block(...) which returns the required concatenated
-  // matrix.
-  if(Preconditioner_blocks_have_been_precomputed
-     && !called_from_arg_free_version)
+  if(Preconditioner_blocks_have_been_precomputed)
    {
-    std::ostringstream error_msg;
-    error_msg << "Preconditioner blocks have been precomputed but you did not "
-              << "call the argument free version of block_setup(...).\n"
-              << "In the case where the preconditioner blocks have been "
-              << "precomputed, I require the identity dof_to_block_map.\n"
-              << "The block ordering should be expressed in Block_to_block_map,"
-              << "which is set by calling set_precomputed_blocks(...) from "
-              << "outside of this preconditioner.";
-    throw OomphLibError(error_msg.str(),
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
+    // Check that the dof_to_block map "makes sense" for the 
+    // Doftype_to_doftype_map.
+    // The Doftype_to_doftype_map describes which doftypes should be considered
+    // as a single doftype in THIS preconditioner.
+    // For example, if this preconditioner is LSC in 3D, it expects 4 doftypes;
+    // 3 velocity, [u, v, w] and 1 pressure [p], giving us the doftype ordering
+    // [u v w p].
+    // The LSC preconditioner groups the velocity and pressure doftypes 
+    // separately, thus the dof_to_block_map will be:
+    // [0 0 0 1]
+    // 
+    // The Doftype_to_doftype_map MUST have length 4, to identify which of the
+    // OTHER doftypes should be grouped together to be one of THIS doftypes.
+    //
+    // For example, if the preconditioner above this one has the doftype 
+    // ordering:
+    // 0  1  2  3  4  5  6  7  8  9
+    // ub vb wb up vp wp ut vt wt p
+    // Then we want to tell THIS preconditioner which doftypes belongs to 
+    // u, v, w and p, by giving the Doftype_to_doftype_map:
+    // [0 3 6]
+    // [1 4 7]
+    // [2 5 8]
+    // [9]
+    //
+    // So, it is important that the length of dof_to_block_map is the same as
+    // the length of Doftype_to_doftype_map.
+    unsigned dof_to_block_map_size = dof_to_block_map.size();
+    if(dof_to_block_map_size != Doftype_to_doftype_map.size())
+     {
+      std::ostringstream err_msg;
+      err_msg
+       << "The size of dof_to_block_map and Doftype_to_doftype_map is not "
+       << "the same.\n"
+       << "One of the two list is incorrect, please look at the comments\n"
+       << "in the source code for more details.";
+      throw OomphLibWarning(err_msg.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+     }
+    
+    // Set the Block_to_block_map from 
+    // the dof_to_block_map and Doftype_to_doftype_map.
+
+    // find the maximum block number
+    unsigned max_block_number = 0;
+    for (unsigned i = 0; i < dof_to_block_map_size; i++)
+     {
+      if (dof_to_block_map[i] > max_block_number)
+       {
+        max_block_number = dof_to_block_map[i];
+       }
+     }
+
+    // Now we do the following:
+    // Lets say the Doftype_to_doftype_map is:
+    // [0 3 6]
+    // [1 4 7]
+    // [2 5 8]
+    // [9]
+    //
+    // and the dof_to_block_map is [0 0 0 1].
+    //
+    // Then we need to form the Block_to_block_map:
+    // [0 3 6 1 4 7 2 5 8]
+    // [9]
+    Block_to_block_map.clear();
+    for (unsigned blocktype_i = 0; blocktype_i <= max_block_number; 
+         blocktype_i++)
+     {
+      // Temp vector to store the doftypes.
+      Vector<unsigned> temp_doftype_vec;
+
+      // Loop through the entires in dof_to_block_map
+      for (unsigned i = 0; i < dof_to_block_map_size; i++) 
+       {
+        // If the entry in dof_to_block_map matches the current blocktype_i
+        // push all entries of Doftype_to_doftype_map[i] into temp_doftype_vec.
+        if(dof_to_block_map[i] == blocktype_i)
+         {
+          unsigned doftype_to_doftype_map_i_size 
+            = Doftype_to_doftype_map[i].size();
+          for (unsigned j = 0; j < doftype_to_doftype_map_i_size; j++) 
+           {
+            temp_doftype_vec.push_back(Doftype_to_doftype_map[i][j]);
+           }
+         }
+       }
+      Block_to_block_map.push_back(temp_doftype_vec);
+     }
+
+    // Now set the dof_to_block_map to the identify.
+    dof_to_block_map.resize(Ndof_types,0);
+    for (unsigned i = 0; i < Ndof_types; i++) 
+     {
+      dof_to_block_map[i] = i;
+     }
    }
 
 #ifdef PARANOID
@@ -252,8 +329,7 @@ namespace oomph
     Ndof_types_in_mesh.assign(nmesh(),0);
     for(unsigned i=0; i<nmesh(); i++)
      {
-      Ndof_types_in_mesh[i] = mesh_pt(i)->
-       ndof_types();
+      Ndof_types_in_mesh[i] = mesh_pt(i)->ndof_types();
      }
 
     // Setup the distribution of this preconditioner, assumed to be the same
@@ -1211,15 +1287,15 @@ namespace oomph
        {
         tmp_dist_pt[sub_block_i] 
          = Precomputed_block_pt(
-                                Block_to_block_map[super_block_i][sub_block_i],0)
-         ->distribution_pt();
+             Block_to_block_map[super_block_i][sub_block_i],0)
+               ->distribution_pt();
        }
   
       Precomputed_block_distribution_pt[super_block_i] 
        = new LinearAlgebraDistribution;
   
       LinearAlgebraDistributionHelpers::concatenate(
-                                                    tmp_dist_pt,*Precomputed_block_distribution_pt[super_block_i]);
+        tmp_dist_pt,*Precomputed_block_distribution_pt[super_block_i]);
      }
    }
 
@@ -1771,7 +1847,7 @@ namespace oomph
    }
 
   // call the block setup method
-  this->block_setup(dof_to_block_lookup,true);
+  this->block_setup(dof_to_block_lookup);
  }
 
 
@@ -2502,7 +2578,7 @@ namespace oomph
  //============================================================================
  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
  return_block_vectors_with_precomputed_block_ordering(
-                                                      const Vector<DoubleVector >& s, DoubleVector& v) const
+   const Vector<DoubleVector >& s, DoubleVector& v) const
  {
   // the number of blocks
   unsigned nprecomputedblock = Block_to_block_map.size();

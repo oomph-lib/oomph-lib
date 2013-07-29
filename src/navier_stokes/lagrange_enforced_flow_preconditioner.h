@@ -1027,7 +1027,7 @@ namespace oomph
                                temp_l_doftypes.end());
   } // end of encapculating
 
-  // Output for artificial test.
+//  // Output for artificial test.
 //  std::cout << "Subsidiary_list_bcpl:" << std::endl; 
 //  for (unsigned i = 0; i < Subsidiary_list_bcpl.size(); i++) 
 //  {
@@ -1723,18 +1723,36 @@ namespace oomph
      (Navier_stokes_preconditioner_pt);
 #endif
 
+    // The ns_dof_list will ensure that the NS preconditioner have the 
+    // structure:
+    // 0  1  2  3  4  5  6
+    // ub vb up vp ut vt p
     navier_stokes_block_preconditioner_pt
      ->turn_into_subsidiary_block_preconditioner(this, ns_dof_list);
 
+    // Tell the LSC preconditioner which dof type should be treated as one
+    // dof type. i.e.
+    // 0   0  2  4
+    // u = ub up ut
+    //
+    // 1   1  3  5
+    // v = vb vp vt
+    //
+    // 2   6
+    // p = p
     Vector<Vector<unsigned> > blocktoblockvec;
-    
-    Vector<unsigned> ns_v_vec(N_velocity_doftypes,0);
-    for (unsigned i = 0; i < N_velocity_doftypes; i++) 
-     {
-      ns_v_vec[i]=i;
-     }
 
-    blocktoblockvec.push_back(ns_v_vec);
+    for (unsigned direction = 0; direction < spatial_dim; direction++)
+     {
+      Vector<unsigned> dir_doftypes_vec(nmesh,0);
+      for (unsigned mesh_i = 0; mesh_i < nmesh; mesh_i++) 
+       {
+        dir_doftypes_vec[mesh_i] = spatial_dim*mesh_i+direction;
+       }
+
+       // Push it in!
+       blocktoblockvec.push_back(dir_doftypes_vec);
+     }
 
     Vector<unsigned> ns_p_vec(1,0);
     ns_p_vec[0] = N_velocity_doftypes;

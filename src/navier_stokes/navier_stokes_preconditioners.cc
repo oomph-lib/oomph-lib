@@ -236,16 +236,10 @@ namespace oomph
     ndof_types = this->ndof_types_in_mesh(0);
    }
 
-  if(this->Preconditioner_blocks_have_been_precomputed)
-   {
-    this->block_setup();
-   }
-  else
-   {
-    Vector<unsigned> dof_to_block_map(ndof_types);
-    dof_to_block_map[ndof_types-1]=1;
-    this->block_setup(dof_to_block_map);
-   }
+  Vector<unsigned> dof_to_block_map(ndof_types);
+  dof_to_block_map[ndof_types-1]=1;
+
+  this->block_setup(dof_to_block_map);
 
   double t_block_finish = TimingHelpers::timer();
   double block_setup_time = t_block_finish - t_block_start;
@@ -306,7 +300,7 @@ namespace oomph
           // We only need the velocity mass matrix
           assemble_inv_press_and_veloc_mass_matrix_diagonal
             (inv_p_mass_pt, inv_v_mass_sub_pt(block_i,block_i), 
-             false, block_i);
+             false, this->Block_to_block_map[0][block_i]);
          }
 
         // We now have all the vmm. We need to concatenate them.

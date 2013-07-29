@@ -298,8 +298,7 @@ namespace oomph
   /// type of DOF. The argument vector dof_to_block_map should be of length
   /// ndof. Each element should contain an integer indicating the block number
   /// corresponding to that type of DOF.
-  void block_setup(const Vector<unsigned>& dof_to_block_map, 
-                   bool called_from_argument_free_version = false);
+  void block_setup(Vector<unsigned>& dof_to_block_map);
 
   /// \short Put block (i,j) into output_matrix.
   ///
@@ -809,26 +808,34 @@ namespace oomph
   /// \short Set the precomputed (and possibly modified) preconditioner blocks.
   /// The precomputed_block_pt is a Dense matrix of pointers of precomputed 
   /// blocks for this preconditioner to use in preconditioning.
-  /// The block_to_block_map is a mapping from the blocks in 
-  /// precomputed_block_pt to the blocks required by THIS preconditioner.
+  /// The doftype_to_doftype_map is a mapping of the doftypes in the master
+  /// preconditioner to the doftypes required by THIS preconditioner.
+  /// 
   /// \n
-  /// For example, if we pass down modified blocks to the LSC preconditioner,
-  /// in 3D, precomputed_block_pt will be a 4 by 4 block matrix, 3 velocity 
-  /// blocks with associated block types 0,1 and 2, and 1 pressure block,
-  /// with associated block type 4. Since the LSC preconditioner works with
-  /// two blocks types (velocity and pressure), the block_to_block_map will be:
-  /// [0 1 2] (velocity block types)
-  /// [4] (pressure block types)
+  /// 
+  /// For example, the Lagrangian preconditioner (in 3D with one constraint) 
+  /// has doftypes:
+  /// 0  1  2  3  4  5  6 7
+  /// ub vb wb uc vc wc p Lc
+  /// 
+  /// The LSC preconditioner requires u, v, p, then the doftype_to_doftype_map 
+  /// will be:
+  /// [0 3]
+  /// [1 4]
+  /// [2 5]
+  /// [6]
+  /// 
   /// \n
+  /// 
   /// This function is called from outside of this preconditioner to set
   /// block matrices to use instead of the block matrices extracted from the
   /// jacobian. A typical use would be if this is a subsidiary preconditioner
   /// and a master preconditioner has to pass down modified blocks for the 
   /// subidiary preconditioner to use.
-  void set_precomputed_blocks(DenseMatrix<CRDoubleMatrix*>&precomputed_block_pt,
-                              Vector<Vector<unsigned> > & block_to_block_map)
+  void set_precomputed_blocks(
+      DenseMatrix<CRDoubleMatrix*>&precomputed_block_pt,
+      Vector<Vector<unsigned> > & doftype_to_doftype_map)
   {
-
 #ifdef PARANOID
    // How many block rows are there?
    unsigned precomputed_block_nrow = precomputed_block_pt.nrow();
@@ -968,25 +975,27 @@ namespace oomph
     }
 
 
-   // Checks for block_to_block_map
+   // Checks for doftype_to_doftype_map
    // No more than ndof types described, 
    // and check that all entries are unique.
-   std::set<unsigned> block_map_set;
-     
-   for (unsigned i = 0; i < block_to_block_map.size(); i++)
-    {
-     for (unsigned j = 0; j < block_to_block_map[i].size(); j++)
-      {
-       std::set<unsigned>::iterator block_map_it;
-       std::pair<std::set<unsigned>::iterator,bool> block_map_ret;
+   std::set<unsigned> doftype_map_set;
 
-       block_map_ret = block_map_set.insert(block_to_block_map[i][j]);
+   unsigned doftype_to_doftype_map_size = doftype_to_doftype_map.size();
+   for (unsigned i = 0; i < doftype_to_doftype_map_size; i++)
+    {
+     unsigned doftype_to_doftype_map_i_size = doftype_to_doftype_map[i].size();
+     for (unsigned j = 0; j < doftype_to_doftype_map_i_size; j++)
+      {
+       std::set<unsigned>::iterator doftype_map_it;
+       std::pair<std::set<unsigned>::iterator,bool> doftype_map_ret;
+
+       doftype_map_ret = doftype_map_set.insert(doftype_to_doftype_map[i][j]);
          
-       if(!block_map_ret.second)
+       if(!doftype_map_ret.second)
         {
          std::ostringstream error_message;
-         error_message << "Error: the block number "
-                       << block_to_block_map[i][j]
+         error_message << "Error: the doftype number "
+                       << doftype_to_doftype_map[i][j]
                        << " is already inserted."
                        << std::endl;
          throw OomphLibError(error_message.str(),
@@ -996,13 +1005,13 @@ namespace oomph
       }
     }
      
-   // All block types described in block_to_block_map must be unique.
-   if(precomputed_block_nrow != block_map_set.size())
+   // All doftype described in doftype_to_doftype_map must be unique.
+   if(precomputed_block_nrow != doftype_map_set.size())
     {
      std::ostringstream error_message;
-     error_message << "Error: all blocks must be assigned. \n"
-                   << "Only " << block_map_set.size()
-                   << " blocks have been assigned."
+     error_message << "Error: all doftypes must be assigned. \n"
+                   << "Only " << doftype_map_set.size()
+                   << " doftypes have been assigned."
                    << std::endl;
      throw OomphLibError(error_message.str(),
                          OOMPH_CURRENT_FUNCTION,
@@ -1014,28 +1023,28 @@ namespace oomph
    // Set the precomputed blocks.
    Precomputed_block_pt = precomputed_block_pt;
 
-   // Set the Block_to_block_map.
-   Block_to_block_map = block_to_block_map;
+   // Set the Doftype_to_doftype_map.
+   Doftype_to_doftype_map = doftype_to_doftype_map;
 
    // Flag indicating that the preconditioner blocks has been precomputed.
    Preconditioner_blocks_have_been_precomputed = true;
   }
   
- // Calls set_precomputed_block(...) with the "identity" block_to_block_map.
+ // Calls set_precomputed_block(...) with the "identity" doftype_to_doftype_map.
  // See the other set_precomputed_block(...) function for more details.
  void set_precomputed_blocks(DenseMatrix<CRDoubleMatrix*>&precomputed_block_pt)
   {
    unsigned precomputed_block_nrow = precomputed_block_pt.nrow();
 
-   Vector<Vector<unsigned> > block_to_block_map(precomputed_block_nrow,
+   Vector<Vector<unsigned> > doftype_to_doftype_map(precomputed_block_nrow,
                                                 Vector<unsigned>(1,0));
 
    for (unsigned i = 0; i < precomputed_block_nrow; i++) 
     {
-     block_to_block_map[i][0] = i;
+     doftype_to_doftype_map[i][0] = i;
     }
 
-   set_precomputed_blocks(precomputed_block_pt,block_to_block_map);
+   set_precomputed_blocks(precomputed_block_pt,doftype_to_doftype_map);
   }
 
   /// \short the number of blocks precomputed. If the preconditioner blocks are
@@ -1043,7 +1052,7 @@ namespace oomph
   /// required by this preconditioner.
   unsigned nblocks_precomputed() const
   {
-   return Block_to_block_map.size();
+   return Doftype_to_doftype_map.size();
   }
 
 
@@ -1386,6 +1395,9 @@ namespace oomph
 
   /// \short Mapping for blocks passed down from the above preconditioner.
   Vector<Vector<unsigned> > Block_to_block_map;
+
+  /// \short Mapping for doftypes passed down from the above preconditioner.
+  Vector<Vector<unsigned> > Doftype_to_doftype_map;
 
   /// \short Flag indicating if blocks have been precomputed 
   /// (and possibly modified).
