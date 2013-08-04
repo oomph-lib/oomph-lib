@@ -32,7 +32,9 @@ EXTRA_DIST=build_mesh_makefile.sh change_headers_to_links.sh fpdiff.py\
            find_missing_doxygen_hooks.sh big_diff.bash \
            make_all_distributions.bash \
            destruct_test_distribution.bash \
-           minimal_mpi_test.cc check_oomph-lib_links.bash strip_down.bash
+           minimal_mpi_test.cc check_oomph-lib_links.bash strip_down.bash \
+           validate_ok_count 
+
 
 
 
