@@ -2790,9 +2790,29 @@ template<class ELEMENT>
    /// Refine mesh uniformly and doc process
    void refine_uniformly(DocInfo& doc_info)
    {
-    throw OomphLibError("refine_uniformly() not implemented yet",
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION); 
+    // Set the element error to something big
+    unsigned nelem=nelement();
+    Vector<double> elem_error(nelem,DBL_MAX);
+
+    // Limit the min element size to 1/3 of the current minimum
+    double backup=Min_element_size;
+    
+    // Get current max and min element size
+    double orig_max_area, orig_min_area;
+    this->max_and_min_element_size(orig_max_area, orig_min_area);
+
+    // Limit
+    Min_element_size=orig_min_area/3.0;
+
+    // Do it...
+    adapt(elem_error);
+
+    // Reset 
+    Min_element_size=backup;
+
+/*     throw OomphLibError("refine_uniformly() not implemented yet", */
+/*                         OOMPH_CURRENT_FUNCTION, */
+/*                         OOMPH_EXCEPTION_LOCATION);  */
    }    
    
    
