@@ -243,8 +243,7 @@ namespace oomph
 
   /// \short Output the matrix in sparse format. Note that this is going to be
   /// slow because we have to check every entry of every matrix for non-zeros.
-  void sparse_indexed_output(std::ostream &outfile,
-                             const bool& force_output_final_entry=false) const
+  void sparse_indexed_output_helper(std::ostream &outfile) const
    {
     for (unsigned long i=0; i<nrow(); i++)
      {
@@ -259,30 +258,6 @@ namespace oomph
          }
        }
      }
-
-    // If there is no output for the last entry and we requested it then
-    // output the zero.
-    if((force_output_final_entry) &&
-       (operator()(this->nrow()-1, this->ncol()-1) == 0.0))
-     {
-      outfile << this->nrow()-1 << " " << this->ncol()-1 << " 0"
-              << std::endl;
-     }
-   }
-
-  /// \short Output the matrix in sparse format to a file. Note that this
-  /// is going to be slow because we have to check every entry of every
-  /// matrix for non-zeros. If the boolean flag is true then output the
-  /// "bottom right" entry regardless of it being zero or
-  /// not (helps reading into matlab etc.).
-  void sparse_indexed_output(const std::string &outfile,
-                             const bool& force_output_final_entry=false) const
-   {
-    // Open file
-    std::ofstream some_file;
-    some_file.open(outfile.c_str());
-    sparse_indexed_output(some_file, force_output_final_entry);
-    some_file.close();
    }
 
 

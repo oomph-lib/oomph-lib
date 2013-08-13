@@ -659,13 +659,6 @@ namespace oomph
   bool block_output_on() const
   {return Output_base_filename.size() > 0;}
 
-  /// Output a block to an output stream.
-  void output_block(const unsigned &i, const unsigned &j,
-                    std::ostream& outstream) const
-  {
-   get_block(i,j).sparse_indexed_output(outstream);
-  }
-
   /// Output all blocks to numbered files. Called at the end of get blocks if
   /// an output filename has been set.
   void output_blocks_to_files(const std::string& basefilename,
@@ -674,20 +667,18 @@ namespace oomph
    unsigned nblocks = nblock_types(true);
 
    for(unsigned i=0; i<nblocks; i++)
-    for(unsigned j=0; j<nblocks; j++)
-     {
-      // Construct the filename.
-      std::string filename(basefilename + "_block_"
-                           + StringConversion::to_string(i)
-                           + "_" + StringConversion::to_string(j));
+    {
+     for(unsigned j=0; j<nblocks; j++)
+      {
+       // Construct the filename.
+       std::string filename(basefilename + "_block_"
+                            + StringConversion::to_string(i)
+                            + "_" + StringConversion::to_string(j));
 
-      // Write out the block.
-      std::ofstream some_file;
-      some_file.open(filename.c_str());
-      some_file.precision(precision);
-      output_block(i,j,some_file);
-      some_file.close();
-     }
+       // Write out the block.
+       get_block(i,j).sparse_indexed_output(filename, precision, true);
+      }
+    }
   }
 
   /// \short A helper method to reduce the memory requirements of block

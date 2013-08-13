@@ -138,14 +138,14 @@ class Matrix
  /// get_entry() function which must be defined in all derived classes
  /// that are to be fully instantiated.
  inline T operator()(const unsigned long &i, 
-                            const unsigned long &j) const
+                     const unsigned long &j) const
   {
    return static_cast<MATRIX_TYPE const *>(this)->get_entry(i,j);
   }
  
  /// \short  Round brackets to give access as a(i,j) for read-write 
  /// access.
- /// The function uses the  MATRIX_TYPE template parameter to call the
+ /// The function uses the MATRIX_TYPE template parameter to call the
  /// entry() function which must be defined in all derived classes
  /// that are to be fully instantiated. If the particular Matrix does
  /// not allow write access, the function should break with an error
@@ -171,16 +171,85 @@ class Matrix
     OOMPH_EXCEPTION_LOCATION);
   }
 
- /// \short Indexed output function to print a matrix to the 
- /// stream outfile as i,j,a(i,j) for a(i,j)!=0 only.
- /// If optional boolean flag is set to true we also output
- /// the "bottom right" entry regardless of it being zero or 
- /// not (helps plotting in matlab)
- /// If the optional unsigned is set to a positive value, we change the
- /// precision of the output stream accordingly.
- virtual void sparse_indexed_output(std::ostream &outfile,
-  const bool& output_bottom_right_entry_regardless=false,
-  const int& output_precision = -1) const=0;
+ /// \short Indexed output function to print a matrix to the stream outfile
+ /// as i,j,a(i,j) for a(i,j)!=0 only.
+ virtual void sparse_indexed_output_helper(std::ostream &outfile) const=0;
+
+ /// \short Indexed output function to print a matrix to the stream outfile
+ /// as i,j,a(i,j) for a(i,j)!=0 only with specified precision (if
+ /// precision=0 then nothing is changed). If optional boolean flag is set
+ /// to true we also output the "bottom right" entry regardless of it being
+ /// zero or not (this allows automatic detection of matrix size in
+ /// e.g. matlab, python).
+ void sparse_indexed_output(std::ostream &outfile,
+                            const unsigned &precision=0,
+                            const bool& output_bottom_right_zero=false) const
+ {
+  // Implemented as a wrapper around "sparse_indexed_output(std::ostream)"
+  // so that only one output helper function is needed in derived classes.
+
+  // We can't have seperate functions for only "output_bottom_right_zero"
+  // because people often write false as "0" and then C++ would pick the
+  // wrong function.
+
+  // If requested set the new precision and store the previous value.
+  unsigned old_precision = 0;
+  if(precision != 0)
+   {
+    old_precision = outfile.precision();
+    outfile.precision(precision);
+   }
+
+  // Output as normal using the helper function defined in each matrix class
+  sparse_indexed_output_helper(outfile);
+
+  // If requested and there is no output for the last entry then output a
+  // zero entry.
+  if (output_bottom_right_zero)
+   {
+    int last_row = this->nrow()-1;
+    int last_col = this->ncol()-1;
+
+    // Use this strange thingy because of the CRTP discussed above.
+    T last_value = static_cast<MATRIX_TYPE const *>(this)->operator()(last_row, last_col);
+    
+    if(last_value == T(0))
+     {
+      outfile << last_row << " " << last_col << " " << T(0)
+              << std::endl;
+     }
+   }
+
+  // Restore the old value of the precision if we changed it
+  if(precision != 0)
+   {
+    outfile.precision(old_precision);
+   }
+ }
+
+ /// \short Indexed output function to print a matrix to the file named
+ /// filename as i,j,a(i,j) for a(i,j)!=0 only with specified precision. If
+ /// optional boolean flag is set to true we also output the "bottom right"
+ /// entry regardless of it being zero or not (this allows automatic
+ /// detection of matrix size in e.g. matlab, python).
+ void sparse_indexed_output(std::string filename,
+                            const unsigned &precision=0,
+                            const bool& output_bottom_right_zero=false) const
+ {
+  // Implemented as a wrapper around "sparse_indexed_output(std::ostream)"
+  // so that only one output function needs to be written in matrix
+  // subclasses.
+
+   // Open file
+   std::ofstream some_file(filename.c_str());
+
+   // Output as normal
+   sparse_indexed_output(some_file, precision, output_bottom_right_zero);
+
+   // Close file
+   some_file.close();
+  }
+
 
 };
 
@@ -238,7 +307,7 @@ class DoubleMatrixBase
  /// (we're not providing a general interface for component-wise write
  /// access since not all matrix formats allow efficient direct access!)
  virtual double operator()(const unsigned long &i, 
-                                  const unsigned long &j) const=0;
+                           const unsigned long &j) const=0;
 
  
  /// Return a pointer to the linear solver object
@@ -404,7 +473,7 @@ class DenseMatrix : public Matrix<T, DenseMatrix<T> >
  /// \short The access function the will be called by the read-only 
  /// (const version) round-bracket operator.
  inline T get_entry(const unsigned long &i, 
-                           const unsigned long &j) const
+                    const unsigned long &j) const
   {
 #ifdef RANGE_CHECKING
    this->range_check(i,j);
@@ -465,26 +534,7 @@ class DenseMatrix : public Matrix<T, DenseMatrix<T> >
 
  /// \short Indexed output function to print a matrix to the 
  /// stream outfile as i,j,a(i,j) for a(i,j)!=0 only.
- /// If optional boolean flag is set to true we also output
- /// the "bottom right" entry regardless of it being zero or 
- /// not (helps plotting in matlab).
- /// If the output_precision is positive, then the output stream is set
- /// to the said precision.
- void sparse_indexed_output(std::ostream &outfile,
-  const bool& output_bottom_right_entry_regardless=false,
-  const int& output_precision = -1) const;
- 
- /// \short Indexed output function to print a matrix to a 
- /// file as i,j,a(i,j) for a(i,j)!=0 only. Specify filename.
- /// If optional boolean flag is set to true we also output
- /// the "bottom right" entry regardless of it being zero or 
- /// not (helps plotting in matlab).
- /// If the output_precision is positive, then the output stream is set
- /// to the said precision.
- void sparse_indexed_output(
-  std::string filename,
-  const bool& output_bottom_right_entry_regardless=false,
-  const int& output_precision = -1) const;
+ void sparse_indexed_output_helper(std::ostream &outfile) const;
 
 };
 
@@ -571,41 +621,16 @@ class SparseMatrix : public Matrix<T,MATRIX_TYPE>
   
   /// \short Indexed output function to print a matrix to the
   /// stream outfile as i,j,a(i,j) for a(i,j)!=0 only.
-  /// If optional boolean flag is set to true we also output
-  /// the "bottom right" entry regardless of it being zero or 
-  /// not (helps plotting in matlab).
-  /// If the optional unsigned is set to a positive value, we change the
-  /// precision of the output stream accordingly.
-  virtual void sparse_indexed_output(std::ostream &outfile,
-   const bool& output_bottom_right_entry_regardless=false,
-   const int& output_precision = -1) const
+  virtual void sparse_indexed_output_helper(std::ostream &outfile) const
    {
     std::string error_message = 
-     "SparseMatrix::sparse_indexed_output() is a virtual function.\n";
+     "SparseMatrix::sparse_indexed_output_helper() is a virtual function.\n";
     error_message +=
      "It must be overloaded for specific sparse matrix storage formats\n";
     
     throw OomphLibError(error_message,
                         OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
-   }
-  
-  /// \short Indexed output function to print a matrix to a
-  /// file as i,j,a(i,j) for a(i,j)!=0 only. Specify filename.
-  /// If optional boolean flag is set to true we also output
-  /// the "bottom right" entry regardless of it being zero or 
-  /// not (helps plotting in matlab).
-  /// If the optional unsigned is set to a positive value, we change the
-  /// precision of the output stream accordingly.
-  void sparse_indexed_output(std::string filename,
-   const bool& output_bottom_right_entry_regardless=false,
-   const int& output_precision = -1) const
-   {
-    // Open file
-    std::ofstream some_file;
-    some_file.open(filename.c_str());
-    sparse_indexed_output(some_file);
-    some_file.close();
    }
   
  };
@@ -693,7 +718,7 @@ class CRMatrix : public SparseMatrix<T, CRMatrix<T> >
  /// \short Access function that will be called by the read-only round-bracket
  /// operator (const)
   T get_entry(const unsigned long &i, 
-                    const unsigned long &j) const
+              const unsigned long &j) const
   {
 #ifdef RANGE_CHECKING
    this->range_check(i,j);
@@ -743,67 +768,16 @@ class CRMatrix : public SparseMatrix<T, CRMatrix<T> >
 
  /// \short Indexed output function to print a matrix to the
  /// stream outfile as i,j,a(i,j) for a(i,j)!=0 only.
- /// If optional boolean flag is set to true we also output
- /// the "bottom right" entry regardless of it being zero or 
- /// not (helps plotting in matlab).
- /// If the optional unsigned is set to a positive value, we change the
- /// precision of the output stream accordingly.
- void sparse_indexed_output(std::ostream &outfile,
-  const bool& output_bottom_right_entry_regardless=false,
-  const int& output_precision = -1) const
+ void sparse_indexed_output_helper(std::ostream &outfile) const
   {
-   if(output_precision > 0)
+   for (unsigned long i=0;i<this->N;i++)
     {
-     for (unsigned long i=0;i<this->N;i++)
+     for (long j=Row_start[i];j<Row_start[i+1];j++)
       {
-       for (long j=Row_start[i];j<Row_start[i+1];j++)
-        {
-         outfile << i << " " << Column_index[j] << " "  
-                 << std::setprecision(output_precision) << this->Value[j]
-                 << std::endl;
-        }
-      }
-    }
-   else
-    {
-     for (unsigned long i=0;i<this->N;i++)
-      {
-       for (long j=Row_start[i];j<Row_start[i+1];j++)
-        {
-         outfile << i << " " << Column_index[j] << " " << this->Value[j]
-                 << std::endl;
-        }
-      }
-    }
-
-   // If there is no output for the last entry then output zero
-   if (output_bottom_right_entry_regardless)
-    {
-     if(get_entry(this->nrow()-1, this->ncol()-1) == this->Zero)
-      {
-       outfile << this->nrow()-1 << " " << this->ncol()-1 << " " << this->Zero
+       outfile << i << " " << Column_index[j] << " " << this->Value[j]
                << std::endl;
       }
     }
-  }
-
- /// \short Indexed output function to print a matrix to a
- /// file as i,j,a(i,j) for a(i,j)!=0 only. Specify filename.
- /// If optional boolean flag is set to true we also output
- /// the "bottom right" entry regardless of it being zero or 
- /// not (helps plotting in matlab).
- /// If the optional unsigned is set to a positive value, we change the
- /// precision of the output stream accordingly.
- void sparse_indexed_output(std::string filename,
-  const bool& output_bottom_right_entry_regardless=false,
-  const int& output_precision = -1) const
-  {
-   // Open file
-   std::ofstream some_file;
-   some_file.open(filename.c_str());
-   sparse_indexed_output(some_file,output_bottom_right_entry_regardless,
-                         output_precision);
-   some_file.close();
   }
 
  /// Wipe matrix data and set all values to 0.
@@ -936,48 +910,17 @@ class CRDoubleMatrix : public Matrix<double, CRDoubleMatrix >,
 
  /// \short Indexed output function to print a matrix to the 
  /// stream outfile as i,j,a(i,j) for a(i,j)!=0 only.
- /// If optional boolean flag is set to true we also output
- /// the "bottom right" entry regardless of it being zero or 
- /// not (helps plotting in matlab).
- /// If the optional unsigned is set to a positive value, we change the
- /// precision of the output stream accordingly.
- void sparse_indexed_output(std::ostream &outfile,
-  const bool& output_bottom_right_entry_regardless=false,
-  const int& output_precision = -1) const
+ void sparse_indexed_output_helper(std::ostream &outfile) const
   {
-   CR_matrix.sparse_indexed_output(outfile,
-                                   output_bottom_right_entry_regardless,
-                                   output_precision);
+   CR_matrix.sparse_indexed_output_helper(outfile);
   }
 
   /// \short Indexed output function to print a matrix to a
   /// file as i,j,a(i,j) for a(i,j)!=0 only. Specify filename.
-  /// If optional boolean flag is set to true we also output
-  /// the "bottom right" entry regardless of it being zero or 
-  /// not (helps plotting in matlab).
-  /// If the optional unsigned is set to a positive value, we change the
-  /// precision of the output stream accordingly.
-  void sparse_indexed_output(std::string filename,
-  const bool& output_bottom_right_entry_regardless=false,
-  const int& output_precision = -1) const
-   {
-    // Open file
-    std::ofstream some_file;
-    some_file.open(filename.c_str());
-    sparse_indexed_output(some_file,output_bottom_right_entry_regardless,
-                          output_precision);
-    some_file.close();
-   }
-
-
-  /// \short Indexed output function to print a matrix to a
-  /// file as i,j,a(i,j) for a(i,j)!=0 only. Specify filename.
   /// This uses acual global row numbers.
-  /// If the optional unsigned is set to a positive value, we change the
-  /// precision of the output stream accordingly.
-  void sparse_indexed_output_with_offset(std::string filename,
-                                         const int& output_precision = -1)
+  void sparse_indexed_output_with_offset(std::string filename)
    {
+    
     // Get offset
     unsigned first_row=distribution_pt()->first_row();
 
@@ -985,36 +928,16 @@ class CRDoubleMatrix : public Matrix<double, CRDoubleMatrix >,
     std::ofstream some_file;
     some_file.open(filename.c_str());
     unsigned n=nrow_local();
-
-    if(output_precision > 0)
+    for (unsigned long i=0;i<n;i++)
      {
-      for (unsigned long i=0;i<n;i++)
+      for (long j=row_start()[i];j<row_start()[i+1];j++)
        {
-        for (long j=row_start()[i];j<row_start()[i+1];j++)
-         {
-          some_file << first_row+i << " " << column_index()[j] << " "
-                    << std::setprecision(output_precision)
-                    << value()[j]
-                    << std::endl;
-         }
+        some_file << first_row+i << " " << column_index()[j] << " "
+                  << value()[j]
+                  << std::endl;
        }
      }
-    else
-     {
-      for (unsigned long i=0;i<n;i++)
-       {
-        for (long j=row_start()[i];j<row_start()[i+1];j++)
-         {
-          some_file << first_row+i << " " << column_index()[j] << " "
-                    << std::setprecision(output_precision)
-                    << value()[j]
-                    << std::endl;
-         }
-       }
-     }
-    
     some_file.close();
-   
    }
 
  /// Overload the round-bracket access operator for read-only access. In a 
@@ -2434,70 +2357,17 @@ class CCMatrix : public SparseMatrix<T, CCMatrix<T> >
 
  /// \short Indexed output function to print a matrix to the
  /// stream outfile as i,j,a(i,j) for a(i,j)!=0 only.
- /// If optional boolean flag is set to true we also output
- /// the "bottom right" entry regardless of it being zero or 
- /// not (helps plotting in matlab).
- /// If the optional unsigned is set to a positive value, we change the
- /// precision of the output stream accordingly.
- void sparse_indexed_output(std::ostream &outfile,
-  const bool& output_bottom_right_entry_regardless=false,
-  const int& output_precision = -1) const
+ void sparse_indexed_output_helper(std::ostream &outfile) const
   {
-   if(output_precision > 0)
+   for (unsigned long j=0;j<this->N;j++)
     {
-     for (unsigned long j=0;j<this->N;j++)
+     for (long k=Column_start[j];k<Column_start[j+1];k++)
       {
-       for (long k=Column_start[j];k<Column_start[j+1];k++)
-        {
-         outfile << Row_index[k] <<  " " << j
-                 <<  " " << std::setprecision(output_precision) 
-                 << this->Value[k] << std::endl;
-        }
-      }
-    }
-   else
-    {
-     for (unsigned long j=0;j<this->N;j++)
-      {
-       for (long k=Column_start[j];k<Column_start[j+1];k++)
-        {
-         outfile << Row_index[k] <<  " " << j
-                 <<  " " << this->Value[k] << std::endl;
-        }
-      }
-    }
-
-   // If there is no output for the last entry then output zero
-   if (output_bottom_right_entry_regardless)
-    {
-     if(get_entry(this->nrow()-1, this->ncol()-1) == this->Zero)
-      {
-       outfile << this->nrow()-1 << " " << this->ncol()-1 << " " << this->Zero
-               << std::endl;
+       outfile << Row_index[k] <<  " " << j
+               <<  " " << this->Value[k] << std::endl;
       }
     }
   }
-
-
- /// \short Indexed output function to print a matrix to a
- /// file as i,j,a(i,j) for a(i,j)!=0 only. Specify filename.
- /// If optional boolean flag is set to true we also output
- /// the "bottom right" entry regardless of it being zero or 
- /// not (helps plotting in matlab).
- /// If the optional unsigned is set to a positive value, we change the
- /// precision of the output stream accordingly.
- void sparse_indexed_output(std::string filename,
-  const bool& output_bottom_right_entry_regardless=false,
-  const int& output_precision = -1) const
-  {
-   // Open file
-   std::ofstream some_file;
-   some_file.open(filename.c_str());
-   sparse_indexed_output(some_file,output_bottom_right_entry_regardless,
-                         output_precision);
-   some_file.close();
-  }
-
 
  /// Wipe matrix data and set all values to 0.
  void clean_up_memory();
@@ -2874,82 +2744,22 @@ void DenseMatrix<T>::indexed_output(std::string filename) const
 
 //============================================================================
 /// Sparse indexed output as i,j,a(i,j) for a(i,j)!=0 only.
-/// If optional boolean flag is set to true we also output
-/// the "bottom right" entry regardless of it being zero or 
-/// not (helps plotting in matlab).
-/// If the optional unsigned is set to a positive value, we change the
-/// precision of the output stream accordingly.
 //============================================================================
 template<class T>
-void DenseMatrix<T>::sparse_indexed_output(std::ostream &outfile,
-  const bool& output_bottom_right_entry_regardless,
-  const int& output_precision) const
+void DenseMatrix<T>::sparse_indexed_output_helper(std::ostream &outfile) const
 {
- if(output_precision > 0)
+ //Loop over the rows
+ for(unsigned i=0;i<N;i++)
   {
-   //Loop over the rows
-   for(unsigned i=0;i<N;i++)
+   //Loop over the column
+   for(unsigned j=0;j<M;j++)
     {
-     //Loop over the column
-     for(unsigned j=0;j<M;j++)
+     if ((*this)(i,j)!=T(0))
       {
-       if ((*this)(i,j)!=T(0))
-        {
-         outfile << i << " " << j << " " << std::setprecision(output_precision)
-                 << (*this)(i,j) << std::endl;
-        }
+       outfile << i << " " << j << " " << (*this)(i,j) << std::endl;
       }
     }
   }
- else
-  {
-   //Loop over the rows
-   for(unsigned i=0;i<N;i++)
-    {
-     //Loop over the column
-     for(unsigned j=0;j<M;j++)
-      {
-       if ((*this)(i,j)!=T(0))
-        {
-         outfile << i << " " << j << " " << (*this)(i,j) << std::endl;
-        }
-      }
-    }
-  }
-
- // If there is no output for the last entry then output zero
- if (output_bottom_right_entry_regardless)
-  {
-   if(get_entry(this->nrow()-1, this->ncol()-1) == T(0))
-    {
-     outfile << this->nrow()-1 << " " << this->ncol()-1 << " " << T(0)
-             << std::endl;
-    }
-  }
-}
-
-
-
-//============================================================================
-/// \short Indexed output function to print a matrix to a 
-/// file as i,j,a(i,j) for a(i,j)!=0 only. Specify filename.
-/// If optional boolean flag is set to true we also output
-/// the "bottom right" entry regardless of it being zero or 
-/// not (helps plotting in matlab).
-/// If the optional unsigned is set to a positive value, we change the
-/// precision of the output stream accordingly.
-//============================================================================
-template<class T>
-void DenseMatrix<T>::sparse_indexed_output(std::string filename,
-  const bool& output_bottom_right_entry_regardless,
-  const int& output_precision) const
-{
- // Open file
- std::ofstream some_file;
- some_file.open(filename.c_str());
- sparse_indexed_output(some_file,output_bottom_right_entry_regardless,
-                       output_precision);
- some_file.close();
 }
 
 
