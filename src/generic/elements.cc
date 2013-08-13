@@ -4510,6 +4510,7 @@ void FiniteElement::locate_zeta(const Vector<double> &zeta,
  }
 
 //======================================================================
+// DOXYERROR
 /// The purpose of this function is to identify all possible
 /// Data that can affect the fields interpolated by the FiniteElement.
 /// The information will typically be used in interaction problems in

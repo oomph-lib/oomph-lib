@@ -408,7 +408,7 @@ public virtual NavierStokesElementWithDiagonalMassMatrices,
 ///
 ///  and 
 ///
-///  \f$ {\Large \frac{\partial u_i}{\partial x_i} = Q } \f$
+///  \f$ { \frac{\partial u_i}{\partial x_i} = Q } \f$
 ///
 /// We also provide all functions required to use this element
 /// in FSI problems, by deriving it from the FSIFluidElement base
@@ -1304,7 +1304,7 @@ public:
    return(interpolated_u);
   }
 
- /// \shortReturn FE interpolated velocity u[i] at local coordinate s
+ /// \short Return FE interpolated velocity u[i] at local coordinate s
  /// at time level t (t=0: present; t>0: history)
  double interpolated_u_nst(const unsigned& t, 
                            const Vector<double> &s, 

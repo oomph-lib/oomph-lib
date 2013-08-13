@@ -60,7 +60,7 @@ namespace oomph
   /// \short Constructor. Takes pointer to mesh of Foeppl von Karman
   /// elements and a vector of unsigneds which identifies the
   /// regions within it that contribute to the controlled volume
-  /// defined as \int w dA (i.e. the "volume under the membrane").
+  /// defined as int w dA (i.e. the "volume under the membrane").
   /// The optional final argument specifies the initial value
   /// for the pressure that is "traded" in exchange for the
   /// volume constraint.

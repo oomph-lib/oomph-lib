@@ -49,6 +49,7 @@ namespace oomph
 {
 
 //=============================================================
+// DOXYERROR: there is no such command as \Diamond!!
 /// A class for all isoparametric elements that solve the
 /// Foeppl von Karman equations.
 /// \f[

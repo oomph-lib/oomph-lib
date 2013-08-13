@@ -248,11 +248,11 @@ void  YoungLaplaceEquations::exact_position(const Vector<double>& s,
     //------
     else
      {
-      /// Get the spines
+      // Get the spines
       get_spine_base(interpolated_zeta, spine_base, dspine_base);
       get_spine(interpolated_zeta, spine, dspine);
 
-      /// calculation of dR/d\zeta_\alpha
+      // calculation of dR/d\zeta_\alpha
       for (unsigned alpha=0;alpha<2;alpha++)
        {
         // Product rule for d(u {\bf S} ) / d \zeta_\alpha

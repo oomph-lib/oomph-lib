@@ -37,7 +37,7 @@ load required to achieve this displacement as an unknown.
 <CENTER>
 <B>Non-axisymmetric buckling of a pressure-loaded, thin-walled elastic ring</B>
 </CENTER> 
-\n
+
 We wish to compute the deformation of a linearly-elastic, circular 
 ring of undeformed radius \f$ R_0 \f$ and wall thickness \f$ h^* \f$,
 subject to a spatially-constant external pressure \f$ p_{ext}^* \f$. 
@@ -70,7 +70,6 @@ Here is a sketch of the problem:
 Note that we have chosen the Eulerian coordinate axes so that they 
 coincide with the ring's lines of symmetry. 
 
-\n
 </TD> 
 </TR>
 </TABLE>  
@@ -114,11 +113,11 @@ the problem from
 <TABLE>
 <TR>
 <TD>
-\n
+
 <CENTER>
 <B> Original formulation of the problem</B>
 </CENTER> 
-\n
+
 Determine the position vector to the centreline of the 
 deformed ring, \f$ {\bf R}_w(\xi) \f$ , in terms of the Lagragian 
 coordinate \f$ \xi \in [0,2\pi] \f$ , for a given value of the 
@@ -136,11 +135,11 @@ to
 <TABLE>
 <TR>
 <TD>
-\n
+
 <CENTER>
 <B> Displacement-control formulation of the problem</B>
 </CENTER> 
-\n
+
 Determine the position vector to the centreline of the 
 deformed ring, \f$ {\bf R}_w(\xi) \f$ , in terms of the Lagragian 
 coordinate \f$ \xi \in [0,2\pi] \f$ , for an external pressure 
@@ -150,7 +149,7 @@ control point is equal to \f$ R_{ctrl} \f$, i.e.
 {\bf R}_w(\xi=\pi/2) \cdot {\bf e}_2 = R_{ctrl},
 \f]
 where \f$ R_{ctrl} \in [0,1] \f$ is given.
-\n
+
 </TD> 
 </TR>
 </TABLE>  
@@ -497,7 +496,7 @@ different constructors for the \c DisplacementControlElement.
   that once \c Data is stored in an element's internal \c Data,
   the element becomes responsible for performing tasks such as equation
   numbering, timestepping, etc. that must be performed exactly once
-  for each \C Data value in the \c Problem.) \n\n
+  for each \c Data value in the \c Problem.) \n\n
 - The second version of the constructor is appropriate for problems 
   in which the load \c Data has already been created by another 
   element, implying that the other element is already "in charge" 

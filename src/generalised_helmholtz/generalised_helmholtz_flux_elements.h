@@ -382,7 +382,7 @@ protected:
 
 
 
- /// \Short The index at which the real and imag part of the unknown is stored 
+ /// \short The index at which the real and imag part of the unknown is stored 
  /// at the nodes
  std::complex<unsigned> U_index_helmholtz;
   
@@ -727,7 +727,7 @@ protected:
   }
 
 
- /// \Short The index at which the real and imag part of the unknown is stored 
+ /// \short The index at which the real and imag part of the unknown is stored 
  /// at the nodes
  std::complex<unsigned> U_index_helmholtz;
  

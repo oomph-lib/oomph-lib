@@ -250,8 +250,8 @@ public:
  }
 
  /// \short Get flux: 
- /// \f \mbox{flux}[i] = \nabla u = \mbox{d}u / \mbox{d} r 
- /// + 1/r \mbox{d}u / \mbox{d} \theta \f
+ // \f$ \mbox{flux}[i] = \nabla u = \mbox{d}u / \mbox{d} r 
+ // + 1/r \mbox{d}u / \mbox{d} \theta \f$
  void get_flux(const Vector<double>& s, Vector<double>& flux) const
   {
    //Find out how many nodes there are in the element
@@ -650,7 +650,7 @@ public virtual  QElement<1,NNODE_1D>
 /// applied Robin boundary condition on the boundaries of Steady 
 /// Axisymmnetric Advection Diffusion Flux elements.
 /// \f[ 
-/// -\Delta u \cdot \mathbk{n} + \alpha(r,z) u = \beta(r,z) 
+/// -\Delta u \cdot \mathbf{n} + \alpha(r,z) u = \beta(r,z) 
 /// \f] 
 /// The element geometry is obtained from the FaceGeometry<ELEMENT> 
 /// policy class.

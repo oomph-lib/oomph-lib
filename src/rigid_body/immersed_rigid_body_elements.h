@@ -43,6 +43,7 @@ namespace oomph
 {
   
 //=====================================================================
+// DOXYERROR: I removed a \f from the formula \f$\mbox{\boldmath$F$} = \mbox{\boldmath$F$}^{*}/\mu U\f$ below because it broke doxygen. Someone who knows the maths should check that this still makes sense.
 /// Class that solves the equations of motion for a general 
 /// two-dimensional rigid body subject to a particular imposed force and torque
 /// distribution and immersed within an external fluid.
@@ -65,7 +66,7 @@ namespace oomph
 /// \f$\mbox{\boldmath$t$}\f$ is the net force per unit length
 /// applied on the rigid body
 /// by the surrounding fluid;
-/// \f$\mbox{\boldmath$T$}\f = \mbox{\boldmath$T$}^{*}/(\mu UL)\f$ 
+/// \f$\mbox{\boldmath$T$} = \mbox{\boldmath$T$}^{*}/(\mu UL)\f$ 
 /// is the external torque per unit length; and \f$\mbox{\boldmath$q$}\f$ is
 /// the net torque per unit length applied on the body by the fluid.
 /// \f$M\f$ is a scaled mass the density ratio multiplied by a shape parameter

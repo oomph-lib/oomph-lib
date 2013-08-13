@@ -120,7 +120,7 @@ fill_in_contribution_to_residuals(Vector<double> &residuals)
    allocate_vector_of_vectors(2,3,dspine);
    
    // Vector v_\alpha contains the numerator of the variations of the 
-   // area element {\cal A}^{1/2} w.r.t. the components of dR/d\zeta_\alpha
+   // area element {\cal A}^{1/2} w.r.t. the components of dR/d\zeta_\alpha 
    Vector<double> area_variation_numerator_0(3,0.0);
    Vector<double> area_variation_numerator_1(3,0.0);
 
@@ -142,11 +142,11 @@ fill_in_contribution_to_residuals(Vector<double> &residuals)
    //------
    else
     {
-     /// Get the spines
+     // Get the spines
      get_spine_base(interpolated_zeta, spine_base, dspine_base);
      get_spine(interpolated_zeta, spine, dspine);
 
-     /// calculation of dR/d\zeta_\alpha
+     // calculation of dR/d\zeta_\alpha
      for (unsigned alpha=0;alpha<2;alpha++)
       {
        // Product rule for d(u {\bf S} ) / d \zeta_\alpha

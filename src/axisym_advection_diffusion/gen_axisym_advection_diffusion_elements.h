@@ -44,6 +44,7 @@ namespace oomph
 {
 
 //=============================================================
+// DOXYERROR: the maths below is wrong somehow but I have no idea what it's supposed to be doing!
 /// \short A class for all elements that solve the Advection 
 /// Diffusion equations in conservative form using isoparametric elements
 /// in a cylindrical polar coordinate system.
