@@ -25,15 +25,14 @@
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 //LIC// 
 //LIC//====================================================================
-#ifndef OOMPH_FD_HH_TIME_HARMONIC_LIN_ELAST_HEADER
-#define OOMPH_FD_HH_TIME_HARMONIC_LIN_ELAST_HEADER
-
+#ifndef OOMPH_GEN_HH_TIME_HARMONIC_LIN_ELAST_HEADER
+#define OOMPH_GEN_HH_TIME_HARMONIC_LIN_ELAST_HEADER
 
 
 //Oomph-lib includes
 #include "generic.h"
-#include "fourier_decomposed_helmholtz.h"
-#include "time_harmonic_fourier_decomposed_linear_elasticity.h"
+#include "generalised_helmholtz.h"
+#include "time_harmonic_linear_elasticity.h"
 
 namespace oomph
 {
@@ -41,19 +40,19 @@ namespace oomph
 
 //======================================================================
 /// A class for elements that allow the imposition of an applied traction
-/// in the equations of time-harmonic linear elasticity from a Helmholtz 
-/// potential (interpreted as a displacement potential for the fluid in a 
-/// quasi-steady, linearised FSI problem.)
+/// in the equations of time-harmonic linear elasticity from a 
+/// GeneralisedHelmholtz potential (interpreted as a displacement potential 
+/// for the fluid in a  quasi-steady, linearised FSI problem.)
 /// The geometrical information can be read from the FaceGeometry<ELEMENT> 
-/// class and and thus, we can be generic enough without the need to have
+/// class and thus, we can be generic enough without the need to have
 /// a separate equations class.
 //======================================================================
  template <class ELASTICITY_BULK_ELEMENT, class HELMHOLTZ_BULK_ELEMENT>
- class FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement 
-  : public virtual FaceGeometry<ELASTICITY_BULK_ELEMENT>, 
-    public virtual FaceElement, 
-    public virtual ElementWithExternalElement
-  {
+ class TimeHarmonicLinElastLoadedByGeneralisedHelmholtzPressureBCElement : 
+  public virtual FaceGeometry<ELASTICITY_BULK_ELEMENT>, 
+  public virtual FaceElement, 
+  public virtual ElementWithExternalElement
+ {
   
  protected:
 
@@ -68,7 +67,7 @@ namespace oomph
   
   /// Index at which the i-th displacement component is stored
   Vector<std::complex<unsigned> > 
-   U_index_fourier_decomposed_time_harmonic_linear_elasticity_helmholtz_traction;
+   U_index_time_harmonic_linear_elasticity_helmholtz_traction;
   
   /// \short Helper function that actually calculates the residuals
   // This small level of indirection is required to avoid calling
@@ -81,21 +80,21 @@ namespace oomph
   
   /// \short Constructor, which takes a "bulk" element and the 
   /// value of the index and its limit
-  FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement(
+  TimeHarmonicLinElastLoadedByGeneralisedHelmholtzPressureBCElement(
    FiniteElement* const &element_pt, 
    const int &face_index) : 
   FaceGeometry<ELASTICITY_BULK_ELEMENT>(), FaceElement(), 
    Q_pt(&Default_Q_Value)
-    {
+    { 
 
     //Attach the geometrical information to the element. N.B. This function
     //also assigns nbulk_value from the required_nvalue of the bulk element
     element_pt->build_face_element(face_index,this);
-     
+    
 #ifdef PARANOID
     {
      //Check that the element is not a refineable 3d element
-     ELASTICITY_BULK_ELEMENT* elem_pt =
+     ELASTICITY_BULK_ELEMENT* elem_pt = 
       dynamic_cast<ELASTICITY_BULK_ELEMENT*>(element_pt);
      //If it's three-d
      if(elem_pt->dim()==3)
@@ -117,7 +116,8 @@ namespace oomph
 #endif
     
     // Set source element storage: one interaction with an external 
-    // element -- the Helmholtz bulk element that provides the pressure
+    // element -- the GeneralisedHelmholtz bulk element that provides 
+    // the pressure
     this->set_ninteraction(1); 
     
     //Find the dimension of the problem
@@ -126,12 +126,12 @@ namespace oomph
     //Find the index at which the displacement unknowns are stored
     ELASTICITY_BULK_ELEMENT* cast_element_pt = 
      dynamic_cast<ELASTICITY_BULK_ELEMENT*>(element_pt);
-    this->U_index_fourier_decomposed_time_harmonic_linear_elasticity_helmholtz_traction.
-     resize(n_dim+1);
-    for(unsigned i=0;i<n_dim+1;i++)
+    this->U_index_time_harmonic_linear_elasticity_helmholtz_traction.
+     resize(n_dim);
+    for(unsigned i=0;i<n_dim;i++)
      {
-      this->U_index_fourier_decomposed_time_harmonic_linear_elasticity_helmholtz_traction[i] = 
-       cast_element_pt->u_index_time_harmonic_fourier_decomposed_linear_elasticity(i);
+      this->U_index_time_harmonic_linear_elasticity_helmholtz_traction[i] = 
+       cast_element_pt->u_index_time_harmonic_linear_elasticity(i);
      }
    }
   
@@ -183,7 +183,7 @@ namespace oomph
     unsigned n_dim = this->nodal_dimension();
     
     // Storage for traction
-    Vector<std::complex<double> > traction(n_dim+1);
+    Vector<std::complex<double> > traction(n_dim);
 
     // Get FSI parameter
     const double q_value=q();
@@ -197,8 +197,11 @@ namespace oomph
     for(unsigned ipt=0;ipt<n_intpt;ipt++)
      {    
       Vector<double> s_int(n_dim-1);
-      s_int[0]=integral_pt()->knot(ipt,0);
-      
+      for (unsigned i=0;i<n_dim-1;i++)
+       {
+        s_int[i]=integral_pt()->knot(ipt,i);
+       }
+
       //Get the outer unit normal
       Vector<double> interpolated_normal(n_dim);
       outer_unit_normal(ipt,interpolated_normal);
@@ -207,32 +210,39 @@ namespace oomph
       Vector<double> zeta(1);
       interpolated_zeta(s_int,zeta);
 
-
-      // Get bulk element for potential
+      // Get external element for potential
       HELMHOLTZ_BULK_ELEMENT* ext_el_pt=
        dynamic_cast<HELMHOLTZ_BULK_ELEMENT*>(external_element_pt(0,ipt));
       Vector<double> s_ext(external_element_local_coord(0,ipt));
       std::complex<double> u_helmholtz=
-       ext_el_pt->interpolated_u_fourier_decomposed_helmholtz(s_ext);
+       ext_el_pt->interpolated_u_generalised_helmholtz(s_ext);
 
       // Traction: Pressure is proportional to POSITIVE potential
-      ext_el_pt->interpolated_u_fourier_decomposed_helmholtz(s_ext);
-      for(unsigned i=0;i<n_dim;i++)
-       {
-       traction[i]=-q_value*interpolated_normal[i]*u_helmholtz;
-       }
+      ext_el_pt->interpolated_u_generalised_helmholtz(s_ext);
+      traction[0]=-q_value*interpolated_normal[0]*u_helmholtz;
+      traction[1]=-q_value*interpolated_normal[1]*u_helmholtz;
     
       outfile << ext_el_pt->interpolated_x(s_ext,0) << " "
               << ext_el_pt->interpolated_x(s_ext,1) << " "
-              << traction[0] << " " 
-              << traction[1] << " " 
+              << traction[0].real() << " " 
+              << traction[1].real() << " " 
+              << traction[0].imag() << " " 
+              << traction[1].imag() << " " 
               << interpolated_normal[0] << " " 
               << interpolated_normal[1] << " " 
-              << u_helmholtz << " "
-              << zeta[0]   << std::endl;
+              << u_helmholtz.real() << " "
+              << u_helmholtz.imag() << " "
+              << interpolated_x(s_int,0) << " "
+              << interpolated_x(s_int,1) << " "
+              << sqrt(pow(ext_el_pt->interpolated_x(s_ext,0)-
+                          interpolated_x(s_int,0),2)+
+                      pow(ext_el_pt->interpolated_x(s_ext,1)-
+                          interpolated_x(s_int,1),2)) << " "
+              << zeta[0] << std::endl;
      }
    }
   
+
   /// \short C_style output function
   void output(FILE* file_pt)
    {FaceGeometry<ELASTICITY_BULK_ELEMENT>::output(file_pt);}
@@ -240,9 +250,247 @@ namespace oomph
   /// \short C-style output function
   void output(FILE* file_pt, const unsigned &n_plot)
    {FaceGeometry<ELASTICITY_BULK_ELEMENT>::output(file_pt,n_plot);}
- 
+
+  /// \short Compute the global_flux_contribution through the template 
+  /// elasticity elements : we compute u.n
+  std::complex<double> global_flux_contribution_from_solid()
+  {
+   // Dummy output file
+   std::ofstream outfile;
+   return global_flux_contribution_from_solid(outfile);
+  }
+  
+  /// \short  Compute the element's contribution to the integral of
+  /// the flux over the artificial boundary. Also output the
+  /// flux  in the specified output file if it's open.
+  std::complex<double> global_flux_contribution_from_solid
+   (std::ofstream& outfile)
+  {
+   // pointer to the corresponding elasticity bulk element
+   ELASTICITY_BULK_ELEMENT* bulk_elem_pt =
+    dynamic_cast<ELASTICITY_BULK_ELEMENT*>(this->bulk_element_pt());
+   
+   //get the dim of the bulk and local nodes
+   const unsigned bulk_dim= bulk_elem_pt->dim();
+   const unsigned local_dim=this->dim();
+   
+   //Set up memory for the outer unit normal
+   Vector<double> unit_normal(bulk_dim);
+   
+   //Set the value of n_intpt
+   const unsigned n_intpt = integral_pt()->nweight();
+   
+   //Set the Vector to hold local coordinates
+   Vector<double> s(local_dim);
+   std::complex<double> flux(0.0,0.0);
+   Vector<std::complex<double> > u(bulk_dim);
+     
+   // Output?
+   if (outfile.is_open())
+    {
+     outfile << "ZONE\n";
+    }
+
+   //Loop over the integration points
+   //--------------------------------
+   for(unsigned ipt=0;ipt<n_intpt;ipt++)
+    {
+     //Assign values of s
+     for(unsigned i=0;i<local_dim;i++)
+      {
+       s[i] = integral_pt()->knot(ipt,i);
+      }
+     //get the outer_unit_ext vector
+     this->outer_unit_normal(s,unit_normal);
+     
+     //Get the integral weight
+     double w = integral_pt()->weight(ipt);
+     
+     // Get jacobian of mapping
+     double J=J_eulerian(s);
+     
+     //Premultiply the weights and the Jacobian
+     double W = w*J;
+     
+     // Get local coordinates in bulk element by copy construction
+     Vector<double> s_bulk(local_coordinate_in_bulk(s));
+     
+     // Get the displacement from the bulk element
+     bulk_elem_pt->interpolated_u_time_harmonic_linear_elasticity(s_bulk,u);
+     
+     // Compute normal displacement u.n
+     std::complex<double> u_dot_n(0.0,0.0);
+     for(unsigned i=0;i<bulk_dim;i++)
+      {
+       u_dot_n += u[i]*unit_normal[i];
+      }
+     
+     // Output?
+     if (outfile.is_open())
+      {
+       Vector<double> x(bulk_dim);
+       interpolated_x(s,x);
+       outfile << x[0] << " "
+               << x[1] << " "
+               << u_dot_n.real() << " "
+               << u_dot_n.imag() << "\n";
+      }
+
+     // ...add to integral
+     flux+=u_dot_n*W;
+    }
+   
+   return  flux;
+  }
+
+
+ /// \short Compute the global_flux_contribution through the helmholtz
+ /// elements : we compute dphidn.n
+  std::complex<double> global_flux_contribution_from_helmholtz()
+   {   
+    // Dummy output file
+    std::ofstream outfile;
+    return global_flux_contribution_from_helmholtz(outfile);
+   }
+  
+  /// \short  Compute the element's contribution to the integral of 
+  /// the flux over the artificial boundary. Also output the
+  /// flux  in the specified output file if it's open.
+  std::complex<double> global_flux_contribution_from_helmholtz
+   (std::ofstream& outfile)
+  {      
+   // Get the dim of this element
+   const unsigned local_dim=this->dim();
+   
+   //Set the value of n_intpt
+   const unsigned n_intpt = integral_pt()->nweight();
+   
+   //Set the Vector to hold local coordinates
+   Vector<double> s(local_dim);
+   std::complex<double> flux(0.0,0.0);    
+   
+   // Output?
+   if (outfile.is_open())
+    {
+     outfile << "ZONE\n";
+    }
+
+   //Loop over the integration points
+   //--------------------------------
+   for(unsigned ipt=0;ipt<n_intpt;ipt++)
+    { 
+     //Assign values of s
+     for(unsigned i=0;i<local_dim;i++)
+      {
+       s[i] = integral_pt()->knot(ipt,i);
+      }
+
+      // Get local coordinates in bulk element by copy construction
+      Vector<double> s_bulk(local_coordinate_in_bulk(s));
+
+      // Get external element for potential
+      HELMHOLTZ_BULK_ELEMENT* ext_el_pt=
+       dynamic_cast<HELMHOLTZ_BULK_ELEMENT*>(external_element_pt(0,ipt));
+
+      // number of nodes in ext element
+      unsigned nnode_ext=ext_el_pt->nnode();
+
+      // get the dim of the external nodes
+      const unsigned ext_dim=ext_el_pt->dim();
+
+      // Set up memory for the external shape function
+      Shape psi_ext(nnode_ext);
+      DShape dpsi_ext_dx(nnode_ext,ext_dim);
+         
+      //Call the derivatives of the shape  functions
+      //in the external element -- must do this via s because this point
+      //is not an integration point the bulk element!
+      (void) ext_el_pt->dshape_eulerian(s_bulk,psi_ext,dpsi_ext_dx);
+
+      //Set up memory for the outer unit normal
+      Vector<double> unit_normal(ext_dim);  
+
+     //get the outer_unit_ext vector      
+     this->outer_unit_normal(s,unit_normal); 
+     
+     //Get the integral weight
+     double w = integral_pt()->weight(ipt);
+     
+     // Get jacobian of mapping
+     double J=J_eulerian(s);
+     
+     //Premultiply the weights and the Jacobian
+     double W = w*J;
+
+     // Global gradient
+     Vector<std::complex <double> > 
+      interpolated_dphidx(ext_dim,std::complex<double>(0.0,0.0));
+     for(unsigned l=0;l<nnode_ext;l++) 
+      {
+       //Get the nodal value of the helmholtz unknown
+       const std::complex<double> phi_value(
+        ext_el_pt->nodal_value(l,ext_el_pt->u_index_helmholtz().real()),
+        ext_el_pt->nodal_value(l,ext_el_pt->u_index_helmholtz().imag()));
+       
+       //Loop over directions
+       for(unsigned i=0;i<ext_dim;i++)
+        {
+         interpolated_dphidx[i] += phi_value*dpsi_ext_dx(l,i);
+        }
+      } 
+
+     //define dphi_dn 
+     std::complex<double> dphi_dn(0.0,0.0);
+     for(unsigned i=0;i<ext_dim;i++)
+      {
+       dphi_dn += interpolated_dphidx[i]*unit_normal[i];
+      }
+
+
+#ifdef PARANOID
+     double max_permitted_discrepancy=1.0e-10;
+     double diff=sqrt(pow(ext_el_pt->interpolated_x(s_bulk,0)-
+                            interpolated_x(s,0),2)+
+                        pow(ext_el_pt->interpolated_x(s_bulk,1)-
+                            interpolated_x(s,1),2));
+     if (diff>max_permitted_discrepancy)
+      {
+       std::ostringstream error_stream; 
+       error_stream 
+        << "Position computed by exernal el and face element differ by ";
+       << diff << " which is more than the acceptable tolerance "
+       << max_permitted_discrepancy << std::endl;
+       throw OomphLibError(
+        error_stream.str(),
+        OOMPH_CURRENT_FUNCTION,
+        OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+
+     // Output?
+     if (outfile.is_open())
+      {
+       Vector<double> x(ext_dim);
+       interpolated_x(s,x);
+       outfile << x[0] << " "
+               << x[1] << " "
+               << dphi_dn.real() << " " 
+               << dphi_dn.imag() << " " 
+               << "\n";
+      }
+
+     // ...add to integral
+     flux+=dphi_dn*W;
+    }  
+   
+   return  flux;
+  }
+
+
+
  }; 
  
+
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
@@ -250,11 +498,11 @@ namespace oomph
  
 
 //=================================================================
-/// Static default value for the ratio of stress scales
+/// Static default value for the ragoogletio of stress scales
 /// used in the fluid and solid equations (default is 1.0)
 //=================================================================
 template <class ELASTICITY_BULK_ELEMENT, class HELMHOLTZ_BULK_ELEMENT>
-double FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement<
+double TimeHarmonicLinElastLoadedByGeneralisedHelmholtzPressureBCElement<
   ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT>::Default_Q_Value=1.0;
  
  
@@ -262,7 +510,7 @@ double FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement<
 /// Return the residuals
 //=====================================================================
  template <class ELASTICITY_BULK_ELEMENT, class HELMHOLTZ_BULK_ELEMENT>
- void FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement<
+ void TimeHarmonicLinElastLoadedByGeneralisedHelmholtzPressureBCElement<
   ELASTICITY_BULK_ELEMENT, HELMHOLTZ_BULK_ELEMENT>::
  fill_in_contribution_to_residuals_helmholtz_traction(
   Vector<double> &residuals)
@@ -287,11 +535,11 @@ double FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement<
   unsigned n_dim = this->nodal_dimension();
   
   //Cache the nodal indices at which the displacement components are stored
-  std::complex<unsigned> u_nodal_index[n_dim+1];
-  for(unsigned i=0;i<n_dim+1;i++)
+  std::complex<unsigned> u_nodal_index[n_dim];
+  for(unsigned i=0;i<n_dim;i++)
    {
     u_nodal_index[i] = 
-     this->U_index_fourier_decomposed_time_harmonic_linear_elasticity_helmholtz_traction[i];
+     this->U_index_time_harmonic_linear_elasticity_helmholtz_traction[i];
    }
   
   //Integer to hold the local equation number
@@ -305,7 +553,7 @@ double FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement<
   const double q_value=q();
 
   // Storage for traction
-  Vector<std::complex<double> > traction(n_dim+1);
+  Vector<std::complex<double> > traction(2);
 
   //Set the value of n_intpt
   unsigned n_intpt = integral_pt()->nweight();
@@ -321,7 +569,7 @@ double FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement<
     
     //Calculate the coordinates
     Vector<double> interpolated_x(n_dim,0.0);
-
+    
     //Also calculate the surface tangent vectors
     DenseMatrix<double> interpolated_A(n_dim-1,n_dim,0.0);   
     
@@ -342,9 +590,6 @@ double FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement<
          }
        }
      }
-
-    //First component for the residuals
-    double r=interpolated_x[0];
     
     //Now find the local metric tensor from the tangent Vectors
     DenseMatrix<double> A(n_dim-1);
@@ -381,7 +626,7 @@ double FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement<
       throw 
        OomphLibError(
         "Wrong dimension in TimeHarmonicLinElastLoadedByPressureElement",
-        "TimeHarmonicLinElastLoadedByPressureElement::fill_in_contribution_to_residuals()",
+        OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
      }
     
@@ -395,16 +640,16 @@ double FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement<
     Vector<double> s_ext(external_element_local_coord(0,ipt));
 
     // Traction: Pressure is proportional to POSITIVE potential
-    std::complex<double> u_helmholtz=ext_el_pt->interpolated_u_fourier_decomposed_helmholtz(s_ext);
-    for(unsigned i=0;i<n_dim;i++)
-     {
-    traction[i]=-q_value*interpolated_normal[i]*u_helmholtz;
-     }
+    std::complex<double> u_helmholtz=ext_el_pt->
+     interpolated_u_generalised_helmholtz(s_ext);
+    traction[0]=-q_value*interpolated_normal[0]*u_helmholtz;
+    traction[1]=-q_value*interpolated_normal[1]*u_helmholtz;
+
     //Loop over the test functions, nodes of the element
     for(unsigned l=0;l<n_node;l++)
      {
       //Loop over the displacement components
-      for(unsigned i=0;i<n_dim+1;i++)
+      for(unsigned i=0;i<n_dim;i++)
        {
 
         local_eqn = this->nodal_local_eqn(l,u_nodal_index[i].real());
@@ -412,7 +657,7 @@ double FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement<
         if(local_eqn >= 0)
          {
           //Add the loading terms to the residuals
-          residuals[local_eqn] -= traction[i].real()*psi(l)*r*W;
+          residuals[local_eqn] -= traction[i].real()*psi(l)*W;
          }
 
         local_eqn = this->nodal_local_eqn(l,u_nodal_index[i].imag());
@@ -420,7 +665,7 @@ double FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement<
         if(local_eqn >= 0)
          {
           //Add the loading terms to the residuals
-          residuals[local_eqn] -= traction[i].imag()*psi(l)*r*W;
+          residuals[local_eqn] -= traction[i].imag()*psi(l)*W;
          }
 
        } //End of if not boundary condition
@@ -431,9 +676,10 @@ double FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement<
 
 
 
-/////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 
 
 
@@ -447,7 +693,7 @@ double FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement<
 /// policy class.
 //======================================================================
  template <class HELMHOLTZ_BULK_ELEMENT, class ELASTICITY_BULK_ELEMENT>
- class FourierDecomposedHelmholtzFluxFromNormalDisplacementBCElement : 
+ class GeneralisedHelmholtzFluxFromNormalDisplacementBCElement : 
   public virtual FaceGeometry<HELMHOLTZ_BULK_ELEMENT>, 
   public virtual FaceElement, 
   public virtual ElementWithExternalElement
@@ -458,24 +704,24 @@ double FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement<
   
   /// \short Constructor, takes the pointer to the "bulk" element and the 
   /// face index identifying the face to which the element is attached.
-  FourierDecomposedHelmholtzFluxFromNormalDisplacementBCElement(
+  GeneralisedHelmholtzFluxFromNormalDisplacementBCElement(
    FiniteElement* const &bulk_el_pt,
    const int& face_index); 
   
   /// Broken copy constructor
-  FourierDecomposedHelmholtzFluxFromNormalDisplacementBCElement(
-   const FourierDecomposedHelmholtzFluxFromNormalDisplacementBCElement& dummy) 
+  GeneralisedHelmholtzFluxFromNormalDisplacementBCElement(
+   const GeneralisedHelmholtzFluxFromNormalDisplacementBCElement& dummy) 
    { 
-    BrokenCopy::broken_copy(
-     "FourierDecomposedHelmholtzFluxFromNormalDisplacementBCElement");
+    BrokenCopy::broken_copy
+     ("GeneralisedHelmholtzFluxFromNormalDisplacementBCElement");
    } 
   
   /// Broken assignment operator
-  void operator=(
-   const FourierDecomposedHelmholtzFluxFromNormalDisplacementBCElement&) 
+  void operator=(const 
+                 GeneralisedHelmholtzFluxFromNormalDisplacementBCElement&) 
    {
-    BrokenCopy::broken_assign(
-     "FourierDecomposedHelmholtzFluxFromNormalDisplacementBCElement");
+    BrokenCopy::broken_assign
+     ("GeneralisedHelmholtzFluxFromNormalDisplacementBCElement");
    }
   
   
@@ -537,12 +783,14 @@ double FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement<
       
       Vector<double> zeta(1);
       interpolated_zeta(s_int,zeta);
+      
       // Get displacements
-      ELASTICITY_BULK_ELEMENT* ext_el_pt=dynamic_cast<ELASTICITY_BULK_ELEMENT*>(
+      ELASTICITY_BULK_ELEMENT* ext_el_pt=
+       dynamic_cast<ELASTICITY_BULK_ELEMENT*>(
        external_element_pt(0,ipt));
       Vector<double> s_ext(external_element_local_coord(0,ipt));
-      Vector<std::complex<double> > displ(Dim+1);
-      ext_el_pt->interpolated_u_time_harmonic_fourier_decomposed_linear_elasticity(s_ext,displ);
+      Vector<std::complex<double> > displ(2);
+      ext_el_pt->interpolated_u_time_harmonic_linear_elasticity(s_ext,displ);
       
       // Convert into flux BC: This takes the dot product of the
       // actual displacement with the flux element's own outer
@@ -553,11 +801,20 @@ double FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement<
       // Output
       outfile << ext_el_pt->interpolated_x(s_ext,0) << " "
               << ext_el_pt->interpolated_x(s_ext,1) << " "
-              << flux*interpolated_normal[0] << " " 
-              << flux*interpolated_normal[1] << " " 
+              << flux.real()*interpolated_normal[0] << " " 
+              << flux.real()*interpolated_normal[1] << " " 
+              << flux.imag()*interpolated_normal[0] << " " 
+              << flux.imag()*interpolated_normal[1] << " " 
               << interpolated_normal[0] << " " 
               << interpolated_normal[1] << " " 
-              << flux << " "
+              << flux.real() << " "
+              << flux.imag() << " "
+              << interpolated_x(s_int,0) << " "
+              << interpolated_x(s_int,1) << " "
+              << sqrt(pow(ext_el_pt->interpolated_x(s_ext,0)-
+                          interpolated_x(s_int,0),2)+
+                      pow(ext_el_pt->interpolated_x(s_ext,1)-
+                          interpolated_x(s_int,1),2)) << " "
               << zeta[0] << std::endl;
      }
    }
@@ -578,7 +835,8 @@ double FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement<
   /// \short Function to compute the shape and test functions and to return 
   /// the Jacobian of mapping between local and global (Eulerian)
   /// coordinates
-  inline double shape_and_test(const Vector<double> &s, Shape &psi, Shape &test)
+  inline double shape_and_test(const Vector<double> &s, Shape &psi, 
+                               Shape &test)
    const
    {
     //Find number of nodes
@@ -648,74 +906,136 @@ double FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement<
 /// this face element is to be attached.
 //===========================================================================
  template <class HELMHOLTZ_BULK_ELEMENT, class ELASTICITY_BULK_ELEMENT>
- FourierDecomposedHelmholtzFluxFromNormalDisplacementBCElement
+ GeneralisedHelmholtzFluxFromNormalDisplacementBCElement
  <HELMHOLTZ_BULK_ELEMENT, ELASTICITY_BULK_ELEMENT>::
- FourierDecomposedHelmholtzFluxFromNormalDisplacementBCElement(
+ GeneralisedHelmholtzFluxFromNormalDisplacementBCElement(
   FiniteElement* const &bulk_el_pt, 
   const int &face_index) : 
   FaceGeometry<HELMHOLTZ_BULK_ELEMENT>(), FaceElement()
-   { 
-
-    // Let the bulk element build the FaceElement, i.e. setup the pointers 
-    // to its nodes (by referring to the appropriate nodes in the bulk
-    // element), etc.
-    bulk_el_pt->build_face_element(face_index,this);
-    
+  { 
+   
+   // Let the bulk element build the FaceElement, i.e. setup the pointers 
+   // to its nodes (by referring to the appropriate nodes in the bulk
+   // element), etc.
+   bulk_el_pt->build_face_element(face_index,this);
+   
 #ifdef PARANOID
-    {
-     //Check that the element is not a refineable 3d element
-     HELMHOLTZ_BULK_ELEMENT* elem_pt = 
-      dynamic_cast<HELMHOLTZ_BULK_ELEMENT*>(bulk_el_pt);
-     //If it's three-d
-     if(elem_pt->dim()==3)
-      {
-       //Is it refineable
-       RefineableElement* ref_el_pt=dynamic_cast<RefineableElement*>(elem_pt);
-       if(ref_el_pt!=0)
-        {
-         if (this->has_hanging_nodes())
-          {
-           throw OomphLibError(
-            "This flux element will not work correctly if nodes are hanging\n",
-            OOMPH_CURRENT_FUNCTION,
-            OOMPH_EXCEPTION_LOCATION);
-          }
-        }
-      }
-    }
+   {
+    //Check that the element is not a refineable 3d element
+    HELMHOLTZ_BULK_ELEMENT* elem_pt = 
+     dynamic_cast<HELMHOLTZ_BULK_ELEMENT*>(bulk_el_pt);
+    //If it's three-d
+    if(elem_pt->dim()==3)
+     {
+      //Is it refineable
+      RefineableElement* ref_el_pt=dynamic_cast<RefineableElement*>(elem_pt);
+      if(ref_el_pt!=0)
+       {
+        if (this->has_hanging_nodes())
+         {
+          throw OomphLibError(
+           "This flux element will not work correctly if nodes are hanging\n",
+           OOMPH_CURRENT_FUNCTION,
+           OOMPH_EXCEPTION_LOCATION);
+         }
+       }
+     }
+   }
 #endif   
-  
+   
   // Set source element storage: one interaction with an external element
   // that provides the displacement of the adjacent linear elasticity 
   // element
   this->set_ninteraction(1); 
   
-  
   // Extract the dimension of the problem from the dimension of 
   // the first node
-  Dim = bulk_el_pt->nodal_dimension();//this->node_pt(0)->ndim();// icidav
+  Dim = this->node_pt(0)->ndim();
   
   //Set up U_index_helmholtz_displacement. Initialise to zero, which 
   // probably won't change in most cases, oh well, the price we 
   // pay for generality
   U_index_helmholtz_from_displacement = std::complex<unsigned>(0,0);
   
-  //Cast to the appropriate HelmholtzEquation so that we can
+  //Cast to the appropriate GeneralisedHelmholtzEquation so that we can
   //find the index at which the variable is stored
   //We assume that the dimension of the full problem is the same
   //as the dimension of the node, if this is not the case you will have
   //to write custom elements, sorry
-   
-    FourierDecomposedHelmholtzEquations* eqn_pt = 
-     dynamic_cast<FourierDecomposedHelmholtzEquations*>(bulk_el_pt);
+  switch(Dim)
+   {
+    //One dimensional problem
+   case 1:
+   {
+    GeneralisedHelmholtzEquations<1>* eqn_pt = 
+     dynamic_cast<GeneralisedHelmholtzEquations<1>*>(bulk_el_pt);
     //If the cast has failed die
     if(eqn_pt==0)
      {
       std::string error_string =
-       "Bulk element must inherit from HelmholtzEquations.";
+       "Bulk element must inherit from GeneralisedHelmholtzEquations.";
+      error_string += 
+       "Nodes are one dimensional, but cannot cast the bulk element to\n";
+      error_string += "GeneralisedHelmholtzEquations<1>\n.";
+      error_string += 
+       "If you desire this functionality, you must implement it yourself\n";
+      
+      throw OomphLibError(
+       error_string,
+       OOMPH_CURRENT_FUNCTION,
+       OOMPH_EXCEPTION_LOCATION);
+     }
+    //Otherwise read out the value
+    else
+     {
+      //Read the index from the (cast) bulk element
+      U_index_helmholtz_from_displacement = eqn_pt->u_index_helmholtz();
+     }
+   }
+   break;
+   
+   //Two dimensional problem
+   case 2:
+   {
+    GeneralisedHelmholtzEquations<2>* eqn_pt = 
+     dynamic_cast<GeneralisedHelmholtzEquations<2>*>(bulk_el_pt);
+    //If the cast has failed die
+    if(eqn_pt==0)
+     {
+      std::string error_string =
+       "Bulk element must inherit from GeneralisedHelmholtzEquations.";
+      error_string += 
+       "Nodes are two dimensional, but cannot cast the bulk element to\n";
+      error_string += "GeneralisedHelmholtzEquations<2>\n.";
+      error_string += 
+       "If you desire this functionality, you must implement it yourself\n";
+      
+      throw OomphLibError(
+       error_string,
+       OOMPH_CURRENT_FUNCTION,
+       OOMPH_EXCEPTION_LOCATION);
+     }
+    else
+     {
+      //Read the index from the (cast) bulk element.
+      U_index_helmholtz_from_displacement = eqn_pt->u_index_helmholtz();
+     }
+   }
+   break;
+   
+   //Three dimensional problem
+   case 3:
+   {
+    GeneralisedHelmholtzEquations<3>* eqn_pt = 
+     dynamic_cast<GeneralisedHelmholtzEquations<3>*>(bulk_el_pt);
+    //If the cast has failed die
+    if(eqn_pt==0)
+     {
+      std::string error_string =
+       "Bulk element must inherit from GeneralisedHelmholtzEquations.";
       error_string += 
        "Nodes are three dimensional, but cannot cast the bulk element to\n";
-      error_string += "HelmholtzEquations<3>\n.";
+      error_string += "GeneralisedHelmholtzEquations<3>\n.";
       error_string += 
        "If you desire this functionality, you must implement it yourself\n";
       
@@ -728,10 +1048,24 @@ double FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement<
     else
      {
       //Read the index from the (cast) bulk element.
-      U_index_helmholtz_from_displacement = eqn_pt->u_index_fourier_decomposed_helmholtz();
+      U_index_helmholtz_from_displacement = eqn_pt->u_index_helmholtz();
      }
+   }
+   break;
    
-   
+   //Any other case is an error
+   default:
+    std::ostringstream error_stream; 
+    error_stream 
+     <<  "Dimension of node is " << Dim 
+     << ". It should be 1,2, or 3!" << std::endl;
+    
+    throw OomphLibError(
+     error_stream.str(),
+     OOMPH_CURRENT_FUNCTION,
+     OOMPH_EXCEPTION_LOCATION);
+    break;
+   }
  }
  
  
@@ -740,7 +1074,7 @@ double FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement<
 /// the Jacobian matrix.
 //===========================================================================
  template <class HELMHOLTZ_BULK_ELEMENT, class ELASTICITY_BULK_ELEMENT>
- void FourierDecomposedHelmholtzFluxFromNormalDisplacementBCElement
+ void GeneralisedHelmholtzFluxFromNormalDisplacementBCElement
  <HELMHOLTZ_BULK_ELEMENT,ELASTICITY_BULK_ELEMENT>::
  fill_in_generic_residual_contribution_helmholtz_flux_from_displacement(
   Vector<double> &residuals, DenseMatrix<double> &jacobian, 
@@ -796,18 +1130,16 @@ double FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement<
        }
      }
     
-    //first component
-    double r = interpolated_x[0];
     //Get the outer unit normal
-    Vector<double> interpolated_normal(Dim);
+    Vector<double> interpolated_normal(2);
     outer_unit_normal(ipt,interpolated_normal);
     
     // Get displacements
     ELASTICITY_BULK_ELEMENT* ext_el_pt=dynamic_cast<ELASTICITY_BULK_ELEMENT*>(
      external_element_pt(0,ipt));
     Vector<double> s_ext(external_element_local_coord(0,ipt));
-    Vector<std::complex<double> > displ(Dim+1);
-    ext_el_pt->interpolated_u_time_harmonic_fourier_decomposed_linear_elasticity(s_ext,displ);
+    Vector<std::complex<double> > displ(2);
+    ext_el_pt->interpolated_u_time_harmonic_linear_elasticity(s_ext,displ);
     
     // Convert into flux BC: This takes the dot product of the
     // actual displacement with the flux element's own outer
@@ -825,7 +1157,7 @@ double FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement<
       if(local_eqn >= 0)
        {
         //Add the prescribed flux terms
-        residuals[local_eqn] -= flux.real()*testf[l]*r*W;
+        residuals[local_eqn] -= flux.real()*testf[l]*W;
         
         // Imposed traction doesn't depend upon the solution, 
         // --> the Jacobian is always zero, so no Jacobian
@@ -837,7 +1169,7 @@ double FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement<
       if(local_eqn >= 0)
        {
         //Add the prescribed flux terms
-        residuals[local_eqn] -= flux.imag()*testf[l]*r*W;
+        residuals[local_eqn] -= flux.imag()*testf[l]*W;
         
         // Imposed traction doesn't depend upon the solution, 
         // --> the Jacobian is always zero, so no Jacobian
@@ -847,6 +1179,5 @@ double FourierDecomposedTimeHarmonicLinElastLoadedByHelmholtzPressureBCElement<
    }
  }
 }
-
 
 #endif

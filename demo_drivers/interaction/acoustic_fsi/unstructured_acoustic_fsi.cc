@@ -760,7 +760,7 @@ actions_after_adapt()
 
 
 
-//=====================start_of_actions_after_adapt=======================
+//=====================start_of_complete_problem_setup=======================
 /// Complete problem setup: Apply boundary conditions and set
 /// physical properties
 //========================================================================

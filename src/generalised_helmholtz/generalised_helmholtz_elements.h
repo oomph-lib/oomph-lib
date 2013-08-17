@@ -1551,8 +1551,6 @@ OOMPH_CURRENT_FUNCTION,
  unsigned self_test();
 
 
-protected:
-
 /// \short Compute pml coefficients at position x and integration point ipt
  void compute_pml_coefficients(
   const unsigned& ipt,
@@ -1623,6 +1621,7 @@ protected:
 
  }
 
+protected:
 
  /// \short Shape/test functions and derivs w.r.t. to global coords at 
  /// local coord. s; return  Jacobian of mapping

@@ -1071,8 +1071,7 @@ class TriangleMeshParameters
     input_string_stream.precision(14);
     input_string_stream.setf(std::ios_base::fixed, 
                              std::ios_base::floatfield);
-    
-    input_string_stream<<"-pA -a" << element_area << " -q30";
+    input_string_stream<<"-pA -a" << element_area << " -q30" << std::fixed;
     
     //Suppress insertion of additional points on outer boundary
     if(refine_boundary==false) 

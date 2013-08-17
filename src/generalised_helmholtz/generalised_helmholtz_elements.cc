@@ -1343,11 +1343,11 @@ fill_in_generic_residual_contribution_helmholtz(Vector<double> &residuals,
    // Declare a complex number for pml weights on the mass matrix bit
    std::complex<double> pml_mass_weight = std::complex<double>(1.0,0.0);
 
-   /// \short All the PML weights that participate in the assemby process 
-   /// are computed here. pml_stiffness_weight will contain the entries
-   /// for the Laplace bit, while pml_mass_weight contains the contributions
-   /// to the Helmholtz bit. Both default to 1.0, should the PML not be 
-   /// enabled via enable_pml.
+   // All the PML weights that participate in the assemby process 
+   // are computed here. pml_stiffness_weight will contain the entries
+   // for the Laplace bit, while pml_mass_weight contains the contributions
+   // to the Helmholtz bit. Both default to 1.0, should the PML not be 
+   // enabled via enable_pml.
    compute_pml_coefficients(ipt, interpolated_x, 
                             pml_stiffness_weight, 
                             pml_mass_weight); 

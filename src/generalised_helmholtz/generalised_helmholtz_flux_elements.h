@@ -188,7 +188,8 @@ public:
      
      // Derivs of Eulerian coordinates w.r.t. local coordinates
      std::complex<double>  dphi_dn(0.0,0.0);
-     Vector<std::complex <double> > interpolated_dphidx(bulk_dim);
+     Vector<std::complex <double> > 
+      interpolated_dphidx(bulk_dim,std::complex<double>(0.0,0.0));
      std::complex<double> interpolated_phi(0.0,0.0);
      Vector<double> x(bulk_dim);
 
@@ -285,7 +286,7 @@ public:
    DShape dpsi_bulk_dx(nnode_bulk,bulk_dim);
    
    //Set up memory for the outer unit normal
-   Vector< double > unit_normal(bulk_dim);    
+   Vector<double> unit_normal(bulk_dim);    
    
    //Set the value of n_intpt
    const unsigned n_intpt = integral_pt()->nweight();
@@ -332,7 +333,8 @@ public:
      
      // Derivs of Eulerian coordinates w.r.t. local coordinates
      std::complex<double>  dphi_dn(0.0,0.0);
-     Vector<std::complex <double> > interpolated_dphidx(bulk_dim);
+     Vector<std::complex <double> > 
+      interpolated_dphidx(bulk_dim,std::complex<double>(0.0,0.0));
      Vector<double> x(bulk_dim);
 
      //Calculate function value and derivatives:
