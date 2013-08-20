@@ -13,6 +13,6 @@ foeppl_von_karman \
 axisym_foeppl_von_karman \
 generalised_helmholtz \
 axisym_linear_elasticity \
-darcy
-
+darcy \
+generalised_time_harmonic_linear_elasticity
 

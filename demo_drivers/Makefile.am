@@ -44,7 +44,8 @@ axisym_foeppl_von_karman \
 generalised_helmholtz \
 axisym_linear_elasticity \
 homogenisation \
-darcy
+darcy \
+generalised_time_harmonic_linear_elasticity
 if WANT_MPI
 SUBDIRS += mpi
 endif

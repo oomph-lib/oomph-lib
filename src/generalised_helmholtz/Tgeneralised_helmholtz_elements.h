@@ -312,6 +312,52 @@ class FaceGeometry<TGeneralisedHelmholtzElement<1,NNODE_1D> >:
 };
 
 
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+//=======================================================================
+/// Policy class defining the elements to be used in the actual
+/// PML layers. It's the corresponding quads.
+//=======================================================================
+  template<unsigned NNODE_1D> //veziaici
+class PMLLayerElement<TGeneralisedHelmholtzElement<2,NNODE_1D> > : 
+ public virtual QGeneralisedHelmholtzElement<2,NNODE_1D>
+{
+
+  public:
+ 
+ /// \short Constructor: Call the constructor for the
+ /// appropriate QElement
+ PMLLayerElement(): QGeneralisedHelmholtzElement<2,NNODE_1D>() 
+  {}
+
+};
+
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+//=======================================================================
+/// Policy class defining the elements to be used in the actual
+/// PML layers. It's the corresponding quads.
+//=======================================================================
+  template<unsigned NNODE_1D> //veziaici
+class PMLLayerElement<ProjectableGeneralisedHelmholtzElement
+   <TGeneralisedHelmholtzElement<2,NNODE_1D> > > : 
+ public virtual QGeneralisedHelmholtzElement<2,NNODE_1D>
+{
+
+  public:
+ 
+ /// \short Constructor: Call the constructor for the
+ /// appropriate QElement
+ PMLLayerElement(): QGeneralisedHelmholtzElement<2,NNODE_1D>() 
+  {}
+
+};
+
 }
+
 
 #endif

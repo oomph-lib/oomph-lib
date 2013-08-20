@@ -179,7 +179,7 @@ void LinearElasticityEquations<DIM>::get_stress(const Vector<double> &s,
      stress(i,j) = 0.0;
      for (unsigned k=0;k<DIM;k++)
       {
-       for (unsigned l=0;k<DIM;k++)
+       for (unsigned l=0;l<DIM;l++)
         {
          stress(i,j)+=this->E(i,j,k,l)*strain(k,l);
         }

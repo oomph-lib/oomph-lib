@@ -323,6 +323,10 @@ PMLProblem<ELEMENT>::PMLProblem()
 
  // Build the entire mesh from its submeshes
  build_global_mesh();
+
+ // Let's have a look where the boundaries are
+ this->mesh_pt()->output("global_mesh.dat");
+ this->mesh_pt()->output_boundaries("global_mesh_boundary.dat");
  
  // Complete the build of all elements so they are fully functional
  unsigned n_element = this->mesh_pt()->nelement();
@@ -555,22 +559,26 @@ void PMLProblem<ELEMENT>::create_pml_meshes()
  double width_y_bottom_pml = 0.2;
  
  // Build the PML meshes based on the new adapted triangular mesh
- PML_right_mesh_pt = PMLHelper::create_right_pml_mesh(Bulk_mesh_pt,
-                                                      right_boundary_id, 
-                                                      n_x_right_pml, 
-                                                      width_x_right_pml);
- PML_top_mesh_pt   = PMLHelper::create_top_pml_mesh(Bulk_mesh_pt,
-                                                    top_boundary_id, 
-                                                    n_y_top_pml, 
-                                                    width_y_top_pml);
- PML_left_mesh_pt  = PMLHelper::create_left_pml_mesh(Bulk_mesh_pt,
-                                                     left_boundary_id, 
-                                                     n_x_left_pml, 
-                                                     width_x_left_pml);
- PML_bottom_mesh_pt= PMLHelper::create_bottom_pml_mesh(Bulk_mesh_pt,
-                                                       bottom_boundary_id, 
-                                                       n_y_bottom_pml, 
-                                                       width_y_bottom_pml);
+ PML_right_mesh_pt = 
+  TwoDimensionalPMLHelper::create_right_pml_mesh
+  <PMLLayerElement<ELEMENT> >
+  (Bulk_mesh_pt,right_boundary_id, 
+   n_x_right_pml, width_x_right_pml);
+ PML_top_mesh_pt   = 
+  TwoDimensionalPMLHelper::create_top_pml_mesh
+  <PMLLayerElement<ELEMENT> >
+  (Bulk_mesh_pt, top_boundary_id, 
+   n_y_top_pml, width_y_top_pml);
+ PML_left_mesh_pt  = 
+  TwoDimensionalPMLHelper::create_left_pml_mesh
+  <PMLLayerElement<ELEMENT> >
+  (Bulk_mesh_pt, left_boundary_id, 
+   n_x_left_pml, width_x_left_pml);
+ PML_bottom_mesh_pt= 
+  TwoDimensionalPMLHelper::create_bottom_pml_mesh
+  <PMLLayerElement<ELEMENT> >
+  (Bulk_mesh_pt, bottom_boundary_id, 
+   n_y_bottom_pml, width_y_bottom_pml);
  
  // Add submeshes to the global mesh
  add_sub_mesh(PML_right_mesh_pt);
@@ -580,28 +588,28 @@ void PMLProblem<ELEMENT>::create_pml_meshes()
  
  // Rebuild corner PML meshes
  PML_top_right_mesh_pt    = 
-  PMLHelper::create_top_right_pml_mesh(PML_right_mesh_pt, 
-                                       PML_top_mesh_pt, 
-                                       Bulk_mesh_pt,
-                                       right_boundary_id);
+  TwoDimensionalPMLHelper::create_top_right_pml_mesh
+  <PMLLayerElement<ELEMENT> >
+  (PML_right_mesh_pt, PML_top_mesh_pt, 
+   Bulk_mesh_pt, right_boundary_id);
  
  PML_bottom_right_mesh_pt = 
-  PMLHelper::create_bottom_right_pml_mesh(PML_right_mesh_pt, 
-                                          PML_bottom_mesh_pt, 
-                                          Bulk_mesh_pt,
-                                          right_boundary_id);
+  TwoDimensionalPMLHelper::create_bottom_right_pml_mesh
+  <PMLLayerElement<ELEMENT> >
+  (PML_right_mesh_pt, PML_bottom_mesh_pt, 
+   Bulk_mesh_pt, right_boundary_id);
  
  PML_top_left_mesh_pt     = 
-  PMLHelper::create_top_left_pml_mesh(PML_left_mesh_pt, 
-                                      PML_top_mesh_pt, 
-                                      Bulk_mesh_pt,
-                                      left_boundary_id);
+  TwoDimensionalPMLHelper::create_top_left_pml_mesh
+  <PMLLayerElement<ELEMENT> >
+  (PML_left_mesh_pt, PML_top_mesh_pt, 
+   Bulk_mesh_pt, left_boundary_id);
  
  PML_bottom_left_mesh_pt  = 
-  PMLHelper::create_bottom_left_pml_mesh(PML_left_mesh_pt, 
-                                         PML_bottom_mesh_pt, 
-                                         Bulk_mesh_pt,
-                                         left_boundary_id);
+  TwoDimensionalPMLHelper::create_bottom_left_pml_mesh
+  <PMLLayerElement<ELEMENT> >
+  (PML_left_mesh_pt, PML_bottom_mesh_pt, 
+   Bulk_mesh_pt, left_boundary_id);
  
  // Add submeshes to the global mesh
  add_sub_mesh(PML_top_right_mesh_pt);

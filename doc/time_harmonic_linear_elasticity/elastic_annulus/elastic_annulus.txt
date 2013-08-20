@@ -174,7 +174,7 @@ finite element.
 All the constitutive parameters are real. The two
 components of the displacement field have a real and imaginary part.
 We store the four real-valued nodal unknowns in the order
-\f$ {\rm Re}\{u_x\}, {\rm Re}\{u_y\}, {\rm Im}\{u_x\}, {\rm Re}\{u_y\}
+\f$ {\rm Re}\{u_x\}, {\rm Re}\{u_y\}, {\rm Im}\{u_x\}, {\rm Im}\{u_y\}
 \f$ and use the shape functions to interpolate the displacements as
 <CENTER>
 \f[
@@ -309,36 +309,39 @@ elements in the mesh.
 
 \section main The driver code
 
-We start by defining command line arguments which specify the
-number of elements in the mesh and indicate the presence or absence of the
-"gap" in the coating. 
+The code is built to perform parameter studies on the length/width
+attributed to the perfectly matched layers, as well as the number of
+elements they are built on. The first step is to start timing the code
+and proceed with reading in the command line arguments, from which the
+global parameters are adjusted.
 
-\dontinclude time_harmonic_elastic_annulus.cc
+\dontinclude time_harmonic_elasticity_driver.cc
 \skipline start_of_main
-\until --have_gap
+\until &Global_Parameters::Directory);
 
-The code performs a parameter study in which we compute the solution
-for a range of pressures. We specify the pressure increment and
-the number of steps to be performed, parse the command line arguments 
-and document them.
+After extracting the relevant information from the command line we
+continue by computing the dependent parameters, which lies in the
+global namespace area and adjusts the geometry of the problem accordingly.
 
-\skipline P increment
-\until doc_specified 
+\skipline // Validation run?
+\until doc_info.set_directory(Global_Parameters::Directory);
 
-Next, we create the problem (discretising the domain with nine-noded
-quadrilateral elements), 
-\skipline Set up the problem
-\until AnnularDisk
+Next, we create the elasticity tensor and set up the problem (discretised with triangular elements). 
+\skipline // Build elasticity tensor
+\until #endif
 
-and perform the parameter study:
+and perform the actual computation
 
-\skipline Initial values
-\until {
-
-\skipline Solve the problem using Newton's method
+\skipline #ifdef
 \until newton_solve();
 
-\skipline Doc solution
+followed by extracting the number of degrees of freedom for
+post-processing purposes, as well as taking note of the time 
+at the end of the execution. All this data is finally used in
+documenting all aspects of the problem we were interested in. Further
+details on the results provided will be presented in  \c doc_solution(DocInfo& doc_info).
+
+\skipline Find total
 \until end of main
  
 <HR>

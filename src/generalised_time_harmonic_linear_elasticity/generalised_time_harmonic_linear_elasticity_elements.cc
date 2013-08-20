@@ -28,16 +28,16 @@
 // Non-inline functions for elements that solve the equations of linear
 // elasticity in cartesian coordinates
 
-#include "time_harmonic_linear_elasticity_elements.h"
+#include "generalised_time_harmonic_linear_elasticity_elements.h"
 
 
 namespace oomph
 {
 
-
 /// Static default value for square of frequency
  template <unsigned DIM>
- double TimeHarmonicLinearElasticityEquationsBase<DIM>::Default_omega_sq_value=1.0;
+ double GeneralisedTimeHarmonicLinearElasticityEquationsBase<DIM>::
+ Default_omega_sq_value=1.0;
  
 
 //////////////////////////////////////////////////////////////////
@@ -48,7 +48,7 @@ namespace oomph
 /// Compute the strain tensor at local coordinate s
 //======================================================================
  template<unsigned DIM>
- void TimeHarmonicLinearElasticityEquationsBase<DIM>::get_strain(
+ void GeneralisedTimeHarmonicLinearElasticityEquationsBase<DIM>::get_strain(
   const Vector<double> &s,
   DenseMatrix<std::complex<double> >& strain) const
  {
@@ -69,10 +69,13 @@ namespace oomph
   
   if(n_position_type != 1)
    {
-    throw OomphLibError(
-     "TimeHarmonicLinearElasticity is not yet implemented for more than one position type",
-     OOMPH_CURRENT_FUNCTION,
-     OOMPH_EXCEPTION_LOCATION);
+    std::ostringstream error_message;
+    error_message << "GeneralisedTimeHarmonicLinearElasticity is not yet " 
+                  << "implemented for more than one position type" 
+                  <<  std::endl;
+    throw OomphLibError(error_message.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
    }
 #endif
   
@@ -154,7 +157,7 @@ namespace oomph
 /// displacement formulation.
 //======================================================================
 template<unsigned DIM>
-void TimeHarmonicLinearElasticityEquations<DIM>::
+void GeneralisedTimeHarmonicLinearElasticityEquations<DIM>::
 get_stress(const Vector<double> &s,
            DenseMatrix<std::complex<double> >&stress) const
 {
@@ -185,7 +188,7 @@ get_stress(const Vector<double> &s,
      stress(i,j) = 0.0;
      for (unsigned k=0;k<DIM;k++)
       {
-       for (unsigned l=0;l<DIM;l++)
+       for (unsigned l=0;l<DIM;l++) 
         {
          stress(i,j)+=this->E(i,j,k,l)*strain(k,l);
         }
@@ -200,7 +203,7 @@ get_stress(const Vector<double> &s,
 /// cartesian coordinates. Flag indicates if we want Jacobian too.
 //=======================================================================
  template <unsigned DIM>
- void TimeHarmonicLinearElasticityEquations<DIM>::
+ void GeneralisedTimeHarmonicLinearElasticityEquations<DIM>::
  fill_in_generic_contribution_to_residuals_time_harmonic_linear_elasticity(
   Vector<double> &residuals, DenseMatrix<double> &jacobian,unsigned flag)
  {
@@ -213,10 +216,13 @@ get_stress(const Vector<double> &s,
   
   if(n_position_type != 1)
    {
-    throw OomphLibError(
-     "TimeHarmonicLinearElasticity is not yet implemented for more than one position type",
-     OOMPH_CURRENT_FUNCTION,
-     OOMPH_EXCEPTION_LOCATION);
+    std::ostringstream error_message;
+    error_message << "GeneralisedTimeHarmonicLinearElasticity is not yet " 
+                  << "implemented for more than one position type" 
+                  <<  std::endl;
+    throw OomphLibError(error_message.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
    }
 
   //Throw and error if an elasticity tensor has not been set
@@ -239,7 +245,7 @@ get_stress(const Vector<double> &s,
 
   // Square of non-dimensional frequency
   const double omega_sq_local = this->omega_sq();
-  
+
   //Set up memory for the shape functions
   Shape psi(n_node);
   DShape dpsidx(n_node,DIM);
@@ -250,8 +256,9 @@ get_stress(const Vector<double> &s,
   //Set the vector to hold the local coordinates in the element
   Vector<double> s(DIM);
   
-  //Integer to store the local equation number
-  int local_eqn=0, local_unknown=0;
+  //Integers to store the local equation numbers
+  int local_eqn_real=0, local_unknown_real=0; 
+  int local_eqn_imag=0, local_unknown_imag=0;
   
   //Loop over the integration points
   for(unsigned ipt=0;ipt<n_intpt;ipt++)
@@ -306,12 +313,26 @@ get_stress(const Vector<double> &s,
        }
      }
     
-    //Get body force at current time
+    //Get body force 
     Vector<std::complex<double> > b(DIM);
     this->body_force(interpolated_x,b);
     
     //Premultiply the weights and the Jacobian
     double W = w*J; 
+
+   // Declare a vector of complex numbers for pml weights on the Laplace bit
+   Vector< std::complex<double> > pml_stiffness_weight(DIM);
+   // Declare a complex number for pml weights on the mass matrix bit
+   std::complex<double> pml_mass_weight = std::complex<double>(1.0,0.0);
+
+   /// \short All the PML weights that participate in the assemby process 
+   /// are computed here. pml_stiffness_weight will contain the entries
+   /// for the stiffness bit, while pml_mass_weight contains the contributions
+   /// to the mass bit. Both default to 1.0, should the PML not be 
+   /// enabled via enable_pml.
+   compute_pml_coefficients(ipt, interpolated_x, 
+                            pml_stiffness_weight, 
+                            pml_mass_weight); 
     
 //=====EQUATIONS OF LINEAR ELASTICITY ========
     
@@ -322,14 +343,19 @@ get_stress(const Vector<double> &s,
       for(unsigned a=0;a<DIM;a++)
        {
         //Get the REAL equation number
-        local_eqn = this->nodal_local_eqn(l,u_nodal_index[a].real());
+        local_eqn_real = this->nodal_local_eqn(l,u_nodal_index[a].real());
+        local_eqn_imag = this->nodal_local_eqn(l,u_nodal_index[a].imag());
         
         /*IF it's not a boundary condition*/
-        if(local_eqn >= 0)
+        if(local_eqn_real >= 0)
          {
           // Acceleration and body force
-          residuals[local_eqn] += 
-           (-omega_sq_local*interpolated_u[a].real()-b[a].real())*psi(l)*W;
+          residuals[local_eqn_real] += 
+           ( (-omega_sq_local*interpolated_u[a].real()-b[a].real())
+              *pml_mass_weight.real() 
+            +( omega_sq_local*interpolated_u[a].imag()+b[a].imag())
+              *pml_mass_weight.imag() 
+           )*psi(l)*W;
           
           // Stress term
           for(unsigned b=0;b<DIM;b++)
@@ -339,8 +365,11 @@ get_stress(const Vector<double> &s,
               for(unsigned d=0;d<DIM;d++)
                {
                 //Add the stress terms to the residuals
-                residuals[local_eqn] +=
-                 this->E(a,b,c,d)*interpolated_dudx(c,d).real()*dpsidx(l,b)*W;
+                residuals[local_eqn_real] +=
+                 this->E(a,b,c,d).real()*(
+                  pml_stiffness_weight[d].real()*interpolated_dudx(c,d).real() 
+                - pml_stiffness_weight[d].imag()*interpolated_dudx(c,d).imag()
+                 )*dpsidx(l,b)*W;
                }
              }
            }
@@ -354,15 +383,18 @@ get_stress(const Vector<double> &s,
               //Loop over the displacement components again
               for(unsigned c=0;c<DIM;c++)
                {
-                local_unknown=this->nodal_local_eqn(l2,u_nodal_index[c].real());
+                local_unknown_real=
+                 this->nodal_local_eqn(l2,u_nodal_index[c].real());
+                local_unknown_imag=
+                 this->nodal_local_eqn(l2,u_nodal_index[c].imag());
                 //If it's not pinned
-                if(local_unknown >= 0)
+                if(local_unknown_real >= 0)
                  {
                   // Inertial term
                   if (a==c)
                    {
-                    jacobian(local_eqn,local_unknown) -=
-                     omega_sq_local*psi(l)*psi(l2)*W;
+                    jacobian(local_eqn_real,local_unknown_real) -=
+                     omega_sq_local*pml_mass_weight.real()*psi(l)*psi(l2)*W;
                    }
 
                   // Stress term 
@@ -371,11 +403,37 @@ get_stress(const Vector<double> &s,
                     for(unsigned d=0;d<DIM;d++)
                      {
                       //Add the contribution to the Jacobian matrix
-                      jacobian(local_eqn,local_unknown) +=
-                       this->E(a,b,c,d)*dpsidx(l2,d)*dpsidx(l,b)*W;
+                      jacobian(local_eqn_real,local_unknown_real) +=
+                       this->E(a,b,c,d).real()
+                        *pml_stiffness_weight[d].real()
+                        *dpsidx(l2,d)*dpsidx(l,b)*W;
                      }
                    }
                  } //End of if not boundary condition
+
+                if(local_unknown_imag >= 0)
+                 {
+                  // Inertial term
+                  if (a==c)
+                   {
+                    jacobian(local_eqn_real,local_unknown_imag) +=
+                     omega_sq_local*pml_mass_weight.imag()*psi(l)*psi(l2)*W;
+                   }
+
+                  // Stress term 
+                  for(unsigned b=0;b<DIM;b++)
+                   {
+                    for(unsigned d=0;d<DIM;d++)
+                     {
+                      //Add the contribution to the Jacobian matrix
+                      jacobian(local_eqn_real,local_unknown_imag) -=
+                       this->E(a,b,c,d).real()
+                        *pml_stiffness_weight[d].imag()
+                        *dpsidx(l2,d)*dpsidx(l,b)*W;
+                     }
+                   }
+                 } //End of if not boundary condition
+
                }
              }
            } //End of jacobian calculation
@@ -385,14 +443,19 @@ get_stress(const Vector<double> &s,
 
 
         //Get the IMAG equation number
-        local_eqn = this->nodal_local_eqn(l,u_nodal_index[a].imag());
+        local_eqn_imag = this->nodal_local_eqn(l,u_nodal_index[a].imag());
+        local_eqn_real = this->nodal_local_eqn(l,u_nodal_index[a].real());
         
         /*IF it's not a boundary condition*/
-        if(local_eqn >= 0)
+        if(local_eqn_imag >= 0)
          {
           // Acceleration and body force
-          residuals[local_eqn] += 
-           (-omega_sq_local*interpolated_u[a].imag()-b[a].imag())*psi(l)*W;
+          residuals[local_eqn_imag] += 
+           ( (-omega_sq_local*interpolated_u[a].imag()-b[a].imag())
+              *pml_mass_weight.real() 
+           + (-omega_sq_local*interpolated_u[a].real()-b[a].real())
+              *pml_mass_weight.imag() 
+           )*psi(l)*W;
           
           // Stress term
           for(unsigned b=0;b<DIM;b++)
@@ -402,8 +465,13 @@ get_stress(const Vector<double> &s,
               for(unsigned d=0;d<DIM;d++)
                {
                 //Add the stress terms to the residuals
-                residuals[local_eqn] +=
-                 this->E(a,b,c,d)*interpolated_dudx(c,d).imag()*dpsidx(l,b)*W;
+                residuals[local_eqn_imag] +=
+                 this->E(a,b,c,d).real()
+                  *(pml_stiffness_weight[d].imag()
+                    *interpolated_dudx(c,d).real() 
+                  + pml_stiffness_weight[d].real()
+                    *interpolated_dudx(c,d).imag()
+                  )*dpsidx(l,b)*W;
                }
              }
            }
@@ -417,15 +485,18 @@ get_stress(const Vector<double> &s,
               //Loop over the displacement components again
               for(unsigned c=0;c<DIM;c++)
                {
-                local_unknown=this->nodal_local_eqn(l2,u_nodal_index[c].imag());
+                local_unknown_imag=
+                 this->nodal_local_eqn(l2,u_nodal_index[c].imag());
+                local_unknown_real=
+                 this->nodal_local_eqn(l2,u_nodal_index[c].real());
                 //If it's not pinned
-                if(local_unknown >= 0)
+                if(local_unknown_imag >= 0)
                  {
                   // Inertial term
                   if (a==c)
                    {
-                    jacobian(local_eqn,local_unknown) -=
-                     omega_sq_local*psi(l)*psi(l2)*W;
+                    jacobian(local_eqn_imag,local_unknown_imag) -=
+                     omega_sq_local*pml_mass_weight.real()*psi(l)*psi(l2)*W;
                    }
 
                   // Stress term 
@@ -434,11 +505,37 @@ get_stress(const Vector<double> &s,
                     for(unsigned d=0;d<DIM;d++)
                      {
                       //Add the contribution to the Jacobian matrix
-                      jacobian(local_eqn,local_unknown) +=
-                       this->E(a,b,c,d)*dpsidx(l2,d)*dpsidx(l,b)*W;
+                      jacobian(local_eqn_imag,local_unknown_imag) +=
+                       this->E(a,b,c,d).real()
+                        *pml_stiffness_weight[d].real()
+                        *dpsidx(l2,d)*dpsidx(l,b)*W;
                      }
                    }
                  } //End of if not boundary condition
+
+                if(local_unknown_real >= 0)
+                 {
+                  // Inertial term
+                  if (a==c)
+                   {
+                    jacobian(local_eqn_imag,local_unknown_real) -=
+                     omega_sq_local*pml_mass_weight.imag()*psi(l)*psi(l2)*W;
+                   }
+
+                  // Stress term 
+                  for(unsigned b=0;b<DIM;b++)
+                   {
+                    for(unsigned d=0;d<DIM;d++)
+                     {
+                      //Add the contribution to the Jacobian matrix
+                      jacobian(local_eqn_imag,local_unknown_real) +=
+                       this->E(a,b,c,d).real()
+                        *pml_stiffness_weight[d].imag()
+                        *dpsidx(l2,d)*dpsidx(l,b)*W;
+                     }
+                   }
+                 } //End of if not boundary condition
+
                }
              }
            } //End of jacobian calculation
@@ -455,7 +552,7 @@ get_stress(const Vector<double> &s,
 /// Output exact solution x,y,[z],u_r,v_r,[w_r],u_i,v_i,[w_i]
 //=======================================================================
  template <unsigned DIM>
- void TimeHarmonicLinearElasticityEquations<DIM>::output_fct(
+ void GeneralisedTimeHarmonicLinearElasticityEquations<DIM>::output_fct(
   std::ostream &outfile, 
   const unsigned &nplot, 
   FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
@@ -509,8 +606,8 @@ get_stress(const Vector<double> &s,
 /// Output: x,y,[z],u,v,[w]
 //=======================================================================
  template <unsigned DIM>
- void TimeHarmonicLinearElasticityEquations<DIM>::output(std::ostream &outfile, 
-                                             const unsigned &nplot)
+ void GeneralisedTimeHarmonicLinearElasticityEquations<DIM>::output(
+  std::ostream &outfile, const unsigned &nplot)
  {
   //Set output Vector
   Vector<double> s(DIM);
@@ -558,8 +655,8 @@ get_stress(const Vector<double> &s,
 /// C-style output: x,y,[z],u,v,[w]
 //=======================================================================
 template <unsigned DIM>
-void TimeHarmonicLinearElasticityEquations<DIM>::output(FILE* file_pt, 
-                                            const unsigned &nplot)
+void GeneralisedTimeHarmonicLinearElasticityEquations<DIM>::output(
+ FILE* file_pt, const unsigned &nplot)
 {
  //Vector of local coordinates
  Vector<double> s(DIM);
@@ -604,7 +701,8 @@ void TimeHarmonicLinearElasticityEquations<DIM>::output(FILE* file_pt,
 /// Compute norm of the solution
 //=======================================================================
 template <unsigned DIM>
-void TimeHarmonicLinearElasticityEquations<DIM>::compute_norm(double& norm)
+void GeneralisedTimeHarmonicLinearElasticityEquations<DIM>::compute_norm(
+ double& norm)
 {
  
  // Initialise
@@ -626,6 +724,73 @@ void TimeHarmonicLinearElasticityEquations<DIM>::compute_norm(double& norm)
  
  //Set the value of n_intpt
  unsigned n_intpt = this->integral_pt()->nweight();
+
+ //Loop over the integration points
+ for(unsigned ipt=0;ipt<n_intpt;ipt++)
+  {
+   
+   //Assign values of s
+   for(unsigned i=0;i<DIM;i++)
+    {
+     s[i] = this->integral_pt()->knot(ipt,i);
+    }
+   
+   //Get the integral weight
+   double w = this->integral_pt()->weight(ipt);
+   
+   // Get jacobian of mapping
+   double J = this->J_eulerian(s);
+   
+   //Premultiply the weights and the Jacobian
+   double W = w*J;
+   
+   // Get FE function value
+   this->interpolated_u_time_harmonic_linear_elasticity(s,disp);
+
+   // Add to norm
+   for (unsigned ii=0;ii<DIM;ii++)
+    {
+     norm+=(disp[ii].real()*disp[ii].real()+disp[ii].imag()*disp[ii].imag())*W;
+    }
+  }
+}
+
+//======================================================================
+ /// Validate against exact solution
+ /// 
+ /// Solution is provided via function pointer.
+ ///
+//======================================================================
+template <unsigned DIM>
+void GeneralisedTimeHarmonicLinearElasticityEquations<DIM>::compute_error(
+ std::ostream &outfile, 
+ FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
+ double& error, double& norm)
+{ 
+ 
+ // Initialise
+ error=0.0;
+ norm=0.0;
+ 
+ //Vector of local coordinates
+ Vector<double> s(DIM);
+ 
+ // Vector for coordintes
+ Vector<double> x(DIM);
+
+ // Displacement vector
+ Vector<std::complex<double> > disp(DIM);
+ 
+ //Find out how many nodes there are in the element
+ unsigned n_node = this->nnode();
+
+ Shape psi(n_node);
+ 
+ //Set the value of n_intpt
+ unsigned n_intpt = this->integral_pt()->nweight();
+
+ // Exact solution Vector
+ Vector<double> exact_soln(2*DIM);
  
  //Loop over the integration points
  for(unsigned ipt=0;ipt<n_intpt;ipt++)
@@ -641,10 +806,16 @@ void TimeHarmonicLinearElasticityEquations<DIM>::compute_norm(double& norm)
    double w = this->integral_pt()->weight(ipt);
    
    // Get jacobian of mapping
-   double J=this->J_eulerian(s);
+   double J = this->J_eulerian(s);
    
    //Premultiply the weights and the Jacobian
    double W = w*J;
+
+   // Get x position as Vector
+   this->interpolated_x(s,x);
+
+   // Get exact solution at this point
+   (*exact_soln_pt)(x,exact_soln);
    
    // Get FE function value
    this->interpolated_u_time_harmonic_linear_elasticity(s,disp);
@@ -652,6 +823,11 @@ void TimeHarmonicLinearElasticityEquations<DIM>::compute_norm(double& norm)
    // Add to  norm
    for (unsigned ii=0;ii<DIM;ii++)
     {
+    // Add to error and norm
+     error+=((exact_soln[ii]-disp[ii].real())
+            *(exact_soln[ii]-disp[ii].real())+
+             (exact_soln[ii+DIM]-disp[ii].imag())
+            *(exact_soln[ii+DIM]-disp[ii].imag()))*W;
      norm+=(disp[ii].real()*disp[ii].real()+disp[ii].imag()*disp[ii].imag())*W;
     }
   }
@@ -659,12 +835,12 @@ void TimeHarmonicLinearElasticityEquations<DIM>::compute_norm(double& norm)
  
  
 //Instantiate the required elements
-template class TimeHarmonicLinearElasticityEquationsBase<2>;
-template class TimeHarmonicLinearElasticityEquations<2>;
+template class GeneralisedTimeHarmonicLinearElasticityEquationsBase<2>;
+template class GeneralisedTimeHarmonicLinearElasticityEquations<2>;
 
-template class QTimeHarmonicLinearElasticityElement<3,3>;
-template class TimeHarmonicLinearElasticityEquationsBase<3>;
-template class TimeHarmonicLinearElasticityEquations<3>;
+template class QGeneralisedTimeHarmonicLinearElasticityElement<3,3>;
+template class GeneralisedTimeHarmonicLinearElasticityEquationsBase<3>;
+template class GeneralisedTimeHarmonicLinearElasticityEquations<3>;
 
 
 
