@@ -76,52 +76,49 @@ namespace Global_Parameters
   b[0]=source_fct*x[0]/sqrt(x[0]*x[0]+x[1]*x[1]);
   b[1]=source_fct*x[1]/sqrt(x[0]*x[0]+x[1]*x[1]);
  }
- 
- /// helpers to number of degrees of freedom
- unsigned problem_ndof = 0;
 
  /// helpers to time the code
- double t_start = 0.0;
- double t_end = 0.0;
+ double T_start = 0.0;
+ double T_end = 0.0;
 
  /// PML width in elements for the right layer
- unsigned n_pml_multiplier = 1;
- double l_pml_multiplier = 1.0;
+ unsigned N_pml_multiplier = 1;
+ double L_pml_multiplier = 1.0;
 
  /// PML width in elements for the right layer
- unsigned n_x_right_pml = 2;
+ unsigned N_x_right_pml = 8;
 
  /// PML width in elements for the top layer
- unsigned n_y_top_pml = 2;
+ unsigned N_y_top_pml = 8;
 
  /// PML width in elements for the left layer
- unsigned n_x_left_pml = 2; 
+ unsigned N_x_left_pml = 8; 
 
  /// PML width in elements for the left layer
- unsigned n_y_bottom_pml = 2; 
+ unsigned N_y_bottom_pml = 8; 
 
  // Outer physical length of the PML layers
  // defaults to 0.2, so 10% of the size of the 
  // physical domain
- double width_x_right_pml  = 1.0;
- double width_y_top_pml    = 1.0;
- double width_x_left_pml   = 1.0;
- double width_y_bottom_pml = 1.0;
+ double Width_x_right_pml  = 2.0;
+ double Width_y_top_pml    = 2.0;
+ double Width_x_left_pml   = 2.0;
+ double Width_y_bottom_pml = 2.0;
 
  /// Function to compute dependent parameters
  void compute_dependent_parameters()
  {
   /// Adjust number of PML elements, set to be equal for all layers
-  n_x_right_pml = n_x_right_pml * n_pml_multiplier;
-  n_x_left_pml = n_x_left_pml * n_pml_multiplier;
-  n_y_top_pml = n_y_top_pml * n_pml_multiplier;
-  n_y_bottom_pml = n_y_bottom_pml * n_pml_multiplier;
+  N_x_right_pml  = N_x_right_pml  * N_pml_multiplier;
+  N_x_left_pml   = N_x_left_pml   * N_pml_multiplier;
+  N_y_top_pml    = N_y_top_pml    * N_pml_multiplier;
+  N_y_bottom_pml = N_y_bottom_pml * N_pml_multiplier;
 
   ///Adjust physical size of PML layers, set to be equal for all layers
-  width_x_right_pml = width_x_right_pml * l_pml_multiplier;
-  width_x_left_pml = width_x_left_pml * l_pml_multiplier;
-  width_y_top_pml = width_y_top_pml * l_pml_multiplier;
-  width_y_bottom_pml = width_y_bottom_pml * l_pml_multiplier;
+  Width_x_right_pml  = Width_x_right_pml  * L_pml_multiplier;
+  Width_x_left_pml   = Width_x_left_pml   * L_pml_multiplier;
+  Width_y_top_pml    = Width_y_top_pml    * L_pml_multiplier;
+  Width_y_bottom_pml = Width_y_bottom_pml * L_pml_multiplier;
  }
 
  /// Poisson's ratio
@@ -478,14 +475,14 @@ void ElasticAnnulusProblem<ELASTICITY_ELEMENT>::doc_solution(DocInfo& doc_info)
  sprintf(filename,"%s/wall_clock_time%i.dat",Doc_info.directory().c_str(),
          Doc_info.number()); 
  some_file.open(filename);
- some_file << Global_Parameters::t_end-Global_Parameters::t_start << std::endl;
+ some_file << Global_Parameters::T_end-Global_Parameters::T_start << std::endl;
  some_file.close();
 
  // Output number of degrees of freedom in a file
  sprintf(filename,"%s/ndof%i.dat",Doc_info.directory().c_str(),
          Doc_info.number()); 
  some_file.open(filename);
- some_file << Global_Parameters::problem_ndof << std::endl;
+ some_file << this->ndof() << std::endl;
  some_file.close();
 
  // Output norm of solution 
@@ -526,29 +523,29 @@ void ElasticAnnulusProblem<ELASTICITY_ELEMENT>::create_pml_meshes()
   TwoDimensionalPMLHelper::create_right_pml_mesh
   <PMLLayerElement<ELASTICITY_ELEMENT> >
   (Solid_mesh_pt, right_boundary_id, 
-  Global_Parameters::n_x_right_pml, 
-  Global_Parameters::width_x_right_pml);
+  Global_Parameters::N_x_right_pml, 
+  Global_Parameters::Width_x_right_pml);
 
  PML_top_mesh_pt   = 
   TwoDimensionalPMLHelper::create_top_pml_mesh
   <PMLLayerElement<ELASTICITY_ELEMENT> >
   (Solid_mesh_pt, top_boundary_id, 
-   Global_Parameters::n_y_top_pml, 
-   Global_Parameters::width_y_top_pml);
+   Global_Parameters::N_y_top_pml, 
+   Global_Parameters::Width_y_top_pml);
 
  PML_left_mesh_pt  = 
   TwoDimensionalPMLHelper::create_left_pml_mesh
   <PMLLayerElement<ELASTICITY_ELEMENT> >
   (Solid_mesh_pt, left_boundary_id, 
-   Global_Parameters::n_x_left_pml, 
-   Global_Parameters::width_x_left_pml);
+   Global_Parameters::N_x_left_pml, 
+   Global_Parameters::Width_x_left_pml);
 
  PML_bottom_mesh_pt= 
   TwoDimensionalPMLHelper::create_bottom_pml_mesh
   <PMLLayerElement<ELASTICITY_ELEMENT> >
   (Solid_mesh_pt, bottom_boundary_id, 
-   Global_Parameters::n_y_bottom_pml, 
-   Global_Parameters::width_y_bottom_pml);
+   Global_Parameters::N_y_bottom_pml, 
+   Global_Parameters::Width_y_bottom_pml);
  
  // Add submeshes to the global mesh
  add_sub_mesh(PML_right_mesh_pt);
@@ -598,7 +595,7 @@ int main(int argc, char **argv)
 {
 
  // Start timing of the code
- Global_Parameters::t_start=TimingHelpers::timer();
+ Global_Parameters::T_start=TimingHelpers::timer();
 
  // Store command line arguments
  CommandLineArgs::setup(argc,argv);
@@ -608,11 +605,11 @@ int main(int argc, char **argv)
 
  // Over-write PML layers element number in each dimension
  CommandLineArgs::specify_command_line_flag("--n_pml",
-                 &Global_Parameters::n_pml_multiplier);
+                 &Global_Parameters::N_pml_multiplier);
 
  // Over-write PML layers physical length in each dimension
  CommandLineArgs::specify_command_line_flag("--l_pml",
-                 &Global_Parameters::l_pml_multiplier);
+                 &Global_Parameters::L_pml_multiplier);
 
  // Output directory
  CommandLineArgs::specify_command_line_flag(
@@ -623,7 +620,7 @@ int main(int argc, char **argv)
 
  // Max. number of adaptations
  unsigned max_adapt=0;
-  CommandLineArgs::specify_command_line_flag("--max_adapt",&max_adapt);
+ CommandLineArgs::specify_command_line_flag("--max_adapt",&max_adapt);
 
 #endif
 
@@ -635,6 +632,24 @@ int main(int argc, char **argv)
  
  // Doc what has actually been specified on the command line
  CommandLineArgs::doc_specified_flags();
+
+ // Validation run?
+ if (CommandLineArgs::command_line_flag_has_been_set("--validation"))
+  {
+   oomph_info << "Using coarser resolution for self-test\n";
+   
+   /// Number of elements for each layer
+   Global_Parameters::N_x_right_pml  = 2;
+   Global_Parameters::N_y_top_pml    = 2;
+   Global_Parameters::N_x_left_pml   = 2; 
+   Global_Parameters::N_y_bottom_pml = 2; 
+
+   /// Thickness of each layer
+   Global_Parameters::Width_x_right_pml  = 1.0;
+   Global_Parameters::Width_y_top_pml    = 1.0;
+   Global_Parameters::Width_x_left_pml   = 1.0;
+   Global_Parameters::Width_y_bottom_pml = 1.0;
+  }
 
  /// Update dependent parameters
  Global_Parameters::compute_dependent_parameters();
@@ -677,11 +692,8 @@ int main(int argc, char **argv)
  problem.newton_solve();
 #endif
 
- // Find total number of degrees of freedom
- Global_Parameters::problem_ndof=problem.ndof();
-
  // End timing of the code
- Global_Parameters::t_end=TimingHelpers::timer();
+ Global_Parameters::T_end=TimingHelpers::timer();
 
  // Doc solution
  problem.doc_solution(doc_info);

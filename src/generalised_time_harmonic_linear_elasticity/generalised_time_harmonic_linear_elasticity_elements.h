@@ -460,42 +460,42 @@ public virtual PMLElementBase<DIM>, public virtual FiniteElement
      /// Constant function, poor performance, discontinuous on interface
      /// Constant set to be (x_outer-x_inner)/2
      /// Activate at own risk!
-     /// pml_absorber_function[k] = std::complex<double>
-     ///(1.0,  (pml_strength_local/a0)*pow(
-     ///  (std::fabs(this->Pml_outer_boundary[k])
-     ///  -std::fabs(this->Pml_inner_boundary[k])) 
-     ///  /(2.0*pml_layer_length[k]), 1.0));
+/*      pml_absorber_function[k] = std::complex<double> */
+/*      (1.0,  (pml_strength_local/a0)*pow( */
+/*       (std::fabs(this->Pml_outer_boundary[k]) */
+/*       -std::fabs(this->Pml_inner_boundary[k]))  */
+/*       /(2.0*pml_layer_length[k]), 1.0)); */
      
      /// \short Function 1
      ///First degree polynomial, poor performance, continuous on interface
      /// Activate at own risk!
-     ///pml_absorber_function[k] = std::complex<double>
-     /// (1.0,  (pml_strength_local/a0)*pow((std::fabs(x[k])
-     ///                    -std::fabs(this->Pml_inner_boundary[k])) 
-     ///                    /pml_layer_length[k], 1.0));
+/*      pml_absorber_function[k] = std::complex<double> */
+/*      (1.0,  (pml_strength_local/a0)*pow((std::fabs(x[k]) */
+/*                         -std::fabs(this->Pml_inner_boundary[k]))  */
+/*                         /pml_layer_length[k], 1.0)); */
 
      /// \short Function 2
      ///Third degree polynomial, very poor performance, continuous on interface
      /// Activate at own risk! 
-     /// pml_absorber_function[k] = std::complex<double>
-     /// (1.0,  (pml_strength_local/a0)*pow((std::fabs(x[k])
-     ///                    -std::fabs(this->Pml_inner_boundary[k])) 
-     ///                    /pml_layer_length[k], 3.0));
+/*      pml_absorber_function[k] = std::complex<double> */
+/*      (1.0,  (pml_strength_local/a0)*pow((std::fabs(x[k]) */
+/*                         -std::fabs(this->Pml_inner_boundary[k]))  */
+/*                         /pml_layer_length[k], 3.0)); */
 
      /// \short Function 3
      ///Unbounded growth function, good performance, discontinuous on interface
      /// Activate at own risk!    
-     ///pml_absorber_function[k] = std::complex<double>
-     /// (1.0, (pml_strength_local/a0)* 
-     ///           (1.0)/(std::fabs(this->Pml_outer_boundary[k] - x[k])));
+/*      pml_absorber_function[k] = std::complex<double> */
+/*      (1.0, (pml_strength_local/a0)*  */
+/*                (1.0)/(std::fabs(this->Pml_outer_boundary[k] - x[k]))); */
 
      /// \short Function 4
      ///Unbounded growth function, best performance, continuous on interface
      pml_absorber_function[k] = std::complex<double>
       (1.0, (pml_strength_local/a0)*(
-        1.0/(std::fabs(this->Pml_outer_boundary[k]-x[k]) ) 
+        1.0/(std::fabs(this->Pml_outer_boundary[k]-x[k]) )
       - 1.0/(std::fabs(this->Pml_outer_boundary[k]-this->Pml_inner_boundary[k]
-        ))) 
+        )))
        );
 
     } else {

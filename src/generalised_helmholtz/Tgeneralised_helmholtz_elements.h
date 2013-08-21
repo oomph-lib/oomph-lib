@@ -342,7 +342,7 @@ class PMLLayerElement<TGeneralisedHelmholtzElement<2,NNODE_1D> > :
 /// Policy class defining the elements to be used in the actual
 /// PML layers. It's the corresponding quads.
 //=======================================================================
-  template<unsigned NNODE_1D> //veziaici
+  template<unsigned NNODE_1D>
 class PMLLayerElement<ProjectableGeneralisedHelmholtzElement
    <TGeneralisedHelmholtzElement<2,NNODE_1D> > > : 
  public virtual QGeneralisedHelmholtzElement<2,NNODE_1D>

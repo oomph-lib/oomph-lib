@@ -1,14 +1,14 @@
-\mainpage Example problem: The equations of time-harmonic linear elasticity and use of PMLs
+\mainpage The equations of time-harmonic linear elasticity and use of PMLs
 
 The aim of this tutorial is to demonstrate the solution of the
 time-harmonic equations of linear elasticity in Cartesian
 coordinates. These equations are useful to describe forced, time-harmonic
-oscillations of elastic bodies.  The imeplementation extends
-on a standard formulation discussed in
+oscillations of elastic bodies.  The implementation extends
+the standard formulation discussed in
 <a href="../../time_harmonic_linear_elasticity/elastic_annulus/html/index.html">
 another tutorial,</a>
-which is modified to incorporate (PML's) as an alternative to
-classical absorbing/approximate boundary conditions or DtN maps.
+which is modified to incorporate perfectly matched layers (PMLs) as an
+alternative to classical absorbing/approximate boundary conditions or DtN maps.
 
 We first present details on the relevant theory and its extensions and
 proceed with an example problem of time-harmonic oscillations on a
@@ -25,7 +25,8 @@ with an interior circular boundary and an exterior rectangular boundary.
 The implementation of the equations and the documentation 
 were developed jointly with 
 <a href="http://imperial.academia.edu/RaduCimpeanu">
-Radu Cimpeanu</a> (Imperial College London).
+Radu Cimpeanu</a> (Imperial College London), with financial
+support from Thales Underwater.
 </CENTER>
 \n
 </TD>
@@ -37,7 +38,7 @@ Radu Cimpeanu</a> (Imperial College London).
 <HR>
 
 \section theory Theory
-Consider a linearly elastic body (of density \f$ \rho \f$, Young's
+Consider an infinite, linearly elastic body (of density \f$ \rho \f$, Young's
 modulus \f$ E \f$ and Poisson's ratio \f$ \nu \f$), occupying 
 the region \f$ D \f$
 whose inner boundary is \f$ \partial D_d \f$.  Assuming that the body performs
@@ -132,13 +133,9 @@ The boundary conditions are set as
 <CENTER>
 \f[
 \mathbf{u}=\mathbf{\hat{u}}\,\,\textrm{on $
-\partial D_d $ }
+\partial D_d $. }
 \f]
 </CENTER>
-
-and a further treatment of the outer boundary is necessary 
-and will be discussed in \ref pml.
-
 
 <HR>
 <HR>
@@ -147,9 +144,9 @@ and will be discussed in \ref pml.
 The idea behind perfectly matched layers is illustrated in the
 figure below. The actual physical/mathematical problem 
 has to be solved in the infinite domain \f$ D \f$ (shown on the left), 
-with the Sommerfeld radiation condition ensuring the suitable decay 
-of the solution at large distances from the region of interest 
-(the vicinity of the scatterer, say).
+with a boundary condition at a certain distance 
+from the source of the waves ensuring the suitable decay 
+of the solution at large distances from the region of interest.
 
 If computations are performed in a finite computational domain, \f$
 D_c \f$ , (shown in the middle), spurious wave reflections are likely to  
@@ -191,34 +188,13 @@ shown in the sketch below:
 
 @I w 0.75\textwidth PMLDomain  "Sketch illustrating the geometry of the perfectly matched layers. "
 
-Based on the work of
+We follow the work of
 <a href="http://www.sciencedirect.com/science/article/pii/S0045782502006424">
 U. Basu and A. Chopra "Perfectly matched layers for time-harmonic
 elastodynamics of unbounded domains: theory and finite-element
 implementation",
 Computer Methods in Applied Mechanics and Engineering <b>192</b> 
-1337–1375(2003)</a>, we design these functions so as to be universally
-absorbing for waves of the (non-dimensional) frequency in the problem.
-To this end we compute a normalising factor based on this frequency
-which is now normalized with respect to the lengthscale of the
-physical domain and the shear wave speed. Given that our problem is
-already nondimensionalised in \ref theory with respect to the
-lengthscale, we only need to add a prefactor to \f$ \Omega \f$
-in order to account for the shear wave speed as opposed to Young's
-modulus and density. To this end, we introduce
-\f[
-a_0 = \sqrt{2.0(1.0+\nu)}\Omega,
-\f]
-which will be used in the attenuation functions. Furthermore, the
-literature hints that a constant prefactor \f$ f_0 \f$, which is just
-a constant to be fine tuned, may bring further advantages to the
-accuracy of the solution. Effectively, \f$ f_0 \f$ simply adjusts the
-steepness of the rise of the damping function in the complex
-stretching. In the cited paper above, values for \f$ f_0 \f$ range
-from roughly \f$ 10.0 \f$ to \f$ 50.0 \f$, which is why we chose
-\f$ f_0=20.0 \f$ for our current implementation as an acceptable value
-for the vast majority of computations.
-
+1337-1375(2003)</a>, we choose 
 - For layers that are aligned with the y axis (such as the left
   and right PML layers in the sketch, with vertical stripes) we set 
   \f[
@@ -228,8 +204,9 @@ for the vast majority of computations.
   \sigma_{x}(x)  =  \frac{1}{|X_{PML_{out}}-x|}-\frac{1}{|X_{PML_{out}}-X_{PML_{in}}|}, \ \ \ \ \ 
   @E[absorbingfctx]@
   \f] 
-  where \f$ X_{PML_{in}} \f$ is the x-coordinate of the inner boundary
-  of the PML layer (the coordinate of the interface with the physical domain) ,\f$ X_{PML_{out}} \f$ is the x-coordinate of the outer boundary
+  where \f$ a_0 = \sqrt{2.0(1.0+\nu)}\Omega\f$, \f$ f_0 \f$ is a
+  constant to be fine tuned, \f$ X_{PML_{in}} \f$ is the x-coordinate
+  of the inner boundary of the PML layer (the coordinate of the interface with the physical domain) ,\f$ X_{PML_{out}} \f$ is the x-coordinate of the outer boundary
   of the PML layer , and
   \f[
    \gamma_y = 1.
@@ -276,6 +253,11 @@ for the vast majority of computations.
   \gamma_{x}(x) =   \gamma_{y}(y) = 1.
   \f]
 .
+
+In our numerical experiments \f$ f_0 = 20.0 \f$ was found to be an 
+appropriate value, which gives acceptable numerical behaviour.
+This is well aligned with the cited paper, where this parameter
+ranges from roughly \f$ 10.0 \f$ to \f$ 50.0 \f$.
 
 
 <HR>
@@ -386,12 +368,12 @@ where \f$  U^{(E)}_{ij} \f$  is the \f$ i \f$-th displacement component
 
 We consider the time-harmonic axisymmetric deformation of
 a 2D elastic body that occupies the region between 
-a circle with prescribed radius and a given rectangular outer
-boundary.
+a circle whose diameter we use as the lengthscale \f$ \cal L \f$.
  We impose a displacement \f$ {\mathbf{u}}(r,\theta)=
- u_0 {\mathbf{e}}_r + u_1 {\mathbf{e}}_{\theta} \f$ on the inner boundary 
+ u_0 {\mathbf{e}}_r + u_1 {\mathbf{e}}_{\theta} \f$ on the inner
+ boundary (to generate a combination of pressure waves and shear waves) 
 and allow for a formulation with perfectly matched layers on the outer
-boundary which should allow for a smooth propagation of the elastic
+boundary of the computational domain, which should allow for a smooth propagation of the elastic
 waves with no interference from the restriction of the problem to a
 finite computational domain. \f$ {\mathbf{e}}_r \f$ is the unit
 vector in the radial direction, whereas \f$ {\mathbf{e}}_{\theta} \f$
@@ -399,15 +381,21 @@ is the unit vector in azimuthal direction.
 
 It is easy to find an analytical solution of this problem by working
 in polar coordinates and exploiting the axisymmetry of the solution by
-writing the displacement as
-\f$ \displaystyle {\mathbf{u}} = U(r) {\mathbf{e}}_r \f$. 
-The radial displacement  \f$ U(r) \f$ is then governed by 
+writing the displacements as
+\f$ \displaystyle {\mathbf{u}} = U(r) {\mathbf{e}}_r \f$
+or
+\f$ \displaystyle {\mathbf{u}} = U(r) {\mathbf{e}}_{\theta} \f$. 
+The displacement  \f$ U(r) \f$ is then governed in both cases by
+an equation of type 
 <CENTER>
 \f[
 \frac{d}{d r}\left(\frac{U}{r}+\frac{dU}{dr}\right) + k^2 U=0,
 \f]
 </CENTER>
-where \f$ \displaystyle k^2= \frac{\Omega^2}{\lambda+2\mu}\f$ and
+where \f$ \displaystyle k^2 = k_{r}^2=
+\frac{\Omega^2}{\lambda+2\mu}\f$ for the radial component and
+\f$ \displaystyle k^2 = k_{\theta}^2=
+\frac{\Omega^2}{\mu}\f$ for the azimuthal component. We also note that
 <CENTER>
 \f[
 \lambda = \frac{\nu}{(1+\nu)(1-2\nu)} \qquad \textrm{and} 
@@ -415,28 +403,14 @@ where \f$ \displaystyle k^2= \frac{\Omega^2}{\lambda+2\mu}\f$ and
 \f]
 </CENTER>
 are the non-dimensional Lame parameters.
-The solution of this equation is given by:
+The solution of these equations is given in each case by:
 <CENTER>
 \f[
 U(r) = H_1(kr).
 \f]
 </CENTER>
-where \f$ H_1 \f$ are is a Hankel function of first kind. We can apply
-a similar treatment in the case of the azimuthal displacement \f$
-\displaystyle {\mathbf{u}} = U(\theta) {\mathbf{e}}_{\theta} \f$. This
-is possible due to a very nice property in vector calculus for this
-particular case. Very loosely, in our context the operation of \f$
-\displaystyle \nabla (\rm{div} \cdot \mathbf{B}) \equiv \rm{curl}
-(\rm{curl}(\mathbf{B}))\f$, so the second part of the problem can be formulated as
-<CENTER>
-\f[
-\frac{d}{d r}\left(\frac{U}{r}+\frac{dU}{dr}\right) + k_{\theta}^2 U=0,
-\f]
-</CENTER>
-where \f$ \displaystyle k_{\theta}^2= \frac{\Omega^2}{\mu}\f$ and
-\f$ \displaystyle \mu = \frac{1}{2(1+\nu)} \f$
-as before, but now \f$ \displaystyle {\mathbf{u}} = U(r) {\mathbf{e}}_{\theta} \f$. So naturally the solution of this problem will be a similar
-Hankel function, altered by the change of \f$ k \f$ to \f$ k_{\theta} \f$. The two solutions can then be converted to Cartesian coordinates and added
+where \f$ H_1 \f$ is the Hankel function of first kind. 
+The two solutions can then be converted to Cartesian coordinates and added
 together in an appropriate manner.
 The details of the procedure can be found in 
 the <code> GlobalParameters::exact_u() </code> function.
@@ -445,35 +419,35 @@ We note that even though a relatively simple analytical solution
 (in polar coordinates!) exists for this problem, it is a non-trivial
 test case for our code which solves the governing equations in Cartesian
 coordinates. It is also a highly relevant test case in the context of
-testing perfectly matched layers, since we can (and will in the next
-section) compare the results to an exact solution and discuss the
-efficiency of this treatment in the context of time harmonic linear elasticity.
+testing perfectly matched layers, since the solution contains both
+shear and compression waves.
 
 <HR>
 <HR>
-
-
 \section results Results
-The figures below show "carpet plots" of the real and imaginary 
-parts of the exact (green) and computed (blue) horizontal displacement 
-for \f$ \Omega^2=30.0 \f$ and \f$ \nu=0.3 \f$, 
-with radius of the circle \f$ r=0.5\f$ in a domain otherwise set to
-have \f$ -2 \le x \le 2, -2 \le y \le 2 \f$. The exact discretized
-geometry (before any adaptation) is shown below.
+
+The discretized
+geometry is shown below. We choose a circle of radius \f$ r=0.5\f$ in
+a computational domain otherwise set to \f$ -2 \le x \le 2, -2 \le y
+\le 2 \f$, with a PML thickness of \f$ 1.6 \f$ in each dimension, spanned by \f$ 8 \f$ elements. 
 
 @I w 0.6\textwidth mesh "Mesh used to resolve the geometry. "
 
+The figures below show "carpet plots" (on the left) of the real and imaginary 
+parts of the exact (green) and computed (blue) horizontal displacement 
+for \f$ \Omega^2=30.0 \f$ and \f$ \nu=0.3 \f$. 
 Comparing the two
 solutions results in good agreement and hence an efficient damping
 given by the perfectly matched layers. We can also observe this by
 taking a one-dimensional slice from point \f$ (-2.0,0.0)\f$ to point
 \f$ (2.0,0.0)\f$ and visualising the profiles of the exact and
-computed solutions. This is shown on the left side of each of the
-plots below.
+computed solutions, shown on the right. The green line represents the
+profile of the exact solution, whereas the blue dots are extracted
+from the profile of the computed solution.
 
-@I w 0.95\textwidth result1 "Real part of the horizontal displacement. Green: exact; dark blue: computed; light blue: perfectly matched layers. "
+@I w 0.95\textwidth result1 "Real part of the horizontal displacement. Exact and computed solution carpet plot (left) and (-2.0,0.0) to (2.0,0.0) one-dimensional slice (right). Green: exact; dark blue: computed; light blue: perfectly matched layers. "
 
-@I w 0.95\textwidth result2 "Imaginary part of the horizontal displacement. Green: exact; dark blue: computed; light blue: perfectly matched layers. "
+@I w 0.95\textwidth result2 "Imaginary part of the horizontal displacement. Exact and computed solution carpet plot (left) and (-2.0,0.0) to (2.0,0.0) one-dimensional slice (right). Green: exact; dark blue: computed; light blue: perfectly matched layers. "
 
 
 To demonstrate that the resulting displacement field is indeed
@@ -488,13 +462,12 @@ displacement, \f$ Re(u_1)^2 + Re(u_2)^2 \f$.
 
 \section namespace Global parameters and functions
 As usual, we define all non-dimensional parameters in a namespace
-where we also define the exact solution which is applied to the inner
-boundary. This is effectively a combination of pressure waves in
-radial direction and shear waves in azimuthal direction.
+where we also define the exact solution which is imposed at the inner
+boundary. We omit the (lengthy) listing of the exact solution.
 
 \dontinclude time_harmonic_elasticity_driver.cc
 \skipline start_namespace
-\until end_namespace
+\until Directory="RESLT";
 
  
 <HR>
@@ -502,11 +475,9 @@ radial direction and shear waves in azimuthal direction.
 
 \section main The driver code
 
-The code is built to perform parameter studies on the length/width
-attributed to the perfectly matched layers, as well as the number of
-elements they are built on. The first step is to start timing the code
-and proceed with reading in the command line arguments, from which the
-global parameters are adjusted.
+We start by reading the command line arguments, which allow the
+specification of the perfectly matched layers in terms of number of
+elements and thickness.
 
 \dontinclude time_harmonic_elasticity_driver.cc
 \skipline start_of_main
@@ -519,30 +490,25 @@ global namespace area and adjusts the geometry of the problem accordingly.
 \skipline // Validation run?
 \until doc_info.set_directory(Global_Parameters::Directory);
 
-Next, we create the elasticity tensor and set up the problem (discretised with triangular elements). 
+Next, we create the elasticity tensor and set up the problem
+(discretised with six-noded triangular elements). 
 \skipline // Build elasticity tensor
 \until #endif
 
-and perform the actual computation
+and perform the actual computation and the post-processing of the results:
 
 \skipline // Solve the problem using
 \until newton_solve();
 
-followed by extracting the number of degrees of freedom for
-post-processing purposes, as well as taking note of the time 
-at the end of the execution. All this data is finally used in
-documenting all aspects of the problem we were interested in. Further
-details on the results provided will be presented in  \c doc_solution(DocInfo& doc_info).
-
-\skipline Find total
+\skipline // End timing
 \until end of main 
 
 \section problem The problem class 
 
 The \c Problem class is very simple and is very similar to that employed for 
 the <a href="../../time_harmonic_linear_elasticity/elastic_annulus/html/index.html">
-solution of the classical time harmonic linear elasiticty study with
-flux boundary conditions.</a> We provide helper functions to create the
+solution of the classical time harmonic linear elasiticity problem with
+traction boundary conditions.</a> We provide helper functions to create the
 PML meshes and to apply the boundary conditions (mainly
 because these tasks have to be performed repeatedly in 
 the spatially adaptive version this code which is not discussed
@@ -575,8 +541,7 @@ the \c Global_Parameters definition:
 \until  Circle(x_c,y_c,a);
 
 and define the polygonal outer boundary of the computational domain.
-\until outer_boundary_pt = new
-TriangleMeshPolygon(outer_boundary_line_pt);
+\until outer_boundary_pt = new TriangleMeshPolygon(outer_boundary_line_pt);
 
 Next we define the curvilinear inner boundary in terms of two
 \c TriangleMeshCurviLines which define the hole in the domain:
@@ -585,7 +550,7 @@ Next we define the curvilinear inner boundary in terms of two
 
 We specify the mesh parameters (including a target element size)
 
-\until 1.0;
+\until Global_Parameters::Element_area;
  
 and build the bulk mesh
 
@@ -622,11 +587,11 @@ which are to be used in the equation construction and
 perfectly matched layer definition.
 
 \dontinclude time_harmonic_elasticity_driver.cc
-\skipline //Assign the physical properties to the elements 
-\until  }
+\skipline start_of_complete_problem_setup
+\until el_pt->omega_sq_pt()= &Global_Parameters::Omega_sq;
 
-We pin both nodal values (representing the real and imaginary
-part of the solutions) on the inner boundaries (boundaries 0 and 1;
+We pin all four nodal values (representing the real and imaginary
+part of the two displacement components) on the inner boundaries (boundaries 0 and 1;
 see enumeration of the boundaries in the constructor) and assign
 the desired boundary values.
 
@@ -648,10 +613,9 @@ solution and the exact solution for comparison purposes
 \skipline // Output exact solution 
 \until some_file.close();
 
-Further information such as the solution in the perfectly matched
-layers themselves, norm of the solution, wall clock time or number of
-degrees of freedom are also relevant for parameter sweep studies on
-the absorption efficiency.
+We also output the solution in the perfectly matched
+layers themselves and document the norm of the solution, the wall
+clock time and number of degrees of freedom.
 
 \skipline // Output runtime
 \until //end doc
@@ -672,7 +636,7 @@ the PMLs is not unique. There are alternatives varying in both order and
 continuity properties. The current form is the result of several
 feasibility studies and comparisons found in
 <a href="http://www.sciencedirect.com/science/article/pii/S0021999106004487">
-Bermudez et al.</a>. These damping functions produce an 
+Bermudez et al.</a> For Helmholtz equations these damping functions produce an 
 acceptable result in most practical situations without further 
 modifications. For very specific applications, alternatives may 
 need to be used and can easily be implemented within the
@@ -691,8 +655,8 @@ Another parameter
 that can be adjusted is the geometrical thickness of the perfectly matched
 layers. In the case of linear elasticity (as opposed to for example
 the Helmholtz equation), the thickness of these layers must be
-relatively large for best results. Try to explain why and take
-note of the differences between the two wave propagation problems.
+relatively large to obtain the best results. Try to explain why and take
+note of the differences between the two mentioned problems.
 
 \subsubsection adaptivity Spatial adaptivity
 The driver code discussed above already contains the straightforward
@@ -709,11 +673,12 @@ performance of these elements and confirm that the helper functions
 correctly create matching (four-node and sixteen-node) quad elements 
 in the PML layers.
 
+
 \subsubsection default Default values for problem parameters
 Following our usual convention, we provide default values
 for problem parameters where this is sensible. 
-Some parameters, such as the frequency
-\f$ \Omega \f$, do need to be set since there are no obvious
+Some parameters, such as the Poisson ratio
+\f$ \nu \f$, do need to be set since there are no obvious
 defaults. If \c oomph-lib is compiled in \c PARANOID mode,
 an error is thrown if the relevant pointers haven't been set. 
 Without paranoia, you get a segmentation fault...
