@@ -457,9 +457,9 @@ namespace oomph
       {
        std::ostringstream error_stream; 
        error_stream 
-        << "Position computed by exernal el and face element differ by ";
-       << diff << " which is more than the acceptable tolerance "
-       << max_permitted_discrepancy << std::endl;
+        << "Position computed by external el and face element differ by "
+        << diff << " which is more than the acceptable tolerance "
+        << max_permitted_discrepancy << std::endl;
        throw OomphLibError(
         error_stream.str(),
         OOMPH_CURRENT_FUNCTION,
