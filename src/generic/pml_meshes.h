@@ -64,12 +64,15 @@ class PMLElementBase
 {
 
   public:
-
+ 
  /// Constructor
  PMLElementBase() : Pml_is_enabled(false), 
   Pml_direction_active(DIM,false), Pml_inner_boundary(DIM,0.0),
   Pml_outer_boundary(DIM,0.0)
    {}
+
+  /// Virtual destructor
+  virtual ~PMLElementBase(){}
 
  /// \short Enable pml. Specify the coordinate direction along which 
  /// pml boundary is constant, as well as the coordinate
@@ -86,6 +89,16 @@ class PMLElementBase
   Pml_inner_boundary[direction] = interface_border_value;
   Pml_outer_boundary[direction] = outer_domain_border_value;
  }
+
+ /// \short Pure virtual function in which we have to specify the
+ /// values to be pinned (and set to zero) on the outer edge of
+ /// the pml layer. This is usually all of the nodal values
+ /// (values 0 and 1 (real and imag part) for Helmholtz; 
+ /// values 0,1,2 and 3 (real and imag part of x- and y-displacement
+ /// for 2D time-harmonic linear elasticity; etc.). Vector
+ /// must be resized internally!
+ virtual void values_to_be_pinned_on_outer_pml_boundary(
+  Vector<unsigned>& values_to_pin)=0;
 
   protected:
 
@@ -1220,35 +1233,31 @@ template<class ASSOCIATED_PML_QUAD_ELEMENT>
     el_pt -> enable_pml(0, l_pml_right_x_start, l_pml_right_x_end);
    }
   
-  /// \short Exterior boundary needs to be set to Dirichlet 0
-  /// in both real and imaginary parts
+  // Get the values to be pinned from the first element (which we
+  // assume exists!)
+  PMLElementBase<2>* el_pt = dynamic_cast<PMLElementBase<2>*>
+     (pml_right_mesh_pt->element_pt(0));
+  Vector<unsigned> values_to_pin;
+  el_pt->values_to_be_pinned_on_outer_pml_boundary(values_to_pin);
+  unsigned npin=values_to_pin.size();
+
+  // Exterior boundary needs to be set to Dirichlet 0
+  // in both real and imaginary parts
   unsigned n_bound_pml_right = pml_right_mesh_pt->nboundary();
   for(unsigned b=0;b<n_bound_pml_right;b++)
    {
     unsigned n_node = pml_right_mesh_pt -> nboundary_node(b);
     for (unsigned n=0;n<n_node;n++)
      {
-      if (b==1) {
-       pml_right_mesh_pt -> boundary_node_pt(b,n)->pin(0);
-       pml_right_mesh_pt -> boundary_node_pt(b,n)->pin(1); 
-      }
-     }
-   }
-  
-  for(unsigned i=0;i<n_bound_pml_right;i++)
-   {
-    // How many nodes are there on this boundary?
-    unsigned n_node = pml_right_mesh_pt->nboundary_node(i);
-    
-    // Loop over the nodes on boundary
-    for (unsigned n=0;n<n_node;n++)
-     {
-      // Get pointer to node
-      Node* nod_pt=pml_right_mesh_pt->boundary_node_pt(i,n);
-      if (i==1)
-       { 
-        nod_pt->set_value(0,0.0);
-        nod_pt->set_value(1,0.0);
+      Node* nod_pt=pml_right_mesh_pt -> boundary_node_pt(b,n);
+      if (b==1)
+       {
+        for (unsigned j=0;j<npin;j++)
+         {
+          unsigned j_val=values_to_pin[j];
+          nod_pt->pin(j_val);
+          nod_pt->set_value(j_val,0.0);
+         }
        }
      }
    }
@@ -1324,35 +1333,32 @@ template<class ASSOCIATED_PML_QUAD_ELEMENT>
     el_pt -> enable_pml(1, l_pml_top_y_start, l_pml_top_y_end);
    }
   
-  /// \short Exterior boundary needs to be set to Dirichlet 0
-  /// in both real and imaginary parts
+  // Get the values to be pinned from the first element (which we
+  // assume exists!)
+  PMLElementBase<2>* el_pt = dynamic_cast<PMLElementBase<2>*>
+     (pml_top_mesh_pt->element_pt(0));
+  Vector<unsigned> values_to_pin;
+  el_pt->values_to_be_pinned_on_outer_pml_boundary(values_to_pin);
+  unsigned npin=values_to_pin.size();
+
+  // Exterior boundary needs to be set to Dirichlet 0
+  // for both real and imaginary parts of all fields
+  // in the problem
   unsigned n_bound_pml_top = pml_top_mesh_pt->nboundary();
   for(unsigned b=0;b<n_bound_pml_top;b++)
    {
     unsigned n_node = pml_top_mesh_pt -> nboundary_node(b);
     for (unsigned n=0;n<n_node;n++)
      {
-      if (b==2) {
-       pml_top_mesh_pt -> boundary_node_pt(b,n)->pin(0);
-       pml_top_mesh_pt -> boundary_node_pt(b,n)->pin(1); 
-      }
-     }
-   }
-  
-  for(unsigned i=0;i<n_bound_pml_top;i++)
-   {
-    // How many nodes are there on this boundary?
-    unsigned n_node = pml_top_mesh_pt->nboundary_node(i);
-    
-    // Loop over the nodes on boundary
-    for (unsigned n=0;n<n_node;n++)
-     {
-      // Get pointer to node
-      Node* nod_pt=pml_top_mesh_pt->boundary_node_pt(i,n);
-      if (i==2)
-       { 
-        nod_pt->set_value(0, 0.0);
-        nod_pt->set_value(1, 0.0);
+      Node* nod_pt=pml_top_mesh_pt -> boundary_node_pt(b,n);
+      if (b==2)
+       {
+        for (unsigned j=0;j<npin;j++)
+         {
+          unsigned j_val=values_to_pin[j];
+          nod_pt->pin(j_val);
+          nod_pt->set_value(j_val,0.0);
+         }
        }
      }
    }
@@ -1428,35 +1434,32 @@ template<class ASSOCIATED_PML_QUAD_ELEMENT>
     el_pt -> enable_pml(0, l_pml_left_x_end, l_pml_left_x_start);
    }
 
-  /// \short Exterior boundary needs to be set to Dirichlet 0
-  /// in both real and imaginary parts
+  // Get the values to be pinned from the first element (which we
+  // assume exists!)
+  PMLElementBase<2>* el_pt = dynamic_cast<PMLElementBase<2>*>
+     (pml_left_mesh_pt->element_pt(0));
+  Vector<unsigned> values_to_pin;
+  el_pt->values_to_be_pinned_on_outer_pml_boundary(values_to_pin);
+  unsigned npin=values_to_pin.size();
+
+  // Exterior boundary needs to be set to Dirichlet 0
+  // for both real and imaginary parts of all fields
+  // in the problem
   unsigned n_bound_pml_left = pml_left_mesh_pt->nboundary();
   for(unsigned b=0;b<n_bound_pml_left;b++)
    {
     unsigned n_node = pml_left_mesh_pt -> nboundary_node(b);
     for (unsigned n=0;n<n_node;n++)
      {
-      if (b==3) {
-       pml_left_mesh_pt -> boundary_node_pt(b,n)->pin(0);
-       pml_left_mesh_pt -> boundary_node_pt(b,n)->pin(1); 
-      }
-     }
-   }
-
-  for(unsigned i=0;i<n_bound_pml_left;i++)
-   {
-    // How many nodes are there on this boundary?
-    unsigned n_node = pml_left_mesh_pt->nboundary_node(i);
-    
-    // Loop over the nodes on boundary
-    for (unsigned n=0;n<n_node;n++)
-     {
-      // Get pointer to node
-      Node* nod_pt=pml_left_mesh_pt->boundary_node_pt(i,n);
-      if (i==3)
-       { 
-        nod_pt->set_value(0,0.0);
-        nod_pt->set_value(1,0.0);
+      Node* nod_pt=pml_left_mesh_pt -> boundary_node_pt(b,n);
+      if (b==3)
+       {
+        for (unsigned j=0;j<npin;j++)
+         {
+          unsigned j_val=values_to_pin[j];
+          nod_pt->pin(j_val);
+          nod_pt->set_value(j_val,0.0);
+         }
        }
      }
    }
@@ -1534,39 +1537,36 @@ template<class ASSOCIATED_PML_QUAD_ELEMENT>
     el_pt -> enable_pml(1, l_pml_bottom_y_end, l_pml_bottom_y_start);
    }
 
-  /// \short Exterior boundary needs to be set to Dirichlet 0
-  /// in both real and imaginary parts
+  // Get the values to be pinned from the first element (which we
+  // assume exists!)
+  PMLElementBase<2>* el_pt = dynamic_cast<PMLElementBase<2>*>
+     (pml_bottom_mesh_pt->element_pt(0));
+  Vector<unsigned> values_to_pin;
+  el_pt->values_to_be_pinned_on_outer_pml_boundary(values_to_pin);
+  unsigned npin=values_to_pin.size();
+
+  // Exterior boundary needs to be set to Dirichlet 0
+  // for both real and imaginary parts of all fields
+  // in the problem
   unsigned n_bound_pml_bottom = pml_bottom_mesh_pt->nboundary();
   for(unsigned b=0;b<n_bound_pml_bottom;b++)
    {
     unsigned n_node = pml_bottom_mesh_pt -> nboundary_node(b);
     for (unsigned n=0;n<n_node;n++)
      {
-      if (b==0) {
-       pml_bottom_mesh_pt -> boundary_node_pt(b,n)->pin(0);
-       pml_bottom_mesh_pt -> boundary_node_pt(b,n)->pin(1); 
-      }
-     }
-   }
-  
-  for(unsigned i=0;i<n_bound_pml_bottom;i++)
-   {
-    // How many nodes are there on this boundary?
-    unsigned n_node = pml_bottom_mesh_pt->nboundary_node(i);
-    
-    // Loop over the nodes on boundary
-    for (unsigned n=0;n<n_node;n++)
-     {
-      // Get pointer to node
-      Node* nod_pt=pml_bottom_mesh_pt->boundary_node_pt(i,n);
-      if (i==0)
-       { 
-        nod_pt->set_value(0,0.0);
-        nod_pt->set_value(1,0.0);
+      Node* nod_pt=pml_bottom_mesh_pt -> boundary_node_pt(b,n);
+      if (b==0)
+       {
+        for (unsigned j=0;j<npin;j++)
+         {
+          unsigned j_val=values_to_pin[j];
+          nod_pt->pin(j_val);
+          nod_pt->set_value(j_val,0.0);
+         }
        }
      }
    }
-
+  
   /// \short Return the finalized mesh, with PML enabled 
   /// and boundary conditions added
   return pml_bottom_mesh_pt;
@@ -1659,40 +1659,37 @@ Mesh* create_top_right_pml_mesh(Mesh* pml_right_mesh_pt,
     el_pt -> enable_pml(0, l_pml_right_x_start, l_pml_right_x_end);
     el_pt -> enable_pml(1, l_pml_top_y_start, l_pml_top_y_end);
    }
-  
-  /// \short Exterior boundary needs to be set to Dirichlet 0
-  /// in both real and imaginary parts
+
+  // Get the values to be pinned from the first element (which we
+  // assume exists!)
+  PMLElementBase<2>* el_pt = dynamic_cast<PMLElementBase<2>*>
+     (pml_top_right_mesh_pt->element_pt(0));
+  Vector<unsigned> values_to_pin;
+  el_pt->values_to_be_pinned_on_outer_pml_boundary(values_to_pin);
+  unsigned npin=values_to_pin.size();
+
+  // Exterior boundary needs to be set to Dirichlet 0
+  // for both real and imaginary parts of all fields
+  // in the problem
   unsigned n_bound_pml_top_right = pml_top_right_mesh_pt->nboundary();
   for(unsigned b=0;b<n_bound_pml_top_right;b++)
    {
     unsigned n_node = pml_top_right_mesh_pt -> nboundary_node(b);
     for (unsigned n=0;n<n_node;n++)
      {
-      if ((b==1)||(b==2)) {
-       pml_top_right_mesh_pt -> boundary_node_pt(b,n)->pin(0);
-       pml_top_right_mesh_pt -> boundary_node_pt(b,n)->pin(1); 
-      }
-     }
-   }
-
-  for(unsigned i=0;i<n_bound_pml_top_right;i++)
-   {
-    // How many nodes are there on this boundary?
-    unsigned n_node = pml_top_right_mesh_pt->nboundary_node(i);
-    
-    // Loop over the nodes on boundary
-    for (unsigned n=0;n<n_node;n++)
-     {
-      // Get pointer to node
-      Node* nod_pt=pml_top_right_mesh_pt->boundary_node_pt(i,n);
-      if ((i==1)||(i==2))
-       { 
-        nod_pt->set_value(0,0.0);
-        nod_pt->set_value(1,0.0);
+      Node* nod_pt=pml_top_right_mesh_pt -> boundary_node_pt(b,n);
+      if ((b==1)||(b==2))
+       {
+        for (unsigned j=0;j<npin;j++)
+         {
+          unsigned j_val=values_to_pin[j];
+          nod_pt->pin(j_val);
+          nod_pt->set_value(j_val,0.0);
+         }
        }
      }
    }
-  
+    
   /// \short Return the finalized mesh, with PML enabled 
   /// and boundary conditions added
   return pml_top_right_mesh_pt;
@@ -1786,37 +1783,32 @@ template<class ASSOCIATED_PML_QUAD_ELEMENT>
     el_pt -> enable_pml(1, l_pml_bottom_y_end, l_pml_bottom_y_start);
    }
 
-  /// \short Exterior boundary needs to be set to Dirichlet 0
-  /// in both real and imaginary parts
-  unsigned n_bound_pml_bottom_right = 
-   pml_bottom_right_mesh_pt->nboundary();
-  
+  // Get the values to be pinned from the first element (which we
+  // assume exists!)
+  PMLElementBase<2>* el_pt = dynamic_cast<PMLElementBase<2>*>
+     (pml_bottom_right_mesh_pt->element_pt(0));
+  Vector<unsigned> values_to_pin;
+  el_pt->values_to_be_pinned_on_outer_pml_boundary(values_to_pin);
+  unsigned npin=values_to_pin.size();
+
+  // Exterior boundary needs to be set to Dirichlet 0
+  // for both real and imaginary parts of all fields
+  // in the problem
+  unsigned n_bound_pml_bottom_right = pml_bottom_right_mesh_pt->nboundary();
   for(unsigned b=0;b<n_bound_pml_bottom_right;b++)
    {
     unsigned n_node = pml_bottom_right_mesh_pt -> nboundary_node(b);
     for (unsigned n=0;n<n_node;n++)
      {
-      if ((b==0)||(b==1)) {
-       pml_bottom_right_mesh_pt -> boundary_node_pt(b,n)->pin(0);
-       pml_bottom_right_mesh_pt -> boundary_node_pt(b,n)->pin(1); 
-      }
-     }
-   }
-
-  for(unsigned i=0;i<n_bound_pml_bottom_right;i++)
-   {
-    // How many nodes are there on this boundary?
-    unsigned n_node = pml_bottom_right_mesh_pt->nboundary_node(i);
-    
-    // Loop over the nodes on boundary
-    for (unsigned n=0;n<n_node;n++)
-     {
-      // Get pointer to node
-      Node* nod_pt=pml_bottom_right_mesh_pt->boundary_node_pt(i,n);
-      if ((i==0)||(i==1))
-       { 
-        nod_pt->set_value(0,0.0);
-        nod_pt->set_value(1,0.0);
+      Node* nod_pt=pml_bottom_right_mesh_pt -> boundary_node_pt(b,n);
+      if ((b==0)||(b==1))
+       {
+        for (unsigned j=0;j<npin;j++)
+         {
+          unsigned j_val=values_to_pin[j];
+          nod_pt->pin(j_val);
+          nod_pt->set_value(j_val,0.0);
+         }
        }
      }
    }
@@ -1915,35 +1907,32 @@ template<class ASSOCIATED_PML_QUAD_ELEMENT>
     el_pt -> enable_pml(1, l_pml_top_y_start, l_pml_top_y_end);
    }
 
-  /// \short Exterior boundary needs to be set to Dirichlet 0
-  /// in both real and imaginary parts
+  // Get the values to be pinned from the first element (which we
+  // assume exists!)
+  PMLElementBase<2>* el_pt = dynamic_cast<PMLElementBase<2>*>
+     (pml_top_left_mesh_pt->element_pt(0));
+  Vector<unsigned> values_to_pin;
+  el_pt->values_to_be_pinned_on_outer_pml_boundary(values_to_pin);
+  unsigned npin=values_to_pin.size();
+
+  // Exterior boundary needs to be set to Dirichlet 0
+  // for both real and imaginary parts of all fields
+  // in the problem
   unsigned n_bound_pml_top_left = pml_top_left_mesh_pt->nboundary();
   for(unsigned b=0;b<n_bound_pml_top_left;b++)
    {
     unsigned n_node = pml_top_left_mesh_pt -> nboundary_node(b);
     for (unsigned n=0;n<n_node;n++)
      {
-     if ((b==2)||(b==3)) {
-      pml_top_left_mesh_pt -> boundary_node_pt(b,n)->pin(0);
-      pml_top_left_mesh_pt -> boundary_node_pt(b,n)->pin(1); 
-     }
-     }
-   }
-  
-  for(unsigned i=0;i<n_bound_pml_top_left;i++)
-   {
-    // How many nodes are there on this boundary?
-    unsigned n_node = pml_top_left_mesh_pt->nboundary_node(i);
-    
-    // Loop over the nodes on boundary
-    for (unsigned n=0;n<n_node;n++)
-     {
-      // Get pointer to node
-      Node* nod_pt=pml_top_left_mesh_pt->boundary_node_pt(i,n);
-      if ((i==2)||(i==3))
-       { 
-        nod_pt->set_value(0,0.0);
-        nod_pt->set_value(1,0.0);
+      Node* nod_pt=pml_top_left_mesh_pt -> boundary_node_pt(b,n);
+      if ((b==2)||(b==3))
+       {
+        for (unsigned j=0;j<npin;j++)
+         {
+          unsigned j_val=values_to_pin[j];
+          nod_pt->pin(j_val);
+          nod_pt->set_value(j_val,0.0);
+         }
        }
      }
    }
@@ -2038,39 +2027,36 @@ template<class ASSOCIATED_PML_QUAD_ELEMENT>
     el_pt -> enable_pml(1, l_pml_bottom_y_end, l_pml_bottom_y_start);
    }
 
-  /// \short Exterior boundary needs to be set to Dirichlet 0
-  /// in both real and imaginary parts
+  // Get the values to be pinned from the first element (which we
+  // assume exists!)
+  PMLElementBase<2>* el_pt = dynamic_cast<PMLElementBase<2>*>
+     (pml_bottom_left_mesh_pt->element_pt(0));
+  Vector<unsigned> values_to_pin;
+  el_pt->values_to_be_pinned_on_outer_pml_boundary(values_to_pin);
+  unsigned npin=values_to_pin.size();
+
+  // Exterior boundary needs to be set to Dirichlet 0
+  // for both real and imaginary parts of all fields
+  // in the problem
   unsigned n_bound_pml_bottom_left = pml_bottom_left_mesh_pt->nboundary();
   for(unsigned b=0;b<n_bound_pml_bottom_left;b++)
    {
     unsigned n_node = pml_bottom_left_mesh_pt -> nboundary_node(b);
     for (unsigned n=0;n<n_node;n++)
      {
-      if ((b==0)||(b==3)) {
-       pml_bottom_left_mesh_pt -> boundary_node_pt(b,n)->pin(0);
-       pml_bottom_left_mesh_pt -> boundary_node_pt(b,n)->pin(1); 
-      }
-     }
-   }
-  
-  for(unsigned i=0;i<n_bound_pml_bottom_left;i++)
-   {
-    // How many nodes are there on this boundary?
-    unsigned n_node = pml_bottom_left_mesh_pt->nboundary_node(i);
-    
-    // Loop over the nodes on boundary
-    for (unsigned n=0;n<n_node;n++)
-     {
-      // Get pointer to node
-      Node* nod_pt=pml_bottom_left_mesh_pt->boundary_node_pt(i,n);
-      if ((i==0)||(i==3))
-       { 
-        nod_pt->set_value(0,0.0);
-        nod_pt->set_value(1,0.0);
+      Node* nod_pt=pml_bottom_left_mesh_pt -> boundary_node_pt(b,n);
+      if ((b==0)||(b==3))
+       {
+        for (unsigned j=0;j<npin;j++)
+         {
+          unsigned j_val=values_to_pin[j];
+          nod_pt->pin(j_val);
+          nod_pt->set_value(j_val,0.0);
+         }
        }
      }
    }
-  
+
   /// \short Return the finalized mesh, with PML enabled 
   /// and boundary conditions added
   return pml_bottom_left_mesh_pt;

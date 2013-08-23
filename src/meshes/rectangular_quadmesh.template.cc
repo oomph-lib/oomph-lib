@@ -350,7 +350,7 @@ void RectangularQuadMesh<ELEMENT>::build_mesh(TimeStepper* time_stepper_pt)
    //END OF FIRST ROW OF ELEMENTS
    
    //ALL CENTRAL ELEMENT ROWS
-   //Loop over remaining element rows in the fluid 
+   //Loop over remaining element rows  
    for(unsigned i=1;i<(Ny-1);i++)
     {
      //Set the first element in the row
@@ -545,15 +545,31 @@ void RectangularQuadMesh<ELEMENT>::build_mesh(TimeStepper* time_stepper_pt)
        //Now do the other columns
        for(unsigned l2=1;l2<Np;l2++)
         {
+         
          //Allocate memory for node
-         Node_pt[node_count] = 
-          finite_element_pt(Nx*(Ny-1))->
-          construct_node(Np*l1+l2,time_stepper_pt);
-       
+         if ((Nx==1)&&(l2==Np-1))
+          {
+           Node_pt[node_count] = 
+            finite_element_pt(Nx*(Ny-1))->
+            construct_boundary_node(Np*l1+l2,time_stepper_pt);
+          }
+         else
+          {
+           Node_pt[node_count] = 
+            finite_element_pt(Nx*(Ny-1))->
+            construct_node(Np*l1+l2,time_stepper_pt);
+          }
+           
          //Set the position of the node
          Node_pt[node_count]->x(0) = x_spacing_function(0,l2,Ny-1,l1);
          Node_pt[node_count]->x(1) = y_spacing_function(0,l2,Ny-1,l1);
        
+         //Push the node back onto boundaries
+         if ((Nx==1)&&(l2==Np-1))
+          {           
+           add_boundary_node(1,Node_pt[node_count]);
+          }
+         
          //Increment the node number
          node_count++;
         }
@@ -568,7 +584,6 @@ void RectangularQuadMesh<ELEMENT>::build_mesh(TimeStepper* time_stepper_pt)
    
      //Set the position of the node
      Node_pt[node_count]->x(0) = x_spacing_function(0,0,Ny-1,Np-1);
-     //In fluid 2 
      Node_pt[node_count]->x(1) = y_spacing_function(0,0,Ny-1,Np-1);
    
      //Push the node back onto boundaries
@@ -592,7 +607,13 @@ void RectangularQuadMesh<ELEMENT>::build_mesh(TimeStepper* time_stepper_pt)
      
        //Push the node back onto boundaries
        add_boundary_node(2,Node_pt[node_count]);
-     
+
+       //Push the node back onto boundaries
+       if ((Nx==1)&&(l2==Np-1))
+        {         
+         add_boundary_node(1,Node_pt[node_count]);
+        }
+
        //Increment the node number
        node_count++;
       }
@@ -605,7 +626,7 @@ void RectangularQuadMesh<ELEMENT>::build_mesh(TimeStepper* time_stepper_pt)
        //The first row is copied from the lower element
        for(unsigned l2=0;l2<Np;l2++)
         {  
-         finite_element_pt(Nx*(Ny-1)+j)->node_pt(l2) = 
+          finite_element_pt(Nx*(Ny-1)+j)->node_pt(l2) = 
           finite_element_pt(Nx*(Ny-2)+j)->node_pt((Np-1)*Np + l2);
         }
      
@@ -626,7 +647,6 @@ void RectangularQuadMesh<ELEMENT>::build_mesh(TimeStepper* time_stepper_pt)
          
            //Set the position of the node
            Node_pt[node_count]->x(0) = x_spacing_function(j,l2,Ny-1,l1);
-           //In fluid 2 
            Node_pt[node_count]->x(1) = y_spacing_function(j,l2,Ny-1,l1);
          
            //Increment the node number
@@ -648,7 +668,6 @@ void RectangularQuadMesh<ELEMENT>::build_mesh(TimeStepper* time_stepper_pt)
        
          //Set the position of the node
          Node_pt[node_count]->x(0) = x_spacing_function(j,l2,Ny-1,Np-1);
-         //In fluid 2 
          Node_pt[node_count]->x(1) = y_spacing_function(j,l2,Ny-1,Np-1);
        
          //Push the node back onto boundaries

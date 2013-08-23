@@ -258,6 +258,19 @@ OOMPH_CURRENT_FUNCTION,
     }
   }
 
+   /// \short Pure virtual function in which we specify the
+   /// values to be pinned (and set to zero) on the outer edge of
+   /// the pml layer. All of them! Vector is resized internally.
+   void values_to_be_pinned_on_outer_pml_boundary(Vector<unsigned>& 
+                                                  values_to_pin)
+   {
+    values_to_pin.resize(DIM);
+    for (unsigned j=0;j<DIM;j++)
+     {
+      values_to_pin[j]=j;
+     }
+   }
+
  /// Access function: Pointer to sound speed function
  CFctPt& c_fct_pt() {return C_fct_pt;}
 

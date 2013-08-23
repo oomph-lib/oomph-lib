@@ -11,9 +11,8 @@ which is modified to incorporate perfectly matched layers (PMLs) as an
 alternative to classical absorbing/approximate boundary conditions or DtN maps.
 
 We first present details on the relevant theory and its extensions and
-proceed with an example problem of time-harmonic oscillations on a
-domain
-with an interior circular boundary and an exterior rectangular boundary.
+proceed with an example problem of time-harmonic oscillations on an infinite
+domain with an interior circular boundary.
 
 <CENTER>
 <TABLE BORDER=1, WIDTH=500px>
@@ -172,7 +171,7 @@ Journal of Computational Physics <b>223</b> 469-488 (2007)</a>
 and we assume the boundaries of the computational domain to be aligned
 with the coordinate axes, as shown in the sketch above.
 
-The method requires a slight further generalisation of the equations, 
+The method requires a slight generalisation of the equations, 
 achieved by introducing the complex coordinate mapping 
 \f[
 \frac{\partial}{\partial x_j} \to \frac{1}{\gamma_j} \frac{\partial}{\partial x_j} 
@@ -194,7 +193,7 @@ U. Basu and A. Chopra "Perfectly matched layers for time-harmonic
 elastodynamics of unbounded domains: theory and finite-element
 implementation",
 Computer Methods in Applied Mechanics and Engineering <b>192</b> 
-1337-1375(2003)</a>, we choose 
+1337-1375(2003)</a> and choose: 
 - For layers that are aligned with the y axis (such as the left
   and right PML layers in the sketch, with vertical stripes) we set 
   \f[
@@ -205,8 +204,9 @@ Computer Methods in Applied Mechanics and Engineering <b>192</b>
   @E[absorbingfctx]@
   \f] 
   where \f$ a_0 = \sqrt{2.0(1.0+\nu)}\Omega\f$, \f$ f_0 \f$ is a
-  constant to be fine tuned, \f$ X_{PML_{in}} \f$ is the x-coordinate
-  of the inner boundary of the PML layer (the coordinate of the interface with the physical domain) ,\f$ X_{PML_{out}} \f$ is the x-coordinate of the outer boundary
+  constant to be tuned, \f$ X_{PML_{in}} \f$ is the x-coordinate
+  of the inner boundary of the PML layer (the coordinate of the
+  interface with the physical domain), \f$ X_{PML_{out}} \f$ is the x-coordinate of the outer boundary
   of the PML layer , and
   \f[
    \gamma_y = 1.
@@ -366,8 +366,8 @@ where \f$  U^{(E)}_{ij} \f$  is the \f$ i \f$-th displacement component
 
 \section test A specific example: outward propagation of elastic waves from the surface of a cylindrical object
 
-We consider the time-harmonic axisymmetric deformation of
-a 2D elastic body that occupies the region between 
+We consider the time-harmonic deformation of
+a 2D elastic body that occupies the region outside 
 a circle whose diameter we use as the lengthscale \f$ \cal L \f$.
  We impose a displacement \f$ {\mathbf{u}}(r,\theta)=
  u_0 {\mathbf{e}}_r + u_1 {\mathbf{e}}_{\theta} \f$ on the inner
@@ -429,7 +429,7 @@ shear and compression waves.
 The discretized
 geometry is shown below. We choose a circle of radius \f$ r=0.5\f$ in
 a computational domain otherwise set to \f$ -2 \le x \le 2, -2 \le y
-\le 2 \f$, with a PML thickness of \f$ 1.6 \f$ in each dimension, spanned by \f$ 8 \f$ elements. 
+\le 2 \f$, with a PML thickness of \f$ 1.6 \f$ in each dimension, spanned by \f$ 16 \f$ elements. 
 
 @I w 0.6\textwidth mesh "Mesh used to resolve the geometry. "
 
@@ -437,7 +437,7 @@ The figures below show "carpet plots" (on the left) of the real and imaginary
 parts of the exact (green) and computed (blue) horizontal displacement 
 for \f$ \Omega^2=30.0 \f$ and \f$ \nu=0.3 \f$. 
 Comparing the two
-solutions results in good agreement and hence an efficient damping
+solutions shows good agreement and hence an efficient damping
 given by the perfectly matched layers. We can also observe this by
 taking a one-dimensional slice from point \f$ (-2.0,0.0)\f$ to point
 \f$ (2.0,0.0)\f$ and visualising the profiles of the exact and
@@ -451,10 +451,13 @@ from the profile of the computed solution.
 
 
 To demonstrate that the resulting displacement field is indeed
-axisymmetric, here is a plot of the square of the real part of the radial
-displacement, \f$ Re(u_1)^2 + Re(u_2)^2 \f$.
+axisymmetric, we present plots of the real and imaginary parts of the radial
+displacement, \f$ (Re(u_1)^2 + Re(u_2)^2)^{1/2} \f$ and \f$ (Im(u_1)^2
++ Im(u_2)^2)^{1/2} \f$. 
 
-@I w 0.6\textwidth result3 "Squared real part of the computed radial displacement. "
+@I w 0.6\textwidth result3 "Real part of the computed radial displacement. "
+
+@I w 0.6\textwidth result4 "Imaginary part of the computed radial displacement. "
 
 <HR> 
 <HR>
@@ -484,8 +487,7 @@ elements and thickness.
 \until &Global_Parameters::Directory);
 
 After extracting the relevant information from the command line we
-continue by computing the dependent parameters, which lies in the
-global namespace area and adjusts the geometry of the problem accordingly.
+continue by computing the dependent parameters.
 
 \skipline // Validation run?
 \until doc_info.set_directory(Global_Parameters::Directory);
@@ -582,20 +584,20 @@ The setup of the problem is now complete.
 
 \subsection complete_setup Completing the problem setup
 
-Next we pass the problem parameters to all elements,
-which are to be used in the equation construction and 
+We pass the problem parameters to all elements,
+which are used in the equation construction and 
 perfectly matched layer definition.
 
 \dontinclude time_harmonic_elasticity_driver.cc
 \skipline start_of_complete_problem_setup
-\until el_pt->omega_sq_pt()= &Global_Parameters::Omega_sq;
+\until // end_of_assignment
 
 We pin all four nodal values (representing the real and imaginary
 part of the two displacement components) on the inner boundaries (boundaries 0 and 1;
 see enumeration of the boundaries in the constructor) and assign
 the desired boundary values.
 
-\skipline unsigned n_bound 
+\skipline for(unsigned b=0;b<2;b++)
 \until  // end_of_complete_setup
 
 <HR>
@@ -677,8 +679,7 @@ in the PML layers.
 \subsubsection default Default values for problem parameters
 Following our usual convention, we provide default values
 for problem parameters where this is sensible. 
-Some parameters, such as the Poisson ratio
-\f$ \nu \f$, do need to be set since there are no obvious
+Some parameters, such as the elasticity tensor, do need to be set since there are no obvious
 defaults. If \c oomph-lib is compiled in \c PARANOID mode,
 an error is thrown if the relevant pointers haven't been set. 
 Without paranoia, you get a segmentation fault...

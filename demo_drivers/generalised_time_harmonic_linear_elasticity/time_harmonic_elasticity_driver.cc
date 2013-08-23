@@ -543,7 +543,7 @@ void ElasticAnnulusProblem<ELASTICITY_ELEMENT>::complete_problem_setup()
    
    // Square of non-dim frequency
    el_pt->omega_sq_pt()= &Global_Parameters::Omega_sq;
-  }                        
+  } // end_of_assignment                        
  
  /// \short Boundaries with id 0 and 1 represent the interior boundary
  /// and these are the only ones that need to be processed, hence the loop

@@ -233,6 +233,20 @@ public virtual PMLElementBase<DIM>, public virtual FiniteElement
      }
    }
    
+
+   /// \short Pure virtual function in which we specify the
+   /// values to be pinned (and set to zero) on the outer edge of
+   /// the pml layer. All of them! Vector is resized internally.
+   void values_to_be_pinned_on_outer_pml_boundary(Vector<unsigned>& 
+                                                  values_to_pin)
+   {
+    values_to_pin.resize(DIM*2);
+    for (unsigned j=0;j<DIM*2;j++)
+     {
+      values_to_pin[j]=j;
+     }
+   }
+
    /// \short The number of "blocks" that degrees of freedom in this element
    /// are sub-divided into: for now lump them all into one block.
    /// Can be adjusted later
@@ -463,7 +477,7 @@ public virtual PMLElementBase<DIM>, public virtual FiniteElement
 /*      pml_absorber_function[k] = std::complex<double> */
 /*      (1.0,  (pml_strength_local/a0)*pow( */
 /*       (std::fabs(this->Pml_outer_boundary[k]) */
-/*       -std::fabs(this->Pml_inner_boundary[k]))  */
+/*       -std::fabs(this->Pml_inner_boundary[k])) */
 /*       /(2.0*pml_layer_length[k]), 1.0)); */
      
      /// \short Function 1
@@ -471,7 +485,7 @@ public virtual PMLElementBase<DIM>, public virtual FiniteElement
      /// Activate at own risk!
 /*      pml_absorber_function[k] = std::complex<double> */
 /*      (1.0,  (pml_strength_local/a0)*pow((std::fabs(x[k]) */
-/*                         -std::fabs(this->Pml_inner_boundary[k]))  */
+/*                         -std::fabs(this->Pml_inner_boundary[k])) */
 /*                         /pml_layer_length[k], 1.0)); */
 
      /// \short Function 2
@@ -479,14 +493,14 @@ public virtual PMLElementBase<DIM>, public virtual FiniteElement
      /// Activate at own risk! 
 /*      pml_absorber_function[k] = std::complex<double> */
 /*      (1.0,  (pml_strength_local/a0)*pow((std::fabs(x[k]) */
-/*                         -std::fabs(this->Pml_inner_boundary[k]))  */
+/*                         -std::fabs(this->Pml_inner_boundary[k])) */
 /*                         /pml_layer_length[k], 3.0)); */
 
      /// \short Function 3
      ///Unbounded growth function, good performance, discontinuous on interface
      /// Activate at own risk!    
 /*      pml_absorber_function[k] = std::complex<double> */
-/*      (1.0, (pml_strength_local/a0)*  */
+/*      (1.0, (pml_strength_local/a0)* */
 /*                (1.0)/(std::fabs(this->Pml_outer_boundary[k] - x[k]))); */
 
      /// \short Function 4
