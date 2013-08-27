@@ -449,7 +449,7 @@ public virtual PMLElementBase<DIM>, public virtual FiniteElement
   /// discretisation errors. This value has performed well
   /// for all experiments and the damping function below
   /// is the most robust out of all listed choices
-  double pml_strength_local = 20.0;
+  double pml_strength_local = 1.0;
 
   /// Define physical length of PML layer
   Vector< double > pml_layer_length(DIM);
