@@ -72,6 +72,11 @@ namespace Global_Physical_Variables
  /// Free surface cosine deform parameter
  double Epsilon = 0.1;
 
+ /// \short Pvd file -- a wrapper for all the different
+ /// vtu output files plus information about continuous time
+ /// to facilitate animations in paraview
+ ofstream Pvd_file;
+
 } // End of namespace
 
 
@@ -352,7 +357,8 @@ doc_solution(DocInfo &doc_info)
 { 
 
  // Output the time
- cout << "Time is now " << time_pt()->time() << std::endl;
+ double t= time_pt()->time();
+ cout << "Time is now " << t << std::endl;
 
  // Document in trace file
  Trace_file << time_pt()->time() << " "
@@ -386,7 +392,20 @@ doc_solution(DocInfo &doc_info)
 
  // Close solution output file
  some_file.close();
+
+ // Output solution to file in paraview format
+ sprintf(filename,"%s/soln%i.vtu",doc_info.directory().c_str(),
+         doc_info.number());
+ some_file.open(filename);
+ Bulk_mesh_pt->output_paraview(some_file,npts);
+ some_file.close();
  
+ // Write pvd information 
+ string file_name="soln"+StringConversion::to_string( doc_info.number())
+  +".vtu";
+ mesh_pt()->write_pvd_information(Global_Physical_Variables::Pvd_file,
+                                  file_name,t);
+
 } // End of doc_solution
 
  
@@ -434,6 +453,13 @@ unsteady_run(const double &t_max, const double &dt)
  // Determine number of timesteps
  const unsigned n_timestep = unsigned(t_max/dt);
 
+ // Open pvd file -- a wrapper for all the different
+ // vtu output files plus information about continuous time
+ // to facilitate animations in paraview
+ sprintf(filename,"%s/soln.pvd",doc_info.directory().c_str());
+ Global_Physical_Variables::Pvd_file.open(filename);
+ mesh_pt()->write_pvd_header(Global_Physical_Variables::Pvd_file);
+
  // Doc initial solution
  doc_solution(doc_info);
 
@@ -454,8 +480,11 @@ unsteady_run(const double &t_max, const double &dt)
 
    // Increment counter for solutions 
    doc_info.number()++;
-
   } // End of timestepping loop
+
+ // write footer and close pvd file
+ mesh_pt()->write_pvd_footer(Global_Physical_Variables::Pvd_file);
+ Global_Physical_Variables::Pvd_file.close();
 
 } // End of unsteady_run
 

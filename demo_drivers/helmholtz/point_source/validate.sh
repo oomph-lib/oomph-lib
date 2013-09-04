@@ -30,7 +30,7 @@ echo "Validation directory: " >> validation.log
 echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
-cat RESLT/trace.dat > adaptive_results.dat
+cat RESLT/trace.dat RESLT/soln0.vtu > adaptive_results.dat
 
 if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
@@ -56,7 +56,7 @@ echo "Validation directory: " >> validation.log
 echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
-cat RESLT/trace.dat > non_adaptive_results.dat
+cat RESLT/trace.dat RESLT/soln0.vtu > non_adaptive_results.dat
 
 if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log

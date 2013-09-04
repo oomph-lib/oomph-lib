@@ -30,7 +30,7 @@ echo "Validation directory: "                   >> validation.log
 echo " "                                        >> validation.log
 echo "  " `pwd`                                 >> validation.log
 echo " "                                        >> validation.log
-cat RESLT/trace.dat RESLT/soln2.dat > results.dat
+cat RESLT/trace.dat RESLT/soln2.dat RESLT/soln2.vtu > results.dat
 
 if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log

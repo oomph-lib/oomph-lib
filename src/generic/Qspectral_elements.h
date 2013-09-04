@@ -434,7 +434,7 @@ public:
 /// \short  Get cector of local coordinates of plot point i (when plotting 
  /// nplot points in each "coordinate direction).
  void get_s_plot(const unsigned& i, const unsigned& nplot,
-                 Vector<double>& s)
+                 Vector<double>& s) const
   {
    if (nplot>1)
     {
@@ -689,7 +689,7 @@ OOMPH_CURRENT_FUNCTION,
 /// \short  Get cector of local coordinates of plot point i (when plotting 
  /// nplot points in each "coordinate direction).
  void get_s_plot(const unsigned& i, const unsigned& nplot,
-                 Vector<double>& s)
+                 Vector<double>& s) const
   {
    if (nplot>1)
     {
@@ -987,7 +987,7 @@ OOMPH_CURRENT_FUNCTION,
 /// \short  Get cector of local coordinates of plot point i (when plotting 
  /// nplot points in each "coordinate direction).
  void get_s_plot(const unsigned& i, const unsigned& nplot,
-                 Vector<double>& s)
+                 Vector<double>& s) const
  {
   if (nplot>1)
    {

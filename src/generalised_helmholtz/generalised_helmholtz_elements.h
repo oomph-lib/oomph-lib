@@ -131,6 +131,98 @@ public:
   return *Omega_pt;
  }
 
+ /// \short Number of scalars/fields output by this element. Reimplements
+ /// broken virtual function in base class.
+ unsigned nscalar_paraview() const
+  {
+   return 2;
+  }
+
+ /// \short Write values of the i-th scalar field at the plot points. Needs 
+ /// to be implemented for each new specific element type.
+ void scalar_value_paraview(std::ofstream& file_out,
+                            const unsigned& i,
+                            const unsigned& nplot) const
+  {
+
+   //Vector of local coordinates
+   Vector<double> s(DIM);
+
+   // Loop over plot points
+   unsigned num_plot_points=nplot_points_paraview(nplot);
+   for (unsigned iplot=0;iplot<num_plot_points;iplot++)
+    {
+
+     // Get local coordinates of plot point
+     get_s_plot(iplot,nplot,s);
+     std::complex<double> u(interpolated_u_generalised_helmholtz(s));
+     
+     // Paraview need to ouput the fileds seperatly so it loops through all 
+     // the elements twice
+     switch(i)
+      {
+       // Real part first
+      case 0:
+       file_out << u.real() << std::endl;
+       break;
+       
+       // Imaginary part second
+      case 1:
+       file_out << u.imag() << std::endl;
+       break;
+       
+       // Never get here
+      default:
+#ifdef PARANOID
+       std::stringstream error_stream;
+       error_stream 
+        << "Generalised Helmholtz elements only store 2 fields " 
+        << "so i must be 0 or 1 rather"
+        << " than " << i << std::endl;
+       throw OomphLibError(
+        error_stream.str(),
+        OOMPH_CURRENT_FUNCTION,
+        OOMPH_EXCEPTION_LOCATION);
+#endif
+      }
+    }
+  }
+ 
+/// \short Name of the i-th scalar field. Default implementation
+ /// returns V1 for the first one, V2 for the second etc. Can (should!) be
+ /// overloaded with more meaningful names in specific elements.
+ string scalar_name_paraview(const unsigned& i) const
+  {
+   switch(i) 
+    {
+    case 0:
+     return "Real part";
+     break;
+     
+    case 1:
+     return "Imaginary part";
+     break;
+     
+     // Never get here
+    default:
+#ifdef PARANOID
+     std::stringstream error_stream;
+     error_stream 
+      << "Generalised Helmholtz elements only store 2 fields " 
+      << "so i must be 0 or 1 rather"
+      << " than " << i << std::endl;
+     throw OomphLibError(
+      error_stream.str(),
+      OOMPH_CURRENT_FUNCTION,
+     OOMPH_EXCEPTION_LOCATION);
+#endif
+     
+     // Dummy return for the default statement
+     return " ";
+     break;
+    }
+  }
+
  /// Output with default number of plot points
  void output(std::ostream &outfile) 
   {

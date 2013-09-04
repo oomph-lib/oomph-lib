@@ -99,6 +99,68 @@ public:
  /// that the unknown is always stored at the same index at each node.
  virtual inline unsigned u_index_poisson() const {return 0;}
 
+ /// \short Number of scalars/fields output by this element. Reimplements
+ /// broken virtual function in base class.
+ unsigned nscalar_paraview() const
+  {
+   return 1;
+  }
+
+ /// \short Write values of the i-th scalar field at the plot points. Needs 
+ /// to be implemented for each new specific element type.
+ void scalar_value_paraview(std::ofstream& file_out,
+                            const unsigned& i,
+                            const unsigned& nplot) const
+  {
+#ifdef PARANOID
+   if (i!=0)
+    {
+     std::stringstream error_stream;
+     error_stream 
+      << "Poisson elements only store a single field so i must be 0 rather"
+      << " than " << i << std::endl;
+     throw OomphLibError(
+      error_stream.str(),
+      OOMPH_CURRENT_FUNCTION,
+      OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+   unsigned local_loop=this->nplot_points_paraview(nplot);
+   for(unsigned j=0;j<local_loop;j++)
+    {
+     // Get the local coordinate of the required plot point
+     Vector<double> s(DIM); 
+     this->get_s_plot(j,nplot,s);
+     
+       file_out << this->interpolated_u_poisson(s) 
+                << std::endl;
+    }
+  }
+
+ /// \short Name of the i-th scalar field. Default implementation
+ /// returns V1 for the first one, V2 for the second etc. Can (should!) be
+ /// overloaded with more meaningful names in specific elements.
+ string scalar_name_paraview(const unsigned& i) const
+  {
+
+#ifdef PARANOID
+   if (i!=0)
+    {
+     std::stringstream error_stream;
+     error_stream 
+      << "Poisson elements only store a single field so i must be 0 rather"
+      << " than " << i << std::endl;
+     throw OomphLibError(
+      error_stream.str(),
+      OOMPH_CURRENT_FUNCTION,
+      OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+     return "Poisson solution";
+  }
+
  /// Output with default number of plot points
  void output(std::ostream &outfile) 
   {
@@ -415,7 +477,6 @@ private:
   {
    BrokenCopy::broken_assign("QPoissonElement");
   }
-
 
  /// \short  Required  # of `values' (pinned or dofs) 
  /// at node n

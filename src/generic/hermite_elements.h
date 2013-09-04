@@ -297,7 +297,7 @@ public:
  /// \short  Get cector of local coordinates of plot point i (when plotting 
  /// nplot points in each "coordinate direction).
  void get_s_plot(const unsigned& i, const unsigned& nplot,
-                 Vector<double>& s);
+                 Vector<double>& s) const;
 
  /// \short Return string for tecplot zone header (when plotting 
  /// nplot points in each "coordinate direction)
@@ -341,7 +341,7 @@ public:
 template<> 
 inline void QHermiteElement<1>::get_s_plot(const unsigned& i, const 
                                            unsigned& nplot,
-                                           Vector<double>& s)
+                                           Vector<double>& s) const
  {
   if (nplot>1)
    {
@@ -382,7 +382,7 @@ inline unsigned QHermiteElement<1>::nplot_points(const unsigned& nplot)
 template<> 
 inline void QHermiteElement<2>::get_s_plot(const unsigned& i, const 
                                            unsigned& nplot,
-                                           Vector<double>& s)
+                                           Vector<double>& s) const
  {
   if (nplot>1)
    {

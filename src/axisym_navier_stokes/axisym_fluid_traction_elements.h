@@ -188,6 +188,143 @@ public virtual FaceGeometry<ELEMENT>,
    output(outfile,nplot);
   }
  
+ /// \short Number of scalars/fields output by this element. Reimplements
+ /// broken virtual function in base class.
+ unsigned nscalar_paraview() const
+ {
+  //Number of dimensions
+  unsigned n_dim = this->nodal_dimension();
+
+  return 2*(n_dim+1);
+ }
+ 
+ /// \short Write values of the k-th scalar field at the plot points. Needs 
+ /// to be implemented for each new specific element type.
+ void scalar_value_paraview(std::ofstream& file_out,
+                            const unsigned& k,
+                            const unsigned& nplot) const
+ {
+  //Number of dimensions
+   unsigned n_dim = this->nodal_dimension();
+
+   //Find out how many nodes there are
+   const unsigned n_node = nnode();
+
+   // Get continuous time from timestepper of first node
+   double time=node_pt(0)->time_stepper_pt()->time_pt()->time();
+  
+   //Set up memory for the shape functions
+   Shape psi(n_node);
+
+   // Local and global coordinates
+   Vector<double> s(n_dim-1);
+   Vector<double> interpolated_x(n_dim);
+
+   // Loop over plot points
+   unsigned num_plot_points=this->nplot_points_paraview(nplot);
+   for (unsigned iplot=0;iplot<num_plot_points;iplot++)
+    {
+     // Get local coordinates of plot point
+     this->get_s_plot(iplot,nplot,s);
+
+     // Outer unit normal
+     Vector<double> unit_normal(n_dim);
+     outer_unit_normal(s,unit_normal);
+
+     //Find the shape functions
+     shape(s,psi);
+
+     //Initialise to zero
+     for(unsigned i=0;i<n_dim;i++)
+      {
+       interpolated_x[i] = 0.0;
+      }
+
+     //Calculate stuff
+     for(unsigned l=0;l<n_node;l++) 
+      {
+       //Loop over directions
+       for(unsigned i=0;i<n_dim;i++)
+        {
+         interpolated_x[i] += this->nodal_position(l,i)*psi[l];
+        }
+      }
+
+     //Get the imposed flux
+     Vector<double> traction(3);
+
+     //Dummy integration point
+     unsigned ipt=0;
+
+     get_traction(time,ipt,interpolated_x,unit_normal,traction);
+
+     // Traction components
+     if (k<n_dim+1) 
+      {
+       file_out << traction[k] << std::endl;
+      }
+  
+     // Advection Diffusion feild
+     else if (k<2*n_dim+1 && k>=n_dim+1) 
+      {
+       file_out << unit_normal[k] << std::endl;
+      }
+     
+     // Never get here
+     else
+      {
+#ifdef PARANOID
+       std::stringstream error_stream;
+       error_stream
+        << "Axisymmetric Fluid Traction Navier-Stokes Elements only store "
+        << 2*(dim+1) << " feilds "
+        << "they currently have " << k << " feilds" << std::endl;
+       throw OomphLibError(
+        error_stream.str(),
+        OOMPH_CURRENT_FUNCTION,
+        OOMPH_EXCEPTION_LOCATION);
+#endif 
+      }
+    }
+ }
+
+  /// \short Name of the i-th scalar field. Default implementation
+ /// returns V1 for the first one, V2 for the second etc. Can (should!) be
+ /// overloaded with more meaningful names in specific elements.
+ string scalar_name_paraview(const unsigned& i) const
+ {
+  //Number of dimensions
+  unsigned n_dim = this->nodal_dimension();
+  
+  // Traction components
+  if (i<n_dim+1) 
+   {
+    return "Traction component "+StringConversion::to_string(i);
+   }
+  
+  // Normals
+  else if (i<2*n_dim+1 && i>=n_dim+1) 
+   {
+    return "Normal "+StringConversion::to_string(i%(n_dim+1));
+   }
+   
+  // Never get here
+  else
+   {
+#ifdef PARANOID
+    std::stringstream error_stream;
+    error_stream
+     << "Axisymmetric Fluid Traction Navier-Stokes Elements only store "
+     << 2*(dim+1) << " feilds "
+     << "they currently have " << i << " feilds" << std::endl;
+    throw OomphLibError(
+     error_stream.str(),
+     OOMPH_CURRENT_FUNCTION,
+     OOMPH_EXCEPTION_LOCATION);
+#endif 
+   }
+ }
+ 
  /// \short Output function
  void output(std::ostream &outfile, const unsigned &n_plot)
   {

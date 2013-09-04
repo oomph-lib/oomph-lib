@@ -2439,6 +2439,165 @@ public:
    }
  }
  
+ /// \short Return the number of actual plot points for paraview
+ /// plot with parameter nplot. Broken virtual; can be overloaded
+ /// in specific elements.
+ virtual unsigned nplot_points_paraview(const unsigned& nplot) const
+  {
+   throw OomphLibError(
+    "This function hasn't been implemented for this element",
+    OOMPH_CURRENT_FUNCTION,
+    OOMPH_EXCEPTION_LOCATION);
+
+   // Dummy unsigned
+   return 0;
+  }
+ 
+ /// \short Return the number of local sub-elements for paraview plot with 
+ /// parameter nplot. Broken virtual; can be overloaded
+ /// in specific elements.
+ virtual unsigned nsub_elements_paraview(const unsigned& nplot) const 
+  {
+   throw OomphLibError(
+    "This function hasn't been implemented for this element",
+    OOMPH_CURRENT_FUNCTION,
+    OOMPH_EXCEPTION_LOCATION);
+
+   // Dummy unsigned
+   return 0;
+  }
+
+ /// \short Paraview output -- this outputs the coordinates at the plot
+ /// points (for parameter nplot) to specified output file.
+ void output_paraview(std::ofstream& file_out, const unsigned& nplot) const
+  {
+   //Decide the dimensions of the nodes
+   unsigned nnod=nnode();
+   if (nnod==0) return;
+   unsigned n=node_pt(0)->ndim();
+
+   // Vector for local coordinates
+   Vector<double> s(n,0.0);
+
+   //Vector for cartesian coordinates
+   Vector<double> x(n,0.0);
+
+   //Determine the total number of plotpoints
+   unsigned plot=nplot_points_paraview(nplot);
+    
+   // Loop over the local points
+   for(unsigned j=0;j<plot;j++)
+    {
+     // Determine where in the local element the point is 
+     this->get_s_plot(j,nplot,s);
+
+     // Update the cartesian coordinates vector 
+     this->interpolated_x(s,x);
+     
+     // Print the global coordinates. Note: no whitespace after last
+     // coordinate or paraview is very unhappy.
+     for(unsigned i=0;i<n-1;i++)
+      {
+       file_out << x[i] << " ";
+      }
+     file_out << x[n-1];
+
+     // Since unstructured grid always needs 3 components for each 
+     // point, output 0's by default
+     switch(n)
+      {
+      case 1:
+       file_out << " 0" << " 0"<< std::endl;
+       break;
+
+      case 2:
+       file_out << " 0"<< std::endl;
+       break;
+
+      case 3:
+       file_out << std::endl;
+       break;
+
+       // Paraview can't handle more than 3 dimensions, output error
+      default:
+       throw OomphLibError(
+        "Printing PlotPoint to .vtu failed; it has >3 dimensions.",
+        OOMPH_CURRENT_FUNCTION,
+        OOMPH_EXCEPTION_LOCATION);
+      }
+    }
+  }
+
+ /// \short Fill in the offset information for paraview plot. Broken virtual.
+ /// Needs to be implemented for each new geometric element type; see
+ /// http://www.vtk.org/VTK/img/file-formats.pdf
+ virtual void write_paraview_output_offset_information(std::ofstream& file_out,
+                                                       const unsigned& nplot,
+                                                       unsigned& counter) const
+  {
+   throw OomphLibError(
+    "This function hasn't been implemented for this element",
+    OOMPH_CURRENT_FUNCTION,
+    OOMPH_EXCEPTION_LOCATION);
+  }
+
+ /// \short Return the paraview element type.  Broken virtual.
+ /// Needs to be implemented for each new geometric element type; see
+ /// http://www.vtk.org/VTK/img/file-formats.pdf
+ virtual void write_paraview_type(std::ofstream& file_out,
+                                  const unsigned& nplot) const
+  {
+   throw OomphLibError(
+    "This function hasn't been implemented for this element",
+    OOMPH_CURRENT_FUNCTION,
+    OOMPH_EXCEPTION_LOCATION);
+  }
+ 
+ /// \short Return the offsets for the paraview sub-elements. Broken
+ /// virtual. Needs to be implemented for each new geometric element type; see
+ /// http://www.vtk.org/VTK/img/file-formats.pdf
+ virtual void write_paraview_offsets(std::ofstream& file_out,
+                                     const unsigned& nplot, 
+                                     unsigned& offset_sum) const
+  {
+   throw OomphLibError(
+    "This function hasn't been implemented for this element",
+    OOMPH_CURRENT_FUNCTION,
+    OOMPH_EXCEPTION_LOCATION);
+  }
+ 
+ /// \short Number of scalars/fields output by this element. Broken
+ /// virtual. Needs to be implemented for each new specific element type.
+ virtual unsigned nscalar_paraview() const
+  {
+   throw OomphLibError(
+    "This function hasn't been implemented for this element",
+    OOMPH_CURRENT_FUNCTION,
+    OOMPH_EXCEPTION_LOCATION);
+
+   // Dummy unsigned
+   return 0;
+  }
+
+ /// \short Write values of the i-th scalar field at the plot points. Broken
+ /// virtual. Needs to be implemented for each new specific element type.
+ virtual void scalar_value_paraview(std::ofstream& file_out,
+                                    const unsigned& i,
+                                    const unsigned& nplot)  const
+  {
+   throw OomphLibError(
+    "This function hasn't been implemented for this element",
+    OOMPH_CURRENT_FUNCTION,
+    OOMPH_EXCEPTION_LOCATION);
+  }
+
+ /// \short Name of the i-th scalar field. Default implementation
+ /// returns V1 for the first one, V2 for the second etc. Can (should!) be
+ /// overloaded with more meaningful names in specific elements.
+ virtual std::string scalar_name_paraview(const unsigned& i) const
+  {
+   return "V"+StringConversion::to_string(i);
+  }
 
  /// \short Output the element data --- typically the values at the 
  /// nodes in a format suitable for post-processing.
@@ -2491,7 +2650,7 @@ public:
  /// \short  Get cector of local coordinates of plot point i (when plotting 
  /// nplot points in each "coordinate direction").
  virtual void get_s_plot(const unsigned& i, const unsigned& nplot,
-                         Vector<double>& s)
+                         Vector<double>& s) const //senare
   {
    throw OomphLibError(
     "get_s_plot(...) is not implemented for this element\n",

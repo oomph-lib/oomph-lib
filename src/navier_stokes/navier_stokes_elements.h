@@ -940,6 +940,81 @@ public:
   Vector<double> &press_mass_diag, Vector<double> &veloc_mass_diag,
   const unsigned& which_one=0);
 
+ /// \short Number of scalars/fields output by this element. Reimplements
+ /// broken virtual function in base class.
+ unsigned nscalar_paraview() const
+  {
+   return DIM+1;
+  }
+
+ /// \short Write values of the i-th scalar field at the plot points. Needs 
+ /// to be implemented for each new specific element type.
+ void scalar_value_paraview(std::ofstream& file_out,
+                            const unsigned& i,
+                            const unsigned& nplot) const
+ {
+  // Vector of local coordinates
+  Vector<double> s(DIM);
+
+ 
+  // Loop over plot points
+  unsigned num_plot_points=nplot_points_paraview(nplot);
+  for (unsigned iplot=0;iplot<num_plot_points;iplot++)
+   {
+    
+    // Get local coordinates of plot point
+    get_s_plot(iplot,nplot,s);
+    
+    // Velocities
+    if(i<DIM) {file_out << interpolated_u_nst(s,i) << std::endl;}
+
+    // Pressure
+    else if(i==DIM) {file_out << interpolated_p_nst(s)  << std::endl;}
+
+    // Never get here
+    else
+     {
+#ifdef PARANOID
+     std::stringstream error_stream;
+    error_stream 
+     << "These Navier Stokes elements only store " << DIM+1 << " fields, "
+     << "but i is currently  " << i << std::endl;
+    throw OomphLibError(
+     error_stream.str(),
+     OOMPH_CURRENT_FUNCTION,
+     OOMPH_EXCEPTION_LOCATION);
+#endif
+     }
+   }
+ }
+ 
+ /// \short Name of the i-th scalar field. Default implementation
+ /// returns V1 for the first one, V2 for the second etc. Can (should!) be
+ /// overloaded with more meaningful names in specific elements.
+ string scalar_name_paraview(const unsigned& i) const
+  {
+    // Velocities
+   if(i<DIM) {return "Velocity "+StringConversion::to_string(i);}
+
+    // Preussre
+   else if(i==DIM) {return "Pressure";}
+
+    // Never get here
+    else
+     {
+#ifdef PARANOID
+     std::stringstream error_stream;
+    error_stream  
+     << "These Navier Stokes elements only store " << DIM+1 << "  fields,\n"
+     << "but i is currently  " << i << std::endl;
+    throw OomphLibError(
+     error_stream.str(),
+     OOMPH_CURRENT_FUNCTION,
+     OOMPH_EXCEPTION_LOCATION);
+#endif
+     }
+  }
+
  /// \short Output function: x,y,[z],u,v,[w],p
  /// in tecplot format. Default number of plot points
  void output(std::ostream &outfile)

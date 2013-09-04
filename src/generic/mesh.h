@@ -759,6 +759,54 @@ public:
  /// \short Read solution from restart file
  virtual void read(std::ifstream &restart_file);
 
+
+ /// \short Output in paraview format into specified file. Breaks up each
+ /// element into sub-elements for plotting purposes. We assume
+ /// that all elements are of the same type (fct will break 
+ /// break (in paranoid mode) if paraview output fcts of the
+ /// elements are inconsistent). 
+ void output_paraview(std::ofstream &file_out, 
+                      const unsigned &nplot) const;
+
+ /// Writes the pvd file header
+ void write_pvd_header(std::ofstream &pvd_file)
+ {
+  pvd_file
+   << "<?xml version=\"1.0\"?>" << std::endl
+   << "<VTKFile type=\"Collection\" version=\"0.1\">"  << std::endl
+   << "<Collection>"<< std::endl;
+ }
+ 
+ /// \short Add name of output file and associated continuous time
+ /// to pvd file.
+ void write_pvd_information(std::ofstream &pvd_file,
+                            const std::string& output_filename,
+                            const double& time)
+ {
+  // Output the actual time values
+  pvd_file
+   << "<DataSet timestep=\""
+   << time
+   << "\" ";
+
+  // Apparently this has to go in
+  pvd_file << "part=\"0\" ";
+
+  // Add the name of the file, so that the pvd file knows what it is called
+  pvd_file
+   << "file=\""
+   << output_filename
+   <<"\"/>" << std::endl;
+ }
+
+ /// Writes the pvd file footer
+ void write_pvd_footer(std::ofstream &pvd_file)
+ {
+  pvd_file
+   << "</Collection>" << std::endl
+   << "</VTKFile>";
+ }
+
  /// Output for all elements
  void output(std::ostream &outfile);
 

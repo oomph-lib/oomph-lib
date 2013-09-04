@@ -39,7 +39,7 @@ cat  RESLT_hijacked_external/soln5.dat RESLT_hijacked_external/trace.dat \
      RESLT_elastic_hijacked_external/trace.dat \
      RESLT_elastic_hijacked_internal/soln5.dat \
      RESLT_elastic_hijacked_internal/trace.dat \
-     > axi_static_cap.dat
+     RESLT/soln0.vtu > axi_static_cap.dat
 
 if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log

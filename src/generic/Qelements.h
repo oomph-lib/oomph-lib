@@ -620,6 +620,69 @@ public:
  /// Number of nodes along each element edge
  unsigned nnode_1d() const {return NNODE_1D;}
 
+ /// \short Return the number of actual plot points for paraview
+ /// plot with parameter nplot.
+ unsigned nplot_points_paraview(const unsigned& nplot) const
+  {
+   return nplot;
+  }
+ 
+ /// \short Return the number of local sub-elements for paraview plot with 
+ /// parameter nplot.
+ unsigned nsub_elements_paraview(const unsigned& nplot) const 
+  {
+   return (nplot-1);   
+  }
+
+ /// \short Fill in the offset information for paraview plot.
+ /// Needs to be implemented for each new geometric element type; see
+ /// http://www.vtk.org/VTK/img/file-formats.pdf
+ void write_paraview_output_offset_information(std::ofstream& file_out,
+                                               const unsigned& nplot,
+                                               unsigned& counter) const
+  {
+   // Number of local elements we want to plot over
+   unsigned plot=nsub_elements_paraview(nplot);
+   
+   // loops over the i-th local element in parent element
+   for(unsigned i=0;i<plot;i++)
+    {
+     file_out << i+counter << " "
+              << i+1+counter 
+              << std::endl;
+    }
+   counter+=nplot_points_paraview(nplot);
+  }
+
+ /// \short Return the paraview element type.
+ /// Needs to be implemented for each new geometric element type; see
+ /// http://www.vtk.org/VTK/img/file-formats.pdf
+ void write_paraview_type(std::ofstream& file_out,
+                          const unsigned& nplot) const
+  {
+   unsigned local_loop=nsub_elements_paraview(nplot);
+   for(unsigned i=0;i<local_loop;i++)
+    {
+     file_out << "3" << std::endl;
+    }
+  }
+ 
+ /// \short Return the offsets for the paraview sub-elements. Needs 
+ /// to be implemented for each new geometric element type; see
+ /// http://www.vtk.org/VTK/img/file-formats.pdf
+ void write_paraview_offsets(std::ofstream& file_out,
+                             const unsigned& nplot, 
+                             unsigned& offset_sum) const
+  {
+   // Loop over all local elements and add its offset to the overall offset_sum
+   unsigned local_loop=nsub_elements_paraview(nplot);
+   for(unsigned i=0;i<local_loop;i++)
+    {
+     offset_sum+=2;
+     file_out << offset_sum << std::endl;
+    }
+  }
+
  /// Output 
  void output(std::ostream &outfile);
 
@@ -636,7 +699,7 @@ public:
  /// \short  Get cector of local coordinates of plot point i (when plotting 
  /// nplot points in each "coordinate direction).
  void get_s_plot(const unsigned& i, const unsigned& nplot,
-                 Vector<double>& s)
+                 Vector<double>& s) const
   {
    if (nplot>1)
     {
@@ -839,6 +902,72 @@ public:
  /// Number of nodes along each element edge
  unsigned nnode_1d() const {return NNODE_1D;}
 
+ /// \short Return the number of actual plot points for paraview
+ /// plot with parameter nplot.
+ unsigned nplot_points_paraview(const unsigned& nplot) const
+  {
+   return nplot*nplot;
+  }
+ 
+ /// \short Return the number of local sub-elements for paraview plot with 
+ /// parameter nplot.
+ unsigned nsub_elements_paraview(const unsigned& nplot) const 
+  {
+   return (nplot-1)*(nplot-1);   
+  }
+
+ /// \short Fill in the offset information for paraview plot.
+ /// Needs to be implemented for each new geometric element type; see
+ /// http://www.vtk.org/VTK/img/file-formats.pdf
+ void write_paraview_output_offset_information(std::ofstream& file_out,
+                                               const unsigned& nplot,
+                                               unsigned& counter) const
+  {
+   // Number of local elements we want to plot over
+   unsigned plot=nsub_elements_paraview(nplot);
+   
+   // loops over the i-th local element in parent element
+   for(unsigned i=0;i<plot;i++)
+    {
+     unsigned d=(i-(i%(nplot-1)))/(nplot-1);
+     
+     file_out << i%(nplot-1)+d*nplot+counter << " "
+              << i%(nplot-1)+1+d*nplot+counter << " "
+              << i%(nplot-1)+(d+1)*nplot+counter << " "
+              << i%(nplot-1)+1+(d+1)*nplot+counter << std::endl;
+    }
+   counter+=nplot_points_paraview(nplot);
+  }
+
+ /// \short Return the paraview element type.
+ /// Needs to be implemented for each new geometric element type; see
+ /// http://www.vtk.org/VTK/img/file-formats.pdf
+ void write_paraview_type(std::ofstream& file_out,
+                          const unsigned& nplot) const
+  {
+   unsigned local_loop=nsub_elements_paraview(nplot);
+   for(unsigned i=0;i<local_loop;i++)
+    {
+     file_out << "8" << std::endl;
+    }
+  }
+ 
+ /// \short Return the offsets for the paraview sub-elements. Needs 
+ /// to be implemented for each new geometric element type; see
+ /// http://www.vtk.org/VTK/img/file-formats.pdf
+ void write_paraview_offsets(std::ofstream& file_out,
+                             const unsigned& nplot, 
+                             unsigned& offset_sum) const
+  {
+   // Loop over all local elements and add its offset to the overall offset_sum
+   unsigned local_loop=nsub_elements_paraview(nplot);
+   for(unsigned i=0;i<local_loop;i++)
+    {
+     offset_sum+=4;
+     file_out << offset_sum << std::endl;
+    }
+  }
+
  /// Output
  void output(std::ostream &outfile);
 
@@ -855,7 +984,7 @@ public:
  /// \short  Get cector of local coordinates of plot point i (when plotting 
  /// nplot points in each "coordinate direction).
  void get_s_plot(const unsigned& i, const unsigned& nplot,
-                 Vector<double>& s)
+                 Vector<double>& s) const
   {
    if (nplot>1)
     {
@@ -1083,6 +1212,89 @@ public:
  /// Number of nodes along each element edge
  unsigned nnode_1d() const {return NNODE_1D;}
 
+ /// \short Return the number of actual plot points for paraview
+ /// plot with parameter nplot.
+ unsigned nplot_points_paraview(const unsigned& nplot) const
+  {
+   return nplot*nplot*nplot;
+  }
+
+ /// \short Return the number of local sub-elements for paraview plot with 
+ /// parameter nplot.
+ unsigned nsub_elements_paraview(const unsigned& nplot) const 
+  {
+   return (nplot-1)*(nplot-1)*(nplot-1);
+  }
+
+ /// \short Fill in the offset information for paraview plot.
+ /// Needs to be implemented for each new geometric element type; see
+ /// http://www.vtk.org/VTK/img/file-formats.pdf
+void write_paraview_output_offset_information(std::ofstream& file_out,
+                                               const unsigned& nplot,
+                                              unsigned& counter) const
+  {
+   // Number of local elements we want to plot over
+   unsigned plot=nsub_elements_paraview(nplot);
+   
+   for(unsigned j=0;j<plot;j+=(nplot-1)*(nplot-1)+1)
+    {
+     // To keep track of how many cross-sections we've looped over
+     unsigned r=((j-(j%((nplot-1)*(nplot-1))))/((nplot-1)*(nplot-1)));
+
+     // loop over all the elemnets in this sublevel
+     unsigned sub_plot=(nplot-1)*(nplot-1);
+
+     // loops over the i-th local element in parent element
+     for(unsigned i=0;i<sub_plot;i++)
+      {
+       unsigned d=((i-(i%(nplot-1)))/(nplot-1));
+       
+     
+       // lower level of rectangles
+       file_out << i%(nplot-1)+d*nplot+r*nplot*nplot+counter << " "
+                << i%(nplot-1)+1+d*nplot+r*nplot*nplot+counter << " "
+                << i%(nplot-1)+(d+1)*nplot+r*nplot*nplot+counter << " "
+                << i%(nplot-1)+1+(d+1)*nplot+r*nplot*nplot+counter << " "
+        
+        // Upper level of rectangle
+                << i%(nplot-1)+d*nplot+(r+1)*nplot*nplot+counter << " "
+                << i%(nplot-1)+1+d*nplot+(r+1)*nplot*nplot+counter << " "
+                << i%(nplot-1)+(d+1)*nplot+(r+1)*nplot*nplot+counter << " "
+                << i%(nplot-1)+1+(d+1)*nplot+(r+1)*nplot*nplot+counter 
+                << std::endl;
+      }
+    }
+   counter+=nplot_points_paraview(nplot);
+  }
+
+ /// \short Return the paraview element type.
+ /// Needs to be implemented for each new geometric element type; see
+ /// http://www.vtk.org/VTK/img/file-formats.pdf
+ void write_paraview_type(std::ofstream& file_out,
+                          const unsigned& nplot) const
+  {
+   unsigned local_loop=nsub_elements_paraview(nplot);
+   for(unsigned i=0;i<local_loop;i++)
+    {
+     file_out << "11" << std::endl;
+    }
+  }
+
+ /// \short Return the offsets for the paraview sub-elements. Needs 
+ /// to be implemented for each new geometric element type; see
+ /// http://www.vtk.org/VTK/img/file-formats.pdf
+ void write_paraview_offsets(std::ofstream& file_out,
+                             const unsigned& nplot,
+                             unsigned& offset_sum) const
+  {
+   unsigned local_loop=nsub_elements_paraview(nplot);
+   for(unsigned i=0;i<local_loop;i++)
+    {
+     offset_sum+=8;
+     file_out << offset_sum << std::endl;
+    }
+  }
+
  /// Output
  void output(std::ostream &outfile);
 
@@ -1098,7 +1310,7 @@ public:
  /// \short  Get cector of local coordinates of plot point i (when plotting 
  /// nplot points in each "coordinate direction).
  void get_s_plot(const unsigned& i, const unsigned& nplot,
-                 Vector<double>& s)
+                 Vector<double>& s) const
  {
   if (nplot>1)
    {

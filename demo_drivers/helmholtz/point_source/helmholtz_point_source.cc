@@ -621,7 +621,15 @@ void HelmholtzPointSourceProblem<ELEMENT>::doc_solution(DocInfo&
  some_file.open(filename);
  Bulk_mesh_pt->output(some_file,npts);
  some_file.close();
- 
+
+ // Output solution in Paraview
+ //---------------------------
+ sprintf(filename,"%s/soln%i.vtu",doc_info.directory().c_str(),
+         doc_info.number());
+ some_file.open(filename);
+ Bulk_mesh_pt->output_paraview(some_file,npts);
+ some_file.close();
+
  // Write power to trace file
  Trace_file  << power << std::endl;
 
