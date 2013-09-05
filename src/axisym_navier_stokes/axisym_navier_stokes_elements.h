@@ -632,7 +632,7 @@ public:
  /// for outer unit normal N
  void traction(const Vector<double>& s, 
                const Vector<double>& N, 
-               Vector<double>& traction);
+               Vector<double>& traction) const;
 
  /// \short Compute the diagonal of the velocity/pressure mass matrices.
  /// If which one=0, both are computed, otherwise only the pressure 
@@ -673,26 +673,22 @@ public:
      {
       file_out << interpolated_u_axi_nst(s,i) << std::endl;
      }
-    
     // Pressure
     else if(i==3) 
      {
       file_out << interpolated_p_axi_nst(s) << std::endl;
      }
-    
     // Never get here
     else
      {
-#ifdef PARANOID
       std::stringstream error_stream;
       error_stream
-     << "Axisymmetric Navier-Stokes Elements only store 4 feilds "
-     << "they currently have " << i << " feilds" << std::endl;
+     << "Axisymmetric Navier-Stokes Elements only store 4 fields "
+     << std::endl;
       throw OomphLibError(
        error_stream.str(),
        OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
-#endif
      }
    }
  }
@@ -703,35 +699,38 @@ public:
  string scalar_name_paraview(const unsigned& i) const
  {
   // Winds
-  if(i<3) {return "Velocity "+StringConversion::to_string(i);}
-  
-  // Advection Diffusion feild
-  else if(i==3) {return "Pressure";}
-  
+  if(i<3) 
+   {
+    return "Velocity "+StringConversion::to_string(i);
+   }
+  // Advection Diffusion field
+  else if(i==3) 
+   {
+    return "Pressure";
+   }
   // Never get here
-    else
-     {
-#ifdef PARANOID
-      std::stringstream error_stream;
-      error_stream
-       << "Axisymmetric Navier-Stokes Elements only store 4 feilds "
-       << "they currently have " << i << " feilds" << std::endl;
-      throw OomphLibError(
-       error_stream.str(),
-       OOMPH_CURRENT_FUNCTION,
-       OOMPH_EXCEPTION_LOCATION);
-#endif
-     }
+  else
+   {
+    std::stringstream error_stream;
+    error_stream
+     << "Axisymmetric Navier-Stokes Elements only store 4 fields "
+     << std::endl;
+    throw OomphLibError(
+     error_stream.str(),
+     OOMPH_CURRENT_FUNCTION,
+     OOMPH_EXCEPTION_LOCATION);
+    return " ";
+   }
  }
 
  /// \short Output function: x,y,[z],u,v,[w],p
  /// in tecplot format. Default number of plot points
  void output(std::ostream &outfile)
-  {
-   unsigned nplot=5;
-   output(outfile,nplot);
+ {
+  unsigned nplot=5;
+  output(outfile,nplot);
   }
-
+ 
  /// \short Output function: x,y,[z],u,v,[w],p
  /// in tecplot format. nplot points in each coordinate direction
  void output(std::ostream &outfile, const unsigned &nplot);
@@ -1309,7 +1308,7 @@ public:
 
  /// \short Compute traction at local coordinate s for outer unit normal N
  void get_traction(const Vector<double>& s, const Vector<double>& N,
-                   Vector<double>& traction);
+                   Vector<double>& traction) const;
 
  /// \short Overload the access function for the pressure's local
  /// equation numbers
@@ -1584,7 +1583,7 @@ public virtual AxisymmetricNavierStokesEquations
 
  /// \short Compute traction at local coordinate s for outer unit normal N
  void get_traction(const Vector<double>& s, const Vector<double>& N,
-                   Vector<double>& traction);
+                   Vector<double>& traction) const;
 
   /// \short Overload the access function for the pressure's local
  /// equation numbers

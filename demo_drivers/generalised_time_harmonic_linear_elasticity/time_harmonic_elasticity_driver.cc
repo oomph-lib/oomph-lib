@@ -41,9 +41,6 @@
 //The meshes
 #include "meshes/triangle_mesh.h"
 
-// The meshes needed in the PML constructions
-#include "meshes/rectangular_quadmesh.h"
-
 using namespace std;
 using namespace oomph;
 

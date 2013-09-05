@@ -103,7 +103,7 @@ public virtual FaceGeometry<ELEMENT>,
                            const unsigned& intpt,
                            const Vector<double>& x,
                            const Vector<double>& n,
-                           Vector<double>& traction)
+                           Vector<double>& traction) const
  {
   Traction_fct_pt(time,x,n,traction);
  }
@@ -255,7 +255,6 @@ public virtual FaceGeometry<ELEMENT>,
 
      //Dummy integration point
      unsigned ipt=0;
-
      get_traction(time,ipt,interpolated_x,unit_normal,traction);
 
      // Traction components
@@ -263,27 +262,22 @@ public virtual FaceGeometry<ELEMENT>,
       {
        file_out << traction[k] << std::endl;
       }
-  
-     // Advection Diffusion feild
+     // Advection Diffusion 
      else if (k<2*n_dim+1 && k>=n_dim+1) 
       {
        file_out << unit_normal[k] << std::endl;
       }
-     
      // Never get here
      else
       {
-#ifdef PARANOID
        std::stringstream error_stream;
        error_stream
         << "Axisymmetric Fluid Traction Navier-Stokes Elements only store "
-        << 2*(dim+1) << " feilds "
-        << "they currently have " << k << " feilds" << std::endl;
+        << 2*(n_dim+1) << " fields " << std::endl;
        throw OomphLibError(
         error_stream.str(),
         OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
-#endif 
       }
     }
  }
@@ -301,27 +295,22 @@ public virtual FaceGeometry<ELEMENT>,
    {
     return "Traction component "+StringConversion::to_string(i);
    }
-  
   // Normals
   else if (i<2*n_dim+1 && i>=n_dim+1) 
    {
     return "Normal "+StringConversion::to_string(i%(n_dim+1));
    }
-   
   // Never get here
   else
    {
-#ifdef PARANOID
     std::stringstream error_stream;
     error_stream
      << "Axisymmetric Fluid Traction Navier-Stokes Elements only store "
-     << 2*(dim+1) << " feilds "
-     << "they currently have " << i << " feilds" << std::endl;
+     << 2*(n_dim+1) << " fields " << std::endl;
     throw OomphLibError(
      error_stream.str(),
      OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
-#endif 
    }
  }
  
@@ -382,7 +371,6 @@ public virtual FaceGeometry<ELEMENT>,
 
      //Dummy integration point
      unsigned ipt=0;
-
      get_traction(time,ipt,interpolated_x,unit_normal,traction);
 
      //Output the x,y,..

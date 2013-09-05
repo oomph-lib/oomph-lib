@@ -401,10 +401,10 @@ doc_solution(DocInfo &doc_info)
  some_file.close();
  
  // Write pvd information 
- string file_name="soln"+StringConversion::to_string( doc_info.number())
+ string file_name="soln"+StringConversion::to_string(doc_info.number())
   +".vtu";
- mesh_pt()->write_pvd_information(Global_Physical_Variables::Pvd_file,
-                                  file_name,t);
+ ParaviewHelper::write_pvd_information(Global_Physical_Variables::Pvd_file,
+                                       file_name,t);
 
 } // End of doc_solution
 
@@ -458,7 +458,7 @@ unsteady_run(const double &t_max, const double &dt)
  // to facilitate animations in paraview
  sprintf(filename,"%s/soln.pvd",doc_info.directory().c_str());
  Global_Physical_Variables::Pvd_file.open(filename);
- mesh_pt()->write_pvd_header(Global_Physical_Variables::Pvd_file);
+ ParaviewHelper::write_pvd_header(Global_Physical_Variables::Pvd_file);
 
  // Doc initial solution
  doc_solution(doc_info);
@@ -483,7 +483,7 @@ unsteady_run(const double &t_max, const double &dt)
   } // End of timestepping loop
 
  // write footer and close pvd file
- mesh_pt()->write_pvd_footer(Global_Physical_Variables::Pvd_file);
+ ParaviewHelper::write_pvd_footer(Global_Physical_Variables::Pvd_file);
  Global_Physical_Variables::Pvd_file.close();
 
 } // End of unsteady_run

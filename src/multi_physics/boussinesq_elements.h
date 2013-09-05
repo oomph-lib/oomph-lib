@@ -125,6 +125,42 @@ public:
    AdvectionDiffusionEquations<DIM>::enable_ALE();
   }
 
+ /// \short Number of scalars/fields output by this element. Broken
+ /// virtual. Needs to be implemented for each new specific element type.
+ /// Temporary dummy
+ unsigned nscalar_paraview() const
+ {
+  throw OomphLibError(
+   "This function hasn't been implemented for this element",
+   OOMPH_CURRENT_FUNCTION,
+   OOMPH_EXCEPTION_LOCATION);
+  
+  // Dummy unsigned
+  return 0;
+ }
+ 
+ /// \short Write values of the i-th scalar field at the plot points. Broken
+ /// virtual. Needs to be implemented for each new specific element type.
+ /// Temporary dummy
+ void scalar_value_paraview(std::ofstream& file_out,
+                            const unsigned& i,
+                            const unsigned& nplot)  const
+ {
+  throw OomphLibError(
+   "This function hasn't been implemented for this element",
+   OOMPH_CURRENT_FUNCTION,
+   OOMPH_EXCEPTION_LOCATION);
+ }
+ 
+ 
+ /// \short Name of the i-th scalar field. Default implementation
+ /// returns V1 for the first one, V2 for the second etc. Can (should!) be
+ /// overloaded with more meaningful names.
+ std::string scalar_name_paraview(const unsigned& i) const
+  {
+   return "V"+StringConversion::to_string(i);
+  }
+ 
 
  ///  Overload the standard output function with the broken default
  void output(std::ostream &outfile) {FiniteElement::output(outfile);}
@@ -773,6 +809,42 @@ public:
   }
 
 
+ /// \short Number of scalars/fields output by this element. Broken
+ /// virtual. Needs to be implemented for each new specific element type.
+ /// Temporary dummy
+ unsigned nscalar_paraview() const
+ {
+  throw OomphLibError(
+   "This function hasn't been implemented for this element",
+   OOMPH_CURRENT_FUNCTION,
+   OOMPH_EXCEPTION_LOCATION);
+  
+  // Dummy unsigned
+  return 0;
+ }
+ 
+ /// \short Write values of the i-th scalar field at the plot points. Broken
+ /// virtual. Needs to be implemented for each new specific element type.
+ /// Temporary dummy
+ void scalar_value_paraview(std::ofstream& file_out,
+                            const unsigned& i,
+                            const unsigned& nplot)  const
+ {
+  throw OomphLibError(
+   "This function hasn't been implemented for this element",
+   OOMPH_CURRENT_FUNCTION,
+   OOMPH_EXCEPTION_LOCATION);
+ }
+ 
+ 
+ /// \short Name of the i-th scalar field. Default implementation
+ /// returns V1 for the first one, V2 for the second etc. Can (should!) be
+ /// overloaded with more meaningful names.
+ std::string scalar_name_paraview(const unsigned& i) const
+  {
+   return "V"+StringConversion::to_string(i);
+  }
+ 
  ///  Overload the standard output function with the broken default
  void output(std::ostream &outfile)
   {FiniteElement::output(outfile);}

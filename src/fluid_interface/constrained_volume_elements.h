@@ -40,6 +40,7 @@
 //OOMPH-LIB headers
 #include "../generic/Qelements.h"
 #include "../generic/spines.h"
+#include "../axisym_navier_stokes/axisym_navier_stokes_elements.h"
 
 //-------------------------------------------
 // NOTE: This is still work 
@@ -355,7 +356,7 @@ namespace oomph
   ~LineVolumeConstraintBoundingElement() {}
   
   /// Return this element's contribution to the total volume enclosed
-  //double contribution_to_enclosed_volume();
+  double contribution_to_enclosed_volume();
 
  };
 
@@ -507,7 +508,86 @@ namespace oomph
 
   /// \short Empty Destructor
   ~AxisymmetricVolumeConstraintBoundingElement() {}
+
+  /// Return this element's contribution to the total volume enclosed
+  double contribution_to_enclosed_volume();
+
+  /// \short Return this element's contribution to the volume flux over
+  /// the boundary
+  double contribution_to_volume_flux()
+  {
+   // Initialise
+   double vol=0.0;
+   
+   //Find out how many nodes there are
+   const unsigned n_node = this->nnode();
   
+   //Set up memeory for the shape functions
+   Shape psif(n_node);
+   DShape dpsifds(n_node,1);
+  
+   //Set the value of n_intpt
+   const unsigned n_intpt = this->integral_pt()->nweight();
+  
+   //Storage for the local cooridinate
+   Vector<double> s(1);
+  
+   //Loop over the integration points
+   for(unsigned ipt=0;ipt<n_intpt;ipt++)
+    {
+     //Get the local coordinate at the integration point
+     s[0] = this->integral_pt()->knot(ipt,0);
+    
+     //Get the integral weight
+     double W = this->integral_pt()->weight(ipt);
+    
+     //Call the derivatives of the shape function at the knot point
+     this->dshape_local_at_knot(ipt,psif,dpsifds);
+    
+     // Get position, tangent vector and velocity vector (r and z 
+     // components only)
+     Vector<double> interpolated_u(2,0.0);
+     Vector<double> interpolated_t1(2,0.0);
+     Vector<double> interpolated_x(2,0.0);
+     for(unsigned l=0;l<n_node;l++)
+      {
+       //Loop over directional components
+       for(unsigned i=0;i<2;i++)
+        {
+         interpolated_x[i] += this->nodal_position(l,i)*psif(l);
+         interpolated_u[i] += this->node_pt(l)->value(
+          dynamic_cast<AxisymmetricNavierStokesEquations*>(bulk_element_pt())
+          ->u_index_axi_nst(i))*psif(l);
+         interpolated_t1[i] += this->nodal_position(l,i)*dpsifds(l,0);
+        }
+      }
+    
+     //Calculate the length of the tangent Vector
+     double tlength = interpolated_t1[0]*interpolated_t1[0] + 
+      interpolated_t1[1]*interpolated_t1[1];
+    
+     //Set the Jacobian of the line element
+     double J = sqrt(tlength)*interpolated_x[0];
+    
+     //Now calculate the normal Vector
+     Vector<double> interpolated_n(2);
+     this->outer_unit_normal(ipt,interpolated_n);
+    
+     // Assemble dot product
+     double dot = 0.0;
+     for(unsigned k=0;k<2;k++) 
+      {
+       dot += interpolated_u[k]*interpolated_n[k];
+      }
+    
+     // Add to volume with sign chosen so that the volume is
+     // positive when the elements bound the fluid
+     vol += dot*W*J;
+    }
+
+   return vol;
+  }
+
  };
 
 //////////////////////////////////////////////////////////////////////

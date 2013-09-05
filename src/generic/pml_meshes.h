@@ -158,23 +158,25 @@ class PMLQuadMesh : public RectangularQuadMesh<ELEMENT>
 
   public:
 
-  /// \short Constructor: Pass pointer to unstructured "bulk" mesh,
+  /// \short Constructor: Pass pointer to "bulk" mesh,
   /// the boundary ID of axis aligned boundary to which the
   /// mesh is supposed to be attached and the boundary ID in the
   /// rectangular quad mesh that contains the pml elements.
   /// (1: constant x, bulk mesh to the right,
   /// 2: constant y, bulk mesh above; 3: constant x, bulk mesh to left;
   /// 0: constant y, bulk mesh below.
-  PMLQuadMesh(Mesh* triangle_mesh_pt, 
+  PMLQuadMesh(Mesh* bulk_mesh_pt, 
               const unsigned& boundary_id, const unsigned& quad_boundary_id, 
               const unsigned& n_pml_x, const unsigned& n_pml_y,
               const double& x_pml_start, const double& x_pml_end, 
-              const double& y_pml_start, const double& y_pml_end):
+              const double& y_pml_start, const double& y_pml_end,
+              TimeStepper* time_stepper_pt=&Mesh::Default_TimeStepper) :
     RectangularQuadMesh<ELEMENT>(n_pml_x,n_pml_y,
                                  x_pml_start,x_pml_end,
-                                 y_pml_start,y_pml_end)
+                                 y_pml_start,y_pml_end,
+                                 time_stepper_pt)
   {
-   unsigned n_boundary_node = triangle_mesh_pt -> nboundary_node(boundary_id);
+   unsigned n_boundary_node = bulk_mesh_pt -> nboundary_node(boundary_id);
  
    // Create a vector of ordered boundary nodes
    Vector<Node*> ordered_boundary_node_pt(n_boundary_node);
@@ -183,7 +185,7 @@ class PMLQuadMesh : public RectangularQuadMesh<ELEMENT>
    for (unsigned n=0; n<n_boundary_node; n++)
     {
      ordered_boundary_node_pt[n] = 
-      triangle_mesh_pt -> boundary_node_pt(boundary_id, n);
+      bulk_mesh_pt -> boundary_node_pt(boundary_id, n);
     }
 
    /// Sort them depending on the boundary being used
@@ -484,13 +486,13 @@ class PMLCornerQuadMesh : public RectangularQuadMesh<ELEMENT>
 {
   public:
 
- /// \short Constructor: Pass pointer to unstructured "bulk" mesh
+ /// \short Constructor: Pass pointer to "bulk" mesh
  /// and the two existing PML meshes in order to construct the corner
  /// PML mesh in between them based on their element number
  /// and coordinates.
  PMLCornerQuadMesh(Mesh* PMLQuad_mesh_x_pt, 
                    Mesh* PMLQuad_mesh_y_pt, 
-                   Mesh* triangle_mesh_pt, 
+                   Mesh* bulk_mesh_pt, 
                    Node* special_corner_node_pt,
                    const unsigned& parent_boundary_x_id, 
                    const unsigned& parent_boundary_y_id, 
@@ -498,10 +500,12 @@ class PMLCornerQuadMesh : public RectangularQuadMesh<ELEMENT>
                    const unsigned& current_boundary_y_id,  
                    const unsigned& n_pml_x, const unsigned& n_pml_y,
                    const double& x_pml_start, const double& x_pml_end, 
-                   const double& y_pml_start, const double& y_pml_end):
+                   const double& y_pml_start, const double& y_pml_end,
+                   TimeStepper* time_stepper_pt=&Mesh::Default_TimeStepper):
   RectangularQuadMesh<ELEMENT>(n_pml_x,n_pml_y,
                                x_pml_start,x_pml_end,
-                               y_pml_start,y_pml_end)
+                               y_pml_start,y_pml_end,
+                               time_stepper_pt)
   {
 
    unsigned nnode_1d = this->finite_element_pt(0)->nnode_1d();
@@ -1172,7 +1176,9 @@ template<class ASSOCIATED_PML_QUAD_ELEMENT>
  Mesh* create_right_pml_mesh(Mesh* bulk_mesh_pt,
                              const unsigned& right_boundary_id,
                              const unsigned& n_x_right_pml,
-                             const double& width_x_right_pml)
+                             const double& width_x_right_pml,
+                             TimeStepper* time_stepper_pt=
+                             &Mesh::Default_TimeStepper)
  {  
   // Look at the right boundary of the triangular mesh
   unsigned n_right_boundary_node = 
@@ -1221,7 +1227,8 @@ template<class ASSOCIATED_PML_QUAD_ELEMENT>
      (bulk_mesh_pt, right_boundary_id, right_quadPML_boundary_id,  
       n_x_right_pml, n_y_right_pml, 
       l_pml_right_x_start, l_pml_right_x_end, 
-      l_pml_right_y_start, l_pml_right_y_end);
+      l_pml_right_y_start, l_pml_right_y_end,
+      time_stepper_pt);
 
   // Enable PML damping on the entire mesh
   unsigned n_element_pml_right = pml_right_mesh_pt->nelement();
@@ -1274,7 +1281,9 @@ template<class ASSOCIATED_PML_QUAD_ELEMENT>
  Mesh* create_top_pml_mesh(Mesh* bulk_mesh_pt,
                            const unsigned& top_boundary_id,
                            const unsigned& n_y_top_pml,
-                           const double& width_y_top_pml)
+                           const double& width_y_top_pml,
+                           TimeStepper* time_stepper_pt=
+                           &Mesh::Default_TimeStepper)
  {  
   // Look at the top boundary of the triangular mesh
   unsigned n_top_boundary_node = 
@@ -1321,7 +1330,8 @@ template<class ASSOCIATED_PML_QUAD_ELEMENT>
      (bulk_mesh_pt, top_boundary_id, top_quadPML_boundary_id,  
       n_x_top_pml, n_y_top_pml, 
       l_pml_top_x_start, l_pml_top_x_end, 
-      l_pml_top_y_start, l_pml_top_y_end);
+      l_pml_top_y_start, l_pml_top_y_end,
+      time_stepper_pt);
 
   // Enable PML damping on the entire mesh
   unsigned n_element_pml_top = pml_top_mesh_pt->nelement();
@@ -1375,7 +1385,9 @@ template<class ASSOCIATED_PML_QUAD_ELEMENT>
  Mesh* create_left_pml_mesh(Mesh* bulk_mesh_pt,
                             const unsigned& left_boundary_id,
                             const unsigned& n_x_left_pml,
-                            const double& width_x_left_pml)
+                            const double& width_x_left_pml,
+                            TimeStepper* time_stepper_pt=
+                            &Mesh::Default_TimeStepper)
  {
   // Look at the left boundary of the triangular mesh
   unsigned n_left_boundary_node = 
@@ -1422,7 +1434,8 @@ template<class ASSOCIATED_PML_QUAD_ELEMENT>
      (bulk_mesh_pt, left_boundary_id, left_quadPML_boundary_id,  
       n_x_left_pml, n_y_left_pml, 
       l_pml_left_x_start, l_pml_left_x_end, 
-      l_pml_left_y_start, l_pml_left_y_end);  
+      l_pml_left_y_start, l_pml_left_y_end,
+      time_stepper_pt);  
 
   // Enable PML damping on the entire mesh
   unsigned n_element_pml_left = pml_left_mesh_pt->nelement();
@@ -1476,7 +1489,9 @@ template<class ASSOCIATED_PML_QUAD_ELEMENT>
  Mesh* create_bottom_pml_mesh(Mesh* bulk_mesh_pt,
                               const unsigned& bottom_boundary_id,
                               const unsigned& n_y_bottom_pml,
-                              const double& width_y_bottom_pml)
+                              const double& width_y_bottom_pml,
+                              TimeStepper* time_stepper_pt=
+                              &Mesh::Default_TimeStepper)
  {
   // Look at the bottom boundary of the triangular mesh
   unsigned n_bottom_boundary_node = 
@@ -1525,7 +1540,8 @@ template<class ASSOCIATED_PML_QUAD_ELEMENT>
      (bulk_mesh_pt, bottom_boundary_id, bottom_quadPML_boundary_id,  
       n_x_bottom_pml, n_y_bottom_pml, 
       l_pml_bottom_x_start, l_pml_bottom_x_end, 
-      l_pml_bottom_y_start, l_pml_bottom_y_end);
+      l_pml_bottom_y_start, l_pml_bottom_y_end,
+      time_stepper_pt);
   
   // Enable PML damping on the entire mesh
   unsigned n_element_pml_bottom = pml_bottom_mesh_pt->nelement();
@@ -1580,7 +1596,9 @@ template<class ASSOCIATED_PML_QUAD_ELEMENT>
 Mesh* create_top_right_pml_mesh(Mesh* pml_right_mesh_pt, 
                                 Mesh* pml_top_mesh_pt, 
                                 Mesh* bulk_mesh_pt,
-                                const unsigned& right_boundary_id)
+                                const unsigned& right_boundary_id,
+                                TimeStepper* time_stepper_pt=
+                                &Mesh::Default_TimeStepper)
  {
 
   /// \short Relevant boundary id's to be used in construction
@@ -1645,7 +1663,8 @@ Mesh* create_top_right_pml_mesh(Mesh* pml_right_mesh_pt,
       current_boundary_x_id, current_boundary_y_id,  
       n_x_right_pml, n_y_top_pml, 
       l_pml_right_x_start, l_pml_right_x_end, 
-      l_pml_top_y_start, l_pml_top_y_end);
+      l_pml_top_y_start, l_pml_top_y_end,
+      time_stepper_pt);
 
   // Enable PML damping on the entire mesh
   /// \short The enabling must be perfromed in both x- and y-directions
@@ -1703,7 +1722,9 @@ template<class ASSOCIATED_PML_QUAD_ELEMENT>
  Mesh* create_bottom_right_pml_mesh(Mesh* pml_right_mesh_pt, 
                                     Mesh* pml_bottom_mesh_pt, 
                                     Mesh* bulk_mesh_pt,
-                                    const unsigned& right_boundary_id)
+                                    const unsigned& right_boundary_id,
+                                    TimeStepper* time_stepper_pt=
+                                    &Mesh::Default_TimeStepper)
  {
 
   /// \short Relevant boundary id's to be used in construction
@@ -1766,7 +1787,8 @@ template<class ASSOCIATED_PML_QUAD_ELEMENT>
       current_boundary_x_id, current_boundary_y_id,  
       n_x_right_pml, n_y_bottom_pml, 
       l_pml_right_x_start, l_pml_right_x_end, 
-      l_pml_bottom_y_start, l_pml_bottom_y_end);  
+      l_pml_bottom_y_start, l_pml_bottom_y_end,
+      time_stepper_pt);  
   
   // Enable PML damping on the entire mesh
   /// \short The enabling must be perfromed in both x- and y-directions
@@ -1826,7 +1848,9 @@ template<class ASSOCIATED_PML_QUAD_ELEMENT>
  Mesh* create_top_left_pml_mesh(Mesh* pml_left_mesh_pt, 
                                 Mesh* pml_top_mesh_pt, 
                                 Mesh* bulk_mesh_pt,
-                                const unsigned& left_boundary_id)
+                                const unsigned& left_boundary_id,
+                                TimeStepper* time_stepper_pt=
+                                &Mesh::Default_TimeStepper)
  {
 
   /// \short Relevant boundary id's to be used in construction
@@ -1891,7 +1915,8 @@ template<class ASSOCIATED_PML_QUAD_ELEMENT>
       current_boundary_x_id, current_boundary_y_id,  
       n_x_left_pml, n_y_top_pml, 
       l_pml_left_x_start, l_pml_left_x_end, 
-      l_pml_top_y_start, l_pml_top_y_end);
+      l_pml_top_y_start, l_pml_top_y_end,
+      time_stepper_pt);
 
   // Enable PML damping on the entire mesh
   /// \short The enabling must be perfromed in both x- and y-directions
@@ -1950,7 +1975,9 @@ template<class ASSOCIATED_PML_QUAD_ELEMENT>
  Mesh* create_bottom_left_pml_mesh(Mesh* pml_left_mesh_pt, 
                                    Mesh* pml_bottom_mesh_pt, 
                                    Mesh* bulk_mesh_pt,
-                                   const unsigned& left_boundary_id)
+                                   const unsigned& left_boundary_id,
+                                   TimeStepper* time_stepper_pt=
+                                   &Mesh::Default_TimeStepper)
  {
 
   /// \short Relevant boundary id's to be used in construction
@@ -2012,7 +2039,8 @@ template<class ASSOCIATED_PML_QUAD_ELEMENT>
       current_boundary_x_id, current_boundary_y_id,  
       n_x_left_pml, n_y_bottom_pml, 
       l_pml_left_x_start, l_pml_left_x_end, 
-      l_pml_bottom_y_start, l_pml_bottom_y_end);
+      l_pml_bottom_y_start, l_pml_bottom_y_end,
+      time_stepper_pt);
   
   //Enable PML damping on the entire mesh
   /// \short The enabling must be perfromed in both x- and y-directions

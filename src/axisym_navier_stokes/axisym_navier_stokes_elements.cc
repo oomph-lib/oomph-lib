@@ -639,8 +639,9 @@ double AxisymmetricNavierStokesEquations::dissipation() const
 /// coordinate s for outer unit normal N
 //==============================================================
 void AxisymmetricNavierStokesEquations::traction(const Vector<double>& s,
-                                   const Vector<double>& N, 
-                                   Vector<double>& traction)
+                                                 const Vector<double>& N, 
+                                                 Vector<double>& traction)
+ const 
 {
  //throw OomphLibError(
  // "Check the traction calculation for axisymmetric NSt",
@@ -3521,8 +3522,9 @@ required_nvalue(const unsigned &n) const {return Initial_Nvalue[n];}
 /// Compute traction at local coordinate s for outer unit normal N
 //========================================================================
 void AxisymmetricQCrouzeixRaviartElement::get_traction(const Vector<double>& s, 
-                                                     const Vector<double>& N, 
-                                                     Vector<double>& traction)
+                                                       const Vector<double>& N, 
+                                                       Vector<double>& traction)
+ const
 {
  AxisymmetricNavierStokesEquations::traction(s,N,traction);
 }
@@ -3597,8 +3599,9 @@ const unsigned AxisymmetricQTaylorHoodElement::Pconv[4]={0,2,6,8};
 /// Compute traction at local coordinate s for outer unit normal N
 //========================================================================
 void AxisymmetricQTaylorHoodElement::get_traction(const Vector<double>& s, 
-                                                 const Vector<double>& N, 
-                                                 Vector<double>& traction)
+                                                  const Vector<double>& N, 
+                                                  Vector<double>& traction)
+ const
 {
  AxisymmetricNavierStokesEquations::traction(s,N,traction);
 }

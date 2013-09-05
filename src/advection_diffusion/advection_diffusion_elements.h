@@ -185,26 +185,22 @@ public:
 
        file_out << wind[i] << std::endl;
       }     
-     
      // Advection Diffusion
      else if(i==DIM)
       {
        file_out << interpolated_u_adv_diff(s) << std::endl;
       }
-
      // Never get here
      else 
       {
-#ifdef PARANOID
        std::stringstream error_stream;
        error_stream 
-        << "Advection Diffusion Elements only store " << DIM+1 << " feilds "
-        << "they currently have " << i << " feilds" << std::endl;
+        << "Advection Diffusion Elements only store " << DIM+1 << " fields "
+        << std::endl;
        throw OomphLibError(
         error_stream.str(),
         OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
-#endif
       }
     }
   }
@@ -215,27 +211,31 @@ public:
  string scalar_name_paraview(const unsigned& i) const
   {
     // Winds
-   if(i<DIM) {return "Wind "+StringConversion::to_string(i);}
-
-   // Advection Diffusion feild
-   else if(i==DIM) {return "Advection Diffusion";}
-
-    // Never get here
-    else
-     {
-#ifdef PARANOID
+   if(i<DIM)
+    {
+     return "Wind "+StringConversion::to_string(i);
+    }
+   // Advection Diffusion field
+   else if(i==DIM) 
+    {
+     return "Advection Diffusion";
+    }
+   // Never get here
+   else
+    {
      std::stringstream error_stream;
-    error_stream
-     << "Advection Diffusion Elements only store " << DIM+1 << " feilds"
-     << "they currently have " << i << " feilds" << std::endl;
-    throw OomphLibError(
-     error_stream.str(),
-     OOMPH_CURRENT_FUNCTION,
-     OOMPH_EXCEPTION_LOCATION);
-#endif
-     }
+     error_stream
+      << "Advection Diffusion Elements only store " << DIM+1 << " fields"
+      << std::endl;
+     throw OomphLibError(
+      error_stream.str(),
+      OOMPH_CURRENT_FUNCTION,
+      OOMPH_EXCEPTION_LOCATION);
+     // Dummy return
+     return " ";
+    }
   }
-
+ 
  /// Output with default number of plot points
  void output(std::ostream &outfile) 
   {

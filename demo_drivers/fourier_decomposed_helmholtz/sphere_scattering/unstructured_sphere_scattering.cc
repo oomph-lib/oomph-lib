@@ -348,7 +348,10 @@ public:
  /// Recompute gamma integral before checking Newton residuals
  void actions_before_newton_convergence_check()
   {
-   Helmholtz_outer_boundary_mesh_pt->setup_gamma();
+   if (!CommandLineArgs::command_line_flag_has_been_set("--square_domain"))
+    {
+     Helmholtz_outer_boundary_mesh_pt->setup_gamma();
+    }
   }
 
  /// Actions before adapt: Wipe the mesh of prescribed flux elements
@@ -418,7 +421,10 @@ template<class ELEMENT>
 void FourierDecomposedHelmholtzProblem<ELEMENT>::actions_before_adapt()
 { 
  // Kill the flux elements and wipe the boundary meshs
- delete_face_elements(Helmholtz_outer_boundary_mesh_pt);
+ if (!CommandLineArgs::command_line_flag_has_been_set("--square_domain"))
+  {
+   delete_face_elements(Helmholtz_outer_boundary_mesh_pt);
+  }
  delete_face_elements(Helmholtz_inner_boundary_mesh_pt);
 
  // Rebuild the Problem's global mesh from its various sub-meshes
@@ -457,8 +463,10 @@ void FourierDecomposedHelmholtzProblem<ELEMENT>::actions_after_adapt()
  // from all elements that are adjacent to the boundaries and add them to 
  // Helmholtz_boundary_meshes
  create_flux_elements_on_inner_boundary();
- create_outer_bc_elements();
- 
+ if (!CommandLineArgs::command_line_flag_has_been_set("--square_domain"))
+  {
+   create_outer_bc_elements();
+  }
 
  // Rebuild the Problem's global mesh from its various sub-meshes
  rebuild_global_mesh();
@@ -509,19 +517,47 @@ FourierDecomposedHelmholtzProblem()
  outer_boundary_line_pt[0]=
   new TriangleMeshPolyLine(boundary_vertices,boundary_id);
 
- // Outer circular boundary:
- //-------------------------
- // The intrinsic coordinates for the beginning and end of the curve
- double s_start = -0.5*MathematicalConstants::Pi;
- double s_end   =  0.5*MathematicalConstants::Pi;
- 
- boundary_id = 1;
- outer_boundary_line_pt[1]=
-  new TriangleMeshCurviLine(outer_circle_pt,
-                            s_start,
-                            s_end,
-                            n_segments,
-                            boundary_id);
+
+ if (CommandLineArgs::command_line_flag_has_been_set("--square_domain"))
+  {
+   // Square outer boundary:
+   //-----------------------
+
+   Vector<Vector<double> > boundary_vertices(4);
+   boundary_vertices[0].resize(2);
+   boundary_vertices[0][0]=0.0;
+   boundary_vertices[0][1]=-r_max;
+   boundary_vertices[1].resize(2);
+   boundary_vertices[1][0]=r_max;
+   boundary_vertices[1][1]=-r_max;
+   boundary_vertices[2].resize(2);
+   boundary_vertices[2][0]=r_max;
+   boundary_vertices[2][1]=r_max;
+   boundary_vertices[3].resize(2);
+   boundary_vertices[3][0]=0.0;
+   boundary_vertices[3][1]=r_max;
+
+   boundary_id=1;
+   outer_boundary_line_pt[1]=
+    new TriangleMeshPolyLine(boundary_vertices,boundary_id);
+  }
+ else
+  {
+   // Outer circular boundary:
+   //-------------------------
+   // The intrinsic coordinates for the beginning and end of the curve
+   double s_start = -0.5*MathematicalConstants::Pi;
+   double s_end   =  0.5*MathematicalConstants::Pi;
+   
+   boundary_id = 1;
+   outer_boundary_line_pt[1]=
+    new TriangleMeshCurviLine(outer_circle_pt,
+                              s_start,
+                              s_end,
+                              n_segments,
+                              boundary_id);
+  }
+
 
  // Top straight boundary on symmetry line
  //---------------------------------------
@@ -539,8 +575,8 @@ FourierDecomposedHelmholtzProblem()
  //-------------------------
  
  // The intrinsic coordinates for the beginning and end of the curve
- s_start =  0.5*MathematicalConstants::Pi;
- s_end   =  -0.5*MathematicalConstants::Pi;
+ double s_start =  0.5*MathematicalConstants::Pi;
+ double s_end   =  -0.5*MathematicalConstants::Pi;
  
  boundary_id = 3;
  outer_boundary_line_pt[3]=
@@ -589,23 +625,30 @@ FourierDecomposedHelmholtzProblem()
  Bulk_mesh_pt->output("mesh.dat");
  Bulk_mesh_pt->output_boundaries("boundaries.dat");
  
- // Create mesh for DtN elements on outer boundary
- Helmholtz_outer_boundary_mesh_pt=
-  new FourierDecomposedHelmholtzDtNMesh<ELEMENT>(
-   r_max,ProblemParameters::Nterms_for_DtN);
 
- // Populate it with elements
- create_outer_bc_elements();
+ if (!CommandLineArgs::command_line_flag_has_been_set("--square_domain"))
+  {
+   // Create mesh for DtN elements on outer boundary
+   Helmholtz_outer_boundary_mesh_pt=
+    new FourierDecomposedHelmholtzDtNMesh<ELEMENT>(
+     r_max,ProblemParameters::Nterms_for_DtN);
+   
+   // Populate it with elements
+   create_outer_bc_elements();
+  }
 
  // Create flux elements on inner boundary
  Helmholtz_inner_boundary_mesh_pt=new Mesh;
  create_flux_elements_on_inner_boundary();
  
- // Add the several  sub meshes to the problem
+ // Add the several sub meshes to the problem
  add_sub_mesh(Bulk_mesh_pt); 
  add_sub_mesh(Helmholtz_inner_boundary_mesh_pt); 
- add_sub_mesh(Helmholtz_outer_boundary_mesh_pt); 
-  
+ if (!CommandLineArgs::command_line_flag_has_been_set("--square_domain"))
+  {
+   add_sub_mesh(Helmholtz_outer_boundary_mesh_pt); 
+  }
+
  // Build the Problem's global mesh from its various sub-meshes
  build_global_mesh();
 
@@ -637,7 +680,6 @@ template<class ELEMENT>
 void FourierDecomposedHelmholtzProblem<ELEMENT>::check_gamma(DocInfo& doc_info)
 {
  
-
  // Compute gamma stuff
  Helmholtz_outer_boundary_mesh_pt->setup_gamma();
  
@@ -749,8 +791,12 @@ void FourierDecomposedHelmholtzProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  Bulk_mesh_pt->compute_norm(norm); 
  Trace_file  << norm << std::endl;
 
- // Check gamma computation
- check_gamma(doc_info);
+
+ if (!CommandLineArgs::command_line_flag_has_been_set("--square_domain"))
+  {
+   // Check gamma computation
+   check_gamma(doc_info);
+  }
 
 } // end of doc
 
@@ -762,6 +808,7 @@ void FourierDecomposedHelmholtzProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 template<class ELEMENT>
 void FourierDecomposedHelmholtzProblem<ELEMENT>::create_outer_bc_elements()
 {
+
  // Outer boundary is boundary 1:
  unsigned b=1;
 
@@ -834,8 +881,22 @@ create_flux_elements_on_inner_boundary()
 //===== start_of_main=====================================================
 /// Driver code for Fourier decomposed Helmholtz problem
 //========================================================================
-int main()
+int main(int argc, char **argv)
 {
+ // Store command line arguments
+ CommandLineArgs::setup(argc,argv);
+
+ // Define possible command line arguments and parse the ones that
+ // were actually specified
+ 
+ // Square domain without DtN
+ CommandLineArgs::specify_command_line_flag("--square_domain");
+
+ // Parse command line
+ CommandLineArgs::parse_and_assign(); 
+ 
+ // Doc what has actually been specified on the command line
+ CommandLineArgs::doc_specified_flags();
 
  // Check if the claimed representation of a planar wave in
  // the tutorial is correct -- of course it is!

@@ -76,6 +76,12 @@ class Mesh
  friend class Problem;
 
 
+ /// \short Default Steady Timestepper, to be used in default arguments
+ /// to Mesh constructors
+ static Steady<0> Default_TimeStepper;
+
+
+
  protected:
 
  /// \short Vector of Vector of pointers to nodes on the boundaries:
@@ -95,11 +101,6 @@ class Mesh
  /// \short  For the e-th finite element on boundary b, this is the index of
  /// the face that lies along that boundary
  Vector<Vector<int> > Face_index_at_boundary;
-
- /// \short Default Steady Timestepper, to be used in default arguments
- /// to Mesh constructors
- static Steady<0> Default_TimeStepper;
-
 
 #ifdef OOMPH_HAS_MPI
 
@@ -767,45 +768,6 @@ public:
  /// elements are inconsistent). 
  void output_paraview(std::ofstream &file_out, 
                       const unsigned &nplot) const;
-
- /// Writes the pvd file header
- void write_pvd_header(std::ofstream &pvd_file)
- {
-  pvd_file
-   << "<?xml version=\"1.0\"?>" << std::endl
-   << "<VTKFile type=\"Collection\" version=\"0.1\">"  << std::endl
-   << "<Collection>"<< std::endl;
- }
- 
- /// \short Add name of output file and associated continuous time
- /// to pvd file.
- void write_pvd_information(std::ofstream &pvd_file,
-                            const std::string& output_filename,
-                            const double& time)
- {
-  // Output the actual time values
-  pvd_file
-   << "<DataSet timestep=\""
-   << time
-   << "\" ";
-
-  // Apparently this has to go in
-  pvd_file << "part=\"0\" ";
-
-  // Add the name of the file, so that the pvd file knows what it is called
-  pvd_file
-   << "file=\""
-   << output_filename
-   <<"\"/>" << std::endl;
- }
-
- /// Writes the pvd file footer
- void write_pvd_footer(std::ofstream &pvd_file)
- {
-  pvd_file
-   << "</Collection>" << std::endl
-   << "</VTKFile>";
- }
 
  /// Output for all elements
  void output(std::ostream &outfile);
@@ -2344,6 +2306,30 @@ namespace MeshChecker
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
 
+
+//=================================================================
+/// Namespace for paraview-style output helper functions 
+//=================================================================
+namespace ParaviewHelper
+{
+
+ /// Write the pvd file header
+ extern void write_pvd_header(std::ofstream &pvd_file);
+ 
+ /// \short Add name of output file and associated continuous time
+ /// to pvd file.
+ extern void write_pvd_information(std::ofstream &pvd_file,
+                                   const std::string& output_filename,
+                                   const double& time);
+ 
+ /// Write the pvd file footer
+ extern void write_pvd_footer(std::ofstream &pvd_file);
+
+}
+
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
 
 
 

@@ -994,24 +994,28 @@ public:
  string scalar_name_paraview(const unsigned& i) const
   {
     // Velocities
-   if(i<DIM) {return "Velocity "+StringConversion::to_string(i);}
-
+   if(i<DIM)
+    {
+     return "Velocity "+StringConversion::to_string(i);
+    }
     // Preussre
-   else if(i==DIM) {return "Pressure";}
-
+   else if(i==DIM)
+    {
+     return "Pressure";
+    }
     // Never get here
     else
      {
-#ifdef PARANOID
-     std::stringstream error_stream;
-    error_stream  
-     << "These Navier Stokes elements only store " << DIM+1 << "  fields,\n"
-     << "but i is currently  " << i << std::endl;
-    throw OomphLibError(
-     error_stream.str(),
-     OOMPH_CURRENT_FUNCTION,
-     OOMPH_EXCEPTION_LOCATION);
-#endif
+      std::stringstream error_stream;
+      error_stream  
+       << "These Navier Stokes elements only store " << DIM+1 << "  fields,\n"
+       << "but i is currently  " << i << std::endl;
+      throw OomphLibError(
+       error_stream.str(),
+       OOMPH_CURRENT_FUNCTION,
+       OOMPH_EXCEPTION_LOCATION);
+      // Dummy return
+      return " ";
      }
   }
 
@@ -2128,7 +2132,7 @@ class QTaylorHoodElement : public virtual QElement<DIM,3>,
                         Shape &test) const;
  
  /// \short Set the value at which the pressure is stored in the nodes
- int p_nodal_index_nst() const {return static_cast<int>(DIM);}
+ virtual int p_nodal_index_nst() const {return static_cast<int>(DIM);}
 
  /// Return the local equation numbers for the pressure values.
  inline int p_local_eqn(const unsigned &n)

@@ -33,16 +33,19 @@ namespace oomph
 {
  
 //======================================================================
-/// Set the data for the number of Variables at each node - 6
+/// Set the data for the number of Variables at each node: 6
 //======================================================================
  template<unsigned NNODE_1D>
   const unsigned AxisymFoepplvonKarmanElement<NNODE_1D>::Initial_Nvalue = 6;
 
-// Foeppl von Karman equations static data
- 
+
+//======================================================================
 /// Default value physical constants
+//======================================================================
  double AxisymFoepplvonKarmanEquations::Default_Physical_Constant_Value = 0.0;
  
+
+
 //======================================================================
 /// Compute contribution to element residual Vector
 ///

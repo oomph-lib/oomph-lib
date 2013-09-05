@@ -184,11 +184,13 @@ public:
         OOMPH_CURRENT_FUNCTION,
         OOMPH_EXCEPTION_LOCATION);
 #endif
+       break;
+
       }
     }
   }
  
-/// \short Name of the i-th scalar field. Default implementation
+ /// \short Name of the i-th scalar field. Default implementation
  /// returns V1 for the first one, V2 for the second etc. Can (should!) be
  /// overloaded with more meaningful names in specific elements.
  string scalar_name_paraview(const unsigned& i) const

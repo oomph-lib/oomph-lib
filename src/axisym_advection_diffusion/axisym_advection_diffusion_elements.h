@@ -174,26 +174,21 @@ public:
       
       file_out << wind[i] << std::endl;
      }
-    
     // Advection Diffusion
     else if(i==3) 
      {
       file_out << this->interpolated_u_axi_adv_diff(s) << std::endl;
      }
-    
     // Never get here
     else
      {
-#ifdef PARANOID
       std::stringstream error_stream;
       error_stream
-     << "Advection Diffusion Elements only store 4 feilds "
-     << "they currently have " << i << " feilds" << std::endl;
+     << "Advection Diffusion Elements only store 4 fields " << std::endl;
       throw OomphLibError(
        error_stream.str(),
        OOMPH_CURRENT_FUNCTION,
        OOMPH_EXCEPTION_LOCATION);
-#endif
      }
    }
  }
@@ -204,25 +199,29 @@ public:
  string scalar_name_paraview(const unsigned& i) const
  {
   // Winds
-  if(i<3) {return "Wind "+StringConversion::to_string(i);}
-  
-  // Advection Diffusion feild
-  else if(i==3) {return "Advection Diffusion";}
-  
+  if(i<3) 
+   {
+    return "Wind "+StringConversion::to_string(i);
+   }
+  // Advection Diffusion field
+  else if(i==3) 
+   {
+    return "Advection Diffusion";
+   }
   // Never get here
-    else
-     {
-#ifdef PARANOID
-      std::stringstream error_stream;
-      error_stream
-       << "Advection Diffusion Elements only store 4 feilds "
-       << "they currently have " << i << " feilds" << std::endl;
-      throw OomphLibError(
-       error_stream.str(),
-       OOMPH_CURRENT_FUNCTION,
-       OOMPH_EXCEPTION_LOCATION);
-#endif
-     }
+  else
+   {
+    std::stringstream error_stream;
+    error_stream
+     << "Advection Diffusion Elements only store 4 fields "
+     << std::endl;
+    throw OomphLibError(
+     error_stream.str(),
+     OOMPH_CURRENT_FUNCTION,
+     OOMPH_EXCEPTION_LOCATION);
+    // Dummy return
+    return " ";
+   }
  }
  
  /// Output with default number of plot points

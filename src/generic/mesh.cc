@@ -8316,4 +8316,66 @@ void SolidMesh::set_lagrangian_nodal_coordinates()
 //=======================================================================
 SolidICProblem SolidMesh::Solid_IC_problem;
 
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
+
+//=================================================================
+/// Namespace for paraview-style output helper functions 
+//=================================================================
+namespace ParaviewHelper
+{
+
+ /// Write the pvd file header
+ void write_pvd_header(std::ofstream &pvd_file)
+ {
+  pvd_file
+   << "<?xml version=\"1.0\"?>" << std::endl
+   << "<VTKFile type=\"Collection\" version=\"0.1\">"  << std::endl
+   << "<Collection>"<< std::endl;
+ }
+ 
+ /// \short Add name of output file and associated continuous time
+ /// to pvd file.
+ void write_pvd_information(std::ofstream &pvd_file,
+                            const std::string& output_filename,
+                            const double& time)
+ {
+  // Output the actual time values
+  pvd_file
+   << "<DataSet timestep=\""
+   << time
+   << "\" ";
+
+  // Apparently this has to go in
+  pvd_file << "part=\"0\" ";
+
+  // Add the name of the file, so that the pvd file knows what it is called
+  pvd_file
+   << "file=\""
+   << output_filename
+   <<"\"/>" << std::endl;
+ }
+ 
+ /// Write the pvd file footer
+ void write_pvd_footer(std::ofstream &pvd_file)
+ {
+  pvd_file
+   << "</Collection>" << std::endl
+   << "</VTKFile>";
+ }
+
+}
+
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+
+
+
+
+
+
 }
