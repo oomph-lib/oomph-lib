@@ -29,8 +29,10 @@ shell \
 solid \
 interaction \
 multi_physics \
+eigenproblems \
 leftovers \
 order_of_action_functions \
+hijacking \
 change_log \
 bugs \
 linear_solvers \

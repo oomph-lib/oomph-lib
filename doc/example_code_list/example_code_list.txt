@@ -86,6 +86,9 @@ perfectly matched layers</A>
                acoustic fluid-structure interaction problems</A>
     - <A HREF="#multi"> Multi-physics problems</A>
     .
+  - Eigenproblems:
+   - <A HREF="#eigen"> How to formulate and solve an eigenproblem</A>
+   .
   .
 -# <A HREF="#meshes">Mesh generation</A>
   - <A HREF="#available_meshes">Structured meshes</A>
@@ -2939,6 +2942,39 @@ and a solid element
 <CENTER>driver code and pretty pictures</CENTER>
 </TD>
 </TR>
+#######################################################
+########################################################
+<TR>
+<TD COLSPAN=3 bgcolor="lightcyan">
+<A NAME="eigen"><CENTER><B>Eigenproblems</B></CENTER></A>
+</TD>
+</TR>
+####################################################################
+<TR>
+<TD>
+<A NAME="harmonic">
+<A HREF="../../eigenproblems/harmonic/html/index.html">
+<B>
+How to formulate and solve an eigenproblem.</B>
+</A></A>
+\n\n
+We demonstrate how to write \c QHarmonicElements that solve the
+  eigenvalues and eigenfunctions of the one-dimensional Laplace operator.
+</TD>
+<TD>
+- A brief introduction to linear stability theory.
+- How to use \c oomph-lib's interfaces to eigensolvers.
+- How to write elements that can be used in eigenproblems.
+- How to use the \c Problem::solve_eigenproblem(...) function to find
+  solutions of the eigenproblems.
+- Post-processing of eigenvalue problems.
+</TD>
+<TD>
+<CENTER>complete</CENTER>
+</TD>
+</TR>
+
+
 ######################################################################
 </TABLE>  
 </CENTER>  

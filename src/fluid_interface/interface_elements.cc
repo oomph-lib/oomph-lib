@@ -655,21 +655,28 @@ output(std::ostream &outfile, const unsigned &n_plot)
  Vector<double> s(1);
  
  //Tecplot header info 
- outfile << "ZONE I=" << n_plot << std::endl;
- 
+ // outfile << "ZONE I=" << n_plot << std::endl;
+ outfile << tecplot_zone_string(n_plot);
+
  //Loop over plot points
  for(unsigned l=0;l<n_plot;l++)
   {
-   s[0] = -1.0 + l*2.0/(n_plot-1);
+   //Get local coordinates of pliot point
+   get_s_plot(l,n_plot,s);
+   //s[0] = -1.0 + l*2.0/(n_plot-1);
    
    //Output the x,y,u,v 
    for(unsigned i=0;i<2;i++) outfile << this->interpolated_x(s,i) << " ";
    for(unsigned i=0;i<2;i++) outfile << interpolated_u(s,i) << " ";      
 
    //Output a dummy pressure
-   outfile << 0.0 << std::endl;
+   outfile << 0.0 << "\n";
   }
- outfile << std::endl;
+
+ write_tecplot_zone_footer(outfile,n_plot);
+
+ outfile << "\n";
+
 }
 
 
@@ -929,14 +936,14 @@ output(std::ostream &outfile, const unsigned &n_plot)
    for(unsigned i=0;i<3;i++) outfile << interpolated_u(s,i) << " ";      
 
    //Output a dummy pressure
-   outfile << 0.0 << std::endl;
+   outfile << 0.0 << "\n";
   }
 
  // Write tecplot footer (e.g. FE connectivity lists)
  write_tecplot_zone_footer(outfile,n_plot);
 
  //Output a final blank line
- outfile << std::endl;
+ outfile << "\n";
 
 }
 
@@ -1229,14 +1236,15 @@ output(std::ostream &outfile, const unsigned &nplot)
     }
    
    // Dummy Pressure
-   outfile << 0.0  << " ";
-  
-   outfile << std::endl;   
+   outfile << 0.0  << "\n";
   }
- outfile << std::endl;
 
  // Write tecplot footer (e.g. FE connectivity lists)
  write_tecplot_zone_footer(outfile,nplot);
+
+ //Write a final blank line
+ outfile << "\n";
+
 }
 
 //===========================================================================

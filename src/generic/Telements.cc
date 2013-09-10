@@ -483,7 +483,7 @@ namespace TElement2BulkCoordinateDerivatives
     face_element_pt->bulk_coordinate_derivatives_fct_pt() =
      &TElement2BulkCoordinateDerivatives::face0;
 
-    // Outer unit normal is the negative cross product of two in plane
+    // Outer unit normal is the positive cross product of two in plane
     // tangent vectors
     face_element_pt->normal_sign()=+1;
 

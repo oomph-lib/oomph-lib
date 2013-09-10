@@ -2469,7 +2469,7 @@ const Vector<double>& elem_error)
          unsigned region_id = it->first;
 
           //Report information
-         std::cout << "Region " << region_id << ": "
+         oomph_info << "Region " << region_id << ": "
                    << it->second[0] << " " << it->second[1] << " ";
          
          //Check that there is at least one element in the region
@@ -2489,7 +2489,7 @@ const Vector<double>& elem_error)
              //Now we have the centroid set it
              it->second = centroid;
 
-             std::cout << "   ,    " << 
+             oomph_info << "   ,    " << 
               it->second[0] << " " << it->second[1] << std::endl;
             } //end of case when there is at least one element
                 }
@@ -3921,7 +3921,6 @@ unrefine_boundary(const unsigned &b,
   double &unrefinement_tolerance,
   const bool &check_only)
  {
-
   // *************************************************************
   // Compute the vector of vertices not allowed for deletion!!!
   Vector<Vector<double> > no_del_vertex;
@@ -3930,7 +3929,6 @@ unrefine_boundary(const unsigned &b,
   // deleted
   if (!this->Boundary_connections_pt[b].empty())
    {
-
     // For easy to use
     std::set<Vector<double> > tmp_set =
     this->Boundary_connections_pt[b];
@@ -3948,7 +3946,6 @@ unrefine_boundary(const unsigned &b,
       no_del_vertex[counter][1] = (*it)[1];
       counter++;
      }
-
    }
   // *************************************************************
 
@@ -4031,8 +4028,7 @@ unrefine_boundary(const unsigned &b,
         double error = (b_x - x)*(b_x - x) + (b_y - y)*(b_y - y);
         error = sqrt(error);
 
-        if(error <
-          ToleranceForVertexMismatchInPolygons::Tolerable_error)
+        if(error < ToleranceForVertexMismatchInPolygons::Tolerable_error)
          {
           do_it = false;
           break;
@@ -4506,7 +4502,6 @@ get_connected_vertex_number_on_dst_boundary(
   // to the given vertex coordinates
   for (unsigned i = 0; i < n_vertices; i++)
    {
-
     Vector<double> current_vertex =
     dst_polyline->vertex_coordinate(i);
 

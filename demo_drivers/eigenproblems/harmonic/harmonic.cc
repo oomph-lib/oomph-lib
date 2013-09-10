@@ -166,7 +166,7 @@ public:
         }
       }
     }
-  }
+  } //end_of_fill_in_contribution_to_jacobian_and_mass_matrix
  
  /// Return FE representation of function value u(s) at local coordinate s
  inline double interpolated_u(const Vector<double> &s) const
@@ -229,33 +229,19 @@ class QHarmonicElement : public virtual QElement<1,NNODE_1D>,
 
  ///\short  Constructor: Call constructors for QElement and 
  /// Poisson equations
- QHarmonicElement() : QElement<1,NNODE_1D>(), HarmonicEquations()
-  {}
-
-
+ QHarmonicElement() : QElement<1,NNODE_1D>(), HarmonicEquations() {}
 
  /// \short  Required  # of `values' (pinned or dofs) 
  /// at node n
- inline unsigned required_nvalue(const unsigned &n) const 
-  {
-   return Initial_Nvalue[n];
-  }
+ inline unsigned required_nvalue(const unsigned &n) const {return 1;}
 
- /// \short Output function:  
- ///  x,y,u   or    x,y,z,u
- void output(ostream &outfile)
-  {
-   HarmonicEquations::output(outfile);
-  }
+ /// \short Output function overloaded from HarmonicEquations
+ void output(ostream &outfile) 
+  {HarmonicEquations::output(outfile);}
 
-
-
- ///  \short Output function:  
- ///   x,y,u   or    x,y,z,u at Nplot^DIM plot points
- void output(ostream &outfile, const unsigned &Nplot)
-  {
-   HarmonicEquations::output(outfile,Nplot);
-  }
+ ///  \short Output function overloaded from HarmonicEquations
+ void output(ostream &outfile, const unsigned &Nplot) 
+  {HarmonicEquations::output(outfile,Nplot);}
 
 
 protected:
@@ -263,78 +249,18 @@ protected:
 /// Shape, test functions & derivs. w.r.t. to global coords. Return Jacobian.
  inline double dshape_eulerian(const Vector<double> &s, 
                                Shape &psi, 
-                               DShape &dpsidx) const;
+                               DShape &dpsidx) const
+  {return QElement<1,NNODE_1D>::dshape_eulerian(s,psi,dpsidx);}
  
 
  /// \short Shape, test functions & derivs. w.r.t. to global coords. at
  /// integration point ipt. Return Jacobian.
  inline double dshape_eulerian_at_knot(const unsigned& ipt,
                                        Shape &psi, 
-                                       DShape &dpsidx) const;
-private:
- 
- /// \short Static array of ints to hold number of variables
- /// at nodes: Initial_Nvalue[n]
- static const unsigned Initial_Nvalue[];
- 
+                                       DShape &dpsidx) const
+  {return QElement<1,NNODE_1D>::dshape_eulerian_at_knot(ipt,psi,dpsidx);}
 
-};
-
-
-
-
-//Inline functions:
-
-
-//======================================================================
-/// Define the shape functions and test functions and derivatives
-/// w.r.t. global coordinates and return Jacobian of mapping.
-///
-/// Galerkin: Test functions = shape functions
-//======================================================================
-template<unsigned NNODE_1D>
-double QHarmonicElement<NNODE_1D>::
-dshape_eulerian(const Vector<double> &s,
-                Shape &psi, 
-                DShape &dpsidx) const
-{
- //Call the geometrical shape functions and derivatives  
- double J = QElement<1,NNODE_1D>::dshape_eulerian(s,psi,dpsidx);
-
- //Return the jacobian
- return J;
-}
-
-
-//======================================================================
-/// Define the shape functions and test functions and derivatives
-/// w.r.t. global coordinates and return Jacobian of mapping.
-///
-/// Galerkin: Test functions = shape functions
-//======================================================================
-template<unsigned NNODE_1D>
-double QHarmonicElement<NNODE_1D>::dshape_eulerian_at_knot(
- const unsigned &ipt,
- Shape &psi, 
- DShape &dpsidx) const
-{
- //Call the geometrical shape functions and derivatives  
- double J = QElement<1,NNODE_1D>::dshape_eulerian_at_knot(ipt,psi,dpsidx);
-
- //Return the jacobian
- return J;
-}
-
-
-//======================================================================
-// Set the data for the number of Variables at each node
-//======================================================================
-template<>
-const unsigned QHarmonicElement<4>::Initial_Nvalue[4]={1,1,1,1};
-template<>
-const unsigned QHarmonicElement<3>::Initial_Nvalue[3]={1,1,1};
-template<>
-const unsigned QHarmonicElement<2>::Initial_Nvalue[2]={1,1};
+}; //end_of_QHarmonic_class_definition
 
 
 //==start_of_problem_class============================================
@@ -350,12 +276,6 @@ public:
 
  /// Destructor (empty)
  ~HarmonicProblem(){delete this->mesh_pt(); delete this->eigen_solver_pt();}
-
- /// Update the problem specs before solve: (Re)set boundary conditions
- void actions_before_newton_solve() {}
-
- /// Update the problem specs after solve (empty)
- void actions_after_newton_solve(){}
 
  /// Solve the problem
  void solve(const unsigned &label);
@@ -377,6 +297,7 @@ template<class ELEMENT,class EIGEN_SOLVER>
 HarmonicProblem<ELEMENT,EIGEN_SOLVER>::HarmonicProblem(
  const unsigned& n_element)
 { 
+ //Create the eigen solver
  this->eigen_solver_pt() = new EIGEN_SOLVER;
  
  //Get the positive eigenvalues, shift is zero by default
@@ -430,7 +351,7 @@ void HarmonicProblem<ELEMENT,EIGEN_SOLVER>::doc_solution(const unsigned& label)
 
 } // end of doc
 
-//===================================================================
+//=======================start_of_solve==============================
 /// Solve the eigenproblem 
 //===================================================================
 template<class ELEMENT,class EIGEN_SOLVER>
@@ -509,7 +430,7 @@ solve(const unsigned& label)
   }
  
  evalues.close();
-}
+} //end_of_solve
  
 
 ////////////////////////////////////////////////////////////////////////
@@ -522,6 +443,11 @@ solve(const unsigned& label)
 //=====================================================================
 int main(int argc, char **argv)
 {
+//Want to test Trilinos if we have it, so we must initialise MPI
+//if we have compiled with it
+#ifdef OOMPH_HAS_MPI
+ MPI_Helpers::init(argc,argv);
+#endif
 
  // Set up the problem: 
  unsigned n_element=100; //Number of elements
@@ -549,8 +475,6 @@ int main(int argc, char **argv)
  clock_t t_end2 = clock();
 
 #ifdef OOMPH_HAS_TRILINOS
-//Only do this if we don't have MPI
-#ifndef OOMPH_HAS_MPI
  clock_t t_start3 = clock();
 //Solve with Anasazi
  {
@@ -558,7 +482,6 @@ int main(int argc, char **argv)
   problem.solve(3);
  }
  clock_t t_end3 = clock();
-#endif
 #endif
 
  std::cout << "ARPACK TIME: " << (double)(t_end1 - t_start1)/CLOCKS_PER_SEC
@@ -568,10 +491,12 @@ int main(int argc, char **argv)
            << std::endl;
 
 #ifdef OOMPH_HAS_TRILINOS
-#ifndef OOMPH_HAS_MPI
   std::cout << "ANASAZI TIME: " << (double)(t_end3 - t_start3)/CLOCKS_PER_SEC
            << std::endl;
 #endif
+
+#ifdef OOMPH_HAS_MPI
+ MPI_Helpers::finalize();
 #endif
 
 } // end of main
