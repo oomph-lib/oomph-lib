@@ -1144,6 +1144,10 @@ void Mesh::read(std::ifstream &restart_file)
 void  Mesh::output_paraview(std::ofstream &file_out, 
                             const unsigned &nplot) const
 {
+
+ // Change the scientific format so that E is used rather than e
+ file_out.setf(std::ios_base::uppercase);
+
  // Decide how many elements there are to be plotted
  unsigned long number_of_elements=this->Element_pt.size();
    

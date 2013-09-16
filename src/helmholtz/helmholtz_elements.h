@@ -152,18 +152,16 @@ public:
        
        // Never get here
       default:
-#ifdef PARANOID
      std::stringstream error_stream;
      error_stream 
-      << "Helmholtz elements only store 2 fields so i must be 0 or 1 rather"
-      << " than " << i << std::endl;
+      << "Helmholtz elements only store 2 fields so i must be 0 or 1" 
+      << std::endl;
      throw OomphLibError(
       error_stream.str(),
       OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
-#endif
        break;
-      } // end of switch statement
+      }
     } // end of plotpoint loop
   } // end scalar_value_paraview
 
@@ -184,16 +182,14 @@ public:
      
      // Never get here
     default:
-#ifdef PARANOID
      std::stringstream error_stream;
      error_stream 
-      << "Helmholtz elements only store 2 fields so i must be 0 or 1 rather"
-      << " than " << i << std::endl;
+      << "Helmholtz elements only store 2 fields so i must be 0 or 1"
+      << std::endl;
      throw OomphLibError(
       error_stream.str(),
       OOMPH_CURRENT_FUNCTION,
      OOMPH_EXCEPTION_LOCATION);
-#endif
      
      // Dummy return for the default statement
      return " ";
