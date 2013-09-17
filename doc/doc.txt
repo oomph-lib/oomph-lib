@@ -361,16 +361,32 @@ The \c oomph-lib "architects" are (in no particular order)
 collaborators who made 
 (or are still making) signficant contributions to the development of
 the library (listed in reverse chronological order):
+- \b Anton \b Martinsson implemented the machinery required to 
+  output \c oomph-lib data in paraview format, bypassing the need
+  for running the time-consuming tecplot to paraview conversion scripts.
+  He also implemented the displacement-based axisymmetric Foeppl von
+  Karman equations. 
+- \b Matthew \b Walker implemented PML methods for the azimuthally
+  Fourier-decomposed Helmholtz equations.
+- \b Joris \b Ferrand implemented the axisymmetric Foeppl von Karman
+  equations.
+- \b Philippe \b Mesnard worked on acoustic FSI problems and introduced many
+  improvements to \c oomph-lib's machinery for handling such problems.
+- \b Florian \b Molinier worked on the coupling of the free surface
+  Navier-Stokes equations and the axisymmetric Foeppl von Karman 
+  equations (in the context of simulating flows in elastic-walled
+  Hele-Shaw problems).
 - \b David \b Nigro developed and implemented much of the machinery
   for acoustic fluid-structure interaction problems.
-- \b Matthew \b Russell implemented the Foeppl-von-Karmann equations;
+- \b Matthew \b Russell implemented the Foeppl-von-Karman equations;
   he now continues to work on poro-elastic FSI problems.
 - \b Raphael \b Perillat worked on the simulation of flows in
   elastic-walled Hele-Shaw cells.
 - \b Robert \b Harter works on acoustic fluid-structure interaction
   problems.
 - \b Radu \b Cimpeanu implemented the PML boundary conditions for the
-  Helmholtz equations.
+  Helmholtz equations and the time-harmonic equations of linear
+  elasticity.
 - \b Julio \b Perez \b Sansalvador works on parallel unstructured
   mesh adaptation.
 - \b David \b Shepherd works on the numerical solution of

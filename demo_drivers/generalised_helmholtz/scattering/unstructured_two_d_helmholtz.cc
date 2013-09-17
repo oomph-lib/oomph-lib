@@ -60,6 +60,7 @@ namespace GlobalParameters
  /// Frequency
  double Omega = sqrt(500.0);
 
+
  /// Speed of sound
  void c_function(const Vector<double>& x, double& c)
  {
@@ -294,7 +295,7 @@ PMLProblem<ELEMENT>::PMLProblem()
  triangle_mesh_parameters.internal_closed_curve_pt() = hole_pt;
 
  // Target element size in bulk mesh
- triangle_mesh_parameters.element_area() = 0.05;
+ triangle_mesh_parameters.element_area() = 0.1;
  
 #ifdef ADAPTIVE
  
@@ -489,9 +490,37 @@ void PMLProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
- this->mesh_pt()->output(some_file,npts);
+ Bulk_mesh_pt->output(some_file,npts);
  some_file.close();
  
+ // Output coarse solution 
+ //-----------------------
+ sprintf(filename,"%s/coarse_soln%i.dat",doc_info.directory().c_str(),
+         doc_info.number());
+ some_file.open(filename);
+ unsigned npts_coarse=2;
+ Bulk_mesh_pt->output(some_file,npts_coarse);
+ some_file.close();
+
+
+ // Output solution within pml domains
+ //-----------------------------------
+ sprintf(filename,"%s/pml_soln%i.dat",doc_info.directory().c_str(),
+         doc_info.number());
+ some_file.open(filename);
+ PML_top_mesh_pt->output(some_file,npts);
+ PML_right_mesh_pt->output(some_file,npts);
+ PML_bottom_mesh_pt->output(some_file,npts);
+ PML_left_mesh_pt->output(some_file,npts);
+ PML_top_right_mesh_pt->output(some_file,npts);
+ PML_bottom_right_mesh_pt->output(some_file,npts);
+ PML_top_left_mesh_pt->output(some_file,npts);
+ PML_bottom_left_mesh_pt->output(some_file,npts);
+ some_file.close();
+
+
+
+
  // Write norm of solution to trace file
  double norm=0.0;
  Bulk_mesh_pt->compute_norm(norm); 
@@ -638,8 +667,8 @@ int main(int argc, char **argv)
 
  // Set up the problem with 2D ten-node elements from the
  // TGeneralisedHelmholtzElement family. 
- //  PMLProblem<ProjectableGeneralisedHelmholtzElement
- //   <TGeneralisedHelmholtzElement<2,4> > > problem;
+ // PMLProblem<ProjectableGeneralisedHelmholtzElement
+ //  <TGeneralisedHelmholtzElement<2,4> > > problem;
 
 #else
  

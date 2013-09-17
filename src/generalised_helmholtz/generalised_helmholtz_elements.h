@@ -43,13 +43,7 @@
 #include "math.h"
 #include <complex>
 #include "../generic/pml_meshes.h"
-
-// The meshes (needed for building of pml meshes!)
-// Include template files to avoid unnecessary re-compilation
-// (*.template.h files get included indirectly).
-#include "../meshes/triangle_mesh.template.cc"
-#include "../meshes/rectangular_quadmesh.template.cc"
-
+#include "../generic/projection.h"
 
 ////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////
@@ -546,7 +540,7 @@ OOMPH_CURRENT_FUNCTION,
    Vector<double> dimension_switch(DIM,0.0);
    for(unsigned k=0; k<DIM; k++) {
     // If PML is enabled in the respective direction
-    if (this->Pml_direction_active[k] != 0) { dimension_switch[k] = 1.0;}
+    if (this->Pml_direction_active[k]) { dimension_switch[k] = 1.0;}
     /// \short Specific prescribed sigma and gamma function
     /// such that sigma is increasing inside the PML and gamma
     /// incorporates it in a manner adjusting to the frequency

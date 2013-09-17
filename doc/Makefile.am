@@ -47,6 +47,7 @@ linear_elasticity \
 time_harmonic_fourier_decomposed_linear_elasticity \
 time_harmonic_linear_elasticity \
 fourier_decomposed_helmholtz \
+generalised_fourier_decomposed_helmholtz \
 generalised_helmholtz \
 axisym_linear_elasticity \
 acoustic_fsi \

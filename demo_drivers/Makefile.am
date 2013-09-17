@@ -44,6 +44,7 @@ axisym_foeppl_von_karman \
 axisym_displ_based_foeppl_von_karman \
 generalised_helmholtz \
 axisym_linear_elasticity \
+generalised_fourier_decomposed_helmholtz \
 homogenisation \
 darcy \
 generalised_time_harmonic_linear_elasticity
