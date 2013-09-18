@@ -15,8 +15,6 @@
 
 #include "./poly_interp.h"
 
-using namespace oomph;
-
 namespace oomph
 {
 

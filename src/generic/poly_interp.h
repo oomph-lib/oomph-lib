@@ -4,8 +4,6 @@
 
 #include "Vector.h"
 
-using namespace oomph;
-
 namespace oomph
 {
 

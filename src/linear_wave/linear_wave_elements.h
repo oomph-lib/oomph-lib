@@ -90,6 +90,33 @@ class LinearWaveEquations : public virtual FiniteElement
  /// that the unknown is always stored at the same index at each node.
  virtual inline unsigned u_index_lin_wave() const {return 0;}
 
+ /// \short du/dt at local node n. 
+ /// Uses suitably interpolated value for hanging nodes.
+ double du_dt_lin_wave(const unsigned &n) const
+  {
+   // Get the data's timestepper
+   TimeStepper* time_stepper_pt=node_pt(n)->time_stepper_pt();
+
+   //Initialise d^2u/dt^2
+   double dudt=0.0;
+   //Loop over the timesteps, if there is a non steady timestepper
+   if (!time_stepper_pt->is_steady())
+    {
+     // Find the index at which the linear wave unknown is stored
+     const unsigned u_nodal_index = u_index_lin_wave();     
+
+     // Number of timsteps (past & present)
+     const unsigned n_time = time_stepper_pt->ntstorage();
+     
+     //Add the contributions to the derivative
+     for(unsigned t=0;t<n_time;t++)
+      {
+       dudt+=time_stepper_pt->weight(1,t)*nodal_value(t,n,u_nodal_index);
+      }
+    }
+   return dudt;
+  }
+
  /// \short d^2u/dt^2 at local node n. 
  /// Uses suitably interpolated value for hanging nodes.
  double d2u_dt2_lin_wave(const unsigned &n) const
@@ -265,6 +292,56 @@ class LinearWaveEquations : public virtual FiniteElement
 
    return(interpolated_u);
   }
+
+
+ /// Return FE representation of function value u(s) at local coordinate s
+ inline double interpolated_du_dt_lin_wave(const Vector<double> &s) const
+  {
+   //Find number of nodes
+   unsigned n_node = nnode();
+
+   //Local shape function
+   Shape psi(n_node);
+
+   //Find values of shape function
+   shape(s,psi);
+
+   //Initialise value of u
+   double interpolated_du_dt = 0.0;
+
+   //Loop over the local nodes and sum
+   for(unsigned l=0;l<n_node;l++) 
+    {
+     interpolated_du_dt += du_dt_lin_wave(l)*psi[l];
+    }
+
+   return(interpolated_du_dt);
+  }
+
+ /// Return FE representation of function value u(s) at local coordinate s
+ inline double interpolated_d2u_dt2_lin_wave(const Vector<double> &s) const
+  {
+   //Find number of nodes
+   unsigned n_node = nnode();
+
+   //Local shape function
+   Shape psi(n_node);
+
+   //Find values of shape function
+   shape(s,psi);
+
+   //Initialise value of u
+   double interpolated_d2u_dt2 = 0.0;
+
+   //Loop over the local nodes and sum
+   for(unsigned l=0;l<n_node;l++) 
+    {
+     interpolated_d2u_dt2 += d2u_dt2_lin_wave(l)*psi[l];
+    }
+
+   return(interpolated_d2u_dt2);
+  }
+
 
 
  /// \short Self-test: Return 0 for OK

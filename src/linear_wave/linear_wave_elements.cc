@@ -273,7 +273,9 @@ void LinearWaveEquations<DIM>::output(std::ostream &outfile,
     {
      outfile << interpolated_x(s,i) << " ";
     }
-   outfile << interpolated_u_lin_wave(s) << std::endl;   
+   outfile << interpolated_u_lin_wave(s) << " ";
+   outfile << interpolated_du_dt_lin_wave(s) << " ";
+   outfile << interpolated_d2u_dt2_lin_wave(s) << std::endl;  
   }
 
  // Write tecplot footer (e.g. FE connectivity lists)
@@ -397,8 +399,8 @@ FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)
  // Tecplot header info
  outfile << tecplot_zone_string(nplot);
    
- // Exact solution Vector (here a scalar)
- Vector<double> exact_soln(1);
+ // Exact solution Vector u, dudt, d2udt2
+ Vector<double> exact_soln(3);
 
  // Loop over plot points
  unsigned num_plot_points=nplot_points(nplot);
@@ -419,7 +421,10 @@ FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)
     {
      outfile << x[i] << " ";
     }
-   outfile << exact_soln[0] << std::endl;   
+   outfile << exact_soln[0] << " " 
+           << exact_soln[1] << " " 
+           << exact_soln[2] << " " 
+           << std::endl;   
   }
 
  // Write tecplot footer (e.g. FE connectivity lists)

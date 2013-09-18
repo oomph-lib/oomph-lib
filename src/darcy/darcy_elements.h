@@ -95,7 +95,7 @@ namespace oomph
   /// Return the equation number of the n-th edge (flux) degree of freedom
   virtual int q_edge_local_eqn(const unsigned &n) const = 0;
 
-  /// Return the equation number of the n-th internal (moment) degree of freedom
+  /// Return the equation number of the n-th internal degree of freedom
   virtual int q_internal_local_eqn(const unsigned &n) const = 0;
 
   /// \short Return vector of pointers to the Data objects that store the 
@@ -115,19 +115,29 @@ namespace oomph
   /// Return the number of the node where the nth edge unknown is stored
   virtual unsigned q_edge_node_number(const unsigned &n) const = 0;
 
-  /// Return the values of the edge (flux) degrees of freedom
+  /// Return the values of the n-th edge (flux) degree of freedom
   virtual double q_edge(const unsigned &n) const = 0;
 
   /// Return the face index associated with edge flux degree of freedom
   virtual unsigned face_index_of_q_edge_basis_fct(const unsigned& j) const=0;
 
-  /// Return the values of the internal (moment) degrees of freedom
+  /// Return the face index associated with specified edge 
+  virtual unsigned face_index_of_edge(const unsigned& j) const=0;
+
+  /// \short Compute the face element coordinates of the nth flux interpolation 
+  /// point along an edge
+  virtual void face_local_coordinate_of_flux_interpolation_point(
+   const unsigned &edge,
+   const unsigned &n,
+   Vector<double> &s) const=0; 
+  
+  /// Return the values of the internal degree of freedom
   virtual double q_internal(const unsigned &n) const = 0;
 
-  /// Set the values of the edge (flux) degrees of freedom
+  /// Set the values of the edge (flux) degree of freedom
   virtual void set_q_edge(const unsigned &n, const double& value)=0;
 
-  /// Set the values of the internal (moment) degrees of freedom
+  /// Set the values of the internal degree of freedom
   virtual void set_q_internal(const unsigned &n, const double& value)=0;
 
   /// Return the total number of computational basis functions for q
@@ -174,14 +184,15 @@ namespace oomph
 
   /// Returns the local coordinate of nth flux interpolation point along an edge
   virtual Vector<double> edge_flux_interpolation_point(const unsigned &edge,
-                                          const unsigned &n) const = 0;
-
+                                                       const unsigned &n)
+   const=0;
+  
   /// \short Returns the global coordinates of the nth flux 
   /// interpolation point along an edge
   virtual void edge_flux_interpolation_point_global(const unsigned &edge,
-                                       const unsigned &n,
-                                       Vector<double> &x) const = 0;
-
+                                                    const unsigned &n,
+                                                    Vector<double> &x) const=0;
+  
   /// Pin the nth internal q value
   virtual void pin_q_internal_value(const unsigned &n) = 0;
 
@@ -189,7 +200,7 @@ namespace oomph
   virtual int p_local_eqn(const unsigned &n) const = 0;
 
   /// Return the nth pressure value
-  virtual double p_value(unsigned &n) const = 0;
+  virtual double p_value(const unsigned &n) const = 0;
 
   /// Return the total number of pressure basis functions
   virtual unsigned np_basis() const = 0;

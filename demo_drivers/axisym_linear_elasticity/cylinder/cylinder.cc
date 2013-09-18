@@ -123,24 +123,6 @@ namespace Global_Parameters
   u[2] = pow(x[0],3)*pow(x[1],3);
  }
 
- /// The exact solution in a vector:
- /// 0: u_r, 1: u_z, 2: u_theta
- void exact_solution(const double &time,
-                     const Vector<double> &x,
-                     Vector<double> &u)
- {
-  // Temporary storage for the exact solution
-  Vector<double> temp_u(3,0.0);
-
-  // Get the exact solution from the global function
-  exact_solution_th(x,temp_u);
-
-  // Loop over each component and multiply by the time dependence
-  for(unsigned i=0;i<3;i++)
-   {
-    u[i]=cos(time)*temp_u[i];
-   }
- } // end_of_exact_solution
 
  //Displacement, velocity and acceleration functions which are used to provide
  //initial values to the timestepper. We must provide a separate function for
@@ -217,6 +199,26 @@ namespace Global_Parameters
    exact_solution_th(x,displ);
    return -cos(time)*displ[2];
   }
+
+ /// The exact solution in a vector:
+ /// 0: u_r, 1: u_z, 2: u_theta and their 1st and 2nd derivs
+ void exact_solution(const double &time,
+                     const Vector<double> &x,
+                     Vector<double> &u)
+ {
+  u[0]=u_r(time,x);
+  u[1]=u_z(time,x);
+  u[2]=u_theta(time,x);
+
+  u[3]=d_u_r_dt(time,x);
+  u[4]=d_u_z_dt(time,x);
+  u[5]=d_u_theta_dt(time,x);
+
+  u[6]=d2_u_r_dt2(time,x);
+  u[7]=d2_u_z_dt2(time,x);
+  u[8]=d2_u_theta_dt2(time,x);
+ } // end_of_exact_solution
+
 } // end_of_Global_Parameters_namespace
 
 //===start_of_problem_class=============================================
@@ -581,7 +583,32 @@ set_boundary_conditions()
  Vector<double> x(2);
 
  // Storage for prescribed displacements
- Vector<double> u(3);
+ Vector<double> u(9);
+
+ // Storage for pointers to the functions defining the displacement,
+ // velocity and acceleration components
+ Vector<typename TIMESTEPPER::NodeInitialConditionFctPt>
+  initial_value_fct(3);
+ Vector<typename TIMESTEPPER::NodeInitialConditionFctPt>
+  initial_veloc_fct(3);
+ Vector<typename TIMESTEPPER::NodeInitialConditionFctPt>
+  initial_accel_fct(3);
+ 
+ // Set the displacement function pointers
+ initial_value_fct[0]=&Global_Parameters::u_r;
+ initial_value_fct[1]=&Global_Parameters::u_z;
+ initial_value_fct[2]=&Global_Parameters::u_theta;
+ 
+ // Set the velocity function pointers
+ initial_veloc_fct[0]=&Global_Parameters::d_u_r_dt;
+ initial_veloc_fct[1]=&Global_Parameters::d_u_z_dt;
+ initial_veloc_fct[2]=&Global_Parameters::d_u_theta_dt;
+ 
+ // Set the acceleration function pointers
+ initial_accel_fct[0]=&Global_Parameters::d2_u_r_dt2;
+ initial_accel_fct[1]=&Global_Parameters::d2_u_z_dt2;
+ initial_accel_fct[2]=&Global_Parameters::d2_u_theta_dt2;
+ 
 
  // Now set displacements on boundaries 0 (z=Zmin),
  //------------------------------------------------
@@ -595,20 +622,38 @@ set_boundary_conditions()
      // Get pointer to node
      Node* nod_pt=Bulk_mesh_pt->boundary_node_pt(ibound,inod);
      
-     // get r and z coordinates
-     x[0]=nod_pt->x(0);
-     x[1]=nod_pt->x(1);
-     
      // Pinned in r, z and theta
      nod_pt->pin(0);nod_pt->pin(1);nod_pt->pin(2);
      
-     // Compute the value of the exact solution at the nodal point
-     Global_Parameters::exact_solution(time_pt()->time(),x,u);
-     
-     // Set the displacements
-     nod_pt->set_value(0,u[0]);
-     nod_pt->set_value(1,u[1]);
-     nod_pt->set_value(2,u[2]);
+     // Direct assigment of just the current values...
+     bool use_direct_assigment=true;
+     if (use_direct_assigment)
+      {
+       // get r and z coordinates
+       x[0]=nod_pt->x(0);
+       x[1]=nod_pt->x(1);
+       
+       // Compute the value of the exact solution at the nodal point
+       Global_Parameters::exact_solution(time_pt()->time(),x,u);
+       
+       // Set the displacements
+       nod_pt->set_value(0,u[0]);
+       nod_pt->set_value(1,u[1]);
+       nod_pt->set_value(2,u[2]);
+      }
+     // ...or the history values too:
+     else
+      {
+       // Upcast the timestepper to the specific type we have
+       TIMESTEPPER* timestepper_pt =
+        dynamic_cast<TIMESTEPPER*>(time_stepper_pt());
+
+       // Assign the history values
+       timestepper_pt->assign_initial_data_values(nod_pt,
+                                                  initial_value_fct,
+                                                  initial_veloc_fct,
+                                                  initial_accel_fct);
+      }
     }
   } // end_of_loop_over_boundary_nodes
 } // end_of_set_boundary_conditions

@@ -236,13 +236,21 @@ class TimeStepper
  /// undo_make_steady() implemented in all specific TimeSteppers
  bool Is_steady;
 
+ /// \short Boolean to indicate if the timestepper will output warnings when
+ /// setting possibly an incorrect number of initial data values from function
+ /// pointers
+ bool Shut_up_in_assign_initial_data_values;
+
 public:
  
  /// \short Constructor. Pass the amount of storage required by
  /// timestepper (present value + history values) and the 
  /// order of highest time-derivative.
  TimeStepper(const unsigned &tstorage, const unsigned &max_deriv) 
-  : Time_pt(0), Adaptive_Flag(false), Is_steady(false)
+  : Time_pt(0),
+  Adaptive_Flag(false),
+  Is_steady(false),
+  Shut_up_in_assign_initial_data_values(false)
   {
    //Resize Weights matrix and initialise each weight to zero 
    Weight.resize(max_deriv+1,tstorage,0.0);
@@ -340,6 +348,16 @@ public:
   {
    return Is_steady;
   }
+
+ /// \short Enable the output of warnings due to possible fct pointer vector
+ /// size mismatch in assign_initial_data_values (Default)
+ void enable_warning_in_assign_initial_data_values()
+  {Shut_up_in_assign_initial_data_values=false;}
+
+ /// \short Disable the output of warnings due to possible fct pointer vector
+ /// size mismatch in assign_initial_data_values
+ void disable_warning_in_assign_initial_data_values()
+  {Shut_up_in_assign_initial_data_values=true;}
  
  /// \short Get a (const) pointer to the weights.
  const DenseMatrix<double>* weights_pt() const {return &Weight;}
@@ -955,6 +973,7 @@ class NewmarkBDF : public Newmark<NSTEPS>
  NewmarkBDF()
   {
    this->Type="NewmarkBDF";
+   Degrade_to_bdf1_for_first_derivs=false;
   }
 
  /// Broken copy constructor
@@ -971,6 +990,28 @@ class NewmarkBDF : public Newmark<NSTEPS>
 
  ///Set weights 
  void set_weights();
+
+ /// \short Degrade scheme to first order BDF (for first derivs/veloc); usually
+ /// for start-up.
+ void enable_degrade_first_derivatives_to_bdf1()
+ {
+  Degrade_to_bdf1_for_first_derivs=true;
+ }
+
+
+ /// \short Disable degradation to first order BDF.
+ void disable_degrade_first_derivatives_to_bdf1()
+ {
+  Degrade_to_bdf1_for_first_derivs=false;
+ }
+
+
+  private:
+
+ 
+ /// \short Boolean flag to indicate degradation of scheme to first
+ /// order BDF (for first derivs/veloc); usually for start-up.
+ bool Degrade_to_bdf1_for_first_derivs;
 
 };
 

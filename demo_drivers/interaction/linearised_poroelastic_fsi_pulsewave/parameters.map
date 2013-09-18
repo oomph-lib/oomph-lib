@@ -1,0 +1,140 @@
+assume(Newton,positive);
+assume(Meter,positive);
+assume(kg,positive);
+assume(Sec,real);
+additionally(Sec,positive);
+
+
+Newton:=kg*Meter/Sec^2;
+Pascal:=Newton/Meter^2;
+
+
+#----------------------------------------------------------------------------
+# Drained elastic modulus. 
+# Chris email: 03/12/12 "lowest value for spine 
+# supported by data"; Chris to confirm
+# (Chris has other values in ASME paper; dunno what all these things are...
+#----------------------------------------------------------------------------
+E:=5e3*Pascal;
+E:=62.5e3*Pascal; # "cord material"
+E:=1.25e6*Pascal; # "dura"
+
+#--------------------------------------------------
+# Density of Navier-Stokes fluid (I know this one!)
+#--------------------------------------------------
+rho_nst:=1000*kg/Meter^3;
+
+#---------------------------------------------
+# Viscosity of Navier-Stokes fluid.
+# Smillie et al JFM 593 pp 417-443; page 431
+#---------------------------------------------
+mu_nst:=8.9e-4*Newton*Sec/Meter^2;
+# Chris (ASME paper)
+mu_nst:=1.0e-3*Pascal*Sec;
+
+#--------------------------
+# Drained Poisson's ratio 
+# Chris email: 03/12/12 
+#--------------------------
+nu:=0.35;
+
+
+#--------------------------------------------------------------------
+# Permeability
+# ("logarithmic average" of the two values quoted in Smillie et al)
+#--------------------------------------------------------------------
+k_smillie:=1.4e-15*Meter^2;
+
+# Convert to mine...
+k:=k_smillie/mu_nst;
+
+
+#--------------------------------------------------------------------
+# Length-scale:
+# diameter of "tube" -- Chris' sketch Fig. 1 in ASME paper suggests
+# average outer radius of 8 mm
+#--------------------------------------------------------------------
+Lengthscale:=2*8e-3*Meter;
+
+
+#---------------------------------------------
+# Velocity scale: 
+# Derive from peak impulsive pressure at inlet 
+# in Chris' ASME paper (bottom of page 3):
+# 100 Pa.
+#---------------------------------------------
+#P_bump:=100*Pascal;
+P_bump:=1*Pascal*P_bump_marker;
+
+#Velocscale:=P_bump*Lengthscale/mu_nst;
+Velocscale:=sqrt(P_bump/rho_nst);
+
+
+#---------------------------------------------------
+# "Tube" Lengthscale (Chris sketch Fig. 1 in ASME paper):
+# 600 mm
+#---------------------------------------------------
+Tube_length:=600e-3*Meter;
+
+#-----------------------------------------------------------
+# "Tube" wall thickness (Chris sketch Fig. 1 in ASME paper):
+# about 1mm.
+#----------------------------------------------------------
+Tube_thickness:=1e-3*Meter;
+
+#-------------------------------------------------
+# Timescale -- corresponds to unit Strouhal number
+#-------------------------------------------------
+Timescale:=evalf(Lengthscale/Velocscale);
+
+
+##########################################################
+
+
+#------------------------------------------
+# Non-dimensional pressure on viscous scale
+#------------------------------------------
+P_inlet:=evalf(P_bump/(Velocscale*mu_nst/Lengthscale));
+
+#----------------
+# Reynolds number
+#----------------
+Reynolds:=simplify(Velocscale*Lengthscale*rho_nst/mu_nst);
+
+#----------------
+# Strouhal number
+#----------------
+Strouhal:=simplify(Lengthscale/(Timescale*Velocscale));
+
+#----------------
+# FSI parameter
+#----------------
+Q_fsi:=simplify(Velocscale*mu_nst/(Lengthscale*E));
+
+#---------------------
+# Nondim permeability
+#---------------------
+permeability:=simplify(k*E*Timescale/Lengthscale^2);
+
+#--------------------------
+# Nondim inertia parameter
+#--------------------------
+Lambda_squared:=simplify(rho_nst/E*(Lengthscale/Timescale)^2);
+
+#--------------------------
+# Nondim length
+#--------------------------
+L:=simplify(Tube_length/Lengthscale);
+
+#--------------------------
+# Nondim wall thickness
+#--------------------------
+h:=simplify(Tube_thickness/Lengthscale);
+
+
+
+
+
+
+
+

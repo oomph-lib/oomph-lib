@@ -4,7 +4,6 @@
 #include "double_vector.h"
 #include "sum_of_matrices.h"
 
-using namespace oomph;
 
 namespace oomph
 {

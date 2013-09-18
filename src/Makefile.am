@@ -15,6 +15,8 @@ generalised_helmholtz \
 axisym_linear_elasticity \
 generalised_fourier_decomposed_helmholtz \
 darcy \
+poroelasticity \
+axisym_poroelasticity \
 generalised_time_harmonic_linear_elasticity \
 axisym_displ_based_foeppl_von_karman
 

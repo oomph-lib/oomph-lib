@@ -221,6 +221,33 @@ class AxisymmetricLinearElasticityEquationsBase :
     }
   }
   
+  /// Compute vector of FE interpolated accel d2u/dt2 at local coordinate s
+  void interpolated_d2u_dt2_axisymmetric_linear_elasticity(
+   const Vector<double> &s, Vector<double>& d2u_dt2) const
+  {
+   //Find number of nodes
+   unsigned n_node = nnode();
+   
+   //Local shape function
+   Shape psi(n_node);
+   
+   //Find values of shape function
+   shape(s,psi);
+   
+   // Loop over directions
+   for (unsigned i=0;i<3;i++)
+    {     
+     //Initialise value of u
+     d2u_dt2[i] = 0.0;
+     
+     //Loop over the local nodes and sum
+     for(unsigned l=0;l<n_node;l++) 
+      {
+       d2u_dt2[i] += d2u_dt2_axisymmetric_linear_elasticity(l,i)*psi[l];
+      }
+    }
+  }
+  
 
    /// \short Function pointer to function that specifies the body force
    /// as a function of the Cartesian coordinates and time FCT(x,b) -- 

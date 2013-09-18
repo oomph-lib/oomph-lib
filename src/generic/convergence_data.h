@@ -20,8 +20,6 @@ part...
 #include "linear_solver.h"
 #include "iterative_linear_solver.h"
 
-using namespace oomph;
-
 namespace oomph
 {
 

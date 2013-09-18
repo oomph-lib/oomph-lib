@@ -45,12 +45,8 @@
 #include "../generic/Qelements.h"
 #include "../generic/oomph_utilities.h"
 
-using namespace std;
-
-
 namespace oomph
 {
-
 
 //========================================================================
 /// Helper namespace for functions required for Helmholtz computations

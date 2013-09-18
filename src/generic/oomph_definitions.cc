@@ -68,6 +68,7 @@ namespace TerminateHelper
  /// Setup terminate helper
  void setup()
  {
+  if (Exception_stringstream_pt!=0) delete Exception_stringstream_pt;
   Exception_stringstream_pt=new std::stringstream;
   std::set_terminate(spawn_errors_from_uncaught_errors);
  }
@@ -90,7 +91,7 @@ namespace TerminateHelper
  std::ostream* Error_message_stream_pt=&std::cerr;
 
  /// String stream that records the error message
- std::stringstream* Exception_stringstream_pt;
+ std::stringstream* Exception_stringstream_pt=0;
 }
 
 ///////////////////////////////////////////////////////////////////////

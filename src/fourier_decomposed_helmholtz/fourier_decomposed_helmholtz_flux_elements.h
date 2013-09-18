@@ -42,8 +42,6 @@
 // oomph-lib includes
 #include "../generic/Qelements.h" 
 
-using namespace std;
-
 
 namespace oomph
 {

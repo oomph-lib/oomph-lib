@@ -40,6 +40,8 @@
 //OOMPH-LIB headers
 //#include "../generic/Qelements.h"
 #include "src/generic/Qelements.h"
+#include "src/generic/element_with_external_element.h"
+
 
 namespace oomph
 {
@@ -630,8 +632,9 @@ template<class ELEMENT>
       
       // Get bulk element for traction
       NAVIER_STOKES_BULK_ELEMENT* ext_el_pt=
-       dynamic_cast<NAVIER_STOKES_BULK_ELEMENT*>(external_element_pt(0,ipt));
-      Vector<double> s_ext(external_element_local_coord(0,ipt));
+       dynamic_cast<NAVIER_STOKES_BULK_ELEMENT*>
+       (this->external_element_pt(0,ipt));
+      Vector<double> s_ext(this->external_element_local_coord(0,ipt));
       
       // Get traction from bulk element (on fluid scale)
       ext_el_pt->traction(s_ext, 
@@ -803,8 +806,9 @@ template <class ELASTICITY_BULK_ELEMENT, class NAVIER_STOKES_BULK_ELEMENT>
     
     // Get bulk element for traction
     NAVIER_STOKES_BULK_ELEMENT* ext_el_pt=
-     dynamic_cast<NAVIER_STOKES_BULK_ELEMENT*>(external_element_pt(0,ipt));
-    Vector<double> s_ext(external_element_local_coord(0,ipt));
+     dynamic_cast<NAVIER_STOKES_BULK_ELEMENT*>
+     (this->external_element_pt(0,ipt));
+    Vector<double> s_ext(this->external_element_local_coord(0,ipt));
     
     // Get traction from bulk element
     ext_el_pt->traction(s_ext, 

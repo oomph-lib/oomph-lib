@@ -77,10 +77,10 @@ namespace ProblemParameters
  }
 
  /// Default physical PML thickness
- double pml_thick=4.0;
+ double PML_thickness=4.0;
 
  /// Default number of elements within PMLs
- unsigned nel=15;
+ unsigned Nel_pml=15;
 
  /// The default Fourier wave number
  int N_fourier=0;
@@ -541,7 +541,7 @@ private:
 
 #endif
 
- /// on the inner boundary
+ /// Mesh of FaceElements that apply the flux bc on the inner boundary
  Mesh* Helmholtz_inner_boundary_mesh_pt;
 
  /// Pointer to the right PML mesh
@@ -647,17 +647,6 @@ template<class ELEMENT>
 void GeneralisedFourierDecomposedHelmholtzProblem<ELEMENT>::
 actions_after_adapt()
 { 
-
-// // hierher kill 
-
-//  // Create flux elements on inner boundary
-//  Helmholtz_inner_boundary_mesh_pt=new Mesh;
-//  create_flux_elements_on_inner_boundary();
-
-//  // Add the several sub meshes to the problem
-//  add_sub_mesh(Helmholtz_inner_boundary_mesh_pt); 
- 
-// // hierher end kill
 
  // Build PML meshes  and add them to the global mesh
  create_pml_meshes();
@@ -841,9 +830,6 @@ GeneralisedFourierDecomposedHelmholtzProblem()
  //-------------------------------------------------
  Vector<TriangleMeshCurveSection*> outer_boundary_line_pt(6);
  
- // Number of segments used for representing the curvilinear boundaries
- unsigned n_segments = 20;
-
  // All poly boundaries are defined by two vertices
  Vector<Vector<double> > boundary_vertices(2);
  
@@ -911,6 +897,9 @@ GeneralisedFourierDecomposedHelmholtzProblem()
 
  // Inner circular boundary:
  //-------------------------
+
+ // Number of segments used for representing the curvilinear boundary
+ unsigned n_segments = 20;
  
  // The intrinsic coordinates for the beginning and end of the curve
  double s_start =  0.5*MathematicalConstants::Pi;
@@ -946,6 +935,9 @@ GeneralisedFourierDecomposedHelmholtzProblem()
  // Build "bulk" mesh
  Bulk_mesh_pt=new RefineableTriangleMesh<ELEMENT>(triangle_mesh_parameters);
 
+ // Add the bulk mesh to the problem
+ add_sub_mesh(Bulk_mesh_pt); 
+
  // Initialise mesh as geom object
  Mesh_as_geom_obj_pt=0;
 
@@ -959,34 +951,30 @@ GeneralisedFourierDecomposedHelmholtzProblem()
  // Reduce wavenumber to make effect of singularity more prominent
  ProblemParameters::Omega=0.1;
 
-// // hierher kill
-
-//   // Create flux elements on inner boundary
-//  Helmholtz_inner_boundary_mesh_pt=new Mesh;
-//  create_flux_elements_on_inner_boundary();
-
 #else
 
- // Pass the TriangleMeshParameters object to the TriangleMesh one
+ // Create the bulk mesh
  Bulk_mesh_pt= new TriangleMesh<ELEMENT>(triangle_mesh_parameters);
 
+ // Add the bulk mesh to the problem
+ add_sub_mesh(Bulk_mesh_pt); 
 
   // Create flux elements on inner boundary
  Helmholtz_inner_boundary_mesh_pt=new Mesh;
  create_flux_elements_on_inner_boundary();
+
+ // ...and add the mesh to the problem
  add_sub_mesh(Helmholtz_inner_boundary_mesh_pt); 
 
 #endif
 
- // Add the several sub meshes to the problem
- add_sub_mesh(Bulk_mesh_pt); 
-
- // Create the pml meshes
- create_pml_meshes();
 
  // Attach the power monitor elements
  Power_monitor_mesh_pt=new Mesh;
  create_power_monitor_mesh();
+
+ // Create the pml meshes
+ create_pml_meshes();
 
  // Build the Problem's global mesh from its various sub-meshes
  build_global_mesh();
@@ -1144,20 +1132,20 @@ void GeneralisedFourierDecomposedHelmholtzProblem<ELEMENT>::create_pml_meshes()
  unsigned int top_boundary_id = 3;
 
  // PML width in elements for the right layer
- unsigned n_x_right_pml = ProblemParameters::nel;
+ unsigned n_x_right_pml = ProblemParameters::Nel_pml;
 
  // PML width in elements for the top layer
- unsigned n_y_top_pml = ProblemParameters::nel;
+ unsigned n_y_top_pml = ProblemParameters::Nel_pml;
 
  // PML width in elements for the bottom layer
- unsigned n_y_bottom_pml = ProblemParameters::nel; 
+ unsigned n_y_bottom_pml = ProblemParameters::Nel_pml; 
 
 
  // Outer physical length of the PML layers
  // defaults to 4.0
- double width_x_right_pml  = ProblemParameters::pml_thick;
- double width_y_top_pml    = ProblemParameters::pml_thick;
- double width_y_bottom_pml = ProblemParameters::pml_thick;
+ double width_x_right_pml  = ProblemParameters::PML_thickness;
+ double width_y_top_pml    = ProblemParameters::PML_thickness;
+ double width_y_bottom_pml = ProblemParameters::PML_thickness;
 
  // Build the PML meshes based on the new adapted triangular mesh
  PML_right_mesh_pt = TwoDimensionalPMLHelper::create_right_pml_mesh
@@ -1223,12 +1211,12 @@ int main(int argc, char **argv)
                                             &ProblemParameters::Directory);
 
  // PML thickness
- CommandLineArgs::specify_command_line_flag("--pml_thickness",    
-                                            &ProblemParameters::pml_thick);
+ CommandLineArgs::specify_command_line_flag("--pml_thick",    
+                                            &ProblemParameters::PML_thickness);
 
  // Number of elements within PMLs
  CommandLineArgs::specify_command_line_flag("--npml_element",     
-                                            &ProblemParameters::nel);
+                                            &ProblemParameters::Nel_pml);
 
  // Validation run?
  CommandLineArgs::specify_command_line_flag("--validate");

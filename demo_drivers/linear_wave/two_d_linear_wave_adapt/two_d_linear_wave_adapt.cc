@@ -85,6 +85,8 @@ namespace TanhSolnForLinearWave
                   Vector<double>& u)
  {
   u[0]=exact_u(time,x);
+  u[1]=exact_dudt(time,x);
+  u[2]=exact_d2udt2(time,x);
  }
 
  /// Source function to make it an exact solution 
@@ -133,6 +135,18 @@ public:
  /// Set time-dependent Dirchlet boundary from exact solution.
  void actions_before_implicit_timestep()
   {
+   Vector<typename TIMESTEPPER::NodeInitialConditionFctPt> 
+    initial_value_fct(1);
+   Vector<typename TIMESTEPPER::NodeInitialConditionFctPt>
+    initial_veloc_fct(1);
+   Vector<typename TIMESTEPPER::NodeInitialConditionFctPt> 
+    initial_accel_fct(1);
+   
+   // Assign values for analytical value, veloc and accel:
+   initial_value_fct[0]=&TanhSolnForLinearWave::exact_u;
+   initial_veloc_fct[0]=&TanhSolnForLinearWave::exact_dudt;
+   initial_accel_fct[0]=&TanhSolnForLinearWave::exact_d2udt2;
+   
    // Loop over boundaries
    unsigned num_bound=mesh_pt()->nboundary();
    for (unsigned ibound=0;ibound<num_bound;ibound++)
@@ -143,15 +157,32 @@ public:
       {
        // Set the boundary condition from the exact solution
        Node* nod_pt=mesh_pt()->boundary_node_pt(ibound,inod);
-       Vector<double> x(2);
-       
-       // Set nodal coordinates for evaluation of BC:
-       x[0]=nod_pt->x(0);
-       x[1]=nod_pt->x(1);
-       
-       // Set exact solution
-       nod_pt->set_value(0,
-                         TanhSolnForLinearWave::exact_u(time_pt()->time(),x));
+
+       bool use_direct_assignment=false;
+       if (use_direct_assignment)
+        {
+         // Set nodal coordinates for evaluation of BC:
+         Vector<double> x(2);
+         x[0]=nod_pt->x(0);
+         x[1]=nod_pt->x(1);
+         
+         // Set exact solution at current time
+         nod_pt->
+          set_value(0,
+                    TanhSolnForLinearWave::exact_u(time_pt()->time(),x));
+        }
+       else
+        {  
+         // Get timestepper
+         TIMESTEPPER* timestepper_pt=dynamic_cast<TIMESTEPPER*>
+          (time_stepper_pt());
+         
+         // Assign the history values
+         timestepper_pt->assign_initial_data_values(nod_pt, 
+                                                    initial_value_fct,
+                                                    initial_veloc_fct,
+                                                    initial_accel_fct);
+        }
       }
     }
   } // end of actions before timestep
@@ -415,17 +446,6 @@ void LinearWaveProblem<ELEMENT,TIMESTEPPER>::doc_solution(DocInfo& doc_info)
  some_file << " 0 0" << std::endl;
  some_file << time_pt()->time()*20.0 << " 0" << std::endl;
 
- // Write dummy zones
- some_file << "ZONE I=2,J=2" << std::endl;
- some_file << "-0.05 -0.05 1.0"  << std::endl;
- some_file << "1.05 -0.05 1.0 " << std::endl;
- some_file << "-0.05 2.05 1.0 " << std::endl;
- some_file << "1.05 2.05 1.0 " << std::endl;
- some_file << "ZONE I=2,J=2" << std::endl;
- some_file << "-0.05 -0.05 -1.0" << std::endl;
- some_file << "1.05 -0.05 -1.0" << std::endl;
- some_file << "-0.05 2.05 -1.0" << std::endl;
- some_file << "1.05 2.05 -1.0" << std::endl;
  some_file.close();
 
  // Output exact solution 

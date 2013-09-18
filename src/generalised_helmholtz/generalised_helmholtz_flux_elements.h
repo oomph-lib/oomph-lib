@@ -415,20 +415,22 @@ GeneralisedHelmholtzPowerElement(FiniteElement* const &bulk_el_pt,
   { 
 #ifdef PARANOID
    {
-    // hierher Matthias to fix this before checking in!
     //Check that the element is not a refineable 3d element
-    ELEMENT* elem_pt = new ELEMENT;
+    ELEMENT* elem_pt = dynamic_cast<ELEMENT*>(bulk_el_pt);
     //If it's three-d
     if(elem_pt->dim()==3)
      {
       //Is it refineable
-      if(dynamic_cast<RefineableElement*>(elem_pt))
+      RefineableElement* ref_el_pt=dynamic_cast<RefineableElement*>(elem_pt);
+      if(ref_el_pt!=0)
        {
-        //Issue a warning
-        OomphLibWarning(
-         "This flux element will not work correctly if nodes are hanging\n",
-         "GeneralisedHelmholtzPowerElement::Constructor",
-         OOMPH_EXCEPTION_LOCATION);
+        if (this->has_hanging_nodes())
+         {
+          throw OomphLibError(
+           "This flux element will not work correctly if nodes are hanging\n",
+           OOMPH_CURRENT_FUNCTION,
+           OOMPH_EXCEPTION_LOCATION);
+         }
        }
      }
    }
@@ -772,20 +774,22 @@ GeneralisedHelmholtzFluxElement(FiniteElement* const &bulk_el_pt,
   { 
 #ifdef PARANOID
    {
-    // hierher Matthias to fix this before checking in!
     //Check that the element is not a refineable 3d element
-    ELEMENT* elem_pt = new ELEMENT;
+    ELEMENT* elem_pt = dynamic_cast<ELEMENT*>(bulk_el_pt);
     //If it's three-d
     if(elem_pt->dim()==3)
      {
       //Is it refineable
-      if(dynamic_cast<RefineableElement*>(elem_pt))
+      RefineableElement* ref_el_pt=dynamic_cast<RefineableElement*>(elem_pt);
+      if(ref_el_pt!=0)
        {
-        //Issue a warning
-        OomphLibWarning(
-         "This flux element will not work correctly if nodes are hanging\n",
-         "GeneralisedHelmholtzFluxElement::Constructor",
-         OOMPH_EXCEPTION_LOCATION);
+        if (this->has_hanging_nodes())
+         {
+          throw OomphLibError(
+           "This flux element will not work correctly if nodes are hanging\n",
+           OOMPH_CURRENT_FUNCTION,
+           OOMPH_EXCEPTION_LOCATION);
+         }
        }
      }
    }

@@ -41,6 +41,7 @@
 #include "multi_domain.h"
 #include "shape.h"
 #include "element_with_external_element.h"
+#include "linear_solver.h"
 
 namespace oomph
 {
@@ -190,7 +191,7 @@ class ProjectableElement : public virtual ELEMENT,
     ELEMENT::fill_in_contribution_to_residuals(residuals);
    }
  }
- 
+  
  
  ///Overloaded version of fill_in_contribution_to_jacobian
  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
@@ -650,9 +651,10 @@ class ProjectionProblem : public virtual Problem
  ///Default constructor 
  ProjectionProblem() 
   {
-   //This is a linear problem, which avoids checking the residual
-   //after the solve and means that we don't get a singular matrix
-   Problem_is_nonlinear=false;
+   //This is a linear problem so avoid checking the residual
+   //after the solve 
+   Problem_is_nonlinear=false; // DO NOT CHANGE THIS -- EVER -- IN
+                               // SOLID MECHANICS PROBLEMS
 
    // By default suppress output during projection
    Output_during_projection_suppressed=true;
@@ -673,7 +675,6 @@ class ProjectionProblem : public virtual Problem
  ///\short Project from base into the problem's own mesh. 
  void project(Mesh* base_mesh_pt)
  {
-
   // Backup verbosity in Newton solve status
   bool shut_up_in_newton_solve_backup=Shut_up_in_newton_solve;
 
@@ -813,6 +814,23 @@ class ProjectionProblem : public virtual Problem
           "Number of equations for projection of Lagrangian coordinate " 
                     << " : "<< ndof_tmp <<std::endl << std::endl;
         }
+
+
+       if (Problem_is_nonlinear)
+        {
+         std::ostringstream error_stream;
+         error_stream 
+          << "Solid mechanics problems will break if Problem_is_nonlinear is\n" 
+          << "set to true in the projection problem because we're using the\n "
+          << "actual nodal positions to store the values of the Lagrangian\n"
+          << "coords. There shouldn't be any need for \n"
+          << "Problem_is_nonlinear=true anyway, apart from debugging in \n"
+          << "which case you now know why this case will break!\n";
+         OomphLibWarning(error_stream.str(),
+                         OOMPH_CURRENT_FUNCTION,
+                         OOMPH_EXCEPTION_LOCATION);
+        }
+
 
        //Projection and interpolation
        Problem::newton_solve();

@@ -118,7 +118,7 @@ namespace TestProblem
    {
     ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt->element_pt(e));
   
-  // Assign edge signs: Loop over the vertex nodes (always 
+    // Assign edge signs: Loop over the vertex nodes (always 
     // first 3 nodes for triangles)
     for(unsigned i=0;i<3;i++)
      {
@@ -377,13 +377,17 @@ void DarcyProblem<ELEMENT>::create_pressure_elements()
  for(unsigned n=0;n<n_neigh;n++)
   {
    // Create the face element
-   FiniteElement *pressure_element_pt
+   DarcyFaceElement<ELEMENT>* pressure_element_pt
     = new DarcyFaceElement<ELEMENT>
     (Bulk_mesh_pt->boundary_element_pt(bound,n),
      Bulk_mesh_pt->face_index_at_boundary(bound,n));
    
    // Add to mesh
    Surface_mesh_pt->add_element_pt(pressure_element_pt);
+
+   // Set function pointer
+   pressure_element_pt->pressure_fct_pt()=&TestProblem::boundary_pressure;
+
   }
 
 } // end of assign_traction_elements
@@ -396,7 +400,6 @@ void DarcyProblem<ELEMENT>::create_pressure_elements()
 template<class ELEMENT>
 void DarcyProblem<ELEMENT>::complete_problem_setup()
 {
-
  // Setup the signs for the fluxes
  TestProblem::edge_sign_setup<ELEMENT>(Bulk_mesh_pt);
 
@@ -420,16 +423,21 @@ void DarcyProblem<ELEMENT>::complete_problem_setup()
   } // end of loop over elements
 
 
- // Complete build of boundary condition elements
- unsigned n_pressure = Surface_mesh_pt->nelement();
- for(unsigned e=0;e<n_pressure;e++)
+ // Apply boundary conditions
+ //--------------------------
+
+ // Get the nodal index at which values representing edge fluxes
+ // at flux interpolation points are stored
+ ELEMENT *el_pt=dynamic_cast<ELEMENT*>(Bulk_mesh_pt->element_pt(0));
+ 
+ // Where are the values stored?
+ unsigned n=el_pt->nedge_flux_interpolation_point();
+ Vector<unsigned> q_index(n);
+ for (unsigned j=0;j<n;j++)
   {
-   DarcyFaceElement<ELEMENT> *el_pt =
-    dynamic_cast<DarcyFaceElement<ELEMENT>* >(Surface_mesh_pt->element_pt(e));
-   el_pt->pressure_fct_pt()=&TestProblem::boundary_pressure;
+   q_index[j]=el_pt->q_edge_index(j);
   }
-
-
+ 
  // Coordinate vector
  Vector<double> x(2);
 
@@ -455,40 +463,73 @@ void DarcyProblem<ELEMENT>::complete_problem_setup()
       // Pin/set values for the flux degrees of freedom
       if (nod_pt->is_on_boundary(ibound))
        {
-        unsigned nval=nod_pt->nvalue();
-        for (unsigned j=0;j<nval;j++)
+        for (unsigned j=0;j<n;j++)
          {
-          nod_pt->pin(j);
+          nod_pt->pin(q_index[j]);
          }
+
+        // Get face index of face associated with edge
+        unsigned f=el_pt->face_index_of_edge(edge);
         
-        // Get the number of flux interpolation points in the current element
+        // Build a temporary face element from which we'll extract
+        // the outer unit normal
+        DarcyFaceElement<ELEMENT>* face_el_pt=
+         new DarcyFaceElement<ELEMENT>(el_pt,f);   
+        
+        // Loop over the flux interpolation points
         unsigned n_flux_interpolation_points=
          el_pt->nedge_flux_interpolation_point();
-        
-        // Loop over the edge Gauss points
         for(unsigned g=0;g<n_flux_interpolation_points;g++)
          {
           // Get the global coords of the flux_interpolation point
           el_pt->edge_flux_interpolation_point_global(edge,g,x);
           
-          // Storage for the exact solution and the unit normal at the 
-          // flux_interpolation point
-          Vector<double> exact_soln(4,0.0);
-          Vector<double> unit_normal(2,0.0);
-          
           // Get the exact solution
+          Vector<double> exact_soln(4,0.0);
           TestProblem::exact_soln(x,exact_soln);
+
+          // Get unit normal at this flux interpolation point
+          Vector<double> s(1);
+          el_pt->face_local_coordinate_of_flux_interpolation_point(edge,g,s);
+          Vector<double> unit_normal(2);
+          face_el_pt->outer_unit_normal(s,unit_normal);
           
-          unit_normal[0]=x[0]/sqrt(x[0]*x[0]+x[1]*x[1]);
-          unit_normal[1]=x[1]/sqrt(x[0]*x[0]+x[1]*x[1]);
+#ifdef PARANOID          
+
+          // Sanity check
+          Vector<double> x_face(2);
+          face_el_pt->interpolated_x(s,x_face);
+          if ((x_face[0]-x[0])*(x_face[0]-x[0])+
+              (x_face[1]-x[1])*(x_face[1]-x[1])>1.0e-3)
+           {
+            std::stringstream error;
+            error << "Discrepancy in coordinate of flux interpolation point\n"
+                  << "(computed by bulk and face elements) for edge " << e 
+                  << " and flux int pt " << g << "\n"
+                  << "Face thinks node is at: "
+                  << x_face[0] << " " << x_face[1] << "\n"
+                  << "Bulk thinks node is at: "
+                  << x[0] << " " << x[1] << "\n";
+            throw OomphLibError(
+             error.str(),
+             OOMPH_CURRENT_FUNCTION,
+             OOMPH_EXCEPTION_LOCATION);
+           }
+#endif
           
           // Set the boundary flux
-          nod_pt->set_value(g,exact_soln[0]*unit_normal[0]+
-                              exact_soln[1]*unit_normal[1]);
+          nod_pt->set_value(q_index[g],
+                            exact_soln[0]*unit_normal[0]+
+                            exact_soln[1]*unit_normal[1]);
           
-         } // End if for node on required boundary
-       } // End of loop over edge Gauss points
-     } // End of loop over nodes on edges
+         } // End of loop over flux interpolation points
+
+        // Don't need face element on that edge any more
+        delete face_el_pt;
+        
+       } // End if for edge on required boundary
+     } // End of loop over edges
+
    } // End of loop over boundary elements
  } // End of loop over boundaries
 }

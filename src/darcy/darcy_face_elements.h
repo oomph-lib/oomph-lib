@@ -79,9 +79,6 @@ public virtual FaceElement
 {
 protected:
 
- /// pointer to the bulk element this face element is attached to
- ELEMENT *Element_pt;
-
  /// \short Pointer to an imposed pressure function. Arguments:
  /// Eulerian coordinate; outer unit normal; applied pressure.
  /// (Not all of the input arguments will be required for all specific load
@@ -146,9 +143,6 @@ public:
      }
    }
 #endif   
-
-  // Set the pointer to the bulk element
-  Element_pt=dynamic_cast<ELEMENT*>(element_pt);
 
   // Attach the geometrical information to the element. N.B. This function
   // also assigns nbulk_value from the required_nvalue of the bulk element
@@ -282,8 +276,11 @@ template<class ELEMENT>
   // Find out the dimension of the node
   unsigned n_dim = this->nodal_dimension();
 
-  unsigned n_q_basis = Element_pt->nq_basis();
-  unsigned n_q_basis_edge = Element_pt->nq_basis_edge();
+  // Set the pointer to the bulk element
+  ELEMENT* bulk_el_pt=dynamic_cast<ELEMENT*>(bulk_element_pt());
+
+  unsigned n_q_basis = bulk_el_pt->nq_basis();
+  unsigned n_q_basis_edge = bulk_el_pt->nq_basis_edge();
 
   // Integer to hold the local equation number
   int local_eqn=0;
@@ -321,7 +318,7 @@ template<class ELEMENT>
 
     // Get the q basis at bulk local coordinate s_bulk, corresponding to 
     // face local coordinate s_face
-    Element_pt->get_q_basis(s_bulk,q_basis);
+    bulk_el_pt->get_q_basis(s_bulk,q_basis);
 
     // Calculate the Eulerian and Lagrangian coordinates
     Vector<double> interpolated_x(n_dim,0.0);
@@ -402,7 +399,7 @@ template<class ELEMENT>
     // have zero normal component on the boundary)
     for(unsigned l=0;l<n_q_basis_edge;l++)
      {
-      local_eqn = this->nodal_local_eqn(1,Element_pt->q_edge_index(l));
+      local_eqn = this->nodal_local_eqn(1,bulk_el_pt->q_edge_index(l));
 
       /*IF it's not a boundary condition*/
       if(local_eqn >= 0)

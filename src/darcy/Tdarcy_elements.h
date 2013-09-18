@@ -60,6 +60,45 @@ namespace oomph
    return Initial_Nvalue[n];
   }
   
+  /// Return the face index associated with specified edge 
+  unsigned face_index_of_edge(const unsigned& j) const
+  {
+   return (j+2)%3;
+  }
+
+  /// \short Compute the face element coordinates of the nth flux interpolation 
+  /// point along specified edge
+  void face_local_coordinate_of_flux_interpolation_point(const unsigned &edge,
+                                                         const unsigned &n,
+                                                         Vector<double> &s) 
+   const
+   {
+    // Get the location of the n-th flux interpolation point along 
+    // the edge in terms of the distance along the edge itself
+    Vector<double> flux_interpolation_point=
+     edge_flux_interpolation_point(edge,n);
+
+    // Convert the edge number to the number of the mid-edge node along that
+    // edge
+    unsigned node_number=Q_edge_conv[edge];
+
+    // The edge basis functions are defined in a clockwise manner, so we have
+    // to effectively "flip" some coordinates
+    switch(node_number)
+     {
+      case 3:
+       s[0]=flux_interpolation_point[0];
+       break;
+      case 4:
+       s[0]=1.0-flux_interpolation_point[0];
+       break;
+      case 5:
+       s[0]=flux_interpolation_point[0];
+       break;
+     }
+
+   }
+
   /// Return the face index associated with edge flux degree of freedom
   unsigned face_index_of_q_edge_basis_fct(const unsigned& j) const
   {
@@ -72,7 +111,7 @@ namespace oomph
     return this->nodal_local_eqn(q_edge_node_number(n),q_edge_index(n));
    }
 
-  /// Return the equation number of the n-th internal (moment) degree of freedom
+  /// Return the equation number of the n-th internal  degree of freedom
   int q_internal_local_eqn(const unsigned &n) const
    {
     return internal_local_eqn(q_internal_index(),n);
@@ -122,25 +161,25 @@ namespace oomph
    return node_pt(Q_edge_conv[edge]);
   }
       
-  /// Return the values of the edge (flux) degrees of freedom
+  /// Return the values of the edge (flux) degree of freedom
   double q_edge(const unsigned &n) const
    {
     return nodal_value(q_edge_node_number(n),q_edge_index(n));
    }
 
-  /// Return the values of the internal (moment) degrees of freedom
+  /// Return the values of the internal  degree of freedom
   double q_internal(const unsigned &n) const
    {
     return this->internal_data_pt(q_internal_index())->value(n);
    }
 
-  /// Set the values of the edge (flux) degrees of freedom
+  /// Set the values of the edge (flux) degree of freedom
   void set_q_edge(const unsigned &n, const double& value)
    {
     node_pt(q_edge_node_number(n))->set_value(q_edge_index(n),value);
    }
 
-  /// Set the values of the internal (moment) degrees of freedom
+  /// Set the values of the internal degree of freedom
   void set_q_internal(const unsigned &n, const double& value)
    {
     this->internal_data_pt(q_internal_index())->set_value(n,value);
@@ -167,7 +206,7 @@ namespace oomph
   /// Return the local coordinate of the nth flux interpolation 
   /// point along an edge
   Vector<double> edge_flux_interpolation_point(const unsigned &edge,
-                                  const unsigned &n) const
+                                               const unsigned &n) const
    {
     Vector<double> coord(1);
     coord[0]=(1.0-sign_edge(edge))/2.0+sign_edge(edge)*
@@ -190,8 +229,8 @@ namespace oomph
   /// \short Compute the global coordinates of the nth flux interpolation 
   /// point along an edge
   void edge_flux_interpolation_point_global(const unsigned &edge,
-                               const unsigned &n,
-                               Vector<double> &x) const
+                                            const unsigned &n,
+                                            Vector<double> &x) const
    {
     // Get the location of the n-th flux interpolation point along 
     // the edge in terms of the distance along the edge itself
@@ -237,7 +276,7 @@ namespace oomph
   int p_local_eqn(const unsigned &n) const;
 
   /// Return the nth pressure value
-  double p_value(unsigned &n) const;
+  double p_value(const unsigned &n) const;
 
   /// Return the total number of pressure basis functions
   unsigned np_basis() const;

@@ -377,7 +377,7 @@ namespace oomph
   outfile << this->tecplot_zone_string(nplot);
   
   // Exact solution Vector 
-  Vector<double> exact_soln(3);
+  Vector<double> exact_soln(9);
   
   // Loop over plot points
   unsigned num_plot_points=this->nplot_points(nplot);
@@ -431,7 +431,7 @@ namespace oomph
   outfile << this->tecplot_zone_string(nplot);
 
   // Exact solution Vector
-  Vector<double> exact_soln(3);
+  Vector<double> exact_soln(9);
 
   // Loop over plot points
   unsigned num_plot_points=this->nplot_points(nplot);
@@ -453,7 +453,7 @@ namespace oomph
       outfile << x[i] << " ";
      }
 
-    for(unsigned i=0;i<3;i++)
+    for(unsigned i=0;i<9;i++)
      {
       outfile << exact_soln[i] << " ";
      }
@@ -476,6 +476,9 @@ namespace oomph
   Vector<double> s(2);
   Vector<double> x(2);
   Vector<double> u(3);
+  Vector<double> du_dt(3);
+  Vector<double> d2u_dt2(3);
+
   
   // Tecplot header info
   outfile << this->tecplot_zone_string(nplot);
@@ -490,8 +493,9 @@ namespace oomph
     
     // Get Eulerian coordinates and displacements
     this->interpolated_x(s,x);
-    this->
-     interpolated_u_axisymmetric_linear_elasticity(s,u);
+    this->interpolated_u_axisymmetric_linear_elasticity(s,u);
+    this->interpolated_du_dt_axisymmetric_linear_elasticity(s,du_dt);
+    this->interpolated_d2u_dt2_axisymmetric_linear_elasticity(s,d2u_dt2);
     
     //Output the r,z,..
     for(unsigned i=0;i<2;i++) 
@@ -500,6 +504,14 @@ namespace oomph
     // Output displacement
     for(unsigned i=0;i<3;i++) 
      {outfile << u[i] << " ";} 
+
+    // Output veloc
+    for(unsigned i=0;i<3;i++) 
+     {outfile << du_dt[i] << " ";} 
+
+    // Output accel
+    for(unsigned i=0;i<3;i++) 
+     {outfile << d2u_dt2[i] << " ";} 
 
     outfile << std::endl;
    }
@@ -577,7 +589,7 @@ void AxisymmetricLinearElasticityEquations::compute_error(
  outfile << "ZONE" << std::endl;
  
  // Exact solution Vector (u_r, u_z, u_theta)
- Vector<double> exact_soln(3);
+ Vector<double> exact_soln(9);
    
  //Loop over the integration points
  for(unsigned ipt=0;ipt<n_intpt;ipt++)
@@ -664,7 +676,7 @@ void AxisymmetricLinearElasticityEquations::compute_error(
  outfile << "ZONE" << std::endl;
  
  // Exact solution Vector (u_r, u_z, u_theta)
- Vector<double> exact_soln(3);
+ Vector<double> exact_soln(9);
    
  //Loop over the integration points
  for(unsigned ipt=0;ipt<n_intpt;ipt++)

@@ -110,7 +110,7 @@ namespace oomph
  /// Return the nth pressure value
 //===========================================================================
  template<>
- double TRaviartThomasDarcyElement<0>::p_value(unsigned &n) const
+ double TRaviartThomasDarcyElement<0>::p_value(const unsigned &n) const
  {
   return this->internal_data_pt(P_internal_data_index)->value(n);
  }
@@ -342,7 +342,7 @@ namespace oomph
  /// Return the nth pressure value
 //===========================================================================
  template<>
- double TRaviartThomasDarcyElement<1>::p_value(unsigned &n) const
+ double TRaviartThomasDarcyElement<1>::p_value(const unsigned &n) const
  {
   return this->internal_data_pt(P_internal_data_index)->value(n);
  }

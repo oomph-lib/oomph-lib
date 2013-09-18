@@ -40,7 +40,7 @@ if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/results.dat.gz   \
-    results.dat  >> validation.log
+    results.dat  5.1 1.0e-14 >> validation.log
 fi
 
 mv RESLT_smooth RESLT_smooth_two_d_linear_wave

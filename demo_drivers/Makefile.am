@@ -47,6 +47,7 @@ axisym_linear_elasticity \
 generalised_fourier_decomposed_helmholtz \
 homogenisation \
 darcy \
+axisym_poroelasticity \
 generalised_time_harmonic_linear_elasticity
 if WANT_MPI
 SUBDIRS += mpi

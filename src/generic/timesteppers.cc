@@ -517,64 +517,107 @@ void  Newmark<NSTEPS>::assign_initial_data_values(Data* const & data_pt,
  // Set weights
  set_weights();
  
- //Find number of values stored
- unsigned n_value = data_pt->nvalue();
- 
- //Loop over values
- for(unsigned j=0;j<n_value;j++)
+#ifdef PARANOID
+ //Check if the 3 vectors of functions have the same size
+ if(initial_value_fct.size() != initial_veloc_fct.size() ||
+    initial_value_fct.size() != initial_accel_fct.size())
   {
-   // Value itself at current and previous times
-   for (unsigned t=0;t<=NSTEPS;t++)
+   throw OomphLibError(
+    "The Vectors of fcts for values, velocities and acceleration must be the same size",
+    OOMPH_CURRENT_FUNCTION,
+    OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+
+ //The number of functions in each vector (they should be the same)
+ unsigned n_fcts = initial_value_fct.size();
+
+#ifdef PARANOID
+ 
+ //If there are more data values at the node than functions, issue a warning
+ unsigned n_value = data_pt->nvalue();
+ if(n_value>n_fcts && !Shut_up_in_assign_initial_data_values)
+  {
+   std::stringstream message;
+   message << "There are more data values than initial value fcts.\n";
+   message << "Only the first " << n_fcts << " data values will be set\n";
+   OomphLibWarning(message.str(),
+                   OOMPH_CURRENT_FUNCTION,
+                   OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+ 
+ //Loop over elements of the function vectors
+ for(unsigned j=0;j<n_fcts;j++)
+  {
+   if (initial_value_fct[j]==0)
     {
-     double time_local=Time_pt->time(t);
-     data_pt->set_value(t,j,initial_value_fct[j](time_local)); 
-    }  
-
-   // Now, rather than assigning the values for veloc and accel
-   // in the Newmark scheme directly, we solve a linear system 
-   // to determine the values required to make the Newmark 
-   // representations of the  veloc and accel at the current (!) 
-   // time are exact. 
-
-   // Initial time: The value itself
-   double time_=Time_pt->time();
-   double U = initial_value_fct[j](time_);   
+#ifdef PARANOID
+     if(!Shut_up_in_assign_initial_data_values)
+      {
+       std::stringstream message;
+       message << "Ignoring value " << j << " in assignment of ic.\n";
+       OomphLibWarning(message.str(),
+                       "Newmark<NSTEPS>::assign_initial_data_values",
+                       OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+    }
+   else
+    {
+     // Value itself at current and previous times
+     for (unsigned t=0;t<=NSTEPS;t++)
+      {
+       double time_local=Time_pt->time(t);
+       data_pt->set_value(t,j,initial_value_fct[j](time_local)); 
+      }  
      
-   // Value itself at previous time
-   time_=Time_pt->time(1);
-   double U0 = initial_value_fct[j](time_);   
+     // Now, rather than assigning the values for veloc and accel
+     // in the Newmark scheme directly, we solve a linear system 
+     // to determine the values required to make the Newmark 
+     // representations of the  veloc and accel at the current (!) 
+     // time are exact. 
      
-   // Veloc (time deriv) at present time -- this is what the
-   // Newmark scheme should return!
-   time_=Time_pt->time(0);
-   double Udot = initial_veloc_fct[j](time_);   
+     // Initial time: The value itself
+     double time_=Time_pt->time();
+     double U = initial_value_fct[j](time_);   
      
-   // Acccel (2nd time deriv) at present time -- this is what the
-   // Newmark scheme should return!
-   time_=Time_pt->time(0);
-   double Udotdot = initial_accel_fct[j](time_);   
-
-   Vector<double> vect(2);
-   vect[0]=Udotdot-Weight(2,0)*U-Weight(2,1)*U0;
-   vect[1]=Udot   -Weight(1,0)*U-Weight(1,1)*U0;
-
-   DenseDoubleMatrix matrix(2,2);
-   matrix(0,0)=Weight(2,NSTEPS+1);
-   matrix(0,1)=Weight(2,NSTEPS+2);
-   matrix(1,0)=Weight(1,NSTEPS+1);
-   matrix(1,1)=Weight(1,NSTEPS+2);
-
-   matrix.solve(vect);
-
-   // Discrete veloc (time deriv) at previous time , to be entered into the
-   // Newmark scheme  so that its prediction for the *current* veloc 
-   // and accel is correct.
-   data_pt->set_value(NSTEPS+1,j,vect[0]);
+     // Value itself at previous time
+     time_=Time_pt->time(1);
+     double U0 = initial_value_fct[j](time_);   
      
-   // Discrete veloc (2nd time deriv) at previous time, to be entered into 
-   // the Newmark scheme  so that its prediction for the *current* veloc 
-   // and accel is correct.
-   data_pt->set_value(NSTEPS+2,j,vect[1]);
+     // Veloc (time deriv) at present time -- this is what the
+     // Newmark scheme should return!
+     time_=Time_pt->time(0);
+     double Udot = initial_veloc_fct[j](time_);   
+     
+     // Acccel (2nd time deriv) at present time -- this is what the
+     // Newmark scheme should return!
+     time_=Time_pt->time(0);
+     double Udotdot = initial_accel_fct[j](time_);   
+     
+     Vector<double> vect(2);
+     vect[0]=Udotdot-Weight(2,0)*U-Weight(2,1)*U0;
+     vect[1]=Udot   -Weight(1,0)*U-Weight(1,1)*U0;
+     
+     DenseDoubleMatrix matrix(2,2);
+     matrix(0,0)=Weight(2,NSTEPS+1);
+     matrix(0,1)=Weight(2,NSTEPS+2);
+     matrix(1,0)=Weight(1,NSTEPS+1);
+     matrix(1,1)=Weight(1,NSTEPS+2);
+     
+     matrix.solve(vect);
+     
+     // Discrete veloc (time deriv) at previous time , to be entered into the
+     // Newmark scheme  so that its prediction for the *current* veloc 
+     // and accel is correct.
+     data_pt->set_value(NSTEPS+1,j,vect[0]);
+     
+     // Discrete veloc (2nd time deriv) at previous time, to be entered into 
+     // the Newmark scheme  so that its prediction for the *current* veloc 
+     // and accel is correct.
+     data_pt->set_value(NSTEPS+2,j,vect[1]);
+    }
   }
 }
 
@@ -595,8 +638,35 @@ void  Newmark<NSTEPS>::assign_initial_data_values(
  // Set weights
  set_weights();
  
- //Find number of values stored
+
+#ifdef PARANOID
+ //Check if the 3 vectors of functions have the same size
+ if(initial_value_fct.size() != initial_veloc_fct.size() ||
+    initial_value_fct.size() != initial_accel_fct.size())
+  {
+   throw OomphLibError("The Vectors of fcts for values, velocities and acceleration must be the same size",
+     "Newmark<NSTEPS>::assign_initial_data_values",
+     OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+
+ //The number of functions in each vector (they should be the same)
+ unsigned n_fcts = initial_value_fct.size();
+
+#ifdef PARANOID
+
+ //If there are more data values at the node than functions, issue a warning
  unsigned n_value = node_pt->nvalue();
+ if(n_value>n_fcts && !Shut_up_in_assign_initial_data_values)
+  {
+   std::stringstream message;
+   message << "There are more nodal values than initial value fcts.\n";
+   message << "Only the first " << n_fcts << " nodal values will be set\n";
+   OomphLibWarning(message.str(),
+                   OOMPH_CURRENT_FUNCTION,
+                   OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
  
  // Get current nodal coordinates
  unsigned n_dim=node_pt->ndim();
@@ -604,62 +674,79 @@ void  Newmark<NSTEPS>::assign_initial_data_values(
  for (unsigned i=0;i<n_dim;i++) x[i]=node_pt->x(i);
 
  //Loop over values
- for(unsigned j=0;j<n_value;j++)
+ for(unsigned j=0;j<n_fcts;j++)
   {
-   // Value itself at current and previous times
-   for (unsigned t=0;t<=NSTEPS;t++)
+   if (initial_value_fct[j]==0)
     {
-     double time_local=Time_pt->time(t);
-     node_pt->set_value(t,j,initial_value_fct[j](time_local,x)); 
-    }  
-
-   // Now, rather than assigning the values for veloc and accel
-   // in the Newmark scheme directly, we solve a linear system 
-   // to determine the values required to make the Newmark 
-   // representations of the  veloc and accel at the current (!) 
-   // time are exact. 
-
-   // Initial time: The value itself
-   double time_=Time_pt->time();
-   double U = initial_value_fct[j](time_,x);   
+#ifdef PARANOID
+     if(!Shut_up_in_assign_initial_data_values)
+      {
+       std::stringstream message;
+       message << "Ignoring value " << j << " in assignment of ic.\n";
+       OomphLibWarning(message.str(),
+                       OOMPH_CURRENT_FUNCTION,
+                       OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+    }
+   else
+    {
+     // Value itself at current and previous times
+     for (unsigned t=0;t<=NSTEPS;t++)
+      {
+       double time_local=Time_pt->time(t);
+       node_pt->set_value(t,j,initial_value_fct[j](time_local,x)); 
+      }  
      
-   // Value itself at previous time
-   time_=Time_pt->time(1);
-   double U0 = initial_value_fct[j](time_,x);   
+     // Now, rather than assigning the values for veloc and accel
+     // in the Newmark scheme directly, we solve a linear system 
+     // to determine the values required to make the Newmark 
+     // representations of the  veloc and accel at the current (!) 
+     // time are exact. 
      
-   // Veloc (time deriv) at present time -- this is what the
-   // Newmark scheme should return!
-   time_=Time_pt->time(0);
-   double Udot = initial_veloc_fct[j](time_,x);   
+     // Initial time: The value itself
+     double time_=Time_pt->time();
+     double U = initial_value_fct[j](time_,x);   
      
-   // Acccel (2nd time deriv) at present time -- this is what the
-   // Newmark scheme should return!
-   time_=Time_pt->time(0);
-   double Udotdot = initial_accel_fct[j](time_,x);   
-
-   Vector<double> vect(2);
-   vect[0]=Udotdot-Weight(2,0)*U-Weight(2,1)*U0;
-   vect[1]=Udot   -Weight(1,0)*U-Weight(1,1)*U0;
-
-   DenseDoubleMatrix matrix(2,2);
-   matrix(0,0)=Weight(2,NSTEPS+1);
-   matrix(0,1)=Weight(2,NSTEPS+2);
-   matrix(1,0)=Weight(1,NSTEPS+1);
-   matrix(1,1)=Weight(1,NSTEPS+2);
-
-   matrix.solve(vect);
-
-   // Discrete veloc (time deriv) at previous time , to be entered into the
-   // Newmark scheme  so that its prediction for the *current* veloc 
-   // and accel is correct.
-   node_pt->set_value(NSTEPS+1,j,vect[0]);
+     // Value itself at previous time
+     time_=Time_pt->time(1);
+     double U0 = initial_value_fct[j](time_,x);   
      
-   // Discrete veloc (2nd time deriv) at previous time, to be entered into 
-   // the Newmark scheme  so that its prediction for the *current* veloc 
-   // and accel is correct.
-   node_pt->set_value(NSTEPS+2,j,vect[1]);
+     // Veloc (time deriv) at present time -- this is what the
+     // Newmark scheme should return!
+     time_=Time_pt->time(0);
+     double Udot = initial_veloc_fct[j](time_,x);   
+     
+     // Acccel (2nd time deriv) at present time -- this is what the
+     // Newmark scheme should return!
+     time_=Time_pt->time(0);
+     double Udotdot = initial_accel_fct[j](time_,x);   
+     
+     Vector<double> vect(2);
+     vect[0]=Udotdot-Weight(2,0)*U-Weight(2,1)*U0;
+     vect[1]=Udot   -Weight(1,0)*U-Weight(1,1)*U0;
+     
+     DenseDoubleMatrix matrix(2,2);
+     matrix(0,0)=Weight(2,NSTEPS+1);
+     matrix(0,1)=Weight(2,NSTEPS+2);
+     matrix(1,0)=Weight(1,NSTEPS+1);
+     matrix(1,1)=Weight(1,NSTEPS+2);
+     
+     matrix.solve(vect);
+     
+     // Discrete veloc (time deriv) at previous time , to be entered into the
+     // Newmark scheme  so that its prediction for the *current* veloc 
+     // and accel is correct.
+     node_pt->set_value(NSTEPS+1,j,vect[0]);
+     
+     // Discrete veloc (2nd time deriv) at previous time, to be entered into 
+     // the Newmark scheme  so that its prediction for the *current* veloc 
+     // and accel is correct.
+     node_pt->set_value(NSTEPS+2,j,vect[1]);
+    }
   }
 }
+
 
 //=========================================================================
 /// \short  First step in a two-stage procedure to assign
@@ -972,13 +1059,26 @@ void  NewmarkBDF<2>::set_weights()
  Weight(2,4)=(Beta2-1.0)/Beta2;
    
  // Set BDF weights for first derivatives
- double dtprev=Time_pt->dt(1);
- Weight(1,0) =  1.0/dt + 1.0/(dt + dtprev);
- Weight(1,1) = -(dt + dtprev)/(dt*dtprev);
- Weight(1,2) = dt/((dt+dtprev)*dtprev);
- Weight(1,3)=0.0;
- Weight(1,4)=0.0;
- 
+ if (Degrade_to_bdf1_for_first_derivs)
+  {
+   this->Weight(1,0) = 1.0/dt;
+   this->Weight(1,1) = -1.0/dt;
+   unsigned nweights=this->Weight.ncol();
+   for (unsigned i=2;i<nweights;i++)
+    {
+     this->Weight(1,i)=0.0;
+    }
+  }
+ else
+  {
+   double dtprev=Time_pt->dt(1);
+   Weight(1,0) =  1.0/dt + 1.0/(dt + dtprev);
+   Weight(1,1) = -(dt + dtprev)/(dt*dtprev);
+   Weight(1,2) = dt/((dt+dtprev)*dtprev);
+   Weight(1,3)=0.0;
+   Weight(1,4)=0.0;
+  }
+   
 }
 
 //=========================================================================
@@ -1010,13 +1110,28 @@ void  NewmarkBDF<4>::set_weights()
     }
   }
 #endif
- Weight(1,0) =  25.0/12.0/dt;
- Weight(1,1) = -48.0/12.0/dt;
- Weight(1,2) =  36.0/12.0/dt;
- Weight(1,3) = -16.0/12.0/dt;
- Weight(1,4) =   3.0/12.0/dt;
- Weight(1,5) = 0.0;
- Weight(1,6) = 0.0;
+
+ // Set BDF weights for first derivatives
+ if (Degrade_to_bdf1_for_first_derivs)
+  {
+   this->Weight(1,0) = 1.0/dt;
+   this->Weight(1,1) = -1.0/dt;
+   unsigned nweights=this->Weight.ncol();
+   for (unsigned i=2;i<nweights;i++)
+    {
+     this->Weight(1,i)=0.0;
+    }
+  }
+ else
+  {
+   Weight(1,0) =  25.0/12.0/dt;
+   Weight(1,1) = -48.0/12.0/dt;
+   Weight(1,2) =  36.0/12.0/dt;
+   Weight(1,3) = -16.0/12.0/dt;
+   Weight(1,4) =   3.0/12.0/dt;
+   Weight(1,5) = 0.0;
+   Weight(1,6) = 0.0;
+  }
  
 }
 
