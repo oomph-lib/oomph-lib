@@ -2366,7 +2366,7 @@ namespace oomph
         unsigned eqn_number = el_pt->eqn_number(i);
         
         // Get the velocity dofs
-        if (this->block_number(eqn_number)==block_i) // THIS HAS CHANGED
+        if (this->block_number(eqn_number)==int(block_i)) // THIS HAS CHANGED
          {
           // get the index in the block
           unsigned index = this->index_in_block(eqn_number);

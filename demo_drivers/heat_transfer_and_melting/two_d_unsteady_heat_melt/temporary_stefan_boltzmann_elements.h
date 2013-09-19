@@ -1022,7 +1022,7 @@ namespace StefanBoltzmannHelper
                  const bool& populate_bin,
                  Vector<std::pair<unsigned,unsigned> >& intersected_bin,
                  FiniteElement* el_pt,
-                 ofstream& outfile)
+                 std::ofstream& outfile)
  {
   
   // Actually plot
@@ -1205,11 +1205,12 @@ namespace StefanBoltzmannHelper
          {
           double x_left_end_bin =Min_coord[0]+double(i  )*Dx[0];
           double x_right_end_bin=Min_coord[0]+double(i+1)*Dx[0];
-          if (x_left_end_bin>max(upper_ray_vertex[0],lower_ray_vertex[0]))
+          if (x_left_end_bin>std::max(upper_ray_vertex[0],lower_ray_vertex[0]))
            {
             add_it=false;
            }
-          else if (x_right_end_bin<min(upper_ray_vertex[0],lower_ray_vertex[0]))
+          else if (x_right_end_bin<std::min(upper_ray_vertex[0],
+                                            lower_ray_vertex[0]))
            {
             add_it=false;
            }
@@ -1269,7 +1270,7 @@ namespace StefanBoltzmannHelper
  //=================================================================
  // Doc populated bins
  //=================================================================
- void doc_bins(ofstream& bin_file)
+ void doc_bins(std::ofstream& bin_file)
  {
   // Loop over bins
   for (unsigned ix=0;ix<Nx_bin;ix++)
@@ -1300,7 +1301,7 @@ namespace StefanBoltzmannHelper
  //=================================================================
  // Doc sample points of Stefan Boltzmann elements
  //=================================================================
- void doc_sample_points(ofstream& outfile, 
+ void doc_sample_points(std::ofstream& outfile, 
                         const Vector<FiniteElement*>& sb_face_element_pt)
  {    
   // Vector for  coordinates of sample point
@@ -1354,7 +1355,7 @@ namespace StefanBoltzmannHelper
  {
   // Output file for debugging
   const bool plot_it=false;
-  ofstream some_file;
+  std::ofstream some_file;
   char filename[100];
 
   // Loop over all face elements to wipe previous information
@@ -1476,7 +1477,7 @@ namespace StefanBoltzmannHelper
        // element (note that the ray can span multiple bins!)
        Vector<std::pair<unsigned,unsigned> > dummy_intersected_bin;
        bool populate_bin=true;
-       ofstream dummy_file;
+       std::ofstream dummy_file;
        Vector<Vector<double> > sample_vertex(2);
        sample_vertex[0].resize(2);
        sample_vertex[1].resize(2);
@@ -1506,7 +1507,7 @@ namespace StefanBoltzmannHelper
        // element (note that the ray can span multiple bins!)
        Vector<std::pair<unsigned,unsigned> > dummy_intersected_bin;
        bool populate_bin=true;
-       ofstream dummy_file;
+       std::ofstream dummy_file;
        Vector<Vector<double> > sample_vertex(2);
        sample_vertex[0].resize(2);
        sample_vertex[1].resize(2);
@@ -1534,7 +1535,7 @@ namespace StefanBoltzmannHelper
        // element (note that the ray can span multiple bins!)
        Vector<std::pair<unsigned,unsigned> > dummy_intersected_bin;
        bool populate_bin=true;
-       ofstream dummy_file;
+       std::ofstream dummy_file;
        Vector<Vector<double> > sample_vertex(2);
        sample_vertex[0].resize(2);
        sample_vertex[1].resize(2);
@@ -1562,7 +1563,7 @@ namespace StefanBoltzmannHelper
        // element (note that the ray can span multiple bins!)
        Vector<std::pair<unsigned,unsigned> > dummy_intersected_bin;
        bool populate_bin=true;
-       ofstream dummy_file;
+       std::ofstream dummy_file;
        Vector<Vector<double> > sample_vertex(2);
        sample_vertex[0].resize(2);
        sample_vertex[1].resize(2);
@@ -1637,7 +1638,7 @@ namespace StefanBoltzmannHelper
         // element (note that the ray can span multiple bins!)
         Vector<std::pair<unsigned,unsigned> > dummy_intersected_bin;
         bool populate_bin=true;
-        ofstream dummy_file;
+        std::ofstream dummy_file;
         bin_helper(sample_vertex,
                    populate_bin,
                    dummy_intersected_bin,

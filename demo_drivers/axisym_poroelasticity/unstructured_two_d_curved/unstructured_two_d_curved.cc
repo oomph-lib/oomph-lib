@@ -691,6 +691,9 @@ AxiPoroProblem<ELEMENT,TIMESTEPPER>::AxiPoroProblem()
  // Allocate the timestepper
  My_time_stepper_pt=new TIMESTEPPER;
  add_time_stepper_pt(My_time_stepper_pt);
+
+ // disable warnings in assign initial data values
+ My_time_stepper_pt->disable_warning_in_assign_initial_data_values();
  
  // Remember it
  ProblemParameters::Internal_time_stepper_pt=My_time_stepper_pt;
