@@ -345,8 +345,8 @@ void LinearWaveEquations<DIM>::output_fct(
  // Tecplot header info
  outfile << tecplot_zone_string(nplot);
    
- // Exact solution Vector (here a scalar)
- Vector<double> exact_soln(1);
+ // Exact solution Vector (value and first and second time derivs)
+ Vector<double> exact_soln(3);
 
  // Loop over plot points
  unsigned num_plot_points=nplot_points(nplot);
@@ -470,8 +470,8 @@ void LinearWaveEquations<DIM>::compute_error(
  // Tecplot header info
  outfile << "ZONE" << std::endl;
    
- // Exact solution Vector (here a scalar)
- Vector<double> exact_soln(1);
+ // Exact solution Vector (value, and first and second time derivs)
+ Vector<double> exact_soln(3);
 
  //Loop over the integration points
  for(unsigned ipt=0;ipt<n_intpt;ipt++)
@@ -553,8 +553,8 @@ void LinearWaveEquations<DIM>::compute_error(
  // Tecplot header info
  outfile << "ZONE" << std::endl;
    
- // Exact solution Vector (here a scalar)
- Vector<double> exact_soln(1);
+ // Exact solution Vector (value, and first and second time derivs)
+ Vector<double> exact_soln(3);
 
  //Loop over the integration points
  for(unsigned ipt=0;ipt<n_intpt;ipt++)
