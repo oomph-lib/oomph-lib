@@ -348,7 +348,7 @@ namespace oomph
      double r = interpolated_x[0];
      
      //Get the imposed flux
-     complex<double> flux(0.0,0.0);
+     std::complex<double> flux(0.0,0.0);
      get_flux(interpolated_x,flux);
      
      //Now add to the appropriate equations
