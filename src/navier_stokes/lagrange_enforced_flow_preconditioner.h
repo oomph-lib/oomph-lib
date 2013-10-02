@@ -146,6 +146,12 @@ namespace oomph
     Use_diagonal_w_block = true;
 
     Mapping_info_calculated = false;
+
+    First_NS_solve = true;
+
+    Label_pt = 0;
+
+    Doc_prec_directory_pt = 0;
    }
 
   /// destructor
@@ -201,6 +207,11 @@ namespace oomph
    Label_pt = label_pt;
   }
 
+  void set_doc_prec_directory_pt(std::string* doc_prec_directory_pt) 
+  {
+   Doc_prec_directory_pt = doc_prec_directory_pt;
+  }
+
   /// \short Apply the preconditioner.
   /// r is the residual (rhs), z will contain the solution.
   void preconditioner_solve(const DoubleVector& r, DoubleVector& z)
@@ -208,29 +219,17 @@ namespace oomph
    // // Counter for the current linear solver iteration.
    // // This is used when dumping the rhs block vector,
    // // we only want the first Newton Step.
-   // unsigned curr_its = 0;
-
-   // if(Doc_prec)
-   // {
-   //   std::string newton_step_counter = "NS"
-   //     + StringConversion::to_string(Doc_info_pt->current_nnewton_step());
-
-   //   curr_its = static_cast<IterativeLinearSolver*>
-   //     (problem_pt()->linear_solver_pt())->iterations();
-
-   //   std::string its_counter = "i" + StringConversion::to_string(curr_its);
-
-   //   Label = Doc_info_pt->label() + newton_step_counter
-   //     + its_counter;
-
-   //   // Dump out the block rhs if  it is the first Newton Iteration.
-   //   if(curr_its==0)
-   //   {
-   //     DoubleVector x; // Will contain the re-ordered rhs
-   //     this->get_block_ordered_preconditioner_vector(r,x);
-   //     x.output("rhsx_" + StringConversion::to_string(Label));
-   //   }
-   // }
+    if(Doc_prec && First_NS_solve)
+    {
+      std::string currentsetting 
+        = *Label_pt + "NS"
+          + StringConversion::to_string(Doc_linear_solver_info_pt
+                                        ->current_nnewton_step());
+      // Dump out the block rhs if  it is the first Newton Iteration.
+      DoubleVector x; // Will contain the re-ordered rhs
+      this->get_block_ordered_preconditioner_vector(r,x);
+      x.output( *Doc_prec_directory_pt + "/rhsx_" + currentsetting,15);
+    }
 
    // Working vectors.
    DoubleVector temp_vec;
@@ -300,6 +299,8 @@ namespace oomph
     {
      Navier_stokes_preconditioner_pt->preconditioner_solve(r,z);
     }
+
+   First_NS_solve = false;
   } // end of preconditioner_solve
 
   void set_meshes(Vector<Mesh*> &mesh_pt)
@@ -477,6 +478,8 @@ namespace oomph
 
   std::string* Label_pt;
 
+  std::string *Doc_prec_directory_pt;
+
   bool Doc_time;
 
   bool Doc_prec;
@@ -530,6 +533,9 @@ namespace oomph
 
   /// \short The number of velocity dof types.
   unsigned N_velocity_doftypes;
+
+  bool First_NS_solve;
+
 
   /// \short Pointer to Doc_linear_solver_info.
   /// used for book keeping purposes.
@@ -856,6 +862,7 @@ namespace oomph
  //========================================================================
  void LagrangeEnforcedflowPreconditioner::setup()
  {
+  First_NS_solve = true;
   // For debugging
   bool Doc_time = false;
 
@@ -1131,20 +1138,20 @@ namespace oomph
     unsigned nproc 
      = master_distribution_pt()->communicator_pt()->nproc();
     // This is for bebugging purposes.
-    std::stringstream curr_setting_stream;
-    curr_setting_stream << "NP" << nproc << "R" << my_rank;
-    std::string currentsetting = curr_setting_stream.str();
-//    std::string currentsetting 
-//      = *Label_pt + "NS"
-//        + StringConversion::to_string(Doc_linear_solver_info_pt
-//                                      ->current_nnewton_step());
+//    std::stringstream curr_setting_stream;
+//    curr_setting_stream << "NP" << nproc << "R" << my_rank;
+//    std::string currentsetting = curr_setting_stream.str();
+    std::string currentsetting 
+      = *Label_pt + "NS"
+        + StringConversion::to_string(Doc_linear_solver_info_pt
+                                      ->current_nnewton_step());
 
     // Output the spatial dimension,
     // on a new line, output the number of dof types in each mesh
     // This information allows us to assemble the preconditioner in, say, 
     // MATLAB
     std::ofstream precinfo_ofstream;
-    std::string precinfo_string = "precinfo_" + currentsetting;
+    std::string precinfo_string = *Doc_prec_directory_pt + "/precinfo_" + currentsetting;
     precinfo_ofstream.open(precinfo_string.c_str());
     // The dimension
     precinfo_ofstream << spatial_dim << " ";
@@ -1166,10 +1173,10 @@ namespace oomph
         CRDoubleMatrix* sub_matrix_pt = new CRDoubleMatrix;
         this->get_block(Mi,Mj,*sub_matrix_pt);
         std::stringstream blockname;
-        blockname << "matlab/rawdata/j_"<< currentsetting<< "_"
+        blockname << *Doc_prec_directory_pt+"/j_"<< currentsetting<< "_"
                   << std::setw(2) << std::setfill('0') << Mi
                   << std::setw(2) << std::setfill('0') << Mj;
-        sub_matrix_pt->sparse_indexed_output(blockname.str(),true);
+        sub_matrix_pt->sparse_indexed_output(blockname.str(),true,15);
         delete sub_matrix_pt;
         sub_matrix_pt = 0;
        }//for
