@@ -3081,6 +3081,25 @@ namespace CRDoubleMatrixHelpers
  /// the infinity norm.
  double inf_norm(const DenseMatrix<CRDoubleMatrix*> &matrix_pt);
 
+ /// \short Calculates the largest Gershgorin disc whilst preserving the sign. 
+ /// Let A be an n by n matrix, with entries aij. For i \in {1,...,n} let
+ /// R_i = \sum_{i\neqj}|a_{ij}| be the sum of the absolute values of the
+ /// non-diagonal entries in the i-th row. Let D(a_{ii},R_i) be the closed 
+ /// disc centered at a_{ii} with radius R_i, such a disc is called a 
+ /// Gershgorin disc.
+ /// 
+ /// \n
+ /// 
+ /// We calculate |D(a_{ii},R_i)|_max and multiply by the sign of the diagonal
+ /// entry.
+ ///
+ /// \n
+ /// 
+ /// The DenseMatrix of CRDoubleMatrices are treated as if they are one 
+ /// large matrix. Therefore the dimensions of the sub matrices has to 
+ /// "make sense", there is a paranoid check for this.
+ double gershgorin_eigenvalue_estimate(
+     const DenseMatrix<CRDoubleMatrix*> &matrix_pt);
 
  /// \short Concatenate CRDoubleMatrix matrices. 
  /// The in matrices are concatenated such that the block structure of the

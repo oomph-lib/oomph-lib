@@ -1112,7 +1112,8 @@ namespace oomph
   this->block_setup(block_setup_bcpl);
 
 //  // Check the block size.
-//  for (unsigned i = 0; i < this->nblock_types(); i++) 
+//  unsigned tmp_nblocks = this->nblock_types(true);
+//  for (unsigned i = 0; i < tmp_nblocks; i++) 
 //  {
 //    // Go along the first column.
 //    unsigned raycol = 0;
@@ -1122,8 +1123,6 @@ namespace oomph
 //
 //    unsigned raynrow = tmpblockpt->nrow();
 //    std::cout << "block: " << i << ", nrow: " << raynrow << std::endl; 
-//    
-//
 //  }
 //  pause("now!"); 
   
@@ -1250,8 +1249,14 @@ namespace oomph
      } //  for
 
     // Get the norm and set the scaling sigma.
-    Scaling_sigma = -CRDoubleMatrixHelpers::inf_norm(u_pt)
+//    Scaling_sigma = -CRDoubleMatrixHelpers::inf_norm(u_pt)
+//     *Scaling_sigma_multiplier;
+
+    Scaling_sigma = -CRDoubleMatrixHelpers::inf_norm(v_aug_pt)
      *Scaling_sigma_multiplier;
+
+//    Scaling_sigma = CRDoubleMatrixHelpers::maximum_gershgorin_disk(v_aug_pt)
+//     *Scaling_sigma_multiplier;
 
     double t_norm_finish = TimingHelpers::timer();
     if(Doc_time)
@@ -1747,7 +1752,7 @@ namespace oomph
     //
     // 2   6
     // p = p
-    Vector<Vector<unsigned> > blocktoblockvec;
+    Vector<Vector<unsigned> > doftype_to_doftype_map;
 
     for (unsigned direction = 0; direction < spatial_dim; direction++)
      {
@@ -1758,16 +1763,16 @@ namespace oomph
        }
 
        // Push it in!
-       blocktoblockvec.push_back(dir_doftypes_vec);
+       doftype_to_doftype_map.push_back(dir_doftypes_vec);
      }
 
     Vector<unsigned> ns_p_vec(1,0);
     ns_p_vec[0] = N_velocity_doftypes;
 
-    blocktoblockvec.push_back(ns_p_vec);
+    doftype_to_doftype_map.push_back(ns_p_vec);
 
     navier_stokes_block_preconditioner_pt
-     ->set_precomputed_blocks(f_subblock_pt,blocktoblockvec);
+     ->set_precomputed_blocks(f_subblock_pt,doftype_to_doftype_map);
 
     navier_stokes_block_preconditioner_pt
      ->setup(matrix_pt(), comm_pt());

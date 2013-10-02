@@ -3559,6 +3559,325 @@ namespace CRDoubleMatrixHelpers
    return inf_norm;
   }
 
+ //============================================================================
+ /// \short Calculates the largest Gershgorin disc whilst preserving the sign. 
+ /// Let A be an n by n matrix, with entries aij. For i \in {1,...,n} let
+ /// R_i = \sum_{i\neqj}|a_{ij}| be the sum of the absolute values of the
+ /// non-diagonal entries in the i-th row. Let D(a_{ii},R_i) be the closed 
+ /// disc centered at a_{ii} with radius R_i, such a disc is called a 
+ /// Gershgorin disc.
+ /// 
+ /// \n
+ /// 
+ /// We calculate |D(a_{ii},R_i)|_max and multiply by the sign of the diagonal
+ /// entry.
+ ///
+ /// \n
+ ///
+ /// The DenseMatrix of CRDoubleMatrices are treated as if they are one 
+ /// large matrix. Therefore the dimensions of the sub matrices has to 
+ /// "make sense", there is a paranoid check for this.
+ //============================================================================
+ double gershgorin_eigenvalue_estimate(
+     const DenseMatrix<CRDoubleMatrix*> &matrix_pt)
+  {
+
+   // The number of block rows and columns
+   const unsigned nblockrow = matrix_pt.nrow();
+   const unsigned nblockcol = matrix_pt.ncol();
+
+#ifdef PARANOID
+   // Check that tehre is at least one matrix.
+   if(matrix_pt.nrow() == 0)
+    {
+     std::ostringstream error_message;
+     error_message << "There are no matrices... \n";
+     throw OomphLibError(error_message.str(),
+                         OOMPH_CURRENT_FUNCTION,
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+
+
+   // Check that all matrix_pt pointers are not null 
+   // and the matrices are built.
+   for (unsigned block_row_i = 0; block_row_i < nblockrow; block_row_i++) 
+    {
+     for (unsigned block_col_i = 0; block_col_i < nblockcol; block_col_i++) 
+      {
+       if(matrix_pt(block_row_i,block_col_i) == 0)
+        {
+         std::ostringstream error_message;
+         error_message << "The pointer martrix_pt(" << block_row_i 
+                       << "," << block_col_i <<") is null.\n";
+         throw OomphLibError(error_message.str(),
+                             OOMPH_CURRENT_FUNCTION,
+                             OOMPH_EXCEPTION_LOCATION);
+        }
+
+       if(!matrix_pt(block_row_i,block_col_i)->built())
+        {
+         std::ostringstream error_message;
+         error_message << "The matrix at martrix_pt(" << block_row_i 
+                       << "," << block_col_i <<") is not built.\n";
+         throw OomphLibError(error_message.str(),
+                             OOMPH_CURRENT_FUNCTION,
+                             OOMPH_EXCEPTION_LOCATION);
+        }
+      }
+    }
+#endif
+
+  // The communicator pointer from block (0,0)
+  // All communicators should be the same, we check this next.
+  const OomphCommunicator* const comm_pt 
+   = matrix_pt(0,0)->distribution_pt()->communicator_pt();
+
+#ifdef PARANOID
+   // Check that all communicators are the same
+   for (unsigned block_row_i = 0; block_row_i < nblockrow; block_row_i++) 
+    {
+     for (unsigned block_col_i = 0; block_col_i < nblockcol; block_col_i++) 
+      {
+       // Communicator for this block matrix.
+       const OomphCommunicator current_block_comm
+         = *(matrix_pt(block_row_i,block_col_i)
+           ->distribution_pt()->communicator_pt());
+       if(*comm_pt != current_block_comm)
+        {
+         std::ostringstream error_message;
+         error_message << "The communicator of block martrix_pt("<< block_row_i 
+                       << "," << block_col_i <<") is not the same as block "
+                       << "matrix_pt(0,0).\n";
+         throw OomphLibError(error_message.str(),
+                             OOMPH_CURRENT_FUNCTION,
+                             OOMPH_EXCEPTION_LOCATION);
+
+        }
+      }
+    }
+
+   // Check that all distributed boolean are the same (if on more than 1 core)
+   if(comm_pt->nproc() > 1)
+    {
+     // Get the distributed boolean from matrix_pt(0,0)
+     bool first_distributed = matrix_pt(0,0)->distributed();
+     
+     for (unsigned block_row_i = 0; block_row_i < nblockrow; block_row_i++) 
+      {
+       for (unsigned block_col_i = 0; block_col_i < nblockcol; block_col_i++) 
+        {
+         // Is the current block distributed?
+         bool current_distributed 
+           = matrix_pt(block_row_i,block_col_i)->distributed();
+
+         if(first_distributed != current_distributed)
+          {
+           std::ostringstream error_message;
+           error_message << "Block matrix_pt(" << block_row_i 
+                         << ","<<block_col_i<<") and block matrix_pt(0,0) "
+                         << "have a different distributed boolean.\n";
+           throw OomphLibError(error_message.str(),
+                               OOMPH_CURRENT_FUNCTION,
+                               OOMPH_EXCEPTION_LOCATION);
+          }
+        }
+      }
+    }
+
+   // Check that all sub matrix dimensions "make sense"
+   // We need to check that all the matrices in the same row has the same nrow.
+   // Then repeat for the columns.
+   
+   // Check the nrow of each block row.
+   for (unsigned block_row_i = 0; block_row_i < nblockrow; block_row_i++) 
+    {
+     // Get the nrow to compare against from the first column.
+     const unsigned first_block_nrow = matrix_pt(block_row_i,0)->nrow();
+     
+     // Loop through the block columns.
+     for (unsigned block_col_i = 1; block_col_i < nblockcol; block_col_i++) 
+      {
+       // If the nrow of this block is not the same as the nrow from the first
+       // block in this block row, throw an error.
+       const unsigned current_block_nrow 
+         = matrix_pt(block_row_i,block_col_i)->nrow();
+
+       if(first_block_nrow != current_block_nrow)
+        {
+         std::ostringstream error_message;
+         error_message << "First block has nrow = " << current_block_nrow
+                       << ". But martrix_pt(" << block_row_i 
+                       << "," << block_col_i <<") has nrow = " 
+                       << current_block_nrow << ".\n";
+         throw OomphLibError(error_message.str(),
+                             OOMPH_CURRENT_FUNCTION,
+                             OOMPH_EXCEPTION_LOCATION);
+        }
+      
+      }
+    }
+
+   // Check the ncol of each block column.
+   for (unsigned block_col_i = 0; block_col_i < nblockcol; block_col_i++) 
+    {
+     // Get the ncol from the first block row to compare against.
+     const unsigned first_block_ncol = matrix_pt(0,block_col_i)->ncol();
+     
+     for (unsigned block_row_i = 1; block_row_i < nblockrow; block_row_i++) 
+      {
+       // Get the ncol for the current block.
+       const unsigned current_block_ncol 
+         = matrix_pt(block_row_i,block_col_i)->ncol();
+
+       if(first_block_ncol != current_block_ncol)
+        {
+         std::ostringstream error_message;
+         error_message << "First block has ncol = " << current_block_ncol
+                       << ". But martrix_pt(" << block_row_i 
+                       << "," << block_col_i <<") has ncol = " 
+                       << current_block_ncol << ".\n";
+         throw OomphLibError(error_message.str(),
+                             OOMPH_CURRENT_FUNCTION,
+                             OOMPH_EXCEPTION_LOCATION);
+        }
+      }
+    }
+
+   // Check that the distribution for each block row is the same.
+   for (unsigned block_row_i = 0; block_row_i < nblockrow; block_row_i++) 
+   {
+     // The first distribution of this block row.
+     const LinearAlgebraDistribution first_dist 
+       = *(matrix_pt(block_row_i,0)->distribution_pt());
+
+     // Loop through the rest of the block columns.
+     for (unsigned block_col_i = 1; block_col_i < nblockcol; block_col_i++) 
+     {
+       // Get the distribution from the current block.
+       const LinearAlgebraDistribution current_dist 
+         = matrix_pt(block_row_i,block_col_i)->distribution_pt();
+
+       // Compare the first distribution against the current.
+       if(first_dist != current_dist)
+        {
+         std::ostringstream error_message;
+         error_message << "First distribution of block row " << block_row_i
+                       << " is different from the distribution from "
+                       << "martrix_pt(" << block_row_i 
+                       << "," << block_col_i <<").\n";
+         throw OomphLibError(error_message.str(),
+                             OOMPH_CURRENT_FUNCTION,
+                             OOMPH_EXCEPTION_LOCATION);
+        }
+     }
+   }
+#endif
+
+ 
+   // Loop thrpugh the block rows, then block columns to 
+   // compute the local inf norm
+   double extreme_disc = 0;
+   for (unsigned block_row_i = 0; block_row_i < nblockrow; block_row_i++) 
+    {
+     // Get the number of local rows from the first block.
+     unsigned block_nrow_local = matrix_pt(block_row_i,0)->nrow_local();
+
+     // Loop through the block_nrow_local in this block row
+     for (unsigned local_row_i = 0; local_row_i < block_nrow_local; 
+          local_row_i++) 
+      {
+       double abs_sum_of_row = 0;
+       // Loop through the block columns
+       for (unsigned block_col_i = 0; block_col_i < nblockcol; block_col_i++) 
+        {
+         // Locally cache the pointer to the current block.
+         CRDoubleMatrix* block_pt = matrix_pt(block_row_i,block_col_i);
+ 
+         const int* row_start = block_pt->row_start();  
+         const double* value = block_pt->value();
+
+         // Loop through the values
+         for (int val_i = row_start[local_row_i]; 
+              val_i < row_start[local_row_i+1]; val_i++)
+          {
+           abs_sum_of_row += fabs(value[val_i]);
+          }
+        }
+
+       // Now minus the diagonal entry...
+       // Locate the diagonal block matrix.
+       double* s_values = matrix_pt(block_row_i,block_row_i)->value();
+       int* s_column_index = matrix_pt(block_row_i,block_row_i)->column_index();
+       int* s_row_start = matrix_pt(block_row_i,block_row_i)->row_start();
+       int s_nrow_local = matrix_pt(block_row_i,block_row_i)->nrow_local();
+       int s_first_row = matrix_pt(block_row_i,block_row_i)->first_row();
+
+       // Get the diagonal value...
+       double diagonal_value = 0;
+       bool found = false;
+       for (int j = s_row_start[local_row_i];
+            j < s_row_start[local_row_i+1] && !found; j++)
+        {
+         if (s_column_index[j] == local_row_i + s_first_row)
+          {
+           diagonal_value = s_values[j];
+           found = true;
+          }
+        }
+      
+       // Check if the diagonal entry is found.
+       if(!found)
+        {
+         std::ostringstream error_message;
+         error_message << "The diagonal entry for the block("
+                       << block_row_i<<","<<block_row_i<<")\n"
+                       << "on local row " << local_row_i << " does not exist."
+                       << std::endl;
+        throw OomphLibError(error_message.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+       } 
+       
+       // This is the disc.
+       abs_sum_of_row -= fabs(diagonal_value);
+
+       // Now we have to check if the diagonal entry is
+       // on the left or right side of zero.
+       if(diagonal_value > 0)
+        {
+         double extreme_disc_local = diagonal_value + abs_sum_of_row;
+         extreme_disc = std::max(extreme_disc_local,extreme_disc);
+        }
+       else
+        {
+         double extreme_disc_local = diagonal_value - abs_sum_of_row;
+         extreme_disc = std::min(extreme_disc_local,extreme_disc);
+        }
+      } // Loop through local row (of all block column)
+    } // Loop through block row
+
+   // if this vector is distributed and on multiple processors then gather
+#ifdef OOMPH_HAS_MPI
+   double extreme_disc_local = extreme_disc;
+   if ( matrix_pt(0,0)->distributed() && comm_pt->nproc() > 1)
+    {
+     if(extreme_disc > 0)
+      {
+       MPI_Allreduce(&extreme_disc,&extreme_disc_local,1,MPI_DOUBLE,MPI_MAX,
+                     comm_pt->mpi_comm());
+      }
+     else
+      {
+       MPI_Allreduce(&extreme_disc,&extreme_disc_local,1,MPI_DOUBLE,MPI_MIN,
+                     comm_pt->mpi_comm());
+      }
+    }
+   extreme_disc = extreme_disc_local;
+#endif
+   
+   // and return
+   return extreme_disc;
+  }
 
  //============================================================================
  /// \short Concatenate CRDoubleMatrix matrices. 

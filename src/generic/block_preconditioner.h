@@ -442,17 +442,70 @@ namespace oomph
       }
     }
   }
-  /// RAYRAY
+
+  /// \short Return the number of fine DOF types in a coarse DOF type.
   unsigned ndof_types_in_coarse_dof_type(const unsigned& coarse_doftype) const
    {
     if(Preconditioner_blocks_have_been_precomputed)
      {
+#ifdef PARANOID
+      if(coarse_doftype >= Doftype_to_doftype_map.size())
+       {
+        std::ostringstream err_msg;
+        err_msg << "You have requested the size of subvector "
+                << coarse_doftype << ".\n"
+                << "But the Doftype_to_doftype_map has size "
+                << Doftype_to_doftype_map.size() << "."
+                << std::endl;
+        throw OomphLibError(err_msg.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+       }
+#endif
+
       return Doftype_to_doftype_map[coarse_doftype].size();
      }
     else
+    // The number of coarse doftypes types is the same as the number of
+    // fine doftypes.
      {
       return 1;
      }
+   }
+
+  /// \short Access function for the sub vector containing the most
+  /// fine grain DOF types.
+  Vector<unsigned> coarse_dof_type_subvec(const unsigned& coarse_doftype) const
+   {
+#ifdef PARANOID
+    // Check that preconditioner blocks have been precomputed.
+    if(!Preconditioner_blocks_have_been_precomputed)
+     {
+      std::ostringstream err_msg;
+      err_msg << "Preconditioner blocks have not been precomputed.\n"
+              << "Therefore the Doftype_to_doftype_map is not set."
+              << std::endl;
+      throw OomphLibError(err_msg.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+    
+    // A range check.
+    if(coarse_doftype >= Doftype_to_doftype_map.size())
+     {
+      std::ostringstream err_msg;
+      err_msg << "You have requested subvector "
+              << coarse_doftype << ".\n"
+              << "But the Doftype_to_doftype_map has size "
+              << Doftype_to_doftype_map.size() << "."
+              << std::endl;
+      throw OomphLibError(err_msg.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+#endif
+
+    return Doftype_to_doftype_map[coarse_doftype];
    }
 
   /// \short Return the total number of DOF types.
@@ -879,8 +932,8 @@ namespace oomph
   /// 0  1  2  3  4  5  6 7
   /// ub vb wb uc vc wc p Lc
   /// 
-  /// The LSC preconditioner requires u, v, p, then the doftype_to_doftype_map 
-  /// will be:
+  /// The LSC preconditioner requires u, v, w, p, then the 
+  /// doftype_to_doftype_map will be:
   /// [0 3]
   /// [1 4]
   /// [2 5]
@@ -898,6 +951,41 @@ namespace oomph
       Vector<Vector<unsigned> > & doftype_to_doftype_map)
   {
 #ifdef PARANOID
+   
+   // Check that this is a subsidiary preconditioner.
+   // At the moment we have no test cases for which the function 
+   // set_precomputed_blocks(..) is called for a master preconditioner.
+   // If the master preconditioner pointer has been set, then we can easily
+   // check if the master preconditioner has precomputed blocks.
+   // This check may be removed in the future if required...
+   if(!is_subsidiary_block_preconditioner())
+    {
+     std::ostringstream error_message;
+     error_message << "This is not a subsidiary preconditioner. \nPlease call"
+                   << "turn_into_subsidiary_block_preconditioner(...)\n" 
+                   << "before calling this function."
+                   << std::endl;
+     throw OomphLibError(error_message.str(),
+                         OOMPH_CURRENT_FUNCTION,
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+
+   if(is_subsidiary_block_preconditioner()&&
+      master_block_preconditioner_pt()
+        ->preconditioner_blocks_have_been_precomputed())
+    {
+     std::ostringstream error_message;
+     error_message << "Preconditioner blocks has already been precomputed in\n"
+                   << "the block preconditioning hierarchy which this\n" 
+                   << "block preconditioner lies in. There can not be two\n"
+                   << "modifications to the preconditioner blocks in the same\n"
+                   << "hierarchy."
+                   << std::endl;
+     throw OomphLibError(error_message.str(),
+                         OOMPH_CURRENT_FUNCTION,
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+
    // How many block rows are there?
    unsigned precomputed_block_nrow = precomputed_block_pt.nrow();
 
@@ -1091,16 +1179,20 @@ namespace oomph
    // Flag indicating that the preconditioner blocks has been precomputed.
    Preconditioner_blocks_have_been_precomputed = true;
   }
-/// RAYRAY
+
+ /// \short Access function to flag checking if the preconditioner 
+ /// blocks have been precomputed.
  bool preconditioner_blocks_have_been_precomputed() const
   {
    return Preconditioner_blocks_have_been_precomputed;
   }
-/// RAYRAY
-  DenseMatrix<CRDoubleMatrix*> precomputed_block_pt() const
+
+ /// \short Access function to the precomputed preconditioner blocks.
+ DenseMatrix<CRDoubleMatrix*> precomputed_block_pt() const
   {
    return Precomputed_block_pt;
   } 
+
  // Calls set_precomputed_block(...) with the "identity" doftype_to_doftype_map.
  // See the other set_precomputed_block(...) function for more details.
  void set_precomputed_blocks(DenseMatrix<CRDoubleMatrix*>&precomputed_block_pt)

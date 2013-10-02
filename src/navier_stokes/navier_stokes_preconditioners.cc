@@ -236,6 +236,20 @@ namespace oomph
   dof_to_block_map[ndof_types-1]=1;
 
   this->block_setup(dof_to_block_map);
+// RAYRAY
+//  std::cout << "From LSC prec" << std::endl; 
+//  unsigned tmp_nblocks = this->nblock_types(true);
+//  std::cout << "There are " << tmp_nblocks << " blocks" << std::endl; 
+//  
+//  for (unsigned block_j = 0; block_j < tmp_nblocks; block_j++) 
+//  {
+//    CRDoubleMatrix* tmp_block_pt = new CRDoubleMatrix;
+//    this->get_block_from_original_matrix(0,block_j,*tmp_block_pt);
+//    unsigned tmp_block_ncol = tmp_block_pt->ncol();
+//    std::cout << tmp_block_ncol << " "; 
+//  }
+//  std::cout << "\n" << std::endl; 
+//  //pause("done!"); 
 
   double t_block_finish = TimingHelpers::timer();
   double block_setup_time = t_block_finish - t_block_start;
@@ -576,19 +590,15 @@ namespace oomph
   double t_f_prec_start = TimingHelpers::timer();
   if (F_preconditioner_is_block_preconditioner)
    {
-    unsigned nmomentum_dof_types = 0;
-    unsigned spatial_dim = Navier_stokes_mesh_pt->finite_element_pt(0)->dim();
+    unsigned nvelocity_dof_types
+      = Navier_stokes_mesh_pt->finite_element_pt(0)->dim();
     
-    for (unsigned dim_i = 0; dim_i < spatial_dim; dim_i++) 
-     {
-      nmomentum_dof_types += this->ndof_types_in_coarse_dof_type(dim_i);
-     }
-
-    Vector<unsigned> dof_map(nmomentum_dof_types);
-    for (unsigned i = 0; i < nmomentum_dof_types; i++)
+    Vector<unsigned> dof_map(nvelocity_dof_types);
+    for (unsigned i = 0; i < nvelocity_dof_types; i++)
      {
       dof_map[i] = i;
      }
+
     F_block_preconditioner_pt->
      turn_into_subsidiary_block_preconditioner(this,dof_map);
 

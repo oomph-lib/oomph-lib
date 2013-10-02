@@ -122,7 +122,7 @@ namespace oomph
                             OOMPH_EXCEPTION_LOCATION);
      }
     
-    // Set the Block_to_block_map from 
+    // Create the Block_to_block_map from 
     // the dof_to_block_map and Doftype_to_doftype_map.
 
     // find the maximum block number
@@ -1810,23 +1810,64 @@ namespace oomph
   // Set the master block preconditioner pointer
   Master_block_preconditioner_pt = master_block_prec_pt;
 
-  // Set the mapping from the master preconditioner blocks to the
-  // subsidiary preconditioner blocks.
-  Dof_number_in_master_preconditioner = block_map;
+  // If the master block preconditioner has precomputed blocks
+  // this preconditioner use these precomputed blocks.
+  if(master_block_prec_pt->preconditioner_blocks_have_been_precomputed())
+   {
+    // We have precomputed preconditioner blocks.
+    Preconditioner_blocks_have_been_precomputed = true;
 
-  // Get the number of block types (and dof types) in this preconditioner
-  // from the length of the block_map vector.
-  Ndof_types = block_map.size();
-  Nblock_types = Ndof_types;
+    // Store the precomputed blocks.
+    Precomputed_block_pt
+      = master_block_prec_pt->precomputed_block_pt();
+    
+    // Only store the master's Doftype_to_doftype_map which is relevant
+    // to this preconditioner.
+    unsigned tmp_ndof_types_size = block_map.size();
+    Vector<unsigned> tmp_dof_type_vec;
+    Doftype_to_doftype_map.resize(block_map.size());
+    for (unsigned doftype_i = 0; doftype_i < tmp_ndof_types_size; doftype_i++) 
+     {
+      Vector<unsigned> tmp_dof_type_subvec 
+        = master_block_prec_pt->coarse_dof_type_subvec(doftype_i);
+      Doftype_to_doftype_map[doftype_i] = tmp_dof_type_subvec;
 
-//  if(master_block_prec_pt->preconditioner_blocks_have_been_precomputed())
-//   {
-//    Preconditioner_blocks_have_been_precomputed = true;
-//    Precomputed_block_distribution_pt 
-//      = master_block_prec_pt->precomputed_block_pt();
-//    Doftype_to_doftype_map.resize(b); // RAYRAY
-//   }
- }
+      unsigned tmp_dof_type_subvec_size = tmp_dof_type_subvec.size();
+
+      for (unsigned fine_dof_type_i = 0; 
+           fine_dof_type_i < tmp_dof_type_subvec_size; fine_dof_type_i++) 
+       {
+        tmp_dof_type_vec.push_back(tmp_dof_type_subvec[fine_dof_type_i]);
+       }
+     }
+
+    // Fill the block_map with the most fine grain dof types.
+    block_map = tmp_dof_type_vec;
+    std::sort(block_map.begin(),block_map.end());
+      
+    // Set the mapping from the master preconditioner blocks to the
+    // subsidiary preconditioner blocks.
+    Dof_number_in_master_preconditioner = block_map;
+    
+    // Get the number of block types (and dof types) in this preconditioner
+    // from the length of the block_map vector.
+    Ndof_types = block_map.size();
+    Nblock_types = Ndof_types;
+   }
+  // If the master block preconditioner does not have precomputed
+  // preconditioner blocks.
+  else
+   {
+    // Set the mapping from the master preconditioner blocks to the
+    // subsidiary preconditioner blocks.
+    Dof_number_in_master_preconditioner = block_map;
+    
+    // Get the number of block types (and dof types) in this preconditioner
+    // from the length of the block_map vector.
+    Ndof_types = block_map.size();
+    Nblock_types = Ndof_types;
+   }
+ } // end of turn_into_subsidiary_block_preconditioner(...)
 
 
  //============================================================================
@@ -1844,7 +1885,7 @@ namespace oomph
  void BlockPreconditioner<MATRIX>::block_setup()
  {
   // Get the number of dof types.
-  unsigned n_dof_types = ndof_types(true);
+  unsigned n_dof_types = ndof_types();
 
   // Build the dof to block map - assume that each type of dof corresponds
   // to a different type of block.
