@@ -1818,6 +1818,14 @@ namespace oomph
   // from the length of the block_map vector.
   Ndof_types = block_map.size();
   Nblock_types = Ndof_types;
+
+//  if(master_block_prec_pt->preconditioner_blocks_have_been_precomputed())
+//   {
+//    Preconditioner_blocks_have_been_precomputed = true;
+//    Precomputed_block_distribution_pt 
+//      = master_block_prec_pt->precomputed_block_pt();
+//    Doftype_to_doftype_map.resize(b); // RAYRAY
+//   }
  }
 
 

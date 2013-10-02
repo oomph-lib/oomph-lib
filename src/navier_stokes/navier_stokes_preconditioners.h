@@ -1205,7 +1205,7 @@ namespace oomph
     CRDoubleMatrix*& inv_v_mass_pt, 
     const bool& do_both);
    
-  // testets 
+   // testets 
    void assemble_inv_press_and_veloc_mass_matrix_diagonal(
     CRDoubleMatrix*& inv_p_mass_pt, 
     CRDoubleMatrix*& inv_v_mass_pt, 

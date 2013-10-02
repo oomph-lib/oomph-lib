@@ -442,45 +442,76 @@ namespace oomph
       }
     }
   }
+  /// RAYRAY
+  unsigned ndof_types_in_coarse_dof_type(const unsigned& coarse_doftype) const
+   {
+    if(Preconditioner_blocks_have_been_precomputed)
+     {
+      return Doftype_to_doftype_map[coarse_doftype].size();
+     }
+    else
+     {
+      return 1;
+     }
+   }
 
   /// \short Return the total number of DOF types.
   unsigned ndof_types(const bool &real_ndof_types = false) const
   {
-   if(real_ndof_types)
-    {
-     if (is_subsidiary_block_preconditioner())
-      {
-       return Ndof_types;
-      }
-     else
-      {
-       unsigned ndof = 0;
-       for (unsigned i = 0; i < nmesh(); i++)
-        {ndof += ndof_types_in_mesh(i);}
-       return ndof;
-      }
-    }
-   else
-    {
-     if(Preconditioner_blocks_have_been_precomputed)
-      {
-       return ndof_types_precomputed();
-      }
-     else
-      {
-       if (is_subsidiary_block_preconditioner())
-        {
-         return Ndof_types;
-        }
-       else
-        {
-         unsigned ndof = 0;
-         for (unsigned i = 0; i < nmesh(); i++)
-          {ndof += ndof_types_in_mesh(i);}
-         return ndof;
-        }
-      }
-    }
+    if (is_subsidiary_block_preconditioner())
+     {
+      if(real_ndof_types || !Preconditioner_blocks_have_been_precomputed)
+       {
+        return Ndof_types;
+       }
+      else
+       {
+        return ndof_types_precomputed();
+       }
+     }
+    else
+     {
+      unsigned ndof = 0;
+      for (unsigned i = 0; i < nmesh(); i++)
+       {ndof += ndof_types_in_mesh(i);}
+      return ndof;
+     }
+ 
+//   if(real_ndof_types)
+//    {
+//     if (is_subsidiary_block_preconditioner())
+//      {
+//       return Ndof_types;
+//      }
+//     else
+//      {
+//       unsigned ndof = 0;
+//       for (unsigned i = 0; i < nmesh(); i++)
+//        {ndof += ndof_types_in_mesh(i);}
+//       return ndof;
+//      }
+//    }
+//   else
+//    {
+//     if(Preconditioner_blocks_have_been_precomputed)
+//      {
+//       return ndof_types_precomputed();
+//      }
+//     else
+//      {
+//       if (is_subsidiary_block_preconditioner())
+//        {
+//         return Ndof_types;
+//        }
+//       else
+//        {
+//         unsigned ndof = 0;
+//         for (unsigned i = 0; i < nmesh(); i++)
+//          {ndof += ndof_types_in_mesh(i);}
+//         return ndof;
+//        }
+//      }
+//    }
   }
 
   /// \short Access to i-th mesh (of the various meshes that contain block
@@ -1060,7 +1091,16 @@ namespace oomph
    // Flag indicating that the preconditioner blocks has been precomputed.
    Preconditioner_blocks_have_been_precomputed = true;
   }
-  
+/// RAYRAY
+ bool preconditioner_blocks_have_been_precomputed() const
+  {
+   return Preconditioner_blocks_have_been_precomputed;
+  }
+/// RAYRAY
+  DenseMatrix<CRDoubleMatrix*> precomputed_block_pt() const
+  {
+   return Precomputed_block_pt;
+  } 
  // Calls set_precomputed_block(...) with the "identity" doftype_to_doftype_map.
  // See the other set_precomputed_block(...) function for more details.
  void set_precomputed_blocks(DenseMatrix<CRDoubleMatrix*>&precomputed_block_pt)

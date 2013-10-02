@@ -51,7 +51,7 @@ using namespace oomph;
 namespace oomph
 {
 
-//===================================================================
+//==start_of_mylinearelasticityelement===============================
 /// Wrapper to make quadratic linear elasticity element block
 /// preconditionable 
 //===================================================================
@@ -74,6 +74,12 @@ public:
 /// of the "block" that this unknown is associated with.
 /// (Function can obviously only be called if the equation numbering
 /// scheme has been set up.)
+/// 
+/// The dof type enumeration (in 3D) is as follows:
+/// S_x = 0
+/// S_y = 1
+/// S_z = 2
+/// 
  void get_dof_numbers_for_unknowns(
   std::list<std::pair<unsigned long,unsigned> >& block_lookup_list)
   {
@@ -239,7 +245,7 @@ private:
  Mesh* Surface_mesh_pt;
 
  /// Solver
- GMRES<CRDoubleMatrix>* Solver_pt;
+ IterativeLinearSolver* Solver_pt; 
 
  /// Preconditioner
  SimpleBlockDiagonalPreconditioner<CRDoubleMatrix>* Prec_pt;
@@ -336,15 +342,26 @@ PeriodicLoadProblem<ELEMENT>::PeriodicLoadProblem
  // Now build the global mesh
  build_global_mesh();
 
- // Create oomph-lib iterative linear solver
- Solver_pt=new GMRES<CRDoubleMatrix>;
- 
+ // Assign equation numbers
+ cout << assign_eqn_numbers() << " equations assigned" << std::endl; 
+
+ // Create the solver.
+#ifdef OOMPH_HAS_TRILINOS
+ TrilinosAztecOOSolver* trilinos_solver_pt = new TrilinosAztecOOSolver;
+ trilinos_solver_pt->solver_type() = TrilinosAztecOOSolver::GMRES;
+ Solver_pt = trilinos_solver_pt;
+#else
+ Solver_pt = new GMRES<CRDoubleMatrix>;
+ // We use RHS preconditioning. Note that by default,
+ // left hand preconditioning is used.
+ static_cast<GMRES<CRDoubleMatrix>*>(Solver_pt)->set_preconditioner_RHS();
+#endif
+
  // Set linear solver
  linear_solver_pt() = Solver_pt;
 
- // Set preconditioner
+ // Create the preconditioner
  Prec_pt=new SimpleBlockDiagonalPreconditioner<CRDoubleMatrix>;
- Solver_pt->preconditioner_pt()=Prec_pt;
 
  // Block preconditioner can work with just the bulk mesh
  // since its elements contain all the degrees of freedom that
@@ -352,8 +369,9 @@ PeriodicLoadProblem<ELEMENT>::PeriodicLoadProblem
  Prec_pt->set_nmesh(1);
  Prec_pt->set_mesh(0,Bulk_mesh_pt);
 
- // Assign equation numbers
- cout << assign_eqn_numbers() << " equations assigned" << std::endl; 
+ // Set the preconditioner
+ Solver_pt->preconditioner_pt()=Prec_pt;
+
 
 } // end of constructor
 
@@ -434,6 +452,11 @@ void PeriodicLoadProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 //======================================================================
 int main(int argc, char* argv[]) 
 {
+#ifdef OOMPH_HAS_MPI
+ // Initialise MPI
+ MPI_Helpers::init(argc,argv);
+#endif
+
  // Number of elements in x-direction
  unsigned nx=5;
  
@@ -446,7 +469,7 @@ int main(int argc, char* argv[])
  // Set output directory
  doc_info.set_directory("RESLT");
  
- // Set up problem
+ //Build the problem
  PeriodicLoadProblem<MyLinearElasticityElement<2> > 
   problem(nx,ny,Global_Parameters::Lx, Global_Parameters::Ly);
  
@@ -455,5 +478,11 @@ int main(int argc, char* argv[])
  
  // Output the solution
  problem.doc_solution(doc_info);
-  
+
+#ifdef OOMPH_HAS_MPI
+ // finalize MPI
+ MPI_Helpers::finalize();
+#endif
+
+ return(EXIT_SUCCESS);  
 } // end_of_main

@@ -1133,10 +1133,10 @@ namespace oomph
 
   if(Doc_prec)
    {
-    unsigned my_rank 
-     = master_distribution_pt()->communicator_pt()->my_rank();
-    unsigned nproc 
-     = master_distribution_pt()->communicator_pt()->nproc();
+//    unsigned my_rank 
+//     = master_distribution_pt()->communicator_pt()->my_rank();
+//    unsigned nproc 
+//     = master_distribution_pt()->communicator_pt()->nproc();
     // This is for bebugging purposes.
 //    std::stringstream curr_setting_stream;
 //    curr_setting_stream << "NP" << nproc << "R" << my_rank;

@@ -576,10 +576,16 @@ namespace oomph
   double t_f_prec_start = TimingHelpers::timer();
   if (F_preconditioner_is_block_preconditioner)
    {
-    unsigned ndof_types = this->ndof_types(true);
-    ndof_types--;
-    Vector<unsigned> dof_map(ndof_types);
-    for (unsigned i = 0; i < ndof_types; i++)
+    unsigned nmomentum_dof_types = 0;
+    unsigned spatial_dim = Navier_stokes_mesh_pt->finite_element_pt(0)->dim();
+    
+    for (unsigned dim_i = 0; dim_i < spatial_dim; dim_i++) 
+     {
+      nmomentum_dof_types += this->ndof_types_in_coarse_dof_type(dim_i);
+     }
+
+    Vector<unsigned> dof_map(nmomentum_dof_types);
+    for (unsigned i = 0; i < nmomentum_dof_types; i++)
      {
       dof_map[i] = i;
      }
@@ -1659,13 +1665,17 @@ namespace oomph
   unsigned p_nrow_local=0;
   unsigned p_nrow=0;
   double* p_values = 0;
+
+  unsigned n_velocity_blocktypes = this->nblock_types(true);
   if (!Use_LSC)
    {
-    // RAYRAY change this, uses the pressure block, NOT 1.
     // determine the pressure rows required by this processor
-    p_first_row = this->block_distribution_pt(1)->first_row();
-    p_nrow_local = this->block_distribution_pt(1)->nrow_local();
-    p_nrow = this->block_distribution_pt(1)->nrow();
+    // pressure block is located at ndof_types(true)
+    p_first_row = this->block_distribution_pt(n_velocity_blocktypes)
+                        ->first_row();
+    p_nrow_local = this->block_distribution_pt(n_velocity_blocktypes)
+                         ->nrow_local();
+    p_nrow = this->block_distribution_pt(n_velocity_blocktypes)->nrow();
   
     // create storage for the diagonals
     p_values = new double[p_nrow_local];
@@ -1719,6 +1729,7 @@ namespace oomph
     // Do the two blocks (0: veloc; 1: press)
     unsigned max_block=0; // RAYRAY Maybe change this?
     if (!Use_LSC) max_block=1; // so block_index = 0,1
+
     for (unsigned block_index=0;block_index<=max_block;block_index++)
      {
       
@@ -1781,7 +1792,7 @@ namespace oomph
           // which_one = 0: Both pressure and velocity mm are computed.
           // which_one = 1: Only pressure mm is computed.
           // which_one = 2: Only velocity mm is computed.
-          // RAYRAY Change this so that which_one = 2 for block_index = 0,1,2... n_velocity_dof_types?
+          // RAYRAY Change this so that which_one = 2 for block_index = 0,1,2... n_velocity_doftypes?
           // Actually, maybe not.... since block_index = 0 only signifies that it's a velocity block I guess.
           unsigned which_one=2;
           if (block_index==1) which_one=1;

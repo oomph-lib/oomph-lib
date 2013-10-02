@@ -46,7 +46,7 @@ namespace oomph
 {
   
 
-//=============================================================================
+//===start_of_simple_block_diagonal_preconditioner_class=======================
 /// \short Simple proof-of-concept block diagonal preconditioner for
 /// demo purposes. There's a much better version in src/generic!
 //=============================================================================
@@ -56,9 +56,11 @@ namespace oomph
   
    public :
   
-  /// Constructor
+  /// Constructor for SimpleBlockDiagonalPreconditioner
    SimpleBlockDiagonalPreconditioner() : BlockPreconditioner<MATRIX>()
-   {}
+   {
+   } // end_of_constructor
+
  
   /// Destructor - delete the diagonal solvers
   ~SimpleBlockDiagonalPreconditioner()
@@ -99,31 +101,18 @@ namespace oomph
  };
 
 
- //============================================================================
- /// setup for the block diagonal preconditioner
+ //==start_of_setup_for_SimpleBlockDiagonalPreconditioner======================
+ /// The setup function.
  //============================================================================
  template<typename MATRIX> 
  void SimpleBlockDiagonalPreconditioner<MATRIX>::setup()
  {
 
-  // Set up the block look up schemes // hierher needs to be modified in
-  // presence of Dof_to_block_map
+  // Set up the block look up scheme
   this->block_setup();
 
   // Number of blocks
   unsigned nblock_types = this->nblock_types();
-
-  /* // hierher  */
-  /* // number of types of blocks. */
-  /* unsigned nblock_types = 0; */
-  /* if(this->Preconditioner_blocks_have_been_precomputed) */
-  /*  { */
-  /*   nblock_types = this->nblocks_precomputed(); */
-  /*  } */
-  /* else */
-  /*  { */
-  /*   nblock_types = this->nblock_types(); */
-  /*  } */
 
   // Resize the storage for the diagonal blocks
   Diagonal_block_preconditioner_pt.resize(nblock_types);
