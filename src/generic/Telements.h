@@ -294,7 +294,7 @@ template<>
   
 //=======================================================================
 /// Second derivatives of shape functions for specific TElement<1,2>:
-/// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ \n
+/// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ 
 //=======================================================================
   void d2shape_local(const Vector<double> &s, 
                      Shape &psi, 
@@ -375,7 +375,7 @@ template<>
 
 //=======================================================================
 /// Second derivatives of shape functions for specific TElement<1,3>:
-/// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ \n
+/// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ 
 //=======================================================================
   void d2shape_local(const Vector<double> &s, 
                      Shape &psi, 
@@ -461,7 +461,7 @@ void shape(const Vector<double> &s, Shape &psi) const
 
 //=======================================================================
 /// Second derivatives of shape functions for specific TElement<2,4>:
-/// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ \n
+/// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ 
 //=======================================================================
 void d2shape_local(const Vector<double> &s,
                    Shape &psi,
@@ -555,9 +555,9 @@ template<>
   
 //=======================================================================
 /// Second derivatives of shape functions for specific TElement<2,2>:
- /// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ \n
- /// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$ \n
- /// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$ \n
+ /// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ 
+ /// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$ 
+ /// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$ 
 //=======================================================================
   void d2shape_local(const Vector<double> &s, 
                      Shape &psi, 
@@ -675,9 +675,9 @@ template<>
 
 //=======================================================================
 /// Second derivatives of shape functions for specific TElement<2,3>:
-/// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ \n
-/// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$ \n
-/// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$ \n
+/// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ 
+/// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$ 
+/// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$ 
 //=======================================================================
   void d2shape_local(const Vector<double> &s, 
                      Shape &psi, 
@@ -844,9 +844,9 @@ void shape(const Vector<double> &s, Shape &psi) const
 
 //=======================================================================
 /// Second derivatives of shape functions for specific TElement<2,4>:
-/// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ \n
-/// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$ \n
-/// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$ \n
+/// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ 
+/// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$ 
+/// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$ 
 //=======================================================================
 void d2shape_local(const Vector<double> &s,
                    Shape &psi,
@@ -1045,9 +1045,9 @@ template<>
 //=======================================================================
 /// Second derivatives of shape functions for specific 
 /// TBubbleElement<2,3>:
-/// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ \n
-/// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$ \n
-/// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$ \n
+/// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ 
+/// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$ 
+/// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$ 
 //=======================================================================
   void d2shape_local(const Vector<double> &s, 
                      Shape &psi, 
@@ -1366,10 +1366,10 @@ public:
   {TElementShape<1,NNODE_1D>::dshape_local(s,psi,dpsids);}
 
  /// \short Compute the geometric shape functions, derivatives and
- /// second derivatives w.r.t local coordinates at local coordinate s \n
- /// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ \n
- /// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$ \n
- /// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$ \n
+ /// second derivatives w.r.t local coordinates at local coordinate s 
+ /// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ 
+ /// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$ 
+ /// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$ 
  inline void d2shape_local(const Vector<double> &s, Shape &psi, 
                            DShape &dpsids, DShape &d2psids) const
   {TElementShape<1,NNODE_1D>::d2shape_local(s,psi,dpsids,d2psids);}
@@ -1617,10 +1617,10 @@ public:
   {TElementShape<2,NNODE_1D>::dshape_local(s,psi,dpsids);}
 
  /// \short Compute the geometric shape functions, derivatives and
- /// second derivatives w.r.t local coordinates at local coordinate s \n
- /// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ \n
- /// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$ \n
- /// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$ \n
+ /// second derivatives w.r.t local coordinates at local coordinate s 
+ /// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ 
+ /// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$ 
+ /// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$ 
  inline void d2shape_local(const Vector<double> &s, Shape &psi, 
                            DShape &dpsids, DShape &d2psids) const
   {TElementShape<2,NNODE_1D>::d2shape_local(s,psi,dpsids,d2psids);}
@@ -1954,13 +1954,13 @@ class TElementShape<3,2>
 
 
 //=======================================================================
-/// Second derivatives of shape functions for specific TElement<3,2>: \n
-/// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ \n
-/// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$ \n
-/// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_2^2 \f$ \n
-/// d2psids(i,3) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$ \n
-/// d2psids(i,4) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_2 \f$ \n
-/// d2psids(i,5) = \f$ \partial^2 \psi_j / \partial s_1 \partial s_2 \f$ \n
+/// Second derivatives of shape functions for specific TElement<3,2>: 
+/// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ 
+/// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$ 
+/// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_2^2 \f$ 
+/// d2psids(i,3) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$ 
+/// d2psids(i,4) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_2 \f$ 
+/// d2psids(i,5) = \f$ \partial^2 \psi_j / \partial s_1 \partial s_2 \f$ 
 //=======================================================================
  void d2shape_local(const Vector<double> &s,
                     Shape &psi,
@@ -2146,13 +2146,13 @@ void dshape_local(const Vector<double> &s,
 
 
 //=======================================================================
-/// Second derivatives of shape functions for specific TElement<3,3>:\n
-/// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ \n
-/// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$ \n
-/// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_2^2 \f$ \n
-/// d2psids(i,3) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$ \n
-/// d2psids(i,4) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_2 \f$ \n
-/// d2psids(i,5) = \f$ \partial^2 \psi_j / \partial s_1 \partial s_2 \f$ \n
+/// Second derivatives of shape functions for specific TElement<3,3>:
+/// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ 
+/// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$ 
+/// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_2^2 \f$ 
+/// d2psids(i,3) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$ 
+/// d2psids(i,4) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_2 \f$ 
+/// d2psids(i,5) = \f$ \partial^2 \psi_j / \partial s_1 \partial s_2 \f$ 
 //=======================================================================
 void d2shape_local(const Vector<double> &s,
                                          Shape &psi,
@@ -2604,13 +2604,13 @@ void dshape_local(const Vector<double> &s,
 
 
 //=======================================================================
-/// Second derivatives of shape functions for specific TElement<3,3>:\n
-/// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ \n
-/// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$ \n
-/// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_2^2 \f$ \n
-/// d2psids(i,3) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$ \n
-/// d2psids(i,4) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_2 \f$ \n
-/// d2psids(i,5) = \f$ \partial^2 \psi_j / \partial s_1 \partial s_2 \f$ \n
+/// Second derivatives of shape functions for specific TElement<3,3>:
+/// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ 
+/// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$ 
+/// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_2^2 \f$ 
+/// d2psids(i,3) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$ 
+/// d2psids(i,4) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_2 \f$ 
+/// d2psids(i,5) = \f$ \partial^2 \psi_j / \partial s_1 \partial s_2 \f$ 
 //=======================================================================
 void d2shape_local(const Vector<double> &s,
                                          Shape &psi,
@@ -3048,13 +3048,13 @@ public:
   {TElementShape<3,NNODE_1D>::dshape_local(s,psi,dpsids);}
  
   /// \short Compute the geometric shape functions, derivatives and
-  /// second derivatives w.r.t local coordinates at local coordinate s. \n
-  /// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ \n
-  /// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$ \n
-  /// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_2^2 \f$ \n
-  /// d2psids(i,3) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$ \n
-  /// d2psids(i,4) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_2 \f$ \n
-  /// d2psids(i,5) = \f$ \partial^2 \psi_j / \partial s_1 \partial s_2 \f$ \n
+  /// second derivatives w.r.t local coordinates at local coordinate s. 
+  /// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ 
+  /// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$ 
+  /// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_2^2 \f$ 
+  /// d2psids(i,3) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$ 
+  /// d2psids(i,4) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_2 \f$ 
+  /// d2psids(i,5) = \f$ \partial^2 \psi_j / \partial s_1 \partial s_2 \f$ 
   inline void d2shape_local(const Vector<double> &s, Shape &psi,
                             DShape &dpsids, DShape &d2psids) const
    {TElementShape<3,NNODE_1D>::d2shape_local(s,psi,dpsids,d2psids);}
@@ -3516,10 +3516,10 @@ public:
 
  
  /// \short Compute the geometric shape functions, derivatives and
- /// second derivatives w.r.t local coordinates at local coordinate s \n
- /// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ \n
- /// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$ \n
- /// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$ \n
+ /// second derivatives w.r.t local coordinates at local coordinate s 
+ /// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ 
+ /// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$ 
+ /// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$ 
  inline void d2shape_local(const Vector<double> &s, Shape &psi, 
                            DShape &dpsids, DShape &d2psids) const
   {TBubbleEnrichedElementShape<DIM,3>::d2shape_local(s,psi,dpsids,d2psids);}

@@ -41,10 +41,10 @@ namespace oomph
  /// Determine the size of the matrix blocks and setup the
  /// lookup schemes relating the global degrees of freedom with
  /// their "blocks" and their indices (row/column numbers) in those
- /// blocks.\n
+ /// blocks.
  /// The distributions of the preconditioner and the blocks are
  /// automatically specified (and assumed to be uniform) at this
- /// stage.\n
+ /// stage.
  /// This method should be used if any block contains more than one
  /// type of DOF. The argument vector dof_to_block_map should be of length
  /// ndof. Each element should contain an integer indicating the block number
@@ -1795,12 +1795,12 @@ namespace oomph
  /// "master block preconditioner (e.g. a Navier-Stokes 2x2 block
  /// preconditioner dealing with the fluid sub-blocks within a
  /// 3x3 FSI preconditioner. Once this is done the master block
- /// preconditioner deals with the block setup etc. \n
+ /// preconditioner deals with the block setup etc.
  /// The vector block_map must specify the dof number in the
  /// master preconditioner that corresponds to a block number in this
- /// preconditioner.\n ??ds horribly misleading comment!
+ /// preconditioner. ??ds horribly misleading comment!
  /// The length of the vector is used to determine the number of
- /// blocks in this preconditioner therefore it must be correctly sized. \n
+ /// blocks in this preconditioner therefore it must be correctly sized.
  //============================================================================
  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
  turn_into_subsidiary_block_preconditioner
@@ -1874,10 +1874,10 @@ namespace oomph
  /// Determine the size of the matrix blocks and setup the
  /// lookup schemes relating the global degrees of freedom with
  /// their "blocks" and their indices (row/column numbers) in those
- /// blocks.\n
+ /// blocks.
  /// The distributions of the preconditioner and the blocks are
  /// automatically specified (and assumed to be uniform) at this
- /// stage.\n
+ /// stage.
  /// This method should be used if each DOF type corresponds to a
  /// unique block type.
  //============================================================================

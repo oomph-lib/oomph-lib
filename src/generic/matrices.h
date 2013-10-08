@@ -156,10 +156,10 @@ class Matrix
    return static_cast<MATRIX_TYPE*>(this)->entry(i,j);
   }
  
- /// \short Output function to print a matrix row-by-row, in the form \n
- /// a(0,0) a(0,1) ... \n
- /// a(1,0) a(1,1) ... \n
- /// ... \n
+ /// \short Output function to print a matrix row-by-row, in the form 
+ /// a(0,0) a(0,1) ... 
+ /// a(1,0) a(1,1) ... 
+ /// ... 
  /// to the stream outfile.
  /// Broken virtual since it might not be sensible to implement this for 
  /// some sparse matrices.
@@ -886,9 +886,9 @@ class CRDoubleMatrix : public Matrix<double, CRDoubleMatrix >,
 			 int* row_start);
 
  /// The contents of the matrix are redistributed to match the new
- /// distribution. In a non-MPI build this method does nothing. \n
+ /// distribution. In a non-MPI build this method does nothing. 
  /// \b NOTE 1: The current distribution and the new distribution must have
- /// the same number of global rows.\n
+ /// the same number of global rows.
  /// \b NOTE 2: The current distribution and the new distribution must have
  /// the same Communicator.
  void redistribute(const LinearAlgebraDistribution* const& dist_pt);
@@ -981,22 +981,22 @@ class CRDoubleMatrix : public Matrix<double, CRDoubleMatrix >,
  void multiply_transpose(const DoubleVector& x,
                          DoubleVector& soln) const;
 
- /// \short Function to multiply this matrix by the CRDoubleMatrix matrix_in.\n
- /// In a serial matrix, there are 4 methods available: \n
+ /// \short Function to multiply this matrix by the CRDoubleMatrix matrix_in.
+ /// In a serial matrix, there are 4 methods available: 
  /// Method 1: First runs through this matrix and matrix_in to find the storage
  ///           requirements for result - arrays of the correct size are 
  ///           then allocated before performing the calculation.
- ///           Minimises memory requirements but more costly. \n
+ ///           Minimises memory requirements but more costly. 
  /// Method 2: Grows storage for values and column indices of result 'on the
  ///           fly' using an array of maps. Faster but more memory
- ///           intensive. \n
+ ///           intensive. 
  /// Method 3: Grows storage for values and column indices of result 'on the
  ///           fly' using a vector of vectors. Not particularly impressive
- ///           on the platforms we tried... \n
- /// Method 4: Trilinos Epetra Matrix Matrix multiply.\n
- /// Method 5: Trilinox Epetra Matrix Matrix Mulitply (ml based) \n
+ ///           on the platforms we tried... 
+ /// Method 4: Trilinos Epetra Matrix Matrix multiply.
+ /// Method 5: Trilinox Epetra Matrix Matrix Mulitply (ml based) 
  /// If Trilinos is installed then Method 4 is employed by default, otherwise
- /// Method 2 is employed by default. \n
+ /// Method 2 is employed by default. 
  /// In a distributed matrix, only Trilinos Epetra Matrix Matrix multiply
  /// is available.
  void multiply(const CRDoubleMatrix& matrix_in, CRDoubleMatrix& result) const;
@@ -1015,15 +1015,15 @@ class CRDoubleMatrix : public Matrix<double, CRDoubleMatrix >,
  /// Method 1: First runs through this matrix and matrix_in to find the storage
  ///           requirements for result - arrays of the correct size are 
  ///           then allocated before performing the calculation.
- ///           Minimises memory requirements but more costly. \n
+ ///           Minimises memory requirements but more costly. 
  /// Method 2: Grows storage for values and column indices of result 'on the
  ///           fly' using an array of maps. Faster but more memory
- ///           intensive. \n
+ ///           intensive. 
  /// Method 3: Grows storage for values and column indices of result 'on the
  ///           fly' using a vector of vectors. Not particularly impressive
- ///           on the platforms we tried... \n
- /// Method 4: Trilinos Epetra Matrix Matrix multiply.\n
- /// Method 5: Trilinos Epetra Matrix Matrix multiply (ML based).\n
+ ///           on the platforms we tried... 
+ /// Method 4: Trilinos Epetra Matrix Matrix multiply.
+ /// Method 5: Trilinos Epetra Matrix Matrix multiply (ML based).
  unsigned& serial_matrix_matrix_multiply_method() 
   { 
    return Serial_matrix_matrix_multiply_method; 
@@ -1032,8 +1032,8 @@ class CRDoubleMatrix : public Matrix<double, CRDoubleMatrix >,
  /// \short Access function to Distributed_matrix_matrix_multiply_method, the 
  /// flag which determines the matrix matrix multiplication method used for 
  /// distributed matrices.
- /// Method 1: Trilinos Epetra Matrix Matrix multiply.\n
- /// Method 2: Trilinos Epetra Matrix Matrix multiply (ML based).\n
+ /// Method 1: Trilinos Epetra Matrix Matrix multiply.
+ /// Method 2: Trilinos Epetra Matrix Matrix multiply (ML based).
  unsigned& distributed_matrix_matrix_multiply_method() 
   { 
    return Distributed_matrix_matrix_multiply_method; 
@@ -3107,7 +3107,7 @@ namespace CRDoubleMatrixHelpers
  /// processors is required. If the block structure of the sub matrices does
  /// not need to be preserved, consider using
  /// CRDoubleMatrixHelpers::concatenate_without_communication(...).
- /// \n
+ /// 
  /// The matrix manipulation functions
  /// CRDoubleMatrixHelpers::concatenate(...) and
  /// CRDoubleMatrixHelpers::concatenate_without_communication(...)
@@ -3117,45 +3117,45 @@ namespace CRDoubleMatrixHelpers
  /// Please look at the DoubleVector functions for an illustration of the 
  /// differences between concatenate(...) and 
  /// concatenate_without_communication(...).
- /// \n
+ /// 
  /// Distribution of the result matrix:
  /// If the result matrix does not have a distribution built, then it will be
  /// given a uniform row distribution. Otherwise we use the existing 
  /// distribution. This gives the user the ability to define their own 
  /// distribution, or save computing power if a distribution has 
- /// been pre-built.\n
- /// \n
+ /// been pre-built.
+ /// 
  /// NOTE: ALL the matrices pointed to by matrix_pt has to be built. This is
  /// not the case with concatenate_without_communication(...)
  void concatenate(const DenseMatrix<CRDoubleMatrix*> &matrix_pt,
                   CRDoubleMatrix &result_matrix);
   
- /// \short Concatenate CRDoubleMatrix matrices.\n
- /// \n
+ /// \short Concatenate CRDoubleMatrix matrices.
+ /// 
  /// The Vector row_distribution_pt contains the LinearAlgebraDistribution 
- /// of each block row.\n
+ /// of each block row.
  /// The Vector col_distribution_pt contains the LinearAlgebraDistribution 
- /// of each block column.\n
+ /// of each block column.
  /// The DenseMatrix matrix_pt contains pointers to the CRDoubleMatrices 
- /// to concatenate.\n
- /// The CRDoubleMatrix result_matrix is the result matrix.\n
- /// \n
+ /// to concatenate.
+ /// The CRDoubleMatrix result_matrix is the result matrix.
+ /// 
  /// The result matrix is a permutation of the sub matrices such that the data
  /// stays on the same processor when the result matrix is built, there is no
- /// communication between processors.\n
+ /// communication between processors.
  /// Thus the block structure of the sub matrices are NOT preserved in the
  /// result matrix. The rows are block-permuted, defined by the concatenation
  /// of the distributions in row_distribution_pt. Similarly, the columns are 
  /// block-permuted, defined by the concatenation of the distributions in 
  /// col_distribution_pt. 
  /// For more details on the block-permutation, see 
- /// LinearAlgebraDistributionHelpers::concatenate(...).\n
- /// \n
+ /// LinearAlgebraDistributionHelpers::concatenate(...).
+ /// 
  /// If one wishes to preserve the block structure of the sub matrices in the
  /// result matrix, consider using CRDoubleMatrixHelpers::concatenate(...),
  /// which uses communication between processors to ensure that the block
- /// structure of the sub matrices are preserved.\n
- /// \n
+ /// structure of the sub matrices are preserved.
+ /// 
  /// The matrix manipulation functions
  /// CRDoubleMatrixHelpers::concatenate(...) and
  /// CRDoubleMatrixHelpers::concatenate_without_communication(...)
@@ -3165,13 +3165,13 @@ namespace CRDoubleMatrixHelpers
  /// Please look at the DoubleVector functions for an illustration of the 
  /// differences between concatenate(...) and 
  /// concatenate_without_communication(...).
- /// \n
+ /// 
  /// Distribution of the result matrix:
  /// If the result matrix does not have a distribution built, then it will be
  /// given a distribution built from the concatenation of the distributions
  /// from row_distribution_pt, see 
  /// LinearAlgebraDistributionHelpers::concatenate(...) for more detail. 
- /// Otherwise we use the existing distribution.\n 
+ /// Otherwise we use the existing distribution. 
  /// If there is an existing distribution then it must be the same as the 
  /// distribution from the concatenation of row distributions as described 
  /// above. 

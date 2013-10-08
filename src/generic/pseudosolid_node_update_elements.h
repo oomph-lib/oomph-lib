@@ -469,7 +469,7 @@ template<class BASIC, class SOLID>
  /// \short Create a list of pairs for all unknowns in this element,
  /// so that the first entry in each pair contains the global equation
  /// number of the unknown, while the second one contains the number
- /// of the "block" that this unknown is associated with.\n
+ /// of the "block" that this unknown is associated with.
  /// This method combines the get_dof_numbers_for_unknowns(...)
  /// method for the BASIC and SOLID elements. The basic elements
  /// retain their DOF type numbering and the SOLID elements
@@ -1309,7 +1309,7 @@ class RefineablePseudoSolidNodeUpdateElement : public virtual BASIC,
  /// \short Create a list of pairs for all unknowns in this element,
  /// so that the first entry in each pair contains the global equation
  /// number of the unknown, while the second one contains the number
- /// of the "block" that this unknown is associated with.\n
+ /// of the "block" that this unknown is associated with.
  /// This method combines the get_dof_numbers_for_unknowns(...)
  /// method for the BASIC and SOLID elements. The basic elements
  /// retain their DOF type numbering and the SOLID elements

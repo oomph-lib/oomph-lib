@@ -48,7 +48,7 @@ namespace oomph
 /// \short 3D tube mesh class.
 /// The domain is specified by the GeomObject that identifies 
 /// the entire volume. Non-refineable base version!
-/// \n
+/// 
 /// The mesh boundaries are numbered as follows:
 /// - Boundary 0: "Inflow" cross section; located along the 
 ///               line parametrised by \f$ \xi_0 =  \xi_0^{lo} \f$.
@@ -117,7 +117,7 @@ protected:
 /// Adaptative version of the TubeMesh base mesh.
 /// The domain is specified by the GeomObject that identifies 
 /// the entire volume
-/// \n
+/// 
 /// The mesh boundaries are numbered as follows:
 /// - Boundary 0: "Inflow" cross section; located along the 
 ///               line parametrised by \f$ \xi_0 =  \xi_0^{lo} \f$.

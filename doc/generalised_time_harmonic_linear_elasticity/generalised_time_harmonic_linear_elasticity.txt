@@ -46,8 +46,8 @@ its motion is governed by the equations of time-harmonic
 linear elasticity
 <CENTER>
 \f[
-\pmb{\nabla}^*}\cdot\pmb{\tau}^*+
-\rho \mathbf{F}^*={\rm -\rho\omega^2}\mathbf{u}^*},
+{\pmb{\nabla}^*}\cdot\pmb{\tau}^*+
+\rho \pmb{F}^*={\rm -\rho\omega^2}\pmb{u}^*,
 \f]
 </CENTER> 
 where the \f$ x_{i}^* \f$ are the Cartesian coordinates, and 
@@ -67,29 +67,28 @@ along  \f$ \partial D_d \f$. This requires that
 <CENTER>
 \f[
 \mathbf{u}^*=\mathbf{\hat{u}}^*\,\,\textrm{on $
-\partial D_d $ }
+\partial D_d. $ }
 \f]
 </CENTER>
-.
 
 The stresses and displacements are related by the constitutive equations
 <CENTER>
 \f[
 \pmb{\tau}^*=\frac{E}{1+\nu}\left(
-\frac{\nu}{1-2\nu}(\pmb{\nabla}^*\cdot\mathbf{u}^*})\textbf{I}+
-\frac{1}{2}(\pmb{\nabla}^*\mathbf{u}^*+\pmb{\nabla}^*\mathbf{u}^*}^{{\rm T}})\right),
+\frac{\nu}{1-2\nu}(\pmb{\nabla}^*\cdot\mathbf{u}^*)\textbf{I}+
+\frac{1}{2}(\pmb{\nabla}^*\mathbf{u}^*+(\pmb{\nabla}^*\mathbf{u}^*){{\rm T}})\right),
 \f]
 </CENTER>
-where \f$ \pmb{\nabla}^*\mathbf{u}^*}^{{\rm T}}
-\f$ represents the transpose of \f$ \pmb{\nabla}^*\mathbf{u}^*}
-\f$.
+where \f$ (\pmb{\nabla}^*\mathbf{u}^*)^{{\rm T}}
+\f$ represents the transpose of \f$ \pmb{\nabla}^*\mathbf{u}^*.
+\f$
 
 We non-dimensionalise the equations, using a problem specific reference
 length, \f$ {\cal L} \f$, and a timescale \f$ \displaystyle {\cal T}=\frac{1}{\omega} \f$, and  use
 Young's modulus to non-dimensionalise the body force and the stress tensor:
 <CENTER>
 \f[
-\pmb{\tau}^*} = E \, \pmb{\tau}, \qquad
+\pmb{\tau}^* = E \, \pmb{\tau}, \qquad
 x_{i}^* = {\cal L}\, x_{i}
 \f]
 \f[
@@ -111,8 +110,8 @@ with the non-dimensional constitutive relation,
 <CENTER>
 \f[
 \pmb{\tau}=\frac{1}{1+\nu}\left(
-\frac{\nu}{1-2\nu}(\pmb{\nabla}\cdot\mathbf{u}})\textbf{I}+
-\frac{1}{2}(\pmb{\nabla}\mathbf{u}+\pmb{\nabla}\mathbf{u}}^{{\rm T}})\right).
+\frac{\nu}{1-2\nu}(\pmb{\nabla}\cdot\mathbf{u})\textbf{I}+
+\frac{1}{2}(\pmb{\nabla}\mathbf{u}+(\pmb{\nabla}\mathbf{u})^{{\rm T}})\right).
 \ \ \ \ \ \ \ \ \ \ @E[nondimconstitutive]@
 \f]
 </CENTER>
@@ -703,7 +702,6 @@ methodologies to
   oomph-lib's machinery. We're happy to help!
 - Repeat the same exercise in 3D -- somewhat less trivial
   (so we're even keener for somebody to have a go!)
-
 .
 <HR>
 <HR> 

@@ -80,7 +80,7 @@ EXTRA_DIST = \
 validate.sh \
 autogen.sh \
 config \
-depcomp config.guess config.sub install-sh 
+depcomp config.guess config.sub install-sh .gitignore
 
 
 # Customise the distribution

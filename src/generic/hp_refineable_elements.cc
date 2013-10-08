@@ -890,7 +890,7 @@ dshape_local(const Vector<double> &s, Shape &psi, DShape &dpsi) const
 
 //=======================================================================
 /// Second derivatives of shape functions for PRefineableQElement<DIM>
-/// \n d2psids(i,0) = \f$ d^2 \psi_j / d s^2 \f$
+///  d2psids(i,0) = \f$ d^2 \psi_j / d s^2 \f$
 //=======================================================================
 template<unsigned INITIAL_NNODE_1D>
 void PRefineableQElement<1,INITIAL_NNODE_1D>::
@@ -2967,7 +2967,7 @@ dshape_local(const Vector<double> &s, Shape &psi, DShape &dpsids) const
 
 //=======================================================================
 /// Second derivatives of shape functions for PRefineableQElement<DIM>
-/// \n d2psids(i,0) = \f$ d^2 \psi_j / d s^2 \f$
+///  d2psids(i,0) = \f$ d^2 \psi_j / d s^2 \f$
 //=======================================================================
 template<unsigned INITIAL_NNODE_1D>
 void PRefineableQElement<2,INITIAL_NNODE_1D>::
@@ -5894,7 +5894,7 @@ dshape_local(const Vector<double> &s, Shape &psi, DShape &dpsids) const
 
 //=======================================================================
 /// Second derivatives of shape functions for PRefineableQElement<DIM>
-/// \n d2psids(i,0) = \f$ d^2 \psi_j / d s^2 \f$
+///  d2psids(i,0) = \f$ d^2 \psi_j / d s^2 \f$
 //=======================================================================
 template<unsigned INITIAL_NNODE_1D>
 void PRefineableQElement<3,INITIAL_NNODE_1D>::

@@ -56,6 +56,12 @@ endif
 list_sub_dirs:
 	@echo $(SUBDIRS)
 
-EXTRA_DIST=run_tests.bash
+EXTRA_DIST=run_tests.bash run_selected_tests.bash
+
+
+
+
+
+
 
 

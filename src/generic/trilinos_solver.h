@@ -47,8 +47,8 @@ namespace oomph
   public:
 
   /// \short Constructor - takes the pointer to the oomph-lib 
-  /// preconditioner and the distribution of the preconditioner\n
-  /// Note: the oomph-lib preconditioner must be setup.\n
+  /// preconditioner and the distribution of the preconditioner
+  /// Note: the oomph-lib preconditioner must be setup.
   /// If use_eptra_values is true then the epetra vector values is used
   /// within the vectors passed to the oomph-lib
   /// preconditioner. If this is true none of the vector rebuild methods can
@@ -282,9 +282,9 @@ namespace oomph
 
 //=============================================================================
 /// \short An interface to the Trilinos AztecOO classes allowing it to be used 
-/// as an Oomph-lib LinearSolver. \n
+/// as an Oomph-lib LinearSolver. 
 /// The AztecOO solver is a Krylov Subspace solver; the solver type (either CG,
-/// GMRES or BiCGStab) can be set using solver_type(). \n
+/// GMRES or BiCGStab) can be set using solver_type(). 
 /// This solver can be preconditioned with Trilinos Preconditioners (derived
 /// from TrilinosPreconditionerBase) or Oomph-lib preconditioners (derived
 /// from Preconditioner). Preconditioners are set using preconditioner_pt().
@@ -513,7 +513,7 @@ class TrilinosAztecOOSolver : public IterativeLinearSolver
  /// or DistributedCRDoubleMatrix to Trilinos's Epetra format - the Trilinos
  /// solver no longer requires the oomph-lib matrices and therefore they could
  /// be deleted to save memory. This must be requested explicitly by setting
- /// this flag to TRUE. \n
+ /// this flag to TRUE. 
  /// \b NOTE: The matrix is deleted after the preconditioner is setup.
  bool Delete_matrix;
 
@@ -539,7 +539,7 @@ class TrilinosAztecOOSolver : public IterativeLinearSolver
  /// Oomph lib matrix pointer
  DoubleMatrixBase* Oomph_matrix_pt;
 
- /// \short A pointer to the underlying problem (NULL if MATRIX based solve)\n
+ /// \short A pointer to the underlying problem (NULL if MATRIX based solve)
  /// The problem_pt is stored here in a problem based solve for the
  /// preconditioner
  Problem* Problem_pt;

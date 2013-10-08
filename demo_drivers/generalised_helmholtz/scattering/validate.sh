@@ -36,7 +36,7 @@ if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/pml_scattering_results.dat.gz   \
-    pml_scattering_results.dat  0.9 1.0e-14 >> validation.log
+    pml_scattering_results.dat  2.0 1.0e-14 >> validation.log
 fi
 mv RESLT RESLT_non_adapt
 
@@ -62,7 +62,7 @@ if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/pml_scattering_results.dat.gz   \
-    pml_scattering_results.dat  0.9 1.0e-14 >> validation.log
+    pml_scattering_results.dat  2.0 1.0e-14 >> validation.log
 fi
 mv RESLT RESLT_adapt
 

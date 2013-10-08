@@ -251,8 +251,8 @@ class LinearSolver : public DistributableLinearAlgebraObject
 
 //=============================================================================
 /// \short Dense LU decomposition-based solve of full assembled linear system.
-/// VERY inefficient but useful to illustrate the principle.\n
-/// Only suitable for use with Serial matrices and vectors.\n
+/// VERY inefficient but useful to illustrate the principle.
+/// Only suitable for use with Serial matrices and vectors.
 /// This solver will only work with non-distributed matrices and vectors
 /// (note: DenseDoubleMatrix is not distributable)
 //============================================================================
@@ -414,18 +414,18 @@ class FD_LU : public DenseLU
 /// SuperLU and SuperLU Dist.
 /// See http://crd.lbl.gov/~xiaoye/SuperLU/
 /// Default Behaviour: If this solver is distributed over more than one 
-/// processor then SuperLU Dist is used.\n
+/// processor then SuperLU Dist is used.
 /// Member data naming convention: member data associated with the SuperLU
 /// Dist solver begins Dist_... and member data associated with the serial
-/// SuperLU solver begins Serial_... .\n 
+/// SuperLU solver begins Serial_... . 
 //=============================================================================
 class SuperLUSolver : public LinearSolver
 {
  
   public:
 
- /// \short enum type to specify the solver behaviour.\n
- /// Default - will employ superlu dist if more than 1 processor.\n
+ /// \short enum type to specify the solver behaviour.
+ /// Default - will employ superlu dist if more than 1 processor.
  /// Serial - will always try use superlu (serial).
  /// Distributed - will always try to use superlu dist.
  enum Type { Default, Serial, Distributed };
@@ -556,7 +556,7 @@ class SuperLUSolver : public LinearSolver
  /// Clean up the memory allocated by the solver
  void clean_up_memory();
 
- /// \short Specify the solve type. Either default, serial or distributed.\n
+ /// \short Specify the solve type. Either default, serial or distributed.
  /// See enum SuperLU_solver_type for more details.
  void set_solver_type(const Type& t)
   {
@@ -608,7 +608,7 @@ class SuperLUSolver : public LinearSolver
 
   /// \short Calling this method will ensure that when the problem based
   /// solve interface is used, a global (serial) jacobian will be 
-  /// assembled.\n
+  /// assembled.
   /// Note: calling this function will delete any distributed solve data.
   void use_global_solve_in_superlu_dist() 
   {
@@ -621,7 +621,7 @@ class SuperLUSolver : public LinearSolver
 
   /// \short Calling this method will ensure that when the problem based
   /// solve interface is used, a distributed jacobian will be 
-  /// assembled.\n
+  /// assembled.
   /// Note: calling this function will delete any global solve data.
   void use_distributed_solve_in_superlu_dist() 
   {

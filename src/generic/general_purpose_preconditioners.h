@@ -390,7 +390,7 @@ class ILUZeroPreconditioner<CRDoubleMatrix> : public Preconditioner
 /// solves. The template argument SOLVER specifies the inner iteration
 /// solver (which must be derived from IterativeLinearSolver) and the
 /// template argument PRECONDITIONER specifies the preconditioner for the 
-/// inner iteration iterative solver.\n
+/// inner iteration iterative solver.
 /// Note: For no preconditioning use the IdentityPreconditioner.
 //=============================================================================
 template <class SOLVER, class PRECONDITIONER> 

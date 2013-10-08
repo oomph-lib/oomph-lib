@@ -79,7 +79,7 @@ adv_diff_iterative_linear_solver_tester_LDADD = \
 
 # Sources for executable
 two_d_linear_elasticity_with_simple_block_diagonal_preconditioner_SOURCES = \
-two_d_linear_elasticity_with_simple_block_diagonal_preconditioner.cc
+two_d_linear_elasticity_with_simple_block_diagonal_preconditioner.cc simple_block_preconditioners.h
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.

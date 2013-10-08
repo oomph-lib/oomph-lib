@@ -332,35 +332,35 @@ namespace oomph
   /// concatenates them such that the nrow_local of the out_distribution
   /// is the sum of the nrow_local of all the in_distributions and the number
   /// of global rows of the out_distribution is the sum of the number of global
-  /// rows of all the in_distributions. \n
+  /// rows of all the in_distributions. 
   /// This results in a permuation of the rows in the out_distribution. 
   /// Think of this in terms of DoubleVectors, if we have DoubleVectors with 
-  /// distributions A and B, distributed across two processors (p0 and p1),\n
-  /// A: [a0] (on p0)    B: [b0] (on p0) \n
-  ///    [a1] (on p1)       [b1] (on P1), \n
-  /// \n
-  /// then the out_distribution is\n
-  /// [a0  (on p0) \n
-  ///  b0] (on p0) \n
-  /// [a1  (on p1) \n
-  ///  b1] (on p1), \n
-  /// \n
-  /// as opposed to \n
-  /// [a0  (on p0) \n
-  ///  a1] (on p0) \n
-  /// [b0  (on p1) \n
-  ///  b1] (on p1). \n
-  /// \n
+  /// distributions A and B, distributed across two processors (p0 and p1),
+  /// A: [a0] (on p0)    B: [b0] (on p0) 
+  ///    [a1] (on p1)       [b1] (on P1), 
+  /// 
+  /// then the out_distribution is
+  /// [a0  (on p0) 
+  ///  b0] (on p0) 
+  /// [a1  (on p1) 
+  ///  b1] (on p1), 
+  /// 
+  /// as opposed to 
+  /// [a0  (on p0) 
+  ///  a1] (on p0) 
+  /// [b0  (on p1) 
+  ///  b1] (on p1). 
+  /// 
   /// Note (1): The out_distribution may not be uniformly distributed even
-  /// if the the in_distributions are uniform distributions.\n 
+  /// if the the in_distributions are uniform distributions. 
   /// Try this out with two distributions of global rows 3 and 5, uniformly
   /// distributed across two processors. Compare this against a distribution
-  /// of global row 8 distributed across two processors.\n
-  /// \n
+  /// of global row 8 distributed across two processors.
+  /// 
   /// Note (2): There is no equivalent function which takes a Vector of
   /// LinearAlgebraDistribution objects (as opposed to pointers), there should
   /// not be one since we do not want to invoke the assignment operator when
-  /// creating the Vector of LinearAlgebraDistribution objects.\n
+  /// creating the Vector of LinearAlgebraDistribution objects.
   //===========================================================================
   void concatenate(const Vector<LinearAlgebraDistribution*>&in_distribution_pt,
                    LinearAlgebraDistribution &out_distribution)

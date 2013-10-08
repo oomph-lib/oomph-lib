@@ -58,7 +58,7 @@ class OomphCommunicator
   public:
 
 #ifdef OOMPH_HAS_MPI
- /// Construct a communicator from a MPI_Comm object. \n
+ /// Construct a communicator from a MPI_Comm object. 
  /// if the bool owns_mpi_comm is true then this communicator is responsible
  /// for the destruction of the mpi_communicator. The mpi comm will be freed
  /// when the destructor is called.
@@ -360,7 +360,7 @@ class OomphCommunicator
  /// the communicator
  bool Owns_mpi_comm;
 
- /// \short boolean to indicate if this communicator is for serial problems.\n
+ /// \short boolean to indicate if this communicator is for serial problems.
  /// This is true when serial codes are compiled under MPI
  bool Serial_communicator;
 

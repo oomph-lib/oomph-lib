@@ -285,11 +285,11 @@ namespace oomph
    /// number of the unknown, while the second one contains the number
    /// of the "DOF" that this unknown is associated with.
    /// (Function can obviously only be called if the equation numbering
-   /// scheme has been set up.)\n
-   /// E.g. in a 3D problem there are 3 types of DOF:\n
-   /// 0 - x displacement\n
-   /// 1 - y displacement\n
-   /// 2 - z displacement\n
+   /// scheme has been set up.)
+   /// E.g. in a 3D problem there are 3 types of DOF:
+   /// 0 - x displacement
+   /// 1 - y displacement
+   /// 2 - z displacement
    void get_dof_numbers_for_unknowns(
     std::list<std::pair<unsigned long,unsigned> >& block_lookup_list)
     {
@@ -1025,9 +1025,9 @@ template<unsigned NNODE_1D>
    /// number of the unknown, while the second one contains the number
    /// of the "DOF" that this unknown is associated with.
    /// (Function can obviously only be called if the equation numbering
-   /// scheme has been set up.)\n
+   /// scheme has been set up.)
    /// There are DIM+1 types of DOF: displacement compnents and
-   /// pressure\n 
+   /// pressure 
    void get_dof_numbers_for_unknowns(
     std::list<std::pair<unsigned long,unsigned> >& block_lookup_list)
     {

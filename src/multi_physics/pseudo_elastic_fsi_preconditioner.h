@@ -42,22 +42,22 @@ namespace oomph {
 
  //============================================================================
  /// \short Preconditioner for FSI problems with pseudo-elastic fluid node
- /// updates.\n
- /// Note:\n
+ /// updates.
+ /// Note:
  /// NavierStokesSchurComplementPreconditioner is applied to the Navier Stokes 
- /// subsidiary system. \n
- /// Default solid preconditioner is SuperLUPreconditioner.\n\n
- /// \b Enumeration of Elastic DOF types in the Pseudo-Elastic Elements \n
+ /// subsidiary system. 
+ /// Default solid preconditioner is SuperLUPreconditioner.
+ /// \b Enumeration of Elastic DOF types in the Pseudo-Elastic Elements 
  /// The method get_dof_types_for_unknowns() must be implemented such that
  /// DOFs subject be Lagrange multiplier and DOFs NOT subject to Lagrange
  /// multiplier have different labels. For example in a 3D problem there are
  /// 6 DOF types and the following labelling must be implemented:
- /// 0 - x displacement (without lagr mult traction)\n
- /// 1 - y displacement (without lagr mult traction)\n
- /// 2 - z displacement (without lagr mult traction)\n
- /// 3 - x displacement (with lagr mult traction)\n
- /// 4 - y displacement (with lagr mult traction)\n
- /// 5 - z displacement (with lagr mult traction)\n
+ /// 0 - x displacement (without lagr mult traction)
+ /// 1 - y displacement (without lagr mult traction)
+ /// 2 - z displacement (without lagr mult traction)
+ /// 3 - x displacement (with lagr mult traction)
+ /// 4 - y displacement (with lagr mult traction)
+ /// 5 - z displacement (with lagr mult traction)
  //============================================================================
  class PseudoElasticFSIPreconditioner : 
   public BlockPreconditioner<CRDoubleMatrix>

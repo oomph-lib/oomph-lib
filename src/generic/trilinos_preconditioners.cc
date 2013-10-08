@@ -49,9 +49,9 @@ namespace oomph
 //=============================================================================
 /// \short Function to set up a preconditioner for the linear system 
 /// defined by matrix_pt. This function must be called before using 
-/// preconditioner_solve. \n
+/// preconditioner_solve. 
 /// \b NOTE 1. matrix_pt must point to an object of class CRDoubleMatrix or 
-/// DistributedCRDoubleMatrix\n
+/// DistributedCRDoubleMatrix
 /// This method should be called by oomph-lib solvers and preconditioners
 //=============================================================================
  void TrilinosPreconditionerBase::setup()
@@ -99,7 +99,7 @@ namespace oomph
  
 //===========================================================================
 /// \short Function to setup a preconditioner for the linear system defined
-/// by the oomph-lib oomph_matrix_pt and Epetra epetra_matrix_pt matrices.\n
+/// by the oomph-lib oomph_matrix_pt and Epetra epetra_matrix_pt matrices.
 /// This method is called by Trilinos solvers.
 //===========================================================================
 void TrilinosPreconditionerBase::setup(Epetra_CrsMatrix* epetra_matrix_pt)
@@ -127,7 +127,7 @@ void TrilinosPreconditionerBase::setup(Epetra_CrsMatrix* epetra_matrix_pt)
 //=============================================================================
 /// \short preconditioner_solve - applies the preconditioner to the vector r 
 /// taking distributed oomph-lib vectors (DistributedVector<double>) as 
-/// arguments. \n
+/// arguments. 
 //=============================================================================
 void TrilinosPreconditionerBase::
 preconditioner_solve(const DoubleVector &r, DoubleVector &z)

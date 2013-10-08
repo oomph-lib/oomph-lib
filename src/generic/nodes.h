@@ -763,7 +763,7 @@ class GeomObject;
 //=====================================================================
 /// \short Nodes are derived from Data, but, in addition, have a 
 /// definite (Eulerian) position in a space of a given dimension. 
-/// \n \n 
+///   
 /// The nodal coordinates are used in the elements' mapping
 /// between local and global coordinates and in the simplest
 /// case (stationary nodes in Lagrange-type elements) this mapping
@@ -773,7 +773,7 @@ class GeomObject;
 /// \f$ X_{ij}\ (i=1..DIM) \f$ of all nodes \f$ j \f$ : provided
 /// by the Node member function
 /// \code Node::x(i) \endcode
-/// \n \n 
+///   
 /// If the nodal positions are time-dependent, the mapping becomes
 /// \f[  x_i(t) = \sum_{j=1}^{N_{node}}  X_{ij}(t) \ \psi_{j}(s_k). \f]
 /// Within the computation (where time is only evaluated at discrete
@@ -790,7 +790,7 @@ class GeomObject;
 /// are generalised history values that the TimeStepper uses to 
 /// determine approximations for the time-derivatives of the
 /// nodal positions. 
-/// \n \n
+///  
 /// Finally, some elements employ mappings 
 /// that involve additional, generalised coordinates. For instance,
 /// in Hermite elements the mapping between local and global coordinates

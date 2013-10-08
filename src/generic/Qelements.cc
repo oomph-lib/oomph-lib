@@ -136,7 +136,7 @@ void QElement<1,NNODE_1D>::dshape_local(const Vector<double> &s, Shape &psi,
 }
 
 //=======================================================================
-/// Second derivatives of shape functions for specific  QElement<1,..>: \n
+/// Second derivatives of shape functions for specific  QElement<1,..>: 
 /// d2psids(i,0) = \f$ d^2 \psi_j / d s^2 \f$
 //=======================================================================
 template <unsigned NNODE_1D>
@@ -518,10 +518,10 @@ void QElement<2,NNODE_1D>::dshape_local(const Vector<double> &s, Shape &psi,
 
 
 //=======================================================================
-/// Second derivatives of shape functions for specific  QElement<2,..>: \n
-/// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ \n
-/// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$ \n
-/// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$ \n
+/// Second derivatives of shape functions for specific  QElement<2,..>: 
+/// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ 
+/// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$ 
+/// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$ 
 //=======================================================================
 template <unsigned NNODE_1D>
 void QElement<2,NNODE_1D>::d2shape_local(const Vector<double> &s, Shape &psi, 
@@ -1000,13 +1000,13 @@ void QElement<3,NNODE_1D>::dshape_local(const Vector<double> &s, Shape &psi,
 }
 
 //=======================================================================
-/// Second derivatives of shape functions for specific  QElement<3,..>: \n
-/// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ \n
-/// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$ \n
-/// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_2^2 \f$ \n
-/// d2psids(i,3) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$ \n
-/// d2psids(i,4) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_2 \f$ \n
-/// d2psids(i,5) = \f$ \partial^2 \psi_j / \partial s_1 \partial s_2 \f$ \n
+/// Second derivatives of shape functions for specific  QElement<3,..>: 
+/// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ 
+/// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$ 
+/// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_2^2 \f$ 
+/// d2psids(i,3) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$ 
+/// d2psids(i,4) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_2 \f$ 
+/// d2psids(i,5) = \f$ \partial^2 \psi_j / \partial s_1 \partial s_2 \f$ 
 //=======================================================================
 template <unsigned NNODE_1D>
 void QElement<3,NNODE_1D>::d2shape_local(const Vector<double> &s, Shape &psi, 

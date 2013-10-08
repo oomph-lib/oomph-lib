@@ -52,7 +52,7 @@ namespace oomph
 /// For highly nonlinear problems it is sometimes helpful to 
 /// re-formulate the problem by prescribing the position of a 
 /// selected control point and treating the (scalar) load level 
-/// required to achieve this deformation as an unknown. \n\n
+/// required to achieve this deformation as an unknown. 
 /// As an example consider the buckling of pressure-loaded,
 /// thin-walled elastic shells.
 /// The load-displacement characteristics of such structures tend to be highly
@@ -63,7 +63,7 @@ namespace oomph
 /// material points will be displaced radially inwards), it 
 /// is advantageous to prescribe the radial displacement of a carefully
 /// selected control point and treat the external pressure as an unknown. 
-/// \n\n
+/// 
 /// \c DisplacementControlElements facilitate the use of
 /// such methods. They require the specification of
 /// - the control point at which the displacement is prescribed. This is

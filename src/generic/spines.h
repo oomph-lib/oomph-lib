@@ -52,7 +52,7 @@ namespace oomph
 /// key Data member of the Spine object is its "height" -- 
 /// usually an unknown in the problem -- which is used by the
 /// SpineNode's node update function to update the SpineNode's position.
-/// \n \n
+///  
 /// In more complex problems (such as the case where a fluid layer is deposited
 /// on an elastic body), the node update function can depend on additional
 /// information, such as the GeomObject representation of the

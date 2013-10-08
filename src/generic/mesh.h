@@ -519,13 +519,13 @@ public:
 
  /// \short Update nodal positions in response to changes in the domain shape.
  /// Uses the FiniteElement::get_x(...) function for FiniteElements
- /// and doesn't do anything for other element types. \n\n
+ /// and doesn't do anything for other element types. 
  /// If a MacroElement pointer has been set for a FiniteElement,
  /// the MacroElement representation is used to update the
  /// nodal positions; if not get_x(...) uses the FE interpolation
  /// and thus leaves the nodal positions unchanged.
  /// Virtual, so it can be overloaded by specific meshes,
- /// such as AlgebraicMeshes or SpineMeshes. \n\n
+ /// such as AlgebraicMeshes or SpineMeshes. 
  /// Generally, this function updates the position of all nodes
  /// in response to changes in the boundary position. 
  /// However, we ignore all SolidNodes since their

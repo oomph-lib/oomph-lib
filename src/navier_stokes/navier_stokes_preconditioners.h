@@ -576,7 +576,7 @@ namespace oomph
 /// preconditioner. It uses blocks corresponding to the velocity 
 /// and pressure unknowns, i.e. there are a total of 2x2 blocks, 
 /// and all velocity components are treated as a single block of unknowns.
-/// \n\n
+/// 
 /// Here are the details: An "ideal" Navier-Stokes preconditioner
 /// would solve the system
 /// \f[
@@ -664,7 +664,7 @@ namespace oomph
 /// Fast Iterative Solvers with Applications in Incompressible Fluid 
 /// Dynamics" by Howard C. Elman, David J. Silvester, and Andrew J. Wathen,
 /// published by Oxford University Press, 2006.
-/// \n\n
+/// 
 /// In our implementation of the preconditioner, the linear systems
 /// can either be solved "exactly", using SuperLU (in its incarnation
 /// as an exact preconditioner; this is the default) or by any 

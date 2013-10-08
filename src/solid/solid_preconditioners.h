@@ -56,7 +56,7 @@ namespace oomph
 /// and pressure unknowns, i.e. there are a total of 2x2 blocks, 
 /// and all displacement/position components are treated as a 
 /// single block of unknowns.
-/// \n\n
+/// 
 /// Here are the details: An "ideal" preconditioner
 /// would solve the saddle point system
 /// \f[
@@ -143,7 +143,7 @@ namespace oomph
 /// Fast Iterative Solvers with Applications in Incompressible Fluid 
 /// Dynamics" by Howard C. Elman, David J. Silvester, and Andrew J. Wathen,
 /// published by Oxford University Press, 2006.
-/// \n\n
+/// 
 /// In our implementation of the preconditioner, the linear systems
 /// can either be solved "exactly", using SuperLU (in its incarnation
 /// as an exact preconditioner; this is the default) or by any 
@@ -306,19 +306,19 @@ namespace oomph
    ///Disable documentation of time
    void disable_doc_time() {Doc_time = false;}
 
-   /// \short If this function is called then:\n
-   /// in setup(...) : BFBt is computed.\n
+   /// \short If this function is called then:
+   /// in setup(...) : BFBt is computed.
    /// in preconditioner_solve(...) : a single matrix vector product with 
-   /// BFBt is performed.\n
+   /// BFBt is performed.
    void enable_form_BFBt_product() {Form_BFBt_product = true; }
 
-   /// \short if this function is called  then:\n
+   /// \short if this function is called  then:
    /// in setup(...) : the matrices B, F are assembled and stored 
-   /// (the default behaviour) .\n
+   /// (the default behaviour) .
    /// in preconditioner_solve(...) : a sequence of matrix vector products
-   /// with B, F, and Bt is performed.\n
+   /// with B, F, and Bt is performed.
    /// (Note: in this discussion no scaling was considered but B and Bt 
-   ///  are replaced with BQ and QBt with scaling)\n
+   ///  are replaced with BQ and QBt with scaling)
    void disable_form_BFBt_product() {Form_BFBt_product = false;}
 
    /// \short Helper function to delete preconditioner data.
@@ -378,16 +378,16 @@ namespace oomph
 
    /// \short indicates whether BFBt should be formed or the component matrices
    /// should be retained.
-   /// If true then:\n
-   /// in setup(...) : BFBt is computed.\n
+   /// If true then:
+   /// in setup(...) : BFBt is computed.
    /// in preconditioner_solve(...) : a single matrix vector product with 
-   /// BFBt is performed.\n
-   /// if false then:\n
-   /// in setup(...) : the matrices B, F are assembled and stored.\n
+   /// BFBt is performed.
+   /// if false then:
+   /// in setup(...) : the matrices B, F are assembled and stored.
    /// in preconditioner_solve(...) : a sequence of matrix vector products
-   /// with B, F, and Bt is performed.\n
+   /// with B, F, and Bt is performed.
    /// (Note: in this discussion no scaling was considered but B and Bt 
-   ///  are replaced with BQ and QBt with scaling)\n
+   ///  are replaced with BQ and QBt with scaling)
    bool Form_BFBt_product;
 
    /// \short the pointer to the mesh of block preconditionable solid

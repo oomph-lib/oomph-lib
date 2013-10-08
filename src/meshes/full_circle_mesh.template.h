@@ -42,7 +42,7 @@ namespace oomph
 /// \short Full circle mesh class.
 /// The domain is specified by the GeomObject that identifies 
 /// the entire area. Non-refineable base version!
-/// \n
+/// 
 /// The mesh boundaries are numbered as follows:
 /// - Boundary 0: The outer wall, represented by \f$\xi_1 = 1\f$.
 /// .
@@ -104,7 +104,7 @@ protected:
 /// Adaptative version of the FullCircleMesh base mesh.
 /// The domain is specified by the GeomObject that identifies 
 /// the entire area
-/// \n
+/// 
 /// The mesh boundaries are numbered as follows:
 /// - Boundary 1: The outer wall, represetned by \f$\xi_1 = 1\f$.
 /// .

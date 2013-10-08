@@ -243,7 +243,7 @@ class ElementWithZ2ErrorEstimator : public virtual FiniteElement
 ///    involves the \f$N_{rec}=3\f$ recovery shape functions
 ///    \f$ \psi^{[rec]}_0(x_0,x_1)=1, \ \psi^{[rec]}_1(x_0,x_1)=x_0 \f$
 ///    and \f$ \psi^{[rec]}_2(x_0,x_1)=x_1\f$. 
-///    \n \n
+///     
 ///    We determine the coefficients \f$ F^{(p)}_{ij} \f$ by enforcing
 ///    \f$ f^{(p)}_i(x_k) =  f^{[FE]}_i(x_k)\f$ in its weak form:
 ///    \f[
@@ -257,7 +257,7 @@ class ElementWithZ2ErrorEstimator : public virtual FiniteElement
 ///    all nodes that are part of the patch. We denote the
 ///    value of the recovered flux at node \f$ k \f$ by
 ///    \f$ {\cal F}^{(p)}_{ik}\f$. 
-///    \n \n 
+///      
 ///    We repeat this procedure for every patch. For nodes that are part of
 ///    multiple patches, the procedure 
 ///    will provide multiple, slightly different nodal values for the recovered

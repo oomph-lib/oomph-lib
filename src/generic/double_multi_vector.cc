@@ -31,9 +31,9 @@
 namespace oomph
 {
  /// The contents of the vector are redistributed to match the new
- /// distribution. In a non-MPI rebuild this method works, but does nothing. \n
+ /// distribution. In a non-MPI rebuild this method works, but does nothing. 
  /// \b NOTE 1: The current distribution and the new distribution must have
- /// the same number of global rows.\n
+ /// the same number of global rows.
  /// \b NOTE 2: The current distribution and the new distribution must have
  /// the same Communicator.
  void DoubleMultiVector::redistribute(

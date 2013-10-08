@@ -31,6 +31,11 @@ headers = metis.h
 extra_headers = defs.h	macros.h  proto.h  rename.h  stdheaders.h  struct.h
 
 
+# Additional files that come with parmetis but aren't actually used by
+# us. Included for completeness.
+EXTRA_DIST = stats.c
+
+
 # Define name of library
 libname = oomph_metis_from_parmetis_3.1.1
 

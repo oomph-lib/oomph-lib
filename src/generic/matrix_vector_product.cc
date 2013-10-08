@@ -32,11 +32,11 @@ namespace oomph
 
 
  //============================================================================
- /// \short Setup the matrix vector product operator.\n
+ /// \short Setup the matrix vector product operator.
  /// WARNING: This class is wrapper to Trilinos Epetra matrix vector
  /// multiply methods, if Trilinos is not installed then this class will
- /// function as expected, but there will be no computational speed gain.\n
- /// By default the Epetra_CrsMatrix::multiply(...) are employed.\n
+ /// function as expected, but there will be no computational speed gain.
+ /// By default the Epetra_CrsMatrix::multiply(...) are employed.
  //============================================================================
  void MatrixVectorProduct::setup(CRDoubleMatrix* matrix_pt,
                              LinearAlgebraDistribution* col_dist_pt)

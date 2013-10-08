@@ -258,7 +258,7 @@ private:
 /// could do that...) but also allows the geometric Data contained 
 /// in the GeomObjects that affect the MacroElement-based node update
 /// operations to be unknowns in the overall Problem.
-/// \n\n
+/// 
 /// The element wraps around the ELEMENT specified by the template
 /// parameter and computes the derivatives of the residual vector
 /// with respect to the geometric Data (needed in the setup of

@@ -70,7 +70,7 @@ class CRDoubleMatrix;
 
 
 //=============================================================================
-/// \short Helper namespace for use with the Trilinos Epetra package.\n 
+/// \short Helper namespace for use with the Trilinos Epetra package. 
 /// Contains functions to generate two Epetra containers (Epetra_Vector and
 /// Epetra_CrsMatrix) and provides access to the trilinos matrix-matrix
 /// and matrix-vector product routines.
@@ -80,7 +80,7 @@ namespace TrilinosEpetraHelpers
 
  // VECTOR METHODS ============================================================
 
- /// \short create an Epetra_Vector from an oomph-lib DoubleVector.\n
+ /// \short create an Epetra_Vector from an oomph-lib DoubleVector.
  /// If oomph_vec is NOT distributed (i.e. locally replicated) and 
  /// on more than one processor, then the returned Epetra_Vector will be 
  /// uniformly distributed. If the oomph_vec is distributed then the 
@@ -89,50 +89,50 @@ namespace TrilinosEpetraHelpers
                                                  oomph_vec);
  
  /// \short create an Epetra_Vector based on the argument oomph-lib 
- /// LinearAlgebraDistribution\n
+ /// LinearAlgebraDistribution
  /// If dist is NOT distributed and 
  /// on more than one processor, then the returned Epetra_Vector will be 
  /// uniformly distributed. If dist is distributed then the Epetra_Vector 
- /// returned will have the same distribution as dist.\n
+ /// returned will have the same distribution as dist.
  /// The coefficient values are not set.
  Epetra_Vector* create_distributed_epetra_vector
   (const LinearAlgebraDistribution* dist_pt);
 
- /// \short create an Epetra_Vector equivalent of DoubleVector\n
- /// The argument DoubleVector must be built.\n
+ /// \short create an Epetra_Vector equivalent of DoubleVector
+ /// The argument DoubleVector must be built.
  /// The Epetra_Vector will point to, and NOT COPY the underlying data in the 
- /// DoubleVector.\n
+ /// DoubleVector.
  /// The oomph-lib DoubleVector and the returned Epetra_Vector will have the 
  /// the same distribution.
  Epetra_Vector* create_epetra_vector_view_data(DoubleVector& oomph_vec);
 
  /// \short Helper function to copy the contents of a Trilinos vector to an
  /// oomph-lib distributed vector. The distribution of the two vectors must
- /// be identical \n
+ /// be identical 
  void copy_to_oomphlib_vector(const Epetra_Vector* epetra_vec_pt,
                               DoubleVector& oomph_vec);
 
  // MATRIX METHODS ============================================================
 
- /// \short create an Epetra_CrsMatrix from an oomph-lib CRDoubleMatrix.\n
+ /// \short create an Epetra_CrsMatrix from an oomph-lib CRDoubleMatrix.
  /// If oomph_matrix_pt is NOT distributed (i.e. locally replicated) and 
  /// on more than one processor, then the returned Epetra_Vector will be 
  /// uniformly distributed. If the oomph_matrix_pt is distributed then the 
  /// Epetra_CrsMatrix returned will have the same distribution as
- /// oomph_matrix_pt.\n
+ /// oomph_matrix_pt.
  /// The LinearAlgebraDistribution argument dist_pt should specify the 
  /// distribution of the object this matrix will operate on.
  Epetra_CrsMatrix* create_distributed_epetra_matrix
   (const CRDoubleMatrix* oomph_matrix_pt,
    const LinearAlgebraDistribution* dist_pt); 
  
- /// \short create and Epetra_CrsMatrix from an oomph-lib CRDoubleMatrix.\n
- /// Specialisation for Trilinos AztecOO.\n
+ /// \short create and Epetra_CrsMatrix from an oomph-lib CRDoubleMatrix.
+ /// Specialisation for Trilinos AztecOO.
  /// If oomph_matrix_pt is NOT distributed (i.e. locally replicated) and 
  /// on more than one processor, then the returned Epetra_Vector will be 
  /// uniformly distributed. If the oomph_matrix_pt is distributed then the 
  /// Epetra_CrsMatrix returned will have the same distribution as
- /// oomph_matrix_pt.\n
+ /// oomph_matrix_pt.
  /// For AztecOO, the column map is ordered such that the local rows are
  /// first.
  Epetra_CrsMatrix* create_distributed_epetra_matrix_for_aztecoo
@@ -141,17 +141,17 @@ namespace TrilinosEpetraHelpers
  // MATRIX OPERATION METHODS ==================================================
 
  /// \short  Function to perform a matrix-vector multiplication on a 
- /// oomph-lib matrix and vector using Trilinos functionality.\n
- /// NOTE 1. the matrix and the vectors must have the same communicator.\n
+ /// oomph-lib matrix and vector using Trilinos functionality.
+ /// NOTE 1. the matrix and the vectors must have the same communicator.
  /// NOTE 2. The vector will be returned with the same distribution
  /// as the matrix, unless a distribution is predefined in the solution
- /// vector in which case the vector will be returned with that distribution.\n
+ /// vector in which case the vector will be returned with that distribution.
  void multiply(const CRDoubleMatrix* matrix,
                const DoubleVector& x,
                DoubleVector &soln);
 
  /// \short Function to perform a matrix-matrix multiplication on oomph-lib
- /// matrices by using Trilinos functionality.\n
+ /// matrices by using Trilinos functionality.
  /// \b NOTE 1. There are two Trilinos matrix-matrix multiplication methods 
  /// available, using either the EpetraExt::MatrixMatrix class (if use_ml == 
  /// false) or using ML (Epetra_MatrixMult method)

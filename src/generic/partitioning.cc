@@ -500,8 +500,7 @@ void METIS::partition_mesh(Problem* problem_pt, const unsigned& ndomain,
 /// of the domain [0,1,...,ndomain-1] to which non-halo element e on THE
 /// CURRENT PROCESSOR ONLY has been assigned. The order of the non-halo
 /// elements is the same as in the Problem's mesh, with the halo
-/// elements being skipped.
-/// \n
+/// elements being skipped. 
 /// Objective:
 /// - objective=0: minimise edgecut.
 /// - objective=1: minimise total communications volume.

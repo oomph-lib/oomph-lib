@@ -49,15 +49,14 @@ namespace oomph
 {
 
 //=============================================================
-// DOXYERROR: there is no such command as \Diamond!!
 /// A class for all isoparametric elements that solve the
 /// Foeppl von Karman equations.
 /// \f[
-/// \nabla^4 w - \eta\Diamond^4(w,\phi) = p(x,y)
+/// \nabla^4 w - \eta Diamond^4(w,\phi) = p(x,y)
 /// \f]
 /// and
 /// \f[
-/// \nabla^4 \phi + \frac{1}{2}\Diamond^4(w,w) = 0
+/// \nabla^4 \phi + \frac{1}{2} Diamond^4(w,w) = 0
 /// \f]
 /// This contains the generic maths. Shape functions, geometric
 /// mapping etc. must get implemented in derived class.

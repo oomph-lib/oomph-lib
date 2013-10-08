@@ -2841,8 +2841,6 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
  void Problem::remove_null_pointers_from_external_halo_node_storage()
  {
 
-  oomph_info << "shitebollocks\n";
-
   //Do we have submeshes?
   unsigned n_mesh_loop=1;
   unsigned nmesh=nsub_mesh();
@@ -3385,7 +3383,7 @@ else
 /// Get the fully assembled residual vector and Jacobian matrix
 /// in dense storage. The DoubleVector residuals returned will be
 /// non-distributed. If on calling this method the DoubleVector residuals is
-/// setup then it must be non-distributed and of the correct length. \n
+/// setup then it must be non-distributed and of the correct length. 
 /// The matrix type DenseDoubleMatrix is not distributable and therefore
 /// the residual vector is also assumed to be non distributable.
 //=============================================================================
@@ -3491,10 +3489,10 @@ else
 //=============================================================================
 /// Return the fully-assembled Jacobian and residuals for the problem,
 /// in the case where the Jacobian matrix is in a distributable
-/// row compressed storage format. \n
+/// row compressed storage format. 
 /// 1. If the distribution of the jacobian and residuals is setup then, they
 /// will be returned with that distribution.
-/// Note. the jacobian and residuals must have the same distribution. \n
+/// Note. the jacobian and residuals must have the same distribution. 
 /// 2. If the distribution of the jacobian and residuals are not setup then
 /// their distribution will computed based on:
 /// Distributed_problem_matrix_distribution.
@@ -7449,7 +7447,7 @@ void Problem::get_derivative_wrt_global_parameter(double* const &parameter_pt,
        }*/
 
    //for(unsigned n=0;n<n_dof;n++)
-   // {std::cout << "ANAL " << n << " " <<  result[n] << "\n";}
+   // {std::cout << "BLA " << n << " " <<  result[n] << "\n";}
   }
  //Otherwise use the finite difference default
  else
@@ -7593,7 +7591,7 @@ for(unsigned i=0;i<n_vec;i++)
          for(unsigned i=0;i<n_vec;i++)
           {
            product[i].global_value(eqn_number) += product_local(i,l);
-           //std::cout << "ANAL " << e << " " << i << " "
+           //std::cout << "BLA " << e << " " << i << " "
            //          << l << " " << product_local(i,l) << "\n";
           }
         }

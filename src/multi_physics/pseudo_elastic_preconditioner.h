@@ -89,18 +89,18 @@ namespace oomph
 /// \short A subsidiary preconditioner for the pseudo-elastic FSI
 /// preconditioner. Also a stand-alone preconditioner for the problem of
 /// non-linear elasticity subject to prescribed displacement by Lagrange
-/// multiplier..\n\n
-/// \b Enumeration of Elastic DOF types in the Pseudo-Elastic Elements \n
+/// multiplier.
+/// \b Enumeration of Elastic DOF types in the Pseudo-Elastic Elements 
 /// The method get_dof_types_for_unknowns() must be implemented such that
 /// DOFs subject be Lagrange multiplier and DOFs NOT subject to Lagrange
 /// multiplier have different labels. For example in a 3D problem there are
 /// 6 DOF types and the following labelling must be implemented:
-/// 0 - x displacement (without lagr mult traction)\n
-/// 1 - y displacement (without lagr mult traction)\n
-/// 2 - z displacement (without lagr mult traction)\n
-/// 4 - x displacement (with lagr mult traction)\n
-/// 5 - y displacement (with lagr mult traction)\n
-/// 6 - z displacement (with lagr mult traction)\n
+/// 0 - x displacement (without lagr mult traction)
+/// 1 - y displacement (without lagr mult traction)
+/// 2 - z displacement (without lagr mult traction)
+/// 4 - x displacement (with lagr mult traction)
+/// 5 - y displacement (with lagr mult traction)
+/// 6 - z displacement (with lagr mult traction)
 //=============================================================================
  class PseudoElasticPreconditioner 
   : public BlockPreconditioner<CRDoubleMatrix>
@@ -119,11 +119,11 @@ namespace oomph
   typedef Preconditioner* (*SubsidiaryPreconditionerFctPt)();
   
   /// \short The augmented elasticity system can be preconditioned in one
-  /// of four ways. \n
-  /// 0 - Exact preconditioner \n
-  /// 1 - Block diagonal preconditioning \n 
-  /// 2 - Block upper triangular preconditioner \n
-  /// 3 - Block lower triangular preconditioner \n
+  /// of four ways. 
+  /// 0 - Exact preconditioner 
+  /// 1 - Block diagonal preconditioning 
+  /// 2 - Block upper triangular preconditioner 
+  /// 3 - Block lower triangular preconditioner 
   /// We group together the different components of the displacement vector 
   /// field for the block decomposition.
   enum Elastic_preconditioner_type { Exact_block_preconditioner,
@@ -222,11 +222,11 @@ namespace oomph
    Elastic_subsidiary_preconditioner_function_pt = prec_fn;
   }
   
-  /// \short Set the type of preconditioner applied to the elastic: \n
-  /// 0 - Exact preconditioner \n
-  /// 1 - Block diagonal preconditioning \n 
-  /// 2 - Block upper triangular preconditioner \n
-  /// 3 - Block lower triangular preconditioner \n
+  /// \short Set the type of preconditioner applied to the elastic: 
+  /// 0 - Exact preconditioner 
+  /// 1 - Block diagonal preconditioning  
+  /// 2 - Block upper triangular preconditioner 
+  /// 3 - Block lower triangular preconditioner 
   /// We group together the different components of the displacement vector 
   /// field for the block decomposition.
   Elastic_preconditioner_type& elastic_preconditioner_type()
@@ -290,18 +290,18 @@ namespace oomph
 /// \short A subsidiary preconditioner for the pseudo-elastic FSI
 /// preconditioner. Also a stand-alone preconditioner for the problem of
 /// non-linear elasticity subject to prescribed displacement by Lagrange
-/// multiplier..\n\n
-/// \b Enumeration of Elastic DOF types in the Pseudo-Elastic Elements \n
+/// multiplier..
+/// \b Enumeration of Elastic DOF types in the Pseudo-Elastic Elements 
 /// The method get_dof_types_for_unknowns() must be implemented such that
 /// DOFs subject be Lagrange multiplier and DOFs NOT subject to Lagrange
 /// multiplier have different labels. For example in a 3D problem there are
 /// 6 DOF types and the following labelling must be implemented:
-/// 0 - x displacement (without lagr mult traction)\n
-/// 1 - y displacement (without lagr mult traction)\n
-/// 2 - z displacement (without lagr mult traction)\n
-/// 4 - x displacement (with lagr mult traction)\n
-/// 5 - y displacement (with lagr mult traction)\n
-/// 6 - z displacement (with lagr mult traction)\n
+/// 0 - x displacement (without lagr mult traction)
+/// 1 - y displacement (without lagr mult traction)
+/// 2 - z displacement (without lagr mult traction)
+/// 4 - x displacement (with lagr mult traction)
+/// 5 - y displacement (with lagr mult traction)
+/// 6 - z displacement (with lagr mult traction)
 //=============================================================================
  class PseudoElasticPreconditionerOld
   : public BlockPreconditioner<CRDoubleMatrix>
@@ -320,11 +320,11 @@ namespace oomph
   typedef Preconditioner* (*SubsidiaryPreconditionerFctPt)();
   
   /// \short The augmented elasticity system can be preconditioned in one
-  /// of four ways. \n
-  /// 0 - Exact preconditioner \n
-  /// 1 - Block diagonal preconditioning \n 
-  /// 2 - Block upper triangular preconditioner \n
-  /// 3 - Block lower triangular preconditioner \n
+  /// of four ways. 
+  /// 0 - Exact preconditioner 
+  /// 1 - Block diagonal preconditioning  
+  /// 2 - Block upper triangular preconditioner 
+  /// 3 - Block lower triangular preconditioner 
   /// We group together the different components of the displacement vector 
   /// field for the block decomposition.
   enum Elastic_preconditioner_type { Exact_block_preconditioner,
@@ -423,11 +423,11 @@ namespace oomph
    Elastic_subsidiary_preconditioner_function_pt = prec_fn;
   }
   
-  /// \short Set the type of preconditioner applied to the elastic: \n
-  /// 0 - Exact preconditioner \n
-  /// 1 - Block diagonal preconditioning \n 
-  /// 2 - Block upper triangular preconditioner \n
-  /// 3 - Block lower triangular preconditioner \n
+  /// \short Set the type of preconditioner applied to the elastic: 
+  /// 0 - Exact preconditioner 
+  /// 1 - Block diagonal preconditioning  
+  /// 2 - Block upper triangular preconditioner 
+  /// 3 - Block lower triangular preconditioner 
   /// We group together the different components of the displacement vector 
   /// field for the block decomposition.
   Elastic_preconditioner_type& elastic_preconditioner_type()
@@ -491,13 +491,13 @@ namespace oomph
 //=============================================================================
 /// Subsidiary helper preconditioner for the PseudoElasticPreconditioner.
 /// Required to construct the augmented elastic system prior to
-/// preconditioning.\n
-/// NOTE:\n
+/// preconditioning.
+/// NOTE:
 /// 1. This is only intended to be used as a subsidiary preconditioner within
-/// the PseudoElasticPreconditioner.\n
+/// the PseudoElasticPreconditioner.
 /// 2. If this preconditioner has N DOF types then the first N/2 are assumed to
 /// be ordinary solid DOF types, and the second N/2 are the solid DOF types 
-/// with lagrange multiplier tractions applied.\n 
+/// with lagrange multiplier tractions applied. 
 /// 3. By default this preconditioner uses a superlu preconditioner.
 //=============================================================================
  class PseudoElasticPreconditionerSubsidiaryPreconditionerOld
@@ -507,7 +507,7 @@ namespace oomph
    public:
    
   /// \short typedef for a function that allows other preconditioners to be
-  /// emplyed to solve the subsidiary linear systems. \n
+  /// emplyed to solve the subsidiary linear systems. 
   /// The function should return a pointer to the requred subsidiary
   /// preconditioner generated using new. This preconditioner is responsible
   /// for the destruction of the subsidiary preconditioners.
@@ -593,12 +593,12 @@ namespace oomph
 /// Subsidiary helper preconditioner for the PseudoElasticPreconditioner.
 /// Required for block preconditioner of the augmented elastic subsidiary
 /// problem.
-/// NOTE:\n
+/// NOTE:
 /// 1. This is only intended to be used as a subsidiary preconditioner within
-/// the PseudoElasticPreconditioner.\n
+/// the PseudoElasticPreconditioner.
 /// 2. If this preconditioner has N DOF types then the first N/2 are assumed to
 /// be ordinary solid DOF types, and the second N/2 are the solid DOF types 
-/// with lagrange multiplier tractions applied.\n 
+/// with lagrange multiplier tractions applied. 
 /// 3. By default this preconditioner uses a superlu preconditioner.
 //=============================================================================
  class PseudoElasticPreconditionerSubsidiaryBlockPreconditionerOld 
@@ -700,10 +700,10 @@ namespace oomph
   /// Matrix of matrix vector product operators for the off diagonals
   DenseMatrix<MatrixVectorProduct*> Off_diagonal_matrix_vector_products;
   
-  /// the preconditioning method.\n
-  /// 0 - block diagonal\n
-  /// 1 - upper triangular\n
-  /// 2 - lower triangular\n
+  /// the preconditioning method.
+  /// 0 - block diagonal
+  /// 1 - upper triangular
+  /// 2 - lower triangular
   unsigned Method;
   
   /// The SubisidaryPreconditionerFctPt 
@@ -732,8 +732,8 @@ namespace oomph
 
    public:
 
-  /// The constructor.\n
-  /// NOTE: \n
+  /// The constructor.
+  /// NOTE:  
   /// 1. master_prec_pt should point to the 
   /// PseudoElasticPreconditioner.
   /// 2. matrix_pt should point to the jacobian.

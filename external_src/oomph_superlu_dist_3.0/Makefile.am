@@ -23,8 +23,51 @@ pdsymbfact_distdata.c dreadhb.c dreadrb.c dreadtriple.c
 
 # These files are included in superlu but are actually part of
 # lapack which can cause clashes with other packages that
-# also include them.
-EXTRA_DIST =  xerbla.c.back  lsame.c.back dlamch.c.back slamch.c.back 
+# also include them. Plus various other files that we're not compiling
+# but are keeping alive for completeness so that what we have in here
+# is the complete set of sources for superlu
+EXTRA_DIST =  xerbla.c.back  lsame.c.back dlamch.c.back slamch.c.back \
+zsp_blas2.c \
+pzgstrf.c \
+zutil.c \
+pzlangs.c \
+pzlaqgs.c \
+pdgstrf_X1.c \
+pdgstrs_Bglobal_Bsend.c \
+pzgssvx.c \
+pzdistribute.c \
+pzgstrs_Bglobal.c \
+zlangs.c \
+zlaqgs.c \
+pdgstrsL.c \
+zmemory.c \
+pdgstrf_sherry.c \
+zdistribute.c \
+pzgsrfs_ABXglobal.c \
+zdistribute_mark.c \
+pzgsmv.c \
+pzgstrf_irecv.c \
+old_colamd.c \
+pzgsrfs.c \
+pzgsmv_AXglobal.c \
+superlu_zdefs.h \
+zsp_blas3.c \
+zmyblas2.c \
+pzgssvx_ABglobal.c \
+html_mainpage.h \
+pzgstrs.c \
+zldperm.c \
+zreadhb.c \
+pzgstrs1.c \
+pzgsequ.c \
+pzsymbfact_distdata.c \
+pdgstrf_irecv.c \
+dcomplex.c \
+pzgstrs_lsum.c \
+zgsequ.c \
+dcomplex.h \
+zreadtriple.c \
+pzutil.c 
 
 # Define the headers
 headers =  \

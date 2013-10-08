@@ -24,7 +24,7 @@ fish_poisson_LDADD = \
 
 EXTRA_DIST += fish_fully_automatic_partition.dat \
               fish_incremental_partition.dat \
-              fish_selective_partition.dat
+              fish_selective_partition.dat distributed_adapt.mcr
 
 # Include path for library headers: All library headers live in 
 # the include directory which we specify with -I

@@ -33,7 +33,11 @@ EXTRA_DIST=build_mesh_makefile.sh change_headers_to_links.sh fpdiff.py\
            make_all_distributions.bash \
            destruct_test_distribution.bash \
            minimal_mpi_test.cc check_oomph-lib_links.bash strip_down.bash \
-           validate_ok_count 
+           validate_ok_count minimal_mpi_variablenp_test.cc \
+           make_index.py check_links_in_example_list.py \
+           find_dodgy_booleans.bash \
+           extract_free_mem_from_top_trace.bash strip_control_m.bash \
+           parallel_self_test.py
 
 
 

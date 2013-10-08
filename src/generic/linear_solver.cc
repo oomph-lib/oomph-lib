@@ -1511,7 +1511,7 @@ void SuperLUSolver::factorise_serial(DoubleMatrixBase* const &matrix_pt)
 }
 
 //=============================================================================
-/// Do the backsubstitution for SuperLUSolver. \n
+/// Do the backsubstitution for SuperLUSolver. 
 /// Note - this method performs no paranoid checks - these are all performed in
 /// solve(...) and resolve(...)
 //=============================================================================
@@ -1539,7 +1539,7 @@ bool SuperLUSolver::Suppress_incorrect_rhs_distribution_warning_in_resolve
                   =false;
 
 //=============================================================================
-/// Do the backsubstitution for SuperLU solver. \n
+/// Do the backsubstitution for SuperLU solver. 
 /// Note - this method performs no paranoid checks - these are all performed in
 /// solve(...) and resolve(...)
 //=============================================================================

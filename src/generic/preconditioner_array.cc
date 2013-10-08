@@ -45,7 +45,7 @@ namespace oomph
 
  //============================================================================
  /// Setup the preconditioners. Sets up each preconditioner in the
- /// array for the corresponding matrix in the vector matrix_pt.\n
+ /// array for the corresponding matrix in the vector matrix_pt.
  /// The number of preconditioners in the array is taken to be the length of
  /// prec_pt.
  //============================================================================

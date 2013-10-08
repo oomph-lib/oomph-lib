@@ -60,11 +60,11 @@ namespace oomph
  /// \c Meshes, but each \c Mesh can only contain a single type of element.
  /// The association between global degrees of freedom and their unique global
  /// dof numbers is therefore based on information provided by the elements.
- /// \n\n
+ /// 
  /// By default each type of DOF is assumed to be unqiue type of block,
  /// but DOF types can be grouped together in a single block when
  /// block_setup(...) is called.
- /// \n\n
+ /// 
  /// This class can function in one of two ways. Either it acts as a
  /// stand-alone block preconditioner which computes and stores
  /// the association between global degrees of freedom and their unique global
@@ -79,7 +79,7 @@ namespace oomph
  /// the master block preconditioner computes and stores the master
  /// lookup schemes. All block preconditioners compute and store their own
  /// optimised lookup schemes.
- /// \n\n
+ /// 
  /// In cases where a \c Problem contains elements of different element types
  /// (e.g. fluid and solid elements in a fluid-structure interaction problem),
  /// access to the elements of the same type must be provided via pointers to
@@ -186,14 +186,14 @@ namespace oomph
   /// "master block preconditioner (e.g. a Navier-Stokes 2x2 block
   /// preconditioner dealing with the fluid sub-blocks within a
   /// 3x3 FSI preconditioner. Once this is done the master block
-  /// preconditioner deals with the block setup etc. \n
+  /// preconditioner deals with the block setup etc. 
   /// The vector block_map must specify the block number in the
   /// master preconditioner that corresponds to a block number in this
-  /// preconditioner.\n
+  /// preconditioner.
   /// \b 1. The length of the vector is used to determine the number of
-  /// blocks in this preconditioner therefore it must be correctly sized. \n
+  /// blocks in this preconditioner therefore it must be correctly sized. 
   /// \b 2. block_setup(...) should be called in the master preconditioner
-  /// before this method is called. \n
+  /// before this method is called. 
   /// \b 3. block_setup(...) should be called in the corresponding subsidiary
   /// preconditioner after this method is called.
   void turn_into_subsidiary_block_preconditioner
@@ -201,7 +201,7 @@ namespace oomph
    Vector<unsigned>& block_map);
 
   /// \short Specify the number of meshes required by this block
-  /// preconditioner.\n
+  /// preconditioner.
   /// Note: elements in different meshes correspond to different types
   /// of DOF.
   void set_nmesh(const unsigned& n)
@@ -223,9 +223,9 @@ namespace oomph
 
 
   /// Set the i-th mesh for this block preconditioner.
-  /// Note:\n
+  /// Note:
   /// The method set_nmesh(...) must be called before this method
-  /// to specify the number of meshes.\n
+  /// to specify the number of meshes.
   /// By default, it is assumed that each mesh only contains elements of the 
   /// same type. This condition may be relaxed by setting the boolean
   /// multiple_element_type_in_mesh to true, however, each mesh must only 
@@ -280,10 +280,10 @@ namespace oomph
   /// \short Determine the size of the matrix blocks and setup the
   /// lookup schemes relating the global degrees of freedom with
   /// their "blocks" and their indices (row/column numbers) in those
-  /// blocks.\n
+  /// blocks.
   /// The distributions of the preconditioner and the blocks are
   /// automatically specified (and assumed to be uniform) at this
-  /// stage.\n
+  /// stage.
   /// This method should be used if each DOF type corresponds to a
   /// unique block type.
   virtual void block_setup();
@@ -291,10 +291,10 @@ namespace oomph
   /// \short Determine the size of the matrix blocks and setup the
   /// lookup schemes relating the global degrees of freedom with
   /// their "blocks" and their indices (row/column numbers) in those
-  /// blocks.\n
+  /// blocks.
   /// The distributions of the preconditioner and the blocks are
   /// automatically specified (and assumed to be uniform) at this
-  /// stage.\n
+  /// stage.
   /// This method should be used if each any block contains more than one
   /// type of DOF. The argument vector dof_to_block_map should be of length
   /// ndof. Each element should contain an integer indicating the block number
@@ -864,7 +864,7 @@ namespace oomph
    Preconditioner_matrix_distribution_pt = 0;
   }
 
-  /// \short debugging method to document the setup.\n
+  /// \short debugging method to document the setup.
   /// Should only be called after block_setup(...).
   void document()
   {
@@ -925,7 +925,7 @@ namespace oomph
   /// The doftype_to_doftype_map is a mapping of the doftypes in the master
   /// preconditioner to the doftypes required by THIS preconditioner.
   /// 
-  /// \n
+  /// 
   /// 
   /// For example, the Lagrangian preconditioner (in 3D with one constraint) 
   /// has doftypes:
@@ -939,7 +939,7 @@ namespace oomph
   /// [2 5]
   /// [6]
   /// 
-  /// \n
+  /// 
   /// 
   /// This function is called from outside of this preconditioner to set
   /// block matrices to use instead of the block matrices extracted from the

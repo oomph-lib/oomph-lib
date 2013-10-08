@@ -48,7 +48,7 @@ namespace oomph
 /// \short 3D quarter tube mesh class.
 /// The domain is specified by the GeomObject that identifies 
 /// boundary 3. Non-refineable base version!
-/// \n
+/// 
 /// The mesh boundaries are numbered as follows:
 /// - Boundary 0: "Inflow" cross section; located along the 
 ///               line parametrised by \f$ \xi_0 =  \xi_0^{lo} \f$
@@ -148,7 +148,7 @@ protected:
 /// Adaptative version of the QuarterTubeMesh base mesh.
 /// The domain is specified by the GeomObject that identifies 
 /// boundary 3.
-/// \n
+/// 
 /// The mesh boundaries are numbered as follows:
 /// - Boundary 0: "Inflow" cross section; located along the 
 ///               line parametrised by \f$ \xi_0 =  \xi_0^{lo} \f$
@@ -402,7 +402,7 @@ public:
 
 //====================================================================
 /// \short Algebraic 3D quarter tube mesh class.
-/// \n
+/// 
 /// The mesh boundaries are numbered as follows:
 /// - Boundary 0: "Inflow" cross section; located along the
 ///               line parametrised by \f$ \xi_0 =  \xi_0^{lo} \f$

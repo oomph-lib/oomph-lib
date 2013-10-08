@@ -63,10 +63,10 @@ EXTRA_DIST += \
 crop.bash  plot_melt.bash  plot_pseudo_melt.bash  plot_sb.bash	plot_spring_contact_landscape.bash  re-enumerate.bash  run_spring_contact.bash
 
 EXTRA_DIST+= \
-melt.pvsm  proper_melt.pvsm  pseudo_melt.pvsm  spring_contact_landscape.pvsm  stefan_boltzmann.pvsm  stefan_boltzmann_rays.pvsm stefan_boltzmann_validation.map
+melt.pvsm  proper_melt.pvsm  pseudo_melt.pvsm  spring_contact_landscape.pvsm  stefan_boltzmann.pvsm  stefan_boltzmann_rays.pvsm stefan_boltzmann_validation.map bins.pvsm
 
 EXTRA_DIST+= \
-exact.map
+exact.map animate.py
 
 
 

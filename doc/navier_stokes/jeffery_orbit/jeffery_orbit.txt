@@ -14,13 +14,13 @@ the fluid mesh in response to changes in orientation of the ellipse.
 @I w 0.75\textwidth jeff_sketch "A rigid ellipse immersed in a shear flow "
 
 We consider an ellipse with centre of mass fixed at the origin of a
-Cartesian coordinate system \f$ (x_{1}^{*}, x_{2}^{*})\f$, but
+Cartesian coordinate system \f$ (x_{1}^{*}, x_{2}^{*}) \f$, but
 immersed in a viscous fluid undergoing a linear shear flow 
-with shear rate \f$G\f$. In the absence of the ellipse 
+with shear rate \f$ G \f$. In the absence of the ellipse 
 the fluid velocity field would be 
- \f$u^{*}_{1} = Gx^{*}_{2}\f$, \f$u^{*}_{2} = 0\f$, where
- \f$u^{*}_{i}\f$ is the dimensional velocity component in the
- \f$x^{*}_{i}\f$ coordinate direction.
+ \f$ u^{*}_{1} = Gx^{*}_{2} \f$, \f$ u^{*}_{2} = 0 \f$, where
+ \f$ u^{*}_{i} \f$ is the dimensional velocity component in the
+ \f$ x^{*}_{i} \f$ coordinate direction.
 
  The configuration of a rigid body in two dimensions is determined entirely
  by the position of its centre of mass, \f$(X^{*}_{1},X^{*}_{2})\f$ 
@@ -28,8 +28,8 @@ the fluid velocity field would be
  axis. The equations governing the motion of the particle are then simply
  conservation of linear and angular momentum:
 <center>
-\f[ M \frac{\mbox{d}^{2} X^{*}_{i}}{\mbox{d} t^{*}^{2}} = F^{*}_{i} \quad
- \mbox{and} \quad I \frac{\mbox{d}^{2} \chi}{\mbox{d} t^{*}^{2}} = T^{*}, \f]
+\f[ M \frac{\mbox{d}^{2} X^{*}_{i}}{\mbox{d} t^{*2}} = F^{*}_{i} \quad
+ \mbox{and} \quad I \frac{\mbox{d}^{2} \chi}{\mbox{d} t^{*2}} = T^{*}, \f]
 </center>
  where \f$M\f$ is the mass of the body, \f$I\f$ is its moment of
  inertia about the centre of mass, \f$(F^{*}_{1},F^{*}_{2})\f$ is the
@@ -39,9 +39,9 @@ the fluid velocity field would be
  In the present context, the force and torque on the body are entirely
  due to the viscous fluid loading on its surface in which case
 <center>
-\f[ F^{*}_{i} = \oint \tau^{*}_{ij}\, n_{j}\, \text{d} s \quad\mbox{and}\quad
+\f[ F^{*}_{i} = \int \tau^{*}_{ij}\, n_{j}\, \mbox{d} s \quad\mbox{and}\quad
     T^{*} = \oint  (x^{*}_{1} - X^{*}_{1}) \tau^{*}_{2j}\,n_{j} - 
-               (x^{*}_{2} - X^{*}_{2}) \tau^{*}_{1j}\,n_{j}\, \text{d}
+               (x^{*}_{2} - X^{*}_{2}) \tau^{*}_{1j}\,n_{j}\, \mbox{d}
  s, \f]
 </center>
  where the integral is around the perimeter of the ellipse,
@@ -112,7 +112,7 @@ u_j \frac{\partial u_i}{\partial x_j} \right) =
 <center>
 \f[ Re \left(\frac{\rho_{s}}{\rho_{f}}\right) \bar{I} 
 =    \oint  \left[x_{1}\tau_{2j}\,n_{j} - 
-                x_{2} \tau_{1j}\,n_{j}\, \right] \text{d} s, \f].
+                x_{2} \tau_{1j}\,n_{j}\, \right] \mbox{d} s, \f].
 </center>
 
 We perform the computations in the domain \f$ x_{1} \in [-L,

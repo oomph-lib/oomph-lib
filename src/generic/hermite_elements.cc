@@ -96,7 +96,7 @@ void QHermiteElement<1>::dshape_local(const Vector<double> &s,
 
 //=======================================================================
 /// Derivatives and second derivatives of shape functions for specific  
-/// QHermiteElement<1> \n
+/// QHermiteElement<1> 
 /// d2psids(i,0) = \f$ d^2 \psi_j / d s^2 \f$
 //=======================================================================
 template<>
@@ -545,10 +545,10 @@ void QHermiteElement<2>::dshape_local(const Vector<double> &s,
 }
 
 //======================================================================
-/// Second derivatives of the shape functions wrt local coordinates. \n
-/// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ \n
-/// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$ \n
-/// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$ \n
+/// Second derivatives of the shape functions wrt local coordinates. 
+/// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ 
+/// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$ 
+/// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$ 
 //======================================================================
 template<>
 void QHermiteElement<2>::d2shape_local(const Vector<double> &s,

@@ -1140,11 +1140,11 @@ void get_interpolated_values(const Vector<double>&s,  Vector<double>& values)
 
  /// \short Get all function values [u,v..,p] at previous timestep t
  /// (t=0: present; t>0: previous timestep). 
- /// \n 
+ ///  
  /// Note: Given the generality of the interface (this function
  /// is usually called from black-box documentation or interpolation routines),
  /// the values Vector sets its own size in here.
- /// \n
+ /// 
  /// Note: No pressure history is kept, so pressure is always
  /// the current value.
  void get_interpolated_values(const unsigned& t, const Vector<double>&s, 
@@ -1441,11 +1441,11 @@ public virtual PRefineableQElement<DIM,3>
 
  /// \short Get all function values [u,v..,p] at previous timestep t
  /// (t=0: present; t>0: previous timestep). 
- /// \n 
+ ///  
  /// Note: Given the generality of the interface (this function
  /// is usually called from black-box documentation or interpolation routines),
  /// the values Vector sets its own size in here.
- /// \n
+ /// 
  /// Note: No pressure history is kept, so pressure is always
  /// the current value.
  void get_interpolated_values(const unsigned& t, const Vector<double>&s, 

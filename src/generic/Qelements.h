@@ -540,7 +540,7 @@ public:
   const;
 
  /// \short Compute the geometric shape functions, derivatives and
- /// second derivatives w.r.t. local coordinates at local coordinate s \n
+ /// second derivatives w.r.t. local coordinates at local coordinate s 
  /// d2psids(i,0) = \f$ d^2 \psi_j / d s^2 \f$
  void d2shape_local(const Vector<double> &s, Shape &psi, DShape &dpsids,
                     DShape &d2psids) const;
@@ -807,10 +807,10 @@ public:
   const;
 
  /// \short Compute the geometric shape functions, derivatives and
- /// second derivatives w.r.t. local coordinates at local coordinate s \n
- /// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ \n
- /// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$ \n
- /// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$ \n
+ /// second derivatives w.r.t. local coordinates at local coordinate s 
+ /// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ 
+ /// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$ 
+ /// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$ 
  void d2shape_local(const Vector<double> &s, Shape &psi, DShape &dpsids,
                     DShape &d2psids) const;
 
@@ -1098,13 +1098,13 @@ public:
   const;
 
  /// \short Compute the geometric shape functions, derivatives and
- /// second derivatives w.r.t. local coordinates at local coordinate s. \n
- /// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ \n
- /// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$ \n
- /// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_2^2 \f$ \n
- /// d2psids(i,3) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$ \n
- /// d2psids(i,4) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_2 \f$ \n
- /// d2psids(i,5) = \f$ \partial^2 \psi_j / \partial s_1 \partial s_2 \f$ \n
+ /// second derivatives w.r.t. local coordinates at local coordinate s. 
+ /// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ 
+ /// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$ 
+ /// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_2^2 \f$ 
+ /// d2psids(i,3) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$ 
+ /// d2psids(i,4) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_2 \f$ 
+ /// d2psids(i,5) = \f$ \partial^2 \psi_j / \partial s_1 \partial s_2 \f$
  void d2shape_local(const Vector<double> &s, Shape &psi, DShape &dpsids,
                     DShape &d2psids) const;
 

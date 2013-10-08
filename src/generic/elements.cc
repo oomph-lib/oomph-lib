@@ -2350,9 +2350,9 @@ void FiniteElement::dJ_eulerian_dnodal_coordinates(
 /// derivative w.r.t. the nodal coordinates \f$ X_{pq} \f$, the inverse
 /// jacobian and the derivatives of the shape functions w.r.t. the local
 /// coordinates. The result is returned as a tensor of rank four.
-/// \n\n Numbering: \n
+///  Numbering: 
 /// d_dpsidx_dX(p,q,j,i) = \f$ \frac{\partial}{\partial X_{pq}}
-/// \left( \frac{\partial \psi_j}{\partial x_i} \right) \f$ \n
+/// \left( \frac{\partial \psi_j}{\partial x_i} \right) \f$ 
 /// This function is slightly inefficient, given that it uses a switch
 /// statement. It can always be overloaded in specific geometric elements,
 /// for efficiency reasons.
@@ -2852,20 +2852,20 @@ void FiniteElement::d_dshape_eulerian_dnodal_coordinates(
 //=========================================================================
 /// Calculate the shape function and its first and second derivatives 
 /// w.r.t. local coordinates at the ipt-th integration point.
-/// \n\n Numbering:
-/// \n \b 1D: \n
+/// Numbering:
+/// \b 1D: 
 /// d2psids(i,0) = \f$ d^2 \psi_j / d s^2 \f$
-/// \n \b 2D: \n
-/// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ \n
-/// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$ \n
-/// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$ \n
-/// \n \b 3D: \n
-/// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ \n
-/// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$ \n
-/// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_2^2 \f$ \n
-/// d2psids(i,3) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$ \n
-/// d2psids(i,4) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_2 \f$ \n
-/// d2psids(i,5) = \f$ \partial^2 \psi_j / \partial s_1 \partial s_2 \f$ \n
+/// \b 2D:
+/// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ 
+/// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$ 
+/// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$ 
+/// \b 3D: 
+/// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$
+/// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$ 
+/// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_2^2 \f$ 
+/// d2psids(i,3) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$ 
+/// d2psids(i,4) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_2 \f$ 
+/// d2psids(i,5) = \f$ \partial^2 \psi_j / \partial s_1 \partial s_2 \f$ 
 //=========================================================================
  void FiniteElement::d2shape_local_at_knot(const unsigned &ipt, Shape &psi, 
                                            DShape &dpsids, DShape &d2psids) 
@@ -3023,20 +3023,20 @@ void FiniteElement::d_dshape_eulerian_dnodal_coordinates(
 /// \short Compute the geometric shape functions and also first
 /// and second derivatives w.r.t. global coordinates at local coordinate s;
 /// Also returns Jacobian of mapping from global to local coordinates.
-/// \n\n Numbering:
-/// \n \b 1D: \n
+/// Numbering:
+///\b 1D: 
 /// d2psidx(i,0) = \f$ d^2 \psi_j / d x^2 \f$
-/// \n \b 2D: \n
-/// d2psidx(i,0) = \f$ \partial^2 \psi_j / \partial x_0^2 \f$ \n
-/// d2psidx(i,1) = \f$ \partial^2 \psi_j / \partial x_1^2 \f$ \n
-/// d2psidx(i,2) = \f$ \partial^2 \psi_j / \partial x_0 \partial x_1 \f$ \n
-/// \n \b 3D: \n
-/// d2psidx(i,0) = \f$ \partial^2 \psi_j / \partial x_0^2 \f$ \n
-/// d2psidx(i,1) = \f$ \partial^2 \psi_j / \partial x_1^2 \f$ \n
-/// d2psidx(i,2) = \f$ \partial^2 \psi_j / \partial x_2^2 \f$ \n
-/// d2psidx(i,3) = \f$ \partial^2 \psi_j / \partial x_0 \partial x_1 \f$ \n
-/// d2psidx(i,4) = \f$ \partial^2 \psi_j / \partial x_0 \partial x_2 \f$ \n
-/// d2psidx(i,5) = \f$ \partial^2 \psi_j / \partial x_1 \partial x_2 \f$ \n
+/// \b 2D: 
+/// d2psidx(i,0) = \f$ \partial^2 \psi_j / \partial x_0^2 \f$ 
+/// d2psidx(i,1) = \f$ \partial^2 \psi_j / \partial x_1^2 \f$ 
+/// d2psidx(i,2) = \f$ \partial^2 \psi_j / \partial x_0 \partial x_1 \f$ 
+/// \b 3D:
+/// d2psidx(i,0) = \f$ \partial^2 \psi_j / \partial x_0^2 \f$ 
+/// d2psidx(i,1) = \f$ \partial^2 \psi_j / \partial x_1^2 \f$ 
+/// d2psidx(i,2) = \f$ \partial^2 \psi_j / \partial x_2^2 \f$ 
+/// d2psidx(i,3) = \f$ \partial^2 \psi_j / \partial x_0 \partial x_1 \f$ 
+/// d2psidx(i,4) = \f$ \partial^2 \psi_j / \partial x_0 \partial x_2 \f$ 
+/// d2psidx(i,5) = \f$ \partial^2 \psi_j / \partial x_1 \partial x_2 \f$ 
 //===========================================================================
  double FiniteElement::d2shape_eulerian(const Vector<double> &s, 
                                         Shape &psi, 
@@ -3077,20 +3077,20 @@ void FiniteElement::d_dshape_eulerian_dnodal_coordinates(
 /// point
 /// Returns Jacobian of mapping from global to local coordinates.
 /// This is the most general version, may be overloaded, if desired.
-/// \n\n Numbering:
-/// \n \b 1D: \n
+/// Numbering:
+/// \b 1D:
 /// d2psidx(i,0) = \f$ d^2 \psi_j / d x^2 \f$
-/// \n \b 2D: \n
-/// d2psidx(i,0) = \f$ \partial^2 \psi_j / \partial x_0^2 \f$ \n
-/// d2psidx(i,1) = \f$ \partial^2 \psi_j / \partial x_1^2 \f$ \n
-/// d2psidx(i,2) = \f$ \partial^2 \psi_j / \partial x_0 \partial x_1 \f$ \n
-/// \n \b 3D: \n
-/// d2psidx(i,0) = \f$ \partial^2 \psi_j / \partial x_0^2 \f$ \n
-/// d2psidx(i,1) = \f$ \partial^2 \psi_j / \partial x_1^2 \f$ \n
-/// d2psidx(i,2) = \f$ \partial^2 \psi_j / \partial x_2^2 \f$ \n
-/// d2psidx(i,3) = \f$ \partial^2 \psi_j / \partial x_0 \partial x_1 \f$ \n
-/// d2psidx(i,4) = \f$ \partial^2 \psi_j / \partial x_0 \partial x_2 \f$ \n
-/// d2psidx(i,5) = \f$ \partial^2 \psi_j / \partial x_1 \partial x_2 \f$ \n
+/// \b 2D: 
+/// d2psidx(i,0) = \f$ \partial^2 \psi_j / \partial x_0^2 \f$ 
+/// d2psidx(i,1) = \f$ \partial^2 \psi_j / \partial x_1^2 \f$ 
+/// d2psidx(i,2) = \f$ \partial^2 \psi_j / \partial x_0 \partial x_1 \f$ 
+/// \b 3D: 
+/// d2psidx(i,0) = \f$ \partial^2 \psi_j / \partial x_0^2 \f$ 
+/// d2psidx(i,1) = \f$ \partial^2 \psi_j / \partial x_1^2 \f$ 
+/// d2psidx(i,2) = \f$ \partial^2 \psi_j / \partial x_2^2 \f$ 
+/// d2psidx(i,3) = \f$ \partial^2 \psi_j / \partial x_0 \partial x_1 \f$ 
+/// d2psidx(i,4) = \f$ \partial^2 \psi_j / \partial x_0 \partial x_2 \f$ 
+/// d2psidx(i,5) = \f$ \partial^2 \psi_j / \partial x_1 \partial x_2 \f$ 
 //==========================================================================
  double FiniteElement::d2shape_eulerian_at_knot(const unsigned &ipt, 
                                                 Shape &psi, 
@@ -5897,20 +5897,20 @@ void FaceElement::get_local_coordinate_in_bulk(
 /// and second derivatives w.r.t. Lagrangian coordinates at 
 /// local coordinate s;
 /// Returns Jacobian of mapping from Lagrangian to local coordinates.
-/// \n\n Numbering:
-/// \n \b 1D: \n
+/// Numbering:
+/// \b 1D: 
 /// d2pidxi(i,0) = \f$ d^2 \psi_j / d \xi^2 \f$
-/// \n \b 2D: \n
-/// d2psidxi(i,0) = \f$ \partial^2 \psi_j / \partial \xi_0^2 \f$ \n
-/// d2psidxi(i,1) = \f$ \partial^2 \psi_j / \partial \xi_1^2 \f$ \n
-/// d2psidxi(i,2) = \f$ \partial^2 \psi_j / \partial \xi_0 \partial \xi_1 \f$ \n
-/// \n \b 3D: \n
-/// d2psidxi(i,0) = \f$ \partial^2 \psi_j / \partial \xi_0^2 \f$ \n
-/// d2psidxi(i,1) = \f$ \partial^2 \psi_j / \partial \xi_1^2 \f$ \n
-/// d2psidxi(i,2) = \f$ \partial^2 \psi_j / \partial \xi_2^2 \f$ \n
-/// d2psidxi(i,3) = \f$ \partial^2 \psi_j/\partial \xi_0 \partial \xi_1 \f$ \n
-/// d2psidxi(i,4) = \f$ \partial^2 \psi_j/\partial \xi_0 \partial \xi_2 \f$ \n
-/// d2psidxi(i,5) = \f$ \partial^2 \psi_j/\partial \xi_1 \partial \xi_2 \f$ \n
+/// \b 2D: 
+/// d2psidxi(i,0) = \f$ \partial^2 \psi_j / \partial \xi_0^2 \f$ 
+/// d2psidxi(i,1) = \f$ \partial^2 \psi_j / \partial \xi_1^2 \f$ 
+/// d2psidxi(i,2) = \f$ \partial^2 \psi_j / \partial \xi_0 \partial \xi_1 \f$ 
+/// \b 3D:
+/// d2psidxi(i,0) = \f$ \partial^2 \psi_j / \partial \xi_0^2 \f$ 
+/// d2psidxi(i,1) = \f$ \partial^2 \psi_j / \partial \xi_1^2 \f$ 
+/// d2psidxi(i,2) = \f$ \partial^2 \psi_j / \partial \xi_2^2 \f$ 
+/// d2psidxi(i,3) = \f$ \partial^2 \psi_j/\partial \xi_0 \partial \xi_1 \f$ 
+/// d2psidxi(i,4) = \f$ \partial^2 \psi_j/\partial \xi_0 \partial \xi_2 \f$ 
+/// d2psidxi(i,5) = \f$ \partial^2 \psi_j/\partial \xi_1 \partial \xi_2 \f$ 
 //========================================================================
  double SolidFiniteElement::
  d2shape_lagrangian(const Vector<double> &s, Shape &psi, 
@@ -5947,20 +5947,20 @@ void FaceElement::get_local_coordinate_in_bulk(
 /// and second derivatives w.r.t. Lagrangian coordinates at 
 /// the ipt-th integration point
 /// Returns Jacobian of mapping from Lagrangian to local coordinates.
-/// \n\n Numbering:
-/// \n \b 1D: \n
+/// Numbering:
+/// \b 1D: 
 /// d2pidxi(i,0) = \f$ d^2 \psi_j / d \xi^2 \f$
-/// \n \b 2D: \n
-/// d2psidxi(i,0) = \f$ \partial^2 \psi_j / \partial \xi_0^2 \f$ \n
-/// d2psidxi(i,1) = \f$ \partial^2 \psi_j / \partial \xi_1^2 \f$ \n
-/// d2psidxi(i,2) = \f$ \partial^2 \psi_j/\partial \xi_0 \partial \xi_1 \f$ \n
-/// \n \b 3D: \n
-/// d2psidxi(i,0) = \f$ \partial^2 \psi_j / \partial \xi_0^2 \f$ \n
-/// d2psidxi(i,1) = \f$ \partial^2 \psi_j / \partial \xi_1^2 \f$ \n
-/// d2psidxi(i,2) = \f$ \partial^2 \psi_j / \partial \xi_2^2 \f$ \n
-/// d2psidxi(i,3) = \f$ \partial^2 \psi_j/\partial \xi_0 \partial \xi_1 \f$ \n
-/// d2psidxi(i,4) = \f$ \partial^2 \psi_j/\partial \xi_0 \partial \xi_2 \f$ \n
-/// d2psidxi(i,5) = \f$ \partial^2 \psi_j/\partial \xi_1 \partial \xi_2 \f$ \n
+/// \b 2D: 
+/// d2psidxi(i,0) = \f$ \partial^2 \psi_j / \partial \xi_0^2 \f$ 
+/// d2psidxi(i,1) = \f$ \partial^2 \psi_j / \partial \xi_1^2 \f$ 
+/// d2psidxi(i,2) = \f$ \partial^2 \psi_j/\partial \xi_0 \partial \xi_1 \f$ 
+/// \b 3D:
+/// d2psidxi(i,0) = \f$ \partial^2 \psi_j / \partial \xi_0^2 \f$ 
+/// d2psidxi(i,1) = \f$ \partial^2 \psi_j / \partial \xi_1^2 \f$ 
+/// d2psidxi(i,2) = \f$ \partial^2 \psi_j / \partial \xi_2^2 \f$ 
+/// d2psidxi(i,3) = \f$ \partial^2 \psi_j/\partial \xi_0 \partial \xi_1 \f$ 
+/// d2psidxi(i,4) = \f$ \partial^2 \psi_j/\partial \xi_0 \partial \xi_2 \f$ 
+/// d2psidxi(i,5) = \f$ \partial^2 \psi_j/\partial \xi_1 \partial \xi_2 \f$ 
 //========================================================================
  double SolidFiniteElement::d2shape_lagrangian_at_knot(const unsigned &ipt, 
                                                        Shape &psi, 

@@ -53,7 +53,7 @@ namespace oomph
 /// provide these FaceElement with a geometric object representation.
 /// The local coordinates of the FaceElements are used as the intrinisic
 /// coordinates for its GeomObject representation.
-/// \n\n
+/// 
 /// These elements are used primarily to set up the interaction terms
 /// in FSI problems and are expected to be created from meshes so 
 /// that they lie on a particular boundary of the mesh.

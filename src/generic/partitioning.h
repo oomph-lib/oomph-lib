@@ -159,7 +159,7 @@ namespace METIS
   /// CURRENT PROCESSOR ONLY has been assigned. The order of the non-halo
   /// elements is the same as in the Problem's mesh, with the halo
   /// elements being skipped.
-  /// \n
+  /// 
   /// Objective:
   /// - objective=0: minimise edgecut.
   /// - objective=1: minimise total communications volume.

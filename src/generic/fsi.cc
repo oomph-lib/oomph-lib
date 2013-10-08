@@ -115,11 +115,11 @@ bool FSIWallElement::Dont_warn_about_missing_adjacent_fluid_elements=false;
  /// the adjacent fluid element: Pass number of integration point
  /// in solid element,
  /// and the unit normal vector (pointing into the fluid on the "front"
- /// of the FSIWallElement) and return the load vector.\n
+ /// of the FSIWallElement) and return the load vector.
  /// Note that the load is non-dimensionalised on the wall-stress scale, 
  /// i.e. it is obtained by computing the traction (on the fluid stress-scale)
  /// from the adjacent fluid element and then multiplying it by 
- /// the stress-scale-ratio \f$ Q. \f$.  \n
+ /// the stress-scale-ratio \f$ Q. \f$.  
  /// If element is loaded on both sides, the fluid load computed
  /// from the reverse element is \b subtracted, because it's
  /// computed with the same normal vector.

@@ -421,11 +421,11 @@ namespace oomph
  /// in the adaptive solution of bifurcation problems.
  void bifurcation_adapt_doc_errors(const unsigned &bifurcation_type);
 
- /// \short The distribution of the DOFs in this problem.\n
+ /// \short The distribution of the DOFs in this problem.
  /// This object is created in the Problem constructor and setup
- /// when assign_eqn_numbers(...) is called. \n
+ /// when assign_eqn_numbers(...) is called. 
  /// If this problem is distributed then this distribution will match
- /// the distribution of the equation numbers. \n
+ /// the distribution of the equation numbers. 
  /// If this problem is not distributed then this distribution will
  /// be uniform over all processors.
  LinearAlgebraDistribution* Dof_distribution_pt;
@@ -725,13 +725,13 @@ namespace oomph
   public:
 
  /// \short enum for distribution of distributed jacobians.
- /// \n 1 - Automatic - the Problem distribution is employed, unless any
+ ///  1 - Automatic - the Problem distribution is employed, unless any
  /// processor has number of rows equal to 110% of N/P, in which case
  /// uniform distribution is employed.
- /// \n 2 - Problem - the jacobian on processor p only contains rows that
+ ///  2 - Problem - the jacobian on processor p only contains rows that
  /// correspond to equations that are on this processor. (minimises 
  /// communication)
- /// \n 3 - Uniform - each processor holds as close to N/P matrix rows as 
+ ///  3 - Uniform - each processor holds as close to N/P matrix rows as 
  /// possible. (very well load balanced)
  enum Distributed_problem_matrix_distribution 
   { Default_matrix_distribution, 
@@ -739,13 +739,13 @@ namespace oomph
     Uniform_matrix_distribution };
 
  /// \short accesss function to the distributed matrix distribution method
- /// \n 1 - Automatic - the Problem distribution is employed, unless any
+ ///  1 - Automatic - the Problem distribution is employed, unless any
  /// processor has number of rows equal to 110% of N/P, in which case
  /// uniform distribution is employed.
- /// \n 2 - Problem - the jacobian on processor p only contains rows that
+ ///  2 - Problem - the jacobian on processor p only contains rows that
  /// correspond to equations that are on this processor. (minimises 
  /// communication)
- /// \n 3 - Uniform - each processor holds as close to N/P matrix rows as 
+ ///  3 - Uniform - each processor holds as close to N/P matrix rows as 
  /// possible. (very well load balanced)
  Distributed_problem_matrix_distribution& 
   distributed_problem_matrix_distribution()
@@ -848,13 +848,13 @@ namespace oomph
   Vector<Vector<Vector<unsigned> > >& refinement_info_for_root_elements);
 
  /// \short The distributed matrix distribution method
- /// \n 1 - Automatic - the Problem distribution is employed, unless any
+ ///  1 - Automatic - the Problem distribution is employed, unless any
  /// processor has number of rows equal to 110% of N/P, in which case
  /// uniform distribution is employed.
- /// \n 2 - Problem - the jacobian on processor p only contains rows that
+ ///  2 - Problem - the jacobian on processor p only contains rows that
  /// correspond to equations that are on this processor. (minimises 
  /// communication)
- /// \n 3 - Uniform - each processor holds as close to N/P matrix rows as 
+ ///  3 - Uniform - each processor holds as close to N/P matrix rows as 
  /// possible. (very well load balanced)
  Distributed_problem_matrix_distribution Dist_problem_matrix_distribution;
 

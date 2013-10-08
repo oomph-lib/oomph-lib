@@ -676,7 +676,7 @@ class DenseMatrix;
 /// \short MPI_Helpers class contains static helper methods to support MPI 
 /// within oomph-lib. The methods init(...) and finalize() initialize and 
 /// finalize MPI in oomph-lib and manage the oomph-libs global communicator
-/// communicator_pt().\n
+/// communicator_pt().
 /// NOTE: This class encapsulates static helper methods and instances of it 
 /// CANNOT be instantiated.
 //=====================================================================
@@ -685,14 +685,14 @@ class MPI_Helpers
 
   public:
 
- /// \short initialise mpi (oomph-libs equivalent of MPI_Init(...)) \n
+ /// \short initialise mpi (oomph-libs equivalent of MPI_Init(...)) 
  /// Initialises MPI and creates the global oomph-lib communicator.
  /// If optional boolean flag is set to false, we use
  /// MPI_COMM_WORLD itself as oomph-lib's communicator. Defaults to true.
  static void init(int argc, char **argv, 
                   const bool& make_duplicate_of_mpi_comm_world=true);
 
- /// finalize mpi (oomph-lib equivalent of MPI_Finalize()) \n
+ /// finalize mpi (oomph-lib equivalent of MPI_Finalize()) 
  /// Deletes the global oomph-lib communicator and finalizes MPI.
  static void finalize();
 

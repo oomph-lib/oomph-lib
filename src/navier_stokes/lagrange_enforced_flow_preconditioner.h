@@ -55,43 +55,43 @@ namespace oomph
 /// \short The preconditioner for the Lagrange multiplier constrained
 /// Navier-Stokes equations. The velocity components are constrained by
 /// Lagrange multiplier, which are applied via OOMPH-LIB's FACE elements.
-/// \n\n
+/// 
 /// A Vector of meshes is taken, each mesh contains a different type of
 /// block preconditionable element. Each element must not only classify it's 
 /// own degrees of freedom but also the associated dof from the 'bulk' element.
-/// \n
+/// 
 /// The first mesh in the Vector Mesh_pt is assumed to be the 'bulk' mesh.
 /// The rest are assumed to contain FACEELMENTS applying the required 
 /// constraint.
-/// \n
-/// Thus the most general block structure (in 3D) is: \n
-/// \n
-///  0 1 2 3   4 5 6 7  8  ..x   x+0 x+1 x+2 x+3 x+4 \n
-/// [u v w p] [u v w l1 l2 ...] [u   v   w   l1  l2 ...] ... \n
-///   Bulk       Surface 1             Surface 2         ... \n
-/// \n
+/// 
+/// Thus the most general block structure (in 3D) is: 
+/// 
+///  0 1 2 3   4 5 6 7  8  ..x   x+0 x+1 x+2 x+3 x+4 
+/// [u v w p] [u v w l1 l2 ...] [u   v   w   l1  l2 ...] ... 
+///   Bulk       Surface 1             Surface 2         ... 
+/// 
 /// where the dof types in [] are the dof types in each mesh.
 /// It is assumed that in all surface mesh (after the bulk mesh), the first
 /// spatial dimension number of dof types are the constrained velocity.
-/// \n\n
+/// 
 /// Consider the case of imposing parallel outflow (3 constrained velocity
 /// dof types and 2 lagrange multiplier dof types) and tangential flow (3
 /// constrained velocity dof types and 1 lagrange multiplier dof type)
 /// along two different boundaries in 3D. The resulting natural block dof
-/// type structure is: \n
-/// [0 1 2 3] [4  5  6   7   8 ] [9  10 11 12 ]\n
-/// [u v w p] [up vp wp Lp1 Lp2] [ut vt wt Lt1]\n
-/// \n
+/// type structure is: 
+/// [0 1 2 3] [4  5  6   7   8 ] [9  10 11 12 ]
+/// [u v w p] [up vp wp Lp1 Lp2] [ut vt wt Lt1]
+/// 
 /// Given that we know the spatial dimension of the problem, this information
 /// can be conveniently stored in a Vector N_doftype_in_mesh = [4, 5, 4]. This
 /// Vector will be used to re-order the dof types to group together the
-/// velocity, pressure, then lagrange dof types like so: \n
-/// \n
-///  0 4  9  1 5  10  2 6  11    3    7   8  12   \n
-/// [u up ut v vp vt  w wp wt ] [p] [Lp1 Lp2 Lt1] \n
+/// velocity, pressure, then lagrange dof types like so: 
+/// 
+///  0 4  9  1 5  10  2 6  11    3    7   8  12   
+/// [u up ut v vp vt  w wp wt ] [p] [Lp1 Lp2 Lt1] 
 ///
-///    0 4  9  1 5  10  2 6  11  3  7   8  12   \n
-///    u up ut v vp vt  w wp wt  p Lp1 Lp2 Lt1  \n
+///    0 4  9  1 5  10  2 6  11  3  7   8  12   
+///    u up ut v vp vt  w wp wt  p Lp1 Lp2 Lt1  
 ///  ..... this is too hard to do without Latex....
 ///
 /// We use the preconditioner in the form... check my first year report...

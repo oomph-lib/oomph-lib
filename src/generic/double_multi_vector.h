@@ -50,9 +50,9 @@ namespace oomph
 
 //=============================================================================
 /// \short A multi vector in the mathematical sense, initially developed for
-/// linear algebra type applications.\n
+/// linear algebra type applications.
 /// If MPI then this multi vector can be distributed - its distribution is 
-/// described by the LinearAlgebraDistribution object at Distribution_pt. \n
+/// described by the LinearAlgebraDistribution object at Distribution_pt. 
 /// Data is stored in a C-style pointer vector (double*)
 //=============================================================================
  class DoubleMultiVector : public DistributableLinearAlgebraObject
@@ -375,7 +375,7 @@ namespace oomph
     }
   }
 
- /// \short initialise the vector with coefficient from the vector v.\n
+ /// \short initialise the vector with coefficient from the vector v.
  /// Note: The vector v must be of length 
  //void initialise(const Vector<double> v);
 
@@ -405,12 +405,12 @@ namespace oomph
  // indicates whether this DoubleVector is built
  bool built() const { return Built; }
 
- /// \short Allows are external data to be used by this vector. \n
+ /// \short Allows are external data to be used by this vector. 
  /// WARNING: The size of the external data must correspond to the 
  /// LinearAlgebraDistribution dist_pt argument.
- /// 1. When a rebuild method is called new internal values are created.\n
+ /// 1. When a rebuild method is called new internal values are created.
  /// 2. It is not possible to redistribute(...) a vector with external
- /// values \n.
+ /// values .
  /// 3. External values are only deleted by this vector if
  /// delete_external_values = true.
  /*void set_external_values(const LinearAlgebraDistribution* const& dist_pt,
@@ -427,12 +427,12 @@ namespace oomph
    set_external_values(external_values,delete_external_values);
    }*/
  
- /// \short Allows are external data to be used by this vector. \n
+ /// \short Allows are external data to be used by this vector. 
  /// WARNING: The size of the external data must correspond to the 
  /// distribution of this vector.
- /// 1. When a rebuild method is called new internal values are created.\n
+ /// 1. When a rebuild method is called new internal values are created.
  /// 2. It is not possible to redistribute(...) a vector with external
- /// values \n.
+ /// values .
  /// 3. External values are only deleted by this vector if
  /// delete_external_values = true.
  /*void set_external_values(double* external_values, 
@@ -463,9 +463,9 @@ namespace oomph
    }*/
 
  /// \short The contents of the vector are redistributed to match the new
- /// distribution. In a non-MPI rebuild this method works, but does nothing. \n
+ /// distribution. In a non-MPI rebuild this method works, but does nothing. 
  /// \b NOTE 1: The current distribution and the new distribution must have
- /// the same number of global rows.\n
+ /// the same number of global rows.
  /// \b NOTE 2: The current distribution and the new distribution must have
  /// the same Communicator.
  void redistribute(const LinearAlgebraDistribution* const& dist_pt);

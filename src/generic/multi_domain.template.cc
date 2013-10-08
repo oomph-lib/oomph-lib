@@ -68,7 +68,7 @@ namespace oomph
  /// \c bulk_mesh_pt. The \c FaceElements must be derived
  /// from the \c ElementWithExternalElement base class and the adjacent
  /// bulk elements are stored as their external elements.
- /// \n
+ /// 
  /// This is the vector-based version which deals with multiple bulk 
  /// mesh boundaries at the same time.
  //============================================================================

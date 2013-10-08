@@ -117,7 +117,7 @@ c     Specify multiplier for workspace scaling factor. Default is 2.
 c======================================================================
       subroutine mumps_set_workspace_scaling_factor(i_pool,s)
 
-      use mumps_module
+      use mumps_module 
 
       integer i_pool
       double precision s
@@ -186,13 +186,15 @@ c======================================================================
 
       integer n, nz_loc
       integer irn_loc(nz_loc), jcn_loc(nz_loc)
+      integer initial_workspace_scaling_factor
       double precision a_loc(nz_loc), rhs(n)
 
 c.....Range checking       
       call mumps_catch_wrong_id(i_pool)
       
 C.....call mumps_setup
-      call mumps_setup(i_pool)
+      initial_workspace_scaling_factor=2
+      call mumps_setup(i_pool,initial_workspace_scaling_factor)
       
 C.....analyse/factorise
       call mumps_factorise(i_pool,n,nz_loc,irn_loc,jcn_loc,a_loc)

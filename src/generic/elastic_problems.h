@@ -73,8 +73,8 @@ public:
 /// We switch the elements' residuals and Jacobians to the system of
 /// equations that forces the wall shape to become that of
 /// a specified "initial condition object".
-/// \n
-/// \n
+/// 
+/// 
 /// Boundary conditions for all data items associated with the mesh's
 /// elements' are temporarily overwritten so that all positional dofs (and
 /// only those!) become free while all other data (nodal data and the element's
@@ -85,8 +85,8 @@ public:
 /// can feature as external data of others. Hence pinning them
 /// in their incarnation as external data would also pin them 
 /// in their incarnation as positional data.
-/// \n
-/// \n
+/// 
+/// 
 /// All data and its pinned-status are restored at the end of the
 /// call to setup_ic().
 //======================================================================

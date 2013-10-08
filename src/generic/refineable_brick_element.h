@@ -173,7 +173,7 @@ public:
  /// \short Determine Vector of boundary conditions along the element's 
  /// face (R/L/U/D/B/F) -- BC is the least restrictive combination 
  /// of all the nodes on this face.
- /// \n
+ /// 
  /// Usual convention: 
  ///   - bound_cons[ival]=0 if value ival on this boundary is free 
  ///   - bound_cons[ival]=1 if value ival on this boundary is pinned
@@ -182,7 +182,7 @@ public:
  /// Given an element edge/vertex, return a Vector which contains
  /// all the (mesh-)boundary numbers that this element edge/vertex 
  /// lives on.
- /// \n
+ /// 
  /// For proper edges, the boundary is the one (if any) that is shared by
  /// both vertex nodes). For vertex nodes, we just return their
  /// boundaries.
@@ -190,7 +190,7 @@ public:
  
  /// \short Determine Vector of boundary conditions along the element's 
  /// boundary (or vertex) bound (S/W/N/E/SW/SE/NW/NE). 
- /// \n
+ /// 
  /// This function assumes that the same boundary condition is applied
  /// along the entire area of an element's face (of course, the
  /// vertices combine the boundary conditions of their two adjacent edges
@@ -199,7 +199,7 @@ public:
  /// two adjacent edges. If we're on an edge (in its proper interior), 
  /// we apply the least restrictive boundary condition of all nodes 
  /// along the edge.
- /// \n
+ /// 
  /// Usual convention: 
  ///   - bound_cons[ival]=0 if value ival on this boundary is free 
  ///   - bound_cons[ival]=1 if value ival on this boundary is pinned

@@ -81,21 +81,21 @@ namespace oomph
 /// \short PreconditionerArray -
 /// NOTE - first implementation, a number of assumptions / simplifications
 /// were made:
-/// 1. Only works with CRDoubleMatrices \n
+/// 1. Only works with CRDoubleMatrices 
 /// 2. The number of processors must be greater than the number of
-///    preconditioners \n
+///    preconditioners 
 /// 3. Currently only very crude load balancing - each preconditioner will
 ///    be setup and applied with the same number of processors (or as near to
-///    as possible to the same number of processors) \n
+///    as possible to the same number of processors) 
 /// 4. This class will, at the appropriate time, delete the all the
-///    Preconditioners passed setup_preconditioners(...) \n
+///    Preconditioners passed setup_preconditioners(...) 
 /// 5. (but) Deletion of matrices passed to setup_preconditioners(...) is NOT
-///    performed by this class \n
+///    performed by this class 
 /// 6. It is assumed that preconditioners do not require access to matrix
-///    once setup(...) is called \n
+///    once setup(...) is called 
 /// 7. The matrix on the subset of processors will be the same type
 ///    (distributed or global) as the matrix passed to
-///    setup_preconditioners(...) \n
+///    setup_preconditioners(...) 
 /// 8. If the matrix is a distributed matrix - it will be assembled with
 ///    a uniform distribution on the subset of processors.
 //=============================================================================
@@ -131,9 +131,9 @@ namespace oomph
     }
 
    /// \short Setup the preconditioners. Sets up each preconditioner in the
-   /// array for the corresponding matrix in the vector matrix_pt.\n
+   /// array for the corresponding matrix in the vector matrix_pt.
    /// The number of preconditioners in the array is taken to be the length of
-   /// prec_pt \n
+   /// prec_pt 
    /// The preconditioners that are not used on this processor are deleted.
    void setup_preconditioners(Vector<CRDoubleMatrix*> matrix_pt,
                               Vector<Preconditioner*> prec_pt,
@@ -235,7 +235,7 @@ namespace oomph
 #endif
 
    /// \short the communication method in the setup_preconditioners(...) method
-   /// 1. Non-blocking Send with Blocking Recv \n
+   /// 1. Non-blocking Send with Blocking Recv 
    /// 2. MPI_Datatypes with Non-blocking sends and receives
    unsigned Method;
 

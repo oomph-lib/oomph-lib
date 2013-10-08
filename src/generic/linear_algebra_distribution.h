@@ -52,14 +52,14 @@ namespace oomph{
 //=============================================================================
 /// \short Describes the distribution of a distributable linear algebra type 
 /// object. Typically this is a container (such as a DoubleVector) or an 
-/// operator (e.g Preconditioner or LinearSolver). \n
+/// operator (e.g Preconditioner or LinearSolver). 
 /// This object is used in both serial and parallel implementations. In the 
 /// serial context (no MPI) this just contains an integer indicating
-/// the number of rows. \n
+/// the number of rows. 
 /// In parallel either each processor holds a subset of the set of global rows.
 /// (each processor contains only a single continuous block of rows - 
 /// parametised with variables denoting the first row and the number of local 
-/// rows) or, all rows are be duplicated across all processors. \n
+/// rows) or, all rows are be duplicated across all processors. 
 /// In parallel this object also contains an OomphCommunicator object which 
 /// primarily contains the MPI_Comm communicator associated with this object.
 //=============================================================================
@@ -178,11 +178,11 @@ class LinearAlgebraDistribution
 	    const unsigned& nrow,
 	    const bool& distributed = true);
  
- /// \short Copy the argument distribution.\n
+ /// \short Copy the argument distribution.
  /// Also a helper method for the =assignment operator and copy constructor
  void build(const LinearAlgebraDistribution& new_dist);
 
- /// \short Copy the argument distribution.\n
+ /// \short Copy the argument distribution.
  /// Also a helper method for the =assignment operator and copy constructor
  void build(const LinearAlgebraDistribution* new_dist_pt)
   {
@@ -570,35 +570,35 @@ class LinearAlgebraDistribution
   /// concatenates them such that the nrow_local of the out_distribution
   /// is the sum of the nrow_local of all the in_distributions and the number
   /// of global rows of the out_distribution is the sum of the number of global
-  /// rows of all the in_distributions. \n
+  /// rows of all the in_distributions. 
   /// This results in a permuation of the rows in the out_distribution. 
   /// Think of this in terms of DoubleVectors, if we have DoubleVectors with 
-  /// distributions A and B, distributed across two processors (p0 and p1),\n
-  /// A: [a0] (on p0)    B: [b0] (on p0) \n
-  ///    [a1] (on p1)       [b1] (on P1), \n
-  /// \n
-  /// then the out_distribution is\n
-  /// [a0  (on p0) \n
-  ///  b0] (on p0) \n
-  /// [a1  (on p1) \n
-  ///  b1] (on p1), \n
-  /// \n
-  /// as opposed to \n
-  /// [a0  (on p0) \n
-  ///  a1] (on p0) \n
-  /// [b0  (on p1) \n
-  ///  b1] (on p1). \n
-  /// \n
+  /// distributions A and B, distributed across two processors (p0 and p1),
+  /// A: [a0] (on p0)    B: [b0] (on p0) 
+  ///    [a1] (on p1)       [b1] (on P1), 
+  /// 
+  /// then the out_distribution is
+  /// [a0  (on p0) 
+  ///  b0] (on p0) 
+  /// [a1  (on p1) 
+  ///  b1] (on p1), 
+  /// 
+  /// as opposed to 
+  /// [a0  (on p0) 
+  ///  a1] (on p0) 
+  /// [b0  (on p1) 
+  ///  b1] (on p1). 
+  /// 
   /// Note (1): The out_distribution may not be uniformly distributed even
-  /// if the the in_distributions are uniform distributions.\n 
+  /// if the the in_distributions are uniform distributions. 
   /// Try this out with two distributions of global rows 3 and 5, uniformly
   /// distributed across two processors. Compare this against a distribution
-  /// of global row 8 distributed across two processors.\n
-  /// \n
+  /// of global row 8 distributed across two processors.
+  /// 
   /// Note (2): There is no equivalent function which takes a Vector of
   /// LinearAlgebraDistribution objects (as opposed to pointers), there should
   /// not be one since we do not want to invoke the assignment operator when
-  /// creating the Vector of LinearAlgebraDistribution objects.\n
+  /// creating the Vector of LinearAlgebraDistribution objects.
   void concatenate(const Vector<LinearAlgebraDistribution*> &in_distribution_pt,
                    LinearAlgebraDistribution &out_distribution);
  }

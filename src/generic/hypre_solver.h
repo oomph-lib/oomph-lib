@@ -81,11 +81,11 @@ namespace oomph
    int check_HYPRE_error_flag(std::ostringstream& message);
    
    /// \short Helper function to create a HYPRE_IJVector and HYPRE_ParVector.
-   /// + If no MPI then serial vectors are created\n
+   /// + If no MPI then serial vectors are created
    /// + If MPI and serial input vector then distributed hypre vectors are 
-   ///   created\n
+   ///   created
    /// + If MPI and distributed input vector the distributed output vectors
-   ///   are created.\n
+   ///   are created.
    extern void create_HYPRE_Vector(const DoubleVector& oomph_vec,
                             const LinearAlgebraDistribution* dist_pt,
                             HYPRE_IJVector& hypre_ij_vector,
@@ -93,11 +93,11 @@ namespace oomph
 
    /// \short Helper function to create an empty HYPRE_IJVector and 
    /// HYPRE_ParVector.
-   /// + If no MPI then serial vectors are created\n
+   /// + If no MPI then serial vectors are created
    /// + If MPI and serial distribution then distributed hypre vectors are 
-   ///   created\n
+   ///   created
    /// + If MPI and distributed input distribution the distributed output 
-   ///   vectors are created.\n
+   ///   vectors are created.
    void create_HYPRE_Vector(const LinearAlgebraDistribution* oomph_vec,
                             HYPRE_IJVector& hypre_ij_vector,
                             HYPRE_ParVector& hypre_par_vector);
@@ -684,9 +684,9 @@ namespace oomph
 
    /// \short Function to solve the linear system defined by matrix_pt
    /// and rhs. This function will delete any existing internal data
-   /// and generate a new Hypre solver.  \n \n
+   /// and generate a new Hypre solver.   
    /// \b Note: The matrix has to be of type CRDoubleMatrix or
-   /// Distributed CRDoubleMatrix.  \n \n
+   /// Distributed CRDoubleMatrix.   
    /// \b Note: Hypre copies matrix data from oomph-lib's CRDoubleMatrix
    /// or DistributedCRDoubleMatrix into its own data structures, 
    /// doubling the memory requirements for the matrix.
@@ -999,7 +999,7 @@ namespace oomph
    /// HyprePreconditioner to be used as a Preconditioner object 
    /// for oomph-lib's own IterativeLinearSolver class.
    /// \b Note: matrix_pt must point to an object of type
-   /// CRDoubleMatrix or DistributedCRDoubleMatrix. \n \n
+   /// CRDoubleMatrix or DistributedCRDoubleMatrix.  
    /// \b Note: Hypre copies matrix data from oomph-lib's CRDoubleMatrix
    /// and DistributedCRDoubleMatrix into its own data structures,
    /// doubling the memory requirements for the matrix.
@@ -1011,7 +1011,7 @@ namespace oomph
    void setup();
 
    /// \short Function applies solver to vector r for preconditioning.
-   /// This requires a call to setup(...) first.\n  \n
+   /// This requires a call to setup(...) first.  
    /// \b Note: Hypre copies matrix data from oomph-lib's CRDoubleMatrix
    /// or DistributedCRDoubleMatrix into its own data structures, 
    /// doubling the memory requirements for the matrix.

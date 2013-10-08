@@ -53,7 +53,7 @@ namespace oomph
 {
  
 //=============================================================================
-/// Base class for Trilinos preconditioners as oomph-lib preconditioner.\n
+/// Base class for Trilinos preconditioners as oomph-lib preconditioner.
 //=============================================================================
  class TrilinosPreconditionerBase : public Preconditioner
   {
@@ -105,14 +105,14 @@ namespace oomph
 
    /// \short Function to set up a preconditioner for the linear system 
    /// defined by matrix_pt. This function must be called before using 
-   /// preconditioner_solve. \n
+   /// preconditioner_solve. 
    /// \b NOTE 1. matrix_pt must point to an object of class CRDoubleMatrix or 
-   /// DistributedCRDoubleMatrix\n
+   /// DistributedCRDoubleMatrix
    /// This method should be called by oomph-lib solvers and preconditioners
    void setup();
 
    /// \short Function to setup a preconditioner for the linear system defined
-   /// by the oomph-lib oomph_matrix_pt and Epetra epetra_matrix_pt matrices.\n
+   /// by the oomph-lib oomph_matrix_pt and Epetra epetra_matrix_pt matrices.
    /// This method is called by Trilinos solvers.
    void setup(Epetra_CrsMatrix* epetra_matrix_pt);
    
@@ -120,14 +120,14 @@ namespace oomph
    void preconditioner_solve(const DoubleVector& r,
                              DoubleVector &z);
 
-   /// Access function to Epetra_preconditioner_pt.\n
+   /// Access function to Epetra_preconditioner_pt.
    /// For use with \c TrilinosAztecOOSolver
    Epetra_Operator*& epetra_operator_pt()
     {
      return Epetra_preconditioner_pt;
     }
  
-   /// Access function to Epetra_preconditioner_pt (const version) \n
+   /// Access function to Epetra_preconditioner_pt (const version) 
    /// For use with \c TrilinosAztecOOSolver
    Epetra_Operator* epetra_operator_pt() const 
     {

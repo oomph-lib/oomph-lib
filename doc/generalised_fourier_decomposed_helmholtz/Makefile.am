@@ -1,1 +1,1 @@
-# Dummy Makefile.am
+SUBDIRS = oscillating_sphere

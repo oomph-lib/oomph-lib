@@ -24,4 +24,5 @@ EXTRA_DIST+=fluid.poly solid.poly fluid.1.ele  fluid.1.face  \
             solid_quadratic_nodes.dat \
             boundary_enumeration.dat \
             three_d_unstructured_fluid.mcr \
-            three_d_unstructured_solid.mcr
+            three_d_unstructured_solid.mcr \
+            show_snap.mcr .vtp_to_tetgen_replies.txt vmtk_files

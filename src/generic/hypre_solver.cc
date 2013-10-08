@@ -266,7 +266,7 @@ namespace oomph
 
 //========================================================================
 /// Helper function to create a serial HYPRE_IJMatrix and
-/// HYPRE_ParCSRMatrix from a CRDoubleMatrix\n
+/// HYPRE_ParCSRMatrix from a CRDoubleMatrix
 /// NOTE: dist_pt is rebuilt to match the distribution of the hypre solver
 /// which is not necassarily the same as the oomph lib matrix
 //========================================================================

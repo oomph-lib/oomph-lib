@@ -1,881 +1,845 @@
-%!PS-Adobe-2.0 EPSF-2.0
-%%Title: two_layer_interface_axisym-time_trace.eps
-%%Creator: gnuplot 4.0 patchlevel 0
-%%CreationDate: Thu Oct  8 15:15:34 2009
-%%DocumentFonts: (atend)
-%%BoundingBox: 50 50 410 302
-%%Orientation: Portrait
+%!PS-Adobe-3.0 EPSF-3.0
+%%Creator: (ImageMagick)
+%%Title: (two_layer_interface_axisym-time_trace.eps)
+%%CreationDate: (2013-09-07T16:46:49+01:00)
+%%BoundingBox: -0 -0 500 350
+%%HiResBoundingBox: 0 0 500 350
+%%DocumentData: Clean7Bit
+%%LanguageLevel: 1
+%%Pages: 1
 %%EndComments
-/gnudict 256 dict def
-gnudict begin
-/Color false def
-/Solid false def
-/gnulinewidth 5.000 def
-/userlinewidth gnulinewidth def
-/vshift -46 def
-/dl {10.0 mul} def
-/hpt_ 31.5 def
-/vpt_ 31.5 def
-/hpt hpt_ def
-/vpt vpt_ def
-/Rounded false def
-/M {moveto} bind def
-/L {lineto} bind def
-/R {rmoveto} bind def
-/V {rlineto} bind def
-/N {newpath moveto} bind def
-/C {setrgbcolor} bind def
-/f {rlineto fill} bind def
-/vpt2 vpt 2 mul def
-/hpt2 hpt 2 mul def
-/Lshow { currentpoint stroke M
-  0 vshift R show } def
-/Rshow { currentpoint stroke M
-  dup stringwidth pop neg vshift R show } def
-/Cshow { currentpoint stroke M
-  dup stringwidth pop -2 div vshift R show } def
-/UP { dup vpt_ mul /vpt exch def hpt_ mul /hpt exch def
-  /hpt2 hpt 2 mul def /vpt2 vpt 2 mul def } def
-/DL { Color {setrgbcolor Solid {pop []} if 0 setdash }
- {pop pop pop 0 setgray Solid {pop []} if 0 setdash} ifelse } def
-/BL { stroke userlinewidth 2 mul setlinewidth
-      Rounded { 1 setlinejoin 1 setlinecap } if } def
-/AL { stroke userlinewidth 2 div setlinewidth
-      Rounded { 1 setlinejoin 1 setlinecap } if } def
-/UL { dup gnulinewidth mul /userlinewidth exch def
-      dup 1 lt {pop 1} if 10 mul /udl exch def } def
-/PL { stroke userlinewidth setlinewidth
-      Rounded { 1 setlinejoin 1 setlinecap } if } def
-/LTw { PL [] 1 setgray } def
-/LTb { BL [] 0 0 0 DL } def
-/LTa { AL [1 udl mul 2 udl mul] 0 setdash 0 0 0 setrgbcolor } def
-/LT0 { PL [] 1 0 0 DL } def
-/LT1 { PL [4 dl 2 dl] 0 1 0 DL } def
-/LT2 { PL [2 dl 3 dl] 0 0 1 DL } def
-/LT3 { PL [1 dl 1.5 dl] 1 0 1 DL } def
-/LT4 { PL [5 dl 2 dl 1 dl 2 dl] 0 1 1 DL } def
-/LT5 { PL [4 dl 3 dl 1 dl 3 dl] 1 1 0 DL } def
-/LT6 { PL [2 dl 2 dl 2 dl 4 dl] 0 0 0 DL } def
-/LT7 { PL [2 dl 2 dl 2 dl 2 dl 2 dl 4 dl] 1 0.3 0 DL } def
-/LT8 { PL [2 dl 2 dl 2 dl 2 dl 2 dl 2 dl 2 dl 4 dl] 0.5 0.5 0.5 DL } def
-/Pnt { stroke [] 0 setdash
-   gsave 1 setlinecap M 0 0 V stroke grestore } def
-/Dia { stroke [] 0 setdash 2 copy vpt add M
-  hpt neg vpt neg V hpt vpt neg V
-  hpt vpt V hpt neg vpt V closepath stroke
-  Pnt } def
-/Pls { stroke [] 0 setdash vpt sub M 0 vpt2 V
-  currentpoint stroke M
-  hpt neg vpt neg R hpt2 0 V stroke
-  } def
-/Box { stroke [] 0 setdash 2 copy exch hpt sub exch vpt add M
-  0 vpt2 neg V hpt2 0 V 0 vpt2 V
-  hpt2 neg 0 V closepath stroke
-  Pnt } def
-/Crs { stroke [] 0 setdash exch hpt sub exch vpt add M
-  hpt2 vpt2 neg V currentpoint stroke M
-  hpt2 neg 0 R hpt2 vpt2 V stroke } def
-/TriU { stroke [] 0 setdash 2 copy vpt 1.12 mul add M
-  hpt neg vpt -1.62 mul V
-  hpt 2 mul 0 V
-  hpt neg vpt 1.62 mul V closepath stroke
-  Pnt  } def
-/Star { 2 copy Pls Crs } def
-/BoxF { stroke [] 0 setdash exch hpt sub exch vpt add M
-  0 vpt2 neg V  hpt2 0 V  0 vpt2 V
-  hpt2 neg 0 V  closepath fill } def
-/TriUF { stroke [] 0 setdash vpt 1.12 mul add M
-  hpt neg vpt -1.62 mul V
-  hpt 2 mul 0 V
-  hpt neg vpt 1.62 mul V closepath fill } def
-/TriD { stroke [] 0 setdash 2 copy vpt 1.12 mul sub M
-  hpt neg vpt 1.62 mul V
-  hpt 2 mul 0 V
-  hpt neg vpt -1.62 mul V closepath stroke
-  Pnt  } def
-/TriDF { stroke [] 0 setdash vpt 1.12 mul sub M
-  hpt neg vpt 1.62 mul V
-  hpt 2 mul 0 V
-  hpt neg vpt -1.62 mul V closepath fill} def
-/DiaF { stroke [] 0 setdash vpt add M
-  hpt neg vpt neg V hpt vpt neg V
-  hpt vpt V hpt neg vpt V closepath fill } def
-/Pent { stroke [] 0 setdash 2 copy gsave
-  translate 0 hpt M 4 {72 rotate 0 hpt L} repeat
-  closepath stroke grestore Pnt } def
-/PentF { stroke [] 0 setdash gsave
-  translate 0 hpt M 4 {72 rotate 0 hpt L} repeat
-  closepath fill grestore } def
-/Circle { stroke [] 0 setdash 2 copy
-  hpt 0 360 arc stroke Pnt } def
-/CircleF { stroke [] 0 setdash hpt 0 360 arc fill } def
-/C0 { BL [] 0 setdash 2 copy moveto vpt 90 450  arc } bind def
-/C1 { BL [] 0 setdash 2 copy        moveto
-       2 copy  vpt 0 90 arc closepath fill
-               vpt 0 360 arc closepath } bind def
-/C2 { BL [] 0 setdash 2 copy moveto
-       2 copy  vpt 90 180 arc closepath fill
-               vpt 0 360 arc closepath } bind def
-/C3 { BL [] 0 setdash 2 copy moveto
-       2 copy  vpt 0 180 arc closepath fill
-               vpt 0 360 arc closepath } bind def
-/C4 { BL [] 0 setdash 2 copy moveto
-       2 copy  vpt 180 270 arc closepath fill
-               vpt 0 360 arc closepath } bind def
-/C5 { BL [] 0 setdash 2 copy moveto
-       2 copy  vpt 0 90 arc
-       2 copy moveto
-       2 copy  vpt 180 270 arc closepath fill
-               vpt 0 360 arc } bind def
-/C6 { BL [] 0 setdash 2 copy moveto
-      2 copy  vpt 90 270 arc closepath fill
-              vpt 0 360 arc closepath } bind def
-/C7 { BL [] 0 setdash 2 copy moveto
-      2 copy  vpt 0 270 arc closepath fill
-              vpt 0 360 arc closepath } bind def
-/C8 { BL [] 0 setdash 2 copy moveto
-      2 copy vpt 270 360 arc closepath fill
-              vpt 0 360 arc closepath } bind def
-/C9 { BL [] 0 setdash 2 copy moveto
-      2 copy  vpt 270 450 arc closepath fill
-              vpt 0 360 arc closepath } bind def
-/C10 { BL [] 0 setdash 2 copy 2 copy moveto vpt 270 360 arc closepath fill
-       2 copy moveto
-       2 copy vpt 90 180 arc closepath fill
-               vpt 0 360 arc closepath } bind def
-/C11 { BL [] 0 setdash 2 copy moveto
-       2 copy  vpt 0 180 arc closepath fill
-       2 copy moveto
-       2 copy  vpt 270 360 arc closepath fill
-               vpt 0 360 arc closepath } bind def
-/C12 { BL [] 0 setdash 2 copy moveto
-       2 copy  vpt 180 360 arc closepath fill
-               vpt 0 360 arc closepath } bind def
-/C13 { BL [] 0 setdash  2 copy moveto
-       2 copy  vpt 0 90 arc closepath fill
-       2 copy moveto
-       2 copy  vpt 180 360 arc closepath fill
-               vpt 0 360 arc closepath } bind def
-/C14 { BL [] 0 setdash 2 copy moveto
-       2 copy  vpt 90 360 arc closepath fill
-               vpt 0 360 arc } bind def
-/C15 { BL [] 0 setdash 2 copy vpt 0 360 arc closepath fill
-               vpt 0 360 arc closepath } bind def
-/Rec   { newpath 4 2 roll moveto 1 index 0 rlineto 0 exch rlineto
-       neg 0 rlineto closepath } bind def
-/Square { dup Rec } bind def
-/Bsquare { vpt sub exch vpt sub exch vpt2 Square } bind def
-/S0 { BL [] 0 setdash 2 copy moveto 0 vpt rlineto BL Bsquare } bind def
-/S1 { BL [] 0 setdash 2 copy vpt Square fill Bsquare } bind def
-/S2 { BL [] 0 setdash 2 copy exch vpt sub exch vpt Square fill Bsquare } bind def
-/S3 { BL [] 0 setdash 2 copy exch vpt sub exch vpt2 vpt Rec fill Bsquare } bind def
-/S4 { BL [] 0 setdash 2 copy exch vpt sub exch vpt sub vpt Square fill Bsquare } bind def
-/S5 { BL [] 0 setdash 2 copy 2 copy vpt Square fill
-       exch vpt sub exch vpt sub vpt Square fill Bsquare } bind def
-/S6 { BL [] 0 setdash 2 copy exch vpt sub exch vpt sub vpt vpt2 Rec fill Bsquare } bind def
-/S7 { BL [] 0 setdash 2 copy exch vpt sub exch vpt sub vpt vpt2 Rec fill
-       2 copy vpt Square fill
-       Bsquare } bind def
-/S8 { BL [] 0 setdash 2 copy vpt sub vpt Square fill Bsquare } bind def
-/S9 { BL [] 0 setdash 2 copy vpt sub vpt vpt2 Rec fill Bsquare } bind def
-/S10 { BL [] 0 setdash 2 copy vpt sub vpt Square fill 2 copy exch vpt sub exch vpt Square fill
-       Bsquare } bind def
-/S11 { BL [] 0 setdash 2 copy vpt sub vpt Square fill 2 copy exch vpt sub exch vpt2 vpt Rec fill
-       Bsquare } bind def
-/S12 { BL [] 0 setdash 2 copy exch vpt sub exch vpt sub vpt2 vpt Rec fill Bsquare } bind def
-/S13 { BL [] 0 setdash 2 copy exch vpt sub exch vpt sub vpt2 vpt Rec fill
-       2 copy vpt Square fill Bsquare } bind def
-/S14 { BL [] 0 setdash 2 copy exch vpt sub exch vpt sub vpt2 vpt Rec fill
-       2 copy exch vpt sub exch vpt Square fill Bsquare } bind def
-/S15 { BL [] 0 setdash 2 copy Bsquare fill Bsquare } bind def
-/D0 { gsave translate 45 rotate 0 0 S0 stroke grestore } bind def
-/D1 { gsave translate 45 rotate 0 0 S1 stroke grestore } bind def
-/D2 { gsave translate 45 rotate 0 0 S2 stroke grestore } bind def
-/D3 { gsave translate 45 rotate 0 0 S3 stroke grestore } bind def
-/D4 { gsave translate 45 rotate 0 0 S4 stroke grestore } bind def
-/D5 { gsave translate 45 rotate 0 0 S5 stroke grestore } bind def
-/D6 { gsave translate 45 rotate 0 0 S6 stroke grestore } bind def
-/D7 { gsave translate 45 rotate 0 0 S7 stroke grestore } bind def
-/D8 { gsave translate 45 rotate 0 0 S8 stroke grestore } bind def
-/D9 { gsave translate 45 rotate 0 0 S9 stroke grestore } bind def
-/D10 { gsave translate 45 rotate 0 0 S10 stroke grestore } bind def
-/D11 { gsave translate 45 rotate 0 0 S11 stroke grestore } bind def
-/D12 { gsave translate 45 rotate 0 0 S12 stroke grestore } bind def
-/D13 { gsave translate 45 rotate 0 0 S13 stroke grestore } bind def
-/D14 { gsave translate 45 rotate 0 0 S14 stroke grestore } bind def
-/D15 { gsave translate 45 rotate 0 0 S15 stroke grestore } bind def
-/DiaE { stroke [] 0 setdash vpt add M
-  hpt neg vpt neg V hpt vpt neg V
-  hpt vpt V hpt neg vpt V closepath stroke } def
-/BoxE { stroke [] 0 setdash exch hpt sub exch vpt add M
-  0 vpt2 neg V hpt2 0 V 0 vpt2 V
-  hpt2 neg 0 V closepath stroke } def
-/TriUE { stroke [] 0 setdash vpt 1.12 mul add M
-  hpt neg vpt -1.62 mul V
-  hpt 2 mul 0 V
-  hpt neg vpt 1.62 mul V closepath stroke } def
-/TriDE { stroke [] 0 setdash vpt 1.12 mul sub M
-  hpt neg vpt 1.62 mul V
-  hpt 2 mul 0 V
-  hpt neg vpt -1.62 mul V closepath stroke } def
-/PentE { stroke [] 0 setdash gsave
-  translate 0 hpt M 4 {72 rotate 0 hpt L} repeat
-  closepath stroke grestore } def
-/CircE { stroke [] 0 setdash 
-  hpt 0 360 arc stroke } def
-/Opaque { gsave closepath 1 setgray fill grestore 0 setgray closepath } def
-/DiaW { stroke [] 0 setdash vpt add M
-  hpt neg vpt neg V hpt vpt neg V
-  hpt vpt V hpt neg vpt V Opaque stroke } def
-/BoxW { stroke [] 0 setdash exch hpt sub exch vpt add M
-  0 vpt2 neg V hpt2 0 V 0 vpt2 V
-  hpt2 neg 0 V Opaque stroke } def
-/TriUW { stroke [] 0 setdash vpt 1.12 mul add M
-  hpt neg vpt -1.62 mul V
-  hpt 2 mul 0 V
-  hpt neg vpt 1.62 mul V Opaque stroke } def
-/TriDW { stroke [] 0 setdash vpt 1.12 mul sub M
-  hpt neg vpt 1.62 mul V
-  hpt 2 mul 0 V
-  hpt neg vpt -1.62 mul V Opaque stroke } def
-/PentW { stroke [] 0 setdash gsave
-  translate 0 hpt M 4 {72 rotate 0 hpt L} repeat
-  Opaque stroke grestore } def
-/CircW { stroke [] 0 setdash 
-  hpt 0 360 arc Opaque stroke } def
-/BoxFill { gsave Rec 1 setgray fill grestore } def
-/BoxColFill {
-  gsave Rec
-  /Fillden exch def
-  currentrgbcolor
-  /ColB exch def /ColG exch def /ColR exch def
-  /ColR ColR Fillden mul Fillden sub 1 add def
-  /ColG ColG Fillden mul Fillden sub 1 add def
-  /ColB ColB Fillden mul Fillden sub 1 add def
-  ColR ColG ColB setrgbcolor
-  fill grestore } def
+
+%%BeginDefaults
+%%EndDefaults
+
+%%BeginProlog
 %
-% PostScript Level 1 Pattern Fill routine
-% Usage: x y w h s a XX PatternFill
-%	x,y = lower left corner of box to be filled
-%	w,h = width and height of box
-%	  a = angle in degrees between lines and x-axis
-%	 XX = 0/1 for no/yes cross-hatch
+% Display a color image.  The image is displayed in color on
+% Postscript viewers or printers that support color, otherwise
+% it is displayed as grayscale.
 %
-/PatternFill { gsave /PFa [ 9 2 roll ] def
-    PFa 0 get PFa 2 get 2 div add PFa 1 get PFa 3 get 2 div add translate
-    PFa 2 get -2 div PFa 3 get -2 div PFa 2 get PFa 3 get Rec
-    gsave 1 setgray fill grestore clip
-    currentlinewidth 0.5 mul setlinewidth
-    /PFs PFa 2 get dup mul PFa 3 get dup mul add sqrt def
-    0 0 M PFa 5 get rotate PFs -2 div dup translate
-	0 1 PFs PFa 4 get div 1 add floor cvi
-	{ PFa 4 get mul 0 M 0 PFs V } for
-    0 PFa 6 get ne {
-	0 1 PFs PFa 4 get div 1 add floor cvi
-	{ PFa 4 get mul 0 2 1 roll M PFs 0 V } for
-    } if
-    stroke grestore } def
-%
-/Symbol-Oblique /Symbol findfont [1 0 .167 1 0 0] makefont
-dup length dict begin {1 index /FID eq {pop pop} {def} ifelse} forall
-currentdict end definefont pop
-/MFshow {
-   { dup 5 get 3 ge
-     { 5 get 3 eq {gsave} {grestore} ifelse }
-     {dup dup 0 get findfont exch 1 get scalefont setfont
-     [ currentpoint ] exch dup 2 get 0 exch R dup 5 get 2 ne {dup dup 6
-     get exch 4 get {show} {stringwidth pop 0 R} ifelse }if dup 5 get 0 eq
-     {dup 3 get {2 get neg 0 exch R pop} {pop aload pop M} ifelse} {dup 5
-     get 1 eq {dup 2 get exch dup 3 get exch 6 get stringwidth pop -2 div
-     dup 0 R} {dup 6 get stringwidth pop -2 div 0 R 6 get
-     show 2 index {aload pop M neg 3 -1 roll neg R pop pop} {pop pop pop
-     pop aload pop M} ifelse }ifelse }ifelse }
-     ifelse }
-   forall} bind def
-/MFwidth {0 exch {dup 3 get{dup dup 0 get findfont exch 1 get scalefont
-     setfont 6 get stringwidth pop add} {pop} ifelse} forall} bind def
-/MLshow { currentpoint stroke M
-  0 exch R MFshow } bind def
-/MRshow { currentpoint stroke M
-  exch dup MFwidth neg 3 -1 roll R MFshow } def
-/MCshow { currentpoint stroke M
-  exch dup MFwidth -2 div 3 -1 roll R MFshow } def
-end
+/DirectClassPacket
+{
+  %
+  % Get a DirectClass packet.
+  %
+  % Parameters:
+  %   red.
+  %   green.
+  %   blue.
+  %   length: number of pixels minus one of this color (optional).
+  %
+  currentfile color_packet readhexstring pop pop
+  compression 0 eq
+  {
+    /number_pixels 3 def
+  }
+  {
+    currentfile byte readhexstring pop 0 get
+    /number_pixels exch 1 add 3 mul def
+  } ifelse
+  0 3 number_pixels 1 sub
+  {
+    pixels exch color_packet putinterval
+  } for
+  pixels 0 number_pixels getinterval
+} bind def
+
+/DirectClassImage
+{
+  %
+  % Display a DirectClass image.
+  %
+  systemdict /colorimage known
+  {
+    columns rows 8
+    [
+      columns 0 0
+      rows neg 0 rows
+    ]
+    { DirectClassPacket } false 3 colorimage
+  }
+  {
+    %
+    % No colorimage operator;  convert to grayscale.
+    %
+    columns rows 8
+    [
+      columns 0 0
+      rows neg 0 rows
+    ]
+    { GrayDirectClassPacket } image
+  } ifelse
+} bind def
+
+/GrayDirectClassPacket
+{
+  %
+  % Get a DirectClass packet;  convert to grayscale.
+  %
+  % Parameters:
+  %   red
+  %   green
+  %   blue
+  %   length: number of pixels minus one of this color (optional).
+  %
+  currentfile color_packet readhexstring pop pop
+  color_packet 0 get 0.299 mul
+  color_packet 1 get 0.587 mul add
+  color_packet 2 get 0.114 mul add
+  cvi
+  /gray_packet exch def
+  compression 0 eq
+  {
+    /number_pixels 1 def
+  }
+  {
+    currentfile byte readhexstring pop 0 get
+    /number_pixels exch 1 add def
+  } ifelse
+  0 1 number_pixels 1 sub
+  {
+    pixels exch gray_packet put
+  } for
+  pixels 0 number_pixels getinterval
+} bind def
+
+/GrayPseudoClassPacket
+{
+  %
+  % Get a PseudoClass packet;  convert to grayscale.
+  %
+  % Parameters:
+  %   index: index into the colormap.
+  %   length: number of pixels minus one of this color (optional).
+  %
+  currentfile byte readhexstring pop 0 get
+  /offset exch 3 mul def
+  /color_packet colormap offset 3 getinterval def
+  color_packet 0 get 0.299 mul
+  color_packet 1 get 0.587 mul add
+  color_packet 2 get 0.114 mul add
+  cvi
+  /gray_packet exch def
+  compression 0 eq
+  {
+    /number_pixels 1 def
+  }
+  {
+    currentfile byte readhexstring pop 0 get
+    /number_pixels exch 1 add def
+  } ifelse
+  0 1 number_pixels 1 sub
+  {
+    pixels exch gray_packet put
+  } for
+  pixels 0 number_pixels getinterval
+} bind def
+
+/PseudoClassPacket
+{
+  %
+  % Get a PseudoClass packet.
+  %
+  % Parameters:
+  %   index: index into the colormap.
+  %   length: number of pixels minus one of this color (optional).
+  %
+  currentfile byte readhexstring pop 0 get
+  /offset exch 3 mul def
+  /color_packet colormap offset 3 getinterval def
+  compression 0 eq
+  {
+    /number_pixels 3 def
+  }
+  {
+    currentfile byte readhexstring pop 0 get
+    /number_pixels exch 1 add 3 mul def
+  } ifelse
+  0 3 number_pixels 1 sub
+  {
+    pixels exch color_packet putinterval
+  } for
+  pixels 0 number_pixels getinterval
+} bind def
+
+/PseudoClassImage
+{
+  %
+  % Display a PseudoClass image.
+  %
+  % Parameters:
+  %   class: 0-PseudoClass or 1-Grayscale.
+  %
+  currentfile buffer readline pop
+  token pop /class exch def pop
+  class 0 gt
+  {
+    currentfile buffer readline pop
+    token pop /depth exch def pop
+    /grays columns 8 add depth sub depth mul 8 idiv string def
+    columns rows depth
+    [
+      columns 0 0
+      rows neg 0 rows
+    ]
+    { currentfile grays readhexstring pop } image
+  }
+  {
+    %
+    % Parameters:
+    %   colors: number of colors in the colormap.
+    %   colormap: red, green, blue color packets.
+    %
+    currentfile buffer readline pop
+    token pop /colors exch def pop
+    /colors colors 3 mul def
+    /colormap colors string def
+    currentfile colormap readhexstring pop pop
+    systemdict /colorimage known
+    {
+      columns rows 8
+      [
+        columns 0 0
+        rows neg 0 rows
+      ]
+      { PseudoClassPacket } false 3 colorimage
+    }
+    {
+      %
+      % No colorimage operator;  convert to grayscale.
+      %
+      columns rows 8
+      [
+        columns 0 0
+        rows neg 0 rows
+      ]
+      { GrayPseudoClassPacket } image
+    } ifelse
+  } ifelse
+} bind def
+
+/DisplayImage
+{
+  %
+  % Display a DirectClass or PseudoClass image.
+  %
+  % Parameters:
+  %   x & y translation.
+  %   x & y scale.
+  %   label pointsize.
+  %   image label.
+  %   image columns & rows.
+  %   class: 0-DirectClass or 1-PseudoClass.
+  %   compression: 0-none or 1-RunlengthEncoded.
+  %   hex color packets.
+  %
+  gsave
+  /buffer 512 string def
+  /byte 1 string def
+  /color_packet 3 string def
+  /pixels 768 string def
+
+  currentfile buffer readline pop
+  token pop /x exch def
+  token pop /y exch def pop
+  x y translate
+  currentfile buffer readline pop
+  token pop /x exch def
+  token pop /y exch def pop
+  currentfile buffer readline pop
+  token pop /pointsize exch def pop
+  /Times-Roman findfont pointsize scalefont setfont
+  x y scale
+  currentfile buffer readline pop
+  token pop /columns exch def
+  token pop /rows exch def pop
+  currentfile buffer readline pop
+  token pop /class exch def pop
+  currentfile buffer readline pop
+  token pop /compression exch def pop
+  class 0 gt { PseudoClassImage } { DirectClassImage } ifelse
+} bind def
 %%EndProlog
-gnudict begin
-gsave
-50 50 translate
-0.050 0.050 scale
-0 setgray
-newpath
-(Helvetica) findfont 140 scalefont setfont
-1.000 UL
-LTb
-798 420 M
-63 0 V
-6101 0 R
--63 0 V
-stroke
-714 420 M
-gsave 0 setgray
-[ [(Helvetica) 140.0 0.0 true true 0 ( 0.85)]
-] -46.7 MRshow
-grestore
-1.000 UL
-LTb
-798 1056 M
-63 0 V
-6101 0 R
--63 0 V
-stroke
-714 1056 M
-gsave 0 setgray
-[ [(Helvetica) 140.0 0.0 true true 0 ( 0.9)]
-] -46.7 MRshow
-grestore
-1.000 UL
-LTb
-798 1692 M
-63 0 V
-6101 0 R
--63 0 V
-stroke
-714 1692 M
-gsave 0 setgray
-[ [(Helvetica) 140.0 0.0 true true 0 ( 0.95)]
-] -46.7 MRshow
-grestore
-1.000 UL
-LTb
-798 2328 M
-63 0 V
-6101 0 R
--63 0 V
-stroke
-714 2328 M
-gsave 0 setgray
-[ [(Helvetica) 140.0 0.0 true true 0 ( 1)]
-] -46.7 MRshow
-grestore
-1.000 UL
-LTb
-798 2964 M
-63 0 V
-6101 0 R
--63 0 V
-stroke
-714 2964 M
-gsave 0 setgray
-[ [(Helvetica) 140.0 0.0 true true 0 ( 1.05)]
-] -46.7 MRshow
-grestore
-1.000 UL
-LTb
-798 3600 M
-63 0 V
-6101 0 R
--63 0 V
-stroke
-714 3600 M
-gsave 0 setgray
-[ [(Helvetica) 140.0 0.0 true true 0 ( 1.1)]
-] -46.7 MRshow
-grestore
-1.000 UL
-LTb
-798 4236 M
-63 0 V
-6101 0 R
--63 0 V
-stroke
-714 4236 M
-gsave 0 setgray
-[ [(Helvetica) 140.0 0.0 true true 0 ( 1.15)]
-] -46.7 MRshow
-grestore
-1.000 UL
-LTb
-798 4872 M
-63 0 V
-6101 0 R
--63 0 V
-stroke
-714 4872 M
-gsave 0 setgray
-[ [(Helvetica) 140.0 0.0 true true 0 ( 1.2)]
-] -46.7 MRshow
-grestore
-1.000 UL
-LTb
-798 420 M
-0 63 V
-0 4389 R
-0 -63 V
-stroke
-798 280 M
-gsave 0 setgray
-[ [(Helvetica) 140.0 0.0 true true 0 ( 0)]
-] -46.7 MCshow
-grestore
-1.000 UL
-LTb
-1569 420 M
-0 63 V
-0 4389 R
-0 -63 V
-stroke
-1569 280 M
-gsave 0 setgray
-[ [(Helvetica) 140.0 0.0 true true 0 ( 0.1)]
-] -46.7 MCshow
-grestore
-1.000 UL
-LTb
-2339 420 M
-0 63 V
-0 4389 R
-0 -63 V
-stroke
-2339 280 M
-gsave 0 setgray
-[ [(Helvetica) 140.0 0.0 true true 0 ( 0.2)]
-] -46.7 MCshow
-grestore
-1.000 UL
-LTb
-3110 420 M
-0 63 V
-0 4389 R
-0 -63 V
-stroke
-3110 280 M
-gsave 0 setgray
-[ [(Helvetica) 140.0 0.0 true true 0 ( 0.3)]
-] -46.7 MCshow
-grestore
-1.000 UL
-LTb
-3880 420 M
-0 63 V
-0 4389 R
-0 -63 V
-stroke
-3880 280 M
-gsave 0 setgray
-[ [(Helvetica) 140.0 0.0 true true 0 ( 0.4)]
-] -46.7 MCshow
-grestore
-1.000 UL
-LTb
-4651 420 M
-0 63 V
-0 4389 R
-0 -63 V
-stroke
-4651 280 M
-gsave 0 setgray
-[ [(Helvetica) 140.0 0.0 true true 0 ( 0.5)]
-] -46.7 MCshow
-grestore
-1.000 UL
-LTb
-5421 420 M
-0 63 V
-0 4389 R
-0 -63 V
-stroke
-5421 280 M
-gsave 0 setgray
-[ [(Helvetica) 140.0 0.0 true true 0 ( 0.6)]
-] -46.7 MCshow
-grestore
-1.000 UL
-LTb
-6192 420 M
-0 63 V
-0 4389 R
-0 -63 V
-stroke
-6192 280 M
-gsave 0 setgray
-[ [(Helvetica) 140.0 0.0 true true 0 ( 0.7)]
-] -46.7 MCshow
-grestore
-1.000 UL
-LTb
-6962 420 M
-0 63 V
-0 4389 R
-0 -63 V
-stroke
-6962 280 M
-gsave 0 setgray
-[ [(Helvetica) 140.0 0.0 true true 0 ( 0.8)]
-] -46.7 MCshow
-grestore
-1.000 UL
-LTb
-1.000 UL
-LTb
-798 420 M
-6164 0 V
-0 4452 V
--6164 0 V
-798 420 L
-LTb
-140 2646 M
-gsave 0 setgray
-currentpoint gsave translate 90 rotate 0 0 moveto
-[ [(Bold) 160.0 0.0 true true 0 (height of interface at left-hand edge of domain \(x=0\))]
-] -53.3 MCshow
-grestore
-grestore
-LTb
-3880 70 M
-gsave 0 setgray
-[ [(Bold) 160.0 0.0 true true 0 (time)]
-] -53.3 MCshow
-grestore
-0.800 UP
-0.800 UP
-1.000 UL
-LT0
-798 4872 M
-39 -70 V
-38 -157 V
-39 -235 V
-38 -301 V
-39 -357 V
-38 -405 V
-39 -442 V
-38 -453 V
-39 -432 V
-38 -377 V
-39 -297 V
-38 -206 V
-39 -111 V
-38 -24 V
-39 54 V
-38 123 V
-39 178 V
-38 219 V
-39 246 V
-39 253 V
-38 243 V
-39 217 V
-38 181 V
-39 137 V
-38 90 V
-39 43 V
-38 1 V
-39 -39 V
-38 -70 V
-39 -96 V
-38 -113 V
-39 -122 V
-38 -124 V
-39 -118 V
-38 -106 V
-39 -90 V
-38 -71 V
-39 -48 V
-38 -26 V
-39 -5 V
-39 16 V
-38 32 V
-39 47 V
-38 56 V
-39 62 V
-38 65 V
-39 61 V
-38 57 V
-39 48 V
-38 38 V
-39 26 V
-38 15 V
-39 3 V
-38 -7 V
-39 -16 V
-38 -23 V
-39 -27 V
-38 -30 V
-39 -30 V
-39 -28 V
-38 -25 V
-39 -21 V
-38 -14 V
-39 -9 V
-38 -4 V
-39 3 V
-38 7 V
-39 11 V
-38 14 V
-39 16 V
-38 16 V
-39 17 V
-38 14 V
-39 13 V
-38 10 V
-39 8 V
-38 4 V
-39 0 V
-38 -2 V
-39 -5 V
-39 -7 V
-38 -8 V
-39 -10 V
-38 -10 V
-39 -10 V
-38 -9 V
-39 -8 V
-38 -7 V
-39 -5 V
-38 -3 V
-39 -2 V
-38 -1 V
-39 1 V
-38 2 V
-39 3 V
-38 4 V
-39 3 V
-38 4 V
-39 4 V
-39 3 V
-38 2 V
-39 2 V
-38 1 V
-39 0 V
-stroke
-4805 2329 M
-38 0 V
-39 0 V
-38 -2 V
-39 -1 V
-38 -1 V
-39 -2 V
-38 -1 V
-39 -1 V
-38 -1 V
-39 -1 V
-38 1 V
-39 0 V
-38 1 V
-39 1 V
-38 1 V
-39 2 V
-39 2 V
-38 2 V
-39 2 V
-38 1 V
-39 2 V
-38 1 V
-39 1 V
-38 1 V
-39 0 V
-38 0 V
-39 0 V
-38 0 V
-39 -1 V
-38 0 V
-39 -1 V
-38 -1 V
-39 -1 V
-38 -1 V
-39 0 V
-39 -1 V
-38 -1 V
-39 0 V
-38 -1 V
-39 0 V
-38 0 V
-39 -1 V
-38 0 V
-39 0 V
-38 0 V
-39 0 V
-38 -1 V
-39 0 V
-38 0 V
-39 0 V
-38 -1 V
-39 0 V
-38 0 V
-39 -1 V
-38 0 V
-39 0 V
-798 4872 Box
-837 4802 Box
-875 4645 Box
-914 4410 Box
-952 4109 Box
-991 3752 Box
-1029 3347 Box
-1068 2905 Box
-1106 2452 Box
-1145 2020 Box
-1183 1643 Box
-1222 1346 Box
-1260 1140 Box
-1299 1029 Box
-1337 1005 Box
-1376 1059 Box
-1414 1182 Box
-1453 1360 Box
-1491 1579 Box
-1530 1825 Box
-1569 2078 Box
-1607 2321 Box
-1646 2538 Box
-1684 2719 Box
-1723 2856 Box
-1761 2946 Box
-1800 2989 Box
-1838 2990 Box
-1877 2951 Box
-1915 2881 Box
-1954 2785 Box
-1992 2672 Box
-2031 2550 Box
-2069 2426 Box
-2108 2308 Box
-2146 2202 Box
-2185 2112 Box
-2223 2041 Box
-2262 1993 Box
-2300 1967 Box
-2339 1962 Box
-2378 1978 Box
-2416 2010 Box
-2455 2057 Box
-2493 2113 Box
-2532 2175 Box
-2570 2240 Box
-2609 2301 Box
-2647 2358 Box
-2686 2406 Box
-2724 2444 Box
-2763 2470 Box
-2801 2485 Box
-2840 2488 Box
-2878 2481 Box
-2917 2465 Box
-2955 2442 Box
-2994 2415 Box
-3032 2385 Box
-3071 2355 Box
-3110 2327 Box
-3148 2302 Box
-3187 2281 Box
-3225 2267 Box
-3264 2258 Box
-3302 2254 Box
-3341 2257 Box
-3379 2264 Box
-3418 2275 Box
-3456 2289 Box
-3495 2305 Box
-3533 2321 Box
-3572 2338 Box
-3610 2352 Box
-3649 2365 Box
-3687 2375 Box
-3726 2383 Box
-3764 2387 Box
-3803 2387 Box
-3841 2385 Box
-3880 2380 Box
-3919 2373 Box
-3957 2365 Box
-3996 2355 Box
-4034 2345 Box
-4073 2335 Box
-4111 2326 Box
-4150 2318 Box
-4188 2311 Box
-4227 2306 Box
-4265 2303 Box
-4304 2301 Box
-4342 2300 Box
-4381 2301 Box
-4419 2303 Box
-4458 2306 Box
-4496 2310 Box
-4535 2313 Box
-4573 2317 Box
-4612 2321 Box
-4651 2324 Box
-4689 2326 Box
-4728 2328 Box
-4766 2329 Box
-4805 2329 Box
-4843 2329 Box
-4882 2329 Box
-4920 2327 Box
-4959 2326 Box
-4997 2325 Box
-5036 2323 Box
-5074 2322 Box
-5113 2321 Box
-5151 2320 Box
-5190 2319 Box
-5228 2320 Box
-5267 2320 Box
-5305 2321 Box
-5344 2322 Box
-5382 2323 Box
-5421 2325 Box
-5460 2327 Box
-5498 2329 Box
-5537 2331 Box
-5575 2332 Box
-5614 2334 Box
-5652 2335 Box
-5691 2336 Box
-5729 2337 Box
-5768 2337 Box
-5806 2337 Box
-5845 2337 Box
-5883 2337 Box
-5922 2336 Box
-5960 2336 Box
-5999 2335 Box
-6037 2334 Box
-6076 2333 Box
-6114 2332 Box
-6153 2332 Box
-6192 2331 Box
-6230 2330 Box
-6269 2330 Box
-6307 2329 Box
-6346 2329 Box
-6384 2329 Box
-6423 2328 Box
-6461 2328 Box
-6500 2328 Box
-6538 2328 Box
-6577 2328 Box
-6615 2327 Box
-6654 2327 Box
-6692 2327 Box
-6731 2327 Box
-6769 2326 Box
-6808 2326 Box
-6846 2326 Box
-6885 2325 Box
-6923 2325 Box
-6962 2325 Box
-1.000 UL
-LTb
-798 420 M
-6164 0 V
-0 4452 V
--6164 0 V
-798 420 L
-0.800 UP
-stroke
-grestore
+%%Page:  1 1
+%%PageBoundingBox: 0 0 500 350
+userdict begin
+DisplayImage
+0 0
+500 350
+12
+500 350
+1
+1
+1
+1
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFF0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0FFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFF0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0FFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFF0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0FFFFFF
+FFFFF8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0FFFFFFFFF9F3783FFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFF0FFFFFFFFFDF77BBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0FFFFFFFFFDFEFA0000
+000000000000000000000000000000000000000000000000000000000000000000000000000000
+0000000000000000000000000FFFF0FFFFFFFFFDF9FABFFFFFFFFFFFF7FFFFFFFFFFFFDFFFFFFF
+FFFFFEFFFFFFFFFFFFFBFFFFFFFFFFFFDFFFFFFFFFFFFF7FFFFFFFFFFFFBFFFFFFFFFFFFEFFFF0
+FFFFFFFFFDFBF83FFFFFFFFFFFF7FFFFFFFFFFFFDFFFFFFFFFFFFEFFFFFFFFFFFFFBFFFFFFFFFF
+FFDFFFFFFFFFFFFF7FFFFFFFFFFFFBFFFFFFFFFFFFEFFFF0FFFFFFFFFDD07E0FFFFFFFFFFFF7FF
+FFFFFFFFFFDFFFFFFFFFFFFEFFFFFFFFFFFFFBFFFFFFFFFFFFDFFFFFFFFFFFFF7FFFFFFFFFFFFB
+FFFFFFFFFFFFEFFFF0FFFFFFFFFFFFFE2FFFFFFFFFFFF7FFFFFFFFFFFFDFFFFFFFFFFFFEFFFFFF
+FFFFFFFBFFFFFFFFFFFFDFFFFFFFFFFFFF7FFFFFFFFFFFFBFFFFFFFFFFFFEFFFF0FFFFFFFFFFFF
+FE4FFFFFFFFFFFF7FFFFFFFFFFFFDFFFFFFFFFFFFEFFFFFFFFFFFFFBFFFFFFFFFFFFDFFFFFFFFF
+FFFF7FFFFFFFFFFFFBFFFFFFFFFFFFEFFFF0FFFFFFFFFFFFFE4FFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+EFFFF0FFFFFFFFFFFFFE0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FFFFFFFFFFFFFEDFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFEFFFF0FFFFFFFFFFFFFEEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FFFFFF
+FFFFFFFEEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FFFFFFFFFFFFFEEFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFEFFFF0FFFFFFFFFFFFFEEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FFFFFFFFFFFFFEF7FF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FFFFFFFFFFFFFEE1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0
+FFFFFFFFFFFFFEE5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FFFFFFFFFFFFFEE5FFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFEFFFF0FFFFFFFFFFFFFEE5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FFFFFFFFFFFF
+FEE1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE07FFFFFFFFFEFBFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+EFFFF0F801FFFFFFFFFEFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FBFDFFFFFFFFFEFBFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFEFFFF0FC0FFFFFFFFFFEFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0F807FF
+FFFFFFFEFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FBF7FFFFFFFFFEFDFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFEFFFF0FBF7FFFFFFFFFEFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0F807FFFFFFFFFEFDFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE0FFFFFFFFFFEFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0
+FFFFFFFFFFFFFEFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FFAFFFFFFFFFFEFDFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFEFFFF0FFAFFFFFFFFFFEFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FFAFFFFFFFFF
+FEF83FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FFAFFFFFFFFFFEFABFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+EFFFF0FFAFFFFFFFFFFEFABFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FFAFFFFFFFFFFEF83FFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFEFFFF0FEF7FFFFFFFFFEFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE67FF
+FFFFFFFEFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FF0FFFFFFFFFFEFF7FFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFEFFFF0FF0FFFFFFFFFFEFF7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE67FFFFFFFFFEFF7F
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FEF7FFFFFFFFFEFF7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0
+FFFFFFFFFFF87EFF7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0F9F9FFFF3F3BFEFF7FFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFEFFFF0FC03FFFFBFB0FEFF7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FF0FFFFFBFB2
+7E0F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFE0FFFF0FFFFFFFFBFBF7EFFBFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+EFFFF0FFFFFFFFBFB77EFFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FFFFFFFFBBB8FEFFBFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFEFFFF0FF07FFFFFFFFFEFFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE07FF
+FFFFFFFEFFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FEFFFFFFFFFFFEFFBFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFEFFFF0FE7FFFFFFFFFFEFF0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE07FFFFFFFFFEFF2F
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE07FFFFFFFFFEFF4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0
+FFFFFFFFFFFFFEFF4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FA07FFFFFFFFFEFF0FFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFEFFFF0FA07FFFFFFFFFEFFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FFFFFFFFFFFF
+FEFFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FF07FFFFFFFFFEFFDFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+EFFFF0FE07FFFFFFFFFEFFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE97FFFFFFFFFEFFDFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFEFFFF0FE97FFFFFFFFFEFFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE47FF
+FFFFFFFEFFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FF47FFFFFFFFFEFFEFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFEFFFF0FFFFFFFFFFFFFEFFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE07FFFFFFFFFEFFEF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE07FFFFFFFFFEFFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0
+FEFFFFFFFFFFFEFFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE07FFFFFFFFFEFFEFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFEFFFF0FE07FFFFFFFFFEFFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FEFFFFFFFFFF
+FEFFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FEFFFFFFFFFFFEFFF7FFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+EFFFF0FE07FFFFFFFFFEFFF7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE07FFFFFFFFFEFFF7FFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFEFFFF0FE07FFFFFFFFFEFFF7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE67FF
+FFFFFFFEFFF7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FEF7FFFFFFFFFEFFE1FFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFEFFFF0FE67FFFFFFFFFEFFE5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE07FFFFFFFFFEFFE5
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FF0FFFFFFFFFFEFFE5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0
+FFFFFFFFFFFFFEFFE1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0F807FFFFFFFFFEFFFBFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFEFFFF0F807FFFFFFFFFEFFFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FEF7FFFFFFFF
+FEFFFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE67FFFFFFFFFEFFFBFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+EFFFF0FE07FFFFFFFFFEFFFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FF0FFFFFF9F9FEFFFBFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFEFFFF0FFFFFFFFFDFDFEFFFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FFFFFF
+FFFDFDFEFFFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FFFFFFFFFDFDFE0FFBFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFE0FFFF0FAFFFFFFFDFDFEFFFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0F807FFFFFDDDFEFFFD
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFEFFFF0F807FFFFFFFFFEFFFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0
+FEFFFFFFFFFFFEFFFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FF0FFFFFFFFFFEFFFDFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFEFFFF0FE07FFFFFFFFFEFFFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE67FFFFFFFF
+FEFFFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FEF7FFFFFFFFFEFFFDFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+EFFFF0FE67FFFFFFFFFEFFFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE07FFFFFFFFFEFFFDFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFEFFFF0FF0FFFFFFFFFFEFFFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FFFFFF
+FFFFFFFEFFFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FFFFFFFFFFFFFEFFFEFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFEFFFF0FFFFFFFFFFFFFEFFFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FF2FFFFFFFFFFEFFF8
+3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE27FFFFFFFFFEFFFABFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0
+FEB7FFFFFFFFFEFFFABFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FEB7FFFFFFFFFEFFFABFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFEFFFF0FE07FFFFFFFFFEFFF83FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FF8FFFFFFFFF
+FEFFFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FFFFFFFFFFFFFEFFFEFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+EFFFF0FE03FFFFFFFFFEFFFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE01FFFFFFFFFEFFFEFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFEFFFF0FEF5FFFFFFFFFEFFFF7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE65FF
+FFFFFFFEFFFF7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE01FFFFFFFFFEFFFF7FFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFEFFFF0FF0DFFFFFFFFFEFFFF7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FFFFFFFFFFFFFEFFFF
+7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFEFFFF0F807FFFFFFFFFEFFFF7FFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0
+F807FFFFFFFFFEFFFF7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FEF7FFFFFFFFFEFFFF7FFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFEFFFF0FE67FFFFFFFFFEFFFF7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE07FFFFFFFF
+FEFFFF7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FF0FFFFFFFFFFEFFFF7FFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+EFFFF0FF2FFFFFFFFFFEFFFFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE27FFFFFFFFFEFFFFBFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFEFFFF0FEB7FFFFFFFFFEFFFFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FEB7FF
+FFFFFFFEFFFFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE07FFFFFFFFFEFFFFBFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFEFFFF0FF8FFFFFFF187EFFFFBFFFFFFFFFFFE03FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FFFFFFFF3F4BFEFFFF
+BFFFFFFFFFFFE9BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FFFFFFFFBEE0FEFFFFBFFFFFFFFFFFE0BFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0
+FFFFFFFFBEE27EFFFFBFFFFFFFFFFF0107FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FFFFFFFFBEEF7E0FFFBFFFFFFFFFFF
+6037FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFE0FFFF0F807FFFFBE477EFFFFBFFFFFFFFFFF5757FFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0F807FFFFBB18
+FEFFFF0FFFFFFFFFFF3707FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FEF7FFFFFFFFFEFFFF4FFFFFFFFFFF07EFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+EFFFF0FE67FFFFFFFFFEFFFF4FFFFFFFFFFF7FE1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE07FFFFFFFFFEFFFF4FFFFF
+FFFFF83FE5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFEFFFF0FF0FFFFFFFFFFEFFFF0FFFFFFFFFFB3FE9FFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FF07FF
+FFFFFFFEFFFFDFFFFFFFFFFABFE1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE07FFFFFFFFFEFFFFDFFFFFFFFFFABFFDFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFEFFFF0FEFFFFFFFFFFFEFFFFDFFFFFFFFFF83FFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE7FFFFFFFFFFEFFFF
+DFFFFFFFFFFDFFF83FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE07FFFFFFFFFEFFFFDFFFFFFFFFFDFFFABFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0
+FE07FFFFFFFFFEFFFFDFFFFFFFFFFDFFFABFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FFFFFFFFFFFFFEFFFFDFFFFFFFFFFB
+FFFABFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFEFFFF0FF07FFFFFFFFFEFFFFEFFFFFFFFFFBFFF83FFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE07FFFFFFFF
+FEFFFFEFFFFFFFFFE1FFFF7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE97FFFFFFFFFEFFFFEFFFFFFFFFE9FFFFBFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+EFFFF0FE97FFFFFFFFFEFFFFEFFFFFFFFFE5FFFFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE47FFFFFFFFFEFFFFEFFFFF
+FFFFE1FFFF07FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFEFFFF0FF47FFFFFFFFFEFFFFEFFFFFFFFFF7FFFF57FFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE07FF
+FFFFFFFEFFFFEFFFFFFFFFF7FFFF57FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE07FFFFFFFFFEFFFFEFFFFFFFFFF7FFFF57
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFEFFFF0FEFFFFFFFFFFFEFFFFEFFFFFFFFFEFFFFF07FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0F807FFFFFFFFFEFFFF
+EFFFFFFFFFEFFFFFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFEFFFF0F807FFFFFFFFFEFFFFEFFFFFFFFFEFFFFFEFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0
+FFFFFFFFFFFFFEFFFFEFFFFFFFFFEFFFFFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FFFFFFFFFFFFFEFFFFF7FFFFFFFFDF
+FFFFF7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFEFFFF0FFBFFFFFFFFFFEFFFFF7FFFFFFFFDFFFFFE1FFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FFBFFFFFFFFF
+FEFFFFF7FFFFFFFF07FFFFE1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FFBFFFFFFFFFFEFFFFF7FFFFFFFF57FFFFE9FFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+EFFFF0FFFFFFFFFFFFFEFFFFF7FFFFFFFF57FFFFE1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0F807FFFFFFFFFEFFFFF7FFFF
+FFFF07FFFFFBFFFFFFFFFFFF003FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFEFFFF0F807FFFFFFFFFEFFFFF7FFFFFFFFBFFFFFFDFFFFFFFFFFFC25BFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FEFFFF
+FFFFFFFEFFFFE1FFFFFFFFBFFFFFFDFFFFFFFFFFFD0007FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FAFFFFFFFFFFFEFFFFE5FFFFFFFFBFFFFFFD
+FFFFFFFFFFE02101FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFEFFFF0F807FFFFFFFFFEFFFFE5FFFFFFFFBFFFFFF83FFFFFFFFFED0425FFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0F807FFFFFFFFFEFFFF
+E5FFFFFFFFBFFFFFFABFFFFFFFFFE03F003FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FEFFFFFFFFFFFEFFFFE1FFFFFFFF7FFFFFFABFFFFFFFFF05
+FFEDBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0
+FF2FFFFFFFFFFEFFFFFBFFFFFFFF7FFFFFFABFFFFFFFFF41FFE007FFFFFFFFFF0000FFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE27FFFFFFFFFEFFFFFBFFFFFFFF7F
+FFFFF83FFFFFFFFF57FFFD37FFFFFFFFFC24243FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFEFFFF0FEB7FFFFFFFFFEFFFFFBFFFFFFFF7FFFFFFF7FFFFFFFFC07FFFC00FFFFFF
+FF00000080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FEB7FFFFFFFF
+FEFFFFFBFFFFFFFF7FFFFFFF7FFFFFFFFD3FFFFF66FFFFFFFC202024043FFFFFFFFFFFFFFFFFFF
+FFFFFFFFF0001FFFFFFFFFFFFFFFFFEFFFF0FE07FFFFFFF9FEFFFFFBFFFFFFFF7FFFFFFFBFFFFF
+FFFCBFFFFF003FFFFFFD0407002080FFFFFFFF80000000FFFFE000000494800000000000000000
+03FFF0FF8FFFFFFFFDFEFFFFFBFFFFFFF83FFFFFFF07FFFFFFFC3FFFFFECBFFFFFE020FFFF8404
+07FFFC0004848484000004949000000000909090909092928BFFF0F807FFFFFFFDFE0FFFFBFFFF
+FFFABFFFFFFF37FFFFFFE1FFFFFFE007FFFF0007FFFFE020A00000A40000000000000000049494
+9494000000000000000BFFF0F807FFFFFFFDFEFFFFFBFFFFFFFABFFFFFFF57FFFFFFE9FFFFFFFD
+20FFFC043FFFFFFF8400A4A00084848484849484940000000000000090909092928BFFF0FFFFFF
+FFFFFDFEFFFFFBFFFFFFF83FFFFFFF57FFFFFFE1FFFFFFFC043FE000FFFFFFFFE0240004A00000
+000000000000FFFFFFFFFFFFF0000000000003FFF0FFFFFFFFFFFDFEFFFFFBFFFFFFFEFFFFFFFF
+07FFFFFFE1FFFFFFFF00000007FFFFFFFFFF80040007FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFEFFFF0FFFFFFFFFFFFFEFFFFFBFFFFFFFEFFFFFFFFEFFFFFFF07FFFFFFFFEC24003FFFFF
+FFFFFFFFE0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FFFFFFFFFFFFFEFFFF
+FDFFFFFFFDFFFFFFFFEFFFFFFF67FFFFFFFFE00020FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FFFFFFFFFFFFFEFFFFFDFFFFFFFDFFFFFFFFF7FFFFFF57FF
+FFFFFFFC0407FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0
+F807FFFFFFFFFEFFFFFDFFFFFFFDFFFFFFFFE1FFFFFF37FFFFFFFFFFE03FFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0F807FFFFFFFFFEFFFFFDFFFFFFFDFF
+FFFFFFE5FFFFFF07FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFEFFFF0FEFFFFFFFFFFFEFFFFFDFFFFFFFDFFFFFFFFE9FFFFFC3FFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FF07FFFFFFFF
+FEFFFFFDFFFFFFFDFFFFFFFFE1FFFFFC3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE07FFFFFFFFFEFFFFFDFFFFFFFBFFFFFFFFFDFFFF
+FCBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+EFFFF0FE97FFFFFFFFFEFFFFFDFFFFFFFBFFFFFFFFFDFFFFFC3FFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE97FFFFFFFFFEFFFFFDFFFF
+FFFBFFFFFFFFF83FFFE1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFEFFFF0FE47FFFFFFFFFEFFFFFDFFFFFFFBFFFFFFFFFABFFFE9FFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FF47FF
+FFFFFFFEFFFFFDFFFFFFE1FFFFFFFFFABFFFE1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FFFFFFFFFFFFFEFFFFFEFFFFFFE9FFFFFFFF
+FB3FFFE5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFEFFFF0FFFFFFFFFFFFFEFFFFFEFFFFFFE5FFFFFFFFF83FFF01FFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FFFFFFFFFFFFFEFFFF
+FEFFFFFFE5FFFFFFFFFF07FF57FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FF2FFFFFFFFFFEFFFFF83FFFFFE1FFFFFFFFFF37FF57FFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0
+FE27FFFFFFFFFEFFFFFABFFFFFF7FFFFFFFFFF57FC07FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FEB7FFFFFFFFFEFFFFFABFFFFFF7FF
+FFFFFFFF61FD3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFEFFFF0FEB7FFFFFFFFFEFFFFFABFFFFFF7FFFFFFFFFF05E0BFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE07FFFFFFFF
+FEFFFFF83FFFFFF7FFFFFFFFFFE02DBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FF8FFFFFFFFFFEFFFFFEFFFFFFEFFFFFFFFFFFE900
+3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+EFFFF0FF6FFFFFFFFFFEFFFFFEFFFFFFEFFFFFFFFFFFE005FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE67FFFFFFFFFEFFFFFEFFFF
+FFEFFFFFFFFFFFFB21FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFEFFFF0FEF7FFFFFFFFFEFFFFFF7FFFFFEFFFFFFFFFFFF807FFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE67FF
+FFFFFFFEFFFFFF7FFFFFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE07FFFFFFFFFEFFFFFF7FFFFFEFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFEFFFF0FF0FFFFFFFFFFEFFFFFF7FFFFFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FF07FFFFFFFFFEFFFF
+FF7FFFFFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE07FFFFFFFFFEFFFFFF7FFFFFDFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0
+FE97FFFFFFFFFEFFFFFF7FFFFF0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE97FFFFFFFFFEFFFFFF7FFFFF4FFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFEFFFF0FE47FFFFFFFFFEFFFFFF7FFFFF4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FF47FFFFFFFF
+FEFFFFFFBFFFFF4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FAFFFFFFFFFFFEFFFFFFBFFFFF0FFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+EFFFF0F807FFFFFFFFFEFFFFFFBFFFFFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0F807FFFFFFFFFEFFFFFFBFFF
+FFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFEFFFF0FEFFFFFFFFFFFEFFFFFFBFFFFFBFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FEFFFF
+FF1F187EFFFFFFBFFFFFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE7FFFFF4EEBFEFFFFFFBFFFFFBFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFEFFFF0FE07FFFEEEE0FEFFFFFFBFFFFF7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE07FFFEEE427E0FFF
+FFBFFFFF7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFE0FFFF0FFFFFFFEEF0F7EFFFFFFBFFFFF7FFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0
+FF2FFFFE4FC77EFFFFFF0FFFFF7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE27FFFF1B18FEFFFFFF4FFFFF7FFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFEFFFF0FEB7FFFFFFFFFEFFFFFF4FFFFF7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FEB7FFFFFFFF
+FEFFFFFF0FFFFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE07FFFFFFFFFEFFFFFFDFFFF83FFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+EFFFF0FF8FFFFFFFFFFEFFFFFFDFFFFABFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0F807FFFFFFFFFEFFFFFFDFFF
+FABFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFEFFFF0F807FFFFFFFFFEFFFFFFDFFFFABFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FEFFFF
+FFFFFFFEFFFFFFEFFFF83FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FFFFFFFFFFFFFEFFFFFFEFFFFDFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFEFFFF0FF07FFFFFFFFFEFFFFFFEFFFFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE07FFFFFFFFFEFFFF
+FFEFFFFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FEFFFFFFFFFFFEFFFFFFEFFFFDFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0
+FE7FFFFFFFFFFEFFFFFFEFFFFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE07FFFFFFFFFEFFFFFFEFFFFDFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFEFFFF0FE07FFFFFFFFFEFFFFFFEFFFFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FA07FFFFFFFF
+FEFFFFFFF7FFFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FA07FFFFFFFFFEFFFFFFF7FFFBFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+EFFFF0FFFFFFFFFFFFFEFFFFFFF7FFFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FFFFFFFFFFFFFEFFFFFFF7FF
+E1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFEFFFF0FFFFFFFFFFFFFEFFFFFFE1FFE9FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FFFFFF
+FFFFFFFEFFFFFFE5FFE5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FAFFFFFFFFFFFEFFFFFFE5FFE5FFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFEFFFF0F807FFFFFFFFFEFFFFFFE9FFE1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0F807FFFFFFFFFEFFFF
+FFE1FFF7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FEFFFFFFFFFFFEFFFFFFFBFFF7FFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0
+FF0FFFFFFFFFFEFFFFFFFBFFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE07FFFFFFFFFEFFFFFFFBFFEFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFEFFFF0FE67FFFFFFFFFEFFFFFFFBFFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FEF7FFFFFFFF
+FEFFFFFFFDFFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE67FFFFFFFFFEFFFFFFFDFFDFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+EFFFF0FE07FFFFFFFFFEFFFFFFFDFFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FF0FFFFFFFFFFEFFFFFFFDFF
+0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFEFFFF0FFFFFFFFFFFFFEFFFFFFFDFF4FFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FFFFFF
+FFFFFFFEFFFFFFFEFF4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FFFFFFFFFFFFFEFFFFFFF83F0FFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFEFFFF0FFFFFFFFFFFFFEFFFFFFFABFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0F807FFFFFFFFFEFFFF
+FFFABFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFEFFFF0F807FFFFFFFFFEFFFFFFF83F7FFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0
+FEFFFFFFF8F8FEFFFFFFFF7F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE07FFFFFA777EFFFFFFFF783FFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFEFFFF0FE07FFFFF7777EFFFFFFFFBABFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FEFFFFFFF772
+7E0FFFFFFF0ABFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFE0FFFF0F807FFFFF7787EFFFFFFFF29BFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+EFFFF0F807FFFFF27E7EFFFFFFFF403FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FFFFFFFFF8D8FEFFFFFFFF61
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFEFFFF0FFFFFFFFFFFFFEFFFFFFFF05FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE03FF
+FFFFFFFEFFFFFFFFE1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE01FFFFFFFFFEFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFEFFFF0FEF5FFFFFFFFFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE65FFFFFFFFFEFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE01FFFFFFFFFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0
+FF0DFFFFFFFFFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FA07FFFFFFFFFEFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFEFFFF0FA07FFFFFFFFFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FFFFFFFFFFFF
+FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FF2FFFFFFFFFFEFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+EFFFF0FE27FFFFFFFFFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FEB7FFFFFFFFFEFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFEFFFF0FEB7FFFFFFFFFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE07FF
+FFFFFFFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FF8FFFFFFFFFFEFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFEFFFF0FFFFFFFFFFFFFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE07FFFFFFFFFEFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FE07FFFFFFFFFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0
+FEFFFFFFFFFFFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0F807FFFFFFFFFEFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFEFFFF0F807FFFFFFFFFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FFFFFFFFFFFF
+FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FFFFFFFFFFFFFEFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+EFFFF0FFFFFFFFFFFFFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FFFFFFFFFFFFFEFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFEFFFF0FFFFFFFFFFFFFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FFFFFF
+FFFFFFFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FFFFFFFFFFFFFEFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFEFFFF0FFFFFFFFFFFFFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FFFFFFFFFFFFFEFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FFFFFFFFFFFFFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0
+FFFFFFFFFFFFFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FFFFFFFFFFFFFEFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFEFFFF0FFFFFFFFFFFFFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FFFFFFFFFFFF
+FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF0FFFFFFFFFFFFFEFFFFFFFFFFFFF7FFFFFFFFFFFFDF
+FFFFFFFFFFFEFFFFFFFFFFFFFBFFFFFFFFFFFFDFFFFFFFFFFFFF7FFFFFFFFFFFFBFFFFFFFFFFFF
+EFFFF0FFFFFFFF1F187EFFFFFFFFFFFFF7FFFFFFFFFFFFDFFFFFFFFFFFFEFFFFFFFFFFFFFBFFFF
+FFFFFFFFDFFFFFFFFFFFFF7FFFFFFFFFFFFBFFFFFFFFFFFFEFFFF0FFFFFFFF4F6BFEFFFFFFFFFF
+FFF7FFFFFFFFFFFFDFFFFFFFFFFFFEFFFFFFFFFFFFFBFFFFFFFFFFFFDFFFFFFFFFFFFF7FFFFFFF
+FFFFFBFFFFFFFFFFFFEFFFF0FFFFFFFEEF60FEFFFFFFFFFFFFF7FFFFFFFFFFFFDFFFFFFFFFFFFE
+FFFFFFFFFFFFFBFFFFFFFFFFFFDFFFFFFFFFFFFF7FFFFFFFFFFFFBFFFFFFFFFFFFEFFFF0FFFFFF
+FEEF027E0000000000000000000000000000000000000000000000000000000000000000000000
+0000000000000000000000000000000000000FFFF0FFFFFFFEEEEF7FFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFF0FFFFFFFE4EE77FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0FFFFFFFF1B18FFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFF0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFF0FFFFFFFFFFFFFE3FFFFFFFFFFF8FFFFFFFFFFFFC7C7FFFFFFFFFF1F1FFFF
+FFFFFF8FEFFFFFFFFFFE3E1FFFFFFFFFF1F9FFFFFFFFFFC783FFFFFFFFFE3E3FF0FFFFFFFFFFFF
+FE9FFFFFFFFFFFA79FFFFFFFFFFD39BFFFFFFFFFF4EEFFFFFFFFFFA7CFFFFFFFFFFE9EFFFFFFFF
+FFF4F4FFFFFFFFFFD3FBFFFFFFFFFE9EDFF0FFFFFFFFFFFFFDDFFFFFFFFFFF77DFFFFFFFFFFBBB
+BFFFFFFFFFEEFEFFFFFFFFFF778FFFFFFFFFFDDC3FFFFFFFFFEEEEFFFFFFFFFFBBF7FFFFFFFFFD
+DEDFF0FFFFFFFFFFFFFDDFFFFFFFFFFF77DFFFFFFFFFFBBF7FFFFFFFFFEEF8FFFFFFFFFF77AFFF
+FFFFFFFDDC9FFFFFFFFFEEE1FFFFFFFFFFBBE7FFFFFFFFFDDE1FF0FFFFFFFFFFFFFDDFFFFFFFFF
+FF77DFFFFFFFFFFBBCFFFFFFFFFFEEFEFFFFFFFFFF7707FFFFFFFFFDDFDFFFFFFFFFEEE6FFFFFF
+FFFFBBEFFFFFFFFFFDDDDFF0FFFFFFFFFFFFFC9FFFFFFFFFFF27DFFFFFFFFFF93DFFFFFFFFFFE4
+EEFFFFFFFFFF27EFFFFFFFFFFC9DDFFFFFFFFFE4E6FFFFFFFFFF93EFFFFFFFFFFC9DDFF0FFFFFF
+FFFFFFFE3FFFFFFFFFFF8DDFFFFFFFFFFC683FFFFFFFFFF1B1FFFFFFFFFF8DEFFFFFFFFFFE363F
+FFFFFFFFF1B1FFFFFFFFFFC6DFFFFFFFFFFE363FF0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFF0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0FFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFF0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFF0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0FFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE67FFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFE7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFF0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC60030FF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0FFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE619367FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFF0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFE619207FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0FFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE61927FFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFE619267FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFF0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE6
+1930FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0FFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFF0
 end
-showpage
+%%PageTrailer
 %%Trailer
-%%DocumentFonts: Bold Helvetica
+%%EOF

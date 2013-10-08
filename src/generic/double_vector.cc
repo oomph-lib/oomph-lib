@@ -95,7 +95,7 @@ namespace oomph
 
  //============================================================================
  /// \short Assembles a DoubleVector with a distribution dist and coefficients
- /// taken from the vector v.\n
+ /// taken from the vector v.
  /// Note. The vector v MUST be of length nrow()
  //============================================================================
  void DoubleVector::build(const LinearAlgebraDistribution* const &dist_pt,
@@ -136,7 +136,7 @@ namespace oomph
   }
 
  //============================================================================
- /// \short initialise the vector with coefficient from the vector v.\n
+ /// \short initialise the vector with coefficient from the vector v.
  /// Note: The vector v must be of length
  //============================================================================
  void DoubleVector::initialise(const Vector<double> v)
@@ -162,9 +162,9 @@ namespace oomph
 
  //============================================================================
  /// The contents of the vector are redistributed to match the new
- /// distribution. In a non-MPI build this method works, but does nothing. \n
+ /// distribution. In a non-MPI build this method works, but does nothing. 
  /// \b NOTE 1: The current distribution and the new distribution must have
- /// the same number of global rows.\n
+ /// the same number of global rows.
  /// \b NOTE 2: The current distribution and the new distribution must have
  /// the same Communicator.
  //============================================================================
@@ -704,7 +704,7 @@ namespace oomph
 
    // output
    // Store the precision so we can revert it.
-   std::streamsize old_precision; 
+   std::streamsize old_precision=0; 
    if(output_precision > 0)
     {
      old_precision = outfile.precision();
@@ -743,7 +743,7 @@ namespace oomph
 
    // output
    // Store the precision so we can revert it.
-   std::streamsize old_precision; 
+   std::streamsize old_precision=0; 
    if(output_precision > 0)
     {
      old_precision = outfile.precision();
@@ -776,7 +776,7 @@ namespace oomph
    
    // output
    // Store the precision so we can revert it.
-   std::streamsize old_precision; 
+   std::streamsize old_precision=0; 
    if(output_precision > 0)
     {
      old_precision = outfile.precision();

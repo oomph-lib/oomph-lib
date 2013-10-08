@@ -162,7 +162,7 @@ DenseMatrix<double> OcTree::S_base;
 /// is parametrised by (s[0],s[2]); etc. We always identify the 
 /// in-face coordinate with the lower (3D) index with the subscript 
 /// \c _lo and the one with the larger (3D) index with the subscript \c _hi.
-/// \n Here we set up the translation scheme between the 2D in-face
+///  Here we set up the translation scheme between the 2D in-face
 /// coordinates (s_lo,s_hi) and the corresponding 3D coordinates:
 /// If we're located on face \c face [L/R/F/B/U/D], then
 /// an increase in s_lo from -1 to +1 corresponds to a change
@@ -3127,7 +3127,6 @@ bool OcTree::edge_neighbour_is_face_neighbour(const int& edge,
 /// The various arguments return additional information about the
 /// size and relative orientation of the neighbouring octree.
 /// To interpret these we use the following
-/// \n \n
 /// <B>General convention:</B>
 /// - Each face of the element that is represented by the octree
 ///   is parametrised by two (of the three)
@@ -3361,7 +3360,6 @@ OcTree* OcTree::gteq_face_neighbour(const int& direction,
 ///  Find (pointer to) `greater-or-equal-sized true edge neighbour' in 
 /// the given direction (LB,RB,DB,UB [the back edges],
 /// LD,RD,LU,RU [the side edges], LF,RF,DF,UF [the front edges]). 
-/// \n 
 /// Another way of interpreting this is that we're looking for 
 /// the neighbour across the present element's edge 'direction'.
 /// The various arguments return additional information about the
@@ -3374,7 +3372,6 @@ OcTree* OcTree::gteq_face_neighbour(const int& direction,
 /// is L[eft]D[own]B[ack]. The "high" vertex of this edge (located
 /// at the high value of this coordinate, i.e. at s[1]=1) is
 /// L[eft]U[p]B[ack]; etc
-/// \n
 /// The interpretation of the arguments is as follows:
 /// - In a forest, an OcTree can have multiple edge neighbours
 ///   (across an edge where multiple trees meet). \c i_root_edge_neighbour

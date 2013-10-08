@@ -80,7 +80,7 @@ namespace oomph
  public:
 
   /// \short typedef for a function that allows other preconditioners to be
-  /// employed to solve the subsidiary linear systems. \n
+  /// employed to solve the subsidiary linear systems. 
   /// The function should return a pointer to the required subsidiary
   /// preconditioner generated using new. This preconditioner is responsible
   /// for the destruction of the subsidiary preconditioners.
@@ -391,8 +391,8 @@ protected:
 
 
  //=============================================================================
- /// \short General purpose block triangular preconditioner\n
- /// By default this is Upper triangular.\n
+ /// \short General purpose block triangular preconditioner
+ /// By default this is Upper triangular.
  /// By default SuperLUPreconditioner (or SuperLUDistPreconditioner) is used to
  /// solve the subsidiary systems, but other preconditioners can be used by 
  /// setting them using passing a pointer to a function of type 

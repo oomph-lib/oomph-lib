@@ -141,7 +141,7 @@ class FSIFluidElement : public virtual FiniteElement
 ///    acting on an elastic pipe) that are already applied to 
 ///    the SolidFiniteElements by other means.
 /// .
-/// \n 
+///  
 /// The fluid-traction on the SolidFiniteElements 
 /// depends on the fluid variables (velocities and pressures) in 
 /// those fluid elements that are adjacent to the SolidFiniteElements' 
@@ -150,7 +150,7 @@ class FSIFluidElement : public virtual FiniteElement
 /// SolidFiniteElement's residual vector on these
 /// unknowns must be taken into account when computing the element's
 /// Jacobian matrix.
-/// \n 
+///  
 /// For each Gauss point in the FSIWallElement, we therefore store:
 /// - [a] pointer[s] to the FSIFluidElement[s] that is [are] "adjacent"
 ///   to the Gauss point in the FSIWallElement.
@@ -161,14 +161,14 @@ class FSIFluidElement : public virtual FiniteElement
 ///   fluid and solid domains to match exactly, therefore,
 ///   small "gaps" may occur between fluid and solid elements.)
 /// .
-/// \n
+/// 
 /// By default, each FSIWallElement is assumed to be exposed to fluid
 /// loading only on one of its faces. For elements that are immersed
 /// into fluid, so that a fluid traction is "exerted from both sides",
 /// the element can store pointers to multiple adjacent fluid elements
 /// (and local coordindates in these). This capability must be enabled
 /// by a call to FSIWallElement::enable_fluid_loading_on_both_sides().
-/// \n
+/// 
 /// Since the fluid traction can involve derivatives 
 /// of the velocity (think of Newtonian fluids), the traction is
 /// also affected by changes in the nodal positions of the adjacent fluid 
@@ -178,7 +178,7 @@ class FSIFluidElement : public virtual FiniteElement
 /// another FSIWallElement. To capture this influence, we
 /// provide the function FSIWallElement::node_update_adjacent_fluid_elements()
 /// which does exactly what it says....
-/// \n \n
+///  
 /// Finally, since oomph-lib's fluid and solid
 /// elements tend to employ different non-dimensionalisations
 /// for the stresses, the fluid traction (computed by
@@ -195,7 +195,7 @@ class FSIFluidElement : public virtual FiniteElement
 /// will differ -- check the documentation and/or implementation to see
 /// which parameters are used to non-dimensionalise the stresses
 /// in the respective elements!
-/// \n  \n
+///   
 /// The function FSIWallElement::fluid_load_vector(...) computes
 /// the fluid traction on the wall on the wall stress-scale.
 /// This function may be called in the get_load (say) function of
@@ -590,7 +590,7 @@ namespace FSI_functions
  /// This routine uses the procedures in the Multi_domain_functions namespace
  /// to set up the interaction by locating the adjacent (source) elements
  /// for each integration point of each solid element
- /// \n\n
+ /// 
  /// This is the vector based version it works simultaneously on
  /// fluid fsi boundaries identified in the vector boundary_in_fluid_mesh
  /// and the corresponding solid meshes in solid_mesh_pt.
@@ -660,7 +660,7 @@ namespace FSI_functions
  /// lagrange_multiplier_mesh_pt. The template parameters
  /// specify the type of the bulk solid elements and their spatial
  /// dimension. 
- /// \n\n
+ /// 
  /// This is the vector based version it works simultaneously on
  /// solid fsi boundaries identified in the vector b_solid_fsi
  /// and the corresponding Lagrange multiplier meshes in 
@@ -727,10 +727,10 @@ namespace FSI_functions
 /// Output is in tecplot readable form: Use fs1.mcr and fsi2.mcr
 /// (or straightforward modifications thereof), stored in
 /// doc/interaction/fsi_collapsible_channel/nondist_figures to process.
-/// \n\n
+/// 
 /// Pass pointer to fluid and solid meshes and pointer to the 
 /// DocInfo object that specifies the directory and the overall
-/// step number. \n
+/// step number. 
 /// Template parameter specifies the type of node that is used
 /// to implement the node update strategy.
 //============================================================================

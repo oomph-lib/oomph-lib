@@ -48,12 +48,10 @@ namespace oomph
 /// \short A class for all elements that solve the Advection 
 /// Diffusion equations in conservative form using isoparametric elements
 /// in a cylindrical polar coordinate system.
-/// \f[ 
 /// \mbox{\boldmath$\nabla\cdot$} \left(
 /// Pe \mbox{\boldmath$w$}(\mbox{\boldmath$x$}) u
 ///  - D(\mbox{\boldmath$x$)\mbox{\boldmath$\nabla$} u\right)
 /// = f(\mbox{\boldmath$x$})
-/// \f] 
 /// This contains the generic maths. Shape functions, geometric
 /// mapping etc. must get implemented in derived class.
 //=============================================================
