@@ -256,20 +256,20 @@ namespace oomph
 /// Class to impose point source to (wrapped) Helmholtz element
 //=====================================================================
 template<class ELEMENT> 
-class HelmholtzPointSourceElement : public virtual ELEMENT
+class GeneralisedHelmholtzPointSourceElement : public virtual ELEMENT
 {
 
 public:
 
  /// Constructor
- HelmholtzPointSourceElement()
+ GeneralisedHelmholtzPointSourceElement()
   {
    // Initialise
    Point_source_magnitude=std::complex<double>(0.0,0.0);
   }
  
  /// Destructor (empty)
- ~HelmholtzPointSourceElement(){}
+ ~GeneralisedHelmholtzPointSourceElement(){}
  
  /// Set local coordinate and magnitude of point source
  void setup(const Vector<double>& s_point_source,
@@ -346,7 +346,7 @@ private:
      /*IF it's not a boundary condition*/
      if(local_eqn_real >= 0)
       {
-       residuals[local_eqn_real] += Point_source_magnitude.real()*psi(l);
+       residuals[local_eqn_real] -= 2.0*Point_source_magnitude.real()*psi(l);
       }     
      
      // Second, compute the imaginary part contribution 
@@ -361,7 +361,7 @@ private:
      if(local_eqn_imag >= 0)
       {
        // Add body force/source term and Helmholtz bit
-       residuals[local_eqn_imag] += Point_source_magnitude.imag()*psi(l);
+       residuals[local_eqn_imag] -= 2.0*Point_source_magnitude.imag()*psi(l);
       }     
     }
   }
@@ -382,7 +382,7 @@ private:
 /// wrapped element
 //=======================================================================
  template<class ELEMENT>
- class FaceGeometry<HelmholtzPointSourceElement<ELEMENT> > 
+ class FaceGeometry<GeneralisedHelmholtzPointSourceElement<ELEMENT> > 
   : public virtual FaceGeometry<ELEMENT>
  {
  public:
@@ -395,7 +395,7 @@ private:
 /// that for the underlying wrapped element
 //=======================================================================
  template<class ELEMENT>
- class FaceGeometry<FaceGeometry<HelmholtzPointSourceElement<ELEMENT> > >
+ class FaceGeometry<FaceGeometry<GeneralisedHelmholtzPointSourceElement<ELEMENT> > >
   : public virtual FaceGeometry<FaceGeometry<ELEMENT> >
  {
  public:
@@ -408,7 +408,7 @@ private:
 /// PML layers.
 //=======================================================================
  template<class ELEMENT>
-class PMLLayerElement<HelmholtzPointSourceElement<ELEMENT> > : 
+class PMLLayerElement<GeneralisedHelmholtzPointSourceElement<ELEMENT> > : 
  public virtual PMLLayerElement<ELEMENT> 
 {
 
@@ -430,7 +430,7 @@ class PMLLayerElement<HelmholtzPointSourceElement<ELEMENT> > :
  template<class ELEMENT>
 class PMLLayerElement<
   ProjectableGeneralisedFourierDecomposedHelmholtzElement<
-  HelmholtzPointSourceElement<ELEMENT> > >: 
+  GeneralisedHelmholtzPointSourceElement<ELEMENT> > >: 
  public virtual PMLLayerElement<ELEMENT> 
 {
 
@@ -739,6 +739,18 @@ setup_point_source()
  Mesh_as_geom_obj_pt->locate_zeta(x_point_source,sub_geom_object_pt,
                                   s_point_source);
 
+ // Set point force
+ if(x_point_source[0]==0.0)
+  { 
+   if(ProblemParameters::N_fourier>0)
+    {
+     // if source on z axis, only contribution to residual comes 
+     // from Fourier wavenumber zero
+     ProblemParameters::Magnitude.real() = 0.0;
+     ProblemParameters::Magnitude.imag() = 0.0;
+    }
+  }
+ 
  // Set point force
  dynamic_cast<ELEMENT*>(sub_geom_object_pt)->
   setup(s_point_source,ProblemParameters::Magnitude);
@@ -1242,7 +1254,7 @@ int main(int argc, char **argv)
  // templated wrapper)
  GeneralisedFourierDecomposedHelmholtzProblem<
  ProjectableGeneralisedFourierDecomposedHelmholtzElement<
- HelmholtzPointSourceElement<
+ GeneralisedHelmholtzPointSourceElement<
  TGeneralisedFourierDecomposedHelmholtzElement<3> > > > problem;
  
 #else
