@@ -3138,10 +3138,11 @@ template<class ELEMENT>
   {
    
     public:
-
-     /// \short Build mesh, based on the specifications on
-     /// TriangleMeshParameters
-     SolidTriangleMesh(
+   
+  /// \short Build mesh, based on closed curve that specifies
+  /// the outer boundary of the domain and any number of internal
+  /// clsed curves. Specify target area for uniform element size.
+    SolidTriangleMesh(
        TriangleMeshParameters &triangle_mesh_parameters, 
        TimeStepper* time_stepper_pt=&Mesh::Default_TimeStepper)
      : TriangleMesh<ELEMENT>(triangle_mesh_parameters, time_stepper_pt)
@@ -3150,9 +3151,24 @@ template<class ELEMENT>
          set_lagrangian_nodal_coordinates();
        }
 
-     /// Empty Destructor
-     virtual ~SolidTriangleMesh() { }
+   SolidTriangleMesh(const std::string& node_file_name,
+                     const std::string& element_file_name,
+                     const std::string& poly_file_name,
+                     TimeStepper* time_stepper_pt=
+                     &Mesh::Default_TimeStepper,
+                     const bool &use_attributes=false) :
+    TriangleMesh<ELEMENT>(node_file_name,
+                          element_file_name,
+                          poly_file_name,
+                          time_stepper_pt,
+                          use_attributes)
+    {
+     //Assign the Lagrangian coordinates
+     set_lagrangian_nodal_coordinates();
+    }
 
+   /// Empty Destructor
+     virtual ~SolidTriangleMesh() { }
   };
 
 #endif

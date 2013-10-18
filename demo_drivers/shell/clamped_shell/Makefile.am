@@ -2,7 +2,7 @@
 include $(top_srcdir)/config/makefile_templates/demo_drivers
 
 # Name of executable
-check_PROGRAMS=clamped_shell clamped_shell_with_arclength_cont
+check_PROGRAMS=clamped_shell clamped_shell_with_arclength_cont unstructured_clamped_curved_shell
 
 #-------------------------------------------------------------------
 
@@ -23,5 +23,14 @@ clamped_shell_with_arclength_cont_SOURCES = \
 # $(FLIBS) is included in case the solver involves fortran sources.
 clamped_shell_with_arclength_cont_LDADD = \
 -L@libdir@ -lshell -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
+
+#-------------------------------------------------------------------
+
+# Sources for executable
+unstructured_clamped_curved_shell_SOURCES = unstructured_clamped_curved_shell.cc 
+
+# Required libraries:
+# $(FLIBS) is included in case the solver involves fortran sources.
+unstructured_clamped_curved_shell_LDADD = -L@libdir@ -lshell -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
 
 #-------------------------------------------------------------------

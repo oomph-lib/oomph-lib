@@ -2,7 +2,7 @@
 include $(top_srcdir)/config/makefile_templates/demo_drivers
 
 # Name of executable
-check_PROGRAMS=plate 
+check_PROGRAMS=plate unstructured_clamped_square_plate
 
 #-------------------------------------------------------------------
 
@@ -13,5 +13,12 @@ plate_SOURCES = plate.cc
 # $(FLIBS) is included in case the solver involves fortran sources.
 plate_LDADD = -L@libdir@ -lshell -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
 
+#-------------------------------------------------------------------
 
+# Sources for executable
+unstructured_clamped_square_plate_SOURCES = unstructured_clamped_square_plate.cc
+
+# Required libraries:
+# $(FLIBS) is included in case the solver involves fortran sources.
+unstructured_clamped_square_plate_LDADD = -L@libdir@ -lshell -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
 #-------------------------------------------------------------------

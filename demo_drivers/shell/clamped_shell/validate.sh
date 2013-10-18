@@ -4,7 +4,7 @@
 OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
 
 #Set the number of tests to be checked
-NUM_TESTS=2
+NUM_TESTS=3
 
 # Setup validation directory
 #---------------------------
@@ -85,6 +85,32 @@ fi
 mv RESLT RESLT_shell
 
 
+# Validation for unstructured mesh triangles for a clamped circular tube
+#---------------------------------------------------------------------
+
+mkdir RESLT_unstructured_curved_shell
+
+echo "Running unstructured_curved_shell validation "
+../unstructured_clamped_curved_shell ../Rectangle_CirTube.1.node ../Rectangle_CirTube.1.ele ../Rectangle_CirTube.1.poly > OUTPUT_unstructured_curved_shell
+
+echo "done"
+echo " " >> validation.log
+echo "Unstructured curved shell validation" \
+ >> validation.log
+echo "---------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat RESLT_unstructured_curved_shell/soln1.dat RESLT_unstructured_curved_shell/soln2.dat > unstructured_curved_shell.dat
+
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../../bin/fpdiff.py ../validata/unstructured_curved_shell.dat.gz \
+ unstructured_curved_shell.dat >> validation.log
+fi
 
 
 # Append output to global validation log file

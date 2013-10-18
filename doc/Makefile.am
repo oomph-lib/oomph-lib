@@ -45,8 +45,9 @@ mpi \
 creating_doc \
 linear_elasticity \
 time_harmonic_fourier_decomposed_linear_elasticity \
-time_harmonic_linear_elasticity \
 fourier_decomposed_helmholtz \
+c1_element \
+time_harmonic_linear_elasticity \
 generalised_fourier_decomposed_helmholtz \
 generalised_helmholtz \
 axisym_linear_elasticity \

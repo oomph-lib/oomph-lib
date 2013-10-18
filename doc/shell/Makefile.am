@@ -1,2 +1,3 @@
 SUBDIRS = \
- clamped_shell
+ clamped_shell \
+ linear_shell

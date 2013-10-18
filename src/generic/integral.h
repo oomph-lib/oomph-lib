@@ -804,6 +804,46 @@ class TGauss<1,4> : public Integral
 
 };
 
+//=========================================================
+template<>
+class TGauss<1,5> : public Integral
+{
+  private:
+
+ /// Number of integration points in the scheme
+ static const unsigned Npts=5;
+ /// Array to hold the weights and knots (defined in cc file)
+ static const double Knot[5][1], Weight[5];
+
+  public:
+
+ /// Default constructor (empty)
+ TGauss(){};
+
+ /// Broken copy constructor
+ TGauss(const TGauss& dummy) 
+  { 
+   BrokenCopy::broken_copy("TGauss");
+  } 
+ 
+ /// Broken assignment operator
+ void operator=(const TGauss&) 
+  {
+   BrokenCopy::broken_assign("TGauss");
+  }
+
+ /// Number of integration points of the scheme
+ unsigned nweight() const {return Npts;}
+
+ /// Return coordinate x[j] of integration point i
+ double knot(const unsigned &i, const unsigned &j) const
+  {return Knot[i][j];}
+
+ /// Return weight of integration point i
+ double weight(const unsigned &i) const {return Weight[i];}
+
+};
+
 
 //=========================================================
 /// 2D Gaussian integration class for linear triangles.
@@ -949,6 +989,94 @@ class TGauss<2,4> : public Integral
 
 };
 
+//------------------------------------------------------------
+//"Full integration" weights for 2D triangles
+// accurate up to order 11
+// http://people.sc.fsu.edu/~jburkardt/datasets/quadrature_rules_tri/
+// quadrature_rules_tri.html
+//------------------------------------------------------------
+ template<>
+ class TGauss<2,13> : public Integral
+ {
+ private:
+  
+  /// Number of integration points in the scheme
+  static const unsigned Npts=37;
+  /// Array to hold the weights and knots (defined in cc file)
+  static const double Knot[37][2], Weight[37];
+  
+ public:
+  
+  /// Default constructor (empty)
+  TGauss(){};
+   
+  /// Broken copy constructor
+  TGauss(const TGauss& dummy) 
+   { 
+    BrokenCopy::broken_copy("TGauss");
+   } 
+  
+  /// Broken assignment operator
+  void operator=(const TGauss&) 
+   {
+    BrokenCopy::broken_assign("TGauss");
+   }
+  
+  /// Number of integration points of the scheme
+  unsigned nweight() const {return Npts;}
+  
+  /// Return coordinate x[j] of integration point i
+  double knot(const unsigned &i, const unsigned &j) const
+   {return Knot[i][j];}
+  
+  /// Return weight of integration point i
+  double weight(const unsigned &i) const {return Weight[i];}
+ };
+
+//------------------------------------------------------------
+//"Full integration" weights for 2D triangles
+// accurate up to order 15
+// http://people.sc.fsu.edu/~jburkardt/datasets/quadrature_rules_tri/quadrature_rules_tri.html
+//------------------------------------------------------------
+
+template<>
+class TGauss<2,5> : public Integral
+{
+  private:
+
+ /// Number of integration points in the scheme
+ static const unsigned Npts=64;
+ /// Array to hold the weights and knots (defined in cc file)
+ static const double Knot[64][2], Weight[64];
+
+  public:
+
+ /// Default constructor (empty)
+ TGauss(){};
+
+ /// Broken copy constructor
+ TGauss(const TGauss& dummy) 
+  { 
+   BrokenCopy::broken_copy("TGauss");
+  } 
+ 
+ /// Broken assignment operator
+ void operator=(const TGauss&) 
+  {
+   BrokenCopy::broken_assign("TGauss");
+  }
+
+ /// Number of integration points of the scheme
+ unsigned nweight() const {return Npts;}
+
+ /// Return coordinate x[j] of integration point i
+ double knot(const unsigned &i, const unsigned &j) const
+  {return Knot[i][j];}
+
+ /// Return weight of integration point i
+ double weight(const unsigned &i) const {return Weight[i];}
+
+};
 
 //=========================================================
 /// 3D Gaussian integration class for tets.
