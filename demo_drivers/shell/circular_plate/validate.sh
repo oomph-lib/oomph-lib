@@ -22,7 +22,7 @@ cd Validation
 
 mkdir RESLT
 
-echo "Running circualr flat plate "
+echo "Running circular flat plate "
 ../unstructured_clamped_circular_plate ../CircularPlate.1.node ../CircularPlate.1.ele ../CircularPlate.1.poly > OUTPUT
 
 echo "done"
@@ -41,7 +41,7 @@ if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/circular_plate.dat.gz \
- circular_plate.dat >> validation.log
+ circular_plate.dat 4.7 1.0e-12 >> validation.log
 fi
 
 

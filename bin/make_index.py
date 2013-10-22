@@ -59,8 +59,8 @@ def print_key(doc_root_directory,key,level,anchor):
  #with spaces removed and '.' instead of '@'
  new_anchor = anchor.replace(' ','')
  anchor = new_anchor
- anchor_string = "\htmlonly <a class=\"anchor\" id=\"" \
- + anchor + "\"></a>\endhtmlonly"
+ anchor_string = "<a class=\"anchor\" id=\"" \
+ + anchor + "\"></a>"
  anchor_tag = "<a href=\"#" + anchor + "\">"
 
  #If we don't have a link then it's a submenu heading, which we allow to
@@ -80,8 +80,7 @@ def print_key(doc_root_directory,key,level,anchor):
   #"<img src=\"../collapse.png\" id=\"im_id",div_counter,"\">", "</a>",
   #print  "\endhtmlonly"
   print end_tag, \
-  "\htmlonly",\
-  "<div id=\"div_id",div_counter,"\"",style,">\endhtmlonly"
+  "<div id=\"div_id",div_counter,"\"",style,">"
 
  #Otherwise just print the link and key
  else:
@@ -133,7 +132,7 @@ def nested_output(doc_root_directory,index,level=0,anchor=""):
 
    #If there is no key the entry is not a link, so we end the text div
    if key[1]=='':
-    print "\htmlonly </div> \endhtmlonly"
+    print "</div>"
    #Get the new key
    key = get_key_and_link(entry)
    #There will only be a subindex entry if we have no link
@@ -169,7 +168,7 @@ def nested_output(doc_root_directory,index,level=0,anchor=""):
  anchor = anchor_stem
 
  if key[1]=='':
-  print "\htmlonly </div> \endhtmlonly"
+  print "</div>"
  if level>2 :
   print "</ul>"
 
@@ -218,17 +217,17 @@ def make_index(filename,doc_root_directory):
 
  #Output Quick links to the Alphabet
  import string
- print "\htmlonly"
  first_letters = "<h1>"
  for char in string.ascii_uppercase:
   first_letters += "<a href=" + doc_root_directory + \
   "/index/html/index.html#" + char + ">" + char + "</a>"
  first_letters += "</h1>"
+ print "\htmlonly"
  print first_letters
- print "\endhtmlonly"
 
  #Output the list
  nested_output(doc_root_directory,main_index)
+ print "\endhtmlonly"
   
 
 if __name__ == "__main__":

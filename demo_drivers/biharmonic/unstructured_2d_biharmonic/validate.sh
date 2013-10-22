@@ -34,7 +34,7 @@ if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/biharmonicbell.dat.gz  \
-         RESLT_bell/soln0.dat >> validation.log
+         RESLT_bell/soln0.dat 0.1 1.0e-11 >> validation.log
 fi
 
 # Validation for unstructured mesh 2d biharmonic with curved elements
@@ -57,7 +57,7 @@ if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/biharmoniccurved.dat.gz  \
-         RESLT_curved/soln0.dat >> validation.log
+         RESLT_curved/soln0.dat 0.1 3.0e-10 >> validation.log
 fi
 
 

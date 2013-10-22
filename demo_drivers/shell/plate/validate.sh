@@ -65,8 +65,8 @@ cat RESLT_unstructured_plate/soln1.dat RESLT_unstructured_plate/soln2.dat > unst
 if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/unstructured_square_plate.dat.gz \
- unstructured_square_plate.dat >> validation.log
+../../../../bin/fpdiff.py  ../validata/unstructured_square_plate.dat.gz \
+ unstructured_square_plate.dat 0.3 1.0e-14 >> validation.log
 fi
 
 
