@@ -588,7 +588,7 @@ class TriangleMeshParameters
     // Convert to a *char required by the triangulate function
     char triswitches[100];
     sprintf(triswitches,"%s",input_string_stream.str().c_str());
-
+    
     // Build the input triangulateio object from the .poly file
     build_triangulateio(poly_file_name, triangle_in);
     
@@ -2035,115 +2035,226 @@ protected:
   // \short A set that contains the open curves created by this
   /// object therefore it is necessary to free their associated memory
   std::set<TriangleMeshOpenCurve*> Free_open_curve_pt;
-
+  
   /// \short Helper function for passing the connection information
   // from the input curve(polyline or curviline) to the output polyline
   void compute_connection_information(
       TriangleMeshCurveSection* input_curve_pt,
-      TriangleMeshCurveSection* output_curve_pt)
+      TriangleMeshCurveSection* output_curve_pt,
+      const bool invert_connection_information = false)
   {
    // Pass vertices connection information
-
-   // Initial vertex
-   if (input_curve_pt->is_initial_vertex_connected())
+   
+   // Are we inverting the connection information?
+   if (!invert_connection_information)
     {
-     output_curve_pt->set_initial_vertex_connected();
-
-     output_curve_pt->initial_vertex_connected_bnd_id() =
-       input_curve_pt->initial_vertex_connected_bnd_id();
-
-     // We need to know if we have to compute the vertex number or
-     // if we need just to copy it
-     if (input_curve_pt->is_initial_vertex_connected_to_curviline())
+     // Initial vertex
+     if (input_curve_pt->is_initial_vertex_connected())
       {
-       double initial_s_connection =
-         input_curve_pt->initial_s_connection_value();
+       output_curve_pt->set_initial_vertex_connected();
 
-       unsigned bnd_id =
-         output_curve_pt->initial_vertex_connected_bnd_id();
+       output_curve_pt->initial_vertex_connected_bnd_id() =
+        input_curve_pt->initial_vertex_connected_bnd_id();
 
-       double s_tolerance =
-         input_curve_pt->tolerance_for_s_connection();
+       // We need to know if we have to compute the vertex number or
+       // if we need just to copy it
+       if (input_curve_pt->is_initial_vertex_connected_to_curviline())
+        {
+         double initial_s_connection =
+          input_curve_pt->initial_s_connection_value();
 
-       output_curve_pt->initial_vertex_connected_n_vertex() =
-         get_associated_vertex_to_svalue(
+         unsigned bnd_id =
+          output_curve_pt->initial_vertex_connected_bnd_id();
+
+         double s_tolerance =
+          input_curve_pt->tolerance_for_s_connection();
+
+         output_curve_pt->initial_vertex_connected_n_vertex() =
+          get_associated_vertex_to_svalue(
            initial_s_connection, bnd_id, s_tolerance);
 
-       // The output polyline is not longer connected to a curviline because
-       // we will be using the polyline representation of the curviline
-       output_curve_pt->unset_initial_vertex_connected_to_curviline();
+         // The output polyline is not longer connected to a curviline because
+         // we will be using the polyline representation of the curviline
+         output_curve_pt->unset_initial_vertex_connected_to_curviline();
+
+        }
+       else
+        {
+         output_curve_pt->initial_vertex_connected_n_vertex() =
+          input_curve_pt->initial_vertex_connected_n_vertex();
+
+        }
+
+       // Get the initial vertex coordinates
+       Vector<double> initial_vertex;
+       output_curve_pt->initial_vertex_coordinate(initial_vertex);
+
+       // Boundary id to which the curve is connected
+       unsigned bnd_id = output_curve_pt->initial_vertex_connected_bnd_id();
+
+       // Establish the vertex coordinates as untouchable for the adaptation
+       // process. It means that un-refinement can not take off the vertices
+       // that receive connections
+       this->Boundary_connections_pt[bnd_id].insert(initial_vertex);
 
       }
-     else
+
+     // Final vertex
+     if (input_curve_pt->is_final_vertex_connected())
       {
-       output_curve_pt->initial_vertex_connected_n_vertex() =
-         input_curve_pt->initial_vertex_connected_n_vertex();
+       output_curve_pt->set_final_vertex_connected();
+
+       output_curve_pt->final_vertex_connected_bnd_id() =
+        input_curve_pt->final_vertex_connected_bnd_id();
+
+       // We need to know if we have to compute the vertex number or
+       // if we need just to copy it
+       if (input_curve_pt->is_final_vertex_connected_to_curviline())
+        {
+         double final_s_connection =
+          input_curve_pt->final_s_connection_value();
+
+         unsigned bnd_id =
+          input_curve_pt->final_vertex_connected_bnd_id();
+
+         double s_tolerance =
+          input_curve_pt->tolerance_for_s_connection();
+
+         output_curve_pt->final_vertex_connected_n_vertex() =
+          get_associated_vertex_to_svalue(
+           final_s_connection, bnd_id, s_tolerance);
+
+         // The output polyline is not longer connected to a curviline because
+         // we will be using the polyline representation of the curviline
+         output_curve_pt->unset_final_vertex_connected_to_curviline();
+        }
+       else
+        {
+         output_curve_pt->final_vertex_connected_n_vertex() =
+          input_curve_pt->final_vertex_connected_n_vertex();
+
+        }
+
+       // Get the final vertex coordinates
+       Vector<double> final_vertex;
+       output_curve_pt->final_vertex_coordinate(final_vertex);
+
+       // Boundary id to which the curve is connected
+       unsigned bnd_id = output_curve_pt->final_vertex_connected_bnd_id();
+
+       // Establish the vertex coordinates as untouchable for the adaptation
+       // process. It means that un-refinement can not take off the vertices
+       // that receive connections
+       this->Boundary_connections_pt[bnd_id].insert(final_vertex);
 
       }
 
-     // Get the initial vertex coordinates
-     Vector<double> initial_vertex;
-     output_curve_pt->initial_vertex_coordinate(initial_vertex);
-
-     // Boundary id to which the curve is connected
-     unsigned bnd_id = output_curve_pt->initial_vertex_connected_bnd_id();
-
-     // Establish the vertex coordinates as untouchable for the adaptation
-     // process. It means that un-refinement can not take off the vertices
-     // that receive connections
-     this->Boundary_connections_pt[bnd_id].insert(initial_vertex);
-
-    }
-
-   // Final vertex
-   if (input_curve_pt->is_final_vertex_connected())
+    } // if (!invert_connection_information)
+   else
     {
-     output_curve_pt->set_final_vertex_connected();
-
-     output_curve_pt->final_vertex_connected_bnd_id() =
-       input_curve_pt->final_vertex_connected_bnd_id();
-
-     // We need to know if we have to compute the vertex number or
-     // if we need just to copy it
-     if (input_curve_pt->is_final_vertex_connected_to_curviline())
+     // Invert the connection information
+     // Initial vertex
+     if (input_curve_pt->is_initial_vertex_connected())
       {
-       double final_s_connection =
-         input_curve_pt->final_s_connection_value();
+       output_curve_pt->set_final_vertex_connected();
 
-       unsigned bnd_id =
-         input_curve_pt->final_vertex_connected_bnd_id();
+       output_curve_pt->final_vertex_connected_bnd_id() =
+        input_curve_pt->initial_vertex_connected_bnd_id();
 
-       double s_tolerance =
-         input_curve_pt->tolerance_for_s_connection();
+       // We need to know if we have to compute the vertex number or
+       // if we need just to copy it
+       if (input_curve_pt->is_initial_vertex_connected_to_curviline())
+        {
+         double initial_s_connection =
+          input_curve_pt->initial_s_connection_value();
 
-       output_curve_pt->final_vertex_connected_n_vertex() =
-         get_associated_vertex_to_svalue(
-         final_s_connection, bnd_id, s_tolerance);
+         unsigned bnd_id =
+          input_curve_pt->initial_vertex_connected_bnd_id();
 
-       // The output polyline is not longer connected to a curviline because
-       // we will be using the polyline representation of the curviline
-       output_curve_pt->unset_final_vertex_connected_to_curviline();
+         double s_tolerance =
+          input_curve_pt->tolerance_for_s_connection();
+
+         output_curve_pt->final_vertex_connected_n_vertex() =
+          get_associated_vertex_to_svalue(
+           initial_s_connection, bnd_id, s_tolerance);
+         
+         // The output polyline is not longer connected to a curviline because
+         // we will be using the polyline representation of the curviline
+         output_curve_pt->unset_final_vertex_connected_to_curviline();
+
+        }
+       else
+        {
+         output_curve_pt->final_vertex_connected_n_vertex() =
+          input_curve_pt->initial_vertex_connected_n_vertex();
+
+        }
+
+       // Get the final vertex coordinates
+       Vector<double> final_vertex;
+       output_curve_pt->final_vertex_coordinate(final_vertex);
+
+       // Boundary id to which the curve is connected
+       unsigned bnd_id = output_curve_pt->final_vertex_connected_bnd_id();
+
+       // Establish the vertex coordinates as untouchable for the adaptation
+       // process. It means that un-refinement can not take off the vertices
+       // that receive connections
+       this->Boundary_connections_pt[bnd_id].insert(final_vertex);
+
       }
-     else
+
+     // Final vertex
+     if (input_curve_pt->is_final_vertex_connected())
       {
-       output_curve_pt->final_vertex_connected_n_vertex() =
-         input_curve_pt->final_vertex_connected_n_vertex();
+       output_curve_pt->set_initial_vertex_connected();
+
+       output_curve_pt->initial_vertex_connected_bnd_id() =
+        input_curve_pt->final_vertex_connected_bnd_id();
+
+       // We need to know if we have to compute the vertex number or
+       // if we need just to copy it
+       if (input_curve_pt->is_final_vertex_connected_to_curviline())
+        {
+         double final_s_connection =
+          input_curve_pt->final_s_connection_value();
+
+         unsigned bnd_id =
+          input_curve_pt->final_vertex_connected_bnd_id();
+
+         double s_tolerance =
+          input_curve_pt->tolerance_for_s_connection();
+
+         output_curve_pt->initial_vertex_connected_n_vertex() =
+          get_associated_vertex_to_svalue(
+           final_s_connection, bnd_id, s_tolerance);
+
+         // The output polyline is not longer connected to a curviline because
+         // we will be using the polyline representation of the curviline
+         output_curve_pt->unset_initial_vertex_connected_to_curviline();
+        }
+       else
+        {
+         output_curve_pt->initial_vertex_connected_n_vertex() =
+          input_curve_pt->final_vertex_connected_n_vertex();
+
+        }
+
+       // Get the final vertex coordinates
+       Vector<double> initial_vertex;
+       output_curve_pt->initial_vertex_coordinate(initial_vertex);
+
+       // Boundary id to which the curve is connected
+       unsigned bnd_id = output_curve_pt->initial_vertex_connected_bnd_id();
+
+       // Establish the vertex coordinates as untouchable for the adaptation
+       // process. It means that un-refinement can not take off the vertices
+       // that receive connections
+       this->Boundary_connections_pt[bnd_id].insert(initial_vertex);
 
       }
-
-     // Get the final vertex coordinates
-     Vector<double> final_vertex;
-     output_curve_pt->final_vertex_coordinate(final_vertex);
-
-     // Boundary id to which the curve is connected
-     unsigned bnd_id = output_curve_pt->final_vertex_connected_bnd_id();
-
-     // Establish the vertex coordinates as untouchable for the adaptation
-     // process. It means that un-refinement can not take off the vertices
-     // that receive connections
-     this->Boundary_connections_pt[bnd_id].insert(final_vertex);
-
-    }
+     
+    } // else if (!invert_connection_information)
 
   }
 
@@ -2710,7 +2821,7 @@ template<class ELEMENT>
      // Convert to a *char required by the triangulate function
      char triswitches[100];
      sprintf(triswitches,"%s",input_string_stream.str().c_str());
-
+     
      // Build triangulateio refined object
      triangulate(triswitches, &triangle_refine, &this->Triangulateio, 0);       
      // Build scaffold
@@ -2883,12 +2994,19 @@ template<class ELEMENT>
      Vector<double> &vertex_coordinates,
      const unsigned &dst_b_id, unsigned &vertex_number);
 
-   /// \short Restore the connections on the specific internal boundary
-   /// They could be change on the vertices numbering when adding
-   /// (refinement) or erasing (unrefinement) nodes (vertices)
-   void restore_connections_on_internal_boundary(
-    TriangleMeshPolyLine* polyline_pt);
-
+   /// \short Restore the connections on the specific internal
+   /// boundary. They could be change on the vertices numbering when
+   /// adding (refinement) or erasing (unrefinement) nodes (vertices).
+   /// If we call with the "first_try = true" it returns false in case
+   /// it could not restore any connections and is expected to invert
+   /// the connection information of the polyline.  When it is called
+   /// with "first_try = false" (only after inverting the connection
+   /// information of the polyline) then it throws an error in case it
+   /// could not restore the connections
+   bool restore_connections_on_internal_boundary(
+    TriangleMeshPolyLine* polyline_pt,
+    const bool first_try = true);
+   
    /// \short Helper function that updates the input polygon's PSLG
    /// by using the end-points of elements from FaceMesh(es) that are
    /// constructed for the boundaries associated with the segments of the

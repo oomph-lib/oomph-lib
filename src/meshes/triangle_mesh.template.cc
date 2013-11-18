@@ -1336,7 +1336,24 @@ void TriangleMesh<ELEMENT>::setup_boundary_coordinates(const unsigned& b,
         // "boundary_id" = idpolyline is stored on the "edge_segment"
         pair_id_vertex = std::make_pair(idpolyline, count_vertices);
         vertices_connections[pair_id_vertex] = edge_segment;
+        
+        // Added line to allow connect to a vertex by using any reference
+        // of it (as last vertex of previous polyline or as first vertex
+        // of the current polyline)
+        if (count_seg>0 && count_vertices==0)
+         {
+          unsigned id_previous_polyline = 
+           outer_boundary_pt->curve_section_pt(count_seg-1)->boundary_id();
 
+          unsigned n_previous_polyline_vertices =
+           outer_boundary_pt->curve_section_pt(count_seg-1)->nvertex()-1;
+
+          pair_id_vertex = std::make_pair(
+           id_previous_polyline, n_previous_polyline_vertices);
+          vertices_connections[pair_id_vertex] = edge_segment;    
+
+         }
+        
         // By doing this we close the boundary
         // By setting that the segment is composed by the
         // vertex with number "edge_segment" and the vertex
@@ -1353,8 +1370,8 @@ void TriangleMesh<ELEMENT>::setup_boundary_coordinates(const unsigned& b,
         vertices_connections[pair_id_vertex] = edge_segment;
 
         // Added line to allow connect to a vertex by using any reference
-        // of it (as last vertex of previos polyline or as first vertex
-        // o f the current polyline)
+        // of it (as last vertex of previous polyline or as first vertex
+        // of the current polyline)
         if (count_seg>0 && count_vertices==0)
          {
           unsigned id_previous_polyline = 
@@ -1436,7 +1453,26 @@ void TriangleMesh<ELEMENT>::setup_boundary_coordinates(const unsigned& b,
           // "boundary_id" = idpolyline is stored on the "edge_segment"
           pair_id_vertex = std::make_pair(idpolyline, count_vertices);
           vertices_connections[pair_id_vertex] = edge_segment;
-
+          
+          // Added line to allow connect to a vertex by using any reference
+          // of it (as last vertex of previous polyline or as first vertex
+          // o f the current polyline)
+          if (count_seg>0 && count_vertices==0)
+           {
+            unsigned id_previous_polyline = 
+             internal_polygon_pt[count_hole]->curve_section_pt(count_seg-1)->
+             boundary_id();
+            
+            unsigned n_previous_polyline_vertices =
+             internal_polygon_pt[count_hole]->curve_section_pt(count_seg-1)->
+             nvertex()-1;
+            
+            pair_id_vertex = std::make_pair(
+             id_previous_polyline, n_previous_polyline_vertices);
+            vertices_connections[pair_id_vertex] = edge_segment;    
+            
+           }
+          
           // Closing the boundary by setting the last vertex
           // same as the first vertex of the internal closed boundary
           // (hole_vertex_start)
@@ -1451,25 +1487,25 @@ void TriangleMesh<ELEMENT>::setup_boundary_coordinates(const unsigned& b,
           pair_id_vertex = std::make_pair(idpolyline, count_vertices);
           vertices_connections[pair_id_vertex] = edge_segment;
 
-        // Added line to allow connect to a vertex by using any reference
-        // of it (as last vertex of previos polyline or as first vertex
-        // o f the current polyline)
-        if (count_seg>0 && count_vertices==0)
-         {
-          unsigned id_previous_polyline = 
-           internal_polygon_pt[count_hole]->curve_section_pt(count_seg-1)->
-           boundary_id();
-
-          unsigned n_previous_polyline_vertices =
-           internal_polygon_pt[count_hole]->curve_section_pt(count_seg-1)->
-           nvertex()-1;
-
-          pair_id_vertex = std::make_pair(
-           id_previous_polyline, n_previous_polyline_vertices);
-          vertices_connections[pair_id_vertex] = edge_segment;    
-
-         }
-
+          // Added line to allow connect to a vertex by using any reference
+          // of it (as last vertex of previous polyline or as first vertex
+          // o f the current polyline)
+          if (count_seg>0 && count_vertices==0)
+           {
+            unsigned id_previous_polyline = 
+             internal_polygon_pt[count_hole]->curve_section_pt(count_seg-1)->
+             boundary_id();
+            
+            unsigned n_previous_polyline_vertices =
+             internal_polygon_pt[count_hole]->curve_section_pt(count_seg-1)->
+             nvertex()-1;
+            
+            pair_id_vertex = std::make_pair(
+             id_previous_polyline, n_previous_polyline_vertices);
+            vertices_connections[pair_id_vertex] = edge_segment;    
+            
+           }
+          
           triangulate_io.segmentlist[count_tri]=edge_segment;
           triangulate_io.segmentlist[count_tri+1]=edge_segment+1;
           edge_segment++;
@@ -1633,7 +1669,7 @@ void TriangleMesh<ELEMENT>::setup_boundary_coordinates(const unsigned& b,
         vertices_connections[pair_id_vertex] = edge_segment;
 
         // Added line to allow connect to a vertex by using any reference
-        // of it (as last vertex of previos polyline or as first vertex
+        // of it (as last vertex of previous polyline or as first vertex
         // o f the current polyline)
         if (count_seg<n_polyline-1&&count_vertices==upper_limit_index-1)
          {
@@ -2524,29 +2560,29 @@ const Vector<double>& elem_error)
     // Gather all the information and use the TriangleMeshParameters
     // object which help us on the manage of all TriangleMesh object's
     // information
-
+    
     // Create the TriangleMeshParameters objects with the outer boundary
     // as the only one parameter
     TriangleMeshParameters triangle_mesh_parameters(closed_curve_pt);
-
+    
     // Pass information about the holes
     triangle_mesh_parameters.internal_closed_curve_pt() = hole_pt;
-
+    
     // Pass information about the internal open boundaries
     triangle_mesh_parameters.internal_open_curves_pt() = open_curves_pt;
-
+    
     // Pass information about max allowed area for elements
     triangle_mesh_parameters.element_area() = max_area;
-
+    
     // Pass information about the extra holes (not defined with closed
     // boundaries)
     triangle_mesh_parameters.extra_holes_coordinates() =
       this->Extra_holes_coordinates;
-
+    
     //Pass information about regions
     triangle_mesh_parameters.regions_coordinates() =
       this->Regions_coordinates;
-
+    
     // *****************************************************************
 
     if (solid_mesh_pt!=0)
@@ -3843,17 +3879,34 @@ bool RefineableTriangleMesh<ELEMENT>::update_open_curve_using_face_mesh(
       // connections.
       this->compute_connection_information(
        open_polyline_pt->polyline_pt(p), tmp_curve_section);
-
+      
       // Re-store the connection vertices
       // Since we have added or eliminated nodes (vertices) on the
       // mesh/domain then we need to restore the connections (it means,
       // compute the new vertices numbers for connections since they could
-      // be moved)
-      this->restore_connections_on_internal_boundary(tmp_polyline);
-
+      // be moved). Call it with the "first_try" option enabled
+      const bool restored_connections = 
+       this->restore_connections_on_internal_boundary(tmp_polyline);
+      
+      // Check if it was possible to restore the connections, if that
+      // is not the case then invert the connection information of the
+      // polyline and try to restore the connections again
+      if (!restored_connections)
+       {
+        // Invert the connection information of the polyline
+        const bool invert_connection_information = true;
+        this->compute_connection_information(
+         open_polyline_pt->polyline_pt(p), tmp_curve_section, 
+         invert_connection_information);
+        
+        // Last chage to restore the connections
+        const bool first_try = false;
+        this->restore_connections_on_internal_boundary(tmp_polyline,first_try);
+       }
+      
       std::set<TriangleMeshCurveSection*>::iterator it =
         this->Free_curve_section_pt.find(open_polyline_pt->curve_section_pt(p));
-
+      
       bool delete_it_on_destructor = false;
 
       if (it!=this->Free_curve_section_pt.end())
@@ -4534,71 +4587,125 @@ get_connected_vertex_number_on_dst_boundary(
 /// erasing nodes (vertices)
 //=========================================================================
 template<class ELEMENT>
-void RefineableTriangleMesh<ELEMENT>::
+bool RefineableTriangleMesh<ELEMENT>::
 restore_connections_on_internal_boundary(
- TriangleMeshPolyLine* polyline_pt)
+ TriangleMeshPolyLine* polyline_pt, const bool first_try)
 {
-
+ 
 #ifdef PARANOID
  // Get the associated boundary id of the current polyline
  unsigned bnd_id = polyline_pt->boundary_id();
 #endif
-
+ 
  // Verify if this polyline is connected to another polyline
-
+ 
  // ****************************************************************
  // 1) If it is connected then get the proper vertex number on the
  //    destination polyline
  // 2) Assign the proper vertex number
  // ****************************************************************
-
+ 
  // ****************************************************************
  // First check the initial end
  if (polyline_pt->is_initial_vertex_connected())
   {
    // We need to get the boundary id of the destination/connected
    // boundary
-   unsigned dst_bnd_id = polyline_pt->initial_vertex_connected_bnd_id();
-
+   unsigned dst_bnd_id_initial = 
+    polyline_pt->initial_vertex_connected_bnd_id();
+   
    // Get the vertex number according to the vertex coordinates
    // on the source boundary
-   Vector<double> src_vertex_coordinates =
+   Vector<double> src_vertex_coordinates_initial =
     polyline_pt->vertex_coordinate(0);
-
-   unsigned n_vertex_connection;
-
-   bool found_vertex_on_dst_boundary =
+   
+   unsigned n_vertex_connection_initial;
+   
+   bool found_vertex_on_dst_boundary_initial =
     get_connected_vertex_number_on_dst_boundary(
-     src_vertex_coordinates, dst_bnd_id, n_vertex_connection);
-
+     src_vertex_coordinates_initial, 
+     dst_bnd_id_initial, 
+     n_vertex_connection_initial);
+   
    // If no found it is because the original polyline could be
    // reversed, try again after reversing!!!
-   if (!found_vertex_on_dst_boundary)
+   if (!found_vertex_on_dst_boundary_initial)
     {
-     // Reverse the polyline
-     polyline_pt->reverse();
-
-     // Get the new vertex coordinates
-     src_vertex_coordinates =
-      polyline_pt->vertex_coordinate(0);
-
-     // Try it again!!!
-     found_vertex_on_dst_boundary =
-      get_connected_vertex_number_on_dst_boundary(
-       src_vertex_coordinates, dst_bnd_id, n_vertex_connection);
-
-     // If no found again then there is a problem with the vertices
-     if (!found_vertex_on_dst_boundary)
+     if (first_try)
       {
+       return false;
+      }
+     else
+      {
+       // If no found again then there is a problem with the vertices
 #ifdef PARANOID
        std::ostringstream error_message;
        error_message 
         << "It was not possible to find the associated "
         << "vertex number on the\ndestination boundary ("
-        << dst_bnd_id << ").\nThe source boundary is (" << bnd_id << ") and"
-        << "the vertex\ntrying to find on the destination boundary "
-        << "is (" << src_vertex_coordinates[0] << ","
-        << src_vertex_coordinates[1]<< ")\n"
+        << dst_bnd_id_initial
+        << ").\nThe source boundary is (" << bnd_id << ") and "
+        << "the vertex trying to find on\nthe destination boundary "
+        << "is (" << src_vertex_coordinates_initial[0] << ","
+        << src_vertex_coordinates_initial[1]<< ")\n"
+        << "Initial vertex connection\n";
+       throw OomphLibError(
+        error_message.str(),
+        OOMPH_CURRENT_FUNCTION,
+        OOMPH_EXCEPTION_LOCATION);
+#endif
+      } // else if (first_try)
+     
+    } // if (!found_vertex_on_dst_boundary_initial)
+   
+   polyline_pt->initial_vertex_connected_n_vertex() = 
+    n_vertex_connection_initial;
+   
+  }
+ 
+ // ****************************************************************
+ // and now the final end
+ if (polyline_pt->is_final_vertex_connected())
+  {
+   // We need to get the boundary id of the destination/connected
+   // boundary
+   unsigned dst_bnd_id_final = polyline_pt->final_vertex_connected_bnd_id();
+   
+   // Get the vertex number according to the vertex coordinates
+   // on the source boundary
+   unsigned tmp_n_vertices = polyline_pt->nvertex();
+   Vector<double> src_vertex_coordinates_final =
+    polyline_pt->vertex_coordinate(tmp_n_vertices-1);
+   
+   unsigned n_vertex_connection_final;
+   
+   bool found_vertex_on_dst_boundary_final =
+    get_connected_vertex_number_on_dst_boundary(
+     src_vertex_coordinates_final, 
+     dst_bnd_id_final, 
+     n_vertex_connection_final);
+   
+   // If no found it is because the original polyline could be
+   // reversed, try again after reversing!!!
+   if (!found_vertex_on_dst_boundary_final)
+    {
+     if (first_try)
+      {
+       return false;
+      }
+     else
+      {
+       // If no found again then there is a problem with the vertices
+#ifdef PARANOID
+       std::ostringstream error_message;
+       error_message 
+        << "It was not possible to find the associated "
+        << "vertex number on the\ndestination boundary ("
+        << dst_bnd_id_final 
+        << ").\nThe source boundary is (" << bnd_id << ") and "
+        << "the vertex trying to find on\nthe destination boundary "
+        << "is (" << src_vertex_coordinates_final[0] << ","
+        << src_vertex_coordinates_final[1]<< ")\n"
         << "Initial vertex connection\n";
        throw OomphLibError(
         error_message.str(),
@@ -4606,59 +4713,18 @@ restore_connections_on_internal_boundary(
         OOMPH_EXCEPTION_LOCATION);
 #endif
       }
-
-    }
-
-   polyline_pt->initial_vertex_connected_n_vertex() = n_vertex_connection;
-
+     
+    } // if (!found_vertex_on_dst_boundary_final)
+   
+   polyline_pt->final_vertex_connected_n_vertex() = 
+    n_vertex_connection_final;
+   
   }
-
- // ****************************************************************
- // and now the final end
- if (polyline_pt->is_final_vertex_connected())
-  {
-
-   // We need to get the boundary id of the destination/connected
-   // boundary
-   unsigned dst_bnd_id = polyline_pt->final_vertex_connected_bnd_id();
-
-   // Get the vertex number according to the vertex coordinates
-   // on the source boundary
-   unsigned tmp_n_vertices = polyline_pt->nvertex();
-   Vector<double> src_vertex_coordinates =
-    polyline_pt->vertex_coordinate(tmp_n_vertices-1);
-
-   unsigned n_vertex_connection;
-
-   bool found_vertex_on_dst_boundary =
-    get_connected_vertex_number_on_dst_boundary(
-     src_vertex_coordinates, dst_bnd_id, n_vertex_connection);
-
-   if (!found_vertex_on_dst_boundary)
-    {
-#ifdef PARANOID
-     std::ostringstream error_message;
-     error_message 
-      << "It was not possible to find the associated "
-      << "vertex number on the\ndestination boundary ("
-      << dst_bnd_id << ").\nThe source boundary is (" << bnd_id << ") and"
-      << "the vertex\ntrying to find on the destination boundary "
-      << "is (" << src_vertex_coordinates[0] << ","
-      << src_vertex_coordinates[1]<< ")\n"
-      << "Final vertex connection\n";
-     throw OomphLibError(
-      error_message.str(),
-      OOMPH_CURRENT_FUNCTION,
-      OOMPH_EXCEPTION_LOCATION);
-#endif
-    }
-
-   polyline_pt->final_vertex_connected_n_vertex() = n_vertex_connection;
-
-  }
-
+ 
+ return true;
+ 
 }
-
+ 
 //=========================================================================
 /// \short Helper function
 /// Creates an unsorted face mesh representation from the specified
@@ -5578,7 +5644,7 @@ surface_remesh_for_inner_hole_boundaries(Vector<Vector<double> >
 
         //Set the new hole centre
         poly_pt->internal_point() = internal_point_coord[ihole];
-
+        
       }
 
      }
@@ -5675,14 +5741,19 @@ surface_remesh_for_inner_hole_boundaries(Vector<Vector<double> >
      }
    }
   node_file.close();
-
+  
   // Get the segments information and use that info. to create the
   // polylines
-
+  
   // A map to store the segments associated to a boundary, non sorted
   std::map<unsigned,Vector<std::pair<unsigned,unsigned> > > 
    unsorted_boundary_segments;
-
+  
+  // Independent storage for the boundaries ids found in the segments so that
+  // the polylines, and therefore polygons be created in the order they appear
+  // in the polyfile
+  Vector<unsigned> sorted_boundaries_ids;
+   
   // Process poly file to extract edges
   //-----------------------------------
    
@@ -5771,6 +5842,31 @@ surface_remesh_for_inner_hole_boundaries(Vector<Vector<double> >
     // methods to bnd_id - 1)
     unsorted_boundary_segments[bnd_id-1].push_back(
      std::make_pair(lnode_id, rnode_id));
+    
+    // Add the boundary id to the vector of boundaries ids only if it
+    // has not been added, the polylines will be created using this
+    // order
+    
+    // Get the number of boundaries ids currently sorted
+    const unsigned nsorted_boundaries_ids = 
+     sorted_boundaries_ids.size();
+    // Flag to know if the boundary id was found
+    bool boundary_id_found = false;
+    for (unsigned ib = 0; ib < nsorted_boundaries_ids; ib++)
+     {
+      if (sorted_boundaries_ids[ib] == bnd_id - 1)
+       {
+        boundary_id_found = true;
+        break;
+       } // if (sorted_boundaries_ids[ib] == bnd_id - 1)
+     } // for (ib < nsorted_boundaries_ids)
+    
+    // If th boundary id has not been added, then add it!!!
+    if (!boundary_id_found)
+     {
+      sorted_boundaries_ids.push_back(bnd_id - 1);
+     } // if (!boundary_id_found)
+    
    }
   
 #ifdef PARANOID
@@ -5802,6 +5898,24 @@ surface_remesh_for_inner_hole_boundaries(Vector<Vector<double> >
      << "The number of boundaries on the mesh (" << this->nboundary() 
      << ") is different from the number of\nboundaries read from the "
      << "polyfiles (" << unsorted_boundary_segments.size() << ")!!!\n\n\n";
+    throw OomphLibError(error_message.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+  
+  // Get the number of sorted boundaries ids and check that it matches
+  // with the total number of boundaries
+  const unsigned nsorted_boundaries_ids = 
+   sorted_boundaries_ids.size();
+#ifdef PARANOID
+  if (nsorted_boundaries_ids != this->nboundary())
+   {
+    std::ostringstream error_message;
+    error_message
+     << "The number of boundaries on the mesh (" << this->nboundary() 
+     << ") is different from the number of\nsorted boundaries ids read "
+     << "from the polyfiles (" << nsorted_boundaries_ids << ")!!!\n\n\n";
     throw OomphLibError(error_message.str(),
                         OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
@@ -5941,20 +6055,19 @@ surface_remesh_for_inner_hole_boundaries(Vector<Vector<double> >
   Vector<TriangleMeshPolyLine*> polylines_pt(nboundary);
   unsigned current_polyline = 0;
   
-  // Go through the sorted boundaries
-  std::map<unsigned, std::list<unsigned> >::iterator it_sorted;
-  for (it_sorted = sorted_boundary_segments.begin();
-       it_sorted != sorted_boundary_segments.end();
-       it_sorted++)
+  // Go through the sorted boundaries using the sorted boundaries ids
+  for (unsigned ib = 0; ib < nsorted_boundaries_ids; ib++)
    {
-    // Get the boundary id
-    const unsigned bnd_id = (*it_sorted).first;
+    // Get the boundary id from the vector of sorted boundaries ids
+    const unsigned bnd_id = sorted_boundaries_ids[ib];
     
     // Create a vector representation for ease to use
     // Get the vertices of the nodes that create the boundary / polyline
     Vector<unsigned> nodes_ids;
-    for (std::list<unsigned>::iterator it_list = (*it_sorted).second.begin();
-         it_list != (*it_sorted).second.end(); it_list++)
+    for (std::list<unsigned>::iterator it_list = 
+          sorted_boundary_segments[bnd_id].begin();
+         it_list != sorted_boundary_segments[bnd_id].end(); 
+         it_list++)
      {nodes_ids.push_back((*it_list));}
     
     // Get the number of vertices for the polyline
