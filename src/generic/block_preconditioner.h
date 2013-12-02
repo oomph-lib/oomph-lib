@@ -598,8 +598,8 @@ namespace oomph
    // subsidiary block preconditioner).
    if(is_subsidiary_block_preconditioner() && ! Mesh_pt.empty())
     {
-     std::string error_msg = "Meshes have been set in a subsidiary "
-     error_msg += "preconditioner!";
+     std::string error_msg = "Meshes have been set in a subsidiary ";
+     error_msg += "preconditioner!\n";
      throw OomphLibError(error_msg, OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
@@ -615,8 +615,8 @@ namespace oomph
 #ifdef PARANOID
    if(is_subsidiary_block_preconditioner() && ! Mesh_pt.empty())
     {
-     std::ostringstream error_msg;
-     error_msg = "Meshes have been set in a subsidiary preconditioner!";
+     std::string error_msg;
+     error_msg = "Meshes have been set in a subsidiary preconditioner!\n";
      throw OomphLibError(error_msg, OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
