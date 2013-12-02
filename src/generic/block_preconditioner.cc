@@ -348,7 +348,7 @@ namespace oomph
      }
     Nrow = matrix_pt()->nrow();
 
-    // boolean to indicate whether the matrix is acutally distributed
+    // boolean to indicate whether the matrix is actually distributed
     // ie distributed and on more than one processor
     bool matrix_distributed =
      (this->distribution_pt()->distributed() &&

@@ -55,7 +55,7 @@ namespace oomph
  /// Block Preconditioner base class. The block structure of the
  /// overall problem is determined from the \c Mesh's constituent
  /// elements. Each constituent element must be block-preconditionable - i.e
- /// must implement the \c GeneralisedElemens functions \c nblock_types() and
+ /// must implement the \c GeneralisedElements functions \c nblock_types() and
  /// get_block_numbers_for_unknowns(...). A \c Problem can have several
  /// \c Meshes, but each \c Mesh can only contain a single type of element.
  /// The association between global degrees of freedom and their unique global
@@ -73,7 +73,7 @@ namespace oomph
  /// preconditioner (pointed to by Master_block_preconditioner_pt).
  /// The master block preconditioner
  /// must have an equal or greater number of block types. Examples
- /// are the FSI precondititioner which is the 3x3 "master block preconditioner"
+ /// are the FSI preconditioner which is the 3x3 "master block preconditioner"
  /// for the Navier-Stokes preconditioners which deals with the
  /// 2x2 fluid-blocks within the overall structure. In this case, \b only
  /// the master block preconditioner computes and stores the master
@@ -113,14 +113,14 @@ namespace oomph
 
    // Initialise number of rows in this block preconditioner.
    // This information is maintained if used as subsidiary or
-   // stand-alone block preconditoner (in the latter case it
+   // stand-alone block preconditioner (in the latter case it
    // obviously stores the number of rows within the subsidiary
    // preconditioner
    Nrow=0;
 
    // Initialise number of different block types in this preconditioner.
    // This information is maintained if used as subsidiary or
-   // stand-alone block preconditoner (in the latter case it
+   // stand-alone block preconditioner (in the latter case it
    // obviously stores the number of rows within the subsidiary
    // preconditioner
    Nblock_types=0;
@@ -132,7 +132,7 @@ namespace oomph
 
    // Clear the Block_to_block_map
    Block_to_block_map.clear();
-  }
+  } // EOFunc constructor
 
   /// Destructor
   virtual ~BlockPreconditioner()
@@ -148,7 +148,7 @@ namespace oomph
     Precomputed_block_distribution_pt.clear();
 
    this->clear_block_preconditioner_base();
-  }
+  } // EOFunc destructor
 
   /// Broken copy constructor
   BlockPreconditioner(const BlockPreconditioner&)
@@ -178,7 +178,7 @@ namespace oomph
     }
 #endif
    return m_pt;
-  }
+  } // EOFunc matrix_pt()
 
 
   /// \short Function to turn this preconditioner into a
@@ -219,7 +219,7 @@ namespace oomph
 #endif
    Mesh_pt.resize(n,0);
    Allow_multiple_element_type_in_mesh.resize(n,0);
-  }
+  } // EOFunc set_nmesh(...)
 
 
   /// Set the i-th mesh for this block preconditioner.
@@ -262,7 +262,7 @@ namespace oomph
    if(is_subsidiary_block_preconditioner())
     {
      std::string err_msg;
-     err_msg = "Tried to set a mesh in subsidiary preconditioner but subsidiary";
+     err_msg = "Tried to set a mesh in a subsidiary preconditioner, ";
      err_msg += "but subsidiary preconditioners do not store meshes.";
      throw OomphLibError(err_msg, OOMPH_CURRENT_FUNCTION, 
                          OOMPH_EXCEPTION_LOCATION);
@@ -275,7 +275,7 @@ namespace oomph
    // Does this mesh contain multiple element types?
    Allow_multiple_element_type_in_mesh[i] 
      = unsigned(allow_multiple_element_type_in_mesh);
-  }
+  } // EOFunc set_mesh(...)
 
   /// \short Determine the size of the matrix blocks and setup the
   /// lookup schemes relating the global degrees of freedom with
@@ -316,7 +316,7 @@ namespace oomph
     { get_precomputed_block(i, j, output_matrix); }
    else
     { get_block_from_original_matrix(i, j, output_matrix); }
-  }
+  } // EOFunc get_block(...)
 
   /// \short Return block (i,j).
   ///
@@ -329,7 +329,7 @@ namespace oomph
     MATRIX output_matrix;
     get_block(i, j, output_matrix);
     return output_matrix;
-   }
+   } // EOFunc get_block(...)
 
 
   /// \short Get a block from a different matrix using the blocking scheme
@@ -344,7 +344,7 @@ namespace oomph
    get_block(i, j, output_matrix);
 
    set_matrix_pt(backup_matrix_pt);
-  }
+  } // EOFunc get_block_other_matrix(...)
 
   /// \short Get all the block matrices required by the block
   /// preconditioner.  Takes a pointer to a matrix of bools that indicate
@@ -441,7 +441,7 @@ namespace oomph
        return Nblock_types;
       }
     }
-  }
+  } // EOFunc nblock_types(...)
 
   /// \short Return the number of fine DOF types in a coarse DOF type.
   unsigned ndof_types_in_coarse_dof_type(const unsigned& coarse_doftype) const
@@ -471,7 +471,7 @@ namespace oomph
      {
       return 1;
      }
-   }
+   } // EOFunc ndof_types_in_coarse_dof_type(...)
 
   /// \short Access function for the sub vector containing the most
   /// fine grain DOF types.
@@ -506,7 +506,7 @@ namespace oomph
 #endif
 
     return Doftype_to_doftype_map[coarse_doftype];
-   }
+   } // EOFunc coarse_dof_type_subvec(...)
 
   /// \short Return the total number of DOF types.
   unsigned ndof_types(const bool &real_ndof_types = false) const
@@ -565,7 +565,7 @@ namespace oomph
 //        }
 //      }
 //    }
-  }
+  } // EOFunc ndof_types(...)
 
   /// \short Access to i-th mesh (of the various meshes that contain block
   /// preconditionable elements of the same type). If this is a subsidiary
@@ -598,14 +598,15 @@ namespace oomph
    // subsidiary block preconditioner).
    if(is_subsidiary_block_preconditioner() && ! Mesh_pt.empty())
     {
-     std::string error_msg = "Meshes have been set in a subsidiary preconditioner!";
+     std::string error_msg = "Meshes have been set in a subsidiary "
+     error_msg += "preconditioner!";
      throw OomphLibError(error_msg, OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
 
    return temp;
-  }
+  } // EOFunc mesh_pt(...)
 
   /// \short Return the number of meshes in Mesh_pt. If this is a
   /// subsidiary preconditioner then the master Mesh_pt is used.
@@ -614,7 +615,8 @@ namespace oomph
 #ifdef PARANOID
    if(is_subsidiary_block_preconditioner() && ! Mesh_pt.empty())
     {
-     std::string error_msg = "Meshes have been set in a subsidiary preconditioner!";
+     std::ostringstream error_msg;
+     error_msg = "Meshes have been set in a subsidiary preconditioner!";
      throw OomphLibError(error_msg, OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
@@ -628,7 +630,7 @@ namespace oomph
     {
      return Mesh_pt.size();
     }
-  }
+  } // EOFunc nmesh()
 
   /// \short Return the block number corresponding to a global index i_dof.
   int block_number(const unsigned& i_dof) const
@@ -642,7 +644,7 @@ namespace oomph
     {
      return Dof_number_to_block_number_lookup[dn];
     }
-  }
+  } // EOFunc block_number(...)
 
   /// \short Return the index in the block corresponding to a global block
   /// number i_dof.
@@ -675,14 +677,14 @@ namespace oomph
      return index;
     }
    return -1;
-  }
+  } // EOFunc index_in_block(...)
 
   /// \short Access function to the block distributions.
   const LinearAlgebraDistribution*
   block_distribution_pt(const unsigned b) const
   {
    return Block_distribution_pt[b];
-  }
+  } // EOFunc block_distribution_pt(...)
 
   /// \short Access function to the distribution of the master
   /// preconditioner. If this preconditioner does not have a master
@@ -697,7 +699,7 @@ namespace oomph
     {
      return Master_block_preconditioner_pt->master_distribution_pt();
     }
-  }
+  } // EOFunc master_distribution_pt(...)
 
   /// \short Return the number of DOF types in mesh i.
   unsigned ndof_types_in_mesh(const unsigned& i) const
@@ -717,31 +719,41 @@ namespace oomph
     {
      return mesh_pt(i)->ndof_types();
     }
-  }
+  } // EOFunc ndof_types_in_mesh(...)
 
   /// \short Return true if this preconditioner is a subsidiary
   /// preconditioner.
   bool is_subsidiary_block_preconditioner() const
-  {return (this->Master_block_preconditioner_pt != 0);}
+  {
+    return (this->Master_block_preconditioner_pt != 0);
+  } // EOFunc is_subsidiary_block_preconditioner()
 
   /// \short Return true if this preconditioner is the master block
   /// preconditioner.
   bool is_master_block_preconditioner() const
-  {return (this->Master_block_preconditioner_pt == 0);}
+  {
+    return (this->Master_block_preconditioner_pt == 0);
+  } // EOFunc is_master_block_preconditioner()
 
   /// \short Set the base part of the filename to output blocks to. If it is
   /// set then all blocks will be output at the end of block_setup. If it is
   /// left empty nothing will be output.
   void set_block_output_to_files(const std::string& basefilename)
-  {Output_base_filename = basefilename;}
+  {
+    Output_base_filename = basefilename;
+  } // EOFunc set_block_output_to_files(...)
 
   /// \short Turn off output of blocks (by clearing the basefilename string).
   void disable_block_output_to_files()
-  {Output_base_filename.clear();}
+  {
+    Output_base_filename.clear();
+  } // EOFunc disable_block_output_to_files()
 
   /// \short Test if output of blocks is on or not.
   bool block_output_on() const
-  {return Output_base_filename.size() > 0;}
+  {
+    return Output_base_filename.size() > 0;
+  } // EOFunc block_output_on()
 
   /// Output all blocks to numbered files. Called at the end of get blocks if
   /// an output filename has been set.
@@ -763,7 +775,7 @@ namespace oomph
        get_block(i,j).sparse_indexed_output(filename, precision, true);
       }
     }
-  }
+  } // EOFunc output_blocks_to_files(...)
 
   /// \short A helper method to reduce the memory requirements of block
   /// preconditioners. Once the methods get_block(...), get_blocks(...)
@@ -788,7 +800,7 @@ namespace oomph
    Ndof_in_block.clear();
    Dof_number_to_block_number_lookup.clear();
    Block_number_to_dof_number_lookup.clear();
-  }
+  } // EOFunc post_block_matrix_assembly_partial_clear()
 
   /// \short Access function to the master block preconditioner pt.
   BlockPreconditioner<MATRIX>* master_block_preconditioner_pt() const
@@ -804,7 +816,7 @@ namespace oomph
     }
 #endif
    return Master_block_preconditioner_pt;
-  }
+  } // EOFunc master_block_preconditioner_pt()
 
   /// \short Clears all BlockPreconditioner data. Called by the destructor
   /// and the block_setup(...) methods
@@ -862,7 +874,7 @@ namespace oomph
    // delete the prec matrix dist pt
    delete Preconditioner_matrix_distribution_pt;
    Preconditioner_matrix_distribution_pt = 0;
-  }
+  } // EOFunc clear_block_preconditioner_base()
 
   /// \short debugging method to document the setup.
   /// Should only be called after block_setup(...).
@@ -917,7 +929,7 @@ namespace oomph
    //  }
    oomph_info << "===========================================" << std::endl;
    oomph_info << std::endl;
-  }
+  } // EOFunc document()
 
   /// \short Set the precomputed (and possibly modified) preconditioner blocks.
   /// The precomputed_block_pt is a Dense matrix of pointers of precomputed 
@@ -1178,23 +1190,24 @@ namespace oomph
 
    // Flag indicating that the preconditioner blocks has been precomputed.
    Preconditioner_blocks_have_been_precomputed = true;
-  }
+  } // EOFunc set_precomputed_blocks(...)
 
  /// \short Access function to flag checking if the preconditioner 
  /// blocks have been precomputed.
  bool preconditioner_blocks_have_been_precomputed() const
   {
    return Preconditioner_blocks_have_been_precomputed;
-  }
+  } // EOFunc preconditioner_blocks_have_been_precomputed()
 
  /// \short Access function to the precomputed preconditioner blocks.
  DenseMatrix<CRDoubleMatrix*> precomputed_block_pt() const
   {
    return Precomputed_block_pt;
-  } 
+  }  // EOFunc precomputed_block_pt()
 
- // Calls set_precomputed_block(...) with the "identity" doftype_to_doftype_map.
- // See the other set_precomputed_block(...) function for more details.
+ /// \short Calls set_precomputed_blocks(...) with the "identity" 
+ /// doftype_to_doftype_map.
+ /// See the other set_precomputed_blocks(...) function for more details.
  void set_precomputed_blocks(DenseMatrix<CRDoubleMatrix*>&precomputed_block_pt)
   {
    unsigned precomputed_block_nrow = precomputed_block_pt.nrow();
@@ -1208,7 +1221,7 @@ namespace oomph
     }
 
    set_precomputed_blocks(precomputed_block_pt,doftype_to_doftype_map);
-  }
+  } // EOFunc set_precomputed_blocks(...)
 
   /// \short the number of blocks precomputed. If the preconditioner blocks are
   /// precomputed then it should be the same as the nblock_types 
@@ -1246,9 +1259,7 @@ namespace oomph
      {
       matvec_prod_pt->setup(block_pt);
      }
-  }
-
-
+  } // EOFunc setup_matrix_vector_product(...)
 
 
  private:
@@ -1262,7 +1273,7 @@ namespace oomph
 
   /// **No comment was on this function** I think it is some kind of binary
   /// search in the vector vec for value el, it looks like it returns -1 for a
-  /// failure - David.
+  /// failure - David Shepherd.
   int get_index_of_element(const Vector<unsigned>& vec, const unsigned el) const
   {
    int lo = 0;
@@ -1586,10 +1597,10 @@ namespace oomph
   /// \short The distribution for precomputed blocks.
   Vector<LinearAlgebraDistribution*> Precomputed_block_distribution_pt;
 
-  /// \short Mapping for blocks passed down from the above preconditioner.
+  /// \short Mapping for blocks passed down from the parent preconditioner.
   Vector<Vector<unsigned> > Block_to_block_map;
 
-  /// \short Mapping for doftypes passed down from the above preconditioner.
+  /// \short Mapping for doftypes passed down from the parent preconditioner.
   Vector<Vector<unsigned> > Doftype_to_doftype_map;
 
   /// \short Flag indicating if blocks have been precomputed 
@@ -1605,7 +1616,9 @@ namespace oomph
 
   /// \short Vector of pointers to the meshes containing the elements used in
   /// the block preconditioner. Const pointers to prevent modification of the
-  /// mesh by the preconditioner (this could be relaxed if needed).
+  /// mesh by the preconditioner (this could be relaxed if needed). If this is
+  /// a subsidiary preconditioner, then the information is looked up in the
+  /// master preconditioner.
   Vector<const Mesh*> Mesh_pt;
   
   /// \short Storage for number of types of degree of freedom of the elements
@@ -1614,21 +1627,21 @@ namespace oomph
 
   /// \short Number of different block types in this preconditioner. Note that
   /// this information is maintained if used as a subsidiary or stand-alone
-  /// block preconditoner, in the latter case it stores the number of blocks
+  /// block preconditioner, in the latter case it stores the number of blocks
   /// within the subsidiary preconditioner.
   unsigned Nblock_types;
 
-  ///\short Number of different dof types in this preconditioner. Note that
+  ///\short Number of different DOF types in this preconditioner. Note that
   /// this information is maintained if used as a subsidiary or stand-alone
-  /// block preconditoner, in the latter case it stores the number of blocks
+  /// block preconditioner, in the latter case it stores the number of blocks
   /// within the subsidiary preconditioner.
   unsigned Ndof_types;
  
  private:
 
-  /// \short Number of dofs (# of rows or columns in the matrix) in this
+  /// \short Number of DOFs (# of rows or columns in the matrix) in this
   /// preconditioner. Note that this information is maintained if used as a
-  /// subsidiary or stand-alone block preconditoner, in the latter case it
+  /// subsidiary or stand-alone block preconditioner, in the latter case it
   /// stores the number of rows within the subsidiary preconditioner.
   unsigned Nrow;
 
@@ -1646,7 +1659,7 @@ namespace oomph
   /// Index_in_dof_block_sparse.
   Vector<unsigned> Index_in_dof_block_dense;
 
-  /// \short Vector to store the mapping from the global dof number to its
+  /// \short Vector to store the mapping from the global DOF number to its
   /// block. Empty if this preconditioner has a master preconditioner, in this
   /// case the information is obtained from the master preconditioner.
   Vector<unsigned> Dof_number_dense;
@@ -1664,8 +1677,8 @@ namespace oomph
   /// The corresponding global indices are stored in this vector.
   Vector<unsigned> Global_index_sparse;
 
-  /// \short Vector to store the mapping from the global dof number to the
-  /// index (row/colum number) within its block (empty if this preconditioner
+  /// \short Vector to store the mapping from the global DOF number to the
+  /// index (row/column number) within its block (empty if this preconditioner
   /// has a master preconditioner as this information is obtained from the
   /// master preconditioner). Sparse version: for global indices outside of the
   /// range this->first_row() to this->first_row()+this->nrow_local(). The
@@ -1673,7 +1686,7 @@ namespace oomph
   /// Global_index_sparse.
   Vector<unsigned> Index_in_dof_block_sparse;
 
-  /// \short Vector to store the mapping from the global dof number to its
+  /// \short Vector to store the mapping from the global DOF number to its
   /// block (empty if this preconditioner has a master preconditioner as this
   /// information is obtained from the master preconditioner). Sparse
   /// version: for global indices outside of the range this->first_row() to
@@ -1683,7 +1696,7 @@ namespace oomph
 #endif
 
   /// \short Vector containing the size of each block, i.e. the number of
-  /// global dofs associated with it. (Empty if this preconditioner has a
+  /// global DOFs associated with it. (Empty if this preconditioner has a
   /// master preconditioner as this information is obtain from the master
   /// preconditioner.)
   Vector<unsigned> Dof_dimension;
@@ -1695,11 +1708,11 @@ namespace oomph
   Vector<Vector<unsigned> > Global_index;
 
   /// \short Vector of vectors to store the mapping from block number to the
-  /// dof number (each element could be a vector because we allow multiple
-  /// dofs types in a single block).
+  /// DOF number (each element could be a vector because we allow multiple
+  /// DOFs types in a single block).
   Vector<Vector<unsigned> > Block_number_to_dof_number_lookup;
 
-  /// \short Vector to the mapping from dof number to block number.
+  /// \short Vector to the mapping from DOF number to block number.
   Vector<unsigned> Dof_number_to_block_number_lookup;
 
   /// \short Number of types of degree of freedom associated with each block.
