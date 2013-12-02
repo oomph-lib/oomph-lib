@@ -1294,10 +1294,10 @@ namespace oomph
 #endif
 
 
-//  std::streamsize cout_precision = std::cout.precision();
-//  oomph_info << "RAYSIGMA: " << std::setprecision(15) << Scaling_sigma
-//             << std::setprecision(cout_precision)
-//             << std::endl;
+  std::streamsize cout_precision = std::cout.precision();
+  oomph_info << "RAYSIGMA: " << std::setprecision(15) << Scaling_sigma
+             << std::setprecision(cout_precision)
+             << std::endl;
 
   ///////////////////////////////////////////////////////////////////////////
   //                Now create the augmented fluid matrix.                 //
