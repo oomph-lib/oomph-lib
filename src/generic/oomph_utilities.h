@@ -125,13 +125,13 @@ namespace StringConversion
 
  /// \short Split a string, s, into a vector of strings where ever there is
  /// an instance of delimiter (i.e. is delimiter is " " will give a list of
- /// words). Note that mutliple delimiters in a row will give empty
+ /// words). Note that multiple delimiters in a row will give empty
  /// strings.
  void split_string(const std::string &s, char delim, Vector<std::string> &elems);
 
  /// \short Split a string, s, into a vector of strings where ever there is
  /// an instance of delimiter (i.e. is delimiter is " " will give a list of
- /// words). Note that mutliple delimiters in a row will give empty
+ /// words). Note that multiple delimiters in a row will give empty
  /// strings. Return by value.
  Vector<std::string> split_string(const std::string &s, char delim);
 
@@ -183,7 +183,8 @@ namespace CumulativeTimings
  /// \short Runtime checked dynamic cast. This is the safe but slightly slower
  /// cast. Use it in any of these cases:
  /// - You aren't entirely sure the cast is always safe.
- /// - You have strange inheritence structures (e.g. the "Diamond of Death" in element inheritence).
+ /// - You have strange inheritance structures (e.g. the "Diamond of Death" in 
+ ///   element inheritance).
  /// - Efficiency is not critical. 
  /// Note that if you just want to check if a pointer can be converted to
  /// some type you will need to use a plain dynamic_cast. Adapted from
@@ -206,8 +207,8 @@ namespace CumulativeTimings
 
  /// \short Checked static cast. Only use this cast if ALL of these are true:
  /// - You are sure that the cast will always succeed.
- /// - You aren't using any strange inheritence structures (e.g. the "Diamond of
- /// Death" in element inheritence, if you aren't sure just try compiling).
+ /// - You aren't using any strange inheritance structures (e.g. the "Diamond of
+ /// Death" in element inheritance, if you aren't sure just try compiling).
  /// - You need efficiency.
  /// Adapted from polymorphic_downcast in boost/cast.hpp, See
  /// http://www.boost.org/doc/libs/1_52_0/libs/conversion/cast.htm for more
@@ -505,7 +506,6 @@ private:
  /// String to label output file, say
  std::string Label;
                
- 
  /// Boolean flag to decide response if an output 
  /// directory doesn't exist: If true, we terminate
  /// code execution by throwing an OomphLibError rather than 
@@ -588,7 +588,8 @@ namespace CommandLineArgs
 
  /// \short Parse command line, check for recognised flags and assign 
  /// associated values
- extern void parse_and_assign(int argc, char *argv[], bool throw_on_unrecognised_args=false);
+ extern void parse_and_assign(int argc, char *argv[], 
+                              bool throw_on_unrecognised_args=false);
 
  /// \short Parse previously specified command line, check for 
  /// recognised flags and assign associated values
@@ -601,7 +602,7 @@ class OomphCommunicator;
 
 #ifdef OOMPH_HAS_MPI
 //========================================================================
-/// MPI output modifier: Preceeds every output by 
+/// MPI output modifier: Precedes every output by 
 /// specification of the processor ID. Output can be restricted
 /// to a single processor.
 //========================================================================
@@ -668,7 +669,6 @@ class DenseMatrix;
 //class OomphCommunicator;
 
 #endif
-
 
 
 //======================================================================
@@ -777,7 +777,6 @@ namespace LeakCheckNames
  // Reset counters
  extern void reset();
 
-
  // Doc counters
  extern void doc();
 }
@@ -829,7 +828,7 @@ namespace TimingHelpers
 /// to spawn a command that computes the total memory usage
 /// on the machine where this is called.  [Disclaimer: works 
 /// on my machine(s) -- no guarantees for any other platform; 
-/// linux or not. MH]
+/// Linux or not. MH]
 //===============================================================
 namespace MemoryUsage
 {
@@ -843,8 +842,8 @@ namespace MemoryUsage
 
   /// \short String containing system command that obtains memory usage
   /// of all processes.
-  /// Default assigment for linux. [Disclaimer: works on my machine(s) --
-  /// no guarantees for any other platform; linux or not. MH]
+  /// Default assignment for Linux. [Disclaimer: works on my machine(s) --
+  /// no guarantees for any other platform; Linux or not. MH]
  extern std::string My_memory_usage_system_string;
 
  /// \short Bool allowing quick bypassing of ALL operations related
@@ -878,8 +877,8 @@ namespace MemoryUsage
 #endif
  
  /// \short String containing system command that obtains total memory usage.
- /// Default assigment for linux. [Disclaimer: works on my machine(s) --
- /// no guarantees for any other platform; linux or not. MH]
+ /// Default assignment for Linux. [Disclaimer: works on my machine(s) --
+ /// no guarantees for any other platform; Linux or not. MH]
  extern std::string Total_memory_usage_system_string;
  
  /// \short String containing name of file in which we document total
@@ -907,14 +906,11 @@ namespace MemoryUsage
  /// \short Doc total and local memory usage, prepended by string (which allows
  /// identification from where the function is called, say)
  void doc_memory_usage(const std::string& prefix_string="");
- 
-
-
 
  /// \short String containing system command that runs "top" (or equivalent)
  /// "indefinitely" and writes to file specified in Top_output_filename.
- /// Default assigment for linux. [Disclaimer: works on my machine(s) --
- /// no guarantees for any other platform; linux or not. MH]
+ /// Default assignment for Linux. [Disclaimer: works on my machine(s) --
+ /// no guarantees for any other platform; Linux or not. MH]
  extern std::string Top_system_string;
  
  /// \short  String containing name of file in which we document "continuous"
@@ -929,28 +925,23 @@ namespace MemoryUsage
  /// file whose name is specified by Top_output_filename
  void empty_top_file();
  
- /// \short Start running top continously and output (append) into 
+ /// \short Start running top continuously and output (append) into 
  /// file specified by Top_output_filename. Wipe that file  with 
  /// empty_top_file() first if you wish. Note that this is again 
- /// quite linux specific and unlikely to work on other operating systems.
+ /// quite Linux specific and unlikely to work on other operating systems.
  /// Insert optional comment into output file before starting.
  void run_continous_top(const std::string& comment="");
 
- /// \short Stop running top continously. Note that this is 
- /// again quite linux specific and unlikely to work on other operating 
+ /// \short Stop running top continuously. Note that this is 
+ /// again quite Linux specific and unlikely to work on other operating 
  /// systems.
  /// Insert optional comment into output file before stopping.
  void stop_continous_top(const std::string& comment="");
   
- /// \short Insert comment into running continous top output
+ /// \short Insert comment into running continuous top output
  void insert_comment_to_continous_top(const std::string& comment);
-
-
-
  
 } // end of namespace MemoryUsage
-
-
 
 }
 #endif

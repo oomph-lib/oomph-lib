@@ -856,7 +856,7 @@ namespace CommandLineArgs
     if ( (strcmp(argv[arg_index], "-help") == 0 ) ||
          (strcmp(argv[arg_index], "--help")== 0 ) )
      {
-      oomph_info << "NOTE: You entered --help or -help on the commmand line\n";
+      oomph_info << "NOTE: You entered --help or -help on the command line\n";
       oomph_info << "so I'm going to tell you about this code's\n";
       oomph_info << "available command line flags and then return.\n";
       doc_available_flags();
@@ -993,9 +993,10 @@ namespace CommandLineArgs
 
       if(throw_on_unrecognised_args)
        {
-        error_message += "Throwing an error because you requested it with throw_on_unrecognised_args option.";
-         throw OomphLibError(error_message, OOMPH_CURRENT_FUNCTION,
-                             OOMPH_EXCEPTION_LOCATION);        
+        error_message += "Throwing an error because you requested it with";
+        error_message += " throw_on_unrecognised_args option.";
+        throw OomphLibError(error_message, OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);        
        }
       else
        {
@@ -1080,11 +1081,11 @@ MPIOutputModifier oomph_mpi_output;
 
  if (MPI_COMM_WORLD!=oomph_comm_world)
   {
-   oomph_info << "Oomph-lib communiator is a duplicate of MPI_COMM_WORLD\n";
+   oomph_info << "Oomph-lib communicator is a duplicate of MPI_COMM_WORLD\n";
   }
  else
   {
-   oomph_info << "Oomph-lib communiator is MPI_COMM_WORLD\n";
+   oomph_info << "Oomph-lib communicator is MPI_COMM_WORLD\n";
   }
 
  // create the oomph-lib communicator
@@ -1096,7 +1097,7 @@ MPIOutputModifier oomph_mpi_output;
  // rather than aborting
  MPI_Errhandler_set(oomph_comm_world, MPI_ERRORS_RETURN);
 
- // Use MPI output modifier: Each processor preceeds its output
+ // Use MPI output modifier: Each processor precedes its output
  // by its rank
  oomph_mpi_output.communicator_pt() = Communicator_pt;
  oomph_info.output_modifier_pt() = &oomph_mpi_output;
@@ -1381,7 +1382,7 @@ void pause(std::string message)
 ///////////////////////////////////////////////////////////////////////////
 
 //=============================================================================
-/// Helper for recordning execution time.
+/// Helper for recording execution time.
 //=============================================================================
 namespace TimingHelpers
 {
@@ -1432,7 +1433,7 @@ namespace MemoryUsage
 
   /// \short String containing system command that obtains memory usage
   /// of all processes.
-  /// Default assigment for linux. [Disclaimer: works on my machine(s) --
+  /// Default assignment for linux. [Disclaimer: works on my machine(s) --
   /// no guarantees for any other platform; linux or not. MH]
   std::string My_memory_usage_system_string="ps aux";
 
@@ -1484,7 +1485,7 @@ namespace MemoryUsage
    the_file << prefix_string << " ";
    the_file.close();
 
-   // Sync all processors if in parallel (unless supressed)
+   // Sync all processors if in parallel (unless suppressed)
 #ifdef OOMPH_HAS_MPI
    if ((MPI_Helpers::mpi_has_been_initialised())&&
        (!Suppress_mpi_synchronisation))
@@ -1507,7 +1508,7 @@ namespace MemoryUsage
 #endif
 
  /// \short String containing system command that obtains total memory usage.
- /// Default assigment for linux. [Disclaimer: works on my machine(s) --
+ /// Default assignment for linux. [Disclaimer: works on my machine(s) --
  /// no guarantees for any other platform; linux or not. MH]
  std::string Total_memory_usage_system_string=
   "ps aux | awk 'BEGIN{sum=0}{sum+=$4}END{print sum}'";
@@ -1602,7 +1603,7 @@ namespace MemoryUsage
 
  /// \short String containing system command that runs "top" (or equivalent)
  /// "indefinitely" and writes to file specified in Top_output_filename.
- /// Default assigment for linux. [Disclaimer: works on my machine(s) --
+ /// Default assignment for linux. [Disclaimer: works on my machine(s) --
  /// no guarantees for any other platform; linux or not. MH]
  std::string Top_system_string="while true; do top -b -n 2 ; done  ";
 
@@ -1630,9 +1631,9 @@ namespace MemoryUsage
  }
 
 
- /// \short Start running top continously and output (append) into
+ /// \short Start running top continuously and output (append) into
  /// file specified by Top_output_filename. Wipe that file  with
- /// empty_top_file() if you wish. Note that this is again quite linux specific
+ /// empty_top_file() if you wish. Note that this is again quite Linux specific
  /// and unlikely to work on other operating systems.
  /// Insert optional comment into output file before starting.
  void run_continous_top(const std::string& comment)
@@ -1693,8 +1694,8 @@ namespace MemoryUsage
 
 
 
- /// \short Stop running top continously. Note that this is
- /// again quite linux specific and unlikely to work on other operating
+ /// \short Stop running top continuously. Note that this is
+ /// again quite Linux specific and unlikely to work on other operating
  /// systems. Insert optional comment into output file before stopping.
  void stop_continous_top(const std::string& comment)
   {
@@ -1734,7 +1735,7 @@ namespace MemoryUsage
   }
 
 
- /// \short Insert comment into running continous top output
+ /// \short Insert comment into running continuous top output
  void insert_comment_to_continous_top(const std::string& comment)
  {
    // bail out straight away?

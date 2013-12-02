@@ -1544,7 +1544,7 @@ namespace oomph
 
       if(!Shut_up_in_newton_solve)
        {
-        oomph_info << "\nProblem is not distributed. Parallel assembly of "
+        oomph_info << "Problem is not distributed. Parallel assembly of "
                    << "Jacobian uses default partitioning: "<< std::endl;
         for (int p=0;p<n_proc;p++)
          {

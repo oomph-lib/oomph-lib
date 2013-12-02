@@ -2237,13 +2237,13 @@ void TetgenMesh<ELEMENT>::split_elements_in_corners(
        this->add_node_pt(temp_nod_pt);
       }
 
-      std::ofstream junk("junk.dat");
-      el_pt->output(junk);
-      el1_pt->output(junk);
-      el2_pt->output(junk);
-      el3_pt->output(junk);
-      el4_pt->output(junk);
-      junk.close();
+//      std::ofstream junk("junk.dat");
+//      el_pt->output(junk);
+//      el1_pt->output(junk);
+//      el2_pt->output(junk);
+//      el3_pt->output(junk);
+//      el4_pt->output(junk);
+//      junk.close();
  
      // Kill old element
      delete el_pt;

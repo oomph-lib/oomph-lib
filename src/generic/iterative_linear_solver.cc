@@ -135,7 +135,7 @@ void BiCGStab<MATRIX>::solve(Problem* const &problem_pt,
 
  if(Doc_time)
   {
-   oomph_info << std::endl << "Time for setup of Jacobian [sec]: "
+   oomph_info << "Time for setup of Jacobian [sec]: "
               << Jacobian_setup_time << std::endl;
   }
 
@@ -989,7 +989,7 @@ void CG<MATRIX>::solve(Problem* const &problem_pt, DoubleVector &result)
 
  if(Doc_time)
   {
-   oomph_info << std::endl << "Time for setup of Jacobian [sec]: "
+   oomph_info << "Time for setup of Jacobian [sec]: "
               << Jacobian_setup_time << std::endl;
   }
 
@@ -1123,7 +1123,7 @@ void GS<MATRIX>::solve(Problem* const &problem_pt, DoubleVector &result)
 
  if(Doc_time)
   {
-   oomph_info << std::endl << "Time for setup of Jacobian [sec]: "
+   oomph_info << "Time for setup of Jacobian [sec]: "
               << Jacobian_setup_time << std::endl;
   }
 
@@ -1426,7 +1426,7 @@ void GMRES<MATRIX>::solve(Problem* const &problem_pt, DoubleVector &result)
 
  if(Doc_time)
   {
-   oomph_info << std::endl << "Time for setup of Jacobian [sec]: "
+   oomph_info << "Time for setup of Jacobian [sec]: "
               << Jacobian_setup_time << std::endl;
   }
 

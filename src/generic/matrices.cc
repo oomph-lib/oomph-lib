@@ -271,7 +271,7 @@ OOMPH_CURRENT_FUNCTION,
 
  throw OomphLibError(
   "Sorry JacobiEigenSolver::jacobi() removed because of licencing problems.",
-OOMPH_CURRENT_FUNCTION,
+  OOMPH_CURRENT_FUNCTION,
   OOMPH_EXCEPTION_LOCATION);
 
  // // Call eigensolver
@@ -601,7 +601,7 @@ CCDoubleMatrix::CCDoubleMatrix() : CCMatrix<double>()
    Matrix_matrix_multiply_method = 2;
   }
 
- /// Destructor: delete the default linaer solver
+ /// Destructor: delete the default linear solver
  CCDoubleMatrix::~CCDoubleMatrix() {delete Default_linear_solver_pt;}
 
 
@@ -834,7 +834,7 @@ void CCDoubleMatrix::multiply(const CCDoubleMatrix& matrix_in,
                               CCDoubleMatrix& result)
 {
 #ifdef PARANOID
- // check matrix dimensions are compatable
+ // check matrix dimensions are compatible
  if ( this->ncol() != matrix_in.nrow()  )
   {
    std::ostringstream error_message;
@@ -959,7 +959,7 @@ OOMPH_CURRENT_FUNCTION,
             error_message << "Error inserting value in result";
             
             throw OomphLibError(error_message.str(),
-OOMPH_CURRENT_FUNCTION,
+                                OOMPH_CURRENT_FUNCTION,
                                 OOMPH_EXCEPTION_LOCATION);
            }
           else if (Row_index[ptr] == -1 )
@@ -3129,7 +3129,7 @@ void CRDoubleMatrix::add(const CRDoubleMatrix &matrix_in,
 #endif
 
  // Addition of two compressed row form matrices, we need to know the union of
- // their sparcity patterns. This is determined from the column indices.
+ // their sparsity patterns. This is determined from the column indices.
  // First we loop through the rows for both this matrix and matrix_in
  // and insert their column indices in a set.
  // NB. when the number of duplicates is large enough, it's actually faster 

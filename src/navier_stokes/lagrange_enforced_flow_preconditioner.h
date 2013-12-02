@@ -1181,30 +1181,30 @@ namespace oomph
        }//for
      }//for
 
-//    // Now get the mass matrices for LSC solve
-//
-//    // Extract all of the inv_v_mass.
-//    bool do_both=false;
-//    CRDoubleMatrix* inv_v_mass_pt = 0;
-//    CRDoubleMatrix* inv_p_mass_pt = 0;
-//
-//    for(unsigned dof_type_i = 0;
-//        dof_type_i < N_velocity_doftypes; dof_type_i++)
-//    {
-//      unsigned required_block = dof_type_i; //Doftype_list_vpl[dof_type_i];
-//      assemble_inv_press_and_veloc_mass_matrix_diagonal
-//        (inv_p_mass_pt, inv_v_mass_pt,
-//         do_both, required_block);
-//      
-//      std::stringstream blockname;
-//      blockname << "vmm_"<< currentsetting<< "_"
-//        << std::setw(2) << std::setfill('0') << required_block
-//        << std::setw(2) << std::setfill('0') << required_block;
-//      inv_v_mass_pt->sparse_indexed_output(blockname.str());
-//      delete inv_v_mass_pt;
-//    }
-   }// if Doc_prec
-  
+    // Now get the mass matrices for LSC solve
+
+    // Extract all of the inv_v_mass.
+    bool do_both=false;
+    CRDoubleMatrix* inv_v_mass_pt = 0;
+    CRDoubleMatrix* inv_p_mass_pt = 0;
+
+    for(unsigned dof_type_i = 0;
+        dof_type_i < N_velocity_doftypes; dof_type_i++)
+    {
+      unsigned required_block = dof_type_i; //Doftype_list_vpl[dof_type_i];
+      assemble_inv_press_and_veloc_mass_matrix_diagonal
+        (inv_p_mass_pt, inv_v_mass_pt,
+         do_both, required_block);
+      
+      std::stringstream blockname;
+      blockname << *Doc_prec_directory_pt << "/vmm_"<< currentsetting<< "_"
+        << std::setw(2) << std::setfill('0') << required_block
+        << std::setw(2) << std::setfill('0') << required_block;
+      inv_v_mass_pt->sparse_indexed_output(blockname.str());
+      delete inv_v_mass_pt;
+      inv_v_mass_pt = 0;
+    }
+ }// if Doc_prec
 
   ///////////////////////////////////////////////////////////////////////////
   // Need to create the norms, used for Sigma, if required

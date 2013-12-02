@@ -209,13 +209,17 @@ namespace oomph
      {
       // The number of elements in the current mesh.
       unsigned n_element = mesh_pt(mesh_i)->nelement();
- 
-      // The string of the first element in the current mesh.
-      std::string first_element_string
-       =typeid(*(mesh_pt(mesh_i)->element_pt(0))).name();
+      
+      // When the bulk mesh is distributed, there may not be any elements
+      // in the surface mesh(es).
+      if(n_element > 0)
+      {
+        // The string of the first element in the current mesh.
+        std::string first_element_string
+         =typeid(*(mesh_pt(mesh_i)->element_pt(0))).name();
   
-      // If there are multiple element types in the current mesh, we can at least
-      // make sure that they contain the same types of DOFs.
+      // If there are multiple element types in the current mesh, 
+      // we can at least make sure that they contain the same types of DOFs.
       if(bool(Allow_multiple_element_type_in_mesh[mesh_i]))
        {
         // The ndof types of the first element.
@@ -286,6 +290,7 @@ namespace oomph
            }
          }
        }
+       }// Here
      }
    }
 
@@ -418,6 +423,7 @@ namespace oomph
     Global_index_sparse.resize(nsparse);
     Index_in_dof_block_sparse.resize(nsparse);
     Dof_number_sparse.resize(nsparse);
+    // RAY - Why is this looping through a vector?...
     for (int i = 0; i < nsparse; i++)
      {
       Global_index_sparse[i]=sparse_global_rows_for_block_lookup[i];
@@ -539,7 +545,7 @@ namespace oomph
 
 #ifdef PARANOID
     // Vector to keep track of previously assigned block numbers
-    // to check consistency between multple assignements.
+    // to check consistency between multiple assignments.
     Vector<int> previously_assigned_block_number(nrow_local,
                                                  Data::Is_unclassified);
 #endif
@@ -561,7 +567,6 @@ namespace oomph
       // elements -- their blocks are added one after the other...
       unsigned dof_offset=0;
 
-      // std::cout << "Begin looping through meshes: " << std::endl;
       // Loop over all meshes
       for (unsigned m=0;m<nmesh();m++)
        {
@@ -606,7 +611,6 @@ namespace oomph
                 previously_assigned_block_number[global_dof-first_row]
                  =dof_number;
                }
-
 #endif
              }
            }
@@ -650,8 +654,7 @@ namespace oomph
 
       // the set of global degrees of freedom and their corresponding dof
       // number on this processor
-      // use set because the elements are ordered and unqiue
-      std::set<std::pair<unsigned long,unsigned> > my_dof_set;
+      std::map<unsigned long,unsigned > my_dof_map;
 
       // Loop over all meshes
       for (unsigned m=0;m<nmesh();m++)
@@ -680,17 +683,15 @@ namespace oomph
             this->mesh_pt(m)->element_pt(e)->
              get_dof_numbers_for_unknowns(dof_lookup_list);
 
-            // update the block numbers
+            // update the block numbers and put it in the map.
             typedef
              std::list<std::pair<unsigned long,unsigned> >::iterator IT;
             for (IT it=dof_lookup_list.begin();
                  it!=dof_lookup_list.end();it++)
              {
               it->second = (it->second)+dof_offset;
+              my_dof_map[it->first] = it->second;
              }
-
-            // and insert them into our set
-            my_dof_set.insert(dof_lookup_list.begin(),dof_lookup_list.end());
            }
          }
 
@@ -702,22 +703,22 @@ namespace oomph
         dof_offset+=ndof_in_element;
        }
 
-      // next copy the set of my dofs to two vectors to send
-      unsigned my_ndof = my_dof_set.size();
+      // next copy the map of my dofs to two vectors to send
+      unsigned my_ndof = my_dof_map.size();
       unsigned long* my_global_dofs = new unsigned long[my_ndof];
       unsigned* my_dof_numbers = new unsigned[my_ndof];
       typedef
-       std::set<std::pair<unsigned long,unsigned> >::iterator IT;
+       std::map<unsigned long,unsigned >::iterator IT;
       unsigned pt = 0;
-      for (IT it = my_dof_set.begin(); it != my_dof_set.end(); it++)
+      for (IT it = my_dof_map.begin(); it != my_dof_map.end(); it++)
        {
         my_global_dofs[pt] = it->first;
         my_dof_numbers[pt] = it->second;
         pt++;
        }
 
-      // and then clear the set
-      my_dof_set.clear();
+      // and then clear the map
+      my_dof_map.clear();
 
       // count up how many DOFs need to be sent to each processor
       int* first_dof_to_send = new int[nproc];
@@ -854,6 +855,14 @@ namespace oomph
           for (unsigned i = first_dof_to_send[p]; i < u; i++)
            {
 #ifdef PARANOID
+            // RAYRAY Legacy code, this checks that the DOFs have not been
+            // re-classified. This has been changed so that we can re-classify
+            // the DOFs. Example: Bulk element classifies it's own DOF types,
+            // then a FaceElement will re-classify the bulk element's DOFs.
+            // See ImposeParallelOutflowElement.
+            // I have not deleted the below so we can easily "revert" back if
+            // required.
+
             // paranoid check
             // check that if row has been imported the block number is the
             // same
@@ -912,6 +921,14 @@ namespace oomph
         for (int i  = 0; i < ndof_to_recv[p]; i++)
          {
 #ifdef PARANOID
+          // RAYRAY Legacy code, this checks that the DOFs have not been
+          // re-classified. This has been changed so that we can re-classify
+          // the DOFs. Example: Bulk element classifies it's own DOF types,
+          // then a FaceElement will re-classify the bulk element's DOFs.
+          // See ImposeParallelOutflowElement.
+          // I have not deleted the below so we can easily "revert" back if
+          // required.
+
           // paranoid check
           // check that if row has been imported the block number is the same
           if (dof_recv[global_dofs_recv[p][i]-first_row])
