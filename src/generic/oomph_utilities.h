@@ -55,7 +55,6 @@
 #include "oomph_definitions.h"
 #include "communicator.h"
 
-
 namespace oomph
 {
 

@@ -6160,10 +6160,10 @@ surface_remesh_for_inner_hole_boundaries(Vector<Vector<double> >
     // Get the initial and final node id of the current polyline
     unsigned left_node_id = sorted_boundary_segments[bnd_id].front();
     unsigned right_node_id = sorted_boundary_segments[bnd_id].back();
-
+    
     // Flag to know that we already have a closed polygon
     bool closed_polygon = false;
-
+    
     do
      {
       // Go through all the polylines
@@ -6173,7 +6173,7 @@ surface_remesh_for_inner_hole_boundaries(Vector<Vector<double> >
         if (!polyline_done[i])
          {
           // Get the initial and final nodes id of the current polyline
-        
+          
           // Get the associated boundary to the current polyline
           const unsigned cbnd_id = polylines_pt[i]->boundary_id();
           // Get the number of vertices on the current polyline
@@ -6181,7 +6181,7 @@ surface_remesh_for_inner_hole_boundaries(Vector<Vector<double> >
           // Get the initial and final node id of the current polyline
           unsigned cleft_node_id = sorted_boundary_segments[cbnd_id].front();
           unsigned cright_node_id = sorted_boundary_segments[cbnd_id].back();
-        
+          
           // Check if the polyline goes to the left or right of the
           // current sorted polylines
           if (cleft_node_id == right_node_id)
@@ -6241,18 +6241,18 @@ surface_remesh_for_inner_hole_boundaries(Vector<Vector<double> >
             break;
            }
          } // if (!polyline_done[i])
-      
+        
        } // for (i < nboundary)
-
+      
       // We have created a polygon
       if (left_node_id == right_node_id)
        {
         // Set the flag as true
         closed_polygon = true;  
        }
-
+      
      }while(nsorted_polylines < nboundary && !closed_polygon);
-
+    
 #ifdef PARANOID
     if (!closed_polygon)
      {
@@ -6308,22 +6308,199 @@ surface_remesh_for_inner_hole_boundaries(Vector<Vector<double> >
    } // while(nsorted_polylines < nboundary)
   
   // ------------------------------------------------------------------
+  // Before filling the data structures we need to identify the outer
+  // closed boundary and the inner closed boundaries.
+  // If the nodes are not in order we throw a warning message
+  
+  // Index for the polygon that is currently considered as the outer
+  // boundary
+  unsigned index_outer = 0;
+  
+  for (unsigned idx_outer = 0; idx_outer < npolygons; idx_outer++)
+   {
+    // Get the vertices of the outer boundary
+    Vector<Vector<double> > outer_vertex_coordinates;
+    
+    // Flag to know if ALL the inner closed boundaries are inside the
+    // outer closed boundary
+    bool all_inner_inside = true;
+    
+    // Number of polylines of the outer boundary
+    const unsigned nouter_polylines = polygons_pt[idx_outer]->npolyline();
+    for (unsigned p = 0; p < nouter_polylines; p++)
+     {
+      TriangleMeshPolyLine* tmp_poly_pt = 
+       polygons_pt[idx_outer]->polyline_pt(p);
+      const unsigned nvertex = tmp_poly_pt->nvertex();
+      for (unsigned v = 0; v < nvertex; v++)
+       {
+        Vector<double> current_vertex = tmp_poly_pt->vertex_coordinate(v);
+        outer_vertex_coordinates.push_back(current_vertex);
+       } // for (v < nvertex)
+     } // for (p < nouter_polylines)
+    
+    // Now get the vertices for the inner boundaries 
+    
+    // First get the number of inner closed boundaries (polygons size
+    // minus one because one of the polygons is considered to be the
+    // outer closed boundary
+    const unsigned ninner_polygons = polygons_pt.size() - 1;
+    
+    // Store the vertices of the inner closed boundaries
+    Vector<Vector<Vector<double> > > inner_vertex_coordinates(ninner_polygons);
+    // Get all the vertices of the inner closed boundaries
+    for (unsigned i = 0; i <= ninner_polygons; i++)
+     {    
+      if (i != idx_outer)
+       {
+        // Number of polylines of the current internal closed boundary
+        const unsigned ninner_polylines = polygons_pt[i]->npolyline();
+        for (unsigned p = 0; p < ninner_polylines; p++)
+         {
+          TriangleMeshPolyLine* tmp_poly_pt = polygons_pt[i]->polyline_pt(p);
+          const unsigned nvertex = tmp_poly_pt->nvertex();
+          for (unsigned v = 0; v < nvertex; v++)
+           {
+            Vector<double> current_vertex = tmp_poly_pt->vertex_coordinate(v);
+            if (i < idx_outer)
+             {
+              inner_vertex_coordinates[i].push_back(current_vertex);
+             }
+            else if (i > idx_outer)
+             {
+              inner_vertex_coordinates[i-1].push_back(current_vertex);
+             }
+           } // for (v < nvertex)
+          
+         } // for (p < ninner_polylines)
+        
+       } // if (i != index_outer)
+      
+     } // for (i <= ninner_polygons)
+    
+    // Now check that ALL the vertices of ALL the internal closed
+    // boundaries are inside the outer closed boundary
+    for (unsigned i = 0; i < ninner_polygons; i++)
+     {
+      // Get the number of vertices in the current internal closed
+      // boundary
+      const unsigned nvertex_internal = inner_vertex_coordinates[i].size();
+      for (unsigned v = 0; v < nvertex_internal; v++)
+       {
+        // Get a vertex in the current internal closed boundary
+        Vector<double> current_point = inner_vertex_coordinates[i][v];
+        all_inner_inside &= 
+         this->is_point_inside_polygon(outer_vertex_coordinates,
+                                       current_point);
+        
+        // Check if we should continue checking for more points inside
+        // the current proposed outer boundary
+        if (!all_inner_inside)
+         {
+          // Break the "for" for the vertices
+          break;
+         }
+        
+       } // for (v < nvertex_internal)
+      
+      // Check if we should continue checking for more inner closed
+      // boundaries inside the current proposed outer boundary
+      if (!all_inner_inside)
+       {
+        // Break the "for" for the inner boundaries
+        break;
+       }
+      
+     } // for (i < ninner_polygons)
+    
+    // Check if all the vertices of all the polygones are inside the
+    // current proposed outer boundary
+    if (all_inner_inside)
+     {
+      index_outer = idx_outer;
+      break;
+     }
+    
+   } // for (idx_outer < npolygons)
+  
+#ifdef PARANOID
+  // Check if the first nodes listed in the polyfiles correspond to
+  // the outer boundary, if that is not the case then throw a warning
+  // message
+  if (index_outer != 0)
+   {
+    std::ostringstream warning_message;
+    warning_message
+     << "The first set of nodes listed in the input polyfiles does not\n"
+     << "correspond to the outer closed boundary. This may lead to\n"
+     << "problems at the adaptation stage if the holes coordinates\n"
+     << "are no correctly associated to the inner closed boundaries.\n"
+     << "You can check the generated mesh by calling the output() method\n"
+     << "from the mesh object '(problem.mesh_pt()->output(string))'\n\n";
+    OomphLibWarning(warning_message.str(),
+                    OOMPH_CURRENT_FUNCTION,
+                    OOMPH_EXCEPTION_LOCATION);
+   } // if (index_outer != 0)
+#endif
+  
+  // ------------------------------------------------------------------
   // Now fill the data structures  
   
   // Store outer polygon
-  this->Outer_boundary_pt = polygons_pt[0];
+  this->Outer_boundary_pt = polygons_pt[index_outer];
   
   this->Internal_polygon_pt.resize(npolygons-1);
-  for (unsigned i = 1; i < npolygons; i++)
+  for (unsigned i = 0; i < npolygons; i++)
    {
-    // Store internal polygons by copy constructor
-    this->Internal_polygon_pt[i-1] = polygons_pt[i];
-   }
+    if (i != index_outer)
+     {
+      if (i < index_outer)
+       {
+        // Store internal polygons by copy constructor
+        this->Internal_polygon_pt[i] = polygons_pt[i];
+       }
+      else if (i > index_outer)
+       {
+        // Store internal polygons by copy constructor
+        this->Internal_polygon_pt[i-1] = polygons_pt[i];
+       }
+     } // if (i != index_outer)
+   } // for (i < npolygons)
+  
+  // Before assigning the hole vertex coordinate to the inner closed
+  // boundaries check that the holes are listed in orderm if that is
+  // not the case the associate each hole vertex coordinate to the
+  // inner closed boundaries
+  
+  // Store the vertices of the inner closed boundaries
+  Vector<Vector<Vector<double> > > inner_vertex_coordinates(npolygons-1);
+  // Get all the vertices of the inner closed boundaries
+  for (unsigned i = 0; i < npolygons-1; i++)
+   {    
+    // Number of polylines of the current internal closed boundary
+    const unsigned ninner_polylines = 
+     this->Internal_polygon_pt[i]->npolyline();
+    for (unsigned p = 0; p < ninner_polylines; p++)
+     {
+      TriangleMeshPolyLine* tmp_poly_pt = 
+       this->Internal_polygon_pt[i]->polyline_pt(p);
+      // Number of vertices of the current polyline in the current
+      // internal closed polygon
+      const unsigned nvertex = tmp_poly_pt->nvertex();
+      for (unsigned v = 0; v < nvertex; v++)
+       {
+        Vector<double> current_vertex = tmp_poly_pt->vertex_coordinate(v);
+        inner_vertex_coordinates[i].push_back(current_vertex);
+       } // for (v < nvertex)
+      
+     } // for (p < ninner_polylines)
+    
+   } // for (i <= ninner_polygons)
   
   // Holes information
   unsigned nholes;
   poly_file >> nholes;
-
+  
 #ifdef PARANOID
   if (npolygons > 1 && (npolygons - 1) != nholes)
    {
@@ -6354,15 +6531,93 @@ surface_remesh_for_inner_hole_boundaries(Vector<Vector<double> >
     poly_file >> hole_coordinates[ihole][0];
     poly_file >> hole_coordinates[ihole][1];
    }
-
+  
+  // Vector that store the index of the hole coordinate that
+  // correspond to each internal closed polygon
+  Vector<unsigned> index_hole_of_internal_polygon(npolygons-1);
+  std::map<unsigned, bool> hole_done;
+  
+  // Now associate each hole vertex to a corresponding internal closed
+  // polygon
+  for (unsigned i = 0; i < npolygons-1; i++)
+   {
+    // Find which hole is associated to each internal closed boundary
+    for (unsigned h = 0; h < nholes; h++)
+     {
+      // If the hole has not been previously associated
+      if (!hole_done[h])
+       {
+        // Get the hole coordinate
+        Vector<double> current_point = hole_coordinates[h];
+        
+        const bool hole_in_polygon =
+         this->is_point_inside_polygon(inner_vertex_coordinates[i],
+                                       current_point);
+        
+        // If the hole is inside the polygon
+        if (hole_in_polygon)
+         {
+          // Mark the hole as done
+          hole_done[h] = true;
+          // Associate the current hole with the current inner closed
+          // boundary
+          index_hole_of_internal_polygon[i] = h;
+          // Break the search
+          break;
+         }
+        
+       } // if (!hole_done[h])
+      
+     } // for (h < nholes)
+    
+   } // for (i < npolygons-1)
+  
+#ifdef PARANOID
+  if (hole_done.size() != npolygons-1)
+   {
+    std::ostringstream error_message;
+    error_message
+     << "Not all the holes were associated to an internal closed boundary\n"
+     << "Only ("<<hole_done.size()<<") holes were assigned for a total of\n"
+     << "(" << npolygons-1 << ") internal closed boundaries.\n"
+     << "You can check the generated mesh by calling the output() method\n"
+     << "from the mesh object '(problem.mesh_pt()->output(string))'\n\n";
+    throw OomphLibError(error_message.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   } // if (index_hole != ihole)
+#endif
+  
   // Assign the holes coordinates to the internal polygons
   for (unsigned ihole = 0; ihole < nholes; ihole++)
    {
+    // Get the index hole of the current internal closed polygon
+    const unsigned index_hole = index_hole_of_internal_polygon[ihole];
+#ifdef PARANOID
+    // Check if the hole index is the same as the internal closed
+    // boundary, it means that the holes were listed in the same order
+    // as the nodes of the internal closed boundaries
+    if (index_hole != ihole)
+     {
+      std::ostringstream error_message;
+      error_message
+       << "The hole vertices coordinates are not listed in the same order\n"
+       << "as the nodes that define the internal closed boundaries.\n"
+       << "This may lead to problems in case that the holes coordinates\n"
+       << "were no properly assigned to the internal closed boundaries.\n"
+       << "You can check the generated mesh by calling the output() method\n"
+       << "from the mesh object '(problem.mesh_pt()->output(string))'\n\n";
+      throw OomphLibError(error_message.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+     } // if (index_hole != ihole)
+#endif
+    
     // Set the hole coordinate for the internal polygon
     this->Internal_polygon_pt[ihole]->internal_point() = 
-     hole_coordinates[ihole];
+     hole_coordinates[index_hole];
    }
-
+  
   // Ignore the first line with structure description
   poly_file.ignore(80,'\n');
   
@@ -6430,6 +6685,97 @@ surface_remesh_for_inner_hole_boundaries(Vector<Vector<double> >
   poly_file.close();
   
  }
+
+//======================================================================
+/// Helper function that checks if a given point is inside a polygon
+//======================================================================
+template <class ELEMENT>
+bool RefineableTriangleMesh<ELEMENT>::is_point_inside_polygon(
+ Vector<Vector<double> > polygon_vertices, Vector<double> point)
+{
+ // Total number of vertices (the first and last vertex should be the
+ // same)
+ const unsigned nvertex = polygon_vertices.size();
+ 
+#ifdef PARANOID
+ // Check that the first and last vertex of the given polygon are the
+ // same
+ const double dist_first_last = 
+  sqrt(((polygon_vertices[0][0] - polygon_vertices[nvertex-1][0]) *
+        (polygon_vertices[0][0] - polygon_vertices[nvertex-1][0])) +
+       ((polygon_vertices[0][1] - polygon_vertices[nvertex-1][1]) *
+        (polygon_vertices[0][1] - polygon_vertices[nvertex-1][1])));
+ 
+ if (dist_first_last > 
+     ToleranceForVertexMismatchInPolygons::Tolerable_error)
+  {
+   std::ostringstream error_stream;
+   error_stream
+    << "The start ("
+    << polygon_vertices[0][0]<<", "<<polygon_vertices[0][1] 
+    << ") and end ("
+    << polygon_vertices[nvertex-1][0]<<", "<<polygon_vertices[nvertex-1][1]
+    << ") points of the polygon don't match when judged\n"
+    << "with the tolerance ("
+    << ToleranceForVertexMismatchInPolygons::Tolerable_error
+    << ") which is specified in the namespace \nvariable "
+    << "ToleranceForVertexMismatchInPolygons::"
+    << "Tolerable_error.\n\n"
+    << "Feel free to adjust this or to recompile the "
+    << "code without\n"
+    << "paranoia if you think this is OK...\n"
+    << std::endl;
+   throw OomphLibError(
+    error_stream.str(),
+    OOMPH_CURRENT_FUNCTION,
+    OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+ 
+ // Counter for number of intersections
+ unsigned intersect_counter=0;
+ 
+ //Get first vertex
+ Vector<double> p1=polygon_vertices[0];
+ for (unsigned i=1;i<=nvertex;i++)
+  {
+   // Get second vertex by wrap-around
+   Vector<double> p2 = polygon_vertices[i%nvertex];
+
+   if (point[1] > std::min(p1[1],p2[1]))
+    {
+     if (point[1] <= std::max(p1[1],p2[1]))
+      {
+       if (point[0] <= std::max(p1[0],p2[0]))
+        {
+         if (p1[1] != p2[1])
+          {
+           double xintersect =
+            (point[1]-p1[1])*(p2[0]-p1[0])/
+            (p2[1]-p1[1])+p1[0];
+           if ( (p1[0] == p2[0]) ||
+                (point[0] <= xintersect) )
+            {
+             intersect_counter++;
+            }
+          }
+        }
+      }
+    }
+   p1 = p2;
+  }
+ 
+ // Even number of intersections: outside
+ if (intersect_counter%2==0)
+  {
+   return false;
+  } // if (intersect_counter%2==0)
+ else
+  {
+   return true;
+  }
+ 
+}
 
 //======================================================================
 /// Move the boundary nodes onto the boundary defined by the old mesh

@@ -41,7 +41,6 @@
 #include "Vector.h"
 #include "matrices.h"
 
-
 namespace oomph
 {
 

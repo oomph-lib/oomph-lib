@@ -2823,7 +2823,7 @@ template<class ELEMENT>
      sprintf(triswitches,"%s",input_string_stream.str().c_str());
      
      // Build triangulateio refined object
-     triangulate(triswitches, &triangle_refine, &this->Triangulateio, 0);       
+     triangulate(triswitches, &triangle_refine, &this->Triangulateio, 0);
      // Build scaffold
      this->Tmp_mesh_pt=new TriangleScaffoldMesh(this->Triangulateio);
 
@@ -2949,13 +2949,17 @@ template<class ELEMENT>
    {
     return Mesh_update_fct_pt;
    }
-
+   
     protected:
-
+   
    /// Helper function to create polylines and fill associate data 
    // structures, used when creating from a mesh from polyfiles
    void create_polylines_from_polyfiles(const std::string& node_file_name,
                                         const std::string& poly_file_name);
+   
+   /// Helper function that checks if a given point is inside a polygon
+   bool is_point_inside_polygon(Vector<Vector<double> > polygon_vertices,
+                                Vector<double> point);
    
    /// \short Helper function that performs the unrefinement process
    /// on the specified boundary by using the provided vertices
