@@ -3187,6 +3187,10 @@ void CRDoubleMatrix::add(const CRDoubleMatrix &matrix_in,
                              column_set[row_i].end());
   }
 
+ //////////////////////////////////////////////////////////////////////////////
+ // The pre-analysis phase is completed. Now we do the actual element-wise
+ // addition.
+
  // Values for the result matrix.
  Vector<double> res_values(nnz_running_sum,0);
  
@@ -3197,44 +3201,42 @@ void CRDoubleMatrix::add(const CRDoubleMatrix &matrix_in,
  // Add the values of both matrices.
  for (unsigned row_i = 0; row_i < nrow_local; row_i++) 
   {
-   // Adding this matrix to the result matrix.
-   // Loop through the entries on this matrix.
-   for (int this_entry_i = this_row_start[row_i]; 
-        this_entry_i < this_row_start[row_i+1]; this_entry_i++) 
-    {
-     // Is the column index found?
-     bool found = false;
+   // res_column_indices contains the union of column indices in
+   // this_column_indices and in_column_indices. So we can loop
+   // through the res_column indices and add the values of 
+   // this_values and in_values if they match.
+   
+   int this_row_start_ip1 = this_row_start[row_i+1];
+   int this_entry_i = this_row_start[row_i];
 
-     // Loop through the entries in the result matrix.
-     for (int res_entry_i = res_row_start[row_i]; 
-          res_entry_i < res_row_start[row_i+1] && !found; res_entry_i++) 
+   int in_row_start_ip1 = in_row_start[row_i+1];
+   int in_entry_i = in_row_start[row_i];
+
+   // Loop through the values of the result matrix.
+   for(int res_entry_i = res_row_start[row_i];
+       res_entry_i < res_row_start[row_i+1];
+       res_entry_i++)
+    {
+     // The CURRENT entry of THIS matrix matches the column indices of the 
+     // CURRENT entry in the result matrix, add it to the results values.
+     // Then increment the counter, so next time we add the next value of THIS
+     // matrix.
+     if((this_entry_i < this_row_start_ip1) &&
+        (res_column_indices[res_entry_i]) == this_column_indices[this_entry_i])
       {
-       if(this_column_indices[this_entry_i] 
-          == res_column_indices[res_entry_i])
-        { 
-         res_values[res_entry_i] += this_values[this_entry_i];
-         found = true;
-        }
+       res_values[res_entry_i] += this_values[this_entry_i];
+       this_entry_i++;
       }
-    }
 
-   // Adding matrix_in values to result_matrix values.
-   for (int in_entry_i = in_row_start[row_i]; 
-        in_entry_i < in_row_start[row_i+1]; in_entry_i++) 
-    {
-     // Is the column index found?
-     bool found = false;
-
-     // Loop through the entries in the result matrix.
-     for (int res_entry_i = res_row_start[row_i]; 
-          res_entry_i < res_row_start[row_i+1] && !found; res_entry_i++) 
+     // The CURRENT entry of IN matrix matches the column indices of the 
+     // CURRENT entry in the result matrix, add it to the results values.
+     // Then increment the counter, so next time we add the next value of IN
+     // matrix.
+     if((in_entry_i < in_row_start_ip1) &&
+        (res_column_indices[res_entry_i]) == in_column_indices[in_entry_i])
       {
-       if(in_column_indices[in_entry_i] 
-          == res_column_indices[res_entry_i])
-        {
-         res_values[res_entry_i] += in_values[in_entry_i];
-         found = true;
-        }
+       res_values[res_entry_i] += in_values[in_entry_i];
+       in_entry_i++;
       }
     }
   }

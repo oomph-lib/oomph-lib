@@ -8,7 +8,8 @@ if WANT_MPI_VARIABLENP
 		matrix_concatenation_without_communication \
 		vector_split \
 		vector_concatenation \
-		matrix_concatenation
+		matrix_concatenation \
+		matrix_addition
 else
   variablenp_dir = 
 endif
