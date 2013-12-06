@@ -124,15 +124,37 @@ public:
    }
  } // end_of_actions_before_newton_solve
 
+#ifdef ADAPT
+ // Perform actions after mesh adaptation
+ void actions_after_adapt();
+#endif
 
+#ifdef ADAPT
+ /// Access function for the specific mesh
+ RefineableTriangleMesh<ELEMENT>* mesh_pt() 
+  {
+   return dynamic_cast<RefineableTriangleMesh<ELEMENT>*>(Problem::mesh_pt());
+  }
+#else
  /// Access function for the specific mesh
  TriangleMesh<ELEMENT>* mesh_pt() 
   {
    return dynamic_cast<TriangleMesh<ELEMENT>*>(Problem::mesh_pt());
   }
+#endif
 
  /// Doc the solution
  void doc_solution(DocInfo& doc_info);
+
+#ifdef ADAPT
+private:
+ /// Pointer to the bulk mesh
+ RefineableTriangleMesh<ELEMENT> *Bulk_mesh_pt;
+
+ /// Error estimator
+ Z2ErrorEstimator* error_estimator_pt;
+ 
+#endif
 
 }; // end_of_problem_class
 
@@ -149,10 +171,25 @@ FlowPastBoxProblem<ELEMENT>::FlowPastBoxProblem(
 
  Problem::Max_residuals=1000.0;
 
+#ifdef ADAPT
+ //Create mesh
+ Bulk_mesh_pt = new RefineableTriangleMesh<ELEMENT>(node_file_name,
+                                                    element_file_name,
+                                                    poly_file_name);
+ 
+ // Set error estimator for bulk mesh
+ Z2ErrorEstimator* error_estimator_pt=new Z2ErrorEstimator;
+ Bulk_mesh_pt->spatial_error_estimator_pt() = error_estimator_pt;
+ 
+ // Set the problem mesh pointer to the bulk mesh
+ Problem::mesh_pt() = Bulk_mesh_pt;
+ 
+#else
  //Create mesh
  Problem::mesh_pt() = new TriangleMesh<ELEMENT>(node_file_name,
                                                 element_file_name,
                                                 poly_file_name);
+#endif
  
  // Set the boundary conditions for this problem: All nodes are
  // free by default -- just pin the ones that have Dirichlet conditions
@@ -196,6 +233,59 @@ FlowPastBoxProblem<ELEMENT>::FlowPastBoxProblem(
 
 } // end_of_constructor
 
+#ifdef ADAPT
+//========================================================================
+// Perform actions after mesh adaptation
+//========================================================================
+template<class ELEMENT>
+void FlowPastBoxProblem<ELEMENT>::actions_after_adapt()
+{
+
+ // Pin the nodes and make all the element fully functional since the
+ // mesh adaptation generated a new mesh
+ 
+ // Set the boundary conditions for this problem: All nodes are
+ // free by default -- just pin the ones that have Dirichlet conditions
+ // here. 
+ unsigned num_bound = mesh_pt()->nboundary();
+ for(unsigned ibound=0;ibound<num_bound;ibound++)
+  {
+   unsigned num_nod= mesh_pt()->nboundary_node(ibound);
+   for (unsigned inod=0;inod<num_nod;inod++)
+    {
+     // Pin horizontal velocity everywhere apart from pure outflow
+     if ((ibound!=2))
+      {       
+       mesh_pt()->boundary_node_pt(ibound,inod)->pin(0); 
+      }
+
+     // Pin vertical velocity everywhere
+     mesh_pt()->boundary_node_pt(ibound,inod)->pin(1); 
+    }
+  } // end loop over boundaries
+
+ // Complete the build of all elements so they are fully functional
+
+ //Find number of elements in mesh
+ unsigned n_element = mesh_pt()->nelement();
+
+ // Loop over the elements to set up element-specific 
+ // things that cannot be handled by constructor
+ for(unsigned e=0;e<n_element;e++)
+  {
+   // Upcast from GeneralisedElement to the present element
+   ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
+
+   //Set the Reynolds number
+   el_pt->re_pt() = &Global_Physical_Variables::Re;
+  } // end loop over elements
+
+
+ // Setup equation numbering scheme
+ cout <<"Number of equations: " << assign_eqn_numbers() << std::endl; 
+
+}
+#endif
 
 
 //==start_of_doc_solution=================================================
@@ -277,13 +367,21 @@ int main(int argc, char* argv[])
  // Step number
  doc_info.number()=0;
 
+#ifdef ADAPT
+ const unsigned max_adapt = 3;
+#endif
 
-// Doing QTaylorHoodElements
+// Doing TTaylorHoodElements
  {
+#ifdef ADAPT
   // Build the problem with TTaylorHoodElements
-  FlowPastBoxProblem<TTaylorHoodElement<2> > problem(node_file_name,
-                                                     element_file_name,
-                                                     poly_file_name);
+  FlowPastBoxProblem<ProjectableTaylorHoodElement<TTaylorHoodElement<2> > >
+   problem(node_file_name, element_file_name, poly_file_name);
+#else
+  // Build the problem with TTaylorHoodElements
+  FlowPastBoxProblem<TTaylorHoodElement<2> > 
+   problem(node_file_name, element_file_name, poly_file_name);
+#endif
   // Output boundaries 
   problem.mesh_pt()->output_boundaries("RESLT/boundaries.dat");
 
@@ -293,8 +391,13 @@ int main(int argc, char* argv[])
   // Step number
   doc_info.number()++;
   
+#ifdef ADAPT
+  // Solve the problem
+  problem.newton_solve(max_adapt);
+#else
   // Solve the problem
   problem.newton_solve();
+#endif
   
   // Outpt the solution
   problem.doc_solution(doc_info);

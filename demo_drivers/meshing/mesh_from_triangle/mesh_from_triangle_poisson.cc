@@ -133,13 +133,25 @@ public:
  /// Update the problem specs before solve (empty)
  void actions_after_newton_solve()
   {}
-
-
+ 
+#ifdef ADAPT
+ /// Actions performed after the adaptation steps
+ void actions_after_adapt();
+#endif
+ 
+#ifdef ADAPT
+ /// Access function for the specific mesh
+ RefineableTriangleMesh<ELEMENT>* mesh_pt() 
+  {
+   return dynamic_cast<RefineableTriangleMesh<ELEMENT>*>(Problem::mesh_pt());
+  }
+#else
  /// Access function for the specific mesh
  TriangleMesh<ELEMENT>* mesh_pt() 
   {
    return dynamic_cast<TriangleMesh<ELEMENT>*>(Problem::mesh_pt());
   }
+#endif
 
   /// Doc the solution
  void doc_solution(DocInfo& doc_info);
@@ -148,7 +160,15 @@ private:
 
  /// Pointer to source function
  PoissonEquations<2>::PoissonSourceFctPt Source_fct_pt;
-
+ 
+#ifdef ADAPT
+ /// Pointer to the bulk mesh
+ RefineableTriangleMesh<ELEMENT> *Bulk_mesh_pt;
+ 
+ /// Error estimator
+ Z2ErrorEstimator* error_estimator_pt;
+#endif
+ 
 };
 
 
@@ -173,10 +193,25 @@ PoissonProblem<ELEMENT>::
  // Orientation of step
  TanhSolnForPoisson::Beta=1.4;
 
+#ifdef ADAPT
+ //Create mesh
+ Bulk_mesh_pt = new RefineableTriangleMesh<ELEMENT>(node_file_name,
+                                                    element_file_name,
+                                                    poly_file_name);
+ 
+ // Set error estimator for bulk mesh
+ Z2ErrorEstimator* error_estimator_pt=new Z2ErrorEstimator;
+ Bulk_mesh_pt->spatial_error_estimator_pt() = error_estimator_pt;
+
+ // Set the problem mesh pointer to the bulk mesh
+ Problem::mesh_pt() = Bulk_mesh_pt;
+ 
+#else
  //Create mesh
   Problem::mesh_pt() = new TriangleMesh<ELEMENT>(node_file_name,
                                                  element_file_name,
                                                  poly_file_name);
+#endif
 
  // Set the boundary conditions for this problem: All nodes are
  // free by default -- just pin the ones that have Dirichlet conditions
@@ -212,6 +247,50 @@ PoissonProblem<ELEMENT>::
 
 }
 
+#ifdef ADAPT
+//========================================================================
+/// Actions performed after the adaptation steps
+//========================================================================
+template<class ELEMENT>
+void PoissonProblem<ELEMENT>::actions_after_adapt()
+{
+ // Since the mesh adaptation strategy is based on mesh re-generation
+ // we need to pin the nodes in the new regenerated mesh, and pass the
+ // source function to the elements
+
+ // Set the boundary conditions for this problem: All nodes are free
+ // by default -- just pin the ones that have Dirichlet conditions
+ // here.
+ unsigned num_bound = mesh_pt()->nboundary();
+ for(unsigned ibound=0;ibound<num_bound;ibound++)
+  {
+   unsigned num_nod= mesh_pt()->nboundary_node(ibound);
+   for (unsigned inod=0;inod<num_nod;inod++)
+   {
+     mesh_pt()->boundary_node_pt(ibound,inod)->pin(0);
+   }
+ }
+
+ // Complete the build of all elements so they are fully functional
+
+ //Find number of elements in mesh
+ unsigned n_element = mesh_pt()->nelement();
+
+ // Loop over the elements to set up element-specific 
+ // things that cannot be handled by constructor
+ for(unsigned i=0;i<n_element;i++)
+  {
+   // Upcast from GeneralElement to the present element
+   ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
+
+   //Set the source function pointer
+   el_pt->source_fct_pt() = Source_fct_pt;
+  }
+
+ // Setup equation numbering scheme
+ cout <<"Number of equations: " << assign_eqn_numbers() << std::endl; 
+}
+#endif
 
 
 //========================================================================
@@ -298,7 +377,10 @@ int main(int argc, char* argv[])
                        OOMPH_EXCEPTION_LOCATION);
   }
 
-
+#ifdef ADAPT
+ const unsigned max_adapt = 3;
+#endif
+ 
  // Convert arguments to strings that specify the input file names
  string node_file_name(argv[1]);
  string element_file_name(argv[2]);
@@ -310,18 +392,19 @@ int main(int argc, char* argv[])
  // Output directory
  doc_info.set_directory("RESLT");
  
-
+#ifndef ADAPT
  // Do the problem with cubic elements
  //-----------------------------------
  {
   cout << std::endl << "Cubic elements" << std::endl;
   cout <<         "==============" << std::endl << std::endl;
+  
   //Set up the problem
   PoissonProblem<TPoissonElement<2,4> > 
    problem(&TanhSolnForPoisson::get_source,node_file_name,
            element_file_name,
            poly_file_name);
-    
+  
   // Solve the problem
   problem.newton_solve();
   
@@ -331,22 +414,36 @@ int main(int argc, char* argv[])
   //Increment counter for solutions 
   doc_info.number()++;
  }
-
-
+#endif
+ 
+ 
  // Do the problem with quadratic elements
  //---------------------------------------
  {
   cout << std::endl  << "Quadratic elements" << std::endl;
   cout <<               "===================" << std::endl << std::endl;
 
+#ifdef ADAPT
+  //Set up the problem
+  PoissonProblem<ProjectablePoissonElement<TPoissonElement<2,3> > >
+   problem(&TanhSolnForPoisson::get_source,node_file_name,
+           element_file_name,
+           poly_file_name);
+#else
   //Set up the problem
   PoissonProblem<TPoissonElement<2,3> > 
    problem(&TanhSolnForPoisson::get_source,node_file_name,
            element_file_name,
            poly_file_name);
+#endif
     
+#ifdef ADAPT
+  // Solve the problem with adaptation
+  problem.newton_solve(max_adapt);
+#else
   // Solve the problem
   problem.newton_solve();
+#endif
   
   //Output solution
   problem.doc_solution(doc_info);
@@ -363,14 +460,27 @@ int main(int argc, char* argv[])
   cout << std::endl << "Linear elements" << std::endl;
   cout <<              "===============" << std::endl << std::endl;
 
+#ifdef ADAPT
+  //Set up the problem
+  PoissonProblem<ProjectablePoissonElement<TPoissonElement<2,2> > > 
+   problem(&TanhSolnForPoisson::get_source,node_file_name,
+           element_file_name,
+           poly_file_name);
+#else
   //Set up the problem
   PoissonProblem<TPoissonElement<2,2> > 
    problem(&TanhSolnForPoisson::get_source,node_file_name,
            element_file_name,
            poly_file_name);
+#endif
   
+#ifdef ADAPT
+  // Solve the problem with adaptation
+  problem.newton_solve(max_adapt);
+#else
   // Solve the problem
   problem.newton_solve();
+#endif
   
   //Output solution
   problem.doc_solution(doc_info);

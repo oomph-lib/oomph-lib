@@ -5869,22 +5869,26 @@ surface_remesh_for_inner_hole_boundaries(Vector<Vector<double> >
     
    }
   
+  // Verify if there are internal boundaries defined, if that is the
+  // case we can not continue since we are not yet supporting internal
+  // boundaries defined in polyfiles to created a mesh that may be
+  // adapted
 #ifdef PARANOID
   if (nglobal_segments != nodes_ids.size())
    {
     std::ostringstream error_message;
     error_message
      << "The number of nodes (" << nodes_ids.size() << ") and segments (" 
-     << nglobal_segments << ") is different.\nThis could mean that there "
-     << "are internal non-closed boundaries defined in\nthe polyfile, "
-     << "to support this feature please use the TriangleMeshPoyLine\n"
-     << "and TriangleMeshCurviLine objects\n\n";
+     << nglobal_segments << ") is different.\nThis may mean that there  "
+     << "are internal non-closed boundaries defined in\nthe polyfile. "
+     << "If you need this feature please use the TriangleMeshPoyLine\n"
+     << "and TriangleMeshCurviLine objects to define your domain.\n\n";
     throw OomphLibError(error_message.str(),
                         OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif
-
+  
   // Now sort the segments associated to a boundary to create a contiguous
   // polyline, but first check that the number of found boundaries be the
   // same as the current number of boundaries in the mesh
@@ -6155,8 +6159,6 @@ surface_remesh_for_inner_hole_boundaries(Vector<Vector<double> >
     
     // Get the associated boundary to the current polyline
     const unsigned bnd_id = polylines_pt[init_poly]->boundary_id();
-    // Get the number of vertices on the current polyline
-    const unsigned nvertices = polylines_pt[init_poly]->nvertex();
     // Get the initial and final node id of the current polyline
     unsigned left_node_id = sorted_boundary_segments[bnd_id].front();
     unsigned right_node_id = sorted_boundary_segments[bnd_id].back();
@@ -6176,8 +6178,6 @@ surface_remesh_for_inner_hole_boundaries(Vector<Vector<double> >
           
           // Get the associated boundary to the current polyline
           const unsigned cbnd_id = polylines_pt[i]->boundary_id();
-          // Get the number of vertices on the current polyline
-          const unsigned cnvertices = polylines_pt[i]->nvertex();
           // Get the initial and final node id of the current polyline
           unsigned cleft_node_id = sorted_boundary_segments[cbnd_id].front();
           unsigned cright_node_id = sorted_boundary_segments[cbnd_id].back();

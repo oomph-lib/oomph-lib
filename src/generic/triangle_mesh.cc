@@ -687,7 +687,11 @@ namespace TriangleHelper
     poly_file >> triangle_io.regionlist[4*iregion+1];
     poly_file >> triangle_io.regionlist[4*iregion+2];
     triangle_io.regionlist[4*iregion+3] = 0.0;
-
+    
+    // Skip the rest of the line, there is no need to read the size of
+    // the elements in the region since that value is no longer used
+    poly_file.ignore(80,'\n');
+    
     // Verify if not using the default region number (zero)
     if (triangle_io.regionlist[4*iregion+2] == 0) 
      {
