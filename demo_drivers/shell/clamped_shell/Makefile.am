@@ -34,3 +34,6 @@ unstructured_clamped_curved_shell_SOURCES = unstructured_clamped_curved_shell.cc
 unstructured_clamped_curved_shell_LDADD = -L@libdir@ -lshell -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
 
 #-------------------------------------------------------------------
+EXTRA_DIST += Rectangle_CirTube.1.ele Rectangle_CirTube.1.node Rectangle_CirTube.1.poly
+
+

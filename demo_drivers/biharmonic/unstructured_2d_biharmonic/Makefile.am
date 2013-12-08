@@ -22,3 +22,6 @@ unstructured_2d_biharmonic_curvedelement_SOURCES = unstructured_2d_biharmonic_cu
 # $(FLIBS) is included in case the solver involves fortran sources.
 unstructured_2d_biharmonic_curvedelement_LDADD = -L@libdir@ -lshell -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
 
+#--------------------------------------------
+EXTRA_DIST += Circle1.1.ele Circle1.1.node Circle1.1.poly
+

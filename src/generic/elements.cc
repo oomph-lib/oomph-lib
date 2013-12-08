@@ -1540,7 +1540,9 @@ namespace Locate_zeta_helpers
 //=========================================================================
 /// Internal function that is used to assemble the jacobian of the mapping
 /// from local coordinates (s) to the eulerian coordinates (x), given the
-/// derivatives of the shape functions. 
+/// derivatives of the shape functions. The entire jacobian matrix is 
+/// constructed and this function will only work if there are the same number
+/// of local coordinates as global coordinates (i.e. for "bulk" elements).
 //=========================================================================
 void FiniteElement::
 assemble_local_to_eulerian_jacobian(const DShape &dpsids,
@@ -3620,8 +3622,12 @@ void FiniteElement::get_dresidual_dnodal_coordinates(
  }
 
 //========================================================================
-/// \short Calculate the Jacobian of the mapping between local and global
-/// coordinates at the position s
+/// \short Calculate the determinant of the 
+/// Jacobian of the mapping between local and global
+/// coordinates at the position. Works directly from the base vectors
+/// without assuming that coordinates match spatial dimension. Will
+/// be overloaded in FaceElements, in which the elemental dimension does
+/// not match the spatial dimension.
 //========================================================================
  double FiniteElement::J_eulerian(const Vector<double> &s) const
  {
@@ -4573,7 +4579,8 @@ void FiniteElement::identify_field_data_for_interactions(
 bool FaceElement::Ignore_discontinuous_tangent_warning = false;
 
 //========================================================================
-/// \short Calculate the Jacobian of the mapping between local and global
+/// \short Calculate the determinant of the 
+/// Jacobian of the mapping between local and global
 /// coordinates at the position s. Overloaded from FiniteElement.
 //========================================================================
  double FaceElement::J_eulerian(const Vector<double> &s) const

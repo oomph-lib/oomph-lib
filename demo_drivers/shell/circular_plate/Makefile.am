@@ -12,3 +12,8 @@ unstructured_clamped_circular_plate_SOURCES = unstructured_clamped_circular_plat
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
 unstructured_clamped_circular_plate_LDADD = -L@libdir@ -lshell -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
+
+#--------------------------------------------------------------------
+EXTRA_DIST += CircularPlate.1.ele CircularPlate.1.node CircularPlate.1.poly
+
+
