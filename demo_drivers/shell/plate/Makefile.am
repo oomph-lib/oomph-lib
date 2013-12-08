@@ -23,6 +23,6 @@ unstructured_clamped_square_plate_SOURCES = unstructured_clamped_square_plate.cc
 unstructured_clamped_square_plate_LDADD = -L@libdir@ -lshell -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
 
 # -------------------------------------------------------------------
-EXTRA_DIST +=  UnitPlate.1.poly UnitPlate.1.ele UnitPLate.1.node
+EXTRA_DIST +=  UnitPlate.1.poly UnitPlate.1.ele UnitPlate.1.node
 
 
