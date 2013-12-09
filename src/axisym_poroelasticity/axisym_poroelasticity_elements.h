@@ -46,6 +46,7 @@ namespace oomph
    Lambda_sq_pt(&Default_lambda_sq_value),
    Density_ratio_pt(&Default_density_ratio_value),
    Permeability_pt(&Default_permeability_value),
+   Permeability_ratio_pt(&Default_permeability_ratio_value),
    Alpha_pt(&Default_alpha_value),
    Porosity_pt(&Default_porosity_value)
     {
@@ -97,6 +98,15 @@ namespace oomph
 
   /// Access function for pointer to the nondim  permeability
   double* &permeability_pt() {return Permeability_pt;}
+
+
+  /// \short Access function for the ratio of the material's actual permeability
+  /// to the permeability used in the non-dimensionalisation of the equations
+  const double& permeability_ratio() const {return *Permeability_ratio_pt;}
+
+  /// Access function for pointer to ratio of the material's actual permeability
+  /// to the permeability used in the non-dimensionalisation of the equations
+  double* &permeability_ratio_pt() {return Permeability_ratio_pt;}
 
   /// Access function for alpha, the Biot parameter
   const double& alpha() const {return *Alpha_pt;}
@@ -1075,6 +1085,10 @@ namespace oomph
   /// permeability
   double* Permeability_pt;
 
+  /// \short Ratio of the material's actual permeability to the permeability
+  /// used in the non-dimensionalisation of the equations
+  double* Permeability_ratio_pt;
+
   /// Alpha -- the biot parameter
   double* Alpha_pt;
 
@@ -1098,6 +1112,11 @@ namespace oomph
   /// \short Static default value for the permeability (1.0 for natural scaling;
   /// i.e. timescale is given by L^2/(k^* E)
   static double Default_permeability_value;
+
+  /// \short Static default value for the ratio of the material's actual
+  /// permeability to the permeability used to non-dimensionalise the
+  /// equations
+  static double Default_permeability_ratio_value;
 
   /// Static default value for alpha, the biot parameter
   static double Default_alpha_value;

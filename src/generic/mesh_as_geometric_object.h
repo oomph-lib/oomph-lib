@@ -97,6 +97,9 @@ private:
  /// Max_search_radius from the point to be located.
  double Max_search_radius;
   
+ /// Max. spiralling level (for efficiency; effect similar to max_search_radius)
+ unsigned Max_spiral_level;
+
  ///Storage for min coordinates in the mesh
  Vector<double> Min_coords;
 
@@ -135,6 +138,7 @@ public:
   : GeomObject()
   {
    Max_search_radius=DBL_MAX;
+   Max_spiral_level=UINT_MAX;
    Suppress_synchronisation_of_bins=false;
    if (suppress_synchronisation_of_bins_flag==1) 
     {
@@ -157,6 +161,7 @@ public:
    : GeomObject()
   {
    Max_search_radius=DBL_MAX;
+   Max_spiral_level=UINT_MAX;
    Suppress_synchronisation_of_bins=false;
    if (suppress_synchronisation_of_bins_flag==1) 
     {
@@ -180,6 +185,7 @@ public:
   GeomObject()
   {
    Max_search_radius=DBL_MAX;
+   Max_spiral_level=UINT_MAX;
    Suppress_synchronisation_of_bins=false;
    if (suppress_synchronisation_of_bins_flag==1) 
     {
@@ -204,6 +210,7 @@ public:
   GeomObject()
   {
    Max_search_radius=DBL_MAX;
+   Max_spiral_level=UINT_MAX;
    if (suppress_synchronisation_of_bins_flag==1) 
     {
      Suppress_synchronisation_of_bins=true;
@@ -349,6 +356,10 @@ public:
  /// a bin whose closest vertex is further than the specified
  /// max search radius.
  double& max_search_radius() {return Max_search_radius;}
+
+ /// \short Access function to max. spiral level during straight locate_zeta
+ /// search (for efficiency; similar to max_search_radius())
+ unsigned& max_spiral_level() {return Max_spiral_level;}
 
  ///Access function to current min. spiral level
  unsigned& current_min_spiral_level() {return Current_min_spiral_level;}

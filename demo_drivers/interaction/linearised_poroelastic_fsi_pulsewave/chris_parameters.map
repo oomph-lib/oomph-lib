@@ -1,0 +1,106 @@
+interface(echo=4);
+
+assume(Newton,positive);
+assume(Meter,positive);
+assume(kg,positive);
+assume(Sec,real);
+additionally(Sec,positive);
+
+cm:=Meter/100;
+Newton:=kg*Meter/Sec^2;
+Pascal:=Newton/Meter^2;
+dyn:=0.1*Pascal*cm^2;
+
+#----------------------------------------------------------------------------
+# Drained elastic moduli 
+#----------------------------------------------------------------------------
+E_cord:=5e4*dyn/cm^2;
+E_filum_and_block:=6.25e5*dyn/cm^2; 
+E_dura_and_pia:=1.25e7*dyn/cm^2;
+
+#--------------------------------------------------
+# Density of Navier-Stokes fluid (I know this one!)
+# Also used for all other materials.
+#--------------------------------------------------
+rho:=1000*kg/Meter^3;
+
+#---------------------------------------------
+# Viscosity of Navier-Stokes fluid.
+#---------------------------------------------
+mu_nst:=1.0e-3*Pascal*Sec;
+
+#--------------------------
+# Drained Poisson's ratio 
+# Chris email: 03/12/12 
+#--------------------------
+nu:=0.35;
+
+#--------------------------------------------------------------------
+# Permeability -- the permeability quoted by Smillie etc. isn't 
+# what I call the permeability; I include the visocsity and
+# k_smillie/mu = k_mine. Generic value currently for all media.
+#--------------------------------------------------------------------
+k_generic:=1.0e-13*Meter^2/mu_nst;
+
+
+#--------------------------------------------------------------------
+# Length-scale: inner diameter of dura
+#--------------------------------------------------------------------
+Lengthscale:=20e-3*Meter;
+
+
+#---------------------------------------------
+# Velocity scale based on peak impulsive pressure 
+# at inlet in Chris' ASME paper (bottom of page 3):
+# 100 Pa.
+#---------------------------------------------
+P_hat:=100*Pascal;
+Velocscale:=sqrt(P_hat/rho);
+
+
+#-------------------------------------------------
+# Timescale -- corresponds to unit Strouhal number
+#-------------------------------------------------
+Timescale:=evalf(Lengthscale/Velocscale);
+
+
+##########################################################
+
+#----------------
+# Reynolds number
+#----------------
+Reynolds:=simplify(Velocscale*Lengthscale*rho/mu_nst);
+
+
+#==============================================
+# All generic factors based on dura and pia 
+#==============================================
+E:=E_dura_and_pia;
+k:=k_generic;
+
+#-----------------------------------
+# Factor multiplying FSI parameter
+#-----------------------------------
+q_factor:=simplify(mu_nst^2/(Lengthscale^2*E*rho));
+
+#----------------------------------------
+# Factor multiplying non-dim permeability
+#----------------------------------------
+permeability_factor:=simplify(k*E*rho/mu_nst);
+
+#------------------------------------
+# Factor for nondim inertia parameter
+#-------------------------------------
+lambda_factor:=simplify(mu_nst/(rho*Lengthscale)*sqrt(rho/E));
+
+
+#==============================================
+# Ratios of material property for cord
+#==============================================
+R_E_cord:=E_cord/E_dura_and_pia;
+
+#==============================================
+# Ratios of material properties for filum and block
+#==============================================
+R_E_filum_and_block:=E_filum_and_block/E_dura_and_pia;
+

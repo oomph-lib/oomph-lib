@@ -13,6 +13,13 @@ snapshot of the project by issuing the command
 svn checkout svn://oomph-lib.maths.man.ac.uk/trunk
 \endcode
 
+Updates to the latest version can then be obtained by
+
+\code
+svn update
+\endcode
+
+
 Note that the source tree in the subversion repository is not a working
 distribution and you must run
 
@@ -40,3 +47,45 @@ http://oomph-lib.maths.man.ac.uk/viewvc </a>.
  If you wish to obtain a
 password for this page please send an e-mail to the usual address,
 omph-lib AT maths DOT man DOT ac DOT uk.
+
+
+<HR>
+\section problems Troubleshooting
+If the response to the checkout or update commands is 
+\code
+svn: Can't connect to host 'oomph-lib.maths.man.ac.uk': Network unreachable
+\endcode
+despite the fact that your web browser is working, say, the likely problem 
+is that your network commands are being intercepted by a proxy server, 
+and you are using a version of the subversion software
+that does not have proxy settings for the svn protocol.
+(Subversion can also use the http and https protocols, but these are
+not serviced by our repository. Therefore the response to the command
+\code
+svn checkout http://oomph-lib.maths.man.ac.uk/trunk subversion
+\endcode
+will be 
+\code 
+svn: Server sent unexpected return value (400 Bad Request) in response to OPTIONS request
+for 'http://oomph-lib.maths.man.ac.uk/trunk'
+\endcode
+
+The solution is to install tsocks (if you don't have it already 
+on your computer). If you are running Ubuntu or
+another Debian derivative, the appropriate command is
+\code
+apt-get install tsocks
+\endcode 
+Edit the IP addresses in \c /etc/tsocks.conf to refer to your 
+local domain and proxy server (you may need to ask
+your local network administrator for information). The checkout is 
+then effected by issuing the command
+\code
+tsocks svn checkout svn://oomph-lib.maths.man.ac.uk/trunk
+\endcode 
+and the update is done with the command
+\code
+tsocks svn update
+\endcode
+We are grateful to Chris Bertram from the University of Sydney
+for this information.

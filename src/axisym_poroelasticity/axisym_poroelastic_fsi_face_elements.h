@@ -478,6 +478,7 @@ void LinearisedAxisymPoroelasticBJS_FSIElement
 
    // Get permeability from the bulk poroelasticity element
    const double permeability=ext_el_pt->permeability();
+   const double local_permeability_ratio=ext_el_pt->permeability_ratio();
 
    // We are given the normal and tangential components of the combined
    // poroelasticity "velocity" at the boundary from the BJS condition ---
@@ -493,11 +494,11 @@ void LinearisedAxisymPoroelasticBJS_FSIElement
    // Calculate the normal and tangential components
    for(unsigned i=0;i<Dim;i++)
     {
-
      normal_component+=local_st*
       (du_dt[i]+permeability*q[i])*interpolated_normal[i];
      tangential_component+=
-      (local_st*du_dt[i]-traction_nst[i]*local_inverse_slip_rate_coeff)
+      (local_st*du_dt[i]-traction_nst[i]*
+       sqrt(local_permeability_ratio)*local_inverse_slip_rate_coeff)
       *interpolated_tangent[i];
     }
    

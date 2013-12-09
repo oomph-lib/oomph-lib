@@ -642,6 +642,9 @@ namespace oomph
        if(n_level < Nbin[i]) {n_level = Nbin[i];}
       }
      
+     // Also limit to max. spiral level
+     n_level=std::min(n_level,max_spiral_level());
+
      // Set bool for finding zeta
      bool found_zeta=false;
      for (unsigned i_level=0;i_level<n_level;i_level++)

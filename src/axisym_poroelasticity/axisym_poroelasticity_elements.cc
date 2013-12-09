@@ -32,6 +32,15 @@ namespace oomph
  double AxisymmetricPoroelasticityEquations::
  Default_permeability_value=1.0;
 
+
+ //===================================================================
+ /// \short Static default value for ratio of the material's actual
+ /// permeability to the permeability used in the non-dimensionalisastion 
+ /// of the equations
+ //===================================================================
+ double AxisymmetricPoroelasticityEquations::
+ Default_permeability_ratio_value=1.0;
+
  //===================================================================
  /// Static default value for alpha, the Biot parameter
  //===================================================================
@@ -587,6 +596,10 @@ namespace oomph
    // Get the value of permeability
    double local_permeability = this->permeability();
 
+   // Ratio of the material's permeability to the permeability used
+   // to non-dimensionalise the equations
+   double local_permeability_ratio = this->permeability_ratio();
+
    // Get the value of alpha
    double alpha = this->alpha();
 
@@ -597,7 +610,7 @@ namespace oomph
    double density_ratio = this->density_ratio();
 
    // Precompute the ratio of fluid density to combined density
-   double rho_f_over_rho = density_ratio/(1+porosity*(density_ratio-1));
+   double rho_f_over_rho = density_ratio/(1.0+porosity*(density_ratio-1.0));
 
    // Get continuous time from timestepper of first node
    double time=node_pt(0)->time_stepper_pt()->time_pt()->time();
@@ -922,7 +935,8 @@ namespace oomph
              rho_f_over_rho*lambda_sq*
              (interpolated_d2u_dt2[i]+
               (local_permeability/porosity)*interpolated_dq_dt[i])
-             +interpolated_q[i]-rho_f_over_rho*f_fluid[i]
+             +interpolated_q[i]/
+             local_permeability_ratio-rho_f_over_rho*f_fluid[i]
              )
             *q_test(l,i)*r*w*J;
           }
@@ -979,7 +993,7 @@ namespace oomph
                 {
                  jacobian(local_eqn,local_unknown)+=
                   q_basis(l2,c)*q_test(l,c)*
-                  (1.0+
+                  (1.0/local_permeability_ratio+
                    rho_f_over_rho*lambda_sq*local_permeability*
                    timestepper_pt->weight(1,0)/porosity)*r*w*J;
                 }
