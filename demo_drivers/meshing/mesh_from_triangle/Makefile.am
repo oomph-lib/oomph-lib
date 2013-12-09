@@ -73,5 +73,8 @@ mesh_from_triangle_navier_stokes_adapt_CXXFLAGS = -DADAPT
 
 EXTRA_DIST += box_hole.poly box_hole.1.node box_hole.1.ele box_hole.1.poly \
 flow_past_box.poly flow_past_box.1.node flow_past_box.1.ele \
-flow_past_box.1.poly box_hole.1.edge flow_past_box.1.edge
+flow_past_box.1.poly box_hole.1.edge flow_past_box.1.edge \
+box_hole_adapt.poly box_hole_adapt.1.node box_hole_adapt.1.ele \
+box_hole_adapt.1.poly flow_past_box_adapt.poly flow_past_box_adapt.1.node \
+flow_past_box_adapt.1.ele flow_past_box_adapt.1.poly 
 
