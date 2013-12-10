@@ -111,7 +111,7 @@ int main(int argc, char* argv[])
   //   row s  = 0 5 10 13 17 19
   //
 
-  // First matrix (mat_zero)
+  // First matrix (t1m1)
   unsigned nrow_global_t1m1 = 5;
   unsigned ncol_t1m1 = 5;
   unsigned nnz_t1m1 = 9;
@@ -127,8 +127,6 @@ int main(int argc, char* argv[])
   construct_vector(col_i_array_t1m1,nnz_t1m1,col_i_t1m1);
   construct_vector(row_s_array_t1m1,nrow_global_t1m1+1,row_s_t1m1);
 
-  LinearAlgebraDistribution distri_zero(comm_pt,nrow_global_t1m1,true);
-
   CRDoubleMatrix mat_t1m1;
   CRDoubleMatrixHelpers::create_uniformly_distributed_matrix(
       nrow_global_t1m1,ncol_t1m1,comm_pt,
@@ -138,7 +136,7 @@ int main(int argc, char* argv[])
   mat_t1m1_stream << "t1m1_NP"<<nproc<<"R"<<my_rank;
   mat_t1m1.sparse_indexed_output(mat_t1m1_stream.str());
 
-  // Next matrix (mat_t1m2)
+  // Next matrix (t1m2)
   unsigned nrow_global_t1m2 = 5;
   unsigned ncol_t1m2 = 5;
   unsigned nnz_t1m2 = 18;
@@ -154,8 +152,6 @@ int main(int argc, char* argv[])
   construct_vector(col_i_array_t1m2,nnz_t1m2,col_i_t1m2);
   construct_vector(row_s_array_t1m2,nrow_global_t1m2+1,row_s_t1m2);
 
-  LinearAlgebraDistribution distri_t1m2(comm_pt,nrow_global_t1m2,true);
-
   CRDoubleMatrix mat_t1m2;
   CRDoubleMatrixHelpers::create_uniformly_distributed_matrix(
       nrow_global_t1m2,ncol_t1m2,comm_pt,
@@ -166,12 +162,14 @@ int main(int argc, char* argv[])
   mat_t1m2_stream << "t1m2_NP"<<nproc<<"R"<<my_rank;
   mat_t1m2.sparse_indexed_output(mat_t1m2_stream.str());
 
+  // Now perform element-wise addition of t1m1 and t1m2, and put the result
+  // in mat_t1_result.
   CRDoubleMatrix mat_t1_result;
 
   mat_t1m1.add(mat_t1m2,mat_t1_result);
 
   std::ostringstream mat_t1_result_stream;
-  mat_t1_result_stream << "t1_res_NP"<<nproc<<"P"<<my_rank;
+  mat_t1_result_stream << "t1_res_NP"<<nproc<<"R"<<my_rank;
   mat_t1_result.sparse_indexed_output(mat_t1_result_stream.str());
 
 
@@ -187,135 +185,152 @@ int main(int argc, char* argv[])
   // B = [2  4  6  8  10 12
   //      14 16 18 20 22 24
   //      26 28 30 32 34 36]
-  //
   
+  // First matrix (t2m1)
+  unsigned nrow_global_t2m1 = 3;
+  unsigned ncol_t2m1 = 6;
+  unsigned nnz_t2m1 = 18;
+  Vector<double> val_t2m1;
+  Vector<int> col_i_t2m1;
+  Vector<int> row_s_t2m1;
+
+  double val_array_t2m1[] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18};
+  int col_i_array_t2m1[] = {0,1,2,3,4,5,0,1,2,3,4,5,0,1,2,3,4,5};
+  int row_s_array_t2m1[] = {0,6,12,18};
+
+  construct_vector(val_array_t2m1,nnz_t2m1,val_t2m1);
+  construct_vector(col_i_array_t2m1,nnz_t2m1,col_i_t2m1);
+  construct_vector(row_s_array_t2m1,nrow_global_t2m1+1,row_s_t2m1);
+
+  CRDoubleMatrix mat_t2m1;
+  CRDoubleMatrixHelpers::create_uniformly_distributed_matrix(
+      nrow_global_t2m1,ncol_t2m1,comm_pt,
+      val_t2m1,col_i_t2m1,row_s_t2m1,mat_t2m1);
+
+  std::ostringstream mat_t2m1_stream;
+  mat_t2m1_stream << "t2m1_NP"<<nproc<<"R"<<my_rank;
+  mat_t2m1.sparse_indexed_output(mat_t2m1_stream.str());
+ 
+  // Second matrix (t2m2)
+  unsigned nrow_global_t2m2 = 3;
+  unsigned ncol_t2m2 = 6;
+  unsigned nnz_t2m2 = 18;
+  Vector<double> val_t2m2;
+  Vector<int> col_i_t2m2;
+  Vector<int> row_s_t2m2;
+
+  double val_array_t2m2[] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18};
+  int col_i_array_t2m2[] = {0,1,2,3,4,5,0,1,2,3,4,5,0,1,2,3,4,5};
+  int row_s_array_t2m2[] = {0,6,12,18};
+
+  construct_vector(val_array_t2m2,nnz_t2m2,val_t2m2);
+  construct_vector(col_i_array_t2m2,nnz_t2m2,col_i_t2m2);
+  construct_vector(row_s_array_t2m2,nrow_global_t2m2+1,row_s_t2m2);
+
+  CRDoubleMatrix mat_t2m2;
+  CRDoubleMatrixHelpers::create_uniformly_distributed_matrix(
+      nrow_global_t2m2,ncol_t2m2,comm_pt,
+      val_t2m2,col_i_t2m2,row_s_t2m2,mat_t2m2);
+
+  std::ostringstream mat_t2m2_stream;
+  mat_t2m2_stream << "t2m2_NP"<<nproc<<"R"<<my_rank;
+  mat_t2m2.sparse_indexed_output(mat_t2m2_stream.str());
+
+  // Now perform element-wise addition of t2m1 and t2m2, and put the result
+  // in mat_t2_result.
+  CRDoubleMatrix mat_t2_result;
+
+  mat_t2m1.add(mat_t2m2,mat_t2_result);
+
+  std::ostringstream mat_t2_result_stream;
+  mat_t2_result_stream << "t2_res_NP"<<nproc<<"R"<<my_rank;
+  mat_t2_result.sparse_indexed_output(mat_t2_result_stream.str());
 
 
+  // Now test with the following matrices: A + B = C where
+  // A = [1  2  3
+  //      4  5  6
+  //      7  8  9
+  //      10 11 12
+  //      13 14 15
+  //      16 17 18]
+  //
+  // B = [1  2  3
+  //      4  5  6
+  //      7  8  9
+  //      10 11 12
+  //      13 14 15
+  //      16 17 18]
+  //
+  // C = [2  4  6
+  //      8  10 12
+  //      14 16 18
+  //      20 22 24
+  //      26 28 30
+  //      32 34 36]
+  
+  // First matrix (t3m1)
+  unsigned nrow_global_t3m1 = 6;
+  unsigned ncol_t3m1 = 3;
+  unsigned nnz_t3m1 = 18;
+  Vector<double> val_t3m1;
+  Vector<int> col_i_t3m1;
+  Vector<int> row_s_t3m1;
 
-  //  // The number of block rows and columns, these will be set to the correct
-  //  // value per test below.
-  //  unsigned nblock_row = 0;
-  //  unsigned nblock_col = 0;
-  //
-  //  // Supply the dimensions of the matrices to concatenate.
-  //  // The matrices must be in the order: top row, then along the columns,
-  //  // then second row, et cetera...
-  //  // The number of elements in this must be 2*nblock_row*nblock_col.
-  //  unsigned dimarray[] = {7,7,7,5,7,3,5,7,5,5,5,3,3,7,3,5,3,3};
-  //
-  //  /////////////////////////////////////////////////////////////////////////////
-  //  // Test 0: Concatenate the sub matrices with the sizes
-  //  // (7,7)(7,5)(7,3)
-  //  // (5,7)(5,5)(5,3)
-  //  // (3,7)(3,5)(3,3)
-  //  
-  //  // This is a 3 by 3 block matrix.
-  //  nblock_row = 3;
-  //  nblock_col = 3;
-  //
-  //  // The data structure to store the pointers to matrices.
-  //  DenseMatrix<CRDoubleMatrix*> mat0_pt(nblock_row,nblock_col,0);
-  //
-  //  // Create the matrice to concatenate.
-  //  create_matrices_to_cat(nblock_row,nblock_col,dimarray,
-  //                         comm_pt,mat0_pt);
-  //  
-  //  // The result matrix.
-  //  CRDoubleMatrix result_matrix0;
-  //
-  //  // Call the concatenate function.
-  //  CRDoubleMatrixHelpers::concatenate(mat0_pt,result_matrix0);
-  //
-  //  // output the result matrix
-  //  std::ostringstream result_mat0_stream;
-  //  result_mat0_stream << "out0_NP" << nproc << "R" << my_rank;
-  //  result_matrix0.sparse_indexed_output(result_mat0_stream.str().c_str());
-  //
-  //  // No longer need the result matrix.
-  //  result_matrix0.clear();
-  //
-  //  /////////////////////////////////////////////////////////////////////////////
-  //  // Test 1: Concatenate the sub matrices with the sizes
-  //  // (7,7)(7,5)
-  //  // (5,7)(5,5)
-  //  // (3,7)(3,5)
-  //  
-  //  // This is a 3 by 3 block matrix.
-  //  nblock_row = 3;
-  //  nblock_col = 2;
-  //
-  //  // The data structure to store the pointers to matrices.
-  //  DenseMatrix<CRDoubleMatrix*> mat1_pt(nblock_row,nblock_col,0);
-  //  
-  //  // Get the matrices from mat0_pt
-  //  for(unsigned block_row_i = 0; block_row_i < nblock_row; block_row_i++) 
-  //  {
-  //    for (unsigned block_col_i = 0; block_col_i < nblock_col; block_col_i++) 
-  //    {
-  //      mat1_pt(block_row_i,block_col_i) = mat0_pt(block_row_i,block_col_i);
-  //    }
-  //  }
-  //
-  //  // The result matrix.
-  //  CRDoubleMatrix result_matrix1;
-  //
-  //  // Call the concatenate function.
-  //  CRDoubleMatrixHelpers::concatenate(mat1_pt,result_matrix1);
-  //
-  //  // output the result matrix
-  //  std::ostringstream result_mat1_stream;
-  //  result_mat1_stream << "out1_NP" << nproc << "R" << my_rank;
-  //  result_matrix1.sparse_indexed_output(result_mat1_stream.str().c_str());
-  //
-  //  // No longer need the result matrix.
-  //  result_matrix1.clear();
-  //
-  //  /////////////////////////////////////////////////////////////////////////////
-  //  // Test 2: Concatenate the sub matrices with the sizes
-  //  // (7,7)(7,5)(7,3)
-  //  // (5,7)(5,5)(5,3)
-  //  
-  //  // This is a 3 by 3 block matrix.
-  //  nblock_row = 2;
-  //  nblock_col = 3;
-  //
-  //  // The data structure to store the pointers to matrices.
-  //  DenseMatrix<CRDoubleMatrix*> mat2_pt(nblock_row,nblock_col,0);
-  //  
-  //  // Get the matrices from mat0_pt
-  //  for(unsigned block_row_i = 0; block_row_i < nblock_row; block_row_i++) 
-  //  {
-  //    for (unsigned block_col_i = 0; block_col_i < nblock_col; block_col_i++) 
-  //    {
-  //      mat2_pt(block_row_i,block_col_i) = mat0_pt(block_row_i,block_col_i);
-  //    }
-  //  }
-  //
-  //  // The result matrix.
-  //  CRDoubleMatrix result_matrix2;
-  //
-  //  // Call the concatenate function.
-  //  CRDoubleMatrixHelpers::concatenate(mat2_pt,result_matrix2);
-  //
-  //  // output the result matrix
-  //  std::ostringstream result_mat2_stream;
-  //  result_mat2_stream << "out2_NP" << nproc << "R" << my_rank;
-  //  result_matrix2.sparse_indexed_output(result_mat2_stream.str().c_str());
-  //
-  //  // No longer need the result matrix.
-  //  result_matrix2.clear();
-  //
-  //  /////////////////////////////////////////////////////////////////////////////
-  //  // Delete the sub block matrices, we only need to delete them from mat0_pt.
-  //  nblock_row = mat0_pt.nrow();
-  //  nblock_col = mat0_pt.ncol();
-  //  for (unsigned block_row_i = 0; block_row_i < nblock_row; block_row_i++) 
-  //  {
-  //    for (unsigned block_col_i = 0; block_col_i < nblock_col; block_col_i++) 
-  //    {
-  //      delete mat0_pt(block_row_i,block_col_i);
-  //    } // for col_i
-  //  } // for row_i
+  double val_array_t3m1[] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18};
+  int col_i_array_t3m1[] = {0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2};
+  int row_s_array_t3m1[] = {0,3,6,9,12,15,18};
+
+  construct_vector(val_array_t3m1,nnz_t3m1,val_t3m1);
+  construct_vector(col_i_array_t3m1,nnz_t3m1,col_i_t3m1);
+  construct_vector(row_s_array_t3m1,nrow_global_t3m1+1,row_s_t3m1);
+
+  CRDoubleMatrix mat_t3m1;
+  CRDoubleMatrixHelpers::create_uniformly_distributed_matrix(
+      nrow_global_t3m1,ncol_t3m1,comm_pt,
+      val_t3m1,col_i_t3m1,row_s_t3m1,mat_t3m1);
+
+  std::ostringstream mat_t3m1_stream;
+  mat_t3m1_stream << "t3m1_NP"<<nproc<<"R"<<my_rank;
+  mat_t3m1.sparse_indexed_output(mat_t3m1_stream.str());
+ 
+  // Second matrix (t3m2)
+  unsigned nrow_global_t3m2 = 6;
+  unsigned ncol_t3m2 = 3;
+  unsigned nnz_t3m2 = 18;
+  Vector<double> val_t3m2;
+  Vector<int> col_i_t3m2;
+  Vector<int> row_s_t3m2;
+
+  double val_array_t3m2[] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18};
+  int col_i_array_t3m2[] = {0,1,2,0,1,2,0,1,2,0,1,2,0,1,2,0,1,2};
+  int row_s_array_t3m2[] = {0,3,6,9,12,15,18};
+
+
+  construct_vector(val_array_t3m2,nnz_t3m2,val_t3m2);
+  construct_vector(col_i_array_t3m2,nnz_t3m2,col_i_t3m2);
+  construct_vector(row_s_array_t3m2,nrow_global_t3m2+1,row_s_t3m2);
+
+  CRDoubleMatrix mat_t3m2;
+  CRDoubleMatrixHelpers::create_uniformly_distributed_matrix(
+      nrow_global_t3m2,ncol_t3m2,comm_pt,
+      val_t3m2,col_i_t3m2,row_s_t3m2,mat_t3m2);
+
+  std::ostringstream mat_t3m2_stream;
+  mat_t3m2_stream << "t3m2_NP"<<nproc<<"R"<<my_rank;
+  mat_t3m2.sparse_indexed_output(mat_t3m2_stream.str());
+
+  // Now perform element-wise addition of t3m1 and t3m2, and put the result
+  // in mat_t3_result.
+  CRDoubleMatrix mat_t3_result;
+
+  mat_t3m1.add(mat_t3m2,mat_t3_result);
+
+  std::ostringstream mat_t3_result_stream;
+  mat_t3_result_stream << "t3_res_NP"<<nproc<<"R"<<my_rank;
+  mat_t3_result.sparse_indexed_output(mat_t3_result_stream.str());
+
+
 
 #ifdef OOMPH_HAS_MPI
   // finalize MPI
