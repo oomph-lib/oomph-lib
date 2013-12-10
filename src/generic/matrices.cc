@@ -3126,6 +3126,71 @@ void CRDoubleMatrix::add(const CRDoubleMatrix &matrix_in,
                        OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
+
+ // Check if the column indices are sorted. The column indices (per row) needs
+ // to be sorted in ascending order.
+ 
+ // Loop through the rows.
+ unsigned para_nrow_local = this->nrow_local();
+ const int* para_this_row_start = this->row_start();
+ const int* para_this_column_indices = this->column_index();
+ const int* para_in_row_start = matrix_in.row_start();
+ const int* para_in_column_indices = matrix_in.column_index();
+
+ // Print out the column indices of THIS matrix.
+ for (unsigned row_i = 0; row_i < para_nrow_local; row_i++) 
+  {
+    for (unsigned this_entry_i = para_this_row_start[row_i]; this_entry_i < para_this_row_start[row_i+1]; this_entry_i++) 
+    {
+      oomph_info << "this_entry_i = " << this_entry_i << " col: " << para_this_column_indices[this_entry_i] << std::endl; 
+      
+    }
+ 
+  }
+
+ for (unsigned row_i = 0; row_i < para_nrow_local; row_i++) 
+  {
+   // Loop through the entries of THIS matrix in the row.
+   for (unsigned this_entry_i = para_this_row_start[row_i]; 
+        this_entry_i < (para_this_row_start[row_i+1]-1); this_entry_i++) 
+    {
+     if(para_this_column_indices[this_entry_i] > 
+        para_this_column_indices[this_entry_i+1])
+      {
+       std::ostringstream err_msg;
+       err_msg << "The column entries must be sorted in ascending order.\n"
+               << "But we have in THIS matrix in row " << row_i << ":\n"
+               << "Column index " << this_entry_i << " is " 
+               << para_this_column_indices[this_entry_i] << "\n"
+               << "Column index " << (this_entry_i+1) << " is " 
+               << para_this_column_indices[this_entry_i+1] << "\n";
+
+       throw OomphLibError(err_msg.str(),
+                           OOMPH_CURRENT_FUNCTION,
+                           OOMPH_EXCEPTION_LOCATION);
+      }
+    }
+   // Loop through the entries of matrix_in in the row.
+   for (unsigned in_entry_i = para_in_row_start[row_i]; 
+        in_entry_i < (para_in_row_start[row_i+1]-1); in_entry_i++) 
+    {
+     if(para_in_column_indices[in_entry_i] > 
+        para_in_column_indices[in_entry_i+1])
+      {
+       std::ostringstream err_msg;
+       err_msg << "The column entries must be sorted in ascending order.\n"
+               << "But we have in matrix_in in row " << row_i << ":\n"
+               << "Column index " << in_entry_i << " is " 
+               << para_in_column_indices[in_entry_i] << "\n"
+               << "Column index " << (in_entry_i+1) << " is " 
+               << para_in_column_indices[in_entry_i+1] << "\n";
+
+       throw OomphLibError(err_msg.str(),
+                           OOMPH_CURRENT_FUNCTION,
+                           OOMPH_EXCEPTION_LOCATION);
+      }
+    }
+  }
 #endif
 
  // Addition of two compressed row form matrices, we need to know the union of
