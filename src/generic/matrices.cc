@@ -3126,71 +3126,6 @@ void CRDoubleMatrix::add(const CRDoubleMatrix &matrix_in,
                        OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
-
- // Check if the column indices are sorted. The column indices (per row) needs
- // to be sorted in ascending order.
- 
- // Loop through the rows.
- unsigned para_nrow_local = this->nrow_local();
- const int* para_this_row_start = this->row_start();
- const int* para_this_column_indices = this->column_index();
- const int* para_in_row_start = matrix_in.row_start();
- const int* para_in_column_indices = matrix_in.column_index();
-
- // Print out the column indices of THIS matrix.
- for (unsigned row_i = 0; row_i < para_nrow_local; row_i++) 
-  {
-    for (unsigned this_entry_i = para_this_row_start[row_i]; this_entry_i < para_this_row_start[row_i+1]; this_entry_i++) 
-    {
-      oomph_info << "this_entry_i = " << this_entry_i << " col: " << para_this_column_indices[this_entry_i] << std::endl; 
-      
-    }
- 
-  }
-
- for (unsigned row_i = 0; row_i < para_nrow_local; row_i++) 
-  {
-   // Loop through the entries of THIS matrix in the row.
-   for (unsigned this_entry_i = para_this_row_start[row_i]; 
-        this_entry_i < (para_this_row_start[row_i+1]-1); this_entry_i++) 
-    {
-     if(para_this_column_indices[this_entry_i] > 
-        para_this_column_indices[this_entry_i+1])
-      {
-       std::ostringstream err_msg;
-       err_msg << "The column entries must be sorted in ascending order.\n"
-               << "But we have in THIS matrix in row " << row_i << ":\n"
-               << "Column index " << this_entry_i << " is " 
-               << para_this_column_indices[this_entry_i] << "\n"
-               << "Column index " << (this_entry_i+1) << " is " 
-               << para_this_column_indices[this_entry_i+1] << "\n";
-
-       throw OomphLibError(err_msg.str(),
-                           OOMPH_CURRENT_FUNCTION,
-                           OOMPH_EXCEPTION_LOCATION);
-      }
-    }
-   // Loop through the entries of matrix_in in the row.
-   for (unsigned in_entry_i = para_in_row_start[row_i]; 
-        in_entry_i < (para_in_row_start[row_i+1]-1); in_entry_i++) 
-    {
-     if(para_in_column_indices[in_entry_i] > 
-        para_in_column_indices[in_entry_i+1])
-      {
-       std::ostringstream err_msg;
-       err_msg << "The column entries must be sorted in ascending order.\n"
-               << "But we have in matrix_in in row " << row_i << ":\n"
-               << "Column index " << in_entry_i << " is " 
-               << para_in_column_indices[in_entry_i] << "\n"
-               << "Column index " << (in_entry_i+1) << " is " 
-               << para_in_column_indices[in_entry_i+1] << "\n";
-
-       throw OomphLibError(err_msg.str(),
-                           OOMPH_CURRENT_FUNCTION,
-                           OOMPH_EXCEPTION_LOCATION);
-      }
-    }
-  }
 #endif
 
  // Addition of two compressed row form matrices, we need to know the union of
@@ -3202,9 +3137,10 @@ void CRDoubleMatrix::add(const CRDoubleMatrix &matrix_in,
  // been tested.
 
  unsigned nrow_local = this->nrow_local();
-
- //Vector of union of column indices
- Vector< std::set<int> > column_set(nrow_local);
+ Vector<int> res_column_indices;
+ Vector<double> res_values;
+ Vector<int> res_row_start;
+ res_row_start.reserve(nrow_local+1);
 
  // The row_start and column_indices
  const int* this_column_indices = this->column_index();
@@ -3212,97 +3148,42 @@ void CRDoubleMatrix::add(const CRDoubleMatrix &matrix_in,
  const int* in_column_indices = matrix_in.column_index();
  const int* in_row_start = matrix_in.row_start();
 
- // Also take this opportunity to work out the row_start.
- int nnz_running_sum = 0;
- Vector<int> res_row_start;
- res_row_start.reserve(nrow_local+1);
-
- // Loop through the rows of both matrices and insert the column indices.
- for (unsigned row_i = 0; row_i < nrow_local; row_i++) 
-  {
-   // Insert the start of this row for the result matrix.
-   res_row_start.push_back(nnz_running_sum);
-
-   // Insert the column indices for this matrix.
-   for (int i = this_row_start[row_i]; i < this_row_start[row_i+1]; i++) 
-    {
-     column_set[row_i].insert(this_column_indices[i]);
-    }
-
-   // Insert the column indices for matrix_in.
-   for (int i = in_row_start[row_i]; i < in_row_start[row_i+1]; i++) 
-    {
-     column_set[row_i].insert(in_column_indices[i]);
-    }
-
-   // Update the nnz.
-   nnz_running_sum += column_set[row_i].size();
-  }
-
- // Insert the last row start.
- res_row_start.push_back(nnz_running_sum);
-
- // Put the values of column_set into res_column_indices
- Vector<int> res_column_indices;
- res_column_indices.reserve(nnz_running_sum);
- for (unsigned row_i = 0; row_i < nrow_local; row_i++) 
-  {
-   res_column_indices.insert(res_column_indices.end(),
-                             column_set[row_i].begin(),
-                             column_set[row_i].end());
-  }
-
- //////////////////////////////////////////////////////////////////////////////
- // The pre-analysis phase is completed. Now we do the actual element-wise
- // addition.
-
- // Values for the result matrix.
- Vector<double> res_values(nnz_running_sum,0);
- 
  // Values from this matrix and matrix_in.
  const double* this_values = this->value();
  const double* in_values = matrix_in.value();
 
- // Add the values of both matrices.
+
+ // The first entry in row_start is always zero.
+ res_row_start.push_back(0);
+
+ // Loop through the rows of both matrices and insert the column indices and 
+ // values as a key-value pair.
  for (unsigned row_i = 0; row_i < nrow_local; row_i++) 
   {
-   // res_column_indices contains the union of column indices in
-   // this_column_indices and in_column_indices. So we can loop
-   // through the res_column indices and add the values of 
-   // this_values and in_values if they match.
-   
-   int this_row_start_ip1 = this_row_start[row_i+1];
-   int this_entry_i = this_row_start[row_i];
+   // Create the map for this row.
+   std::map<int,double> res_row_map;
 
-   int in_row_start_ip1 = in_row_start[row_i+1];
-   int in_entry_i = in_row_start[row_i];
-
-   // Loop through the values of the result matrix.
-   for(int res_entry_i = res_row_start[row_i];
-       res_entry_i < res_row_start[row_i+1];
-       res_entry_i++)
+   // Insert the column and value pair for this matrix.
+   for (int i = this_row_start[row_i]; i < this_row_start[row_i+1]; i++) 
     {
-     // The CURRENT entry of THIS matrix matches the column indices of the 
-     // CURRENT entry in the result matrix, add it to the results values.
-     // Then increment the counter, so next time we add the next value of THIS
-     // matrix.
-     if((this_entry_i < this_row_start_ip1) &&
-        (res_column_indices[res_entry_i]) == this_column_indices[this_entry_i])
-      {
-       res_values[res_entry_i] += this_values[this_entry_i];
-       this_entry_i++;
-      }
+     res_row_map[this_column_indices[i]] = this_values[i];
+    }
 
-     // The CURRENT entry of IN matrix matches the column indices of the 
-     // CURRENT entry in the result matrix, add it to the results values.
-     // Then increment the counter, so next time we add the next value of IN
-     // matrix.
-     if((in_entry_i < in_row_start_ip1) &&
-        (res_column_indices[res_entry_i]) == in_column_indices[in_entry_i])
-      {
-       res_values[res_entry_i] += in_values[in_entry_i];
-       in_entry_i++;
-      }
+   // Insert the column and value pair for in matrix.
+   for (int i = in_row_start[row_i]; i < in_row_start[row_i+1]; i++) 
+   {
+     res_row_map[in_column_indices[i]] += in_values[i];
+   }
+
+   // Fill in the row start
+   res_row_start.push_back(res_row_start.back() + res_row_map.size());
+
+   // Now insert the key into res_column_indices and value into res_values
+   for(std::map<int,double>::iterator it = res_row_map.begin(); 
+       it != res_row_map.end(); ++it)
+    {
+     res_column_indices.push_back(it->first);
+     res_values.push_back(it->second);
     }
   }
 
