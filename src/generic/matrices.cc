@@ -3127,14 +3127,12 @@ void CRDoubleMatrix::add(const CRDoubleMatrix &matrix_in,
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
-
- // Addition of two compressed row form matrices, we need to know the union of
- // their sparsity patterns. This is determined from the column indices.
- // First we loop through the rows for both this matrix and matrix_in
- // and insert their column indices in a set.
- // NB. when the number of duplicates is large enough, it's actually faster 
- // to convert to a set and then dump the data back into a vector. This has
- // been tested.
+ 
+ // To add the elements of two CRDoubleMatrices, we need to know the union of
+ // the sparsity patterns. This is determined by the column indices.
+ // We add the column indices and values (entries) as a key-value pair in
+ // a map (per row). We then read these out into two column indices and values
+ // vector for the result matrix.
 
  unsigned nrow_local = this->nrow_local();
  Vector<int> res_column_indices;
