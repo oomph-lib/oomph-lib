@@ -93,10 +93,6 @@ public virtual FaceGeometry<ELEMENT>,
  {
    protected:
 
- // hierher why extra storage?
- /* /// pointer to the bulk element this face element is attached to */
- /* ELEMENT *Element_pt; */
-
  /// \short Pointer to an imposed traction function. Arguments:
  /// Eulerian coordinate; outer unit normal; applied traction.
  /// (Not all of the input arguments will be required for all specific load
@@ -183,9 +179,6 @@ public:
      }
    }
 #endif  
-
-  // Set the pointer to the bulk element
-  // hierherElement_pt=dynamic_cast<ELEMENT*>(element_pt);
 
   // Attach the geometrical information to the element. N.B. This function
   // also assigns nbulk_value from the required_nvalue of the bulk element
@@ -280,10 +273,11 @@ public:
     Vector<double> unit_normal(n_dim);
     outer_unit_normal(s,unit_normal);
     
+
     // Get pointer to bulk element
     ELEMENT* bulk_pt=dynamic_cast<ELEMENT*>(bulk_element_pt());
-    local_coordinate_in_bulk(s_bulk);
-    
+    s_bulk=local_coordinate_in_bulk(s);
+     
     /// Calculate the FE representation of u
     bulk_pt->interpolated_u(s_bulk,disp);
 
@@ -417,7 +411,8 @@ void AxisymmetricPoroelasticityTractionElement<ELEMENT>::pressure(
 
 
 //=====================================================================
-/// Return the residuals for the AxisymmetricPoroelasticityTractionElement equations
+/// Return the residuals for the AxisymmetricPoroelasticityTractionElement 
+/// equations
 //=====================================================================
 template<class ELEMENT>
  void AxisymmetricPoroelasticityTractionElement<ELEMENT>::
@@ -555,8 +550,6 @@ template<class ELEMENT>
         OOMPH_EXCEPTION_LOCATION);
      }
 
-// hierher check the maths
-
     // Premultiply the weights and the square-root of the determinant of
     // the metric tensor
     double W = w*sqrt(Adet);
@@ -678,6 +671,42 @@ protected:
    Vector<double> traction_nst(3);
    ext_el_pt->traction(s_ext,interpolated_normal,traction_nst);
 
+
+#ifdef PARANOID
+
+   // Get own coordinates:
+   Vector<double> s(n_dim-1);
+   for(unsigned i=0;i<(n_dim-1);i++)
+    {
+     s[i] = integral_pt()->knot(intpt,i);
+    }
+   Vector<double> x_local(n_dim);
+   this->interpolated_x(s,x_local);
+
+    // Get bulk coordinates in external element
+    Vector<double> x_bulk(n_dim);
+    x_bulk[0]=ext_el_pt->interpolated_x(s_ext,0);
+    x_bulk[1]=ext_el_pt->interpolated_x(s_ext,1);
+    double error=sqrt((x_local[0]-x_bulk[0])*(x_local[0]-x_bulk[0])+
+                      (x_local[1]-x_bulk[1])*(x_local[1]-x_bulk[1]));
+    double tol=1.0e-10;
+    if (error>tol)
+     {
+      std::stringstream junk;
+      junk 
+       << "Gap between external and face element coordinate\n"
+       << "is suspiciously large:"
+       << error << " ( tol = " << tol << " ) " 
+       << "\nExternal/bulk at: " 
+       << x_bulk[0] << " " << x_bulk[1] << "\n" 
+       << "Face at: " << x_local[0] << " " << x_local[1] << "\n";
+      throw OomphLibError(junk.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+#endif
+
+
    // Get FSI parameter
    const double q_value=q();
 
@@ -738,6 +767,96 @@ public:
    this->set_ninteraction(1);
   }
  
+
+
+ /// \short Output function -- overloaded version -- ignores 
+ /// n_plot since fsi elements can only evaluate traction at
+ /// Gauss points.
+ void output(std::ostream &outfile, const unsigned &n_plot)
+ {
+
+  // Get continuous time from timestepper of first node
+  double time=node_pt(0)->time_stepper_pt()->time_pt()->time();
+  unsigned n_dim = this->nodal_dimension();
+  
+  Vector<double> x(n_dim);
+  Vector<double> s(n_dim-1);
+  Vector<double> s_bulk(n_dim);
+  Vector<double> disp(n_dim);
+  
+  // Set the value of n_intpt
+  unsigned n_intpt = integral_pt()->nweight();
+
+  // Tecplot header info
+  outfile << this->tecplot_zone_string(n_intpt);
+  
+  // Loop over the integration points
+  for(unsigned ipt=0;ipt<n_intpt;ipt++)
+   {
+    // Assign values of s in FaceElement and local coordinates in bulk element
+    for(unsigned i=0;i<n_dim-1;i++)
+     {
+      s[i] = integral_pt()->knot(ipt,i);
+     }
+        
+    // Get Eulerian coordinates
+    this->interpolated_x(s,x);
+    
+    // Outer unit normal
+    Vector<double> unit_normal(n_dim);
+    this->outer_unit_normal(s,unit_normal);
+    
+    // Get pointer to bulk element
+    POROELASTICITY_BULK_ELEMENT* bulk_pt=
+     dynamic_cast<POROELASTICITY_BULK_ELEMENT*>(this->bulk_element_pt());
+    s_bulk=this->local_coordinate_in_bulk(s);
+    
+    /// Calculate the FE representation of u
+    bulk_pt->interpolated_u(s_bulk,disp);
+    
+    //Now calculate the traction load
+    Vector<double> traction(n_dim);
+    this->get_traction(time,
+                       ipt,
+                       x,
+                       unit_normal,
+                       traction);
+    
+    // Now calculate the load
+    double pressure;
+    this->get_pressure(time,
+                       ipt,
+                       x,
+                       unit_normal,
+                       pressure);
+    
+    
+    //Output the x,y,..
+    for(unsigned i=0;i<n_dim;i++) 
+     {outfile << x[i] << " ";}
+    
+    // Output displacement
+    for(unsigned i=0;i<n_dim;i++) 
+     {
+      outfile << disp[i] << " ";
+     } 
+    
+    // Output traction
+    for(unsigned i=0;i<n_dim;i++) 
+     {
+      outfile << traction[i] << " ";
+     } 
+    
+    // Output pressure
+    outfile << pressure << " ";
+    
+    outfile << std::endl;
+   }
+   
+  // Write tecplot footer (e.g. FE connectivity lists)
+  this->write_tecplot_zone_footer(outfile,n_plot);
+ }
+
 
  /// Fill in contribution from Jacobian
  void fill_in_contribution_to_jacobian(Vector<double> &residuals,

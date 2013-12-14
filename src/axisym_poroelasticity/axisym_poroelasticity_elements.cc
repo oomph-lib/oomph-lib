@@ -163,54 +163,6 @@ namespace oomph
      // Output FE representation of p at s
      outfile << interpolated_p(s) << " "; // soln 5
 
-     // // hierher -- kill below here
-     // const unsigned n_node=this->nnode();
-     // Shape psi(n_node);
-     // shape(s,psi);
-
-     // Vector<double> interpolated_du_dt(2,0.0);
-     // for(unsigned i=0;i<2;i++)
-     //  {
-     //   for(unsigned l=0;l<n_node;l++)
-     //    {
-     //     interpolated_du_dt[i]+=du_dt(l,i)*psi(l);
-     //    }
-     //   outfile << interpolated_du_dt[i] << " ";  // soln 6 and 7 
-     //  }
-     // outfile << interpolated_du_dt[0]+interpolated_du_dt[1] << " "; // soln 8
-
-     // Vector<double> interpolated_d2u_dt2(2,0.0);
-     // for(unsigned i=0;i<2;i++)
-     //  {
-     //   for(unsigned l=0;l<n_node;l++)
-     //    {
-     //     interpolated_d2u_dt2[i]+=d2u_dt2(l,i)*psi(l);
-     //    }
-     //   outfile << interpolated_d2u_dt2[i] << " "; // column 9 and 10
-     //  }
-
-     // const unsigned n_q_basis=this->nq_basis();
-     // const unsigned n_q_basis_edge=this->nq_basis_edge();
-     // Shape q_basis(n_q_basis,2), q_basis_local(n_q_basis,2);
-     // this->get_q_basis_local(s,q_basis_local);
-     // (void)this->transform_basis(s,q_basis_local,psi,q_basis);
-     // Vector<double> interpolated_dq_dt(2,0.0);
-     // for(unsigned i=0;i<2;i++)
-     //  {
-     //   for(unsigned l=0;l<n_q_basis_edge;l++)
-     //    {
-     //     interpolated_dq_dt[i]+=dq_edge_dt(l)*q_basis(l,i);
-     //    }
-     //   for(unsigned l=n_q_basis_edge;l<n_q_basis;l++)
-     //    {
-     //     interpolated_dq_dt[i]+=dq_internal_dt(l-n_q_basis_edge)*q_basis(l,i);
-     //    }
-     //   outfile << interpolated_dq_dt[i] << " "; // soln 11 and 12
-     //  }
-
-     // // hierher end additional debugging stuff
-
-
      outfile << std::endl;
 
     }
@@ -546,9 +498,6 @@ namespace oomph
    DenseMatrix<double> &jacobian,
    bool flag)
   {
-
-   // hierher check the maths yet again
-
    // Get the number of geometric nodes, total number of basis functions,
    // and number of edges basis functions
    const unsigned n_node = nnode();

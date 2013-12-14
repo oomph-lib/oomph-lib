@@ -153,69 +153,169 @@ public:
  /*  } */
  
 
- // hierher fix the output function
+ /// Output function
+ void output(std::ostream &outfile)
+  {
+   //Dummy
+   unsigned nplot=0;
+   output(outfile,nplot);
+  }
 
- /* /// Output function */
- /* void output(std::ostream &outfile) */
- /*  { */
- /*   //Dummy */
- /*   unsigned nplot=0; */
- /*   output(outfile,nplot); */
- /*  } */
+ /// Output function: Output at Gauss points; n_plot is ignored.
+ void output(std::ostream &outfile, const unsigned &n_plot)
+ {
+  //Get the value of Nintpt
+  const unsigned n_intpt = integral_pt()->nweight();
+  
+  // Tecplot header info
+  outfile << this->tecplot_zone_string(n_intpt);
+  
+  //Set the Vector to hold local coordinates
+  Vector<double> s(Dim-1);
+  Vector<double> x_bulk(Dim);
 
- /* /// Output function: Output at Gauss points; n_plot is ignored. */
- /* void output(std::ostream &outfile, const unsigned &n_plot) */
- /*  { */
- /*   outfile << "ZONE\n"; */
+  // Cache the Strouhal number
+  const double local_st=st();
+  
+  // Cache the slip rate coefficient
+  const double local_inverse_slip_rate_coeff=inverse_slip_rate_coefficient(); 
+  
+  //Loop over the integration points
+  for(unsigned ipt=0;ipt<n_intpt;ipt++)
+   {
+    //Assign values of s
+    for(unsigned i=0;i<(Dim-1);i++)
+     {
+      s[i] = integral_pt()->knot(ipt,i);
+     }
 
- /*   //Get the value of Nintpt */
- /*   const unsigned n_intpt = integral_pt()->nweight(); */
+    // Get the outer unit normal
+    Vector<double> interpolated_normal(Dim);
+    outer_unit_normal(ipt,interpolated_normal);
+    
+    // Calculate the unit tangent vector
+    Vector<double> interpolated_tangent(Dim);
+    interpolated_tangent[0]=-interpolated_normal[1];
+    interpolated_tangent[1]= interpolated_normal[0];
+    
+    // Get solid velocity and porous flux from adjacent solid
+    POROELASTICITY_BULK_ELEMENT* ext_el_pt=
+     dynamic_cast<POROELASTICITY_BULK_ELEMENT*>(
+      external_element_pt(0,ipt));
+    Vector<double> s_ext(external_element_local_coord(0,ipt));
+    Vector<double> du_dt(3);
+    Vector<double> q(2);
+    ext_el_pt->interpolated_du_dt(s_ext,du_dt);
+    ext_el_pt->interpolated_q(s_ext,q);
+    x_bulk[0]=ext_el_pt->interpolated_x(s_ext,0);
+    x_bulk[1]=ext_el_pt->interpolated_x(s_ext,1);
+    
+#ifdef PARANOID
+    // Get own coordinates:
+    Vector<double> x(Dim);
+    this->interpolated_x(s,x);
 
- /*   //Set the Vector to hold local coordinates */
- /*   Vector<double> s_int(Dim-1); */
+    double error=sqrt((x[0]-x_bulk[0])*(x[0]-x_bulk[0])+
+                      (x[1]-x_bulk[1])*(x[1]-x_bulk[1]));
+    double tol=1.0e-10;
+    if (error>tol)
+     {
+      std::stringstream junk;
+      junk 
+       << "Gap between external and face element coordinate\n"
+       << "is suspiciously large: "
+       << error << "\nBulk/external at: " 
+       << x_bulk[0] << " " << x_bulk[1] << "\n" 
+       << "Face at: " << x[0] << " " << x[1] << "\n";
+      OomphLibWarning(junk.str(),
+                      OOMPH_CURRENT_FUNCTION,
+                      OOMPH_EXCEPTION_LOCATION);
+     }
+#endif
+  
 
- /*   //Loop over the integration points */
- /*   for(unsigned ipt=0;ipt<n_intpt;ipt++) */
- /*    { */
+    // Get permeability from the bulk poroelasticity element
+    const double permeability=ext_el_pt->permeability();
+    const double local_permeability_ratio=ext_el_pt->permeability_ratio();
 
- /*     //Assign values of s */
- /*     for(unsigned i=0;i<(Dim-1);i++) */
- /*      { */
- /*       s_int[i] = integral_pt()->knot(ipt,i); */
- /*      } */
+    // Local coordinate in bulk element
+    Vector<double> s_bulk(Dim);
+    s_bulk=local_coordinate_in_bulk(s);
 
- /*     // Get boundary coordinate */
- /*     Vector<double> zeta(1); */
- /*     interpolated_zeta(s_int,zeta); */
+    // Get the fluid traction from the NSt bulk element 
+    Vector<double> traction_nst(3);
+    dynamic_cast<FLUID_BULK_ELEMENT*>(bulk_element_pt())->traction(
+     s_bulk,interpolated_normal,traction_nst);
+    
+    // Get fluid velocity from bulk element
+    Vector<double> fluid_veloc(Dim+1,0.0);
+    dynamic_cast<FLUID_BULK_ELEMENT*>(bulk_element_pt())->
+     interpolated_u_axi_nst(s_bulk,fluid_veloc);
 
- /*     // Get velocity from adjacent solid */
- /*     POROELASTICITY_BULK_ELEMENT* ext_el_pt= */
- /*      dynamic_cast<POROELASTICITY_BULK_ELEMENT*>( */
- /*        external_element_pt(0,ipt)); */
- /*     Vector<double> s_ext(external_element_local_coord(0,ipt)); */
- /*     Vector<double> dudt(3); */
- /*     ext_el_pt->interpolated_du_dt_axisymmetric_linear_elasticity(s_ext,dudt); */
+    // Calculate the normal components
+    double scaled_normal_wall_veloc=0.0;
+    double scaled_normal_poro_veloc=0.0;
+    double scaled_tangential_wall_veloc=0.0;
+    double scaled_tangential_poro_veloc=0.0;
+    double normal_nst_veloc=0.0;
+    for(unsigned i=0;i<Dim;i++)
+     {
+      scaled_normal_wall_veloc+=
+      local_st*du_dt[i]*interpolated_normal[i];
 
- /*     // Output */
- /*     outfile << ext_el_pt->interpolated_x(s_ext,0) << " " */
- /*             << ext_el_pt->interpolated_x(s_ext,1) << " " */
- /*             << dudt[0] << " " */
- /*             << dudt[1] << " " */
- /*             << dudt[2] << " " */
- /*             << zeta[0] << std::endl; */
- /*    } */
- /*  } */
+      scaled_normal_poro_veloc+=
+      local_st*permeability*q[i]*interpolated_normal[i];
+
+      scaled_tangential_wall_veloc+=
+       local_st*du_dt[i]*interpolated_tangent[i];
+
+      scaled_tangential_poro_veloc+=
+       -traction_nst[i]*sqrt(local_permeability_ratio)*
+       local_inverse_slip_rate_coeff*interpolated_tangent[i];
+
+      normal_nst_veloc+=fluid_veloc[i]*interpolated_normal[i];
+     }
+    
+    // Calculate the combined poroelasticity "velocity" (RHS of BJS BC).
+    double total_poro_normal_component=
+     scaled_normal_wall_veloc+scaled_normal_poro_veloc;
+    double total_poro_tangential_component=
+     scaled_tangential_wall_veloc+scaled_tangential_poro_veloc;
+    Vector<double> poro_veloc(2,0.0);
+    for(unsigned i=0;i<Dim;i++)
+     {
+      poro_veloc[i]+=
+       total_poro_normal_component*interpolated_normal[i]+
+       total_poro_tangential_component*interpolated_tangent[i];
+     }
+
+    // Output
+    outfile << x_bulk[0] << " "
+            << x_bulk[1] << " "
+            << fluid_veloc[0] << " "
+            << fluid_veloc[1] << " "
+            << poro_veloc[0] << " "
+            << poro_veloc[1] << " "
+            << normal_nst_veloc*interpolated_normal[0] << " "
+            << normal_nst_veloc*interpolated_normal[1] << " "
+            << total_poro_normal_component*interpolated_normal[0] << " " 
+            << total_poro_normal_component*interpolated_normal[1] << " " 
+            << scaled_normal_wall_veloc*interpolated_normal[0] << " " 
+            << scaled_normal_wall_veloc*interpolated_normal[1] << " " 
+            << scaled_normal_poro_veloc*interpolated_normal[0] << " " 
+            << scaled_normal_poro_veloc*interpolated_normal[1] << " " 
+            << std::endl;
+   }
+ }
 
 
- /* /// C-style output function */
- /* void output(FILE* file_pt) */
- /*  {FaceGeometry<FLUID_BULK_ELEMENT>::output(file_pt);} */
+ /// C-style output function
+ void output(FILE* file_pt)
+  {FaceGeometry<FLUID_BULK_ELEMENT>::output(file_pt);}
 
- /* /// C-style output function */
- /* void output(FILE* file_pt, const unsigned &n_plot) */
- /*  {FaceGeometry<FLUID_BULK_ELEMENT>::output(file_pt,n_plot);} */
-
-
+ /// C-style output function
+ void output(FILE* file_pt, const unsigned &n_plot)
+  {FaceGeometry<FLUID_BULK_ELEMENT>::output(file_pt,n_plot);}
 
 
 protected:
@@ -368,7 +468,7 @@ private:
   }
    
  // We need Dim+1 additional values for each FaceElement node to store the
- // Lagrange multipliers. // hierher not Dim?
+ // Lagrange multipliers.
  Vector<unsigned> n_additional_values(nnode(), Dim+1);
 
  // Now add storage for Lagrange multipliers and set the map containing the
@@ -457,7 +557,44 @@ void LinearisedAxisymPoroelasticBJS_FSIElement
       }
     }
 
-   // Get velocity from adjacent solid
+   // Local coordinate in bulk element
+   Vector<double> s_bulk(Dim);
+   s_bulk=local_coordinate_in_bulk(s);
+   
+#ifdef PARANOID
+   {
+    // Get fluid velocity from bulk element
+    Vector<double> fluid_veloc_from_bulk(Dim+1,0.0);
+    dynamic_cast<FLUID_BULK_ELEMENT*>(bulk_element_pt())->
+     interpolated_u_axi_nst(s_bulk,fluid_veloc_from_bulk);
+
+    double error=0.0;
+    for(unsigned i=0;i<Dim+1;i++)
+     {
+      error+=
+       (fluid_veloc[i]-fluid_veloc_from_bulk[i])*
+       (fluid_veloc[i]-fluid_veloc_from_bulk[i]);
+     }
+    error=sqrt(error);
+    double tol=1.0e-15;
+    if (error>tol)
+     {
+      std::stringstream junk;
+      junk 
+       << "Difference in Navier-Stokes velocities\n"
+       << "is suspiciously large: "
+       << error << "\nVeloc from bulk: " 
+       << fluid_veloc_from_bulk[0] << " " << fluid_veloc_from_bulk[1] << "\n" 
+       <<            "Veloc from face: " 
+       << fluid_veloc[0] << " " << fluid_veloc[1] << "\n";
+      OomphLibWarning(junk.str(),
+                      OOMPH_CURRENT_FUNCTION,
+                      OOMPH_EXCEPTION_LOCATION);
+     }
+   }
+#endif
+
+   // Get solid velocity from adjacent solid
    POROELASTICITY_BULK_ELEMENT* ext_el_pt=
     dynamic_cast<POROELASTICITY_BULK_ELEMENT*>(
       external_element_pt(0,ipt));
@@ -475,7 +612,6 @@ void LinearisedAxisymPoroelasticBJS_FSIElement
    interpolated_tangent[0]=-interpolated_normal[1];
    interpolated_tangent[1]= interpolated_normal[0];
 
-
    // Get permeability from the bulk poroelasticity element
    const double permeability=ext_el_pt->permeability();
    const double local_permeability_ratio=ext_el_pt->permeability_ratio();
@@ -489,7 +625,7 @@ void LinearisedAxisymPoroelasticBJS_FSIElement
    // Get the fluid traction from the NSt bulk element
    Vector<double> traction_nst(3);
    dynamic_cast<FLUID_BULK_ELEMENT*>(bulk_element_pt())->traction(
-     s_ext,interpolated_normal,traction_nst);
+     s_bulk,interpolated_normal,traction_nst);
 
    // Calculate the normal and tangential components
    for(unsigned i=0;i<Dim;i++)
@@ -503,7 +639,7 @@ void LinearisedAxisymPoroelasticBJS_FSIElement
     }
    
    // Calculate the combined poroelasticity "velocity"
-   Vector<double> poro_veloc(2,0.0);
+   Vector<double> poro_veloc(3,0.0);
    for(unsigned i=0;i<Dim;i++)
     {
      poro_veloc[i]+=
@@ -569,6 +705,18 @@ void LinearisedAxisymPoroelasticBJS_FSIElement
        // If it's not pinned
        if(local_eqn>=0)
         {
+
+#ifdef PARANOID
+         if (i==Dim)
+          {
+           std::stringstream junk;
+           junk << "Elements have not been validated for nonzero swirl!\n";
+           OomphLibWarning(junk.str(),
+                           OOMPH_CURRENT_FUNCTION,
+                           OOMPH_EXCEPTION_LOCATION);
+          }
+#endif
+
          residuals[local_eqn]+=
           (poro_veloc[i]-fluid_veloc[i])*testf(l)*interpolated_r*W;
 
