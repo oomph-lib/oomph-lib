@@ -1205,7 +1205,16 @@ namespace oomph
     CRDoubleMatrix*& inv_v_mass_pt, 
     const bool& do_both);
    
-   // testets 
+   /// \short This is temporary, used when preconditioner blocks are
+   /// precomputed. I will need to figure out a good way to package this up.
+   /// But for now, it works and should not affect anything else but my own
+   /// code. RAYRAY
+   /// Helper function to assemble the inverse diagonals of the pressure
+   /// and velocity mass matrices from the elemental contributions defined in
+   /// NavierStokesEquations<DIM>.
+   /// If do_both=true, both are computed, otherwise only the velocity
+   /// mass matrix (the LSC version of the preconditioner only needs
+   /// that one)
    void assemble_inv_press_and_veloc_mass_matrix_diagonal(
     CRDoubleMatrix*& inv_p_mass_pt, 
     CRDoubleMatrix*& inv_v_mass_pt, 

@@ -303,6 +303,11 @@ namespace oomph
   double ivmm_assembly_start_t = TimingHelpers::timer();
   if (Use_LSC)
    {
+     // If precomputed blocks have been computed, we need to get the mass 
+     // matrices for each of the most fine grain blocks. This will be wrapped
+     // up nicely to hide the precomputed-ness, once I have worked out a good
+     // way to get the mass matrices of all the most fine grain blocks.
+     // For now, this works and will only affect my code - RAYRAY
      if(this->Preconditioner_blocks_have_been_precomputed)
       {
         for (unsigned block_i = 0; block_i < n_velocity_doftypes; block_i++) 
@@ -1639,6 +1644,8 @@ namespace oomph
 
 
 //========================================================================
+/// RAYRAY - this is a temporary function overloading the other
+/// assemble_inv_press_and_veloc_mass_matrix_diagonal(...) function.
 /// Helper function to assemble the inverse diagonals of the pressure and
 /// velocity mass matrix from the elemental contributions defined in
 /// NavierStokesElementWithDiagonalMassMatrices::
