@@ -146,6 +146,36 @@ t3_res_NP4R0 \
 t3_res_NP4R1 \
 t3_res_NP4R2 \
 t3_res_NP4R3 \
+t4m1_NP1R0 \
+t4m1_NP2R0 \
+t4m1_NP2R1 \
+t4m1_NP3R0 \
+t4m1_NP3R1 \
+t4m1_NP3R2 \
+t4m1_NP4R0 \
+t4m1_NP4R1 \
+t4m1_NP4R2 \
+t4m1_NP4R3 \
+t4m2_NP1R0 \
+t4m2_NP2R0 \
+t4m2_NP2R1 \
+t4m2_NP3R0 \
+t4m2_NP3R1 \
+t4m2_NP3R2 \
+t4m2_NP4R0 \
+t4m2_NP4R1 \
+t4m2_NP4R2 \
+t4m2_NP4R3 \
+t4_res_NP1R0 \
+t4_res_NP2R0 \
+t4_res_NP2R1 \
+t4_res_NP3R0 \
+t4_res_NP3R1 \
+t4_res_NP3R2 \
+t4_res_NP4R0 \
+t4_res_NP4R1 \
+t4_res_NP4R2 \
+t4_res_NP4R3 \
 > matrix_addition.dat
 
 # Remove the individual outputs.
@@ -239,7 +269,37 @@ t3_res_NP3R2 \
 t3_res_NP4R0 \
 t3_res_NP4R1 \
 t3_res_NP4R2 \
-t3_res_NP4R3 
+t3_res_NP4R3 \
+t4m1_NP1R0 \
+t4m1_NP2R0 \
+t4m1_NP2R1 \
+t4m1_NP3R0 \
+t4m1_NP3R1 \
+t4m1_NP3R2 \
+t4m1_NP4R0 \
+t4m1_NP4R1 \
+t4m1_NP4R2 \
+t4m1_NP4R3 \
+t4m2_NP1R0 \
+t4m2_NP2R0 \
+t4m2_NP2R1 \
+t4m2_NP3R0 \
+t4m2_NP3R1 \
+t4m2_NP3R2 \
+t4m2_NP4R0 \
+t4m2_NP4R1 \
+t4m2_NP4R2 \
+t4m2_NP4R3 \
+t4_res_NP1R0 \
+t4_res_NP2R0 \
+t4_res_NP2R1 \
+t4_res_NP3R0 \
+t4_res_NP3R1 \
+t4_res_NP3R2 \
+t4_res_NP4R0 \
+t4_res_NP4R1 \
+t4_res_NP4R2 \
+t4_res_NP4R3
 
 if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log

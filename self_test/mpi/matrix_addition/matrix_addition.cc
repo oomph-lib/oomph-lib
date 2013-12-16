@@ -331,6 +331,81 @@ int main(int argc, char* argv[])
   mat_t3_result.sparse_indexed_output(mat_t3_result_stream.str());
 
 
+  // COLUMN INDICES NOT ORDERED. 
+  // Now test with the following matrices: A + B = C where
+  // A = [1  2  3  4  5  6
+  //      7  8  9  10 11 12
+  //      13 14 15 16 17 18]
+  //
+  // B = [1  2  3  4  5  6
+  //      7  8  9  10 11 12
+  //      13 14 15 16 17 18]
+  //
+  // B = [2  4  6  8  10 12
+  //      14 16 18 20 22 24
+  //      26 28 30 32 34 36]
+  //
+  // In this test, the column indices (per row) is not ordered.
+  
+  // First matrix (t4m1)
+  unsigned nrow_global_t4m1 = 3;
+  unsigned ncol_t4m1 = 6;
+  unsigned nnz_t4m1 = 18;
+  Vector<double> val_t4m1;
+  Vector<int> col_i_t4m1;
+  Vector<int> row_s_t4m1;
+
+  double val_array_t4m1[] = {1,5,4,3,2,6,7,8,9,10,11,12,13,17,16,15,14,18};
+  int col_i_array_t4m1[] = {0,4,3,2,1,5,0,1,2,3,4,5,0,4,3,2,1,5};
+  int row_s_array_t4m1[] = {0,6,12,18};
+
+  construct_vector(val_array_t4m1,nnz_t4m1,val_t4m1);
+  construct_vector(col_i_array_t4m1,nnz_t4m1,col_i_t4m1);
+  construct_vector(row_s_array_t4m1,nrow_global_t4m1+1,row_s_t4m1);
+
+  CRDoubleMatrix mat_t4m1;
+  CRDoubleMatrixHelpers::create_uniformly_distributed_matrix(
+      nrow_global_t4m1,ncol_t4m1,comm_pt,
+      val_t4m1,col_i_t4m1,row_s_t4m1,mat_t4m1);
+
+  std::ostringstream mat_t4m1_stream;
+  mat_t4m1_stream << "t4m1_NP"<<nproc<<"R"<<my_rank;
+  mat_t4m1.sparse_indexed_output(mat_t4m1_stream.str());
+ 
+  // Second matrix (t4m2)
+  unsigned nrow_global_t4m2 = 3;
+  unsigned ncol_t4m2 = 6;
+  unsigned nnz_t4m2 = 18;
+  Vector<double> val_t4m2;
+  Vector<int> col_i_t4m2;
+  Vector<int> row_s_t4m2;
+
+  double val_array_t4m2[] = {1,2,3,4,5,6,7,11,10,9,8,12,13,14,15,16,17,18};
+  int col_i_array_t4m2[] = {0,1,2,3,4,5,0,4,3,2,1,5,0,1,2,3,4,5};
+  int row_s_array_t4m2[] = {0,6,12,18};
+
+  construct_vector(val_array_t4m2,nnz_t4m2,val_t4m2);
+  construct_vector(col_i_array_t4m2,nnz_t4m2,col_i_t4m2);
+  construct_vector(row_s_array_t4m2,nrow_global_t4m2+1,row_s_t4m2);
+
+  CRDoubleMatrix mat_t4m2;
+  CRDoubleMatrixHelpers::create_uniformly_distributed_matrix(
+      nrow_global_t4m2,ncol_t4m2,comm_pt,
+      val_t4m2,col_i_t4m2,row_s_t4m2,mat_t4m2);
+
+  std::ostringstream mat_t4m2_stream;
+  mat_t4m2_stream << "t4m2_NP"<<nproc<<"R"<<my_rank;
+  mat_t4m2.sparse_indexed_output(mat_t4m2_stream.str());
+
+  // Now perform element-wise addition of t4m1 and t4m2, and put the result
+  // in mat_t4_result.
+  CRDoubleMatrix mat_t4_result;
+
+  mat_t4m1.add(mat_t4m2,mat_t4_result);
+
+  std::ostringstream mat_t4_result_stream;
+  mat_t4_result_stream << "t4_res_NP"<<nproc<<"R"<<my_rank;
+  mat_t4_result.sparse_indexed_output(mat_t4_result_stream.str());
 
 #ifdef OOMPH_HAS_MPI
   // finalize MPI
