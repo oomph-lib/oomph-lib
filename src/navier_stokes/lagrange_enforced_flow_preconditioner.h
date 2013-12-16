@@ -1735,12 +1735,6 @@ namespace oomph
      (Navier_stokes_preconditioner_pt);
 #endif
 
-    // The ns_dof_list will ensure that the NS preconditioner have the 
-    // structure:
-    // 0  1  2  3  4  5  6
-    // ub vb up vp ut vt p
-    navier_stokes_block_preconditioner_pt
-     ->turn_into_subsidiary_block_preconditioner(this, ns_dof_list);
 
     // Tell the LSC preconditioner which dof type should be treated as one
     // dof type. i.e.
@@ -1771,8 +1765,16 @@ namespace oomph
 
     doftype_to_doftype_map.push_back(ns_p_vec);
 
+    // The ns_dof_list will ensure that the NS preconditioner have the 
+    // structure:
+    // 0  1  2  3  4  5  6
+    // ub vb up vp ut vt p
     navier_stokes_block_preconditioner_pt
-     ->set_precomputed_blocks(f_subblock_pt,doftype_to_doftype_map);
+     ->turn_into_subsidiary_block_preconditioner(this, ns_dof_list,
+                                                 doftype_to_doftype_map);
+
+    navier_stokes_block_preconditioner_pt
+     ->set_precomputed_blocks(f_subblock_pt);
 
     navier_stokes_block_preconditioner_pt
      ->setup(matrix_pt(), comm_pt());

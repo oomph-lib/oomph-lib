@@ -323,8 +323,16 @@ namespace oomph
     ExactBlockPreconditioner<CRDoubleMatrix>* s_prec_pt = 
      new ExactBlockPreconditioner<CRDoubleMatrix>;
 
+    Vector<Vector<unsigned> > doftype_to_doftype_map(n_solid_dof_types,
+                                                     Vector<unsigned>(1,0));
+
+    for (unsigned i = 0; i < n_solid_dof_types; i++) 
+     {
+      doftype_to_doftype_map[i][0] = i;
+     }
+
     s_prec_pt->turn_into_subsidiary_block_preconditioner(
-     this,dof_list_for_subsidiary_prec);
+     this,dof_list_for_subsidiary_prec,doftype_to_doftype_map);
 
     if (Elastic_subsidiary_preconditioner_function_pt != 0)
      {
@@ -383,18 +391,9 @@ namespace oomph
      }
      break;
      }
-     
-    s_prec_pt->turn_into_subsidiary_block_preconditioner
-     (this,dof_list_for_subsidiary_prec);
 
-    if(Elastic_subsidiary_preconditioner_function_pt != 0)
-     {
-      s_prec_pt->set_subsidiary_preconditioner_function
-       (Elastic_subsidiary_preconditioner_function_pt);
-     }
-   
     // The block to block map
-    Vector<Vector<unsigned> > block_to_block_map(
+    Vector<Vector<unsigned> > doftype_to_doftype_map(
       Dim,Vector<unsigned>(2,0));
     Vector<unsigned> s_prec_dof_to_block_map(Dim,0);
 
@@ -402,11 +401,20 @@ namespace oomph
     for (unsigned d = 0; d < Dim; d++) 
      {
       s_prec_dof_to_block_map[d] = d;
-      block_to_block_map[d][0] = tmp_index++;
-      block_to_block_map[d][1] = tmp_index++;
+      doftype_to_doftype_map[d][0] = tmp_index++;
+      doftype_to_doftype_map[d][1] = tmp_index++;
+     }
+    
+    s_prec_pt->turn_into_subsidiary_block_preconditioner
+     (this,dof_list_for_subsidiary_prec,doftype_to_doftype_map);
+
+    if(Elastic_subsidiary_preconditioner_function_pt != 0)
+     {
+      s_prec_pt->set_subsidiary_preconditioner_function
+       (Elastic_subsidiary_preconditioner_function_pt);
      }
 
-    s_prec_pt->set_precomputed_blocks(solid_matrix_pt,block_to_block_map);
+    s_prec_pt->set_precomputed_blocks(solid_matrix_pt);
     s_prec_pt->set_dof_to_block_map(s_prec_dof_to_block_map);
     s_prec_pt->Preconditioner::setup(matrix_pt(),comm_pt());
 

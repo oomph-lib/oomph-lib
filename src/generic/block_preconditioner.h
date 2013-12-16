@@ -128,6 +128,11 @@ namespace oomph
    
    // No preconditioner blocks has been computed yet.
    Preconditioner_blocks_have_been_precomputed = false;
+
+   // No doftypes have been coarsened.
+   Preconditioner_doftypes_have_been_coarsened = false;
+   
+   // There are no precomputed block distributions to start off with.
    Precomputed_block_distribution_pt.resize(0);
 
    // Clear the Block_to_block_map
@@ -196,9 +201,47 @@ namespace oomph
   /// before this method is called. 
   /// \b 3. block_setup(...) should be called in the corresponding subsidiary
   /// preconditioner after this method is called.
+  /// 
+  /// This calls the other turn_into_subsidiary_block_preconditioner 
+  /// function with an empty doftype_to_doftype_map vector.
   void turn_into_subsidiary_block_preconditioner
   (BlockPreconditioner<MATRIX>* master_block_prec_pt,
    Vector<unsigned>& block_map);
+
+  /// \short Function to turn this preconditioner into a
+  /// subsidiary preconditioner that operates within a bigger
+  /// "master block preconditioner (e.g. a Navier-Stokes 2x2 block
+  /// preconditioner dealing with the fluid sub-blocks within a
+  /// 3x3 FSI preconditioner. Once this is done the master block
+  /// preconditioner deals with the block setup etc. 
+  /// The vector block_map must specify the block number in the
+  /// master preconditioner that corresponds to a block number in this
+  /// preconditioner.
+  /// \b 1. The length of the vector is used to determine the number of
+  /// blocks in this preconditioner therefore it must be correctly sized. 
+  /// \b 2. block_setup(...) should be called in the master preconditioner
+  /// before this method is called. 
+  /// \b 3. block_setup(...) should be called in the corresponding subsidiary
+  /// preconditioner after this method is called.
+  ///
+  /// The doftype_to_doftype_map is a mapping of the doftypes in the master
+  /// preconditioner to the doftypes required by THIS preconditioner. 
+  /// 
+  /// For example, the Lagrangian preconditioner (in 3D with one constraint) 
+  /// has doftypes:
+  /// 0  1  2  3  4  5  6 7
+  /// ub vb wb uc vc wc p Lc
+  /// 
+  /// The LSC preconditioner requires u, v, w, p, then the 
+  /// doftype_to_doftype_map will be:
+  /// [0 3]
+  /// [1 4]
+  /// [2 5]
+  /// [6]
+  void turn_into_subsidiary_block_preconditioner
+  (BlockPreconditioner<MATRIX>* master_block_prec_pt,
+   Vector<unsigned>& block_map,
+   Vector<Vector<unsigned> > & doftype_to_doftype_map);
 
   /// \short Specify the number of meshes required by this block
   /// preconditioner.
@@ -312,10 +355,71 @@ namespace oomph
   {
    // Assume that if the preconditioner blocks have been precomputed, we
    // would want to use them.
-   if(Preconditioner_blocks_have_been_precomputed)
-    { get_precomputed_block(i, j, output_matrix); }
+
+   if(Preconditioner_doftypes_have_been_coarsened)
+   {
+     get_coarsened_block(i,j,output_matrix);
+   }
    else
-    { get_block_from_original_matrix(i, j, output_matrix); }
+   {
+     if(Preconditioner_blocks_have_been_precomputed)
+     {
+      // Cache the pointer to the precomputed block.
+      CRDoubleMatrix* precom_block_pt 
+        = Precomputed_block_pt(i,j);
+
+      // Temp storage.
+      Vector<double> tmp_values;
+      Vector<int> tmp_column_indices;
+      Vector<int> tmp_row_start;
+      // The precomputed block nrow and nnz
+      unsigned precom_nrow = precom_block_pt->nrow();
+      unsigned long precom_nnz = precom_block_pt->nnz();
+      // Reserve space.
+      tmp_values.reserve(precom_nnz);
+      tmp_column_indices.reserve(precom_nnz);
+      tmp_row_start.reserve(precom_nrow + 1);
+
+      // The data to copy over.
+      double* precom_values = precom_block_pt->value();
+      int* precom_column_indices = precom_block_pt->column_index();
+      int* precom_row_start = precom_block_pt->row_start();
+      // Copy the values and column indices.
+      for (unsigned i = 0; i < precom_nnz; i++) 
+      {
+        tmp_values.push_back(precom_values[i]);
+        tmp_column_indices.push_back(precom_column_indices[i]);
+      }
+      // Copy the row start
+      for (unsigned i = 0; i < precom_nrow + 1; i++) 
+      {
+        tmp_row_start.push_back(precom_row_start[i]);
+      }
+
+    unsigned precom_ncol
+      = precom_block_pt->ncol();
+
+    CRDoubleMatrix* output_block 
+      = dynamic_cast<CRDoubleMatrix*> (&output_matrix);
+
+    output_block->build(precom_block_pt->distribution_pt(),
+                       precom_ncol,
+                       tmp_values,
+                       tmp_column_indices,
+                       tmp_row_start);
+     }
+     else
+     {
+       get_block_from_original_matrix(i,j,output_matrix);
+     }
+   }
+
+//   if(Preconditioner_blocks_have_been_precomputed)
+//    { get_precomputed_block(i, j, output_matrix); }
+//   else
+//    { get_block_from_original_matrix(i, j, output_matrix); }
+
+
   } // EOFunc get_block(...)
 
   /// \short Return block (i,j).
@@ -934,24 +1038,6 @@ namespace oomph
   /// \short Set the precomputed (and possibly modified) preconditioner blocks.
   /// The precomputed_block_pt is a Dense matrix of pointers of precomputed 
   /// blocks for this preconditioner to use in preconditioning.
-  /// The doftype_to_doftype_map is a mapping of the doftypes in the master
-  /// preconditioner to the doftypes required by THIS preconditioner.
-  /// 
-  /// 
-  /// 
-  /// For example, the Lagrangian preconditioner (in 3D with one constraint) 
-  /// has doftypes:
-  /// 0  1  2  3  4  5  6 7
-  /// ub vb wb uc vc wc p Lc
-  /// 
-  /// The LSC preconditioner requires u, v, w, p, then the 
-  /// doftype_to_doftype_map will be:
-  /// [0 3]
-  /// [1 4]
-  /// [2 5]
-  /// [6]
-  /// 
-  /// 
   /// 
   /// This function is called from outside of this preconditioner to set
   /// block matrices to use instead of the block matrices extracted from the
@@ -959,8 +1045,7 @@ namespace oomph
   /// and a master preconditioner has to pass down modified blocks for the 
   /// subidiary preconditioner to use.
   void set_precomputed_blocks(
-      DenseMatrix<CRDoubleMatrix*>&precomputed_block_pt,
-      Vector<Vector<unsigned> > & doftype_to_doftype_map)
+      DenseMatrix<CRDoubleMatrix*>&precomputed_block_pt)
   {
 #ifdef PARANOID
    
@@ -1135,58 +1220,10 @@ namespace oomph
                            OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
     }
-
-
-   // Checks for doftype_to_doftype_map
-   // No more than ndof types described, 
-   // and check that all entries are unique.
-   std::set<unsigned> doftype_map_set;
-
-   unsigned doftype_to_doftype_map_size = doftype_to_doftype_map.size();
-   for (unsigned i = 0; i < doftype_to_doftype_map_size; i++)
-    {
-     unsigned doftype_to_doftype_map_i_size = doftype_to_doftype_map[i].size();
-     for (unsigned j = 0; j < doftype_to_doftype_map_i_size; j++)
-      {
-       std::set<unsigned>::iterator doftype_map_it;
-       std::pair<std::set<unsigned>::iterator,bool> doftype_map_ret;
-
-       doftype_map_ret = doftype_map_set.insert(doftype_to_doftype_map[i][j]);
-         
-       if(!doftype_map_ret.second)
-        {
-         std::ostringstream error_message;
-         error_message << "Error: the doftype number "
-                       << doftype_to_doftype_map[i][j]
-                       << " is already inserted."
-                       << std::endl;
-         throw OomphLibError(error_message.str(),
-                             OOMPH_CURRENT_FUNCTION,
-                             OOMPH_EXCEPTION_LOCATION);
-        }
-      }
-    }
-     
-   // All doftype described in doftype_to_doftype_map must be unique.
-   if(precomputed_block_nrow != doftype_map_set.size())
-    {
-     std::ostringstream error_message;
-     error_message << "Error: all doftypes must be assigned. \n"
-                   << "Only " << doftype_map_set.size()
-                   << " doftypes have been assigned."
-                   << std::endl;
-     throw OomphLibError(error_message.str(),
-                         OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
-    }
-
 #endif
     
    // Set the precomputed blocks.
    Precomputed_block_pt = precomputed_block_pt;
-
-   // Set the Doftype_to_doftype_map.
-   Doftype_to_doftype_map = doftype_to_doftype_map;
 
    // Flag indicating that the preconditioner blocks has been precomputed.
    Preconditioner_blocks_have_been_precomputed = true;
@@ -1204,24 +1241,6 @@ namespace oomph
   {
    return Precomputed_block_pt;
   }  // EOFunc precomputed_block_pt()
-
- /// \short Calls set_precomputed_blocks(...) with the "identity" 
- /// doftype_to_doftype_map.
- /// See the other set_precomputed_blocks(...) function for more details.
- void set_precomputed_blocks(DenseMatrix<CRDoubleMatrix*>&precomputed_block_pt)
-  {
-   unsigned precomputed_block_nrow = precomputed_block_pt.nrow();
-
-   Vector<Vector<unsigned> > doftype_to_doftype_map(precomputed_block_nrow,
-                                                Vector<unsigned>(1,0));
-
-   for (unsigned i = 0; i < precomputed_block_nrow; i++) 
-    {
-     doftype_to_doftype_map[i][0] = i;
-    }
-
-   set_precomputed_blocks(precomputed_block_pt,doftype_to_doftype_map);
-  } // EOFunc set_precomputed_blocks(...)
 
   /// \short the number of blocks precomputed. If the preconditioner blocks are
   /// precomputed then it should be the same as the nblock_types 
@@ -1388,7 +1407,7 @@ namespace oomph
   /// DenseMatrix of pointers to precomputed (and possibly modified)
   /// blocks. Necessary concatenation handled by this function and the
   /// result is returned in output_block.
-  void get_precomputed_block(const unsigned& i, const unsigned& j,
+  void get_coarsened_block(const unsigned& i, const unsigned& j,
                              MATRIX& output_block) const;
   
   /// \short Check if any of the meshes are distributed. This is equivalent
@@ -1606,6 +1625,9 @@ namespace oomph
   /// \short Flag indicating if blocks have been precomputed 
   /// (and possibly modified).
   bool Preconditioner_blocks_have_been_precomputed;
+  
+  /// \short Flag indicating if the doftypes have been coarsened.
+  bool Preconditioner_doftypes_have_been_coarsened;
 
   /// \short Storage for the default distribution for each block.
   Vector<LinearAlgebraDistribution*> Block_distribution_pt;

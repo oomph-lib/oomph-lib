@@ -1803,6 +1803,32 @@ namespace oomph
    output_blocks_to_files(Output_base_filename);
  }
 
+ //============================================================================
+ //??ds
+ /// \short Function to turn this preconditioner into a
+ /// subsidiary preconditioner that operates within a bigger
+ /// "master block preconditioner (e.g. a Navier-Stokes 2x2 block
+ /// preconditioner dealing with the fluid sub-blocks within a
+ /// 3x3 FSI preconditioner. Once this is done the master block
+ /// preconditioner deals with the block setup etc.
+ /// The vector block_map must specify the dof number in the
+ /// master preconditioner that corresponds to a block number in this
+ /// preconditioner. ??ds horribly misleading comment!
+ /// The length of the vector is used to determine the number of
+ /// blocks in this preconditioner therefore it must be correctly sized.
+ /// This calls the other turn_into_subsidiary_block_preconditioner(...)
+ /// function providing an empty doftype_to_doftype_map vector.
+ //============================================================================
+ template<typename MATRIX> void BlockPreconditioner<MATRIX>::
+ turn_into_subsidiary_block_preconditioner
+ (BlockPreconditioner<MATRIX>* master_block_prec_pt,
+  Vector<unsigned>& block_map)
+ {
+   Vector<Vector<unsigned> > doftype_to_doftype_map;
+   Preconditioner_doftypes_have_been_coarsened = false;
+   turn_into_subsidiary_block_preconditioner(master_block_prec_pt,
+       block_map, doftype_to_doftype_map);
+ }
 
 
  //============================================================================
@@ -1818,12 +1844,74 @@ namespace oomph
  /// preconditioner. ??ds horribly misleading comment!
  /// The length of the vector is used to determine the number of
  /// blocks in this preconditioner therefore it must be correctly sized.
+ /// The Vector doftype_to_doftype_map is provided if preconditioner 
+ /// DOF types needs to be coarsened. 
  //============================================================================
  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
  turn_into_subsidiary_block_preconditioner
  (BlockPreconditioner<MATRIX>* master_block_prec_pt,
-  Vector<unsigned>& block_map)
+  Vector<unsigned>& block_map,
+  Vector<Vector<unsigned> > &doftype_to_doftype_map)
  {
+  
+  if(doftype_to_doftype_map.size() != 0)
+  {
+#ifdef PARANOID
+   // Checks for doftype_to_doftype_map
+   // No more than ndof types described, 
+   // and check that all entries are unique.
+   std::set<unsigned> doftype_map_set;
+
+   unsigned doftype_to_doftype_map_size = doftype_to_doftype_map.size();
+   for (unsigned i = 0; i < doftype_to_doftype_map_size; i++)
+    {
+     unsigned doftype_to_doftype_map_i_size = doftype_to_doftype_map[i].size();
+     for (unsigned j = 0; j < doftype_to_doftype_map_i_size; j++)
+      {
+       std::set<unsigned>::iterator doftype_map_it;
+       std::pair<std::set<unsigned>::iterator,bool> doftype_map_ret;
+
+       doftype_map_ret = doftype_map_set.insert(doftype_to_doftype_map[i][j]);
+         
+       if(!doftype_map_ret.second)
+        {
+         std::ostringstream error_message;
+         error_message << "Error: the doftype number "
+                       << doftype_to_doftype_map[i][j]
+                       << " is already inserted."
+                       << std::endl;
+         throw OomphLibError(error_message.str(),
+                             OOMPH_CURRENT_FUNCTION,
+                             OOMPH_EXCEPTION_LOCATION);
+        }
+      }
+    }
+     
+//   // All doftype described in doftype_to_doftype_map must be unique.
+//   if(precomputed_block_nrow != doftype_map_set.size())
+//    {
+//     std::ostringstream error_message;
+//     error_message << "Error: all doftypes must be assigned. \n"
+//                   << "Only " << doftype_map_set.size()
+//                   << " doftypes have been assigned."
+//                   << std::endl;
+//     throw OomphLibError(error_message.str(),
+//                         OOMPH_CURRENT_FUNCTION,
+//                         OOMPH_EXCEPTION_LOCATION);
+//    }
+
+#endif
+    // We want to coarsen the preconditioner doftypes.
+    Preconditioner_doftypes_have_been_coarsened = true;
+
+    // Set the Doftype_to_doftype_map.
+    Doftype_to_doftype_map = doftype_to_doftype_map;
+  }
+  else
+  {
+    Preconditioner_doftypes_have_been_coarsened = false;
+  }
+
   // Set the master block preconditioner pointer
   Master_block_preconditioner_pt = master_block_prec_pt;
 
@@ -3697,152 +3785,6 @@ namespace oomph
  } // function return_block_ordered_preconditioner_vector
 
 //=============================================================================
-/// \short Gets block (i,j) from Precomputed_block_pt and returns it in
-/// block_matrix_pt.
-//=============================================================================
- template<> 
- void BlockPreconditioner<CRDoubleMatrix>:: 
- get_precomputed_block(const unsigned& block_i, const unsigned& block_j, 
-                       CRDoubleMatrix& output_block) const
- {
-#ifdef PARANOID
-  // the number of blocks
-  unsigned nblocks = nblock_types_precomputed();
-  
-  // paranoid check that block i is in this block preconditioner
-  if (block_i >= nblocks || block_j >= nblocks)
-   {
-    std::ostringstream error_message;
-    error_message << "Requested block (" << block_i << "," << block_j   
-                  << "), however this preconditioner has nblock_types_precomputed() "
-                  << "= " << nblocks << std::endl;
-    throw OomphLibError(error_message.str(),
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
-   }
-
-  if(!Preconditioner_blocks_have_been_precomputed)
-  {
-    std::ostringstream error_message;
-    error_message << "There are no precomputed blocks. Please call "
-                  << "set_precomputed_blocks(...)  ";
-    throw OomphLibError(error_message.str(),
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
-  }
-#endif
-
-  // Create the dense matrix required for the merge.
-  // How many block rows and columns?
-  const unsigned nblock_in_row = Block_to_block_map[block_i].size();
-  const unsigned nblock_in_col = Block_to_block_map[block_j].size();
-  
-  if((nblock_in_row == 1) && (nblock_in_col == 1))
-   {
-     
-    // Do not need to invoke concatenate function.
-    unsigned prec_block_i = Block_to_block_map[block_i][0];
-    unsigned prec_block_j = Block_to_block_map[block_j][0];
-
-    // Cache the pointer to the precomputed block.
-    CRDoubleMatrix* precom_block_pt 
-      = Precomputed_block_pt(prec_block_i,prec_block_j);
-
-    // Create a new matrix with the precomputed block
-    // (prec_block_i,prec_block_j)
-
-    // Temp storage.
-    Vector<double> tmp_values;
-    Vector<int> tmp_column_indices;
-    Vector<int> tmp_row_start;
-    
-    // The precomputed block nrow and nnz
-    unsigned precom_nrow = precom_block_pt->nrow();
-    unsigned long precom_nnz = precom_block_pt->nnz();
-    
-    // Reserve space.
-    tmp_values.reserve(precom_nnz);
-    tmp_column_indices.reserve(precom_nnz);
-    tmp_row_start.reserve(precom_nrow + 1);
-
-    // The data to copy over.
-    double* precom_values = precom_block_pt->value();
-    int* precom_column_indices = precom_block_pt->column_index();
-    int* precom_row_start = precom_block_pt->row_start();
-    
-    // Copy the values and column indices.
-    for (unsigned i = 0; i < precom_nnz; i++) 
-     {
-      tmp_values.push_back(precom_values[i]);
-      tmp_column_indices.push_back(precom_column_indices[i]);
-     }
-
-    // Copy the row start
-    for (unsigned i = 0; i < precom_nrow + 1; i++) 
-     {
-      tmp_row_start.push_back(precom_row_start[i]);
-     }
-
-    unsigned precom_ncol
-      = precom_block_pt->ncol();
-
-    output_block.build(precom_block_pt->distribution_pt(),
-                       precom_ncol,
-                       tmp_values,
-                       tmp_column_indices,
-                       tmp_row_start);
-   }
-  else
-   {
-  DenseMatrix<CRDoubleMatrix*> tmp_block_pt(nblock_in_row,nblock_in_col,0);
-  Vector<LinearAlgebraDistribution*> tmp_row_distribution_pt(nblock_in_row,0);
-  Vector<LinearAlgebraDistribution*> tmp_col_distribution_pt(nblock_in_col,0);
-
-  // Fill in the corresponding matrices.
-  for (unsigned block_row_i = 0; block_row_i < nblock_in_row; block_row_i++) 
-   {
-    unsigned prec_block_i = Block_to_block_map[block_i][block_row_i];
-
-    for (unsigned block_col_i = 0; block_col_i < nblock_in_col; block_col_i++) 
-     {
-      unsigned prec_block_j = Block_to_block_map[block_j][block_col_i];
-    
-      tmp_block_pt(block_row_i,block_col_i) 
-       = Precomputed_block_pt(prec_block_i, prec_block_j);
-     }
-   }
-
-  // Fill in the row distributions, use the first block column.
-  for (unsigned block_row_i = 0; block_row_i < nblock_in_row; block_row_i++) 
-   {
-    tmp_row_distribution_pt[block_row_i] 
-      = tmp_block_pt(block_row_i,0)->distribution_pt();
-   }
-
-  // Fill in the col distributions, use the first block row.
-  // This is a bit more tricky, we need the distributions of the block
-  // rows that these block columns correspond to.
-  for (unsigned block_col_i = 0; block_col_i < nblock_in_col; block_col_i++) 
-   {
-    unsigned prec_row_block_i = Block_to_block_map[block_j][block_col_i];
-
-    tmp_col_distribution_pt[block_col_i] 
-      = Precomputed_block_pt(prec_row_block_i,0)->distribution_pt();
-   }
-
-  output_block.build(Precomputed_block_distribution_pt[block_i]);
-
-  // Concatenate the matrix.
-  // For now, we use concatenate_without_communication(...) since none of the
-  // current preconditioners require the block matrix to be in a particular
-  // arrangement. We could use concatenate(...) which requires communication.
-  CRDoubleMatrixHelpers::concatenate_without_communication(
-    tmp_row_distribution_pt,tmp_col_distribution_pt, tmp_block_pt, output_block);
-   }
- }
-
-
-//=============================================================================
 /// \short Gets block (i,j) from the original matrix and returns it in
 /// block_matrix_pt (Specialisation for CRDoubleMatrix)
 //=============================================================================
@@ -4387,6 +4329,176 @@ namespace oomph
 #endif 
    }
  }
+
+
+//=============================================================================
+/// \short Gets block (i,j) from Precomputed_block_pt and returns it in
+/// block_matrix_pt.
+//=============================================================================
+ template<> 
+ void BlockPreconditioner<CRDoubleMatrix>:: 
+ get_coarsened_block(const unsigned& block_i, const unsigned& block_j, 
+                       CRDoubleMatrix& output_block) const
+ {
+#ifdef PARANOID
+  // the number of blocks
+  unsigned nblocks = nblock_types_precomputed();
+  
+  // paranoid check that block i is in this block preconditioner
+  if (block_i >= nblocks || block_j >= nblocks)
+   {
+    std::ostringstream error_message;
+    error_message << "Requested block (" << block_i << "," << block_j   
+                  << "), however this preconditioner has nblock_types_precomputed() "
+                  << "= " << nblocks << std::endl;
+    throw OomphLibError(error_message.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+
+  if(!Preconditioner_blocks_have_been_precomputed)
+  {
+    std::ostringstream error_message;
+    error_message << "There are no precomputed blocks. Please call "
+                  << "set_precomputed_blocks(...)  ";
+    throw OomphLibError(error_message.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+
+  // Create the dense matrix required for the merge.
+  // How many block rows and columns?
+  const unsigned nblock_in_row = Block_to_block_map[block_i].size();
+  const unsigned nblock_in_col = Block_to_block_map[block_j].size();
+  
+  if((nblock_in_row == 1) && (nblock_in_col == 1))
+   {
+     
+    // Do not need to invoke concatenate function.
+    unsigned prec_block_i = Block_to_block_map[block_i][0];
+    unsigned prec_block_j = Block_to_block_map[block_j][0];
+
+    // Cache the pointer to the precomputed block.
+    CRDoubleMatrix* precom_block_pt = 0;
+    if(Preconditioner_blocks_have_been_precomputed)
+    {
+      precom_block_pt = Precomputed_block_pt(prec_block_i,prec_block_j);
+    }
+    else
+    {
+      precom_block_pt = new CRDoubleMatrix;
+      get_block_from_original_matrix(prec_block_i,prec_block_j,*precom_block_pt);
+    }
+
+    // Create a new matrix with the precomputed block
+    // (prec_block_i,prec_block_j)
+
+    // Temp storage.
+    Vector<double> tmp_values;
+    Vector<int> tmp_column_indices;
+    Vector<int> tmp_row_start;
+    
+    // The precomputed block nrow and nnz
+    unsigned precom_nrow = precom_block_pt->nrow();
+    unsigned long precom_nnz = precom_block_pt->nnz();
+    
+    // Reserve space.
+    tmp_values.reserve(precom_nnz);
+    tmp_column_indices.reserve(precom_nnz);
+    tmp_row_start.reserve(precom_nrow + 1);
+
+    // The data to copy over.
+    double* precom_values = precom_block_pt->value();
+    int* precom_column_indices = precom_block_pt->column_index();
+    int* precom_row_start = precom_block_pt->row_start();
+    
+    // Copy the values and column indices.
+    for (unsigned i = 0; i < precom_nnz; i++) 
+     {
+      tmp_values.push_back(precom_values[i]);
+      tmp_column_indices.push_back(precom_column_indices[i]);
+     }
+
+    // Copy the row start
+    for (unsigned i = 0; i < precom_nrow + 1; i++) 
+     {
+      tmp_row_start.push_back(precom_row_start[i]);
+     }
+
+    unsigned precom_ncol
+      = precom_block_pt->ncol();
+
+    output_block.build(precom_block_pt->distribution_pt(),
+                       precom_ncol,
+                       tmp_values,
+                       tmp_column_indices,
+                       tmp_row_start);
+    if(!Preconditioner_blocks_have_been_precomputed)
+    {
+      delete precom_block_pt;
+    }
+   }
+  else
+   {
+  DenseMatrix<CRDoubleMatrix*> tmp_block_pt(nblock_in_row,nblock_in_col,0);
+  Vector<LinearAlgebraDistribution*> tmp_row_distribution_pt(nblock_in_row,0);
+  Vector<LinearAlgebraDistribution*> tmp_col_distribution_pt(nblock_in_col,0);
+
+  // Fill in the corresponding matrices.
+  for (unsigned block_row_i = 0; block_row_i < nblock_in_row; block_row_i++) 
+   {
+    unsigned prec_block_i = Block_to_block_map[block_i][block_row_i];
+
+    for (unsigned block_col_i = 0; block_col_i < nblock_in_col; block_col_i++) 
+     {
+      unsigned prec_block_j = Block_to_block_map[block_j][block_col_i];
+    
+      tmp_block_pt(block_row_i,block_col_i) = 0;
+      if(Preconditioner_blocks_have_been_precomputed)
+      { 
+        tmp_block_pt(block_row_i,block_col_i)
+          = Precomputed_block_pt(prec_block_i, prec_block_j);
+      }
+      else
+      {
+        tmp_block_pt(block_row_i,block_col_i) = new CRDoubleMatrix;
+        get_block_from_original_matrix(prec_block_i,prec_block_j,
+                                       *tmp_block_pt(block_row_i,block_col_i));
+      }
+     } // for
+   } // for
+
+  // Fill in the row distributions, use the first block column.
+  for (unsigned block_row_i = 0; block_row_i < nblock_in_row; block_row_i++) 
+   {
+    tmp_row_distribution_pt[block_row_i] 
+      = tmp_block_pt(block_row_i,0)->distribution_pt();
+   }
+
+  // Fill in the col distributions, use the first block row.
+  // This is a bit more tricky, we need the distributions of the block
+  // rows that these block columns correspond to.
+  for (unsigned block_col_i = 0; block_col_i < nblock_in_col; block_col_i++) 
+   {
+    unsigned prec_row_block_i = Block_to_block_map[block_j][block_col_i];
+
+    tmp_col_distribution_pt[block_col_i] 
+      = Precomputed_block_pt(prec_row_block_i,0)->distribution_pt();
+   }
+
+  output_block.build(Precomputed_block_distribution_pt[block_i]);
+
+  // Concatenate the matrix.
+  // For now, we use concatenate_without_communication(...) since none of the
+  // current preconditioners require the block matrix to be in a particular
+  // arrangement. We could use concatenate(...) which requires communication.
+  CRDoubleMatrixHelpers::concatenate_without_communication(
+    tmp_row_distribution_pt,tmp_col_distribution_pt, tmp_block_pt, output_block);
+   }
+ }
+
+
 
 
 //=============================================================================
