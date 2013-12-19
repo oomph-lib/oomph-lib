@@ -133,14 +133,14 @@ public:
 
 
   /// Access function for the specific mesh
-  TriangleMesh<ELEMENT>* mesh_pt()
-      {
-    return dynamic_cast<TriangleMesh<ELEMENT>*>(Problem::mesh_pt());
-      }
-
-  /// Doc the solution
-  void doc_solution(DocInfo& doc_info);
-
+ TriangleMesh<ELEMENT>* mesh_pt()
+  {
+   return dynamic_cast<TriangleMesh<ELEMENT>*>(Problem::mesh_pt());
+  }
+ 
+ /// Doc the solution
+ void doc_solution(DocInfo& doc_info);
+ 
 private:
 
   /// Pointer to source function

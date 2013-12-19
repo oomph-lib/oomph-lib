@@ -525,6 +525,9 @@ PoissonProblem(PoissonEquations<2>::PoissonSourceFctPt source_fct_pt)
   // Pass information about the defined regions
   triangle_mesh_parameters.add_region_coordinates(1, region);
   
+  // Specify different target area of region 1:
+  triangle_mesh_parameters.set_target_area_for_region(1,0.01);
+
   // Pass the TriangleMeshParameters object to the TriangleMesh one
   Problem::mesh_pt() = new TriangleMesh<ELEMENT>(triangle_mesh_parameters);
 
@@ -608,6 +611,25 @@ void PoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
   mesh_pt()->output_fct(some_file,npts,TanhSolnForPoisson::get_exact_u);
   some_file.close();
 
+
+  // Output regions
+  //---------------
+  {
+   unsigned nr=mesh_pt()->nregion();
+   for (unsigned r=0;r<nr;r++)
+    {
+     ofstream some_file;
+     sprintf(filename,"%s/soln_in_region%i_%i.dat",doc_info.directory().c_str(),
+             r,doc_info.number());
+     some_file.open(filename);
+     unsigned nel=mesh_pt()->nregion_element(r);
+     for(unsigned e=0;e<nel;e++)
+      {
+       mesh_pt()->region_element_pt(r,e)->output(some_file,npts);
+      }
+     some_file.close();
+    }
+         }
 
   // Doc error
   //----------

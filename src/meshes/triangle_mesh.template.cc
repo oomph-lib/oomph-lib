@@ -1071,6 +1071,7 @@ void TriangleMesh<ELEMENT>::setup_boundary_coordinates(const unsigned& b,
    Vector<TriangleMeshOpenCurve*> &internal_polylines_pt,
    Vector<Vector<double> > &extra_holes_coordinates,
    std::map<unsigned, Vector<double> > &regions_coordinates,
+   std::map<unsigned, double> &regions_areas,
    TriangulateIO& triangulate_io)
    {
   // triangulate_io initialization
@@ -1863,7 +1864,7 @@ void TriangleMesh<ELEMENT>::setup_boundary_coordinates(const unsigned& b,
         ((*it_regions).second)[1];
       triangulate_io.regionlist[4*p-2] =
         static_cast<double>(region_id);
-      triangulate_io.regionlist[4*p-1] = 0.0;
+      triangulate_io.regionlist[4*p-1] = regions_areas[region_id];
       p++;
      }
 

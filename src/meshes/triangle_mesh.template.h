@@ -153,7 +153,7 @@ class TriangleMeshParameters
                          OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);     
     }
-/*
+   
    // First check if the region with the specified id does not already exist
    std::map<unsigned, Vector<double> >::iterator it;
    it = Regions_coordinates.find(i);
@@ -161,16 +161,16 @@ class TriangleMeshParameters
    if (it != Regions_coordinates.end())
     {
      std::ostringstream error_message;
-     error_message << "The region id ("<<i<<")that you are using for"
+     error_message << "The region id ("<<i<<") that you are using for"
                    << "defining\n"
                    << "your region is already in use. Use another\n"
                    << "region id and verify that you are not re-using\n"
-                   <<" previously defined regions id's\n"<<std::endl;
-     throw OomphLibError(error_message.str(),
-     OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
+                   <<" previously defined regions ids\n"<<std::endl;
+     OomphLibWarning(error_message.str(),
+                     OOMPH_CURRENT_FUNCTION,
+                     OOMPH_EXCEPTION_LOCATION);
     }
-*/
+
    // If it does not exist then create the map
    Regions_coordinates[i] = region_coordinates;
    // Automatically set the using of attributes to enable
@@ -180,6 +180,16 @@ class TriangleMeshParameters
  /// Helper function for getting access to the regions coordinates
  std::map<unsigned, Vector<double> >&regions_coordinates()
   {return Regions_coordinates;}
+
+ /// Helper function to specify target area for region
+ void set_target_area_for_region(const unsigned &i, const double& area)
+ {
+   Regions_areas[i] = area;
+ }
+
+ /// Helper function for getting access to the region's target areas
+ std::map<unsigned, double >&target_area_for_region()
+  {return Regions_areas;}
 
  /// \short Helper function for getting the status of use_attributes 
  /// variable
@@ -223,10 +233,14 @@ class TriangleMeshParameters
  /// Store the coordinates for defining extra holes
  Vector<Vector<double> > Extra_holes_coordinates;
  
- /// Store the coordinates for defining extra regions
+ /// \short Store the coordinates for defining extra regions
  /// The key on the map is the region id
  std::map<unsigned, Vector<double> > Regions_coordinates;
  
+ /// \short Target areas for regions; defaults to 0.0 which (luckily)
+ /// implies "no specific target area" for triangle!
+ std::map<unsigned, double> Regions_areas;
+
  /// Define the use of attributes (regions)
  bool Use_attributes;
  
@@ -529,13 +543,14 @@ class TriangleMeshParameters
                          OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
-   
+
    this->generic_constructor(outer_boundary_polygon_pt,
                              internal_polygon_pt,
                              internal_open_curve_poly_pt,
                              element_area,
                              extra_holes_coordinates,
                              regions,
+                             triangle_mesh_parameters.target_area_for_region(),
                              time_stepper_pt,
                              use_attributes,
                              refine_boundary,
@@ -583,7 +598,10 @@ class TriangleMeshParameters
     
     // Input string for triangle
     std::stringstream input_string_stream;
-    input_string_stream<<"-pA -a" << element_area << "q30";
+
+    // MH: Like everything else, this hasn't been tested!
+    // used to be input_string_stream<<"-pA -a" << element_area << "q30";
+    input_string_stream<<"-pA -a -a" << element_area << "q30";
     
     // Convert to a *char required by the triangulate function
     char triswitches[100];
@@ -983,6 +1001,8 @@ class TriangleMeshParameters
                            Vector<Vector<double> > &extra_holes_coordinates,
                            std::map<unsigned, Vector<double> >
                            &regions_coordinates,
+                           std::map<unsigned, double>
+                           &regions_areas,
                            TriangulateIO& triangulate_io);
 
   /// \short Helper function to create TriangulateIO object (return in
@@ -1002,6 +1022,8 @@ class TriangleMeshParameters
                            Vector<Vector<double> > &extra_holes_coordinates,
                            std::map<unsigned, Vector<double> >
                            &regions_coordinates,
+                           std::map<unsigned, double >
+                           &regions_areas,
                            TimeStepper* time_stepper_pt,
                            const bool &use_attributes,
                            const bool &refine_boundary,
@@ -1058,6 +1080,7 @@ class TriangleMeshParameters
                         open_polylines_pt,
                         extra_holes_coordinates,
                         regions_coordinates,
+                        regions_areas,
                         triangulate_io);
 
     // Initialize TriangulateIO structure
@@ -1071,7 +1094,12 @@ class TriangleMeshParameters
     input_string_stream.precision(14);
     input_string_stream.setf(std::ios_base::fixed, 
                              std::ios_base::floatfield);
-    input_string_stream<<"-pA -a" << element_area << " -q30" << std::fixed;
+
+    // MH: Used to be:
+    // input_string_stream<<"-pA -a" << element_area << " -q30" << std::fixed;
+    // The repeated -a allows the specification of areas for different
+    // regions (if any)
+    input_string_stream <<"-pA -a -a" << element_area << " -q30" << std::fixed;
     
     //Suppress insertion of additional points on outer boundary
     if(refine_boundary==false) 

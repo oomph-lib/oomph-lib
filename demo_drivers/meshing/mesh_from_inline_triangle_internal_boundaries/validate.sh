@@ -64,13 +64,13 @@ echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/trace.dat  \
-    > results.dat
+    > results_extra.dat
 
 if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/results_extra.dat.gz   \
-    results.dat  >> validation.log
+    results_extra.dat  >> validation.log
 fi
 
 mv RESLT RESLT_internal_boundaries_extra
