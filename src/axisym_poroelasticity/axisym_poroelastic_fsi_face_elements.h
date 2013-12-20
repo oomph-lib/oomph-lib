@@ -252,6 +252,10 @@ public:
     dynamic_cast<FLUID_BULK_ELEMENT*>(bulk_element_pt())->
      interpolated_u_axi_nst(s_bulk,fluid_veloc);
 
+    // Get fluid pressure from bulk element
+    double p_fluid=dynamic_cast<FLUID_BULK_ELEMENT*>(bulk_element_pt())->
+     interpolated_p_axi_nst(s_bulk);
+    
     // Calculate the normal components
     double scaled_normal_wall_veloc=0.0;
     double scaled_normal_poro_veloc=0.0;
@@ -304,6 +308,7 @@ public:
             << scaled_normal_wall_veloc*interpolated_normal[1] << " " 
             << scaled_normal_poro_veloc*interpolated_normal[0] << " " 
             << scaled_normal_poro_veloc*interpolated_normal[1] << " " 
+            << p_fluid << " " 
             << std::endl;
    }
  }
