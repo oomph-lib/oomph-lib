@@ -57,7 +57,7 @@ else
 run_command4 += " -D TPL_ENABLE_LAPACK:BOOL=ON -D TPL_LAPACK_LIBRARIES:STRING=\"$(oomph_abs_top_srcdir)/external_src/oomph_flapack/.libs/liboomph_flapack.a\" " 
 endif
 run_command4 += " -D Trilinos_ENABLE_ALL_PACKAGES:BOOL=OFF -D Trilinos_ENABLE_ALL_OPTIONAL_PACKAGES:BOOL=OFF -D Trilinos_ENABLE_Teuchos:BOOL=ON -D Trilinos_ENABLE_Epetra:BOOL=ON -D Trilinos_ENABLE_EpetraExt:BOOL=ON -D Trilinos_ENABLE_Triutils:BOOL=ON -D Trilinos_ENABLE_Ifpack:BOOL=ON -D Trilinos_ENABLE_AztecOO:BOOL=ON -D Trilinos_ENABLE_Amesos:BOOL=ON -D Trilinos_ENABLE_ML:BOOL=ON -D Trilinos_ENABLE_Anasazi:BOOL=ON "
-run_command4 += " -D CMAKE_Fortran_COMPILER=\"$(F77)\"  -D CMAKE_C_COMPILER=\"$(CC)\" -D CMAKE_CXX_COMPILER=\"$(CXX)\" -D CMAKE_Fortran_FLAGS:STRING=\"$(FFLAGS)\"  -D CMAKE_C_CFLAGS:STRING=\"$(CFLAGS)\" -D CMAKE_CXX_FLAGS:STRING=\"$(CXXFLAGS)\" \\"
+run_command4 += " -D CMAKE_Fortran_COMPILER=\"$(F77)\"  -D CMAKE_C_COMPILER=\"$(CC)\" -D CMAKE_CXX_COMPILER=\"$(CXX)\" -D CMAKE_Fortran_FLAGS:STRING=\"$(FFLAGS)\"  -D CMAKE_C_FLAGS:STRING=\"$(CFLAGS)\" -D CMAKE_CXX_FLAGS:STRING=\"$(CXXFLAGS)\" \\"
 
 
 all:
@@ -99,3 +99,4 @@ clean-local:
 	rm -f build_script.bash
 	rm -rf trilinos-9.0.2
 	rm -rf trilinos-10.8.5-Source
+	rm -rf trilinos-11.4.3-Source

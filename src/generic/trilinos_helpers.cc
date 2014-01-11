@@ -1041,12 +1041,12 @@ create_epetra_map(const LinearAlgebraDistribution* const dist_pt)
   }
  else
   {
-   return new Epetra_LocalMap(dist_pt->nrow(),0,
+   return new Epetra_LocalMap(int(dist_pt->nrow()),int(0),
                               Epetra_MpiComm(
                                dist_pt->communicator_pt()->mpi_comm()));
   }
 #else
- return new Epetra_LocalMap(dist_pt->nrow(),0,Epetra_SerialComm());
+ return new Epetra_LocalMap(int(dist_pt->nrow()),int(0),Epetra_SerialComm());
 #endif
 }
 

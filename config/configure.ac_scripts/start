@@ -618,6 +618,14 @@ AC_SUBST(MPI_VARIABLENP_RUN_COMMAND)
 AM_CONDITIONAL(WANT_MPI_VARIABLENP, test x$run_mpi_self_tests_variablenp = xtrue)
 
 
+# Do we need multiple teuchos sub-libraries
+AC_ARG_ENABLE(multiple_teuchos_libraries,
+              [  --enable-multiple_teuchos_libraries Assume that the 
+                                                     version of trilinos
+                                                     provides multiple 
+                                                     teuchos (sub-)libraries],
+              [multiple_teuchos_libs_requested=true],
+              [multiple_teuchos_libs_requested=false])
 
 
 # Suppress build of extensive documentation?
@@ -1320,13 +1328,32 @@ else \
        echo " "; \
    fi;\
 fi; \
+echo ""; \
+echo ""; \
+echo "========================================================================"; \
+echo "NOTE: We're going to link against an existing trilinos installation."; \
+echo "      Unfortunately different versions of that library require"; \
+echo "      explicit linkinig against different sets of (sub-)libraries."; \
+echo "      We're currently assuming that you use a version that"; \
+echo "      needs just -lteuchos. If you have linking problems"; \
+echo "      that indicate missing teuchos functions, try to re-install"; \
+echo "      oomph-lib with the"; \
+echo ""; \
+echo "            --need_multiple_teuchos_libraries "; \
+echo ""; \
+echo "      configuration flag (or omit it if you've specified it already)"; \
+echo ""; \
+echo "========================================================================"; \
+echo ""; \
+echo ""; \
+echo ""; \
 else \
     echo "No trilinos library directory specified"; \ 
 
     # Will trilinos library be built?
     #--------------------------------
-will_have_trilinos=false;
-    AC_CHECK_FILES([external_distributions/trilinos/trilinos-9.0.2.tar.gz  external_distributions/trilinos/trilinos-10.8.5-Source.tar.gz], will_have_trilinos=true, )
+    will_have_trilinos=false;
+    AC_CHECK_FILES([external_distributions/trilinos/trilinos-9.0.2.tar.gz  external_distributions/trilinos/trilinos-10.8.5-Source.tar.gz external_distributions/trilinos/trilinos-11.4.3-Source.tar.gz], will_have_trilinos=true, )
     
    if test x$will_have_trilinos = xtrue; then \
     echo "Trilinos distribution .tar.gz file found ... will build trilinos"; \
@@ -1334,12 +1361,46 @@ will_have_trilinos=false;
     TRILINOS_DIR="`pwd`/external_distributions/trilinos/trilinos_default_installation"
     TRILINOS_LIB="`pwd`/external_distributions/trilinos/trilinos_default_installation/lib"
     TRILINOS_INCLUDE="`pwd`/external_distributions/trilinos/trilinos_default_installation/include"
+
+    tar_file_needs_single_teuchos_library=false;
+    AC_CHECK_FILES([external_distributions/trilinos/trilinos-9.0.2.tar.gz  external_distributions/trilinos/trilinos-10.8.5-Source.tar.gz], tar_file_needs_single_teuchos_library=true, )
+
+    if test x$tar_file_needs_single_teuchos_library = xtrue; then \
+         echo "We believe that this version of the trilinos library needs single teuchos library"; \
+    else \
+         echo "We believe that this version of the trilinos library needs multiple teuchos libraries"; \
+    fi; \
+
    else
     echo "Trilinos distribution .tar.gz file not found ... can't build trilinos";
    fi;
 
 fi
 
+
+# Using multiple techos libraries?
+#---------------------------------
+use_single_teuchos_library=true;
+if test x$multiple_teuchos_libs_requested = xtrue; then \
+    echo "Requested multiple teuchos libraries via config flag"; \
+    use_single_teuchos_library=false; \
+    if test x$will_have_trilinos = xtrue; then \
+        if test x$tar_file_needs_single_teuchos_library = xtrue; then \
+           echo "Note that this changes the (sensible!) default inferred from version of tar file!"; \
+        fi; \
+    fi; \
+else \
+    echo "Not requested single teuchos library via config flag"; \
+    if test x$will_have_trilinos = xtrue; then \
+      if test x$tar_file_needs_single_teuchos_library = xtrue; then \
+         echo "Building with single teuchos library"; \
+         use_single_teuchos_library=true; \
+      else
+         echo "Building with multi teuchos libraries"; \
+         use_single_teuchos_library=false; \
+      fi; \
+    fi; \
+fi;
 
 
 # Do we have the trilinos libraries? If so add them to the
@@ -1355,7 +1416,13 @@ else \
     TRILINOS_INCLUDE='' ;\
     external_dist_libraries_include=`echo $external_dist_libraries_include " -DOOMPH_HAS_TRILINOS"` ; \
   else \
-    external_dist_libraries=`echo $external_dist_libraries " -lml -lifpack -lamesos -lanasazi -laztecoo -lepetraext -ltriutils -lepetra -lteuchos"` ; \
+    if test x$use_single_teuchos_library = xtrue; then \
+       echo "Actually building with single teuchos library"; \
+       external_dist_libraries=`echo $external_dist_libraries " -lml -lifpack -lamesos -lanasazi -laztecoo -lepetraext -ltriutils -lepetra -lteuchos"` ; \
+    else \
+       echo "Actually building with multiple teuchos libraries"; \
+       external_dist_libraries=`echo $external_dist_libraries " -lml -lifpack -lamesos -lanasazi -laztecoo -lepetraext -ltriutils -lepetra -lteuchosremainder -lteuchosnumerics -lteuchoscomm -lteuchosparameterlist -lteuchoscore "` ; \
+    fi
     external_dist_libraries_lib=`echo $external_dist_libraries_lib "-L"$TRILINOS_LIB` ; \
     external_dist_libraries_include=`echo $external_dist_libraries_include "-isystem "$TRILINOS_INCLUDE -DOOMPH_HAS_TRILINOS` ; \
   fi
