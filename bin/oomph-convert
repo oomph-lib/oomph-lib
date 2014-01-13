@@ -32,6 +32,7 @@ OPTIONS\n
 \t-z  \t add trailing zeros to the output filename \n
 \t-p2  \t extract only 2D points with values in data\n
 \t-p3  \t extract only 3D points with values in data\n
+\t-o  \t ovewrite output files (otherwise skip conversion if they already exist)\n
 \n
 \n
 TYPICAL USAGE EXAMPLES\n
@@ -62,7 +63,8 @@ fi
 zeroflag=
 pointflag=
 dimflag=0
-while getopts "hzp23" OPTIONS; do
+oflag=
+while getopts "hzpo23" OPTIONS; do
     case ${OPTIONS} in
         h)      echo -e $USAGE
                 exit 0
@@ -75,6 +77,8 @@ while getopts "hzp23" OPTIONS; do
 	        ;;
 	3)      dimflag=3
 	        ;;
+        o)      oflag=-o
+                ;;
         \?)     # getopts issues an error message
                 usage
                 ;;
@@ -98,7 +102,7 @@ if [ $dimflag -eq 0 ] ; then
 	filenametrunc=${filename%\.*} 
         # Assume that this lives in the bin directory (or some other
         # directory that's in the path...
-	oomph-convert.py $zeroflag $filename $filenametrunc.vtu
+	oomph-convert.py $oflag $zeroflag $filename $filenametrunc.vtu
 	shift
     done
 
@@ -113,7 +117,7 @@ else
 
         # Assume that this lives in the bin directory (or some other
         # directory that's in the path...
-	oomph-convert.py $zeroflag $pointflag$dimflag $filename $filenametrunc.vtp
+	oomph-convert.py $oflag $zeroflag $pointflag$dimflag $filename $filenametrunc.vtp
 	shift
     done
 

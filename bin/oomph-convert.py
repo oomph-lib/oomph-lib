@@ -4,7 +4,7 @@
 # Licensed under the GNU LGPL Version 2.1
 #
 # Script for converting from oomph-lib tecplot format to VTK XML
-#
+# 
 # Report bugs to a.simone@tudelft.nl
 #
 # The script can convert
@@ -36,12 +36,23 @@
 #
 # 20130419: David Shepherd
 #           - Send errors to stderr not stdout.
+#
+# 20120714: Matthias Heil
+#           - skip files if output files already exist (unless -o is specified
+#             on command line). Avoids costly (!) re-generation of existing
+#             files.
+#           - Fixed vtp file generation with -p flag: Ignore any line
+#             the contains non-floating point numbers (rather than
+#             ignoring any lines that contains an ascii character which
+#             ignores floating point numbers in scientific notation!
+#
 ###############################################################################
-
+import os
 import getopt
 import string
 import sys
 import time
+import re
 from commands import getoutput
 
 #
@@ -65,7 +76,7 @@ OPTIONS
         -p2 or -p3 outputs only points in 2D or 3D (.vtp)
         -h         display this help text and exit
         -z         add trailing zeros to the output filename
-
+        -o         overwrite existing files
 
 TYPICAL USAGE EXAMPLES
         oomph-convert.py -h                             -> display help text
@@ -77,14 +88,14 @@ TYPICAL USAGE EXAMPLES
         oomph-convert.py -z soln12.dat nsol2.vtu        -> generate nsol00002.vtu
         oomph-convert.py soln.dat                       -> generate soln.vtu
         oomph-convert.py -z soln.dat                    -> generate soln00000.vtu
-        oomph-convert.py -p soln12.dat soln12.vtp          -> generate soln12.vtp
-        oomph-convert.py -p -z soln12.dat soln12.vtp       -> generate soln00012.vtp
-        oomph-convert.py -p soln12.dat                     -> generate soln12.vtp
-        oomph-convert.py -p -z soln12.dat                  -> generate soln00012.vtp
-        oomph-convert.py -p soln12.dat nsol2.vtp           -> generate nsol2.vtp
-        oomph-convert.py -p -z soln12.dat nsol2.vtp        -> generate nsol00002.vtp
-        oomph-convert.py -p soln.dat                       -> generate soln.vtp
-        oomph-convert.py -p -z soln.dat                    -> generate soln00000.vtp"""
+        oomph-convert.py -p3 soln12.dat soln12.vtp          -> generate soln12.vtp
+        oomph-convert.py -p2 -z soln12.dat soln12.vtp       -> generate soln00012.vtp
+        oomph-convert.py -p3 soln12.dat                     -> generate soln12.vtp
+        oomph-convert.py -p2 -z soln12.dat                  -> generate soln00012.vtp
+        oomph-convert.py -p3 soln12.dat nsol2.vtp           -> generate nsol2.vtp
+        oomph-convert.py -p2 -z soln12.dat nsol2.vtp        -> generate nsol00002.vtp
+        oomph-convert.py -p3 soln.dat                       -> generate soln.vtp
+        oomph-convert.py -p2 -z soln.dat                    -> generate soln00000.vtp"""
 
 #
 ###############################################################################
@@ -96,9 +107,9 @@ def main(argv):
     print "* oomph-convert.py, ver. 20110615"
 
     # Check python version. Bark at user if < 2.3 or if major is > 2
-    if sys.version_info<(2,3):
-        print >>sys.stderr, "You need at least Python 2.3 "
-        sys.exit(3)
+    if sys.version_info<(2,3): 
+        print >>sys.stderr, "You need at least Python 2.3 " 
+        sys.exit(3) 
 
     major = sys.version_info[0]
     if major > 2:
@@ -107,14 +118,15 @@ def main(argv):
 
     # Get command-line arguments
     try:
-        opts, args = getopt.getopt(argv, "hzp:")
+        opts, args = getopt.getopt(argv, "hozp:")
     except getopt.GetoptError:
         usage()
         sys.exit(2)
-
+        
     # Get options
     flag = 0
     flag2 = 0
+    overwrite_flag=0
     for opt, arg in opts:
         if opt in ("-h"):
             usage()
@@ -124,10 +136,14 @@ def main(argv):
         if opt in ("-p"):
             flag2 = 1
             argdim = arg
-            if argdim not in ("2","3"):
+            if argdim not in ("2","3"):    
                 usage()
-                sys.exit()
+                sys.exit() 
+        if opt in ("-o"):
+            overwrite_flag=1
 
+          
+  
     if len(args) == 1:
         # Get filename and suffix
         ifilename = args[0]
@@ -139,14 +155,14 @@ def main(argv):
             ofilename = ifilename[:lenBaseName]+".vtu"
         else:
             ofilename = ifilename[:lenBaseName]+".vtp"
-        osuffix = ofilename.split(".")[-1]
+        osuffix = ofilename.split(".")[-1]      
     elif len(args) == 2:
         # Get filenames and suffixes
         ifilename = args[0]
         ofilename = args[1]
         isuffix = ifilename.split(".")[-1]
         osuffix = ofilename.split(".")[-1]
-
+            
     else:
         usage()
         sys.exit(2)
@@ -155,21 +171,40 @@ def main(argv):
         if flag == 1:
             ofilename = addTrailingZeros(ofilename,osuffix)
         # Convert from oomph-lib Tecplot format to VTK XML format
-        start = time.time()
-        tecplot_to_vtkxml(ifilename, ofilename)
-        end = time.time()
-        print "* Conversion done in %d seconds" % (end - start)
-        print '* Output file name: %(fn)s ' %{'fn': ofilename}
+        do_it=1
+        if os.path.exists(ofilename):
+            print "File already exists! "
+            if (overwrite_flag==1):
+                print "Overwriting anyway"
+            else:
+                print "Not overwriting"
+                do_it=0
+        if (do_it==1):
+            start = time.time()
+            tecplot_to_vtkxml(ifilename, ofilename)
+            end = time.time()
+            print "* Conversion done in %d seconds" % (end - start)
+            print '* Output file name: %(fn)s ' %{'fn': ofilename}
     elif isuffix == "dat" and osuffix == "vtp" and flag2 == 1 :
         if flag == 1:
             ofilename = addTrailingZeros(ofilename,osuffix)
         # Convert from oomph-lib Tecplot format to VTP XML format
-        start = time.time()
-        tecplot_to_vtpxml(ifilename, ofilename,string.atoi(argdim))
-        end = time.time()
-        print "* Conversion done in %d seconds" % (end - start)
-        print '* Output file name: %(fn)s ' %{'fn': ofilename}
-    else:
+        do_it=1
+        if os.path.exists(ofilename):
+            print "File already exists! "
+            print overwrite_flag
+            if (overwrite_flag==1):
+                print "Overwriting anyway."
+            else:
+                print "Not overwriting."
+                do_it=0
+        if (do_it==1):
+            start = time.time()
+            tecplot_to_vtpxml(ifilename, ofilename,string.atoi(argdim))
+            end = time.time()
+            print "* Conversion done in %d seconds" % (end - start)
+            print '* Output file name: %(fn)s ' %{'fn': ofilename}       
+    else:   
         error("Sorry, cannot convert between .%s and .%s file formats." % (isuffix, osuffix))
 
 #
@@ -240,7 +275,7 @@ def tecplot_to_vtkxml(inputFilename, outputFilename):
         except TecplotParsingError, e:
             input.close()
             error(str(e))
-
+        
         if zone:
             zones.append(zone)
             ignoredlines+=line-linetmp-1-zone.nodesCount()
@@ -260,7 +295,7 @@ def tecplot_to_vtkxml(inputFilename, outputFilename):
             output = open(outputFilename, "w")
         except:
             error("Failed to open output file for writing !")
-
+        
         output.close()
         error("The input file does not contain any Tecplot zone ! Created an empty file... \n You may want to try converting this file to point \n data with -p2 option if dim == 2 or -p3 option if dim == 3")
 
@@ -308,7 +343,7 @@ def tecplot_to_vtkxml(inputFilename, outputFilename):
     output.write(VtkXml.pointsHeader)
     for zone in zones:
         for node in zone.nodes:
-            output.write("%f %f %f\n" %(node.coordinates[0], node.coordinates[1], node.coordinates[2]))
+            output.write("%e %e %e\n" %(node.coordinates[0], node.coordinates[1], node.coordinates[2]))
     output.write(VtkXml.pointsFooter)
     print "done"
 
@@ -379,7 +414,7 @@ def tecplot_to_vtkxml(inputFilename, outputFilename):
                     pos += 1
                 # Next zone
                 pos += dimI
-
+        
             if zone.dimension[0] == 3: # Hexahedron
                 indexes = 8 * [0]
                 dimJ = zone.edges[1]
@@ -438,8 +473,8 @@ def tecplot_to_vtkxml(inputFilename, outputFilename):
     sys.stdout.write("Write cell types.........................")
     sys.stdout.flush()
 
-    output.write(VtkXml.typesHeader)
-
+    output.write(VtkXml.typesHeader)    
+    
     cellType0 = zones[0].cellType[0]
     warn = 0
     for zone in zones:
@@ -474,7 +509,7 @@ def tecplot_to_vtkxml(inputFilename, outputFilename):
         output.write(VtkXml.fieldHeader % (fieldIndex + 1))
         for zone in zones:
             for node in zone.nodes:
-                output.write("%f\n" % node.fields[fieldIndex])
+                output.write("%e\n" % node.fields[fieldIndex])
 
         print "done"
         output.write(VtkXml.fieldFooter)
@@ -574,7 +609,7 @@ class TecplotZone:
         #-----------------------------------------------------------------------
         # Seek to the next Tecplot zone
         #-----------------------------------------------------------------------
-
+        
         while 1:
             header = file.readline()
             line += 1
@@ -600,7 +635,7 @@ class TecplotZone:
         # ZONE N=15, E=16, F=FEPOINT, ET=TRIANGLE
         # In this case, edges = ['N=15', ' E=16', ' F=FEPOINT', ' ET=TRIANGLE']
         # This zone has been coded for two ET keywords: TRIANGLE and TETRAHEDRON
-        # The second (format 2) is defined in terms of the IJK indexes and a
+        # The second (format 2) is defined in terms of the IJK indexes and a 
         # typical zone reads
         # ZONE I=5, J=5, K=5
         # One index, I, indicates a line element, 2 indexes, I and J, indicate
@@ -684,7 +719,7 @@ class TecplotZone:
             nodesCount = 1
             for edge in zone.edges:
                 nodesCount *= edge
-
+                
             #-------------------------------------------------------------------
             # Cell count in zone
             #-------------------------------------------------------------------
@@ -805,11 +840,26 @@ def tecplot_to_vtpxml(inputFilename, outputFilename, dim):
     sys.stdout.write("Parse input file for points........")
     sys.stdout.flush()
     line = 0
+    prev_line=0
+    offset_list=[]
+    count=0
+    nzone=1
     points = list()
     while 1:
         point = None
         try:
             (point, line) = InputPoints.parse(input, line, dim)
+            #print "line %d %d is..." % (line, prev_line)
+            if line != prev_line+1 :
+                #print "...normal point"
+                #else:
+                #print "...start point"
+                if prev_line !=0: 
+                    offset_list.append(count)
+                    nzone+=1
+            count+=1
+            prev_line=line
+
         except TecplotParsingError, e:
             input.close()
             error(str(e))
@@ -821,10 +871,12 @@ def tecplot_to_vtpxml(inputFilename, outputFilename, dim):
             input.close() # Close input file
             break
 
+    offset_list.append(count-1)
     nbpoints = len(points)
 
     if nbpoints == 0:
         error("The input file does not contain any point !")
+
 
     #---------------------------------------------------------------------------
     # Compute global informations
@@ -844,7 +896,7 @@ def tecplot_to_vtpxml(inputFilename, outputFilename, dim):
 
     output.write(VtpXml.header)
     output.write(VtpXml.polyDataHeader)
-    output.write(VtpXml.pieceHeader % (nbpoints))
+    output.write(VtpXml.pieceHeader % (nbpoints,nzone))
 
     #---------------------------------------------------------------------------
     # Nodes
@@ -853,10 +905,10 @@ def tecplot_to_vtpxml(inputFilename, outputFilename, dim):
     sys.stdout.flush()
     output.write(VtpXml.pointsHeader)
     for point in points:
-        output.write("%f %f %f\n" %(point.coordinates[0], point.coordinates[1], point.coordinates[2]))
+        output.write("%e %e %e\n" %(point.coordinates[0], point.coordinates[1], point.coordinates[2]))
     output.write(VtpXml.pointsFooter)
     print "done"
-
+ 
     #---------------------------------------------------------------------------
     # Fields
     #---------------------------------------------------------------------------
@@ -866,7 +918,7 @@ def tecplot_to_vtpxml(inputFilename, outputFilename, dim):
         sys.stdout.flush()
         output.write(VtpXml.fieldHeader % (fieldIndex + 1))
         for point in points:
-            output.write("%f\n" % point.fields[fieldIndex])
+            output.write("%e\n" % point.fields[fieldIndex])
 
         print "done"
         output.write(VtpXml.fieldFooter)
@@ -880,6 +932,16 @@ def tecplot_to_vtpxml(inputFilename, outputFilename, dim):
     output.write(VtpXml.vertsHeader)
     output.write(VtpXml.vertsFooter)
     output.write(VtpXml.linesHeader)
+    #Prepare line information:
+    output.write(VtkXml.connectivityHeader)
+    for i in range(0,nbpoints):
+        output.write("%i "%i)
+    output.write(VtkXml.connectivityFooter)
+    output.write(VtkXml.offsetsHeader)
+    for offset in offset_list:
+         output.write("%i "%offset)
+    output.write(VtkXml.offsetsFooter)
+    #end line information
     output.write(VtpXml.linesFooter)
     output.write(VtpXml.stripsHeader)
     output.write(VtpXml.stripsFooter)
@@ -910,7 +972,8 @@ class InputPoints:
         """
 
     @staticmethod
-    def parse(file, line, dim):
+    def parse(file, line, dim): 
+
 
         #-----------------------------------------------------------------------
         # Create the point
@@ -928,33 +991,44 @@ class InputPoints:
                 # We reach the end of the file
                 return (None, line)
 
-            ispoint=1 #Look for a letter in the line
-            lg=len(pointline)
-            for i in range(0,lg):
-                if pointline[i] in string.ascii_letters:
-                    ispoint=0
-                    break
-            if lg > 3 and ispoint > 0:
-                #Read the line
-                values = list()
-                values = pointline.strip().split(" ")
-                if len(values) > dim:
-                    # We got a point !
-                    break
-
-
-        #Stores values
-        for i, value in enumerate(values):
-            try:
-                if i < dim:
-                    point.coordinates[i] = float(value)
+            # Boolean indicating that the line contains only numerical data
+            is_fp_line=1 
+                
+            #Read the line and split into individual entries
+            values = list()
+            values = pointline.strip().split(" ")
+            
+            # Check that all entries are floating points numbers
+            for i, value in enumerate(values):
+                
+                # Define regular expression for floating point number
+                float_point_re=re.compile('[-+]?[0-9]*\.?[0-9]*([e,E][-+]?[0-9]+)?') 
+                
+                match_index=re.match(float_point_re,value)
+                if match_index is not None:
+                    if len(match_index.group()) != len(value):
+                        is_fp_line=0
+                        break
                 else:
-                    point.fields.append(float(value))
-            except ValueError:
-                raise TecplotParsingError("Invalid zone", "wrong node values !", line)
-
-        return (point, line)
-
+                    is_fp_line=0
+                    break
+                
+            # If it's a line containing only floating point numbers: 
+            # Extract coordinates and values
+            if is_fp_line > 0:
+                for i, value in enumerate(values):
+                    try:
+                        # Coordinate
+                        if i < dim:
+                            point.coordinates[i] = float(value)
+                        # Value
+                        else:
+                            point.fields.append(float(value))
+                    except ValueError:
+                        raise TecplotParsingError("Invalid zone", "wrong node values !", line)
+                    
+                return (point, line)
+            
 #
 ################################################################################
 #
@@ -969,7 +1043,7 @@ class VtpXml:
     polyDataHeader = '<PolyData>\n'
     polyDataFooter = '</PolyData>\n'
 
-    pieceHeader = '<Piece NumberOfPoints="%d" NumberOfVerts="0" NumberOfLines="0" NumberOfStrips="0" NumberOfPolys="0">\n'
+    pieceHeader = '<Piece NumberOfPoints="%d" NumberOfVerts="0" NumberOfLines="%d" NumberOfStrips="0" NumberOfPolys="0">\n'
     pieceFooter = '</Piece>'
 
     pointsHeader = '<Points>\n<DataArray type="Float32" NumberOfComponents="3" format="ascii">\n'

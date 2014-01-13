@@ -350,6 +350,113 @@ public:
                const Vector<double>& s,
                double &pressure);
 
+
+
+ /// Compute contribution to integrated porous flux over boundary
+ double contribution_to_total_porous_flux()
+ {
+  // Get pointer to bulk element
+  ELEMENT* bulk_el_pt=dynamic_cast<ELEMENT*>(bulk_element_pt());
+  
+  // Get permeability from the bulk poroelasticity element
+  const double permeability=bulk_el_pt->permeability();
+
+  //Find out how many nodes there are
+  const unsigned n_node = this->nnode();
+  
+  //Set up memeory for the shape functions
+  Shape psi(n_node);
+  DShape dpsids(n_node,1);
+  
+  //Get the value of Nintpt
+  const unsigned n_intpt = integral_pt()->nweight();
+  
+  //Set the Vector to hold local coordinates
+  Vector<double> s(1);
+  Vector<double> s_bulk(2);
+  
+  //Loop over the integration points
+  double flux_contrib=0.0;
+  for(unsigned ipt=0;ipt<n_intpt;ipt++)
+   {
+    //Assign values of s
+    s[0] = integral_pt()->knot(ipt,0);
+    
+    //Get the integral weight
+    double W = this->integral_pt()->weight(ipt);
+    
+    //Call the derivatives of the shape function at the knot point
+    this->dshape_local_at_knot(ipt,psi,dpsids);
+    
+    // Get position and tangent vector
+    Vector<double> interpolated_t1(2,0.0);
+    Vector<double> interpolated_x(2,0.0);
+    for(unsigned l=0;l<n_node;l++)
+     {
+      //Loop over directional components
+      for(unsigned i=0;i<2;i++)
+       {
+        interpolated_x[i]  += this->nodal_position(l,i)*psi(l);
+        interpolated_t1[i] += this->nodal_position(l,i)*dpsids(l,0);
+       }
+     }
+    
+    //Calculate the length of the tangent Vector
+    double tlength = interpolated_t1[0]*interpolated_t1[0] + 
+     interpolated_t1[1]*interpolated_t1[1];
+    
+    //Set the Jacobian of the line element
+    double J = sqrt(tlength)*interpolated_x[0];
+    
+    // Get the outer unit normal
+    Vector<double> interpolated_normal(2);
+    outer_unit_normal(s,interpolated_normal);
+    
+    // Get coordinate in bulk element
+    s_bulk=this->local_coordinate_in_bulk(s);
+    
+    /// Calculate the FE representation of q
+    Vector<double> q(2);
+    bulk_el_pt->interpolated_q(s_bulk,q);
+
+#ifdef PARANOID    
+    Vector<double> x_bulk(2);
+    x_bulk[0]=bulk_el_pt->interpolated_x(s_bulk,0);
+    x_bulk[1]=bulk_el_pt->interpolated_x(s_bulk,1);
+    double error=sqrt((interpolated_x[0]-x_bulk[0])*
+                      (interpolated_x[0]-x_bulk[0])+
+                      (interpolated_x[1]-x_bulk[1])*
+                      (interpolated_x[1]-x_bulk[1]));
+    double tol=1.0e-10;
+    if (error>tol)
+     {
+      std::stringstream junk;
+      junk 
+       << "Gap between bulk and face element coordinate\n"
+       << "is suspiciously large: "
+       << error << "\nBulk at: " 
+       << x_bulk[0] << " " << x_bulk[1] << "\n" 
+       << "Face at: " << interpolated_x[0] << " " << interpolated_x[1] << "\n";
+      OomphLibWarning(junk.str(),
+                      OOMPH_CURRENT_FUNCTION,
+                      OOMPH_EXCEPTION_LOCATION);
+     }
+#endif
+
+    // Get net flux through boundary
+    double flux=0.0;
+    for(unsigned i=0;i<2;i++)
+     {
+      flux+=permeability*q[i]*interpolated_normal[i];
+     }
+    
+    // Add 
+    flux_contrib += 2.0*MathematicalConstants::Pi*flux*W*J;
+   }
+  return flux_contrib;
+}
+ 
+ 
 };
 
 ///////////////////////////////////////////////////////////////////////

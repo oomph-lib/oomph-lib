@@ -6,6 +6,7 @@
 # The root directory must be passed as the first argument
 #-------------------------------------------------------------------
 
+
 # Test that we do have (only one) command line argument
 if (test $# -lt 1); then
  echo "Path to root directory must be the first argument\
@@ -32,7 +33,10 @@ oomph_dir=$1
 cd $oomph_dir
 
 #Add the private directory 
-if [ -d private ]; then
+if [ -d private -a -e private/Makefile.am ]; then
+
+ echo "---- detected private/Makefile.am ---"
+
  #Remove the old file
  if [ -e config/configure.ac_scripts/private.dir_list ]; then
   rm config/configure.ac_scripts/private.dir_list
@@ -46,7 +50,12 @@ if [ -d private ]; then
  #Only echo if the file is a directory
  for file in $filelist; do
   if [ -d $file -a $file != "external_src" ]; then
+  if [ -e $file/Makefile.am ]; then
+    echo "--- detected $file/Makefile.am --- "
     echo private/$file >> ../config/configure.ac_scripts/private.dir_list
+  else
+    echo "--- NOT detected $file/Makefile.am --- "
+  fi
   fi
  done
  cd ..
@@ -54,13 +63,15 @@ fi
 
 
 #Generate a list of private user drivers
-if [ -d private/user_drivers ]; then
+if [ -d private/user_drivers -a -e private/user_drivers/Makefile.am ]; then
+
+ echo "---- detected private/user_drivers/Makefile.am ---"
+
  #Remove the old file
  if [ -e config/configure.ac_scripts/private_user_drivers.dir_list ]; then
   rm config/configure.ac_scripts/private_user_drivers.dir_list
  fi
- #Add the directory to the list
- #echo private/user_drivers >> config/configure.ac_scripts/private_user_drivers.dir_list
+
  #Now change to the directory
  cd private/user_drivers
  #Obtain a list of all files in the directory
@@ -68,7 +79,12 @@ if [ -d private/user_drivers ]; then
  #Only echo if the file is a directory
  for file in $filelist; do
   if [ -d $file ]; then
+  if [ -e $file/Makefile.am ]; then
+    echo "--- detected private/user_drivers/$file/Makefile.am --- "
     echo private/user_drivers/$file >> ../../config/configure.ac_scripts/private_user_drivers.dir_list
+  else
+    echo "--- NOT detected private/user_drivers/$file/Makefile.am --- "
+  fi
   fi
  done
  cd ../..
@@ -76,13 +92,15 @@ fi
 
 
 #Generate a list of private user srcs
-if [ -d private/user_src ]; then
+if [ -d private/user_src  -a -e private/user_src/Makefile.am ]; then
+
+ echo "---- detected private/user_src/Makefile.am ---"
+
  #Remove the old file
  if [ -e config/configure.ac_scripts/private_user_src.dir_list ]; then
   rm config/configure.ac_scripts/private_user_src.dir_list
  fi
- #Add the directory to the list
- #echo private/user_src >> config/configure.ac_scripts/private_user_src.dir_list
+
  #Change to the directory
  cd private/user_src
  #Obtain a list of all files in the directory
@@ -90,8 +108,11 @@ if [ -d private/user_src ]; then
  #Omit the Makefiles directories
  for file in $filelist; do
   #Only echo if it's a directory
-  if [ -d $file ]; then
+  if [ -d $file -a -e $file/Makefile.am ]; then
+    echo "--- detected $file/Makefile.am --- "
     echo private/user_src/$file >> ../../config/configure.ac_scripts/private_user_src.dir_list
+  else
+    echo "--- NOT detected $file/Makefile.am --- "
   fi
  done
  cd ../..
