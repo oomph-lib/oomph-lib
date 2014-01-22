@@ -5,7 +5,7 @@ OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
 
 
 #Set the number of tests to be checked
-NUM_TESTS=1
+NUM_TESTS=2
 
 # Doc what we're using to run tests on two processors
 echo " " 
@@ -32,7 +32,7 @@ mkdir RESLT_proc1
 # the existence of the new directory
 sleep 5
 
-$MPI_RUN_COMMAND ../pseudo_solid_collapsible_tube --validate  > OUTPUT
+$MPI_RUN_COMMAND ../pseudo_solid_collapsible_tube --use_iterative_solver --validate  > OUTPUT
 echo "done"
 echo " " >> validation.log
 echo "Pseudo-elastic collapsible tube validation" >> validation.log
@@ -54,6 +54,17 @@ else
 ../../../../../bin/fpdiff.py ../validata/results.dat.gz  \
          results.dat 0.1 1.0e-12 >> validation.log
 fi
+
+# check iteration counts -- allow for 10% difference
+grep iterations RESLT_proc1/OUTPUT.1 | awk '{print $5}' > iter_counts.dat
+
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../../../bin/fpdiff.py ../validata/iter_counts.dat.gz  \
+         iter_counts.dat 10.0 1.0e-12 >> validation.log
+fi
+
 
 #---------------------------------------------------------------------
 

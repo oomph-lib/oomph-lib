@@ -1604,8 +1604,9 @@ set_pseudo_elastic_fsi_solver()
   GMRES<CRDoubleMatrix>* solver_pt = new GMRES<CRDoubleMatrix>;
   
 #endif
-  
-  solver_pt->tolerance()=1e-8;
+
+  // Set tolerance
+  solver_pt->tolerance()=1.0e-8;
   
   // preconditioner
   PseudoElasticFSIPreconditioner* prec_pt = new
@@ -1669,7 +1670,6 @@ set_pseudo_elastic_fsi_solver()
 #endif
 
   ns_prec_pt->set_f_preconditioner(f_prec_pt);
-
   
 #ifdef OOMPH_HAS_HYPRE
 
@@ -1708,9 +1708,35 @@ int main(int argc, char* argv[])
 #ifdef OOMPH_HAS_MPI                                                    
    MPI_Helpers::init(argc,argv);                                          
 #endif         
+
+ // Switch off output modifier
+ oomph_info.output_modifier_pt() = &default_output_modifier;
  
  // Store command line arguments
  CommandLineArgs::setup(argc,argv);
+
+ // Doc info
+ DocInfo doc_info;
+
+ // Use separate directory for output from each processor
+ std::ostringstream dir_name;
+ dir_name << "RESLT_proc" << MPI_Helpers::communicator_pt()->my_rank();
+ doc_info.set_directory(dir_name.str());
+
+ // Define processor-labeled output file for all on-screen stuff
+ std::ofstream output_stream;
+ char filename[1000];
+#ifdef OOMPH_HAS_MPI
+ sprintf(filename,"%s/OUTPUT.%i",doc_info.directory().c_str(),
+         MPI_Helpers::communicator_pt()->my_rank());
+#else
+ sprintf(filename,"%s/OUTPUT.%i",doc_info.directory().c_str(),0);
+#endif
+
+ output_stream.open(filename);
+ oomph_info.stream_pt() = &output_stream;
+ OomphLibWarning::set_stream_pt(&output_stream);
+ OomphLibError::set_stream_pt(&output_stream);   
 
  // Define possible command line arguments and parse the ones that
  // were actually specified
@@ -1727,6 +1753,9 @@ int main(int argc, char* argv[])
  // Parse command line
  CommandLineArgs::parse_and_assign(); 
 
+ // Doc what has actually been specified on the command line
+ CommandLineArgs::doc_specified_flags();
+
  // Create generalised Hookean constitutive equations
  Global_Parameters::Constitutive_law_wall_pt = 
   new GeneralisedHookean(&Global_Parameters::Nu_wall);
@@ -1741,13 +1770,6 @@ PseudoElasticCollapsibleChannelProblem
    PseudoElasticBulkElement<RefineableQPVDElement<3,3> > >,
   RefineableQPVDElement<3,3> >  problem; 
 
- // Doc info
- DocInfo doc_info;
-
- // Use separate directory for output from each processor
- std::ostringstream dir_name;
- dir_name << "RESLT_proc" << MPI_Helpers::communicator_pt()->my_rank();
- doc_info.set_directory(dir_name.str());
 
 #ifdef OOMPH_HAS_MPI
  // Distribute the problem
