@@ -5,9 +5,14 @@ include $(top_srcdir)/config/makefile_templates/demo_drivers
 # DESCEND INTO THIS DIRECTORY
 
 # Name of executables
-check_PROGRAMS= \
-pseudo_solid_collapsible_tube
+if OOMPH_HAS_HYPRE
+if OOMPH_HAS_TRILINOS
 
+check_PROGRAMS= \
+pseudo_solid_collapsible_tube 
+
+endif
+endif
 
 #---------------------------------------------------------------------
 

@@ -3,6 +3,19 @@
 # Get the OOPMH-LIB root directory from a makefile
 OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
 
+if [ -e ../pseudo_solid_collapsible_tube ]; then
+    echo " "
+    echo "Pseudo-elastic collapsible tube validation "
+    echo " "
+    echo " SKIPPED BECAUSE WE DON'T HAVE TRILINOS OR HYPRE"
+    echo " "
+    echo " " >> validation.log
+    echo "Pseudo-elastic collapsible tube validation" >> validation.log
+    echo "------------------------------------------" >> validation.log
+    echo " SKIPPED BECAUSE WE DON'T HAVE TRILINOS OR HYPRE" >> validation.log
+    exit
+fi
+
 
 #Set the number of tests to be checked
 NUM_TESTS=2
