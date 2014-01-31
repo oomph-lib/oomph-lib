@@ -86,6 +86,7 @@ namespace oomph
   Sparse_assemble_with_arrays_initial_allocation(400),
   Sparse_assemble_with_arrays_allocation_increment(150),
   Numerical_zero_for_sparse_assembly(0.0),
+  FD_step_used_in_get_hessian_vector_products(1.0e-8),
   Mass_matrix_reuse_is_enabled(false), Mass_matrix_has_been_computed(false),
   Discontinuous_element_formulation(false),
   Minimum_dt(1.0e-12), Maximum_dt(1.0e12),
@@ -3383,7 +3384,7 @@ else
 /// Get the fully assembled residual vector and Jacobian matrix
 /// in dense storage. The DoubleVector residuals returned will be
 /// non-distributed. If on calling this method the DoubleVector residuals is
-/// setup then it must be non-distributed and of the correct length. 
+/// setup then it must be non-distributed and of the correct length.
 /// The matrix type DenseDoubleMatrix is not distributable and therefore
 /// the residual vector is also assumed to be non distributable.
 //=============================================================================
@@ -3489,10 +3490,10 @@ else
 //=============================================================================
 /// Return the fully-assembled Jacobian and residuals for the problem,
 /// in the case where the Jacobian matrix is in a distributable
-/// row compressed storage format. 
+/// row compressed storage format.
 /// 1. If the distribution of the jacobian and residuals is setup then, they
 /// will be returned with that distribution.
-/// Note. the jacobian and residuals must have the same distribution. 
+/// Note. the jacobian and residuals must have the same distribution.
 /// 2. If the distribution of the jacobian and residuals are not setup then
 /// their distribution will computed based on:
 /// Distributed_problem_matrix_distribution.
@@ -7605,7 +7606,9 @@ for(unsigned i=0;i<n_vec;i++)
  else
   {
    //Cache the finite difference step
-   const double FD_step = 1.0e-8;
+   /// Alice: My bifurcation tracking converges better with this FD_step
+   /// as 1.0e-5. The default value remains at 1.0e-8.
+   const double FD_step = FD_step_used_in_get_hessian_vector_products;
 
    //We can now construct our multipliers
    const unsigned n_dof_local = this->Dof_distribution_pt->nrow_local();
@@ -7696,9 +7699,10 @@ for(unsigned i=0;i<n_vec;i++)
        for(unsigned n=0;n<n_var;n++)
         {
          unsigned eqn_number = assembly_handler_pt->eqn_number(elem_pt,n);
-         //Peturb by vector C[i]
+         //Perturb by vector C[i]
          *this->dof_pt(eqn_number) += C_mult[i]*C[i].global_value(eqn_number);
         }
+        actions_before_newton_convergence_check();
 
        //Allocate storage for the perturbed jacobian
        DenseMatrix<double> jac_C(n_var);
@@ -7712,6 +7716,7 @@ for(unsigned i=0;i<n_vec;i++)
          unsigned eqn_number = assembly_handler_pt->eqn_number(elem_pt,n);
          *this->dof_pt(eqn_number) = dof_bac[n];
         }
+        actions_before_newton_convergence_check();
 
        //Now work out the products
        for(unsigned n=0;n<n_var;n++)
@@ -8431,7 +8436,7 @@ void Problem::newton_solve()
 
    // Increment number of Newton iterations taken
    Nnewton_iter_taken++;
-   
+
    // Initialise timer for linear solver
    double t_solver_start = TimingHelpers::timer();
 
@@ -9781,16 +9786,16 @@ double Problem::arc_length_step_solve(double* const &parameter_pt,
      //it must be a turning point or bifurcation
      if(Sign_of_jacobian != previous_sign)
       {
-       
+
        //There has been, at least, one sign change
        First_jacobian_sign_change = true;
-       
+
        //The sign has changed this time
        SIGN_CHANGE=true;
-       
+
        //Calculate the dot product of the approximate null vector
        //of the Jacobian matrix ((badly) approximated by z)
-       //and the vectors of derivatives of the residuals wrt the 
+       //and the vectors of derivatives of the residuals wrt the
        //global parameter
        //If this is small it is a bifurcation rather than a turning point.
        //Get the derivative wrt global parameter
@@ -9800,7 +9805,7 @@ double Problem::arc_length_step_solve(double* const &parameter_pt,
        //double dot=0.0;
        //for(unsigned long n=0;n<n_dofs;++n) {dot += dparam[n]*z[n];}
        //z.dot(dparam);
-       
+
        //Write the output message
        std::ostringstream message;
        message << "-----------------------------------------------------------";
@@ -9813,10 +9818,10 @@ double Problem::arc_length_step_solve(double* const &parameter_pt,
        //message << "OTHERWISE A TURNING POINT" << std::endl;
        message << "-----------------------------------------------------------"
                << std::endl;
-       
+
        //Write the message to standard output
        oomph_info << message.str();
-       
+
        //Open the information file for appending
        std::ofstream bifurcation_info("bifurcation_info",std::ios_base::app);
        //Write the message to the file
@@ -9881,7 +9886,7 @@ double Problem::arc_length_step_solve(double* const &parameter_pt,
 
  //If we are trying to find a bifurcation and the first sign change
  //has occured, use bisection
- if((Bifurcation_detection) && 
+ if((Bifurcation_detection) &&
     (Bisect_to_find_bifurcation) && (First_jacobian_sign_change))
   {
    //If there has been a sign change we need to half the step size
@@ -11461,7 +11466,7 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
    rebuild_global_mesh();
   }
 
- //Any actions after adapt 
+ //Any actions after adapt
  //ALH: Why is the global mesh rebuilt before this function?
  actions_after_adapt();
 
