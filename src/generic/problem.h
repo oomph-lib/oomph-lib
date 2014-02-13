@@ -213,6 +213,17 @@ namespace oomph
  /// \short Use the globally convergent newton method
  bool Use_globally_convergent_newton_method;
 
+ /// \short Boolean to indicate that empty 
+ /// actions_before_read_unstructured_meshes() function has been called.
+ bool Empty_actions_before_read_unstructured_meshes_has_been_called;
+
+ /// \short Boolean to indicate that empty 
+ /// actions_after_read_unstructured_meshes() function has been called.
+ bool Empty_actions_after_read_unstructured_meshes_has_been_called;
+
+
+
+
   protected:
 
  ///\short Vector of pointers to copies of the problem used in adaptive
@@ -288,6 +299,12 @@ namespace oomph
  /// of the problem  used in adaptive bifurcation tracking
  /// (ALH: TEMPORARY HACK, WILL BE FIXED)
  void set_pinned_values_to_zero();
+
+
+ /// \short Flag to allow suppression of warning messages re reading in
+ /// unstructured meshes during restart.
+ static bool Suppress_warning_about_actions_before_read_unstructured_meshes;
+
 
   private:
 
@@ -969,10 +986,41 @@ namespace oomph
  /// \short Actions that are to be performed before a mesh adaptation.
  /// These might include removing any additional elements, such as traction
  /// boundary elements before the adaptation.
- virtual void actions_before_adapt() {}
+ virtual void actions_before_adapt(){}
 
  /// Actions that are to be performed after a mesh adaptation.
- virtual void actions_after_adapt() {}
+ virtual void actions_after_adapt(){}
+
+ /// \short Actions that are to be performed before reading in 
+ /// restart data for problems involving unstructured bulk meshes.
+ /// If the problem contains such meshes we need
+ /// to strip out any face elements that are attached to them 
+ /// because restart of unstructured meshes re-creates their elements
+ /// and nodes from scratch, leading to dangling pointers from the
+ /// face elements to the old elements and nodes. This function is
+ /// virtual and (practically) empty 
+ /// but toggles a flag to indicate that it has been called. This is used to
+ /// issue a warning, prompting the user to consider overloading it 
+ /// if the problem is found to contain unstructured bulk meshes during
+ /// restarts.
+ virtual void actions_before_read_unstructured_meshes()
+ {
+  Empty_actions_before_read_unstructured_meshes_has_been_called=true;
+ }
+ 
+ /// \short Actions that are to be performed before reading in 
+ /// restart data for problems involving unstructured bulk meshes.
+ /// Typically used to re-attach FaceElements, say, that were stripped
+ /// out in actions_before_read_unstructured_meshes(). This function is
+ /// virtual and (practically) empty 
+ /// but toggles a flag to indicate that it has been called. This is used to
+ /// issue a warning, prompting the user to consider overloading it 
+ /// if the problem is found to contain unstructured bulk meshes during
+ /// restarts.
+ virtual void actions_after_read_unstructured_meshes()
+ {
+  Empty_actions_after_read_unstructured_meshes_has_been_called=true;
+ }
 
 #ifdef OOMPH_HAS_MPI
  /// Actions to be performed before a (mesh) distribution

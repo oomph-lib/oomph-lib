@@ -28,7 +28,7 @@
 # - F77 =  F77 compiler (defaults to gcc/g77 if not specified)
 # 
 # - CXXFLAGS = flags for the C++ compiler. Specify optmisation flags
-#              for your compiler (e.g. -O6 for maximum optimisation
+#              for your compiler (e.g. -O3 for maximum optimisation
 #              with the gcc compiler suite, enable debugging (-g for
 #              the gcc compilers), etc.)
 #
@@ -58,7 +58,7 @@
 #                         of the library.
 # 
 # - CFLAGS   = flags for the C compiler. Specify optimisation flags
-#              for your compiler (e.g. -O6 for maximum optimisation
+#              for your compiler (e.g. -O3 for maximum optimisation
 #              with the gcc compiler suite, enable debugging (-g for
 #              the gcc compilers), etc.) The C-compiler is only used
 #              to compile certain external libraries, such as superlu.
@@ -66,7 +66,7 @@
 #              oomph-lib's own compilation flags.
 # 
 # - FFLAGS   = flags for the f77 compiler. Specify optimisation flags
-#              for your compiler (e.g. -O6 for maximum optimisation
+#              for your compiler (e.g. -O3 for maximum optimisation
 #              with the gcc compiler suite, enable debugging (-g for
 #              the gcc compilers), etc.) The f77-compiler is only used
 #              to compile certain external libraries, such as the
@@ -98,6 +98,7 @@
 # to have been compiled with mpi support. Linking is done
 # with the lam mpi fortran compiler.
 #
+--enable-suppress-doc
 --enable-MPI
 --enable-symbolic-links-for-headers
 --with-blas=/home/mheil/local/lib/blas/blas.a
@@ -106,9 +107,9 @@
 --with-hypre=/home/mheil/test_external_local/hypre_default_installation_mpi
 --with-mpi-self-tests="mpirun -np 2"
 --with-mpi-self-tests-variablenp="mpirun -np OOMPHNP"
-CXXFLAGS="-O6 -Wall"
-CFLAGS="-O6"
-FFLAGS="-O6"
+CXXFLAGS="-O3 -Wall"
+CFLAGS="-O3"
+FFLAGS="-O3"
 FFLAGS_NO_OPT="-O0"
 CXX=mpic++
 CC=mpicc

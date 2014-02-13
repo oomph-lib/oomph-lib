@@ -67,6 +67,8 @@ namespace oomph
   Default_set_initial_condition_called(false),
   Convergence_data_pt(0),
   Use_globally_convergent_newton_method(false),
+  Empty_actions_before_read_unstructured_meshes_has_been_called(false),
+  Empty_actions_after_read_unstructured_meshes_has_been_called(false),
   Calculate_hessian_products_analytic(false),
 #ifdef OOMPH_HAS_MPI
   Doc_imbalance_in_parallel_assembly(false),
@@ -11390,8 +11392,28 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
 
 #endif
 
+
+ // Boolean to record if any unstructured bulk meshes have
+ // been read in (and therefore completely re-generated, with new
+ // elements and nodes) from disk
+ bool have_read_unstructured_mesh=false;
+
  //Call the actions before adaptation
  actions_before_adapt();
+
+ // If there are unstructured meshes in the problem we need
+ // to strip out any face elements that are attached to them 
+ // because restart of unstructured meshes re-creates their elements
+ // and nodes from scratch, leading to dangling pointers from the
+ // face elements to the old elements and nodes. This function is
+ // virtual and (practically) empty in the Problem base class
+ // but toggles a flag to indicate that it has been called. We can then 
+ // issue a warning below, prompting the user to consider overloading it 
+ // if the problem is found to contain unstructured bulk meshes.
+ // Warning can be ignored if the bulk mesh is not associated with any
+ // face elements.
+ Empty_actions_before_read_unstructured_meshes_has_been_called=false;
+ actions_before_read_unstructured_meshes();
 
  // Update number of submeshes
  n_mesh=nsub_mesh();
@@ -11422,6 +11444,7 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
      //file and then completely regenerates the mesh using the
      //data structure
      mmesh_pt->remesh_from_triangulateio(restart_file);
+     have_read_unstructured_mesh=true;
     }
 #endif
 
@@ -11457,6 +11480,7 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
        //file and then completely regenerates the mesh using the
        //data structure
        mmesh_pt->remesh_from_triangulateio(restart_file);
+       have_read_unstructured_mesh=true;
       }
 #endif
     } // End of loop over submeshes
@@ -11467,14 +11491,58 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
   }
 
  //Any actions after adapt
- //ALH: Why is the global mesh rebuilt before this function?
  actions_after_adapt();
+
+ // Re-attach face elements (or whatever else needs to be done
+ // following the total re-generation of the unstructured meshes
+ Empty_actions_after_read_unstructured_meshes_has_been_called=false;
+ actions_after_read_unstructured_meshes();
+
+ 
+ // Issue warning:
+ if (!Suppress_warning_about_actions_before_read_unstructured_meshes)
+  {
+   if (have_read_unstructured_mesh)
+    {
+     if (Empty_actions_before_read_unstructured_meshes_has_been_called||
+         Empty_actions_after_read_unstructured_meshes_has_been_called)
+      {
+       std::ostringstream warn_message;
+       warn_message 
+        << "I've just read in some unstructured meshes and have, in\n"
+        << "the process, totally re-generated their nodes and elements.\n"
+        << "This may create dangling pointers that still point to the\n"
+        << "old nodes and elements, e.g. because FaceElements were\n"
+        << "attached to these meshes or pointers to nodes and elements\n"
+        << "were stored somewhere. FaceElements should therefore be\n"
+        << "removed before reading in these meshes, using an overloaded\n"
+        << "version of the function\n\n"
+        << "   Problem::actions_before_read_unstructured_meshes()\n\n"
+        << "and then re-attached using an overloaded version of\n\n"
+        << "   Problem::actions_after_read_unstructured_meshes().\n\n"
+        << "The required content of these functions is likely to be similar\n"
+        << "to the Problem::actions_before_adapt() and \n"
+        << "Problem::actions_after_adapt() that would be required in\n"
+        << "a spatially adaptive computation. If these functions already\n"
+        << "exist and perform the required actions, the \n"
+        << "actions_before/after_read_unstructured_meshes() functions\n"
+        << "can remain empty because the former are called automatically.\n"
+        << "In this case, this warning my be suppressed by setting the\n"
+        << "public boolean\n\n"
+        << "   Problem::Suppress_warning_about_actions_before_read_unstructured_meshes\n\n"
+        << "to true."
+        << std::endl;
+       OomphLibWarning(warn_message.str(),
+                       OOMPH_CURRENT_FUNCTION,
+                       OOMPH_EXCEPTION_LOCATION);
+      }
+    }
+  }
 
  // Setup equation numbering scheme
  oomph_info <<"\nNumber of equations in Problem::read(): "
             << assign_eqn_numbers()
             << std::endl<< std::endl;
-
 
  // Read time info
  //---------------
@@ -17985,5 +18053,14 @@ void Problem::setup_base_mesh_info_after_pruning()
  }
 
 #endif
+
+
+
+ /// Instantiation of public flag to allow suppression of warning 
+ /// messages re reading in unstructured meshes during restart.
+bool Problem::Suppress_warning_about_actions_before_read_unstructured_meshes=
+           false;
+
+
 
 }
