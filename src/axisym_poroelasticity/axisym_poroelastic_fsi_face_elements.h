@@ -309,6 +309,8 @@ public:
             << scaled_normal_poro_veloc*interpolated_normal[0] << " " 
             << scaled_normal_poro_veloc*interpolated_normal[1] << " " 
             << p_fluid << " " 
+            << du_dt[0] << " "
+            << du_dt[1] << " "
             << std::endl;
    }
  }
