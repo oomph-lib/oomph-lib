@@ -805,9 +805,8 @@ namespace oomph
           // If it's bigger than our tolerance, say so           
           if (err>1.0e-10)
            {
-            oomph_info <<  local_node_pt->x(0) << " " 
-                       <<  local_node_pt->x(1) << " \n# "
-                       << "erru (S)" << err << " " << ival << " " 
+            oomph_info <<  local_node_pt->x(0) << "\n# " 
+                       << "erru " << err << " " << ival << " " 
                        << get_node_number(local_node_pt) << " "
                        << values_in_current[ival]
                        << " " << values_in_neighbour[ival] << std::endl;

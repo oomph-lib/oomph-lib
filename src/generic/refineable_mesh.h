@@ -54,8 +54,9 @@ namespace oomph
 //=======================================================================
 class RefineableMeshBase : public virtual Mesh
 {
-
 public:
+
+ bool adapt_flag() {return Adapt_flag;}
 
  /// Constructor sets default values for refinement targets etc.
  /// and initialises pointer to spatial error estimator to NULL.

@@ -9640,146 +9640,217 @@ void Problem::reset_assembly_handler_to_default()
 /// Iterations per solve.
 //=====================================================================
 double Problem::arc_length_step_solve(double* const &parameter_pt,
-                                      const double &ds)
+                                      const double &ds,
+                                      const unsigned &max_adapt)
 {
 
  //----------------------MAKE THE PROBLEM STEADY-----------------------
  //Loop over the timesteppers and make them (temporarily) steady.
  //We can only do continuation for steady problems!
  unsigned n_time_steppers = ntime_stepper();
+ // Vector of bools to store the is_steady status of the various
+ // timesteppers when we came in here
+ std::vector<bool> was_steady(n_time_steppers);
+ 
+ //Loop over them all and make them (temporarily) static
  for(unsigned i=0;i<n_time_steppers;i++)
   {
+   was_steady[i]=time_stepper_pt(i)->is_steady();
    time_stepper_pt(i)->make_steady();
   }
 
- //----------SAVE THE INITIAL VALUES, IN CASE THE STEP FAILS-----------
- //Find total number of dofs
- //unsigned long n_dofs = ndof();
+ // Max number of solves
+ unsigned max_solve = max_adapt+1;
+ //Storage for newton steps in each adaptation
+ unsigned max_count_in_adapt_loop=0;
 
- //Find the number of local dofs
- unsigned ndof_local = Dof_distribution_pt->nrow_local();
 
- //Safety check, set up the array of Dof_derivatives, if necessary
- //The distribution is the same as the (natural) distribution of the dofs
- if(Dof_derivatives.size() != ndof_local)
-  {Dof_derivatives.resize(ndof_local,0.0);}
- //Save the current value of the parameter
- Parameter_current = *parameter_pt;
+   //----SET UP MEMORY FOR QUANTITIES THAT ARE REQUIRED OUTSIDE THE LOOP----
+   
+   //Assign memory for solutions of the equations Jz = du/dparameter
+   //This is needed here (outside the loop), so that we can save on
+   //one linear solve when calculating the derivatives wrt the arc-length
+   DoubleVector z;
 
- //Save the current values of the degrees of freedom
- //Safety check, set up the array of curren values, if necessary
- //Again the distribution reflects the (natural) distribution of the dofs
- if(Dofs_current.size() != ndof_local) {Dofs_current.resize(ndof_local);}
- for(unsigned long l=0;l<ndof_local;l++) {Dofs_current[l] = *Dof_pt[l];}
- //Set the value of ds_current
- Ds_current = ds;
-
- //----SET UP MEMORY FOR QUANTITIES THAT ARE REQUIRED OUTSIDE THE LOOP----
-
- //Assign memory for solutions of the equations Jz = du/dparameter
- //This is needed here (outside the loop), so that we can save on
- //one linear solve when calculating the derivatives wrt the arc-length
- DoubleVector z;
-
- //LinearAlgebraDistribution dist(Communicator_pt,n_dofs,false);
- //DoubleVector z(&dist,0.0);
 
  //Store sign of the Jacobian, used for bifurcation detection
  //If this is the first time that we are calling the arc-length solver,
  //this should not be used.
  int previous_sign = Sign_of_jacobian;
-
- //Counter for the number of newton steps
- unsigned count=0;
- //Flag to indicate a successful step
- bool STEP_REJECTED=false;
-
- //Flag to indicate a sign change
+ 
+//Flag to indicate a sign change
  bool SIGN_CHANGE=false;
 
- //Loop around the step in arc-length
- do
+ 
+ //Adaptation loop
+ for(unsigned isolve=0;isolve<max_solve;++isolve)
   {
-   //Check that the step has not fallen below the minimum tolerance
-   if(std::fabs(Ds_current) < Minimum_ds)
+   //Only adapt after the first solve has been done
+   if(isolve > 0)
     {
-     std::ostringstream error_message;
-     error_message << "DESIRED ARC-LENGTH STEP " << Ds_current
-                   << " HAS FALLEN BELOW MINIMUM TOLERANCE, "
-                   << Minimum_ds << std::endl;
-
-     throw OomphLibError(error_message.str(),
-                         OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
-    }
-
-   //Assume that we shall accept the step
-   STEP_REJECTED=false;
-   //Set initial value of the parameter
-   *parameter_pt += Parameter_derivative*Ds_current;
-   //Loop over the (local) variables and set their initial values
-   for(unsigned long l=0;l<ndof_local;l++)
-    {
-     *Dof_pt[l] += Dof_derivatives[l]*Ds_current;
-    }
-
-   //Actually do the newton solve stage for the continuation problem
-   try
-    {
-     count = newton_solve_continuation(parameter_pt,z);
-    }
-   //Catch any exceptions thrown in the Newton solver
-   catch(NewtonSolverError &error)
-    {
-     //Check whether it's the linear solver
-     if(error.linear_solver_error)
+     unsigned n_refined;
+     unsigned n_unrefined;
+     
+     // Adapt problem
+     adapt(n_refined,n_unrefined);
+     
+#ifdef OOMPH_HAS_MPI
+     // Adaptation only converges if ALL the processes have no
+     // refinement or unrefinement to perform
+     unsigned total_refined=0;
+     unsigned total_unrefined=0;
+     if (Problem_has_been_distributed)
       {
-       std::ostringstream error_stream;
-       error_stream << std::endl
-                    << "USER-DEFINED ERROR IN NEWTON SOLVER " << std::endl;
-       oomph_info << "ERROR IN THE LINEAR SOLVER" << std::endl;
-       throw OomphLibError(error_stream.str(),
+       MPI_Allreduce(&n_refined,&total_refined,1,MPI_UNSIGNED,MPI_SUM,
+                     this->communicator_pt()->mpi_comm());
+       n_refined=total_refined;
+       MPI_Allreduce(&n_unrefined,&total_unrefined,1,MPI_UNSIGNED,MPI_SUM,
+                     this->communicator_pt()->mpi_comm());
+       n_unrefined=total_unrefined;
+      }
+#endif
+     
+     oomph_info << "---> " << n_refined << " elements were refined, and "
+                << n_unrefined
+                << " were unrefined"
+#ifdef OOMPH_HAS_MPI
+                << ", in total (over all processors).\n";
+#else
+     << ".\n";
+#endif
+     
+     
+     // Check convergence of adaptation cycle
+     if ((n_refined==0)&&(n_unrefined==0))
+      {
+       oomph_info << "\n \n Solution is fully converged in "
+                  << "Problem::newton_solver(). \n \n ";
+       break;
+      }
+    }
+
+   //----------SAVE THE INITIAL VALUES, IN CASE THE STEP FAILS-----------
+   //Find total number of dofs
+   //unsigned long n_dofs = ndof();
+   
+   //Find the number of local dofs
+   unsigned ndof_local = Dof_distribution_pt->nrow_local();
+   
+   //Only need to do this in the first loop
+   if(isolve==0)
+    {
+     //Safety check, set up the array of Dof_derivatives, if necessary
+     //The distribution is the same as the (natural) distribution of the dofs
+     if(Dof_derivatives.size() != ndof_local)
+      {Dof_derivatives.resize(ndof_local,0.0);}
+     //Save the current value of the parameter
+     Parameter_current = *parameter_pt;
+     
+     //Save the current values of the degrees of freedom
+     //Safety check, set up the array of curren values, if necessary
+     //Again the distribution reflects the (natural) distribution of the dofs
+     if(Dofs_current.size() != ndof_local) {Dofs_current.resize(ndof_local);}
+     for(unsigned long l=0;l<ndof_local;l++) {Dofs_current[l] = *Dof_pt[l];}
+     //Set the value of ds_current
+     Ds_current = ds;
+    }
+   
+   //LinearAlgebraDistribution dist(Communicator_pt,n_dofs,false);
+   //DoubleVector z(&dist,0.0);
+   
+   //Counter for the number of newton steps
+   unsigned count=0;
+
+   //Flag to indicate a successful step
+   bool STEP_REJECTED=false;
+   
+   //Loop around the step in arc-length
+   do
+    {
+     //Check that the step has not fallen below the minimum tolerance
+     if(std::fabs(Ds_current) < Minimum_ds)
+      {
+       std::ostringstream error_message;
+       error_message << "DESIRED ARC-LENGTH STEP " << Ds_current
+                     << " HAS FALLEN BELOW MINIMUM TOLERANCE, "
+                     << Minimum_ds << std::endl;
+       
+       throw OomphLibError(error_message.str(),
                            OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
-     //Otherwise mark the step as having failed
-     else
+     
+     //Assume that we shall accept the step
+     STEP_REJECTED=false;
+     //Set initial value of the parameter
+     *parameter_pt = Parameter_current + Parameter_derivative*Ds_current;
+     //Loop over the (local) variables and set their initial values
+     for(unsigned long l=0;l<ndof_local;l++)
       {
-       oomph_info << "STEP REJECTED --- TRYING AGAIN" << std::endl;
-       STEP_REJECTED=true;
-       //Let's take a smaller step
-       Ds_current *= (2.0/3.0);
-       //Reset the dofs and parameter
-       *parameter_pt = Parameter_current;
-       for(unsigned long l=0;l<ndof_local;l++) {*Dof_pt[l] = Dofs_current[l];}
+       *Dof_pt[l] = Dofs_current[l] + Dof_derivatives[l]*Ds_current;
       }
-    }
-  }
- while(STEP_REJECTED); //continue until a step is accepted
+     
+     //Actually do the newton solve stage for the continuation problem
+     try
+      {
+       count = newton_solve_continuation(parameter_pt,z);
+      }
+     //Catch any exceptions thrown in the Newton solver
+     catch(NewtonSolverError &error)
+      {
+       //Check whether it's the linear solver
+       if(error.linear_solver_error)
+        {
+         std::ostringstream error_stream;
+         error_stream << std::endl
+                      << "USER-DEFINED ERROR IN NEWTON SOLVER " << std::endl;
+         oomph_info << "ERROR IN THE LINEAR SOLVER" << std::endl;
+         throw OomphLibError(error_stream.str(),
+                             OOMPH_CURRENT_FUNCTION,
+                             OOMPH_EXCEPTION_LOCATION);
+        }
+       //Otherwise mark the step as having failed
+       else
+        {
+         oomph_info << "STEP REJECTED --- TRYING AGAIN" << std::endl;
+         STEP_REJECTED=true;
+         //Let's take a smaller step
+         Ds_current *= (2.0/3.0);
+         //Reset the dofs and parameter
+         //*parameter_pt = Parameter_current;
+         //for(unsigned long l=0;l<ndof_local;l++) {*Dof_pt[l] = Dofs_current[l];}
+        }
+      }
+      }
+   while(STEP_REJECTED); //continue until a step is accepted
+
+   //Set the maximum count
+   if(count > max_count_in_adapt_loop) {max_count_in_adapt_loop = count;}
+  } /// end of adaptation loop
 
  //Only recalculate the derivatives if there has been a Newton solve
  //If not, the previous values should be close enough
- if(count>0)
+ if(max_count_in_adapt_loop>0)
   {
-
+   
    //--------------------CHECK FOR POTENTIAL BIFURCATIONS-------------
    if(Bifurcation_detection)
     {
      //If the sign of the jacobian is zero issue a warning
      if(Sign_of_jacobian == 0)
       {
-       std::string error_message =
-        "The sign of the jacobian is zero after a linear solve\n";
-       error_message +=
-        "Either the matrix is singular (unlikely),\n";
-       error_message +=
-        "or the linear solver cannot compute the determinant of the matrix;\n";
-       error_message += "e.g. an iterative linear solver.\n";
-       error_message +=
-        "If the latter, bifurcation detection must be via an eigensolver\n";
-       OomphLibWarning(error_message,
-                       "Problem::arc_length_step_solve",
-                       OOMPH_EXCEPTION_LOCATION);
+         std::string error_message =
+          "The sign of the jacobian is zero after a linear solve\n";
+         error_message +=
+          "Either the matrix is singular (unlikely),\n";
+         error_message +=
+          "or the linear solver cannot compute the determinant of the matrix;\n";
+         error_message += "e.g. an iterative linear solver.\n";
+         error_message +=
+          "If the latter, bifurcation detection must be via an eigensolver\n";
+         OomphLibWarning(error_message,
+                         "Problem::arc_length_step_solve",
+                         OOMPH_EXCEPTION_LOCATION);
       }
      //If this is the first step, we cannot rely on the previous value
      //of the jacobian so set the previous sign to the present sign
@@ -9788,13 +9859,13 @@ double Problem::arc_length_step_solve(double* const &parameter_pt,
      //it must be a turning point or bifurcation
      if(Sign_of_jacobian != previous_sign)
       {
-
+       
        //There has been, at least, one sign change
        First_jacobian_sign_change = true;
-
+       
        //The sign has changed this time
        SIGN_CHANGE=true;
-
+       
        //Calculate the dot product of the approximate null vector
        //of the Jacobian matrix ((badly) approximated by z)
        //and the vectors of derivatives of the residuals wrt the
@@ -9807,7 +9878,7 @@ double Problem::arc_length_step_solve(double* const &parameter_pt,
        //double dot=0.0;
        //for(unsigned long n=0;n<n_dofs;++n) {dot += dparam[n]*z[n];}
        //z.dot(dparam);
-
+       
        //Write the output message
        std::ostringstream message;
        message << "-----------------------------------------------------------";
@@ -9820,10 +9891,10 @@ double Problem::arc_length_step_solve(double* const &parameter_pt,
        //message << "OTHERWISE A TURNING POINT" << std::endl;
        message << "-----------------------------------------------------------"
                << std::endl;
-
+       
        //Write the message to standard output
        oomph_info << message.str();
-
+       
        //Open the information file for appending
        std::ofstream bifurcation_info("bifurcation_info",std::ios_base::app);
        //Write the message to the file
@@ -9831,7 +9902,7 @@ double Problem::arc_length_step_solve(double* const &parameter_pt,
        bifurcation_info.close();
       }
     }
-
+   
    //Calculate the derivatives required for the next stage of continuation
    //In this we pass the last value of z (i.e. approximation)
    if(!Use_finite_differences_for_continuation_derivatives)
@@ -9843,7 +9914,7 @@ double Problem::arc_length_step_solve(double* const &parameter_pt,
     {
      calculate_continuation_derivatives_fd(parameter_pt);
     }
-
+   
    //If it's the first step then the value of the next step should
    //be the change in parameter divided by the parameter derivative
    //to obtain approximately the same parameter change
@@ -9851,7 +9922,7 @@ double Problem::arc_length_step_solve(double* const &parameter_pt,
     {
      Ds_current = (*parameter_pt - Parameter_current)/Parameter_derivative;
     }
-
+   
    //We have taken our first step
    Arc_length_step_taken = true;
   }
@@ -9863,11 +9934,11 @@ double Problem::arc_length_step_solve(double* const &parameter_pt,
    //system. We must do this to ensure that the derivatives are in sync
    //It could lead to problems near turning points when we should really be
    //solving an eigenproblem, but seems OK so far!
-
+   
    //Save the current sign of the jacobian
    int temp_sign=Sign_of_jacobian;
-
-
+   
+   
    //Calculate the continuation derivatives, which includes a solve
    //of the linear system if not using finite differences
    if(!Use_finite_differences_for_continuation_derivatives)
@@ -9879,13 +9950,24 @@ double Problem::arc_length_step_solve(double* const &parameter_pt,
     {
      calculate_continuation_derivatives_fd(parameter_pt);
     }
-
+   
    //Reset the sign of the jacobian, just in case the sign has changed when
    //solving the continuation derivatives. The sign change will be picked
    //up on the next continuation step.
    Sign_of_jacobian = temp_sign;
   }
-
+ 
+ // Reset the is_steady status of all timesteppers that
+ // weren't already steady when we came in here and reset their
+ // weights
+ for(unsigned i=0;i<n_time_steppers;i++)
+  {
+   if (!was_steady[i])
+    {
+     time_stepper_pt(i)->undo_make_steady();
+    }
+  }
+ 
  //If we are trying to find a bifurcation and the first sign change
  //has occured, use bisection
  if((Bifurcation_detection) &&
@@ -9905,11 +9987,13 @@ double Problem::arc_length_step_solve(double* const &parameter_pt,
    //Return the desired value of the step
    return Ds_current;
   }
-
+ 
  //If fewer than the desired number of Newton Iterations, increase the step
- if(count < Desired_newton_iterations_ds) {return Ds_current*1.5;}
+ if(max_count_in_adapt_loop < Desired_newton_iterations_ds) 
+  {return Ds_current*1.5;}
  //If more than the desired number of Newton Iterations, reduce the step
- if(count > Desired_newton_iterations_ds) {return Ds_current*(2.0/3.0);}
+ if(max_count_in_adapt_loop > Desired_newton_iterations_ds) 
+  {return Ds_current*(2.0/3.0);}
  //Otherwise return the step just taken
  return Ds_current;
 }
@@ -12253,10 +12337,300 @@ void Problem::adapt(unsigned &n_refined, unsigned &n_unrefined)
  //Get the bifurcation type
  int bifurcation_type = this->Assembly_handler_pt->bifurcation_type();
 
+ bool continuation_problem = false;
+
+ //If we have continuation data then we need to project that across to the 
+ //new mesh
+ if(Dof_derivatives.size() != 0) {continuation_problem = true;}
+
  //If we are tracking a bifurcation then call the bifurcation adapt function
  if(bifurcation_type!=0)
   {
    this->bifurcation_adapt_helper(n_refined,n_unrefined,bifurcation_type);
+   //Return immediately
+   return;
+  }
+
+ if(continuation_problem)
+  {
+   //Create a copy of the problem
+    Copy_of_problem_pt.resize(2);
+    //If we don't already have a copy
+    for(unsigned c=0;c<2;c++)
+     {
+      if(Copy_of_problem_pt[c]==0)
+       {
+        //Create the copy
+        Copy_of_problem_pt[c] = this->make_copy();
+        
+        //Refine the copy to the same level as the current problem
+        //Must call actions before adapt
+        Copy_of_problem_pt[c]->actions_before_adapt();
+        
+        //Find number of submeshes
+        const unsigned N_mesh = Copy_of_problem_pt[c]->nsub_mesh();
+
+        //If there is only one mesh
+        if(N_mesh==0)
+         {
+          //Can we refine the mesh
+          if(TreeBasedRefineableMeshBase* mmesh_pt =
+             dynamic_cast<TreeBasedRefineableMeshBase*>(
+              Copy_of_problem_pt[c]->mesh_pt(0)))
+           {
+            //Is the adapt flag set
+            if(mmesh_pt->is_adaptation_enabled())
+             {
+              //Now get the original problem's mesh if it's refineable
+              if(TreeBasedRefineableMeshBase* original_mesh_pt
+                 = dynamic_cast<TreeBasedRefineableMeshBase*>(this->mesh_pt(0)))
+               {
+                if(dynamic_cast<SolidMesh*>(original_mesh_pt)!=0)
+                 {
+                  oomph_info
+                   << "Info/Warning: Adaptive Continuation is broken in "
+                   << "SolidElement" << std::endl;
+                 }
+                  mmesh_pt->
+                   refine_base_mesh_as_in_reference_mesh(original_mesh_pt);
+                 }
+              else
+               {
+                oomph_info
+                 <<
+                 "Info/Warning: Mesh in orginal problem is not refineable."
+                 << std::endl;
+               }
+             }
+            else
+             {
+              oomph_info << "Info/Warning: Mesh adaptation is disabled in copy."
+                         << std::endl;
+             }
+           }
+          else if(TriangleMeshBase* tmesh_pt = 
+                  dynamic_cast<TriangleMeshBase*>(
+                   Copy_of_problem_pt[c]->mesh_pt(0)))
+           {
+            if(TriangleMeshBase* original_mesh_pt = 
+               dynamic_cast<TriangleMeshBase*>(
+                this->mesh_pt(0)))
+             {
+              if(dynamic_cast<SolidMesh*>(original_mesh_pt)!=0)
+               {
+                oomph_info
+                 << "Info/Warning: Adaptive Continuation is broken in "
+                 << "SolidElement" << std::endl;
+               }
+
+              //Remesh using the triangulateIO of the base mesh
+              //Done via a file, so a bit hacky but this will be 
+              //superseded very soon
+              std::ofstream tri_dump("triangle_mesh.dmp");
+              original_mesh_pt->dump_triangulateio(tri_dump);
+              tri_dump.close();
+              std::ifstream tri_read("triangle_mesh.dmp");
+              tmesh_pt->remesh_from_triangulateio(tri_read);
+              tri_read.close();
+
+
+              //Set the nodes to be at the same positions
+              //as the original just in case the
+              //triangulatio is out of sync with the real data
+              const unsigned n_node = original_mesh_pt->nnode();
+              for(unsigned n=0;n<n_node;++n)
+               {
+                Node* const nod_pt = original_mesh_pt->node_pt(n);
+                Node* const new_node_pt = tmesh_pt->node_pt(n);
+                unsigned n_dim = nod_pt->ndim();
+                for(unsigned i=0;i<n_dim;++i)
+                 {
+                  new_node_pt->x(i) = nod_pt->x(i);
+                 }
+               }
+             }
+            else
+             {
+              oomph_info
+               << "Info/warning: Original Mesh is not TriangleBased\n"
+               << "... but the copy is!" << std::endl;
+             }
+           }
+          else
+           {
+            oomph_info << "Info/Warning: Mesh cannot be adapted in copy."
+                       << std::endl;
+           }
+         } //End of single mesh case
+        //Otherwise loop over the submeshes
+        else
+         {
+          for(unsigned m=0;m<N_mesh;m++)
+           {
+            //Can we refine the submesh
+            if(TreeBasedRefineableMeshBase* mmesh_pt =
+               dynamic_cast<TreeBasedRefineableMeshBase*>(
+                Copy_of_problem_pt[c]->mesh_pt(m)))
+             {
+              //Is the adapt flag set
+              if(mmesh_pt->is_adaptation_enabled())
+               {
+                //Now get the original problem's mesh
+                if(TreeBasedRefineableMeshBase* original_mesh_pt
+                   = dynamic_cast<TreeBasedRefineableMeshBase*>(this->mesh_pt(m)))
+                 {
+                  if(dynamic_cast<SolidMesh*>(original_mesh_pt)!=0)
+                   {
+                    oomph_info
+                     << "Info/Warning: Adaptive Continuation is broken in "
+                     << "SolidElement" << std::endl;
+                   }
+                  
+                  mmesh_pt->
+                   refine_base_mesh_as_in_reference_mesh(original_mesh_pt);
+                 }
+                else
+                 {
+                  oomph_info
+                   <<
+                   "Info/Warning: Mesh in orginal problem is not refineable."
+                   << std::endl;
+                 }
+               }
+              else
+               {
+                oomph_info <<
+                 "Info/Warning: Mesh adaptation is disabled in copy."
+                           << std::endl;
+               }
+             }
+            else if(TriangleMeshBase* tmesh_pt = 
+                  dynamic_cast<TriangleMeshBase*>(
+                   Copy_of_problem_pt[c]->mesh_pt(m)))
+           {
+            if(TriangleMeshBase* original_mesh_pt = 
+               dynamic_cast<TriangleMeshBase*>(
+                this->mesh_pt(m)))
+             {
+              if(dynamic_cast<SolidMesh*>(original_mesh_pt)!=0)
+               {
+                oomph_info
+                 << "Info/Warning: Adaptive Continuation is broken in "
+                 << "SolidElement" << std::endl;
+               }
+
+              //Remesh using the triangulateIO of the base mesh
+              //Done via a file, so a bit hacky but this will be 
+              //superseded very soon
+              std::ofstream tri_dump("triangle_mesh.dmp");
+              original_mesh_pt->dump_triangulateio(tri_dump);
+              tri_dump.close();
+              std::ifstream tri_read("triangle_mesh.dmp");
+              tmesh_pt->remesh_from_triangulateio(tri_read);
+              tri_read.close();
+
+              //Set the nodes to be at the same positions
+              //as the original just in case the
+              //triangulatio is out of sync with the real data
+              const unsigned n_node = original_mesh_pt->nnode();
+              for(unsigned n=0;n<n_node;++n)
+               {
+                Node* const nod_pt = original_mesh_pt->node_pt(n);
+                Node* const new_node_pt = tmesh_pt->node_pt(n);
+                unsigned n_dim = nod_pt->ndim();
+                for(unsigned i=0;i<n_dim;++i)
+                 {
+                  new_node_pt->x(i) = nod_pt->x(i);
+                 }
+               }
+             }
+            else
+             {
+              oomph_info
+               << "Info/warning: Original Mesh is not TriangleBased\n"
+               << "... but the copy is!" << std::endl;
+             }
+           }
+            else
+             {
+              oomph_info << "Info/Warning: Mesh cannot be adapted in copy."
+                         << std::endl;
+             }
+           }
+
+
+          //Must call actions after adapt
+          Copy_of_problem_pt[c]->actions_after_adapt();
+
+          //rebuild the global mesh in the copy
+          Copy_of_problem_pt[c]->rebuild_global_mesh();
+          
+         } //End of multiple mesh case
+        
+        //Must call actions after adapt
+        Copy_of_problem_pt[c]->actions_after_adapt();
+      
+      //Assign the equation numbers to the copy (quietly)
+      (void)Copy_of_problem_pt[c]->assign_eqn_numbers();
+     }
+
+   //Check that the dofs match for each copy
+#ifdef PARANOID
+   //If the problems don't match then complain
+   if(Copy_of_problem_pt[c]->ndof() != this->ndof())
+    {
+     std::ostringstream error_stream;
+     error_stream
+      <<
+      "Number of unknowns in the problem copy " 
+      << c << " "
+      << "not equal to number in the original:\n"
+      << this->ndof() << " (original) " << Copy_of_problem_pt[c]->ndof()
+      << " (copy)\n";
+     
+     throw OomphLibError(error_stream.str(),
+                         OOMPH_CURRENT_FUNCTION,
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+     }
+
+   //Need to set the Dof derivatives to the copied problem
+   //Assign the eigenfunction(s) to the copied problems
+   unsigned ndof_local = Dof_distribution_pt->nrow_local();
+   for(unsigned i=0;i<ndof_local;i++)
+    {
+     Copy_of_problem_pt[0]->dof(i) = this->Dof_derivatives[i];
+     Copy_of_problem_pt[1]->dof(i) = this->Dofs_current[i];
+    }
+   //Set all pinned values to zero
+   Copy_of_problem_pt[0]->set_pinned_values_to_zero();
+   //Don't need to for the current dofs that are actuall the dofs
+
+   //Now adapt
+   Vector<Vector<double> > base_error;
+   this->get_all_error_estimates(base_error);
+   this->adapt_based_on_error_estimates(n_refined,n_unrefined,base_error);
+   Copy_of_problem_pt[0]->
+    adapt_based_on_error_estimates(n_refined,n_unrefined,base_error);
+   Copy_of_problem_pt[1]->
+    adapt_based_on_error_estimates(n_refined,n_unrefined,base_error);
+   
+   //Now sort out the Dof pointer
+   ndof_local = Dof_distribution_pt->nrow_local();
+   if(Dof_derivatives.size() != ndof_local);
+   {
+    Dof_derivatives.resize(ndof_local,0.0);
+   }
+   if(Dofs_current.size() != ndof_local)
+    {
+     Dofs_current.resize(ndof_local,0.0);
+    }
+   for(unsigned i=0;i<ndof_local;i++)
+    {
+     Dof_derivatives[i] = Copy_of_problem_pt[0]->dof(i);
+     Dofs_current[i] = Copy_of_problem_pt[1]->dof(i);
+    }
    //Return immediately
    return;
   }
@@ -12354,7 +12728,7 @@ void Problem::adapt(unsigned &n_refined, unsigned &n_unrefined)
 
        // Adapt mesh
        mmesh_pt->adapt(elemental_error);
-
+       
        // Add to counters
        n_refined+=mmesh_pt->nrefined();
        n_unrefined+=mmesh_pt->nunrefined();

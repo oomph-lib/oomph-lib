@@ -2034,7 +2034,8 @@ namespace oomph
  /// \short Solve a steady problem using arc-length continuation, where
  /// parameter is the parameter of the problem and ds is the arc_length
  double arc_length_step_solve(double* const &parameter_pt,
-                              const double &ds);
+                              const double &ds,
+                              const unsigned &max_adapt=0);
 
  /// \short Reset the "internal" arc-length continuation parameters, so as
  /// to allow continuation in another parameter. N.B. The parameters that

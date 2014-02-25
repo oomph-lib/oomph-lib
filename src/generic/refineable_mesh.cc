@@ -2119,7 +2119,17 @@ unsigned TreeBasedRefineableMeshBase::unrefine_uniformly()
  unsigned long Nelement=this->nelement();
  Vector<double> elemental_error(Nelement);
 
- // Set it error to 1/100 of the min. error to force unrefinement
+ //In order to force unrefinement, set the min permitted error to 
+ //be the default and then set the actual error to be below this.
+ //This avoids problems when the actual min error is zero (or small)
+ //For sanity's sake, also set the max permitted error back to the default
+ //so that we have a max error bigger than a min error
+ const double current_min_error = this->min_permitted_error();
+ const double current_max_error = this->max_permitted_error();
+
+ this->min_permitted_error() = 1.0e-5;
+ this->max_permitted_error() = 1.0e-3;
+
  double error=min_permitted_error()/100.0;
  for (unsigned long e=0;e<Nelement;e++)
   {
@@ -2137,6 +2147,10 @@ unsigned TreeBasedRefineableMeshBase::unrefine_uniformly()
  // Reset the minimum number of elements that need to be unrefined 
  // to make it worthwhile
  max_keep_unrefined()=backup;
+
+ //Now restore the error tolerances
+ this->min_permitted_error() = current_min_error;
+ this->max_permitted_error() = current_max_error;
 
  // Has the unrefinement actually changed anything?
  if (Nelement==this->nelement())

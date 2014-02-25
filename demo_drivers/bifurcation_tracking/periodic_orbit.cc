@@ -390,7 +390,7 @@ void ABCProblem<ELEMENT,TIMESTEPPER>::solve()
                         eigenvalues[0].imag(),
                         eigenvectors[0],eigenvectors[1]);
 
- newton_solve();
+ this->steady_newton_solve();
 
  std::cout << "Hopf bifurcation found at " 
            << Global_Physical_Variables::P[0]  << " "
