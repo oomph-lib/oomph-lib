@@ -1740,11 +1740,11 @@ void Mesh::shift_time_values()
 {
  // Loop over the elements which shift their internal data
  // via their own timesteppers
- unsigned long Nelement=nelement();
+ const unsigned long Nelement=nelement();
  for (unsigned long e=0;e<Nelement;e++)
   {
    //Find the number of internal dofs
-   unsigned Ninternal = element_pt(e)->ninternal_data();
+   const unsigned Ninternal = element_pt(e)->ninternal_data();
    //Loop over internal dofs and shift the time values
    //using the internals data's timestepper
    for(unsigned j=0;j<Ninternal;j++)
@@ -1755,7 +1755,7 @@ void Mesh::shift_time_values()
   }
 
  //Loop over the nodes
- unsigned long n_node=nnode();
+ const unsigned long n_node=nnode();
  for (unsigned long n=0;n<n_node;n++)
   {
    // Shift the Data associated with the nodes with the Node's own
@@ -1779,11 +1779,11 @@ void Mesh::calculate_predictions()
 {
  // Loop over the elements which shift their internal data
  // via their own timesteppers
- unsigned long Nelement=nelement();
+ const unsigned long Nelement=nelement();
  for (unsigned long e=0;e<Nelement;e++)
   {
    //Find the number of internal dofs
-   unsigned Ninternal = element_pt(e)->ninternal_data();
+   const unsigned Ninternal = element_pt(e)->ninternal_data();
    //Loop over internal dofs and calculate predicted positions
    //using the internals data's timestepper
    for(unsigned j=0;j<Ninternal;j++)
@@ -1794,7 +1794,7 @@ void Mesh::calculate_predictions()
   }
 
  //Loop over the nodes
- unsigned long n_node=nnode();
+ const unsigned long n_node=nnode();
  for (unsigned long n=0;n<n_node;n++)
   {
    // Calculate the predicted values at the nodes
@@ -1802,6 +1802,43 @@ void Mesh::calculate_predictions()
    //Calculate the predicted positions
    Node_pt[n]->position_time_stepper_pt()->
     calculate_predicted_positions(Node_pt[n]);
+  }
+}
+
+//===============================================================
+/// Set the time stepper associated with all the nodal data
+/// in the problem
+//==============================================================
+void Mesh::set_nodal_time_stepper(TimeStepper* const &time_stepper_pt)
+{
+ //Loop over the nodes
+ const unsigned long n_node=this->nnode();
+ for(unsigned long n=0;n<n_node;n++)
+  {
+   //Set the timestepper associated with each node
+   this->Node_pt[n]->set_time_stepper(time_stepper_pt);
+  }
+}
+
+//===============================================================
+/// Set the time stepper associated with all internal data stored
+/// in the elements in the mesh
+//===============================================================
+void Mesh::set_elemental_internal_time_stepper(
+ TimeStepper* const &time_stepper_pt)
+{
+ // Loop over the elements 
+ const unsigned long n_element=this->nelement();
+ for (unsigned long e=0;e<n_element;e++)
+  {
+   //Find the number of internal dofs
+   const unsigned n_internal = this->element_pt(e)->ninternal_data();
+   //Loop over internal dofs and set the timestepper
+   for(unsigned j=0;j<n_internal;j++)
+    {
+     this->element_pt(e)->internal_data_pt(j)
+      ->set_time_stepper(time_stepper_pt);
+    }
   }
 }
 

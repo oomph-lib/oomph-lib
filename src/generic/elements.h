@@ -798,6 +798,12 @@ public:
  /// Return the number of equations/dofs in the element.
  unsigned ndof() const {return Ndof;}
 
+ /// \short Set the timestepper associated with the i-th internal data
+ /// object
+ void set_internal_data_time_stepper(const unsigned &i,
+                                     TimeStepper* const &time_stepper_pt)
+ {this->internal_data_pt(i)->set_time_stepper(time_stepper_pt);}
+
  /// \short Assign the global equation numbers to the internal Data. 
  /// The arguments are the current highest global equation number 
  /// (which will be incremented) and a Vector of pointers to the 

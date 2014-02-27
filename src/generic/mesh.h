@@ -159,16 +159,16 @@ class Mesh
  /// \short Assign the global equation numbers in the Data stored at the nodes
  /// and also internal element Data. Also, build (via push_back) the
  /// Vector of pointers to the dofs (variables).
- virtual unsigned long
+ unsigned long
   assign_global_eqn_numbers(Vector<double *> &Dof_pt);
 
  /// Assign the local equation numbers in all elements
- virtual void assign_local_eqn_numbers();
+ void assign_local_eqn_numbers();
 
  /// Vector of pointers to nodes
  Vector<Node*> Node_pt;
 
-/// Vector of pointers to generalised elements
+ /// Vector of pointers to generalised elements
  Vector<GeneralisedElement*> Element_pt;
 
  /// \short Vector of boolean data that indicates whether the boundary
@@ -516,7 +516,6 @@ public:
  void add_element_pt(GeneralisedElement* const &element_pt)
   {Element_pt.push_back(element_pt);}
 
-
  /// \short Update nodal positions in response to changes in the domain shape.
  /// Uses the FiniteElement::get_x(...) function for FiniteElements
  /// and doesn't do anything for other element types. 
@@ -830,9 +829,26 @@ public:
  /// Data
  void shift_time_values();
 
+ 
  /// \short Calculate predictions for all Data and positions associated
  /// with the mesh, usually used in adaptive time-stepping.
  void calculate_predictions();
+
+ /// \short Set the timestepper associated with all data stored in the
+ /// mesh. The function is virtual so that it can be overloaded in meshes
+ /// that add additional data of their own, e.g. SpineMeshes.
+ void set_time_stepper(TimeStepper* const &time_stepper_pt)
+ {
+  this->set_nodal_time_stepper(time_stepper_pt);
+  this->set_elemental_internal_time_stepper(time_stepper_pt);
+ }
+
+ /// \short Set the timestepper associated with the nodal data in the mesh
+ void set_nodal_time_stepper(TimeStepper* const &time_stepper_pt);
+
+ /// \short Set the timestepper associated with the internal data stored
+ /// within elements in the meah
+ void set_elemental_internal_time_stepper(TimeStepper* const &time_stepper_pt);
 
  /// \short Compute norm of solution by summing contributions of
  /// compute_norm(...) for all constituent elements in the mesh.

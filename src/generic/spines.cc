@@ -129,11 +129,11 @@ void SpineMesh::node_update(const bool& update_all_solid_nodes)
 //====================================================================
 /// Assign (global) equation numbers to spines, nodes and elements
 //====================================================================
-unsigned long SpineMesh::assign_global_eqn_numbers
+unsigned long SpineMesh::assign_global_spine_eqn_numbers
 (Vector<double *> &Dof_pt)
 {
- //First call the general mesh assign_eqn_numbers
- unsigned long equation_number = Mesh::assign_global_eqn_numbers(Dof_pt);
+ //Find the current number of dofs
+ unsigned long equation_number = Dof_pt.size();
 
  // Loop over spines and set global equation numbers for the spine heights
  // (they are the only Data items whose global eqn numbers are assigned
@@ -144,8 +144,24 @@ unsigned long SpineMesh::assign_global_eqn_numbers
    Spine_pt[i]->spine_height_pt()->assign_eqn_numbers(equation_number,Dof_pt);
   }
 
- //Return total number of equations
+ //Return the total number of equations
  return(equation_number);
+}
+
+
+//====================================================================
+/// Assign time stepper to spines, nodes and elements
+//====================================================================
+void SpineMesh::set_spine_time_stepper(TimeStepper* const &time_stepper_pt)
+{
+ // Loop over spines and set the time stepper for the spine heights
+ // (they are the only Data that are additional to the standard nodal and
+ // elemental)
+ const unsigned long n_spine = this->nspine();
+ for(unsigned long i=0;i<n_spine;i++)
+  {
+   this->Spine_pt[i]->spine_height_pt()->set_time_stepper(time_stepper_pt);
+  }
 }
 
 //=======================================================================

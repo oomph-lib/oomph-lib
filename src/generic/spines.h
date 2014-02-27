@@ -581,7 +581,7 @@ public:
 
  /// Add a spine to the mesh
  void add_spine_pt(Spine* const &spine_pt)
-  {Spine_pt.push_back(spine_pt);}
+ {Spine_pt.push_back(spine_pt);}
  
  /// Return a pointer to the n-th global SpineNode 
  //Can safely cast the nodes to SpineNodes
@@ -644,8 +644,12 @@ public:
  // {dynamic_cast<ELEMENT*>(Element_pt[e])->add_spine(spine);}
  
  /// Assign equation numbers for spines
- unsigned long assign_global_eqn_numbers(Vector<double *> &Dof_pt);
- 
+ unsigned long assign_global_spine_eqn_numbers(Vector<double *> &Dof_pt);
+
+ /// \short Set the time stepper for all the data stored in the mesh,
+ /// including the spine data
+ void set_spine_time_stepper(TimeStepper* const &time_stepper_pt);
+
  /// \short Update function to update all nodes of mesh
  /// [Doesn't make sense to use this mesh with SolidElements anyway,
  /// so we buffer the case if update_all_solid_nodes is set to 

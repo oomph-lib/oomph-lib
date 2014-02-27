@@ -1477,8 +1477,8 @@ namespace oomph
  /// can be overloaded in MPI problems.  Bool argument can be set to false
  /// to ignore assigning local equation numbers (found to be necessary in
  /// the parallel implementation of locate_zeta between multiple meshes).
- virtual unsigned long assign_eqn_numbers(const bool&
-                                          assign_local_eqn_numbers=true);
+ unsigned long assign_eqn_numbers(const bool&
+                                  assign_local_eqn_numbers=true);
 
  /// \short Indicate that the problem involves discontinuous elements
  /// This allows for a more efficiently assembly and inversion of the

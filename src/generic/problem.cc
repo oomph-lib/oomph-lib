@@ -45,6 +45,7 @@
 #include "dg_elements.h"
 #include "partitioning.h"
 #include "convergence_data.h"
+#include "spines.h"
 
 //Include to fill in additional_setup_shared_node_scheme() function
 #include "refineable_mesh.template.cc"
@@ -2003,23 +2004,31 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
      t_start = TimingHelpers::timer();
     }
 
-   // Loop over the submeshes: Note we need to call the submeshes' own
-   // assign_*_eqn_number() otherwise we miss additional functionality
-   // that is implemented (e.g.) in SolidMeshes!
-   if (n_sub_mesh==0)
+   //Call assign equation numbers on the global mesh
+   n_dof = Mesh_pt->assign_global_eqn_numbers(Dof_pt);
+
+   // Deal with the spine meshes additional numbering
+   //If there is only one mesh
+   if(n_sub_mesh==0)
     {
-     n_dof=Mesh_pt->assign_global_eqn_numbers(Dof_pt);
+     if(SpineMesh* const spine_mesh_pt = dynamic_cast<SpineMesh*>(Mesh_pt))
+      {
+       n_dof = spine_mesh_pt->assign_global_spine_eqn_numbers(Dof_pt);
+      }
     }
+   //Otherwise loop over the sub meshes
    else
     {
      //Assign global equation numbers first
-     for (unsigned i=0;i<n_sub_mesh;i++)
+     for(unsigned i=0;i<n_sub_mesh;i++)
       {
-       Sub_mesh_pt[i]->assign_global_eqn_numbers(Dof_pt);
+       if(SpineMesh* const spine_mesh_pt = 
+          dynamic_cast<SpineMesh*>(Sub_mesh_pt[i]))
+        {
+         n_dof = spine_mesh_pt->assign_global_spine_eqn_numbers(Dof_pt);
+        }
       }
-     n_dof=Dof_pt.size();
     }
-
 
    if (Global_timings::Doc_comprehensive_timings)
     {
