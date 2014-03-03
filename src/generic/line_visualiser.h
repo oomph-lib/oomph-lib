@@ -133,194 +133,201 @@ namespace oomph
      {
       // Resize output data array
       data.resize(Nplot_points);
-   
-   
+
+      int nproc=MPI_Helpers::communicator_pt()->nproc();   
+      if (nproc>1)
+       {
+
 #ifdef OOMPH_HAS_MPI
    
-      // Declaration of MPI variables
-      MPI_Status stat;
-      int tag=0;
-      int my_rank=MPI_Helpers::communicator_pt()->my_rank();
-      int nproc=MPI_Helpers::communicator_pt()->nproc();
+        // Declaration of MPI variables
+        MPI_Status stat;
+        int tag=0;
+        int my_rank=MPI_Helpers::communicator_pt()->my_rank();
+
       
-      // Buffer
-      unsigned buff_size;
+        // Buffer
+        unsigned buff_size;
    
-      // Create array which contains data found in every process
-      Vector<Vector<double> > vec(Nplot_points);
+        // Create array which contains data found in every process
+        Vector<Vector<double> > vec(Nplot_points);
    
-      // Loop over the points to fill in vec
-      for (unsigned i=0; i<Nplot_points; i++)
-       {
-        // Check if the point was found in the mesh
-        if (Plot_point[i].first != NULL) // success
-         {
-          // Check if the point is halo
-          if (!((*Plot_point[i].first).is_halo()))
-           {
-            // Get the line of output data from the element 
-            // (specified by .first), at its local coordinate 
-            // (specified by .second)
-            Plot_point[i].first->point_output_data(Plot_point[i].second,vec[i]);
-           }
-         }
-       }
-   
-   
-      // Analyse which plot points have been found
-      // locally and concatenate the data:
-   
-      // This contains the flat-packed doubles to be sent
-      // for all located plot points
-      Vector<double> local_values;
-   
-      // Number of values to be sent for each plot point
-      // (almost certainly the same for all plot points, but...)
-      // size_values[i] gives the number of doubles to be 
-      // sent for plot point i.
-      Vector<unsigned> size_values; 
-   
-      // Each processor indicates if it has found a given plot point.
-      // Once this is gathered on the root processor we know
-      // exactly which data we'll receive from where.
-      Vector<unsigned> tmp_proc_point_found_plus_one(Nplot_points,0);
-   
-      // Loop over the plot points
-      for (unsigned i=0; i<Nplot_points; i++)
-       {
-        unsigned ndata=vec[i].size();
-        if (ndata!=0)
-         {
-          // Store the number of fields 
-          size_values.push_back(ndata);
-       
-          // Update found vector 
-          tmp_proc_point_found_plus_one[i]=my_rank+1;
-       
-          // Store values
-          for (unsigned j=0;j<ndata;j++)
-           {
-            local_values.push_back(vec[i][j]);
-           }
-         }
-       }
-   
-         // hierher: Get rid of mpi Helpers
-   
-      // Gather information on root
-   
-      // Find out who's found the points
-      Vector<unsigned> proc_point_found_plus_one(Nplot_points,0);
-      MPI_Reduce(&tmp_proc_point_found_plus_one[0], 
-                 &proc_point_found_plus_one[0], 
-                 Nplot_points, MPI_UNSIGNED, MPI_MAX, 0,  
-                 MPI_Helpers::communicator_pt()->mpi_comm());
-   
-   
-      // Main process write data
-      if (my_rank == 0) 
-       {
-        // Collect all the data
-        Vector<Vector<double> > received_data(nproc-1);
-        Vector<Vector<unsigned> > received_size(nproc-1);
-        Vector<unsigned> counter_d(nproc-1,0);
-        Vector<unsigned> counter_s(nproc-1,0);
-     
-        // Loop over processors that send their points
-        for (int i=1; i<nproc; i++)
-         {
-          // Receive sizes of data
-          MPI_Recv(&buff_size, 1, MPI_UNSIGNED, i, 
-                   tag,  MPI_Helpers::communicator_pt()->mpi_comm(), &stat);
-          received_size[i-1].resize(std::max(unsigned(1),buff_size)); 
-          MPI_Recv(&received_size[i-1][0], buff_size, MPI_UNSIGNED, i, 
-                   tag,  MPI_Helpers::communicator_pt()->mpi_comm(), &stat);
-       
-          // Receive actual data
-          MPI_Recv(&buff_size, 1, MPI_UNSIGNED, i, 
-                   tag,  MPI_Helpers::communicator_pt()->mpi_comm(), &stat);   
-          received_data[i-1].resize(std::max(unsigned(1),buff_size));      
-          MPI_Recv(&received_data[i-1][0], buff_size, MPI_DOUBLE, i,
-                   tag,  MPI_Helpers::communicator_pt()->mpi_comm(), &stat);
-         }
-     
-        // Analyse data for each point
+        // Loop over the points to fill in vec
         for (unsigned i=0; i<Nplot_points; i++)
-         {       
-          // Somebody has found it
-          if (proc_point_found_plus_one[i] != 0) 
+         {
+          // Check if the point was found in the mesh
+          if (Plot_point[i].first != NULL) // success
            {
-            // Root processor has found it
-            if (proc_point_found_plus_one[i] == 1)
+            // Check if the point is halo
+            if (!((*Plot_point[i].first).is_halo()))
              {
-              // Copy directly from vec vector
-              data[i]=vec[i];
+              // Get the line of output data from the element 
+              // (specified by .first), at its local coordinate 
+              // (specified by .second)
+              Plot_point[i].first->point_output_data(Plot_point[i].second,
+                                                     vec[i]);
              }
-            // Another (non-root) processor has found it
-            else 
-             {  
-              unsigned line_i=proc_point_found_plus_one[i]-2;
-           
-              // Resize data line
-              data[i].resize(received_size[line_i][counter_s[line_i] ]);
-           
-              // Copy values
-              for (unsigned j=0;j<received_size[line_i][counter_s[line_i] ];j++)
+           }
+         }
+   
+   
+        // Analyse which plot points have been found
+        // locally and concatenate the data:
+   
+        // This contains the flat-packed doubles to be sent
+        // for all located plot points
+        Vector<double> local_values;
+   
+        // Number of values to be sent for each plot point
+        // (almost certainly the same for all plot points, but...)
+        // size_values[i] gives the number of doubles to be 
+        // sent for plot point i.
+        Vector<unsigned> size_values; 
+   
+        // Each processor indicates if it has found a given plot point.
+        // Once this is gathered on the root processor we know
+        // exactly which data we'll receive from where.
+        Vector<unsigned> tmp_proc_point_found_plus_one(Nplot_points,0);
+   
+        // Loop over the plot points
+        for (unsigned i=0; i<Nplot_points; i++)
+         {
+          unsigned ndata=vec[i].size();
+          if (ndata!=0)
+           {
+            // Store the number of fields 
+            size_values.push_back(ndata);
+       
+            // Update found vector 
+            tmp_proc_point_found_plus_one[i]=my_rank+1;
+       
+            // Store values
+            for (unsigned j=0;j<ndata;j++)
+             {
+              local_values.push_back(vec[i][j]);
+             }
+           }
+         }
+   
+        // hierher: Get rid of mpi Helpers
+   
+        // Gather information on root
+   
+        // Find out who's found the points
+        Vector<unsigned> proc_point_found_plus_one(Nplot_points,0);
+        MPI_Reduce(&tmp_proc_point_found_plus_one[0], 
+                   &proc_point_found_plus_one[0], 
+                   Nplot_points, MPI_UNSIGNED, MPI_MAX, 0,  
+                   MPI_Helpers::communicator_pt()->mpi_comm());
+   
+   
+        // Main process write data
+        if (my_rank == 0) 
+         {
+          // Collect all the data
+          Vector<Vector<double> > received_data(nproc-1);
+          Vector<Vector<unsigned> > received_size(nproc-1);
+          Vector<unsigned> counter_d(nproc-1,0);
+          Vector<unsigned> counter_s(nproc-1,0);
+     
+          // Loop over processors that send their points
+          for (int i=1; i<nproc; i++)
+           {
+            // Receive sizes of data
+            MPI_Recv(&buff_size, 1, MPI_UNSIGNED, i, 
+                     tag,  MPI_Helpers::communicator_pt()->mpi_comm(), &stat);
+            received_size[i-1].resize(std::max(unsigned(1),buff_size)); 
+            MPI_Recv(&received_size[i-1][0], buff_size, MPI_UNSIGNED, i, 
+                     tag,  MPI_Helpers::communicator_pt()->mpi_comm(), &stat);
+       
+            // Receive actual data
+            MPI_Recv(&buff_size, 1, MPI_UNSIGNED, i, 
+                     tag,  MPI_Helpers::communicator_pt()->mpi_comm(), &stat);
+            received_data[i-1].resize(std::max(unsigned(1),buff_size));      
+            MPI_Recv(&received_data[i-1][0], buff_size, MPI_DOUBLE, i,
+                     tag,  MPI_Helpers::communicator_pt()->mpi_comm(), &stat);
+           }
+     
+          // Analyse data for each point
+          for (unsigned i=0; i<Nplot_points; i++)
+           {       
+            // Somebody has found it
+            if (proc_point_found_plus_one[i] != 0) 
+             {
+              // Root processor has found it
+              if (proc_point_found_plus_one[i] == 1)
                {
-                data[i][j]=received_data[line_i][counter_d[line_i]+j];
+                // Copy directly from vec vector
+                data[i]=vec[i];
                }
+              // Another (non-root) processor has found it
+              else 
+               {  
+                unsigned line_i=proc_point_found_plus_one[i]-2;
            
-              //Increase counter
-              counter_d[line_i]+=received_size[line_i][counter_s[line_i] ];
-              counter_s[line_i]++;
-             }
-           } // end somebody has found it -- no output at all if nobody
-          // has found the point (e.g. outside mesh)
+                // Resize data line
+                data[i].resize(received_size[line_i][counter_s[line_i] ]);
+           
+                // Copy values
+                for (unsigned j=0;j<received_size[line_i][counter_s[line_i] ];
+                     j++)
+                 {
+                  data[i][j]=received_data[line_i][counter_d[line_i]+j];
+                 }
+           
+                //Increase counter
+                counter_d[line_i]+=received_size[line_i][counter_s[line_i] ];
+                counter_s[line_i]++;
+               }
+             } // end somebody has found it -- no output at all if nobody
+            // has found the point (e.g. outside mesh)
+           }
          }
+        // Send data to root
+        else 
+         {
+          //Send the number of fields to the main process 
+          buff_size = size_values.size();
+          MPI_Send(&buff_size, 1, MPI_UNSIGNED, 0, tag,  
+                   MPI_Helpers::communicator_pt()->mpi_comm());
+     
+          //Send the sizes of fields to the main process
+          if (buff_size==0) size_values.resize(1);
+          MPI_Send(&size_values[0], buff_size, MPI_UNSIGNED, 0, tag, 
+                   MPI_Helpers::communicator_pt()->mpi_comm());
+     
+          //Send the number of data fields to the main process 
+          buff_size = local_values.size();
+          MPI_Send(&buff_size, 1, MPI_UNSIGNED, 0, tag,  
+                   MPI_Helpers::communicator_pt()->mpi_comm());
+     
+          //Send the data to the main process
+          if (buff_size==0) local_values.resize(1);
+          MPI_Send(&local_values[0], buff_size, MPI_DOUBLE, 0, tag, 
+                   MPI_Helpers::communicator_pt()->mpi_comm());   
+         }
+   
+#endif // Serial version
        }
-      // Send data to root
-      else 
+      else
        {
-        //Send the number of fields to the main process 
-        buff_size = size_values.size();
-        MPI_Send(&buff_size, 1, MPI_UNSIGNED, 0, tag,  
-                 MPI_Helpers::communicator_pt()->mpi_comm());
-     
-        //Send the sizes of fields to the main process
-        if (buff_size==0) size_values.resize(1);
-        MPI_Send(&size_values[0], buff_size, MPI_UNSIGNED, 0, tag, 
-                 MPI_Helpers::communicator_pt()->mpi_comm());
-     
-        //Send the number of data fields to the main process 
-        buff_size = local_values.size();
-        MPI_Send(&buff_size, 1, MPI_UNSIGNED, 0, tag,  
-                 MPI_Helpers::communicator_pt()->mpi_comm());
-     
-        //Send the data to the main process
-        if (buff_size==0) local_values.resize(1);
-        MPI_Send(&local_values[0], buff_size, MPI_DOUBLE, 0, tag, 
-                 MPI_Helpers::communicator_pt()->mpi_comm());   
-       }
-   
-#else // Serial version
-   
-      // Loop over the points
-      for (unsigned i=0; i<Nplot_points; i++)
-       {  
-        // Check if the point was found in the mesh
-        if (Plot_point[i].first != NULL) // success
-         {
-          // Copy line into data array
-          Plot_point[i].first->point_output_data(data[i], Plot_point[i].second);
+        
+        // Loop over the points
+        for (unsigned i=0; i<Nplot_points; i++)
+         {  
+          // Check if the point was found in the mesh
+          if (Plot_point[i].first != NULL) // success
+           {
+            // Copy line into data array
+            Plot_point[i].first->point_output_data(Plot_point[i].second,
+                                                   data[i]);
+           }
+          else // not found -- keep empty block there for debugging
+           {
+            //oomph_info << "Point " << i << " not found\n";
+           }
          }
-        else // error
-         {
-          //oomph_info << "Point " << i << " not found\n";
-         }
-       }
-   
-#endif
-   
+       }  
      }
   
   
@@ -330,180 +337,185 @@ namespace oomph
      {
       // Resize coord_vec
       coord_vec.resize(Nplot_points);
-   
+
+      int nproc=MPI_Helpers::communicator_pt()->nproc();
+      if (nproc>1)
+       {
+
 #ifdef OOMPH_HAS_MPI
    
-      // Declaration of MPI variables
-      MPI_Status stat;
-      int tag;
-      int my_rank=MPI_Helpers::communicator_pt()->my_rank();
-      int nproc=MPI_Helpers::communicator_pt()->nproc();
-   
-      // Buffer
-      unsigned buff_size;
-   
-      // Create array which contains data found in every process
-      Vector<Vector<double> > vec(Nplot_points);
-   
-      for (unsigned i=0; i<Nplot_points; i++)
-       {
-        if (Plot_point[i].first != NULL)
-         {
-          if (!((*Plot_point[i].first).is_halo()))
-           {
-            unsigned dim = Plot_point[i].second.size();
-         
-            vec[i].resize(dim);
-         
-            for (unsigned j=0; j<dim; j++)
-             {
-              vec[i][j]=Plot_point[i].first->
-               interpolated_x(Plot_point[i].second,j);
-             }
-           }
-         }
-       }
-   
-   
-      // Analyse which plot points have been found
-      // locally and concatenate the data:
-   
-      // This contains the flat-packed doubles to be sent
-      // for all located plot points
-      Vector<double> local_values;
-   
-      // Number of values to be sent for each plot point
-      // (almost certainly the same for all plot points, but...)
-      // size_values[i] gives the number of doubles to be 
-      // sent for plot point i.
-      Vector<unsigned> size_values; 
-   
-      // Each processor indicates if it has found a given plot point.
-      // Once this is gathered on the root processor we know
-      // exactly which data we'll receive from where.
-      Vector<unsigned> tmp_proc_point_found_plus_one(Nplot_points,0);
-   
-      // Loop over the plot points
-      for (unsigned i=0; i<Nplot_points; i++)
-       {
-        unsigned ndata=vec[i].size();
-        if (ndata!=0)
-         {
-          // Store the number of fields 
-          size_values.push_back(ndata);
-       
-          // Update found vector 
-          tmp_proc_point_found_plus_one[i]=my_rank+1;
-       
-       
-          // Store values
-          for (unsigned j=0;j<ndata;j++)
-           {
-            local_values.push_back(vec[i][j]);
-           }
-         }
-       }
+        // Declaration of MPI variables
+        MPI_Status stat;
+        int tag;
+        int my_rank=MPI_Helpers::communicator_pt()->my_rank();
 
-      // Gather information on root
-
-      // Find out who's found the points
-      Vector<unsigned> proc_point_found_plus_one(Nplot_points,0);
-      MPI_Reduce(&tmp_proc_point_found_plus_one[0], 
-                 &proc_point_found_plus_one[0], 
-                 Nplot_points, MPI_UNSIGNED, MPI_MAX, 0, 
-                 MPI_Helpers::communicator_pt()->mpi_comm());
    
-      // Main process write data
-      if (my_rank == 0) 
-       {
-        // Collect all the data
-        Vector<Vector<double> > received_data(nproc-1);
-        Vector<Vector<unsigned> > received_size(nproc-1);
-        Vector<unsigned> counter_d(nproc-1,0);
-        Vector<unsigned> counter_s(nproc-1,0);
-     
-        // Loop over processors that send their points
-        for (int i=1; i<nproc; i++)
-         {
-          // Receive sizes of data
-          MPI_Recv(&buff_size, 1, MPI_UNSIGNED, i, 
-                   tag,  MPI_Helpers::communicator_pt()->mpi_comm(), &stat);
-          received_size[i-1].resize(std::max(unsigned(1),buff_size)); 
-          MPI_Recv(&received_size[i-1][0], buff_size, MPI_UNSIGNED, i, 
-                   tag,  MPI_Helpers::communicator_pt()->mpi_comm(), &stat);
-       
-          // Receive actual data
-          MPI_Recv(&buff_size, 1, MPI_UNSIGNED, i, 
-                   tag,  MPI_Helpers::communicator_pt()->mpi_comm(), &stat);   
-          received_data[i-1].resize(std::max(unsigned(1),buff_size));      
-          MPI_Recv(&received_data[i-1][0], buff_size, MPI_DOUBLE, i,
-                   tag,  MPI_Helpers::communicator_pt()->mpi_comm(), &stat);
-         }
-     
-        // Analyse data for each point
+        // Buffer
+        unsigned buff_size;
+   
+        // Create array which contains data found in every process
+        Vector<Vector<double> > vec(Nplot_points);
+   
         for (unsigned i=0; i<Nplot_points; i++)
-         {       
-          // Somebody has found it
-          if (proc_point_found_plus_one[i] != 0) 
+         {
+          if (Plot_point[i].first != NULL)
            {
-            // Root processor has found it
-            if (proc_point_found_plus_one[i] == 1)
+            if (!((*Plot_point[i].first).is_halo()))
              {
-              // Copy directly from vec vector
-              coord_vec[i]=vec[i];
-             }
-            // Another (non-root) processor has found it
-            else 
-             {  
-              unsigned line_i=proc_point_found_plus_one[i]-2;
-
-              // Resize data line
-              coord_vec[i].resize(received_size[line_i][counter_s[line_i] ]);
-           
-              // Copy values
-              for (unsigned j=0;j<received_size[line_i][counter_s[line_i] ];j++)
+              unsigned dim = Plot_point[i].second.size();
+         
+              vec[i].resize(dim);
+         
+              for (unsigned j=0; j<dim; j++)
                {
-                coord_vec[i][j]=received_data[line_i][counter_d[line_i]+j];
+                vec[i][j]=Plot_point[i].first->
+                 interpolated_x(Plot_point[i].second,j);
                }
-           
-              //Increase counter
-              counter_d[line_i]+=received_size[line_i][counter_s[line_i] ];
-              counter_s[line_i]++;
              }
-           } // end somebody has found it -- no output at all if nobody
-          // has found the point (e.g. outside mesh)
+           }
          }
+   
+   
+        // Analyse which plot points have been found
+        // locally and concatenate the data:
+   
+        // This contains the flat-packed doubles to be sent
+        // for all located plot points
+        Vector<double> local_values;
+   
+        // Number of values to be sent for each plot point
+        // (almost certainly the same for all plot points, but...)
+        // size_values[i] gives the number of doubles to be 
+        // sent for plot point i.
+        Vector<unsigned> size_values; 
+   
+        // Each processor indicates if it has found a given plot point.
+        // Once this is gathered on the root processor we know
+        // exactly which data we'll receive from where.
+        Vector<unsigned> tmp_proc_point_found_plus_one(Nplot_points,0);
+   
+        // Loop over the plot points
+        for (unsigned i=0; i<Nplot_points; i++)
+         {
+          unsigned ndata=vec[i].size();
+          if (ndata!=0)
+           {
+            // Store the number of fields 
+            size_values.push_back(ndata);
+       
+            // Update found vector 
+            tmp_proc_point_found_plus_one[i]=my_rank+1;
+       
+       
+            // Store values
+            for (unsigned j=0;j<ndata;j++)
+             {
+              local_values.push_back(vec[i][j]);
+             }
+           }
+         }
+
+        // Gather information on root
+
+        // Find out who's found the points
+        Vector<unsigned> proc_point_found_plus_one(Nplot_points,0);
+        MPI_Reduce(&tmp_proc_point_found_plus_one[0], 
+                   &proc_point_found_plus_one[0], 
+                   Nplot_points, MPI_UNSIGNED, MPI_MAX, 0, 
+                   MPI_Helpers::communicator_pt()->mpi_comm());
+   
+        // Main process write data
+        if (my_rank == 0) 
+         {
+          // Collect all the data
+          Vector<Vector<double> > received_data(nproc-1);
+          Vector<Vector<unsigned> > received_size(nproc-1);
+          Vector<unsigned> counter_d(nproc-1,0);
+          Vector<unsigned> counter_s(nproc-1,0);
+     
+          // Loop over processors that send their points
+          for (int i=1; i<nproc; i++)
+           {
+            // Receive sizes of data
+            MPI_Recv(&buff_size, 1, MPI_UNSIGNED, i, 
+                     tag,  MPI_Helpers::communicator_pt()->mpi_comm(), &stat);
+            received_size[i-1].resize(std::max(unsigned(1),buff_size)); 
+            MPI_Recv(&received_size[i-1][0], buff_size, MPI_UNSIGNED, i, 
+                     tag,  MPI_Helpers::communicator_pt()->mpi_comm(), &stat);
+       
+            // Receive actual data
+            MPI_Recv(&buff_size, 1, MPI_UNSIGNED, i, 
+                     tag,  MPI_Helpers::communicator_pt()->mpi_comm(), &stat);
+            received_data[i-1].resize(std::max(unsigned(1),buff_size));      
+            MPI_Recv(&received_data[i-1][0], buff_size, MPI_DOUBLE, i,
+                     tag,  MPI_Helpers::communicator_pt()->mpi_comm(), &stat);
+           }
+     
+          // Analyse data for each point
+          for (unsigned i=0; i<Nplot_points; i++)
+           {       
+            // Somebody has found it
+            if (proc_point_found_plus_one[i] != 0) 
+             {
+              // Root processor has found it
+              if (proc_point_found_plus_one[i] == 1)
+               {
+                // Copy directly from vec vector
+                coord_vec[i]=vec[i];
+               }
+              // Another (non-root) processor has found it
+              else 
+               {  
+                unsigned line_i=proc_point_found_plus_one[i]-2;
+
+                // Resize data line
+                coord_vec[i].resize(received_size[line_i][counter_s[line_i] ]);
+           
+                // Copy values
+                for (unsigned j=0;j<received_size[line_i][counter_s[line_i] ];
+                     j++)
+                 {
+                  coord_vec[i][j]=received_data[line_i][counter_d[line_i]+j];
+                 }
+           
+                //Increase counter
+                counter_d[line_i]+=received_size[line_i][counter_s[line_i] ];
+                counter_s[line_i]++;
+               }
+             } // end somebody has found it -- no output at all if nobody
+            // has found the point (e.g. outside mesh)
+           }
+         }
+        // Send data to root
+        else 
+         {
+          //Send the number of fields to the main process 
+          buff_size = size_values.size();
+          MPI_Send(&buff_size, 1, MPI_UNSIGNED, 0, tag,  
+                   MPI_Helpers::communicator_pt()->mpi_comm());
+     
+          //Send the sizes of fields to the main process
+          if (buff_size==0) size_values.resize(1);
+          MPI_Send(&size_values[0], buff_size, MPI_UNSIGNED, 0, tag,  
+                   MPI_Helpers::communicator_pt()->mpi_comm());
+     
+          //Send the number of data fields to the main process 
+          buff_size = local_values.size();
+          MPI_Send(&buff_size, 1, MPI_UNSIGNED, 0, tag,  
+                   MPI_Helpers::communicator_pt()->mpi_comm());
+     
+          //Send the data to the main process
+          if (buff_size==0) local_values.resize(1);
+          MPI_Send(&local_values[0], buff_size, MPI_DOUBLE, 0, tag,  
+                   MPI_Helpers::communicator_pt()->mpi_comm());   
+         }
+   
+#endif // Serial version
        }
-      // Send data to root
-      else 
+      else
        {
-        //Send the number of fields to the main process 
-        buff_size = size_values.size();
-        MPI_Send(&buff_size, 1, MPI_UNSIGNED, 0, tag,  
-                 MPI_Helpers::communicator_pt()->mpi_comm());
-     
-        //Send the sizes of fields to the main process
-        if (buff_size==0) size_values.resize(1);
-        MPI_Send(&size_values[0], buff_size, MPI_UNSIGNED, 0, tag,  
-                 MPI_Helpers::communicator_pt()->mpi_comm());
-     
-        //Send the number of data fields to the main process 
-        buff_size = local_values.size();
-        MPI_Send(&buff_size, 1, MPI_UNSIGNED, 0, tag,  
-                 MPI_Helpers::communicator_pt()->mpi_comm());
-     
-        //Send the data to the main process
-        if (buff_size==0) local_values.resize(1);
-        MPI_Send(&local_values[0], buff_size, MPI_DOUBLE, 0, tag,  
-                 MPI_Helpers::communicator_pt()->mpi_comm());   
+        get_local_plot_points_coordinates(coord_vec);
        }
-   
-#else // Serial version
-   
-      get_local_plot_points_coordinates(coord_vec);
-   
-#endif
-   
      }
   
    private:
@@ -608,6 +620,8 @@ namespace oomph
 
       // Loop over input points
       double tt_start=TimingHelpers::timer();
+      //oomph_info << "Looking for " << Nplot_points << " plot points\n";
+
       for (unsigned i=0; i<Nplot_points; i++)
        {
         // Local coordinate of the plot point with its element
@@ -623,7 +637,19 @@ namespace oomph
         FiniteElement* fe_pt=dynamic_cast<FiniteElement*>(geom_pt);
      
         // Another one not found locally...
-        if (fe_pt==0)  count_not_found_local++;
+        if (fe_pt==0)
+         {
+          count_not_found_local++;
+          /* oomph_info << "NOT Found the one at "  */
+          /*            << coord_vec[i][0] << " " */
+          /*            << coord_vec[i][1] << "\n"; */
+         }
+        else
+         {
+          /* oomph_info << "Found the one at "  */
+          /*            << coord_vec[i][0] << " " */
+          /*            << coord_vec[i][1] << "\n"; */
+         }
 
         // Save result in a pair
         Plot_point[i]=std::pair<FiniteElement*,Vector<double> >(fe_pt,s);
@@ -636,59 +662,64 @@ namespace oomph
       // Global equivalent (is overwritten below if mpi)
       unsigned count_not_found=count_not_found_local;
    
+      int nproc=MPI_Helpers::communicator_pt()->nproc();
+      if (nproc>1)
+       {
+        
 #ifdef OOMPH_HAS_MPI
-   
-      // Declaration of MPI variables
-      int my_rank=MPI_Helpers::communicator_pt()->my_rank();
+        
+        // Declaration of MPI variables
+        int my_rank=MPI_Helpers::communicator_pt()->my_rank();
       
-      // Each processor indicates if it has found a given plot point.
-      // Once this is gathered on the root processor we know
-      // exactly which data we'll receive from where.
-      Vector<unsigned> tmp_proc_point_found_plus_one(Nplot_points,0);
+        // Each processor indicates if it has found a given plot point.
+        // Once this is gathered on the root processor we know
+        // exactly which data we'll receive from where.
+        Vector<unsigned> tmp_proc_point_found_plus_one(Nplot_points,0);
    
-      // Loop over the plot points
-      for (unsigned i=0; i<Nplot_points; i++)
-       {
-        // Found locally?
-        if (Plot_point[i].first!=0)
-         {
-          tmp_proc_point_found_plus_one[i]=my_rank+1;
-         }     
-       }
-   
-      // hierher: Get rid of mpi Helpers
-   
-      // Gather information on root
-   
-      // Find out who's found the points
-      Vector<unsigned> proc_point_found_plus_one(Nplot_points,0);
-      MPI_Reduce(&tmp_proc_point_found_plus_one[0], 
-                 &proc_point_found_plus_one[0], 
-                 Nplot_points, MPI_UNSIGNED, MPI_MAX, 0,  
-                 MPI_Helpers::communicator_pt()->mpi_comm());
-   
-   
-      // Main process analyses data
-      if (my_rank == 0) 
-       {
-        // Analyse data for each point
-        count_not_found=0;
+        // Loop over the plot points
         for (unsigned i=0; i<Nplot_points; i++)
-         {       
-          // Nobody has found it
-          if (proc_point_found_plus_one[i] == 0) 
+         {
+          // Found locally?
+          if (Plot_point[i].first!=0)
            {
-            count_not_found++;
+            tmp_proc_point_found_plus_one[i]=my_rank+1;
+           }     
+         }
+   
+        // hierher: Get rid of mpi Helpers
+   
+        // Gather information on root
+   
+        // Find out who's found the points
+        Vector<unsigned> proc_point_found_plus_one(Nplot_points,0);
+        MPI_Reduce(&tmp_proc_point_found_plus_one[0], 
+                   &proc_point_found_plus_one[0], 
+                   Nplot_points, MPI_UNSIGNED, MPI_MAX, 0,  
+                   MPI_Helpers::communicator_pt()->mpi_comm());
+   
+   
+        // Main process analyses data
+        if (my_rank == 0) 
+         {
+          // Analyse data for each point
+          count_not_found=0;
+          for (unsigned i=0; i<Nplot_points; i++)
+           {       
+            // Nobody has found it
+            if (proc_point_found_plus_one[i] == 0) 
+             {
+              count_not_found++;
+             }
            }
          }
-       }
 
-      // Now tell everybody about it
-      MPI_Bcast(&count_not_found,1,MPI_UNSIGNED,0,
-                MPI_Helpers::communicator_pt()->mpi_comm());
+        // Now tell everybody about it
+        MPI_Bcast(&count_not_found,1,MPI_UNSIGNED,0,
+                  MPI_Helpers::communicator_pt()->mpi_comm());
 
 #endif
-
+       }
+      
       double tt_end=TimingHelpers::timer();
       oomph_info 
        << "Total time for location of plot points in LineVisualiser: "

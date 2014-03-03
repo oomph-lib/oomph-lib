@@ -959,6 +959,36 @@ namespace oomph
    }
  }
  
+ /// \short Output solution in data vector at local cordinates s:
+ /// r,z,u_r,u_z,q_r,q_z,div_q,p
+ void point_output_data(const Vector<double> &s, Vector<double>& data)
+ {
+  // Output the components of the position
+  for(unsigned i=0;i<2;i++)
+   {
+    data.push_back(interpolated_x(s,i));
+   }
+  
+  // Output the components of the FE representation of u at s
+  for(unsigned i=0;i<2;i++)
+   {
+    data.push_back(interpolated_u(s,i));
+   }
+  
+  // Output the components of the FE representation of q at s
+  for(unsigned i=0;i<2;i++)
+   {
+    data.push_back(interpolated_q(s,i));
+   }
+    
+  // Output FE representation of div u at s
+  data.push_back(interpolated_div_q(s));
+  
+  // Output FE representation of p at s
+  data.push_back(interpolated_p(s));
+ }
+
+
  /// Output with default number of plot points
  void output(std::ostream &outfile)
  {

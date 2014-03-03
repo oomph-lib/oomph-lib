@@ -698,12 +698,12 @@ public:
  /// overloaded with more meaningful names in specific elements.
  std::string scalar_name_paraview(const unsigned& i) const
  {
-  // Winds
+  // Veloc
   if(i<3) 
    {
     return "Velocity "+StringConversion::to_string(i);
    }
-  // Advection Diffusion field
+  // Pressure field
   else if(i==3) 
    {
     return "Pressure";
@@ -722,6 +722,27 @@ public:
     return " ";
    }
  }
+
+ /// \short Output solution in data vector at local cordinates s:
+ /// r,z,u_r,u_z,u_phi,p
+ void point_output_data(const Vector<double> &s, Vector<double>& data)
+ {
+  // Output the components of the position
+  for(unsigned i=0;i<2;i++)
+   {
+    data.push_back(interpolated_x(s,i));
+   }
+  
+  // Output the components of the FE representation of u at s
+  for(unsigned i=0;i<3;i++)
+   {
+    data.push_back(interpolated_u_axi_nst(s,i));
+   }
+    
+  // Output FE representation of p at s
+  data.push_back(interpolated_p_axi_nst(s));
+ }
+
 
  /// \short Output function: x,y,[z],u,v,[w],p
  /// in tecplot format. Default number of plot points
