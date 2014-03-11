@@ -198,10 +198,10 @@ fill_in_generic_residual_contribution_ust_heat(Vector<double> &residuals,
              // Laplace operator & mesh velocity bit
              for(unsigned i=0;i<DIM;i++)
               {
-               double tmp=dtestdx(l,i);
-               if (!ALE_is_disabled) tmp+=alpha_local*mesh_velocity[i]*test(l);
+               double tmp=beta_local*dtestdx(l,i);
+               if (!ALE_is_disabled) tmp-=alpha_local*mesh_velocity[i]*test(l);
                jacobian(local_eqn,local_unknown) += 
-                beta_local*dpsidx(l2,i)*tmp*W;
+                dpsidx(l2,i)*tmp*W;
               }
             }
           }

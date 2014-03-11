@@ -1444,19 +1444,66 @@ namespace Locate_zeta_helpers
      }
     else
      {
-      std::ostringstream error_message;
-      error_message << "Determinant of Jacobian matrix is zero --- "
-                    << "singular mapping!\n The determinant of the "
-                    << "jacobian is "<<std::fabs(jacobian)
-                    << "which is smaller than the treshold "
-                    << Tolerance_for_singular_jacobian <<"\n"
-                    << "You can change this treshold, by specifying "
-                    << "FiniteElement::Tolerance_for_singular_jacobian \n";
-      throw OomphLibError(error_message.str(),
+      std::ostringstream error_stream;
+      error_stream 
+       << "Determinant of Jacobian matrix is zero --- "
+       << "singular mapping!\n The determinant of the "
+       << "jacobian is "<<std::fabs(jacobian)
+       << "which is smaller than the treshold "
+       << Tolerance_for_singular_jacobian <<"\n"
+       << "You can change this treshold, by specifying "
+       << "FiniteElement::Tolerance_for_singular_jacobian \n"
+       << "Here are the nodal coordinates of the inverted element\n" 
+       << "in the form \n\n       x,y[,z], hang_status\n\n" 
+       << "where hang_status = 1 or 2 for non-hanging or hanging\n" 
+       << "nodes respectively (useful for automatic sizing of\n" 
+       << "tecplot markers to identify the hanging nodes). \n\n" ;
+      unsigned n_dim_nod=node_pt(0)->ndim();
+      unsigned n_nod=nnode();
+      unsigned hang_count=0;
+      for (unsigned j=0;j<n_nod;j++)
+       {
+        for (unsigned i=0;i<n_dim_nod;i++)
+         {
+          error_stream << node_pt(j)->x(i) << " ";
+         }
+        if (node_pt(j)->is_hanging())
+         {
+          error_stream << " 2";
+          hang_count++;
+         }
+        else
+         {
+          error_stream << " 1";
+         }
+        error_stream << std::endl;
+       }
+      error_stream << std::endl << std::endl;
+      if ((Macro_elem_pt!=0)&&(0!=hang_count))
+       {
+        error_stream 
+         << "NOTE:  Offending element is associated with a MacroElement\n"
+         << "       AND the element has hanging nodes! \n"
+         << "       If an element is thin and highly curved, the \n"
+         << "       constraints imposed by\n \n"
+         << "       (1) inter-element continuity (imposed by the hanging\n"
+         << "           node constraints) and \n\n"
+         << "       (2) the need to respect curvilinear domain boundaries\n"
+         << "           during mesh refinement (imposed by the element's\n"
+         << "           macro element mapping)\n\n"
+         << "       may be irreconcilable!  \n \n"
+         << "       You may have to re-design your base mesh to avoid \n"
+         << "       the creation of thin, highly curved elements during\n"
+         << "       the refinement process.\n"
+         << std::endl;
+       }
+      throw OomphLibError(error_stream.str(),
                           OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
    }
+
+
   //Now check for negative jacobians, if we're not allowing them (default)
   if((Accept_negative_jacobian==false) && (jacobian < 0.0))
    {

@@ -2449,13 +2449,22 @@ const Vector<double>& elem_error)
         || (inner_open_boundary_update_necessary) )
        {
         oomph_info
-        << "Mesh regeneration triggered by inaccurate interface/surface "
-        << "representation\n";
+        << "Mesh regeneration triggered by inaccurate interface/surface\n"
+        << "representation; setting Nrefined to number of elements.\n"
+        << "outer_boundary_update_necessary     : " 
+        << outer_boundary_update_necessary << "\n"
+        << "inner_boundary_update_necessary     : "
+        << inner_boundary_update_necessary << "\n"
+        << "inner_open_boundary_update_necessary: "
+        << inner_open_boundary_update_necessary << "\n"; 
+        Nrefined=nelement();
        }
       else
        {
         oomph_info
-        << "Mesh regeneration triggered by min angle criterion\n";
+        << "Mesh regeneration triggered by min angle criterion;\n"
+        << "setting Nrefined to number of elements.\n";
+        Nrefined=nelement();
        }
      }
 
@@ -4548,7 +4557,7 @@ get_connected_vertex_number_on_dst_boundary(
 
   // Get the pointer to the associated polyline by using the boundary id
   TriangleMeshPolyLine *dst_polyline =
-    this->boundary_polyline(dst_bnd_id);
+    this->boundary_polyline_pt(dst_bnd_id);
 
   unsigned n_vertices = dst_polyline->nvertex();
 
@@ -4725,6 +4734,8 @@ restore_connections_on_internal_boundary(
  return true;
  
 }
+
+
  
 //=========================================================================
 /// \short Helper function

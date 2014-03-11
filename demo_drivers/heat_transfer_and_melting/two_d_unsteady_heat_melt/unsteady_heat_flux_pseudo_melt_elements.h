@@ -28,7 +28,9 @@
 // Header file for elements that are used to apply prescribed flux
 // boundary conditions to the UnsteadyHeat equations, ensuring
 // that boundary temperature never exceeds the melting temperature.
-
+// The required flux (applied in addition to whatever is externally
+// imposed) is just "sucked into nothing" here -- in the actual
+// melt elements, this flux will be what drives the melt process.
 #ifndef OOMPH_UNSTEADY_HEAT_FLUX_PSEUDO_MELT_ELEMENTS_HEADER
 #define OOMPH_UNSTEADY_HEAT_FLUX_PSEUDO_MELT_ELEMENTS_HEADER
 

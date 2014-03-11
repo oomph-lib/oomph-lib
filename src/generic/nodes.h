@@ -1760,12 +1760,6 @@ public:
 class BoundaryNodeBase
 {
  private:
- /// \short Pointer to a map,  
- /// indexed by the face element identifier it returns
- /// the position of the first face element value.
- /// If the Node does not lie on a face element 
- /// this map should never be queried.
- std::map<unsigned, unsigned>* Index_of_first_value_assigned_by_face_element_pt;
 
  /// \short Pointer to a map of pointers to 
  /// intrinsic boundary coordinates of the Node,
@@ -1780,6 +1774,14 @@ class BoundaryNodeBase
  std::set<unsigned>* Boundaries_pt;
  
   protected:
+
+
+ /// \short Pointer to a map,  
+ /// indexed by the face element identifier it returns
+ /// the position of the first face element value.
+ /// If the Node does not lie on a face element 
+ /// this map should never be queried.
+ std::map<unsigned, unsigned>* Index_of_first_value_assigned_by_face_element_pt;
  
  /// \short If the BoundaryNode is periodic, this pointer is set to
  /// the BoundaryNode whose data it shares
@@ -1897,12 +1899,26 @@ class BoundaryNodeBase
    }
   return (*Index_of_first_value_assigned_by_face_element_pt)[face_id];
  }
- 
+
+ /// \short Return the number of values associated with
+ /// the i-th face element field. If no argument is specified
+ /// we return the value associated with the first (and assumed to be only)
+ /// face element attached to this node. Throws error only in paranoid mode
+ /// if no values have been set by any FaceElements. If you want to
+ /// catch such cases gracefully in all circumstances (there are examples
+ /// with complex unstructured 3D meshes where it's not clear a priori
+ /// if a node has been resized by FaceElements) use alternative
+ /// version (with leading bool arguments) that always checks and throws
+ /// so exceptions can be caught gracefully. Returns UINT_MAX if error.
+ virtual unsigned nvalue_assigned_by_face_element(const unsigned& face_id=0) 
+  const=0;
+
  /// \short Default constructor, set the pointers to the storage to NULL
-  BoundaryNodeBase() :  Index_of_first_value_assigned_by_face_element_pt(0), 
-  Boundary_coordinates_pt(0), 
-			Boundaries_pt(0),
-			Copied_node_pt(0){}
+  BoundaryNodeBase() :  
+ Boundary_coordinates_pt(0), 
+  Boundaries_pt(0),
+  Index_of_first_value_assigned_by_face_element_pt(0), 
+  Copied_node_pt(0){}
  
  /// \short Destructor, clean up any allocated storage for the boundaries
  ~BoundaryNodeBase();
@@ -2290,6 +2306,65 @@ class BoundaryNode: public NODE_TYPE, public BoundaryNodeBase
   {BoundaryNodeBase::set_coordinates_on_boundary(b,k,boundary_zeta);}
 
 
+
+ /// \short Return the number of values associated with
+ /// the i-th face element field. If no argument is specified
+ /// we return the value associated with the first (and assumed to be only)
+ /// face element attached to this node. Throws error only in paranoid mode
+ /// if no values have been set by any FaceElements. If you want to
+ /// catch such cases gracefully in all circumstances (there are examples
+ /// with complex unstructured 3D meshes where it's not clear a priori
+ /// if a node has been resized by FaceElements) use alternative
+ /// version (with leading bool arguments) that always checks and throws
+ /// so exceptions can be caught gracefully. Returns UINT_MAX if error.
+ unsigned nvalue_assigned_by_face_element(const unsigned& face_id=0) const
+ {
+#ifdef PARANOID
+  if (Index_of_first_value_assigned_by_face_element_pt==0)
+   {
+    std::ostringstream error_message;
+    error_message 
+     << "Index_of_first_value_assigned_by_face_element_pt==0;\n"
+     << "Pointer must be set via call to: \n\n"
+     << "  BoundaryNode::index_of_first_value_assigned_by_face_element_pt(), \n\n" 
+     << "typically from FaceElement::add_additional_values(...).";
+    throw OomphLibError(error_message.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+    return UINT_MAX;
+   }
+#endif
+
+  // How many values are there in total?
+  unsigned nval=this->nvalue();
+
+  // Single entry: Number of values is the difference between 
+  // number of values and first index
+  if ((*Index_of_first_value_assigned_by_face_element_pt).size()==1)
+   {
+    return nval-
+     (*Index_of_first_value_assigned_by_face_element_pt)[face_id];
+   }
+  else
+   {
+    // Find the next first index: Default: nvalue()
+    unsigned next_first_index=nval;
+    unsigned my_first_index=
+     (*Index_of_first_value_assigned_by_face_element_pt)[face_id];
+    for (std::map<unsigned, unsigned>::iterator it=
+          (*Index_of_first_value_assigned_by_face_element_pt).begin();
+         it!=(*Index_of_first_value_assigned_by_face_element_pt).end();
+         it++)
+     {
+      unsigned first_index=(*it).second;
+      if ((first_index>my_first_index)&&(first_index<next_first_index))
+       {
+        next_first_index=first_index;
+       }
+     }
+    return next_first_index-my_first_index;
+   }
+ }
 
  /// \short Make the node periodic
  void make_periodic(Node* const &node_pt)

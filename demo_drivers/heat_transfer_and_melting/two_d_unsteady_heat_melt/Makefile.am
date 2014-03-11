@@ -2,7 +2,89 @@
 include $(top_srcdir)/config/makefile_templates/demo_drivers
 
 # Name of executables that should run during the self-test
-check_PROGRAMS=pretend_melt spring_contact melt stefan_boltzmann stefan_boltzmann_melt
+check_PROGRAMS=pretend_melt spring_contact melt two_d_unsteady_heat \
+stefan_boltzmann stefan_boltzmann_melt solid_contact \
+circular_boulder_melt \
+circular_boulder_solar_radiation \
+solid_contact_with_lagr_melt \
+solid_contact_with_gravity_structured solid_contact_with_gravity_unstructured
+
+#-------------------------------------------------
+
+# Sources for executable
+solid_contact_with_gravity_structured_SOURCES = solid_contact_with_gravity.cc \
+contact_elements.h
+
+# Required libraries:
+# $(FLIBS) is included in case the solver involves fortran sources.
+solid_contact_with_gravity_structured_LDADD = -L@libdir@ -lconstitutive \
+                                -lsolid -lgeneric \
+				$(EXTERNAL_LIBS) $(FLIBS)
+
+solid_contact_with_gravity_structured_CXXFLAGS=-DSTRUCTURED_MESH
+
+#-------------------------------------------------
+
+# Sources for executable
+solid_contact_with_gravity_unstructured_SOURCES = solid_contact_with_gravity.cc \
+contact_elements.h
+
+# Required libraries:
+# $(FLIBS) is included in case the solver involves fortran sources.
+solid_contact_with_gravity_unstructured_LDADD = -L@libdir@ -lconstitutive \
+                                -lsolid -lgeneric \
+				$(EXTERNAL_LIBS) $(FLIBS)
+
+#-------------------------------------------------
+
+# Sources for executable
+solid_contact_with_lagr_melt_SOURCES = solid_contact_with_lagr_melt.cc \
+contact_elements.h
+
+# Required libraries:
+# $(FLIBS) is included in case the solver involves fortran sources.
+solid_contact_with_lagr_melt_LDADD = -L@libdir@ -lconstitutive \
+                                -lsolid -lgeneric \
+				$(EXTERNAL_LIBS) $(FLIBS)
+
+#-------------------------------------------------
+
+# Sources for executable
+circular_boulder_melt_SOURCES = circular_boulder_melt.cc 
+
+# Required libraries:
+# $(FLIBS) is included in case the solver involves fortran sources.
+circular_boulder_melt_LDADD = -L@libdir@ -lunsteady_heat -lconstitutive -lsolid -lgeneric \
+				$(EXTERNAL_LIBS) $(FLIBS)
+
+#-------------------------------------------------
+
+# Sources for executable
+circular_boulder_solar_radiation_SOURCES = circular_boulder_solar_radiation.cc 
+
+# Required libraries:
+# $(FLIBS) is included in case the solver involves fortran sources.
+circular_boulder_solar_radiation_LDADD = -L@libdir@ -lunsteady_heat -lconstitutive -lsolid -lgeneric \
+				$(EXTERNAL_LIBS) $(FLIBS)
+
+#-------------------------------------------------
+
+# Sources for executable
+solid_contact_SOURCES = solid_contact.cc contact_elements.h
+
+# Required libraries:
+# $(FLIBS) is included in case the solver involves fortran sources.
+solid_contact_LDADD = -L@libdir@ -lconstitutive -lsolid -lgeneric \
+				$(EXTERNAL_LIBS) $(FLIBS)
+#-------------------------------------------------
+
+# Sources for executable
+two_d_unsteady_heat_SOURCES = two_d_unsteady_heat.cc
+
+# Required libraries:
+# $(FLIBS) is included in case the solver involves fortran sources.
+two_d_unsteady_heat_LDADD = -L@libdir@ -lunsteady_heat -lgeneric \
+				$(EXTERNAL_LIBS) $(FLIBS)
 
 #-------------------------------------------------
 
@@ -60,13 +142,35 @@ stefan_boltzmann_melt_LDADD = -L@libdir@ -lconstitutive -lsolid -lunsteady_heat 
 
 
 EXTRA_DIST += \
-crop.bash  plot_melt.bash  plot_pseudo_melt.bash  plot_sb.bash	plot_spring_contact_landscape.bash  re-enumerate.bash  run_spring_contact.bash
+backup.bash			     plot_sb_melt.bash \
+crop.bash			     plot_solar_radiation.bash \
+debug.bash			     plot_solid_contact.bash \
+plot_circular_boulder_melt.bash      plot_spring_contact_landscape.bash \
+plot_hertz.bash			     re-enumerate.bash \
+plot_melt.bash			     run_sb_melt.bash \
+plot_melt_with_free_penetrator.bash  run_solid_contact.bash \
+plot_pseudo_melt.bash		     run_spring_contact.bash \
+plot_sb.bash
+
 
 EXTRA_DIST+= \
-melt.pvsm  proper_melt.pvsm  pseudo_melt.pvsm  spring_contact_landscape.pvsm  stefan_boltzmann.pvsm  stefan_boltzmann_rays.pvsm stefan_boltzmann_validation.map bins.pvsm
+before_and_after_contact_pressure.pvsm	solar_radiation_cones.pvsm \
+bins.pvsm				solar_radiation.pvsm \
+circular_boulder_melt.pvsm		solid_contact.pvsm \
+compare_displ.pvsm			solid_contact_with_newton_iter.pvsm \
+displ.pvsm				spring_contact_landscape.pvsm \
+hertz_validation.pvsm			stefan_boltzmann_melt.pvsm \
+melt.pvsm				stefan_boltzmann.pvsm \
+proper_melt.pvsm			stefan_boltzmann_rays.pvsm \
+pseudo_melt.pvsm
+
 
 EXTRA_DIST+= \
-exact.map animate.py
+contact.map  stefan_boltzmann_melt_validation.map  view_factor.map \
+exact.map    stefan_boltzmann_validation.map
+
+
+
 
 
 

@@ -137,6 +137,15 @@ public:
  Hijacked(FiniteElement* const &element_pt, const int &face_index) : 
   ELEMENT(element_pt, face_index),
   HijackedElementBase() {}
+
+
+ /// \short Constructor used for hijacking face elements with specification of
+ /// ID of additional variables
+  Hijacked(FiniteElement* const &element_pt, 
+           const int &face_index, 
+           const unsigned &id=0) : 
+  ELEMENT(element_pt, face_index,id),
+  HijackedElementBase() {}
  
   
  /// \short Hijack the i-th value stored at internal data n.

@@ -121,22 +121,27 @@ namespace oomph
 /// all kinds of heat transfer operation. Used to store spatial dim of
 /// problem and the index at which the temperature is stored in the bulk element
 //======================================================================
-class TemplateFreeUnsteadyHeatBaseFaceElement 
-{
+ class TemplateFreeUnsteadyHeatBaseFaceElement 
+ {
+  
+   public:
+  
 
-  public:
-
-
- /// \short Function pointer to the prescribed-flux function fct(x,f(x)) -- 
- /// x is a Vector! 
- typedef void (*UnsteadyHeatPrescribedFluxFctPt)(const double& time,
-                                                 const Vector<double>& x, 
-                                                 const Vector<double>& n, 
-                                                 double& flux);
+  /// \short Function pointer to the prescribed-flux function.
+  /// Flux is allowed to depend on the spatial
+  /// position, x, the outer unit normal, n, and the continuous time. 
+  /// We also allow a dependendence on actual local "temperature", u.
+  typedef void (*UnsteadyHeatPrescribedFluxFctPt)(const double& time,
+                                                  const Vector<double>& x, 
+                                                  const Vector<double>& n,
+                                                  const double& u,  
+                                                  double& flux);
+  
+  /// Constructor
+   TemplateFreeUnsteadyHeatBaseFaceElement() : U_index_ust_heat(0), 
+   Dim(0), Flux_fct_pt(0) 
+   {}
  
- /// Constructor
- TemplateFreeUnsteadyHeatBaseFaceElement(){}
-
  /// Destrutor
  virtual ~TemplateFreeUnsteadyHeatBaseFaceElement(){}
  
@@ -146,11 +151,18 @@ class TemplateFreeUnsteadyHeatBaseFaceElement
   protected:
 
  /// \short Function to calculate the prescribed flux at a given spatial
- /// position and at a given time. Virtual so it can be overloaded
- /// (and augmented with additional contributions) in derived classes.
- virtual void get_flux(const double& time, 
+ /// position, x, the outer unit normal, n, and the continuous time. 
+ /// We also allow an explicit dependendence on the integration point, ipt,
+ /// and the actual local "temperature", u, in anticipation of
+ /// Stefan Boltzmann radiation. Virtual so it can be overloaded.
+ /// Note that the potential dependence on u makes the problem 
+ /// potentially nonlinear -- Jacobian is currently worked out 
+ /// by finite differencing.
+ virtual void get_flux(const unsigned& ipt,
+                       const double& time, 
                        const Vector<double>& x, 
-                       const Vector<double>& n, 
+                       const Vector<double>& n,
+                       const double& u,  
                        double& flux)
  {
   //If the function pointer is zero return zero
@@ -161,18 +173,15 @@ class TemplateFreeUnsteadyHeatBaseFaceElement
   //Otherwise call the function
   else
    {
-    (*Flux_fct_pt)(time,x,n,flux);
+    (*Flux_fct_pt)(time,x,n,u,flux);
    }
  }
-
 
  /// Index at which temperature is stored
  unsigned U_index_ust_heat;
 
  /// The spatial dimension of the problem
  unsigned Dim;
-
-  private:
 
  /// Function pointer to the (global) prescribed-flux function
  UnsteadyHeatPrescribedFluxFctPt Flux_fct_pt;
@@ -1502,21 +1511,158 @@ class TemplateFreeUnsteadyHeatBaseFaceElement
 
 //======================================================================
 /// \short A base class for face elements that involve all kinds of
-/// heat transfer. 
+/// heat transfer. It's actually a fully functional re-implementation
+/// of the UnsteadyHeatFluxElement defined in the unsteady heat library
+/// with a slightly more general interface to the prescribed flux
+/// function (which we allow to depend on many additional (pre-computable)
+/// quantities.
 //======================================================================
 template <class ELEMENT>
- class UnsteadyHeatBaseFaceElement :
-public virtual FaceGeometry<ELEMENT>, 
+ class UnsteadyHeatBaseFaceElement : public virtual FaceGeometry<ELEMENT>, 
  public virtual FaceElement, 
- // hierher public virtual StefanBoltzmannRadiationBase, 
- // hierher public virtual SolarRadiationBase,
  public virtual TemplateFreeUnsteadyHeatBaseFaceElement
  {
-  
    public:
   
   /// Constructor
-  UnsteadyHeatBaseFaceElement(){}
+  UnsteadyHeatBaseFaceElement(FiniteElement* const &bulk_el_pt, 
+                              const int &face_index) 
+   {
+    
+#ifdef PARANOID
+    {
+     //Check that the element is not a refineable 3d element
+     if(bulk_el_pt->dim()==3)
+      {
+       //Is it refineable
+       if(dynamic_cast<RefineableElement*>(bulk_el_pt))
+        {
+         //Issue a warning
+         std::string error_string=
+          "This face element will not work correctly if nodes are hanging.\n";
+         error_string+="Use the refineable version instead. ";
+         OomphLibWarning(error_string,
+                         OOMPH_CURRENT_FUNCTION,
+                         OOMPH_EXCEPTION_LOCATION);
+        }
+      }
+    }
+#endif
+    
+    //Attach the geometrical information to the element. N.B. This function
+    //also assigns nbulk_value from the required_nvalue of the bulk element
+    bulk_el_pt->build_face_element(face_index,this);    
+
+    
+    // Extract the dimension of the problem from the dimension of 
+    // the first node
+    Dim = this->node_pt(0)->ndim();
+    
+    //Cast to the appropriate UnsteadyHeatEquation so that we can
+    //find the index at which the variable is stored
+    //We assume that the dimension of the full problem is the same
+    //as the dimension of the node, if this is not the case you will have
+    //to write custom elements, sorry
+    switch(Dim)
+     {
+      //One dimensional problem
+     case 1:
+     {
+      UnsteadyHeatEquations<1>* eqn_pt = 
+       dynamic_cast<UnsteadyHeatEquations<1>*>(bulk_el_pt);
+      //If the cast has failed die
+      if(eqn_pt==0)
+       {
+        std::string error_string =
+         "Bulk element must inherit from UnsteadyHeatEquations.";
+        error_string += 
+         "Nodes are one dimensional, but cannot cast the bulk element to\n";
+        error_string += "UnsteadyHeatEquations<1>\n.";
+        error_string += 
+         "If you desire this functionality, you must implement it yourself\n";
+        
+        throw OomphLibError(error_string,
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+       }
+      //Otherwise read out the value
+      else
+       {
+        //Read the index from the (cast) bulk element
+        U_index_ust_heat = eqn_pt->u_index_ust_heat();
+       }
+     }
+     break;
+     
+     //Two dimensional problem
+     case 2:
+     {
+      UnsteadyHeatEquations<2>* eqn_pt = 
+       dynamic_cast<UnsteadyHeatEquations<2>*>(bulk_el_pt);
+      //If the cast has failed die
+      if(eqn_pt==0)
+       {
+        std::string error_string =
+         "Bulk element must inherit from UnsteadyHeatEquations.";
+        error_string += 
+         "Nodes are two dimensional, but cannot cast the bulk element to\n";
+        error_string += "UnsteadyHeatEquations<2>\n.";
+        error_string += 
+         "If you desire this functionality, you must implement it yourself\n";
+        
+        throw OomphLibError(error_string,
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+       }
+      else
+       {
+        //Read the index from the (cast) bulk element.
+        U_index_ust_heat = eqn_pt->u_index_ust_heat();
+       }
+     }
+     break;
+     
+     //Three dimensional problem
+     case 3:
+     {
+      UnsteadyHeatEquations<3>* eqn_pt = 
+       dynamic_cast<UnsteadyHeatEquations<3>*>(bulk_el_pt);
+      //If the cast has failed die
+      if(eqn_pt==0)
+       {
+        std::string error_string =
+         "Bulk element must inherit from UnsteadyHeatEquations.";
+        error_string += 
+         "Nodes are three dimensional, but cannot cast the bulk element to\n";
+        error_string += "UnsteadyHeatEquations<3>\n.";
+      error_string += 
+       "If you desire this functionality, you must implement it yourself\n";
+      
+      throw OomphLibError(error_string,
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+       }
+      else
+       {
+        //Read the index from the (cast) bulk element.
+        U_index_ust_heat = eqn_pt->u_index_ust_heat();
+       }
+     }
+     break;
+     
+     //Any other case is an error
+     default:
+      std::ostringstream error_stream; 
+      error_stream <<  "Dimension of node is " << Dim 
+                   << ". It should be 1,2, or 3!" << std::endl;
+      
+      throw OomphLibError(error_stream.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+      break;
+     }
+    
+   }
   
   /// Destructor
   virtual ~UnsteadyHeatBaseFaceElement(){}
@@ -1555,262 +1701,235 @@ public virtual FaceGeometry<ELEMENT>,
   {return FaceElement::zeta_nodal(n,k,i);}     
   
   
-  /// Output function
-  void output(std::ostream &outfile) 
+ /// Compute the element residual vector
+ inline void fill_in_contribution_to_residuals(Vector<double> &residuals)
   {
-   unsigned nplot=5;
-   output(outfile,nplot);
-  }
-  
-  /// \short Output function. Note: nplot is ignored since we can only
-  /// output at integration points
-  void output(std::ostream &outfile, const unsigned &n_plot)
-  { 
-   
-   // hierher
-   assert(false);
-  
-   /* unsigned n_dim = this->nodal_dimension(); */
-   
-   /* Vector<double> x(n_dim); */
-   /* Vector<double> s(n_dim-1); */
-   /* Vector<double> dx_dt(n_dim); */
-   
-   /* //Set the value of n_intpt */
-   /* unsigned n_intpt = integral_pt()->nweight(); */
-   
-   /* outfile << "ZONE\n"; */
-   
-   /* //Loop over the integration points */
-   /* for(unsigned ipt=0;ipt<n_intpt;ipt++) */
-   /*  { */
-   /*   // Local coordinate of integration point */
-   /*   for (unsigned i=0;i<n_dim-1;i++) */
-   /*    { */
-   /*     s[i]=integral_pt()->knot(ipt,i); */
-   /*    } */
-     
-   /*   // Get Eulerian coordinates and their time derivative */
-   /*   this->interpolated_x(s,x); */
-   /*   this->interpolated_dxdt(s,1,dx_dt); */
-     
-   /*   // Get temperature  */
-   /*   double interpolated_u=0; */
-   /*   this->interpolated_u(s,interpolated_u); */
-     
-   /*   // Outer unit normal */
-   /*   Vector<double> unit_normal(n_dim); */
-   /*   outer_unit_normal(s,unit_normal); */
-     
-   /*   /\* //Get the incoming atmospheric radiation *\/ */
-   /*   /\* //-------------------------------------- *\/ */
-   /*   /\* double incoming_atmospheric_radiation= *\/ */
-   /*   /\*  atmospheric_radiation(ipt,time(),x,unit_normal); *\/ */
-     
-   /*   // Get flux into adjacent bulk element */
-   /*   //------------------------------------ */
-     
-   /*   // Get pointer to bulk element */
-   /*   ELEMENT* bulk_el_pt=dynamic_cast<ELEMENT*>(this->bulk_element_pt()); */
-     
-   /*   // Local coordinates in bulk element */
-   /*   Vector<double> s_bulk(n_dim); */
-   /*   s_bulk=local_coordinate_in_bulk(s); */
-     
-   /*   // Get flux from bulk element (flux[i] = du/dx_i) */
-   /*   Vector<double> flux_vector(n_dim); */
-   /*   bulk_el_pt->get_flux(s_bulk,flux_vector); */
-     
-   /*   // Work out heat flux seen by adjacent bulk element  */
-   /*   // du/dn > 0: Hotter on surface than on inside of bulk */
-   /*   // so net flux (from hot to cold) is into the bulk. */
-   /*   double beta_dtheta_dn=0.0; */
-   /*   for (unsigned i=0;i<n_dim;i++) */
-   /*    { */
-   /*     beta_dtheta_dn+=flux_vector[i]*unit_normal[i]; */
-   /*    } */
-   /*   beta_dtheta_dn*= bulk_el_pt->beta(); */
-     
-   /*   /\* // Outgoing Stefan Boltzmann radiation *\/ */
-   /*   /\* //------------------------------------- *\/ */
-   /*   /\* double outgoing_sb_radiation= *\/ */
-   /*   /\*  this->sigma()*pow((interpolated_u+this->theta_0()),4); *\/ */
-     
-   /*   /\* // Incoming Stefan Boltzmann radiation *\/ */
-   /*   /\* //------------------------------------ *\/ */
-   /*   /\* double incoming_sb_radiation=incoming_stefan_boltzmann_radiation *\/ */
-   /*   /\*  (ipt,x,unit_normal); *\/ */
-     
-   /*   //Output the x,y,.. */
-   /*   for(unsigned i=0;i<n_dim;i++)  */
-   /*    {outfile << x[i] << " ";} */
-     
-   /*   /\* // Output atmospheric radiation *\/ */
-   /*   /\* outfile << incoming_atmospheric_radiation << " "; *\/ */
-     
-   /*   /\* // Output radiative gains *\/ */
-   /*   /\* outfile << incoming_sb_radiation << " "; *\/ */
-     
-   /*   /\* // Output radiative losses *\/ */
-   /*   /\* outfile <<  outgoing_sb_radiation << " "; *\/ */
-     
-   /*   // Net heat flux into adjacent bulk */
-   /*   outfile << beta_dtheta_dn << " "; */
-     
-   /*   // Temperature */
-   /*   outfile << interpolated_u << " "; */
-     
-   /*   // Output mesh velocity */
-   /*   for(unsigned i=0;i<n_dim;i++) */
-   /*    { */
-   /*     outfile << dx_dt[i] << " "; */
-   /*    } */
-     
-   /*   /\* // Output min/max angle and opening angle *\/ */
-   /*   /\* outfile  *\/ */
-   /*   /\*  << Diffuse_limit_angles[ipt].first << " " *\/ */
-   /*   /\*  << Diffuse_limit_angles[ipt].second << " " *\/ */
-   /*   /\*  << Diffuse_limit_angles[ipt].second- *\/ */
-   /*   /\*  Diffuse_limit_angles[ipt].first << " "; *\/ */
-     
-   /*   // Output normal */
-   /*   for(unsigned i=0;i<n_dim;i++) */
-   /*    {outfile << unit_normal[i] << " ";} */
-     
-   /*   outfile << std::endl; */
-   /*  } */
-
-
+   //Call the generic residuals function
+   fill_in_generic_residual_contribution_ust_heat_flux(residuals);
   }
 
-  /// \short C_style output function
-  void output(FILE* file_pt)
-  {FiniteElement::output(file_pt);}
-  
-  /// \short C-style output function
-  void output(FILE* file_pt, const unsigned &n_plot)
-  {FiniteElement::output(file_pt,n_plot);}
-    
-  
-   protected:
-  
-  /// \short Extract index of nodal value that stores temperature from
-  /// bulk element
-  void extract_temperature_index_from_bulk_element(
-   FiniteElement* const &bulk_el_pt)
-  {
-   // Extract the dimension of the problem from the dimension of 
-   // the first node
-   Dim = this->node_pt(0)->ndim();
-   
-   //Cast to the appropriate UnsteadyHeatEquation so that we can
-   //find the index at which the variable is stored
-   //We assume that the dimension of the full problem is the same
-   //as the dimension of the node, if this is not the case you will have
-   //to write custom elements, sorry
-   switch(Dim)
-    {
-     //One dimensional problem
-    case 1:
-    {
-     UnsteadyHeatEquations<1>* eqn_pt = 
-      dynamic_cast<UnsteadyHeatEquations<1>*>(bulk_el_pt);
-     //If the cast has failed die
-     if(eqn_pt==0)
-      {
-       std::string error_string =
-        "Bulk element must inherit from UnsteadyHeatEquations.";
-       error_string += 
-        "Nodes are one dimensional, but cannot cast the bulk element to\n";
-       error_string += "UnsteadyHeatEquations<1>\n.";
-       error_string += 
-        "If you desire this functionality, you must implement it yourself\n";
-       
-       throw OomphLibError(error_string,
-                           OOMPH_CURRENT_FUNCTION,
-                           OOMPH_EXCEPTION_LOCATION);
-      }
-     //Otherwise read out the value
-     else
-      {
-       //Read the index from the (cast) bulk element
-       U_index_ust_heat = eqn_pt->u_index_ust_heat();
-      }
-    }
-    break;
-    
-    //Two dimensional problem
-    case 2:
-    {
-     UnsteadyHeatEquations<2>* eqn_pt = 
-      dynamic_cast<UnsteadyHeatEquations<2>*>(bulk_el_pt);
-     //If the cast has failed die
-     if(eqn_pt==0)
-      {
-       std::string error_string =
-        "Bulk element must inherit from UnsteadyHeatEquations.";
-       error_string += 
-        "Nodes are two dimensional, but cannot cast the bulk element to\n";
-       error_string += "UnsteadyHeatEquations<2>\n.";
-       error_string += 
-        "If you desire this functionality, you must implement it yourself\n";
-       
-       throw OomphLibError(error_string,
-                           OOMPH_CURRENT_FUNCTION,
-                           OOMPH_EXCEPTION_LOCATION);
-      }
-     else
-      {
-       //Read the index from the (cast) bulk element.
-       U_index_ust_heat = eqn_pt->u_index_ust_heat();
-      }
-    }
-    break;
-    
-    //Three dimensional problem
-    case 3:
-    {
-     UnsteadyHeatEquations<3>* eqn_pt = 
-      dynamic_cast<UnsteadyHeatEquations<3>*>(bulk_el_pt);
-     //If the cast has failed die
-     if(eqn_pt==0)
-      {
-       std::string error_string =
-        "Bulk element must inherit from UnsteadyHeatEquations.";
-       error_string += 
-        "Nodes are three dimensional, but cannot cast the bulk element to\n";
-       error_string += "UnsteadyHeatEquations<3>\n.";
-       error_string += 
-        "If you desire this functionality, you must implement it yourself\n";
-       
-       throw OomphLibError(error_string,
-                           OOMPH_CURRENT_FUNCTION,
-                           OOMPH_EXCEPTION_LOCATION);
-      }
-     else
-      {
-       //Read the index from the (cast) bulk element.
-       U_index_ust_heat = eqn_pt->u_index_ust_heat();
-      }
-    }
-    break;
-    
-    //Any other case is an error
-    default:
-     std::ostringstream error_stream; 
-     error_stream <<  "Dimension of node is " << Dim 
-                  << ". It should be 1,2, or 3!" << std::endl;
-     
-     throw OomphLibError(error_stream.str(),
-                         OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
-     break;
-    }
+
+ // No Jacobian because of potential of nonlinear dependence of 
+ // flux on temperature
+ /* /// Compute the element's residual vector and its Jacobian matrix */
+ /* inline void fill_in_contribution_to_jacobian(Vector<double> &residuals, */
+ /*                                              DenseMatrix<double> &jacobian) */
+ /* { */
+ /*  //Call the generic routine with the flag set to 1 */
+ /*  fill_in_generic_residual_contribution_ust_heat_flux(residuals,jacobian,1); */
+ /* } */
  
-  }
+ 
+ /// Output function
+ void output(std::ostream &outfile) 
+ {
+  unsigned nplot=5;
+  output(outfile,nplot);
+ }
+ 
+ /// \short Output function. Output "temperature", "incoming" heat flux,
+ /// and outer unit normal. n_plot is ignored because flux function may
+ /// depend explicitly on integration point!
+ void output(std::ostream &outfile, const unsigned &n_plot)
+ { 
+  unsigned n_dim = this->nodal_dimension();
+  Vector<double> x(n_dim);
+  Vector<double> s(n_dim-1);
+  Vector<double> unit_normal(n_dim);
   
+  // Get continuous time from timestepper of first node
+  double time=node_pt(0)->time_stepper_pt()->time_pt()->time();
+  
+  // Number of integration points
+  unsigned n_intpt = integral_pt()->nweight();
+  
+  outfile << "ZONE\n";
+  
+  //Loop over the integration points
+  for(unsigned ipt=0;ipt<n_intpt;ipt++)
+   {
+    // Local coordinate of integration point
+    for (unsigned i=0;i<n_dim-1;i++)
+     {
+      s[i]=integral_pt()->knot(ipt,i);
+     }
+    
+    // Get Eulerian coordinates
+    this->interpolated_x(s,x);
+    
+    // Get temperature
+    double interpolated_u=0;
+    this->interpolated_u(s,interpolated_u);
+    
+    // Outer unit normal
+    outer_unit_normal(s,unit_normal);
+    
+    //Get the incoming flux
+    double flux=0.0;
+    get_flux(ipt,time,x,unit_normal,interpolated_u,flux);
+    
+    //Output the x,y,..
+    for(unsigned i=0;i<n_dim;i++)
+     {
+      outfile << x[i] << " ";
+     }
+    
+    // Temperature
+    outfile << interpolated_u << " ";
+    
+    // Incoming flux
+    outfile << flux << " ";
+    
+    // Outer unit normal
+    for(unsigned i=0;i<n_dim;i++)
+     {
+      outfile << unit_normal[i] << " ";
+     }
+    
+    outfile << std::endl;
+   }
+ }
+ 
+ /// \short C_style output function
+ void output(FILE* file_pt)
+ {FiniteElement::output(file_pt);}
+ 
+ /// \short C-style output function
+ void output(FILE* file_pt, const unsigned &n_plot)
+ {FiniteElement::output(file_pt,n_plot);}
+ 
+ 
+   protected:
+ 
+ /// \short Function to compute the shape and test functions and to return 
+ /// the Jacobian of mapping between local and global (Eulerian)
+ /// coordinates
+ inline double shape_and_test(const Vector<double> &s, Shape &psi, Shape &test)
+  const
+ {
+  //Find number of nodes
+  unsigned n_node = nnode();
+   
+  //Get the shape functions
+  shape(s,psi);
+   
+  //Set the test functions to be the same as the shape functions
+  for(unsigned i=0;i<n_node;i++) {test[i] = psi[i];}
+
+  //Return the value of the jacobian
+  return J_eulerian(s);
+ }
+ 
+   private:
+ 
+ /// Generic residuals function
+ void fill_in_generic_residual_contribution_ust_heat_flux(Vector<double>& 
+                                                          residuals);
+ 
  };
 
+
+
+//===========================================================================
+/// Compute the element's residual vector. No Jacobian because
+/// we allow dependence of flux on "temperature" which introduces
+/// potential nonlinearity -- currently handled by fd-ing.
+//===========================================================================
+template<class ELEMENT>
+void UnsteadyHeatBaseFaceElement<ELEMENT>::
+fill_in_generic_residual_contribution_ust_heat_flux(Vector<double> &residuals)
+{
+ //Find out how many nodes there are
+ const unsigned n_node = nnode();
+
+ // Get continuous time from timestepper of first node
+ double time=node_pt(0)->time_stepper_pt()->time_pt()->time();
+  
+ //Set up memory for the shape and test functions
+ Shape psif(n_node), testf(n_node);
+ 
+ //Set the value of n_intpt
+ const unsigned n_intpt = integral_pt()->nweight();
+ 
+ //Set the Vector to hold local coordinates
+ Vector<double> s(Dim-1);
+ 
+ //Integer to store the local equation and unknowns
+ int local_eqn=0;
+
+ // Locally cache the index at which the variable is stored
+ const unsigned u_index_ust_heat = U_index_ust_heat;
+ 
+ //Loop over the integration points
+ //--------------------------------
+ for(unsigned ipt=0;ipt<n_intpt;ipt++)
+  {
+
+   //Assign values of s
+   for(unsigned i=0;i<(Dim-1);i++)
+    {
+     s[i] = integral_pt()->knot(ipt,i);
+    }
+
+   //Get the integral weight
+   double w = integral_pt()->weight(ipt);
+   
+   //Find the shape and test functions and return the Jacobian
+   //of the mapping
+   double J = shape_and_test(s,psif,testf);
+   
+   //Premultiply the weights and the Jacobian
+   double W = w*J;
+   
+   //Need to find position to feed into flux function
+   Vector<double> interpolated_x(Dim);
+   
+   //Initialise to zero
+   double interpolated_u=0.0;
+   for(unsigned i=0;i<Dim;i++)
+    {
+     interpolated_x[i] = 0.0;
+    }
+
+   // hierher replace in second sweep (once inline computation of
+   // n has been validated somewhere)
+
+   //Get the outer unit normal
+   Vector<double> interpolated_n(Dim);
+   this->outer_unit_normal(ipt,interpolated_n);
+   
+   //Calculate coordinate and temperature
+   for(unsigned l=0;l<n_node;l++) 
+    {
+     double u_value = raw_nodal_value(l,u_index_ust_heat);
+     interpolated_u += u_value*psif[l];
+
+     //Loop over directions
+     for(unsigned i=0;i<Dim;i++)
+      {
+       interpolated_x[i] += nodal_position(l,i)*psif[l];
+      }
+    }
+   
+   //Get the imposed flux
+   double flux=0.0;
+   get_flux(ipt,time,interpolated_x,interpolated_n,interpolated_u,flux);
+   
+   //Now add to the appropriate equations
+   
+   //Loop over the test functions
+   for(unsigned l=0;l<n_node;l++)
+    {
+     local_eqn = nodal_local_eqn(l,u_index_ust_heat);
+     /*IF it's not a boundary condition*/
+     if(local_eqn >= 0)
+      {
+       //Add the prescribed flux terms
+       residuals[local_eqn] -= flux*testf[l]*W;
+      }
+    }
+  }
+}
 
 
 
@@ -2127,33 +2246,19 @@ template <class ELEMENT>
  class SurfaceMeltElement : 
 public virtual FaceGeometry<ELEMENT>, 
  public virtual SolidFaceElement, 
-// hierher public virtual StefanBoltzmannRadiationBase, // hierher needed?
-// hierher public virtual SolarRadiationBase, // hierher needed?
  public virtual UnsteadyHeatBaseFaceElement<ELEMENT>
   
  {
   
-   protected:
-  
-  /// \short Helper function that actually calculates the residuals
-  void fill_in_contribution_to_residuals_surface_melt(
-   Vector<double> &residuals);
-    
-  /// Id of additional unknowns (Lagrange multiplier ("pressure") and melt rate)
-  unsigned Melt_id;
-  
-  /// Pointer to non-default melt temperature
-  double* Melt_temperature_pt;
-  
    public:
   
-  /// \short Constructor, which takes a "bulk" element and the 
-  /// value of the index and its limit
+   /// \short Constructor, which takes a "bulk" element and the 
+   /// value of the index and its limit
    SurfaceMeltElement(FiniteElement* const &bulk_el_pt, 
                       const int &face_index,
                       const unsigned &id=0,
                       const bool& called_from_refineable_constructor=false) : 
-  FaceGeometry<ELEMENT>(), FaceElement()
+  UnsteadyHeatBaseFaceElement<ELEMENT>(bulk_el_pt,face_index)
    { 
     
 #ifdef PARANOID
@@ -2186,10 +2291,6 @@ public virtual FaceGeometry<ELEMENT>,
     // it from any others
     Melt_id=id;
     
-    //Attach the geometrical information to the element. N.B. This function
-    //also assigns nbulk_value from the required_nvalue of the bulk element
-    bulk_el_pt->build_face_element(face_index,this);
-    
     // We need two additional value for each FaceElement node:
     // (1) the normal traction (Lagrange multiplier) to be 
     // exerted onto the pseudo-solid and (2) the melt rate
@@ -2200,10 +2301,6 @@ public virtual FaceGeometry<ELEMENT>,
     // the position of the first entry of this face element's 
     // additional values.
     add_additional_values(n_additional_values,id);
-    
-    // Extract index of nodal value that stores temperature from
-    // bulk element
-    this->extract_temperature_index_from_bulk_element(bulk_el_pt); 
     
 #ifdef PARANOID
     // Check spatial dimension
@@ -2216,6 +2313,33 @@ public virtual FaceGeometry<ELEMENT>,
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif
+
+
+    /* // hierher */
+    /* // Add positions of bulk nodes as external data */
+    /* unsigned nnod_bulk=bulk_el_pt->nnode(); */
+    /* unsigned count=0; */
+    /* for (unsigned j=0;j<nnod_bulk;j++) */
+    /*  { */
+    /*   SolidNode* bulk_nod_pt=dynamic_cast<SolidNode*>(bulk_el_pt->node_pt(j)); */
+    /*   unsigned do_it=true; */
+    /*   for (unsigned k=0;k<n_nod;k++) */
+    /*    { */
+    /*     SolidNode* nod_pt=dynamic_cast<SolidNode*>(node_pt(k)); */
+    /*     if (nod_pt==bulk_nod_pt) */
+    /*      { */
+    /*       do_it=false; */
+    /*       break; */
+    /*      } */
+    /*    } */
+    /*   if (do_it) */
+    /*    { */
+    /*     count++; */
+    /*     add_external_data(bulk_nod_pt->variable_position_pt()); */
+    /*     add_external_data(bulk_nod_pt); */
+    /*    } */
+    /*  } */
+    /* oomph_info << "Added " << count << " position data from bulk\n"; */
 
    }
   
@@ -2304,6 +2428,33 @@ public virtual FaceGeometry<ELEMENT>,
      nod_pt->pin(first_index+1);
     }
   }
+
+  
+  /// \short Set "Lagrange multiplier pressure" to zero (to make things
+  /// consistent with re-set Lagrangian coordinates
+  void set_lagrange_multiplier_pressure_to_zero()
+  {
+   unsigned n_node=nnode();
+   for(unsigned l=0;l<n_node;l++) 
+    {
+     // get the node pt
+     Node* nod_pt = node_pt(l);
+     
+     // Cast to a boundary node
+     BoundaryNodeBase *bnod_pt = 
+      dynamic_cast<BoundaryNodeBase*>(nod_pt);
+     
+     // Get the index of the first nodal value associated with
+     // this FaceElement
+     unsigned first_index=
+      bnod_pt->index_of_first_value_assigned_by_face_element(Melt_id);
+     
+     // Lagrange multiplier is first additional value created by this 
+     // face element)
+     nod_pt->set_value(first_index,0.0);
+    }
+  }
+
   
   /// \short Specify the value of nodal zeta from the face geometry:
   /// The "global" intrinsic coordinate of the element when
@@ -2321,127 +2472,11 @@ public virtual FaceGeometry<ELEMENT>,
   
 
 
-  /// \short Output function. 
-  void output(std::ostream &outfile, const unsigned &n_plot)
-  { 
-   // Locally cache the index at which the variable is stored
-   const unsigned u_index_ust_heat = this->U_index_ust_heat;
-   
-   // Get continuous time from timestepper of first node
-   double time=node_pt(0)->time_stepper_pt()->time_pt()->time();
-   
-   //Find out how many nodes there are
-   const unsigned n_node = nnode();
-   
-   //Set up memory for the shape functions
-   Shape psi(n_node);
-   
-   // Local and global coordinates
-   Vector<double> s(this->Dim-1);
-   Vector<double> interpolated_x(this->Dim);
-   
-   // Tecplot header info
-   outfile << this->tecplot_zone_string(n_plot);
-   
-   // Loop over plot points
-   unsigned num_plot_points=this->nplot_points(n_plot);
-   for (unsigned iplot=0;iplot<num_plot_points;iplot++)
-    {
-     // Get local coordinates of plot point
-     this->get_s_plot(iplot,n_plot,s);
-     
-     // Outer unit normal
-     Vector<double> unit_normal(this->Dim);
-     outer_unit_normal(s,unit_normal);
-     
-     //Find the shape functions
-     shape(s,psi);
-     
-     // Melt flux
-     double melt_flux=0.0;
-     
-     // Temperature
-     double u=0.0;
-     
-     //Initialise to zero
-     for(unsigned i=0;i<this->Dim;i++)
-      {
-       interpolated_x[i] = 0.0;
-      }
-     
-     //Calculate stuff
-     for(unsigned l=0;l<n_node;l++) 
-      {
-       // get the node pt
-       Node* nod_pt = node_pt(l);
-       
-       // Cast to a boundary node
-       BoundaryNodeBase *bnod_pt = 
-        dynamic_cast<BoundaryNodeBase*>(nod_pt);
-       
-       // Get the index of the first nodal value associated with
-       // this FaceElement
-       unsigned first_index=
-        bnod_pt->index_of_first_value_assigned_by_face_element(Melt_id);
-       
-       // Melt rate
-       melt_flux+=nod_pt->value(first_index+1)*psi[l];
-       
-       // Temperature
-       u+=nod_pt->value(u_index_ust_heat)*psi[l]; 
-       
-       //Loop over directions
-       for(unsigned i=0;i<this->Dim;i++)
-        {
-         interpolated_x[i] += nodal_position(l,i)*psi[l];
-        }
-      }
-     
-     //Get the imposed flux
-     double flux=0.0;
-     this->get_flux(time,interpolated_x,unit_normal,flux);
-     
-     //Output the x,y,..
-     for(unsigned i=0;i<this->Dim;i++) 
-      {
-       outfile << interpolated_x[i] << " ";
-      }
-     
-     // Output imposed flux and melt flux
-     outfile << flux << " ";
-     outfile << melt_flux << " ";
-     
-     // Output normal
-     for(unsigned i=0;i<this->Dim;i++) 
-      {
-       outfile << unit_normal[i] << " ";
-      } 
-     outfile << std::endl;
-    }
-  }
-  /// Output melt rate etc
-  void output_melt_rate(std::ostream &outfile, const unsigned &n_plot=5);
-  
- }; 
-
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-
-
-//=====================================================================
-/// Output melt rate etc.
-//=====================================================================
-template<class ELEMENT>
- void SurfaceMeltElement<ELEMENT>::output_melt_rate(std::ostream &outfile, 
-                                                    const unsigned &n_plot)
+ /// Melt rate at local coordinate s
+ void interpolated_melt_rate(const Vector<double>& s, double& melt_flux)
  {
-  
-  // Locally cache the index at which the variable is stored
-  const unsigned u_index_ust_heat = this->U_index_ust_heat;
-  
-  // Get continuous time from timestepper of first node
-  double time=node_pt(0)->time_stepper_pt()->time_pt()->time();
+  // Iinitialise
+  melt_flux=0.0;
   
   //Find out how many nodes there are
   const unsigned n_node = nnode();
@@ -2449,91 +2484,227 @@ template<class ELEMENT>
   //Set up memory for the shape functions
   Shape psi(n_node);
   
-  // Local and global coordinates
-  Vector<double> s(this->Dim-1);
-  Vector<double> interpolated_x(this->Dim);
+  // Get shape fct
+  shape(s,psi);
   
-  // Tecplot header info
-  outfile << this->tecplot_zone_string(n_plot);
-  
-  // Loop over plot points
-  unsigned num_plot_points=this->nplot_points(n_plot);
-  for (unsigned iplot=0;iplot<num_plot_points;iplot++)
+  //Calculate stuff
+  for(unsigned l=0;l<n_node;l++) 
    {
-    // Get local coordinates of plot point
-    this->get_s_plot(iplot,n_plot,s);
+    // get the node pt
+    Node* nod_pt = node_pt(l);
+    
+    // Cast to a boundary node
+    BoundaryNodeBase *bnod_pt = dynamic_cast<BoundaryNodeBase*>(nod_pt);
+    
+    // Get the index of the first nodal value associated with
+    // this FaceElement
+    unsigned first_index=
+     bnod_pt->index_of_first_value_assigned_by_face_element(Melt_id);
+    
+    // Melt rate
+    melt_flux+=nod_pt->value(first_index+1)*psi[l];
+   }
+ }
+ 
+ /// \short Generalised output function to include melt information:
+ /// temperature, incoming flux, melt rate, outer unit normal
+ void output_melt(std::ostream &outfile)
+ { 
+  unsigned n_dim = this->nodal_dimension();
+  Vector<double> x(n_dim);
+  Vector<double> s(n_dim-1);
+  Vector<double> unit_normal(n_dim);
+  
+  // Get continuous time from timestepper of first node
+  double time=node_pt(0)->time_stepper_pt()->time_pt()->time();
+  
+  // Number of integration points
+  unsigned n_intpt = integral_pt()->nweight();
+  
+  outfile << "ZONE\n";
+  
+  //Loop over the integration points
+  for(unsigned ipt=0;ipt<n_intpt;ipt++)
+   {
+    // Local coordinate of integration point
+    for (unsigned i=0;i<n_dim-1;i++)
+     {
+      s[i]=integral_pt()->knot(ipt,i);
+     }
+    
+    // Get Eulerian coordinates
+    this->interpolated_x(s,x);
+    
+    // Get temperature
+    double interpolated_u=0;
+    this->interpolated_u(s,interpolated_u);
     
     // Outer unit normal
-    Vector<double> unit_normal(this->Dim);
     outer_unit_normal(s,unit_normal);
     
-    //Find the shape functions
-    shape(s,psi);
-    
-    // Melt flux
-    double melt_flux=0.0;
-    
-    // Temperature
-    double u=0.0;
-    
-    //Initialise to zero
-    for(unsigned i=0;i<this->Dim;i++)
-     {
-      interpolated_x[i] = 0.0;
-     }
-    
-    //Calculate stuff
-    for(unsigned l=0;l<n_node;l++) 
-     {
-      // get the node pt
-      Node* nod_pt = node_pt(l);
-      
-      // Cast to a boundary node
-      BoundaryNodeBase *bnod_pt = 
-       dynamic_cast<BoundaryNodeBase*>(nod_pt);
-      
-      // Get the index of the first nodal value associated with
-      // this FaceElement
-      unsigned first_index=
-       bnod_pt->index_of_first_value_assigned_by_face_element(Melt_id);
-      
-      // Melt rate
-      melt_flux+=nod_pt->value(first_index+1)*psi[l];
-      
-      // Temperature
-      u+=nod_pt->value(u_index_ust_heat)*psi[l]; 
-      
-      //Loop over directions
-      for(unsigned i=0;i<this->Dim;i++)
-       {
-        interpolated_x[i] += nodal_position(l,i)*psi[l];
-       }
-     }
-    
-    //Get the imposed flux
+    // Get melt rate
+    double interpolated_m=0.0;
+    this->interpolated_melt_rate(s,interpolated_m);
+
+    // Get "lagrange multiplier" pressure
+    double lagrange_p=get_interpolated_lagrange_p(s);
+
+    //Get the incoming flux
     double flux=0.0;
-    this->get_flux(time,interpolated_x,flux);
+    this->get_flux(ipt,time,x,unit_normal,interpolated_u,flux);
     
     //Output the x,y,..
-    for(unsigned i=0;i<this->Dim;i++) 
+    for(unsigned i=0;i<n_dim;i++)
      {
-      outfile << interpolated_x[i] << " ";
+      outfile << x[i] << " ";
      }
     
-    // Output imposed flux and melt flux
-    outfile << flux << " ";
-    outfile << melt_flux << " ";
+    // Temperature
+    outfile << interpolated_u << " ";
     
-    // Output normal
-    for(unsigned i=0;i<this->Dim;i++) 
+    // Incoming flux
+    outfile << flux << " ";
+    
+    // Melt rate
+    outfile << interpolated_m << " ";
+    
+    // Lagrange multiplier-like pressure
+    outfile << lagrange_p << " ";
+    
+    // Outer unit normal
+    for(unsigned i=0;i<n_dim;i++)
      {
       outfile << unit_normal[i] << " ";
-     } 
+     }
     outfile << std::endl;
    }
-  
  }
+ 
+   protected:
+ 
+ /// \short Helper function that actually calculates the residuals
+ void fill_in_contribution_to_residuals_surface_melt(
+  Vector<double> &residuals);
+ 
+ /// Id of additional unknowns (Lagrange multiplier ("pressure") and melt rate)
+ unsigned Melt_id;
+ 
+ /// Pointer to non-default melt temperature
+ double* Melt_temperature_pt;
+ 
+ }; 
 
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
+// hierher kill
+
+/* //===================================================================== */
+/* /// Output melt rate etc. */
+/* //===================================================================== */
+/* template<class ELEMENT> */
+/*  void SurfaceMeltElement<ELEMENT>::output_melt_rate(std::ostream &outfile,  */
+/*                                                     const unsigned &n_plot) */
+/*  { */
+  
+/*   // Locally cache the index at which the variable is stored */
+/*   const unsigned u_index_ust_heat = this->U_index_ust_heat; */
+  
+/*   // Get continuous time from timestepper of first node */
+/*   double time=node_pt(0)->time_stepper_pt()->time_pt()->time(); */
+  
+/*   //Find out how many nodes there are */
+/*   const unsigned n_node = nnode(); */
+  
+/*   //Set up memory for the shape functions */
+/*   Shape psi(n_node); */
+  
+/*   // Local and global coordinates */
+/*   Vector<double> s(this->Dim-1); */
+/*   Vector<double> interpolated_x(this->Dim); */
+  
+/*   // Tecplot header info */
+/*   outfile << this->tecplot_zone_string(n_plot); */
+  
+/*   // Loop over plot points */
+/*   unsigned num_plot_points=this->nplot_points(n_plot); */
+/*   for (unsigned iplot=0;iplot<num_plot_points;iplot++) */
+/*    { */
+/*     // Get local coordinates of plot point */
+/*     this->get_s_plot(iplot,n_plot,s); */
+    
+/*     // Outer unit normal */
+/*     Vector<double> unit_normal(this->Dim); */
+/*     outer_unit_normal(s,unit_normal); */
+    
+/*     //Find the shape functions */
+/*     shape(s,psi); */
+    
+/*     // Melt flux */
+/*     double melt_flux=0.0; */
+    
+/*     // Temperature */
+/*     double u=0.0; */
+    
+/*     //Initialise to zero */
+/*     for(unsigned i=0;i<this->Dim;i++) */
+/*      { */
+/*       interpolated_x[i] = 0.0; */
+/*      } */
+    
+/*     //Calculate stuff */
+/*     for(unsigned l=0;l<n_node;l++)  */
+/*      { */
+/*       // get the node pt */
+/*       Node* nod_pt = node_pt(l); */
+      
+/*       // Cast to a boundary node */
+/*       BoundaryNodeBase *bnod_pt =  */
+/*        dynamic_cast<BoundaryNodeBase*>(nod_pt); */
+      
+/*       // Get the index of the first nodal value associated with */
+/*       // this FaceElement */
+/*       unsigned first_index= */
+/*        bnod_pt->index_of_first_value_assigned_by_face_element(Melt_id); */
+      
+/*       // Melt rate */
+/*       melt_flux+=nod_pt->value(first_index+1)*psi[l]; */
+      
+/*       // Temperature */
+/*       u+=nod_pt->value(u_index_ust_heat)*psi[l];  */
+      
+/*       //Loop over directions */
+/*       for(unsigned i=0;i<this->Dim;i++) */
+/*        { */
+/*         interpolated_x[i] += nodal_position(l,i)*psi[l]; */
+/*        } */
+/*      } */
+    
+/*     //Get the imposed flux */
+/*     double flux=0.0; */
+/*     this->get_flux(time,interpolated_x,flux,u); */
+    
+/*     //Output the x,y,.. */
+/*     for(unsigned i=0;i<this->Dim;i++)  */
+/*      { */
+/*       outfile << interpolated_x[i] << " "; */
+/*      } */
+    
+/*     // Output imposed flux and melt flux */
+/*     outfile << flux << " "; */
+/*     outfile << melt_flux << " "; */
+    
+/*     // Output normal */
+/*     for(unsigned i=0;i<this->Dim;i++)  */
+/*      { */
+/*       outfile << unit_normal[i] << " "; */
+/*      }  */
+/*     outfile << std::endl; */
+/*    } */
+  
+/*  } */
+// hierher end kill
  
 //=====================================================================
 /// Return the residuals for the SurfaceMeltElement equations
@@ -2542,6 +2713,9 @@ template<class ELEMENT>
  void SurfaceMeltElement<ELEMENT>::
  fill_in_contribution_to_residuals_surface_melt(Vector<double> &residuals)
  {
+
+  // hierher kill oomph_info << "hierher: Number of dofs: " << ndof() << std::endl;
+
   // Get continuous time from timestepper of first node
   double time=node_pt(0)->time_stepper_pt()->time_pt()->time();
   
@@ -2556,7 +2730,31 @@ template<class ELEMENT>
 
   //Integer to hold the local equation number
   int local_eqn=0;
-   
+
+  /* // hierher kill */
+  /* { */
+  /*  for (unsigned j=0;j<n_node;j++) */
+  /*   { */
+  /*    SolidNode* nod_pt=dynamic_cast<SolidNode*>(node_pt(j)); */
+  /*    unsigned nval=nod_pt->nvalue(); */
+  /*    for (unsigned i=0;i<nval;i++) */
+  /*     { */
+  /*      oomph_info << "i_val, eqn_number: " << i << " "  */
+  /*                 << nod_pt->eqn_number(i) << " " */
+  /*                 << std::endl; */
+  /*     } */
+  /*    Data* data_pt=dynamic_cast<SolidNode*>(node_pt(j)) */
+  /*     ->variable_position_pt(); */
+  /*    nval=data_pt->nvalue(); */
+  /*    for (unsigned i=0;i<nval;i++) */
+  /*     { */
+  /*      oomph_info << "i_pos, eqn_number: " << i << " "  */
+  /*                 << data_pt->eqn_number(i) << " " */
+  /*                 << std::endl; */
+  /*     } */
+  /*   } */
+  /* } */
+
   //Set up memory for the shape functions
   //Note that in this case, the number of lagrangian coordinates is always
   //equal to the dimension of the nodes
@@ -2657,6 +2855,8 @@ template<class ELEMENT>
        }
      }
    
+    // hierher replaced this in first sweep!
+
     //Get the outer unit normal
     Vector<double> interpolated_normal(n_dim);
     outer_unit_normal(ipt,interpolated_normal);
@@ -2691,7 +2891,7 @@ template<class ELEMENT>
 
     //Get the imposed flux
     double flux=0.0;
-    this->get_flux(time,interpolated_x,interpolated_normal,flux);
+    this->get_flux(ipt,time,interpolated_x,interpolated_normal,u,flux);
     
 
     // Calculate the "load" -- Lagrange multiplier acts as traction to
@@ -2773,7 +2973,6 @@ template<class ELEMENT>
       local_eqn=this->nodal_local_eqn(l,first_index);
       if (local_eqn>=0)
        {
-        // hierher check the maths
         residuals[local_eqn]+=(normal_veloc+melt_rate)*psi[l]*W;
        }
       
@@ -2782,7 +2981,6 @@ template<class ELEMENT>
       local_eqn = nodal_local_eqn(l,this->U_index_ust_heat);
       if(local_eqn >= 0)
        {
-        // hierher check the maths
         //Add the prescribed flux terms
         residuals[local_eqn] -= (flux-melt_rate)*psi[l]*W;
        }
@@ -2833,924 +3031,9 @@ template<class ELEMENT>
   
  }
 
-
-
-
 //////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////
-
-/* // hierher */
-
-/* //======================================================================= */
-/* /// Namespace containing helper functions for Stefan Boltzmann radiation */
-/* //======================================================================= */
-/* namespace StefanBoltzmannHelper */
-/*  { */
-  
-/*   /// Bin to store pointers to finite elements in  */
-/*   Vector<Vector<std::set<FiniteElement*> > > Element_in_bin; */
-  
-/*   /// Max/min bin coords */
-/*   Vector<double> Max_coord(2,-DBL_MAX); */
-/*   Vector<double> Min_coord(2, DBL_MAX); */
-  
-/*   /// Increments in bin */
-/*    Vector<double> Dx(2,0.0);  */
-   
-/*    /// Number of bins in x direction */
-/*    unsigned Nx_bin=1000; */
-
-/*    /// Number of bins in y direction */
-/*    unsigned Ny_bin=1000; */
-   
-/*    /// \short Number of sampling points in element to form segments with which */
-/*    /// we check intersection with ray */
-/*    unsigned Nsample=10; */
-   
-
-/*    //====================================================================== */
-/*    /// \short Helper function to setup or use bin that is used to */
-/*    /// locate intersections of rays with boundaries. */
-/*    /// */
-/*    /// Args:  -- Two vectors, ray_vertex[0] and ray_vertex[1] which define */
-/*    ///           the end points of a ray. */
-/*    ///        -- Boolean populate_bin:  */
-/*    //            If true:  populate the bin structure represented by  */
-/*    ///                     Element_in_bin by associating all bins  */
-/*    ///                     that are intersected by the ray with the element  */
-/*    ///                     pointed to by el_pt. */
-/*    ///           If false: Return vector of bins that are intersected  */
-/*    ///                     by the ray (retrived from previously set up bin */
-/*    ///                     structure) */
-/*    ///        -- Output stream outfile; if open, we write the intersected bins  */
-/*    ///           to that file but only if populate_bin=false. */
-/*    //====================================================================== */
-/*    void fill_in_intersecting_rays( */
-/*     const Vector<Vector<double> >& ray_vertex, */
-/*     const bool& populate_bin, */
-/*     Vector<std::pair<unsigned,unsigned> >& intersected_bin,  */
-/*     FiniteElement* el_pt, */
-/*     ofstream& outfile) */
-/*    { */
-
-/*     // Actually plot */
-/*     bool plot_it=false; */
-/*     if (outfile.is_open()) */
-/*      { */
-/*       if (populate_bin) */
-/*        { */
-/*         oomph_info << "Not outputting while bin is being populated...\n"; */
-/*        } */
-/*       else */
-/*        { */
-/*         plot_it=true; */
-/*        } */
-/*      } */
-
-/*     // Step along ray in increasing y direction */
-/*     Vector<double> lower_ray_vertex=ray_vertex[0]; */
-/*     Vector<double> upper_ray_vertex=ray_vertex[1]; */
-/*     if (ray_vertex[1][1]<ray_vertex[0][1])  */
-/*      { */
-/*       lower_ray_vertex=ray_vertex[1]; */
-/*       upper_ray_vertex=ray_vertex[0]; */
-/*      } */
-
-/*     // Output */
-/*     if (plot_it) */
-/*      { */
-/*       outfile  */
-/*        << "ZONE T=\"ray\"\n" */
-/*        <<ray_vertex[0][0] << " " << ray_vertex[0][1] << "\n" */
-/*        <<ray_vertex[1][0] << " " << ray_vertex[1][1] << "\n"; */
-/*      } */
-    
-/*     // Add bin that contains the start point of the ray */
-/*     unsigned ix_start=unsigned((lower_ray_vertex[0]-Min_coord[0])/  */
-/*                                (Max_coord[0]-Min_coord[0])* */
-/*                                double(Nx_bin)); */
-/*     unsigned iy_start=unsigned((lower_ray_vertex[1]-Min_coord[1])/  */
-/*                                (Max_coord[1]-Min_coord[1])* */
-/*                                double(Ny_bin)); */
-/*     if (populate_bin) */
-/*      { */
-/*       Element_in_bin[ix_start][iy_start].insert(el_pt); */
-/*      } */
-/*     else */
-/*      { */
-/*       intersected_bin.push_back(std::make_pair(ix_start,iy_start)); */
-/*      } */
-
-/*     // Vertical ray? */
-/*     if (lower_ray_vertex[0]==upper_ray_vertex[0]) */
-/*      { */
-/*       // Add all the bins above the initial one until end point */
-/*       unsigned iy_end=unsigned((upper_ray_vertex[1]-Min_coord[1])/  */
-/*                                (Max_coord[1]-Min_coord[1])* */
-/*                                double(Ny_bin)); */
-/*       for (unsigned i=iy_start+1;i<=iy_end;i++) */
-/*        { */
-/*         if (populate_bin) */
-/*          { */
-/*           Element_in_bin[ix_start][i].insert(el_pt); */
-/*          } */
-/*         else */
-/*          { */
-/*           intersected_bin.push_back(std::make_pair(ix_start,i)); */
-/*          } */
-/*        } */
-/*      } */
-/*     // Non-vertical ray */
-/*     else  */
-/*      { */
-/*       // Get the (finite) slope */
-/*       double slope= */
-/*        (upper_ray_vertex[1]-lower_ray_vertex[1])/ */
-/*        (upper_ray_vertex[0]-lower_ray_vertex[0]); */
-      
-/*       // Current bin level */
-/*       unsigned iy=iy_start; */
-      
-/*       // Upper and lower bounds of current bin level */
-/*       double y_this_bin_min=Min_coord[1]+double(iy  )*Dx[1]; */
-/*       double y_this_bin_max=Min_coord[1]+double(iy+1)*Dx[1]; */
-      
-/*       // Keep going until we've moved through all the */
-/*       // bins beyond the y-level of the ray's end point */
-/*       int unit_offset=1.0; */
-/*       while (y_this_bin_min<upper_ray_vertex[1]) */
-/*        { */
-/*         // Work out x-coordinate of intersection of ray with */
-/*         // other boundary of its current y-bin level */
-/*         double x_intersect=Max_coord[0]; */
-/*         if (slope!=0.0) */
-/*          { */
-/*           x_intersect=lower_ray_vertex[0]+ */
-/*            (y_this_bin_max-lower_ray_vertex[1])/slope; */
-/*          } */
-
-/*         // Cut it off if it goes outside the bin structure */
-/*         if (x_intersect>Max_coord[0]) x_intersect=Max_coord[0] ; */
-/*         if (x_intersect<Min_coord[0]) x_intersect=Min_coord[0] ; */
-        
-/*         // What's the x-bin index of that point */
-/*         unsigned ix_intersect=unsigned((x_intersect-Min_coord[0])/  */
-/*                                        (Max_coord[0]-Min_coord[0])* */
-/*                                        double(Nx_bin)); */
-        
-/*         // Unit offset is equal to one initially (because the first */
-/*         // bin has already been filled; in subsequent rows of */
-/*         // bins, we add all of them. */
-/*         unsigned i_lo=ix_start+unit_offset; */
-/*         unsigned i_hi=ix_intersect; */
-/*         if (i_lo>i_hi) */
-/*          { */
-/*           i_lo=ix_intersect; */
-/*           i_hi=ix_start-unit_offset; */
-/*          } */
-/*         unit_offset=0; */
-
-/*         // ...but don't fall off the end... */
-/*         if (i_hi==Element_in_bin.size()) i_hi-=1; */
-
-/*         // Now add all the bins at this y-level */
-/*         for (unsigned i=i_lo;i<=i_hi;i++) */
-/*          { */
-/*           // .. but don't go beyond the end of the ray */
-/*           bool add_it=true; */
-/*           if (slope>0.0) */
-/*            { */
-/*             double x_left_end_bin =Min_coord[0]+double(i  )*Dx[0]; */
-/*             if (x_left_end_bin>upper_ray_vertex[0]) */
-/*              { */
-/*               add_it=false; */
-/*              } */
-/*            } */
-/*           else */
-/*            { */
-/*             double x_right_end_bin=Min_coord[0]+double(i+1)*Dx[0]; */
-/*             if (x_right_end_bin<upper_ray_vertex[0]) */
-/*              { */
-/*               add_it=false; */
-/*              } */
-/*            } */
-/*           if (add_it) */
-/*            { */
-/*             if (populate_bin) */
-/*              { */
-/*               Element_in_bin[i][iy].insert(el_pt); */
-/*              } */
-/*             else */
-/*              { */
-/*               intersected_bin.push_back(std::make_pair(i,iy)); */
-/*              } */
-/*            } */
-/*          } */
-        
-/*         // Now update the counters: x bin level starts at the */
-/*         // point of intersection with the next level... */
-/*         ix_start=ix_intersect; */
-        
-/*         // ...upper and lower boundary moves one level up */
-/*         y_this_bin_min+=Dx[1]; */
-/*         y_this_bin_max+=Dx[1]; */
-        
-/*         // ...and bump up the level itself */
-/*         iy++; */
-/*        } */
-/*      } */
-    
-/*     // Plot the intersected bins? */
-/*     if (plot_it) */
-/*      { */
-/*       unsigned nbin=intersected_bin.size(); */
-/*       for (unsigned i=0;i<nbin;i++) */
-/*        { */
-/*         unsigned ix=intersected_bin[i].first; */
-/*         unsigned iy=intersected_bin[i].second; */
-        
-/*         double x_lo=Min_coord[0]+double(ix)*Dx[0]; */
-/*         double x_hi=x_lo+Dx[0]; */
-/*         double y_lo=Min_coord[1]+double(iy)*Dx[1]; */
-/*         double y_hi=y_lo+Dx[1]; */
-        
-/*         outfile << "ZONE\n" */
-/*                   << x_lo << " " << y_lo << "\n" */
-/*                   << x_hi << " " << y_lo << "\n" */
-/*                   << x_hi << " " << y_hi << "\n" */
-/*                   << x_lo << " " << y_hi << "\n" */
-/*                   << x_lo << " " << y_lo << "\n"; */
-/*        } */
-/*      } */
-/*    } */
-
-
-/*   //======================================================================= */
-/*   /// Setup mutual visibility for Stefan Boltzmann radiation for all */
-/*   /// face elements (derived from StefanBoltzmannRadiationBase) */
-/*   /// contained in vector. */
-/*   //======================================================================= */
-/*   void setup_stefan_boltzmann_visibility(const Vector<FiniteElement*>&  */
-/*                                          shielding_face_element_pt) */
-/*   { */
-   
-/*    // Loop over all face elements to wipe previous information */
-/*    unsigned nel=shielding_face_element_pt.size(); */
-/*    for (unsigned e_illuminated=0;e_illuminated<nel;e_illuminated++) */
-/*     { */
-/*      StefanBoltzmannRadiationBase* illuminated_el_pt= */
-/*       dynamic_cast<StefanBoltzmannRadiationBase*>( */
-/*        shielding_face_element_pt[e_illuminated]); */
-/* //#ifdef PARANOID // hierher enable paranoia-only check */
-/*      if (illuminated_el_pt==0) */
-/*       { */
-/*        std::stringstream error_message; */
-/*        error_message << "Failed to cast illuminated element "  */
-/*                      << e_illuminated  */
-/*                      << " to  StefanBoltzmannRadiationBase"; */
-/*        throw OomphLibError( */
-/*         error_message.str(), */
-/*         "StefanBoltzmannHelper::setup_stefan_boltzmann_visibility()", */
-/*         OOMPH_EXCEPTION_LOCATION); */
-/*       } */
-/* //#endif */
-     
-/*      // Forget any previous information */
-/*      illuminated_el_pt->wipe_stefan_boltzmann_illumination_info(); */
-/*     } */
-
-
-/*    double t_start=TimingHelpers::timer(); */
-
-/*    // Validation only */
-/*    const bool plot_it=false; */
-
-/*    // Vector to illuminated/ing Gauss points */
-/*    Vector<double> r_illuminated(2); */
-/*    Vector<double> s_illuminated(1); */
-/*    Vector<double> unit_normal_illuminated(2);   */
-/*    Vector<double> r_illuminating(2); */
-/*    Vector<double> s_illuminating(1); */
-/*    Vector<double> unit_normal_illuminating(2); */
-
-/*    // Setup bin structure */
-/*    const bool use_bins=true; */
-/*    if (use_bins) */
-/*     { */
-/*      double t_start_bin=TimingHelpers::timer(); */
-
-/*      // Each bin stores FiniteElements that have any sample point in it */
-/*      Element_in_bin.clear(); */
-/*      Element_in_bin.resize(Nx_bin); */
-/*      for (unsigned i=0;i<Nx_bin;i++) */
-/*       { */
-/*        Element_in_bin[i].resize(Ny_bin); */
-/*       } */
-     
-/*      // Initial sweep: Get max/min coords */
-/*      //---------------------------------- */
-
-/*      // Loop over all face elements */
-/*      unsigned nel=shielding_face_element_pt.size(); */
-/*      for (unsigned e_illuminated=0;e_illuminated<nel;e_illuminated++) */
-/*       { */
-/*        StefanBoltzmannRadiationBase* illuminated_el_pt= */
-/*         dynamic_cast<StefanBoltzmannRadiationBase*>( */
-/*          shielding_face_element_pt[e_illuminated]); */
-/* //#ifdef PARANOID // hierher enable paranoia-only check */
-/*        if (illuminated_el_pt==0) */
-/*         { */
-/*          std::stringstream error_message; */
-/*          error_message << "Failed to cast illuminated element "  */
-/*                        << e_illuminated  */
-/*                        << " to  StefanBoltzmannRadiationBase"; */
-/*          throw OomphLibError( */
-/*           error_message.str(), */
-/*           "StefanBoltzmannHelper::setup_stefan_boltzmann_visibility()", */
-/*           OOMPH_EXCEPTION_LOCATION); */
-/*         } */
-/* //#endif */
-       
-/*        // Loop over iluminated integration points  */
-/*        unsigned nint=illuminated_el_pt->integral_pt()->nweight(); */
-/*        for (unsigned ipt_illuminated=0;ipt_illuminated<nint;ipt_illuminated++) */
-/*         { */
-/*          // Local coordinate of integration point */
-/*          s_illuminated[0]= */
-/*           illuminated_el_pt->integral_pt()->knot(ipt_illuminated,0); */
-         
-/*          // No recycling of shape fcts -- may as well call interpolated_x */
-/*          // directly */
-/*          illuminated_el_pt->interpolated_x(s_illuminated,r_illuminated); */
-         
-/*          for (unsigned i=0;i<2;i++) */
-/*           { */
-/*            if (r_illuminated[i]>Max_coord[i]) Max_coord[i]=r_illuminated[i]; */
-/*            if (r_illuminated[i]<Min_coord[i]) Min_coord[i]=r_illuminated[i]; */
-/*           } */
-/*         } */
-/*       } */
-
-/*      // Allow for offset */
-/*      double percentage_offset=5.0; */
-/*      for (unsigned i=0;i<2;i++) */
-/*       { */
-/*        double dx=Max_coord[i]-Min_coord[i]; */
-/*        Max_coord[i]=Max_coord[i]+percentage_offset/100.0*dx; */
-/*        Min_coord[i]=Min_coord[i]-percentage_offset/100.0*dx; */
-/*       } */
-
-/*      // Update increments */
-/*      Dx[0]=(Max_coord[0]-Min_coord[0])/double(Nx_bin); */
-/*      Dx[1]=(Max_coord[1]-Min_coord[1])/double(Ny_bin); */
-     
-/*      // Setup bin for checking intersections with rays */
-/*      //----------------------------------------------- */
-     
-/*      // Loop over all face elements */
-/*      nel=shielding_face_element_pt.size(); */
-/*      for (unsigned e=0;e<nel;e++) */
-/*       { */
-/*        StefanBoltzmannRadiationBase* el_pt= */
-/*         dynamic_cast<StefanBoltzmannRadiationBase*>( */
-/*          shielding_face_element_pt[e]); */
-/* //#ifdef PARANOID // hierher enable paranoia-only check */
-/*        if (el_pt==0) */
-/*         { */
-/*          std::stringstream error_message; */
-/*          error_message << "Failed to cast possible intersecting element "  */
-/*                        << e  */
-/*                        << " to  StefanBoltzmannRadiationBase"; */
-/*          throw OomphLibError( */
-/*           error_message.str(), */
-/*           "StefanBoltzmannHelper::setup_stefan_boltzmann_visibility()", */
-/*           OOMPH_EXCEPTION_LOCATION); */
-/*         } */
-/* //#endif        */
-
-/*        // Loop over ALL sampling points along element */
-/*        Vector<Vector<double> > sample_vertex(2); */
-/*        sample_vertex[0].resize(2); */
-/*        sample_vertex[1].resize(2); */
-       
-/*        // Get vector of local coordinates of plot point j */
-/*        // as first vertex */
-/*        Vector<double> s(1); */
-/*        unsigned j_sample=0; */
-/*        el_pt->get_s_plot(j_sample,Nsample,s); */
-       
-/*        // Get coordinate of first vertex */
-/*        el_pt->interpolated_x(s,sample_vertex[0]); */
-       
-/*        // Loop over remaining sampling points */
-/*        for (unsigned j_sample=1;j_sample<Nsample;j_sample++) */
-/*         {  */
-/*          // Get vector of local coordinates of plot point j */
-/*          // as second vertex */
-/*          el_pt->get_s_plot(j_sample,Nsample,s); */
-         
-/*          // Get coordinate of vertex */
-/*          el_pt->interpolated_x(s,sample_vertex[1]); */
-        
-/*          // Populate bin by associating all bins intersected by */
-/*          // ray from one to the other sample vertex with the */
-/*          // element */
-/*          Vector<std::pair<unsigned,unsigned> > dummy_intersected_bin; */
-/*          bool populate_bin=true; */
-/*          ofstream dummy_file; */
-/*          fill_in_intersecting_rays(sample_vertex, */
-/*                                    populate_bin, */
-/*                                    dummy_intersected_bin,  */
-/*                                    el_pt, */
-/*                                    dummy_file); */
-         
-/*          // Shift along */
-/*          sample_vertex[0]=sample_vertex[1]; */
-/*         } */
-/*       } */
-     
-/*      double t_end_bin=TimingHelpers::timer(); */
-/*      oomph_info << "Time for setting up bin: "  */
-/*                 << t_end_bin-t_start_bin << std::endl; */
-
-/*      // Doc bins: (make boolean const so compiler can completely bypass */
-/*      // code if set to false) */
-/*      const bool plot_it=false;  */
-/*      if (plot_it) */
-/*       { */
-/*        ofstream some_file; */
-/*        char filename[100]; */
-/*        sprintf(filename,"stefan_boltzmann_bin.dat"); */
-/*        some_file.open(filename); */
-       
-/*        // Loop over bins */
-/*        for (unsigned ix=0;ix<Nx_bin;ix++) */
-/*         { */
-/*          for (unsigned iy=0;iy<Ny_bin;iy++) */
-/*           { */
-/*            // Anybody at home? */
-/*            if (Element_in_bin[ix][iy].size()!=0) */
-/*             { */
-/*              double x_lo=Min_coord[0]+double(ix)*Dx[0]; */
-/*              double x_hi=x_lo+Dx[0]; */
-/*              double y_lo=Min_coord[1]+double(iy)*Dx[1]; */
-/*              double y_hi=y_lo+Dx[1]; */
-             
-/*              some_file << "zone\n" */
-/*                        << x_lo << " " << y_lo << "\n" */
-/*                        << x_hi << " " << y_lo << "\n" */
-/*                        << x_hi << " " << y_hi << "\n" */
-/*                        << x_lo << " " << y_hi << "\n" */
-/*                        << x_lo << " " << y_lo << "\n"; */
-/*             } */
-/*           } */
-/*         } */
-/*        some_file.close(); */
-/*        pause("done bins"); */
-/*       } */
-/*     } */
-   
-
-/*    // Number of elements */
-/*    nel=shielding_face_element_pt.size(); */
-
-/*    // Assume all elements have the same number of integration points */
-/*    unsigned nintpt_all=shielding_face_element_pt[0]->integral_pt()->nweight(); */
-
-/*    // Exploit symmetry during setup */
-/*    const bool exploit_symmetry=true; */
-
-/*    // Helper lookup scheme to exploit symmetry of interaction:  */
-/*    // If integration point i_ed in element e_ed is illuminatED by */
-/*    // integration point i_ing in element e_ing (which is the */
-/*    // illuminatING one!) then the reverse is true too */
-/*    Vector<Vector<Vector<Vector<unsigned> > > > aux; */
-/*    if (exploit_symmetry) */
-/*     { */
-/*      nintpt_all=shielding_face_element_pt[0]->integral_pt()->nweight(); */
-/*      aux.resize(nel); */
-/*      for (unsigned e=0;e<nel;e++) */
-/*       { */
-/*        aux[e].resize(nintpt_all); */
-/*        for (unsigned ipt=0;ipt<nintpt_all;ipt++) */
-/*         { */
-/*          aux[e][ipt].resize(nel); */
-/*         } */
-/*       } */
-/*     } */
-  
-/*    // Loop over all face elements -- viewed as illuminated ones */
-/*    for (unsigned e_illuminated=0;e_illuminated<nel;e_illuminated++) */
-/*     { */
-/*      StefanBoltzmannRadiationBase* illuminated_el_pt= */
-/*       dynamic_cast<StefanBoltzmannRadiationBase*>( */
-/*        shielding_face_element_pt[e_illuminated]); */
-
-/* //#ifdef PARANOID // hierher enable paranoia-only check */
-/*        if (illuminated_el_pt==0) */
-/*         { */
-/*          std::stringstream error_message; */
-/*          error_message << "Failed to cast illuminated element "  */
-/*                        << e_illuminated  */
-/*                        << " to  StefanBoltzmannRadiationBase"; */
-/*          throw OomphLibError( */
-/*           error_message.str(), */
-/*           "StefanBoltzmannHelper::setup_stefan_boltzmann_visibility()", */
-/*           OOMPH_EXCEPTION_LOCATION); */
-/*         } */
-/* //#endif */
-     
-/*      // Recast to FaceElement */
-/*      FaceElement* illuminated_face_el_pt= */
-/*       dynamic_cast<FaceElement*>(illuminated_el_pt); */
-     
-/*      // Loop over iluminated integration points  */
-/*      unsigned nint=illuminated_el_pt->integral_pt()->nweight(); */
-/*      for (unsigned ipt_illuminated=0;ipt_illuminated<nint;ipt_illuminated++) */
-/*       { */
-/*        // Local coordinate of integration point */
-/*        s_illuminated[0]= */
-/*         illuminated_el_pt->integral_pt()->knot(ipt_illuminated,0); */
-       
-/*        // No recycling of shape fcts -- may as well call interpolated_x */
-/*        // directly */
-/*        illuminated_el_pt->interpolated_x(s_illuminated,r_illuminated); */
-       
-/*        // Get outer unit normal */
-/*        illuminated_face_el_pt->outer_unit_normal(s_illuminated, */
-/*                                                  unit_normal_illuminated); */
-       
-/*        // Now loop over all other elements (the iluminating ones) */
-/*        unsigned e_lo=0; */
-/*        if (exploit_symmetry) e_lo=e_illuminated; */
-/*        for (unsigned e_illuminating=e_lo;e_illuminating<nel;e_illuminating++) */
-/*         { */
-/*          StefanBoltzmannRadiationBase* illuminating_el_pt= */
-/*           dynamic_cast<StefanBoltzmannRadiationBase*>( */
-/*            shielding_face_element_pt[e_illuminating]); */
-
-/* //#ifdef PARANOID // hierher enable paranoia-only check */
-/*        if (illuminating_el_pt==0) */
-/*         { */
-/*          std::stringstream error_message; */
-/*          error_message << "Failed to cast illuminating element "  */
-/*                        << e_illuminating  */
-/*                        << " to  StefanBoltzmannRadiationBase"; */
-/*          throw OomphLibError( */
-/*           error_message.str(), */
-/*           "StefanBoltzmannHelper::setup_stefan_boltzmann_visibility()", */
-/*           OOMPH_EXCEPTION_LOCATION); */
-/*         } */
-/* //#endif */
-         
-/*          // Recast to FaceElement */
-/*          FaceElement* illuminating_face_el_pt= */
-/*           dynamic_cast<FaceElement*>(illuminating_el_pt); */
-         
-/*          // Storage to accumulate indices of integration points in  */
-/*          // illuminating face element that is visible from */
-/*          // current integration point */
-/*          Vector<unsigned> illuminating_integration_point_index; */
-         
-/*          // Loop over iluminating integration points  */
-/*          unsigned nint=illuminating_el_pt->integral_pt()->nweight(); */
-/*          for (unsigned ipt_illuminating=0;ipt_illuminating<nint; */
-/*               ipt_illuminating++) */
-/*           { */
-/*            // Local coordinate of integration point */
-/*            s_illuminating[0]= */
-/*             illuminating_el_pt->integral_pt()->knot(ipt_illuminating,0); */
-           
-/*            // No recycling of shape fcts -- may as well call interpolated_x */
-/*            // directly */
-/*            illuminating_el_pt->interpolated_x(s_illuminating,r_illuminating); */
-           
-/*            // Get outer unit normal */
-/*            illuminating_face_el_pt->outer_unit_normal(s_illuminating, */
-/*                                                       unit_normal_illuminating); */
-           
-/*            // Get vector from illuminating point to illuminated point */
-/*            Vector<double> ray(2); */
-/*            ray[0]=r_illuminated[0]-r_illuminating[0]; */
-/*            ray[1]=r_illuminated[1]-r_illuminating[1]; */
-           
-
-/*            Vector<Vector<double> > ray_vertex(2); */
-/*            ray_vertex[0].resize(2); */
-/*            ray_vertex[1].resize(2); */
-/*            ray_vertex[0][0]=r_illuminated[0]; */
-/*            ray_vertex[0][1]=r_illuminated[1]; */
-/*            ray_vertex[1][0]=r_illuminating[0]; */
-/*            ray_vertex[1][1]=r_illuminating[1]; */
-
-/*            // Do we radiate away from the positive face of the */
-/*            // illuminating point? */
-/*            double dot_illuminating= */
-/*             (unit_normal_illuminating[0]*ray[0]+ */
-/*              unit_normal_illuminating[1]*ray[1]); */
-/*            if (dot_illuminating>0.0) */
-/*             { */
-             
-/*              // Do we radiate onto from the positive face of the */
-/*              // illuminated point? */
-/*              double dot_illuminated= */
-/*               (unit_normal_illuminated[0]*ray[0]+ */
-/*                unit_normal_illuminated[1]*ray[1]); */
-/*              if (dot_illuminated<0.0) */
-/*               { */
-
-/*                // Does the ray (a finite-length segment) from */
-/*                // radiating to radiated point intersect? */
-                              
-/*                // Vector of pairs of bin coordinates that */
-/*                // intersect ray */
-/*                Vector<std::pair<unsigned,unsigned> > intersected_bin; */
-/*                if (use_bins) */
-/*                 { */
-/*                  ofstream some_file; */
-/*                  char filename[100]; */
-/*                  if (plot_it) */
-/*                   { */
-/*                    sprintf(filename,"RESLT/latest_ray.dat"); */
-/*                    some_file.open(filename); */
-/*                   } */
-
-/*                  // Find bins that are intersected by ray */
-/*                  Vector<std::pair<unsigned,unsigned> > intersected_bin; */
-/*                  bool populate_bin=false; */
-/*                  FiniteElement* dummy_el_pt=0; */
-/*                  fill_in_intersecting_rays(ray_vertex, */
-/*                                            populate_bin, */
-/*                                            intersected_bin,  */
-/*                                            dummy_el_pt, */
-/*                                            some_file); */
-                 
-/*                  // End plot */
-/*                  if (plot_it) */
-/*                   { */
-/*                    some_file.close(); */
-/*                    pause("done latest ray"); */
-/*                   } */
-
-/*                  // Storage for vertices of possible intersection with ray */
-/*                  Vector<Vector<double> > segment_vertex(2); */
-/*                  segment_vertex[0].resize(2); */
-/*                  segment_vertex[1].resize(2); */
-
-/*                  // Search through all elements in bins along ray */
-/*                  bool have_intersection=false; */
-/*                  unsigned nbin=intersected_bin.size(); */
-/*                  for (unsigned b=0;b<nbin;b++) */
-/*                   { */
-/*                    // Get bin indices */
-/*                    unsigned i=intersected_bin[b].first; */
-/*                    unsigned j=intersected_bin[b].second; */
-
-/*                    // Loop over elements in that bin                    */
-/*                    for (std::set<FiniteElement*>::iterator it= */
-/*                          Element_in_bin[i][j].begin(); */
-/*                         it!=Element_in_bin[i][j].end();it++) */
-/*                     { */
-/*                      // Get possibly blocking element */
-/*                      StefanBoltzmannRadiationBase* el_pt= */
-/*                       dynamic_cast<StefanBoltzmannRadiationBase*>(*it); */
-                     
-/* //#ifdef PARANOID // hierher enable paranoia-only check */
-/*                      if (illuminated_el_pt==0) */
-/*                       { */
-/*                        std::stringstream error_message; */
-/*                        error_message  */
-/*                         << "Failed to cast possibly blocking element "  */
-/*                         << " to  StefanBoltzmannRadiationBase"; */
-/*                        throw OomphLibError( */
-/*                         error_message.str(), */
-/*                         "StefanBoltzmannHelper::setup_stefan_boltzmann_visibility()", */
-/*                         OOMPH_EXCEPTION_LOCATION); */
-/*         } */
-/* //#endif */
-/*                      // Skip intersections with illuming/illuminated element */
-/*                      if ((el_pt!=illuminated_el_pt)&& */
-/*                          (el_pt!=illuminating_el_pt)) */
-/*                       { */
-/*                        // Loop over sampling points along element */
-/*                        for (unsigned j_sample=0;j_sample<Nsample-1;j_sample++) */
-/*                         { */
-/*                          // Get cector of local coordinates of plot point j */
-/*                          // as first vertex */
-/*                          Vector<double> s(1); */
-/*                          el_pt->get_s_plot(j_sample,Nsample,s); */
-                         
-/*                          // Get coordinate of first vertex */
-/*                          el_pt->interpolated_x(s,segment_vertex[0]); */
-                         
-/*                          // Get cector of local coordinates of plot point j+1 */
-/*                          // as second vertex */
-/*                          el_pt->get_s_plot(j_sample+1,Nsample,s); */
-                         
-/*                          // Get coordinate of second vertex */
-/*                          el_pt->interpolated_x(s,segment_vertex[1]); */
-                         
-/*                          // Check intersection */
-/*                          bool intersection=IntersectionChecker::intersects( */
-/*                           segment_vertex,ray_vertex); */
-                         
-/*                          // Bail out */
-/*                          if (intersection) */
-/*                           { */
-/*                            have_intersection=true; */
-/*                            break; */
-/*                           } */
-/*                         } // end of loop over sampling points */
-/*                       } // endif for self-intersection */
-/*                      if (have_intersection) break; */
-/*                     } // end of loop over elements in bin */
-/*                    if (have_intersection) break; */
-/*                   }// End of loop over bins that contain ray */
-                 
-                 
-/*                  // No intersection */
-/*                  if (!have_intersection) */
-/*                   { */
-/*                    // Visible, so add integration point  */
-/*                    illuminating_integration_point_index. */
-/*                     push_back(ipt_illuminating); */
-/*                   } */
-/*                 } */
-/*                // Brute force search loop */
-/*                else */
-/*                 { */
-/*                  // Intersection for star-shaped (non-convex) polygon */
-/*                  // can only be detected in O(n^2) operations. */
-/*                  Vector<Vector<double> > segment_vertex(2); */
-/*                  segment_vertex[0].resize(2); */
-/*                  segment_vertex[1].resize(2); */
-                 
-/*                  // Loop over all segments to test for intersection */
-/*                  bool have_intersection=false; */
-/*                  for (unsigned e_intersect=0;e_intersect<nel; */
-/*                       e_intersect++) */
-/*                   { */
-                   
-/*                    // Skip intersection with illuminating/ed elements */
-/*                    if (! ( (e_intersect==e_illuminated) ||  */
-/*                            (e_intersect==e_illuminating) ) ) */
-/*                     { */
-                     
-/*                      // Loop over sampling points along element */
-/*                      for (unsigned j=0;j<Nsample-1;j++) */
-/*                       { */
-/*                        // Get cector of local coordinates of plot point j */
-/*                        // as first vertex */
-/*                        Vector<double> s(1); */
-/*                        shielding_face_element_pt[e_intersect]-> */
-/*                         get_s_plot(j,Nsample,s); */
-                       
-/*                        // Get coordinate of first vertex */
-/*                        shielding_face_element_pt[e_intersect]-> */
-/*                         interpolated_x(s,segment_vertex[0]); */
-                       
-/*                        // Get cector of local coordinates of plot point j+1 */
-/*                        // as second vertex */
-/*                        shielding_face_element_pt[e_intersect]-> */
-/*                         get_s_plot(j+1,Nsample,s); */
-                       
-/*                        // Get coordinate of second vertex */
-/*                        shielding_face_element_pt[e_intersect]-> */
-/*                         interpolated_x(s,segment_vertex[1]); */
-                       
-/*                        // Check intersection */
-/*                        bool intersection=IntersectionChecker::intersects( */
-/*                         segment_vertex,ray_vertex); */
-                       
-/*                        if (intersection) */
-/*                         { */
-/*                          have_intersection=true; */
-/*                          break; */
-/*                         } */
-/*                       } */
-/*                     } */
-/*                    if (have_intersection) */
-/*                     { */
-/*                      break; */
-/*                     } */
-/*                   } */
-                 
-/*                  // No intersection */
-/*                  if (!have_intersection) */
-/*                   { */
-/*                    // Visible, so add integration point  */
-/*                    illuminating_integration_point_index. */
-/*                     push_back(ipt_illuminating); */
-/*                   } */
-
-/*                 } // end if for brute force search loop */
-
-/*               } */
-/*             } */
-/*           } */
-         
-/*          // Done all possibly illuminating integration points in  */
-/*          // current possibly illuminating element */
-/*          unsigned npt=illuminating_integration_point_index.size(); */
-/*          if (npt>0) */
-/*           { */
-/*            // Add info */
-/*            illuminated_el_pt->add_stefan_boltzmann_illumination_info( */
-/*             ipt_illuminated,illuminating_el_pt, */
-/*             illuminating_integration_point_index); */
-
-/*            // Set up reverse scheme */
-/*            if (exploit_symmetry) */
-/*             { */
-/*              for (unsigned i_ing=0;i_ing<npt;i_ing++) */
-/*               { */
-/*                aux[e_illuminating] */
-/*                 [illuminating_integration_point_index[i_ing]] */
-/*                 [e_illuminated].push_back(ipt_illuminated); */
-/*               } */
-/*             } */
-/*           } */
-/*         } */
-
-/*       } */
-/*     } */
-
-
-/*    // Now do other half of dependencies */
-/*    //---------------------------------- */
-/*    if (exploit_symmetry) */
-/*     { */
-/*      // Loop over all face elements -- viewed as illuminated ones */
-/*      for (unsigned e_illuminated=0;e_illuminated<nel;e_illuminated++) */
-/*       { */
-/*        StefanBoltzmannRadiationBase* illuminated_el_pt= */
-/*         dynamic_cast<StefanBoltzmannRadiationBase*>( */
-/*          shielding_face_element_pt[e_illuminated]);        */
-
-/* //#ifdef PARANOID // hierher enable paranoia-only check */
-/*        if (illuminated_el_pt==0) */
-/*         { */
-/*          std::stringstream error_message; */
-/*          error_message << "Failed to cast illuminated element "  */
-/*                        << e_illuminated  */
-/*                        << " to  StefanBoltzmannRadiationBase"; */
-/*          throw OomphLibError( */
-/*           error_message.str(), */
-/*           "StefanBoltzmannHelper::setup_stefan_boltzmann_visibility()", */
-/*           OOMPH_EXCEPTION_LOCATION); */
-/*         } */
-/* //#endif */
-
-/*        // Loop over iluminated integration points  */
-/*        unsigned nint=illuminated_el_pt->integral_pt()->nweight(); */
-/*        for (unsigned ipt_illuminated=0;ipt_illuminated<nint;ipt_illuminated++) */
-/*         { */
-/*          // Now loop over all other elements (the iluminating ones) */
-/*          for (unsigned e_illuminating=0;  */
-/*               e_illuminating<e_illuminated;e_illuminating++) */
-/*           { */
-/*            StefanBoltzmannRadiationBase* illuminating_el_pt= */
-/*             dynamic_cast<StefanBoltzmannRadiationBase*>( */
-/*              shielding_face_element_pt[e_illuminating]); */
-           
-/* //#ifdef PARANOID // hierher enable paranoia-only check */
-/*        if (illuminating_el_pt==0) */
-/*         { */
-/*          std::stringstream error_message; */
-/*          error_message << "Failed to cast illuminating element "  */
-/*                        << e_illuminating  */
-/*                        << " to  StefanBoltzmannRadiationBase"; */
-/*          throw OomphLibError( */
-/*           error_message.str(), */
-/*           "StefanBoltzmannHelper::setup_stefan_boltzmann_visibility()", */
-/*           OOMPH_EXCEPTION_LOCATION); */
-/*         } */
-/* //#endif */
-/*            // Get illuminating integration points */
-/*            Vector<unsigned> illuminating_integration_point_index= */
-/*             aux[e_illuminated][ipt_illuminated][e_illuminating]; */
-/*            unsigned npt=illuminating_integration_point_index.size(); */
-/*            if (npt>0) */
-/*             { */
-/*              // Add info */
-/*              illuminated_el_pt->add_stefan_boltzmann_illumination_info( */
-/*               ipt_illuminated,illuminating_el_pt, */
-/*               illuminating_integration_point_index); */
-/*             } */
-/*           } */
-/*         } */
-/*       } */
-/*     } */
-
-/*    double t_end=TimingHelpers::timer(); */
-/*    oomph_info << "Time for setting up mutual Stefan Boltzmann radiation: "  */
-/*               << t_end-t_start << std::endl; */
-/*   } */
-
-/* } */
-
-/* } */
 
 }
 

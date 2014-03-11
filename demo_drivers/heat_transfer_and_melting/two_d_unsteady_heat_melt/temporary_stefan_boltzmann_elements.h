@@ -106,6 +106,1016 @@ namespace IntersectionChecker
 }
 
 
+/////////////////////////////////////////////////////////////////////// 
+///////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+//=======================================================================
+/// Namespace containing default function that provides zero
+/// atmospheric radiation
+//=======================================================================
+namespace SolarRadiationHelper
+ {
+
+
+
+  //=======================================================================
+  /// Default atmospheric radiation function in terms of time
+  //=======================================================================
+  void Zero_atmospheric_radiation_fct(const double& time,
+                                      double& solar_flux_magnitude,
+                                      Vector<double> &solar_flux_unit_vector,
+                                      double& total_diffuse_radiation)
+  {
+   solar_flux_magnitude=0.0;
+   solar_flux_unit_vector[0]= 0.0;
+   solar_flux_unit_vector[1]=-1.0;
+   total_diffuse_radiation=0.0;
+  }
+  
+}
+
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+
+
+
+//======================================================================
+/// Template-free base class for elements that are illuminated by 
+/// solar radiation
+//======================================================================
+class SolarRadiationBase : public virtual FiniteElement,
+ public virtual FaceElement,
+ public virtual TemplateFreeUnsteadyHeatBaseFaceElement
+
+{
+ 
+public:
+
+ /// Constructor
+ SolarRadiationBase()
+  {
+   // Don't use tanh profile to smooth solar shadows
+   Smoothed_sun_shadow=false;
+   
+   // Factor for tanh profile to smooth solar shadows
+   Alpha_tanh_smooth_sun_shadow=100.0;
+   
+   // Assign default zero atmospheric radiation fct...
+   Atmospheric_radiation_fct_pt=
+    &SolarRadiationHelper::Zero_atmospheric_radiation_fct;
+   
+   // Make space for limiting angles for diffuse radiation
+   unsigned n_intpt = integral_pt()->nweight();
+   Diffuse_limit_angles.resize(n_intpt);
+   for (unsigned i=0;i<n_intpt;i++)
+    {
+     Diffuse_limit_angles[i].first=0.0;
+     Diffuse_limit_angles[i].second=MathematicalConstants::Pi;
+    }
+  }
+ 
+ 
+ /// \short Enable smoothing of shadow; optional argument provides
+ /// value for tanh smoothing factor (defaults to 100)
+ void enable_smoothed_sun_shadow(const double& alpha_tanh_smooth_sun_shadow=
+                                 100.0)
+ {
+  Smoothed_sun_shadow=true;
+  Alpha_tanh_smooth_sun_shadow=alpha_tanh_smooth_sun_shadow;
+ }
+ 
+ /// \short Disable smoothing of shadow
+ void disable_smoothed_sun_shadow()
+ {
+  Smoothed_sun_shadow=false;
+ }
+
+ /// \short Disable smoothing of shadow
+ bool smoothed_sun_shadow_is_enabled()
+ {
+  return Smoothed_sun_shadow;
+ }
+
+
+ /// Value for tanh smoothing factor (read only -- set with enable... fct;
+ /// only used if enabled!)
+ double alpha_tanh_smooth_sun_shadow()
+ {
+  return Alpha_tanh_smooth_sun_shadow;
+ }
+
+
+ /// Reference to the atmospheric radiation function pointer
+ void (* &atmospheric_radiation_fct_pt())(const double& time,
+                                          double &solar_flux_magnitude,
+                                          Vector<double>&
+                                          solar_flux_unit_vector,
+                                          double& total_diffuse_radiation)
+  {return Atmospheric_radiation_fct_pt;}
+
+  
+ /// \short Update limiting angles for diffuse radiation, given the
+ /// pointers to nodes that make up the "upper boundary"
+ /// that can potentially shield the integration points from diffuse
+ /// radiation
+ void update_limiting_angles(const Vector<Node*>&
+                             shielding_node_pt);
+
+
+ /// \short Get the atmospheric radiation as fct of integration point
+ /// index, time, Eulerian coordinate and outer unit normal. Virtual
+ /// so it can be overloaded in multiphysics problems
+ virtual double atmospheric_radiation(const unsigned& intpt,
+                                      const double& time,
+                                      const Vector<double>& x,
+                                      const Vector<double>& n);
+
+
+
+ /// Output cone of diffuse radiation for all integration points
+ void output_diffuse_radiation_cone(std::ostream &outfile,
+                                    const double& radius);
+ 
+
+/// \short Output min angle of cone of diffuse radiation for 
+/// all integration points
+void output_diffuse_radiation_cone_min_angle(std::ostream &outfile,
+                                             const double& radius);
+
+/// \short Output max angle of cone of diffuse radiation for 
+/// all integration points
+void output_diffuse_radiation_cone_max_angle(std::ostream &outfile,
+                                             const double& radius);
+
+
+/// Output illumination angles for all integration points
+void output_limiting_angles(std::ostream &outfile);
+
+
+/// Output diffuse and direct radiation
+void output_atmospheric_radiation(std::ostream &outfile);
+ 
+protected:
+
+ /// Use tanh profile to smooth solar shadows
+ bool Smoothed_sun_shadow;
+
+ /// Factor for tanh profile to smooth solar shadows
+ double Alpha_tanh_smooth_sun_shadow;
+
+  /// \short Vector of pairs storing max. and minimum angle for exposure
+ /// to diffuse atmospheric radiation for each integration point.
+ /// Initialised to 0 and pi (full radiation from semicircle above
+ /// integration point)
+ Vector<std::pair<double,double> > Diffuse_limit_angles;
+
+ /// \short Pointer to function that specifies atmospheric
+ /// radiation in terms of directional solar flux (unit vector and magnitude)
+ /// and total diffusive radiation (which is later weighted by diffuse limiting
+ /// angles). Input argument: time.
+ void (*Atmospheric_radiation_fct_pt)(const double& time,
+                                      double& solar_flux_magnitude,
+                                      Vector<double> &solar_flux_unit_vector,
+                                      double& total_diffuse_radiation);
+
+  private:
+
+ /// \short Private helper function to check if the straight line
+ /// connecting (x_prev,y_prev) and (x_next,y_next) jumps
+ /// quadrants (in which case crossing_quadrants is returned as true)
+ /// and what increment to the winding number this results in.
+ /// Error (indicated by no_problem being false) occurs if
+ /// the line crosses the origin exactly in which case we're
+ /// stuffed. Diagnostics are returned in error string.
+ void check_quadrant_jump(const double& x_prev,
+                          const double& y_prev,
+                          const double& x_next,
+                          const double& y_next,
+                          bool& crossing_quadrants,
+                          int& n_winding_increment,
+                          std::string& error_string,
+                          bool& no_problem);
+ 
+};
+
+
+
+
+//=====================================================================
+/// \short Get the atmospheric radiation as fct of integration point
+/// index, time, Eulerian coordinate and outer unit normal. Virtual
+/// so it can be overloaded in multiphysics problems
+//=====================================================================
+double SolarRadiationBase::atmospheric_radiation(const unsigned& intpt,
+                                                 const double& time,
+                                                 const Vector<double>& x,
+                                                 const Vector<double>& n)
+{
+ double radiation=0.0;
+ unsigned n_dim = this->nodal_dimension();
+ double solar_flux_magnitude=0.0;
+ Vector<double> solar_flux_unit_vector(n_dim);
+ double total_diffuse_radiation=0.0;
+ Atmospheric_radiation_fct_pt(time,solar_flux_magnitude,
+                              solar_flux_unit_vector,
+                              total_diffuse_radiation);
+ 
+ // Diffuse radiation from opening angle
+ //-------------------------------------
+ double phi_exposed=Diffuse_limit_angles[intpt].second-
+  Diffuse_limit_angles[intpt].first;
+ if (phi_exposed>0.0)
+  {
+   radiation+=total_diffuse_radiation*phi_exposed/
+    MathematicalConstants::Pi;
+   
+#ifdef PARANOID 
+   double tol=1.0e-5;
+   if (phi_exposed-MathematicalConstants::Pi>tol)
+    {
+     std::stringstream error_message;
+     error_message << "Exposure angle " << phi_exposed
+                   << " greater than 180^o at ( "
+                   << x[0] << " , " << x[1] << " )\n"
+                   << "Actual difference is: " 
+                   << phi_exposed-MathematicalConstants::Pi
+                   << " which exceeds tolerance " << tol << std::endl;
+     //throw 
+      OomphLibError(error_message.str(),
+                    OOMPH_CURRENT_FUNCTION,
+                    OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+  }
+ 
+ // Direct radiation (with directional cosine and ignore
+ //-----------------------------------------------------
+ // shielded bits)
+ //---------------
+ 
+ 
+ // Cos of angle between outer unit normal and direct solar flux
+ double cos_angle=-(n[0]*solar_flux_unit_vector[0]+
+                    n[1]*solar_flux_unit_vector[1]);
+ 
+ // No further contributions if we're pointing away from the sun
+ if (cos_angle>0.0)
+  {
+   // Angle that the incoming solar radiation makes
+   // with the horizontal
+   double theta=atan2(solar_flux_unit_vector[0],-solar_flux_unit_vector[1]);
+   double phi=0.5*MathematicalConstants::Pi+theta;
+   
+   
+   // Bounding angles of visibility
+   double phi_min=Diffuse_limit_angles[intpt].first;
+   double phi_max=Diffuse_limit_angles[intpt].second;
+   
+   // Is the sun visible?
+   if (Smoothed_sun_shadow)
+    {
+     // Smooth shadow
+     double tanh_factor=
+      0.5*(-tanh(Alpha_tanh_smooth_sun_shadow*(phi-phi_max))
+           -tanh(Alpha_tanh_smooth_sun_shadow*(phi_min-phi)));
+     radiation+=cos_angle*solar_flux_magnitude*tanh_factor;
+    }
+   else
+    {
+     // Hard shadow
+     if (phi>phi_min)
+      {
+       if (phi<phi_max)
+        {
+         radiation+=cos_angle*solar_flux_magnitude;
+        }
+      }
+    }
+  }
+ 
+ return radiation;
+}
+
+
+//====================================================================
+/// \short Private helper function to check if the straight line
+/// connecting (x_prev,y_prev) and (x_next,y_next) jumps
+/// quadrants (in which case crossing_quadrants is returned as true)
+/// and what increment to the winding number this results in.
+/// Error (indicated by no_problem being false) occurs if
+/// the line crosses the origin exactly in which case we're
+/// stuffed. Diagnostics are returned in error string.
+//====================================================================
+void SolarRadiationBase::check_quadrant_jump(const double& x_prev,
+                                             const double& y_prev,
+                                             const double& x_next,
+                                             const double& y_next,
+                                             bool& crossing_quadrants,
+                                             int& n_winding_increment,
+                                             std::string& error_string,
+                                             bool& no_problem)
+{
+ // Sanity check: We have to keep track of winding numbers
+ // but we're stuffed if we our discrete increments in coordinates
+ // jump diagonally across quadrants...
+ std::stringstream error_message;
+ no_problem=true;
+ crossing_quadrants=false;
+ 
+ // y coordinate of intersection with x axis
+ double y_intersect=0.0;
+ double denom=x_next-x_prev;
+ 
+ // If denominator is zero then we're intersection exactly
+ // at the sample point and we're absolutely screwed. This
+ // really shouldn't happen.
+ if (denom!=0.0)
+  {
+   y_intersect=y_prev-(y_next-y_prev)*x_prev/denom;
+  }
+ if ((x_prev>0.0)&&(y_prev>0.0)&&(x_next<0.0)&&(y_next<0.0))
+  {
+   crossing_quadrants=true;
+   error_message << "Jumped from upper right quadrant to lower left one\n";
+   oomph_info    << "Jumped from upper right quadrant to lower left one\n";
+   if (y_intersect==0.0)
+    {
+     error_message << "..and cannot be repaired!\n";
+     no_problem=false;
+    }
+   // Path crosses the positive x axis: No winding
+   else if (y_intersect<0.0)
+    {
+     n_winding_increment=0;
+    }
+   // Path crosses the negative x axis from above: increase winding number
+   else if (y_intersect>0.0)
+    {
+     n_winding_increment=1;
+    }
+  }
+ else if ((x_prev<0.0)&&(y_prev<0.0)&&(x_next>0.0)&&(y_next>0.0))
+  {
+   crossing_quadrants=true;
+   error_message << "Jumped from lower left quadrant to upper right one\n";
+   oomph_info    << "Jumped from lower left quadrant to upper right one\n";
+   if (y_intersect==0.0)
+    {
+     error_message << "..and cannot be repaired!\n";
+     no_problem=false;
+    }
+   // Path crosses the positive x axis: No winding
+   else if (y_intersect<0.0)
+    {
+     n_winding_increment=0;
+    }
+   // Path crosses the negative x axis from below: reduce winding number
+   else if (y_intersect>0.0)
+    {
+     n_winding_increment=-1;
+    }
+  }
+ else if ((x_prev<0.0)&&(y_prev>0.0)&&(x_next>0.0)&&(y_next<0.0))
+  {
+   crossing_quadrants=true;
+   error_message << "Jumped from upper left quadrant to lower right one\n";
+   oomph_info    << "Jumped from upper left quadrant to lower right one\n";
+   if (y_intersect==0.0)
+    {
+     error_message << "..and cannot be repaired!\n";
+     no_problem=false;
+    }
+   // Path crosses the positive x axis: No winding
+   else if (y_intersect>0.0)
+    {
+     n_winding_increment=0;
+    }
+   // Path crosses the negative x axis from above: increase winding number
+   else if (y_intersect<0.0)
+    {
+     n_winding_increment=1;
+    }
+  }
+ else if ((x_prev>0.0)&&(y_prev<0.0)&&(x_next<0.0)&&(y_next>0.0))
+  {
+   crossing_quadrants=true;
+   error_message << "Jumped from lower right quadrant to upper left one\n";
+   oomph_info    << "Jumped from lower right quadrant to upper left one\n";
+   if (y_intersect==0.0)
+    {
+     error_message << "..and cannot be repaired!\n";
+     no_problem=false;
+    }
+   // Path crosses the positive x axis: No winding
+   else if (y_intersect>0.0)
+    {
+     n_winding_increment=0;
+    }
+   // Path crosses the negative x axis from below: decrease winding number
+   else if (y_intersect<0.0)
+    {
+     n_winding_increment=-1;
+    }
+  }
+}
+
+//=====================================================================
+/// \short Update limiting angles for diffuse radiation, given the
+/// Vector of pointers to nodes that make up the "upper boundary"
+/// that can potentially shield the integration points from diffuse
+/// radiation
+//=====================================================================
+ void SolarRadiationBase::update_limiting_angles(const Vector<Node*>&
+                                                 shielding_node_pt)
+{
+
+ // Search through all shielding nodes and find the
+ // bounding ones for this element
+ Node* first_vertex_node_pt=node_pt(0);
+ unsigned nnod_el=nnode();
+ Node* second_vertex_node_pt=node_pt(nnod_el-1);
+
+ // Find left and rightmost node of element in shielding_node_pt vector:
+ unsigned j_left=0;
+ bool found=false;
+ unsigned nnod=shielding_node_pt.size();
+ for (unsigned j=0;j<nnod;j++)
+  {
+   // We come from the left so we're definitely meeting the leftmost
+   // node
+   if ((shielding_node_pt[j]==first_vertex_node_pt)||
+       (shielding_node_pt[j]==second_vertex_node_pt))
+    {
+     j_left=j;
+     found=true;
+     break;
+    }
+  }
+ unsigned j_right=j_left+1;
+
+ // Did we succeed?
+ if (!found)
+  {
+   throw OomphLibError("Failed to find leftmost node in shielding_node_pt",
+                       OOMPH_CURRENT_FUNCTION,
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+
+ //Set the value of n_intpt
+ unsigned n_intpt = integral_pt()->nweight();
+
+ // Spatial dimension of the nodes
+ unsigned n_dim = this->nodal_dimension();
+ Vector<double> x(n_dim);
+ Vector<double> s(n_dim-1);
+
+ //Loop over the integration points
+ for(unsigned ipt=0;ipt<n_intpt;ipt++)
+  {
+
+   // Local coordinate of integration point
+   for (unsigned i=0;i<n_dim-1;i++)
+    {
+     s[i]=integral_pt()->knot(ipt,i);
+    }
+
+   // No recycling of shape fcts -- may as well call interpolated_x
+   // directly
+   this->interpolated_x(s,x);
+
+   oomph_info << "Integration point: " <<  x[0] << " " << x[1] << std::endl;
+    
+   // Loop over all potential shielding nodes to the left to find
+   // minimum angle
+   int n_winding=0;
+
+   // Initial point
+   Node* nod_pt=shielding_node_pt[0];
+
+   // Coordinate relative to sampling point
+   double x_prev=nod_pt->x(0)-x[0];
+   double y_prev=nod_pt->x(1)-x[1];
+
+#ifdef PARANOID
+   // Check that initial point is to the left of current point
+   // for calibration purposes...
+   if (x_prev>0.0)
+    {
+     throw OomphLibError(
+      "Leftmost point in shielding nodes is not to the left of current int pt",
+      OOMPH_CURRENT_FUNCTION,      
+      OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+   // Angle against x-axis relative to sampling point
+   double phi_prev=atan2(y_prev,x_prev);
+
+   oomph_info << "Vertex point " <<  0 << " : " 
+              <<  nod_pt->x(0) << " " << nod_pt->x(1) 
+              << " phi_raw: " << phi_prev;
+   oomph_info << " wind1 " << n_winding << " ";
+
+   // Want a positive angle!
+   if (phi_prev<0.0)
+    {
+     n_winding+=1;
+     phi_prev+=2.0*MathematicalConstants::Pi;
+    }
+
+   oomph_info << " wind2 " << n_winding << " ";
+   oomph_info << " phi_adj: " << phi_prev << std::endl;
+
+
+   // Current best guess for minimum angle to the left
+   double phi_left=phi_prev;
+
+
+
+   // Loop over all other nodes
+   for (unsigned j=1;j<=j_left;j++)
+    {
+     Node* nod_pt=shielding_node_pt[j];
+     double x_next=nod_pt->x(0)-x[0];
+     double y_next=nod_pt->x(1)-x[1];
+     double phi_next=atan2(y_next,x_next);
+     
+     oomph_info << "Vertex point " << j << " : " 
+                <<  nod_pt->x(0) << " " << nod_pt->x(1) 
+                << " phi_raw: " << phi_next;
+     
+     // Sanity check: We have to keep track of winding numbers
+     // but we're stuffed if we our discrete increments in coordinates
+     // jump diagonally across quadrants...
+     std::string error_string;
+     bool no_problem=true;
+     bool crossing_quadrants=false;
+     int n_winding_increment=0;
+
+     // Check if we've crossed quadrants
+     check_quadrant_jump(x_prev,
+                         y_prev,
+                         x_next,
+                         y_next,
+                         crossing_quadrants,
+                         n_winding_increment,
+                         error_string,
+                         no_problem);
+
+     // Success?
+     if (no_problem)
+      {
+       n_winding+=n_winding_increment;
+      }
+     // Complain bitterly
+     else
+      {
+       std::stringstream error_message;
+       error_message << error_string;
+       error_message << "\n x/y_prev, x/y_next:"
+                     << x_prev << " "
+                     << y_prev << " "
+                     << x_next << " "
+                     << y_next << " "<< std::endl;
+       error_message << "for point at "
+                     << x[0] << " " << x[1] << std::endl;
+       error_message << "chain of shielding nodes on left:\n";
+       for (unsigned jj=1;jj<=j_left;jj++)
+        {
+         Node* nnod_pt=shielding_node_pt[jj];
+         error_message << nnod_pt->x(0) << " "
+                       << nnod_pt->x(1) << "\n";
+        }
+       throw OomphLibError(error_message.str(),
+                           OOMPH_CURRENT_FUNCTION,
+                           OOMPH_EXCEPTION_LOCATION);
+      }
+
+     oomph_info << " wind1 " << n_winding << " ";
+
+     // If we're crossing the x axis to the left of the origin
+     // without jumping across quadrants we
+     // have to adjust the winding number
+     if (!crossing_quadrants)
+      {
+       if ((x_prev<0.0)&&(x_next<0.0))
+        {
+         if ((y_prev>=0.0)&&(y_next<0.0))
+          {
+           n_winding+=1;
+          }
+         else if ((y_prev<0.0)&&(y_next>=0.0))
+          {
+           n_winding-=1;
+          }
+        }
+      }
+
+     
+     // Correct angle by winding
+     phi_next+=double(n_winding)*2.0*MathematicalConstants::Pi;
+      
+     oomph_info << " wind2 " << n_winding << " ";
+     oomph_info << " phi_adj: " << phi_next << std::endl;
+
+     // Is it smaller?
+     if (phi_next<phi_left)
+      {
+       phi_left=phi_next;
+      }
+     
+     // Bump up
+     x_prev=x_next;
+     y_prev=y_next;
+     phi_prev=phi_next;
+    }
+
+
+   // Loop over all potential shielding nodes to the right to find
+   // maximum angle
+   n_winding=0;
+
+   // Initial point
+   nod_pt=shielding_node_pt[nnod-1];
+
+   // Coordinate relative to sampling point
+   x_prev=nod_pt->x(0)-x[0];
+   y_prev=nod_pt->x(1)-x[1];
+
+#ifdef PARANOID
+   // Check that initial point is to the right of current point
+   // for calibration purposes...
+   if (x_prev<0.0)
+    {
+     throw OomphLibError(
+      "Rightmost point in shielding nodes is not to the right of current int pt",
+      OOMPH_CURRENT_FUNCTION,      
+      OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+   // Angle against x-axis relative to sampling point
+   phi_prev=atan2(y_prev,x_prev);
+
+   // Current best guess for maximum angle to the right
+   double phi_right=phi_prev;
+   
+   // Loop over all other nodes
+   //for (unsigned j=j_right+1;j<nnod;j++)
+   for (unsigned j=nnod-2;j>=j_right;j--)
+    {
+     Node* nod_pt=shielding_node_pt[j];
+     double x_next=nod_pt->x(0)-x[0];
+     double y_next=nod_pt->x(1)-x[1];
+     double phi_next=atan2(y_next,x_next);
+
+     // Sanity check: We have to keep track of winding numbers
+     // but we're stuffed if we our discrete increments in coordinates
+     // jump diagonally across quadrants...
+     std::string error_string;
+     bool no_problem=true;
+     bool crossing_quadrants=false;
+     int n_winding_increment=0;
+
+     // Check if we've crossed quadrants
+     check_quadrant_jump(x_prev,
+                         y_prev,
+                         x_next,
+                         y_next,
+                         crossing_quadrants,
+                         n_winding_increment,
+                         error_string,
+                         no_problem);
+
+     // Success?
+     if (no_problem)
+      {
+       n_winding+=n_winding_increment;
+      }
+     // Complain bitterly
+     else
+      {
+       std::stringstream error_message;
+       error_message << error_string;
+       error_message << "\n x/y_prev, x/y_next:"
+                     << x_prev << " "
+                     << y_prev << " "
+                     << x_next << " "
+                     << y_next << " "<< std::endl;
+       error_message << "for point at "
+                     << x[0] << " " << x[1] << std::endl;
+       error_message << "chain of shielding nodes on right:\n";
+       for (unsigned jj=j_right;jj<nnod;jj++)
+        {
+         Node* nnod_pt=shielding_node_pt[jj];
+         error_message << nnod_pt->x(0) << " "
+                       << nnod_pt->x(1) << "\n";
+        }
+       throw OomphLibError(error_message.str(),
+                           OOMPH_CURRENT_FUNCTION,
+                           OOMPH_EXCEPTION_LOCATION);
+      }
+     
+     
+     // If we're crossing the x axis to the left of the origin
+     // without jumping across quadrants we
+     // have to adjust the winding number
+     if (!crossing_quadrants)
+      {
+       if ((x_prev<0.0)&&(x_next<0.0))
+        {
+         if ((y_prev>=0.0)&&(y_next<0.0))
+          {
+           n_winding+=1;
+          }
+         else if ((y_prev<0.0)&&(y_next>=0.0))
+          {
+           n_winding-=1;
+          }
+        }
+      }
+     
+     // Correct angle by winding
+     phi_next+=double(n_winding)*2.0*MathematicalConstants::Pi;
+
+     // Is it bigger?
+     if (phi_next>phi_right)
+      {
+       phi_right=phi_next;
+      }
+     
+     // Bump up
+     x_prev=x_next;
+     y_prev=y_next;
+     phi_prev=phi_next;
+    }
+
+//---
+
+   Diffuse_limit_angles[ipt].first=phi_right;
+   Diffuse_limit_angles[ipt].second=phi_left;
+  }
+}
+
+
+
+//=====================================================================
+/// \short Output cone of diffuse radiation for all integration points
+//=====================================================================
+void SolarRadiationBase::output_diffuse_radiation_cone(
+ std::ostream &outfile, const double& radius)
+{
+ //Set the value of n_intpt
+ unsigned n_intpt = integral_pt()->nweight();
+
+ // Spatial dimension of the nodes
+ unsigned n_dim = this->nodal_dimension();
+ Vector<double> x(n_dim);
+ Vector<double> s(n_dim-1);
+
+ //Loop over the integration points
+ for(unsigned ipt=0;ipt<n_intpt;ipt++)
+  {
+   outfile << "ZONE\n";
+
+   // Local coordinate of integration point
+   for (unsigned i=0;i<n_dim-1;i++)
+    {
+     s[i]=integral_pt()->knot(ipt,i);
+    }
+   
+   // No recycling of shape fcts -- may as well call interpolated_x
+   // directly
+   this->interpolated_x(s,x);
+   
+   double phi_min=Diffuse_limit_angles[ipt].first;
+   double phi_max=Diffuse_limit_angles[ipt].second;
+   
+   if (phi_max>phi_min)
+    {
+     outfile << x[0]+radius*cos(phi_min) << " "
+             << x[1]+radius*sin(phi_min) << "\n"
+             << x[0] << " "
+             << x[1] << "\n"
+             << x[0]+radius*cos(phi_max) << " "
+             << x[1]+radius*sin(phi_max) << "\n";
+    }
+   else
+    {
+     outfile << x[0] << " "
+             << x[1] << "\n"
+             << x[0] << " "
+             << x[1] << "\n"
+             << x[0] << " "
+             << x[1] << "\n";
+    }
+  }
+}
+
+
+//=====================================================================
+/// \short Output max angle of cone of diffuse radiation for 
+/// all integration points
+//=====================================================================
+void SolarRadiationBase::output_diffuse_radiation_cone_max_angle(
+ std::ostream &outfile, const double& radius)
+{
+ //Set the value of n_intpt
+ unsigned n_intpt = integral_pt()->nweight();
+
+ // Spatial dimension of the nodes
+ unsigned n_dim = this->nodal_dimension();
+ Vector<double> x(n_dim);
+ Vector<double> s(n_dim-1);
+
+ //Loop over the integration points
+ for(unsigned ipt=0;ipt<n_intpt;ipt++)
+  {
+   outfile << "ZONE\n";
+
+   // Local coordinate of integration point
+   for (unsigned i=0;i<n_dim-1;i++)
+    {
+     s[i]=integral_pt()->knot(ipt,i);
+    }
+   
+   // No recycling of shape fcts -- may as well call interpolated_x
+   // directly
+   this->interpolated_x(s,x);
+   
+   double phi_max=Diffuse_limit_angles[ipt].second;
+
+   unsigned nplot=100;
+   double fract=0.1;
+   for (unsigned j=0;j<nplot;j++)
+    {
+     double phi=phi_max*double(j)/double(nplot-1);
+
+     outfile
+      << x[0]+fract*(1.0+0.1*double(j)/double(nplot-1))*radius*cos(phi) << " "
+      << x[1]+fract*(1.0+0.1*double(j)/double(nplot-1))*radius*sin(phi) << "\n";
+    }
+   outfile << x[0] << " "
+           << x[1] << "\n"
+           << x[0]+radius*cos(phi_max) << " "
+           << x[1]+radius*sin(phi_max) << "\n";
+
+  }
+}
+//=====================================================================
+/// \short Output min angle of cone of diffuse radiation for 
+/// all integration points
+//=====================================================================
+void SolarRadiationBase::output_diffuse_radiation_cone_min_angle(
+ std::ostream &outfile, const double& radius)
+{
+ //Set the value of n_intpt
+ unsigned n_intpt = integral_pt()->nweight();
+
+ // Spatial dimension of the nodes
+ unsigned n_dim = this->nodal_dimension();
+ Vector<double> x(n_dim);
+ Vector<double> s(n_dim-1);
+
+ //Loop over the integration points
+ for(unsigned ipt=0;ipt<n_intpt;ipt++)
+  {
+   outfile << "ZONE\n";
+
+   // Local coordinate of integration point
+   for (unsigned i=0;i<n_dim-1;i++)
+    {
+     s[i]=integral_pt()->knot(ipt,i);
+    }
+   
+   // No recycling of shape fcts -- may as well call interpolated_x
+   // directly
+   this->interpolated_x(s,x);
+   
+   double phi_min=Diffuse_limit_angles[ipt].first;
+
+   unsigned nplot=100;
+   double fract=0.13;
+   for (unsigned j=0;j<nplot;j++)
+    {
+     double phi=phi_min*double(j)/double(nplot-1);
+     
+     outfile 
+      << x[0]+fract*(1.0+0.1*double(j)/double(nplot-1))*radius*cos(phi) << " "
+      << x[1]+fract*(1.0+0.1*double(j)/double(nplot-1))*radius*sin(phi) << "\n";
+    }
+   outfile << x[0] << " "
+           << x[1] << "\n"
+           << x[0]+radius*cos(phi_min) << " "
+           << x[1]+radius*sin(phi_min) << "\n";
+
+  }
+}
+
+
+
+//=====================================================================
+/// \short Output illumination angles for all integration points
+//=====================================================================
+void SolarRadiationBase::output_limiting_angles(std::ostream &outfile)
+{
+ //Set the value of n_intpt
+ unsigned n_intpt = integral_pt()->nweight();
+
+ // Spatial dimension of the nodes
+ unsigned n_dim = this->nodal_dimension();
+ Vector<double> x(n_dim);
+ Vector<double> s(n_dim-1);
+ Vector<double> normal(n_dim);
+
+ //Loop over the integration points
+ for(unsigned ipt=0;ipt<n_intpt;ipt++)
+  {
+   outfile << "ZONE\n";
+
+   // Local coordinate of integration point
+   for (unsigned i=0;i<n_dim-1;i++)
+    {
+     s[i]=integral_pt()->knot(ipt,i);
+    }
+   
+   // No recycling of shape fcts -- may as well call interpolated_x
+   // directly
+   this->interpolated_x(s,x);
+   
+   // Get outer unit normal
+   this->outer_unit_normal(s,normal);
+
+   double phi_min=Diffuse_limit_angles[ipt].first;
+   double phi_max=Diffuse_limit_angles[ipt].second;
+   
+   outfile << x[0] << " "
+           << x[1] << " "
+           << normal[0] << " "
+           << normal[1] << " "
+           << phi_min << " "
+           << phi_max << "\n";
+    
+  }
+}
+
+
+
+
+//=====================================================================
+/// \short Output illumination angles for all integration points
+//=====================================================================
+void SolarRadiationBase::output_atmospheric_radiation(std::ostream &outfile)
+{
+
+ // Get time from first node
+ double time=node_pt(0)->time_stepper_pt()->time_pt()->time();
+
+ //Set the value of n_intpt
+ unsigned n_intpt = integral_pt()->nweight();
+ 
+ // Spatial dimension of the nodes
+ unsigned n_dim = this->nodal_dimension();
+ Vector<double> x(n_dim);
+ Vector<double> s(n_dim-1);
+ Vector<double> normal(n_dim);
+
+ //Loop over the integration points
+ for(unsigned ipt=0;ipt<n_intpt;ipt++)
+  {
+   outfile << "ZONE\n";
+
+   // Local coordinate of integration point
+   for (unsigned i=0;i<n_dim-1;i++)
+    {
+     s[i]=integral_pt()->knot(ipt,i);
+    }
+   
+   // No recycling of shape fcts -- may as well call interpolated_x
+   // directly
+   this->interpolated_x(s,x);
+   
+   // Get outer unit normal
+   this->outer_unit_normal(s,normal);
+
+   // Get radiation
+   double radiation=atmospheric_radiation(ipt,
+                                          time,
+                                          x,
+                                          normal);
+   // output
+   outfile << x[0] << " "
+           << x[1] << " "
+           << radiation << " "
+           << normal[0] << " "
+           << normal[1] << "\n";
+    
+  }
+}
+
+
 
 /////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////
@@ -281,8 +1291,6 @@ public:
          SolidNode* solid_node_pt=dynamic_cast<SolidNode*>(ext_node_pt);
          if (solid_node_pt!=0)
           {
-           // hierher
-           oomph_info << "Adding solid position data!\n";
            add_external_data(solid_node_pt->variable_position_pt());
           }
         }
@@ -298,9 +1306,8 @@ public:
  /// integration point to illuminating ones (and back).
  void output_stefan_boltzmann_radiation_rays(
   std::ostream &outfile, 
-  const unsigned& integration_point=0); 
+  const unsigned& integration_point=UINT_MAX); 
 
-  protected:
 
  /// \short Compute the incoming Stefan Boltzmann radiation
  /// onto integration point ipt -- input externally pre-computed
@@ -333,6 +1340,7 @@ public:
   return flux;
  }
 
+  protected:
 
  /// Pointer to non-dim Stefan Boltzmann constant
  double* Sigma_pt;
@@ -389,11 +1397,6 @@ double StefanBoltzmannRadiationBase::contribution_to_stefan_boltzmann_radiation(
  Shape psi(n_node);
  DShape dpsids(n_node,1);
  
- // Local coordinate
- //ALH: Commented out because it's not used and caused a memory error
- //below
- //Vector<double> s(1);
-
  // Loop over contributing integration points
  unsigned nint=visible_intpts_in_current_element.size();
  for (unsigned ii=0;ii<nint;ii++)
@@ -429,14 +1432,6 @@ double StefanBoltzmannRadiationBase::contribution_to_stefan_boltzmann_radiation(
       }
     }
    
-   /* // Get outer unit normal */
-   /* Vector<double> n_illuminating(Dim); */
-   /* outer_unit_normal(s,n_illuminating); */
-
-   /* // Jacobian of mapping */
-   /* double arclength=sqrt(interpolated_dxds[0]*interpolated_dxds[0]+ */
-   /*                       interpolated_dxds[1]*interpolated_dxds[1]); */
-
    // Vector from illuminated to illuminated point
    Vector<double> ray(2);
    ray[0]=r_illuminating[0]-r_illuminated[0];
@@ -467,13 +1462,6 @@ double StefanBoltzmannRadiationBase::contribution_to_stefan_boltzmann_radiation(
     0.5*cos_phi*std::fabs(inv_length*(interpolated_dxds[0]*e_phi[0]+
                                       interpolated_dxds[1]*e_phi[1]));
    
-   /* double integrand= */
-   /*  -this->sigma()*pow((interpolated_u+this->theta_0()),4)* */
-   /*  0.5* */
-   /*  (ray[0]*n_illuminating[0]+ray[1]*n_illuminating[1])* */
-   /*  (ray[0]*n_illuminated [0]+ray[1]*n_illuminated [1])/ */
-   /*  pow(ray[0]*ray[0]+ray[1]*ray[1],1.5)*arclength; */
-
 
    // Add it in...
    contribution+=integrand*w;
@@ -512,7 +1500,7 @@ void StefanBoltzmannRadiationBase::output_stefan_boltzmann_radiation_rays(
  
  unsigned ipt_lo=0;
  unsigned ipt_hi=this->integral_pt()->nweight()-1;
- if (integration_point!=0)
+ if (integration_point!=UINT_MAX)
   {
    ipt_lo=integration_point;
    ipt_hi=integration_point;
@@ -581,6 +1569,7 @@ class StefanBoltzmannUnsteadyHeatFluxElement :
 public virtual FaceGeometry<ELEMENT>,
  public virtual FaceElement,
  public virtual StefanBoltzmannRadiationBase, 
+ public virtual SolarRadiationBase, 
  public virtual UnsteadyHeatBaseFaceElement<ELEMENT>
 {
  
@@ -603,27 +1592,8 @@ public:
   {
    BrokenCopy::broken_assign("StefanBoltzmannUnsteadyHeatFluxElement");
   }
+
  
- /// Compute the element residual vector
- inline void fill_in_contribution_to_residuals(Vector<double> &residuals)
-  {
-   //Call the generic residuals function with flag set to 0
-   //using a dummy matrix argument
-   fill_in_generic_residual_contribution_solar_ust_heat_flux(
-    residuals,GeneralisedElement::Dummy_matrix,0);
-  }
-
-
- // // FD-ed now that we've made it nonlinear with Stefan Boltzmann
- // // radiation
- // /// Compute the element's residual vector and its Jacobian matrix
- // inline void fill_in_contribution_to_jacobian(Vector<double> &residuals,
- //                                          DenseMatrix<double> &jacobian)
- //  {
- //   //Call the generic routine with the flag set to 1
- //   fill_in_generic_residual_contribution_solar_ust_heat_flux(residuals,jacobian,1);
- //  }
-
  /// \short Change integration scheme (overloads underlying version and
  /// and resizes lookup schemes introduced in this class.
  void set_integration_scheme(Integral* const &integral_pt)
@@ -641,148 +1611,158 @@ public:
  double zeta_nodal(const unsigned &n, const unsigned &k,
                    const unsigned &i) const
  {return FaceElement::zeta_nodal(n,k,i);}
-
-
-  /// Output function
-  void output(std::ostream &outfile) 
-  {
-   unsigned nplot=5;
-   output(outfile,nplot);
-  }
-  
-  
-  /// \short Output function. Note: nplot is ignored since we can only
-  /// output at integration points
-  void output(std::ostream &outfile, const unsigned &n_plot)
-  { 
-   unsigned n_dim = this->nodal_dimension();
-   
-   Vector<double> x(n_dim);
-   Vector<double> s(n_dim-1);
-   Vector<double> dx_dt(n_dim);
-   
-   //Set the value of n_intpt
-   unsigned n_intpt = integral_pt()->nweight();
-   
-   outfile << "ZONE\n";
-   
-   //Loop over the integration points
-   for(unsigned ipt=0;ipt<n_intpt;ipt++)
-    {
-     // Local coordinate of integration point
-     for (unsigned i=0;i<n_dim-1;i++)
-      {
-       s[i]=integral_pt()->knot(ipt,i);
-      }
-     
-     // Get Eulerian coordinates and their time derivative
-     this->interpolated_x(s,x);
-     this->interpolated_dxdt(s,1,dx_dt);
-     
-     // Get temperature
-     double interpolated_u=0;
-     this->interpolated_u(s,interpolated_u);
-     
-     // Outer unit normal
-     Vector<double> unit_normal(n_dim);
-     outer_unit_normal(s,unit_normal);
-     
-     
-     // Get flux into adjacent bulk element
-     //------------------------------------
-     
-     // Get pointer to bulk element
-     ELEMENT* bulk_el_pt=dynamic_cast<ELEMENT*>(this->bulk_element_pt());
-     
-     // Local coordinates in bulk element
-     Vector<double> s_bulk(n_dim);
-     s_bulk=local_coordinate_in_bulk(s);
-     
-     // Get flux from bulk element (flux[i] = du/dx_i)
-     Vector<double> flux_vector(n_dim);
-     bulk_el_pt->get_flux(s_bulk,flux_vector);
-     
-     // Work out heat flux seen by adjacent bulk element
-     // du/dn > 0: Hotter on surface than on inside of bulk
-     // so net flux (from hot to cold) is into the bulk.
-     double beta_dtheta_dn=0.0;
-     for (unsigned i=0;i<n_dim;i++)
-      {
-       beta_dtheta_dn+=flux_vector[i]*unit_normal[i];
-      }
-     beta_dtheta_dn*= bulk_el_pt->beta();
-     
-     // Outgoing Stefan Boltzmann radiation
-     //-------------------------------------
-     double outgoing_sb_radiation=
-      this->sigma()*pow((interpolated_u+this->theta_0()),4);
-     
-     // Incoming Stefan Boltzmann radiation
-     //------------------------------------
-     double incoming_sb_radiation=incoming_stefan_boltzmann_radiation
-      (ipt,x,unit_normal);
-     
-     //Output the x,y,..
-     for(unsigned i=0;i<n_dim;i++)
-      {outfile << x[i] << " ";}
-     
-     // Output radiative gains
-     outfile << incoming_sb_radiation << " ";
-     
-     // Output radiative losses
-     outfile <<  outgoing_sb_radiation << " ";
-     
-     // Net heat flux into adjacent bulk
-     outfile << beta_dtheta_dn << " ";
-     
-     // Temperature
-     outfile << interpolated_u << " ";
-     
-     // Output mesh velocity
-     for(unsigned i=0;i<n_dim;i++)
-      {
-       outfile << dx_dt[i] << " ";
-      }
-     // Output normal
-     for(unsigned i=0;i<n_dim;i++)
-      {
-       outfile << unit_normal[i] << " ";
-      }
-     
-     outfile << std::endl;
-    }
-  }
-
-protected:
  
- /// \short Function to compute the shape and test functions and to return
- /// the Jacobian of mapping between local and global (Eulerian)
- /// coordinates
- inline double shape_and_test(const Vector<double> &s, Shape &psi, Shape &test)
-  const
-  {
-   //Find number of nodes
-   unsigned n_node = nnode();
+ 
+ /// \short Generalised output function to include stefan boltzmann information:
+ /// temperature, total incoming flux, incoming s.b. flux, outgoing s.b. flux, 
+ /// outer unit normal. Note that total incoming flux is simply given
+ /// by difference between incoming and outgoing radiation since we don't
+ /// allow any user-specified additional flux (the get_flux(...) function
+ /// has been overloaded.
+ void output_stefan_boltzmann_radiation(std::ostream &outfile)
+ { 
+  unsigned n_dim = this->nodal_dimension();
+  Vector<double> x(n_dim);
+  Vector<double> s(n_dim-1);
+  Vector<double> unit_normal(n_dim);
+  
+  // Get continuous time from timestepper of first node
+  double time=node_pt(0)->time_stepper_pt()->time_pt()->time();
+  
+  // Number of integration points
+  unsigned n_intpt = integral_pt()->nweight();
+  
+  outfile << "ZONE\n";
+  
+  //Loop over the integration points
+  for(unsigned ipt=0;ipt<n_intpt;ipt++)
+   {
+    // Local coordinate of integration point
+    for (unsigned i=0;i<n_dim-1;i++)
+     {
+      s[i]=integral_pt()->knot(ipt,i);
+     }
+    
+    // Get Eulerian coordinates
+    this->interpolated_x(s,x);
+    
+    // Get temperature
+    double interpolated_u=0;
+    this->interpolated_u(s,interpolated_u);
+    
+    // Outer unit normal
+    outer_unit_normal(s,unit_normal);
+        
+    // Outgoing Stefan Boltzmann radiation
+    double outgoing_sb_radiation=
+     this->sigma()*pow((interpolated_u+this->theta_0()),4);
+    
+    // Incoming Stefan Boltzmann radiation
+    double incoming_sb_radiation=incoming_stefan_boltzmann_radiation
+     (ipt,x,unit_normal);
 
-   //Get the shape functions
-   shape(s,psi);
-
-   //Set the test functions to be the same as the shape functions
-   for(unsigned i=0;i<n_node;i++) {test[i] = psi[i];}
-
-   //Return the value of the jacobian
-   return J_eulerian(s);
-  }
+    // Get the net incoming flux (should be the difference between
+    // the two previous ones!
+    double flux=0.0;
+    get_flux(ipt,time,x,unit_normal,interpolated_u,flux);
 
 
+// hierher paranoidify
+//#ifdef PARANOID    
+     if (fabs(flux-(incoming_sb_radiation-outgoing_sb_radiation)))
+     {
+      std::stringstream error_message;
+      error_message 
+       << "Difference between incoming ( " << incoming_sb_radiation 
+       << " ) and outgoing ( " << outgoing_sb_radiation << " ) is "
+       << (incoming_sb_radiation-outgoing_sb_radiation)
+       << " but total flux is " << flux << " so difference is "
+       << fabs(flux-(incoming_sb_radiation-outgoing_sb_radiation));
+      throw OomphLibError(
+       error_message.str(),
+       OOMPH_CURRENT_FUNCTION,
+       OOMPH_EXCEPTION_LOCATION);
+     }
+//#endif
 
-private:
 
- /// \short Compute the element residual vector.
- /// flag=1(or 0): do (or don't) compute the Jacobian as well.
- void fill_in_generic_residual_contribution_solar_ust_heat_flux(
-  Vector<double> &residuals, DenseMatrix<double> &jacobian,
-  unsigned flag);
+    //Output the x,y,..
+    for(unsigned i=0;i<n_dim;i++)
+     {
+      outfile << x[i] << " ";
+     }
+    
+    // Temperature
+    outfile << interpolated_u << " ";
+    
+    // Total incoming flux (may include additional contributions)
+    outfile << flux << " ";
+    
+    // Incoming sb flux
+    outfile << incoming_sb_radiation << " ";
+    
+    // Outgoing sb flux
+    outfile << outgoing_sb_radiation << " ";
+    
+    // Outer unit normal
+    for(unsigned i=0;i<n_dim;i++)
+     {
+      outfile << unit_normal[i] << " ";
+     }
+    outfile << std::endl;
+   }
+ }
+ 
+
+ 
+  protected:
+ 
+
+ /// \short Overload the function that determines the prescribed flux 
+ /// at a given spatial
+ /// position, x, the outer unit normal, n, and the continuous time. 
+ /// We also allow an explicit dependendence on the integration point, ipt,
+ /// and the actual local "temperature", u -- just what is needed for
+ /// this case we have here, where the net flux is determined by the
+ /// balance between incoming and outgoing Stefan Boltzmann radiation. 
+ /// The dependence on u makes the problem highly nonlinear -- Jacobian 
+ /// is currently worked out by finite differencing.
+ virtual void get_flux(const unsigned& ipt,
+                       const double& time, 
+                       const Vector<double>& x, 
+                       const Vector<double>& n,
+                       const double& u,  
+                       double& flux)
+ {
+
+#ifdef PARANOID
+  // We shouldn't really have an externally imposed flux (cos it's ignored)
+  if (Flux_fct_pt != 0)
+   {
+    //Issue a warning
+    OomphLibWarning("Flux_fct_pt is ignored in this element\n",
+                    OOMPH_CURRENT_FUNCTION,
+                    OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+  
+  // Outgoing Stefan Boltzmann radiation in terms of pre-computed
+  // local temperature
+  double outgoing_sb_radiation=this->sigma()*pow((u+this->theta_0()),4);
+  
+  // Incoming Stefan Boltzmann radiation
+  double incoming_sb_radiation=incoming_stefan_boltzmann_radiation(ipt,x,n);
+  
+  // Atmospheric radiation
+  double incoming_atmospheric=atmospheric_radiation(ipt,time,x,n);
+
+  // Net flux
+  flux=incoming_sb_radiation-outgoing_sb_radiation+incoming_atmospheric;
+
+
+ }
+
+
  
 };
 
@@ -797,44 +1777,30 @@ private:
 template<class ELEMENT>
 StefanBoltzmannUnsteadyHeatFluxElement<ELEMENT>::
 StefanBoltzmannUnsteadyHeatFluxElement(FiniteElement* const &bulk_el_pt,
-                             const int &face_index) :
- FaceGeometry<ELEMENT>(), FaceElement()
+                                       const int &face_index) :  
+UnsteadyHeatBaseFaceElement<ELEMENT>(bulk_el_pt,face_index)
 {
- 
-
 
 #ifdef PARANOID
- {
-  // hierher 
-
-  //Check that the element is not a refineable 3d element
-  ELEMENT* elem_pt = new ELEMENT;
-  //If it's three-d
-  if(elem_pt->dim()==3)
-   {
-    //Is it refineable
-    if(dynamic_cast<RefineableElement*>(elem_pt))
-     {
-      //Issue a warning
-      OomphLibWarning(
-       "This flux element will not work correctly if nodes are hanging\n",
-       OOMPH_CURRENT_FUNCTION,
-       OOMPH_EXCEPTION_LOCATION);
-     }
-   }
- }
+    {
+     //Check that the element is not a refineable 3d element
+     if(bulk_el_pt->dim()==3)
+      {
+       //Is it refineable
+       if(dynamic_cast<RefineableElement*>(bulk_el_pt))
+        {
+         //Issue a warning
+         std::string error_string=
+          "This face element will not work correctly if nodes are hanging.\n";
+         error_string+="Use the refineable version instead. ";
+         OomphLibWarning(error_string,
+                         OOMPH_CURRENT_FUNCTION,
+                         OOMPH_EXCEPTION_LOCATION);
+        }
+      }
+    }
 #endif
-  
- // Let the bulk element build the FaceElement, i.e. setup the pointers
- // to its nodes (by referring to the appropriate nodes in the bulk
- // element), etc.
- bulk_el_pt->build_face_element(face_index,this);
-
- // Extract index of nodal value that stores temperature from
- // bulk elements
- this->extract_temperature_index_from_bulk_element(bulk_el_pt);
-
-
+ 
 #ifdef PARANOID
  // Check spatial dimension
  if (Dim!=2)
@@ -847,125 +1813,6 @@ StefanBoltzmannUnsteadyHeatFluxElement(FiniteElement* const &bulk_el_pt,
   }
 #endif
 
-}
-
-
-
-//===========================================================================
-/// Compute the element's residual vector and the Jacobian matrix.
-//===========================================================================
-template<class ELEMENT>
-void StefanBoltzmannUnsteadyHeatFluxElement<ELEMENT>::
-fill_in_generic_residual_contribution_solar_ust_heat_flux(
- Vector<double> &residuals, DenseMatrix<double> &jacobian,
- unsigned flag)
-{
- //Find out how many nodes there are
- const unsigned n_node = nnode();
-
-  //Set up memory for the shape and test functions
- Shape psif(n_node), testf(n_node);
- 
- //Set the value of n_intpt
- const unsigned n_intpt = integral_pt()->nweight();
- 
- //Set the Vector to hold local coordinates
- Vector<double> s(Dim-1);
- 
- //Integer to store the local equation numbers
- int local_eqn=0;
-
- // Locally cache the index at which the variable is stored
- const unsigned u_index_ust_heat = U_index_ust_heat;
- 
- // Interpolated u
- double interpolated_u=0;
- 
- //Loop over the integration points
- //--------------------------------
- for(unsigned ipt=0;ipt<n_intpt;ipt++)
-  {
-
-   //Assign values of s
-   for(unsigned i=0;i<(Dim-1);i++)
-    {
-     s[i] = integral_pt()->knot(ipt,i);
-    }
-
-   //Get the integral weight
-   double w = integral_pt()->weight(ipt);
-   
-   //Find the shape and test functions and return the Jacobian
-   //of the mapping
-   double J = shape_and_test(s,psif,testf);
-   
-   //Premultiply the weights and the Jacobian
-   double W = w*J;
-   
-   // Get outer unit normal
-   Vector<double> n(Dim);
-   outer_unit_normal(s,n);
-
-   //Need to find position to feed into flux function
-   Vector<double> interpolated_x(Dim);
-   
-   //Initialise to zero
-   for(unsigned i=0;i<Dim;i++)
-    {
-     interpolated_x[i] = 0.0;
-    }
-   
-   //Calculate temperature position
-   interpolated_u=0.0;
-   for(unsigned l=0;l<n_node;l++)
-    {
-     //Calculate the value at the nodes
-     double u_value = raw_nodal_value(l,u_index_ust_heat);
-     interpolated_u += u_value*psif[l];
-     
-     //Loop over directions
-     for(unsigned i=0;i<Dim;i++)
-      {
-       interpolated_x[i] += nodal_position(l,i)*psif[l];
-      }
-    }
-   
-   // Outgoing Stefan Boltzmann radiation
-   double outgoing_sb_radiation=
-    this->sigma()*pow((interpolated_u+this->theta_0()),4);
-
-   // Incoming Stefan Boltzmann radiation
-   double incoming_sb_radiation=incoming_stefan_boltzmann_radiation
-    (ipt,interpolated_x,n);
-
-   // Net flux
-   double flux=incoming_sb_radiation-outgoing_sb_radiation;
-
-   //Loop over the test functions
-   for(unsigned l=0;l<n_node;l++)
-    {
-     local_eqn = nodal_local_eqn(l,u_index_ust_heat);
-     /*IF it's not a boundary condition*/
-     if(local_eqn >= 0)
-      {
-       // Add the prescribed flux terms NOTE THAT THERE'S NO BETA
-       // IN HERE THE ABOVE BALANCES THE BETA * DU/DN THAT APPEARS
-       // IN THE WEAK FORM OF THE EQUATIONS!
-       residuals[local_eqn] -= flux*testf[l]*W;
-       
-       // No Jacobian -- computed by FD anyway!
-       if (flag==1)
-        {
-         // hierher may speed it up a lot..
-         throw OomphLibError(
-          "Analytical Jacobian not yet implemented... Volunteers?\n",
-          OOMPH_CURRENT_FUNCTION,
-          OOMPH_EXCEPTION_LOCATION);
-        }
-
-      }
-    }
-  }
 }
 
 //////////////////////////////////////////////////////////////////
@@ -982,8 +1829,10 @@ namespace StefanBoltzmannHelper
  /// Bin to store pointers to finite elements in
  Vector<Vector<std::set<FiniteElement*> > > Element_in_bin;
  
- /// Max/min bin coords
+ /// Max bin coords
  Vector<double> Max_coord(2,-DBL_MAX);
+
+ /// Min bin coords
  Vector<double> Min_coord(2, DBL_MAX);
  
  /// Increments in bin
@@ -1096,26 +1945,6 @@ namespace StefanBoltzmannHelper
        }
      }
    }
-  /* // horizonal ray? */
-  /* else (lower_ray_vertex[1]==upper_ray_vertex[1]) */
-  /*       { */
-
-  /*   // Add all the bins above the initial one until end point */
-  /*   unsigned i_end=unsigned((upper_ray_vertex[1]-Min_coord[1])/ */
-  /*                            (Max_coord[1]-Min_coord[1])* */
-  /*                            double(Ny_bin)); */
-  /*   for (unsigned i=iy_start+1;i<=iy_end;i++) */
-  /*    { */
-  /*     if (populate_bin) */
-  /*      { */
-  /*       Element_in_bin[ix_start][i].insert(el_pt); */
-  /*      } */
-  /*     else */
-  /*      { */
-  /*       intersected_bin.push_back(std::make_pair(ix_start,i)); */
-  /*      } */
-  /*    } */
-  /*       } */
   // Non-vertical ray
   else
    {
@@ -1408,6 +2237,13 @@ namespace StefanBoltzmannHelper
       Element_in_bin[i].resize(Ny_bin);
      }
      
+
+    // Reset max/min coords
+    Max_coord.clear();
+    Max_coord.resize(2,-DBL_MAX);
+    Min_coord.clear();
+    Min_coord.resize(2, DBL_MAX);
+
     // Initial sweep: Get max/min coords
     //----------------------------------
 
@@ -1771,9 +2607,10 @@ namespace StefanBoltzmannHelper
             illuminating_el_pt->interpolated_x(s_illuminating,r_illuminating);
            
             // Get outer unit normal
-            illuminating_face_el_pt->outer_unit_normal(s_illuminating,
-                                                       unit_normal_illuminating);
-           
+            illuminating_face_el_pt->
+             outer_unit_normal(s_illuminating,
+                               unit_normal_illuminating);
+            
             // Get vector from illuminating point to illuminated point
             Vector<double> ray(2);
             ray[0]=r_illuminated[0]-r_illuminating[0];

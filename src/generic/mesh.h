@@ -597,6 +597,25 @@ public:
  }
 
 
+ /// \short Determine the sum of all "sizes" of the FiniteElements in the mesh
+ /// (non-FiniteElements are ignored). This gives the length/area/volume
+ /// occupied by the mesh
+ double total_size()
+ {
+  double size=0.0;
+  unsigned nel=nelement();
+  for (unsigned e=0;e<nel;e++)
+   {
+    FiniteElement* fe_pt=finite_element_pt(e);
+    if (fe_pt!=0)
+     {
+      size+=fe_pt->size();
+     }
+   }
+  return size;
+ }
+
+
  /// \short Check for inverted elements and report outcome
  /// in boolean variable. This visits all elements at their
  /// integration points and checks if the Jacobian of the

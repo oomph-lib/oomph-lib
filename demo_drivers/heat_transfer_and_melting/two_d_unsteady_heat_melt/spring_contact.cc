@@ -151,7 +151,7 @@ namespace GlobalFct
       oomph_info << "Please specify which method you want to use for\n"
                  << "the enforcement of the contact condition: \n";
       CommandLineArgs::doc_available_flags();
-      assert(false);
+      abort();
      }
    }
  }

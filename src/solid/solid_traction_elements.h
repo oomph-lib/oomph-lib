@@ -221,7 +221,7 @@ public:
     
     // Get Eulerian and Lagrangian coordinates
     this->interpolated_x(s,x);
-    this->interpolated_xi(s,x);   
+    this->interpolated_xi(s,xi);   
 
     // Outer unit normal
     Vector<double> unit_normal(n_dim);
@@ -295,7 +295,7 @@ void SolidTractionElement<ELEMENT>::traction(const Vector<double>& s,
 
  // Lagrangian coordinate
  Vector<double> xi(n_dim);
- this->interpolated_xi(s,x);
+ this->interpolated_xi(s,xi);
 
  // Outer unit normal
  Vector<double> unit_normal(n_dim);

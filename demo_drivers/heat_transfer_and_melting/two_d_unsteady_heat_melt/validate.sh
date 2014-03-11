@@ -5,7 +5,7 @@ OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
 
 
 #Set the number of tests to be checked
-NUM_TESTS=7
+NUM_TESTS=12 
 
 
 # Setup validation directory
@@ -14,6 +14,143 @@ touch Validation
 rm -r -f Validation
 mkdir Validation
 cd Validation
+
+
+# Validation for solid contact with gravity (unstructured)
+#---------------------------------------------------------
+
+echo "Running solid contact with gravity (unstructured) validation"
+mkdir RESLT
+../solid_contact_with_gravity_unstructured  > RESLT/OUTPUT
+echo "done"
+echo " " >> validation.log
+echo "Solid contact with gravity (unstructured) validation" >> validation.log
+echo "----------------------------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat RESLT/trace.dat  > result_solid_contact_with_gravity_unstructured.dat
+
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../../bin/fpdiff.py ../validata/result_solid_contact_with_gravity_unstructured.dat.gz \
+    result_solid_contact_with_gravity_unstructured.dat  >> validation.log
+fi
+
+mv RESLT RESLT_solid_contact_with_gravity_unstructured
+
+
+# Validation for solid contact with gravity (structured)
+#-------------------------------------------------------
+
+echo "Running solid contact with gravity (structured) validation"
+mkdir RESLT
+../solid_contact_with_gravity_structured  > RESLT/OUTPUT
+echo "done"
+echo " " >> validation.log
+echo "Solid contact with gravity (structured) validation" >> validation.log
+echo "--------------------------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat RESLT/trace.dat  > result_solid_contact_with_gravity_structured.dat
+
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../../bin/fpdiff.py ../validata/result_solid_contact_with_gravity_structured.dat.gz \
+    result_solid_contact_with_gravity_structured.dat  >> validation.log
+fi
+
+mv RESLT RESLT_solid_contact_with_gravity_structured
+
+
+# Validation for solid contact
+#-----------------------------
+
+echo "Running solid contact validation"
+mkdir RESLT
+../solid_contact --validate  > RESLT/OUTPUT
+echo "done"
+echo " " >> validation.log
+echo "Solid contact validation" >> validation.log
+echo "------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat RESLT/trace.dat  > result_solid_contact.dat
+
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../../bin/fpdiff.py ../validata/result_solid_contact.dat.gz \
+    result_solid_contact.dat  >> validation.log
+fi
+
+mv RESLT RESLT_solid_contact
+
+
+# Validation for Stefan Boltzmann melting
+#----------------------------------------
+
+echo "Running Stefan Boltzmann melt validation"
+mkdir RESLT
+../stefan_boltzmann_melt --dt 0.05 --t_max 0.2  > RESLT/OUTPUT
+echo "done"
+echo " " >> validation.log
+echo "2D Stefan Boltzmann melt validation" >> validation.log
+echo "-----------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat RESLT/trace.dat  > result_sb_melt.dat
+
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../../bin/fpdiff.py ../validata/result_sb_melt.dat.gz \
+    result_sb_melt.dat  >> validation.log
+fi
+
+mv RESLT RESLT_sb_melt
+
+
+
+
+
+# Validation 2D unsteady heat
+#----------------------------
+echo "Running 2D unsteady heat validation "
+mkdir RESLT
+../two_d_unsteady_heat  > RESLT/OUTPUT
+echo "done"
+echo " " >> validation.log
+echo "2D unsteady heat validation " >> validation.log
+echo "----------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat RESLT/soln0.dat RESLT/soln1.dat RESLT/soln2.dat \
+    > result_unsteady_heat.dat
+mv RESLT RESLT_unsteady_heat
+
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../../bin/fpdiff.py ../validata/result_unsteady_heat.dat.gz \
+    result_unsteady_heat.dat  >> validation.log
+fi
 
 
 # Validation for demo Stefan Boltzmann problem

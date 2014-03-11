@@ -673,7 +673,7 @@ class ProjectionProblem : public virtual Problem
  }
 
  ///\short Project from base into the problem's own mesh. 
- void project(Mesh* base_mesh_pt)
+ void project(Mesh* base_mesh_pt, const bool& dont_project_positions=false)
  {
   // Backup verbosity in Newton solve status
   bool shut_up_in_newton_solve_backup=Shut_up_in_newton_solve;
@@ -713,6 +713,20 @@ class ProjectionProblem : public virtual Problem
       << " not doing anything in ProjectionProblem::project()\n";
      return;
     }
+
+#ifdef PARANOID
+   unsigned nnod=Problem::mesh_pt()->nnode();
+   if (nnod==0)
+    {
+     std::ostringstream error_stream;
+     error_stream 
+      << "Mesh has no nodes! Please populate the Node_pt vector\n" 
+      << "otherwise projection won't work!\n";
+     throw OomphLibError(error_stream.str(),
+                         OOMPH_CURRENT_FUNCTION,
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
 
    // How many fields do we have to project?
    unsigned n_fields = dynamic_cast<PROJECTABLE_ELEMENT*>
@@ -769,6 +783,9 @@ class ProjectionProblem : public virtual Problem
    //Let us first pin every degree of freedom
    //We shall unpin selected dofs for each different projection problem
    this->pin_all();
+
+   if (!dont_project_positions)
+    {
 
    //------------------Project coordinates first------------------------
    //If we have a solid element then we should also project Lagrangian 
@@ -1067,6 +1084,8 @@ class ProjectionProblem : public virtual Problem
     } //End of non-SolidElement case
 
    
+    } // end if for projection of coordinates
+
    //Disable projection of coordinates
    for(unsigned e=0;e<n_element;e++)
     {  

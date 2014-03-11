@@ -150,6 +150,9 @@ namespace GlobalParameters
  /// Outer radius of annular region
  double Radius_outer=1.5;
 
+ /// Temperature on boundary of inner circle
+ double U0 = 0.8288627710;
+
  /// Strength of source function in inner region
  double S0=0.1;
 
@@ -176,45 +179,115 @@ namespace GlobalParameters
                   Vector<double>& u)
  {
   double r=sqrt(x[0]*x[0]+x[1]*x[1]);
-  double U2=1.0;
-  double r0=Radius_innermost;
-  double r1=Radius_inner;
-  double r2=Radius_outer;
-  double U0=0.0;
-  double U1=0.0;
 
-  if ((S0!=0.1)||
-      (S1!=1.0)||
-      (Sigma!=1.0e-2)||
-      (Theta_0!=1.0)||
-      (Alpha0!=1.0)||
-      (Alpha1!=1.0)||
-      (Beta0!=0.05)||
-      (Beta1!=1.5)||
-      (Radius_innermost!=0.5)||
-      (Radius_inner!=1.0)||
-      (Radius_outer!=1.5))
-   {
-    oomph_info << "Hardcoded exact solution for specific parameter values\n";
-    oomph_info << "Yours don't match\n";
-    assert(false);
-   }
-
-  // Hardcoded results from nonlinear solve in maple for above values
-  U0 = 0.8288627710;
-  U1 = 0.9234428268;
-
+  // Solutions from maple
+  double t0=0.0;
   if (r<0.5*(Radius_inner+Radius_innermost))
    {
-    u[0]=S0/Beta0*(r*r-r0*r0)/4.0+U0;
+    t0 = 0.25*S0/Beta0*(r*r-1.0*Radius_innermost*Radius_innermost)+U0;
    }
   else
    {
-    u[0]=S1/Beta1*r*r/4.0+(-4.0*U2*Beta1+S1*r2*r2+4.0*U1*Beta1-S1*r1*r1)/
-     Beta1/(-log(r2)+log(r1))*log(r)/
-     4.0+(4.0*log(r1)*U2*Beta1-log(r1)*S1*r2*r2-4.0*
-          U1*Beta1*log(r2)+S1*r1*r1*log(r2))/Beta1/(-log(r2)+log(r1))/4.0;
+    
+    double MapleGenVar1 = 0.0;     
+    double MapleGenVar4 = 0.0;
+    double MapleGenVar6 = 0.0;
+    double MapleGenVar9 = 0.0;
+    double MapleGenVar8 = 0.0;
+    double MapleGenVar7 = 0.0;
+    double MapleGenVar5 = 0.0;
+    double MapleGenVar3 = 0.0;
+    double MapleGenVar11 = 0.0;
+    double MapleGenVar13 = 0.0;
+    double MapleGenVar15 = 0.0;
+    double MapleGenVar16 = 0.0;
+    double MapleGenVar14 = 0.0;
+    double MapleGenVar12 = 0.0;
+    double MapleGenVar10 = 0.0;
+    double MapleGenVar2  = 0.0;
+    
+      MapleGenVar1 = S1/Beta1*r*r/4.0;
+      MapleGenVar4 = 1/Beta1/4.0;
+      MapleGenVar6 = 1/(log(Radius_inner)-log(Radius_outer));
+      MapleGenVar9 = -2.0*log(Radius_inner)*S0*Radius_innermost*
+Radius_innermost+2.0*log(Radius_outer)*S0*Radius_innermost*Radius_innermost+4.0
+*log(Radius_inner)*Sigma*Theta_0*Theta_0*Theta_0*Theta_0*Radius_inner-8.0*log(
+Radius_inner)*Sigma*Theta_0*Theta_0*Theta_0*Theta_0*Radius_innermost+4.0*log(
+Radius_inner)*Sigma*U0*U0*U0*U0*Radius_inner-8.0*log(Radius_inner)*Sigma*U0*U0*
+U0*U0*Radius_innermost-4.0*log(Radius_outer)*Sigma*Theta_0*Theta_0*Theta_0*
+Theta_0*Radius_inner+8.0*log(Radius_outer)*Sigma*Theta_0*Theta_0*Theta_0*
+Theta_0*Radius_innermost-4.0*log(Radius_outer)*Sigma*U0*U0*U0*U0*Radius_inner+
+8.0*log(Radius_outer)*Sigma*U0*U0*U0*U0*Radius_innermost+2.0*log(Radius_inner)*
+S0*Radius_inner*Radius_innermost-2.0*log(Radius_outer)*S0*Radius_inner*
+Radius_innermost-2.0*S1*Radius_inner*Radius_inner*log(Radius_inner);
+      MapleGenVar8 = MapleGenVar9+2.0*log(Radius_outer)*S1*Radius_inner*
+Radius_inner+16.0*log(Radius_inner)*Sigma*Theta_0*Theta_0*Theta_0*U0*
+Radius_inner-32.0*log(Radius_inner)*Sigma*Theta_0*Theta_0*Theta_0*U0*
+Radius_innermost+24.0*log(Radius_inner)*Sigma*Theta_0*Theta_0*U0*U0*
+Radius_inner-48.0*log(Radius_inner)*Sigma*Theta_0*Theta_0*U0*U0*
+Radius_innermost+16.0*log(Radius_inner)*Sigma*Theta_0*U0*U0*U0*Radius_inner
+-32.0*log(Radius_inner)*Sigma*Theta_0*U0*U0*U0*Radius_innermost-16.0*log(
+Radius_outer)*Sigma*Theta_0*Theta_0*Theta_0*U0*Radius_inner+32.0*log(
+Radius_outer)*Sigma*Theta_0*Theta_0*Theta_0*U0*Radius_innermost-24.0*log(
+Radius_outer)*Sigma*Theta_0*Theta_0*U0*U0*Radius_inner+48.0*log(Radius_outer)*
+Sigma*Theta_0*Theta_0*U0*U0*Radius_innermost-16.0*log(Radius_outer)*Sigma*
+Theta_0*U0*U0*U0*Radius_inner+32.0*log(Radius_outer)*Sigma*Theta_0*U0*U0*U0*
+Radius_innermost;
+      MapleGenVar9 = log(r);
+      MapleGenVar7 = MapleGenVar8*MapleGenVar9;
+      MapleGenVar5 = MapleGenVar6*MapleGenVar7;
+      MapleGenVar3 = MapleGenVar4*MapleGenVar5;
+      MapleGenVar6 = -Beta1*pow(2.0,0.75)*pow((2.0*Sigma*Theta_0*Theta_0*
+Theta_0*Theta_0+8.0*Sigma*Theta_0*Theta_0*Theta_0*U0+12.0*Sigma*Theta_0*Theta_0
+*U0*U0+8.0*Sigma*Theta_0*U0*U0*U0+2.0*Sigma*U0*U0*U0*U0+S0*Radius_innermost)/
+Sigma,0.25)*log(Radius_outer)/2.0-log(Radius_inner)*S1*Radius_outer*
+Radius_outer/4.0;
+      MapleGenVar7 = MapleGenVar6+log(Radius_outer)*S1*Radius_inner*
+Radius_inner/4.0;
+      MapleGenVar8 = MapleGenVar7;
+      MapleGenVar11 = 1.0/4.0;
+      MapleGenVar13 = log(Radius_inner);
+      MapleGenVar15 = 2.0*log(Radius_inner)*S0*Radius_innermost*
+Radius_innermost-2.0*log(Radius_outer)*S0*Radius_innermost*Radius_innermost-4.0
+*log(Radius_inner)*Sigma*Theta_0*Theta_0*Theta_0*Theta_0*Radius_inner+8.0*log(
+Radius_inner)*Sigma*Theta_0*Theta_0*Theta_0*Theta_0*Radius_innermost-4.0*log(
+Radius_inner)*Sigma*U0*U0*U0*U0*Radius_inner+8.0*log(Radius_inner)*Sigma*U0*U0*
+U0*U0*Radius_innermost+4.0*log(Radius_outer)*Sigma*Theta_0*Theta_0*Theta_0*
+Theta_0*Radius_inner-8.0*log(Radius_outer)*Sigma*Theta_0*Theta_0*Theta_0*
+Theta_0*Radius_innermost+4.0*log(Radius_outer)*Sigma*U0*U0*U0*U0*Radius_inner
+-8.0*log(Radius_outer)*Sigma*U0*U0*U0*U0*Radius_innermost-2.0*log(Radius_inner)
+*S0*Radius_inner*Radius_innermost+2.0*log(Radius_outer)*S0*Radius_inner*
+Radius_innermost+2.0*S1*Radius_inner*Radius_inner*log(Radius_inner)-2.0*log(
+Radius_outer)*S1*Radius_inner*Radius_inner-S1*Radius_inner*Radius_inner;
+      MapleGenVar16 = MapleGenVar15+2.0*pow(2.0,0.75)*pow((2.0*Sigma*Theta_0*
+Theta_0*Theta_0*Theta_0+8.0*Sigma*Theta_0*Theta_0*Theta_0*U0+12.0*Sigma*Theta_0
+*Theta_0*U0*U0+8.0*Sigma*Theta_0*U0*U0*U0+2.0*Sigma*U0*U0*U0*U0+S0*
+Radius_innermost)/Sigma,0.25)*Beta1+S1*Radius_outer*Radius_outer-4.0*Theta_0*
+Beta1-16.0*log(Radius_inner)*Sigma*Theta_0*Theta_0*Theta_0*U0*Radius_inner+32.0
+*log(Radius_inner)*Sigma*Theta_0*Theta_0*Theta_0*U0*Radius_innermost-24.0*log(
+Radius_inner)*Sigma*Theta_0*Theta_0*U0*U0*Radius_inner+48.0*log(Radius_inner)*
+Sigma*Theta_0*Theta_0*U0*U0*Radius_innermost;
+      MapleGenVar14 = MapleGenVar16-16.0*log(Radius_inner)*Sigma*Theta_0*U0*U0*
+U0*Radius_inner+32.0*log(Radius_inner)*Sigma*Theta_0*U0*U0*U0*Radius_innermost+
+16.0*log(Radius_outer)*Sigma*Theta_0*Theta_0*Theta_0*U0*Radius_inner-32.0*log(
+Radius_outer)*Sigma*Theta_0*Theta_0*Theta_0*U0*Radius_innermost+24.0*log(
+Radius_outer)*Sigma*Theta_0*Theta_0*U0*U0*Radius_inner-48.0*log(Radius_outer)*
+Sigma*Theta_0*Theta_0*U0*U0*Radius_innermost+16.0*log(Radius_outer)*Sigma*
+Theta_0*U0*U0*U0*Radius_inner-32.0*log(Radius_outer)*Sigma*Theta_0*U0*U0*U0*
+Radius_innermost;
+      MapleGenVar12 = MapleGenVar13*MapleGenVar14;
+      MapleGenVar10 = MapleGenVar11*MapleGenVar12;
+      MapleGenVar11 = Beta1*log(Radius_outer)*Theta_0;
+      MapleGenVar9 = MapleGenVar10+MapleGenVar11;
+      MapleGenVar5 = MapleGenVar8+MapleGenVar9;
+      MapleGenVar6 = 1/Beta1/(log(Radius_inner)-log(Radius_outer));
+      MapleGenVar4 = MapleGenVar5*MapleGenVar6;
+      MapleGenVar2 = MapleGenVar3+MapleGenVar4;
+      t0 = MapleGenVar1+MapleGenVar2;
    }
+
+  u[0] = t0;
+
  }
  
 
@@ -273,7 +346,7 @@ StefanBoltzmannProblem<ELEMENT>::StefanBoltzmannProblem()
 { 
 
  // Open trace file
- Trace_file.open("RESLT/trace.dat");
+ Trace_file.open((GlobalParameters::Directory+std::string("/trace.dat")).c_str());
  
  // Number of segments in (half) the innermost boundary
  unsigned n_innermost=20;
@@ -538,12 +611,14 @@ StefanBoltzmannProblem<ELEMENT>::StefanBoltzmannProblem()
 
  // Doc the populated bins
  ofstream some_file;
- some_file.open("RESLT/populated_bins.dat");
+ some_file.open((GlobalParameters::Directory+
+                 std::string("/populated_bins.dat")).c_str());
  StefanBoltzmannHelper::doc_bins(some_file);
  some_file.close();
 
  // Doc the sample points used to assess visibility 
- some_file.open("RESLT/sample_points.dat");
+ some_file.open((GlobalParameters::Directory+
+                 std::string("/sample_points.dat")).c_str());
  StefanBoltzmannHelper::doc_sample_points(some_file,shielding_face_element_pt);
  some_file.close();
  

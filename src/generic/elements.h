@@ -4347,7 +4347,7 @@ class SolidFaceElement: public virtual FaceElement,
 
    // Get Lagrangian position vector
    dynamic_cast<SolidFiniteElement*>(bulk_element_pt())->
-    interpolated_x(s_bulk,xi);
+    interpolated_xi(s_bulk,xi);
   }
 
 
