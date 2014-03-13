@@ -225,7 +225,7 @@ class Data
  virtual ~Data();
 
  /// \short Set a new timestepper by resizing the appropriate storage.
- /// If already assigne equation numbering will not be affected
+ /// If already assigned the equation numbering will not be altered
  void set_time_stepper(TimeStepper* const &time_stepper_pt);
 
  /// Return the pointer to the timestepper.
@@ -325,6 +325,9 @@ class Data
 #endif
    return &Value[i][t];
   }
+
+ /// Check whether the pointer parameter_pt addresses internal data values
+ bool does_pointer_correspond_to_value(double* const &parameter_pt);
 
  /// Copy Data values from specified Data object
  void copy(Data* orig_data_pt);
@@ -931,6 +934,16 @@ public:
  /// \short Return a pointer to the position timestepper (const version).
  TimeStepper* const &position_time_stepper_pt() const
   {return Position_time_stepper_pt;}
+
+ /// \short Set a new position timestepper be resizing the appropriate storage
+ virtual void set_position_time_stepper(TimeStepper* 
+                                        const &position_time_stepper_pt);
+ 
+ /// \short Check whether the pointer parameter_pt addresses position data
+ /// values. It never does for a standard node, because the positions are
+ /// not data
+ virtual bool does_pointer_correspond_to_position_data(
+  double* const &parameter_pt) {return false;}
 
  /// \short Return (Eulerian) spatial dimension of the node.
  unsigned ndim() const {return Ndim;}
@@ -1582,6 +1595,16 @@ public:
 
  ///Set the variable position data from an external data object
  void set_external_variable_position_pt(Data* const &data_pt); 
+
+ /// \short Set a new position timestepper be resizing the appropriate storage
+ /// Overloaded from the basic implementation to take into account the
+ /// fact that position is now Data
+ void set_position_time_stepper(TimeStepper* 
+                                const &position_time_stepper_pt);
+
+ /// \short Overload the check whether the pointer parameter_pt addresses
+ /// position data values
+ bool does_pointer_correspond_to_position_data(double* const &parameter_pt);
 
  ///Return whether any position component has been copied
  bool position_is_a_copy() const {return Variable_position_pt->is_a_copy();}

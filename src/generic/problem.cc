@@ -37,6 +37,7 @@
 #include "problem.h"
 #include "timesteppers.h"
 #include "explicit_timesteppers.h"
+#include "generalised_timesteppers.h"
 #include "refineable_mesh.h"
 #include "triangle_mesh.h"
 #include "linear_solver.h"
@@ -57,6 +58,11 @@ namespace oomph
 //////////////////////////////////////////////////////////////////
 //Non-inline functions for the problem class
 //////////////////////////////////////////////////////////////////
+
+//=================================================================
+///The continuation timestepper object
+//=================================================================
+ContinuationStorageScheme Problem::Continuation_time_stepper;
 
 //================================================================
 /// Constructor: Allocate space for one time stepper
@@ -99,6 +105,9 @@ namespace oomph
   Scale_arc_length(true), Desired_proportion_of_arc_length(0.5),
   Theta_squared(1.0), Sign_of_jacobian(0), Continuation_direction(1.0),
   Parameter_derivative(1.0), Parameter_current(0.0),
+  Use_continuation_timestepper(false),
+  Dof_derivative_offset(1),
+  Dof_current_offset(2),
   Ds_current(0.0), Desired_newton_iterations_ds(5),
   Minimum_ds(1.0e-10), Bifurcation_detection(false),
   Bisect_to_find_bifurcation(false),
@@ -2011,7 +2020,7 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
    //If there is only one mesh
    if(n_sub_mesh==0)
     {
-     if(SpineMesh* const spine_mesh_pt = dynamic_cast<SpineMesh*>(Mesh_pt))
+     if(SpineMesh* const spine_mesh_pt = dynamic_cast<SpineMesh*>(Mesh_pt))     
       {
        n_dof = spine_mesh_pt->assign_global_spine_eqn_numbers(Dof_pt);
       }
@@ -2022,22 +2031,22 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
      //Assign global equation numbers first
      for(unsigned i=0;i<n_sub_mesh;i++)
       {
-       if(SpineMesh* const spine_mesh_pt = 
+       if(SpineMesh* const spine_mesh_pt =
           dynamic_cast<SpineMesh*>(Sub_mesh_pt[i]))
         {
          n_dof = spine_mesh_pt->assign_global_spine_eqn_numbers(Dof_pt);
         }
-      }
     }
+  }
 
-   if (Global_timings::Doc_comprehensive_timings)
-    {
-     t_end = TimingHelpers::timer();
-     oomph_info
-      << "Time for assign_global_eqn_numbers in assign_eqn_numbers: "
-      << t_end-t_start << std::endl;
-     t_start = TimingHelpers::timer();
-    }
+ if (Global_timings::Doc_comprehensive_timings)
+  {
+   t_end = TimingHelpers::timer();
+   oomph_info
+    << "Time for assign_global_eqn_numbers in assign_eqn_numbers: "
+    << t_end-t_start << std::endl;
+   t_start = TimingHelpers::timer();
+  }
 
 
 #ifdef OOMPH_HAS_MPI
@@ -8961,7 +8970,7 @@ newton_solve_continuation(double* const &parameter_pt,
      for(unsigned long l=0;l<ndof_local;l++)
       {
        arc_length_constraint_residual +=
-        Dof_derivatives[l]*(*Dof_pt[l] - Dofs_current[l]);
+        dof_derivative(l)*(*Dof_pt[l] - dof_current(l));
       }
 
      //Now reduce if we have been distributed
@@ -9055,8 +9064,8 @@ newton_solve_continuation(double* const &parameter_pt,
    double* const z_pt = z.values_pt();
    for(unsigned long l=0;l<ndof_local;l++)
     {
-     uderiv_dot_y += Dof_derivatives[l]*y_pt[l];
-     uderiv_dot_z += Dof_derivatives[l]*z_pt[l];
+     uderiv_dot_y += dof_derivative(l)*y_pt[l];
+     uderiv_dot_z += dof_derivative(l)*z_pt[l];
     }
 
    //Now reduce if we have been distributed
@@ -9123,7 +9132,7 @@ newton_solve_continuation(double* const &parameter_pt,
    for(unsigned long l=0;l<ndof_local;l++)
     {
      arc_length_constraint_residual +=
-      Dof_derivatives[l]*(*Dof_pt[l] - Dofs_current[l]);
+      dof_derivative(l)*(*Dof_pt[l] - dof_current(l));
     }
 
    //Now reduce if we have been distributed
@@ -9325,6 +9334,59 @@ void Problem::calculate_continuation_derivatives_fd(
   }
 }
 
+//======================================================================
+/// Function that returns a boolean flag to indicate whether the pointer
+/// parameter_pt refers to memory that is a value in a Data object used
+/// within the problem
+//======================================================================
+bool Problem::does_pointer_correspond_to_problem_data(
+ double* const &parameter_pt)
+{
+ //Firstly check the global data
+ const unsigned n_global=Global_data_pt.size();
+ for (unsigned i=0;i<n_global;++i)
+  {
+   //If we find it then return true
+   if(Global_data_pt[i]->does_pointer_correspond_to_value(parameter_pt))
+    {return true;}
+  }
+
+ //If we find the pointer in the mesh data return true
+ if(Mesh_pt->does_pointer_correspond_to_mesh_data(parameter_pt))
+  {return true;}
+
+ //Loop over the submeshes to handle the case of spine data
+ const unsigned n_sub_mesh = this->nsub_mesh();
+ //If there is only one mesh
+ if(n_sub_mesh==0)
+  {
+   if(SpineMesh* const spine_mesh_pt = dynamic_cast<SpineMesh*>(Mesh_pt))
+    {
+     if(spine_mesh_pt->does_pointer_correspond_to_spine_data(parameter_pt))
+      {return true;}
+    }
+  }
+ //Otherwise loop over the sub meshes
+ else
+  {
+   //Assign global equation numbers first
+   for(unsigned i=0;i<n_sub_mesh;i++)
+    {
+     if(SpineMesh* const spine_mesh_pt = 
+        dynamic_cast<SpineMesh*>(Sub_mesh_pt[i]))
+      {
+       if(spine_mesh_pt->does_pointer_correspond_to_spine_data(parameter_pt))
+        {return true;}
+      }
+    }
+  }
+
+ //If we have got here then the data is not stored in the problem, so return
+ //false
+ return false;
+}
+
+
 //=======================================================================
 /// A private helper function to
 /// calculate the derivatives with respect to the arc-length
@@ -9346,8 +9408,8 @@ void Problem::calculate_continuation_derivatives_helper(const DoubleVector &z)
  //if the direction is to remain the same.
  //du/ds_{new} = [dlambda/ds; du/ds] = [dlambda/ds ; - dlambda/ds z]
  //so (du/ds)_{new} . (du/ds)_{old}
- // = dlambda/ds [1 ; - z] . [ Parameter_derivative ; Dof_derivaives]
- // = dlambda/ds (Parameter_derivative - Dof_derivatives . z)
+ // = dlambda/ds [1 ; - z] . [ Parameter_derivative ; Dof_derivatives]
+ // = dlambda/ds (Parameter_derivative - Dof_derivative . z)
 
  //Create a local copy of z that can be redistributed without breaking
  //the constness of z
@@ -9361,7 +9423,7 @@ void Problem::calculate_continuation_derivatives_helper(const DoubleVector &z)
  //Cache the pointer to z
  double* const local_z_pt = local_z.values_pt();
  for(unsigned long l=0;l<ndof_local;l++)
-  {Continuation_direction -= Dof_derivatives[l]*local_z_pt[l];}
+  {Continuation_direction -= dof_derivative(l)*local_z_pt[l];}
 
  //Now reduce if we have been distributed
 #ifdef OOMPH_HAS_MPI
@@ -9378,8 +9440,6 @@ void Problem::calculate_continuation_derivatives_helper(const DoubleVector &z)
 
  //Add parameter derivative
  Continuation_direction += Parameter_derivative;
- //for(unsigned long l=0;l<n_dofs;l++)
- // {Continuation_direction -= Dof_derivatives[l]*z[l];}
 
  //Calculate the magnitude of the du/ds Vector
 
@@ -9388,8 +9448,6 @@ void Problem::calculate_continuation_derivatives_helper(const DoubleVector &z)
  //Newton solve.
 
  //First calculate the magnitude of du/dparameter, chi
- //double chi = 0.0;
- //for(unsigned long l=0;l<n_dofs;l++) {chi += z[l]*z[l];}
  double chi = local_z.dot(local_z);
 
  //Calculate the current derivative of the parameter wrt the arc-length
@@ -9402,14 +9460,17 @@ void Problem::calculate_continuation_derivatives_helper(const DoubleVector &z)
   {Parameter_derivative*= -1.0;}
 
  //Resize the derivatives array, if necessary
- if(Dof_derivatives.size() != ndof_local)
-  {Dof_derivatives.resize(ndof_local,0.0);}
+ if(!Use_continuation_timestepper)
+  {
+   if(Dof_derivative.size() != ndof_local)
+    {Dof_derivative.resize(ndof_local,0.0);}
+  }
  //Calculate the new derivatives wrt the arc-length
  for(unsigned long l=0;l<ndof_local;l++)
   {
    //This comes from the formulation J u_dot + dr/dlambda  lambda_dot = 0
    //on the curve and then it follows that.
-   Dof_derivatives[l] = -Parameter_derivative*local_z_pt[l];
+   dof_derivative(l) = -Parameter_derivative*local_z_pt[l];
   }
 }
 
@@ -9432,7 +9493,7 @@ double* const  &parameter_pt)
  //Calculate the change in values and contribution to total length
  for(unsigned long l=0;l<ndof_local;l++)
   {
-   z[l] = (*Dof_pt[l] - Dofs_current[l])/Ds_current;
+   z[l] = (*Dof_pt[l] - Dof_current[l])/Ds_current;
    length += Theta_squared*z[l]*z[l];
   }
 
@@ -9457,7 +9518,7 @@ double* const  &parameter_pt)
  length = sqrt(length);
  for(unsigned long l=0;l<ndof_local;l++)
   {
-   Dof_derivatives[l] = z[l]/length;
+   dof_derivative(l) = z[l]/length;
   }
  Parameter_derivative = Z/length;
 }
@@ -9652,6 +9713,234 @@ double Problem::arc_length_step_solve(double* const &parameter_pt,
                                       const double &ds,
                                       const unsigned &max_adapt)
 {
+ //First check that we shouldn't use the other interface
+ //by checking that the parameter isn't already stored as data
+ if(does_pointer_correspond_to_problem_data(parameter_pt))
+  {
+   std::ostringstream error_message;
+   error_message << "The parameter addressed by " << parameter_pt
+                 << " with the value " << *parameter_pt 
+                 << "\n is supposed to be used for arc-length contiunation,\n"
+                 << " but it is stored in a Data object used by the problem.\n\n"
+                 << "This is bad for two reasons:\n"
+                 << 
+    "1. If it's a variable in the problem, it must already have an\n"
+    "associated equation, so it can't be used for continuation;\n"
+                 << 
+    "2. The problem data will be reorganised in memory during continuation,\n"
+                 <<
+    "   which means that the pointer will become invalid.\n\n"
+                 << 
+    "If you are sure that this is what you want to do you must:\n" 
+                 << 
+    "A. Ensure that the value is pinned (don't worry we'll shout again if not)\n"
+                 <<
+    "B. Use the alternative interface\n"
+                 <<
+    "   Problem::arc_length_step_solve(Data*,unsigned,...)\n"
+                 <<
+    "   which uses a pointer to the data object and not the raw double pointer."
+                 << std::endl;
+   throw OomphLibError(error_message.str(),
+                       OOMPH_CURRENT_FUNCTION,
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+
+
+ //If we are using the continuation timestepper 
+ if(Use_continuation_timestepper)
+  {
+   //Has the timestepper already been added to the problem
+   bool continuation_time_stepper_added = false;
+   const unsigned n_time_steppers = this->ntime_stepper();
+   for(unsigned i=0;i<n_time_steppers;i++)
+    {
+     if(this->time_stepper_pt(i) == &Continuation_time_stepper)
+      {
+       continuation_time_stepper_added = true;
+       break;
+      }
+    }
+   
+   //If not add it
+   if(!continuation_time_stepper_added)
+    {
+     oomph_info << "Adding the continuation time stepper\n";
+     this->add_time_stepper_pt(&Continuation_time_stepper);
+    }
+
+   //Need to treat case of eigenproblems and bifurcation detection/tracking
+   //here
+
+   //Backup the current timesteppers for each mesh!
+
+
+   //If an arc length step has not been taken then set the timestepper
+   if(!Arc_length_step_taken)
+    {
+     //Set the continuation timestepper for all data in the problem
+     std::cout << 
+      this->set_timestepper_for_all_data(&Continuation_time_stepper)
+               << 
+      " equation numbers allocated for continuation\n";
+    }
+     
+  } //End of continuation time stepper case
+
+
+ //Just call the helper function (parameter is not from data)
+ return arc_length_step_solve_helper(parameter_pt,ds,max_adapt);
+}
+
+
+//===================================================================
+/// This function takes one step of length ds in pseudo-arclength.The
+/// argument data_pt is a pointer to the data that holds the 
+/// parameter (global variable)
+/// that is being traded for arc-length. The exact value is located at
+/// the location given by data_index.
+/// The function returns the next desired
+/// arc-length according to criteria based upon the desired number of Newton
+/// Iterations per solve.
+//=====================================================================
+ double Problem::arc_length_step_solve(Data* const &data_pt,
+                                       const unsigned &data_index,
+                                       const double &ds,
+                                       const unsigned &max_adapt)
+ {
+  //Firstly check that the data is pinned
+  if(!data_pt->is_pinned(data_index))
+   {
+    std::ostringstream error_stream;
+    error_stream << "The value at index " << data_index 
+                 << " in the data object to be used for continuation\n" 
+                 << "is not pinned, which means that it is already a\n"
+                 << "variable in the problem " 
+                 << "and cannot be used for continuation.\n\n"
+                 << "Please correct your formulation by either:\n"
+                 << "A. Pinning the value" << "\n or \n"
+	         << "B. Using a different parameter for continuation"
+                 << std::endl;
+   throw OomphLibError(error_stream.str(),
+                       OOMPH_CURRENT_FUNCTION,
+                       OOMPH_EXCEPTION_LOCATION);
+   }
+
+
+ //If we are using the continuation timestepper 
+ if(Use_continuation_timestepper)
+  {
+   //Has the timestepper already been added to the problem
+   bool continuation_time_stepper_added = false;
+   const unsigned n_time_steppers = this->ntime_stepper();
+   for(unsigned i=0;i<n_time_steppers;i++)
+    {
+     if(this->time_stepper_pt(i) == &Continuation_time_stepper)
+      {
+       continuation_time_stepper_added = true;
+       break;
+      }
+    }
+   
+   //If not add it
+   if(!continuation_time_stepper_added)
+    {
+     oomph_info << "Adding the continuation time stepper\n";
+     this->add_time_stepper_pt(&Continuation_time_stepper);
+    }
+
+   //Need to treat case of eigenproblems and bifurcation detection/tracking
+   //here
+
+
+   //Backup the current timesteppers for each mesh!
+
+
+   //If an arc length step has not been taken then set the timestepper
+   if(!Arc_length_step_taken)
+    {
+     //Set the continuation timestepper for all data in the problem
+     std::cout << 
+      this->set_timestepper_for_all_data(&Continuation_time_stepper)
+               << 
+      " equation numbers allocated for continuation\n";
+    }
+
+     
+  } //End of continuation time stepper case
+
+
+  //Now make a pointer to the (newly allocated) data object
+  double* parameter_pt = data_pt->value_pt(data_index);
+  //Call the helper function, this will change the parameter_pt if
+  //the data storage is changed (if the timestepper has to be changed,
+  //which happens if this is the first time that a continuation step is 
+  //taken)
+  return arc_length_step_solve_helper(parameter_pt,ds,max_adapt);
+ }
+
+//======================================================================
+/// \short Private helper function that is used to set the appropriate
+/// pinned values for continuation. If the data is pinned, the its
+/// current value is always the same as the original value and
+/// the derivative is always zero. If these are not set properly
+/// then interpolation and projection in spatial adaptivity will 
+/// not give the best answers.
+//=====================================================================
+void Problem::set_consistent_pinned_values_for_continuation()
+{
+ //Set the consistent values for the global mesh
+ Mesh_pt->set_consistent_pinned_values_for_continuation(
+  &Continuation_time_stepper);
+
+ // Deal with the spine meshes additional numbering separately
+ const unsigned n_sub_mesh = this->nsub_mesh();
+ //If there is only one mesh
+ if(n_sub_mesh==0)
+  {
+   if(SpineMesh* const spine_mesh_pt = dynamic_cast<SpineMesh*>(Mesh_pt))
+    {
+     spine_mesh_pt->set_consistent_pinned_spine_values_for_continuation(
+      &Continuation_time_stepper);
+    }
+   //If it's a triangle mesh the we need to set the 
+
+  }
+ //Otherwise loop over the sub meshes
+ else
+  {
+   //Assign global equation numbers first
+   for(unsigned i=0;i<n_sub_mesh;i++)
+    {
+     if(SpineMesh* const spine_mesh_pt = 
+        dynamic_cast<SpineMesh*>(Sub_mesh_pt[i]))
+      {
+       spine_mesh_pt->set_consistent_pinned_spine_values_for_continuation(
+        &Continuation_time_stepper);
+      }
+    }
+  }
+ 
+ //Also set time stepper for global data
+ const unsigned n_global=Global_data_pt.size();
+ for (unsigned i=0;i<n_global;++i)
+  {
+   Continuation_time_stepper.set_consistent_pinned_values(Global_data_pt[i]);
+  }
+}
+
+
+//===================================================================
+/// This function takes one step of length ds in pseudo-arclength.The
+/// argument parameter_pt is a pointer to the parameter (global variable)
+/// that is being traded for arc-length. The function returns the next desired
+/// arc-length according to criteria based upon the desired number of Newton
+/// Iterations per solve.
+//=====================================================================
+double Problem::arc_length_step_solve_helper(double* const &parameter_pt,
+                                             const double &ds,
+                                             const unsigned &max_adapt)
+{
 
  //----------------------MAKE THE PROBLEM STEADY-----------------------
  //Loop over the timesteppers and make them (temporarily) steady.
@@ -9668,19 +9957,20 @@ double Problem::arc_length_step_solve(double* const &parameter_pt,
    time_stepper_pt(i)->make_steady();
   }
 
+
  // Max number of solves
  unsigned max_solve = max_adapt+1;
  //Storage for newton steps in each adaptation
  unsigned max_count_in_adapt_loop=0;
 
 
-   //----SET UP MEMORY FOR QUANTITIES THAT ARE REQUIRED OUTSIDE THE LOOP----
-   
-   //Assign memory for solutions of the equations Jz = du/dparameter
-   //This is needed here (outside the loop), so that we can save on
-   //one linear solve when calculating the derivatives wrt the arc-length
-   DoubleVector z;
-
+ //----SET UP MEMORY FOR QUANTITIES THAT ARE REQUIRED OUTSIDE THE LOOP----
+ 
+ //Assign memory for solutions of the equations Jz = du/dparameter
+ //This is needed here (outside the loop), so that we can save on
+ //one linear solve when calculating the derivatives wrt the arc-length
+ DoubleVector z;
+ 
 
  //Store sign of the Jacobian, used for bifurcation detection
  //If this is the first time that we are calling the arc-length solver,
@@ -9702,7 +9992,7 @@ double Problem::arc_length_step_solve(double* const &parameter_pt,
      
      // Adapt problem
      adapt(n_refined,n_unrefined);
-     
+
 #ifdef OOMPH_HAS_MPI
      // Adaptation only converges if ALL the processes have no
      // refinement or unrefinement to perform
@@ -9739,8 +10029,6 @@ double Problem::arc_length_step_solve(double* const &parameter_pt,
     }
 
    //----------SAVE THE INITIAL VALUES, IN CASE THE STEP FAILS-----------
-   //Find total number of dofs
-   //unsigned long n_dofs = ndof();
    
    //Find the number of local dofs
    unsigned ndof_local = Dof_distribution_pt->nrow_local();
@@ -9748,31 +10036,41 @@ double Problem::arc_length_step_solve(double* const &parameter_pt,
    //Only need to do this in the first loop
    if(isolve==0)
     {
-     //Safety check, set up the array of Dof_derivatives, if necessary
-     //The distribution is the same as the (natural) distribution of the dofs
-     if(Dof_derivatives.size() != ndof_local)
-      {Dof_derivatives.resize(ndof_local,0.0);}
+     if(!Use_continuation_timestepper)
+      {
+       //Safety check, set up the array of dof derivatives, if necessary
+       //The distribution is the same as the (natural) distribution of the dofs
+       if(Dof_derivative.size() != ndof_local)
+        {Dof_derivative.resize(ndof_local,0.0);}
+   
+       //Safety check, set up the array of curren values, if necessary
+       //Again the distribution reflects the (natural) distribution of the dofs
+       if(Dof_current.size() != ndof_local) {Dof_current.resize(ndof_local);}
+      }
+
      //Save the current value of the parameter
      Parameter_current = *parameter_pt;
      
      //Save the current values of the degrees of freedom
-     //Safety check, set up the array of curren values, if necessary
-     //Again the distribution reflects the (natural) distribution of the dofs
-     if(Dofs_current.size() != ndof_local) {Dofs_current.resize(ndof_local);}
-     for(unsigned long l=0;l<ndof_local;l++) {Dofs_current[l] = *Dof_pt[l];}
+     for(unsigned long l=0;l<ndof_local;l++) {dof_current(l) = *Dof_pt[l];}
+
      //Set the value of ds_current
      Ds_current = ds;
     }
-   
-   //LinearAlgebraDistribution dist(Communicator_pt,n_dofs,false);
-   //DoubleVector z(&dist,0.0);
    
    //Counter for the number of newton steps
    unsigned count=0;
 
    //Flag to indicate a successful step
    bool STEP_REJECTED=false;
-   
+
+     
+   //Set the appropriate initial conditions for the pinned data
+   if(Use_continuation_timestepper)
+    {
+     this->set_consistent_pinned_values_for_continuation();
+    }
+
    //Loop around the step in arc-length
    do
     {
@@ -9796,7 +10094,7 @@ double Problem::arc_length_step_solve(double* const &parameter_pt,
      //Loop over the (local) variables and set their initial values
      for(unsigned long l=0;l<ndof_local;l++)
       {
-       *Dof_pt[l] = Dofs_current[l] + Dof_derivatives[l]*Ds_current;
+       *Dof_pt[l] = dof_current(l) + dof_derivative(l)*Ds_current;
       }
      
      //Actually do the newton solve stage for the continuation problem
@@ -9825,18 +10123,15 @@ double Problem::arc_length_step_solve(double* const &parameter_pt,
          STEP_REJECTED=true;
          //Let's take a smaller step
          Ds_current *= (2.0/3.0);
-         //Reset the dofs and parameter
-         //*parameter_pt = Parameter_current;
-         //for(unsigned long l=0;l<ndof_local;l++) {*Dof_pt[l] = Dofs_current[l];}
         }
       }
-      }
+    }
    while(STEP_REJECTED); //continue until a step is accepted
 
    //Set the maximum count
    if(count > max_count_in_adapt_loop) {max_count_in_adapt_loop = count;}
   } /// end of adaptation loop
-
+ 
  //Only recalculate the derivatives if there has been a Newton solve
  //If not, the previous values should be close enough
  if(max_count_in_adapt_loop>0)
@@ -9848,18 +10143,18 @@ double Problem::arc_length_step_solve(double* const &parameter_pt,
      //If the sign of the jacobian is zero issue a warning
      if(Sign_of_jacobian == 0)
       {
-         std::string error_message =
-          "The sign of the jacobian is zero after a linear solve\n";
-         error_message +=
-          "Either the matrix is singular (unlikely),\n";
-         error_message +=
-          "or the linear solver cannot compute the determinant of the matrix;\n";
-         error_message += "e.g. an iterative linear solver.\n";
-         error_message +=
-          "If the latter, bifurcation detection must be via an eigensolver\n";
-         OomphLibWarning(error_message,
-                         "Problem::arc_length_step_solve",
-                         OOMPH_EXCEPTION_LOCATION);
+       std::string error_message =
+        "The sign of the jacobian is zero after a linear solve\n";
+       error_message +=
+        "Either the matrix is singular (unlikely),\n";
+       error_message +=
+        "or the linear solver cannot compute the determinant of the matrix;\n";
+       error_message += "e.g. an iterative linear solver.\n";
+       error_message +=
+        "If the latter, bifurcation detection must be via an eigensolver\n";
+       OomphLibWarning(error_message,
+                       "Problem::arc_length_step_solve",
+                       OOMPH_EXCEPTION_LOCATION);
       }
      //If this is the first step, we cannot rely on the previous value
      //of the jacobian so set the previous sign to the present sign
@@ -9946,7 +10241,6 @@ double Problem::arc_length_step_solve(double* const &parameter_pt,
    
    //Save the current sign of the jacobian
    int temp_sign=Sign_of_jacobian;
-   
    
    //Calculate the continuation derivatives, which includes a solve
    //of the linear system if not using finite differences
@@ -10593,6 +10887,70 @@ double Problem::time() const
                        OOMPH_EXCEPTION_LOCATION);
   }
  else {return Time_pt->time();}
+}
+
+
+//=======================================================================
+/// Set all problem data to have the same timestepper (timestepper_pt).
+/// This is mainly used in continuation and bifurcation detection problems
+/// in which case the total number of unknowns may change and the changes
+/// to the underlying memory layout means that the Dof_pt must be 
+/// reallocated. Thus, the function calls assign_eqn_numbers() and returns
+/// the number of new equation numbers.
+//=========================================================================
+unsigned long Problem::set_timestepper_for_all_data(
+ TimeStepper* const &time_stepper_pt)
+{
+ //Set the timestepper for the master mesh's nodal and elemental data
+ //to be the
+ //continuation time stepper. This will wipe all storage other than
+ //the 0th (present time) value at all the data objects
+ Mesh_pt->set_nodal_and_elemental_time_stepper(time_stepper_pt);
+ 
+ // Deal with the any additional mesh level timestepper data separately
+ const unsigned n_sub_mesh = this->nsub_mesh();
+ //If there is only one mesh
+ if(n_sub_mesh==0)
+  {
+   Mesh_pt->set_mesh_level_time_stepper(time_stepper_pt);
+  }
+ //Otherwise loop over the sub meshes
+ else
+  {
+   //Assign global equation numbers first
+   for(unsigned i=0;i<n_sub_mesh;i++)
+    {
+     this->Sub_mesh_pt[i]->set_mesh_level_time_stepper(time_stepper_pt);
+    }
+  }
+ 
+ //Also set time stepper for global data
+ const unsigned n_global=Global_data_pt.size();
+ for (unsigned i=0;i<n_global;++i)
+  {
+   Global_data_pt[i]->set_time_stepper(time_stepper_pt);
+  }
+
+ //We now need to reassign equations numbers because the Dof pointer
+ //will be inappropriate  because memory has been reallocated
+
+#ifdef OOMPH_HAS_MPI
+ if(Problem_has_been_distributed)
+  {
+   std::ostringstream warning_stream;
+   warning_stream << 
+    "This has not been comprehensively tested for distributed problems.\n"
+                  <<
+    "I'm sure that I need to worry about external halo and external elements."
+                  << std::endl;
+   OomphLibWarning(warning_stream.str(),
+                   OOMPH_CURRENT_FUNCTION,
+                   OOMPH_EXCEPTION_LOCATION);
+  }
+
+#endif
+ 
+ return (this->assign_eqn_numbers());
 }
 
 
@@ -12350,8 +12708,11 @@ void Problem::adapt(unsigned &n_refined, unsigned &n_unrefined)
 
  //If we have continuation data then we need to project that across to the 
  //new mesh
- if(Dof_derivatives.size() != 0) {continuation_problem = true;}
-
+ if(!Use_continuation_timestepper)
+  {
+   if(Dof_derivative.size() != 0) {continuation_problem = true;}
+  }
+ 
  //If we are tracking a bifurcation then call the bifurcation adapt function
  if(bifurcation_type!=0)
   {
@@ -12609,8 +12970,8 @@ void Problem::adapt(unsigned &n_refined, unsigned &n_unrefined)
    unsigned ndof_local = Dof_distribution_pt->nrow_local();
    for(unsigned i=0;i<ndof_local;i++)
     {
-     Copy_of_problem_pt[0]->dof(i) = this->Dof_derivatives[i];
-     Copy_of_problem_pt[1]->dof(i) = this->Dofs_current[i];
+     Copy_of_problem_pt[0]->dof(i) = this->dof_derivative(i);
+     Copy_of_problem_pt[1]->dof(i) = this->dof_current(i);
     }
    //Set all pinned values to zero
    Copy_of_problem_pt[0]->set_pinned_values_to_zero();
@@ -12627,18 +12988,18 @@ void Problem::adapt(unsigned &n_refined, unsigned &n_unrefined)
    
    //Now sort out the Dof pointer
    ndof_local = Dof_distribution_pt->nrow_local();
-   if(Dof_derivatives.size() != ndof_local);
+   if(Dof_derivative.size() != ndof_local);
    {
-    Dof_derivatives.resize(ndof_local,0.0);
+    Dof_derivative.resize(ndof_local,0.0);
    }
-   if(Dofs_current.size() != ndof_local)
+   if(Dof_current.size() != ndof_local)
     {
-     Dofs_current.resize(ndof_local,0.0);
+     Dof_current.resize(ndof_local,0.0);
     }
    for(unsigned i=0;i<ndof_local;i++)
     {
-     Dof_derivatives[i] = Copy_of_problem_pt[0]->dof(i);
-     Dofs_current[i] = Copy_of_problem_pt[1]->dof(i);
+     Dof_derivative[i] = Copy_of_problem_pt[0]->dof(i);
+     Dof_current[i] = Copy_of_problem_pt[1]->dof(i);
     }
    //Return immediately
    return;

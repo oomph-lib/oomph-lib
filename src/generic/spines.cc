@@ -150,7 +150,7 @@ unsigned long SpineMesh::assign_global_spine_eqn_numbers
 
 
 //====================================================================
-/// Assign time stepper to spines, nodes and elements
+/// Assign time stepper to spines data
 //====================================================================
 void SpineMesh::set_spine_time_stepper(TimeStepper* const &time_stepper_pt)
 {
@@ -162,6 +162,44 @@ void SpineMesh::set_spine_time_stepper(TimeStepper* const &time_stepper_pt)
   {
    this->Spine_pt[i]->spine_height_pt()->set_time_stepper(time_stepper_pt);
   }
+}
+
+//====================================================================
+/// Set the data associated with pinned spine values to be consistent
+/// for continuation when using the continuation storage scheme
+//====================================================================
+void SpineMesh::set_consistent_pinned_spine_values_for_continuation(
+ ContinuationStorageScheme* const &continuation_stepper_pt)
+{
+ // Loop over spines and set consistent values by using the function
+ // provided by the continuation storage scheme
+ const unsigned long n_spine = this->nspine();
+ for(unsigned long i=0;i<n_spine;i++)
+  {
+   continuation_stepper_pt->set_consistent_pinned_values(
+    this->Spine_pt[i]->spine_height_pt());
+  }
+}
+
+
+//=====================================================================
+/// Return true if the pointer addresses data stored within the spines,
+/// false if not.
+//=====================================================================
+bool SpineMesh::does_pointer_correspond_to_spine_data(
+ double* const &parameter_pt)
+{
+ // Loop over spines and check their data
+ const unsigned long n_spine = this->nspine();
+ for(unsigned long i=0;i<n_spine;i++)
+  {
+   if(this->Spine_pt[i]->spine_height_pt()
+      ->does_pointer_correspond_to_value(parameter_pt))
+    {return true;}
+  }
+ 
+ //If we haven't found it yet, then it's not present in the spine data
+ return false;
 }
 
 //=======================================================================

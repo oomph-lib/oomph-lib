@@ -44,6 +44,7 @@
 //OOMPH-LIB headers
 #include "Vector.h"
 #include "matrices.h"
+#include "generalised_timesteppers.h"
 #include "explicit_timesteppers.h"
 #include "double_vector_with_halo.h"
 #include <complex>
@@ -707,11 +708,27 @@ namespace oomph
  /// Storage for the present value of the global parameter
  double Parameter_current;
 
- /// Storage for the derivatives of the problem variables wrt arc-length
- Vector<double> Dof_derivatives;
+ /// Boolean to control original or new storage of dof stuff
+ bool Use_continuation_timestepper;
+
+ /// Storage for the single static continuation timestorage object
+ static ContinuationStorageScheme Continuation_time_stepper;
+
+ /// Storage for the offset for the continuation derivatives from the
+ /// original dofs (default is 1, but this will be differnet when continuing
+ /// bifurcations and periodic orbits)
+ unsigned Dof_derivative_offset;
+
+ /// Storage for the offset for the current values of dofs from the
+ /// original dofs (default is 2, but this will be differnet when continuing
+ /// bifurcations and periodic orbits)
+ unsigned Dof_current_offset;
+
+ /// Storage for the derivative of the problem variables wrt arc-length
+ Vector<double> Dof_derivative;
 
  /// Storage for the present values of the variables
- Vector<double> Dofs_current;
+ Vector<double> Dof_current;
 
  /// Storage for the current step value
  double Ds_current;
@@ -1067,6 +1084,26 @@ namespace oomph
    actions_after_newton_solve();
   }
 
+ /// \short Access function to the derivative of the i-th (local) 
+ /// dof with respect to
+ /// the arc length, used in continuation
+ inline double &dof_derivative(const unsigned &i)
+ {
+  if(!Use_continuation_timestepper)
+   {return Dof_derivative[i];}
+  else
+   {return (*(Dof_pt[i]+Dof_derivative_offset));}
+}
+
+ /// \short Access function to the current value of the i-th (local)
+ /// dof at the start of a continuation step
+ inline double &dof_current(const unsigned &i)
+ {
+  if(!Use_continuation_timestepper)
+   {return Dof_current[i];}
+  else 
+   {return (*(Dof_pt[i]+Dof_current_offset));}
+ }
 
  /// \short Set initial condition (incl previous timesteps).
  /// We need to establish this interface
@@ -1381,6 +1418,11 @@ namespace oomph
  /// Return a pointer to the explicit timestepper
  ExplicitTimeStepper* &explicit_time_stepper_pt()
   {return Explicit_time_stepper_pt;}
+
+ /// \short Set all problem data to have the same timestepper (timestepper_pt)
+ /// Return the new number of dofs in the problem
+ unsigned long 
+  set_timestepper_for_all_data(TimeStepper* const &time_stepper_pt);
 
  /// \short Shift all values along to prepare for next timestep
  void shift_time_values();
@@ -1940,6 +1982,10 @@ namespace oomph
  /// the ContinuationParameters namespace.
  void calculate_continuation_derivatives_fd(double* const &parameter_pt);
 
+ /// \short Return a boolean flag to indicate whether the pointer
+ /// parameter_pt refers to values stored in a Data object that 
+ /// is contained within the problem
+ bool does_pointer_correspond_to_problem_data(double* const &parameter_pt);
 
   public:
 
@@ -2031,11 +2077,50 @@ namespace oomph
  /// \short Reset the system to the standard non-augemented state
  void reset_assembly_handler_to_default();
 
- /// \short Solve a steady problem using arc-length continuation, where
- /// parameter is the parameter of the problem and ds is the arc_length
+  private:
+
+ /// \short Private helper function that actually contains the guts
+ /// of the arc-length stepping, parameter_pt is a pointer to the 
+ /// parameter that is traded for the arc-length constraint, ds is
+ /// the desired arc length and max_adapt is the maximum number of 
+ /// spatial adaptations. The pointer to the parameter may be changed
+ /// if this is called from the Data-based interface
+ double arc_length_step_solve_helper(double* const &parameter_pt,
+                                     const double &ds,
+                                     const unsigned &max_adapt);
+
+
+ /// \short Private helper function that is used to set the appropriate
+ /// pinned values for continuation.
+ void set_consistent_pinned_values_for_continuation();
+
+  public:
+
+ /// \short Solve a steady problem using arc-length continuation, when the 
+ /// parameter that becomes a variable corresponding to the arc-length 
+ /// constraint equation is an external double:
+ /// parameter_pt is a pointer to that double,
+ /// ds is the desired arc_length and max_adapt is the maximum 
+ /// number of spatial adaptations (default zero, no adaptation).
  double arc_length_step_solve(double* const &parameter_pt,
                               const double &ds,
                               const unsigned &max_adapt=0);
+
+ /// \short Solve a steady problem using arc-length continuation, when the 
+ /// variable corresponding to the arc-length 
+ /// constraint equation is already stored in data used in the problem:
+ /// data_pt is a pointer to the appropriate data object,
+ /// data_index is the index of the value that will be traded for the 
+ /// constriant,
+ /// ds is the desired arc_length and max_adapt is the maximum 
+ /// number of spatial adaptations (default zero, no adaptation).
+ /// Note that the value must be pinned in order for this formulation to work
+ double arc_length_step_solve(Data* const &data_pt,
+                              const unsigned &data_index,
+                              const double &ds,
+                              const unsigned &max_adapt=0);
+
+
 
  /// \short Reset the "internal" arc-length continuation parameters, so as
  /// to allow continuation in another parameter. N.B. The parameters that
@@ -2049,7 +2134,7 @@ namespace oomph
    Parameter_derivative = 1.0;
    First_jacobian_sign_change=false;
    Arc_length_step_taken=false;
-   Dof_derivatives.resize(0);
+   Dof_derivative.resize(0);
   }
 
  /// \short Access function for the sign of the global jacobian matrix.

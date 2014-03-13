@@ -414,6 +414,35 @@ void Data::value(const unsigned& t, Vector<double>& values) const
  for(unsigned i=0;i<n_value;i++) {values[i] = value(t,i);}
 }
 
+//=====================================================================
+/// If pointer parameter_pt addresses internal data values then return
+/// return true, otherwise return false
+//======================================================================
+bool Data::does_pointer_correspond_to_value(double*const &parameter_pt)
+ {
+  //If there is no value data then return false
+  if(Value==0) {return false;}
+
+  //Find the amount of data stored
+  const unsigned n_value = nvalue();
+  const unsigned n_time = ntstorage();
+  const unsigned n_storage = n_value*n_time;
+
+  //Pointer to the local data
+  double *local_value_pt = Value[0];
+
+  //Loop over data and if we find the pointer then return true
+  for(unsigned i=0;i<n_storage;++i)
+   {
+    if(parameter_pt==(local_value_pt+i)) {return true;}
+   }
+
+  //If we get to here we haven't found the data
+  return false;
+ }
+  
+
+
 //================================================================
 /// Copy Data values from specified Data object
 //================================================================
@@ -1498,6 +1527,50 @@ Node::~Node()
  //Now delete the pointer
  delete[] X_position; X_position=0;
 }
+
+//================================================================
+/// Set a new position TimeStepper be resizing the appropriate storage.
+/// The current (zero) values will be unaffected, but all other entries
+/// will be set to zero.
+//================================================================
+void Node::set_position_time_stepper(TimeStepper* 
+                                     const &position_time_stepper_pt)
+{
+ //If the timestepper is unchanged do nothing
+ if(Position_time_stepper_pt==position_time_stepper_pt) {return;}
+ 
+ //Set the new time stepper
+ Position_time_stepper_pt = position_time_stepper_pt;
+
+ //Determine the total amount of storage required for position variables
+ const unsigned n_storage = this->ndim()*this->nposition_type();
+ 
+ //Amount of storage required for history values
+ const unsigned n_tstorage = Position_time_stepper_pt->ntstorage();
+
+ //Allocate all position data in one big array
+ double *x_positions = new double[n_storage*n_tstorage];
+ 
+ //Copy the old "current" positions into the new storage scheme
+ for(unsigned j=0;j<n_storage;++j)
+  {
+   x_positions[j*n_tstorage] = this->X_position[j][0];
+  }
+
+ //Now delete the old position storage, which was allocated in one block
+ delete[] X_position[0];
+
+ //Set the pointers to the contiguous memory
+ for(unsigned j=0;j<n_storage;j++) 
+  {
+    //Set the pointer from the bug array
+    X_position[j] = &x_positions[j*n_tstorage];
+    //Initialise all non-current values to be zero
+    for(unsigned t=1;t<n_tstorage;t++) {X_position[j][t] = 0.0;}
+   }
+}
+
+
 
 
 //================================================================
@@ -3191,6 +3264,41 @@ void SolidNode::set_external_variable_position_pt(Data* const &data_pt)
  //Set the new value of x
  X_position = Variable_position_pt->Value;
 }
+
+
+//================================================================
+/// Set a new position TimeStepper be resizing the appropriate storage.
+/// The current (zero) values will be unaffected, but all other entries
+/// will be set to zero.
+//================================================================
+void SolidNode::set_position_time_stepper(TimeStepper* 
+                                          const &position_time_stepper_pt)
+{
+ //If the timestepper is unchanged do nothing
+ if(Position_time_stepper_pt==position_time_stepper_pt) {return;}
+ 
+ //Set the new time stepper
+ Position_time_stepper_pt = position_time_stepper_pt;
+
+ //Now simply set the time stepper of the variable position data
+ this->Variable_position_pt->set_time_stepper(position_time_stepper_pt);
+ //Need to reset the X_position to point to the variable positions data 
+ //values which have been reassigned
+ X_position = this->Variable_position_pt->Value;
+}
+
+
+//====================================================================
+/// Check whether the pointer parameter_pt refers to positional data
+//====================================================================
+bool SolidNode::does_pointer_correspond_to_position_data(
+  double* const &parameter_pt)
+{
+ //Simply pass the test through to the data of the Variabl position pointer
+ return
+  (this->Variable_position_pt->does_pointer_correspond_to_value(parameter_pt));
+}
+
 
 
 //=======================================================================

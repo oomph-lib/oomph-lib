@@ -2643,6 +2643,17 @@ const Vector<double>& elem_error)
       Mesh_update_fct_pt(tmp_new_mesh_pt);
      }
 
+    //If we have a continuation problem 
+    //any problem in which the timestepper is a "generalisedtimestepper",
+    //which will have been set by the problem, then ensure
+    //all data in the new mesh has the appropriate timestepper
+    /*if(dynamic_cast<GeneralisedTimeStepper*>(this->Time_stepper_pt))
+     {
+      tmp_new_mesh_pt->set_nodal_and_elemental_time_stepper(
+       this->Time_stepper_pt);
+      tmp_new_mesh_pt->set_mesh_level_time_stepper(this->Time_stepper_pt);
+      }*/
+
     //Output the mesh after the snapping has taken place
     //   tmp_new_mesh_pt->output("mesh_nodes_snapped_0.dat");
 
@@ -2938,6 +2949,17 @@ const Vector<double>& elem_error)
         Mesh_update_fct_pt(new_mesh_pt);
        }
 
+      //If we have a continuation problem 
+      //any problem in which the timestepper is a "generalisedtimestepper",
+      //which will have been set by the problem, then ensure
+      //all data in the new mesh has the appropriate timestepper
+      if(dynamic_cast<GeneralisedTimeStepper*>(this->Time_stepper_pt))
+       {
+        new_mesh_pt->set_nodal_and_elemental_time_stepper(
+         this->Time_stepper_pt);
+        new_mesh_pt->set_mesh_level_time_stepper(this->Time_stepper_pt);
+       }
+
       //Output the mesh after the snapping has taken place
       //   new_mesh_pt->output("mesh_nodes_snapped_1.dat"); 
 
@@ -2958,6 +2980,7 @@ const Vector<double>& elem_error)
     ProjectionProblem<ELEMENT>* project_problem_pt=
     new ProjectionProblem<ELEMENT>;
     project_problem_pt->mesh_pt()=new_mesh_pt;
+    //project_problem_pt->disable_suppress_output_during_projection();
     project_problem_pt->project(this);
 
     //Flush the old mesh 

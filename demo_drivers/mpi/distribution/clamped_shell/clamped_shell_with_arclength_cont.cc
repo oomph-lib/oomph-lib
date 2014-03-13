@@ -326,7 +326,8 @@ public:
  /// Destructor: delete mesh, geometric object
  ~ShellProblem()
   {
-   delete Problem::mesh_pt();
+   delete Displacement_control_mesh_pt;
+   delete Solid_mesh_pt;
    delete Undeformed_midplane_pt;
   }
 
@@ -409,6 +410,9 @@ template<class ELEMENT>
 ShellProblem<ELEMENT>::ShellProblem(const unsigned &nx, const unsigned &ny, 
                                     const double &lx, const double &ly)
 {
+ Mesh::Suppress_warning_about_empty_mesh_level_time_stepper_function=true;
+
+ Use_continuation_timestepper=true;
  //Create the undeformed midplane object
  Undeformed_midplane_pt = new EllipticalTube(1.0,1.0);
 
@@ -708,7 +712,7 @@ void ShellProblem<ELEMENT>::solve()
  for(unsigned i=0;i<15;i++)
    {
     ds = arc_length_step_solve(
-     Global_Physical_Variables::Pext_data_pt->value_pt(0),ds);
+     Global_Physical_Variables::Pext_data_pt,0,ds);
     
     //Output the pressure
     trace << Global_Physical_Variables::external_pressure()/(pow(0.05,3)/12.0)
@@ -733,9 +737,8 @@ int main(int argc, char* argv[])
 #ifdef OOMPH_HAS_MPI
  MPI_Helpers::init(argc,argv);
 #endif
- 
+ { 
   //SuperLUSolver::Suppress_incorrect_rhs_distribution_warning_in_resolve=true;;
-
 
  //Length of domain
  double L = 10.0;
@@ -747,22 +750,22 @@ int main(int argc, char* argv[])
 
  //Let's just be crazy and distribut it
 #ifdef OOMPH_HAS_MPI
- //Set up a dummy partition
- unsigned n_element = problem.mesh_pt()->nelement();
- Vector<unsigned> element_partition(n_element);
- for(unsigned e=0;e<n_element/2;e++) {element_partition[e]=0;}
- for(unsigned e=n_element/2;e<n_element;e++) {element_partition[e]=1;}
-
- DocInfo mesh_doc_info;
- bool report_stats=true;
- mesh_doc_info.set_directory("RESLT_MESH");
- problem.distribute(element_partition,mesh_doc_info,report_stats);
- problem.check_halo_schemes(mesh_doc_info);
+  //Set up a dummy partition
+  unsigned n_element = problem.mesh_pt()->nelement();
+  Vector<unsigned> element_partition(n_element);
+  for(unsigned e=0;e<n_element/2;e++) {element_partition[e]=0;}
+  for(unsigned e=n_element/2;e<n_element;e++) {element_partition[e]=1;}
+  
+  DocInfo mesh_doc_info;
+  bool report_stats=true;
+  mesh_doc_info.set_directory("RESLT_MESH");
+  problem.distribute(element_partition,mesh_doc_info,report_stats);
+  problem.check_halo_schemes(mesh_doc_info);
 #endif
 
  //Solve the problem
  problem.solve();
-
+ }
 #ifdef OOMPH_HAS_MPI
  MPI_Helpers::finalize();
 #endif

@@ -579,6 +579,12 @@ public:
   }
 
 
+ /// \short Overload set_mesh_level_time_stepper so that the stored
+ /// time stepper now corresponds to the new timestepper
+ void set_mesh_level_time_stepper(TimeStepper* const &time_stepper_pt)
+ {this->Time_stepper_pt = time_stepper_pt;}
+
+
 
  /// Boolen defining whether tetgenio object has been built or not
  bool tetgenio_exists() const {return Tetgenio_exists;}

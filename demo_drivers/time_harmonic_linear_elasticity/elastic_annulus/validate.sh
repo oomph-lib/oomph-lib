@@ -23,7 +23,7 @@ mkdir RESLT
 ../adaptive_time_harmonic_elastic_annulus > OUTPUT_adapt
 echo "done"
 echo " " >> validation.log
-echo "Aadaptive time-periodic linear elasticity for annulus" >> validation.log
+echo "Adaptive time-periodic linear elasticity for annulus" >> validation.log
 echo "-----------------------------------------------------" >> validation.log
 echo " " >> validation.log
 echo "Validation directory: " >> validation.log
@@ -72,7 +72,7 @@ mkdir RESLT
 ../adaptive_unstructured_time_harmonic_elastic_annulus --validation --alpha 0.0 > OUTPUT_unstructured_adapt
 echo "done"
 echo " " >> validation.log
-echo "Aadaptive unstructured time-periodic linear elasticity for annulus" >> validation.log
+echo "Adaptive unstructured time-periodic linear elasticity for annulus" >> validation.log
 echo "------------------------------------------------------------------" >> validation.log
 echo " " >> validation.log
 echo "Validation directory: " >> validation.log
@@ -85,7 +85,7 @@ if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/unstructured_adaptive_results.dat.gz   \
-    unstructured_adaptive_results.dat  >> validation.log
+    unstructured_adaptive_results.dat  4.0 1.0e-12 >> validation.log
 fi
 mv RESLT RESLT_unstructured_adapt
 

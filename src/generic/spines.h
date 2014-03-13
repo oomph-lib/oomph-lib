@@ -646,9 +646,24 @@ public:
  /// Assign equation numbers for spines
  unsigned long assign_global_spine_eqn_numbers(Vector<double *> &Dof_pt);
 
- /// \short Set the time stepper for all the data stored in the mesh,
- /// including the spine data
+ /// \short Overload the mesh_level timestepper function to set the
+ /// timestepper data for the spines
+ void set_mesh_level_time_stepper(TimeStepper* const &time_stepper_pt)
+ {this->set_spine_time_stepper(time_stepper_pt);}
+
+ /// \short Set the time stepper forthe spine data that is stored in 
+ /// the mesh.
  void set_spine_time_stepper(TimeStepper* const &time_stepper_pt);
+
+ /// \short Set any pinned spine "history" values to be consistent for
+ /// continuation problems
+ void set_consistent_pinned_spine_values_for_continuation(
+  ContinuationStorageScheme* const &continuation_stepper_pt);
+  
+
+ /// \short Check whether the pointer parameter_pt addresses data stored
+ /// in the spines
+ bool does_pointer_correspond_to_spine_data(double* const &parameter_pt);
 
  /// \short Update function to update all nodes of mesh
  /// [Doesn't make sense to use this mesh with SolidElements anyway,

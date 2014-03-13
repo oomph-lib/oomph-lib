@@ -52,6 +52,10 @@ namespace oomph
 Steady<0> Mesh::Default_TimeStepper;
 
 
+//=======================================================================
+/// Static boolean flag to control warning about mesh level timesteppers
+//=======================================================================
+bool Mesh::Suppress_warning_about_empty_mesh_level_time_stepper_function=false;
 
 //=======================================================================
 /// Merge meshes.
@@ -1806,6 +1810,117 @@ void Mesh::calculate_predictions()
 }
 
 //===============================================================
+/// Virtual function that should be overloaded if the mesh
+/// has any mesh level storage of the timestepper
+//==================================================================
+void Mesh::set_mesh_level_time_stepper(TimeStepper* const &time_stepper_pt)
+{
+#ifdef PARANOID
+ if(!Suppress_warning_about_empty_mesh_level_time_stepper_function)
+  {
+   std::ostringstream warning_stream;
+   warning_stream << 
+    "Empty set_mesh_level_time_stepper() has been called.\n"
+                  << 
+    "This function needs to be overloaded to reset any (pointers to) \n"
+                  << 
+    "timesteppers for meshes that store timesteppers in locations other\n"
+                  << "than the Nodes or Elements;\n"
+                  << "e.g. SpineMeshes have SpineData with timesteppers,\n"
+                  << 
+    "Triangle and TetMeshes store the timestepper for use in adaptivity.\n\n\n";
+   warning_stream << "If you are solving a continuation or bifurcation detecion\n"
+                  << "problem and strange things are happening, then check that\n"
+                  << "you don't need to overload this function for your mesh."
+                  << "\n This warning can be suppressed by setting:\n"
+                  <<
+    "Mesh::Suppress_warning_about_empty_mesh_level_time_stepper_function=true"
+                  << std::endl;
+   OomphLibWarning(warning_stream.str(),
+                   OOMPH_CURRENT_FUNCTION,
+                   OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+}
+
+//===============================================================
+/// Set the values of auxilliary data used in continuation problems
+/// when the data is pinned.
+//==================================================================
+void Mesh::set_consistent_pinned_values_for_continuation(
+ ContinuationStorageScheme* const &continuation_storage_pt)
+{
+ //Loop over the nodes
+ const unsigned long n_node=this->nnode();
+ for(unsigned long n=0;n<n_node;n++)
+  {
+   continuation_storage_pt->set_consistent_pinned_values(this->Node_pt[n]);
+   continuation_storage_pt->set_consistent_pinned_positions(this->Node_pt[n]);
+  }
+
+ // Loop over the elements 
+ const unsigned long n_element=this->nelement();
+ for (unsigned long e=0;e<n_element;e++)
+  {
+   //Cache pointer to the elemnet   
+   GeneralisedElement* const elem_pt = this->element_pt(e);
+   //Find the number of internal dofs
+   const unsigned n_internal = elem_pt->ninternal_data();
+
+   //Loop over internal dofs and test the data
+   for(unsigned j=0;j<n_internal;j++)
+    {
+     continuation_storage_pt->
+      set_consistent_pinned_values(elem_pt->internal_data_pt(j));
+    }
+  }
+}
+
+
+//===============================================================
+/// Return true if the pointer corresponds to any data stored in 
+/// the mesh and false if not
+//==================================================================
+bool Mesh::does_pointer_correspond_to_mesh_data(double* const &parameter_pt)
+{
+ //Loop over the nodes
+ const unsigned long n_node=this->nnode();
+ for(unsigned long n=0;n<n_node;n++)
+  {
+   //Check the values and positional data associated with each node
+   if(
+    (this->Node_pt[n]->does_pointer_correspond_to_value(parameter_pt))
+    || 
+    (this->Node_pt[n]->does_pointer_correspond_to_position_data(parameter_pt)))
+    {return true;}
+  }
+
+ // Loop over the elements 
+ const unsigned long n_element=this->nelement();
+ for (unsigned long e=0;e<n_element;e++)
+  {
+   //Cache pointer to the elemnet   
+   GeneralisedElement* const elem_pt = this->element_pt(e);
+
+   //Find the number of internal dofs
+   const unsigned n_internal = elem_pt->ninternal_data();
+
+   //Loop over internal dofs and test the data
+   for(unsigned j=0;j<n_internal;j++)
+    {
+     if(elem_pt->internal_data_pt(j)
+        ->does_pointer_correspond_to_value(parameter_pt))
+      {return true;}
+    }
+  }
+
+ //If we get here we haven't found the data, so return false
+ return false;
+}
+
+
+
+//===============================================================
 /// Set the time stepper associated with all the nodal data
 /// in the problem
 //==============================================================
@@ -1817,6 +1932,7 @@ void Mesh::set_nodal_time_stepper(TimeStepper* const &time_stepper_pt)
   {
    //Set the timestepper associated with each node
    this->Node_pt[n]->set_time_stepper(time_stepper_pt);
+   this->Node_pt[n]->set_position_time_stepper(time_stepper_pt);
   }
 }
 
@@ -1833,6 +1949,7 @@ void Mesh::set_elemental_internal_time_stepper(
   {
    //Find the number of internal dofs
    const unsigned n_internal = this->element_pt(e)->ninternal_data();
+
    //Loop over internal dofs and set the timestepper
    for(unsigned j=0;j<n_internal;j++)
     {

@@ -366,6 +366,12 @@ template<class ELEMENT>
 ShellProblem<ELEMENT>::ShellProblem(const unsigned &nx, const unsigned &ny, 
                                     const double &lx, const double &ly)
 {
+ //Suppress the warning about empty mesh_level_timestepper_stuff
+ Mesh::Suppress_warning_about_empty_mesh_level_time_stepper_function=true;
+
+ //Use the continuation timestepper
+ Use_continuation_timestepper = true;
+
  //Create the undeformed midplane object
  Undeformed_midplane_pt = new EllipticalTube(1.0,1.0);
 
@@ -651,7 +657,7 @@ void ShellProblem<ELEMENT>::solve()
  for(unsigned i=0;i<15;i++)
    {
     ds = arc_length_step_solve(
-     Global_Physical_Variables::Pext_data_pt->value_pt(0),ds);
+     Global_Physical_Variables::Pext_data_pt,0,ds);
     
     //Output the pressure
     trace << Global_Physical_Variables::external_pressure()/(pow(0.05,3)/12.0)

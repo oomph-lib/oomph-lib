@@ -161,6 +161,12 @@ public:
  double p_nst(const unsigned &i) const
   {return this->internal_data_pt(P_nst_internal_index)->value(i);}
 
+ /// \short Return the pressure values at internal dof i_internal
+ /// (Discontinous pressure interpolation -- no need to cater for hanging
+ /// nodes).
+ double p_nst(const unsigned &t, const unsigned &i) const
+ {return this->internal_data_pt(P_nst_internal_index)->value(t,i);}
+
  /// Return number of pressure values
  unsigned npres_nst() const {return DIM+1;}
 
@@ -825,6 +831,11 @@ public:
  /// node n_p (const version)
  double p_nst(const unsigned &n_p) const
   {return this->nodal_value(Pconv[n_p],DIM);}
+
+ /// \short Access function for the pressure values at local pressure
+ /// node n_p (const version)
+ double p_nst(const unsigned &t, const unsigned &n_p) const
+ {return this->nodal_value(t,Pconv[n_p],DIM);}
  
  /// \short Set the value at which the pressure is stored in the nodes
  int p_nodal_index_nst() const {return static_cast<int>(DIM);}

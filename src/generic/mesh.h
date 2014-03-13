@@ -49,6 +49,7 @@
 #include "nodes.h"
 #include "elements.h"
 #include "timesteppers.h"
+#include "generalised_timesteppers.h"
 #include "matrices.h"
 #include "refineable_elements.h"
 
@@ -79,7 +80,6 @@ class Mesh
  /// \short Default Steady Timestepper, to be used in default arguments
  /// to Mesh constructors
  static Steady<0> Default_TimeStepper;
-
 
 
  protected:
@@ -215,6 +215,10 @@ public:
  /// exact solution
  typedef void (FiniteElement::*UnsteadyExactSolutionFctPt)(
   const double& time, const Vector<double>& x, Vector<double>& soln);
+
+ /// \short Boolean used to control warning about empty mesh level 
+ /// timestepper function
+ static bool Suppress_warning_about_empty_mesh_level_time_stepper_function;
 
  /// \short Default constructor
  Mesh()
@@ -853,14 +857,26 @@ public:
  /// with the mesh, usually used in adaptive time-stepping.
  void calculate_predictions();
 
- /// \short Set the timestepper associated with all data stored in the
- /// mesh. The function is virtual so that it can be overloaded in meshes
- /// that add additional data of their own, e.g. SpineMeshes.
- void set_time_stepper(TimeStepper* const &time_stepper_pt)
+ /// \short Set the timestepper associated with all nodal and elemental 
+ /// data stored in the mesh. 
+ void set_nodal_and_elemental_time_stepper(TimeStepper* const &time_stepper_pt)
  {
   this->set_nodal_time_stepper(time_stepper_pt);
   this->set_elemental_internal_time_stepper(time_stepper_pt);
  }
+
+ /// \short Function that can be used to set any additional timestepper data
+ /// stored at the Mesh (as opposed to nodal and elemental) levels. This
+ /// is virtual so that it can be overloaded in the appropriate Meshes. 
+ /// Examples include the SpineMeshes and adaptive triangle and tet meshes
+ virtual void set_mesh_level_time_stepper(TimeStepper* const &time_stepper_pt);
+
+ /// \short Set consistent values for pinned data in continuation
+ void set_consistent_pinned_values_for_continuation(
+  ContinuationStorageScheme* const &continuation_stepper_pt);
+
+ /// \short Does the double pointer correspond to any mesh data
+ bool does_pointer_correspond_to_mesh_data(double* const &parameter_pt);
 
  /// \short Set the timestepper associated with the nodal data in the mesh
  void set_nodal_time_stepper(TimeStepper* const &time_stepper_pt);

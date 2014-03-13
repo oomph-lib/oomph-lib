@@ -868,6 +868,9 @@ public:
  /// Uses suitably interpolated value for hanging nodes.
  virtual double p_nst(const unsigned &n_p)const=0; 
 
+ /// \short Pressure at local pressure "node" n_p at time level t
+ virtual double p_nst(const unsigned &t, const unsigned &n_p)const=0;
+
  /// Pin p_dof-th pressure dof and set it to value specified by p_value.
  virtual void fix_pressure(const unsigned &p_dof, const double &p_value)=0;
 
@@ -1487,6 +1490,28 @@ public:
   }
 
 
+ /// Return FE interpolated pressure at local coordinate s at time level t
+ double interpolated_p_nst(const unsigned &t, const Vector<double> &s) const
+  {
+   //Find number of nodes
+   unsigned n_pres = npres_nst();
+   //Local shape function
+   Shape psi(n_pres);
+   //Find values of shape function
+   pshape_nst(s,psi);
+   
+   //Initialise value of p
+   double interpolated_p = 0.0;
+   //Loop over the local nodes and sum
+   for(unsigned l=0;l<n_pres;l++) 
+    {
+     interpolated_p += p_nst(t,l)*psi[l];
+    }
+   
+   return(interpolated_p);
+  }
+
+
  /// \short Output solution in data vector at local cordinates s:
  /// x,y [,z], u,v,[w], p
  void point_output_data(const Vector<double> &s, Vector<double>& data)
@@ -1601,6 +1626,12 @@ public:
  /// nodes). 
  double p_nst(const unsigned &i) const
   {return this->internal_data_pt(P_nst_internal_index)->value(i);}
+
+ /// \short Return the i-th pressure value
+ /// (Discontinous pressure interpolation -- no need to cater for hanging 
+ /// nodes). 
+ double p_nst(const unsigned &t, const unsigned &i) const
+ {return this->internal_data_pt(P_nst_internal_index)->value(t,i);}
 
  /// Return number of pressure values
  unsigned npres_nst() const {return DIM+1;} 
@@ -2142,6 +2173,11 @@ class QTaylorHoodElement : public virtual QElement<DIM,3>,
  /// node n_p (const version)
  double p_nst(const unsigned &n_p) const
   {return this->nodal_value(Pconv[n_p],this->p_nodal_index_nst());}
+
+ /// \short Access function for the pressure values at local pressure 
+ /// node n_p (const version)
+ double p_nst(const unsigned &t, const unsigned &n_p) const
+ {return this->nodal_value(t,Pconv[n_p],this->p_nodal_index_nst());}
  
  /// Return number of pressure values
  unsigned npres_nst() const 
@@ -2705,7 +2741,7 @@ public virtual QElement<1,3>
     if (fld==this->dim())
      {
       //pressure doesn't have history values
-      return 1; 
+      return this->node_pt(0)->ntstorage();//1; 
      }
     else 
      {
@@ -2768,7 +2804,7 @@ public virtual QElement<1,3>
     //If fld=n_dim, we deal with the pressure
     if (fld==n_dim)
      {
-      return this->interpolated_p_nst(s);
+      return this->interpolated_p_nst(t,s);
      }
     // Velocity
     else

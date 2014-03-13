@@ -106,8 +106,8 @@ general_purpose_block_preconditioners.h SuperLU_preconditioner.h \
 matrix_vector_product.h projection.h line_visualiser.h \
 Subparametric_Telements.h \
 sum_of_matrices.h convergence_data.h midpoint_method.h poly_interp.h \
-preconditioner_array.h pml_meshes.h face_mesh_project.h
-
+preconditioner_array.h pml_meshes.h generalised_timesteppers.h \
+face_mesh_project.h
 
 if OOMPH_HAS_MUMPS
 headers+=mumps_solver.h

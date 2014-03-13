@@ -1350,6 +1350,9 @@ public virtual PRefineableQElement<DIM,3>
  double p_nst(const unsigned &i) const
   {return this->internal_data_pt(this->P_nst_internal_index)->value(i);}
 
+ double p_nst(const unsigned &t, const unsigned &i) const
+ {return this->internal_data_pt(this->P_nst_internal_index)->value(t,i);}
+
  ///// Return number of pressure values
  unsigned npres_nst() const {return (this->p_order()-2)*(this->p_order()-2);}
  
