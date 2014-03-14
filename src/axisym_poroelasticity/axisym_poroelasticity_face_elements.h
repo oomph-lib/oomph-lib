@@ -278,8 +278,19 @@ public:
     ELEMENT* bulk_pt=dynamic_cast<ELEMENT*>(bulk_element_pt());
     s_bulk=local_coordinate_in_bulk(s);
      
-    /// Calculate the FE representation of u
+    /// Calculate the FE representation of u -- the skeleton displacement
     bulk_pt->interpolated_u(s_bulk,disp);
+
+    /// Skeleton velocity 
+    Vector<double> du_dt(2);
+    bulk_pt->interpolated_du_dt(s_bulk,du_dt);
+
+    // Porous seepage flux
+    Vector<double> q(2);
+    bulk_pt->interpolated_q(s_bulk,q);
+
+    // Get permeability from the bulk poroelasticity element
+    const double permeability=bulk_pt->permeability();
 
     // Dummy
     unsigned ipt=0;
@@ -303,22 +314,34 @@ public:
     
     //Output the x,y,..
     for(unsigned i=0;i<n_dim;i++) 
-     {outfile << x[i] << " ";}
+     {outfile << x[i] << " ";} // column 1,2
     
     // Output displacement
     for(unsigned i=0;i<n_dim;i++) 
-     {
-      outfile << disp[i] << " ";
+     { 
+      outfile << disp[i] << " "; // column 3,4
      } 
 
     // Output traction
     for(unsigned i=0;i<n_dim;i++) 
      {
-      outfile << traction[i] << " ";
+      outfile << traction[i] << " "; // column 5,6
      } 
           
     // Output pressure
-    outfile << pressure << " ";
+    outfile << pressure << " "; // column 7
+
+    // Output seepage flux
+    outfile << permeability*q[0] << " "  // column 8
+            << permeability*q[1] << " "; // column 9
+
+    // Output skeleton velocity
+    outfile << du_dt[0] << " " // column 10
+            << du_dt[1] << " "; // column 11
+
+    // Total veloc
+    outfile << du_dt[0]+permeability*q[0] << " "  // column 12
+            << du_dt[1]+permeability*q[1] << " "; // column 13
     
     outfile << std::endl;
    }
@@ -352,9 +375,14 @@ public:
 
 
 
- /// Compute contribution to integrated porous flux over boundary
- double contribution_to_total_porous_flux()
+ /// \short Compute contributions to integrated porous flux over boundary:
+ /// q_skeleton = \int \partial u_displ / \partial t \cdot n ds 
+ /// q_seepage  = \int k q \cdot n ds 
+ void contribution_to_total_porous_flux(double& skeleton_flux_contrib,
+                                        double& seepage_flux_contrib)
  {
+
+
   // Get pointer to bulk element
   ELEMENT* bulk_el_pt=dynamic_cast<ELEMENT*>(bulk_element_pt());
   
@@ -376,7 +404,8 @@ public:
   Vector<double> s_bulk(2);
   
   //Loop over the integration points
-  double flux_contrib=0.0;
+  skeleton_flux_contrib=0.0;
+  seepage_flux_contrib=0.0;
   for(unsigned ipt=0;ipt<n_intpt;ipt++)
    {
     //Assign values of s
@@ -419,6 +448,10 @@ public:
     Vector<double> q(2);
     bulk_el_pt->interpolated_q(s_bulk,q);
 
+    // Skeleton velocity from bulk
+    Vector<double> du_dt(2);
+    bulk_el_pt->interpolated_du_dt(s_bulk,du_dt);
+
 #ifdef PARANOID    
     Vector<double> x_bulk(2);
     x_bulk[0]=bulk_el_pt->interpolated_x(s_bulk,0);
@@ -444,16 +477,18 @@ public:
 #endif
 
     // Get net flux through boundary
-    double flux=0.0;
+    double q_flux=0.0;
+    double dudt_flux=0.0;
     for(unsigned i=0;i<2;i++)
      {
-      flux+=permeability*q[i]*interpolated_normal[i];
+      q_flux+=permeability*q[i]*interpolated_normal[i];
+      dudt_flux+=du_dt[i]*interpolated_normal[i];
      }
     
     // Add 
-    flux_contrib += 2.0*MathematicalConstants::Pi*flux*W*J;
+    seepage_flux_contrib += 2.0*MathematicalConstants::Pi*q_flux*W*J;
+    skeleton_flux_contrib += 2.0*MathematicalConstants::Pi*dudt_flux*W*J;
    }
-  return flux_contrib;
 }
  
  

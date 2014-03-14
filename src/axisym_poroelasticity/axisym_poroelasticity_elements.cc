@@ -128,6 +128,9 @@ namespace oomph
    // Vector of local coordinates
    Vector<double> s(2);
 
+   // Skeleton velocity
+   Vector<double> du_dt(2);
+
    // Tecplot header info
    outfile << tecplot_zone_string(nplot);
 
@@ -145,7 +148,7 @@ namespace oomph
        outfile << interpolated_x(s,i) << " ";
       }
 
-     // Output the components of the FE representation of u at s
+     // Output the components of the FE representation of skeleton displ. at s
      for(unsigned i=0;i<2;i++)
       {
        outfile << interpolated_u(s,i) << " "; // soln 0 and 1
@@ -162,6 +165,11 @@ namespace oomph
 
      // Output FE representation of p at s
      outfile << interpolated_p(s) << " "; // soln 5
+
+     // Skeleton velocity
+     interpolated_du_dt(s,du_dt);
+     outfile << du_dt[0] << " "; // soln 6
+     outfile << du_dt[1] << " "; // soln 7
 
      outfile << std::endl;
 

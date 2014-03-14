@@ -250,7 +250,7 @@ public virtual FaceGeometry<ELEMENT>,
         }
       }
 
-     //Get the imposed flux
+     //Get the imposed traction
      Vector<double> traction(3);
 
      //Dummy integration point
@@ -366,7 +366,7 @@ public virtual FaceGeometry<ELEMENT>,
         }
       }
 
-     //Get the imposed flux
+     //Get the imposed traction
      Vector<double> traction(3);
 
      //Dummy integration point

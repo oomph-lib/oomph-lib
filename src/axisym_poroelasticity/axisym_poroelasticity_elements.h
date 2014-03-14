@@ -48,7 +48,8 @@ namespace oomph
    Permeability_pt(&Default_permeability_value),
    Permeability_ratio_pt(&Default_permeability_ratio_value),
    Alpha_pt(&Default_alpha_value),
-   Porosity_pt(&Default_porosity_value)
+   Porosity_pt(&Default_porosity_value),
+   Darcy_is_switched_off(false)
     {
     }
    
@@ -820,9 +821,19 @@ namespace oomph
    this->internal_data_pt(q_index)->set_time_stepper(time_stepper_pt);
   }
 
+
+  /// Is Darcy flow switched off?
+  bool darcy_is_switched_off()
+  {
+   return Darcy_is_switched_off;
+  }
+
+
   /// Switch off Darcy flow
   void switch_off_darcy()
   {
+   Darcy_is_switched_off=true;
+
    // Pin pressures and set them to zero
    double p=0.0;
    unsigned np=np_basis();
@@ -858,7 +869,7 @@ namespace oomph
   /// broken virtual function in base class.
   unsigned nscalar_paraview() const
   {
-   return 6;
+   return 8;
   }
   
   /// \short Write values of the i-th scalar field at the plot points. Needs 
@@ -878,6 +889,10 @@ namespace oomph
     // Get local coordinates of plot point
     get_s_plot(iplot,nplot,s);
     
+    // Skeleton velocity
+    Vector<double> du_dt(2);
+    interpolated_du_dt(s,du_dt);
+
     // Displacements
     if(i<2) 
      {
@@ -896,6 +911,14 @@ namespace oomph
     else if (i==5)
      {
       file_out << interpolated_p(s) << std::endl;
+     }
+    else if (i==6)
+     {
+      file_out << du_dt[0] << std::endl;
+     }
+    else if (i==7)
+     {
+      file_out << du_dt[1] << std::endl;
      }
     // Never get here
     else
@@ -943,11 +966,19 @@ namespace oomph
     return "pore pressure";
     break;
 
+   case 6:
+    return "radial skeleton velocity";
+    break;
+
+   case 7:
+    return "axial skeleton velocity";
+    break;
+
    default:
     
     std::stringstream error_stream;
     error_stream
-     << "Axisymmetric Navier-Stokes Elements only store 4 fields "
+     << "AxisymmetricPoroelasticityEquations only store 8 fields "
      << std::endl;
     throw OomphLibError(
      error_stream.str(),
@@ -1124,6 +1155,9 @@ namespace oomph
 
   /// Porosity
   double* Porosity_pt;
+
+  /// Boolean to record that darcy has been switched off
+  bool Darcy_is_switched_off;
 
   /// Static default value for Young's modulus (1.0 -- for natural
   /// scaling, i.e. all stresses have been non-dimensionalised by

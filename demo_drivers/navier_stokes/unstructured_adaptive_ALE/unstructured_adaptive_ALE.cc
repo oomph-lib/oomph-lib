@@ -621,7 +621,7 @@ public:
      // Set the Reynolds number
      el_pt->re_pt() = &Problem_Parameter::Re;
 
-     // Set the Wormesley number (same as Re since St=1)
+     // Set the Womersley number (same as Re since St=1)
      el_pt->re_st_pt() = &Problem_Parameter::Re;
 
      // Set the constitutive law for pseudo-elastic mesh deformation

@@ -546,7 +546,7 @@ CollapsibleChannelProblem<ELEMENT>::CollapsibleChannelProblem(
    //Set the Reynolds number
    el_pt->re_pt() = &Global_Physical_Variables::Re;
 
-   // Set the Wormesley number
+   // Set the Womersley number
    el_pt->re_st_pt() = &Global_Physical_Variables::ReSt;
 
    //Set the constitutive law
