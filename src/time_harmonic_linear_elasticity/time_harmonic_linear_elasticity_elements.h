@@ -517,7 +517,7 @@ namespace oomph
   /// \short Specify the values associated with field fld. 
   /// The information is returned in a vector of pairs which comprise 
   /// the Data object and the value within it, that correspond to field fld. 
-  /// In the underlying time-harmonic linear elasticity elemements the 
+  /// In the underlying time-harmonic linear elasticity elements the 
   /// real and complex parts of the displacements are stored
   /// at the nodal values
   Vector<std::pair<Data*,unsigned> > data_values_of_field(const unsigned& fld)
@@ -529,7 +529,7 @@ namespace oomph
     unsigned nnod=this->nnode();
     for (unsigned j=0;j<nnod;j++)
      {
-      // Add the data value associated with the velocity components
+      // Add the data value associated with the displacement components
       data_values.push_back(std::make_pair(this->node_pt(j),fld));
      }
     

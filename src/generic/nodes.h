@@ -1944,7 +1944,7 @@ class BoundaryNodeBase
   Copied_node_pt(0){}
  
  /// \short Destructor, clean up any allocated storage for the boundaries
- ~BoundaryNodeBase();
+ virtual ~BoundaryNodeBase();
  
  /// Broken copy constructor
  BoundaryNodeBase(const BoundaryNodeBase& boundary_node_base) 

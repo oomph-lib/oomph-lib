@@ -165,7 +165,10 @@ class Penetrator
 
   /// Constructor
   Penetrator(){};
- 
+
+  /// Destructor
+  virtual ~Penetrator(){};
+
   /// \short Get penetration for given point x with outer unit normal n
   virtual double penetration(const Vector<double>& x,
                              const Vector<double>& n) const =0;
@@ -209,6 +212,10 @@ class CircularPenetrator : public virtual Penetrator
     Centre_pt=r_c_pt;
     Radius=r;
    }
+
+  /// Destructor
+  virtual ~CircularPenetrator(){}
+
 
 // hierher
   /* /// Get centre of penetrator (origin for cylindrical polar coordinate system) */
@@ -885,6 +892,9 @@ class ContactElementBase
 {
 
   public:
+
+  /// Destructor
+  virtual ~ContactElementBase(){}
 
  /// Resulting contact force
  virtual void resulting_contact_force(Vector<double> &contact_force)=0;

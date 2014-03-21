@@ -5,7 +5,7 @@ OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
 
 
 #Set the number of tests to be checked
-NUM_TESTS=12 
+NUM_TESTS=14
 
 
 # Setup validation directory
@@ -14,6 +14,60 @@ touch Validation
 rm -r -f Validation
 mkdir Validation
 cd Validation
+
+
+# Validation for linear solid contact with gravity (unstructured)
+#----------------------------------------------------------------
+
+echo "Running solid linear contact with gravity (unstructured) validation"
+mkdir RESLT
+../linear_solid_contact_with_gravity_unstructured  > RESLT/OUTPUT
+echo "done"
+echo " " >> validation.log
+echo "Linear solid contact with gravity (unstructured) validation" >> validation.log
+echo "-----------------------------------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat RESLT/trace.dat  > result_linear_solid_contact_with_gravity_unstructured.dat
+
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../../bin/fpdiff.py ../validata/result_linear_solid_contact_with_gravity_unstructured.dat.gz \
+    result_linear_solid_contact_with_gravity_unstructured.dat 0.1 1.0e-9 >> validation.log
+fi
+
+mv RESLT RESLT_linear_solid_contact_with_gravity_unstructured
+
+
+# Validation for linear solid contact with gravity (structured)
+#--------------------------------------------------------------
+
+echo "Running linear solid contact with gravity (structured) validation"
+mkdir RESLT
+../linear_solid_contact_with_gravity_structured  > RESLT/OUTPUT
+echo "done"
+echo " " >> validation.log
+echo "Linear solid contact with gravity (structured) validation" >> validation.log
+echo "---------------------------------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat RESLT/trace.dat  > result_linear_solid_contact_with_gravity_structured.dat
+
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../../bin/fpdiff.py ../validata/result_linear_solid_contact_with_gravity_structured.dat.gz \
+    result_linear_solid_contact_with_gravity_structured.dat  >> validation.log
+fi
+
+mv RESLT RESLT_linear_solid_contact_with_gravity_structured
 
 
 # Validation for solid contact with gravity (unstructured)
