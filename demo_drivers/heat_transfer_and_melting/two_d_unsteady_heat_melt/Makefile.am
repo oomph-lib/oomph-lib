@@ -39,33 +39,7 @@ linear_solid_contact_with_gravity_structured_LDADD = -L@libdir@ -llinear_elastic
                                 -lsolid -lgeneric \
 				$(EXTERNAL_LIBS) $(FLIBS)
 
-solid_contact_with_gravity_structured_CXXFLAGS=-DSTRUCTURED_MESH
-
-#-------------------------------------------------
-
-# Sources for executable
-solid_contact_with_gravity_structured_SOURCES = solid_contact_with_gravity.cc \
-contact_elements.h
-
-# Required libraries:
-# $(FLIBS) is included in case the solver involves fortran sources.
-solid_contact_with_gravity_structured_LDADD = -L@libdir@ -lconstitutive \
-                                -lsolid -lgeneric \
-				$(EXTERNAL_LIBS) $(FLIBS)
-
-solid_contact_with_gravity_structured_CXXFLAGS=-DSTRUCTURED_MESH
-#-------------------------------------------------
-
-# Sources for executable
-linear_solid_contact_with_gravity_SOURCES = linear_solid_contact_with_gravity.cc \
-linear_contact_elements.h
-
-# Required libraries:
-# $(FLIBS) is included in case the solver involves fortran sources.
-linear_solid_contact_with_gravity_LDADD = -L@libdir@ -llinear_elasticity \
-                                -lconstitutive \
-                                -lsolid -lgeneric \
-				$(EXTERNAL_LIBS) $(FLIBS)
+linear_solid_contact_with_gravity_structured_CXXFLAGS=-DSTRUCTURED_MESH
 
 #-------------------------------------------------
 
@@ -208,7 +182,7 @@ plot_hertz.bash			     re-enumerate.bash \
 plot_melt.bash			     run_sb_melt.bash \
 plot_melt_with_free_penetrator.bash  run_solid_contact.bash \
 plot_pseudo_melt.bash		     run_spring_contact.bash \
-plot_sb.bash                         add plot_linear_hertz.bash
+plot_sb.bash                         plot_linear_hertz.bash
 
 
 EXTRA_DIST+= \
