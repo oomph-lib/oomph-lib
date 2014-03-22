@@ -223,7 +223,7 @@ void LinearElasticityEquations<DIM>::get_stress(const Vector<double> &s,
    }
 #endif
   
-  //Find the indices at which the local velocities are stored
+  //Find the indices at which the local displacements are stored
   unsigned u_nodal_index[DIM];
   for(unsigned i=0;i<DIM;i++) 
    {u_nodal_index[i] = this->u_index_linear_elasticity(i);}

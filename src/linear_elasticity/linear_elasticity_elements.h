@@ -673,9 +673,9 @@ namespace oomph
    {
     unsigned n_node=this->nnode();
 
-#ifdef PARANOID
-    unsigned n_dim=this->node_pt(0)->ndim();
-#endif
+/* #ifdef PARANOID */
+/*     unsigned n_dim=this->node_pt(0)->ndim(); */
+/* #endif */
     
     //Local shape function
     Shape psi(n_node);
@@ -689,20 +689,22 @@ namespace oomph
     //Sum over the local nodes at that time
     for(unsigned l=0;l<n_node;l++) 
      {
-#ifdef PARANOID
-      unsigned nvalue=this->node_pt(l)->nvalue();
-      if (nvalue!=n_dim)
-       {        
-        std::stringstream error_stream;
-        error_stream 
-         << "Current implementation only works for non-resized nodes\n"
-         << "but nvalue= " << nvalue << "!= dim = " << n_dim << std::endl;
-        throw OomphLibError(
-         error_stream.str(),
-         OOMPH_CURRENT_FUNCTION,
-         OOMPH_EXCEPTION_LOCATION);
-       }
-#endif
+// over-zealous I think. This will quietly do the right thing
+// even if there are additional degrees of freedom floating around.
+/* #ifdef PARANOID */
+/*       unsigned nvalue=this->node_pt(l)->nvalue(); */
+/*       if (nvalue!=n_dim) */
+/*        {         */
+/*         std::stringstream error_stream; */
+/*         error_stream  */
+/*          << "Current implementation only works for non-resized nodes\n" */
+/*          << "but nvalue= " << nvalue << "!= dim = " << n_dim << std::endl; */
+/*         throw OomphLibError( */
+/*          error_stream.str(), */
+/*          OOMPH_CURRENT_FUNCTION, */
+/*          OOMPH_EXCEPTION_LOCATION); */
+/*        } */
+/* #endif */
       interpolated_u += this->nodal_value(t,l,fld)*psi[l];
      }
     return interpolated_u;     
@@ -720,21 +722,23 @@ namespace oomph
   int local_equation(const unsigned &fld,
                      const unsigned &j)
    {
-#ifdef PARANOID
-    unsigned n_dim=this->node_pt(0)->ndim();
-    unsigned nvalue=this->node_pt(j)->nvalue();
-    if (nvalue!=n_dim)
-     {        
-      std::stringstream error_stream;
-      error_stream 
-       << "Current implementation only works for non-resized nodes\n"
-       << "but nvalue= " << nvalue << "!= dim = " << n_dim << std::endl;
-      throw OomphLibError(
-         error_stream.str(),
-         OOMPH_CURRENT_FUNCTION,
-         OOMPH_EXCEPTION_LOCATION);
-     }
-#endif
+// over-zealous I think. This will quietly do the right thing
+// even if there are additional degrees of freedom floating around.
+/* #ifdef PARANOID */
+/*     unsigned n_dim=this->node_pt(0)->ndim(); */
+/*     unsigned nvalue=this->node_pt(j)->nvalue(); */
+/*     if (nvalue!=n_dim) */
+/*      {         */
+/*       std::stringstream error_stream; */
+/*       error_stream  */
+/*        << "Current implementation only works for non-resized nodes\n" */
+/*        << "but nvalue= " << nvalue << "!= dim = " << n_dim << std::endl; */
+/*       throw OomphLibError( */
+/*          error_stream.str(), */
+/*          OOMPH_CURRENT_FUNCTION, */
+/*          OOMPH_EXCEPTION_LOCATION); */
+/*      } */
+/* #endif */
     return this->nodal_local_eqn(j,fld);
    }
 
