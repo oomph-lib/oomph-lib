@@ -312,3 +312,7 @@ library_includedir=$(includedir)/oomph_flapack
 #else
 install-data-hook: 
 #endif
+
+if ADD_LGFORTRAN_TO_OOMPH_LAPACK
+liboomph_flapack_la_LIBADD = -lgfortran
+endif

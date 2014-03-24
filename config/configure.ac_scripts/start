@@ -13,7 +13,9 @@ AC_INIT([oomph-lib],[0.90],[oomph-lib@maths.man.ac.uk])
 # config header file
 AC_CONFIG_HEADERS(config.h)
 
-#Intialise automake
+# Intialise automake. Note that the following line may be modified between
+# the version in "start" and the version in configure.ac by
+# regenerate_config_files.sh. (Updated comment from David Shepherd)
 AM_INIT_AUTOMAKE
 
 # Checks for programs:
@@ -379,10 +381,17 @@ AM_CONDITIONAL(HAVE_TETGEN, test x$have_tetgen = xtrue)
 
 
 
+# Suppress build of pdf-based documentation?
+# If yes, run configure as './configure --enable-suppress-pdf-doc'
+AC_ARG_ENABLE(suppress-pdf-doc,
+              [  --enable-suppress-pdf-doc Suppress building of oomph-lib's doxygen-based pdf documentation],
+              [want_pdf_doc=false],
+              [want_pdf_doc=true])
+
 # Do we have pdflatex installed?
-#----------------------------
-AC_CHECK_PROG(have_pdflatex,pdflatex,true,false)
-if test x$have_pdflatex = xfalse; then \
+#-------------------------------
+AC_CHECK_PROG(have_pdf_latex,pdflatex,true,false)
+if test x$have_pdf_latex = xfalse; then \
   echo " "; \
   echo "===================================================="; \
   echo "Cannot find pdflatex on your system"; \
@@ -404,9 +413,14 @@ if test x$have_pdflatex = xfalse; then \
 else \
   echo "Congratulations! I have located pdflatex and can build the "; \
   echo "latex documentation in the doc directory."; \
+  if test x$want_pdf_doc = xfalse; then \
+     echo "BUILDING OF PDF DOC SUPPRESSED VIA CONFIGURE FLAG!"; \
+     have_pdf_latex=false; \
+  fi \
 fi
-AM_CONDITIONAL(HAVE_PDF_LATEX, test x$have_pdf_latex = xtrue)
 
+echo "have_pdf_latex $have_pdf_latex"
+AM_CONDITIONAL(HAVE_PDF_LATEX, test x$have_pdf_latex = xtrue)
 
 # Do we have python installed?
 #-----------------------------
@@ -695,6 +709,19 @@ AM_CONDITIONAL(SYMBOLIC_LINKS_FOR_HEADERS, test x$want_sym_link = xtrue)
 
 
 
+# Link gfortran libraries when building oomph_flapack library
+# This is a workaround to a problem with the latest versions of
+# gfortran (ubuntu13.10 -- seems like a bug to use so we're not
+# hardcoding it here..
+# Run configure with './configure --enable_use_gfortran_libraries_for_oomph_flapack'
+AC_ARG_ENABLE(use-gfortran-libraries-for-oomph-flapack,
+              [  --enable-use-gfortran-libraries-for-oomph-flapack Link gfortran libraries when building oomph_flapack library (workaround for ubuntu 13.10 feature(bug?)],
+              [use_gfortran_libraries_for_oomph_flapack=true],
+              [use_gfortran_libraries_for_oomph_flapack=false])
+
+# Pass result of test to automake (makefiles can now check for 
+# status of ADD_LGFORTRAN_TO_OOMPH_LAPACK in any Makefile.am
+AM_CONDITIONAL(ADD_LGFORTRAN_TO_OOMPH_LAPACK, test x$use_gfortran_libraries_for_oomph_flapack = xtrue)
 
 
 

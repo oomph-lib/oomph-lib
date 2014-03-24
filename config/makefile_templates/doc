@@ -11,9 +11,9 @@ html/index.html: $(docfile).txt_doxygenified.h oomph-lib_header.html
 	rm $(docfile).txt_doxygenified.h.junk
 #endif
 	doxygen
-#if HAVE_PDF_LATEX
+if HAVE_PDF_LATEX
 	(cd latex; rm -f refman.pdf; echo "\end{document}" >> index.tex; mv refman.tex refman.tex.back; $(top_builddir)/../bin/customise_latex.bash refman.tex.back > refman.tex; make; mv refman.pdf ../$(docfile).pdf; ln -s ../$(docfile).pdf refman.pdf)
-#endif
+endif
 
 EXTRA_DIST = Doxyfile $(docfile).txt figures 
 
