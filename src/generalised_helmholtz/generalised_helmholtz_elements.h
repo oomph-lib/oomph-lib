@@ -230,6 +230,19 @@ public:
  /// x,y,z,u_re,u_im at  n_plot^DIM plot points
  void output(std::ostream &outfile, const unsigned &n_plot);
 
+
+/// Output function for real part of full time-dependent solution
+/// constructed by adding the scattered field
+///  u = Re( (u_r +i u_i) exp(-i omega t)
+/// at phase angle omega t = phi computed here, to the corresponding 
+/// incoming wave specified via the function pointer.
+void  output_total_real(
+ std::ostream &outfile, 
+ FiniteElement::SteadyExactSolutionFctPt incoming_wave_fct_pt,
+ const double& phi,
+ const unsigned &nplot);
+
+
  /// \short Output function for real part of full time-dependent solution
  /// u = Re( (u_r +i u_i) exp(-i omega t))
  /// at phase angle omega t = phi.

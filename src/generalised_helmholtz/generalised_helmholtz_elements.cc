@@ -429,6 +429,70 @@ void  GeneralisedHelmholtzEquations<DIM>::output_real(std::ostream &outfile,
 }
 
 //======================================================================
+/// Output function for real part of full time-dependent solution
+/// constructed by adding the scattered field
+///
+///  u = Re( (u_r +i u_i) exp(-i omega t)
+///
+/// at phase angle omega t = phi computed here, to the corresponding 
+/// incoming wave specified via the function pointer.
+///
+///   x,y,u   or    x,y,z,u
+///
+/// Output at nplot points in each coordinate direction
+//======================================================================
+template <unsigned DIM>
+void  GeneralisedHelmholtzEquations<DIM>::output_total_real(
+ std::ostream &outfile, 
+ FiniteElement::SteadyExactSolutionFctPt incoming_wave_fct_pt,
+ const double& phi,
+ const unsigned &nplot)
+{
+ 
+ //Vector of local coordinates
+ Vector<double> s(DIM);
+ 
+ // Vector for coordintes
+ Vector<double> x(DIM);
+
+ // Real and imag part of incoming wave
+ Vector<double> incoming_soln(2);
+ 
+ // Tecplot header info
+ outfile << tecplot_zone_string(nplot);
+ 
+ // Loop over plot points
+ unsigned num_plot_points=nplot_points(nplot);
+ for (unsigned iplot=0;iplot<num_plot_points;iplot++)
+  {
+   
+   // Get local coordinates of plot point
+   get_s_plot(iplot,nplot,s);
+   std::complex<double> u(interpolated_u_generalised_helmholtz(s));
+
+   // Get x position as Vector
+   interpolated_x(s,x);
+
+   // Get exact solution at this point
+   (*incoming_wave_fct_pt)(x,incoming_soln);
+   
+   for(unsigned i=0;i<DIM;i++) 
+    {
+     outfile << interpolated_x(s,i) << " ";
+    }
+
+   outfile << 
+    (u.real()+incoming_soln[0])*cos(phi)+
+    (u.imag()+incoming_soln[1])*sin(phi) << std::endl;   
+   
+  }
+
+ // Write tecplot footer (e.g. FE connectivity lists)
+ write_tecplot_zone_footer(outfile,nplot);
+
+}
+
+//======================================================================
 /// Output function for imaginary part of full time-dependent solution
 ///
 ///  u = Im( (u_r +i u_i) exp(-i omega t))
