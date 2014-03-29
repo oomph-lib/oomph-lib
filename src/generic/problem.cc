@@ -121,7 +121,8 @@ ContinuationStorageScheme Problem::Continuation_time_stepper;
   Max_permitted_error_for_halo_check(1.0e-14),
 #endif
   Shut_up_in_newton_solve(false),
-  Always_take_one_newton_step(false)
+  Always_take_one_newton_step(false),
+  Timestep_reduction_factor_after_nonconvergence(0.5)
  {
 
   /// Setup terminate helper
@@ -10550,8 +10551,9 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
           << std::endl;
          //Reject the timestep, if we have an exception
          REJECT_TIMESTEP=1;
-         //Essentially all I do here is half the next timestep
-         dt_actual *= 0.5;
+         // Essentially all I do here is adjust (by default, half) 
+         // the next timestep
+         dt_actual *= Timestep_reduction_factor_after_nonconvergence; //0.5;
          //Reset the time
          time_pt()->time() = time_current;
          //Reload the dofs
