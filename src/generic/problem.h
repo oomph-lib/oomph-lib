@@ -1943,6 +1943,11 @@ namespace oomph
  /// even if the initial residuals are below the required tolerance
  bool Always_take_one_newton_step;
 
+ /// \short What it says: If temporally adaptive Newton solver fails to
+ /// to converge, reduce timestep by this factor and try again; defaults
+ /// to 1/2; can be over-written by user in derived problem.
+ double Timestep_reduction_factor_after_nonconvergence;
+
  /// \short Perform a basic arc-length continuation step using Newton's
  /// method. Returns number of Newton steps taken.
  unsigned newton_solve_continuation(double* const &parameter_pt);
