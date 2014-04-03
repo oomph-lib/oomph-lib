@@ -1177,16 +1177,23 @@ namespace oomph
     }
     std::cout << std::endl; 
 
+    std::cout << "Lgr prec: calling block_setup(...)" << std::endl; 
+    
     // Call the block setup
     this->block_setup(dof_to_block_map);
 
-    //  // Print out the nrow of blocks along the first column.
-    //  for (unsigned block_i = 0; block_i < nblock_types(); block_i++) 
-    //  {
-    //    CRDoubleMatrix tmp_block = get_block(block_i,0);
-    //    unsigned tmp_block_nrow = tmp_block.nrow();
-    //    std::cout << "block " << block_i << ", nrow: " << tmp_block_nrow << std::endl; 
-    //  }
+    std::cout << "Lgr prec: done block_setup()\n" << std::endl;
+    
+
+      // Print out the nrow of blocks along the first column.
+      std::cout << "Printing out blocks." << std::endl; 
+      for (unsigned block_i = 0; block_i < nblock_types(); block_i++) 
+      {
+        CRDoubleMatrix tmp_block = get_block(block_i,0);
+        unsigned tmp_block_nrow = tmp_block.nrow();
+        std::cout << "block " << block_i << ", nrow: " << tmp_block_nrow << std::endl; 
+      }
+      
 
     if(Doc_prec)
     {
@@ -1477,9 +1484,9 @@ namespace oomph
 
       // RAYRAY change back to Block_distribution_pt
       // Create both the w_i and inv_w_i matrices.
-      w_pt[l_i] = new CRDoubleMatrix(this->Internal_block_distribution_pt[l_doftype]);
+      w_pt[l_i] = new CRDoubleMatrix(this->Block_distribution_pt[l_doftype]);
       CRDoubleMatrix* inv_w_pt 
-        = new CRDoubleMatrix(this->Internal_block_distribution_pt[l_doftype]);
+        = new CRDoubleMatrix(this->Block_distribution_pt[l_doftype]);
 
       // The w_i is either a
       // 1) diagonal or
@@ -1496,11 +1503,11 @@ namespace oomph
         // RAYRAY change back to Block_distribution_pt
         // Get the number of local rows for this Lagrange block.
         unsigned long l_i_nrow_local 
-          = this->Internal_block_distribution_pt[l_doftype]->nrow_local();
+          = this->Block_distribution_pt[l_doftype]->nrow_local();
 
         // The first row, for the column offset (required in parallel).
         unsigned l_i_first_row 
-          = this->Internal_block_distribution_pt[l_doftype]->first_row();
+          = this->Block_distribution_pt[l_doftype]->first_row();
 
         // A vector to contain the results of mass matrices squared.
         Vector<double> w_i_diag_values(l_i_nrow_local,0);
@@ -1549,7 +1556,7 @@ namespace oomph
         // number of columns.
         // RAYRAY change back to Block_distribution_pt
         unsigned long l_i_nrow_global 
-          = this->Internal_block_distribution_pt[l_doftype]->nrow();
+          = this->Block_distribution_pt[l_doftype]->nrow();
         w_pt[l_i]->build(l_i_nrow_global,
             w_i_diag_values,
             w_i_column_indices,
@@ -1574,7 +1581,7 @@ namespace oomph
           // Squaring process.
           // RAYRAY change back to Block_distribution_pt
           CRDoubleMatrix* temp_mm_sqrd_pt = new CRDoubleMatrix;
-          temp_mm_sqrd_pt->build(this->Internal_block_distribution_pt[l_doftype]);
+          temp_mm_sqrd_pt->build(this->Block_distribution_pt[l_doftype]);
           mm_pt[mm_i]->multiply((*mm_pt[mm_i]),*temp_mm_sqrd_pt);
 
           // adding to the partial sum of squared mass matrices.
@@ -1615,7 +1622,7 @@ namespace oomph
         inv_w_i_row_start[l_i_nrow_local] = l_i_nrow_local;
         // RAYRAY change back to Block_distribution_pt
         unsigned long l_i_nrow_global 
-          = this->Internal_block_distribution_pt[l_doftype]->nrow();
+          = this->Block_distribution_pt[l_doftype]->nrow();
         inv_w_pt->build(l_i_nrow_global,
             inv_w_i_diag_values,
             inv_w_i_column_indices,
@@ -1718,11 +1725,10 @@ namespace oomph
       // Concatenate the sub matrices.
       CRDoubleMatrix* f_aug_pt = new CRDoubleMatrix;
 
-      // RAYRAY change back to Block_distribution_pt
       Vector<LinearAlgebraDistribution*> f_dist_pt(N_fluid_doftypes,0);
       for(unsigned f_i = 0; f_i < N_fluid_doftypes; f_i++)
       {
-        f_dist_pt[f_i] = this->Internal_block_distribution_pt[f_i];
+        f_dist_pt[f_i] = this->block_distribution_pt(f_i);
       }
 
       CRDoubleMatrixHelpers::concatenate_without_communication
@@ -1754,6 +1760,9 @@ namespace oomph
       //////////////////////////////////////////////////////////////////////////
       //////////////////////////////////////////////////////////////////////////
       //////////////////////////////////////////////////////////////////////////
+
+      std::cout << "Lgr using a block subsidiary preconditioner" << std::endl; 
+      
 
       // Get the rest of the f block.
       DenseMatrix<CRDoubleMatrix* > f_subblock_pt(N_fluid_doftypes,
@@ -1820,7 +1829,7 @@ namespace oomph
       //
       // 2   6
       // p = p
-      Vector<Vector<unsigned> > doftype_to_doftype_map;
+      Vector<Vector<unsigned> > subsidiary_dof_type_coarsening_map;
 
       for (unsigned direction = 0; direction < spatial_dim; direction++)
       {
@@ -1831,13 +1840,24 @@ namespace oomph
         }
 
         // Push it in!
-        doftype_to_doftype_map.push_back(dir_doftypes_vec);
+        subsidiary_dof_type_coarsening_map.push_back(dir_doftypes_vec);
       }
 
       Vector<unsigned> ns_p_vec(1,0);
       ns_p_vec[0] = N_velocity_doftypes;
 
-      doftype_to_doftype_map.push_back(ns_p_vec);
+      subsidiary_dof_type_coarsening_map.push_back(ns_p_vec);
+
+      std::cout << "Lgr: sub dof type coarsening map: " << std::endl; 
+      for (unsigned i = 0; i < subsidiary_dof_type_coarsening_map.size(); i++) 
+      {
+        for (unsigned j = 0; j < subsidiary_dof_type_coarsening_map[i].size(); j++) 
+        {
+          std::cout << subsidiary_dof_type_coarsening_map[i][j] << " ";
+        }
+        std::cout << "\n"; 
+      }
+      
 
       //    // RAYRAY REMOVE
       //    Doftype_coarsen_map_fine.resize(0,0);
@@ -2029,7 +2049,10 @@ namespace oomph
       // ub vb up vp ut vt p
       navier_stokes_block_preconditioner_pt
         ->turn_into_subsidiary_block_preconditioner(this, Subsidiary_list_bcpl,
-            doftype_to_doftype_map);
+            subsidiary_dof_type_coarsening_map);
+
+      //pause("Lgr: Done turn_into_sub..."); 
+      
 
       //    pause("After turn_into..."); 
 
@@ -2054,8 +2077,6 @@ namespace oomph
 
       navier_stokes_block_preconditioner_pt
         ->setup(matrix_pt(), comm_pt());
-      //    pause("after call to setup of NS prec."); 
-
 
       for (unsigned i = 0; i < N_fluid_doftypes; i++)
       {
@@ -2123,6 +2144,7 @@ namespace oomph
     }
 
     Mapping_info_calculated = true;
+    
   } // end of LagrangeEnforcedflowPreconditioner::setup
 
 

@@ -828,7 +828,10 @@ void SimpleFSIPreconditioner::setup()
   this->get_block(1,0,*fluid_onto_solid_matrix_pt);
 
   // And setup the matrix vector product operator
-  Fluid_solid_coupling_matvec_pt->setup(fluid_onto_solid_matrix_pt);
+  this->setup_matrix_vector_product(Fluid_solid_coupling_matvec_pt,
+                                    fluid_onto_solid_matrix_pt,
+                                    0);
+//  Fluid_solid_coupling_matvec_pt->setup(fluid_onto_solid_matrix_pt);
   delete fluid_onto_solid_matrix_pt; fluid_onto_solid_matrix_pt = 0;
  }
 

@@ -888,7 +888,7 @@ namespace oomph
   // RAYRAY this will be incorrect, we have to use the distributions for the
   // blocks, not the internal blocks.
   CRDoubleMatrixHelpers::concatenate_without_communication(
-   Internal_block_distribution_pt,s_pt,*s_prec_pt);
+   Block_distribution_pt,s_pt,*s_prec_pt);
 
   delete s_pt(0,0); s_pt(0,0) = 0;
   delete s_pt(0,1); s_pt(0,1) = 0;
@@ -1051,7 +1051,9 @@ namespace oomph
         this->get_block(d,j,*block_matrix_pt);
         Off_diagonal_matrix_vector_products(d,j) 
          = new MatrixVectorProduct();
-        Off_diagonal_matrix_vector_products(d,j)->setup(block_matrix_pt);
+//        Off_diagonal_matrix_vector_products(d,j)->setup(block_matrix_pt);
+        this->setup_matrix_vector_product(Off_diagonal_matrix_vector_products(d,j),
+                                          block_matrix_pt,j);
 
         delete block_matrix_pt; block_matrix_pt = 0;
        }

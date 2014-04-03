@@ -247,25 +247,32 @@ namespace oomph {
   // setup the fluid pseudo-solid matvec operator
   CRDoubleMatrix* fp_matrix_pt = new CRDoubleMatrix;
   get_block(0,2,*fp_matrix_pt);
-  Fluid_pseudo_elastic_matvec_pt->setup(fp_matrix_pt);
+//  Fluid_pseudo_elastic_matvec_pt->setup(fp_matrix_pt);
+  this->setup_matrix_vector_product(Fluid_pseudo_elastic_matvec_pt,
+                                    fp_matrix_pt,2);
   delete fp_matrix_pt; fp_matrix_pt = 0;
   
   // setup the solid fluid matvec operator
   CRDoubleMatrix* sf_matrix_pt = new CRDoubleMatrix;
   get_block(1,0,*sf_matrix_pt);
-  Solid_fluid_matvec_pt->setup(sf_matrix_pt);
+//  Solid_fluid_matvec_pt->setup(sf_matrix_pt);
+  this->setup_matrix_vector_product(Solid_fluid_matvec_pt,sf_matrix_pt,0);
   delete sf_matrix_pt; sf_matrix_pt = 0;
   
   // setup the solid pseudo-solid matvec operator
   CRDoubleMatrix* sp_matrix_pt = new CRDoubleMatrix;
   get_block(1,2,*sp_matrix_pt);
-  Solid_pseudo_elastic_matvec_pt->setup(sp_matrix_pt);
+//  Solid_pseudo_elastic_matvec_pt->setup(sp_matrix_pt);
+  this->setup_matrix_vector_product(Solid_pseudo_elastic_matvec_pt,
+                                    sp_matrix_pt,2);
   delete sp_matrix_pt; sp_matrix_pt = 0;
   
   // build the lagrange solid matvec operator
   CRDoubleMatrix* ls_matrix_pt = new CRDoubleMatrix;
   get_block(3,1,*ls_matrix_pt);
-  Lagrange_solid_matvec_pt->setup(ls_matrix_pt);
+//  Lagrange_solid_matvec_pt->setup(ls_matrix_pt);
+  this->setup_matrix_vector_product(Lagrange_solid_matvec_pt,
+                                    ls_matrix_pt,1);
   delete ls_matrix_pt; ls_matrix_pt = 0;
 
  }

@@ -265,7 +265,8 @@ namespace oomph
      }
     double t_E_matvec_start = TimingHelpers::timer();
     E_mat_vec_pt = new MatrixVectorProduct;
-    E_mat_vec_pt->setup(e_matrix_pt);
+    //E_mat_vec_pt->setup(e_matrix_pt);
+    this->setup_matrix_vector_product(E_mat_vec_pt,e_matrix_pt,1);
     double t_E_matvec_finish = TimingHelpers::timer();
     delete e_matrix_pt;
     if(Doc_time)
@@ -357,7 +358,8 @@ namespace oomph
     // build the matvec operator for QBt
     double t_QBt_MV_start = TimingHelpers::timer();
     QBt_mat_vec_pt = new MatrixVectorProduct;
-    QBt_mat_vec_pt->setup(bt_pt);
+    //QBt_mat_vec_pt->setup(bt_pt);
+    this->setup_matrix_vector_product(QBt_mat_vec_pt,bt_pt,1);
     double t_QBt_MV_finish = TimingHelpers::timer();
     if(Doc_time)
      {
@@ -381,7 +383,8 @@ namespace oomph
     // form the matrix vector product helper
     double t_F_MV_start = TimingHelpers::timer();
     F_mat_vec_pt = new MatrixVectorProduct;
-    F_mat_vec_pt->setup(f_pt);
+    //F_mat_vec_pt->setup(f_pt);
+    this->setup_matrix_vector_product(F_mat_vec_pt,f_pt,0);
     double t_F_MV_finish = TimingHelpers::timer();
     if(Doc_time)
      {
@@ -416,7 +419,8 @@ namespace oomph
   // form the matrix vector operator for Bt
   double t_Bt_MV_start = TimingHelpers::timer();
   Bt_mat_vec_pt = new MatrixVectorProduct;
-  Bt_mat_vec_pt->setup(bt_pt);
+  //Bt_mat_vec_pt->setup(bt_pt);
+  this->setup_matrix_vector_product(Bt_mat_vec_pt,bt_pt,1);
   double t_Bt_MV_finish = TimingHelpers::timer();
   if(Doc_time)
    {
@@ -725,6 +729,15 @@ namespace oomph
  CRDoubleMatrix* 
  PressureBasedSolidLSCPreconditioner::assemble_mass_matrix_diagonal()
  {
+
+   {
+     std::ostringstream err_msg;
+     err_msg << "RAYRAY: assemble_mass_matrix_diagonal from solid_prec" << std::endl;
+     OomphLibWarning(
+         err_msg.str(),
+         OOMPH_CURRENT_FUNCTION,
+         OOMPH_EXCEPTION_LOCATION);
+   }
   // determine the rows required by this processor
   unsigned first_row = this->block_distribution_pt(0)->first_row();
   unsigned nrow_local = this->block_distribution_pt(0)->nrow_local();

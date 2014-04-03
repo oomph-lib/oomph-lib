@@ -343,7 +343,9 @@ private:
    {
     CRDoubleMatrix* block_matrix_0_1_pt = new CRDoubleMatrix;
     this->get_block(0,1,*block_matrix_0_1_pt);
-    Matrix_vector_product_0_1_pt->setup(block_matrix_0_1_pt);
+    //Matrix_vector_product_0_1_pt->setup(block_matrix_0_1_pt);
+    this->setup_matrix_vector_product(Matrix_vector_product_0_1_pt,
+                                      block_matrix_0_1_pt,1);
     delete block_matrix_0_1_pt;
    }
   
@@ -352,7 +354,9 @@ private:
    {
     CRDoubleMatrix* block_matrix_1_0_pt = new CRDoubleMatrix;
     this->get_block(1,0,*block_matrix_1_0_pt);
-    Matrix_vector_product_1_0_pt->setup(block_matrix_1_0_pt);
+    //Matrix_vector_product_1_0_pt->setup(block_matrix_1_0_pt);
+    this->setup_matrix_vector_product(Matrix_vector_product_1_0_pt,
+                                      block_matrix_1_0_pt,0);
     delete block_matrix_1_0_pt;
    }
   
@@ -737,16 +741,20 @@ void SimpleFSIPreconditioner<MATRIX>::identify_required_blocks(
    }
 #endif
 
+  std::cout << "is_master_block_preconditioner = " << this->is_master_block_preconditioner() << std::endl; 
+  
   // setup the meshes
   this->set_mesh(0,Navier_stokes_mesh_pt,
                  Allow_multiple_element_type_in_navier_stokes_mesh);
   this->set_mesh(1,Wall_mesh_pt,Allow_multiple_element_type_in_wall_mesh);
 
-  // get the number of fluid dofs from teh first element in the mesh
+  // get the number of fluid dofs from the first element in the mesh
   unsigned n_fluid_dof = this->ndof_types_in_mesh(0);
   unsigned n_dof = n_fluid_dof + this->ndof_types_in_mesh(1);
+  std::cout << "n_fluid_dof = " << n_fluid_dof << std::endl; 
+  std::cout << "n_dof = " << n_dof << std::endl; 
 
-  // this fsi precondtioner has two types of DOF fluid dofs and solid dofs
+  // this fsi preconditioner has two types of DOF fluid dofs and solid dofs
   Vector<unsigned> dof_to_block_map(n_dof,0);
   dof_to_block_map[n_fluid_dof-1]=1; // pressure
   for (unsigned i = n_fluid_dof; i < n_dof; i++) //solid
@@ -754,8 +762,27 @@ void SimpleFSIPreconditioner<MATRIX>::identify_required_blocks(
     dof_to_block_map[i] = 2;
    }
 
+  std::cout << "dof_to_block_map:" << std::endl; 
+  for (unsigned i = 0; i < dof_to_block_map.size(); i++) 
+  {
+    std::cout << dof_to_block_map[i] << " "; 
+  }
+  std::cout << "\n" << std::endl; 
+
+  std::cout << "b4 block setup" << std::endl; 
+  
   // Set up the blocks look up schemes
   this->block_setup(dof_to_block_map);
+  std::cout << "after block setup" << std::endl; 
+
+  unsigned tt_ndof_types = this->ndof_types();
+  unsigned tt_internal_ndof_types = this->internal_ndof_types();
+  unsigned tt_nblock_types = this->nblock_types();
+  unsigned tt_internal_nblock_types = this->internal_nblock_types();
+  std::cout << "ndof_types = " << tt_ndof_types << std::endl; 
+  std::cout << "internal_ndof_types = " << tt_internal_ndof_types << std::endl;
+  std::cout << "nblock_types = " << tt_nblock_types << std::endl; 
+  std::cout << "internal_nblock_types = " << tt_internal_nblock_types << std::endl; 
 
   // find number of block types
   n_dof = this->nblock_types();
@@ -768,9 +795,12 @@ void SimpleFSIPreconditioner<MATRIX>::identify_required_blocks(
 
   // Get pointers to the blocks
   DenseMatrix<CRDoubleMatrix*> block_matrix_pt(n_dof,n_dof,0);
+  std::cout << "SimpleFSIPreconditioner::setup() b4 get blocks" << std::endl; 
+  
   this->get_blocks(required_blocks,
                    block_matrix_pt);
 
+  std::cout << "SimpleFSIPreconditioner::setup() after get blocks" << std::endl; 
   // Build a big matrix from the blocks
   CRDoubleMatrix* P_matrix_pt=new CRDoubleMatrix
     (this->preconditioner_matrix_distribution_pt());
@@ -778,7 +808,7 @@ void SimpleFSIPreconditioner<MATRIX>::identify_required_blocks(
   // RAYRAY this will NOT work, use Block_distribution_pt instead of
   // Internal_block_distribution_pt
   CRDoubleMatrixHelpers::concatenate_without_communication(
-    this->Internal_block_distribution_pt, block_matrix_pt, *P_matrix_pt);
+    this->Block_distribution_pt, block_matrix_pt, *P_matrix_pt);
 
   // Delete blocks -- they're no longer needed.
   for (unsigned i = 0 ; i < n_dof; i++)

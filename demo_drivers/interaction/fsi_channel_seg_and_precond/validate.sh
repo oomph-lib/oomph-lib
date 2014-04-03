@@ -16,7 +16,7 @@ mkdir Validation
 # Validation for steady FSI collapsible channel (precond)
 #--------------------------------------------------------
 
-echo "Running steady preconditined solver validation"
+echo "Running steady preconditioned solver validation"
 ./steady_precond.bash
 mv STEADY_PRECONDITIONED_COLLAPSIBLE_CHANNEL_RUNS Validation
 echo "done"
@@ -25,7 +25,7 @@ echo "done"
 # Validation for unsteady FSI collapsible channel (precond)
 #----------------------------------------------------------
 
-echo "Running unsteady preconditined solver validation"
+echo "Running unsteady preconditioned solver validation"
 ./unsteady_precond.bash
 mv UNSTEADY_PRECONDITIONED_COLLAPSIBLE_CHANNEL_RUNS Validation
 echo "done"

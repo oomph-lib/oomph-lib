@@ -286,7 +286,9 @@ private:
   
   // Build the matvec operator for QBt
   QBt_mat_vec_pt = new MatrixVectorProduct;
-  QBt_mat_vec_pt->setup(bt_pt);
+  //QBt_mat_vec_pt->setup(bt_pt);
+  this->setup_matrix_vector_product(QBt_mat_vec_pt,
+                                    bt_pt, 1);
   
   // Kill gradient matrix B^T (it's been overwritten anyway and
   // needs to be recomputed afresh below)
@@ -298,7 +300,8 @@ private:
     
   // form the matrix vector product helper
   F_mat_vec_pt = new MatrixVectorProduct;
-  F_mat_vec_pt->setup(f_pt);
+  //F_mat_vec_pt->setup(f_pt);
+  this->setup_matrix_vector_product(F_mat_vec_pt,f_pt,0);
   
   // if F is a block preconditioner then we can delete the F matrix
   if (F_preconditioner_is_block_preconditioner)
@@ -313,7 +316,8 @@ private:
   
   // Form the matrix vector operator for Bt
   Bt_mat_vec_pt = new MatrixVectorProduct;
-  Bt_mat_vec_pt->setup(bt_pt);
+  //Bt_mat_vec_pt->setup(bt_pt);
+  this->setup_matrix_vector_product(Bt_mat_vec_pt,bt_pt,1);
   delete bt_pt;
   
   // If the P preconditioner has not been setup

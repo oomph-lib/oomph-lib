@@ -273,7 +273,7 @@ void ExactSubBiharmonicPreconditioner::setup()
   // RAYRAY this WILL be incorrect, we have to use the block distribution pt,
   // not for the internal blocks
   CRDoubleMatrixHelpers::concatenate_without_communication
-    (Internal_block_distribution_pt,
+    (Block_distribution_pt,
      matrix_of_block_pointers,
      *preconditioner_matrix_pt);
 
@@ -592,6 +592,7 @@ void InexactSubBiharmonicPreconditioner::compute_inexact_schur_complement()
   S_00_row_start[J_00_nrow] = S_00_nnz;
 
   // build the schur complement S00
+  // RAYRAY - make sure that this is correct, regarding the block distribution.
   S_00_pt = new CRDoubleMatrix(this->block_distribution_pt(0),J_00_nrow,
                                S_00_value,S_00_column_index,S_00_row_start);
   

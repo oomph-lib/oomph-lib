@@ -145,31 +145,91 @@ namespace oomph
  void NavierStokesSchurComplementPreconditioner::
  setup()
  {
+   std::cout << "Got in LSC setup()" << std::endl; 
+   
   // For debugging...
   bool doc_block_matrices=false;
 
-// RAYRAY REMOVE
-//  pause("Got in LSC!!!");
-//
-//  block_setup();
-//
-//  std::cout << "ndof_types() = " << this->ndof_types() << std::endl;
-//  std::cout << "internal_ndof_types() = " << this->internal_ndof_types() << std::endl; 
-//  std::cout << "nblock_types() = " << this->nblock_types() << std::endl;
-//  std::cout << "internal_nblock_types() = " << this->internal_nblock_types() << std::endl; 
-// 
-//  
-//  // Output all the blocks from original... and get block....
-//  unsigned tmp_nblock_types = this->internal_ndof_types();
-//  std::cout << "nblock_types() " << tmp_nblock_types << std::endl; 
-//
-//  CRDoubleMatrix tmp_blk = get_block(1,1);
-//
-//  
-//  pause("LSC TIMBERRRR"); 
-  
+  // Encapsulation
+  {
+ //RAYRAY REMOVE
 
-  
+
+ unsigned tmp_ndof_types = this->ndof_types();
+ std::cout << "ndof_types() = " << tmp_ndof_types << std::endl;
+
+ unsigned tmp_internal_ndof_types = this->internal_ndof_types();
+ std::cout << "internal_ndof_types() = " << tmp_internal_ndof_types << std::endl; 
+
+// std::cout << "Calling block setup with no arguments." << std::endl; 
+// 
+// block_setup();
+//
+// unsigned tmp_internal_nblock_types = this->internal_nblock_types();
+// std::cout << "internal_nblock_types() = " << tmp_internal_nblock_types << std::endl;
+//
+// unsigned tmp_nblock_types = this->nblock_types();
+// std::cout << "nblock_types() = " << tmp_nblock_types << std::endl; 
+
+
+// std::cout << "Get block from original matrix" << std::endl; 
+// for (unsigned block_i = 0; block_i < tmp_internal_nblock_types; block_i++) 
+// {
+//   for (unsigned block_j = 0; block_j < tmp_internal_nblock_types; block_j++) 
+//   {
+//     CRDoubleMatrix tmptmpblock;
+//     get_block_from_original_matrix(block_i,block_j,tmptmpblock);
+//     unsigned tmptmpnrow = tmptmpblock.nrow();
+//     unsigned tmptmpncol = tmptmpblock.ncol();
+//     std::cout << "block("<<block_i<<","<<block_j<<"), "
+//               << "nrow: " << tmptmpnrow <<", ncol: " << tmptmpncol << std::endl;
+//   }
+// }
+
+// // Test 2, testing the 
+// std::cout << "\n" << std::endl; 
+// for(unsigned tt_i = 0; tt_i < tmp_nblock_types; tt_i++)
+// {
+//   for(unsigned tt_j = 0; tt_j < tmp_nblock_types; tt_j++)
+//   {
+//   CRDoubleMatrix yet_another_tmp_block = this->get_block(tt_i,tt_j);
+//   unsigned tt_nrow = yet_another_tmp_block.nrow();
+//   unsigned tt_ncol = yet_another_tmp_block.ncol();
+//   std::cout << "block(" << tt_i<<","<<tt_j<<") "
+//             << "has nrow = " << tt_nrow <<", ncol = " << tt_ncol << std::endl;
+//   std::cout << "\n" << std::endl; 
+//   }
+// }
+ 
+// // Test 3
+// Vector<unsigned> tmp_dof_to_block_map(tmp_ndof_types,0);
+// tmp_dof_to_block_map[tmp_ndof_types - 1] = 1;
+// block_setup(tmp_dof_to_block_map);
+// unsigned tt_nblock_types = this->nblock_types();
+// std::cout << "nblock_types = " << tt_nblock_types << std::endl;
+// 
+//
+// std::cout << "\n" << std::endl; 
+// for (unsigned tt_i = 0; tt_i < tt_nblock_types; tt_i++)
+// {
+//   for (unsigned tt_j = 0; tt_j < tt_nblock_types; tt_j++) 
+//   {
+//     CRDoubleMatrix tt_block = this->get_block(tt_i,tt_j);
+//     unsigned tt_nrow = tt_block.nrow();
+//     unsigned tt_ncol = tt_block.ncol();
+//     std::cout << "block(" << tt_i<<","<<tt_j<<") "
+//               << "has nrow = " << tt_nrow <<", ncol = " << tt_ncol << std::endl;
+//     std::cout << "\n" << std::endl;  
+//   }
+// }
+ 
+// std::cout << "\n" << std::endl; 
+// std::cout << "DONE" << std::endl; 
+// pause("Hello, is it me you're looking for?"); 
+ 
+
+  }// end encapsulation
+
 
   //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   // NOTE: In the interest of minimising memory usage, several containers
@@ -262,20 +322,6 @@ namespace oomph
   dof_to_block_map[ndof_types-1]=1;
 
   this->block_setup(dof_to_block_map);
-// RAYRAY
-//  std::cout << "From LSC prec" << std::endl; 
-//  unsigned tmp_nblocks = this->nblock_types(true);
-//  std::cout << "There are " << tmp_nblocks << " blocks" << std::endl; 
-//  
-//  for (unsigned block_j = 0; block_j < tmp_nblocks; block_j++) 
-//  {
-//    CRDoubleMatrix* tmp_block_pt = new CRDoubleMatrix;
-//    this->get_block_from_original_matrix(0,block_j,*tmp_block_pt);
-//    unsigned tmp_block_ncol = tmp_block_pt->ncol();
-//    std::cout << tmp_block_ncol << " "; 
-//  }
-//  std::cout << "\n" << std::endl; 
-//  //pause("done!"); 
 
   double t_block_finish = TimingHelpers::timer();
   double block_setup_time = t_block_finish - t_block_start;
@@ -299,6 +345,10 @@ namespace oomph
   double t_get_B_start = TimingHelpers::timer();
   CRDoubleMatrix* b_pt = new CRDoubleMatrix;
   this->get_block(1,0,*b_pt);
+  
+  unsigned b_nrow = b_pt->nrow();
+  unsigned b_ncol = b_pt->ncol();
+
   double t_get_B_finish = TimingHelpers::timer();
   if(Doc_time)
    {
@@ -321,6 +371,7 @@ namespace oomph
   CRDoubleMatrix* inv_v_mass_pt = 0;
   CRDoubleMatrix* inv_p_mass_pt = 0;
 
+  // RAYRAY get rid of internal_ndof_types from here
   unsigned n_velocity_doftypes = this->internal_ndof_types() - 1;
 
   DenseMatrix<CRDoubleMatrix*> inv_v_mass_sub_pt(n_velocity_doftypes,
@@ -334,10 +385,14 @@ namespace oomph
      // up nicely to hide the precomputed-ness, once I have worked out a good
      // way to get the mass matrices of all the most fine grain blocks.
      // For now, this works and will only affect my code - RAYRAY
-     if(this->preconditioner_blocks_have_been_replaced())
+   //  if(this->preconditioner_blocks_have_been_replaced())
       {
         for (unsigned block_i = 0; block_i < n_velocity_doftypes; block_i++) 
          {
+           std::cout << "Getting vmm for block: " << block_i << std::endl; 
+           std::cout << "from block to dof map: " << Block_to_dof_map_coarse[0][block_i] << "\n" << std::endl; 
+           
+           
           // We only need the velocity mass matrix
           assemble_inv_press_and_veloc_mass_matrix_diagonal
             (inv_p_mass_pt, inv_v_mass_sub_pt(block_i,block_i), 
@@ -348,7 +403,7 @@ namespace oomph
 
         // Build the matrix with just the distribution.
         inv_v_mass_pt = 
-          new CRDoubleMatrix(this->Block_distribution_pt[0]);
+          new CRDoubleMatrix(this->block_distribution_pt(0));
 
         // Get the linear algebra distributions of the blocks we require.
         Vector<LinearAlgebraDistribution*> tmp_dist_pt(n_velocity_doftypes,0);
@@ -368,13 +423,13 @@ namespace oomph
           delete inv_v_mass_sub_pt(block_i,block_i);
         }
       }
-     else
-      {
-       // We only need the velocity mass matrix
-       assemble_inv_press_and_veloc_mass_matrix_diagonal(inv_p_mass_pt,
-                                                         inv_v_mass_pt,
-                                                         false);
-      }
+    // else
+    //  {
+    //   // We only need the velocity mass matrix
+    //   assemble_inv_press_and_veloc_mass_matrix_diagonal(inv_p_mass_pt,
+    //                                                     inv_v_mass_pt,
+    //                                                     false);
+    //  }
    }
   else
    {
@@ -739,12 +794,13 @@ namespace oomph
     temp_vec.clear();
     QBt_mat_vec_pt->multiply_transpose(another_temp_vec, temp_vec);
     
+    
     // NOTE: The vector temp_vec now contains E P^{-1} r_p
     
     // Solve second pressure Poisson system using preconditioner_solve
     another_temp_vec.clear();
     P_preconditioner_pt->preconditioner_solve(temp_vec, another_temp_vec);
-    
+
     // NOTE: The vector another_temp_vec now contains z_p = P^{-1} E P^{-1} r_p
     //       as required (apart from the sign which we'll fix in the
     //       next step.
@@ -1687,13 +1743,13 @@ namespace oomph
   const bool& do_both, const unsigned& block_i)
  {
   // determine the velocity rows required by this processor
-  unsigned v_first_row = this->block_distribution_pt(block_i)->first_row();
-  unsigned v_nrow_local = this->block_distribution_pt(block_i)->nrow_local();
-  unsigned v_nrow = this->block_distribution_pt(block_i)->nrow();
+  unsigned v_first_row = this->internal_block_distribution_pt(block_i)->first_row();
+  unsigned v_nrow_local = this->internal_block_distribution_pt(block_i)->nrow_local();
+  unsigned v_nrow = this->internal_block_distribution_pt(block_i)->nrow();
 
-//  std::cout << "v_first_row: " << v_first_row << std::endl; 
-//  std::cout << "v_nrow_local: " << v_nrow_local << std::endl; 
-//  std::cout << "v_nrow: " << v_nrow << std::endl; 
+  std::cout << "v_first_row: " << v_first_row << std::endl; 
+  std::cout << "v_nrow_local: " << v_nrow_local << std::endl; 
+  std::cout << "v_nrow: " << v_nrow << std::endl; 
   
   // create storage for the diagonals
   double* v_values = new double[v_nrow_local];
@@ -1714,11 +1770,11 @@ namespace oomph
    {
     // determine the pressure rows required by this processor
     // pressure block is located at internal_ndof_types()
-    p_first_row = this->block_distribution_pt(n_velocity_blocktypes)
+    p_first_row = this->internal_block_distribution_pt(n_velocity_blocktypes)
                         ->first_row();
-    p_nrow_local = this->block_distribution_pt(n_velocity_blocktypes)
+    p_nrow_local = this->internal_block_distribution_pt(n_velocity_blocktypes)
                          ->nrow_local();
-    p_nrow = this->block_distribution_pt(n_velocity_blocktypes)->nrow();
+    p_nrow = this->internal_block_distribution_pt(n_velocity_blocktypes)->nrow();
   
     // create storage for the diagonals
     p_values = new double[p_nrow_local];
@@ -1738,6 +1794,9 @@ namespace oomph
    }
 
 #endif
+  
+  oomph_info << "is this distributed? " << distributed << std::endl; 
+  
 
   // next we get the diagonal velocity mass matrix data
   if (distributed)
@@ -1749,6 +1808,14 @@ namespace oomph
 
     // and my rank
     unsigned my_rank = comm_pt()->my_rank();
+
+    oomph_info << "nproc: " << nproc << std::endl; 
+
+    std::cout << "my_rank: " << my_rank << std::endl; 
+    
+
+    
+    
 
     // determine the rows for which we have lookup rows
 
@@ -1762,12 +1829,21 @@ namespace oomph
     last_lookup_row = first_lookup_row + 
      this->master_distribution_pt()->nrow_local() - 1;
 
+    oomph_info << "first_lookup_row = " << first_lookup_row << std::endl; 
+    oomph_info << "last_lookup_row = " << last_lookup_row << std::endl;
+
     // find number of local elements
     unsigned n_el = Navier_stokes_mesh_pt->nelement();
+
+    oomph_info << "n_el = " << n_el << std::endl; 
+    
     
     // get the master distribution pt
     const LinearAlgebraDistribution* master_distribution_pt = 
      this->master_distribution_pt();
+
+    oomph_info << "I am master_distribution_pt" << std::endl; 
+    
 
     // Do the two blocks (0: veloc; 1: press)
     unsigned max_block=0; // RAYRAY Maybe change this?
@@ -1809,7 +1885,8 @@ namespace oomph
 //      const LinearAlgebraDistribution* velocity_or_press_dist_pt 
 //       = this->block_distribution_pt(block_index);
       const LinearAlgebraDistribution* velocity_or_press_dist_pt 
-       = this->block_distribution_pt(block_i);
+       = this->internal_block_distribution_pt(block_i);
+
      
       // get the contribution for each element
       for (unsigned e = 0; e < n_el; e++)
@@ -2476,7 +2553,7 @@ namespace oomph
   v_row_start[v_nrow_local] = v_nrow_local;
   
   // Build the velocity mass matrix
-  inv_v_mass_pt = new CRDoubleMatrix(this->block_distribution_pt(block_i));
+  inv_v_mass_pt = new CRDoubleMatrix(this->internal_block_distribution_pt(block_i));
   inv_v_mass_pt->build_without_copy(v_nrow,v_nrow_local,
                                     v_values,v_column_index,
                                     v_row_start);
@@ -2510,7 +2587,7 @@ namespace oomph
     p_row_start[p_nrow_local] = p_nrow_local;
     
     // Build the pressure mass matrix
-    inv_p_mass_pt = new CRDoubleMatrix(this->block_distribution_pt(1));
+    inv_p_mass_pt = new CRDoubleMatrix(this->internal_block_distribution_pt(1));
     inv_p_mass_pt->build_without_copy(p_nrow,p_nrow_local,
                                       p_values,p_column_index,
                                       p_row_start);

@@ -103,13 +103,33 @@ namespace oomph
 
   /// \short Constructor
   BlockPreconditioner()
-   : Ndof_types_in_mesh(0),
-     Preconditioner_matrix_distribution_pt(0)
+   : Ndof_types_in_mesh(0)
   {
    // Initially set the master block preconditioner pointer to zero
    // indicating that this is stand-alone preconditioner that will
    // set up its own block lookup schemes etc.
    Master_block_preconditioner_pt = 0;
+
+   // The distribution of the concatenation of the internal blocks.
+   // This is only for the master block preconditioner.
+   // For subsidiary block preconditioners, this remains null.
+   //
+   // Because BlockPreconditioners are DistributedLinearAlgebraObjects, they 
+   // have a distribution. For the upper most master block preconditioner,
+   // this is the distribution of the underlying Jacobian.
+   //
+   // For all subsidiary block preconditioners, this remains null. The 
+   // concatenation of the distribution of the internal blocks are stored
+   // as the distribution of the BlockPreconditioner.
+   //
+   // This a design decision, for better or worse, we don't know.
+   //
+   // RAYRAY - come back and edit this comment once I find out why this is 
+   // done. For now, I can see no reason for the inconsistency.
+   Internal_preconditioner_matrix_distribution_pt = 0;
+
+   // The concatenation of the external block distributions.
+   Preconditioner_matrix_distribution_pt = 0;
 
    // Initialise number of rows in this block preconditioner.
    // This information is maintained if used as subsidiary or
@@ -377,28 +397,28 @@ namespace oomph
 
     // Assume that if the preconditioner blocks have been precomputed, we
     // would want to use them.
-    if(Preconditioner_doftypes_have_been_coarsened)
-    {
+//    if(Preconditioner_doftypes_have_been_coarsened)
+//    {
       // RAYRAY REMOVE
-      std::cout << "GETTING COARSENED BLOCK(" << i << "," << j<<")" << std::endl; 
+//      std::cout << "GETTING COARSENED BLOCK(" << i << "," << j<<")" << std::endl; 
       get_coarsened_block(i,j,output_matrix);
-    }
-    else
-    {
-      if(Replacement_dof_block_pt.get(i,j) == 0)
-      {
-        // RAYRAY REMOVE
-        std::cout << "GETTING ORIGINAL MATRIX BLOCK("<<i<<","<<j<<")"<< std::endl; 
-        get_block_from_original_matrix(i,j,output_matrix);
-      }
-      else
-      {
-        // RAYRAY REMOVE
-        std::cout << "GETTING REPLACEMENT BLOCK("<<i<<","<<j<<")" << std::endl; 
-        cr_double_matrix_deep_copy(Replacement_dof_block_pt.get(i,j),
-            output_matrix);
-      }
-    }
+//    }
+//    else
+//    {
+//      if(Replacement_dof_block_pt.get(i,j) == 0)
+//      {
+//        // RAYRAY REMOVE
+//        std::cout << "GETTING ORIGINAL MATRIX BLOCK("<<i<<","<<j<<")"<< std::endl; 
+//        get_block_from_original_matrix(i,j,output_matrix);
+//      }
+//      else
+//      {
+//        // RAYRAY REMOVE
+//        std::cout << "GETTING REPLACEMENT BLOCK("<<i<<","<<j<<")" << std::endl; 
+//        cr_double_matrix_deep_copy(Replacement_dof_block_pt.get(i,j),
+//            output_matrix);
+//      }
+//    }
   } // EOFunc get_block(...)
 
 
@@ -546,6 +566,10 @@ namespace oomph
 
   /// \short Given the naturally ordered vector, v, return
   /// the vector rearranged in block order in w.
+  void internal_get_block_ordered_preconditioner_vector(const DoubleVector& v,
+                                                        DoubleVector& w) const;
+
+  /// \short RAYRAY comment
   void get_block_ordered_preconditioner_vector(const DoubleVector& v,
                                                DoubleVector& w) const;
 
@@ -555,6 +579,10 @@ namespace oomph
   /// associated with the blocks of the subsidiary preconditioner will be
   /// included. Hence the length of w is master_nrow() whereas that of the v
   /// is
+  void internal_return_block_ordered_preconditioner_vector(const DoubleVector& w,
+                                                  DoubleVector& v) const;
+
+  /// \short RAYRAY comment
   void return_block_ordered_preconditioner_vector(const DoubleVector& w,
                                                   DoubleVector& v) const;
 
@@ -617,72 +645,6 @@ namespace oomph
     return Block_to_dof_map_coarse.size();
   } // EOFunc nblock_types(...)
 
-
-
-  /// \short Return the number of fine DOF types in a coarse DOF type.
-  unsigned ndof_types_in_coarse_dof_type(const unsigned& coarse_doftype) const
-   {
-    if(preconditioner_blocks_have_been_replaced())
-     {
-#ifdef PARANOID
-      if(coarse_doftype >= Doftype_coarsen_map_coarse.size())
-       {
-        std::ostringstream err_msg;
-        err_msg << "You have requested the size of subvector "
-                << coarse_doftype << ".\n"
-                << "But the Doftype_coarsen_map_coarse has size "
-                << Doftype_coarsen_map_coarse.size() << "."
-                << std::endl;
-        throw OomphLibError(err_msg.str(),
-                            OOMPH_CURRENT_FUNCTION,
-                            OOMPH_EXCEPTION_LOCATION);
-       }
-#endif
-
-      return Doftype_coarsen_map_coarse[coarse_doftype].size();
-     }
-    else
-    // The number of coarse doftypes types is the same as the number of
-    // fine doftypes.
-     {
-      return 1;
-     }
-   } // EOFunc ndof_types_in_coarse_dof_type(...)
-
-  /// \short Access function for the sub vector containing the most
-  /// fine grain DOF types.
-  Vector<unsigned> coarse_dof_type_subvec(const unsigned& coarse_doftype) const
-   {
-#ifdef PARANOID
-    // Check that preconditioner blocks have been precomputed.
-    if(!preconditioner_blocks_have_been_replaced())
-     {
-      std::ostringstream err_msg;
-      err_msg << "Preconditioner blocks have not been precomputed.\n"
-              << "Therefore the Doftype_coarsen_map_coarse is not set."
-              << std::endl;
-      throw OomphLibError(err_msg.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-     }
-    
-    // A range check.
-    if(coarse_doftype >= Doftype_coarsen_map_coarse.size())
-     {
-      std::ostringstream err_msg;
-      err_msg << "You have requested subvector "
-              << coarse_doftype << ".\n"
-              << "But the Doftype_coarsen_map_coarse has size "
-              << Doftype_coarsen_map_coarse.size() << "."
-              << std::endl;
-      throw OomphLibError(err_msg.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-     }
-#endif
-
-    return Doftype_coarsen_map_coarse[coarse_doftype];
-   } // EOFunc coarse_dof_type_subvec(...)
 
   /// \short Return the total number of DOF types.
   unsigned internal_ndof_types() const
@@ -870,11 +832,96 @@ namespace oomph
    return -1;
   } // EOFunc index_in_block(...)
 
+  /// \short Access function to the internal block distributions.
+  const LinearAlgebraDistribution*
+    internal_block_distribution_pt(const unsigned b) const
+    {
+#ifdef PARANOID
+      if(Internal_block_distribution_pt.size() == 0)
+      {
+        std::ostringstream error_msg;
+        error_msg <<"Internal block distributions are not set up.\n"
+          << "Have you called block_setup(...)?\n"
+          << std::endl;
+        throw OomphLibError(error_msg.str(),
+            OOMPH_CURRENT_FUNCTION,
+            OOMPH_EXCEPTION_LOCATION);
+      }
+      if(b > internal_nblock_types())
+      {
+        std::ostringstream error_msg;
+        error_msg <<"You requested the distribution for the internal block "
+          << b << ".\n"
+          << "But there are only " << internal_nblock_types() << " block types.\n"
+          << std::endl;
+        throw OomphLibError(error_msg.str(),
+            OOMPH_CURRENT_FUNCTION,
+            OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+      return Internal_block_distribution_pt[b];
+    } // EOFunc internal_block_distribution_pt(...)
+
   /// \short Access function to the block distributions.
   const LinearAlgebraDistribution*
   block_distribution_pt(const unsigned b) const
   {
-   return Internal_block_distribution_pt[b];
+#ifdef PARANOID
+      if(Block_distribution_pt.size() == 0)
+      {
+        std::ostringstream error_msg;
+        error_msg <<"Block distributions are not set up.\n"
+          << "Have you called block_setup(...)?\n"
+          << std::endl;
+        throw OomphLibError(error_msg.str(),
+            OOMPH_CURRENT_FUNCTION,
+            OOMPH_EXCEPTION_LOCATION);
+      }
+      if(b > nblock_types())
+      {
+        std::ostringstream error_msg;
+        error_msg <<"You requested the distribution for the block "
+          << b << ".\n"
+          << "But there are only " << nblock_types() << " block types.\n"
+          << std::endl;
+        throw OomphLibError(error_msg.str(),
+            OOMPH_CURRENT_FUNCTION,
+            OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+
+   return Block_distribution_pt[b];
+  } // EOFunc block_distribution_pt(...)
+
+  /// \short Access function to the block distributions.
+  LinearAlgebraDistribution*
+  block_distribution_pt(const unsigned b)
+  {
+#ifdef PARANOID
+      if(Block_distribution_pt.size() == 0)
+      {
+        std::ostringstream error_msg;
+        error_msg <<"Block distributions are not set up.\n"
+          << "Have you called block_setup(...)?\n"
+          << std::endl;
+        throw OomphLibError(error_msg.str(),
+            OOMPH_CURRENT_FUNCTION,
+            OOMPH_EXCEPTION_LOCATION);
+      }
+      if(b > nblock_types())
+      {
+        std::ostringstream error_msg;
+        error_msg <<"You requested the distribution for the block "
+          << b << ".\n"
+          << "But there are only " << nblock_types() << " block types.\n"
+          << std::endl;
+        throw OomphLibError(error_msg.str(),
+            OOMPH_CURRENT_FUNCTION,
+            OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+
+   return Block_distribution_pt[b];
   } // EOFunc block_distribution_pt(...)
 
   /// \short Access function to the distribution of the master
@@ -1061,6 +1108,8 @@ namespace oomph
     }
 
    // delete the prec matrix dist pt
+   delete Internal_preconditioner_matrix_distribution_pt;
+   Internal_preconditioner_matrix_distribution_pt = 0;
    delete Preconditioner_matrix_distribution_pt;
    Preconditioner_matrix_distribution_pt = 0;
   } // EOFunc clear_block_preconditioner_base()
@@ -1098,12 +1147,19 @@ namespace oomph
    oomph_info << std::endl;
    oomph_info << "Master block preconditioner distribution:" << std::endl;
    oomph_info << *master_distribution_pt() << std::endl;
+   oomph_info << "Internal preconditioner matrix distribution:" << std::endl;
+   oomph_info << *internal_preconditioner_matrix_distribution_pt() << std::endl;
    oomph_info << "Preconditioner matrix distribution:" << std::endl;
    oomph_info << *preconditioner_matrix_distribution_pt() << std::endl;
    for (unsigned b = 0; b < Internal_nblock_types; b++)
     {
-     oomph_info << "Block " << b << " distribution:" << std::endl;
+     oomph_info << "Internal block " << b << " distribution:" << std::endl;
      oomph_info << *Internal_block_distribution_pt[b] << std::endl;
+    }
+   for (unsigned b = 0; b < nblock_types(); b++)
+    {
+     oomph_info << "Block " << b << " distribution:" << std::endl;
+     oomph_info << *Block_distribution_pt[b] << std::endl;
     }
 
    // DS: the functions called here no longer exist and this function is
@@ -1424,15 +1480,15 @@ namespace oomph
                                    CRDoubleMatrix* block_pt,
                                    unsigned block_col_index)
   {
-    if(this->preconditioner_blocks_have_been_replaced())
-     {
+//    if(this->preconditioner_blocks_have_been_replaced())
+//     {
       matvec_prod_pt->setup(block_pt,
                             Block_distribution_pt[block_col_index]);
-     }
-    else
-     {
-      matvec_prod_pt->setup(block_pt);
-     }
+//     }
+//    else
+//     {
+//      matvec_prod_pt->setup(block_pt);
+//     }
   } // EOFunc setup_matrix_vector_product(...)
 
 
@@ -1756,13 +1812,25 @@ namespace oomph
   }
 
   /// \short access function to the preconditioner matrix distribution pt
+  /// RAYRAY this will need to be changed.
+  /// preconditioner_matrix_distribution_pt always returns the concatenation 
+  /// of the internal block distributions. Of course this will break, we need
+  /// to use the concatenation of the external block distributions.
+  const LinearAlgebraDistribution*
+  internal_preconditioner_matrix_distribution_pt() const
+  {
+   if (is_master_block_preconditioner())
+    return Internal_preconditioner_matrix_distribution_pt;
+   else
+    return this->distribution_pt();
+  }
+
+  // RAYRAY put comment
   const LinearAlgebraDistribution*
   preconditioner_matrix_distribution_pt() const
   {
-   if (is_master_block_preconditioner())
+    // RAYRAY put paranoid tests
     return Preconditioner_matrix_distribution_pt;
-   else
-    return this->distribution_pt();
   }
 
   /// \short Precomputed (and possibly modified) blocks.
@@ -1982,9 +2050,18 @@ namespace oomph
   Vector<unsigned> Nrows_to_recv_for_get_ordered;
 #endif
 
-  /// \short The distribution of the preconditioner matrix - only used if
-  /// this preconditioner is a master preconditioner. Warning: always use
-  /// the access function preconditioner_matrix_distribution_pt().
+  /// \short The distribution of the (internal) preconditioner matrix. This is 
+  /// formed by concatenating the distribution of the internal blocks.
+  /// This is obsolete code, maintained for backwards compatibility.
+  /// Below is the old comment:
+  /// 
+  /// - only used if this preconditioner is a master preconditioner. 
+  /// Warning: always use the access function 
+  /// internal_preconditioner_matrix_distribution_pt().
+  LinearAlgebraDistribution* Internal_preconditioner_matrix_distribution_pt;
+
+  /// \short The distribution of the preconditioner matrix. This is the
+  /// concatenation of the block distribution.
   LinearAlgebraDistribution* Preconditioner_matrix_distribution_pt;
 
   /// \short Static boolean to allow block_matrix_test(...) to be run.
