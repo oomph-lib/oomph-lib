@@ -266,7 +266,7 @@ namespace oomph
   /// \short lagrange multiplier preconditioner pt
   Vector<Preconditioner*> Lagrange_multiplier_preconditioner_pt;
   
-  /// The Lagrange multiplier subsidary preconditioner function pointer
+  /// The Lagrange multiplier subsidiary preconditioner function pointer
   SubsidiaryPreconditionerFctPt 
    Lagrange_multiplier_subsidiary_preconditioner_function_pt;
   

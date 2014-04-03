@@ -46,8 +46,6 @@
 #include "navier_stokes_elements.h"
 #include "refineable_navier_stokes_elements.h"
 #include "navier_stokes_preconditioners.h"
-//#include <algorithm>
-
 
 namespace oomph
 {
@@ -112,18 +110,35 @@ namespace oomph
  {
    public:
 
+  /// \short This preconditioner includes the option to use subsidiary 
+  /// operators other than SuperLUPreconditioner for this problem. 
+  /// This is the typedef of a function that should return an instance
+  /// of a subsidiary preconditioning operator.  This preconditioner is 
+  /// responsible for the destruction of the subsidiary preconditioners.
+  typedef Preconditioner* (*SubsidiaryPreconditionerFctPt)();
 
   /// Constructor - sets the defaults for control flags
    LagrangeEnforcedflowPreconditioner():BlockPreconditioner<CRDoubleMatrix>()
    {
-    // Set default preconditioners
+    // Null the pointers:
+    // The Navier Stokes preconditioner pointer.
     Navier_stokes_preconditioner_pt = 0;
+    // Null the function pointer which is used to create the subsidiary
+    // preconditioners for the W block(s)
+    Lagrange_multiplier_subsidiary_preconditioner_function_pt = 0;
 
-    // new temp exact prec
-    Exact_prec_pt = 0;
+    // Set the vector of preconditioner pointers for the W block(s) to zero.
+    Lagrange_multiplier_preconditioner_pt.resize(0);
 
-    // flag to indicate whether the default w preconditioner is used
-    Using_superlu_w_preconditioner = true;
+    // By default, the Lagrange multiplier block is preconditioned by the 
+    // SuperLU preconditioner. To be honest, it does not matter what we set
+    // here, it is reset later in the function setup(...).
+    Lagrange_multiplier_preconditioner_is_block_preconditioner = false;
+
+    // By default, the Navier Stokes block is preconditioned by the 
+    // Least Square Commutator (LSC) preconditioner. To be honest, it foes not
+    // matter what we set here, since it is reset in the function setup(...).
+    Navier_stokes_preconditioner_is_block_preconditioner = true;
 
     // flag to indicate to use SuperLU or not.
     Using_superlu_ns_preconditioner = true;
@@ -237,21 +252,31 @@ namespace oomph
    DoubleVector yet_another_temp_vec;
 
    // First we solve all the w blocks:
-   // Loop through all of the Lagrange multipliers
-   for(unsigned l_i = 0; l_i < N_lagrange_doftypes; l_i++)
-    {
-     // Get the block type of block l_i
-     unsigned l_ii = N_fluid_doftypes + l_i;
+   if(Lagrange_multiplier_preconditioner_is_block_preconditioner)
+   {
+     for (unsigned l_i = 0; l_i < N_lagrange_doftypes; l_i++) 
+     {
+       Lagrange_multiplier_preconditioner_pt[l_i]->preconditioner_solve(r,z);
+     }
+   }
+   else
+   {
+     // Loop through all of the Lagrange multipliers
+     for(unsigned l_i = 0; l_i < N_lagrange_doftypes; l_i++)
+     {
+       // Get the block type of block l_i
+       unsigned l_ii = N_fluid_doftypes + l_i;
 
-     // Extract the block
-     this->get_block_vector(l_ii,r,temp_vec);
-     W_preconditioner_pts[l_i]->preconditioner_solve(temp_vec,
-                                                     another_temp_vec);
+       // Extract the block
+       this->get_block_vector(l_ii,r,temp_vec);
+       Lagrange_multiplier_preconditioner_pt[l_i]->preconditioner_solve(temp_vec,
+           another_temp_vec);
 
-     this->return_block_vector(l_ii,another_temp_vec,z);
-     temp_vec.clear();
-     another_temp_vec.clear();
-    }
+       this->return_block_vector(l_ii,another_temp_vec,z);
+       temp_vec.clear();
+       another_temp_vec.clear();
+     }
+   }
    
    // Now solve the Navier-Stokes block.
 
@@ -440,35 +465,20 @@ namespace oomph
     }
   }
 
-  /// Function to set a new momentum matrix preconditioner (inexact solver)
-  void set_w_preconditioner(Preconditioner* new_w_preconditioner_pt)
-  {
-   // If the default preconditioner has been used
-   // clean it up now...
-   if (Using_superlu_w_preconditioner)
-    {
-     delete W_preconditioner_pt;
-    }
-   W_preconditioner_pt = new_w_preconditioner_pt;
-   Using_superlu_w_preconditioner = false;
-  }
-
-  ///\short Function to (re-)set momentum matrix preconditioner (inexact
-  /// solver) to SuperLU
-  void set_w_superlu_preconditioner()
-  {
-   if (!Using_superlu_w_preconditioner)
-    {
-     delete W_preconditioner_pt;
-     Using_superlu_w_preconditioner = true;
-    }
-  }
-
-
   void set_doc_linear_solver_info_pt
    (DocLinearSolverInfo* doc_linear_solver_info_pt)
   {
    Doc_linear_solver_info_pt = doc_linear_solver_info_pt;
+  }
+
+  /// \short By default the Lagrange multiplier subsidiary systems are 
+  /// preconditioner with SuperLUPreconditioner. For a different 
+  /// preconditioner, pass a function to this 
+  /// method returning a different subsidiary operator.
+  void set_lagrange_multiplier_subsidiary_preconditioner
+   (SubsidiaryPreconditionerFctPt prec_fn)
+  {
+   Lagrange_multiplier_subsidiary_preconditioner_function_pt = prec_fn;
   }
 
   /// \short Clears the memory.
@@ -493,25 +503,27 @@ namespace oomph
   ////////// NEW STUFF
   bool Use_default_norm_of_f_scaling;
 
+  /// The Lagrange multiplier subsidiary preconditioner function pointer
+  SubsidiaryPreconditionerFctPt 
+   Lagrange_multiplier_subsidiary_preconditioner_function_pt;
 
-  // Pointer to the 'preconditioner' for the W matrix
-  // This will only be used if the user provides a preconditioner. Otherwise
-  // we will use superLU preconditioners and solve each block using
-  // W_preconditioner_pts
-  Preconditioner* W_preconditioner_pt;
+  /// Same W solvers are used in both exact and LSC.
+  /// Pointer to the 'preconditioner' for the W matrix
+  Vector<Preconditioner*> Lagrange_multiplier_preconditioner_pt;
 
-  // Pointer to the 'preconditioner' for the Navier-Stokes block
+  /// Boolean to indicate if the Lagrange multiplier preconditioner is a 
+  /// block preconditioner or not.
+  bool Lagrange_multiplier_preconditioner_is_block_preconditioner;
+  
+  /// Pointer to the 'preconditioner' for the Navier-Stokes block
   Preconditioner* Navier_stokes_preconditioner_pt;
-  Preconditioner* Exact_prec_pt;
-  // Same W solvers are used in both exact and LSC.
-  // Pointer to the 'preconditoner' for the W matrix
-  Vector<Preconditioner*> W_preconditioner_pts;
+
+  /// Boolean to indicate if the preconditioner for the Navier Stokes block
+  /// is a block preconditioner or not.
+  bool Navier_stokes_preconditioner_is_block_preconditioner;
 
   // flag to indicate whether the default NS preconditioner is used
   bool Using_superlu_ns_preconditioner;
-
-  // flag to indicate whether the default w preconditioner is used
-  bool Using_superlu_w_preconditioner;
 
   // Bool to use diagonal or block diagonal W block.
   bool Use_diagonal_w_block;
@@ -917,33 +929,30 @@ namespace oomph
   // turn_into_subsidiary_block_preconditioner(...).
   //
   // To do this, we first work out a few number of dof types.
- 
 
-  /////// Working out the dof types ///////
+  // Get the number of dof types.
+  unsigned n_doftypes = ndof_types();
+  std::cout << "n_doftypes = " << n_doftypes << std::endl; 
+  
 
-  // Zero the number of dof types. This is stored in block_preconditioner.h,
-  // but only calculated when block_setup(...) is called. I tried to move this
-  // out in to another function but something goes wrong...
-  unsigned n_doftypes = 0;
-
-  // Compute the variables we just reset!
-  if (this->is_master_block_preconditioner())
-   {
-    // Loop through the meshes.
-    for(unsigned mesh_i = 0; mesh_i < nmesh; mesh_i++)
-     {
-      n_doftypes += this->ndof_types_in_mesh(mesh_i);
-     }
-   }
-  else
-   {
-    pause("RAYRAY todo"); 
-    
-    // RAYEDIT - I'm not sure what to do here.
-    // I'll cross the bridge when I come to it.
-    n_doftypes = this->ndof_types();
-    N_fluid_doftypes = 5;
-   }
+//  // Compute the variables we just reset!
+//  if (this->is_master_block_preconditioner())
+//   {
+//    // Loop through the meshes.
+//    for(unsigned mesh_i = 0; mesh_i < nmesh; mesh_i++)
+//     {
+//      n_doftypes += this->ndof_types_in_mesh(mesh_i);
+//     }
+//   }
+//  else
+//   {
+//    pause("RAYRAY todo"); 
+//    
+//    // RAYEDIT - I'm not sure what to do here.
+//    // I'll cross the bridge when I come to it.
+//    n_doftypes = this->ndof_types();
+//    N_fluid_doftypes = 5;
+//   }
   
   // Determine the number of velocity dof types. 
 
@@ -951,8 +960,12 @@ namespace oomph
   // are velocity dof types.
   N_velocity_doftypes = nmesh*spatial_dim;
 
+  std::cout << "N_velocity_doftypes = " << N_velocity_doftypes << std::endl; 
+
   // Fluid has +1 for the pressure.
   N_fluid_doftypes = N_velocity_doftypes + 1;
+
+  std::cout << "N_fluid_doftypes = " << N_fluid_doftypes << std::endl; 
 
   // The rest are lagrange multiplier dof types.
   N_lagrange_doftypes = n_doftypes - N_fluid_doftypes;
@@ -1594,7 +1607,7 @@ namespace oomph
      }
    } // loop through Lagrange multipliers.
 
-  // AT this point, we have created the aumented fluid block in v_aug_pt
+  // AT this point, we have created the augmented fluid block in v_aug_pt
   // and the w block in w_pt.
   //
   /////////////////////////////////////////////////////////////////////////////
@@ -1849,23 +1862,43 @@ namespace oomph
 
   // Solver for the W block.
   double t_w_prec_start = TimingHelpers::timer();
-  W_preconditioner_pts.resize(N_lagrange_doftypes);
+  Lagrange_multiplier_preconditioner_pt.resize(N_lagrange_doftypes,0);
   for(unsigned l_i = 0; l_i < N_lagrange_doftypes; l_i++)
-   {
-    if(Using_superlu_w_preconditioner)
-     {
-      if(W_preconditioner_pts[l_i] == 0)
-       {
-        W_preconditioner_pts[l_i] = new SuperLUPreconditioner;
-       }
-
-      W_preconditioner_pts[l_i]->setup(w_pt[l_i], comm_pt());
-     }
+  {
+    if(Lagrange_multiplier_subsidiary_preconditioner_function_pt == 0)
+    {
+      Lagrange_multiplier_preconditioner_pt[l_i] = new SuperLUPreconditioner;
+    }
     else
-     {
-      pause("Other W preconditioners are not yet implemented.");
-     }
-   }
+    {
+      // We use the preconditioner provided.
+      Lagrange_multiplier_preconditioner_pt[l_i] = 
+        (*Lagrange_multiplier_subsidiary_preconditioner_function_pt)();
+    }
+
+    // Is this a block preconditioner?
+    BlockPreconditioner<CRDoubleMatrix>* L_block_preconditioner_pt = 
+      dynamic_cast<BlockPreconditioner<CRDoubleMatrix>* >
+      (Lagrange_multiplier_preconditioner_pt[l_i]);
+
+    if(L_block_preconditioner_pt == 0)
+    {
+      Lagrange_multiplier_preconditioner_is_block_preconditioner = false;
+
+      Lagrange_multiplier_preconditioner_pt[l_i]->setup(w_pt[l_i], comm_pt());
+    }
+    else
+    {
+
+      Lagrange_multiplier_preconditioner_is_block_preconditioner = true;
+      Vector<unsigned> l_mult_dof_map;
+      l_mult_dof_map.push_back(N_fluid_doftypes + l_i);
+
+      L_block_preconditioner_pt->
+        turn_into_subsidiary_block_preconditioner(this,l_mult_dof_map);
+      L_block_preconditioner_pt->setup(matrix_pt(),comm_pt());
+    }
+  }
   
   double t_w_prec_finish = TimingHelpers::timer();
   if(Doc_time)
@@ -1892,6 +1925,25 @@ namespace oomph
  {
   // clean the block preconditioner base class memory
   this->clear_block_preconditioner_base();
+
+  // Delete the Navier-Stokes preconditioner pointer.
+// RAYRAY for now, we do not delete the Navier Stokes preconditioner pointer.
+// Since we did not createt this preconditioner. We should...
+// Create function pointers for both the Lagrange and Navier-Stokes block.
+// At the moment, if SuperLU preconditioning is used for the NS block,
+// There would be a memory leak since we have not deleted this...
+//  delete Navier_stokes_preconditioner_pt;
+//  Navier_stokes_preconditioner_pt = 0;
+
+  // Delete the Lagrange_multiplier_preconditioner_pt
+  unsigned n_lgr_mult_prec_size = Lagrange_multiplier_preconditioner_pt.size();
+  for (unsigned prec_i = 0; prec_i < n_lgr_mult_prec_size; prec_i++) 
+  {
+    delete Lagrange_multiplier_preconditioner_pt[prec_i];
+  }
+
+  // Resize the vector to zero, to avoid any dangling pointers.
+  Lagrange_multiplier_preconditioner_pt.resize(0);
  } // end of LagrangeEnforcedflowPreconditioner::clean_up_memory
 
 
