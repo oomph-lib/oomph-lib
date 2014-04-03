@@ -4788,7 +4788,7 @@ namespace oomph
       precom_block_pt = Replacement_dof_block_pt.get(prec_block_i,prec_block_j);
     }
 
-    cr_double_matrix_deep_copy(precom_block_pt,output_block);
+    CRDoubleMatrixHelpers::deep_copy(precom_block_pt,output_block);
 
     if(Replacement_dof_block_pt.get(prec_block_i,prec_block_j)==0)
     {

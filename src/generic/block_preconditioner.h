@@ -393,57 +393,6 @@ namespace oomph
   } // EOFunc get_block(...)
 
 
-    /// \short Create a deep copy of a CRDoubleMatrix.
-  /// RAYRAY - This should be moved into CRDoubleMatrixHelpers
-  void cr_double_matrix_deep_copy(CRDoubleMatrix* in_matrix_pt,
-                                  CRDoubleMatrix& out_matrix) const
-   {
-    // RAYRAY optimise this to use build_without_copy, see the copy
-    // constructor for CRDoubleMatrices
-    // RAYRAY add PARANOID checks...
-
-    // Temp storage.
-    Vector<double> out_values;
-    Vector<int> out_column_indices;
-    Vector<int> out_row_start;
-
-    // The block nrow and nnz
-    unsigned in_nrow_local = in_matrix_pt->nrow_local();
-    unsigned long in_nnz = in_matrix_pt->nnz();
-
-    // Reserve space.
-    out_values.reserve(in_nnz);
-    out_column_indices.reserve(in_nnz);
-    out_row_start.reserve(in_nrow_local + 1);
-
-    // The data to copy over. RAYRAY make these const.
-    double* in_values = in_matrix_pt->value();
-    int* in_column_indices = in_matrix_pt->column_index();
-    int* in_row_start = in_matrix_pt->row_start();
-
-    // Copy the values and column indices.
-    for (unsigned i = 0; i < in_nnz; i++) 
-     {
-      out_values.push_back(in_values[i]);
-      out_column_indices.push_back(in_column_indices[i]);
-     }
-    
-    // Copy the row start
-    for (unsigned i = 0; i < (in_nrow_local + 1); i++) 
-     {
-      out_row_start.push_back(in_row_start[i]);
-     }
-
-    unsigned in_ncol = in_matrix_pt->ncol();
-
-    out_matrix.build(in_matrix_pt->distribution_pt(),
-                     in_ncol,
-                     out_values,
-                     out_column_indices,
-                     out_row_start);
-   } // EoFunc cr_double_matrix_deep_copy
-
-
   /// \short Return block (i,j).
   ///
   /// RAYRAY comment

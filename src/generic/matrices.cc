@@ -1258,6 +1258,13 @@ CRDoubleMatrix::CRDoubleMatrix(const CRDoubleMatrix& other_matrix)
  const int* column_indices = other_matrix.column_index();
  const int* row_start = other_matrix.row_start();
  unsigned nnz = other_matrix.nnz();
+ // RAYRAY this appears to be incorrect. nrow_local should be used.
+ // Because this "nrow" variable is used to copy the row_start array, which is
+ // of length nrow_local. Since nrow_local <= nrow, this will fail in parallel.
+ // This is obviously not tested in parallel. I can't be bothered to write a 
+ // test for this as I am not using it. Just be aware...
+ //
+ // Also, why are we not using std::copy????!
  unsigned nrow = other_matrix.nrow();
  double* my_values_pt = new double[nnz];
  int* my_column_indices = new int[nnz];
