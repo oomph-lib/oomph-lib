@@ -128,7 +128,7 @@ namespace oomph
     Lagrange_multiplier_subsidiary_preconditioner_function_pt = 0;
 
     // Set the vector of preconditioner pointers for the W block(s) to zero.
-    Lagrange_multiplier_preconditioner_pt.resize(0);
+    Lagrange_multiplier_preconditioner_pt.resize(0,0);
 
     // By default, the Lagrange multiplier block is preconditioned by the 
     // SuperLU preconditioner. To be honest, it does not matter what we set
@@ -142,6 +142,15 @@ namespace oomph
 
     // flag to indicate to use SuperLU or not.
     Using_superlu_ns_preconditioner = true;
+
+    // Initially, there are no meshes set!
+    My_mesh_pt.resize(0,0);
+
+    // The number of meshes
+    My_nmesh = 0;
+
+    // The number of DOF types within the meshes.
+    My_ndof_types_in_mesh.resize(0,0);
 
     // flag to indicate LSC preconditioner
     Use_default_norm_of_f_scaling = true;
@@ -296,7 +305,6 @@ namespace oomph
      // Perform the concatenation. 
      DoubleVectorHelpers::concatenate_without_communication
       (fluid_sub_vec_pt,temp_vec);
-
      // Do not clear the sub vectors since we need them to split the result
      // back.
      
@@ -356,25 +364,27 @@ namespace oomph
       }
     }
   
-   // We assume that the first mesh is the "bulk" mesh. To check this, the
-   // elemental dimension must be the same as the nodal dimension.
+   // We assume that the first mesh is the Navier Stokes "bulk" mesh. 
+   // To check this, the elemental dimension must be the same as the 
+   // nodal (spatial) dimension.
    //
    // We store the elemental dimension i.e. the number of local coordinates
-   // required to parametrise its geomentry.
-   unsigned spatial_dim = mesh_pt[0]->finite_element_pt(0)->dim();
+   // required to parametrise its geometry.
+   unsigned elemental_dim = mesh_pt[0]->elemental_dimension();
 
    // The dimension of the nodes in the first element in the (supposedly)
    // bulk mesh.
-   unsigned nodal_dim = mesh_pt[0]->finite_element_pt(0)
-    ->nodal_dimension();
+   unsigned nodal_dim = mesh_pt[0]->nodal_dimension();
   
    // Check if the first mesh is the "bulk" mesh.
    // Here we assume only one mesh contains "bulk" elements.
-   if (spatial_dim != nodal_dim) 
+   // All subsequent meshes contain block preconditionable elements which
+   // re-classify the bulk velocity dofs to constrained velocity dofs.
+   if (elemental_dim != nodal_dim) 
     {
      std::ostringstream err_msg;
      err_msg << "In the first mesh, the elements have elemental dimension of "
-             << spatial_dim << ", with a nodal dimension of "
+             << elemental_dim << ", with a nodal dimension of "
              << nodal_dim << ".\n"
              << "The first mesh does not contain 'bulk' elements.\n"
              << "Please re-order your mesh_pt vector.\n";
@@ -385,6 +395,7 @@ namespace oomph
     }
 #endif
    
+   // Only the upper most master block preconditioner stores the meshes.
    if(is_master_block_preconditioner())
     {
      // Set the number of meshes 
@@ -396,7 +407,19 @@ namespace oomph
        this->set_mesh(mesh_i,mesh_pt[mesh_i]);
       }
     }
-  }
+
+   // We also store the meshes and number of meshes locally in this class.
+   // This is slightly redundant, since we always have it stored in the upper
+   // most master block preconditioner. But at the moment there is no 
+   // mapping/look up scheme between master and subsidiary block 
+   // preconditioners for meshes.
+   // So if this is a subsidiary block preconditioner, we don't know which of
+   // the master's meshes belong to us. We need this information to set up
+   // look up lists in the function setup(...).
+   // So we store them local to this class.
+   My_mesh_pt = mesh_pt;
+   My_nmesh = nmesh;
+  } // EoFunc set_meshes
 
 
   /// \short Access function to the Scaling sigma of the preconditioner
@@ -536,6 +559,16 @@ namespace oomph
   Vector<unsigned> Doftype_list_vpl;
   // the re-arraned doftypes: bulk, constrained, pressure, lagrange.
   Vector<unsigned> Subsidiary_list_bcpl;
+
+  /// \short Storage for the meshes. 
+  /// The first mesh must always be the Navier-Stokes (bulk) mesh.
+  Vector<Mesh*> My_mesh_pt;
+
+  Vector<unsigned> My_ndof_types_in_mesh;
+
+  /// \short Store the number of meshes. 
+  /// This is required to create the look up lists.
+  unsigned My_nmesh;
 
   /// \short The number of lagrange multiplier dof types
   unsigned N_lagrange_doftypes;
@@ -881,267 +914,279 @@ namespace oomph
   // clean
   this->clean_up_memory();
   
-  // Store the number of meshes locally.
-  unsigned nmesh = this->nmesh();
-  
-  // What is the spatial dimension of the problem?
-  unsigned spatial_dim = this->Mesh_pt[0]->finite_element_pt(0)->dim();
-
 #ifdef PARANOID
   // Paranoid check that meshes have been set.
-  if(nmesh == 0)
+  if(My_nmesh == 0)
    {
     std::ostringstream err_msg;
-    err_msg << "There are no meshes set. Please call set_meshes(...)\n";
+    err_msg << "There are no meshes set. Please call set_meshes(...)\n"
+            << "with at least two mesh.";
     throw OomphLibError(err_msg.str(),
                         OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif
+  
 
-  // To construct the required block structure for the preconditoner, we
-  // require only the
-  // (1) spatial dimension of the problem and
-  // (2) the number of dof types in each of the meshes.
+  // Set up the My_ndof_types_in_mesh vector.
+  // RAYRAY - this can be optimised by creating a lookup list to the master
+  // block preconditioner, so then we get the number of DOF types in each mesh
+  // from BlockPreconditioner::ndof_types_in_mesh(...). The function
+  //  Mesh::ndof_types() requires communication, so we store this for now.
   //
-  // We assume the first mesh is always the bulk mesh. Example:
-  // The general structure for the dof types (in 3D) is
+  //  We try to be a bit efficient by not setting up the list twice.
+  if(My_ndof_types_in_mesh.size() == 0)
+  {
+    for (unsigned mesh_i = 0; mesh_i < My_nmesh; mesh_i++) 
+    {
+      My_ndof_types_in_mesh.push_back(My_mesh_pt[0]->ndof_types());
+    }
+  }
+
+  // To construct the desired block structure for this preconditioner, with
+  // assumption on the natural ordering of the DOF types, we require only the
+  //
+  // (1) spatial dimension of the problem and
+  // (2) the number of DOF types in each of the meshes.
+  //
+  // Assumption: We assume the first mesh is always the "bulk" mesh 
+  // (the Navier Stokes mesh), which contains block preconditionable 
+  // Navier Stokes elements classifies the velocity and pressure 
+  // degrees of freedom (ndof_types = 3(4) in 2(3)D). All subsequent meshes
+  // contains the constrained velocity DOF types, then the Lagrange multiplier
+  // DOF types.
+  //
+  // Example:
+  // The general ordering for the DOF types (for this program, in 3D) is
+  //
   //  0 1 2 3   4 5 6 7  8  ..x   x+0 x+1 x+2 x+3 x+4
   // [u v w p] [u v w l1 l2 ...] [u   v   w   l1  l2 ...] ...
   //
-  // where then square brackets [] represents the dof types in each mesh.
+  // where then square brackets [] represents the DOF types in each mesh.
+  //
+  // Thus we need the mesh pointers to determine how many Lagrange multiplier
+  // DOF types there are in each mesh, which is used to determine how many
+  // Lagrange multiplier DOF types there are overall.
   //
   // Consider the case of imposing parallel outflow (3 constrained velocity
-  // dof types and 2 lagrange multiplier dof types) and tangential flow (3
-  // constrained velocity dof types and 1 lagrange multiplier dof type)
-  // along two different boundaries in 3D. The resulting natural block dof
-  // type structure is:
+  // DOF types and 2 Lagrange multiplier DOF types) and tangential flow (3
+  // constrained velocity DOF types and 1 Lagrange multiplier DOF type)
+  // along two different boundaries in 3D. The resulting natural ordering of
+  // the DOF types, determined by the by the two-level ordering, (first mesh 
+  // order, then the elemental DOF type ordering) is:
+  //
   // [0 1 2 3] [4  5  6   7   8 ] [9  10 11 12 ]
   // [u v w p] [up vp wp Lp1 Lp2] [ut vt wt Lt1]
   //
-  // Then the dimension = 3 and N_doftype_in_mesh = [4, 5, 4].
+  // We observe that the problem dimension is 3 and 
+  // N_doftype_in_mesh = [4, 5, 4].
   //
-  // With these information we can construct the required block structure:
+  // With these information we can construct the desired block structure:
   // | u v w | up vp wp | ut vt wt | p | Lp1 Lp2 Lt1 |
   //
-  // We create two dof list maps below to describe the above block structure.
-  // One for block_setup(...), the other for 
-  // turn_into_subsidiary_block_preconditioner(...).
+  // The block structure is determined by the vector dof_to_block_map we 
+  // give to the function block_setup(...).
+  // 
+  // First we work out a few variables to aid us in this endeavour.
+
+
+  // Get the spatial dimension of the problem.
+  // This is used to create look up lists later.
+  // Note: Mesh::nodal_dimension() requires communication, use it sparingly!
+  unsigned spatial_dim = My_mesh_pt[0]->nodal_dimension();
+  std::cout << "spatial_dim: " << spatial_dim << std::endl; 
+
+  // Get the number of DOF types.
+  unsigned n_dof_types = ndof_types();
+  std::cout << "n_dof_types: " << n_dof_types << std::endl; 
+
+  // Check if the number of DOF types make sense.
+#ifdef PARANOID
+  // The Navier Stokes mesh should (classify $spatial_dim + 1) number of 
+  // DOF types (velocities and pressure).
+  // For the meshes classifying constrained DOF types, there will always be
+  // $spatial_dim number of constrained velocity DOF types first, followed by 
+  // the Lagrange multiplier DOF types.
   //
-  // To do this, we first work out a few number of dof types.
+  // Of course, we cannot check which DOF type is which, and thus cannot check 
+  // if they are in the correct "assumed/required" order.
+  //
+  // We can at least check if the n_dof_types is the same as the total number
+  // of DOF types in the meshes. This check is not necessary for the upper most
+  // master block preconditioner since it gets the ndof_types() by looping 
+  // through the meshes!
+  if(is_subsidiary_block_preconditioner())
+  {
+    // Calculate the ndof types from the meshes passed to this block 
+    // preconditioner. This should be equal to the value returned by 
+    // ndof_types()
+    unsigned tmp_ndof_types = 0;
 
-  // Get the number of dof types.
-  unsigned n_doftypes = ndof_types();
-  std::cout << "n_doftypes = " << n_doftypes << std::endl; 
-  
+    for (unsigned mesh_i = 0; mesh_i < My_nmesh; mesh_i++) 
+    {
+      tmp_ndof_types += My_ndof_types_in_mesh[mesh_i];
+    }
 
-//  // Compute the variables we just reset!
-//  if (this->is_master_block_preconditioner())
-//   {
-//    // Loop through the meshes.
-//    for(unsigned mesh_i = 0; mesh_i < nmesh; mesh_i++)
-//     {
-//      n_doftypes += this->ndof_types_in_mesh(mesh_i);
-//     }
-//   }
-//  else
-//   {
-//    pause("RAYRAY todo"); 
-//    
-//    // RAYEDIT - I'm not sure what to do here.
-//    // I'll cross the bridge when I come to it.
-//    n_doftypes = this->ndof_types();
-//    N_fluid_doftypes = 5;
-//   }
-  
-  // Determine the number of velocity dof types. 
+    if(tmp_ndof_types != n_dof_types)
+    {
+     std::ostringstream err_msg;
+     err_msg << "The number of DOF types are incorrect.\n"
+             << "The total DOF types from the meshes is: " 
+             << tmp_ndof_types << ".\n"
+             << "The number of DOF types from "
+             << "BlockPreconditioner::ndof_types() is " << n_dof_types <<".\n";
+     throw OomphLibError(err_msg.str(),
+                         OOMPH_CURRENT_FUNCTION,
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+  }
+#endif
 
-  // Assume that all meshes contain elements for which the first 3 dof types
-  // are velocity dof types.
-  N_velocity_doftypes = nmesh*spatial_dim;
-
-  std::cout << "N_velocity_doftypes = " << N_velocity_doftypes << std::endl; 
+  // The number of velocity DOF types: We assume that all meshes classify
+  // at least some of the velocity DOF types (bulk/constrained), thus the 
+  // total number of velocity DOF types is the spatial dimension multiplied
+  // by the number of meshes.
+  N_velocity_doftypes = My_nmesh*spatial_dim;
+  std::cout << "N_velocity_doftypes: " << N_velocity_doftypes << std::endl; 
 
   // Fluid has +1 for the pressure.
   N_fluid_doftypes = N_velocity_doftypes + 1;
+  std::cout << "N_fluid_doftypes: " << N_fluid_doftypes << std::endl; 
+  
+  // The rest are Lagrange multiplier DOF types.
+  N_lagrange_doftypes = n_dof_types - N_fluid_doftypes;
+  std::cout << "N_lagrange_doftypes: " << N_lagrange_doftypes << std::endl; 
 
-  std::cout << "N_fluid_doftypes = " << N_fluid_doftypes << std::endl; 
-
-  // The rest are lagrange multiplier dof types.
-  N_lagrange_doftypes = n_doftypes - N_fluid_doftypes;
-
-  /////// Now create the dof lists ///////
-
-  // Re-order the dof_types.
-  // The natural ordering of the dof types are ordered by their meshes.
-  // We want all the bulk velocities together, then the constrained velocities,
-  // then the pressure, and finally the Lagrange multiplier block.
-  // Consider the same example above:
-  // [0 1 2 3] [4  5  6   7   8 ] [9  10 11 12]
-  // [u v w p] [up vp wp Lp1 Lp2] [ut vt wt Lt1]
+  ///////////////////////////////////////////////////////////
+  //   Now create the DOF to block map for block_setup()   //
+  ///////////////////////////////////////////////////////////
+  
+  // This preconditioner permutes the DOF types to get the block types.
+  // I.e. nblock_types = ndof_types, but they are re-ordered 
+  // so that we have (in order):
+  // 1) bulk velocity DOF types
+  // 2) constrained velocity DOF types
+  // 3) pressure DOF type
+  // 4) Lagrange multiplier DOF types
+  //
+  // Recall that the natural ordering of the DOF types are ordered first by 
+  // their meshes, then the elemental DOF type as described by the
+  // function get_dof_numbers_for_unknowns().
+  //
+  // Also recall that (for this problem), we assume/require that every mesh 
+  // (re-)classify at least some of the velocity DOF types, furthermore, 
+  // the velocity DOF type classification comes before the 
+  // pressure / Lagrange multiplier
+  // (in the case of the bulk mesh)/(in the case of the subsequent meshes).
+  //
+  // Consider the same example as shown previously, the natural DOF type 
+  // ordering is:
+  //  0 1 2 3   4  5  6   7   8    9  10 11 12   <- Natural DOF type ordering.
+  // [u v w p] [up vp wp Lp1 Lp2] [ut vt wt Lt1] <- DOF type.
   //
   // We want:
-  //  0 1 2   4  5  6    9  10 11    3    7   8  12
   // [u v w | up vp wp | ut vt wt ] [p | Lp1 Lp2 Lt1]
   //
-  // To create the list, think of it as 
-  // "What do I want to move into this position?"
-  // Consider the 3rd entry (starting from 0), which dof type do we want to
-  // move into this position? - It's "up" or "4". 
+  // We can see that we lump the first $spatial_dimension number of DOF types
+  // from each mesh together, and put the rest at the end.
   //
-  // This is stored in Subsidiary_list_bcpl, this is passed to 
-  // turn_into_subsidiary_block_preconditioner(...).
+  // To achieve this, we use the dof_to_block_map:
+  //  0 1 2 9 3  4  5  10  11  6  7  8  12   <- dof_to_block_map
   //
-  // Artificial test data for the above example. Just uncomment to test.
-  // nmesh = 3;
-  // N_doftype_in_mesh.resize(nmesh,0);
-  // N_doftype_in_mesh[0] = 4;
-  // N_doftype_in_mesh[1] = 5;
-  // N_doftype_in_mesh[2] = 4;
-  // spatial_dim = 3;
-  // n_doftypes = 13;
-  { // encapsulating temp vectors.
-
-    // We create the mapping with the help of two vectors.
-    // Noting that the first spatial dimension number of dof types in each mesh
-    // corresponds to the velocity dof types, and the rest are either pressure
-    // (in the case of the bulk mesh) or lagrange multiplier dof types, we
-    // simply:
-    // 1) Loop through the meshes
-    // 2)   Loop through the spatial_dim, store the dof type in the v_vector.
-    // 3)   Loop through the remaining dof types, store the dof type in the l
-    //      vector.
-    // 4) Concatenate the two vectors.
-
-    // Temp velocity and lagrange dof type vectors.
-   Vector<unsigned> temp_v_doftypes;
-   Vector<unsigned> temp_l_doftypes;
-    
-   unsigned increment = 0;
-   for(unsigned mesh_i = 0; mesh_i < nmesh; mesh_i++)
-    {
-     // Store the velocity dof types.
-     for(unsigned dim_i = 0; dim_i < spatial_dim; dim_i++)
-      {
-       temp_v_doftypes.push_back(increment++);
-      } // for spatial_dim
-
-     // Store the pressure/lagrange dof types.
-     unsigned n_doftype_in_mesh = this->ndof_types_in_mesh(mesh_i);
-
-     for(unsigned l_i = spatial_dim; l_i < n_doftype_in_mesh; l_i++)
-      {
-       temp_l_doftypes.push_back(increment++);
-      }
-    } // for nmesh
-    
-   // Concatenate the vectors.
-   Subsidiary_list_bcpl.clear();
-   Subsidiary_list_bcpl.reserve(temp_v_doftypes.size() + 
-                                temp_l_doftypes.size());
-   Subsidiary_list_bcpl.insert(Subsidiary_list_bcpl.end(),
-                               temp_v_doftypes.begin(),
-                               temp_v_doftypes.end());
-   Subsidiary_list_bcpl.insert(Subsidiary_list_bcpl.end(),
-                               temp_l_doftypes.begin(),
-                               temp_l_doftypes.end());
-  } // end of encapculating
-
-//  // Output for artificial test.
-//  std::cout << "Subsidiary_list_bcpl:" << std::endl; 
-//  for (unsigned i = 0; i < Subsidiary_list_bcpl.size(); i++) 
-//  {
-//    std::cout << Subsidiary_list_bcpl[i] << std::endl;
-//  }
-//  pause("Printed out Subsidiary_list_bcpl"); 
-
-
-  // Re-order the dof_types.
-  // The natural ordering of the dof types are ordered by their meshes.
-  // We want to tell the blocks where they should be in the 
-  // new blocking scheme. This mapping is passed to block_setup(...).
+  // In general, we want:
   //
-  // This corresponds with the Subsidiary_list_bcpl above. We want the order: 
-  // 1) bulk velocities, 2) constrained velocities, 3) pressure,
-  // 4) the Lagrange multipliers.
+  //    dof_to_block_map[$dof_number] = $block_number
   //
-  // Consider the same example above:
-  // [0 1 2 3] [4  5  6   7   8 ] [9  10 11 12]
-  // [u v w p] [up vp wp Lp1 Lp2] [ut vt wt Lt1]
   //
-  // We want:
-  //  0 1 2 9 3  4  5  10  11  6  7  8  12
-  // [u v w p up vp wp Lp1 Lp2 ut vt wt Lt1
+  // We put this all together for your convenience:
   //
-  // To create the mapping, think of this in terms of:
-  // "Where do I want to move this dof type to?"
-  // For example, take the 3th entry in the original list "p". Where do we want
-  // to move this to? the 9th place.
+  // Natural DOF type ordering:
+  //  0 1 2 3   4  5  6   7   8    9  10 11 12   <- Natural DOF type ordering.
+  // [u v w p] [up vp wp Lp1 Lp2] [ut vt wt Lt1] <- DOF type.
   //
-  // Artificial test data for the above example. Just uncomment to test.
-  // nmesh = 3;
-  // N_doftype_in_mesh.resize(nmesh,0);
-  // N_doftype_in_mesh[0] = 4;
-  // N_doftype_in_mesh[1] = 5;
-  // N_doftype_in_mesh[2] = 4;
-  // spatial_dim = 3;
-  // N_velocity_doftypes = spatial_dim*nmesh;
-  // n_doftypes = 13;
+  // Desired block structure:
+  //  0 1 2   3  4  5    6  7  8     9   10  11  12   <- block index
+  // [u v w | up vp wp | ut vt wt ] [p | Lp1 Lp2 Lt1] <- DOF type
+  //
+  // dof_to_block_map:
+  //  0 1 2 9 3  4  5  10  11  6  7  8  12   <- dof_to_block_map
+  // [u v w p up vp wp Lp1 Lp2 ut vt wt Lt1] <- DOF type
+  //
+  // Consider the 4th entry of the dof_to_block_map, this represents the 
+  // pressure DOF type. We want to consider this block type 9.
 
-  Vector<unsigned> block_setup_bcpl(n_doftypes,0);
+
+//  /////////////////////////////////////////////////////////////////////////////
+//  // Start of artificial test data
+//  n_dof_types = 13;
+//  My_nmesh = 3;
+//  spatial_dim = 3;
+//  N_velocity_doftypes = My_nmesh * spatial_dim;
+//  My_ndof_types_in_mesh.resize(3,0);
+//  My_ndof_types_in_mesh[0] = 4;
+//  My_ndof_types_in_mesh[1] = 5;
+//  My_ndof_types_in_mesh[2] = 4;
+//  // End of artificial test data.
+
+  Vector<unsigned> dof_to_block_map(n_dof_types,0);
   
   // Encapsulate temporary variables
   {
+   // Logic: We observe that the dof_to_block_map has the following pattern:
+   // [0, 1, 2, p, 3, 4, 5, Lp1, ... Lpx, 6, 7, 8, Lt1, ... Lty, ...]
+   //
+   // We can loop through the number of meshes,
+   //  fill in the first $spatial_dimension number of entries with velocity vals
+   //  then fill in the rest with Lagrange dof types.
+
+   // Index for the dof_to_block_map vector.
    unsigned temp_index = 0;
-   unsigned lagrange_entry = N_velocity_doftypes;
-   for (unsigned mesh_i = 0; mesh_i < nmesh; mesh_i++)
+
+   // Value for the velocity DOF type.
+   unsigned velocity_val = 0;
+
+   // Value for the pressure/Lagrange DOF type.
+   unsigned pressure_lgr_val = N_velocity_doftypes;
+
+   // Loop through the number of meshes.
+   for (unsigned mesh_i = 0; mesh_i < My_nmesh; mesh_i++)
     {
+     // Fill in the velocity DOF types.
      for (unsigned dim_i = 0; dim_i < spatial_dim; dim_i++) 
       {
-       block_setup_bcpl[temp_index] = dim_i + mesh_i*spatial_dim;
-       temp_index++;
+       //dof_to_block_map[temp_index] = dim_i + mesh_i*spatial_dim; fancy way.
+       dof_to_block_map[temp_index++] = velocity_val++;
       } // for
 
-     unsigned ndof_type_in_mesh = this->ndof_types_in_mesh(mesh_i);
-
+     // Loop through the pressure/Lagrange multiplier DOF types.
+     unsigned ndof_type_in_mesh_i = My_ndof_types_in_mesh[mesh_i];
      for (unsigned doftype_i = spatial_dim; 
-          doftype_i < ndof_type_in_mesh; doftype_i++) 
+          doftype_i < ndof_type_in_mesh_i; doftype_i++) 
       {
-       block_setup_bcpl[temp_index] = lagrange_entry;
-       lagrange_entry++;
-       temp_index++;
+       dof_to_block_map[temp_index++] = pressure_lgr_val++;
       } // for
     } // for
   } // Encapsulation
 
-//  std::cout << "block_setup_bcpl:" << std::endl; 
-//  for (unsigned i = 0; i < block_setup_bcpl.size(); i++) 
-//  {
-//    std::cout << block_setup_bcpl[i] << std::endl;
-//  }
-//  pause("Done the block_setup_bcpl"); 
+  // With the artificial test data, we get the following list:
+  // 0 1 2 9 3  4  5  10  11  6  7  8  12
+  std::cout << "dof_to_block_map: " << std::endl; 
+  for (unsigned tmp_i = 0; tmp_i < dof_to_block_map.size(); tmp_i++) 
+  {
+    std::cout << dof_to_block_map[tmp_i] << " "; 
+  }
+  std::cout << std::endl; 
 
   // Call the block setup
-  this->block_setup(block_setup_bcpl);
+  this->block_setup(dof_to_block_map);
 
-//  // Check the block size.
-//  unsigned tmp_nblocks = this->nblock_types();
-//  for (unsigned i = 0; i < tmp_nblocks; i++) 
+//  // Print out the nrow of blocks along the first column.
+//  for (unsigned block_i = 0; block_i < nblock_types(); block_i++) 
 //  {
-//    // Go along the first column.
-//    unsigned raycol = 0;
-//
-//    CRDoubleMatrix* tmpblockpt = new CRDoubleMatrix;
-//    this->get_block(i,raycol,*tmpblockpt);
-//
-//    unsigned raynrow = tmpblockpt->nrow();
-//    std::cout << "block: " << i << ", nrow: " << raynrow << std::endl; 
+//    CRDoubleMatrix tmp_block = get_block(block_i,0);
+//    unsigned tmp_block_nrow = tmp_block.nrow();
+//    std::cout << "block " << block_i << ", nrow: " << tmp_block_nrow << std::endl; 
 //  }
-//  pause("now!"); 
-  
-
-///////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
 
   if(Doc_prec)
    {
@@ -1170,9 +1215,9 @@ namespace oomph
     // The number of blocks
     unsigned nblock_types = this->nblock_types();
 
-    for (unsigned mesh_i = 0; mesh_i < nmesh; mesh_i++)
+    for (unsigned mesh_i = 0; mesh_i < My_nmesh; mesh_i++)
      {
-      precinfo_ofstream << this->Ndof_types_in_mesh[mesh_i] << " ";
+      precinfo_ofstream << this->My_ndof_types_in_mesh[mesh_i] << " ";
      }
     precinfo_ofstream.close();
 
@@ -1219,6 +1264,7 @@ namespace oomph
     }
  }// if Doc_prec
 
+
   ///////////////////////////////////////////////////////////////////////////
   // Need to create the norms, used for Sigma, if required
   ///////////////////////////////////////////////////////////////////////////
@@ -1239,22 +1285,18 @@ namespace oomph
 
   if(Use_default_norm_of_f_scaling)
    {
-    // Create the scaling, norm of the momentum block.
-    // The the u block (the blocks corresponding to the velocity in the 
-    // x direction).
-
     double t_norm_start = TimingHelpers::timer();
 
-    DenseMatrix<CRDoubleMatrix* > u_pt(nmesh,nmesh,0);
+    DenseMatrix<CRDoubleMatrix* > u_pt(My_nmesh,My_nmesh,0);
 
     // Recall the blocking scheme:
     // 0 1 2 3  4  5  6  7  8
     // u v w u1 v1 w1 u2 v2 w2 ...
     // So we loop through the meshes and then get the first entry...
     // from v_aug_pt.
-    for(unsigned row_i = 0; row_i < nmesh; row_i++)
+    for(unsigned row_i = 0; row_i < My_nmesh; row_i++)
      {
-      for(unsigned col_i = 0; col_i < nmesh; col_i++)
+      for(unsigned col_i = 0; col_i < My_nmesh; col_i++)
        {
         u_pt(row_i,col_i) = v_aug_pt(row_i*spatial_dim,
                                      col_i*spatial_dim);
@@ -1312,6 +1354,7 @@ namespace oomph
              << std::setprecision(cout_precision)
              << std::endl;
 
+
   ///////////////////////////////////////////////////////////////////////////
   //                Now create the augmented fluid matrix.                 //
   ///////////////////////////////////////////////////////////////////////////
@@ -1327,7 +1370,7 @@ namespace oomph
   //     2) Store the mass matrix.
   //     3) Create the partial w_i += diag(m)^2
   //
-  //   1) Store the w_i for this lagrange multiplier.
+  //   1) Store the w_i for this Lagrange multiplier.
   //   Loop through the mass matrix location to determine the aug. row.
   //     Loop through the mm location to determine the aug. col.
   //       1) Create inv_wi from the w_i already created.
@@ -1338,17 +1381,17 @@ namespace oomph
   Vector<CRDoubleMatrix*> w_pt(N_lagrange_doftypes,0);
 
   // Note that we do not need to store all the inverse w_i since they
-  // are only used once per lagrage multiplier.
+  // are only used once per Lagrange multiplier.
   for(unsigned l_i = 0; l_i < N_lagrange_doftypes; l_i++)
    {
-    // Storage for the current lagrange block mass matrices.
+    // Storage for the current Lagrange block mass matrices.
     Vector<CRDoubleMatrix*> mm_pt;
     Vector<CRDoubleMatrix*> mmt_pt;
 
-    // Get the current lagrange doftype.
+    // Get the current Lagrange DOF type.
     unsigned l_doftype = N_fluid_doftypes + l_i;
 
-    // Store the mass matrix locations for the current lagrange block.
+    // Store the mass matrix locations for the current Lagrange block.
     Vector<unsigned> mm_locations;
     
     // Store the number of mass matrices.
@@ -1358,7 +1401,7 @@ namespace oomph
     // I have extracted all the mass matrices for this Lagrange
     // block.
 
-    // Go along the block columns for the current lagrange block.
+    // Go along the block columns for the current Lagrange block.
     for(unsigned col_i = 0; col_i < N_velocity_doftypes; col_i++)
      {
       // Get the block matrix for this block column.
@@ -1376,14 +1419,14 @@ namespace oomph
         // This is just an empty matrix. No need to keep this.
         delete mm_temp_pt;
        }
-     } // loop through the columns of the lagrange row.
+     } // loop through the columns of the Lagrange row.
 
 #ifdef PARANOID
     if (n_mm == 0) 
      {
       std::ostringstream warning_stream;
       warning_stream << "WARNING:\n"
-                     << "There are no mass matrices on lagrange block " 
+                     << "There are no mass matrices on Lagrange block " 
                      << l_i << ".\n"
                      << "Perhaps the problem setup is incorrect." << std::endl;
       OomphLibWarning(warning_stream.str(),
@@ -1420,7 +1463,7 @@ namespace oomph
         }
 #endif
       }
-     } // loop through the ROW of the lagrange COLUMN.
+     } // loop through the ROW of the Lagrange COLUMN.
 
     // The mass matrices for the current Lagrange block row is in mm_pt. 
     // The mass matrices for the current Lagrange block col is in mmt_pt. 
@@ -1449,7 +1492,7 @@ namespace oomph
     if(Use_diagonal_w_block)
      {
       // RAYRAY change back to Block_distribution_pt
-      // Get the number of local rows for this lagrange block.
+      // Get the number of local rows for this Lagrange block.
       unsigned long l_i_nrow_local 
         = this->Internal_block_distribution_pt[l_doftype]->nrow_local();
 
@@ -1607,13 +1650,150 @@ namespace oomph
      }
    } // loop through Lagrange multipliers.
 
+//pause("Done the lgr stuff"); 
+
+
+  // Consider the 3rd entry (starting from 0), which dof type do we want to
+  // move into this position? - It's "up" or "4". 
+  //
+  // This is stored in Subsidiary_list_bcpl, this is passed to 
+  // turn_into_subsidiary_block_preconditioner(...).
+  //
+  // Artificial test data for the above example. Just uncomment to test.
+  // nmesh = 3;
+  // N_doftype_in_mesh.resize(nmesh,0);
+  // N_doftype_in_mesh[0] = 4;
+  // N_doftype_in_mesh[1] = 5;
+  // N_doftype_in_mesh[2] = 4;
+  // spatial_dim = 3;
+  // n_dof_types = 13;
+  { // encapsulating temp vectors.
+
+    // We create the mapping with the help of two vectors.
+    // Noting that the first spatial dimension number of dof types in each mesh
+    // corresponds to the velocity dof types, and the rest are either pressure
+    // (in the case of the bulk mesh) or lagrange multiplier dof types, we
+    // simply:
+    // 1) Loop through the meshes
+    // 2)   Loop through the spatial_dim, store the dof type in the v_vector.
+    // 3)   Loop through the remaining dof types, store the dof type in the l
+    //      vector.
+    // 4) Concatenate the two vectors.
+
+    // Temp velocity and lagrange dof type vectors.
+   Vector<unsigned> temp_v_doftypes;
+   Vector<unsigned> temp_l_doftypes;
+    
+   unsigned increment = 0;
+   for(unsigned mesh_i = 0; mesh_i < My_nmesh; mesh_i++)
+    {
+     // Store the velocity dof types.
+     for(unsigned dim_i = 0; dim_i < spatial_dim; dim_i++)
+      {
+       temp_v_doftypes.push_back(increment++);
+      } // for spatial_dim
+
+     // Store the pressure/lagrange dof types.
+     unsigned n_doftype_in_mesh = this->ndof_types_in_mesh(mesh_i);
+
+     for(unsigned l_i = spatial_dim; l_i < n_doftype_in_mesh; l_i++)
+      {
+       temp_l_doftypes.push_back(increment++);
+      }
+    } // for My_nmesh
+    
+   // Concatenate the vectors.
+   Subsidiary_list_bcpl.clear();
+   Subsidiary_list_bcpl.reserve(temp_v_doftypes.size() + 
+                                temp_l_doftypes.size());
+   Subsidiary_list_bcpl.insert(Subsidiary_list_bcpl.end(),
+                               temp_v_doftypes.begin(),
+                               temp_v_doftypes.end());
+   Subsidiary_list_bcpl.insert(Subsidiary_list_bcpl.end(),
+                               temp_l_doftypes.begin(),
+                               temp_l_doftypes.end());
+  } // end of encapculating
+
+//  // Output for artificial test.
+//  std::cout << "Subsidiary_list_bcpl:" << std::endl; 
+//  for (unsigned i = 0; i < Subsidiary_list_bcpl.size(); i++) 
+//  {
+//    std::cout << Subsidiary_list_bcpl[i] << std::endl;
+//  }
+//  pause("Printed out Subsidiary_list_bcpl"); 
+
+
+  // Re-order the dof_types.
+  // The natural ordering of the dof types are ordered by their meshes.
+  // We want to tell the blocks where they should be in the 
+  // new blocking scheme. This mapping is passed to block_setup(...).
+  //
+  // This corresponds with the Subsidiary_list_bcpl above. We want the order: 
+  // 1) bulk velocities, 2) constrained velocities, 3) pressure,
+  // 4) the Lagrange multipliers.
+  //
+  // Consider the same example above:
+  // [0 1 2 3] [4  5  6   7   8 ] [9  10 11 12]
+  // [u v w p] [up vp wp Lp1 Lp2] [ut vt wt Lt1]
+  //
+  // We want:
+  //  0 1 2 9 3  4  5  10  11  6  7  8  12
+  // [u v w p up vp wp Lp1 Lp2 ut vt wt Lt1
+  //
+  // To create the mapping, think of this in terms of:
+  // "Where do I want to move this dof type to?"
+  // For example, take the 3th entry in the original list "p". Where do we want
+  // to move this to? the 9th place.
+  //
+  // Artificial test data for the above example. Just uncomment to test.
+  // My_nmesh = 3;
+  // N_doftype_in_mesh.resize(My_nmesh,0);
+  // N_doftype_in_mesh[0] = 4;
+  // N_doftype_in_mesh[1] = 5;
+  // N_doftype_in_mesh[2] = 4;
+  // spatial_dim = 3;
+  // N_velocity_doftypes = spatial_dim*My_nmesh;
+  // n_dof_types = 13;
+
+
+
+//  std::cout << "dof_to_block_map:" << std::endl; 
+//  for (unsigned i = 0; i < dof_to_block_map.size(); i++) 
+//  {
+//    std::cout << dof_to_block_map[i] << std::endl;
+//  }
+//  pause("Done the dof_to_block_map"); 
+
+
+//  // Check the block size.
+//  unsigned tmp_nblocks = this->nblock_types();
+//  for (unsigned i = 0; i < tmp_nblocks; i++) 
+//  {
+//    // Go along the first column.
+//    unsigned raycol = 0;
+//
+//    CRDoubleMatrix* tmpblockpt = new CRDoubleMatrix;
+//    this->get_block(i,raycol,*tmpblockpt);
+//
+//    unsigned raynrow = tmpblockpt->nrow();
+//    std::cout << "block: " << i << ", nrow: " << raynrow << std::endl; 
+//  }
+//  pause("now!"); 
+  
+
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+
+
+
+
   // AT this point, we have created the augmented fluid block in v_aug_pt
   // and the w block in w_pt.
   //
   /////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////
 
-  // Setup the fluid subsidiary precoditioner
+  // Setup the fluid subsidiary preconditioner
   //
   // We solve the fluid block using different preconditioners.
   //
@@ -1621,7 +1801,7 @@ namespace oomph
   // For this, we have to form the fluid block by extracting the 
   // pressure matrices.
   //
-  // 2) For Exact lsc block preconditioning we do not need to form the whole
+  // 2) For Exact LSC block preconditioning we do not need to form the whole
   // fluid block since the pressure and velocity are solved separately.
   //
   if(Using_superlu_ns_preconditioner)
@@ -1768,8 +1948,8 @@ namespace oomph
 
     for (unsigned direction = 0; direction < spatial_dim; direction++)
      {
-      Vector<unsigned> dir_doftypes_vec(nmesh,0);
-      for (unsigned mesh_i = 0; mesh_i < nmesh; mesh_i++) 
+      Vector<unsigned> dir_doftypes_vec(My_nmesh,0);
+      for (unsigned mesh_i = 0; mesh_i < My_nmesh; mesh_i++) 
        {
         dir_doftypes_vec[mesh_i] = spatial_dim*mesh_i+direction;
        }
@@ -1784,7 +1964,7 @@ namespace oomph
     doftype_to_doftype_map.push_back(ns_p_vec);
 
 //    // RAYRAY REMOVE
-//    Doftype_coarsen_map_fine.resize(0);
+//    Doftype_coarsen_map_fine.resize(0,0);
 //    Vector<unsigned> tmp0;
 //    tmp0.push_back(0);
 //    tmp0.push_back(1);
@@ -1928,7 +2108,7 @@ namespace oomph
 
   // Delete the Navier-Stokes preconditioner pointer.
 // RAYRAY for now, we do not delete the Navier Stokes preconditioner pointer.
-// Since we did not createt this preconditioner. We should...
+// Since we did not create this preconditioner. We should...
 // Create function pointers for both the Lagrange and Navier-Stokes block.
 // At the moment, if SuperLU preconditioning is used for the NS block,
 // There would be a memory leak since we have not deleted this...
@@ -1943,7 +2123,7 @@ namespace oomph
   }
 
   // Resize the vector to zero, to avoid any dangling pointers.
-  Lagrange_multiplier_preconditioner_pt.resize(0);
+  Lagrange_multiplier_preconditioner_pt.resize(0,0);
  } // end of LagrangeEnforcedflowPreconditioner::clean_up_memory
 
 
@@ -2022,7 +2202,7 @@ namespace oomph
   else
    {
     // find number of elements
-    unsigned n_el = this->Mesh_pt[0]->nelement();
+    unsigned n_el = My_mesh_pt[0]->nelement();
 
     //unsigned n_el = problem_pt->mesh_pt(0)->nelement();
     // Fp needs pressure and velocity mass matrices
@@ -2035,7 +2215,7 @@ namespace oomph
      {
       // Get element
       //GeneralisedElement* el_pt=problem_pt->mesh_pt(0)->element_pt(e);
-      GeneralisedElement* el_pt=this->Mesh_pt[0]->element_pt(e);
+      GeneralisedElement* el_pt=this->My_mesh_pt[0]->element_pt(e);
 
       // find number of degrees of freedom in the element
       // (this is slightly too big because it includes the
