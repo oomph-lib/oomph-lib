@@ -309,66 +309,37 @@ namespace oomph
   unsigned nblock_types = this->nblock_types();
 
   // Build the preconditioner matrix
+  // RAYRAY this may need to be changed so that it is the concatenation of the
+  // external block distributions.
   CRDoubleMatrix* exact_block_matrix_pt 
    = new CRDoubleMatrix(this->preconditioner_matrix_distribution_pt());
   
-  // If precomputed blocks are set, we use the precomputed blocks.
-  // There is no need to delete the precomputed blocks, this should be handled
-  // by the master preconditioner of THIS preconditioner.
-  if(this->preconditioner_blocks_have_been_replaced())
-   {
-     // RAYRAY this may need to be fixed... This should be integrated into
-     // get block(i,j) or perhaps get_blocks(...) or even get_preconditioner
-     // matrix().
-    
-     // Put it in a CRDoubleMatrix for concatenation.
-    
-    DenseMatrix<CRDoubleMatrix*> tmp_dense_matrix(nblock_types,
-                                                  nblock_types,0);
+  // Extract the blocks from the jacobian.
 
-    for (unsigned row_i = 0; row_i < nblock_types; row_i++) 
-    {
-      for (unsigned col_i = 0; col_i < nblock_types; col_i++) 
-      {
-        tmp_dense_matrix(row_i,col_i) = this->Replacement_dof_block_pt.get(row_i,col_i);
-      }
-    }
-
-    // RAYRAY this will be incorrect, we have to use the block distribution
-    // for the blocks, not internal blocks.
-    CRDoubleMatrixHelpers::concatenate_without_communication
-     (this->Internal_block_distribution_pt,tmp_dense_matrix,
-      *exact_block_matrix_pt);
-   }
-  else
-   // Extract the blocks from the jacobian.
-   {
-    // Set the diagonal elements of required block to true for block diagonal
-    // preconditioner
-    DenseMatrix<bool> required_blocks(nblock_types, nblock_types,true);
+  // Set the diagonal elements of required block to true for block diagonal
+  // preconditioner
+  DenseMatrix<bool> required_blocks(nblock_types, nblock_types,true);
   
-    // matrix of block pt
-    DenseMatrix<CRDoubleMatrix*> block_matrix_pt(nblock_types, 
-                                                 nblock_types,0);
-    
-    // Get pointers to the blocks
-    this->get_blocks(required_blocks, block_matrix_pt);
+  // matrix of block pt
+  DenseMatrix<CRDoubleMatrix*> block_matrix_pt(nblock_types, 
+                                               nblock_types,0);
   
-    // RAYRAY this will be incorrect, we have to use the block distribution
-    // for the blocks, not internal blocks.
-    CRDoubleMatrixHelpers::concatenate_without_communication
-     (this->Internal_block_distribution_pt,block_matrix_pt,*exact_block_matrix_pt);
+  // Get pointers to the blocks
+  this->get_blocks(required_blocks, block_matrix_pt);
+  
+  // RAYRAY this will be incorrect, we have to use the block distribution
+  // for the blocks, not internal blocks.
+  CRDoubleMatrixHelpers::concatenate_without_communication
+   (this->Internal_block_distribution_pt,block_matrix_pt,*exact_block_matrix_pt);
 
-    // need to delete the matrix of block matrices
-    for (unsigned i = 0; i < nblock_types; i++)
+  // need to delete the matrix of block matrices
+  for (unsigned i = 0; i < nblock_types; i++)
+   {
+    for (unsigned j = 0; j < nblock_types; j++)
      {
-      for (unsigned j = 0; j < nblock_types; j++)
-       {
-        delete block_matrix_pt(i,j);
-        block_matrix_pt(i,j) = 0;
-       }
+      delete block_matrix_pt(i,j);
+      block_matrix_pt(i,j) = 0;
      }
-
    }
 
   // Setup the preconditioner.

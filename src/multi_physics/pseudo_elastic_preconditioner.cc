@@ -282,7 +282,7 @@ namespace oomph
   // Add the scaled identify matrix to the constrained solid blocks.
   for(unsigned d = 0; d < Dim; d++)
    {
-    // Where is the constained block located?
+    // Where is the constrained block located?
     unsigned block_i = 2*d+1;
 
     // Data from the constrained block.
