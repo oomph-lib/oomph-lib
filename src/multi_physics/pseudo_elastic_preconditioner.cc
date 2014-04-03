@@ -341,7 +341,7 @@ namespace oomph
        (Elastic_subsidiary_preconditioner_function_pt);
      }
 
-    s_prec_pt->set_precomputed_blocks(solid_matrix_pt);
+    s_prec_pt->set_replacement_block(solid_matrix_pt);
 
     s_prec_pt->Preconditioner::setup(matrix_pt(),comm_pt());
     Elastic_preconditioner_pt = s_prec_pt;
@@ -414,7 +414,7 @@ namespace oomph
        (Elastic_subsidiary_preconditioner_function_pt);
      }
 
-    s_prec_pt->set_precomputed_blocks(solid_matrix_pt);
+    s_prec_pt->set_replacement_block(solid_matrix_pt);
     s_prec_pt->set_dof_to_block_map(s_prec_dof_to_block_map);
     s_prec_pt->Preconditioner::setup(matrix_pt(),comm_pt());
 

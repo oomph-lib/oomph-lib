@@ -1303,7 +1303,7 @@ namespace oomph
            sub_block_i < sub_block_size; sub_block_i++) 
        {
         tmp_dist_pt[sub_block_i] 
-         = Precomputed_block_pt(
+         = Replacement_block_pt(
              Block_to_block_map[super_block_i][sub_block_i],0)
                ->distribution_pt();
        }
@@ -1923,8 +1923,8 @@ namespace oomph
     Preconditioner_blocks_have_been_precomputed = true;
 
     // Store the precomputed blocks.
-    Precomputed_block_pt
-      = master_block_prec_pt->precomputed_block_pt();
+    Replacement_block_pt
+      = master_block_prec_pt->replacement_block_pt();
     
     // Only store the master's Doftype_to_doftype_map which is relevant
     // to this preconditioner.
@@ -1990,12 +1990,12 @@ namespace oomph
  void BlockPreconditioner<MATRIX>::block_setup()
  {
   // Get the number of dof types.
-  unsigned n_dof_types = internal_ndof_types();
+  unsigned internal_n_dof_types = internal_ndof_types();
 
   // Build the dof to block map - assume that each type of dof corresponds
   // to a different type of block.
-  Vector<unsigned> dof_to_block_lookup(n_dof_types);
-  for (unsigned i = 0; i < n_dof_types; i++)
+  Vector<unsigned> dof_to_block_lookup(internal_n_dof_types);
+  for (unsigned i = 0; i < internal_n_dof_types; i++)
    {
     dof_to_block_lookup[i] = i;
    }
@@ -4332,7 +4332,7 @@ namespace oomph
 
 
 //=============================================================================
-/// \short Gets block (i,j) from Precomputed_block_pt and returns it in
+/// \short Gets block (i,j) from Replacement_block_pt and returns it in
 /// block_matrix_pt.
 //=============================================================================
  template<> 
@@ -4360,7 +4360,7 @@ namespace oomph
   {
     std::ostringstream error_message;
     error_message << "There are no precomputed blocks. Please call "
-                  << "set_precomputed_blocks(...)  ";
+                  << "set_replacement_block(...)  ";
     throw OomphLibError(error_message.str(),
                         OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
@@ -4383,7 +4383,7 @@ namespace oomph
     CRDoubleMatrix* precom_block_pt = 0;
     if(Preconditioner_blocks_have_been_precomputed)
     {
-      precom_block_pt = Precomputed_block_pt(prec_block_i,prec_block_j);
+      precom_block_pt = Replacement_block_pt(prec_block_i,prec_block_j);
     }
     else
     {
@@ -4458,7 +4458,7 @@ namespace oomph
       if(Preconditioner_blocks_have_been_precomputed)
       { 
         tmp_block_pt(block_row_i,block_col_i)
-          = Precomputed_block_pt(prec_block_i, prec_block_j);
+          = Replacement_block_pt(prec_block_i, prec_block_j);
       }
       else
       {
@@ -4484,7 +4484,7 @@ namespace oomph
     unsigned prec_row_block_i = Block_to_block_map[block_j][block_col_i];
 
     tmp_col_distribution_pt[block_col_i] 
-      = Precomputed_block_pt(prec_row_block_i,0)->distribution_pt();
+      = Replacement_block_pt(prec_row_block_i,0)->distribution_pt();
    }
 
   output_block.build(Precomputed_block_distribution_pt[block_i]);

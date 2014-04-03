@@ -55,7 +55,7 @@ namespace oomph
  /// Block Preconditioner base class. The block structure of the
  /// overall problem is determined from the \c Mesh's constituent
  /// elements. Each constituent element must be block-preconditionable - i.e
- /// must implement the \c GeneralisedElements functions \c ndof_types() and
+ /// must implement the \c GeneralisedElements functions \c internal_ndof_types() and
  /// get_dof_numbers_for_unknowns(...). A \c Problem can have several
  /// \c Meshes, but each \c Mesh can only contain a single type of element.
  /// The association between global degrees of freedom and their unique global
@@ -366,7 +366,7 @@ namespace oomph
      {
       // Cache the pointer to the precomputed block.
       CRDoubleMatrix* precom_block_pt 
-        = Precomputed_block_pt(i,j);
+        = Replacement_block_pt(i,j);
 
       // Temp storage.
       Vector<double> tmp_values;
@@ -886,6 +886,8 @@ namespace oomph
   /// and build_preconditioner_matrix(...) have been called in this and
   /// all subsidiary block preconditioners this method can be called to
   /// clean up.
+  /// RAYRAY do this for replacement blocks? - Maybe? - Need to see how to
+  /// integrate this.
   void post_block_matrix_assembly_partial_clear()
   {
    if (is_master_block_preconditioner())
@@ -1036,22 +1038,22 @@ namespace oomph
   } // EOFunc document()
 
   /// \short Set the precomputed (and possibly modified) preconditioner blocks.
-  /// The precomputed_block_pt is a Dense matrix of pointers of precomputed 
+  /// The replacement_block_pt is a Dense matrix of pointers of precomputed 
   /// blocks for this preconditioner to use in preconditioning.
   /// 
   /// This function is called from outside of this preconditioner to set
   /// block matrices to use instead of the block matrices extracted from the
   /// jacobian. A typical use would be if this is a subsidiary preconditioner
   /// and a master preconditioner has to pass down modified blocks for the 
-  /// subidiary preconditioner to use.
-  void set_precomputed_blocks(
-      DenseMatrix<CRDoubleMatrix*>&precomputed_block_pt)
+  /// subsidiary preconditioner to use.
+  void set_replacement_block(
+      DenseMatrix<CRDoubleMatrix*>&given_replacement_block_pt)
   {
 #ifdef PARANOID
    
    // Check that this is a subsidiary preconditioner.
    // At the moment we have no test cases for which the function 
-   // set_precomputed_blocks(..) is called for a master preconditioner.
+   // set_replacement_block(..) is called for a master preconditioner.
    // If the master preconditioner pointer has been set, then we can easily
    // check if the master preconditioner has precomputed blocks.
    // This check may be removed in the future if required...
@@ -1084,10 +1086,10 @@ namespace oomph
     }
 
    // How many block rows are there?
-   unsigned precomputed_block_nrow = precomputed_block_pt.nrow();
+   unsigned precomputed_block_nrow = given_replacement_block_pt.nrow();
 
    // Ensure that a square block matrix is given.
-   if(precomputed_block_nrow != precomputed_block_pt.ncol())
+   if(precomputed_block_nrow != given_replacement_block_pt.ncol())
     {
      std::ostringstream error_message;
      error_message << "The number of block rows and block columns are "
@@ -1121,7 +1123,7 @@ namespace oomph
           block_col_i++)
       {
        // Check that the block matrix has been set.
-       if(precomputed_block_pt(block_row_i,block_col_i) == 0)
+       if(given_replacement_block_pt(block_row_i,block_col_i) == 0)
         {
          std::ostringstream error_message;
          error_message << "Block (" << block_row_i
@@ -1133,7 +1135,7 @@ namespace oomph
         }
 
        // Check that the block matrix has been built.
-       if(!precomputed_block_pt(block_row_i,block_col_i)->built())
+       if(!given_replacement_block_pt(block_row_i,block_col_i)->built())
         {
          std::ostringstream error_message;
          error_message << "Block (" << block_row_i
@@ -1163,7 +1165,7 @@ namespace oomph
          block_col_i++)
       {
        // Get the global row of this block.
-       unsigned current_block_nrow = precomputed_block_pt(block_row_i,
+       unsigned current_block_nrow = given_replacement_block_pt(block_row_i,
                                                     block_col_i)->nrow();
        if(current_block_row_nrow != current_block_nrow)
         {
@@ -1185,14 +1187,14 @@ namespace oomph
     {
      // Get the number of columns for this block column
      unsigned current_block_col_ncol
-      = precomputed_block_pt(0,block_col_i)->ncol();
+      = given_replacement_block_pt(0,block_col_i)->ncol();
 
      // Loop through the rows
      for(unsigned block_row_i = 0; block_row_i < precomputed_block_nrow;
          block_row_i++)
       {
        // Get the number of columns for this block.
-       unsigned current_block_ncol = precomputed_block_pt(block_row_i,
+       unsigned current_block_ncol = given_replacement_block_pt(block_row_i,
                                                     block_col_i)->ncol();
        if(current_block_col_ncol != current_block_ncol)
         {
@@ -1223,11 +1225,11 @@ namespace oomph
 #endif
     
    // Set the precomputed blocks.
-   Precomputed_block_pt = precomputed_block_pt;
+   Replacement_block_pt = given_replacement_block_pt;
 
    // Flag indicating that the preconditioner blocks has been precomputed.
    Preconditioner_blocks_have_been_precomputed = true;
-  } // EOFunc set_precomputed_blocks(...)
+  } // EOFunc set_replacement_block(...)
 
  /// \short Access function to flag checking if the preconditioner 
  /// blocks have been precomputed.
@@ -1237,10 +1239,10 @@ namespace oomph
   } // EOFunc preconditioner_blocks_have_been_precomputed()
 
  /// \short Access function to the precomputed preconditioner blocks.
- DenseMatrix<CRDoubleMatrix*> precomputed_block_pt() const
+ DenseMatrix<CRDoubleMatrix*> replacement_block_pt() const
   {
-   return Precomputed_block_pt;
-  }  // EOFunc precomputed_block_pt()
+   return Replacement_block_pt;
+  }  // EOFunc replacement_block_pt()
 
   /// \short the number of blocks precomputed. If the preconditioner blocks are
   /// precomputed then it should be the same as the nblock_types 
@@ -1403,7 +1405,7 @@ namespace oomph
   void get_block_from_original_matrix(const unsigned& i, const unsigned& j,
                                       MATRIX& output_block) const;
 
-  /// \short Gets block (i,j) from the Precomputed_block_pt, which is a
+  /// \short Gets block (i,j) from the Replacement_block_pt, which is a
   /// DenseMatrix of pointers to precomputed (and possibly modified)
   /// blocks. Necessary concatenation handled by this function and the
   /// result is returned in output_block.
@@ -1611,7 +1613,7 @@ namespace oomph
   }
 
   /// \short Precomputed (and possibly modified) blocks.
-  DenseMatrix<CRDoubleMatrix*> Precomputed_block_pt;
+  DenseMatrix<CRDoubleMatrix*> Replacement_block_pt;
   
   /// \short The distribution for precomputed blocks.
   Vector<LinearAlgebraDistribution*> Precomputed_block_distribution_pt;
@@ -1655,7 +1657,7 @@ namespace oomph
 
   ///\short Number of different DOF types in this preconditioner. Note that
   /// this information is maintained if used as a subsidiary or stand-alone
-  /// block preconditioner, in the latter case it stores the number of blocks
+  /// block preconditioner, in the latter case it stores the number of dofs
   /// within the subsidiary preconditioner.
   unsigned Internal_ndof_types;
  

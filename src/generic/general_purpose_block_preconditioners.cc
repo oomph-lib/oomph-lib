@@ -317,8 +317,11 @@ namespace oomph
   // by the master preconditioner of THIS preconditioner.
   if(this->Preconditioner_blocks_have_been_precomputed)
    {
+     // RAYRAY this may need to be fixed... This should be integrated into
+     // get block(i,j) or perhaps get_blocks(...) or even get_preconditioner
+     // matrix().
     CRDoubleMatrixHelpers::concatenate_without_communication
-     (this->Block_distribution_pt,this->Precomputed_block_pt,
+     (this->Block_distribution_pt,this->Replacement_block_pt,
       *exact_block_matrix_pt);
    }
   else

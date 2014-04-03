@@ -1774,7 +1774,7 @@ namespace oomph
                                                  doftype_to_doftype_map);
 
     navier_stokes_block_preconditioner_pt
-     ->set_precomputed_blocks(f_subblock_pt);
+     ->set_replacement_block(f_subblock_pt);
 
     navier_stokes_block_preconditioner_pt
      ->setup(matrix_pt(), comm_pt());
