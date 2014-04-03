@@ -318,7 +318,7 @@ namespace oomph
           // We only need the velocity mass matrix
           assemble_inv_press_and_veloc_mass_matrix_diagonal
             (inv_p_mass_pt, inv_v_mass_sub_pt(block_i,block_i), 
-             false, this->Block_to_block_map[0][block_i]);
+             false, this->Doftype_to_block_map[0][block_i]); // RAYRAY this is very dodgy, check this!
          }
 
         // We now have all the vmm. We need to concatenate them.

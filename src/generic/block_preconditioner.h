@@ -132,8 +132,8 @@ namespace oomph
    // There are no precomputed block distributions to start off with.
    Precomputed_block_distribution_pt.resize(0);
 
-   // Clear the Block_to_block_map
-   Block_to_block_map.clear();
+   // Clear the Doftype_to_block_map
+   Doftype_to_block_map.clear();
   } // EOFunc constructor
 
   /// Destructor
@@ -203,7 +203,7 @@ namespace oomph
   /// function with an empty doftype_to_doftype_map vector.
   void turn_into_subsidiary_block_preconditioner
   (BlockPreconditioner<MATRIX>* master_block_prec_pt,
-   Vector<unsigned>& block_map);
+   Vector<unsigned>& dof_number_in_master_preconditioner_coarse);
 
   /// \short Function to turn this preconditioner into a
   /// subsidiary preconditioner that operates within a bigger
@@ -237,8 +237,8 @@ namespace oomph
   /// [6]
   void turn_into_subsidiary_block_preconditioner
   (BlockPreconditioner<MATRIX>* master_block_prec_pt,
-   Vector<unsigned>& block_map,
-   Vector<Vector<unsigned> > & doftype_to_doftype_map);
+   Vector<unsigned>& dof_number_in_master_preconditioner_coarse,
+   Vector<Vector<unsigned> > & dof_coarsen_map_coarse);
 
   /// \short Specify the number of meshes required by this block
   /// preconditioner.
@@ -554,13 +554,13 @@ namespace oomph
     if(preconditioner_blocks_have_been_replaced())
      {
 #ifdef PARANOID
-      if(coarse_doftype >= Doftype_to_doftype_map.size())
+      if(coarse_doftype >= Doftype_coarsen_map_coarse.size())
        {
         std::ostringstream err_msg;
         err_msg << "You have requested the size of subvector "
                 << coarse_doftype << ".\n"
-                << "But the Doftype_to_doftype_map has size "
-                << Doftype_to_doftype_map.size() << "."
+                << "But the Doftype_coarsen_map_coarse has size "
+                << Doftype_coarsen_map_coarse.size() << "."
                 << std::endl;
         throw OomphLibError(err_msg.str(),
                             OOMPH_CURRENT_FUNCTION,
@@ -568,7 +568,7 @@ namespace oomph
        }
 #endif
 
-      return Doftype_to_doftype_map[coarse_doftype].size();
+      return Doftype_coarsen_map_coarse[coarse_doftype].size();
      }
     else
     // The number of coarse doftypes types is the same as the number of
@@ -588,7 +588,7 @@ namespace oomph
      {
       std::ostringstream err_msg;
       err_msg << "Preconditioner blocks have not been precomputed.\n"
-              << "Therefore the Doftype_to_doftype_map is not set."
+              << "Therefore the Doftype_coarsen_map_coarse is not set."
               << std::endl;
       throw OomphLibError(err_msg.str(),
                           OOMPH_CURRENT_FUNCTION,
@@ -596,13 +596,13 @@ namespace oomph
      }
     
     // A range check.
-    if(coarse_doftype >= Doftype_to_doftype_map.size())
+    if(coarse_doftype >= Doftype_coarsen_map_coarse.size())
      {
       std::ostringstream err_msg;
       err_msg << "You have requested subvector "
               << coarse_doftype << ".\n"
-              << "But the Doftype_to_doftype_map has size "
-              << Doftype_to_doftype_map.size() << "."
+              << "But the Doftype_coarsen_map_coarse has size "
+              << Doftype_coarsen_map_coarse.size() << "."
               << std::endl;
       throw OomphLibError(err_msg.str(),
                           OOMPH_CURRENT_FUNCTION,
@@ -610,7 +610,7 @@ namespace oomph
      }
 #endif
 
-    return Doftype_to_doftype_map[coarse_doftype];
+    return Doftype_coarsen_map_coarse[coarse_doftype];
    } // EOFunc coarse_dof_type_subvec(...)
 
   /// \short Return the total number of DOF types.
@@ -1312,7 +1312,7 @@ namespace oomph
   /// REQUIRED by this preconditioner.
   unsigned nblock_types_precomputed() const
   {
-   return Block_to_block_map.size();
+   return Doftype_to_block_map.size();
   }
 
   /// \short the number of dof types precomputed. 
@@ -1320,7 +1320,7 @@ namespace oomph
   /// as the ndof_types REQUIRED by this preconditioner.
   unsigned ndof_types_precomputed() const
   {
-   return Doftype_to_doftype_map.size();
+   return Doftype_coarsen_map_coarse.size();
   }
 
   /// \short Setup a matrix vector product.
@@ -1541,7 +1541,7 @@ namespace oomph
      // block blk_num and return the block number in this preconditioner
      for (unsigned i = 0; i < this->internal_ndof_types(true); i++)
       {
-       if (Dof_number_in_master_preconditioner[i] == blk_num)
+       if (Doftype_in_master_preconditioner_fine[i] == blk_num)
         {return static_cast<int>(i);}
       }
      // if the master block preconditioner number is not found return -1
@@ -1662,7 +1662,7 @@ namespace oomph
    if (is_master_block_preconditioner())
     return b;
    else
-    return Dof_number_in_master_preconditioner[b];
+    return Doftype_in_master_preconditioner_fine[b];
   }
 
   /// \short access function to the preconditioner matrix distribution pt
@@ -1682,10 +1682,10 @@ namespace oomph
   Vector<LinearAlgebraDistribution*> Precomputed_block_distribution_pt;
 
   /// \short Mapping for blocks passed down from the parent preconditioner.
-  Vector<Vector<unsigned> > Block_to_block_map;
+  Vector<Vector<unsigned> > Doftype_to_block_map;
 
   /// \short Mapping for doftypes passed down from the parent preconditioner.
-  Vector<Vector<unsigned> > Doftype_to_doftype_map;
+  Vector<Vector<unsigned> > Doftype_coarsen_map_coarse;
   
   /// \short Flag indicating if the doftypes have been coarsened.
   bool Preconditioner_doftypes_have_been_coarsened;
@@ -1736,7 +1736,7 @@ namespace oomph
 
   /// \short The map between the blocks in the preconditioner and the master
   /// preconditioner. If there is no master preconditioner it remains empty.
-  Vector<unsigned> Dof_number_in_master_preconditioner;
+  Vector<unsigned> Doftype_in_master_preconditioner_fine;
 
   /// \short **This was uncommented** Presumably a non-distributed analogue of
   /// Index_in_dof_block_sparse.
