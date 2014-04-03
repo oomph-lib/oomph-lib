@@ -660,7 +660,7 @@ void SimpleFSIPreconditioner<MATRIX>::identify_required_blocks(
 {
 
  // find number of block types
- unsigned n_dof = this->internal_nblock_types();
+ unsigned n_dof = this->nblock_types();
  
  // Initialise all blocks to false
  for (unsigned i=0;i<n_dof;i++)
@@ -758,7 +758,7 @@ void SimpleFSIPreconditioner<MATRIX>::identify_required_blocks(
   this->block_setup(dof_to_block_map);
 
   // find number of block types
-  n_dof = this->internal_nblock_types();
+  n_dof = this->nblock_types();
 
   // Create matrix that indicates which blocks are required
   DenseMatrix<bool> required_blocks(n_dof,n_dof);

@@ -85,7 +85,7 @@ namespace oomph
   unsigned ndof_types = 0;
   if (this->is_subsidiary_block_preconditioner())
    {
-    ndof_types = this->internal_ndof_types();
+    ndof_types = this->ndof_types();
    }
   else
    {
@@ -466,7 +466,7 @@ namespace oomph
   double t_f_prec_start = TimingHelpers::timer();
   if (F_preconditioner_is_block_preconditioner)
    {
-    unsigned ndof_types = this->internal_ndof_types();
+    unsigned ndof_types = this->ndof_types();
     ndof_types--;
     Vector<unsigned> dof_map(ndof_types);
     for (unsigned i = 0; i < ndof_types; i++)

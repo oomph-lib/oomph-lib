@@ -161,7 +161,7 @@ namespace oomph
    }
   else
    {
-    n_dof_types = this->internal_ndof_types();
+    n_dof_types = this->ndof_types();
     n_solid_dof_types = n_dof_types - (n_dof_types/3);
    }
 #ifdef PARANOID
@@ -580,7 +580,7 @@ namespace oomph
    }
   else
    {
-    n_dof_types = this->internal_ndof_types();
+    n_dof_types = this->ndof_types();
     n_solid_dof_types = n_dof_types - (n_dof_types/3);
    }
 #ifdef PARANOID
@@ -821,7 +821,7 @@ namespace oomph
      
 #ifdef PARANOID
   // paranoid check that this preconditioner has an even number of DOF types
-  if (this->internal_ndof_types()%2 != 0)
+  if (this->ndof_types()%2 != 0)
    {
     std::ostringstream error_message;
     error_message
@@ -835,7 +835,7 @@ namespace oomph
 #endif
      
   // assemble dof_to_block_map
-  unsigned ndof_types = this->internal_ndof_types();
+  unsigned ndof_types = this->ndof_types();
   Vector<unsigned> dof_to_block_map(ndof_types,0);
   for (unsigned i = ndof_types/2; i < ndof_types; i++)
    {
@@ -972,7 +972,7 @@ namespace oomph
   this->clean_up_memory();
   
   // determine the number of DOF types
-  unsigned n_dof_types =  this->internal_ndof_types();
+  unsigned n_dof_types =  this->ndof_types();
   
 #ifdef PARANOID
   // must be Dim*2 dof types
@@ -1068,7 +1068,7 @@ namespace oomph
   unsigned n_block;
    
   // Cache umber of block types (also the spatial DIM)
-  n_block = this->internal_nblock_types();
+  n_block = this->nblock_types();
 
   // loop parameters
   int start = n_block-1;

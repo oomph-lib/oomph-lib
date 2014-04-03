@@ -55,7 +55,7 @@ namespace oomph
  /// Block Preconditioner base class. The block structure of the
  /// overall problem is determined from the \c Mesh's constituent
  /// elements. Each constituent element must be block-preconditionable - i.e
- /// must implement the \c GeneralisedElements functions \c internal_ndof_types() and
+ /// must implement the \c GeneralisedElements functions \c ndof_types() and
  /// get_dof_numbers_for_unknowns(...). A \c Problem can have several
  /// \c Meshes, but each \c Mesh can only contain a single type of element.
  /// The association between global degrees of freedom and their unique global
@@ -529,24 +529,25 @@ namespace oomph
                                                   DoubleVector& v) const;
 
   /// \short Return the number of block types.
-  unsigned internal_nblock_types(const bool &real_nblock_types = false) const
+  unsigned internal_nblock_types() const
   {
-   if(real_nblock_types)
-    {  
-     return Internal_nblock_types;
-    }
-   else
+    return Internal_nblock_types;
+  } // EOFunc Internal_nblock_types(...)
+
+  /// \short Return the number of block types.
+  unsigned nblock_types() const
+  {
+    if(preconditioner_blocks_have_been_replaced())
     {
-     if(preconditioner_blocks_have_been_replaced())
-      {
-       return nblock_types_precomputed();
-      }
-     else
-      {
-       return Internal_nblock_types;
-      }
+      return nblock_types_precomputed();
+    }
+    else
+    {
+      return Internal_nblock_types;
     }
   } // EOFunc Internal_nblock_types(...)
+
+
 
   /// \short Return the number of fine DOF types in a coarse DOF type.
   unsigned ndof_types_in_coarse_dof_type(const unsigned& coarse_doftype) const
@@ -614,63 +615,45 @@ namespace oomph
    } // EOFunc coarse_dof_type_subvec(...)
 
   /// \short Return the total number of DOF types.
-  unsigned internal_ndof_types(const bool &real_ndof_types = false) const
+  unsigned internal_ndof_types() const
   {
     if (is_subsidiary_block_preconditioner())
-     {
-      if(real_ndof_types || !preconditioner_blocks_have_been_replaced())
-       {
-        return Internal_ndof_types;
-       }
-      else
-       {
-        return ndof_types_precomputed();
-       }
-     }
+    {
+      return Internal_ndof_types;
+    }
     else
-     {
+    {
       unsigned ndof = 0;
       for (unsigned i = 0; i < nmesh(); i++)
-       {ndof += ndof_types_in_mesh(i);}
+      {ndof += ndof_types_in_mesh(i);}
       return ndof;
-     }
- 
-//   if(real_ndof_types)
-//    {
-//     if (is_subsidiary_block_preconditioner())
-//      {
-//       return Internal_ndof_types;
-//      }
-//     else
-//      {
-//       unsigned ndof = 0;
-//       for (unsigned i = 0; i < nmesh(); i++)
-//        {ndof += ndof_types_in_mesh(i);}
-//       return ndof;
-//      }
-//    }
-//   else
-//    {
-//     if(preconditioner_blocks_have_been_replaced())
-//      {
-//       return ndof_types_precomputed();
-//      }
-//     else
-//      {
-//       if (is_subsidiary_block_preconditioner())
-//        {
-//         return Internal_ndof_types;
-//        }
-//       else
-//        {
-//         unsigned ndof = 0;
-//         for (unsigned i = 0; i < nmesh(); i++)
-//          {ndof += ndof_types_in_mesh(i);}
-//         return ndof;
-//        }
-//      }
-//    }
+    }
   } // EOFunc internal_ndof_types(...)
+ 
+
+  /// \short Return the total number of DOF types.
+  unsigned ndof_types() const
+  {
+    if(preconditioner_blocks_have_been_replaced())
+    {
+      return ndof_types_precomputed();
+    }
+    else
+    {
+      if (is_subsidiary_block_preconditioner())
+      {
+        return Internal_ndof_types;
+      }
+      else
+      {
+        unsigned ndof = 0;
+        for (unsigned i = 0; i < nmesh(); i++)
+        {ndof += ndof_types_in_mesh(i);}
+        return ndof;
+      }
+    }
+  } // EOFunc ndof_types(...)
+
 
   /// \short Access to i-th mesh (of the various meshes that contain block
   /// preconditionable elements of the same type). If this is a subsidiary
@@ -865,7 +848,7 @@ namespace oomph
   void output_blocks_to_files(const std::string& basefilename,
                               const unsigned& precision = 8) const
   {
-   unsigned nblocks = internal_nblock_types(true);
+   unsigned nblocks = internal_nblock_types();
 
    for(unsigned i=0; i<nblocks; i++)
     {
@@ -991,8 +974,8 @@ namespace oomph
    oomph_info << "===========================================" << std::endl;
    oomph_info << "Block Preconditioner Documentation" << std::endl
               << std::endl;
-   oomph_info << "Number of DOF types: " << internal_ndof_types(true) << std::endl;
-   oomph_info << "Number of block types: " << internal_nblock_types(true) << std::endl;
+   oomph_info << "Number of DOF types: " << internal_ndof_types() << std::endl;
+   oomph_info << "Number of block types: " << internal_nblock_types() << std::endl;
    oomph_info << std::endl;
    if (is_subsidiary_block_preconditioner())
     {
@@ -1003,7 +986,7 @@ namespace oomph
       }
     }
    oomph_info << std::endl;
-   for (unsigned b = 0; b < internal_nblock_types(true); b++)
+   for (unsigned b = 0; b < internal_nblock_types(); b++)
     {
      oomph_info << "Block " << b << " DOF types:";
      for (unsigned i = 0; i < Block_number_to_dof_number_lookup[b].size();
@@ -1185,15 +1168,15 @@ namespace oomph
 //    }
 //
 //   // Check that this is the most fine grain .
-//   if(precomputed_block_nrow != this->internal_ndof_types(true))
+//   if(precomputed_block_nrow != this->internal_ndof_types())
 //    {
 //     std::ostringstream error_message;
 //     error_message << "This must be the most fine grain block matrix.\n"
 //                   << "It must have ndof_types number of rows / columns.\n"
 //                   << "You have given me a " << precomputed_block_nrow
 //                   << " by " << precomputed_block_nrow << " matrix.\n"
-//                   << "I want a " << internal_ndof_types(true) << " by "
-//                   << internal_ndof_types(true)
+//                   << "I want a " << internal_ndof_types() << " by "
+//                   << internal_ndof_types()
 //                   << " matrix." << std::endl;
 //     throw OomphLibError(error_message.str(),
 //                         OOMPH_CURRENT_FUNCTION,
@@ -1563,7 +1546,7 @@ namespace oomph
 
      // Search through the Block_number_in_master_preconditioner for master
      // block blk_num and return the block number in this preconditioner
-     for (unsigned i = 0; i < this->internal_ndof_types(true); i++)
+     for (unsigned i = 0; i < this->internal_ndof_types(); i++)
       {
        if (Doftype_in_master_preconditioner_fine[i] == blk_num)
         {return static_cast<int>(i);}

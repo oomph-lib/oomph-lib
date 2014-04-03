@@ -175,7 +175,7 @@ namespace Biharmonic_schur_complement_Hypre_defaults
  // for the 5th block diagonal block (Matrix is also diagonal hence a diagonal
  // preconditioner is sufficient in the exact biharmonic preconditioner case 
  // as well)
- if (this->internal_nblock_types() == 5)
+ if (this->nblock_types() == 5)
   {
    // get the matrix for block J_33
    CRDoubleMatrix* j_44_pt = new CRDoubleMatrix;
@@ -210,7 +210,7 @@ namespace Biharmonic_schur_complement_Hypre_defaults
   return_block_vector(3,block_z,z);
 
   // solve the hijacked sub block preconditioner if required
-  if (this->internal_nblock_types() == 5)
+  if (this->nblock_types() == 5)
    {
     block_r.clear();
     block_z.clear();
@@ -233,7 +233,7 @@ void ExactSubBiharmonicPreconditioner::setup()
  this->block_setup();
 
  // Mumber of block types
- unsigned n_block_types = this->internal_nblock_types();
+ unsigned n_block_types = this->nblock_types();
 
  // check for required number of blocks 
 #ifdef PARANOID
@@ -326,7 +326,7 @@ void InexactSubBiharmonicPreconditioner::setup()
  this->block_setup();
 
  // Number of block types
- unsigned n_block_types = this->internal_nblock_types();
+ unsigned n_block_types = this->nblock_types();
 
  // paranoid check for number of blocks
 #ifdef PARANOID

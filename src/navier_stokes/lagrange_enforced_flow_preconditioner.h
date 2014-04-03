@@ -941,7 +941,7 @@ namespace oomph
     
     // RAYEDIT - I'm not sure what to do here.
     // I'll cross the bridge when I come to it.
-    n_doftypes = this->internal_ndof_types();
+    n_doftypes = this->ndof_types();
     N_fluid_doftypes = 5;
    }
   
@@ -1112,7 +1112,7 @@ namespace oomph
   this->block_setup(block_setup_bcpl);
 
 //  // Check the block size.
-//  unsigned tmp_nblocks = this->internal_nblock_types();
+//  unsigned tmp_nblocks = this->nblock_types();
 //  for (unsigned i = 0; i < tmp_nblocks; i++) 
 //  {
 //    // Go along the first column.
@@ -1155,7 +1155,7 @@ namespace oomph
     // The dimension
     precinfo_ofstream << spatial_dim << " ";
     // The number of blocks
-    unsigned nblock_types = this->internal_nblock_types();
+    unsigned nblock_types = this->nblock_types();
 
     for (unsigned mesh_i = 0; mesh_i < nmesh; mesh_i++)
      {
