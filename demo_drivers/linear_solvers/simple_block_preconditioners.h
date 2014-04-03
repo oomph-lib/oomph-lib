@@ -111,8 +111,8 @@ namespace oomph
   // Set up the block look up scheme
   this->block_setup();
 
-  // Number of blocks
-  unsigned nblock_types = this->nblock_types();
+  // Number of blocks 
+  unsigned nblock_types = this->internal_nblock_types();
 
   // Resize the storage for the diagonal blocks
   Diagonal_block_preconditioner_pt.resize(nblock_types);
@@ -149,7 +149,7 @@ namespace oomph
   {
    
    // Get number of blocks
-   unsigned n_block = this->nblock_types();
+   unsigned n_block = this->internal_nblock_types();
    
    /* // hierher */
    /* // Cache umber of block types */
@@ -160,7 +160,7 @@ namespace oomph
    /*  } */
    /* else */
    /*  { */
-   /*   n_block = this->nblock_types(); */
+   /*   n_block = this->internal_nblock_types(); */
    /*  } */
 
    // Split up rhs vector into sub-vectors, re-arranged to match

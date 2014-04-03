@@ -48,7 +48,7 @@ namespace oomph
   GeneralPurposeBlockPreconditioner<MATRIX>::block_setup();
 
   // number of types of blocks.
-  unsigned nblock_types = this->nblock_types();
+  unsigned nblock_types = this->internal_nblock_types();
 
   // Create any subsidiary preconditioners needed
   this->fill_in_subsidiary_preconditioners(nblock_types);
@@ -118,7 +118,7 @@ namespace oomph
  preconditioner_solve(const DoubleVector& r, DoubleVector& z)
  {
   // Cache umber of block types
-  unsigned n_block = this->nblock_types();
+  unsigned n_block = this->internal_nblock_types();
 
   // Get the right hand side vector (b in Ax = b) in block form.
   Vector<DoubleVector> block_r;
@@ -175,7 +175,7 @@ namespace oomph
   this->block_setup();
    
   // number of block types
-  unsigned nblock_types = this->nblock_types();
+  unsigned nblock_types = this->internal_nblock_types();
 
   // storage for the off diagonal matrix vector products
   Off_diagonal_matrix_vector_products.resize(nblock_types,nblock_types,0);
@@ -225,7 +225,7 @@ namespace oomph
  preconditioner_solve(const DoubleVector& r, DoubleVector& z)
  {
   // Cache number of block types
-  unsigned n_block = this->nblock_types();
+  unsigned n_block = this->internal_nblock_types();
 
   //
   int start = n_block-1;
@@ -306,7 +306,7 @@ namespace oomph
   this->block_setup();
 
   // get the number of DOF types
-  unsigned nblock_types = this->nblock_types();
+  unsigned nblock_types = this->internal_nblock_types();
 
   // Build the preconditioner matrix
   CRDoubleMatrix* exact_block_matrix_pt 

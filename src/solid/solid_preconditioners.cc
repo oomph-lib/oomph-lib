@@ -85,10 +85,12 @@ namespace oomph
   unsigned ndof_types = 0;
   if (this->is_subsidiary_block_preconditioner())
    {
-    ndof_types = this->ndof_types();
+    ndof_types = this->internal_ndof_types();
    }
   else
    {
+    // RAYRAY check if this is correct, IIRC there is no proper mapping of the
+    // meshes
     ndof_types = this->ndof_types_in_mesh(0);
    }
   Vector<unsigned> dof_to_block_map(ndof_types);
@@ -464,7 +466,7 @@ namespace oomph
   double t_f_prec_start = TimingHelpers::timer();
   if (F_preconditioner_is_block_preconditioner)
    {
-    unsigned ndof_types = this->ndof_types();
+    unsigned ndof_types = this->internal_ndof_types();
     ndof_types--;
     Vector<unsigned> dof_map(ndof_types);
     for (unsigned i = 0; i < ndof_types; i++)

@@ -225,10 +225,13 @@ namespace oomph
 
   if (this->is_subsidiary_block_preconditioner())
    {
-    ndof_types = this->ndof_types();
+    ndof_types = this->internal_ndof_types();
    }
   else
    {
+     // RAYRAY check, this is dangerous.... is Mesh 0 always the NS mesh, even
+     // in a subsidiary block preconditioner? I.e. is the appropriate look up
+     // scheme in place plus ndof types is?
     ndof_types = this->ndof_types_in_mesh(0);
    }
 
@@ -295,7 +298,7 @@ namespace oomph
   CRDoubleMatrix* inv_v_mass_pt = 0;
   CRDoubleMatrix* inv_p_mass_pt = 0;
 
-  unsigned n_velocity_doftypes = this->ndof_types(true) - 1;
+  unsigned n_velocity_doftypes = this->internal_ndof_types(true) - 1;
 
   DenseMatrix<CRDoubleMatrix*> inv_v_mass_sub_pt(n_velocity_doftypes,
                                                  n_velocity_doftypes,0);
@@ -1683,11 +1686,11 @@ namespace oomph
   unsigned p_nrow=0;
   double* p_values = 0;
 
-  unsigned n_velocity_blocktypes = this->nblock_types(true);
+  unsigned n_velocity_blocktypes = this->internal_nblock_types(true);
   if (!Use_LSC)
    {
     // determine the pressure rows required by this processor
-    // pressure block is located at ndof_types(true)
+    // pressure block is located at internal_ndof_types(true)
     p_first_row = this->block_distribution_pt(n_velocity_blocktypes)
                         ->first_row();
     p_nrow_local = this->block_distribution_pt(n_velocity_blocktypes)
