@@ -584,9 +584,9 @@ template<unsigned DIM>
 class MyTaylorHoodElement :  public virtual QTaylorHoodElement<DIM>
 {
  
- /// \short The number of "blocks" that degrees of freedom in this element
+ /// \short The number of "DOF types" that degrees of freedom in this element
  /// are sub-divided into: Velocity and pressure.
- unsigned ndof_types()
+ unsigned ndof_types() const
   {
    return DIM+1;
   }
@@ -594,17 +594,17 @@ class MyTaylorHoodElement :  public virtual QTaylorHoodElement<DIM>
 /// Create a list of pairs for all unknowns in this element,
 /// so the first entry in each pair contains the global equation
 /// number of the unknown, while the second one contains the number
-/// of the "block" that this unknown is associated with.
+/// of the "DOF type" that this unknown is associated with.
 /// (Function can obviously only be called if the equation numbering
 /// scheme has been set up.)
  void get_dof_numbers_for_unknowns(
-  std::list<std::pair<unsigned long,unsigned> >& block_lookup_list)
+  std::list<std::pair<unsigned long,unsigned> >& dof_lookup_list) const
   {
    // number of nodes
    unsigned n_node = this->nnode();
    
-   // temporary pair (used to store block lookup prior to being added to list)
-   std::pair<unsigned,unsigned> block_lookup;
+   // temporary pair (used to store dof lookup prior to being added to list)
+   std::pair<unsigned,unsigned> dof_lookup;
    
    // loop over the nodes
    for (unsigned j=0;j<n_node;j++)
@@ -623,15 +623,15 @@ class MyTaylorHoodElement :  public virtual QTaylorHoodElement<DIM>
        // with by the element containing their master nodes
        if (local_eqn_number >= 0)
         {
-         // store block lookup in temporary pair: Global equation number
+         // store dof lookup in temporary pair: Global equation number
          // is the first entry in pair
-         block_lookup.first = this->eqn_number(local_eqn_number);
+         dof_lookup.first = this->eqn_number(local_eqn_number);
          
-         // set block numbers: Block number is the second entry in pair
-         block_lookup.second = i;
+         // set dof numbers: Dof number is the second entry in pair
+         dof_lookup.second = i;
          
          // add to list
-         block_lookup_list.push_front(block_lookup);
+         dof_lookup_list.push_front(dof_lookup);
         }
       }
     }

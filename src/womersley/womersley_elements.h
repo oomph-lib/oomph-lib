@@ -2836,9 +2836,9 @@ public virtual GeneralisedElement
    Pressure_data_id = add_external_data(pressure_data_pt);
   }
  
- /// \short The number of "blocks" that degrees of freedom in this element
+ /// \short The number of "DOF types" that degrees of freedom in this element
  /// are sub-divided into - set to 1
- unsigned ndof_types()
+ unsigned ndof_types() const
   {
    return 1;
   }
@@ -2846,20 +2846,20 @@ public virtual GeneralisedElement
  /// \short Create a list of pairs for all unknowns in this element,
  /// so that the first entry in each pair contains the global equation
  /// number of the unknown, while the second one contains the number
- /// of the "block" that this unknown is associated with.
+ /// of the "DOF type" that this unknown is associated with.
  /// (Function can obviously only be called if the equation numbering
  /// scheme has been set up.) 
  void get_dof_numbers_for_unknowns(
-  std::list<std::pair<unsigned long, unsigned> >& block_lookup_list)
+  std::list<std::pair<unsigned long, unsigned> >& dof_lookup_list) const
   {
-   // pair to store block lookup prior to being added to list
-   std::pair<unsigned,unsigned> block_lookup;
+   // pair to store dof lookup prior to being added to list
+   std::pair<unsigned,unsigned> dof_lookup;
    
-   block_lookup.first = this->eqn_number(0);
-   block_lookup.second = 0;
+   dof_lookup.first = this->eqn_number(0);
+   dof_lookup.second = 0;
    
    // add to list
-   block_lookup_list.push_front(block_lookup);
+   dof_lookup_list.push_front(dof_lookup);
   }
  
   protected:
@@ -2988,9 +2988,9 @@ public virtual NetFluxControlElement
   }
  
  
- /// \short The number of "blocks" that degrees of freedom in this element
+ /// \short The number of "DOF types" that degrees of freedom in this element
  /// are sub-divided into - set to 1
- unsigned ndof_types()
+ unsigned ndof_types() const
   {
    return 1;
   }
@@ -2998,20 +2998,20 @@ public virtual NetFluxControlElement
  /// \short Create a list of pairs for all unknowns in this element,
  /// so that the first entry in each pair contains the global equation
  /// number of the unknown, while the second one contains the number
- /// of the "block" that this unknown is associated with.
+ /// of the "DOF type" that this unknown is associated with.
  /// (Function can obviously only be called if the equation numbering
  /// scheme has been set up.)
  void get_dof_numbers_for_unknowns(
-  std::list<std::pair<unsigned long, unsigned> >& block_lookup_list)
+  std::list<std::pair<unsigned long, unsigned> >& dof_lookup_list) const
   {
-   // pair to store block lookup prior to being added to list
-   std::pair<unsigned,unsigned> block_lookup;
+   // pair to store dof lookup prior to being added to list
+   std::pair<unsigned,unsigned> dof_lookup;
  
-   block_lookup.first = this->eqn_number(0);
-   block_lookup.second = 0;
+   dof_lookup.first = this->eqn_number(0);
+   dof_lookup.second = 0;
      
    // add to list
-   block_lookup_list.push_front(block_lookup);
+   dof_lookup_list.push_front(dof_lookup);
   }
  
 };

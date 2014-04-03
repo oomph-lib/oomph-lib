@@ -142,7 +142,7 @@ namespace oomph
 
    /// \short Return the local degree of freedom associated with the
    /// i-th solid pressure. Default is that there are none.
-   virtual int solid_p_local_eqn(const unsigned &i) {return -1;}
+   virtual int solid_p_local_eqn(const unsigned &i)const {return -1;}
    
    /// \short Return the index at which the solid pressure is stored if it
    /// is stored at the nodes. If not stored at the nodes this will return
@@ -275,7 +275,7 @@ namespace oomph
 
 
    /// \short returns the number of DOF types associated with this element. 
-   unsigned ndof_types()
+   unsigned ndof_types() const
     {
      return DIM;
     }
@@ -291,10 +291,10 @@ namespace oomph
    /// 1 - y displacement
    /// 2 - z displacement
    void get_dof_numbers_for_unknowns(
-    std::list<std::pair<unsigned long,unsigned> >& block_lookup_list)
+    std::list<std::pair<unsigned long,unsigned> >& dof_lookup_list) const
     {
-     // temporary pair (used to store block lookup prior to being added to list
-     std::pair<unsigned,unsigned> block_lookup;
+     // temporary pair (used to store dof lookup prior to being added to list
+     std::pair<unsigned,unsigned> dof_lookup;
    
      // number of nodes
      const unsigned n_node = this->nnode();
@@ -322,13 +322,13 @@ namespace oomph
            // ignore pinned values
            if (local_unknown >= 0)
             {
-             // store block lookup in temporary pair: First entry in pair
-             // is global equation number; second entry is block type
-             block_lookup.first = this->eqn_number(local_unknown);
-             block_lookup.second = i;
+             // store dof lookup in temporary pair: First entry in pair
+             // is global equation number; second entry is dof type
+             dof_lookup.first = this->eqn_number(local_unknown);
+             dof_lookup.second = i;
            
              // add to list
-             block_lookup_list.push_front(block_lookup);
+             dof_lookup_list.push_front(dof_lookup);
            
             }
           }
@@ -1015,7 +1015,7 @@ template<unsigned NNODE_1D>
    
    /// \short returns the number of DOF types associated with this element:
    ///  displacement components and pressure
-   unsigned ndof_types()
+   unsigned ndof_types() const
    {
     return DIM+1; 
     }
@@ -1029,10 +1029,10 @@ template<unsigned NNODE_1D>
    /// There are DIM+1 types of DOF: displacement compnents and
    /// pressure 
    void get_dof_numbers_for_unknowns(
-    std::list<std::pair<unsigned long,unsigned> >& block_lookup_list)
+    std::list<std::pair<unsigned long,unsigned> >& dof_lookup_list) const
     {
-     // temporary pair (used to store block lookup prior to being added to list
-     std::pair<unsigned,unsigned> block_lookup;
+     // temporary pair (used to store dof lookup prior to being added to list
+     std::pair<unsigned,unsigned> dof_lookup;
    
      // number of nodes
      const unsigned n_node = this->nnode();
@@ -1060,13 +1060,13 @@ template<unsigned NNODE_1D>
            // ignore pinned values
            if (local_unknown >= 0)
             {
-             // store block lookup in temporary pair: First entry in pair
-             // is global equation number; second entry is block type
-             block_lookup.first = this->eqn_number(local_unknown);
-             block_lookup.second = i;
+             // store dof lookup in temporary pair: First entry in pair
+             // is global equation number; second entry is dof type
+             dof_lookup.first = this->eqn_number(local_unknown);
+             dof_lookup.second = i;
            
              // add to list
-             block_lookup_list.push_front(block_lookup);
+             dof_lookup_list.push_front(dof_lookup);
             }
           }
         }
@@ -1080,13 +1080,13 @@ template<unsigned NNODE_1D>
        // ignore pinned values
        if (local_unknown >= 0)
         {
-         // store block lookup in temporary pair: First entry in pair
-         // is global equation number; second entry is block type 
-         block_lookup.first = this->eqn_number(local_unknown);
-         block_lookup.second = DIM;
+         // store dof lookup in temporary pair: First entry in pair
+         // is global equation number; second entry is dof type 
+         dof_lookup.first = this->eqn_number(local_unknown);
+         dof_lookup.second = DIM;
          
          // add to list
-         block_lookup_list.push_front(block_lookup);
+         dof_lookup_list.push_front(dof_lookup);
         }
       }
 
@@ -1305,9 +1305,9 @@ class QPVDElementWithPressure : public virtual SolidQElement<DIM,3>,
  unsigned P_solid_internal_index;
  
  /// \short Overload the access function 
- /// that is used to return local equation correpsonding to the i-th
+ /// that is used to return local equation corresponding to the i-th
  /// solid pressure value
- inline int solid_p_local_eqn(const unsigned &i)
+ inline int solid_p_local_eqn(const unsigned &i) const
   {return this->internal_local_eqn(P_solid_internal_index,i);}
  
  /// Return the pressure shape functions
@@ -1484,9 +1484,9 @@ protected:
  static const unsigned Pconv[];
 
  /// \short Overload the access function 
- /// that is used to return local equation correpsonding to the i-th
+ /// that is used to return local equation corresponding to the i-th
  /// solid pressure value
- inline int solid_p_local_eqn(const unsigned &i)
+ inline int solid_p_local_eqn(const unsigned &i) const
   {return this->nodal_local_eqn(Pconv[i],this->solid_p_nodal_index());}
 
  /// Return the pressure shape functions
@@ -2009,9 +2009,9 @@ class TPVDElementWithContinuousPressure : public virtual SolidTElement<DIM,3>,
  static const unsigned Pconv[];
  
  /// \short Overload the access function 
- /// that is used to return local equation correpsonding to the i-th
+ /// that is used to return local equation corresponding to the i-th
  /// solid pressure value
- inline int solid_p_local_eqn(const unsigned &i)
+ inline int solid_p_local_eqn(const unsigned &i) const
   {return this->nodal_local_eqn(Pconv[i],this->solid_p_nodal_index());}
  
  /// Pressure shape functions at local coordinate s

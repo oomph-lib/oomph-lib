@@ -1,4 +1,4 @@
-#//LIC// ====================================================================
+//LIC// ====================================================================
 //LIC// This file forms part of oomph-lib, the object-oriented, 
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
@@ -590,9 +590,13 @@ namespace oomph
     void output(FILE* file_pt, const unsigned &n_plot)
     { LinearisedAxisymmetricNavierStokesEquations::output(file_pt,n_plot); }
     
-    /// \short The number of "blocks" that degrees of freedom in this
+    /// \short The number of "DOF types" that degrees of freedom in this
     /// element are sub-divided into: Velocity and pressure.
-    unsigned ndof_types() { return 8; }
+    /// RAYRAY - The above comment is not useful for understanding why 8 is
+    /// returned.
+    unsigned ndof_types()const { return 8; }
+
+    // RAYRAY - where is the function get_dof_numbers_for_unknowns(...) ?
     
   }; // End of LinearisedAxisymmetricQCrouzeixRaviartElement class definition
  
@@ -823,9 +827,13 @@ namespace oomph
     void output(FILE* file_pt, const unsigned &n_plot)
     { LinearisedAxisymmetricNavierStokesEquations::output(file_pt,n_plot); }
     
-    /// \short Returns the number of "blocks" that degrees of freedom
+    /// \short Returns the number of "DOF types" that degrees of freedom
     /// in this element are sub-divided into: Velocity and pressure.
-    unsigned ndof_types() { return 8; }
+    /// RAYRAY - The above comment is not useful for understanding why 8
+    /// is returned.
+    unsigned ndof_types()const { return 8; }
+
+    // RAYRAY - where is the function get_dof_numbers_for_unknowns(...)?
     
   }; // End of LinearisedAxisymmetricQCrouzeixRaviartElement class definition
  

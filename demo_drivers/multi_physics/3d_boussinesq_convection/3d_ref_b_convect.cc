@@ -1262,7 +1262,7 @@ void compute_error(ostream &outfile,
   } //End of function
 
  ///
- unsigned ndof_types()
+ unsigned ndof_types() const
   {
    return DIM+2;
   }
@@ -1275,7 +1275,7 @@ void compute_error(ostream &outfile,
  /// (Function can obviously only be called if the equation numbering
  /// scheme has been set up.)
  void get_dof_numbers_for_unknowns(
-  std::list<std::pair<unsigned long,unsigned> >& block_lookup_list)
+  std::list<std::pair<unsigned long,unsigned> >& dof_lookup_list) const
   {
    // number of nodes
    unsigned n_node = this->nnode();
@@ -1283,8 +1283,8 @@ void compute_error(ostream &outfile,
    // number of pressure values
    unsigned n_press = this->npres_nst();
 
-   // temporary pair (used to store block lookup prior to being added to list)
-   std::pair<unsigned,unsigned> block_lookup;
+   // temporary pair (used to store dof lookup prior to being added to list)
+   std::pair<unsigned,unsigned> dof_lookup;
 
    // pressure dof number
    unsigned pressure_dof_number = DIM;
@@ -1300,13 +1300,13 @@ void compute_error(ostream &outfile,
      // with by the element containing their master nodes
      if (local_eqn_number >= 0)
       {
-       // store block lookup in temporary pair: First entry in pair
-       // is global equation number; second entry is block type
-       block_lookup.first = this->eqn_number(local_eqn_number);
-       block_lookup.second = pressure_dof_number;
+       // store dof lookup in temporary pair: First entry in pair
+       // is global equation number; second entry is dof type
+       dof_lookup.first = this->eqn_number(local_eqn_number);
+       dof_lookup.second = pressure_dof_number;
 
        // add to list
-       block_lookup_list.push_front(block_lookup);
+       dof_lookup_list.push_front(dof_lookup);
       }
     }
 
@@ -1322,13 +1322,13 @@ void compute_error(ostream &outfile,
        // ignore pinned values
        if (local_eqn_number >= 0)
         {
-         // store block lookup in temporary pair: First entry in pair
-         // is global equation number; second entry is block type
-         block_lookup.first = this->eqn_number(local_eqn_number);
-         block_lookup.second = v;
+         // store dof lookup in temporary pair: First entry in pair
+         // is global equation number; second entry is dof type
+         dof_lookup.first = this->eqn_number(local_eqn_number);
+         dof_lookup.second = v;
 
          // add to list
-         block_lookup_list.push_front(block_lookup);
+         dof_lookup_list.push_front(dof_lookup);
         }
       }
 
@@ -1341,15 +1341,15 @@ void compute_error(ostream &outfile,
       // ignore pinned values
       if (local_eqn_number >= 0)
        {
-        // store block lookup in temporary pair: First entry in pair
-        // is global equation number; second entry is block type
-        block_lookup.first = this->eqn_number(local_eqn_number);
+        // store dof lookup in temporary pair: First entry in pair
+        // is global equation number; second entry is dof type
+        dof_lookup.first = this->eqn_number(local_eqn_number);
 
         // Temperture is the last type
-        block_lookup.second = DIM+1;
+        dof_lookup.second = DIM+1;
 
         // add to list
-        block_lookup_list.push_front(block_lookup);
+        dof_lookup_list.push_front(dof_lookup);
 
        }
      }

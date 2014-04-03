@@ -348,7 +348,7 @@ public virtual NavierStokesElementWithDiagonalMassMatrices,
  /// \short Access function for the local equation number information for
  /// the pressure.
  /// p_local_eqn[n] = local equation number or < 0 if pinned
- virtual int p_local_eqn(const unsigned &n)=0;
+ virtual int p_local_eqn(const unsigned &n)const=0;
 
  /// \short Global eqn number of pressure dof that's pinned in pressure
  /// adv diff problem
@@ -1638,7 +1638,7 @@ public:
 
 
  /// Return the local equation numbers for the pressure values.
- inline int p_local_eqn(const unsigned &n)
+ inline int p_local_eqn(const unsigned &n) const
   {return this->internal_local_eqn(P_nst_internal_index,n);}
  
  /// Pin p_dof-th pressure dof and set it to value specified by p_value.
@@ -1712,9 +1712,9 @@ public:
   {NavierStokesEquations<DIM>::full_output(outfile,nplot);}
 
 
- /// \short The number of "blocks" that degrees of freedom in this element
+ /// \short The number of "DOF types" that degrees of freedom in this element
  /// are sub-divided into: Velocity and pressure.
- unsigned ndof_types()
+ unsigned ndof_types() const
   {
    return DIM+1;
   }
@@ -1722,11 +1722,11 @@ public:
  /// \short Create a list of pairs for all unknowns in this element,
  /// so that the first entry in each pair contains the global equation
  /// number of the unknown, while the second one contains the number
- /// of the "block" that this unknown is associated with.
+ /// of the "DOF type" that this unknown is associated with.
  /// (Function can obviously only be called if the equation numbering
  /// scheme has been set up.) Velocity=0; Pressure=1
  void get_dof_numbers_for_unknowns(
-  std::list<std::pair<unsigned long,unsigned> >& dof_lookup_list);
+  std::list<std::pair<unsigned long,unsigned> >& dof_lookup_list) const;
 
 };
 
@@ -2086,7 +2086,7 @@ public virtual QElement<1,3>
 //=======================================================================
 /// Taylor--Hood elements are Navier--Stokes elements 
 /// with quadratic interpolation for velocities and positions and 
-/// continous linear pressure interpolation. They can be used
+/// continuous linear pressure interpolation. They can be used
 /// within oomph-lib's block-preconditioning framework.
 //=======================================================================
 template <unsigned DIM>
@@ -2166,7 +2166,7 @@ class QTaylorHoodElement : public virtual QElement<DIM,3>,
  virtual int p_nodal_index_nst() const {return static_cast<int>(DIM);}
 
  /// Return the local equation numbers for the pressure values.
- inline int p_local_eqn(const unsigned &n)
+ inline int p_local_eqn(const unsigned &n) const
   {return this->nodal_local_eqn(Pconv[n],p_nodal_index_nst());}
 
  /// \short Access function for the pressure values at local pressure 
@@ -2243,9 +2243,9 @@ class QTaylorHoodElement : public virtual QElement<DIM,3>,
   {NavierStokesEquations<DIM>::output(file_pt,nplot);}
 
  
- /// \short Returns the number of "blocks" that degrees of freedom
+ /// \short Returns the number of "DOF types" that degrees of freedom
  /// in this element are sub-divided into: Velocity and pressure.
- unsigned ndof_types()
+ unsigned ndof_types() const
   {
    return DIM+1;
   }
@@ -2253,11 +2253,11 @@ class QTaylorHoodElement : public virtual QElement<DIM,3>,
  /// \short Create a list of pairs for all unknowns in this element,
  /// so that the first entry in each pair contains the global equation
  /// number of the unknown, while the second one contains the number
- /// of the "block" that this unknown is associated with.
+ /// of the "DOF type" that this unknown is associated with.
  /// (Function can obviously only be called if the equation numbering
  /// scheme has been set up.) Velocity=0; Pressure=1
  void get_dof_numbers_for_unknowns(
-  std::list<std::pair<unsigned long, unsigned> >& block_lookup_list);
+  std::list<std::pair<unsigned long, unsigned> >& dof_lookup_list) const;
  
  
 };

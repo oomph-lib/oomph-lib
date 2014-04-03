@@ -2385,12 +2385,12 @@ identify_pressure_data(std::set<std::pair<Data*,unsigned> > &paired_pressure_dat
 /// Create a list of pairs for all unknowns in this element,
 /// so that the first entry in each pair contains the global equation
 /// number of the unknown, while the second one contains the number
-/// of the "block" that this unknown is associated with.
+/// of the "DOF type" that this unknown is associated with.
 /// (Function can obviously only be called if the equation numbering
 /// scheme has been set up.)
 //=============================================================================
 void QSphericalCrouzeixRaviartElement::get_dof_numbers_for_unknowns(
- std::list<std::pair<unsigned long,unsigned> >& block_lookup_list)
+ std::list<std::pair<unsigned long,unsigned> >& dof_lookup_list) const
 {
  // number of nodes
  unsigned n_node = this->nnode();
@@ -2398,8 +2398,8 @@ void QSphericalCrouzeixRaviartElement::get_dof_numbers_for_unknowns(
  // number of pressure values
  unsigned n_press = this->npres_spherical_nst();
  
- // temporary pair (used to store block lookup prior to being added to list)
- std::pair<unsigned,unsigned> block_lookup;
+ // temporary pair (used to store dof lookup prior to being added to list)
+ std::pair<unsigned,unsigned> dof_lookup;
  
  // pressure dof number
  unsigned pressure_dof_number = 3;
@@ -2415,13 +2415,13 @@ void QSphericalCrouzeixRaviartElement::get_dof_numbers_for_unknowns(
    // with by the element containing their master nodes
    if (local_eqn_number >= 0)
     {
-     // store block lookup in temporary pair: First entry in pair
-     // is global equation number; second entry is block type
-     block_lookup.first = this->eqn_number(local_eqn_number);
-     block_lookup.second = pressure_dof_number;
+     // store dof lookup in temporary pair: First entry in pair
+     // is global equation number; second entry is dof type
+     dof_lookup.first = this->eqn_number(local_eqn_number);
+     dof_lookup.second = pressure_dof_number;
      
      // add to list
-     block_lookup_list.push_front(block_lookup);
+     dof_lookup_list.push_front(dof_lookup);
     }
   }
  
@@ -2440,13 +2440,13 @@ void QSphericalCrouzeixRaviartElement::get_dof_numbers_for_unknowns(
      // ignore pinned values
      if (local_eqn_number >= 0)
       {
-       // store block lookup in temporary pair: First entry in pair
-       // is global equation number; second entry is block type
-       block_lookup.first = this->eqn_number(local_eqn_number);
-       block_lookup.second = v;
+       // store dof lookup in temporary pair: First entry in pair
+       // is global equation number; second entry is dof type
+       dof_lookup.first = this->eqn_number(local_eqn_number);
+       dof_lookup.second = v;
        
        // add to list
-       block_lookup_list.push_front(block_lookup);
+       dof_lookup_list.push_front(dof_lookup);
        
       }
     }
@@ -2531,13 +2531,13 @@ identify_pressure_data(std::set<std::pair<Data*,unsigned> > &paired_pressure_dat
 /// Create a list of pairs for all unknowns in this element,
 /// so the first entry in each pair contains the global equation
 /// number of the unknown, while the second one contains the number
-/// of the "block" that this unknown is associated with.
+/// of the "DOF type" that this unknown is associated with.
 /// (Function can obviously only be called if the equation numbering
 /// scheme has been set up.)
 //============================================================================
 void QSphericalTaylorHoodElement::get_dof_numbers_for_unknowns(
  std::list<std::pair<unsigned long,
- unsigned> >& block_lookup_list)
+ unsigned> >& dof_lookup_list) const
 {
  // number of nodes
  unsigned n_node = this->nnode();
@@ -2545,8 +2545,8 @@ void QSphericalTaylorHoodElement::get_dof_numbers_for_unknowns(
  // local eqn no for pressure unknown
  //unsigned p_index = this->p_nodal_index_spherical_nst();
  
- // temporary pair (used to store block lookup prior to being added to list)
- std::pair<unsigned,unsigned> block_lookup;
+ // temporary pair (used to store dof lookup prior to being added to list)
+ std::pair<unsigned,unsigned> dof_lookup;
  
  // loop over the nodes
  for (unsigned n = 0; n < n_node; n++)
@@ -2565,15 +2565,15 @@ void QSphericalTaylorHoodElement::get_dof_numbers_for_unknowns(
      // with by the element containing their master nodes
      if (local_eqn_number >= 0)
       {
-       // store block lookup in temporary pair: Global equation number
+       // store dof lookup in temporary pair: Global equation number
        // is the first entry in pair
-       block_lookup.first = this->eqn_number(local_eqn_number);
+       dof_lookup.first = this->eqn_number(local_eqn_number);
        
-       // set block numbers: Block number is the second entry in pair
-        block_lookup.second = v;
+       // set dof numbers: Dof number is the second entry in pair
+       dof_lookup.second = v;
        
        // add to list
-       block_lookup_list.push_front(block_lookup);
+       dof_lookup_list.push_front(dof_lookup);
       }
     }
   }

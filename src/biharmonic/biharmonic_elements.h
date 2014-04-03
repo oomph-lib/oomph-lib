@@ -423,9 +423,9 @@ public:
   }
 
 
- /// \short The number of "blocks" that degrees of freedom in this element
+ /// \short The number of "DOF types" that degrees of freedom in this element
  /// are sub-divided into (for block preconditioning)
- unsigned ndof_types()
+ unsigned ndof_types() const
   {
    return this->required_nvalue(1);
   }
@@ -434,12 +434,12 @@ public:
  /// \short Create a list of pairs for all unknowns in this element,
  /// so that the first entry in each pair contains the global equation 
  /// number of the unknown, while the second one contains the number
- /// of the "block" that this unknown is associated with. 
+ /// of the "DOF types" that this unknown is associated with. 
  /// (Function can obviously only be called if the equation numbering
  /// scheme has been set up.) (for block preconditioning)
  void get_dof_numbers_for_unknowns(std::list<std::pair<unsigned long,
                                    unsigned> > 
-                                   &block_lookup_list)
+                                   &dof_lookup_list) const
   {
    
    // number of nodes
@@ -448,8 +448,8 @@ public:
    // number of degrees of freedom at each node
    int n_value = this->node_pt(0)->nvalue();
 
-   // temporary pair (used to store block lookup prior to being added to list
-   std::pair<unsigned long,unsigned> block_lookup;
+   // temporary pair (used to store dof lookup prior to being added to list
+   std::pair<unsigned long,unsigned> dof_lookup;
    
    // loop over the nodes
    for (int n = 0; n < n_node; n++)
@@ -467,10 +467,10 @@ public:
        if (local_eqn_number >= 0)
         {
          
-         // store block lookup in temporary pair
-         block_lookup.first = this->eqn_number(local_eqn_number);
-         block_lookup.second = k;
-         block_lookup_list.push_front(block_lookup);
+         // store dof lookup in temporary pair
+         dof_lookup.first = this->eqn_number(local_eqn_number);
+         dof_lookup.second = k;
+         dof_lookup_list.push_front(dof_lookup);
          // add to list
          
         }

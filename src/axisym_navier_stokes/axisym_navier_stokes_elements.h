@@ -282,7 +282,7 @@ protected:
  /// \short Access function for the local equation number information for
  /// the pressure.
  /// p_local_eqn[n] = local equation number or < 0 if pinned
- virtual int p_local_eqn(const unsigned &n)=0;
+ virtual int p_local_eqn(const unsigned &n)const=0;
 
  /// \short Compute the shape functions and derivatives 
  /// w.r.t. global coords at local coordinate s.
@@ -1333,7 +1333,7 @@ public:
 
  /// \short Overload the access function for the pressure's local
  /// equation numbers
- inline int p_local_eqn(const unsigned &n) 
+ inline int p_local_eqn(const unsigned &n)const 
   {return internal_local_eqn(P_axi_nst_internal_index,n);}
 
  /// Redirect output to NavierStokesEquations output
@@ -1353,9 +1353,11 @@ public:
  void output(FILE* file_pt, const unsigned &n_plot)
   {AxisymmetricNavierStokesEquations::output(file_pt,n_plot);}
 
- /// \short The number of "blocks" that degrees of freedom in this element
+ /// \short The number of "DOF types" that degrees of freedom in this element
  /// are sub-divided into: Velocity and pressure.
- unsigned ndof_types()
+ /// RAYRAY - 4 is hard coded and the above comment doesn't tell us much
+ /// information. Please state why this is the case
+ unsigned ndof_types() const
   {
    return 4;
   }
@@ -1363,11 +1365,11 @@ public:
  /// \short Create a list of pairs for all unknowns in this element,
  /// so that the first entry in each pair contains the global equation
  /// number of the unknown, while the second one contains the number
- /// of the "block" that this unknown is associated with.
+ /// of the "DOF type" that this unknown is associated with.
  /// (Function can obviously only be called if the equation numbering
  /// scheme has been set up.) Velocity=0; Pressure=1
  void get_dof_numbers_for_unknowns(
-  std::list<std::pair<unsigned long,unsigned> >& block_lookup_list);
+  std::list<std::pair<unsigned long,unsigned> >& dof_lookup_list) const;
 
 
 };
@@ -1608,7 +1610,7 @@ public virtual AxisymmetricNavierStokesEquations
 
   /// \short Overload the access function for the pressure's local
  /// equation numbers
- inline int p_local_eqn(const unsigned &n) 
+ inline int p_local_eqn(const unsigned &n)const 
   {return nodal_local_eqn(Pconv[n],p_nodal_index_axi_nst());}
  
  /// Redirect output to NavierStokesEquations output
@@ -1627,9 +1629,11 @@ public virtual AxisymmetricNavierStokesEquations
  void output(FILE* file_pt, const unsigned &n_plot)
   {AxisymmetricNavierStokesEquations::output(file_pt,n_plot);}
 
- /// \short Returns the number of "blocks" that degrees of freedom
+ /// \short Returns the number of "DOF types" that degrees of freedom
  /// in this element are sub-divided into: Velocity and pressure.
- unsigned ndof_types()
+ /// RAYRAY - 4 is hard coded and the above comment doesn't tell us much
+ /// information. Please state why this is the case
+ unsigned ndof_types() const
   {
    return 4;
   }
@@ -1637,11 +1641,11 @@ public virtual AxisymmetricNavierStokesEquations
  /// \short Create a list of pairs for all unknowns in this element,
  /// so that the first entry in each pair contains the global equation
  /// number of the unknown, while the second one contains the number
- /// of the "block" that this unknown is associated with.
+ /// of the "DOF type" that this unknown is associated with.
  /// (Function can obviously only be called if the equation numbering
  /// scheme has been set up.) Velocity=0; Pressure=1
  void get_dof_numbers_for_unknowns(
-  std::list<std::pair<unsigned long, unsigned> >& block_lookup_list);
+  std::list<std::pair<unsigned long, unsigned> >& dof_lookup_list) const;
 
 
 };

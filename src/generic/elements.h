@@ -671,7 +671,7 @@ public:
 
  /// \short Return the global equation number corresponding to the 
  /// ieqn_local-th local equation number
- unsigned long eqn_number(const unsigned &ieqn_local)
+ unsigned long eqn_number(const unsigned &ieqn_local) const
   {
 #ifdef RANGE_CHECKING
    if(ieqn_local >= Ndof)
@@ -1028,11 +1028,11 @@ public:
 
  /// \short The number of types of degrees of freedom in this element
  /// are sub-divided into
- virtual unsigned ndof_types()
+ virtual unsigned ndof_types() const
   {
    // error message stream
    std::ostringstream error_message;
-   error_message << "ndof_types() has not been implemented for this \n"
+   error_message << "ndof_types() const has not been implemented for this \n"
                  << "element\n" << std::endl;
    // throw error
    throw OomphLibError(error_message.str(),
@@ -1044,15 +1044,15 @@ public:
  /// is "in charge of" -- ignore any unknowns associated with external
  /// \c Data. The first entry in each pair must contain the global equation 
  /// number of the unknown, while the second one contains the number
- /// of the DOF that this unknown is associated with. 
+ /// of the DOF type that this unknown is associated with. 
  /// (The function can obviously only be called if the equation numbering
  /// scheme has been set up.)
  virtual void get_dof_numbers_for_unknowns(
-  std::list<std::pair<unsigned long,unsigned> >& block_lookup_list)
+  std::list<std::pair<unsigned long,unsigned> >& dof_lookup_list) const
   {
    // error message stream
    std::ostringstream error_message;
-   error_message << "get_dof_numbers_for_unknowns() has not been \n"
+   error_message << "get_dof_numbers_for_unknowns() const has not been \n"
                  << " implemented for this element\n" << std::endl;
    // throw error
    throw OomphLibError(error_message.str(),

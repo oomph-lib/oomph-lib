@@ -123,7 +123,7 @@ public:
  void unpin_all_internal_pressure_dofs();
 
  /// Return the local equation numbers for the pressure values.
- inline int p_local_eqn(const unsigned &n)
+ inline int p_local_eqn(const unsigned &n) const
   {return this->internal_local_eqn(P_nst_internal_index,n);}
  
 public:
@@ -298,9 +298,9 @@ public:
  void full_output(std::ostream &outfile, const unsigned &nplot)
   {NavierStokesEquations<DIM>::full_output(outfile,nplot);}
 
-/// \short The number of "blocks" that degrees of freedom in this element
+/// \short The number of "DOF types" that degrees of freedom in this element
  /// are sub-divided into: Velocity and pressure.
- unsigned ndof_types()
+ unsigned ndof_types() const
   {
    return DIM+1;
   }
@@ -308,11 +308,11 @@ public:
  /// \short Create a list of pairs for all unknowns in this element,
  /// so that the first entry in each pair contains the global equation
  /// number of the unknown, while the second one contains the number
- /// of the "block" that this unknown is associated with.
+ /// of the "DOF types" that this unknown is associated with.
  /// (Function can obviously only be called if the equation numbering
  /// scheme has been set up.) Velocity=0; Pressure=1
  void get_dof_numbers_for_unknowns(
-  std::list<std::pair<unsigned long,unsigned> >& dof_lookup_list);
+  std::list<std::pair<unsigned long,unsigned> >& dof_lookup_list) const;
 
 
 };
@@ -641,7 +641,7 @@ public virtual TElement<1,3>
 //=============================================================================
 template<unsigned DIM>
 void TCrouzeixRaviartElement<DIM>::get_dof_numbers_for_unknowns(
- std::list<std::pair<unsigned long,unsigned> >& block_lookup_list)
+ std::list<std::pair<unsigned long,unsigned> >& dof_lookup_list) const
 {
  // number of nodes
  unsigned n_node = this->nnode();
@@ -649,8 +649,8 @@ void TCrouzeixRaviartElement<DIM>::get_dof_numbers_for_unknowns(
  // number of pressure values
  unsigned n_press = this->npres_nst();
  
- // temporary pair (used to store block lookup prior to being added to list)
- std::pair<unsigned,unsigned> block_lookup;
+ // temporary pair (used to store dof lookup prior to being added to list)
+ std::pair<unsigned,unsigned> dof_lookup;
  
  // pressure dof number
  unsigned pressure_dof_number = DIM;
@@ -666,13 +666,13 @@ void TCrouzeixRaviartElement<DIM>::get_dof_numbers_for_unknowns(
    // with by the element containing their master nodes
    if (local_eqn_number >= 0)
     {
-     // store block lookup in temporary pair: First entry in pair
-     // is global equation number; second entry is block type
-     block_lookup.first = this->eqn_number(local_eqn_number);
-     block_lookup.second = pressure_dof_number;
+     // store dof lookup in temporary pair: First entry in pair
+     // is global equation number; second entry is dof type
+     dof_lookup.first = this->eqn_number(local_eqn_number);
+     dof_lookup.second = pressure_dof_number;
      
      // add to list
-     block_lookup_list.push_front(block_lookup);
+     dof_lookup_list.push_front(dof_lookup);
     }
   }
  
@@ -691,13 +691,13 @@ void TCrouzeixRaviartElement<DIM>::get_dof_numbers_for_unknowns(
      // ignore pinned values
      if (local_eqn_number >= 0)
       {
-       // store block lookup in temporary pair: First entry in pair
-       // is global equation number; second entry is block type
-       block_lookup.first = this->eqn_number(local_eqn_number);
-       block_lookup.second = v;
+       // store dof lookup in temporary pair: First entry in pair
+       // is global equation number; second entry is dof type
+       dof_lookup.first = this->eqn_number(local_eqn_number);
+       dof_lookup.second = v;
        
        // add to list
-       block_lookup_list.push_front(block_lookup);
+       dof_lookup_list.push_front(dof_lookup);
        
       }
     }
@@ -824,7 +824,7 @@ public:
  //{return this->Node_pt[Pconv[n_p]];}
 
  /// Return the local equation numbers for the pressure values.
- inline int p_local_eqn(const unsigned &n)
+ inline int p_local_eqn(const unsigned &n) const
   {return this->nodal_local_eqn(Pconv[n],DIM);}
 
  /// \short Access function for the pressure values at local pressure
@@ -961,9 +961,9 @@ public:
    }
  }
  
- /// \short The number of "blocks" that degrees of freedom in this element
+ /// \short The number of "DOF types" that degrees of freedom in this element
  /// are sub-divided into: Velocity and pressure.
- unsigned ndof_types()
+ unsigned ndof_types() const
  {
   return DIM+1;
  }
@@ -971,17 +971,17 @@ public:
  /// \short Create a list of pairs for all unknowns in this element,
  /// so that the first entry in each pair contains the global equation
  /// number of the unknown, while the second one contains the number
- /// of the "block" that this unknown is associated with.
+ /// of the "DOF type" that this unknown is associated with.
  /// (Function can obviously only be called if the equation numbering
  /// scheme has been set up.) Velocity=0; Pressure=1
  void get_dof_numbers_for_unknowns(
-  std::list<std::pair<unsigned long,unsigned> >& block_lookup_list)
+  std::list<std::pair<unsigned long,unsigned> >& dof_lookup_list) const
   {
    // number of nodes
    unsigned n_node = this->nnode();
    
-   // temporary pair (used to store block lookup prior to being added to list)
-   std::pair<unsigned,unsigned> block_lookup;
+   // temporary pair (used to store dof lookup prior to being added to list)
+   std::pair<unsigned,unsigned> dof_lookup;
    
    // loop over the nodes
    for (unsigned n = 0; n < n_node; n++)
@@ -1000,15 +1000,15 @@ public:
        // with by the element containing their master nodes
        if (local_eqn_number >= 0)
         {
-         // store block lookup in temporary pair: Global equation number
+         // store dof lookup in temporary pair: Global equation number
          // is the first entry in pair
-         block_lookup.first = this->eqn_number(local_eqn_number);
+         dof_lookup.first = this->eqn_number(local_eqn_number);
          
-         // set block numbers: Block number is the second entry in pair
-         block_lookup.second = v;
+         // set dof numbers: Dof number is the second entry in pair
+         dof_lookup.second = v;
          
          // add to list
-         block_lookup_list.push_front(block_lookup);
+         dof_lookup_list.push_front(dof_lookup);
         }
       }
     }

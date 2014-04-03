@@ -194,41 +194,53 @@ class NetFluxControlElement : public virtual GeneralisedElement
   }
 
 
- /// \short The number of "blocks" that degrees of freedom in this element
+ /// \short The number of "DOF types" that degrees of freedom in this element
  /// are sub-divided into - set to Ndof_number_for_unknown+1
  /// because it's expected this element is added to a fluid mesh 
  /// containing navier stokes elements
- unsigned ndof_types()
+ /// RAYRAY - the comment above is incorrect. The person who wrote this should
+ /// fix it.
+ unsigned ndof_types() const
   {
    return Dim+1;
   }
 
- /// \short The id number of the "block" to which the degree
- /// of freedom in this element is added to. This should be set to the 
- /// number id of the Navier-Stokes pressure block (which is dimension
- /// dependent!) if this element is added to a fluid mesh 
- /// containing navier stokes elements
+ /// \short Function to set / get the id number of the "DOF type" to which 
+ /// the degree of freedom in this element is added to. 
+ /// This should be set to the number id of the Navier-Stokes pressure DOF type
+ /// (usually the dimension of the problem, for example, in 3D, the DOF types 
+ /// for Navier-Stokes elements are usually labelled 0, 1, 2, 3 for u, v and w 
+ /// velocities and pressure respectively. It is important to note that this is
+ /// dimension dependent, so should not be hard coded in!! This should not be
+ /// set to the dimension of the problem if there is further splitting of the
+ /// velocity DOF types) if this element is added to a fluid mesh containing 
+ /// Navier-Stokes elements.
+ /// RAYRAY - The default is 0, there does not seem to be a check to see if the
+ /// user has set this variable, the default value would almost always fail if
+ /// this element is inserted into the Navier-Stokes bulk mesh. 
  unsigned& ndof_number_for_unknown() {return Ndof_number_for_unknown; }
 
  /// \short Create a list of pairs for all unknowns in this element,
  /// so that the first entry in each pair contains the global equation
  /// number of the unknown, while the second one contains the number
- /// of the "block" that this unknown is associated with.
+ /// of the "DOF type" that this unknown is associated with.
  /// (Function can obviously only be called if the equation numbering
  /// scheme has been set up.) The single degree of freedom is given the 
- /// block number of 1 since it's expected this unknown is added to the 
- /// Navier-Stokes pressure block
+ /// DOF type number of Ndof_number_for_unknown since it's expected this 
+ /// unknown is added to the Navier-Stokes pressure DOF block (it is also
+ /// assumed that the user has set the Ndof_number_for_unknown variable to
+ /// the velocity DOF type using the function ndof_number_for_unknown()).
  void get_dof_numbers_for_unknowns(
-  std::list<std::pair<unsigned long, unsigned> >& block_lookup_list)
+  std::list<std::pair<unsigned long, unsigned> >& dof_lookup_list) const
   {
-   // pair to store block lookup prior to being added to list
-   std::pair<unsigned,unsigned> block_lookup;
+   // pair to store dof lookup prior to being added to list
+   std::pair<unsigned,unsigned> dof_lookup;
  
-   block_lookup.first = this->eqn_number(0);
-   block_lookup.second = Ndof_number_for_unknown;
+   dof_lookup.first = this->eqn_number(0);
+   dof_lookup.second = Ndof_number_for_unknown;
      
    // add to list
-   block_lookup_list.push_front(block_lookup);
+   dof_lookup_list.push_front(dof_lookup);
   }
  
   protected:
@@ -285,9 +297,9 @@ private:
  /// \short Pointer to the value that stores the prescribed flux
  double* Prescribed_flux_value_pt;
 
- /// \short The id number of the "block" to which the degree
+ /// \short The id number of the "DOF type" to which the degree
  /// of freedom in this element is added to. This should be set to the 
- /// number id of the Navier-Stokes pressure block (which is dimension
+ /// number id of the Navier-Stokes pressure DOF block (which is dimension
  /// dependent!) if this element is added to a fluid mesh 
  /// containing navier stokes elements
  unsigned Ndof_number_for_unknown;

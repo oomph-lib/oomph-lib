@@ -390,14 +390,14 @@ public:
 
  // Preconditioner overloads required
  void get_dof_numbers_for_unknowns
-  (std::list<std::pair<unsigned long, unsigned> >& block_lookup_list)
+  (std::list<std::pair<unsigned long, unsigned> >& dof_lookup_list) const
   {
    // Call the underlying CrouzeixRaviart function
    QCrouzeixRaviartElement<DIM>::get_dof_numbers_for_unknowns
-    (block_lookup_list);
+    (dof_lookup_list);
   }
 
- unsigned ndof_types()
+ unsigned ndof_types() const
   {
    return QCrouzeixRaviartElement<DIM>::ndof_types();
   }
@@ -744,7 +744,7 @@ public:
 
 
  void get_dof_numbers_for_unknowns
-  (std::list<std::pair<unsigned long, unsigned> >& block_lookup_list)
+  (std::list<std::pair<unsigned long, unsigned> >& dof_lookup_list) const
   {
    // There isn't an underlying AdvectionDiffusion example as yet, so
    // write one... !
@@ -752,8 +752,8 @@ public:
    // number of nodes
    unsigned n_node = this->nnode();
  
-   // temporary pair (used to store block lookup prior to being added to list)
-   std::pair<unsigned,unsigned> block_lookup;
+   // temporary pair (used to store dof lookup prior to being added to list)
+   std::pair<unsigned,unsigned> dof_lookup;
  
    // loop over the nodes
    for (unsigned n = 0; n < n_node; n++)
@@ -772,22 +772,22 @@ public:
        // with by the element containing their master nodes
        if (local_eqn_number >= 0)
         {
-         // store block lookup in temporary pair: Global equation number
+         // store dof lookup in temporary pair: Global equation number
          // is the first entry in pair
-         block_lookup.first = this->eqn_number(local_eqn_number);
+         dof_lookup.first = this->eqn_number(local_eqn_number);
        
-         // set block numbers: Block number is the second entry in pair
-         block_lookup.second = 0;
+         // set DOF numbers: DOF number is the second entry in pair
+         dof_lookup.second = 0;
        
          // add to list
-         block_lookup_list.push_front(block_lookup);
+         dof_lookup_list.push_front(dof_lookup);
         }
       }
     }
   }
 
  /// Number of dof types in this element
- unsigned ndof_types()
+ unsigned ndof_types() const
   {
    return 1;
   }

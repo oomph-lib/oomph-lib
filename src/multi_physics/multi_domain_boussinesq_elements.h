@@ -342,14 +342,14 @@ public virtual ElementWithExternalElement
 
  /// Classify dof numbers as in underlying element
  void get_dof_numbers_for_unknowns(std::list<std::pair<unsigned long, 
-                                   unsigned> >& block_lookup_list)
+                                   unsigned> >& dof_lookup_list) const
  {
   // Call the underlying function
-  NST_ELEMENT::get_dof_numbers_for_unknowns(block_lookup_list);
+  NST_ELEMENT::get_dof_numbers_for_unknowns(dof_lookup_list);
  }
  
  /// Get number of dof types from underlying element
- unsigned ndof_types()
+ unsigned ndof_types() const
  {
   return NST_ELEMENT::ndof_types();
  }
@@ -689,13 +689,13 @@ public:
 
  /// Classify dofs for use in block preconditioner
  void get_dof_numbers_for_unknowns(std::list<std::pair<unsigned long, 
-                                   unsigned> >& block_lookup_list)
+                                   unsigned> >& dof_lookup_list) const
  {
   // number of nodes
   unsigned n_node = this->nnode();
   
-  // temporary pair (used to store block lookup prior to being added to list)
-  std::pair<unsigned,unsigned> block_lookup;
+  // temporary pair (used to store dof lookup prior to being added to list)
+  std::pair<unsigned,unsigned> dof_lookup;
   
   // loop over the nodes
   for (unsigned n = 0; n < n_node; n++)
@@ -714,15 +714,15 @@ public:
       // with by the element containing their master nodes
       if (local_eqn_number >= 0)
        {
-        // store block lookup in temporary pair: Global equation number
+        // store dof lookup in temporary pair: Global equation number
         // is the first entry in pair
-        block_lookup.first = this->eqn_number(local_eqn_number);
+        dof_lookup.first = this->eqn_number(local_eqn_number);
         
-        // set block numbers: Block number is the second entry in pair
-        block_lookup.second = 0;
+        // set dof numbers: Dof number is the second entry in pair
+        dof_lookup.second = 0;
         
         // add to list
-        block_lookup_list.push_front(block_lookup);
+        dof_lookup_list.push_front(dof_lookup);
        }
      }
    }
@@ -730,7 +730,7 @@ public:
  
 
  /// Specify number of dof types for use in block preconditioner
- unsigned ndof_types()
+ unsigned ndof_types() const
  {
   return 1;
  }

@@ -103,7 +103,7 @@ namespace oomph
 /// \b Note: The element inherits from the BlockPreconditionableElementBase 
 /// and can be used in the block-preconditioning context. The element
 /// is "in charge" of the control load (if it's been created internally)
-/// and classifies it as its one-and-only "block type" 
+/// and classifies it as its one-and-only "DOF type" 
 //======================================================================
 class DisplacementControlElement :  
  public virtual GeneralisedElement
@@ -266,9 +266,9 @@ public:
     }
   }
 
- /// \short The number of "blocks" that degrees of freedom in this element
+ /// \short The number of "DOF" that degrees of freedom in this element
  /// are sub-divided into: Just the control pressure.
- unsigned ndof_types()
+ unsigned ndof_types() const
   {
    return 1;
   }
@@ -276,19 +276,19 @@ public:
  /// \short Create a list of pairs for all unknowns in this element,
  /// so that the first entry in each pair contains the global equation
  /// number of the unknown, while the second one contains the number
- /// of the "block" that this unknown is associated with.
+ /// of the "DOF type" that this unknown is associated with.
  /// (Function can obviously only be called if the equation numbering
  /// scheme has been set up.) The only dof this element is in charge
  /// of is the control load, provided it's been created as
  /// internal Data. 
  void get_dof_numbers_for_unknowns(
-  std::list<std::pair<unsigned long,unsigned> >& block_lookup_list)
+  std::list<std::pair<unsigned long,unsigned> >& dof_lookup_list) const
   {
    if (Load_data_created_internally)
     {
-     // temporary pair (used to store block lookup prior to being 
+     // temporary pair (used to store dof lookup prior to being 
      // added to list)
-     std::pair<unsigned long,unsigned> block_lookup;
+     std::pair<unsigned long,unsigned> dof_lookup;
  
      // determine local eqn number for displacement control eqn
      int local_eqn_number = Displ_ctrl_local_eqn;
@@ -296,13 +296,13 @@ public:
      // Is it a dof or is it pinned?
      if (local_eqn_number>=0)
       {
-       // store block lookup in temporary pair: First entry in pair
-       // is global equation number; second entry is block type
-       block_lookup.first = this->eqn_number(local_eqn_number);
-       block_lookup.second = 0;
+       // store dof lookup in temporary pair: First entry in pair
+       // is global equation number; second entry is dof type
+       dof_lookup.first = this->eqn_number(local_eqn_number);
+       dof_lookup.second = 0;
 
        // Add to list
-       block_lookup_list.push_front(block_lookup);
+       dof_lookup_list.push_front(dof_lookup);
       }
     }
   }

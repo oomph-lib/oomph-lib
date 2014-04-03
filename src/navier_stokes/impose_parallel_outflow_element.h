@@ -313,7 +313,7 @@ namespace oomph
    /// it's own degrees of freedom. In addition to this, it also classifies the
    /// 2(3) constrained velocity bulk degrees of freedom which this face element 
    /// is attached to.
-   unsigned ndof_types()
+   unsigned ndof_types() const
    {
     // The the dof types in this element is 1 in 2D, 2 in 3D, so we use the
     // elemental dimension function this->dim().
@@ -326,7 +326,7 @@ namespace oomph
    /// \short Create a list of pairs for all unknowns in this element,
    /// so that the first entry in each pair contains the global equation
    /// number of the unknown, while the second one contains the LOCAL number
-   /// of the "block" that this unknown is associated with.
+   /// of the "DOF types" that this unknown is associated with.
    /// (Function can obviously only be called if the equation numbering
    /// scheme has been set up.) 
    /// 
@@ -340,11 +340,11 @@ namespace oomph
    /// 0  1  2  3  4
    /// up vp wp L1 L2
    void get_dof_numbers_for_unknowns(
-    std::list<std::pair<unsigned long,unsigned> >& block_lookup_list)
+    std::list<std::pair<unsigned long,unsigned> >& dof_lookup_list) const
    {
   
-    // Temporary pair (used to store block lookup prior to being added to list)
-    std::pair<unsigned,unsigned> block_lookup;
+    // Temporary pair (used to store dof lookup prior to being added to list)
+    std::pair<unsigned,unsigned> dof_lookup;
   
     // Number of nodes in this element.
     const unsigned n_node = this->nnode();
@@ -389,13 +389,13 @@ namespace oomph
         // Ignore pinned values.
         if(local_eqn >= 0)
          {
-          // Store the block loopup in temporary pair: First entry in pair
-          // is the global equation number; second entry is the LOCAL block type.
+          // Store the dof loopup in temporary pair: First entry in pair
+          // is the global equation number; second entry is the LOCAL dof type.
           // It is assumed that the velocity dof types comes first. We do not
           // re-classify the pressure dof types as they are not constrained.
-          block_lookup.first = Bulk_element_pt->eqn_number(local_eqn);
-          block_lookup.second = velocity_i;
-          block_lookup_list.push_front(block_lookup);
+          dof_lookup.first = Bulk_element_pt->eqn_number(local_eqn);
+          dof_lookup.second = velocity_i;
+          dof_lookup_list.push_front(dof_lookup);
          } // ignore pinned nodes "if(local-eqn>=0)"
        } // for loop over the velocity components
 
@@ -415,8 +415,8 @@ namespace oomph
 
         if (local_eqn>=0)
          {
-          // Store block lookup in temporary pair: First entry in pair
-          // is global equation number; second entry is block type.
+          // Store dof lookup in temporary pair: First entry in pair
+          // is global equation number; second entry is dof type.
           // We assume that the first 2(3) types are fluid dof types in
           // 2(3) spatial dimensions (classified above):
           //
@@ -424,11 +424,11 @@ namespace oomph
           // up vp wp L1 L2
           //
           // Thus the offset is the dim_bulk.
-          block_lookup.first = this->eqn_number(local_eqn);
-          block_lookup.second = dim_i + dim_bulk;
+          dof_lookup.first = this->eqn_number(local_eqn);
+          dof_lookup.second = dim_i + dim_bulk;
         
           // Add to list
-          block_lookup_list.push_front(block_lookup);
+          dof_lookup_list.push_front(dof_lookup);
          } // if local_eqn > 0
        } // for: loop over the directions in the face element.
      } // for: loop over the nodes in the face element.

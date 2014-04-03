@@ -65,7 +65,7 @@ public:
  /// \short Returns the number of DOF types associated with this element: Twice
  /// the number of spatial dimensions (for the constrained and 
  /// unconstrained nodal positions).
- unsigned ndof_types()
+ unsigned ndof_types() const
   {
    return 2*ELEMENT::dim();
   }
@@ -84,10 +84,10 @@ public:
  /// 5 - y displacement (with lagr mult traction)\n
  /// 6 - z displacement (with lagr mult traction)\n
  void get_dof_numbers_for_unknowns(
-    std::list<std::pair<unsigned long,unsigned> >& block_lookup_list)
+    std::list<std::pair<unsigned long,unsigned> >& dof_lookup_list) const
   {
-   // temporary pair (used to store block lookup prior to being added to list
-   std::pair<unsigned,unsigned> block_lookup;
+   // temporary pair (used to store dof lookup prior to being added to list
+   std::pair<unsigned,unsigned> dof_lookup;
    
    // number of nodes
    const unsigned n_node = this->nnode();
@@ -118,13 +118,13 @@ public:
          local_unknown = ELEMENT::position_local_eqn(n,k,i);
          if (local_unknown >= 0)
           {
-           // store block lookup in temporary pair: First entry in pair
-           // is global equation number; second entry is block type
-           block_lookup.first = this->eqn_number(local_unknown);
-           block_lookup.second = offset+i;
+           // store dof lookup in temporary pair: First entry in pair
+           // is global equation number; second entry is dof type
+           dof_lookup.first = this->eqn_number(local_unknown);
+           dof_lookup.second = offset+i;
            
            // add to list
-           block_lookup_list.push_front(block_lookup);
+           dof_lookup_list.push_front(dof_lookup);
           }
         }
       }
@@ -300,7 +300,7 @@ namespace Global_Physical_Variables
 
 
 //=============begin_problem============================================ 
-/// Problem class for deformation of elastic block by prescribed
+/// Problem class for deformation of elastic DOF type by prescribed
 /// boundary motion.
 //====================================================================== 
 template<class ELEMENT>

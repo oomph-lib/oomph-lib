@@ -450,9 +450,9 @@ class FSIHermiteBeamElement : public virtual HermiteBeamElement,
  
 
 
- /// \short The number of "blocks" that degrees of freedom in this element
+ /// \short The number of "DOF types" that degrees of freedom in this element
  /// are sub-divided into: Just the solid degrees of freedom themselves.
- unsigned ndof_types()
+ unsigned ndof_types() const
   {
    return 1;
   }
@@ -460,11 +460,11 @@ class FSIHermiteBeamElement : public virtual HermiteBeamElement,
  /// \short Create a list of pairs for all unknowns in this element,
  /// so that the first entry in each pair contains the global equation
  /// number of the unknown, while the second one contains the number
- /// of the "block" that this unknown is associated with.
+ /// of the "DOF type" that this unknown is associated with.
  /// (Function can obviously only be called if the equation numbering
  /// scheme has been set up.) 
  void get_dof_numbers_for_unknowns(
-  std::list<std::pair<unsigned long,unsigned> >& block_lookup_list);
+  std::list<std::pair<unsigned long,unsigned> >& dof_lookup_list) const;
 
 };
 

@@ -440,28 +440,30 @@ template<class BASIC, class SOLID>
  unsigned nrecovery_order() {return BASIC::nrecovery_order();}
 
 
- /// \short The number of "blocks" that degrees of freedom in this element
+ /// \short The number of "DOF types" that degrees of freedom in this element
  /// are sub-divided into.
  /// This is needed as a final overload in cases where both fluid and
  /// solid elements are block preconditionable. However, we break
  /// it here because it isn't obvious which classification we
  /// should use. This forces the user to re-implement this function
  /// if it's used
- unsigned ndof_types()
+ /// RAYRAY - the comment is incorrect, this is no longer broken.
+ /// who ever wrote this comment should fix it.
+ unsigned ndof_types() const
   {
    return BASIC::ndof_types() + SOLID::ndof_types();
   }
 
  /// \short return the number of DOF types associated with the BASIC 
  /// elements in this combined element
- unsigned nbasic_dof_types()
+ unsigned nbasic_dof_types() const
   {
    return BASIC::ndof_types();
   }
 
  /// \short return the number of DOF types associated with the SOLID 
  /// elements in this combined element
- unsigned nsolid_dof_types()
+ unsigned nsolid_dof_types() const
   {
    return SOLID::ndof_types();
   }
@@ -469,20 +471,20 @@ template<class BASIC, class SOLID>
  /// \short Create a list of pairs for all unknowns in this element,
  /// so that the first entry in each pair contains the global equation
  /// number of the unknown, while the second one contains the number
- /// of the "block" that this unknown is associated with.
+ /// of the "DOF type" that this unknown is associated with.
  /// This method combines the get_dof_numbers_for_unknowns(...)
  /// method for the BASIC and SOLID elements. The basic elements
  /// retain their DOF type numbering and the SOLID elements
  /// DOF type numbers are incremented by nbasic_dof_types().
  void get_dof_numbers_for_unknowns(
-  std::list<std::pair<unsigned long,unsigned> >& block_lookup_list)
+  std::list<std::pair<unsigned long,unsigned> >& dof_lookup_list) const
   {
    // get the solid list
    std::list<std::pair<unsigned long,unsigned> > solid_list;
    SOLID::get_dof_numbers_for_unknowns(solid_list);
 
    // get the basic list
-   BASIC::get_dof_numbers_for_unknowns(block_lookup_list);
+   BASIC::get_dof_numbers_for_unknowns(dof_lookup_list);
 
    // get the number of basic dof types
    unsigned nbasic_dof_types = BASIC::ndof_types();
@@ -496,7 +498,7 @@ template<class BASIC, class SOLID>
      std::pair<unsigned long,unsigned> new_pair;
      new_pair.first = it->first;
      new_pair.second = it->second + nbasic_dof_types;
-     block_lookup_list.push_front(new_pair);
+     dof_lookup_list.push_front(new_pair);
     }
   }
 
@@ -1280,28 +1282,30 @@ class RefineablePseudoSolidNodeUpdateElement : public virtual BASIC,
   void output(FILE* file_pt, const unsigned &n_p)
   {BASIC::output(file_pt,n_p);}
 
- /// \short The number of "blocks" that degrees of freedom in this element
+ /// \short The number of "DOF types" that degrees of freedom in this element
  /// are sub-divided into.
  /// This is needed as a final overload in cases where both fluid and
  /// solid elements are block preconditionable. However, we break
  /// it here because it isn't obvious which classification we
  /// should use. This forces the user to re-implement this function
- /// if it's used
- unsigned ndof_types()
+ /// if it's used.
+ /// RAYRAY - The above comment is incorrect, this is no longer broken.
+ /// Who ever wrote this comment can fix it.
+ unsigned ndof_types() const
   {
    return BASIC::ndof_types() + SOLID::ndof_types();
   }
 
  /// \short return the number of DOF types associated with the BASIC
  /// elements in this combined element
- unsigned nbasic_dof_types()
+ unsigned nbasic_dof_types() const
   {
    return BASIC::ndof_types();
   }
 
  /// \short return the number of DOF types associated with the SOLID
  /// elements in this combined element
- unsigned nsolid_dof_types()
+ unsigned nsolid_dof_types() const
   {
    return SOLID::ndof_types();
   }
@@ -1309,20 +1313,20 @@ class RefineablePseudoSolidNodeUpdateElement : public virtual BASIC,
  /// \short Create a list of pairs for all unknowns in this element,
  /// so that the first entry in each pair contains the global equation
  /// number of the unknown, while the second one contains the number
- /// of the "block" that this unknown is associated with.
+ /// of the "DOF type" that this unknown is associated with.
  /// This method combines the get_dof_numbers_for_unknowns(...)
  /// method for the BASIC and SOLID elements. The basic elements
  /// retain their DOF type numbering and the SOLID elements
  /// DOF type numbers are incremented by nbasic_dof_types().
  void get_dof_numbers_for_unknowns(
-  std::list<std::pair<unsigned long,unsigned> >& block_lookup_list)
+  std::list<std::pair<unsigned long,unsigned> >& dof_lookup_list) const
   {
    // get the solid list
    std::list<std::pair<unsigned long,unsigned> > solid_list;
    SOLID::get_dof_numbers_for_unknowns(solid_list);
 
    // get the basic list
-   BASIC::get_dof_numbers_for_unknowns(block_lookup_list);
+   BASIC::get_dof_numbers_for_unknowns(dof_lookup_list);
 
    // get the number of basic dof types
    unsigned nbasic_dof_types = BASIC::ndof_types();
@@ -1336,7 +1340,7 @@ class RefineablePseudoSolidNodeUpdateElement : public virtual BASIC,
      std::pair<unsigned long,unsigned> new_pair;
      new_pair.first = it->first;
      new_pair.second = it->second + nbasic_dof_types;
-     block_lookup_list.push_front(new_pair);
+     dof_lookup_list.push_front(new_pair);
     }
   }
 };

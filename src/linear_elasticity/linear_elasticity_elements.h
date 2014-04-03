@@ -267,10 +267,10 @@ namespace oomph
    
    
    
-   /// \short The number of "blocks" that degrees of freedom in this element
-   /// are sub-divided into: for now lump them all into one block.
+   /// \short The number of "DOF types" that degrees of freedom in this element
+   /// are sub-divided into: for now lump them all into one DOF type.
    /// Can be adjusted later
-   unsigned nblock_types()
+   unsigned ndof_types() const
    {
     return 1;
    }
@@ -278,16 +278,16 @@ namespace oomph
    /// \short Create a list of pairs for all unknowns in this element,
    /// so that the first entry in each pair contains the global equation
    /// number of the unknown, while the second one contains the number
-   /// of the "block" that this unknown is associated with.
+   /// of the "DOF types" that this unknown is associated with.
    /// (Function can obviously only be called if the equation numbering
    /// scheme has been set up.) 
    void get_dof_numbers_for_unknowns(
-    std::list<std::pair<unsigned long,unsigned> >& block_lookup_list)
+    std::list<std::pair<unsigned long,unsigned> >& dof_lookup_list) const
    {
 
-    // temporary pair (used to store block lookup prior to being added 
+    // temporary pair (used to store dof lookup prior to being added 
     // to list)
-    std::pair<unsigned long,unsigned> block_lookup;
+    std::pair<unsigned long,unsigned> dof_lookup;
     
     // number of nodes
     const unsigned n_node = this->nnode();
@@ -307,13 +307,13 @@ namespace oomph
         // ignore pinned values
         if (local_unknown >= 0)
          {
-          // store block lookup in temporary pair: First entry in pair
-          // is global equation number; second entry is block type
-          block_lookup.first = this->eqn_number(local_unknown);
-          block_lookup.second = 0;
+          // store dof lookup in temporary pair: First entry in pair
+          // is global equation number; second entry is dof type
+          dof_lookup.first = this->eqn_number(local_unknown);
+          dof_lookup.second = 0;
           
           // add to list
-          block_lookup_list.push_front(block_lookup);
+          dof_lookup_list.push_front(dof_lookup);
           
          }
        }
