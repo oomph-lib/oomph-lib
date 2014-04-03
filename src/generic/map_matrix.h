@@ -144,10 +144,12 @@ public:
 
 
  /// Copy constructor
- MapMatrixMixed(MapMatrixMixed<KEY_TYPE_ROW,KEY_TYPE_COL,VALUE_TYPE>& map_mat)
+ MapMatrixMixed(const MapMatrixMixed<KEY_TYPE_ROW,
+                                     KEY_TYPE_COL,VALUE_TYPE>& map_mat)
   {
    // Step through the row pointers
-   for (OuterMixedIt it=map_mat.Row_pt.begin(); it!=map_mat.Row_pt.end(); it++)
+   for (ConstOuterMixedIt it=map_mat.Row_pt.begin(); it!=map_mat.Row_pt.end(); 
+        it++)
     {
      // Is the row pointer nonzero, i.e. are there any entries in this row?
      if (it->second!=0)
@@ -157,7 +159,8 @@ public:
        InnerMapMixed inner_map=*(it->second);
 
        // Loop over entries in the row
-       for (InnerMixedIt it2=inner_map.begin(); it2!=inner_map.end(); it2++)
+       for (ConstInnerMixedIt it2=inner_map.begin(); it2!=inner_map.end(); 
+            it2++)
         {
 
          // If the entry is nonzero: Copy
@@ -527,16 +530,22 @@ public:
  typedef typename InnerMap::iterator InnerIt;
 
  /// Typedef to keep the code more readable
+ typedef typename InnerMap::const_iterator ConstInnerIt;
+
+ /// Typedef to keep the code more readable
  typedef std::map<KEY_TYPE,std::map<KEY_TYPE,VALUE_TYPE>*> OuterMap;
 
  /// Typedef to keep the code more readable
  typedef typename OuterMap::iterator OuterIt;
 
+ /// Typedef to keep the code more readable
+ typedef typename OuterMap::const_iterator ConstOuterIt;
+
  /// Copy constructor
- MapMatrix(MapMatrix<KEY_TYPE,VALUE_TYPE>& map_mat)
+ MapMatrix(const MapMatrix<KEY_TYPE,VALUE_TYPE>& map_mat)
   {
    // Step through the row pointers
-   for (OuterIt it=map_mat.Row_pt.begin(); it!=map_mat.Row_pt.end(); it++)
+   for (ConstOuterIt it=map_mat.Row_pt.begin(); it!=map_mat.Row_pt.end(); it++)
     {
      // Is the row pointer nonzero, i.e. are there any entries in this row?
      if (it->second!=0)
@@ -545,7 +554,7 @@ public:
        InnerMap inner_map=*(it->second);
 
        // Loop over entries in the row
-       for (InnerIt it2=inner_map.begin(); it2!=inner_map.end(); it2++)
+       for (ConstInnerIt it2=inner_map.begin(); it2!=inner_map.end(); it2++)
         {
          // If the entry is nonzero: Copy
          if (it2->second!=0)
