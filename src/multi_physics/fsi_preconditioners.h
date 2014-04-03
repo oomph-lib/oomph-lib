@@ -302,7 +302,7 @@ private:
   unsigned n_fluid_dof = this->ndof_types_in_mesh(0);
   unsigned n_dof = n_fluid_dof + this->ndof_types_in_mesh(1);
 
-  // this fsi precondtioner has two types of DOF fluid dofs and solid dofs
+  // this fsi preconditioner has two types of DOF fluid dofs and solid dofs
   Vector<unsigned> dof_to_block_map(n_dof,0);
   for (unsigned i = n_fluid_dof; i < n_dof; i++)
    {
@@ -335,38 +335,34 @@ private:
   // Extract the additional blocks we need for FSI:
   
   // Solid tangent stiffness matrix
-  CRDoubleMatrix* block_matrix_1_1_pt = new CRDoubleMatrix;
-  this->get_block(1,1,*block_matrix_1_1_pt);
+  {
+    CRDoubleMatrix block_matrix_1_1;
+    this->get_block(1,1,block_matrix_1_1);
+
+    // Setup the solid preconditioner (inexact solver)
+    double t_start = TimingHelpers::timer();
+    Solid_preconditioner_pt->setup(&block_matrix_1_1,comm_pt());
+    double t_end = TimingHelpers::timer();
+    double setup_time= t_end-t_start;
+  }
 
   // Solid on fluid terms (if needed)
   if (Retain_solid_onto_fluid_terms)
    {
-    CRDoubleMatrix* block_matrix_0_1_pt = new CRDoubleMatrix;
-    this->get_block(0,1,*block_matrix_0_1_pt);
-    //Matrix_vector_product_0_1_pt->setup(block_matrix_0_1_pt);
+    CRDoubleMatrix block_matrix_0_1 = get_block(0,1);
     this->setup_matrix_vector_product(Matrix_vector_product_0_1_pt,
-                                      block_matrix_0_1_pt,1);
-    delete block_matrix_0_1_pt;
+                                      &block_matrix_0_1,1);
    }
   
   // Fluid on solid terms (if needed)
   if (Retain_fluid_onto_solid_terms)
    {
-    CRDoubleMatrix* block_matrix_1_0_pt = new CRDoubleMatrix;
-    this->get_block(1,0,*block_matrix_1_0_pt);
-    //Matrix_vector_product_1_0_pt->setup(block_matrix_1_0_pt);
+    CRDoubleMatrix block_matrix_1_0 = get_block(1,0);
     this->setup_matrix_vector_product(Matrix_vector_product_1_0_pt,
-                                      block_matrix_1_0_pt,0);
-    delete block_matrix_1_0_pt;
+                                      &block_matrix_1_0,0);
    }
   
-  // Setup the solid preconditioner (inexact solver)
-  double t_start = TimingHelpers::timer();
-  Solid_preconditioner_pt->setup(block_matrix_1_1_pt,comm_pt());
-  double t_end = TimingHelpers::timer();
-  double setup_time= t_end-t_start;
-  delete block_matrix_1_1_pt;
-  block_matrix_1_1_pt = 0;
+
   
 
  // Output times
@@ -741,8 +737,6 @@ void SimpleFSIPreconditioner<MATRIX>::identify_required_blocks(
    }
 #endif
 
-  std::cout << "is_master_block_preconditioner = " << this->is_master_block_preconditioner() << std::endl; 
-  
   // setup the meshes
   this->set_mesh(0,Navier_stokes_mesh_pt,
                  Allow_multiple_element_type_in_navier_stokes_mesh);
@@ -751,8 +745,6 @@ void SimpleFSIPreconditioner<MATRIX>::identify_required_blocks(
   // get the number of fluid dofs from the first element in the mesh
   unsigned n_fluid_dof = this->ndof_types_in_mesh(0);
   unsigned n_dof = n_fluid_dof + this->ndof_types_in_mesh(1);
-  std::cout << "n_fluid_dof = " << n_fluid_dof << std::endl; 
-  std::cout << "n_dof = " << n_dof << std::endl; 
 
   // this fsi preconditioner has two types of DOF fluid dofs and solid dofs
   Vector<unsigned> dof_to_block_map(n_dof,0);
@@ -762,27 +754,8 @@ void SimpleFSIPreconditioner<MATRIX>::identify_required_blocks(
     dof_to_block_map[i] = 2;
    }
 
-  std::cout << "dof_to_block_map:" << std::endl; 
-  for (unsigned i = 0; i < dof_to_block_map.size(); i++) 
-  {
-    std::cout << dof_to_block_map[i] << " "; 
-  }
-  std::cout << "\n" << std::endl; 
-
-  std::cout << "b4 block setup" << std::endl; 
-  
   // Set up the blocks look up schemes
   this->block_setup(dof_to_block_map);
-  std::cout << "after block setup" << std::endl; 
-
-  unsigned tt_ndof_types = this->ndof_types();
-  unsigned tt_internal_ndof_types = this->internal_ndof_types();
-  unsigned tt_nblock_types = this->nblock_types();
-  unsigned tt_internal_nblock_types = this->internal_nblock_types();
-  std::cout << "ndof_types = " << tt_ndof_types << std::endl; 
-  std::cout << "internal_ndof_types = " << tt_internal_ndof_types << std::endl;
-  std::cout << "nblock_types = " << tt_nblock_types << std::endl; 
-  std::cout << "internal_nblock_types = " << tt_internal_nblock_types << std::endl; 
 
   // find number of block types
   n_dof = this->nblock_types();
@@ -793,40 +766,26 @@ void SimpleFSIPreconditioner<MATRIX>::identify_required_blocks(
   // Identify required blocks
   identify_required_blocks(required_blocks);
 
-  // Get pointers to the blocks
-  DenseMatrix<CRDoubleMatrix*> block_matrix_pt(n_dof,n_dof,0);
-  std::cout << "SimpleFSIPreconditioner::setup() b4 get blocks" << std::endl; 
+  VectorMatrix<BlockSelector> selected_blocks(n_dof,n_dof);
+
+  for (unsigned dof_i = 0; dof_i < n_dof; dof_i++) 
+  {
+    for (unsigned dof_j = 0; dof_j < n_dof; dof_j++) 
+    {
+      selected_blocks[dof_i][dof_j].select_block(dof_i,dof_j,false,0);
+
+      if(required_blocks(dof_i,dof_j))
+      {
+        selected_blocks[dof_i][dof_j].want_block();
+      }
+    }
+  }
+
+  CRDoubleMatrix P_matrix = this->get_concatenated_block(selected_blocks);
   
-  this->get_blocks(required_blocks,
-                   block_matrix_pt);
-
-  std::cout << "SimpleFSIPreconditioner::setup() after get blocks" << std::endl; 
-  // Build a big matrix from the blocks
-  CRDoubleMatrix* P_matrix_pt=new CRDoubleMatrix
-    (this->preconditioner_matrix_distribution_pt());
-
-  // RAYRAY this will NOT work, use Block_distribution_pt instead of
-  // Internal_block_distribution_pt
-  CRDoubleMatrixHelpers::concatenate_without_communication(
-    this->Block_distribution_pt, block_matrix_pt, *P_matrix_pt);
-
-  // Delete blocks -- they're no longer needed.
-  for (unsigned i = 0 ; i < n_dof; i++)
-   {
-    for (unsigned j = 0 ; j < n_dof; j++)
-     {
-      delete block_matrix_pt(i,j);
-      block_matrix_pt(i,j) = 0;
-     }
-   }
-
-  // Setup preconditoner (i.e. inexact solver) -- does the LU decomposition
+  // Setup preconditioner (i.e. inexact solver) -- does the LU decomposition
   Preconditioner_pt = new SuperLUPreconditioner;
-  Preconditioner_pt->setup(P_matrix_pt,this->comm_pt());
-
-  // Now throw away the big matrix
-  delete P_matrix_pt;
- 
+  Preconditioner_pt->setup(&P_matrix,this->comm_pt());
  }
 
 

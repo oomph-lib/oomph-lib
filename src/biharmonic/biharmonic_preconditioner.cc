@@ -232,7 +232,7 @@ void ExactSubBiharmonicPreconditioner::setup()
  // setup
  this->block_setup();
 
- // Mumber of block types
+ // Number of block types
  unsigned n_block_types = this->nblock_types();
 
  // check for required number of blocks 
@@ -249,51 +249,34 @@ void ExactSubBiharmonicPreconditioner::setup()
   }
 #endif
  
-  // required blocks
-  DenseMatrix<bool> required_blocks(n_block_types,n_block_types,false);
-  required_blocks(0,0) = true;
-  required_blocks(0,1) = true;
-  required_blocks(0,2) = true;
-  required_blocks(1,0) = true;
-  required_blocks(1,1) = true;
-  required_blocks(2,0) = true;
-  required_blocks(2,2) = true;
- 
-  // Matrix of block matrix pointers
-  DenseMatrix<CRDoubleMatrix*> 
-   matrix_of_block_pointers(n_block_types,n_block_types,0);
+  // Data type indicating which blocks from the preconditioner matrix we want
+  VectorMatrix<BlockSelector> required_blocks(n_block_types,n_block_types);
 
-  // get the blocks
-  this->get_blocks(required_blocks, matrix_of_block_pointers);
+  // boolean indicating if we want the block or not, stored for readability.
+  // Initially this is set to true for all blocks. Later we select which
+  // blocks we do not want.
+  const bool want_block = true;
+  for (unsigned b_i = 0; b_i < n_block_types; b_i++) 
+  {
+    for (unsigned b_j = 0; b_j < n_block_types; b_j++) 
+    {
+      required_blocks[b_i][b_j].select_block(b_i,b_j,want_block);
+    }
+  }
 
-  // build the preconditioner matrix
-  CRDoubleMatrix* preconditioner_matrix_pt 
-    = new CRDoubleMatrix(this->preconditioner_matrix_distribution_pt());
-  
-  // RAYRAY this WILL be incorrect, we have to use the block distribution pt,
-  // not for the internal blocks
-  CRDoubleMatrixHelpers::concatenate_without_communication
-    (Block_distribution_pt,
-     matrix_of_block_pointers,
-     *preconditioner_matrix_pt);
+  // Which blocks do we not want?
+  required_blocks[1][2].do_not_want_block();
+  required_blocks[2][1].do_not_want_block();
 
-  // delete the block matrices
-  for (unsigned i = 0; i < n_block_types; i++)
-   {
-    for (unsigned j = 0; j < n_block_types; j++)
-     {
-      if (matrix_of_block_pointers(i,j) != 0)
-       {
-        delete matrix_of_block_pointers(i,j);
-        matrix_of_block_pointers(i,j) = 0;
-       }
-     }
-   }
+  // Get the preconditioner matrix as defined by required_blocks
+  CRDoubleMatrix preconditioner_matrix
+    = this->get_concatenated_block(required_blocks);
 
   // setup the preconditioner
   Sub_preconditioner_pt = new SuperLUPreconditioner;
-  Sub_preconditioner_pt->setup(preconditioner_matrix_pt,comm_pt());
-  delete preconditioner_matrix_pt; preconditioner_matrix_pt = 0;
+  Sub_preconditioner_pt->setup(&preconditioner_matrix,comm_pt());
+
+  // preconditioner_matrix will now go out of scope (and is destroyed).
 }
 
 

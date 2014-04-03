@@ -309,45 +309,25 @@ namespace oomph
   unsigned nblock_types = this->nblock_types();
 
   // Build the preconditioner matrix
-  // RAYRAY this may need to be changed so that it is the concatenation of the
-  // external block distributions.
-  CRDoubleMatrix* exact_block_matrix_pt 
-   = new CRDoubleMatrix(this->preconditioner_matrix_distribution_pt());
-  
-  // Extract the blocks from the jacobian.
+  VectorMatrix<BlockSelector> required_blocks(nblock_types,nblock_types);
 
-  // Set the diagonal elements of required block to true for block diagonal
-  // preconditioner
-  DenseMatrix<bool> required_blocks(nblock_types, nblock_types,true);
-  
-  // matrix of block pt
-  DenseMatrix<CRDoubleMatrix*> block_matrix_pt(nblock_types, 
-                                               nblock_types,0);
-  
-  // Get pointers to the blocks
-  this->get_blocks(required_blocks, block_matrix_pt);
-  
-  // RAYRAY this will be incorrect, we have to use the block distribution
-  // for the blocks, not internal blocks.
-  CRDoubleMatrixHelpers::concatenate_without_communication
-   (this->Block_distribution_pt,block_matrix_pt,*exact_block_matrix_pt);
+  // boolean indicating if we want the block, stored for readability.
+  const bool want_block = true;
+  for (unsigned b_i = 0; b_i < nblock_types; b_i++) 
+  {
+    for (unsigned b_j = 0; b_j < nblock_types; b_j++) 
+    {
+      required_blocks[b_i][b_j].select_block(b_i,b_j,want_block);
+    }
+  }
 
-  // need to delete the matrix of block matrices
-  for (unsigned i = 0; i < nblock_types; i++)
-   {
-    for (unsigned j = 0; j < nblock_types; j++)
-     {
-      delete block_matrix_pt(i,j);
-      block_matrix_pt(i,j) = 0;
-     }
-   }
-
+  // Get the concatenated blocks
+  CRDoubleMatrix exact_block_matrix 
+    = this->get_concatenated_block(required_blocks);
+  
   // Setup the preconditioner.
   this->fill_in_subsidiary_preconditioners(1); // Only need one preconditioner
-  preconditioner_pt()->setup(exact_block_matrix_pt, this->comm_pt());
-   
-  // delete the exact block preconditioner matrix
-  delete exact_block_matrix_pt;
+  preconditioner_pt()->setup(&exact_block_matrix, this->comm_pt());
  }
  
  //=============================================================================

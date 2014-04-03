@@ -39,10 +39,13 @@
 // #include <list>
 #include <math.h>
 #include <typeinfo>
+//#include <algorithm>
 
 // oomph-lib includes
 #include "matrices.h"
 #include "mesh.h"
+#include "vector_matrix.h"
+
 // #include "problem.h"
 #include "preconditioner.h"
 #include "SuperLU_preconditioner.h"
@@ -50,6 +53,217 @@
 
 namespace oomph
 {
+
+
+
+//=============================================================================
+/// \short Object to select certain blocks...
+//=============================================================================
+class BlockSelector
+{
+  public:
+
+  /// \short Constructor, initialise block index i, j and bool.
+  BlockSelector()
+  {
+    // Needs to be set to zero because if the build function leaves the
+    // Block_pt alone if block_pt = 0 (the default argument).
+    Block_pt = 0;
+    this->build(0,0,false);
+  }
+
+
+  /// \short RAYRAY comment
+  BlockSelector(const unsigned& row_index, 
+                const unsigned& column_index, 
+                const bool& wanted,
+                CRDoubleMatrix* block_pt = 0)
+  {
+#ifdef PARANOID
+    if((wanted == false) && (block_pt !=0))
+    {
+      std::ostringstream err_msg;
+      err_msg << "Trying to construct a BlockSelector object with:\n" 
+        << "block_pt != 0 and wanted == false"
+        << "If you require the block, please set wanted == true.\n";
+      throw OomphLibError(err_msg.str(),
+          OOMPH_CURRENT_FUNCTION,
+          OOMPH_EXCEPTION_LOCATION); 
+    }
+#endif
+
+    // Needs to be set to zero because if the build function leaves the
+    // Block_pt alone if block_pt = 0 (the default argument).
+    Block_pt = 0;
+   
+    this->build(row_index,column_index,wanted,block_pt);
+  }
+
+  /// \short RAYRAY comment.
+  virtual ~BlockSelector()
+  {
+  }
+
+  /// \short RAYRAY comment
+  void select_block(const unsigned& row_index, 
+                    const unsigned& column_index, 
+                    const bool& wanted,
+                    CRDoubleMatrix* block_pt = 0)
+  {
+#ifdef PARANOID
+    if((wanted == false) && (block_pt !=0))
+    {
+      std::ostringstream err_msg;
+      err_msg << "Trying to construct a BlockSelector object with:\n" 
+        << "block_pt != 0 and wanted == false"
+        << "If you require the block, please set wanted == true.\n";
+      throw OomphLibError(err_msg.str(),
+          OOMPH_CURRENT_FUNCTION,
+          OOMPH_EXCEPTION_LOCATION); 
+    }
+#endif
+
+    this->build(row_index,column_index,wanted,block_pt);
+  }
+
+  // RAYRAY comment
+  void want_block()
+  {
+    Wanted = true;
+  }
+
+  // RAYRAY comment
+  void do_not_want_block()
+  {
+#ifdef PARANOID
+    if(Block_pt !=0)
+    {
+      std::ostringstream err_msg;
+      err_msg << "Trying to set Wanted = false, but block_pt is not null.\n" 
+        << "Please call null_block_pt()\n"
+        << "(remember to free memory if necessary)\n";
+      throw OomphLibError(err_msg.str(),
+          OOMPH_CURRENT_FUNCTION,
+          OOMPH_EXCEPTION_LOCATION); 
+    }
+#endif
+
+    Wanted = false;
+  }
+
+  void null_block_pt()
+  {
+    Block_pt = 0;
+  }
+
+  void set_block_pt(CRDoubleMatrix* block_pt)
+  {
+#ifdef PARANOID
+    if(Wanted == false)
+    {
+      std::ostringstream err_msg;
+      err_msg << "Trying to set block_pt, but Wanted == false.\n" 
+        << "Please call want_block()\n";
+      throw OomphLibError(err_msg.str(),
+          OOMPH_CURRENT_FUNCTION,
+          OOMPH_EXCEPTION_LOCATION); 
+    }
+#endif
+
+    Block_pt = block_pt;
+  }
+
+  // RAYRAY comment.
+//  const CRDoubleMatrix* block_pt() const
+//  {
+//    return Block_pt;
+//  }
+
+  // RAYRAY comment.
+  CRDoubleMatrix* block_pt() const
+  {
+    return Block_pt;
+  }
+
+  // RAYRAY comment
+  void set_row_index(const unsigned& row_index)
+  {
+    Row_index = row_index;
+  }
+
+  // RAYRAY comment
+  const unsigned& row_index() const
+  {
+    return Row_index;
+  }
+
+  // RAYRAY comment
+  void set_column_index(const unsigned& column_index)
+  {
+    Column_index = column_index;
+  }
+
+  // RAYRAY comment
+  const unsigned& column_index() const
+  {
+    return Column_index;
+  }
+
+  // RAYRAY comment
+  const bool& wanted() const
+  {
+    return Wanted;
+  }
+
+
+  friend std::ostream& operator<<(std::ostream& o_stream,
+                           const BlockSelector& block_selector)
+  {
+    o_stream << "Row_index = " << block_selector.row_index() << ", "
+             << "Column_index = " << block_selector.column_index() << ", "
+             << "Wanted = " << block_selector.wanted() << ", "
+             << "Block_pt = " << block_selector.block_pt() << ".";
+
+    return o_stream;
+  }
+
+  private:
+
+  void build(const unsigned& row_index, 
+      const unsigned& column_index, 
+      const bool& wanted,
+      CRDoubleMatrix* block_pt = 0)
+  {
+    Row_index = row_index;
+    Column_index = column_index;
+    Wanted = wanted;
+
+    // Only set the block_pt if it is set. Otherwise we leave it alone.
+    // All constructors should set Block_pt to 0.
+    if(block_pt != 0)
+    {
+#ifdef PARANOID
+      if(Wanted == false)
+      {
+        std::ostringstream err_msg;
+        err_msg << "Trying to set block_pt, but Wanted == false.\n"; 
+        throw OomphLibError(err_msg.str(),
+            OOMPH_CURRENT_FUNCTION,
+            OOMPH_EXCEPTION_LOCATION); 
+      }
+#endif
+
+      Block_pt = block_pt;
+    }
+  }
+
+  unsigned Row_index;
+  unsigned Column_index;
+  bool Wanted;
+  CRDoubleMatrix* Block_pt;
+
+};
+
 
  //============================================================================
  /// Block Preconditioner base class. The block structure of the
@@ -160,7 +374,11 @@ namespace oomph
 
    // Clear the Block_to_dof_map_coarse
    Block_to_dof_map_coarse.clear();
+
+   Raydebug = false;
   } // EOFunc constructor
+
+  bool Raydebug;
 
   /// Destructor
   virtual ~BlockPreconditioner()
@@ -174,6 +392,14 @@ namespace oomph
     }
 
     Block_distribution_pt.clear();
+
+    // Delete any dof block distributions
+    const unsigned ndof_block_dist = Dof_block_distribution_pt.size();
+    for (unsigned dof_i = 0; dof_i < ndof_block_dist; dof_i++) 
+    {
+      delete Dof_block_distribution_pt[dof_i];
+    }
+    Dof_block_distribution_pt.clear();
 
    this->clear_block_preconditioner_base();
   } // EOFunc destructor
@@ -207,6 +433,20 @@ namespace oomph
 #endif
    return m_pt;
   } // EOFunc matrix_pt()
+
+  void turn_on_raydebug()
+  {
+    Raydebug = true;
+    if(is_subsidiary_block_preconditioner())
+      this->master_block_preconditioner_pt()->turn_on_raydebug();
+  }
+
+  void turn_off_raydebug()
+  {
+    Raydebug = false;
+    if(is_subsidiary_block_preconditioner())
+      this->master_block_preconditioner_pt()->turn_off_raydebug();
+  }
 
 
   /// \short Function to turn this preconditioner into a
@@ -371,7 +611,8 @@ namespace oomph
   ///
   /// RAYRAY comment 
   void get_block(const unsigned& i, const unsigned& j,
-      MATRIX& output_matrix) const
+      MATRIX& output_matrix, 
+      bool ignore_replacement_block = false) const
   {
 #ifdef PARANOID
     // Check the range of i and j, they should not be greater than nblock_types
@@ -389,7 +630,7 @@ namespace oomph
     }
 #endif
 
-      get_coarsened_block(i,j,output_matrix);
+      get_coarsened_block(i,j,output_matrix,ignore_replacement_block);
   } // EOFunc get_block(...)
 
 
@@ -403,6 +644,27 @@ namespace oomph
     return output_matrix;
    } // EOFunc get_block(...)
 
+  void set_master_preconditioner_matrix(MATRIX* in_matrix_pt)
+  {
+    if(is_subsidiary_block_preconditioner())
+    {
+      if(Raydebug)
+      {
+        std::cout << "I am subsidiary, going to set master matrix" << std::endl; 
+      }
+      master_block_preconditioner_pt()
+        ->set_master_preconditioner_matrix(in_matrix_pt);
+    }
+    else
+    {
+      if(Raydebug)
+      {
+        std::cout << "I am master, setting my own matrix" << std::endl; 
+      }
+
+      this->set_matrix_pt(in_matrix_pt);
+    }
+  }
 
   /// \short Get a block from a different matrix using the blocking scheme
   /// that has already been set up.
@@ -410,12 +672,21 @@ namespace oomph
                               MATRIX* in_matrix_pt,
                               MATRIX& output_matrix)
   {
+
+//    pause("Hi from get_block_other_matrix"); 
+    
    MATRIX* backup_matrix_pt = matrix_pt();
-   set_matrix_pt(in_matrix_pt);
+   set_master_preconditioner_matrix(in_matrix_pt);
+//   pause("have set the matrix"); 
+   
 
-   get_block(i, j, output_matrix);
+//   this->set_matrix_pt(in_matrix_pt);
 
-   set_matrix_pt(backup_matrix_pt);
+   get_block(i, j, output_matrix, true);
+
+   set_master_preconditioner_matrix(backup_matrix_pt);
+
+//   this->set_matrix_pt(backup_matrix_pt);
   } // EOFunc get_block_other_matrix(...)
 
   /// \short Get all the block matrices required by the block
@@ -435,6 +706,642 @@ namespace oomph
   /// properly...
   void get_blocks(DenseMatrix<bool>& required_blocks,
                   DenseMatrix<MATRIX*>& block_matrix_pt) const;
+
+  /// \short Gets block (i,j) from the Replacement_dof_block_pt, which is a
+  /// DenseMatrix of pointers to precomputed (and possibly modified)
+  /// blocks. Necessary concatenation handled by this function and the
+  /// result is returned in output_block.
+  void get_dof_level_block(const unsigned& i, const unsigned& j,
+                           MATRIX& output_block,
+                           bool ignore_replacement_block = false) const;
+
+//  /// RAYRAY comment.
+//  If the result distribution is known, get it!
+  MATRIX get_concatenated_block(const VectorMatrix<BlockSelector> 
+                                &selected_block)
+   {
+#ifdef PARANOID
+
+     unsigned const para_selected_block_nrow = selected_block.nrow();
+     unsigned const para_selected_block_ncol = selected_block.ncol();
+     unsigned const para_nblocks = this->nblock_types();
+
+     // Check that selected_block size is not 0.
+     if(para_selected_block_nrow == 0)
+     {
+       std::ostringstream error_msg;
+       error_msg << "selected_block has nrow = 0.\n";
+       throw OomphLibError(error_msg.str(),
+           OOMPH_CURRENT_FUNCTION,
+           OOMPH_EXCEPTION_LOCATION);
+     }
+
+     // Check that the number of blocks is not outside of the range 
+     // nblock_types(). Since this function builds matrices for block
+     // preconditioning, it does not make sense for us to concatenate more
+     // blocks than nblock_types().
+     if((para_selected_block_nrow > para_nblocks) ||
+        (para_selected_block_ncol > para_nblocks))
+     {
+       std::ostringstream error_msg;
+       error_msg << "Trying to concatenate a " 
+                 << para_selected_block_nrow << " by " 
+                 << para_selected_block_ncol 
+                 << " block matrix,\n"
+                 << "but there are only " 
+                 << para_nblocks << " block types.\n";
+       throw OomphLibError(error_msg.str(),
+           OOMPH_CURRENT_FUNCTION,
+           OOMPH_EXCEPTION_LOCATION);
+     }
+
+     // Check that selected_block make sense, i.e. the row indices of each row
+     // are the same, and the column indices of each column are the same.
+
+     // First check if the row indices are consistent. 
+     // For each row, loop through the columns, comparing the row index against
+     // the first column.
+     for (unsigned row_i = 0; row_i < para_selected_block_nrow; row_i++)
+     {
+       const unsigned col_0_row_index = selected_block[row_i][0].row_index();
+
+       for (unsigned col_i = 0; col_i < para_selected_block_ncol; col_i++)
+       {
+         const unsigned para_b_i = selected_block[row_i][col_i].row_index();
+         const unsigned para_b_j = selected_block[row_i][col_i].column_index();
+
+         if(col_0_row_index != para_b_i)
+         {
+           std::ostringstream err_msg;
+           err_msg << "Block index for block(" << row_i << "," << col_i <<") "
+                   << "contains block indices (" << para_b_i << "," 
+                                                 << para_b_j << ").\n"
+                   << "But the row index for the first column is " 
+                   << col_0_row_index <<", they must be the same!\n";
+           throw OomphLibError(err_msg.str(),
+                               OOMPH_CURRENT_FUNCTION,
+                               OOMPH_EXCEPTION_LOCATION); 
+         }
+       }
+     }
+
+     // Do the same for the column indices, consistency check.
+     // For each column, loop through the rows, comparing the column index
+     // against the first row.
+     for (unsigned col_i = 0; col_i < para_selected_block_ncol; col_i++) 
+     {
+       const unsigned row_0_col_index = selected_block[0][col_i].column_index();
+
+       for (unsigned row_i = 0; row_i < para_selected_block_nrow; row_i++) 
+       {
+         const unsigned para_b_i = selected_block[row_i][col_i].row_index();
+         const unsigned para_b_j = selected_block[row_i][col_i].column_index();
+
+         if(row_0_col_index != para_b_j)
+         {
+           std::ostringstream err_msg;
+           err_msg << "Block index for block(" << row_i << "," << col_i <<") "
+                   << "contains block indices (" << para_b_i << "," 
+                                                 << para_b_j << ").\n"
+                   << "But the col index for the first row is " 
+                   << row_0_col_index <<", they must be the same!\n";
+           throw OomphLibError(err_msg.str(),
+                               OOMPH_CURRENT_FUNCTION,
+                               OOMPH_EXCEPTION_LOCATION); 
+         }
+       }
+     }
+
+     // Check to see if the values in selected_block is within the range 
+     // nblock_types()
+     //
+     // Since we know that the column and row indices are consistent (by the
+     // two paranoia checks above), we only need to check the column indices
+     // in the first row, and the row indices in the first column.
+     
+     // Check that the row indices in the first column are within the range
+     // nblock_types()
+     for (unsigned row_i = 0; row_i < para_selected_block_nrow; row_i++) 
+     {
+       const unsigned para_b_i = selected_block[row_i][0].row_index();
+       const unsigned para_b_j = selected_block[row_i][0].column_index();
+       if(para_b_i > para_nblocks)
+       {
+           std::ostringstream err_msg;
+           err_msg << "Block index for block(" << row_i << ",0) "
+                   << "contains block indices (" << para_b_i << "," 
+                                               << para_b_j << ").\n"
+                   << "But there are only " << para_nblocks 
+                   << " nblock_types().\n";
+           throw OomphLibError(err_msg.str(),
+                               OOMPH_CURRENT_FUNCTION,
+                               OOMPH_EXCEPTION_LOCATION); 
+       }
+     }
+
+     // Check that the col indices in the first row are within the range
+     // nblock_types()
+     for (unsigned col_i = 0; col_i < para_selected_block_nrow; col_i++)
+     {
+       const unsigned para_b_i = selected_block[0][col_i].row_index();
+       const unsigned para_b_j = selected_block[0][col_i].column_index();
+       if(para_b_j > para_nblocks)
+       {
+           std::ostringstream err_msg;
+           err_msg << "Block index for block(0," << col_i << ") "
+                   << "contains block indices (" << para_b_i << "," 
+                                                 << para_b_j << ").\n"
+                   << "But there are only " << para_nblocks 
+                   << " nblock_types().\n";
+           throw OomphLibError(err_msg.str(),
+                               OOMPH_CURRENT_FUNCTION,
+                               OOMPH_EXCEPTION_LOCATION); 
+       }
+     }
+
+     // Stricter test - can be removed is required in the future. For the first
+     // column, check that the row indices does not repeat.
+     std::set<unsigned> row_index_set;
+     for (unsigned row_i = 0; row_i < para_selected_block_nrow; row_i++) 
+     {
+       std::pair<std::set<unsigned>::iterator,bool> row_index_set_ret;
+
+       const unsigned row_i_index = selected_block[row_i][0].row_index();
+
+       row_index_set_ret
+         = row_index_set.insert(row_i_index);
+         
+       if(!row_index_set_ret.second)
+        {
+         std::ostringstream err_msg;
+         err_msg << "The row " << row_i_index << " is already inserted.\n";
+         throw OomphLibError(err_msg.str(),
+                             OOMPH_CURRENT_FUNCTION,
+                             OOMPH_EXCEPTION_LOCATION);
+        }
+     }
+
+     // Stricter test - can be removed is required in the future. For the first
+     // row, check that the column indices does not repeat.
+     std::set<unsigned> col_index_set;
+     for (unsigned col_i = 0; col_i < para_selected_block_ncol; col_i++) 
+     {
+       std::pair<std::set<unsigned>::iterator,bool> col_index_set_ret;
+
+       const unsigned col_i_index = selected_block[0][col_i].column_index();
+
+       col_index_set_ret
+         = col_index_set.insert(col_i_index);
+         
+       if(!col_index_set_ret.second)
+        {
+         std::ostringstream err_msg;
+         err_msg << "The col " << col_i_index << " is already inserted.\n";
+         throw OomphLibError(err_msg.str(),
+                             OOMPH_CURRENT_FUNCTION,
+                             OOMPH_EXCEPTION_LOCATION);
+        }
+     }
+
+     // Loop through all the block_pt and check:
+     // 1) The non-null pointers point to built matrices.
+     // 2) The distribution matches those defined by selected_block within 
+     //    Block_distribution_pt.
+     for (unsigned block_i = 0; block_i < para_selected_block_nrow; block_i++)
+     {
+       for (unsigned block_j = 0; block_j < para_selected_block_ncol; block_j++)
+       {
+         const CRDoubleMatrix* tmp_block_pt 
+           = selected_block[block_i][block_j].block_pt();
+
+         if(tmp_block_pt != 0)
+         {
+           if(!tmp_block_pt->built())
+           {
+             std::ostringstream err_msg;
+             err_msg << "The matrix pointed to by block(" 
+                     << block_i << "," << block_j << ") is not built.\n";
+             throw OomphLibError(err_msg.str(),
+                                 OOMPH_CURRENT_FUNCTION,
+                                 OOMPH_EXCEPTION_LOCATION);
+           }
+
+           const LinearAlgebraDistribution* const tmp_block_dist_pt
+             = tmp_block_pt->distribution_pt();
+
+           const unsigned row_selected_block 
+             = selected_block[block_i][block_j].row_index();
+
+           const LinearAlgebraDistribution* const another_tmp_block_dist_pt
+             = block_distribution_pt(row_selected_block);
+
+           if(*tmp_block_dist_pt != *another_tmp_block_dist_pt)
+           {
+             std::ostringstream err_msg;
+             err_msg << "block_distribution_pt " << row_selected_block << "\n"
+                     << "does not match the distribution from the block_pt() "
+                     << " in selected_block["
+                     << block_i << "][" << block_j <<"].\n";
+             throw OomphLibError(err_msg.str(),
+                                 OOMPH_CURRENT_FUNCTION,
+                                 OOMPH_EXCEPTION_LOCATION);
+           }
+         }
+       }
+     }
+
+     // Attempt a similar check for the column index. This is not as rigorous
+     // since a CRDoubleMatrix does not have a distribution for the columns.
+     // However, we can check if the ncol of the matrices in block_pt matches
+     // those in the block_distribution_pt corresponding to the columns.
+     // (I hope this makes sense... both the row and columns are permuted in
+     // CRDoubleMatrixHelpers::concatenate_without_communication(...))
+     //
+     // The test for the row distributions checks if the nrow_local is correct.
+     // We do not have the equivalent for columns.
+     for (unsigned block_i = 0; block_i < para_selected_block_nrow; block_i++) 
+     {
+       for (unsigned block_j = 0; block_j < para_selected_block_ncol; block_j++) 
+       {
+         // Cache the block_pt
+         const CRDoubleMatrix* tmp_block_pt 
+           = selected_block[block_i][block_j].block_pt();
+
+         if(tmp_block_pt != 0)
+         {
+           const unsigned tmp_block_ncol = tmp_block_pt->ncol();
+
+           const unsigned selected_block_col
+             = selected_block[block_i][block_j].column_index();
+
+           // YES, nrow, this is not incorrect.
+           const unsigned another_tmp_block_ncol 
+             = block_distribution_pt(selected_block_col)->nrow();
+
+           if(tmp_block_ncol != another_tmp_block_ncol)
+           {
+             std::ostringstream err_msg;
+             err_msg << "block_pt in selected_block[" 
+                     << block_i << "][" << block_j << "] "
+                     << "has ncol = " << tmp_block_ncol << ".\n"
+                     << "But the corresponding block_distribution_pt("
+                     << selected_block_col << ") has nrow = " 
+                     << another_tmp_block_ncol 
+                     << ").\n";
+             throw OomphLibError(err_msg.str(),
+                                 OOMPH_CURRENT_FUNCTION,
+                                 OOMPH_EXCEPTION_LOCATION);
+           }
+         }
+       }
+     }
+#endif
+
+    MATRIX output_matrix;
+
+    const unsigned nblock_row = selected_block.nrow();
+    const unsigned nblock_col = selected_block.ncol();
+
+    // Get the row and col distributions.
+    Vector<LinearAlgebraDistribution*> row_dist_pt(nblock_row,0);
+    Vector<LinearAlgebraDistribution*> col_dist_pt(nblock_col,0);
+
+    // For the row distributions, use the first column of selected_block
+    // Also, store the index of the block rows.
+    Vector<unsigned> block_row_index(nblock_row,0);
+    for (unsigned row_i = 0; row_i < nblock_row; row_i++) 
+    {
+      const unsigned selected_row_index 
+        = selected_block[row_i][0].row_index();
+
+      row_dist_pt[row_i] = Block_distribution_pt[selected_row_index];
+      block_row_index[row_i] = selected_row_index;
+    }
+
+    // For the col distributions, use the first row of selected_block
+    Vector<unsigned> block_col_index(nblock_col,0);
+    for (unsigned col_i = 0; col_i < nblock_col; col_i++) 
+    {
+      const unsigned selected_col_index 
+        = selected_block[0][col_i].column_index();
+
+      col_dist_pt[col_i] = Block_distribution_pt[selected_col_index];
+      block_col_index[col_i] = selected_col_index;
+    }
+
+    // Build the output matrix, check to see if the block row indices is
+    // already a key in Auxiliary_distribution_pt.
+    std::map<Vector<unsigned>,LinearAlgebraDistribution* >::const_iterator iter;
+
+    iter = Auxiliary_distribution_pt.find(block_row_index);
+
+    if(iter != Auxiliary_distribution_pt.end())
+    {
+      output_matrix.build(iter->second);
+    }
+    else
+    {
+      LinearAlgebraDistribution* tmp_dist_pt = new LinearAlgebraDistribution;
+      LinearAlgebraDistributionHelpers::concatenate(row_dist_pt,*tmp_dist_pt);
+      Auxiliary_distribution_pt.insert(
+          std::make_pair(block_row_index,tmp_dist_pt));
+
+      output_matrix.build(tmp_dist_pt);
+    }
+
+    // Do the same for the column dist, since we might need it for the RHS
+    // vector..
+    iter = Auxiliary_distribution_pt.find(block_col_index);
+    if(iter == Auxiliary_distribution_pt.end())
+    {
+      LinearAlgebraDistribution* tmp_dist_pt = new LinearAlgebraDistribution;
+      LinearAlgebraDistributionHelpers::concatenate(col_dist_pt,*tmp_dist_pt);
+      Auxiliary_distribution_pt.insert(
+          std::make_pair(block_col_index,tmp_dist_pt));
+    }
+
+    DenseMatrix<CRDoubleMatrix*> block_pt(nblock_row,nblock_col,0);
+    Vector<Vector<unsigned> > new_block(nblock_row,Vector<unsigned>(nblock_col,0));
+
+    // Extract blocks if required
+    for (unsigned block_i = 0; block_i < nblock_row; block_i++) 
+    {
+      for (unsigned block_j = 0; block_j < nblock_col; block_j++) 
+      {
+        const bool block_wanted = selected_block[block_i][block_j].wanted();
+        if(block_wanted)
+        {
+          CRDoubleMatrix* tmp_block_pt 
+            = selected_block[block_i][block_j].block_pt();
+
+          if(tmp_block_pt == 0)
+          {
+            new_block[block_i][block_j] = 1;
+
+            block_pt(block_i,block_j) = new CRDoubleMatrix;
+
+            const unsigned mapped_block_i = block_row_index[block_i];
+            const unsigned mapped_block_j = block_row_index[block_j];
+            this->get_block(mapped_block_i,mapped_block_j,
+                            *block_pt(block_i,block_j));
+          }
+          else
+          {
+            block_pt(block_i,block_j) = tmp_block_pt;
+          }
+        }
+      }
+    }
+    CRDoubleMatrixHelpers::concatenate_without_communication(row_dist_pt,
+                                                             col_dist_pt,
+                                                             block_pt,
+                                                             output_matrix);
+
+    for (unsigned block_i = 0; block_i < nblock_row; block_i++) 
+    {
+      for (unsigned block_j = 0; block_j < nblock_col; block_j++) 
+      {
+        if(new_block[block_i][block_j])
+        {
+          delete block_pt(block_i,block_j);
+        }
+      }
+    }
+
+    return output_matrix;
+   } // EOFunc get_concatenated_block(...)
+
+//  /// RAYRAY comment.
+//  MATRIX get_concatenated_block(const VectorMatrix<BlockSelector> 
+//                                &selected_block)
+//   {
+//#ifdef PARANOID
+//     // Check range of block index
+//     const unsigned para_selected_block_nrow = selected_block.nrow();
+//     const unsigned para_selected_block_ncol = selected_block.ncol();
+//     const unsigned para_nblocks = nblock_types();
+//
+//     // Check that selected_block size is not 0.
+//     if(para_selected_block_nrow == 0)
+//     {
+//       std::ostringstream err_msg;
+//       err_msg << "There is no matrix to concatenate, \n" 
+//               << "selected_block.nrow() == 0.\n";
+//       throw OomphLibError(err_msg.str(),
+//                           OOMPH_CURRENT_FUNCTION,
+//                           OOMPH_EXCEPTION_LOCATION);   
+//     }
+//
+//     // Check that the number of blocks is not outside of the range 
+//     // nblock_types(). Since this function builds matrices for block
+//     // preconditioning, it does not make sense for us to concatenate more
+//     // blocks than nblock_types().
+//     if((para_selected_block_nrow > para_nblocks) || 
+//        (para_selected_block_ncol > para_nblocks))
+//     {
+//       std::ostringstream err_msg;
+//       err_msg << "Trying to concatenate a " 
+//               << para_selected_block_nrow << " by " 
+//               << para_selected_block_ncol 
+//               << " block matrix,\n"
+//               << "but there are only " 
+//               << para_nblocks << " block types.\n";
+//       throw OomphLibError(err_msg.str(),
+//                           OOMPH_CURRENT_FUNCTION,
+//                           OOMPH_EXCEPTION_LOCATION);   
+//     }
+//     
+//
+//     // Check that selected_block make sense, i.e. the row indices of each row
+//     // is the same, and the column indices of each column are the same.
+//
+//     // First check if the row indices are consistent. 
+//     // For each row, loop through the columns, comparing the row index against
+//     // the first column.
+//     for (unsigned row_i = 0; row_i < para_selected_block_nrow; row_i++)
+//     {
+//       // Row index of the first block (column 0) in this row. 
+//       // This will used to compare against.
+//       const unsigned col_0_row_index = selected_block[row_i][0].row_index();
+//
+//       for (unsigned col_i = 0; col_i < para_selected_block_ncol; col_i++) 
+//       {
+//         // Row and column index of the current block (along this row)
+//         const unsigned para_b_i = selected_block[row_i][col_i].row_index();
+//         const unsigned para_b_j = selected_block[row_i][col_i].column_index();
+//
+//         if(col_0_row_index != para_b_i)
+//         {
+//           std::ostringstream err_msg;
+//           err_msg << "Block index for block(" << row_i << "," << col_i <<") "
+//                   << "contains block index (" << para_b_i << "," 
+//                                               << para_b_j << ").\n"
+//                   << "But the row index for the first column is " 
+//                   << col_0_row_index <<", they must be the same!\n";
+//           throw OomphLibError(err_msg.str(),
+//                               OOMPH_CURRENT_FUNCTION,
+//                               OOMPH_EXCEPTION_LOCATION); 
+//         }
+//       }
+//     }
+//
+//     // Do the same for the column indices, consistency check.
+//     // For each column, loop through the rows, comparing the column index
+//     // against the first row.
+//     for (unsigned col_i = 0; col_i < para_selected_block_ncol; col_i++) 
+//     {
+//       // Column index from the first block (row 0) in this column.
+//       // This will be used to compare against.
+//       const unsigned row_0_col_index 
+//         = selected_block[0][col_i].column_index();
+//
+//       for (unsigned row_i = 0; row_i < para_selected_block_nrow; row_i++) 
+//       {
+//         // The row and column index of the current block along this column.
+//         const unsigned para_b_i = selected_block[row_i][col_i].row_index();
+//         const unsigned para_b_j = selected_block[row_i][col_i].column_index();
+//
+//         if(row_0_col_index != para_b_j)
+//         {
+//           std::ostringstream err_msg;
+//           err_msg << "Block index for block(" << row_i << "," << col_i <<") "
+//                   << "contains block index (" << para_b_i << "," 
+//                                               << para_b_j << ").\n"
+//                   << "But the col index for the first row is " 
+//                   << row_0_col_index <<", they must be the same!\n";
+//           throw OomphLibError(err_msg.str(),
+//                               OOMPH_CURRENT_FUNCTION,
+//                               OOMPH_EXCEPTION_LOCATION); 
+//         }
+//       }
+//     }
+//
+//     // Check to see if the values in selected_block is within the range 
+//     // nblock_types()
+//     //
+//     // Since we know that the column and row indices are consistent (by the
+//     // two paranoia checks above), we only need to check the column indices
+//     // in the first row, and the row indices in the first column.
+//     
+//     // Check that the row indices in the first column are within the range
+//     // nblock_types()
+//     for (unsigned row_i = 0; row_i < para_selected_block_nrow; row_i++) 
+//     {
+//       const unsigned para_b_i = selected_block[row_i][0].row_index();
+//       const unsigned para_b_j = selected_block[row_i][0].column_index();
+//       if(para_b_i > para_nblocks)
+//       {
+//           std::ostringstream err_msg;
+//           err_msg << "Block index for block(" << row_i << ",0) "
+//                   << "contains block index (" << para_b_i << "," 
+//                                               << para_b_j << ").\n"
+//                   << "But there are only " << para_nblocks 
+//                   << " nblock_types().\n";
+//           throw OomphLibError(err_msg.str(),
+//                               OOMPH_CURRENT_FUNCTION,
+//                               OOMPH_EXCEPTION_LOCATION); 
+//       }
+//     }
+//
+//     // Check that the col indices in the first row are within the range
+//     // nblock_types()
+//     for (unsigned col_i = 0; col_i < para_selected_block_nrow; col_i++)
+//     {
+//       const unsigned para_b_i = selected_block[0][col_i].row_index();
+//       const unsigned para_b_j = selected_block[0][col_i].column_index();
+//       if(para_b_j > para_nblocks)
+//       {
+//           std::ostringstream err_msg;
+//           err_msg << "Vector for block(0," << col_i << ") "
+//                   << "contains block index (" << para_b_i << "," 
+//                                               << para_b_j << ").\n"
+//                   << "But there are only " << para_nblocks 
+//                   << " nblock_types().\n";
+//           throw OomphLibError(err_msg.str(),
+//                               OOMPH_CURRENT_FUNCTION,
+//                               OOMPH_EXCEPTION_LOCATION); 
+//       }
+//     }
+//
+//     // Stricter test - can be removed is required in the future. For the first
+//     // column, check that the row indices does not repeat.
+//     std::set<unsigned> row_index_set;
+//     for (unsigned row_i = 0; row_i < para_selected_block_nrow; row_i++) 
+//     {
+//       std::pair<std::set<unsigned>::iterator,bool> row_index_set_ret;
+//
+//       const unsigned row_i_index = selected_block[row_i][0].row_index();
+//
+//       row_index_set_ret
+//         = row_index_set.insert(row_i_index);
+//         
+//       if(!row_index_set_ret.second)
+//        {
+//         std::ostringstream err_msg;
+//         err_msg << "The row " << row_i_index << " is already inserted.\n";
+//         throw OomphLibError(err_msg.str(),
+//                             OOMPH_CURRENT_FUNCTION,
+//                             OOMPH_EXCEPTION_LOCATION);
+//        }
+//     }
+//
+//     // Stricter test - can be removed is required in the future. For the first
+//     // row, check that the column indices does not repeat.
+//     std::set<unsigned> col_index_set;
+//     for (unsigned col_i = 0; col_i < para_selected_block_ncol; col_i++) 
+//     {
+//       std::pair<std::set<unsigned>::iterator,bool> col_index_set_ret;
+//
+//       const unsigned col_i_index = selected_block[0][col_i].column_index();
+//
+//       col_index_set_ret
+//         = col_index_set.insert(col_i_index);
+//         
+//       if(!col_index_set_ret.second)
+//        {
+//         std::ostringstream err_msg;
+//         err_msg << "The col " << col_i_index << " is already inserted.\n";
+//         throw OomphLibError(err_msg.str(),
+//                             OOMPH_CURRENT_FUNCTION,
+//                             OOMPH_EXCEPTION_LOCATION);
+//        }
+//     }
+//#endif
+//
+//    const unsigned nblock_row = selected_block.nrow();
+//    const unsigned nblock_col = selected_block.ncol();
+//
+//    DenseMatrix<CRDoubleMatrix*> sub_block_pt(nblock_row,nblock_col,0);
+//
+//    // Get the required blocks
+//    for (unsigned row_i = 0; row_i < nblock_row; row_i++)
+//    {
+//      for (unsigned col_i = 0; col_i < nblock_col; col_i++)
+//      {
+//        if(bool(selected_block[row_i][col_i].wanted()))
+//        {
+//          const unsigned block_i = selected_block[row_i][col_i].row_index();
+//          const unsigned block_j = selected_block[row_i][col_i].column_index();
+//
+//          sub_block_pt(row_i,col_i) = new CRDoubleMatrix;
+//          this->get_block(block_i,block_j,*sub_block_pt(row_i,col_i));
+//        }
+//      }
+//    }
+//
+//    MATRIX output_matrix = get_concatenated_block(selected_block,sub_block_pt);
+//    
+//    // delete the sub blocks.
+//    for (unsigned row_i = 0; row_i < nblock_row; row_i++) 
+//    {
+//      for (unsigned col_i = 0; col_i < nblock_col; col_i++) 
+//      {
+//        delete sub_block_pt(row_i,col_i);
+//      }
+//    }
+//
+//    return output_matrix;
+//   } // EOFunc get_concatenated_block(...)
  
   /// \short Takes the naturally ordered vector and rearranges it into a
   /// vector of sub vectors corresponding to the blocks, so s[b][i] contains
@@ -716,6 +1623,33 @@ namespace oomph
     }
   } // EOFunc block_number(...)
 
+  // Given a global degree of freedom, returns the block number, this is the
+  // external block, not the underlying or the dof block.
+  int external_block_number(const unsigned& i_dof) const
+  {
+    int internal_block_number = this->block_number(i_dof);
+
+    if(internal_block_number == -1)
+    {
+      return internal_block_number;
+    }
+    else
+    {
+      // map the internal block to external block.
+      
+      unsigned block_i = 0;
+      while(std::find(Block_to_dof_map_fine[block_i].begin(), 
+                      Block_to_dof_map_fine[block_i].end(), 
+                      internal_block_number)
+                      == Block_to_dof_map_fine[block_i].end())
+      {
+        block_i++;
+      }
+
+      return block_i;
+    }
+  }
+
   /// \short Return the index in the block corresponding to a global block
   /// number i_dof.
   int index_in_block(const unsigned& i_dof) const
@@ -748,6 +1682,94 @@ namespace oomph
     }
    return -1;
   } // EOFunc index_in_block(...)
+
+  // Given a global dof number, returns the index in the block it belongs to.
+  // This is the overall index, not local block (in parallel).
+  int external_index_in_block(const unsigned& i_dof) const
+  {
+//    std::cout << "Hi from external_index_in_block(...)" << std::endl;
+
+//    std::cout << "Printing out Block_to_dof_map_fine: " << std::endl;
+//    for (unsigned i = 0; i < Block_to_dof_map_fine.size(); i++) 
+//    {
+//      std::cout << "i: " << i << ", " << Block_to_dof_map_fine[i] << std::endl;
+//    }
+    
+    
+    // the dof block number
+    int dof_block_number = this->dof_number(i_dof);
+//    std::cout << "dof_block_number is: " << dof_block_number << std::endl;
+
+    if(dof_block_number >= 0)
+    {
+      // the external block number
+      unsigned ex_blk_number = this->external_block_number(i_dof);
+//      std::cout << "ex_blk_number: " << ex_blk_number << std::endl; 
+      
+      int internal_index_in_dof = this->index_in_dof(i_dof);
+//      int internal_block_number = this->block_number(i_dof);
+      // find the processor which this global index in block belongs to.
+      unsigned block_proc 
+        = internal_block_distribution_pt(dof_block_number)
+        ->rank_of_global_row(internal_index_in_dof);
+
+      // Add up all of the first rows.
+      const unsigned ndof_in_block 
+        = Block_to_dof_map_fine[ex_blk_number].size();
+
+      unsigned index = 0;
+      for (unsigned dof_i = 0; dof_i < ndof_in_block; dof_i++)
+      {
+        index += internal_block_distribution_pt(
+                 Block_to_dof_map_fine[ex_blk_number][dof_i])
+                 ->first_row(block_proc);
+      }
+//      std::cout << "sum of first row is: " << index << std::endl; 
+      
+//      if(Raydebug)
+//      pause("Done the first row add"); 
+      
+
+      // Now add up all the nrow_local up to this dof block.
+      unsigned j = 0;
+      
+      while(int(Block_to_dof_map_fine[ex_blk_number][j])!= dof_block_number)
+      {
+        index += internal_block_distribution_pt(
+            Block_to_dof_map_fine[ex_blk_number][j])->nrow_local(block_proc);
+        j++;
+      }
+
+      
+
+      // Now add the index of this block...
+      index += (internal_index_in_dof - 
+                internal_block_distribution_pt(
+                  dof_block_number)
+                ->first_row(block_proc));
+
+      return index;
+
+
+
+//      // compute the index in the block
+//      unsigned j = 0;
+//      while(int(Block_to_dof_map_fine[ex_block_number][j])  !=
+//            dof_block_number)
+//      {
+//        unsigned first_row = internal_block_distribution_pt(
+//            Block_to_dof_map_fine[ex_block_number][j])->first_row();
+//
+//        unsigned nrow_local = internal_block_distribution_pt(
+//            Block_to_dof_map_fine[ex_block_number][j])->nrow_local();
+//
+//        index += 
+//      }
+    }
+
+    return -1;
+  }
+
 
   /// \short Access function to the internal block distributions.
   const LinearAlgebraDistribution*
@@ -840,6 +1862,63 @@ namespace oomph
 
    return Block_distribution_pt[b];
   } // EOFunc block_distribution_pt(...)
+
+  /// \short Access function to the block distributions.
+  LinearAlgebraDistribution*
+  dof_block_distribution_pt(const unsigned& b)
+  {
+#ifdef PARANOID
+      if(b > ndof_types())
+      {
+        std::ostringstream error_msg;
+        error_msg <<"You requested the distribution for the dof block "
+          << b << ".\n"
+          << "But there are only " << ndof_types() << " DOF types.\n"
+          << std::endl;
+        throw OomphLibError(error_msg.str(),
+            OOMPH_CURRENT_FUNCTION,
+            OOMPH_EXCEPTION_LOCATION);
+      }
+
+#endif
+
+    if(is_master_block_preconditioner())
+    {
+#ifdef PARANOID
+      if(Internal_block_distribution_pt.size() == 0)
+      {
+        std::ostringstream error_msg;
+        error_msg <<"Internal block distributions are not set up.\n"
+          << "Have you called block_setup(...)?\n"
+          << std::endl;
+        throw OomphLibError(error_msg.str(),
+            OOMPH_CURRENT_FUNCTION,
+            OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+
+      // The dof block is distribution is the same as the internal
+      // block distribution.
+      return Internal_block_distribution_pt[b];
+    }
+    else
+    {
+#ifdef PARANOID
+      if(Dof_block_distribution_pt.size() == 0)
+      {
+        std::ostringstream error_msg;
+        error_msg <<"Dof block distributions are not set up.\n"
+          << "Have you called block_setup(...)?\n"
+          << std::endl;
+        throw OomphLibError(error_msg.str(),
+            OOMPH_CURRENT_FUNCTION,
+            OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+      return Dof_block_distribution_pt[b];
+    }
+  } // EOFunc block_distribution_pt(...)
+
 
   /// \short Access function to the distribution of the master
   /// preconditioner. If this preconditioner does not have a master
@@ -976,6 +2055,8 @@ namespace oomph
   void clear_block_preconditioner_base()
   {
 
+    Replacement_dof_block_pt.clear();
+
    // clear the Distributions
    this->clear_distribution();
    unsigned nblock = Internal_block_distribution_pt.size();
@@ -1029,6 +2110,9 @@ namespace oomph
    Internal_preconditioner_matrix_distribution_pt = 0;
    delete Preconditioner_matrix_distribution_pt;
    Preconditioner_matrix_distribution_pt = 0;
+
+   // Delete all distributions within Auxiliary_distribution_pt, except for
+   // the one which corres
   } // EOFunc clear_block_preconditioner_base()
 
   /// \short debugging method to document the setup.
@@ -1127,49 +2211,85 @@ namespace oomph
   /// jacobian. A typical use would be if this is a subsidiary preconditioner
   /// and a master preconditioner has to pass down modified blocks for the 
   /// subsidiary preconditioner to use.
+  /// RAYRAY move to protected!!!!
   void set_replacement_dof_block(const unsigned &block_i, 
-                                 const unsigned &block_j,
-                                 CRDoubleMatrix* replacement_dof_block_pt)
+      const unsigned &block_j,
+      CRDoubleMatrix* replacement_dof_block_pt)
   {
 #ifdef PARANOID
-  
-   // RAYRAY 
-   // Check that the replaced block's distribution makes sense (nrow and ncol)
-   
-   // Only the dof level blocks at THIS preconditioner can be replaced.
-   // I.e. nblock_types() == ndof_types().
-   // This is because if one or more dof types is associated with one block
-   // type, a subsidiary block preconditioner may not account for such a 
-   // blocking structure.
-   //
-   // For example, if the th
+    // Check if block_setup(...) has been called.
+    if(nblock_types() == 0)
+    {
+      std::ostringstream err_msg;
+      err_msg << "nblock_types() is 0, has block_setup(...) been called?\n";
+      throw OomphLibError(err_msg.str(),
+          OOMPH_CURRENT_FUNCTION,
+          OOMPH_EXCEPTION_LOCATION);
+    }
 
+    // Check that the most fine grain mapping has been used in block_setup(...)
+    // i.e. nblock_types() == ndof_types()
+    if(ndof_types() != nblock_types())
+    {
+      std::ostringstream err_msg;
+      err_msg << "ndof_types() != nblock_types()\n"
+              << "Only the dof-level blocks can be replaced.\n"
+              << "Please re-think your blocking scheme.\n";
+      throw OomphLibError(err_msg.str(),
+          OOMPH_CURRENT_FUNCTION,
+          OOMPH_EXCEPTION_LOCATION);
+    }
 
-   // Check that the replacement block pt is not null
-   if(replacement_dof_block_pt == 0)
-   {
-         std::ostringstream err_msg;
-         err_msg << "Replacing block(" << block_i << "," << block_i << ")\n"
-                 << " but the pointer is NULL." << std::endl;
-         throw OomphLibError(err_msg.str(),
-                             OOMPH_CURRENT_FUNCTION,
-                             OOMPH_EXCEPTION_LOCATION);
-   }
+    // Check that the replacement block pt is not null
+    if(replacement_dof_block_pt == 0)
+    {
+      std::ostringstream err_msg;
+      err_msg << "Replacing block(" << block_i << "," << block_i << ")\n"
+        << " but the pointer is NULL." << std::endl;
+      throw OomphLibError(err_msg.str(),
+          OOMPH_CURRENT_FUNCTION,
+          OOMPH_EXCEPTION_LOCATION);
+    }
 
-   // Check that the replacement block has been built
-   if(!replacement_dof_block_pt->built())
-   {
-         std::ostringstream err_msg;
-         err_msg << "Replacement block(" << block_i << "," << block_i << ")"
-                 << " is not built." << std::endl;
-         throw OomphLibError(err_msg.str(),
-                             OOMPH_CURRENT_FUNCTION,
-                             OOMPH_EXCEPTION_LOCATION);
-   }
+    // Check that the replacement block has been built
+    if(!replacement_dof_block_pt->built())
+    {
+      std::ostringstream err_msg;
+      err_msg << "Replacement block(" << block_i << "," << block_i << ")"
+        << " is not built." << std::endl;
+      throw OomphLibError(err_msg.str(),
+          OOMPH_CURRENT_FUNCTION,
+          OOMPH_EXCEPTION_LOCATION);
+    }
+
+    // Check if the distribution matches. Determine which natural ordering dof
+    // this should go to. I.e. we convert from dof-block index to dof index.
+    // Luckily, this is stored in Block_to_dof_map_coarse.
+    const unsigned para_dof_block_i = Block_to_dof_map_coarse[block_i][0];
+
+    if(*dof_block_distribution_pt(para_dof_block_i) !=
+       *replacement_dof_block_pt->distribution_pt() )
+    {
+      std::ostringstream err_msg;
+      err_msg << "The distribution of the replacement dof_block_pt\n"
+              << "is different from the Dof_block_distribution_pt["
+              << para_dof_block_i<<"].\n";
+      throw OomphLibError(err_msg.str(),
+          OOMPH_CURRENT_FUNCTION,
+          OOMPH_EXCEPTION_LOCATION);
+    }
+
+    // Possibly get a dof_level_block and compare the ncol?
+
 #endif
     
-   // Set the precomputed blocks.
-   Replacement_dof_block_pt(block_i,block_j) = replacement_dof_block_pt;
+    // This makes sense because we only can use this if 
+    // nblock_types() == ndof_types().
+    const unsigned dof_block_i = Block_to_dof_map_coarse[block_i][0];
+    const unsigned dof_block_j = Block_to_dof_map_coarse[block_j][0];
+
+    Replacement_dof_block_pt(dof_block_i,dof_block_j) 
+      = replacement_dof_block_pt;
 
   } // EOFunc set_precomputed_blocks(...)
 
@@ -1356,7 +2476,8 @@ namespace oomph
   /// blocks. Necessary concatenation handled by this function and the
   /// result is returned in output_block.
   void get_coarsened_block(const unsigned& i, const unsigned& j,
-                             MATRIX& output_block) const;
+                             MATRIX& output_block, 
+                             bool ignore_replacement_block = false) const;
   
   /// \short Check if any of the meshes are distributed. This is equivalent
   /// to problem.distributed() and is used as a replacement.
@@ -1401,9 +2522,10 @@ namespace oomph
       }
      // if we here we couldn't find the i_dof
 #ifdef PARANOID
+     unsigned my_rank = comm_pt()->my_rank();
      std::ostringstream error_message;
      error_message
-      << "Requested dof_number(...) for global DOF " << i_dof << "\n"
+      << "Proc " << my_rank<<": Requested dof_number(...) for global DOF " << i_dof << "\n"
       << "cannot be found.\n";
      throw OomphLibError(
                          error_message.str(),
@@ -1578,8 +2700,14 @@ namespace oomph
   /// \short The distribution for precomputed blocks.
   Vector<LinearAlgebraDistribution*> Block_distribution_pt;
 
+  // RAYRAY comment
+  std::map<Vector<unsigned>,LinearAlgebraDistribution*> Auxiliary_distribution_pt;
+
   /// \short Mapping for blocks passed down from the parent preconditioner.
   Vector<Vector<unsigned> > Block_to_dof_map_coarse;
+
+  /// \short RAYRAY comment
+  Vector<Vector<unsigned> > Block_to_dof_map_fine;
 
   /// \short Mapping for dof types within THIS precondition. This is usually
   /// passed down from the parent preconditioner.

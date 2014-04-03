@@ -1,6 +1,5 @@
 
 
-
 # Do we want to run the (possibly rather expensive) comprehensive self tests
 #---------------------------------------------------------------------------
 # for all available libraries? Add additional libraries here.
@@ -16,6 +15,9 @@ else
 endif
 
 
+# Append the generic folder
+other_self_test = \
+generic
 
 # Here are the sub-directories in which we actually want to run self-tests
 #-------------------------------------------------------------------------
@@ -26,6 +28,7 @@ endif
 
 SUBDIRS = \
 $(full_self_test) \
+$(other_self_test) \
 analyse_self_tests
 
 

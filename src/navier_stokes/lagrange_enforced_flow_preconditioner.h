@@ -994,11 +994,11 @@ namespace oomph
     // This is used to create look up lists later.
     // Note: Mesh::nodal_dimension() requires communication, use it sparingly!
     unsigned spatial_dim = My_mesh_pt[0]->nodal_dimension();
-    std::cout << "spatial_dim: " << spatial_dim << std::endl; 
+//    std::cout << "spatial_dim: " << spatial_dim << std::endl; 
 
     // Get the number of DOF types.
     unsigned n_dof_types = ndof_types();
-    std::cout << "n_dof_types: " << n_dof_types << std::endl; 
+//    std::cout << "n_dof_types: " << n_dof_types << std::endl; 
 
     // Check if the number of DOF types make sense.
 #ifdef PARANOID
@@ -1047,15 +1047,15 @@ namespace oomph
     // total number of velocity DOF types is the spatial dimension multiplied
     // by the number of meshes.
     N_velocity_doftypes = My_nmesh*spatial_dim;
-    std::cout << "N_velocity_doftypes: " << N_velocity_doftypes << std::endl; 
+//    std::cout << "N_velocity_doftypes: " << N_velocity_doftypes << std::endl; 
 
     // Fluid has +1 for the pressure.
     N_fluid_doftypes = N_velocity_doftypes + 1;
-    std::cout << "N_fluid_doftypes: " << N_fluid_doftypes << std::endl; 
+//    std::cout << "N_fluid_doftypes: " << N_fluid_doftypes << std::endl; 
 
     // The rest are Lagrange multiplier DOF types.
     N_lagrange_doftypes = n_dof_types - N_fluid_doftypes;
-    std::cout << "N_lagrange_doftypes: " << N_lagrange_doftypes << std::endl; 
+//    std::cout << "N_lagrange_doftypes: " << N_lagrange_doftypes << std::endl; 
 
     ///////////////////////////////////////////////////////////
     //   Now create the DOF to block map for block_setup()   //
@@ -1170,30 +1170,52 @@ namespace oomph
 
     // With the artificial test data, we get the following list:
     // 0 1 2 9 3  4  5  10  11  6  7  8  12
-    std::cout << "dof_to_block_map: " << std::endl; 
-    for (unsigned tmp_i = 0; tmp_i < dof_to_block_map.size(); tmp_i++) 
-    {
-      std::cout << dof_to_block_map[tmp_i] << " "; 
-    }
-    std::cout << std::endl; 
+//    std::cout << "Lgr::setup dof_to_block_map: " << std::endl; 
+//    for (unsigned tmp_i = 0; tmp_i < dof_to_block_map.size(); tmp_i++) 
+//    {
+//      std::cout << dof_to_block_map[tmp_i] << " "; 
+//    }
+//    std::cout << "\n" << std::endl; 
 
-    std::cout << "Lgr prec: calling block_setup(...)" << std::endl; 
-    
     // Call the block setup
     this->block_setup(dof_to_block_map);
 
-    std::cout << "Lgr prec: done block_setup()\n" << std::endl;
+//    pause("Lgr::setup() done block_setup, about to print dof block dist nrow"); 
+
+//    for (unsigned block_i = 0; block_i < nblock_types(); block_i++) 
+//    {
+//      const unsigned nrow = dof_block_distribution_pt(block_i)->nrow();
+//      std::cout << "dof block " << block_i << ", nrow = " << nrow << std::endl; 
+//    }
+
+//    pause("done dof block dist nrow, about to print out each block.");
+
+
+//    std::cout << "Print 1, NOT replaced." << std::endl; 
+//    std::cout << "============================================" << std::endl; 
+//    std::cout << "============================================" << std::endl; 
+//    std::cout << "============================================" << std::endl; 
+//    std::cout << "============================================" << std::endl; 
+//
+//    for (unsigned block_i = 0; block_i < nblock_types(); block_i++) 
+//    {
+//      for (unsigned block_j = 0; block_j < nblock_types(); block_j++) 
+//      {
+//        CRDoubleMatrix tmp_block = get_block(block_i,block_j);
+//        const unsigned tmp_block_nrow = tmp_block.nrow();
+//        const unsigned tmp_block_ncol = tmp_block.ncol();
+//        std::cout << "block(" << block_i  << "," << block_j << ")"
+//                  << " , nrow: " << tmp_block_nrow << ", col: " 
+//                  << tmp_block_ncol << std::endl;
+//
+//        std::cout << "============================================" << std::endl; 
+//        std::cout << "\n" << std::endl; 
+//      }
+//    }
+//    pause("done un replaced blocks"); 
     
 
-      // Print out the nrow of blocks along the first column.
-      std::cout << "Printing out blocks." << std::endl; 
-      for (unsigned block_i = 0; block_i < nblock_types(); block_i++) 
-      {
-        CRDoubleMatrix tmp_block = get_block(block_i,0);
-        unsigned tmp_block_nrow = tmp_block.nrow();
-        std::cout << "block " << block_i << ", nrow: " << tmp_block_nrow << std::endl; 
-      }
-      
+
 
     if(Doc_prec)
     {
@@ -1672,7 +1694,25 @@ namespace oomph
     ///////////////////////////////////////////////////////////////////////////////
 
 
-
+//      std::cout << "\n" << std::endl; 
+//      std::cout << "\n" << std::endl; 
+//      std::cout << "Print 2, Setting replacement blocks." << std::endl; 
+//      std::cout << "============================================" << std::endl; 
+//      std::cout << "============================================" << std::endl; 
+//      std::cout << "============================================" << std::endl; 
+//      std::cout << "============================================" << std::endl; 
+      for (unsigned row_i = spatial_dim; row_i < N_velocity_doftypes; row_i++) 
+      {
+        for (unsigned col_i = spatial_dim; col_i < N_velocity_doftypes; col_i++) 
+        {
+          const unsigned tmp_nrow = v_aug_pt(row_i,col_i)->nrow();
+          const unsigned tmp_ncol = v_aug_pt(row_i,col_i)->ncol();
+//          std::cout<<"Setting block("<<row_i<<","<<col_i<<"), nrow: "
+//                   <<tmp_nrow<<", ncol: " << tmp_ncol << "\n";
+          this->set_replacement_dof_block(row_i,col_i,
+                                          v_aug_pt(row_i,col_i));
+        }
+      }
 
     // AT this point, we have created the augmented fluid block in v_aug_pt
     // and the w block in w_pt.
@@ -1693,106 +1733,211 @@ namespace oomph
     //
     if(Using_superlu_ns_preconditioner)
     {
-      DenseMatrix<CRDoubleMatrix* > f_subblock_pt(N_fluid_doftypes,
-          N_fluid_doftypes,0);
-      // put in v_aug_pt:
-      for(unsigned v_i = 0; v_i < N_velocity_doftypes; v_i++)
+
+      
+      
+      
+
+//      pause("Lgr::setup() done setting replacement blocks, about to check repl. blocks");
+//      MapMatrix<unsigned,CRDoubleMatrix*> re_block_pt = this->replacement_dof_block_pt();
+//
+//      for (unsigned dof_block_i = 0; dof_block_i < this->ndof_types(); dof_block_i++) 
+//      {
+//        for (unsigned dof_block_j = 0; dof_block_j < this->ndof_types(); dof_block_j++) 
+//        {
+//          CRDoubleMatrix* tmp_block_pt = re_block_pt.get(dof_block_i,dof_block_j);
+//          if(tmp_block_pt != 0)
+//          {
+//            const unsigned tmp_nrow = tmp_block_pt->nrow();
+//            const unsigned tmp_ncol = tmp_block_pt->ncol();
+//            std::cout << "block(" << dof_block_i <<","<<dof_block_j
+//                      <<") has been replaced, nrow: " 
+//                      << tmp_nrow << ", ncol: "<< tmp_ncol << std::endl;
+//          }
+//        }
+//      }
+//      pause("printed repl. block pt"); 
+//      
+//      
+//
+//
+//
+//
+//      std::cout << "Print 1, NOT replaced." << std::endl; 
+//      std::cout << "============================================" << std::endl; 
+//      std::cout << "============================================" << std::endl; 
+//      std::cout << "============================================" << std::endl; 
+//      std::cout << "============================================" << std::endl; 
+//      
+//      for (unsigned block_i = 0; block_i < nblock_types(); block_i++) 
+//      {
+//        for (unsigned block_j = 0; block_j < nblock_types(); block_j++) 
+//        {
+//          CRDoubleMatrix tmp_block = get_block(block_i,block_j);
+//          const unsigned tmp_block_nrow = tmp_block.nrow();
+//          const unsigned tmp_block_ncol = tmp_block.ncol();
+//          std::cout << "block(" << block_i  << "," << block_j << ")"
+//                    << " , nrow: " << tmp_block_nrow << ", col: " << tmp_block_ncol << std::endl; 
+//
+//          std::cout << "============================================" << std::endl; 
+//          std::cout << "\n" << std::endl; 
+//        }
+//      }
+//      
+//      pause("Got the nrow yo 222222222"); 
+//
+//      DenseMatrix<CRDoubleMatrix* > f_subblock_pt(N_fluid_doftypes,
+//                                                  N_fluid_doftypes,0);
+//      // put in v_aug_pt:
+//      for(unsigned v_i = 0; v_i < N_fluid_doftypes; v_i++)
+//      {
+//        for(unsigned v_j = 0; v_j < N_fluid_doftypes; v_j++)
+//        {
+//          f_subblock_pt(v_i,v_j) = new CRDoubleMatrix;
+//          this->get_block(v_i,v_j,*f_subblock_pt(v_i,v_j));
+//        }
+//      }
+
+
+//      // RAYRAY old
+//      DenseMatrix<CRDoubleMatrix* > f_subblock_pt(N_fluid_doftypes,
+//          N_fluid_doftypes,0);
+//      // put in v_aug_pt:
+//      for(unsigned v_i = 0; v_i < N_velocity_doftypes; v_i++)
+//      {
+//        for(unsigned v_j = 0; v_j < N_velocity_doftypes; v_j++)
+//        {
+//          f_subblock_pt(v_i,v_j) = v_aug_pt(v_i,v_j);
+//        }
+//      }
+//
+//      // Now get the B and B^T blocks. Note that we have left out the zero block.
+//
+//      // Fill in the pressure block B
+//      for(unsigned col_i = 0; col_i < N_velocity_doftypes; col_i++)
+//      {
+//        f_subblock_pt(N_velocity_doftypes,col_i) = new CRDoubleMatrix;
+//        this->get_block(N_velocity_doftypes,col_i,
+//            *f_subblock_pt(N_velocity_doftypes,col_i));
+//      }
+//
+//      // Fill in the pressure block B^T
+//      for(unsigned row_i = 0; row_i < N_velocity_doftypes; row_i++)
+//      {
+//        f_subblock_pt(row_i,N_velocity_doftypes) = new CRDoubleMatrix;
+//        this->get_block(row_i,N_velocity_doftypes,
+//            *f_subblock_pt(row_i,N_velocity_doftypes));
+//      }
+
+      // Concatenate the sub matrices.
+//      CRDoubleMatrix* f_aug_pt = new CRDoubleMatrix;
+
+
+//      std::cout << "dof_block_dimension():" << std::endl;
+//      for (unsigned i = 0; i < 6; i++) 
+//      {
+//        std::cout << "i = " << i << ", val: " << this->dof_block_dimension(i) << std::endl;
+//        
+//      }
+//
+//      pause("bloodz"); 
+      
+      
+      VectorMatrix<BlockSelector> f_aug_blocks(N_fluid_doftypes,
+                                               N_fluid_doftypes);
+      for (unsigned block_i = 0; block_i < N_fluid_doftypes; block_i++) 
       {
-        for(unsigned v_j = 0; v_j < N_velocity_doftypes; v_j++)
+        for (unsigned block_j = 0; block_j < N_fluid_doftypes; block_j++) 
         {
-          f_subblock_pt(v_i,v_j) = v_aug_pt(v_i,v_j);
+          f_aug_blocks[block_i][block_j].select_block(block_i,block_j,true);
         }
       }
 
-      // Now get the B and B^T blocks. Note that we have left out the zero block.
+///////////////////////////////////////////////////////////////////////////////      
+///////////////////////////////////////////////////////////////////////////////      
+///////////////////////////////////////////////////////////////////////////////      
 
-      // Fill in the pressure block B
-      for(unsigned col_i = 0; col_i < N_velocity_doftypes; col_i++)
-      {
-        f_subblock_pt(N_velocity_doftypes,col_i) = new CRDoubleMatrix;
-        this->get_block(N_velocity_doftypes,col_i,
-            *f_subblock_pt(N_velocity_doftypes,col_i));
-      }
+      CRDoubleMatrix f_aug_block 
+        = this->get_concatenated_block(f_aug_blocks);
 
-      // Fill in the pressure block B^T
-      for(unsigned row_i = 0; row_i < N_velocity_doftypes; row_i++)
-      {
-        f_subblock_pt(row_i,N_velocity_doftypes) = new CRDoubleMatrix;
-        this->get_block(row_i,N_velocity_doftypes,
-            *f_subblock_pt(row_i,N_velocity_doftypes));
-      }
+//      pause("after get_concat_blocks"); 
 
-      // Concatenate the sub matrices.
-      CRDoubleMatrix* f_aug_pt = new CRDoubleMatrix;
+//      Vector<LinearAlgebraDistribution*> f_dist_pt(N_fluid_doftypes,0);
+//      for(unsigned f_i = 0; f_i < N_fluid_doftypes; f_i++)
+//      {
+//        f_dist_pt[f_i] = this->block_distribution_pt(f_i);
+//      }
 
-      Vector<LinearAlgebraDistribution*> f_dist_pt(N_fluid_doftypes,0);
-      for(unsigned f_i = 0; f_i < N_fluid_doftypes; f_i++)
-      {
-        f_dist_pt[f_i] = this->block_distribution_pt(f_i);
-      }
-
-      CRDoubleMatrixHelpers::concatenate_without_communication
-        (f_dist_pt,f_subblock_pt,*f_aug_pt);
+//      CRDoubleMatrixHelpers::concatenate_without_communication
+//        (f_dist_pt,f_subblock_pt,*f_aug_pt);
 
       // delete the sub F pointers, this would also delete the 
       // v_aug_pt
-      for(unsigned row_i = 0; row_i < N_fluid_doftypes; row_i++)
-      {
-        for(unsigned col_i = 0; col_i < N_fluid_doftypes; col_i++)
-        {
-          delete f_subblock_pt(row_i, col_i);
-          f_subblock_pt(row_i, col_i) = 0;
-        }
-      }
+//      for(unsigned row_i = 0; row_i < N_fluid_doftypes; row_i++)
+//      {
+//        for(unsigned col_i = 0; col_i < N_fluid_doftypes; col_i++)
+//        {
+//          delete f_subblock_pt(row_i, col_i);
+//          f_subblock_pt(row_i, col_i) = 0;
+//        }
+//      }
 
       if(Navier_stokes_preconditioner_pt == 0)
       {
         Navier_stokes_preconditioner_pt = new SuperLUPreconditioner;
       }
 
-      Navier_stokes_preconditioner_pt->setup(f_aug_pt, comm_pt());
+      Navier_stokes_preconditioner_pt->setup(&f_aug_block, comm_pt());
 
-      delete f_aug_pt;
-      f_aug_pt = 0;
+//      Navier_stokes_preconditioner_pt->setup(f_aug_pt, comm_pt());
+
+//      delete f_aug_pt;
+//      f_aug_pt = 0;
     }
     else
     {
+//      std::cout << "\n" << std::endl; 
+//      std::cout << "\n" << std::endl; 
+//      std::cout << "\n" << std::endl; 
+      
+//      pause("Lgr::setup() Got to the else block"); 
+      
       //////////////////////////////////////////////////////////////////////////
       //////////////////////////////////////////////////////////////////////////
       //////////////////////////////////////////////////////////////////////////
 
-      std::cout << "Lgr using a block subsidiary preconditioner" << std::endl; 
+//      std::cout << "Lgr using a block subsidiary preconditioner" << std::endl; 
       
 
-      // Get the rest of the f block.
-      DenseMatrix<CRDoubleMatrix* > f_subblock_pt(N_fluid_doftypes,
-          N_fluid_doftypes,0);
-      // put in v_aug_pt:
-      for(unsigned v_i = 0; v_i < N_velocity_doftypes; v_i++)
-      {
-        for(unsigned v_j = 0; v_j < N_velocity_doftypes; v_j++)
-        {
-          f_subblock_pt(v_i,v_j) = v_aug_pt(v_i,v_j);
-        }
-      }
+//      // Get the rest of the f block.
+//      DenseMatrix<CRDoubleMatrix* > f_subblock_pt(N_fluid_doftypes,
+//          N_fluid_doftypes,0);
+//      // put in v_aug_pt:
+//      for(unsigned v_i = 0; v_i < N_velocity_doftypes; v_i++)
+//      {
+//        for(unsigned v_j = 0; v_j < N_velocity_doftypes; v_j++)
+//        {
+//          f_subblock_pt(v_i,v_j) = v_aug_pt(v_i,v_j);
+//        }
+//      }
 
-      // Fill in the pressure block B plus 1
-      for(unsigned col_i = 0; col_i < N_fluid_doftypes; col_i++)
-      {
-        f_subblock_pt(N_velocity_doftypes,col_i) = new CRDoubleMatrix;
+//      // Fill in the pressure block B plus 1
+//      for(unsigned col_i = 0; col_i < N_fluid_doftypes; col_i++)
+//      {
+//        f_subblock_pt(N_velocity_doftypes,col_i) = new CRDoubleMatrix;
+//
+//        this->get_block(N_velocity_doftypes,col_i,
+//            *f_subblock_pt(N_velocity_doftypes,col_i));
+//      }
 
-        this->get_block(N_velocity_doftypes,col_i,
-            *f_subblock_pt(N_velocity_doftypes,col_i));
-      }
-
-      // Fill in the pressure block B^T
-      for(unsigned row_i = 0; row_i < N_velocity_doftypes; row_i++)
-      {
-        f_subblock_pt(row_i,N_velocity_doftypes) = new CRDoubleMatrix;
-
-        this->get_block(row_i,N_velocity_doftypes,
-            *f_subblock_pt(row_i,N_velocity_doftypes));
-      }
+//      // Fill in the pressure block B^T
+//      for(unsigned row_i = 0; row_i < N_velocity_doftypes; row_i++)
+//      {
+//        f_subblock_pt(row_i,N_velocity_doftypes) = new CRDoubleMatrix;
+//
+//        this->get_block(row_i,N_velocity_doftypes,
+//            *f_subblock_pt(row_i,N_velocity_doftypes));
+//      }
 
 
       // Determine whether the NS preconditioner is a block preconditioner (and
@@ -1848,15 +1993,15 @@ namespace oomph
 
       subsidiary_dof_type_coarsening_map.push_back(ns_p_vec);
 
-      std::cout << "Lgr: sub dof type coarsening map: " << std::endl; 
-      for (unsigned i = 0; i < subsidiary_dof_type_coarsening_map.size(); i++) 
-      {
-        for (unsigned j = 0; j < subsidiary_dof_type_coarsening_map[i].size(); j++) 
-        {
-          std::cout << subsidiary_dof_type_coarsening_map[i][j] << " ";
-        }
-        std::cout << "\n"; 
-      }
+//      std::cout << "Lgr: sub dof type coarsening map: " << std::endl; 
+//      for (unsigned i = 0; i < subsidiary_dof_type_coarsening_map.size(); i++) 
+//      {
+//        for (unsigned j = 0; j < subsidiary_dof_type_coarsening_map[i].size(); j++) 
+//        {
+//          std::cout << subsidiary_dof_type_coarsening_map[i][j] << " ";
+//        }
+//        std::cout << "\n"; 
+//      }
       
 
       //    // RAYRAY REMOVE
@@ -2035,13 +2180,13 @@ namespace oomph
 
       } // end of encapsulating
 
-      //  // Output for artificial test.
-      //  std::cout << "Subsidiary_list_bcpl:" << std::endl; 
-      //  for (unsigned i = 0; i < Subsidiary_list_bcpl.size(); i++) 
-      //  {
-      //    std::cout << Subsidiary_list_bcpl[i] << std::endl;
-      //  }
-      //  pause("Printed out Subsidiary_list_bcpl"); 
+        // Output for artificial test.
+//        std::cout << "Subsidiary_list_bcpl:" << std::endl; 
+//        for (unsigned i = 0; i < Subsidiary_list_bcpl.size(); i++) 
+//        {
+//          std::cout << Subsidiary_list_bcpl[i] << std::endl;
+//        }
+//        pause("Printed out Subsidiary_list_bcpl"); 
 
       // The ns_dof_list will ensure that the NS preconditioner have the 
       // structure:
@@ -2063,28 +2208,32 @@ namespace oomph
       //  0 1 2   3  4  5    6  7  8     9   10  11  12   <- block index
       // [u v w | up vp wp | ut vt wt ] [p | Lp1 Lp2 Lt1] <- DOF type
 
-      for (unsigned row_i = spatial_dim; row_i < N_velocity_doftypes; row_i++) 
-      {
-        for (unsigned col_i = spatial_dim; col_i < N_velocity_doftypes; col_i++) 
-        {
-          navier_stokes_block_preconditioner_pt
-            ->set_replacement_dof_block(row_i,col_i,
-                f_subblock_pt(row_i,col_i));
-        }
-      }
+      // RAYRAY commented out.
+//      for (unsigned row_i = spatial_dim; row_i < N_velocity_doftypes; row_i++) 
+//      {
+//        for (unsigned col_i = spatial_dim; col_i < N_velocity_doftypes; col_i++) 
+//        {
+//          navier_stokes_block_preconditioner_pt
+//            ->set_replacement_dof_block(row_i,col_i,
+//                f_subblock_pt(row_i,col_i));
+//        }
+//      }
 
       //    pause("About to call setup of NS prec."); 
 
       navier_stokes_block_preconditioner_pt
         ->setup(matrix_pt(), comm_pt());
 
-      for (unsigned i = 0; i < N_fluid_doftypes; i++)
-      {
-        for (unsigned j = 0; j < N_fluid_doftypes; j++) 
-        {
-          delete f_subblock_pt(i,j);
-        }
-      }
+//      pause("done NS setup"); 
+      
+
+//      for (unsigned i = 0; i < N_fluid_doftypes; i++)
+//      {
+//        for (unsigned j = 0; j < N_fluid_doftypes; j++) 
+//        {
+//          delete f_subblock_pt(i,j);
+//        }
+//      }
     } // else - NS prec is block preconditioner
 
     ///////////////////////////////////////////////////////////////////////////////

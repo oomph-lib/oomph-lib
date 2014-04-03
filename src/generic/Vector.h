@@ -41,7 +41,7 @@
 #include<sstream>
 #include<cmath>
 
-//Oomph-libe error handler
+//Oomph-lib error handler
 #include "oomph_definitions.h"
 
 

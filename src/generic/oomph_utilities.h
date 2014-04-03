@@ -55,6 +55,9 @@
 #include "oomph_definitions.h"
 #include "communicator.h"
 
+//header for cxx-prettyprint: A C++ Container Pretty-Printer
+#include "prettyprint98.h"
+
 namespace oomph
 {
 

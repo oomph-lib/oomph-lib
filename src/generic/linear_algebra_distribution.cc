@@ -264,7 +264,7 @@ namespace oomph
  (const LinearAlgebraDistribution& other_dist) const
   {   
 #ifdef OOMPH_HAS_MPI
-   // compare the communcators
+   // compare the communicators
    if (!((*Comm_pt) == (*other_dist.communicator_pt())))
     {
      return false;
@@ -311,7 +311,7 @@ namespace oomph
  /// output operator
  //=============================================================================
  std::ostream& operator<<(std::ostream& stream, 
-                          LinearAlgebraDistribution dist)
+                          LinearAlgebraDistribution& dist)
  {
   stream << "nrow()=" << dist.nrow() 
          << ", first_row()=" << dist.first_row()

@@ -380,7 +380,7 @@ class LinearAlgebraDistribution
 
  /// \short << operator
  friend std::ostream& operator<<(std::ostream& stream, 
-                                 LinearAlgebraDistribution dist);
+                                 LinearAlgebraDistribution& dist);
  
  /// \short return the local index corresponding to the global index 
  unsigned global_to_local_row_map(const unsigned& global_i) const

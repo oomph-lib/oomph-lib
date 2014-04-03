@@ -172,6 +172,8 @@ namespace oomph
   // Block_to_dof_map_coarse[block_number] = Vector[dof types];
   //
   // Note that this is not the internal (underlying) dof type.
+  // Nor is this in relation to the parent block preconditioner's dof type.
+  // The number of elements in it is the same as dof_to_block_map vector.
   //
   // Since the dof type coarsening feature is added later, we encapsulate this
   // bit of the code so it does not affect things below.
@@ -208,6 +210,8 @@ namespace oomph
     // So, it is important that the length of dof_to_block_map is the same as
     // the length of Doftype_coarsen_map_coarse. We check this.
     unsigned dof_to_block_map_size = dof_to_block_map.size();
+
+#ifdef PARANOID
     if(dof_to_block_map_size != Doftype_coarsen_map_coarse.size())
      {
       std::ostringstream err_msg;
@@ -223,6 +227,7 @@ namespace oomph
                             OOMPH_CURRENT_FUNCTION,
                             OOMPH_EXCEPTION_LOCATION);
      }
+#endif
 
     // Create the Block_to_dof_map_coarse from 
     // the dof_to_block_map and Doftype_coarsen_map_coarse.
@@ -249,36 +254,118 @@ namespace oomph
     // Clear anything in the Block_to_dof_map_coarse
     Block_to_dof_map_coarse.clear();
 
-    // Loop through all the blocks. There are max_block_number + 1 number of
-    // blocks, hence the <= loop condition.
-    for (unsigned blocktype_i = 0; blocktype_i <= max_block_number; 
-         blocktype_i++)
-     {
-      // Temp vector to store the doftypes.
-      Vector<unsigned> temp_doftype_vec;
+    const unsigned tmp_nblock = max_block_number + 1;
 
-      // Loop through the entries in dof_to_block_map
-      for (unsigned i = 0; i < dof_to_block_map_size; i++) 
-       {
-        // If the entry in dof_to_block_map matches the current blocktype_i,
-        // push all entries of Doftype_coarsen_map_coarse[i] into 
-        // temp_doftype_vec. This will create a vector of all the dof types
-        // which is associated with block block_type_i.
-        if(dof_to_block_map[i] == blocktype_i)
-         {
-          unsigned doftype_coarsen_map_coarse_i_size 
-            = Doftype_coarsen_map_coarse[i].size();
-          for (unsigned j = 0; j < doftype_coarsen_map_coarse_i_size; j++) 
-           {
-            temp_doftype_vec.push_back(Doftype_coarsen_map_coarse[i][j]);
-           }
-         }
-       }
+    Block_to_dof_map_coarse.resize(tmp_nblock);
 
-      // Push the vector with dof types associated with block block_type_i
-      // into the Block_to_dof_map_coarse vector.
-      Block_to_dof_map_coarse.push_back(temp_doftype_vec);
-     }
+    for (unsigned i = 0; i < dof_to_block_map_size; i++) 
+    {
+      Block_to_dof_map_coarse[dof_to_block_map[i]].push_back(i);
+    }
+
+    Block_to_dof_map_fine.clear();
+    Block_to_dof_map_fine.resize(tmp_nblock);
+    for (unsigned block_i = 0; block_i < tmp_nblock; block_i++)
+    {
+      // get the dof types in this block.
+      const unsigned ndof_in_block = Block_to_dof_map_coarse[block_i].size();
+      for (unsigned dof_i = 0; dof_i < ndof_in_block; dof_i++)
+      {
+        const unsigned coarsened_dof_i = Block_to_dof_map_coarse[block_i][dof_i];
+
+        // Insert the most fine grain dofs which this dof_i corresponds to
+        // into block_i
+        Vector<unsigned> dof_i_dofs 
+          = Doftype_coarsen_map_fine[coarsened_dof_i];
+        
+        Block_to_dof_map_fine[block_i].insert(
+            Block_to_dof_map_fine[block_i].end(),
+            dof_i_dofs.begin(),
+            dof_i_dofs.end());
+      }
+    }
+//// RAYRAY remove
+//    std::cout << "Block_to_dof_map_fine: " << std::endl;
+//    for (unsigned i = 0; i < Block_to_dof_map_fine.size(); i++) 
+//    {
+//      std::cout << "i: " << i << ", " << Block_to_dof_map_fine[i] << std::endl; 
+//    }
+//    pause("done Block_to_dof_map_fine output"); 
+    
+    
+//    // Loop through all the blocks. There are max_block_number + 1 number of
+//    // blocks, hence the <= loop condition.
+//    for (unsigned blocktype_i = 0; blocktype_i <= max_block_number; 
+//         blocktype_i++)
+//     {
+//      // Temp vector to store the doftypes.
+//      Vector<unsigned> temp_doftype_vec;
+//
+//      // Loop through the entries in dof_to_block_map
+//      for (unsigned i = 0; i < dof_to_block_map_size; i++) 
+//       {
+//        // If the entry in dof_to_block_map matches the current blocktype_i,
+//        // push all entries of Doftype_coarsen_map_coarse[i] into 
+//        // temp_doftype_vec. This will create a vector of all the dof types
+//        // which is associated with block block_type_i.
+//        if(dof_to_block_map[i] == blocktype_i)
+//         {
+//          unsigned doftype_coarsen_map_coarse_i_size 
+//            = Doftype_coarsen_map_coarse[i].size();
+//          for (unsigned j = 0; j < doftype_coarsen_map_coarse_i_size; j++) 
+//           {
+//            temp_doftype_vec.push_back(Doftype_coarsen_map_coarse[i][j]);
+//           }
+//         }
+//       }
+//
+//      // Push the vector with dof types associated with block block_type_i
+//      // into the Block_to_dof_map_coarse vector.
+//      Block_to_dof_map_coarse.push_back(temp_doftype_vec);
+//     }
+
+
+//    std::cout << "BPF::block_setup() dof_to_block_map: " << std::endl;
+//    for (unsigned i = 0; i < dof_to_block_map.size(); i++) 
+//    {
+//      std::cout << dof_to_block_map[i] << " "; 
+//    }
+//    std::cout << "\n" << std::endl; 
+//
+//    std::cout << "BPF::setup() Doftype_coarsen_map_coarse: " << std::endl;
+//    for (unsigned i = 0; i < Doftype_coarsen_map_coarse.size(); i++) 
+//    {
+//      for (unsigned j = 0; j < Doftype_coarsen_map_coarse[i].size(); j++) 
+//      {
+//        std::cout << Doftype_coarsen_map_coarse[i][j] << " ";
+//      }
+//      std::cout << "\n"; 
+//    }
+//    std::cout << "\n" << std::endl; 
+//
+//    std::cout << "BPF::setup() Doftype_coarsen_map_fine: " << std::endl;
+//    for (unsigned i = 0; i < Doftype_coarsen_map_fine.size(); i++) 
+//    {
+//      for (unsigned j = 0; j < Doftype_coarsen_map_fine[i].size(); j++) 
+//      {
+//        std::cout << Doftype_coarsen_map_fine[i][j] << " ";
+//      }
+//      std::cout << "\n"; 
+//    }
+//    std::cout << "\n" << std::endl;   
+//    
+//    std::cout << "BPF::block_setup() Block_to_dof_map_coarse: " << std::endl; 
+//    for (unsigned i = 0; i < Block_to_dof_map_coarse.size(); i++) 
+//    {
+//      for (unsigned j = 0; j < Block_to_dof_map_coarse[i].size(); j++) 
+//      {
+//        std::cout << Block_to_dof_map_coarse[i][j] << " ";
+//      }
+//      std::cout << "\n";
+//    }
+//
+//    std::cout << "\n" << std::endl; 
+    
 
     // Now set the dof_to_block_map to the identify.
     // NOTE: We are now using the internal n dof types. This is because the
@@ -543,7 +630,7 @@ namespace oomph
     Global_index_sparse.resize(nsparse);
     Index_in_dof_block_sparse.resize(nsparse);
     Dof_number_sparse.resize(nsparse);
-    // RAY - Why is this looping through a vector?...
+    // RAYRAY - Why is this looping through a vector?...
     for (int i = 0; i < nsparse; i++)
      {
       Global_index_sparse[i]=sparse_global_rows_for_block_lookup[i];
@@ -1332,7 +1419,7 @@ namespace oomph
    }
 #endif
 
-  // find the maximum block number
+  // find the maximum block number RAYAY use std::max_element
   unsigned max_block_number = 0;
   for (unsigned i = 0; i < Internal_ndof_types; i++)
    {
@@ -1398,6 +1485,54 @@ namespace oomph
                                block_dim,distributed);
    }
 
+  // Work out the distribution of the dof-level blocks.
+  // Since several dof types may be coarsened into a single dof type.
+  // We get the dof-level block distributions from the parent preconditioner.
+
+  // How many dof types are there?
+  if(is_subsidiary_block_preconditioner())
+  {
+    // Delete any pre-existing distributions.
+    const unsigned dof_block_distribution_size 
+      = Dof_block_distribution_pt.size();
+    for (unsigned dof_i = 0; dof_i < dof_block_distribution_size; dof_i++)
+    {
+      delete Dof_block_distribution_pt[dof_i];
+    }
+    const unsigned ndofs = this->ndof_types();
+    Dof_block_distribution_pt.resize(ndofs,0);
+
+    // For each dof type, work out how many parent preconditioner dof types are
+    // in it.
+    for (unsigned dof_i = 0; dof_i < ndofs; dof_i++) 
+    {
+      // For each external dof, we get the dofs coarsened into it (from the
+      // parent preconditioner level, not the most fine grain level).
+      const unsigned ncoarsened_dofs_in_dof_i = Doftype_coarsen_map_coarse[dof_i].size();
+      Vector<LinearAlgebraDistribution*> tmp_dist_pt(ncoarsened_dofs_in_dof_i,0);
+      for (unsigned parent_dof_i = 0; parent_dof_i < ncoarsened_dofs_in_dof_i; parent_dof_i++)
+      {
+        tmp_dist_pt[parent_dof_i]  
+          = master_block_preconditioner_pt()
+          ->dof_block_distribution_pt(
+              Doftype_in_master_preconditioner_coarse[
+                Doftype_coarsen_map_coarse[dof_i][parent_dof_i] ] );
+      }
+
+      Dof_block_distribution_pt[dof_i] = new LinearAlgebraDistribution;
+      
+
+      LinearAlgebraDistributionHelpers::concatenate(tmp_dist_pt,*Dof_block_distribution_pt[dof_i]);
+    }
+
+
+  }
+//    std::cout << "BPF::block_setup Dof_block_distribution_pt nrow: " << std::endl;
+//    for (unsigned i = 0; i < Dof_block_distribution_pt.size(); i++) 
+//    {
+//      std::cout << "dof block: " << i << ", nrow: " << Dof_block_distribution_pt[i]->nrow() << std::endl; 
+//    }
+
    {
     // Delete any existing distributions in Block_distribution_pt.
     unsigned n_existing_precom_block_dist 
@@ -1421,8 +1556,8 @@ namespace oomph
        {
          // RAYRAY use the Dof_block_distribution_pt when it is set up
         tmp_dist_pt[sub_block_i] 
-         = Internal_block_distribution_pt[
-             Block_to_dof_map_coarse[super_block_i][sub_block_i]];
+         = dof_block_distribution_pt(
+             Block_to_dof_map_coarse[super_block_i][sub_block_i]);
        }
   
       Block_distribution_pt[super_block_i] 
@@ -1431,6 +1566,13 @@ namespace oomph
       LinearAlgebraDistributionHelpers::concatenate(
         tmp_dist_pt,*Block_distribution_pt[super_block_i]);
      }
+
+//    std::cout << "BPF::block_setup() Block_distribution_pt nrow: " << std::endl;
+//    for (unsigned i = 0; i < Block_distribution_pt.size(); i++) 
+//    {
+//      std::cout << "block: " << i << ", nrow: " << Block_distribution_pt[i]->nrow() << std::endl; 
+//    }
+    
    } // creating Block_distribution_pt
 
 
@@ -1456,7 +1598,47 @@ namespace oomph
   Preconditioner_matrix_distribution_pt = new LinearAlgebraDistribution;
   LinearAlgebraDistributionHelpers::concatenate(Block_distribution_pt,
                                                 *Preconditioner_matrix_distribution_pt);
-  
+
+  // Clear all distributions in Auxiliary_distribution_pt, except for the
+  // one which corresponds to the preconditioner matrix distribution.
+  // This is already deleted by clear_block_preconditioner_base(...)
+
+  // Create the key which corresponds to preconditioner_matrix_distribution_pt
+  {
+    const unsigned nblocks = Block_distribution_pt.size();
+    Vector<unsigned> preconditioner_matrix_key(nblocks,0);
+    for (unsigned i = 0; i < nblocks; i++) 
+    {
+      preconditioner_matrix_key[i] = i;
+    }
+
+    // Now iterate through Auxiliary_distribution_pt and delete everything 
+    // except for the value which corresponds to preconditioner_matrix_key.
+    std::map<Vector<unsigned>, LinearAlgebraDistribution*>::iterator iter;
+    for (iter = Auxiliary_distribution_pt.begin();
+        iter != Auxiliary_distribution_pt.end();
+        ++iter) 
+    {
+      if(iter->first != preconditioner_matrix_key)
+      {
+        delete iter->second;
+        Auxiliary_distribution_pt.erase(iter);
+      }
+      else
+      {
+        Auxiliary_distribution_pt.erase(iter);
+      }
+    }
+
+    // Clear it just to be safe!
+    Auxiliary_distribution_pt.clear();
+
+    // Insert the preconditioner matrix distribution.
+    Auxiliary_distribution_pt.insert(
+        std::make_pair(preconditioner_matrix_key,
+                       Preconditioner_matrix_distribution_pt));
+  } // End of Auxiliary_distribution_pt encapsulation.
+
   // clearing up after comm to assemble sparse lookup schemes
 #ifdef OOMPH_HAS_MPI
   if (send_requests_sparse.size()>0)
@@ -2096,7 +2278,7 @@ namespace oomph
      for (unsigned j = 0; j < para_doftype_coarsen_map_coarse_i_size; j++)
       {
        // Attempt to insert all the values of the inner vector into a set.
-       std::set<unsigned>::iterator doftype_map_it;
+       //std::set<unsigned>::iterator doftype_map_it;
        std::pair<std::set<unsigned>::iterator,bool> doftype_map_ret;
 
        doftype_map_ret 
@@ -2161,6 +2343,25 @@ namespace oomph
   Doftype_in_master_preconditioner_coarse 
     = doftype_in_master_preconditioner_coarse;
 
+//  std::cout << "BPF::turn_into... Doftype_in_master_preconditioner_coarse:" << std::endl; 
+//  for (unsigned dof_i = 0; dof_i < Doftype_in_master_preconditioner_coarse.size(); dof_i++) 
+//  {
+//    std::cout << Doftype_in_master_preconditioner_coarse[dof_i] << " ";
+//  }
+//  std::cout << "\n" << std::endl; 
+//  
+//  std::cout << "BPF::turn_into... Doftype_coarsen_map_coarse: " << std::endl;
+//  for (unsigned i = 0; i < Doftype_coarsen_map_coarse.size(); i++) 
+//  {
+//    for (unsigned j = 0; j < Doftype_coarsen_map_coarse[i].size(); j++) 
+//    {
+//      std::cout << Doftype_coarsen_map_coarse[i][j] << " ";
+//    }
+//    std::cout << "\n"; 
+//  }
+//  std::cout << "\n" << std::endl;
+
+  
   // Set the mapping from the master preconditioner dof types to the
   // subsidiary preconditioner dof types. 
   //
@@ -2337,6 +2538,28 @@ namespace oomph
 
   // Nblock_types is later updated in block_setup(...)
   Internal_nblock_types = Internal_ndof_types;
+
+//  std::cout << "BPF::turn... Doftype_in_master_preconditioner_fine" << std::endl; 
+//  for (unsigned i = 0; i < Doftype_in_master_preconditioner_fine.size(); i++) 
+//  {
+//    std::cout << Doftype_in_master_preconditioner_fine[i] << " ";
+//  }
+//  std::cout << "\n" << std::endl;
+//
+//  std::cout << "BPF::turn... Doftype_coarsen_map_fine" << std::endl; 
+//  for (unsigned i = 0; i < Doftype_coarsen_map_fine.size(); i++) 
+//  {
+//    for (unsigned j = 0; j < Doftype_coarsen_map_fine[i].size(); j++) 
+//    {
+//      std::cout << Doftype_coarsen_map_fine[i][j] << " "; 
+//    }
+//    std::cout << "\n";
+//  }
+//  std::cout << "\n" << std::endl; 
+  
+  
+  //pause("End of turn_into..."); 
+  
  } // end of turn_into_subsidiary_block_preconditioner(...)
 
 
@@ -3187,34 +3410,67 @@ namespace oomph
                         OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
-
 #endif
 
-  // How many block vectors do we need to concatenate?
-  unsigned nblocks_to_cat = Block_to_dof_map_coarse[b].size();
-  if(nblocks_to_cat == 1)
-   // If there is only one block vector, we simply extract it.
-   {
-    this->get_block_vector_with_original_matrix_ordering(
-                                                         Block_to_dof_map_coarse[b][0],v,w);
-   }
+  // Recall that, the relationship between the external blocks and the external
+  // dof types, as seen by the preconditioner writer is stored in the mapping
+  // Block_to_dof_map_coarse.
+  //
+  // However, each dof type could have been coarsened! The relationship
+  // between the dof types of this preconditioner and the parent preconditioner
+  // is stored in the mapping Doftype_coarsen_map_coarse. The dof numbers in
+  // this map is relative to this preconditioner.
+  //
+  // Finally, the relationship between the dof types of this preconditioner
+  // and the most fine grain dof types is stored in the mapping
+  // Doftype_coarsen_map_fine. Again, the dof numbers in this map is relative
+  // to this preconditioner.
+  //
+  // Furthermore, we note that concatenation of vectors without communication
+  //  is associative, but not commutative. I.e.
+  // (V1+V2)+V3 = V1 + (V2 + V3), where + is concatenation without 
+  // communication.
+  //
+  // So all we need is the vectors listed in the correct order.
+  //
+  // We need only Block_to_dof_map_coarse to tell us which external dof types
+  // are in this block, then Doftype_coarsen_map_fine to tell us which most
+  // fine grain dofs to concatenate!
+  //
+  // All the mapping vectors are constructed to respect the ordering of
+  // the dof types.
+
+  const unsigned n_ext_dof = Block_to_dof_map_coarse[b].size();
+
+  // Loop through the external dof types and get the most fine grain dof types
+  Vector<unsigned> tmp_fine_grain_dof;
+  for (unsigned ext_dof_i = 0; ext_dof_i < n_ext_dof; ext_dof_i++) 
+  {
+    tmp_fine_grain_dof.insert(tmp_fine_grain_dof.end(),
+                               Doftype_coarsen_map_fine[Block_to_dof_map_coarse[b][ext_dof_i]].begin(),
+                               Doftype_coarsen_map_fine[Block_to_dof_map_coarse[b][ext_dof_i]].end());
+  }
+
+  // How many vectors do we need to concatenate?
+  const unsigned n_dof_vec = tmp_fine_grain_dof.size();
+  if(n_dof_vec == 1)
+  {
+    this->get_block_vector_with_original_matrix_ordering(tmp_fine_grain_dof[0],v,w);
+  }
   else
-   // We need to concatenate multiple block vectors.
-   {
-    // Get the DoubleVectors to be concatenated.
-    Vector<DoubleVector> tmp_block_vector(nblocks_to_cat);
-    for (unsigned b_i = 0; b_i < nblocks_to_cat; b_i++) 
-     {
-      this->get_block_vector_with_original_matrix_ordering(
-                                                           Block_to_dof_map_coarse[b][b_i], v,tmp_block_vector[b_i]);
-     }
-     
-    Vector<DoubleVector*> tmp_block_vector_pt(nblocks_to_cat,0);
-    for (unsigned b_i = 0; b_i < nblocks_to_cat; b_i++) 
-     {
-      tmp_block_vector_pt[b_i] = &tmp_block_vector[b_i];
-     }
-  
+  {
+    Vector<DoubleVector> tmp_block_vector(n_dof_vec);
+    for (unsigned vec_i = 0; vec_i < n_dof_vec; vec_i++) 
+    {
+      this->get_block_vector_with_original_matrix_ordering(tmp_fine_grain_dof[vec_i], v, tmp_block_vector[vec_i]);
+    }
+
+    Vector<DoubleVector*> tmp_block_vector_pt(n_dof_vec,0);
+    for (unsigned vec_i = 0; vec_i < n_dof_vec; vec_i++) 
+    {
+      tmp_block_vector_pt[vec_i] = &tmp_block_vector[vec_i];
+    }
+
     // Build w with the correct distribution.
     w.build(Block_distribution_pt[b],0);
   
@@ -3225,7 +3481,45 @@ namespace oomph
     // No longer need the sub vectors. Calling clear on the Vector will invoke
     // the destructors in the DoubleVectors.
     tmp_block_vector.clear();
-   }
+  }
+
+
+//  // How many block vectors do we need to concatenate?
+//  unsigned nblocks_to_cat = Block_to_dof_map_coarse[b].size();
+//  if(nblocks_to_cat == 1)
+//   // If there is only one block vector, we simply extract it.
+//   {
+//    this->get_block_vector_with_original_matrix_ordering(
+//                                                         Block_to_dof_map_coarse[b][0],v,w);
+//   }
+//  else
+//   // We need to concatenate multiple block vectors.
+//   {
+//    // Get the DoubleVectors to be concatenated.
+//    Vector<DoubleVector> tmp_block_vector(nblocks_to_cat);
+//    for (unsigned b_i = 0; b_i < nblocks_to_cat; b_i++) 
+//     {
+//      this->get_block_vector_with_original_matrix_ordering(
+//                                                           Block_to_dof_map_coarse[b][b_i], v,tmp_block_vector[b_i]);
+//     }
+//     
+//    Vector<DoubleVector*> tmp_block_vector_pt(nblocks_to_cat,0);
+//    for (unsigned b_i = 0; b_i < nblocks_to_cat; b_i++) 
+//     {
+//      tmp_block_vector_pt[b_i] = &tmp_block_vector[b_i];
+//     }
+//  
+//    // Build w with the correct distribution.
+//    w.build(Block_distribution_pt[b],0);
+//  
+//    // Concatenate the vectors
+//    DoubleVectorHelpers::concatenate_without_communication
+//     (tmp_block_vector_pt,w);
+//  
+//    // No longer need the sub vectors. Calling clear on the Vector will invoke
+//    // the destructors in the DoubleVectors.
+//    tmp_block_vector.clear();
+//   }
  }
 
  //============================================================================
@@ -3471,47 +3765,97 @@ namespace oomph
    }
 
 #endif
-  
-  // How many dof types does this block type represent?
-  unsigned nblocks_to_split_into = Block_to_dof_map_coarse[b].size();
 
-  if(nblocks_to_split_into == 1)
-   // If there is one block vector to return, we simply return the one block
-   // vector
-   {
-    this->return_block_vector_with_original_matrix_ordering(
-                                                            Block_to_dof_map_coarse[b][0],w,v);
-   }
+  const unsigned n_ext_dof = Block_to_dof_map_coarse[b].size();
+
+  Vector<unsigned> tmp_fine_grain_dof;
+  for (unsigned ext_dof_i = 0; ext_dof_i < n_ext_dof; ext_dof_i++) 
+  {
+    tmp_fine_grain_dof.insert(tmp_fine_grain_dof.end(),
+                               Doftype_coarsen_map_fine[Block_to_dof_map_coarse[b][ext_dof_i]].begin(),
+                               Doftype_coarsen_map_fine[Block_to_dof_map_coarse[b][ext_dof_i]].end());
+  }
+
+  // How many vectors do we need to split?
+  const unsigned n_dof_vec = tmp_fine_grain_dof.size();
+  if(n_dof_vec == 1)
+  {
+    this->return_block_vector_with_original_matrix_ordering(tmp_fine_grain_dof[0],w,v);
+  }
   else
-   // Otherwise this block vector correspondings to more than one dof types.
-   // We need to split this.
-   {
-    // Temp vector to be returned to v.
-    Vector<DoubleVector> tmp_block_vector(nblocks_to_split_into);
-  
-    // Fill it with the corresponding ditributions.
-    for (unsigned b_i = 0; b_i < nblocks_to_split_into; b_i++) 
+  {
+    Vector<DoubleVector> tmp_block_vector(n_dof_vec);
+
+    // Fill in the corresponding distributions.
+    for (unsigned vec_i = 0; vec_i < n_dof_vec; vec_i++) 
+    {
+      tmp_block_vector[vec_i].build(this->internal_block_distribution_pt(tmp_fine_grain_dof[vec_i]));
+    }
+
+    Vector<DoubleVector*> tmp_block_vector_pt(n_dof_vec,0);
+    for (unsigned vec_i = 0; vec_i < n_dof_vec; vec_i++) 
      {
-      tmp_block_vector[b_i].build(this->internal_block_distribution_pt
-                                  (Block_to_dof_map_coarse[b][b_i]));
-     }
-  
-    Vector<DoubleVector*> tmp_block_vector_pt(nblocks_to_split_into,0);
-    for (unsigned b_i = 0; b_i < nblocks_to_split_into; b_i++) 
-     {
-      tmp_block_vector_pt[b_i] = &tmp_block_vector[b_i];
+      tmp_block_vector_pt[vec_i] = &tmp_block_vector[vec_i];
      }
   
     // Perform the splitting of w into tmp_block_vector.
     DoubleVectorHelpers::split_without_communication(w,tmp_block_vector_pt);
   
     // return to v
-    for (unsigned b_i = 0; b_i < nblocks_to_split_into; b_i++) 
+    for (unsigned vec_i = 0; vec_i < n_dof_vec; vec_i++) 
      {
       this->return_block_vector_with_original_matrix_ordering(
-                                                              Block_to_dof_map_coarse[b][b_i], tmp_block_vector[b_i],v);
+                                                              tmp_fine_grain_dof[vec_i], tmp_block_vector[vec_i],v);
      }
-   }
+
+
+
+
+  }
+  
+
+  
+  
+//  // How many dof types does this block type represent?
+//  unsigned nblocks_to_split_into = Block_to_dof_map_coarse[b].size();
+//
+//  if(nblocks_to_split_into == 1)
+//   // If there is one block vector to return, we simply return the one block
+//   // vector
+//   {
+//    this->return_block_vector_with_original_matrix_ordering(
+//                                                            Block_to_dof_map_coarse[b][0],w,v);
+//   }
+//  else
+//   // Otherwise this block vector correspondings to more than one dof types.
+//   // We need to split this.
+//   {
+//    // Temp vector to be returned to v.
+//    Vector<DoubleVector> tmp_block_vector(nblocks_to_split_into);
+//  
+//    // Fill it with the corresponding ditributions.
+//    for (unsigned b_i = 0; b_i < nblocks_to_split_into; b_i++) 
+//     {
+//      tmp_block_vector[b_i].build(this->internal_block_distribution_pt
+//                                  (Block_to_dof_map_coarse[b][b_i]));
+//     }
+//  
+//    Vector<DoubleVector*> tmp_block_vector_pt(nblocks_to_split_into,0);
+//    for (unsigned b_i = 0; b_i < nblocks_to_split_into; b_i++) 
+//     {
+//      tmp_block_vector_pt[b_i] = &tmp_block_vector[b_i];
+//     }
+//  
+//    // Perform the splitting of w into tmp_block_vector.
+//    DoubleVectorHelpers::split_without_communication(w,tmp_block_vector_pt);
+//  
+//    // return to v
+//    for (unsigned b_i = 0; b_i < nblocks_to_split_into; b_i++) 
+//     {
+//      this->return_block_vector_with_original_matrix_ordering(
+//                                                              Block_to_dof_map_coarse[b][b_i], tmp_block_vector[b_i],v);
+//     }
+//   }
  }
 
 
@@ -4736,6 +5080,378 @@ namespace oomph
    }
  }
 
+//=============================================================================
+/// \short Gets block (i,j) from Replacement_dof_block_pt and returns it in
+/// block_matrix_pt.
+//=============================================================================
+ template<> 
+ void BlockPreconditioner<CRDoubleMatrix>:: 
+ get_dof_level_block(const unsigned& block_i, const unsigned& block_j, 
+                     CRDoubleMatrix& output_block,
+                     bool ignore_replacement_block) const
+ {
+//#ifdef PARANOID
+//  // the number of blocks RAYRAY change this to the block types the preconditioner expects
+//  unsigned ndofs = ndof_types();
+//  
+//  // paranoid check that block i is in this block preconditioner
+//  if (block_i >= ndofs || block_j >= ndofs)
+//   {
+//    std::ostringstream error_message;
+//    error_message << "Requested dof block (" << block_i << "," << block_j   
+//                  << "), however this preconditioner has ndof_types() "
+//                  << "= " << ndofs << std::endl;
+//    throw OomphLibError(error_message.str(),
+//                        OOMPH_CURRENT_FUNCTION,
+//                        OOMPH_EXCEPTION_LOCATION);
+//   }
+//
+//#endif
+
+//   std::cout << "BPF::get_dof_level_block " << block_i << ", " << block_j << std::endl; 
+   
+  CRDoubleMatrix * tmp_block_pt = Replacement_dof_block_pt.get(block_i,block_j);
+
+  if((tmp_block_pt == 0) || ignore_replacement_block)
+  {
+//    std::cout << "Find out which dof types are coarsened into this one, one level up." << std::endl;
+//    std::cout << "Recall that the Doftype_coarsen_map_coarse is:" << std::endl; 
+//    for (unsigned i = 0; i < Doftype_coarsen_map_coarse.size(); i++) 
+//    {
+//      for (unsigned j = 0; j < Doftype_coarsen_map_coarse[i].size(); j++) 
+//      {
+//        std::cout << Doftype_coarsen_map_coarse[i][j] <<" ";
+//      }
+//      std::cout << "\n";
+//    }
+//    std::cout << "\n" << std::endl;
+    
+    
+    // Getting the block from parent preconditioner
+    const unsigned ndof_in_parent_i = Doftype_coarsen_map_coarse[block_i].size();
+    const unsigned ndof_in_parent_j = Doftype_coarsen_map_coarse[block_j].size();
+//    std::cout << "tmp_block_pt = 0, ndof_in_parent_i = " 
+//              << ndof_in_parent_i << ", ndof_in_parent_j = " 
+//              << ndof_in_parent_j << std::endl; 
+    
+
+    if(ndof_in_parent_i == 1 && ndof_in_parent_j == 1)
+    {
+      unsigned parent_dof_i = Doftype_coarsen_map_coarse[block_i][0];
+      unsigned parent_dof_j = Doftype_coarsen_map_coarse[block_j][0];
+//      std::cout << "getting parent dofs: " << parent_dof_i << ", " << parent_dof_j << std::endl; 
+      
+      if(is_master_block_preconditioner())
+      {
+//        std::cout << "is master, do getting block from original matrix" << std::endl; 
+        get_block_from_original_matrix(parent_dof_i,parent_dof_j,output_block);
+      }
+      else
+      {
+//        std::cout << "is subsidiary, so getting master's" << std::endl; 
+        parent_dof_i = Doftype_in_master_preconditioner_coarse[parent_dof_i];
+        parent_dof_j = Doftype_in_master_preconditioner_coarse[parent_dof_j];
+        
+        master_block_preconditioner_pt()->get_dof_level_block(parent_dof_i,
+                                                              parent_dof_j,
+                                                              output_block,
+                                                              ignore_replacement_block);
+      }
+    }
+    else
+    {
+
+    DenseMatrix<CRDoubleMatrix*> tmp_blocks_pt(ndof_in_parent_i,ndof_in_parent_j,0);
+
+    Vector<Vector<unsigned> > new_block(ndof_in_parent_i,Vector<unsigned>(ndof_in_parent_j,0));
+
+    for (unsigned dof_i = 0; dof_i < ndof_in_parent_i; dof_i++) 
+    {
+      unsigned parent_dof_i = Doftype_coarsen_map_coarse[block_i][dof_i];
+      if(is_subsidiary_block_preconditioner())
+      {
+        parent_dof_i = Doftype_in_master_preconditioner_coarse[parent_dof_i];
+      }
+
+      for (unsigned dof_j = 0; dof_j < ndof_in_parent_j; dof_j++) 
+      {
+        unsigned parent_dof_j = Doftype_coarsen_map_coarse[block_j][dof_j];
+
+        tmp_blocks_pt(dof_i,dof_j) = new CRDoubleMatrix;
+
+        new_block[dof_i][dof_j] = 1;
+
+        if(is_master_block_preconditioner())
+        {
+          get_block_from_original_matrix(parent_dof_i,parent_dof_j,*tmp_blocks_pt(dof_i,dof_j));
+        }
+        else
+        {
+          parent_dof_j = Doftype_in_master_preconditioner_coarse[parent_dof_j];
+//          std::cout << "I am subsidiary, get master block " << parent_dof_i <<", " << parent_dof_j << std::endl; 
+          
+          master_block_preconditioner_pt()
+            ->get_dof_level_block(parent_dof_i,
+                                  parent_dof_j,
+                                  *tmp_blocks_pt(dof_i,dof_j),
+                                  ignore_replacement_block);
+        }
+      }
+    }
+
+
+
+//   if(is_subsidiary_block_preconditioner())
+//   {
+//     std::cout << "Got all master dof blocks:" << std::endl;
+//     for (unsigned i = 0; i < tmp_blocks_pt.nrow(); i++) 
+//     {
+//       for (unsigned j = 0; j < tmp_blocks_pt.ncol(); j++) 
+//       {
+//         unsigned tmp_nrow = tmp_blocks_pt(i,j)->nrow();
+//         unsigned tmp_ncol = tmp_blocks_pt(i,j)->ncol();
+//         std::cout << "block(" << i<<","<<j<<"), nrow: " << tmp_nrow <<", ncol: " << tmp_ncol << std::endl; 
+//         
+//       }
+//     }
+//     
+//   } 
+
+
+
+  Vector<LinearAlgebraDistribution*> tmp_row_dist_pt(ndof_in_parent_i,0);
+
+  for (unsigned parent_dof_i = 0; parent_dof_i < ndof_in_parent_i; parent_dof_i++) 
+  {
+    unsigned mapped_dof_i = Doftype_coarsen_map_coarse[block_i][parent_dof_i];
+
+    if(is_master_block_preconditioner())
+    {
+      tmp_row_dist_pt[parent_dof_i] = Internal_block_distribution_pt[mapped_dof_i];
+    }
+    else
+    {
+      mapped_dof_i = Doftype_in_master_preconditioner_coarse[mapped_dof_i];
+      
+      tmp_row_dist_pt[parent_dof_i] 
+        = master_block_preconditioner_pt()
+        ->dof_block_distribution_pt(mapped_dof_i);
+
+//      std::cout << "Got master row dist " << mapped_dof_i << ", nrow = " << tmp_row_dist_pt[parent_dof_i]->nrow() << std::endl; 
+    }
+  }
+ // std::cout << "\n" << std::endl; 
+  
+
+  Vector<LinearAlgebraDistribution*> tmp_col_dist_pt(ndof_in_parent_j,0);
+
+  for (unsigned parent_dof_j = 0; parent_dof_j < ndof_in_parent_j; parent_dof_j++) 
+  {
+    unsigned mapped_dof_j = Doftype_coarsen_map_coarse[block_j][parent_dof_j];
+
+    if(is_master_block_preconditioner())
+    {
+      tmp_col_dist_pt[parent_dof_j] = Internal_block_distribution_pt[mapped_dof_j];
+    }
+    else
+    {
+      mapped_dof_j = Doftype_in_master_preconditioner_coarse[mapped_dof_j];
+      tmp_col_dist_pt[parent_dof_j] 
+        = master_block_preconditioner_pt()
+        ->dof_block_distribution_pt(mapped_dof_j);
+
+//      std::cout << "Got master col dist " << mapped_dof_j << ", ncol = " << tmp_col_dist_pt[parent_dof_j]->nrow() << std::endl;
+    }
+  }
+
+//  std::cout << "\n" << std::endl; 
+
+
+//  if(is_subsidiary_block_preconditioner())
+//  {
+//    std::cout << "\n\n" << std::endl; 
+//    std::cout << "==============================================" << std::endl;
+//    std::cout << "RAYRAY INSIDE LSC get dof block" << std::endl;
+//    std::cout << "Getting dof block(" << block_i <<","<<block_j<<")"<< std::endl;
+//    std::cout << "This means getting master's dof blocks:" << std::endl;
+//
+//    for (unsigned dof_i = 0; dof_i < tmp_blocks_pt.nrow(); dof_i++) 
+//    {
+//      unsigned parent_dof_i = Doftype_coarsen_map_coarse[block_i][dof_i];
+//      parent_dof_i = Doftype_in_master_preconditioner_coarse[parent_dof_i];
+//
+//      for (unsigned dof_j = 0; dof_j < tmp_blocks_pt.ncol(); dof_j++) 
+//      {
+//        unsigned parent_dof_j = Doftype_coarsen_map_coarse[block_j][dof_j];
+//        parent_dof_j = Doftype_in_master_preconditioner_coarse[parent_dof_j];
+//        std::cout << "block(" << parent_dof_i <<", " << parent_dof_j 
+//                  << ") nrow: " << tmp_blocks_pt(dof_i,dof_j)->nrow() 
+//                  << ", ncol: " << tmp_blocks_pt(dof_i,dof_j)->ncol() << std::endl; 
+//      }
+//
+//      std::cout << "\ntmp_row_dist_pt:" << std::endl;
+//      for (unsigned i = 0; i < tmp_row_dist_pt.size(); i++) 
+//      {
+//        std::cout << "nrow: " << tmp_row_dist_pt[i]->nrow() << std::endl;
+//      }
+//      std::cout << "\ntmp_col_dist_pt:" << std::endl;
+//      for (unsigned i = 0; i < tmp_col_dist_pt.size(); i++) 
+//      {
+//        std::cout << "ncol: " << tmp_col_dist_pt[i]->nrow() << std::endl; 
+//      }
+//
+//    std::cout << "==============================================" << std::endl;
+//      //pause("Find yourself"); 
+//      
+//      
+//    }
+//  }
+  CRDoubleMatrixHelpers::concatenate_without_communication(tmp_row_dist_pt,
+                                                           tmp_col_dist_pt,
+                                                           tmp_blocks_pt,
+                                                           output_block);
+//  if(is_subsidiary_block_preconditioner())
+//  {
+//    std::cout << "dof block(" << block_i<<","<< block_j<<") success!" << std::endl; 
+//    //pause("lalala"); 
+//  }
+
+
+  for (unsigned dof_i = 0; dof_i < ndof_in_parent_i; dof_i++) 
+  {
+    for (unsigned dof_j = 0; dof_j < ndof_in_parent_j; dof_j++) 
+    {
+      if(new_block[dof_i][dof_j])
+      {
+        delete tmp_blocks_pt(dof_i,dof_j);
+      }
+    }
+  }
+    }
+
+  } 
+  else
+  {
+//    std::cout << "The Repl.block_pt.get(" << block_i << ","<<block_j << std::endl; 
+//    std::cout << "is not null, so just copying." << std::endl; 
+    CRDoubleMatrixHelpers::deep_copy(tmp_block_pt,output_block);
+  }
+
+//  // Create the dense matrix required for the merge.
+//  // How many block rows and columns?
+//  const unsigned nblock_in_row = Block_to_dof_map_coarse[block_i].size();
+//  const unsigned nblock_in_col = Block_to_dof_map_coarse[block_j].size();
+//
+//  if((nblock_in_row == 1) && (nblock_in_col == 1))
+//   {
+//     
+//    // Do not need to invoke concatenate function.
+//    unsigned prec_block_i = Block_to_dof_map_coarse[block_i][0];
+//    unsigned prec_block_j = Block_to_dof_map_coarse[block_j][0];
+//
+//    // Cache the pointer to the precomputed block.
+//    CRDoubleMatrix* precom_block_pt = 0;
+//    if(Replacement_dof_block_pt.get(prec_block_i,prec_block_j) == 0)
+//    {
+//      precom_block_pt = new CRDoubleMatrix;
+//      get_block_from_original_matrix(prec_block_i,prec_block_j,*precom_block_pt);
+//    }
+//    else
+//    {
+//      precom_block_pt = Replacement_dof_block_pt.get(prec_block_i,prec_block_j);
+//    }
+//
+//    CRDoubleMatrixHelpers::deep_copy(precom_block_pt,output_block);
+//
+//    if(Replacement_dof_block_pt.get(prec_block_i,prec_block_j)==0)
+//    {
+//      delete precom_block_pt;
+//    }
+//   }
+//  else
+//   {
+//  DenseMatrix<CRDoubleMatrix*> tmp_block_pt(nblock_in_row,nblock_in_col,0);
+//  Vector<LinearAlgebraDistribution*> tmp_row_distribution_pt(nblock_in_row,0);
+//  Vector<LinearAlgebraDistribution*> tmp_col_distribution_pt(nblock_in_col,0);
+//
+//  // Fill in the corresponding matrices.
+//  for (unsigned block_row_i = 0; block_row_i < nblock_in_row; block_row_i++) 
+//   {
+//    unsigned prec_block_i = Block_to_dof_map_coarse[block_i][block_row_i];
+//
+//    for (unsigned block_col_i = 0; block_col_i < nblock_in_col; block_col_i++) 
+//     {
+//      unsigned prec_block_j = Block_to_dof_map_coarse[block_j][block_col_i];
+//
+//      tmp_block_pt(block_row_i,block_col_i) = 0;
+//      if(Replacement_dof_block_pt.get(prec_block_i,prec_block_j) == 0)
+//      { 
+//        tmp_block_pt(block_row_i,block_col_i) = new CRDoubleMatrix;
+//        get_block_from_original_matrix(prec_block_i,prec_block_j,
+//                                       *tmp_block_pt(block_row_i,block_col_i));
+//      }
+//      else
+//      {
+//        tmp_block_pt(block_row_i,block_col_i)
+//          = Replacement_dof_block_pt.get(prec_block_i, prec_block_j);
+//      }
+//     } // for
+//   } // for
+//
+//  // Fill in the row distributions, use the first block column.
+//  for (unsigned block_row_i = 0; block_row_i < nblock_in_row; block_row_i++) 
+//   {
+//    tmp_row_distribution_pt[block_row_i] 
+//      = tmp_block_pt(block_row_i,0)->distribution_pt();
+//   }
+//
+//  // Fill in the col distributions, use the first block row.
+//  // This is a bit more tricky, we need the distributions of the block
+//  // rows that these block columns correspond to.
+//  for (unsigned block_col_i = 0; block_col_i < nblock_in_col; block_col_i++) 
+//   {
+//    unsigned prec_row_block_i = Block_to_dof_map_coarse[block_j][block_col_i];
+//
+//    // RAYRAY note: This will be incorrect. Will have to use 
+//    // Dof_block_distribution_pt
+//    tmp_col_distribution_pt[block_col_i] 
+//      = Internal_block_distribution_pt[prec_row_block_i];
+//   }
+//
+//  output_block.build(Block_distribution_pt[block_i]);
+//  
+//  DenseMatrix<const CRDoubleMatrix*> const_tmp_block_pt(nblock_in_row,nblock_in_col,0);
+//  for (unsigned row_i = 0; row_i < nblock_in_row; row_i++) 
+//  {
+//    for (unsigned col_i = 0; col_i < nblock_in_col; col_i++) 
+//    {
+//      const_tmp_block_pt(row_i,col_i) = tmp_block_pt(row_i,col_i);
+//    }
+//  }
+//
+//  // Concatenate the matrix.
+//  // For now, we use concatenate_without_communication(...) since none of the
+//  // current preconditioners require the block matrix to be in a particular
+//  // arrangement. We could use concatenate(...) which requires communication.
+//  CRDoubleMatrixHelpers::concatenate_without_communication(
+//    tmp_row_distribution_pt,tmp_col_distribution_pt, tmp_block_pt, output_block);
+//
+//  for (unsigned block_row_i = 0; block_row_i < nblock_in_row; block_row_i++) 
+//   {
+//    unsigned prec_block_i = Block_to_dof_map_coarse[block_i][block_row_i];
+//
+//    for (unsigned block_col_i = 0; block_col_i < nblock_in_col; block_col_i++) 
+//     {
+//      unsigned prec_block_j = Block_to_dof_map_coarse[block_j][block_col_i];
+//    
+//      if(Replacement_dof_block_pt.get(prec_block_i,prec_block_j) == 0)
+//      { 
+//        delete tmp_block_pt(block_row_i,block_col_i);
+//      }
+//     } // for
+//   } // for
+//   } // else need to concatenate
+ }
 
 //=============================================================================
 /// \short Gets block (i,j) from Replacement_dof_block_pt and returns it in
@@ -4744,7 +5460,8 @@ namespace oomph
  template<> 
  void BlockPreconditioner<CRDoubleMatrix>:: 
  get_coarsened_block(const unsigned& block_i, const unsigned& block_j, 
-                       CRDoubleMatrix& output_block) const
+                       CRDoubleMatrix& output_block, 
+                       bool ignore_replacement_block) const
  {
 #ifdef PARANOID
   // the number of blocks RAYRAY change this to the block types the preconditioner expects
@@ -4764,120 +5481,340 @@ namespace oomph
 
 #endif
 
-  // Create the dense matrix required for the merge.
-  // How many block rows and columns?
-  const unsigned nblock_in_row = Block_to_dof_map_coarse[block_i].size();
-  const unsigned nblock_in_col = Block_to_dof_map_coarse[block_j].size();
+  // We attempt to get block(i,j).
+  //
+  // Now, the logic is this:
+  //
+  // Block_to_dof_map_coarse tells us which dof types belongs in each block.
+  // This is relative to this preconditioner, and describes the external
+  // block and dof type mappings.
+  // 
+  // As such, the dof types in Block_to_dof_map_coarse describes the
+  // dof-level blocks needed to be concatenated to produce block(i,j)
+  //
+  // Now, the dofs to concatenate can either come from Replacement_dof_block_pt
+  // or the original matrix / further up the hierarchy.
+  //
+  // There is a small subtlety... Take the Lgr preconditioner, with the 
+  // natural DOF ordering:
+  // 0 1 2 3  4  5
+  // u v p uc vc L
+  //
+  // If the mapping given to block_setup(...) is:
+  // dof_to_block_map = [0, 1, 4, 2, 3, 5]
+  // saying that dof type 0 goes to block 0
+  //             dof type 1 goes to block 1
+  //             dof type 2 goes to block 4
+  //             dof type 3 goes to block 2
+  //             dof type 4 goes to block 3
+  //             dof type 5 goes to block 5
+  //
+  // Which results in the Block_to_dof_map_coarse = [[0][1][3][4][2][5]]
+  // which says that get_block(0,0) will get the u,u block
+  //                 get_block(1,1) will get the v,v block
+  //                 get_block(2,2) will get the uc,uc block
+  //                 get_block(3,3) will get the vc,vc block
+  //                 get_block(4,4) will get the p,p block
+  //                 get_block(5,5) will get the L,L block
+  //
+  // i.e. this permutes the dofs to blocks so that we now have the following 
+  // ordering:
+  // 0 1 2  3  4 5 <- block ordering
+  // u v uc vc p L
+  //
+  // Now, when we replace a dof level block, we do it with respect to the
+  // block order, i.e. if we replace the pressure block, we call
+  // set_replacement_dof_block(4,4,Matrix);
+  //
+  // However, when we get_block(4,4), we use the mapping Block_to_dof_map_coarse
+  // i.e. Block_to_dof_map_coarse[4] = 2, we get the block 2,2, since the
+  // underlying dof_to_block mapping is still the identity, i.e. it has not
+  // changed from:
+  // 0 1 2 3  4  5
+  // u v p uc vc L
+  //
+  // So, get_block(4,4) (pressure block) we get the mapping (2,2), which we
+  // can use to get_block_from_original_matrix. If we try the same with
+  // Replacement_dof_block_pt, we end up with the block(2,2) = (v,v), which
+  // is incorrect! 
 
-  if((nblock_in_row == 1) && (nblock_in_col == 1))
-   {
-     
-    // Do not need to invoke concatenate function.
-    unsigned prec_block_i = Block_to_dof_map_coarse[block_i][0];
-    unsigned prec_block_j = Block_to_dof_map_coarse[block_j][0];
+//  std::cout << "BPF::get_coarsened_block: " << block_i << ", " << block_j << std::endl; 
+//  std::cout << "\n" << std::endl; 
 
-    // Cache the pointer to the precomputed block.
-    CRDoubleMatrix* precom_block_pt = 0;
-    if(Replacement_dof_block_pt.get(prec_block_i,prec_block_j) == 0)
+//  std::cout << "Recall that Block_to_dof_map_coarse is: " << std::endl;
+//  for (unsigned i = 0; i < Block_to_dof_map_coarse.size(); i++) 
+//  {
+//    for (unsigned j = 0; j < Block_to_dof_map_coarse[i].size(); j++) 
+//    {
+//      std::cout << Block_to_dof_map_coarse[i][j] <<" ";
+//    }
+//    std::cout << "\n"; 
+//  }
+//  std::cout << "\n" << std::endl; 
+
+  const unsigned ndofblock_in_row = Block_to_dof_map_coarse[block_i].size();
+  const unsigned ndofblock_in_col = Block_to_dof_map_coarse[block_j].size();
+
+//  std::cout << "ndofblock_in_row: " << ndofblock_in_row << std::endl; 
+//  std::cout << "ndofblock_in_col: " << ndofblock_in_col << std::endl; 
+//  std::cout << "\n" << std::endl; 
+  
+  
+  if(ndofblock_in_row == 1 && ndofblock_in_col == 1)
+  {
+    const unsigned wanted_dof_row = Block_to_dof_map_coarse[block_i][0];
+    const unsigned wanted_dof_col = Block_to_dof_map_coarse[block_j][0];
+//    std::cout << "wanted_dof_row = " << wanted_dof_row << std::endl; 
+//    std::cout << "wanted_dof_col = " << wanted_dof_col << std::endl; 
+//    std::cout << "\n" << std::endl; 
+    
+    
+    if((Replacement_dof_block_pt.get(wanted_dof_row,wanted_dof_col) == 0) ||
+        ignore_replacement_block)
     {
-      precom_block_pt = new CRDoubleMatrix;
-      get_block_from_original_matrix(prec_block_i,prec_block_j,*precom_block_pt);
+//      std::cout << "Getting from get_dof_level_block" << std::endl; 
+      
+      get_dof_level_block(wanted_dof_row,wanted_dof_col,output_block,ignore_replacement_block);
     }
     else
     {
-      precom_block_pt = Replacement_dof_block_pt.get(prec_block_i,prec_block_j);
+//      std::cout << "Getting from Replacement_dof_block_pt" << std::endl; 
+      CRDoubleMatrixHelpers::deep_copy(Replacement_dof_block_pt.get(wanted_dof_row,
+                                                                    wanted_dof_col),
+                                                                    output_block);
     }
-
-    CRDoubleMatrixHelpers::deep_copy(precom_block_pt,output_block);
-
-    if(Replacement_dof_block_pt.get(prec_block_i,prec_block_j)==0)
-    {
-      delete precom_block_pt;
-    }
-   }
+  }
   else
-   {
-  DenseMatrix<CRDoubleMatrix*> tmp_block_pt(nblock_in_row,nblock_in_col,0);
-  Vector<LinearAlgebraDistribution*> tmp_row_distribution_pt(nblock_in_row,0);
-  Vector<LinearAlgebraDistribution*> tmp_col_distribution_pt(nblock_in_col,0);
-
-  // Fill in the corresponding matrices.
-  for (unsigned block_row_i = 0; block_row_i < nblock_in_row; block_row_i++) 
-   {
-    unsigned prec_block_i = Block_to_dof_map_coarse[block_i][block_row_i];
-
-    for (unsigned block_col_i = 0; block_col_i < nblock_in_col; block_col_i++) 
-     {
-      unsigned prec_block_j = Block_to_dof_map_coarse[block_j][block_col_i];
-
-      tmp_block_pt(block_row_i,block_col_i) = 0;
-      if(Replacement_dof_block_pt.get(prec_block_i,prec_block_j) == 0)
-      { 
-        tmp_block_pt(block_row_i,block_col_i) = new CRDoubleMatrix;
-        get_block_from_original_matrix(prec_block_i,prec_block_j,
-                                       *tmp_block_pt(block_row_i,block_col_i));
-      }
-      else
-      {
-        tmp_block_pt(block_row_i,block_col_i)
-          = Replacement_dof_block_pt.get(prec_block_i, prec_block_j);
-      }
-     } // for
-   } // for
-
-  // Fill in the row distributions, use the first block column.
-  for (unsigned block_row_i = 0; block_row_i < nblock_in_row; block_row_i++) 
-   {
-    tmp_row_distribution_pt[block_row_i] 
-      = tmp_block_pt(block_row_i,0)->distribution_pt();
-   }
-
-  // Fill in the col distributions, use the first block row.
-  // This is a bit more tricky, we need the distributions of the block
-  // rows that these block columns correspond to.
-  for (unsigned block_col_i = 0; block_col_i < nblock_in_col; block_col_i++) 
-   {
-    unsigned prec_row_block_i = Block_to_dof_map_coarse[block_j][block_col_i];
-
-    // RAYRAY note: This will be incorrect. Will have to use 
-    // Dof_block_distribution_pt
-    tmp_col_distribution_pt[block_col_i] 
-      = Internal_block_distribution_pt[prec_row_block_i];
-   }
-
-  output_block.build(Block_distribution_pt[block_i]);
-  
-  DenseMatrix<const CRDoubleMatrix*> const_tmp_block_pt(nblock_in_row,nblock_in_col,0);
-  for (unsigned row_i = 0; row_i < nblock_in_row; row_i++) 
   {
-    for (unsigned col_i = 0; col_i < nblock_in_col; col_i++) 
+  
+  DenseMatrix<CRDoubleMatrix*> tmp_blocks_pt(ndofblock_in_row,ndofblock_in_col,0);
+
+  Vector<Vector<unsigned> > new_block(ndofblock_in_row,Vector<unsigned>(ndofblock_in_col,0));
+
+  for (unsigned row_dofblock = 0; row_dofblock < ndofblock_in_row; row_dofblock++) 
+  {
+    const unsigned wanted_dof_row = Block_to_dof_map_coarse[block_i][row_dofblock];
+
+    for (unsigned col_dofblock = 0; col_dofblock < ndofblock_in_col; col_dofblock++) 
     {
-      const_tmp_block_pt(row_i,col_i) = tmp_block_pt(row_i,col_i);
+      const unsigned wanted_dof_col = Block_to_dof_map_coarse[block_j][col_dofblock];
+
+      tmp_blocks_pt(row_dofblock,col_dofblock) 
+        = Replacement_dof_block_pt.get(wanted_dof_row,wanted_dof_col);
+
+      if((tmp_blocks_pt(row_dofblock,col_dofblock) == 0) ||
+          ignore_replacement_block)
+      {
+//        std::cout << "Calling get_dof_level_block" << std::endl; 
+        
+        new_block[row_dofblock][col_dofblock] = 1;
+        tmp_blocks_pt(row_dofblock,col_dofblock) = new CRDoubleMatrix;
+        get_dof_level_block(wanted_dof_row,
+                            wanted_dof_col,
+                            *tmp_blocks_pt(row_dofblock,col_dofblock),
+                            ignore_replacement_block);
+      }
+      else // RAYRAY delete this else.
+      {
+        std::cout << "Got block from Recpl." << std::endl;
+      }
     }
   }
 
-  // Concatenate the matrix.
-  // For now, we use concatenate_without_communication(...) since none of the
-  // current preconditioners require the block matrix to be in a particular
-  // arrangement. We could use concatenate(...) which requires communication.
-  CRDoubleMatrixHelpers::concatenate_without_communication(
-    tmp_row_distribution_pt,tmp_col_distribution_pt, tmp_block_pt, output_block);
+//  if(is_subsidiary_block_preconditioner())
+//  {
+//    std::cout << "\n\n" << std::endl; 
+//    std::cout << "==============================================" << std::endl; 
+//    std::cout << "From LSC get coarsened block, getting block(" 
+//              <<block_i<<","<<block_j<<")" << std::endl; 
+//
+//    std::cout << "This means getting dof blocks:" << std::endl;
+//    for (unsigned i = 0; i < ndofblock_in_row; i++) 
+//    {
+//      const unsigned wanted_dof_row 
+//        = Block_to_dof_map_coarse[block_i][i];
+//      for (unsigned j = 0; j < ndofblock_in_col; j++) 
+//      {
+//        const unsigned wanted_dof_col 
+//          = Block_to_dof_map_coarse[block_j][j];
+//
+//        std::cout << "block("<<wanted_dof_row<<","<<wanted_dof_col<<")"
+//                  << ", nrow: " << tmp_blocks_pt(i,j)->nrow()
+//                  << ", ncol: " << tmp_blocks_pt(i,j)->ncol()<<std::endl;
+//      }
+//    }
+//
+//
+//    std::cout << "==============================================" << std::endl; 
+//
+//  }
 
-  for (unsigned block_row_i = 0; block_row_i < nblock_in_row; block_row_i++) 
-   {
-    unsigned prec_block_i = Block_to_dof_map_coarse[block_i][block_row_i];
+  Vector<LinearAlgebraDistribution*> tmp_row_dist_pt(ndofblock_in_row,0);
+  for (unsigned row_dof_i = 0; row_dof_i < ndofblock_in_row; row_dof_i++) 
+  {
+    // RAYRAY redo this part. Get the distribution from dof_block_distribution,
+    // but atm cannot due to const.
+    const unsigned mapped_dof_i = Block_to_dof_map_coarse[block_i][row_dof_i];
+    if(is_master_block_preconditioner())
+    {
+    tmp_row_dist_pt[row_dof_i] = Internal_block_distribution_pt[mapped_dof_i];
+    }
+    else
+    {
+      tmp_row_dist_pt[row_dof_i] = Dof_block_distribution_pt[mapped_dof_i];
+    }
+  }
 
-    for (unsigned block_col_i = 0; block_col_i < nblock_in_col; block_col_i++) 
-     {
-      unsigned prec_block_j = Block_to_dof_map_coarse[block_j][block_col_i];
-    
-      if(Replacement_dof_block_pt.get(prec_block_i,prec_block_j) == 0)
-      { 
-        delete tmp_block_pt(block_row_i,block_col_i);
+  Vector<LinearAlgebraDistribution*> tmp_col_dist_pt(ndofblock_in_col,0);
+  for (unsigned col_dof_i = 0; col_dof_i < ndofblock_in_col; col_dof_i++) 
+  {
+    const unsigned mapped_dof_j = Block_to_dof_map_coarse[block_j][col_dof_i];
+    if(is_master_block_preconditioner())
+    {
+      tmp_col_dist_pt[col_dof_i] = Internal_block_distribution_pt[mapped_dof_j];
+    }
+    else
+    {
+      tmp_col_dist_pt[col_dof_i] = Dof_block_distribution_pt[mapped_dof_j];
+    }
+//    tmp_col_dist_pt[col_dof_i] 
+//      = dof_block_distribution_pt(Block_to_dof_map_coarse[block_j][col_dof_i]);
+//    tmp_col_dist_pt[col_dof_i] 
+//      = tmp_blocks_pt(0,col_dof_i)->distribution_pt();
+  }
+
+  CRDoubleMatrixHelpers::concatenate_without_communication(tmp_row_dist_pt,
+                                                           tmp_col_dist_pt,
+                                                           tmp_blocks_pt,
+                                                           output_block);
+
+  for (unsigned row_i = 0; row_i < ndofblock_in_row; row_i++) 
+  {
+    for (unsigned col_i = 0; col_i < ndofblock_in_col; col_i++) 
+    {
+      if(new_block[row_i][col_i])
+      {
+        delete tmp_blocks_pt(row_i,col_i);
       }
-     } // for
-   } // for
-   } // else need to concatenate
+    }
+  }
+  }// else need to concatenate
+
+
+//  // Create the dense matrix required for the merge.
+//  // How many block rows and columns?
+//  const unsigned nblock_in_row = Block_to_dof_map_coarse[block_i].size();
+//  const unsigned nblock_in_col = Block_to_dof_map_coarse[block_j].size();
+//
+//  if((nblock_in_row == 1) && (nblock_in_col == 1))
+//   {
+//     
+//    // Do not need to invoke concatenate function.
+//    unsigned prec_block_i = Block_to_dof_map_coarse[block_i][0];
+//    unsigned prec_block_j = Block_to_dof_map_coarse[block_j][0];
+//
+//    // Cache the pointer to the precomputed block.
+//    CRDoubleMatrix* precom_block_pt = 0;
+//    if(Replacement_dof_block_pt.get(prec_block_i,prec_block_j) == 0)
+//    {
+//      precom_block_pt = new CRDoubleMatrix;
+//      get_block_from_original_matrix(prec_block_i,prec_block_j,*precom_block_pt);
+//    }
+//    else
+//    {
+//      precom_block_pt = Replacement_dof_block_pt.get(prec_block_i,prec_block_j);
+//    }
+//
+//    CRDoubleMatrixHelpers::deep_copy(precom_block_pt,output_block);
+//
+//    if(Replacement_dof_block_pt.get(prec_block_i,prec_block_j)==0)
+//    {
+//      delete precom_block_pt;
+//    }
+//   }
+//  else
+//   {
+//  DenseMatrix<CRDoubleMatrix*> tmp_block_pt(nblock_in_row,nblock_in_col,0);
+//  Vector<LinearAlgebraDistribution*> tmp_row_distribution_pt(nblock_in_row,0);
+//  Vector<LinearAlgebraDistribution*> tmp_col_distribution_pt(nblock_in_col,0);
+//
+//  // Fill in the corresponding matrices.
+//  for (unsigned block_row_i = 0; block_row_i < nblock_in_row; block_row_i++) 
+//   {
+//    unsigned prec_block_i = Block_to_dof_map_coarse[block_i][block_row_i];
+//
+//    for (unsigned block_col_i = 0; block_col_i < nblock_in_col; block_col_i++) 
+//     {
+//      unsigned prec_block_j = Block_to_dof_map_coarse[block_j][block_col_i];
+//
+//      tmp_block_pt(block_row_i,block_col_i) = 0;
+//      if(Replacement_dof_block_pt.get(prec_block_i,prec_block_j) == 0)
+//      { 
+//        tmp_block_pt(block_row_i,block_col_i) = new CRDoubleMatrix;
+//        get_block_from_original_matrix(prec_block_i,prec_block_j,
+//                                       *tmp_block_pt(block_row_i,block_col_i));
+//      }
+//      else
+//      {
+//        tmp_block_pt(block_row_i,block_col_i)
+//          = Replacement_dof_block_pt.get(prec_block_i, prec_block_j);
+//      }
+//     } // for
+//   } // for
+//
+//  // Fill in the row distributions, use the first block column.
+//  for (unsigned block_row_i = 0; block_row_i < nblock_in_row; block_row_i++) 
+//   {
+//    tmp_row_distribution_pt[block_row_i] 
+//      = tmp_block_pt(block_row_i,0)->distribution_pt();
+//   }
+//
+//  // Fill in the col distributions, use the first block row.
+//  // This is a bit more tricky, we need the distributions of the block
+//  // rows that these block columns correspond to.
+//  for (unsigned block_col_i = 0; block_col_i < nblock_in_col; block_col_i++) 
+//   {
+//    unsigned prec_row_block_i = Block_to_dof_map_coarse[block_j][block_col_i];
+//
+//    // RAYRAY note: This will be incorrect. Will have to use 
+//    // Dof_block_distribution_pt
+//    tmp_col_distribution_pt[block_col_i] 
+//      = Internal_block_distribution_pt[prec_row_block_i];
+//   }
+//
+//  output_block.build(Block_distribution_pt[block_i]);
+//  
+//  DenseMatrix<const CRDoubleMatrix*> const_tmp_block_pt(nblock_in_row,nblock_in_col,0);
+//  for (unsigned row_i = 0; row_i < nblock_in_row; row_i++) 
+//  {
+//    for (unsigned col_i = 0; col_i < nblock_in_col; col_i++) 
+//    {
+//      const_tmp_block_pt(row_i,col_i) = tmp_block_pt(row_i,col_i);
+//    }
+//  }
+//
+//  // Concatenate the matrix.
+//  // For now, we use concatenate_without_communication(...) since none of the
+//  // current preconditioners require the block matrix to be in a particular
+//  // arrangement. We could use concatenate(...) which requires communication.
+//  CRDoubleMatrixHelpers::concatenate_without_communication(
+//    tmp_row_distribution_pt,tmp_col_distribution_pt, tmp_block_pt, output_block);
+//
+//  for (unsigned block_row_i = 0; block_row_i < nblock_in_row; block_row_i++) 
+//   {
+//    unsigned prec_block_i = Block_to_dof_map_coarse[block_i][block_row_i];
+//
+//    for (unsigned block_col_i = 0; block_col_i < nblock_in_col; block_col_i++) 
+//     {
+//      unsigned prec_block_j = Block_to_dof_map_coarse[block_j][block_col_i];
+//    
+//      if(Replacement_dof_block_pt.get(prec_block_i,prec_block_j) == 0)
+//      { 
+//        delete tmp_block_pt(block_row_i,block_col_i);
+//      }
+//     } // for
+//   } // for
+//   } // else need to concatenate
  }
 
 

@@ -434,10 +434,10 @@ class DenseMatrix : public Matrix<T, DenseMatrix<T> >
     }
   }
 
- /// Copy assignement 
+ /// Copy assignment 
  DenseMatrix& operator=(const DenseMatrix& source_matrix) 
   {
-   // Don't create a new matrix if the assignement is the identity
+   // Don't create a new matrix if the assignment is the identity
    if (this != & source_matrix)
     {
      // Check row and column length

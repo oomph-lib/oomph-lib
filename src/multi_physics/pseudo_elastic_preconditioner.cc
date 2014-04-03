@@ -351,8 +351,8 @@ namespace oomph
     for (unsigned d = 0; d < Dim; d++) 
     {
       unsigned block_i = 2*d+1;
-      s_prec_pt->set_replacement_dof_block(block_i,block_i,
-                                           solid_matrix_pt(block_i,block_i));
+      this->set_replacement_dof_block(block_i,block_i,
+                                      solid_matrix_pt(block_i,block_i));
     }
 
     s_prec_pt->Preconditioner::setup(matrix_pt(),comm_pt());
@@ -430,8 +430,8 @@ namespace oomph
     for (unsigned d = 0; d < Dim; d++) 
     {
       unsigned block_i = 2*d+1;
-      s_prec_pt->set_replacement_dof_block(block_i,block_i,
-                                           solid_matrix_pt(block_i,block_i));
+      this->set_replacement_dof_block(block_i,block_i,
+                                      solid_matrix_pt(block_i,block_i));
     }
 
     s_prec_pt->set_dof_to_block_map(s_prec_dof_to_block_map);
@@ -869,31 +869,21 @@ namespace oomph
      }
    }
 
-  // get the remaining block and build the preconditioner
-  DenseMatrix<CRDoubleMatrix* > s_pt(2,2,0);
-  s_pt(0,0) = new CRDoubleMatrix;
-  this->get_block(0,0,*s_pt(0,0));
+  VectorMatrix<BlockSelector> required_blocks(2,2);
+  const bool want_block = true;
+  for (unsigned b_i = 0; b_i < 2; b_i++) 
+  {
+    for (unsigned b_j = 0; b_j < 2; b_j++) 
+    {
+      required_blocks[b_i][b_j].select_block(b_i,b_j,want_block);
+    }
+  }
 
-  s_pt(0,1) = new CRDoubleMatrix;
-  this->get_block(0,1,*s_pt(0,1));
+  required_blocks[1][1].set_block_pt(s11_pt);
 
-  s_pt(1,0) = new CRDoubleMatrix;
-  this->get_block(1,0,*s_pt(1,0));
+  CRDoubleMatrix s_prec_pt = this->get_concatenated_block(required_blocks);
 
-  s_pt(1,1) = s11_pt;
-   
-  CRDoubleMatrix* s_prec_pt
-   = new CRDoubleMatrix(this->preconditioner_matrix_distribution_pt());
-
-  // RAYRAY this will be incorrect, we have to use the distributions for the
-  // blocks, not the internal blocks.
-  CRDoubleMatrixHelpers::concatenate_without_communication(
-   Block_distribution_pt,s_pt,*s_prec_pt);
-
-  delete s_pt(0,0); s_pt(0,0) = 0;
-  delete s_pt(0,1); s_pt(0,1) = 0;
-  delete s_pt(1,0); s_pt(1,0) = 0;
-  delete s_pt(1,1); s_pt(1,1) = 0;
+  delete s11_pt; s11_pt = 0;
    
   // setup the preconditioner
   if (Subsidiary_preconditioner_function_pt != 0)
@@ -904,8 +894,7 @@ namespace oomph
    {
     Preconditioner_pt = new SuperLUPreconditioner;
    }
-  Preconditioner_pt->setup(s_prec_pt,comm_pt());
-  delete s_prec_pt; s_prec_pt = 0;
+  Preconditioner_pt->setup(&s_prec_pt,comm_pt());
  }
    
  //=============================================================================

@@ -3937,7 +3937,7 @@ namespace CRDoubleMatrixHelpers
      }
    }
 
-  // Compare the number of colmns of each block matrix in a block column.
+  // Compare the number of columns of each block matrix in a block column.
   for(unsigned block_col_i = 0; block_col_i < matrix_ncol; block_col_i++)
    {
     // Use the first row to compare against the rest.
@@ -4725,7 +4725,7 @@ namespace CRDoubleMatrixHelpers
   unsigned matrix_nrow = matrix_pt.nrow();
   unsigned matrix_ncol = matrix_pt.ncol();
  
-  // PARANOID checks involving in matrices and block_dsitribution only.
+  // PARANOID checks involving in matrices and block_distribution only.
   // PARANOID checks involving the result matrix will come later since
   // we have to create the result matrix distribution from the in distribution
   // if it does not already exist.
@@ -4957,7 +4957,7 @@ namespace CRDoubleMatrixHelpers
      }
    }
 
-  // Compare the number of colmns of each block matrix in a block column.
+  // Compare the number of columns of each block matrix in a block column.
   for(unsigned block_col_i = 0; block_col_i < matrix_ncol; block_col_i++)
    {
     // Get the current block ncol from the linear algebra distribution.
@@ -5006,7 +5006,7 @@ namespace CRDoubleMatrixHelpers
      {
       if(matrix_pt(block_row_i,block_col_i) != 0)
        {
-        // Get the distirbution for this block.
+        // Get the distribution for this block.
         LinearAlgebraDistribution* current_block_distribution_pt
          = matrix_pt(block_row_i,block_col_i)->distribution_pt();
    
@@ -5194,7 +5194,7 @@ namespace CRDoubleMatrixHelpers
   // nrow_local for the result matrix
   unsigned res_nrow_local = res_distribution_pt->nrow_local();
   
-  // renamed for readibility.
+  // renamed for readability.
   unsigned nblock_col = matrix_ncol;
 
   // construct the block offset
