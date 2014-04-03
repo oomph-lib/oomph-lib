@@ -471,9 +471,6 @@ namespace oomph
    // Number of processors
    unsigned nproc = comm_pt->nproc();
    
-   // My rank
-   unsigned my_rank = comm_pt->my_rank();
-   
    // First determine the out_nrow_local and the out_nrow (the global nrow)
    unsigned out_nrow_local = 0;
    unsigned out_nrow = 0;
@@ -494,6 +491,9 @@ namespace oomph
    if(distributed)
     {
 #ifdef OOMPH_HAS_MPI
+     // My rank
+     unsigned my_rank = comm_pt->my_rank();
+
      unsigned *out_nrow_local_all = new unsigned[nproc];
      MPI_Allgather(&out_nrow_local,1,MPI_UNSIGNED,
                    out_nrow_local_all,1,MPI_UNSIGNED,
