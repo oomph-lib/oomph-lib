@@ -1773,8 +1773,18 @@ namespace oomph
      ->turn_into_subsidiary_block_preconditioner(this, ns_dof_list,
                                                  doftype_to_doftype_map);
 
-    navier_stokes_block_preconditioner_pt
-     ->set_replacement_block(f_subblock_pt);
+    // Set the replacement blocks.
+    for (unsigned row_i = 0; row_i < N_fluid_doftypes; row_i++) 
+    {
+      for (unsigned col_i = 0; col_i < N_fluid_doftypes; col_i++) 
+      {
+        navier_stokes_block_preconditioner_pt
+          ->set_replacement_dof_block(row_i,col_i,
+                                      f_subblock_pt(row_i,col_i));
+      }
+    }
+//    navier_stokes_block_preconditioner_pt
+//     ->set_replacement_block(f_subblock_pt);
 
     navier_stokes_block_preconditioner_pt
      ->setup(matrix_pt(), comm_pt());

@@ -341,7 +341,16 @@ namespace oomph
        (Elastic_subsidiary_preconditioner_function_pt);
      }
 
-    s_prec_pt->set_replacement_block(solid_matrix_pt);
+    // Set the replacement blocks.
+    for (unsigned row_i = 0; row_i < n_solid_dof_types; row_i++) 
+    {
+      for (unsigned col_i = 0; col_i < n_solid_dof_types; col_i++) 
+      {
+        s_prec_pt->set_replacement_dof_block(row_i,col_i,
+                                             solid_matrix_pt(row_i,col_i));
+      }
+    }
+    //s_prec_pt->set_replacement_block(solid_matrix_pt);
 
     s_prec_pt->Preconditioner::setup(matrix_pt(),comm_pt());
     Elastic_preconditioner_pt = s_prec_pt;
@@ -414,7 +423,16 @@ namespace oomph
        (Elastic_subsidiary_preconditioner_function_pt);
      }
 
-    s_prec_pt->set_replacement_block(solid_matrix_pt);
+    // Set the replacement blocks.
+    for (unsigned row_i = 0; row_i < n_solid_dof_types; row_i++) 
+    {
+      for (unsigned col_i = 0; col_i < n_solid_dof_types; col_i++) 
+      {
+        s_prec_pt->set_replacement_dof_block(row_i,col_i,
+                                             solid_matrix_pt(row_i,col_i));
+      }
+    }
+//    s_prec_pt->set_replacement_block(solid_matrix_pt);
     s_prec_pt->set_dof_to_block_map(s_prec_dof_to_block_map);
     s_prec_pt->Preconditioner::setup(matrix_pt(),comm_pt());
 

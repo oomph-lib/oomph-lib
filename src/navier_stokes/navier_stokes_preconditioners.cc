@@ -311,7 +311,7 @@ namespace oomph
      // up nicely to hide the precomputed-ness, once I have worked out a good
      // way to get the mass matrices of all the most fine grain blocks.
      // For now, this works and will only affect my code - RAYRAY
-     if(this->Preconditioner_blocks_have_been_precomputed)
+     if(this->preconditioner_blocks_have_been_replaced())
       {
         for (unsigned block_i = 0; block_i < n_velocity_doftypes; block_i++) 
          {

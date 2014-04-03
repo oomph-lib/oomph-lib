@@ -79,7 +79,7 @@ namespace oomph
 #endif
    }
 
-  if(Preconditioner_blocks_have_been_precomputed)
+  if(preconditioner_blocks_have_been_replaced())
    {
     // Check that the dof_to_block map "makes sense" for the 
     // Doftype_to_doftype_map.
@@ -1280,7 +1280,7 @@ namespace oomph
 
   // If blocks have been precomputed, compute the precomputed 
   // block distributions.
-  if(Preconditioner_blocks_have_been_precomputed)
+  if(preconditioner_blocks_have_been_replaced())
    {
     // Delete any existing distributions in Precomputed_block_distribution_pt.
     unsigned n_existing_precom_block_dist 
@@ -1303,7 +1303,7 @@ namespace oomph
            sub_block_i < sub_block_size; sub_block_i++) 
        {
         tmp_dist_pt[sub_block_i] 
-         = Replacement_block_pt(
+         = Replacement_dof_block_pt.get(
              Block_to_block_map[super_block_i][sub_block_i],0)
                ->distribution_pt();
        }
@@ -1917,14 +1917,14 @@ namespace oomph
 
   // If the master block preconditioner has precomputed blocks
   // this preconditioner use these precomputed blocks.
-  if(master_block_prec_pt->preconditioner_blocks_have_been_precomputed())
+  if(master_block_prec_pt->preconditioner_blocks_have_been_replaced())
    {
     // We have precomputed preconditioner blocks.
-    Preconditioner_blocks_have_been_precomputed = true;
+//    preconditioner_blocks_have_been_replaced = true;
 
     // Store the precomputed blocks.
-    Replacement_block_pt
-      = master_block_prec_pt->replacement_block_pt();
+    Replacement_dof_block_pt
+      = master_block_prec_pt->replacement_dof_block_pt();
     
     // Only store the master's Doftype_to_doftype_map which is relevant
     // to this preconditioner.
@@ -2097,7 +2097,7 @@ namespace oomph
   // get_block_vectors_with_precomputed_block_ordering(...) to ensure that
   // the distribution of the block vectors s are the same as the 
   // precomputed block distributions.
-  if(Preconditioner_blocks_have_been_precomputed)
+  if(preconditioner_blocks_have_been_replaced())
    {
     get_block_vectors_with_precomputed_block_ordering(v,s);
    }
@@ -2401,7 +2401,7 @@ namespace oomph
                         OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
-  if(!Preconditioner_blocks_have_been_precomputed)
+  if(!preconditioner_blocks_have_been_replaced())
    {
     std::ostringstream error_message;
     error_message << "You have not set precomputed blocks. It does not make "
@@ -2441,7 +2441,7 @@ namespace oomph
   // get_block_vectors_with_precomputed_block_ordering(...). We call
   // return_block_vectors_with_precomputed_block_ordering(...)  ensure that
   // the entries are returned in the correct place.
-  if(Preconditioner_blocks_have_been_precomputed)
+  if(preconditioner_blocks_have_been_replaced())
    {
     return_block_vectors_with_precomputed_block_ordering(s,v);
    }
@@ -2738,7 +2738,7 @@ namespace oomph
   unsigned nprecomputedblock = Block_to_block_map.size();
 
 #ifdef PARANOID
-  if(!Preconditioner_blocks_have_been_precomputed)
+  if(!preconditioner_blocks_have_been_replaced())
    {
     std::ostringstream error_message;
     error_message << "Precomputed blocks are not set. I cannot return block "
@@ -2860,7 +2860,7 @@ namespace oomph
    }
 
   // Are precomputed blocks set?
-  if(!Preconditioner_blocks_have_been_precomputed)
+  if(!preconditioner_blocks_have_been_replaced())
    {
     std::ostringstream warning_message;
     warning_message << "There are no precomputed blocks set."
@@ -3096,7 +3096,7 @@ namespace oomph
   // get_block_vector_with_precomputed_block_ordering(...) to ensure that the
   // distribution of w is the same as the distribution of the precomputed
   // block.
-  if(Preconditioner_blocks_have_been_precomputed)
+  if(preconditioner_blocks_have_been_replaced())
    {
     get_block_vector_with_precomputed_block_ordering(b,v,w);
    }
@@ -3165,7 +3165,7 @@ namespace oomph
    }
 
   // Are precomputed blocks set?
-  if(!Preconditioner_blocks_have_been_precomputed)
+  if(!preconditioner_blocks_have_been_replaced())
    {
     std::ostringstream warning_message;
     warning_message << "There are no precomputed blocks set."
@@ -3431,7 +3431,7 @@ namespace oomph
   // that the ordering of b is the same as the ordering of the
   // precomputed blocks. We invoke the correct function for returning the 
   // block vector.
-  if(Preconditioner_blocks_have_been_precomputed)
+  if(preconditioner_blocks_have_been_replaced())
    {
     return_block_vector_with_precomputed_block_ordering(b,w,v);
    }
@@ -4332,7 +4332,7 @@ namespace oomph
 
 
 //=============================================================================
-/// \short Gets block (i,j) from Replacement_block_pt and returns it in
+/// \short Gets block (i,j) from Replacement_dof_block_pt and returns it in
 /// block_matrix_pt.
 //=============================================================================
  template<> 
@@ -4356,7 +4356,7 @@ namespace oomph
                         OOMPH_EXCEPTION_LOCATION);
    }
 
-  if(!Preconditioner_blocks_have_been_precomputed)
+  if(!preconditioner_blocks_have_been_replaced())
   {
     std::ostringstream error_message;
     error_message << "There are no precomputed blocks. Please call "
@@ -4381,9 +4381,9 @@ namespace oomph
 
     // Cache the pointer to the precomputed block.
     CRDoubleMatrix* precom_block_pt = 0;
-    if(Preconditioner_blocks_have_been_precomputed)
+    if(preconditioner_blocks_have_been_replaced())
     {
-      precom_block_pt = Replacement_block_pt(prec_block_i,prec_block_j);
+      precom_block_pt = Replacement_dof_block_pt.get(prec_block_i,prec_block_j);
     }
     else
     {
@@ -4434,7 +4434,7 @@ namespace oomph
                        tmp_values,
                        tmp_column_indices,
                        tmp_row_start);
-    if(!Preconditioner_blocks_have_been_precomputed)
+    if(!preconditioner_blocks_have_been_replaced())
     {
       delete precom_block_pt;
     }
@@ -4455,10 +4455,10 @@ namespace oomph
       unsigned prec_block_j = Block_to_block_map[block_j][block_col_i];
     
       tmp_block_pt(block_row_i,block_col_i) = 0;
-      if(Preconditioner_blocks_have_been_precomputed)
+      if(preconditioner_blocks_have_been_replaced())
       { 
         tmp_block_pt(block_row_i,block_col_i)
-          = Replacement_block_pt(prec_block_i, prec_block_j);
+          = Replacement_dof_block_pt.get(prec_block_i, prec_block_j);
       }
       else
       {
@@ -4484,7 +4484,7 @@ namespace oomph
     unsigned prec_row_block_i = Block_to_block_map[block_j][block_col_i];
 
     tmp_col_distribution_pt[block_col_i] 
-      = Replacement_block_pt(prec_row_block_i,0)->distribution_pt();
+      = Replacement_dof_block_pt.get(prec_row_block_i,0)->distribution_pt();
    }
 
   output_block.build(Precomputed_block_distribution_pt[block_i]);

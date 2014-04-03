@@ -315,13 +315,27 @@ namespace oomph
   // If precomputed blocks are set, we use the precomputed blocks.
   // There is no need to delete the precomputed blocks, this should be handled
   // by the master preconditioner of THIS preconditioner.
-  if(this->Preconditioner_blocks_have_been_precomputed)
+  if(this->preconditioner_blocks_have_been_replaced())
    {
      // RAYRAY this may need to be fixed... This should be integrated into
      // get block(i,j) or perhaps get_blocks(...) or even get_preconditioner
      // matrix().
+    
+     // Put it in a CRDoubleMatrix for concatenation.
+    
+    DenseMatrix<CRDoubleMatrix*> tmp_dense_matrix(nblock_types,
+                                                  nblock_types,0);
+
+    for (unsigned row_i = 0; row_i < nblock_types; row_i++) 
+    {
+      for (unsigned col_i = 0; col_i < nblock_types; col_i++) 
+      {
+        tmp_dense_matrix(row_i,col_i) = this->Replacement_dof_block_pt.get(row_i,col_i);
+      }
+    }
+
     CRDoubleMatrixHelpers::concatenate_without_communication
-     (this->Block_distribution_pt,this->Replacement_block_pt,
+     (this->Block_distribution_pt,tmp_dense_matrix,
       *exact_block_matrix_pt);
    }
   else

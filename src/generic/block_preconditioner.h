@@ -126,9 +126,6 @@ namespace oomph
    Internal_nblock_types=0;
    Internal_ndof_types=0;
    
-   // No preconditioner blocks has been computed yet.
-   Preconditioner_blocks_have_been_precomputed = false;
-
    // No doftypes have been coarsened.
    Preconditioner_doftypes_have_been_coarsened = false;
    
@@ -347,7 +344,7 @@ namespace oomph
   /// \short Put block (i,j) into output_matrix.
   ///
   /// If the preconditioner blocks for this preconditioner has
-  /// been precomputed (Preconditioner_blocks_have_been_precomputed is
+  /// been precomputed (preconditioner_blocks_have_been_replaced() is
   /// true), then this function calls get_precomputed_block(...), otherwise
   /// get_block_from_original_matrix(...) is called.
   void get_block(const unsigned& i, const unsigned& j,
@@ -362,11 +359,11 @@ namespace oomph
    }
    else
    {
-     if(Preconditioner_blocks_have_been_precomputed)
+     if(preconditioner_blocks_have_been_replaced())
      {
       // Cache the pointer to the precomputed block.
       CRDoubleMatrix* precom_block_pt 
-        = Replacement_block_pt(i,j);
+        = Replacement_dof_block_pt.get(i,j);
 
       // Temp storage.
       Vector<double> tmp_values;
@@ -414,7 +411,7 @@ namespace oomph
      }
    }
 
-//   if(Preconditioner_blocks_have_been_precomputed)
+//   if(preconditioner_blocks_have_been_replaced)
 //    { get_precomputed_block(i, j, output_matrix); }
 //   else
 //    { get_block_from_original_matrix(i, j, output_matrix); }
@@ -425,7 +422,7 @@ namespace oomph
   /// \short Return block (i,j).
   ///
   /// If the preconditioner blocks for this preconditioner has
-  /// been precomputed (Preconditioner_blocks_have_been_precomputed is
+  /// been precomputed (preconditioner_blocks_have_been_replaced() is
   /// true), then this function calls get_precomputed_block(...), otherwise
   /// get_block_from_original_matrix(...) is called.
   MATRIX get_block(const unsigned& i, const unsigned& j) const
@@ -536,7 +533,7 @@ namespace oomph
     }
    else
     {
-     if(Preconditioner_blocks_have_been_precomputed)
+     if(preconditioner_blocks_have_been_replaced())
       {
        return nblock_types_precomputed();
       }
@@ -550,7 +547,7 @@ namespace oomph
   /// \short Return the number of fine DOF types in a coarse DOF type.
   unsigned ndof_types_in_coarse_dof_type(const unsigned& coarse_doftype) const
    {
-    if(Preconditioner_blocks_have_been_precomputed)
+    if(preconditioner_blocks_have_been_replaced())
      {
 #ifdef PARANOID
       if(coarse_doftype >= Doftype_to_doftype_map.size())
@@ -583,7 +580,7 @@ namespace oomph
    {
 #ifdef PARANOID
     // Check that preconditioner blocks have been precomputed.
-    if(!Preconditioner_blocks_have_been_precomputed)
+    if(!preconditioner_blocks_have_been_replaced())
      {
       std::ostringstream err_msg;
       err_msg << "Preconditioner blocks have not been precomputed.\n"
@@ -617,7 +614,7 @@ namespace oomph
   {
     if (is_subsidiary_block_preconditioner())
      {
-      if(real_ndof_types || !Preconditioner_blocks_have_been_precomputed)
+      if(real_ndof_types || !preconditioner_blocks_have_been_replaced())
        {
         return Internal_ndof_types;
        }
@@ -650,7 +647,7 @@ namespace oomph
 //    }
 //   else
 //    {
-//     if(Preconditioner_blocks_have_been_precomputed)
+//     if(preconditioner_blocks_have_been_replaced())
 //      {
 //       return ndof_types_precomputed();
 //      }
@@ -1037,8 +1034,9 @@ namespace oomph
    oomph_info << std::endl;
   } // EOFunc document()
 
+
   /// \short Set the precomputed (and possibly modified) preconditioner blocks.
-  /// The replacement_block_pt is a Dense matrix of pointers of precomputed 
+  /// The precomputed_block_pt is a Dense matrix of pointers of precomputed 
   /// blocks for this preconditioner to use in preconditioning.
   /// 
   /// This function is called from outside of this preconditioner to set
@@ -1046,202 +1044,263 @@ namespace oomph
   /// jacobian. A typical use would be if this is a subsidiary preconditioner
   /// and a master preconditioner has to pass down modified blocks for the 
   /// subsidiary preconditioner to use.
-  void set_replacement_block(
-      DenseMatrix<CRDoubleMatrix*>&given_replacement_block_pt)
+  void set_replacement_dof_block(const unsigned &block_i, 
+                                 const unsigned &block_j,
+                                 CRDoubleMatrix* replacement_dof_block_pt)
   {
 #ifdef PARANOID
+  
+   // RAYRAY 
+   // Check that the replaced block's distribution makes sense (nrow and ncol)
    
-   // Check that this is a subsidiary preconditioner.
-   // At the moment we have no test cases for which the function 
-   // set_replacement_block(..) is called for a master preconditioner.
-   // If the master preconditioner pointer has been set, then we can easily
-   // check if the master preconditioner has precomputed blocks.
-   // This check may be removed in the future if required...
-   if(!is_subsidiary_block_preconditioner())
-    {
-     std::ostringstream error_message;
-     error_message << "This is not a subsidiary preconditioner. \nPlease call"
-                   << "turn_into_subsidiary_block_preconditioner(...)\n" 
-                   << "before calling this function."
-                   << std::endl;
-     throw OomphLibError(error_message.str(),
-                         OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
-    }
+   // Only the dof level blocks at THIS preconditioner can be replaced.
+   // I.e. nblock_types() == ndof_types().
+   // This is because if one or more dof types is associated with one block
+   // type, a subsidiary block preconditioner may not account for such a 
+   // blocking structure.
+   //
+   // For example, if the th
 
-   if(is_subsidiary_block_preconditioner()&&
-      master_block_preconditioner_pt()
-        ->preconditioner_blocks_have_been_precomputed())
-    {
-     std::ostringstream error_message;
-     error_message << "Preconditioner blocks has already been precomputed in\n"
-                   << "the block preconditioning hierarchy which this\n" 
-                   << "block preconditioner lies in. There can not be two\n"
-                   << "modifications to the preconditioner blocks in the same\n"
-                   << "hierarchy."
-                   << std::endl;
-     throw OomphLibError(error_message.str(),
-                         OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
-    }
 
-   // How many block rows are there?
-   unsigned precomputed_block_nrow = given_replacement_block_pt.nrow();
-
-   // Ensure that a square block matrix is given.
-   if(precomputed_block_nrow != given_replacement_block_pt.ncol())
-    {
-     std::ostringstream error_message;
-     error_message << "The number of block rows and block columns are "
-                   << "not the same." << std::endl;
-     throw OomphLibError(error_message.str(),
-                         OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
-    }
-
-   // Check that this is the most fine grain .
-   if(precomputed_block_nrow != this->internal_ndof_types(true))
-    {
-     std::ostringstream error_message;
-     error_message << "This must be the most fine grain block matrix.\n"
-                   << "It must have ndof_types number of rows / columns.\n"
-                   << "You have given me a " << precomputed_block_nrow
-                   << " by " << precomputed_block_nrow << " matrix.\n"
-                   << "I want a " << internal_ndof_types(true) << " by "
-                   << internal_ndof_types(true)
-                   << " matrix." << std::endl;
-     throw OomphLibError(error_message.str(),
-                         OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
-    }
-
-   // Check that all matrices have been set and have been built.
-   for (unsigned block_row_i = 0; block_row_i < precomputed_block_nrow;
-        block_row_i++)
-    {
-     for (unsigned block_col_i = 0; block_col_i < precomputed_block_nrow;
-          block_col_i++)
-      {
-       // Check that the block matrix has been set.
-       if(given_replacement_block_pt(block_row_i,block_col_i) == 0)
-        {
-         std::ostringstream error_message;
-         error_message << "Block (" << block_row_i
-                       << "," << block_col_i << ")"
-                       << " is NULL." << std::endl;
-         throw OomphLibError(error_message.str(),
+   // Check that the replacement block pt is not null
+   if(replacement_dof_block_pt == 0)
+   {
+         std::ostringstream err_msg;
+         err_msg << "Replacing block(" << block_i << "," << block_i << ")\n"
+                 << " but the pointer is NULL." << std::endl;
+         throw OomphLibError(err_msg.str(),
                              OOMPH_CURRENT_FUNCTION,
                              OOMPH_EXCEPTION_LOCATION);
-        }
+   }
 
-       // Check that the block matrix has been built.
-       if(!given_replacement_block_pt(block_row_i,block_col_i)->built())
-        {
-         std::ostringstream error_message;
-         error_message << "Block (" << block_row_i
-                       << "," << block_col_i << ")"
-                       << " is not built." << std::endl;
-         throw OomphLibError(error_message.str(),
+   // Check that the replacement block has been built
+   if(!replacement_dof_block_pt->built())
+   {
+         std::ostringstream err_msg;
+         err_msg << "Replacement block(" << block_i << "," << block_i << ")"
+                 << " is not built." << std::endl;
+         throw OomphLibError(err_msg.str(),
                              OOMPH_CURRENT_FUNCTION,
                              OOMPH_EXCEPTION_LOCATION);
-        }
-      }
-    }
-
-   // Check that the size of all matrices "make sense".
-   // First do the rows.
-   for (unsigned block_row_i = 0; block_row_i < precomputed_block_nrow;
-        block_row_i++)
-    {
-
-     // Note that we are checking this against the dof block dimensions in
-     // this preconditioner. Thus at the same time we check if this is the
-     // dimension this preconditioner expects.
-     unsigned current_block_row_nrow
-      = this->dof_block_dimension(block_row_i);
-
-     // Loop through the columns
-     for(unsigned block_col_i = 0; block_col_i < precomputed_block_nrow;
-         block_col_i++)
-      {
-       // Get the global row of this block.
-       unsigned current_block_nrow = given_replacement_block_pt(block_row_i,
-                                                    block_col_i)->nrow();
-       if(current_block_row_nrow != current_block_nrow)
-        {
-         std::ostringstream error_message;
-         error_message << "Block (" << block_row_i
-                       << "," << block_col_i << ")"
-                       << " does not have the correct number of rows."
-                       << std::endl;
-         throw OomphLibError(error_message.str(),
-                             OOMPH_CURRENT_FUNCTION,
-                             OOMPH_EXCEPTION_LOCATION);
-        }
-      }
-    }
-
-   // Now check the columns
-   for(unsigned block_col_i = 0; block_col_i < precomputed_block_nrow;
-       block_col_i++)
-    {
-     // Get the number of columns for this block column
-     unsigned current_block_col_ncol
-      = given_replacement_block_pt(0,block_col_i)->ncol();
-
-     // Loop through the rows
-     for(unsigned block_row_i = 0; block_row_i < precomputed_block_nrow;
-         block_row_i++)
-      {
-       // Get the number of columns for this block.
-       unsigned current_block_ncol = given_replacement_block_pt(block_row_i,
-                                                    block_col_i)->ncol();
-       if(current_block_col_ncol != current_block_ncol)
-        {
-         std::ostringstream error_message;
-         error_message << "Block (" << block_row_i
-                       << "," << block_col_i << ")"
-                       << " does not have the correct number of columns."
-                       << std::endl;
-         throw OomphLibError(error_message.str(),
-                             OOMPH_CURRENT_FUNCTION,
-                             OOMPH_EXCEPTION_LOCATION);
-        }
-      }
-    }
-
-   // This function should be used only by master preconditioners to pass
-   // blocks to this subsidiary preconditioner. If this is a master, then we
-   // warn the using.
-   if(is_master_block_preconditioner())
-    {
-     std::ostringstream warning_message;
-     warning_message << "Warning: This is a master preconditioner\n"
-                     << "This function should not be called." << std::endl;
-     throw OomphLibWarning(warning_message.str(),
-                           OOMPH_CURRENT_FUNCTION,
-                           OOMPH_EXCEPTION_LOCATION);
-    }
+   }
 #endif
     
    // Set the precomputed blocks.
-   Replacement_block_pt = given_replacement_block_pt;
+   Replacement_dof_block_pt(block_i,block_j) = replacement_dof_block_pt;
 
-   // Flag indicating that the preconditioner blocks has been precomputed.
-   Preconditioner_blocks_have_been_precomputed = true;
-  } // EOFunc set_replacement_block(...)
+  } // EOFunc set_precomputed_blocks(...)
+
+
+
+
+
+//  /// \short Set the precomputed (and possibly modified) preconditioner blocks.
+//  /// The replacement_block_pt is a Dense matrix of pointers of precomputed 
+//  /// blocks for this preconditioner to use in preconditioning.
+//  /// 
+//  /// This function is called from outside of this preconditioner to set
+//  /// block matrices to use instead of the block matrices extracted from the
+//  /// jacobian. A typical use would be if this is a subsidiary preconditioner
+//  /// and a master preconditioner has to pass down modified blocks for the 
+//  /// subsidiary preconditioner to use.
+//  void set_replacement_block(
+//      MapMatrix<CRDoubleMatrix*>&given_replacement_block_pt)
+//  {
+//#ifdef PARANOID
+//   
+//   // Check that this is a subsidiary preconditioner.
+//   // At the moment we have no test cases for which the function 
+//   // set_replacement_block(..) is called for a master preconditioner.
+//   // If the master preconditioner pointer has been set, then we can easily
+//   // check if the master preconditioner has precomputed blocks.
+//   // This check may be removed in the future if required...
+//   if(!is_subsidiary_block_preconditioner())
+//    {
+//     std::ostringstream error_message;
+//     error_message << "This is not a subsidiary preconditioner. \nPlease call"
+//                   << "turn_into_subsidiary_block_preconditioner(...)\n" 
+//                   << "before calling this function."
+//                   << std::endl;
+//     throw OomphLibError(error_message.str(),
+//                         OOMPH_CURRENT_FUNCTION,
+//                         OOMPH_EXCEPTION_LOCATION);
+//    }
+//
+//   if(is_subsidiary_block_preconditioner()&&
+//      master_block_preconditioner_pt()
+//        ->preconditioner_blocks_have_been_replaced())
+//    {
+//     std::ostringstream error_message;
+//     error_message << "Preconditioner blocks has already been precomputed in\n"
+//                   << "the block preconditioning hierarchy which this\n" 
+//                   << "block preconditioner lies in. There can not be two\n"
+//                   << "modifications to the preconditioner blocks in the same\n"
+//                   << "hierarchy."
+//                   << std::endl;
+//     throw OomphLibError(error_message.str(),
+//                         OOMPH_CURRENT_FUNCTION,
+//                         OOMPH_EXCEPTION_LOCATION);
+//    }
+//
+//   // How many block rows are there?
+//   unsigned precomputed_block_nrow = given_replacement_block_pt.nrow();
+//
+//   // Ensure that a square block matrix is given.
+//   if(precomputed_block_nrow != given_replacement_block_pt.ncol())
+//    {
+//     std::ostringstream error_message;
+//     error_message << "The number of block rows and block columns are "
+//                   << "not the same." << std::endl;
+//     throw OomphLibError(error_message.str(),
+//                         OOMPH_CURRENT_FUNCTION,
+//                         OOMPH_EXCEPTION_LOCATION);
+//    }
+//
+//   // Check that this is the most fine grain .
+//   if(precomputed_block_nrow != this->internal_ndof_types(true))
+//    {
+//     std::ostringstream error_message;
+//     error_message << "This must be the most fine grain block matrix.\n"
+//                   << "It must have ndof_types number of rows / columns.\n"
+//                   << "You have given me a " << precomputed_block_nrow
+//                   << " by " << precomputed_block_nrow << " matrix.\n"
+//                   << "I want a " << internal_ndof_types(true) << " by "
+//                   << internal_ndof_types(true)
+//                   << " matrix." << std::endl;
+//     throw OomphLibError(error_message.str(),
+//                         OOMPH_CURRENT_FUNCTION,
+//                         OOMPH_EXCEPTION_LOCATION);
+//    }
+//
+//   // Check that all matrices have been set and have been built.
+//   for (unsigned block_row_i = 0; block_row_i < precomputed_block_nrow;
+//        block_row_i++)
+//    {
+//     for (unsigned block_col_i = 0; block_col_i < precomputed_block_nrow;
+//          block_col_i++)
+//      {
+//       // Check that the block matrix has been set.
+//       if(given_replacement_block_pt(block_row_i,block_col_i) == 0)
+//        {
+//         std::ostringstream error_message;
+//         error_message << "Block (" << block_row_i
+//                       << "," << block_col_i << ")"
+//                       << " is NULL." << std::endl;
+//         throw OomphLibError(error_message.str(),
+//                             OOMPH_CURRENT_FUNCTION,
+//                             OOMPH_EXCEPTION_LOCATION);
+//        }
+//
+//       // Check that the block matrix has been built.
+//       if(!given_replacement_block_pt(block_row_i,block_col_i)->built())
+//        {
+//         std::ostringstream error_message;
+//         error_message << "Block (" << block_row_i
+//                       << "," << block_col_i << ")"
+//                       << " is not built." << std::endl;
+//         throw OomphLibError(error_message.str(),
+//                             OOMPH_CURRENT_FUNCTION,
+//                             OOMPH_EXCEPTION_LOCATION);
+//        }
+//      }
+//    }
+//
+//   // Check that the size of all matrices "make sense".
+//   // First do the rows.
+//   for (unsigned block_row_i = 0; block_row_i < precomputed_block_nrow;
+//        block_row_i++)
+//    {
+//
+//     // Note that we are checking this against the dof block dimensions in
+//     // this preconditioner. Thus at the same time we check if this is the
+//     // dimension this preconditioner expects.
+//     unsigned current_block_row_nrow
+//      = this->dof_block_dimension(block_row_i);
+//
+//     // Loop through the columns
+//     for(unsigned block_col_i = 0; block_col_i < precomputed_block_nrow;
+//         block_col_i++)
+//      {
+//       // Get the global row of this block.
+//       unsigned current_block_nrow = given_replacement_block_pt(block_row_i,
+//                                                    block_col_i)->nrow();
+//       if(current_block_row_nrow != current_block_nrow)
+//        {
+//         std::ostringstream error_message;
+//         error_message << "Block (" << block_row_i
+//                       << "," << block_col_i << ")"
+//                       << " does not have the correct number of rows."
+//                       << std::endl;
+//         throw OomphLibError(error_message.str(),
+//                             OOMPH_CURRENT_FUNCTION,
+//                             OOMPH_EXCEPTION_LOCATION);
+//        }
+//      }
+//    }
+//
+//   // Now check the columns
+//   for(unsigned block_col_i = 0; block_col_i < precomputed_block_nrow;
+//       block_col_i++)
+//    {
+//     // Get the number of columns for this block column
+//     unsigned current_block_col_ncol
+//      = given_replacement_block_pt(0,block_col_i)->ncol();
+//
+//     // Loop through the rows
+//     for(unsigned block_row_i = 0; block_row_i < precomputed_block_nrow;
+//         block_row_i++)
+//      {
+//       // Get the number of columns for this block.
+//       unsigned current_block_ncol = given_replacement_block_pt(block_row_i,
+//                                                    block_col_i)->ncol();
+//       if(current_block_col_ncol != current_block_ncol)
+//        {
+//         std::ostringstream error_message;
+//         error_message << "Block (" << block_row_i
+//                       << "," << block_col_i << ")"
+//                       << " does not have the correct number of columns."
+//                       << std::endl;
+//         throw OomphLibError(error_message.str(),
+//                             OOMPH_CURRENT_FUNCTION,
+//                             OOMPH_EXCEPTION_LOCATION);
+//        }
+//      }
+//    }
+//
+//   // This function should be used only by master preconditioners to pass
+//   // blocks to this subsidiary preconditioner. If this is a master, then we
+//   // warn the using.
+//   if(is_master_block_preconditioner())
+//    {
+//     std::ostringstream warning_message;
+//     warning_message << "Warning: This is a master preconditioner\n"
+//                     << "This function should not be called." << std::endl;
+//     throw OomphLibWarning(warning_message.str(),
+//                           OOMPH_CURRENT_FUNCTION,
+//                           OOMPH_EXCEPTION_LOCATION);
+//    }
+//#endif
+//    
+//   // Set the precomputed blocks.
+//   Replacement_dof_block_pt = given_replacement_block_pt;
+//
+//   // Flag indicating that the preconditioner blocks has been precomputed.
+//   preconditioner_blocks_have_been_replaced = true;
+//  } // EOFunc set_replacement_block(...)
 
  /// \short Access function to flag checking if the preconditioner 
  /// blocks have been precomputed.
- bool preconditioner_blocks_have_been_precomputed() const
+ bool preconditioner_blocks_have_been_replaced() const
   {
-   return Preconditioner_blocks_have_been_precomputed;
-  } // EOFunc preconditioner_blocks_have_been_precomputed()
+   // If the size of the Replacement_dof_block_pt is not zero,
+   // it means preconditioner blocks have been replaced.
+   return Replacement_dof_block_pt.nnz() != 0;
+  } // EOFunc preconditioner_blocks_have_been_replaced()
 
- /// \short Access function to the precomputed preconditioner blocks.
- DenseMatrix<CRDoubleMatrix*> replacement_block_pt() const
+ /// \short Access function to the replaced dof-level blocks.
+ MapMatrix<unsigned,CRDoubleMatrix*> replacement_dof_block_pt() const
   {
-   return Replacement_block_pt;
+   return Replacement_dof_block_pt;
   }  // EOFunc replacement_block_pt()
 
   /// \short the number of blocks precomputed. If the preconditioner blocks are
@@ -1271,7 +1330,7 @@ namespace oomph
                                    CRDoubleMatrix* block_pt,
                                    unsigned block_col_index)
   {
-    if(this->Preconditioner_blocks_have_been_precomputed)
+    if(this->preconditioner_blocks_have_been_replaced())
      {
       matvec_prod_pt->setup(block_pt,
                             Precomputed_block_distribution_pt[block_col_index]);
@@ -1405,7 +1464,7 @@ namespace oomph
   void get_block_from_original_matrix(const unsigned& i, const unsigned& j,
                                       MATRIX& output_block) const;
 
-  /// \short Gets block (i,j) from the Replacement_block_pt, which is a
+  /// \short Gets block (i,j) from the Replacement_dof_block_pt, which is a
   /// DenseMatrix of pointers to precomputed (and possibly modified)
   /// blocks. Necessary concatenation handled by this function and the
   /// result is returned in output_block.
@@ -1613,7 +1672,7 @@ namespace oomph
   }
 
   /// \short Precomputed (and possibly modified) blocks.
-  DenseMatrix<CRDoubleMatrix*> Replacement_block_pt;
+  MapMatrix<unsigned,CRDoubleMatrix*> Replacement_dof_block_pt;
   
   /// \short The distribution for precomputed blocks.
   Vector<LinearAlgebraDistribution*> Precomputed_block_distribution_pt;
@@ -1623,10 +1682,6 @@ namespace oomph
 
   /// \short Mapping for doftypes passed down from the parent preconditioner.
   Vector<Vector<unsigned> > Doftype_to_doftype_map;
-
-  /// \short Flag indicating if blocks have been precomputed 
-  /// (and possibly modified).
-  bool Preconditioner_blocks_have_been_precomputed;
   
   /// \short Flag indicating if the doftypes have been coarsened.
   bool Preconditioner_doftypes_have_been_coarsened;
