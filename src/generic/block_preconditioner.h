@@ -528,24 +528,64 @@ namespace oomph
   void return_block_ordered_preconditioner_vector(const DoubleVector& w,
                                                   DoubleVector& v) const;
 
-  /// \short Return the number of block types.
+  /// \short Return the number of dof level blocks. This should be the same
+  /// as Internal_ndof_types. The two variables are kept separate since for
+  /// backwards compatibility reasons. Before the dof type coarsening mechanism
+  /// was introduced, there was no "internal" and "external". Within the new
+  /// framework, the internal number of block types and ndof types are the
+  /// same. This is because, internally, we always work with the most fine
+  /// grain blocks, thus the internal number of blocks is the same as the
+  /// internal number of dof types.
   unsigned internal_nblock_types() const
   {
-    return Internal_nblock_types;
-  } // EOFunc Internal_nblock_types(...)
+#ifdef PARANOID
+      if(Internal_nblock_types == 0)
+      {
+        std::ostringstream error_msg;
+        error_msg <<"(Internal_nblock_types == 0) is true. \n"
+          << "Did you remember to call the function block_setup(...)?\n\n"
 
-  /// \short Return the number of block types.
+          << "This variable is always set up within block_setup(...).\n"
+          << "If block_setup() is already called, then perhaps there is\n"
+          << "something wrong with your block preconditionable elements.\n"
+          << std::endl;
+        throw OomphLibError(error_msg.str(),
+            OOMPH_CURRENT_FUNCTION,
+            OOMPH_EXCEPTION_LOCATION);
+      }
+
+      // RAYRAY put in a paranoid check that Internal_ndof_types == Internal_nblock_types.
+      // If they are not the same, then something has gone wrong.
+      // I cannot do this now since the Internal_nblock_types could still have
+      // several dof types. This will be changed later when I remove the
+      // temp vector in block_setup(...)
+#endif
+    return Internal_nblock_types;
+  } // EOFunc internal_nblock_types(...)
+
+  /// \short Return the number of block types that this preconditioner expects.
+  /// In all cases, this should be used. The function internal_ndof_types(...)
+  /// returns the number of dof level blocks.
   unsigned nblock_types() const
   {
-    if(preconditioner_blocks_have_been_replaced())
-    {
-      return nblock_types_precomputed();
-    }
-    else
-    {
-      return Internal_nblock_types;
-    }
-  } // EOFunc Internal_nblock_types(...)
+#ifdef PARANOID
+      if(Doftype_to_block_map.size() == 0)
+      {
+        std::ostringstream error_msg;
+        error_msg <<"The Doftype_to_block_map vector is not setup for \n"
+          << "this block preconditioner.\n\n"
+
+          << "This vector is always set up within block_setup(...).\n"
+          << "If block_setup() is already called, then perhaps there is\n"
+          << "something wrong with your block preconditionable elements.\n"
+          << std::endl;
+        throw OomphLibError(error_msg.str(),
+            OOMPH_CURRENT_FUNCTION,
+            OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+    return Doftype_to_block_map.size();
+  } // EOFunc nblock_types(...)
 
 
 
@@ -1360,14 +1400,6 @@ namespace oomph
   {
    return Replacement_dof_block_pt;
   }  // EOFunc replacement_block_pt()
-
-  /// \short the number of blocks precomputed. If the preconditioner blocks are
-  /// precomputed then it should be the same as the nblock_types 
-  /// REQUIRED by this preconditioner.
-  unsigned nblock_types_precomputed() const
-  {
-   return Doftype_to_block_map.size();
-  }
 
   /// \short Setup a matrix vector product.
   /// The distribution of the block column must be the same as the 

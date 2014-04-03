@@ -2240,7 +2240,7 @@ namespace oomph
   // Set the master block preconditioner pointer
   Master_block_preconditioner_pt = master_block_prec_pt;
 
-  // Set the Doftype_to_doftype_map.
+  // Set the Doftype_coarsen_map_coarse.
   Doftype_coarsen_map_coarse = doftype_coarsen_map_coarse;
 
   Doftype_in_master_preconditioner_coarse 
@@ -3772,15 +3772,15 @@ namespace oomph
  {
 #ifdef PARANOID
   // the number of blocks
-  unsigned n_blocks = nblock_types_precomputed();
+  unsigned n_blocks = nblock_types();
 
   // paranoid check that block i is in this block preconditioner
   if (b >= n_blocks)
    {
     std::ostringstream error_message;
     error_message << "Requested block  vector " << b
-                  << ", however this preconditioner has nblock_types_precomputed() "
-                  << "= " << nblock_types_precomputed() << std::endl;
+                  << ", however this preconditioner has nblock_types() "
+                  << "= " << nblock_types() << std::endl;
     throw OomphLibError(error_message.str(),
                         OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
@@ -4990,14 +4990,14 @@ namespace oomph
  {
 #ifdef PARANOID
   // the number of blocks RAYRAY change this to the block types the preconditioner expects
-  unsigned nblocks = nblock_types_precomputed();
+  unsigned nblocks = nblock_types();
   
   // paranoid check that block i is in this block preconditioner
   if (block_i >= nblocks || block_j >= nblocks)
    {
     std::ostringstream error_message;
     error_message << "Requested block (" << block_i << "," << block_j   
-                  << "), however this preconditioner has nblock_types_precomputed() "
+                  << "), however this preconditioner has nblock_types() "
                   << "= " << nblocks << std::endl;
     throw OomphLibError(error_message.str(),
                         OOMPH_CURRENT_FUNCTION,
