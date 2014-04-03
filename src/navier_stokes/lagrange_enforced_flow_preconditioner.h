@@ -1765,6 +1765,39 @@ namespace oomph
 
     doftype_to_doftype_map.push_back(ns_p_vec);
 
+//    // RAYRAY REMOVE
+//    Doftype_coarsen_map_fine.resize(0);
+//    Vector<unsigned> tmp0;
+//    tmp0.push_back(0);
+//    tmp0.push_back(1);
+//    tmp0.push_back(2);
+//    tmp0.push_back(3);
+//    Vector<unsigned> tmp1;
+//    tmp1.push_back(4);
+//    tmp1.push_back(5);
+//    tmp1.push_back(6);
+//    tmp1.push_back(7);
+//    Vector<unsigned> tmp2;
+//    tmp2.push_back(8);
+//    tmp2.push_back(9);
+//    tmp2.push_back(10);
+//    tmp2.push_back(11);
+//    Vector<unsigned> tmp3;
+//    tmp3.push_back(12);
+//    tmp3.push_back(13);
+//    Vector<unsigned> tmp4;
+//    tmp4.push_back(14);
+//    tmp4.push_back(15);
+//    Doftype_coarsen_map_fine.push_back(tmp0);
+//    Doftype_coarsen_map_fine.push_back(tmp1);
+//    Doftype_coarsen_map_fine.push_back(tmp2);
+//    Doftype_coarsen_map_fine.push_back(tmp3);
+//    Doftype_coarsen_map_fine.push_back(tmp4);
+
+//    pause("Before turn into..."); 
+    
+
+
     // The ns_dof_list will ensure that the NS preconditioner have the 
     // structure:
     // 0  1  2  3  4  5  6
@@ -1772,6 +1805,9 @@ namespace oomph
     navier_stokes_block_preconditioner_pt
      ->turn_into_subsidiary_block_preconditioner(this, ns_dof_list,
                                                  doftype_to_doftype_map);
+
+//    pause("After turn_into..."); 
+    
 
     // Set the replacement blocks.
     for (unsigned row_i = 0; row_i < N_fluid_doftypes; row_i++) 
@@ -1783,11 +1819,17 @@ namespace oomph
                                       f_subblock_pt(row_i,col_i));
       }
     }
+//    pause("I have set the replacement blocks"); 
+    
 //    navier_stokes_block_preconditioner_pt
 //     ->set_replacement_block(f_subblock_pt);
 
+//    pause("About to call setup of NS prec."); 
+    
     navier_stokes_block_preconditioner_pt
      ->setup(matrix_pt(), comm_pt());
+//    pause("after call to setup of NS prec."); 
+    
     
     for (unsigned i = 0; i < N_fluid_doftypes; i++)
      {

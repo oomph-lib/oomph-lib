@@ -203,7 +203,7 @@ namespace oomph
   /// function with an empty doftype_to_doftype_map vector.
   void turn_into_subsidiary_block_preconditioner
   (BlockPreconditioner<MATRIX>* master_block_prec_pt,
-   Vector<unsigned>& dof_number_in_master_preconditioner_coarse);
+   Vector<unsigned>& doftype_in_master_preconditioner_coarse);
 
   /// \short Function to turn this preconditioner into a
   /// subsidiary preconditioner that operates within a bigger
@@ -237,8 +237,8 @@ namespace oomph
   /// [6]
   void turn_into_subsidiary_block_preconditioner
   (BlockPreconditioner<MATRIX>* master_block_prec_pt,
-   Vector<unsigned>& dof_number_in_master_preconditioner_coarse,
-   Vector<Vector<unsigned> > & dof_coarsen_map_coarse);
+   Vector<unsigned>& doftype_in_master_preconditioner_coarse,
+   Vector<Vector<unsigned> > & doftype_coarsen_map_coarse);
 
   /// \short Specify the number of meshes required by this block
   /// preconditioner.
@@ -1038,6 +1038,30 @@ namespace oomph
    oomph_info << std::endl;
   } // EOFunc document()
 
+  /// \short Access function for the most fine grain dof types in a coarsened
+  /// dof type.
+  Vector<unsigned> get_fine_grain_dof_types_in(unsigned& i) const
+  {
+    // RAYRAY check if i is in the range 0 < Doftype_coarsen_map_fine.size()
+
+    return Doftype_coarsen_map_fine[i];
+  }
+
+  /// \short Access function for the Doftype_coarsen_map_fine
+  /// variable.
+  Vector<Vector<unsigned> > doftype_coarsen_map_fine() const
+  {
+    return Doftype_coarsen_map_fine;
+  }
+
+  /// \short Access function for the number of most fine grain dof types in 
+  /// a coarsened dof type.
+  unsigned internal_ndof_types_in(unsigned& i) const
+  {
+    // RAYRAY check if i is in the range 0 < Doftype_coarsen_map_fine.size()
+
+    return Doftype_coarsen_map_fine[i].size();
+  }
 
   /// \short Set the precomputed (and possibly modified) preconditioner blocks.
   /// The precomputed_block_pt is a Dense matrix of pointers of precomputed 
@@ -1684,8 +1708,51 @@ namespace oomph
   /// \short Mapping for blocks passed down from the parent preconditioner.
   Vector<Vector<unsigned> > Doftype_to_block_map;
 
-  /// \short Mapping for doftypes passed down from the parent preconditioner.
+  /// \short Mapping for dof types within THIS precondition. This is usually
+  /// passed down from the parent preconditioner.
+  /// This list is used to tell which does types should
+  /// be considered as a single dof type within this preconditioner. I.e. we
+  /// "coarsen" the dof types. The values are local to this preconditioner,
+  /// for example, even if the 
+  /// Doftype_in_master_preconditioner_coarse = [2,3,4], the vector
+  /// Doftype_coarsen_map_coarse = [[0],[1,2]], saying your local dof types
+  /// 0 should be considered as dof type 0 and dof types 1 and 2 are considered
+  /// as dof type 1.
+  /// 
+  /// Furthermore, the dof types are that the preconditioner above this one 
+  /// knows; these dof types may or may not be coarsened. For example, say that
+  /// this preconditioner expects two dof types, 0 and 1.
+  /// The preconditioner above this one wishes to use this preconditioner to 
+  /// solve the block associated with it's dof types 2, 3 and 4. It passes the
+  /// Vector [2,3,4] to this preconditioner via the function 
+  /// turn_into_subsidiary_block_preconditioner(...), this list is to be stored
+  /// in Doftype_in_master_preconditioner_coarse. It also passes in the
+  /// 2D vector [[0][1,2]] (as described above), this list is to be stored in
+  /// Doftype_coarsen_map_coarse. BUT, the master's preconditioner dof types
+  /// may also be coarsened. I.e. the underlying dof types of the master block
+  /// preconditioner may be [0,1,2,3,4,5,6,7], for which it may have the 
+  /// Doftype_coarsen_map_coarse = [[0,1][2,3][4,5][6,7]].
+  /// 
+  /// An additional list has to be kept for the most fine grain dof type 
+  /// mapping. This is stored in Doftype_coarsen_map_fine, in this case it 
+  /// would be:
+  /// 
+  /// Doftype_coarsen_map_fine = [[0,1][2,3,4,5]], since the dof types passed
+  /// to this preconditioner is [2, 3, 4] from the master preconditioner, but
+  /// it actually refers to the underlying dof types [2,3,4,5,6,7].
+  /// 
+  /// In the case of the top most master block 
+  /// preconditioner, the block_setup(...) function fills the vector with the
+  /// identity mapping.
   Vector<Vector<unsigned> > Doftype_coarsen_map_coarse;
+
+  /// \short Mapping the dof types within this preconditioner. The values in
+  /// here refers to the most grain dof types. This list is automatically
+  /// generated either in block_setup(...) (for the top-most preconditioner)
+  /// or the turn_into_subsidiary_block_preconditioner(...) function.
+  /// Please refer to the comment above Doftype_coarsen_map_coarse for more
+  /// details.
+  Vector<Vector<unsigned> > Doftype_coarsen_map_fine;
   
   /// \short Flag indicating if the doftypes have been coarsened.
   bool Preconditioner_doftypes_have_been_coarsened;
@@ -1734,9 +1801,17 @@ namespace oomph
   /// then this  pointer remains null.
   BlockPreconditioner<MATRIX>* Master_block_preconditioner_pt;
 
-  /// \short The map between the blocks in the preconditioner and the master
+  /// \short The map between the dof types in this preconditioner and the master
   /// preconditioner. If there is no master preconditioner it remains empty.
+  /// This list contains the mapping for the underlying dof types.
   Vector<unsigned> Doftype_in_master_preconditioner_fine;
+
+  /// \short The map between the dof types in this preconditioner and the 
+  /// master preconditioner. If there is no master preconditioner, it remains
+  /// empty. This is the version for which the master preconditioner expects.
+  /// The dof types in here may or may not be coarsened in the preconditioner
+  /// above this one.
+  Vector<unsigned> Doftype_in_master_preconditioner_coarse;
 
   /// \short **This was uncommented** Presumably a non-distributed analogue of
   /// Index_in_dof_block_sparse.
