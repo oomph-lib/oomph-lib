@@ -166,11 +166,11 @@ namespace oomph
 #endif
   }
 
-  // Now we create the vector Doftype_to_block_map.
+  // Now we create the vector Block_to_dof_map_coarse.
   // Recall that the vector describe which dof types are in which block with 
   // the relationship:
   //
-  // Doftype_to_block_map[block_number] = Vector[dof types];
+  // Block_to_dof_map_coarse[block_number] = Vector[dof types];
   //
   // Note that this is not the internal (underlying) dof type.
   //
@@ -225,7 +225,7 @@ namespace oomph
                             OOMPH_EXCEPTION_LOCATION);
      }
 
-    // Create the Doftype_to_block_map from 
+    // Create the Block_to_dof_map_coarse from 
     // the dof_to_block_map and Doftype_coarsen_map_coarse.
 
     // find the maximum block number
@@ -243,12 +243,12 @@ namespace oomph
     //
     // and the dof_to_block_map is [0 0 0 1].
     //
-    // Then we need to form the Doftype_to_block_map:
+    // Then we need to form the Block_to_dof_map_coarse:
     // [0 3 6 1 4 7 2 5 8]
     // [9]
 
-    // Clear anything in the Doftype_to_block_map
-    Doftype_to_block_map.clear();
+    // Clear anything in the Block_to_dof_map_coarse
+    Block_to_dof_map_coarse.clear();
 
     // Loop through all the blocks. There are max_block_number + 1 number of
     // blocks, hence the <= loop condition.
@@ -277,8 +277,8 @@ namespace oomph
        }
 
       // Push the vector with dof types associated with block block_type_i
-      // into the Doftype_to_block_map vector.
-      Doftype_to_block_map.push_back(temp_doftype_vec);
+      // into the Block_to_dof_map_coarse vector.
+      Block_to_dof_map_coarse.push_back(temp_doftype_vec);
      }
 
     // Now set the dof_to_block_map to the identify.
@@ -299,9 +299,10 @@ namespace oomph
      {
       dof_to_block_map[i] = i;
      }
-  } // end of Doftype_to_block_map encapsulation
-
-  std::cout << "Has blocks been replaced?" << preconditioner_blocks_have_been_replaced() << std::endl; 
+  } // end of Block_to_dof_map_coarse encapsulation
+  // RAYRAY REMOVE
+  std::cout << "From block_setup(...), has blocks been replaced?" 
+            << preconditioner_blocks_have_been_replaced() << std::endl; 
   
 
   // RAYRAY REMOVE
@@ -1425,36 +1426,37 @@ namespace oomph
   // block distributions.
   if(preconditioner_blocks_have_been_replaced())
    {
-    // Delete any existing distributions in Precomputed_block_distribution_pt.
+    // Delete any existing distributions in Block_distribution_pt.
     unsigned n_existing_precom_block_dist 
-     = Precomputed_block_distribution_pt.size();
+     = Block_distribution_pt.size();
     for (unsigned dist_i = 0; dist_i < n_existing_precom_block_dist; dist_i++) 
      {
-      delete Precomputed_block_distribution_pt[dist_i];
+      delete Block_distribution_pt[dist_i];
      }
 
     // Work out the distributions of the concatenated blocks.
-    unsigned super_block_size = Doftype_to_block_map.size();
-    Precomputed_block_distribution_pt.resize(super_block_size,0);
+    unsigned super_block_size = Block_to_dof_map_coarse.size();
+    Block_distribution_pt.resize(super_block_size,0);
     for (unsigned super_block_i = 0; 
          super_block_i < super_block_size; super_block_i++)
      {
-      unsigned sub_block_size = Doftype_to_block_map[super_block_i].size();
+      unsigned sub_block_size = Block_to_dof_map_coarse[super_block_i].size();
       Vector<LinearAlgebraDistribution*> tmp_dist_pt(sub_block_size,0);
       
       for (unsigned sub_block_i = 0; 
            sub_block_i < sub_block_size; sub_block_i++) 
        {
+         // RAYRAY use the Dof_block_distribution_pt when it is set up
         tmp_dist_pt[sub_block_i] 
          = Internal_block_distribution_pt[
-             Doftype_to_block_map[super_block_i][sub_block_i]];
+             Block_to_dof_map_coarse[super_block_i][sub_block_i]];
        }
   
-      Precomputed_block_distribution_pt[super_block_i] 
+      Block_distribution_pt[super_block_i] 
        = new LinearAlgebraDistribution;
   
       LinearAlgebraDistributionHelpers::concatenate(
-        tmp_dist_pt,*Precomputed_block_distribution_pt[super_block_i]);
+        tmp_dist_pt,*Block_distribution_pt[super_block_i]);
      }
    }
 
@@ -2260,7 +2262,9 @@ namespace oomph
   }
 
   // RAYRAY REMOVE
-  std::cout << "Preconditioner_doftypes_have_been_coarsened: " << Preconditioner_doftypes_have_been_coarsened << std::endl; 
+  std::cout << "from turn into sub..., "
+            << "preconditioner doftypes have been coarsened: " 
+            << Preconditioner_doftypes_have_been_coarsened << std::endl; 
 
   // Set the mapping from the master preconditioner dof types to the
   // subsidiary preconditioner dof types. 
@@ -2669,6 +2673,7 @@ namespace oomph
  {
 
   // Cache number of block types
+  // RAYRAY this needs to be changed to the external blocks.
   const unsigned n_block_types=this->Internal_nblock_types;
 
 #ifdef PARANOID
@@ -3062,7 +3067,7 @@ namespace oomph
    }
 #endif
 
-  const unsigned nprecomputed_blocks = Doftype_to_block_map.size();
+  const unsigned nprecomputed_blocks = Block_to_dof_map_coarse.size();
   s.resize(nprecomputed_blocks);
   
   for (unsigned b_i = 0; b_i < nprecomputed_blocks; b_i++) 
@@ -3385,7 +3390,7 @@ namespace oomph
    const Vector<DoubleVector >& s, DoubleVector& v) const
  {
   // the number of blocks
-  unsigned nprecomputedblock = Doftype_to_block_map.size();
+  unsigned nprecomputedblock = Block_to_dof_map_coarse.size();
 
 #ifdef PARANOID
   if(!preconditioner_blocks_have_been_replaced())
@@ -3440,13 +3445,13 @@ namespace oomph
                           OOMPH_EXCEPTION_LOCATION);
      }
     
-    if (*(s[b].distribution_pt()) != *(Precomputed_block_distribution_pt[b]))
+    if (*(s[b].distribution_pt()) != *(Block_distribution_pt[b]))
      {
       std::ostringstream error_message;
       error_message << "The distribution of the block vector " << b
                     << "must match the"
                     << " specified distribution at "
-                    << "Precomputed_block_distribution_pt["
+                    << "Block_distribution_pt["
                     << b << "]";
       throw OomphLibError(error_message.str(),
                           OOMPH_CURRENT_FUNCTION,
@@ -3477,7 +3482,7 @@ namespace oomph
  {
 #ifdef PARANOID
   // the number of blocks
-  unsigned n_blocks = Doftype_to_block_map.size();
+  unsigned n_blocks = Block_to_dof_map_coarse.size();
 
   // paranoid check that block i is in this block preconditioner
   if (b >= n_blocks)
@@ -3522,12 +3527,12 @@ namespace oomph
 #endif
 
   // How many block vectors do we need to concatenate?
-  unsigned nblocks_to_cat = Doftype_to_block_map[b].size();
+  unsigned nblocks_to_cat = Block_to_dof_map_coarse[b].size();
   if(nblocks_to_cat == 1)
    // If there is only one block vector, we simply extract it.
    {
     this->get_block_vector_with_original_matrix_ordering(
-                                                         Doftype_to_block_map[b][0],v,w);
+                                                         Block_to_dof_map_coarse[b][0],v,w);
    }
   else
    // We need to concatenate multiple block vectors.
@@ -3537,7 +3542,7 @@ namespace oomph
     for (unsigned b_i = 0; b_i < nblocks_to_cat; b_i++) 
      {
       this->get_block_vector_with_original_matrix_ordering(
-                                                           Doftype_to_block_map[b][b_i], v,tmp_block_vector[b_i]);
+                                                           Block_to_dof_map_coarse[b][b_i], v,tmp_block_vector[b_i]);
      }
      
     Vector<DoubleVector*> tmp_block_vector_pt(nblocks_to_cat,0);
@@ -3547,7 +3552,7 @@ namespace oomph
      }
   
     // Build w with the correct distribution.
-    w.build(Precomputed_block_distribution_pt[b],0);
+    w.build(Block_distribution_pt[b],0);
   
     // Concatenate the vectors
     DoubleVectorHelpers::concatenate_without_communication
@@ -3827,14 +3832,14 @@ namespace oomph
 #endif
   
   // How many dof types does this block type represent?
-  unsigned nblocks_to_split_into = Doftype_to_block_map[b].size();
+  unsigned nblocks_to_split_into = Block_to_dof_map_coarse[b].size();
 
   if(nblocks_to_split_into == 1)
    // If there is one block vector to return, we simply return the one block
    // vector
    {
     this->return_block_vector_with_original_matrix_ordering(
-                                                            Doftype_to_block_map[b][0],w,v);
+                                                            Block_to_dof_map_coarse[b][0],w,v);
    }
   else
    // Otherwise this block vector correspondings to more than one dof types.
@@ -3847,7 +3852,7 @@ namespace oomph
     for (unsigned b_i = 0; b_i < nblocks_to_split_into; b_i++) 
      {
       tmp_block_vector[b_i].build(this->block_distribution_pt
-                                  (Doftype_to_block_map[b][b_i]));
+                                  (Block_to_dof_map_coarse[b][b_i]));
      }
   
     Vector<DoubleVector*> tmp_block_vector_pt(nblocks_to_split_into,0);
@@ -3863,7 +3868,7 @@ namespace oomph
     for (unsigned b_i = 0; b_i < nblocks_to_split_into; b_i++) 
      {
       this->return_block_vector_with_original_matrix_ordering(
-                                                              Doftype_to_block_map[b][b_i], tmp_block_vector[b_i],v);
+                                                              Block_to_dof_map_coarse[b][b_i], tmp_block_vector[b_i],v);
      }
    }
  }
@@ -5019,15 +5024,15 @@ namespace oomph
 
   // Create the dense matrix required for the merge.
   // How many block rows and columns?
-  const unsigned nblock_in_row = Doftype_to_block_map[block_i].size();
-  const unsigned nblock_in_col = Doftype_to_block_map[block_j].size();
+  const unsigned nblock_in_row = Block_to_dof_map_coarse[block_i].size();
+  const unsigned nblock_in_col = Block_to_dof_map_coarse[block_j].size();
   
   if((nblock_in_row == 1) && (nblock_in_col == 1))
    {
      
     // Do not need to invoke concatenate function.
-    unsigned prec_block_i = Doftype_to_block_map[block_i][0];
-    unsigned prec_block_j = Doftype_to_block_map[block_j][0];
+    unsigned prec_block_i = Block_to_dof_map_coarse[block_i][0];
+    unsigned prec_block_j = Block_to_dof_map_coarse[block_j][0];
 
     // Cache the pointer to the precomputed block.
     CRDoubleMatrix* precom_block_pt = 0;
@@ -5057,11 +5062,11 @@ namespace oomph
   // Fill in the corresponding matrices.
   for (unsigned block_row_i = 0; block_row_i < nblock_in_row; block_row_i++) 
    {
-    unsigned prec_block_i = Doftype_to_block_map[block_i][block_row_i];
+    unsigned prec_block_i = Block_to_dof_map_coarse[block_i][block_row_i];
 
     for (unsigned block_col_i = 0; block_col_i < nblock_in_col; block_col_i++) 
      {
-      unsigned prec_block_j = Doftype_to_block_map[block_j][block_col_i];
+      unsigned prec_block_j = Block_to_dof_map_coarse[block_j][block_col_i];
     
       tmp_block_pt(block_row_i,block_col_i) = 0;
       if(Replacement_dof_block_pt.get(prec_block_i,prec_block_j) == 0)
@@ -5090,13 +5095,13 @@ namespace oomph
   // rows that these block columns correspond to.
   for (unsigned block_col_i = 0; block_col_i < nblock_in_col; block_col_i++) 
    {
-    unsigned prec_row_block_i = Doftype_to_block_map[block_j][block_col_i];
+    unsigned prec_row_block_i = Block_to_dof_map_coarse[block_j][block_col_i];
 
     tmp_col_distribution_pt[block_col_i] 
       = Internal_block_distribution_pt[prec_row_block_i];
    }
 
-  output_block.build(Precomputed_block_distribution_pt[block_i]);
+  output_block.build(Block_distribution_pt[block_i]);
 
   // Concatenate the matrix.
   // For now, we use concatenate_without_communication(...) since none of the
@@ -5107,11 +5112,11 @@ namespace oomph
 
   for (unsigned block_row_i = 0; block_row_i < nblock_in_row; block_row_i++) 
    {
-    unsigned prec_block_i = Doftype_to_block_map[block_i][block_row_i];
+    unsigned prec_block_i = Block_to_dof_map_coarse[block_i][block_row_i];
 
     for (unsigned block_col_i = 0; block_col_i < nblock_in_col; block_col_i++) 
      {
-      unsigned prec_block_j = Doftype_to_block_map[block_j][block_col_i];
+      unsigned prec_block_j = Block_to_dof_map_coarse[block_j][block_col_i];
     
       if(Replacement_dof_block_pt.get(prec_block_i,prec_block_j) == 0)
       { 

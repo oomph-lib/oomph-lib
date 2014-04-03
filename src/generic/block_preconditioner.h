@@ -131,7 +131,7 @@ namespace oomph
    
    // RAYRAY this is to be removed.
    // There are no precomputed block distributions to start off with.
-   Precomputed_block_distribution_pt.resize(0);
+   Block_distribution_pt.resize(0);
 
    // The distribution of the underlying internal blocks.
    Internal_block_distribution_pt.resize(0);
@@ -141,11 +141,8 @@ namespace oomph
    // RAYRAY - may not be needed?
    Dof_block_distribution_pt.resize(0);
 
-   // The distribution of the blocks.
-   Block_distribution_pt.resize(0);
-
-   // Clear the Doftype_to_block_map
-   Doftype_to_block_map.clear();
+   // Clear the Block_to_dof_map_coarse
+   Block_to_dof_map_coarse.clear();
   } // EOFunc constructor
 
   /// Destructor
@@ -153,13 +150,13 @@ namespace oomph
   {
    // Delete any existing precomputed block distributions.
    unsigned n_existing_precom_block_dist 
-     = Precomputed_block_distribution_pt.size();
+     = Block_distribution_pt.size();
     for (unsigned dist_i = 0; dist_i < n_existing_precom_block_dist; dist_i++) 
     {
-      delete Precomputed_block_distribution_pt[dist_i];
+      delete Block_distribution_pt[dist_i];
     }
 
-    Precomputed_block_distribution_pt.clear();
+    Block_distribution_pt.clear();
 
    this->clear_block_preconditioner_base();
   } // EOFunc destructor
@@ -382,16 +379,22 @@ namespace oomph
     // would want to use them.
     if(Preconditioner_doftypes_have_been_coarsened)
     {
+      // RAYRAY REMOVE
+      std::cout << "GETTING COARSENED BLOCK(" << i << "," << j<<")" << std::endl; 
       get_coarsened_block(i,j,output_matrix);
     }
     else
     {
       if(Replacement_dof_block_pt.get(i,j) == 0)
       {
+        // RAYRAY REMOVE
+        std::cout << "GETTING ORIGINAL MATRIX BLOCK("<<i<<","<<j<<")"<< std::endl; 
         get_block_from_original_matrix(i,j,output_matrix);
       }
       else
       {
+        // RAYRAY REMOVE
+        std::cout << "GETTING REPLACEMENT BLOCK("<<i<<","<<j<<")" << std::endl; 
         cr_double_matrix_deep_copy(Replacement_dof_block_pt.get(i,j),
             output_matrix);
       }
@@ -596,10 +599,10 @@ namespace oomph
   unsigned nblock_types() const
   {
 #ifdef PARANOID
-      if(Doftype_to_block_map.size() == 0)
+      if(Block_to_dof_map_coarse.size() == 0)
       {
         std::ostringstream error_msg;
-        error_msg <<"The Doftype_to_block_map vector is not setup for \n"
+        error_msg <<"The Block_to_dof_map_coarse vector is not setup for \n"
           << "this block preconditioner.\n\n"
 
           << "This vector is always set up within block_setup(...).\n"
@@ -611,7 +614,7 @@ namespace oomph
             OOMPH_EXCEPTION_LOCATION);
       }
 #endif
-    return Doftype_to_block_map.size();
+    return Block_to_dof_map_coarse.size();
   } // EOFunc nblock_types(...)
 
 
@@ -1424,7 +1427,7 @@ namespace oomph
     if(this->preconditioner_blocks_have_been_replaced())
      {
       matvec_prod_pt->setup(block_pt,
-                            Precomputed_block_distribution_pt[block_col_index]);
+                            Block_distribution_pt[block_col_index]);
      }
     else
      {
@@ -1766,10 +1769,10 @@ namespace oomph
   MapMatrix<unsigned,CRDoubleMatrix*> Replacement_dof_block_pt;
   
   /// \short The distribution for precomputed blocks.
-  Vector<LinearAlgebraDistribution*> Precomputed_block_distribution_pt;
+  Vector<LinearAlgebraDistribution*> Block_distribution_pt;
 
   /// \short Mapping for blocks passed down from the parent preconditioner.
-  Vector<Vector<unsigned> > Doftype_to_block_map;
+  Vector<Vector<unsigned> > Block_to_dof_map_coarse;
 
   /// \short Mapping for dof types within THIS precondition. This is usually
   /// passed down from the parent preconditioner.
@@ -1826,9 +1829,6 @@ namespace oomph
   /// \short Storage for the default distribution for each dof block at
   /// this level.
   Vector<LinearAlgebraDistribution*> Dof_block_distribution_pt;
-
-  /// \short Storage for the default distribution for each block.
-  Vector<LinearAlgebraDistribution*> Block_distribution_pt;
 
   /// \short Vector of unsigned to indicate which meshes contain multiple
   /// element types.

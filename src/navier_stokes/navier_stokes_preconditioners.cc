@@ -148,6 +148,29 @@ namespace oomph
   // For debugging...
   bool doc_block_matrices=false;
 
+// RAYRAY REMOVE
+//  pause("Got in LSC!!!");
+//
+//  block_setup();
+//
+//  std::cout << "ndof_types() = " << this->ndof_types() << std::endl;
+//  std::cout << "internal_ndof_types() = " << this->internal_ndof_types() << std::endl; 
+//  std::cout << "nblock_types() = " << this->nblock_types() << std::endl;
+//  std::cout << "internal_nblock_types() = " << this->internal_nblock_types() << std::endl; 
+// 
+//  
+//  // Output all the blocks from original... and get block....
+//  unsigned tmp_nblock_types = this->internal_ndof_types();
+//  std::cout << "nblock_types() " << tmp_nblock_types << std::endl; 
+//
+//  CRDoubleMatrix tmp_blk = get_block(1,1);
+//
+//  
+//  pause("LSC TIMBERRRR"); 
+  
+
+  
+
   //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   // NOTE: In the interest of minimising memory usage, several containers
   //       are recycled, therefore their content/meaning changes
@@ -318,14 +341,14 @@ namespace oomph
           // We only need the velocity mass matrix
           assemble_inv_press_and_veloc_mass_matrix_diagonal
             (inv_p_mass_pt, inv_v_mass_sub_pt(block_i,block_i), 
-             false, this->Doftype_to_block_map[0][block_i]); // RAYRAY this is very dodgy, check this!
+             false, this->Block_to_dof_map_coarse[0][block_i]); // RAYRAY this is very dodgy, check this!
          }
 
         // We now have all the vmm. We need to concatenate them.
 
         // Build the matrix with just the distribution.
         inv_v_mass_pt = 
-          new CRDoubleMatrix(this->Precomputed_block_distribution_pt[0]);
+          new CRDoubleMatrix(this->Block_distribution_pt[0]);
 
         // Get the linear algebra distributions of the blocks we require.
         Vector<LinearAlgebraDistribution*> tmp_dist_pt(n_velocity_doftypes,0);
