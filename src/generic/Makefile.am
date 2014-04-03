@@ -106,15 +106,11 @@ general_purpose_block_preconditioners.h SuperLU_preconditioner.h \
 matrix_vector_product.h projection.h line_visualiser.h \
 Subparametric_Telements.h \
 sum_of_matrices.h convergence_data.h midpoint_method.h poly_interp.h \
-<<<<<<< HEAD
 preconditioner_array.h pml_meshes.h generalised_timesteppers.h \
-face_mesh_project.h
-=======
+face_mesh_project.h \
 prettyprint98.h \
-vector_matrix.h \
-preconditioner_array.h pml_meshes.h
+vector_matrix.h 
 
->>>>>>> Block preconditioning framework is fully working. Needs cleaning up.
 
 if OOMPH_HAS_MUMPS
 headers+=mumps_solver.h
