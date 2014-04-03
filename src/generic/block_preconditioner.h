@@ -1204,30 +1204,64 @@ namespace oomph
                          const MATRIX* block_matrix_pt) const;
 
 
-  /// **No comment was on this function** I think it is some kind of binary
-  /// search in the vector vec for value el, it looks like it returns -1 for a
-  /// failure - David Shepherd.
-  int get_index_of_element(const Vector<unsigned>& vec, const unsigned el) const
-  {
-   int lo = 0;
-   int hi = vec.size();
-   int mid = (hi+lo)/2;
-   while (vec[mid] != el)
-    {
-     if (vec[mid] < el)
-      {
-       if (hi==mid) return -1;
-       lo = mid;
-      }
-     else
-      {
-       if (lo==mid) return -1;
-       hi = mid;
-      }
-     mid = (hi+lo)/2;
-    }
-   return mid;
-  }
+// RAYRAY - this has been replaced by the function
+// get_index_of_value(...), which uses STL functions. The equivalent of this
+// function is called when the optional parameter is set to "true".
+//
+//  /// **No comment was on this function** I think it is some kind of binary
+//  /// search in the vector vec for value el, it looks like it returns -1 for a
+//  /// failure - David Shepherd.
+//  int get_index_of_element(const Vector<unsigned>& vec, const unsigned el) const
+//  {
+//   int lo = 0;
+//   int hi = vec.size();
+//   int mid = (hi+lo)/2;
+//   while (vec[mid] != el)
+//    {
+//     if (vec[mid] < el)
+//      {
+//       if (hi==mid) return -1;
+//       lo = mid;
+//      }
+//     else
+//      {
+//       if (lo==mid) return -1;
+//       hi = mid;
+//      }
+//     mid = (hi+lo)/2;
+//    }
+//   return mid;
+//  }
+
+ /// \short Get the index of first occurrence of value in a vector.
+ /// If the element does not exist, -1 is returned.
+ /// The optional parameter indicates of the Vector is sorted or not.
+ /// Complexity: if the Vector is sorted, then on average, logarithmic in the 
+ /// distance between first and last: Performs approximately log2(N)+2 
+ /// element comparisons.
+ /// Otherwise, up to linear in the distance between first and last: 
+ /// Compares elements until a match is found.
+ /// 
+ /// RAYRAY - tried to move this to oomph_utilities... 
+ /// it keeps giving me an error...
+ template<typename myType>
+ inline int get_index_of_value(const Vector<myType>& vec, 
+                               const myType val,
+                               const bool sorted = false) const
+ {
+   if(sorted)
+   {
+     typename Vector<myType>::const_iterator low 
+       = std::lower_bound(vec.begin(),vec.end(),val);
+ 
+     return (low == vec.end() || *low != val) ? -1 : (low - vec.begin());
+   }
+   else
+   {
+     int pos = std::find(vec.begin(),vec.end(),val) - vec.begin();
+     return (pos < int(vec.size()) && pos >=0) ? pos : -1;
+   }
+ }
 
  protected:
 
@@ -1358,7 +1392,8 @@ namespace oomph
       }
      else
       {
-       int index = this->get_index_of_element(Global_index_sparse,i_dof);
+       //int index = this->get_index_of_element(Global_index_sparse,i_dof);
+       int index = get_index_of_value<unsigned>(Global_index_sparse,i_dof,true);
        if (index >= 0)
         {
          return Dof_number_sparse[index];
@@ -1421,7 +1456,8 @@ namespace oomph
       }
      else
       {
-       int index = this->get_index_of_element(Global_index_sparse,i_dof);
+       //int index = this->get_index_of_element(Global_index_sparse,i_dof);
+       int index = get_index_of_value<unsigned>(Global_index_sparse,i_dof,true);
        if (index >= 0)
         {
          return Index_in_dof_block_sparse[index];
