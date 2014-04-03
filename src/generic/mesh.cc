@@ -7933,10 +7933,8 @@ void Mesh::remove_null_pointers_from_external_halo_node_storage()
 /// processors. \b Careful: Involves MPI Broadcasts and must therefore be
 /// called on all processors!
 // =================================================================
-
 unsigned Mesh::ndof_types() const
 {
-
  // Remains -1 if we don't have any elements on this processor.
  int int_ndof_types = -1;
  if (nelement() > 0)
@@ -8066,10 +8064,287 @@ OOMPH_CURRENT_FUNCTION,
  if (int_ndof_types == -1) int_ndof_types = 0;
 
  return unsigned(int_ndof_types);
-
 }
 
+// =================================================================
+/// Get the number of elemental dimension in the mesh from the first 
+/// element of the mesh. If MPI is on then also do some consistency 
+/// checks between processors. \b Careful: Involves MPI Broadcasts 
+/// and must therefore be called on all processors!
+// =================================================================
+unsigned Mesh::elemental_dimension() const
+{
+ // Remains -1 if we don't have any elements on this processor.
+ int int_dim = -1;
+ if (nelement() > 0)
+  {
+   int_dim = finite_element_pt(0)->dim();
+#ifdef PARANOID
+   // Check that every element in this mesh has the same number of
+   // types of elemental dimension.
+   for (unsigned i = 1; i < nelement(); i++)
+    {
+     if (int_dim != int(finite_element_pt(i)->dim()) )
+      {
+       std::ostringstream error_message;
+       error_message
+        << "Every element in the mesh must have the same number of "
+        << "elemental dimension for elemental_dimension() to work.\n"
+        << "Element 0 has elemental dimension " << int_dim << "\n"
+        << "Element " << i << " has elemental dimension "
+        << finite_element_pt(i)->dim() << ".";
+       throw OomphLibError(error_message.str(),
+                           OOMPH_CURRENT_FUNCTION,
+                           OOMPH_EXCEPTION_LOCATION);
+      }
+    }
+#endif
+  }
 
+#ifdef OOMPH_HAS_MPI
+
+ // If mesh is distributed
+ if (Comm_pt != 0)
+  {
+   // if more than one processor then
+   // + ensure dimension number is consistent on each processor (PARANOID)
+   // + ensure processors with no elements in this mesh have the
+   //   correct dimension number.
+   if (Comm_pt->nproc() > 1)
+    {
+     unsigned nproc = Comm_pt->nproc();
+     unsigned my_rank = Comm_pt->my_rank();
+
+     // Collect on root the dimension number determined independently
+     // on all processors (-1 indicates that the processor didn't have
+     // any elements and therefore doesn't know!)
+     int* dim_recv = 0;
+     if (my_rank == 0)
+      {
+       dim_recv = new int[nproc];
+      }
+
+     MPI_Gather(&int_dim,1,MPI_INT,
+                dim_recv,1,MPI_INT,0,
+                Comm_pt->mpi_comm());
+
+     // Root: Update own dimension, check consistency amongst
+     // all processors (in paranoid mode) and send out the actual
+     // dimension number to those processors who couldn't figure this
+     // out themselves
+     if (my_rank == 0)
+      {
+       // Check number of types of all non-root processors
+       for (unsigned p = 1; p < nproc; p++)
+        {
+         if (dim_recv[p] != -1)
+          {
+           // Processor p was able to figure out the elemental
+           // dimension, so I root can update
+           // its own (if required)
+           if (int_dim == -1)
+            {
+             int_dim = dim_recv[p];
+            }
+#ifdef PARANOID
+           // Check consistency
+           else if (int_dim != dim_recv[p])
+            {
+             std::ostringstream error_message;
+             error_message
+              << "The elements in this mesh must have the same elemental "
+              << "dimension number on each processor";
+             for (unsigned p = 0; p < nproc; p++)
+              {
+               if (dim_recv[p] != -1)
+                {
+                 error_message << "Processor " << p << " : "
+                               << dim_recv[p] << "\n";
+                }
+               else
+                {
+                 error_message << "Processor " << p << " : (no elements)\n";
+                }
+              }
+             throw OomphLibError(error_message.str(),
+OOMPH_CURRENT_FUNCTION,
+                                 OOMPH_EXCEPTION_LOCATION);
+            }
+#endif
+          }
+        }
+
+       // Now send the elemental dimension to non-root processors that 
+       // don't have it
+       for (unsigned p = 1; p < nproc; p++)
+        {
+         if (dim_recv[p] == -1)
+          {
+           MPI_Send(&int_dim,1,MPI_INT,p,0,
+                    Comm_pt->mpi_comm());
+          }
+        }
+       // clean up
+       delete[] dim_recv;
+      }
+     // "else if": "else" for non-root; "if" for checking if current
+     // (non-root) processor does not know elemental dimension and is therefore
+     // about to receive it from root.
+     else if (int_dim == -1)
+      {
+       MPI_Recv(&int_dim,1,MPI_INT,0,0,
+                Comm_pt->mpi_comm(),MPI_STATUS_IGNORE);
+      }
+    }
+  }
+#endif
+
+ // If int_dim if still -1 then no elements were found for this mesh, so it
+ // has no elemental dimension.
+ if (int_dim == -1) int_dim = 0;
+
+ return unsigned(int_dim);
+}
+
+// =================================================================
+/// Get the number of nodal dimension in the mesh from the first 
+/// element of the mesh. If MPI is on then also do some consistency 
+/// checks between processors. \b Careful: Involves MPI Broadcasts 
+/// and must therefore be called on all processors!
+// =================================================================
+unsigned Mesh::nodal_dimension() const
+{
+ // Remains -1 if we don't have any elements on this processor.
+ int int_dim = -1;
+ if (nelement() > 0)
+  {
+   int_dim = finite_element_pt(0)->nodal_dimension();
+#ifdef PARANOID
+   // Check that every element in this mesh has the same number of
+   // types of nodal dimension.
+   for (unsigned i = 1; i < nelement(); i++)
+    {
+     if (int_dim != int(finite_element_pt(i)->nodal_dimension()) )
+      {
+       std::ostringstream error_message;
+       error_message
+        << "Every element in the mesh must have the same number of "
+        << "nodal dimension for nodal_dimension() to work.\n"
+        << "Element 0 has nodal dimension " << int_dim << "\n"
+        << "Element " << i << " has nodal dimension "
+        << finite_element_pt(i)->nodal_dimension() << ".";
+       throw OomphLibError(error_message.str(),
+                           OOMPH_CURRENT_FUNCTION,
+                           OOMPH_EXCEPTION_LOCATION);
+      }
+    }
+#endif
+  }
+
+#ifdef OOMPH_HAS_MPI
+
+ // If mesh is distributed
+ if (Comm_pt != 0)
+  {
+   // if more than one processor then
+   // + ensure dimension number is consistent on each processor (PARANOID)
+   // + ensure processors with no elements in this mesh have the
+   //   correct dimension number.
+   if (Comm_pt->nproc() > 1)
+    {
+     unsigned nproc = Comm_pt->nproc();
+     unsigned my_rank = Comm_pt->my_rank();
+
+     // Collect on root the dimension number determined independently
+     // on all processors (-1 indicates that the processor didn't have
+     // any elements and therefore doesn't know!)
+     int* dim_recv = 0;
+     if (my_rank == 0)
+      {
+       dim_recv = new int[nproc];
+      }
+
+     MPI_Gather(&int_dim,1,MPI_INT,
+                dim_recv,1,MPI_INT,0,
+                Comm_pt->mpi_comm());
+
+     // Root: Update own dimension, check consistency amongst
+     // all processors (in paranoid mode) and send out the actual
+     // dimension number to those processors who couldn't figure this
+     // out themselves
+     if (my_rank == 0)
+      {
+       // Check number of types of all non-root processors
+       for (unsigned p = 1; p < nproc; p++)
+        {
+         if (dim_recv[p] != -1)
+          {
+           // Processor p was able to figure out the nodal
+           // dimension, so I root can update
+           // its own (if required)
+           if (int_dim == -1)
+            {
+             int_dim = dim_recv[p];
+            }
+#ifdef PARANOID
+           // Check consistency
+           else if (int_dim != dim_recv[p])
+            {
+             std::ostringstream error_message;
+             error_message
+              << "The elements in this mesh must have the same nodal "
+              << "dimension number on each processor";
+             for (unsigned p = 0; p < nproc; p++)
+              {
+               if (dim_recv[p] != -1)
+                {
+                 error_message << "Processor " << p << " : "
+                               << dim_recv[p] << "\n";
+                }
+               else
+                {
+                 error_message << "Processor " << p << " : (no elements)\n";
+                }
+              }
+             throw OomphLibError(error_message.str(),
+                                 OOMPH_CURRENT_FUNCTION,
+                                 OOMPH_EXCEPTION_LOCATION);
+            }
+#endif
+          }
+        }
+
+       // Now send the nodal dimension to non-root processors that 
+       // don't have it
+       for (unsigned p = 1; p < nproc; p++)
+        {
+         if (dim_recv[p] == -1)
+          {
+           MPI_Send(&int_dim,1,MPI_INT,p,0,
+                    Comm_pt->mpi_comm());
+          }
+        }
+       // clean up
+       delete[] dim_recv;
+      }
+     // "else if": "else" for non-root; "if" for checking if current
+     // (non-root) processor does not know nodal dimension and is therefore
+     // about to receive it from root.
+     else if (int_dim == -1)
+      {
+       MPI_Recv(&int_dim,1,MPI_INT,0,0,
+                Comm_pt->mpi_comm(),MPI_STATUS_IGNORE);
+      }
+    }
+  }
+#endif
+
+ // If int_dim if still -1 then no elements were found for this mesh, so it
+ // has no nodal dimension.
+ if (int_dim == -1) int_dim = 0;
+
+ return unsigned(int_dim);
+}
 
 //========================================================================
 /// Wipe the storage for all externally-based elements and delete halos

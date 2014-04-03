@@ -513,6 +513,12 @@ public:
  /// Return number of dof types in mesh
  unsigned ndof_types() const;
 
+ /// Return number of elemental dimension in mesh
+ unsigned elemental_dimension() const;
+
+ /// Return number of nodal dimension in mesh
+ unsigned nodal_dimension() const;
+
  /// Add a (pointer to a) node to the mesh
  void add_node_pt(Node* const &node_pt) {Node_pt.push_back(node_pt);}
 
