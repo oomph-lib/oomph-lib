@@ -129,12 +129,18 @@ public:
  /// Typedef to keep the code more readable
  typedef typename InnerMapMixed::iterator InnerMixedIt;
 
+ /// Typedef to keep the code more readable const version
+ typedef typename InnerMapMixed::const_iterator ConstInnerMixedIt;
+
  /// Typedef to keep the code more readable
  typedef std::map<KEY_TYPE_ROW,std::map<KEY_TYPE_COL,VALUE_TYPE>*> 
   OuterMapMixed;
 
  /// Typedef to keep the code more readable
  typedef typename OuterMapMixed::iterator OuterMixedIt;
+
+ /// Typedef to keep the code more readable const version
+ typedef typename OuterMapMixed::const_iterator ConstOuterMixedIt;
 
 
  /// Copy constructor
@@ -192,7 +198,7 @@ public:
 
 
  /// Destructor
- ~MapMatrixMixed()
+ virtual ~MapMatrixMixed()
   {
    // Step through the pointers to row maps
    for (OuterMixedIt it=Row_pt.begin(); it!=Row_pt.end(); it++)
@@ -228,6 +234,32 @@ public:
  VALUE_TYPE& operator()(const KEY_TYPE_ROW& i, const KEY_TYPE_COL& j)
   {
    return *entry_pt(i,j);
+  }
+
+ /// \short Get an element corresponding to the key (i,j)
+ ///  Searches the container for an element with a key equivalent to 
+ /// (i,j) and returns the element if found, otherwise the default 0 value for 
+ /// the value type is returned. The container is not modified.
+ VALUE_TYPE get(const KEY_TYPE_ROW& i, const KEY_TYPE_COL& j) const
+  {
+   if(Row_pt.count(i) > 0)
+    {
+     // Get the pointer to the row and check the j key
+     InnerMapMixed* inner_map_mixed_pt = Row_pt.find(i)->second;
+     if(inner_map_mixed_pt->count(j) > 0)
+     {
+       return inner_map_mixed_pt->find(j)->second;
+     }
+     else
+     {
+       return VALUE_TYPE(0);
+     }
+    }
+   else
+    {
+      // The key does not exist, return VALUE_TYPE(0)
+      return VALUE_TYPE(0);
+    }
   }
 
 
@@ -294,6 +326,37 @@ public:
    return count;
   }
 
+ /// \short Work out number of non-`zero' entries, const version
+ unsigned long nnz() const
+  {
+   // Initialise counter for # of nonzero entries
+   unsigned long count=0;
+
+   // Step through the row pointers
+   for (ConstOuterMixedIt it=Row_pt.begin(); it!=Row_pt.end(); it++)
+    {
+     // Is the row pointer nonzero, i.e. are there any entries in this row?
+     if (it->second!=0)
+      {
+       // Identify the map that holds the entries in this row:
+       InnerMapMixed inner_map=*(it->second);
+
+       // Loop over entries in the row
+       for (ConstInnerMixedIt it2=inner_map.begin(); it2!=inner_map.end(); it2++)
+        {
+         // If the entry is nonzero: Increment counter
+         if (it2->second!=0)
+          {
+           count++;
+          }
+        }
+      }
+    }
+   return count;
+  }
+
+
+
 
  /// \short Work out total number of entries
  unsigned long size()
@@ -320,8 +383,33 @@ public:
    return count;
   }
 
+ /// \short Work out total number of entries const version
+ unsigned long size() const
+  {
+   // Initialise counter for # of nonzero entries
+   unsigned long count=0;
 
-private:
+   // Step through the row pointers
+   for (ConstOuterMixedIt it=Row_pt.begin(); it!=Row_pt.end(); it++)
+    {
+     // Is the row pointer nonzero, i.e. are there any entries in this row?
+     if (it->second!=0)
+      {
+       // Identify the map that holds the entries in this row:
+       InnerMapMixed inner_map=*(it->second);
+
+       // Loop over all (!) entries in the row (incl. zero ones!)
+       for (ConstInnerMixedIt it2=inner_map.begin(); it2!=inner_map.end(); it2++)
+        {
+         count++;
+        }
+      }
+    }
+   return count;
+  }
+
+
+protected:
 
  /// \short Return pointer to entry
  VALUE_TYPE* entry_pt(const KEY_TYPE_ROW& i, const KEY_TYPE_COL& j)
@@ -363,7 +451,8 @@ private:
 /// class.
 ///
 /// The matrix is indexed by indices of type KEY_TYPE
-/// and has entries of type VALUE_TYPE.
+/// and has entries of type VALUE_TYPE. It is a specialisation of the
+/// class MapMatrixMixed. Please implement future functions in that class.
 ///
 /// Careful: If a zero entry is referenced then it is created in
 /// memory. Therefore this isn't really a practical sparse matrix scheme. 
@@ -423,7 +512,7 @@ private:
 ///
 //================================================================
 template<class KEY_TYPE, class VALUE_TYPE>
-class MapMatrix
+class MapMatrix : public MapMatrixMixed<KEY_TYPE,KEY_TYPE,VALUE_TYPE>
 { 
 
 public:
@@ -442,7 +531,6 @@ public:
 
  /// Typedef to keep the code more readable
  typedef typename OuterMap::iterator OuterIt;
-
 
  /// Copy constructor
  MapMatrix(MapMatrix<KEY_TYPE,VALUE_TYPE>& map_mat)
@@ -475,162 +563,7 @@ public:
    BrokenCopy::broken_assign("MapMatrix");
   }
 
- /// Destructor
- ~MapMatrix()
-  {
-   // Step through the pointers to row maps
-   for (OuterIt it=Row_pt.begin(); it!=Row_pt.end(); it++)
-    {
-     // Is the row pointer nonzero, i.e. are there any entries in this row?
-     if (it->second!=0)
-      {
-       // it->second is the stored object
-       delete it->second;
-      }
-    }
-  }
 
-
- /// Wipe all entries
- void clear()
-  {
-   // Step through the pointers to row maps
-   for (OuterIt it=Row_pt.begin(); it!=Row_pt.end(); it++)
-    {
-     // Is the row pointer nonzero, i.e. are there any entries in this row?
-     if (it->second!=0)
-      {
-       // it->second is the stored object: a map that can be cleared
-       it->second->clear();
-      }
-    }
-  }
-
- /// \short Return (reference to) entry.
- /// Careful: If the entry does not exist then it is created and 
- /// set to zero
- VALUE_TYPE& operator()(const KEY_TYPE& i, const KEY_TYPE& j)
-  {
-   return *entry_pt(i,j);
-  }
-
- /// \short Dump all non-`zero' entries to file.
- /// Output is in the format
- ///   `i', `j', `entry[i][j]'
- void output(std::ostream &outfile)
-  {
-   // NOTE:
-   //------
-   // map.first = key
-   // map.second = value
-
-   // Step through the row pointers
-   for (OuterIt it=Row_pt.begin(); it!=Row_pt.end(); it++)
-    {
-     // Is the row pointer nonzero, i.e. are there any entries in this row?
-     if (it->second!=0)
-      {
-       // Identify the map that holds the entries in this row:
-       InnerMap inner_map=*(it->second);
-
-       // Loop over entries in the row
-       for (InnerIt it2=inner_map.begin(); it2!=inner_map.end(); it2++)
-        {
-         // If the entry is nonzero: Doc
-         if (it2->second!=0)
-          {
-           // Output key1, key2, value
-           outfile << it->first << " " << it2->first << " " 
-                << it2->second << std::endl;
-          }
-        }
-      }
-    }
-  }
-
-
- /// \short Work out number of non-`zero' entries
- unsigned long nnz()
-  {
-   // Initialise counter for # of nonzero entries
-   unsigned long count=0;
-   
-   // Step through the row pointers
-   for (OuterIt it=Row_pt.begin(); it!=Row_pt.end(); it++)
-    {
-     // Is the row pointer nonzero, i.e. are there any entries in this row?
-     if (it->second!=0)
-      {
-       // Identify the map that holds the entries in this row:
-       InnerMap inner_map=*(it->second);
-
-       // Loop over entries in the row
-       for (InnerIt it2=inner_map.begin(); it2!=inner_map.end(); it2++)
-        {
-         // If the entry is nonzero: Increment counter
-         if (it2->second!=0)
-          {
-           count++;
-          }
-        }
-      }
-    }
-   return count;
-  }
-
-
- /// \short Work out total number of entries
- unsigned long size()
-  {
-   // Initialise counter for # of nonzero entries
-   unsigned long count=0;
-
-   // Step through the row pointers
-   for (OuterIt it=Row_pt.begin(); it!=Row_pt.end(); it++)
-    {
-     // Is the row pointer nonzero, i.e. are there any entries in this row?
-     if (it->second!=0)
-      {
-       // Identify the map that holds the entries in this row:
-       InnerMap inner_map=*(it->second);
-
-       // Loop over all (!) entries in the row (incl. zero ones!)
-       for (InnerIt it2=inner_map.begin(); it2!=inner_map.end(); it2++)
-        {
-         count++;
-        }
-      }
-    }
-   return count;
-  }
-
-
-private:
-
- /// \short Return pointer to entry
- VALUE_TYPE* entry_pt(const KEY_TYPE& i, const KEY_TYPE& j)
-  {
-   // There's not a single entry in this row: Entry must be zero.
-   if (Row_pt[i]==0)
-    {
-     // Create row and entry in row and set the value to zero
-     Row_pt[i]=new std::map<KEY_TYPE, VALUE_TYPE>;
-     (*Row_pt[i])[j]=VALUE_TYPE(0);
-     return &(*Row_pt[i])[j];
-    }
-   // Simply return pointer to existing entry
-   else
-    {
-     return &(*Row_pt[i])[j];
-    }
-  }
-
-
- /// Here's the generalised matrix structure: A map of pointers to
- /// the maps that hold the entries in each row.
- std::map<KEY_TYPE, std::map<KEY_TYPE, VALUE_TYPE>* > Row_pt;
-
- 
 };
 
 }
