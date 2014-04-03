@@ -103,7 +103,7 @@ namespace oomph
 
   /// \short Constructor
   BlockPreconditioner()
-   : Internal_block_distribution_pt(0), Ndof_types_in_mesh(0),
+   : Ndof_types_in_mesh(0),
      Preconditioner_matrix_distribution_pt(0)
   {
    // Initially set the master block preconditioner pointer to zero
@@ -129,8 +129,20 @@ namespace oomph
    // No doftypes have been coarsened.
    Preconditioner_doftypes_have_been_coarsened = false;
    
+   // RAYRAY this is to be removed.
    // There are no precomputed block distributions to start off with.
    Precomputed_block_distribution_pt.resize(0);
+
+   // The distribution of the underlying internal blocks.
+   Internal_block_distribution_pt.resize(0);
+
+   // The distribution of the dof-level blocks, these are used during the
+   // concatenation process to create the distribution of the blocks.
+   // RAYRAY - may not be needed?
+   Dof_block_distribution_pt.resize(0);
+
+   // The distribution of the blocks.
+   Block_distribution_pt.resize(0);
 
    // Clear the Doftype_to_block_map
    Doftype_to_block_map.clear();
@@ -348,27 +360,42 @@ namespace oomph
   /// true), then this function calls get_precomputed_block(...), otherwise
   /// get_block_from_original_matrix(...) is called.
   void get_block(const unsigned& i, const unsigned& j,
-                 MATRIX& output_matrix) const
+      MATRIX& output_matrix) const
   {
-   // Assume that if the preconditioner blocks have been precomputed, we
-   // would want to use them.
+#ifdef PARANOID
+    // Check the range of i and j, they should not be greater than nblock_types
+    unsigned n_block_types = this->nblock_types();
+    if((i > n_block_types) || (j > n_block_types))
+    {
+      std::ostringstream err_msg;
+      err_msg << "Requested block("<< i <<","<< j <<")"<<"\n"
+        << "but nblock_types() is " << n_block_types << ".\n"
+        << "Maybe your argument to block_setup(...) is incorrect?"
+        << std::endl;
+      throw OomphLibError(err_msg.str(),
+          OOMPH_CURRENT_FUNCTION,
+          OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
 
-   if(Preconditioner_doftypes_have_been_coarsened)
-   {
-     get_coarsened_block(i,j,output_matrix);
-   }
-   else
-   {
-     if(Replacement_dof_block_pt.get(i,j) == 0)
-     {
-       get_block_from_original_matrix(i,j,output_matrix);
-     }
-     else
-     {
-       cr_double_matrix_deep_copy(Replacement_dof_block_pt.get(i,j),
-                                  output_matrix);
-     }
-   }
+    // Assume that if the preconditioner blocks have been precomputed, we
+    // would want to use them.
+    if(Preconditioner_doftypes_have_been_coarsened)
+    {
+      get_coarsened_block(i,j,output_matrix);
+    }
+    else
+    {
+      if(Replacement_dof_block_pt.get(i,j) == 0)
+      {
+        get_block_from_original_matrix(i,j,output_matrix);
+      }
+      else
+      {
+        cr_double_matrix_deep_copy(Replacement_dof_block_pt.get(i,j),
+            output_matrix);
+      }
+    }
   } // EOFunc get_block(...)
 
 
@@ -1811,8 +1838,15 @@ namespace oomph
   /// \short Flag indicating if the doftypes have been coarsened.
   bool Preconditioner_doftypes_have_been_coarsened;
 
-  /// \short Storage for the default distribution for each block.
+  /// \short Storage for the default distribution for each internal block.
   Vector<LinearAlgebraDistribution*> Internal_block_distribution_pt;
+
+  /// \short Storage for the default distribution for each dof block at
+  /// this level.
+  Vector<LinearAlgebraDistribution*> Dof_block_distribution_pt;
+
+  /// \short Storage for the default distribution for each block.
+  Vector<LinearAlgebraDistribution*> Block_distribution_pt;
 
   /// \short Vector of unsigned to indicate which meshes contain multiple
   /// element types.
