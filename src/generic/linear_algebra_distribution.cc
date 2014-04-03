@@ -333,7 +333,7 @@ namespace oomph
   /// is the sum of the nrow_local of all the in_distributions and the number
   /// of global rows of the out_distribution is the sum of the number of global
   /// rows of all the in_distributions. 
-  /// This results in a permuation of the rows in the out_distribution. 
+  /// This results in a permutation of the rows in the out_distribution. 
   /// Think of this in terms of DoubleVectors, if we have DoubleVectors with 
   /// distributions A and B, distributed across two processors (p0 and p1),
   /// A: [a0] (on p0)    B: [b0] (on p0) 
@@ -352,7 +352,7 @@ namespace oomph
   ///  b1] (on p1). 
   /// 
   /// Note (1): The out_distribution may not be uniformly distributed even
-  /// if the the in_distributions are uniform distributions. 
+  /// if the in_distributions are uniform distributions. 
   /// Try this out with two distributions of global rows 3 and 5, uniformly
   /// distributed across two processors. Compare this against a distribution
   /// of global row 8 distributed across two processors.
