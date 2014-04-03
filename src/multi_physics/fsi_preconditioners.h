@@ -270,44 +270,44 @@ private:
 //=============================================================================
 /// Setup the preconditioner. Note: Matrix must be a CRDoubleMatrix.
 //=============================================================================
- void FSIPreconditioner::setup()
- {
+void FSIPreconditioner::setup()
+{
 
   // check the meshes have been set
 #ifdef PARANOID
   if (Navier_stokes_mesh_pt==0)
-   {
+  {
     std::ostringstream error_message;
     error_message << "Pointer to fluid mesh hasn't been set!\n";
     throw OomphLibError(error_message.str(),
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
-   }
+        OOMPH_CURRENT_FUNCTION,
+        OOMPH_EXCEPTION_LOCATION);
+  }
   if (Wall_mesh_pt==0)
-   {
+  {
     std::ostringstream error_message;
     error_message << "Pointer to solid mesh hasn't been set!\n";
     throw OomphLibError(error_message.str(),
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
-   }
+        OOMPH_CURRENT_FUNCTION,
+        OOMPH_EXCEPTION_LOCATION);
+  }
 #endif
 
   // setup the meshes
   this->set_mesh(0,Navier_stokes_mesh_pt,
-                 Allow_multiple_element_type_in_navier_stokes_mesh);
+      Allow_multiple_element_type_in_navier_stokes_mesh);
   this->set_mesh(1,Wall_mesh_pt,Allow_multiple_element_type_in_wall_mesh);
 
- // get the number of fluid dofs from teh first element in the mesh
+  // get the number of fluid dofs from teh first element in the mesh
   unsigned n_fluid_dof = this->ndof_types_in_mesh(0);
   unsigned n_dof = n_fluid_dof + this->ndof_types_in_mesh(1);
 
   // this fsi preconditioner has two types of DOF fluid dofs and solid dofs
   Vector<unsigned> dof_to_block_map(n_dof,0);
   for (unsigned i = n_fluid_dof; i < n_dof; i++)
-   {
+  {
     dof_to_block_map[i] = 1;
-   }
+  }
 
   // Call block setup for this preconditioner
   this->block_setup(dof_to_block_map);
@@ -317,66 +317,60 @@ private:
   // in the subsidiary Navier Stokes one.
   Vector<unsigned> ns_dof_lookup(n_fluid_dof);
   for (unsigned i = 0; i < n_fluid_dof; i++)
-   {
+  {
     ns_dof_lookup[i] = i;
-   }
+  }
 
   // Turn the Navier Stokes Schur complement preconditioner into a 
   // subsidiary preconditioner of this preconditioner
   Navier_stokes_preconditioner_pt->
-   turn_into_subsidiary_block_preconditioner(this,ns_dof_lookup);
+    turn_into_subsidiary_block_preconditioner(this,ns_dof_lookup);
 
   // Setup the navier stokes preconditioner: Tell it about the
   // Navier Stokes mesh and set it up.
   Navier_stokes_preconditioner_pt->
-   set_navier_stokes_mesh(Navier_stokes_mesh_pt);
+    set_navier_stokes_mesh(Navier_stokes_mesh_pt);
   Navier_stokes_preconditioner_pt->setup(matrix_pt(),comm_pt());
 
   // Extract the additional blocks we need for FSI:
-  
-  // Solid tangent stiffness matrix
-  {
-    CRDoubleMatrix block_matrix_1_1;
-    this->get_block(1,1,block_matrix_1_1);
 
-    // Setup the solid preconditioner (inexact solver)
-    double t_start = TimingHelpers::timer();
-    Solid_preconditioner_pt->setup(&block_matrix_1_1,comm_pt());
-    double t_end = TimingHelpers::timer();
-    double setup_time= t_end-t_start;
-  }
+  // Solid tangent stiffness matrix
+  CRDoubleMatrix block_matrix_1_1;
+  this->get_block(1,1,block_matrix_1_1);
+
+  // Setup the solid preconditioner (inexact solver)
+  double t_start = TimingHelpers::timer();
+  Solid_preconditioner_pt->setup(&block_matrix_1_1,comm_pt());
+  double t_end = TimingHelpers::timer();
+  block_matrix_1_1.clear();
+  double setup_time= t_end-t_start;
 
   // Solid on fluid terms (if needed)
   if (Retain_solid_onto_fluid_terms)
-   {
+  {
     CRDoubleMatrix block_matrix_0_1 = get_block(0,1);
     this->setup_matrix_vector_product(Matrix_vector_product_0_1_pt,
-                                      &block_matrix_0_1,1);
-   }
-  
+        &block_matrix_0_1,1);
+  }
+
   // Fluid on solid terms (if needed)
   if (Retain_fluid_onto_solid_terms)
-   {
+  {
     CRDoubleMatrix block_matrix_1_0 = get_block(1,0);
     this->setup_matrix_vector_product(Matrix_vector_product_1_0_pt,
-                                      &block_matrix_1_0,0);
-   }
-  
+        &block_matrix_1_0,0);
+  }
 
-  
-
- // Output times
- if(Doc_time)
+  // Output times
+  if(Doc_time)
   {
-   oomph_info << "Solid sub-preconditioner setup time [sec]: "
-              << setup_time << "\n";
+    oomph_info << "Solid sub-preconditioner setup time [sec]: "
+      << setup_time << "\n";
   }
 
   // We're done (and we stored some data)
   Preconditioner_has_been_setup=true;
-
-  
- }
+}
 
 
 //======================================================================
