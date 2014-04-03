@@ -343,7 +343,10 @@ private:
     F_block_preconditioner_pt->
      turn_into_subsidiary_block_preconditioner(this,dof_map);
 
-    // Set the mesh in the subsidiary precondtioner. 
+    // Set the mesh in the subsidiary preconditioner. 
+    // RAYRAY This is incorrect. We never set the mesh for a subsidiary 
+    // block preconditioner. The self test still passes since this part of
+    // the if-else condition is never executed.
     F_block_preconditioner_pt->set_nmesh(1);
     F_block_preconditioner_pt->set_mesh(0, Navier_stokes_mesh_pt);
 

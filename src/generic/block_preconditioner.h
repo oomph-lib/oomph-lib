@@ -304,7 +304,7 @@ namespace oomph
     {
      std::ostringstream err_msg;
      err_msg
-      << "The mesh pointer is null.";
+      << "Tried to set the " << i << "-th mesh pointer, but it is null.";
      throw OomphLibError(err_msg.str(),
                          OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
@@ -770,44 +770,35 @@ namespace oomph
 
 
   /// \short Access to i-th mesh (of the various meshes that contain block
-  /// preconditionable elements of the same type). If this is a subsidiary
-  /// preconditioner then the master Mesh_pt is used.
+  /// preconditionable elements of the same number of dof type). 
   const Mesh* mesh_pt(const unsigned& i) const
   {
-   // Get the mesh pointer either from here or from the master
-   const Mesh* temp;
-   if(is_subsidiary_block_preconditioner())
-    {
-     temp = master_block_preconditioner_pt()->mesh_pt(i);
-    }
-   else
-    {
-     temp = Mesh_pt[i];
-    }
-
 #ifdef PARANOID
-   if(temp == 0)
+    if(is_subsidiary_block_preconditioner())
     {
-     std::ostringstream error_msg;
-     error_msg << "Mesh pointer " << i << " is null.";
-     throw OomphLibError(error_msg.str(),
-                         OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
-    }
-
-   // Warn if any meshes have been set in subsidiary block preconditioners
-   // (because they are ignored and could have been set before it became a
-   // subsidiary block preconditioner).
-   if(is_subsidiary_block_preconditioner() && ! Mesh_pt.empty())
-    {
-     std::string error_msg = "Meshes have been set in a subsidiary ";
-     error_msg += "preconditioner!\n";
-     throw OomphLibError(error_msg, OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
+      std::ostringstream error_msg;
+      error_msg << "The mesh_pt() function should not be called on a\n"
+        << "subsidiary block preconditioner." << std::endl;
+      throw OomphLibError(error_msg.str(),
+          OOMPH_CURRENT_FUNCTION,
+          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
 
-   return temp;
+    const Mesh* mesh_i_pt = Mesh_pt[i];
+
+#ifdef PARANOID
+    if(mesh_i_pt == 0)
+    {
+      std::ostringstream error_msg;
+      error_msg << "Mesh pointer " << mesh_i_pt << " is null.";
+      throw OomphLibError(error_msg.str(),
+          OOMPH_CURRENT_FUNCTION,
+          OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+    return mesh_i_pt;
   } // EOFunc mesh_pt(...)
 
   /// \short Return the number of meshes in Mesh_pt. If this is a
@@ -815,23 +806,18 @@ namespace oomph
   unsigned nmesh() const 
   {
 #ifdef PARANOID
-   if(is_subsidiary_block_preconditioner() && ! Mesh_pt.empty())
+    if(is_subsidiary_block_preconditioner())
     {
-     std::string error_msg;
-     error_msg = "Meshes have been set in a subsidiary preconditioner!\n";
-     throw OomphLibError(error_msg, OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
+      std::ostringstream error_msg;
+      error_msg << "The nmesh() function should not be called on a subsidiary\n"
+        << "block preconditioner." << std::endl;
+      throw OomphLibError(error_msg.str(),
+          OOMPH_CURRENT_FUNCTION,
+          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
 
-   if(is_subsidiary_block_preconditioner())
-    {
-     return master_block_preconditioner_pt()->nmesh();
-    }
-   else
-    {
-     return Mesh_pt.size();
-    }
+    return Mesh_pt.size();
   } // EOFunc nmesh()
 
   /// \short Return the block number corresponding to a global index i_dof.
@@ -906,21 +892,17 @@ namespace oomph
   /// \short Return the number of DOF types in mesh i.
   unsigned ndof_types_in_mesh(const unsigned& i) const
   {
-   // If we have a master preconditioner then ask it for the
-   // result. Otherwise if we have calculated the value then return
-   // it, if not then get the mesh to calculate it.
-   if(is_subsidiary_block_preconditioner())
+#ifdef PARANOID
+    if (is_subsidiary_block_preconditioner())
     {
-     return master_block_preconditioner_pt()->ndof_types_in_mesh(i);
+      std::ostringstream err_msg;
+      err_msg << "A subsidiary block preconditioner should not care about\n"
+        << "anything to do with meshes.";
+      throw OomphLibError(err_msg.str(), OOMPH_CURRENT_FUNCTION,
+          OOMPH_EXCEPTION_LOCATION);
     }
-   else if(Ndof_types_in_mesh.size() > 0)
-    {
-     return Ndof_types_in_mesh[i];
-    }
-   else
-    {
-     return mesh_pt(i)->ndof_types();
-    }
+#endif
+    return mesh_pt(i)->ndof_types();
   } // EOFunc ndof_types_in_mesh(...)
 
   /// \short Return true if this preconditioner is a subsidiary
