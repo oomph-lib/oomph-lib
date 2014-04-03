@@ -1269,6 +1269,9 @@ namespace oomph
   // Need to create the norms, used for Sigma, if required
   ///////////////////////////////////////////////////////////////////////////
 
+  // RAYRAY todo: This could be made more efficient by storing only the
+  // augmented blocks. I will do this later.
+  //
   // Extract the velocity block. Although we only require the infinity norm
   // a single direction of the velocity block, we extract them all since we
   // use the rest immediately (to perform the augmentation).
@@ -1287,21 +1290,21 @@ namespace oomph
    {
     double t_norm_start = TimingHelpers::timer();
 
-    DenseMatrix<CRDoubleMatrix* > u_pt(My_nmesh,My_nmesh,0);
-
-    // Recall the blocking scheme:
-    // 0 1 2 3  4  5  6  7  8
-    // u v w u1 v1 w1 u2 v2 w2 ...
-    // So we loop through the meshes and then get the first entry...
-    // from v_aug_pt.
-    for(unsigned row_i = 0; row_i < My_nmesh; row_i++)
-     {
-      for(unsigned col_i = 0; col_i < My_nmesh; col_i++)
-       {
-        u_pt(row_i,col_i) = v_aug_pt(row_i*spatial_dim,
-                                     col_i*spatial_dim);
-       } // for
-     } //  for
+//    DenseMatrix<CRDoubleMatrix* > u_pt(My_nmesh,My_nmesh,0);
+//
+//    // Recall the blocking scheme:
+//    // 0 1 2 3  4  5  6  7  8
+//    // u v w u1 v1 w1 u2 v2 w2 ...
+//    // So we loop through the meshes and then get the first entry...
+//    // from v_aug_pt.
+//    for(unsigned row_i = 0; row_i < My_nmesh; row_i++)
+//     {
+//      for(unsigned col_i = 0; col_i < My_nmesh; col_i++)
+//       {
+//        u_pt(row_i,col_i) = v_aug_pt(row_i*spatial_dim,
+//                                     col_i*spatial_dim);
+//       } // for
+//     } //  for
 
     // Get the norm and set the scaling sigma.
 //    Scaling_sigma = -CRDoubleMatrixHelpers::inf_norm(u_pt)
@@ -1389,6 +1392,9 @@ namespace oomph
     Vector<CRDoubleMatrix*> mmt_pt;
 
     // Get the current Lagrange DOF type.
+    // Recall that the ordering is:
+    // | Fluid DOF types | Lagrange multiplier DOF types
+    //   u v w uc vc wc p  L1, ....
     unsigned l_doftype = N_fluid_doftypes + l_i;
 
     // Store the mass matrix locations for the current Lagrange block.
@@ -1401,7 +1407,7 @@ namespace oomph
     // I have extracted all the mass matrices for this Lagrange
     // block.
 
-    // Go along the block columns for the current Lagrange block.
+    // Go along the block columns for the current Lagrange block ROW.
     for(unsigned col_i = 0; col_i < N_velocity_doftypes; col_i++)
      {
       // Get the block matrix for this block column.
@@ -1426,7 +1432,7 @@ namespace oomph
      {
       std::ostringstream warning_stream;
       warning_stream << "WARNING:\n"
-                     << "There are no mass matrices on Lagrange block " 
+                     << "There are no mass matrices on Lagrange block row " 
                      << l_i << ".\n"
                      << "Perhaps the problem setup is incorrect." << std::endl;
       OomphLibWarning(warning_stream.str(),
@@ -1455,7 +1461,7 @@ namespace oomph
           std::ostringstream warning_stream;
           warning_stream << "WARNING:\n"
             << "The mass matrix block " << mm_locations[mm_i] 
-            << "in L^T block " << l_i << "is zero.\n"
+            << " in L^T block " << l_i << " is zero.\n"
             << "Perhaps the problem setup is incorrect." << std::endl;
           OomphLibWarning(warning_stream.str(),
               OOMPH_CURRENT_FUNCTION,
@@ -1469,10 +1475,6 @@ namespace oomph
     // The mass matrices for the current Lagrange block col is in mmt_pt. 
     // Now create the w_i and put it in w_pt.
     
-    // RAYRAY change back to Block_distribution_pt
-    unsigned long l_i_nrow_global 
-      = this->Internal_block_distribution_pt[l_doftype]->nrow();
-  
     // RAYRAY change back to Block_distribution_pt
     // Create both the w_i and inv_w_i matrices.
     w_pt[l_i] = new CRDoubleMatrix(this->Internal_block_distribution_pt[l_doftype]);
@@ -1489,14 +1491,14 @@ namespace oomph
     // beforehand. In the case of (1), nothing needs to be done, 
     // but in (2) we need to extract the diagonal of the block-diagonal matrix.
 
-    if(Use_diagonal_w_block)
+    if(Use_diagonal_w_block) // This is the default.
      {
       // RAYRAY change back to Block_distribution_pt
       // Get the number of local rows for this Lagrange block.
       unsigned long l_i_nrow_local 
         = this->Internal_block_distribution_pt[l_doftype]->nrow_local();
 
-      // The first row, for the offset.
+      // The first row, for the column offset (required in parallel).
       unsigned l_i_first_row 
         = this->Internal_block_distribution_pt[l_doftype]->first_row();
       
@@ -1511,24 +1513,20 @@ namespace oomph
       // Loop through the mass matrices.
       for(unsigned m_i = 0; m_i < n_mm; m_i++)
        {
-        // NOTE: THIS WILL BREAK IF THE MASS MATRICES IS NOT SQUARE.
-        // THIS HAPPENS WHEN THE FREE NODES ON THE CONSTRAINED BOUNDARIES
-        // ARE DIFFERENT BETWEEN VELOCITY DEGREES OF FREEDOM.
-        // WE CAN GET AROUND THIS MY MULTIPLYING THE MASS MATRIX BY
-        // IT'S TRANSPOSE, THEN TAKE THE DIAGONAL ENTRIES OF THAT.
         // Get the diagonal entries for the mass matrix.
         CRDoubleMatrix* temp_mm_sqrd_pt = new CRDoubleMatrix;
         temp_mm_sqrd_pt->build(mm_pt[m_i]->distribution_pt());
         mm_pt[m_i]->multiply(*mmt_pt[m_i],*temp_mm_sqrd_pt);
 
-        //Vector<double> m_diag = mm_pt[m_i]->diagonal_entries();
         Vector<double> m_diag = temp_mm_sqrd_pt->diagonal_entries();
 
-        // Loop through the entries, square and add them.
+        // Loop through the entries, add them.
         for(unsigned long row_i = 0; row_i < l_i_nrow_local; row_i++)
          {
           w_i_diag_values[row_i] += m_diag[row_i];
          }
+
+        delete temp_mm_sqrd_pt; temp_mm_sqrd_pt = 0;
        }
       
 
@@ -1540,6 +1538,7 @@ namespace oomph
         // w_i is a diagonal matrix, so take the inverse to
         // invert the matrix.
         invw_i_diag_values[row_i] = 1.0/w_i_diag_values[row_i];
+
         w_i_column_indices[row_i] = row_i + l_i_first_row;
         w_i_row_start[row_i] = row_i;
        }
@@ -1548,6 +1547,9 @@ namespace oomph
 
       // Theses are square matrices. So we use the l_i_nrow_global for the
       // number of columns.
+    // RAYRAY change back to Block_distribution_pt
+    unsigned long l_i_nrow_global 
+      = this->Internal_block_distribution_pt[l_doftype]->nrow();
       w_pt[l_i]->build(l_i_nrow_global,
                          w_i_diag_values,
                          w_i_column_indices,
@@ -1558,7 +1560,11 @@ namespace oomph
                       w_i_row_start);
      }
     else
+      // We use the block diagonal form of the W block.
      {
+// NOTE: This seems very dodgy. A lot of functions has moved into CRDoubleMatrix
+// such as get_diagonal_entries() and add()
+
       // Square the first mass matrix. We assume that there is at least one.
       mm_pt[0]->multiply((*mm_pt[0]),(*w_pt[l_i]));
       
@@ -1571,9 +1577,9 @@ namespace oomph
         temp_mm_sqrd_pt->build(this->Internal_block_distribution_pt[l_doftype]);
         mm_pt[mm_i]->multiply((*mm_pt[mm_i]),*temp_mm_sqrd_pt);
         
-        // adding to the sum of squared mass matrices.
+        // adding to the partial sum of squared mass matrices.
         add_matrices(temp_mm_sqrd_pt,w_pt[l_i]);
-        delete temp_mm_sqrd_pt;
+        delete temp_mm_sqrd_pt; temp_mm_sqrd_pt = 0;
        }
 
       // Now multiply by the Scaling sigma:
@@ -1587,7 +1593,7 @@ namespace oomph
       // w_i is complete.
       // We have to create inv_w_pt by extracting the diagonal entries of w_i.
 
-      // Get the number of local rows for this lagrange block.
+      // Get the number of local rows for this Lagrange block.
       // We shall use the block in the first column.
       unsigned long l_i_nrow_local = mm_pt[0]->nrow_local();
 
@@ -1607,12 +1613,14 @@ namespace oomph
        }
 
       inv_w_i_row_start[l_i_nrow_local] = l_i_nrow_local;
-
+    // RAYRAY change back to Block_distribution_pt
+    unsigned long l_i_nrow_global 
+      = this->Internal_block_distribution_pt[l_doftype]->nrow();
       inv_w_pt->build(l_i_nrow_global,
                       inv_w_i_diag_values,
                       inv_w_i_column_indices,
                       inv_w_i_row_start);
-     }
+     } // else - finished building w_i and inv_w_i
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -1638,7 +1646,8 @@ namespace oomph
         //add_matrices(aug_pt,v_aug_pt(aug_i,aug_j));
         v_aug_pt(aug_i,aug_j)->add(*another_mat_pt,*v_aug_pt(aug_i,aug_j));
 
-        delete aug_pt;
+        delete aug_pt; aug_pt = 0;
+        delete another_mat_pt; another_mat_pt = 0;
        } // loop jj
      } // loop ii
 
@@ -1650,136 +1659,7 @@ namespace oomph
      }
    } // loop through Lagrange multipliers.
 
-//pause("Done the lgr stuff"); 
 
-
-  // Consider the 3rd entry (starting from 0), which dof type do we want to
-  // move into this position? - It's "up" or "4". 
-  //
-  // This is stored in Subsidiary_list_bcpl, this is passed to 
-  // turn_into_subsidiary_block_preconditioner(...).
-  //
-  // Artificial test data for the above example. Just uncomment to test.
-  // nmesh = 3;
-  // N_doftype_in_mesh.resize(nmesh,0);
-  // N_doftype_in_mesh[0] = 4;
-  // N_doftype_in_mesh[1] = 5;
-  // N_doftype_in_mesh[2] = 4;
-  // spatial_dim = 3;
-  // n_dof_types = 13;
-  { // encapsulating temp vectors.
-
-    // We create the mapping with the help of two vectors.
-    // Noting that the first spatial dimension number of dof types in each mesh
-    // corresponds to the velocity dof types, and the rest are either pressure
-    // (in the case of the bulk mesh) or lagrange multiplier dof types, we
-    // simply:
-    // 1) Loop through the meshes
-    // 2)   Loop through the spatial_dim, store the dof type in the v_vector.
-    // 3)   Loop through the remaining dof types, store the dof type in the l
-    //      vector.
-    // 4) Concatenate the two vectors.
-
-    // Temp velocity and lagrange dof type vectors.
-   Vector<unsigned> temp_v_doftypes;
-   Vector<unsigned> temp_l_doftypes;
-    
-   unsigned increment = 0;
-   for(unsigned mesh_i = 0; mesh_i < My_nmesh; mesh_i++)
-    {
-     // Store the velocity dof types.
-     for(unsigned dim_i = 0; dim_i < spatial_dim; dim_i++)
-      {
-       temp_v_doftypes.push_back(increment++);
-      } // for spatial_dim
-
-     // Store the pressure/lagrange dof types.
-     unsigned n_doftype_in_mesh = this->ndof_types_in_mesh(mesh_i);
-
-     for(unsigned l_i = spatial_dim; l_i < n_doftype_in_mesh; l_i++)
-      {
-       temp_l_doftypes.push_back(increment++);
-      }
-    } // for My_nmesh
-    
-   // Concatenate the vectors.
-   Subsidiary_list_bcpl.clear();
-   Subsidiary_list_bcpl.reserve(temp_v_doftypes.size() + 
-                                temp_l_doftypes.size());
-   Subsidiary_list_bcpl.insert(Subsidiary_list_bcpl.end(),
-                               temp_v_doftypes.begin(),
-                               temp_v_doftypes.end());
-   Subsidiary_list_bcpl.insert(Subsidiary_list_bcpl.end(),
-                               temp_l_doftypes.begin(),
-                               temp_l_doftypes.end());
-  } // end of encapculating
-
-//  // Output for artificial test.
-//  std::cout << "Subsidiary_list_bcpl:" << std::endl; 
-//  for (unsigned i = 0; i < Subsidiary_list_bcpl.size(); i++) 
-//  {
-//    std::cout << Subsidiary_list_bcpl[i] << std::endl;
-//  }
-//  pause("Printed out Subsidiary_list_bcpl"); 
-
-
-  // Re-order the dof_types.
-  // The natural ordering of the dof types are ordered by their meshes.
-  // We want to tell the blocks where they should be in the 
-  // new blocking scheme. This mapping is passed to block_setup(...).
-  //
-  // This corresponds with the Subsidiary_list_bcpl above. We want the order: 
-  // 1) bulk velocities, 2) constrained velocities, 3) pressure,
-  // 4) the Lagrange multipliers.
-  //
-  // Consider the same example above:
-  // [0 1 2 3] [4  5  6   7   8 ] [9  10 11 12]
-  // [u v w p] [up vp wp Lp1 Lp2] [ut vt wt Lt1]
-  //
-  // We want:
-  //  0 1 2 9 3  4  5  10  11  6  7  8  12
-  // [u v w p up vp wp Lp1 Lp2 ut vt wt Lt1
-  //
-  // To create the mapping, think of this in terms of:
-  // "Where do I want to move this dof type to?"
-  // For example, take the 3th entry in the original list "p". Where do we want
-  // to move this to? the 9th place.
-  //
-  // Artificial test data for the above example. Just uncomment to test.
-  // My_nmesh = 3;
-  // N_doftype_in_mesh.resize(My_nmesh,0);
-  // N_doftype_in_mesh[0] = 4;
-  // N_doftype_in_mesh[1] = 5;
-  // N_doftype_in_mesh[2] = 4;
-  // spatial_dim = 3;
-  // N_velocity_doftypes = spatial_dim*My_nmesh;
-  // n_dof_types = 13;
-
-
-
-//  std::cout << "dof_to_block_map:" << std::endl; 
-//  for (unsigned i = 0; i < dof_to_block_map.size(); i++) 
-//  {
-//    std::cout << dof_to_block_map[i] << std::endl;
-//  }
-//  pause("Done the dof_to_block_map"); 
-
-
-//  // Check the block size.
-//  unsigned tmp_nblocks = this->nblock_types();
-//  for (unsigned i = 0; i < tmp_nblocks; i++) 
-//  {
-//    // Go along the first column.
-//    unsigned raycol = 0;
-//
-//    CRDoubleMatrix* tmpblockpt = new CRDoubleMatrix;
-//    this->get_block(i,raycol,*tmpblockpt);
-//
-//    unsigned raynrow = tmpblockpt->nrow();
-//    std::cout << "block: " << i << ", nrow: " << raynrow << std::endl; 
-//  }
-//  pause("now!"); 
-  
 
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
@@ -1848,7 +1728,8 @@ namespace oomph
     CRDoubleMatrixHelpers::concatenate_without_communication
      (f_dist_pt,f_subblock_pt,*f_aug_pt);
 
-    // delete the sub F pointers
+    // delete the sub F pointers, this would also delete the 
+    // v_aug_pt
     for(unsigned row_i = 0; row_i < N_fluid_doftypes; row_i++)
      {
       for(unsigned col_i = 0; col_i < N_fluid_doftypes; col_i++)
@@ -1904,11 +1785,6 @@ namespace oomph
                       *f_subblock_pt(row_i,N_velocity_doftypes));
      }
 
-    Vector<unsigned> ns_dof_list(N_fluid_doftypes,0);
-    for (unsigned i = 0; i < N_fluid_doftypes; i++)
-     {
-      ns_dof_list[i]= Subsidiary_list_bcpl[i];
-     }
 
     // Determine whether the NS preconditioner is a block preconditioner (and
     // therefore a subsidiary preconditioner)
@@ -1934,7 +1810,7 @@ namespace oomph
 #endif
 
 
-    // Tell the LSC preconditioner which dof type should be treated as one
+    // Tell the LSC preconditioner which DOF type should be treated as one
     // dof type. i.e.
     // 0   0  2  4
     // u = ub up ut
@@ -1993,34 +1869,186 @@ namespace oomph
 //    Doftype_coarsen_map_fine.push_back(tmp4);
 
 //    pause("Before turn into..."); 
-    
+   
 
+  // Now we create the dof_number_in_master_map vector to pass to the
+  // turn_into_subsidiary_block_preconditioner(...) function.
+  //
+  // This vector tells the subsidiary block preconditioner what it's DOF type
+  // is in relation it's parent block preconditioner.
+  //
+  // In general, we want:
+  //
+  //   dof_number_in_master_map[subsidiary DOF type] = master DOF type
+  //
+  // 
+  // Example: Using the example above, our problem has the natural 
+  // DOF type ordering:
+  //
+  //  0 1 2 3   4  5  6   7   8    9  10 11 12   <- Natural DOF type ordering.
+  // [u v w p] [up vp wp Lp1 Lp2] [ut vt wt Lt1] <- DOF type.
+  //
+  // We need to create a vector telling the subsidiary block preconditioner
+  // which DOF types it will work with, in our case, it will work with the
+  // fluid DOF types: u, v, w, p, up, vp, wp, ut, vt and wt.
+  //
+  // Furthermore, the ordering of the DOF type matters, most importantly,
+  // THIS preconditioner needs to be aware of the natural DOF type required
+  // by the subsidiary block preconditioner. The Navier-Stokes Schur Complement
+  // block preconditioner works with $spatial_dimension + 1 DOF types, BUT, 
+  // this block preconditioner has split the velocity DOF types into a finer 
+  // grain DOF type structure required by the Navier-Stokes preconditioner. 
+  // We will discuss coarsening DOF types later, for now we focus on the
+  // dof_number_in_master_map vector.
+  //
+  // We start by discussing a simpler example, lets say this preconditioner 
+  // does not have a finer DOF type splitting than required by the subsidiary
+  // block preconditioner, so let the natural DOF type ordering of this
+  // block preconditioner be:
+  // 0 1 2 3 4  5
+  // u v w p L1 L2
+  //
+  // This preconditioner must know the natural DOF type ordering required by
+  // the subsidiary block preconditioner. For our implementation of the LSC
+  // preconditioner, we require the velocity DOF types first, then the pressure
+  // DOF type. In 3D, this would be:
+  //
+  // LSC block preconditioner DOF type ordering:
+  // 0 1 2 3
+  // u v w p
+  //
+  // We must map each of the subsidiary DOF type with a parent DOF type.
+  //
+  // So the dof_number_in_master_map would be:
+  // [0, 1, 2, 3], which says:
+  //
+  // subsidiary DOF type 0 -> master DOF type 0
+  // subsidiary DOF type 1 -> master DOF type 1
+  // subsidiary DOF type 2 -> master DOF type 2
+  // subsidiary DOF type 3 -> master DOF type 3
+  //
+  // This is a trivial mapping. 
+  //
+  //
+  //
+  // Another example, lets assume that the natural DOF type ordering of this 
+  // preconditioner be:
+  // 0  1  2 3 4 5
+  // L1 L2 u v w p
+  //
+  // Then the dof_number_in_master_map would be:
+  // [2, 3, 4, 5], which says:
+  // 
+  // subsidiary DOF type 0 -> master DOF type 2
+  // subsidiary DOF type 1 -> master DOF type 3
+  // subsidiary DOF type 2 -> master DOF type 4
+  // subsidiary DOF type 3 -> master DOF type 5
+  //
+  //
+  //
+  // Another example, assume that this block preconditioner has the natural
+  // DOF type ordering:
+  // 0 1  2 3  4 5  6 7
+  // v L1 p L2 u L3 w L4
+  //
+  // Then the dof_number_in_master_map would be
+  // [4 0 6 2], which says: 
+  //
+  // subsidiary DOF type 0 -> master DOF type 4
+  // subsidiary DOF type 1 -> master DOF type 0
+  // subsidiary DOF type 2 -> master DOF type 6
+  // subsidiary DOF type 3 -> master DOF type 2
+  //
+  //
+  //
+  //
+  // BACK TO OUR PRECONDITIONER
+  //
+  // For your convenience, we repeat the natural DOF type ordering of this 
+  // block preconditioner here:
+  //
+  //  0 1 2 3   4  5  6   7   8    9  10 11 12   <- Natural DOF type ordering.
+  // [u v w p] [up vp wp Lp1 Lp2] [ut vt wt Lt1] <- DOF type.
+  //
+  // First, we ignore the fact that there are more DOF types than required by
+  // the subsidiary block preconditioner. We give the subsidiary block 
+  // preconditioner the following dof_number_in_master_map:
+  // [0 1 2 4  5  6  9  10 11 3]
+  //  u v w up vp wp ut vt wt p
+  // 
+  // Which basically says to the subsidiary block preconditioner:
+  // "you will work with my DOF types 0, 1, 2, 4, etc.."
+  //
+  // We chose this DOF ordering as it is the same as our block ordering, and
+  // so will be easier when we replace blocks (discussed later).
+  // 
+  { // encapsulating temp vectors.
+
+    // We create the mapping with the help of two vectors.
+    // Noting that the first spatial dimension number of dof types in each mesh
+    // corresponds to the velocity dof types, and the rest are either pressure
+    // (in the case of the bulk mesh) or lagrange multiplier dof types, we
+    // simply:
+    // 1) Loop through the meshes
+    // 2)   Loop through the spatial_dim, store the dof type in the v_vector.
+    // 3)   Loop through the remaining dof types, store the dof type in the l
+    //      vector.
+    // 4) Concatenate the two vectors.
+
+   unsigned dof_index = 0;
+
+   Subsidiary_list_bcpl.resize(0,0);
+   for(unsigned mesh_i = 0; mesh_i < My_nmesh; mesh_i++)
+    {
+     // Store the velocity dof types.
+     for(unsigned dim_i = 0; dim_i < spatial_dim; dim_i++)
+      {
+       Subsidiary_list_bcpl.push_back(dof_index++);
+      } // for spatial_dim
+
+     // Update the DOF index
+     dof_index = My_ndof_types_in_mesh[mesh_i];
+    } // for My_nmesh
+
+   // push back the pressure DOF type
+   Subsidiary_list_bcpl.push_back(spatial_dim);
+
+  } // end of encapsulating
+
+//  // Output for artificial test.
+//  std::cout << "Subsidiary_list_bcpl:" << std::endl; 
+//  for (unsigned i = 0; i < Subsidiary_list_bcpl.size(); i++) 
+//  {
+//    std::cout << Subsidiary_list_bcpl[i] << std::endl;
+//  }
+//  pause("Printed out Subsidiary_list_bcpl"); 
 
     // The ns_dof_list will ensure that the NS preconditioner have the 
     // structure:
     // 0  1  2  3  4  5  6
     // ub vb up vp ut vt p
     navier_stokes_block_preconditioner_pt
-     ->turn_into_subsidiary_block_preconditioner(this, ns_dof_list,
+     ->turn_into_subsidiary_block_preconditioner(this, Subsidiary_list_bcpl,
                                                  doftype_to_doftype_map);
 
 //    pause("After turn_into..."); 
     
 
     // Set the replacement blocks.
-    for (unsigned row_i = 0; row_i < N_fluid_doftypes; row_i++) 
+    //
+    // Recall: block structure:
+    //  0 1 2   3  4  5    6  7  8     9   10  11  12   <- block index
+    // [u v w | up vp wp | ut vt wt ] [p | Lp1 Lp2 Lt1] <- DOF type
+
+    for (unsigned row_i = spatial_dim; row_i < N_velocity_doftypes; row_i++) 
     {
-      for (unsigned col_i = 0; col_i < N_fluid_doftypes; col_i++) 
+      for (unsigned col_i = spatial_dim; col_i < N_velocity_doftypes; col_i++) 
       {
         navier_stokes_block_preconditioner_pt
           ->set_replacement_dof_block(row_i,col_i,
                                       f_subblock_pt(row_i,col_i));
       }
     }
-//    pause("I have set the replacement blocks"); 
-    
-//    navier_stokes_block_preconditioner_pt
-//     ->set_replacement_block(f_subblock_pt);
 
 //    pause("About to call setup of NS prec."); 
     
@@ -2036,7 +2064,7 @@ namespace oomph
         delete f_subblock_pt(i,j);
        }
      }
-   }
+   } // else - NS prec is block preconditioner
 
 ///////////////////////////////////////////////////////////////////////////////
 

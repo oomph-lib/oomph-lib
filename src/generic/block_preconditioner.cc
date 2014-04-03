@@ -117,9 +117,12 @@ namespace oomph
       std::ostringstream err_msg;
       err_msg
        << "The internal ndof types and the length of the dof_to_block_map\n"
-       << "vector is not the same. Since this is the master block\n"
-       << "preconditioner, you must describe which block each dof type belongs"
-       << " to.";
+       << "vector is not the same. Since this is the master block "
+       << "preconditioner,\n"
+       << "you must describe which block each DOF type belongs to,\n"
+       << "no more, no less."
+       << "internal_ndof_types = " << n_internal_dof_types << "\n"
+       << "dof_to_block_map.size() = " << n_working_dof_types << "\n";
       throw OomphLibWarning(err_msg.str(),
                             OOMPH_CURRENT_FUNCTION,
                             OOMPH_EXCEPTION_LOCATION);
@@ -1443,9 +1446,8 @@ namespace oomph
            sub_block_i < sub_block_size; sub_block_i++) 
        {
         tmp_dist_pt[sub_block_i] 
-         = Replacement_dof_block_pt.get(
-             Doftype_to_block_map[super_block_i][sub_block_i],0)
-               ->distribution_pt();
+         = Internal_block_distribution_pt[
+             Doftype_to_block_map[super_block_i][sub_block_i]];
        }
   
       Precomputed_block_distribution_pt[super_block_i] 
@@ -5091,7 +5093,7 @@ namespace oomph
     unsigned prec_row_block_i = Doftype_to_block_map[block_j][block_col_i];
 
     tmp_col_distribution_pt[block_col_i] 
-      = Replacement_dof_block_pt.get(prec_row_block_i,0)->distribution_pt();
+      = Internal_block_distribution_pt[prec_row_block_i];
    }
 
   output_block.build(Precomputed_block_distribution_pt[block_i]);

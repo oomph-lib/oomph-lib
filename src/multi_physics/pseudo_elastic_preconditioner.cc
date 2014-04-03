@@ -194,16 +194,20 @@ namespace oomph
 #endif
 
   // Setup the dof_list scheme for block_setup. 
-  // The dof types are currently in the order (in 3D):
-  // 0 1 2 3  4  5  6  7  8
-  // x y z xc yc zc lx ly lz
+  // The natural DOF types order is (in 3D):
+  // 0 1 2 3  4  5  6  7  8  <- natural DOF type index
+  // x y z xc yc zc lx ly lz <- DOf type
   // 
   // We need to group the directional displacements together:
-  // x xc y yc xz zc lx ly lz
+  // 0 1  2 3  4  5  6  7  8  <- block index
+  // x xc y yc xz zc lx ly lz <- DOF type
+  //
   // The mapping required is:
   // 0 2 4 1 3 5 6 7 8
-  // Think of this as 
-  // "Where do I want to move the dof type in this position to?"
+  //
+  // In general we want:
+  //
+  //   dof_to_block_map[DOF type] = block type
   Vector<unsigned> dof_list_for_block_setup(n_dof_types);
   for (unsigned dim_i = 0; dim_i < Dim; dim_i++) 
    {
@@ -219,12 +223,12 @@ namespace oomph
 
   // Setup the block ordering. We have the following:
   // Block types [0, 2*Dim) are the solid blocks.
-  // Block types [2*Dim, 3*Dim) are the lagrange multiplier dof types.
+  // Block types [2*Dim, 3*Dim) are the Lagrange multiplier blocks.
   // 
   // For d = 0, 1, 2,
   // Bulk solid doftypes: 2*d
   // Constrained solid doftypes: 2*d+1
-  // Lagr doftyoes: 2*Dim + d
+  // Lgr doftyoes: 2*Dim + d
   this->block_setup(dof_list_for_block_setup);
 
   // Create dof_list for subsidiary preconditioner. This will be used later
@@ -232,15 +236,17 @@ namespace oomph
   Vector<unsigned> dof_list_for_subsidiary_prec(n_solid_dof_types);
 
   // The dof types are currently in the order (in 3D):
-  // 0 1 2 3  4  5  6  7  8
-  // x y z xc yc zc lx ly lz
+  // 0 1 2 3  4  5  6  7  8  <- DOF index
+  // x y z xc yc zc lx ly lz <- DOF type
   // 
   // We need to group the directional displacements together:
-  // x xc y yc xz zc lx ly lz
+  // x xc y yc xz zc
+  //
   // The mapping required is:
   // 0 3 1 4 2 5
-  // Think of this as: 
-  // "Which dof type do I want to move into this position?"
+  //
+  // In general we want:
+  //    dof_list[subsidiary DOF type] = master DOF type
   for (unsigned dim_i = 0; dim_i < Dim; dim_i++) 
    {
     // bulk solid dof 
@@ -342,15 +348,12 @@ namespace oomph
      }
 
     // Set the replacement blocks.
-    for (unsigned row_i = 0; row_i < n_solid_dof_types; row_i++) 
+    for (unsigned d = 0; d < Dim; d++) 
     {
-      for (unsigned col_i = 0; col_i < n_solid_dof_types; col_i++) 
-      {
-        s_prec_pt->set_replacement_dof_block(row_i,col_i,
-                                             solid_matrix_pt(row_i,col_i));
-      }
+      unsigned block_i = 2*d+1;
+      s_prec_pt->set_replacement_dof_block(block_i,block_i,
+                                           solid_matrix_pt(block_i,block_i));
     }
-    //s_prec_pt->set_replacement_block(solid_matrix_pt);
 
     s_prec_pt->Preconditioner::setup(matrix_pt(),comm_pt());
     Elastic_preconditioner_pt = s_prec_pt;
@@ -424,15 +427,13 @@ namespace oomph
      }
 
     // Set the replacement blocks.
-    for (unsigned row_i = 0; row_i < n_solid_dof_types; row_i++) 
+    for (unsigned d = 0; d < Dim; d++) 
     {
-      for (unsigned col_i = 0; col_i < n_solid_dof_types; col_i++) 
-      {
-        s_prec_pt->set_replacement_dof_block(row_i,col_i,
-                                             solid_matrix_pt(row_i,col_i));
-      }
+      unsigned block_i = 2*d+1;
+      s_prec_pt->set_replacement_dof_block(block_i,block_i,
+                                           solid_matrix_pt(block_i,block_i));
     }
-//    s_prec_pt->set_replacement_block(solid_matrix_pt);
+
     s_prec_pt->set_dof_to_block_map(s_prec_dof_to_block_map);
     s_prec_pt->Preconditioner::setup(matrix_pt(),comm_pt());
 
