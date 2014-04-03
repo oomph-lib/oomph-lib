@@ -59,7 +59,7 @@ namespace oomph
     // Compute number of rows in this (sub) preconditioner using data from
     // the master.
     Nrow = 0;
-    for (unsigned b = 0; b < Ndof_types; b++)
+    for (unsigned b = 0; b < Internal_ndof_types; b++)
      {
       Nrow += this->dof_block_dimension(b);
      }
@@ -173,8 +173,8 @@ namespace oomph
      }
 
     // Now set the dof_to_block_map to the identify.
-    dof_to_block_map.resize(Ndof_types,0);
-    for (unsigned i = 0; i < Ndof_types; i++) 
+    dof_to_block_map.resize(Internal_ndof_types,0);
+    for (unsigned i = 0; i < Internal_ndof_types; i++) 
      {
       dof_to_block_map[i] = i;
      }
@@ -541,7 +541,7 @@ namespace oomph
     Index_in_dof_block_dense.resize(nrow_local);
 
     // zero the number of dof types
-    Ndof_types = 0;
+    Internal_ndof_types = 0;
 
 #ifdef PARANOID
     // Vector to keep track of previously assigned block numbers
@@ -576,7 +576,7 @@ namespace oomph
         // Find the number of block types that the elements in this mesh
         // are in charge of
         unsigned ndof_in_element = ndof_types_in_mesh(m);
-        Ndof_types += ndof_in_element;
+        Internal_ndof_types += ndof_in_element;
 
         for (unsigned e=0;e<n_element;e++)
          {
@@ -665,7 +665,7 @@ namespace oomph
         // Find the number of block types that the elements in this mesh
         // are in charge of
         unsigned ndof_in_element = ndof_types_in_mesh(m);
-        Ndof_types += ndof_in_element;
+        Internal_ndof_types += ndof_in_element;
 
         // Loop over all elements
         for (unsigned e=0;e<n_element;e++)
@@ -1047,7 +1047,7 @@ namespace oomph
     // have the corresponding dof number
 
     // clear the Ndof_in_dof_block storage
-    Dof_dimension.assign(Ndof_types,0);
+    Dof_dimension.assign(Internal_ndof_types,0);
 
     // first consider a non distributed matrix
     if (!matrix_distributed)
@@ -1071,8 +1071,8 @@ namespace oomph
 
       // first compute how many instances of each dof are on this
       // processor
-      unsigned* my_nrows_in_dof_block = new unsigned[Ndof_types];
-      for (unsigned i = 0; i < Ndof_types; i++)
+      unsigned* my_nrows_in_dof_block = new unsigned[Internal_ndof_types];
+      for (unsigned i = 0; i < Internal_ndof_types; i++)
        {
         my_nrows_in_dof_block[i] = 0;
        }
@@ -1082,24 +1082,24 @@ namespace oomph
        }
 
       // next share the data
-      unsigned* nrow_in_dof_block_recv = new unsigned[Ndof_types*nproc];
-      MPI_Allgather(my_nrows_in_dof_block,Ndof_types,MPI_UNSIGNED,
-                    nrow_in_dof_block_recv,Ndof_types,MPI_UNSIGNED,
+      unsigned* nrow_in_dof_block_recv = new unsigned[Internal_ndof_types*nproc];
+      MPI_Allgather(my_nrows_in_dof_block,Internal_ndof_types,MPI_UNSIGNED,
+                    nrow_in_dof_block_recv,Internal_ndof_types,MPI_UNSIGNED,
                     comm_pt()->mpi_comm());
       delete[] my_nrows_in_dof_block;
 
       // compute my first dof index and Nrows_in_dof_block
-      Vector<unsigned> my_first_dof_index(Ndof_types,0);
-      for (unsigned i = 0; i < Ndof_types; i++)
+      Vector<unsigned> my_first_dof_index(Internal_ndof_types,0);
+      for (unsigned i = 0; i < Internal_ndof_types; i++)
        {
         for (unsigned p = 0; p < my_rank; p++)
          {
-          my_first_dof_index[i] += nrow_in_dof_block_recv[p*Ndof_types + i];
+          my_first_dof_index[i] += nrow_in_dof_block_recv[p*Internal_ndof_types + i];
          }
         Dof_dimension[i] = my_first_dof_index[i];
         for (unsigned p = my_rank; p < nproc; p++)
          {
-          Dof_dimension[i] += nrow_in_dof_block_recv[p*Ndof_types + i];
+          Dof_dimension[i] += nrow_in_dof_block_recv[p*Internal_ndof_types + i];
          }
        }
       delete[] nrow_in_dof_block_recv;
@@ -1107,7 +1107,7 @@ namespace oomph
       // next compute Index in dof block
       Index_in_dof_block_dense.resize(nrow_local);
       Index_in_dof_block_dense.initialise(0);
-      Vector<unsigned> dof_counter(Ndof_types,0);
+      Vector<unsigned> dof_counter(Internal_ndof_types,0);
       for (unsigned i = 0; i < nrow_local; i++)
        {
         Index_in_dof_block_dense[i] =
@@ -1198,13 +1198,13 @@ namespace oomph
 
 #ifdef PARANOID
   //check the vector is the correct length
-  if (dof_to_block_map.size() != Ndof_types)
+  if (dof_to_block_map.size() != Internal_ndof_types)
    {
     std::ostringstream error_message;
     error_message
      << "The dof_to_block_map vector (size="
-     << dof_to_block_map.size() << ") must be of size Ndof_types="
-     << Ndof_types;
+     << dof_to_block_map.size() << ") must be of size Internal_ndof_types="
+     << Internal_ndof_types;
     throw OomphLibError(
                         error_message.str(),
                         OOMPH_CURRENT_FUNCTION,
@@ -1214,7 +1214,7 @@ namespace oomph
 
   // find the maximum block number
   unsigned max_block_number = 0;
-  for (unsigned i = 0; i < Ndof_types; i++)
+  for (unsigned i = 0; i < Internal_ndof_types; i++)
    {
     if (dof_to_block_map[i] > max_block_number)
      {
@@ -1229,10 +1229,10 @@ namespace oomph
   Ndof_in_block.resize(max_block_number+1);
 
   // resize storage
-  Dof_number_to_block_number_lookup.resize(Ndof_types);
+  Dof_number_to_block_number_lookup.resize(Internal_ndof_types);
 
   // build the storage for the two maps (block to dof) and (dof to block)
-  for (unsigned i = 0; i < Ndof_types; i++)
+  for (unsigned i = 0; i < Internal_ndof_types; i++)
    {
     Dof_number_to_block_number_lookup[i] = dof_to_block_map[i];
     Block_number_to_dof_number_lookup[dof_to_block_map[i]].push_back(i);
@@ -1258,14 +1258,14 @@ namespace oomph
 #endif
 
   // update the number of blocks types
-  Nblock_types = max_block_number+1;
+  Internal_nblock_types = max_block_number+1;
 
   // distributed or not depends on if we have more than one processor
   bool distributed = this->master_distribution_pt()->distributed();
 
   // create the new block distributions
-  Block_distribution_pt.resize(Nblock_types);
-  for (unsigned i = 0; i < Nblock_types; i++)
+  Block_distribution_pt.resize(Internal_nblock_types);
+  for (unsigned i = 0; i < Internal_nblock_types; i++)
    {
     unsigned block_dim = 0;
     for (unsigned j = 0; j < Ndof_in_block[i]; j++)
@@ -1364,8 +1364,8 @@ namespace oomph
   if (!distributed)
    {
     // resize the storage
-    Global_index.resize(Nblock_types);
-    for (unsigned b = 0; b < Nblock_types; b++)
+    Global_index.resize(Internal_nblock_types);
+    for (unsigned b = 0; b < Internal_nblock_types; b++)
      {
       Global_index[b].resize(Block_distribution_pt[b]->nrow());
      }
@@ -1408,7 +1408,7 @@ namespace oomph
      this->master_distribution_pt();
 
     // resize the nrows... storage
-    Nrows_to_send_for_get_block.resize(Nblock_types,nproc);
+    Nrows_to_send_for_get_block.resize(Internal_nblock_types,nproc);
     Nrows_to_send_for_get_block.initialise(0);
     Nrows_to_send_for_get_ordered.resize(nproc);
     Nrows_to_send_for_get_ordered.initialise(0);
@@ -1444,7 +1444,7 @@ namespace oomph
      }
 
     // resize the storage for Nrows_to_recv
-    Nrows_to_recv_for_get_block.resize(Nblock_types,nproc);
+    Nrows_to_recv_for_get_block.resize(Internal_nblock_types,nproc);
     Nrows_to_recv_for_get_block.initialise(0);
     Nrows_to_recv_for_get_ordered.resize(nproc);
     Nrows_to_recv_for_get_ordered.initialise(0);
@@ -1461,28 +1461,28 @@ namespace oomph
        {
         // send
         proc.push_back(p);
-        nrows_to_send[p] = new unsigned[Nblock_types];
-        for (unsigned b = 0; b < Nblock_types; b++)
+        nrows_to_send[p] = new unsigned[Internal_nblock_types];
+        for (unsigned b = 0; b < Internal_nblock_types; b++)
          {
           nrows_to_send[p][b] =
            Nrows_to_send_for_get_block(b,p);
          }
         MPI_Request s_req;
-        MPI_Isend(nrows_to_send[p],Nblock_types,MPI_UNSIGNED,p,3,
+        MPI_Isend(nrows_to_send[p],Internal_nblock_types,MPI_UNSIGNED,p,3,
                   comm_pt()->mpi_comm(),&s_req);
         send_requests_nrow.push_back(s_req);
 
         // recv
-        nrows_to_recv[p] = new unsigned[Nblock_types];
+        nrows_to_recv[p] = new unsigned[Internal_nblock_types];
         MPI_Request r_req;
-        MPI_Irecv(nrows_to_recv[p],Nblock_types,MPI_UNSIGNED,p,3,
+        MPI_Irecv(nrows_to_recv[p],Internal_nblock_types,MPI_UNSIGNED,p,3,
                   comm_pt()->mpi_comm(),&r_req);
         recv_requests_nrow.push_back(r_req);
        }
       // send to self
       else
        {
-        for (unsigned b = 0; b < Nblock_types; b++)
+        for (unsigned b = 0; b < Internal_nblock_types; b++)
          {
           Nrows_to_recv_for_get_block(b,p) =
            Nrows_to_send_for_get_block(b,p);
@@ -1493,21 +1493,21 @@ namespace oomph
 
     // create some temporary storage for the global row indices that will
     // be received from another processor.
-    DenseMatrix<int*> block_rows_to_send(Nblock_types,nproc,0);
+    DenseMatrix<int*> block_rows_to_send(Internal_nblock_types,nproc,0);
     Vector<int*> ordered_rows_to_send(nproc,0);
 
     // resize the rows... storage
-    Rows_to_send_for_get_block.resize(Nblock_types,nproc);
+    Rows_to_send_for_get_block.resize(Internal_nblock_types,nproc);
     Rows_to_send_for_get_block.initialise(0);
     Rows_to_send_for_get_ordered.resize(nproc);
     Rows_to_send_for_get_ordered.initialise(0);
-    Rows_to_recv_for_get_block.resize(Nblock_types,nproc);
+    Rows_to_recv_for_get_block.resize(Internal_nblock_types,nproc);
     Rows_to_recv_for_get_block.initialise(0);
 
     // resize the storage
     for (unsigned p = 0; p < nproc; p++)
      {
-      for (unsigned b = 0; b < Nblock_types; b++)
+      for (unsigned b = 0; b < Internal_nblock_types; b++)
        {
         Rows_to_send_for_get_block(b,p)
          = new int[Nrows_to_send_for_get_block(b,p)];
@@ -1529,7 +1529,7 @@ namespace oomph
 
 
     // loop over my rows to allocate the nrows
-    DenseMatrix<unsigned> ptr_block(Nblock_types,nproc,0);
+    DenseMatrix<unsigned> ptr_block(Internal_nblock_types,nproc,0);
     for (unsigned i = 0; i < nrow_local; i++)
      {
       // the block number
@@ -1571,7 +1571,7 @@ namespace oomph
     for (unsigned p = 0; p < nproc; ++p)
      {
       int pt = 0;
-      for (unsigned b = 0; b < Nblock_types; ++b)
+      for (unsigned b = 0; b < Internal_nblock_types; ++b)
        {
 
         for (unsigned i = 0; i < Nrows_to_send_for_get_block(b,p); ++i)
@@ -1602,7 +1602,7 @@ namespace oomph
 
       // copy the data to its final storage
       Nrows_to_recv_for_get_ordered[p]=0;
-      for (unsigned b = 0; b < Nblock_types; b++)
+      for (unsigned b = 0; b < Internal_nblock_types; b++)
        {
         Nrows_to_recv_for_get_block(b,p) = nrows_to_recv[p][b];
         Nrows_to_recv_for_get_ordered[p] += nrows_to_recv[p][b];
@@ -1618,7 +1618,7 @@ namespace oomph
      {
       if (p != my_rank)
        {
-        for (unsigned b = 0; b < Nblock_types; b++)
+        for (unsigned b = 0; b < Internal_nblock_types; b++)
          {
           Rows_to_recv_for_get_block(b,p)
            = new int[Nrows_to_recv_for_get_block(b,p)];
@@ -1634,7 +1634,7 @@ namespace oomph
      {
       if (p != my_rank)
        {
-        for (unsigned b = 0; b < Nblock_types; b++)
+        for (unsigned b = 0; b < Internal_nblock_types; b++)
          {
           if (Nrows_to_send_for_get_block(b,p) > 0)
            {
@@ -1663,7 +1663,7 @@ namespace oomph
           MPI_Aint send_displacements[nsend_for_rows[p]];
           int send_sz[nsend_for_rows[p]];
           unsigned send_ptr = 0;
-          for (unsigned b = 0; b < Nblock_types; b++)
+          for (unsigned b = 0; b < Internal_nblock_types; b++)
            {
             if (Nrows_to_send_for_get_block(b,p) > 0)
              {
@@ -1699,7 +1699,7 @@ namespace oomph
           MPI_Aint recv_displacements[nrecv_for_rows[p]];
           int recv_sz[nrecv_for_rows[p]];
           unsigned recv_ptr = 0;
-          for (unsigned b = 0; b < Nblock_types; b++)
+          for (unsigned b = 0; b < Internal_nblock_types; b++)
            {
             if (Nrows_to_recv_for_get_block(b,p) > 0)
              {
@@ -1746,8 +1746,8 @@ namespace oomph
     Rows_to_recv_for_get_ordered.initialise(0);
 
     // construct block offset
-    Vector<int> vec_offset(Nblock_types,0);
-    for (unsigned b = 1; b < Nblock_types; ++b)
+    Vector<int> vec_offset(Internal_nblock_types,0);
+    for (unsigned b = 1; b < Internal_nblock_types; ++b)
      {
       vec_offset[b]=vec_offset[b-1]+Block_distribution_pt[b-1]->nrow_local();
      }
@@ -1758,7 +1758,7 @@ namespace oomph
       int pt = 0;
       Rows_to_recv_for_get_ordered[p]
        = new int[Nrows_to_recv_for_get_ordered[p]];
-      for (unsigned b = 0; b < Nblock_types; b++)
+      for (unsigned b = 0; b < Internal_nblock_types; b++)
        {
         for (unsigned i = 0; i < Nrows_to_recv_for_get_block(b,p); i++)
          {
@@ -1774,7 +1774,7 @@ namespace oomph
      {
       if (p!= my_rank)
        {
-        for (unsigned b = 0; b < Nblock_types; b++)
+        for (unsigned b = 0; b < Internal_nblock_types; b++)
          {
           delete[] block_rows_to_send(b,p);
          }
@@ -1956,8 +1956,8 @@ namespace oomph
     
     // Get the number of block types (and dof types) in this preconditioner
     // from the length of the block_map vector.
-    Ndof_types = block_map.size();
-    Nblock_types = Ndof_types;
+    Internal_ndof_types = block_map.size();
+    Internal_nblock_types = Internal_ndof_types;
    }
   // If the master block preconditioner does not have precomputed
   // preconditioner blocks.
@@ -1969,8 +1969,8 @@ namespace oomph
     
     // Get the number of block types (and dof types) in this preconditioner
     // from the length of the block_map vector.
-    Ndof_types = block_map.size();
-    Nblock_types = Ndof_types;
+    Internal_ndof_types = block_map.size();
+    Internal_nblock_types = Internal_ndof_types;
    }
  } // end of turn_into_subsidiary_block_preconditioner(...)
 
@@ -2019,7 +2019,7 @@ namespace oomph
  {
 
   // Cache number of block types
-  const unsigned n_block_types=this->Nblock_types;
+  const unsigned n_block_types=this->Internal_nblock_types;
 
 #ifdef PARANOID
   // If required blocks matrix pointer is not the correct size then abort.
@@ -3482,7 +3482,7 @@ namespace oomph
    {
 
     // number of blocks
-    unsigned nblock = this->Nblock_types;
+    unsigned nblock = this->Internal_nblock_types;
 
     // copy to w
     unsigned block_offset = 0;
@@ -3662,7 +3662,7 @@ namespace oomph
       !this->distribution_pt()->distributed())
    {
     // number of blocks
-    unsigned nblock = this->Nblock_types;
+    unsigned nblock = this->Internal_nblock_types;
 
     // copy to w
     unsigned block_offset = 0;

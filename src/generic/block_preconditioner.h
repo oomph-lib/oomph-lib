@@ -123,8 +123,8 @@ namespace oomph
    // stand-alone block preconditioner (in the latter case it
    // obviously stores the number of rows within the subsidiary
    // preconditioner
-   Nblock_types=0;
-   Ndof_types=0;
+   Internal_nblock_types=0;
+   Internal_ndof_types=0;
    
    // No preconditioner blocks has been computed yet.
    Preconditioner_blocks_have_been_precomputed = false;
@@ -532,7 +532,7 @@ namespace oomph
   {
    if(real_nblock_types)
     {  
-     return Nblock_types;
+     return Internal_nblock_types;
     }
    else
     {
@@ -542,7 +542,7 @@ namespace oomph
       }
      else
       {
-       return Nblock_types;
+       return Internal_nblock_types;
       }
     }
   } // EOFunc nblock_types(...)
@@ -619,7 +619,7 @@ namespace oomph
      {
       if(real_ndof_types || !Preconditioner_blocks_have_been_precomputed)
        {
-        return Ndof_types;
+        return Internal_ndof_types;
        }
       else
        {
@@ -638,7 +638,7 @@ namespace oomph
 //    {
 //     if (is_subsidiary_block_preconditioner())
 //      {
-//       return Ndof_types;
+//       return Internal_ndof_types;
 //      }
 //     else
 //      {
@@ -658,7 +658,7 @@ namespace oomph
 //      {
 //       if (is_subsidiary_block_preconditioner())
 //        {
-//         return Ndof_types;
+//         return Internal_ndof_types;
 //        }
 //       else
 //        {
@@ -971,8 +971,8 @@ namespace oomph
    if (is_master_block_preconditioner())
     {
      Nrow = 0;
-     Ndof_types = 0;
-     Nblock_types = 0;
+     Internal_ndof_types = 0;
+     Internal_nblock_types = 0;
     }
 
    // delete the prec matrix dist pt
@@ -993,7 +993,7 @@ namespace oomph
    oomph_info << std::endl;
    if (is_subsidiary_block_preconditioner())
     {
-     for (unsigned d = 0; d < Ndof_types; d++)
+     for (unsigned d = 0; d < Internal_ndof_types; d++)
       {
        oomph_info << "Master DOF number " << d << " : "
                   << this->master_dof_number(d) << std::endl;
@@ -1015,7 +1015,7 @@ namespace oomph
    oomph_info << *master_distribution_pt() << std::endl;
    oomph_info << "Preconditioner matrix distribution:" << std::endl;
    oomph_info << *preconditioner_matrix_distribution_pt() << std::endl;
-   for (unsigned b = 0; b < Nblock_types; b++)
+   for (unsigned b = 0; b < Internal_nblock_types; b++)
     {
      oomph_info << "Block " << b << " distribution:" << std::endl;
      oomph_info << *Block_distribution_pt[b] << std::endl;
@@ -1651,13 +1651,13 @@ namespace oomph
   /// this information is maintained if used as a subsidiary or stand-alone
   /// block preconditioner, in the latter case it stores the number of blocks
   /// within the subsidiary preconditioner.
-  unsigned Nblock_types;
+  unsigned Internal_nblock_types;
 
   ///\short Number of different DOF types in this preconditioner. Note that
   /// this information is maintained if used as a subsidiary or stand-alone
   /// block preconditioner, in the latter case it stores the number of blocks
   /// within the subsidiary preconditioner.
-  unsigned Ndof_types;
+  unsigned Internal_ndof_types;
  
  private:
 
