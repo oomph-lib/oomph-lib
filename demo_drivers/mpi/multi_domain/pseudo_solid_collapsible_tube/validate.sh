@@ -3,7 +3,7 @@
 # Get the OOPMH-LIB root directory from a makefile
 OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
 
-if [ -e ../pseudo_solid_collapsible_tube ]; then
+if [ ! -f pseudo_solid_collapsible_tube ]; then
     echo " "
     echo "Pseudo-elastic collapsible tube validation "
     echo " "
