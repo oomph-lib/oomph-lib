@@ -4341,7 +4341,7 @@ namespace oomph
                        CRDoubleMatrix& output_block) const
  {
 #ifdef PARANOID
-  // the number of blocks
+  // the number of blocks RAYRAY change this to the block types the preconditioner expects
   unsigned nblocks = nblock_types_precomputed();
   
   // paranoid check that block i is in this block preconditioner
@@ -4356,15 +4356,15 @@ namespace oomph
                         OOMPH_EXCEPTION_LOCATION);
    }
 
-  if(!preconditioner_blocks_have_been_replaced())
-  {
-    std::ostringstream error_message;
-    error_message << "There are no precomputed blocks. Please call "
-                  << "set_replacement_block(...)  ";
-    throw OomphLibError(error_message.str(),
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
-  }
+//  if(!preconditioner_blocks_have_been_replaced())
+//  {
+//    std::ostringstream error_message;
+//    error_message << "There are no precomputed blocks. Please call "
+//                  << "set_replacement_block(...)  ";
+//    throw OomphLibError(error_message.str(),
+//                        OOMPH_CURRENT_FUNCTION,
+//                        OOMPH_EXCEPTION_LOCATION);
+//  }
 #endif
 
   // Create the dense matrix required for the merge.
@@ -4381,60 +4381,19 @@ namespace oomph
 
     // Cache the pointer to the precomputed block.
     CRDoubleMatrix* precom_block_pt = 0;
-    if(preconditioner_blocks_have_been_replaced())
-    {
-      precom_block_pt = Replacement_dof_block_pt.get(prec_block_i,prec_block_j);
-    }
-    else
+    if(Replacement_dof_block_pt.get(prec_block_i,prec_block_j) == 0)
     {
       precom_block_pt = new CRDoubleMatrix;
       get_block_from_original_matrix(prec_block_i,prec_block_j,*precom_block_pt);
     }
+    else
+    {
+      precom_block_pt = Replacement_dof_block_pt.get(prec_block_i,prec_block_j);
+    }
 
-    // Create a new matrix with the precomputed block
-    // (prec_block_i,prec_block_j)
+    cr_double_matrix_deep_copy(precom_block_pt,output_block);
 
-    // Temp storage.
-    Vector<double> tmp_values;
-    Vector<int> tmp_column_indices;
-    Vector<int> tmp_row_start;
-    
-    // The precomputed block nrow and nnz
-    unsigned precom_nrow = precom_block_pt->nrow();
-    unsigned long precom_nnz = precom_block_pt->nnz();
-    
-    // Reserve space.
-    tmp_values.reserve(precom_nnz);
-    tmp_column_indices.reserve(precom_nnz);
-    tmp_row_start.reserve(precom_nrow + 1);
-
-    // The data to copy over.
-    double* precom_values = precom_block_pt->value();
-    int* precom_column_indices = precom_block_pt->column_index();
-    int* precom_row_start = precom_block_pt->row_start();
-    
-    // Copy the values and column indices.
-    for (unsigned i = 0; i < precom_nnz; i++) 
-     {
-      tmp_values.push_back(precom_values[i]);
-      tmp_column_indices.push_back(precom_column_indices[i]);
-     }
-
-    // Copy the row start
-    for (unsigned i = 0; i < precom_nrow + 1; i++) 
-     {
-      tmp_row_start.push_back(precom_row_start[i]);
-     }
-
-    unsigned precom_ncol
-      = precom_block_pt->ncol();
-
-    output_block.build(precom_block_pt->distribution_pt(),
-                       precom_ncol,
-                       tmp_values,
-                       tmp_column_indices,
-                       tmp_row_start);
-    if(!preconditioner_blocks_have_been_replaced())
+    if(Replacement_dof_block_pt.get(prec_block_i,prec_block_j)==0)
     {
       delete precom_block_pt;
     }
@@ -4455,16 +4414,16 @@ namespace oomph
       unsigned prec_block_j = Block_to_block_map[block_j][block_col_i];
     
       tmp_block_pt(block_row_i,block_col_i) = 0;
-      if(preconditioner_blocks_have_been_replaced())
+      if(Replacement_dof_block_pt.get(prec_block_i,prec_block_j) == 0)
       { 
-        tmp_block_pt(block_row_i,block_col_i)
-          = Replacement_dof_block_pt.get(prec_block_i, prec_block_j);
-      }
-      else
-      {
         tmp_block_pt(block_row_i,block_col_i) = new CRDoubleMatrix;
         get_block_from_original_matrix(prec_block_i,prec_block_j,
                                        *tmp_block_pt(block_row_i,block_col_i));
+      }
+      else
+      {
+        tmp_block_pt(block_row_i,block_col_i)
+          = Replacement_dof_block_pt.get(prec_block_i, prec_block_j);
       }
      } // for
    } // for
@@ -4495,7 +4454,22 @@ namespace oomph
   // arrangement. We could use concatenate(...) which requires communication.
   CRDoubleMatrixHelpers::concatenate_without_communication(
     tmp_row_distribution_pt,tmp_col_distribution_pt, tmp_block_pt, output_block);
-   }
+
+  for (unsigned block_row_i = 0; block_row_i < nblock_in_row; block_row_i++) 
+   {
+    unsigned prec_block_i = Block_to_block_map[block_i][block_row_i];
+
+    for (unsigned block_col_i = 0; block_col_i < nblock_in_col; block_col_i++) 
+     {
+      unsigned prec_block_j = Block_to_block_map[block_j][block_col_i];
+    
+      if(Replacement_dof_block_pt.get(prec_block_i,prec_block_j) == 0)
+      { 
+        delete tmp_block_pt(block_row_i,block_col_i);
+      }
+     } // for
+   } // for
+   } // else need to concatenate
  }
 
 
