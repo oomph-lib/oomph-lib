@@ -53,6 +53,12 @@ doc/picture_show/rotate_gifs.php
 # User drives should go in your own version control I guess
 user_drivers/
 
+# private OOMPH-LIB directory configure lists are automatically generated.
+config/configure.ac_scripts/private.dir_list
+config/configure.ac_scripts/private_user_drivers.dir_list
+config/configure.ac_scripts/private_user_src.dir_list
+
+
 validation.log
 config/configure.ac_scripts/user_drivers.dir_list
 config/configure.ac_scripts/user_drivers.dir_list.backup
@@ -89,6 +95,13 @@ external_distributions/hypre/hypre-*
 external_distributions/hypre/hypre_default_installation/
 external_distributions/trilinos/trilinos-*
 external_distributions/trilinos/trilinos_default_installation/
+
+# arpack and hsl files which are automatically generated.
+external_src/oomph_arpack/all_arpack_sources.f
+external_src/oomph_arpack/debug.h
+external_src/oomph_arpack/stat.h
+external_src/oomph_hsl/frontal.f
+
 
 # auto generated list of binaries etc. using git status
 
@@ -582,6 +595,7 @@ src/axisym_poroelasticity/axisym_poroelasticity.h
 src/generalised_fourier_decomposed_helmholtz/generalised_fourier_decomposed_helmholtz.h
 src/generalised_time_harmonic_linear_elasticity/generalised_time_harmonic_linear_elasticity.h
 src/poroelasticity/poroelasticity.h
+
 
 # Documentation
 doc/FAQ/FAQ.pdf
