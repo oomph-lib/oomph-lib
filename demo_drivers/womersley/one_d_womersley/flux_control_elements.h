@@ -143,6 +143,11 @@ public:
 
  /// \short The number of "blocks" that degrees of freedom in this element
  /// are sub-divided into
+ /// RAYRAY - This is not even the correct function name! Because this appears
+ /// to be untested (it will break if tested!), I will comment this out.
+ /// Please re-implement if required in the future.
+ /// The correct function signature is:
+ /// unsigned ndof_types() const
  unsigned nblock_types()
   {
    return 2;
@@ -155,6 +160,11 @@ public:
  /// (Function can obviously only be called if the equation numbering
  /// scheme has been set up.) Pressure=1 since we expect to add this
  /// unknown to the pressure block
+ /// RAYRAY - This is not even the correct function name!
+ /// I have no self tests for this, because it appears to be not tested,
+ /// I will comment this out, the correct function signature is:
+ /// void get_dof_numbers_for_unknowns(
+ /// std::list<std::pair<unsigned long, unsigned> >& block_lookup_list) const
  void get_block_numbers_for_unknowns(
   std::list<std::pair<unsigned long, unsigned> >& block_lookup_list)
   {
