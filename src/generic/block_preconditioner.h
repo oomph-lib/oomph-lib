@@ -619,6 +619,26 @@ namespace oomph
   {
     if (is_subsidiary_block_preconditioner())
     {
+#ifdef PARANOID
+      if(Internal_ndof_types == 0)
+      {
+        std::ostringstream error_msg;
+        error_msg <<"(Internal_ndof_types == 0) is true.\n"
+          << "This means that the Master_block_preconditioner_pt pointer is\n"
+          << "set but possibly not by the function\n"
+          << "turn_into_subsidiary_block_preconditioner(...).\n\n"
+
+          << "This goes against the block preconditioning framework "
+          << "methodology.\n"
+          << "Many machinery relies on the look up lists set up by the \n"
+          << "function turn_into_subsidiary_block_preconditioner(...) \n"
+          << "between the parent and child block preconditioners.\n"
+          << std::endl;
+        throw OomphLibError(error_msg.str(),
+            OOMPH_CURRENT_FUNCTION,
+            OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
       return Internal_ndof_types;
     }
     else
@@ -634,23 +654,50 @@ namespace oomph
   /// \short Return the total number of DOF types.
   unsigned ndof_types() const
   {
-    if(preconditioner_blocks_have_been_replaced())
+    // If this is a subsidiary block preconditioner, then the function
+    // turn_into_subsidiary_block_preconditioner(...) should have been called,
+    // this function would have set up the look up lists between coarsened
+    // dof types and the internal dof types. Of coarse, the user (the writer 
+    // of the preconditioners) should not care about the internal dof types
+    // and what happens under the hood. Thus they should get the number of 
+    // coarsened dof types (i.e. the number of dof types the preconditioner 
+    // above (parent preconditioner) decides to give to this preconditioner).
+    if(is_subsidiary_block_preconditioner())
     {
-      return ndof_types_precomputed();
+#ifdef PARANOID
+      if(Doftype_coarsen_map_coarse.size() == 0)
+      {
+        std::ostringstream error_msg;
+        error_msg <<"The Doftype_coarsen_map_coarse vector is not setup for \n"
+          << "this SUBSIDIARY block preconditioner.\n\n"
+
+          << "For SUBSIDARY block preconditioners at any level, this\n"
+          << "vector is set up in the function \n"
+          << "turn_into_subsidiary_block_preconditioner(...).\n\n"
+
+          << "Being a SUBSIDIARY block preconditioner means that \n"
+          << "(Master_block_preconditioner_pt == 0) is true.\n"
+          << "The Master_block_preconditioner_pt MUST be set in the "
+          << "function \n"
+          << "turn_into_subsidiary_block_preconditioner(...).\n\n"
+
+          << "Somewhere, the Master_block_preconditioner_pt pointer is\n"
+          << "set but not by the function\n"
+          << "turn_into_subsidiary_block_preconditioner(...).\n"
+          << std::endl;
+        throw OomphLibError(error_msg.str(),
+            OOMPH_CURRENT_FUNCTION,
+            OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+      return Doftype_coarsen_map_coarse.size();
     }
     else
+      // Otherwise the number of ndof types is the same as the internal number 
+      // of dof types, since no coarsening of the dof types is done at the 
+      // top-most master level.
     {
-      if (is_subsidiary_block_preconditioner())
-      {
-        return Internal_ndof_types;
-      }
-      else
-      {
-        unsigned ndof = 0;
-        for (unsigned i = 0; i < nmesh(); i++)
-        {ndof += ndof_types_in_mesh(i);}
-        return ndof;
-      }
+      return internal_ndof_types();
     }
   } // EOFunc ndof_types(...)
 
@@ -1320,14 +1367,6 @@ namespace oomph
   unsigned nblock_types_precomputed() const
   {
    return Doftype_to_block_map.size();
-  }
-
-  /// \short the number of dof types precomputed. 
-  /// If the preconditioner blocks are precomputed then it should be the same 
-  /// as the ndof_types REQUIRED by this preconditioner.
-  unsigned ndof_types_precomputed() const
-  {
-   return Doftype_coarsen_map_coarse.size();
   }
 
   /// \short Setup a matrix vector product.
