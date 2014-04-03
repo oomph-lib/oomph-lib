@@ -103,7 +103,7 @@ namespace oomph
 
   /// \short Constructor
   BlockPreconditioner()
-   : Block_distribution_pt(0), Ndof_types_in_mesh(0),
+   : Internal_block_distribution_pt(0), Ndof_types_in_mesh(0),
      Preconditioner_matrix_distribution_pt(0)
   {
    // Initially set the master block preconditioner pointer to zero
@@ -858,7 +858,7 @@ namespace oomph
   const LinearAlgebraDistribution*
   block_distribution_pt(const unsigned b) const
   {
-   return Block_distribution_pt[b];
+   return Internal_block_distribution_pt[b];
   } // EOFunc block_distribution_pt(...)
 
   /// \short Access function to the distribution of the master
@@ -1002,12 +1002,12 @@ namespace oomph
 
    // clear the Distributions
    this->clear_distribution();
-   unsigned nblock = Block_distribution_pt.size();
+   unsigned nblock = Internal_block_distribution_pt.size();
    for (unsigned b = 0; b < nblock; b++)
     {
-     delete Block_distribution_pt[b];
+     delete Internal_block_distribution_pt[b];
     }
-   Block_distribution_pt.resize(0);
+   Internal_block_distribution_pt.resize(0);
 
    // clear the global index
    Global_index.clear();
@@ -1091,7 +1091,7 @@ namespace oomph
    for (unsigned b = 0; b < Internal_nblock_types; b++)
     {
      oomph_info << "Block " << b << " distribution:" << std::endl;
-     oomph_info << *Block_distribution_pt[b] << std::endl;
+     oomph_info << *Internal_block_distribution_pt[b] << std::endl;
     }
 
    // DS: the functions called here no longer exist and this function is
@@ -1690,7 +1690,7 @@ namespace oomph
   /// block preconditioner.
   unsigned block_dimension(const unsigned& b) const
   {
-   return Block_distribution_pt[b]->nrow();
+   return Internal_block_distribution_pt[b]->nrow();
   }
 
   /// \short Return the size of the dof "block" i, i.e. how many degrees of
@@ -1812,7 +1812,7 @@ namespace oomph
   bool Preconditioner_doftypes_have_been_coarsened;
 
   /// \short Storage for the default distribution for each block.
-  Vector<LinearAlgebraDistribution*> Block_distribution_pt;
+  Vector<LinearAlgebraDistribution*> Internal_block_distribution_pt;
 
   /// \short Vector of unsigned to indicate which meshes contain multiple
   /// element types.

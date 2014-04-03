@@ -270,8 +270,12 @@ void ExactSubBiharmonicPreconditioner::setup()
   CRDoubleMatrix* preconditioner_matrix_pt 
     = new CRDoubleMatrix(this->preconditioner_matrix_distribution_pt());
   
+  // RAYRAY this WILL be incorrect, we have to use the block distribution pt,
+  // not for the internal blocks
   CRDoubleMatrixHelpers::concatenate_without_communication
-    (Block_distribution_pt,matrix_of_block_pointers,*preconditioner_matrix_pt);
+    (Internal_block_distribution_pt,
+     matrix_of_block_pointers,
+     *preconditioner_matrix_pt);
 
   // delete the block matrices
   for (unsigned i = 0; i < n_block_types; i++)

@@ -775,8 +775,10 @@ void SimpleFSIPreconditioner<MATRIX>::identify_required_blocks(
   CRDoubleMatrix* P_matrix_pt=new CRDoubleMatrix
     (this->preconditioner_matrix_distribution_pt());
 
+  // RAYRAY this will NOT work, use Block_distribution_pt instead of
+  // Internal_block_distribution_pt
   CRDoubleMatrixHelpers::concatenate_without_communication(
-    this->Block_distribution_pt, block_matrix_pt, *P_matrix_pt);
+    this->Internal_block_distribution_pt, block_matrix_pt, *P_matrix_pt);
 
   // Delete blocks -- they're no longer needed.
   for (unsigned i = 0 ; i < n_dof; i++)

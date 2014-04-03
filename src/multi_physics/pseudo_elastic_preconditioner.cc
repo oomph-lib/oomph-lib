@@ -884,8 +884,10 @@ namespace oomph
   CRDoubleMatrix* s_prec_pt
    = new CRDoubleMatrix(this->preconditioner_matrix_distribution_pt());
 
+  // RAYRAY this will be incorrect, we have to use the distributions for the
+  // blocks, not the internal blocks.
   CRDoubleMatrixHelpers::concatenate_without_communication(
-   Block_distribution_pt,s_pt,*s_prec_pt);
+   Internal_block_distribution_pt,s_pt,*s_prec_pt);
 
   delete s_pt(0,0); s_pt(0,0) = 0;
   delete s_pt(0,1); s_pt(0,1) = 0;

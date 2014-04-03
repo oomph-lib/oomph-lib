@@ -334,8 +334,10 @@ namespace oomph
       }
     }
 
+    // RAYRAY this will be incorrect, we have to use the block distribution
+    // for the blocks, not internal blocks.
     CRDoubleMatrixHelpers::concatenate_without_communication
-     (this->Block_distribution_pt,tmp_dense_matrix,
+     (this->Internal_block_distribution_pt,tmp_dense_matrix,
       *exact_block_matrix_pt);
    }
   else
@@ -352,8 +354,10 @@ namespace oomph
     // Get pointers to the blocks
     this->get_blocks(required_blocks, block_matrix_pt);
   
+    // RAYRAY this will be incorrect, we have to use the block distribution
+    // for the blocks, not internal blocks.
     CRDoubleMatrixHelpers::concatenate_without_communication
-     (this->Block_distribution_pt,block_matrix_pt,*exact_block_matrix_pt);
+     (this->Internal_block_distribution_pt,block_matrix_pt,*exact_block_matrix_pt);
 
     // need to delete the matrix of block matrices
     for (unsigned i = 0; i < nblock_types; i++)

@@ -1413,13 +1413,15 @@ namespace oomph
     // The mass matrices for the current Lagrange block col is in mmt_pt. 
     // Now create the w_i and put it in w_pt.
     
+    // RAYRAY change back to Block_distribution_pt
     unsigned long l_i_nrow_global 
-      = this->Block_distribution_pt[l_doftype]->nrow();
+      = this->Internal_block_distribution_pt[l_doftype]->nrow();
   
+    // RAYRAY change back to Block_distribution_pt
     // Create both the w_i and inv_w_i matrices.
-    w_pt[l_i] = new CRDoubleMatrix(this->Block_distribution_pt[l_doftype]);
+    w_pt[l_i] = new CRDoubleMatrix(this->Internal_block_distribution_pt[l_doftype]);
     CRDoubleMatrix* inv_w_pt 
-      = new CRDoubleMatrix(this->Block_distribution_pt[l_doftype]);
+      = new CRDoubleMatrix(this->Internal_block_distribution_pt[l_doftype]);
 
     // The w_i is either a
     // 1) diagonal or
@@ -1433,13 +1435,14 @@ namespace oomph
 
     if(Use_diagonal_w_block)
      {
+      // RAYRAY change back to Block_distribution_pt
       // Get the number of local rows for this lagrange block.
       unsigned long l_i_nrow_local 
-        = this->Block_distribution_pt[l_doftype]->nrow_local();
+        = this->Internal_block_distribution_pt[l_doftype]->nrow_local();
 
       // The first row, for the offset.
       unsigned l_i_first_row 
-        = this->Block_distribution_pt[l_doftype]->first_row();
+        = this->Internal_block_distribution_pt[l_doftype]->first_row();
       
       // A vector to contain the results of mass matrices squared.
       Vector<double> w_i_diag_values(l_i_nrow_local,0);
@@ -1507,8 +1510,9 @@ namespace oomph
       for (unsigned mm_i = 1; mm_i < n_mm; mm_i++)
        {
         // Squaring process.
+        // RAYRAY change back to Block_distribution_pt
         CRDoubleMatrix* temp_mm_sqrd_pt = new CRDoubleMatrix;
-        temp_mm_sqrd_pt->build(this->Block_distribution_pt[l_doftype]);
+        temp_mm_sqrd_pt->build(this->Internal_block_distribution_pt[l_doftype]);
         mm_pt[mm_i]->multiply((*mm_pt[mm_i]),*temp_mm_sqrd_pt);
         
         // adding to the sum of squared mass matrices.
@@ -1640,11 +1644,12 @@ namespace oomph
 
     // Concatenate the sub matrices.
     CRDoubleMatrix* f_aug_pt = new CRDoubleMatrix;
-
+    
+    // RAYRAY change back to Block_distribution_pt
     Vector<LinearAlgebraDistribution*> f_dist_pt(N_fluid_doftypes,0);
     for(unsigned f_i = 0; f_i < N_fluid_doftypes; f_i++)
      {
-      f_dist_pt[f_i] = this->Block_distribution_pt[f_i];
+      f_dist_pt[f_i] = this->Internal_block_distribution_pt[f_i];
      }
 
     CRDoubleMatrixHelpers::concatenate_without_communication

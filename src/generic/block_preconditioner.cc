@@ -1404,7 +1404,7 @@ namespace oomph
   bool distributed = this->master_distribution_pt()->distributed();
 
   // create the new block distributions
-  Block_distribution_pt.resize(Internal_nblock_types);
+  Internal_block_distribution_pt.resize(Internal_nblock_types);
   for (unsigned i = 0; i < Internal_nblock_types; i++)
    {
     unsigned block_dim = 0;
@@ -1413,7 +1413,7 @@ namespace oomph
       block_dim +=
        dof_block_dimension(Block_number_to_dof_number_lookup[i][j]);
      }
-    Block_distribution_pt[i] = new
+    Internal_block_distribution_pt[i] = new
      LinearAlgebraDistribution(comm_pt(),
                                block_dim,distributed);
    }
@@ -1462,7 +1462,7 @@ namespace oomph
   // if this preconditioner is a master preconditioner then it is stored
   // at Preconditioner_matrix_distribution_pt
   LinearAlgebraDistribution dist;
-  LinearAlgebraDistributionHelpers::concatenate(Block_distribution_pt,dist);
+  LinearAlgebraDistributionHelpers::concatenate(Internal_block_distribution_pt,dist);
   
   // build the distribution
   if (is_subsidiary_block_preconditioner())
@@ -1507,7 +1507,7 @@ namespace oomph
     Global_index.resize(Internal_nblock_types);
     for (unsigned b = 0; b < Internal_nblock_types; b++)
      {
-      Global_index[b].resize(Block_distribution_pt[b]->nrow());
+      Global_index[b].resize(Internal_block_distribution_pt[b]->nrow());
      }
 
     // compute
@@ -1570,9 +1570,9 @@ namespace oomph
 
         // the processor this row will be sent to
         unsigned block_p = 0;
-        while(!(Block_distribution_pt[b]->first_row(block_p) <= j &&
-                (Block_distribution_pt[b]->first_row(block_p) +
-                 Block_distribution_pt[b]->nrow_local(block_p) > j)))
+        while(!(Internal_block_distribution_pt[b]->first_row(block_p) <= j &&
+                (Internal_block_distribution_pt[b]->first_row(block_p) +
+                 Internal_block_distribution_pt[b]->nrow_local(block_p) > j)))
          {
           block_p++;
          }
@@ -1684,9 +1684,9 @@ namespace oomph
 
         // the processor this row will be sent to
         unsigned block_p = 0;
-        while(!(Block_distribution_pt[b]->first_row(block_p) <= j &&
-                (Block_distribution_pt[b]->first_row(block_p) +
-                 Block_distribution_pt[b]->nrow_local(block_p) > j)))
+        while(!(Internal_block_distribution_pt[b]->first_row(block_p) <= j &&
+                (Internal_block_distribution_pt[b]->first_row(block_p) +
+                 Internal_block_distribution_pt[b]->nrow_local(block_p) > j)))
          {
           block_p++;
          }
@@ -1696,12 +1696,12 @@ namespace oomph
         if (block_p != my_rank)
          {
           block_rows_to_send(b,block_p)[ptr_block(b,block_p)]
-           = j - Block_distribution_pt[b]->first_row(block_p);
+           = j - Internal_block_distribution_pt[b]->first_row(block_p);
          }
         else
          {
           Rows_to_recv_for_get_block(b,block_p)[ptr_block(b,block_p)]
-           = j - Block_distribution_pt[b]->first_row(block_p);
+           = j - Internal_block_distribution_pt[b]->first_row(block_p);
          }
         ptr_block(b,block_p)++;
        }
@@ -1889,7 +1889,7 @@ namespace oomph
     Vector<int> vec_offset(Internal_nblock_types,0);
     for (unsigned b = 1; b < Internal_nblock_types; ++b)
      {
-      vec_offset[b]=vec_offset[b-1]+Block_distribution_pt[b-1]->nrow_local();
+      vec_offset[b]=vec_offset[b-1]+Internal_block_distribution_pt[b-1]->nrow_local();
      }
 
     //
@@ -2812,7 +2812,7 @@ namespace oomph
     // setup the block vector and then insert the data
     for (unsigned b = 0; b < nblock; b++)
      {
-      s[b].build(Block_distribution_pt[b],0.0);
+      s[b].build(Internal_block_distribution_pt[b],0.0);
       double* s_pt = s[b].values_pt();
       unsigned nrow = s[b].nrow();
       for (unsigned i = 0; i < nrow; i++)
@@ -2835,7 +2835,7 @@ namespace oomph
     s.resize(nblock);
     for (unsigned b = 0; b < nblock; b++)
      {
-      s[b].build(Block_distribution_pt[b],0.0);
+      s[b].build(Internal_block_distribution_pt[b],0.0);
      }
 
     // determine the maximum number of rows to be sent or recv
@@ -3095,7 +3095,7 @@ namespace oomph
    }
   else
    // Otherwise we assume that the block vectors s have the same distribution
-   // as Block_distribution_pt.
+   // as Internal_block_distribution_pt.
    {
     return_block_vectors_with_original_matrix_ordering(s,v);
    }
@@ -3147,12 +3147,12 @@ namespace oomph
                           OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
-    if (*(s[b].distribution_pt()) != *(Block_distribution_pt[b]))
+    if (*(s[b].distribution_pt()) != *(Internal_block_distribution_pt[b]))
      {
       std::ostringstream error_message;
       error_message << "The distribution of the block vector " << b
                     << "must match the"
-                    << " specified distribution at Block_distribution_pt["
+                    << " specified distribution at Internal_block_distribution_pt["
                     << b << "]";
       throw OomphLibError(error_message.str(),
                           OOMPH_CURRENT_FUNCTION,
@@ -3606,7 +3606,7 @@ namespace oomph
 #endif
 
   // rebuild the block vector
-  w.build(Block_distribution_pt[b],0.0);
+  w.build(Internal_block_distribution_pt[b],0.0);
 
   // if + only one processor
   //    + more than one processor but matrix_pt is not distributed
@@ -3924,11 +3924,11 @@ namespace oomph
                         OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
-  if (*w.distribution_pt() != *Block_distribution_pt[b])
+  if (*w.distribution_pt() != *Internal_block_distribution_pt[b])
    {
     std::ostringstream error_message;
     error_message << "The distribution of the block vector w must match the "
-                  << " specified distribution at Block_distribution_pt[b]";
+                  << " specified distribution at Internal_block_distribution_pt[b]";
     throw OomphLibError(error_message.str(),
                         OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
@@ -4569,7 +4569,7 @@ namespace oomph
     // Fill in the compressed row matrix ??ds Note: I kept the calls to
     // build as close as I could to before (had to replace new(dist) with
     // .build(dist) ).
-    output_block.build(Block_distribution_pt[block_i]);
+    output_block.build(Internal_block_distribution_pt[block_i]);
     output_block.build_without_copy(block_ncol,block_nnz,
                                     temp_value,temp_column_index,
                                     temp_row_start);
@@ -4615,7 +4615,7 @@ namespace oomph
     Vector<unsigned> total_nnz_send(nproc,0);
 
     // number of rows of the block matrix on this processor
-    unsigned nrow_local = Block_distribution_pt[block_i]->nrow_local();
+    unsigned nrow_local = Internal_block_distribution_pt[block_i]->nrow_local();
 
     // resize the nnz storage and compute nnz_send
     // and send and recv the nnz
@@ -4943,7 +4943,7 @@ namespace oomph
      }
 
     // Fill in the compressed row matrix
-    output_block.build(Block_distribution_pt[block_i]);
+    output_block.build(Internal_block_distribution_pt[block_i]);
     output_block.build_without_copy(this->block_dimension(block_j),
                                     local_block_nnz,
                                     values_recv,
