@@ -2417,7 +2417,7 @@ namespace oomph
   if(master_block_preconditioner_pt()->doftype_coarsen_map_fine().size() == 0)
   {
     std::ostringstream err_msg;
-    err_msg << "The master block preconditioner's Doftype_coarsen_fine is not\n"
+    err_msg << "The master block preconditioner's Doftype_coarsen_map_fine is not\n"
             << "set up properly."
             << std::endl;
     throw OomphLibError(err_msg.str(),
