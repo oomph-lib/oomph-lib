@@ -1535,12 +1535,16 @@ namespace oomph
 
    {
     // Delete any existing distributions in Block_distribution_pt.
+    // (This should already be deleted in clear_block_preconditioner_base(...)
+    // but we are just being extra safe!).
     unsigned n_existing_precom_block_dist 
      = Block_distribution_pt.size();
     for (unsigned dist_i = 0; dist_i < n_existing_precom_block_dist; dist_i++) 
      {
       delete Block_distribution_pt[dist_i];
      }
+
+    Block_distribution_pt.clear();
 
     // Work out the distributions of the concatenated blocks.
     unsigned super_block_size = Block_to_dof_map_coarse.size();
@@ -1614,19 +1618,20 @@ namespace oomph
 
     // Now iterate through Auxiliary_distribution_pt and delete everything 
     // except for the value which corresponds to preconditioner_matrix_key.
-    std::map<Vector<unsigned>, LinearAlgebraDistribution*>::iterator iter;
-    for (iter = Auxiliary_distribution_pt.begin();
-        iter != Auxiliary_distribution_pt.end();
-        ++iter) 
+    std::map<Vector<unsigned>, LinearAlgebraDistribution*>::iterator iter
+      = Auxiliary_distribution_pt.begin();
+    while(iter != Auxiliary_distribution_pt.end())
     {
       if(iter->first != preconditioner_matrix_key)
       {
         delete iter->second;
-        Auxiliary_distribution_pt.erase(iter);
+        iter++;
+        //Auxiliary_distribution_pt.erase(iter++);
       }
       else
       {
-        Auxiliary_distribution_pt.erase(iter);
+        ++iter;
+        //Auxiliary_distribution_pt.erase(iter++);
       }
     }
 

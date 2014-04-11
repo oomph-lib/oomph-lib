@@ -446,23 +446,8 @@ class BlockSelector
   /// Destructor
   virtual ~BlockPreconditioner()
   {
-   // Delete any existing precomputed block distributions.
-   unsigned n_existing_precom_block_dist 
-     = Block_distribution_pt.size();
-    for (unsigned dist_i = 0; dist_i < n_existing_precom_block_dist; dist_i++) 
-    {
-      delete Block_distribution_pt[dist_i];
-    }
 
-    Block_distribution_pt.clear();
 
-    // Delete any dof block distributions
-    const unsigned ndof_block_dist = Dof_block_distribution_pt.size();
-    for (unsigned dof_i = 0; dof_i < ndof_block_dist; dof_i++) 
-    {
-      delete Dof_block_distribution_pt[dof_i];
-    }
-    Dof_block_distribution_pt.clear();
 
    this->clear_block_preconditioner_base();
   } // EOFunc destructor
@@ -2174,8 +2159,75 @@ class BlockSelector
    delete Preconditioner_matrix_distribution_pt;
    Preconditioner_matrix_distribution_pt = 0;
 
-   // Delete all distributions within Auxiliary_distribution_pt, except for
-   // the one which corres
+   // Delete any existing (external) block distributions.
+   const unsigned n_existing_block_dist 
+     = Block_distribution_pt.size();
+    for (unsigned dist_i = 0; dist_i < n_existing_block_dist; dist_i++) 
+    {
+      delete Block_distribution_pt[dist_i];
+    }
+
+    // Clear the vector.
+    Block_distribution_pt.clear();
+
+
+    Vector<unsigned> preconditioner_matrix_key(n_existing_block_dist,0);
+    for (unsigned i = 0; i < n_existing_block_dist; i++)
+    {
+      preconditioner_matrix_key[i] = i;
+    }
+
+
+   // Now iterate through Auxiliary_distribution_pt and delete everything 
+   std::map<Vector<unsigned>, LinearAlgebraDistribution*>::iterator iter
+     = Auxiliary_distribution_pt.begin();
+
+   while(iter != Auxiliary_distribution_pt.end())
+   {
+
+
+     if(iter->first != preconditioner_matrix_key)
+     {
+       delete iter->second;
+       iter++;
+       //Auxiliary_distribution_pt.erase(iter++);
+     }
+     else
+     {
+       ++iter;
+       //Auxiliary_distribution_pt.erase(iter++);
+     }
+
+
+     //  if(iter->first)
+     //  delete iter->second;
+     //  Auxiliary_distribution_pt.erase(iter++);
+     //
+     //    if (it->second == delete_this_id)
+     //    {
+     //        port_map.erase(pm_it++);  // Use iterator.
+     //                                  // Note the post increment.
+     //                                  // Increments the iterator but returns the
+     //                                  // original value for use by erase 
+     //    }
+     //    else
+     //    {
+     //        ++pm_it;           // Can use pre-increment in this case
+     //                           // To make sure you have the efficient version
+     //    }
+     //}
+   }
+
+   Auxiliary_distribution_pt.clear();
+
+    // Delete any dof block distributions
+    const unsigned ndof_block_dist = Dof_block_distribution_pt.size();
+    for (unsigned dof_i = 0; dof_i < ndof_block_dist; dof_i++) 
+    {
+      delete Dof_block_distribution_pt[dof_i];
+    }
+    Dof_block_distribution_pt.clear();
+
   } // EOFunc clear_block_preconditioner_base()
 
   /// \short debugging method to document the setup.
