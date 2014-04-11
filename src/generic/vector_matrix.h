@@ -202,7 +202,8 @@ public:
  }
 
 
- /// \short Clears the outer vector.
+ /// \short Clears the outer vector. Calling Vector::clear() will invoke the 
+ /// destructor of all the inner Vectors.
  void clear()
  {
    Vector_matrix.clear();

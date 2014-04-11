@@ -36,10 +36,8 @@
 #endif
 
 // c++ include
-// #include <list>
 #include <math.h>
 #include <typeinfo>
-//#include <algorithm>
 
 // oomph-lib includes
 #include "matrices.h"
@@ -53,17 +51,74 @@
 
 namespace oomph
 {
-
-
-
 //=============================================================================
-/// \short Object to select certain blocks...
+/// \short Data structure to store information about a certain "block" or
+/// sub-matrix from the overall matrix in the block preconditioning framework.
+/// 
+/// It stores four variables:
+/// 
+/// 1) The row and column indices of the block. 
+/// For re-usability, whether these refer to the dof-level or block-level 
+/// indices, the internal or external enumeration is entirely up to the user.
+///
+/// 2) Wanted: a boolean to indicate if we want this block. Hence the name
+/// "BlockSelector".
+///
+/// 3) Block_pt: Pointer to the block.
+///
+/// Example of use: We want to concatenate Jacobian blocks:
+/// 
+/// [J_11, J_12
+///  J_21, J_22]
+/// 
+/// We can create a VectorMatrix of BlockSelector objects indicating which
+/// indices (i,j) is required and if we want them or not.
+/// 
+/// VectorMatrix<BlockSelector> required_block(2,2);
+/// required_block[0][0].select_block(1,1,true);
+/// required_block[0][1].select_block(1,2,true);
+/// required_block[1][0].select_block(2,1,true);
+/// required_block[1][1].select_block(2,2,true);
+///
+/// CRDoubleMatrix concatenated_block1 
+///   = get_concatenated_block(required_block);
+///
+/// Suppose that we do not want block J_21, then we simply set Wanted to false
+/// by invoking the BlockSelector::do_not_want_block() function and call
+/// get_concatenated_block(...) again:
+///
+/// required_block[1][0].do_not_want_block();
+///
+/// CRDoubleMatrix concatenated_block2
+///   = get_concatenated_block(required_block);
+///
+/// ===========================================================================
+/// Aside: note that we still need to know the row/column indices of the 
+/// unwanted blocks. This is due to the method of concatenation. Both the
+/// rows and columns are permuted, thus we need to know the distribution of
+/// of all the blocks. This is also used for correctness checks. See the
+/// get_concatenated_block() function for more details.
+/// ===========================================================================
+///
+/// The Block_pt variable is used to store a pointer to a CRDoubleMatrix.
+/// This can be used to point to a modified/replaced block instead of getting
+/// the block from the Jacobian via get_block(...).
+///
+/// Note: if Block_pt is not null then Wanted must be true. But Wanted can be 
+/// true whilst Block_pt is null.
+/// That is, (Block_pt =/= null) => (Wanted == true)
+/// 
+/// This design decision was taken since if Block_pt is set, then we would want
+/// to use it. So if Wanted = false, then it may be a mistake. If block_pt is
+/// not null, but later, the block is not required, then to set Wanted to 
+/// false, the function BlockSelector::null_block_pt() must be called first.
 //=============================================================================
 class BlockSelector
 {
   public:
 
-  /// \short Constructor, initialise block index i, j and bool.
+  /// \short Default constructor, 
+  /// initialise block index i, j to 0 and bool to false.
   BlockSelector()
   {
     // Needs to be set to zero because if the build function leaves the
@@ -72,8 +127,9 @@ class BlockSelector
     this->build(0,0,false);
   }
 
-
-  /// \short RAYRAY comment
+  /// \short Constructor, takes the row and column indices 
+  /// and a boolean indicating if the block is required or not. The optional
+  /// parameter block_pt is set to null.
   BlockSelector(const unsigned& row_index, 
                 const unsigned& column_index, 
                 const bool& wanted,
@@ -94,17 +150,18 @@ class BlockSelector
 
     // Needs to be set to zero because if the build function leaves the
     // Block_pt alone if block_pt = 0 (the default argument).
+    // Thus if it is not set here, it would not be initialised to null.
     Block_pt = 0;
    
     this->build(row_index,column_index,wanted,block_pt);
   }
 
-  /// \short RAYRAY comment.
+  /// \short Default destructor.
   virtual ~BlockSelector()
   {
   }
 
-  /// \short RAYRAY comment
+  /// \short Select a block.
   void select_block(const unsigned& row_index, 
                     const unsigned& column_index, 
                     const bool& wanted,
@@ -126,13 +183,13 @@ class BlockSelector
     this->build(row_index,column_index,wanted,block_pt);
   }
 
-  // RAYRAY comment
+  /// \short Indicate that we require the block (set Wanted to true).
   void want_block()
   {
     Wanted = true;
   }
 
-  // RAYRAY comment
+  /// \short Indicate that we do not want the block (set Wanted to false).
   void do_not_want_block()
   {
 #ifdef PARANOID
@@ -151,11 +208,13 @@ class BlockSelector
     Wanted = false;
   }
 
+  /// \short Set Block_pt to null.
   void null_block_pt()
   {
     Block_pt = 0;
   }
 
+  /// \short set Block_pt.
   void set_block_pt(CRDoubleMatrix* block_pt)
   {
 #ifdef PARANOID
@@ -173,49 +232,45 @@ class BlockSelector
     Block_pt = block_pt;
   }
 
-  // RAYRAY comment.
-//  const CRDoubleMatrix* block_pt() const
-//  {
-//    return Block_pt;
-//  }
-
-  // RAYRAY comment.
+  /// \short returns Block_pt
   CRDoubleMatrix* block_pt() const
   {
     return Block_pt;
   }
 
-  // RAYRAY comment
+  /// \short Set the row index.
   void set_row_index(const unsigned& row_index)
   {
     Row_index = row_index;
   }
 
-  // RAYRAY comment
+  /// \short returns the row index.
   const unsigned& row_index() const
   {
     return Row_index;
   }
 
-  // RAYRAY comment
+  /// \short Set the column index.
   void set_column_index(const unsigned& column_index)
   {
     Column_index = column_index;
   }
 
-  // RAYRAY comment
+  /// \short returns the column index.
   const unsigned& column_index() const
   {
     return Column_index;
   }
 
-  // RAYRAY comment
+  /// \short returns whether the block is wanted or not.
   const bool& wanted() const
   {
     return Wanted;
   }
 
 
+  /// \short output function, outputs the Row_index, Column_index, Wanted and
+  /// the address of the Block_pt.
   friend std::ostream& operator<<(std::ostream& o_stream,
                            const BlockSelector& block_selector)
   {
@@ -229,6 +284,7 @@ class BlockSelector
 
   private:
 
+  // build function.
   void build(const unsigned& row_index, 
       const unsigned& column_index, 
       const bool& wanted,
@@ -257,9 +313,16 @@ class BlockSelector
     }
   }
 
+  /// Row index of the block.
   unsigned Row_index;
+
+  /// Column index of the block.
   unsigned Column_index;
+
+  /// Bool to indicate if we require this block.
   bool Wanted;
+
+  /// Pointer to the block.
   CRDoubleMatrix* Block_pt;
 
 };
