@@ -184,7 +184,7 @@ namespace oomph
   this->fill_in_subsidiary_preconditioners(nblock_types);
 
   // build the preconditioners and matrix vector products
-  for (unsigned i = 0; i < nblock_types; i++)
+  for(unsigned i = 0; i < nblock_types; i++)
    {
     // Get the block and set up the preconditioner.
     {
@@ -194,15 +194,19 @@ namespace oomph
     }
      
     // next setup the off diagonal mat vec operators
-    unsigned l = i+1;
-    unsigned u = nblock_types;
-    if (!Upper_triangular)
+    unsigned l, u;
+    if(Upper_triangular)
+     {
+      l = i+1;
+      u = nblock_types;
+     }
+    else
      {
       l = 0;
       u = i;
      }
 
-    for (unsigned j = l; j < u; j++)
+    for(unsigned j = l; j < u; j++)
      {
       // Get the block
       CRDoubleMatrix block_matrix = this->get_block(i,j);
@@ -228,10 +232,14 @@ namespace oomph
   unsigned n_block = this->nblock_types();
 
   //
-  int start = n_block-1;
-  int end = -1;
-  int step = -1;
-  if (!Upper_triangular)
+  int start, end, step;
+  if(Upper_triangular)
+   {
+    start = n_block-1;
+    end = -1;
+    step = -1;
+   }
+  else
    {
     start = 0;
     end = n_block;

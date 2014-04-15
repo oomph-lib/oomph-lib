@@ -58,7 +58,7 @@ namespace oomph
  public:
 
   /// Constructor
-  Preconditioner() : Matrix_pt(0), Comm_pt(0) {};
+  Preconditioner() : Matrix_pt(0), Comm_pt(0) {}
 
   /// Broken copy constructor
   Preconditioner(const Preconditioner&)
@@ -107,7 +107,7 @@ namespace oomph
   virtual void setup() = 0;
 
   /// \short Clean up memory (empty). Generic interface function.
-  virtual void clean_up_memory(){};
+  virtual void clean_up_memory(){}
 
   /// Get function for matrix pointer.
   virtual DoubleMatrixBase* matrix_pt() const
