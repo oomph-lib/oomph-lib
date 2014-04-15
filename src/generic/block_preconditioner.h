@@ -464,22 +464,31 @@ class BlockSelector
    BrokenCopy::broken_assign("BlockPreconditioner");
   }
 
-  /// \short Access function to matrix_pt. Cast the matrix pointer to
-  /// MATRIX*, error check and return.
+  /// \short Access function to matrix_pt. If this is the master then cast
+  /// the matrix pointer to MATRIX*, error check and return. Otherwise ask
+  /// the master for its matrix pointer.
   MATRIX* matrix_pt() const
   {
-   MATRIX* m_pt = dynamic_cast<MATRIX*>(Preconditioner::matrix_pt());
-#ifdef PARANOID
-   if(m_pt == 0)
+   if(is_subsidiary_block_preconditioner())
     {
-     std::ostringstream error_msg;
-     error_msg << "Matrix is not correct type.";
-     throw OomphLibError(error_msg.str(),
-                         OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
+     return master_block_preconditioner_pt()->matrix_pt();
     }
+   else 
+    {
+     MATRIX* m_pt = dynamic_cast<MATRIX*>(Preconditioner::matrix_pt());
+#ifdef PARANOID
+     if(m_pt == 0)
+      {
+       std::ostringstream error_msg;
+       error_msg << "Matrix is not correct type.";
+       throw OomphLibError(error_msg.str(),
+                           OOMPH_CURRENT_FUNCTION,
+                           OOMPH_EXCEPTION_LOCATION);
+      }
 #endif
-   return m_pt;
+     return m_pt;
+     
+    }
   } // EOFunc matrix_pt()
 
   void turn_on_raydebug()
