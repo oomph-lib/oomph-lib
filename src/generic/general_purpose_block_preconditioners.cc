@@ -45,7 +45,7 @@ namespace oomph
   this->clean_up_memory();
 
   // Set up the block look up schemes
-  GeneralPurposeBlockPreconditioner<MATRIX>::block_setup();
+  this->gp_preconditioner_block_setup();
 
   // number of types of blocks.
   unsigned nblock_types = this->nblock_types();
@@ -172,7 +172,7 @@ namespace oomph
   this->clean_up_memory();
 
   // Set up the block look up schemes
-  this->block_setup();
+  this->gp_preconditioner_block_setup();
    
   // number of block types
   unsigned nblock_types = this->nblock_types();
@@ -303,7 +303,7 @@ namespace oomph
  void ExactBlockPreconditioner<MATRIX>::setup()
  {
   // Set up the block look up schemes
-  this->block_setup();
+  this->gp_preconditioner_block_setup();
 
   // get the number of DOF types
   unsigned nblock_types = this->nblock_types();

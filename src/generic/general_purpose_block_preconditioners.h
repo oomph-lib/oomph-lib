@@ -178,8 +178,10 @@ namespace oomph
    Dof_to_block_map = dof_to_block_map;
   }
 
+ protected:
+
   /// Modified block setup for general purpose block preconditioners
-  void block_setup()
+  void gp_preconditioner_block_setup()
   {
    if (Dof_to_block_map.size() > 0)
     {
@@ -190,9 +192,6 @@ namespace oomph
      BlockPreconditioner<MATRIX>::block_setup();
     }
   }
-  
-  
- protected:
 
   /// \short Create any subsidiary preconditioners needed. Usually
   /// nprec_needed = nblock_types, except for the ExactBlockPreconditioner
