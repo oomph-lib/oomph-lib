@@ -38,7 +38,7 @@ if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/torus.dat.gz  \
-         torus.dat 0.1 1.0e-12 >> validation.log
+         torus.dat 0.1 1.0e-10 >> validation.log
 fi
 
 # Append log to main validation log
