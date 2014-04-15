@@ -526,7 +526,7 @@ class BlockSelector
   /// function with an empty doftype_to_doftype_map vector.
   void turn_into_subsidiary_block_preconditioner
   (BlockPreconditioner<MATRIX>* master_block_prec_pt,
-   Vector<unsigned>& doftype_in_master_preconditioner_coarse);
+   const Vector<unsigned>& doftype_in_master_preconditioner_coarse);
 
   /// \short Function to turn this preconditioner into a
   /// subsidiary preconditioner that operates within a bigger
@@ -560,8 +560,8 @@ class BlockSelector
   /// [6]
   void turn_into_subsidiary_block_preconditioner
   (BlockPreconditioner<MATRIX>* master_block_prec_pt,
-   Vector<unsigned>& doftype_in_master_preconditioner_coarse,
-   Vector<Vector<unsigned> > & doftype_coarsen_map_coarse);
+   const Vector<unsigned>& doftype_in_master_preconditioner_coarse,
+   const Vector<Vector<unsigned> > & doftype_coarsen_map_coarse);
 
   /// \short Specify the number of meshes required by this block
   /// preconditioner.

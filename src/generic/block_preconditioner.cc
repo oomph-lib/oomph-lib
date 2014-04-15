@@ -2131,7 +2131,7 @@ namespace oomph
  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
  turn_into_subsidiary_block_preconditioner
  (BlockPreconditioner<MATRIX>* master_block_prec_pt,
-  Vector<unsigned>& doftype_in_master_preconditioner_coarse)
+  const Vector<unsigned>& doftype_in_master_preconditioner_coarse)
  {
    // Create the identity dof_coarsen_map
    Vector<Vector<unsigned> > doftype_coarsen_map_coarse;
@@ -2209,9 +2209,15 @@ namespace oomph
  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
  turn_into_subsidiary_block_preconditioner
  (BlockPreconditioner<MATRIX>* master_block_prec_pt,
-  Vector<unsigned>& doftype_in_master_preconditioner_coarse,
-  Vector<Vector<unsigned> > &doftype_coarsen_map_coarse)
+  const Vector<unsigned>& doftype_in_master_preconditioner_coarse_in,
+  const Vector<Vector<unsigned> > &doftype_coarsen_map_coarse_in)
  {
+
+  // create modifiable copys of input vectors
+  Vector<unsigned> doftype_in_master_preconditioner_coarse =
+   doftype_in_master_preconditioner_coarse_in;
+  Vector<Vector<unsigned> > doftype_coarsen_map_coarse =
+   doftype_coarsen_map_coarse_in;
 
 #ifdef PARANOID
    // Get the size of the doftype_in_master_preconditioner_coarse.
