@@ -662,7 +662,7 @@ class BlockSelector
   /// type of DOF. The argument vector dof_to_block_map should be of length
   /// ndof. Each element should contain an integer indicating the block number
   /// corresponding to that type of DOF.
-  void block_setup(Vector<unsigned>& dof_to_block_map);
+  void block_setup(const Vector<unsigned>& dof_to_block_map);
 
   /// \short Put block (i,j) into output_matrix.
   ///

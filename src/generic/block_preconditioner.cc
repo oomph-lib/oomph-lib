@@ -51,8 +51,10 @@ namespace oomph
  /// corresponding to that type of DOF.
  //============================================================================
  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
- block_setup(Vector<unsigned>& dof_to_block_map)
+ block_setup(const Vector<unsigned>& dof_to_block_map_in)
  {
+  // Create a copy of the vector input so that we can modify it below
+  Vector<unsigned> dof_to_block_map = dof_to_block_map_in;
 
   if(is_subsidiary_block_preconditioner())
    {
