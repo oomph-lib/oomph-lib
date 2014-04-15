@@ -56,6 +56,349 @@ namespace oomph
 
   if(is_subsidiary_block_preconditioner())
    {
+#ifdef PARANOID
+    // Get the size of the Doftype_in_master_preconditioner_coarse.
+    unsigned para_doftype_in_master_preconditioner_coarse_size 
+     = Doftype_in_master_preconditioner_coarse.size();
+
+    // Check that the doftype_in_master_preconditioner_coarse vector is not 
+    // empty
+    if(para_doftype_in_master_preconditioner_coarse_size == 0)
+     {
+      std::ostringstream err_msg;
+      err_msg << "The mapping from the dof types of the master "
+              << "block preconditioner \n"
+              << "to the subsidiary block preconditioner is empty.\n"
+              << "doftype_in_master_preconditioner_coarse.size() == 0"
+              << std::endl;
+      throw OomphLibError(err_msg.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+
+
+    // PARANOID checks for doftype_coarsen_map
+   
+    // Three conditions must be satisfied:
+    //
+    // 1) The dof type numbers in the dof_coarsen_map vector must be 
+    //    unique. For example, it does not make sense to have the vector
+    //    [[0,1][1,2]] because the first inner vector says 
+    //    "treat dof types 0 and 1 as dof type 0" and the second inner vector 
+    //    says "treat dof type 1 and 2 as dof type 1", but dof type 1 is already
+    //    being treated as dof type 0.
+    //
+    // 2) Every SUBSIDIARY dof type must be mapped to a dof type in the 
+    //    doftype_coarsen_map vector. For example, if there are 5 dof types
+    //    (passed down from the master block preconditioner), and this block 
+    //    subsidiary block preconditioner only deals with 3 dof types, then all 
+    //    5 dof types must be mapped to a dof type in the subsidiary 
+    //    preconditioner. For example if the dof_map is [1,2,3,4,5], then the 
+    //    subsidiary block preconditioner knows that 5 dof types have been 
+    //    passed down. But if it only works with three dof types, we MUST have 
+    //    three inner vectors in the doftype_coarsen_map vector (which 
+    //    corresponds to dof types 0, 1 and 2), the union of the dof types in 
+    //    the three inner vectors must contain dof types 0, 1, 2, 3 and 4 
+    //    exactly once. It cannot contain, say, 0, 1, 5, 7, 9, even though it 
+    //    passes the uniqueness check. We ensure this by two conditions:
+    //
+    //    2.1) The doftype_coarsen_map vector must contain the same number of
+    //         dof types as the dof_map vector.
+    //
+    //    2.2) The maximum element in the doftype_coarsen_map vector is the 
+    //         length of the dof_map vector minus 1.
+
+    // A set is deal for checking the above three conditions, we shall insert
+    // all the elements in the doftype_coarsen_map vector into this set.
+    std::set<unsigned> doftype_map_set;
+
+    // Condition (1): Check for uniqueness by inserting all the values of
+    // doftype_coarsen_map into a set.
+    unsigned para_doftype_coarsen_map_coarse_size 
+     = Doftype_coarsen_map_coarse.size();
+
+    // Loop through the outer vector.
+    for (unsigned i = 0; i < para_doftype_coarsen_map_coarse_size; i++)
+     {
+      // Loop through the inner vector
+      unsigned para_doftype_coarsen_map_coarse_i_size 
+       = Doftype_coarsen_map_coarse[i].size();
+      for (unsigned j = 0; j < para_doftype_coarsen_map_coarse_i_size; j++)
+       {
+        // Attempt to insert all the values of the inner vector into a set.
+        //std::set<unsigned>::iterator doftype_map_it;
+        std::pair<std::set<unsigned>::iterator,bool> doftype_map_ret;
+
+        doftype_map_ret 
+         = doftype_map_set.insert(Doftype_coarsen_map_coarse[i][j]);
+         
+        if(!doftype_map_ret.second)
+         {
+          std::ostringstream err_msg;
+          err_msg << "Error: the doftype number "
+                  << Doftype_coarsen_map_coarse[i][j]
+                  << " is already inserted."
+                  << std::endl;
+          throw OomphLibError(err_msg.str(),
+                              OOMPH_CURRENT_FUNCTION,
+                              OOMPH_EXCEPTION_LOCATION);
+         }
+       }
+     }
+     
+    // Condition (2.1): Check that the doftype_map_set describes as many values
+    // as doftype_in_master_preconditioner_coarse. 
+    // I.e. if dof_map contains 5 dof types, then the 
+    // doftype_coarsen_map_coarse vector must also contain 5 dof types.
+    if(para_doftype_in_master_preconditioner_coarse_size 
+       != doftype_map_set.size())
+     {
+      std::ostringstream err_msg;
+      err_msg << "The size of doftype_in_master_preconditioner_coarse "
+              << "must be the same as the total\n"
+              << "number of values in the doftype_coarsen_map_coarse vector."
+              << std::endl;
+      throw OomphLibError(err_msg.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+
+    // Condition (2.2): Check that the maximum element in the 
+    // doftype_coarsen_map_coarse vector is the length of the 
+    // doftype_in_master_preconditioner_coarse minus 1.
+    unsigned para_doftype_in_master_preconditioner_coarse_size_minus_one 
+     = para_doftype_in_master_preconditioner_coarse_size - 1;
+    if(para_doftype_in_master_preconditioner_coarse_size_minus_one 
+       != *doftype_map_set.rbegin())
+     {
+      std::ostringstream err_msg;
+      err_msg << "The maximum dof type number in the "
+              << "doftype_coarsen_map vector must be "
+              << para_doftype_in_master_preconditioner_coarse_size_minus_one
+              << std::endl;
+      throw OomphLibError(err_msg.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+#endif
+
+    //  std::cout << "BPF::turn_into... Doftype_in_master_preconditioner_coarse:" << std::endl; 
+    //  for (unsigned dof_i = 0; dof_i < Doftype_in_master_preconditioner_coarse.size(); dof_i++) 
+    //  {
+    //    std::cout << Doftype_in_master_preconditioner_coarse[dof_i] << " ";
+    //  }
+    //  std::cout << "\n" << std::endl; 
+    //  
+    //  std::cout << "BPF::turn_into... Doftype_coarsen_map_coarse: " << std::endl;
+    //  for (unsigned i = 0; i < Doftype_coarsen_map_coarse.size(); i++) 
+    //  {
+    //    for (unsigned j = 0; j < Doftype_coarsen_map_coarse[i].size(); j++) 
+    //    {
+    //      std::cout << Doftype_coarsen_map_coarse[i][j] << " ";
+    //    }
+    //    std::cout << "\n"; 
+    //  }
+    //  std::cout << "\n" << std::endl;
+
+  
+    // Set the mapping from the master preconditioner dof types to the
+    // subsidiary preconditioner dof types. 
+    //
+    // IMPORTANT: Since dof_types may be coarsened in the master block 
+    // preconditioner, this may no longer reflect the actual underlying 
+    // dof types. We must get the actual underlying dof types for the 
+    // block_setup(...) function to work properly so all the look up schemes 
+    // for this block preconditioner is correct and works properly, this is for
+    // backwards compatibility purposes and to make sure Richard Muddle's 
+    // still works at this (subsidiary) level, although it may not be used.
+    //
+    // If we do not want to make it backwards compatible, we may as well kill the
+    // block_setup(...) for subsidiary block preconditioners - but other things
+    // may break. Do it at your own risk (take time to fully understand the whole
+    // block preconditioning framework code).
+
+    // Create the corresponding Doftype_in_master_preconditioner_fine and
+    // Doftype_coarsen_map_fine vectors.
+
+    // First resize the vectors.
+    Doftype_in_master_preconditioner_fine.resize(0);
+    Doftype_coarsen_map_fine.resize(0);
+
+    // The Doftype_in_master_preconditioner_fine vector is easy.
+    // We know that the Doftype_coarsen_map_fine in the master preconditioner
+    // must be constructed already. So we simply loop through the values in
+    // doftype_in_master_preconditioner_coarse, then get the most fine
+    // grain dof types from the master preconditioner's 
+    // Doftype_coarsen_map_fine vector.
+    //
+    // For example, if the master preconditioner has the vector:
+    // Doftype_coarsen_map_fine = [0,1,2,3][4,5,6,7][8,9,10,11][12,13][14,15]
+    // 
+    // and passes the two vectors 
+    // doftype_in_master_preconditioner_coarse = [1,2,3]
+    // doftype_coarsen_map_coarse = [[0][1,2]]
+    //
+    // Then we want 
+    // Doftype_in_master_preconditioner_fine = [4,5,6,7,8,9,10,11,12,13]
+    //
+    // We achieve this by looking up the corresponding fine dof types in the 
+    // masters' Doftype_coarsen_map_fine vector which corresponds to the 
+    // values in Doftype_in_master_preconditioner_coarse.
+    //
+    // That is, the values in Doftype_in_master_preconditioner_coarse gives us
+    // the index of sub vector we want in the master's Doftype_coarsen_map_fine
+    // vector.
+
+#ifdef PARANOID
+    // Check that the master block preconditioner's Doftype_coarsen_map_fine is
+    // set up. Under the current implementation, this would always be set up
+    // properly, but we check it just in case!
+    if(master_block_preconditioner_pt()->doftype_coarsen_map_fine().size() == 0)
+     {
+      std::ostringstream err_msg;
+      err_msg << "The master block preconditioner's Doftype_coarsen_fine is not\n"
+              << "set up properly."
+              << std::endl;
+      throw OomphLibError(err_msg.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+#endif
+
+    unsigned doftype_in_master_preconditioner_coarse_size 
+     = Doftype_in_master_preconditioner_coarse.size();
+    for (unsigned i = 0; 
+         i < doftype_in_master_preconditioner_coarse_size; i++) 
+     {
+      // The index of the sub vector we want.
+      unsigned subvec_index = Doftype_in_master_preconditioner_coarse[i];
+
+      // Get the corresponding most fine grain sub vector from the master block
+      // preconditioner
+      Vector<unsigned> tmp_master_dof_subvec 
+       = Master_block_preconditioner_pt
+       ->get_fine_grain_dof_types_in(subvec_index);
+
+      Doftype_in_master_preconditioner_fine.insert(
+                                                   Doftype_in_master_preconditioner_fine.end(),
+                                                   tmp_master_dof_subvec.begin(),
+                                                   tmp_master_dof_subvec.end());
+     }
+
+    // The Doftype_coarsen_map_fine vector is a bit more tricky.
+    // The Doftype_coarsen_map_coarse vector describes which coarse dof types
+    // of THIS preconditioner are grouped together. We have to translate this 
+    // into the most fine grain dof types.
+    //
+    // For example, if
+    // Doftype_coarsen_map_coarse vector = [[0][1,2]]
+    // Doftype_in_master_preconditioner_coarse = [1,2,3]
+    //
+    // and the master preconditioner has:
+    // Doftype_coarsen_map_fine= [[0,1,2,3][4,5,6,7][8,9,10,11][12,13][14,15]]
+    //
+    // Then [[0][1,2]] tell us that the most fine grain dof types 1 of the master 
+    // preconditioner most be grouped together, and the most fine grained dof 
+    // types 2 and 3 of the master preconditioner must be grouped together.
+    //
+    // This gives the vector [[4,5,6,7] [8,9,10,11,12,13]], translating this into
+    // the local dof types of this preconditioner we have 
+    // Doftype_coarsen_map_fine = [[0,1,2,3][4,5,6,7,8,9]]. This corresponds 
+    // with the Doftype_in_master_preconditioner_fine vector we created above:
+    // Doftype_in_master_preconditioner_fine = [4,5,6,7,8,9,10,11,12,13]
+    //
+    // Together, the master block preconditioner says to THIS subsidiary block
+    // preconditioner "work on my dof types [4,5,6,7,8,9,10,11,12,13], but group
+    // your dof type [0,1,2,3] together as dof type 0 and [4,5,6,7,8,9] together
+    // together as dof type 1".
+    //
+    // Think of it like this: For each dof type in Doftype_coarsen_map_coarse
+    // we look at how many values this corresponds to in the master 
+    // preconditioner. In this case, Doftype_coarsen_map_coarse[
+    // 1 - corresponds to internal dof types 0,1,2,3 in this preconditioner
+    // 2 - corresponds to internal dof types 4,5,6,7 in this preconditioner
+    // 3 - corresponds to internal dof types 8,9 in this preconditioner.
+    //
+    // Thus Doftype_coarsen_map_fine = [[0,1,2,3][4,5,6,7,8,9]]
+    //
+
+    Vector<Vector<unsigned> > tmp_doftype_to_doftype_vec;
+    unsigned dof_type_index = 0;
+    for (unsigned i = 0; 
+         i < doftype_in_master_preconditioner_coarse_size; i++) 
+     {
+      // How many internal dof types are in the master's
+      // Doftype_in_master_preconditioner_coarse[i]? - i.e. 
+      // Master_block_preconditioner_pt
+      //   ->get_fine_grain_dof_types_in(coarse_dof).size();
+      unsigned coarse_dof = Doftype_in_master_preconditioner_coarse[i];
+
+      unsigned n_internal_doftypes 
+       = Master_block_preconditioner_pt->internal_ndof_types_in(coarse_dof);
+
+      Vector<unsigned> tmp_sub_vec;
+      for (unsigned j = 0; j < n_internal_doftypes; j++) 
+       {
+        tmp_sub_vec.push_back(dof_type_index);
+        dof_type_index++;
+       }
+      tmp_doftype_to_doftype_vec.push_back(tmp_sub_vec);
+     }
+
+
+    // tmp_doftype_to_doftype_vec now contains vectors with values are from
+    // 0, 1, 2, .., 
+    //
+    // Doftype_coarsen_map_coarse
+
+    // Now read out the values of tmp_doftype_to_doftype_vec and place them in
+    // order according to Doftype_coarsen_map_coarse.
+    unsigned doftype_coarsen_map_coarse_size 
+     = Doftype_coarsen_map_coarse.size();
+    for (unsigned i = 0; i < doftype_coarsen_map_coarse_size; i++) 
+     {
+      Vector<unsigned> tmp_vec;
+      unsigned doftype_coarsen_map_coarse_i_size 
+       = Doftype_coarsen_map_coarse[i].size();
+      for (unsigned j = 0; j < doftype_coarsen_map_coarse_i_size; j++) 
+       {
+        unsigned subvec_i = Doftype_coarsen_map_coarse[i][j];
+
+        tmp_vec.insert(tmp_vec.end(),tmp_doftype_to_doftype_vec[subvec_i].begin(),
+                       tmp_doftype_to_doftype_vec[subvec_i].end());
+       }
+
+      Doftype_coarsen_map_fine.push_back(tmp_vec);
+     }
+
+    // Get the number of block types (and dof types) in this preconditioner
+    // from the length of the dof_map vector.
+    Internal_ndof_types = Doftype_in_master_preconditioner_fine.size();
+
+    // Nblock_types is later updated in block_setup(...)
+    Internal_nblock_types = Internal_ndof_types;
+
+    //  std::cout << "BPF::turn... Doftype_in_master_preconditioner_fine" << std::endl; 
+    //  for (unsigned i = 0; i < Doftype_in_master_preconditioner_fine.size(); i++) 
+    //  {
+    //    std::cout << Doftype_in_master_preconditioner_fine[i] << " ";
+    //  }
+    //  std::cout << "\n" << std::endl;
+    //
+    //  std::cout << "BPF::turn... Doftype_coarsen_map_fine" << std::endl; 
+    //  for (unsigned i = 0; i < Doftype_coarsen_map_fine.size(); i++) 
+    //  {
+    //    for (unsigned j = 0; j < Doftype_coarsen_map_fine[i].size(); j++) 
+    //    {
+    //      std::cout << Doftype_coarsen_map_fine[i][j] << " "; 
+    //    }
+    //    std::cout << "\n";
+    //  }
+    //  std::cout << "\n" << std::endl; 
+  
+  
+    //pause("End of turn_into..."); 
+
     // Compute number of rows in this (sub) preconditioner using data from
     // the master.
     Nrow = 0;
@@ -2209,368 +2552,17 @@ namespace oomph
  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
  turn_into_subsidiary_block_preconditioner
  (BlockPreconditioner<MATRIX>* master_block_prec_pt,
-  const Vector<unsigned>& doftype_in_master_preconditioner_coarse_in,
-  const Vector<Vector<unsigned> > &doftype_coarsen_map_coarse_in)
+  const Vector<unsigned>& doftype_in_master_preconditioner_coarse,
+  const Vector<Vector<unsigned> > &doftype_coarsen_map_coarse)
  {
-
-  // create modifiable copys of input vectors
-  Vector<unsigned> doftype_in_master_preconditioner_coarse =
-   doftype_in_master_preconditioner_coarse_in;
-  Vector<Vector<unsigned> > doftype_coarsen_map_coarse =
-   doftype_coarsen_map_coarse_in;
-
-#ifdef PARANOID
-   // Get the size of the doftype_in_master_preconditioner_coarse.
-   unsigned para_doftype_in_master_preconditioner_coarse_size 
-     = doftype_in_master_preconditioner_coarse.size();
-
-   // Check that the doftype_in_master_preconditioner_coarse vector is not 
-   // empty
-   if(para_doftype_in_master_preconditioner_coarse_size == 0)
-    {
-     std::ostringstream err_msg;
-     err_msg << "The mapping from the dof types of the master "
-             << "block preconditioner \n"
-             << "to the subsidiary block preconditioner is empty.\n"
-             << "doftype_in_master_preconditioner_coarse.size() == 0"
-             << std::endl;
-     throw OomphLibError(err_msg.str(),
-                         OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
-    }
-
-
-   // PARANOID checks for doftype_coarsen_map
-   
-   // Three conditions must be satisfied:
-   //
-   // 1) The dof type numbers in the dof_coarsen_map vector must be 
-   //    unique. For example, it does not make sense to have the vector
-   //    [[0,1][1,2]] because the first inner vector says 
-   //    "treat dof types 0 and 1 as dof type 0" and the second inner vector 
-   //    says "treat dof type 1 and 2 as dof type 1", but dof type 1 is already
-   //    being treated as dof type 0.
-   //
-   // 2) Every SUBSIDIARY dof type must be mapped to a dof type in the 
-   //    doftype_coarsen_map vector. For example, if there are 5 dof types
-   //    (passed down from the master block preconditioner), and this block 
-   //    subsidiary block preconditioner only deals with 3 dof types, then all 
-   //    5 dof types must be mapped to a dof type in the subsidiary 
-   //    preconditioner. For example if the dof_map is [1,2,3,4,5], then the 
-   //    subsidiary block preconditioner knows that 5 dof types have been 
-   //    passed down. But if it only works with three dof types, we MUST have 
-   //    three inner vectors in the doftype_coarsen_map vector (which 
-   //    corresponds to dof types 0, 1 and 2), the union of the dof types in 
-   //    the three inner vectors must contain dof types 0, 1, 2, 3 and 4 
-   //    exactly once. It cannot contain, say, 0, 1, 5, 7, 9, even though it 
-   //    passes the uniqueness check. We ensure this by two conditions:
-   //
-   //    2.1) The doftype_coarsen_map vector must contain the same number of
-   //         dof types as the dof_map vector.
-   //
-   //    2.2) The maximum element in the doftype_coarsen_map vector is the 
-   //         length of the dof_map vector minus 1.
-
-   // A set is deal for checking the above three conditions, we shall insert
-   // all the elements in the doftype_coarsen_map vector into this set.
-   std::set<unsigned> doftype_map_set;
-
-   // Condition (1): Check for uniqueness by inserting all the values of
-   // doftype_coarsen_map into a set.
-   unsigned para_doftype_coarsen_map_coarse_size 
-     = doftype_coarsen_map_coarse.size();
-
-   // Loop through the outer vector.
-   for (unsigned i = 0; i < para_doftype_coarsen_map_coarse_size; i++)
-    {
-     // Loop through the inner vector
-     unsigned para_doftype_coarsen_map_coarse_i_size 
-       = doftype_coarsen_map_coarse[i].size();
-     for (unsigned j = 0; j < para_doftype_coarsen_map_coarse_i_size; j++)
-      {
-       // Attempt to insert all the values of the inner vector into a set.
-       //std::set<unsigned>::iterator doftype_map_it;
-       std::pair<std::set<unsigned>::iterator,bool> doftype_map_ret;
-
-       doftype_map_ret 
-         = doftype_map_set.insert(doftype_coarsen_map_coarse[i][j]);
-         
-       if(!doftype_map_ret.second)
-        {
-         std::ostringstream err_msg;
-         err_msg << "Error: the doftype number "
-                 << doftype_coarsen_map_coarse[i][j]
-                 << " is already inserted."
-                 << std::endl;
-         throw OomphLibError(err_msg.str(),
-                             OOMPH_CURRENT_FUNCTION,
-                             OOMPH_EXCEPTION_LOCATION);
-        }
-      }
-    }
-     
-   // Condition (2.1): Check that the doftype_map_set describes as many values
-   // as doftype_in_master_preconditioner_coarse. 
-   // I.e. if dof_map contains 5 dof types, then the 
-   // doftype_coarsen_map_coarse vector must also contain 5 dof types.
-   if(para_doftype_in_master_preconditioner_coarse_size 
-       != doftype_map_set.size())
-    {
-     std::ostringstream err_msg;
-     err_msg << "The size of doftype_in_master_preconditioner_coarse "
-             << "must be the same as the total\n"
-             << "number of values in the doftype_coarsen_map_coarse vector."
-             << std::endl;
-     throw OomphLibError(err_msg.str(),
-                         OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
-    }
-
-   // Condition (2.2): Check that the maximum element in the 
-   // doftype_coarsen_map_coarse vector is the length of the 
-   // doftype_in_master_preconditioner_coarse minus 1.
-   unsigned para_doftype_in_master_preconditioner_coarse_size_minus_one 
-     = para_doftype_in_master_preconditioner_coarse_size - 1;
-   if(para_doftype_in_master_preconditioner_coarse_size_minus_one 
-       != *doftype_map_set.rbegin())
-    {
-     std::ostringstream err_msg;
-     err_msg << "The maximum dof type number in the "
-             << "doftype_coarsen_map vector must be "
-             << para_doftype_in_master_preconditioner_coarse_size_minus_one
-             << std::endl;
-     throw OomphLibError(err_msg.str(),
-                         OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-
   // Set the master block preconditioner pointer
   Master_block_preconditioner_pt = master_block_prec_pt;
 
   // Set the Doftype_coarsen_map_coarse.
   Doftype_coarsen_map_coarse = doftype_coarsen_map_coarse;
 
-  Doftype_in_master_preconditioner_coarse 
-    = doftype_in_master_preconditioner_coarse;
-
-//  std::cout << "BPF::turn_into... Doftype_in_master_preconditioner_coarse:" << std::endl; 
-//  for (unsigned dof_i = 0; dof_i < Doftype_in_master_preconditioner_coarse.size(); dof_i++) 
-//  {
-//    std::cout << Doftype_in_master_preconditioner_coarse[dof_i] << " ";
-//  }
-//  std::cout << "\n" << std::endl; 
-//  
-//  std::cout << "BPF::turn_into... Doftype_coarsen_map_coarse: " << std::endl;
-//  for (unsigned i = 0; i < Doftype_coarsen_map_coarse.size(); i++) 
-//  {
-//    for (unsigned j = 0; j < Doftype_coarsen_map_coarse[i].size(); j++) 
-//    {
-//      std::cout << Doftype_coarsen_map_coarse[i][j] << " ";
-//    }
-//    std::cout << "\n"; 
-//  }
-//  std::cout << "\n" << std::endl;
-
-  
-  // Set the mapping from the master preconditioner dof types to the
-  // subsidiary preconditioner dof types. 
-  //
-  // IMPORTANT: Since dof_types may be coarsened in the master block 
-  // preconditioner, this may no longer reflect the actual underlying 
-  // dof types. We must get the actual underlying dof types for the 
-  // block_setup(...) function to work properly so all the look up schemes 
-  // for this block preconditioner is correct and works properly, this is for
-  // backwards compatibility purposes and to make sure Richard Muddle's 
-  // still works at this (subsidiary) level, although it may not be used.
-  //
-  // If we do not want to make it backwards compatible, we may as well kill the
-  // block_setup(...) for subsidiary block preconditioners - but other things
-  // may break. Do it at your own risk (take time to fully understand the whole
-  // block preconditioning framework code).
-
-  // Create the corresponding Doftype_in_master_preconditioner_fine and
-  // Doftype_coarsen_map_fine vectors.
-
-  // First resize the vectors.
-  Doftype_in_master_preconditioner_fine.resize(0);
-  Doftype_coarsen_map_fine.resize(0);
-
-  // The Doftype_in_master_preconditioner_fine vector is easy.
-  // We know that the Doftype_coarsen_map_fine in the master preconditioner
-  // must be constructed already. So we simply loop through the values in
-  // doftype_in_master_preconditioner_coarse, then get the most fine
-  // grain dof types from the master preconditioner's 
-  // Doftype_coarsen_map_fine vector.
-  //
-  // For example, if the master preconditioner has the vector:
-  // Doftype_coarsen_map_fine = [0,1,2,3][4,5,6,7][8,9,10,11][12,13][14,15]
-  // 
-  // and passes the two vectors 
-  // doftype_in_master_preconditioner_coarse = [1,2,3]
-  // doftype_coarsen_map_coarse = [[0][1,2]]
-  //
-  // Then we want 
-  // Doftype_in_master_preconditioner_fine = [4,5,6,7,8,9,10,11,12,13]
-  //
-  // We achieve this by looking up the corresponding fine dof types in the 
-  // masters' Doftype_coarsen_map_fine vector which corresponds to the 
-  // values in Doftype_in_master_preconditioner_coarse.
-  //
-  // That is, the values in Doftype_in_master_preconditioner_coarse gives us
-  // the index of sub vector we want in the master's Doftype_coarsen_map_fine
-  // vector.
-
-#ifdef PARANOID
-  // Check that the master block preconditioner's Doftype_coarsen_map_fine is
-  // set up. Under the current implementation, this would always be set up
-  // properly, but we check it just in case!
-  if(master_block_preconditioner_pt()->doftype_coarsen_map_fine().size() == 0)
-  {
-    std::ostringstream err_msg;
-    err_msg << "The master block preconditioner's Doftype_coarsen_map_fine is not\n"
-            << "set up properly."
-            << std::endl;
-    throw OomphLibError(err_msg.str(),
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
-  }
-#endif
-
-  unsigned doftype_in_master_preconditioner_coarse_size 
-    = Doftype_in_master_preconditioner_coarse.size();
-  for (unsigned i = 0; 
-       i < doftype_in_master_preconditioner_coarse_size; i++) 
-  {
-    // The index of the sub vector we want.
-    unsigned subvec_index = Doftype_in_master_preconditioner_coarse[i];
-
-    // Get the corresponding most fine grain sub vector from the master block
-    // preconditioner
-    Vector<unsigned> tmp_master_dof_subvec 
-      = Master_block_preconditioner_pt
-          ->get_fine_grain_dof_types_in(subvec_index);
-
-    Doftype_in_master_preconditioner_fine.insert(
-        Doftype_in_master_preconditioner_fine.end(),
-        tmp_master_dof_subvec.begin(),
-        tmp_master_dof_subvec.end());
-  }
-
-  // The Doftype_coarsen_map_fine vector is a bit more tricky.
-  // The Doftype_coarsen_map_coarse vector describes which coarse dof types
-  // of THIS preconditioner are grouped together. We have to translate this 
-  // into the most fine grain dof types.
-  //
-  // For example, if
-  // Doftype_coarsen_map_coarse vector = [[0][1,2]]
-  // Doftype_in_master_preconditioner_coarse = [1,2,3]
-  //
-  // and the master preconditioner has:
-  // Doftype_coarsen_map_fine= [[0,1,2,3][4,5,6,7][8,9,10,11][12,13][14,15]]
-  //
-  // Then [[0][1,2]] tell us that the most fine grain dof types 1 of the master 
-  // preconditioner most be grouped together, and the most fine grained dof 
-  // types 2 and 3 of the master preconditioner must be grouped together.
-  //
-  // This gives the vector [[4,5,6,7] [8,9,10,11,12,13]], translating this into
-  // the local dof types of this preconditioner we have 
-  // Doftype_coarsen_map_fine = [[0,1,2,3][4,5,6,7,8,9]]. This corresponds 
-  // with the Doftype_in_master_preconditioner_fine vector we created above:
-  // Doftype_in_master_preconditioner_fine = [4,5,6,7,8,9,10,11,12,13]
-  //
-  // Together, the master block preconditioner says to THIS subsidiary block
-  // preconditioner "work on my dof types [4,5,6,7,8,9,10,11,12,13], but group
-  // your dof type [0,1,2,3] together as dof type 0 and [4,5,6,7,8,9] together
-  // together as dof type 1".
-  //
-  // Think of it like this: For each dof type in Doftype_coarsen_map_coarse
-  // we look at how many values this corresponds to in the master 
-  // preconditioner. In this case, Doftype_coarsen_map_coarse[
-  // 1 - corresponds to internal dof types 0,1,2,3 in this preconditioner
-  // 2 - corresponds to internal dof types 4,5,6,7 in this preconditioner
-  // 3 - corresponds to internal dof types 8,9 in this preconditioner.
-  //
-  // Thus Doftype_coarsen_map_fine = [[0,1,2,3][4,5,6,7,8,9]]
-  //
-
-  Vector<Vector<unsigned> > tmp_doftype_to_doftype_vec;
-  unsigned dof_type_index = 0;
-  for (unsigned i = 0; 
-       i < doftype_in_master_preconditioner_coarse_size; i++) 
-  {
-    // How many internal dof types are in the master's
-    // Doftype_in_master_preconditioner_coarse[i]? - i.e. 
-    // Master_block_preconditioner_pt
-    //   ->get_fine_grain_dof_types_in(coarse_dof).size();
-    unsigned coarse_dof = Doftype_in_master_preconditioner_coarse[i];
-
-    unsigned n_internal_doftypes 
-      = Master_block_preconditioner_pt->internal_ndof_types_in(coarse_dof);
-
-    Vector<unsigned> tmp_sub_vec;
-    for (unsigned j = 0; j < n_internal_doftypes; j++) 
-    {
-      tmp_sub_vec.push_back(dof_type_index);
-      dof_type_index++;
-    }
-    tmp_doftype_to_doftype_vec.push_back(tmp_sub_vec);
-  }
-
-
-  // tmp_doftype_to_doftype_vec now contains vectors with values are from
-  // 0, 1, 2, .., 
-  //
-  // Doftype_coarsen_map_coarse
-
-  // Now read out the values of tmp_doftype_to_doftype_vec and place them in
-  // order according to Doftype_coarsen_map_coarse.
-  unsigned doftype_coarsen_map_coarse_size 
-    = Doftype_coarsen_map_coarse.size();
-  for (unsigned i = 0; i < doftype_coarsen_map_coarse_size; i++) 
-  {
-    Vector<unsigned> tmp_vec;
-    unsigned doftype_coarsen_map_coarse_i_size 
-      = Doftype_coarsen_map_coarse[i].size();
-    for (unsigned j = 0; j < doftype_coarsen_map_coarse_i_size; j++) 
-    {
-      unsigned subvec_i = Doftype_coarsen_map_coarse[i][j];
-
-      tmp_vec.insert(tmp_vec.end(),tmp_doftype_to_doftype_vec[subvec_i].begin(),
-                                     tmp_doftype_to_doftype_vec[subvec_i].end());
-    }
-
-    Doftype_coarsen_map_fine.push_back(tmp_vec);
-  }
-
-  // Get the number of block types (and dof types) in this preconditioner
-  // from the length of the dof_map vector.
-  Internal_ndof_types = Doftype_in_master_preconditioner_fine.size();
-
-  // Nblock_types is later updated in block_setup(...)
-  Internal_nblock_types = Internal_ndof_types;
-
-//  std::cout << "BPF::turn... Doftype_in_master_preconditioner_fine" << std::endl; 
-//  for (unsigned i = 0; i < Doftype_in_master_preconditioner_fine.size(); i++) 
-//  {
-//    std::cout << Doftype_in_master_preconditioner_fine[i] << " ";
-//  }
-//  std::cout << "\n" << std::endl;
-//
-//  std::cout << "BPF::turn... Doftype_coarsen_map_fine" << std::endl; 
-//  for (unsigned i = 0; i < Doftype_coarsen_map_fine.size(); i++) 
-//  {
-//    for (unsigned j = 0; j < Doftype_coarsen_map_fine[i].size(); j++) 
-//    {
-//      std::cout << Doftype_coarsen_map_fine[i][j] << " "; 
-//    }
-//    std::cout << "\n";
-//  }
-//  std::cout << "\n" << std::endl; 
-  
-  
-  //pause("End of turn_into..."); 
-  
+  Doftype_in_master_preconditioner_coarse =
+   doftype_in_master_preconditioner_coarse;
  } // end of turn_into_subsidiary_block_preconditioner(...)
 
 
