@@ -82,7 +82,7 @@ namespace oomph
   /// communicator pointer then call preconditioner specific setup()
   /// function. If not in parallel then it is safe to use the default null
   /// communicator pointer.
-  void setup(DoubleMatrixBase* matrix_pt,
+  virtual void setup(DoubleMatrixBase* matrix_pt,
              const OomphCommunicator* comm_pt = 0)
   {
    set_matrix_pt(matrix_pt);
@@ -107,7 +107,7 @@ namespace oomph
   virtual void clean_up_memory(){};
 
   /// Get function for matrix pointer.
-  DoubleMatrixBase* matrix_pt() const
+  virtual DoubleMatrixBase* matrix_pt() const
   {
 #ifdef PARANOID
    if(Matrix_pt == 0)
@@ -123,10 +123,10 @@ namespace oomph
   }
 
   /// \short Set the matrix pointer.
-  void set_matrix_pt(DoubleMatrixBase* matrix_pt) {Matrix_pt = matrix_pt;}
+  virtual void set_matrix_pt(DoubleMatrixBase* matrix_pt) {Matrix_pt = matrix_pt;}
 
   /// Get function for comm pointer.
-  const OomphCommunicator* comm_pt() const
+  virtual const OomphCommunicator* comm_pt() const
   {
 #ifdef PARANOID
    if(Comm_pt == 0)
@@ -145,7 +145,7 @@ namespace oomph
   }
   
   /// \short Set the communicator pointer
-  void set_comm_pt(const OomphCommunicator* const comm_pt)
+  virtual void set_comm_pt(const OomphCommunicator* const comm_pt)
   {Comm_pt = comm_pt;}
 
  private:
