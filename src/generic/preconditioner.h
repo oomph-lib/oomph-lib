@@ -44,6 +44,9 @@
 namespace oomph
 {
 
+ // Forward declaration of block preconditioners (for turn into subs.)
+ template<typename MATRIX> class BlockPreconditioner;
+
  //=============================================================================
  /// \short Preconditioner base class. Gives an interface to call all other
  /// preconditioners through and stores the matrix and communicator
@@ -147,6 +150,23 @@ namespace oomph
   /// \short Set the communicator pointer
   virtual void set_comm_pt(const OomphCommunicator* const comm_pt)
   {Comm_pt = comm_pt;}
+
+  /// Virtual interface function for making a preconditioner a subsidiary
+  /// of a block preconditioner. By default nothing is needed, but if this
+  /// preconditioner is also a block preconditioner then things need to
+  /// happen.
+  virtual void turn_into_subsidiary_preconditioner
+  (BlockPreconditioner<CRDoubleMatrix>* master_prec_pt,
+   const Vector<unsigned>& doftype_in_master_preconditioner_coarse) {}
+
+  /// Virtual interface function for making a preconditioner a subsidiary
+  /// of a block preconditioner. By default nothing is needed, but if this
+  /// preconditioner is also a block preconditioner then things need to
+  /// happen. Version for coarsening dof-types.
+  virtual void turn_into_subsidiary_block_preconditioner
+  (BlockPreconditioner<CRDoubleMatrix>* master_block_prec_pt,
+   const Vector<unsigned>& doftype_in_master_preconditioner_coarse,
+   const Vector<Vector<unsigned> > & doftype_coarsen_map_coarse) {}
 
  private:
 
