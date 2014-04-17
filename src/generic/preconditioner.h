@@ -58,7 +58,7 @@ namespace oomph
  public:
 
   /// Constructor
-  Preconditioner() : Matrix_pt(0), Comm_pt(0) {}
+  Preconditioner() : Matrix_pt(0), Comm_pt(0), Setup_time(0){};
 
   /// Broken copy constructor
   Preconditioner(const Preconditioner&)
@@ -90,7 +90,10 @@ namespace oomph
   {
    set_matrix_pt(matrix_pt);
    set_comm_pt(comm_pt);
+   double setup_time_start = TimingHelpers::timer();
    setup();
+   double setup_time_finish = TimingHelpers::timer();
+   Setup_time = setup_time_finish - setup_time_start;
   }
 
   /// \short Compatability layer for old preconditioners where problem
@@ -151,6 +154,10 @@ namespace oomph
   virtual void set_comm_pt(const OomphCommunicator* const comm_pt)
   {Comm_pt = comm_pt;}
 
+  /// \short Returns the time to setup the preconditioner.
+  double setup_time() const
+  {return Setup_time;}
+
   /// Virtual interface function for making a preconditioner a subsidiary
   /// of a block preconditioner. By default nothing is needed, but if this
   /// preconditioner is also a block preconditioner then things need to
@@ -178,6 +185,9 @@ namespace oomph
   /// \short Storage for a pointer to the communicator. Null 
   /// if the preconditioner should not be distributed.
   const OomphCommunicator* Comm_pt;
+
+  /// The time it takes to set up this preconditioner.
+  double Setup_time;
 
  };//Preconditioner
 
