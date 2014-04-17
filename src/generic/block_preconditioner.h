@@ -284,7 +284,8 @@ class BlockSelector
 
   private:
 
-  // build function.
+  /// Build function, sets the Row_index, Column_index and Wanted variables.
+  /// the Block_pt is only set if it is not null. Otherwise it is left alone.
   void build(const unsigned& row_index, 
       const unsigned& column_index, 
       const bool& wanted,
@@ -302,7 +303,9 @@ class BlockSelector
       if(Wanted == false)
       {
         std::ostringstream err_msg;
-        err_msg << "Trying to set block_pt, but Wanted == false.\n"; 
+        err_msg << "Trying to set block_pt, but Wanted == false.\n"
+                << "Please either not set the block_pt or call the function\n"
+                << "do_not_want_block()";
         throw OomphLibError(err_msg.str(),
             OOMPH_CURRENT_FUNCTION,
             OOMPH_EXCEPTION_LOCATION); 
@@ -334,11 +337,13 @@ class BlockSelector
  /// elements. Each constituent element must be block-preconditionable - i.e
  /// must implement the \c GeneralisedElements functions \c ndof_types() and
  /// get_dof_numbers_for_unknowns(...). A \c Problem can have several
- /// \c Meshes, but each \c Mesh can only contain a single type of element.
- /// The association between global degrees of freedom and their unique global
+ /// \c Meshes, but each \c Mesh must contain elements with the same DOF types.
+ /// The association between global degrees of freedom and their unique local
  /// dof numbers is therefore based on information provided by the elements.
+ /// We refer to the local dof numbers provided by the elements as the 
+ /// elemental dof numbers.
  /// 
- /// By default each type of DOF is assumed to be unqiue type of block,
+ /// By default each type of DOF is assumed to be unique type of block,
  /// but DOF types can be grouped together in a single block when
  /// block_setup(...) is called.
  /// 
@@ -383,26 +388,34 @@ class BlockSelector
    : Ndof_types_in_mesh(0)
   {
    // Initially set the master block preconditioner pointer to zero
-   // indicating that this is stand-alone preconditioner that will
-   // set up its own block lookup schemes etc.
+   // indicating that this is stand-alone preconditioner (i.e. the upper most
+   // level preconditioner) that will set up its own block lookup schemes etc.
    Master_block_preconditioner_pt = 0;
 
-   // The distribution of the concatenation of the internal blocks.
-   // This is only for the master block preconditioner.
+   // The distribution of the concatenation of the internal block 
+   // distributions.
+   // I.e. LinearAlgebraDistributionHelpers::concatenate
+   //        (distributions of internal blocks).
+   //
+   // The concatenation of the internal block distributions is stored in two
+   // places depending on if this is the upper-most master block preconditioner
+   // or not.
+   //
+   // If this is a master block preconditioner (Master_block_preconditioner_pt
+   // is null), then it is stored in the variable 
+   // Internal_preconditioner_matrix_distribution_pt (below).
    // For subsidiary block preconditioners, this remains null.
    //
    // Because BlockPreconditioners are DistributedLinearAlgebraObjects, they 
-   // have a distribution. For the upper most master block preconditioner,
+   // have a distribution. For the upper-most master block preconditioner,
    // this is the distribution of the underlying Jacobian.
    //
    // For all subsidiary block preconditioners, this remains null. The 
    // concatenation of the distribution of the internal blocks are stored
    // as the distribution of the BlockPreconditioner.
    //
-   // This a design decision, for better or worse, we don't know.
-   //
-   // RAYRAY - come back and edit this comment once I find out why this is 
-   // done. For now, I can see no reason for the inconsistency.
+   // This seems inconsistent and I cannot figure out why this is done.
+   // RAYRAY
    Internal_preconditioner_matrix_distribution_pt = 0;
 
    // The concatenation of the external block distributions.
@@ -412,43 +425,47 @@ class BlockSelector
    // This information is maintained if used as subsidiary or
    // stand-alone block preconditioner (in the latter case it
    // obviously stores the number of rows within the subsidiary
-   // preconditioner
+   // preconditioner.
    Nrow=0;
 
    // Initialise number of different block types in this preconditioner.
    // This information is maintained if used as subsidiary or
    // stand-alone block preconditioner (in the latter case it
    // obviously stores the number of rows within the subsidiary
-   // preconditioner
+   // preconditioner.
    Internal_nblock_types=0;
+
+   // Initialise number of different dof types in this preconditioner.
+   // This information is maintained if used as subsidiary or
+   // stand-alone block preconditioner (in the latter case it
+   // obviously stores the number of rows within the subsidiary
+   // preconditioner.
    Internal_ndof_types=0;
    
-   // RAYRAY this is to be removed.
-   // There are no precomputed block distributions to start off with.
+   // There are no blocks to start off with.
    Block_distribution_pt.resize(0);
 
-   // The distribution of the underlying internal blocks.
+   // The distributions of the underlying internal blocks.
    Internal_block_distribution_pt.resize(0);
 
    // The distribution of the dof-level blocks, these are used during the
    // concatenation process to create the distribution of the blocks.
-   // RAYRAY - may not be needed?
    Dof_block_distribution_pt.resize(0);
 
-   // Clear the Block_to_dof_map_coarse
-   Block_to_dof_map_coarse.clear();
+   // Clear both the Block_to_dof_map_coarse and Block_to_dof_map_fine vectors.
+   Block_to_dof_map_coarse.resize(0);
+   Block_to_dof_map_fine.resize(0);
 
+   // RAYRAY remove.
    Raydebug = false;
   } // EOFunc constructor
 
+  // Temporary viable for debugging purposes.
   bool Raydebug;
 
   /// Destructor
   virtual ~BlockPreconditioner()
   {
-
-
-
    this->clear_block_preconditioner_base();
   } // EOFunc destructor
 
@@ -487,10 +504,11 @@ class BlockSelector
       }
 #endif
      return m_pt;
-     
     }
   } // EOFunc matrix_pt()
 
+
+  // RAYRAY REMOVE
   void turn_on_raydebug()
   {
     Raydebug = true;
@@ -498,6 +516,7 @@ class BlockSelector
       this->master_block_preconditioner_pt()->turn_on_raydebug();
   }
 
+  // RAYRAY REMOVE
   void turn_off_raydebug()
   {
     Raydebug = false;
@@ -505,16 +524,15 @@ class BlockSelector
       this->master_block_preconditioner_pt()->turn_off_raydebug();
   }
 
-
   /// \short Function to turn this preconditioner into a
   /// subsidiary preconditioner that operates within a bigger
   /// "master block preconditioner (e.g. a Navier-Stokes 2x2 block
   /// preconditioner dealing with the fluid sub-blocks within a
   /// 3x3 FSI preconditioner. Once this is done the master block
   /// preconditioner deals with the block setup etc. 
-  /// The vector block_map must specify the block number in the
-  /// master preconditioner that corresponds to a block number in this
-  /// preconditioner.
+  /// The vector doftype_in_master_preconditioner_coarse must specify the 
+  /// dof number in the master preconditioner that corresponds to a dof number 
+  /// in this preconditioner.
   /// \b 1. The length of the vector is used to determine the number of
   /// blocks in this preconditioner therefore it must be correctly sized. 
   /// \b 2. block_setup(...) should be called in the master preconditioner
@@ -523,7 +541,8 @@ class BlockSelector
   /// preconditioner after this method is called.
   /// 
   /// This calls the other turn_into_subsidiary_block_preconditioner 
-  /// function with an empty doftype_to_doftype_map vector.
+  /// function with the identity mapping for doftype_coarsen_map_coarse
+  /// vector.
   void turn_into_subsidiary_block_preconditioner
   (BlockPreconditioner<MATRIX>* master_block_prec_pt,
    const Vector<unsigned>& doftype_in_master_preconditioner_coarse);
@@ -534,9 +553,9 @@ class BlockSelector
   /// preconditioner dealing with the fluid sub-blocks within a
   /// 3x3 FSI preconditioner. Once this is done the master block
   /// preconditioner deals with the block setup etc. 
-  /// The vector block_map must specify the block number in the
-  /// master preconditioner that corresponds to a block number in this
-  /// preconditioner.
+  /// The vector doftype_in_master_preconditioner_coarse must specify the 
+  /// dof number in the master preconditioner that corresponds to a dof number 
+  /// in this preconditioner.
   /// \b 1. The length of the vector is used to determine the number of
   /// blocks in this preconditioner therefore it must be correctly sized. 
   /// \b 2. block_setup(...) should be called in the master preconditioner
@@ -544,26 +563,34 @@ class BlockSelector
   /// \b 3. block_setup(...) should be called in the corresponding subsidiary
   /// preconditioner after this method is called.
   ///
-  /// The doftype_to_doftype_map is a mapping of the doftypes in the master
-  /// preconditioner to the doftypes required by THIS preconditioner. 
+  /// The doftype_coarsen_map_coarse is a mapping of the dof numbers in the 
+  /// master preconditioner to the dof numbers REQUIRED by THIS preconditioner.
+  /// This allows for coarsening of the dof types if the master preconditioner
+  /// has a more fine grain dof type splitting.
   /// 
   /// For example, the Lagrangian preconditioner (in 3D with one constraint) 
   /// has doftypes:
   /// 0  1  2  3  4  5  6 7
   /// ub vb wb uc vc wc p Lc
   /// 
-  /// The LSC preconditioner requires u, v, w, p, then the 
-  /// doftype_to_doftype_map will be:
-  /// [0 3]
-  /// [1 4]
-  /// [2 5]
-  /// [6]
+  /// We wish to use an existing Navier-Stokes preconditioner, for example, 
+  /// LSC, to solve the sub-system associated with the dof numbers
+  /// 0, 1, 2, 3, 4, 5, 6. But the existing LSC preconditioner only works
+  /// with four dof types (3 velocity dof types and 1 pressure dof types).
+  /// We need to coarsen the number of dof types in the master preconditioner.
+  /// 
+  /// If the LSC preconditioner requires the dof ordering: u, v, w, p. Then 
+  /// the doftype_coarsen_map_coarse will be:
+  /// [0 3] -> u velocity dof type
+  /// [1 4] -> v velocity dof type
+  /// [2 5] -> w velocity dof type
+  /// [6] -> pressure dof type.
   void turn_into_subsidiary_block_preconditioner
   (BlockPreconditioner<MATRIX>* master_block_prec_pt,
    const Vector<unsigned>& doftype_in_master_preconditioner_coarse,
    const Vector<Vector<unsigned> > & doftype_coarsen_map_coarse);
 
-  /// \short Specify the number of meshes required by this block
+  /// \short Specify the number of meshes required by this block 
   /// preconditioner.
   /// Note: elements in different meshes correspond to different types
   /// of DOF.
@@ -585,14 +612,14 @@ class BlockSelector
   } // EOFunc set_nmesh(...)
 
 
-  /// Set the i-th mesh for this block preconditioner.
+  /// \short Set the i-th mesh for this block preconditioner.
   /// Note:
   /// The method set_nmesh(...) must be called before this method
   /// to specify the number of meshes.
   /// By default, it is assumed that each mesh only contains elements of the 
   /// same type. This condition may be relaxed by setting the boolean
-  /// multiple_element_type_in_mesh to true, however, each mesh must only 
-  /// contain elements with the same number of types of DOF.
+  /// allow_multiple_element_type_in_mesh to true, however, each mesh must only 
+  /// contain elements with the same number of dof types.
   void set_mesh(const unsigned& i, const Mesh* const mesh_pt,
                 const bool &allow_multiple_element_type_in_mesh = false)
   {
@@ -644,11 +671,15 @@ class BlockSelector
   /// lookup schemes relating the global degrees of freedom with
   /// their "blocks" and their indices (row/column numbers) in those
   /// blocks.
-  /// The distributions of the preconditioner and the blocks are
+  /// The distributions of the preconditioner and the internal blocks are
   /// automatically specified (and assumed to be uniform) at this
   /// stage.
-  /// This method should be used if each DOF type corresponds to a
-  /// unique block type.
+  /// This method should be used if the identity dof-to-block mapping is okay,
+  /// i.e. 
+  /// dof number 0 corresponds to block number 0
+  /// dof number 1 corresponds to block number 1
+  /// dof number 2 corresponds to block number 2
+  /// etc...
   virtual void block_setup();
 
   /// \short Determine the size of the matrix blocks and setup the
@@ -658,15 +689,15 @@ class BlockSelector
   /// The distributions of the preconditioner and the blocks are
   /// automatically specified (and assumed to be uniform) at this
   /// stage.
-  /// This method should be used if each any block contains more than one
-  /// type of DOF. The argument vector dof_to_block_map should be of length
-  /// ndof. Each element should contain an integer indicating the block number
-  /// corresponding to that type of DOF.
+  /// This method should be used if anything other than the identity
+  /// dof-to-block mapping is required. The argument vector dof_to_block_map 
+  /// should be of length ndof. The indices represents the dof types whilst the
+  /// value represents the block types. In general we want:
+  ///
+  ///   dof_to_block_map[dof_number] = block_number.
   void block_setup(const Vector<unsigned>& dof_to_block_map);
 
   /// \short Put block (i,j) into output_matrix.
-  ///
-  /// RAYRAY comment 
   void get_block(const unsigned& i, const unsigned& j,
       MATRIX& output_matrix, 
       bool ignore_replacement_block = false) const
