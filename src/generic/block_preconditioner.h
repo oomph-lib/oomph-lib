@@ -718,13 +718,162 @@ class BlockSelector
     }
 #endif
 
-      get_coarsened_block(i,j,output_matrix,ignore_replacement_block);
+    // We attempt to get block(i,j).
+    //
+    // The logic is this:
+    //
+    // Block_to_dof_map_coarse tells us which dof types belongs in each block.
+    // This is relative to this preconditioner, and describes the external
+    // block and dof type mappings.
+    // 
+    // As such, the dof types in Block_to_dof_map_coarse describes the
+    // dof-level blocks needed to be concatenated to produce block(i,j)
+    //
+    // Now, the dofs to concatenate can either come from Replacement_dof_block_pt
+    // or the original matrix / further up the hierarchy.
+    //
+    // There is a small subtlety... Take the Lgr preconditioner, with the 
+    // natural DOF ordering:
+    // 0 1 2 3  4  5
+    // u v p uc vc L
+    //
+    // If the mapping given to block_setup(...) is:
+    // dof_to_block_map = [0, 1, 4, 2, 3, 5]
+    // saying that dof type 0 goes to block 0
+    //             dof type 1 goes to block 1
+    //             dof type 2 goes to block 4
+    //             dof type 3 goes to block 2
+    //             dof type 4 goes to block 3
+    //             dof type 5 goes to block 5
+    //
+    // Which results in the Block_to_dof_map_coarse = [[0][1][3][4][2][5]]
+    // which says that get_block(0,0) will get the u block
+    //                 get_block(1,1) will get the v block
+    //                 get_block(2,2) will get the uc block
+    //                 get_block(3,3) will get the vc block
+    //                 get_block(4,4) will get the p block
+    //                 get_block(5,5) will get the L block
+    //
+    // i.e. this permutes the dofs to blocks so that we now have the following 
+    // ordering:
+    // 0 1 2  3  4 5 <- block ordering
+    // u v uc vc p L
+    //
+    // Now, when we replace a dof level block, we do it with respect to the
+    // block order, i.e. if we replace the pressure block, we call
+    // set_replacement_dof_block(4,4,Matrix);
+    //
+    // However, when we get_block(4,4), we use the mapping Block_to_dof_map_coarse
+    // i.e. Block_to_dof_map_coarse[4] = 2, we get the block 2,2, since the
+    // underlying dof_to_block mapping is still the identity, i.e. it has not
+    // changed from:
+    // 0 1 2 3  4  5
+    // u v p uc vc L
+    //
+    // So, get_block(4,4) (pressure block) we get the mapping (2,2), which we
+    // can use to get_block_from_original_matrix. If we try the same with
+    // Replacement_dof_block_pt, we end up with the block(2,2) = (v,v), which
+    // is incorrect! 
+
+    const unsigned ndofblock_in_row = Block_to_dof_map_coarse[i].size();
+    const unsigned ndofblock_in_col = Block_to_dof_map_coarse[j].size();
+
+    if(ndofblock_in_row == 1 && ndofblock_in_col == 1)
+    {
+      const unsigned wanted_dof_row = Block_to_dof_map_coarse[i][0];
+      const unsigned wanted_dof_col = Block_to_dof_map_coarse[j][0];
+
+      if((Replacement_dof_block_pt.get(wanted_dof_row,wanted_dof_col) == 0) ||
+          ignore_replacement_block)
+      {
+        get_dof_level_block(wanted_dof_row,wanted_dof_col,output_matrix,ignore_replacement_block);
+      }
+      else
+      {
+        CRDoubleMatrixHelpers::deep_copy(Replacement_dof_block_pt.get(wanted_dof_row,
+              wanted_dof_col),
+            output_matrix);
+      }
+    }
+    else
+    {
+
+      DenseMatrix<CRDoubleMatrix*> tmp_blocks_pt(ndofblock_in_row,ndofblock_in_col,0);
+
+      Vector<Vector<unsigned> > new_block(ndofblock_in_row,Vector<unsigned>(ndofblock_in_col,0));
+
+      for (unsigned row_dofblock = 0; row_dofblock < ndofblock_in_row; row_dofblock++) 
+      {
+        const unsigned wanted_dof_row = Block_to_dof_map_coarse[i][row_dofblock];
+
+        for (unsigned col_dofblock = 0; col_dofblock < ndofblock_in_col; col_dofblock++) 
+        {
+          const unsigned wanted_dof_col = Block_to_dof_map_coarse[j][col_dofblock];
+
+          tmp_blocks_pt(row_dofblock,col_dofblock) 
+            = Replacement_dof_block_pt.get(wanted_dof_row,wanted_dof_col);
+
+          if((tmp_blocks_pt(row_dofblock,col_dofblock) == 0) ||
+              ignore_replacement_block)
+          {
+            new_block[row_dofblock][col_dofblock] = 1;
+            tmp_blocks_pt(row_dofblock,col_dofblock) = new CRDoubleMatrix;
+            get_dof_level_block(wanted_dof_row,
+                wanted_dof_col,
+                *tmp_blocks_pt(row_dofblock,col_dofblock),
+                ignore_replacement_block);
+          }
+        }
+      }
+
+      Vector<LinearAlgebraDistribution*> tmp_row_dist_pt(ndofblock_in_row,0);
+      for (unsigned row_dof_i = 0; row_dof_i < ndofblock_in_row; row_dof_i++) 
+      {
+        const unsigned mapped_dof_i = Block_to_dof_map_coarse[i][row_dof_i];
+        if(is_master_block_preconditioner())
+        {
+          tmp_row_dist_pt[row_dof_i] = Internal_block_distribution_pt[mapped_dof_i];
+        }
+        else
+        {
+          tmp_row_dist_pt[row_dof_i] = Dof_block_distribution_pt[mapped_dof_i];
+        }
+      }
+
+      Vector<LinearAlgebraDistribution*> tmp_col_dist_pt(ndofblock_in_col,0);
+      for (unsigned col_dof_i = 0; col_dof_i < ndofblock_in_col; col_dof_i++) 
+      {
+        const unsigned mapped_dof_j = Block_to_dof_map_coarse[j][col_dof_i];
+        if(is_master_block_preconditioner())
+        {
+          tmp_col_dist_pt[col_dof_i] = Internal_block_distribution_pt[mapped_dof_j];
+        }
+        else
+        {
+          tmp_col_dist_pt[col_dof_i] = Dof_block_distribution_pt[mapped_dof_j];
+        }
+      }
+
+      CRDoubleMatrixHelpers::concatenate_without_communication(tmp_row_dist_pt,
+          tmp_col_dist_pt,
+          tmp_blocks_pt,
+          output_matrix);
+
+      for (unsigned row_i = 0; row_i < ndofblock_in_row; row_i++) 
+      {
+        for (unsigned col_i = 0; col_i < ndofblock_in_col; col_i++) 
+        {
+          if(new_block[row_i][col_i])
+          {
+            delete tmp_blocks_pt(row_i,col_i);
+          }
+        }
+      }
+    }// else need to concatenate
   } // EOFunc get_block(...)
 
 
   /// \short Return block (i,j).
-  ///
-  /// RAYRAY comment
   MATRIX get_block(const unsigned& i, const unsigned& j) const
    {
     MATRIX output_matrix;
@@ -760,21 +909,10 @@ class BlockSelector
                               MATRIX* in_matrix_pt,
                               MATRIX& output_matrix)
   {
-
-//    pause("Hi from get_block_other_matrix"); 
-    
    MATRIX* backup_matrix_pt = matrix_pt();
    set_master_preconditioner_matrix(in_matrix_pt);
-//   pause("have set the matrix"); 
-   
-
-//   this->set_matrix_pt(in_matrix_pt);
-
    get_block(i, j, output_matrix, true);
-
    set_master_preconditioner_matrix(backup_matrix_pt);
-
-//   this->set_matrix_pt(backup_matrix_pt);
   } // EOFunc get_block_other_matrix(...)
 
   /// \short Get all the block matrices required by the block
@@ -1199,237 +1337,6 @@ class BlockSelector
     return output_matrix;
    } // EOFunc get_concatenated_block(...)
 
-//  /// RAYRAY comment.
-//  MATRIX get_concatenated_block(const VectorMatrix<BlockSelector> 
-//                                &selected_block)
-//   {
-//#ifdef PARANOID
-//     // Check range of block index
-//     const unsigned para_selected_block_nrow = selected_block.nrow();
-//     const unsigned para_selected_block_ncol = selected_block.ncol();
-//     const unsigned para_nblocks = nblock_types();
-//
-//     // Check that selected_block size is not 0.
-//     if(para_selected_block_nrow == 0)
-//     {
-//       std::ostringstream err_msg;
-//       err_msg << "There is no matrix to concatenate, \n" 
-//               << "selected_block.nrow() == 0.\n";
-//       throw OomphLibError(err_msg.str(),
-//                           OOMPH_CURRENT_FUNCTION,
-//                           OOMPH_EXCEPTION_LOCATION);   
-//     }
-//
-//     // Check that the number of blocks is not outside of the range 
-//     // nblock_types(). Since this function builds matrices for block
-//     // preconditioning, it does not make sense for us to concatenate more
-//     // blocks than nblock_types().
-//     if((para_selected_block_nrow > para_nblocks) || 
-//        (para_selected_block_ncol > para_nblocks))
-//     {
-//       std::ostringstream err_msg;
-//       err_msg << "Trying to concatenate a " 
-//               << para_selected_block_nrow << " by " 
-//               << para_selected_block_ncol 
-//               << " block matrix,\n"
-//               << "but there are only " 
-//               << para_nblocks << " block types.\n";
-//       throw OomphLibError(err_msg.str(),
-//                           OOMPH_CURRENT_FUNCTION,
-//                           OOMPH_EXCEPTION_LOCATION);   
-//     }
-//     
-//
-//     // Check that selected_block make sense, i.e. the row indices of each row
-//     // is the same, and the column indices of each column are the same.
-//
-//     // First check if the row indices are consistent. 
-//     // For each row, loop through the columns, comparing the row index against
-//     // the first column.
-//     for (unsigned row_i = 0; row_i < para_selected_block_nrow; row_i++)
-//     {
-//       // Row index of the first block (column 0) in this row. 
-//       // This will used to compare against.
-//       const unsigned col_0_row_index = selected_block[row_i][0].row_index();
-//
-//       for (unsigned col_i = 0; col_i < para_selected_block_ncol; col_i++) 
-//       {
-//         // Row and column index of the current block (along this row)
-//         const unsigned para_b_i = selected_block[row_i][col_i].row_index();
-//         const unsigned para_b_j = selected_block[row_i][col_i].column_index();
-//
-//         if(col_0_row_index != para_b_i)
-//         {
-//           std::ostringstream err_msg;
-//           err_msg << "Block index for block(" << row_i << "," << col_i <<") "
-//                   << "contains block index (" << para_b_i << "," 
-//                                               << para_b_j << ").\n"
-//                   << "But the row index for the first column is " 
-//                   << col_0_row_index <<", they must be the same!\n";
-//           throw OomphLibError(err_msg.str(),
-//                               OOMPH_CURRENT_FUNCTION,
-//                               OOMPH_EXCEPTION_LOCATION); 
-//         }
-//       }
-//     }
-//
-//     // Do the same for the column indices, consistency check.
-//     // For each column, loop through the rows, comparing the column index
-//     // against the first row.
-//     for (unsigned col_i = 0; col_i < para_selected_block_ncol; col_i++) 
-//     {
-//       // Column index from the first block (row 0) in this column.
-//       // This will be used to compare against.
-//       const unsigned row_0_col_index 
-//         = selected_block[0][col_i].column_index();
-//
-//       for (unsigned row_i = 0; row_i < para_selected_block_nrow; row_i++) 
-//       {
-//         // The row and column index of the current block along this column.
-//         const unsigned para_b_i = selected_block[row_i][col_i].row_index();
-//         const unsigned para_b_j = selected_block[row_i][col_i].column_index();
-//
-//         if(row_0_col_index != para_b_j)
-//         {
-//           std::ostringstream err_msg;
-//           err_msg << "Block index for block(" << row_i << "," << col_i <<") "
-//                   << "contains block index (" << para_b_i << "," 
-//                                               << para_b_j << ").\n"
-//                   << "But the col index for the first row is " 
-//                   << row_0_col_index <<", they must be the same!\n";
-//           throw OomphLibError(err_msg.str(),
-//                               OOMPH_CURRENT_FUNCTION,
-//                               OOMPH_EXCEPTION_LOCATION); 
-//         }
-//       }
-//     }
-//
-//     // Check to see if the values in selected_block is within the range 
-//     // nblock_types()
-//     //
-//     // Since we know that the column and row indices are consistent (by the
-//     // two paranoia checks above), we only need to check the column indices
-//     // in the first row, and the row indices in the first column.
-//     
-//     // Check that the row indices in the first column are within the range
-//     // nblock_types()
-//     for (unsigned row_i = 0; row_i < para_selected_block_nrow; row_i++) 
-//     {
-//       const unsigned para_b_i = selected_block[row_i][0].row_index();
-//       const unsigned para_b_j = selected_block[row_i][0].column_index();
-//       if(para_b_i > para_nblocks)
-//       {
-//           std::ostringstream err_msg;
-//           err_msg << "Block index for block(" << row_i << ",0) "
-//                   << "contains block index (" << para_b_i << "," 
-//                                               << para_b_j << ").\n"
-//                   << "But there are only " << para_nblocks 
-//                   << " nblock_types().\n";
-//           throw OomphLibError(err_msg.str(),
-//                               OOMPH_CURRENT_FUNCTION,
-//                               OOMPH_EXCEPTION_LOCATION); 
-//       }
-//     }
-//
-//     // Check that the col indices in the first row are within the range
-//     // nblock_types()
-//     for (unsigned col_i = 0; col_i < para_selected_block_nrow; col_i++)
-//     {
-//       const unsigned para_b_i = selected_block[0][col_i].row_index();
-//       const unsigned para_b_j = selected_block[0][col_i].column_index();
-//       if(para_b_j > para_nblocks)
-//       {
-//           std::ostringstream err_msg;
-//           err_msg << "Vector for block(0," << col_i << ") "
-//                   << "contains block index (" << para_b_i << "," 
-//                                               << para_b_j << ").\n"
-//                   << "But there are only " << para_nblocks 
-//                   << " nblock_types().\n";
-//           throw OomphLibError(err_msg.str(),
-//                               OOMPH_CURRENT_FUNCTION,
-//                               OOMPH_EXCEPTION_LOCATION); 
-//       }
-//     }
-//
-//     // Stricter test - can be removed is required in the future. For the first
-//     // column, check that the row indices does not repeat.
-//     std::set<unsigned> row_index_set;
-//     for (unsigned row_i = 0; row_i < para_selected_block_nrow; row_i++) 
-//     {
-//       std::pair<std::set<unsigned>::iterator,bool> row_index_set_ret;
-//
-//       const unsigned row_i_index = selected_block[row_i][0].row_index();
-//
-//       row_index_set_ret
-//         = row_index_set.insert(row_i_index);
-//         
-//       if(!row_index_set_ret.second)
-//        {
-//         std::ostringstream err_msg;
-//         err_msg << "The row " << row_i_index << " is already inserted.\n";
-//         throw OomphLibError(err_msg.str(),
-//                             OOMPH_CURRENT_FUNCTION,
-//                             OOMPH_EXCEPTION_LOCATION);
-//        }
-//     }
-//
-//     // Stricter test - can be removed is required in the future. For the first
-//     // row, check that the column indices does not repeat.
-//     std::set<unsigned> col_index_set;
-//     for (unsigned col_i = 0; col_i < para_selected_block_ncol; col_i++) 
-//     {
-//       std::pair<std::set<unsigned>::iterator,bool> col_index_set_ret;
-//
-//       const unsigned col_i_index = selected_block[0][col_i].column_index();
-//
-//       col_index_set_ret
-//         = col_index_set.insert(col_i_index);
-//         
-//       if(!col_index_set_ret.second)
-//        {
-//         std::ostringstream err_msg;
-//         err_msg << "The col " << col_i_index << " is already inserted.\n";
-//         throw OomphLibError(err_msg.str(),
-//                             OOMPH_CURRENT_FUNCTION,
-//                             OOMPH_EXCEPTION_LOCATION);
-//        }
-//     }
-//#endif
-//
-//    const unsigned nblock_row = selected_block.nrow();
-//    const unsigned nblock_col = selected_block.ncol();
-//
-//    DenseMatrix<CRDoubleMatrix*> sub_block_pt(nblock_row,nblock_col,0);
-//
-//    // Get the required blocks
-//    for (unsigned row_i = 0; row_i < nblock_row; row_i++)
-//    {
-//      for (unsigned col_i = 0; col_i < nblock_col; col_i++)
-//      {
-//        if(bool(selected_block[row_i][col_i].wanted()))
-//        {
-//          const unsigned block_i = selected_block[row_i][col_i].row_index();
-//          const unsigned block_j = selected_block[row_i][col_i].column_index();
-//
-//          sub_block_pt(row_i,col_i) = new CRDoubleMatrix;
-//          this->get_block(block_i,block_j,*sub_block_pt(row_i,col_i));
-//        }
-//      }
-//    }
-//
-//    MATRIX output_matrix = get_concatenated_block(selected_block,sub_block_pt);
-//    
-//    // delete the sub blocks.
-//    for (unsigned row_i = 0; row_i < nblock_row; row_i++) 
-//    {
-//      for (unsigned col_i = 0; col_i < nblock_col; col_i++) 
-//      {
-//        delete sub_block_pt(row_i,col_i);
-//      }
-//    }
-//
-//    return output_matrix;
-//   } // EOFunc get_concatenated_block(...)
  
   /// \short Takes the naturally ordered vector and rearranges it into a
   /// vector of sub vectors corresponding to the blocks, so s[b][i] contains
@@ -1724,7 +1631,6 @@ class BlockSelector
     else
     {
       // map the internal block to external block.
-      
       unsigned block_i = 0;
       while(std::find(Block_to_dof_map_fine[block_i].begin(), 
                       Block_to_dof_map_fine[block_i].end(), 
@@ -1775,27 +1681,17 @@ class BlockSelector
   // This is the overall index, not local block (in parallel).
   int external_index_in_block(const unsigned& i_dof) const
   {
-//    std::cout << "Hi from external_index_in_block(...)" << std::endl;
-
-//    std::cout << "Printing out Block_to_dof_map_fine: " << std::endl;
-//    for (unsigned i = 0; i < Block_to_dof_map_fine.size(); i++) 
-//    {
-//      std::cout << "i: " << i << ", " << Block_to_dof_map_fine[i] << std::endl;
-//    }
-    
     
     // the dof block number
     int dof_block_number = this->dof_number(i_dof);
-//    std::cout << "dof_block_number is: " << dof_block_number << std::endl;
 
     if(dof_block_number >= 0)
     {
       // the external block number
       unsigned ex_blk_number = this->external_block_number(i_dof);
-//      std::cout << "ex_blk_number: " << ex_blk_number << std::endl; 
       
       int internal_index_in_dof = this->index_in_dof(i_dof);
-//      int internal_block_number = this->block_number(i_dof);
+
       // find the processor which this global index in block belongs to.
       unsigned block_proc 
         = internal_block_distribution_pt(dof_block_number)
@@ -1812,11 +1708,6 @@ class BlockSelector
                  Block_to_dof_map_fine[ex_blk_number][dof_i])
                  ->first_row(block_proc);
       }
-//      std::cout << "sum of first row is: " << index << std::endl; 
-      
-//      if(Raydebug)
-//      pause("Done the first row add"); 
-      
 
       // Now add up all the nrow_local up to this dof block.
       unsigned j = 0;
@@ -1828,8 +1719,6 @@ class BlockSelector
         j++;
       }
 
-      
-
       // Now add the index of this block...
       index += (internal_index_in_dof - 
                 internal_block_distribution_pt(
@@ -1837,22 +1726,6 @@ class BlockSelector
                 ->first_row(block_proc));
 
       return index;
-
-
-
-//      // compute the index in the block
-//      unsigned j = 0;
-//      while(int(Block_to_dof_map_fine[ex_block_number][j])  !=
-//            dof_block_number)
-//      {
-//        unsigned first_row = internal_block_distribution_pt(
-//            Block_to_dof_map_fine[ex_block_number][j])->first_row();
-//
-//        unsigned nrow_local = internal_block_distribution_pt(
-//            Block_to_dof_map_fine[ex_block_number][j])->nrow_local();
-//
-//        index += 
-//      }
     }
 
     return -1;
@@ -2100,8 +1973,6 @@ class BlockSelector
   /// and build_preconditioner_matrix(...) have been called in this and
   /// all subsidiary block preconditioners this method can be called to
   /// clean up.
-  /// RAYRAY do this for replacement blocks? - Maybe? - Need to see how to
-  /// integrate this.
   void post_block_matrix_assembly_partial_clear()
   {
    if (is_master_block_preconditioner())
@@ -2626,14 +2497,6 @@ class BlockSelector
   void get_block_from_original_matrix(const unsigned& i, const unsigned& j,
                                       MATRIX& output_block) const;
 
-  /// \short Gets block (i,j) from the Replacement_dof_block_pt, which is a
-  /// DenseMatrix of pointers to precomputed (and possibly modified)
-  /// blocks. Necessary concatenation handled by this function and the
-  /// result is returned in output_block.
-  void get_coarsened_block(const unsigned& i, const unsigned& j,
-                             MATRIX& output_block, 
-                             bool ignore_replacement_block = false) const;
-  
   /// \short Check if any of the meshes are distributed. This is equivalent
   /// to problem.distributed() and is used as a replacement.
   bool any_mesh_distributed() const
