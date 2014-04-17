@@ -697,7 +697,9 @@ class BlockSelector
   ///   dof_to_block_map[dof_number] = block_number.
   void block_setup(const Vector<unsigned>& dof_to_block_map);
 
-  /// \short Put block (i,j) into output_matrix.
+  /// \short Put block (i,j) into output_matrix. This block accounts for any
+  /// coarsening of dof types and any replaced dof-level blocks above this
+  /// preconditioner.
   void get_block(const unsigned& i, const unsigned& j,
       MATRIX& output_matrix, 
       bool ignore_replacement_block = false) const
@@ -718,35 +720,56 @@ class BlockSelector
     }
 #endif
 
-    // We attempt to get block(i,j).
-    //
     // The logic is this:
     //
     // Block_to_dof_map_coarse tells us which dof types belongs in each block.
     // This is relative to this preconditioner, and describes the external
-    // block and dof type mappings.
+    // block and dof type mappings (what the preconditioner writer 
+    // expects/sees).
     // 
     // As such, the dof types in Block_to_dof_map_coarse describes the
-    // dof-level blocks needed to be concatenated to produce block(i,j)
+    // dof-level blocks needed to be concatenated to produce block(i,j). These
+    // dofs may have been coarsened.
     //
-    // Now, the dofs to concatenate can either come from Replacement_dof_block_pt
-    // or the original matrix / further up the hierarchy.
+    // Now, the dof blocks to concatenate comes from:
+    // If the dof block exists in Replacement_dof_block_pt, then we make a
+    // deep copy of it. Otherwise, if this is the upper-most master block 
+    // preconditioner then we get it from the original matrix via function 
+    // get_block_from_original_matrix(...) otherwise, if this is a subsidiary 
+    // block preconditioner, we go one level up the hierarchy and repeat the 
+    // process.
     //
-    // There is a small subtlety... Take the Lgr preconditioner, with the 
-    // natural DOF ordering:
+    //
+    // RAYRAY - a small note about indirections which caused me some headache.
+    // Thought I would mention it here in case the below code needs to be
+    // re-visited.
+    //
+    // A small subtlety with indirections:
+    //
+    // The underlying ordering of the dof-level blocks is STILL AND ALWAYS the 
+    // `natural' ordering determined by first the elements then the order of 
+    // the meshes.
+    // 
+    // But during the process of block_setup(...), the external (perceived) 
+    // block ordering may have changed. So some indirection has to take place,
+    // this mapping is maintained in Block_to_dof_map_coarse.
+    //
+    // For example, take the Lagrangian preconditioner, which expects the 
+    // natural dof type ordering:
     // 0 1 2 3  4  5
     // u v p uc vc L
     //
     // If the mapping given to block_setup(...) is:
     // dof_to_block_map = [0, 1, 4, 2, 3, 5]
-    // saying that dof type 0 goes to block 0
-    //             dof type 1 goes to block 1
-    //             dof type 2 goes to block 4
-    //             dof type 3 goes to block 2
-    //             dof type 4 goes to block 3
-    //             dof type 5 goes to block 5
+    // saying that: dof type 0 goes to block 0
+    //              dof type 1 goes to block 1
+    //              dof type 2 goes to block 4
+    //              dof type 3 goes to block 2
+    //              dof type 4 goes to block 3
+    //              dof type 5 goes to block 5
     //
-    // Which results in the Block_to_dof_map_coarse = [[0][1][3][4][2][5]]
+    // The function block_setup(...) will populate the vector 
+    // Block_to_dof_map_coarse with [[0][1][3][4][2][5]],
     // which says that get_block(0,0) will get the u block
     //                 get_block(1,1) will get the v block
     //                 get_block(2,2) will get the uc block
@@ -754,111 +777,223 @@ class BlockSelector
     //                 get_block(4,4) will get the p block
     //                 get_block(5,5) will get the L block
     //
-    // i.e. this permutes the dofs to blocks so that we now have the following 
-    // ordering:
+    // i.e. the ordering of the block types is a permutation of the dof types,
+    // so that we now have the following block ordering:
     // 0 1 2  3  4 5 <- block ordering
     // u v uc vc p L
     //
-    // Now, when we replace a dof level block, we do it with respect to the
-    // block order, i.e. if we replace the pressure block, we call
+    // Now, the writer expects to work with the block ordering. I.e. when we 
+    // replace a dof-level block, say the pressure block, we call
     // set_replacement_dof_block(4,4,Matrix);
+    // Similarly, when we want the pressure block, we call
+    // get_block(4,4);
     //
-    // However, when we get_block(4,4), we use the mapping Block_to_dof_map_coarse
-    // i.e. Block_to_dof_map_coarse[4] = 2, we get the block 2,2, since the
+    // Now, the below code uses the indirection maintained in 
+    // Block_to_dof_map_coarse. I.e. When we call get_block(4,4), we use the 
+    // mapping Block_to_dof_map_coarse[4] = 2, we get the block (2,2) 
+    // (from Replacement_dof_block_pt or get_block_from_original_matrix), since the
     // underlying dof_to_block mapping is still the identity, i.e. it has not
     // changed from:
     // 0 1 2 3  4  5
     // u v p uc vc L
     //
-    // So, get_block(4,4) (pressure block) we get the mapping (2,2), which we
-    // can use to get_block_from_original_matrix. If we try the same with
-    // Replacement_dof_block_pt, we end up with the block(2,2) = (v,v), which
-    // is incorrect! 
+    // So, block (4,4) (pressure block) maps to the block (2,2).
 
+    // How many external dof types are in this block?
     const unsigned ndofblock_in_row = Block_to_dof_map_coarse[i].size();
     const unsigned ndofblock_in_col = Block_to_dof_map_coarse[j].size();
 
+    // If there is only one dof block in this block then there is no need to 
+    // concatenate.
     if(ndofblock_in_row == 1 && ndofblock_in_col == 1)
     {
+      // Get the indirection for the dof we want.
       const unsigned wanted_dof_row = Block_to_dof_map_coarse[i][0];
       const unsigned wanted_dof_col = Block_to_dof_map_coarse[j][0];
 
+      // If the block has NOT been replaced or if we want to ignore the
+      // replacement, then we call get_dof_level_block(...) which will get the
+      // dof-level blocks up the preconditioning hierarchy, dragging down
+      // any replacement dof blocks of parent preconditioners if required.
       if((Replacement_dof_block_pt.get(wanted_dof_row,wanted_dof_col) == 0) ||
           ignore_replacement_block)
       {
-        get_dof_level_block(wanted_dof_row,wanted_dof_col,output_matrix,ignore_replacement_block);
+        get_dof_level_block(wanted_dof_row, wanted_dof_col,
+                            output_matrix, ignore_replacement_block);
       }
       else
+      // Replacement_dof_block_pt.get(wanted_dof_row,wanted_dof_col) is not
+      // null, this means that the block has been replaced. We simply make
+      // a deep copy of it.
       {
-        CRDoubleMatrixHelpers::deep_copy(Replacement_dof_block_pt.get(wanted_dof_row,
-              wanted_dof_col),
+        CRDoubleMatrixHelpers::deep_copy(
+            Replacement_dof_block_pt.get(wanted_dof_row, wanted_dof_col), 
             output_matrix);
       }
     }
     else
+    // This block contains more than one dof-level block. So we need to 
+    // concatenate the (external) dof-level blocks.
     {
+      // The CRDoubleMatrixHelpers::concatenate_without_communication(...)
+      // takes a DenseMatrix of pointers to CRDoubleMatrices to concatenate.
+      DenseMatrix<CRDoubleMatrix*> tmp_blocks_pt(ndofblock_in_row,
+                                                 ndofblock_in_col,0);
 
-      DenseMatrix<CRDoubleMatrix*> tmp_blocks_pt(ndofblock_in_row,ndofblock_in_col,0);
+      // Vector of Vectors of unsigns to indicate whether we have created
+      // CRDoubleMatrices with new or not... so we can delete it later.
+      // 0 - no new CRDoubleMatrix is created.
+      // 1 - a new CRDoubleMatrix is created.
+      // If we ever use C++11, remove this and use smart pointers.
+      Vector<Vector<unsigned> >new_block(ndofblock_in_row,
+                                         Vector<unsigned>(ndofblock_in_col,0));
 
-      Vector<Vector<unsigned> > new_block(ndofblock_in_row,Vector<unsigned>(ndofblock_in_col,0));
-
-      for (unsigned row_dofblock = 0; row_dofblock < ndofblock_in_row; row_dofblock++) 
+      // Loop through the number of dof block rows and then the number of dof
+      // block columns, either get the pointer from Replacement_dof_block_pt
+      // or from get_dof_level_block(...).
+      for (unsigned row_dofblock = 0; row_dofblock < ndofblock_in_row; 
+           row_dofblock++) 
       {
-        const unsigned wanted_dof_row = Block_to_dof_map_coarse[i][row_dofblock];
+        // Indirection for the row, as discuss in the large chunk of text
+        // previously.
+        const unsigned wanted_dof_row 
+          = Block_to_dof_map_coarse[i][row_dofblock];
 
-        for (unsigned col_dofblock = 0; col_dofblock < ndofblock_in_col; col_dofblock++) 
+        for (unsigned col_dofblock = 0; col_dofblock < ndofblock_in_col; 
+             col_dofblock++) 
         {
-          const unsigned wanted_dof_col = Block_to_dof_map_coarse[j][col_dofblock];
+          // Indirection for the column as discussed in the large chunk of text
+          // above.
+          const unsigned wanted_dof_col 
+            = Block_to_dof_map_coarse[j][col_dofblock];
 
+          // Get the pointer from Replacement_dof_block_pt.
           tmp_blocks_pt(row_dofblock,col_dofblock) 
             = Replacement_dof_block_pt.get(wanted_dof_row,wanted_dof_col);
 
+          // If the pointer from Replacement_dof_block_pt is null, or if
+          // we have to ignore replacement blocks, build a new CRDoubleMatrix
+          // via get_dof_level_block.
           if((tmp_blocks_pt(row_dofblock,col_dofblock) == 0) ||
               ignore_replacement_block)
           {
+            // We have to create a new CRDoubleMatrix, so put in 1 to indicate
+            // that we have to delete it later.
             new_block[row_dofblock][col_dofblock] = 1;
+
+            // Create the new CRDoubleMatrix. Note that we do not use the
+            // indirection, since the indirection is only used one way.
             tmp_blocks_pt(row_dofblock,col_dofblock) = new CRDoubleMatrix;
+
+            // Get the dof-level block, as discussed above.
             get_dof_level_block(wanted_dof_row,
-                wanted_dof_col,
-                *tmp_blocks_pt(row_dofblock,col_dofblock),
-                ignore_replacement_block);
+                                wanted_dof_col,
+                                *tmp_blocks_pt(row_dofblock,col_dofblock),
+                                ignore_replacement_block);
           }
         }
       }
 
+      // Concatenation of matrices require the distribution of the individual
+      // sub-matrices (for both row and column). This is because concatenation
+      // is implemented without communication in such a way that the rows
+      // and column values are both permuted, the permutation is defined by
+      // the individual distributions of the sub blocks.
+      // Without a vector of distributions describing the distributions of
+      // of the rows, we do not know how to permute the rows. For the columns,
+      // although CRDoubleMatrices does not have a column distribution, the
+      // concatenated matrix must have it's columns permuted, so we mirror
+      // the diagonal and get the corresponding row distribution.
+      //
+      // Confused? - Example: Say we have a matrix with dof blocking
+      //
+      //   | a | b | c | d | e |
+      // --|---|---|---|---|---|
+      // a |   |   |   |   |   |
+      // --|---|---|---|---|---|
+      // b |   |   |   |   |   |
+      // --|---|---|---|---|---|
+      // c |   |   |   |   |   |
+      // --|---|---|---|---|---|
+      // d |   |   |   |   |   |
+      // --|---|---|---|---|---|
+      // e |   |   |   |   |   |
+      // --|---|---|---|---|---|
+      //
+      // We wish to concatenate the blocks
+      //
+      //   | d | e | 
+      // --|---|---|
+      // a |   |   |
+      // --|---|---|
+      // b |   |   |
+      // --|---|---|
+      //
+      // Then clearly the row distributions required are the distributions for
+      // the dof blocks a and b. But block(a,d) does not have a column 
+      // distribution since it is a CRDoubleMatrix! - We use the distribution
+      // mirrored by the diagonal, so the column distributions required to
+      // concatenate these blocks is the same as the distributions of the rows
+      // for dof block d and e.
+
+      // First we do the row distribution.
+      
+      // Storage for the row distribution pointers.
       Vector<LinearAlgebraDistribution*> tmp_row_dist_pt(ndofblock_in_row,0);
+
+      // Loop through the number of dof blocks in the row. For the upper-most
+      // master block preconditioner, the external dof distributions is the
+      // same as the internal BLOCK distributions. Recall what we said above
+      // about the underlying blocks maintaining it's natural ordering.
+      //
+      // If this is a subsidiary block preconditioner, then the distributions
+      // for the dof blocks are stored in Dof_block_distribution_pt. The reason
+      // why this is different for subsidiary block preconditioners is because
+      // subsidiary block preconditioners would have it's dof types coarsened.
+      // Then a single dof distribution in a subsidiary block preconditioner
+      // could be a concatenation of many dof distributions of the master
+      // dof distributions.
       for (unsigned row_dof_i = 0; row_dof_i < ndofblock_in_row; row_dof_i++) 
       {
         const unsigned mapped_dof_i = Block_to_dof_map_coarse[i][row_dof_i];
         if(is_master_block_preconditioner())
         {
-          tmp_row_dist_pt[row_dof_i] = Internal_block_distribution_pt[mapped_dof_i];
+          tmp_row_dist_pt[row_dof_i] 
+            = Internal_block_distribution_pt[mapped_dof_i];
         }
         else
         {
-          tmp_row_dist_pt[row_dof_i] = Dof_block_distribution_pt[mapped_dof_i];
+          tmp_row_dist_pt[row_dof_i] 
+            = Dof_block_distribution_pt[mapped_dof_i];
         }
       }
 
+      // Storage for the column distribution pointers.
       Vector<LinearAlgebraDistribution*> tmp_col_dist_pt(ndofblock_in_col,0);
+
+      // We do the same thing as before.
       for (unsigned col_dof_i = 0; col_dof_i < ndofblock_in_col; col_dof_i++) 
       {
         const unsigned mapped_dof_j = Block_to_dof_map_coarse[j][col_dof_i];
         if(is_master_block_preconditioner())
         {
-          tmp_col_dist_pt[col_dof_i] = Internal_block_distribution_pt[mapped_dof_j];
+          tmp_col_dist_pt[col_dof_i] 
+            = Internal_block_distribution_pt[mapped_dof_j];
         }
         else
         {
-          tmp_col_dist_pt[col_dof_i] = Dof_block_distribution_pt[mapped_dof_j];
+          tmp_col_dist_pt[col_dof_i] 
+            = Dof_block_distribution_pt[mapped_dof_j];
         }
       }
 
+      // Perform the concatenation.
       CRDoubleMatrixHelpers::concatenate_without_communication(tmp_row_dist_pt,
           tmp_col_dist_pt,
           tmp_blocks_pt,
           output_matrix);
 
+      // Delete any new CRDoubleMatrices we have created.
       for (unsigned row_i = 0; row_i < ndofblock_in_row; row_i++) 
       {
         for (unsigned col_i = 0; col_i < ndofblock_in_col; col_i++) 
@@ -885,20 +1020,11 @@ class BlockSelector
   {
     if(is_subsidiary_block_preconditioner())
     {
-      if(Raydebug)
-      {
-        std::cout << "I am subsidiary, going to set master matrix" << std::endl; 
-      }
       master_block_preconditioner_pt()
         ->set_master_preconditioner_matrix(in_matrix_pt);
     }
     else
     {
-      if(Raydebug)
-      {
-        std::cout << "I am master, setting my own matrix" << std::endl; 
-      }
-
       this->set_matrix_pt(in_matrix_pt);
     }
   }
@@ -2309,8 +2435,11 @@ class BlockSelector
 
 #endif
     
-    // This makes sense because we only can use this if 
-    // nblock_types() == ndof_types().
+    // Block_to_dof_map_coarse[x][0] sense because we only can use this if 
+    // nblock_types() == ndof_types(), i.e. each sub-vector is of length 1.
+    //
+    // We use this indirection so that the placement of the pointer is 
+    // consistent with get_block_from_original_matrix(...).
     const unsigned dof_block_i = Block_to_dof_map_coarse[block_i][0];
     const unsigned dof_block_j = Block_to_dof_map_coarse[block_j][0];
 
