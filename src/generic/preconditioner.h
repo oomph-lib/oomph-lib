@@ -154,9 +154,11 @@ namespace oomph
   /// Virtual interface function for making a preconditioner a subsidiary
   /// of a block preconditioner. By default nothing is needed, but if this
   /// preconditioner is also a block preconditioner then things need to
-  /// happen.
-  virtual void turn_into_subsidiary_preconditioner
-  (BlockPreconditioner<CRDoubleMatrix>* master_prec_pt,
+  /// happen. There's an assumption here that the block preconditioner will
+  /// be in CR form but since that assumption is hard coded all over
+  /// BlockPreconditioner we're safe.
+  virtual void turn_into_subsidiary_block_preconditioner
+  (BlockPreconditioner<CRDoubleMatrix>* master_block_prec_pt,
    const Vector<unsigned>& doftype_in_master_preconditioner_coarse) {}
 
   /// Virtual interface function for making a preconditioner a subsidiary
