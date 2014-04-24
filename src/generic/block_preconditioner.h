@@ -1572,6 +1572,14 @@ class BlockSelector
     return output_matrix;
   } // EOFunc get_concatenated_block(...)
 
+  void get_concatenated_block_vector(const Vector<unsigned>& required_vector,
+                                     const DoubleVector& v,
+                                     DoubleVector& b);
+
+  void return_concatenated_block_vector(
+      const Vector<unsigned>& required_vector,
+      const DoubleVector& b,
+      DoubleVector& v) const;
  
   /// \short Takes the naturally ordered vector and rearranges it into a
   /// vector of sub vectors corresponding to the blocks, so s[b][i] contains
@@ -1624,7 +1632,7 @@ class BlockSelector
 
   /// \short RAYRAY comment
   void get_block_ordered_preconditioner_vector(const DoubleVector& v,
-                                               DoubleVector& w) const;
+                                               DoubleVector& w);
 
   /// \short Takes the naturally ordered vector, w, and reorders it in block
   /// order. Reordered vector is returned in v. Note: If the preconditioner is
