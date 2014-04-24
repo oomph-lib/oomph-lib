@@ -217,18 +217,11 @@ int main(int argc, char* argv[])
   // Create the vectors to split the vector into.
   create_vectors_to_split(nrowarray,comm_pt,distributed,out_vector);
   
-  // Pointer to the out vectors.
-  Vector<DoubleVector*> out_vector_pt(nvectors,0);
-  for (unsigned vec_i = 0; vec_i < nvectors; vec_i++) 
-  {
-    out_vector_pt[vec_i] = &out_vector[vec_i];
-  }
-
   // Pointers to the out distributions
   Vector<LinearAlgebraDistribution*> out_distribution_pt(nvectors,0);
   for (unsigned vec_i = 0; vec_i < nvectors; vec_i++) 
   {
-    out_distribution_pt[vec_i] = out_vector_pt[vec_i]->distribution_pt();
+    out_distribution_pt[vec_i] = out_vector[vec_i].distribution_pt();
   }
 
   // Create the in vector distribution by concatenating the distributions
@@ -252,7 +245,7 @@ int main(int argc, char* argv[])
 
   // Now split the vector.
   DoubleVectorHelpers::split_without_communication(in_vector,
-                                                   out_vector_pt);
+                                                   out_vector);
   unsigned nproc = comm_pt->nproc();
 
   // The output file name.
@@ -271,24 +264,23 @@ int main(int argc, char* argv[])
   // values
   for (unsigned vec_i = 0; vec_i < nvectors; vec_i++) 
   {
-    // The the values and nrow local.
-    double* out_values_pt = out_vector_pt[vec_i]->values_pt();
-    unsigned out_nrow_local = out_vector_pt[vec_i]->nrow_local();
+    // The values and nrow local.
+    double* out_values = out_vector[vec_i].values_pt();
+    unsigned out_nrow_local = out_vector[vec_i].nrow_local();
 
-    out_file << out_vector_pt[vec_i]->nrow() << "\n";
-    out_file << out_vector_pt[vec_i]->first_row() << "\n";
+    out_file << out_vector[vec_i].nrow() << "\n";
+    out_file << out_vector[vec_i].first_row() << "\n";
     out_file << out_nrow_local << "\n";
-    out_file << out_vector_pt[vec_i]->distributed() << "\n";
+    out_file << out_vector[vec_i].distributed() << "\n";
     
     for (unsigned val_i = 0; val_i < out_nrow_local; val_i++) 
     {
-      out_file << out_values_pt[val_i] << "\n";
+      out_file << out_values[val_i] << "\n";
     }
   }
 
   out_file.close();
   
-
 #ifdef OOMPH_HAS_MPI
   // finalize MPI
   MPI_Helpers::finalize();

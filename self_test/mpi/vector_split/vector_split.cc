@@ -183,20 +183,12 @@ int main(int argc, char* argv[])
   // /rant.
   create_vectors_to_split(nrowarray,comm_pt,distributed,out_vector);
 
-  // Pointer to the out vectors.
-  Vector<DoubleVector*> out_vector_pt(nvectors,0);
-  for (unsigned vec_i = 0; vec_i < nvectors; vec_i++) 
-  {
-    out_vector_pt[vec_i] = &out_vector[vec_i];
-  }
-  
-   
   // Global row for the in vector (must match the sum of the global rows for 
   // the sub vectors).
   unsigned in_nrow = 0;
   for (unsigned vec_i = 0; vec_i < nvectors; vec_i++) 
   {
-    in_nrow += out_vector_pt[vec_i]->nrow();
+    in_nrow += out_vector[vec_i].nrow();
   }
   
   // The in vector
@@ -204,7 +196,7 @@ int main(int argc, char* argv[])
   create_vector_ascend_row(in_nrow, comm_pt, distributed, in_vector);
   
   // Call the split function.
-  DoubleVectorHelpers::split(in_vector,out_vector_pt);
+  DoubleVectorHelpers::split(in_vector,out_vector);
   
   // The split is done, now we output the results.
   // We do not use the output function from DoubleVector
@@ -232,18 +224,18 @@ int main(int argc, char* argv[])
   // values
   for (unsigned vec_i = 0; vec_i < nvectors; vec_i++) 
   {
-    // The the values and nrow local.
-    double* out_values_pt = out_vector_pt[vec_i]->values_pt();
-    unsigned out_nrow_local = out_vector_pt[vec_i]->nrow_local();
+    // The values and nrow local.
+    double* out_values = out_vector[vec_i].values_pt();
+    unsigned out_nrow_local = out_vector[vec_i].nrow_local();
 
-    out_file << out_vector_pt[vec_i]->nrow() << "\n";
-    out_file << out_vector_pt[vec_i]->first_row() << "\n";
+    out_file << out_vector[vec_i].nrow() << "\n";
+    out_file << out_vector[vec_i].first_row() << "\n";
     out_file << out_nrow_local << "\n";
-    out_file << out_vector_pt[vec_i]->distributed() << "\n";
+    out_file << out_vector[vec_i].distributed() << "\n";
     
     for (unsigned val_i = 0; val_i < out_nrow_local; val_i++) 
     {
-      out_file << out_values_pt[val_i] << "\n";
+      out_file << out_values[val_i] << "\n";
     }
   }
 

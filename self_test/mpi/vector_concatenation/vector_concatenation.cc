@@ -188,20 +188,14 @@ int main(int argc, char* argv[])
   // The data structure to store the DoubleVectors to concatenate
   Vector<DoubleVector> in_vector(nvectors);
   
-  // Create the matrice to concatenate.
+  // Create the matrices to concatenate.
   create_vectors_to_cat(nvectors,dimarray,comm_pt,in_vector);
 
-  Vector<DoubleVector*> in_vector_pt(nvectors,0);
-  for (unsigned vec_i = 0; vec_i < nvectors; vec_i++) 
-  {
-    in_vector_pt[vec_i] = &in_vector[vec_i];
-  }
-  
   // The result vector.
   DoubleVector out_vector;
   
   // Call the concatenate function.
-  DoubleVectorHelpers::concatenate(in_vector_pt,out_vector);
+  DoubleVectorHelpers::concatenate(in_vector,out_vector);
 
   // output the result matrix
   unsigned my_rank = comm_pt->my_rank();
@@ -220,7 +214,7 @@ int main(int argc, char* argv[])
   std::ofstream out_file;
   out_file.open(out_stream.str().c_str());
 
-  double* out_values_pt = out_vector.values_pt();
+  double* out_values = out_vector.values_pt();
   unsigned out_nrow_local = out_vector.nrow_local();
   
   out_file << out_vector.nrow() << "\n";
@@ -230,7 +224,7 @@ int main(int argc, char* argv[])
 
   for (unsigned val_i = 0; val_i < out_nrow_local; val_i++) 
   {
-    out_file << out_values_pt[val_i] << "\n";
+    out_file << out_values[val_i] << "\n";
   }
 
   out_file.close();

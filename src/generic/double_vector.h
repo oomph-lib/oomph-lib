@@ -356,6 +356,21 @@ namespace DoubleVectorHelpers
  void concatenate(const Vector<DoubleVector*> &in_vector_pt,
                   DoubleVector &out_vector);
 
+ /// \short Wrapper around the other concatenate(...) function.
+ /// Be careful with Vector of vectors. If the DoubleVectors are resized,
+ /// there could be reallocation of memory. If we wanted to use the function
+ /// which takes a Vector of pointers to DoubleVectors, we would either have
+ /// to invoke new and remember to delete, or create a temporary Vector to
+ /// store pointers to the DoubleVector objects.
+ /// This wrapper is meant to make life easier for the user by avoiding calls 
+ /// to new/delete AND without creating a temporary vector of pointers to 
+ /// DoubleVectors. 
+ /// If we had C++ 11, this would be so much nicer since we can use smart 
+ /// pointers which will delete themselves, so we do not have to remember 
+ /// to delete!
+ void concatenate(Vector<DoubleVector> &in_vector,
+                  DoubleVector &out_vector);
+
  /// \short Split a DoubleVector into the out DoubleVectors.
  /// Let vec_A be the in Vector, and let vec_B and vec_C be the out vectors.
  /// Then the splitting of vec_A is depicted below:
@@ -374,6 +389,21 @@ namespace DoubleVectorHelpers
  /// the in vector.
  void split(const DoubleVector &in_vector, 
             Vector<DoubleVector*> &out_vector_pt);
+
+ /// \short Wrapper around the other split(...) function.
+ /// Be careful with Vector of vectors. If the DoubleVectors are resized,
+ /// there could be reallocation of memory. If we wanted to use the function
+ /// which takes a Vector of pointers to DoubleVectors, we would either have
+ /// to invoke new and remember to delete, or create a temporary Vector to
+ /// store pointers to the DoubleVector objects.
+ /// This wrapper is meant to make life easier for the user by avoiding calls 
+ /// to new/delete AND without creating a temporary vector of pointers to 
+ /// DoubleVectors. 
+ /// If we had C++ 11, this would be so much nicer since we can use smart 
+ /// pointers which will delete themselves, so we do not have to remember 
+ /// to delete!
+ void split(const DoubleVector &in_vector, 
+            Vector<DoubleVector> &out_vector);
 
  /// \short Concatenate DoubleVectors.
  /// Takes a Vector of DoubleVectors. If the out vector is built, we will not
@@ -414,6 +444,22 @@ namespace DoubleVectorHelpers
  void concatenate_without_communication(
   const Vector<DoubleVector*> &in_vector_pt, DoubleVector &out_vector);
 
+ /// \short Wrapper around the other concatenate_without_communication(...)
+ /// function.
+ /// Be careful with Vector of vectors. If the DoubleVectors are resized,
+ /// there could be reallocation of memory. If we wanted to use the function
+ /// which takes a Vector of pointers to DoubleVectors, we would either have
+ /// to invoke new and remember to delete, or create a temporary Vector to
+ /// store pointers to the DoubleVector objects.
+ /// This wrapper is meant to make life easier for the user by avoiding calls 
+ /// to new/delete AND without creating a temporary vector of pointers to 
+ /// DoubleVectors. 
+ /// If we had C++ 11, this would be so much nicer since we can use smart 
+ /// pointers which will delete themselves, so we do not have to remember 
+ /// to delete!
+ void concatenate_without_communication(
+  Vector<DoubleVector> &in_vector, DoubleVector &out_vector);
+
  /// \short Split a DoubleVector into the out DoubleVectors.
  /// Data stays on its current processor, no data is sent between processors.
  /// This results in our vectors which are a permutation of the in vector.
@@ -434,6 +480,22 @@ namespace DoubleVectorHelpers
  /// distributions.
  void split_without_communication(const DoubleVector &in_vector, 
                                   Vector<DoubleVector*> &out_vector_pt);
+
+ /// \short Wrapper around the other split_without_communication(...) 
+ /// function.
+ /// Be careful with Vector of vectors. If the DoubleVectors are resized,
+ /// there could be reallocation of memory. If we wanted to use the function
+ /// which takes a Vector of pointers to DoubleVectors, we would either have
+ /// to invoke new and remember to delete, or create a temporary Vector to
+ /// store pointers to the DoubleVector objects.
+ /// This wrapper is meant to make life easier for the user by avoiding calls 
+ /// to new/delete AND without creating a temporary vector of pointers to 
+ /// DoubleVectors. 
+ /// If we had C++ 11, this would be so much nicer since we can use smart 
+ /// pointers which will delete themselves, so we do not have to remember 
+ /// to delete!
+ void split_without_communication(const DoubleVector &in_vector, 
+                                  Vector<DoubleVector> &out_vector);
 
 } // end of DoubleVectorHelpers namespace
 

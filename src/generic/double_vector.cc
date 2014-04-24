@@ -1344,6 +1344,35 @@ namespace oomph
   } // function concatenate
 
   //===========================================================================
+  /// \short Wrapper around the other concatenate(...) function.
+  /// Be careful with Vector of vectors. If the DoubleVectors are resized,
+  /// there could be reallocation of memory. If we wanted to use the function
+  /// which takes a Vector of pointers to DoubleVectors, we would either have
+  /// to invoke new and remember to delete, or create a temporary Vector to
+  /// store pointers to the DoubleVector objects.
+  /// This wrapper is meant to make life easier for the user by avoiding calls 
+  /// to new/delete AND without creating a temporary vector of pointers to 
+  /// DoubleVectors. 
+  /// If we had C++ 11, this would be so much nicer since we can use smart 
+  /// pointers which will delete themselves, so we do not have to remember 
+  /// to delete!
+  //===========================================================================
+  void concatenate(Vector<DoubleVector> &in_vector,
+                   DoubleVector &out_vector)
+  {
+    const unsigned n_in_vector = in_vector.size();
+
+    Vector<DoubleVector*> in_vector_pt(n_in_vector,0);
+
+    for (unsigned i = 0; i < n_in_vector; i++) 
+    {
+      in_vector_pt[i] = &in_vector[i];
+    }
+
+    DoubleVectorHelpers::concatenate(in_vector_pt,out_vector);
+  } // function concatenate
+
+  //===========================================================================
   /// \short Split a DoubleVector into the out DoubleVectors.
   /// Let vec_A be the in Vector, and let vec_B and vec_C be the out vectors.
   /// Then the splitting of vec_A is depicted below:
@@ -1724,6 +1753,34 @@ namespace oomph
   } // function split(...)
 
   //===========================================================================
+  /// \short Wrapper around the other split(...) function.
+  /// Be careful with Vector of vectors. If the DoubleVectors are resized,
+  /// there could be reallocation of memory. If we wanted to use the function
+  /// which takes a Vector of pointers to DoubleVectors, we would either have
+  /// to invoke new and remember to delete, or create a temporary Vector to
+  /// store pointers to the DoubleVector objects.
+  /// This wrapper is meant to make life easier for the user by avoiding calls 
+  /// to new/delete AND without creating a temporary vector of pointers to 
+  /// DoubleVectors. 
+  /// If we had C++ 11, this would be so much nicer since we can use smart 
+  /// pointers which will delete themselves, so we do not have to remember 
+  /// to delete!
+  //===========================================================================
+  void split(const DoubleVector & in_vector, 
+             Vector<DoubleVector> &out_vector)
+  {
+    const unsigned n_out_vector = out_vector.size();
+    Vector<DoubleVector*> out_vector_pt(n_out_vector,0);
+
+    for (unsigned i = 0; i < n_out_vector; i++) 
+    {
+      out_vector_pt[i] = &out_vector[i];
+    }
+
+    DoubleVectorHelpers::split(in_vector,out_vector_pt);
+  } // function split(...)
+
+  //===========================================================================
   /// \short Concatenate DoubleVectors.
   /// Takes a Vector of DoubleVectors. If the out vector is built, we will not
   /// build a new distribution. Otherwise a new distribution will be built
@@ -1929,6 +1986,38 @@ namespace oomph
   } // function concatenate_without_communication
 
   //===========================================================================
+  /// \short Wrapper around the other concatenate_without_communication(...)
+  /// function.
+  /// Be careful with Vector of vectors. If the DoubleVectors are resized,
+  /// there could be reallocation of memory. If we wanted to use the function
+  /// which takes a Vector of pointers to DoubleVectors, we would either have
+  /// to invoke new and remember to delete, or create a temporary Vector to
+  /// store pointers to the DoubleVector objects.
+  /// This wrapper is meant to make life easier for the user by avoiding calls 
+  /// to new/delete AND without creating a temporary vector of pointers to 
+  /// DoubleVectors. 
+  /// If we had C++ 11, this would be so much nicer since we can use smart 
+  /// pointers which will delete themselves, so we do not have to remember 
+  /// to delete!
+  //===========================================================================
+  void concatenate_without_communication(
+   Vector<DoubleVector> &in_vector, DoubleVector &out_vector)
+  {
+
+    const unsigned n_in_vector = in_vector.size();
+
+    Vector<DoubleVector*> in_vector_pt(n_in_vector,0);
+
+    for (unsigned i = 0; i < n_in_vector; i++) 
+    {
+      in_vector_pt[i] = &in_vector[i];
+    }
+
+    DoubleVectorHelpers::concatenate_without_communication(in_vector_pt,
+                                                           out_vector);
+  } // function concatenate_without_communication
+
+  //===========================================================================
   /// \short Split a DoubleVector into the out DoubleVectors.
   /// Data stays on its current processor, no data is sent between processors.
   /// This results in our vectors which are a permutation of the in vector.
@@ -2072,6 +2161,38 @@ namespace oomph
      in_value_offset += out_nrow_local;
     }
   } // function split_distribution_vector
+
+  //===========================================================================
+  /// \short Wrapper around the other split_without_communication(...) 
+  /// function.
+  /// Be careful with Vector of vectors. If the DoubleVectors are resized,
+  /// there could be reallocation of memory. If we wanted to use the function
+  /// which takes a Vector of pointers to DoubleVectors, we would either have
+  /// to invoke new and remember to delete, or create a temporary Vector to
+  /// store pointers to the DoubleVector objects.
+  /// This wrapper is meant to make life easier for the user by avoiding calls 
+  /// to new/delete AND without creating a temporary vector of pointers to 
+  /// DoubleVectors. 
+  /// If we had C++ 11, this would be so much nicer since we can use smart 
+  /// pointers which will delete themselves, so we do not have to remember 
+  /// to delete!
+  //===========================================================================
+  void split_without_communication(const DoubleVector &in_vector, 
+                                   Vector<DoubleVector> &out_vector)
+  {
+   const unsigned n_out_vector = out_vector.size();
+
+   Vector<DoubleVector*> out_vector_pt(n_out_vector,0);
+
+   for (unsigned i = 0; i < n_out_vector; i++) 
+   {
+     out_vector_pt[i] = &out_vector[i];
+   }
+
+   DoubleVectorHelpers::split_without_communication(in_vector,out_vector_pt);
+
+  } // function split_distribution_vector
+
  } // end of DoubleVectorHelpers namespace
 
 }//end of oomph namespace
