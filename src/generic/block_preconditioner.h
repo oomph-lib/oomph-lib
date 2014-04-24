@@ -1643,11 +1643,8 @@ class BlockSelector
   void get_block_vector(const unsigned& n, const DoubleVector& v,
                         DoubleVector& b) const;
 
-  /// \short Takes the n-th block vector, b, and copies its entries
-  /// to the appropriate entries in the naturally ordered vector, v, either
-  /// by calling return_block_vector_with_precomputed_block_ordering(...)
-  /// if the preconditioner blocks have been precomputed or
-  /// return_block_vector_with_original_matrix_ordering(...) otherwise.
+  /// \short Takes the n-th block ordered vector, b,  and copies its entries
+  /// to the appropriate entries in the naturally ordered vector, v.
   /// Here n is the block number in the current block preconditioner.
   /// If the preconditioner is a subsidiary block preconditioner
   /// the other entries in v  that are not associated with it
@@ -1656,6 +1653,7 @@ class BlockSelector
                            const DoubleVector& b,
                            DoubleVector& v) const;
 
+  /// RAYRAY comment
   /// \short Given the naturally ordered vector, v, return
   /// the vector rearranged in block order in w.
   void internal_get_block_ordered_preconditioner_vector(const DoubleVector& v,

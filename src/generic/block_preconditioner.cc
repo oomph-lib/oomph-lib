@@ -4216,10 +4216,7 @@ namespace oomph
  //============================================================================
  /// \short Takes the naturally ordered vector, v and returns the n-th
  /// block vector, b. Here n is the block number in the current
- /// preconditioner. If blocks for this preconditioner has been precomputed
- /// then this function calls the function get_precomputed_block_vector(...).
- /// Otherwise it calls get_block_vector_from_original_matrix(...).
- //============================================================================
+ /// preconditioner.
  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
  get_block_vector(const unsigned& b, const DoubleVector& v, DoubleVector& w)
   const
@@ -4239,6 +4236,7 @@ namespace oomph
                         OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
+
   if (!v.built())
    {
     std::ostringstream err_msg;
@@ -4315,7 +4313,7 @@ namespace oomph
 
     dof_vector.clear();
   }
- }
+ } // get_block_vector(...)
 
  //============================================================================
  /// \short A helper function to return a block if no preconditioner blocks
@@ -4511,11 +4509,8 @@ namespace oomph
  }
 
  //============================================================================
- /// \short Takes the n-th block vector, b, and copies its entries
- /// to the appropriate entries in the naturally ordered vector, v, either
- /// by calling return_block_vector_with_precomputed_block_ordering(...)
- /// if the preconditioner blocks have been precomputed or
- /// return_block_vector_with_original_matrix_ordering(...) otherwise.
+ /// \short Takes the n-th block ordered vector, b,  and copies its entries
+ /// to the appropriate entries in the naturally ordered vector, v.
  /// Here n is the block number in the current block preconditioner.
  /// If the preconditioner is a subsidiary block preconditioner
  /// the other entries in v  that are not associated with it
@@ -4597,7 +4592,7 @@ namespace oomph
     return_block_vectors_with_original_matrix_ordering(most_fine_grain_dof,
                                                        dof_vector,v);
   }
- }
+ } // return_block_vector(...)
 
  //============================================================================
  /// \short Given the naturally ordered vector, v, return the vector rearranged
