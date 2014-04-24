@@ -1598,22 +1598,42 @@ class BlockSelector
   /// Note: If the preconditioner is a subsidiary preconditioner then only the
   /// sub-vectors associated with the blocks of the subsidiary preconditioner
   /// will be included. Hence the length of v is master_nrow() whereas the
-  /// total length of the s vectors is Nrow.
+  /// total length of the s vectors is the sum of the lengths of the
+  /// individual block vectors defined in block_vec_number.
   void get_block_vectors(const Vector<unsigned> & block_vec_number,
                          const DoubleVector& v,
                          Vector<DoubleVector >& s) const;
 
+  /// \short Takes the naturally ordered vector and rearranges it into a
+  /// vector of sub vectors corresponding to the blocks, so s[b][i] contains
+  /// the i-th entry in the vector associated with block b.
+  /// Note: If the preconditioner is a subsidiary preconditioner then only the
+  /// sub-vectors associated with the blocks of the subsidiary preconditioner
+  /// will be included. Hence the length of v is master_nrow() whereas the
+  /// total length of the s vectors is Nrow.
+  /// This is simply a wrapper around the other get_block_vectors(...) function
+  /// where the block_vec_number Vector is the identity, i.e.
+  /// block_vec_number is [0, 1, ..., nblock_types - 1].
   void get_block_vectors(const DoubleVector& v,
                          Vector<DoubleVector >& s) const;
 
   /// \short Takes the vector of block vectors, s, and copies its entries into
   /// the naturally ordered vector, v. If this is a subsidiary block
   /// preconditioner only those entries in v that are associated with its
-  /// blocks are affected.
+  /// blocks are affected. The block_vec_number indicates which block the
+  /// vectors in s came from. The block number in this preconditioner.
   void return_block_vectors(const Vector<unsigned>& block_vec_number,
                             const Vector<DoubleVector >& s,
                             DoubleVector& v) const; 
 
+  /// \short Takes the vector of block vectors, s, and copies its entries into
+  /// the naturally ordered vector, v. If this is a subsidiary block
+  /// preconditioner only those entries in v that are associated with its
+  /// blocks are affected. The block_vec_number indicates which block the
+  /// vectors in s came from. The block number in this preconditioner.
+  /// This is simply a wrapper around the other return_block_vectors(...) 
+  /// function where the block_vec_number Vector is the identity, i.e.
+  /// block_vec_number is [0, 1, ..., nblock_types - 1].
   void return_block_vectors(const Vector<DoubleVector >& s,
                             DoubleVector& v) const;
 
