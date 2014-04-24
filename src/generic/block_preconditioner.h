@@ -1580,6 +1580,10 @@ class BlockSelector
   /// sub-vectors associated with the blocks of the subsidiary preconditioner
   /// will be included. Hence the length of v is master_nrow() whereas the
   /// total length of the s vectors is Nrow.
+  void get_block_vectors(const Vector<unsigned> & required_vector,
+                         const DoubleVector& v,
+                         Vector<DoubleVector >& s) const;
+
   void get_block_vectors(const DoubleVector& v,
                          Vector<DoubleVector >& s) const;
 
@@ -1587,9 +1591,13 @@ class BlockSelector
   /// the naturally ordered vector, v. If this is a subsidiary block
   /// preconditioner only those entries in v that are associated with its
   /// blocks are affected.
+  void return_block_vectors(const Vector<unsigned>& required_vector,
+                            const Vector<DoubleVector >& s,
+                            DoubleVector& v) const; 
+
   void return_block_vectors(const Vector<DoubleVector >& s,
                             DoubleVector& v) const;
-  
+
   /// \short Takes the naturally ordered vector, v and returns the n-th
   /// block vector, b. Here n is the block number in the current
   /// preconditioner.
