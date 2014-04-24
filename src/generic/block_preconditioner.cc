@@ -5093,7 +5093,7 @@ namespace oomph
  void BlockPreconditioner<CRDoubleMatrix>:: 
  get_dof_level_block(const unsigned& block_i, const unsigned& block_j, 
                      CRDoubleMatrix& output_block,
-                     bool ignore_replacement_block) const
+                     const bool& ignore_replacement_block) const
  {
 //#ifdef PARANOID
 //  // the number of blocks RAYRAY change this to the block types the preconditioner expects
