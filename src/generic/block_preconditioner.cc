@@ -4594,8 +4594,40 @@ namespace oomph
  } // return_block_vector(...)
 
  //============================================================================
- /// \short Given the naturally ordered vector, v, return the vector rearranged
- /// in block order in w.
+ /// \short Given the naturally ordered vector, v, return
+ /// the vector rearranged in block order in w. This is a legacy function
+ /// from the old block preconditioning framework. Kept alive in case it may
+ /// be needed again.
+ /// 
+ /// This uses the variables ending in "get_ordered". We no longer use this
+ /// type of method. This function copy values from v and re-order them 
+ /// in "block order" and place them in w. Block order means that the
+ /// values in w are the same as the concatenated block vectors.
+ ///
+ /// I.e. - v is naturally ordered.
+ ///        v -> s_b, v is ordered into blocks vectors 
+ ///                  (requires communication)
+ ///        concatenate_without_communication(s_{0,...,nblocks},w) gives w.
+ /// 
+ /// But this function skips out the concatenation part and builds w directly
+ /// from v.
+ ///
+ /// This is nice but the function is implemented in such a way that it
+ /// always use all the (internal) blocks and concatenated with the 
+ /// identity ordering. I.e. if this preconditioner has 3 block types, then
+ /// w will always be:
+ /// concatenate_without_communication([s_0, s_1, s_2], w). There is easy
+ /// way to change this.
+ /// 
+ /// Furthermore, it does not take into account the new dof type coarsening 
+ /// feature. So this function will most likely produce the incorrect vector 
+ /// w from what the user intended. It still works, but w will be the
+ /// concatenation of the most fine grain dof block vectors with the
+ /// "natural" dof type ordering.
+ /// 
+ /// This has been superseded by the function 
+ /// get_block_ordered_preconditioner_vector(...) which does the correct 
+ /// thing.
  //============================================================================
  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
  internal_get_block_ordered_preconditioner_vector(const DoubleVector& v, 
@@ -4758,8 +4790,31 @@ namespace oomph
  }
 
  //============================================================================
- /// \short Given the naturally ordered vector, v, return the vector rearranged
- /// in block order in w.
+ /// \short Given the naturally ordered vector, v, return
+ /// the vector rearranged in block order in w. This function calls
+ /// get_concatenated_block_vector(...) with the identity block mapping.
+ /// 
+ /// This function has been re-written to work with the new dof type 
+ /// coarsening feature. The old function is kept alive in
+ /// internal_get_block_ordered_preconditioner_vector(...) and is moved to
+ /// the private section of the code. The differences between the two are:
+ /// 
+ /// 1) This function extracts all the block vectors (in one go) via the
+ ///    function internal_get_block_vectors(...), and concatenates them.
+ /// 
+ /// 2) The old function makes use of the variables ending in "get_ordered",
+ ///    thus is slightly more efficient since it does not have to concatenate
+ ///    any block vectors.
+ ///
+ /// 3) The old function no longer respect the new indirections if dof types
+ ///    have been coarsened.
+ ///
+ /// 4) This function extracts the most fine grain dof-level vectors and 
+ ///    concatenates them. These dof-level vectors respect the re-ordering
+ ///    caused by the coarsening of dof types. The overhead associated with
+ ///    concatenating DoubleVectors without communication is very small.
+ /// 
+ /// This function should be used.
  //============================================================================
  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
  get_block_ordered_preconditioner_vector(const DoubleVector& v, 
@@ -4786,23 +4841,38 @@ namespace oomph
    }
 #endif
 
+  // Get the number of blocks.
   unsigned nblocks = this->nblock_types();
 
+  // Fill in the identity mapping.
   Vector<unsigned> block_vec_number(nblocks,0);
   for (unsigned b = 0; b < nblocks; b++) 
   {
     block_vec_number[b]=b;
   }
 
+  // Do the work.
   get_concatenated_block_vector(block_vec_number,v,w);
- }
+ } // get_block_ordered_preconditioner_vector(...)
 
  //============================================================================
- /// \short Takes the naturally ordered vector, w, and reorders it in block
- /// order. Reordered vector is returned in v. Note: If the preconditioner is a
- /// subsidiary preconditioner then only the components of the vector
+ /// \short Takes the block ordered vector, w, and reorders it in the natural
+ /// order. Reordered vector is returned in v. Note: If the preconditioner is
+ /// a subsidiary preconditioner then only the components of the vector
  /// associated with the blocks of the subsidiary preconditioner will be
- /// included.
+ /// included. Hence the length of v is master_nrow() whereas that of the 
+ /// vector w is of length this->nrow(). 
+ /// 
+ /// This is the return function for the function
+ /// internal_get_block_ordered_preconditioner_vector(...).
+ /// Both internal_get_block_ordered_preconditioner_vector(...) and
+ /// internal_return_block_ordered_preconditioner_vector(...) has been 
+ /// superseded by the functions
+ /// 
+ /// get_block_ordered_preconditioner_vector(...) and
+ /// return_block_ordered_preconditioner_vector(...),
+ ///
+ /// Thus this function is moved to the private section of the code.
  //============================================================================
  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
  internal_return_block_ordered_preconditioner_vector(const DoubleVector& w,
@@ -4978,11 +5048,18 @@ namespace oomph
 
 
  //============================================================================
- /// \short Takes the naturally ordered vector, w, and reorders it in block
- /// order. Reordered vector is returned in v. Note: If the preconditioner is a
- /// subsidiary preconditioner then only the components of the vector
+ /// \short Takes the block ordered vector, w, and reorders it in natural
+ /// order. Reordered vector is returned in v. Note: If the preconditioner is
+ /// a subsidiary preconditioner then only the components of the vector
  /// associated with the blocks of the subsidiary preconditioner will be
- /// included.
+ /// included. Hence the length of v is master_nrow() whereas that of the 
+ /// vector w is of length this->nrow(). 
+ /// 
+ /// This is the return function for the function
+ /// get_block_ordered_preconditioner_vector(...).
+ /// 
+ /// It calls the function return_concatenated_block_vector(...) with the
+ /// identity block number ordering.
  //============================================================================
  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
  return_block_ordered_preconditioner_vector(const DoubleVector& w,
