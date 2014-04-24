@@ -292,44 +292,14 @@ namespace oomph
         // At this point, all vectors are cleared.
         if(Using_superlu_ns_preconditioner)
         {
-          // Concatenate the fluid block vectors
-//          Vector<DoubleVector*> fluid_sub_vec_pt(N_fluid_doftypes,0);
+          // Get the concatenated fluid vector.
+          Vector<unsigned> fluid_block_indices(N_fluid_doftypes,0);
+          for (unsigned b = 0; b < N_fluid_doftypes; b++) 
+          {
+            fluid_block_indices[b] = b;
+          }
 
-          // Loop through the fluid rhs block vectors
-//          for(unsigned i = 0; i < N_fluid_doftypes; i++)
-//          {
-//            fluid_sub_vec_pt[i] = new DoubleVector;
-//            this->get_block_vector(i,r,*fluid_sub_vec_pt[i]);
-//          } // for
-
-          Vector<DoubleVector> tmpvecs;
-          Vector<unsigned> tmp_fluid_index(5,0);
-          tmp_fluid_index[0] = 0;
-          tmp_fluid_index[1] = 1;
-          tmp_fluid_index[2] = 3;
-          tmp_fluid_index[3] = 4;
-          tmp_fluid_index[4] = 2;
-
-          Vector<unsigned> tmp_fluid_index_new(5,0);
-          tmp_fluid_index_new[0] = 0;
-          tmp_fluid_index_new[1] = 1;
-          tmp_fluid_index_new[2] = 2;
-          tmp_fluid_index_new[3] = 3;
-          tmp_fluid_index_new[4] = 4;
-
-          this->get_block_vectors(tmp_fluid_index_new,r,tmpvecs);
-
-          //DoubleVector newtmpvec;
-          this->get_concatenated_block_vector(tmp_fluid_index_new,r,temp_vec);
-
-          // Perform the concatenation. 
-//          DoubleVectorHelpers::concatenate_without_communication
-//            (fluid_sub_vec_pt,temp_vec);
-
-     //     DoubleVectorHelpers::concatenate_without_communication(tmpvecs,temp_vec);
-
-          // Do not clear the sub vectors since we need them to split the result
-          // back.
+          this->get_concatenated_block_vector(fluid_block_indices,r,temp_vec);
 
           // temp_vec contains the (concatenated) fluid rhs.
           Navier_stokes_preconditioner_pt
@@ -337,34 +307,14 @@ namespace oomph
 
           temp_vec.clear();
 
-          // We now have to put the block vectors in another_temp_vec back!
-//          DoubleVectorHelpers::split_without_communication
-//            (another_temp_vec,fluid_sub_vec_pt);
-
-
-
-//          DoubleVectorHelpers::split_without_communication
-//            (another_temp_vec,tmpvecs);
-
-//          another_temp_vec.clear();
-
-//          this->return_block_vectors_with_original_matrix_ordering(tmp_fluid_index,tmpvecs,z);
-//          this->return_block_vectors(tmp_fluid_index_new,tmpvecs,z);
-//
-          this->return_concatenated_block_vector(tmp_fluid_index_new,another_temp_vec,z);
+          // Now return it.
+          this->return_concatenated_block_vector(fluid_block_indices,
+                                                 another_temp_vec,z);
           another_temp_vec.clear();
-
-          // loop through the fluid block vectors
-          // and return the block vector.
-//          for(unsigned i = 0; i < N_fluid_doftypes; i++)
-//          {
-//            this->return_block_vector(i,*fluid_sub_vec_pt[i],z);
-//            fluid_sub_vec_pt[i]->clear();
-//          }//for
-          
         }
         else
         {
+          // This is a BlockPreconditioner
           Navier_stokes_preconditioner_pt->preconditioner_solve(r,z);
         }
 
@@ -1740,10 +1690,6 @@ namespace oomph
       {
         for (unsigned col_i = spatial_dim; col_i < N_velocity_doftypes; col_i++) 
         {
-          const unsigned tmp_nrow = v_aug_pt(row_i,col_i)->nrow();
-          const unsigned tmp_ncol = v_aug_pt(row_i,col_i)->ncol();
-//          std::cout<<"Setting block("<<row_i<<","<<col_i<<"), nrow: "
-//                   <<tmp_nrow<<", ncol: " << tmp_ncol << "\n";
           this->set_replacement_dof_block(row_i,col_i,
                                           v_aug_pt(row_i,col_i));
         }
