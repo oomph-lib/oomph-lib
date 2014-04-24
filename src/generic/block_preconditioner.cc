@@ -2673,131 +2673,178 @@ namespace oomph
    }
  }
 
- //////////////////////////////////////////////////////////////////////////////
- //////////////////////////////////////////////////////////////////////////////
- //////////////////////////////////////////////////////////////////////////////
- //////////////////////////////////////////////////////////////////////////////
- //////////////////////////////////////////////////////////////////////////////
- //////////////////////////////////////////////////////////////////////////////
+ //============================================================================
+ /// Takes the naturally ordered vector and extracts the blocks 
+ /// indicated by the block number (the values) in the Vector 
+ /// block_vec_number all at once, then concatenates them without 
+ /// communication. Here, the values in block_vec_numbers is the block number
+ /// in the current preconditioner.
+ /// This is a non-const function because distributions may be created
+ /// and stored in Auxiliary_distribution_pt for future use.
+ //============================================================================
  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
- get_concatenated_block_vector(const Vector<unsigned>& required_vector,
-     const DoubleVector& v, DoubleVector& w)
- {
+   get_concatenated_block_vector(const Vector<unsigned>& block_vec_number,
+       const DoubleVector& v, DoubleVector& w)
+   {
 #ifdef PARANOID
-  if (!v.built())
-   {
-    std::ostringstream err_msg;
-    err_msg << "The distribution of the global vector v must be setup.";
-    throw OomphLibError(err_msg.str(),
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
-   }
-  if (*(v.distribution_pt()) != *(this->master_distribution_pt()))
-   {
-    std::ostringstream err_msg;
-    err_msg << "The distribution of the global vector v must match the "
-            << " specified master_distribution_pt(). \n"
-            << "i.e. Distribution_pt in the master preconditioner";
-    throw OomphLibError(err_msg.str(),
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
-   }
 
-  const unsigned para_nblock_types = nblock_types();
-  const unsigned para_required_vector_size = required_vector.size();
-  if(para_required_vector_size > para_nblock_types)
-  {
-    std::ostringstream err_msg;
-    err_msg << "You have requested " << para_required_vector_size
-            << " number of blocks, (required_vector.size() is " 
-            << para_required_vector_size << ").\n"
-            << "But there are only " << para_nblock_types << " nblock_types.\n"
-            << "Please make sure that required_vector is correctly sized.\n";
-    throw OomphLibError(err_msg.str(),
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
-  }
+     // Check if v is built.
+     if (!v.built())
+     {
+       std::ostringstream err_msg;
+       err_msg << "The distribution of the global vector v must be setup.";
+       throw OomphLibError(err_msg.str(),
+           OOMPH_CURRENT_FUNCTION,
+           OOMPH_EXCEPTION_LOCATION);
+     }
 
-  for (unsigned i = 0; i < para_required_vector_size; i++) 
-  {
-    const unsigned para_required_block = required_vector[i];
-    if(para_required_block > para_nblock_types)
-    {
-      std::ostringstream err_msg;
-      err_msg << "required_vector[" << i << "] is " << para_required_block 
-              << ".\n"
-              << "But there are only " << para_nblock_types 
-              << " nblock_types.\n";
-      throw OomphLibError(err_msg.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-    }
-  }
+     // v must have the same distribution as the upper-most master block
+     // preconditioner, since the upper-most master block preconditioner 
+     // should have the same distribution as the matrix pointed to 
+     // by matrix_pt().
+     if (*(v.distribution_pt()) != *(this->master_distribution_pt()))
+     {
+       std::ostringstream err_msg;
+       err_msg << "The distribution of the global vector v must match the "
+         << " specified master_distribution_pt(). \n"
+         << "i.e. Distribution_pt in the master preconditioner";
+       throw OomphLibError(err_msg.str(),
+           OOMPH_CURRENT_FUNCTION,
+           OOMPH_EXCEPTION_LOCATION);
+     }
 
-  std::set<unsigned> para_set;
-  for (unsigned b = 0; b < para_required_vector_size; b++) 
-  {
-    std::pair<std::set<unsigned>::iterator,bool> para_set_ret;
-    para_set_ret = para_set.insert(required_vector[b]);
+     // Check to see if there are more blocks defined in the block_vec_number 
+     // vector than the number of block types. This is not allowed.
+     const unsigned para_nblock_types = nblock_types();
+     const unsigned para_block_vec_number_size = block_vec_number.size();
+     if(para_block_vec_number_size > para_nblock_types)
+     {
+       std::ostringstream err_msg;
+       err_msg << "You have requested " << para_block_vec_number_size
+         << " number of blocks, (block_vec_number.size() is " 
+         << para_block_vec_number_size << ").\n"
+         << "But there are only " << para_nblock_types << " nblock_types.\n"
+         << "Please make sure that block_vec_number is correctly sized.\n";
+       throw OomphLibError(err_msg.str(),
+           OOMPH_CURRENT_FUNCTION,
+           OOMPH_EXCEPTION_LOCATION);
+     }
 
-    if(!para_set_ret.second)
-    {
-      std::ostringstream err_msg;
-      err_msg << "Error: the block number "
-        << required_vector[b]
-        << " appears twice.\n";
-      throw OomphLibError(err_msg.str(),
-          OOMPH_CURRENT_FUNCTION,
-          OOMPH_EXCEPTION_LOCATION);
-    }
-  }
+     // Check if any block numbers defined in block_vec_number is equal to or 
+     // greater than the number of block types. 
+     // E.g. if there are 5 block types, we can only have block numbers:
+     //  0, 1, 2, 3 and 4.
+     for (unsigned i = 0; i < para_block_vec_number_size; i++) 
+     {
+       const unsigned para_required_block = block_vec_number[i];
+       if(para_required_block >= para_nblock_types)
+       {
+         std::ostringstream err_msg;
+         err_msg << "block_vec_number[" << i << "] is " << para_required_block 
+           << ".\n"
+           << "But there are only " << para_nblock_types 
+           << " nblock_types.\n";
+         throw OomphLibError(err_msg.str(),
+             OOMPH_CURRENT_FUNCTION,
+             OOMPH_EXCEPTION_LOCATION);
+       }
+     }
+
+     // Check that no block number is inserted twice.
+     std::set<unsigned> para_set;
+     for (unsigned b = 0; b < para_block_vec_number_size; b++) 
+     {
+       std::pair<std::set<unsigned>::iterator,bool> para_set_ret;
+       para_set_ret = para_set.insert(block_vec_number[b]);
+
+       if(!para_set_ret.second)
+       {
+         std::ostringstream err_msg;
+         err_msg << "Error: the block number "
+           << block_vec_number[b]
+           << " appears twice.\n";
+         throw OomphLibError(err_msg.str(),
+             OOMPH_CURRENT_FUNCTION,
+             OOMPH_EXCEPTION_LOCATION);
+       }
+     }
 #endif
 
-  const unsigned n_block = required_vector.size();
+     // Number of blocks to get.
+     const unsigned n_block = block_vec_number.size();
 
-  // Get all of the most fine grained dofs required.
-  Vector<unsigned> most_fine_grain_dof_required;
-  for (unsigned b = 0; b < n_block; b++)
-  {
-    const unsigned mapped_b = required_vector[b];
-    most_fine_grain_dof_required.insert(
-        most_fine_grain_dof_required.end(),
-        Block_to_dof_map_fine[mapped_b].begin(),
-        Block_to_dof_map_fine[mapped_b].end());
-  }
+     // Each block is made of dof types. We get the most fine grain dof types.
+     // Most fine grain in the sense that these are the dof types that belongs
+     // in this block before any coarsening of dof types has taken place.
+     // The ordering of the dof types matters, this is handled properly when
+     // creating the Block_to_dof_map_fine vector and must be respected here.
+     // I.e. we cannot arbitrarily insert dof types (even if they are correct)
+     // in the vector most_fine_grain_dof.
+     Vector<unsigned> most_fine_grain_dof;
+     for (unsigned b = 0; b < n_block; b++)
+     {
+       const unsigned mapped_b = block_vec_number[b];
+       most_fine_grain_dof.insert(
+           most_fine_grain_dof.end(),
+           Block_to_dof_map_fine[mapped_b].begin(),
+           Block_to_dof_map_fine[mapped_b].end());
+     }
 
-  // Get all the dof level vectors in one go.
-  Vector<DoubleVector> dof_block_vector;
-  get_block_vectors_with_original_matrix_ordering(most_fine_grain_dof_required,
-                                                  v,dof_block_vector);
+     // Get all the dof level vectors in one go.
+     Vector<DoubleVector> dof_block_vector;
+     get_block_vectors_with_original_matrix_ordering(most_fine_grain_dof,
+         v,dof_block_vector);
 
-  std::map<Vector<unsigned>,
-           LinearAlgebraDistribution* >::const_iterator iter;
+     // Next we need to build the output DoubleVector w with the correct 
+     // distribution: the concatenation of the distributions of all the 
+     // dof-level vectors. This is the same as the concatenation of the 
+     // distributions of the blocks within this preconditioner.
+     //
+     // So we first check if it exists already, if not, we create it and 
+     // store it for future use. We store it because concatenation of 
+     // distributions requires communication, so concatenation of 
+     // distributions on-the-fly should be avoided.
+     std::map<Vector<unsigned>,
+       LinearAlgebraDistribution* >::const_iterator iter;
 
-  iter = Auxiliary_distribution_pt.find(required_vector);
+     // Attempt to get an iterator pointing to the pair with the value
+     // block_vec_number.
+     iter = Auxiliary_distribution_pt.find(block_vec_number);
 
-    if(iter != Auxiliary_distribution_pt.end())
-    {
-      w.build(iter->second);
-    }
-    else
-    {
-      Vector<LinearAlgebraDistribution*> tmp_vec_dist_pt(n_block,0);
-      for (unsigned b = 0; b < n_block; b++) 
-      {
-        tmp_vec_dist_pt[b] = Block_distribution_pt[required_vector[b]];
-      }
+     if(iter != Auxiliary_distribution_pt.end())
+       // If it exists, build w with the distribution pointed to 
+       // by pair::second.
+     {
+       w.build(iter->second);
+     }
+     else
+       // Else, we need to create the distribution and store it in
+       // Auxiliary_distribution_pt.
+     {
+       Vector<LinearAlgebraDistribution*> tmp_vec_dist_pt(n_block,0);
+       for (unsigned b = 0; b < n_block; b++) 
+       {
+         tmp_vec_dist_pt[b] = Block_distribution_pt[block_vec_number[b]];
+       }
 
-      LinearAlgebraDistribution* tmp_dist_pt = new LinearAlgebraDistribution;
-      LinearAlgebraDistributionHelpers::concatenate(tmp_vec_dist_pt,*tmp_dist_pt);
+       // Note that the distribution is created with new but not deleted here.
+       // This is handled in the clean up functions.
+       LinearAlgebraDistribution* tmp_dist_pt = new LinearAlgebraDistribution;
+       LinearAlgebraDistributionHelpers::concatenate(tmp_vec_dist_pt,
+           *tmp_dist_pt);
+       // Store the pair of Vector<unsigned> and LinearAlgebraDistribution*
+       Auxiliary_distribution_pt.insert(
+           std::make_pair(block_vec_number,tmp_dist_pt));
 
-      Auxiliary_distribution_pt.insert(
-          std::make_pair(required_vector,tmp_dist_pt));
+       // Build w.
+       w.build(tmp_dist_pt);
+     }
 
-      w.build(tmp_dist_pt);
-    }
-    DoubleVectorHelpers::concatenate_without_communication(dof_block_vector,w);
- }
+     // Now concatenate all the dof level vectors into the vector w.
+     DoubleVectorHelpers::concatenate_without_communication(
+         dof_block_vector,w);
+
+   } // get_concatenated_block_vector(...)
 
 
 
@@ -2808,7 +2855,7 @@ namespace oomph
  //////////////////////////////////////////////////////////////////////////////
  //////////////////////////////////////////////////////////////////////////////
  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
- return_concatenated_block_vector(const Vector<unsigned> & required_vector,
+ return_concatenated_block_vector(const Vector<unsigned> & block_vec_number,
                       const DoubleVector& w, DoubleVector& v) const
  {
 #ifdef PARANOID
@@ -2831,12 +2878,12 @@ namespace oomph
                         OOMPH_EXCEPTION_LOCATION);
    }
 
-  const unsigned para_required_vector_size = required_vector.size();
+  const unsigned para_block_vec_number_size = block_vec_number.size();
   const unsigned para_n_block = nblock_types();
-  if(para_required_vector_size > para_n_block)
+  if(para_block_vec_number_size > para_n_block)
   {
     std::ostringstream err_msg;
-    err_msg << "Trying to return " << para_required_vector_size 
+    err_msg << "Trying to return " << para_block_vec_number_size 
             << " block vectors.\n"
             << "But there are only " << para_n_block << " block types.\n";
     throw OomphLibError(err_msg.str(),
@@ -2844,13 +2891,13 @@ namespace oomph
                         OOMPH_EXCEPTION_LOCATION);
   }
 
-  for (unsigned b = 0; b < para_required_vector_size; b++) 
+  for (unsigned b = 0; b < para_block_vec_number_size; b++) 
   {
-    const unsigned para_required_block = required_vector[b];
+    const unsigned para_required_block = block_vec_number[b];
     if(para_required_block > para_n_block)
     {
       std::ostringstream err_msg;
-      err_msg << "required_vector[" << b << "] is " << para_required_block
+      err_msg << "block_vec_number[" << b << "] is " << para_required_block
               << ".\n"
               << "But there are only " << para_n_block << " block types.\n";
       throw OomphLibError(err_msg.str(),
@@ -2861,16 +2908,16 @@ namespace oomph
   }
 
   std::set<unsigned> para_set;
-  for (unsigned b = 0; b < para_required_vector_size; b++) 
+  for (unsigned b = 0; b < para_block_vec_number_size; b++) 
   {
     std::pair<std::set<unsigned>::iterator,bool> para_set_ret;
-    para_set_ret = para_set.insert(required_vector[b]);
+    para_set_ret = para_set.insert(block_vec_number[b]);
 
     if(!para_set_ret.second)
     {
       std::ostringstream err_msg;
       err_msg << "Error: the block number "
-        << required_vector[b]
+        << block_vec_number[b]
         << " appears twice.\n";
       throw OomphLibError(err_msg.str(),
           OOMPH_CURRENT_FUNCTION,
@@ -2889,11 +2936,11 @@ namespace oomph
 
 
   Vector<LinearAlgebraDistribution*> para_vec_dist_pt(
-      para_required_vector_size,0);
+      para_block_vec_number_size,0);
 
-  for (unsigned b = 0; b < para_required_vector_size; b++) 
+  for (unsigned b = 0; b < para_block_vec_number_size; b++) 
   {
-    para_vec_dist_pt[b] = Block_distribution_pt[required_vector[b]];
+    para_vec_dist_pt[b] = Block_distribution_pt[block_vec_number[b]];
   }
 
   LinearAlgebraDistribution para_tmp_dist;
@@ -2906,19 +2953,19 @@ namespace oomph
     std::ostringstream err_msg;
     err_msg << "The distribution of the block vector w does not match \n"
             << "the concatenation of the block distributions defined in \n"
-            << "required_vector.\n";
+            << "block_vec_number.\n";
     throw OomphLibError(err_msg.str(),
                         OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
   }
 #endif
 
-  const unsigned n_block = required_vector.size();
+  const unsigned n_block = block_vec_number.size();
 
   Vector<unsigned> most_fine_grain_dof;
   for (unsigned b = 0; b < n_block; b++) 
   {
-    const unsigned mapped_b = required_vector[b];
+    const unsigned mapped_b = block_vec_number[b];
     most_fine_grain_dof.insert(
         most_fine_grain_dof.end(),
         Block_to_dof_map_fine[mapped_b].begin(),
@@ -2954,7 +3001,7 @@ namespace oomph
  /// otherwise get_block_vector_with_original_matrix_ordering(...) is called.
  //============================================================================
  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
- get_block_vectors(const Vector<unsigned>& required_vector,
+ get_block_vectors(const Vector<unsigned>& block_vec_number,
      const DoubleVector& v, Vector<DoubleVector >& s) const
  {
 #ifdef PARANOID
@@ -2978,27 +3025,27 @@ namespace oomph
    }
 
   const unsigned para_nblock_types = nblock_types();
-  const unsigned para_required_vector_size = required_vector.size();
-  if(para_required_vector_size > para_nblock_types)
+  const unsigned para_block_vec_number_size = block_vec_number.size();
+  if(para_block_vec_number_size > para_nblock_types)
   {
     std::ostringstream err_msg;
-    err_msg << "You have requested " << para_required_vector_size
-            << " number of blocks, (required_vector.size() is " 
-            << para_required_vector_size << ").\n"
+    err_msg << "You have requested " << para_block_vec_number_size
+            << " number of blocks, (block_vec_number.size() is " 
+            << para_block_vec_number_size << ").\n"
             << "But there are only " << para_nblock_types << " nblock_types.\n"
-            << "Please make sure that required_vector is correctly sized.\n";
+            << "Please make sure that block_vec_number is correctly sized.\n";
     throw OomphLibError(err_msg.str(),
                         OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
   }
 
-  for (unsigned i = 0; i < para_required_vector_size; i++) 
+  for (unsigned i = 0; i < para_block_vec_number_size; i++) 
   {
-    const unsigned para_required_block = required_vector[i];
+    const unsigned para_required_block = block_vec_number[i];
     if(para_required_block > para_nblock_types)
     {
       std::ostringstream err_msg;
-      err_msg << "required_vector[" << i << "] is " << para_required_block 
+      err_msg << "block_vec_number[" << i << "] is " << para_required_block 
               << ".\n"
               << "But there are only " << para_nblock_types 
               << " nblock_types.\n";
@@ -3009,16 +3056,16 @@ namespace oomph
   }
 
   std::set<unsigned> para_set;
-  for (unsigned b = 0; b < para_required_vector_size; b++) 
+  for (unsigned b = 0; b < para_block_vec_number_size; b++) 
   {
     std::pair<std::set<unsigned>::iterator,bool> para_set_ret;
-    para_set_ret = para_set.insert(required_vector[b]);
+    para_set_ret = para_set.insert(block_vec_number[b]);
 
     if(!para_set_ret.second)
     {
       std::ostringstream err_msg;
       err_msg << "Error: the block number "
-        << required_vector[b]
+        << block_vec_number[b]
         << " appears twice.\n";
       throw OomphLibError(err_msg.str(),
           OOMPH_CURRENT_FUNCTION,
@@ -3027,14 +3074,14 @@ namespace oomph
   }
 #endif
 
-  const unsigned n_block = required_vector.size();
+  const unsigned n_block = block_vec_number.size();
   s.resize(n_block);
 
   // Get all of the most fine grained dofs required.
   Vector<unsigned> most_fine_grain_dof_required;
   for (unsigned b = 0; b < n_block; b++)
   {
-    const unsigned mapped_b = required_vector[b];
+    const unsigned mapped_b = block_vec_number[b];
 
     most_fine_grain_dof_required.insert(
         most_fine_grain_dof_required.end(),
@@ -3053,7 +3100,7 @@ namespace oomph
 
   for (unsigned b = 0; b < n_block; b++) 
   {
-    const unsigned mapped_b = required_vector[b];
+    const unsigned mapped_b = block_vec_number[b];
 
     // How many most fine grain dofs are in this block?
     const unsigned n_dof = Block_to_dof_map_fine[mapped_b].size();
@@ -3106,7 +3153,7 @@ namespace oomph
  //============================================================================
  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
  get_block_vectors_with_original_matrix_ordering(
-   const Vector<unsigned>& required_vector, const DoubleVector& v, 
+   const Vector<unsigned>& block_vec_number, const DoubleVector& v, 
    Vector<DoubleVector >& s) const
  {
 #ifdef PARANOID
@@ -3132,7 +3179,7 @@ namespace oomph
 
   // Number of block types
   //const unsigned nblock = this->internal_nblock_types();
-  const unsigned nblock = required_vector.size();
+  const unsigned nblock = block_vec_number.size();
 
   // if + only one processor
   //    + more than one processor but matrix_pt is not distributed
@@ -3150,7 +3197,7 @@ namespace oomph
     // setup the block vector and then insert the data
     for (unsigned b = 0; b < nblock; b++)
      {
-      const unsigned required_block = required_vector[b];
+      const unsigned required_block = block_vec_number[b];
       s[b].build(Internal_block_distribution_pt[required_block],0.0);
       double* s_pt = s[b].values_pt();
       unsigned nrow = s[b].nrow();
@@ -3174,7 +3221,7 @@ namespace oomph
     s.resize(nblock);
     for (unsigned b = 0; b < nblock; b++)
      {
-      const unsigned required_block = required_vector[b];
+      const unsigned required_block = block_vec_number[b];
       s[b].build(Internal_block_distribution_pt[required_block],0.0);
      }
 
@@ -3188,7 +3235,7 @@ namespace oomph
      {
       for (unsigned b = 0; b < nblock; b++)
        {
-        const unsigned required_block = required_vector[b];
+        const unsigned required_block = block_vec_number[b];
         max_n_send_or_recv =
          std::max(max_n_send_or_recv,Nrows_to_send_for_get_block(required_block,p));
         max_n_send_or_recv =
@@ -3229,7 +3276,7 @@ namespace oomph
           unsigned ptr = 0;
           for (unsigned b = 0; b < nblock; b++)
            {
-            const unsigned required_block = required_vector[b];
+            const unsigned required_block = block_vec_number[b];
 
             if (Nrows_to_send_for_get_block(required_block,p) > 0)
              {
@@ -3289,7 +3336,7 @@ namespace oomph
           unsigned ptr = 0;
           for (unsigned b = 0; b < nblock; b++)
            {
-            const unsigned required_block = required_vector[b];
+            const unsigned required_block = block_vec_number[b];
 
             if (Nrows_to_recv_for_get_block(required_block,p) > 0)
              {
@@ -3330,7 +3377,7 @@ namespace oomph
         const double* v_values_pt = v.values_pt();
         for (unsigned b = 0; b < nblock; b++)
          {
-          const unsigned required_block = required_vector[b];
+          const unsigned required_block = block_vec_number[b];
 
           double* w_values_pt = s[b].values_pt();
           for (unsigned i = 0; i < Nrows_to_send_for_get_block(required_block,p); i++)
@@ -3369,13 +3416,13 @@ namespace oomph
  {
   // Number of block types
   const unsigned nblock = this->internal_nblock_types();
-  Vector<unsigned> required_vector(nblock,0);
+  Vector<unsigned> block_vec_number(nblock,0);
   for (unsigned b = 0; b < nblock; b++) 
   {
-    required_vector[b] = b;
+    block_vec_number[b] = b;
   }
 
-  get_block_vectors_with_original_matrix_ordering(required_vector,v,s);
+  get_block_vectors_with_original_matrix_ordering(block_vec_number,v,s);
  }
 
  //============================================================================
@@ -3389,7 +3436,7 @@ namespace oomph
  /// is called.
  //============================================================================
  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
- return_block_vectors(const Vector<unsigned> & required_vector,
+ return_block_vectors(const Vector<unsigned> & block_vec_number,
                       const Vector<DoubleVector >& s, DoubleVector& v) const
  {
 #ifdef PARANOID
@@ -3412,13 +3459,13 @@ namespace oomph
                         OOMPH_EXCEPTION_LOCATION);
    }
 
-  const unsigned para_required_vector_size = required_vector.size();
+  const unsigned para_block_vec_number_size = block_vec_number.size();
   const unsigned para_s_size = s.size();
 
-  if(para_required_vector_size != para_s_size)
+  if(para_block_vec_number_size != para_s_size)
   {
     std::ostringstream err_msg;
-    err_msg << "required_vector.size() is " << para_required_vector_size 
+    err_msg << "block_vec_number.size() is " << para_block_vec_number_size 
             << "\n."
             << "s.size() is " << para_s_size << ".\n"
             << "But they must be the same size!\n";
@@ -3428,10 +3475,10 @@ namespace oomph
   }
 
   const unsigned para_n_block = nblock_types();
-  if(para_required_vector_size > para_n_block)
+  if(para_block_vec_number_size > para_n_block)
   {
     std::ostringstream err_msg;
-    err_msg << "Trying to return " << para_required_vector_size 
+    err_msg << "Trying to return " << para_block_vec_number_size 
             << " block vectors.\n"
             << "But there are only " << para_n_block << " block types.\n";
     throw OomphLibError(err_msg.str(),
@@ -3439,13 +3486,13 @@ namespace oomph
                         OOMPH_EXCEPTION_LOCATION);
   }
 
-  for (unsigned b = 0; b < para_required_vector_size; b++) 
+  for (unsigned b = 0; b < para_block_vec_number_size; b++) 
   {
-    const unsigned para_required_block = required_vector[b];
+    const unsigned para_required_block = block_vec_number[b];
     if(para_required_block > para_n_block)
     {
       std::ostringstream err_msg;
-      err_msg << "required_vector[" << b << "] is " << para_required_block
+      err_msg << "block_vec_number[" << b << "] is " << para_required_block
               << ".\n"
               << "But there are only " << para_n_block << " block types.\n";
       throw OomphLibError(err_msg.str(),
@@ -3456,16 +3503,16 @@ namespace oomph
   }
 
   std::set<unsigned> para_set;
-  for (unsigned b = 0; b < para_required_vector_size; b++) 
+  for (unsigned b = 0; b < para_block_vec_number_size; b++) 
   {
     std::pair<std::set<unsigned>::iterator,bool> para_set_ret;
-    para_set_ret = para_set.insert(required_vector[b]);
+    para_set_ret = para_set.insert(block_vec_number[b]);
 
     if(!para_set_ret.second)
     {
       std::ostringstream err_msg;
       err_msg << "Error: the block number "
-        << required_vector[b]
+        << block_vec_number[b]
         << " appears twice.\n";
       throw OomphLibError(err_msg.str(),
           OOMPH_CURRENT_FUNCTION,
@@ -3473,7 +3520,7 @@ namespace oomph
     }
   }
 
-  for (unsigned b = 0; b < para_required_vector_size; b++) 
+  for (unsigned b = 0; b < para_block_vec_number_size; b++) 
   {
     if(!s[b].built())
     {
@@ -3486,19 +3533,19 @@ namespace oomph
     }
   }
 
-  for (unsigned b = 0; b < para_required_vector_size; b++) 
+  for (unsigned b = 0; b < para_block_vec_number_size; b++) 
   {
     if (*(s[b].distribution_pt()) != 
-        *(Block_distribution_pt[required_vector[b]]))
+        *(Block_distribution_pt[block_vec_number[b]]))
     {
       std::ostringstream error_message;
       error_message << "The distribution of the block vector " << b
         << "must match the"
         << " specified distribution at "
         << "Block_distribution_pt["
-        << required_vector[b] << "].\n"
+        << block_vec_number[b] << "].\n"
         << "The distribution of the Block_distribution_pt is determined by\n"
-        << "the vector required_vector. Perhaps it is incorrect?\n";
+        << "the vector block_vec_number. Perhaps it is incorrect?\n";
       throw OomphLibError(error_message.str(),
           OOMPH_CURRENT_FUNCTION,
           OOMPH_EXCEPTION_LOCATION);
@@ -3509,13 +3556,13 @@ namespace oomph
   // Need to split all the blocks into the most fine grain dof-level blocks.
   // Then return them all at once with
   // return_block_vectors_with_original_matrix_ordering(..)
-  const unsigned n_block = required_vector.size();
+  const unsigned n_block = block_vec_number.size();
 
   // Get the most fine grain dofs
   Vector<unsigned> most_fine_dof;
   for (unsigned b = 0; b < n_block; b++) 
   {
-    const unsigned mapped_b = required_vector[b];
+    const unsigned mapped_b = block_vec_number[b];
     
     most_fine_dof.insert(most_fine_dof.end(),
                          Block_to_dof_map_fine[mapped_b].begin(),
@@ -3529,7 +3576,7 @@ namespace oomph
   // Perform the splitting for each block.
   for (unsigned b = 0; b < n_block; b++) 
   {
-    const unsigned mapped_b = required_vector[b];
+    const unsigned mapped_b = block_vec_number[b];
 
     const unsigned ndof = Block_to_dof_map_fine[mapped_b].size();
     
@@ -3586,12 +3633,12 @@ namespace oomph
  //============================================================================
  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
  return_block_vectors_with_original_matrix_ordering(
- const Vector<unsigned>& required_vector,
+ const Vector<unsigned>& block_vec_number,
  const Vector<DoubleVector >& s, DoubleVector& v) const
  {
   // the number of blocks
   //unsigned nblock = this->internal_nblock_types();
-  unsigned nblock = required_vector.size();
+  unsigned nblock = block_vec_number.size();
 
 #ifdef PARANOID
   if (!v.built())
@@ -3623,7 +3670,7 @@ namespace oomph
                           OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
-    const unsigned required_block = required_vector[b];
+    const unsigned required_block = block_vec_number[b];
     if (*(s[b].distribution_pt()) != *(Internal_block_distribution_pt[required_block]))
      {
       std::ostringstream error_message;
@@ -3647,7 +3694,7 @@ namespace oomph
     double* v_pt = v.values_pt();
     for (unsigned b = 0; b < nblock; b++)
      {
-      const unsigned required_block = required_vector[b];
+      const unsigned required_block = block_vec_number[b];
 
       const double* s_pt = s[b].values_pt();
       unsigned nrow = this->block_dimension(required_block);
@@ -3678,7 +3725,7 @@ namespace oomph
      {
       for (unsigned b = 0; b < nblock; b++)
        {
-        const unsigned required_block = required_vector[b];
+        const unsigned required_block = block_vec_number[b];
 
         max_n_send_or_recv =
          std::max(max_n_send_or_recv,Nrows_to_send_for_get_block(required_block,p));
@@ -3720,7 +3767,7 @@ namespace oomph
           unsigned ptr = 0;
           for (unsigned b = 0; b < nblock; b++)
            {
-            const unsigned required_block = required_vector[b];
+            const unsigned required_block = block_vec_number[b];
 
             if (Nrows_to_send_for_get_block(required_block,p) > 0)
              {
@@ -3781,7 +3828,7 @@ namespace oomph
           unsigned ptr = 0;
           for (unsigned b = 0; b < nblock; b++)
            {
-            const unsigned required_block = required_vector[b];
+            const unsigned required_block = block_vec_number[b];
 
             if (Nrows_to_recv_for_get_block(required_block,p) > 0)
              {
@@ -3823,7 +3870,7 @@ namespace oomph
         double* v_values_pt = v.values_pt();
         for (unsigned b = 0; b < nblock; b++)
          {
-          const unsigned required_block = required_vector[b];
+          const unsigned required_block = block_vec_number[b];
 
           const double* w_values_pt = s[b].values_pt();
           for (unsigned i = 0; i < Nrows_to_send_for_get_block(required_block,p); i++)
@@ -3863,10 +3910,10 @@ namespace oomph
  {
   // the number of blocks
   const unsigned nblock = this->internal_nblock_types();
-  Vector<unsigned> required_vector(nblock,0);
+  Vector<unsigned> block_vec_number(nblock,0);
   for (unsigned b = 0; b < nblock; b++) 
   {
-    required_vector[b] = b;
+    block_vec_number[b] = b;
   }
  }
 
@@ -4621,23 +4668,15 @@ namespace oomph
    }
 #endif
 
-  //  Cleared and resized w for reordered vector
-//  w.build(this->preconditioner_matrix_distribution_pt(),0.0);
-
   unsigned nblocks = this->nblock_types();
 
-  Vector<unsigned> required_vector(nblocks,0);
+  Vector<unsigned> block_vec_number(nblocks,0);
   for (unsigned b = 0; b < nblocks; b++) 
   {
-    required_vector[b]=b;
+    block_vec_number[b]=b;
   }
 
-  get_concatenated_block_vector(required_vector,v,w);
-
-//  Vector<DoubleVector> tmp_vec(nblocks);
-//  get_block_vectors(v,tmp_vec);
-
-//  DoubleVectorHelpers::concatenate_without_communication(tmp_vec,w);
+  get_concatenated_block_vector(block_vec_number,v,w);
  }
 
  //============================================================================
@@ -4872,13 +4911,13 @@ namespace oomph
 
   // Split into the block vectors.
   const unsigned nblocks = nblock_types();
-  Vector<unsigned> required_vector(nblocks,0);
+  Vector<unsigned> block_vec_number(nblocks,0);
   for (unsigned b = 0; b < nblocks; b++) 
   {
-    required_vector[b] = b;
+    block_vec_number[b] = b;
   }
 
-  return_concatenated_block_vector(required_vector,w,v);
+  return_concatenated_block_vector(block_vec_number,w,v);
  } // function return_block_ordered_preconditioner_vector
 
 

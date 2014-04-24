@@ -1572,12 +1572,26 @@ class BlockSelector
     return output_matrix;
   } // EOFunc get_concatenated_block(...)
 
-  void get_concatenated_block_vector(const Vector<unsigned>& required_vector,
+  /// \short Takes the naturally ordered vector and extracts the blocks 
+  /// indicated by the block number (the values) in the Vector 
+  /// block_vec_number all at once, then concatenates them without 
+  /// communication. Here, the values in block_vec_numbers is the block number
+  /// in the current preconditioner.
+  /// This is a non-const function because distributions may be created
+  /// and stored in Auxiliary_distribution_pt for future use.
+  void get_concatenated_block_vector(const Vector<unsigned>& block_vec_number,
                                      const DoubleVector& v,
                                      DoubleVector& b);
 
+  /// \short Takes concatenated block ordered vector, b, and copies its 
+  /// entries to the appropriate entries in the naturally ordered vector, v.
+  /// Here the values in block_vec_number indicates which blocks the vector
+  /// b is a concatenation of. The block number are those in the current
+  /// preconditioner. If the preconditioner is a subsidiary block
+  /// preconditioner the other entries in v that are not associated with it 
+  /// are left alone.
   void return_concatenated_block_vector(
-      const Vector<unsigned>& required_vector,
+      const Vector<unsigned>& block_vec_number,
       const DoubleVector& b,
       DoubleVector& v) const;
  
@@ -1588,7 +1602,7 @@ class BlockSelector
   /// sub-vectors associated with the blocks of the subsidiary preconditioner
   /// will be included. Hence the length of v is master_nrow() whereas the
   /// total length of the s vectors is Nrow.
-  void get_block_vectors(const Vector<unsigned> & required_vector,
+  void get_block_vectors(const Vector<unsigned> & block_vec_number,
                          const DoubleVector& v,
                          Vector<DoubleVector >& s) const;
 
@@ -1599,7 +1613,7 @@ class BlockSelector
   /// the naturally ordered vector, v. If this is a subsidiary block
   /// preconditioner only those entries in v that are associated with its
   /// blocks are affected.
-  void return_block_vectors(const Vector<unsigned>& required_vector,
+  void return_block_vectors(const Vector<unsigned>& block_vec_number,
                             const Vector<DoubleVector >& s,
                             DoubleVector& v) const; 
 
@@ -2632,10 +2646,10 @@ class BlockSelector
   } // EOFunc setup_matrix_vector_product(...)
 
   void get_block_vectors_with_original_matrix_ordering(
-      const Vector<unsigned>& required_vector, const DoubleVector& v, Vector<DoubleVector >& s) const;
+      const Vector<unsigned>& block_vec_number, const DoubleVector& v, Vector<DoubleVector >& s) const;
 
   void return_block_vectors_with_original_matrix_ordering(
-      const Vector<unsigned>& required_vector,
+      const Vector<unsigned>& block_vec_number,
       const Vector<DoubleVector >& s, DoubleVector& v) const;
  private:
 
