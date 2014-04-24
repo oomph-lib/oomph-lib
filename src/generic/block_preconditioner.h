@@ -735,7 +735,7 @@ class BlockSelector
     // If the dof block exists in Replacement_dof_block_pt, then we make a
     // deep copy of it. Otherwise, if this is the upper-most master block 
     // preconditioner then we get it from the original matrix via function 
-    // get_block_from_original_matrix(...) otherwise, if this is a subsidiary 
+    // internal_get_block(...) otherwise, if this is a subsidiary 
     // block preconditioner, we go one level up the hierarchy and repeat the 
     // process.
     //
@@ -791,7 +791,7 @@ class BlockSelector
     // Now, the below code uses the indirection maintained in 
     // Block_to_dof_map_coarse. I.e. When we call get_block(4,4), we use the 
     // mapping Block_to_dof_map_coarse[4] = 2, we get the block (2,2) 
-    // (from Replacement_dof_block_pt or get_block_from_original_matrix), since the
+    // (from Replacement_dof_block_pt or internal_get_block), since the
     // underlying dof_to_block mapping is still the identity, i.e. it has not
     // changed from:
     // 0 1 2 3  4  5
@@ -1069,7 +1069,7 @@ class BlockSelector
   /// block is returned via a deep copy.
   ///
   /// Otherwise if this is the uppermost block preconditioner then it calls
-  /// get_block_from_original_matrix(i,j), else if it is a subsidiary
+  /// internal_get_block(i,j), else if it is a subsidiary
   /// block preconditioner, it will call it's master block preconditioners'
   /// get_dof_level_block function.
   void get_dof_level_block(const unsigned& i, const unsigned& j,
@@ -1649,13 +1649,13 @@ class BlockSelector
   /// If the preconditioner is a subsidiary block preconditioner
   /// the other entries in v  that are not associated with it
   /// are left alone.
-  void return_block_vector(const unsigned& n,
-                           const DoubleVector& b,
+  void return_block_vector(const unsigned& n, const DoubleVector& b,
                            DoubleVector& v) const;
 
-  /// RAYRAY comment
   /// \short Given the naturally ordered vector, v, return
-  /// the vector rearranged in block order in w.
+  /// the vector rearranged in block order in w. This is a legacy function
+  /// from the old block preconditioning framework. Kept alive in case it may
+  /// be needed again.
   void internal_get_block_ordered_preconditioner_vector(const DoubleVector& v,
                                                         DoubleVector& w) const;
 
@@ -2584,7 +2584,7 @@ class BlockSelector
     // nblock_types() == ndof_types(), i.e. each sub-vector is of length 1.
     //
     // We use this indirection so that the placement of the pointer is 
-    // consistent with get_block_from_original_matrix(...).
+    // consistent with internal_get_block(...).
     const unsigned dof_block_i = Block_to_dof_map_coarse[block_i][0];
     const unsigned dof_block_j = Block_to_dof_map_coarse[block_j][0];
 
@@ -2654,10 +2654,11 @@ class BlockSelector
     setup_matrix_vector_product(matvec_prod_pt,block_pt,col_index_vector);
   } // EOFunc setup_matrix_vector_product(...)
 
-  void get_block_vectors_with_original_matrix_ordering(
-      const Vector<unsigned>& block_vec_number, const DoubleVector& v, Vector<DoubleVector >& s) const;
+  void internal_get_block_vectors(
+      const Vector<unsigned>& block_vec_number, 
+      const DoubleVector& v, Vector<DoubleVector >& s) const;
 
-  void return_block_vectors_with_original_matrix_ordering(
+  void internal_return_block_vectors(
       const Vector<unsigned>& block_vec_number,
       const Vector<DoubleVector >& s, DoubleVector& v) const;
  private:
@@ -2760,7 +2761,7 @@ class BlockSelector
   /// If the preconditioner is a subsidiary block preconditioner
   /// the other entries in v  that are not associated with it
   /// are left alone.
-  void return_block_vector_with_original_matrix_ordering(const unsigned& n,
+  void internal_return_block_vector(const unsigned& n,
                            const DoubleVector& b,
                            DoubleVector& v) const;
 
@@ -2768,8 +2769,8 @@ class BlockSelector
   /// and extracts the n-th block vector, b. 
   /// Here n is the block number in the current preconditioner. 
   /// NOTE: The ordering of the vector b is the same as the 
-  /// ordering of the block matrix from get_block_from_original_matrix(...).
-  void get_block_vector_with_original_matrix_ordering(
+  /// ordering of the block matrix from internal_get_block(...).
+  void internal_get_block_vector(
     const unsigned& n, const DoubleVector& v, DoubleVector& b) const;
 
   /// \short A helper function, takes the naturally ordered vector and 
@@ -2781,7 +2782,7 @@ class BlockSelector
   /// sub-vectors associated with the blocks of the subsidiary preconditioner
   /// will be included. Hence the length of v is master_nrow() whereas the
   /// total length of the s s vectors is Nrow.
-  void get_block_vectors_with_original_matrix_ordering(
+  void internal_get_block_vectors(
       const DoubleVector& v, Vector<DoubleVector >& s) const;
 
   /// \short A helper function, takes the vector of block vectors, s, and 
@@ -2790,12 +2791,12 @@ class BlockSelector
   /// block matrices. I.e. there are no precomputed blocks. 
   /// If this is a subsidiary block preconditioner only those entries in v 
   /// that are associated with its blocks are affected.
-  void return_block_vectors_with_original_matrix_ordering(
+  void internal_return_block_vectors(
       const Vector<DoubleVector >& s, DoubleVector& v) const;
 
   /// \short Gets block (i,j) from the original matrix, pointed to by
   /// Matrix_pt and returns it in output_block.
-  void get_block_from_original_matrix(const unsigned& i, const unsigned& j,
+  void internal_get_block(const unsigned& i, const unsigned& j,
                                       MATRIX& output_block) const;
 
   /// \short Check if any of the meshes are distributed. This is equivalent

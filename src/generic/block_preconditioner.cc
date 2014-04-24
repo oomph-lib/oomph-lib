@@ -2791,7 +2791,7 @@ namespace oomph
 
      // Get all the dof level vectors in one go.
      Vector<DoubleVector> dof_block_vector;
-     get_block_vectors_with_original_matrix_ordering(most_fine_grain_dof,
+     internal_get_block_vectors(most_fine_grain_dof,
          v,dof_block_vector);
 
      // Next we need to build the output DoubleVector w with the correct 
@@ -3014,7 +3014,7 @@ namespace oomph
      DoubleVectorHelpers::split_without_communication(w,dof_vector);
 
      // Return all the dof level vectors in one go.
-     return_block_vectors_with_original_matrix_ordering(most_fine_grain_dof,
+     internal_return_block_vectors(most_fine_grain_dof,
          dof_vector,
          v);
    } // return_concatenated_block_vector(...)
@@ -3140,7 +3140,7 @@ namespace oomph
 
      // Get all the dof level vectors in one go.
      Vector<DoubleVector> dof_vector;
-     get_block_vectors_with_original_matrix_ordering(most_fine_grain_dof,
+     internal_get_block_vectors(most_fine_grain_dof,
          v,dof_vector);
 
      // For each block vector requested, 
@@ -3226,7 +3226,7 @@ namespace oomph
  /// total length of the s s vectors is Nrow.
  //============================================================================
  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
- get_block_vectors_with_original_matrix_ordering(
+ internal_get_block_vectors(
    const Vector<unsigned>& block_vec_number, const DoubleVector& v, 
    Vector<DoubleVector >& s) const
  {
@@ -3488,7 +3488,7 @@ namespace oomph
 
  //============================================================================
  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
- get_block_vectors_with_original_matrix_ordering(
+ internal_get_block_vectors(
    const DoubleVector& v, Vector<DoubleVector >& s) const
  {
   // Number of block types
@@ -3499,7 +3499,7 @@ namespace oomph
     block_vec_number[b] = b;
   }
 
-  get_block_vectors_with_original_matrix_ordering(block_vec_number,v,s);
+  internal_get_block_vectors(block_vec_number,v,s);
  }
 
  //============================================================================
@@ -3698,7 +3698,8 @@ namespace oomph
 
            // build the dof vector.
            dof_vector[offset_plus_d].build( 
-               Internal_block_distribution_pt[most_fine_dof[offset_plus_d]]);
+               Internal_block_distribution_pt[
+               most_fine_grain_dof[offset_plus_d]]);
 
            // Store the pointer.
            tmp_dof_vector_pt[d] = &dof_vector[offset_plus_d];
@@ -3714,7 +3715,7 @@ namespace oomph
      }
 
      // Return the block vectors all in one go.
-     return_block_vectors_with_original_matrix_ordering(most_fine_dof,
+     internal_return_block_vectors(most_fine_grain_dof,
          dof_vector,
          v);
    } // return_block_vectors(...)
@@ -3756,7 +3757,7 @@ namespace oomph
  /// that are associated with its blocks are affected.
  //============================================================================
  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
- return_block_vectors_with_original_matrix_ordering(
+ internal_return_block_vectors(
  const Vector<unsigned>& block_vec_number,
  const Vector<DoubleVector >& s, DoubleVector& v) const
  {
@@ -4029,7 +4030,7 @@ namespace oomph
  }
 
  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
- return_block_vectors_with_original_matrix_ordering(
+ internal_return_block_vectors(
      const Vector<DoubleVector >& s, DoubleVector& v) const
  {
   // the number of blocks
@@ -4046,10 +4047,10 @@ namespace oomph
  /// and extracts the n-th block vector, b. 
  /// Here n is the block number in the current preconditioner. 
  /// NOTE: The ordering of the vector b is the same as the 
- /// ordering of the block matrix from get_block_from_original_matrix(...).
+ /// ordering of the block matrix from internal_get_block(...).
  //============================================================================
  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
- get_block_vector_with_original_matrix_ordering(const unsigned& b, 
+ internal_get_block_vector(const unsigned& b, 
                                                 const DoubleVector& v, 
                                                 DoubleVector& w)
   const
@@ -4294,8 +4295,7 @@ namespace oomph
   if(n_dof_vec == 1)
   // No need to concatenate, just extract the vector.
   {
-    get_block_vector_with_original_matrix_ordering(most_fine_grain_dof[0],
-                                                   v,w);
+    internal_get_block_vector(most_fine_grain_dof[0],v,w);
   }
   else
   // Need to concatenate dof-level vectors.
@@ -4303,7 +4303,7 @@ namespace oomph
     Vector<DoubleVector> dof_vector(n_dof_vec);
 
     // Get all the dof-level vectors in one go
-    get_block_vectors_with_original_matrix_ordering(most_fine_grain_dof,
+    internal_get_block_vectors(most_fine_grain_dof,
                                                     v, dof_vector);
     // Build w with the correct distribution.
     w.build(Block_distribution_pt[b],0);
@@ -4326,7 +4326,7 @@ namespace oomph
  /// are left alone.
  //============================================================================
  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
- return_block_vector_with_original_matrix_ordering(const unsigned& b, 
+ internal_return_block_vector(const unsigned& b, 
                                                    const DoubleVector& w, 
                                                    DoubleVector& v)
   const
@@ -4573,8 +4573,7 @@ namespace oomph
   if(n_dof_vec == 1)
   // There is only one dof, no need to split.
   {
-    return_block_vector_with_original_matrix_ordering(most_fine_grain_dof[0],
-                                                      w,v);
+    internal_return_block_vector(most_fine_grain_dof[0],w,v);
   }
   else
   // Need to split the vector up before we insert them all in one go.
@@ -4589,7 +4588,7 @@ namespace oomph
     DoubleVectorHelpers::split_without_communication(w,dof_vector);
 
     // return to v
-    return_block_vectors_with_original_matrix_ordering(most_fine_grain_dof,
+    internal_return_block_vectors(most_fine_grain_dof,
                                                        dof_vector,v);
   }
  } // return_block_vector(...)
@@ -5047,7 +5046,7 @@ namespace oomph
 //=============================================================================
  template<> 
  void BlockPreconditioner<CRDoubleMatrix>:: 
- get_block_from_original_matrix(const unsigned& block_i, const unsigned& block_j, 
+ internal_get_block(const unsigned& block_i, const unsigned& block_j, 
                                 CRDoubleMatrix& output_block) const
  {
 
@@ -5650,7 +5649,7 @@ namespace oomph
       if(is_master_block_preconditioner())
       {
 //        std::cout << "is master, do getting block from original matrix" << std::endl; 
-        get_block_from_original_matrix(parent_dof_i,parent_dof_j,output_block);
+        internal_get_block(parent_dof_i,parent_dof_j,output_block);
       }
       else
       {
@@ -5689,7 +5688,7 @@ namespace oomph
 
         if(is_master_block_preconditioner())
         {
-          get_block_from_original_matrix(parent_dof_i,parent_dof_j,*tmp_blocks_pt(dof_i,dof_j));
+          internal_get_block(parent_dof_i,parent_dof_j,*tmp_blocks_pt(dof_i,dof_j));
         }
         else
         {
