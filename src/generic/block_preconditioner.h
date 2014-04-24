@@ -2707,18 +2707,6 @@ class BlockSelector
 
  protected:
 
-  /// \short A helper function to return a block vector if the preconditioner
-  /// blocks have been precomputed.
-  /// Takes the n-th block ordered vector, b, and copies its entries
-  /// to the appropriate entries in the naturally ordered vector, v.
-  /// Here n is the block number in the current block preconditioner.
-  /// If the preconditioner is a subsidiary block preconditioner
-  /// the other entries in v  that are not associated with it
-  /// are left alone.
-//  void return_block_vector_with_precomputed_block_ordering(const unsigned& n,
-//                           const DoubleVector& b,
-//                           DoubleVector& v) const;
-
   /// \short A helper function to return a block if no preconditioner blocks
   /// were precomputed.
   /// Takes the n-th block ordered vector, b,  and copies its entries
@@ -2735,28 +2723,9 @@ class BlockSelector
   /// and extracts the n-th block vector, b. 
   /// Here n is the block number in the current preconditioner. 
   /// NOTE: The ordering of the vector b is the same as the 
-  /// ordering of the block matrix from get_precomputed_block(...).
-//  void get_block_vector_with_precomputed_block_ordering(
-//    const unsigned& n, const DoubleVector& v, DoubleVector& b) const;
-
-  /// \short A helper function, takes the naturally ordered vector, v, 
-  /// and extracts the n-th block vector, b. 
-  /// Here n is the block number in the current preconditioner. 
-  /// NOTE: The ordering of the vector b is the same as the 
   /// ordering of the block matrix from get_block_from_original_matrix(...).
   void get_block_vector_with_original_matrix_ordering(
     const unsigned& n, const DoubleVector& v, DoubleVector& b) const;
-
-  /// \short A helper function, takes the naturally ordered vector and 
-  /// rearranges it into a vector of sub vectors corresponding to the 
-  /// PRECOMPUTED blocks, so s[b][i] contains the i-th entry in the vector 
-  /// associated with the precomputed block b.
-  /// Note: If the preconditioner is a subsidiary preconditioner then only the
-  /// sub-vectors associated with the blocks of the subsidiary preconditioner
-  /// will be included. Hence the length of v is master_nrow() whereas the
-  /// total length of the s vectors is Nrow.
-//  void get_block_vectors_with_precomputed_block_ordering(
-//      const DoubleVector& v, Vector<DoubleVector >& s) const;
 
   /// \short A helper function, takes the naturally ordered vector and 
   /// rearranges it into a vector of sub vectors corresponding to the blocks, 
@@ -2769,15 +2738,6 @@ class BlockSelector
   /// total length of the s s vectors is Nrow.
   void get_block_vectors_with_original_matrix_ordering(
       const DoubleVector& v, Vector<DoubleVector >& s) const;
-
-  /// \short A helper function, takes the vector of block vectors, s, 
-  /// and copies its entries into the naturally ordered vector, v. 
-  /// This function assume that there are nblocks_precomputed block vectors 
-  /// and they have the precomputed block ordering. If this is a subsidiary 
-  /// block preconditioner only those entries in v that are associated with 
-  /// its blocks are affected.
-//  void return_block_vectors_with_precomputed_block_ordering(
-//      const Vector<DoubleVector >& s, DoubleVector& v) const;
 
   /// \short A helper function, takes the vector of block vectors, s, and 
   /// copies its entries into the naturally ordered vector, v. 
