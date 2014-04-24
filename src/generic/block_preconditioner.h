@@ -1773,6 +1773,9 @@ class BlockSelector
 
   /// \short Access to i-th mesh (of the various meshes that contain block
   /// preconditionable elements of the same number of dof type). 
+  /// 
+  /// WARNING: This should only be used if the derived class is the 
+  /// upper-most master block preconditioner.
   const Mesh* mesh_pt(const unsigned& i) const
   {
 #ifdef PARANOID
@@ -1803,8 +1806,10 @@ class BlockSelector
     return mesh_i_pt;
   } // EOFunc mesh_pt(...)
 
-  /// \short Return the number of meshes in Mesh_pt. If this is a
-  /// subsidiary preconditioner then the master Mesh_pt is used.
+  /// \short Return the number of meshes in Mesh_pt.
+  ///
+  /// WARNING: This should only be used if the derived class is the 
+  /// upper-most master block preconditioner.
   unsigned nmesh() const 
   {
 #ifdef PARANOID
@@ -2766,6 +2771,54 @@ class BlockSelector
     }
   } // EOFunc internal_ndof_types(...)
 
+
+  /// \short A helper function to return a block if no preconditioner blocks
+  /// were precomputed.
+  /// Takes the n-th block ordered vector, b,  and copies its entries
+  /// to the appropriate entries in the naturally ordered vector, v.
+  /// Here n is the block number in the current block preconditioner.
+  /// If the preconditioner is a subsidiary block preconditioner
+  /// the other entries in v  that are not associated with it
+  /// are left alone.
+  void internal_return_block_vector(const unsigned& n,
+                           const DoubleVector& b,
+                           DoubleVector& v) const;
+
+  /// \short A helper function, takes the naturally ordered vector, v, 
+  /// and extracts the n-th block vector, b. 
+  /// Here n is the block number in the current preconditioner. 
+  /// NOTE: The ordering of the vector b is the same as the 
+  /// ordering of the block matrix from internal_get_block(...).
+  void internal_get_block_vector(
+    const unsigned& n, const DoubleVector& v, DoubleVector& b) const;
+
+  /// \short A helper function, takes the naturally ordered vector and 
+  /// rearranges it into a vector of sub vectors corresponding to the blocks, 
+  /// so s[b][i] contains the i-th entry in the vector associated with block b. 
+  /// These blocks and vectors are those corresponding to the original block 
+  /// matrix ordering, i.e. there are no precomputed blocks.
+  /// Note: If the preconditioner is a subsidiary preconditioner then only the
+  /// sub-vectors associated with the blocks of the subsidiary preconditioner
+  /// will be included. Hence the length of v is master_nrow() whereas the
+  /// total length of the s s vectors is Nrow.
+  void internal_get_block_vectors(
+      const DoubleVector& v, Vector<DoubleVector >& s) const;
+
+  /// \short A helper function, takes the vector of block vectors, s, and 
+  /// copies its entries into the naturally ordered vector, v. 
+  /// The block vectors are assumed to have the ordering of the original 
+  /// block matrices. I.e. there are no precomputed blocks. 
+  /// If this is a subsidiary block preconditioner only those entries in v 
+  /// that are associated with its blocks are affected.
+  void internal_return_block_vectors(
+      const Vector<DoubleVector >& s, DoubleVector& v) const;
+
+  /// \short Gets block (i,j) from the original matrix, pointed to by
+  /// Matrix_pt and returns it in output_block.
+  void internal_get_block(const unsigned& i, const unsigned& j,
+                                      MATRIX& output_block) const;
+
+
   /// \short insert a Vector<unsigned> and LinearAlgebraDistribution* pair
   /// into Auxiliary_block_distribution_pt. The 
   /// Auxiliary_block_distribution_pt should only contain pointers to 
@@ -2856,51 +2909,7 @@ class BlockSelector
 
  protected:
 
-  /// \short A helper function to return a block if no preconditioner blocks
-  /// were precomputed.
-  /// Takes the n-th block ordered vector, b,  and copies its entries
-  /// to the appropriate entries in the naturally ordered vector, v.
-  /// Here n is the block number in the current block preconditioner.
-  /// If the preconditioner is a subsidiary block preconditioner
-  /// the other entries in v  that are not associated with it
-  /// are left alone.
-  void internal_return_block_vector(const unsigned& n,
-                           const DoubleVector& b,
-                           DoubleVector& v) const;
 
-  /// \short A helper function, takes the naturally ordered vector, v, 
-  /// and extracts the n-th block vector, b. 
-  /// Here n is the block number in the current preconditioner. 
-  /// NOTE: The ordering of the vector b is the same as the 
-  /// ordering of the block matrix from internal_get_block(...).
-  void internal_get_block_vector(
-    const unsigned& n, const DoubleVector& v, DoubleVector& b) const;
-
-  /// \short A helper function, takes the naturally ordered vector and 
-  /// rearranges it into a vector of sub vectors corresponding to the blocks, 
-  /// so s[b][i] contains the i-th entry in the vector associated with block b. 
-  /// These blocks and vectors are those corresponding to the original block 
-  /// matrix ordering, i.e. there are no precomputed blocks.
-  /// Note: If the preconditioner is a subsidiary preconditioner then only the
-  /// sub-vectors associated with the blocks of the subsidiary preconditioner
-  /// will be included. Hence the length of v is master_nrow() whereas the
-  /// total length of the s s vectors is Nrow.
-  void internal_get_block_vectors(
-      const DoubleVector& v, Vector<DoubleVector >& s) const;
-
-  /// \short A helper function, takes the vector of block vectors, s, and 
-  /// copies its entries into the naturally ordered vector, v. 
-  /// The block vectors are assumed to have the ordering of the original 
-  /// block matrices. I.e. there are no precomputed blocks. 
-  /// If this is a subsidiary block preconditioner only those entries in v 
-  /// that are associated with its blocks are affected.
-  void internal_return_block_vectors(
-      const Vector<DoubleVector >& s, DoubleVector& v) const;
-
-  /// \short Gets block (i,j) from the original matrix, pointed to by
-  /// Matrix_pt and returns it in output_block.
-  void internal_get_block(const unsigned& i, const unsigned& j,
-                                      MATRIX& output_block) const;
 
   /// \short Check if any of the meshes are distributed. This is equivalent
   /// to problem.distributed() and is used as a replacement.

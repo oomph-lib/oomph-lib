@@ -285,12 +285,6 @@ namespace oomph
   CRDoubleMatrix* inv_v_mass_pt = 0;
   CRDoubleMatrix* inv_p_mass_pt = 0;
 
-  // RAYRAY get rid of internal_ndof_types from here
-  unsigned n_velocity_doftypes = this->internal_ndof_types() - 1;
-
-  DenseMatrix<CRDoubleMatrix*> inv_v_mass_sub_pt(n_velocity_doftypes,
-                                                 n_velocity_doftypes,0);
-
   double ivmm_assembly_start_t = TimingHelpers::timer();
   if (Use_LSC)
    {   
