@@ -1473,15 +1473,15 @@ class BlockSelector
     // concatenation of distributions requires communication, we try to 
     // minimise this process by creating it once, then store a key to the
     // concatenated distribution. First check to see if the block row indices 
-    // is already a key in Auxiliary_distribution_pt, if it is in there, we
-    // use the distribution it corresponds to. Otherwise, we create the 
+    // is already a key in Auxiliary_block_distribution_pt, if it is in there, 
+    // we use the distribution it corresponds to. Otherwise, we create the 
     // distribution and store it for possible further use.
     std::map<Vector<unsigned>,
              LinearAlgebraDistribution* >::const_iterator iter;
 
-    iter = Auxiliary_distribution_pt.find(block_row_index);
+    iter = Auxiliary_block_distribution_pt.find(block_row_index);
 
-    if(iter != Auxiliary_distribution_pt.end())
+    if(iter != Auxiliary_block_distribution_pt.end())
     {
       output_matrix.build(iter->second);
     }
@@ -1489,21 +1489,18 @@ class BlockSelector
     {
       LinearAlgebraDistribution* tmp_dist_pt = new LinearAlgebraDistribution;
       LinearAlgebraDistributionHelpers::concatenate(row_dist_pt,*tmp_dist_pt);
-      Auxiliary_distribution_pt.insert(
-          std::make_pair(block_row_index,tmp_dist_pt));
-
+      insert_auxiliary_block_distribution(block_row_index,tmp_dist_pt);
       output_matrix.build(tmp_dist_pt);
     }
 
     // Do the same for the column dist, since we might need it for the RHS
     // vector..
-    iter = Auxiliary_distribution_pt.find(block_col_index);
-    if(iter == Auxiliary_distribution_pt.end())
+    iter = Auxiliary_block_distribution_pt.find(block_col_index);
+    if(iter == Auxiliary_block_distribution_pt.end())
     {
       LinearAlgebraDistribution* tmp_dist_pt = new LinearAlgebraDistribution;
       LinearAlgebraDistributionHelpers::concatenate(col_dist_pt,*tmp_dist_pt);
-      Auxiliary_distribution_pt.insert(
-          std::make_pair(block_col_index,tmp_dist_pt));
+      insert_auxiliary_block_distribution(block_col_index,tmp_dist_pt);
     }
 
     // Storage for the pointers to CRDoubleMatrices to concatenate.
@@ -1575,10 +1572,10 @@ class BlockSelector
   /// \short Takes the naturally ordered vector and extracts the blocks 
   /// indicated by the block number (the values) in the Vector 
   /// block_vec_number all at once, then concatenates them without 
-  /// communication. Here, the values in block_vec_numbers is the block number
+  /// communication. Here, the values in block_vec_number is the block number
   /// in the current preconditioner.
   /// This is a non-const function because distributions may be created
-  /// and stored in Auxiliary_distribution_pt for future use.
+  /// and stored in Auxiliary_block_distribution_pt for future use.
   void get_concatenated_block_vector(const Vector<unsigned>& block_vec_number,
                                      const DoubleVector& v,
                                      DoubleVector& b);
@@ -2345,11 +2342,11 @@ class BlockSelector
     }
 
 
-   // Now iterate through Auxiliary_distribution_pt and delete everything 
+   // Now iterate through Auxiliary_block_distribution_pt and delete everything 
    std::map<Vector<unsigned>, LinearAlgebraDistribution*>::iterator iter
-     = Auxiliary_distribution_pt.begin();
+     = Auxiliary_block_distribution_pt.begin();
 
-   while(iter != Auxiliary_distribution_pt.end())
+   while(iter != Auxiliary_block_distribution_pt.end())
    {
 
 
@@ -2357,18 +2354,18 @@ class BlockSelector
      {
        delete iter->second;
        iter++;
-       //Auxiliary_distribution_pt.erase(iter++);
+       //Auxiliary_block_distribution_pt.erase(iter++);
      }
      else
      {
        ++iter;
-       //Auxiliary_distribution_pt.erase(iter++);
+       //Auxiliary_block_distribution_pt.erase(iter++);
      }
 
 
      //  if(iter->first)
      //  delete iter->second;
-     //  Auxiliary_distribution_pt.erase(iter++);
+     //  Auxiliary_block_distribution_pt.erase(iter++);
      //
      //    if (it->second == delete_this_id)
      //    {
@@ -2385,7 +2382,7 @@ class BlockSelector
      //}
    }
 
-   Auxiliary_distribution_pt.clear();
+   Auxiliary_block_distribution_pt.clear();
 
     // Delete any dof block distributions
     const unsigned ndof_block_dist = Dof_block_distribution_pt.size();
@@ -2608,8 +2605,8 @@ class BlockSelector
   std::map<Vector<unsigned>,
            LinearAlgebraDistribution* >::const_iterator iter;
 
-  iter = Auxiliary_distribution_pt.find(block_col_indices);
-    if(iter != Auxiliary_distribution_pt.end())
+  iter = Auxiliary_block_distribution_pt.find(block_col_indices);
+    if(iter != Auxiliary_block_distribution_pt.end())
     {
       matvec_prod_pt->setup(block_pt,iter->second);
     }
@@ -2622,14 +2619,11 @@ class BlockSelector
       }
 
       LinearAlgebraDistribution* tmp_dist_pt = new LinearAlgebraDistribution;
-      LinearAlgebraDistributionHelpers::concatenate(tmp_vec_dist_pt,*tmp_dist_pt);
-
-      Auxiliary_distribution_pt.insert(
-          std::make_pair(block_col_indices,tmp_dist_pt));
+      LinearAlgebraDistributionHelpers::concatenate(tmp_vec_dist_pt,
+                                                    *tmp_dist_pt);
+      insert_auxiliary_block_distribution(block_col_indices,tmp_dist_pt);
       matvec_prod_pt->setup(block_pt,tmp_dist_pt);
     }
-
-
     }
   } // EOFunc setup_matrix_vector_product(...)
 
@@ -2640,9 +2634,6 @@ class BlockSelector
   {
     Vector<unsigned> col_index_vector(1,block_col_index);
     setup_matrix_vector_product(matvec_prod_pt,block_pt,col_index_vector);
-
-    //  matvec_prod_pt->setup(block_pt,
-    //                        Block_distribution_pt[block_col_index]);
   } // EOFunc setup_matrix_vector_product(...)
 
   void get_block_vectors_with_original_matrix_ordering(
@@ -2653,41 +2644,66 @@ class BlockSelector
       const Vector<DoubleVector >& s, DoubleVector& v) const;
  private:
 
+  /// \short insert a Vector<unsigned> and LinearAlgebraDistribution* pair
+  /// into Auxiliary_block_distribution_pt. The 
+  /// Auxiliary_block_distribution_pt should only contain pointers to 
+  /// distributions concatenated at this block level. We try to ensure this by
+  /// checking if the block_vec_number vector is within the range 
+  /// nblock_types(). Of course, this does not guarantee correctness, but this
+  /// is the least we can do.
+  void insert_auxiliary_block_distribution(
+      const Vector<unsigned>& block_vec_number,
+      LinearAlgebraDistribution* dist_pt)
+  {
+  #ifdef PARANOID
+    const unsigned max_block_number 
+      = *std::max_element(block_vec_number.begin(), 
+          block_vec_number.end());
+  
+    const unsigned nblocks = nblock_types();
+    if(max_block_number >= nblocks)
+    {
+      std::ostringstream err_msg;
+      err_msg << "Cannot insert into Auxiliary_block_distribution_pt\n"
+        << "because " << max_block_number << " is equal to or \n"
+        << "greater than " << nblocks << ".\n";
+      throw OomphLibError(err_msg.str(),
+          OOMPH_CURRENT_FUNCTION,
+          OOMPH_EXCEPTION_LOCATION);
+    }
+  
+    // Now check if the pair already exists in Auxiliary_block_distribution_pt.
+    // This is a stricter test and can be removed if required.
+  
+    // Attempt to get an iterator pointing to the pair with the value
+    // block_vec_number.
+    std::map<Vector<unsigned>,
+      LinearAlgebraDistribution* >::const_iterator iter
+        = Auxiliary_block_distribution_pt.find(block_vec_number);
+  
+    if(iter != Auxiliary_block_distribution_pt.end())
+      // If it exists, we throw an error
+    {
+      std::ostringstream err_msg;
+      err_msg << "Cannot insert into Auxiliary_block_distribution_pt\n"
+        << "because the first in the pair already exists.\n";
+      throw OomphLibError(err_msg.str(),
+          OOMPH_CURRENT_FUNCTION,
+          OOMPH_EXCEPTION_LOCATION);
+    }
+  #endif
+  
+    Auxiliary_block_distribution_pt.insert(
+        std::make_pair(block_vec_number,
+          dist_pt));
+  } // insert_auxiliary_block_distribution(...)
+
+  /// RAYRAY check if this still makes sense.
   /// \short Private helper function to check that every element in the block
   /// matrix (i,j) matches the corresponding element in the original matrix
   void block_matrix_test(const unsigned& i,
                          const unsigned& j,
                          const MATRIX* block_matrix_pt) const;
-
-
-// RAYRAY - this has been replaced by the function
-// get_index_of_value(...), which uses STL functions. The equivalent of this
-// function is called when the optional parameter is set to "true".
-//
-//  /// **No comment was on this function** I think it is some kind of binary
-//  /// search in the vector vec for value el, it looks like it returns -1 for a
-//  /// failure - David Shepherd.
-//  int get_index_of_element(const Vector<unsigned>& vec, const unsigned el) const
-//  {
-//   int lo = 0;
-//   int hi = vec.size();
-//   int mid = (hi+lo)/2;
-//   while (vec[mid] != el)
-//    {
-//     if (vec[mid] < el)
-//      {
-//       if (hi==mid) return -1;
-//       lo = mid;
-//      }
-//     else
-//      {
-//       if (lo==mid) return -1;
-//       hi = mid;
-//      }
-//     mid = (hi+lo)/2;
-//    }
-//   return mid;
-//  }
 
  /// \short Get the index of first occurrence of value in a vector.
  /// If the element does not exist, -1 is returned.
@@ -2697,9 +2713,6 @@ class BlockSelector
  /// element comparisons.
  /// Otherwise, up to linear in the distance between first and last: 
  /// Compares elements until a match is found.
- /// 
- /// RAYRAY - tried to move this to oomph_utilities... 
- /// it keeps giving me an error...
  template<typename myType>
  inline int get_index_of_value(const Vector<myType>& vec, 
                                const myType val,
@@ -2982,14 +2995,15 @@ class BlockSelector
     return Preconditioner_matrix_distribution_pt;
   }
 
+
+
   /// \short Precomputed (and possibly modified) blocks.
   MapMatrix<unsigned,CRDoubleMatrix*> Replacement_dof_block_pt;
   
   /// \short The distribution for precomputed blocks.
   Vector<LinearAlgebraDistribution*> Block_distribution_pt;
 
-  // RAYRAY comment
-  std::map<Vector<unsigned>,LinearAlgebraDistribution*> Auxiliary_distribution_pt;
+
 
   /// \short Mapping for blocks passed down from the parent preconditioner.
   Vector<Vector<unsigned> > Block_to_dof_map_coarse;
@@ -3078,6 +3092,13 @@ class BlockSelector
   unsigned Internal_ndof_types;
  
  private:
+
+  /// \short Stores any block-level distributions / concatenation of 
+  /// block-level distributions required. The first in the pair 
+  /// (Vector<unsigned>) represents the block numbers of the distributions
+  /// concatenated to get the second in the pair (LinearAlgebraDistribution*).
+  std::map<Vector<unsigned>,LinearAlgebraDistribution*> 
+    Auxiliary_block_distribution_pt;
 
   /// \short Number of DOFs (# of rows or columns in the matrix) in this
   /// preconditioner. Note that this information is maintained if used as a

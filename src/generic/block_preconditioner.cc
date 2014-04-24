@@ -1948,7 +1948,7 @@ namespace oomph
   LinearAlgebraDistributionHelpers::concatenate(Block_distribution_pt,
                                                 *Preconditioner_matrix_distribution_pt);
 
-  // Clear all distributions in Auxiliary_distribution_pt, except for the
+  // Clear all distributions in Auxiliary_block_distribution_pt, except for the
   // one which corresponds to the preconditioner matrix distribution.
   // This is already deleted by clear_block_preconditioner_base(...)
 
@@ -1961,33 +1961,32 @@ namespace oomph
       preconditioner_matrix_key[i] = i;
     }
 
-    // Now iterate through Auxiliary_distribution_pt and delete everything 
+    // Now iterate through Auxiliary_block_distribution_pt and delete everything 
     // except for the value which corresponds to preconditioner_matrix_key.
     std::map<Vector<unsigned>, LinearAlgebraDistribution*>::iterator iter
-      = Auxiliary_distribution_pt.begin();
-    while(iter != Auxiliary_distribution_pt.end())
+      = Auxiliary_block_distribution_pt.begin();
+    while(iter != Auxiliary_block_distribution_pt.end())
     {
       if(iter->first != preconditioner_matrix_key)
       {
         delete iter->second;
         iter++;
-        //Auxiliary_distribution_pt.erase(iter++);
+        //Auxiliary_block_distribution_pt.erase(iter++);
       }
       else
       {
         ++iter;
-        //Auxiliary_distribution_pt.erase(iter++);
+        //Auxiliary_block_distribution_pt.erase(iter++);
       }
     }
 
     // Clear it just to be safe!
-    Auxiliary_distribution_pt.clear();
+    Auxiliary_block_distribution_pt.clear();
 
     // Insert the preconditioner matrix distribution.
-    Auxiliary_distribution_pt.insert(
-        std::make_pair(preconditioner_matrix_key,
-                       Preconditioner_matrix_distribution_pt));
-  } // End of Auxiliary_distribution_pt encapsulation.
+    insert_auxiliary_block_distribution(preconditioner_matrix_key,
+                                        Preconditioner_matrix_distribution_pt);
+  } // End of Auxiliary_block_distribution_pt encapsulation.
 
   // clearing up after comm to assemble sparse lookup schemes
 #ifdef OOMPH_HAS_MPI
@@ -2677,10 +2676,10 @@ namespace oomph
  /// Takes the naturally ordered vector and extracts the blocks 
  /// indicated by the block number (the values) in the Vector 
  /// block_vec_number all at once, then concatenates them without 
- /// communication. Here, the values in block_vec_numbers is the block number
+ /// communication. Here, the values in block_vec_number is the block number
  /// in the current preconditioner.
  /// This is a non-const function because distributions may be created
- /// and stored in Auxiliary_distribution_pt for future use.
+ /// and stored in Auxiliary_block_distribution_pt for future use.
  //============================================================================
  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
    get_concatenated_block_vector(const Vector<unsigned>& block_vec_number,
@@ -2809,9 +2808,9 @@ namespace oomph
 
      // Attempt to get an iterator pointing to the pair with the value
      // block_vec_number.
-     iter = Auxiliary_distribution_pt.find(block_vec_number);
+     iter = Auxiliary_block_distribution_pt.find(block_vec_number);
 
-     if(iter != Auxiliary_distribution_pt.end())
+     if(iter != Auxiliary_block_distribution_pt.end())
        // If it exists, build w with the distribution pointed to 
        // by pair::second.
      {
@@ -2819,7 +2818,7 @@ namespace oomph
      }
      else
        // Else, we need to create the distribution and store it in
-       // Auxiliary_distribution_pt.
+       // Auxiliary_block_distribution_pt.
      {
        Vector<LinearAlgebraDistribution*> tmp_vec_dist_pt(n_block,0);
        for (unsigned b = 0; b < n_block; b++) 
@@ -2832,9 +2831,9 @@ namespace oomph
        LinearAlgebraDistribution* tmp_dist_pt = new LinearAlgebraDistribution;
        LinearAlgebraDistributionHelpers::concatenate(tmp_vec_dist_pt,
            *tmp_dist_pt);
+
        // Store the pair of Vector<unsigned> and LinearAlgebraDistribution*
-       Auxiliary_distribution_pt.insert(
-           std::make_pair(block_vec_number,tmp_dist_pt));
+       insert_auxiliary_block_distribution(block_vec_number,tmp_dist_pt);
 
        // Build w.
        w.build(tmp_dist_pt);
@@ -2846,147 +2845,179 @@ namespace oomph
 
    } // get_concatenated_block_vector(...)
 
-
-
- //////////////////////////////////////////////////////////////////////////////
- //////////////////////////////////////////////////////////////////////////////
- //////////////////////////////////////////////////////////////////////////////
- //////////////////////////////////////////////////////////////////////////////
- //////////////////////////////////////////////////////////////////////////////
- //////////////////////////////////////////////////////////////////////////////
+ //============================================================================
+ /// \short Takes concatenated block ordered vector, b, and copies its 
+ // entries to the appropriate entries in the naturally ordered vector, v.
+ // Here the values in block_vec_number indicates which blocks the vector
+ // b is a concatenation of. The block number are those in the current
+ // preconditioner. If the preconditioner is a subsidiary block
+ // preconditioner the other entries in v that are not associated with it 
+ // are left alone.
+ //============================================================================
  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
- return_concatenated_block_vector(const Vector<unsigned> & block_vec_number,
-                      const DoubleVector& w, DoubleVector& v) const
- {
+   return_concatenated_block_vector(const Vector<unsigned> & block_vec_number,
+       const DoubleVector& w, DoubleVector& v) const
+   {
 #ifdef PARANOID
-  if (!v.built())
-   {
-    std::ostringstream err_msg;
-    err_msg << "The distribution of the global vector v must be setup.";
-    throw OomphLibError(err_msg.str(),
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
-   }
-  if (*(v.distribution_pt()) != *(this->master_distribution_pt()))
-   {
-    std::ostringstream err_msg;
-    err_msg << "The distribution of the global vector v must match the "
-            << " specified master_distribution_pt(). \n"
-            << "i.e. Distribution_pt in the master preconditioner";
-    throw OomphLibError(err_msg.str(),
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
-   }
 
-  const unsigned para_block_vec_number_size = block_vec_number.size();
-  const unsigned para_n_block = nblock_types();
-  if(para_block_vec_number_size > para_n_block)
-  {
-    std::ostringstream err_msg;
-    err_msg << "Trying to return " << para_block_vec_number_size 
-            << " block vectors.\n"
-            << "But there are only " << para_n_block << " block types.\n";
-    throw OomphLibError(err_msg.str(),
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
-  }
+     // Check if v is built.
+     if (!v.built())
+     {
+       std::ostringstream err_msg;
+       err_msg << "The distribution of the global vector v must be setup.";
+       throw OomphLibError(err_msg.str(),
+           OOMPH_CURRENT_FUNCTION,
+           OOMPH_EXCEPTION_LOCATION);
+     }
 
-  for (unsigned b = 0; b < para_block_vec_number_size; b++) 
-  {
-    const unsigned para_required_block = block_vec_number[b];
-    if(para_required_block > para_n_block)
-    {
-      std::ostringstream err_msg;
-      err_msg << "block_vec_number[" << b << "] is " << para_required_block
-              << ".\n"
-              << "But there are only " << para_n_block << " block types.\n";
-      throw OomphLibError(err_msg.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
+     // v must have the same distribution as the upper-most master block
+     // preconditioner, since the upper-most master block preconditioner 
+     // should have the same distribution as the matrix pointed to 
+     // by matrix_pt().
+     if (*(v.distribution_pt()) != *(this->master_distribution_pt()))
+     {
+       std::ostringstream err_msg;
+       err_msg << "The distribution of the global vector v must match the "
+         << " specified master_distribution_pt(). \n"
+         << "i.e. Distribution_pt in the master preconditioner";
+       throw OomphLibError(err_msg.str(),
+           OOMPH_CURRENT_FUNCTION,
+           OOMPH_EXCEPTION_LOCATION);
+     }
 
-    }
-  }
+     // Check to see if there are more blocks defined in the block_vec_number 
+     // vector than the number of block types. This is not allowed.
+     const unsigned para_block_vec_number_size = block_vec_number.size();
+     const unsigned para_n_block = nblock_types();
+     if(para_block_vec_number_size > para_n_block)
+     {
+       std::ostringstream err_msg;
+       err_msg << "Trying to return " << para_block_vec_number_size 
+         << " block vectors.\n"
+         << "But there are only " << para_n_block << " block types.\n";
+       throw OomphLibError(err_msg.str(),
+           OOMPH_CURRENT_FUNCTION,
+           OOMPH_EXCEPTION_LOCATION);
+     }
 
-  std::set<unsigned> para_set;
-  for (unsigned b = 0; b < para_block_vec_number_size; b++) 
-  {
-    std::pair<std::set<unsigned>::iterator,bool> para_set_ret;
-    para_set_ret = para_set.insert(block_vec_number[b]);
+     // Check if any block numbers defined in block_vec_number is equal to or 
+     // greater than the number of block types. 
+     // E.g. if there are 5 block types, we can only have block numbers:
+     //  0, 1, 2, 3 and 4.
+     for (unsigned b = 0; b < para_block_vec_number_size; b++) 
+     {
+       const unsigned para_required_block = block_vec_number[b];
+       if(para_required_block > para_n_block)
+       {
+         std::ostringstream err_msg;
+         err_msg << "block_vec_number[" << b << "] is " << para_required_block
+           << ".\n"
+           << "But there are only " << para_n_block << " block types.\n";
+         throw OomphLibError(err_msg.str(),
+             OOMPH_CURRENT_FUNCTION,
+             OOMPH_EXCEPTION_LOCATION);
 
-    if(!para_set_ret.second)
-    {
-      std::ostringstream err_msg;
-      err_msg << "Error: the block number "
-        << block_vec_number[b]
-        << " appears twice.\n";
-      throw OomphLibError(err_msg.str(),
-          OOMPH_CURRENT_FUNCTION,
-          OOMPH_EXCEPTION_LOCATION);
-    }
-  }
+       }
+     }
 
-  if (!w.built())
-   {
-    std::ostringstream err_msg;
-    err_msg << "The distribution of the block vector w must be setup.";
-    throw OomphLibError(err_msg.str(),
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
-   }
+     // Check that no block number is inserted twice.
+     std::set<unsigned> para_set;
+     for (unsigned b = 0; b < para_block_vec_number_size; b++) 
+     {
+       std::pair<std::set<unsigned>::iterator,bool> para_set_ret;
+       para_set_ret = para_set.insert(block_vec_number[b]);
 
+       if(!para_set_ret.second)
+       {
+         std::ostringstream err_msg;
+         err_msg << "Error: the block number "
+           << block_vec_number[b]
+           << " appears twice.\n";
+         throw OomphLibError(err_msg.str(),
+             OOMPH_CURRENT_FUNCTION,
+             OOMPH_EXCEPTION_LOCATION);
+       }
+     }
 
-  Vector<LinearAlgebraDistribution*> para_vec_dist_pt(
-      para_block_vec_number_size,0);
+     // Check that w is built.
+     if (!w.built())
+     {
+       std::ostringstream err_msg;
+       err_msg << "The distribution of the block vector w must be setup.";
+       throw OomphLibError(err_msg.str(),
+           OOMPH_CURRENT_FUNCTION,
+           OOMPH_EXCEPTION_LOCATION);
+     }
 
-  for (unsigned b = 0; b < para_block_vec_number_size; b++) 
-  {
-    para_vec_dist_pt[b] = Block_distribution_pt[block_vec_number[b]];
-  }
+     // Check that the distributions defined by block_vec_number is correct for
+     // the distribution from w.
+     // Recall that w is the concatenation of the block vectors defined by 
+     // the values in block_vec_number. We check that this is the case.
+     Vector<LinearAlgebraDistribution*> para_vec_dist_pt(
+         para_block_vec_number_size,0);
 
-  LinearAlgebraDistribution para_tmp_dist;
+     for (unsigned b = 0; b < para_block_vec_number_size; b++) 
+     {
+       para_vec_dist_pt[b] = Block_distribution_pt[block_vec_number[b]];
+     }
 
-  LinearAlgebraDistributionHelpers::concatenate(para_vec_dist_pt,
-                                                para_tmp_dist);
+     LinearAlgebraDistribution para_tmp_dist;
 
-  if(*w.distribution_pt() != para_tmp_dist)
-  {
-    std::ostringstream err_msg;
-    err_msg << "The distribution of the block vector w does not match \n"
-            << "the concatenation of the block distributions defined in \n"
-            << "block_vec_number.\n";
-    throw OomphLibError(err_msg.str(),
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
-  }
+     LinearAlgebraDistributionHelpers::concatenate(para_vec_dist_pt,
+         para_tmp_dist);
+
+     if(*w.distribution_pt() != para_tmp_dist)
+     {
+       std::ostringstream err_msg;
+       err_msg << "The distribution of the block vector w does not match \n"
+         << "the concatenation of the block distributions defined in \n"
+         << "block_vec_number.\n";
+       throw OomphLibError(err_msg.str(),
+           OOMPH_CURRENT_FUNCTION,
+           OOMPH_EXCEPTION_LOCATION);
+     }
 #endif
 
-  const unsigned n_block = block_vec_number.size();
+     // Number of blocks to return.
+     const unsigned n_block = block_vec_number.size();
 
-  Vector<unsigned> most_fine_grain_dof;
-  for (unsigned b = 0; b < n_block; b++) 
-  {
-    const unsigned mapped_b = block_vec_number[b];
-    most_fine_grain_dof.insert(
-        most_fine_grain_dof.end(),
-        Block_to_dof_map_fine[mapped_b].begin(),
-        Block_to_dof_map_fine[mapped_b].end());
-  }
+     // Each block is made of dof types. We get the most fine grain dof types.
+     // Most fine grain in the sense that these are the dof types that belongs
+     // in this block before any coarsening of dof types has taken place.
+     // The ordering of the dof types matters, this is handled properly when
+     // creating the Block_to_dof_map_fine vector and must be respected here.
+     // I.e. we cannot arbitrarily insert dof types (even if they are correct)
+     // in the vector most_fine_grain_dof.
+     Vector<unsigned> most_fine_grain_dof;
+     for (unsigned b = 0; b < n_block; b++) 
+     {
+       const unsigned mapped_b = block_vec_number[b];
+       most_fine_grain_dof.insert(
+           most_fine_grain_dof.end(),
+           Block_to_dof_map_fine[mapped_b].begin(),
+           Block_to_dof_map_fine[mapped_b].end());
+     }
 
-  const unsigned ndof = most_fine_grain_dof.size();
+     // The number of most fine grain dof types associated with the blocks
+     // defined by block_vec_number.
+     const unsigned ndof = most_fine_grain_dof.size();
 
-  Vector<DoubleVector> dof_vector(ndof);
-  for (unsigned d = 0; d < ndof; d++) 
-  {
-    dof_vector[d].build(internal_block_distribution_pt(
-                        most_fine_grain_dof[d]));
-  }
+     // Build each dof level vector with the correct distribution.
+     Vector<DoubleVector> dof_vector(ndof);
+     for (unsigned d = 0; d < ndof; d++) 
+     {
+       dof_vector[d].build(internal_block_distribution_pt(
+             most_fine_grain_dof[d]));
+     }
 
-  DoubleVectorHelpers::split_without_communication(w,dof_vector);
+     // Perform the splitting of w into the most fine grain dof level vectors.
+     DoubleVectorHelpers::split_without_communication(w,dof_vector);
 
-  return_block_vectors_with_original_matrix_ordering(most_fine_grain_dof,
-                                                     dof_vector,
-                                                     v);
- }
+     // Return all the dof level vectors in one go.
+     return_block_vectors_with_original_matrix_ordering(most_fine_grain_dof,
+         dof_vector,
+         v);
+   } // return_concatenated_block_vector(...)
 
  //============================================================================
  /// \short Takes the naturally ordered vector and rearranges it into a
