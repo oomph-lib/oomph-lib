@@ -2579,10 +2579,56 @@ class BlockSelector
   /// which are available for such instances!
   void setup_matrix_vector_product(MatrixVectorProduct* matvec_prod_pt,
                                    CRDoubleMatrix* block_pt,
-                                   unsigned block_col_index)
+                                   const Vector<unsigned>& block_col_indices)
   {
+    const unsigned nblock = block_col_indices.size();
+
+    if(nblock == 1)
+    {
+      const unsigned col_index = block_col_indices[0];
       matvec_prod_pt->setup(block_pt,
-                            Block_distribution_pt[block_col_index]);
+                            Block_distribution_pt[col_index]);
+    }
+    else
+    {
+  std::map<Vector<unsigned>,
+           LinearAlgebraDistribution* >::const_iterator iter;
+
+  iter = Auxiliary_distribution_pt.find(block_col_indices);
+    if(iter != Auxiliary_distribution_pt.end())
+    {
+      matvec_prod_pt->setup(block_pt,iter->second);
+    }
+    else
+    {
+      Vector<LinearAlgebraDistribution*> tmp_vec_dist_pt(nblock,0);
+      for (unsigned b = 0; b < nblock; b++) 
+      {
+        tmp_vec_dist_pt[b] = Block_distribution_pt[block_col_indices[b]];
+      }
+
+      LinearAlgebraDistribution* tmp_dist_pt = new LinearAlgebraDistribution;
+      LinearAlgebraDistributionHelpers::concatenate(tmp_vec_dist_pt,*tmp_dist_pt);
+
+      Auxiliary_distribution_pt.insert(
+          std::make_pair(block_col_indices,tmp_dist_pt));
+      matvec_prod_pt->setup(block_pt,tmp_dist_pt);
+    }
+
+
+    }
+  } // EOFunc setup_matrix_vector_product(...)
+
+  // RAYRAY comment
+  void setup_matrix_vector_product(MatrixVectorProduct* matvec_prod_pt,
+                                   CRDoubleMatrix* block_pt,
+                                   const unsigned& block_col_index)
+  {
+    Vector<unsigned> col_index_vector(1,block_col_index);
+    setup_matrix_vector_product(matvec_prod_pt,block_pt,col_index_vector);
+
+    //  matvec_prod_pt->setup(block_pt,
+    //                        Block_distribution_pt[block_col_index]);
   } // EOFunc setup_matrix_vector_product(...)
 
   void get_block_vectors_with_original_matrix_ordering(
@@ -2669,9 +2715,9 @@ class BlockSelector
   /// If the preconditioner is a subsidiary block preconditioner
   /// the other entries in v  that are not associated with it
   /// are left alone.
-  void return_block_vector_with_precomputed_block_ordering(const unsigned& n,
-                           const DoubleVector& b,
-                           DoubleVector& v) const;
+//  void return_block_vector_with_precomputed_block_ordering(const unsigned& n,
+//                           const DoubleVector& b,
+//                           DoubleVector& v) const;
 
   /// \short A helper function to return a block if no preconditioner blocks
   /// were precomputed.
@@ -2690,8 +2736,8 @@ class BlockSelector
   /// Here n is the block number in the current preconditioner. 
   /// NOTE: The ordering of the vector b is the same as the 
   /// ordering of the block matrix from get_precomputed_block(...).
-  void get_block_vector_with_precomputed_block_ordering(
-    const unsigned& n, const DoubleVector& v, DoubleVector& b) const;
+//  void get_block_vector_with_precomputed_block_ordering(
+//    const unsigned& n, const DoubleVector& v, DoubleVector& b) const;
 
   /// \short A helper function, takes the naturally ordered vector, v, 
   /// and extracts the n-th block vector, b. 
@@ -2709,8 +2755,8 @@ class BlockSelector
   /// sub-vectors associated with the blocks of the subsidiary preconditioner
   /// will be included. Hence the length of v is master_nrow() whereas the
   /// total length of the s vectors is Nrow.
-  void get_block_vectors_with_precomputed_block_ordering(
-      const DoubleVector& v, Vector<DoubleVector >& s) const;
+//  void get_block_vectors_with_precomputed_block_ordering(
+//      const DoubleVector& v, Vector<DoubleVector >& s) const;
 
   /// \short A helper function, takes the naturally ordered vector and 
   /// rearranges it into a vector of sub vectors corresponding to the blocks, 
@@ -2730,8 +2776,8 @@ class BlockSelector
   /// and they have the precomputed block ordering. If this is a subsidiary 
   /// block preconditioner only those entries in v that are associated with 
   /// its blocks are affected.
-  void return_block_vectors_with_precomputed_block_ordering(
-      const Vector<DoubleVector >& s, DoubleVector& v) const;
+//  void return_block_vectors_with_precomputed_block_ordering(
+//      const Vector<DoubleVector >& s, DoubleVector& v) const;
 
   /// \short A helper function, takes the vector of block vectors, s, and 
   /// copies its entries into the naturally ordered vector, v. 

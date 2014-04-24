@@ -3380,50 +3380,50 @@ namespace oomph
   get_block_vectors_with_original_matrix_ordering(required_vector,v,s);
  }
 
- //============================================================================
- /// \short A helper function, takes the naturally ordered vector and 
- /// rearranges it into a vector of sub vectors corresponding to the 
- /// PRECOMPUTED blocks, so s[b][i] contains the i-th entry in the vector 
- /// associated with the precomputed block b.
- /// Note: If the preconditioner is a subsidiary preconditioner then only the
- /// sub-vectors associated with the blocks of the subsidiary preconditioner
- /// will be included. Hence the length of v is master_nrow() whereas the
- /// total length of the s vectors is Nrow. 
- //============================================================================
- template<typename MATRIX> void BlockPreconditioner<MATRIX>::
- get_block_vectors_with_precomputed_block_ordering(
-                                                   const DoubleVector& v, Vector<DoubleVector >& s) const
- {
-#ifdef PARANOID
-  if (!v.built())
-   {
-    std::ostringstream error_message;
-    error_message << "The distribution of the global vector v must be setup.";
-    throw OomphLibError(error_message.str(),
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
-   }
-  if (*(v.distribution_pt()) != *(this->master_distribution_pt()))
-   {
-    std::ostringstream error_message;
-    error_message << "The distribution of the global vector v must match the "
-                  << " specified master_distribution_pt(). \n"
-                  << "i.e. Distribution_pt in the master preconditioner";
-    throw OomphLibError(error_message.str(),
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
-   }
-#endif
-
-  const unsigned nprecomputed_blocks = Block_to_dof_map_coarse.size();
-  s.resize(nprecomputed_blocks);
-  
-  for (unsigned b_i = 0; b_i < nprecomputed_blocks; b_i++) 
-   {
-    get_block_vector_with_precomputed_block_ordering(b_i,v,s[b_i]);
-   }
-
- }
+// //============================================================================
+// /// \short A helper function, takes the naturally ordered vector and 
+// /// rearranges it into a vector of sub vectors corresponding to the 
+// /// PRECOMPUTED blocks, so s[b][i] contains the i-th entry in the vector 
+// /// associated with the precomputed block b.
+// /// Note: If the preconditioner is a subsidiary preconditioner then only the
+// /// sub-vectors associated with the blocks of the subsidiary preconditioner
+// /// will be included. Hence the length of v is master_nrow() whereas the
+// /// total length of the s vectors is Nrow. 
+// //============================================================================
+// template<typename MATRIX> void BlockPreconditioner<MATRIX>::
+// get_block_vectors_with_precomputed_block_ordering(
+//                                                   const DoubleVector& v, Vector<DoubleVector >& s) const
+// {
+//#ifdef PARANOID
+//  if (!v.built())
+//   {
+//    std::ostringstream error_message;
+//    error_message << "The distribution of the global vector v must be setup.";
+//    throw OomphLibError(error_message.str(),
+//                        OOMPH_CURRENT_FUNCTION,
+//                        OOMPH_EXCEPTION_LOCATION);
+//   }
+//  if (*(v.distribution_pt()) != *(this->master_distribution_pt()))
+//   {
+//    std::ostringstream error_message;
+//    error_message << "The distribution of the global vector v must match the "
+//                  << " specified master_distribution_pt(). \n"
+//                  << "i.e. Distribution_pt in the master preconditioner";
+//    throw OomphLibError(error_message.str(),
+//                        OOMPH_CURRENT_FUNCTION,
+//                        OOMPH_EXCEPTION_LOCATION);
+//   }
+//#endif
+//
+//  const unsigned nprecomputed_blocks = Block_to_dof_map_coarse.size();
+//  s.resize(nprecomputed_blocks);
+//  
+//  for (unsigned b_i = 0; b_i < nprecomputed_blocks; b_i++) 
+//   {
+//    get_block_vector_with_precomputed_block_ordering(b_i,v,s[b_i]);
+//   }
+//
+// }
 
  //============================================================================
  /// \short Takes the vector of block vectors, s, and copies its entries into
@@ -3916,231 +3916,231 @@ namespace oomph
     required_vector[b] = b;
   }
  }
- //============================================================================
- /// \short A helper function, takes the vector of block vectors, s, 
- /// and copies its entries into the naturally ordered vector, v. 
- /// This function assume that there are nblocks_precomputed block vectors 
- /// and they have the precomputed block ordering. If this is a subsidiary 
- /// block preconditioner only those entries in v that are associated with 
- /// its blocks are affected.
- //============================================================================
- template<typename MATRIX> void BlockPreconditioner<MATRIX>::
- return_block_vectors_with_precomputed_block_ordering(
-   const Vector<DoubleVector >& s, DoubleVector& v) const
- {
-  // the number of blocks
-  unsigned nprecomputedblock = Block_to_dof_map_coarse.size();
-
-#ifdef PARANOID
-
-  if (!v.built())
-   {
-    std::ostringstream error_message;
-    error_message << "The distribution of the global vector v must be setup.";
-    throw OomphLibError(error_message.str(),
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
-   }
-  
-  if (*(v.distribution_pt()) != *(this->master_distribution_pt()))
-   {
-    std::ostringstream error_message;
-    error_message << "The distribution of the global vector v must match the "
-                  << " specified master_distribution_pt(). \n"
-                  << "i.e. Distribution_pt in the master preconditioner";
-    throw OomphLibError(error_message.str(),
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
-   }
-  
-  if(s.size() > nprecomputedblock)
-   {
-    std::ostringstream error_message;
-    error_message << "You have supplied " << s.size()
-                  << " block vectors. I require " << nprecomputedblock
-                  << " block vectors.";
-    throw OomphLibError(error_message.str(),
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
-   }
-
-  for (unsigned b = 0; b < nprecomputedblock; b++)
-   {
-    if (!s[b].built())
-     {
-      std::ostringstream error_message;
-      error_message << "The distribution of the block vector " << b
-                    << " must be setup.";
-      throw OomphLibError(error_message.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-     }
-    
-    if (*(s[b].distribution_pt()) != *(Block_distribution_pt[b]))
-     {
-      std::ostringstream error_message;
-      error_message << "The distribution of the block vector " << b
-                    << "must match the"
-                    << " specified distribution at "
-                    << "Block_distribution_pt["
-                    << b << "]";
-      throw OomphLibError(error_message.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-     }
-   }
-#endif
-
-  for (unsigned b_i = 0; b_i < nprecomputedblock; b_i++) 
-   {
-    return_block_vector_with_precomputed_block_ordering(b_i,s[b_i],v);
-   }
-
- }
-
- //============================================================================
- /// \short A helper function, takes the naturally ordered vector, v, 
- /// and extracts the n-th block vector, b. 
- /// Here n is the block number in the current preconditioner. 
- /// NOTE: The ordering of the vector b is the same as the 
- /// ordering of the block matrix from get_precomputed_block(...).
- //============================================================================
- template<typename MATRIX> void BlockPreconditioner<MATRIX>::
- get_block_vector_with_precomputed_block_ordering(const unsigned& b, 
-                                                  const DoubleVector& v, 
-                                                  DoubleVector& w)
-  const
- {
-#ifdef PARANOID
-  // the number of blocks
-  unsigned n_blocks = Block_to_dof_map_coarse.size();
-
-  // paranoid check that block i is in this block preconditioner
-  if (b >= n_blocks)
-   {
-    std::ostringstream error_message;
-    error_message << "Requested block  vector " << b
-                  << ", however this preconditioner has merged blocks "
-                  << "= " << n_blocks << std::endl;
-    throw OomphLibError(error_message.str(),
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
-   }
-  if (!v.built())
-   {
-    std::ostringstream error_message;
-    error_message << "The distribution of the global vector v must be setup.";
-    throw OomphLibError(error_message.str(),
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
-   }
-  if (*(v.distribution_pt()) != *(this->master_distribution_pt()))
-   {
-    std::ostringstream error_message;
-    error_message << "The distribution of the global vector v must match the "
-                  << " specified master_distribution_pt(). \n"
-                  << "i.e. Distribution_pt in the master preconditioner";
-    throw OomphLibError(error_message.str(),
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
-   }
-#endif
-
-  // Recall that, the relationship between the external blocks and the external
-  // dof types, as seen by the preconditioner writer is stored in the mapping
-  // Block_to_dof_map_coarse.
-  //
-  // However, each dof type could have been coarsened! The relationship
-  // between the dof types of this preconditioner and the parent preconditioner
-  // is stored in the mapping Doftype_coarsen_map_coarse. The dof numbers in
-  // this map is relative to this preconditioner.
-  //
-  // Finally, the relationship between the dof types of this preconditioner
-  // and the most fine grain dof types is stored in the mapping
-  // Doftype_coarsen_map_fine. Again, the dof numbers in this map is relative
-  // to this preconditioner.
-  //
-  // Furthermore, we note that concatenation of vectors without communication
-  //  is associative, but not commutative. I.e.
-  // (V1+V2)+V3 = V1 + (V2 + V3), where + is concatenation without 
-  // communication.
-  //
-  // So all we need is the vectors listed in the correct order.
-  //
-  // We need only Block_to_dof_map_coarse to tell us which external dof types
-  // are in this block, then Doftype_coarsen_map_fine to tell us which most
-  // fine grain dofs to concatenate!
-  //
-  // All the mapping vectors are constructed to respect the ordering of
-  // the dof types.
-
-  // Loop through the external dof types and get the most fine grain dof types
-  Vector<unsigned> tmp_fine_grain_dof = Block_to_dof_map_fine[b];
-
-  // How many vectors do we need to concatenate?
-  const unsigned n_dof_vec = tmp_fine_grain_dof.size();
-  if(n_dof_vec == 1)
-  {
-    this->get_block_vector_with_original_matrix_ordering(tmp_fine_grain_dof[0],v,w);
-  }
-  else
-  {
-    Vector<DoubleVector> tmp_block_vector(n_dof_vec);
-    for (unsigned vec_i = 0; vec_i < n_dof_vec; vec_i++) 
-    {
-      this->get_block_vector_with_original_matrix_ordering(tmp_fine_grain_dof[vec_i], v, tmp_block_vector[vec_i]);
-    }
-
-    // Build w with the correct distribution.
-    w.build(Block_distribution_pt[b],0);
-  
-    // Concatenate the vectors
-    DoubleVectorHelpers::concatenate_without_communication
-     (tmp_block_vector,w);
-  
-    // No longer need the sub vectors. Calling clear on the Vector will invoke
-    // the destructors in the DoubleVectors.
-    tmp_block_vector.clear();
-  }
-
-
-//  // How many block vectors do we need to concatenate?
-//  unsigned nblocks_to_cat = Block_to_dof_map_coarse[b].size();
-//  if(nblocks_to_cat == 1)
-//   // If there is only one block vector, we simply extract it.
+// //============================================================================
+// /// \short A helper function, takes the vector of block vectors, s, 
+// /// and copies its entries into the naturally ordered vector, v. 
+// /// This function assume that there are nblocks_precomputed block vectors 
+// /// and they have the precomputed block ordering. If this is a subsidiary 
+// /// block preconditioner only those entries in v that are associated with 
+// /// its blocks are affected.
+// //============================================================================
+// template<typename MATRIX> void BlockPreconditioner<MATRIX>::
+// return_block_vectors_with_precomputed_block_ordering(
+//   const Vector<DoubleVector >& s, DoubleVector& v) const
+// {
+//  // the number of blocks
+//  unsigned nprecomputedblock = Block_to_dof_map_coarse.size();
+//
+//#ifdef PARANOID
+//
+//  if (!v.built())
 //   {
-//    this->get_block_vector_with_original_matrix_ordering(
-//                                                         Block_to_dof_map_coarse[b][0],v,w);
+//    std::ostringstream error_message;
+//    error_message << "The distribution of the global vector v must be setup.";
+//    throw OomphLibError(error_message.str(),
+//                        OOMPH_CURRENT_FUNCTION,
+//                        OOMPH_EXCEPTION_LOCATION);
 //   }
-//  else
-//   // We need to concatenate multiple block vectors.
-//   {
-//    // Get the DoubleVectors to be concatenated.
-//    Vector<DoubleVector> tmp_block_vector(nblocks_to_cat);
-//    for (unsigned b_i = 0; b_i < nblocks_to_cat; b_i++) 
-//     {
-//      this->get_block_vector_with_original_matrix_ordering(
-//                                                           Block_to_dof_map_coarse[b][b_i], v,tmp_block_vector[b_i]);
-//     }
-//     
-//    Vector<DoubleVector*> tmp_block_vector_pt(nblocks_to_cat,0);
-//    for (unsigned b_i = 0; b_i < nblocks_to_cat; b_i++) 
-//     {
-//      tmp_block_vector_pt[b_i] = &tmp_block_vector[b_i];
-//     }
 //  
+//  if (*(v.distribution_pt()) != *(this->master_distribution_pt()))
+//   {
+//    std::ostringstream error_message;
+//    error_message << "The distribution of the global vector v must match the "
+//                  << " specified master_distribution_pt(). \n"
+//                  << "i.e. Distribution_pt in the master preconditioner";
+//    throw OomphLibError(error_message.str(),
+//                        OOMPH_CURRENT_FUNCTION,
+//                        OOMPH_EXCEPTION_LOCATION);
+//   }
+//  
+//  if(s.size() > nprecomputedblock)
+//   {
+//    std::ostringstream error_message;
+//    error_message << "You have supplied " << s.size()
+//                  << " block vectors. I require " << nprecomputedblock
+//                  << " block vectors.";
+//    throw OomphLibError(error_message.str(),
+//                        OOMPH_CURRENT_FUNCTION,
+//                        OOMPH_EXCEPTION_LOCATION);
+//   }
+//
+//  for (unsigned b = 0; b < nprecomputedblock; b++)
+//   {
+//    if (!s[b].built())
+//     {
+//      std::ostringstream error_message;
+//      error_message << "The distribution of the block vector " << b
+//                    << " must be setup.";
+//      throw OomphLibError(error_message.str(),
+//                          OOMPH_CURRENT_FUNCTION,
+//                          OOMPH_EXCEPTION_LOCATION);
+//     }
+//    
+//    if (*(s[b].distribution_pt()) != *(Block_distribution_pt[b]))
+//     {
+//      std::ostringstream error_message;
+//      error_message << "The distribution of the block vector " << b
+//                    << "must match the"
+//                    << " specified distribution at "
+//                    << "Block_distribution_pt["
+//                    << b << "]";
+//      throw OomphLibError(error_message.str(),
+//                          OOMPH_CURRENT_FUNCTION,
+//                          OOMPH_EXCEPTION_LOCATION);
+//     }
+//   }
+//#endif
+//
+//  for (unsigned b_i = 0; b_i < nprecomputedblock; b_i++) 
+//   {
+//    return_block_vector_with_precomputed_block_ordering(b_i,s[b_i],v);
+//   }
+//
+// }
+
+// //============================================================================
+// /// \short A helper function, takes the naturally ordered vector, v, 
+// /// and extracts the n-th block vector, b. 
+// /// Here n is the block number in the current preconditioner. 
+// /// NOTE: The ordering of the vector b is the same as the 
+// /// ordering of the block matrix from get_precomputed_block(...).
+// //============================================================================
+// template<typename MATRIX> void BlockPreconditioner<MATRIX>::
+// get_block_vector_with_precomputed_block_ordering(const unsigned& b, 
+//                                                  const DoubleVector& v, 
+//                                                  DoubleVector& w)
+//  const
+// {
+//#ifdef PARANOID
+//  // the number of blocks
+//  unsigned n_blocks = Block_to_dof_map_coarse.size();
+//
+//  // paranoid check that block i is in this block preconditioner
+//  if (b >= n_blocks)
+//   {
+//    std::ostringstream error_message;
+//    error_message << "Requested block  vector " << b
+//                  << ", however this preconditioner has merged blocks "
+//                  << "= " << n_blocks << std::endl;
+//    throw OomphLibError(error_message.str(),
+//                        OOMPH_CURRENT_FUNCTION,
+//                        OOMPH_EXCEPTION_LOCATION);
+//   }
+//  if (!v.built())
+//   {
+//    std::ostringstream error_message;
+//    error_message << "The distribution of the global vector v must be setup.";
+//    throw OomphLibError(error_message.str(),
+//                        OOMPH_CURRENT_FUNCTION,
+//                        OOMPH_EXCEPTION_LOCATION);
+//   }
+//  if (*(v.distribution_pt()) != *(this->master_distribution_pt()))
+//   {
+//    std::ostringstream error_message;
+//    error_message << "The distribution of the global vector v must match the "
+//                  << " specified master_distribution_pt(). \n"
+//                  << "i.e. Distribution_pt in the master preconditioner";
+//    throw OomphLibError(error_message.str(),
+//                        OOMPH_CURRENT_FUNCTION,
+//                        OOMPH_EXCEPTION_LOCATION);
+//   }
+//#endif
+//
+//  // Recall that, the relationship between the external blocks and the external
+//  // dof types, as seen by the preconditioner writer is stored in the mapping
+//  // Block_to_dof_map_coarse.
+//  //
+//  // However, each dof type could have been coarsened! The relationship
+//  // between the dof types of this preconditioner and the parent preconditioner
+//  // is stored in the mapping Doftype_coarsen_map_coarse. The dof numbers in
+//  // this map is relative to this preconditioner.
+//  //
+//  // Finally, the relationship between the dof types of this preconditioner
+//  // and the most fine grain dof types is stored in the mapping
+//  // Doftype_coarsen_map_fine. Again, the dof numbers in this map is relative
+//  // to this preconditioner.
+//  //
+//  // Furthermore, we note that concatenation of vectors without communication
+//  //  is associative, but not commutative. I.e.
+//  // (V1+V2)+V3 = V1 + (V2 + V3), where + is concatenation without 
+//  // communication.
+//  //
+//  // So all we need is the vectors listed in the correct order.
+//  //
+//  // We need only Block_to_dof_map_coarse to tell us which external dof types
+//  // are in this block, then Doftype_coarsen_map_fine to tell us which most
+//  // fine grain dofs to concatenate!
+//  //
+//  // All the mapping vectors are constructed to respect the ordering of
+//  // the dof types.
+//
+//  // Loop through the external dof types and get the most fine grain dof types
+//  Vector<unsigned> tmp_fine_grain_dof = Block_to_dof_map_fine[b];
+//
+//  // How many vectors do we need to concatenate?
+//  const unsigned n_dof_vec = tmp_fine_grain_dof.size();
+//  if(n_dof_vec == 1)
+//  {
+//    this->get_block_vector_with_original_matrix_ordering(tmp_fine_grain_dof[0],v,w);
+//  }
+//  else
+//  {
+//    Vector<DoubleVector> tmp_block_vector(n_dof_vec);
+//    for (unsigned vec_i = 0; vec_i < n_dof_vec; vec_i++) 
+//    {
+//      this->get_block_vector_with_original_matrix_ordering(tmp_fine_grain_dof[vec_i], v, tmp_block_vector[vec_i]);
+//    }
+//
 //    // Build w with the correct distribution.
 //    w.build(Block_distribution_pt[b],0);
 //  
 //    // Concatenate the vectors
 //    DoubleVectorHelpers::concatenate_without_communication
-//     (tmp_block_vector_pt,w);
+//     (tmp_block_vector,w);
 //  
 //    // No longer need the sub vectors. Calling clear on the Vector will invoke
 //    // the destructors in the DoubleVectors.
 //    tmp_block_vector.clear();
-//   }
- }
+//  }
+//
+//
+////  // How many block vectors do we need to concatenate?
+////  unsigned nblocks_to_cat = Block_to_dof_map_coarse[b].size();
+////  if(nblocks_to_cat == 1)
+////   // If there is only one block vector, we simply extract it.
+////   {
+////    this->get_block_vector_with_original_matrix_ordering(
+////                                                         Block_to_dof_map_coarse[b][0],v,w);
+////   }
+////  else
+////   // We need to concatenate multiple block vectors.
+////   {
+////    // Get the DoubleVectors to be concatenated.
+////    Vector<DoubleVector> tmp_block_vector(nblocks_to_cat);
+////    for (unsigned b_i = 0; b_i < nblocks_to_cat; b_i++) 
+////     {
+////      this->get_block_vector_with_original_matrix_ordering(
+////                                                           Block_to_dof_map_coarse[b][b_i], v,tmp_block_vector[b_i]);
+////     }
+////     
+////    Vector<DoubleVector*> tmp_block_vector_pt(nblocks_to_cat,0);
+////    for (unsigned b_i = 0; b_i < nblocks_to_cat; b_i++) 
+////     {
+////      tmp_block_vector_pt[b_i] = &tmp_block_vector[b_i];
+////     }
+////  
+////    // Build w with the correct distribution.
+////    w.build(Block_distribution_pt[b],0);
+////  
+////    // Concatenate the vectors
+////    DoubleVectorHelpers::concatenate_without_communication
+////     (tmp_block_vector_pt,w);
+////  
+////    // No longer need the sub vectors. Calling clear on the Vector will invoke
+////    // the destructors in the DoubleVectors.
+////    tmp_block_vector.clear();
+////   }
+// }
 
  //============================================================================
  /// \short A helper function, takes the naturally ordered vector, v, 
@@ -4418,149 +4418,149 @@ namespace oomph
   }
  }
 
- //============================================================================
- /// \short A helper function to return a block vector if the preconditioner
- /// blocks have been precomputed.
- /// Takes the n-th block ordered vector, b, and copies its entries
- /// to the appropriate entries in the naturally ordered vector, v.
- /// Here n is the block number in the current block preconditioner.
- /// If the preconditioner is a subsidiary block preconditioner
- /// the other entries in v  that are not associated with it
- /// are left alone.
- //============================================================================
- template<typename MATRIX> void BlockPreconditioner<MATRIX>::
- return_block_vector_with_precomputed_block_ordering(
-                                                     const unsigned& b, const DoubleVector& w, DoubleVector& v) const
- {
-#ifdef PARANOID
-  // the number of blocks
-  unsigned n_blocks = nblock_types();
-
-  // paranoid check that block i is in this block preconditioner
-  if (b >= n_blocks)
-   {
-    std::ostringstream error_message;
-    error_message << "Requested block  vector " << b
-                  << ", however this preconditioner has nblock_types() "
-                  << "= " << nblock_types() << std::endl;
-    throw OomphLibError(error_message.str(),
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
-   }
-  if (!v.built())
-   {
-    std::ostringstream error_message;
-    error_message << "The distribution of the global vector v must be setup.";
-    throw OomphLibError(error_message.str(),
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
-   }
-  if (*v.distribution_pt() != *this->master_distribution_pt())
-   {
-    std::ostringstream error_message;
-    error_message << "The distribution of the global vector v must match the "
-                  << " specified master_distribution_pt(). \n"
-                  << "i.e. Distribution_pt in the master preconditioner";
-    throw OomphLibError(error_message.str(),
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
-   }
-  if (!w.built())
-   {
-    std::ostringstream error_message;
-    error_message << "The distribution of the block vector w must be setup.";
-    throw OomphLibError(error_message.str(),
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
-   }
-
-#endif
-
-  const unsigned n_ext_dof = Block_to_dof_map_coarse[b].size();
-
-  Vector<unsigned> tmp_fine_grain_dof;
-  for (unsigned ext_dof_i = 0; ext_dof_i < n_ext_dof; ext_dof_i++) 
-  {
-    tmp_fine_grain_dof.insert(tmp_fine_grain_dof.end(),
-                               Doftype_coarsen_map_fine[Block_to_dof_map_coarse[b][ext_dof_i]].begin(),
-                               Doftype_coarsen_map_fine[Block_to_dof_map_coarse[b][ext_dof_i]].end());
-  }
-
-  // How many vectors do we need to split?
-  const unsigned n_dof_vec = tmp_fine_grain_dof.size();
-  if(n_dof_vec == 1)
-  {
-    this->return_block_vector_with_original_matrix_ordering(tmp_fine_grain_dof[0],w,v);
-  }
-  else
-  {
-    Vector<DoubleVector> tmp_block_vector(n_dof_vec);
-
-    // Fill in the corresponding distributions.
-    for (unsigned vec_i = 0; vec_i < n_dof_vec; vec_i++) 
-    {
-      tmp_block_vector[vec_i].build(this->internal_block_distribution_pt(tmp_fine_grain_dof[vec_i]));
-    }
-  
-    // Perform the splitting of w into tmp_block_vector.
-    DoubleVectorHelpers::split_without_communication(w,tmp_block_vector);
-  
-    // return to v
-    for (unsigned vec_i = 0; vec_i < n_dof_vec; vec_i++) 
-     {
-      this->return_block_vector_with_original_matrix_ordering(
-                                                              tmp_fine_grain_dof[vec_i], tmp_block_vector[vec_i],v);
-     }
-
-
-
-
-  }
-  
-
-  
-  
-//  // How many dof types does this block type represent?
-//  unsigned nblocks_to_split_into = Block_to_dof_map_coarse[b].size();
+// //============================================================================
+// /// \short A helper function to return a block vector if the preconditioner
+// /// blocks have been precomputed.
+// /// Takes the n-th block ordered vector, b, and copies its entries
+// /// to the appropriate entries in the naturally ordered vector, v.
+// /// Here n is the block number in the current block preconditioner.
+// /// If the preconditioner is a subsidiary block preconditioner
+// /// the other entries in v  that are not associated with it
+// /// are left alone.
+// //============================================================================
+// template<typename MATRIX> void BlockPreconditioner<MATRIX>::
+// return_block_vector_with_precomputed_block_ordering(
+//                                                     const unsigned& b, const DoubleVector& w, DoubleVector& v) const
+// {
+//#ifdef PARANOID
+//  // the number of blocks
+//  unsigned n_blocks = nblock_types();
 //
-//  if(nblocks_to_split_into == 1)
-//   // If there is one block vector to return, we simply return the one block
-//   // vector
+//  // paranoid check that block i is in this block preconditioner
+//  if (b >= n_blocks)
 //   {
-//    this->return_block_vector_with_original_matrix_ordering(
-//                                                            Block_to_dof_map_coarse[b][0],w,v);
+//    std::ostringstream error_message;
+//    error_message << "Requested block  vector " << b
+//                  << ", however this preconditioner has nblock_types() "
+//                  << "= " << nblock_types() << std::endl;
+//    throw OomphLibError(error_message.str(),
+//                        OOMPH_CURRENT_FUNCTION,
+//                        OOMPH_EXCEPTION_LOCATION);
 //   }
-//  else
-//   // Otherwise this block vector correspondings to more than one dof types.
-//   // We need to split this.
+//  if (!v.built())
 //   {
-//    // Temp vector to be returned to v.
-//    Vector<DoubleVector> tmp_block_vector(nblocks_to_split_into);
-//  
-//    // Fill it with the corresponding ditributions.
-//    for (unsigned b_i = 0; b_i < nblocks_to_split_into; b_i++) 
-//     {
-//      tmp_block_vector[b_i].build(this->internal_block_distribution_pt
-//                                  (Block_to_dof_map_coarse[b][b_i]));
-//     }
-//  
-//    Vector<DoubleVector*> tmp_block_vector_pt(nblocks_to_split_into,0);
-//    for (unsigned b_i = 0; b_i < nblocks_to_split_into; b_i++) 
-//     {
-//      tmp_block_vector_pt[b_i] = &tmp_block_vector[b_i];
-//     }
+//    std::ostringstream error_message;
+//    error_message << "The distribution of the global vector v must be setup.";
+//    throw OomphLibError(error_message.str(),
+//                        OOMPH_CURRENT_FUNCTION,
+//                        OOMPH_EXCEPTION_LOCATION);
+//   }
+//  if (*v.distribution_pt() != *this->master_distribution_pt())
+//   {
+//    std::ostringstream error_message;
+//    error_message << "The distribution of the global vector v must match the "
+//                  << " specified master_distribution_pt(). \n"
+//                  << "i.e. Distribution_pt in the master preconditioner";
+//    throw OomphLibError(error_message.str(),
+//                        OOMPH_CURRENT_FUNCTION,
+//                        OOMPH_EXCEPTION_LOCATION);
+//   }
+//  if (!w.built())
+//   {
+//    std::ostringstream error_message;
+//    error_message << "The distribution of the block vector w must be setup.";
+//    throw OomphLibError(error_message.str(),
+//                        OOMPH_CURRENT_FUNCTION,
+//                        OOMPH_EXCEPTION_LOCATION);
+//   }
+//
+//#endif
+//
+//  const unsigned n_ext_dof = Block_to_dof_map_coarse[b].size();
+//
+//  Vector<unsigned> tmp_fine_grain_dof;
+//  for (unsigned ext_dof_i = 0; ext_dof_i < n_ext_dof; ext_dof_i++) 
+//  {
+//    tmp_fine_grain_dof.insert(tmp_fine_grain_dof.end(),
+//                               Doftype_coarsen_map_fine[Block_to_dof_map_coarse[b][ext_dof_i]].begin(),
+//                               Doftype_coarsen_map_fine[Block_to_dof_map_coarse[b][ext_dof_i]].end());
+//  }
+//
+//  // How many vectors do we need to split?
+//  const unsigned n_dof_vec = tmp_fine_grain_dof.size();
+//  if(n_dof_vec == 1)
+//  {
+//    this->return_block_vector_with_original_matrix_ordering(tmp_fine_grain_dof[0],w,v);
+//  }
+//  else
+//  {
+//    Vector<DoubleVector> tmp_block_vector(n_dof_vec);
+//
+//    // Fill in the corresponding distributions.
+//    for (unsigned vec_i = 0; vec_i < n_dof_vec; vec_i++) 
+//    {
+//      tmp_block_vector[vec_i].build(this->internal_block_distribution_pt(tmp_fine_grain_dof[vec_i]));
+//    }
 //  
 //    // Perform the splitting of w into tmp_block_vector.
-//    DoubleVectorHelpers::split_without_communication(w,tmp_block_vector_pt);
+//    DoubleVectorHelpers::split_without_communication(w,tmp_block_vector);
 //  
 //    // return to v
-//    for (unsigned b_i = 0; b_i < nblocks_to_split_into; b_i++) 
+//    for (unsigned vec_i = 0; vec_i < n_dof_vec; vec_i++) 
 //     {
 //      this->return_block_vector_with_original_matrix_ordering(
-//                                                              Block_to_dof_map_coarse[b][b_i], tmp_block_vector[b_i],v);
+//                                                              tmp_fine_grain_dof[vec_i], tmp_block_vector[vec_i],v);
 //     }
-//   }
- }
+//
+//
+//
+//
+//  }
+//  
+//
+//  
+//  
+////  // How many dof types does this block type represent?
+////  unsigned nblocks_to_split_into = Block_to_dof_map_coarse[b].size();
+////
+////  if(nblocks_to_split_into == 1)
+////   // If there is one block vector to return, we simply return the one block
+////   // vector
+////   {
+////    this->return_block_vector_with_original_matrix_ordering(
+////                                                            Block_to_dof_map_coarse[b][0],w,v);
+////   }
+////  else
+////   // Otherwise this block vector correspondings to more than one dof types.
+////   // We need to split this.
+////   {
+////    // Temp vector to be returned to v.
+////    Vector<DoubleVector> tmp_block_vector(nblocks_to_split_into);
+////  
+////    // Fill it with the corresponding ditributions.
+////    for (unsigned b_i = 0; b_i < nblocks_to_split_into; b_i++) 
+////     {
+////      tmp_block_vector[b_i].build(this->internal_block_distribution_pt
+////                                  (Block_to_dof_map_coarse[b][b_i]));
+////     }
+////  
+////    Vector<DoubleVector*> tmp_block_vector_pt(nblocks_to_split_into,0);
+////    for (unsigned b_i = 0; b_i < nblocks_to_split_into; b_i++) 
+////     {
+////      tmp_block_vector_pt[b_i] = &tmp_block_vector[b_i];
+////     }
+////  
+////    // Perform the splitting of w into tmp_block_vector.
+////    DoubleVectorHelpers::split_without_communication(w,tmp_block_vector_pt);
+////  
+////    // return to v
+////    for (unsigned b_i = 0; b_i < nblocks_to_split_into; b_i++) 
+////     {
+////      this->return_block_vector_with_original_matrix_ordering(
+////                                                              Block_to_dof_map_coarse[b][b_i], tmp_block_vector[b_i],v);
+////     }
+////   }
+// }
 
 
  //============================================================================
