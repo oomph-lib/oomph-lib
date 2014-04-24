@@ -2569,7 +2569,12 @@ class BlockSelector
                             Block_distribution_pt[block_col_index]);
   } // EOFunc setup_matrix_vector_product(...)
 
+  void get_block_vectors_with_original_matrix_ordering(
+      const Vector<unsigned>& required_vector, const DoubleVector& v, Vector<DoubleVector >& s) const;
 
+  void return_block_vectors_with_original_matrix_ordering(
+      const Vector<unsigned>& required_vector,
+      const Vector<DoubleVector >& s, DoubleVector& v) const;
  private:
 
   /// \short Private helper function to check that every element in the block

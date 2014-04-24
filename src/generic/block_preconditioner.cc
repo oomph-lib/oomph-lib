@@ -2913,7 +2913,7 @@ namespace oomph
          }
        }
 
-      // communicate wih self
+      // communicate with self
       else
        {
         const double* v_values_pt = v.values_pt();
@@ -2949,6 +2949,273 @@ namespace oomph
 #endif
    }
  }
+
+ 
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+
+ template<typename MATRIX> void BlockPreconditioner<MATRIX>::
+ get_block_vectors_with_original_matrix_ordering(
+   const Vector<unsigned>& required_vector, const DoubleVector& v, 
+   Vector<DoubleVector >& s) const
+ {
+#ifdef PARANOID
+  if (!v.built())
+   {
+    std::ostringstream error_message;
+    error_message << "The distribution of the global vector v must be setup.";
+    throw OomphLibError(error_message.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+  if (*(v.distribution_pt()) != *(this->master_distribution_pt()))
+   {
+    std::ostringstream error_message;
+    error_message << "The distribution of the global vector v must match the "
+                  << " specified master_distribution_pt(). \n"
+                  << "i.e. Distribution_pt in the master preconditioner";
+    throw OomphLibError(error_message.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+
+  // Number of block types
+  //const unsigned nblock = this->internal_nblock_types();
+  const unsigned nblock = required_vector.size();
+
+  // if + only one processor
+  //    + more than one processor but matrix_pt is not distributed
+  // then use the serial get_block method
+  if (this->distribution_pt()->communicator_pt()->nproc() == 1 ||
+      !this->distribution_pt()->distributed())
+   {
+
+    // Vector of vectors for each section of residual vector
+    s.resize(nblock);
+
+    // pointer to the data in v
+    const double* v_pt = v.values_pt();
+
+    // setup the block vector and then insert the data
+    for (unsigned b = 0; b < nblock; b++)
+     {
+      const unsigned required_block = required_vector[b];
+      s[b].build(Internal_block_distribution_pt[required_block],0.0);
+      double* s_pt = s[b].values_pt();
+      unsigned nrow = s[b].nrow();
+      for (unsigned i = 0; i < nrow; i++)
+       {
+        s_pt[i] = v_pt[this->Global_index[required_block][i]];
+       }
+     }
+   }
+  // otherwise use mpi
+  else
+   {
+#ifdef OOMPH_HAS_MPI
+    // my rank
+    unsigned my_rank = this->distribution_pt()->communicator_pt()->my_rank();
+
+    // the number of processors
+    unsigned nproc = this->distribution_pt()->communicator_pt()->nproc();
+
+    // build the vectors
+    s.resize(nblock);
+    for (unsigned b = 0; b < nblock; b++)
+     {
+      const unsigned required_block = required_vector[b];
+      s[b].build(Internal_block_distribution_pt[required_block],0.0);
+     }
+
+    // determine the maximum number of rows to be sent or recv
+    // and determine the number of blocks each processor will send and recv
+    // communication for
+    Vector<int> nblock_send(nproc,0);
+    Vector<int> nblock_recv(nproc,0);
+    unsigned max_n_send_or_recv = 0;
+    for (unsigned p = 0; p < nproc; p++)
+     {
+      for (unsigned b = 0; b < nblock; b++)
+       {
+        const unsigned required_block = required_vector[b];
+        max_n_send_or_recv =
+         std::max(max_n_send_or_recv,Nrows_to_send_for_get_block(required_block,p));
+        max_n_send_or_recv =
+         std::max(max_n_send_or_recv,Nrows_to_recv_for_get_block(required_block,p));
+        if (Nrows_to_send_for_get_block(required_block,p) > 0)
+         {
+          nblock_send[p]++;
+         }
+        if (Nrows_to_recv_for_get_block(required_block,p) > 0)
+         {
+          nblock_recv[p]++;
+         }
+       }
+     }
+
+    // create a vectors of 1s the size of the nblock for the mpi indexed
+    // data types
+    int* block_lengths = new int[max_n_send_or_recv];
+    for (unsigned i = 0; i < max_n_send_or_recv; i++)
+     {
+      block_lengths[i] = 1;
+     }
+
+    // perform the sends and receives
+    Vector<MPI_Request> requests;
+    for (unsigned p = 0; p < nproc; p++)
+     {
+      // send and recv with other processors
+      if (p != my_rank)
+       {
+        // send
+        if (nblock_send[p] > 0)
+         {
+          // create the datatypes vector
+          MPI_Datatype block_send_types[nblock_send[p]];
+
+          // create the datatypes
+          unsigned ptr = 0;
+          for (unsigned b = 0; b < nblock; b++)
+           {
+            const unsigned required_block = required_vector[b];
+
+            if (Nrows_to_send_for_get_block(required_block,p) > 0)
+             {
+              MPI_Type_indexed(Nrows_to_send_for_get_block(required_block,p),block_lengths,
+                               Rows_to_send_for_get_block(required_block,p),MPI_DOUBLE,
+                               &block_send_types[ptr]);
+              MPI_Type_commit(&block_send_types[ptr]);
+              ptr++;
+             }
+           }
+
+          // compute the displacements and lengths
+          MPI_Aint displacements[nblock_send[p]];
+          int lengths[nblock_send[p]];
+          for (int i = 0; i < nblock_send[p]; i++)
+           {
+            lengths[i] = 1;
+            displacements[i] = 0;
+           }
+
+          // build the final datatype
+          MPI_Datatype type_send;
+          MPI_Type_struct(nblock_send[p],lengths,displacements,
+                          block_send_types,&type_send);
+          MPI_Type_commit(&type_send);
+
+          // send
+          MPI_Request send_req;
+          MPI_Isend(const_cast<double*>(v.values_pt()),1,type_send,p,0,
+                    this->distribution_pt()->communicator_pt()->mpi_comm(),
+                    &send_req);
+          MPI_Type_free(&type_send);
+          for (int i = 0; i < nblock_send[p]; i++)
+           {
+            MPI_Type_free(&block_send_types[i]);
+           }
+          requests.push_back(send_req);
+         }
+
+        // recv
+        if (nblock_recv[p] > 0)
+         {
+          // create the datatypes vector
+          MPI_Datatype block_recv_types[nblock_recv[p]];
+
+          // and the displacements
+          MPI_Aint displacements[nblock_recv[p]];
+
+          // and the lengths
+          int lengths[nblock_recv[p]];
+
+          // all displacements are computed relative to s[0] values
+          MPI_Aint displacements_base;
+          MPI_Address(s[0].values_pt(),&displacements_base);
+
+          // now build
+          unsigned ptr = 0;
+          for (unsigned b = 0; b < nblock; b++)
+           {
+            const unsigned required_block = required_vector[b];
+
+            if (Nrows_to_recv_for_get_block(required_block,p) > 0)
+             {
+              MPI_Type_indexed(Nrows_to_recv_for_get_block(required_block,p),block_lengths,
+                               Rows_to_recv_for_get_block(required_block,p),MPI_DOUBLE,
+                               &block_recv_types[ptr]);
+              MPI_Type_commit(&block_recv_types[ptr]);
+              MPI_Address(s[b].values_pt(),&displacements[ptr]);
+              displacements[ptr] -= displacements_base;
+              lengths[ptr] = 1;
+              ptr++;
+             }
+           }
+
+          // build the final data type
+          MPI_Datatype type_recv;
+          MPI_Type_struct(nblock_recv[p],lengths,displacements,
+                          block_recv_types,&type_recv);
+          MPI_Type_commit(&type_recv);
+
+          // recv
+          MPI_Request recv_req;
+          MPI_Irecv(s[0].values_pt(),1,type_recv,p,0,
+                    this->distribution_pt()->communicator_pt()->mpi_comm(),
+                    &recv_req);
+          MPI_Type_free(&type_recv);
+          for (int i = 0; i < nblock_recv[p]; i++)
+           {
+            MPI_Type_free(&block_recv_types[i]);
+           }
+          requests.push_back(recv_req);
+         }
+       }
+
+      // communicate with self
+      else
+       {
+        const double* v_values_pt = v.values_pt();
+        for (unsigned b = 0; b < nblock; b++)
+         {
+          const unsigned required_block = required_vector[b];
+
+          double* w_values_pt = s[b].values_pt();
+          for (unsigned i = 0; i < Nrows_to_send_for_get_block(required_block,p); i++)
+           {
+            w_values_pt[Rows_to_recv_for_get_block(required_block,p)[i]] =
+             v_values_pt[Rows_to_send_for_get_block(required_block,p)[i]];
+           }
+         }
+       }
+     }
+
+    // and then just wait
+    unsigned c = requests.size();
+    Vector<MPI_Status> stat(c);
+    if (c)
+     {
+      MPI_Waitall(c,&requests[0],&stat[0]);
+     }
+    delete[] block_lengths;
+
+#else
+    // throw error
+    std::ostringstream error_message;
+    error_message << "The preconditioner is distributed and on more than one "
+                  << "processor. MPI is required.";
+    throw OomphLibError(error_message.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+#endif
+   }
+ }
+
+
 
  //============================================================================
  /// \short A helper function, takes the naturally ordered vector and 
@@ -3288,6 +3555,287 @@ namespace oomph
  }
 
  //============================================================================
+ /// \short A helper function, takes the vector of block vectors, s, and 
+ /// copies its entries into the naturally ordered vector, v. 
+ /// The block vectors are assumed to have the ordering of the original 
+ /// block matrices. I.e. there are no precomputed blocks. 
+ /// If this is a subsidiary block preconditioner only those entries in v 
+ /// that are associated with its blocks are affected.
+ //============================================================================
+ template<typename MATRIX> void BlockPreconditioner<MATRIX>::
+ return_block_vectors_with_original_matrix_ordering(
+ const Vector<unsigned>& required_vector,
+ const Vector<DoubleVector >& s, DoubleVector& v) const
+ {
+  // the number of blocks
+  //unsigned nblock = this->internal_nblock_types();
+  unsigned nblock = required_vector.size();
+
+#ifdef PARANOID
+  if (!v.built())
+   {
+    std::ostringstream error_message;
+    error_message << "The distribution of the global vector v must be setup.";
+    throw OomphLibError(error_message.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+  if (*(v.distribution_pt()) != *(this->master_distribution_pt()))
+   {
+    std::ostringstream error_message;
+    error_message << "The distribution of the global vector v must match the "
+                  << " specified master_distribution_pt(). \n"
+                  << "i.e. Distribution_pt in the master preconditioner";
+    throw OomphLibError(error_message.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+  for (unsigned b = 0; b < nblock; b++)
+   {
+    if (!s[b].built())
+     {
+      std::ostringstream error_message;
+      error_message << "The distribution of the block vector " << b
+                    << " must be setup.";
+      throw OomphLibError(error_message.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+    const unsigned required_block = required_vector[b];
+    if (*(s[b].distribution_pt()) != *(Internal_block_distribution_pt[required_block]))
+     {
+      std::ostringstream error_message;
+      error_message << "The distribution of the block vector " << b
+                    << " must match the"
+                    << " specified distribution at Internal_block_distribution_pt["
+                    << b << "]";
+      throw OomphLibError(error_message.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+   }
+#endif
+
+  // if + only one processor
+  //    + more than one processor but matrix_pt is not distributed
+  // then use the serial get_block method
+  if (this->distribution_pt()->communicator_pt()->nproc() == 1 ||
+      !this->distribution_pt()->distributed())
+   {
+    double* v_pt = v.values_pt();
+    for (unsigned b = 0; b < nblock; b++)
+     {
+      const unsigned required_block = required_vector[b];
+
+      const double* s_pt = s[b].values_pt();
+      unsigned nrow = this->block_dimension(required_block);
+      for (unsigned i = 0; i < nrow; i++)
+       {
+        v_pt[this->Global_index[required_block][i]] = s_pt[i];
+       }
+     }
+   }
+  // otherwise use mpi
+  else
+   {
+#ifdef OOMPH_HAS_MPI
+
+    // my rank
+    unsigned my_rank = this->distribution_pt()->communicator_pt()->my_rank();
+
+    // the number of processors
+    unsigned nproc = this->distribution_pt()->communicator_pt()->nproc();
+
+    // determine the maximum number of rows to be sent or recv
+    // and determine the number of blocks each processor will send and recv
+    // communication for
+    Vector<int> nblock_send(nproc,0);
+    Vector<int> nblock_recv(nproc,0);
+    unsigned max_n_send_or_recv = 0;
+    for (unsigned p = 0; p < nproc; p++)
+     {
+      for (unsigned b = 0; b < nblock; b++)
+       {
+        const unsigned required_block = required_vector[b];
+
+        max_n_send_or_recv =
+         std::max(max_n_send_or_recv,Nrows_to_send_for_get_block(required_block,p));
+        max_n_send_or_recv =
+         std::max(max_n_send_or_recv,Nrows_to_recv_for_get_block(required_block,p));
+        if (Nrows_to_send_for_get_block(required_block,p) > 0)
+         {
+          nblock_recv[p]++;
+         }
+        if (Nrows_to_recv_for_get_block(required_block,p) > 0)
+         {
+          nblock_send[p]++;
+         }
+       }
+     }
+
+    // create a vectors of 1s the size of the nblock for the mpi indexed
+    // data types
+    int* block_lengths = new int[max_n_send_or_recv];
+    for (unsigned i = 0; i < max_n_send_or_recv; i++)
+     {
+      block_lengths[i] = 1;
+     }
+
+    // perform the sends and receives
+    Vector<MPI_Request> requests;
+    for (unsigned p = 0; p < nproc; p++)
+     {
+      // send and recv with other processors
+      if (p != my_rank)
+       {
+        // recv
+        if (nblock_recv[p] > 0)
+         {
+          // create the datatypes vector
+          MPI_Datatype block_recv_types[nblock_recv[p]];
+
+          // create the datatypes
+          unsigned ptr = 0;
+          for (unsigned b = 0; b < nblock; b++)
+           {
+            const unsigned required_block = required_vector[b];
+
+            if (Nrows_to_send_for_get_block(required_block,p) > 0)
+             {
+              MPI_Type_indexed(Nrows_to_send_for_get_block(required_block,p),block_lengths,
+                               Rows_to_send_for_get_block(required_block,p),MPI_DOUBLE,
+                               &block_recv_types[ptr]);
+              MPI_Type_commit(&block_recv_types[ptr]);
+              ptr++;
+             }
+           }
+
+          // compute the displacements and lengths
+          MPI_Aint displacements[nblock_recv[p]];
+          int lengths[nblock_recv[p]];
+          for (int i = 0; i < nblock_recv[p]; i++)
+           {
+            lengths[i] = 1;
+            displacements[i] = 0;
+           }
+
+          // build the final datatype
+          MPI_Datatype type_recv;
+          MPI_Type_struct(nblock_recv[p],lengths,displacements,
+                          block_recv_types,&type_recv);
+          MPI_Type_commit(&type_recv);
+
+          // recv
+          MPI_Request recv_req;
+          MPI_Irecv(v.values_pt(),1,type_recv,p,0,
+                    this->distribution_pt()->communicator_pt()->mpi_comm(),
+                    &recv_req);
+          MPI_Type_free(&type_recv);
+          for (int i = 0; i < nblock_recv[p]; i++)
+           {
+            MPI_Type_free(&block_recv_types[i]);
+           }
+          requests.push_back(recv_req);
+         }
+
+        // send
+        if (nblock_send[p] > 0)
+         {
+          // create the datatypes vector
+          MPI_Datatype block_send_types[nblock_send[p]];
+
+          // and the displacements
+          MPI_Aint displacements[nblock_send[p]];
+
+          // and the lengths
+          int lengths[nblock_send[p]];
+
+          // all displacements are computed relative to s[0] values
+          MPI_Aint displacements_base;
+          MPI_Address(const_cast<double*>(s[0].values_pt()),
+                      &displacements_base);
+
+          // now build
+          unsigned ptr = 0;
+          for (unsigned b = 0; b < nblock; b++)
+           {
+            const unsigned required_block = required_vector[b];
+
+            if (Nrows_to_recv_for_get_block(required_block,p) > 0)
+             {
+              MPI_Type_indexed(Nrows_to_recv_for_get_block(required_block,p),block_lengths,
+                               Rows_to_recv_for_get_block(required_block,p),MPI_DOUBLE,
+                               &block_send_types[ptr]);
+              MPI_Type_commit(&block_send_types[ptr]);
+              MPI_Address(const_cast<double*>(s[b].values_pt()),
+                          &displacements[ptr]);
+              displacements[ptr] -= displacements_base;
+              lengths[ptr] = 1;
+              ptr++;
+             }
+           }
+
+          // build the final data type
+          MPI_Datatype type_send;
+          MPI_Type_struct(nblock_send[p],lengths,displacements,
+                          block_send_types,&type_send);
+          MPI_Type_commit(&type_send);
+
+          // send
+          MPI_Request send_req;
+          MPI_Isend(const_cast<double*>(s[0].values_pt()),1,type_send,p,0,
+                    this->distribution_pt()->communicator_pt()->mpi_comm(),
+                    &send_req);
+          MPI_Type_free(&type_send);
+          for (int i = 0; i < nblock_send[p]; i++)
+           {
+            MPI_Type_free(&block_send_types[i]);
+           }
+          requests.push_back(send_req);
+         }
+       }
+
+      // communicate wih self
+      else
+       {
+        double* v_values_pt = v.values_pt();
+        for (unsigned b = 0; b < nblock; b++)
+         {
+          const unsigned required_block = required_vector[b];
+
+          const double* w_values_pt = s[b].values_pt();
+          for (unsigned i = 0; i < Nrows_to_send_for_get_block(required_block,p); i++)
+           {
+            v_values_pt[Rows_to_send_for_get_block(required_block,p)[i]] =
+             w_values_pt[Rows_to_recv_for_get_block(required_block,p)[i]];
+
+           }
+         }
+       }
+     }
+
+    // and then just wait
+    unsigned c = requests.size();
+    Vector<MPI_Status> stat(c);
+    if (c)
+     {
+      MPI_Waitall(c,&requests[0],&stat[0]);
+     }
+    delete[] block_lengths;
+
+#else
+    // throw error
+    std::ostringstream error_message;
+    error_message << "The preconditioner is distributed and on more than one "
+                  << "processor. MPI is required.";
+    throw OomphLibError(error_message.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+#endif
+   }
+ }
+
+ //============================================================================
  /// \short A helper function, takes the vector of block vectors, s, 
  /// and copies its entries into the naturally ordered vector, v. 
  /// This function assume that there are nblocks_precomputed block vectors 
@@ -3445,16 +3993,16 @@ namespace oomph
   // All the mapping vectors are constructed to respect the ordering of
   // the dof types.
 
-  const unsigned n_ext_dof = Block_to_dof_map_coarse[b].size();
+//  const unsigned n_ext_dof = Block_to_dof_map_coarse[b].size();
 
   // Loop through the external dof types and get the most fine grain dof types
-  Vector<unsigned> tmp_fine_grain_dof;
-  for (unsigned ext_dof_i = 0; ext_dof_i < n_ext_dof; ext_dof_i++) 
-  {
-    tmp_fine_grain_dof.insert(tmp_fine_grain_dof.end(),
-                               Doftype_coarsen_map_fine[Block_to_dof_map_coarse[b][ext_dof_i]].begin(),
-                               Doftype_coarsen_map_fine[Block_to_dof_map_coarse[b][ext_dof_i]].end());
-  }
+  Vector<unsigned> tmp_fine_grain_dof = Block_to_dof_map_fine[b];
+//  for (unsigned ext_dof_i = 0; ext_dof_i < n_ext_dof; ext_dof_i++) 
+//  {
+//    tmp_fine_grain_dof.insert(tmp_fine_grain_dof.end(),
+//                               Doftype_coarsen_map_fine[Block_to_dof_map_coarse[b][ext_dof_i]].begin(),
+//                               Doftype_coarsen_map_fine[Block_to_dof_map_coarse[b][ext_dof_i]].end());
+//  }
 
   // How many vectors do we need to concatenate?
   const unsigned n_dof_vec = tmp_fine_grain_dof.size();
@@ -3470,18 +4018,12 @@ namespace oomph
       this->get_block_vector_with_original_matrix_ordering(tmp_fine_grain_dof[vec_i], v, tmp_block_vector[vec_i]);
     }
 
-    Vector<DoubleVector*> tmp_block_vector_pt(n_dof_vec,0);
-    for (unsigned vec_i = 0; vec_i < n_dof_vec; vec_i++) 
-    {
-      tmp_block_vector_pt[vec_i] = &tmp_block_vector[vec_i];
-    }
-
     // Build w with the correct distribution.
     w.build(Block_distribution_pt[b],0);
   
     // Concatenate the vectors
     DoubleVectorHelpers::concatenate_without_communication
-     (tmp_block_vector_pt,w);
+     (tmp_block_vector,w);
   
     // No longer need the sub vectors. Calling clear on the Vector will invoke
     // the destructors in the DoubleVectors.
@@ -3665,7 +4207,7 @@ namespace oomph
          }
        }
 
-      // communicate wih self
+      // communicate with self
       else
        {
         double* w_values_pt = w.values_pt();
@@ -3796,15 +4338,9 @@ namespace oomph
     {
       tmp_block_vector[vec_i].build(this->internal_block_distribution_pt(tmp_fine_grain_dof[vec_i]));
     }
-
-    Vector<DoubleVector*> tmp_block_vector_pt(n_dof_vec,0);
-    for (unsigned vec_i = 0; vec_i < n_dof_vec; vec_i++) 
-     {
-      tmp_block_vector_pt[vec_i] = &tmp_block_vector[vec_i];
-     }
   
     // Perform the splitting of w into tmp_block_vector.
-    DoubleVectorHelpers::split_without_communication(w,tmp_block_vector_pt);
+    DoubleVectorHelpers::split_without_communication(w,tmp_block_vector);
   
     // return to v
     for (unsigned vec_i = 0; vec_i < n_dof_vec; vec_i++) 
@@ -4277,12 +4813,7 @@ namespace oomph
   Vector<DoubleVector> tmp_vec(nblocks);
   get_block_vectors(v,tmp_vec);
 
-  Vector<DoubleVector*> tmp_vec_pt(nblocks,0);
-  for (unsigned b_i = 0; b_i < nblocks; b_i++) 
-  {
-    tmp_vec_pt[b_i] = &tmp_vec[b_i];
-  }
-  DoubleVectorHelpers::concatenate_without_communication(tmp_vec_pt,w);
+  DoubleVectorHelpers::concatenate_without_communication(tmp_vec,w);
  }
 
  //============================================================================
@@ -4523,17 +5054,9 @@ namespace oomph
     tmp_vec[b_i].build(this->block_distribution_pt(b_i));
   }
 
-  Vector<DoubleVector*> tmp_vec_pt(nblocks,0);
-
-  for (unsigned b_i = 0; b_i < nblocks; b_i++) 
-  {
-    tmp_vec_pt[b_i] = &tmp_vec[b_i];
-  }
-
-  DoubleVectorHelpers::split_without_communication(w,tmp_vec_pt);
+  DoubleVectorHelpers::split_without_communication(w,tmp_vec);
 
   return_block_vectors_with_precomputed_block_ordering(tmp_vec,v);
-
 
  } // function return_block_ordered_preconditioner_vector
 
