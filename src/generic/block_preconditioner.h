@@ -1523,6 +1523,7 @@ class BlockSelector
       for (unsigned block_j = 0; block_j < nblock_col; block_j++) 
       {
         const bool block_wanted = selected_block[block_i][block_j].wanted();
+        
         if(block_wanted)
         {
           CRDoubleMatrix* tmp_block_pt 
@@ -1578,11 +1579,7 @@ class BlockSelector
   /// Note: If the preconditioner is a subsidiary preconditioner then only the
   /// sub-vectors associated with the blocks of the subsidiary preconditioner
   /// will be included. Hence the length of v is master_nrow() whereas the
-  /// total length of the s s vectors is Nrow.
-  /// RAYRAY come back to edit this... I'm not sure about this for now.
-  /// NOTE: If the preconditioner blocks are precomputed, then this function
-  /// calls get_block_vectors_with_precomputed_block_ordering(...),
-  /// otherwise get_block_vector_with_original_matrix_ordering(...) is called.
+  /// total length of the s vectors is Nrow.
   void get_block_vectors(const DoubleVector& v,
                          Vector<DoubleVector >& s) const;
 
@@ -1590,18 +1587,12 @@ class BlockSelector
   /// the naturally ordered vector, v. If this is a subsidiary block
   /// preconditioner only those entries in v that are associated with its
   /// blocks are affected.
-  /// NOTE: If the preconditioner blocks are precomputed, then this function
-  /// calls return_block_vectors_with_precomputed_block_ordering(...),
-  /// otherwise return_block_vector_with_original_matrix_ordering(...) 
-  /// is called.
   void return_block_vectors(const Vector<DoubleVector >& s,
                             DoubleVector& v) const;
   
   /// \short Takes the naturally ordered vector, v and returns the n-th
   /// block vector, b. Here n is the block number in the current
-  /// preconditioner. If blocks for this preconditioner has been precomputed
-  /// then this function calls the function get_precomputed_block_vector(...).
-  /// Otherwise it calls get_block_vector_from_original_matrix(...).
+  /// preconditioner.
   void get_block_vector(const unsigned& n, const DoubleVector& v,
                         DoubleVector& b) const;
 

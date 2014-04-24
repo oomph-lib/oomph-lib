@@ -4205,7 +4205,7 @@ namespace oomph
          }
        }
 
-      // communicate wih self
+      // communicate with self
       else
        {
         double* w_values_pt = w.values_pt();
@@ -5095,23 +5095,22 @@ namespace oomph
                      CRDoubleMatrix& output_block,
                      const bool& ignore_replacement_block) const
  {
-//#ifdef PARANOID
-//  // the number of blocks RAYRAY change this to the block types the preconditioner expects
-//  unsigned ndofs = ndof_types();
-//  
-//  // paranoid check that block i is in this block preconditioner
-//  if (block_i >= ndofs || block_j >= ndofs)
-//   {
-//    std::ostringstream error_message;
-//    error_message << "Requested dof block (" << block_i << "," << block_j   
-//                  << "), however this preconditioner has ndof_types() "
-//                  << "= " << ndofs << std::endl;
-//    throw OomphLibError(error_message.str(),
-//                        OOMPH_CURRENT_FUNCTION,
-//                        OOMPH_EXCEPTION_LOCATION);
-//   }
-//
-//#endif
+#ifdef PARANOID
+  // the number of blocks RAYRAY change this to the block types the preconditioner expects
+  unsigned para_ndofs = ndof_types();
+  
+  // paranoid check that block i is in this block preconditioner
+  if (block_i >= para_ndofs || block_j >= para_ndofs)
+   {
+    std::ostringstream err_msg;
+    err_msg << "Requested dof block (" << block_i << "," << block_j   
+            << "), however this preconditioner has ndof_types() "
+            << "= " << para_ndofs << std::endl;
+    throw OomphLibError(err_msg.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
 
 //   std::cout << "BPF::get_dof_level_block " << block_i << ", " << block_j << std::endl; 
    
