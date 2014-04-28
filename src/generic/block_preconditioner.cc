@@ -1756,9 +1756,9 @@ namespace oomph
     // Delete any existing distributions in Block_distribution_pt.
     // (This should already be deleted in clear_block_preconditioner_base(...)
     // but we are just being extra safe!).
-    unsigned n_existing_precom_block_dist 
+    unsigned n_existing_block_dist 
      = Block_distribution_pt.size();
-    for (unsigned dist_i = 0; dist_i < n_existing_precom_block_dist; dist_i++) 
+    for (unsigned dist_i = 0; dist_i < n_existing_block_dist; dist_i++) 
      {
       delete Block_distribution_pt[dist_i];
      }
