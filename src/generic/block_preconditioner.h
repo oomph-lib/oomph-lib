@@ -3153,11 +3153,12 @@ class BlockSelector
     return Doftype_in_master_preconditioner_fine[b];
   }
 
-  /// \short access function to the preconditioner matrix distribution pt
-  /// RAYRAY this will need to be changed.
+  /// \short access function to the internal 
+  /// preconditioner matrix distribution pt.
   /// preconditioner_matrix_distribution_pt always returns the concatenation 
-  /// of the internal block distributions. Of course this will break, we need
-  /// to use the concatenation of the external block distributions.
+  /// of the internal block distributions. Since the writer of the 
+  /// preconditioner does not need to concern themselves with the internal
+  /// dof/block, please use preconditioner_matrix_distribution_pt().
   const LinearAlgebraDistribution*
   internal_preconditioner_matrix_distribution_pt() const
   {
@@ -3167,28 +3168,33 @@ class BlockSelector
     return this->distribution_pt();
   }
 
-  // RAYRAY put comment
+  /// \short Access function to the preconditioner matrix distribution pointer.
+  /// This is the concatenation of the block distributions with the identity
+  /// ordering. I.e. if this preconditioner has three block types, with the
+  /// three associated block distributions dist_b0, dist_b1 and dist_b2, then
+  /// this distribution is:
+  /// LinearAlgebraDistributionHelpers::concatenate(dist_b0, dist_b1, dist_b2).
   const LinearAlgebraDistribution*
   preconditioner_matrix_distribution_pt() const
   {
-    // RAYRAY put paranoid tests
     return Preconditioner_matrix_distribution_pt;
   }
 
-
-
-  /// \short Precomputed (and possibly modified) blocks.
+  /// \short The replacement dof-level blocks.
   MapMatrix<unsigned,CRDoubleMatrix*> Replacement_dof_block_pt;
   
-  /// \short The distribution for precomputed blocks.
+  /// \short The distribution for the blocks.
   Vector<LinearAlgebraDistribution*> Block_distribution_pt;
 
-
-
-  /// \short Mapping for blocks passed down from the parent preconditioner.
+  /// \short Mapping for block types to dof types. These are the dof types
+  /// the writer of the preconditioner expects. For the upper-most master
+  /// block preconditioner, this would be the sum of the dof types in the 
+  /// meshes. For subsidiary block preconditioners, this is determined by
+  /// the parent preconditioner when passing in the doftype_coarsen_map_coarse
+  /// vector in turn_into_subsidiary_block_preconditioner(...).
   Vector<Vector<unsigned> > Block_to_dof_map_coarse;
 
-  /// \short RAYRAY comment
+  /// \short Mapping for the block types to the most fine grain dof types.
   Vector<Vector<unsigned> > Block_to_dof_map_fine;
 
   /// \short Mapping for dof types within THIS precondition. This is usually
