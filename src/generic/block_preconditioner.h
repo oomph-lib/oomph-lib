@@ -1907,39 +1907,9 @@ class BlockSelector
     return -1;
   }
 
-  /// \short Access function to the internal block distributions.
+  /// \short Access function to the block distributions (const version).
   const LinearAlgebraDistribution*
-    internal_block_distribution_pt(const unsigned b) const
-    {
-#ifdef PARANOID
-      if(Internal_block_distribution_pt.size() == 0)
-      {
-        std::ostringstream error_msg;
-        error_msg <<"Internal block distributions are not set up.\n"
-          << "Have you called block_setup(...)?\n"
-          << std::endl;
-        throw OomphLibError(error_msg.str(),
-            OOMPH_CURRENT_FUNCTION,
-            OOMPH_EXCEPTION_LOCATION);
-      }
-      if(b > internal_nblock_types())
-      {
-        std::ostringstream error_msg;
-        error_msg <<"You requested the distribution for the internal block "
-          << b << ".\n"
-          << "But there are only " << internal_nblock_types() << " block types.\n"
-          << std::endl;
-        throw OomphLibError(error_msg.str(),
-            OOMPH_CURRENT_FUNCTION,
-            OOMPH_EXCEPTION_LOCATION);
-      }
-#endif
-      return Internal_block_distribution_pt[b];
-    } // EOFunc internal_block_distribution_pt(...)
-
-  /// \short Access function to the block distributions.
-  const LinearAlgebraDistribution*
-  block_distribution_pt(const unsigned b) const
+  block_distribution_pt(const unsigned& b) const
   {
 #ifdef PARANOID
       if(Block_distribution_pt.size() == 0)
@@ -1968,7 +1938,7 @@ class BlockSelector
    return Block_distribution_pt[b];
   } // EOFunc block_distribution_pt(...)
 
-  /// \short Access function to the block distributions.
+  /// \short Access function to the block distributions (non-const version).
   LinearAlgebraDistribution*
   block_distribution_pt(const unsigned b)
   {
@@ -1999,7 +1969,7 @@ class BlockSelector
    return Block_distribution_pt[b];
   } // EOFunc block_distribution_pt(...)
 
-  /// \short Access function to the block distributions.
+  /// \short Access function to the dof-level block distributions.
   LinearAlgebraDistribution*
   dof_block_distribution_pt(const unsigned& b)
   {
@@ -2072,6 +2042,8 @@ class BlockSelector
   } // EOFunc master_distribution_pt(...)
 
   /// \short Return the number of DOF types in mesh i.
+  /// WARNING: This should only be used by the upper-most master block 
+  /// preconditioner.
   unsigned ndof_types_in_mesh(const unsigned& i) const
   {
 #ifdef PARANOID
@@ -2257,62 +2229,42 @@ class BlockSelector
     Block_distribution_pt.clear();
 
 
+    // Create the identity key.
     Vector<unsigned> preconditioner_matrix_key(n_existing_block_dist,0);
     for (unsigned i = 0; i < n_existing_block_dist; i++)
     {
       preconditioner_matrix_key[i] = i;
     }
 
-
-   // Now iterate through Auxiliary_block_distribution_pt and delete everything 
+   // Now iterate through Auxiliary_block_distribution_pt 
+   // and delete all distributions, except for the one which corresponds
+   // to the identity since this is already deleted.
    std::map<Vector<unsigned>, LinearAlgebraDistribution*>::iterator iter
      = Auxiliary_block_distribution_pt.begin();
 
    while(iter != Auxiliary_block_distribution_pt.end())
    {
-
-
      if(iter->first != preconditioner_matrix_key)
      {
        delete iter->second;
        iter++;
-       //Auxiliary_block_distribution_pt.erase(iter++);
      }
      else
      {
        ++iter;
-       //Auxiliary_block_distribution_pt.erase(iter++);
      }
-
-
-     //  if(iter->first)
-     //  delete iter->second;
-     //  Auxiliary_block_distribution_pt.erase(iter++);
-     //
-     //    if (it->second == delete_this_id)
-     //    {
-     //        port_map.erase(pm_it++);  // Use iterator.
-     //                                  // Note the post increment.
-     //                                  // Increments the iterator but returns the
-     //                                  // original value for use by erase 
-     //    }
-     //    else
-     //    {
-     //        ++pm_it;           // Can use pre-increment in this case
-     //                           // To make sure you have the efficient version
-     //    }
-     //}
    }
 
+   // Now clear it.
    Auxiliary_block_distribution_pt.clear();
 
-    // Delete any dof block distributions
-    const unsigned ndof_block_dist = Dof_block_distribution_pt.size();
-    for (unsigned dof_i = 0; dof_i < ndof_block_dist; dof_i++) 
-    {
-      delete Dof_block_distribution_pt[dof_i];
-    }
-    Dof_block_distribution_pt.clear();
+   // Delete any dof block distributions
+   const unsigned ndof_block_dist = Dof_block_distribution_pt.size();
+   for (unsigned dof_i = 0; dof_i < ndof_block_dist; dof_i++) 
+   {
+     delete Dof_block_distribution_pt[dof_i];
+   }
+   Dof_block_distribution_pt.clear();
 
   } // EOFunc clear_block_preconditioner_base()
 
@@ -2823,6 +2775,38 @@ class BlockSelector
     }
    return -1;
   } // EOFunc internal_index_in_block(...)
+
+  /// \short Access function to the internal block distributions.
+  const LinearAlgebraDistribution*
+    internal_block_distribution_pt(const unsigned& b) const
+    {
+#ifdef PARANOID
+      if(Internal_block_distribution_pt.size() == 0)
+      {
+        std::ostringstream error_msg;
+        error_msg <<"Internal block distributions are not set up.\n"
+          << "Have you called block_setup(...)?\n"
+          << std::endl;
+        throw OomphLibError(error_msg.str(),
+            OOMPH_CURRENT_FUNCTION,
+            OOMPH_EXCEPTION_LOCATION);
+      }
+      if(b > internal_nblock_types())
+      {
+        std::ostringstream error_msg;
+        error_msg <<"You requested the distribution for the internal block "
+          << b << ".\n"
+          << "But there are only " << internal_nblock_types() << " block types.\n"
+          << std::endl;
+        throw OomphLibError(error_msg.str(),
+            OOMPH_CURRENT_FUNCTION,
+            OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+      return Internal_block_distribution_pt[b];
+    } // EOFunc internal_block_distribution_pt(...)
+
+
 
 
   /// \short insert a Vector<unsigned> and LinearAlgebraDistribution* pair
