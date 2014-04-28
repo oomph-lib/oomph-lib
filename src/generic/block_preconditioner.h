@@ -2603,15 +2603,16 @@ class BlockSelector
     }
   } // EOFunc internal_ndof_types(...)
 
-
-  /// \short A helper function to return a block if no preconditioner blocks
-  /// were precomputed.
-  /// Takes the n-th block ordered vector, b,  and copies its entries
+  /// \short Takes the n-th block ordered vector, b,  and copies its entries
   /// to the appropriate entries in the naturally ordered vector, v.
   /// Here n is the block number in the current block preconditioner.
   /// If the preconditioner is a subsidiary block preconditioner
   /// the other entries in v  that are not associated with it
   /// are left alone.
+  ///
+  /// This version works with the internal block types. This is legacy code
+  /// but is kept alive, hence moved to private. Please use the 
+  /// function "return_block_vector(...)".
   void internal_return_block_vector(const unsigned& n,
                            const DoubleVector& b,
                            DoubleVector& v) const;
@@ -2624,37 +2625,53 @@ class BlockSelector
   void internal_get_block_vector(
     const unsigned& n, const DoubleVector& v, DoubleVector& b) const;
 
-  /// \short A helper function, takes the naturally ordered vector and 
+
+  /// \short Takes the naturally ordered vector and 
   /// rearranges it into a vector of sub vectors corresponding to the blocks, 
   /// so s[b][i] contains the i-th entry in the vector associated with block b. 
-  /// These blocks and vectors are those corresponding to the original block 
-  /// matrix ordering, i.e. there are no precomputed blocks.
+  /// These blocks and vectors are those corresponding to the internal blocks.
   /// Note: If the preconditioner is a subsidiary preconditioner then only the
   /// sub-vectors associated with the blocks of the subsidiary preconditioner
   /// will be included. Hence the length of v is master_nrow() whereas the
-  /// total length of the s s vectors is Nrow.
+  /// total length of the s vectors is the sum of the Nrow of the sub vectors. 
+  void internal_get_block_vectors(
+      const Vector<unsigned>& block_vec_number, 
+      const DoubleVector& v, Vector<DoubleVector >& s) const;
+
+  /// \short A helper function, takes the naturally ordered vector and 
+  /// rearranges it into a vector of sub vectors corresponding to the blocks, 
+  /// so s[b][i] contains the i-th entry in the vector associated with block b. 
+  /// These blocks and vectors are those corresponding to the internal blocks.
+  /// Note: If the preconditioner is a subsidiary preconditioner then only the
+  /// sub-vectors associated with the blocks of the subsidiary preconditioner
+  /// will be included. Hence the length of v is master_nrow() whereas the
+  /// total length of the s vectors is Nrow.
+  /// This is simply a wrapper around the other internal_get_block_vectors(...)
+  /// function with the identity block_vec_number vector.
   void internal_get_block_vectors(
       const DoubleVector& v, Vector<DoubleVector >& s) const;
 
   /// \short A helper function, takes the vector of block vectors, s, and 
   /// copies its entries into the naturally ordered vector, v. 
-  /// The block vectors are assumed to have the ordering of the original 
-  /// block matrices. I.e. there are no precomputed blocks. 
   /// If this is a subsidiary block preconditioner only those entries in v 
   /// that are associated with its blocks are affected.
-  void internal_return_block_vectors(
-      const Vector<DoubleVector >& s, DoubleVector& v) const;
-
-  void internal_get_block_vectors(
-      const Vector<unsigned>& block_vec_number, 
-      const DoubleVector& v, Vector<DoubleVector >& s) const;
-
   void internal_return_block_vectors(
       const Vector<unsigned>& block_vec_number,
       const Vector<DoubleVector >& s, DoubleVector& v) const;
 
-  /// \short Gets block (i,j) from the original matrix, pointed to by
-  /// Matrix_pt and returns it in output_block.
+  /// \short A helper function, takes the vector of block vectors, s, and 
+  /// copies its entries into the naturally ordered vector, v. 
+  /// If this is a subsidiary block preconditioner only those entries in v 
+  /// that are associated with its blocks are affected.
+  /// This is simple a wrapper around the other 
+  /// internal_return_block_vectors(...) function with the identity
+  /// block_vec_number vector.
+  void internal_return_block_vectors(
+      const Vector<DoubleVector >& s, DoubleVector& v) const;
+
+  /// \short Gets block (i,j) from the matrix pointed to by
+  /// Matrix_pt and returns it in output_block. This is associated with the
+  /// internal blocks. Please use the other get_block(...) function.
   void internal_get_block(const unsigned& i, const unsigned& j,
                                       MATRIX& output_block) const;
 
@@ -2742,9 +2759,6 @@ class BlockSelector
       return Internal_block_distribution_pt[b];
     } // EOFunc internal_block_distribution_pt(...)
 
-
-
-
   /// \short insert a Vector<unsigned> and LinearAlgebraDistribution* pair
   /// into Auxiliary_block_distribution_pt. The 
   /// Auxiliary_block_distribution_pt should only contain pointers to 
@@ -2799,7 +2813,6 @@ class BlockSelector
           dist_pt));
   } // insert_auxiliary_block_distribution(...)
 
-  /// RAYRAY check if this still makes sense.
   /// \short Private helper function to check that every element in the block
   /// matrix (i,j) matches the corresponding element in the original matrix
   void block_matrix_test(const unsigned& i,
@@ -2917,7 +2930,7 @@ class BlockSelector
     Replacement_dof_block_pt(dof_block_i,dof_block_j) 
       = replacement_dof_block_pt;
 
-  } // EOFunc set_precomputed_blocks(...)
+  }
 
   /// \short Check if any of the meshes are distributed. This is equivalent
   /// to problem.distributed() and is used as a replacement.
@@ -2938,6 +2951,7 @@ class BlockSelector
   /// the block number in the subsidiary block preconditioner is returned. If
   /// a particular global DOF is not associated with this preconditioner then
   /// -1 is returned
+  // RAYRAY this is internal
   int dof_number(const unsigned& i_dof) const
   {
 
@@ -2965,7 +2979,8 @@ class BlockSelector
      unsigned my_rank = comm_pt()->my_rank();
      std::ostringstream error_message;
      error_message
-      << "Proc " << my_rank<<": Requested dof_number(...) for global DOF " << i_dof << "\n"
+      << "Proc " << my_rank<<": Requested dof_number(...) for global DOF " 
+      << i_dof << "\n"
       << "cannot be found.\n";
      throw OomphLibError(
                          error_message.str(),
@@ -3004,6 +3019,7 @@ class BlockSelector
 
   /// \short Return the row/column number of global unknown i_dof within it's
   /// block.
+  // RAYRAY this is internal
   unsigned index_in_dof(const unsigned& i_dof) const
   {
    if (is_master_block_preconditioner())
@@ -3057,6 +3073,7 @@ class BlockSelector
   /// this preconditioner acts as a subsidiary preconditioner then b refers
   /// to the block number in the subsidiary preconditioner not the master
   /// block preconditioner.
+  // RAYRAY this is internal
   unsigned block_dimension(const unsigned& b) const
   {
    return Internal_block_distribution_pt[b]->nrow();
@@ -3066,6 +3083,7 @@ class BlockSelector
   /// freedom are associated with it. Note that if this preconditioner acts as
   /// a subsidiary preconditioner, then i refers to the block number in the
   /// subsidiary preconditioner not the master block preconditioner
+  // RAYRAY this is internal
   unsigned dof_block_dimension(const unsigned& i) const
   {
 
@@ -3104,6 +3122,7 @@ class BlockSelector
   /// corresponding block number in the master preconditioner. If this
   /// preconditioner does not have a master block preconditioner then the
   /// block number passed is returned
+  // RAYRAY this is internal
   unsigned master_dof_number(const unsigned& b) const
   {
    if (is_master_block_preconditioner())
