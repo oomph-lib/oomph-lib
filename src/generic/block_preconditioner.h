@@ -1621,7 +1621,8 @@ class BlockSelector
   /// the naturally ordered vector, v. If this is a subsidiary block
   /// preconditioner only those entries in v that are associated with its
   /// blocks are affected. The block_vec_number indicates which block the
-  /// vectors in s came from. The block number in this preconditioner.
+  /// vectors in s came from. The block number corresponds to the block 
+  /// numbers in this preconditioner.
   void return_block_vectors(const Vector<unsigned>& block_vec_number,
                             const Vector<DoubleVector >& s,
                             DoubleVector& v) const; 
@@ -1630,7 +1631,8 @@ class BlockSelector
   /// the naturally ordered vector, v. If this is a subsidiary block
   /// preconditioner only those entries in v that are associated with its
   /// blocks are affected. The block_vec_number indicates which block the
-  /// vectors in s came from. The block number in this preconditioner.
+  /// vectors in s came from. The block number corresponds to the block
+  /// numbers in this preconditioner.
   /// This is simply a wrapper around the other return_block_vectors(...) 
   /// function where the block_vec_number Vector is the identity, i.e.
   /// block_vec_number is [0, 1, ..., nblock_types - 1].
@@ -2629,6 +2631,7 @@ class BlockSelector
   /// \short Takes the naturally ordered vector and 
   /// rearranges it into a vector of sub vectors corresponding to the blocks, 
   /// so s[b][i] contains the i-th entry in the vector associated with block b. 
+  /// The block_vec_number indicates which blocks we want.
   /// These blocks and vectors are those corresponding to the internal blocks.
   /// Note: If the preconditioner is a subsidiary preconditioner then only the
   /// sub-vectors associated with the blocks of the subsidiary preconditioner
@@ -2641,11 +2644,12 @@ class BlockSelector
   /// \short A helper function, takes the naturally ordered vector and 
   /// rearranges it into a vector of sub vectors corresponding to the blocks, 
   /// so s[b][i] contains the i-th entry in the vector associated with block b. 
+  /// The block_vec_number indicates which blocks we want.
   /// These blocks and vectors are those corresponding to the internal blocks.
   /// Note: If the preconditioner is a subsidiary preconditioner then only the
   /// sub-vectors associated with the blocks of the subsidiary preconditioner
   /// will be included. Hence the length of v is master_nrow() whereas the
-  /// total length of the s vectors is Nrow.
+  /// total length of the s vectors is the sum of the Nrow of the sub vectors. 
   /// This is simply a wrapper around the other internal_get_block_vectors(...)
   /// function with the identity block_vec_number vector.
   void internal_get_block_vectors(

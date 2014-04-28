@@ -3215,15 +3215,15 @@ namespace oomph
  }
 
  //============================================================================
- /// \short A helper function, takes the naturally ordered vector and 
+ /// \short Takes the naturally ordered vector and 
  /// rearranges it into a vector of sub vectors corresponding to the blocks, 
  /// so s[b][i] contains the i-th entry in the vector associated with block b. 
- /// These blocks and vectors are those corresponding to the original block 
- /// matrix ordering, i.e. there are no precomputed blocks.
+ /// The block_vec_number indicates which blocks we want.
+ /// These blocks and vectors are those corresponding to the internal blocks.
  /// Note: If the preconditioner is a subsidiary preconditioner then only the
- /// sub-vectors associated with the blocks of the subsidiary preconditioner
+  /// sub-vectors associated with the blocks of the subsidiary preconditioner
  /// will be included. Hence the length of v is master_nrow() whereas the
- /// total length of the s s vectors is Nrow.
+ /// total length of the s vectors is the sum of the Nrow of the sub vectors. 
  //============================================================================
  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
  internal_get_block_vectors(
@@ -3485,7 +3485,17 @@ namespace oomph
  }
 
  //============================================================================
-
+ /// \short A helper function, takes the naturally ordered vector and 
+ /// rearranges it into a vector of sub vectors corresponding to the blocks, 
+ /// so s[b][i] contains the i-th entry in the vector associated with block b. 
+ /// The block_vec_number indicates which blocks we want.
+ /// These blocks and vectors are those corresponding to the internal blocks.
+ /// Note: If the preconditioner is a subsidiary preconditioner then only the
+ /// sub-vectors associated with the blocks of the subsidiary preconditioner
+ /// will be included. Hence the length of v is master_nrow() whereas the
+ /// total length of the s vectors is the sum of the Nrow of the sub vectors. 
+ /// This is simply a wrapper around the other internal_get_block_vectors(...)
+ /// function with the identity block_vec_number vector.
  //============================================================================
  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
  internal_get_block_vectors(
@@ -3507,7 +3517,8 @@ namespace oomph
  /// the naturally ordered vector, v. If this is a subsidiary block
  /// preconditioner only those entries in v that are associated with its
  /// blocks are affected. The block_vec_number indicates which block the
- /// vectors in s came from. The block number in this preconditioner.
+ /// vectors in s came from. The block number corresponds to the block 
+ /// numbers in this preconditioner.
  //============================================================================
  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
    return_block_vectors(const Vector<unsigned> & block_vec_number,
@@ -3726,7 +3737,8 @@ namespace oomph
  /// the naturally ordered vector, v. If this is a subsidiary block
  /// preconditioner only those entries in v that are associated with its
  /// blocks are affected. The block_vec_number indicates which block the
- /// vectors in s came from. The block number in this preconditioner.
+ /// vectors in s came from. The block number corresponds to the block
+ /// numbers in this preconditioner.
  /// This is simply a wrapper around the other return_block_vectors(...) 
  /// function where the block_vec_number Vector is the identity, i.e.
  /// block_vec_number is [0, 1, ..., nblock_types - 1].
@@ -3749,12 +3761,15 @@ namespace oomph
  } // return_block_vectors(...)
 
  //============================================================================
- /// \short A helper function, takes the vector of block vectors, s, and 
- /// copies its entries into the naturally ordered vector, v. 
- /// The block vectors are assumed to have the ordering of the original 
- /// block matrices. I.e. there are no precomputed blocks. 
- /// If this is a subsidiary block preconditioner only those entries in v 
- /// that are associated with its blocks are affected.
+ /// \short Takes the naturally ordered vector and 
+ /// rearranges it into a vector of sub vectors corresponding to the blocks, 
+ /// so s[b][i] contains the i-th entry in the vector associated with block b. 
+ /// The block_vec_number indicates which blocks we want.
+ /// These blocks and vectors are those corresponding to the internal blocks.
+ /// Note: If the preconditioner is a subsidiary preconditioner then only the
+ /// sub-vectors associated with the blocks of the subsidiary preconditioner
+ /// will be included. Hence the length of v is master_nrow() whereas the
+ /// total length of the s vectors is the sum of the Nrow of the sub vectors. 
  //============================================================================
  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
  internal_return_block_vectors(
@@ -4029,6 +4044,19 @@ namespace oomph
    }
  }
 
+ //============================================================================
+ /// \short A helper function, takes the naturally ordered vector and 
+ /// rearranges it into a vector of sub vectors corresponding to the blocks, 
+ /// so s[b][i] contains the i-th entry in the vector associated with block b. 
+ /// The block_vec_number indicates which blocks we want.
+ /// These blocks and vectors are those corresponding to the internal blocks.
+ /// Note: If the preconditioner is a subsidiary preconditioner then only the
+ /// sub-vectors associated with the blocks of the subsidiary preconditioner
+ /// will be included. Hence the length of v is master_nrow() whereas the
+ /// total length of the s vectors is the sum of the Nrow of the sub vectors. 
+ /// This is simply a wrapper around the other internal_get_block_vectors(...)
+ /// function with the identity block_vec_number vector.
+ //============================================================================
  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
  internal_return_block_vectors(
      const Vector<DoubleVector >& s, DoubleVector& v) const
@@ -4040,6 +4068,8 @@ namespace oomph
   {
     block_vec_number[b] = b;
   }
+
+  internal_return_block_vectors(block_vec_number,s,v);
  }
 
  //============================================================================
@@ -4218,6 +4248,7 @@ namespace oomph
  /// \short Takes the naturally ordered vector, v and returns the n-th
  /// block vector, b. Here n is the block number in the current
  /// preconditioner.
+ //============================================================================
  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
  get_block_vector(const unsigned& b, const DoubleVector& v, DoubleVector& w)
   const
@@ -4316,14 +4347,16 @@ namespace oomph
  } // get_block_vector(...)
 
  //============================================================================
- /// \short A helper function to return a block if no preconditioner blocks
- /// were precomputed.
- /// Takes the n-th block ordered vector, b,  and copies its entries
+ /// \short Takes the n-th block ordered vector, b,  and copies its entries
  /// to the appropriate entries in the naturally ordered vector, v.
  /// Here n is the block number in the current block preconditioner.
  /// If the preconditioner is a subsidiary block preconditioner
  /// the other entries in v  that are not associated with it
  /// are left alone.
+ ///
+ /// This version works with the internal block types. This is legacy code
+ /// but is kept alive, hence moved to private. Please use the 
+ /// function "return_block_vector(...)".
  //============================================================================
  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
  internal_return_block_vector(const unsigned& b, 
@@ -4517,7 +4550,7 @@ namespace oomph
  /// are left alone.
  //============================================================================
  template<typename MATRIX> void BlockPreconditioner<MATRIX>::
- return_block_vector(const unsigned& b, const DoubleVector& w, DoubleVector& v)
+ return_block_vector(const unsigned& n, const DoubleVector& b, DoubleVector& v)
   const
  {
 #ifdef PARANOID
@@ -4525,7 +4558,7 @@ namespace oomph
   const unsigned para_n_blocks = nblock_types();
 
   // paranoid check that block i is in this block preconditioner
-  if (b >= para_n_blocks)
+  if (n >= para_n_blocks)
    {
     std::ostringstream err_msg;
     err_msg << "Requested block vector " << b
@@ -4553,10 +4586,10 @@ namespace oomph
                         OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
    }
-  if (!w.built())
+  if (!b.built())
    {
     std::ostringstream err_msg;
-    err_msg << "The distribution of the block vector w must be setup.";
+    err_msg << "The distribution of the block vector b must be setup.";
     throw OomphLibError(err_msg.str(),
                         OOMPH_CURRENT_FUNCTION,
                         OOMPH_EXCEPTION_LOCATION);
@@ -4565,15 +4598,15 @@ namespace oomph
 #endif
 
   // Get the most fine grain dof
-  Vector<unsigned> most_fine_grain_dof = Block_to_dof_map_fine[b];
+  Vector<unsigned> most_fine_grain_dof = Block_to_dof_map_fine[n];
 
   // How many dofs are in this block?
-  const unsigned n_dof_vec = Block_to_dof_map_fine[b].size();
+  const unsigned n_dof_vec = Block_to_dof_map_fine[n].size();
 
   if(n_dof_vec == 1)
   // There is only one dof, no need to split.
   {
-    internal_return_block_vector(most_fine_grain_dof[0],w,v);
+    internal_return_block_vector(most_fine_grain_dof[0],b,v);
   }
   else
   // Need to split the vector up before we insert them all in one go.
@@ -4585,7 +4618,7 @@ namespace oomph
                             most_fine_grain_dof[d]));
     }
 
-    DoubleVectorHelpers::split_without_communication(w,dof_vector);
+    DoubleVectorHelpers::split_without_communication(b,dof_vector);
 
     // return to v
     internal_return_block_vectors(most_fine_grain_dof,
@@ -5115,11 +5148,10 @@ namespace oomph
   return_concatenated_block_vector(block_vec_number,w,v);
  } // function return_block_ordered_preconditioner_vector
 
-
-
 //=============================================================================
-/// \short Gets block (i,j) from the original matrix and returns it in
-/// block_matrix_pt (Specialisation for CRDoubleMatrix)
+/// \short Gets block (i,j) from the matrix pointed to by
+/// Matrix_pt and returns it in output_block. This is associated with the
+/// internal blocks. Please use the other get_block(...) function.
 //=============================================================================
  template<> 
  void BlockPreconditioner<CRDoubleMatrix>:: 
@@ -5664,8 +5696,14 @@ namespace oomph
  }
 
 //=============================================================================
-/// \short Gets block (i,j) from Replacement_dof_block_pt and returns it in
-/// block_matrix_pt.
+/// \short Gets dof-level block (i,j).
+/// If Replacement_dof_block_pt(i,j) is not null, then the replacement
+/// block is returned via a deep copy.
+///
+/// Otherwise if this is the uppermost block preconditioner then it calls
+/// internal_get_block(i,j), else if it is a subsidiary
+/// block preconditioner, it will call it's master block preconditioners'
+/// get_dof_level_block function.
 //=============================================================================
  template<> 
  void BlockPreconditioner<CRDoubleMatrix>:: 
@@ -5917,8 +5955,6 @@ namespace oomph
     CRDoubleMatrixHelpers::deep_copy(tmp_block_pt,output_block);
   }
  }
-
-
 
 //=============================================================================
 /// \short test function to check that every element in the block matrix
