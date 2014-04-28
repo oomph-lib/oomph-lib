@@ -936,11 +936,11 @@ namespace oomph
              {
               
               // Only use the dofs that we're dealing with here
-              if ( this->external_block_number(eqn_number)==int(block_index) )
+              if ( this->block_number(eqn_number)==int(block_index) )
                {
                 
                 // get the index in the block
-                unsigned index = this->external_index_in_block(eqn_number);
+                unsigned index = this->index_in_block(eqn_number);
                 
                 // determine which processor requires the block index
                 for (unsigned p = 0; p < nproc; p++)
@@ -1176,11 +1176,11 @@ namespace oomph
          {
           unsigned eqn_number = unclassified_indices_recv[p][i];
           //Only deal with our block unknowns
-          if ( this->external_block_number(eqn_number)==int(block_index) )
+          if ( this->block_number(eqn_number)==int(block_index) )
            {
               
             //get the index in the block
-            unsigned index = this->external_index_in_block(eqn_number);
+            unsigned index = this->index_in_block(eqn_number);
               
             //determine which processor requires the block index
             for (unsigned pp = 0; pp < nproc; pp++)
@@ -1487,10 +1487,10 @@ namespace oomph
         unsigned eqn_number = el_pt->eqn_number(i);
         
         // Get the velocity dofs
-        if (this->external_block_number(eqn_number)==0)
+        if (this->block_number(eqn_number)==0)
          {
           // get the index in the block
-          unsigned index = this->external_index_in_block(eqn_number);
+          unsigned index = this->index_in_block(eqn_number);
           
           // if it is required on this processor
           if ((index >= v_first_row) &&
@@ -1500,12 +1500,12 @@ namespace oomph
            }
          }
         // Get the pressure dofs
-        else if (this->external_block_number(eqn_number)==1)
+        else if (this->block_number(eqn_number)==1)
          {
           if (!Use_LSC)
            {
             // get the index in the block
-            unsigned index = this->external_index_in_block(eqn_number);
+            unsigned index = this->index_in_block(eqn_number);
             
             // if it is required on this processor
             if ((index >= p_first_row)&&

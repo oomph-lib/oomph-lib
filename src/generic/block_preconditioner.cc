@@ -2073,13 +2073,13 @@ namespace oomph
      {
 
       // the block number
-      int b = this->block_number(first_row + i);
+      int b = this->internal_block_number(first_row + i);
 
       // check that the DOF i is associated with this preconditioner
       if (b >= 0)
        {
         // the block index
-        unsigned j = this->index_in_block(first_row + i);
+        unsigned j = this->internal_index_in_block(first_row + i);
 
         // the processor this row will be sent to
         unsigned block_p = 0;
@@ -2186,14 +2186,14 @@ namespace oomph
     for (unsigned i = 0; i < nrow_local; i++)
      {
       // the block number
-      int b = this->block_number(first_row + i);
+      int b = this->internal_block_number(first_row + i);
 
       // check that the DOF i is associated with this preconditioner
       if (b >= 0)
        {
 
         // the block index
-        unsigned j = this->index_in_block(first_row + i);
+        unsigned j = this->internal_index_in_block(first_row + i);
 
         // the processor this row will be sent to
         unsigned block_p = 0;
@@ -5198,16 +5198,16 @@ namespace oomph
     // stored in temp_ptr temporarily
     for (unsigned k = 0; k < master_nrow; k++)
      {
-      if (block_number(k) == static_cast<int>(block_i))
+      if (internal_block_number(k) == static_cast<int>(block_i))
        {
         for (int l = j_row_start[k]; 
              l < j_row_start[k+1]; l++)
          {
-          if (block_number(j_column_index[l]) == 
+          if (internal_block_number(j_column_index[l]) == 
               static_cast<int>(block_j))
            {
             block_nnz++;
-            temp_ptr[index_in_block(k)+1]++;
+            temp_ptr[internal_index_in_block(k)+1]++;
            }
          }
        }
@@ -5232,18 +5232,18 @@ namespace oomph
       // of the block matrix
       for (unsigned k = 0; k < master_nrow; k++)
        {
-        if (block_number(k) == static_cast<int>(block_i))
+        if (internal_block_number(k) == static_cast<int>(block_i))
          {
           for (int l = j_row_start[k]; 
                l < j_row_start[k+1]; l++)
            {
-            if (block_number(j_column_index[l]) == 
+            if (internal_block_number(j_column_index[l]) == 
                 static_cast<int>(block_j))
              {
-              int kk = temp_ptr[index_in_block(k)]++;
+              int kk = temp_ptr[internal_index_in_block(k)]++;
               temp_value[kk] = j_value[l];
               temp_column_index[kk] = 
-               index_in_block(j_column_index[l]); 
+               internal_index_in_block(j_column_index[l]); 
              }
            }
          }
@@ -5328,7 +5328,7 @@ namespace oomph
         int c = 0;
         for (int r = j_row_start[row]; r < j_row_start[row+1]; r++)
          {
-          if (block_number(j_column_index[r]) == int(block_j))
+          if (internal_block_number(j_column_index[r]) == int(block_j))
            {
             c++;
            }
@@ -5389,11 +5389,11 @@ namespace oomph
             unsigned row = Rows_to_send_for_get_block(block_i,p)[i];
             for (int r = j_row_start[row]; r < j_row_start[row+1]; r++)
              {
-              if (block_number(j_column_index[r]) == int(block_j))
+              if (internal_block_number(j_column_index[r]) == int(block_j))
                {
                 values_for_proc[p][ptr] = j_value[r];
                 column_index_for_proc[p][ptr] = 
-                 index_in_block(j_column_index[r]);
+                 internal_index_in_block(j_column_index[r]);
                 ptr++;
                }
              }
@@ -5607,11 +5607,11 @@ namespace oomph
             unsigned row = Rows_to_send_for_get_block(block_i,my_rank)[i];
             for (int r = j_row_start[row]; r < j_row_start[row+1]; r++)
              {
-              if (block_number(j_column_index[r]) == int(block_j))
+              if (internal_block_number(j_column_index[r]) == int(block_j))
                {
                 values_recv[offset+counter] = j_value[r];
                 column_index_recv[offset + counter] = 
-                 index_in_block(j_column_index[r]);
+                 internal_index_in_block(j_column_index[r]);
                 counter++;
                }
              }
@@ -5944,7 +5944,7 @@ namespace oomph
     
     // if this coefficient is associated with a block in this block 
     // preconditioner
-    if (static_cast<int>(block_i) == this->block_number(i))
+    if (static_cast<int>(block_i) == this->internal_block_number(i))
      {
       
       // loop over columns of original matrix
@@ -5953,14 +5953,14 @@ namespace oomph
         
         // if the coeeficient is associated with a block in this block
         // preconditioner
-        if (static_cast<int>(block_j) == this->block_number(j))
+        if (static_cast<int>(block_j) == this->internal_block_number(j))
          {
           
           // check whether elements in original matrix and matrix of block 
           // pointers match
 		    if ( matrix_pt()->operator()(i,j) !=
                block_matrix_pt
-               ->operator()(index_in_block(i),index_in_block(j)) )
+               ->operator()(internal_index_in_block(i),internal_index_in_block(j)) )
            {
             check = false;
            }

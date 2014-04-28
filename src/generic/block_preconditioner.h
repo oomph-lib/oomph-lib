@@ -1830,22 +1830,7 @@ class BlockSelector
   /// \short Return the block number corresponding to a global index i_dof.
   int block_number(const unsigned& i_dof) const
   {
-   int dn = dof_number(i_dof);
-   if (dn == -1)
-    {
-     return dn;
-    }
-   else
-    {
-     return Dof_number_to_block_number_lookup[dn];
-    }
-  } // EOFunc block_number(...)
-
-  // Given a global degree of freedom, returns the block number, this is the
-  // external block, not the underlying or the dof block.
-  int external_block_number(const unsigned& i_dof) const
-  {
-    int internal_block_number = this->block_number(i_dof);
+    int internal_block_number = this->internal_block_number(i_dof);
 
     if(internal_block_number == -1)
     {
@@ -1853,7 +1838,8 @@ class BlockSelector
     }
     else
     {
-      // map the internal block to external block.
+      // Map the internal block to the "external" block number, i.e. what the
+      // writer of the preconditioner is expects.
       unsigned block_i = 0;
       while(std::find(Block_to_dof_map_fine[block_i].begin(), 
                       Block_to_dof_map_fine[block_i].end(), 
@@ -1867,51 +1853,18 @@ class BlockSelector
     }
   }
 
-  /// \short Return the index in the block corresponding to a global block
-  /// number i_dof.
+  /// \short Given a global dof number, returns the index in the block it 
+  /// belongs to.
+  /// This is the overall index, not local block (in parallel).
   int index_in_block(const unsigned& i_dof) const
   {
-
-   // the index in the dof block
-   unsigned index = index_in_dof(i_dof);
-
-   // the dof block number
-   int dof_block_number = dof_number(i_dof);
-   if (dof_block_number >= 0)
-    {
-
-     // the 'actual' block number
-     unsigned blk_number = block_number(i_dof);
-
-     // compute the index in the block
-     unsigned j = 0;
-     while (int(Block_number_to_dof_number_lookup[blk_number][j]) !=
-            dof_block_number)
-      {
-       index +=
-        dof_block_dimension
-        (Block_number_to_dof_number_lookup[blk_number][j]);
-       j++;
-      }
-
-     // and return
-     return index;
-    }
-   return -1;
-  } // EOFunc index_in_block(...)
-
-  // Given a global dof number, returns the index in the block it belongs to.
-  // This is the overall index, not local block (in parallel).
-  int external_index_in_block(const unsigned& i_dof) const
-  {
-    
     // the dof block number
     int dof_block_number = this->dof_number(i_dof);
 
     if(dof_block_number >= 0)
     {
       // the external block number
-      unsigned ex_blk_number = this->external_block_number(i_dof);
+      unsigned ex_blk_number = this->block_number(i_dof);
       
       int internal_index_in_dof = this->index_in_dof(i_dof);
 
@@ -1953,7 +1906,6 @@ class BlockSelector
 
     return -1;
   }
-
 
   /// \short Access function to the internal block distributions.
   const LinearAlgebraDistribution*
@@ -2817,6 +2769,60 @@ class BlockSelector
   /// Matrix_pt and returns it in output_block.
   void internal_get_block(const unsigned& i, const unsigned& j,
                                       MATRIX& output_block) const;
+
+  /// \short Return the block number corresponding to a global index i_dof.
+  /// This returns the block number corresponding to the internal blocks.
+  /// What this means is that this returns the most fine grain dof-block 
+  /// number which this global index i_dof corresponds to. Since the writer
+  /// of the preconditioner does not need to care about the internal block
+  /// types, this function should not be used and thus moved to private.
+  /// This function should not be removed since it is still used deep within
+  /// the inner workings of the block preconditioning framework.
+  int internal_block_number(const unsigned& i_dof) const
+  {
+   int dn = dof_number(i_dof);
+   if (dn == -1)
+    {
+     return dn;
+    }
+   else
+    {
+     return Dof_number_to_block_number_lookup[dn];
+    }
+  } // EOFunc internal_block_number(...)
+
+  /// \short Return the index in the block corresponding to a global block
+  /// number i_dof. The index returned corresponds to the internal blocks,
+  /// which is the most fine grain dof blocks.
+  int internal_index_in_block(const unsigned& i_dof) const
+  {
+   // the index in the dof block
+   unsigned index = index_in_dof(i_dof);
+
+   // the dof block number
+   int dof_block_number = dof_number(i_dof);
+   if (dof_block_number >= 0)
+    {
+
+     // the 'actual' block number
+     unsigned blk_number = internal_block_number(i_dof);
+
+     // compute the index in the block
+     unsigned j = 0;
+     while (int(Block_number_to_dof_number_lookup[blk_number][j]) !=
+            dof_block_number)
+      {
+       index +=
+        dof_block_dimension
+        (Block_number_to_dof_number_lookup[blk_number][j]);
+       j++;
+      }
+
+     // and return
+     return index;
+    }
+   return -1;
+  } // EOFunc internal_index_in_block(...)
 
 
   /// \short insert a Vector<unsigned> and LinearAlgebraDistribution* pair
