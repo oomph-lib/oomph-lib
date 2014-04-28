@@ -336,7 +336,7 @@ namespace oomph
       unsigned coarse_dof = Doftype_in_master_preconditioner_coarse[i];
 
       unsigned n_internal_doftypes 
-       = Master_block_preconditioner_pt->internal_ndof_types_in(coarse_dof);
+       = Master_block_preconditioner_pt->nfine_grain_dof_types_in(coarse_dof);
 
       Vector<unsigned> tmp_sub_vec;
       for (unsigned j = 0; j < n_internal_doftypes; j++) 

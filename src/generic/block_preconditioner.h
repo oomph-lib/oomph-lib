@@ -2330,15 +2330,6 @@ class BlockSelector
    oomph_info << std::endl;
   } // EOFunc document()
 
-  /// \short Access function for the most fine grain dof types in a coarsened
-  /// dof type.
-  Vector<unsigned> get_fine_grain_dof_types_in(unsigned& i) const
-  {
-    // RAYRAY check if i is in the range 0 < Doftype_coarsen_map_fine.size()
-
-    return Doftype_coarsen_map_fine[i];
-  }
-
   /// \short Access function for the Doftype_coarsen_map_fine
   /// variable.
   Vector<Vector<unsigned> > doftype_coarsen_map_fine() const
@@ -2346,113 +2337,53 @@ class BlockSelector
     return Doftype_coarsen_map_fine;
   }
 
-  /// \short Access function for the number of most fine grain dof types in 
-  /// a coarsened dof type.
-  unsigned internal_ndof_types_in(unsigned& i) const
+  /// \short Returns the most fine grain dof types in a (possibly coarsened)
+  /// dof type.
+  Vector<unsigned> get_fine_grain_dof_types_in(const unsigned& i) const
   {
-    // RAYRAY check if i is in the range 0 < Doftype_coarsen_map_fine.size()
+#ifdef PARANOID
+    const unsigned n_dof_types = ndof_types();
 
+    if(i >= n_dof_types)
+    {
+      std::ostringstream err_msg;
+      err_msg << "Trying to get the most fine grain dof types in dof type "
+        << i << ",\nbut there are only " << n_dof_types 
+        << " number of dof types.\n";
+      throw OomphLibError(err_msg.str(),
+          OOMPH_CURRENT_FUNCTION,
+          OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+    return Doftype_coarsen_map_fine[i];
+  }
+
+  /// \short Access function for the number of most fine grain dof types in 
+  /// a (possibly coarsened) dof type.
+  unsigned nfine_grain_dof_types_in(const unsigned& i) const
+  {
+#ifdef PARANOID
+    const unsigned n_dof_types = ndof_types();
+
+    if(i >= n_dof_types)
+    {
+      std::ostringstream err_msg;
+      err_msg << "Trying to get the number of most fine grain dof types "
+        << "in dof type " << i << ",\n"
+        << "but there are only " << n_dof_types 
+        << " number of dof types.\n";
+      throw OomphLibError(err_msg.str(),
+          OOMPH_CURRENT_FUNCTION,
+          OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
     return Doftype_coarsen_map_fine[i].size();
   }
 
-  /// \short Set the precomputed (and possibly modified) preconditioner blocks.
-  /// The precomputed_block_pt is a Dense matrix of pointers of precomputed 
-  /// blocks for this preconditioner to use in preconditioning.
-  /// 
-  /// This function is called from outside of this preconditioner to set
-  /// block matrices to use instead of the block matrices extracted from the
-  /// jacobian. A typical use would be if this is a subsidiary preconditioner
-  /// and a master preconditioner has to pass down modified blocks for the 
-  /// subsidiary preconditioner to use.
-  /// RAYRAY move to protected!!!!
-  void set_replacement_dof_block(const unsigned &block_i, 
-      const unsigned &block_j,
-      CRDoubleMatrix* replacement_dof_block_pt)
+  /// \short Access function to the replaced dof-level blocks.
+  MapMatrix<unsigned,CRDoubleMatrix*> replacement_dof_block_pt() const
   {
-#ifdef PARANOID
-    // Check if block_setup(...) has been called.
-    if(nblock_types() == 0)
-    {
-      std::ostringstream err_msg;
-      err_msg << "nblock_types() is 0, has block_setup(...) been called?\n";
-      throw OomphLibError(err_msg.str(),
-          OOMPH_CURRENT_FUNCTION,
-          OOMPH_EXCEPTION_LOCATION);
-    }
-
-    // Check that the most fine grain mapping has been used in block_setup(...)
-    // i.e. nblock_types() == ndof_types()
-    if(ndof_types() != nblock_types())
-    {
-      std::ostringstream err_msg;
-      err_msg << "ndof_types() != nblock_types()\n"
-              << "Only the dof-level blocks can be replaced.\n"
-              << "Please re-think your blocking scheme.\n";
-      throw OomphLibError(err_msg.str(),
-          OOMPH_CURRENT_FUNCTION,
-          OOMPH_EXCEPTION_LOCATION);
-    }
-
-    // Check that the replacement block pt is not null
-    if(replacement_dof_block_pt == 0)
-    {
-      std::ostringstream err_msg;
-      err_msg << "Replacing block(" << block_i << "," << block_i << ")\n"
-        << " but the pointer is NULL." << std::endl;
-      throw OomphLibError(err_msg.str(),
-          OOMPH_CURRENT_FUNCTION,
-          OOMPH_EXCEPTION_LOCATION);
-    }
-
-    // Check that the replacement block has been built
-    if(!replacement_dof_block_pt->built())
-    {
-      std::ostringstream err_msg;
-      err_msg << "Replacement block(" << block_i << "," << block_i << ")"
-        << " is not built." << std::endl;
-      throw OomphLibError(err_msg.str(),
-          OOMPH_CURRENT_FUNCTION,
-          OOMPH_EXCEPTION_LOCATION);
-    }
-
-    // Check if the distribution matches. Determine which natural ordering dof
-    // this should go to. I.e. we convert from dof-block index to dof index.
-    // Luckily, this is stored in Block_to_dof_map_coarse.
-    const unsigned para_dof_block_i = Block_to_dof_map_coarse[block_i][0];
-
-    if(*dof_block_distribution_pt(para_dof_block_i) !=
-       *replacement_dof_block_pt->distribution_pt() )
-    {
-      std::ostringstream err_msg;
-      err_msg << "The distribution of the replacement dof_block_pt\n"
-              << "is different from the Dof_block_distribution_pt["
-              << para_dof_block_i<<"].\n";
-      throw OomphLibError(err_msg.str(),
-          OOMPH_CURRENT_FUNCTION,
-          OOMPH_EXCEPTION_LOCATION);
-    }
-
-    // Possibly get a dof_level_block and compare the ncol?
-
-#endif
-    
-    // Block_to_dof_map_coarse[x][0] sense because we only can use this if 
-    // nblock_types() == ndof_types(), i.e. each sub-vector is of length 1.
-    //
-    // We use this indirection so that the placement of the pointer is 
-    // consistent with internal_get_block(...).
-    const unsigned dof_block_i = Block_to_dof_map_coarse[block_i][0];
-    const unsigned dof_block_j = Block_to_dof_map_coarse[block_j][0];
-
-    Replacement_dof_block_pt(dof_block_i,dof_block_j) 
-      = replacement_dof_block_pt;
-
-  } // EOFunc set_precomputed_blocks(...)
-
- /// \short Access function to the replaced dof-level blocks.
- MapMatrix<unsigned,CRDoubleMatrix*> replacement_dof_block_pt() const
-  {
-   return Replacement_dof_block_pt;
+    return Replacement_dof_block_pt;
   }  // EOFunc replacement_block_pt()
 
   /// \short Setup a matrix vector product.
@@ -2463,8 +2394,8 @@ class BlockSelector
   /// To solve this problem, we have stored the precomputed block distributions
   /// which are available for such instances!
   void setup_matrix_vector_product(MatrixVectorProduct* matvec_prod_pt,
-                                   CRDoubleMatrix* block_pt,
-                                   const Vector<unsigned>& block_col_indices)
+      CRDoubleMatrix* block_pt,
+      const Vector<unsigned>& block_col_indices)
   {
     const unsigned nblock = block_col_indices.size();
 
@@ -2472,51 +2403,43 @@ class BlockSelector
     {
       const unsigned col_index = block_col_indices[0];
       matvec_prod_pt->setup(block_pt,
-                            Block_distribution_pt[col_index]);
+          Block_distribution_pt[col_index]);
     }
     else
     {
-  std::map<Vector<unsigned>,
-           LinearAlgebraDistribution* >::const_iterator iter;
+      std::map<Vector<unsigned>,
+        LinearAlgebraDistribution* >::const_iterator iter;
 
-  iter = Auxiliary_block_distribution_pt.find(block_col_indices);
-    if(iter != Auxiliary_block_distribution_pt.end())
-    {
-      matvec_prod_pt->setup(block_pt,iter->second);
-    }
-    else
-    {
-      Vector<LinearAlgebraDistribution*> tmp_vec_dist_pt(nblock,0);
-      for (unsigned b = 0; b < nblock; b++) 
+      iter = Auxiliary_block_distribution_pt.find(block_col_indices);
+      if(iter != Auxiliary_block_distribution_pt.end())
       {
-        tmp_vec_dist_pt[b] = Block_distribution_pt[block_col_indices[b]];
+        matvec_prod_pt->setup(block_pt,iter->second);
       }
+      else
+      {
+        Vector<LinearAlgebraDistribution*> tmp_vec_dist_pt(nblock,0);
+        for (unsigned b = 0; b < nblock; b++) 
+        {
+          tmp_vec_dist_pt[b] = Block_distribution_pt[block_col_indices[b]];
+        }
 
-      LinearAlgebraDistribution* tmp_dist_pt = new LinearAlgebraDistribution;
-      LinearAlgebraDistributionHelpers::concatenate(tmp_vec_dist_pt,
-                                                    *tmp_dist_pt);
-      insert_auxiliary_block_distribution(block_col_indices,tmp_dist_pt);
-      matvec_prod_pt->setup(block_pt,tmp_dist_pt);
-    }
+        LinearAlgebraDistribution* tmp_dist_pt = new LinearAlgebraDistribution;
+        LinearAlgebraDistributionHelpers::concatenate(tmp_vec_dist_pt,
+            *tmp_dist_pt);
+        insert_auxiliary_block_distribution(block_col_indices,tmp_dist_pt);
+        matvec_prod_pt->setup(block_pt,tmp_dist_pt);
+      }
     }
   } // EOFunc setup_matrix_vector_product(...)
 
   // RAYRAY comment
   void setup_matrix_vector_product(MatrixVectorProduct* matvec_prod_pt,
-                                   CRDoubleMatrix* block_pt,
-                                   const unsigned& block_col_index)
+      CRDoubleMatrix* block_pt,
+      const unsigned& block_col_index)
   {
     Vector<unsigned> col_index_vector(1,block_col_index);
     setup_matrix_vector_product(matvec_prod_pt,block_pt,col_index_vector);
   } // EOFunc setup_matrix_vector_product(...)
-
-  void internal_get_block_vectors(
-      const Vector<unsigned>& block_vec_number, 
-      const DoubleVector& v, Vector<DoubleVector >& s) const;
-
-  void internal_return_block_vectors(
-      const Vector<unsigned>& block_vec_number,
-      const Vector<DoubleVector >& s, DoubleVector& v) const;
 
  private:
 
@@ -2717,6 +2640,14 @@ class BlockSelector
   void internal_return_block_vectors(
       const Vector<DoubleVector >& s, DoubleVector& v) const;
 
+  void internal_get_block_vectors(
+      const Vector<unsigned>& block_vec_number, 
+      const DoubleVector& v, Vector<DoubleVector >& s) const;
+
+  void internal_return_block_vectors(
+      const Vector<unsigned>& block_vec_number,
+      const Vector<DoubleVector >& s, DoubleVector& v) const;
+
   /// \short Gets block (i,j) from the original matrix, pointed to by
   /// Matrix_pt and returns it in output_block.
   void internal_get_block(const unsigned& i, const unsigned& j,
@@ -2899,7 +2830,89 @@ class BlockSelector
 
  protected:
 
+  /// \short Set replacement dof-level blocks.
+  /// Only dof-level blocks can be set. This is important due to how the
+  /// dof type coarsening feature operates.
+  void set_replacement_dof_block(const unsigned &block_i, 
+      const unsigned &block_j,
+      CRDoubleMatrix* replacement_dof_block_pt)
+  {
+#ifdef PARANOID
+    // Check if block_setup(...) has been called.
+    if(nblock_types() == 0)
+    {
+      std::ostringstream err_msg;
+      err_msg << "nblock_types() is 0, has block_setup(...) been called?\n";
+      throw OomphLibError(err_msg.str(),
+          OOMPH_CURRENT_FUNCTION,
+          OOMPH_EXCEPTION_LOCATION);
+    }
 
+    // Check that the most fine grain mapping has been used in block_setup(...)
+    // i.e. nblock_types() == ndof_types()
+    if(ndof_types() != nblock_types())
+    {
+      std::ostringstream err_msg;
+      err_msg << "ndof_types() != nblock_types()\n"
+              << "Only the dof-level blocks can be replaced.\n"
+              << "Please re-think your blocking scheme.\n";
+      throw OomphLibError(err_msg.str(),
+          OOMPH_CURRENT_FUNCTION,
+          OOMPH_EXCEPTION_LOCATION);
+    }
+
+    // Check that the replacement block pt is not null
+    if(replacement_dof_block_pt == 0)
+    {
+      std::ostringstream err_msg;
+      err_msg << "Replacing block(" << block_i << "," << block_i << ")\n"
+        << " but the pointer is NULL." << std::endl;
+      throw OomphLibError(err_msg.str(),
+          OOMPH_CURRENT_FUNCTION,
+          OOMPH_EXCEPTION_LOCATION);
+    }
+
+    // Check that the replacement block has been built
+    if(!replacement_dof_block_pt->built())
+    {
+      std::ostringstream err_msg;
+      err_msg << "Replacement block(" << block_i << "," << block_i << ")"
+        << " is not built." << std::endl;
+      throw OomphLibError(err_msg.str(),
+          OOMPH_CURRENT_FUNCTION,
+          OOMPH_EXCEPTION_LOCATION);
+    }
+
+    // Check if the distribution matches. Determine which natural ordering dof
+    // this should go to. I.e. we convert from dof-block index to dof index.
+    // Luckily, this is stored in Block_to_dof_map_coarse.
+    const unsigned para_dof_block_i = Block_to_dof_map_coarse[block_i][0];
+
+    if(*dof_block_distribution_pt(para_dof_block_i) !=
+       *replacement_dof_block_pt->distribution_pt() )
+    {
+      std::ostringstream err_msg;
+      err_msg << "The distribution of the replacement dof_block_pt\n"
+              << "is different from the Dof_block_distribution_pt["
+              << para_dof_block_i<<"].\n";
+      throw OomphLibError(err_msg.str(),
+          OOMPH_CURRENT_FUNCTION,
+          OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+    
+    // Block_to_dof_map_coarse[x][0] sense because we only can use this if 
+    // nblock_types() == ndof_types(), i.e. each sub-vector is of length 1.
+    //
+    // We use this indirection so that the placement of the pointer is 
+    // consistent with internal_get_block(...).
+    const unsigned dof_block_i = Block_to_dof_map_coarse[block_i][0];
+    const unsigned dof_block_j = Block_to_dof_map_coarse[block_j][0];
+
+    Replacement_dof_block_pt(dof_block_i,dof_block_j) 
+      = replacement_dof_block_pt;
+
+  } // EOFunc set_precomputed_blocks(...)
 
   /// \short Check if any of the meshes are distributed. This is equivalent
   /// to problem.distributed() and is used as a replacement.
