@@ -2387,12 +2387,16 @@ class BlockSelector
   }  // EOFunc replacement_block_pt()
 
   /// \short Setup a matrix vector product.
+  /// matvec_prod_pt is a pointer to the MatrixVectorProduct,
+  /// block_pt is a pointer to the block matrix,
+  /// block_col_indices is a vector indicating which block indices does the
+  /// RHS vector we want to multiply the matrix by.
+  /// 
   /// The distribution of the block column must be the same as the 
   /// RHS vector being solved. By default, OOMPH-LIB's uniform row distribution
-  /// is employed. When blocks are precomputed, this is no longer true, the RHS
-  /// vector is now a concatenation of the corresponding block distributions.
-  /// To solve this problem, we have stored the precomputed block distributions
-  /// which are available for such instances!
+  /// is employed. When block matrices are concatenated without communication,
+  /// the columns are permuted, as a result, the distribution of the columns
+  /// may no longer be uniform.
   void setup_matrix_vector_product(MatrixVectorProduct* matvec_prod_pt,
       CRDoubleMatrix* block_pt,
       const Vector<unsigned>& block_col_indices)
@@ -2432,7 +2436,8 @@ class BlockSelector
     }
   } // EOFunc setup_matrix_vector_product(...)
 
-  // RAYRAY comment
+  /// \short Setup matrix vector product. This is simply a wrapper
+  /// around the other setup_matrix_vector_product function.
   void setup_matrix_vector_product(MatrixVectorProduct* matvec_prod_pt,
       CRDoubleMatrix* block_pt,
       const unsigned& block_col_index)
