@@ -406,7 +406,7 @@ namespace oomph
     Nrow = 0;
     for (unsigned b = 0; b < Internal_ndof_types; b++)
      {
-      Nrow += this->dof_block_dimension(b);
+      Nrow += this->internal_dof_block_dimension(b);
      }
 
 #ifdef PARANOID
@@ -1823,7 +1823,7 @@ namespace oomph
     for (unsigned j = 0; j < Ndof_in_block[i]; j++)
      {
       block_dim +=
-       dof_block_dimension(Block_number_to_dof_number_lookup[i][j]);
+       internal_dof_block_dimension(Block_number_to_dof_number_lookup[i][j]);
      }
     Internal_block_distribution_pt[i] = new
      LinearAlgebraDistribution(comm_pt(),
@@ -2028,7 +2028,7 @@ namespace oomph
     for (unsigned i = 0; i < nrow; i++)
      {
       // the dof type number
-      int dof_number = this->dof_number(i);
+      int dof_number = this->internal_dof_number(i);
       if (dof_number >= 0)
        {
 
@@ -2042,11 +2042,11 @@ namespace oomph
                != dof_number)
          {
           index_in_block +=
-           dof_block_dimension(Block_number_to_dof_number_lookup[block_number]
+           internal_dof_block_dimension(Block_number_to_dof_number_lookup[block_number]
                                [ptr]);
           ptr++;
          }
-        index_in_block += index_in_dof(i);
+        index_in_block += internal_index_in_dof(i);
         Global_index[block_number][index_in_block] = i;
        }
      }
@@ -3822,7 +3822,7 @@ namespace oomph
       const unsigned required_block = block_vec_number[b];
 
       const double* s_pt = s[b].values_pt();
-      unsigned nrow = this->block_dimension(required_block);
+      unsigned nrow = this->internal_block_dimension(required_block);
       for (unsigned i = 0; i < nrow; i++)
        {
         v_pt[this->Global_index[required_block][i]] = s_pt[i];
@@ -4391,7 +4391,7 @@ namespace oomph
    {
 
     // length of vector
-    unsigned n_row = this->block_dimension(b);
+    unsigned n_row = this->internal_block_dimension(b);
 
     // copy back from the block vector to the naturally ordered vector
     double* v_pt = v.values_pt();
@@ -4674,7 +4674,7 @@ namespace oomph
     const double* v_pt = v.values_pt();
     for (unsigned b = 0; b < nblock;b++)
      {
-      unsigned block_nrow = this->block_dimension(b);
+      unsigned block_nrow = this->internal_block_dimension(b);
       for (unsigned i = 0; i < block_nrow; i++)
        {
         w_pt[block_offset+i] = v_pt[this->Global_index[b][i]];
@@ -4932,7 +4932,7 @@ namespace oomph
     double* v_pt = v.values_pt();
     for (unsigned b = 0; b < nblock;b++)
      {
-      unsigned block_nrow = this->block_dimension(b);
+      unsigned block_nrow = this->internal_block_dimension(b);
       for (unsigned i = 0; i < block_nrow; i++)
        {
         v_pt[this->Global_index[b][i]] = w_pt[block_offset+i];
@@ -5175,8 +5175,8 @@ namespace oomph
 	j_value = cr_matrix_pt->value();
     
     // get the block dimensions
-    unsigned block_nrow = this->block_dimension(block_i);
-    unsigned block_ncol = this->block_dimension(block_j);
+    unsigned block_nrow = this->internal_block_dimension(block_i);
+    unsigned block_ncol = this->internal_block_dimension(block_j);
     
     // allocate temporary storage for the component vectors of block (i,j)
     // temp_ptr is used to point to an element in each column - required as
@@ -5629,7 +5629,7 @@ namespace oomph
 
     // Fill in the compressed row matrix
     output_block.build(Internal_block_distribution_pt[block_i]);
-    output_block.build_without_copy(this->block_dimension(block_j),
+    output_block.build_without_copy(this->internal_block_dimension(block_j),
                                     local_block_nnz,
                                     values_recv,
                                     column_index_recv,

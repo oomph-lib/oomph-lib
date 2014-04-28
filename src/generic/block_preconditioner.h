@@ -1859,18 +1859,18 @@ class BlockSelector
   int index_in_block(const unsigned& i_dof) const
   {
     // the dof block number
-    int dof_block_number = this->dof_number(i_dof);
+    int internal_dof_block_number = this->internal_dof_number(i_dof);
 
-    if(dof_block_number >= 0)
+    if(internal_dof_block_number >= 0)
     {
       // the external block number
       unsigned ex_blk_number = this->block_number(i_dof);
       
-      int internal_index_in_dof = this->index_in_dof(i_dof);
+      int internal_index_in_dof = this->internal_index_in_dof(i_dof);
 
       // find the processor which this global index in block belongs to.
       unsigned block_proc 
-        = internal_block_distribution_pt(dof_block_number)
+        = internal_block_distribution_pt(internal_dof_block_number)
         ->rank_of_global_row(internal_index_in_dof);
 
       // Add up all of the first rows.
@@ -1888,7 +1888,7 @@ class BlockSelector
       // Now add up all the nrow_local up to this dof block.
       unsigned j = 0;
       
-      while(int(Block_to_dof_map_fine[ex_blk_number][j])!= dof_block_number)
+      while(int(Block_to_dof_map_fine[ex_blk_number][j])!= internal_dof_block_number)
       {
         index += internal_block_distribution_pt(
             Block_to_dof_map_fine[ex_blk_number][j])->nrow_local(block_proc);
@@ -1898,7 +1898,7 @@ class BlockSelector
       // Now add the index of this block...
       index += (internal_index_in_dof - 
                 internal_block_distribution_pt(
-                  dof_block_number)
+                  internal_dof_block_number)
                 ->first_row(block_proc));
 
       return index;
@@ -2284,7 +2284,7 @@ class BlockSelector
      for (unsigned d = 0; d < Internal_ndof_types; d++)
       {
        oomph_info << "Master DOF number " << d << " : "
-                  << this->master_dof_number(d) << std::endl;
+                  << this->internal_master_dof_number(d) << std::endl;
       }
     }
    oomph_info << std::endl;
@@ -2685,7 +2685,7 @@ class BlockSelector
   /// the inner workings of the block preconditioning framework.
   int internal_block_number(const unsigned& i_dof) const
   {
-   int dn = dof_number(i_dof);
+   int dn = internal_dof_number(i_dof);
    if (dn == -1)
     {
      return dn;
@@ -2702,11 +2702,11 @@ class BlockSelector
   int internal_index_in_block(const unsigned& i_dof) const
   {
    // the index in the dof block
-   unsigned index = index_in_dof(i_dof);
+   unsigned index = internal_index_in_dof(i_dof);
 
    // the dof block number
-   int dof_block_number = dof_number(i_dof);
-   if (dof_block_number >= 0)
+   int internal_dof_block_number = internal_dof_number(i_dof);
+   if (internal_dof_block_number >= 0)
     {
 
      // the 'actual' block number
@@ -2715,10 +2715,10 @@ class BlockSelector
      // compute the index in the block
      unsigned j = 0;
      while (int(Block_number_to_dof_number_lookup[blk_number][j]) !=
-            dof_block_number)
+            internal_dof_block_number)
       {
        index +=
-        dof_block_dimension
+        internal_dof_block_dimension
         (Block_number_to_dof_number_lookup[blk_number][j]);
        j++;
       }
@@ -2951,8 +2951,7 @@ class BlockSelector
   /// the block number in the subsidiary block preconditioner is returned. If
   /// a particular global DOF is not associated with this preconditioner then
   /// -1 is returned
-  // RAYRAY this is internal
-  int dof_number(const unsigned& i_dof) const
+  int internal_dof_number(const unsigned& i_dof) const
   {
 
    if (is_master_block_preconditioner())
@@ -2979,7 +2978,7 @@ class BlockSelector
      unsigned my_rank = comm_pt()->my_rank();
      std::ostringstream error_message;
      error_message
-      << "Proc " << my_rank<<": Requested dof_number(...) for global DOF " 
+      << "Proc " << my_rank<<": Requested internal_dof_number(...) for global DOF " 
       << i_dof << "\n"
       << "cannot be found.\n";
      throw OomphLibError(
@@ -2996,7 +2995,7 @@ class BlockSelector
    else
     {
      // Block number in master prec
-     unsigned blk_num = Master_block_preconditioner_pt->dof_number(i_dof);
+     unsigned blk_num = Master_block_preconditioner_pt->internal_dof_number(i_dof);
 
      // Search through the Block_number_in_master_preconditioner for master
      // block blk_num and return the block number in this preconditioner
@@ -3019,8 +3018,7 @@ class BlockSelector
 
   /// \short Return the row/column number of global unknown i_dof within it's
   /// block.
-  // RAYRAY this is internal
-  unsigned index_in_dof(const unsigned& i_dof) const
+  unsigned internal_index_in_dof(const unsigned& i_dof) const
   {
    if (is_master_block_preconditioner())
     {
@@ -3045,7 +3043,7 @@ class BlockSelector
 #ifdef PARANOID
      std::ostringstream error_message;
      error_message
-      << "Requested index_in_dof(...) for global DOF " << i_dof << "\n"
+      << "Requested internal_index_in_dof(...) for global DOF " << i_dof << "\n"
       << "cannot be found.\n";
      throw OomphLibError(
                          error_message.str(),
@@ -3058,7 +3056,7 @@ class BlockSelector
     }
    else
     {
-     return Master_block_preconditioner_pt->index_in_dof(i_dof);
+     return Master_block_preconditioner_pt->internal_index_in_dof(i_dof);
     }
 
    // Shouldn't get here
@@ -3073,9 +3071,22 @@ class BlockSelector
   /// this preconditioner acts as a subsidiary preconditioner then b refers
   /// to the block number in the subsidiary preconditioner not the master
   /// block preconditioner.
-  // RAYRAY this is internal
-  unsigned block_dimension(const unsigned& b) const
+  unsigned internal_block_dimension(const unsigned& b) const
   {
+#ifdef PARANOID
+    const unsigned i_nblock_types = internal_nblock_types();
+    if(b >= i_nblock_types)
+    {
+      std::ostringstream err_msg;
+      err_msg << "Trying to get internal block dimension for \n"
+              << "internal block " << b <<".\n" 
+              << "But there are only " << i_nblock_types
+              << " internal dof types.\n";
+      throw OomphLibError(err_msg.str(),
+          OOMPH_CURRENT_FUNCTION,
+          OOMPH_EXCEPTION_LOCATION); 
+    }
+#endif
    return Internal_block_distribution_pt[b]->nrow();
   }
 
@@ -3083,10 +3094,22 @@ class BlockSelector
   /// freedom are associated with it. Note that if this preconditioner acts as
   /// a subsidiary preconditioner, then i refers to the block number in the
   /// subsidiary preconditioner not the master block preconditioner
-  // RAYRAY this is internal
-  unsigned dof_block_dimension(const unsigned& i) const
+  unsigned internal_dof_block_dimension(const unsigned& i) const
   {
-
+#ifdef PARANOID
+    const unsigned i_n_dof_types = internal_ndof_types();
+    if(i >= i_n_dof_types)
+    {
+      std::ostringstream err_msg;
+      err_msg << "Trying to get internal dof block dimension for \n"
+              << "internal dof block " << i <<".\n" 
+              << "But there are only " << i_n_dof_types 
+              << " internal dof types.\n";
+      throw OomphLibError(err_msg.str(),
+          OOMPH_CURRENT_FUNCTION,
+          OOMPH_EXCEPTION_LOCATION); 
+    }
+#endif
    // I don't understand the difference between this function and
    // block_dimension(...) but I'm not going to mess with it... David
 
@@ -3096,8 +3119,8 @@ class BlockSelector
     }
    else
     {
-     unsigned master_i = master_dof_number(i);
-     return Master_block_preconditioner_pt->dof_block_dimension(master_i);
+     unsigned master_i = internal_master_dof_number(i);
+     return Master_block_preconditioner_pt->internal_dof_block_dimension(master_i);
     }
   }
 
@@ -3122,8 +3145,7 @@ class BlockSelector
   /// corresponding block number in the master preconditioner. If this
   /// preconditioner does not have a master block preconditioner then the
   /// block number passed is returned
-  // RAYRAY this is internal
-  unsigned master_dof_number(const unsigned& b) const
+  unsigned internal_master_dof_number(const unsigned& b) const
   {
    if (is_master_block_preconditioner())
     return b;
