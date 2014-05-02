@@ -128,6 +128,22 @@ void HSL_MA42::solve_for_one_dof(Problem* const &problem_pt,
 //====================================================================
 void HSL_MA42::solve(Problem* const &problem_pt, DoubleVector &result)
 {
+#ifdef OOMPH_HAS_MPI
+ if(problem_pt->communicator_pt()->nproc() > 1)
+  {
+   std::ostringstream error_message;
+   error_message 
+    << "HSL_MA42 solver cannot be used in parallel.\n"
+    << "Please change to another linear solver.\n"
+    << "If you want to use a frontal solver then try MumpsSolver\n";
+   
+   throw OomphLibError(error_message.str(),
+                       OOMPH_CURRENT_FUNCTION,
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+    
+
  //Find the number of elements
  unsigned long n_el = problem_pt->mesh_pt()->nelement();
 

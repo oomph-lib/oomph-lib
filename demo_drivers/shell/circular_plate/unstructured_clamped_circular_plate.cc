@@ -1238,7 +1238,7 @@ fill_in_generic_residual_contribution_shell(Vector<double> &residuals,
           }
          
          // Assign nodal equations for each nodes
-         DenseMatrix<double> nodal_eqn(this->nnode(),n_position_type,-1);
+         DenseMatrix<int> nodal_eqn(this->nnode(),n_position_type,-1);
          this->get_nodal_eqn_curve(nodal_eqn);
        
          //--------------------------------------------
@@ -1420,7 +1420,7 @@ fill_in_generic_residual_contribution_shell(Vector<double> &residuals,
      else /// find residuals for the first and second directions(tangents)
       {
        // Assign nodal equations for each nodes
-       DenseMatrix<double> nodal_eqn(this->nnode(),n_position_type,-1);
+       DenseMatrix<int> nodal_eqn(this->nnode(),n_position_type,-1);
        if(bd_element==1)
         {
          this->get_nodal_eqn_curve(nodal_eqn);

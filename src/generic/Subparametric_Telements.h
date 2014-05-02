@@ -3384,7 +3384,7 @@ public:
    //Find the element dimension
    const unsigned el_dim = dim();
    //Find the number of second derivatives required
-   const unsigned n_deriv = N2deriv[el_dim];
+   //const unsigned n_deriv = N2deriv[el_dim];
    //Get the values of the shape function and local derivatives for unknowns
    d2basis_local(s,psi,dpsi,d2psi);
      
@@ -4767,7 +4767,7 @@ public:
  /// the nodal values defined on the element doesn't match with the defined 
  /// shape functions
  //=======================================================================
- void get_nodal_eqn_curve(DenseMatrix<double> &nodal_eqn) 
+ void get_nodal_eqn_curve(DenseMatrix<int> &nodal_eqn) 
   {
    // assign degrees of freedom to the reference element
    DenseMatrix<double> D(21,21), B(21,36);

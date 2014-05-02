@@ -1793,9 +1793,9 @@ const string& poly_file_name) :
  // Set the boundary conditions for this problem: By default, all nodal
  // values are free -- we only need to pin the ones that have 
  // Dirichlet conditions. 
- unsigned n_side0 = mesh_pt()->nboundary_node(0);
+// unsigned n_side0 = mesh_pt()->nboundary_node(0);
  unsigned n_side1 = mesh_pt()->nboundary_node(1);
- unsigned n_side2 = mesh_pt()->nboundary_node(2);
+ //unsigned n_side2 = mesh_pt()->nboundary_node(2);
  unsigned n_side3 = mesh_pt()->nboundary_node(3);
  
  //------ PLATE BENDING PROBLEM -------------

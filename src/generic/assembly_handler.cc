@@ -2744,7 +2744,7 @@ namespace oomph
        Count.global_value(local_eqn);
       //Final term that specifies the symmetry
       residuals[raw_ndof] +=
-       ((*Problem_pt->dof_pt(local_eqn))*Psi.global_value(local_eqn))/
+       ((*Problem_pt->global_dof_pt(local_eqn))*Psi.global_value(local_eqn))/
        Count.global_value(local_eqn);
      }
    }
@@ -2780,7 +2780,7 @@ namespace oomph
 
       //Specify the symmetry
       residuals[raw_ndof] +=
-       ((*Problem_pt->dof_pt(local_eqn))*Psi.global_value(local_eqn))/
+       ((*Problem_pt->global_dof_pt(local_eqn))*Psi.global_value(local_eqn))/
        Count.global_value(local_eqn);
       //Specify the normalisation
       residuals[2*raw_ndof+1] += (Y.global_value(local_eqn)*
@@ -2922,7 +2922,7 @@ namespace oomph
        {
         //Get the original (unaugmented) global equation number
         unsigned long global_eqn = Assembly_handler_pt->eqn_number(elem_pt,n);
-        double* unknown_pt = Problem_pt->dof_pt(global_eqn);
+        double* unknown_pt = Problem_pt->global_dof_pt(global_eqn);
         double init = *unknown_pt;
         *unknown_pt += FD_step;
 Problem_pt->actions_before_newton_convergence_check();

@@ -740,7 +740,7 @@ fill_in_generic_residual_contribution_biharmonic(Vector<double> &residuals,
    if(bd_element==1)
     {
      // Assign the nodal local equation numbers
-     DenseMatrix<double> nodal_eqn(6,n_position_type,-1);
+     DenseMatrix<int> nodal_eqn(6,n_position_type,-1);
      for(unsigned k=0;k<n_position_type;k++)
       {
        nodal_eqn(0,k) = this->nodal_local_eqn(0,k);

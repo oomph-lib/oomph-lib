@@ -173,7 +173,7 @@ all:
 	echo "" >> build_script.bash
 	echo "" >> build_script.bash
 	echo "# Update Makefile" >> build_script.bash
-	echo "escaped_blas_lib=\`echo $(blas_lib) | awk '{gsub(\"/\",\"\\/\"); print}' \`" >> build_script.bash
+	echo "escaped_blas_lib=\`echo $(blas_lib) | awk '{gsub(\"/\",\"\\\\\\/\"); print}' \`" >> build_script.bash
 	echo -e "sed \"s/@mpicc@/"$(CC)"/g\" Makefile.inc.template  | sed \"s/@mpif90@/"$(F77)"/g\"  | sed \"s/@blas_lib@/\044escaped_blas_lib/g\" | sed \"s/@fopts@/"$(FFLAGS)"/g\" | sed \"s/@lopts@/"$(FFLAGS)"/g\" | sed \"s/@copts@/"$(CFLAGS)"/g\" | sed \"s/@mangle@/\044fortran_mangle/g\" > MUMPS_4.10.0/Makefile.inc" >> build_script.bash
 	echo "" >> build_script.bash
 	echo "cd MUMPS_4.10.0" >> build_script.bash

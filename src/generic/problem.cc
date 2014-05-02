@@ -7710,7 +7710,7 @@ for(unsigned i=0;i<n_vec;i++)
      for(unsigned n=0;n<n_var;n++)
       {
        unsigned eqn_number = assembly_handler_pt->eqn_number(elem_pt,n);
-       dof_bac[n] = *this->dof_pt(eqn_number);
+       dof_bac[n] = *this->global_dof_pt(eqn_number);
       }
 
      //Now loop over all vectors C
@@ -7721,7 +7721,8 @@ for(unsigned i=0;i<n_vec;i++)
         {
          unsigned eqn_number = assembly_handler_pt->eqn_number(elem_pt,n);
          //Perturb by vector C[i]
-         *this->dof_pt(eqn_number) += C_mult[i]*C[i].global_value(eqn_number);
+         *this->global_dof_pt(eqn_number) += 
+          C_mult[i]*C[i].global_value(eqn_number);
         }
         actions_before_newton_convergence_check();
 
@@ -7735,7 +7736,7 @@ for(unsigned i=0;i<n_vec;i++)
        for(unsigned n=0;n<n_var;n++)
         {
          unsigned eqn_number = assembly_handler_pt->eqn_number(elem_pt,n);
-         *this->dof_pt(eqn_number) = dof_bac[n];
+         *this->global_dof_pt(eqn_number) = dof_bac[n];
         }
         actions_before_newton_convergence_check();
 
@@ -15820,7 +15821,8 @@ void Problem::synchronise_dofs(const bool& do_halos,
 //========================================================================
 long Problem::synchronise_eqn_numbers(const bool& assign_local_eqn_numbers)
 {
- // number of equations on this processor
+ // number of equations on this processor, which at this stage is only known
+ // by counting the number of dofs that have been added to the problem 
  unsigned my_n_eqn = Dof_pt.size();
 
  // my rank

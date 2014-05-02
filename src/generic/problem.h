@@ -439,6 +439,8 @@ namespace oomph
  /// in the adaptive solution of bifurcation problems.
  void bifurcation_adapt_doc_errors(const unsigned &bifurcation_type);
 
+//ALH_TEMP_DEVELOPMENT
+  protected:
  /// \short The distribution of the DOFs in this problem.
  /// This object is created in the Problem constructor and setup
  /// when assign_eqn_numbers(...) is called.
@@ -448,6 +450,7 @@ namespace oomph
  /// be uniform over all processors.
  LinearAlgebraDistribution* Dof_distribution_pt;
 
+  private:
 #ifdef OOMPH_HAS_MPI
 
  ///\short Helper method that returns the (unique) global equations to which
@@ -1548,7 +1551,7 @@ namespace oomph
  /// \short Return a pointer to the dof, indexed by global equation number
  /// which may be haloed or stored locally. If it is haloed, a local copy
  /// must have been requested on this processor in the Halo_scheme_pt.
- inline double* dof_pt(const unsigned &i)
+ inline double* global_dof_pt(const unsigned &i)
   {
 #ifdef OOMPH_HAS_MPI
    //If the problem is distributed I have to do something different
@@ -2094,6 +2097,9 @@ namespace oomph
                                      const double &ds,
                                      const unsigned &max_adapt);
 
+
+ //ALH_DEVELOP
+  protected:
 
  /// \short Private helper function that is used to set the appropriate
  /// pinned values for continuation.
