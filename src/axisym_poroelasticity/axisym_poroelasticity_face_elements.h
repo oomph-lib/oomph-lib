@@ -76,6 +76,11 @@ namespace AxisymmetricPoroelasticityTractionElementHelper
     load=0.0;
    }
 
+  /// \short Public boolean to allow gap between poro-elastic and Navier Stokes
+  /// element in FSI computations. Useful in hybrid linear/nonlinear geometry
+  /// runs where this will happen
+  bool Allow_gap_in_FSI=false;
+
  }
 
 
@@ -815,37 +820,39 @@ protected:
 
 
 #ifdef PARANOID
-
-   // Get own coordinates:
-   Vector<double> s(n_dim-1);
-   for(unsigned i=0;i<(n_dim-1);i++)
+   if (!AxisymmetricPoroelasticityTractionElementHelper::Allow_gap_in_FSI)
     {
-     s[i] = integral_pt()->knot(intpt,i);
+     // Get own coordinates:
+     Vector<double> s(n_dim-1);
+     for(unsigned i=0;i<(n_dim-1);i++)
+      {
+       s[i] = integral_pt()->knot(intpt,i);
+      }
+     Vector<double> x_local(n_dim);
+     this->interpolated_x(s,x_local);
+     
+     // Get bulk coordinates in external element
+     Vector<double> x_bulk(n_dim);
+     x_bulk[0]=ext_el_pt->interpolated_x(s_ext,0);
+     x_bulk[1]=ext_el_pt->interpolated_x(s_ext,1);
+     double error=sqrt((x_local[0]-x_bulk[0])*(x_local[0]-x_bulk[0])+
+                       (x_local[1]-x_bulk[1])*(x_local[1]-x_bulk[1]));
+     double tol=1.0e-10;
+     if (error>tol)
+      {
+       std::stringstream junk;
+       junk 
+        << "Gap between external and face element coordinate\n"
+        << "is suspiciously large:"
+        << error << " ( tol = " << tol << " ) " 
+        << "\nExternal/bulk at: " 
+        << x_bulk[0] << " " << x_bulk[1] << "\n" 
+        << "Face at: " << x_local[0] << " " << x_local[1] << "\n";
+       throw OomphLibError(junk.str(),
+                           OOMPH_CURRENT_FUNCTION,
+                           OOMPH_EXCEPTION_LOCATION);
+      }
     }
-   Vector<double> x_local(n_dim);
-   this->interpolated_x(s,x_local);
-
-    // Get bulk coordinates in external element
-    Vector<double> x_bulk(n_dim);
-    x_bulk[0]=ext_el_pt->interpolated_x(s_ext,0);
-    x_bulk[1]=ext_el_pt->interpolated_x(s_ext,1);
-    double error=sqrt((x_local[0]-x_bulk[0])*(x_local[0]-x_bulk[0])+
-                      (x_local[1]-x_bulk[1])*(x_local[1]-x_bulk[1]));
-    double tol=1.0e-10;
-    if (error>tol)
-     {
-      std::stringstream junk;
-      junk 
-       << "Gap between external and face element coordinate\n"
-       << "is suspiciously large:"
-       << error << " ( tol = " << tol << " ) " 
-       << "\nExternal/bulk at: " 
-       << x_bulk[0] << " " << x_bulk[1] << "\n" 
-       << "Face at: " << x_local[0] << " " << x_local[1] << "\n";
-      throw OomphLibError(junk.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-     }
 #endif
 
 

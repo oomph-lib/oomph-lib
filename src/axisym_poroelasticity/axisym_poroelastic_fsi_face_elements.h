@@ -211,25 +211,28 @@ public:
     x_bulk[1]=ext_el_pt->interpolated_x(s_ext,1);
     
 #ifdef PARANOID
-    // Get own coordinates:
-    Vector<double> x(Dim);
-    this->interpolated_x(s,x);
-
-    double error=sqrt((x[0]-x_bulk[0])*(x[0]-x_bulk[0])+
-                      (x[1]-x_bulk[1])*(x[1]-x_bulk[1]));
-    double tol=1.0e-10;
-    if (error>tol)
+    if (!AxisymmetricPoroelasticityTractionElementHelper::Allow_gap_in_FSI)
      {
-      std::stringstream junk;
-      junk 
-       << "Gap between external and face element coordinate\n"
-       << "is suspiciously large: "
-       << error << "\nBulk/external at: " 
-       << x_bulk[0] << " " << x_bulk[1] << "\n" 
-       << "Face at: " << x[0] << " " << x[1] << "\n";
-      OomphLibWarning(junk.str(),
-                      OOMPH_CURRENT_FUNCTION,
-                      OOMPH_EXCEPTION_LOCATION);
+      // Get own coordinates:
+      Vector<double> x(Dim);
+      this->interpolated_x(s,x);
+      
+      double error=sqrt((x[0]-x_bulk[0])*(x[0]-x_bulk[0])+
+                        (x[1]-x_bulk[1])*(x[1]-x_bulk[1]));
+      double tol=1.0e-10;
+      if (error>tol)
+       {
+        std::stringstream junk;
+        junk 
+         << "Gap between external and face element coordinate\n"
+         << "is suspiciously large: "
+         << error << "\nBulk/external at: " 
+         << x_bulk[0] << " " << x_bulk[1] << "\n" 
+         << "Face at: " << x[0] << " " << x[1] << "\n";
+        OomphLibWarning(junk.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+       }
      }
 #endif
   
