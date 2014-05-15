@@ -4625,6 +4625,47 @@ void FiniteElement::identify_field_data_for_interactions(
 /// Do not ignore warning for discontinuous tangent vectors.
 bool FaceElement::Ignore_discontinuous_tangent_warning = false;
 
+
+//========================================================================
+/// Output boundary coordinate zeta
+//========================================================================
+void FaceElement::output_zeta(std::ostream &outfile, const unsigned& nplot)
+{
+ //Vector of local coordinates
+ unsigned n_dim=dim();
+ Vector<double> s(n_dim);
+ 
+ // Tecplot header info
+ outfile << tecplot_zone_string(nplot);
+ 
+ // Loop over plot points
+ unsigned num_plot_points=nplot_points(nplot);
+ for (unsigned iplot=0;iplot<num_plot_points;iplot++)
+  {
+   // Get local coordinates of plot point
+   get_s_plot(iplot,nplot,s);
+   
+   // Spatial coordinates are one higher
+   for(unsigned i=0;i<n_dim+1;i++) 
+    {
+     outfile << interpolated_x(s,i) << " ";
+    }
+   
+   // Boundary coordinate
+   Vector<double> zeta(n_dim);
+   interpolated_zeta(s,zeta);
+   for(unsigned i=0;i<n_dim;i++) 
+    {
+     outfile << zeta[i] << " ";
+    }
+   outfile << std::endl;   
+  }
+ 
+ // Write tecplot footer (e.g. FE connectivity lists)
+ write_tecplot_zone_footer(outfile,nplot);
+}
+
+
 //========================================================================
 /// \short Calculate the determinant of the 
 /// Jacobian of the mapping between local and global

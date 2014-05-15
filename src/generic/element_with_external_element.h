@@ -168,6 +168,12 @@ class ElementWithExternalElement: public virtual FiniteElement
     }
 
 
+   /// \short Output by plotting vector from integration point to 
+   /// corresponding point in external element for specified interaction
+   /// index
+   void output_external_elements(std::ostream &outfile,
+                                 const unsigned &interaction_index);
+
    /// \short Initialise storage for pointers to external elements and their
    /// local coordinates. This must be called before any of
    /// the access functions are used.

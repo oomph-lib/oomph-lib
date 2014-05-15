@@ -4268,6 +4268,8 @@ class FaceElement: public virtual FiniteElement
     } //End of loop over nodes
   }
 
+ /// Output boundary coordinate zeta
+ void output_zeta(std::ostream &outfile, const unsigned& nplot);
 
  /// \short Return boolean to indicate if any of the FaceElement's nodes
  /// are geometrically hanging (Same as version in RefineableElement

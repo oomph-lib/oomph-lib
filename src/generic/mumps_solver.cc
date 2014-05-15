@@ -231,9 +231,9 @@ void MumpsSolver::factorise(DoubleMatrixBase* const &matrix_pt)
       << "         the communicator to be a duplicate of MPI_COMM_WORLD\n"
       << "         (done via an optional boolean to MPI_Helpers::init(...)\n\n"
       << "         (You can suppress this warning by recompiling without\n"
-      << "         paranoia or setting \n\n"
-      << "         MumpsSolver::suppress_warning_about_MPI_COMM_WORLD()\n\n"
-      << "         to true.\n";
+      << "         paranoia or calling \n\n"
+      << "         MumpsSolver::enable_suppress_warning_about_MPI_COMM_WORLD()\n\n"
+      << "         \n";
      OomphLibWarning(error_message_stream.str(),
                      "MumpsSolver::factorise()",
                      OOMPH_EXCEPTION_LOCATION);
@@ -501,9 +501,9 @@ void MumpsSolver::factorise(DoubleMatrixBase* const &matrix_pt)
        << "         the communicator to be a duplicate of MPI_COMM_WORLD\n"
        << "         (done via an optional boolean to MPI_Helpers::init(...)\n\n"
        << "         (You can suppress this warning by recompiling without\n"
-       << "         paranoia or setting \n\n"
-       << "         MumpsSolver::suppress_warning_about_MPI_COMM_WORLD()\n\n"
-       << "         to true.\n";
+       << "         paranoia or calling \n\n"
+       << "         MumpsSolver::enable_suppress_warning_about_MPI_COMM_WORLD()\n\n"
+       << "         \n";
       OomphLibWarning(error_message_stream.str(),
                       "MumpsSolver::backsub()",
                       OOMPH_EXCEPTION_LOCATION);
@@ -690,9 +690,9 @@ void MumpsSolver::solve(DoubleMatrixBase* const &matrix_pt,
       << "         the communicator to be a duplicate of MPI_COMM_WORLD\n"
       << "         (done via an optional boolean to MPI_Helpers::init(...)\n\n"
       << "         (You can suppress this warning by recompiling without\n"
-      << "         paranoia or setting \n\n"
-      << "         MumpsSolver::suppress_warning_about_MPI_COMM_WORLD()\n\n"
-      << "         to true.\n";
+      << "         paranoia or calling \n\n"
+      << "         MumpsSolver::enable_suppress_warning_about_MPI_COMM_WORLD()\n\n"
+      << "         \n";
      OomphLibWarning(error_message_stream.str(),
                      "MumpsSolver::solve()",
                      OOMPH_EXCEPTION_LOCATION);
@@ -855,9 +855,9 @@ void MumpsSolver::solve(Problem* const &problem_pt, DoubleVector &result)
       << "         the communicator to be a duplicate of MPI_COMM_WORLD\n"
       << "         (done via an optional boolean to MPI_Helpers::init(...)\n\n"
       << "         (You can suppress this warning by recompiling without\n"
-      << "         paranoia or setting \n\n"
-      << "         MumpsSolver::suppress_warning_about_MPI_COMM_WORLD()\n\n"
-      << "         to true.\n";
+      << "         paranoia or calling \n\n"
+      << "         MumpsSolver::enable_suppress_warning_about_MPI_COMM_WORLD()\n\n"
+      << "         \n";
      OomphLibWarning(error_message_stream.str(),
                      "MumpsSolver::solve()",
                      OOMPH_EXCEPTION_LOCATION);
@@ -960,9 +960,9 @@ void MumpsSolver::solve(Problem* const &problem_pt, DoubleVector &result)
        << "         the communicator to be a duplicate of MPI_COMM_WORLD\n"
        << "         (done via an optional boolean to MPI_Helpers::init(...)\n\n"
        << "         (You can suppress this warning by recompiling without\n"
-       << "         paranoia or setting \n\n"
-       << "         MumpsSolver::suppress_warning_about_MPI_COMM_WORLD()\n\n"
-       << "         to true.\n";
+       << "         paranoia or calling\n\n"
+       << "         MumpsSolver::enable_suppress_warning_about_MPI_COMM_WORLD()\n\n"
+       << "         \n";
       OomphLibWarning(error_message_stream.str(),
                       "MumpsSolver::resolve()",
                       OOMPH_EXCEPTION_LOCATION);

@@ -698,4 +698,62 @@ assign_external_interaction_data_local_eqn_numbers()
   reset_after_external_interaction_geometric_fd();
  }
 
+
+
+//============================================================================
+ /// Output by plotting vector from integration point to 
+ /// corresponding point in external element for specified interaction
+ /// index
+//==========================================================================
+ void ElementWithExternalElement::output_external_elements(
+  std::ostream &outfile,
+  const unsigned &interaction_index)
+ {
+  // Dimension of element
+  unsigned n_dim_el=dim();
+  Vector<double> s(n_dim_el);
+  
+  // Vectors for coordintes
+  unsigned n_dim=node_pt(0)->ndim();
+  Vector<double> x(n_dim);
+  Vector<double> x_ext(n_dim);
+  
+  //Loop over the integration points
+  const unsigned n_intpt = this->integral_pt()->nweight();
+  outfile << "ZONE I=" << n_intpt << std::endl;
+  for(unsigned ipt=0;ipt<n_intpt;ipt++)
+   {
+    for(unsigned i=0;i<n_dim_el;i++)
+     {
+      s[i] = integral_pt()->knot(ipt,i);
+     }
+    
+    // Eulerian coordinates of integration point
+    interpolated_x(s,x);
+    
+    // Get pointer to external element
+    FiniteElement* ext_el_pt=external_element_pt(interaction_index,
+                                                 ipt);
+    // Get local coordinate in external element
+    Vector<double> s_ext(external_element_local_coord(interaction_index,
+                                                      ipt));
+    
+    // Eulerian coordinates of point in external element
+    ext_el_pt->interpolated_x(s_ext,x_ext);
+    
+    // Output coords of interation point
+    for(unsigned i=0;i<n_dim;i++)
+     {
+      outfile << x[i] << " ";
+     }
+    // Write vector to point in external element
+    for(unsigned i=0;i<n_dim;i++)
+     {
+      outfile << x_ext[i]-x[i] << " ";
+     }
+    outfile << std::endl;
+   }
+ }
+
+
 }
