@@ -91,6 +91,29 @@ void ARPACK::solve_eigenproblem(Problem* const &problem_pt,
  ncv   = NArnoldi < n ? NArnoldi : n; //Number of Arnoldi vectors allowed 
                                       //Maximum possible value is max
                                       //dimension of matrix
+
+ //If we don't have enough Arnoldi vectors to compute the desired number
+ //of eigenvalues then complain
+ if(nev > ncv) 
+  {
+   std::ostringstream warning_stream;
+   warning_stream << "Number of requested eigenvalues " << nev << "\n"
+                  << "is greater than the number of Arnoldi vectors:"
+                  << ncv << "\n";
+   //Increase the number of Arnoldi vectors
+   ncv = nev + 10;
+   if(ncv > n) {ncv = n;}
+
+   warning_stream << "Increasing number of Arnoldi vectors to " << ncv
+                  << "\n but you may want to increase further using\n"
+                  << "ARPACK::narnoldi()\n"
+                  << "which will also get rid of this warning.\n";
+
+   OomphLibWarning(warning_stream.str(),
+                   OOMPH_CURRENT_FUNCTION,
+                   OOMPH_EXCEPTION_LOCATION);
+  }
+
  //Allocate some workspace
  int lworkl  = 3*ncv*ncv + 6*ncv; 
  
