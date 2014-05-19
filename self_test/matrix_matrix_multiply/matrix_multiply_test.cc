@@ -310,8 +310,8 @@ int main()
  cout << "DenseDoubleMatrix " << endl;
  D_matrix1_pt->multiply(*D_matrix2_pt, *D_result_pt);
 
- // output matricies
- bool output = false;
+ // output matrices
+ bool output = true;
  if (output)
  {
   ofstream file;
@@ -360,7 +360,7 @@ int main()
   file.close();
  }
 
-	// clear up memory
+ // clear up memory
  delete problem1_pt;
  delete problem2_pt;
 

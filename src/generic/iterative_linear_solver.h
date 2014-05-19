@@ -78,7 +78,7 @@ class IterativeLinearSolver : public LinearSolver
    Tolerance=1.0e-8;
    
    //Set maximum number of iterations 
-   Max_iter=1000;
+   Max_iter=100;
 
    // set default for document convergence history
    Doc_convergence_history = false;

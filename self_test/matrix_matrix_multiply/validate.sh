@@ -5,7 +5,7 @@ OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
 
 
 #Set the number of tests to be checked
-NUM_TESTS=0
+NUM_TESTS=7
 
 # Setup validation directory
 #---------------------------
@@ -28,18 +28,36 @@ echo " " >> validation.log
 echo "Validation directory: " >> validation.log
 echo " " >> validation.log
 echo "  " `pwd` >> validation.log
-echo " " >> validation.log
-cd RESLT
-#cat .. > results.dat
-cd ..
+echo " " >> validation.log 
+sort -k 1 -k 2 -n  CC_result1.dat > CC_result1.dat.sorted
+sort -k 1 -k 2 -n  CC_result2.dat > CC_result2.dat.sorted
+sort -k 1 -k 2 -n  CC_result3.dat > CC_result3.dat.sorted
+sort -k 1 -k 2 -n  CR_result1.dat > CR_result1.dat.sorted
+sort -k 1 -k 2 -n  CR_result2.dat > CR_result2.dat.sorted
+sort -k 1 -k 2 -n  CR_result3.dat > CR_result3.dat.sorted
+sort -k 1 -k 2 -n  D_result.dat   > D_result.dat.sorted
 
 
 
-#if test "$1" = "no_fpdiff"; then
-#  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
-#else
-#../../../bin/fpdiff.py ../validata/results.dat.gz RESLT/results.dat >> validation.log
-#fi
+
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+echo "CC method 1: ">> validation.log
+../../../bin/fpdiff.py ../validata/result.dat.gz   CC_result1.dat.sorted >> validation.log
+echo "CC method 2: ">> validation.log
+../../../bin/fpdiff.py ../validata/result.dat.gz   CC_result2.dat.sorted >> validation.log
+echo "CC method 3: ">> validation.log
+../../../bin/fpdiff.py ../validata/result.dat.gz   CC_result3.dat.sorted >> validation.log
+echo "CR method 1: ">> validation.log
+../../../bin/fpdiff.py ../validata/result.dat.gz   CR_result1.dat.sorted >> validation.log
+echo "CR method 2: ">> validation.log
+../../../bin/fpdiff.py ../validata/result.dat.gz   CR_result2.dat.sorted >> validation.log
+echo "CR method 3: ">> validation.log
+../../../bin/fpdiff.py ../validata/result.dat.gz   CR_result3.dat.sorted >> validation.log
+echo "Dense: ">> validation.log
+../../../bin/fpdiff.py ../validata/result.dat.gz   D_result.dat.sorted >> validation.log
+fi
 
 
 

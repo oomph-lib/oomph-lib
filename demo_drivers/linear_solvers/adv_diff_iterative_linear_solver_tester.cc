@@ -517,7 +517,15 @@ void run_it(LinearSolver* linear_solver_pt)
  // Set linear solver
  problem.linear_solver_pt()=linear_solver_pt;
 
- 
+ // Change max. number of iterations (some of the solvers used here
+ // are rubbish!
+ IterativeLinearSolver* iter_solver_pt=
+  dynamic_cast<IterativeLinearSolver*>(linear_solver_pt);
+ if (iter_solver_pt!=0)
+  {
+   iter_solver_pt->max_iter()=1000;
+  }
+
  // Get Jacobian matrix and create dummy rhs for re-solve
  // (solution from re-solve should be a vector of ones)
  unsigned n_dof=problem.ndof();
