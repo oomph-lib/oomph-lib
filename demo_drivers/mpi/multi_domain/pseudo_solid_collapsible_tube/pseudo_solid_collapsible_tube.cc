@@ -1607,6 +1607,9 @@ set_pseudo_elastic_fsi_solver()
 
   // Set tolerance
   solver_pt->tolerance()=1.0e-8;
+
+  // Max. number of iterations
+  solver_pt->max_iter()=200;
   
   // preconditioner
   PseudoElasticFSIPreconditioner* prec_pt = new
