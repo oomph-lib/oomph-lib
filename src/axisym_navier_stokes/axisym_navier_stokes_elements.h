@@ -1190,7 +1190,7 @@ public:
   }
 
  /// Compute the volume of the element
- double compute_volume() const
+ double compute_physical_size() const
  {
   // Initialise result
   double result = 0.0;
@@ -1229,7 +1229,7 @@ public:
    }
 
   // Multiply by 2pi (integrating in azimuthal direction)
-  return (2*MathematicalConstants::Pi*result);
+  return (2.0*MathematicalConstants::Pi*result);
  }
 
 }; 

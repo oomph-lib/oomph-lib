@@ -3810,7 +3810,11 @@ void FiniteElement::get_dresidual_dnodal_coordinates(
  }
 
 //====================================================================
-/// Calculate the size of the element.
+/// Calculate the size of the element (in Eulerian computational 
+/// coordinates. Use suitably overloaded compute_physical_size()
+/// function to compute the actual size (taking into account
+/// factors such as 2pi or radii the integrand) -- such function
+/// can only be implemented on an equation-by-equation basis.
 //====================================================================
  double FiniteElement::size() const
  {

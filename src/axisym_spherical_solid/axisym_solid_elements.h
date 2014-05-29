@@ -279,8 +279,8 @@ class AxisymmetricPVDEquations : public virtual SolidFiniteElement
  //The jacobian is calculated by finite differences by default,
  //could overload the get_jacobian function here if desired
 
- /// Overload the size function to calculate the volume of the element
- double size() const
+ /// Overload/implement the function to calculate the volume of the element
+ double compute_physical_size() const
   {
    unsigned n_node = nnode();
    unsigned n_position_type = 1;
@@ -1086,8 +1086,8 @@ public virtual SolidFiniteElement
  //The jacobian is calculated by finite differences by default,
  //could overload the get_jacobian function here if desired
 
- ///Overload the size function
- double size() const
+ ///Overload/implement the size function
+ double compute_physical_size() const
   {
    unsigned n_node = nnode();
    unsigned n_position_type = 1;

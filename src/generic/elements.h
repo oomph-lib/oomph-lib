@@ -2417,11 +2417,28 @@ public:
    return 0.0;
   }
 
- /// Calculate the size of the element (length, area, volume,...)
- // ALH: Only virtual so that it can be overloaded in axisymmetric
- // elements
- virtual double size() const; 
+  /// Calculate the size of the element (length, area, volume,...)
+  /// in Eulerian computational 
+  /// coordinates. Use suitably overloaded compute_physical_size()
+  /// function to compute the actual size (taking into account
+  /// factors such as 2pi or radii the integrand) -- such function
+  /// can only be implemented on an equation-by-equation basis.
+  double size() const; 
  
+
+  /// \short Broken virtual 
+  /// function to compute the actual size (taking into account
+  /// factors such as 2pi or radii the integrand) -- such function
+  /// can only be implemented on an equation-by-equation basis.
+ virtual double compute_physical_size() const
+  {
+    throw OomphLibError(
+    "compute_physical_size() isn't implemented for this element\n",
+    OOMPH_CURRENT_FUNCTION,
+    OOMPH_EXCEPTION_LOCATION);
+    // Dummy return
+   return 0.0;
+  }
  
  /// \short Virtual function to write the double precision numbers that
  /// appear in a single line of output into the data vector. Empty virtual,
