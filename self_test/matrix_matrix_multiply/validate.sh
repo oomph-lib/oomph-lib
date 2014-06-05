@@ -44,19 +44,19 @@ if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 echo "CC method 1: ">> validation.log
-../../../bin/fpdiff.py ../validata/result.dat.gz   CC_result1.dat.sorted >> validation.log
+../../../bin/fpdiff.py ../validata/result.dat.gz CC_result1.dat.sorted 0.1 2.0e-14 >> validation.log
 echo "CC method 2: ">> validation.log
-../../../bin/fpdiff.py ../validata/result.dat.gz   CC_result2.dat.sorted >> validation.log
+../../../bin/fpdiff.py ../validata/result.dat.gz   CC_result2.dat.sorted  0.1 2.0e-14 >> validation.log
 echo "CC method 3: ">> validation.log
-../../../bin/fpdiff.py ../validata/result.dat.gz   CC_result3.dat.sorted >> validation.log
+../../../bin/fpdiff.py ../validata/result.dat.gz   CC_result3.dat.sorted  0.1 2.0e-14 >> validation.log
 echo "CR method 1: ">> validation.log
-../../../bin/fpdiff.py ../validata/result.dat.gz   CR_result1.dat.sorted >> validation.log
+../../../bin/fpdiff.py ../validata/result.dat.gz   CR_result1.dat.sorted  0.1 2.0e-14 >> validation.log
 echo "CR method 2: ">> validation.log
-../../../bin/fpdiff.py ../validata/result.dat.gz   CR_result2.dat.sorted >> validation.log
+../../../bin/fpdiff.py ../validata/result.dat.gz   CR_result2.dat.sorted  0.1 2.0e-14 >> validation.log
 echo "CR method 3: ">> validation.log
-../../../bin/fpdiff.py ../validata/result.dat.gz   CR_result3.dat.sorted >> validation.log
+../../../bin/fpdiff.py ../validata/result.dat.gz   CR_result3.dat.sorted  0.1 2.0e-14 >> validation.log
 echo "Dense: ">> validation.log
-../../../bin/fpdiff.py ../validata/result.dat.gz   D_result.dat.sorted >> validation.log
+../../../bin/fpdiff.py ../validata/result.dat.gz   D_result.dat.sorted  0.1 2.0e-14 >> validation.log
 fi
 
 

@@ -12,6 +12,7 @@
 #include "mesh.h"
 #include "algebraic_elements.h"
 #include "macro_element_node_update_element.h"
+#include "Qspectral_elements.h"
 #include "refineable_line_element.h"
 
 namespace oomph
