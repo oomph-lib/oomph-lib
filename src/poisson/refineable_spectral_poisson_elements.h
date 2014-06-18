@@ -93,9 +93,10 @@ public QSpectralPoissonElement<DIM,NNODE_1D>,
  Node* vertex_node_pt(const unsigned& j) const
   {return QSpectralPoissonElement<DIM,NNODE_1D>::vertex_node_pt(j);}
 
- void assign_all_generic_local_eqn_numbers()
+ void assign_all_generic_local_eqn_numbers(const bool &store_local_dof_pt)
   {
-   RefineableElement::assign_all_generic_local_eqn_numbers();
+   RefineableElement::
+    assign_all_generic_local_eqn_numbers(store_local_dof_pt);
   }
 
  /// \short Order of recovery shape functions for Z2 error estimation:

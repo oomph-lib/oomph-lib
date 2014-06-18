@@ -288,21 +288,25 @@ class ElementWithExternalElement: public virtual FiniteElement
 
    /// \short Overload the assign internal and external local equation
    /// number scheme so that the interaction data is taken into account
-   void assign_internal_and_external_local_eqn_numbers()
+   void assign_internal_and_external_local_eqn_numbers(
+    const bool &store_local_dof_pt)
     {
      //Call the external stuff first so that it is near the front of the 
      //list for fast searches when using indexing by global dof for 
      //analytic calculation of interaction blocks.
-     this->assign_external_interaction_data_local_eqn_numbers();
+     this->assign_external_interaction_data_local_eqn_numbers(
+      store_local_dof_pt);
      //Now call the underlying equation numbering
-     GeneralisedElement::assign_internal_and_external_local_eqn_numbers();
+     GeneralisedElement::
+      assign_internal_and_external_local_eqn_numbers(store_local_dof_pt);
     }
    
    /// \short Assign the local equation numbers for those 
    /// Data values involved in the external interactions that 
    /// affect the residuals of the element
-   void assign_external_interaction_data_local_eqn_numbers();
-
+   void assign_external_interaction_data_local_eqn_numbers(
+    const bool &store_local_dof_pt);
+   
 
    /// \short Calculate the contributions to the jacobian from all external
    /// interaction degrees of freedom (geometric and field data) in

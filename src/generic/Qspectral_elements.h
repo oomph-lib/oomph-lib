@@ -187,10 +187,13 @@ class SpectralElement : public virtual FiniteElement
   {return (*Spectral_data_pt)[i];}
 
 
- virtual void assign_all_generic_local_eqn_numbers()
+ /// \short Assign the local equation numbers. If the boolean argument is
+ /// true then store degrees of freedom at Dof_pt
+ virtual void assign_all_generic_local_eqn_numbers(
+  const bool &store_local_dof_pt)
   {
    //Do the standard finite element stuff
-   FiniteElement::assign_all_generic_local_eqn_numbers();
+   FiniteElement::assign_all_generic_local_eqn_numbers(store_local_dof_pt);
   
    //Now need to loop over the spectral data 
    unsigned n_spectral = nspectral();
@@ -245,12 +248,13 @@ class SpectralElement : public virtual FiniteElement
        //Otherwise it's just data
        else
         {
-         unsigned n_value = spectral_data_pt(n)->nvalue();
+         Data* const data_pt = spectral_data_pt(n);
+         unsigned n_value = data_pt->nvalue();
          //Loop over the number of values
          for(unsigned j=0;j<n_value;j++)
           {
            //Get the GLOBAL equation number
-           long eqn_number = spectral_data_pt(n)->eqn_number(j);
+           long eqn_number = data_pt->eqn_number(j);
            //If the GLOBAL equation number is positive (a free variable)
            if(eqn_number >= 0)
             {
@@ -258,6 +262,12 @@ class SpectralElement : public virtual FiniteElement
              //local-to-global translation
              //scheme
              global_eqn_number_queue.push_back(eqn_number);
+            //Add pointer to the dof to the queue if required
+             if(store_local_dof_pt)
+              {
+               GeneralisedElement::Dof_pt_deque.push_back(
+                data_pt->value_pt(j));
+              }
              //Add the local equation number to the local scheme
              Spectral_local_eqn(n,j) = local_eqn_number;
              //Increase the local number
@@ -273,7 +283,11 @@ class SpectralElement : public virtual FiniteElement
       }
 
      //Now add our global equations numbers to the internal element storage
-     add_global_eqn_numbers(global_eqn_number_queue);
+     add_global_eqn_numbers(global_eqn_number_queue,
+                            GeneralisedElement::Dof_pt_deque);
+     //Clear the memory used in the deque
+     if(store_local_dof_pt)
+      {std::deque<double*>().swap(GeneralisedElement::Dof_pt_deque);}
      
     } //End of case when there are spectral degrees of freedom
   }

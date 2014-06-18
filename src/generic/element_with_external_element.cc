@@ -186,7 +186,8 @@ namespace oomph
 /// or external Data.
 //==========================================================================
 void ElementWithExternalElement::
-assign_external_interaction_data_local_eqn_numbers()
+assign_external_interaction_data_local_eqn_numbers(
+ const bool &store_local_dof_pt)
 {
  //Reset number of stored field data to zero
  Nexternal_interaction_field_data=0;
@@ -475,6 +476,14 @@ assign_external_interaction_data_local_eqn_numbers()
 
        //Add the GLOBAL equation number to the local queue
        global_eqn_number_queue.push_back(eqn_number);
+       //Add pointer to the dof to the queue if required
+       if(store_local_dof_pt)
+        {
+         GeneralisedElement::Dof_pt_deque.push_back(
+          External_interaction_field_data_pt[i]->value_pt(
+           External_interaction_field_data_index[i]));
+        }
+
        //Add the local equation number to the local scheme
        External_interaction_field_data_local_eqn[i] = local_eqn_number;
        //Increase the local number
@@ -487,7 +496,11 @@ assign_external_interaction_data_local_eqn_numbers()
       }
     }
    //Now add our global equations numbers to the internal element storage
-   add_global_eqn_numbers(global_eqn_number_queue);
+    add_global_eqn_numbers(global_eqn_number_queue,
+                           GeneralisedElement::Dof_pt_deque);
+    //Clear the memory used in the deque
+    if(store_local_dof_pt)
+     {std::deque<double*>().swap(GeneralisedElement::Dof_pt_deque);}
   }
 
  //Find the number of external geometric data
@@ -521,6 +534,14 @@ assign_external_interaction_data_local_eqn_numbers()
       {
        //Add the GLOBAL equation number to the local queue
        global_eqn_number_queue.push_back(eqn_number);
+       //Add pointer to the dof to the queue if required
+       if(store_local_dof_pt)
+        {
+         GeneralisedElement::Dof_pt_deque.push_back(
+          External_interaction_geometric_data_pt[i]->value_pt(
+           External_interaction_geometric_data_index[i]));
+        }
+
        //Add the local equation number to the local scheme
        External_interaction_geometric_data_local_eqn[i] = local_eqn_number;
        //Increase the local number
@@ -533,7 +554,11 @@ assign_external_interaction_data_local_eqn_numbers()
       }
     }
    //Now add our global equations numbers to the internal element storage
-   add_global_eqn_numbers(global_eqn_number_queue);
+   add_global_eqn_numbers(global_eqn_number_queue,
+                          GeneralisedElement::Dof_pt_deque);
+   //Clear the memory used in the deque
+   if(store_local_dof_pt)
+    {std::deque<double*>().swap(GeneralisedElement::Dof_pt_deque);}
   }
   }
 }

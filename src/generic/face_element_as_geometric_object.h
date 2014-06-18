@@ -152,10 +152,11 @@ public:
 
 
  /// Unique final overrider needed for assign_all_generic_local_eqn_numbers
- void assign_all_generic_local_eqn_numbers()
+ void assign_all_generic_local_eqn_numbers(const bool &store_local_dof_pt)
   {
    // Call the ElementWithExternalElement's assign function
-   ElementWithExternalElement::assign_all_generic_local_eqn_numbers();
+   ElementWithExternalElement::assign_all_generic_local_eqn_numbers(
+    store_local_dof_pt);
   }
  
 

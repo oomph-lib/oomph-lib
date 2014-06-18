@@ -222,7 +222,9 @@ namespace oomph
  /// actions_after_read_unstructured_meshes() function has been called.
  bool Empty_actions_after_read_unstructured_meshes_has_been_called;
 
-
+ /// \short Boolean to indicate whether local dof pointers should be
+ /// stored in the elements
+ bool Store_local_dof_pt_in_elements;
 
 
   protected:
@@ -543,6 +545,20 @@ namespace oomph
 
  /// Vector of pointers to dofs
  Vector<double*> Dof_pt;
+
+ ///\short Counter that records how many elements contribute to each dof.
+ /// Used to determine the automatic (discrete) arc-length automatically.
+ /// It really should be an integer, but is a double so that the
+ /// distribution information can be used for distributed problems
+ DoubleVectorWithHaloEntries Element_count_per_dof;
+
+ /// \short Function that populates the Element_counter_per_dof vector
+ /// with the number of elements that contribute to each dof. For example,
+ /// with linear elements in 1D each dof contains contributions from two
+ /// elements apart from those on the boundary. Returns the total number
+ /// of elements in the problem
+ unsigned setup_element_count_per_dof();
+
 
 #ifdef OOMPH_HAS_MPI
 
@@ -1515,6 +1531,16 @@ namespace oomph
 
  /// \short Self-test: Check meshes and global data. Return 0 for OK
  unsigned self_test();
+
+ /// \short Insist that local dof pointers are set up in each element
+ /// when equation numbering takes place
+ void enable_store_local_dof_pt_in_elements() 
+ {Store_local_dof_pt_in_elements=true;}
+
+ /// \short Insist that local dof pointers are NOT set up in each element
+ /// when equation numbering takes place (the default)
+ void disable_store_local_dof_pt_in_elements()
+ {Store_local_dof_pt_in_elements=false;}
 
  /// \short Assign all equation numbers for problem: Deals with global
  /// data (= data that isn't attached to any elements) and then

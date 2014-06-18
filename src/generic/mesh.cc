@@ -682,13 +682,13 @@ unsigned long Mesh::assign_global_eqn_numbers(Vector<double *> &Dof_pt)
 //========================================================
 /// Assign local equation numbers in all elements
 //========================================================
-void Mesh::assign_local_eqn_numbers()
+void Mesh::assign_local_eqn_numbers(const bool &store_local_dof_pt)
 {
  //Now loop over the elements and assign local equation numbers
  unsigned long Element_pt_range = Element_pt.size();
  for(unsigned long i=0;i<Element_pt_range;i++)
   {
-   Element_pt[i]->assign_local_eqn_numbers();
+   Element_pt[i]->assign_local_eqn_numbers(store_local_dof_pt);
   }
 }
 

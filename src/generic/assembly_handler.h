@@ -70,6 +70,15 @@ class AssemblyHandler
 
  ///Return the number of degrees of freedom in the element elem_pt
  virtual unsigned ndof(GeneralisedElement* const &elem_pt);
+
+ ///\short Return vector of dofs at time level t in the element elem_pt
+ virtual void dof_vector(GeneralisedElement* const &elem_pt,
+                         const unsigned &t, Vector<double> &dof);
+
+
+ ///\short Return vector of pointers to dofs in the element elem_pt
+ virtual void dof_pt_vector(GeneralisedElement* const &elem_pt,
+                            Vector<double*> &dof_pt);
  
  /// \short Return the global equation number of the local unknown ieqn_local
  ///in elem_pt.

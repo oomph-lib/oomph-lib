@@ -1,2 +1,2 @@
 SUBDIRS = \
-harmonic
+harmonic complex_harmonic

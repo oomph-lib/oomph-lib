@@ -59,8 +59,7 @@ namespace oomph
 ///   in a single array so that we need only store one pointer. 
 ///   The internal Data are placed at the beginning
 ///   of the array and the external Data are stored at the end.
-/// - a pointer to a global Time,
-/// - a lookup table that establishes the relation between local
+/// - a pointer to a global Time/// - a lookup table that establishes the relation between local
 ///   and global equation numbers.
 /// 
 /// We also provide interfaces for functions that compute the
@@ -69,7 +68,6 @@ namespace oomph
 /// of terms that multiply any time derivatives in the problem --- is
 /// also provided to permit explicit time-stepping and the solution
 /// of the generalised eigenproblems. 
-/// Object size: 28 bytes (32-bit), 56 bytes (64-bit)
 //========================================================================
 class GeneralisedElement
 {
@@ -78,7 +76,14 @@ class GeneralisedElement
  /// \short Storage for the global equation numbers represented by the 
  /// degrees of freedom in the element.
  unsigned long *Eqn_number;
-  
+
+ /// \short Storage for array of pointers to degrees of freedom ordered
+ /// by local equation number. This information is not needed, except in
+ /// continuation, bifurcation tracking and periodic orbit calculations.
+ /// It is not set up unless the control flag 
+ /// Problem::Store_local_dof_pts_in_elements = true
+ double **Dof_pt;
+
  /// \short Storage for pointers to internal and external data.
  /// The data is of the same type and so can be addressed by 
  /// a single pointer. The idea is that the array is of 
@@ -200,28 +205,38 @@ class GeneralisedElement
   }
 
  /// \short Clear the storage for the global equation numbers
+ /// and pointers to dofs (if stored)
  void clear_global_eqn_numbers() 
-  {delete[] Eqn_number; Eqn_number=0; Ndof=0;}
+ {delete[] Eqn_number; Eqn_number=0; delete[] Dof_pt; Dof_pt=0; Ndof=0;}
 
  /// \short Add the contents of the queue global_eqn_numbers 
  /// to the local storage for the local-to-global translation scheme.
  /// It is essential that the entries in the queue are added IN ORDER
  /// i.e. from the front.
  void add_global_eqn_numbers(std::deque<unsigned long> 
-                             const &global_eqn_numbers);
+                             const &global_eqn_numbers,
+                             std::deque<double*>
+                             const &global_dof_pt);
  
  /// \short Empty dense matrix used as a dummy argument to combined
  /// residual and jacobian functions in the case when only the residuals
  /// are being assembled
  static DenseMatrix<double> Dummy_matrix;
  
+ /// \short Static storage for deque used to add_global_equation_numbers
+ /// when pointers to the dofs in each element are not required
+ static std::deque<double*> Dof_pt_deque;
+
  /// \short Assign the local equation numbers for the internal 
  /// and external Data
  /// This must be called after the global equation numbers have all been
  /// assigned. It is virtual so that it can be overloaded by
  /// ElementWithExternalElements so that any external data from the
  /// external elements in included in the numbering scheme.
- virtual void assign_internal_and_external_local_eqn_numbers();
+ /// If the boolean argument is true then pointers to the dofs will be 
+ /// stored in Dof_pt
+ virtual void assign_internal_and_external_local_eqn_numbers(
+  const bool &store_local_dof_pt);
 
  /// \short Assign all the local equation numbering schemes that can
  /// be applied generically for the element. In most cases, this is the
@@ -230,9 +245,12 @@ class GeneralisedElement
  /// called after ALL other local equation numbering has been performed.
  /// The default for the GeneralisedElement is simply to call internal
  /// and external local equation numbering.
- virtual inline void assign_all_generic_local_eqn_numbers()
+ /// If the boolean argument is true then pointers to the dofs will be stored
+ /// in Dof_pt
+ virtual inline void assign_all_generic_local_eqn_numbers(
+  const bool &store_local_dof_pt)
   {
-   assign_internal_and_external_local_eqn_numbers();
+   this->assign_internal_and_external_local_eqn_numbers(store_local_dof_pt);
   }
  
  /// \short Setup any additional look-up schemes for local equation numbers.
@@ -562,7 +580,7 @@ public:
 
  /// \short Constructor: Initialise all pointers and all values to zero
   GeneralisedElement() : 
-  Eqn_number(0), Data_pt(0),
+ Eqn_number(0), Dof_pt(0), Data_pt(0),
   Data_local_eqn(0), Ndof(0), Ninternal_data(0), Nexternal_data(0)
 #ifdef OOMPH_HAS_MPI
   , Non_halo_proc_ID(-1) , Must_be_kept_as_halo(false)
@@ -798,6 +816,60 @@ public:
  /// Return the number of equations/dofs in the element.
  unsigned ndof() const {return Ndof;}
 
+ ///\short Return the vector of dof values at time level t
+ void dof_vector(const unsigned &t, Vector<double> &dof)
+ {
+  //Check that the internal storage has been set up
+#ifdef PARANOID
+  if(Dof_pt==0)
+   {
+    std::stringstream error_stream;
+    error_stream << "Internal dof array not set up in element.\n"
+                 << "In order to set it up you must call\n"
+                 << "   Problem::enable_store_local_dof_in_elements()\n"
+                 << "before the call to Problem::assign_eqn_numbers()\n";
+    throw OomphLibError(error_stream.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif 
+  //Resize the vector
+  dof.resize(this->Ndof);
+  //Loop over the vector and fill in the desired values
+  for(unsigned i=0;i<this->Ndof;++i)
+   {
+    dof[i] = Dof_pt[i][t];
+   }
+ }
+
+ ///\short Return the vector of pointers to dof values
+ void dof_pt_vector(Vector<double*> &dof_pt)
+ {
+  //Check that the internal storage has been set up
+#ifdef PARANOID
+  if(Dof_pt==0)
+   {
+    std::stringstream error_stream;
+    error_stream << "Internal dof array not set up in element.\n"
+                 << "In order to set it up you must call\n"
+                 << "   Problem::enable_store_local_dof_in_elements()\n"
+                 << "before the call to Problem::assign_eqn_numbers()\n";
+    throw OomphLibError(error_stream.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif 
+  //Resize the vector
+  dof_pt.resize(this->Ndof);
+  //Loop over the vector and fill in the desired values
+  for(unsigned i=0;i<this->Ndof;++i)
+   {
+    dof_pt[i] = Dof_pt[i];
+   }
+ }
+
+ 
+
  /// \short Set the timestepper associated with the i-th internal data
  /// object
  void set_internal_data_time_stepper(const unsigned &i,
@@ -842,7 +914,9 @@ public:
 #endif
 
  /// \short Setup the arrays of local equation numbers for the element. 
- virtual void assign_local_eqn_numbers();
+ /// If the optional boolean argument is true, then pointers to the associated
+ /// degrees of freedom are stored locally in the array Dof_pt
+ virtual void assign_local_eqn_numbers(const bool &store_local_dof_pt);
  
  /// \short Complete the setup of any additional dependencies
  /// that the element may have. Empty virtual function that may be
@@ -1895,17 +1969,23 @@ public:
                                          DShape &d2psidx) const;
  
  /// \short Assign the local equation numbers for Data stored at the nodes
- /// Virtual so that it can be overloaded by RefineableFiniteElements
- virtual void assign_nodal_local_eqn_numbers();
+ /// Virtual so that it can be overloaded by RefineableFiniteElements.
+ /// If the boolean is true then the pointers to the degrees of freedom
+ /// associated with each equation number are stored in Dof_pt
+ virtual void assign_nodal_local_eqn_numbers(
+  const bool &store_local_dof_pt);
 
  /// \short Overloaded version of the calculation of the local equation
- /// numbers. 
- virtual inline void assign_all_generic_local_eqn_numbers()
+ /// numbers. If the boolean argument is true then pointers to the degrees
+ /// of freedom associated with each equation number are stored locally
+ /// in the array Dof_pt.
+ virtual inline void assign_all_generic_local_eqn_numbers(
+  const bool &store_local_dof_pt)
   {
    //GeneralisedElement's version assigns internal and external data
-   GeneralisedElement::assign_all_generic_local_eqn_numbers();
+   GeneralisedElement::assign_all_generic_local_eqn_numbers(store_local_dof_pt);
    //Need simply to add the nodal numbering scheme
-   assign_nodal_local_eqn_numbers();
+   assign_nodal_local_eqn_numbers(store_local_dof_pt);
   }
 
  /// Return a pointer to the local node n
@@ -3286,14 +3366,16 @@ public:
  /// \short Overload assign_all_generic_local_equation numbers to 
  /// include the data associated with solid dofs. 
  /// It remains virtual so that it can be overloaded
- /// by RefineableSolidElements
- virtual inline void assign_all_generic_local_eqn_numbers()
+ /// by RefineableSolidElements. If the boolean argument is true
+ /// then the degrees of freedom are stored in Dof_pt
+ virtual inline void assign_all_generic_local_eqn_numbers(
+  const bool &store_local_dof_pt)
   {
    //Call the standard finite element equation numbering
    //(internal, external and nodal data).
-   FiniteElement::assign_all_generic_local_eqn_numbers();
+   FiniteElement::assign_all_generic_local_eqn_numbers(store_local_dof_pt);
    //Assign the numbering for the solid dofs
-   assign_solid_local_eqn_numbers();
+   assign_solid_local_eqn_numbers(store_local_dof_pt);
   }
  
  /// \short Return i-th Lagrangian coordinate at local node n without using
@@ -3527,7 +3609,9 @@ public:
 
  /// \short Assigns local equation numbers for the generic solid 
  /// local equation numbering schemes.
- virtual void assign_solid_local_eqn_numbers();
+ /// If the boolean flag is true the the degrees of freedom are stored in
+ /// Dof_pt
+ virtual void assign_solid_local_eqn_numbers(const bool &store_local_dof);
 
  /// \short Pointer to object that specifies the initial condition
  SolidInitialCondition* Solid_ic_pt;

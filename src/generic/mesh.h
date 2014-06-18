@@ -162,8 +162,9 @@ class Mesh
  unsigned long
   assign_global_eqn_numbers(Vector<double *> &Dof_pt);
 
- /// Assign the local equation numbers in all elements
- void assign_local_eqn_numbers();
+ /// \short Assign the local equation numbers in all elements
+ /// If the boolean argument is true then also store pointers to dofs
+ void assign_local_eqn_numbers(const bool &store_local_dof_pt);
 
  /// Vector of pointers to nodes
  Vector<Node*> Node_pt;

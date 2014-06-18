@@ -308,7 +308,8 @@ namespace oomph
 //=======================================================================
 /// Assign the local hang eqn. 
 //=======================================================================
- void RefineableElement::assign_hanging_local_eqn_numbers()
+ void RefineableElement::assign_hanging_local_eqn_numbers(
+  const bool &store_local_dof_pt)
  {
   //Find the number of nodes
   const unsigned n_node = nnode();
@@ -418,6 +419,12 @@ namespace oomph
                  {
                   //Add global equation number to the queue
                   global_eqn_number_queue.push_back(eqn_number);
+                  //Add pointer to the dof to the queue if required
+                  if(store_local_dof_pt)
+                   {
+                    GeneralisedElement::Dof_pt_deque.push_back(
+                     Master_node_pt->value_pt(j));
+                   }
                   //Add to pointer based scheme
                   Local_hang_eqn[j][Master_node_pt] = local_eqn_number;
                   //Increase number of local variables
@@ -441,7 +448,12 @@ namespace oomph
      } //End of second loop over nodes
 
     //Now add our global equations numbers to the internal element storage
-    add_global_eqn_numbers(global_eqn_number_queue);
+    add_global_eqn_numbers(global_eqn_number_queue,
+                           GeneralisedElement::Dof_pt_deque);
+    //Clear the memory used in the deque
+    if(store_local_dof_pt)
+     {std::deque<double*>().swap(GeneralisedElement::Dof_pt_deque);}
+    
 
     //If there are no hanging_eqn_numbers delete the (empty) stored maps
     if(!hanging_eqn_numbers) 
@@ -1161,7 +1173,8 @@ void RefineableSolidElement::identify_geometric_data(std::set<Data*>&
 /// The standard equation numbering scheme for solid positions, 
 /// so that hanging Node information is included.
 //========================================================================
- void RefineableSolidElement::assign_solid_hanging_local_eqn_numbers()
+ void RefineableSolidElement::assign_solid_hanging_local_eqn_numbers(
+  const bool &store_local_dof_pt)
  {
   //Find the number of nodes
   const unsigned n_node = nnode();
@@ -1269,6 +1282,12 @@ void RefineableSolidElement::identify_geometric_data(std::set<Data*>&
                    {
                     //Add global equation number to the local queue
                     global_eqn_number_queue.push_back(eqn_number);
+                    //Add pointer to the dof to the queue if required
+                    if(store_local_dof_pt)
+                     {
+                      GeneralisedElement::Dof_pt_deque.push_back(
+                       &(Master_node_pt->x_gen(j,k)));
+                     }
                     //Add to pointer-based scheme
                     Position_local_eqn_at_node(j,k) = local_eqn_number;
                     //Increase the number of local variables
@@ -1295,7 +1314,12 @@ void RefineableSolidElement::identify_geometric_data(std::set<Data*>&
      } //End of loop over nodes
 
     //Now add our global equations numbers to the internal element storage
-    add_global_eqn_numbers(global_eqn_number_queue);
+    add_global_eqn_numbers(global_eqn_number_queue,
+                           GeneralisedElement::Dof_pt_deque);
+    //Clear the memory used in the deque
+    if(store_local_dof_pt)
+     {std::deque<double*>().swap(GeneralisedElement::Dof_pt_deque);}
+
 
    } //End of if nodes
  }

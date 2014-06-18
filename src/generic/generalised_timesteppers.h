@@ -124,7 +124,7 @@ class ContinuationStorageScheme : public GeneralisedTimeStepper
  /// corresponding to an impulsive start.
  void assign_initial_values_impulsive(Data* const &data_pt)
   {
-   throw OomphLibError(
+   OomphLibWarning(
     "Cannot perform impulsive start for ContinuationStorageScheme",
     OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
@@ -134,7 +134,7 @@ class ContinuationStorageScheme : public GeneralisedTimeStepper
  /// the positions for the node corresponding to an impulsive start
  void assign_initial_positions_impulsive(Node* const &node_pt)
   {
-   throw OomphLibError(
+   OomphLibWarning(
     "Cannot perform impulsive start for ContinuationStorageScheme",
     OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);

@@ -145,7 +145,8 @@ bool GeneralisedElement::Suppress_warning_about_repeated_external_data=true;
 /// are added in order, i.e. from the front.
 //=======================================================================
  void GeneralisedElement::add_global_eqn_numbers(
-  std::deque<unsigned long> const &global_eqn_numbers)
+  std::deque<unsigned long> const &global_eqn_numbers,
+  std::deque<double*> const &global_dof_pt)
  {
   //Find the number of dofs
   const unsigned n_dof = Ndof;
@@ -174,7 +175,56 @@ bool GeneralisedElement::Suppress_warning_about_repeated_external_data=true;
     ++index;
    }
   
-  //Now delete the old storage
+
+  //If a non-empty dof deque has been passed then do stuff
+  const unsigned n_additional_dof_pt = global_dof_pt.size();
+  if(n_additional_dof_pt > 0)
+   {
+//If it's size is not the same as the equation numbers complain
+#ifdef PARANOID 
+    if(n_additional_dof_pt != n_additional_dof)
+     {
+      std::ostringstream error_stream;
+      error_stream 
+       << 
+       "global_dof_pt is non-empty, yet it does not have the same size\n"
+       <<
+       "as global_eqn_numbers.\n"
+       << 
+       "There are " << n_additional_dof << " equation numbers,\n"
+       << 
+       "but " << n_additional_dof_pt << std::endl;
+      
+      throw OomphLibError(error_stream.str(),
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+#endif
+
+    //Create storge for all dofs initialised to NULL
+    double **new_dof_pt = new double*[new_n_dof];
+    //Copy over the exisiting values to the start of new storage
+    for(unsigned i=0;i<n_dof;i++) {new_dof_pt[i] = Dof_pt[i];}
+  
+    //Set an index to the next position in the new storage
+    unsigned index = n_dof;
+    //Loop over the queue and add it's entries to our new storage
+    for(std::deque<double*>::const_iterator it=global_dof_pt.begin();
+        it!=global_dof_pt.end();++it)
+     {
+      //Add the value to the storage
+      new_dof_pt[index] = *it;
+      //Increase the array index
+      ++index;
+     }
+
+    //Now delete the old storage
+    delete[] Dof_pt;
+    //Set the pointer to address the new storaga
+    Dof_pt = new_dof_pt;
+   }
+
+  //Now delete the old for the equation numbers storage
   delete[] Eqn_number;
   //Set the pointer to address the new storage
   Eqn_number = new_eqn_number; 
@@ -188,6 +238,13 @@ bool GeneralisedElement::Suppress_warning_about_repeated_external_data=true;
 /// are being assembled
 //========================================================================
 DenseMatrix<double> GeneralisedElement::Dummy_matrix;
+
+//========================================================================
+/// Static storage used when pointers to the dofs are being assembled by
+/// add_global_eqn_numbers()
+//========================================================================
+std::deque<double*> GeneralisedElement::Dof_pt_deque;
+
  
 //=========================================================================
 /// Default value used as the increment for finite difference calculations
@@ -525,10 +582,11 @@ DenseMatrix<double> GeneralisedElement::Dummy_matrix;
  /// That said, the function is virtual so that it 
  /// may be overloaded by the user if they *really* know what they are doing.
  //==========================================================================
- void GeneralisedElement::assign_local_eqn_numbers() 
+ void GeneralisedElement::assign_local_eqn_numbers(
+  const bool &store_local_dof_pt) 
  {
   clear_global_eqn_numbers();
-  assign_all_generic_local_eqn_numbers();
+  assign_all_generic_local_eqn_numbers(store_local_dof_pt);
   assign_additional_local_eqn_numbers();
 
   //Check that no global equation numbers are repeated
@@ -773,9 +831,12 @@ DenseMatrix<double> GeneralisedElement::Dummy_matrix;
 /// This function loops over the internal and external data of the element, 
 /// adds the GLOBAL equation numbers to the local-to-global look-up scheme and 
 /// fills in the look-up schemes for the local equation 
-/// numbers
+/// numbers.
+/// If the boolean argument is true then pointers to the dofs will be 
+/// stored in Dof_pt
 //==========================================================================
- void GeneralisedElement::assign_internal_and_external_local_eqn_numbers()
+ void GeneralisedElement::assign_internal_and_external_local_eqn_numbers(
+  const bool &store_local_dof_pt)
  {
   //Find the number of internal and external data
   const unsigned n_internal_data = Ninternal_data;
@@ -837,19 +898,26 @@ DenseMatrix<double> GeneralisedElement::Dummy_matrix;
     //Now loop over the internal data and assign local equation numbers
     for(unsigned i=0;i<n_internal_data;i++)
      {
+      //Pointer to the internal data
+      Data* const data_pt = internal_data_pt(i);
       //Find the number of values stored at the internal data
-      unsigned n_value = internal_data_pt(i)->nvalue();
+      unsigned n_value = data_pt->nvalue();
      
       //Loop over the number of values
       for(unsigned j=0;j<n_value;j++)
        {
         //Get the GLOBAL equation number
-        long eqn_number = internal_data_pt(i)->eqn_number(j);
+        long eqn_number = data_pt->eqn_number(j);
         //If the GLOBAL equation number is positive (a free variable)
         if(eqn_number >= 0)
          {
           //Add the GLOBAL equation number to the queue
           global_eqn_number_queue.push_back(eqn_number);
+          //Add pointer to the dof to the queue if required
+          if(store_local_dof_pt)
+           {
+            GeneralisedElement::Dof_pt_deque.push_back(data_pt->value_pt(j));
+           }
           //Add the local equation number to the storage scheme
           Data_local_eqn[i][j] = local_eqn_number;
           //Increase the local number
@@ -867,19 +935,26 @@ DenseMatrix<double> GeneralisedElement::Dummy_matrix;
     //Now loop over the external data and assign local equation numbers
     for(unsigned i=0;i<n_external_data;i++)
      {
+      //Pointer to the external data
+      Data* const data_pt = external_data_pt(i);
       //Find the number of values stored at the external data
-      unsigned n_value = external_data_pt(i)->nvalue();
+      unsigned n_value = data_pt->nvalue();
      
       //Loop over the number of values
       for(unsigned j=0;j<n_value;j++)
        {
         //Get the GLOBAL equation number
-        long eqn_number = external_data_pt(i)->eqn_number(j);
+        long eqn_number = data_pt->eqn_number(j);
         //If the GLOBAL equation number is positive (a free variable)
         if(eqn_number >= 0)
          {
           //Add the GLOBAL equation number to the queue
           global_eqn_number_queue.push_back(eqn_number);
+          //Add pointer to the dof to the queue if required
+          if(store_local_dof_pt)
+           {
+            GeneralisedElement::Dof_pt_deque.push_back(data_pt->value_pt(j));
+           }
           //Add the local equation number to the local scheme
           Data_local_eqn[n_internal_data + i][j] = local_eqn_number;
           //Increase the local number
@@ -894,7 +969,11 @@ DenseMatrix<double> GeneralisedElement::Dummy_matrix;
      }
 
     //Now add our global equations numbers to the internal element storage
-    add_global_eqn_numbers(global_eqn_number_queue);
+    add_global_eqn_numbers(global_eqn_number_queue,
+                           GeneralisedElement::Dof_pt_deque);
+    //Clear the memory used in the deque
+    if(store_local_dof_pt)
+     {std::deque<double*>().swap(GeneralisedElement::Dof_pt_deque);}
    }
  }
 
@@ -3181,8 +3260,11 @@ void FiniteElement::d_dshape_eulerian_dnodal_coordinates(
 /// GLOBAL equation numbers to the local-to-global look-up scheme and 
 /// fills in the Nodal_local_eqn look-up scheme for the local equation 
 /// numbers
+/// If the boolean argument is true then pointers to the dofs will be 
+/// stored in Dof_pt
 //==========================================================================
- void FiniteElement::assign_nodal_local_eqn_numbers()
+ void FiniteElement::assign_nodal_local_eqn_numbers(
+  const bool &store_local_dof_pt)
  {
   //Find the number of nodes
   const unsigned n_node = nnode();
@@ -3237,19 +3319,28 @@ void FiniteElement::d_dshape_eulerian_dnodal_coordinates(
     //Now loop over the nodes again and assign local equation numbers
     for(unsigned n=0;n<n_node;n++)
      {
+      //Pointer to node
+      Node* const nod_pt = node_pt(n);
+
       //Find the number of values stored at the node
-      unsigned n_value = node_pt(n)->nvalue();
+      unsigned n_value = nod_pt->nvalue();
      
       //Loop over the number of values
       for(unsigned j=0;j<n_value;j++)
        {
         //Get the GLOBAL equation number
-        long eqn_number = node_pt(n)->eqn_number(j);
+        long eqn_number = nod_pt->eqn_number(j);
         //If the GLOBAL equation number is positive (a free variable)
         if(eqn_number >= 0)
          {
           //Add the GLOBAL equation number to the queue
           global_eqn_number_queue.push_back(eqn_number);
+          //Add pointer to the dof to the queue if required
+          if(store_local_dof_pt)
+           {
+            GeneralisedElement::Dof_pt_deque.push_back(
+             nod_pt->value_pt(j));
+           }
           //Add the local equation number to the local scheme
           Nodal_local_eqn[n][j] = local_eqn_number;
           //Increase the local number
@@ -3264,7 +3355,11 @@ void FiniteElement::d_dshape_eulerian_dnodal_coordinates(
      }
     
     //Now add our global equations numbers to the internal element storage
-    add_global_eqn_numbers(global_eqn_number_queue);
+    add_global_eqn_numbers(global_eqn_number_queue,
+                           GeneralisedElement::Dof_pt_deque);
+    //Clear the memory used in the deque
+    if(store_local_dof_pt)
+     {std::deque<double*>().swap(GeneralisedElement::Dof_pt_deque);}
    }
  }
 
@@ -6097,8 +6192,11 @@ void FaceElement::get_local_coordinate_in_bulk(
 /// Assign local equation numbers for the solid equations in the element.
 //  This can be done at a high level assuming, as I am, that the equations will
 //  always be formulated in terms of nodal positions. 
+/// If the boolean argument is true then pointers to the dofs will be 
+/// stored in Dof_pt.
 //============================================================================
- void SolidFiniteElement::assign_solid_local_eqn_numbers()
+ void SolidFiniteElement::assign_solid_local_eqn_numbers(
+  const bool &store_local_dof_pt)
  {
   //Find the number of nodes
   const unsigned n_node = nnode();
@@ -6143,6 +6241,13 @@ void FaceElement::get_local_coordinate_in_bulk(
            {
             //Add to global array
             global_eqn_number_queue.push_back(eqn_number);
+            //Add pointer to the dof to the queue if required
+            if(store_local_dof_pt)
+             {
+              GeneralisedElement::Dof_pt_deque.push_back(
+               &(cast_node_pt->x_gen(j,k)));
+             }
+
             //Add to look-up scheme
             Position_local_eqn[(n*n_position_type + j)*nodal_dim + k] = 
              local_eqn_number;
@@ -6159,7 +6264,12 @@ void FaceElement::get_local_coordinate_in_bulk(
      } //End of loop over nodes
 
     //Now add our global equations numbers to the internal element storage
-    add_global_eqn_numbers(global_eqn_number_queue);
+    add_global_eqn_numbers(global_eqn_number_queue,
+                           GeneralisedElement::Dof_pt_deque);
+    //Clear the memory used in the deque
+    if(store_local_dof_pt)
+     {std::deque<double*>().swap(GeneralisedElement::Dof_pt_deque);}
+
    } //End of the case when there are nodes
  }
 

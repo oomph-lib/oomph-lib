@@ -182,23 +182,18 @@ ConvectionProblem<NST_ELEMENT,AD_ELEMENT>::ConvectionProblem()
  unsigned num_bound = nst_mesh_pt()->nboundary();
  for(unsigned ibound=0;ibound<num_bound;ibound++)
   {
-   //Set the maximum index to be pinned (all values by default)
-   unsigned val_max;//=3; (fine for combined element... !)
+   //Set the maximum index to be pinned (both velocity values by default)
+   unsigned val_max=2;
 
    //Loop over the number of nodes on the boundry
    unsigned num_nod= nst_mesh_pt()->nboundary_node(ibound);
    for (unsigned inod=0;inod<num_nod;inod++)
     {
-     //If we are on the side-walls, the v-velocity and temperature
-     //satisfy natural boundary conditions, so we only pin the
-     //first value
+     //If we are on the side-walls, the v-velocity satisfies natural
+     //boundary conditions, so we only pin the u-velocity
      if ((ibound==1) || (ibound==3)) 
       {
        val_max=1;
-      }
-     else // pin all values
-      {
-       val_max=nst_mesh_pt()->boundary_node_pt(ibound,inod)->nvalue();
       }
 
      //Loop over the desired values stored at the nodes and pin
@@ -217,28 +212,24 @@ ConvectionProblem<NST_ELEMENT,AD_ELEMENT>::ConvectionProblem()
  num_bound = adv_diff_mesh_pt()->nboundary();
  for(unsigned ibound=0;ibound<num_bound;ibound++)
   {
-   //Set the maximum index to be pinned (all values by default)
-   unsigned val_max=0;
+   //Set the maximum index to be pinned (the temperature value by default)
+   unsigned val_max=1;
 
    //Loop over the number of nodes on the boundry
    unsigned num_nod= adv_diff_mesh_pt()->nboundary_node(ibound);
    for (unsigned inod=0;inod<num_nod;inod++)
     {
-     //If we are on the side-walls, the v-velocity and temperature
-     //satisfy natural boundary conditions, so we don't pin anything
+     //If we are on the side-walls, the temperature
+     //satisfies natural boundary conditions, so we don't pin anything
      // in this mesh
      if ((ibound==1) || (ibound==3)) 
       {
        val_max=0;
       }
-     else // pin all values
+     //Loop over the desired values stored at the nodes and pin
+     for(unsigned j=0;j<val_max;j++)
       {
-       val_max=adv_diff_mesh_pt()->boundary_node_pt(ibound,inod)->nvalue();
-       //Loop over the desired values stored at the nodes and pin
-       for(unsigned j=0;j<val_max;j++)
-        {
-         adv_diff_mesh_pt()->boundary_node_pt(ibound,inod)->pin(j);
-        }
+       adv_diff_mesh_pt()->boundary_node_pt(ibound,inod)->pin(j);
       }
     }
   }
@@ -338,7 +329,8 @@ void ConvectionProblem<NST_ELEMENT,AD_ELEMENT>::set_boundary_conditions(
      // Get pointer to node
      Node* nod_pt=nst_mesh_pt()->boundary_node_pt(ibound,inod);
 
-     //Set the number of velocity components
+     //Set the number of velocity components to be pinned
+     //(both by default)
      unsigned vel_max=2;
 
      //If we are on the side walls we only set the x-velocity.

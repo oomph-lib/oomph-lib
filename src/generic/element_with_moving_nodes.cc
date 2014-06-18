@@ -162,7 +162,8 @@ namespace oomph
  /// Assign local equation numbers for the geometric data associated
  ///with the element.
  //==================================================================
- void ElementWithMovingNodes::assign_all_generic_local_eqn_numbers()
+ void ElementWithMovingNodes::assign_all_generic_local_eqn_numbers(
+  const bool &store_local_dof_pt)
  {
   //Get local number of dofs so far
   unsigned local_eqn_number = this->ndof();
@@ -233,12 +234,18 @@ namespace oomph
        {
         // Get global equation number
         long eqn_number=data_pt->eqn_number(j);
-
+        
         //If equation number positive 
         if (eqn_number>=0)
          {
           //Add the global equation number to our queue
           global_eqn_number_queue.push_back(eqn_number);
+          //Add pointer to the dof to the queue if required
+          if(store_local_dof_pt)
+           {
+            GeneralisedElement::Dof_pt_deque.push_back(
+             data_pt->value_pt(j));
+           }
 
           //Add to local value
           Geometric_data_local_eqn[i][j] = local_eqn_number;
@@ -257,7 +264,11 @@ namespace oomph
      }
     
     //Now add our global equations numbers to the internal element storage
-    this->add_global_eqn_numbers(global_eqn_number_queue);
+    this->add_global_eqn_numbers(global_eqn_number_queue,
+                                 GeneralisedElement::Dof_pt_deque);
+    //Clear the memory used in the deque
+    if(store_local_dof_pt)
+     {std::deque<double*>().swap(GeneralisedElement::Dof_pt_deque);}
    }
  }
  

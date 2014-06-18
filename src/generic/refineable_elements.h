@@ -179,7 +179,7 @@ class RefineableElement : public virtual FiniteElement
  
 
  /// \short Assign the local equation numbers for hanging node variables
- void assign_hanging_local_eqn_numbers();
+ void assign_hanging_local_eqn_numbers(const bool &store_local_dof_pt);
 
  /// \short Calculate the contributions to the jacobian from the nodal
  /// degrees of freedom using finite differences.
@@ -456,10 +456,10 @@ class RefineableElement : public virtual FiniteElement
  /// \short Overload the function that assigns local equation numbers
  /// for the Data stored at the nodes so that hanging data is taken 
  /// into account
- inline void assign_nodal_local_eqn_numbers()
+ inline void assign_nodal_local_eqn_numbers(const bool &store_local_dof_pt)
   {
-   FiniteElement::assign_nodal_local_eqn_numbers();
-   assign_hanging_local_eqn_numbers();
+   FiniteElement::assign_nodal_local_eqn_numbers(store_local_dof_pt);
+   assign_hanging_local_eqn_numbers(store_local_dof_pt);
   }
 
  /// \short Pointer to the root element in refinement hierarchy (must be 
@@ -806,7 +806,7 @@ class RefineableSolidElement : public virtual RefineableElement,
 
  /// \short Assign local equation numbers to the hanging values associated
  /// with positions or additional solid values.
- void assign_solid_hanging_local_eqn_numbers();
+ void assign_solid_hanging_local_eqn_numbers(const bool &store_local_dof_pt);
 
 
  protected:
@@ -858,10 +858,10 @@ void assemble_local_to_lagrangian_jacobian(
  
  /// \short Overload the local equation numbers for Data stored as part
  /// of solid nodes to include hanging node data
- void assign_solid_local_eqn_numbers()
+ void assign_solid_local_eqn_numbers(const bool &store_local_dof_pt)
   {
-   SolidFiniteElement::assign_solid_local_eqn_numbers();
-   assign_solid_hanging_local_eqn_numbers();
+   SolidFiniteElement::assign_solid_local_eqn_numbers(store_local_dof_pt);
+   assign_solid_hanging_local_eqn_numbers(store_local_dof_pt);
   }
 
  ///\short The number of geometric data affecting a 

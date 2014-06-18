@@ -263,7 +263,9 @@ public:
 
  /// \short Set up the local equation numbers for the underlying element,
  /// then set up the local arrays to hold the hijacked variables.
- void assign_local_eqn_numbers()
+ /// If the boolean argument is true then pointers to the associated degrees
+ /// of freedom are stored in the array Dof_pt
+ void assign_local_eqn_numbers(const bool &store_local_dof_pt)
   {
    //If things have already been allocated,
    //clear the local hijacked array, so that if the equation numbers
@@ -277,7 +279,7 @@ public:
     
 
    //Call the hijacked element's assign_local_eqn_numbers
-   ELEMENT::assign_local_eqn_numbers();
+   ELEMENT::assign_local_eqn_numbers(store_local_dof_pt);
    
    //If any values have been hijacked, we need to find the corresponding
    //local equation numbers

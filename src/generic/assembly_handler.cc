@@ -37,13 +37,29 @@ namespace oomph
  // Non-inline functions for the AssemblyHandler class
  //////////////////////////////////////////////////////////////////////
 
-
  //===================================================================
  ///Get the number of elemental degrees of freedom. Direct call
  ///to the function in the element.
  //===================================================================
  unsigned AssemblyHandler::ndof(GeneralisedElement* const &elem_pt)
  {return elem_pt->ndof();}
+
+ //===================================================================
+ ///Get the vector of dofs in the element elem_pt at time level t
+ ///Direct call to the function in the element.
+ //===================================================================
+ void AssemblyHandler::dof_vector(GeneralisedElement* const &elem_pt,
+                                 const unsigned &t, Vector<double> &dof)
+ {return elem_pt->dof_vector(t,dof);}
+
+ //===================================================================
+ ///Get the vector of pointers to dofs in the element elem_pt
+ ///Direct call to the function in the element.
+ //===================================================================
+ void AssemblyHandler::dof_pt_vector(GeneralisedElement* const &elem_pt,
+                                     Vector<double*> &dof_pt)
+ {return elem_pt->dof_pt_vector(dof_pt);}
+
 
  //==================================================================
  ///Get the global equation number of the local unknown. Direct call

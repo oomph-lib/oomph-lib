@@ -76,6 +76,7 @@ ContinuationStorageScheme Problem::Continuation_time_stepper;
   Use_globally_convergent_newton_method(false),
   Empty_actions_before_read_unstructured_meshes_has_been_called(false),
   Empty_actions_after_read_unstructured_meshes_has_been_called(false),
+  Store_local_dof_pt_in_elements(false),
   Calculate_hessian_products_analytic(false),
 #ifdef OOMPH_HAS_MPI
   Doc_imbalance_in_parallel_assembly(false),
@@ -201,6 +202,71 @@ ContinuationStorageScheme Problem::Continuation_time_stepper;
    Mesh_pt->flush_element_and_node_storage();
    delete Mesh_pt;
   }
+ }
+
+ //=================================================================
+ ///Setup the count vector that records how many elements contribute
+ ///to each degree of freedom. Returns the total number of elements
+ ///in the problem
+ //=================================================================
+ unsigned Problem::setup_element_count_per_dof()
+ {
+  //Now set the element counter to have the curretn Dof distribution
+  Element_count_per_dof.build(this->Dof_distribution_pt);
+  //We need to use the halo scheme (assuming it has been setup)
+#ifdef OOMPH_HAS_MPI
+  Element_count_per_dof.build_halo_scheme(this->Halo_scheme_pt);
+#endif
+    
+  //Loop over the elements and count the entries
+  //and number of (non-halo) elements
+  const unsigned n_element = this->mesh_pt()->nelement();
+  unsigned n_non_halo_element_local=0;
+  for(unsigned e=0;e<n_element;e++)
+   {
+    GeneralisedElement* elem_pt = this->mesh_pt()->element_pt(e);
+#ifdef OOMPH_HAS_MPI
+    //Ignore halo elements
+    if(!elem_pt->is_halo())
+     {
+#endif
+      //Increment the number of non halo elements
+      ++n_non_halo_element_local;
+      //Now count the number of times the element contributes to a value
+      //using the current assembly handler
+      unsigned n_var = this->Assembly_handler_pt->ndof(elem_pt);
+      for(unsigned n=0;n<n_var;n++)
+       {
+        ++Element_count_per_dof.global_value(
+         this->Assembly_handler_pt->eqn_number(elem_pt,n));
+       }
+#ifdef OOMPH_HAS_MPI
+     }
+#endif
+   }
+
+  //Storage for the total number of elements
+  unsigned Nelement=0;
+  
+  //Add together all the counts if we are in parallel
+#ifdef OOMPH_HAS_MPI
+  Element_count_per_dof.sum_all_halo_and_haloed_values();
+  
+  //If distributed, find the total number of elements in the problem
+  if(this->Problem_has_been_distributed)
+   {
+    //Need to gather the total number of non halo elements
+    MPI_Allreduce(&n_non_halo_element_local,&Nelement,1,MPI_UNSIGNED,MPI_SUM,
+                  this->communicator_pt()->mpi_comm());
+   }
+  //Otherwise the total number is the same on each processor
+  else
+#endif
+   {
+    Nelement = n_non_halo_element_local;
+   }
+
+  return Nelement;
  }
 
 
@@ -2210,13 +2276,13 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
   {
    if (n_sub_mesh==0)
     {
-     Mesh_pt->assign_local_eqn_numbers();
+     Mesh_pt->assign_local_eqn_numbers(Store_local_dof_pt_in_elements);
     }
    else
     {
      for (unsigned i=0;i<n_sub_mesh;i++)
       {
-       Sub_mesh_pt[i]->assign_local_eqn_numbers();
+       Sub_mesh_pt[i]->assign_local_eqn_numbers(Store_local_dof_pt_in_elements);
       }
     }
   }
@@ -16006,13 +16072,13 @@ long Problem::synchronise_eqn_numbers(const bool& assign_local_eqn_numbers)
    unsigned n_sub_mesh=nsub_mesh();
    if (n_sub_mesh==0)
     {
-     mesh_pt()->assign_local_eqn_numbers();
+     mesh_pt()->assign_local_eqn_numbers(Store_local_dof_pt_in_elements);
     }
    else
     {
      for (unsigned i=0;i<n_sub_mesh;i++)
       {
-       mesh_pt(i)->assign_local_eqn_numbers();
+       mesh_pt(i)->assign_local_eqn_numbers(Store_local_dof_pt_in_elements);
       }
     }
   }

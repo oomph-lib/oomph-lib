@@ -191,10 +191,10 @@ public:
 
  /// short Overload assign local equation numbers: Add the dependency 
  /// on the external Data that affects the inflow profile
- void assign_local_eqn_numbers()
+ void assign_local_eqn_numbers(const bool  &store_local_dof_pt)
   {
    // Call the element's local equation numbering procedure first
-   ELEMENT::assign_local_eqn_numbers();
+   ELEMENT::assign_local_eqn_numbers(store_local_dof_pt);
    
    // Now add the equation numbers for the Data that affects the inflow
    // profile

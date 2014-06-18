@@ -282,7 +282,10 @@ namespace oomph
  void complete_setup_of_dependencies();
 
  /// Assign local equation numbers for the geometric Data in the element
- virtual void assign_all_generic_local_eqn_numbers();
+ /// If the boolean argument is true then the degrees of freedom are stored
+ /// in Dof_pt
+ virtual void assign_all_generic_local_eqn_numbers(
+  const bool &store_local_dof_pt);
 
  /// \short Calculate the contributions to the Jacobian matrix from the
  /// geometric data. This version
@@ -452,11 +455,12 @@ template<class ELEMENT,class NODE_TYPE>
 
  /// \short Assign local equation numbers for the underlying element, then
  /// deal with the additional geometric dofs
- void assign_all_generic_local_eqn_numbers()
+ void assign_all_generic_local_eqn_numbers(const bool &store_local_dof_pt)
  {
   // Call the generic local equation numbering scheme of the ELEMENT
-  ELEMENT::assign_all_generic_local_eqn_numbers();
-  ElementWithMovingNodes::assign_all_generic_local_eqn_numbers();
+  ELEMENT::assign_all_generic_local_eqn_numbers(store_local_dof_pt);
+  ElementWithMovingNodes::assign_all_generic_local_eqn_numbers(
+   store_local_dof_pt);
  }
 
  /// Compute the element's residuals vector and jacobian matrix
