@@ -743,7 +743,7 @@ private:
    Vector<double*> dummy_dof_pt;
    Time_mesh_pt->assign_global_eqn_numbers(dummy_dof_pt);
    //Assign the local equation numbers
-   Time_mesh_pt->assign_local_eqn_numbers();
+   Time_mesh_pt->assign_local_eqn_numbers(false);
 
    //Find the number of temporal degrees of freedom
    N_tstorage = dummy_dof_pt.size();
@@ -1238,7 +1238,7 @@ private:
    Vector<double*> dummy_dof_pt;
    Time_mesh_pt->assign_global_eqn_numbers(dummy_dof_pt);
    //Assign the local equation numbers
-   Time_mesh_pt->assign_local_eqn_numbers();
+   Time_mesh_pt->assign_local_eqn_numbers(false);
 
    //Find the number of temporal degrees of freedom
    N_tstorage = dummy_dof_pt.size();

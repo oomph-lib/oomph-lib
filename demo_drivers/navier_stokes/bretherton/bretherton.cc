@@ -251,7 +251,8 @@ public:
     }
    
    //Now add our global equations numbers to the internal element storage
-   this->add_global_eqn_numbers(global_eqn_number_queue);
+   this->add_global_eqn_numbers(global_eqn_number_queue, 
+                                GeneralisedElement::Dof_pt_deque);
   }
 
  
