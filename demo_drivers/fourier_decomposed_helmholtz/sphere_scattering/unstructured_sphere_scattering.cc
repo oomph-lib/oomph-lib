@@ -63,7 +63,7 @@ namespace PlanarWave
  unsigned N_terms=100;
 
  /// Wave number
- unsigned K=3.0*MathematicalConstants::Pi;
+ double K=3.0*MathematicalConstants::Pi;
 
  /// Imaginary unit 
  std::complex<double> I(0.0,1.0); 

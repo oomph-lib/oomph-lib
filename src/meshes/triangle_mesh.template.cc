@@ -6160,7 +6160,9 @@ surface_remesh_for_inner_hole_boundaries(Vector<Vector<double> >
     std::list<TriangleMeshCurveSection*> sorted_curve_sections_pt;
     
     unsigned init_poly = 0;
+#ifdef PARANOID
     bool found_root_polyline = false;
+#endif
     // Get the left and right node of the current polyline
     for (unsigned i = 0; i < nboundary; i++)
      {
@@ -6169,8 +6171,10 @@ surface_remesh_for_inner_hole_boundaries(Vector<Vector<double> >
         init_poly = i;
         // Increase the number of sorted polylines
         nsorted_polylines++;
+#ifdef PARANOID
         // Mark as found the root polyline
         found_root_polyline = true;
+#endif
         // Mark the polyline as done
         polyline_done[i] = true;
         // Add the polyline to the curve sections storage

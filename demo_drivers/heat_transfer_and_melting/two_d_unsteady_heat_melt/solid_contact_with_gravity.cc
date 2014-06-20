@@ -1843,11 +1843,11 @@ CircularPenetratorElement* pen_el_pt=
   {
    target_weight=pen_el_pt->target_weight();
   }
- double angle=0.0;
- if (pen_el_pt!=0)
-  {
-   angle=pen_el_pt->angle();
-  }
+ // double angle=0.0;
+ // if (pen_el_pt!=0)
+ //  {
+ //   angle=pen_el_pt->angle();
+ //  }
  
 
  // Write trace file

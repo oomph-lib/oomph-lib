@@ -460,15 +460,15 @@ public:
       }            
     }
     
-   /// compute displacement u in cartesian coordinate
-   /// displacement component in y direction is identical with normal dirention
-   double x_dir;
-   double y_dir;
-   double z_dir;
+   // /// compute displacement u in cartesian coordinate
+   // /// displacement component in y direction is identical with normal dirention
+   // double x_dir;
+   // double y_dir;
+   // double z_dir;
    
-   x_dir = interpolated_u[0]*t(0,0) + interpolated_u[1]*t(1,0) + interpolated_u[2]*unit_n[0];
-   y_dir = interpolated_u[0]*t(0,1) + interpolated_u[1]*t(1,1) + interpolated_u[2]*unit_n[1];
-   z_dir = interpolated_u[0]*t(0,2) + interpolated_u[1]*t(1,2) + interpolated_u[2]*unit_n[2];
+   // x_dir = interpolated_u[0]*t(0,0) + interpolated_u[1]*t(1,0) + interpolated_u[2]*unit_n[0];
+   // y_dir = interpolated_u[0]*t(0,1) + interpolated_u[1]*t(1,1) + interpolated_u[2]*unit_n[1];
+   // z_dir = interpolated_u[0]*t(0,2) + interpolated_u[1]*t(1,2) + interpolated_u[2]*unit_n[2];
    
    /*interpolated_u[0] = x_dir;
    interpolated_u[1] = y_dir;

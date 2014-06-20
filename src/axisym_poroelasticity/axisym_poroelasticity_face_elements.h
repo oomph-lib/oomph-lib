@@ -327,13 +327,13 @@ public:
       outfile << disp[i] << " "; // column 3,4
      } 
 
-    // Output traction
+    // Output imposed traction
     for(unsigned i=0;i<n_dim;i++) 
      {
       outfile << traction[i] << " "; // column 5,6
      } 
           
-    // Output pressure
+    // Output imposed pressure
     outfile << pressure << " "; // column 7
 
     // Output seepage flux
@@ -347,6 +347,13 @@ public:
     // Total veloc
     outfile << du_dt[0]+permeability*q[0] << " "  // column 12
             << du_dt[1]+permeability*q[1] << " "; // column 13
+
+
+    // Output FE representation of div u at s_bulk 
+    outfile <<  bulk_pt->interpolated_div_q(s_bulk) << " "; // column 14
+    
+    // Output FE representation of p at s_bulk
+    outfile <<  bulk_pt->interpolated_p(s_bulk) << " "; // column 15
     
     outfile << std::endl;
    }

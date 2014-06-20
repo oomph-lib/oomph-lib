@@ -1192,7 +1192,10 @@ int main(int argc, char **argv)
  // Loop over timesteps for specified number of periods of fluctuating
  // inflow
  unsigned n_period=1;
- unsigned nstep=n_period*Global_Parameters::T/Global_Parameters::Dt;
+
+ unsigned nstep=unsigned(double(n_period)
+                         *Global_Parameters::T/Global_Parameters::Dt);
+
  if (CommandLineArgs::command_line_flag_has_been_set("--validate"))
   {
    nstep=3;

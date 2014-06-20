@@ -44,7 +44,7 @@
 #include "integral.h"
 #include "elements.h"
 #include "Telements.h"
-
+ 
 namespace oomph
 {
 
@@ -1190,9 +1190,10 @@ template<>
     psi[2] = 1.0-s[0]-s[1];
     
     // assign shape functions to the boundary elements
-    double angle_1 = atan(bd_position(0,1)/bd_position(0,0));
-    double angle_2 = atan(bd_position(1,1)/bd_position(1,0));
-    double angle_min, angle_max;
+    double angle_1 = atan2(bd_position(0,1),bd_position(0,0));
+    double angle_2 = atan2(bd_position(1,1),bd_position(1,0));
+    double angle_min=0.0;
+    double angle_max=0.0;
     
     DenseMatrix<double> p(3,2);
     if(angle_1 < angle_2)
@@ -1262,9 +1263,10 @@ template<>
     dpsids(2,0) = -1.0;
     dpsids(2,1) = -1.0;
     
-    double angle_1 = atan(bd_position(0,1)/bd_position(0,0));
-    double angle_2 = atan(bd_position(1,1)/bd_position(1,0));
-    double angle_min, angle_max;
+    double angle_1 = atan2(bd_position(0,1),bd_position(0,0));
+    double angle_2 = atan2(bd_position(1,1),bd_position(1,0));
+    double angle_min=0.0;
+    double angle_max=0.0;
     
     DenseMatrix<double> p(3,2);
     if(angle_1 < angle_2)
@@ -1353,9 +1355,10 @@ template<>
       d2psids(i,1) = 0.0;
       d2psids(i,2) = 0.0;
      }
-    double angle_1 = atan(bd_position(0,1)/bd_position(0,0));
-    double angle_2 = atan(bd_position(1,1)/bd_position(1,0));
-    double angle_min, angle_max;
+    double angle_1 = atan2(bd_position(0,1),bd_position(0,0));
+    double angle_2 = atan2(bd_position(1,1),bd_position(1,0));
+    double angle_min=0.0;
+    double angle_max=0.0;
     
     DenseMatrix<double> p(3,2);
     if(angle_1 < angle_2)
@@ -1560,9 +1563,10 @@ template<unsigned DIM, unsigned NNODE_1D>
   void set_of_value(DenseMatrix<double> &D, DenseMatrix<double> &B, DenseMatrix<double> &position,
                     unsigned &bd_element, DenseMatrix<double> &bd_position, Vector<double> &x) const
    {
-    double angle_1 = atan(bd_position(0,1)/bd_position(0,0));
-    double angle_2 = atan(bd_position(1,1)/bd_position(1,0));
-    double angle_min, angle_max;
+    double angle_1 = atan2(bd_position(0,1),bd_position(0,0));
+    double angle_2 = atan2(bd_position(1,1),bd_position(1,0));
+    double angle_min=0.0;
+    double angle_max=0.0;
     
     DenseMatrix<double> p(3,2);
     if(angle_1 < angle_2)

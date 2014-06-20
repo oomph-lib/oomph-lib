@@ -1364,7 +1364,7 @@ int main(int argc, char **argv)
                                             &ProblemParameters::T_tanh);
 
  // Precalculate n_steps based on defaults
- unsigned n_steps=1.0/ProblemParameters::Dt;
+ unsigned n_steps=unsigned(1.0/ProblemParameters::Dt);
 
  // Override n_steps if provided
  CommandLineArgs::specify_command_line_flag("--n_steps",
