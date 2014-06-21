@@ -1991,132 +1991,162 @@ namespace oomph
      
     } // end of "spirals" loop
    
+
+
    // If we haven't found all zetas we're dead now...
+   //-------------------------------------------------
    if (n_zeta_not_found!=0)
     {
-     std::ostringstream error_stream;
-     error_stream 
-      << "Multi_domain_functions::locate_zeta_for_local_coordinates()"
-      << "\nhas failed ";
-     
-#ifdef OOMPH_HAS_MPI
-     if (problem_pt->communicator_pt()->nproc() > 1)
+     // Shout?
+     if (!Accept_failed_locate_zeta_in_setup_multi_domain_interaction)
       {
-       error_stream << " on proc: " << problem_pt->communicator_pt()->my_rank()
-                    << std::endl;
-      }
+       
+       std::ostringstream error_stream;
+       error_stream 
+        << "Multi_domain_functions::locate_zeta_for_local_coordinates()"
+        << "\nhas failed ";
+       
+#ifdef OOMPH_HAS_MPI
+       if (problem_pt->communicator_pt()->nproc() > 1)
+        {
+         error_stream << " on proc: " 
+                      << problem_pt->communicator_pt()->my_rank()
+                      << std::endl;
+        }
 #endif
-     error_stream 
-      << "\n\n\nThis is most likely to arise because the two meshes\n"
-      << "that are to be matched don't overlap perfectly or\n"
-      << "because the elements are distorted and too small a \n"
-      << "number of sampling points has been used when setting\n"
-      << "up the bin structure.\n\n"
-      << "You should try to increase the value of \n"
-      << "Multi_domain_functions::Nsample_points from \n"
-      << "its current value of " 
-      << Multi_domain_functions::Nsample_points << "\n";
-     
-     std::ostringstream modifier;     
+       error_stream 
+        << "\n\n\nThis is most likely to arise because the two meshes\n"
+        << "that are to be matched don't overlap perfectly or\n"
+        << "because the elements are distorted and too small a \n"
+        << "number of sampling points has been used when setting\n"
+        << "up the bin structure.\n\n"
+        << "You should try to increase the value of \n"
+        << "Multi_domain_functions::Nsample_points from \n"
+        << "its current value of " 
+        << Multi_domain_functions::Nsample_points << "\n"
+        << "\n\n"
+        << "NOTE: You can suppress this error and \"accept failure\""
+        << "      by setting the public boolean \n\n"
+        << "        Multi_domain_functions::Accept_failed_locate_zeta_in_setup_multi_domain_interaction\n\n"
+        << "      to true. In this case, the pointers to external elements\n"
+        << "      that couldn't be located will remain null\n";
+
+       std::ostringstream modifier;     
 #ifdef OOMPH_HAS_MPI
-     if (problem_pt->communicator_pt()->nproc() > 1)
-      {
-       modifier << "_proc" << problem_pt->communicator_pt()->my_rank();
-      }
+       if (problem_pt->communicator_pt()->nproc() > 1)
+        {
+         modifier << "_proc" << problem_pt->communicator_pt()->my_rank();
+        }
 #endif
 
-     // Loop over all meshes
-     for (unsigned i_mesh=0;i_mesh<n_mesh;i_mesh++)
-      {
+       // Loop over all meshes
+       for (unsigned i_mesh=0;i_mesh<n_mesh;i_mesh++)
+        {
 
-       // Add yet another modifier to distinguish meshes if reqd
-       if (n_mesh>1)
-        {
-         modifier << "_mesh" << i_mesh;
-        }
-       
-       std::ofstream outfile;
-       char filename[100];
-       sprintf(filename,"missing_coords_mesh%s.dat",modifier.str().c_str());
-       outfile.open(filename); 
-       unsigned nel=mesh_pt[i_mesh]->nelement();
-       for (unsigned e=0;e<nel;e++)
-        {
-         mesh_pt[i_mesh]->finite_element_pt(e)->FiniteElement::output(outfile);
-        }
-       outfile.close();
-       
-       sprintf(filename,"missing_coords_ext_mesh%s.dat",modifier.str().c_str());
-       outfile.open(filename); 
-       nel=external_mesh_pt->nelement();
-       for (unsigned e=0;e<nel;e++)
-        {
-         external_mesh_pt->finite_element_pt(e)->FiniteElement::output(outfile);
-        }
-       outfile.close();
-       
-       sprintf(filename,"missing_coords_bin%s.dat",modifier.str().c_str());
-       outfile.open(filename); 
-       mesh_geom_obj_pt[i_mesh]->output_bins(outfile);
-       outfile.close();
-       
-       sprintf(filename,"missing_coords%s.dat",modifier.str().c_str());
-       outfile.open(filename); 
-       unsigned n=External_element_located.size();
-       error_stream << "Number of unlocated elements " << n << std::endl;
-       for (unsigned e=0;e<n;e++)
-        {
-         unsigned n_intpt=External_element_located[e].size();
-         if (n_intpt==0)
+         // Add yet another modifier to distinguish meshes if reqd
+         if (n_mesh>1)
           {
-           error_stream 
-            << "Failure to locate in halo element! Why are we searching there?"
-            << std::endl;
+           modifier << "_mesh" << i_mesh;
           }
-         for (unsigned ipt=0;ipt<n_intpt;ipt++)
+       
+         std::ofstream outfile;
+         char filename[100];
+         sprintf(filename,"missing_coords_mesh%s.dat",modifier.str().c_str());
+         outfile.open(filename); 
+         unsigned nel=mesh_pt[i_mesh]->nelement();
+         for (unsigned e=0;e<nel;e++)
           {
-           if (External_element_located[e][ipt]==0)
+           mesh_pt[i_mesh]->finite_element_pt(e)->
+            FiniteElement::output(outfile);
+          }
+         outfile.close();
+       
+         sprintf(filename,"missing_coords_ext_mesh%s.dat",
+                 modifier.str().c_str());
+         outfile.open(filename); 
+         nel=external_mesh_pt->nelement();
+         for (unsigned e=0;e<nel;e++)
+          {
+           external_mesh_pt->finite_element_pt(e)->
+            FiniteElement::output(outfile);
+          }
+         outfile.close();
+       
+         sprintf(filename,"missing_coords_bin%s.dat",modifier.str().c_str());
+         outfile.open(filename); 
+         mesh_geom_obj_pt[i_mesh]->output_bins(outfile);
+         outfile.close();
+       
+         sprintf(filename,"missing_coords%s.dat",modifier.str().c_str());
+         outfile.open(filename); 
+         unsigned n=External_element_located.size();
+         error_stream << "Number of unlocated elements " << n << std::endl;
+         for (unsigned e=0;e<n;e++)
+          {
+           unsigned n_intpt=External_element_located[e].size();
+           if (n_intpt==0)
             {
-             error_stream << "Failure at element/intpt: " 
-                          << e << " " << ipt << std::endl;
-             
-             // Cast
-             ElementWithExternalElement *el_pt=
-              dynamic_cast<ElementWithExternalElement*>(
-               mesh_pt[i_mesh]->element_pt(e));
-             
-             unsigned n_dim_el=el_pt->dim();
-             Vector<double> s(n_dim_el);
-             for (unsigned i=0;i<n_dim_el;i++)
+             error_stream 
+              << "Failure to locate in halo element! "
+              << "Why are we searching there?"
+              << std::endl;
+            }
+           for (unsigned ipt=0;ipt<n_intpt;ipt++)
+            {
+             if (External_element_located[e][ipt]==0)
               {
-               s[i]=el_pt->integral_pt()->knot(ipt,i);
+               error_stream << "Failure at element/intpt: " 
+                            << e << " " << ipt << std::endl;
+             
+               // Cast
+               ElementWithExternalElement *el_pt=
+                dynamic_cast<ElementWithExternalElement*>(
+                 mesh_pt[i_mesh]->element_pt(e));
+             
+               unsigned n_dim_el=el_pt->dim();
+               Vector<double> s(n_dim_el);
+               for (unsigned i=0;i<n_dim_el;i++)
+                {
+                 s[i]=el_pt->integral_pt()->knot(ipt,i);
+                }
+               unsigned n_dim=el_pt->node_pt(0)->ndim();
+               Vector<double> x(n_dim);
+               el_pt->interpolated_x(s,x);
+               for (unsigned i=0;i<n_dim;i++)
+                {
+                 error_stream << x[i] << " ";
+                 outfile<< x[i] << " ";
+                }            
+               error_stream << std::endl;
+               outfile << std::endl;
               }
-             unsigned n_dim=el_pt->node_pt(0)->ndim();
-             Vector<double> x(n_dim);
-             el_pt->interpolated_x(s,x);
-             for (unsigned i=0;i<n_dim;i++)
-              {
-               error_stream << x[i] << " ";
-               outfile<< x[i] << " ";
-              }            
-             error_stream << std::endl;
-             outfile << std::endl;
             }
           }
+         outfile.close();
         }
-       outfile.close();
-      }
 
-     error_stream 
-      << "Mesh and external mesh documented in missing_coords_mesh*.dat\n"
-      << "and missing_coords_ext_mesh*.dat, respectively. Missing \n"
-      << "coordinates in missing_coords*.dat\n";
-     throw OomphLibError
-      (error_stream.str(),
-       OOMPH_CURRENT_FUNCTION,
-       OOMPH_EXCEPTION_LOCATION);     
+       error_stream 
+        << "Mesh and external mesh documented in missing_coords_mesh*.dat\n"
+        << "and missing_coords_ext_mesh*.dat, respectively. Missing \n"
+        << "coordinates in missing_coords*.dat\n";
+       throw OomphLibError
+        (error_stream.str(),
+         OOMPH_CURRENT_FUNCTION,
+         OOMPH_EXCEPTION_LOCATION);    
+      }
+     // Failure is deeemed to be acceptable
+     else
+      {
+       oomph_info 
+        << "NOTE: Haven't found " << n_zeta_not_found
+        << " external elements in \n"
+        << "Multi_domain_functions::aux_setup_multi_domain_interaction(...)\n"
+        << "but this deemed to be acceptable because \n"
+        << "Multi_domain_functions::Accept_failed_locate_zeta_in_setup_multi_domain_interaction\n"
+        << "is true.\n";
+      }
     }
-   
+
 
    // Doc timings if required
    if (Doc_timings)

@@ -72,6 +72,12 @@ namespace oomph
 namespace Multi_domain_functions
  {
 
+  /// \short Boolean to indicate that failure in setup multi domain 
+  /// functions is acceptable; defaults to false. If set to true
+  /// external element pointers are set to null for those elements
+  /// for which external elements couldn't be located.
+  extern bool Accept_failed_locate_zeta_in_setup_multi_domain_interaction;
+
   /// \short Dimension of zeta tuples (set by get_dim_helper) -- needed
   /// because we store the scalar coordinates in flat-packed form.
   extern unsigned Dim;

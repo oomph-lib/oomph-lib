@@ -495,6 +495,7 @@ void Mesh::reorder_nodes()
 
  // Setup map to check if nodes have been done yet
  std::map<Node*,bool> done;
+ std::map<Node*,bool> is_in_node_pt;
 
  // Loop over all nodes
  unsigned nnod=nnode();
@@ -508,6 +509,7 @@ void Mesh::reorder_nodes()
  for (unsigned j=0;j<nnod;j++)
   {
    done[node_pt(j)]=false;
+   is_in_node_pt[node_pt(j)]=true;
   }
 
  // Initialise counter for number of nodes
@@ -534,10 +536,15 @@ void Mesh::reorder_nodes()
        // reason we don't range check here by default (not even under
        // paranoia) but force you turn on proper (costly) range checking
        // to track this down...
-       Node_pt[count]=nod_pt;
-       done[nod_pt]=true;
-       // Increase counter
-       count++;
+
+
+       if (is_in_node_pt[nod_pt])
+        {
+         Node_pt[count]=nod_pt;
+         done[nod_pt]=true;
+         // Increase counter
+         count++;
+        }
       }
     }
   }
@@ -545,12 +552,19 @@ void Mesh::reorder_nodes()
  // Sanity check
  if (count!=nnod)
   {
-   throw OomphLibError(
-    "Trouble: Number of nodes hasn't stayed constant during reordering!\n",
+   std::ostringstream error_stream;
+   error_stream 
+    << "Number of nodes hasn't stayed constant\n "
+    << "during re-ordering. nnode = " << nnod 
+    << "\nbut we only encountered " << count << "unique ones\n"
+    << "during reordering."
+    << std::endl;
+   OomphLibWarning(
+    error_stream.str(),
     OOMPH_CURRENT_FUNCTION,
     OOMPH_EXCEPTION_LOCATION);
   }
-
+ 
 }
 
 //=======================================================
@@ -563,6 +577,7 @@ void Mesh::get_node_reordering(Vector<Node*> &reordering) const
 
  // Setup map to check if nodes have been done yet
  std::map<Node*,bool> done;
+ std::map<Node*,bool> is_in_node_pt;
 
  // Loop over all nodes
  unsigned nnod=nnode();
@@ -570,15 +585,17 @@ void Mesh::get_node_reordering(Vector<Node*> &reordering) const
  // Initialise the vector
  reordering.assign(nnod,0);
 
+ // hierher out of date because of introduction of is_in_node_pt?
  // Return immediately if there are no nodes: Note assumption:
  // Either all the elements' nodes stored here or none.
  // If only a subset is stored in the Node_pt vector we'll get
- // a range checking error below (only if run with range, checking,
+ // a range checking error below (only if run with range checking,
  // of course).
  if (nnod==0) return;
  for (unsigned j=0;j<nnod;j++)
   {
    done[node_pt(j)]=false;
+   is_in_node_pt[node_pt(j)]=true;
   }
 
  // Initialise counter for number of nodes
@@ -597,6 +614,10 @@ void Mesh::get_node_reordering(Vector<Node*> &reordering) const
      // Has node been done yet?
      if (!done[nod_pt])
       {
+
+       // hierher comment probably out of date after 
+       // introduction of is_in_node_pt
+
        // Insert into node vector. NOTE: If you get a seg fault/range checking
        // error here then you probably haven't added all the elements' nodes
        // to the Node_pt vector -- this is most likely to arise in the
@@ -606,10 +627,19 @@ void Mesh::get_node_reordering(Vector<Node*> &reordering) const
        // reason we don't range check here by default (not even under
        // paranoia) but force you turn on proper (costly) range checking
        // to track this down...
-       reordering[count]=nod_pt;
-       done[nod_pt]=true;
-       // Increase counter
-       count++;
+
+
+       // end hierher comment probably out of date after 
+       // introduction of is_in_node_pt
+
+
+       if (is_in_node_pt[nod_pt])
+        {
+         reordering[count]=nod_pt;
+         done[nod_pt]=true;
+         // Increase counter
+         count++;
+        }
       }
     }
   }
@@ -617,12 +647,19 @@ void Mesh::get_node_reordering(Vector<Node*> &reordering) const
  // Sanity check
  if (count!=nnod)
   {
-   throw OomphLibError(
-                       "Trouble: Number of nodes hasn't stayed constant during reordering!\n",
-                       OOMPH_CURRENT_FUNCTION,
-                       OOMPH_EXCEPTION_LOCATION);
+   std::ostringstream error_stream;
+   error_stream 
+    << "Number of nodes hasn't stayed constant\n "
+    << "during re-ordering. nnode = " << nnod 
+    << "\nbut we only encountered " << count << "unique ones\n"
+    << "during reordering."
+    << std::endl;
+   OomphLibWarning(
+    error_stream.str(),
+    OOMPH_CURRENT_FUNCTION,
+    OOMPH_EXCEPTION_LOCATION);
   }
-
+ 
 }
 
 

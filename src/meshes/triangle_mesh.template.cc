@@ -514,20 +514,20 @@ void TriangleMesh<ELEMENT>::setup_boundary_coordinates(const unsigned& b,
     // Loop over all elements on boundaries
     nel = this->nboundary_element(b);
     
-#ifdef PARANOID
-    if (nel==0)
-     {
-      std::ostringstream warning_message;
-      warning_message
-       << "There are no elements associated with boundary (" << b << ").\n"
-       << "This could happen because you did not specify boundaries with\n"
-       << "this boundary id. Review carefully the indexing of your\n"
-       << "boundaries.";
-      OomphLibWarning(warning_message.str(),
-                      "TriangleMesh::setup_boundary_coordinates()",
-                      OOMPH_EXCEPTION_LOCATION);
-     }
-#endif
+// #ifdef PARANOID
+//     if (nel==0)
+//      {
+//       std::ostringstream warning_message;
+//       warning_message
+//        << "There are no elements associated with boundary (" << b << ").\n"
+//        << "This could happen because you did not specify boundaries with\n"
+//        << "this boundary id. Review carefully the indexing of your\n"
+//        << "boundaries.";
+//       OomphLibWarning(warning_message.str(),
+//                       "TriangleMesh::setup_boundary_coordinates()",
+//                       OOMPH_EXCEPTION_LOCATION);
+//      }
+// #endif
     
     //Only bother to do anything else, if there are elements
     if (nel > 0)

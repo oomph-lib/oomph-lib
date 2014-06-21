@@ -351,7 +351,7 @@ namespace oomph
 /// in cartesian coordinates.
 //=======================================================================
  template <unsigned DIM>
-  class LinearElasticityEquations : public LinearElasticityEquationsBase<DIM>
+  class LinearElasticityEquations : public virtual LinearElasticityEquationsBase<DIM>
   {
     public:
    
