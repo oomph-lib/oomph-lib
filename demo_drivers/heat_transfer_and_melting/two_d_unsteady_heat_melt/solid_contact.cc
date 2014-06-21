@@ -25,8 +25,15 @@
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 //LIC// 
 //LIC//====================================================================
-// Driver for 2D contact problem -- this mainly demonstrates 
-// pseudo-elasticity
+// Driver for 2D contact problem -- displacement controlled penetrator
+
+
+//===========================================================
+// Jonathan to do:
+// - doc projection of contact pressure (and do by default)
+// - explore --resolve_after_adapt
+//===========================================================
+
 #include <fenv.h> 
 
 //Generic routines
@@ -83,12 +90,6 @@ namespace ProblemParameters
  /// Initial/max element area
  double El_area=0.002;
 
- // hierher
- double T0=0.0;
-
- // hierher
- double Time_sign=1.0;
-
 } // end of ProblemParameters
 
 
@@ -123,43 +124,39 @@ public:
  void actions_before_implicit_timestep()
   {
    // Amplitude of oscillation
-   double amplitude=0.6;
+   double amplitude=0.1; 
    
    // Update position of centre -- amplitude of oscillation increases
    // by 5% per period...
-   double actual_time=ProblemParameters::T0+
-    ProblemParameters::Time_sign*(time_pt()->time()-ProblemParameters::T0);
-
+   double time=time_pt()->time();
    ProblemParameters::Centre[1]=ProblemParameters::Y_c_max-amplitude*
-    (1.0+0.05*actual_time)*
-    0.5*(1.0-cos(2.0*MathematicalConstants::Pi*actual_time));
+    (1.0+0.05*time)*0.5*(1.0-cos(2.0*MathematicalConstants::Pi*time));
    
    oomph_info << "Solving for y_c = " 
               << ProblemParameters::Centre[1] 
-              << " for actual time: " << actual_time << std::endl;
+              << " for time: " << time << std::endl;
   }
 
  /// Actions before adapt: wipe contact elements
  void actions_before_adapt() 
   {
-
    // Make backup of surface mesh
    Backed_up_surface_contact_mesh_pt=
-    new BackupMeshForProjection<TElement<1,3> >( //FaceGeometry<ELEMENT> >(
+    new BackupMeshForProjection<TElement<1,3> >(
      Surface_contact_mesh_pt,Contact_boundary_id);
 
-   // Output contact elements
-   ofstream some_file;
-   char filename[100];
-   sprintf(filename,"contact_before.dat");
-   some_file.open(filename);
-   unsigned nel=Surface_contact_mesh_pt->nelement();
-   for (unsigned e=0;e<nel;e++)
-    {
-     dynamic_cast<SurfaceContactElement<ELEMENT>* >(
-      Surface_contact_mesh_pt->element_pt(e))->output(some_file);
-    }
-   some_file.close();
+   // // Output contact elements
+   // ofstream some_file;
+   // char filename[100];
+   // sprintf(filename,"contact_before.dat");
+   // some_file.open(filename);
+   // unsigned nel=Surface_contact_mesh_pt->nelement();
+   // for (unsigned e=0;e<nel;e++)
+   //  {
+   //   dynamic_cast<NonlinearSurfaceContactElement<ELEMENT>* >(
+   //    Surface_contact_mesh_pt->element_pt(e))->output(some_file);
+   //  }
+   // some_file.close();
    
    // // Kill the  elements and wipe surface mesh
    delete_contact_elements();
@@ -183,91 +180,34 @@ public:
    // Rebuild elements
    complete_problem_setup();
 
-   
-   if (CommandLineArgs::command_line_flag_has_been_set
-       ("--project_contact_pressure_during_adapt"))
-    {
-     
-     // Now project from backup of original contact mesh to new one
-     oomph_info << "Projecting contact pressure.\n";
-     Backed_up_surface_contact_mesh_pt->project_onto_new_mesh(
-      Surface_contact_mesh_pt);
-    }
-   else
-    {
-     oomph_info << "Not projecting contact pressure.\n";
-    }
+   // Now project from backup of original contact mesh to new one
+   oomph_info << "Projecting contact pressure.\n";
+   Backed_up_surface_contact_mesh_pt->project_onto_new_mesh(
+    Surface_contact_mesh_pt);
 
    // Kill backed up mesh
    delete Backed_up_surface_contact_mesh_pt;
-   Backed_up_surface_contact_mesh_pt=0; // hierher add to constructor
+   Backed_up_surface_contact_mesh_pt=0;
 
-   // Doc penetration
-   oomph_info << "Doc penetration after adapt (before reset pen)\n";
-   doc_penetration();
-
-   // Reset penetration
-   reset_penetration();
-
-   // Doc penetration
-   oomph_info << "Doc penetration after adapt (after reset pen)\n";
-   doc_penetration();
-
-   // Output contact elements
-   ofstream some_file;
-   char filename[100];
-   sprintf(filename,"contact_after.dat");
-   some_file.open(filename);
-   unsigned nel=Surface_contact_mesh_pt->nelement();
-   for (unsigned e=0;e<nel;e++)
-    {
-     dynamic_cast<SurfaceContactElement<ELEMENT>* >(
-      Surface_contact_mesh_pt->element_pt(e))->output(some_file);
-    }
-   some_file.close();
-   //pause("done");
+   // // Output contact elements
+   // ofstream some_file;
+   // char filename[100];
+   // sprintf(filename,"contact_after.dat");
+   // some_file.open(filename);
+   // unsigned nel=Surface_contact_mesh_pt->nelement();
+   // for (unsigned e=0;e<nel;e++)
+   //  {
+   //   dynamic_cast<NonlinearSurfaceContactElement<ELEMENT>* >(
+   //    Surface_contact_mesh_pt->element_pt(e))->output(some_file);
+   //  }
+   // some_file.close();
+   // //pause("done");
 
   }
  
  /// Doc the solution
  void doc_solution();
  
- /// Doc penetration for all nodes
- void doc_penetration()
-  {   
-   double max_max_pen=0.0;
-   // Loop over the surface elements
-   unsigned n_element = Surface_contact_mesh_pt->nelement();
-   for(unsigned e=0;e<n_element;e++)
-    {
-     double max_pen=
-     dynamic_cast<SurfaceContactElement<ELEMENT>*>(
-      Surface_contact_mesh_pt->element_pt(e))->doc_penetration();
-     if (max_pen>max_max_pen) max_max_pen=max_pen;
-    }
-   oomph_info << "MAX. PENETRATION: " << max_max_pen << std::endl;
-  }
-
- /// Reset penetration for all nodes
- void reset_penetration()
-  {   
-   // Loop over the surface elements
-   unsigned n_element = Surface_contact_mesh_pt->nelement();
-   for(unsigned e=0;e<n_element;e++)
-    {
-     dynamic_cast<SurfaceContactElement<ELEMENT>*>(
-      Surface_contact_mesh_pt->element_pt(e))->reset_penetration();
-    }
-
-   // Assign the Lagrangian coordinates following the possible
-   // slight adjustment of nodal coordinates
-   if (!CommandLineArgs::command_line_flag_has_been_set("--proper_elasticity"))
-    {
-     Bulk_mesh_pt->set_lagrangian_nodal_coordinates();
-    }
-   
-  }
-
  /// Dummy global error norm for adaptive time-stepping
  double global_temporal_error_norm(){return 0.0;}
 
@@ -292,8 +232,8 @@ private:
      int face_index = Bulk_mesh_pt->face_index_at_boundary(b,e);
      
      // Build the corresponding contact element
-     SurfaceContactElement<ELEMENT>* contact_element_pt = new 
-      SurfaceContactElement<ELEMENT>(bulk_elem_pt,face_index);
+     NonlinearSurfaceContactElement<ELEMENT>* contact_element_pt = new 
+      NonlinearSurfaceContactElement<ELEMENT>(bulk_elem_pt,face_index);
      
      //Add the contact element to the surface mesh
      Surface_contact_mesh_pt->add_element_pt(contact_element_pt);
@@ -375,13 +315,15 @@ private:
     }
 
 
-   if (!CommandLineArgs::command_line_flag_has_been_set("--proper_elasticity"))
-    {
-     // Assign the Lagrangian coordinates -- sensible
-     // because we've completely rebuilt the mesh 
-     // and haven't copied across any Lagrange multipliers
-     Bulk_mesh_pt->set_lagrangian_nodal_coordinates();
-    }
+   // hierher
+   // if (!CommandLineArgs::command_line_flag_has_been_set("--proper_elasticity"))
+   //  {
+   //   // Assign the Lagrangian coordinates -- sensible
+   //   // because we've completely rebuilt the mesh 
+   //   // and haven't copied across any Lagrange multipliers
+   //   Bulk_mesh_pt->set_lagrangian_nodal_coordinates();
+   //  }
+
 
    // Loop over the contact elements to pass pointer to penetrator
    //-------------------------------------------------------------
@@ -389,8 +331,8 @@ private:
    for(unsigned e=0;e<n_element;e++)
     {
      // Upcast from GeneralisedElement 
-     SurfaceContactElement<ELEMENT> *el_pt = 
-      dynamic_cast<SurfaceContactElement<ELEMENT>*>(
+     NonlinearSurfaceContactElement<ELEMENT> *el_pt = 
+      dynamic_cast<NonlinearSurfaceContactElement<ELEMENT>*>(
        Surface_contact_mesh_pt->element_pt(e));
      
      // Set pointer to penetrator
@@ -424,8 +366,7 @@ private:
 
  /// \short Backup of Surface_contact_mesh_pt so the Lagrange multipliers
  /// can be projected across
- BackupMeshForProjection<TElement<1,3> >*  //FaceGeometry<ELEMENT> >* 
- Backed_up_surface_contact_mesh_pt;
+ BackupMeshForProjection<TElement<1,3> >* Backed_up_surface_contact_mesh_pt;
 
 }; // end of problem class
 
@@ -436,6 +377,9 @@ private:
 template<class ELEMENT>
 ContactProblem<ELEMENT>::ContactProblem()
 { 
+
+ // Initialise
+ Backed_up_surface_contact_mesh_pt=0;
 
  // Output directory
  Doc_info.set_directory("RESLT");
@@ -455,9 +399,9 @@ ContactProblem<ELEMENT>::ContactProblem()
  add_time_stepper_pt(new BDF<2>);
 
 
- double x_ll=0.0;// 0.4;
- double x_ur=1.0; //0.6;
- double y_ll=0.0; //0.8;
+ double x_ll=0.0;
+ double x_ur=1.0;
+ double y_ll=0.0;
  double y_ur=1.0;
 
  // Pointer to the closed curve that defines the outer boundary
@@ -517,7 +461,7 @@ ContactProblem<ELEMENT>::ContactProblem()
 
 
  // Contact boundary
- unsigned npt_contact=4; // hierher;
+ unsigned npt_contact=4; 
  Vector<Vector<double> > contact_bound_coords(npt_contact);
  contact_bound_coords[0].resize(2);
  contact_bound_coords[0][0]=x_ur;
@@ -532,15 +476,6 @@ ContactProblem<ELEMENT>::ContactProblem()
  contact_bound_coords[npt_contact-1][0]=x_ll;
  contact_bound_coords[npt_contact-1][1]=y_ur;
 
-// hierher
- // // Flux boundary
- // bound_coords[0].resize(2);
- // bound_coords[0][0]=1.0;
- // bound_coords[0][1]=1.0;
-
- // bound_coords[1].resize(2);
- // bound_coords[1][0]=0.0;
- // bound_coords[1][1]=1.0;
  
  // Build boundary poly line
  Contact_boundary_id=3;
@@ -548,12 +483,6 @@ ContactProblem<ELEMENT>::ContactProblem()
   new TriangleMeshPolyLine(contact_bound_coords,
                            Contact_boundary_id);
  boundary_polyline_pt[3]=contact_boundary_pt;
- 
-
- // hierher
- // // Keep number of elements on boundary approx fixed.
- // double maximum_length=1.0/double(npt_contact-1); 
- // contact_boundary_pt->set_maximum_length(maximum_length);
  
 
  // Create the triangle mesh polygon for outer boundary
@@ -585,11 +514,6 @@ ContactProblem<ELEMENT>::ContactProblem()
  Z2ErrorEstimator* error_estimator_pt=new Z2ErrorEstimator;
  Bulk_mesh_pt->spatial_error_estimator_pt()=error_estimator_pt;
 
- // hierher
- // // Set element size limits
- // Bulk_mesh_pt->max_element_size()=ProblemParameters::El_area;
- // Bulk_mesh_pt->min_element_size()=0.0002; 
-  
  // Create the surface mesh as an empty mesh
  Surface_contact_mesh_pt=new Mesh;
  
@@ -605,17 +529,6 @@ ContactProblem<ELEMENT>::ContactProblem()
 
  // Combine all submeshes into a single global Mesh
  build_global_mesh();
-
- // Doc penetration
- oomph_info << "Doc penetration in constructor before reset pen\n";
- doc_penetration();
- 
- // Reset penetration
- reset_penetration();
- 
- // Doc penetration
- oomph_info << "Doc penetration in constructor after reset pen\n";
- doc_penetration();
  
  // Do equation numbering
  cout <<"Number of equations: " << assign_eqn_numbers() << std::endl; 
@@ -662,26 +575,18 @@ void ContactProblem<ELEMENT>::doc_solution()
  unsigned nel=Surface_contact_mesh_pt->nelement();
  for (unsigned e=0;e<nel;e++)
   {
-   dynamic_cast<SurfaceContactElement<ELEMENT>* >(
+   dynamic_cast<NonlinearSurfaceContactElement<ELEMENT>* >(
     Surface_contact_mesh_pt->element_pt(e))->output(some_file,20);
   }
  some_file.close();
  
+
  // Output penetrator
  sprintf(filename,"%s/penetrator%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
- unsigned n=500;
- Vector<double> r(2);
- Vector<double> x_dummy(2);
- for (unsigned j=0;j<n;j++)
-  {
-   double phi=2.0*MathematicalConstants::Pi*double(j)/double(n-1);
-   x_dummy[0]=cos(phi);
-   x_dummy[1]=sin(phi);
-   ProblemParameters::Penetrator_pt->position(x_dummy,r);
-   some_file << r[0] << " " << r[1] << std::endl;
-  }
+ unsigned nplot=500;
+ ProblemParameters::Penetrator_pt->output(some_file,nplot);
  some_file.close();
   
  // Write mesh "volume" to trace file
@@ -722,22 +627,9 @@ int main(int argc, char* argv[])
  CommandLineArgs::specify_command_line_flag("--el_area",
                                             &ProblemParameters::El_area);
     
- // Project contact pressure during adaptation
- CommandLineArgs::specify_command_line_flag
-  ("--project_contact_pressure_during_adapt");
-
  // Resolve after adaptation
- CommandLineArgs::specify_command_line_flag("--resolve_after_adapt");
+ // hierher CommandLineArgs::specify_command_line_flag("--resolve_after_adapt");
 
- // Proper elasticity (rather than pseudo-solid with constant
- // re-setting)
- CommandLineArgs::specify_command_line_flag("--proper_elasticity");
-
- // Uniform refinements before release of load
- unsigned nref=0;
- CommandLineArgs::specify_command_line_flag("--nref_before_release",
-                                            &nref);
-    
  // Suppress adaptation
  CommandLineArgs::specify_command_line_flag("--validate");
     
@@ -778,7 +670,7 @@ int main(int argc, char* argv[])
 
 
  // Number of parameter increments per period
- unsigned nstep_for_period=100;
+ unsigned nstep_for_period=40; // 100;
 
  // Parameter variation
  unsigned nperiod=3;
@@ -811,7 +703,10 @@ int main(int argc, char* argv[])
     {
      suppress_resolve_after_spatial_adapt_flag=0;
     }
-       
+
+   // hierher
+   suppress_resolve_after_spatial_adapt_flag=0;
+  
    double next_dt=
     problem.doubly_adaptive_unsteady_newton_solve(
      dt,
@@ -824,49 +719,6 @@ int main(int argc, char* argv[])
    //Output solution
    problem.doc_solution();
   }
- 
+  
 
- // hierher
- exit(0);
-
- oomph_info << "Done final down step\n";
-
-
- for (unsigned i=0;i<nref;i++)
-  {
-   oomph_info << "doing refinement solve " << i << std::endl;
-   problem.refine_uniformly();
-   problem.newton_solve();
-   problem.doc_solution();
-  }
-
-
- // hierher
- ProblemParameters::T0=problem.time_pt()->time();
- // hierher
- ProblemParameters::Time_sign=-1.0;
-
-
- while (ProblemParameters::Centre[1]<ProblemParameters::Y_c_max)
-  {
-   // Dummy double adaptivity (timestep is always accepted because
-   // tolerance is set to huge value; mainly used to automatically
-   // re-solve with smaller timestep increment after non-convergence
-   double epsilon_t=DBL_MAX;
-   bool first=false;
-   unsigned suppress_resolve_after_spatial_adapt_flag=0;
-   double next_dt=
-    problem.doubly_adaptive_unsteady_newton_solve(
-     dt,
-     epsilon_t,
-     max_adapt,
-     suppress_resolve_after_spatial_adapt_flag,
-     first);
-   dt = next_dt; 
-   
-   //Output solution
-   problem.doc_solution();
-  }
- 
- 
 } // end of main

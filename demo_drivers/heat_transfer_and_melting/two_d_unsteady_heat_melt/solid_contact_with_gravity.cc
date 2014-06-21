@@ -25,8 +25,8 @@
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 //LIC// 
 //LIC//====================================================================
-// Driver for 2D contact problem -- this mainly demonstrates 
-// pseudo-elasticity
+// Driver for 2D contact problem -- switching from displacement to
+// weight control
 #include <fenv.h> 
 
 //Generic routines
@@ -142,6 +142,9 @@ class CircularPenetratorElement : public virtual GeneralisedElement,
     Contact_element_mesh_pt=0;
    }
   
+
+  /// Virtual destructor
+  virtual ~CircularPenetratorElement(){};
 
   /// \short Vector of pairs identifying values (via a pair of pointer to 
   /// Data object and index within it) that correspond to the Data values 
@@ -529,16 +532,19 @@ class CircularPenetratorElement : public virtual GeneralisedElement,
     }
   }
 
-  /// \short Get position to surface, r, for given point x. Specific 
-  /// implementation of penetetrator has do decide how to relate
-  /// these two points. Here we assume they both have the same polar angle
-  void position(const Vector<double>& x, Vector<double>& r) const
-  {
-   double phi=atan2(x[1]-centre(1),x[0]-centre(0));
-   r[0]=centre(0)+(*Radius_pt)*cos(phi);
-   r[1]=centre(1)+(*Radius_pt)*sin(phi);
-  }
- 
+
+  /// Output coordinates of penetrator at nplot plot points
+  void output(std::ostream &outfile, const unsigned& nplot) const
+   {
+    for (unsigned j=0;j<nplot;j++)
+     {
+      double phi=2.0*MathematicalConstants::Pi*double(j)/double(nplot-1);
+      outfile << centre(0)+(*Radius_pt)*cos(phi) << " " 
+              << centre(1)+(*Radius_pt)*sin(phi)
+              << std::endl;
+     }
+   }
+    
   /// \short Resulting force from all associated ContactElements
   Vector<double> resulting_force() const
   {
@@ -610,7 +616,7 @@ namespace ProblemParameters
 {
  
  /// \short Impose position of centre (i.e. a stand-alone penetrator with
- /// prescribed position or indirectly via control node?
+ /// prescribed position) or indirectly via control node?
  bool Impose_position_of_centre=true;
  
  /// Non-dim density for solid
@@ -736,7 +742,7 @@ public:
    // unsigned nel=Surface_contact_mesh_pt->nelement();
    // for (unsigned e=0;e<nel;e++)
    //  {
-   //   dynamic_cast<SurfaceContactElement<ELEMENT>* >(
+   //   dynamic_cast<NonlinearSurfaceContactElement<ELEMENT>* >(
    //    Surface_contact_mesh_pt->element_pt(e))->output(some_file);
    //  }
    // some_file.close();
@@ -782,7 +788,7 @@ public:
    // unsigned nel=Surface_contact_mesh_pt->nelement();
    // for (unsigned e=0;e<nel;e++)
    //  {
-   //   dynamic_cast<SurfaceContactElement<ELEMENT>* >(
+   //   dynamic_cast<NonlinearSurfaceContactElement<ELEMENT>* >(
    //    Surface_contact_mesh_pt->element_pt(e))->output(some_file);
    //  }
    // some_file.close();
@@ -826,8 +832,8 @@ public:
    for(unsigned e=0;e<n_element;e++)
     {
      // Upcast from GeneralisedElement 
-     SurfaceContactElement<ELEMENT> *el_pt = 
-      dynamic_cast<SurfaceContactElement<ELEMENT>*>(
+     NonlinearSurfaceContactElement<ELEMENT> *el_pt = 
+      dynamic_cast<NonlinearSurfaceContactElement<ELEMENT>*>(
        Surface_contact_mesh_pt->element_pt(e));
      
      // Set pointer to penetrator
@@ -862,8 +868,8 @@ private:
      int face_index = Bulk_mesh_pt->face_index_at_boundary(b,e);
      
      // Build the corresponding contact element
-     SurfaceContactElement<ELEMENT>* contact_element_pt = new 
-      SurfaceContactElement<ELEMENT>(bulk_elem_pt,face_index,
+     NonlinearSurfaceContactElement<ELEMENT>* contact_element_pt = new 
+      NonlinearSurfaceContactElement<ELEMENT>(bulk_elem_pt,face_index,
                                                 Contact_id);
      
      //Add the contact element to the surface mesh
@@ -1062,8 +1068,8 @@ private:
       bool found=false;
       for (unsigned e=0;e<nel;e++)
        {
-        SurfaceContactElement<ELEMENT>* el_pt=
-         dynamic_cast<SurfaceContactElement<ELEMENT>*>(
+        NonlinearSurfaceContactElement<ELEMENT>* el_pt=
+         dynamic_cast<NonlinearSurfaceContactElement<ELEMENT>*>(
           Surface_contact_mesh_pt->element_pt(e));
         unsigned nnod=el_pt->nnode();
         for (unsigned j=0;j<nnod;j++)
@@ -1205,8 +1211,8 @@ private:
    for(unsigned e=0;e<n_element;e++)
     {
      // Upcast from GeneralisedElement 
-     SurfaceContactElement<ELEMENT> *el_pt = 
-      dynamic_cast<SurfaceContactElement<ELEMENT>*>(
+     NonlinearSurfaceContactElement<ELEMENT> *el_pt = 
+      dynamic_cast<NonlinearSurfaceContactElement<ELEMENT>*>(
        Surface_contact_mesh_pt->element_pt(e));
      
      // Set pointer to penetrator
@@ -1715,7 +1721,7 @@ void ContactProblem<ELEMENT>::doc_solution()
  unsigned nel=Surface_contact_mesh_pt->nelement();
  for (unsigned e=0;e<nel;e++)
   {
-   dynamic_cast<SurfaceContactElement<ELEMENT>* >(
+   dynamic_cast<NonlinearSurfaceContactElement<ELEMENT>* >(
     Surface_contact_mesh_pt->element_pt(e))->output(some_file,20);
   }
  some_file.close();
@@ -1732,8 +1738,8 @@ void ContactProblem<ELEMENT>::doc_solution()
  nel=Surface_contact_mesh_pt->nelement();
  for (unsigned e=0;e<nel;e++)
   {
-   SurfaceContactElement<ELEMENT>* el_pt=
-    dynamic_cast<SurfaceContactElement<ELEMENT>* >(
+   NonlinearSurfaceContactElement<ELEMENT>* el_pt=
+    dynamic_cast<NonlinearSurfaceContactElement<ELEMENT>* >(
      Surface_contact_mesh_pt->element_pt(e));
    unsigned nint=el_pt->integral_pt()->nweight();
    for (unsigned j=0;j<nint;j++)
@@ -1749,40 +1755,12 @@ void ContactProblem<ELEMENT>::doc_solution()
 
  
  // Output penetrator
-CircularPenetratorElement* pen_el_pt=
- dynamic_cast<CircularPenetratorElement*>(ProblemParameters::Penetrator_pt);
  sprintf(filename,"%s/penetrator%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
- Vector<double> centre(2);
- if (pen_el_pt!=0)
-  {
-   Vector<double> my_centre(pen_el_pt->centre());
-   centre[0]=my_centre[0];
-   centre[1]=my_centre[1];
-  }
- else
-  {
-   centre[0]=ProblemParameters::Centre[0];
-   centre[1]=ProblemParameters::Centre[1];
-  }
- double radius=ProblemParameters::Radius;
- unsigned n=500;
- Vector<double> r(2);
- Vector<double> x_dummy(2);
- for (unsigned j=0;j<n;j++)
-  {   
-   // Position fct finds the point on the penetrator with the same
-   // polar angle as the input point -- fly around it with twice
-   // radius...
-   double phi=2.0*MathematicalConstants::Pi*double(j)/double(n-1);
-   x_dummy[0]=centre[0]+2.0*radius*cos(phi);
-   x_dummy[1]=centre[1]+2.0*radius*sin(phi);
-   ProblemParameters::Penetrator_pt->position(x_dummy,r);
-   some_file << r[0] << " " << r[1] << std::endl;
-  }
+ unsigned nplot=500;
+ ProblemParameters::Penetrator_pt->output(some_file,nplot);
  some_file.close();
-
   
  // Output contact elements and assemble total resulting force
  Vector<double> total_contact_force(2,0.0);
@@ -1793,8 +1771,8 @@ CircularPenetratorElement* pen_el_pt=
  nel=Surface_contact_mesh_pt->nelement();
  for (unsigned e=0;e<nel;e++)
   {
-   SurfaceContactElement<ELEMENT>* el_pt=
-    dynamic_cast<SurfaceContactElement<ELEMENT>*>(
+   NonlinearSurfaceContactElement<ELEMENT>* el_pt=
+    dynamic_cast<NonlinearSurfaceContactElement<ELEMENT>*>(
      Surface_contact_mesh_pt->element_pt(e));
    el_pt->output(some_file,3);
    el_pt->resulting_contact_force(contact_force);
@@ -1822,7 +1800,21 @@ CircularPenetratorElement* pen_el_pt=
  sprintf(filename,"%s/hertz%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
- n=500;
+ unsigned n=500;
+ CircularPenetratorElement* pen_el_pt=
+  dynamic_cast<CircularPenetratorElement*>(ProblemParameters::Penetrator_pt);
+ Vector<double> centre(2);
+ if (pen_el_pt!=0)
+  {
+   Vector<double> my_centre(pen_el_pt->centre());
+   centre[0]=my_centre[0];
+   centre[1]=my_centre[1];
+  }
+ else
+  {
+   centre[0]=ProblemParameters::Centre[0];
+   centre[1]=ProblemParameters::Centre[1];
+  }
  double x_c=centre[0];
  double width=2.0*b_hertz;
  for (unsigned j=0;j<n;j++)

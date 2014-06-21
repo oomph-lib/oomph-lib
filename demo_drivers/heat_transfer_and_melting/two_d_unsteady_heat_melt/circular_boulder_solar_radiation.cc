@@ -337,17 +337,6 @@ public:
 
    // Rebuild elements
    complete_problem_setup();
-   
-   // Doc penetration
-   oomph_info << "Doc penetration after adapt (before reset pen)\n";
-   doc_penetration();
-
-   // Reset penetration
-   reset_penetration();
-
-   // Doc penetration
-   oomph_info << "Doc penetration after adapt (after reset pen)\n";
-   doc_penetration();
   }
  
 
@@ -483,44 +472,9 @@ public:
    // hierher Ordered_shielding_node_pt.push_back(Right_horizon_node_pt);
   }
 
-
-
  /// Doc the solution
  void doc_solution();
  
- /// Doc penetration for all nodes
- void doc_penetration()
-  {   
-   double max_max_pen=0.0;
-   // Loop over the surface elements
-   unsigned n_element = Surface_contact_mesh_pt->nelement();
-   for(unsigned e=0;e<n_element;e++)
-    {
-     double max_pen=
-     dynamic_cast<SurfaceContactElement<ELEMENT>*>(
-      Surface_contact_mesh_pt->element_pt(e))->doc_penetration();
-     if (max_pen>max_max_pen) max_max_pen=max_pen;
-    }
-   oomph_info << "MAX. PENETRATION: " << max_max_pen << std::endl;
-  }
-
- /// Reset penetration for all nodes
- void reset_penetration()
-  {   
-   // Loop over the surface elements
-   unsigned n_element = Surface_contact_mesh_pt->nelement();
-   for(unsigned e=0;e<n_element;e++)
-    {
-     dynamic_cast<SurfaceContactElement<ELEMENT>*>(
-      Surface_contact_mesh_pt->element_pt(e))->reset_penetration();
-    }
-
-   // Assign the Lagrangian coordinates following the possible
-   // slight adjustment of nodal coordinates
-   Bulk_mesh_pt->set_lagrangian_nodal_coordinates();
-   
-  }
-
  /// Dummy global error norm for adaptive time-stepping
  double global_temporal_error_norm(){return 0.0;}
 
@@ -555,8 +509,8 @@ private:
        unsigned id=0; // hierher make member
 
        // Build the corresponding contact element
-       SurfaceContactElement<ELEMENT>* contact_element_pt = new 
-        SurfaceContactElement<ELEMENT>(bulk_elem_pt,face_index,id);
+       NonlinearSurfaceContactElement<ELEMENT>* contact_element_pt = new 
+        NonlinearSurfaceContactElement<ELEMENT>(bulk_elem_pt,face_index,id);
        
        //Add the contact element to the surface mesh
        Surface_contact_mesh_pt->add_element_pt(contact_element_pt);
@@ -727,8 +681,8 @@ private:
    for(unsigned e=0;e<n_element;e++)
     {
      // Upcast from GeneralisedElement 
-     SurfaceContactElement<ELEMENT> *el_pt = 
-      dynamic_cast<SurfaceContactElement<ELEMENT>*>(
+     NonlinearSurfaceContactElement<ELEMENT> *el_pt = 
+      dynamic_cast<NonlinearSurfaceContactElement<ELEMENT>*>(
        Surface_contact_mesh_pt->element_pt(e));
      
      // Set pointer to penetrator
@@ -1190,18 +1144,6 @@ SolarRadiationProblem<ELEMENT>::SolarRadiationProblem()
  // Combine all submeshes into a single global Mesh
  build_global_mesh();
 
- // Doc penetration
- oomph_info << "Doc penetration in constructor before reset pen\n";
- doc_penetration();
- 
- // Reset penetration
- reset_penetration();
- 
- // Doc penetration
- oomph_info << "Doc penetration in constructor after reset pen\n";
- doc_penetration();
- 
-
  // Set the initial conditions
  unsigned nnod = Bulk_mesh_pt->nnode();
  for(unsigned j=0;j<nnod;j++)
@@ -1255,7 +1197,7 @@ void SolarRadiationProblem<ELEMENT>::doc_solution()
  unsigned nel=Surface_contact_mesh_pt->nelement();
  for (unsigned e=0;e<nel;e++)
   {
-   dynamic_cast<SurfaceContactElement<ELEMENT>* >(
+   dynamic_cast<NonlinearSurfaceContactElement<ELEMENT>* >(
     Surface_contact_mesh_pt->element_pt(e))->output(some_file);
   }
  some_file.close();
@@ -1364,21 +1306,13 @@ void SolarRadiationProblem<ELEMENT>::doc_solution()
     }
   }
 
+
  // Output penetrator
  sprintf(filename,"%s/penetrator%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  unsigned n=100;
- Vector<double> r(2);
- Vector<double> x_dummy(2);
- for (unsigned j=0;j<n;j++)
-  {
-   double phi=2.0*MathematicalConstants::Pi*double(j)/double(n-1);
-   x_dummy[0]=cos(phi);
-   x_dummy[1]=sin(phi);
-   ProblemParameters::Penetrator_pt->position(x_dummy,r);
-   some_file << r[0] << " " << r[1] << std::endl;
-  }
+ ProblemParameters::Penetrator_pt->output(some_file,n);
  some_file.close();
  
  // Output Number of Newton iterations in form that can be visualised

@@ -23,7 +23,7 @@ cd $dir
 
 # Loop over the element areas
 #----------------------------
-el_area_list="0.02 0.002 0.0002 0.00002 0.000002" # adjust
+el_area_list="0.02 0.002" ## hierher  0.0002 0.00002 0.000002" # adjust
 for el_area in `echo $el_area_list`; do
 
     
@@ -34,7 +34,8 @@ for el_area in `echo $el_area_list`; do
 
     
     # Assemble command line flag
-    command_line_flag=`echo " --proper_elasticity  --no_adapt --el_area  $el_area"`
+    #command_line_flag=`echo " --proper_elasticity  --no_adapt --el_area  $el_area"` # hierher
+    command_line_flag=`echo " --proper_elasticity  --el_area  $el_area"`
     
     # Run it
     ./solid_contact `echo $command_line_flag` > RESLT/OUTPUT
