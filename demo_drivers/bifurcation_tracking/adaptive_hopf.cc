@@ -60,6 +60,11 @@ namespace Global_Parameters
 
  // Rotation ratio
  double Alpha=0.0;
+
+ // Control Flag that will read in the eigenfunction from disk
+ // This is required because we are not allowed to redistribute
+ // ARPACK, so cannot assume that it has been installed.
+ bool Read_in_eigenfunction_from_disk = true;
 }
 
 
@@ -1191,6 +1196,13 @@ FlowAroundCylinderProblem<ELEMENT>::FlowAroundCylinderProblem(
  //the coarsest mesh
  Max_residuals = 100.0;
  
+ if(!Global_Parameters::Read_in_eigenfunction_from_disk)
+  {
+   this->eigen_solver_pt() = new ARPACK;
+   static_cast<ARPACK*>(eigen_solver_pt())->set_shift(50.0);
+   static_cast<ARPACK*>(eigen_solver_pt())->narnoldi() = 70;
+  }
+
  // Build mesh
  Problem::mesh_pt()=
   new RefineableRectangleWithHoleMesh<ELEMENT>(cylinder_pt,length,height);
@@ -1269,34 +1281,46 @@ int main()
    problem.newton_solve();
   }
 
- //Read in the  eigenvalue from the data file
- std::ifstream input("eigen.dat");
- double eigenvalue=0.0;
- input >> eigenvalue;
-
- //Read in the eigenvector from the data file
+ //Assign memory for the eigenvalues and eigenvectors
  Vector<DoubleVector> eigenvectors;
- const unsigned n_dof = problem.ndof();
- eigenvectors.resize(2);
- LinearAlgebraDistribution dist(problem.communicator_pt(),n_dof,false);
- //Rebuild the vector
- eigenvectors[0].build(&dist,0.0);
- eigenvectors[1].build(&dist,0.0);
- //eigenvectors[0].resize(n_dof);
- //eigenvectors[1].resize(n_dof);
+ double frequency = 0.0;
 
- for(unsigned n=0;n<n_dof;n++)
+ //If we are reading in from the disk
+ if(Global_Parameters::Read_in_eigenfunction_from_disk)
   {
-   input >> eigenvectors[0][n];
-   input >> eigenvectors[1][n];
+   //Read in the  eigenvalue from the data file
+   std::ifstream input("eigen.dat");
+   input >> frequency;
+   
+   //Read in the eigenvector from the data file
+   const unsigned n_dof = problem.ndof();
+   eigenvectors.resize(2);
+   LinearAlgebraDistribution dist(problem.communicator_pt(),n_dof,false);
+   //Rebuild the vector
+   eigenvectors[0].build(&dist,0.0);
+   eigenvectors[1].build(&dist,0.0);
+
+   for(unsigned n=0;n<n_dof;n++)
+    {
+     input >> eigenvectors[0][n];
+     input >> eigenvectors[1][n];
+    }
+   input.close();
   }
- input.close();
- 
+ //Otherwise solve the eigenproblem
+ else
+  {
+   Vector<complex<double> > eigenvalues;
+   //Now solve the eigenproblem
+   problem.solve_eigenproblem(6,eigenvalues,eigenvectors);
+   frequency = eigenvalues[0].imag();
+  }
+
  //Try to find the Hopf exactly by using the initial
  //guesses for the eigenvalue and eigenvector from
  //the data file
  problem.activate_hopf_tracking(&Global_Parameters::Re,
-                                eigenvalue,
+                                frequency,
                                 eigenvectors[0],      
                                 eigenvectors[1]);      
  //Solve the problem 
