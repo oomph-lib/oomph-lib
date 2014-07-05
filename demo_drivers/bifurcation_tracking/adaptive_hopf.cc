@@ -1310,7 +1310,7 @@ int main()
  //Otherwise solve the eigenproblem
  else
   {
-   Vector<complex<double> > eigenvalues;
+   Vector<std::complex<double> > eigenvalues;
    //Now solve the eigenproblem
    problem.solve_eigenproblem(6,eigenvalues,eigenvectors);
    frequency = eigenvalues[0].imag();

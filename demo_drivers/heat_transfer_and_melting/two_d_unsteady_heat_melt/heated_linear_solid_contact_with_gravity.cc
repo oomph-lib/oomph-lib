@@ -1142,7 +1142,7 @@ fill_in_contribution_to_residuals_surface_contact(Vector<double> &residuals)
          
       case ContactElementBase::External_data:
       {
-       int local_eqn=external_local_eqn(
+       int local_eqn=this->external_local_eqn(
         this->Penetrator_eq_data_data_index[i],
         this->Penetrator_eq_data_index[i]);
        if (local_eqn>=0)
@@ -1156,7 +1156,7 @@ fill_in_contribution_to_residuals_surface_contact(Vector<double> &residuals)
       {
        // position type (dummy -- hierher paranoid check)
        unsigned k=0;
-       int local_eqn=position_local_eqn(
+       int local_eqn=this->position_local_eqn(
         this->Penetrator_eq_data_data_index[i],k,
         this->Penetrator_eq_data_index[i]);
        if (local_eqn>=0)
@@ -1169,7 +1169,7 @@ fill_in_contribution_to_residuals_surface_contact(Vector<double> &residuals)
         
       case ContactElementBase::Nodal_data:
       {
-       int local_eqn=nodal_local_eqn(
+       int local_eqn=this->nodal_local_eqn(
         this->Penetrator_eq_data_data_index[i],
         this->Penetrator_eq_data_index[i]);
        if (local_eqn>=0)

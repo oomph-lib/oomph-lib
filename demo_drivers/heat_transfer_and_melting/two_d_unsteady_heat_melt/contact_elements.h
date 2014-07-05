@@ -1114,13 +1114,13 @@ fill_in_contribution_to_residuals_surface_contact(Vector<double> &residuals)
          {
           //Calculate the Eulerian and Lagrangian positions
           interpolated_x[i] += 
-           nodal_position_gen(l,this->bulk_position_type(k),i)*psi(l,k);
+           this->nodal_position_gen(l,this->bulk_position_type(k),i)*psi(l,k);
                       
           //Loop over LOCAL derivative directions, to calculate the tangent(s)
           for(unsigned j=0;j<n_dim-1;j++)
            {
             interpolated_A(j,i) += 
-             nodal_position_gen(l,this->bulk_position_type(k),i)*dpsids(l,k,j);
+             this->nodal_position_gen(l,this->bulk_position_type(k),i)*dpsids(l,k,j);
            }
          }
        }
@@ -1483,13 +1483,13 @@ void NonlinearSurfaceContactElement<ELEMENT>::resulting_contact_force(
         {
          //Calculate the Eulerian and Lagrangian positions
          interpolated_x[i] += 
-          nodal_position_gen(l,this->bulk_position_type(k),i)*psi(l,k);
+          this->nodal_position_gen(l,this->bulk_position_type(k),i)*psi(l,k);
            
          //Loop over LOCAL derivative directions, to calculate the tangent(s)
          for(unsigned j=0;j<n_dim-1;j++)
           {
            interpolated_A(j,i) += 
-            nodal_position_gen(l,this->bulk_position_type(k),i)*dpsids(l,k,j);
+            this->nodal_position_gen(l,this->bulk_position_type(k),i)*dpsids(l,k,j);
           }
         }
       }
@@ -2070,7 +2070,7 @@ fill_in_contribution_to_residuals_surface_contact(Vector<double> &residuals)
          
       case ContactElementBase::External_data:
       {
-       int local_eqn=external_local_eqn(
+       int local_eqn=this->external_local_eqn(
         this->Penetrator_eq_data_data_index[i],
         this->Penetrator_eq_data_index[i]);
        if (local_eqn>=0)
@@ -2084,7 +2084,7 @@ fill_in_contribution_to_residuals_surface_contact(Vector<double> &residuals)
       {
        // position type (dummy -- hierher paranoid check)
        unsigned k=0;
-       int local_eqn=position_local_eqn(
+       int local_eqn=this->position_local_eqn(
         this->Penetrator_eq_data_data_index[i],k,
         this->Penetrator_eq_data_index[i]);
        if (local_eqn>=0)
@@ -2097,7 +2097,7 @@ fill_in_contribution_to_residuals_surface_contact(Vector<double> &residuals)
         
       case ContactElementBase::Nodal_data:
       {
-       int local_eqn=nodal_local_eqn(
+       int local_eqn=this->nodal_local_eqn(
         this->Penetrator_eq_data_data_index[i],
         this->Penetrator_eq_data_index[i]);
        if (local_eqn>=0)
