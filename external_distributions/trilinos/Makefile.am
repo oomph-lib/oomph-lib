@@ -100,3 +100,4 @@ clean-local:
 	rm -rf trilinos-9.0.2
 	rm -rf trilinos-10.8.5-Source
 	rm -rf trilinos-11.4.3-Source
+	rm -rf trilinos-11.8.1-Source
