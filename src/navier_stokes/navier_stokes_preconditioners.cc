@@ -229,9 +229,8 @@ namespace oomph
    }
   else
    {
-     // RAYRAY check, this is dangerous.... is Mesh 0 always the NS mesh, even
-     // in a subsidiary block preconditioner? I.e. is the appropriate look up
-     // scheme in place plus ndof types is?
+    // This is the upper-most master block preconditioner, the Navier-Stokes
+    // mesh is in position 0
     ndof_types = this->ndof_types_in_mesh(0);
    }
 
