@@ -924,9 +924,14 @@ namespace oomph
     {
       for (unsigned mesh_i = 0; mesh_i < My_nmesh; mesh_i++) 
       {
-        My_ndof_types_in_mesh.push_back(My_mesh_pt[0]->ndof_types());
+        My_ndof_types_in_mesh.push_back(My_mesh_pt[mesh_i]->ndof_types());
       }
     }
+
+ //   std::cout << "ndof_types: " << this->ndof_types() << std::endl; 
+//    pause("lock me away"); 
+    
+    
 
     // To construct the desired block structure for this preconditioner, with
     // assumption on the natural ordering of the DOF types, we require only the
@@ -1139,7 +1144,7 @@ namespace oomph
         // Fill in the velocity DOF types.
         for (unsigned dim_i = 0; dim_i < spatial_dim; dim_i++) 
         {
-          //dof_to_block_map[temp_index] = dim_i + mesh_i*spatial_dim; fancy way.
+          //dof_to_block_map[temp_index] = dim_i + mesh_i*spatial_dim;// fancy way.
           dof_to_block_map[temp_index++] = velocity_val++;
         } // for
 
@@ -1161,6 +1166,8 @@ namespace oomph
 //      std::cout << dof_to_block_map[tmp_i] << " "; 
 //    }
 //    std::cout << "\n" << std::endl; 
+//    pause("I'm back"); 
+    
 
     // Call the block setup
     this->block_setup(dof_to_block_map);
@@ -1370,7 +1377,6 @@ namespace oomph
     oomph_info << "RAYSIGMA: " << std::setprecision(15) << Scaling_sigma
       << std::setprecision(cout_precision)
       << std::endl;
-
 
     ///////////////////////////////////////////////////////////////////////////
     //                Now create the augmented fluid matrix.                 //
@@ -1673,8 +1679,6 @@ namespace oomph
       }
     } // loop through Lagrange multipliers.
 
-
-
     ///////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////
 
@@ -1714,10 +1718,6 @@ namespace oomph
     //
     if(Using_superlu_ns_preconditioner)
     {
-
-      
-      
-      
 
 //      pause("Lgr::setup() done setting replacement blocks, about to check repl. blocks");
 //      MapMatrix<unsigned,CRDoubleMatrix*> re_block_pt = this->replacement_dof_block_pt();
