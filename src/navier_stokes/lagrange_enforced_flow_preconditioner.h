@@ -49,6 +49,33 @@
 
 namespace oomph
 {
+
+namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
+{
+#ifdef OOMPH_HAS_TRILINOS
+  /// \short CG with diagonal preconditioner for the lagrange multiplier
+  /// subsidiary linear systems.
+  Preconditioner* get_lagrange_multiplier_preconditioner()
+  {
+   InnerIterationPreconditioner
+    <TrilinosAztecOOSolver,MatrixBasedDiagPreconditioner>* prec_pt = 
+    new InnerIterationPreconditioner
+    <TrilinosAztecOOSolver,MatrixBasedDiagPreconditioner>;
+   // Note: This makes CG a proper "inner iteration" for
+   // which GMRES (may) no longer converge. We should really
+   // use FGMRES or GMRESR for this. However, here the solver
+   // is so good that it'll converge very quickly anyway
+   // so there isn't much to be gained by limiting the number
+   // of iterations...
+   prec_pt->max_iter() = 4;
+   prec_pt->solver_pt()->solver_type() = TrilinosAztecOOSolver::CG;
+   prec_pt->solver_pt()->disable_doc_time();
+   return prec_pt;
+  }
+#endif
+}
+
+
   //=============================================================================
   /// \short The preconditioner for the Lagrange multiplier constrained
   /// Navier-Stokes equations. The velocity components are constrained by
@@ -280,6 +307,13 @@ namespace oomph
             this->get_block_vector(l_ii,r,temp_vec);
             Lagrange_multiplier_preconditioner_pt[l_i]->preconditioner_solve(temp_vec,
                 another_temp_vec);
+
+            const unsigned vec_nrow_local = another_temp_vec.nrow_local();
+            double* vec_values_pt = another_temp_vec.values_pt();
+            for (unsigned i = 0; i < vec_nrow_local; i++) 
+            {
+              vec_values_pt[i] = vec_values_pt[i]*Scaling_sigma;
+            }
 
             this->return_block_vector(l_ii,another_temp_vec,z);
             temp_vec.clear();
@@ -1553,11 +1587,11 @@ namespace oomph
         // Divide by Scaling_sigma and create the inverse of w.
         for(unsigned long row_i = 0; row_i < l_i_nrow_local; row_i++)
         {
-          w_i_diag_values[row_i] /= Scaling_sigma;
+//          w_i_diag_values[row_i] /= Scaling_sigma;
 
           // w_i is a diagonal matrix, so take the inverse to
           // invert the matrix.
-          invw_i_diag_values[row_i] = 1.0/w_i_diag_values[row_i];
+          invw_i_diag_values[row_i] = Scaling_sigma / w_i_diag_values[row_i];
 
           w_i_column_indices[row_i] = row_i + l_i_first_row;
           w_i_row_start[row_i] = row_i;
