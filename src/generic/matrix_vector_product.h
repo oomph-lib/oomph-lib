@@ -102,8 +102,12 @@ namespace oomph {
    /// multiply methods, if Trilinos is not installed then this class will
    /// function as expected, but there will be no computational speed gain.
    /// By default the Epetra_CrsMatrix::multiply(...) are employed.
+   /// The optional argument col_dist_pt is the distribution of: 
+   /// x if using multiply(...) or y if using multiply_transpose(...) 
+   /// where this is A x = y. By default, this is assumed to the uniformly
+   /// distributed based on matrix_pt->ncol().
    void setup(CRDoubleMatrix* matrix_pt,
-              LinearAlgebraDistribution* col_dist_pt=0);
+              const LinearAlgebraDistribution* col_dist_pt=0);
 
    /// \short Apply the operator to the vector x and return the result in 
    /// the vector y
@@ -141,7 +145,7 @@ namespace oomph {
    /// \short an oomph-lib matrix
    CRDoubleMatrix* Oomph_matrix_pt;
 
-   /// \short The (assumed) distribution of: x if using multiply(...) or y
+   /// \short The distribution of: x if using multiply(...) or y
    /// if using multiply_transpose(...) where this is A x = y.
    LinearAlgebraDistribution* Column_distribution_pt;
 

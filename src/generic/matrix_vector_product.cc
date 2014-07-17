@@ -37,9 +37,13 @@ namespace oomph
  /// multiply methods, if Trilinos is not installed then this class will
  /// function as expected, but there will be no computational speed gain.
  /// By default the Epetra_CrsMatrix::multiply(...) are employed.
+ /// The optional argument col_dist_pt is the distribution of: 
+ /// x if using multiply(...) or y if using multiply_transpose(...) 
+ /// where this is A x = y. By default, this is assumed to the uniformly
+ /// distributed based on matrix_pt->ncol().
  //============================================================================
  void MatrixVectorProduct::setup(CRDoubleMatrix* matrix_pt,
-                             LinearAlgebraDistribution* col_dist_pt)
+                             const LinearAlgebraDistribution* col_dist_pt)
  {
   // clean memory
   this->clean_up_memory();
@@ -63,7 +67,9 @@ namespace oomph
 #endif
 #endif
 
-  // create the cols map
+  // create the column distribution map, if a distribution is not provided,
+  // create a uniformly distributed based on matrix_pt->ncol().
+  // Otherwise, use the provided distribution.
   if(col_dist_pt == 0)
    {
     Column_distribution_pt = new LinearAlgebraDistribution
