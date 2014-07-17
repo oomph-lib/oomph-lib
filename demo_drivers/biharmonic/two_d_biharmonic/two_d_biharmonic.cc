@@ -139,6 +139,36 @@ public:
    this->build_global_mesh_and_assign_eqn_numbers();
   }
 
+ // constructor - more flexible, for testing purposes.
+ BiharmonicTestProblem1(const int x_min, const int x_max,
+                        const int y_min, const int y_max,
+                        const unsigned n_element)
+  {
+   // force linear
+   Problem::Problem_is_nonlinear = false;
+
+   // use test functions 1 namespace
+   using namespace BiharmonicTestFunctions1;
+
+   // create the domain describing the geometry of the problem
+   Domain_pt = new TopologicallyRectangularDomain(x_min,x_max,y_min,y_max);
+
+   // assemble mesh	
+   this->build_bulk_mesh(n_element, n_element, Domain_pt);
+
+   // set the bulk element source function
+   set_source_function(surface_load);
+
+   // clamp edge on all boundaries
+   set_dirichlet_boundary_condition(0,u_SW,dudn_SW);
+   set_dirichlet_boundary_condition(1,u_NE,dudn_NE);
+   set_dirichlet_boundary_condition(2,u_NE,dudn_NE);
+   set_dirichlet_boundary_condition(3,u_SW,dudn_SW);
+
+   // assign equation numbers
+   this->build_global_mesh_and_assign_eqn_numbers();
+  }
+
  /// Destructor - just deletes domain pt
  virtual ~BiharmonicTestProblem1()
   {
@@ -361,7 +391,69 @@ public:
   };
 };
 
+void print_elemental_jacobian(const unsigned& element_number, 
+    const Problem* const problem_pt)
+{
+  AssemblyHandler* const assembly_handler_pt 
+    = problem_pt->assembly_handler_pt();
 
+  const Mesh* const mesh_pt = problem_pt->mesh_pt();
+
+  const unsigned n_element = mesh_pt->nelement();
+  const unsigned n_ele_1d = sqrt(n_element);
+
+  oomph_info << "Elements: 1D: " << n_ele_1d 
+             << ", total: " << n_element << std::endl;
+
+#ifdef PARANOID
+  if(element_number >= n_element)
+  {
+    std::ostringstream err_stream;
+    err_stream << "Supplied element number: " << element_number << ",\n"
+      << "But number of elements is: " << n_element << std::endl;
+    throw OomphLibError(err_stream.str(),
+        OOMPH_CURRENT_FUNCTION,
+        OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+
+  // Get pointer to the element
+  GeneralisedElement* elem_pt 
+    = mesh_pt->element_pt(element_number);
+
+  // Find number of dofs in the element
+  const unsigned n_element_dofs = assembly_handler_pt->ndof(elem_pt);
+
+  // Set up an array
+  Vector<double> element_residuals(n_element_dofs);
+
+  // Set up a matrix
+  DenseMatrix<double> element_jacobian(n_element_dofs);
+
+  // Fill the array
+  assembly_handler_pt->get_jacobian(elem_pt,
+      element_residuals,
+      element_jacobian);
+
+  std::ostringstream ele_stream;
+  ele_stream << "N"<< n_ele_1d << "_ele_" << element_number;
+  element_jacobian.sparse_indexed_output(ele_stream.str(),15,true);
+
+  //  // Output the coordinates just to make sure...
+  //  FiniteElement* finite_element_pt 
+  //    = mesh_pt->finite_element_pt(element_number);
+  //
+  //  const unsigned n_node = finite_element_pt->nnode();
+  //
+  //  // Loop over nodes and output coordinates
+  //  for (unsigned n = 0; n < n_node; n++) 
+  //  {
+  //    Node* nod_pt = finite_element_pt->node_pt(n);
+  //    const double x = nod_pt->x(0);
+  //    const double y = nod_pt->x(1);
+  //    oomph_info << "Node: " << n << ", " << x << ", " << y << std::endl;
+  //  }
+}
 
 //=============================================================================
 /// main
@@ -376,79 +468,131 @@ int main(int argc, char *argv[])
   doc_info.set_directory("RESLT");
   doc_info.number()=0;
 
-  // Biharmonic Problem 1 (square)
-  // Exact Biharmonic Preconditioner
+  if(argc > 1)
   {
-    oomph_info 
-      << "/////////////////////////////////////////////////////////////////////"
-      << std::endl;
-    oomph_info << "TESTING: Square 2D Biharmonic Problem w/ "
-	       << "Exact Preconditioning"
-	       << std::endl;
-    oomph_info 
-      << "/////////////////////////////////////////////////////////////////////"
-      << std::endl;
+    // Check that we have the correct number of arguments.
+    // arg 1: number of elements in 1D
+    //
+    // Domain:
+    // arg 2: x min
+    // arg 3: y min
+    // arg 4: x_max
+    // arg 5: y max
+    //
+    // arg 6: element_number (number of the element to print)
+#ifdef PARANOID
+    if(argc != 7)
+    {
+      std::ostringstream err_stream;
+      err_stream << "Please supply 6 command line arguments:\n"
+        << "1 - The number of elements in 1D\n"
+        << "2 - x min of the domain\n"
+        << "3 - x max of the domain\n"
+        << "4 - y min of the domain\n"
+        << "5 - y max of the domain\n"
+        << "6 - the element number to do stuff with...\n"
+        << std::endl;
+      throw OomphLibError(err_stream.str(),
+          OOMPH_CURRENT_FUNCTION,
+          OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+    // Parse the command line arguments.
+    const unsigned n_element = atoi(argv[1]);
+    const int x_min = atoi(argv[2]);
+    const int x_max = atoi(argv[3]);
+    const int y_min = atoi(argv[4]);
+    const int y_max = atoi(argv[5]);
+    const unsigned element_number = atoi(argv[6]);
+
+    oomph_info << "n_element: " << n_element << std::endl;
+    oomph_info << "x_min: " << x_min << std::endl;
+    oomph_info << "x_max: " << x_max << std::endl;
+    oomph_info << "y_min: " << y_min << std::endl;
+    oomph_info << "y_max: " << y_max << std::endl;
+    oomph_info << "element_number: " << element_number << std::endl; 
+
+    BiharmonicTestProblem1 problem(x_min,x_max,y_min,y_max,n_element);
+
+    print_elemental_jacobian(element_number,&problem);
+  }
+  else
+  {
+    // Biharmonic Problem 1 (square)
+    // Exact Biharmonic Preconditioner
+    {
+      oomph_info 
+        << "/////////////////////////////////////////////////////////////////////"
+        << std::endl;
+      oomph_info << "TESTING: Square 2D Biharmonic Problem w/ "
+        << "Exact Preconditioning"
+        << std::endl;
+      oomph_info 
+        << "/////////////////////////////////////////////////////////////////////"
+        << std::endl;
 
       // create the problem
-    BiharmonicTestProblem1 problem(n_element);
+      BiharmonicTestProblem1 problem(n_element);
 
-    // setup the preconditioner
-    BiharmonicPreconditioner* prec_pt = new BiharmonicPreconditioner;
-    prec_pt->bulk_element_mesh_pt() = problem.bulk_element_mesh_pt();
-    prec_pt->preconditioner_type() = 0;
+      // setup the preconditioner
+      BiharmonicPreconditioner* prec_pt = new BiharmonicPreconditioner;
+      prec_pt->bulk_element_mesh_pt() = problem.bulk_element_mesh_pt();
+      prec_pt->preconditioner_type() = 0;
 
-    // setup the solver
-    IterativeLinearSolver* solver_pt = new CG<CRDoubleMatrix>;  
-    solver_pt->preconditioner_pt() = prec_pt;
- 
-    // apply the solver
-    problem.linear_solver_pt() = solver_pt;
-    problem.newton_solve();
+      // setup the solver
+      IterativeLinearSolver* solver_pt = new CG<CRDoubleMatrix>;  
+      solver_pt->preconditioner_pt() = prec_pt;
 
-    // ouput the solution
-    problem.doc_solution(doc_info,BiharmonicTestFunctions1::solution);
-    doc_info.number()++;
+      // apply the solver
+      problem.linear_solver_pt() = solver_pt;
+      problem.newton_solve();
 
-    // clean up
-    delete solver_pt;
-    delete prec_pt;
-  }
+      // ouput the solution
+      problem.doc_solution(doc_info,BiharmonicTestFunctions1::solution);
+      doc_info.number()++;
 
-  // Biharmonic Problem 2 (section of annulus)
-  // Inexact Biharmonic Preconditioner w/ SuperLU
-  {
-    oomph_info 
-      << "/////////////////////////////////////////////////////////////////////"
-      << std::endl;
-    oomph_info << "TESTING: Curved 2D Biharmonic Problem w/ "
-	       << "Inexact Preconditioning"
-	       << std::endl;
-    oomph_info 
-      << "/////////////////////////////////////////////////////////////////////"
-      << std::endl;
+      // clean up
+      delete solver_pt;
+      delete prec_pt;
+    }
 
-    // create the problem
-    BiharmonicTestProblem2 problem(n_element);
+    // Biharmonic Problem 2 (section of annulus)
+    // Inexact Biharmonic Preconditioner w/ SuperLU
+    {
+      oomph_info 
+        << "/////////////////////////////////////////////////////////////////////"
+        << std::endl;
+      oomph_info << "TESTING: Curved 2D Biharmonic Problem w/ "
+        << "Inexact Preconditioning"
+        << std::endl;
+      oomph_info 
+        << "/////////////////////////////////////////////////////////////////////"
+        << std::endl;
 
-    // setup the preconditioner
-    BiharmonicPreconditioner* prec_pt = new BiharmonicPreconditioner;
-    prec_pt->bulk_element_mesh_pt() = problem.bulk_element_mesh_pt();
-    prec_pt->preconditioner_type() = 1;
+      // create the problem
+      BiharmonicTestProblem2 problem(n_element);
 
-    // setup the solver
-    IterativeLinearSolver* solver_pt = new CG<CRDoubleMatrix>;  
-    solver_pt->preconditioner_pt() = prec_pt;
- 
-    // apply the solver
-    problem.linear_solver_pt() = solver_pt;
-    problem.newton_solve();
+      // setup the preconditioner
+      BiharmonicPreconditioner* prec_pt = new BiharmonicPreconditioner;
+      prec_pt->bulk_element_mesh_pt() = problem.bulk_element_mesh_pt();
+      prec_pt->preconditioner_type() = 1;
 
-    // ouput the solution
-    problem.doc_solution(doc_info,BiharmonicTestFunctions2::solution);
-    doc_info.number()++;
+      // setup the solver
+      IterativeLinearSolver* solver_pt = new CG<CRDoubleMatrix>;  
+      solver_pt->preconditioner_pt() = prec_pt;
 
-    // clean up
-    delete solver_pt;
-    delete prec_pt;
+      // apply the solver
+      problem.linear_solver_pt() = solver_pt;
+      problem.newton_solve();
+
+      // ouput the solution
+      problem.doc_solution(doc_info,BiharmonicTestFunctions2::solution);
+      doc_info.number()++;
+
+      // clean up
+      delete solver_pt;
+      delete prec_pt;
+    }
   }
 }
