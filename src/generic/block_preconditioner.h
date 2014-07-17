@@ -1534,7 +1534,7 @@ class BlockSelector
 
             // temp variables for readability purposes.
             const unsigned tmp_block_i = block_row_index[block_i];
-            const unsigned tmp_block_j = block_row_index[block_j];
+            const unsigned tmp_block_j = block_col_index[block_j];
 
             // Get the block.
             this->get_block(tmp_block_i,tmp_block_j,
