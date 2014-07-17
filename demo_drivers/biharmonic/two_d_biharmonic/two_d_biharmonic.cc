@@ -176,6 +176,18 @@ public:
    delete Domain_pt;
    Domain_pt = 0;
   };
+
+ void dump_jacobian(std::string& jac_str)
+ {
+   DoubleVector res;
+   CRDoubleMatrix jac;
+
+   this->get_jacobian(res,jac);
+
+   jac.sparse_indexed_output(jac_str,15,true);
+
+
+ }
 };
 
 
@@ -504,7 +516,7 @@ int main(int argc, char *argv[])
     const int x_max = atoi(argv[3]);
     const int y_min = atoi(argv[4]);
     const int y_max = atoi(argv[5]);
-    const unsigned element_number = atoi(argv[6]);
+    const int element_number = atoi(argv[6]);
 
     oomph_info << "n_element: " << n_element << std::endl;
     oomph_info << "x_min: " << x_min << std::endl;
@@ -515,7 +527,17 @@ int main(int argc, char *argv[])
 
     BiharmonicTestProblem1 problem(x_min,x_max,y_min,y_max,n_element);
 
-    print_elemental_jacobian(element_number,&problem);
+    if(element_number < 0)
+    {
+      std::ostringstream dump_stream;
+      dump_stream << "two_d_biharmonic_jac_clamped_Noel_" << n_element;
+      std::string dump_str = dump_stream.str();
+      problem.dump_jacobian(dump_str);
+    }
+    else
+    {
+      print_elemental_jacobian(element_number,&problem);
+    }
   }
   else
   {
