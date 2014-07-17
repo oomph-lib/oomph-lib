@@ -321,10 +321,10 @@ namespace oomph
         First_NS_solve = false;
       } // end of preconditioner_solve
 
-      void set_meshes(Vector<Mesh*> &mesh_pt)
+      void set_meshes(const Vector<Mesh*> &mesh_pt)
       {
         // There should be at least two meshes for this preconditioner.
-        unsigned nmesh = mesh_pt.size();
+        const unsigned nmesh = mesh_pt.size();
 
 #ifdef PARANOID
         if(nmesh < 2)
