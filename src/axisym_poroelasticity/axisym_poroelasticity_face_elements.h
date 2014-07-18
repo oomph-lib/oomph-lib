@@ -278,7 +278,6 @@ public:
     Vector<double> unit_normal(n_dim);
     outer_unit_normal(s,unit_normal);
     
-
     // Get pointer to bulk element
     ELEMENT* bulk_pt=dynamic_cast<ELEMENT*>(bulk_element_pt());
     s_bulk=local_coordinate_in_bulk(s);
@@ -348,12 +347,15 @@ public:
     outfile << du_dt[0]+permeability*q[0] << " "  // column 12
             << du_dt[1]+permeability*q[1] << " "; // column 13
 
+    // Outer unit normal
+    outfile << unit_normal[0] << " "  // column 14
+            << unit_normal[1] << " "; // column 15
 
     // Output FE representation of div u at s_bulk 
-    outfile <<  bulk_pt->interpolated_div_q(s_bulk) << " "; // column 14
+    outfile <<  bulk_pt->interpolated_div_q(s_bulk) << " "; // column 16
     
     // Output FE representation of p at s_bulk
-    outfile <<  bulk_pt->interpolated_p(s_bulk) << " "; // column 15
+    outfile <<  bulk_pt->interpolated_p(s_bulk) << " "; // column 17
     
     outfile << std::endl;
    }
@@ -967,6 +969,13 @@ public:
      dynamic_cast<POROELASTICITY_BULK_ELEMENT*>(this->bulk_element_pt());
     s_bulk=this->local_coordinate_in_bulk(s);
     
+    // Get permeability from the bulk poroelasticity element
+    const double local_permeability=bulk_pt->permeability();
+
+    // Porous seepage flux
+    Vector<double> q(2);
+    bulk_pt->interpolated_q(s_bulk,q);
+
     /// Calculate the FE representation of u
     bulk_pt->interpolated_u(s_bulk,disp);
     
@@ -989,23 +998,46 @@ public:
     
     //Output the x,y,..
     for(unsigned i=0;i<n_dim;i++) 
-     {outfile << x[i] << " ";}
+     {outfile << x[i] << " ";} // column 1,2
     
     // Output displacement
     for(unsigned i=0;i<n_dim;i++) 
      {
-      outfile << disp[i] << " ";
+      outfile << disp[i] << " "; // column 3,4
      } 
     
     // Output traction
     for(unsigned i=0;i<n_dim;i++) 
      {
-      outfile << traction[i] << " ";
+      outfile << traction[i] << " "; // column 5,6
      } 
     
     // Output pressure
-    outfile << pressure << " ";
+    outfile << pressure << " ";  // column 7
+
+    // Output seepage flux
+    outfile << local_permeability*q[0] << " "  // column 8
+            << local_permeability*q[1] << " "; // column 9
+
+    // Output skeleton velocity
+    Vector<double> du_dt(2);
+    bulk_pt->interpolated_du_dt(s,du_dt);
+    outfile << du_dt[0] << " " // column 10
+            << du_dt[1] << " "; // column 11
+
+    // Total veloc
+    outfile << du_dt[0]+local_permeability*q[0] << " "  // column 12
+            << du_dt[1]+local_permeability*q[1] << " "; // column 13
+
+    // Outer unit normal
+    outfile << unit_normal[0] << " "  // column 14
+            << unit_normal[1] << " "; // column 15    
+
+    // Output FE representation of div u at s_bulk 
+    outfile <<  bulk_pt->interpolated_div_q(s_bulk) << " "; // column 16
     
+    // Output FE representation of p at s_bulk
+    outfile <<  bulk_pt->interpolated_p(s_bulk) << " "; // column 17
     outfile << std::endl;
    }
    
