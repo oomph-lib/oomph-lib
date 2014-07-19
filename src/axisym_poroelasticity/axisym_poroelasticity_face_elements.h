@@ -1021,7 +1021,7 @@ public:
 
     // Output skeleton velocity
     Vector<double> du_dt(2);
-    bulk_pt->interpolated_du_dt(s,du_dt);
+    bulk_pt->interpolated_du_dt(s_bulk,du_dt);
     outfile << du_dt[0] << " " // column 10
             << du_dt[1] << " "; // column 11
 
