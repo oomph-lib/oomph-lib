@@ -6,11 +6,9 @@ In this document, we discuss an alternative approach for solving the
 <TABLE>
 <TR>
 <TD>
-\n
 <CENTER>
 <B>Two-dimensional model Poisson problem with Neumann boundary conditions</B>
 </CENTER> 
-\n
 Solve
 \f[
 \sum_{i=1}^2 \frac{\partial^2u}{\partial x_i^2} = f(x_1,x_2),
@@ -35,7 +33,6 @@ we apply the Neumann conditions
 \ \ \ \ \ \ \ \ \ \ @E[2DPoisson_fluxBC]@
 \f]
 where the function \f$ g_0 \f$ is given.
-\n
 </TD>
 </TR>
 </TABLE>  
@@ -253,7 +250,7 @@ additional features that the "user" should be aware of:
   next timestep. If this was done repeatedly for nodes that are common
   to multiple sub-meshes, the results would be incorrect. 
   If your problem requires a combined mesh in which duplicates
-  are allowed, you must construct this mesh yourself. \n\n
+  are allowed, you must construct this mesh yourself. 
 - Recall that the function \c Mesh::add_boundary_node()
   "tells" the mesh's constituent nodes which boundaries they are
   located on. What happens if a (sub-)mesh for which this lookup scheme has
@@ -271,13 +268,13 @@ additional features that the "user" should be aware of:
 
 
 \section sources Source files for this tutorial
-- The source files for this tutorial are located in the directory:\n\n
+- The source files for this tutorial are located in the directory:
 <CENTER>
 <A HREF="../../../../demo_drivers/poisson/two_d_poisson_flux_bc2/">
 demo_drivers/poisson/two_d_poisson_flux_bc2/
 </A>
-</CENTER>\n
-- The driver code is: \n\n
+</CENTER>
+- The driver code is:
 <CENTER>
 <A HREF="../../../../demo_drivers/poisson/two_d_poisson_flux_bc2/two_d_poisson_flux_bc2.cc">
 demo_drivers/poisson/two_d_poisson_flux_bc2/two_d_poisson_flux_bc2.cc

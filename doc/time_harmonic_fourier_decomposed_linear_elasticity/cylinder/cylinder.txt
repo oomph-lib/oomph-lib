@@ -15,13 +15,11 @@ non-axisymmetric oscillations of axisymmetric elastic bodies.
 <TD bgcolor="cornsilk">
 <CENTER>
 <B>Acknowledgement:</B>
-\n\n
 This implementation of the equations and the documentation 
 were developed jointly with Robert Harter (Thales Underwater Systems
 Ltd) with financial support from a KTA Secondment grant from
 University of Manchester's EPSRC-funded Knowledge Transfer Account.
 </CENTER>
-\n
 </TD>
 </TR>
 </TABLE>
@@ -459,21 +457,17 @@ As expected, this member function documents the computed solution.
   creates a small amount of damping in the material whose actual 
   stiffness is still characterised by the (real-valued and dimensional)
   Young's modulus used to non-dimensionalise the equations.
-  \n\n
 - Note that we also allow Poisson's ratio (whose specification \e is 
   required) to be complex-valued. We are not aware of any meaningful physical
   interpretation of non-real Poisson ratios but provide this option 
   because it appears to allow a better characterisation of some materials.
-  \n\n
 .
 
 \subsection exercises Exercises
 - Confirm that the specification of Poisson's ratio is required:
   What happens if you comment out its assignment in the problem constructor?
-  \n\n
 - Confirm that the small imaginary part of the computed displacement field
   for the test problem goes to zero under mesh refinement. 
-  \n\n
 - Change the problem setup to the (less contrived) case where the
   deformation of the cylinder is driven by a time-periodic pressure 
   load acting on the inside while its upper and lower ends are held 
@@ -487,13 +481,13 @@ As expected, this member function documents the computed solution.
 
 
 \section sources Source files for this tutorial
-- The source files for this tutorial are located in the directory:\n\n
+- The source files for this tutorial are located in the directory:
 <CENTER>
 <A HREF="../../../../demo_drivers/time_harmonic_fourier_decomposed_linear_elasticity/cylinder/">
 demo_drivers/time_harmonic_fourier_decomposed_linear_elasticity/cylinder/
 </A>
-</CENTER>\n
-- The driver code is: \n\n
+</CENTER>
+- The driver code is: 
 <CENTER>
 <A HREF="../../../../demo_drivers/time_harmonic_fourier_decomposed_linear_elasticity/cylinder/cylinder.cc">
 demo_drivers/time_harmonic_fourier_decomposed_linear_elasticity/cylinder/cylinder.cc

@@ -17,11 +17,9 @@ elastic ring. Specifically we shall
 <TABLE>
 <TR>
 <TD>
-\n
 <CENTER>
 <B>Large-amplitude oscillations of a thin-walled elastic beam</B>
 </CENTER> 
-\n
 
 We wish to compute the large-amplitude oscillations of a
 linearly-elastic, circular 
@@ -61,7 +59,6 @@ we wish to compute the position vector to the deformed ring's
 centreline, \f$ {\bf R}_w(\xi,t) \f$ , for \f$ t > 0 \f$ .
 
 
-\n
 </TD> 
 </TR>
 </TABLE>  
@@ -563,14 +560,14 @@ to the definition given above.
    Change the load function to a spatially-constant external pressure
    (which will deform the ring axisymmetrically so that its
    motion is dominated by extensional deformations) to confirm 
-   that in this mode \n \n
+   that in this mode 
    -# \f$ {\cal O}(1) \f$ pressures are required to induce
-      \f$ {\cal O}(1) \f$ axisymmetric displacements, and \n\n
+      \f$ {\cal O}(1) \f$ axisymmetric displacements, and
    -# the period of the axisymmetric oscillations is
-      \f$ {\cal O}(1) \f$. \n\n
+      \f$ {\cal O}(1) \f$. 
    . 
    [\b Hint: You will have to reduce the timestep to capture the
-   much faster axisymmetric oscillations.] \n\n
+   much faster axisymmetric oscillations.] 
 -# Use the principle of virtual displacements (without prestress)
    \f[
    \int_0^{L}   \left[ 
@@ -585,36 +582,35 @@ to the definition given above.
    \f]
    to show (analytically) that for bending-dominated deformations (i.e. 
    deformations for which \f$ |\gamma| \ll |\kappa| \f$)
-   -# an increase in the wall thickness \f$ h \f$ by a factor 2, say, will \n\n
+   -# an increase in the wall thickness \f$ h \f$ by a factor 2, say, will 
       -# reduce the amplitude of the ring's static deformation 
-         by a factor of 8 (thicker rings are stiffer) \n\n
+         by a factor of 8 (thicker rings are stiffer)
       -# reduces the period of the unforced oscillations 
          (i.e. the oscillations it performs when \f$ {\bf f} = 
          {\bf 0} \f$ ) by factor of  4 (thicker 
-         rings oscillate more rapidly).  \n\n
+         rings oscillate more rapidly). 
       .
    -# an increase in the ring's density \f$ \rho \sim \Lambda^2\f$ 
       by a factor of 2, say, increases the period of its
       bending-dominated oscillations by a factor of 4 (heavier rings 
-      oscillate more slowly). \n\n
+      oscillate more slowly).
    .
    Combine these results to show that
    a ring of wall thickness \f$ h \f$ and a density \f$ \rho \f$, 
    subject to a forcing of magnitude \f$ f \f$ will deform 
    (approximately) as a ring of wall thickness \f$ \alpha h \f$ with 
    a density  \f$ \alpha^2 \rho \f$, subject to a forcing of magnitude
-   \f$ \alpha^3 f\f$.\n\n
+   \f$ \alpha^3 f\f$.
    Confirm these theoretical predictions computationally: Change
    the initial assignment for the scaling factor 
    \c Global_Physical_Variables::Alpha and repeat the computation. 
-   \n\n
 -# Confirm that the restart procedure works correctly by plotting
    the time-trace obtained from a restarted simulation on top
-   of the original time-trace. \n\n
+   of the original time-trace. 
 -# Compare the results obtained from a simulation with a variable
    timestep against the results obtained from a computation with a 
    fixed timestep (comment out the line that reduces the timestep
-   after every solve). \n\n
+   after every solve). 
 -# Compare the various output files generated in \c doc_solution()
    to confirm that the \c Newmark<3> timestepper correctly maintains
    the history of the solution at three previous timesteps. 
@@ -626,7 +622,6 @@ to the definition given above.
    \code 
    HermiteBeamElement::output(...)
    \endcode
-   \n
    \code
    FiniteElement::interpolated_x(...)
    \endcode
@@ -642,13 +637,13 @@ to the definition given above.
 
 
 \section sources Source files for this tutorial
-- The source files for this tutorial are located in the directory:\n\n
+- The source files for this tutorial are located in the directory:
 <CENTER>
 <A HREF="../../../../demo_drivers/beam/unsteady_ring/">
 demo_drivers/beam/unsteady_ring/
 </A>
-</CENTER>\n
-- The driver code is: \n\n
+</CENTER>
+- The driver code is: 
 <CENTER>
 <A HREF="../../../../demo_drivers/beam/unsteady_ring/unsteady_ring.cc">
 demo_drivers/beam/unsteady_ring/unsteady_ring.cc

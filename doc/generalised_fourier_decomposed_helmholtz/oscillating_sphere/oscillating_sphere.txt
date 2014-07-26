@@ -23,12 +23,12 @@ from the surface of a unit sphere.
 <TD bgcolor="cornsilk">
 <CENTER>
 <B>Acknowledgement:</B>
-\n\n
+
 This tutorial and the associated driver codes were developed jointly
 with Matthew Walker (The University of Manchester), with financial
 support from Thales Underwater Ltd.
 </CENTER>
-\n
+
 </TD>
 </TR>
 </TABLE>
@@ -151,7 +151,7 @@ straightforward and follows the pattern employed for the solution
 of the Poisson equation: 
 - Dirichlet conditions are imposed by pinning the relevant nodal
   values and setting them to the appropriate prescribed values. 
-  \n\n
+  
 - Neumann (flux) boundary conditions are imposed via 
   \c FaceElements (here the \c GeneralisedFourierDecomposedHelmholtzFluxElements). 
    <a href="../../../poisson/two_d_poisson_flux_bc/html/index.html">
@@ -221,7 +221,7 @@ mesh boundaries we distinguish three different cases
   \f[
    s_r(r) = 1.
   \f] 
-  \n\n
+  
 - For the right layer that is aligned with the z axis we set 
   \f[ 
   s_z(z) = 1,
@@ -236,7 +236,7 @@ mesh boundaries we distinguish three different cases
   \f]
   where \f$ R_{PML} \f$ is the r-coordinate of the outer boundary
   of the PML layer.
-  \n\n
+  
 - In corner regions that are bounded by two axis-aligned PML layers
   (with outer coordinates \f$ R_{PML} \f$ and  
   \f$ Z_{PML} \f$) we set
@@ -255,7 +255,7 @@ mesh boundaries we distinguish three different cases
   \sigma_{z}(z)  =  \frac{1}{|Z_{PML}-z|}. \ \ \ \ \ 
   @E[absorbingfcty_corner]@
   \f]
-  \n\n
+  
 - Finally, in the actual computational domain (outside
   the PML layers) we set
   \f[
@@ -760,13 +760,13 @@ assignments.
 <HR>
 
 \section sources Source files for this tutorial
-- The source files for this tutorial are located in the directory:\n\n
+- The source files for this tutorial are located in the directory:
   <CENTER>
   <A HREF="../../../../demo_drivers/generalised_fourier_decomposed_helmholtz/oscillating_sphere">
   demo_drivers/generalised_fourier_decomposed_helmholtz/oscillating_sphere/
   </A>
-  </CENTER>\n
-- The driver code is: \n\n
+  </CENTER>
+- The driver code is: 
   <CENTER>
   <A HREF="../../../../demo_drivers/generalised_fourier_decomposed_helmholtz/oscillating_sphere/oscillating_sphere.cc">
   demo_drivers/generalised_fourier_decomposed_helmholtz/oscillating_sphere/oscillating_sphere.cc

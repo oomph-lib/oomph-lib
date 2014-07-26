@@ -15,12 +15,10 @@ from a sphere, the example we consider below.
 <TD bgcolor="cornsilk">
 <CENTER>
 <B>Acknowledgement:</B>
-\n\n
 This implementation of the equations and the 
 documentation were developed jointly
 with Ahmed Wassfi (EnstaParisTech, Paris).
 </CENTER>
-\n
 </TD>
 </TR>
 </TABLE>
@@ -119,7 +117,6 @@ straightforward and follows the pattern employed for the solution
 of the Poisson equation: 
 - Dirichlet conditions are imposed by pinning the relevant nodal
   values and setting them to the appropriate prescribed values. 
-  \n\n
 - Neumann (flux) boundary conditions are imposed via 
   \c FaceElements (here the \c FourierDecomposedHelmholtzFluxElements). 
    <a href="../../../poisson/two_d_poisson_flux_bc/html/index.html">
@@ -265,7 +262,7 @@ member function
 The radius \f$ R \f$ of the artificial boundary and the (finite) upper limit
 for the sum in (@R[gamma_bc]@) are specified
 as arguments to the constructor of the \c FourierDecomposedHelmholtzDtNMesh.
-\n\n 
+
 <b>NOTE:</b> Since \f$ \gamma \f$  depends on the solution, 
 it must be recomputed whenever the unknowns are updated during
 the Newton iteration. This is best done by adding a call to
@@ -529,13 +526,12 @@ As discussed above, the Dirichlet-to-Neumann mapping allows an
 "exact" implementation of the Sommerfeld radiation condition,
 provided the artificial outer boundary is sufficiently far from the
 scatterer that any near field effects have decayed. The actual
-accuracy of the computational results depends on various factors: \n
+accuracy of the computational results depends on various factors: 
 - The number of \c FourierDecomposedHelmholtzDtNBoundaryElement
   along the artificial domain boundary. Since these elements are
   attached to the "bulk" \c FourierDecomposedHelmholtzElements
   it is important that the bulk mesh is sufficiently fine to resolve the
   relevant features of the solution throughout the domain.
-  \n
 - The number of terms included in the sum  (@R[gamma_bc]@) --
   specified in the call to the constructor of the 
   \c FourierDecomposedHelmholtzDtNMesh.
@@ -563,7 +559,6 @@ avoided by declaring the problem to be linear.
   an obviously wrong result is obtained if we choose 
   \c  ProblemParameters::Nterms_for_DtN  < 
   \c  ProblemParameters::Nterms.  
-  \n
 - Explore the function \c check_gamma() and confirm that 
   the computed value for the \f$ \gamma \f$ integral provides
   a good approximation to the derivative of the exact solution.
@@ -601,13 +596,13 @@ code</a> already contains a namespace \c PlanarWave with several
 
 
 \section sources Source files for this tutorial
-- The source files for this tutorial are located in the directory:\n\n
+- The source files for this tutorial are located in the directory:
   <CENTER>
   <A HREF="../../../../demo_drivers/fourier_decomposed_helmholtz/sphere_scattering">
   demo_drivers/fourier_decomposed_helmholtz/sphere_scattering/
   </A>
-  </CENTER>\n
-- The driver code is: \n\n
+  </CENTER>
+- The driver code is: 
   <CENTER>
   <A HREF="../../../../demo_drivers/fourier_decomposed_helmholtz/sphere_scattering/sphere_scattering.cc">
   demo_drivers/fourier_decomposed_helmholtz/sphere_scattering/sphere_scattering.cc

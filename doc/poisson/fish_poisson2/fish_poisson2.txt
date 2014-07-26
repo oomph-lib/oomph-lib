@@ -28,11 +28,9 @@ To illustrate these issues we (re-)consider the 2D Poisson problem
 <TABLE>
 <TR>
 <TD>
-\n
 <CENTER>
 <B>Two-dimensional model Poisson problem in a non-trivial domain</B>
 </CENTER> 
-\n
 Solve
 \f[
 \sum_{i=1}^2 \frac{\partial^2u}{\partial x_i^2} = -1,
@@ -44,7 +42,6 @@ Dirichlet boundary conditions
 \left. u\right|_{\partial D_{fish}}=0.
 \ \ \ \ \ \ \ \ \ \ @E[2DPoisson_BC]@
 \f]
-\n
 </TD>
 </TR>
 </TABLE>  
@@ -384,7 +381,7 @@ Here are a few of the private member functions that define individual
   along the geometric object. We use this Lagrangian coordinate
   to obtain the position vector to the domain boundary via a call to the
   \c GeomObject::position(...) function of the geometric object 
-  pointed to by \c Back_pt: \n \n 
+  pointed to by \c Back_pt:
 \dontinclude fish_domain.h
 \skipline start_of_r_upper_body_N
 \until  end of r_upper_body_N 
@@ -392,14 +389,14 @@ Here are a few of the private member functions that define individual
 
 - The E[astern] boundary of macro element 2 is a straight vertical
   line from the "tail end" of the curved fish back to the
-  x-axis: \n \n
+  x-axis: 
 \dontinclude fish_domain.h
 \skipline start_of_r_upper_body_E
 \until  end of r_upper_body_E
 
 - The S[outhern] boundary of macro element 2 is a straight horizontal
   line from the "mouth" to the end of the
-  body: \n \n
+  body: 
 \dontinclude fish_domain.h
 \skipline start_of_r_upper_body_S
 \until  end of r_upper_body_S
@@ -407,14 +404,14 @@ Here are a few of the private member functions that define individual
 
 - The W[estern] boundary of macro element 2 is a straight
   line from the "mouth" to the "mouth" end of the
-  curved upper boundary of the body: \n \n
+  curved upper boundary of the body:
 \dontinclude fish_domain.h
 \skipline start_of_r_upper_body_W
 \until  end of r_upper_body_W
 
 - The S[outhern] boundary of macro element 0 (which represents the
   lower body) is simply a reflection of the N[orthern] boundary
-  of macro element 2: \n \n
+  of macro element 2:
 \dontinclude fish_domain.h
 \skipline  Southern boundary of lower body macro element
 \until  }
@@ -529,13 +526,13 @@ for the refineable FishMesh illustrates the methodology.
 <HR>
 
 \section sources Source files for this tutorial
-- The source files for this tutorial are located in the directory:\n\n
+- The source files for this tutorial are located in the directory:
 <CENTER>
 <A HREF="../../../../demo_drivers/poisson/fish_poisson2/">
 demo_drivers/poisson/fish_poisson2/
 </A>
-</CENTER>\n
-- The driver code is: \n\n
+</CENTER>
+- The driver code is:
 <CENTER>
 <A HREF="../../../../demo_drivers/poisson/fish_poisson2/fish_poisson_adapt.cc">
 demo_drivers/poisson/fish_poisson2/fish_poisson_adapt.cc

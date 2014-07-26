@@ -37,11 +37,9 @@ flow-structures described below may be found.
 <TABLE>
 <TR> 
 <TD>
-\n
 <CENTER>
 <B>Finite-Reynolds-number flow in a 2D channel with an oscillating wall .</B>
 </CENTER> 
-\n
 
 The figure below shows a sketch of the problem: Flow is driven by a 
 prescribed pressure drop through a 2D channel of width 
@@ -193,10 +191,6 @@ distribution is dominated by the variations induced by the oscillatory
 sloshing  flows. For a detailed discussion of the flow structure we refer
 to <A HREF="http://www.maths.man.ac.uk/~mheil/MATTHIAS/PDF/JensenHeil2003.pdf">
 Jensen \& Heil (2003).</A>
-
-\n
-
-
 
 
 
@@ -602,12 +596,10 @@ to the newly created traction elements.
    static, undeformed channel. Use this to "validate" (well, 
    "plausibility-check", anyway...) the code by setting the 
    amplitude of the wall oscillation to zero.
-   \n\n
 -# Double the upstream pressure while keeping the amplitude
    of the wall oscillation at zero and confirm that the flow 
    accelerates until it (asymptotically) approaches Poiseuille
    flow with twice the initial flowrate as \f$ t \to \infty. \f$
-   \n\n
 -# The flow field has the largest velocity gradients in the thin
    Stokes layers near the wall, causing the automatic mesh adaptation
    procedure to refine the mesh pre-dominantly in these regions.
@@ -622,18 +614,14 @@ to the newly created traction elements.
    this capability which may be activated by compiling the driver
    code with \c -DUSE_BL_SQUASH_FCT. This activates the code
    segment
-   \n\n
    \dontinclude collapsible_channel.cc
    \skipline ifdef USE
    \until endif
-   \n 
    in the Problem constructor. The "squash function" used for this 
    example is defined in the following namespace:
-   \n\n
    \dontinclude collapsible_channel.cc
    \skipline start_of_BL_Squash
    \until end of BL_Squash
-   \n
    With this function 50% of the nodal points in the vertical
    direction are located within two boundary-layer regions which
    occupy 2 x 10% of the channel's width. The figure below
@@ -641,13 +629,11 @@ to the newly created traction elements.
    that is used in the validation run, with and
    without the boundary-layer squashing function:
 @I w 0.75\textwidth bl_squashing "Coarse initial meshes with and without the boundary-layer squash function. "
-   \n\n
    Confirm that if this "squashing function" is applied to the
    mesh that is used during the non-self-test runs (this mesh has 16 x
    larger number of elements than the meshes shown above), the quality of the 
    computed solution improves so much that no subsequent
    mesh adaptation is required.
-   \n\n
 -# The flow structures observed during the small-amplitude
    oscillations (shown in the animation at the beginning of this
    document) are in perfect agreement with the structures predicted
@@ -706,13 +692,13 @@ to the newly created traction elements.
 
 
 \section sources Source files for this tutorial
-- The source files for this tutorial are located in the directory:\n\n
+- The source files for this tutorial are located in the directory:
 <CENTER>
 <A HREF="../../../../demo_drivers/navier_stokes/collapsible_channel/">
 demo_drivers/navier_stokes/collapsible_channel/
 </A>
-</CENTER>\n
-- The driver code is: \n\n
+</CENTER>
+- The driver code is:
 <CENTER>
 <A HREF="../../../../demo_drivers/navier_stokes/collapsible_channel/collapsible_channel.cc">
 demo_drivers/navier_stokes/collapsible_channel/collapsible_channel.cc

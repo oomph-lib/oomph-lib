@@ -20,13 +20,11 @@ loaded by a time-periodic pressure load on its inner surface.
 <TD bgcolor="cornsilk">
 <CENTER>
 <B>Acknowledgement:</B>
-\n\n
 This implementation of the equations and the documentation 
 were developed jointly with Robert Harter (Thales Underwater Systems
 Ltd) with financial support from a KTA Secondment grant from
 University of Manchester's EPSRC-funded Knowledge Transfer Account.
 </CENTER>
-\n
 </TD>
 </TR>
 </TABLE>
@@ -72,7 +70,6 @@ demo_drivers/time_harmonic_fourier_decomposed_linear_elasticity/cylinder/pressur
 shows you the differences, the most important of which are:
 - The change of the forcing to a spatially constant 
   pressure load on the inside boundary.
-  \n\n
 - The provision of the \c actions_before/after_adapt() functions and a 
   helper function \c complete_problem_setup()
   which rebuilds the elements (by passing the problem parameters
@@ -80,10 +77,8 @@ shows you the differences, the most important of which are:
   (The need/rationale for such a function is discussed in 
   <a href="../../../meshes/mesh_from_inline_triangle/html/index.html">
   another tutorial.</a>)
-  \n\n
 - The mesh generation and the application of boundary conditions at
   the upper and lower boundaries of the hollow cylinder.
-  \n\n
 .  
 All of this is reasonably straightforward and provides a
 powerful code that automatically adapts the mesh in regions of 
@@ -105,13 +100,13 @@ Here's a listing of the complete driver code:
 
 
 \section sources Source files for this tutorial
-- The source files for this tutorial are located in the directory:\n\n
+- The source files for this tutorial are located in the directory:
 <CENTER>
 <A HREF="../../../../demo_drivers/time_harmonic_fourier_decomposed_linear_elasticity/cylinder/">
 demo_drivers/time_harmonic_fourier_decomposed_linear_elasticity/cylinder/
 </A>
-</CENTER>\n
-- The driver code is: \n\n
+</CENTER>
+- The driver code is:
 <CENTER>
 <A HREF="../../../../demo_drivers/time_harmonic_fourier_decomposed_linear_elasticity/cylinder/pressure_loaded_cylinder.cc">
 demo_drivers/time_harmonic_fourier_decomposed_linear_elasticity/cylinder/pressure_loaded_cylinder.cc

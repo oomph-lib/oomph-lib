@@ -5,11 +5,9 @@ using existing objects from the \c oomph-lib library:
 <TABLE>
 <TR>
 <TD>
-\n
 <CENTER>
 <B>Two-dimensional model Poisson problem</B>
 </CENTER> 
-\n
 Solve
 \f[
 \sum_{i=1}^2 \frac{\partial^2u}{\partial x_i^2} = f(x_1,x_2),
@@ -23,7 +21,6 @@ with Dirichlet boundary conditions
 \ \ \ \ \ \ \ \ \ \ @E[2DPoisson_BC]@
 \f]
 where the function \f$ u_0 \f$ is given.
-\n
 </TD>
 </TR>
 </TABLE>  
@@ -258,9 +255,7 @@ generic \c Mesh member functions \c Mesh::output(...),
    \c main() function. 
 -# Note how the accuracy of the FE solution decreases as
    the steepness of the "step" is increased:
-   \n
 @I w 0.75\textwidth alpha "Plot of the solution for different values of the steepness parameter "
-   \n
    How many elements are required to resolve the solution 
    with \f$ \alpha = 10 \f$ as accurately as in the case
    of  \f$ \alpha = 1\f$? [\b Note: Since the solution
@@ -436,13 +431,13 @@ explore the performance of various linear solvers for the
 
 
 \section sources Source files for this tutorial
-- The source files for this tutorial are located in the directory:\n\n
+- The source files for this tutorial are located in the directory:
 <CENTER>
 <A HREF="../../../../demo_drivers/poisson/two_d_poisson/">
 demo_drivers/poisson/two_d_poisson/
 </A>
-</CENTER>\n
-- The driver code is: \n\n
+</CENTER>
+- The driver code is: 
 <CENTER>
 <A HREF="../../../../demo_drivers/poisson/two_d_poisson/two_d_poisson.cc">
 demo_drivers/poisson/two_d_poisson/two_d_poisson.cc

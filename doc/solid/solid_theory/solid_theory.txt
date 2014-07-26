@@ -279,7 +279,6 @@ for compressible/incompressible/near-incompressible behaviour:
      is required in equation (@R[incompressibility]@)
      whose solution determines the pressure.
    .
-  \n
 -# \b Nearly \b Incompressible \b Behaviour: \n If the material is nearly
    incompressible, it is advantageous to split the stress into
    its deviatoric and hydrostatic parts by writing the
@@ -330,7 +329,6 @@ for compressible/incompressible/near-incompressible behaviour:
    - The generalised dilatation \f$ d \f$
    - The inverse of the bulk modulus \f$ \kappa \f$
    .
-  \n
 
 The abstract base class \c ConstitutiveLaw provides
 interfaces for the computation of the stress in all three forms.
@@ -524,7 +522,7 @@ following figures:
 
 <CENTER>
 @I w 0.35\textwidth  Isotropic_growth_0 " "
-\n Undeformed, ungrown and 
+Undeformed, ungrown and 
 stress-free reference configuration.
 </CENTER>
 </TD>
@@ -540,7 +538,7 @@ stress-free reference configuration.
 
 @I w 0.35\textwidth Isotropic_growth_U1 " "
 
-\n The individual infinitesimal material elements
+The individual infinitesimal material elements
 have expanded (or contracted) isotropically and the elements are in 
 a stress-free state. The isotropic growth
 is spatially uniform -- all elements have expanded (or contracted) 
@@ -551,7 +549,7 @@ by the same amount.
 
 @I w 0.35\textwidth Isotropic_growth_N1 " "
 
-\n All infinitesimal material elements
+All infinitesimal material elements
 have expanded (or contracted) isotropically and the elements are in 
 a stress-free state. The isotropic growth
 is spatially non-uniform, so individual elements
@@ -567,7 +565,7 @@ have grown (or contracted) by different amounts.
 <center><b>State U2:</b></center>
 
 @I w 0.35\textwidth Isotropic_growth_U2 " "
-\n Since the isotropically-grown infinitesimal
+Since the isotropically-grown infinitesimal
  material elements have grown (or contracted) by the same amount, they can
  be (re-)assembled to form a continuous, stress-free body. 
 </TD>
@@ -575,7 +573,7 @@ have grown (or contracted) by different amounts.
 <center><b>State N2:</b></center>
 
 @I w 0.35\textwidth Isotropic_growth_N2 " "
-\n Since the individual material elements have
+Since the individual material elements have
 grown (or contracted) by different amounts they can (in general) 
 not be (re-)assembled to form a continous body without undergoing 
 some deformation. The deformation of the material elements (relative to their
@@ -593,7 +591,7 @@ induces internal stresses -- the so-called growth-stresses.
 <center><b>State UE:</b></center>
 
 @I w 0.35\textwidth Isotropic_growth_UE " "
-\n When subjected to external tractions 
+When subjected to external tractions 
 and to body forces, the uniformly-grown material elements deform. Their
 deformation (relative to their stress-free shape in state
 U1 (or, equivalently, U2), generates internal stresses which
@@ -604,7 +602,7 @@ U1 (or, equivalently, U2), generates internal stresses which
 <center><b>State NE:</b></center>
 
 @I w 0.35\textwidth Isotropic_growth_NE " "
-\n  When subjected to external tractions 
+When subjected to external tractions 
 and to body forces, the material elements deform further. Their
 deformation (relative to their stress-free shape in state
 N1), generates internal stresses which
@@ -1297,10 +1295,9 @@ the above function, must re-direct the computation of the residual to
 \code 
 SolidFiniteElement:get_residuals_for_solid_ic(...)
 \endcode
-\n
 whenever the pointer to the \c SolidInitialCondition is non-NULL, as 
 illustrated in this code fragment:
-\n \n
+
 \code
 //=======================================================================
 // Compute the residuals for the elasticity equations.

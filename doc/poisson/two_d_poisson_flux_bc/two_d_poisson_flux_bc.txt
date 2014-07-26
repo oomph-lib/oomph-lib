@@ -7,11 +7,9 @@ from the \c oomph-lib library:
 <TABLE>
 <TR>
 <TD>
-\n
 <CENTER>
 <B>Two-dimensional model Poisson problem with Neumann boundary conditions</B>
 </CENTER> 
-\n
 Solve
 \f[
 \sum_{i=1}^2 \frac{\partial^2u}{\partial x_i^2} = f(x_1,x_2),
@@ -36,7 +34,6 @@ we apply the Neumann conditions
 \ \ \ \ \ \ \ \ \ \ @E[2DPoisson_fluxBC]@
 \f]
 where the function \f$ g_0 \f$ is given.
-\n
 </TD>
 </TR>
 </TABLE>  
@@ -300,9 +297,9 @@ additional difficulties in refineable problems and we shall demonstrate
    Compare the computational result to those obtained when you set
    the prescribed flux to zero, \f$ g_0 = 0 \f$. Does this make sense? 
    [Hint: Remember the "natural" boundary conditions for
-   Poisson's equation]. \n \n
+   Poisson's equation].
 -# Try to compute the error of the computed solution by
-   re-instating the global error checking procedure \n \n
+   re-instating the global error checking procedure
    \code
    // Doc error and return of the square of the L2 error
    //---------------------------------------------------
@@ -313,14 +310,14 @@ additional difficulties in refineable problems and we shall demonstrate
    mesh_pt()->compute_error(some_file,TanhSolnForPoisson::get_exact_u,
                             error,norm); 
    some_file.close();
-   \endcode \n
+   \endcode
    in \c doc_solution(...).
    What happens when you run the code? The code's behaviour
-   illustrates a general convention in \c oomph-lib: \n \n
+   illustrates a general convention in \c oomph-lib: 
    <TABLE>
    <TR>
    <TD bgcolor="cornsilk">
-   \n<CENTER><B>\anchor broken_virtual A general convention</B></CENTER> \n
+   <CENTER><B>\anchor broken_virtual A general convention</B></CENTER> 
    Some \c oomph-lib functions, such as 
    \c GeneralisedElement::compute_error(...),
    are defined as virtual functions in a base class to allow
@@ -363,7 +360,7 @@ additional difficulties in refineable problems and we shall demonstrate
    code execution stops with a suitable warning message. 
    </TD> 
    </TR>
-   </TABLE> \n
+   </TABLE> 
 -# Implement the error computation by hand to familiarise yourself
    with the way in which the \c Mesh::compute_error(...) function works.
 
@@ -389,13 +386,13 @@ by \c Mesh::boundary_element_pt(...) and
 
 
 \section sources Source files for this tutorial
-- The source files for this tutorial are located in the directory:\n\n
+- The source files for this tutorial are located in the directory:
 <CENTER>
 <A HREF="../../../../demo_drivers/poisson/two_d_poisson_flux_bc/">
 demo_drivers/poisson/two_d_poisson_flux_bc/
 </A>
-</CENTER>\n
-- The driver code is: \n\n
+</CENTER>
+- The driver code is:
 <CENTER>
 <A HREF="../../../../demo_drivers/poisson/two_d_poisson_flux_bc/two_d_poisson_flux_bc.cc">
 demo_drivers/poisson/two_d_poisson_flux_bc/two_d_poisson_flux_bc.cc

@@ -7,11 +7,9 @@ using \c oomph-lib's powerful mesh adaptation routines:
 <TABLE>
 <TR> 
 <TD>
-\n
 <CENTER>
 <B>Two-dimensional model Poisson problem in a non-trivial domain</B>
 </CENTER> 
-\n
 Solve
 \f[
 \sum_{i=1}^2 \frac{\partial^2u}{\partial x_i^2} = -1,
@@ -23,7 +21,6 @@ Dirichlet boundary conditions
 \left. u\right|_{\partial D_{fish}}=0.
 \ \ \ \ \ \ \ \ \ \ @E[2DPoisson_BC]@
 \f]
-\n
 </TD>
 </TR>
 </TABLE>  
@@ -337,7 +334,7 @@ passed to an element's four "son" elements when the element
 is subdivided. This allows the adaptation to procede completely
 automatically, without any intervention by the "user". On return
 from \c Problem::adapt() the problem can immediately be re-solved.
-\n\n
+
 In some special cases, certain actions may need to be performed 
 before or after the mesh adaptation (e.g. if flux boundary
 conditions are applied by \c  FaceElements; this is explained in
@@ -345,21 +342,17 @@ conditions are applied by \c  FaceElements; this is explained in
 another example</A>). To ensure that these steps are performed when 
 the adaptation is controlled by the "black-box" adaptive Newton solver, 
 the \c Problem class provides the two empty virtual functions 
-\n \n
 \code
 Problem::actions_before_adapt()
 \endcode
-\n    
 and 
-\n \n
 \code
 Problem::actions_after_adapt()
 \endcode
-\n
 which are called automatically before and after the adaptation.
 The "user" can overload these in his/her specific \c Problem class
 to implement such actions.
-\n\n
+
 
 \subsection how_to Automatic mesh adaptation in domains with curvilinear boundaries
 The mesh adaptation not only increases the number of elements 
@@ -397,23 +390,18 @@ we suggest the following exercises:
    targets, no elements are unrefined. Increase the minimum
    permitted error from its default value of \f$ 10^{-5} \f$ to 
    \f$ 10^{-4} \f$ by adding the statement 
-   \n\n
    \code 
    problem.mesh_pt()->min_permitted_error()=1.0e-4;
    \endcode
-   \n\n  
    before
-   \n\n   
    \code
    problem.mesh_pt()->doc_adaptivity_targets(cout);
    \endcode
-   \n\n  
    This value forces an unrefinement of several elements in the mesh:
 @I w 0.75\textwidth fish_poisson_soln2 "Plot of the solutions obtained with the modified adaptivity targets. "
 -# Convince yourself that \c Problem::adapt() does indeed interpolate the
    solution from the coarse mesh to the fine mesh -- call
    \c Problem::doc_solution(...) before and after its execution.  
-   \n\n
 -# The \c Problem::refine_uniformly() function has a counterpart
     \c Problem::unrefine_uniformly(). Why does this function 
     not simply unrefine every single element in the mesh? 
@@ -421,9 +409,8 @@ we suggest the following exercises:
     Problem::unrefine_uniformly() by plotting the solution
     before and after a few executions of this function.
 @I w 0.75\textwidth fish_poisson_soln3 "Uniform unrefinement "
-    \n\n
 -# Impose a "user-defined" refinement pattern
-   by calling the function \c Problem::refine_selected_elements(...). \n\n
+   by calling the function \c Problem::refine_selected_elements(...). 
 .
 
 
@@ -431,13 +418,13 @@ we suggest the following exercises:
 <HR>
 
 \section sources Source files for this tutorial
-- The source files for this tutorial are located in the directory:\n\n
+- The source files for this tutorial are located in the directory:
 <CENTER>
 <A HREF="../../../../demo_drivers/poisson/fish_poisson/">
 demo_drivers/poisson/fish_poisson/
 </A>
-</CENTER>\n
-- The driver code is: \n\n
+</CENTER>
+- The driver code is: 
 <CENTER>
 <A HREF="../../../../demo_drivers/poisson/fish_poisson/fish_poisson.cc">
 demo_drivers/poisson/fish_poisson/fish_poisson.cc

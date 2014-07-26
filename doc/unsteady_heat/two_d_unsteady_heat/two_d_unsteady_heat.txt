@@ -33,11 +33,9 @@ the solution of the 2D unsteady heat equation in a square domain:
 <TABLE>
 <TR> 
 <TD>
-\n
 <CENTER>
 <B>The two-dimensional unsteady heat equation in a square domain.</B>
 </CENTER> 
-\n
 Solve
 \f[
 \sum_{i=1}^2\frac{\partial^2 u}{\partial x_i^2} 
@@ -70,7 +68,7 @@ u_0(x_1,x_2,t) = e^{-Kt}\sin\left( \sqrt{K} \left( x_1 \cos \Phi + x_2 \sin
 \f]
 where \f$ K \f$ and \f$ \Phi \f$ are constants, controlling the
 decay rate of the solution and its spatial orientation, respectively.
-\n
+
 The figure below shows a plot of computed and exact solutions at
 time \f$ t = 0.01 \f$ (for an animation  
 <A HREF="../figures/unsteady_heat_soln.avi"> click
@@ -216,7 +214,7 @@ convention:
 <TR>
 <TD bgcolor="cornsilk">
 \anchor conv_mesh_const
-\n<CENTER><B>A general convention</B></CENTER> \n
+<CENTER><B>A general convention</B></CENTER> 
 
 Recall that all \c Data objects store a pointer to a \c TimeStepper
 that translates their "history values" into approximations of
@@ -359,7 +357,7 @@ the \c i -th nodal coordinate at previous timestep \c t.
 <TR>
 <TD bgcolor="cornsilk">
 \anchor conv_t_arg
-\n<CENTER><B>A general convention</B></CENTER> \n
+<CENTER><B>A general convention</B></CENTER> 
 Many functions in \c oomph-lib have steady and time-dependent
 versions which usually differ in their first argument. Typically,
 the first argument of the time-dependent function is an 
@@ -377,7 +375,7 @@ the first and second time-derivatives at the previous timestep.
 
 <HR>
 \anchor conv_hist_vals
-\n<CENTER><B>Another general convention</B></CENTER> \n
+<CENTER><B>Another general convention</B></CENTER> 
 While, in general, not all "history values" represent
 the solution at previous timesteps, the "history values"
 that do, should be (and, for any existing \c TimeSteppers, are) 
@@ -463,31 +461,27 @@ The following exercises aim to explore this functionality.
    \c Problem::assign_initial_values_impulsive() and analyse
    the results. [Hint: When \c Data objects are created, their 
    values are initialised to zero.]
-   \n\n
--# Confirm that the loop over the coordinate directions \n\n
+-# Confirm that the loop over the coordinate directions
    \dontinclude two_d_unsteady_heat.cc 
    \skipline Loop over coordinate directions
    \until }
-   \n in \c set_initial_condition(), can be replaced by
-   \n\n \code
+   in \c set_initial_condition(), can be replaced by
+   \code
    time_stepper_pt()->assign_initial_positions_impulsive(
                         mesh_pt()->node_pt(n));
    \endcode
-   \n [This statement could then be moved outside the loop 
+   [This statement could then be moved outside the loop 
    over the previous time levels.] 
-   \n\n
 -# Confirm that the initialisation of the previous nodal positions
    is essential by commenting out this step -- see the  
    <A HREF="../../two_d_unsteady_heat_ALE/html/index.html">ALE 
    example</A> for further details on computations in moving domains.
-   \n\n
 -# Overwrite the correct assignment of the "history values" in
    \c set_initial_condition() by adding the statement
    \c Problem::assign_initial_values_impulsive() at the end
    of this function (rather than bypassing the assignement
    completely as in the first exercise). Repeat this with the \c BDF<1>
    and \c BDF<4> timesteppers and explain the different behaviour. 
-   \n\n
 -# Examine the accuracy of the various \c BDF timesteppers by
    re-running the simulations with various timesteppers and with
    different timesteps.
@@ -499,13 +493,13 @@ The following exercises aim to explore this functionality.
 
 
 \section sources Source files for this tutorial
-- The source files for this tutorial are located in the directory:\n\n
+- The source files for this tutorial are located in the directory:
 <CENTER>
 <A HREF="../../../../demo_drivers/unsteady_heat/two_d_unsteady_heat/">
 demo_drivers/unsteady_heat/two_d_unsteady_heat/
 </A>
-</CENTER>\n
-- The driver code is: \n\n
+</CENTER>
+- The driver code is:
 <CENTER>
 <A HREF="../../../../demo_drivers/unsteady_heat/two_d_unsteady_heat/two_d_unsteady_heat.cc">
 demo_drivers/unsteady_heat/two_d_unsteady_heat/two_d_unsteady_heat.cc

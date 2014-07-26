@@ -9,11 +9,9 @@ using existing objects from the \c oomph-lib library:
 <TABLE>  
 <TR> 
 <TD>  
-\n
 <CENTER>
 <B>One-dimensional model Poisson problem</B>
 </CENTER> 
-\n
 Solve
 \f[
 \frac{\mbox{d}^2u}{\mbox{d}x^2} = f(x),
@@ -25,7 +23,6 @@ u(0)=u_0 \ \mbox{\ \ \ and \ \ \ } \ \ u(1)=u_1,
 \ \ \ \ \ \ \ \ \ \ @E[1DPoisson_BC]@
 \f]
 where \f$ u_0 \f$ and \f$ u_1 \f$  are given.
-\n
 </TD>
 </TR>
 </TABLE>  
@@ -144,7 +141,7 @@ member, the pointer to the source function.
  <TABLE>
  <TR>
  <TD bgcolor="cornsilk">
-\n<CENTER><B>\anchor gen_conv A general convention</B></CENTER> \n
+<CENTER><B>\anchor gen_conv A general convention</B></CENTER>
 The type \c PoissonEquations<1>::PoissonSourceFctPt, used to 
 define the type of the source function pointer,
 is a public typedef, defined in \c oomph-lib's Poisson equation
@@ -212,7 +209,7 @@ have an access function to the Poisson element's source function pointer.
  <TABLE>
  <TR>
  <TD bgcolor="cornsilk">
-\n<CENTER><B>\anchor const_conv A general convention</B></CENTER> \n
+<CENTER><B>\anchor const_conv A general convention</B></CENTER> 
  It might seem more natural to pass
 essential parameters (such as the Poisson element's source function 
 pointer) to an element when the element is created. If we 
@@ -307,7 +304,6 @@ in the specified output file.
    \c QPoissonElement<1,2>.
 -# The fish-shaped exact solution (@R[ExactFish]@) is fairly smooth.
    Postulate a more rapidly varying "exact" solution, such as
-   \n
    \f[
    u(x) = \tanh\left[\alpha \left(x-\frac{1}{2}\right)\right]
    \f]
@@ -330,13 +326,13 @@ in the specified output file.
 <HR>
 
 \section sources Source files for this tutorial
-- The source files for this tutorial are located in the directory:\n\n
+- The source files for this tutorial are located in the directory:
 <CENTER>
 <A HREF="../../../../demo_drivers/poisson/one_d_poisson/">
 demo_drivers/poisson/one_d_poisson/
 </A>
-</CENTER>\n
-- The driver code is: \n\n
+</CENTER>
+- The driver code is: 
 <CENTER>
 <A HREF="../../../../demo_drivers/poisson/one_d_poisson/one_d_poisson.cc">
 demo_drivers/poisson/one_d_poisson/one_d_poisson.cc

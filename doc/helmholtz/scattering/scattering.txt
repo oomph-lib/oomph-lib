@@ -14,11 +14,9 @@ planar wave from a circular cylinder.
 <TD bgcolor="cornsilk">
 <CENTER>
 <B>Acknowledgement:</B>
-\n\n
 This tutorial and the associated driver codes were developed jointly
 with Tarak Kharrat (EnstaParisTech, Paris).
 </CENTER>
-\n
 </TD>
 </TR>
 </TABLE>
@@ -87,7 +85,6 @@ straightforward and follows the pattern employed for the solution
 of the Poisson equation: 
 - Dirichlet conditions are imposed by pinning the relevant nodal
   values and setting them to the appropriate prescribed values. 
-  \n\n
 - Neumann (flux) boundary conditions are imposed via 
   \c FaceElements (here the \c HelmholtzFluxElements). 
    <a href="../../../poisson/two_d_poisson_flux_bc/html/index.html">
@@ -212,7 +209,7 @@ member function \c HelmholtzDtNMesh::setup_gamma() pre-computes the
 The radius \f$ R \f$ of the artificial boundary and the (finite) number of
 (Fourier) terms used in the sum in (@R[gamma]@) are specified
 as arguments to the constructor of the \c HelmholtzDtNMesh.
-\n\n 
+
 <b>NOTE:</b> Since \f$ \gamma \f$  depends on the solution, 
 it must be recomputed whenever the unknowns are updated during
 the Newton iteration. This is best done by adding a call to
@@ -631,13 +628,13 @@ only be improved by increasing the size of the computational domain.
 
 
 \section sources Source files for this tutorial
-- The source files for this tutorial are located in the directory:\n\n
+- The source files for this tutorial are located in the directory:
   <CENTER>
   <A HREF="../../../../demo_drivers/helmholtz/scattering">
   demo_drivers/helmholtz/scattering/
   </A>
-  </CENTER>\n
-- The driver code is: \n\n
+  </CENTER>
+- The driver code is: 
   <CENTER>
   <A HREF="../../../../demo_drivers/helmholtz/scattering/scattering.cc">
   demo_drivers/helmholtz/scattering/scattering.cc

@@ -7,11 +7,9 @@ solid mechanics problem, using \c oomph-lib's Kirchhoff-Love beam elements:
 <TABLE>
 <TR>
 <TD>
-\n
 <CENTER>
 <B>One-dimensional beam problem</B>
 </CENTER> 
-\n
 Determine the deformation of a pre-stressed, pressure-loaded elastic 
 beam of length \f$ L^*
 \f$ and wall thickness \f$ h^* \f$ . In its undeformed configuration,
@@ -20,7 +18,6 @@ size \f$ \sigma^*_0 \f$ . We wish to compute its deformation when it
 is loaded by a spatially uniform pressure of size \f$ p^*_{ext} \f$ .
 
 @I w 0.75\textwidth string_sketch "A pre-stressed elastic beam under constant pressure loading. "
-\n
 </TD> 
 </TR>
 </TABLE>  
@@ -218,7 +215,7 @@ Implementation
 <img src="../figures/pinned.gif">
 </TD>
 <TD>
-\f$ {\bf R}_w \cdot {\bf e}_x = const. \f$\n
+\f$ {\bf R}_w \cdot {\bf e}_x = const. \f$ \n
 \f$ {\bf R}_w \cdot {\bf e}_y = const. \f$ 
 </TD>
 <TD>
@@ -464,7 +461,7 @@ the beam's midpoint by the specified displacement, \f$ d \f$.
 <TABLE>
 <TR>
 <TD bgcolor="cornsilk">
-\n<CENTER><B>Comment: Geometric and constitutive nonlinearities</B></CENTER> \n
+<CENTER><B>Comment: Geometric and constitutive nonlinearities</B></CENTER>
 The comparison between the computational results and the analytical 
 predictions is very satisfying but is important to realise that
 the agreement only validates the numerical solution, not the
@@ -656,7 +653,7 @@ pressure to the trace file.
 \section comments Exercises and Comments
 
 -# Modify the code so that one end of the beam is no longer fixed in
-   space. What happens? Why? \n\n
+   space. What happens? Why? 
 -# Increase the bending effects by increasing the beam's
    thickness to \f$ h=0.1 \f$, say, and by "clamping" its ends,
    so that \f$ d({\bf R}_w(\xi)\cdot {\bf e}_y)/d\xi = 0 \f$ at \f$ \xi=0 \f$
@@ -668,7 +665,7 @@ pressure to the trace file.
    \endcode
    in the loop in the \c Problem constructor.
    You will have to adjust the number of elements
-   to fully resolve the bending boundary layers. \n\n
+   to fully resolve the bending boundary layers. 
 -# \c oomph-lib's default \anchor newton_cust nonlinear solver, \c
    Problem::newton_solve(...), provides an implementation of
    the Newton method, which has the attractive feature
@@ -705,14 +702,13 @@ pressure to the trace file.
    the initial maximum residual has a relatively large value of 
    19.6. Here are some exercises that explore the convergence
    characteristics of the Newton method:
-   \n\n
    -# Experiment with the Newton solver and find the largest
       value for the load increment, \c pext_increment, for which
-      the Newton method still converges.\n\n
+      the Newton method still converges.
    -# Explain why the Newton method converges 
       very slowly for small values of \f$ p_{ext} \f$ and much more rapidly
       at larger values, even though the load increment, \c
-      pext_increment, remains constant. \n\n
+      pext_increment, remains constant.
    -# Compare the solutions for different values of 
       \c Problem::Newton_solver_tolerance. Is the default value  
       \f$ 10^{-8} \f$ adequate? Reduce it to  \f$ 10^{-12} \f$ and
@@ -725,7 +721,7 @@ pressure to the trace file.
 
 
 \section sources Source files for this tutorial
-- The source files for this tutorial are located in the directory:\n\n
+- The source files for this tutorial are located in the directory:
 <CENTER>
 <A HREF="
 ../../../../
@@ -733,8 +729,8 @@ demo_drivers/beam/tensioned_string/
 ">
 demo_drivers/beam/tensioned_string/
 </A>
-</CENTER>\n
-- The driver code is: \n\n
+</CENTER>
+- The driver code is: 
 <CENTER>
 <A HREF="
 ../../../../

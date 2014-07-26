@@ -24,14 +24,12 @@ waves from the surface of a cylinder.
 <TD bgcolor="cornsilk">
 <CENTER>
 <B>Acknowledgement:</B>
-\n\n
 This tutorial and the associated driver codes were developed jointly
 with
 <a href="http://imperial.academia.edu/RaduCimpeanu">
 Radu Cimpeanu</a>
  (Imperial College London)
 </CENTER>
-\n
 </TD>
 </TR>
 </TABLE>
@@ -132,7 +130,6 @@ The application of Dirichlet and Neumann boundary conditions is
 straightforward:
 - Dirichlet conditions are imposed by pinning the relevant nodal
   values and setting them to the appropriate prescribed values. 
-  \n\n
 - Neumann (flux) boundary conditions are imposed via 
   \c FaceElements (here the \c GeneralisedHelmholtzFluxElements). 
    <a href="../../../poisson/two_d_poisson_flux_bc/html/index.html">
@@ -223,7 +220,6 @@ shown in the sketch below:
   \f[
    \gamma_y = 1.
   \f] 
-  \n\n
 - For layers that are aligned with the x axis  (such as the top
   and bottom PML layers in the sketch) we set 
   \f[ 
@@ -239,7 +235,6 @@ shown in the sketch below:
   \f]
   where \f$ Y_{PML} \f$ is the y-coordinate of the outer boundary
   of the PML layer.
-  \n\n
 - In corner regions that are bounded by two axis-aligned PML layers
   (with outer coordinates \f$ X_{PML} \f$ and  
   \f$ Y_{PML} \f$) we set
@@ -258,7 +253,6 @@ shown in the sketch below:
   \sigma_{y}(y)  =  \frac{1}{|Y_{PML}-y|}. \ \ \ \ \ 
   @E[absorbingfcty_corner]@
   \f]
-  \n\n
 - Finally, in the actual computational domain (outside
   the PML layers) we set
   \f[
@@ -646,13 +640,13 @@ methodologies to
 
 
 \section sources Source files for this tutorial
-- The source files for this tutorial are located in the directory:\n\n
+- The source files for this tutorial are located in the directory:
   <CENTER>
   <A HREF="../../../../demo_drivers/generalised_helmholtz/scattering">
   demo_drivers/generalised_helmholtz/scattering/
   </A>
-  </CENTER>\n
-- The driver code is: \n\n
+  </CENTER>
+- The driver code is:
   <CENTER>
   <A HREF="../../../../demo_drivers/generalised_helmholtz/scattering/unstructured_two_d_helmholtz.cc">
   demo_drivers/generalised_helmholtz/scattering/unstructured_two_d_helmholtz.cc

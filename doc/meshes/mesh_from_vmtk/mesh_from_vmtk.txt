@@ -31,14 +31,11 @@ For further information on VMTK, please refer to VMTK's
 <TABLE BORDER=1, WIDTH=500px>
 <TR>
 <TD bgcolor="cornsilk">
-\n\n
 <CENTER>
 <B>Ackowledgement:</B>
 </CENTER>
-\n\n
 This tutorial and the associated driver codes were developed jointly
 with Amine Massit (ENSTA, Paris).
-\n\n
 </TD>
 </TR>
 </TABLE>
@@ -49,17 +46,17 @@ with Amine Massit (ENSTA, Paris).
 <TABLE BORDER=1, WIDTH=500px>
 <TR>
 <TD bgcolor="cornsilk">
-\n\n
 <CENTER>
 <B>Disclaimer:</B>
 </CENTER>
-\n\n
 The generation of high-quality computational meshes from medical
 images is a non-trivial task. The
 <a href="http://www.vmtk.org/Main/HomePage"> Vascular Modeling
 Toolkit</a>  greatly simplifies this task but
 it is important to remember that (intelligent) user input is required
-at various stages of the process. \n\n This tutorial does \b not provide
+at various stages of the process. 
+
+ This tutorial does \b not provide
 any guidance on this aspect. We simply demonstrate \b how to generate
 meshes that can be used in \c oomph-lib - based  
 physiological flow (or fluid-structure interaction) simulations.
@@ -687,11 +684,9 @@ are:
 \section comm_and_ex Comments and Exercises
 
 - In its current form, the conversion code 
-  \n\n
-  <CENTER>
+   <CENTER>
   <a href="../../../../demo_drivers/meshing/mesh_from_vmtk/create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh.cc">demo_drivers/interaction/create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh.cc</a>
   </CENTER>
-  \n\n
   is restricted to bifurcation-like geometries, and makes certain 
   assumptions about the enumeration of the boundaries. 
   Furthermore, it can only deal with constant thickness vessel
@@ -706,28 +701,22 @@ are:
   <a href="../../../contact/html/index.html">Get in touch</a> if you 
   need help with this (and feel free to share any improvements
   with us).
-  \n\n
 - We provide three separate tutorials to demonstrate the use of
   VMTK-based meshes in \c oomph-lib driver codes:
-  \n\n
   - <a href="../../../solid/vmtk_solid/html/index.html">The inflation
     of the arterial bifurcation by a constant pressure -- a pure solid
     mechanics problem.</a>
-    \n\n
   - <a href="../../../navier_stokes/vmtk_fluid/html/index.html">Steady
     finite-Reynolds number flow through the (rigid) arterial bifurcation --
     a pure fluid-mechanics mechanics problem.</a>
-    \n\n
   - <a href="../../../interaction/vmtk_fsi/html/index.html">Steady 
     finite-Reynolds-number flow through an elastic
     arterial bifurcation -- a fluid-structrure interaction
     problem.</a>
   .
-  \n\n
 - To facilitate experimentation with the methodology we distribute the  
   \c xda file that was used to create the meshes in the above
   examples. It is available at:
-  \n\n
   <center>
   <a href="../../../../demo_drivers/interaction/vmtk_fsi/iliac.xda">
   demo_drivers/interaction/vmtk_fsi/iliac.xda</a>

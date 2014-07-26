@@ -59,7 +59,8 @@ namespace oomph
 ///   in a single array so that we need only store one pointer. 
 ///   The internal Data are placed at the beginning
 ///   of the array and the external Data are stored at the end.
-/// - a pointer to a global Time/// - a lookup table that establishes the relation between local
+/// - a pointer to a global Time
+/// - a lookup table that establishes the relation between local
 ///   and global equation numbers.
 /// 
 /// We also provide interfaces for functions that compute the

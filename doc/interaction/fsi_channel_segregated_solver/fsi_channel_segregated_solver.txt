@@ -30,11 +30,9 @@ with \c oomph-lib's FSI preconditioner.</A>
 <TABLE>
 <TR> 
 <TD>
-\n
 <CENTER>
 <B>Flow in a 2D collapsible channel </B>
 </CENTER> 
-\n
 
 The figure below shows a sketch of the problem: 
 Flow is driven by a 
@@ -237,17 +235,14 @@ function
    \code 
    SegregatedFSIProblem::segregated_solve();
    \endcode
-   \n
  - The equivalent of the monolithic \c Problem::steady_newton_solve() is
    \code
    SegregatedFSIProblem::steady_segregated_solve();
    \endcode
-   \n
  - Finally, the equivalent of  \c Problem::unsteady_newton_solve(dt) is
    \code
    PicardConvergenceData unsteady_segregated_solve(const double &dt);
    \endcode
-   \n
  .
 All three functions return an instance of a \c PicardConvergenceData
 object which stores the convergence statistics of the segregated solve.
@@ -341,7 +336,6 @@ specific actions during the distinct sub-solves.
     "A version of the Aitken accelerator for computer iteration".
     International Journal of Numerical Methods in Engineering <b>1</b>,
     275-277 (1969).
-    \n\n
  -# <b>Pointwise Aitken-acceleration:</b>
     \n\n
     \code
@@ -530,17 +524,14 @@ straightforward
 -# Modify the control flags in <code><A HREF="../../../../demo_drivers/interaction/fsi_channel_seg_and_precond/simple_segregated_driver.cc">simple_segregated_driver.cc</a></code> to
    verify that the monolithic solution is the same (to within finite
    precision) as the segregated solution.
-   \n\n
 -# Modify the control flags in <code><A HREF="../../../../demo_drivers/interaction/fsi_channel_seg_and_precond/simple_segregated_driver.cc">simple_segregated_driver.cc</a></code> to
    investigate the influence of the convergence acceleration
    techniques and convergence criterion on the segregated solution. Which
    combination of parameters gives convergence in the fewest Picard
    iterations? 
-   \n\n
 -# Investigate the behaviour of the system if the fluid (bulk) mesh is \em not
    updated after each Newton step in the solution of the solid
    problem. Can you obtain converged solutions?
-   \n\n
 -# Write your own \c
    SegregatedFSICollapsibleChannelFlow::unsteady_run()
    member function that computes the time evolution of the system after
@@ -555,13 +546,13 @@ straightforward
 
 
 \section sources Source files for this tutorial
-- The source files for this tutorial are located in the directory:\n\n
+- The source files for this tutorial are located in the directory:
 <CENTER>
 <A HREF="../../../../demo_drivers/interaction/fsi_channel_seg_and_precond/">
 demo_drivers/interaction/fsi_channel_seg_and_precond/
 </A>
-</CENTER>\n
-- The driver code is: \n\n
+</CENTER>
+- The driver code is: 
 <CENTER>
 <A HREF="../../../../demo_drivers/interaction/fsi_channel_seg_and_precond/simple_segregated_driver.cc">
 demo_drivers/interaction/fsi_channel_seg_and_precond/simple_segregated_driver.cc

@@ -18,12 +18,10 @@ For this purpose consider the following problem:
 <TABLE>
 <TR> 
 <TD>
-\n
 <CENTER>
 <B>The two-dimensional unsteady heat equation with flux boundary
 conditions in a quarter circle domain</B>
 </CENTER> 
-\n
 Solve
 \f[
 \sum_{i=1}^2\frac{\partial^2 u}{\partial x_i^2} 
@@ -52,7 +50,7 @@ The initial conditions are given by
 u(x_1,x_2,t=0)=k_0(x_1,x_2),
 \ \ \ \ \ \ \ \ \ \ @E[2DHeat_IC1]@
 \f]
-where the functions \f$ f, g_0, \ h_0\f$ and  \f$ k_0\f$ are given. \n
+where the functions \f$ f, g_0, \ h_0\f$ and  \f$ k_0\f$ are given. 
 </TD>
 </TR>
 </TABLE>  
@@ -181,7 +179,6 @@ issues arise:
    at time  \f$ t + dt \f$ . One level of mesh adaptation per timestep 
    should therefore be sufficient to adapt the mesh
    in response to these changes.
-   \n\n 
 -# The only exception to this recommendation arises during the computation of
    the first timestep, illustrated in the following sketch:
 @I w 0.75\textwidth adapted_ic1 "Sketch of the mesh adaptation during the computation of the first timestep. "
@@ -207,11 +204,9 @@ issues arise:
    \c first is set \c true. In that case,
    the values and history values on the adapted mesh are 
    (re-)assigned by calling the function
-   \n\n
    \code
    Problem::set_initial_condition()
    \endcode
-   \n
    which is defined as an 
    empty virtual function in the \c Problem base class. You should
    overload it in your derived \c Problem to ensure that your specific
@@ -278,7 +273,6 @@ in two versions:
 - The two-argument version,  \c GeomObject::position(xi,r)
   computes the position vector, \c r, to the point on/in the \c GeomObject,
   parametrised by the vector of intrinsic coordinates, \c xi.
-  \n\n
 - The three-argument version \c GeomObject::position(t,xi,r), where
   \c t is an unsignedeger, computes the position vector at 
   the \c t - th previous timestep. 
@@ -543,7 +537,7 @@ another example.</A>
 
 
 \section sources Source files for this tutorial
-- The source files for this tutorial are located in the directory:\n\n
+- The source files for this tutorial are located in the directory:
 <CENTER>
 <A HREF="
 ../../../../
@@ -551,8 +545,8 @@ demo_drivers/unsteady_heat/two_d_unsteady_heat_adapt/
 ">
 demo_drivers/unsteady_heat/two_d_unsteady_heat_adapt/
 </A>
-</CENTER>\n
-- The driver code is: \n\n
+</CENTER>
+- The driver code is: 
 <CENTER>
 <A HREF="
 ../../../../

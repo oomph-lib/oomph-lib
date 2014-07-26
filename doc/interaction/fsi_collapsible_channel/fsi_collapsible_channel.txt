@@ -42,11 +42,9 @@ and
 <TABLE>
 <TR> 
 <TD>
-\n
 <CENTER>
 <B>Flow in a 2D collapsible channel </B>
 </CENTER> 
-\n
 
 The figure below shows a sketch of the problem: Flow is driven by a 
 prescribed pressure drop through a 2D channel of width 
@@ -243,7 +241,7 @@ single-physics problems in isolation, i.e.
   \c SolidFiniteElement (e.g.  a \c HermiteBeamElement) and determine the
   wall deformation in response to a prescribed external load. If possible,
   choose a load that is vaguely "representative" of the loads expected
-  in the actual fluid-structure interaction problem. \n\n
+  in the actual fluid-structure interaction problem. 
 - Discretise the fluid mechanics problem in a domain in which 
   the deformation of the "elastic boundary" is described by 
   a \c GeomObject that performs a prescribed motion. 
@@ -265,12 +263,12 @@ that must be incorporated into the computational framework:
 -# The position of the nodes in the fluid mesh depends on the wall
    shape. Since the wall shape is now determined by the degrees of
    freedom in the \c SolidFiniteElements that we use to discretise the
-   wall, we must ensure that: \n\n 
+   wall, we must ensure that: 
    -# The node-update operations that we developed for problems
       with prescribed wall motion (in which the position of the
       curvilinear domain boundaries is determined by \c GeomObjects)
       also work for problems in which the curvilinear domain
-      boundaries are represented by \c SolidFiniteElements. \n\n
+      boundaries are represented by \c SolidFiniteElements.
    -# The dependence of the residuals of the fluid elements
       on the solid-mechanics degrees of freedom that affect the
       positions of the fluid nodes (via the node-update 
@@ -278,17 +276,17 @@ that must be incorporated into the computational framework:
       the fluid elements' Jacobian matrices. (See the discussion of
       the "shape derivatives" in the 
       <A HREF="../../macro_element_free_boundary_poisson/html/index.html"> 
-      "toy" free-boundary Poisson problem</A> for details.)   \n\n
+      "toy" free-boundary Poisson problem</A> for details.)  
 -# The \c SolidFiniteElements are not only loaded by the external load
    but also by the traction that the fluid exerts on
    them. When computing the residuals of the
    \c SolidFiniteElements we have to evaluate the combined load 
    vector at the \c SolidFiniteElement's Gauss points. We therefore 
-   have to provide a lookup scheme that specifies: \n\n
+   have to provide a lookup scheme that specifies: 
    -# which fluid element is adjacent to 
-      a given Gauss point in the \c SolidFiniteElements, and \n\n
+      a given Gauss point in the \c SolidFiniteElements, and
    -# which (fluid) degrees of freedom affect the fluid traction at that 
-      point. \n\n
+      point. 
    .
    The dependence of the residuals of the \c SolidFiniteElements on these
    (fluid) degrees of freedom must be taken into account when 
@@ -332,7 +330,7 @@ discussed in  the context of the "toy" problem may also be used
 for genuine fluid-structure interaction problems, such as the problem 
 considered here, provided
 -# A \c MacroElement/Domain - based Mesh is used to discretise the
-   fluid domain. \n\n
+   fluid domain.
 -# The moving boundary is represented by a \c GeomObject whose 
    member function \c GeomObject::geom_data_pt(...) provides
    access to its "geometric" \c Data, i.e. the \c Data that affects 
@@ -478,7 +476,7 @@ the element's local coordinate is
 regarded as the intrinisic
 coordinate that parametrises its shape. Thus we already have a standard 
 interface through which an \c FSIWallElement can be used to parametrise 
-the shape of (part of) the domain boundary. \n\n
+the shape of (part of) the domain boundary. 
 
 By inheriting from the \c SolidFiniteElement class,
 we establish that the shape of the \c FSIWallElement is determined 
@@ -592,29 +590,28 @@ fluid-structure interaction problem is a straightforward
 combination of the two single-physics codes with a few
 trivial additional steps. The main steps in the problem setup are:
 -# Create the wall mesh, using \c FSIHermiteBeamElements instead of
-   \c HermiteBeamElements. \n\n
+   \c HermiteBeamElements. 
 -# <B>NEW:</B> Create a \c GeomObject representation of the wall mesh, using
-   the \c MeshAsGeomObject class. \n\n
+   the \c MeshAsGeomObject class. 
 -# Create the fluid mesh, using elements of type
    \c MacroElementNodeUpdateElement<QCrouzeixRaviartElement<2>> instead of
    \c QCrouzeixRaviartElement<2>. Use the \c MeshAsGeomObject
    representation of the elastic wall, created in the previous step
-   to represent the curvilinear domain boundary.\n\n
+   to represent the curvilinear domain boundary.
 -# Build a mesh of traction elements that apply the
    prescribed-traction boundary condition at the inflow. 
    Add all three meshes (fluid, solid and traction mesh)
    to the \c Problem's collection of sub-meshes and build the global
-   mesh. \n\n
+   mesh.
 -# Pass the relevant function pointers (for Reynolds number, 
    external loads, etc) to the various elements and apply the boundary 
-   conditions. \n\n
+   conditions. 
 -# <B>NEW:</B> Call the function 
    \c FSI_functions::setup_fluid_load_info_for_solid_elements(...) to
    set up the lookup scheme that establishes which fluid
-   elements affect the traction on the wall.  \n\n
--# Set up the equation numbering scheme. \n\n
--# Done! \n\n
-. 
+   elements affect the traction on the wall. 
+-# Set up the equation numbering scheme. 
+-# Done! . 
 
 Most steps in this sequence are either identical to those 
 in the corresponding single-physics codes, or require only trivial
@@ -1080,18 +1077,17 @@ problem with prescribed wall motion</A>.
     non-matching the points do not coincide exactly though they 
     will continue to approach each other under further mesh
     refinement. 
-   \n\n
   - The coloured numbers indicate the number of values that affect
-    the fluid traction on this \c FSIWallElement: \n\n
+    the fluid traction on this \c FSIWallElement: 
     - The red numbers represent the number of nodal values at the
       nodes of the adjacent fluid element(s) that affect the traction: For a
       2D Crouzeix-Raviart element, each fluid node stores two velocity
-      degrees of freedom, both of which affect the traction.  \n\n
+      degrees of freedom, both of which affect the traction.  
     - The blue numbers represent the number of internal \c Data values
       stored in an adjacent fluid element that affect the traction:
       In a 2D Crouzeix-Raviart element, each element stores three
       pressure values in its internal \c Data and all three
-      pressure values affect the traction. \n\n
+      pressure values affect the traction. 
     - Finally, the green numbers indicate the number of \c Data values 
       that are (potentially) involved in the node-update operation for
       the nodes in the adjacent fluid elements. Recall that during the
@@ -1108,7 +1104,7 @@ problem with prescribed wall motion</A>.
     .
   .
 @I w 0.75\textwidth crozier_raviart_fsi_macro "Animation of the Data  values that affect the fluid traction that the adjacent fluid   elements exert onto the various FSIHermiteBeamElements in the wall   mesh. (The fluid elements are 2D Crouzeix-Raviart elements.) " 
-   \n
+
    Here is the corresponding animation for a discretisation with
    2D Taylor-Hood elements. These elements have no internal \c Data but
    the pressure degrees of freedom are stored at the fluid element's
@@ -1137,7 +1133,7 @@ position of all fluid nodes.
   that the implementation of the fluid-structure interaction
   via \c MacroElement/Domain - based node updates does not lead to
   a particularly efficient algorithm. The current approach suffers
-  from two main problems: \n\n
+  from two main problems: 
   -# The fluid-node update is not sparse: Since we cannot distinguish between
      the various sub-objects in the "compound" \c GeomObject, we can do
      no better than assuming the worst-case scenario, namely 
@@ -1147,7 +1143,7 @@ position of all fluid nodes.
      adjacent to the wall. Consequently, each \c FSIHermiteBeamElement
      in the wall mesh depends on all solid mechanics degrees of 
      freedom in the wall mesh. As a result, the wall discretisation 
-     completely loses its sparsity! \n\n
+     completely loses its sparsity!
   -# When updating the position of the fluid nodes via the fluid element's
      \c Domain/MacroElement representation, we obtain the wall
      shape from the \c GeomObject::position(...) function of the
@@ -1157,7 +1153,7 @@ position of all fluid nodes.
      is a very costly operation, since we first have to determine
      which of the constituent \c FSIHermiteBeamElements "contains"
      the required Lagrangian coordinate, and then evaluate the
-     Eulerian position of the relevant point in the element.\n\n
+     Eulerian position of the relevant point in the element.
   .
   In <A HREF="../../../interaction/fsi_collapsible_channel_algebraic/html/index.html">
   the next  example</A> we will demonstrate how the use of the algebraic node update
@@ -1181,7 +1177,7 @@ position of all fluid nodes.
    arbitrarily. Now set the inflow velocity to zero and increase the value of 
    \f$ p_{fix} \f$ from zero, say. If the wall collapses inwards
    as \f$ p_{fix} \f$ is increased the 
-   direction of normal was chosen wrongly!] \n \n
+   direction of normal was chosen wrongly!] 
 -# In section \ref fsi_wall_elements we mentioned that the function
    \c FSI_functions::setup_fluid_load_info_for_solid_elements(...)
    assumes that the fluid nodes on the FSI boundary store 
@@ -1189,16 +1185,16 @@ position of all fluid nodes.
    step is omitted, e.g. by commenting out the assignment of boundary
    coordinates with \c Node::set_coordinates_on_boundary(...) in 
    <A HREF="../../../../src/meshes/collapsible_channel_mesh.template.cc">
-   collapsible_channel_mesh.template.cc</A>. \n\n 
+   collapsible_channel_mesh.template.cc</A>. 
 -# In section \ref undeformed we mentioned that the function 
    \c GeomObject::d2position(...) must be implemented for all \c
    GeomObjects that specify the undeformed shape of a beam element.
    Check what happens if this function is not implemented, e.g. by      
-   commenting out its definition in the \c UndeformedWall class. \n\n
+   commenting out its definition in the \c UndeformedWall class. 
 -# In section \ref problemcontr we commented that \c oomph-lib
    does not require the discretisations of the fluid and solid
    meshes to match along the common boundary. Confirm this, e.g., by 
-   increasing the number of elements in the wall mesh. \n\n
+   increasing the number of elements in the wall mesh. 
 .   
 
 
@@ -1208,13 +1204,13 @@ position of all fluid nodes.
 
 
 \section sources Source files for this tutorial
-- The source files for this tutorial are located in the directory:\n\n
+- The source files for this tutorial are located in the directory:
 <CENTER>
 <A HREF="../../../../demo_drivers/interaction/fsi_collapsible_channel/">
 demo_drivers/interaction/fsi_collapsible_channel/
 </A>
-</CENTER>\n
-- The driver code is: \n\n
+</CENTER>
+- The driver code is: 
 <CENTER>
 <A HREF="../../../../demo_drivers/interaction/fsi_collapsible_channel/fsi_collapsible_channel.cc">
 demo_drivers/interaction/fsi_collapsible_channel/fsi_collapsible_channel.cc

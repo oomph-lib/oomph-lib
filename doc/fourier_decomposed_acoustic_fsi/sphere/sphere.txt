@@ -7,13 +7,11 @@
 <TD bgcolor="cornsilk">
 <CENTER>
 <B>Acknowledgement:</B>
-\n\n
 This tutorial and the associated driver codes were developed jointly
 with David Nigro and Robert Harter (Thales Underwater Systems
 Ltd) with financial support from a KTA Secondment grant from
 University of Manchester's EPSRC-funded Knowledge Transfer Account.
 </CENTER>
-\n
 </TD>
 </TR>
 </TABLE>
@@ -690,7 +688,6 @@ the total radiated power, and plots the computed solutions
   \c false -- in that case, \c oomph-lib's Newton solver
   skips the convergence check in the Newton iteration and simply
   accepts the solution obtained after one linear solve.
-  \n\n
 - You may have noticed that, unlike the tutorial for the
   <a href="../../../acoustic_fsi/acoustic_fsi_annulus/html/index.html">
   cartesian counterpart</a> of the model problem considered here, we
@@ -721,19 +718,15 @@ the total radiated power, and plots the computed solutions
   \n\n
   Investigate the accuracy of the computational predictions for \f$
   \overline{\cal P}\f$ by:
-  \n\n
   - increasing the spatial resolution e.g. by using
     the command line flag \c --el_multiplier which controls the number
     of elements in the mesh.
-    \n\n
   - reducing the outer radius of the computational domain, using
     the command line flag \c --outer_radius, say.
-    \n\n
   - varying the element type, from the bi-linear 
     \c QFourierDecomposedHelmholtzElement<2>
     to the bi-cubic \c QFourierDecomposedHelmholtzElement<4>, say.
   .
-  \n\n
  Which of these approaches gives you the "most accuracy" for a given number of
  degrees of freedom?
 .
@@ -864,13 +857,13 @@ with maple, using the script
 <HR>
 
 \section sources Source files for this tutorial
-- The source files for this tutorial are located in the directory:\n\n
+- The source files for this tutorial are located in the directory:
   <CENTER>
   <A HREF="../../../../demo_drivers/interaction/fourier_decomposed_acoustic_fsi">
   demo_drivers/interaction/fourier_decomposed_acoustic_fsi/
   </A>
-  </CENTER>\n
-- The driver code is: \n\n
+  </CENTER>
+- The driver code is:
   <CENTER>
   <A HREF="../../../../demo_drivers/interaction/fourier_decomposed_acoustic_fsi/fourier_decomposed_acoustic_fsi.cc">
   demo_drivers/interaction/fourier_decomposed_acoustic_fsi/fourier_decomposed_acoustic_fsi.cc

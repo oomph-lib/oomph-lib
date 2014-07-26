@@ -28,7 +28,7 @@ a \c Problem object is problem-dependent:
 - If \c oomph-lib's existing \c Mesh objects and element types
   are sufficient to discretise the problem, the generation of
   a fully-functional \c Problem object is straightforward. We shall discuss
-  this case in the section \ref problem.  \n\n 
+  this case in the section \ref problem. 
 - If \c oomph-lib provides the required element type but none of the
   available meshes are suitable, 
   you will have to write your own \c Mesh object. We shall discuss this in 
@@ -36,7 +36,7 @@ a \c Problem object is problem-dependent:
   \c oomph-lib meshes based on the output from third-party (commercial)
   mesh generators. This is illustrated in 
   <A HREF="../../meshes/third_party_meshes/html/index.html">
-  another example.</A> \n\n
+  another example.</A> 
 - Finally, the problem might involve a PDE for which \c oomph-lib
   does not provide any suitable elements. In this case you 
   will need to write your own element. When implementing elements
@@ -65,11 +65,9 @@ by considering the discretisation of the model problem
 <TABLE BORDER="0">
 <TR>
 <TD>
-\n
 <CENTER>
 <B>One-dimensional model Poisson problem</B>
 </CENTER> 
-\n
 Solve
 \f[
 \frac{\mbox{d}^2u}{\mbox{d}x^2} = \pm 30 \sin(\sqrt{30} x),
@@ -80,7 +78,6 @@ in the one-dimensional domain \f$x\in[0,1]\f$, subject to
 u(0)=0 \ \mbox{\ \ \ and \ \ \ } \ \ u(1)=\mp 1, 
 \ \ \ \ \ \ \ \ \ \ @E[1DPoisson_BC]@
 \f]
-\n
 </TD>
 </TR>
 </TABLE> 
@@ -127,10 +124,8 @@ on the exact details of the problem being solved.
 Only a few member functions \e must be implemented for each specific
 \c Problem class:
 - The problem constructor \code SomeSpecificProblem(...) \endcode
-  \n
 - and the member functions
   \code Problem::actions_before_newton_solve() \endcode
-  \n 
   \code Problem::actions_after_newton_solve() \endcode
 .
 \subsection spec The constructor: SomeSpecificProblem(...)
@@ -474,12 +469,12 @@ geometric element. The \c SpecificElement class needs to implement
 the following functions:
 - The function that specifies the number of nodal values
   required at each of the element's nodes:
-  \code FiniteElement::required_nvalue(n) \endcode \n
+  \code FiniteElement::required_nvalue(n) \endcode 
 - The function that computes the element's residual vector:
-  \code FiniteElement::get_residuals(residuals) \endcode \n
+  \code FiniteElement::get_residuals(residuals) \endcode
 - The function that computes the element's Jacobian matrix and
   its residual vector:
-  \code FiniteElement::get_jacobian(residuals,jacobian) \endcode  \n
+  \code FiniteElement::get_jacobian(residuals,jacobian) \endcode 
 - The output function:
   \code FiniteElement::output(ostream) \endcode
 .
@@ -610,9 +605,7 @@ The output function is used to print the nodal values over the element
     get_generic_residual_contribution(residuals,jacobian,flag);
    }
   \endcode
-  \n
   and 
-  \n \n
   \code
   /// \short Calculate the elemental contribution to the Jacobian 
   /// matrix dR_{i}/du_{j} used in the Newton method
@@ -636,7 +629,7 @@ The output function is used to print the nodal values over the element
   element class itself. 
   \n \n
   Here is a suggestion for an improved implementation, which illustrates the
-  procedure employed in the existing elements in \c oomph-lib:\n\n
+  procedure employed in the existing elements in \c oomph-lib:
   - Introduce a public typedef into the element class to define
     the required format of the function pointer:
     \code
@@ -644,7 +637,7 @@ The output function is used to print the nodal values over the element
     /// The source function returns the value of the 
     /// source function at the global coordinate x.
     typedef double (*PoissonSourceFctPt)(const double& x);
-    \endcode \n
+    \endcode
   - Add a function pointer to the private data of the \c
     TwoNodePoissonElement class and initalise it to NULL
     in the constructor:
@@ -652,12 +645,12 @@ The output function is used to print the nodal values over the element
     /// \short Function pointer to source function (initialised to
     /// NULL in the constructor)
     PoissonSourceFctPt Source_fct_pt;
-    \endcode\n
+    \endcode
   - Provide an access function for the source function pointer:
     \code
     /// \short Access function to pointer to source function
     PoissonSourceFctPt& source_fct_pt() {return Source_fct_pt;}
-    \endcode\n
+    \endcode
   - Re-write the \c TwoNodePoissonElement::f(...) function,
     so that it evaluates the (global) function pointed to by
     the source function pointer.  If possible, provide a default value 
@@ -705,7 +698,7 @@ with the same underlying geometrical representation.
 For this purpose, each geometric \c FiniteElement must 
 implement the following functions:
 - The constructor
-  \code SomeGeometricFiniteElement::SomeGeometricFiniteElement() \endcode \n
+  \code SomeGeometricFiniteElement::SomeGeometricFiniteElement() \endcode 
   must perform the following actions:
   - Set the number of Nodes by calling the protected member function
     \code FiniteElement::set_n_node(n_node). \endcode
@@ -747,13 +740,13 @@ implement the following functions:
 It is usually necessary to implement the following additional functions:
 - The function that computes the derivatives of the element's shape
   functions with respect to the local coordinates,
-  \code FiniteElement::dshape_local(s,psi,dpsids) \endcode \n
+  \code FiniteElement::dshape_local(s,psi,dpsids) \endcode
 #- A function that is used to select which of the functions
 #  defined in the base FiniteElement class
 #  should be used to calculate the derivatives of the shape functions
 #  with respect to non-local coordinates specified in the vector X.
 #  \code FiniteElement::dshape_general_coordinate(X,dpsids,dpsidX)
-#  \endcode \n
+#  \endcode 
 #   The functions in FiniteElement are templated by the dimension of
 #   the element, so for a two-dimensional Element the function should be
 #   \code
@@ -762,7 +755,7 @@ It is usually necessary to implement the following additional functions:
 #   \endcode
 - The function that specifies the number of Nodes along the
   element's 1D "edges"  
-  \code FiniteElement::nnode_1d() \endcode \n
+  \code FiniteElement::nnode_1d() \endcode 
 .
 Further member functions and member data may be defined as and when required.
 For instance, all specific \c FiniteElements must store a pointer to an
@@ -865,7 +858,7 @@ same as the number of nodes:
   \code
   template <unsigned NNODE>
   class PoissonLineElement<NNODE> : public GeometricLineElement<NNODE>
-  \endcode \n
+  \endcode 
 - Validate all elements against the exact solution and
   confirm the theoretical error estimate which predicts that 
   if the domain \f$ x \in [0,1]\f$ is discretised with \f$ N \f$
@@ -957,11 +950,11 @@ shape functions and their derivatives:
   \endcode
   where the \c unsigned argument \c int_point identifies
   the integration point (as specified by the
-  element's spatial integration scheme). \n
+  element's spatial integration scheme).
  In "standard" \c FiniteElements the function 
  \c FiniteElement::shape_at_knot(...) simply determines the position
  of the integration point and calls \c FiniteElement::shape(...) and
- so the shape functions are still computed "on the fly". \n
+ so the shape functions are still computed "on the fly". 
  The templated class \c StorableShapeElement<ELEMENT>, however,
   may be used to
  upgrade any class derived from \c FiniteElement into a class that \b
@@ -971,7 +964,7 @@ shape functions and their derivatives:
  time, it computes the values of the shape function
  at all integration points and stores them for future reference.
  In subsequent calls, the function returns the stored values, rather 
- than re-computing them. \n\n
+ than re-computing them. 
 - There are equivalent alternatives for the functions that
   compute the shape functions and their derivatives with respect
   to the local coordinates:
@@ -1197,7 +1190,7 @@ the tests to be disabled. Here is an example:
 
 [...]
 
-\endcode \n
+\endcode 
 Note that we throw a specific \c OomphLibError object after catching 
 the error -- this allows the provision of more explicit (and hopefully more
 meaningful) error messages.
@@ -1265,11 +1258,11 @@ multi-physics element, while the off-diagonal interaction blocks must
 be computed separately. The details of the implementation vary
 from problem to problem. However, any single-physics element 
 must satisfy the following requirements if it is to be used
-as a base class for derived multi-physics elements: \n\n
-- \ref dont_wipe \n\n
-- \ref virtual \n\n
-- \ref index_fcts \n\n
-- \ref mesh_movement \n\n
+as a base class for derived multi-physics elements: 
+- \ref dont_wipe 
+- \ref virtual 
+- \ref index_fcts 
+- \ref mesh_movement 
 .
 
 

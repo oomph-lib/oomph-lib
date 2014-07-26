@@ -442,7 +442,6 @@ onto the curvilinear boundary that is still defined by the
 <TR>
 <TD bgcolor="cornsilk">
 <CENTER>
-\n
 \b IMPORTANT: 
 \n
 Note that the initial shape of moving free boundaries 
@@ -459,7 +458,6 @@ as described above -- the free surface therefore keeps jumping
 back to its initial position whenever the mesh is adapted 
 which is unlikely to be desired!
 </CENTER>
-\n
 </TD>
 </TR>
 </TABLE>
@@ -612,11 +610,9 @@ such boundaries are associated with a specific, continuous
    manually onto the circular boundary and call the steady Newton
    solver.  Why is the initial residual not equal to zero, even though
    we have manually assigned the correct solution as an initial guess?  
-   \n\n
 -# Comment out \c create_volume_constraint_elements()
    and \c delete_volume_constraint_elements() throughout the code and
    explain what happens. 
-   \n\n
 -# Experiment with the refinement/unrefinement of polylines and explore
    the option to re-distribute segments between the polylines
    that define the boundaries of the bubble. Specifically, change
@@ -626,7 +622,6 @@ such boundaries are associated with a specific, continuous
    Confirm that, following the mesh adaptation, the bubble boundaries
    are adjusted such that each boundary occupies approximately 1/2 of
    the bubble surface when the redistribution of polylines is enabled.
-   \n\n
 .
 
 <HR> <HR>
@@ -634,12 +629,12 @@ such boundaries are associated with a specific, continuous
 
 \section sources Source files for this tutorial 
 - The source files for
-  this tutorial are located in the directory:\n\n 
+  this tutorial are located in the directory:
   <CENTER> 
   <A HREF="../../../../demo_drivers/navier_stokes/unstructured_adaptive_fs/">
   demo_drivers/navier_stokes/unstructured_adaptive_fs/ </A> 
-  </CENTER>\n
-- The driver code is: \n\n 
+  </CENTER>
+- The driver code is:
   <CENTER> 
   <A HREF="../../../../demo_drivers/navier_stokes/unstructured_adaptive_fs/adaptive_bubble_in_channel.cc">
    demo_drivers/navier_stokes/unstructured_adaptive_fs/adaptive_bubble_in_channel.cc</A> 

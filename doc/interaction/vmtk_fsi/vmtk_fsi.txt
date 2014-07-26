@@ -7,7 +7,6 @@ Modeling Toolkit.</a>
  We combine two single-physics problems, namely
 - <a href="../../../solid/vmtk_solid/html/index.html">
   The inflation of a blood vessel</a>
-  \n\n
 - <a href="../../../navier_stokes/vmtk_fluid/html/index.html">
   Finite-Reynolds number flow through a rigid iliac bifurcation</a>
 .
@@ -31,14 +30,11 @@ The section \ref face below shows how this is done.
 <TABLE BORDER=1, WIDTH=500px>
 <TR>
 <TD bgcolor="cornsilk">
-\n\n
 <CENTER>
 <B>Ackowledgement:</B>
 </CENTER>
-\n\n
 This tutorial and the associated driver codes were developed jointly
 with Amine Massit (ENSTA, Paris).
-\n\n
 </TD>
 </TR>
 </TABLE>
@@ -97,13 +93,11 @@ Neumann/flux/traction-type boundary conditions on the faces of
 higher-dimensional "bulk" elements. Examples include:
 - <a href="../../../poisson/two_d_poisson_flux_bc2/html/index.html">
   the application of a flux bounday condition in a Poisson problem;</a> 
-  \n\n
 - the application of traction boundary conditions in 
   <a href="../../../navier_stokes/rayleigh_traction_channel/html/index.html">
   fluid</a> and 
   <a href="../../../solid/airy_cantilever/html/index.html">solid</a>
   mechanics problems;
-  \n\n
 - <a href="../../../young_laplace/contact_angle/html/index.html">the
   application of a contact-angle boundary condition for the
   Young-Laplace equation.</a>
@@ -289,7 +283,6 @@ shows that the only differences relate to the facts that:
 - although the meshes for the two problems are topologically 
   equivalent, the boundary numbers assigned by
   \c Tetgen are different.
-  \n\n
 - we impose parallel flow at the vessel's in- and outflow
   cross-sections, none of which are not aligned with any of the Cartesian
   coordinate planes. The parallel flow and the imposed pressure
@@ -299,17 +292,13 @@ shows that the only differences relate to the facts that:
   We refer to the corresponding 
   <a href="../../../navier_stokes/vmtk_fluid/html/index.html#parallel_flow">
   single-physics fluids problem</a> for more details on this aspect.
-  \n\n
 - The problem involves two different types of \c FaceElements: 
-  \n\n
   - \c ImposeParallelOutflowElements are used
     to impose parallel flow at the in- and outflow cross-sections.
-    \n\n
   - \c ImposeDisplacementByLagrangeMultiplerElements are used to
     deform the boundary of the pseudo-solid fluid mesh 
     to reflect the changes in the geometry of the 
     vessel wall.
-    \n\n
   .
   Since both \c FaceElements introduce additional unknowns 
   into the problem, we use the methodology described
@@ -465,13 +454,13 @@ exercise.
 <HR>
 
 \section sources Source files for this tutorial
-- The source files for this tutorial are located in the directory:\n\n
+- The source files for this tutorial are located in the directory:
 <CENTER>
 <A HREF="../../../../demo_drivers/interaction/vmtk_fsi/">
 demo_drivers/interaction/vmtk_fsi/
 </A>
-</CENTER>\n
-- The driver code is: \n\n
+</CENTER>
+- The driver code is: 
 <CENTER>
 <A HREF="../../../../demo_drivers/interaction/vmtk_fsi/vmtk_fsi.cc">
 demo_drivers/interaction/vmtk_fsi/vmtk_fsi.cc

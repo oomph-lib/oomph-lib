@@ -79,11 +79,9 @@ very little effort. We demonstrate this by re-visiting the
 <TABLE>
 <TR>
 <TD> 
-\n
 <CENTER>
 <B>Two-dimensional model Poisson problem</B>
 </CENTER> 
-\n
 Solve
 \f[
 \sum_{i=1}^2 \frac{\partial^2u}{\partial x_i^2} = f(x_1,x_2),
@@ -107,7 +105,7 @@ f(x_1,x_2) = \sum_{i=1}^2 \frac{\partial^2 u_0}{\partial x_i^2}
 \ \ \ \ \ \ \ \ \  @E[SourceFct]@
 \f]
 so that \f$u_0(x_1,x_2) \f$ represents the exact solution of the
-problem.\n
+problem.
 </TD>
 </TR>
 </TABLE>  
@@ -351,7 +349,7 @@ What happens when a node is hanging, i.e. if
 <TABLE>
 <TR>
 <TD bgcolor="cornsilk">
-\n<CENTER><B>A convention</B></CENTER> \n
+<CENTER><B>A convention</B></CENTER>
 The functions
  
 \code
@@ -389,7 +387,7 @@ therefore always refer to nodal values with the \c Node::value(...)
 function to ensure that the code works correctly in the presence
 of hanging nodes. 
 
-\n
+
 We provide equivalent functions to access the nodal positions:
 The function
 
@@ -424,13 +422,13 @@ hanging to non-hanging.
 <HR>
 
 \section sources Source files for this tutorial
-- The source files for this tutorial are located in the directory:\n\n
+- The source files for this tutorial are located in the directory:
 <CENTER>
 <A HREF="../../../../demo_drivers/poisson/two_d_poisson_adapt/">
 demo_drivers/poisson/two_d_poisson_adapt/
 </A>
-</CENTER>\n
-- The driver code is: \n\n
+</CENTER>
+- The driver code is: 
 <CENTER>
 <A HREF="../../../../demo_drivers/poisson/two_d_poisson_adapt/two_d_poisson_adapt.cc">
 demo_drivers/poisson/two_d_poisson_adapt/two_d_poisson_adapt.cc

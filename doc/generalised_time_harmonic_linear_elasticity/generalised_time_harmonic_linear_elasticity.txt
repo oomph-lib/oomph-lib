@@ -20,14 +20,12 @@ domain with an interior circular boundary.
 <TD bgcolor="cornsilk">
 <CENTER>
 <B>Acknowledgement:</B>
-\n\n
 The implementation of the equations and the documentation 
 were developed jointly with 
 <a href="http://imperial.academia.edu/RaduCimpeanu">
 Radu Cimpeanu</a> (Imperial College London), with financial
 support from Thales Underwater.
 </CENTER>
-\n
 </TD>
 </TR>
 </TABLE>
@@ -210,7 +208,6 @@ Computer Methods in Applied Mechanics and Engineering <b>192</b>
   \f[
    \gamma_y = 1.
   \f] 
-  \n\n
 - For layers that are aligned with the x axis  (such as the top
   and bottom PML layers in the sketch, with horizontal stripes) we set 
   \f[ 
@@ -226,7 +223,6 @@ Computer Methods in Applied Mechanics and Engineering <b>192</b>
   \f]
   where \f$ Y_{PML} \f$ is the y-coordinate of the outer boundary
   of the PML layer.
-  \n\n
 - In corner regions (diagonally striped) that are bounded by two
   axis-aligned PML layers (with outer coordinates \f$ X_{PML} \f$ and  
   \f$ Y_{PML} \f$) we set
@@ -245,7 +241,6 @@ Computer Methods in Applied Mechanics and Engineering <b>192</b>
   \sigma_{y}(y)  =  \frac{1}{|Y_{PML_{out}}-y|}-\frac{1}{|Y_{PML_{out}}-Y_{PML_{in}}|}. \ \ \ \ \ 
   @E[absorbingfcty_corner]@
   \f]
-  \n\n
 - Finally, in the actual computational domain (outside
   the PML layers) we set
   \f[
@@ -708,13 +703,13 @@ methodologies to
 
 
 \section sources Source files for this tutorial
-- The source files for this tutorial are located in the directory:\n\n
+- The source files for this tutorial are located in the directory:
 <CENTER>
 <A HREF="../../../demo_drivers/generalised_time_harmonic_linear_elasticity/">
 demo_drivers/generalised_time_harmonic_linear_elasticity/
 </A>
-</CENTER>\n
-- The driver code is: \n\n
+</CENTER>
+- The driver code is: 
 <CENTER>
 <A HREF="../../../demo_drivers/generalised_time_harmonic_linear_elasticity/time_harmonic_elasticity_driver.cc">
 demo_drivers/generalised_time_harmonic_linear_elasticity/time_harmonic_elasticity_driver.cc

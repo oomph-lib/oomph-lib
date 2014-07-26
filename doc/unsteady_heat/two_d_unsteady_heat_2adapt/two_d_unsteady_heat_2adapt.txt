@@ -11,12 +11,10 @@ temporal adaptivity.
 <TABLE>
 <TR> 
 <TD>
-\n
 <CENTER>
 <B>The two-dimensional unsteady heat equation with flux boundary
 conditions in a moving domain.</B>
 </CENTER> 
-\n
 Solve
 \f[
 \sum_{i=1}^2\frac{\partial^2 u}{\partial x_i^2} 
@@ -55,7 +53,7 @@ The initial conditions are given by
 u(x_1,x_2,t=0)=k_0(x_1,x_2),
 \ \ \ \ \ \ \ \ \ \ @E[2DHeat_IC1]@
 \f]
-where the functions \f$ f, g_0, \ h_0\f$ and  \f$ k_0\f$ are given. \n
+where the functions \f$ f, g_0, \ h_0\f$ and  \f$ k_0\f$ are given. 
 </TD>
 </TR>
 </TABLE>  
@@ -116,7 +114,6 @@ adaptations sequentially, as follows:
    \c Problem::global_temporal_error_norm() falls below the target
    error specified by the (\c double) argument \c epsilon_t. The
    (\c double) argument \c dt, specifies the suggestion for the timestep.
-   \n\n
 -# Once a temporally accurate solution has been computed on that
    mesh, we perform up to \c max_adapt spatial adaptations to reduce
    the spatial error. We re-compute the solution on the adapted
@@ -309,13 +306,13 @@ to avoid it as a matter of principle -- even in trivial examples.
 
 
 \section sources Source files for this tutorial
-- The source files for this tutorial are located in the directory:\n\n
+- The source files for this tutorial are located in the directory:
 <CENTER>
 <A HREF="../../../../demo_drivers/unsteady_heat/two_d_unsteady_heat_2adapt/">
 demo_drivers/unsteady_heat/two_d_unsteady_heat_2adapt/
 </A>
-</CENTER>\n
-- The driver code is: \n\n
+</CENTER>
+- The driver code is:
 <CENTER>
 <A HREF="../../../../demo_drivers/unsteady_heat/two_d_unsteady_heat_2adapt/two_d_unsteady_heat_2adapt.cc">
 demo_drivers/unsteady_heat/two_d_unsteady_heat_2adapt/two_d_unsteady_heat_2adapt.cc

@@ -37,7 +37,7 @@ EXTRA_DIST=build_mesh_makefile.sh change_headers_to_links.sh fpdiff.py\
            make_index.py check_links_in_example_list.py \
            find_dodgy_booleans.bash \
            extract_free_mem_from_top_trace.bash strip_control_m.bash \
-           parallel_self_test.py
+           parallel_self_test.py tweak_doxygen_latex_style_file.bash
 
 
 

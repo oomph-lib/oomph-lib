@@ -12,11 +12,9 @@ of a 2D problem: the deformation of an elastic strip by a periodic traction.
 <TD bgcolor="cornsilk">
 <CENTER>
 <B>Acknowledgement:</B>
-\n\n
 This tutorial and the associated driver code was developed jointly
 with David Rutter.
 </CENTER>
-\n
 </TD>
 </TR>
 </TABLE>
@@ -225,12 +223,10 @@ elasticity, we consider the 2D problem shown in the sketch below.
 <TABLE>
 <TR> 
 <TD>
-\n
 <CENTER>
 <B>The problem.</B>
 </CENTER> 
 @I w 0.5\textwidth attempt3 "Infinitely long strip loaded by a periodic traction. "
-\n
 Solve
 \f[
 \frac{\partial \tau_{ij}}{\partial x_j} + F_i=0,
@@ -251,7 +247,6 @@ on the top boundary, and symmetry conditions at \f$ x_1 = 0 \f$ and \f$ x_1 = L_
 \f[
 \left. {\bf u}\right|_{x_1=0} = \left.{\bf u}\right|_{x_1=L_x}.
 \f]
-\n
 </TD>
 </TR>
 </TABLE>  
@@ -421,7 +416,6 @@ materials with different material properties.
    i.e. \f$ {\bf u} = {\bf u}^{[\mathrm{exact}]} \f$, using the \c
    Global_Parameters::Finite flag. Then investigate how the solution 
    converges to the exact solution for increasing numbers of elements.
-   \n\n
 -# Try varying the depth of the domain by changing 
    \c Global_Parameters::Ly while maintaining a constant spatial
    resolution (i.e. increasing the number of elements -- this is
@@ -435,13 +429,13 @@ materials with different material properties.
 
 
 \section sources Source files for this tutorial
-- The source files for this tutorial are located in the directory:\n\n
+- The source files for this tutorial are located in the directory:
 <CENTER>
 <A HREF="../../../../demo_drivers/linear_elasticity/periodic_load/">
 demo_drivers/linear_elasticity/periodic_load/
 </A>
-</CENTER>\n
-- The driver code is: \n\n
+</CENTER>
+- The driver code is:
 <CENTER>
 <A HREF="../../../../demo_drivers/linear_elasticity/periodic_load/periodic_load.cc">
 demo_drivers/linear_elasticity/periodic_load/periodic_load.cc
