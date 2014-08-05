@@ -2181,8 +2181,9 @@ void TriangleMesh<ELEMENT>::setup_boundary_coordinates(const unsigned& b,
          //Get the position and time history according to the underlying
          //geometric object, assuming that it has the same timestepper
          //as the nodes....
-         unsigned n_tstorage = nod_pt->ntstorage();
-         for (unsigned t = 0; t < n_tstorage; ++t)
+         unsigned n_tvalues = 1 + nod_pt->position_time_stepper_pt()
+          ->nprev_values();
+         for (unsigned t = 0; t < n_tvalues; ++t)
           {
            //Get the position according to the underlying geometric object
            geom_object_pt->position(t, b_coord, new_x);

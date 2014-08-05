@@ -184,7 +184,7 @@ for resolution in `echo $resolution_list`; do
            #------------------------------------------------------------
            restart_directory="RESLT_unsteady"
            overlap=3
-           restart_file_number=`echo "$first_nsteps - $overlap" | bc`
+           restart_file_number=2 #`echo "$first_nsteps - $overlap" | bc`
            steady_flag=0
            nsteps=1
            pressure_jump=0.0 # we're not doing any further impulsive increase
