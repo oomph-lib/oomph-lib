@@ -2251,6 +2251,18 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
 //      }
     } // else - NS prec is block preconditioner
 
+    const unsigned v_aug_nrow = v_aug_pt.nrow();
+    const unsigned v_aug_ncol = v_aug_pt.ncol();
+    for (unsigned v_row = 0; v_row < v_aug_nrow; v_row++) 
+    {
+      for (unsigned v_col = 0; v_col < v_aug_ncol; v_col++) 
+      {
+        delete v_aug_pt(v_row,v_col);
+        v_aug_pt(v_row,v_col) = 0;
+      }
+    }
+
+
     ///////////////////////////////////////////////////////////////////////////////
 
     // Solver for the W block.
