@@ -5,7 +5,8 @@ include $(top_srcdir)/config/makefile_templates/demo_drivers
 check_PROGRAMS=time_periodic_taylor_couette
 
 # Sources for executable
-time_periodic_taylor_couette_SOURCES = time_periodic_taylor_couette.cc validate.sh
+time_periodic_taylor_couette_SOURCES = ../self_starting_BDF2_timestepper.h \
+                                       time_periodic_taylor_couette.cc validate.sh
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.

@@ -5,7 +5,8 @@ include $(top_srcdir)/config/makefile_templates/demo_drivers
 check_PROGRAMS=counter_rotating_disks counter_rotating_disks_ref
 
 # Sources for executable
-counter_rotating_disks_SOURCES = counter_rotating_disks.cc validate.sh
+counter_rotating_disks_SOURCES = ../self_starting_BDF2_timestepper.h \
+                                 counter_rotating_disks.cc validate.sh
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
@@ -15,7 +16,8 @@ counter_rotating_disks_LDADD = -L@libdir@ -llinearised_axisym_navier_stokes \
                                $(EXTERNAL_LIBS) $(FLIBS)
 
 # Sources for executable
-counter_rotating_disks_ref_SOURCES = counter_rotating_disks_ref.cc validate.sh
+counter_rotating_disks_ref_SOURCES = ../self_starting_BDF2_timestepper.h \
+                                     counter_rotating_disks_ref.cc validate.sh
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
