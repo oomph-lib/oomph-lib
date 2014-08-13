@@ -152,7 +152,8 @@ unsigned long SpineMesh::assign_global_spine_eqn_numbers
 //====================================================================
 /// Assign time stepper to spines data
 //====================================================================
-void SpineMesh::set_spine_time_stepper(TimeStepper* const &time_stepper_pt)
+void SpineMesh::set_spine_time_stepper(TimeStepper* const &time_stepper_pt,
+ const bool &preserve_existing_data)
 {
  // Loop over spines and set the time stepper for the spine heights
  // (they are the only Data that are additional to the standard nodal and
@@ -160,7 +161,8 @@ void SpineMesh::set_spine_time_stepper(TimeStepper* const &time_stepper_pt)
  const unsigned long n_spine = this->nspine();
  for(unsigned long i=0;i<n_spine;i++)
   {
-   this->Spine_pt[i]->spine_height_pt()->set_time_stepper(time_stepper_pt);
+   this->Spine_pt[i]->spine_height_pt()->set_time_stepper(time_stepper_pt,
+    preserve_existing_data);
   }
 }
 

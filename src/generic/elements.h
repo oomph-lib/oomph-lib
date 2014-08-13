@@ -577,6 +577,19 @@ class GeneralisedElement
   DenseMatrix<double> const &C,
   DenseMatrix<double> &product);
 
+ /// \short Fill in the contribution to the inner products between given
+ /// pairs of history values
+ virtual void fill_in_contribution_to_inner_products(
+  Vector<std::pair<unsigned,unsigned> > const &history_index,
+  Vector<double> &inner_product);
+
+ /// \short Fill in the contributions to the vectors that when taken
+ /// as dot product with other history values give the inner product
+ /// over the element
+ virtual void fill_in_contribution_to_inner_product_vectors(
+  Vector<unsigned> const &history_index,
+  Vector<Vector<double> >  &inner_product_vector);
+
 public:
 
  /// \short Constructor: Initialise all pointers and all values to zero
@@ -874,8 +887,10 @@ public:
  /// \short Set the timestepper associated with the i-th internal data
  /// object
  void set_internal_data_time_stepper(const unsigned &i,
-                                     TimeStepper* const &time_stepper_pt)
- {this->internal_data_pt(i)->set_time_stepper(time_stepper_pt);}
+                                     TimeStepper* const &time_stepper_pt,
+                                     const bool &preserve_existing_data)
+ {this->internal_data_pt(i)->set_time_stepper(time_stepper_pt,
+   preserve_existing_data);}
 
  /// \short Assign the global equation numbers to the internal Data. 
  /// The arguments are the current highest global equation number 
@@ -1045,6 +1060,29 @@ public:
    this->fill_in_contribution_to_hessian_vector_products(Y,C,product);
   }
  
+ /// \short Return the vector of inner product of the given pairs of 
+ /// history values
+ virtual void get_inner_products(Vector<std::pair<unsigned,unsigned> > 
+                                 const &history_index, 
+                                 Vector<double> &inner_product)
+ {
+  inner_product.initialise(0.0);
+  this->fill_in_contribution_to_inner_products(history_index,
+                                               inner_product);
+ }
+
+ /// \short  Compute the vectors that when taken as a dot product with
+ /// other history values give the inner product over the element.
+ virtual void get_inner_product_vectors(Vector<unsigned> const &history_index,
+  Vector<Vector<double> >  &inner_product_vector)
+ {
+  const unsigned n_inner_product = inner_product_vector.size();
+  for(unsigned i=0;i<n_inner_product;++i)
+   {inner_product_vector[i].initialise(0.0);}
+  this->fill_in_contribution_to_inner_product_vectors(history_index,
+                                                      inner_product_vector);
+ }
+
 
  /// \short Self-test: Have all internal values been classified as 
  /// pinned/unpinned? Return 0 if OK. 

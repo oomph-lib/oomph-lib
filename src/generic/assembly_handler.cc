@@ -60,6 +60,14 @@ namespace oomph
                                      Vector<double*> &dof_pt)
  {return elem_pt->dof_pt_vector(dof_pt);}
 
+ /// \short Return the t-th level of storage associated with the i-th
+ /// (local) dof stored in the problem
+ double &AssemblyHandler::local_problem_dof(Problem* const &problem_pt, 
+                                            const unsigned &t, 
+                                            const unsigned &i)
+ {return *(problem_pt->dof_pt(i)+t);}
+ 
+
 
  //==================================================================
  ///Get the global equation number of the local unknown. Direct call
@@ -181,6 +189,34 @@ namespace oomph
                       OOMPH_CURRENT_FUNCTION,
                       OOMPH_EXCEPTION_LOCATION);
  }
+
+ ///==========================================================================
+ /// Compute the inner products of the given vector of pairs of 
+ /// history values over the element. The values of the index in the pair
+ /// may be the same.
+ //===========================================================================
+ void AssemblyHandler::get_inner_products(GeneralisedElement* const &elem_pt,
+                                          Vector<std::pair<unsigned,unsigned> >
+                                          const &history_index,
+                                          Vector<double> &inner_product)
+ {
+  elem_pt->get_inner_products(history_index,inner_product);
+ }
+
+ //==========================================================================
+ /// Compute the vectors that when taken as a dot product with
+ /// other history values give the inner product over the element.
+ /// In other words if we call get_inner_product_vectors({0,1},output)
+ /// output[0] will be a vector such that dofs.output[0] gives the inner
+ /// product of current dofs with themselves.
+ //==========================================================================
+ void AssemblyHandler::get_inner_product_vectors(
+  GeneralisedElement* const &elem_pt,  Vector<unsigned> const &history_index,
+  Vector<Vector<double> >  &inner_product_vector)
+ {
+  elem_pt->get_inner_product_vectors(history_index,inner_product_vector);
+ }
+
 
 
  ///////////////////////////////////////////////////////////////////////

@@ -329,10 +329,16 @@ Data::Data(TimeStepper* const &time_stepper_pt_,
 /// The current (zero) values will be unaffected, but all other entries
 /// will be set to zero.
 //================================================================
-void Data::set_time_stepper(TimeStepper* const &time_stepper_pt)
+ void Data::set_time_stepper(TimeStepper* const &time_stepper_pt,
+                             const bool &preserve_existing_data)
 {
  //If the timestepper is unchanged do nothing
  if(Time_stepper_pt==time_stepper_pt) {return;}
+
+ //Find the amount of data to be preserved
+ //Default is just the current values 
+ unsigned n_preserved_tstorage = 1;
+ if(preserve_existing_data) {n_preserved_tstorage = this->ntstorage();}
  
  //Set the new time stepper
  Time_stepper_pt = time_stepper_pt;
@@ -352,8 +358,16 @@ void Data::set_time_stepper(TimeStepper* const &time_stepper_pt)
    //Allocate all the data values in one big array for data locality.
    double *values = new double[n_value*n_tstorage];
 
-   //Copy the old "current" values into the new storage scheme
-   for(unsigned i=0;i<n_value;i++) {values[i*n_tstorage] = Value[i][0];}
+   //Copy the old "preserved" values into the new storage scheme
+   //Make sure that we limit the values to the level of storage
+   if(n_tstorage < n_preserved_tstorage) {n_preserved_tstorage = n_tstorage;}
+   for(unsigned i=0;i<n_value;i++) 
+    {
+     for(unsigned t=0;t<n_preserved_tstorage;t++)
+      {
+       values[i*n_tstorage + t] = Value[i][t];
+      }
+    }
 
    //Now delete the old value storage
    delete[] Value[0];
@@ -363,7 +377,7 @@ void Data::set_time_stepper(TimeStepper* const &time_stepper_pt)
     {
      Value[i] = &values[i*n_tstorage];
      //Initialise all new time storage values to zero
-     for(unsigned t=1;t<n_tstorage;t++) {Value[i][t] = 0.0;}
+     for(unsigned t=n_preserved_tstorage;t<n_tstorage;t++) {Value[i][t] = 0.0;}
     }
 
    //Update any pointers in any copies of this data
@@ -1534,11 +1548,17 @@ Node::~Node()
 /// will be set to zero.
 //================================================================
 void Node::set_position_time_stepper(TimeStepper* 
-                                     const &position_time_stepper_pt)
+                                     const &position_time_stepper_pt,
+                                     const bool &preserve_existing_data)
 {
  //If the timestepper is unchanged do nothing
  if(Position_time_stepper_pt==position_time_stepper_pt) {return;}
  
+ //Find the amount of data to be preserved
+ unsigned n_preserved_tstorage =1;
+ if(preserve_existing_data) 
+  {n_preserved_tstorage = Position_time_stepper_pt->ntstorage();}
+
  //Set the new time stepper
  Position_time_stepper_pt = position_time_stepper_pt;
 
@@ -1551,10 +1571,17 @@ void Node::set_position_time_stepper(TimeStepper*
  //Allocate all position data in one big array
  double *x_positions = new double[n_storage*n_tstorage];
  
- //Copy the old "current" positions into the new storage scheme
+ //If we have reduced the storage, reduce the size of preserved storage
+ //to that of the new storage
+ if(n_tstorage < n_preserved_tstorage) {n_preserved_tstorage = n_tstorage;}
+
+ //Copy the old "preserved" positions into the new storage scheme
  for(unsigned j=0;j<n_storage;++j)
   {
-   x_positions[j*n_tstorage] = this->X_position[j][0];
+   for(unsigned t=0;t<n_preserved_tstorage;t++)
+    {
+     x_positions[j*n_tstorage + t] = this->X_position[j][t];
+    }
   }
 
  //Now delete the old position storage, which was allocated in one block
@@ -1565,8 +1592,9 @@ void Node::set_position_time_stepper(TimeStepper*
   {
     //Set the pointer from the bug array
     X_position[j] = &x_positions[j*n_tstorage];
-    //Initialise all non-current values to be zero
-    for(unsigned t=1;t<n_tstorage;t++) {X_position[j][t] = 0.0;}
+    //Initialise all new time storgae values to be zero
+    for(unsigned t=n_preserved_tstorage;t<n_tstorage;t++) 
+     {X_position[j][t] = 0.0;}
    }
 }
 
@@ -3272,7 +3300,8 @@ void SolidNode::set_external_variable_position_pt(Data* const &data_pt)
 /// will be set to zero.
 //================================================================
 void SolidNode::set_position_time_stepper(TimeStepper* 
-                                          const &position_time_stepper_pt)
+                                          const &position_time_stepper_pt,
+                                          const bool &preserve_existing_data)
 {
  //If the timestepper is unchanged do nothing
  if(Position_time_stepper_pt==position_time_stepper_pt) {return;}
@@ -3281,7 +3310,8 @@ void SolidNode::set_position_time_stepper(TimeStepper*
  Position_time_stepper_pt = position_time_stepper_pt;
 
  //Now simply set the time stepper of the variable position data
- this->Variable_position_pt->set_time_stepper(position_time_stepper_pt);
+ this->Variable_position_pt->set_time_stepper(position_time_stepper_pt,
+                                              preserve_existing_data);
  //Need to reset the X_position to point to the variable positions data 
  //values which have been reassigned
  X_position = this->Variable_position_pt->Value;

@@ -2957,8 +2957,8 @@ const Vector<double>& elem_error)
       if(dynamic_cast<GeneralisedTimeStepper*>(this->Time_stepper_pt))
        {
         new_mesh_pt->set_nodal_and_elemental_time_stepper(
-         this->Time_stepper_pt);
-        new_mesh_pt->set_mesh_level_time_stepper(this->Time_stepper_pt);
+         this->Time_stepper_pt,false);
+        new_mesh_pt->set_mesh_level_time_stepper(this->Time_stepper_pt,false);
        }
 
       //Output the mesh after the snapping has taken place

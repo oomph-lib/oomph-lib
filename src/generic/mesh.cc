@@ -1850,7 +1850,8 @@ void Mesh::calculate_predictions()
 /// Virtual function that should be overloaded if the mesh
 /// has any mesh level storage of the timestepper
 //==================================================================
-void Mesh::set_mesh_level_time_stepper(TimeStepper* const &time_stepper_pt)
+void Mesh::set_mesh_level_time_stepper(TimeStepper* const &time_stepper_pt,
+                                       const bool &preserve_existing_data)
 {
 #ifdef PARANOID
  if(!Suppress_warning_about_empty_mesh_level_time_stepper_function)
@@ -1961,15 +1962,17 @@ bool Mesh::does_pointer_correspond_to_mesh_data(double* const &parameter_pt)
 /// Set the time stepper associated with all the nodal data
 /// in the problem
 //==============================================================
-void Mesh::set_nodal_time_stepper(TimeStepper* const &time_stepper_pt)
+void Mesh::set_nodal_time_stepper(TimeStepper* const &time_stepper_pt,
+                                  const bool &preserve_existing_data)
 {
  //Loop over the nodes
  const unsigned long n_node=this->nnode();
  for(unsigned long n=0;n<n_node;n++)
   {
    //Set the timestepper associated with each node
-   this->Node_pt[n]->set_time_stepper(time_stepper_pt);
-   this->Node_pt[n]->set_position_time_stepper(time_stepper_pt);
+   this->Node_pt[n]->set_time_stepper(time_stepper_pt,preserve_existing_data);
+   this->Node_pt[n]->set_position_time_stepper(time_stepper_pt,
+                                               preserve_existing_data);
   }
 }
 
@@ -1978,7 +1981,7 @@ void Mesh::set_nodal_time_stepper(TimeStepper* const &time_stepper_pt)
 /// in the elements in the mesh
 //===============================================================
 void Mesh::set_elemental_internal_time_stepper(
- TimeStepper* const &time_stepper_pt)
+ TimeStepper* const &time_stepper_pt, const bool &preserve_existing_data)
 {
  // Loop over the elements 
  const unsigned long n_element=this->nelement();
@@ -1991,7 +1994,7 @@ void Mesh::set_elemental_internal_time_stepper(
    for(unsigned j=0;j<n_internal;j++)
     {
      this->element_pt(e)->internal_data_pt(j)
-      ->set_time_stepper(time_stepper_pt);
+      ->set_time_stepper(time_stepper_pt,preserve_existing_data);
     }
   }
 }

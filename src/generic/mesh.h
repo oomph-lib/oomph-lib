@@ -866,18 +866,21 @@ public:
 
  /// \short Set the timestepper associated with all nodal and elemental 
  /// data stored in the mesh. 
- void set_nodal_and_elemental_time_stepper(TimeStepper* const &time_stepper_pt)
+ void set_nodal_and_elemental_time_stepper(TimeStepper* const &time_stepper_pt,
+  const bool &preserve_existing_data)
  {
-  this->set_nodal_time_stepper(time_stepper_pt);
-  this->set_elemental_internal_time_stepper(time_stepper_pt);
+  this->set_nodal_time_stepper(time_stepper_pt,preserve_existing_data);
+  this->set_elemental_internal_time_stepper(time_stepper_pt,
+                                            preserve_existing_data);
  }
 
  /// \short Function that can be used to set any additional timestepper data
  /// stored at the Mesh (as opposed to nodal and elemental) levels. This
  /// is virtual so that it can be overloaded in the appropriate Meshes. 
  /// Examples include the SpineMeshes and adaptive triangle and tet meshes
- virtual void set_mesh_level_time_stepper(TimeStepper* const &time_stepper_pt);
-
+ virtual void set_mesh_level_time_stepper(TimeStepper* const &time_stepper_pt,
+                                          const bool &preserve_existing_data);
+ 
  /// \short Set consistent values for pinned data in continuation
  void set_consistent_pinned_values_for_continuation(
   ContinuationStorageScheme* const &continuation_stepper_pt);
@@ -886,12 +889,14 @@ public:
  bool does_pointer_correspond_to_mesh_data(double* const &parameter_pt);
 
  /// \short Set the timestepper associated with the nodal data in the mesh
- void set_nodal_time_stepper(TimeStepper* const &time_stepper_pt);
+ void set_nodal_time_stepper(TimeStepper* const &time_stepper_pt,
+                             const bool &preserve_existing_data);
 
  /// \short Set the timestepper associated with the internal data stored
  /// within elements in the meah
- void set_elemental_internal_time_stepper(TimeStepper* const &time_stepper_pt);
-
+ void set_elemental_internal_time_stepper(TimeStepper* const &time_stepper_pt,
+                                          const bool &preserve_existing_data);
+ 
  /// \short Compute norm of solution by summing contributions of
  /// compute_norm(...) for all constituent elements in the mesh.
  /// What that norm means depends on what's defined in the element's

@@ -4,17 +4,9 @@ include $(top_srcdir)/config/makefile_templates/demo_drivers
 # Name of executable
 check_PROGRAMS=two_layer_interface_nonaxisym_perturbations
 
-# Sources for executable
 two_layer_interface_nonaxisym_perturbations_SOURCES = \
-linearised_axisym_navier_stokes_elements.h \
-linearised_axisym_navier_stokes_elements.cc \
-linearised_axisymmetric_fluid_interface_elements.h \
-linearised_axisymmetric_fluid_interface_elements.cc \
-multi_domain_linearised_axisym_navier_stokes_elements.h \
-perturbed_spines.h perturbed_spines.cc \
-two_layer_perturbed_spine_mesh.template.h \
-two_layer_perturbed_spine_mesh.template.cc \
-two_layer_interface_nonaxisym_perturbations.cc validate.sh
+ two_layer_interface_nonaxisym_perturbations.cc validate.sh
+
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
@@ -28,4 +20,13 @@ two_layer_interface_nonaxisym_perturbations_LDADD = -L@libdir@ \
 # include directory.
 INCLUDES = -I@includedir@  
 
+#Extra files required for distribution
+EXTRA_DIST += linearised_axisym_navier_stokes_elements.h \
+ linearised_axisym_navier_stokes_elements.cc \
+ linearised_axisymmetric_fluid_interface_elements.h \
+ linearised_axisymmetric_fluid_interface_elements.cc \
+ multi_domain_linearised_axisym_navier_stokes_elements.h \
+ perturbed_spines.h perturbed_spines.cc \
+ two_layer_perturbed_spine_mesh.template.h \
+ two_layer_perturbed_spine_mesh.template.cc 
 

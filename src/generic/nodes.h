@@ -226,7 +226,8 @@ class Data
 
  /// \short Set a new timestepper by resizing the appropriate storage.
  /// If already assigned the equation numbering will not be altered
- void set_time_stepper(TimeStepper* const &time_stepper_pt);
+ void set_time_stepper(TimeStepper* const &time_stepper_pt,
+                       const bool &preserve_existing_data);
 
  /// Return the pointer to the timestepper.
  TimeStepper*& time_stepper_pt() {return Time_stepper_pt;}
@@ -937,7 +938,8 @@ public:
 
  /// \short Set a new position timestepper be resizing the appropriate storage
  virtual void set_position_time_stepper(TimeStepper* 
-                                        const &position_time_stepper_pt);
+                                        const &position_time_stepper_pt,
+                                        const bool &preserve_existing_data);
  
  /// \short Check whether the pointer parameter_pt addresses position data
  /// values. It never does for a standard node, because the positions are
@@ -1600,7 +1602,8 @@ public:
  /// Overloaded from the basic implementation to take into account the
  /// fact that position is now Data
  void set_position_time_stepper(TimeStepper* 
-                                const &position_time_stepper_pt);
+                                const &position_time_stepper_pt,
+                                const bool &preserve_existing_data);
 
  /// \short Overload the check whether the pointer parameter_pt addresses
  /// position data values

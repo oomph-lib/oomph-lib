@@ -75,11 +75,16 @@ class AssemblyHandler
  virtual void dof_vector(GeneralisedElement* const &elem_pt,
                          const unsigned &t, Vector<double> &dof);
 
-
  ///\short Return vector of pointers to dofs in the element elem_pt
  virtual void dof_pt_vector(GeneralisedElement* const &elem_pt,
                             Vector<double*> &dof_pt);
- 
+
+ /// \short Return the t-th level of storage associated with the i-th
+ /// (local) dof stored in the problem
+ virtual double &local_problem_dof(Problem* const &problem_pt, 
+                                   const unsigned &t, 
+                                   const unsigned &i);
+
  /// \short Return the global equation number of the local unknown ieqn_local
  ///in elem_pt.
  virtual unsigned long eqn_number(GeneralisedElement* const &elem_pt,
@@ -106,7 +111,6 @@ class AssemblyHandler
  virtual void get_dresiduals_dparameter(GeneralisedElement* const &elem_pt,
                                         double* const &parameter_pt,
                                         Vector<double> &dres_dparam);
-
  
  /// \short Calculate the derivative of the residuals and jacobian 
  /// with respect to a parameter
@@ -137,6 +141,20 @@ class AssemblyHandler
  /// \short Return the eigenfunction(s) associated with the bifurcation that
  /// has been detected in bifurcation tracking problems
  virtual void get_eigenfunction(Vector<DoubleVector> &eigenfunction);
+
+ /// \short Compute the inner products of the given vector of pairs of 
+ /// history values over the element.
+ virtual void get_inner_products(GeneralisedElement* const &elem_pt,
+                                Vector<std::pair<unsigned,unsigned> >
+                                const &history_index,
+                                Vector<double> &inner_product);
+
+ /// \short Compute the vectors that when taken as a dot product with
+ /// other history values give the inner product over the element
+ virtual void get_inner_product_vectors(GeneralisedElement* const &elem_pt,
+                                        Vector<unsigned> const &history_index,
+                                        Vector<Vector<double> > 
+                                        &inner_product_vector);
 
 #ifdef OOMPH_HAS_MPI
 

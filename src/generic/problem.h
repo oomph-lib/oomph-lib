@@ -547,7 +547,7 @@ namespace oomph
  Vector<double*> Dof_pt;
 
  ///\short Counter that records how many elements contribute to each dof.
- /// Used to determine the automatic (discrete) arc-length automatically.
+ /// Used to determine the (discrete) arc-length automatically.
  /// It really should be an integer, but is a double so that the
  /// distribution information can be used for distributed problems
  DoubleVectorWithHaloEntries Element_count_per_dof;
@@ -1441,7 +1441,8 @@ namespace oomph
  /// \short Set all problem data to have the same timestepper (timestepper_pt)
  /// Return the new number of dofs in the problem
  unsigned long 
-  set_timestepper_for_all_data(TimeStepper* const &time_stepper_pt);
+  set_timestepper_for_all_data(TimeStepper* const &time_stepper_pt,
+                               const bool &preserve_existing_data=false);
 
  /// \short Shift all values along to prepare for next timestep
  void shift_time_values();
@@ -1635,6 +1636,12 @@ namespace oomph
   {
    return *(Dof_pt[i]);
   }
+
+ /// \short Pointer to i-th dof in the problem
+ double* &dof_pt(const unsigned &i) {return Dof_pt[i];}
+
+/// \short Pointer to i-th dof in the problem (const version)
+ double* dof_pt(const unsigned &i) const {return Dof_pt[i];} 
 
  ///\short Return the residual vector multiplied by the inverse mass matrix
  ///Virtual so that it can be overloaded for mpi problems

@@ -581,7 +581,8 @@ public:
 
  /// \short Overload set_mesh_level_time_stepper so that the stored
  /// time stepper now corresponds to the new timestepper
- void set_mesh_level_time_stepper(TimeStepper* const &time_stepper_pt)
+ void set_mesh_level_time_stepper(TimeStepper* const &time_stepper_pt,
+                                  const bool &preserve_existing_data)
  {this->Time_stepper_pt = time_stepper_pt;}
 
 

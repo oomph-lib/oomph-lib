@@ -1180,7 +1180,7 @@ std::deque<double*> GeneralisedElement::Dof_pt_deque;
   std::string error_message =
    "Empty fill_in_contribution_to_mass_matrix() has been called.\n";
   error_message +=
-   "This function is called from the default implementations of\n";
+   "This function is called from the default implementation of\n";
   error_message += "get_mass_matrix();\n";
   error_message += 
     "and must calculate the residuals vector and mass matrix ";
@@ -1215,7 +1215,7 @@ std::deque<double*> GeneralisedElement::Dof_pt_deque;
    "Empty fill_in_contribution_to_jacobian_and_mass_matrix() has been ";
   error_message += "called.\n";
   error_message +=
-   "This function is called from the default implementations of\n";
+   "This function is called from the default implementation of\n";
   error_message += "get_jacobian_and_mass_matrix();\n";
   error_message += 
     "and must calculate the residuals vector and mass and jacobian matrices ";
@@ -1250,7 +1250,7 @@ std::deque<double*> GeneralisedElement::Dof_pt_deque;
    "Empty fill_in_contribution_to_dresiduals_dparameter() has been ";
   error_message += "called.\n";
   error_message +=
-   "This function is called from the default implementations of\n";
+   "This function is called from the default implementation of\n";
   error_message += "get_dresiduals_dparameter();\n";
   error_message += 
    "and must calculate the derivatives of the residuals vector with respect\n";
@@ -1298,7 +1298,7 @@ std::deque<double*> GeneralisedElement::Dof_pt_deque;
    "Empty fill_in_contribution_to_djacobian_dparameter() has been ";
   error_message += "called.\n";
   error_message +=
-   "This function is called from the default implementations of\n";
+   "This function is called from the default implementation of\n";
   error_message += "get_djacobian_dparameter();\n";
   error_message += 
    "and must calculate the derivatives of residuals vector and jacobian ";
@@ -1352,7 +1352,7 @@ std::deque<double*> GeneralisedElement::Dof_pt_deque;
    "Empty fill_in_contribution_to_djacobian_and_dmass_matrix_dparameter() has";
   error_message += " been called.\n";
   error_message +=
-   "This function is called from the default implementations of\n";
+   "This function is called from the default implementation of\n";
   error_message += "get_djacobian_and_dmass_matrix_dparameter();\n";
   error_message += 
     "and must calculate the residuals vector and mass and jacobian matrices ";
@@ -1404,7 +1404,7 @@ std::deque<double*> GeneralisedElement::Dof_pt_deque;
    "Empty fill_in_contribution_to_hessian_vector_products() has been ";
   error_message += "called.\n";
   error_message +=
-   "This function is called from the default implementations of\n";
+   "This function is called from the default implementation of\n";
   error_message += "get_hessian_vector_products(); ";
   error_message += " and must calculate the products \n";
   error_message += "of the hessian matrix with the (global) ";
@@ -1432,6 +1432,74 @@ std::deque<double*> GeneralisedElement::Dof_pt_deque;
     "GeneralisedElement::fill_in_contribution_to_hessian_vector_product()",
     OOMPH_EXCEPTION_LOCATION);
  }
+
+ //========================================================================
+ /// Fill in the contribution to the inner products between given
+ /// pairs of history values
+ //==========================================================================
+ void GeneralisedElement::fill_in_contribution_to_inner_products(
+  Vector<std::pair<unsigned,unsigned> > const &history_index,
+  Vector<double> &inner_product)
+ {
+  std::string error_message =
+   "Empty fill_in_contribution_to_inner_products() has been called.\n";
+  error_message +=
+   "This function is called from the default implementation of\n";
+  error_message += "get_inner_products();\n ";
+  error_message += "It must calculate the inner products over the element\n";
+  error_message += "of given pairs of history values\n";
+  error_message += "without initialision of the output vector.\n\n";
+
+  error_message += 
+   "If you do not wish to use these defaults, you must overload\n";
+  error_message += 
+   "get_inner_products(), which must initialise the entries\n";
+  error_message +=
+   "of the returned vector to zero.\n\n";
+  
+  throw 
+   OomphLibError(
+    error_message,
+    OOMPH_CURRENT_FUNCTION,
+    OOMPH_EXCEPTION_LOCATION);
+ }
+
+ //========================================================================
+ /// \short Fill in the contributions to the vectors that when taken
+ /// as dot product with other history values give the inner product
+ /// over the element
+ //==========================================================================
+ void GeneralisedElement::fill_in_contribution_to_inner_product_vectors(
+  Vector<unsigned>  const &history_index,
+  Vector<Vector<double> > &inner_product_vector)
+ {
+  std::string error_message =
+   "Empty fill_in_contribution_to_inner_product_vectors() has been called.\n";
+  error_message +=
+   "This function is called from the default implementation of\n";
+  error_message += "get_inner_product_vectors(); ";
+  error_message += " and must calculate the vectors \n";
+  error_message += "corresponding to the input history values\n ";
+  error_message += "that when multiplied by other vectors of history values\n";
+  error_message += "return the appropriate dot products.\n\n";
+  error_message += "The output vectors must not be initialised.\n\n";
+
+  error_message += 
+   "If you do not wish to use these defaults, you must overload\n";
+  error_message += 
+   "get_inner_products(), which must initialise the entries\n";
+  error_message +=
+   "of the returned vector to zero.\n\n";
+    
+  throw 
+   OomphLibError(
+    error_message,
+    OOMPH_CURRENT_FUNCTION,
+    OOMPH_EXCEPTION_LOCATION);
+ }
+
+
+
 
 
 //==========================================================================

@@ -791,7 +791,7 @@ private:
    for(unsigned n=0;n<n_node;n++)
     {
      Node* const nod_pt = problem_pt->mesh_pt()->node_pt(n);
-     nod_pt->set_time_stepper(Time_stepper_pt);
+     nod_pt->set_time_stepper(Time_stepper_pt,false);
      //If the unknowns are pinned then copy the value to all values
      unsigned n_value = nod_pt->nvalue();
      for(unsigned i=0;i<n_value;i++)
@@ -819,7 +819,7 @@ private:
        Data* const data_pt = problem_pt->mesh_pt()->element_pt(e)
         ->internal_data_pt(i);
        //and set the timestepper
-       data_pt->set_time_stepper(Time_stepper_pt);
+       data_pt->set_time_stepper(Time_stepper_pt,false);
        
        //If the unknowns are pinned then copy the value to all values
        unsigned n_value = data_pt->nvalue();
@@ -1080,7 +1080,8 @@ private:
    unsigned n_time_node = Time_mesh_pt->nnode();
    for(unsigned t=0;t<n_time_node;t++) //Do  include the periodic one
     {
-     Time_mesh_pt->node_pt(t)->set_time_stepper(fake_space_time_stepper_pt);
+     Time_mesh_pt->node_pt(t)->set_time_stepper(fake_space_time_stepper_pt,
+      false);
     }
 
    //Now I "just" copy the values into the new storage
@@ -1286,7 +1287,7 @@ private:
    for(unsigned n=0;n<n_node;n++)
     {
      Node* const nod_pt = Problem_pt->mesh_pt()->node_pt(n);
-     nod_pt->set_time_stepper(periodic_time_stepper_pt);
+     nod_pt->set_time_stepper(periodic_time_stepper_pt,false);
     }
 
    for(unsigned e=0;e<n_space_element;e++)
@@ -1299,7 +1300,7 @@ private:
        Data* const data_pt = Problem_pt->mesh_pt()->element_pt(e)
         ->internal_data_pt(i);
        //and set the timestepper
-       data_pt->set_time_stepper(periodic_time_stepper_pt);
+       data_pt->set_time_stepper(periodic_time_stepper_pt,false);
       }
     }
 
@@ -1417,7 +1418,8 @@ private:
    n_time_node = Time_mesh_pt->nnode();
    for(unsigned t=0;t<n_time_node;t++)
     {
-     Time_mesh_pt->node_pt(t)->set_time_stepper(&Mesh::Default_TimeStepper);
+     Time_mesh_pt->node_pt(t)->set_time_stepper(
+      &Mesh::Default_TimeStepper,false);
     }
    //Delete the fake timestepper
    delete fake_space_time_stepper_pt;

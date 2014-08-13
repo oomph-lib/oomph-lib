@@ -52,18 +52,28 @@ namespace oomph
 //====================================================================
  class GeneralisedTimeStepper : public TimeStepper
  {
+
   protected:
+
+  //Set the number of entries that correspond to dof storage
+  unsigned Ndof_storage_entries;
+
+  //Vector that represents the storage entries
+  //Vector<unsigned> Dof_storage_index;
   
   ///Constructor that can only be called by derived objects.
   ///Pass the information directly through to the TimeStepper object
   GeneralisedTimeStepper(const unsigned &n_tstorage, 
-                         const unsigned &max_deriv) : 
- TimeStepper(n_tstorage,max_deriv) {}
+                         const unsigned &max_deriv,
+                         const unsigned &ndof_storage_entries=1) : 
+  TimeStepper(n_tstorage,max_deriv), Ndof_storage_entries(ndof_storage_entries) 
+   {
+    //Dof_storage_index.resize(1,0.0);
+   }
 
- /// Broken empty constructor
+  /// Broken empty constructor
    GeneralisedTimeStepper() : TimeStepper() {} 
- 
- 
+  
  /// Broken copy constructor
  GeneralisedTimeStepper(const GeneralisedTimeStepper&) 
   { 
@@ -75,6 +85,14 @@ namespace oomph
   {
    BrokenCopy::broken_assign("GeneralisedTimeStepper");
   }
+
+   public:
+ 
+ /// Return the number of entries that correspond to dof storage
+ unsigned ndof_storage_entries() const {return Ndof_storage_entries;}
+
+ /// Return the i-th storage index
+ //unsigned dof_storage_index(const unsigned &i) {return Dof_storage_index[i];}
 
 };
 
@@ -89,12 +107,19 @@ namespace oomph
 //====================================================================
 class ContinuationStorageScheme : public GeneralisedTimeStepper
 {
+ //Store the offset for the derivatives
+ unsigned Dof_derivative_offset;
+
+ //Store the offset for the current values of the dofs
+ unsigned Dof_current_offset;
+
   public:
 
  ///Constructor for the case when we allow adaptive continuation
  ///It can evaulate up to second derivatives, but doesn't do anything
  ///the time-derivatives evaluate to zero.
- ContinuationStorageScheme() : GeneralisedTimeStepper(3,2)
+  ContinuationStorageScheme() : GeneralisedTimeStepper(3,2),
+  Dof_derivative_offset(1), Dof_current_offset(2)
   {
    Type="ContinuationStorageScheme";
    Is_steady=true;
@@ -106,7 +131,31 @@ class ContinuationStorageScheme : public GeneralisedTimeStepper
   { 
    BrokenCopy::broken_copy("ContinuationStorageScheme");
   } 
+
+ ///Modify the scheme based on the underlying timestepper
+ void modify_storage(GeneralisedTimeStepper* const &time_stepper_pt)
+ {
+  //Get the number of "dofs" in the existing timestepper
+  this->Ndof_storage_entries =  time_stepper_pt->ndof_storage_entries();
+  //Get the current amount of storage
+  unsigned n_tstorage = time_stepper_pt->ntstorage();
+
+  //Find the offsets which is always relative to the number of dofs stored
+  //in the existing timestepper
+  Dof_derivative_offset = n_tstorage;
+  Dof_current_offset = n_tstorage + this->Ndof_storage_entries;
  
+  //Set the new amount of storage twice the dofs to store parameter derivatives
+  //and initial values plus the original storage
+  unsigned n_new_tstorage = 2*this->Ndof_storage_entries + n_tstorage;
+
+  //Resize the weights accordingly
+  Weight.resize(3,n_new_tstorage,0.0);
+  //Set the weight for the zero-th derivative which is always 1.0
+  Weight(0,0) = 1.0;
+ }
+
+
  /// Broken assignment operator
  void operator=(const ContinuationStorageScheme&) 
   {
@@ -196,10 +245,14 @@ class ContinuationStorageScheme : public GeneralisedTimeStepper
     //Only bother to do anything if the value is pinned and not a copy
     if(data_pt->is_pinned(i) && (data_pt->is_a_copy(i) == false))
      {
-      //Set the stored derivatve to be zero
-      data_pt->set_value(1,i,0.0);
-      //Set the stored current value to be the same as the present value
-      data_pt->set_value(2,i,data_pt->value(0));
+      //ASSUMPTION storage is always at the "front"
+      for(unsigned t=0;t<this->Ndof_storage_entries;t++)
+       {
+        //Set the stored derivatve to be zero
+        data_pt->set_value(Dof_derivative_offset+t,i,0.0);
+        //Set the stored current value to be the same as the present value
+        data_pt->set_value(Dof_current_offset+t,i,data_pt->value(t,i));
+       }
      }
    }
  }
@@ -248,16 +301,26 @@ class ContinuationStorageScheme : public GeneralisedTimeStepper
           //If it's pinned then set the "history" values
           if(solid_node_pt->position_is_pinned(k,i))
            {
-            //Set the derivative to 0
-            solid_node_pt->x_gen(1,k,i) = 0.0;
-            //Set the stored current value to the present value
-            solid_node_pt->x_gen(2,k,i) = solid_node_pt->x_gen(0,k,i);
+            for(unsigned t=0;t<Ndof_storage_entries;t++)
+             {
+              //Set the derivative to 0
+              solid_node_pt->x_gen(Dof_derivative_offset+t,k,i) = 0.0;
+              //Set the stored current value to the present value
+              solid_node_pt->x_gen(Dof_current_offset+t,k,i) = 
+               solid_node_pt->x_gen(t,k,i);
+             }
            }
          }
        }
      }
    }
  }
+
+ //Return the stored derivative offset
+ unsigned dof_derivative_offset() {return Dof_derivative_offset;}
+ 
+ //Return the offset for the current values
+ unsigned dof_current_offset() {return Dof_current_offset;}
 
 };
 

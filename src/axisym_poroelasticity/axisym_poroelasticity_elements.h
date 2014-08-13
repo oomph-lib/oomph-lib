@@ -818,7 +818,7 @@ namespace oomph
   void set_q_internal_timestepper(TimeStepper* const time_stepper_pt)
   {
    unsigned q_index=q_internal_index();
-   this->internal_data_pt(q_index)->set_time_stepper(time_stepper_pt);
+   this->internal_data_pt(q_index)->set_time_stepper(time_stepper_pt,false);
   }
 
 

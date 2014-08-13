@@ -623,7 +623,7 @@ namespace oomph
    {
     unsigned q_index=q_internal_index();
 
-    this->internal_data_pt(q_index)->set_time_stepper(time_stepper_pt);
+    this->internal_data_pt(q_index)->set_time_stepper(time_stepper_pt,false);
    }
 
   unsigned self_test()

@@ -648,12 +648,14 @@ public:
 
  /// \short Overload the mesh_level timestepper function to set the
  /// timestepper data for the spines
- void set_mesh_level_time_stepper(TimeStepper* const &time_stepper_pt)
- {this->set_spine_time_stepper(time_stepper_pt);}
+ void set_mesh_level_time_stepper(TimeStepper* const &time_stepper_pt,
+                                  const bool &preserve_existing_data)
+ {this->set_spine_time_stepper(time_stepper_pt,preserve_existing_data);}
 
  /// \short Set the time stepper forthe spine data that is stored in 
  /// the mesh.
- void set_spine_time_stepper(TimeStepper* const &time_stepper_pt);
+ void set_spine_time_stepper(TimeStepper* const &time_stepper_pt,
+                             const bool &preserve_existing_data);
 
  /// \short Set any pinned spine "history" values to be consistent for
  /// continuation problems

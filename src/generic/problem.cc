@@ -211,7 +211,7 @@ ContinuationStorageScheme Problem::Continuation_time_stepper;
  //=================================================================
  unsigned Problem::setup_element_count_per_dof()
  {
-  //Now set the element counter to have the curretn Dof distribution
+  //Now set the element counter to have the current Dof distribution
   Element_count_per_dof.build(this->Dof_distribution_pt);
   //We need to use the halo scheme (assuming it has been setup)
 #ifdef OOMPH_HAS_MPI
@@ -10968,20 +10968,21 @@ double Problem::time() const
 /// the number of new equation numbers.
 //=========================================================================
 unsigned long Problem::set_timestepper_for_all_data(
- TimeStepper* const &time_stepper_pt)
+ TimeStepper* const &time_stepper_pt, const bool &preserve_existing_data)
 {
  //Set the timestepper for the master mesh's nodal and elemental data
  //to be the
  //continuation time stepper. This will wipe all storage other than
  //the 0th (present time) value at all the data objects
- Mesh_pt->set_nodal_and_elemental_time_stepper(time_stepper_pt);
+ Mesh_pt->set_nodal_and_elemental_time_stepper(time_stepper_pt,
+                                               preserve_existing_data);
  
  // Deal with the any additional mesh level timestepper data separately
  const unsigned n_sub_mesh = this->nsub_mesh();
  //If there is only one mesh
  if(n_sub_mesh==0)
   {
-   Mesh_pt->set_mesh_level_time_stepper(time_stepper_pt);
+   Mesh_pt->set_mesh_level_time_stepper(time_stepper_pt,preserve_existing_data);
   }
  //Otherwise loop over the sub meshes
  else
@@ -10989,7 +10990,8 @@ unsigned long Problem::set_timestepper_for_all_data(
    //Assign global equation numbers first
    for(unsigned i=0;i<n_sub_mesh;i++)
     {
-     this->Sub_mesh_pt[i]->set_mesh_level_time_stepper(time_stepper_pt);
+     this->Sub_mesh_pt[i]->set_mesh_level_time_stepper(time_stepper_pt,
+      preserve_existing_data);
     }
   }
  
@@ -10997,7 +10999,7 @@ unsigned long Problem::set_timestepper_for_all_data(
  const unsigned n_global=Global_data_pt.size();
  for (unsigned i=0;i<n_global;++i)
   {
-   Global_data_pt[i]->set_time_stepper(time_stepper_pt);
+   Global_data_pt[i]->set_time_stepper(time_stepper_pt,preserve_existing_data);
   }
 
  //We now need to reassign equations numbers because the Dof pointer
