@@ -75,7 +75,7 @@ two_d_multi_poisson_SOURCES = two_d_multi_poisson.cc \
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
-two_d_multi_poisson_LDADD = -L@libdir@  -lmulti_poisson -lgeneric \
+two_d_multi_poisson_LDADD = -L@libdir@ -lgeneric \
 	$(EXTERNAL_LIBS) $(FLIBS)
 
 

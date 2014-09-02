@@ -32,9 +32,6 @@
 //Generic routines
 #include "generic.h"
 
-// The MultiPoisson equations
-#include "multi_poisson.h"
-
 // The mesh
 #include "meshes/simple_rectangular_quadmesh.h"
 

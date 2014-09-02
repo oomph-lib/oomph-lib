@@ -1151,9 +1151,10 @@ namespace oomph
   // Clean up memory.
   this->clean_up_my_memory();
 
-  unsigned n_dof_types = this->ndof_types();
+
 #ifdef PARANOID
   // This preconditioner only works for 3 dof types
+  unsigned n_dof_types = this->ndof_types();
   if (n_dof_types!=3)
    {
     std::stringstream tmp;
@@ -2196,9 +2197,11 @@ namespace oomph
   // Clean up memory
   this->clean_up_my_memory();
 
-  unsigned n_dof_types = this->ndof_types();
+
 #ifdef PARANOID
+
   // This preconditioner only works for 5 dof types
+  unsigned n_dof_types = this->ndof_types();
   if (n_dof_types!=5)
    {
     std::stringstream tmp;

@@ -193,8 +193,11 @@ two_d_multi_poisson_LDADD = -L@libdir@ -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
 #----------------------------------------------------------------------
 
 # Include path for library headers: All library headers live in 
-# the include directory which we specify with -I
-INCLUDES =   -I@includedir@  
+# the include directory which we specify with -I. The slightly convoluted
+# reference to generic is required to allow the multi-poisson driver code
+# to include the multi-poisson header file in the serial demo driver
+# directory to find the generic header files.
+INCLUDES =   -I@includedir@   -I@includedir@/generic
 
 
 
