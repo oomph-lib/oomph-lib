@@ -410,9 +410,12 @@ int main(int argc, char **argv)
      // Doc
      problem.doc_solution(doc_info);
      doc_info.number()++;
-     oomph_info << "Number of Newton iterations: " << problem.newton_count() 
-                << std::endl << std::endl;
-     conv_file << problem.newton_count() << std::endl;
+     oomph_info << "Number of linear solver iterations: " 
+                << dynamic_cast<TrilinosAztecOOSolver*>(
+                 linear_solver_pt)->iterations() << std::endl << std::endl;
+     conv_file << "Number of linear solver iterations: " 
+               << dynamic_cast<TrilinosAztecOOSolver*>(
+                linear_solver_pt)->iterations() << std::endl;
 
    } // end of loop over preconditioner
  
@@ -479,9 +482,12 @@ int main(int argc, char **argv)
      // Doc
      problem.doc_solution(doc_info);
      doc_info.number()++;
-     oomph_info << "Number of Newton iterations: " << problem.newton_count() 
-                << std::endl << std::endl;
-     conv_file << problem.newton_count() << std::endl;
+     oomph_info << "Number of linear solver iterations: " 
+                << dynamic_cast<TrilinosAztecOOSolver*>(
+                 linear_solver_pt)->iterations() << std::endl << std::endl;
+     conv_file << "Number of linear solver iterations: " 
+               << dynamic_cast<TrilinosAztecOOSolver*>(
+                linear_solver_pt)->iterations() << std::endl;
     
    } // end of loop over preconditioner
  
@@ -557,9 +563,12 @@ int main(int argc, char **argv)
    // Doc
    problem.doc_solution(doc_info);
    doc_info.number()++;
-   oomph_info << "Number of Newton iterations: " << problem.newton_count() 
-              << std::endl << std::endl;
-   conv_file << problem.newton_count() << std::endl;
+   oomph_info << "Number of linear solver iterations: " 
+              << dynamic_cast<CG<CRDoubleMatrix>*>(
+               linear_solver_pt)->iterations() << std::endl << std::endl;
+   conv_file <<  "Number of linear solver iterations: " 
+             << dynamic_cast<CG<CRDoubleMatrix>*>(
+              linear_solver_pt)->iterations() << std::endl;
 
    delete linear_solver_pt;
    
@@ -582,9 +591,12 @@ int main(int argc, char **argv)
    // Doc
    problem.doc_solution(doc_info);
    doc_info.number()++;
-   oomph_info << "Number of Newton iterations: " << problem.newton_count() 
-              << std::endl << std::endl;
-   conv_file << problem.newton_count() << std::endl;
+   oomph_info << "Number of linear solver iterations: " 
+              << dynamic_cast<BiCGStab<CRDoubleMatrix>*>(
+               linear_solver_pt)->iterations() << std::endl << std::endl;
+   conv_file << "Number of linear solver iterations: " 
+             << dynamic_cast<BiCGStab<CRDoubleMatrix>*>(
+              linear_solver_pt)->iterations() << std::endl;
 
    delete linear_solver_pt;
 
@@ -607,9 +619,12 @@ int main(int argc, char **argv)
    // Doc
    problem.doc_solution(doc_info);
    doc_info.number()++;
-   oomph_info << "Number of Newton iterations: " << problem.newton_count() 
-              << std::endl << std::endl;
-   conv_file << problem.newton_count() << std::endl;
+   oomph_info << "Number of linear solver iterations: " 
+              << dynamic_cast<GMRES<CRDoubleMatrix>*>(
+               linear_solver_pt)->iterations() << std::endl << std::endl;
+   conv_file << "Number of linear solver iterations: " 
+             << dynamic_cast<GMRES<CRDoubleMatrix>*>(
+              linear_solver_pt)->iterations() << std::endl;
 
    delete linear_solver_pt;
 
@@ -676,9 +691,12 @@ int main(int argc, char **argv)
     // Doc
     problem.doc_solution(doc_info);
     doc_info.number()++;
-    oomph_info << "Number of Newton iterations: " << problem.newton_count() 
-               << std::endl << std::endl;
-    conv_file << problem.newton_count() << std::endl;
+    oomph_info << "Number of linear solver iterations: " 
+               << dynamic_cast<TrilinosAztecOOSolver*>(
+                linear_solver_pt)->iterations() << std::endl << std::endl;
+    conv_file << "Number of linear solver iterations: " 
+              << dynamic_cast<TrilinosAztecOOSolver*>(
+               linear_solver_pt)->iterations() << std::endl;
     
    } // end of loop over preconditioner
  

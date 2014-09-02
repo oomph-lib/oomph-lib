@@ -9,7 +9,8 @@ check_PROGRAMS= \
 driven_cavity \
 direct_solver_test \
 airy_cantilever \
-fsi_channel_with_leaflet
+fsi_channel_with_leaflet \
+two_d_multi_poisson
 
 # Do we have the TRILINOS library?
 #=================================
@@ -56,7 +57,7 @@ airy_cantilever_LDADD = -L@libdir@ -lsolid -lconstitutive \
 
 #---------------------------------------------------------------------
 
-# Sources for first executable
+# Sources for executable
 fsi_channel_with_leaflet_SOURCES = fsi_channel_with_leaflet.cc
 
 # Required libraries:
@@ -68,6 +69,17 @@ fsi_channel_with_leaflet_LDADD = \
 
 #-----------------------------------------------------------------------
 
+# Sources for executable
+two_d_multi_poisson_SOURCES = two_d_multi_poisson.cc \
+	simple_block_preconditioners.h
+
+# Required libraries:
+# $(FLIBS) is included in case the solver involves fortran sources.
+two_d_multi_poisson_LDADD = -L@libdir@  -lmulti_poisson -lgeneric \
+	$(EXTERNAL_LIBS) $(FLIBS)
+
+
+#-----------------------------------------------------------------------
 # Do we have the TRILINOS library?
 #=================================
 if OOMPH_HAS_TRILINOS
@@ -90,6 +102,11 @@ endif
 
 
 # Include path for library headers: All library headers live in 
-# the include directory which we specify with -I
-INCLUDES =   -I@includedir@  
+# the include directory which we specify with -I. The slightly convoluted
+# reference to generic is required to allow the multi-poisson driver code
+# to include the multi-poisson header file in the serial demo driver
+# directory to find the generic header files.
+INCLUDES =   -I@includedir@  -I@includedir@/generic
 
+
+EXTRA_DIST += multi_poisson_partition.dat 

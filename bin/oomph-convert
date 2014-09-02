@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Copyright (C) 2007- Angelo Simone (TU Delft)
 # Licensed under the GNU LGPL Version 2.1
@@ -51,12 +51,12 @@ TYPICAL USAGE EXAMPLES\n
 
 usage() {
   echo -e $usagestr
-  exit 1
 }
 
 # -- we want at least one parameter (it may be a flag or an argument)
 if [ -z "$1" ]; then
         usage
+        exit 1
 fi
 
 # -- parse command line arguments
@@ -66,7 +66,7 @@ dimflag=0
 oflag=
 while getopts "hzpo23" OPTIONS; do
     case ${OPTIONS} in
-        h)      echo -e $USAGE
+        h)      usage
                 exit 0
                 ;;
         z)      zeroflag=-z
@@ -81,6 +81,7 @@ while getopts "hzpo23" OPTIONS; do
                 ;;
         \?)     # getopts issues an error message
                 usage
+                exit 1
                 ;;
     esac
 done
@@ -89,6 +90,7 @@ shift `expr $OPTIND - 1`
 # -- we want at least one file name
 if [ $# -eq 0 ]; then
         usage
+        exit 1
 fi
 
 # -- convert the files
