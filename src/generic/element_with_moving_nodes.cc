@@ -157,6 +157,40 @@ namespace oomph
    }
  }
 
+ //==================================================================
+ /// \short Function to describe the local dofs of the element[s]. The ostream 
+ /// specifies the output stream to which the description 
+ /// is written; the string stores the currently 
+ /// assembled output that is ultimately written to the
+ /// output stream by Data::describe_dofs(...); it is typically
+ /// built up incrementally as we descend through the
+ /// call hierarchy of this function when called from 
+ /// Problem::describe_dofs(...)
+ //==================================================================
+ void ElementWithMovingNodes::
+ describe_local_dofs(std::ostream& out,const std::string& current_string) const
+ {
+  // Call the standard finite element classification.
+  FiniteElement::describe_local_dofs(out,current_string);
+  //Get local number of dofs so far
+  unsigned local_eqn_number = this->ndof();
+  
+  //Set the number of data
+  const unsigned n_geom_data = ngeom_data();
+
+  //Loop over the node update data
+  for(unsigned i=0;i<n_geom_data;i++)
+   {
+    // Pointer to geometric Data
+    Data* data_pt=Geom_data_pt[i];
+    
+    std::stringstream conversion;
+    conversion<<" of Geometric Data "<<i<<current_string;
+    std::string in(conversion.str());
+    data_pt->describe_dofs(out,in);
+   }
+ }
+
 
  //==================================================================
  /// Assign local equation numbers for the geometric data associated

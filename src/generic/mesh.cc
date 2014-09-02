@@ -33,6 +33,7 @@
 
 #include<algorithm>
 #include<limits.h>
+#include <typeinfo>
 
 
 //oomph-lib headers
@@ -715,6 +716,67 @@ unsigned long Mesh::assign_global_eqn_numbers(Vector<double *> &Dof_pt)
  //Return the total number of equations
  return(equation_number);
 }
+
+//========================================================
+/// \short Function to describe the dofs of the Mesh. The ostream 
+/// specifies the output stream to which the description 
+/// is written; the string stores the currently 
+/// assembled output that is ultimately written to the
+/// output stream by Data::describe_dofs(...); it is typically
+/// built up incrementally as we descend through the
+/// call hierarchy of this function when called from 
+/// Problem::describe_dofs(...)
+//========================================================
+void Mesh::describe_dofs(std::ostream& out,
+                         const std::string& current_string) const
+{
+ //Loop over the nodes and call their classification functions
+ unsigned long nnod = Node_pt.size();
+ for(unsigned long i=0;i<nnod;i++)
+  {
+   std::stringstream conversion;
+   conversion << " of Node " << i << current_string;
+   std::string in(conversion.str());
+   Node_pt[i]->describe_dofs(out,in);
+  }
+
+ //Loop over the elements and classify.
+ unsigned long nel = Element_pt.size();
+ for(unsigned long i=0;i<nel;i++)
+  {
+   std::stringstream conversion;
+   conversion <<" in Element "<<i<<" ["<<typeid(*Element_pt[i]).name()<<"] "
+              <<current_string;
+   std::string in(conversion.str());
+   Element_pt[i]->describe_dofs(out,in);
+  }
+}
+
+//========================================================
+/// \short Function to describe the local dofs of the elements. The ostream 
+/// specifies the output stream to which the description 
+/// is written; the string stores the currently 
+/// assembled output that is ultimately written to the
+/// output stream by Data::describe_dofs(...); it is typically
+/// built up incrementally as we descend through the
+/// call hierarchy of this function when called from 
+/// Problem::describe_dofs(...)
+//========================================================
+void Mesh::describe_local_dofs(std::ostream& out,
+                               const std::string& current_string) const
+{
+ //Now loop over the elements and describe local dofs
+ unsigned long nel = Element_pt.size();
+ for(unsigned long i=0;i<nel;i++)
+  {
+   std::stringstream conversion;
+   conversion <<" in Element"<<i<<" ["<<typeid(*Element_pt[i]).name()<<"] "
+              << current_string;
+   std::string in(conversion.str());
+   Element_pt[i]->describe_local_dofs(out,in);
+  }
+}
+
 
 //========================================================
 /// Assign local equation numbers in all elements

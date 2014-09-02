@@ -211,6 +211,17 @@ class FSIWallElement : public virtual SolidFiniteElement,
 
   public:
 
+ /// \short Function to describe the local dofs of the element. The ostream 
+ /// specifies the output stream to which the description 
+ /// is written; the string stores the currently 
+ /// assembled output that is ultimately written to the
+ /// output stream by Data::describe_dofs(...); it is typically
+ /// built up incrementally as we descend through the
+ /// call hierarchy of this function when called from 
+ /// Problem::describe_dofs(...)
+ void describe_local_dofs(std::ostream& out,
+                          const std::string& current_string) const;
+
  /// Static flag that allows the suppression of warning messages
  static bool Dont_warn_about_missing_adjacent_fluid_elements;
 

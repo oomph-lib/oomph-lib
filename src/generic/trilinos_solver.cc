@@ -302,7 +302,7 @@ void TrilinosAztecOOSolver::solver_setup(DoubleMatrixBase* const& matrix_pt)
      // setup the preconditioner
      // start of prec setup
      double prec_setup_start_t = TimingHelpers::timer();
-     Preconditioner_pt->setup(matrix_pt, Problem_pt->communicator_pt());
+     Preconditioner_pt->setup(matrix_pt);
      // start of prec setup
      double prec_setup_finish_t = TimingHelpers::timer();
      if (Doc_time)

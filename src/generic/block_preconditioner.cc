@@ -195,10 +195,10 @@ namespace oomph
     // backwards compatibility purposes and to make sure Richard Muddle's 
     // still works at this (subsidiary) level, although it may not be used.
     //
-    // If we do not want to make it backwards compatible, we may as well kill the
-    // block_setup(...) for subsidiary block preconditioners - but other things
-    // may break. Do it at your own risk (take time to fully understand the whole
-    // block preconditioning framework code).
+    // If we do not want to make it backwards compatible, we may as well
+    // kill the block_setup(...) for subsidiary block preconditioners - 
+    // but other thing may break. Do it at your own risk (take time to
+    // fully understand the whole block preconditioning framework code).
 
     // Create the corresponding Doftype_in_master_preconditioner_fine and
     // Doftype_coarsen_map_fine vectors.
@@ -239,8 +239,8 @@ namespace oomph
     if(master_block_preconditioner_pt()->doftype_coarsen_map_fine().size() == 0)
      {
       std::ostringstream err_msg;
-      err_msg << "The master block preconditioner's Doftype_coarsen_fine is not\n"
-              << "set up properly."
+      err_msg << "The master block preconditioner's Doftype_coarsen_fine is not"
+              << "\nset up properly."
               << std::endl;
       throw OomphLibError(err_msg.str(),
                           OOMPH_CURRENT_FUNCTION,
@@ -263,9 +263,9 @@ namespace oomph
        ->get_fine_grain_dof_types_in(subvec_index);
 
       Doftype_in_master_preconditioner_fine.insert(
-                                                   Doftype_in_master_preconditioner_fine.end(),
-                                                   tmp_master_dof_subvec.begin(),
-                                                   tmp_master_dof_subvec.end());
+       Doftype_in_master_preconditioner_fine.end(),
+       tmp_master_dof_subvec.begin(),
+       tmp_master_dof_subvec.end());
      }
 
     // The Doftype_coarsen_map_fine vector is a bit more tricky.
@@ -280,12 +280,13 @@ namespace oomph
     // and the master preconditioner has:
     // Doftype_coarsen_map_fine= [[0,1,2,3][4,5,6,7][8,9,10,11][12,13][14,15]]
     //
-    // Then [[0][1,2]] tell us that the most fine grain dof types 1 of the master 
-    // preconditioner most be grouped together, and the most fine grained dof 
-    // types 2 and 3 of the master preconditioner must be grouped together.
+    // Then [[0][1,2]] tell us that the most fine grain dof types 1 of the 
+    // master preconditioner most be grouped together, and the most fine 
+    // grained dof types 2 and 3 of the master preconditioner must be grouped 
+    // together.
     //
-    // This gives the vector [[4,5,6,7] [8,9,10,11,12,13]], translating this into
-    // the local dof types of this preconditioner we have 
+    // This gives the vector [[4,5,6,7] [8,9,10,11,12,13]], translating this 
+    // into the local dof types of this preconditioner we have 
     // Doftype_coarsen_map_fine = [[0,1,2,3][4,5,6,7,8,9]]. This corresponds 
     // with the Doftype_in_master_preconditioner_fine vector we created above:
     // Doftype_in_master_preconditioner_fine = [4,5,6,7,8,9,10,11,12,13]
@@ -297,10 +298,16 @@ namespace oomph
     //
     // Think of it like this: For each dof type in Doftype_coarsen_map_coarse
     // we look at how many values this corresponds to in the master 
-    // preconditioner. In this case, Doftype_coarsen_map_coarse[
-    // 1 - corresponds to internal dof types 0,1,2,3 in this preconditioner
-    // 2 - corresponds to internal dof types 4,5,6,7 in this preconditioner
-    // 3 - corresponds to internal dof types 8,9 in this preconditioner.
+    // preconditioner. In this case, Doftype_coarsen_map_coarse:
+    //
+    // 1 - corresponds to internal dof types 0,1,2,3 in this preconditioner,
+    // and 4,5,6,7 in the master preconditioner;
+    //
+    // 2 - corresponds to internal dof types 4,5,6,7 in this preconditioner,
+    // and 8,9,10,11 in the master preconditioner;
+    //
+    // 3 - corresponds to internal dof types 8,9 in this preconditioner,
+    // and 12,13 in the master preconditioner.
     //
     // Thus Doftype_coarsen_map_fine = [[0,1,2,3][4,5,6,7,8,9]]
     //
@@ -347,7 +354,8 @@ namespace oomph
        {
         unsigned subvec_i = Doftype_coarsen_map_coarse[i][j];
 
-        tmp_vec.insert(tmp_vec.end(),tmp_doftype_to_doftype_vec[subvec_i].begin(),
+        tmp_vec.insert(tmp_vec.end(),
+                       tmp_doftype_to_doftype_vec[subvec_i].begin(),
                        tmp_doftype_to_doftype_vec[subvec_i].end());
        }
 
@@ -403,8 +411,8 @@ namespace oomph
   // Doftype_coarsen_map_fine and Doftype_coarsen_map_coarse is handled
   // by the turn_into_subsidiary_block_preconditioner(...) function.
   if(is_master_block_preconditioner())
-  {
-    // How many dof types does this preconditioner works with?
+   {
+    // How many dof types does this preconditioner work with?
     unsigned n_external_dof_types = dof_to_block_map.size();
 
     // Note: at the master level, the n_external_dof_types should be the same as
@@ -440,22 +448,22 @@ namespace oomph
 
     // Now push back the identity mapping.
     for (unsigned i = 0; i < n_external_dof_types; i++) 
-    {
+     {
       // Create a vector and push it in.
       Vector<unsigned> tmp_vec(1,i);
       Doftype_coarsen_map_fine.push_back(tmp_vec);
       Doftype_coarsen_map_coarse.push_back(tmp_vec);
-    }
-  }
+     }
+   }
   else
-  {
+   {
     // Both the Doftype_coarsen_map_fine and Doftype_coarsen_map_coarse
     // vectors must be already be handled by the 
     // turn_into_subsidiary_block_preconditioner(...) function. We check this.
 #ifdef PARANOID
     if(   (Doftype_coarsen_map_fine.size() == 0)
         ||(Doftype_coarsen_map_coarse.size() == 0))
-    {
+     {
       std::ostringstream err_msg;
       err_msg
        << "Either the Doftype_coarsen_map_fine or the \n"
@@ -465,9 +473,9 @@ namespace oomph
       throw OomphLibWarning(err_msg.str(),
                             OOMPH_CURRENT_FUNCTION,
                             OOMPH_EXCEPTION_LOCATION); 
-    }
+     }
 #endif
-  }
+   }
 
   
   // Now we create the vector Block_to_dof_map_coarse.
@@ -564,31 +572,31 @@ namespace oomph
     Block_to_dof_map_coarse.resize(tmp_nblock);
 
     for (unsigned i = 0; i < dof_to_block_map_size; i++) 
-    {
+     {
       Block_to_dof_map_coarse[dof_to_block_map[i]].push_back(i);
-    }
+     }
 
     Block_to_dof_map_fine.clear();
     Block_to_dof_map_fine.resize(tmp_nblock);
     for (unsigned block_i = 0; block_i < tmp_nblock; block_i++)
-    {
+     {
       // get the dof types in this block.
       const unsigned ndof_in_block = Block_to_dof_map_coarse[block_i].size();
       for (unsigned dof_i = 0; dof_i < ndof_in_block; dof_i++)
-      {
-        const unsigned coarsened_dof_i = Block_to_dof_map_coarse[block_i][dof_i];
+       {
+        const unsigned coarsened_dof_i=Block_to_dof_map_coarse[block_i][dof_i];
 
         // Insert the most fine grain dofs which this dof_i corresponds to
         // into block_i
         Vector<unsigned> dof_i_dofs 
-          = Doftype_coarsen_map_fine[coarsened_dof_i];
+         =Doftype_coarsen_map_fine[coarsened_dof_i];
         
         Block_to_dof_map_fine[block_i].insert(
-            Block_to_dof_map_fine[block_i].end(),
-            dof_i_dofs.begin(),
-            dof_i_dofs.end());
-      }
-    }
+         Block_to_dof_map_fine[block_i].end(),
+         dof_i_dofs.begin(),
+         dof_i_dofs.end());
+       }
+     }
     
     // Now set the dof_to_block_map to the identify.
     // NOTE: We are now using the internal n dof types. This is because the
@@ -601,7 +609,7 @@ namespace oomph
     // the Internal_ndof_type variable may not be set up yet if this is a 
     // master preconditioner).
     unsigned tmp_internal_ndof_types = internal_ndof_types();
-
+    
     dof_to_block_map.resize(tmp_internal_ndof_types,0);
     
     for (unsigned i = 0; i < tmp_internal_ndof_types; i++) 
@@ -754,7 +762,7 @@ namespace oomph
   Vector<MPI_Request> recv_requests_sparse;
 #endif
 
-  // if this preconditioner is the master preconditioner then we need
+  // If this preconditioner is the master preconditioner then we need
   // to assemble the vectors : Dof_number
   //                           Index_in_dof_block
   if (is_master_block_preconditioner())
@@ -783,14 +791,14 @@ namespace oomph
      }
     Nrow = matrix_pt()->nrow();
 
-    // boolean to indicate whether the matrix is actually distributed
-    // ie distributed and on more than one processor
+    // Boolean to indicate whether the matrix is actually distributed,
+    // ie distributed and on more than one processor.
     bool matrix_distributed =
      (this->distribution_pt()->distributed() &&
       this->distribution_pt()->communicator_pt()->nproc() > 1);
 
 
-    // matrix must be CR
+    // Matrix must be a CR matrix.
     CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt());
     if (cr_matrix_pt == 0) {
      std::ostringstream error_message;
@@ -804,7 +812,7 @@ namespace oomph
 
 
 
-    // my distribution
+    // Get distribution.
     unsigned first_row = this->distribution_pt()->first_row();
     unsigned nrow_local = this->distribution_pt()->nrow_local();
     unsigned last_row = first_row+nrow_local-1;
@@ -994,44 +1002,42 @@ namespace oomph
 
       // Offset for the block type in the overall system.
       // Different meshes contain different block-preconditionable
-      // elements -- their blocks are added one after the other...
+      // elements -- their blocks are added one after the other.
       unsigned dof_offset=0;
 
-      // Loop over all meshes
+      // Loop over all meshes.
       for (unsigned m=0;m<nmesh();m++)
        {
-        // Number of elements in this mesh
+        // Number of elements in this mesh.
         unsigned n_element = mesh_pt(m)->nelement();
 
         // Find the number of block types that the elements in this mesh
-        // are in charge of
+        // are in charge of.
         unsigned ndof_in_element = ndof_types_in_mesh(m);
         Internal_ndof_types += ndof_in_element;
 
         for (unsigned e=0;e<n_element;e++)
          {
           // List containing pairs of global equation number and
-          // dof number for each global dof in an element
+          // dof number for each global dof in an element.
           std::list<std::pair<unsigned long,unsigned> > dof_lookup_list;
 
-          // Get list of blocks associated with the element's global unknowns
+          // Get list of blocks associated with the element's global unknowns.
           mesh_pt(m)->element_pt(e)->
            get_dof_numbers_for_unknowns(dof_lookup_list);
 
           // Loop over all entries in the list
-          // and store the block number
+          // and store the block number.
           typedef std::list<std::pair<unsigned long,unsigned> >::iterator IT;
           for (IT it=dof_lookup_list.begin();
                it!=dof_lookup_list.end();it++)
-           {
-
+           {            
             unsigned long global_dof = it->first;
             if (global_dof >= unsigned(first_row) &&
                 global_dof <= unsigned(last_row))
              {
               unsigned dof_number = (it->second)+dof_offset;
-              Dof_number_dense[global_dof-first_row]
-               = dof_number;
+              Dof_number_dense[global_dof-first_row]=dof_number;
 
 #ifdef PARANOID
               // Check consistency of block numbers if assigned multiple times
@@ -1687,13 +1693,13 @@ namespace oomph
    }
 #endif
 
-  // update the number of blocks types
+  // Update the number of blocks types.
   Internal_nblock_types = max_block_number+1;
 
-  // distributed or not depends on if we have more than one processor
+  // Distributed or not, depends on if we have more than one processor.
   bool distributed = this->master_distribution_pt()->distributed();
 
-  // create the new block distributions
+  // Create the new block distributions.
   Internal_block_distribution_pt.resize(Internal_nblock_types);
   for (unsigned i = 0; i < Internal_nblock_types; i++)
    {
@@ -1731,21 +1737,26 @@ namespace oomph
     {
       // For each external dof, we get the dofs coarsened into it (from the
       // parent preconditioner level, not the most fine grain level).
-      const unsigned ncoarsened_dofs_in_dof_i = Doftype_coarsen_map_coarse[dof_i].size();
-      Vector<LinearAlgebraDistribution*> tmp_dist_pt(ncoarsened_dofs_in_dof_i,0);
-      for (unsigned parent_dof_i = 0; parent_dof_i < ncoarsened_dofs_in_dof_i; parent_dof_i++)
-      {
+      const unsigned ncoarsened_dofs_in_dof_i = 
+       Doftype_coarsen_map_coarse[dof_i].size();
+      Vector<LinearAlgebraDistribution*> 
+       tmp_dist_pt(ncoarsened_dofs_in_dof_i,0);
+      for (unsigned parent_dof_i=0;parent_dof_i<ncoarsened_dofs_in_dof_i;
+           parent_dof_i++)
+       {
         tmp_dist_pt[parent_dof_i]  
-          = master_block_preconditioner_pt()
-          ->dof_block_distribution_pt(
-              Doftype_in_master_preconditioner_coarse[
-                Doftype_coarsen_map_coarse[dof_i][parent_dof_i] ] );
-      }
-
+         = master_block_preconditioner_pt()
+         ->dof_block_distribution_pt(
+          Doftype_in_master_preconditioner_coarse[
+           Doftype_coarsen_map_coarse[dof_i][parent_dof_i] ] );
+       }
+      
       Dof_block_distribution_pt[dof_i] = new LinearAlgebraDistribution;
       
 
-      LinearAlgebraDistributionHelpers::concatenate(tmp_dist_pt,*Dof_block_distribution_pt[dof_i]);
+      LinearAlgebraDistributionHelpers::concatenate(tmp_dist_pt,
+                                                    *Dof_block_distribution_pt[
+                                                     dof_i]);
     }
 
 
@@ -1790,18 +1801,19 @@ namespace oomph
         tmp_dist_pt,*Block_distribution_pt[super_block_i]);
      }
 
-   } // creating Block_distribution_pt
+   } // Creating Block_distribution_pt.
 
 
-  // create the distribution of the preconditioner matrix
+  // Create the distribution of the preconditioner matrix,
   // if this preconditioner is a subsidiary preconditioner then it stored
-  // at Distribution_pt.
+  // at Distribution_pt;
   // if this preconditioner is a master preconditioner then it is stored
-  // at Internal_preconditioner_matrix_distribution_pt
+  // at Internal_preconditioner_matrix_distribution_pt.
   LinearAlgebraDistribution dist;
-  LinearAlgebraDistributionHelpers::concatenate(Internal_block_distribution_pt,dist);
+  LinearAlgebraDistributionHelpers::concatenate(Internal_block_distribution_pt,
+                                                dist);
   
-  // build the distribution
+  // Build the distribution.
   if (is_subsidiary_block_preconditioner())
    {
     this->build_distribution(dist);
@@ -1813,14 +1825,14 @@ namespace oomph
    }
 
   Preconditioner_matrix_distribution_pt = new LinearAlgebraDistribution;
-  LinearAlgebraDistributionHelpers::concatenate(Block_distribution_pt,
-                                                *Preconditioner_matrix_distribution_pt);
+  LinearAlgebraDistributionHelpers::
+   concatenate(Block_distribution_pt,*Preconditioner_matrix_distribution_pt);
 
   // Clear all distributions in Auxiliary_block_distribution_pt, except for the
   // one which corresponds to the preconditioner matrix distribution.
   // This is already deleted by clear_block_preconditioner_base(...)
 
-  // Create the key which corresponds to preconditioner_matrix_distribution_pt
+  // Create the key which corresponds to preconditioner_matrix_distribution_pt.
   {
     const unsigned nblocks = Block_distribution_pt.size();
     Vector<unsigned> preconditioner_matrix_key(nblocks,0);
@@ -1829,22 +1841,22 @@ namespace oomph
       preconditioner_matrix_key[i] = i;
     }
 
-    // Now iterate through Auxiliary_block_distribution_pt and delete everything 
+    // Now iterate through Auxiliary_block_distribution_pt and delete everything
     // except for the value which corresponds to preconditioner_matrix_key.
     std::map<Vector<unsigned>, LinearAlgebraDistribution*>::iterator iter
-      = Auxiliary_block_distribution_pt.begin();
-    while(iter != Auxiliary_block_distribution_pt.end())
-    {
-      if(iter->first != preconditioner_matrix_key)
-      {
+     =Auxiliary_block_distribution_pt.begin();
+    while(iter!=Auxiliary_block_distribution_pt.end())
+     {
+      if(iter->first!=preconditioner_matrix_key)
+       {
         delete iter->second;
         iter++;
-      }
+       }
       else
-      {
+       {
         ++iter;
-      }
-    }
+       }
+     }
 
     // Clear it just to be safe!
     Auxiliary_block_distribution_pt.clear();
@@ -1854,7 +1866,7 @@ namespace oomph
                                         Preconditioner_matrix_distribution_pt);
   } // End of Auxiliary_block_distribution_pt encapsulation.
 
-  // clearing up after comm to assemble sparse lookup schemes
+  // Clearing up after comm to assemble sparse lookup schemes.
 #ifdef OOMPH_HAS_MPI
   if (send_requests_sparse.size()>0)
    {
@@ -1877,43 +1889,44 @@ namespace oomph
   delete[] nreq_sparse_for_proc;
 #endif
 
-  // next we assemble the lookup schemes for the rows
+  // Next we assemble the lookup schemes for the rows
   // if the matrix is not distributed then we assemble Global_index
-  // if the matrix is distributed then Rows_to_send_..., Rows_to_recv_... etc
+  // if the matrix is distributed then Rows_to_send_..., Rows_to_recv_... etc.
   if (!distributed)
    {
-    // resize the storage
+    // Resize the storage.
     Global_index.resize(Internal_nblock_types);
     for (unsigned b = 0; b < Internal_nblock_types; b++)
      {
       Global_index[b].resize(Internal_block_distribution_pt[b]->nrow());
      }
 
-    // compute
-    unsigned nrow = this->master_nrow();
-    for (unsigned i = 0; i < nrow; i++)
+    // Compute:
+    unsigned nrow=this->master_nrow();
+    for (unsigned i=0;i<nrow;i++)
      {
-      // the dof type number
-      int dof_number = this->internal_dof_number(i);
-      if (dof_number >= 0)
+      // the dof type number;
+      int dof_number=this->internal_dof_number(i);
+      if (dof_number>=0)
        {
 
-        // the block number
+        // the block number;
         unsigned block_number = Dof_number_to_block_number_lookup[dof_number];
 
-        // compute the index in the block
-        unsigned index_in_block = 0;
-        unsigned ptr = 0;
+        // the index in the block.
+        unsigned index_in_block=0;
+        unsigned ptr=0;
         while (int(Block_number_to_dof_number_lookup[block_number][ptr])
-               != dof_number)
+               !=dof_number)
          {
-          index_in_block +=
-           internal_dof_block_dimension(Block_number_to_dof_number_lookup[block_number]
-                               [ptr]);
+          index_in_block+=
+           internal_dof_block_dimension(Block_number_to_dof_number_lookup[
+                                         block_number]
+                                        [ptr]);
           ptr++;
          }
-        index_in_block += internal_index_in_dof(i);
-        Global_index[block_number][index_in_block] = i;
+        index_in_block+=internal_index_in_dof(i);
+        Global_index[block_number][index_in_block]=i;
        }
      }
    }

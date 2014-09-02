@@ -164,14 +164,14 @@ namespace oomph {
      turn_into_subsidiary_block_preconditioner(this,ns_dof_list);
 
     Navier_stokes_schur_complement_preconditioner_pt->
-     Preconditioner::setup(matrix_pt(),comm_pt());
+     Preconditioner::setup(matrix_pt());
    }
   else
    {
     CRDoubleMatrix* ns_matrix_pt = new CRDoubleMatrix;
     this->get_block(0,0,*ns_matrix_pt);
 
-    Navier_stokes_preconditioner_pt->setup(ns_matrix_pt,comm_pt());
+    Navier_stokes_preconditioner_pt->setup(ns_matrix_pt);
     delete ns_matrix_pt; ns_matrix_pt = 0;
    }
   
@@ -196,7 +196,7 @@ namespace oomph {
       solid_block_preconditioner_pt
        ->turn_into_subsidiary_block_preconditioner(this,
                                                    solid_prec_dof_list);
-      solid_block_preconditioner_pt->setup(cr_matrix_pt,comm_pt());
+      solid_block_preconditioner_pt->setup(cr_matrix_pt);
      }
     else
      {
@@ -215,7 +215,7 @@ namespace oomph {
     Solid_preconditioner_is_block_preconditioner=false;
     CRDoubleMatrix* s_matrix_pt = new CRDoubleMatrix;
     this->get_block(1,1,*s_matrix_pt);
-    Solid_preconditioner_pt->setup(s_matrix_pt,comm_pt());
+    Solid_preconditioner_pt->setup(s_matrix_pt);
     delete s_matrix_pt; s_matrix_pt = 0;
    }
   
@@ -239,7 +239,7 @@ namespace oomph {
   Pseudo_elastic_preconditioner_pt->
    set_lagrange_multiplier_mesh(this->Lagrange_multiplier_mesh_pt);
   Pseudo_elastic_preconditioner_pt->
-   Preconditioner::setup(matrix_pt(),comm_pt());
+   Preconditioner::setup(matrix_pt());
   
   // SETUP THE MATRIX VECTOR PRODUCT OPERATORS
   // =========================================

@@ -458,7 +458,7 @@ class LinearAlgebraDistribution
    
    public :
     
-    /// Default constructor - just null the distribution pt
+    /// Default constructor - create a distribution
     DistributableLinearAlgebraObject() 
     {
      Distribution_pt = new LinearAlgebraDistribution;

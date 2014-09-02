@@ -504,6 +504,74 @@ std::deque<double*> GeneralisedElement::Dof_pt_deque;
    {internal_data_pt(i)->assign_eqn_numbers(global_number,Dof_pt);}
  }
 
+
+
+//==========================================================================
+/// \short Function to describe the dofs of the Element. The ostream 
+/// specifies the output stream to which the description 
+/// is written; the string stores the currently 
+/// assembled output that is ultimately written to the
+/// output stream by Data::describe_dofs(...); it is typically
+/// built up incrementally as we descend through the
+/// call hierarchy of this function when called from 
+/// Problem::describe_dofs(...)
+//==========================================================================
+ void GeneralisedElement::describe_dofs(std::ostream& out,
+                                        const std::string& current_string) const
+ {
+  for(unsigned i=0;i<Ninternal_data;i++)
+   {
+    std::stringstream conversion;
+    conversion <<" of Internal Data "<<i<<current_string;
+    std::string in(conversion.str());
+    internal_data_pt(i)->describe_dofs(out,in);
+   }
+ }
+
+//==========================================================================
+/// \short Function to describe the local dofs of the element. The ostream 
+/// specifies the output stream to which the description 
+/// is written; the string stores the currently 
+/// assembled output that is ultimately written to the
+/// output stream by Data::describe_dofs(...); it is typically
+/// built up incrementally as we descend through the
+/// call hierarchy of this function when called from 
+/// Problem::describe_dofs(...)
+//==========================================================================
+void GeneralisedElement::
+describe_local_dofs(std::ostream& out,const std::string& current_string) const
+ {
+  // Find the number of internal and external data
+  const unsigned n_internal_data = Ninternal_data;
+  const unsigned n_external_data = Nexternal_data;
+
+  // Now loop over the internal data and describe local equation numbers
+  for(unsigned i=0;i<n_internal_data;i++)
+   {
+    // Pointer to the internal data
+    Data* const data_pt = internal_data_pt(i);
+      
+    std::stringstream conversion;
+    conversion <<" of Internal Data "<<i<<current_string;
+    std::string in(conversion.str());
+    data_pt->describe_dofs(out,in);
+   }   
+
+    
+  // Now loop over the external data and assign local equation numbers
+  for(unsigned i=0;i<n_external_data;i++)
+   {
+    // Pointer to the external data
+    Data* const data_pt = external_data_pt(i);
+          
+    std::stringstream conversion;
+    conversion<<" of External Data "<<i<<current_string;
+    std::string in(conversion.str());
+    data_pt->describe_dofs(out,in);  
+   }
+   
+ }
+
  //==========================================================================
  /// This function loops over the internal data of the element and add 
  /// pointers to their unconstrained values to a map indexed by the global
@@ -1572,7 +1640,51 @@ namespace Locate_zeta_helpers
 ///////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 
+//======================================================================
+/// \short Function to describe the local dofs of the element. The ostream 
+/// specifies the output stream to which the description 
+/// is written; the string stores the currently 
+/// assembled output that is ultimately written to the
+/// output stream by Data::describe_dofs(...); it is typically
+/// built up incrementally as we descend through the
+/// call hierarchy of this function when called from 
+/// Problem::describe_dofs(...)
+//======================================================================
+void FiniteElement::describe_local_dofs(std::ostream& out,
+                                        const std::string& current_string) const
+{
+ // Call the standard finite element classification.
+ GeneralisedElement::describe_local_dofs(out,current_string);
+ describe_nodal_local_dofs(out,current_string);
+}
 
+//======================================================================
+// \short Function to describe the local dofs of the element. The ostream 
+/// specifies the output stream to which the description 
+/// is written; the string stores the currently 
+/// assembled output that is ultimately written to the
+/// output stream by Data::describe_dofs(...); it is typically
+/// built up incrementally as we descend through the
+/// call hierarchy of this function when called from 
+/// Problem::describe_dofs(...)
+//======================================================================
+void FiniteElement::
+describe_nodal_local_dofs(std::ostream& out,
+                          const std::string& current_string) const
+{
+ //Find the number of nodes
+ const unsigned n_node = nnode();
+ for(unsigned n=0;n<n_node;n++)
+  {
+   //Pointer to node
+   Node* const nod_pt = node_pt(n);
+      
+   std::stringstream conversion;
+   conversion<<" of Node "<<n<<current_string;
+   std::string in(conversion.str());
+   nod_pt->describe_dofs(out,in);
+  }// End if for n_node
+}// End describe_nodal_local_dofs
 
 //========================================================================
 /// \short Internal function used to check for singular or negative values
@@ -5925,6 +6037,25 @@ void FaceElement::get_local_coordinate_in_bulk(
 ///////////////////////////////////////////////////////////////////////////
 
 //=========================================================================
+/// \short Function to describe the local dofs of the element. The ostream 
+/// specifies the output stream to which the description 
+/// is written; the string stores the currently 
+/// assembled output that is ultimately written to the
+/// output stream by Data::describe_dofs(...); it is typically
+/// built up incrementally as we descend through the
+/// call hierarchy of this function when called from 
+/// Problem::describe_dofs(...)
+//=========================================================================
+void SolidFiniteElement::
+describe_local_dofs(std::ostream& out,const std::string& current_string) const
+{
+ // Call the standard finite element description.
+ FiniteElement::describe_local_dofs(out,current_string);
+ describe_solid_local_dofs(out,current_string);
+}
+
+
+//=========================================================================
 /// Internal function that is used to assemble the jacobian of the mapping
 /// from local coordinates (s) to the lagrangian coordinates (xi), given the
 /// derivatives of the shape functions. 
@@ -6255,6 +6386,34 @@ void FaceElement::get_local_coordinate_in_bulk(
   //Return the determinant of the mapping
   return det;
  }
+
+//============================================================================
+/// \short Function to describe the local dofs of the element. The ostream 
+/// specifies the output stream to which the description 
+/// is written; the string stores the currently 
+/// assembled output that is ultimately written to the
+/// output stream by Data::describe_dofs(...); it is typically
+/// built up incrementally as we descend through the
+/// call hierarchy of this function when called from 
+/// Problem::describe_dofs(...)
+//============================================================================
+void SolidFiniteElement::
+describe_solid_local_dofs(std::ostream& out,
+                          const std::string& current_string) const
+{
+ //Find the number of nodes
+ const unsigned n_node = nnode();
+ //Loop over the nodes
+ for(unsigned n=0;n<n_node;n++)
+  {
+   //Cast to a solid node
+   SolidNode* cast_node_pt = static_cast<SolidNode*>(node_pt(n));
+   std::stringstream conversion;
+   conversion<<" of Solid Node "<<n<<current_string;
+   std::string in(conversion.str());
+   cast_node_pt->describe_dofs(out,in);
+  }
+}
 
 //============================================================================
 /// Assign local equation numbers for the solid equations in the element.

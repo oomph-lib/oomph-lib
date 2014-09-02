@@ -513,7 +513,7 @@ namespace oomph
     oomph_info << "Done output of " << junk.str() << std::endl;
    }
   
-  P_preconditioner_pt->setup(p_matrix_pt,comm_pt());
+  P_preconditioner_pt->setup(p_matrix_pt);
   delete p_matrix_pt; p_matrix_pt = 0;
   double t_p_prec_finish = TimingHelpers::timer();
   if(Doc_time)
@@ -549,12 +549,12 @@ namespace oomph
     F_block_preconditioner_pt->
      turn_into_subsidiary_block_preconditioner(this,dof_map);
 
-    F_block_preconditioner_pt->setup(matrix_pt(),comm_pt());
+    F_block_preconditioner_pt->setup(matrix_pt());
    }
   // otherwise F is not a block preconditioner
   else
    {
-    F_preconditioner_pt->setup(f_pt,comm_pt());
+    F_preconditioner_pt->setup(f_pt);
     delete f_pt; f_pt = 0;
    }
   double t_f_prec_finish = TimingHelpers::timer();

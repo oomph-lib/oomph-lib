@@ -60,20 +60,20 @@ class ElementWithExternalElement: public virtual FiniteElement
 
    /// \short Constructor. Initialise member data and pointers to data 
    /// associated with the external elements to zero.
-   ElementWithExternalElement() : FiniteElement(),
+   ElementWithExternalElement() : FiniteElement(),      
     Add_external_interaction_data(true),  
-    Add_external_geometric_data(true),  
+    Add_external_geometric_data(true), 
+    External_interaction_field_data_pt(0),
+    External_interaction_geometric_data_pt(0),           
     Ninteraction(0),
     Nintpt(0),
     Nexternal_element_storage(0),
     Nexternal_interaction_field_data(0),
     Nexternal_interaction_geometric_data(0),
     External_element_pt(0),
-    External_element_local_coord(0),
-    External_interaction_field_data_pt(0),
+    External_element_local_coord(0),  
     External_interaction_field_data_index(0),
     External_interaction_field_data_local_eqn(0),
-    External_interaction_geometric_data_pt(0),
     External_interaction_geometric_data_index(0),
     External_interaction_geometric_data_local_eqn(0)
     { }
@@ -284,6 +284,17 @@ class ElementWithExternalElement: public virtual FiniteElement
    bool external_geometric_data_is_included() const
    {return Add_external_geometric_data;}
 
+   /// \short Function to describe the local dofs of the element. The ostream 
+   /// specifies the output stream to which the description 
+   /// is written; the string stores the currently 
+   /// assembled output that is ultimately written to the
+   /// output stream by Data::describe_dofs(...); it is typically
+   /// built up incrementally as we descend through the
+   /// call hierarchy of this function when called from 
+   /// Problem::describe_dofs(...)
+   void describe_local_dofs(std::ostream& out,
+                            const std::string& curr_string) const;
+
     protected:
 
    /// \short Overload the assign internal and external local equation
@@ -473,8 +484,16 @@ class ElementWithExternalElement: public virtual FiniteElement
 
    ///Boolean flag to indicate whether to include the external geometric data
    bool Add_external_geometric_data;
+ 
+   //// Storage for pointers to external field Data that affect the 
+   /// interactions in the elemenet
+   Data** External_interaction_field_data_pt;
+    
+   //// Storage for pointers to external geometric Data that affect the 
+   /// interactions in the elemenet
+   Data** External_interaction_geometric_data_pt;
    
-    private:
+  private:
 
    /// \short Helper function to check that storage has actually been allocated
    void check_storage_allocated() const
@@ -565,10 +584,6 @@ class ElementWithExternalElement: public virtual FiniteElement
    //// point.
    Vector<double> *External_element_local_coord;
 
-   //// Storage for pointers to external field Data that affect the 
-   /// interactions in the elemenet
-   Data** External_interaction_field_data_pt;
-    
    /// \short Storage for the index of the values in the external field data
    /// that affect the interactions in the element
    unsigned* External_interaction_field_data_index;
@@ -576,10 +591,6 @@ class ElementWithExternalElement: public virtual FiniteElement
    /// \short Storage for the local equation number associated with the 
    /// external field data the affect the interactions in the element
    int* External_interaction_field_data_local_eqn;
- 
-   //// Storage for pointers to external geometric Data that affect the 
-   /// interactions in the elemenet
-   Data** External_interaction_geometric_data_pt;
     
    /// \short Storage for the index of the values in the external 
    /// geometric data

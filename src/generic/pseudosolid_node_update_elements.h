@@ -74,6 +74,21 @@ template<class BASIC, class SOLID>
    SOLID::lambda_sq_pt()=&PseudoSolidHelper::Zero;
   }
 
+ /// \short Function to describe the local dofs of the element. The ostream 
+ /// specifies the output stream to which the description 
+ /// is written; the string stores the currently 
+ /// assembled output that is ultimately written to the
+ /// output stream by Data::describe_dofs(...); it is typically
+ /// built up incrementally as we descend through the
+ /// call hierarchy of this function when called from 
+ /// Problem::describe_dofs(...)
+ void describe_local_dofs(std::ostream& out,
+                          const std::string& current_string) const
+  {
+   BASIC::describe_local_dofs(out,current_string);
+   SOLID::describe_local_dofs(out,current_string);
+  }
+
  /// \short The required number of values is the sum of the two
  unsigned required_nvalue(const unsigned &n) const
   {return BASIC::required_nvalue(n) + SOLID::required_nvalue(n);}
@@ -553,6 +568,20 @@ class RefineablePseudoSolidNodeUpdateElement : public virtual BASIC,
     SOLID::lambda_sq_pt()=&PseudoSolidHelper::Zero;
    }
 
+ /// \short Function to describe the local dofs of the element. The ostream 
+ /// specifies the output stream to which the description 
+ /// is written; the string stores the currently 
+ /// assembled output that is ultimately written to the
+ /// output stream by Data::describe_dofs(...); it is typically
+ /// built up incrementally as we descend through the
+ /// call hierarchy of this function when called from 
+ /// Problem::describe_dofs(...)
+ void describe_local_dofs(std::ostream& out,
+                          const std::string& current_string) const
+  {
+   BASIC::describe_local_dofs(out,current_string);
+   SOLID::describe_local_dofs(out,current_string);
+  }
 
  /// \short The required number of values is the sum of the two
  unsigned required_nvalue(const unsigned &n) const

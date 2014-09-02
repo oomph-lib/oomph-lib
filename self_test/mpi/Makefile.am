@@ -9,7 +9,7 @@ if WANT_MPI_VARIABLENP
 		vector_split \
 		vector_concatenation \
 		matrix_concatenation \
-		matrix_addition
+		matrix_addition 
 else
   variablenp_dir = 
 endif
@@ -17,7 +17,8 @@ endif
 SUBDIRS = \
 $(variablenp_dir) \
 two_d_mesh_dist \
-three_d_mesh_dist
+three_d_mesh_dist \
+line_visualiser
 
 
 

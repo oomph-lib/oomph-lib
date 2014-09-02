@@ -186,6 +186,45 @@ class SpectralElement : public virtual FiniteElement
  Data* spectral_data_pt(const unsigned &i) const
   {return (*Spectral_data_pt)[i];}
 
+ /// \short Function to describe the local dofs of the element. The ostream 
+ /// specifies the output stream to which the description 
+ /// is written; the string stores the currently 
+ /// assembled output that is ultimately written to the
+ /// output stream by Data::describe_dofs(...); it is typically
+ /// built up incrementally as we descend through the
+ /// call hierarchy of this function when called from 
+ /// Problem::describe_dofs(...)
+ virtual void describe_local_dofs(std::ostream& out,
+                                  const std::string& current_string) const
+  {
+   //Do the standard finite element stuff
+   FiniteElement::describe_local_dofs(out,current_string);
+   //Now get the number of spectral data.
+   unsigned n_spectral = nspectral();
+   
+   //Now loop over the nodes again and assign local equation numbers
+   for(unsigned n=0;n<n_spectral;n++)
+    {
+     //Can we upcast to a node
+     Node* cast_node_pt = dynamic_cast<Node*>(spectral_data_pt(n));
+     if(cast_node_pt)
+      {
+       std::stringstream conversion;
+       conversion <<" of Node "<<n<<current_string;
+       std::string in(conversion.str());
+       cast_node_pt->describe_dofs(out,in);
+      }
+     // Otherwise it is data.
+     else
+      {
+       Data* data_pt = spectral_data_pt(n);
+       std::stringstream conversion;
+       conversion <<" of Data "<<n<<current_string;
+       std::string in(conversion.str());
+       data_pt->describe_dofs(out,in);
+      }
+    }
+  }
 
  /// \short Assign the local equation numbers. If the boolean argument is
  /// true then store degrees of freedom at Dof_pt

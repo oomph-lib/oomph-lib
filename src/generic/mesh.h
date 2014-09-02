@@ -43,6 +43,7 @@
 #include<float.h>
 #include <list>
 #include <typeinfo>
+#include<string>
 
 //oomph-lib headers
 #include "Vector.h"
@@ -161,6 +162,27 @@ class Mesh
  /// Vector of pointers to the dofs (variables).
  unsigned long
   assign_global_eqn_numbers(Vector<double *> &Dof_pt);
+
+ /// \short Function to describe the dofs of the Mesh. The ostream 
+ /// specifies the output stream to which the description 
+ /// is written; the string stores the currently 
+ /// assembled output that is ultimately written to the
+ /// output stream by Data::describe_dofs(...); it is typically
+ /// built up incrementally as we descend through the
+ /// call hierarchy of this function when called from 
+ /// Problem::describe_dofs(...)
+ void describe_dofs(std::ostream& out,const std::string& current_string) const;
+
+ /// \short Function to describe the local dofs of the elements. The ostream 
+ /// specifies the output stream to which the description 
+ /// is written; the string stores the currently 
+ /// assembled output that is ultimately written to the
+ /// output stream by Data::describe_dofs(...); it is typically
+ /// built up incrementally as we descend through the
+ /// call hierarchy of this function when called from 
+ /// Problem::describe_dofs(...)
+ void describe_local_dofs(std::ostream& out,
+                          const std::string& current_string) const;
 
  /// \short Assign the local equation numbers in all elements
  /// If the boolean argument is true then also store pointers to dofs

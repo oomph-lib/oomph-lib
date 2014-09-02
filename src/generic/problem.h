@@ -1552,6 +1552,13 @@ namespace oomph
  unsigned long assign_eqn_numbers(const bool&
                                   assign_local_eqn_numbers=true);
 
+ /// \short Function to describe the dofs in terms of the global 
+ /// equation number, i.e. what type of value (nodal value of
+ /// a Node; value in a Data object; value of internal Data in an 
+ /// element; etc) is the unknown with a certain global equation number.
+ /// Output stream defaults to oomph_info.
+ void describe_dofs(std::ostream& out=*(oomph_info.stream_pt())) const;
+
  /// \short Indicate that the problem involves discontinuous elements
  /// This allows for a more efficiently assembly and inversion of the
  /// mass matrix

@@ -181,8 +181,8 @@ class LinearisedAxisymmetricQCrouzeixRaviartMultiDomainElement :
 public virtual LinearisedAxisymmetricQCrouzeixRaviartElement,
  public virtual ElementWithExternalElement
 {
-  public:
- 
+public:
+
  /// Constructor: call the underlying constructors
  LinearisedAxisymmetricQCrouzeixRaviartMultiDomainElement() :
   LinearisedAxisymmetricQCrouzeixRaviartElement(),

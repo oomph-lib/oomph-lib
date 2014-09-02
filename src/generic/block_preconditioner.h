@@ -58,36 +58,44 @@ namespace oomph
 /// It stores four variables:
 /// 
 /// 1) The row and column indices of the block. 
-/// For re-usability, whether these refer to the dof-level or block-level 
+/// Ray: For re-usability, whether these refer to the dof-level or block-level 
 /// indices, the internal or external enumeration is entirely up to the user.
 ///
 /// 2) Wanted: a boolean to indicate if we want this block. Hence the name
-/// "BlockSelector".
+/// "BlockSelector". If a block is not wanted a replacement block of 0s is
+/// used that is the same size, this is so that the desired shape can be kept
+/// without using that block.
 ///
 /// 3) Block_pt: Pointer to the block.
 ///
 /// Example of use: We want to concatenate Jacobian blocks:
 /// 
-/// [J_11, J_12
-///  J_21, J_22]
+/// [J_00, J_01, J_02
+///  J_10, J_11, J_12
+///  J_20, J_21, J_22]
 /// 
 /// We can create a VectorMatrix of BlockSelector objects indicating which
 /// indices (i,j) is required and if we want them or not.
+///
+/// In this case we want to create a matrix using J_00 as the new matrix's 
+/// M_01; J_01 as M_00; J_20 as M_11; and have M_10 be a 0 matrix so that
+/// M is upper triangular.
 /// 
 /// VectorMatrix<BlockSelector> required_block(2,2);
-/// required_block[0][0].select_block(1,1,true);
-/// required_block[0][1].select_block(1,2,true);
-/// required_block[1][0].select_block(2,1,true);
-/// required_block[1][1].select_block(2,2,true);
+/// required_block[0][0].select_block(0,1,true);
+/// required_block[0][1].select_block(0,0,true);
+/// required_block[1][0].select_block(1,0,false);
+/// required_block[1][1].select_block(1,1,true);
 ///
 /// CRDoubleMatrix concatenated_block1 
 ///   = get_concatenated_block(required_block);
 ///
-/// Suppose that we do not want block J_21, then we simply set Wanted to false
-/// by invoking the BlockSelector::do_not_want_block() function and call
+/// Suppose that we do not want block J_01, so that we have a diagonal matrix,
+/// then we simply set Wanted to false  by invoking the 
+/// BlockSelector::do_not_want_block() function and call
 /// get_concatenated_block(...) again:
 ///
-/// required_block[1][0].do_not_want_block();
+/// required_block[0][1].do_not_want_block();
 ///
 /// CRDoubleMatrix concatenated_block2
 ///   = get_concatenated_block(required_block);
@@ -127,33 +135,34 @@ class BlockSelector
     this->build(0,0,false);
   }
 
-  /// \short Constructor, takes the row and column indices 
-  /// and a boolean indicating if the block is required or not. The optional
-  /// parameter block_pt is set to null.
-  BlockSelector(const unsigned& row_index, 
-                const unsigned& column_index, 
-                const bool& wanted,
-                CRDoubleMatrix* block_pt = 0)
+ /// \short Constructor, takes the row and column indices 
+ /// and a boolean indicating if the block is required or not. The optional
+ /// parameter block_pt is set to null. If the block is not required a block
+ /// of the correct dimensions full of 0s is used.
+ BlockSelector(const unsigned& row_index, 
+               const unsigned& column_index, 
+               const bool& wanted,
+               CRDoubleMatrix* block_pt = 0)
   {
 #ifdef PARANOID
-    if((wanted == false) && (block_pt !=0))
+   if((wanted == false) && (block_pt !=0))
     {
-      std::ostringstream err_msg;
-      err_msg << "Trying to construct a BlockSelector object with:\n" 
-        << "block_pt != 0 and wanted == false"
-        << "If you require the block, please set wanted == true.\n";
-      throw OomphLibError(err_msg.str(),
-          OOMPH_CURRENT_FUNCTION,
-          OOMPH_EXCEPTION_LOCATION); 
+     std::ostringstream err_msg;
+     err_msg << "Trying to construct a BlockSelector object with:\n" 
+             << "block_pt != 0 and wanted == false"
+             << "If you require the block, please set wanted == true.\n";
+     throw OomphLibError(err_msg.str(),
+                         OOMPH_CURRENT_FUNCTION,
+                         OOMPH_EXCEPTION_LOCATION); 
     }
 #endif
-
-    // Needs to be set to zero because if the build function leaves the
-    // Block_pt alone if block_pt = 0 (the default argument).
-    // Thus if it is not set here, it would not be initialised to null.
-    Block_pt = 0;
    
-    this->build(row_index,column_index,wanted,block_pt);
+   // Needs to be set to zero because if the build function leaves the
+   // Block_pt alone if block_pt = 0 (the default argument).
+   // Thus if it is not set here, it would not be initialised to null.
+   Block_pt = 0;
+   
+   this->build(row_index,column_index,wanted,block_pt);
   }
 
   /// \short Default destructor.
@@ -232,7 +241,7 @@ class BlockSelector
     Block_pt = block_pt;
   }
 
-  /// \short returns Block_pt
+  /// \short Returns Block_pt
   CRDoubleMatrix* block_pt() const
   {
     return Block_pt;
@@ -269,7 +278,7 @@ class BlockSelector
   }
 
 
-  /// \short output function, outputs the Row_index, Column_index, Wanted and
+  /// \short Output function, outputs the Row_index, Column_index, Wanted and
   /// the address of the Block_pt.
   friend std::ostream& operator<<(std::ostream& o_stream,
                            const BlockSelector& block_selector)
@@ -295,7 +304,7 @@ class BlockSelector
     Column_index = column_index;
     Wanted = wanted;
 
-    // Only set the block_pt if it is set. Otherwise we leave it alone.
+    // Only set the block_pt if it is wanted. Otherwise we leave it alone.
     // All constructors should set Block_pt to 0.
     if(block_pt != 0)
     {
@@ -2279,7 +2288,8 @@ class BlockSelector
    oomph_info << "Block Preconditioner Documentation" << std::endl
               << std::endl;
    oomph_info << "Number of DOF types: " << internal_ndof_types() << std::endl;
-   oomph_info << "Number of block types: " << internal_nblock_types() << std::endl;
+   oomph_info << "Number of block types: " << internal_nblock_types() 
+              << std::endl;
    oomph_info << std::endl;
    if (is_subsidiary_block_preconditioner())
     {
@@ -2752,9 +2762,9 @@ class BlockSelector
       {
         std::ostringstream error_msg;
         error_msg <<"You requested the distribution for the internal block "
-          << b << ".\n"
-          << "But there are only " << internal_nblock_types() << " block types.\n"
-          << std::endl;
+                  << b << ".\n" << "But there are only " 
+                  << internal_nblock_types()
+                  << " block types.\n" << std::endl;
         throw OomphLibError(error_msg.str(),
             OOMPH_CURRENT_FUNCTION,
             OOMPH_EXCEPTION_LOCATION);

@@ -61,32 +61,32 @@ namespace oomph
     // Get the blocks. We have to use new because you can't have containers
     // of matrices because the copy constructor is buggy (so we create a
     // container of pointers instead). ??ds
-    Vector<CRDoubleMatrix*> block_diagonal_matrix_pts(nblock_types, 0);
+    Vector<CRDoubleMatrix*> block_diagonal_matrix_pt(nblock_types, 0);
     for(unsigned i=0; i<nblock_types; i++)
      {
-      block_diagonal_matrix_pts[i] = new CRDoubleMatrix;
+      block_diagonal_matrix_pt[i] = new CRDoubleMatrix;
       this->get_block(i, get_other_diag_ds(i, nblock_types),
-                      *block_diagonal_matrix_pts[i]);
+                      *block_diagonal_matrix_pt[i]);
      }
 
     // Construct the preconditioner array
     Preconditioner_array_pt = new PreconditionerArray;
 
     Preconditioner_array_pt->
-     setup_preconditioners(block_diagonal_matrix_pts,
-                           this->Subsidiary_preconditioner_pts,
+     setup_preconditioners(block_diagonal_matrix_pt,
+                           this->Subsidiary_preconditioner_pt,
                            this->comm_pt());
 
     // and delete the blocks
     for(unsigned i=0; i<nblock_types; i++)
      {
-      delete block_diagonal_matrix_pts[i];
-      block_diagonal_matrix_pts[i] = 0;
+      delete block_diagonal_matrix_pt[i];
+      block_diagonal_matrix_pt[i] = 0;
      }
 
     // Preconditioner array is weird, it calls delete on all the
     // preconditioners you give it and requires new ones each time!
-    this->Subsidiary_preconditioner_pts.clear();
+    this->Subsidiary_preconditioner_pt.clear();
    }
 
 
@@ -101,7 +101,7 @@ namespace oomph
 
       // Set up preconditioner (i.e. approximately solve the block + store solution)
       double superlusetup_start = TimingHelpers::timer();
-      this->Subsidiary_preconditioner_pts[i]->setup(&block,this->comm_pt());
+      this->Subsidiary_preconditioner_pt[i]->setup(&block);
       double superlusetup_end = TimingHelpers::timer();
       oomph_info << "Took " << superlusetup_end - superlusetup_start
                  << "s to setup."<< std::endl;
@@ -144,7 +144,7 @@ namespace oomph
        {
         t_start=TimingHelpers::timer();
        }
-      this->Subsidiary_preconditioner_pts[i]->preconditioner_solve(block_r[i],
+      this->Subsidiary_preconditioner_pt[i]->preconditioner_solve(block_r[i],
                                                                    block_z[i]);
       if (Doc_time_during_preconditioner_solve)
        {
@@ -189,8 +189,8 @@ namespace oomph
     // Get the block and set up the preconditioner.
     {
      CRDoubleMatrix block_matrix = this->get_block(i,i);
-     this->Subsidiary_preconditioner_pts[i]
-      ->setup(&block_matrix, this->comm_pt());
+     this->Subsidiary_preconditioner_pt[i]
+      ->setup(&block_matrix);
     }
      
     // next setup the off diagonal mat vec operators
@@ -212,7 +212,7 @@ namespace oomph
       CRDoubleMatrix block_matrix = this->get_block(i,j);
 
       // Copy the block into a "multiplier" class. If trilinos is being
-      // used this should also be faster than oomph-lib's multiplys.
+      // used this should also be faster than oomph-lib's multiphys.
       Off_diagonal_matrix_vector_products(i,j) = new MatrixVectorProduct();
 
       this->setup_matrix_vector_product(
@@ -260,10 +260,10 @@ namespace oomph
    {
     // ??ds ugly, fix this?
     if(dynamic_cast<BlockPreconditioner<CRDoubleMatrix>*>
-       (this->Subsidiary_preconditioner_pts[i]) == 0)
+       (this->Subsidiary_preconditioner_pt[i]) == 0)
      {
       // solve on the block
-      this->Subsidiary_preconditioner_pts[i]->
+      this->Subsidiary_preconditioner_pt[i]->
        preconditioner_solve(block_r[i], block_z[i]);
      }
     else
@@ -280,7 +280,7 @@ namespace oomph
       this->return_block_vectors(block_r, r_updated);
 
       // Solve (blocking is handled inside the block preconditioner).
-      this->Subsidiary_preconditioner_pts[i]->
+      this->Subsidiary_preconditioner_pt[i]->
        preconditioner_solve(r_updated, block_z_with_size_of_full_z);
 
       // Extract this block's z vector because we need it for the next step
@@ -335,7 +335,7 @@ namespace oomph
   
   // Setup the preconditioner.
   this->fill_in_subsidiary_preconditioners(1); // Only need one preconditioner
-  preconditioner_pt()->setup(&exact_block_matrix, this->comm_pt());
+  preconditioner_pt()->setup(&exact_block_matrix);
  }
  
  //=============================================================================

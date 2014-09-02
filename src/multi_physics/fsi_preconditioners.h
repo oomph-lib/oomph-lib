@@ -330,7 +330,7 @@ void FSIPreconditioner::setup()
   // Navier Stokes mesh and set it up.
   Navier_stokes_preconditioner_pt->
     set_navier_stokes_mesh(Navier_stokes_mesh_pt);
-  Navier_stokes_preconditioner_pt->setup(matrix_pt(),comm_pt());
+  Navier_stokes_preconditioner_pt->setup(matrix_pt());
 
   // Extract the additional blocks we need for FSI:
 
@@ -340,7 +340,7 @@ void FSIPreconditioner::setup()
 
   // Setup the solid preconditioner (inexact solver)
   double t_start = TimingHelpers::timer();
-  Solid_preconditioner_pt->setup(&block_matrix_1_1,comm_pt());
+  Solid_preconditioner_pt->setup(&block_matrix_1_1);
   double t_end = TimingHelpers::timer();
   block_matrix_1_1.clear();
   double setup_time= t_end-t_start;
@@ -779,7 +779,7 @@ void SimpleFSIPreconditioner<MATRIX>::identify_required_blocks(
   
   // Setup preconditioner (i.e. inexact solver) -- does the LU decomposition
   Preconditioner_pt = new SuperLUPreconditioner;
-  Preconditioner_pt->setup(&P_matrix,this->comm_pt());
+  Preconditioner_pt->setup(&P_matrix);
  }
 
 

@@ -5,7 +5,11 @@ OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
 
 
 #Set the number of tests to be checked
-NUM_TESTS=65
+NUM_TESTS=81
+
+# Threshold for number of iterations in comparison of convergence histories
+#===========================================================================
+threshold_for_number_of_iterations=3
 
 # Setup validation directory
 #---------------------------
@@ -14,6 +18,302 @@ rm -r -f Validation
 mkdir Validation
 
 cd Validation
+
+
+# Validation for simple block precond
+#------------------------------------
+
+echo "Simple block preconditioner for 'multi-poisson' "
+mkdir RESLT
+../two_d_multi_poisson --simple > RESLT/OUTPUT
+echo "done"
+echo " " >> validation.log
+echo "'Multi-Poisson' simple preconditioner validation" >> validation.log
+echo "------------------------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat  RESLT/soln0.dat > multi_poisson_simple_prec_results.dat
+cat  RESLT/iterative_solver_convergence.dat > simple_iterative_solver_convergence.dat
+
+if test "$1" = "no_fpdiff"; then
+    echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+    # Compare results
+    ../$OOMPH_ROOT_DIR/bin/fpdiff.py ../validata/multi_poisson_simple_prec_results.dat.gz  \
+        multi_poisson_simple_prec_results.dat >> validation.log
+    
+    #Compare number of iterations against reference data and append
+    ../$OOMPH_ROOT_DIR/bin/compare_file_length_with_tolerance.bash \
+        simple_iterative_solver_convergence.dat \
+        ../validata/simple_iterative_solver_convergence.dat \
+        $threshold_for_number_of_iterations \
+        >>  validation.log
+fi
+
+
+mv RESLT RESLT_multi_poisson_simple_prec
+
+
+
+# Validation for two plus three block precond
+#--------------------------------------------
+
+echo "Two plus three block preconditioner for 'multi-poisson' "
+mkdir RESLT
+../two_d_multi_poisson --two_plus_three > RESLT/OUTPUT
+echo "done"
+echo " " >> validation.log
+echo "'Multi-Poisson' one plus four preconditioner validation" >> validation.log
+echo "-------------------------------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat  RESLT/soln0.dat > multi_poisson_two_plus_three_prec_results.dat
+cat  RESLT/iterative_solver_convergence.dat > two_plus_three_iterative_solver_convergence.dat
+
+if test "$1" = "no_fpdiff"; then
+    echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+    # Compare results
+    ../$OOMPH_ROOT_DIR/bin/fpdiff.py ../validata/multi_poisson_two_plus_three_prec_results.dat.gz  \
+        multi_poisson_two_plus_three_prec_results.dat >> validation.log
+    
+    #Compare number of iterations against reference data and append
+    ../$OOMPH_ROOT_DIR/bin/compare_file_length_with_tolerance.bash \
+        two_plus_three_iterative_solver_convergence.dat \
+        ../validata/two_plus_three_iterative_solver_convergence.dat \
+        $threshold_for_number_of_iterations \
+        >>  validation.log
+fi
+
+mv RESLT RESLT_multi_poisson_two_plus_three_prec
+
+
+# Validation for two plus three upper triangular precond
+#-------------------------------------------------------
+
+echo "Two plus three upper triangular block preconditioner for 'multi-poisson' "
+mkdir RESLT
+../two_d_multi_poisson --two_plus_three_upper_triangular > RESLT/OUTPUT
+echo "done"
+echo " " >> validation.log
+echo "'Multi-Poisson' two plus three upper triangular validation" >> validation.log
+echo "------------------------------------------------------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat  RESLT/soln0.dat > multi_poisson_two_plus_three_upper_triangular_prec_results.dat
+cat  RESLT/iterative_solver_convergence.dat > two_plus_three_upper_triangular_iterative_solver_convergence.dat
+
+if test "$1" = "no_fpdiff"; then
+    echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+    # Compare results
+    ../$OOMPH_ROOT_DIR/bin/fpdiff.py ../validata/multi_poisson_two_plus_three_upper_triangular_prec_results.dat.gz  \
+        multi_poisson_two_plus_three_upper_triangular_prec_results.dat >> validation.log
+    
+    #Compare number of iterations against reference data and append
+    ../$OOMPH_ROOT_DIR/bin/compare_file_length_with_tolerance.bash \
+        two_plus_three_upper_triangular_iterative_solver_convergence.dat \
+        ../validata/two_plus_three_upper_triangular_iterative_solver_convergence.dat \
+        $threshold_for_number_of_iterations \
+        >>  validation.log
+fi
+
+mv RESLT RESLT_multi_poisson_two_plus_three_upper_triangular_prec
+
+
+# Validation for two plus three upper triangular with sub block precond
+#----------------------------------------------------------------------
+
+echo "Two plus three upper triangular block preconditioner with sub for 'multi-poisson' "
+mkdir RESLT
+../two_d_multi_poisson --two_plus_three_upper_triangular_with_sub > RESLT/OUTPUT
+echo "done"
+echo " " >> validation.log
+echo "'Multi-Poisson' two pus three upper triangular with sub validation" >> validation.log
+echo "-----------------------------------------------------------------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat  RESLT/soln0.dat > multi_poisson_two_plus_three_upper_triangular_with_sub_prec_results.dat
+cat  RESLT/iterative_solver_convergence.dat > two_plus_three_upper_triangular_with_sub_iterative_solver_convergence.dat
+
+if test "$1" = "no_fpdiff"; then
+    echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+    # Compare results
+    ../$OOMPH_ROOT_DIR/bin/fpdiff.py ../validata/multi_poisson_two_plus_three_upper_triangular_with_sub_prec_results.dat.gz  \
+        multi_poisson_two_plus_three_upper_triangular_with_sub_prec_results.dat >> validation.log
+    
+    #Compare number of iterations against reference data and append
+    ../$OOMPH_ROOT_DIR/bin/compare_file_length_with_tolerance.bash \
+        two_plus_three_upper_triangular_with_sub_iterative_solver_convergence.dat \
+        ../validata/two_plus_three_upper_triangular_with_sub_iterative_solver_convergence.dat \
+        $threshold_for_number_of_iterations \
+        >>  validation.log
+fi
+
+mv RESLT RESLT_multi_poisson_two_plus_three_upper_triangular_with_sub_subsidiary_prec
+
+# Validation for two plus three upper triangular with two sub block precond
+#--------------------------------------------------------------------------
+
+echo "Two plus three upper triangular block preconditioner with two sub for 'multi-poisson' "
+mkdir RESLT
+../two_d_multi_poisson --two_plus_three_upper_triangular_with_two_sub > RESLT/OUTPUT
+echo "done"
+echo " " >> validation.log
+echo "'Multi-Poisson' two pus three upper triangular with two sub validation" >> validation.log
+echo "-----------------------------------------------------------------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat  RESLT/soln0.dat > multi_poisson_two_plus_three_upper_triangular_with_two_sub_prec_results.dat
+cat  RESLT/iterative_solver_convergence.dat > two_plus_three_upper_triangular_with_two_sub_iterative_solver_convergence.dat
+
+if test "$1" = "no_fpdiff"; then
+    echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+    # Compare results
+    ../$OOMPH_ROOT_DIR/bin/fpdiff.py ../validata/multi_poisson_two_plus_three_upper_triangular_with_two_sub_prec_results.dat.gz  \
+        multi_poisson_two_plus_three_upper_triangular_with_two_sub_prec_results.dat >> validation.log
+    
+    #Compare number of iterations against reference data and append
+    ../$OOMPH_ROOT_DIR/bin/compare_file_length_with_tolerance.bash \
+        two_plus_three_upper_triangular_with_two_sub_iterative_solver_convergence.dat \
+        ../validata/two_plus_three_upper_triangular_with_two_sub_iterative_solver_convergence.dat \
+        $threshold_for_number_of_iterations \
+        >>  validation.log
+fi
+
+mv RESLT RESLT_multi_poisson_two_plus_three_upper_triangular_with_two_sub_subsidiary_prec
+
+# Validation for two plus three upper triangular with replace block precond
+#--------------------------------------------------------------------------
+
+echo "Two plus three upper triangular block preconditioner with replace for 'multi-poisson' "
+mkdir RESLT
+../two_d_multi_poisson --two_plus_three_upper_triangular_with_replace > RESLT/OUTPUT
+echo "done"
+echo " " >> validation.log
+echo "'Multi-Poisson' two pus three upper triangular with replace validation" >> validation.log
+echo "-----------------------------------------------------------------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat  RESLT/soln0.dat > multi_poisson_two_plus_three_upper_triangular_with_replace_prec_results.dat
+cat  RESLT/iterative_solver_convergence.dat > two_plus_three_upper_triangular_with_replace_iterative_solver_convergence.dat
+
+if test "$1" = "no_fpdiff"; then
+    echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+    # Compare results
+    ../$OOMPH_ROOT_DIR/bin/fpdiff.py ../validata/multi_poisson_two_plus_three_upper_triangular_with_replace_prec_results.dat.gz  \
+        multi_poisson_two_plus_three_upper_triangular_with_replace_prec_results.dat >> validation.log
+    
+    #Compare number of iterations against reference data and append
+    ../$OOMPH_ROOT_DIR/bin/compare_file_length_with_tolerance.bash \
+        two_plus_three_upper_triangular_with_replace_iterative_solver_convergence.dat \
+        ../validata/two_plus_three_upper_triangular_with_replace_iterative_solver_convergence.dat \
+        $threshold_for_number_of_iterations \
+        >>  validation.log
+fi
+
+mv RESLT RESLT_multi_poisson_two_plus_three_upper_triangular_with_replace_subsidiary_prec
+
+# Validation for coarse two plus two plus two one
+#------------------------------------------------
+
+echo "Coarse two plus two plus one block preconditioner for 'multi-poisson' "
+mkdir RESLT
+../two_d_multi_poisson --coarse_two_plus_two_plus_one > RESLT/OUTPUT
+echo "done"
+echo " " >> validation.log
+echo "'Multi-Poisson' coarse two plus two plus one with subsidary and replace preconditioner validation" >> validation.log
+echo "------------------------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat  RESLT/soln0.dat > multi_poisson_coarse_two_plus_two_plus_one_prec_results.dat
+cat  RESLT/iterative_solver_convergence.dat > coarse_two_plus_two_plus_one_iterative_solver_convergence.dat
+
+if test "$1" = "no_fpdiff"; then
+    echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+    # Compare results
+    ../$OOMPH_ROOT_DIR/bin/fpdiff.py ../validata/multi_poisson_coarse_two_plus_two_plus_one_prec_results.dat.gz  \
+        multi_poisson_coarse_two_plus_two_plus_one_prec_results.dat >> validation.log
+    
+    #Compare number of iterations against reference data and append
+    ../$OOMPH_ROOT_DIR/bin/compare_file_length_with_tolerance.bash \
+        coarse_two_plus_two_plus_one_iterative_solver_convergence.dat \
+        ../validata/coarse_two_plus_two_plus_one_iterative_solver_convergence.dat \
+        $threshold_for_number_of_iterations \
+        >>  validation.log
+fi
+
+mv RESLT RESLT_multi_poisson_coarse_two_plus_two_plus_one_prec
+
+
+# Validation for upper triangular block precond
+#--------------------------------------------------------
+
+echo "Upper diag block preconditioner for 'multi-poisson' "
+mkdir RESLT
+../two_d_multi_poisson --upper_triangular > RESLT/OUTPUT
+echo "done"
+echo " " >> validation.log
+echo "'Multi-Poisson' upper_triangular preconditioner validation" >> validation.log
+echo "----------------------------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat  RESLT/soln0.dat > multi_poisson_upper_triangular_prec_results.dat
+cat  RESLT/iterative_solver_convergence.dat > upper_triangular_iterative_solver_convergence.dat
+
+if test "$1" = "no_fpdiff"; then
+    echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+    # Compare results
+    ../$OOMPH_ROOT_DIR/bin/fpdiff.py ../validata/multi_poisson_upper_triangular_prec_results.dat.gz  \
+        multi_poisson_upper_triangular_prec_results.dat >> validation.log
+    
+    #Compare number of iterations against reference data and append
+    ../$OOMPH_ROOT_DIR/bin/compare_file_length_with_tolerance.bash \
+        upper_triangular_iterative_solver_convergence.dat \
+        ../validata/upper_triangular_iterative_solver_convergence.dat \
+        $threshold_for_number_of_iterations \
+        >>  validation.log
+fi
+
+mv RESLT RESLT_multi_poisson_upper_triangular_prec
+
+
+
+#####################hierher##############
+
+
+
+
+
 
 
 # Validation for rectangular driven cavity
@@ -105,10 +405,6 @@ fi
 
 mv RESLT RESLT_SuperLU
 
-
-# Threshold for number of iterations in comparison of convergence histories
-#===========================================================================
-threshold_for_number_of_iterations=3
 
 
 # Validation with GMRES

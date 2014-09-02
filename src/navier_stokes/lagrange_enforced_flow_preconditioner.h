@@ -1902,9 +1902,9 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
         Navier_stokes_preconditioner_pt = new SuperLUPreconditioner;
       }
 
-      Navier_stokes_preconditioner_pt->setup(&f_aug_block, comm_pt());
+      Navier_stokes_preconditioner_pt->setup(&f_aug_block);
 
-//      Navier_stokes_preconditioner_pt->setup(f_aug_pt, comm_pt());
+//      Navier_stokes_preconditioner_pt->setup(f_aug_pt);
 
 //      delete f_aug_pt;
 //      f_aug_pt = 0;
@@ -2237,7 +2237,7 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
       //    pause("About to call setup of NS prec."); 
 
       navier_stokes_block_preconditioner_pt
-        ->setup(matrix_pt(), comm_pt());
+        ->setup(matrix_pt());
 
 //      pause("done NS setup"); 
       
@@ -2290,7 +2290,7 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
       {
         Lagrange_multiplier_preconditioner_is_block_preconditioner = false;
 
-        Lagrange_multiplier_preconditioner_pt[l_i]->setup(w_pt[l_i], comm_pt());
+        Lagrange_multiplier_preconditioner_pt[l_i]->setup(w_pt[l_i]);
       }
       else
       {
@@ -2301,7 +2301,7 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
 
         L_block_preconditioner_pt->
           turn_into_subsidiary_block_preconditioner(this,l_mult_dof_map);
-        L_block_preconditioner_pt->setup(matrix_pt(),comm_pt());
+        L_block_preconditioner_pt->setup(matrix_pt());
       }
     }
 

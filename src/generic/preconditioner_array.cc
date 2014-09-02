@@ -2390,7 +2390,7 @@ namespace oomph
 
   // now setup the preconditioner
   Preconditioner_pt = prec_pt[Color];
-  Preconditioner_pt->setup(local_matrix_pt,comm_pt);
+  Preconditioner_pt->setup(local_matrix_pt);
 
   // clean up memory
   if (matrix_pt[0]->distributed())

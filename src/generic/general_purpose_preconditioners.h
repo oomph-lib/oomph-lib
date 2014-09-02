@@ -470,8 +470,7 @@ class InnerIterationPreconditioner : public Preconditioner
    // Setup the inner iteration preconditioner (For some reason we need to
    // remind the compiler that there is also a function named setup in the
    // base class.)
-   Preconditioner_pt->Preconditioner::setup(matrix_pt(),
-                                            comm_pt());
+   Preconditioner_pt->Preconditioner::setup(matrix_pt());
 
    // setup the solverready for resolve
    unsigned max_iter = Solver_pt->max_iter();

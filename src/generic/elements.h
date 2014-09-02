@@ -38,6 +38,7 @@
 
 #include <map>
 #include <deque>
+#include<string>
 #include <list>
 
 //oomph-lib includes
@@ -899,6 +900,27 @@ public:
  /// added). 
  void assign_internal_eqn_numbers(unsigned long &global_number, 
                                   Vector<double *> &Dof_pt);
+
+ /// \short Function to describe the dofs of the element. The ostream 
+ /// specifies the output stream to which the description 
+ /// is written; the string stores the currently 
+ /// assembled output that is ultimately written to the
+ /// output stream by Data::describe_dofs(...); it is typically
+ /// built up incrementally as we descend through the
+ /// call hierarchy of this function when called from 
+ /// Problem::describe_dofs(...)
+ void describe_dofs(std::ostream& out,const std::string& current_string) const;
+ 
+ /// \short Function to describe the local dofs of the element. The ostream 
+ /// specifies the output stream to which the description 
+ /// is written; the string stores the currently 
+ /// assembled output that is ultimately written to the
+ /// output stream by Data::describe_dofs(...); it is typically
+ /// built up incrementally as we descend through the
+ /// call hierarchy of this function when called from 
+ /// Problem::describe_dofs(...)
+ virtual void describe_local_dofs(std::ostream& out,
+                                  const std::string& current_string) const;
 
  /// \short Add pointers to the internal data values to map indexed
  /// by the global equation number.
@@ -2013,6 +2035,29 @@ public:
  /// associated with each equation number are stored in Dof_pt
  virtual void assign_nodal_local_eqn_numbers(
   const bool &store_local_dof_pt);
+
+ /// \short Function to describe the local dofs of the element[s]. The ostream 
+ /// specifies the output stream to which the description 
+ /// is written; the string stores the currently 
+ /// assembled output that is ultimately written to the
+ /// output stream by Data::describe_dofs(...); it is typically
+ /// built up incrementally as we descend through the
+ /// call hierarchy of this function when called from 
+ /// Problem::describe_dofs(...)
+ virtual void describe_local_dofs(std::ostream& out,
+                                  const std::string& current_string) const;
+
+ /// \short Function to describe the local dofs of the element[s]. The ostream 
+ /// specifies the output stream to which the description 
+ /// is written; the string stores the currently 
+ /// assembled output that is ultimately written to the
+ /// output stream by Data::describe_dofs(...); it is typically
+ /// built up incrementally as we descend through the
+ /// call hierarchy of this function when called from 
+ /// Problem::describe_dofs(...)
+ virtual void describe_nodal_local_dofs(
+  std::ostream& out,
+  const std::string& current_string) const;
 
  /// \short Overloaded version of the calculation of the local equation
  /// numbers. If the boolean argument is true then pointers to the degrees
@@ -3416,6 +3461,17 @@ public:
    //Assign the numbering for the solid dofs
    assign_solid_local_eqn_numbers(store_local_dof_pt);
   }
+
+ /// \short Function to describe the local dofs of the element. The ostream 
+ /// specifies the output stream to which the description 
+ /// is written; the string stores the currently 
+ /// assembled output that is ultimately written to the
+ /// output stream by Data::describe_dofs(...); it is typically
+ /// built up incrementally as we descend through the
+ /// call hierarchy of this function when called from 
+ /// Problem::describe_dofs(...)
+ void describe_local_dofs(std::ostream& out,
+                          const std::string& current_string) const;
  
  /// \short Return i-th Lagrangian coordinate at local node n without using
  /// the hanging representation
@@ -3651,6 +3707,10 @@ public:
  /// If the boolean flag is true the the degrees of freedom are stored in
  /// Dof_pt
  virtual void assign_solid_local_eqn_numbers(const bool &store_local_dof);
+
+ /// \short Classifies dofs locally for solid specific aspects.
+ void describe_solid_local_dofs(std::ostream& out,
+                                const std::string& current_string) const;
 
  /// \short Pointer to object that specifies the initial condition
  SolidInitialCondition* Solid_ic_pt;

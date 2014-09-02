@@ -457,7 +457,6 @@ public virtual RefineableLinearisedAxisymmetricQCrouzeixRaviartElement,
  public virtual ElementWithExternalElement
 {
   public:
- 
  /// Constructor: call the underlying constructors
  RefineableLinearisedAxisymmetricQCrouzeixRaviartMultiDomainElement() :
   RefineableLinearisedAxisymmetricQCrouzeixRaviartElement(),

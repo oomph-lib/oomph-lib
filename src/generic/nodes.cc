@@ -793,6 +793,35 @@ void Data::assign_eqn_numbers(unsigned long &global_number,
   }
 }
 
+//================================================================
+/// \short Function to describe the dofs of the Data. The ostream 
+/// specifies the output stream to which the description 
+/// is written; the string stores the currently 
+/// assembled output that is ultimately written to the
+/// output stream by Data::describe_dofs(...); it is typically
+/// built up incrementally as we descend through the
+/// call hierarchy of this function when called from 
+/// Problem::describe_dofs(...)
+//================================================================
+void Data::describe_dofs(std::ostream& out,
+                         const std::string& current_string) const
+{
+ //Loop over the number of variables
+ const unsigned eqn_number_range = Nvalue;
+ for(unsigned i=0;i<eqn_number_range;i++)
+  {
+   int eqn_number=Eqn_number[i];
+   if (eqn_number>=0)
+    {
+     // Note: The spacing around equation number is deliberate.
+     // It allows for searching more easily as Eqn:<space>5<space> would return
+     // a unique dof, whereas Eqn:<space>5 would also return those starting with
+     // 5, such as 500. 
+     out<<"Eqn: "<<eqn_number<<" | Value "<<i<<current_string<<std::endl;
+    }
+  }
+}
+
 
 //================================================================
 ///  Self-test: Have all values been classified as pinned/unpinned?
@@ -3402,6 +3431,35 @@ void SolidNode::assign_eqn_numbers(unsigned long &global_number,
  //Then call standard Data assign_eqn_numbers 
  Data::assign_eqn_numbers(global_number,dof_pt);
 } 
+
+//================================================================
+/// \short Function to describe the dofs of the SolidNode. The ostream 
+/// specifies the output stream to which the description 
+/// is written; the string stores the currently 
+/// assembled output that is ultimately written to the
+/// output stream by Data::describe_dofs(...); it is typically
+/// built up incrementally as we descend through the
+/// call hierarchy of this function when called from 
+/// Problem::describe_dofs(...)
+//================================================================
+void SolidNode::describe_dofs(std::ostream& out,
+                              const std::string& current_string) const
+{
+ //Let's call position equations first
+ {
+  std::stringstream conversion;
+  conversion << " of Solid Node Position" << current_string;
+  std::string in(conversion.str());
+  Variable_position_pt->describe_dofs(out,in);
+ }// Let conversion go out of scope.
+
+ //Then call standard Data version
+ std::stringstream conversion;
+ conversion << " of Data" << current_string;
+ std::string in(conversion.str());
+ Data::describe_dofs(out,in);
+ 
+}
 
 //================================================================
 /// Add pointers to all data values (including position data)

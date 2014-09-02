@@ -192,6 +192,20 @@ class ProjectableElement : public virtual ELEMENT,
    }
  }
   
+ /// \short Function to describe the local dofs of the element. The ostream 
+ /// specifies the output stream to which the description 
+ /// is written; the string stores the currently 
+ /// assembled output that is ultimately written to the
+ /// output stream by Data::describe_dofs(...); it is typically
+ /// built up incrementally as we descend through the
+ /// call hierarchy of this function when called from 
+ /// Problem::describe_dofs(...)
+ void describe_local_dofs(std::ostream& out,
+                          const std::string& current_string) const
+  {
+   ElementWithExternalElement::describe_local_dofs(out,current_string);
+   ELEMENT::describe_local_dofs(out,current_string);
+  }
  
  ///Overloaded version of fill_in_contribution_to_jacobian
  void fill_in_contribution_to_jacobian(Vector<double> &residuals,

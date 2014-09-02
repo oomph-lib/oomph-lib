@@ -597,6 +597,7 @@ class HeatedLinearSurfaceContactElement :
  
   public:
  
+
  /// \short Constructor, which takes a "bulk" element and the 
  /// value of the index and its limit
  HeatedLinearSurfaceContactElement(FiniteElement* const &element_pt, 
@@ -639,6 +640,21 @@ class HeatedLinearSurfaceContactElement :
  /// \short Default constructor
  HeatedLinearSurfaceContactElement(){}
 
+ /// \short Function to describe the local dofs of the element. The ostream 
+ /// specifies the output stream to which the description 
+ /// is written; the string stores the currently 
+ /// assembled output that is ultimately written to the
+ /// output stream by Data::describe_dofs(...); it is typically
+ /// built up incrementally as we descend through the
+ /// call hierarchy of this function when called from 
+ /// Problem::describe_dofs(...)
+ void describe_local_dofs(std::ostream& out,
+                          const std::string& current_string) const
+  {
+   LinearSurfaceContactElement<ELEMENT>::
+    describe_local_dofs(out,current_string);
+   ElementWithExternalElement::describe_local_dofs(out,current_string);
+  }
 
  // hierher why do we suddenly need this?
  /// Final over-rider -- use version in element with external element

@@ -352,8 +352,7 @@ void BiCGStab<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
      //Setup preconditioner from the Jacobian matrix
      double t_start_prec = TimingHelpers::timer(); 
      
-     preconditioner_pt()->setup(matrix_pt,
-                                distribution_pt()->communicator_pt());
+     preconditioner_pt()->setup(matrix_pt);
      
      // Doc time for setup of preconditioner
      double t_end_prec = TimingHelpers::timer(); 
@@ -782,8 +781,7 @@ void CG<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
      //Setup preconditioner from the Jacobian matrix
      double t_start_prec = TimingHelpers::timer(); 
      
-     preconditioner_pt()->setup(matrix_pt,
-                                distribution_pt()->communicator_pt());
+     preconditioner_pt()->setup(matrix_pt);
      
      // Doc time for setup of preconditioner
      double t_end_prec = TimingHelpers::timer(); 
@@ -1576,8 +1574,7 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
      double t_start_prec = TimingHelpers::timer();
      
      // do not setup
-     preconditioner_pt()->setup(matrix_pt, 
-                                distribution_pt()->communicator_pt());
+     preconditioner_pt()->setup(matrix_pt);
      
      // Doc time for setup of preconditioner
      double t_end_prec = TimingHelpers::timer();

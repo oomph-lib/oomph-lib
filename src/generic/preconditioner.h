@@ -85,11 +85,20 @@ namespace oomph
   /// communicator pointer then call preconditioner specific setup()
   /// function. If not in parallel then it is safe to use the default null
   /// communicator pointer.
-  virtual void setup(DoubleMatrixBase* matrix_pt,
-             const OomphCommunicator* comm_pt = 0)
+  void setup(DoubleMatrixBase* matrix_pt)
   {
    set_matrix_pt(matrix_pt);
-   set_comm_pt(comm_pt);
+   DistributableLinearAlgebraObject* dist_obj_pt=
+    dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt);
+   if (dist_obj_pt!=0)
+    {
+     set_comm_pt(dist_obj_pt->distribution_pt()->communicator_pt());
+    }
+   else
+    {
+     set_comm_pt(0);
+    }
+
    double setup_time_start = TimingHelpers::timer();
    setup();
    double setup_time_finish = TimingHelpers::timer();
@@ -102,7 +111,7 @@ namespace oomph
   void setup(const Problem* problem_pt, DoubleMatrixBase* matrix_pt)
   {
    ObsoleteCode::obsolete();
-   setup(matrix_pt, problem_pt->communicator_pt());
+   setup(matrix_pt);
   }
 
   /// \short Setup the preconditioner. Pure virtual generic interface

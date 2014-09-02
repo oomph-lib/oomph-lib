@@ -44,8 +44,6 @@
 namespace oomph
 {
 
-
-
 //=======================================================================
 /// Namespace containing the zero traction function for solid traction
 /// elements
@@ -2557,12 +2555,26 @@ protected:
 //======================================================================
 template <class ELEMENT>
 class FSIImposeDisplacementByLagrangeMultiplierElement : 
-  public virtual FaceGeometry<ELEMENT>, 
-  public virtual SolidFaceElement,
-  public virtual ElementWithExternalElement
+ public virtual FaceGeometry<ELEMENT>, 
+ public virtual SolidFaceElement,
+ public virtual ElementWithExternalElement
 {
  
 public:
+ /// \short Function to describe the local dofs of the elements. The ostream 
+ /// specifies the output stream to which the description 
+ /// is written; the string stores the currently 
+ /// assembled output that is ultimately written to the
+ /// output stream by Data::describe_dofs(...); it is typically
+ /// built up incrementally as we descend through the
+ /// call hierarchy of this function when called from 
+ /// Problem::describe_dofs(...)
+ void describe_local_dofs(std::ostream& out,
+                          const std::string& current_string) const
+  {
+   ElementWithExternalElement::describe_local_dofs(out,current_string);
+   describe_nodal_local_dofs(out,current_string);
+  }
  
  /// \short Constructor takes a "bulk" element and the 
  /// index that identifies which face the FaceElement is supposed
@@ -3089,6 +3101,18 @@ class RefineableFSIImposeDisplacementByLagrangeMultiplierElement :
 {
  
 public:
+ 
+ 
+ /// \short Function to describe the local dofs of the element. The ostream 
+ /// specifies the output stream to which the description 
+ /// is written; the string stores the currently 
+ /// assembled output that is ultimately written to the
+ /// output stream by Data::describe_dofs(...); it is typically
+ /// built up incrementally as we descend through the
+ /// call hierarchy of this function when called from 
+ /// Problem::describe_dofs(...)
+ using FSIImposeDisplacementByLagrangeMultiplierElement<ELEMENT>::
+ describe_local_dofs;
 
  /// \short Constructor takes a "bulk" element and the 
  /// index that identifies which face the FaceElement is supposed

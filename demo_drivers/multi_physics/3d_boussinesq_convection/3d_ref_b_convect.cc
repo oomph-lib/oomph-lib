@@ -345,7 +345,7 @@ void BoussinesqPreconditioner::setup()
    turn_into_subsidiary_block_preconditioner(this,ns_dof_lookup);
 
   // Setup the Navier Stokes preconditioner:
-  Navier_stokes_preconditioner_pt->setup(matrix_pt(),comm_pt());
+  Navier_stokes_preconditioner_pt->setup(matrix_pt());
 
   // Extract the additional blocks we need for Boussinesq:
 
@@ -373,7 +373,7 @@ void BoussinesqPreconditioner::setup()
 
   // Setup the temperature preconditioner (inexact solver)
   double t_start = TimingHelpers::timer();
-  Temperature_preconditioner_pt->setup(block_matrix_1_1_pt, comm_pt());
+  Temperature_preconditioner_pt->setup(block_matrix_1_1_pt);
   double t_end = TimingHelpers::timer();
   double setup_time= t_end-t_start;
   delete block_matrix_1_1_pt; block_matrix_1_1_pt = 0;

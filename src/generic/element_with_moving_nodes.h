@@ -106,6 +106,17 @@ namespace oomph
    BrokenCopy::broken_assign("ElementWithMovingNodes");
   }
 
+ /// \short Function to describe the local dofs of the element. The ostream 
+ /// specifies the output stream to which the description 
+ /// is written; the string stores the currently 
+ /// assembled output that is ultimately written to the
+ /// output stream by Data::describe_dofs(...); it is typically
+ /// built up incrementally as we descend through the
+ /// call hierarchy of this function when called from 
+ /// Problem::describe_dofs(...)
+ void describe_local_dofs(std::ostream& out,
+                          const std::string& current_string) const;
+
  /// Virtual destructor (clean up and allocated memory)
  virtual ~ElementWithMovingNodes()
   {
@@ -361,7 +372,22 @@ template<class ELEMENT,class NODE_TYPE>
  class ElementWithSpecificMovingNodes : public ELEMENT,
  public ElementWithMovingNodes
 {
-  public:
+public:
+
+ /// \short Function to describe the local dofs of the element. The ostream 
+ /// specifies the output stream to which the description 
+ /// is written; the string stores the currently 
+ /// assembled output that is ultimately written to the
+ /// output stream by Data::describe_dofs(...); it is typically
+ /// built up incrementally as we descend through the
+ /// call hierarchy of this function when called from 
+ /// Problem::describe_dofs(...)
+ void describe_local_dofs(std::ostream& out,
+                          const std::string& current_string) const
+  {
+   ELEMENT::describe_local_dofs(out,current_string);
+   ElementWithMovingNodes::describe_local_dofs(out,current_string);
+  }
 
  /// Constructor, call the constructor of the base element
  ElementWithSpecificMovingNodes() : ELEMENT(), ElementWithMovingNodes()
@@ -375,6 +401,13 @@ template<class ELEMENT,class NODE_TYPE>
 
  /// Empty Destructor,
  ~ElementWithSpecificMovingNodes() {}
+
+ /// Unique final overrider for describe_dofs
+ void describe_local_dofs(std::ostream& out, std::string& curr_str)
+  {
+   ElementWithMovingNodes::describe_local_dofs(out,curr_str);
+   ELEMENT::describe_local_dofs(out,curr_str);
+  }
 
 
  /// \short Overload the node assignment routine to assign nodes of the

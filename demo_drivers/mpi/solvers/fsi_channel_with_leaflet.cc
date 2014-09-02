@@ -794,7 +794,7 @@ void SimpleFSIPreconditioner::setup()
 
   // setup the solid preconditioner
   // (perform the LU decomposition)
-  Solid_preconditioner_pt->setup(solid_matrix_pt, comm_pt());
+  Solid_preconditioner_pt->setup(solid_matrix_pt);
   delete solid_matrix_pt; solid_matrix_pt = 0;
 
   // Next the fluid preconditioner
@@ -818,7 +818,7 @@ void SimpleFSIPreconditioner::setup()
   // (Pass it a pointer to the Navier Stokes mesh)
   Navier_stokes_preconditioner_pt->
    set_navier_stokes_mesh(Navier_stokes_mesh_pt);
-  Navier_stokes_preconditioner_pt->setup(matrix_pt(), comm_pt());
+  Navier_stokes_preconditioner_pt->setup(matrix_pt());
 
   // Finally the fluid onto solid matrix vector product operator
   //============================================================

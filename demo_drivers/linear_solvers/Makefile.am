@@ -8,7 +8,9 @@ two_d_poisson_dense_lu \
 two_d_poisson_cg \
 driven_cavity \
 direct_solver_test \
-two_d_linear_elasticity_with_simple_block_diagonal_preconditioner 
+two_d_linear_elasticity_with_simple_block_diagonal_preconditioner \
+two_d_multi_poisson
+
 #driven_cavity_with_simple_lsc_preconditioner 
 
 
@@ -169,6 +171,24 @@ HypreSolver_test_LDADD = \
                  $(FLIBS)
 
 endif
+
+#----------------------------------------------------------------------
+
+
+
+# Sources the executable depends on:
+two_d_multi_poisson_SOURCES = two_d_multi_poisson.cc \
+	multi_poisson_block_preconditioners.h \
+	multi_poisson_elements.h	
+
+# Note: The following only works if the libraries have been installed! 
+
+# Required libraries: Only the "generic" library
+# which are accessible via the general library directory which 
+# we specify with -L. $(FLIBS) get included just in case
+# we decide to use a solver that involves fortran sources. 
+two_d_multi_poisson_LDADD = -L@libdir@ -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
+
 
 #----------------------------------------------------------------------
 

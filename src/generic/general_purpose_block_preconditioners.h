@@ -99,9 +99,9 @@ namespace oomph
   {
    this->clean_up_memory();
 
-   for(unsigned j=0, nj=Subsidiary_preconditioner_pts.size(); j<nj; j++)
+   for(unsigned j=0, nj=Subsidiary_preconditioner_pt.size(); j<nj; j++)
      {
-      delete Subsidiary_preconditioner_pts[j];
+      delete Subsidiary_preconditioner_pt[j];
      }
   }
   
@@ -111,11 +111,11 @@ namespace oomph
   virtual void clean_up_memory()
    {
     // Call clean up in any subsidiary precondtioners that are set.
-    for(unsigned j=0, nj=Subsidiary_preconditioner_pts.size(); j<nj; j++)
+    for(unsigned j=0, nj=Subsidiary_preconditioner_pt.size(); j<nj; j++)
      {
-      if(Subsidiary_preconditioner_pts[j] != 0)
+      if(Subsidiary_preconditioner_pt[j] != 0)
        {
-        Subsidiary_preconditioner_pts[j]->clean_up_memory();
+        Subsidiary_preconditioner_pt[j]->clean_up_memory();
        }
      }
 
@@ -152,9 +152,9 @@ namespace oomph
   {
    // If the vector is currently too small to hold that many
    // preconditioners then expand it and fill with nulls.
-   if(Subsidiary_preconditioner_pts.size() < i +1)
+   if(Subsidiary_preconditioner_pt.size() < i +1)
     {
-     Subsidiary_preconditioner_pts.resize(i+1, 0);
+     Subsidiary_preconditioner_pt.resize(i+1, 0);
     }
    // Note: the size of the vector is checked by
    // fill_in_subsidiary_preconditioners(..)  when we know what size it
@@ -164,13 +164,13 @@ namespace oomph
    // compared to Jacobian size, so a resize doesn't waste much time.
 
    // Put the pointer in the vector
-   Subsidiary_preconditioner_pts[i] = prec;
+   Subsidiary_preconditioner_pt[i] = prec;
   }
 
   /// \short Get the subsidiary precondtioner pointer in block i (is
   /// allowed to be null if not yet set).
   Preconditioner* subsidiary_preconditioner_pt(const unsigned &i) const
-  { return Subsidiary_preconditioner_pts[i]; }
+  { return Subsidiary_preconditioner_pt[i]; }
 
   /// \short specify a DOF to block map
   void set_dof_to_block_map(Vector<unsigned>& dof_to_block_map)
@@ -200,21 +200,21 @@ namespace oomph
   {
 
    // If it's empty then fill it in with null pointers.
-   if(Subsidiary_preconditioner_pts.empty())
+   if(Subsidiary_preconditioner_pt.empty())
     {
-     Subsidiary_preconditioner_pts.assign(nprec_needed, 0); 
+     Subsidiary_preconditioner_pt.assign(nprec_needed, 0); 
     }
    else
     {
      // Otherwise check we have the right number of them
 #ifdef PARANOID
-     if(Subsidiary_preconditioner_pts.size() != nprec_needed)
+     if(Subsidiary_preconditioner_pt.size() != nprec_needed)
       {
        using namespace StringConversion;
        std::string error_msg = "Wrong number of precondtioners in";
-       error_msg += "Subsidiary_preconditioner_pts, should have ";
+       error_msg += "Subsidiary_preconditioner_pt, should have ";
        error_msg += to_string(nprec_needed) + " but we actually have ";
-       error_msg += to_string(Subsidiary_preconditioner_pts.size());
+       error_msg += to_string(Subsidiary_preconditioner_pt.size());
        throw OomphLibError(error_msg, OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
@@ -223,11 +223,11 @@ namespace oomph
 
 
    // Now replace any null pointers with new preconditioners
-   for(unsigned j=0, nj=Subsidiary_preconditioner_pts.size(); j<nj; j++)
+   for(unsigned j=0, nj=Subsidiary_preconditioner_pt.size(); j<nj; j++)
     {
-     if(Subsidiary_preconditioner_pts[j] == 0)
+     if(Subsidiary_preconditioner_pt[j] == 0)
       {
-       Subsidiary_preconditioner_pts[j] = 
+       Subsidiary_preconditioner_pt[j] = 
         (*Subsidiary_preconditioner_creation_function_pt)();
       }
     }
@@ -235,10 +235,10 @@ namespace oomph
   }
 
   /// List of preconditioners to use for the blocks to be solved.
-  Vector<Preconditioner*> Subsidiary_preconditioner_pts;
+  Vector<Preconditioner*> Subsidiary_preconditioner_pt;
 
   /// Function to create any subsidiary preconditioners not set in
-  /// Subsidiary_preconditioner_pts.
+  /// Subsidiary_preconditioner_pt.
   SubsidiaryPreconditionerFctPt Subsidiary_preconditioner_creation_function_pt;
 
  private:
@@ -339,7 +339,7 @@ namespace oomph
   {
 #ifdef PARANOID
    if((Use_two_level_parallelisation) && 
-      !this->Subsidiary_preconditioner_pts.empty())
+      !this->Subsidiary_preconditioner_pt.empty())
     {
      std::string err_msg = 
       "Two level parallelism diagonal block preconditioners cannot have";
@@ -523,7 +523,7 @@ protected:
    /// system (stored in the vector of pointers in the base class);
    Preconditioner*& preconditioner_pt()
    {
-    return this->Subsidiary_preconditioner_pts[0];
+    return this->Subsidiary_preconditioner_pt[0];
    }
   };
 

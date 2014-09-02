@@ -45,6 +45,7 @@
 #include<map>
 #include<set>
 #include<climits>
+#include<string>
 
 //oomph-lib headers
 #include "Vector.h"
@@ -434,6 +435,17 @@ class Data
  /// of unknowns, global_ndof; and add any new dofs to the dof_pt.
  virtual void assign_eqn_numbers(unsigned long &global_ndof, 
                                  Vector<double *> &dof_pt);
+
+ /// \short Function to describe the dofs of the Node. The ostream 
+ /// specifies the output stream to which the description 
+ /// is written; the string stores the currently 
+ /// assembled output that is ultimately written to the
+ /// output stream by Data::describe_dofs(...); it is typically
+ /// built up incrementally as we descend through the
+ /// call hierarchy of this function when called from 
+ /// Problem::describe_dofs(...)
+ virtual void describe_dofs(std::ostream& out,
+                            const std::string& current_string) const;
  
  /// Change (increase) the number of values that may be stored.
  virtual void resize(const unsigned &n_value);
@@ -1728,6 +1740,16 @@ public:
  ///Overload the assign equation numbers routine
  void assign_eqn_numbers(unsigned long &global_number, 
                                  Vector<double *> &dof_pt);
+
+ /// \short Function to describe the dofs of the Node. The ostream 
+ /// specifies the output stream to which the description 
+ /// is written; the string stores the currently 
+ /// assembled output that is ultimately written to the
+ /// output stream by Data::describe_dofs(...); it is typically
+ /// built up incrementally as we descend through the
+ /// call hierarchy of this function when called from 
+ /// Problem::describe_dofs(...)
+ void describe_dofs(std::ostream& out,const std::string& current_string) const;
 
  ///\short Overload the function add_values_to_map so that it also adds
  /// the variable position data

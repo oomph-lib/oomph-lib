@@ -32,6 +32,7 @@
 
 #include<list>
 #include<algorithm>
+#include<string>
 
 #include "oomph_utilities.h"
 #include "problem.h"
@@ -1940,76 +1941,76 @@ ContinuationStorageScheme Problem::Continuation_time_stepper;
 /// (necessary in the parallel implementation of locate_zeta
 /// between multiple meshes).
 //================================================================
-unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
-{
- //Check that the global mesh has been build
+ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
+ {
+  //Check that the global mesh has been build
 #ifdef PARANOID
- if(Mesh_pt==0)
-  {
-   std::ostringstream error_stream;
-   error_stream <<
-    "Global mesh does not exist, so equation numbers cannot be assigned.\n";
-   //Check for sub meshes
-   if(nsub_mesh()==0)
-    {
-     error_stream << "There aren't even any sub-meshes in the Problem.\n"
-                  << "You can set the global mesh directly by using\n"
-                  << "Problem::mesh_pt() = my_mesh_pt;\n"
-                  << "OR you can use Problem::add_sub_mesh(mesh_pt); "
-                  << "to add a sub mesh.\n";
-    }
-   else
-    {
-     error_stream << "There are " << nsub_mesh() << " sub-meshes.\n";
-    }
-   error_stream <<
-    "You need to call Problem::build_global_mesh() to create a global mesh\n"
-                << "from the sub-meshes.\n\n";
+  if(Mesh_pt==0)
+   {
+    std::ostringstream error_stream;
+    error_stream <<
+     "Global mesh does not exist, so equation numbers cannot be assigned.\n";
+    //Check for sub meshes
+    if(nsub_mesh()==0)
+     {
+      error_stream << "There aren't even any sub-meshes in the Problem.\n"
+                   << "You can set the global mesh directly by using\n"
+                   << "Problem::mesh_pt() = my_mesh_pt;\n"
+                   << "OR you can use Problem::add_sub_mesh(mesh_pt); "
+                   << "to add a sub mesh.\n";
+     }
+    else
+     {
+      error_stream << "There are " << nsub_mesh() << " sub-meshes.\n";
+     }
+    error_stream <<
+     "You need to call Problem::build_global_mesh() to create a global mesh\n"
+                 << "from the sub-meshes.\n\n";
 
-   throw OomphLibError(error_stream.str(),
-                       OOMPH_CURRENT_FUNCTION,
-                       OOMPH_EXCEPTION_LOCATION);
-  }
+    throw OomphLibError(error_stream.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
 #endif
 
- // Number of submeshes
- unsigned n_sub_mesh=Sub_mesh_pt.size();
+  // Number of submeshes
+  unsigned n_sub_mesh=Sub_mesh_pt.size();
 
 #ifdef OOMPH_HAS_MPI
 
- // Storage for number of processors
- int n_proc=this->communicator_pt()->nproc();
+  // Storage for number of processors
+  int n_proc=this->communicator_pt()->nproc();
 
 
- if (n_proc>1)
-  {
-   // Force re-analysis of time spent on assembly each
-   // elemental Jacobian
-   Must_recompute_load_balance_for_assembly=true;
-   Elemental_assembly_time.clear();
-  }
- else
-  {
-   Must_recompute_load_balance_for_assembly=false;
-  }
+  if (n_proc>1)
+   {
+    // Force re-analysis of time spent on assembly each
+    // elemental Jacobian
+    Must_recompute_load_balance_for_assembly=true;
+    Elemental_assembly_time.clear();
+   }
+  else
+   {
+    Must_recompute_load_balance_for_assembly=false;
+   }
 
- // Re-distribution of elements over processors during assembly
- // must be recomputed
- if (!Problem_has_been_distributed)
-  {
-   // Set default first and last elements for parallel assembly
-   // of non-distributed problem.
-   set_default_first_and_last_element_for_assembly();
-  }
+  // Re-distribution of elements over processors during assembly
+  // must be recomputed
+  if (!Problem_has_been_distributed)
+   {
+    // Set default first and last elements for parallel assembly
+    // of non-distributed problem.
+    set_default_first_and_last_element_for_assembly();
+   }
 
 #endif
 
 
- double t_start = 0.0;
- if (Global_timings::Doc_comprehensive_timings)
-  {
-   t_start=TimingHelpers::timer();
-  }
+  double t_start = 0.0;
+  if (Global_timings::Doc_comprehensive_timings)
+   {
+    t_start=TimingHelpers::timer();
+   }
 
   // Loop over all elements in the mesh and set up any additional
   // dependencies that they may have (e.g. storing the geometric
@@ -2022,285 +2023,407 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
    }
 
 #ifdef OOMPH_HAS_MPI
- // Complete setup of dependencies for external halo elements too
- unsigned n_mesh=this->nsub_mesh();
- for (unsigned i_mesh=0;i_mesh<n_mesh;i_mesh++)
-  {
-   for (int iproc=0;iproc<n_proc;iproc++)
-    {
-     unsigned n_ext_halo_el=mesh_pt(i_mesh)->nexternal_halo_element(iproc);
-     for (unsigned e=0;e<n_ext_halo_el;e++)
-      {
-       mesh_pt(i_mesh)->external_halo_element_pt(iproc,e)
-        ->complete_setup_of_dependencies();
-      }
-    }
-  }
+  // Complete setup of dependencies for external halo elements too
+  unsigned n_mesh=this->nsub_mesh();
+  for (unsigned i_mesh=0;i_mesh<n_mesh;i_mesh++)
+   {
+    for (int iproc=0;iproc<n_proc;iproc++)
+     {
+      unsigned n_ext_halo_el=mesh_pt(i_mesh)->nexternal_halo_element(iproc);
+      for (unsigned e=0;e<n_ext_halo_el;e++)
+       {
+        mesh_pt(i_mesh)->external_halo_element_pt(iproc,e)
+         ->complete_setup_of_dependencies();
+       }
+     }
+   }
 #endif
 
 
 
 
- double t_end = 0.0;
- if (Global_timings::Doc_comprehensive_timings)
-  {
-   t_end = TimingHelpers::timer();
-   oomph_info
-    << "Time for complete setup of dependencies in assign_eqn_numbers: "
-    << t_end-t_start << std::endl;
-  }
+  double t_end = 0.0;
+  if (Global_timings::Doc_comprehensive_timings)
+   {
+    t_end = TimingHelpers::timer();
+    oomph_info
+     << "Time for complete setup of dependencies in assign_eqn_numbers: "
+     << t_end-t_start << std::endl;
+   }
 
 
- // Initialise number of dofs for reserve below
- unsigned n_dof=0;
+  // Initialise number of dofs for reserve below
+  unsigned n_dof=0;
 
- // Potentially loop over remainder of routine, possible re-visiting all those
- // parts that must be redone, following the removal of duplicate
- // external halo data.
- for (unsigned loop_count=0;loop_count<2;loop_count++)
-  {
-   //(Re)-set the dof pointer to zero length because entries are
-   //pushed back onto it -- if it's not reset here then we get into
-   //trouble during mesh refinement when we reassign all dofs
-   Dof_pt.resize(0);
+  // Potentially loop over remainder of routine, possible re-visiting all those
+  // parts that must be redone, following the removal of duplicate
+  // external halo data.
+  for (unsigned loop_count=0;loop_count<2;loop_count++)
+   {
+    //(Re)-set the dof pointer to zero length because entries are
+    //pushed back onto it -- if it's not reset here then we get into
+    //trouble during mesh refinement when we reassign all dofs
+    Dof_pt.resize(0);
 
-   // Reserve from previous allocation if we're going around again
-   Dof_pt.reserve(n_dof);
+    // Reserve from previous allocation if we're going around again
+    Dof_pt.reserve(n_dof);
 
-   //Reset the equation number
-   unsigned long equation_number=0;
+    //Reset the equation number
+    unsigned long equation_number=0;
 
-   //Now set equation numbers for the global Data
-   unsigned Nglobal_data = nglobal_data();
-   for(unsigned i=0;i<Nglobal_data;i++)
-    {Global_data_pt[i]->assign_eqn_numbers(equation_number,Dof_pt);}
+    //Now set equation numbers for the global Data
+    unsigned Nglobal_data = nglobal_data();
+    for(unsigned i=0;i<Nglobal_data;i++)
+     {Global_data_pt[i]->assign_eqn_numbers(equation_number,Dof_pt);}
 
-   if (Global_timings::Doc_comprehensive_timings)
-    {
-     t_start = TimingHelpers::timer();
-    }
+    if (Global_timings::Doc_comprehensive_timings)
+     {
+      t_start = TimingHelpers::timer();
+     }
 
-   //Call assign equation numbers on the global mesh
-   n_dof = Mesh_pt->assign_global_eqn_numbers(Dof_pt);
+    //Call assign equation numbers on the global mesh
+    n_dof = Mesh_pt->assign_global_eqn_numbers(Dof_pt);
 
-   // Deal with the spine meshes additional numbering
-   //If there is only one mesh
-   if(n_sub_mesh==0)
-    {
-     if(SpineMesh* const spine_mesh_pt = dynamic_cast<SpineMesh*>(Mesh_pt))     
-      {
-       n_dof = spine_mesh_pt->assign_global_spine_eqn_numbers(Dof_pt);
-      }
-    }
-   //Otherwise loop over the sub meshes
-   else
-    {
-     //Assign global equation numbers first
-     for(unsigned i=0;i<n_sub_mesh;i++)
-      {
-       if(SpineMesh* const spine_mesh_pt =
-          dynamic_cast<SpineMesh*>(Sub_mesh_pt[i]))
-        {
-         n_dof = spine_mesh_pt->assign_global_spine_eqn_numbers(Dof_pt);
-        }
-    }
-  }
+    // Deal with the spine meshes additional numbering
+    //If there is only one mesh
+    if(n_sub_mesh==0)
+     {
+      if(SpineMesh* const spine_mesh_pt = dynamic_cast<SpineMesh*>(Mesh_pt))
+       {
+        n_dof = spine_mesh_pt->assign_global_spine_eqn_numbers(Dof_pt);
+       }
+     }
+    //Otherwise loop over the sub meshes
+    else
+     {
+      //Assign global equation numbers first
+      for(unsigned i=0;i<n_sub_mesh;i++)
+       {
+        if(SpineMesh* const spine_mesh_pt =
+           dynamic_cast<SpineMesh*>(Sub_mesh_pt[i]))
+         {
+          n_dof = spine_mesh_pt->assign_global_spine_eqn_numbers(Dof_pt);
+         }
+       }
+     }
 
- if (Global_timings::Doc_comprehensive_timings)
-  {
-   t_end = TimingHelpers::timer();
-   oomph_info
-    << "Time for assign_global_eqn_numbers in assign_eqn_numbers: "
-    << t_end-t_start << std::endl;
-   t_start = TimingHelpers::timer();
-  }
+    if (Global_timings::Doc_comprehensive_timings)
+     {
+      t_end = TimingHelpers::timer();
+      oomph_info
+       << "Time for assign_global_eqn_numbers in assign_eqn_numbers: "
+       << t_end-t_start << std::endl;
+      t_start = TimingHelpers::timer();
+     }
 
 
 #ifdef OOMPH_HAS_MPI
 
-   // reset previous allocation
-   Parallel_sparse_assemble_previous_allocation = 0;
+    // reset previous allocation
+    Parallel_sparse_assemble_previous_allocation = 0;
 
-   // Only synchronise if the problem has actually been
-   // distributed.
-   if (Problem_has_been_distributed)
-    {
-     // Synchronise the equation numbers and return the total
-     // number of degrees of freedom in the overall problem
-     // Do not assign local equation numbers -- we're doing this
-     // below.
-     n_dof=synchronise_eqn_numbers(false);
-    }
-   // ..else just setup the Dof_distribution_pt
-   // NOTE: this is setup by synchronise_eqn_numbers(...)
-   // if Problem_has_been_distributed
-   else
+    // Only synchronise if the problem has actually been
+    // distributed.
+    if (Problem_has_been_distributed)
+     {
+      // Synchronise the equation numbers and return the total
+      // number of degrees of freedom in the overall problem
+      // Do not assign local equation numbers -- we're doing this
+      // below.
+      n_dof=synchronise_eqn_numbers(false);
+     }
+    // ..else just setup the Dof_distribution_pt
+    // NOTE: this is setup by synchronise_eqn_numbers(...)
+    // if Problem_has_been_distributed
+    else
 #endif
-    {
-     Dof_distribution_pt->build(Communicator_pt,n_dof,false);
-    }
+     {
+      Dof_distribution_pt->build(Communicator_pt,n_dof,false);
+     }
 
-   if (Global_timings::Doc_comprehensive_timings)
-    {
-     t_end = TimingHelpers::timer();
-     oomph_info
-      << "Time for Problem::synchronise_eqn_numbers in "
-      << "Problem::assign_eqn_numbers: "
-      << t_end-t_start << std::endl;
-    }
+    if (Global_timings::Doc_comprehensive_timings)
+     {
+      t_end = TimingHelpers::timer();
+      oomph_info
+       << "Time for Problem::synchronise_eqn_numbers in "
+       << "Problem::assign_eqn_numbers: "
+       << t_end-t_start << std::endl;
+     }
 
 
 #ifdef OOMPH_HAS_MPI
 
 
-   // Now remove duplicate data in external halo elements
-   if (Problem_has_been_distributed)
-    {
+    // Now remove duplicate data in external halo elements
+    if (Problem_has_been_distributed)
+     {
 
-     if (Global_timings::Doc_comprehensive_timings)
-      {
-       t_start = TimingHelpers::timer();
-      }
+      if (Global_timings::Doc_comprehensive_timings)
+       {
+        t_start = TimingHelpers::timer();
+       }
 
-     // Monitor if we've actually changed anything
-     bool actually_removed_some_data=false;
+      // Monitor if we've actually changed anything
+      bool actually_removed_some_data=false;
 
-     // Only do it once!
-     if (loop_count==0)
-      {
-       if (n_sub_mesh==0)
-        {
-         remove_duplicate_data(Mesh_pt,actually_removed_some_data);
-        }
-       else
-        {
-         for (unsigned i=0;i<n_sub_mesh;i++)
-          {
-           bool tmp_actually_removed_some_data=false;
-           remove_duplicate_data(Sub_mesh_pt[i],
-                                 tmp_actually_removed_some_data);
-           if (tmp_actually_removed_some_data) actually_removed_some_data=true;
-          }
-        }
-      }
-
-
-     if (Global_timings::Doc_comprehensive_timings)
-      {
-       t_end = TimingHelpers::timer();
-       std::stringstream tmp;
-       tmp << "Time for calls to Problem::remove_duplicate_data in "
-           << "Problem::assign_eqn_numbers: "
-           << t_end-t_start << " ; have ";
-       if (!actually_removed_some_data)
-        {
-         tmp << " not ";
-        }
-       tmp << " removed some/any data.\n";
-       oomph_info << tmp.str();
-       t_start=TimingHelpers::timer();
-      }
-
-     // Break out of the loop if we haven't done anything here.
-     unsigned status=0;
-     if (actually_removed_some_data) status=1;
-
-     // Allreduce to check if anyone has removed any data
-     unsigned overall_status=0;
-     MPI_Allreduce(&status,&overall_status,1,
-                   MPI_UNSIGNED,MPI_MAX,this->communicator_pt()->mpi_comm());
+      // Only do it once!
+      if (loop_count==0)
+       {
+        if (n_sub_mesh==0)
+         {
+          remove_duplicate_data(Mesh_pt,actually_removed_some_data);
+         }
+        else
+         {
+          for (unsigned i=0;i<n_sub_mesh;i++)
+           {
+            bool tmp_actually_removed_some_data=false;
+            remove_duplicate_data(Sub_mesh_pt[i],
+                                  tmp_actually_removed_some_data);
+            if (tmp_actually_removed_some_data) actually_removed_some_data=true;
+           }
+         }
+       }
 
 
-     if (Global_timings::Doc_comprehensive_timings)
-      {
-       t_end = TimingHelpers::timer();
-       std::stringstream tmp;
-       tmp << "Time for MPI_Allreduce after Problem::remove_duplicate_data in "
-           << "Problem::assign_eqn_numbers: "
-           << t_end-t_start << std::endl;
-       oomph_info << tmp.str();
-       t_start=TimingHelpers::timer();
-      }
+      if (Global_timings::Doc_comprehensive_timings)
+       {
+        t_end = TimingHelpers::timer();
+        std::stringstream tmp;
+        tmp << "Time for calls to Problem::remove_duplicate_data in "
+            << "Problem::assign_eqn_numbers: "
+            << t_end-t_start << " ; have ";
+        if (!actually_removed_some_data)
+         {
+          tmp << " not ";
+         }
+        tmp << " removed some/any data.\n";
+        oomph_info << tmp.str();
+        t_start=TimingHelpers::timer();
+       }
 
-     // Bail out if we haven't done anything here
-     if (overall_status!=1)
-      {
-       break;
-      }
+      // Break out of the loop if we haven't done anything here.
+      unsigned status=0;
+      if (actually_removed_some_data) status=1;
 
-     // Big tidy up: Remove null pointers from halo/haloed node storage
-     // for all meshes (this involves comms and therefore must be
-     // performed outside loop over meshes so the all-to-all is only
-     // done once)
-     remove_null_pointers_from_external_halo_node_storage();
+      // Allreduce to check if anyone has removed any data
+      unsigned overall_status=0;
+      MPI_Allreduce(&status,&overall_status,1,
+                    MPI_UNSIGNED,MPI_MAX,this->communicator_pt()->mpi_comm());
 
-     // Time it...
-     if (Global_timings::Doc_comprehensive_timings)
-      {
-       double t_end = TimingHelpers::timer();
-       oomph_info
-        << "Total time for "
-        << "Problem::remove_null_pointers_from_external_halo_node_storage(): "
-        << t_end-t_start << std::endl;
-      }
 
-    }
-   else
-    {
-     // Problem not distributed; no need for another loop
-     break;
-    }
+      if (Global_timings::Doc_comprehensive_timings)
+       {
+        t_end = TimingHelpers::timer();
+        std::stringstream tmp;
+        tmp << "Time for MPI_Allreduce after Problem::remove_duplicate_data in "
+            << "Problem::assign_eqn_numbers: "
+            << t_end-t_start << std::endl;
+        oomph_info << tmp.str();
+        t_start=TimingHelpers::timer();
+       }
+
+      // Bail out if we haven't done anything here
+      if (overall_status!=1)
+       {
+        break;
+       }
+
+      // Big tidy up: Remove null pointers from halo/haloed node storage
+      // for all meshes (this involves comms and therefore must be
+      // performed outside loop over meshes so the all-to-all is only
+      // done once)
+      remove_null_pointers_from_external_halo_node_storage();
+
+      // Time it...
+      if (Global_timings::Doc_comprehensive_timings)
+       {
+        double t_end = TimingHelpers::timer();
+        oomph_info
+         << "Total time for "
+         << "Problem::remove_null_pointers_from_external_halo_node_storage(): "
+         << t_end-t_start << std::endl;
+       }
+
+     }
+    else
+     {
+      // Problem not distributed; no need for another loop
+      break;
+     }
 
 #else
 
-   // Serial run: Again no need for a second loop
-   break;
+    // Serial run: Again no need for a second loop
+    break;
 
 #endif
 
-  } // end of loop over fcts that need to be re-executed if
-    // we've removed duplicate external data
+   } // end of loop over fcts that need to be re-executed if
+  // we've removed duplicate external data
 
 
- // Resize the sparse assemble with arrays previous allocation
- Sparse_assemble_with_arrays_previous_allocation.resize(0);
+  // Resize the sparse assemble with arrays previous allocation
+  Sparse_assemble_with_arrays_previous_allocation.resize(0);
 
 
- if (Global_timings::Doc_comprehensive_timings)
+  if (Global_timings::Doc_comprehensive_timings)
+   {
+    t_start = TimingHelpers::timer();
+   }
+
+  // Finally assign local equations
+  if (assign_local_eqn_numbers)
+   {
+    if (n_sub_mesh==0)
+     {
+      Mesh_pt->assign_local_eqn_numbers(Store_local_dof_pt_in_elements);
+     }
+    else
+     {
+      for (unsigned i=0;i<n_sub_mesh;i++)
+       {
+        Sub_mesh_pt[i]->
+         assign_local_eqn_numbers(Store_local_dof_pt_in_elements);
+       }
+     }
+   }
+
+  if (Global_timings::Doc_comprehensive_timings)
+   {
+    t_end = TimingHelpers::timer();
+    oomph_info
+     << "Total time for all Mesh::assign_local_eqn_numbers in "
+     << "Problem::assign_eqn_numbers: "
+     << t_end-t_start << std::endl;
+   }
+
+
+  // and return the total number of DOFs
+  return n_dof;
+
+ }
+//================================================================
+/// \short Function to describe the dofs in terms of the global 
+/// equation number, i.e. what type of value (nodal value of
+/// a Node; value in a Data object; value of internal Data in an 
+/// element; etc) is the unknown with a certain global equation number.
+/// Output stream defaults to oomph_info.
+//================================================================
+ void Problem::describe_dofs(std::ostream& out) const
+ {
+  //Check that the global mesh has been build
+#ifdef PARANOID
+  if(Mesh_pt==0)
+   {
+    std::ostringstream error_stream;
+    error_stream <<
+     "Global mesh does not exist, so equation numbers cannot be found.\n";
+    //Check for sub meshes
+    if(nsub_mesh()==0)
+     {
+      error_stream << "There aren't even any sub-meshes in the Problem.\n"
+                   << "You can set the global mesh directly by using\n"
+                   << "Problem::mesh_pt() = my_mesh_pt;\n"
+                   << "OR you can use Problem::add_sub_mesh(mesh_pt); "
+                   << "to add a sub mesh.\n";
+     }
+    else
+     {
+      error_stream << "There are " << nsub_mesh() << " sub-meshes.\n";
+     }
+    error_stream <<
+     "You need to call Problem::build_global_mesh() to create a global mesh\n"
+                 << "from the sub-meshes.\n\n";
+
+    throw OomphLibError(error_stream.str(),
+                        OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+
+  out << "Although this program will describe the degrees of freedom in the \n" 
+      << "problem, it will do so using the typedef for the elements. This is \n"
+      << "not neccesarily human readable, but there is a solution.\n"
+      << "Pipe your program's output through c++filt, with the argument -t.\n"
+      << "e.g. \"./two_d_multi_poisson | c++filt -t > ReadableOutput.txt\".\n "
+      << "(Disregarding the quotes)\n\n\n";
+
+  out << "Classifying Global Equation Numbers" << std::endl;
+  out <<  std::string(80,'-') << std::endl;
+
+  // Number of submeshes
+  unsigned n_sub_mesh=Sub_mesh_pt.size();
+  
+  // Classify Global dofs
+  unsigned Nglobal_data = nglobal_data();
+  for(unsigned i=0;i<Nglobal_data;i++)
+   {
+    std::stringstream conversion;
+    conversion <<" in Global Data "<<i<<".";
+    std::string in(conversion.str());
+    Global_data_pt[i]->describe_dofs(out,in);
+   }
+  
+  // Put string in limiting scope.
   {
-   t_start = TimingHelpers::timer();
+   // Descend into assignment for mesh.
+   std::string in(" in Problem's Only Mesh.");
+   Mesh_pt->describe_dofs(out,in);
   }
 
- // Finally assign local equations
- if (assign_local_eqn_numbers)
-  {
-   if (n_sub_mesh==0)
-    {
-     Mesh_pt->assign_local_eqn_numbers(Store_local_dof_pt_in_elements);
-    }
-   else
-    {
-     for (unsigned i=0;i<n_sub_mesh;i++)
-      {
-       Sub_mesh_pt[i]->assign_local_eqn_numbers(Store_local_dof_pt_in_elements);
-      }
-    }
-  }
+  // Deal with the spine meshes additional numbering:
+  // If there is only one mesh:
+  if(n_sub_mesh==0)
+   {
+    if(SpineMesh* const spine_mesh_pt = dynamic_cast<SpineMesh*>(Mesh_pt))     
+     {
+      std::string in(" in Problem's Only SpineMesh.");
+      spine_mesh_pt->describe_spine_dofs(out,in);
+     }
+   }
+  //Otherwise loop over the sub meshes
+  else
+   {
+    //Assign global equation numbers first
+    for(unsigned i=0;i<n_sub_mesh;i++)
+     {
+      if(SpineMesh* const spine_mesh_pt =
+         dynamic_cast<SpineMesh*>(Sub_mesh_pt[i]))
+       {
+        std::stringstream conversion;
+        conversion <<" in Sub-SpineMesh "<<i<<".";
+        std::string in(conversion.str());
+        spine_mesh_pt->describe_spine_dofs(out,in);
+       }// end if.
+     }// end for.
+   }// end else.
 
- if (Global_timings::Doc_comprehensive_timings)
-  {
-   t_end = TimingHelpers::timer();
-   oomph_info
-    << "Total time for all Mesh::assign_local_eqn_numbers in "
-    << "Problem::assign_eqn_numbers: "
-    << t_end-t_start << std::endl;
-  }
 
+  out <<  std::string(80,'\\') << std::endl;
+  out <<  std::string(80,'\\') << std::endl;
+  out <<  std::string(80,'\\') << std::endl;
+  out << "Classifying global eqn numbers in terms of elements." << std::endl;
+  out <<  std::string(80,'-') << std::endl;
+  out << "Eqns   | Source" << std::endl;
+  out << std::string(80,'-') << std::endl;
 
- // and return the total number of DOFs
- return n_dof;
-
-}
+  if (n_sub_mesh==0)
+   {
+    std::string in(" in Problem's Only Mesh.");
+    Mesh_pt->describe_local_dofs(out,in);
+   }
+  else
+   {
+    for (unsigned i=0;i<n_sub_mesh;i++)
+     {
+       std::stringstream conversion;
+       conversion <<" in Sub-Mesh "<<i<<".";
+       std::string in(conversion.str());
+       Sub_mesh_pt[i]->describe_local_dofs(out,in);
+     }// End for
+   }// End else
+ } // End problem::describe_dofs(...)
 
 
 //================================================================

@@ -32,6 +32,8 @@
 #define OOMPH_SPINES_HEADER
 
 
+#include<string>
+
 //oomph-lib headers
 #include "nodes.h"
 #include "elements.h"
@@ -645,6 +647,17 @@ public:
  
  /// Assign equation numbers for spines
  unsigned long assign_global_spine_eqn_numbers(Vector<double *> &Dof_pt);
+
+ /// \short Function to describe the dofs of the Spine. The ostream 
+ /// specifies the output stream to which the description 
+ /// is written; the string stores the currently 
+ /// assembled output that is ultimately written to the
+ /// output stream by Data::describe_dofs(...); it is typically
+ /// built up incrementally as we descend through the
+ /// call hierarchy of this function when called from 
+ /// Problem::describe_dofs(...)
+ void describe_spine_dofs(std::ostream& out,
+                          const std::string& current_string) const;
 
  /// \short Overload the mesh_level timestepper function to set the
  /// timestepper data for the spines

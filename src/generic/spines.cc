@@ -148,6 +148,29 @@ unsigned long SpineMesh::assign_global_spine_eqn_numbers
  return(equation_number);
 }
 
+//====================================================================
+/// \short Function to describe the dofs of the Spine. The ostream 
+/// specifies the output stream to which the description 
+/// is written; the string stores the currently 
+/// assembled output that is ultimately written to the
+/// output stream by Data::describe_dofs(...); it is typically
+/// built up incrementally as we descend through the
+/// call hierarchy of this function when called from 
+/// Problem::describe_dofs(...)
+//====================================================================
+ void SpineMesh::describe_spine_dofs(std::ostream& out,
+                                     const std::string& current_string) const
+ {
+  // Describe spine heights.
+  unsigned long Spine_pt_range = Spine_pt.size();
+  for(unsigned long i=0;i<Spine_pt_range;i++)
+   {
+    std::stringstream conversion;
+    conversion <<" of Spine Height "<<i<<current_string;
+    std::string in(conversion.str());
+    Spine_pt[i]->spine_height_pt()->describe_dofs(out,in);
+   }
+ }
 
 //====================================================================
 /// Assign time stepper to spines data

@@ -1709,6 +1709,16 @@ template<unsigned DIM, unsigned NNODE_1D>
  /// \short Pointer to the j-th vertex node in the element
  Node* vertex_node_pt(const unsigned& j) const
  {return TElement<DIM,NNODE_1D>::vertex_node_pt(j);}
+
+ /// \short Function to describe the local dofs of the element. The ostream 
+ /// specifies the output stream to which the description 
+ /// is written; the string stores the currently 
+ /// assembled output that is ultimately written to the
+ /// output stream by Data::desribe_dofs(...); it is typically
+ /// built up incrementally as we descend through the
+ /// call hierarchy of this function when called from 
+ /// Problem::describe_dofs(...)
+ using SolidFiniteElement::describe_local_dofs;
  
  /// Number of 'flux' terms for Z2 error estimation
  unsigned num_Z2_flux_terms()

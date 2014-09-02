@@ -63,13 +63,50 @@ namespace FSI_functions
 }
 
  
-//===================================================================
+//====================================================================
 /// Flag that allows the suppression of warning messages
 //====================================================================
 bool FSIWallElement::Dont_warn_about_missing_adjacent_fluid_elements=false;
 
+//====================================================================
+/// \short Function to describe the local dofs of the element. The ostream 
+/// specifies the output stream to which the description 
+/// is written; the string stores the currently 
+/// assembled output that is ultimately written to the
+/// output stream by Data::describe_dofs(...); it is typically
+/// built up incrementally as we descend through the
+/// call hierarchy of this function when called from 
+/// Problem::describe_dofs(...)
+//====================================================================
+void FSIWallElement::
+describe_local_dofs(std::ostream& out,const std::string& current_string) const
+{
+ // Call the standard finite element classification.
+ FiniteElement::describe_local_dofs(out,current_string);
+ describe_solid_local_dofs(out,current_string);
+ //Find the number of external field data
+ const unsigned n_external_field_data = nexternal_interaction_field_data();
+ //Now loop over the field data again to assign local equation numbers
+ for(unsigned i=0;i<n_external_field_data;i++)
+  {
+   std::stringstream conversion;
+   conversion<<" of External Interaction Field Data "<<i<<current_string;
+   std::string in(conversion.str());
+   External_interaction_field_data_pt[i]->describe_dofs(out,in);
+  }
 
+ //Find the number of external geometric data
+ unsigned n_external_geom_data = nexternal_interaction_geometric_data();
 
+ //Now loop over the field data again assign local equation numbers
+ for(unsigned i=0;i<n_external_geom_data;i++)
+  {
+   std::stringstream conversion;
+   conversion<<" of External Interaction Geometric Data "<<i<<current_string;
+   std::string in(conversion.str());
+   External_interaction_geometric_data_pt[i]->describe_dofs(out,in);
+  }
+}
 
  //================================================================
  /// Compete build of element: Assign storage -- pass the Eulerian 

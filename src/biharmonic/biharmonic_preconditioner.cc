@@ -163,12 +163,12 @@ namespace Biharmonic_schur_complement_Hypre_defaults
   }
  
  // setup sub preconditioner pt 1
- Sub_preconditioner_1_pt->setup(matrix_pt(),comm_pt());
+ Sub_preconditioner_1_pt->setup(matrix_pt());
  
  // get the matrix ans setup sub preconditioner pt 2
  CRDoubleMatrix* j_33_pt = new CRDoubleMatrix;
  this->get_block(3,3,*j_33_pt);
- Sub_preconditioner_2_pt->setup(j_33_pt,comm_pt());
+ Sub_preconditioner_2_pt->setup(j_33_pt);
  delete j_33_pt; j_33_pt = 0;
 
  // if the block preconditioner has 5 block types setup the preconditioner
@@ -183,7 +183,7 @@ namespace Biharmonic_schur_complement_Hypre_defaults
 
    // setup the hijacked sub preconditioner
    Hijacked_sub_block_preconditioner_pt = new MatrixBasedDiagPreconditioner;
-   Hijacked_sub_block_preconditioner_pt->setup(j_44_pt,comm_pt());
+   Hijacked_sub_block_preconditioner_pt->setup(j_44_pt);
    delete j_44_pt; j_44_pt = 0;
   }
 }
@@ -274,7 +274,7 @@ void ExactSubBiharmonicPreconditioner::setup()
 
   // setup the preconditioner
   Sub_preconditioner_pt = new SuperLUPreconditioner;
-  Sub_preconditioner_pt->setup(&preconditioner_matrix,comm_pt());
+  Sub_preconditioner_pt->setup(&preconditioner_matrix);
 
   // preconditioner_matrix will now go out of scope (and is destroyed).
 }
@@ -349,7 +349,7 @@ void InexactSubBiharmonicPreconditioner::setup()
   Lumped_J_11_preconditioner_pt = 
    new MatrixBasedLumpedPreconditioner<CRDoubleMatrix>;
   Lumped_J_11_preconditioner_pt->
-   setup(Matrix_of_block_pointers(1,1),comm_pt());
+   setup(Matrix_of_block_pointers(1,1));
 
   delete Matrix_of_block_pointers(1,1);
   Matrix_of_block_pointers(1,1) = 0;
@@ -357,7 +357,7 @@ void InexactSubBiharmonicPreconditioner::setup()
   // lump the matrix J_22
   Lumped_J_22_preconditioner_pt = 
    new MatrixBasedLumpedPreconditioner<CRDoubleMatrix>;
-  Lumped_J_22_preconditioner_pt->setup(Matrix_of_block_pointers(2,2),comm_pt());
+  Lumped_J_22_preconditioner_pt->setup(Matrix_of_block_pointers(2,2));
   delete Matrix_of_block_pointers(2,2);
   Matrix_of_block_pointers(2,2) = 0;
 
@@ -387,7 +387,7 @@ void InexactSubBiharmonicPreconditioner::setup()
    }
 
   // setup the preconditioner
-  S_00_preconditioner_pt->setup(S_00_pt,comm_pt());
+  S_00_preconditioner_pt->setup(S_00_pt);
 
   // clean up
   delete S_00_pt;

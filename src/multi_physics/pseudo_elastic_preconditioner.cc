@@ -355,7 +355,7 @@ namespace oomph
                                       solid_matrix_pt(block_i,block_i));
     }
 
-    s_prec_pt->Preconditioner::setup(matrix_pt(),comm_pt());
+    s_prec_pt->Preconditioner::setup(matrix_pt());
     Elastic_preconditioner_pt = s_prec_pt;
    }
   // otherwise it is a block based preconditioner
@@ -435,7 +435,7 @@ namespace oomph
     }
 
     s_prec_pt->set_dof_to_block_map(s_prec_dof_to_block_map);
-    s_prec_pt->Preconditioner::setup(matrix_pt(),comm_pt());
+    s_prec_pt->Preconditioner::setup(matrix_pt());
 
     Elastic_preconditioner_pt = s_prec_pt;
    }
@@ -470,7 +470,7 @@ namespace oomph
      }
     
     // and setup
-    Lagrange_multiplier_preconditioner_pt[d]->setup(b_pt,comm_pt());
+    Lagrange_multiplier_preconditioner_pt[d]->setup(b_pt);
     delete b_pt; b_pt = 0;
    }
 
@@ -667,7 +667,7 @@ namespace oomph
        (Elastic_subsidiary_preconditioner_function_pt);
      }
     s_prec_pt->scaling() = Scaling;
-    s_prec_pt->Preconditioner::setup(matrix_pt(),comm_pt());
+    s_prec_pt->Preconditioner::setup(matrix_pt());
     Elastic_preconditioner_pt = s_prec_pt;
    }
   
@@ -713,7 +713,7 @@ namespace oomph
      }
     
     // setup
-    s_prec_pt->Preconditioner::setup(matrix_pt(),comm_pt());
+    s_prec_pt->Preconditioner::setup(matrix_pt());
     Elastic_preconditioner_pt = s_prec_pt;
 
    }
@@ -740,7 +740,7 @@ namespace oomph
      }
     
     // and setup
-    Lagrange_multiplier_preconditioner_pt[d]->setup(b_pt,comm_pt());
+    Lagrange_multiplier_preconditioner_pt[d]->setup(b_pt);
     delete b_pt; b_pt = 0;
    }
 
@@ -894,7 +894,7 @@ namespace oomph
    {
     Preconditioner_pt = new SuperLUPreconditioner;
    }
-  Preconditioner_pt->setup(&s_prec_pt,comm_pt());
+  Preconditioner_pt->setup(&s_prec_pt);
  }
    
  //=============================================================================
@@ -1018,7 +1018,7 @@ namespace oomph
     Diagonal_block_preconditioner_pt[d]->scaling() = Scaling;
 
     Diagonal_block_preconditioner_pt[d]->
-     Preconditioner::setup(matrix_pt(),comm_pt());
+     Preconditioner::setup(matrix_pt());
     
     // the preconditioning method.\n
     // 0 - block diagonal\n
