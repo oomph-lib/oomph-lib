@@ -468,6 +468,7 @@ class CircularPenetratorElement : public virtual GeneralisedElement,
     (*Target_weight_pt)=-force[1];
    }
 
+
   /// Target weight (returns zero if not imposed)
   double target_weight()
    {
@@ -687,8 +688,12 @@ class CircularPenetratorElement : public virtual GeneralisedElement,
    }
  
   /// \short Get penetration for given point x.
-  double penetration(const Vector<double>& x, const Vector<double>& n) const
+  void penetration(const Vector<double>& x,
+                     const Vector<double>& n,
+                     double& d,
+                     bool& intersection)const
   {
+
    // Vector from potential contact point to centre of penetrator
    Vector<double> l(2);
    l[0]=centre(0)-x[0];
@@ -706,17 +711,18 @@ class CircularPenetratorElement : public virtual GeneralisedElement,
    double b_squared=ll*ll-(*Radius_pt)*(*Radius_pt);
 
    // Is square root negative? In this case we have no intersection
-   // and we return penetration as -DBL_MAX
    if (project_squared<b_squared)
     {
-     return -DBL_MAX;
+     d = -DBL_MAX;
+     intersection = false;
     }
    else
     {
      double sqr=sqrt(project_squared-b_squared);
-     return -std::min(project-sqr,project+sqr);
+     d = -std::min(project-sqr,project+sqr);
+     intersection = true;
     }
-  }
+  }  
 
   /// Output coordinates of penetrator at nplot plot points
   void output(std::ostream &outfile, const unsigned& nplot) const
@@ -738,7 +744,7 @@ class CircularPenetratorElement : public virtual GeneralisedElement,
    unsigned nel=Contact_element_mesh_pt->nelement();
    for (unsigned e=0;e<nel;e++)
     {
-     dynamic_cast<ContactElementBase*>(
+     dynamic_cast<TemplateFreeContactElementBase*>(
       Contact_element_mesh_pt->element_pt(e))->
       resulting_contact_force(el_contact_force);
      for (unsigned i=0;i<2;i++)
@@ -2595,10 +2601,5 @@ int main(int argc, char* argv[])
   
   //Output solution
   problem.doc_solution();
-  
  }
-
-
-
-
 }

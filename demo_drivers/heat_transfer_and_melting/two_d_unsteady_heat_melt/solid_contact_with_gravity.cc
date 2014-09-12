@@ -501,7 +501,8 @@ class CircularPenetratorElement : public virtual GeneralisedElement,
    }
  
   /// \short Get penetration for given point x.
-  double penetration(const Vector<double>& x, const Vector<double>& n) const
+  void penetration(const Vector<double>& x, const Vector<double>& n, 
+                   double& d, bool& intersection) const
   {
    // Vector from potential contact point to centre of penetrator
    Vector<double> l(2);
@@ -523,12 +524,14 @@ class CircularPenetratorElement : public virtual GeneralisedElement,
    // and we return penetration as -DBL_MAX
    if (project_squared<b_squared)
     {
-     return -DBL_MAX;
+     d= -DBL_MAX;
+     intersection = false;
     }
    else
     {
      double sqr=sqrt(project_squared-b_squared);
-     return -std::min(project-sqr,project+sqr);
+     d= -std::min(project-sqr,project+sqr);
+     intersection = true;
     }
   }
 
@@ -553,7 +556,7 @@ class CircularPenetratorElement : public virtual GeneralisedElement,
    unsigned nel=Contact_element_mesh_pt->nelement();
    for (unsigned e=0;e<nel;e++)
     {
-     dynamic_cast<ContactElementBase*>(
+     dynamic_cast<TemplateFreeContactElementBase*>(
       Contact_element_mesh_pt->element_pt(e))->
       resulting_contact_force(el_contact_force);
      for (unsigned i=0;i<2;i++)

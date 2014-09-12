@@ -26,7 +26,8 @@
 //LIC// 
 //LIC//====================================================================
 // Driver for 2D contact problem with displacement and gravity loading
-// and unsteady heat in bulk
+// unsteady heat in penetrator and bulk and continuity of temperature on 
+// contact boundary
 #include <fenv.h> 
 
 //#define STRUCTURED_MESH
@@ -63,13 +64,16 @@ namespace oomph
 {
 
 //======================================================================
-/// Template-free base class... hierher
+/// Template-free base class for a heated penetrator surface which 
+/// conducts to another surface by imposing a flux
 //======================================================================
 class TemplateFreeHeatedPenetratorFluxElementBase
 {
 
 public:
 
+ /// Virtual destructor (empty)
+ virtual ~TemplateFreeHeatedPenetratorFluxElementBase(){}
 
  /// \short Pure virtual function: Return temperature at 
  /// local coordinate s.
@@ -82,8 +86,8 @@ public:
 /////////////////////////////////////////////////////////////////////////
 
 
-//======================class definition==============================
-/// hierher
+//======================class definition==================================
+/// Bulk element which combines linear elasticity and unsteady heat
 //=========================================================================
 template<unsigned DIM, unsigned NNODE_1D>
 class TLinearHeatAndElasticityElement :
@@ -178,7 +182,7 @@ public:
     for(unsigned i=0;i<DIM;i++) 
      {outfile << x[i] << " ";}
 
-    // Output u,v,..
+    // Output displacements
     for(unsigned i=0;i<DIM;i++) 
      {outfile << u[i] << " ";} 
 
@@ -313,7 +317,7 @@ public:
    unsigned nnod=this->nnode();
    for (unsigned j=0;j<nnod;j++)
     {
-     this->node_pt(j)->pin(2); // hierher 
+     this->node_pt(j)->pin(u_index_ust_heat()); 
     }
   }
 
@@ -324,7 +328,7 @@ public:
    unsigned nnod=this->nnode();
    for (unsigned j=0;j<nnod;j++)
     {
-     this->node_pt(j)->pin(0); // hierher 
+     this->node_pt(j)->pin(0); // hierher use u_index fct from lin elast
      this->node_pt(j)->pin(1); // hierher 
     }
   }
@@ -557,13 +561,15 @@ public virtual TElement<DIM-1,NNODE_1D>
 ///////////////////////////////////////////////////////////////////////
 
 //======================================================================
-/// Template-free base class... hierher
+/// Template-free base class for linear contact with a heated penetrator
 //======================================================================
 class TemplateFreeHeatedLinearSurfaceContactElementBase
 {
 
 public:
 
+ /// Virtual destructor (empty)
+ virtual ~TemplateFreeHeatedLinearSurfaceContactElementBase(){}
 
  /// \short Pure virtual function: Return heat flux required to 
  /// maintain continuity of temperature to adjacent penetrator at 
@@ -612,7 +618,8 @@ class HeatedLinearSurfaceContactElement :
   LinearSurfaceContactElement<ELEMENT>(element_pt, 
                                        face_index,
                                        id,
-                                       called_from_refineable_constructor)
+                                       called_from_refineable_constructor),
+  Use_collocated_heat_flux_flag_pt(0)
   {
    // hierher provide separate id via arg list
    Heat_flux_lagr_multiplier_id=id+1;
@@ -631,9 +638,23 @@ class HeatedLinearSurfaceContactElement :
 
 
    // Set source element storage: one interaction with an external 
-   // element -- the HeatedPenetratorFluxElement whose temperture we're 
+   // element -- the HeatedPenetratorFluxElement whose temperature we're 
    //matching
-   this->set_ninteraction(1); 
+   this->set_ninteraction(1);
+   
+   activate_iso_colloc_for_contact = false;
+   ///hierher currently deactivating collocation on contact elements
+   this->Use_isoparametric_flag_pt = &activate_iso_colloc_for_contact;
+   this->Use_collocated_penetration_flag_pt = &activate_iso_colloc_for_contact;
+   this->Use_collocated_contact_pressure_flag_pt =&activate_iso_colloc_for_contact;
+
+   //If we are using a top hat function for the heat flux, we need to change 
+   //the integration scheme
+   if(!use_collocated_heat_flux_flag())
+    {
+     set_integration_scheme(new PiecewiseGauss<1,3>(s_min(),s_max()));
+    }
+   
   }
 
 
@@ -712,6 +733,125 @@ class HeatedLinearSurfaceContactElement :
    return zeta[i]; 
   }
 
+
+ void output(std::ostream &outfile, const unsigned &n_plot)
+  {
+   unsigned n_dim = this->nodal_dimension();
+   
+   Vector<double> x(n_dim);
+   Vector<double> disp(n_dim);
+   Vector<double> x_def(n_dim);
+   Vector<double> s(n_dim-1);
+   Vector<double> r_pen(n_dim);
+   Vector<double> unit_normal(n_dim);
+   Vector<double> interpolated_heat_flux(1);
+   
+   // Tecplot header info
+   outfile << this->tecplot_zone_string(n_plot);
+   
+   // Loop over plot points
+   unsigned num_plot_points=this->nplot_points(n_plot);
+   for (unsigned iplot=0;iplot<num_plot_points;iplot++)
+    {
+     // Get local coordinates of plot point
+     this->get_s_plot(iplot,n_plot,s);
+     
+     // Get coordinates and outer unit normal
+     this->interpolated_x(s,x);
+     this->outer_unit_normal(s,unit_normal);   
+     
+     // Displacement
+     this->interpolated_u_linear_elasticity(s,disp);
+     
+     // Deformed position
+     for(unsigned i=0;i<n_dim;i++) 
+      {
+       x_def[i]=x[i]+disp[i];
+      }
+     
+     // Get penetration based on deformed position
+     double d= 0.0;
+     bool intersection = false;
+     this->penetration(x_def,unit_normal,d,intersection);
+     
+     //Get heat flux
+     interpolated_heat_flux[0] = heat_flux(s);
+     
+     //Output the x,y,..
+     for(unsigned i=0;i<n_dim;i++) 
+      {outfile << x[i] << " ";} // col 1,2
+     
+     // Penetration
+     outfile << std::max(d,-100.0) << " "; // col 3
+     
+     // Lagrange multiplier-like pressure
+     double p=this->get_interpolated_lagrange_p(s);
+     outfile << p << " "; // col 4
+     
+     
+     // Plot Lagrange multiplier like pressure
+     outfile << -unit_normal[0]*p << " "; // col 5
+     outfile << -unit_normal[1]*p << " "; // col 6
+     
+     // Plot vector from current point to boundary of penetrator
+     double d_tmp=d;
+     if (!intersection) d_tmp=0.0;
+     outfile << -d_tmp*unit_normal[0] << " ";  // col 7
+     outfile << -d_tmp*unit_normal[1] << " ";  // col 8
+     
+     // Output normal
+     for(unsigned i=0;i<n_dim;i++) 
+      {outfile << unit_normal[i] << " ";} // col 9, 10
+     
+     //Output the displacements
+     for(unsigned i=0;i<n_dim;i++)
+      {
+       outfile << disp[i] << " "; // col 11, 12
+      }
+     
+     //Output the deformed position
+     for(unsigned i=0;i<n_dim;i++)
+      {
+      outfile << x_def[i] << " "; // col 13, 14
+      }
+     
+     //Output the heat_flux
+     outfile << interpolated_heat_flux[0] << " "; // col 15
+     
+     
+     outfile << std::endl;
+    }
+
+
+  
+  // Write tecplot footer (e.g. FE connectivity lists)
+  this->write_tecplot_zone_footer(outfile,n_plot);
+  
+ }
+
+
+  ///Determine which method to use to discretise heat_flux, collocation (true)
+ ///or integrated using the hat function (false)
+  bool use_collocated_heat_flux_flag()
+  {
+   if (Use_collocated_heat_flux_flag_pt==0)
+    {
+     return false;
+    }
+   else
+    {
+     return *Use_collocated_heat_flux_flag_pt;
+    }
+  } 
+
+
+ /// Access function: Pointer to flag to use collocated heat_flux
+ bool*& use_collocated_heat_flux_flag_pt() 
+  {return Use_collocated_heat_flux_flag_pt;}
+ /// Access function: Pointer to flag to use collocated heat_flux (const version)
+ bool* use_collocated_heat_flux_flag_pt() 
+  const {return Use_collocated_heat_flux_flag_pt;}
+
 protected:
 
  /// \short Overloaded fill in contributions function -- includes heat flux
@@ -721,6 +861,15 @@ protected:
 
  /// ID of heat flux Lagrange multiplier (to ensure continuity of temperature)
  unsigned Heat_flux_lagr_multiplier_id;
+  
+
+ ///Set options for basis/test functions for penetration and pressure
+ bool* Use_collocated_heat_flux_flag_pt;
+
+ /// hierher currently we don't want to use isoparametric for
+ /// the lagrange multipliers and collocation for penetration
+ /// and contact pressure, use this as a bulk switch
+ bool activate_iso_colloc_for_contact;
 
 };
 
@@ -736,9 +885,6 @@ protected:
 /////////////////////////////////////////////////////////////////////////
 
 
-
-
-
 //=====================================================================
 /// Return the residuals for the LinearSurfaceContactElement equations
 //=====================================================================
@@ -746,7 +892,13 @@ template<class ELEMENT>
 void HeatedLinearSurfaceContactElement<ELEMENT>::
 fill_in_contribution_to_residuals_surface_contact(Vector<double> &residuals)
 {
+
+ // Get pointer to bulk element
+ ELEMENT *bulk_el_pt = dynamic_cast<ELEMENT*>(this->bulk_element_pt());
  
+ // Get index of temperature in bulk element
+ unsigned temperature_index=bulk_el_pt->u_index_ust_heat();
+
  // Spatial dimension of problem
  unsigned n_dim = this->nodal_dimension();
    
@@ -774,6 +926,10 @@ fill_in_contribution_to_residuals_surface_contact(Vector<double> &residuals)
 
   // Separate shape functions for Lagrange multiplier
   Shape psi_p(n_node);
+
+  // Separate shape functions for integration (top hat)
+  Shape psi_i(n_node);
+
   Vector<double> s(n_dim-1);
 
   // Contribution to integrated pressure
@@ -803,12 +959,15 @@ fill_in_contribution_to_residuals_surface_contact(Vector<double> &residuals)
     //Only need to call the local derivatives
     this->dshape_local_at_knot(ipt,psi,dpsids);
      
-    // Separate shape function for Lagrange multiplier
+    // Separate shape function for Lagrange multipliers 
     for(unsigned i=0;i<n_dim-1;i++)
      {
       s[i] = this->integral_pt()->knot(ipt,i);
      }
     this->shape_p(s,psi_p);
+    
+    //set up shape for integration
+    this->shape_i(s,psi_i);
 
     // Interpolated Lagrange multiplier (pressure acting on solid)
     double interpolated_lambda_p=0.0;
@@ -850,14 +1009,14 @@ fill_in_contribution_to_residuals_surface_contact(Vector<double> &residuals)
        bnod_pt->index_of_first_value_assigned_by_face_element(
         this->Heat_flux_lagr_multiplier_id);
        
-      // Add to Lagrange multiplier (acting as pressure on solid
-      // to enforce motion to ensure non-penetration)
+      // Add to Lagrange multiplier (acting as a heat flux to enforce
+      // continuity of temperature across boundary)
       interpolated_lambda_q+=this->node_pt(l)->value(first_index_q)*psi_p[l];
-         
-      // Get temperature // hierher needed?
-      interpolated_temp+=this->node_pt(l)->value(2)*psi[l]; // hierher get index
-                                                            // of temperature!
-      //Loop over displacement components
+
+      //Get temperature at this integration point
+      interpolated_temp+=this->node_pt(l)->value(temperature_index)*psi[l];
+
+      //Loop over directions
       for(unsigned i=0;i<n_dim;i++)
        {
         //Calculate the positions
@@ -876,8 +1035,6 @@ fill_in_contribution_to_residuals_surface_contact(Vector<double> &residuals)
        }
      }
      
-
-
     // Get the temperature on the penetrator
     double penetrator_temperature=0.0;
     if (external_element_pt(0,ipt)!=0)
@@ -886,21 +1043,23 @@ fill_in_contribution_to_residuals_surface_contact(Vector<double> &residuals)
       TemplateFreeHeatedPenetratorFluxElementBase* el_pt=
        dynamic_cast<TemplateFreeHeatedPenetratorFluxElementBase*>(
         external_element_pt(0,ipt));
+      // Note: this does NOT take contact or no contact into account
+      // it simply returns the local temperature at "that point" in "that
+      // element"
       penetrator_temperature=el_pt->penetrator_temperature(s_ext);
-      oomph_info << "actual penetrator temperature: " << penetrator_temperature << std::endl;
+
+      /* oomph_info << "actual penetrator temperature: " 
+         << penetrator_temperature << std::endl;*/
      }
     else
      {
-      oomph_info << "default penetrator temperature: " << penetrator_temperature << std::endl;
+      // hierher this should never be triggered on contact surface, 
+      // throw error here? Although it may not always be a problem, depending
+      // on penetrator/contact surface geometry
+
+      oomph_info << "using default penetrator temperature: " 
+                 << penetrator_temperature << std::endl;
      }
-    // hierher 
-
-    //penetrator_temperature=0.0;
-
-   // hierher -- if this goes; kill in HeatedPenetrator too
-    // // Now find temperature on penetrator
-    // double penetrator_temperature=dynamic_cast<HeatedPenetrator*>
-    //  (this->penetrator_pt())->temperature(interpolated_x);
 
     //Now find the local deformed metric tensor from the tangent Vectors
     DenseMatrix<double> A(n_dim-1);
@@ -978,8 +1137,9 @@ fill_in_contribution_to_residuals_surface_contact(Vector<double> &residuals)
        }
       
       
-      // Contribution to heat flux
-      local_eqn = this->nodal_local_eqn(l,2); // hierher get index
+      // Contribution to unsteady heat equation on surface
+      local_eqn = this->nodal_local_eqn(l,temperature_index);
+
       /*IF it's not a boundary condition*/
       if(local_eqn >= 0)
        {
@@ -992,30 +1152,61 @@ fill_in_contribution_to_residuals_surface_contact(Vector<double> &residuals)
        
     //=====CONTRIBUTION TO CONTACT PRESSURE/LAGRANGE MULTIPLIER EQNS ========
     
-    // Get local penetration
-    double d=this->penetration(x_def,interpolated_normal);
-    
-    //Loop over the nodes
+    //Only calculate the integrals we need to
+    if(!this->use_collocated_contact_pressure_flag())
+     {
+      //Loop over the nodes
+      for(unsigned l=0;l<n_node;l++)
+       {
+        // Contribution to integrated pressure
+        pressure_integral[l]+=interpolated_lambda_p*psi_i[l]*W;
+       }
+     }
+
+    if(!this->use_collocated_penetration_flag())
+     {
+      // Get local penetration
+      double d=0.0;
+      bool intersection = false;
+      this->penetration(x_def,interpolated_normal,d,intersection);
+
+      //If there is no intersection, d = -max, ie the penetrator 
+      //is infinitely far away
+      if(!intersection)
+       {
+        d = -DBL_MAX;
+       }
+
+      for(unsigned l=0;l<n_node;l++)
+       {
+        
+        // Contribution to weighted penetration integral
+        penetration_integral[l]+=d*psi_i[l]*W;
+       }
+     }
+
+    if(!this->use_collocated_heat_flux_flag())
+     {
+      for(unsigned l=0;l<n_node;l++)
+       {
+        // Contribution to integrated heat flux
+        heat_flux_integral[l]+=interpolated_lambda_q*psi_i[l]*W;
+       }
+     }
+
+   
     for(unsigned l=0;l<n_node;l++)
      {
-      // Contribution to integrated pressure
-      pressure_integral[l]+=interpolated_lambda_p*psi_p[l]*W;
-         
-      // Contribution to weighted penetration integral
-      penetration_integral[l]+=d*psi_p[l]*W;
-
-      // Contribution to integrated heat flux
-      heat_flux_integral[l]+=interpolated_lambda_q*psi_p[l]*W;
-         
       // Contribution to weighted temperature deviation integral
       temp_deviation_integral[l]+=(interpolated_temp-
-                                   penetrator_temperature)*psi_p[l]*W; 
+                                   penetrator_temperature)*psi_i[l]*W;
      }
+     
 
    } //End of loop over integration points
 
 
-  // Eqn for contact pressure/Lagrange multiplier
+  // Eqn for contact pressure and heat flux
   //---------------------------------------------
   
   // Storage for nodal coordinate
@@ -1036,7 +1227,7 @@ fill_in_contribution_to_residuals_surface_contact(Vector<double> &residuals)
     unsigned first_index_p=
      bnod_pt->index_of_first_value_assigned_by_face_element(this->Contact_id);
        
-    // Equation for Lagrange multiplier
+    // Equation for pressure Lagrange multiplier
     local_eqn_p = this->nodal_local_eqn(l,first_index_p);
        
     // Get the index of the first nodal value associated with
@@ -1045,101 +1236,102 @@ fill_in_contribution_to_residuals_surface_contact(Vector<double> &residuals)
      bnod_pt->index_of_first_value_assigned_by_face_element(
       this->Heat_flux_lagr_multiplier_id);
        
-    // Equation for Lagrange multiplier
+    // Equation number for temperature Lagrange multiplier
     local_eqn_q = this->nodal_local_eqn(l,first_index_q);
-       
 
-    /*IF it's not a boundary condition*/
-    if(local_eqn_p >= 0)
+    //IF it's not a boundary condition for both heat_flux and contact_pressure
+    if(local_eqn_p >= 0 || local_eqn_q >= 0)
      {
+      
+      // Use weighted/integrated quantities intially (could be 0)
+      // then overwrite them if using collocation
+      double d=penetration_integral[l];
+      double contact_pressure=pressure_integral[l];
+      double heat_flux=heat_flux_integral[l];
+      double temp_deviation=temp_deviation_integral[l];
+      
+      //overwrite appropriate measure if using collocation
 
-      // // Enforcement by collocation
-      // bool do_collocation=false;
-      // if (do_collocation)
-      //  {
-      //   // Nodal position
-      //   x[0]=nod_pt->x(0);
-      //   x[1]=nod_pt->x(1);
-           
-      //   // Get outer unit normal
-      //   Vector<double> s(1);
-      //   this->local_coordinate_of_node(l,s);
-      //   Vector<double> unit_normal(2);
-      //   this->outer_unit_normal(s,unit_normal);
-
-      //   // Displacement
-      //   Vector<double> disp(2);
-      //   this->interpolated_u_linear_elasticity(s,disp);
-
-      //   // Deformed position
-      //   Vector<double> x_def(2);
-      //   x_def[0]=x[0]+disp[0];
-      //   x_def[1]=x[1]+disp[1];
-
-      //   // Get penetration
-      //   double d=this->penetration(x_def,unit_normal);
-           
-      //   // Get value of contact pressure
-      //   double contact_pressure=nod_pt->value(first_index);
-           
-      //   // Contact/non-penetration residual
-      //   if (this->Enable_stick)
-      //    {
-      //     // Enforce contact
-      //     local_residuals[local_eqn]-=d;
-      //    }
-      //   else
-      //    {
-      //     // Piecewise linear variation for non-penetration constraint
-      //     if (-d>contact_pressure)
-      //      {
-      //       local_residuals[local_eqn]+=contact_pressure;
-      //      }
-      //     else
-      //      {
-      //       local_residuals[local_eqn]-=d;
-      //      }
-      //    }
-      //  }
-      // // Weighted penetration constraint
-      // else
+      if(this->use_collocated_penetration_flag())
        {
-        // Use weighted/integrated quantities
-        double d=penetration_integral[l];
-        double contact_pressure=pressure_integral[l];
-        double heat_flux=heat_flux_integral[l];
-        double temp=temp_deviation_integral[l];
+        // Nodal position
+        x[0]=nod_pt->x(0);
+        x[1]=nod_pt->x(1);
+        
+        // Get outer unit normal
+        Vector<double> s(1);
+        this->local_coordinate_of_node(l,s);
+        Vector<double> unit_normal(2);
+        this->outer_unit_normal(s,unit_normal);
 
-        // Contact/non-penetration residual
-        if (this->Enable_stick)
+        // Get penetration
+        bool intersection = false;
+        this->penetration(x,unit_normal,d,intersection);
+        
+        //If there is no intersection, d = -max, ie the penetrator 
+        //is infinitely far away
+        if(!intersection)
          {
-          // Enforce contact
-          local_residuals[local_eqn_p]-=d;
+          d = -DBL_MAX;
+         }
+         
+       }
+      
+      //If we are using collocated heat flux, overwrite value
+      if(this->use_collocated_heat_flux_flag())
+       {
+        heat_flux = this->node_pt(l)->value(first_index_q);
+       }
 
-          // Enforce continuity of temperature
+      //If we are using collocated contact pressure, overwrite value
+      if(this->use_collocated_contact_pressure_flag())
+       {
+        contact_pressure=nod_pt->value(first_index_p);
+       }
+
+
+      // Contact/non-penetration residual
+      if (this->Enable_stick)
+       {
+        // Enforce contact
+        if(local_eqn_p >= 0)
+         {
+          local_residuals[local_eqn_p]-=d;
+         }
+
+        // Enforce continuity of temperature
+        if(local_eqn_q >= 0)
+         {
+          local_residuals[local_eqn_q]+=temp_deviation;
+         }
+       }
+      else
+       {
+        // Piecewise linear variation for non-penetration constraint
+        if (-d>contact_pressure)//No penetration
+         {
+          if(local_eqn_p >= 0)
+           {
+            //Crush contact pressure
+            local_residuals[local_eqn_p]+=contact_pressure;
+           }
           if(local_eqn_q >= 0)
            {
-            local_residuals[local_eqn_q]+=temp;
+            //Crush heat flux as no contact means no heat transfer
+            local_residuals[local_eqn_q]+=heat_flux;
            }
          }
-        else
+        else //Penetration
          {
-          // Piecewise linear variation for non-penetration constraint
-          if (-d>contact_pressure)
+          if(local_eqn_p >= 0)
            {
-            local_residuals[local_eqn_p]+=contact_pressure;
-            if(local_eqn_q >= 0)
-             {
-              local_residuals[local_eqn_q]+=heat_flux;
-             }
-           }
-          else
-           {
+            //Increase contact_pressure until d=0 
             local_residuals[local_eqn_p]-=d;
-            if(local_eqn_q >= 0)
-             {
-              local_residuals[local_eqn_q]+=temp;
-             }
+           }
+          if(local_eqn_q >= 0)
+           {
+            //Change lagrange mult (heat flux) until we have continuity
+            local_residuals[local_eqn_q]+=temp_deviation;
            }
          }
        }
@@ -1156,7 +1348,7 @@ fill_in_contribution_to_residuals_surface_contact(Vector<double> &residuals)
      switch(unsigned(this->Penetrator_eq_data_type[i]))
       {
          
-      case ContactElementBase::External_data:
+      case TemplateFreeContactElementBase::External_data:
       {
        int local_eqn=this->external_local_eqn(
         this->Penetrator_eq_data_data_index[i],
@@ -1168,7 +1360,7 @@ fill_in_contribution_to_residuals_surface_contact(Vector<double> &residuals)
       }
       break;
         
-      case ContactElementBase::Nodal_position_data:
+      case TemplateFreeContactElementBase::Nodal_position_data:
       {
        // position type (dummy -- hierher paranoid check)
        unsigned k=0;
@@ -1183,7 +1375,7 @@ fill_in_contribution_to_residuals_surface_contact(Vector<double> &residuals)
       break;
         
         
-      case ContactElementBase::Nodal_data:
+      case TemplateFreeContactElementBase::Nodal_data:
       {
        int local_eqn=this->nodal_local_eqn(
         this->Penetrator_eq_data_data_index[i],
@@ -1339,8 +1531,49 @@ public:
 
  /// \short Output function -- forward to broken version in FiniteElement
  /// until somebody decides what exactly they want to plot here...
- void output(std::ostream &outfile, const unsigned &n_plot)
-  {FaceGeometry<ELEMENT>::output(outfile,n_plot);}
+// void output(std::ostream &outfile, const unsigned &n_plot)
+ // {FaceGeometry<ELEMENT>::output(outfile,n_plot);}
+
+//\short Output function -- hierher rushed
+ void output(std::ostream &outfile, const unsigned &nplot)
+  {
+
+  //Set output Vector
+  Vector<double> s(1); //hierher - should be DIM and DIM-1
+  Vector<double> x(2);
+  
+  // Tecplot header info
+  outfile << this->tecplot_zone_string(nplot);
+  
+  // Loop over plot points
+  unsigned num_plot_points=this->nplot_points(nplot);
+  for (unsigned iplot=0;iplot<num_plot_points;iplot++)
+   {
+    
+    // Get local coordinates of plot point
+    this->get_s_plot(iplot,nplot,s);
+    
+    // Get Eulerian coordinates and displacements
+    this->interpolated_x(s,x);
+    
+    //Output the x,y,..
+    for(unsigned i=0;i<2;i++) 
+     {outfile << x[i] << " ";}
+
+    // Output heat_flux
+    //outfile << this->heat_flux(s) << " ";
+
+    // Output temperature
+    outfile << this->penetrator_temperature(s) << std::endl;   
+
+    outfile << std::endl;
+   }
+  
+  // Write tecplot footer (e.g. FE connectivity lists)
+  this->write_tecplot_zone_footer(outfile,nplot);
+
+  }
+
 
  /// C-style output function -- forward to broken version in FiniteElement
  /// until somebody decides what exactly they want to plot here...
@@ -1700,10 +1933,6 @@ fill_in_generic_residual_contribution_ust_heat_flux(
      // hierher sign?
      flux=-el_pt->heat_flux(s_ext);
     }
-
-   // hierher fake external flux
-   flux+=0.5;
-
 
    //Now add to the appropriate equations
    
@@ -2405,7 +2634,8 @@ class HeatedCircularPenetratorElement : public virtual GeneralisedElement,
    }
  
   /// \short Get penetration for given point x.
-  double penetration(const Vector<double>& x, const Vector<double>& n) const
+  void penetration(const Vector<double>& x, const Vector<double>& n,
+                   double& d,bool& intersection) const
   {
    // Vector from potential contact point to centre of penetrator
    Vector<double> l(2);
@@ -2427,12 +2657,14 @@ class HeatedCircularPenetratorElement : public virtual GeneralisedElement,
    // and we return penetration as -DBL_MAX
    if (project_squared<b_squared)
     {
-     return -DBL_MAX;
+     d= -DBL_MAX;
+     intersection = false;
     }
    else
     {
      double sqr=sqrt(project_squared-b_squared);
-     return -std::min(project-sqr,project+sqr);
+     d= -std::min(project-sqr,project+sqr);
+     intersection = true;
     }
   }
 
@@ -2476,7 +2708,7 @@ class HeatedCircularPenetratorElement : public virtual GeneralisedElement,
    unsigned nel=Contact_element_mesh_pt->nelement();
    for (unsigned e=0;e<nel;e++)
     {
-     dynamic_cast<ContactElementBase*>(
+     dynamic_cast<TemplateFreeContactElementBase*>(
       Contact_element_mesh_pt->element_pt(e))->
       resulting_contact_force(el_contact_force);
      for (unsigned i=0;i<2;i++)
@@ -2633,7 +2865,7 @@ namespace ProblemParameters
  double El_area=0.02;
 
  /// Factor for element length on contact boundary
- double Element_length_factor=1.0;
+ double Element_length_factor=0.01;
 
 
  // /// Body force magnitude
@@ -2687,7 +2919,8 @@ public:
    for (unsigned j=0;j<nnod;j++)
     {
      SolidNode* nod_pt=Bulk_mesh_pt->boundary_node_pt(b,j);
-     // hierher index read out from element
+     // hierher index read out from element, though 
+     // this shouldn't actually be set at all. Kill
      nod_pt->set_value(2,ProblemParameters::T_contact); 
     }
   }
@@ -2705,6 +2938,19 @@ public:
    // but is what we'd do if we wanted to use the solid solve
    // to update a fluid mesh in an FSI problem, say.
    Bulk_mesh_pt->set_lagrangian_nodal_coordinates();
+
+   DoubleVector r;
+   CRDoubleMatrix jac;
+
+   oomph_info << "SETTING UP JAC FOR OUTPUT OF MOST RECENT JAC\n";
+   get_jacobian(r,jac);
+   oomph_info << "DONE SETTING UP JAC FOR OUTPUT OF MOST RECENT JAC\n";
+   jac.sparse_indexed_output("most_recent_jacobian.dat");
+
+   ofstream descr_file;
+   descr_file.open("most_recent_description.dat");
+   describe_dofs(descr_file);
+   descr_file.close();
   }
   
 
@@ -2724,6 +2970,11 @@ public:
 
    double max_el_length=Maximum_element_length_on_contact_boundary*
     ProblemParameters::Element_length_factor;
+
+   //Impose max_el_length from el_area, ie derive average element length from El_area then 
+   //apply multiplier
+   //max_el_length = ProblemParameters::Element_length_factor*
+   //(2*sqrt(sqrt(3))*sqrt(ProblemParameters::El_area));
 
    Bulk_mesh_pt->boundary_polyline_pt(Contact_boundary_id)
     ->set_maximum_length(max_el_length);
@@ -3033,6 +3284,7 @@ private:
            // that originally created this node?
            unsigned n_bulk_value=el_pt->nbulk_value(j);
            
+           // hierher: this statement is unlikely to be true. Fix! 
            // The remaining ones are Lagrange multipliers and we pin them.
            unsigned nval=nod_pt->nvalue();
            for (unsigned j=n_bulk_value;j<nval;j++)
@@ -3765,6 +4017,7 @@ private:
 
  /// Max. element length on contact boundary
  double Maximum_element_length_on_contact_boundary;
+ double Maximum_element_length_on_boulder_boundary;
 
 }; // end of problem class
 
@@ -3827,7 +4080,7 @@ ContactProblem<ELEMENT>::ContactProblem()
  // First bit
  double zeta_start=0.0;
  double zeta_end=MathematicalConstants::Pi;
- unsigned n_seg_boulder=100; 
+ unsigned n_seg_boulder=1000; 
  boulder_outer_curvilinear_boundary_pt[0]=new TriangleMeshCurviLine(
   boulder_boundary_circle_pt,zeta_start,zeta_end,n_seg_boulder,
   Boulder_top_boundary_id);
@@ -3853,7 +4106,7 @@ ContactProblem<ELEMENT>::ContactProblem()
  // Target element size in boulder mesh
  boulder_triangle_mesh_parameters.element_area() = 
   ProblemParameters::El_area;
- 
+
  // Build boulder mesh
  Boulder_mesh_pt=new RefineableTriangleMesh<
   ProjectableUnsteadyHeatElement
@@ -3866,8 +4119,8 @@ ContactProblem<ELEMENT>::ContactProblem()
  Boulder_mesh_pt->spatial_error_estimator_pt()=boulder_error_estimator_pt;
 
  // Set element size limits
- Boulder_mesh_pt->max_element_size()=ProblemParameters::El_area;
- Boulder_mesh_pt->min_element_size()=0.1*ProblemParameters::El_area;
+ //Boulder_mesh_pt->max_element_size()=ProblemParameters::El_area;
+ //Boulder_mesh_pt->min_element_size()=0.1*ProblemParameters::El_area;
   
  
 #ifdef STRUCTURED_MESH
@@ -3969,7 +4222,7 @@ ContactProblem<ELEMENT>::ContactProblem()
   
 
  // Contact boundary
- unsigned npt_contact=20; // hierher 50; 
+ unsigned npt_contact=200; // hierher 20; 
  Vector<Vector<double> > contact_bound_coords(npt_contact);
  contact_bound_coords[0].resize(2);
  contact_bound_coords[0][0]=right_top_bound_coords[npt_right-1][0];
@@ -3995,8 +4248,6 @@ ContactProblem<ELEMENT>::ContactProblem()
  Maximum_element_length_on_contact_boundary=(X_ur-X_ll)/double(npt_contact);
  Contact_boundary_pt->set_maximum_length(
   Maximum_element_length_on_contact_boundary);
-
-
 
  // Left top boundary
  unsigned npt_left=15; 
@@ -4142,9 +4393,17 @@ void ContactProblem<ELEMENT>::doc_solution()
  ofstream some_file;
  char filename[100];
 
+
+ // Write restart file
+/* sprintf(filename,"%s/restart%i.dat",doc_info.directory().c_str(),
+         doc_info.number());
+ some_file.open(filename);
+ dump(some_file); 
+ some_file.close();*/
+
  // Number of plot points
  unsigned npts;
- npts=5;
+ npts=3;
  
  // Output solution 
  sprintf(filename,"%s/soln%i.dat",Doc_info.directory().c_str(),
@@ -4167,7 +4426,21 @@ void ContactProblem<ELEMENT>::doc_solution()
  some_file.open(filename);
  Boulder_mesh_pt->output(some_file,npts);
  some_file.close();
- 
+
+  // Output contact region on boulder
+ sprintf(filename,"%s/boulder_contact%i.dat",Doc_info.directory().c_str(),
+         Doc_info.number());
+ some_file.open(filename);
+ Boulder_surface_contact_mesh_pt->output(some_file,npts);
+ some_file.close();
+
+  // Output contact region on boulder
+ sprintf(filename,"%s/boulder_heat_flux%i.dat",Doc_info.directory().c_str(),
+         Doc_info.number());
+ some_file.open(filename);
+ Boulder_surface_heat_flux_mesh_pt->output(some_file,npts);
+ some_file.close();
+
  // Output solution coarsely (only element vertices for easier
  // mesh visualisation)
  sprintf(filename,"%s/boulder_coarse_soln%i.dat",Doc_info.directory().c_str(),
@@ -4191,7 +4464,7 @@ void ContactProblem<ELEMENT>::doc_solution()
  for (unsigned e=0;e<nel;e++)
   {
    dynamic_cast<HeatedLinearSurfaceContactElement<ELEMENT>* >(
-    Surface_contact_mesh_pt->element_pt(e))->output(some_file,20);
+    Surface_contact_mesh_pt->element_pt(e))->output(some_file,3);
   }
  some_file.close();
 
@@ -4422,6 +4695,10 @@ int main(int argc, char* argv[])
  problem.initialise_dt(dt);
  problem.assign_initial_values_impulsive();
 
+ double max_residuals = 100;
+ problem.max_residuals() = max_residuals;
+ unsigned max_iterations = 10;
+
   //Output initial condition
  problem.doc_solution();
  
@@ -4501,8 +4778,23 @@ int main(int argc, char* argv[])
 
    // Solve
    bool first=false;
-   problem.unsteady_newton_solve(dt,max_adapt,first);
-   
+   // problem.unsteady_newton_solve(dt,max_adapt,first);
+   try
+    {      
+     max_iterations = 10;
+     problem.max_newton_iterations() = max_iterations;
+     problem.unsteady_newton_solve(dt);
+    }
+   catch(OomphLibError& error) //This will catch any error, 
+//but actually we only want to catch failure to converge
+    {
+     max_iterations = 100;
+     problem.max_newton_iterations() = max_iterations;
+     problem.enable_globally_convergent_newton_method();
+     problem.unsteady_newton_solve(dt,false);
+     problem.disable_globally_convergent_newton_method();
+    }
+
    //Output solution
    problem.doc_solution();
   }
@@ -4547,8 +4839,34 @@ int main(int argc, char* argv[])
               << std::endl;
 
    // Solve
-   problem.newton_solve(max_adapt);
    
+   // Try using normal newton solver, if it fails to converge, try a more stabl
+   // but slower globally convergent method
+   try
+    {
+     //This problem can have quite high initial residuals
+     max_residuals = 100;
+
+     //Set max number of iterations to low number
+     max_iterations = 10;
+     problem.max_newton_iterations() = max_iterations;
+
+     problem.newton_solve(max_adapt);
+    }
+   catch(OomphLibError& error) //This will catch any error, 
+       //but actually we only want to catch failure to converge
+    {   
+     //Increase number of iterations to give it chance to converge
+     max_iterations = 100;
+     problem.max_newton_iterations() = max_iterations;
+
+     //Activate globally convergent method, then deactivate after
+     problem.enable_globally_convergent_newton_method();
+     problem.newton_solve(max_adapt);
+     problem.disable_globally_convergent_newton_method();
+    }
+
+
    //Output solution
    problem.doc_solution();
   }
@@ -4570,8 +4888,34 @@ int main(int argc, char* argv[])
             << std::endl;
  
  // Re-solve
- problem.unsteady_newton_solve(dt); // max_adapt);
- 
+ // problem.unsteady_newton_solve(dt); // max_adapt);
+
+ // Try using normal newton solver, if it fails to converge, try a more stable
+ // but slower globally convergent method
+ try
+  {
+   //Set max number of iterations to low number
+   max_iterations = 10;
+   problem.max_newton_iterations() = max_iterations;
+   
+   problem.unsteady_newton_solve(dt);
+  }
+ catch(OomphLibError& error) //This will catch any error, 
+//but actually we only want to catch failure to converge
+  {
+   //Increase number of iterations to give it chance to converge
+   max_iterations = 100;
+   problem.max_newton_iterations() = max_iterations;
+   
+   //Activate globally convergent method, then deactivate after
+   problem.enable_globally_convergent_newton_method();
+   problem.unsteady_newton_solve(dt,false);
+   problem.disable_globally_convergent_newton_method(); 
+  }
+
+
+
+
  //Output solution
  problem.doc_solution();
  
@@ -4645,7 +4989,25 @@ int main(int argc, char* argv[])
               << std::endl;
   
   // Re-solve
-  problem.newton_solve(max_adapt);
+   try
+    {
+     max_residuals = 100;
+     max_iterations = 10;
+     problem.max_newton_iterations() = max_iterations;
+     problem.max_residuals() = max_residuals;
+     problem.newton_solve(max_adapt);
+    }
+   catch(OomphLibError& error) //This will catch any error, 
+//but actually we only want to catch failure to converge
+    {
+     max_iterations = 100;
+     problem.max_newton_iterations() = max_iterations;
+     problem.enable_globally_convergent_newton_method();
+     problem.newton_solve(max_adapt);
+     problem.disable_globally_convergent_newton_method();
+    }
+
+
   
   //Output solution
   problem.doc_solution();

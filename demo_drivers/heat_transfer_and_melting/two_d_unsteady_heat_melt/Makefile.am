@@ -3,7 +3,8 @@ include $(top_srcdir)/config/makefile_templates/demo_drivers
 
 # Name of executables that should run during the self-test
 check_PROGRAMS=pretend_melt spring_contact melt two_d_unsteady_heat \
-stefan_boltzmann stefan_boltzmann_melt solid_contact \
+stefan_boltzmann stefan_boltzmann_melt \
+solid_contact \
 circular_boulder_melt \
 circular_boulder_solar_radiation \
 solid_contact_with_gravity_structured \
@@ -11,6 +12,18 @@ solid_contact_with_gravity_unstructured \
 linear_solid_contact_with_gravity_structured \
 linear_solid_contact_with_gravity_unstructured \
 heated_linear_solid_contact_with_gravity
+
+
+#-------------------------------------------------
+
+# Sources for executable
+solid_contact_SOURCES = solid_contact.cc 
+
+# Required libraries:
+# $(FLIBS) is included in case the solver involves fortran sources.
+solid_contact_LDADD = -L@libdir@  -lsolid -lconstitutive -lgeneric \
+				$(EXTERNAL_LIBS) $(FLIBS)
+
 
 #-------------------------------------------------
 
@@ -23,7 +36,6 @@ heated_linear_solid_contact_with_gravity_LDADD = -L@libdir@ -lunsteady_heat -lli
                                 -lconstitutive \
                                 -lsolid -lgeneric \
 				$(EXTERNAL_LIBS) $(FLIBS)
-
 
 #-------------------------------------------------
 
@@ -100,15 +112,6 @@ circular_boulder_solar_radiation_SOURCES = circular_boulder_solar_radiation.cc
 circular_boulder_solar_radiation_LDADD = -L@libdir@ -lunsteady_heat -lconstitutive -lsolid -lgeneric \
 				$(EXTERNAL_LIBS) $(FLIBS)
 
-#-------------------------------------------------
-
-# Sources for executable
-solid_contact_SOURCES = solid_contact.cc contact_elements.h
-
-# Required libraries:
-# $(FLIBS) is included in case the solver involves fortran sources.
-solid_contact_LDADD = -L@libdir@ -lconstitutive -lsolid -lgeneric \
-				$(EXTERNAL_LIBS) $(FLIBS)
 #-------------------------------------------------
 
 # Sources for executable
