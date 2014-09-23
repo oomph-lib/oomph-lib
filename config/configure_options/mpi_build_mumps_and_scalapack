@@ -88,22 +88,25 @@
 #=====================================================================
 #
 # Compilation with lam mpi compilers (wrappers to gcc) with 
-# debugging (-g) and full warnings. 
+# full optimisation and full warnings. 
 # Library headers in the build directory are replaced by symbolic
 # links to the src directory -- this ensures that you don't
 # accidentally edit a file in the include directory only to have
 # it immediately wiped out when you re-install the library after
 # finishing your changes. Linking is done
-# with the lam mpi fortran compiler.
+# with the lam mpi fortran compiler. Location of mpi header is
+# specified to enable building of scalapack/mumps. Directory was
+# located using "locate mpi.h"
 #
 --enable-suppress-doc
 --enable-MPI
 --enable-symbolic-links-for-headers
 --with-mpi-self-tests="mpirun -np 2"
 --with-mpi-self-tests-variablenp="mpirun -np OOMPHNP"
-CXXFLAGS="-g -Wall"
-CFLAGS="-g"
-FFLAGS="-g"
+--with-mpi-include-directory="/usr/lib/openmpi/include/"
+CXXFLAGS="-O3 -Wall"
+CFLAGS="-O3"
+FFLAGS="-O3"
 FFLAGS_NO_OPT="-O0"
 CXX=mpic++
 CC=mpicc
