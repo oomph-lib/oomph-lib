@@ -13,7 +13,6 @@ linear_solid_contact_with_gravity_structured \
 linear_solid_contact_with_gravity_unstructured \
 heated_linear_solid_contact_with_gravity
 
-
 #-------------------------------------------------
 
 # Sources for executable

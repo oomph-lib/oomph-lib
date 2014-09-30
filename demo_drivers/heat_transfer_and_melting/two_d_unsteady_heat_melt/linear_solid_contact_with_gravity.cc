@@ -1967,7 +1967,7 @@ ContactProblem<ELEMENT>::ContactProblem()
   
 
  // Contact boundary
- unsigned npt_contact=20; // hierher 50; 
+ unsigned npt_contact=20; 
  Vector<Vector<double> > contact_bound_coords(npt_contact);
  contact_bound_coords[0].resize(2);
  contact_bound_coords[0][0]=right_top_bound_coords[npt_right-1][0];

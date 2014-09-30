@@ -185,21 +185,14 @@ class Penetrator
   /// Output coordinates of penetrator at nplot plot points
   virtual void output(std::ostream &outfile, const unsigned& nplot) const =0;
   
-
-
-  // ---------------- hierher -------------------------------------------
-  // NOTE: NOT SURE IF THE FUNCTIONS BELOW ARE REALLY NEEDED IN THE BASE CLASS.
-  // NEEDED FOR FORCE LOADED PENETRATORS; MAYBE IMPLEMENT BOTH AS VIRTUAL
-  // WITH DEFAULTS FOR THE CASE WHERE THERE'S NO SUCH THING (ALREADY
-  // DONE FOR equilibrium_data() ANYWAY.
-  // ---------------- hierher -------------------------------------------
-
   /// \short Get rigid body displacement of reference point in penetrator.
-  /// ...really pure virtual?
-  virtual Vector<double> rigid_body_displacement() const // hierher=0;
+  /// Broken virtual, so you don't really have to imlement this...
+  virtual Vector<double> rigid_body_displacement() const 
   {
-   oomph_info << "broken virtual hierher\n";
-   abort();
+   throw OomphLibError(
+    "This is a broken virtual function. Please implement/overload. ",
+    OOMPH_CURRENT_FUNCTION,
+    OOMPH_EXCEPTION_LOCATION);
   }
 
   /// \short Vector of pairs identifying values (via a pair of pointer to 
@@ -214,28 +207,17 @@ class Penetrator
     return dummy;
    }
 
-  // ---------------- hierher -------------------------------------------
-  // NOTE NOT SURE IF THE FUNCTIONS BELOW ARE REALLY NEEDED -- THEY CAME
-  // IN WHEN STARTING TO THE HEAT TRANSFER...
-  // ---------------- hierher -------------------------------------------
-
-  /// \short Get position to surface, r, in terms of surface coordinate zeta.
-  /// hierher this becomes the new position
-  virtual void position_from_zeta(const Vector<double>& zeta, 
-                                  Vector<double>& r) const // hierher=0;
-  {
-   oomph_info << "broken virtual hierher\n";
-   abort();
-  }
-
-
-  /// \short Get surface coordinate along penetrator for given point x.
-  /// hierher ... as above...
+  /// \short Get surface coordinate along penetrator for given point x;
+  /// implies some sort of "projection"-type relation between
+  /// point x and the parametrisation of the surface (e.g. polar
+  /// angle).
   virtual void surface_coordinate(const Vector<double>& x, 
-                                  Vector<double>& zeta) const // hierher=0;
+                                  Vector<double>& zeta) const 
   {
-   oomph_info << "broken virtual hierher\n";
-   abort();
+   throw OomphLibError(
+    "This is a broken virtual function. Please implement/overload. ",
+    OOMPH_CURRENT_FUNCTION,
+    OOMPH_EXCEPTION_LOCATION);
   }
     
 
@@ -463,6 +445,9 @@ namespace PolygonHelper
   // Total number of vertices
   unsigned nvertex=polygon_vertex.size();
 
+// faire: obviously polygons should ALWAYS be designed to be closed, so
+// such testing should only need to be done once upon implementation of
+// the polygon, not everytime we want to check number of intersections 
 // hierher #ifdef PARANOID
   
   // Make sure the polygon closes exactly:
@@ -536,8 +521,7 @@ namespace PolygonHelper
 ////////////////////////////////////////////////////////////////////////
 
 //======================================================================
-/// Template-free base class for contact elements
-// hierher rename to TemplateFree...
+/// Template-free base class for contact elements 
 //======================================================================
 class TemplateFreeContactElementBase : public virtual FiniteElement
 {
@@ -774,16 +758,22 @@ class SurfaceContactElementBase : public virtual FaceGeometry<ELEMENT>,
        OOMPH_EXCEPTION_LOCATION);
      }
 #endif
-   
-    // If at least one of them is true, then we need to change to discontinuous
-    // integration scheme
-    if(!(this->use_isoparametric_flag() && 
-         this->use_collocated_contact_pressure_flag() && 
-         this->use_collocated_penetration_flag()))
-    // Change integration scheme if we are going to be using discontinuous functions
+
+    // Always use piecewise Gauss -- it "over-integrates" for isoparametric formulations
+    // but is likely to be better for discontinuous basis fcts.
+    //Only implemented for 1,3 (1 is from surface of 2D bulk) (3 for quadratic elements)
+#ifdef PARANOID
+    // Bit hacky... Only really works for three-noded 1D elements
+    if (n_nod!=3)
      {
-      set_integration_scheme(new PiecewiseGauss<1,3>(s_min(),s_max()));
+      //Issue a warning
+      throw OomphLibError(
+       "Piecwise Gauss used here isn't appropriate for non-3-node elements.\n",
+       OOMPH_CURRENT_FUNCTION,
+       OOMPH_EXCEPTION_LOCATION);
      }
+#endif
+     set_integration_scheme(new PiecewiseGauss<1,3>(s_min(),s_max()));
    }
  
 
@@ -824,7 +814,8 @@ class SurfaceContactElementBase : public virtual FaceGeometry<ELEMENT>,
     fill_in_contribution_to_residuals_surface_contact(residuals);
    }
    
-   
+   // fiare: we are currently using FD, but this may be useful if that ever changes
+   // some parts of the jacobian are known a priori
    // hierher FD the lot for now
    // /// Fill in contribution from Jacobian
    // void fill_in_contribution_to_jacobian(Vector<double> &residuals,
@@ -1516,6 +1507,7 @@ fill_in_contribution_to_residuals_surface_contact(Vector<double> &residuals)
    }
  }
 
+// faire: we need to go through this
  // Now deal with the penetrator equilibrium equations (if any!)
  unsigned n=this->Penetrator_eq_data_type.size();
  for (unsigned i=0;i<n;i++)
@@ -1930,7 +1922,6 @@ public virtual SurfaceContactElementBase<ELEMENT>
       disp[i] += this->nodal_value(l,u_nodal_index)*psi[l];
      }
    }
-  // hierher paranoid check via bulk
  }
   
 
@@ -2281,6 +2272,7 @@ fill_in_contribution_to_residuals_surface_contact(Vector<double> &residuals)
    }
  }
 
+//faire: equilibrium again
  // Now deal with the penetrator equilibrium equations (if any!)
  unsigned n=this->Penetrator_eq_data_type.size();
  for (unsigned i=0;i<n;i++)

@@ -2865,6 +2865,7 @@ namespace ProblemParameters
  double El_area=0.02;
 
  /// Factor for element length on contact boundary
+ /// ie how many times smaller should the elements on the boundary be?
  double Element_length_factor=0.01;
 
 
@@ -2968,13 +2969,13 @@ public:
                                                 Contact_boundary_id);
 #else
 
-   double max_el_length=Maximum_element_length_on_contact_boundary*
-    ProblemParameters::Element_length_factor;
+   //double max_el_length=Maximum_element_length_on_contact_boundary*
+   //ProblemParameters::Element_length_factor;
 
    //Impose max_el_length from el_area, ie derive average element length from El_area then 
    //apply multiplier
-   //max_el_length = ProblemParameters::Element_length_factor*
-   //(2*sqrt(sqrt(3))*sqrt(ProblemParameters::El_area));
+   double max_el_length = ProblemParameters::Element_length_factor*
+    (2*sqrt(sqrt(3))*sqrt(ProblemParameters::El_area));
 
    Bulk_mesh_pt->boundary_polyline_pt(Contact_boundary_id)
     ->set_maximum_length(max_el_length);
@@ -4118,9 +4119,9 @@ ContactProblem<ELEMENT>::ContactProblem()
  Z2ErrorEstimator* boulder_error_estimator_pt=new Z2ErrorEstimator;
  Boulder_mesh_pt->spatial_error_estimator_pt()=boulder_error_estimator_pt;
 
- // Set element size limits
- //Boulder_mesh_pt->max_element_size()=ProblemParameters::El_area;
- //Boulder_mesh_pt->min_element_size()=0.1*ProblemParameters::El_area;
+ // Set element size limits (faire: just uncommented both of these)
+ Boulder_mesh_pt->max_element_size()=ProblemParameters::El_area;
+ Boulder_mesh_pt->min_element_size()=0.1*ProblemParameters::El_area;
   
  
 #ifdef STRUCTURED_MESH
