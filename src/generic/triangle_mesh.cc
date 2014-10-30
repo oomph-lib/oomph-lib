@@ -1370,7 +1370,9 @@ void TriangleMeshCurveSection::connect_final_vertex_to_curviline(
 #ifdef PARANOID
  double z_initial = curviline_pt->zeta_start();
  double z_final = curviline_pt->zeta_end();
- if (s_value < z_initial || z_final < s_value)
+ double z_max = std::max(z_initial,z_final);
+ double z_min = std::min(z_initial,z_final);
+ if (s_value < z_min || z_max < s_value)
   {
    std::ostringstream error_stream;
    error_stream
