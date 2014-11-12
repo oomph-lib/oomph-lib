@@ -281,13 +281,12 @@ class RefineableElement : public virtual FiniteElement
    return Local_hang_eqn[i][node_pt];
   }
 
- /// \short Interface to function that builds the element: i.e. 
- /// construct the nodes, assign their positions, 
- //  apply boundary conditions, etc. The 
- /// required procedures depend on the geometrical type of the element
- /// and must be implemented in specific refineable elements. Any new
- /// nodes created during the build process are returned in the 
- /// vector new_node_pt.
+ /// \short Interface to function that builds the element: i.e.  construct
+ /// the nodes, assign their positions, apply boundary conditions, etc. The
+ /// required procedures depend on the geometrical type of the element and
+ /// must be implemented in specific refineable elements. Any new nodes
+ /// created during the build process are returned in the vector
+ /// new_node_pt.
  virtual void build(Mesh* &mesh_pt, Vector<Node*> &new_node_pt,
                     bool &was_already_built, std::ofstream &new_nodes_file)=0;
 
@@ -364,17 +363,17 @@ class RefineableElement : public virtual FiniteElement
 
  /// \short Get all continously interpolated function values in this 
  /// element as a Vector. Note: Vector sets is own size to ensure that
- /// that this function can be used in black-box fashion
+ /// that this function can be used in black-box fashion.
  virtual void get_interpolated_values(const Vector<double>&s, 
                                       Vector<double>& values)
  {
   get_interpolated_values(0, s, values);
  }
  
- /// \short Get all continously interpolated function values at previous 
- /// timestep in this element as a Vector. (t=0: present; t>0: prev. timestep)
- /// Note: Vector sets is own size to ensure that
- /// that this function can be used in black-box fashion
+ /// \short Get all continously interpolated function values at previous
+ /// timestep in this element as a Vector. (t=0: present; t>0:
+ /// prev. timestep) Note: Vector sets is own size to ensure that that this
+ /// function can be used in black-box fashion.
  virtual void get_interpolated_values(const unsigned& t,
                                       const Vector<double>&s, 
                                       Vector<double>& values)=0;
