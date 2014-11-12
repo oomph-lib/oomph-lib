@@ -239,6 +239,9 @@ fi
 
 confdir="config/configure.ac_scripts"
 
+# Ensure required files exist
+touch "$confdir/makefile_list"
+
 # Get a list of locations of files named Makefile.am, modify a little and
 # write to stdout.
 GetDirList ()
@@ -278,7 +281,7 @@ cat "$confdir/core.dir_list" \
 # included in configure.ac and tell the user. The fact that we have
 # modified a file included in configure.ac will cause make to rerun
 # autoconf and configure.
-if ! diff -q -N "$confdir/new_makefile_list" "$confdir/makefile_list" > /dev/null 2>&1; 
+if ! diff -q "$confdir/new_makefile_list" "$confdir/makefile_list" > /dev/null 2>&1; 
 then
     echo "New/removed user dirs detected and $confdir/new_makefile_list updated, configure will be rerun automatically by make."
 
