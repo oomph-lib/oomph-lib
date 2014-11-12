@@ -20,6 +20,50 @@ OptionRead()
  echo $Opt
 }
 
+# Convert a string passed as argument to return true/false (ie a bool),
+# return value 255 indicates error.
+yntobool()
+{
+    if [[ $1 == "y" || $1 == "Y" ]]; then
+        return $(true) # 0 == true in bash
+    elif [[ $1 == "n" || $1 == "N" ]]; then
+        return $(false) # 1 is false in bash
+    else
+        echo "I don't understand \"$1\", y/n only please."
+        return 255
+    fi
+}
+
+# Read a y/n answer from input, if the answer is not y/n then repeat until
+# it is.
+YesNoRead()
+{
+    prompt="$1"
+    default="$2"
+
+    # Read an answer
+    printf "%s y/n [default %s]: " "$1" "$2"
+    read Opt
+
+    # Convert to a bool
+    bool=""
+    if [[ $Opt == "" ]]; then
+        yntobool $default
+        bool=$?
+    else
+        yntobool $Opt
+        bool=$?
+    fi
+
+    # If we didn't recognise it then try again
+    if [[ $bool != 1 && $bool != 0 ]]; then
+        YesNoRead $prompt $default
+        return $?
+    fi
+
+    return $bool
+}
+
 #This little function takes the input, removes anything following a #
 #deletes blanks lines and then replaces all newlines by spaces
 ProcessOptionsFile()
@@ -184,9 +228,8 @@ if $raw_build; then
     echo " links tend to be machine-specific so it's best to force "
     echo " autoconf/automake to rebuild them on the new machine]."
     echo " "
-    echo " Do you want to wipe the helper scripts [y/n -- default: n]"
-    reply=`OptionRead`
-    if test "$reply" = "y" -o "$reply" = "Y" ; then 
+    
+    if YesNoRead "Do you want to wipe the helper scripts?" "n"; then
         echo " "
         echo "As a backup: Here are the old symbolic links:"
         echo " "
@@ -256,13 +299,9 @@ echo " "
 echo "    " $build_dir
 echo " "
 echo " "
-OptionPrompt " Is this OK? [y/n -- default: n]"
-reply=`OptionRead`
-if test "$reply" != "y" -a "$reply" != "Y" ; then 
-   OptionPrompt "Specify build directory [e.g. /home/joe_user/build] :"
-   build_dir=`OptionRead`
-else
-    echo "It's ok"
+if ! YesNoRead "Is this OK?" "n"; then
+    OptionPrompt "Specify build directory [e.g. /home/joe_user/build] :"
+    build_dir=`OptionRead`
 fi
 
 
@@ -326,32 +365,25 @@ if test "$configure_options_are_ok" != ""; then
   echo " " 
   echo $configure_options_are_ok
   echo " " 
-  reply="n"
-  OptionRead #This is just a pause
+  echo "==============================================================="
+  
+  # Fail, go back to start of loop
+  continue
+fi 
 
-#If the options are in the correct order, ask whether they are OK
-else
+# Ask if these options are OK
+echo " "
+echo "Configure options are: "
+echo 
+echo $configure_options
+echo 
 
-  echo " "
-  echo "Configure options are: "
-  echo 
-  echo $configure_options
-  echo 
-  if test $list_changed = "false"; then
-   OptionPrompt "Is this OK? [y/n -- default: y]"
-   reply=`OptionRead`
-  else
-   reply="n"
-   list_changed="false"
-  fi
-fi
-
-
-#If it's not OK, then read in alternative options from a file, or
-#specify on command line
 private_configure_option_files=""
-if test "$reply" = "n" -o "$reply" = "N"; then
- 
+if [[ $list_changed == "true" ]] || ! YesNoRead "Is this OK?" "y"; then
+
+  # Now the list hasn't changed
+  list_changed="false"
+
   #Remove the current symbolic link (or file)
   #rm -f config/configure_options/current   
 
