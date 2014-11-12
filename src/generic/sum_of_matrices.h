@@ -34,6 +34,13 @@ namespace oomph
     this->build(mesh_pt, dof_index);
    }
 
+  /// Construct lookup schemes from int array (HLib's format for this
+  /// data).
+  NodeGlobalNumbersLookup(const int* lookup_array, const unsigned& length)
+  {
+   this->build(lookup_array, length);
+  }
+
   /// Destructor
   ~NodeGlobalNumbersLookup() {}
 
@@ -91,6 +98,26 @@ namespace oomph
   void build(const Mesh* mesh_pt, const unsigned& dof_index)
    {
     construct_node_to_global_mapping(mesh_pt, dof_index);
+    construct_reverse_mapping();
+   }
+
+  /// Construct lookup schemes from int array (HLib's format for this
+  /// data).
+  void build(const int* lookup_array, const unsigned& length)
+   {
+#ifdef PARANOID
+    for(unsigned j=0; j<length; j++)
+     {
+      if(lookup_array[j] < 0)
+       {
+        std::string err = "negative entry in lookup array!";
+        throw OomphLibError(err, OOMPH_EXCEPTION_LOCATION,
+                            OOMPH_CURRENT_FUNCTION);
+       }
+     } 
+#endif
+    // Copy array into mapping and generate the inverse lookup
+    Node_to_global_mapping.assign(lookup_array, lookup_array+length);
     construct_reverse_mapping();
    }
 
