@@ -180,7 +180,7 @@ def find_validate_dirs(base_dirs):
     return all_validation_dirs
 
 
-def dispatch_dir(dirname, features):
+def dispatch_dir(dirname, features, **kwargs):
     """Check for missing features and print the appropriate message if
     needed. Otherwise run the check function."""
 
@@ -193,7 +193,7 @@ def dispatch_dir(dirname, features):
                missing_feature_message(dirname, feature['feature_name'])
                return
 
-    make_check_in_dir(dirname)
+    make_check_in_dir(dirname, **kwargs)
 
 
 # Functions for checking if a test needs a certain feature
@@ -203,7 +203,7 @@ def check_if_arpack_driver(d): return "eigenproblems" in d
 
 # The function doing the bulk of the actual work (called many times in
 # parallel by main).
-def make_check_in_dir(directory):
+def make_check_in_dir(directory, just_build=False):
     """
     Rebuild binaries in the directory using make if needed then run the
     tests.
@@ -242,15 +242,23 @@ def make_check_in_dir(directory):
             build_fail_message(directory)
             return
 
-        tracefile.write("\nRunning self test properly:\n")
-        tracefile.flush()
+        if not just_build:
+            tracefile.write("\nRunning self test properly:\n")
+            tracefile.flush()
 
-        # Run make check (runs the actual test)
-        test_result = subp.call(['make', 'check', '--silent',
-                                'LIBTOOLFLAGS=--silent'],
-                                cwd = directory,
-                                stdout=tracefile,
-                                stderr=subp.STDOUT)
+            # Run make check (runs the actual test)
+            test_result = subp.call(['make', 'check', '--silent',
+                                    'LIBTOOLFLAGS=--silent'],
+                                    cwd = directory,
+                                    stdout=tracefile,
+                                    stderr=subp.STDOUT)
+
+        else:
+            tracefile.write(
+                "\nNot running self test because you set the 'just_build' option\n")
+            tracefile.flush()
+
+            test_result = 0
 
     final_tracefile_path = pjoin(directory, "Validation", "make_check_output")
 
@@ -337,6 +345,9 @@ def main():
     parser.add_argument('--check-scripts', action='store_true',
                         help='Check all the validate.sh scripts using a simple '
                         + 'regex to make sure that they set an exit status.')
+
+    parser.add_argument('--just-build', action='store_true',
+                        help="Only build the tests, don't run them")
 
     parser.add_argument('--serial-mode', action='store_true',
                         help='Run the script without parallelism (for debugging'
@@ -450,7 +461,7 @@ def main():
     validation_dirs = find_validate_dirs(abs_base_dirs)
 
     # Construct final function to run on each directory
-    f = pt(dispatch_dir, features=oomph_features)
+    f = pt(dispatch_dir, features=oomph_features, just_build=args.just_build)
 
     if args.serial_mode:
         list(map(f, validation_dirs)) # list forces evaluation of the map
