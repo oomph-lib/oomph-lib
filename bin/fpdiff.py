@@ -32,27 +32,21 @@ def read_file(filename):
  read as binary (rather than text) files
  """
  import gzip
-
+    
  #If the first file is a gzipped file, open it via the gzip module
- try:
-  if(filename.find(".gz") != -1):
+ if(filename.find(".gz") != -1):
    F=gzip.open(filename)
    filedata = [l.decode() for l in F.readlines() ] 
    F.close()
  #Otherwise open as normal
-  else:
+ else:
    F=open(filename);
    filedata = F.readlines();
    F.close() 
- #If there has been an IO error fail
- except IOError:
-   sys.stdout.write("\n   [FAILED] : Unable to open the input file %s \n\n" \
-   % filename)
-   sys.exit(5)
 
  return filedata
 
-def fpdiff(filename1,filename2,relative_error,small):
+def fpdiff_helper(filename1,filename2,relative_error,small):
  """ Calculate the floating-point difference between two data files.
      The idea is to use a looser tolerance than the UNIX diff command,
      so that if two entries have a relative error less than the argument
@@ -60,16 +54,29 @@ def fpdiff(filename1,filename2,relative_error,small):
 
      Note that the relative error is percentage!
 
-     Returns True if the two files are the same or False if they are
-     different.
+     Returns 0 if the two files are the same, 1 if they are different or
+     5 if the files cannot be opened.
  """
 
  import math
 
  
  #Open the files
- tmpfile1 = read_file(filename1)
- tmpfile2 = read_file(filename2)
+ try:
+   tmpfile1 = read_file(filename1)
+ except IOError:
+   #If there has been an IO error fail
+   sys.stdout.write("\n   [FAILED] : Unable to open the input file %s \n\n"
+      % filename1)
+   return 5
+
+ try:
+   tmpfile2 = read_file(filename2)
+ except IOError:
+   #If there has been an IO error fail
+   sys.stdout.write("\n   [FAILED] : Unable to open the input file %s \n\n"
+      % filename2)
+   return 5
 
  #Find the number of lines in each file
  n1 = len(tmpfile1)
@@ -221,7 +228,7 @@ def fpdiff(filename1,filename2,relative_error,small):
   sys.stdout.write("\n========================================================")
   sys.stdout.write("\n\n   [FAILED]\n")
   # Return failure
-  return False
+  return 2
 
  else:
   sys.stdout.write("\n\n In files %s %s" % (filename1, filename2))
@@ -231,7 +238,13 @@ def fpdiff(filename1,filename2,relative_error,small):
   sys.stdout.write(\
   "\n                                  - numerical zero  = %g\n" % small)
   # Return success
-  return True
+  return 0
+
+
+def fpdiff(filename1, filename2, relative_error=0.1, small=1e-14):
+    """Wrapper for using fpdiff inside python. Has default args and returns a
+    bool."""
+    return fpdiff_helper(filename1, filename2, relative_error, small) == 0
 
 
 def run_as_script(argv):
@@ -270,12 +283,11 @@ def run_as_script(argv):
    small = float(argv[3])
  
  # Run the diff
- files_same = fpdiff(argv[0], argv[1], maxreld, small)
+ error_code = fpdiff_helper(argv[0], argv[1], maxreld, small)
 
- if files_same:
-  return 0
- else:
-  return 2
+ return error_code
+
+
 
 
 # What to do if this is run as a script, rather than loaded as a module
