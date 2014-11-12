@@ -65,7 +65,7 @@ def usage():
     print """\
 
 NAME
-        oomph-convert.py - script for converting from oomph-lib tecplot format to VTK XML
+        oomph-convert.py - script for converting from oomph-lib tecplot format to VTK XML. 
 
 
 SYNOPSIS
@@ -128,26 +128,25 @@ def main(argv):
         sys.exit(2)
         
     # Get options
-    flag = 0
-    flag2 = 0
-    overwrite_flag=0
+    zero_pad_name_flag = False
+    write_points_flag = False
+    overwrite_flag = False
     for opt, arg in opts:
         if opt in ("-h"):
             usage()
             sys.exit()
         if opt in ("-z"):
-            flag = 1
+            zero_pad_name_flag = True
         if opt in ("-p"):
-            flag2 = 1
+            write_points_flag = True
             argdim = arg
             if argdim not in ("2","3"):    
                 usage()
                 sys.exit() 
         if opt in ("-o"):
-            overwrite_flag=1
+            overwrite_flag = True
 
           
-  
     if len(args) == 1:
         # Get filename and suffix
         ifilename = args[0]
@@ -155,11 +154,14 @@ def main(argv):
         # Set filename and suffix
         extension_len = len(isuffix) + 1
         lenBaseName = len(ifilename) - extension_len
-        if flag2 == 0:
-            ofilename = ifilename[:lenBaseName]+".vtu"
-        else:
+        
+        if write_points_flag:
             ofilename = ifilename[:lenBaseName]+".vtp"
-        osuffix = ofilename.split(".")[-1]      
+        else:
+            ofilename = ifilename[:lenBaseName]+".vtu"
+
+        osuffix = ofilename.split(".")[-1]
+
     elif len(args) == 2:
         # Get filenames and suffixes
         ifilename = args[0]
@@ -171,34 +173,34 @@ def main(argv):
         usage()
         sys.exit(2)
 
-    if isuffix == "dat" and osuffix == "vtu":
-        if flag == 1:
-            ofilename = addTrailingZeros(ofilename,osuffix)
+
+    # Zero pad output names if requested
+    if zero_pad_name_flag:
+        ofilename = addTrailingZeros(ofilename, osuffix)
+
+
+    # Check that we are allowed to write to the ofilename (allowed to
+    # overwrite or nothing to overwrite).
+    if ok_to_write_ofile(overwrite_flag, ifilename, ofilename):
+        start = time.time()
 
         # Convert from oomph-lib Tecplot format to VTK XML format
-        if should_convert(overwrite_flag, ifilename, ofilename):
-            start = time.time()
+        if isuffix == "dat" and osuffix == "vtu":
             tecplot_to_vtkxml(ifilename, ofilename)
-            end = time.time()
-            print "* Conversion done in %d seconds" % (end - start)
-            print '* Output file name: %(fn)s ' %{'fn': ofilename}
 
-    elif isuffix == "dat" and osuffix == "vtp" and flag2 == 1 :
-        if flag == 1:
-            ofilename = addTrailingZeros(ofilename,osuffix)
         # Convert from oomph-lib Tecplot format to VTP XML format
-        if should_convert(overwrite_flag, ifilename, ofilename):
-            start = time.time()
+        elif isuffix == "dat" and osuffix == "vtp":
             tecplot_to_vtpxml(ifilename, ofilename,string.atoi(argdim))
-            end = time.time()
-            print "* Conversion done in %d seconds" % (end - start)
-            print '* Output file name: %(fn)s ' %{'fn': ofilename}
-                
-    else:   
-        error("Sorry, cannot convert between .%s and .%s file formats." % (isuffix, osuffix))
+
+        else:   
+            error("Sorry, cannot convert between .%s and .%s file formats." % (isuffix, osuffix))
+
+        end = time.time()
+        print "* Conversion done in %d seconds" % (end - start)
+        print '* Output file name: %(fn)s ' %{'fn': ofilename}
 
 
-def should_convert(flag, in_file_name, out_file_name):
+def ok_to_write_ofile(flag, in_file_name, out_file_name):
     """Check if the output file exists, if so decide if we should overwrite it
     and tell the user what we are doing."""
 
