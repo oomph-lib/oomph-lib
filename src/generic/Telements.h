@@ -1163,7 +1163,11 @@ template<>
    BrokenCopy::broken_assign("TElementBase");
   }
 
-
+ /// It's a T element!
+ ElementGeometry::ElementGeometry element_geometry() const
+ {
+  return ElementGeometry::T;
+ }
 
  ///Check whether the local coordinates are valid or not
  bool local_coord_is_valid(const Vector<double> &s) 

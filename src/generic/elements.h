@@ -1197,6 +1197,13 @@ public:
 
 };
 
+ /// Enumeration a finite element's geometry "type". Either "Q" (square,
+ /// cubeoid like) or "T" (triangle, tetrahedron).
+ namespace ElementGeometry
+ {
+  enum ElementGeometry {Q, T};
+ }
+
 //Forward class definitions that are used in FiniteElements
 class FaceElement;
 class MacroElement;
@@ -2431,6 +2438,14 @@ public:
  /// the number of local coordinates required to parametrise its 
  /// geometry.
  unsigned dim() const {return Elemental_dimension;}
+
+ /// Return the geometry type of the element (either Q or T usually).
+ virtual ElementGeometry::ElementGeometry element_geometry() const
+ {
+  std::string err = "Broken virtual function.";
+  throw OomphLibError(err, OOMPH_CURRENT_FUNCTION,
+                      OOMPH_EXCEPTION_LOCATION);
+ }
 
  /// Return FE interpolated coordinate x[i] at local coordinate s
  virtual double interpolated_x(const Vector<double> &s, 

@@ -335,6 +335,12 @@ class QElementBase : public virtual QElementGeometricBase
    return static_cast<unsigned>(pow(static_cast<double>(nnode_1d()), dim()-1));
   }
 
+ /// It's a Q element!
+ ElementGeometry::ElementGeometry element_geometry() const
+ {
+  return ElementGeometry::Q;
+ }
+
   private:
 
  /// Pointer to vector of lower left vertex coords. in macro element
