@@ -147,27 +147,10 @@ class LinearAlgebraDistribution
  /// \short Sets the distribution. Takes first_row, nrow_local and 
  /// nrow as arguments. If nrow is not provided or equal to
  /// 0 then it is computed automatically
- void build(const OomphCommunicator& comm,
-	    const unsigned& first_row, 
-	    const unsigned& nrow_local,
-	    const unsigned& nrow = 0);
- 
- /// \short Sets the distribution. Takes first_row, nrow_local and 
- /// nrow as arguments. If nrow is not provided or equal to
- /// 0 then it is computed automatically
  void build(const OomphCommunicator* const comm_pt,
 	    const unsigned& first_row, 
 	    const unsigned& nrow_local,
 	    const unsigned& nrow = 0);
- 
- /// \short Build the LinearAlgebraDistribution. if distributed = true 
- /// (default) then uniformly distribute nrow over all processors where 
- /// processors 0 holds approximately the first nrow/n_proc, processor 
- /// 1 holds the next nrow/n_proc and so on... or if distributed = false
- /// then every row is held on every processor
- void build(const OomphCommunicator& comm_pt,
-	    const unsigned& nrow,
-	    const bool& distributed = true);
  
  /// \short Build the LinearAlgebraDistribution. if distributed = true 
  /// (default) then uniformly distribute nrow over all processors where 
