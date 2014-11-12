@@ -10,7 +10,6 @@ set -o nounset
 
 
 # Default values for arguments
-oomph_root=""
 build_dir=""
 make_options=""
 extra_configure_options=""
@@ -28,9 +27,6 @@ while getopts ":hrd:c:b:j:sk" opt; do
       r)
           generate_config_files="true"
           echo "Doing a complete rebuild from scratch."
-          ;;
-      d)
-          oomph_root="$OPTARG"
           ;;
       c)
           configure_options_file="$OPTARG"
@@ -65,10 +61,12 @@ while getopts ":hrd:c:b:j:sk" opt; do
   esac
 done
 
-# Default value for oomph_root if not set by args
-if [[ $oomph_root == "" ]]; then
-    oomph_root=$(pwd)
-fi
+# Get the directory that autogen.sh is in (stolen frome stackoverflow:
+# http://stackoverflow.com/questions/59895/can-a-bash-script-tell-what-directory-its-stored-in
+# ), this is the oomph-lib root directory. Doesn't follow symlinks to the
+# script itself, should be robust for anything else. If you move autogen.sh
+# this will need to change a little.
+oomph_root="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # and for build dir 
 if [[ $build_dir == "" ]]; then
@@ -106,7 +104,7 @@ fi
 
 # Print information about command line options selected
 echo
-echo "Using oomph lib in directory \"$PWD\""
+echo "Building using the oomph-lib source in \"$PWD\""
 echo "Using configure options file \"$configure_options_file\""
 echo "Placing built files in \"$build_dir\""
 if [[ $make_options != "" ]]; then
