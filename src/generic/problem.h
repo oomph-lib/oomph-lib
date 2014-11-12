@@ -1462,7 +1462,7 @@ namespace oomph
                                const bool &preserve_existing_data=false);
 
  /// \short Shift all values along to prepare for next timestep
- void shift_time_values();
+ virtual void shift_time_values();
 
  /// Return a pointer to the assembly handler object
  AssemblyHandler* &assembly_handler_pt() {return Assembly_handler_pt;}
