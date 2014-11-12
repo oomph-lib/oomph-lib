@@ -495,6 +495,8 @@ template<>
   void local_coordinate_of_node(const unsigned& j,
                                 Vector<double>& s) const
    {
+    s.resize(2);
+
     switch (j)
      {
      case 0:
@@ -585,6 +587,8 @@ template<>
   void local_coordinate_of_node(const unsigned& j,
                                 Vector<double>& s) const
    {
+    s.resize(2);
+
     switch (j)
      {
      case 0:
@@ -724,6 +728,8 @@ template<>
   void local_coordinate_of_node(const unsigned& j,
                                 Vector<double>& s) const
    {
+    s.resize(2);
+
     switch (j)
   {
   case 0:
@@ -932,6 +938,8 @@ template<>
   void local_coordinate_of_node(const unsigned& j,
                                 Vector<double>& s) const
    {
+    s.resize(2);
+
     switch (j)
      {
      case 0:
@@ -1880,6 +1888,8 @@ class TElementShape<3,2>
  void local_coordinate_of_node(const unsigned& j,
                                Vector<double>& s) const
   {
+   s.resize(3);
+
    switch (j)
     {
     case 0:
@@ -2002,6 +2012,8 @@ template<>
   void local_coordinate_of_node(const unsigned& j,
                                 Vector<double>& s) const
 {
+ s.resize(3);
+
  switch (j)
   {
   case 0:
@@ -2274,6 +2286,8 @@ template<>
   void local_coordinate_of_node(const unsigned& j,
                                 Vector<double>& s) const
 {
+ s.resize(3);
+
  switch (j)
   {
   case 0:
