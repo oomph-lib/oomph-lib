@@ -187,62 +187,6 @@ set -o nounset
 MY_HOME_WD=`pwd`
 
 
-
-# If this is a rebuild: Check for helper scripts 
-#-----------------------------------------------
-if $raw_build; then
-
-    SCRIPT_LIST=`echo config.guess config.sub depcomp install-sh ltmain.sh missing aclocal.m4 mkinstalldirs `
-    SCRIPTS_EXIST="no"
-    for script in $SCRIPT_LIST
-    do
-        if (test -e $script); then
-            SCRIPTS_EXIST="yes"
-        fi 
-    done
-    if test "$SCRIPTS_EXIST" = "yes" ; then 
-        echo " "
-        echo "You may wipe the symbolic links to the autoconf/automake helper scripts"
-        echo " "
-        for script in $SCRIPT_LIST
-        do
-            if (test -e $script); then
-                echo "   " $script
-            fi 
-        done
-        echo " "
-        echo "[This is recommended if you have moved the sources to a different"
-        echo " machine without packaging them up with make dist. The symbolic "
-        echo " links tend to be machine-specific so it's best to force "
-        echo " autoconf/automake to rebuild them on the new machine]."
-        echo " "
-        
-        if YesNoRead "Do you want to wipe the helper scripts?" "n"; then
-            echo " "
-            echo "As a backup: Here are the old symbolic links:"
-            echo " "
-            for script in $SCRIPT_LIST
-            do
-                if (test -L $script); then
-                    ls -L $script
-                    ls -l $script > old_symbolic_links.txt
-                fi
-            done
-            echo " "
-            echo "We have stored this information in old_symbolic_links.txt"
-            echo " "
-            echo "Wiping them..."
-            rm -f  $SCRIPT_LIST
-            echo "Done"
-        fi   
-    else
-        echo " "
-        echo "[No autoconf/automake helper scripts to be wiped...]"
-        echo " "
-    fi
-fi
-
-
 # Choose build directory (for lib,include), relative to root
 #------------------------------------------------------------
 build_dir=$MY_HOME_WD/build
@@ -386,6 +330,40 @@ done
 #====================================================================
 # Start actual build process
 #====================================================================
+
+
+
+# If this is a rebuild then clean up the helper scripts 
+#-----------------------------------------------
+if $raw_build; then
+
+    SCRIPT_LIST="config.guess config.sub depcomp install-sh ltmain.sh missing aclocal.m4 mkinstalldirs"
+
+    echo " "
+    echo "Wiping the symbolic links to the autoconf/automake helper scripts"
+    echo "[This is recommended if you have moved the sources to a different"
+    echo " machine without packaging them up with make dist. The symbolic "
+    echo " links tend to be machine-specific so it's best to force "
+    echo " autoconf/automake to rebuild them on the new machine]."
+    echo " "
+    echo "As a backup: Here are the old symbolic links:"
+    echo " "
+
+    for script in $SCRIPT_LIST
+    do
+        if (test -L $script); then
+            ls -L $script
+            ls -l $script > old_symbolic_links.txt
+        fi
+    done
+
+    echo " "
+    echo "We have stored this information in old_symbolic_links.txt"
+    echo " "
+    echo "Wiping them..."
+    rm -f  $SCRIPT_LIST
+    echo "Done"
+fi
 
 
 # Autodetect folders in user_drivers
