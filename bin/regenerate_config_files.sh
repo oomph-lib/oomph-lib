@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 
 #-------------------------------------------------------------------
 # Shell script to rerun autotools coomands to generate all configuration
