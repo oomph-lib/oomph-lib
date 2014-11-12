@@ -79,6 +79,8 @@ class IterativeLinearSolver : public LinearSolver
 
    // set default
    Setup_preconditioner_before_solve = true;
+
+   Throw_error_after_max_iter = false;
   }    
  
  /// Broken copy constructor
@@ -177,6 +179,14 @@ class IterativeLinearSolver : public LinearSolver
  /// Don't set up the preconditioner before the solve
  void disable_setup_preconditioner_before_solve()
  {Setup_preconditioner_before_solve = false;}
+
+ /// Throw an error if we don't converge within max_iter
+ void enable_error_after_max_iter()
+ {Throw_error_after_max_iter = true;}
+
+ /// Don't throw an error if we don't converge within max_iter (default).
+ void disable_error_after_max_iter()
+ {Throw_error_after_max_iter = false;}
  
   protected:
 
@@ -213,6 +223,10 @@ class IterativeLinearSolver : public LinearSolver
  /// \short indicates whether the preconditioner should be setup before solve.
  /// Default = true;
  bool Setup_preconditioner_before_solve;
+
+ /// \short Should we throw an error instead of just returning when we hit
+ /// the max iterations?
+ bool Throw_error_after_max_iter;
 };
 
 ///////////////////////////////////////////////////////////////////////////////

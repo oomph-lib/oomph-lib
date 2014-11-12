@@ -603,6 +603,14 @@ void BiCGStab<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
    oomph_info << "Time for solve with BiCGStab  [sec]: "
               << Solution_time << std::endl;
   }
+
+ if(Throw_error_after_max_iter)
+  {
+   std::string err = "Solver failed to converge and you requested an error";
+   err += " on convergence failures.";
+   throw OomphLibError(err, OOMPH_EXCEPTION_LOCATION,
+                       OOMPH_CURRENT_FUNCTION);
+  }
  
 }
 
@@ -923,6 +931,14 @@ void CG<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
   {
    oomph_info << "Time for solve with CG  [sec]: "
               << Solution_time << std::endl;
+  }
+
+ if((counter >= Max_iter) && (Throw_error_after_max_iter))
+  {
+   std::string err = "Solver failed to converge and you requested an error";
+   err += " on convergence failures.";
+   throw OomphLibError(err, OOMPH_EXCEPTION_LOCATION,
+                       OOMPH_CURRENT_FUNCTION);
   }
 
 }//end CG
@@ -1336,6 +1352,16 @@ void GS<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
    oomph_info << "Time for solve with GS  [sec]: "
               << Solution_time << std::endl;
   }
+
+
+ if((counter >= Max_iter) && Throw_error_after_max_iter)
+  {
+   std::string err = "Solver failed to converge and you requested an error";
+   err += " on convergence failures.";
+   throw OomphLibError(err, OOMPH_EXCEPTION_LOCATION,
+                       OOMPH_CURRENT_FUNCTION);
+  }
+
 
 }//end Gauss Seidel
 
@@ -1889,6 +1915,16 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
             << resid << std::endl;
  oomph_info << "after " << Max_iter<< " iterations." << std::endl;
  oomph_info << std::endl;
+
+
+ if(Throw_error_after_max_iter)
+  {
+   std::string err = "Solver failed to converge and you requested an error";
+   err += " on convergence failures.";
+   throw OomphLibError(err, OOMPH_EXCEPTION_LOCATION,
+                       OOMPH_CURRENT_FUNCTION);
+  }
+
  return;
   
 }//end GMRES
