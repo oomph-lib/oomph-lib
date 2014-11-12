@@ -1,10 +1,6 @@
 #! /bin/bash
 
-# TODO: automatically remove config.cache if options change?
-#       automatically detect if user_drivers has changed and regen config files?
-#       automatic hypre/trilinos pull source + install?
-#       move user driver detection to bin/regenerate_config_files.sh?
-#       merge scripts again?
+# TODO:    automatic hypre/trilinos pull source + install?
 
 set -o errexit
 set -o nounset
@@ -233,73 +229,92 @@ find "user_drivers" -type f -name "Makefile.am" \
 # with pipes). 3) Remove the start of the path from each line leaving only the
 # location relative to the oomph-lib root directory.
 
-echo
-echo "User driver folders included are:"
-cat "config/configure.ac_scripts/user_drivers.dir_list"
-echo
+
+confdir="config/configure.ac_scripts"
+cat "$confdir/core.dir_list" \
+    "$confdir/doc.dir_list" \
+    "$confdir/user_drivers.dir_list" \
+    "$confdir/user_src.dir_list" \
+    | sort \
+    | sed -e 's|\(^.*$\)|\1/Makefile|' \
+    | cat <(echo "AC_CONFIG_FILES([Makefile") - <(echo "])") \
+    > "$confdir/new_makefile_list"
+
+if ! diff -q "$confdir/new_makefile_list" "$confdir/makefile_list" > /dev/null 2>&1; 
+then
+    echo "New/removed user dirs detected and $confdir/new_makefile_list updated, configure will be rerun automatically by make."
+
+    echo
+    echo "User driver folders included are:"
+    cat "config/configure.ac_scripts/user_drivers.dir_list"
+    echo
+
+    mv "$confdir/new_makefile_list" "$confdir/makefile_list"
+fi
+
 
 
 # Set up configure options
 #--------------------------------------------------------
 
-# generate the config files if needed.
-if [[ $generate_config_files == "true" ]]; then
-    ./bin/regenerate_config_files.sh "$PWD"
-fi
 
-# If "current" configure options file does not exist then copy in the
-# default one:
-if [[ "$configure_options_file" != "config/configure_options/current" ]]; then
+# Read the options from the files and convert them into a single one-line string
+new_configure_options=$(ProcessOptionsFile "$configure_options_file")
+old_configure_options=$(ProcessOptionsFile config/configure_options/current)
+
+# If configure options have changed then run configure command
+if [[ "$new_configure_options" != "$old_configure_options" || "$generate_config_files" == "true" ]]; then
+
+    echo "Using configure options:"
+    cat "$configure_options_file"
+    echo
+
+    # Check that the options are in the correct order
+    configure_options_are_ok="$(CheckOptions config/configure_options/current)"
+    if test "$configure_options_are_ok" != ""; then
+
+        echo 1>&2
+        echo "===============================================================" 1>&2
+        echo "Error message from autogen.sh:" 1>&2
+        echo  1>&2
+        echo $configure_options_are_ok 1>&2
+        echo  1>&2
+        echo "===============================================================" 1>&2
+        
+        # Failed
+        exit 4
+    fi
+
+    # Update current options
     cp "$configure_options_file" "config/configure_options/current"
-elif test ! -f config/configure_options/current; then
-    cp "config/configure_options/default" "config/configure_options/current"
+
+    # Before running automake, build the auxillary files required in
+    # /src/meshes ??ds this should probably go in a makefile!
+    echo
+    echo "Building Auxillary Files in /src/meshes"
+    ./bin/build_mesh_makefile.sh .
+
+    # Run all the autotools and just do the right things to generate
+    # configure, Makefile.in and all the dependency relationships.
+    autoreconf --install
+
+    # Finally run configure itself to convert "Makefile.in"s into "Makefile"s
+    echo
+    echo "Running ./configure --prefix $build_dir $new_configure_options $extra_configure_options"
+    echo
+    /bin/sh -c "./configure --prefix $build_dir $new_configure_options $extra_configure_options"
+
+    # Test that the mpi commands work (automatically passes if no variable
+    # MPI_RUN_COMMAND in makefile). This needs to go after configure so that we
+    # can use the generated Makefile to (robustly) get the run and compile
+    # commands.
+    ./bin/check_mpi_command.sh Makefile
 fi
 
-# Check that the options are in the correct order
-configure_options_are_ok="$(CheckOptions config/configure_options/current)"
-if test "$configure_options_are_ok" != ""; then
 
-    echo " " 1>&2
-    echo "===============================================================" 1>&2
-    echo "Error message from autogen.sh:" 1>&2
-    echo " "  1>&2
-    echo $configure_options_are_ok 1>&2
-    echo " "  1>&2
-    echo "===============================================================" 1>&2
-    
-    # Failed
-    exit 4
-fi
-
-echo "Using configure options:"
-cat "config/configure_options/current"
-echo
-
-# Read the options from the file and convert them into a single one-line string
-configure_options=$(ProcessOptionsFile config/configure_options/current)
-
-
-
-# Go!
-#--------------------------------------------------------
-
-# Run configure command
-echo " "
-echo "Running ./configure --prefix $build_dir $configure_options $extra_configure_options"
-echo " "
-/bin/sh -c "./configure --prefix $build_dir $configure_options $extra_configure_options"
-
-echo " "
-echo " "
-echo "done running ./configure"
-echo " "
-echo " "
-
-# Test that the mpi commands work (automatically passes if no variable
-# MPI_RUN_COMMAND in makefile). This needs to go after configure so that we
-# can use the generated Makefile to (robustly) get the run and compile
-# commands.
-./bin/check_mpi_command.sh Makefile
+# make is smart enough to automatically run automake, configure etc. if
+# they are needed for other reasons (e.g if we have added new dirs to one
+# of the dir lists or modified a Makefile.am).
 
 
 # Make all libraries
