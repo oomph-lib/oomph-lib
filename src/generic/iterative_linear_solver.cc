@@ -886,7 +886,7 @@ void CG<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
   }//end while
  
  
- if (counter>Max_iter)
+ if (counter >= Max_iter)
   {  
    oomph_info << std::endl;
    oomph_info << "CG did not converge to required tolerance! " << std::endl;
