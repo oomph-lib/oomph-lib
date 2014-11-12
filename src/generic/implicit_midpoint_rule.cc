@@ -1,5 +1,5 @@
 
-#include "midpoint_method.h"
+#include "implicit_midpoint_rule.h"
 #include "problem.h"
 
 // Needed for mipoint update...
@@ -12,7 +12,7 @@ namespace oomph
 
  /// \short This function advances the Data's time history so that
  /// we can move on to the next timestep
- void MidpointMethodBase::shift_time_values(Data* const &data_pt)
+ void IMRBase::shift_time_values(Data* const &data_pt)
  {
   //Loop over the values, set previous values to the previous value, if
   //not a copy.
@@ -30,7 +30,7 @@ namespace oomph
 
  ///\short This function advances the time history of the positions
  ///at a node. ??ds Untested: I have no problems with moving nodes.
- void MidpointMethodBase::shift_time_positions(Node* const &node_pt)
+ void IMRBase::shift_time_positions(Node* const &node_pt)
  {
   //Find the number of coordinates
   unsigned n_dim = node_pt->ndim();
@@ -84,7 +84,7 @@ namespace oomph
 
  /// Dummy - just check that the values that
  /// problem::calculate_predicted_values() has been called right.
- void MidpointMethodBase::calculate_predicted_values(Data* const &data_pt)
+ void IMRBase::calculate_predicted_values(Data* const &data_pt)
  {
   if(adaptive_flag())
    {
@@ -95,7 +95,7 @@ namespace oomph
  }
 
 
- double MidpointMethodBase::temporal_error_in_value(Data* const &data_pt,
+ double IMRBase::temporal_error_in_value(Data* const &data_pt,
                                                     const unsigned &i)
  {
   if(adaptive_flag())
@@ -112,7 +112,7 @@ namespace oomph
  }
 
  /// Half the timestep before starting solve
- void MidpointMethodByBDF::actions_before_timestep(Problem* problem_pt)
+ void IMRByBDF::actions_before_timestep(Problem* problem_pt)
   {
 
    // Check that this is the only time stepper
@@ -120,7 +120,7 @@ namespace oomph
    if(problem_pt->ntime_stepper() != 1)
     {
      std::string err = "This implementation of midpoint can only work with a ";
-     err += "single time stepper, try using MidpointMethod instead (but check ";
+     err += "single time stepper, try using IMR instead (but check ";
      err += "your Jacobian and residual calculations very carefully for compatability).";
      throw OomphLibError(err, OOMPH_EXCEPTION_LOCATION,
                          OOMPH_CURRENT_FUNCTION);
@@ -176,7 +176,7 @@ namespace oomph
 
  /// Take problem from t={n+1/2} to t=n+1 by algebraic update and restore
  /// time step.
- void MidpointMethodByBDF::actions_after_timestep(Problem* problem_pt)
+ void IMRByBDF::actions_after_timestep(Problem* problem_pt)
  {
 #ifdef PARANOID
   // Do it as dofs too to compare

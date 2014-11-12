@@ -52,9 +52,6 @@
 #include "refineable_mesh.template.cc"
 
 
-//??ds get rid this eventually?
-#include "midpoint_method.h"
-
 namespace oomph
 {
 

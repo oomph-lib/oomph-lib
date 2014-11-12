@@ -29,16 +29,16 @@ namespace Factories
    {
     return new BDF<2>(adaptive_flag);
    }
-  else if((ts_name == "midpoint") || (ts_name == "old-imr"))
+  else if(ts_name == "real-imr")
    {
-    MidpointMethod* mp_pt = new MidpointMethod(adaptive_flag);
+    IMR* mp_pt = new IMR(adaptive_flag);
     ExplicitTimeStepper* pred_pt = new EBDF3;
     mp_pt->set_predictor_pt(pred_pt);
     return mp_pt;
    }
-  else if((ts_name == "midpoint-bdf") || (ts_name == "imr"))
+  else if(ts_name == "imr")
    {
-    MidpointMethodByBDF* mp_pt = new MidpointMethodByBDF(adaptive_flag);
+    IMRByBDF* mp_pt = new IMRByBDF(adaptive_flag);
     ExplicitTimeStepper* pred_pt = new EBDF3;
     mp_pt->set_predictor_pt(pred_pt);
     return mp_pt;

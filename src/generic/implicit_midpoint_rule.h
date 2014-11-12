@@ -1,5 +1,5 @@
-#ifndef OOMPH_MIDPOINT_METHOD_H
-#define OOMPH_MIDPOINT_METHOD_H
+#ifndef OOMPH_IMPLICIT_MIDPOINT_RULE_H
+#define OOMPH_IMPLICIT_MIDPOINT_RULE_H
 
 //oomph-lib headers
 #include "Vector.h"
@@ -16,12 +16,12 @@ namespace oomph
  
 
   /// Implicit midpoint rule base class for the two implementations.
-  class MidpointMethodBase : public TimeStepper
+  class IMRBase : public TimeStepper
   {
   public:
 
    /// Constructor with initialisation
-   MidpointMethodBase(bool adaptive=false) :
+   IMRBase(bool adaptive=false) :
     TimeStepper(2,1) // initialise weights later
    {
     Adaptive_Flag = adaptive;
@@ -55,7 +55,7 @@ namespace oomph
    }
 
     /// Destructor
-    virtual ~MidpointMethodBase() {}
+    virtual ~IMRBase() {}
 
     /// Setup weights for time derivative calculations.
     virtual void set_weights()=0;
@@ -127,11 +127,11 @@ namespace oomph
  /// by calculation of residuals etc. at half step. This requires
  /// non-trivial modifications to the element's residual and Jacobian
  /// calculation functions to interpolate values to the midpoint. As such
- /// MidpointMethodByBDF should be preferred.
+ /// IMRByBDF should be preferred.
  ///
  /// However this class must be used when multiple different time steppers
  /// are being used simultaneously for different parts of the problem.
-class MidpointMethod : public MidpointMethodBase
+class IMR : public IMRBase
 {
 public:
  /// Common mistakes when using this implementation of midpoint:
@@ -141,10 +141,10 @@ public:
 
 
  /// Constructor with initialisation
- MidpointMethod(bool adaptive=false) : MidpointMethodBase(adaptive) {}
+ IMR(bool adaptive=false) : IMRBase(adaptive) {}
 
  /// Destructor, predictor_pt handled by base
- virtual ~MidpointMethod() {}
+ virtual ~IMR() {}
 
  /// Setup weights for time derivative calculations.
  void set_weights()
@@ -168,10 +168,10 @@ public:
 private:
 
  /// Inaccessible copy constructor.
- MidpointMethod(const MidpointMethod &dummy) {}
+ IMR(const IMR &dummy) {}
 
  /// Inaccessible assignment operator.
- void operator=(const MidpointMethod &dummy) {}
+ void operator=(const IMR &dummy) {}
 };
 
 
@@ -181,18 +181,18 @@ private:
 ///
 /// The exception is when multiple different time steppers are being used
 /// simultaneously for different parts of the problem. In this case the
-/// MidpointMethod class should be used.
-class MidpointMethodByBDF : public MidpointMethodBase
+/// IMR class should be used.
+class IMRByBDF : public IMRBase
 {
 public:
  /// Constructor with initialisation
- MidpointMethodByBDF(bool adaptive=false) : MidpointMethodBase(adaptive) 
+ IMRByBDF(bool adaptive=false) : IMRBase(adaptive) 
  {
   Update_pinned = true;
  }
 
  /// Destructor
- virtual ~MidpointMethodByBDF() {}
+ virtual ~IMRByBDF() {}
 
  /// Setup weights for time derivative calculations.
  void set_weights()
@@ -221,10 +221,10 @@ public:
 private:
 
  /// Inaccessible copy constructor.
- MidpointMethodByBDF(const MidpointMethodByBDF &dummy) {}
+ IMRByBDF(const IMRByBDF &dummy) {}
 
  /// Inaccessible assignment operator.
- void operator=(const MidpointMethodByBDF &dummy) {}
+ void operator=(const IMRByBDF &dummy) {}
 
 };
 

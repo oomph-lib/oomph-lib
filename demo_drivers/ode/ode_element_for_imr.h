@@ -8,9 +8,9 @@
 namespace oomph
 {
  /// Class for ODE elements when using the implicit midpoint rule time
- /// integrator MidpointMethod. The residual and Jacobian functions are
+ /// integrator IMR. The residual and Jacobian functions are
  /// modified to interpolate in time. Note that the normal element can be
- /// used for the IMR implementation in the class MidpointMethodByBDF.
+ /// used for the IMR implementation in the class IMRByBDF.
  class IMRODEElement : public ODEElement 
  {
  public:
@@ -22,7 +22,7 @@ namespace oomph
   /// Virtual destructor
   virtual ~IMRODEElement() {}
 
-  /// For IMR implemented using MidpointMethod we have to interpolate
+  /// For IMR implemented using IMR we have to interpolate
   /// everything in time (to get the midpoint values). This function does
   /// that for the u values.
   Vector<double> time_interpolate_u() const
@@ -49,7 +49,7 @@ namespace oomph
    return u;   
   }
 
-  /// For IMR implemented using MidpointMethod we have to interpolate
+  /// For IMR implemented using IMR we have to interpolate
   /// everything in time (to get the midpoint values). This function does
   /// that for the continuous time.
   double time_interpolate_time() const
@@ -74,7 +74,7 @@ namespace oomph
   }
   
   /// Modified get residuals: have to interpolate in time for IMR when
-  /// using the MidpointMethod implementation so we can't use the normal
+  /// using the IMR implementation so we can't use the normal
   /// ODE element implementation.
   void fill_in_contribution_to_residuals(Vector<double>& residuals)
    {
@@ -104,7 +104,7 @@ namespace oomph
    }
 
   /// Modified get jacobian: two differences from the normal verson here
-  /// which are required when using the MidpointMethod implementation: 
+  /// which are required when using the IMR implementation: 
   /// 1) We have to interpolate in time to calculate the analytical
   /// contribution. 
   /// 2) The interpolation in time within the residual calculation modifies
