@@ -48,9 +48,21 @@
 namespace oomph
 {
 
+ class Time;
+
 //===============================================================
 /// Class for objects than can be advanced in time by an Explicit
 /// Timestepper.
+/// WARNING: For explicit time stepping to work the object's residual
+/// function (as used by get_inverse_mass_matrix_times_residuals(..)) MUST
+/// be in the form r = f(t, u) - [timestepper approximation to dudt]!
+/// Standard implicit time stepping will work with plenty of residuals that
+/// don't fit into this form. Some examples where implicit time stepping
+/// will work fine but explicit will fail:
+/// 1) The negation of the above formula, this implementation will end up
+/// using dudt = - f(u,t).
+/// 2) A residual which is implicit or non-linear in dudt, such as r = dudt
+/// - u x dudt.
 //===============================================================
 class ExplicitTimeSteppableObject
 {
@@ -83,6 +95,9 @@ public:
  /// Function that gets the values of the dofs in the object
  virtual void get_dofs(DoubleVector &dofs);
 
+ /// Function that gets the history values of the dofs in the object
+ virtual void get_dofs(const unsigned &t, DoubleVector &dofs);
+
  /// Function that sets the values of the dofs in the object
  virtual void set_dofs(const DoubleVector &dofs);
 
@@ -99,6 +114,9 @@ public:
  ///return access to the local time in the object
  virtual double &time();
 
+ /// \short Virtual function that should be overloaded to return a pointer to a
+ /// Time object.
+ virtual Time* time_pt() const;
 };
 
 
@@ -234,6 +252,44 @@ public:
 
 };
 
+
+ ///===========================================================
+ /// An explicit version of BDF3 (i.e. uses derivative evaluation at y_n
+ /// instead of y_{n+1}). Useful as a predictor because it is third order
+ /// accurate but requires only one function evaluation (i.e. only one mass
+ /// matrix inversion + residual calculation).
+ //============================================================
+ class EBDF3 : public ExplicitTimeStepper
+ {
+  double Yn_weight;
+  double Ynm1_weight;
+  double Ynm2_weight;
+  double Fn_weight;
+
+ public:
+ 
+  ///Constructor, set the type
+  EBDF3() {}
+
+  /// Broken copy constructor
+  EBDF3(const EBDF3&) 
+  { 
+   BrokenCopy::broken_copy("EBDF3");
+  } 
+ 
+  /// Broken assignment operator
+  void operator=(const EBDF3&) 
+  {
+   BrokenCopy::broken_assign("EBDF3");
+  }
+
+  void set_weights(const double &dtn, const double &dtnm1, const double &dtnm2);
+
+  /// Function that is used to advance the solution by time dt
+  void timestep(ExplicitTimeSteppableObject* const &object_pt,
+                const double &dt);
+
+ };
 
 }
 

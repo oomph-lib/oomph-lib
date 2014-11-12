@@ -27,6 +27,7 @@
 //LIC//====================================================================
 //Non-inline member functions for the explicit timesteppers
 #include "explicit_timesteppers.h"
+#include "timesteppers.h"
 
 namespace oomph
 {
@@ -66,6 +67,26 @@ namespace oomph
   error_stream 
    << "Empty default function called.\n"
    << "The function must return the current values of the degrees of \n"
+   << "freedom in the object.\n"
+   << "Note: It is the responsibility of the object to set the size\n" 
+   << "of the vector\n";
+  
+  throw OomphLibError(error_stream.str(),
+                      OOMPH_CURRENT_FUNCTION,
+                      OOMPH_EXCEPTION_LOCATION);
+  
+ }
+
+ //=======================================================================
+ /// Function that should get the values of the dofs in the object
+ //=======================================================================
+ void ExplicitTimeSteppableObject::get_dofs(const unsigned& t, 
+                                            DoubleVector &dofs)
+ {
+  std::ostringstream error_stream;
+  error_stream 
+   << "Empty default function called.\n"
+   << "The function must return the t'th history values of the degrees of \n"
    << "freedom in the object.\n"
    << "Note: It is the responsibility of the object to set the size\n" 
    << "of the vector\n";
@@ -135,6 +156,22 @@ namespace oomph
   return Dummy_time_value;
  }
 
+ /// \short Virtual function that should be overloaded to return a pointer to a
+ /// Time object.
+ Time* ExplicitTimeSteppableObject::time_pt() const
+ {
+  std::ostringstream error_stream;
+  error_stream 
+   << "Empty default function called.\n"
+   << "The function must return a pointer to an oomph-lib Time object.\n";
+  throw OomphLibError(error_stream.str(),
+                      OOMPH_CURRENT_FUNCTION,
+                      OOMPH_EXCEPTION_LOCATION);
+
+  return 0;
+ }
+
+
  //================================================================
  /// Euler timestepping x^{t+1} = x^{t} + dt M^{-1} L(x^{t})
  //=================================================================
@@ -177,7 +214,7 @@ template<>
 void RungeKutta<4>::timestep(ExplicitTimeSteppableObject* const &object_pt,
                              const double &dt)
 {
- //Store the initial values and initial tim
+ //Store the initial values and initial time
  DoubleVector u;
  object_pt->get_dofs(u);
 
@@ -321,6 +358,104 @@ void LowStorageRungeKutta<4>::timestep(
    object_pt->actions_after_explicit_timestep();
   }
 }
+
+// ??ds this could be heavily optimised if needed. Keeping it simple for
+// now
+void EBDF3::timestep(ExplicitTimeSteppableObject* const &object_pt,
+                     const double &dt)
+{
+ using namespace StringConversion; //??ds debugging
+
+ // Storage indicies for the history values that we need
+ unsigned tn = 1;
+ unsigned tnm1 = tn+1;
+ unsigned tnm2 = tnm1+1;
+
+ // Check dts are the same, this will need to be removed if ebdf3 is being
+ // used as something other than a predictor... But seeing as it isn't
+ // stable that isn't likely.
+#ifdef PARANOID
+ if(std::abs(dt - object_pt->time_pt()->dt(0)) > 1e-15)
+  {
+   std::string err = "Inconsistent dts! Predictor is stepping by " + to_string(dt);
+   err += " but dt(0) = " + to_string(object_pt->time_pt()->dt(0));
+   throw OomphLibError(err, OOMPH_EXCEPTION_LOCATION,
+                       OOMPH_CURRENT_FUNCTION);
+  }
+#endif
+
+ // Get older dt values
+ double dtnm1 = object_pt->time_pt()->dt(1);
+ double dtnm2 = object_pt->time_pt()->dt(2);
+
+ // Calculate weights for these dts
+ set_weights(dt, dtnm1, dtnm2);
+ 
+ // Get derivative value at step n (even though this uses values from t=0 =
+ // step n+1, it's ok because we haven't changed the values in that slot
+ // yet).
+ DoubleVector fn;
+ object_pt->get_inverse_mass_matrix_times_residuals(fn);
+ fn *= Fn_weight;
+
+ // Extract history values and multiply by their weights
+ DoubleVector ynp1, yn, ynm1, ynm2;
+ object_pt->get_dofs(tn, yn);
+ yn *= Yn_weight;
+ object_pt->get_dofs(tnm1, ynm1);
+ ynm1 *= Ynm1_weight;
+ object_pt->get_dofs(tnm2, ynm2);
+ ynm2 *= Ynm2_weight;
+
+
+ // Add everything together
+ ynp1 = yn;
+ ynp1 += ynm1;
+ ynp1 += ynm2;
+ ynp1 += fn;
+
+ // Done, update things in the object
+ object_pt->set_dofs(ynp1);
+ object_pt->time() += dt;
+ object_pt->actions_after_explicit_timestep();
+}
+
+/// Calculate the weights for this set of step sizes.
+void EBDF3::set_weights(const double &dtn, const double &dtnm1, 
+                        const double &dtnm2)
+ {
+  using namespace std;
+
+  // If this is slow we can probably optimise by doing direct
+  // multiplication instead of using pow.
+
+  // Generated using sympy from my python ode code.
+
+  double denom = pow(dtnm1,4)*dtnm2 + 2*pow(dtnm1,3)*pow(dtnm2,2) 
+   + pow(dtnm1,2)*pow(dtnm2,3);
+
+  Yn_weight = -(2*pow(dtn,3)*dtnm1*dtnm2 + pow(dtn,3)*pow(dtnm2,2) 
+               + 3*pow(dtn,2)*pow(dtnm1,2)*dtnm2 
+               + 3*pow(dtn,2)*dtnm1*pow(dtnm2,2) + pow(dtn,2)*pow(dtnm2,3) 
+               - pow(dtnm1,4)*dtnm2 - 2*pow(dtnm1,3)*pow(dtnm2,2) 
+               - pow(dtnm1,2)*pow(dtnm2,3))/denom;
+
+  Ynm1_weight = -(-pow(dtn,3)*pow(dtnm1,2) - 2*pow(dtn,3)*dtnm1*dtnm2 
+                 - pow(dtn,3)*pow(dtnm2,2) - pow(dtn,2)*pow(dtnm1,3) 
+                 - 3*pow(dtn,2)*pow(dtnm1,2)*dtnm2 
+                 - 3*pow(dtn,2)*dtnm1*pow(dtnm2,2) 
+                 - pow(dtn,2)*pow(dtnm2,3))/denom;
+
+  Ynm2_weight = -(pow(dtn,3)*pow(dtnm1,2) + pow(dtn,2)*pow(dtnm1,3))/denom;
+
+  Fn_weight = -(-pow(dtn,3)*pow(dtnm1,2)*dtnm2 - pow(dtn,3)*dtnm1*pow(dtnm2,2) 
+               - 2*pow(dtn,2)*pow(dtnm1,3)*dtnm2 
+               - 3*pow(dtn,2)*pow(dtnm1,2)*pow(dtnm2,2) 
+               - pow(dtn,2)*dtnm1*pow(dtnm2,3) - dtn*pow(dtnm1,4)*dtnm2 
+               - 2*dtn*pow(dtnm1,3)*pow(dtnm2,2) 
+               - dtn*pow(dtnm1,2)*pow(dtnm2,3))/denom;
+ }
+
 
 
 //Force build of templates

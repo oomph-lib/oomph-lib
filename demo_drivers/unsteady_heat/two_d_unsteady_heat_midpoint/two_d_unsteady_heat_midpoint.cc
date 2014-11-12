@@ -121,6 +121,8 @@ public:
 
  /// Doc the solution
  void doc_solution(DocInfo& doc_info, ofstream& trace_file);
+
+ double global_temporal_error_norm();
  
 private:
 
@@ -131,6 +133,34 @@ private:
  Node* Control_node_pt;
 
 }; // end of problem class
+
+/// comparison with explicit timestepper result).
+template<class ELEMENT>
+double UnsteadyHeatProblem<ELEMENT>::global_temporal_error_norm()
+{
+ double global_error = 0.0;
+
+ //Find out how many nodes there are in the problem
+ unsigned n_node = mesh_pt()->nnode();
+
+ //Loop over the nodes and calculate the estimated error in the values
+ for(unsigned i=0;i<n_node;i++)
+  {
+   Node* node_pt = mesh_pt()->node_pt(i);
+   // Get timestepper's error estimate for this direction of m
+   // at this point.
+   double error = node_pt->time_stepper_pt()->
+    temporal_error_in_value(node_pt, 0); //assuming heat is 0th value
+
+   //Add the square of the individual error to the global error
+   global_error += error*error;
+  }
+
+ // Divide by the number of data points
+ global_error /= double(n_node);
+
+ return std::sqrt(global_error);
+}
 
 
 //========start_of_constructor============================================
@@ -417,8 +447,10 @@ doc_solution(DocInfo& doc_info,ofstream& trace_file)
 int main(int argc, const char* argv[])
 {
 
+ bool adaptive_flag = false;
+
  // Pick time stepper based on input
- TimeStepper* ts_pt;
+ TimeStepper* ts_pt = 0;
  if(to_lower(std::string(argv[1])) == "bdf2")
   {
    ts_pt = new BDF<2>;
@@ -426,6 +458,14 @@ int main(int argc, const char* argv[])
  else if(to_lower(std::string(argv[1])) == "midpoint")
   {
    ts_pt = new MidpointMethod;
+  }
+ else if(to_lower(std::string(argv[1])) == "adaptive-midpoint")
+  {
+   MidpointMethod* mp_pt = new MidpointMethod(true);
+   mp_pt->set_predictor_pt(new RungeKutta<4>);
+   adaptive_flag = true;
+   
+   ts_pt = mp_pt;
   }
  else
   {
@@ -460,6 +500,10 @@ int main(int argc, const char* argv[])
  // Choose simulation interval and timestep
  double t_max=0.5;
  double dt=0.01;
+ double tol = 1e-2; // for when we do adaptive
+
+ // Start small for time adaptive
+ if(adaptive_flag) dt = 1e-5;
 
  // Initialise timestep -- also sets the weights for all timesteppers
  // in the problem.
@@ -474,19 +518,23 @@ int main(int argc, const char* argv[])
  //Increment counter for solutions 
  doc_info.number()++;
 
- // Find number of steps
- unsigned nstep = unsigned(t_max/dt);
-
  // Timestepping loop
- for (unsigned istep=0;istep<nstep;istep++)
+ while(problem.time() < t_max)
   {
-   cout << " Timestep " << istep << std::endl;
+   cout << " Timestep " << doc_info.number() << std::endl;
    
    // Take timestep
-   problem.unsteady_newton_solve(dt);
+   if(adaptive_flag)
+    {
+     dt = problem.adaptive_unsteady_newton_solve(dt, tol);
+    }
+   else
+    {
+     problem.unsteady_newton_solve(dt);
+    }
    
    //Output solution
-   problem.doc_solution(doc_info,trace_file);
+   problem.doc_solution(doc_info, trace_file);
    
    //Increment counter for solutions 
    doc_info.number()++;

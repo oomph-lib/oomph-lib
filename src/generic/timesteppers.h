@@ -240,6 +240,10 @@ class TimeStepper
  /// pointers
  bool Shut_up_in_assign_initial_data_values;
 
+ /// \short Flag: is adaptivity done by taking a separate step using an
+ /// ExplicitTimeStepper object?
+ bool Predict_by_explicit_step; 
+
 public:
  
  /// \short Constructor. Pass the amount of storage required by
@@ -249,7 +253,8 @@ public:
   : Time_pt(0),
   Adaptive_Flag(false),
   Is_steady(false),
-  Shut_up_in_assign_initial_data_values(false)
+  Shut_up_in_assign_initial_data_values(false),
+  Predict_by_explicit_step(false)
   {
    //Resize Weights matrix and initialise each weight to zero 
    Weight.resize(max_deriv+1,tstorage,0.0);
@@ -347,6 +352,13 @@ public:
    return Is_steady;
   }
 
+ /// \short Flag: is adaptivity done by taking a separate step using an
+ /// ExplicitTimeStepper object?
+ bool predict_by_explicit_step() const 
+ {
+  return Predict_by_explicit_step;
+ }
+
  /// \short Enable the output of warnings due to possible fct pointer vector
  /// size mismatch in assign_initial_data_values (Default)
  void enable_warning_in_assign_initial_data_values()
@@ -377,7 +389,7 @@ public:
  // normal polymorphism because data.value is different to node.value and
  // value is not a virtual function.
 
- /// \short Evaluate i-th derivative of all values in Data and return in 
+ /// \short Evaluate i-th derivative of all values in Data and return in
  /// Vector deriv[].
  void time_derivative(const unsigned &i, 
                       Data* const &data_pt, Vector<double>& deriv)
@@ -393,7 +405,7 @@ public:
     }
   }
 
- /// \short Evaluate i-th derivative of j-th value in Data
+ /// \short Evaluate i-th derivative of j-th value in Data.
  double time_derivative(const unsigned &i, Data* const &data_pt, 
                         const unsigned& j)
   {

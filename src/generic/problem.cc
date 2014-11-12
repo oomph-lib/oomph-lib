@@ -52,6 +52,10 @@
 //Include to fill in additional_setup_shared_node_scheme() function
 #include "refineable_mesh.template.cc"
 
+
+//??ds get rid this eventually?
+#include "midpoint_method.h"
+
 namespace oomph
 {
 
@@ -2442,6 +2446,71 @@ ContinuationStorageScheme Problem::Continuation_time_stepper;
   for(unsigned long l=0;l<n_dof;l++)
    {
     dofs[l] = *Dof_pt[l];
+   }
+ }
+
+ /// Get history values of dofs
+ void Problem::get_dofs(const unsigned& t, DoubleVector& dofs)
+ {
+#ifdef OOMPH_HAS_MPI
+  throw OomphLibError("Not designed for MPI!",
+                      OOMPH_EXCEPTION_LOCATION,
+                      OOMPH_CURRENT_FUNCTION);
+#endif
+
+  // Resize the vector
+  dofs.build(Dof_distribution_pt, 0.0);
+
+  // First deal with global data
+  unsigned Nglobal_data = nglobal_data();
+  for(unsigned i=0; i<Nglobal_data; i++)
+   {
+    for(unsigned j=0, nj=Global_data_pt[i]->nvalue(); j<nj; j++)
+     {
+      // For each data get the equation number and copy out the value.
+      int eqn_number = Global_data_pt[i]->eqn_number(j);
+      if(eqn_number >= 0)
+       {
+        dofs[eqn_number] = Global_data_pt[i]->value(t, j);
+       }
+     }
+   }
+
+  // Next element internal data
+  for(unsigned i=0, ni=mesh_pt()->nelement(); i<ni; i++)
+   {
+
+    GeneralisedElement* ele_pt = mesh_pt()->element_pt(i);
+    for(unsigned j=0, nj=ele_pt->ninternal_data(); j<nj; j++)
+     {
+
+      Data* d_pt = ele_pt->internal_data_pt(j);
+      for(unsigned k=0, nk=d_pt->nvalue(); k<nk; k++)
+       {
+
+        int eqn_number = d_pt->eqn_number(k);
+         if(eqn_number >= 0)
+          {
+           dofs[eqn_number] = d_pt->value(t, j);
+          }
+       }
+     }
+   }
+
+  // Now the nodes
+  for(unsigned i=0, ni=mesh_pt()->nnode(); i<ni; i++)
+   {
+    Node* node_pt = mesh_pt()->node_pt(i);
+    for(unsigned j=0, nj=node_pt->nvalue(); j<nj; j++)
+     {
+      // For each node get the equation number and copy out the value.
+      int eqn_number = node_pt->eqn_number(j);
+      if(eqn_number >= 0)
+       {
+        dofs[eqn_number] = node_pt->value(t, j);
+
+       }
+     }
    }
  }
 
@@ -8391,7 +8460,7 @@ OOMPH_CURRENT_FUNCTION,
        *(this->Dof_pt[n]) = (*Saved_dof_pt)[n];
       }
     }
-   //Otherwise just store all the dofs
+   //Otherwise just restore all the dofs
    else
 #endif
     {
@@ -10498,6 +10567,15 @@ double Problem::arc_length_step_solve_helper(double* const &parameter_pt,
 //======================================================================
 void Problem::explicit_timestep(const double &dt, const bool &shift_values)
 {
+#ifdef PARANOID
+ if(this->explicit_time_stepper_pt() == 0)
+  {
+   throw OomphLibError("Explicit time stepper pointer is null in problem.",
+                       OOMPH_EXCEPTION_LOCATION,
+                       OOMPH_CURRENT_FUNCTION);
+  }
+#endif
+
  //Firstly we shift the time values
  if(shift_values) {shift_time_values();}
  //Set the current value of dt, if we can
@@ -10793,7 +10871,8 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
        time_stepper_pt(i)->set_error_weights();
       }
 
-     //Call a global error, at the moment I'm just going to use a square norm
+     // Get a global error norm to use in adaptivity (as specified by the
+     // problem sub-class writer).
      double error = global_temporal_error_norm();
 
      // Prevent a divide by zero if the solution gives very close to zero
@@ -11176,19 +11255,173 @@ void Problem::shift_time_values()
 //========================================================================
 void Problem::calculate_predictions()
 {
- //Calculate all predictions in the "master" mesh
- Mesh_pt->calculate_predictions();
 
- //Calculate predictions for global data with their own timesteppers
- unsigned Nglobal=Global_data_pt.size();
- for (unsigned iglobal=0;iglobal<Nglobal;iglobal++)
+// Check that if we have multiple time steppers none of them want to
+// predict by calling an explicit timestepper (as opposed to doing
+// something like an explicit step by combining known history values, as
+// done in BDF).
+#ifdef PARANOID
+ if(Time_stepper_pt.size()!=1)
   {
-   Global_data_pt[iglobal]->time_stepper_pt()->
-    calculate_predicted_values(Global_data_pt[iglobal]);
+   for(unsigned j=0; j<Time_stepper_pt.size(); j++)
+    {
+     if(time_stepper_pt()->predict_by_explicit_step())
+      {
+       std::string err = 
+        "Prediction by explicit step only works for problems with a simple time";
+        err += "stepper. I think implementing anything more general will";
+        err += "require a rewrite of explicit time steppers. - David";
+       throw OomphLibError(err, OOMPH_EXCEPTION_LOCATION,
+                           OOMPH_CURRENT_FUNCTION);
+      }
+    }
+  }
+#endif
+
+ 
+ // Predict using an explicit timestepper (don't do it if adaptive = false
+ // because pointers probably aren't set up).
+ if(time_stepper_pt()->predict_by_explicit_step() && 
+    time_stepper_pt()->adaptive_flag())
+  {
+    // ??ds assume midpoint method for now
+    MidpointMethod* mp_pt = checked_dynamic_cast<MidpointMethod*>
+     (time_stepper_pt());
+
+    // Copy the midpoint time stepper's predictor pt into problem's
+    // explicit time stepper pt (unless problem already has its own
+    // explicit time stepper).
+    ExplicitTimeStepper* ets_pt = mp_pt->predictor_pt();
+#ifdef PARANOID
+    if((explicit_time_stepper_pt() != ets_pt)
+       && (explicit_time_stepper_pt() != 0))
+     {
+      throw OomphLibError("Problem has explicit time stepper other than predictor, not sure how to handle this yet ??ds",
+                          OOMPH_EXCEPTION_LOCATION,
+                          OOMPH_CURRENT_FUNCTION);
+     }
+#endif
+    explicit_time_stepper_pt() = ets_pt;
+    
+    // Backup dofs and time
+    store_current_dof_values();
+    double backup_time = time();
+
+    // Move time back so that we are at the start of the timestep (as
+    // explicit_timestep functions expect). This is needed because the
+    // predictor calculations are done after unsteady newton solve has
+    // started, and it has already moved time forwards.
+    double dt = time_pt()->dt();
+    time() -= dt;
+
+    // Explicit step
+    this->explicit_timestep(dt, false);
+
+    // Copy predicted dofs and time to their storage slots.
+    copy_dof_pt_to_data_history_value(Dof_pt, mp_pt->predictor_storage_index());
+    mp_pt->Predicted_time = time();
+
+    // Check we got the times right
+#ifdef PARANOID
+    if(std::abs(time() - backup_time) > 1e-15)
+     {
+      throw OomphLibError("Predictor landed at the wrong time!",
+                          OOMPH_EXCEPTION_LOCATION,
+                          OOMPH_CURRENT_FUNCTION);
+     }
+#endif
+
+    // Restore dofs and time
+    restore_dof_values();
   }
 
+ // Otherwise we can do predictions in a more object oriented way using
+ // whatever timestepper the data provides (this is the normal case).
+ else
+  {
+   //Calculate all predictions in the "master" mesh
+   Mesh_pt->calculate_predictions();
+
+   //Calculate predictions for global data with their own timesteppers
+   unsigned Nglobal=Global_data_pt.size();
+   for (unsigned iglobal=0;iglobal<Nglobal;iglobal++)
+    {
+     Global_data_pt[iglobal]->time_stepper_pt()->
+      calculate_predicted_values(Global_data_pt[iglobal]);
+    }
+  }
 }
 
+void Problem::copy_dof_pt_to_data_history_value(Vector<double*>& dof_pt, 
+                                                const unsigned& t)
+ {
+#ifdef OOMPH_HAS_MPI
+    throw OomphLibError("Not designed for MPI!",
+                        OOMPH_EXCEPTION_LOCATION,
+                        OOMPH_CURRENT_FUNCTION);
+#endif
+
+    // First deal with global data
+    unsigned Nglobal_data = nglobal_data();
+    for(unsigned i=0; i<Nglobal_data; i++)
+     {
+      for(unsigned j=0, nj=Global_data_pt[i]->nvalue(); j<nj; j++)
+       {
+        // For each data get the equation number and copy in the value.
+        int eqn_number = Global_data_pt[i]->eqn_number(j);
+        if(eqn_number >= 0)
+         {
+          Global_data_pt[i]->set_value(t, j, *(dof_pt[eqn_number]));
+         }
+       }
+     }
+
+    // Now the meshes
+    for(unsigned k=0, nk=1; k<nk; k++)
+     {
+#warning "Not handling multiple meshes"
+
+      // nodes
+      for(unsigned i=0, ni=mesh_pt()->nnode(); i<ni; i++)
+       {
+        Node* node_pt = mesh_pt()->node_pt(i);
+        for(unsigned j=0, nj=node_pt->nvalue(); j<nj; j++)
+         {
+          // For each node get the equation number and copy in the value.
+          int eqn_number = node_pt->eqn_number(j);
+          if(eqn_number >= 0)
+           {
+            node_pt->set_value(t, j, *(dof_pt[eqn_number]));
+           }
+         }
+       }
+
+      // and non-nodal data inside elements
+      for(unsigned i=0, ni=mesh_pt()->nelement(); i<ni; i++)
+       {
+        GeneralisedElement* ele_pt = mesh_pt()->element_pt(i);
+        for(unsigned j=0, nj=ele_pt->ninternal_data(); j<nj; j++)
+         {
+          Data* data_pt = ele_pt->internal_data_pt(j);
+          // For each node get the equation number and copy in the value.
+          int eqn_number = data_pt->eqn_number(j);
+
+          if(eqn_number >= 0)
+           { 
+            data_pt->set_value(t, j, *(dof_pt[eqn_number]));
+            std::cout << "copying eqn " << eqn_number
+                      << " with value " << *(dof_pt[eqn_number]) << std::endl; 
+           }
+         }
+       }
+
+
+      // If it's a spine mesh I think there might be more degrees of
+      // freedom there. I don't use them though so I'll let someone who
+      // knows what they are doing handle it... 
+     }
+
+ }
 
 
 //======================================================================

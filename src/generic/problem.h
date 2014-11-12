@@ -1576,6 +1576,9 @@ namespace oomph
  /// values of all unknowns.
  void get_dofs(DoubleVector& dofs);
 
+ /// \short Return vector of the t'th history value of all dofs.
+ void get_dofs(const unsigned& t, DoubleVector& dofs);
+
  /// \short Set the values of the dofs
  void set_dofs(const DoubleVector &dofs);
 
@@ -2324,6 +2327,11 @@ namespace oomph
 
  /// \short Calculate predictions
  void calculate_predictions();
+
+ /// \short Copy values from the provided vector of pointers to dofs into
+ /// the t'th history value of the corresponding Data.
+ void copy_dof_pt_to_data_history_value(Vector<double*>& dof_pt, 
+                                        const unsigned& t);
 
  ///\short Enable recycling of the mass matrix in explicit timestepping
  ///schemes. Useful for timestepping on fixed meshes when you want

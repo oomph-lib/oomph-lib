@@ -3,14 +3,12 @@
 # Get the OOPMH-LIB root directory from a makefile
 OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
 
-exit
-
 set -o errexit
 no_fpdiff=false # `test "$1" = "no_fpdiff"`
 set -o nounset
 
 #Set the number of tests to be checked
-NUM_TESTS=2
+NUM_TESTS=3
 
 
 # Setup validation directory
@@ -23,6 +21,9 @@ mkdir Validation
 #----------------------------------
 cd Validation
 
+
+# Midpoint safe elements with bdf2
+# ============================================================
 echo "Running 2D unsteady heat midpoint elements with bdf2 time stepper validation"
 mkdir RESLT
 ../two_d_unsteady_heat_midpoint "bdf2" > OUTPUT_bdf2
@@ -46,6 +47,8 @@ else
 fi
 
 
+# With midpoint
+# ============================================================
 echo "Running unsteady heat midpoint elements with midpoint time stepper validation"
 mkdir RESLT
 ../two_d_unsteady_heat_midpoint "midpoint" > OUTPUT_midpoint
@@ -66,6 +69,30 @@ if $no_fpdiff; then
 else
 ../../../../bin/fpdiff.py ../validata/result.dat.gz \
     result_midpoint.dat  >> validation.log
+fi
+
+# With adaptive midpoint
+# ============================================================
+echo "Running unsteady heat midpoint elements with adaptive midpoint time stepper validation"
+mkdir RESLT
+../two_d_unsteady_heat_midpoint "adaptive-midpoint" > OUTPUT_adaptive_midpoint
+echo "done"
+echo >> validation.log
+echo "2D unsteady heat midpoint elements with adaptive midpoint time stepper validation " >> validation.log
+echo "------------------------------------------------" >> validation.log
+echo >> validation.log
+echo "Validation directory: " >> validation.log
+echo >> validation.log
+echo "  " `pwd` >> validation.log
+echo >> validation.log
+cat RESLT/soln*.dat > result_adaptive_midpoint.dat
+mv RESLT RESLT_adaptive_midpoint
+
+if $no_fpdiff; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../../bin/fpdiff.py ../validata/result_adaptive_midpoint.dat.gz \
+    result_adaptive_midpoint.dat  >> validation.log
 fi
 
 # Append output to global validation log file

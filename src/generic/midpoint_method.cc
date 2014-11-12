@@ -71,76 +71,33 @@ namespace oomph
          {
           node_pt->x_gen(t,k,i) = node_pt->x_gen(t-1,k,i);
          }
-
-        //If we are using the adaptive scheme, set the velocity
-        if(adaptive_flag())
-         {
-          node_pt->x_gen(ndt()+1,k,i) = velocity[k][i];
-         }
        }
      }
    }
  }
 
- ///
+
+ /// Dummy - just check that the values that
+ /// problem::calculate_predicted_values() has been called right.
  void MidpointMethod::calculate_predicted_values(Data* const &data_pt)
  {
   if(adaptive_flag())
    {
-    // Cache some values
-    double tnph = (time_pt()->time(0) + time_pt()->time(1))/2;
-    double dt_n = time_pt()->dt(); //??ds is this right?
-
-    // Collect the data needed for interpolation
-    Vector<double> known_times(N_interp);
-    Vector<Vector<double> > known_values(N_interp);
-    unsigned nvalue = data_pt->nvalue();
-    for(unsigned i_t=0; i_t<N_interp; i_t++)
-     {
-      known_times[i_t] = time_pt()->time(i_t);
-
-      for(unsigned v=0; v<nvalue; v++)
-       {
-        known_values[i_t].push_back(data_pt->value(i_t, v));
-       }
-     }
-
-    // Interpolate y(t_n+1/2), y'_n and y'(t_n+1/2)
-    BarycentricLagrangeInterpolator interpolator(known_times, known_values);
-
-    Vector<double> y_tnph, dy_tnph, dy_tn;
-    interpolator.eval(tnph, y_tnph);
-    interpolator.eval_derivative(tnph, 1, dy_tnph);
-    interpolator.eval_derivative(time_pt()->time(1), 1, dy_tn);
-
-    // Use the interpolated values to calculate an estimate to
-    // y_np1. Basically just using AB2.
-    for(unsigned v=0, nv=data_pt->nvalue(); v<nv; v++)
-     {
-      data_pt->set_value(Predictor_storage_index, v,
-                         y_tnph[v] + (dt_n/4) * ( 3*dy_tnph[v] - dy_tn[v]));
-
-      // Also store the interpolated values of y'(t_nph) for later
-      data_pt->set_value(Dy_tnph_storage_index, v, dy_tnph[v]);
-     }
+    // Can't do it here, but we can check that the predicted values have
+    // been updated.
+    check_predicted_values_up_to_date();
    }
  }
 
- /// \short
+
  double MidpointMethod::temporal_error_in_value(Data* const &data_pt,
                                                 const unsigned &i)
  {
   if(adaptive_flag())
    {
-    // Calculate error. Hopefully see my paper ??ds
-    double y_np1_MP = data_pt->value(0, i);
-    double y_n = data_pt->value(1, i);
-    double y_np1_pred = data_pt->value(Predictor_storage_index, i);
-    double dy_tnph = data_pt->value(Dy_tnph_storage_index, i);;
-    double dt_n = time_pt()->dt(); //??ds is this right?
-    double a_n = dt_n*dy_tnph + y_n - y_np1_MP;
-
-    return (4*(y_np1_MP - y_np1_pred) + 5*a_n) * Fudge_factor;
+    // predicted value is more accurate so just compare with that
+    //??ds is sign important? probably not...
+    return data_pt->value(i) - data_pt->value(Predictor_storage_index, i);
    }
   else
    {
