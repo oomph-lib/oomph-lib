@@ -46,14 +46,19 @@ def read_file(filename):
 
  return filedata
 
-def fpdiff_helper(filename1,filename2,relative_error,small):
+def fpdiff_helper(filename1,filename2,relative_error,small,
+                  outstream, details_stream):
  """ Calculate the floating-point difference between two data files.
      The idea is to use a looser tolerance than the UNIX diff command,
      so that if two entries have a relative error less than the argument
      relative_error, they are counted as the same.
 
      Note that the relative error is percentage!
-
+     
+     Information on pass/failure is written to outstream. Details on which
+     lines failed are written to details_stream. Warning: if run on
+     large files the details_stream may be overwhelmingly long.
+     
      Returns 0 if the two files are the same, 1 if they are different or
      5 if the files cannot be opened.
  """
@@ -66,7 +71,7 @@ def fpdiff_helper(filename1,filename2,relative_error,small):
    tmpfile1 = read_file(filename1)
  except IOError:
    #If there has been an IO error fail
-   sys.stdout.write("\n   [FAILED] : Unable to open the input file %s \n\n"
+   outstream.write("\n   [FAILED] : Unable to open the input file %s \n\n"
       % filename1)
    return 5
 
@@ -74,7 +79,7 @@ def fpdiff_helper(filename1,filename2,relative_error,small):
    tmpfile2 = read_file(filename2)
  except IOError:
    #If there has been an IO error fail
-   sys.stdout.write("\n   [FAILED] : Unable to open the input file %s \n\n"
+   outstream.write("\n   [FAILED] : Unable to open the input file %s \n\n"
       % filename2)
    return 5
 
@@ -102,8 +107,8 @@ def fpdiff_helper(filename1,filename2,relative_error,small):
   count += 1
   #If we've run over the end of the file2, issue a warning and end the loop
   if count >= n:
-   sys.stdout.write("\nWarning: files have different numbers of lines")
-   sys.stdout.write("\nResults are for first %d lines of both files\n" % count)
+   details_stream.write("\nWarning: files have different numbers of lines")
+   details_stream.write("\nResults are for first %d lines of both files\n" % count)
    nerr += 1
    break
   #Read the next line from file2
@@ -121,10 +126,10 @@ def fpdiff_helper(filename1,filename2,relative_error,small):
 
    #If the number of fields is not the same, report it as an error
    if nfields1 != nfields2:
-     sys.stdout.write("\n =====> line %d: different number of fields\n" \
+     details_stream.write("\n =====> line %d: different number of fields\n" \
      % (count+1))
-     sys.stdout.write("%s fields: %s" % (nfields1, line1)) 
-     sys.stdout.write("%s fields: %s" % (nfields2, line2))
+     details_stream.write("%s fields: %s" % (nfields1, line1)) 
+     details_stream.write("%s fields: %s" % (nfields2, line2))
      nerr += 1
      continue
     
@@ -208,43 +213,45 @@ def fpdiff_helper(filename1,filename2,relative_error,small):
    #If there has been any sort of error, print it
    if problem == 1:
     nline_error += 1
-    sys.stdout.write("\n =====> line %d\n" % (count+1))
-    sys.stdout.write("%s\n%s\n%s\n" % (outputline1, outputline2, outputline3))
+    details_stream.write("\n =====> line %d\n" % (count+1))
+    details_stream.write("%s\n%s\n%s\n" % (outputline1, outputline2, outputline3))
  
  #Final print out, once loop over lines is complete
  if nerr > 0:
-  sys.stdout.write("\n In files %s %s" % (filename1, filename2))
-  sys.stdout.write("\n number of lines processed: %d" % count)
-  sys.stdout.write("\n number of lines containing errors: %d" % nline_error)
-  sys.stdout.write("\n number of errors: %d " % nerr)
-  sys.stdout.write("\n========================================================")
-  sys.stdout.write("\n    Parameters used:")
-  sys.stdout.write("\n        threshold for numerical zero : %g" % small)
-  sys.stdout.write("\n        maximum rel. difference [percent] : %g" % relative_error)
-  sys.stdout.write("\n    Legend: ")
-  sys.stdout.write("\n        *******  means differences in data type (string vs number)")
-  sys.stdout.write("\n        -------  means real data exceeded the relative difference maximum") 
-  sys.stdout.write("\n        %%%%%%%  means that two strings are different")
-  sys.stdout.write("\n========================================================")
-  sys.stdout.write("\n\n   [FAILED]\n")
+  outstream.write("\n In files %s %s" % (filename1, filename2))
+  outstream.write("\n number of lines processed: %d" % count)
+  outstream.write("\n number of lines containing errors: %d" % nline_error)
+  outstream.write("\n number of errors: %d " % nerr)
+  outstream.write("\n========================================================")
+  outstream.write("\n    Parameters used:")
+  outstream.write("\n        threshold for numerical zero : %g" % small)
+  outstream.write("\n        maximum rel. difference [percent] : %g" % relative_error)
+  outstream.write("\n    Legend: ")
+  outstream.write("\n        *******  means differences in data type (string vs number)")
+  outstream.write("\n        -------  means real data exceeded the relative difference maximum") 
+  outstream.write("\n        %%%%%%%  means that two strings are different")
+  outstream.write("\n========================================================")
+  outstream.write("\n\n   [FAILED]\n")
   # Return failure
   return 2
 
  else:
-  sys.stdout.write("\n\n In files %s %s" % (filename1, filename2))
-  sys.stdout.write(\
+  outstream.write("\n\n In files %s %s" % (filename1, filename2))
+  outstream.write(\
   "\n   [OK] for fpdiff.py parameters: - max. rel. error = %g " % relative_error)
-  sys.stdout.write("%")
-  sys.stdout.write(\
+  outstream.write("%")
+  outstream.write(\
   "\n                                  - numerical zero  = %g\n" % small)
   # Return success
   return 0
 
 
-def fpdiff(filename1, filename2, relative_error=0.1, small=1e-14):
+def fpdiff(filename1, filename2, relative_error=0.1, small=1e-14,
+           outstream=sys.stdout, details_stream=sys.stdout):
     """Wrapper for using fpdiff inside python. Has default args and returns a
     bool."""
-    return fpdiff_helper(filename1, filename2, relative_error, small) == 0
+    return fpdiff_helper(filename1, filename2, relative_error, small,
+                         outstream, details_stream) == 0
 
 
 def run_as_script(argv):
@@ -283,7 +290,8 @@ def run_as_script(argv):
    small = float(argv[3])
  
  # Run the diff
- error_code = fpdiff_helper(argv[0], argv[1], maxreld, small)
+ error_code = fpdiff_helper(argv[0], argv[1], maxreld, small,
+                            sys.stdout, sys.stdout)
 
  return error_code
 
