@@ -133,9 +133,9 @@ public:
  /// Broken copy constructor
  Shape(const Shape &shape) {BrokenCopy::broken_copy("Shape");}
 
- /// Default constructor - just assigns a null pointer for the storage so that
- /// the destructor works as expected.
- Shape() : Allocated_storage(0) {}
+ /// Default constructor - just assigns a null pointers and zero index
+ /// sizes.
+ Shape() : Psi(0), Allocated_storage(0), Index1(0), Index2(0) {}
 
  /// The assignment operator does a shallow copy 
  /// (resets the pointer to the data)
@@ -186,6 +186,20 @@ public:
 
  /// Destructor, clear up the memory allocated by the object
  ~Shape() {delete[] Allocated_storage; Allocated_storage=0;}
+
+ /// Change the size of the storage
+ void resize(const unsigned& N, const unsigned& M=1)
+ {
+  // Clear old storage
+  delete[] Allocated_storage; Allocated_storage = 0;
+  Psi = 0;
+
+  // Allocate new storage
+  Index1 = N;
+  Index2 = M;
+  Allocated_storage = new double[N*M];
+  Psi = Allocated_storage;
+ }
 
  /// Overload the bracket operator to provide access to values.
  inline double & operator[](const unsigned &i) 
@@ -325,6 +339,10 @@ class DShape
   Index1(N), Index2(M), Index3(P)
   {Allocated_storage = new double[N*M*P]; DPsi = Allocated_storage;}
 
+ /// Default constructor - just assigns a null pointers and zero index
+ /// sizes.
+ DShape() : DPsi(0), Allocated_storage(0), Index1(0), Index2(0), Index3(0) {}
+
  /// Broken copy constructor
  DShape(const DShape &dshape) {BrokenCopy::broken_copy("DShape");}
 
@@ -385,6 +403,23 @@ class DShape
 
  /// Destructor, clean up the memory allocated by this object
  ~DShape() {delete[] Allocated_storage; Allocated_storage=0;}
+
+ /// Change the size of the storage. Note that (for some strange reason)
+ /// index2 is the "optional" index, to conform with the existing
+ /// constructor.
+ void resize(const unsigned& N, const unsigned& P, const unsigned& M=1)
+ {
+  // Clear old storage
+  delete[] Allocated_storage; Allocated_storage = 0;
+  DPsi = 0;
+
+  // Allocate new storage
+  Index1 = N;
+  Index2 = M;
+  Index3 = P;
+  Allocated_storage = new double[N*M*P];
+  DPsi = Allocated_storage;
+ }
 
  /// Overload the round bracket operator for access to the data
  inline double &operator()(const unsigned &i, const unsigned &k)
