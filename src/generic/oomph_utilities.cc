@@ -727,6 +727,45 @@ namespace CommandLineArgs
   return false;
  }
 
+ /// Document the values of all flags (specified or not).
+ void doc_all_flags(std::ostream& outstream)
+ {
+  for (std::map<std::string,bool>::iterator it=
+        Specified_command_line_flag.begin();
+       it!=Specified_command_line_flag.end();it++)
+   {
+    outstream << it->first << " " << it->second << std::endl;
+   }
+  for (std::map<std::string,std::pair<bool,double*> >::iterator it=
+        Specified_command_line_double_pt.begin();
+       it!=Specified_command_line_double_pt.end();it++)
+   {
+    outstream << it->first << " " << *(it->second.second)
+              << std::endl;
+   }
+  for (std::map<std::string,std::pair<bool,int*> >::iterator it=
+        Specified_command_line_int_pt.begin();
+       it!=Specified_command_line_int_pt.end();it++)
+   {
+    outstream << it->first << " " << *(it->second.second)
+              << std::endl;
+   }
+  for (std::map<std::string,std::pair<bool,unsigned*> >::iterator it=
+        Specified_command_line_unsigned_pt.begin();
+       it!=Specified_command_line_unsigned_pt.end();it++)
+   {
+    outstream << it->first << " " << *(it->second.second)
+              << std::endl;
+   }
+  for (std::map<std::string,std::pair<bool,std::string*> >::iterator it=
+        Specified_command_line_string_pt.begin();
+       it!=Specified_command_line_string_pt.end();it++)
+   {
+    outstream << it->first << " " << *(it->second.second)
+              << std::endl;
+   }
+ }
+
  /// Document specified command line flags
  void doc_specified_flags()
  {

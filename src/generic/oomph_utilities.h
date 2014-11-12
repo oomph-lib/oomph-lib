@@ -620,6 +620,9 @@ namespace CommandLineArgs
  /// value will have been assigned directly)
  extern bool command_line_flag_has_been_set(const std::string& flag);
 
+ /// Document the values of all flags (specified or not)
+ extern void doc_all_flags(std::ostream& outstream=*oomph_info.stream_pt());
+
  /// Document specified command line flags
  extern void doc_specified_flags();
 
