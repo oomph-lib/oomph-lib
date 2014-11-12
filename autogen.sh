@@ -285,8 +285,8 @@ fi
 #============================================================================
 
 # Read the options from the files and convert them into a single one-line string
-new_configure_options=$(ProcessOptionsFile "$configure_options_file")
-old_configure_options=$(ProcessOptionsFile config/configure_options/current)
+new_configure_options=$(ProcessOptionsFile < "$configure_options_file")
+old_configure_options=$(ProcessOptionsFile < config/configure_options/current)
 
 # If configure options have changed then we need to reconfigure
 if [[ "$new_configure_options" != "$old_configure_options" || "$generate_config_files" == "true" ]]; then

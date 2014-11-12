@@ -61,7 +61,7 @@ YesNoRead()
 # deletes blanks lines and then replaces all newlines by spaces.
 ProcessOptionsFile()
 {
-    sed < $1 -e 's/#.*$//' -e '/^[ \t]*$/d' | tr '\n' ' '
+    sed -e 's/#.*$//' -e '/^[ \t]*$/d' | tr '\n' ' '
 
     # Note: We use tr for newline replacement because sed operates on each
     # line individually and so never sees the newline characters (actually
