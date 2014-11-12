@@ -75,22 +75,11 @@ def fpdiff_helper(filename1,filename2,relative_error,small,
  max_rel_diff = 0
  max_wrong_entry = 0 
  
- #Open the files
- try:
-   tmpfile1 = read_file(filename1)
- except IOError:
-   #If there has been an IO error fail
-   outstream.write("\n   [FAILED] : Unable to open the input file %s \n\n"
-      % filename1)
-   return 5, 0, 0
-
- try:
-   tmpfile2 = read_file(filename2)
- except IOError:
-   #If there has been an IO error fail
-   outstream.write("\n   [FAILED] : Unable to open the input file %s \n\n"
-      % filename2)
-   return 5, 0, 0
+ # Open the files (if run as a script then open failures are handled higher
+ # up by catching the error, otherwise it is the parent program's job to
+ # handle the error and so we shouldn't do anything weird here).
+ tmpfile1 = read_file(filename1)
+ tmpfile2 = read_file(filename2)
 
  #Find the number of lines in each file
  n1 = len(tmpfile1)
@@ -314,8 +303,14 @@ def run_as_script(argv):
    small = float(argv[3])
  
  # Run the diff
- error_code, _, _ = fpdiff_helper(argv[0], argv[1], maxreld, small,
+ try:
+    error_code, _, _ = fpdiff_helper(argv[0], argv[1], maxreld, small,
                                   sys.stdout, sys.stdout)
+ except IOError, e:
+    #If there has been an IO error fail with a useful message
+    sys.stderr.write("\n   [FAILED] I/O error(%d): %s \"%s\"\n"
+                        % (e.errno, e.strerror, e.filename))
+    return 5
 
  return error_code
 
