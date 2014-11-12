@@ -112,11 +112,12 @@ if [[ $extra_configure_options != "" ]]; then
 fi
 
 
-
-# If we are regenerating config files then clean up the helper scripts
-#============================================================================
+# If this is a new build or a forced rebuild then we need to do some extra
+# stuff.
 if $generate_config_files == "true"; then
 
+    # If we are regenerating config files then clean up the helper scripts
+    #========================================================================
     SCRIPT_LIST="config.guess config.sub depcomp install-sh ltmain.sh missing aclocal.m4 mkinstalldirs"
 
     echo " "
@@ -143,12 +144,10 @@ if $generate_config_files == "true"; then
     echo "Wiping them..."
     rm -f  $SCRIPT_LIST
     echo "Done"
-fi
 
 
-# David Shepherd's automake compatability fix
-#============================================================================
-if $generate_config_files == "true"; then
+    # David Shepherd's automake compatability fix
+    #=========================================================================
 
     # This is an awful hack but I can't find any other way to handle it :(
 
@@ -214,6 +213,19 @@ if $generate_config_files == "true"; then
         echo "Not setting serial tests option in configure.ac because your version"
         echo "of automake is old enough to use it by default (older than 1.12.0)."
     fi
+
+
+    # Do all the autotools setup stuff
+    # ============================================================
+    
+    # ??ds not really sure why this is here or what it does
+    echo
+    echo "Building Auxillary Files in /src/meshes"
+    ./bin/build_mesh_makefile.sh .
+
+    # Run all the autotools and just do the right things to generate
+    # configure, Makefile.in and all the dependency relationships.
+    autoreconf --install
 
 fi
 
@@ -305,16 +317,6 @@ if [[ "$new_configure_options" != "$old_configure_options" || "$generate_config_
 
     # Update current options
     cp "$configure_options_file" "config/configure_options/current"
-
-    # Before running automake, build the auxillary files required in
-    # /src/meshes ??ds this should probably go in a makefile!
-    echo
-    echo "Building Auxillary Files in /src/meshes"
-    ./bin/build_mesh_makefile.sh .
-
-    # Run all the autotools and just do the right things to generate
-    # configure, Makefile.in and all the dependency relationships.
-    autoreconf --install
 
     # Finally run configure itself to convert "Makefile.in"s into "Makefile"s
     echo
