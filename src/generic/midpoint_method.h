@@ -112,11 +112,33 @@ namespace oomph
     void set_predictor_weights() {}
 
     /// not implemented (??ds TODO)
-    void assign_initial_values_impulsive(Data* const &data_pt) {abort();}
-    void assign_initial_positions_impulsive(Node* const &node_pt) {abort();}
-    void calculate_predicted_positions(Node* const &node_pt) {}
+    void assign_initial_values_impulsive(Data* const &data_pt) 
+   {
+    std::string err = "Not implemented";
+    throw OomphLibError(err, OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+    void assign_initial_positions_impulsive(Node* const &node_pt)
+   {
+    std::string err = "Not implemented";
+    throw OomphLibError(err, OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+
+
+    void calculate_predicted_positions(Node* const &node_pt) 
+   {
+    std::string err = "Not implemented";
+    throw OomphLibError(err, OOMPH_CURRENT_FUNCTION,
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+   
     double temporal_error_in_position(Node* const &node_pt, const unsigned &i)
-    { abort(); return 0.0;}
+    { 
+     std::string err = "Not implemented";
+     throw OomphLibError(err, OOMPH_CURRENT_FUNCTION,
+                         OOMPH_EXCEPTION_LOCATION);
+    }
 
     // Adaptivity
     void calculate_predicted_values(Data* const &data_pt);
