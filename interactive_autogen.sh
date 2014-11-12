@@ -124,7 +124,7 @@ fi
 while [[ $accept_configure_options != "true" ]]; do
 
     # Get list of options files
-    configure_option_files="$(find config/configure_options -type f)"
+    configure_option_files="$(find config/configure_options -type f | sort)"
 
     echo " "
     echo "======================================================================"
