@@ -205,7 +205,7 @@ class Matrix
 
   // If requested and there is no output for the last entry then output a
   // zero entry.
-  if (output_bottom_right_zero)
+  if(output_bottom_right_zero && ncol() > 0 && nrow() > 0)
    {
     int last_row = this->nrow()-1;
     int last_col = this->ncol()-1;
