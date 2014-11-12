@@ -18,7 +18,7 @@ two_layer_interface_nonaxisym_perturbations_LDADD = -L@libdir@ \
 # the include directory which we specify with -I
 # Automake will replace the variable @includedir@ with the actual
 # include directory.
-INCLUDES = -I@includedir@  
+AM_CPPFLAGS += -I@includedir@  
 
 #Extra files required for distribution
 EXTRA_DIST += linearised_axisym_navier_stokes_elements.h \

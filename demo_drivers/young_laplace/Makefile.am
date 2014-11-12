@@ -58,6 +58,6 @@ refineable_young_laplace_LDADD = -L@libdir@ -lyoung_laplace -lgeneric  $(EXTERNA
 # the include directory which we specify with -I
 # Automake will replace the variable @includedir@ with the actual
 # include directory.
-INCLUDES = -I@includedir@  
+AM_CPPFLAGS += -I@includedir@  
 
 

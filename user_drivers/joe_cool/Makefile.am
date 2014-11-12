@@ -41,4 +41,4 @@ joes_poisson_code_LDADD = -L@libdir@ -lpoisson -lgeneric $(EXTERNAL_LIBS) $(FLIB
 # the include directory which we specify with -I
 # Automake will replace the variable @includedir@ with the actual
 # include directory.
-INCLUDES = -I@includedir@  
+AM_CPPFLAGS += -I@includedir@  

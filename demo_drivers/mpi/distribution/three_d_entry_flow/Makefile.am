@@ -26,5 +26,5 @@ EXTRA_DIST += three_d_entry_flow_1_partition.dat \
 
 # Include path for library headers: All library headers live in 
 # the include directory which we specify with -I
-INCLUDES =   -I@includedir@  
+AM_CPPFLAGS +=   -I@includedir@  
 

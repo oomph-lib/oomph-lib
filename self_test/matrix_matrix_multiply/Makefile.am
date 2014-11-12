@@ -22,7 +22,7 @@ matrix_multiply_test_LDADD = -L@libdir@ -lnavier_stokes -lgeneric $(EXTERNAL_LIB
 
 # Include path for library headers: All library headers live in 
 # the include directory which we specify with -I
-INCLUDES = -I@includedir@
+AM_CPPFLAGS += -I@includedir@
 
 # Only run self test if we have python for fpdiff.py
 #---------------------------------------------------

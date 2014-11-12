@@ -197,7 +197,7 @@ two_d_multi_poisson_LDADD = -L@libdir@ -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
 # reference to generic is required to allow the multi-poisson driver code
 # to include the multi-poisson header file in the serial demo driver
 # directory to find the generic header files.
-INCLUDES =   -I@includedir@   -I@includedir@/generic
+AM_CPPFLAGS +=  -I@includedir@   -I@includedir@/generic
 
 
 

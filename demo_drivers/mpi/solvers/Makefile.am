@@ -106,7 +106,6 @@ endif
 # reference to generic is required to allow the multi-poisson driver code
 # to include the multi-poisson header file in the serial demo driver
 # directory to find the generic header files.
-INCLUDES =   -I@includedir@  -I@includedir@/generic
-
+AM_CPPFLAGS +=  -I@includedir@  -I@includedir@/generic
 
 EXTRA_DIST += multi_poisson_partition.dat 

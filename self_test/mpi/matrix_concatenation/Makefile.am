@@ -22,5 +22,5 @@ matrix_concatenation_LDADD = \
 
 # Include path for library headers: All library headers live in
 # the include directory which we specify with -I
-INCLUDES =   -I@includedir@  
+AM_CPPFLAGS +=   -I@includedir@  
 

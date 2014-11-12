@@ -25,5 +25,5 @@ EXTRA_DIST += fsi_channel_with_leaflet_partition.dat
 
 # Include path for library headers: All library headers live in 
 # the include directory which we specify with -I
-INCLUDES =   -I@includedir@  
+AM_CPPFLAGS +=   -I@includedir@  
 
