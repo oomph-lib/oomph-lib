@@ -10639,7 +10639,7 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
  double time_current = time_pt()->time();
 
  //Flag to detect whether the timestep has been rejected or not
- unsigned REJECT_TIMESTEP=0;
+ bool REJECT_TIMESTEP=0;
  //Flag to detect whether any of the timesteppers are adaptive
  unsigned ADAPTIVE_FLAG=0;
  //The value of the actual timestep, by default the same as desired timestep
