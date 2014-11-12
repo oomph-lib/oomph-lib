@@ -322,114 +322,6 @@ if (test -d  $build_dir); then
 fi
 
 
-
-
-
-#Doc size of build?
-#------------------
-echo " " 
-echo " " 
-OptionPrompt "Do you want to document the size of the installation ? [y/n -- default: n]"
-want_doc_size=`OptionRead`
-if test "$want_doc_size" = "y" -o "$want_doc_size" = "Y" ; then 
-    doc_size="y"
-    echo " " 
-    echo "Size of the distribution at various stages of the"
-    echo "build process will be documented in size.html"
-    echo " " 
-else
-    doc_size="n"
-    echo " " 
-    echo "Not documenting size of build"
-fi
-
-#Create header for size.html file
-#--------------------------------
-if test "$doc_size" = "y"; then 
-    echo " "
-    echo "Assessing size of the distribution before the"
-    echo "installation -- this can take a little while... "
-    echo " " 
-    echo "<html>" > size.html
-    echo "<h1>" >> size.html
-    echo "Build sizes for oomph-lib build in " `pwd` " on " `date` >> size.html
-    echo "</h1>" >> size.html
-    echo "<TABLE BORDER=1>" >> size.html
-    echo "<TR>" >> size.html
-    echo "<TD align=\"center\">" >> size.html
-    echo "tar file" >> size.html
-    echo "</TD>" >> size.html
-    echo "<TD align=\"center\">" >> size.html
-    echo "Documentation?" >> size.html
-    echo "</TD>" >> size.html
-    echo "<TD align=\"center\">" >> size.html
-    echo "Validata?" >> size.html
-    echo "</TD>" >> size.html
-    echo "<TD align=\"center\">" >> size.html
-    echo "Size of gzipped tar file" >> size.html
-    echo "</TD>" >> size.html
-    echo "<TD align=\"center\">" >> size.html
-    echo "Size of unpacked distribution before build" >> size.html
-    echo "</TD>" >> size.html
-    echo "<TD align=\"center\">" >> size.html
-    echo "Size after build" >> size.html
-    echo "</TD>" >> size.html
-    echo "<TD align=\"center\">" >> size.html
-    echo "Size after self-tests" >> size.html
-    echo "</TD>" >> size.html
-    echo "</TR>" >> size.html
-    echo " " >> size.html
-    echo " " >> size.html
-    echo " " >> size.html
-    echo " " >> size.html
-    echo " " >> size.html
-    echo "<TD align=\"center\">" >> size.html
-    echo "<a href=\"oomph-lib-0.90.tar.gz\">oomph-lib-0.90.tar.gz</A>" >> size.html
-    echo "</TD>" >> size.html
-
-
-    # Indicate if we have documentation available
-    #--------------------------------------------
-    echo "<TD align=\"center\">" >> size.html
-    if (test -e doc/doc.txt); then 
-      echo "yes" >> size.html
-    else 
-      echo "no" >> size.html
-    fi
-    echo "</TD>" >> size.html
-
-
-    # Indicate if we have validata available
-    #---------------------------------------
-    echo "<TD align=\"center\">" >> size.html
-    if (test -e demo_drivers/poisson/two_d_poisson_flux_bc_adapt/validata/results.dat.gz); then 
-      echo "yes" >> size.html
-    else 
-      echo "no" >> size.html
-    fi
-    echo "</TD>" >> size.html
-
-
-    # Dummy output for size of gzipped tar file
-    #------------------------------------------
-    echo "<TD align=\"center\">" >> size.html
-    echo "***G" >> size.html
-    echo "</TD>" >> size.html
-
-
-    # Size before build
-    #------------------
-    echo "<TD align=\"center\">" >> size.html
-    echo `du -s -h .` >> size.html
-    echo "</TD>" >> size.html
-
-    echo " "
-    echo "...done."
-    echo " " 
-
-fi
-
-
 # Create configure options file
 #------------------------------
 
@@ -664,17 +556,6 @@ if [ $raw_build -o ! -e ./configure ]; then
  $MY_HOME_WD/bin/regenerate_config_files.sh $MY_HOME_WD
 fi
 
-# Now do the actual configure:
-#------------------------------
-# - prefix sets directory where lib and install directories get placed:
-# - CXX =  C++ compiler (defaults to gcc/g++)
-# - CC =   C compiler (defaults to gcc)
-# - F77 =  F77 compiler (defaults to gcc/g77)
-# 
-# Options: "--enable-MPI" includes all MPI sources into the build
-#
-
-
 # Run configure command
 echo " "
 echo "Running ./configure --prefix $build_dir $configure_options"
@@ -711,23 +592,6 @@ echo "done"
 
 
 
-
-# Size after build
-#-----------------
-if test "$doc_size" = "y"; then 
-    echo " "
-    echo "Assessing size of the distribution after "
-    echo "installation -- this can take a little while..."
-    echo " " 
-    echo "<TD align=\"center\">" >> size.html
-    echo `du -s -h .` >> size.html
-    echo "</TD>" >> size.html
-    echo " "
-    echo "...done."
-    echo " " 
-fi
-
-
 # Make the demo codes and run the ones that are listed in the TESTS
 #------------------------------------------------------------------
 # declaration in the "Makefile.am"s
@@ -748,50 +612,11 @@ if test "$want_self_tests" = "y" -o "$reply" = "Y" ; then
   # and now turn it back on (just in case...)
   set -o errexit
 
-  # Size after self-tests
-  #----------------------
-  if test "$doc_size" = "y"; then 
-      echo " "
-      echo "Assessing size of the distribution after "
-      echo "self tests -- this can take a little while... "
-      echo " " 
-      echo "<TD align=\"center\">" >> size.html
-      echo `du -s -h .` >> size.html
-      echo "</TD>" >> size.html
-      echo " "
-      echo "...done."
-      echo " " 
-  fi
-
 else
   echo " "
   echo "The build process is complete. You may now "
   echo "initiate the self-tests by typing \"make check -k\". "
-  echo " "
-
-
-  # Size after self-tests
-  #----------------------
-  if test "$doc_size" = "y"; then 
-      echo "<TD align=\"center\">" >> size.html
-      echo "n/a" >> size.html
-      echo "</TD>" >> size.html
-  fi
-
-fi
-
-
-#Finish off size file
-#--------------------
-if test "$doc_size" = "y"; then 
-    echo "</TR>" >> size.html
-    echo " " >> size.html
-    echo " " >> size.html
-    echo " " >> size.html
-    echo " " >> size.html
-    echo " " >> size.html
-    echo "</TABLE>" >> size.html
-    echo "</html>" >> size.html
+  echo " " 
 fi
 
 
