@@ -15,45 +15,47 @@ namespace oomph
 
  using namespace StringConversion;
 
-
+ // ================================================================= 
+ /// Class to store bi-directional lookup between added matrix row/col
+ /// numbers to main matrix (SumOfMatrix) row/col numbers. 
  // =================================================================
- /// Class to store node number to global and global to node lookups (could
- /// use mesh for node number to global but worried it might change order).
- // =================================================================
- class NodeGlobalNumbersLookup
+ class AddedMainNumberingLookup
  {
 
  public:
 
   /// Default constructor
-  NodeGlobalNumbersLookup() {}
+  AddedMainNumberingLookup() {}
 
-  /// Real constructor
-  NodeGlobalNumbersLookup(const Mesh* mesh_pt, const unsigned& dof_index)
+  /// Real constructor: construct lookup from node numbers in mesh and
+  /// global equation numbers. Useful for the case when the main matrix is
+  /// a Jacobian and the added matrix is a contribution only on a certain
+  /// mesh.
+  AddedMainNumberingLookup(const Mesh* mesh_pt, const unsigned& dof_index)
    {
     this->build(mesh_pt, dof_index);
    }
 
   /// Construct lookup schemes from int array (HLib's format for this
   /// data).
-  NodeGlobalNumbersLookup(const int* lookup_array, const unsigned& length)
+  AddedMainNumberingLookup(const int* lookup_array, const unsigned& length)
   {
    this->build(lookup_array, length);
   }
 
   /// Destructor
-  ~NodeGlobalNumbersLookup() {}
+  ~AddedMainNumberingLookup() {}
 
-  /// \short Given a global equation number in the lookup get the
-  /// associated node number. Throw an error if not found.
-  unsigned global_to_node(const int& global) const
+  /// \short Given a main matrix row/col number get the equivalent row/col
+  /// in the added matrix. Throw an error if not found.
+  unsigned main_to_added(const int& main) const
    {
-    int result = unsafe_global_to_node(global);
+    int result = unsafe_main_to_added(main);
 #ifdef PARANOID
     // If it's -1 then we failed to find it:
     if(result == -1)
      {
-      std::string err = "Global equation number " + to_string(global) 
+      std::string err = "Main matrix row/col number " + to_string(main) 
        + " not found in lookup.";
       throw OomphLibError(err, OOMPH_EXCEPTION_LOCATION,
                           OOMPH_CURRENT_FUNCTION);
@@ -70,16 +72,16 @@ namespace oomph
     return unsigned(result);
    }
 
-  /// \short Given a global equation number in the lookup get the
-  /// associated node number. Return -1 if not found.
-  int unsafe_global_to_node(const int& global) const
+  /// \short Given a main matrix row/col number get the equivalent row/col
+  /// in the added matrix. Return -1 if not found.
+  int unsafe_main_to_added(const int& main) const
   {
    // Find the entry
    std::map<unsigned, unsigned>::const_iterator
-    it = Global_to_node_mapping.find(unsigned(global));
+    it = Main_to_added_mapping.find(unsigned(main));
 
    // Check the entry existed, it not then return -1.
-   if(it == global_to_node_mapping_pt()->end())
+   if(it == main_to_added_mapping_pt()->end())
     {
      return -1;
     }
@@ -89,15 +91,16 @@ namespace oomph
     }
   }
 
-  /// Convert node number (in the mesh) to global equation number.
-  unsigned node_to_global(const unsigned& node) const
-   {return Node_to_global_mapping[node];}
+  /// Given a row/col number in the added matrix return the equivalent
+  /// row/col number in the main matrix.
+  unsigned added_to_main(const unsigned& added) const
+   {return Added_to_main_mapping[added];}
 
   /// Construct the lookup schemes given a mesh and the degree of freedom
-  /// to lookup.
+  /// to lookup main equation numbers for.
   void build(const Mesh* mesh_pt, const unsigned& dof_index)
    {
-    construct_node_to_global_mapping(mesh_pt, dof_index);
+    construct_added_to_main_mapping(mesh_pt, dof_index);
     construct_reverse_mapping();
    }
 
@@ -106,6 +109,8 @@ namespace oomph
   void build(const int* lookup_array, const unsigned& length)
    {
 #ifdef PARANOID
+    // Check for negative entries just in case (since it's an integer
+    // array).
     for(unsigned j=0; j<length; j++)
      {
       if(lookup_array[j] < 0)
@@ -116,18 +121,19 @@ namespace oomph
        }
      } 
 #endif
+
     // Copy array into mapping and generate the inverse lookup
-    Node_to_global_mapping.assign(lookup_array, lookup_array+length);
+    Added_to_main_mapping.assign(lookup_array, lookup_array+length);
     construct_reverse_mapping();
    }
 
   /// Construct an identity map (mostly for testing).
   void build_identity_map(const unsigned& n)
    {
-    Node_to_global_mapping.assign(n, 0);
+    Added_to_main_mapping.assign(n, 0);
     for(unsigned j=0; j<n; j++)
      {
-      Node_to_global_mapping[j] = j;
+      Added_to_main_mapping[j] = j;
      }
     construct_reverse_mapping();
    }
@@ -136,37 +142,36 @@ namespace oomph
   // Access functions
   // ============================================================
 
-  /// \short Const access function for Node_to_global_mapping.
-  const Vector<unsigned>* node_to_global_mapping_pt() const
-   {return &Node_to_global_mapping;}
+  /// \short Const access function for mapping.
+  const Vector<unsigned>* added_to_main_mapping_pt() const
+   {return &Added_to_main_mapping;}
 
-  /// \short Const access function for Global_to_node_mapping_pt.
-  const std::map<unsigned, unsigned>* global_to_node_mapping_pt() const
-   {return &Global_to_node_mapping;}
+  /// \short Const access function for mapping.
+  const std::map<unsigned, unsigned>* main_to_added_mapping_pt() const
+   {return &Main_to_added_mapping;}
 
  private:
 
-  /// Set up the lookup from node number to global equation number.
-  void construct_node_to_global_mapping(const Mesh* mesh_pt,
+  /// Set up the lookup from added matrix row/col to main matrix.
+  void construct_added_to_main_mapping(const Mesh* mesh_pt,
                                         const unsigned& dof_index)
    {
     // Basically just copy from the node data.
-    Node_to_global_mapping.resize(mesh_pt->nnode());
+    Added_to_main_mapping.resize(mesh_pt->nnode());
     for(unsigned nd=0, nnode=mesh_pt->nnode(); nd<nnode; nd++)
      {
-      Node_to_global_mapping[nd] =
-       mesh_pt->node_pt(nd)->eqn_number(dof_index);
+      Added_to_main_mapping[nd] = mesh_pt->node_pt(nd)->eqn_number(dof_index);
      }
    }
 
-  /// Set up the global to node mapping using the node to global mapping.
+  /// Set up the main to added mapping using the added to main mapping.
   void construct_reverse_mapping()
    {
 #ifdef PARANOID
-    if(Node_to_global_mapping.size() == 0)
+    if(Added_to_main_mapping.size() == 0)
      {
       std::ostringstream error_msg;
-      error_msg << "Must set up Node_to_global_mapping first.";
+      error_msg << "Must set up Added_to_main_mapping first.";
       throw OomphLibError(error_msg.str(),
                           OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
@@ -174,33 +179,33 @@ namespace oomph
 #endif
 
     // Clear old data
-    Global_to_node_mapping.clear();
+    Main_to_added_mapping.clear();
 
-    // Copy from Node_to_global_mapping with order reversed.
-    for(unsigned j=0; j<Node_to_global_mapping.size(); j++)
+    // Copy from Added_to_main_mapping with order reversed.
+    for(unsigned j=0; j<Added_to_main_mapping.size(); j++)
      {
-      std::pair<unsigned, unsigned> a = std::make_pair(Node_to_global_mapping[j], j);
-      Global_to_node_mapping.insert(a);
+      Main_to_added_mapping.insert(std::make_pair(Added_to_main_mapping[j],
+                                                   j));
      }
    }
 
-  /// Mapping from node numbers to global equation numbers.
-  Vector<unsigned> Node_to_global_mapping;
+  /// Mapping from added matrix row/col numbers to main matrix row/col numbers.
+  Vector<unsigned> Added_to_main_mapping;
 
-  /// Mapping from global equation numbers to node numbers. Note that we
-  /// cannot use a vector here because the global equation numbers are
-  /// probably not contiguous. Access times are O(log N) so if you need to
-  /// iterate over all elements then use the pointer access functions and
-  /// use stl iterators properly.
-  std::map<unsigned, unsigned> Global_to_node_mapping;
+  /// Mapping from main matrix row/col numbers to added matrix row/col
+  /// numbers. Note that we cannot use a vector here because the main
+  /// matrix rows/cols mapped onto are probably not contiguous. Access
+  /// times are O(log N) so if you need to iterate over all elements then
+  /// use the pointer access functions and use stl iterators properly.
+  std::map<unsigned, unsigned> Main_to_added_mapping;
 
   /// Inaccessible copy constructor
-  NodeGlobalNumbersLookup(const NodeGlobalNumbersLookup& dummy)
-   {BrokenCopy::broken_copy("NodeGlobalNumbersLookup");}
+  AddedMainNumberingLookup(const AddedMainNumberingLookup& dummy)
+   {BrokenCopy::broken_copy("AddedMainNumberingLookup");}
 
   /// Inaccessible assignment operator
-  void operator=(const NodeGlobalNumbersLookup& dummy)
-   {BrokenCopy::broken_assign("NodeGlobalNumbersLookup");}
+  void operator=(const AddedMainNumberingLookup& dummy)
+   {BrokenCopy::broken_assign("AddedMainNumberingLookup");}
 
  };
 
@@ -211,7 +216,7 @@ namespace oomph
 /// if, for example, G,H etc. are subblocks of M that must be stored in a
 /// different format to S.
 
-/// Maps mut be provided which gives a map from the rows/cols of the "main"
+/// Maps mut be provided which gives a map from the rows/cols of the main
 /// matrix to the rows/cols of each of the added matrices.
 //======================================================================
  class SumOfMatrices : public DoubleMatrixBase,
@@ -226,19 +231,19 @@ namespace oomph
   /// List of pointers to the matrices that are added to the main matrix
   Vector<DoubleMatrixBase*> Added_matrix_pt;
 
-  /// \short List of maps from the row numbers of the main matrix to the added matrix
-  /// row numbers.
-  Vector<const NodeGlobalNumbersLookup* > Main_to_individual_rows_pt;
+  /// \short List of maps from the row numbers of the main matrix to the
+  /// added matrix row numbers.
+  Vector<const AddedMainNumberingLookup* > Main_to_added_rows_pt;
 
-  /// \short List of maps from the col numbers of the main matrix to the added matrix
-  /// col numbers.
-  Vector<const NodeGlobalNumbersLookup* > Main_to_individual_cols_pt;
+  /// \short List of maps from the col numbers of the main matrix to the
+  /// added matrix col numbers.
+  Vector<const AddedMainNumberingLookup* > Main_to_added_cols_pt;
 
   /// Should we delete the sub matrices when destructor is called?
   Vector<unsigned> Should_delete_added_matrix;
 
-  /// \short Should we delete the main matrix when destructor is called? Default is
-  /// no.
+  /// \short Should we delete the main matrix when destructor is called?
+  /// Default is no.
   bool Should_delete_main_matrix;
 
  public:
@@ -246,13 +251,13 @@ namespace oomph
   /// Default constructor
   SumOfMatrices()
    : Main_matrix_pt(0), Added_matrix_pt(0),
-     Main_to_individual_rows_pt(0), Main_to_individual_cols_pt(0),
+     Main_to_added_rows_pt(0), Main_to_added_cols_pt(0),
      Should_delete_added_matrix(0), Should_delete_main_matrix(0) {}
 
   /// Constructor taking a pointer to the main matrix as input.
   SumOfMatrices(DoubleMatrixBase* main_matrix_pt)
    : Main_matrix_pt(main_matrix_pt), Added_matrix_pt(0),
-     Main_to_individual_rows_pt(0), Main_to_individual_cols_pt(0),
+     Main_to_added_rows_pt(0), Main_to_added_cols_pt(0),
      Should_delete_added_matrix(0), Should_delete_main_matrix(0) {}
 
   /// Broken copy constructor
@@ -263,7 +268,8 @@ namespace oomph
   void operator=(const SumOfMatrices&)
    {BrokenCopy::broken_assign("SumOfMatrices");}
 
-  /// Destructor: delete matrices as instructed by Should_delete_added_matrix vector
+  /// Destructor: delete matrices as instructed by
+  /// Should_delete_added_matrix vector and Should_delete_main_matrix.
   ~SumOfMatrices()
    {
     for(unsigned i_matrix=0; i_matrix<Added_matrix_pt.size(); i_matrix++)
@@ -281,8 +287,8 @@ namespace oomph
   const DoubleMatrixBase* main_matrix_pt() const {return Main_matrix_pt;}
   DoubleMatrixBase*& main_matrix_pt() {return Main_matrix_pt;}
 
-  /// \short Set the main matrix to be deleted by the destructor of the SumOfMatrices
-  /// (default is to not delete it).
+  /// \short Set the main matrix to be deleted by the destructor of the
+  /// SumOfMatrices (default is to not delete it).
   void set_delete_main_matrix()
    {Should_delete_main_matrix = true;}
 
@@ -330,15 +336,16 @@ namespace oomph
      }
    }
 
-  /// \short Add a new matrix to the sum by giving a matrix pointer and a mapping from
-  /// the main matrix numbering to the new matrix numbering.
+  /// \short Add a new matrix to the sum by giving a matrix pointer and a
+  /// mapping from the main matrix numbering to the added matrix's numbering.
   void add_matrix(DoubleMatrixBase* added_matrix_pt_in,
-                  const NodeGlobalNumbersLookup* main_to_individual_rows_pt,
-                  const NodeGlobalNumbersLookup* main_to_individual_cols_pt,
+                  const AddedMainNumberingLookup* main_to_added_rows_pt,
+                  const AddedMainNumberingLookup* main_to_added_cols_pt,
                   bool should_delete_matrix=false)
    {
-#ifdef RANGE_CHECKING
-    if (main_to_individual_rows_pt->global_to_node_mapping_pt()->size()
+#ifdef PARANOID
+    // Check that row mapping has correct size
+    if (main_to_added_rows_pt->main_to_added_mapping_pt()->size()
         > added_matrix_pt_in->nrow())
      {
       throw OomphLibError("Row mapping size should be less than or equal to nrow (less than if it is a sparse matrix and there are some empty rows).",
@@ -346,16 +353,20 @@ namespace oomph
                           OOMPH_EXCEPTION_LOCATION);
      }
 
-    if (main_to_individual_cols_pt->global_to_node_mapping_pt()->size()
+    // Check that col mapping has correct size
+    if (main_to_added_cols_pt->main_to_added_mapping_pt()->size()
         > added_matrix_pt_in->ncol())
      {
       throw OomphLibError("Col mapping size should be less than or equal to ncol (less than if it is a sparse matrix and there are some empty cols).",
                           OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
      }
-
-    const Vector<unsigned>* nd2gb_pt = main_to_individual_rows_pt->node_to_global_mapping_pt();
-    unsigned max_row = *std::max_element(nd2gb_pt->begin(), nd2gb_pt->end());
+#endif
+#ifdef RANGE_CHECKING
+    // Check that all entries in the row mapping are "in range" for the
+    // main matrix.
+    const Vector<unsigned>* rowmap_pt = main_to_added_rows_pt->added_to_main_mapping_pt();
+    unsigned max_row = *std::max_element(rowmap_pt->begin(), rowmap_pt->end());
     if(max_row > main_matrix_pt()->nrow())
      {
       std::string err = "Trying to add a matrix with a mapping which specifices";
@@ -364,20 +375,33 @@ namespace oomph
       throw OomphLibError(err, OOMPH_EXCEPTION_LOCATION,
                           OOMPH_CURRENT_FUNCTION);
      }
+
+    // Check that all entries in the row mapping are "in range" for the
+    // main matrix.
+    const Vector<unsigned>* colmap_pt = main_to_added_cols_pt->added_to_main_mapping_pt();
+    unsigned max_col = *std::max_element(colmap_pt->begin(), colmap_pt->end());
+    if(max_col > main_matrix_pt()->ncol())
+     {
+      std::string err = "Trying to add a matrix with a mapping which specifices";
+      err += " a max col of "+to_string(max_col)+" but the main matrix ";
+      err += "only has "+to_string(main_matrix_pt()->ncol()) +" cols!";
+      throw OomphLibError(err, OOMPH_EXCEPTION_LOCATION,
+                          OOMPH_CURRENT_FUNCTION);
+     }
 #endif
 
     Added_matrix_pt.push_back(added_matrix_pt_in);
-    Main_to_individual_rows_pt.push_back(main_to_individual_rows_pt);
-    Main_to_individual_cols_pt.push_back(main_to_individual_cols_pt);
+    Main_to_added_rows_pt.push_back(main_to_added_rows_pt);
+    Main_to_added_cols_pt.push_back(main_to_added_cols_pt);
     Should_delete_added_matrix.push_back(unsigned(should_delete_matrix));
    }
 
-  /// Access functions
+  /// Access function for ith added matrix (main matrix not included in
+  /// numbering).
   inline DoubleMatrixBase* added_matrix_pt(const unsigned& i) const
    {return Added_matrix_pt[i];}
 
-  /// Return the number of rows of the total matrix (equal to that of the first
-  /// matrix).
+  /// Return the number of rows of the main matrix.
   inline unsigned long nrow() const
    {
 #ifdef PARANOID
@@ -390,8 +414,7 @@ namespace oomph
     return Main_matrix_pt->nrow();
    }
 
-  /// \short Return the number of columns of the total matrix (equal to that of the
-  /// first matrix).
+  /// \short Return the number of columns of the main matrix.
   inline unsigned long ncol() const
    {
 #ifdef PARANOID
@@ -404,7 +427,7 @@ namespace oomph
     return Main_matrix_pt->ncol();
    }
 
-  /// Return the number of matrices in the sum
+  /// Return the number of added matrices in the sum
   inline unsigned n_added_matrix() const {return Added_matrix_pt.size();}
 
   /// \short Multiply: just call multiply on each of the matrices and add up the
@@ -429,10 +452,10 @@ namespace oomph
     double sum = main_matrix_pt()->operator()(i,j);
     for(unsigned i_matrix=0; i_matrix<n_added_matrix(); i_matrix++)
      {
-      int li = Main_to_individual_rows_pt[i_matrix]->unsafe_global_to_node(i);
-      int lj = Main_to_individual_cols_pt[i_matrix]->unsafe_global_to_node(j);
+      int li = Main_to_added_rows_pt[i_matrix]->unsafe_main_to_added(i);
+      int lj = Main_to_added_cols_pt[i_matrix]->unsafe_main_to_added(j);
 
-      // If the global numbers are in the map then add the entry
+      // If the added matrix contributes to this entry then add it
       if(( li != -1) && (lj != -1))
        {
         sum += added_matrix_pt(i_matrix)->operator()(li,lj);

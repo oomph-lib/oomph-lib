@@ -18,11 +18,11 @@ namespace oomph
   // We assume that appropriate checks and initialisation on x and soln are
   // carried out within the individual matrix multiplys.
 
-  // Multiply for the first matrix
-  Main_matrix_pt->multiply(x,soln);
+  // Multiply for the main matrix
+  Main_matrix_pt->multiply(x, soln);
 
-  // Now add contribution for other matrices
-  for(unsigned i_matrix=0; i_matrix< Added_matrix_pt.size(); i_matrix++)
+  // Now add contribution for the added matrices
+  for(unsigned i_matrix=0; i_matrix<Added_matrix_pt.size(); i_matrix++)
    {
     // Try to cast to a distributed object to get a distribution pointer
     DistributableLinearAlgebraObject* dist_obj_pt
@@ -36,7 +36,7 @@ namespace oomph
     OomphCommunicator* serial_comm_pt = new OomphCommunicator; // Serial communcator (does nothing)
     if(dist_obj_pt == 0)
      {
-      dist_pt->build(serial_comm_pt,added_matrix_pt(i_matrix)->nrow(),false);
+      dist_pt->build(serial_comm_pt, added_matrix_pt(i_matrix)->nrow(), false);
      }
     else
      {
@@ -47,26 +47,26 @@ namespace oomph
     DoubleVector temp_soln(dist_pt);
 
     // Create a const iterator for the map (faster than .find() or []
-    // access, const means can't change the map via the iterator)
+    // access, const means can't change the map via the iterator).
     std::map<unsigned, unsigned>::const_iterator it;
     
     // Pull out the appropriate values into a temp vector
     //??ds not parallel
     DoubleVector temp_x(dist_pt);
-    for(it = Main_to_individual_cols_pt[i_matrix]->global_to_node_mapping_pt()->begin();
-        it != Main_to_individual_cols_pt[i_matrix]->global_to_node_mapping_pt()->end();
+    for(it = Main_to_added_cols_pt[i_matrix]->main_to_added_mapping_pt()->begin();
+        it != Main_to_added_cols_pt[i_matrix]->main_to_added_mapping_pt()->end();
         it++)
      {
       temp_x[it->second] = x[it->first];
      }
     
     // Perform the multiplication
-    Added_matrix_pt[i_matrix]->multiply(temp_x,temp_soln);
+    Added_matrix_pt[i_matrix]->multiply(temp_x, temp_soln);
 
     // Add result to solution vector
     //??ds not parallel
-    for(it = Main_to_individual_rows_pt[i_matrix]->global_to_node_mapping_pt()->begin();
-        it != Main_to_individual_rows_pt[i_matrix]->global_to_node_mapping_pt()->end();
+    for(it = Main_to_added_rows_pt[i_matrix]->main_to_added_mapping_pt()->begin();
+        it != Main_to_added_rows_pt[i_matrix]->main_to_added_mapping_pt()->end();
         it++)
      {
       soln[it->first] += temp_soln[it->second];
