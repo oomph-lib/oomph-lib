@@ -52,8 +52,10 @@ namespace oomph
  class GeneralInterpolator
  {
  public:
-  /// Default constructor
-  GeneralInterpolator(const FiniteElement* const this_element,
+
+  /// Default constructor. Choose element to interpolate within and
+  /// position in element to interpolate at.
+  GeneralInterpolator(const FiniteElement* this_element,
                       const Vector<double> &s)
    :
 
@@ -78,7 +80,8 @@ namespace oomph
 
   // Initialise pointers
    This_element(this_element),
-   Ts_weights_pt(this_element->node_pt(0)->time_stepper_pt()->weights_pt()),
+   Ts_pt(this_element->node_pt(0)->time_stepper_pt()),
+   Ts_weights_pt(Ts_pt->weights_pt()),
    Position_ts_weights_pt(this_element->node_pt(0)->position_time_stepper_pt()
                           ->weights_pt()),
 
@@ -87,6 +90,7 @@ namespace oomph
    Test(Nnode),
    Dpsidx(Nnode, Dim),
    Dtestdx(Nnode, Dim),
+   S(s),
    
   // Use negative time to signify that it has not been calculated yet
    Intp_time(NotYetCalculatedValue),
@@ -95,11 +99,94 @@ namespace oomph
   // dimensional array we need to do some initialisation now).
    Dvaluesdx(Nvalue),
    D2valuesdxdt(Nvalue)
+   { 
+#ifdef PARANOID
+    for(unsigned nd=0, nnode=This_element->nnode(); nd<nnode; nd++)
+     {
+      Node* nd_pt = This_element->node_pt(nd);
+
+      // Check ts_pts in the element are the same in all nodes
+      if(nd_pt->time_stepper_pt() != This_element->node_pt(0)->time_stepper_pt())
+       {
+        std::ostringstream error_msg;
+        error_msg << "Time steppers should all be the same within an element!";
+        throw OomphLibError(error_msg.str(),
+                            OOMPH_CURRENT_FUNCTION,
+                            OOMPH_EXCEPTION_LOCATION);
+       }
+     }
+#endif
+
+    build();
+   }
+
+  /// More complex constructor. Choose element to interpolate within,
+  /// position in element to interpolate at and a time stepper to do time
+  /// interpolation. WARNING: if you use this construtor you need to make
+  /// sure that the previous values stored (in nodes) have the same meaning
+  /// in both the given time stepper and the nodes' time steppers.
+  GeneralInterpolator(const FiniteElement* this_element,
+                      const Vector<double> &s,
+                      const TimeStepper* ts_pt)
+   :
+   // ??ds a value to indicate that something hasn't been interpolated
+   // yet. Possibly dangerous?
+   NotYetCalculatedValue(-987654.321),
+
+   // Cache some loop end conditions
+   Nnode(this_element->nnode()),
+   Dim(this_element->dim()),
+   Nprev_value_zeroth_derivative(ts_pt->
+                                 nprev_values_for_value_at_evaluation_time()),
+   Nprev_value_zeroth_pos_derivative(this_element->node_pt(0)->
+                                     position_time_stepper_pt()->
+                                     nprev_values_for_value_at_evaluation_time()),
+   Nprev_value_derivative(ts_pt->ntstorage()),
+   Nprev_value_pos_derivative(this_element->node_pt(0)->
+                              position_time_stepper_pt()->ntstorage()),
+   Nvalue(this_element->node_pt(0)->nvalue()),
+
+  // Initialise pointers
+   This_element(this_element),
+   Ts_pt(ts_pt),
+   Ts_weights_pt(ts_pt->weights_pt()),
+   Position_ts_weights_pt(this_element->node_pt(0)->position_time_stepper_pt()
+                          ->weights_pt()),
+
+  // Initialise storage for shape functions
+   Psi(Nnode),
+   Test(Nnode),
+   Dpsidx(Nnode, Dim),
+   Dtestdx(Nnode, Dim),
+   S(s),
+   
+  // Use negative time to signify that it has not been calculated yet
+   Intp_time(NotYetCalculatedValue),
+
+  // Initialise storage for value derivatives (because this is a two
+  // dimensional array we need to do some initialisation now).
+   Dvaluesdx(Nvalue),
+   D2valuesdxdt(Nvalue)
+   {
+    // Check for incompatible time steppers ??ds
+#ifdef PARANOID
+    if(0)
+     {
+      std::string error_msg = "";
+      throw OomphLibError(error_msg, OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+#endif
+
+    build();
+   }
+
+
+  void build()
   {
 
    // Set up shape + test functions
-   S = s;
-   J = this_element->dshape_eulerian(s, Psi, Dpsidx);
+   J = This_element->dshape_eulerian(S, Psi, Dpsidx);
    Test = Psi;
    Dtestdx = Dpsidx;
 
@@ -129,23 +216,14 @@ namespace oomph
                            OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
-
-     // Check ts_pts are all the same
-     if(nd_pt->time_stepper_pt() != This_element->node_pt(0)->time_stepper_pt())
-      {
-       std::ostringstream error_msg;
-       error_msg << "Time steppers should all be the same within an element!";
-       throw OomphLibError(error_msg.str(),
-                           OOMPH_CURRENT_FUNCTION,
-                           OOMPH_EXCEPTION_LOCATION);
-      }
-
     }
 #endif
   }
 
   /// Destructor
   virtual ~GeneralInterpolator() {}
+
+  const TimeStepper* ts_pt() const {return Ts_pt;}
 
   double time()
   {
@@ -299,16 +377,17 @@ namespace oomph
 
   // Cached pointers
   const FiniteElement* This_element;
+  const TimeStepper* Ts_pt;
   const DenseMatrix<double>* Ts_weights_pt;
   const DenseMatrix<double>* Position_ts_weights_pt;
 
   // Jacobian + shape/test functions
-  Vector<double> S;
   double J;
   Shape Psi;
   Shape Test;
   DShape Dpsidx;
   DShape Dtestdx;
+  const Vector<double> S;
 
   // Interpolated value storage (note we can't name the time variable
   // "Time" because that is used for the time class).

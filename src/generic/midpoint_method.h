@@ -83,7 +83,7 @@ namespace oomph
     // unsigned nprev_values() {return 2;}
 
     /// \short ??ds
-    unsigned nprev_values_for_value_at_evaluation_time() {return 2;}
+    unsigned nprev_values_for_value_at_evaluation_time() const {return 2;}
 
     /// \short This function advances the Data's time history so that
     /// we can move on to the next timestep
