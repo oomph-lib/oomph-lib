@@ -55,8 +55,15 @@
 #include "oomph_definitions.h"
 #include "communicator.h"
 
-//header for cxx-prettyprint: A C++ Container Pretty-Printer
-#include "prettyprint98.h"
+// Header for cxx-prettyprint: A C++ Container Pretty-Printer. If the
+// standard in use is older than C++11 then use a special older version of
+// the header. Header is from here:
+// http://louisdx.github.io/cxx-prettyprint/
+#if __cplusplus <= 199711L
+  #include "prettyprint98.h"
+#else
+  #include "prettyprint.h"
+#endif
 
 // Header for name demangling
 #include <cxxabi.h>
