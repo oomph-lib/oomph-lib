@@ -958,6 +958,25 @@ void SuperLUSolver::solve(DoubleMatrixBase* const &matrix_pt,
                        OOMPH_EXCEPTION_LOCATION);    
   }
 
+ // check that the matrix has some entries, and so has a values_pt that
+ // makes sense (only for CR because CC is never used I think dense
+ // matrices will be safe since they don't use a values pointer).
+ CRDoubleMatrix* cr_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt);
+ if (cr_pt != 0)
+  {
+   if (cr_pt->nnz() == 0)
+    {
+     std::ostringstream error_message_stream;
+     error_message_stream
+      << "Attempted to call SuperLu on a CRDoubleMatrix with no entries, "
+      << "SuperLU would segfault (because the values array pt is "
+      << "uninitialised or null).";
+     throw OomphLibError(error_message_stream.str(),
+                         OOMPH_CURRENT_FUNCTION,
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+  }
+
  // check that the matrix and the rhs vector have the same nrow()
  if (matrix_pt->nrow() != rhs.nrow())
   {
