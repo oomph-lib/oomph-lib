@@ -36,6 +36,12 @@
 //oomph-lib includes
 #include "iterative_linear_solver.h"
 
+// Required to force_ get templated builds of iterative solvers for
+// sumofmatrices class.
+#include "sum_of_matrices.h"
+
+
+
 
 namespace oomph
 {
@@ -1909,5 +1915,12 @@ template class GS<DenseDoubleMatrix>;
 template class GMRES<CCDoubleMatrix>;
 template class GMRES<CRDoubleMatrix>;
 template class GMRES<DenseDoubleMatrix>;
+
+// Solvers for SumOfMatrices class
+template class BiCGStab<SumOfMatrices>;
+template class CG<SumOfMatrices>;
+template class GS<SumOfMatrices>;
+template class GMRES<SumOfMatrices>;
+
 
 }

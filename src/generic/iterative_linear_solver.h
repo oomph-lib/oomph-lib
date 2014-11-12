@@ -44,17 +44,11 @@
 #include "linear_solver.h"
 #include "preconditioner.h"
 
-#include "sum_of_matrices.h"
 
 
 
 namespace oomph
 {
-
- // // Forward definition of SumOfMatrices, only needed because we want to
- // // force the build of the template later.
- // class SumOfMatrices;
-
 
 //=============================================================================
 /// \short Base class for all linear iterative solvers.
