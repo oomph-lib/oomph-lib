@@ -1519,7 +1519,7 @@ class TElement<2,NNODE_1D> : public virtual TElementBase,
   private:
 
  /// Nodal translation scheme for use when generating face elements
- static const unsigned NodeOnFace[3][NNODE_1D];
+ static const unsigned Node_on_face[3][NNODE_1D];
  
  /// \short Default integration rule: Gaussian integration of same 'order' as 
  /// the element
@@ -2946,7 +2946,7 @@ class TElement<3,NNODE_1D> : public virtual TElementBase,
   private:
   
  /// Nodal translation scheme for use when generating face elements
- static const unsigned NodeOnFace[4][(NNODE_1D*(NNODE_1D+1))/2];
+ static const unsigned Node_on_face[4][(NNODE_1D*(NNODE_1D+1))/2];
  
  /// \short Default integration rule: Gaussian integration of same 'order' as
  /// the element
@@ -3473,7 +3473,7 @@ class TBubbleEnrichedElement<DIM,3> : public virtual TElement<DIM,3>,
  static TBubbleEnrichedGauss<DIM,3> Default_enriched_integration_scheme;
 
  //Static storage for central node
- static const unsigned CentralNodeOnFace[DIM+1];
+ static const unsigned Central_node_on_face[DIM+1];
 
 public:
 

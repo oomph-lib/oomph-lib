@@ -325,13 +325,13 @@ void TElement<1,NNODE_1D>::build_face_element(const int &face_index,
 
 /// Assign the nodal translation schemes
 template<> 
-const unsigned TElement<2,2>::NodeOnFace[3][2] ={{2,1},{2,0},{0,1}};
+const unsigned TElement<2,2>::Node_on_face[3][2] ={{2,1},{2,0},{0,1}};
 
 template<> 
-const unsigned TElement<2,3>::NodeOnFace[3][3] ={{2,4,1},{2,5,0},{0,3,1}};
+const unsigned TElement<2,3>::Node_on_face[3][3] ={{2,4,1},{2,5,0},{0,3,1}};
 
 template<> 
-const unsigned TElement<2,4>::NodeOnFace[3][4] =
+const unsigned TElement<2,4>::Node_on_face[3][4] =
 {{2,6,5,1},{2,7,8,0},{0,3,4,1}};
 
 
@@ -459,7 +459,7 @@ namespace TElement2BulkCoordinateDerivatives
  for (unsigned i=0;i<n_face_nodes;i++)
   {
    //The number is just offset by one
-   unsigned bulk_number = NodeOnFace[face_index][i];
+   unsigned bulk_number = Node_on_face[face_index][i];
    face_element_pt->node_pt(i)=node_pt(bulk_number);
    face_element_pt->bulk_node_number(i) = bulk_number;
    //set the number of values originally stored at this node
@@ -907,12 +907,12 @@ namespace TElement3FaceToBulkCoordinates
 
 ///Assign the nodal translation scheme for linear elements
 template<> 
-const unsigned TElement<3,2>::NodeOnFace[4][3] =
+const unsigned TElement<3,2>::Node_on_face[4][3] =
 {{1,2,3},{0,2,3},{0,1,3},{1,2,0}};
 
 ///Assign the nodal translation scheme for quadratic elements
 template<> 
-const unsigned TElement<3,3>::NodeOnFace[4][6] =
+const unsigned TElement<3,3>::Node_on_face[4][6] =
 {{1,2,3,7,8,9},{0,2,3,5,8,6},{0,1,3,4,9,6},{1,2,0,7,5,4}};
 
 
@@ -959,7 +959,7 @@ const unsigned TElement<3,3>::NodeOnFace[4][6] =
  for (unsigned i=0;i<n_face_nodes;i++)
   {
    //The number is just offset by one
-   unsigned bulk_number = NodeOnFace[face_index][i];
+   unsigned bulk_number = Node_on_face[face_index][i];
    face_element_pt->node_pt(i)=node_pt(bulk_number);
    face_element_pt->bulk_node_number(i) = bulk_number;
    //set the number of values originally stored at this node
@@ -1055,7 +1055,7 @@ TBubbleEnrichedElement<DIM,3>::Default_enriched_integration_scheme;
 //Central node on the face of the TBubbleEnrichedelement<2,3>
 //===================================================================
 template<>
-const unsigned TBubbleEnrichedElement<2,3>::CentralNodeOnFace[3] = {4,5,3};
+const unsigned TBubbleEnrichedElement<2,3>::Central_node_on_face[3] = {4,5,3};
 
 
 //================================================================
@@ -1071,7 +1071,7 @@ void TBubbleEnrichedElement<2,3>::build_face_element(
 //Central node on the face of the TBubbleEnrichedelement<3,3>
 //===================================================================
 template<>
-const unsigned TBubbleEnrichedElement<3,3>::CentralNodeOnFace[4] = 
+const unsigned TBubbleEnrichedElement<3,3>::Central_node_on_face[4] = 
 {13,12,10,11};
 
 
@@ -1106,7 +1106,7 @@ const unsigned TBubbleEnrichedElement<3,3>::CentralNodeOnFace[4] =
  // 3 : sloping face
  
  //Copy central node across
- unsigned bulk_number = CentralNodeOnFace[face_index];
+ unsigned bulk_number = Central_node_on_face[face_index];
  face_element_pt->node_pt(n_face_nodes-1)=node_pt(bulk_number);
  face_element_pt->bulk_node_number(n_face_nodes-1) = bulk_number;
  //set the number of values originally stored at this node
