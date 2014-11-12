@@ -366,7 +366,10 @@ class RefineableElement : public virtual FiniteElement
  /// element as a Vector. Note: Vector sets is own size to ensure that
  /// that this function can be used in black-box fashion
  virtual void get_interpolated_values(const Vector<double>&s, 
-                                      Vector<double>& values)=0;
+                                      Vector<double>& values)
+ {
+  get_interpolated_values(0, s, values);
+ }
  
  /// \short Get all continously interpolated function values at previous 
  /// timestep in this element as a Vector. (t=0: present; t>0: prev. timestep)
