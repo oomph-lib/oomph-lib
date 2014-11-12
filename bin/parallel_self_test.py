@@ -211,27 +211,59 @@ def make_check_in_dir(directory):
     Since everything important is written to validation logs we just
     summarise passes/fails on stdout.
 
-    Output from compilation is sent to /dev/null since it is trivial to
-    rerun make and get it again.
+    Output from compilation is sent to make_check_output file in
+    directory. The file is then moved into Validation once we can be
+    sure the folder exists.
     """
 
-    # Rebuild (but don't run the test yet).
-    build_return = subp.call(['make', 'check',
-                              'TESTS_ENVIRONMENT=true'],
-                              cwd = directory,
-                              stdout=open(os.devnull, 'w'),
-                              stderr=open(os.devnull, 'w'))
 
-    # If it failed then return a failure immediately
-    if build_return != 0:
-        build_fail_message(directory)
-        return
+    # Write make output into a file in test rootdir (in case Validation dir
+    # doesn't exist yet).
+    tracefile_path = pjoin(directory, "make_check_output")
 
-    # Run make check (runs the actual test)
-    test_result = subp.call(['make', 'check'],
-                            cwd = directory,
-                            stdout=open(os.devnull, 'w'),
-                            stderr=open(os.devnull, 'w'))
+    with open(tracefile_path, 'w') as tracefile:
+
+        # Need to flush write buffer so that this gets into the file
+        # before the build output.
+        tracefile.write("Building WITH FAKE TEST PASS CONDITION:\n")
+        tracefile.flush()
+
+        # Rebuild (but don't run the test yet). Minimal output except for
+        # errors. Output goes to the trace file.
+        build_return = subp.call(['make', 'check', '--silent',
+                                  'LIBTOOLFLAGS=--silent',
+                                  'TESTS_ENVIRONMENT=true'],
+                                  cwd = directory,
+                                  stdout=tracefile,
+                                  stderr=subp.STDOUT)
+
+        # If it failed then return a build failure immediately
+        if build_return != 0:
+            build_fail_message(directory)
+            return
+
+        tracefile.write("\nRunning self test properly:\n")
+        tracefile.flush()
+
+        # Run make check (runs the actual test)
+        test_result = subp.call(['make', 'check', '--silent',
+                                'LIBTOOLFLAGS=--silent'],
+                                cwd = directory,
+                                stdout=tracefile,
+                                stderr=subp.STDOUT)
+
+    final_tracefile_path = pjoin(directory, "Validation", "make_check_output")
+
+    # Validation dir should exist now. Move the output file there if so,
+    # otherwise issue a warning.
+    if not os.path.isdir(os.path.dirname(final_tracefile_path)):
+        sys.stderr.write("Warning: no Validation directory in "+directory
+                         +" so I couldn't put make_check_output in there\n")
+        sys.stderr.flush()
+    else:
+        os.rename(tracefile_path, final_tracefile_path)
+
+
     if test_result == 0:
         check_success_message(directory)
         return
