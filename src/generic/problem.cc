@@ -11263,51 +11263,41 @@ void Problem::copy_dof_pt_to_data_history_value(Vector<double*>& dof_pt,
        }
      }
 
-    // Now the meshes
-    for(unsigned k=0, nk=1; k<nk; k++)
+    // Now the mesh data
+    // nodes
+    for(unsigned i=0, ni=mesh_pt()->nnode(); i<ni; i++)
      {
-#warning "Not handling multiple meshes"
-
-      // nodes
-      for(unsigned i=0, ni=mesh_pt()->nnode(); i<ni; i++)
+      Node* node_pt = mesh_pt()->node_pt(i);
+      for(unsigned j=0, nj=node_pt->nvalue(); j<nj; j++)
        {
-        Node* node_pt = mesh_pt()->node_pt(i);
-        for(unsigned j=0, nj=node_pt->nvalue(); j<nj; j++)
+        // For each node get the equation number and copy in the value.
+        int eqn_number = node_pt->eqn_number(j);
+        if(eqn_number >= 0)
          {
-          // For each node get the equation number and copy in the value.
-          int eqn_number = node_pt->eqn_number(j);
-          if(eqn_number >= 0)
-           {
-            node_pt->set_value(t, j, *(dof_pt[eqn_number]));
-           }
+          node_pt->set_value(t, j, *(dof_pt[eqn_number]));
          }
        }
-
-      // and non-nodal data inside elements
-      for(unsigned i=0, ni=mesh_pt()->nelement(); i<ni; i++)
-       {
-        GeneralisedElement* ele_pt = mesh_pt()->element_pt(i);
-        for(unsigned j=0, nj=ele_pt->ninternal_data(); j<nj; j++)
-         {
-          Data* data_pt = ele_pt->internal_data_pt(j);
-          // For each node get the equation number and copy in the value.
-          int eqn_number = data_pt->eqn_number(j);
-
-          if(eqn_number >= 0)
-           { 
-            data_pt->set_value(t, j, *(dof_pt[eqn_number]));
-            std::cout << "copying eqn " << eqn_number
-                      << " with value " << *(dof_pt[eqn_number]) << std::endl; 
-           }
-         }
-       }
-
-
-      // If it's a spine mesh I think there might be more degrees of
-      // freedom there. I don't use them though so I'll let someone who
-      // knows what they are doing handle it... 
      }
 
+    // and non-nodal data inside elements
+    for(unsigned i=0, ni=mesh_pt()->nelement(); i<ni; i++)
+     {
+      GeneralisedElement* ele_pt = mesh_pt()->element_pt(i);
+      for(unsigned j=0, nj=ele_pt->ninternal_data(); j<nj; j++)
+       {
+        Data* data_pt = ele_pt->internal_data_pt(j);
+        // For each node get the equation number and copy in the value.
+        int eqn_number = data_pt->eqn_number(j);
+        if(eqn_number >= 0)
+         { 
+          data_pt->set_value(t, j, *(dof_pt[eqn_number]));
+         }
+       }
+     }
+
+      // ??ds If there are spine meshes I think there might be more degrees
+      // of freedom there. I don't use them though so I'll let someone who
+      // knows what they are doing handle it...
  }
 
 
