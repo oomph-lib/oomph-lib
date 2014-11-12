@@ -425,7 +425,8 @@ def main():
         base_dirs = ["demo_drivers", "self_test"]
 
     # Convert to absolute paths
-    abs_base_dirs = [os.path.join(args.oomph_root, b) for b in base_dirs]
+    abs_base_dirs = [os.path.abspath(os.path.join(args.oomph_root, b))
+                      for b in base_dirs]
 
     print("\nLooking for validate.sh scripts in directories:")
     pprint.pprint(abs_base_dirs)
