@@ -88,10 +88,18 @@ private:
     {
      //Construct an error message, as a string stream
      std::ostringstream error_message;
-     error_message << "Range Error: " << __n 
-                   << " is not in the range (0," 
-                   << this->size()-1 << ")"; 
- 
+     if(this->size() == 0)
+      {
+       error_message << "Range Error: Vector is empty but you requested entry "
+                     << __n ;
+      }
+     else
+      {
+       error_message << "Range Error: " << __n
+                     << " is not in the range (0,"
+                     << this->size()-1 << ")";
+      }
+
      //Throw an Oomph-lib error
      throw OomphLibError(error_message.str(),
                          OOMPH_CURRENT_FUNCTION,
