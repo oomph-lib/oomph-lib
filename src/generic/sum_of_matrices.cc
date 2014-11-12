@@ -41,8 +41,8 @@ namespace oomph
     // Pull out the appropriate values into a temp vector
     //??ds not parallel
     DoubleVector temp_x(col_dist);
-    for(it = Col_map_pts[i_matrix]->main_to_added_mapping_pt()->begin();
-        it != Col_map_pts[i_matrix]->main_to_added_mapping_pt()->end();
+    for(it = Col_map_pt[i_matrix]->main_to_added_mapping_pt()->begin();
+        it != Col_map_pt[i_matrix]->main_to_added_mapping_pt()->end();
         it++)
      {
       if(it->second >= 0) // skip pinned nodes
@@ -56,8 +56,8 @@ namespace oomph
 
     // Add result to solution vector
     //??ds not parallel
-    for(it = Row_map_pts[i_matrix]->main_to_added_mapping_pt()->begin();
-        it != Row_map_pts[i_matrix]->main_to_added_mapping_pt()->end();
+    for(it = Row_map_pt[i_matrix]->main_to_added_mapping_pt()->begin();
+        it != Row_map_pt[i_matrix]->main_to_added_mapping_pt()->end();
         it++)
      {
       if(it->second >= 0)  // skip pinned nodes

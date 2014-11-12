@@ -205,7 +205,7 @@ class Mesh
  /// schemes and in the mesh's Node_pt vector. The new node is also
  /// addressed by node_pt on return from the function.
  void convert_to_boundary_node(Node* &node_pt,
-                               const Vector<FiniteElement*>& finite_element_pts);
+                               const Vector<FiniteElement*>& finite_element_pt);
 
  void convert_to_boundary_node(Node* &node_pt);
 

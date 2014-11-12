@@ -58,15 +58,15 @@ int main(int argc, char *argv[])
 
  TimeStepper* time_stepper_pt = Factories::time_stepper_factory(ts_name);
 
- Vector<Mesh*> mesh_pts;
- mesh_pts.push_back(new Mesh);
+ Vector<Mesh*> mesh_pt;
+ mesh_pt.push_back(new Mesh);
  if(element_type == "normal")
   {
-   mesh_pts[0]->add_element_pt(new ODEElement(time_stepper_pt, problem.Exact_solution_pt));
+   mesh_pt[0]->add_element_pt(new ODEElement(time_stepper_pt, problem.Exact_solution_pt));
   }
  else if(element_type == "imr-element")
   {
-   mesh_pts[0]->add_element_pt(new IMRODEElement(time_stepper_pt, problem.Exact_solution_pt));
+   mesh_pt[0]->add_element_pt(new IMRODEElement(time_stepper_pt, problem.Exact_solution_pt));
   }
  else 
   {
@@ -74,7 +74,7 @@ int main(int argc, char *argv[])
    throw OomphLibError(err, OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
- problem.build(mesh_pts);
+ problem.build(mesh_pt);
 
  problem.Doc_info.set_directory(outdir);
 

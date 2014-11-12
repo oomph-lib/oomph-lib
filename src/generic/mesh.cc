@@ -2003,17 +2003,17 @@ void Mesh::set_elemental_internal_time_stepper(
 void Mesh::convert_to_boundary_node(Node* &node_pt)
 {
  // Cache a list of FiniteElement pointers for use in this function.
- Vector<FiniteElement*> fe_pts(nelement(),0);
+ Vector<FiniteElement*> fe_pt(nelement(),0);
  for(unsigned e=0, ne=nelement(); e < ne; e++)
   {
    // Some elements may not have been build yet, just store a null pointer
    // for these cases.
-   if(Element_pt[e] == 0) fe_pts[e] = 0;
-   else fe_pts[e] = finite_element_pt(e);
+   if(Element_pt[e] == 0) fe_pt[e] = 0;
+   else fe_pt[e] = finite_element_pt(e);
   }
 
  // Now call the real function
- convert_to_boundary_node(node_pt, fe_pts);
+ convert_to_boundary_node(node_pt, fe_pt);
 }
 
 // ============================================================
@@ -2026,7 +2026,7 @@ void Mesh::convert_to_boundary_node(Node* &node_pt)
 // O(N) times your boundary node creation complexity is O(N^2).
 // ============================================================
 void Mesh::convert_to_boundary_node
-(Node* &node_pt, const Vector<FiniteElement*>& finite_element_pts)
+(Node* &node_pt, const Vector<FiniteElement*>& finite_element_pt)
 {
 
  //If the node is already a boundary node, then return straight away,
@@ -2054,7 +2054,7 @@ void Mesh::convert_to_boundary_node
    if(Element_pt[e]!=0)
     {
      //Find the local node number of the passed node
-     int node_number = finite_element_pts[e]->get_node_number(node_pt);
+     int node_number = finite_element_pt[e]->get_node_number(node_pt);
      //If the node is present in the element, add it to our list and
      //NULL out the local element entries
      if(node_number!=-1)
@@ -2063,7 +2063,7 @@ void Mesh::convert_to_boundary_node
         list_of_elements_and_local_node_numbers.end(),
         std::make_pair(e,node_number));
        //Null it out
-       finite_element_pts[e]->node_pt(node_number)=0;
+       finite_element_pt[e]->node_pt(node_number)=0;
       }
     }
   } //End of loop over elements
@@ -2095,7 +2095,7 @@ void Mesh::convert_to_boundary_node
 
  //Create a new boundary node, using the timestepper from the
  //original node
- Node* new_node_pt = finite_element_pts[list_it->first]
+ Node* new_node_pt = finite_element_pt[list_it->first]
   ->construct_boundary_node(list_it->second,node_pt->time_stepper_pt());
 
   //Now copy all the information accross from the old node
@@ -2118,7 +2118,7 @@ void Mesh::convert_to_boundary_node
      list_it!=list_of_elements_and_local_node_numbers.end();
      ++list_it)
   {
-   finite_element_pts[list_it->first]->node_pt(list_it->second)
+   finite_element_pt[list_it->first]->node_pt(list_it->second)
     = new_node_pt;
   }
 

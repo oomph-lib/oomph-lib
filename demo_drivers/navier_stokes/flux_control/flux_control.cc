@@ -791,7 +791,7 @@ void CollapsibleChannelProblem<ELEMENT>::refine_elements_based_on_x_coord(
  const double& x_max)
   {
    // Vector to store pointers to elements to be refined
-   Vector<RefineableElement*> element_pts;
+   Vector<RefineableElement*> element_pt;
    
    // Get elements we want to refine
    unsigned n_el = Bulk_mesh_pt->nelement();
@@ -808,15 +808,15 @@ void CollapsibleChannelProblem<ELEMENT>::refine_elements_based_on_x_coord(
      // Add to Vector if to be refined
      if ((x_centre>=x_min) && (x_centre<=x_max))
       {
-       element_pts.push_back(el_pt);
+       element_pt.push_back(el_pt);
       }     
     }
     
    // Refine the elements
    oomph_info << "Number of elements to refine between x=" << x_min
               << " & " << x_max << " is " 
-              << element_pts.size() << "\n";
-   refine_selected_elements(Bulk_mesh_id, element_pts);
+              << element_pt.size() << "\n";
+   refine_selected_elements(Bulk_mesh_id, element_pt);
   }
 
 //====start_of_doc_solution===================================================

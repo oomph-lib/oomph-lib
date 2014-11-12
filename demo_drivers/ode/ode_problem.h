@@ -43,10 +43,10 @@ namespace oomph
 
   virtual ~ODEProblem() {}
 
-  virtual void build(Vector<Mesh*>& bulk_mesh_pts)
+  virtual void build(Vector<Mesh*>& bulk_mesh_pt)
   {
    // Call the underlying build
-   MyProblem::build(bulk_mesh_pts);
+   MyProblem::build(bulk_mesh_pt);
 
    // Set up the global mesh
    build_global_mesh();

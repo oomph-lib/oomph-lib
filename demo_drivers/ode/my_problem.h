@@ -709,7 +709,7 @@ using namespace StringConversion;
 
 
     /// \short Perform set up of problem.
-    virtual void build(Vector<Mesh*>& bulk_mesh_pts);
+    virtual void build(Vector<Mesh*>& bulk_mesh_pt);
 
     /// \short Get problem dimension (nodal dimension).
     const unsigned dim() const {return this->Dim;}
@@ -917,25 +917,25 @@ throw OomphLibError("Not implemented (yet?).", OOMPH_CURRENT_FUNCTION,
   }
 
   /// \short Perform set up of problem.
-  void MyProblem::build(Vector<Mesh*>& bulk_mesh_pts)
+  void MyProblem::build(Vector<Mesh*>& bulk_mesh_pt)
   {
     // Copy the first mesh's first timestepper to the problem
 
     FiniteElement* fele_pt = dynamic_cast<FiniteElement*>
-      (bulk_mesh_pts[0]->element_pt(0));
+      (bulk_mesh_pt[0]->element_pt(0));
 
     // Finite element mesh: grab ts from node
     if(fele_pt != 0)
       {
-        TimeStepper* ts_pt = bulk_mesh_pts[0]->node_pt(0)->time_stepper_pt();
+        TimeStepper* ts_pt = bulk_mesh_pt[0]->node_pt(0)->time_stepper_pt();
         this->add_time_stepper_pt(ts_pt);
 
         // ??ds assumed any timesteppers hiding somewhere else are added elsewhere
 
 #ifdef PARANOID
-        for(unsigned j=0; j<bulk_mesh_pts.size(); j++)
+        for(unsigned j=0; j<bulk_mesh_pt.size(); j++)
           {
-            if(bulk_mesh_pts[j]->node_pt(0)->time_stepper_pt()
+            if(bulk_mesh_pt[j]->node_pt(0)->time_stepper_pt()
                != ts_pt)
               {
                 std::string err = "Multiple timesteppers, you need to do somedhing more fancy here";
@@ -949,16 +949,16 @@ throw OomphLibError("Not implemented (yet?).", OOMPH_CURRENT_FUNCTION,
     // Non finite element mesh: grab ts from internal data
     else
       {
-        TimeStepper* ts_pt = bulk_mesh_pts[0]->element_pt(0)->
+        TimeStepper* ts_pt = bulk_mesh_pt[0]->element_pt(0)->
           internal_data_pt(0)->time_stepper_pt();
         this->add_time_stepper_pt(ts_pt);
 
         // ??ds again assumed any timesteppers hiding somewhere else are added elsewhere
 
 #ifdef PARANOID
-        for(unsigned j=0; j<bulk_mesh_pts.size(); j++)
+        for(unsigned j=0; j<bulk_mesh_pt.size(); j++)
           {
-            if(bulk_mesh_pts[j]->element_pt(0)->
+            if(bulk_mesh_pt[j]->element_pt(0)->
                internal_data_pt(0)->time_stepper_pt() != ts_pt)
               {
                 std::string err = "Multiple timesteppers? you need to do somedhing more fancy here";
@@ -971,9 +971,9 @@ throw OomphLibError("Not implemented (yet?).", OOMPH_CURRENT_FUNCTION,
 
 
     // Push all the meshes into the problem's sub mesh list
-    for(unsigned j=0; j<bulk_mesh_pts.size(); j++)
+    for(unsigned j=0; j<bulk_mesh_pt.size(); j++)
       {
-        add_sub_mesh(bulk_mesh_pts[j]);
+        add_sub_mesh(bulk_mesh_pt[j]);
       }
 
     // If we have an iterative solver with a block preconditioner then
