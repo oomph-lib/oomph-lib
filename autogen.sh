@@ -380,18 +380,6 @@ while [[ $accept_configure_options != "true" ]]; do
 done
 
 
-echo " "
-echo "==================================================================="
-echo " "
-echo " "
-echo "End of customisation -- the actual build process is about to start."
-echo "This may take a while... No user intervention is required during"
-echo "the build procedure, so go and take the dog for a walk..."
-echo " " 
-OptionPrompt "Hit enter to continue."
-tmp=`OptionRead`
-
-
 
 
 
