@@ -243,32 +243,6 @@ if $raw_build; then
 fi
 
 
-# Autodetect folders in user_drivers
-#-----------------------------------
-
-# Backup old file (use -f so it doesn't give an error if the file doesn't exist)
-touch ${MY_HOME_WD}/config/configure.ac_scripts/user_drivers.dir_list
-mv -f ${MY_HOME_WD}/config/configure.ac_scripts/user_drivers.dir_list ${MY_HOME_WD}/config/configure.ac_scripts/user_drivers.dir_list.backup
-
-# Get a list of locations of files named Makefile.am, modify a little and write to user_drivers.dir_list.
-find ${MY_HOME_WD}/user_drivers -type f -name "Makefile.am" \
-    | grep -v "^${MY_HOME_WD}/user_drivers/Makefile.am" \
-    | sed 's:/Makefile.am$::' \
-    | sed "s:^${MY_HOME_WD}/::" \
-    > ${MY_HOME_WD}/config/configure.ac_scripts/user_drivers.dir_list
-
-# The grep and sed commands above do the following: 1) Remove the line that
-# corresponds to the Makefile.am in user_drivers itself. 2) Remove
-# "/Makefile.am" from each line leaving only the directory (dirname doesn't work
-# with pipes). 3) Remove the start of the path from each line leaving only the
-# location relative to the oomph-lib root directory.
-
-echo
-echo "User driver folders included are:"
-cat ${MY_HOME_WD}/config/configure.ac_scripts/user_drivers.dir_list
-echo
-
-
 # Choose build directory (for lib,include), relative to root
 #------------------------------------------------------------
 build_dir=$MY_HOME_WD/build
@@ -424,6 +398,32 @@ tmp=`OptionRead`
 #====================================================================
 # Start actual build process
 #====================================================================
+
+
+# Autodetect folders in user_drivers
+#-----------------------------------
+
+# Backup old file (use -f so it doesn't give an error if the file doesn't exist)
+touch ${MY_HOME_WD}/config/configure.ac_scripts/user_drivers.dir_list
+mv -f ${MY_HOME_WD}/config/configure.ac_scripts/user_drivers.dir_list ${MY_HOME_WD}/config/configure.ac_scripts/user_drivers.dir_list.backup
+
+# Get a list of locations of files named Makefile.am, modify a little and write to user_drivers.dir_list.
+find ${MY_HOME_WD}/user_drivers -type f -name "Makefile.am" \
+    | grep -v "^${MY_HOME_WD}/user_drivers/Makefile.am" \
+    | sed 's:/Makefile.am$::' \
+    | sed "s:^${MY_HOME_WD}/::" \
+    > ${MY_HOME_WD}/config/configure.ac_scripts/user_drivers.dir_list
+
+# The grep and sed commands above do the following: 1) Remove the line that
+# corresponds to the Makefile.am in user_drivers itself. 2) Remove
+# "/Makefile.am" from each line leaving only the directory (dirname doesn't work
+# with pipes). 3) Remove the start of the path from each line leaving only the
+# location relative to the oomph-lib root directory.
+
+echo
+echo "User driver folders included are:"
+cat ${MY_HOME_WD}/config/configure.ac_scripts/user_drivers.dir_list
+echo
 
 
 # If we are doing a raw build or if ./configure does not yet exist then generate
