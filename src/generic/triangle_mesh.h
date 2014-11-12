@@ -1364,6 +1364,9 @@ public:
    TriangleHelper::initialise_triangulateio(Triangulateio);
 
 #endif
+
+   // Enable triangulateio specific parts for dump/restart by default.
+   Use_triangulateio_restart = true;
   }
 
  /// Broken copy constructor
@@ -1398,6 +1401,16 @@ public:
  /// \short Setup lookup schemes which establish which elements are located
  /// next to mesh's boundaries. Doc in outfile (if it's open).
  void setup_boundary_element_info(std::ostream &outfile);
+
+ /// \short const access for Use_triangulateio_restart.
+ bool use_triangulateio_restart() const {return Use_triangulateio_restart;}
+
+ /// \short write access for Use_triangulateio_restart.
+ void enable_triangulateio_restart() {Use_triangulateio_restart = true;}
+
+ /// \short write access for Use_triangulateio_restart.
+ void disable_triangulateio_restart() {Use_triangulateio_restart = false;}
+
 
 #ifdef OOMPH_HAS_TRIANGLE_LIB
 
@@ -1442,6 +1455,10 @@ public:
 
  ///\short TriangulateIO representation of the mesh
  TriangulateIO Triangulateio;
+
+ /// Should we use triangulateio specific parts for dump/restart? (Doesn't
+ /// work with some elements and isn't needed if not using adaptivity).
+ bool Use_triangulateio_restart;
 
 #endif 
  

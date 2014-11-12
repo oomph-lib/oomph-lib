@@ -11688,8 +11688,8 @@ void Problem::dump(std::ofstream& dump_file) const
     }
 #ifdef OOMPH_HAS_TRIANGLE_LIB
    // Dump triangle mesh TriangulateIO which represents mesh topology
-   if(TriangleMeshBase* mmesh_pt =
-      dynamic_cast<TriangleMeshBase*>(mesh_pt(0)))
+   TriangleMeshBase* mmesh_pt = dynamic_cast<TriangleMeshBase*>(mesh_pt(0));
+   if(mmesh_pt != 0 && mmesh_pt->use_triangulateio_restart())
     {
      mmesh_pt->dump_triangulateio(dump_file);
     }
@@ -11712,8 +11712,9 @@ void Problem::dump(std::ofstream& dump_file) const
       }
 #ifdef OOMPH_HAS_TRIANGLE_LIB
      // Dump triangle mesh TriangulateIO which represents mesh topology
-     if(TriangleMeshBase* mmesh_pt =
-        dynamic_cast<TriangleMeshBase*>(mesh_pt(imesh)))
+     TriangleMeshBase* mmesh_pt =
+      dynamic_cast<TriangleMeshBase*>(mesh_pt(imesh));
+     if(mmesh_pt != 0 && mmesh_pt->use_triangulateio_restart())
       {
        mmesh_pt->dump_triangulateio(dump_file);
       }
@@ -12238,8 +12239,8 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
     }
 #ifdef OOMPH_HAS_TRIANGLE_LIB
    // Regenerate mesh from triangulate IO if it's a triangular mesh
-   if(TriangleMeshBase* mmesh_pt =
-      dynamic_cast<TriangleMeshBase*>(mesh_pt(0)))
+   TriangleMeshBase* mmesh_pt = dynamic_cast<TriangleMeshBase*>(mesh_pt(0));
+   if(mmesh_pt != 0 && mmesh_pt->use_triangulateio_restart())
     {
      //The function reads the TriangulateIO data structure from the dump
      //file and then completely regenerates the mesh using the
@@ -12274,8 +12275,9 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
       }
 #ifdef OOMPH_HAS_TRIANGLE_LIB
      // Regenerate mesh from triangulate IO if it's a triangular mesh
-     if(TriangleMeshBase* mmesh_pt =
-        dynamic_cast<TriangleMeshBase*>(mesh_pt(imesh)))
+     TriangleMeshBase* mmesh_pt = 
+      dynamic_cast<TriangleMeshBase*>(mesh_pt(imesh));
+     if(mmesh_pt != 0 && mmesh_pt->use_triangulateio_restart())
       {
        //The function reads the TriangulateIO data structure from the dump
        //file and then completely regenerates the mesh using the
