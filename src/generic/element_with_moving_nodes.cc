@@ -172,8 +172,6 @@ namespace oomph
  {
   // Call the standard finite element classification.
   FiniteElement::describe_local_dofs(out,current_string);
-  //Get local number of dofs so far
-  unsigned local_eqn_number = this->ndof();
   
   //Set the number of data
   const unsigned n_geom_data = ngeom_data();
