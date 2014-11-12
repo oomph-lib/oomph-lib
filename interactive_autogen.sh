@@ -101,13 +101,20 @@ fi
 
 configure_options_file="config/configure_options/current"
 
-# Ask if the initial options are OK
-echo " "
-echo "Configure options are: "
-cat "$configure_options_file" | ProcessOptionsFile
-echo 
-if YesNoRead "Is this OK?" "y"; then
-    accept_configure_options="true"
+# If the current file exists then ask if it is ok
+if [[ -f $configure_options_file ]]; then
+
+    echo " "
+    echo "Configure options are: "
+    cat "$configure_options_file" | ProcessOptionsFile
+    echo
+    if YesNoRead "Is this OK?" "y"; then
+        accept_configure_options="true"
+    else
+        accept_configure_options="false"
+    fi
+
+    # Otherwise have to choose one interactively
 else
     accept_configure_options="false"
 fi
