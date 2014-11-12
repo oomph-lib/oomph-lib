@@ -26,10 +26,17 @@ source "${oomph_root}/bin/autogen_helpers.sh"
 build_dir=""
 make_options=""
 extra_configure_options=""
-configure_options_file="config/configure_options/current"
 generate_config_files="false"
+configure_options_file="config/configure_options/current"
+
+# If "current" configure options does not exist then use "default".
+if [[ ! -f "config/configure_options/current" ]]; then
+    echo "No current configure options found, copying over the default options"
+    cp "config/configure_options/default" "config/configure_options/current"
+fi
 
 
+# Parse command line arguments
 while getopts ":hrd:c:b:j:sk" opt; do
   case $opt in
       h)
