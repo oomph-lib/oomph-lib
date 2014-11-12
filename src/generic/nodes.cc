@@ -328,6 +328,30 @@ Data::Data(TimeStepper* const &time_stepper_pt_,
   }
 }
 
+ /// Output operator: output equation numbers and values at all times,
+ /// along with any extra information stored for the timestepper.
+ std::ostream& operator<< (std::ostream &out, const Data& d)
+  {
+   const unsigned nvalue = d.nvalue();
+   const unsigned nt = d.ntstorage();
+
+   out << "Data: [" << std::endl;
+
+   for(unsigned j=0; j<nvalue; j++)
+    {
+     out << "global eq " << d.eqn_number(j) << ": [";
+     for(unsigned t=0; t<nt-1; t++)
+      {
+       out << d.value(t, j) << ", ";
+      }
+     out << d.value(nt-1, j) << "]" << std::endl;
+    }
+   out << "]" << std::endl;
+
+
+   return out;
+  }
+
 
 //================================================================
 /// Set a new TimeStepper be resizing the appropriate storage.

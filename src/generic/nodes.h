@@ -227,6 +227,10 @@ class Data
  /// Broken assignment operator.
  void operator=(const Data&) {BrokenCopy::broken_assign("Data");}
 
+ /// Output operator: output all values at all times, along with any extra
+ /// information stored for the timestepper.
+ friend std::ostream& operator<< (std::ostream &out, const Data& d);
+
   /// Destructor, deallocates memory assigned for data.
  virtual ~Data();
 
