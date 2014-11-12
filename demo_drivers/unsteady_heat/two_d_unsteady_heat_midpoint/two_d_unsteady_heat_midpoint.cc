@@ -459,12 +459,23 @@ int main(int argc, const char* argv[])
   {
    ts_pt = new MidpointMethod;
   }
+ else if(to_lower(std::string(argv[1])) == "midpoint-bdf1")
+  {
+   ts_pt = new MidpointMethodByBDF;
+  }
  else if(to_lower(std::string(argv[1])) == "adaptive-midpoint")
   {
    MidpointMethod* mp_pt = new MidpointMethod(true);
    mp_pt->set_predictor_pt(new RungeKutta<4>);
    adaptive_flag = true;
    
+   ts_pt = mp_pt;
+  }
+ else if(to_lower(std::string(argv[1])) == "adaptive-midpoint-bdf1")
+  {
+   MidpointMethodByBDF* mp_pt = new MidpointMethodByBDF(true);
+   mp_pt->set_predictor_pt(new RungeKutta<4>);
+   adaptive_flag = true; 
    ts_pt = mp_pt;
   }
  else

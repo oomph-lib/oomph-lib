@@ -49,6 +49,8 @@
 namespace oomph
 {
 
+ class Problem;
+
 //====================================================================
 /// \short Class to keep track of discrete/continous time. It is essential
 /// to have a single Time object when using multiple time-stepping schemes; 
@@ -528,6 +530,14 @@ public:
  virtual double temporal_error_in_value(Data* const &data_pt, 
                                         const unsigned &i) 
   {return 0.0;}
+
+ /// Interface for any actions that need to be performed before a time
+ /// step.
+ virtual void actions_before_timestep(Problem* problem_pt) {}
+
+ /// Interface for any actions that need to be performed after a time
+ /// step.
+ virtual void actions_after_timestep(Problem* problem_pt) {}
 };
 
 

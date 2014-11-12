@@ -1,13 +1,13 @@
 
 #include "midpoint_method.h"
-#include "poly_interp.h"
+#include "problem.h"
 
 namespace oomph
 {
 
  /// \short This function advances the Data's time history so that
  /// we can move on to the next timestep
- void MidpointMethod::shift_time_values(Data* const &data_pt)
+ void MidpointMethodBase::shift_time_values(Data* const &data_pt)
  {
   //Loop over the values, set previous values to the previous value, if
   //not a copy.
@@ -25,7 +25,7 @@ namespace oomph
 
  ///\short This function advances the time history of the positions
  ///at a node. ??ds I have no idea what I'm doing here!
- void MidpointMethod::shift_time_positions(Node* const &node_pt)
+ void MidpointMethodBase::shift_time_positions(Node* const &node_pt)
  {
   //Find the number of coordinates
   unsigned n_dim = node_pt->ndim();
@@ -79,7 +79,7 @@ namespace oomph
 
  /// Dummy - just check that the values that
  /// problem::calculate_predicted_values() has been called right.
- void MidpointMethod::calculate_predicted_values(Data* const &data_pt)
+ void MidpointMethodBase::calculate_predicted_values(Data* const &data_pt)
  {
   if(adaptive_flag())
    {
@@ -90,8 +90,8 @@ namespace oomph
  }
 
 
- double MidpointMethod::temporal_error_in_value(Data* const &data_pt,
-                                                const unsigned &i)
+ double MidpointMethodBase::temporal_error_in_value(Data* const &data_pt,
+                                                    const unsigned &i)
  {
   if(adaptive_flag())
    {
@@ -106,5 +106,52 @@ namespace oomph
     throw OomphLibError(err, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
    }
  }
+
+ /// Half the timestep before starting solve
+ void MidpointMethodByBDF::actions_before_timestep(Problem* problem_pt)
+  {
+
+   // Check that this is the only time stepper
+#ifdef PARANOID
+   if(problem_pt->ntime_stepper() != 1)
+    {
+     std::string err = "This implementation of midpoint can only work with a ";
+     err += "single time stepper, try using MidpointMethod instead (but check ";
+     err += "your Jacobian and residual calculations very carefully for compatability).";
+     throw OomphLibError(err, OOMPH_EXCEPTION_LOCATION,
+                         OOMPH_CURRENT_FUNCTION);
+    }
+#endif
+
+   time_pt()->dt() /= 2;
+   time_pt()->time() -= time_pt()->dt();
+
+   // Set the weights again because we just changed the step size
+   set_weights();
+  }
+
+ /// Take problem from t={n+1/2} to t=n+1 by algebraic update and restore
+ /// time step.
+ void MidpointMethodByBDF::actions_after_timestep(Problem* problem_pt)
+  {
+   const unsigned ndof = problem_pt->ndof();
+
+   // Get dofs at previous time step
+   DoubleVector dof_n;
+   problem_pt->get_dofs(1, dof_n);
+
+   // Update dofs at current step
+   for(unsigned i=0; i<ndof; i++)
+    {
+     problem_pt->dof(i) += problem_pt->dof(i) - dof_n[i];
+    }
+
+   // Update time
+   problem_pt->time_pt()->time() += problem_pt->time_pt()->dt();
+
+   // Return step size to its full value
+   problem_pt->time_pt()->dt() *= 2;
+
+  }
 
 } // End of oomph namespace

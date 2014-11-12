@@ -10538,6 +10538,12 @@ void Problem::unsteady_newton_solve(const double &dt, const bool &shift_values)
    time_stepper_pt(i)->set_weights();
   }
 
+ // Run the individual timesteppers actions before timestep. These need to
+ // be "outside" the problem's actions_before_implicit_timestep so that the
+ // boundary conditions are set consistently.
+ for(unsigned i=0;i<n_time_steppers;i++)
+  {time_stepper_pt(i)->actions_before_timestep(this);}
+
  //Now update anything that needs updating before the timestep
  //This could be time-dependent boundary conditions, for example.
  actions_before_implicit_timestep();
@@ -10581,6 +10587,10 @@ void Problem::unsteady_newton_solve(const double &dt, const bool &shift_values)
 
  //Now update anything that needs updating after the timestep
  actions_after_implicit_timestep();
+
+ // Run the individual timesteppers actions
+ for(unsigned i=0;i<n_time_steppers;i++)
+  {time_stepper_pt(i)->actions_after_timestep(this);}
 }
 
 //=======================================================================
@@ -10672,6 +10682,10 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
    //Now calculate the predicted values for the all data and all positions
    calculate_predictions();
 
+   // Run the individual timesteppers actions before timestep
+   for(unsigned i=0;i<n_time_steppers;i++)
+    {time_stepper_pt(i)->actions_before_timestep(this);}
+
    //Do any updates/boundary conditions changes here
    actions_before_implicit_timestep();
 
@@ -10709,6 +10723,10 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
 
    //Update anything that needs updating after the timestep
    actions_after_implicit_timestep();
+
+   // Finally run the individual timesteppers actions
+   for(unsigned i=0;i<n_time_steppers;i++)
+    {time_stepper_pt(i)->actions_after_timestep(this);}
 
    // If we have an adapative timestepper (and we haven't already failed)
    // then calculate the error estimate and rescaling factor.
@@ -11157,7 +11175,7 @@ void Problem::calculate_predictions()
     time_stepper_pt()->adaptive_flag())
   {
     // ??ds assume midpoint method for now
-    MidpointMethod* mp_pt = checked_dynamic_cast<MidpointMethod*>
+    MidpointMethodBase* mp_pt = checked_dynamic_cast<MidpointMethodBase*>
      (time_stepper_pt());
 
     // Copy the midpoint time stepper's predictor pt into problem's
@@ -11197,8 +11215,11 @@ void Problem::calculate_predictions()
 #ifdef PARANOID
     if(std::abs(time() - backup_time) > 1e-15)
      {
-      throw OomphLibError("Predictor landed at the wrong time!",
-                          OOMPH_EXCEPTION_LOCATION,
+      using namespace StringConversion;
+      std::string err = "Predictor landed at the wrong time!";
+      err += " Expected time " + to_string(backup_time, 14) + " but got ";
+      err += to_string(time(), 14);
+      throw OomphLibError(err, OOMPH_EXCEPTION_LOCATION,
                           OOMPH_CURRENT_FUNCTION);
      }
 #endif

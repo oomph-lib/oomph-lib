@@ -11,70 +11,56 @@
 namespace oomph
 {
 
+ // Forward decl. so that we can have function of Problem*
+ class Problem;
+ 
+
   // =======================================================================
-  /// Implicit midpoint rule. Implemented by calculation of residuals
-  /// etc. at half step.
-
-  /// Common mistakes when using midpoint:
-
-  /// * Didn't include the d_u_evaltime_by_du_np1 term in the Jacobian.
-
-  /// * Didn't properly interpolate time/values/x/derivatives in
-  /// jacobian/residual (all of these MUST be evaluated at the midpoint).
-
-
+  /// Implicit midpoint rule base class for the two implementations
   //========================================================================
-  class MidpointMethod : public TimeStepper
+  class MidpointMethodBase : public TimeStepper
   {
   public:
 
-    /// Constructor with initialisation
-    MidpointMethod(bool adaptive=false) :
-      TimeStepper(2,1), // initialise weights later
-      Predictor_storage_index(4)
-    {
-      Adaptive_Flag = adaptive;
-      Is_steady = false;
-      Type = "Midpoint method";
-      Predict_by_explicit_step=true;
+   /// Constructor with initialisation
+   MidpointMethodBase(bool adaptive=false) :
+    TimeStepper(2,1), // initialise weights later
+    Predictor_storage_index(4)
+   {
+    Adaptive_Flag = adaptive;
+    Is_steady = false;
+    Type = "Midpoint method";
+    Predict_by_explicit_step=true;
+    Predictor_pt = 0;
 
-      // Storage for weights needs to be 2x(2 + 0/2) (the +2 is extra history
-      // for ebdf3 predictor if adaptive). This means we provide ways to
-      // calculate the zeroth and first derivatives and in calculations we
-      // use 2 + 0/2 time values.
+    // Storage for weights needs to be 2x(2 + 0/2) (the +2 is extra history
+    // for ebdf3 predictor if adaptive). This means we provide ways to
+    // calculate the zeroth and first derivatives and in calculations we
+    // use 2 + 0/2 time values.
 
-      // But actually (for some reason...) the amount of data storage
-      // allocated for the timestepper in each node is determined by the
-      // size of weight. So we need to store an extra dummy entry in order
-      // to have storage space for the predicted value at t_{n+1}.
+    // But actually (for some reason...) the amount of data storage
+    // allocated for the timestepper in each node is determined by the
+    // size of weight. So we need to store an extra dummy entry in order
+    // to have storage space for the predicted value at t_{n+1}.
 
-      // Just leave space for predictor values anyway, it's not expensive.
-      Weight.resize(2, 5, 0.0);
+    // Just leave space for predictor values anyway, it's not expensive.
+    Weight.resize(2, 5, 0.0);
 
-      // Assume that set_weights() or make_steady() is called before use to
-      // set up the values stored in Weight.
-    }
+    // Assume that set_weights() or make_steady() is called before use to
+    // set up the values stored in Weight.
+   }
 
     /// Destructor
-    virtual ~MidpointMethod() 
+    virtual ~MidpointMethodBase() 
     {
      delete Predictor_pt; Predictor_pt = 0;
     }
 
     /// Setup weights for time derivative calculations.
-    void set_weights()
-    {
-      // Set the weights for zero-th derivative (i.e. the value to use in
-      // newton solver calculations, implicit midpoint method uses the
-      // average of previous and current values).
-      Weight(0, 0) = 0.5;
-      Weight(0, 1) = 0.5;
+    virtual void set_weights()=0;
 
-      // Set the weights for 1st time derivative
-      double dt=Time_pt->dt(0);
-      Weight(1,0) = 1.0/dt;
-      Weight(1,1) = -1.0/dt;
-    }
+   /// \short ??ds
+   virtual unsigned nprev_values_for_value_at_evaluation_time() const=0;
 
     /// Actual order (accuracy) of the scheme
     unsigned order() {return 2;}
@@ -88,9 +74,6 @@ namespace oomph
     /// Get the pointer to the timestepper to use as a predictor in
     /// adaptivity.
     ExplicitTimeStepper* predictor_pt() {return Predictor_pt;}
-
-    /// \short ??ds
-    unsigned nprev_values_for_value_at_evaluation_time() const {return 2;}
 
     /// Check that the predicted values are the ones we want.
     void check_predicted_values_up_to_date() const
@@ -151,15 +134,99 @@ namespace oomph
 
     /// Time stepper to use to calculate predictor value
     ExplicitTimeStepper* Predictor_pt;
-
-    /// Inaccessible copy constructor.
-    MidpointMethod(const MidpointMethod &dummy) {}
-
-    /// Inaccessible assignment operator.
-    void operator=(const MidpointMethod &dummy) {}
   };
 
+ /// Implicit midpoint rule implemented by calculation of residuals etc. at
+ /// half step.
+class MidpointMethod : public MidpointMethodBase
+{
+public:
+ /// Common mistakes when using this implementation of midpoint:
+ /// * Didn't include the d_u_evaltime_by_du_np1 term in the Jacobian.
+ /// * Didn't properly interpolate time/values/x/derivatives in
+ ///   jacobian/residual (all of these MUST be evaluated at the midpoint).
 
+
+ /// Constructor with initialisation
+ MidpointMethod(bool adaptive=false) : MidpointMethodBase(adaptive) {}
+
+ /// Destructor, predictor_pt handled by base
+ virtual ~MidpointMethod() {}
+
+ /// Setup weights for time derivative calculations.
+ void set_weights()
+ {
+  // Set the weights for zero-th derivative (i.e. the value to use in
+  // newton solver calculations, implicit midpoint method uses the
+  // average of previous and current values).
+  Weight(0, 0) = 0.5;
+  Weight(0, 1) = 0.5;
+
+  // Set the weights for 1st time derivative
+  double dt=Time_pt->dt(0);
+  Weight(1,0) = 1.0/dt;
+  Weight(1,1) = -1.0/dt;
+ }
+
+ /// \short ??ds
+ unsigned nprev_values_for_value_at_evaluation_time() const {return 2;}
+
+private:
+
+ /// Inaccessible copy constructor.
+ MidpointMethod(const MidpointMethod &dummy) {}
+
+ /// Inaccessible assignment operator.
+ void operator=(const MidpointMethod &dummy) {}
+};
+
+
+/// Implementation of implicit midpoint rule by taking half a step of bdf1
+/// then applying an update to all dofs.
+class MidpointMethodByBDF : public MidpointMethodBase
+{
+public:
+ /// Constructor with initialisation
+ MidpointMethodByBDF(bool adaptive=false) : MidpointMethodBase(adaptive) {}
+
+ /// Destructor
+ virtual ~MidpointMethodByBDF() {}
+
+ /// Setup weights for time derivative calculations.
+ void set_weights()
+ {
+  // Use weights from bdf1
+  double dt=Time_pt->dt(0);
+  Weight(1,0) = 1.0/dt;
+  Weight(1,1) = -1.0/dt;
+ }
+
+ /// \short Evaluation time is the end of the bdf1 "half-step", so only need one
+ /// value.
+ unsigned nprev_values_for_value_at_evaluation_time() const {return 1;}
+
+ /// Half the timestep before starting solve
+ void actions_before_timestep(Problem* problem_pt);
+
+ /// Take problem from t={n+1/2} to t=n+1 by algebraic update and restore
+ /// time step.
+ void actions_after_timestep(Problem* problem_pt);
+
+private:
+
+ /// Dummy time index of predictor values in data.
+ unsigned Predictor_storage_index;
+
+ /// Time stepper to use to calculate predictor value
+ ExplicitTimeStepper* Predictor_pt;
+
+ /// Inaccessible copy constructor.
+ MidpointMethodByBDF(const MidpointMethodByBDF &dummy) {}
+
+ /// Inaccessible assignment operator.
+ void operator=(const MidpointMethodByBDF &dummy) {}
+
+};
 
 } // End of oomph namespace
 
