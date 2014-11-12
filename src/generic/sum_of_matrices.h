@@ -127,6 +127,21 @@ namespace oomph
     construct_reverse_mapping();
    }
 
+  /// Construct lookup using node vector 
+  void build(const Vector<const Node*>& bem_lookup,
+             const unsigned& dof_index)
+  {
+   const unsigned ni = bem_lookup.size();
+   Added_to_main_mapping.assign(ni, -1);
+
+   for(unsigned i=0; i<ni; i++)
+    {
+     Added_to_main_mapping[i] = bem_lookup[i]->eqn_number(dof_index);
+    }
+
+   construct_reverse_mapping();
+  }
+
   /// Construct an identity map (mostly for testing).
   void build_identity_map(const unsigned& n)
    {
