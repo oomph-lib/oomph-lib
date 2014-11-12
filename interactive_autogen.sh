@@ -1,12 +1,25 @@
 #! /bin/bash
 
-. bin/autogen_helpers.sh
-
 # Crash if any sub command crashes
 set -o errexit
 
 # Crash if any unset variables are used
 set -o nounset
+
+
+# Read out root install directory
+oomph_root=$(pwd)
+
+
+# Check that this is actually the oomph-lib directory
+if [ ! -e "$oomph_root/bin/autogen_helpers.sh" ]; then
+    echo "interactive_autogen.sh must be run from the oomph-lib root directory."
+    exit 5
+fi
+
+# Load helper functions
+source bin/autogen_helpers.sh
+
 
 # Echo autogen's usage if requested
 while getopts ":h" opt; do
@@ -20,6 +33,7 @@ while getopts ":h" opt; do
   esac
 done
 
+
 #====================================================================
 # Start Q/A session
 #====================================================================
@@ -29,10 +43,6 @@ echo "============================================================= "
 echo "        oomph-lib interactive installation script" 
 echo "============================================================= "
 echo " "
-
-
-# Read out root install directory
-oomph_root=$(pwd)
 
 
 # Choose build directory (for lib,include)
