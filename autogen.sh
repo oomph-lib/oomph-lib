@@ -10,12 +10,13 @@ set -o errexit
 set -o nounset
 
 # Default values for arguments
-generate_config_files="false"
 oomph_root=""
 build_dir=""
 make_options=""
 extra_configure_options=""
 configure_options_file="config/configure_options/current"
+generate_config_files="false"
+
 
 while getopts ":hrd:c:b:j:sk" opt; do
   case $opt in
@@ -85,6 +86,12 @@ configure_options_file="$(AbsPath $configure_options_file)"
 
 # Now switch to the oomph lib directory
 cd "$oomph_root"
+
+# Force generate config files if this is a brand new build.
+if [ ! -e configure ]; then
+    echo "No ./configure found, assuming this is a new build and regenerating everything."
+    generate_config_files="true"
+fi
 
 # Print information about command line options selected
 echo
@@ -164,7 +171,7 @@ echo
 #--------------------------------------------------------
 
 # generate the config files if needed.
-if [[ $generate_config_files == "true" ]] || [ ! -e configure ]; then
+if [[ $generate_config_files == "true" ]]; then
     ./bin/regenerate_config_files.sh "$PWD"
 fi
 
