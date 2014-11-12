@@ -99,12 +99,10 @@ clean-local:
 	(cd user_drivers && if test -e Makefile; then ${MAKE} clean; fi )
 # Kill stray symbolic links to private configure options
 	(cd config/configure_options && find . -type l -exec rm {} \; )
-# The private files are also not in the SUBDIRS variable
-# so they also need to be cleaned by hand. Again we test
-# whether a makefile exists before cleaning
-if HAVE_PRIVATE_DIRECTORY
-	(cd private && if test -e Makefile; then ${MAKE} clean; fi)
-endif
+# The private files are also not in the SUBDIRS variable so they also need
+# to be cleaned by hand. We put a `-` in front of the command to say that
+# it is allowed to fail.
+	-(cd private && if test -e Makefile; then ${MAKE} clean; fi)
 
 # Not necessary to force a descend in to user_drivers as they're
 # cleaned automatically during distclean (because they're mentioned
@@ -112,9 +110,7 @@ endif
 distclean-local:
 #We need to distclean the private directories because they are not
 #mentioned in DIST_SUBDIRS
-if HAVE_PRIVATE_DIRECTORY
-	(cd private && if test -e Makefile; then ${MAKE} distclean; fi)
-endif
+	-(cd private && if test -e Makefile; then ${MAKE} distclean; fi)
 	rm -f old_symbolic_links.txt
 	rm -f config/configure.ac_scripts/private*.dir_list
 

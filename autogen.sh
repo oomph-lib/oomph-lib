@@ -234,7 +234,7 @@ fi
 
 
 
-# Autodetection of folders in user_drivers etc.
+# Autodetection of Makefiles to generate
 #============================================================================
 
 confdir="config/configure.ac_scripts"
@@ -242,40 +242,22 @@ confdir="config/configure.ac_scripts"
 # Ensure required files exist
 touch "$confdir/makefile_list"
 
-# Get a list of locations of files named Makefile.am, modify a little and
-# write to stdout.
-GetDirList ()
-{
-    basedir="$1"
-
-    find "$1" -type f -name "Makefile.am" \
-        | grep -v "^${1}/Makefile.am" \
-        | sed 's:/Makefile.am$::' \
-        | sed "s:^./::"
-
-    # The grep and sed commands above do the following: 1) Remove the line that
-    # corresponds to the Makefile.am in user_drivers itself. 2) Remove
-    # "/Makefile.am" from each line leaving only the directory (dirname doesn't
-    # work with pipes). 3) Remove the start of the path from each line leaving
-    # only the location relative to the oomph-lib root directory. 
-}
-
-# Ensure the private folders exist
-mkdir -p "private/user_src/" "private/user_drivers/"
-
 # Generate a sorted list of all the makefiles in the project, wrap it into
 # an autoconfigure command and put it into a file.
-cat "$confdir/core.dir_list" \
-    "$confdir/doc.dir_list" \
-    <(GetDirList "user_drivers") \
-    <(GetDirList "private/user_drivers") \
-    <(GetDirList "user_src") \
-    <(GetDirList "private/user_src") \
-    | sed -e 's|\(^.*$\)|\1/Makefile|' \
+find -type f -name "Makefile.am" \
+    | sed -e 's:Makefile\.am$:Makefile:' -e 's:^./::' \
     | sort \
     | cat <(echo "# GENERATED FILE, DO NOT MODIFY.") \
-    <(echo "AC_CONFIG_FILES([Makefile") - <(echo "])") \
+    <(echo "AC_CONFIG_FILES([") - <(echo "])") \
     > "$confdir/new_makefile_list"
+
+# A bit more explanation of the above command: First we find all
+# Makefile.ams in the project, then we remove the .am to get a list of
+# Makefiles to create (we also remove the "./" here because the autotools
+# don't like it). Next we sort the output (so that the resulting list is
+# deterministic). Finally we concatenate the list together with some
+# autoconfig commands to create the final file.
+
 
 # If we found some new dirs then write it into the list file that is
 # included in configure.ac and tell the user. The fact that we have
@@ -283,18 +265,14 @@ cat "$confdir/core.dir_list" \
 # autoconf and configure.
 if ! diff -q "$confdir/new_makefile_list" "$confdir/makefile_list" > /dev/null 2>&1; 
 then
-    echo "New/removed user dirs detected and $confdir/new_makefile_list updated, configure will be rerun automatically by make."
-
-    echo
-    echo "User driver folders included are:"
-    cat "$confdir/user_drivers.dir_list"
-    echo
-
+    echo "New/removed directories detected and $confdir/makefile_list updated,"
+    echo "./configure will be rerun automatically by make."
     mv "$confdir/new_makefile_list" "$confdir/makefile_list"
 fi
 
 
-# If this is a new build or a forced rebuild
+# If this is a new build or a forced rebuild then we need to explicitly run
+# all the autotools magic now.
 if $generate_config_files == "true"; then
 
     # Run all the autotools and just do the right things to generate
