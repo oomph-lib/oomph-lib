@@ -297,7 +297,8 @@ cat "$confdir/core.dir_list" \
     "$confdir/private_user_src.dir_list" \
     | sed -e 's|\(^.*$\)|\1/Makefile|' \
     | sort \
-    | cat <(echo "AC_CONFIG_FILES([Makefile") - <(echo "])") \
+    | cat <(echo "# GENERATED FILE, DO NOT MODIFY.") \
+    <(echo "AC_CONFIG_FILES([Makefile") - <(echo "])") \
     > "$confdir/new_makefile_list"
 
 # If we found some new dirs then write it into the list file that is
