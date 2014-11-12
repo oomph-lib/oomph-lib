@@ -130,7 +130,7 @@ local_one_d_fraction_of_node(const unsigned &n1d, const unsigned &i)
 //==================================================================
 template<unsigned INITIAL_NNODE_1D>
 Node* PRefineableQElement<1,INITIAL_NNODE_1D>::
-get_node_at_local_coordinate(const Vector<double> &s)
+get_node_at_local_coordinate(const Vector<double> &s) const
 {
  //Load the tolerance into a local variable
  double tol = FiniteElement::Node_location_tolerance;
@@ -1290,7 +1290,7 @@ local_one_d_fraction_of_node(const unsigned &n1d, const unsigned &i)
 //==================================================================
 template<unsigned INITIAL_NNODE_1D>
 Node* PRefineableQElement<2,INITIAL_NNODE_1D>::
-get_node_at_local_coordinate(const Vector<double> &s)
+get_node_at_local_coordinate(const Vector<double> &s) const
 {
  unsigned Nnode_1d = this->nnode_1d();
  //Load the tolerance into a local variable
@@ -4773,7 +4773,7 @@ local_one_d_fraction_of_node(const unsigned &n1d, const unsigned &i)
 //==================================================================
 template<unsigned INITIAL_NNODE_1D>
 Node* PRefineableQElement<3,INITIAL_NNODE_1D>::
-get_node_at_local_coordinate(const Vector<double> &s)
+get_node_at_local_coordinate(const Vector<double> &s) const
 {
  OomphLibWarning(
   "3D PRefineableQElements have not been fully implemented.",

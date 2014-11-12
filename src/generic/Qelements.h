@@ -626,7 +626,7 @@ public:
   }
 
  /// Get the node at the specified local coordinate
- Node* get_node_at_local_coordinate(const Vector<double> &s);
+ Node* get_node_at_local_coordinate(const Vector<double> &s) const;
 
  /// Number of nodes along each element edge
  unsigned nnode_1d() const {return NNODE_1D;}
@@ -959,7 +959,7 @@ public:
   }
 
  /// Get the node at the specified local coordinate
- Node* get_node_at_local_coordinate(const Vector<double> &s);
+ Node* get_node_at_local_coordinate(const Vector<double> &s) const;
  
  /// Number of nodes along each element edge
  unsigned nnode_1d() const {return NNODE_1D;}
@@ -1329,7 +1329,7 @@ public:
   }
 
  /// Get the node at the specified local coordinate
- Node* get_node_at_local_coordinate(const Vector<double> &s);
+ Node* get_node_at_local_coordinate(const Vector<double> &s) const;
  
  /// Number of nodes along each element edge
  unsigned nnode_1d() const {return NNODE_1D;}

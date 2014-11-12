@@ -2402,7 +2402,7 @@ public:
 
  /// \short If there is a node at this local coordinate, return the pointer to
  /// the node
- virtual Node* get_node_at_local_coordinate(const Vector<double> &s);
+ virtual Node* get_node_at_local_coordinate(const Vector<double> &s) const;
 
  /// \short Return the i-th value stored at local node n
  /// but do NOT take hanging nodes into account

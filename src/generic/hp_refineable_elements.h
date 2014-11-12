@@ -96,7 +96,7 @@ public:
   
  // Overloaded from QElement<1,NNODE_1D> to use nnode_1d() instead of
  // template argument.
- Node* get_node_at_local_coordinate(const Vector<double> &s);
+ Node* get_node_at_local_coordinate(const Vector<double> &s) const;
  
  Node* node_created_by_son_of_neighbour(const Vector<double> &s_fraction, 
                                         bool &is_periodic);
@@ -178,7 +178,7 @@ public:
   
  // Overloaded from QElement<2,NNODE_1D> to use nnode_1d() instead of
  // template argument.
- Node* get_node_at_local_coordinate(const Vector<double> &s);
+ Node* get_node_at_local_coordinate(const Vector<double> &s) const;
  
  Node* node_created_by_neighbour(const Vector<double> &s_fraction, 
                                  bool &is_periodic);
@@ -306,7 +306,7 @@ public:
   
  // Overloaded from QElement<3,NNODE_1D> to use nnode_1d() instead of
  // template argument.
- Node* get_node_at_local_coordinate(const Vector<double> &s);
+ Node* get_node_at_local_coordinate(const Vector<double> &s) const;
  
  Node* node_created_by_neighbour(const Vector<double> &s_fraction);
  

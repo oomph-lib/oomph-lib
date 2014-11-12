@@ -3774,7 +3774,7 @@ void FiniteElement::get_dresidual_dnodal_coordinates(
  /// force implementation, can almost certainly be made more efficient for
  /// specific elements.
  //==========================================================================
- Node* FiniteElement::get_node_at_local_coordinate(const Vector<double> &s)
+ Node* FiniteElement::get_node_at_local_coordinate(const Vector<double> &s) const
   {
    //Locally cache the tolerance
    const double tol = Node_location_tolerance;

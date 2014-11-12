@@ -49,7 +49,7 @@ Gauss<1,NNODE_1D> QElement<1,NNODE_1D>::Default_integration_scheme;
 //==================================================================
 template<unsigned NNODE_1D>
 Node* QElement<1,NNODE_1D>::
-get_node_at_local_coordinate(const Vector<double> &s)
+get_node_at_local_coordinate(const Vector<double> &s) const
 {
  //Load the tolerance into a local variable
  double tol = FiniteElement::Node_location_tolerance;
@@ -310,7 +310,7 @@ Gauss<2,NNODE_1D> QElement<2,NNODE_1D>::Default_integration_scheme;
 //==================================================================
 template<unsigned NNODE_1D>
 Node* QElement<2,NNODE_1D>::
-get_node_at_local_coordinate(const Vector<double> &s)
+get_node_at_local_coordinate(const Vector<double> &s) const
 {
  //Load the tolerance into a local variable
  double tol = FiniteElement::Node_location_tolerance;
@@ -645,7 +645,7 @@ Gauss<3,NNODE_1D> QElement<3,NNODE_1D>::Default_integration_scheme;
 //==================================================================
 template<unsigned NNODE_1D>
 Node* QElement<3,NNODE_1D>::
-get_node_at_local_coordinate(const Vector<double> &s)
+get_node_at_local_coordinate(const Vector<double> &s) const
 {
  //Load the tolerance into a local variable
  double tol = FiniteElement::Node_location_tolerance;
