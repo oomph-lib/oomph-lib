@@ -4,12 +4,6 @@
 #!/usr/bin/env python
 
 import sys
-import argparse
-import os
-import os.path
-import argparse
-
-from os.path import join as pjoin
 
 usage = """Test whether all floating point values in a file are small.
 
@@ -34,17 +28,18 @@ def main(argv):
     else:
         small = 1e-3
 
-    with open(filename) as f:
-        lines = f.readlines()
-        entries = sum([l.strip().split() for l in lines], [])
+    f = open(filename)
+    lines = f.readlines()
+    f.close()
+    
+    entries = sum([l.strip().split() for l in lines], []) 
+    floats = [float(e) for e in entries]
 
-        floats = [float(e) for e in entries]
-
-        exit_code = 0
-        for fl in floats:
-            if fl > small:
-                pr("Value too large: ", str(fl))
-                exit_code = 2
+    exit_code = 0
+    for fl in floats:
+        if fl > small:
+            pr("Value too large: ", str(fl))
+            exit_code = 2
     
     return exit_code
 
