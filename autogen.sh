@@ -10,14 +10,14 @@ set -o errexit
 # A little function 'borrowed' from the tecplot installation script...
 OptionPrompt() 
 { 
- printf "%s " "$1" 
+    printf "%s " "$1" 
 }
 
 # Another little function 'borrowed' from the tecplot installation script...
 OptionRead()
 {
- read Opt
- echo $Opt
+    read Opt
+    echo $Opt
 }
 
 # Convert a string passed as argument to return true/false (ie a bool),
@@ -76,7 +76,7 @@ ProcessOptionsFile()
 #Check that the "--" options preceed other configure options.
 CheckOptions()
 {
-   awk '
+    awk '
    BEGIN{encountered_first_minus_minus=0
          encountered_first_non_minus_minus_after_first_minus_minus=0}
    NF {# pattern NF ignores blank lines since it expands to 0 for empty lines!
@@ -110,9 +110,9 @@ CheckOptions()
     }' `echo $1`
 
 
-#old echo `echo -n $@ | sed 's/^/ /' | sed -n '/[ ].[^-].* --/p'`
-#echo `echo $@ | sed 's/^/ /' | sed -n '/[ ].[^-].* --/p'`
-# echo `printf "$@" | sed 's/^/ /' | sed -n '/[ ].[^-].* --/p'`
+    #old echo `echo -n $@ | sed 's/^/ /' | sed -n '/[ ].[^-].* --/p'`
+    #echo `echo $@ | sed 's/^/ /' | sed -n '/[ ].[^-].* --/p'`
+    # echo `printf "$@" | sed 's/^/ /' | sed -n '/[ ].[^-].* --/p'`
 }
 
 
@@ -129,16 +129,16 @@ CheckOptions()
 #This little function echo's the usage information
 EchoUsage()
 {
-        echo "Usage: "
-        echo "------ "
-        echo " "
-        echo "[without flags]: Normal \"./configure; make; make install; make check -k\" sequence."
-        echo " "
-        echo " --rebuild     : Complete re-configure, followed by normal build sequence."
-        echo " "
-        echo "--jobs[=N]     :  Run N make jobs simultaneously."
-        echo "                  Useful for speeding up the build on multi-core processors." 
-        exit
+    echo "Usage: "
+    echo "------ "
+    echo " "
+    echo "[without flags]: Normal \"./configure; make; make install; make check -k\" sequence."
+    echo " "
+    echo " --rebuild     : Complete re-configure, followed by normal build sequence."
+    echo " "
+    echo "--jobs[=N]     :  Run N make jobs simultaneously."
+    echo "                  Useful for speeding up the build on multi-core processors." 
+    exit
 }
 
 
@@ -161,7 +161,7 @@ echo " "
 
 #Bail out if more than two command line arguments
 if (test $# -gt 2); then 
- EchoUsage 
+    EchoUsage 
 fi   
 
 #Process the command line options
@@ -169,23 +169,23 @@ raw_build=false;
 make_options=" ";
 while (test $# -gt 0)
 do
-   case "$1" in
-     #Set the rebuild flag
-     --rebuild) 
-      echo "             [Doing complete rebuild from scratch.]"
-      raw_build=true;;
-     #Set the jobs flag
-     --jobs*)
-      make_options="$1";;
-     #Anything else bail out     
-      *)  
-       EchoUsage;;
-   esac
-   shift
+    case "$1" in
+        #Set the rebuild flag
+        --rebuild) 
+            echo "             [Doing complete rebuild from scratch.]"
+            raw_build=true;;
+        #Set the jobs flag
+        --jobs*)
+            make_options="$1";;
+        #Anything else bail out     
+        *)  
+            EchoUsage;;
+    esac
+    shift
 done
 
 if (test "$raw_build" = "false"); then
-   echo "                     [Doing normal build.]"
+    echo "                     [Doing normal build.]"
 fi   
 
 
@@ -204,54 +204,54 @@ MY_HOME_WD=`pwd`
 #-----------------------------------------------
 if $raw_build; then
 
-  SCRIPT_LIST=`echo config.guess config.sub depcomp install-sh ltmain.sh missing aclocal.m4 mkinstalldirs `
-  SCRIPTS_EXIST="no"
-  for script in $SCRIPT_LIST
-   do
-    if (test -e $script); then
-        SCRIPTS_EXIST="yes"
-    fi 
-  done
-  if test "$SCRIPTS_EXIST" = "yes" ; then 
-    echo " "
-    echo "You may wipe the symbolic links to the autoconf/automake helper scripts"
-    echo " "
+    SCRIPT_LIST=`echo config.guess config.sub depcomp install-sh ltmain.sh missing aclocal.m4 mkinstalldirs `
+    SCRIPTS_EXIST="no"
     for script in $SCRIPT_LIST
-      do
+    do
         if (test -e $script); then
-          echo "   " $script
+            SCRIPTS_EXIST="yes"
         fi 
-      done
-    echo " "
-    echo "[This is recommended if you have moved the sources to a different"
-    echo " machine without packaging them up with make dist. The symbolic "
-    echo " links tend to be machine-specific so it's best to force "
-    echo " autoconf/automake to rebuild them on the new machine]."
-    echo " "
-    
-    if YesNoRead "Do you want to wipe the helper scripts?" "n"; then
+    done
+    if test "$SCRIPTS_EXIST" = "yes" ; then 
         echo " "
-        echo "As a backup: Here are the old symbolic links:"
+        echo "You may wipe the symbolic links to the autoconf/automake helper scripts"
         echo " "
         for script in $SCRIPT_LIST
-          do
-          if (test -L $script); then
-              ls -L $script
-              ls -l $script > old_symbolic_links.txt
-          fi
+        do
+            if (test -e $script); then
+                echo "   " $script
+            fi 
         done
         echo " "
-        echo "We have stored this information in old_symbolic_links.txt"
+        echo "[This is recommended if you have moved the sources to a different"
+        echo " machine without packaging them up with make dist. The symbolic "
+        echo " links tend to be machine-specific so it's best to force "
+        echo " autoconf/automake to rebuild them on the new machine]."
         echo " "
-        echo "Wiping them..."
-        rm -f  $SCRIPT_LIST
-        echo "Done"
-    fi   
-else
-    echo " "
-    echo "[No autoconf/automake helper scripts to be wiped...]"
-    echo " "
-fi
+        
+        if YesNoRead "Do you want to wipe the helper scripts?" "n"; then
+            echo " "
+            echo "As a backup: Here are the old symbolic links:"
+            echo " "
+            for script in $SCRIPT_LIST
+            do
+                if (test -L $script); then
+                    ls -L $script
+                    ls -l $script > old_symbolic_links.txt
+                fi
+            done
+            echo " "
+            echo "We have stored this information in old_symbolic_links.txt"
+            echo " "
+            echo "Wiping them..."
+            rm -f  $SCRIPT_LIST
+            echo "Done"
+        fi   
+    else
+        echo " "
+        echo "[No autoconf/automake helper scripts to be wiped...]"
+        echo " "
+    fi
 fi
 
 
@@ -351,122 +351,122 @@ while (test $accept_configure_options -eq 0)
 do
 
 
-#Read the options from the file and convert them into a single one-line string
-configure_options=`ProcessOptionsFile config/configure_options/current`
+    #Read the options from the file and convert them into a single one-line string
+    configure_options=`ProcessOptionsFile config/configure_options/current`
 
 
-#Check that the options are in the correct order
-configure_options_are_ok=`CheckOptions config/configure_options/current`
-if test "$configure_options_are_ok" != ""; then
+    #Check that the options are in the correct order
+    configure_options_are_ok=`CheckOptions config/configure_options/current`
+    if test "$configure_options_are_ok" != ""; then
 
-  echo " "
-  echo "==============================================================="
-  echo "Error message from autogen.sh:"
-  echo " " 
-  echo $configure_options_are_ok
-  echo " " 
-  echo "==============================================================="
-  
-  # Fail, go back to start of loop
-  continue
-fi 
+        echo " "
+        echo "==============================================================="
+        echo "Error message from autogen.sh:"
+        echo " " 
+        echo $configure_options_are_ok
+        echo " " 
+        echo "==============================================================="
+        
+        # Fail, go back to start of loop
+        continue
+    fi 
 
-# Ask if these options are OK
-echo " "
-echo "Configure options are: "
-echo 
-echo $configure_options
-echo 
+    # Ask if these options are OK
+    echo " "
+    echo "Configure options are: "
+    echo 
+    echo $configure_options
+    echo 
 
-private_configure_option_files=""
-if [[ $list_changed == "true" ]] || ! YesNoRead "Is this OK?" "y"; then
+    private_configure_option_files=""
+    if [[ $list_changed == "true" ]] || ! YesNoRead "Is this OK?" "y"; then
 
-  # Now the list hasn't changed
-  list_changed="false"
+        # Now the list hasn't changed
+        list_changed="false"
 
-  #Remove the current symbolic link (or file)
-  #rm -f config/configure_options/current   
+        #Remove the current symbolic link (or file)
+        #rm -f config/configure_options/current   
 
-  # Link in the private ones:
-  return_dir_before_link_in_private=`pwd`
-  # Kill stray symlinks
-  cd config/configure_options
-  find . -type l -exec rm {} \; 
-  if test  "$full_list" = "true"; then
-   cd private_configure_options
-   private_configure_option_files=`ls `
-   cd ..
-   for file in $private_configure_option_files; do ln -s private_configure_options/$file ; done
-  fi
-  cd $return_dir_before_link_in_private
+        # Link in the private ones:
+        return_dir_before_link_in_private=`pwd`
+        # Kill stray symlinks
+        cd config/configure_options
+        find . -type l -exec rm {} \; 
+        if test  "$full_list" = "true"; then
+            cd private_configure_options
+            private_configure_option_files=`ls `
+            cd ..
+            for file in $private_configure_option_files; do ln -s private_configure_options/$file ; done
+        fi
+        cd $return_dir_before_link_in_private
 
-  # Ooops: Non-portable gnu extension to ls
-  #configure_option_files=`ls --ignore=private_configure_options config/configure_options`
+        # Ooops: Non-portable gnu extension to ls
+        #configure_option_files=`ls --ignore=private_configure_options config/configure_options`
 
-  # Thanks for this fix, Andy!
-  configure_option_files=`ls config/configure_options | grep -v  private_configure_options` 
+        # Thanks for this fix, Andy!
+        configure_option_files=`ls config/configure_options | grep -v  private_configure_options` 
 
-  echo " "
-  echo "======================================================================"
-  echo 
-  echo "Choose an alternative configuration file "
-  #Loop over files and display a menu
-  count=0
-  for file in $configure_option_files
-   do
-    #Increase the counter
-    count=`expr $count + 1`
-    echo $count ": " $file
-   done #End of loop over files in config/configure_options
- echo
+        echo " "
+        echo "======================================================================"
+        echo 
+        echo "Choose an alternative configuration file "
+        #Loop over files and display a menu
+        count=0
+        for file in $configure_option_files
+        do
+            #Increase the counter
+            count=`expr $count + 1`
+            echo $count ": " $file
+        done #End of loop over files in config/configure_options
+        echo
 
-  echo "Enter the Desired configuration file [1-"$count"]"
-  if test $full_list = "false"; then
-   echo "Enter -1 to show an extended list of options"
-  else 
-   echo "Enter -1 to show a short list of options"
-  fi
-  echo "Enter 0 to specify the options on the command line"
-  #Read in the Desired File
-  file_number=`OptionRead`
+        echo "Enter the Desired configuration file [1-"$count"]"
+        if test $full_list = "false"; then
+            echo "Enter -1 to show an extended list of options"
+        else 
+            echo "Enter -1 to show a short list of options"
+        fi
+        echo "Enter 0 to specify the options on the command line"
+        #Read in the Desired File
+        file_number=`OptionRead`
 
-  #If options are to be read from the command line then store the#
-  #options in the file config/configure_options/current
-  if (test $file_number -eq 0); then
-   echo 
-   echo "Enter options"
-   configure_options=`OptionRead`  
-   echo $configure_options > config/configure_options/current
+        #If options are to be read from the command line then store the#
+        #options in the file config/configure_options/current
+        if (test $file_number -eq 0); then
+            echo 
+            echo "Enter options"
+            configure_options=`OptionRead`  
+            echo $configure_options > config/configure_options/current
 
-  #Otherwise copy the desired options file to config/configure_options/current
-  elif (test $file_number -eq -1); then
-   list_changed="true"
-   if test $full_list = "true"; then
-    full_list="false"
-   else
-    full_list="true"
-   fi
-  else   
-   #Reset the counter
-   count=0
-   #Loop over the files until the counter equals the chosen file_number
-   for file in $configure_option_files
-     do
-     #Increase the counter
-     count=`expr $count + 1`
-     if (test $count -eq $file_number); then
-        cp -f config/configure_options/$file config/configure_options/current
-        break
-     fi
-   done #End of loop over files
-   fi #End of create symbolic link code
+            #Otherwise copy the desired options file to config/configure_options/current
+        elif (test $file_number -eq -1); then
+            list_changed="true"
+            if test $full_list = "true"; then
+                full_list="false"
+            else
+                full_list="true"
+            fi
+        else   
+            #Reset the counter
+            count=0
+            #Loop over the files until the counter equals the chosen file_number
+            for file in $configure_option_files
+            do
+                #Increase the counter
+                count=`expr $count + 1`
+                if (test $count -eq $file_number); then
+                    cp -f config/configure_options/$file config/configure_options/current
+                    break
+                fi
+            done #End of loop over files
+        fi #End of create symbolic link code
 
-#If the configuration is OK, accept it
-else
- echo " " 
- echo "Configure options have been accepted."
- accept_configure_options=1
-fi
+        #If the configuration is OK, accept it
+    else
+        echo " " 
+        echo "Configure options have been accepted."
+        accept_configure_options=1
+    fi
 
 done #End of while loop over customisation of configure options
 
@@ -501,7 +501,7 @@ tmp=`OptionRead`
 # all config files needed.
 #--------------------------------------------------------
 if [ $raw_build -o ! -e ./configure ]; then
- $MY_HOME_WD/bin/regenerate_config_files.sh $MY_HOME_WD
+    $MY_HOME_WD/bin/regenerate_config_files.sh $MY_HOME_WD
 fi
 
 # Run configure command
