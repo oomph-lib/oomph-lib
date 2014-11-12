@@ -180,7 +180,7 @@ namespace oomph
  /// likely to be different to the linear solver for newton solves because
  /// explicit time steps only involve inverting a mass matrix. This can be
  /// done very efficiently by, e.g. CG with a diagonal predconditioner).
- LinearSolver* Explicit_solver_pt;
+ LinearSolver* Mass_matrix_solver_pt;
 
  /// Pointer to the eigen solver for the problem
  EigenSolver* Eigen_solver_pt;
@@ -1400,12 +1400,12 @@ namespace oomph
 
  /// Return a pointer to the linear solver object used for explicit time
  /// stepping.
- LinearSolver* &explicit_solver_pt() {return Explicit_solver_pt;}
+ LinearSolver* &mass_matrix_solver_pt() {return Mass_matrix_solver_pt;}
 
  /// Return a pointer to the linear solver object used for explicit time
  /// stepping (const version).
- LinearSolver* explicit_solver_pt() const
- {return Explicit_solver_pt;}
+ LinearSolver* mass_matrix_solver_pt() const
+ {return Mass_matrix_solver_pt;}
 
  /// Return a pointer to the eigen solver object
  EigenSolver* &eigen_solver_pt() {return Eigen_solver_pt;}
