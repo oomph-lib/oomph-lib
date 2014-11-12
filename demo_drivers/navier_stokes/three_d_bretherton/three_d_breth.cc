@@ -195,7 +195,7 @@ public:
  
  
  //If mult_width = 0, it multiplu only the channel length
- void multiply_aspect_ratio(const double factor, bool mult_width)
+ void multiply_aspect_ratio(const double factor, const bool& mult_width)
   {
    // until now we have just worked with a square channel
    // lets change the aspect ratio

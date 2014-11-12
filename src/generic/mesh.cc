@@ -491,7 +491,7 @@ void Mesh::node_update(const bool& update_all_solid_nodes)
 /// Reorder nodes in the order in which they are
 /// encountered when stepping through the elements
 //========================================================
- void Mesh::reorder_nodes(bool use_old_ordering)
+ void Mesh::reorder_nodes(const bool& use_old_ordering)
  {
   Vector<Node*> reordering;
   get_node_reordering(reordering, use_old_ordering);
@@ -509,7 +509,7 @@ void Mesh::node_update(const bool& update_all_solid_nodes)
 /// without changing the mesh's node vector).
 //========================================================
  void Mesh::get_node_reordering(Vector<Node*> &reordering,
-                                bool use_old_ordering) const
+                                const bool& use_old_ordering) const
  {
   if(use_old_ordering)
    {
@@ -1034,7 +1034,7 @@ void Mesh::output_boundaries(std::ostream &outfile)
 /// Dump function for the mesh class.
 /// Loop over all nodes and elements and dump them
 //===================================================================
- void Mesh::dump(std::ofstream &dump_file, bool use_old_ordering) const
+ void Mesh::dump(std::ofstream &dump_file, const bool& use_old_ordering) const
 {
 
  // Get a reordering of the nodes so that the dump file is in a standard

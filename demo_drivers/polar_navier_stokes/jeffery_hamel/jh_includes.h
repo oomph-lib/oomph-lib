@@ -152,7 +152,7 @@ public:
   }
 
  //Function to add the traction boundary elements
- void make_traction_elements(bool outlet)
+ void make_traction_elements(const bool& outlet)
   {
    //Specify inlet/outlet specific quantities
    unsigned ibound; int index; double eta;

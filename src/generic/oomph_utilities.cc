@@ -952,7 +952,7 @@ namespace CommandLineArgs
 
  /// \short Parse command line, check for recognised flags and assign
  /// associated values
- void parse_and_assign(int argc, char *argv[], bool throw_on_unrecognised_args)
+ void parse_and_assign(int argc, char *argv[], const bool& throw_on_unrecognised_args)
  {
 
   //Keep looping over command line arguments
@@ -1125,7 +1125,7 @@ namespace CommandLineArgs
 
  /// \short Parse previously specified command line, check for
  /// recognised flags and assign associated values
- void parse_and_assign(bool throw_on_unrecognised_args)
+ void parse_and_assign(const bool& throw_on_unrecognised_args)
  {
   parse_and_assign(Argc, Argv, throw_on_unrecognised_args);
  }

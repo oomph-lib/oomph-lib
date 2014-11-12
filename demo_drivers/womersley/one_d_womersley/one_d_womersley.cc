@@ -318,7 +318,7 @@ class CollapsibleChannelProblem : public Problem
  void doc_solution(DocInfo& doc_info, ofstream& trace_file);
 
  /// Run unsteady problem
- void unsteady_run(string directory_for_data, double nstep, bool validation_run=false);
+ void unsteady_run(string directory_for_data, double nstep, const bool& validation_run=false);
 
  /// \short Refine any element whoes centre node lies between x coorodinates
  /// x_min and x_max
@@ -1429,7 +1429,7 @@ void CollapsibleChannelProblem<ELEMENT>::set_parallel_outflow()
 //============================================================================
 template <class ELEMENT>
 void CollapsibleChannelProblem<ELEMENT>::
-unsteady_run(string directory_for_data, double nstep, bool validation_run)
+unsteady_run(string directory_for_data, double nstep, const bool& validation_run)
 { 
  // Set volume flux consistent with Re
  Prescribed_volume_flux = 1.0;

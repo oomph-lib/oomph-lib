@@ -434,7 +434,7 @@ doc_solution(DocInfo& doc_info,ofstream& trace_file)
 /// Run adaptive solution of unsteady heat equation with
 /// or without ALE
 //========================================================================
-void run_it(bool use_ale)
+void run_it(const bool& use_ale)
 {
 
  // Build problem

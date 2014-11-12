@@ -36,7 +36,7 @@ namespace oomph
   /// Constructor, storage for two history derivatives (one for TR and
   /// one for the predictor step), one history value, present value and
   /// predicted value.
-  TR(bool adaptive=false) : TimeStepper(2+2+1, 1)
+  TR(const bool& adaptive=false) : TimeStepper(2+2+1, 1)
   {
    //Set the weight for the zero-th derivative
    Weight(0,0) = 1.0;

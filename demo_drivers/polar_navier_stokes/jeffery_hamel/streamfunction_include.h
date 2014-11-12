@@ -46,7 +46,7 @@ public:
   }
 
  //Function to add the traction boundary elements
- void make_traction_elements(bool outlet)
+ void make_traction_elements(const bool& outlet)
   {
    //Specify inlet/outlet specific quantities
    unsigned ibound; int index;
@@ -142,7 +142,7 @@ protected:
 public:
 
  /// Constructor: Pass pointer to source function
- StreamfunctionProblem(bool eigen);
+ StreamfunctionProblem(const bool& eigen);
 
  /// Destructor (empty -- all the cleanup is done in base class)
  ~StreamfunctionProblem(){};
@@ -215,7 +215,7 @@ public:
 //=====start_of_constructor===============================================
 /// Constructor for Streamfunction problem: Pass pointer to source function.
 //========================================================================
-StreamfunctionProblem::StreamfunctionProblem(bool eigen)
+StreamfunctionProblem::StreamfunctionProblem(const bool& eigen)
 { 
  // Are we solving for an eigenfunction?
  this->eigenfunction=eigen;

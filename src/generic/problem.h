@@ -2794,7 +2794,7 @@ class NewtonSolverError
   linear_solver_error(false), iterations(0), maxres(0.0) {}
 
  ///Constructor that passes a failure of the linear solver
- NewtonSolverError(bool Passed_linear_failure) :
+ NewtonSolverError(const bool& Passed_linear_failure) :
   linear_solver_error(Passed_linear_failure), iterations(0), maxres(0.0) {}
 
  /// Constructor that passes number of iterations and residuals

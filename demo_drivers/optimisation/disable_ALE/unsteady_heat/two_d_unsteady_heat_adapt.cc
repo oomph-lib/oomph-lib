@@ -927,7 +927,7 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::restart(ifstream& restart_file)
 /// Solve an unsteady heat problem
 /// with mesh adaptation with and without ALE terms
 //========================================================================
-void run_it(bool use_ale)
+void run_it(const bool& use_ale)
 {
 
  // Build problem

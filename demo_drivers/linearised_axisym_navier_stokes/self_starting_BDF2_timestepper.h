@@ -56,7 +56,7 @@ namespace oomph
   
   /// Constructor for the case when we allow adaptive timestepping.
   /// Set BDF1_mode flag to false (default is BDF2 mode)
-  SelfStartingBDF2(bool adaptive=false) : TimeStepper(3,1), BDF1_mode(false)
+  SelfStartingBDF2(const bool& adaptive=false) : TimeStepper(3,1), BDF1_mode(false)
    {
     Type="BDF";
     

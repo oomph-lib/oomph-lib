@@ -607,13 +607,13 @@ public:
 
  /// \short Re-order nodes in the order in which they appear in elements --
  /// can be overloaded for more efficient re-ordering
- virtual void reorder_nodes(bool use_old_ordering=true);
+ virtual void reorder_nodes(const bool& use_old_ordering=true);
 
  /// \short Get a reordering of the nodes in the order in which they
  /// appear in elements -- can be overloaded for more efficient
  /// re-ordering
  virtual void get_node_reordering(Vector<Node*> &reordering,
-                                  bool use_old_ordering=true) const;
+                                  const bool& use_old_ordering=true) const;
 
  /// \short Constuct a Mesh of FACE_ELEMENTs along the b-th boundary
  /// of the mesh (which contains elements of type BULK_ELEMENT)
@@ -846,11 +846,11 @@ public:
 
  /// Dump the data in the mesh into a file for restart
  virtual void dump(std::ofstream &dump_file,
-                   bool use_old_ordering=true) const;
+                   const bool& use_old_ordering=true) const;
 
  /// Dump the data in the mesh into a file for restart
  void dump(const std::string &dump_file_name,
-           bool use_old_ordering=true) const
+           const bool& use_old_ordering=true) const
  {
   std::ofstream dump_stream(dump_file_name.c_str());
 #ifdef PARANOID

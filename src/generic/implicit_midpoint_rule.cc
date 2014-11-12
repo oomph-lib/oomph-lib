@@ -158,7 +158,7 @@ namespace oomph
 
  /// Local (not exported in header) helper function to handle midpoint
  /// update on a data object.
- void post_midpoint_update(Data* dat_pt, bool update_pinned)
+ void post_midpoint_update(Data* dat_pt, const bool& update_pinned)
  {
   if(!dat_pt->is_a_copy())
    {

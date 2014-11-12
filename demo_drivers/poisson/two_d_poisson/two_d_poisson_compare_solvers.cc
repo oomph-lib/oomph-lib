@@ -93,7 +93,7 @@ public:
  /// nel_1d x nel_1d. 
  PoissonProblem(PoissonEquations<2>::PoissonSourceFctPt source_fct_pt,
                 const unsigned& nel_1d,
-                bool mess_up_order);
+                const bool& mess_up_order);
 
  /// Destructor (empty)
  ~PoissonProblem(){}
@@ -128,7 +128,7 @@ private:
 template<class ELEMENT>
 PoissonProblem<ELEMENT>::
 PoissonProblem(PoissonEquations<2>::PoissonSourceFctPt source_fct_pt,
-       const unsigned& nel_1d, bool mess_up_order)
+       const unsigned& nel_1d, const bool& mess_up_order)
        :  Source_fct_pt(source_fct_pt)
 { 
 

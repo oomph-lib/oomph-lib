@@ -250,7 +250,7 @@ public:
  /// \short  Constructor: Bool flag specifies if position of fish back is
  /// prescribed or computed from the coupled problem. String specifies
  /// output directory
- RefineableFishPoissonProblem(bool fix_position, string directory_name);
+ RefineableFishPoissonProblem(const bool& fix_position, string directory_name);
 
  /// Destructor
  virtual ~RefineableFishPoissonProblem();
@@ -326,7 +326,7 @@ private:
 //========================================================================
 template<class ELEMENT>
 RefineableFishPoissonProblem<ELEMENT>::RefineableFishPoissonProblem(
- bool fix_position, string directory_name) : Fix_position(fix_position)
+ const bool& fix_position, string directory_name) : Fix_position(fix_position)
 { 
 
  // Set output directory

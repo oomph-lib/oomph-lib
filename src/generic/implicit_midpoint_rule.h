@@ -21,7 +21,7 @@ namespace oomph
   public:
 
    /// Constructor with initialisation
-   IMRBase(bool adaptive=false) :
+   IMRBase(const bool& adaptive=false) :
     TimeStepper(2,1) // initialise weights later
    {
     Adaptive_Flag = adaptive;
@@ -141,7 +141,7 @@ public:
 
 
  /// Constructor with initialisation
- IMR(bool adaptive=false) : IMRBase(adaptive) {}
+ IMR(const bool& adaptive=false) : IMRBase(adaptive) {}
 
  /// Destructor, predictor_pt handled by base
  virtual ~IMR() {}
@@ -186,7 +186,7 @@ class IMRByBDF : public IMRBase
 {
 public:
  /// Constructor with initialisation
- IMRByBDF(bool adaptive=false) : IMRBase(adaptive) 
+ IMRByBDF(const bool& adaptive=false) : IMRBase(adaptive) 
  {
   Update_pinned = true;
  }

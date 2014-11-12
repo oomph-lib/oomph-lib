@@ -1135,7 +1135,7 @@ class BDF : public TimeStepper
   public:
 
  ///Constructor for the case when we allow adaptive timestepping
- BDF(bool adaptive=false) : TimeStepper(NSTEPS+1,1)
+ BDF(const bool& adaptive=false) : TimeStepper(NSTEPS+1,1)
   {
    Type="BDF";
 
