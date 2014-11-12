@@ -50,6 +50,10 @@ int main(int argc, char *argv[])
  // Build problem
  ODEProblem problem;
 
+ // For some reason using stored mass matrix + CG + lumped prec (for mass
+ // matrix solves) causes some issues with 1D ODEs, so disable it.
+ problem.Disable_mass_matrix_solver_optimisations = true;
+
  problem.Exact_solution_pt = ODEFactories::exact_solutions_factory(ode_name);
 
  TimeStepper* time_stepper_pt = Factories::time_stepper_factory(ts_name);
@@ -60,7 +64,7 @@ int main(int argc, char *argv[])
   {
    mesh_pts[0]->add_element_pt(new ODEElement(time_stepper_pt, problem.Exact_solution_pt));
   }
- else if(element_type == "imr_element")
+ else if(element_type == "imr-element")
   {
    mesh_pts[0]->add_element_pt(new IMRODEElement(time_stepper_pt, problem.Exact_solution_pt));
   }
