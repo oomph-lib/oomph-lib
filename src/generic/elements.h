@@ -2823,6 +2823,16 @@ public:
    outfile << "Output function undefined" << std::endl;
   }
 
+ /// \short Output the element data at time step t. This is const because
+ /// it is newly added and so can be done easily. Really all the
+ /// output(...) functions should be const!
+ virtual void output(const unsigned& t, 
+                     std::ostream &outfile, 
+                     const unsigned &n_plot) const
+ {
+  outfile << "Output function undefined" << std::endl;
+ }
+
  /// \short Output the element data --- typically the values at the 
  /// nodes in a format suitable for post-processing.
  /// (C style output)
