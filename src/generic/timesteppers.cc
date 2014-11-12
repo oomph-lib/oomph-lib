@@ -79,14 +79,23 @@ template<>
 
 
 //======================================================================
-///Calculate the predictor weights
+/// Set the predictor weights (Gresho and Sani pg. 270)
 //======================================================================
 template<>
 void BDF<1>::set_predictor_weights()
 {
- throw OomphLibError("Not implemented yet",
-                     OOMPH_CURRENT_FUNCTION,
-                     OOMPH_EXCEPTION_LOCATION);
+ //If it's adaptive set the predictor weights
+ if(adaptive_flag())
+  {
+   double dt=Time_pt->dt(0);
+
+   //Set the predictor weights
+   Predictor_weight[0] = 0.0;
+   Predictor_weight[1] = 1.0;
+
+   // Velocity weight
+   Predictor_weight[2] = dt;
+  }
 }
 
 
@@ -98,9 +107,30 @@ void BDF<1>::set_predictor_weights()
 template<>
 void BDF<1>::calculate_predicted_values(Data* const &data_pt)
 {
- throw OomphLibError("Not implemented yet",
-                     OOMPH_CURRENT_FUNCTION,
-                     OOMPH_EXCEPTION_LOCATION);
+ //If it's adaptive calculate the values
+ if(adaptive_flag())
+  {
+   //Find number of values
+   unsigned n_value = data_pt->nvalue();
+   //Loop over the values
+   for(unsigned j=0;j<n_value;j++)
+    {
+     //If the value is not copied
+     if(data_pt->is_a_copy(j) == false)
+      {
+       //Now Initialise the predictor to zero
+       double predicted_value = 0.0;
+       //Now loop over all the stored data and add appropriate values
+       //to the predictor
+       for(unsigned i=1;i<3;i++)
+        {
+         predicted_value += data_pt->value(i,j)*Predictor_weight[i];
+        }
+       //Store the predicted value
+       data_pt->set_value(Predictor_storage_index, j, predicted_value);
+      }
+    }
+  }
 }
 
 
@@ -110,21 +140,40 @@ void BDF<1>::calculate_predicted_values(Data* const &data_pt)
 template<>
 void BDF<1>::calculate_predicted_positions(Node* const &node_pt)
   {
-   throw OomphLibError("Not implemented yet",
-                       OOMPH_CURRENT_FUNCTION,
-                       OOMPH_EXCEPTION_LOCATION);
+   //Only do this if adaptive
+   if(adaptive_flag())
+    {
+     //Find number of dimensions of the problem
+     unsigned n_dim = node_pt->ndim();
+     //Loop over the dimensions
+     for(unsigned j=0;j<n_dim;j++)
+      {
+       //If the node is not copied
+       if(node_pt->position_is_a_copy(j) == false)
+        {
+         //Initialise the predictor to zero
+         double predicted_value = 0.0;
+         //Now loop over all the stored data and add appropriate values
+         //to the predictor
+         for(unsigned i=1;i<3;i++)
+          {
+           predicted_value += node_pt->x(i,j)*Predictor_weight[i];
+          }
+         //Store the predicted value
+         node_pt->x(Predictor_storage_index, j) = predicted_value;
+        }
+      }
+    }
   }
 
 
 //=======================================================================
-///Function that sets the error weights
+/// Set the error weights  (Gresho and Sani pg. 270)
 //=======================================================================
 template<>
 void BDF<1>::set_error_weights()
 {
- throw OomphLibError("Not implemented yet",
-                     OOMPH_CURRENT_FUNCTION,
-                       OOMPH_EXCEPTION_LOCATION);
+ Error_weight = 0.5;
 }
 
 //===================================================================
@@ -134,10 +183,15 @@ template<>
 double BDF<1>::temporal_error_in_position(Node* const &node_pt, 
                                           const unsigned &i)
 {
- throw OomphLibError("Not implemented yet",
-                     OOMPH_CURRENT_FUNCTION,
-                       OOMPH_EXCEPTION_LOCATION);
- return 0.0;
+ if(adaptive_flag())
+  {
+   //Just return the error
+   return Error_weight*(node_pt->x(i) - node_pt->x(Predictor_storage_index,i));
+  }
+ else
+  {
+   return 0.0;
+  }
 }
    
 
@@ -147,10 +201,16 @@ double BDF<1>::temporal_error_in_position(Node* const &node_pt,
 template<>
 double BDF<1>::temporal_error_in_value(Data* const &data_pt, const unsigned &i)
 {
- throw OomphLibError("Not implemented yet",
-                     OOMPH_CURRENT_FUNCTION,
-                     OOMPH_EXCEPTION_LOCATION);
- return 0.0;
+ if(adaptive_flag())
+  {
+   //Just return the error
+   return Error_weight*(data_pt->value(i) 
+                        - data_pt->value(Predictor_storage_index,i));
+  }
+ else
+  {
+   return 0.0;
+  }
 }
 
 //=======================================================================

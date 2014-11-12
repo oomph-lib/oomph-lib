@@ -1064,6 +1064,24 @@ class NewmarkBDF : public Newmark<NSTEPS>
 template<unsigned NSTEPS>
 class BDF : public TimeStepper
 {
+ // A BDF<1> time data set consists of:
+ // [y_np1, y_n, dy_n, y^P_np1]
+ // Or in english: 
+ // * y-value at time being/just been solved for
+ // * y-value at previous time 
+ // * approximation to y derivative at previous time (also refered to as
+ //   velocity in some places, presumably it corresponds to velocity in
+ //   solid mechanics). 
+ // * predicted y-value at time n+1
+
+ // A BDF<2> time data set consists of:
+ // [y_np1, y_n, y_nm1, dy_n, y^P_np1]
+ // i.e. the same thing but with one more previous time value. Also the
+ // derivative approximation will be more accurate.
+
+ // If the adaptive flag is set to false then the final two pieces of data
+ // in each are not stored (derivative and predictor value).
+
   private:
  
  ///Private data for the predictor weights
@@ -1086,15 +1104,15 @@ class BDF : public TimeStepper
      //Set the adaptive flag to be true
      Adaptive_Flag = true;
      
-     //Set the size of the Predictor_Weights Vector
-     //N.B. The size is correct for BDF<2>, but may be wrong for others
+     //Set the size of the Predictor_Weights Vector N.B. The size is
+     //correct for BDF1 and 2, but may be wrong for others.
      Predictor_weight.resize(NSTEPS+2);
      
      //Resize the weights to the appropriate size
      Weight.resize(2, NSTEPS+3, 0.0);
 
-     // Storing predicted values in slot 4
-     Predictor_storage_index = 4;
+     // Storing predicted values in slot after other information
+     Predictor_storage_index = NSTEPS + 2;
     }
 
    //Set the weight for the zero-th derivative
