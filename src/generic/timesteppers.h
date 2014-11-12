@@ -372,25 +372,24 @@ public:
  /// (e.g. "BDF", "Newmark", etc.)
  std::string type() const {return Type;}
 
+ //??ds I think that the Data and Node cases below couldp robably be
+ // handled with a template argument. However they can't be handled by
+ // normal polymorphism because data.value is different to node.value and
+ // value is not a virtual function.
+
  /// \short Evaluate i-th derivative of all values in Data and return in 
- /// Vector deriv[]
+ /// Vector deriv[].
  void time_derivative(const unsigned &i, 
                       Data* const &data_pt, Vector<double>& deriv)
   {
    // Number of values stored in the Data object
    unsigned nvalue=data_pt->nvalue();
-   unsigned n_tstorage = ntstorage();
+   deriv.assign(nvalue, 0.0);
+
    // Loop over all values
-   for (unsigned j=0;j<nvalue;j++)
+   for(unsigned j=0;j<nvalue;j++)
     {
-     double aux_deriv=0.0;
-     // Loop over all history data and add the approriate contribution
-     // to the derivative
-     for (unsigned t=0;t<n_tstorage;t++)
-      {
-       aux_deriv+=Weight(i,t)*data_pt->value(t,j);
-      }
-     deriv[j]=aux_deriv;
+     deriv[j]=time_derivative(i, data_pt, j);
     }
   }
 
@@ -402,42 +401,34 @@ public:
    unsigned n_tstorage = ntstorage();
    // Loop over all history data and add the appropriate contribution
    // to the derivative
-   for (unsigned t=0;t<n_tstorage;t++)
+   for(unsigned t=0;t<n_tstorage;t++)
     {
      deriv+=Weight(i,t)*data_pt->value(t,j);
     }
    return deriv;
   }
 
- /// \short Evaluate i-th derivative of all values in Node and return in 
- /// Vector deriv[]. Note the use of the nodal_value() function so that
- /// hanging nodes are taken into account
- void time_derivative(const unsigned &i, 
+ /// \short Evaluate i-th derivative of all values in Node and return in
+ /// Vector deriv[] (this can't be simply combined with time_derivative(..,
+ /// Data, ...) because of differences with haning nodes).
+ void time_derivative(const unsigned &i,
                       Node* const &node_pt, Vector<double>& deriv)
   {
    // Number of values stored in the Data object
    unsigned nvalue = node_pt->nvalue();
    deriv.assign(nvalue, 0.0);
 
-
-   unsigned n_tstorage = ntstorage();
    // Loop over all values
-   for (unsigned j=0;j<nvalue;j++)
+   for(unsigned j=0;j<nvalue;j++)
     {
-     double aux_deriv=0.0;
-     // Loop over all history data and add the approriate contribution
-     // to the derivative
-     for (unsigned t=0;t<n_tstorage;t++)
-      {
-       aux_deriv+=weight(i,t)*node_pt->value(t,j);
-      }
-     deriv[j]=aux_deriv;
+     deriv[j]=time_derivative(i, node_pt, j);
     }
   }
 
- /// \short Evaluate i-th derivative of j-th value in Node. Note the
- /// explicit use of nodal_value() so that hanging nodes are properly
- /// evaluated
+ /// \short Evaluate i-th derivative of j-th value in Node. Note the use of
+ /// the node's value() function so that hanging nodes are taken into
+ /// account (this is why the functions for Data and Node cannot be
+ /// combined through simple polymorphism: value is not virtual).
  double time_derivative(const unsigned &i, Node* const &node_pt, 
                         const unsigned& j)
   {
@@ -445,7 +436,7 @@ public:
    unsigned n_tstorage = ntstorage();
    // Loop over all history data and add the appropriate contribution
    // to the derivative
-   for (unsigned t=0;t<n_tstorage;t++)
+   for(unsigned t=0;t<n_tstorage;t++)
     {
      deriv+=weight(i,t)*node_pt->value(t,j);
     }
