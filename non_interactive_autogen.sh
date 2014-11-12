@@ -5,51 +5,57 @@
 set -o errexit
 set -o nounset
 
-# Do we want to rebuild from scratch?
-#-------------------------------------
-
-#Bail out if more than two command line arguments
-if (test $# -gt 2); then
-    EchoUsage
-fi
-
-#Process the command line options
-raw_build=false;
-make_options=" ";
-while (test $# -gt 0)
-do
-    case "$1" in
-        #Set the rebuild flag
-        --rebuild)
-            echo "             [Doing complete rebuild from scratch.]"
-            raw_build=true;;
-        #Set the jobs flag
-        --jobs*)
-            make_options="$1";;
-        #Anything else bail out
-        *)
-            EchoUsage;;
-    esac
-    shift
-done
-
-if (test "$raw_build" = "false"); then
-    echo "                     [Doing normal build.]"
-fi
-
-
-# Temporary defaults
-raw_build="false"
+# Default values for arguments
+generate_config_files="false"
 oomph_root=$(pwd)
 build_dir="${oomph_root}/build"
 make_options=""
 configure_options_file="config/configure_options/current"
 
+while getopts ":hrd:c:j:b:" opt; do
+  case $opt in
+      h)
+          echo "Options for autogen.sh:"
+          echo
+          EchoUsage
+          exit 0
+          ;;
+
+      r)
+          generate_config_files="true"
+          echo "Doing a complete rebuild from scratch."
+          ;;
+
+      d)
+          oomph_root="$OPTARG"
+          echo "Building oomph-lib in $oomph_root"
+          ;;
+
+      c)
+          configure_options_file="$OPTARG"
+          echo "Using configure options file $configure_options_file"
+          ;;
+
+      j)
+          make_options="$make_options -j $OPTARG"
+          echo "Using make options $make_options"
+          ;;
+      b)
+          build_dir="$OPTARG"
+          echo "Building in directory $build_dir"
+          ;;
+
+      \?)
+          echo "Invalid option: -$OPTARG" >&2
+          exit 3
+          ;;
+  esac
+done
 
 
-# If this is a rebuild then clean up the helper scripts
+# If this is a raw build then clean up the helper scripts
 #-----------------------------------------------
-if $raw_build != "true"; then
+if $generate_config_files == "true"; then
 
     SCRIPT_LIST="config.guess config.sub depcomp install-sh ltmain.sh missing aclocal.m4 mkinstalldirs"
 
@@ -112,7 +118,7 @@ echo
 
 # If we are doing a raw build or if ./configure does not yet exist then generate
 # the config files needed.
-if [ $raw_build -o ! -e ./configure ]; then
+if [ $generate_config_files -o ! -e ./configure ]; then
     $oomph_root/bin/regenerate_config_files.sh $oomph_root
 fi
 
@@ -139,6 +145,10 @@ if test "$configure_options_are_ok" != ""; then
     # Failed
     exit 4
 fi
+
+echo "Using configure options:"
+cat "config/configure_options/current"
+echo
 
 # Read the options from the file and convert them into a single one-line string
 configure_options=$(ProcessOptionsFile config/configure_options/current)

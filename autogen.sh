@@ -8,6 +8,17 @@ set -o errexit
 # Crash if any unset variables are used
 set -o nounset
 
+# Echo autogen's usage if requested
+while getopts ":h" opt; do
+  case $opt in
+      h)
+          echo "This script is an interactive interface to autogen.sh." 
+          echo "Arguments allowed for the underlying autogen.sh are:"
+          EchoUsage
+          exit 0
+          ;; 
+  esac
+done
 
 #====================================================================
 # Start Q/A session
@@ -153,15 +164,17 @@ while [[ $accept_configure_options != "true" ]]; do
 
 done
 
+echo
+echo
+echo
+
 
 #====================================================================
 # Start actual build process
 #====================================================================
 
-./non_interactive_autogen.sh "$@"
-
-# echo "calling autogen as"
-# echo "./non_interactive_autogen.sh" "$@"
+# Call real autogen
+./non_interactive_autogen.sh "$@" -b $build_dir -C $oomph_root -c "${oomph_root}config/configure_options/current"
 
 echo " "
 echo "autogen.sh has finished! If you can't spot any error messages" 

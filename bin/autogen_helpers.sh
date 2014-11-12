@@ -103,17 +103,25 @@ CheckOptions()
 }
 
 
-#This little function echo's the usage information
+# This little function echo's the usage information
 EchoUsage()
 {
-    echo "Usage: "
-    echo "------ "
-    echo " "
-    echo "[without flags]: Normal \"./configure; make; make install; make check -k\" sequence."
-    echo " "
-    echo " --rebuild     : Complete re-configure, followed by normal build sequence."
-    echo " "
-    echo "--jobs[=N]     :  Run N make jobs simultaneously."
-    echo "                  Useful for speeding up the build on multi-core processors." 
-    exit
+    echo "  h)"
+    echo "      Show this usage info"
+    echo "  "
+    echo "  r)"
+    echo "      Regenerate the configuration files before compliling,"
+    echo "      this is needed if you have added new user drivers."
+    echo "  "
+    echo "  d)"
+    echo "      Set the oomph-lib root directory (default: use pwd)."
+    echo "  "
+    echo "  c)"
+    echo "      Set the configure options file to use (default: current)."
+    echo "  "
+    echo "  j)"
+    echo "      Set the number of cores to use for compilation (default: 1)."
+    echo "  "
+    echo "  b)"
+    echo "      Set the directory to put object files etc. in (default pwd/build)."
 }
