@@ -103,7 +103,7 @@ namespace oomph
     }
    
    /// Return the actual order of the scheme
-   unsigned order() { return 2; }
+   unsigned order() const { return 2; }
    
    /// \short Function to make the time stepper temporarily work
    /// as if it is BDF1. This is trivially achieved by resetting the
@@ -361,10 +361,10 @@ namespace oomph
    void set_weights_bdf2();
    
    /// Number of previous values available.
-   unsigned nprev_values() { return 2; }
+   unsigned nprev_values() const { return 2; }
    
    /// Number of timestep increments that need to be stored by the scheme
-   unsigned ndt() { return 2; }
+   unsigned ndt() const { return 2; }
    
    /// Function to set the predictor weights corresponding to BDF1
    void set_predictor_weights_bdf1();
