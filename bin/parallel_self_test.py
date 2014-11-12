@@ -212,7 +212,10 @@ def dispatch_dir(dirname, features, **kwargs):
 # Functions for checking if a test needs a certain feature
 def check_if_mpi_driver(d): return "mpi" in d
 def check_if_arpack_driver(d): return "eigenproblems" in d
-def check_if_hlib_driver(d): return "hlib" in d
+def check_if_hlib_driver(d):
+    # hlib is in "oomphlib", so take it out in case people use dirs called
+    # oomphlib with no -.
+    return "hlib" in d.replace("oomphlib", "")
 
 
 # The function doing the bulk of the actual work (called many times in
