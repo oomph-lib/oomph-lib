@@ -35,7 +35,9 @@ yntobool()
 }
 
 # Read a y/n answer from input, if the answer is not y/n then repeat until
-# it is.
+# it is. Turns out this can be nasty when combined with set -o errexit: you
+# can only call this inside an if statement otherwise bash thinks any false
+# return value is an error!
 YesNoRead()
 {
     prompt="$1"
@@ -343,19 +345,68 @@ fi
 # line. Check that all options (starting with "--") 
 # come first. 
 
-#Continue asking if the options are OK until approved
-accept_configure_options=0
-list_changed="false"
-while (test $accept_configure_options -eq 0)
-do
+# Ask if the initial options are OK
+echo " "
+echo "Configure options are: "
+cat "config/configure_options/current"
+echo 
+if YesNoRead "Is this OK?" "y"; then
+    accept_configure_options="true"
+else
+    accept_configure_options="false"
+fi
+
+# Continue asking if the options are OK until approved
+while [[ $accept_configure_options != "true" ]]; do
+
+    # Get list of options files
+    configure_option_files="$(find config/configure_options -type f)"
+
+    echo " "
+    echo "======================================================================"
+    echo 
+    echo "Choose an alternative configuration file "
+    #Loop over files and display a menu
+    count=0
+    for file in $configure_option_files
+    do
+        #Increase the counter
+        count=`expr $count + 1`
+        echo $count ": " $(basename $file)
+    done #End of loop over files in config/configure_options
+
+    echo
+    echo "Enter the Desired configuration file [1-"$count"]"
+    echo "Enter 0 to specify the options on the command line"
+
+    #Read in the Desired File and validate it
+    file_number=$(OptionRead)
+    if (( $file_number >= $count )) || (( $file_number < 0 )); then
+        # Error and go to start of loop
+        Error "File number out of range, trying again."
+        continue
+    fi
 
 
-    #Read the options from the file and convert them into a single one-line string
-    configure_options=`ProcessOptionsFile config/configure_options/current`
+    #If options are to be read from the command line then store the
+    #options in the file config/configure_options/current
+    if [[ "$file_number" == "0" ]]; then
+        echo 
+        echo "Enter options"
+        configure_options=`OptionRead`  
+        echo $configure_options > config/configure_options/current
 
+        #Otherwise copy the desired options file to config/configure_options/current
+    else 
+        # Use cut to extract the nth entry in the list
+        configure_options_file=$(echo $configure_option_files | cut -d \  -f $file_number)
+
+        # Copy to current
+        cp -f "$configure_options_file" "config/configure_options/current"
+    fi
 
     #Check that the options are in the correct order
-    configure_options_are_ok=`CheckOptions config/configure_options/current`
+    configure_options_are_ok="$(CheckOptions config/configure_options/current)"
     if test "$configure_options_are_ok" != ""; then
 
         echo " "
@@ -368,100 +419,21 @@ do
         
         # Fail, go back to start of loop
         continue
-    fi 
+    fi
 
     # Ask if these options are OK
     echo " "
     echo "Configure options are: "
+    cat "config/configure_options/current"
     echo 
-    echo $configure_options
-    echo 
-
-    private_configure_option_files=""
-    if [[ $list_changed == "true" ]] || ! YesNoRead "Is this OK?" "y"; then
-
-        # Now the list hasn't changed
-        list_changed="false"
-
-        #Remove the current symbolic link (or file)
-        #rm -f config/configure_options/current   
-
-        # Link in the private ones:
-        return_dir_before_link_in_private=`pwd`
-        # Kill stray symlinks
-        cd config/configure_options
-        find . -type l -exec rm {} \; 
-
-        cd private_configure_options
-        private_configure_option_files=`ls `
-        cd ..
-        for file in $private_configure_option_files; do ln -s private_configure_options/$file ; done
-        cd $return_dir_before_link_in_private
-
-        # Ooops: Non-portable gnu extension to ls
-        #configure_option_files=`ls --ignore=private_configure_options config/configure_options`
-
-        # Thanks for this fix, Andy!
-        configure_option_files=`ls config/configure_options | grep -v  private_configure_options` 
-
-        echo " "
-        echo "======================================================================"
-        echo 
-        echo "Choose an alternative configuration file "
-        #Loop over files and display a menu
-        count=0
-        for file in $configure_option_files
-        do
-            #Increase the counter
-            count=`expr $count + 1`
-            echo $count ": " $file
-        done #End of loop over files in config/configure_options
-        echo
-
-        echo "Enter the Desired configuration file [1-"$count"]"
-        echo "Enter 0 to specify the options on the command line"
-        #Read in the Desired File
-        file_number=`OptionRead`
-
-        #If options are to be read from the command line then store the#
-        #options in the file config/configure_options/current
-        if (test $file_number -eq 0); then
-            echo 
-            echo "Enter options"
-            configure_options=`OptionRead`  
-            echo $configure_options > config/configure_options/current
-
-            #Otherwise copy the desired options file to config/configure_options/current
-        else   
-            #Reset the counter
-            count=0
-            #Loop over the files until the counter equals the chosen file_number
-            for file in $configure_option_files
-            do
-                #Increase the counter
-                count=`expr $count + 1`
-                if (test $count -eq $file_number); then
-                    cp -f config/configure_options/$file config/configure_options/current
-                    break
-                fi
-            done #End of loop over files
-        fi #End of create symbolic link code
-
-        #If the configuration is OK, accept it
+    if YesNoRead "Is this OK?" "y"; then
+        accept_configure_options="true"
     else
-        echo " " 
-        echo "Configure options have been accepted."
-        accept_configure_options=1
+        accept_configure_options="false"
     fi
 
-done #End of while loop over customisation of configure options
+done # End of while loop over customisation of configure options
 
-
-# Undo links to private configure options
-return_dir_before_link_in_private=`pwd`
-cd config/configure_options
-for file in $private_configure_option_files; do rm -f $file; done
-cd $return_dir_before_link_in_private
 
 echo " "
 echo "==================================================================="
@@ -489,6 +461,9 @@ tmp=`OptionRead`
 if [ $raw_build -o ! -e ./configure ]; then
     $MY_HOME_WD/bin/regenerate_config_files.sh $MY_HOME_WD
 fi
+
+# Read the options from the file and convert them into a single one-line string
+configure_options=`ProcessOptionsFile config/configure_options/current`
 
 # Run configure command
 echo " "
