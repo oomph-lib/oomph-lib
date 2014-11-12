@@ -562,6 +562,49 @@ private:
 //====================================================================
 namespace CommandLineArgs
 {
+ 
+ /// Structure to store information on a command line argument
+ template<class T> 
+ struct ArgInfo
+ {
+
+  /// Proper constructor
+  ArgInfo(const bool& is_set, 
+          T* arg_pt,
+          const std::string& doc)
+  {
+   this->is_set = is_set;
+   this->arg_pt = arg_pt;
+   this->doc = doc;
+  }
+
+  /// Default constructor. We need this to be able to store these things in
+  /// maps.
+  ArgInfo()
+  {
+   this->is_set = false;
+   this->arg_pt = 0;
+   this->doc = "";
+  }
+
+  // /// Assignment operator. We need this to be able to store these things in
+  // /// maps.
+  // void operator=(const ArgInfo& that)
+  //  {
+  //   this->is_set = that.is_set;
+  //   this->arg_pt = that.arg_pt;
+  //   this->doc = that.doc;
+  //  }
+
+  /// Has this argument been set?
+  bool is_set;
+
+  /// The place to put the argument's value when it is set
+  T* arg_pt;
+
+  /// Information about what the argument does
+  std::string doc;
+ };
 
  // Number of arguments + 1
  extern int Argc;
@@ -570,22 +613,22 @@ namespace CommandLineArgs
  extern char** Argv;
 
  /// Map to indicate an input flag as having been set
- extern std::map<std::string,bool> Specified_command_line_flag;
+ extern std::map<std::string, ArgInfo<bool> > Specified_command_line_flag;
 
  /// Map to associate an input flag with a double -- specified via pointer
- extern std::map<std::string,std::pair<bool,double*> > 
+ extern std::map<std::string, ArgInfo<double> > 
  Specified_command_line_double_pt;
 
  /// Map to associate an input flag with an int -- specified via pointer
- extern std::map<std::string,std::pair<bool,int*> > 
+ extern std::map<std::string, ArgInfo<int> > 
  Specified_command_line_int_pt;
 
  /// Map to associate an input flag with an unsigned -- specified via pointer
- extern std::map<std::string,std::pair<bool,unsigned*> > 
+ extern std::map<std::string, ArgInfo<unsigned> > 
  Specified_command_line_unsigned_pt;
 
  /// Map to associate an input flag with a string -- specified via pointer
- extern std::map<std::string,std::pair<bool,std::string*> > 
+ extern std::map<std::string, ArgInfo<std::string> > 
  Specified_command_line_string_pt;
 
  // Set values
@@ -595,26 +638,33 @@ namespace CommandLineArgs
  extern void output();
 
  /// Specify possible argument-free command line flag
- extern void specify_command_line_flag(const std::string& command_line_flag);
+ extern void specify_command_line_flag
+ (const std::string& command_line_flag,
+  const std::string& documentation="Undocumented");
 
  /// \short Specify possible command line flag that specifies a double, accessed
  /// via pointer
- extern void specify_command_line_flag(const std::string& command_line_flag,
-                                       double* arg_pt);
+ extern void specify_command_line_flag
+ (const std::string& command_line_flag, double* arg_pt,
+  const std::string& documentation="Undocumented");
 
  /// \short Specify possible command line flag that specifies an int, accessed
  /// via pointer
- extern void specify_command_line_flag(const std::string& command_line_flag,
-                                       int* arg_pt);
+ extern void specify_command_line_flag
+ (const std::string& command_line_flag, int* arg_pt,
+  const std::string& documentation="Undocumented");
+
  /// \short Specify possible command line flag that specifies an unsigned, 
  /// accessed via pointer
- extern void specify_command_line_flag(const std::string& command_line_flag,
-                                       unsigned* arg_pt);
+ extern void specify_command_line_flag
+ (const std::string& command_line_flag, unsigned* arg_pt,
+  const std::string& documentation="Undocumented");
 
  /// \short Specify possible command line flag that specifies a string, 
  /// accessed via pointer
- extern void specify_command_line_flag(const std::string& command_line_flag,
-                                       std::string* arg_pt);
+ extern void specify_command_line_flag
+ (const std::string& command_line_flag, std::string* arg_pt,
+  const std::string& documentation="Undocumented");
 
  /// \short Check if specified flag has been set (the associated 
  /// value will have been assigned directly)
