@@ -791,9 +791,21 @@ namespace oomph
  /// derivatievs
  bool Use_finite_differences_for_continuation_derivatives;
 
+public:
+
+ /// If we have MPI return the "problem has been distributed" flag,
+ /// otherwise it can't be distributed so return false.
+ bool distributed() const
+ {
+#ifdef OOMPH_HAS_MPI
+  return Problem_has_been_distributed;
+#else
+  return false;
+#endif
+ }
+
 #ifdef OOMPH_HAS_MPI
 
-  public:
 
  /// \short enum for distribution of distributed jacobians.
  ///  1 - Automatic - the Problem distribution is employed, unless any
@@ -942,9 +954,6 @@ namespace oomph
  bool Bypass_increase_in_dof_check_during_pruning;
 
   public:
-
- /// access function to the problem has been distributed flag
- const bool distributed() const { return Problem_has_been_distributed; }
 
  /// \short Set default first and last elements for parallel assembly
  /// of non-distributed problem.
