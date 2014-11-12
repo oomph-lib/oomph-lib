@@ -17,7 +17,7 @@ build_dir="${oomph_root}/build"
 make_options=""
 configure_options_file="config/configure_options/current"
 
-while getopts ":hrd:c:j:b:" opt; do
+while getopts ":hrd:c:b:j:sk" opt; do
   case $opt in
       h)
           echo "Options for autogen.sh:"
@@ -30,25 +30,36 @@ while getopts ":hrd:c:j:b:" opt; do
           generate_config_files="true"
           echo "Doing a complete rebuild from scratch."
           ;;
-
       d)
           oomph_root="$OPTARG"
           echo "Building oomph-lib in $oomph_root"
           ;;
-
       c)
           configure_options_file="$OPTARG"
           echo "Using configure options file $configure_options_file"
-          ;;
-
-      j)
-          make_options="$make_options -j $OPTARG"
-          echo "Using make options $make_options"
           ;;
       b)
           build_dir="$OPTARG"
           echo "Building in directory $build_dir"
           ;;
+
+      # flags for make
+      j)
+          job_option="--jobs $OPTARG"
+          make_options="$make_options $job_option"
+          echo "Added make option $job_option"
+          ;;
+      k)
+          k_option="--keep-going"
+          make_options="$make_options $k_option"
+          echo "Added make option $k_option"
+          ;;
+      s)
+          silent_option="--silent LIBTOOLFLAGS=--silent"
+          make_options="$make_options $silent_option"
+          echo "Added make option $silent_option"
+          ;;
+
 
       \?)
           echo "Invalid option: -$OPTARG" >&2
@@ -56,6 +67,7 @@ while getopts ":hrd:c:j:b:" opt; do
           ;;
   esac
 done
+echo "Using make options: \"$make_options\""
 
 
 # If we are regenerating config files then clean up the helper scripts

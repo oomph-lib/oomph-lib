@@ -119,9 +119,19 @@ EchoUsage()
     echo "  c)"
     echo "      Set the configure options file to use (default: current)."
     echo "  "
-    echo "  j)"
-    echo "      Set the number of cores to use for compilation (default: 1)."
-    echo "  "
     echo "  b)"
     echo "      Set the directory to put object files etc. in (default pwd/build)."
+    echo
+    echo
+    echo "Flags to control make:"
+    echo "  j)"
+    echo "      Set the number of cores to use (default: 1)."
+    echo "  "
+    echo "  k)"
+    echo "      Keep compiling as far as possible even after errors occur (this"
+    echo "      can save time but makes it harder to spot error messages)." 
+    echo "  "
+    echo "  s)"
+    echo "      Silent mode: don't output all the useless spam from make."
+    echo "  "
 }
