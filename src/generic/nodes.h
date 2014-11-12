@@ -1385,7 +1385,15 @@ public:
  /// If a pointer to a Node has been explicitly down-cast to a pointer to
  /// Data then the "wrong" (Data) version of the function will be called.
  void value(Vector<double>& values) const;
- 
+
+ /// Return vector of values calculated using value(vector).
+ Vector<double> value() const
+ {
+  Vector<double> vals(nvalue(), 0.0);
+  value(vals);
+  return vals;
+ }
+
  /// \short Compute Vector of values (dofs or pinned) in this data
  /// at time level t (t=0: present; t>0: previous). This interface 
  /// explicitly takes the hanging status into account.
@@ -1400,6 +1408,14 @@ public:
  /// \short Compute Vector of nodal positions
  /// either directly or via hanging node representation
  void position(Vector<double>& pos) const;
+
+ /// Return vector of position of node at current time.
+ Vector<double> position() const
+  {
+   Vector<double> pos(ndim(), 0.0);
+   position(pos);
+   return pos;
+  }
 
  /// \short Compute Vector of nodal position at time level t
  /// (t=0: current; t>0: previous timestep),
