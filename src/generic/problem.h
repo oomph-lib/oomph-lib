@@ -1029,6 +1029,11 @@ namespace oomph
  /// between the two cases
  virtual void actions_after_implicit_timestep() {}
 
+ /// \short Actions that should be performed after each implicit time step.
+ /// This is needed if your actions_after_implicit_timestep() modify the
+ /// solution in a way that affects the error estimate.
+ virtual void actions_after_implicit_timestep_and_error_estimation() {}
+
  /// \short Actions that should be performed before each explicit time step.
  virtual void actions_before_explicit_timestep() {}
 

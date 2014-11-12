@@ -10663,6 +10663,7 @@ void Problem::unsteady_newton_solve(const double &dt, const bool &shift_values)
 
  //Now update anything that needs updating after the timestep
  actions_after_implicit_timestep();
+ actions_after_implicit_timestep_and_error_estimation();
 }
 
 //=======================================================================
@@ -10903,6 +10904,9 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
     }
 
 
+   actions_after_implicit_timestep_and_error_estimation();
+
+
    // If we are rejecting this attempt then revert the dofs etc.
    if(REJECT_TIMESTEP)
     {
@@ -10923,6 +10927,7 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
      actions_before_newton_convergence_check();
      actions_after_newton_solve();
      actions_after_implicit_timestep();
+     actions_after_implicit_timestep_and_error_estimation();
     }
 
   }
