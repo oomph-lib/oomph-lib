@@ -60,8 +60,8 @@ def fpdiff(filename1,filename2,relative_error,small):
 
      Note that the relative error is percentage!
 
-     Returns zero if the two files are the same, 2 if they are
-     different or if there has been an error.
+     Returns True if the two files are the same or False if they are
+     different.
  """
 
  import math
@@ -220,8 +220,9 @@ def fpdiff(filename1,filename2,relative_error,small):
   sys.stdout.write("\n        %%%%%%%  means that two strings are different")
   sys.stdout.write("\n========================================================")
   sys.stdout.write("\n\n   [FAILED]\n")
-  # Return non-zero since it failed
-  return 2
+  # Return failure
+  return False
+
  else:
   sys.stdout.write("\n\n In files %s %s" % (filename1, filename2))
   sys.stdout.write(\
@@ -229,13 +230,13 @@ def fpdiff(filename1,filename2,relative_error,small):
   sys.stdout.write("%")
   sys.stdout.write(\
   "\n                                  - numerical zero  = %g\n" % small)
-  # Success: return 0
-  return 0
+  # Return success
+  return True
 
 
 def run_as_script(argv):
- """Run fpdiff as a script (handles argument parsing and some helpful
-    messages).
+ """Run fpdiff as a script (handles argument parsing, output as error codes
+    and some helpful messages).
  """
  # Note that we shouldn't just put this code this under 'if __name__ ==
  # "__main__":' because variables created there are global. This resulted
@@ -269,7 +270,12 @@ def run_as_script(argv):
    small = float(argv[3])
  
  # Run the diff
- return fpdiff(argv[0], argv[1], maxreld, small)
+ files_same = fpdiff(argv[0], argv[1], maxreld, small)
+
+ if files_same:
+  return 0
+ else:
+  return 2
 
 
 # What to do if this is run as a script, rather than loaded as a module
