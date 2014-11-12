@@ -99,6 +99,11 @@ if [ ! -e configure ]; then
     generate_config_files="true"
 fi
 
+if [ ! -e $configure_options_file ]; then
+    echo "Configure options file $configure_options_file does not exist"
+    exit 8
+fi
+
 # Print information about command line options selected
 echo
 echo "Using oomph lib in directory \"$PWD\""
