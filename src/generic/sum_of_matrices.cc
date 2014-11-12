@@ -33,10 +33,10 @@ namespace oomph
     // distributed so make a serial LinearAlgebraDistribution object.
     LinearAlgebraDistribution dist;
     LinearAlgebraDistribution* dist_pt = &dist;
-    OomphCommunicator* serial_comm_pt = new OomphCommunicator; // Serial communcator (does nothing)
+    OomphCommunicator serial_comm; // Serial communcator (does nothing)
     if(dist_obj_pt == 0)
      {
-      dist_pt->build(serial_comm_pt, added_matrix_pt(i_matrix)->nrow(), false);
+      dist_pt->build(&serial_comm, added_matrix_pt(i_matrix)->nrow(), false);
      }
     else
      {
