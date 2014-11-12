@@ -72,7 +72,7 @@ public:
                   &Mesh::Default_TimeStepper)
   {
    // Mesh can only be built with 3D Qelements.
-   MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(3);
+   MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(3, 3);
    
    // Build temporary tet mesh
    XdaTetMesh<TElement<3,3> >* tmp_mesh_pt= 
@@ -95,7 +95,7 @@ public:
                   const bool &use_attributes=false)
   {
    // Mesh can only be built with 3D Qelements.
-   MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(3);
+   MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(3, 3);
    
    // Build temporary tet mesh
    TetgenMesh<TElement<3,3> >* tmp_mesh_pt= 
@@ -123,7 +123,7 @@ public:
                   &Mesh::Default_TimeStepper)
   {
    // Mesh can only be built with 3D Qelements.
-   MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(3);
+   MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(3, 3);
    
    // Build temporary tet mesh
    xda_tet_mesh_pt=new XdaTetMesh<TElement<3,3> >(xda_file_name,

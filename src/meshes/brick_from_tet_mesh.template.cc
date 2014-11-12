@@ -45,7 +45,7 @@ namespace oomph
   TimeStepper* time_stepper_pt)
  {
   // Mesh can only be built with 3D Qelements.
-  MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(3);
+  MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(3, 3);
   
   // Figure out if the tet mesh is a solid mesh
   bool tet_mesh_is_solid_mesh=false;
@@ -4944,7 +4944,7 @@ namespace oomph
   TimeStepper* time_stepper_pt)
  {
   // Mesh can only be built with 3D Qelements.
-  MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(3);
+  MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(3, 3);
   
   // Figure out if the tet mesh is a solid mesh
   bool tet_mesh_is_solid_mesh=false;
