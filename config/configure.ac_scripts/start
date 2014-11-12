@@ -1469,6 +1469,99 @@ AC_SUBST(TRILINOS_INCLUDE)
 
 
 
+#---------------------------------------------------
+# Potential location of the HLIB libraries.
+#
+# If the HLIB is available on your machine, specify the library directory
+# i.e. the one above the lib and include directories with --with-hlib
+#----------------------------------------------------
+HLIB_LIB=
+HLIB_INCLUDE=
+check_for_hlib=false
+
+AC_ARG_WITH(hlib,
+[AS_HELP_STRING([--with-hlib], [Use hlib library. Assumed to be installed in the default install
+               directorys: headers in /usr/local/include/HLib and library in
+               /usr/local/lib.])]
+      ,[
+    check_for_hlib=true
+    HLIB_LIB="/usr/local/lib"
+    HLIB_INCLUDE="/usr/local/include/HLib"
+])
+
+
+# Do they exist?
+have_hlib=false
+if test x$check_for_hlib = xtrue; then \
+if test -d $HLIB_LIB; then \
+    have_hlib=true; \
+    echo "Found the hlib libraries in"; \
+    echo " "; \
+    echo "   "  $HLIB_LIB ; \
+    echo " "; \
+else \
+    have_hlib=false; \
+    echo "Did NOT find the hlib libraries in"; \
+    echo " "; \
+    echo "   "  $HLIB_LIB ; \
+    echo " "; \
+fi; \  
+if test -d $HLIB_INCLUDE; then \
+    have_hlib=true; \
+          echo "Found the hlib include files in"; \
+    echo " "; \
+    echo "   "  $HLIB_INCLUDE ; \
+    echo " "; \
+else \
+     have_hlib=false; \
+     echo "Did NOT find the hlib include files in"; \
+     echo " "; \
+     echo "   "  $HLIB_INCLUDE ; \
+     echo " "; \
+fi; \
+else \
+    echo "No hlib library directory specified"; \ 
+
+dnl dnl Not building hlib for people at the moment, probably not worth it
+dnl     # Will hlib library be built?
+dnl     #--------------------------------
+dnl will_have_hlib=false;
+dnl     AC_CHECK_FILES([external_distributions/hlib/HLib-1.3p20.tar.gz], will_have_hlib=true, )
+    
+dnl    if test x$will_have_hlib = xtrue; then \
+dnl     echo "Hlib distribution .tar.gz file found ... will build hlib"; \
+dnl     have_hlib=true; \
+dnl     HLIB_DIR="`pwd`/external_distributions/hlib/hlib_default_installation"
+dnl     HLIB_LIB="`pwd`/external_distributions/hlib/hlib_default_installation/lib"
+dnl     HLIB_INCLUDE="`pwd`/external_distributions/hlib/hlib_default_installation/include"
+dnl    else
+dnl     echo "Hlib distribution .tar.gz file not found ... can't build hlib";
+dnl    fi;
+
+fi
+
+
+
+# Do we have the hlib libraries? If so add them to the external
+# distributions; if not wipe the variables
+#--------------------------------------------------
+if test x$have_hlib = xfalse; then 
+  HLIB_LIB='' ; \
+  HLIB_INCLUDE='' ;\
+else \
+  external_dist_libraries=`echo $external_dist_libraries " -lhmatrix"` ; \
+  external_dist_libraries_lib=`echo $external_dist_libraries_lib "-L"$HLIB_LIB` ; \
+  external_dist_libraries_include=`echo $external_dist_libraries_include "-I"$HLIB_INCLUDE -DOOMPH_HAS_HLIB` ; \
+fi
+
+#Tell everybody about it...
+AM_CONDITIONAL(OOMPH_HAS_HLIB, test x$have_hlib = xtrue)
+
+# Make these variables available to all Makefile.am-s
+AC_SUBST(HLIB_LIB)
+AC_SUBST(HLIB_INCLUDE)
+
+
 #................................................................
 #................................................................
 

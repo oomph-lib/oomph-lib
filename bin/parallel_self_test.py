@@ -212,6 +212,7 @@ def dispatch_dir(dirname, features, **kwargs):
 # Functions for checking if a test needs a certain feature
 def check_if_mpi_driver(d): return "mpi" in d
 def check_if_arpack_driver(d): return "eigenproblems" in d
+def check_if_hlib_driver(d): return "hlib" in d
 
 
 # The function doing the bulk of the actual work (called many times in
@@ -394,13 +395,18 @@ def main():
     # Figure out if we have various features
     # ============================================================
 
-    #??ds there MUST be a ways to detect this somehow...
+    #??ds there MUST be a way to detect this somehow...
     have_arpack = False
 
     # Find out if we have mpi by looking for "OOMPH_HAS_MPI" in flags in
     # Makefile.
     have_mpi = "OOMPH_HAS_MPI" in \
       variable_from_makefile("AM_CPPFLAGS", pjoin(args.oomph_root, "Makefile"))
+
+    # Similarly for hlib
+    have_hlib = "OOMPH_HAS_HLIB" in \
+      variable_from_makefile("AM_CPPFLAGS", pjoin(args.oomph_root, "Makefile"))
+
 
     # List of possible features. Each one must contain: "feature_name",
     # check_driver_function--a function to find out if a directory requires
@@ -415,6 +421,11 @@ def main():
        {'feature_name' : "mpi",
         'check_driver_function' : check_if_mpi_driver,
         'have_feature' : have_mpi
+        },
+
+       {'feature_name' : "hlib",
+        'check_driver_function' : check_if_hlib_driver,
+        'have_feature' : have_hlib
         }
         ])
 
