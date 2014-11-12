@@ -503,6 +503,44 @@ public:
  /// Add a (pointer to) a node to the b-th boundary
  void add_boundary_node(const unsigned &b, Node* const &node_pt);
 
+ /// Replace existing boundary node lookup schemes with new schemes created
+ /// using the boundary data stored in the nodes.
+ void copy_boundary_node_data_from_nodes()
+ {
+  // Clear existing boundary data
+  Boundary_node_pt.clear();
+
+  // Loop over nodes adding them to the appropriate boundary lookup schemes
+  // in the mesh.
+  const unsigned n_node = nnode();
+  for(unsigned nd=0; nd<n_node; nd++)
+   {
+    Node* nd_pt = node_pt(nd);
+
+    if(nd_pt->is_on_boundary())
+     {
+      // Get set of boundaries that the node is on
+      std::set<unsigned>* boundaries_pt;
+      nd_pt->get_boundaries_pt(boundaries_pt);
+
+      // If needed then add more boundaries to this mesh
+      unsigned max_boundary_n = 1 +
+       *std::max_element(boundaries_pt->begin(), boundaries_pt->end());
+      if(max_boundary_n > nboundary())
+       {
+        set_nboundary(max_boundary_n);
+       }
+
+      // Add node pointer to the appropriate Boundary_node_pt vectors
+      std::set<unsigned>::const_iterator it;
+      for(it=boundaries_pt->begin(); it!=boundaries_pt->end(); it++)
+       {
+        Boundary_node_pt[*it].push_back(nd_pt);
+       }
+     }
+   }
+ }
+
  /// Indicate whether the i-th boundary has an intrinsic coordinate.
  // By default, if the array Boundary_coordinate has not been resized,
  // return false
