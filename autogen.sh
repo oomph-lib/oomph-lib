@@ -5,8 +5,6 @@
 #       move user driver detection to bin/regenerate_config_files.sh?
 #       merge scripts again?
 
-. bin/autogen_helpers.sh
-
 set -o errexit
 set -o nounset
 
@@ -70,6 +68,19 @@ done
 echo "Using make options: \"$make_options\""
 
 
+# Load helper functions
+source "${oomph_root}/bin/autogen_helpers.sh"
+
+
+# Convert to absolute paths
+build_dir="$(AbsPath $build_dir)"
+configure_options_file="$(AbsPath $configure_options_file)"
+
+# Now move to the oomph lib directory
+cd "$oomph_root"
+
+
+
 # If we are regenerating config files then clean up the helper scripts
 #-----------------------------------------------
 if $generate_config_files == "true"; then
@@ -108,15 +119,15 @@ fi
 #-----------------------------------
 
 # Backup old file (use -f so it doesn't give an error if the file doesn't exist)
-touch ${oomph_root}/config/configure.ac_scripts/user_drivers.dir_list
-mv -f ${oomph_root}/config/configure.ac_scripts/user_drivers.dir_list ${oomph_root}/config/configure.ac_scripts/user_drivers.dir_list.backup
+touch "config/configure.ac_scripts/user_drivers.dir_list"
+mv -f "config/configure.ac_scripts/user_drivers.dir_list" "config/configure.ac_scripts/user_drivers.dir_list.backup"
 
 # Get a list of locations of files named Makefile.am, modify a little and write to user_drivers.dir_list.
-find ${oomph_root}/user_drivers -type f -name "Makefile.am" \
-    | grep -v "^${oomph_root}/user_drivers/Makefile.am" \
+find "user_drivers" -type f -name "Makefile.am" \
+    | grep -v "^user_drivers/Makefile.am" \
     | sed 's:/Makefile.am$::' \
-    | sed "s:^${oomph_root}/::" \
-    > ${oomph_root}/config/configure.ac_scripts/user_drivers.dir_list
+    | sed "s:^./::" \
+    > "config/configure.ac_scripts/user_drivers.dir_list"
 
 # The grep and sed commands above do the following: 1) Remove the line that
 # corresponds to the Makefile.am in user_drivers itself. 2) Remove
@@ -126,7 +137,7 @@ find ${oomph_root}/user_drivers -type f -name "Makefile.am" \
 
 echo
 echo "User driver folders included are:"
-cat ${oomph_root}/config/configure.ac_scripts/user_drivers.dir_list
+cat "config/configure.ac_scripts/user_drivers.dir_list"
 echo
 
 
@@ -134,8 +145,8 @@ echo
 #--------------------------------------------------------
 
 # generate the config files if needed.
-if [[ $generate_config_files == "true" ]] || [ ! -e ./configure ]; then
-    $oomph_root/bin/regenerate_config_files.sh $oomph_root
+if [[ $generate_config_files == "true" ]] || [ ! -e configure ]; then
+    ./bin/regenerate_config_files.sh "$PWD"
 fi
 
 # If "current" configure options file does not exist then copy in the
@@ -190,18 +201,18 @@ echo " "
 # MPI_RUN_COMMAND in makefile). This needs to go after configure so that we
 # can use the generated Makefile to (robustly) get the run and compile
 # commands.
-$oomph_root/bin/check_mpi_command.sh $oomph_root/Makefile
+./bin/check_mpi_command.sh Makefile
 
 
 # Make all libraries
 echo " "
-echo "Running make $make_options"
+echo "Running `make $make_options` in $PWD"
 make $make_options
 echo "done"
 
 
 # Install the libraries (in build directory specified above)
 echo " "
-echo "running make $make_options install"
+echo "running `make $make_options install` in $PWD"
 make $make_options install
 echo "done"

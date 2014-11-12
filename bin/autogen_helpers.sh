@@ -139,3 +139,25 @@ EchoUsage()
     echo "      Silent mode: don't output all the useless spam from make."
     echo "  "
 }
+
+# Get the absolute path from a path that could be relative or absolute (has
+# to be portable, so we can't use readlink :( ). Note that this doesn't
+# resolve symlinks (because that's harder to do and we don't need it).
+AbsPath()
+{
+    # Catch absolute paths
+    if [[ "$1" == /* ]]; then
+        echo "$1"
+    else
+        # Catch the case where the pwd is / otherwise we end up with //.
+        if [[ $PWD == / ]]; then
+            dir="$1"
+        else
+            dir="$PWD/$1"
+        fi
+
+        # remove anything followed by /.. then remove any "./" and print
+        # the result.
+        echo "$dir" | sed -e 's|[^/]\+/\.\./||g' -e 's|\./||g'
+    fi
+}
