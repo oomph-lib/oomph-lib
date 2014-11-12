@@ -4,19 +4,22 @@
 # TODO:
 
 # Different message for dummy oks due to missing code? But we can't see
-# what's missing from outside the code! So unfortunately can't do anything
+# what's missing from outside the code. So unfortunately can't do anything
 # fancy with hypre tests etc..
 
-# Add a check for arpack... at the moment we jsut assume it's not there.
+# Add a check for arpack... at the moment we just assume it's not there
+# because I don't know how to look for it!
+
 
 # ASSUMPTIONS:
 
 # All validate.sh scripts return an appropriate exit status. Otherwise this
 # script cannot know if the test failed!
 
-# Driver requirements are determined by:
-# mpi driver <=> has "mpi" in the path.
-# arpack drivers <=> has "eigenproblem" in the path.
+# Driver requirements are currently determined by:
+# * mpi driver <=> has "mpi" in the path.
+# * arpack drivers <=> has "eigenproblem" in the path.
+# but this is easy to change by modifying e.g. check_if_mpi_driver(...)
 
 
 
@@ -29,7 +32,7 @@ from __future__ import unicode_literals
 
 # Other compatability notes:
 
-# Anything passed too/from subprocesses as a stream must be encoded (with
+# Anything passed to/from subprocesses as a stream must be encoded (with
 # x.encode()) / decoded (with str(y)) in python3. e.g. see
 # variable_from_makefile.
 
@@ -109,8 +112,19 @@ def missing_feature_message(directory, feature):
 class NoMakefileError(IOError):
     pass
 
+
 def variable_from_makefile(variable_name, makefile_path="Makefile"):
-    """Extract a variable from a makefile (using make)."""
+    """Extract a variable from a makefile (using make).
+
+    The basic idea is to cat a new "print-var" command, which prints the
+    variable we want, onto the start of the makefile. Then we just run
+    "make print-var" and make gives us the value we want.
+
+    Of course we don't actually modify the real makefile, we make a
+    stream and pipe it into make instead.
+
+    The idea came from somewhere on the internet, probably
+    stackoverflow."""
 
     if not os.path.isfile(makefile_path):
         raise NoMakefileError("Makefile not found at path: " + makefile_path +
@@ -148,6 +162,7 @@ def error(*args):
     """Write an error message to stderr and exit."""
     sys.stderr.write("\nERROR:\n" + "\n".join(args) + "\n")
     sys.exit(2)
+
 
 # Validation functions
 # ============================================================
@@ -193,7 +208,7 @@ def make_check_in_dir(directory):
     Rebuild binaries in the directory using make if needed then run the
     tests.
 
-    Since everything important is written to validation logs so just
+    Since everything important is written to validation logs we just
     summarise passes/fails on stdout.
 
     Output from compilation is sent to /dev/null since it is trivial to
@@ -212,7 +227,7 @@ def make_check_in_dir(directory):
         build_fail_message(directory)
         return
 
-    # Run make check
+    # Run make check (runs the actual test)
     test_result = subp.call(['make', 'check'],
                             cwd = directory,
                             stdout=open(os.devnull, 'w'),
@@ -245,11 +260,11 @@ def main():
     For this script to work correctly ALL validate.sh scripts must return
     an exit status. Use the --check-scripts option to check this.
 
-    Note: aborting with C-c will not work due to limitations of python2's
-    multiprocessing module. The easiest way to abort is probably to kill
-    the terminal emulator itself. Alternatively background the python
-    process with C-z then kill it (i.e. run "kill %%"). Or just upgrade to
-    python3.
+    Note: aborting with C-c will not work in python2 due to limitations
+    of python2's multiprocessing module. The easiest way to abort is
+    probably to kill the terminal emulator itself. Alternatively
+    background the python process with C-z then kill it (i.e. run "kill
+    %%"). Or just upgrade to python3.
     """
 
     # Parse inputs
@@ -261,7 +276,7 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         )
 
-    # make uses -C for "run make in this directory"
+    # make uses -C for "run make in this directory" so copy it
     parser.add_argument('-C', dest='oomph_root',
                         help='Set the root directory of oomph-lib, by default try to \
     extract it from a Makefile.')
@@ -401,7 +416,7 @@ def main():
     f = pt(dispatch_dir, features=oomph_features)
 
     # Run it in parallel.
-    Pool().map(f, validation_dirs, 1)
+    Pool(processes=int(args.ncores)).map(f, validation_dirs, 1)
     # Set chunksize to 1 (i.e. each "make check" call is in its own "chunk
     # of work") to avoid the situation where multiple slow "make check"s
     # end up in the same chunk and we have to wait ages for it to finish.
