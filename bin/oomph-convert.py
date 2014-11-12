@@ -297,7 +297,7 @@ def tecplot_to_vtkxml(inputFilename, outputFilename):
             error("Failed to open output file for writing !")
         
         output.close()
-        error("The input file does not contain any Tecplot zone ! Created an empty file... \n You may want to try converting this file to point \n data with -p2 option if dim == 2 or -p3 option if dim == 3")
+        error("The input file " + inputFilename + "\n does not contain any Tecplot zone! Created an empty file... \n You may want to try converting this file to point \n data with -p2 option if dim == 2 or -p3 option if dim == 3")
 
     #---------------------------------------------------------------------------
     # Compute global informations
