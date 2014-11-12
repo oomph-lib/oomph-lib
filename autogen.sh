@@ -5,6 +5,19 @@
 set -o errexit
 set -o nounset
 
+
+# Get the directory that autogen.sh is in (stolen frome stackoverflow:
+# http://stackoverflow.com/questions/59895/can-a-bash-script-tell-what-directory-its-stored-in
+# ), this is the oomph-lib root directory. Doesn't follow symlinks to the
+# script itself, should be robust for anything else. If you move autogen.sh
+# this will need to change a little.
+oomph_root="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+# Load helper functions
+source "${oomph_root}/bin/autogen_helpers.sh"
+
+
+
 # Handle command line input
 # ============================================================
 
@@ -15,13 +28,15 @@ make_options=""
 extra_configure_options=""
 configure_options_file="config/configure_options/current"
 generate_config_files="false"
-echo_usage="false"
 
 
 while getopts ":hrd:c:b:j:sk" opt; do
   case $opt in
       h)
-          echo_usage="true"
+          echo "Options for autogen.sh:"
+          echo
+          EchoUsage
+          exit 0 
           ;;
 
       r)
@@ -56,32 +71,17 @@ while getopts ":hrd:c:b:j:sk" opt; do
 
       \?)
           echo "Invalid option: -$OPTARG" >&2
+          echo "Valid options are:"
+          echo
+          EchoUsage
           exit 3
           ;;
   esac
 done
 
-# Get the directory that autogen.sh is in (stolen frome stackoverflow:
-# http://stackoverflow.com/questions/59895/can-a-bash-script-tell-what-directory-its-stored-in
-# ), this is the oomph-lib root directory. Doesn't follow symlinks to the
-# script itself, should be robust for anything else. If you move autogen.sh
-# this will need to change a little.
-oomph_root="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-
 # and for build dir 
 if [[ $build_dir == "" ]]; then
     build_dir=${oomph_root}/build
-fi
-
-# Load helper functions
-source "${oomph_root}/bin/autogen_helpers.sh"
-
-# Just echo usage and exit if requested
-if [[ $echo_usage == "true" ]]; then
-    echo "Options for autogen.sh:"
-    echo
-    EchoUsage
-    exit 0
 fi
 
 # Convert some things to absolute paths

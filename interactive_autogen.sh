@@ -7,15 +7,14 @@ set -o errexit
 set -o nounset
 
 
-# Read out root install directory
-oomph_root=$(pwd)
+# Get the directory that autogen.sh is in (stolen frome stackoverflow:
+# http://stackoverflow.com/questions/59895/can-a-bash-script-tell-what-directory-its-stored-in
+# ), this is the oomph-lib root directory. Doesn't follow symlinks to the
+# script itself, should be robust for anything else. If you move autogen.sh
+# this will need to change a little.
+oomph_root="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-
-# Check that this is actually the oomph-lib directory
-if [ ! -e "$oomph_root/bin/autogen_helpers.sh" ]; then
-    echo "interactive_autogen.sh must be run from the oomph-lib root directory."
-    exit 5
-fi
+cd "$oomph_root"
 
 # Load helper functions
 source bin/autogen_helpers.sh
@@ -27,6 +26,7 @@ while getopts ":h" opt; do
       h)
           echo "This script is an interactive interface to autogen.sh." 
           echo "Arguments allowed for the underlying autogen.sh are:"
+          echo
           EchoUsage
           exit 0
           ;; 
@@ -46,7 +46,7 @@ echo " "
 
 
 # Choose build directory (for lib,include)
-build_dir=$oomph_root/build
+build_dir="$oomph_root/build"
 
 echo " "
 echo " "
