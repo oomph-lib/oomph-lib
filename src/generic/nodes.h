@@ -397,7 +397,8 @@ class Data
   }
 
  /// \short Test whether the i-th variable is pinned (1: true; 0: false).
- bool is_pinned(const unsigned &i) {return (Eqn_number[i]==Is_pinned);}
+ bool is_pinned(const unsigned &i) const
+ {return (Eqn_number[i]==Is_pinned);}
 
  /// \short Test whether the i-th variable is temporaily pinned for a
  /// segregated solve.
