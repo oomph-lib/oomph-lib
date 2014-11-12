@@ -76,7 +76,11 @@ OPTIONS
         -p2 or -p3 outputs only points in 2D or 3D (.vtp)
         -h         display this help text and exit
         -z         add trailing zeros to the output filename
-        -o         overwrite existing files
+        -o         force overwrite existing files
+
+        By default output files will overwrite old ones only if the input file is
+        newer than the output file.
+
 
 TYPICAL USAGE EXAMPLES
         oomph-convert.py -h                             -> display help text
@@ -170,42 +174,55 @@ def main(argv):
     if isuffix == "dat" and osuffix == "vtu":
         if flag == 1:
             ofilename = addTrailingZeros(ofilename,osuffix)
+
         # Convert from oomph-lib Tecplot format to VTK XML format
-        do_it=1
-        if os.path.exists(ofilename):
-            print "File already exists! "
-            if (overwrite_flag==1):
-                print "Overwriting anyway"
-            else:
-                print "Not overwriting"
-                do_it=0
-        if (do_it==1):
+        if should_convert(overwrite_flag, ifilename, ofilename):
             start = time.time()
             tecplot_to_vtkxml(ifilename, ofilename)
             end = time.time()
             print "* Conversion done in %d seconds" % (end - start)
             print '* Output file name: %(fn)s ' %{'fn': ofilename}
+
     elif isuffix == "dat" and osuffix == "vtp" and flag2 == 1 :
         if flag == 1:
             ofilename = addTrailingZeros(ofilename,osuffix)
         # Convert from oomph-lib Tecplot format to VTP XML format
-        do_it=1
-        if os.path.exists(ofilename):
-            print "File already exists! "
-            print overwrite_flag
-            if (overwrite_flag==1):
-                print "Overwriting anyway."
-            else:
-                print "Not overwriting."
-                do_it=0
-        if (do_it==1):
+        if should_convert(overwrite_flag, ifilename, ofilename):
             start = time.time()
             tecplot_to_vtpxml(ifilename, ofilename,string.atoi(argdim))
             end = time.time()
             print "* Conversion done in %d seconds" % (end - start)
-            print '* Output file name: %(fn)s ' %{'fn': ofilename}       
+            print '* Output file name: %(fn)s ' %{'fn': ofilename}
+                
     else:   
         error("Sorry, cannot convert between .%s and .%s file formats." % (isuffix, osuffix))
+
+
+def should_convert(flag, in_file_name, out_file_name):
+    """Check if the output file exists, if so decide if we should overwrite it
+    and tell the user what we are doing."""
+
+    if not os.path.exists(out_file_name):
+        return True
+
+    print "File", in_file_name, "already exists!"
+
+    # Get modification times (in seconds since unix epoch I think)
+    in_mtime = os.path.getmtime(in_file_name)
+    out_mtime = os.path.getmtime(out_file_name)
+    
+    if flag:
+        print "Overwriting regardless of modification times because of flag."
+        return True
+    
+    elif in_mtime > out_mtime:
+        print "Overwriting because input file is newer than output file"
+        return True
+
+    else:
+        print "Not overwriting."
+        return False
+
 
 #
 ################################################################################
