@@ -1228,6 +1228,21 @@ namespace Locate_zeta_helpers
 }
 
 
+ /// \short Typedef for the function that translates the face coordinate
+ /// to the coordinate in the bulk element
+ typedef void (*CoordinateMappingFctPt)(const Vector<double> &s,
+                                        Vector<double> &s_bulk);
+
+ /// \short Typedef for the function that returns the partial derivative
+ /// of the local coordinates in the bulk element
+ /// with respect to the coordinates along the face.
+ /// In addition this function returns an index of one of the 
+ /// bulk local coordinates that varies away from the edge
+ typedef void (*BulkCoordinateDerivativesFctPt)(const Vector<double> &s,
+                                                DenseMatrix<double> &ds_bulk_dsface,
+                                                unsigned &interior_direction);
+
+
 //========================================================================
 /// \short A general Finite Element class.
 ////
@@ -2994,17 +3009,69 @@ public:
  /// depends on the particular element type, and a pointer to the
  /// FaceElement.
  virtual void build_face_element(const int &face_index, 
-                                 FaceElement* face_element_pt)
-  {
-   throw OomphLibError(
-    "build_face_element() undefined for this element type",
-    OOMPH_CURRENT_FUNCTION,
-    OOMPH_EXCEPTION_LOCATION);
-  }
+                                 FaceElement* face_element_pt);
+
 
  /// \short Self-test: Check inversion of element & do self-test for
  /// GeneralisedElement. Return 0 if OK. 
  virtual unsigned self_test();
+
+ /// Get the number of the ith node on face face_index (in the bulk node
+ /// vector). 
+ virtual unsigned get_bulk_node_number(const int& face_index, 
+                                       const unsigned& i) const
+  {
+   std::string err = "Not implemented for this element.";
+   throw OomphLibError(err, OOMPH_EXCEPTION_LOCATION,
+                       OOMPH_CURRENT_FUNCTION);
+  }
+
+ /// Get the sign of the outer unit normal on the face given by face_index.
+ virtual int face_outer_unit_normal_sign(const int& face_index) const
+  {
+   std::string err = "Not implemented for this element.";
+   throw OomphLibError(err, OOMPH_EXCEPTION_LOCATION,
+                       OOMPH_CURRENT_FUNCTION);
+  }
+
+ virtual unsigned nnode_on_face() const
+  {
+   std::string err = "Not implemented for this element.";
+   throw OomphLibError(err, OOMPH_EXCEPTION_LOCATION,
+                       OOMPH_CURRENT_FUNCTION);
+  }
+
+ /// Range check for face node numbers
+ void face_node_number_error_check(const unsigned& i) const
+ {
+#ifdef RANGE_CHECKING
+  if(i < 0 || i > nnode_on_face())
+   {
+    std::string err = "Face node index i out of range on face.";
+    throw OomphLibError(err, OOMPH_EXCEPTION_LOCATION,
+                        OOMPH_CURRENT_FUNCTION);
+   }
+#endif
+ }
+
+ /// Get a pointer to the function mapping face coordinates to bulk coordinates
+ virtual CoordinateMappingFctPt face_to_bulk_coordinate_fct_pt
+ (const int& face_index) const
+   {
+   std::string err = "Not implemented for this element.";
+   throw OomphLibError(err, OOMPH_EXCEPTION_LOCATION,
+                       OOMPH_CURRENT_FUNCTION);
+  }
+
+ /// Get a pointer to the derivative of the mapping from face to bulk
+ /// coordinates.
+ virtual BulkCoordinateDerivativesFctPt bulk_coordinate_derivatives_fct_pt
+ (const int& face_index) const
+  {
+   std::string err = "Not implemented for this element.";
+   throw OomphLibError(err, OOMPH_EXCEPTION_LOCATION,
+                       OOMPH_CURRENT_FUNCTION);
+  }
 
 };
 

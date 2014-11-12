@@ -4896,6 +4896,63 @@ void FiniteElement::identify_field_data_for_interactions(
   }
 }
 
+void FiniteElement::build_face_element(const int &face_index, 
+                                       FaceElement* face_element_pt)
+{
+ //Set the nodal dimension
+ face_element_pt->set_nodal_dimension(nodal_dimension());
+
+ //Set the pointer to the orginal "bulk" element
+ face_element_pt->bulk_element_pt()=this;
+
+#ifdef OOMPH_HAS_MPI
+ // Pass on non-halo proc ID
+ face_element_pt->set_halo(Non_halo_proc_ID);
+#endif
+
+ // Set the face index
+ face_element_pt->face_index() = face_index;
+
+ // Get number of bulk nodes on a face of this element
+ const unsigned nnode_face = nnode_on_face();
+
+ // Set the function pointer for face coordinate to bulk coordinate
+ // mapping
+ face_element_pt->face_to_bulk_coordinate_fct_pt() =
+  face_to_bulk_coordinate_fct_pt(face_index);
+
+ // Set the function pointer for the derivative of the face coordinate to
+ // bulk coordinate mapping
+ face_element_pt->bulk_coordinate_derivatives_fct_pt() =
+  bulk_coordinate_derivatives_fct_pt(face_index);
+
+ // Resize storage for the number of values originally stored each of the
+ // face element's nodes.
+ face_element_pt->nbulk_value_resize(nnode_face);
+
+ // Resize storage for the bulk node numbers corresponding to the face
+ // element's nodes.
+ face_element_pt->bulk_node_number_resize(nnode_face);
+
+ // Copy bulk_node_numbers and nbulk_values
+ for(unsigned i=0; i<nnode_face; i++)
+  {
+   // Find the corresponding bulk node's number
+   unsigned bulk_number = get_bulk_node_number(face_index, i);
+
+   // Assign the pointer and number into the face element
+   face_element_pt->node_pt(i) = node_pt(bulk_number);
+   face_element_pt->bulk_node_number(i) = bulk_number;
+
+   // Set the number of values originally stored at this node
+   face_element_pt->nbulk_value(i) = required_nvalue(bulk_number); 
+  }
+
+ // Set the outer unit normal sign
+ face_element_pt->normal_sign() = face_outer_unit_normal_sign(face_index);
+
+}
+
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////

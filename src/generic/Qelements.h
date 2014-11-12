@@ -48,6 +48,9 @@
 #include "elements.h"
 #include "macro_element.h"
 
+#include "Qelement_face_coordinate_translation_schemes.h"
+
+
 
 namespace oomph
 {
@@ -322,6 +325,14 @@ class QElementBase : public virtual QElementGeometricBase
      s_macro[i]=s_macro_ll(i)+0.5*(s[i]+1.0)*(s_macro_ur(i)-s_macro_ll(i));
     }
    Macro_elem_pt->macro_map(t,s_macro,x);
+  }
+
+ /// Return number of nodes on one face of the element. Always
+ /// nnode_1d^(el_dim - 1).
+ unsigned nnode_on_face() const
+  {
+   // c++ doesn't have pow(int, int) so we have to use all these casts...
+   return static_cast<unsigned>(pow(static_cast<double>(nnode_1d()), dim()-1));
   }
 
   private:
@@ -730,14 +741,65 @@ public:
    return np;
   }
 
- /// \short Build the lower-dimensional FaceElement (an element of type
- /// QElement<0,NNODE_1D>). The face index takes one of 
- /// two values corresponding
- /// to the two possible faces:
- /// -1 (Left)  s[0] = -1.0
- /// +1 (Right) s[0] =  1.0
- void build_face_element(const int &face_index, 
-                         FaceElement* face_element_pt);
+ /// Get the number of the ith node on face face_index in the bulk node
+ /// vector. 
+ unsigned get_bulk_node_number(const int& face_index,
+                               const unsigned& i) const
+  {
+   face_node_number_error_check(i);
+
+   if(face_index == -1) {return 0;}
+   else if(face_index == +1) {return nnode_1d() - 1;}
+   else
+    {
+     std::string err = "Face index should be in {-1, +1}.";
+     throw OomphLibError(err, OOMPH_EXCEPTION_LOCATION,
+                         OOMPH_CURRENT_FUNCTION);
+    }
+  }
+
+ /// Get the sign of the outer unit normal on the face given by face_index.
+ int face_outer_unit_normal_sign(const int& face_index) const
+  {
+#ifdef PARANOID
+   if(std::abs(face_index) != 1)
+    {
+     std::string err = "Face index should be in {-1, +1}.";
+     throw OomphLibError(err, OOMPH_EXCEPTION_LOCATION,
+                         OOMPH_CURRENT_FUNCTION);
+    }
+#endif
+   return face_index;
+  }
+
+ /// Get a pointer to the function mapping face coordinates to bulk coordinates
+ CoordinateMappingFctPt face_to_bulk_coordinate_fct_pt
+ (const int& face_index) const
+ {
+  if(face_index == 1) {return &QElement1FaceToBulkCoordinates::face1;}
+  else if(face_index == -1) {return &QElement1FaceToBulkCoordinates::face0;}
+  else
+   {
+    std::string err = "Face index should be in {-1, +1}.";
+    throw OomphLibError(err, OOMPH_EXCEPTION_LOCATION,
+                        OOMPH_CURRENT_FUNCTION);
+   } 
+ }
+
+ /// Get a pointer to the derivative of the mapping from face to bulk
+ /// coordinates.
+ BulkCoordinateDerivativesFctPt bulk_coordinate_derivatives_fct_pt
+ (const int& face_index) const
+ {
+  if(face_index == 1) {return &QElement1BulkCoordinateDerivatives::faces0;}
+  else if (face_index == -1) {return &QElement1BulkCoordinateDerivatives::faces0;}
+  else
+   {
+    std::string err = "Face index should be in {-1, +1}.";
+    throw OomphLibError(err, OOMPH_EXCEPTION_LOCATION,
+                        OOMPH_CURRENT_FUNCTION);
+   } 
+ }
 
 };
 
@@ -1020,15 +1082,75 @@ public:
    return np;
   };
 
- /// \short Build the lower-dimensional FaceElement (an element of type
- /// QElement<1,NNODE_1D>). The face index takes one of four values
- /// corresponding to the four possible faces:
- /// -1 (West)  s[0] = -1.0
- /// +1 (East)  s[0] =  1.0
- /// -2 (South) s[1] = -1.0
- /// +2 (North) s[1] =  1.0
- void build_face_element(const int &face_index,
-                         FaceElement* face_element_pt);
+ /// Get the number of the ith node on face face_index (in the bulk node
+ /// vector). 
+ unsigned get_bulk_node_number(const int& face_index,
+                               const unsigned& i) const
+ {
+  face_node_number_error_check(i);
+
+  const unsigned nn1d = nnode_1d();
+
+  if(face_index == -1) {return i*nn1d;}
+  else if(face_index == +1) {return nn1d*i + nn1d-1;}
+  else if(face_index == -2) {return i;}
+  else if(face_index == +2) {return nn1d*(nn1d-1) + i;}
+  else
+   {
+    std::string err = "Face index should be in {-1, +1, -2, +2}.";
+    throw OomphLibError(err, OOMPH_EXCEPTION_LOCATION,
+                        OOMPH_CURRENT_FUNCTION);
+   }
+ }
+
+ /// Get the sign of the outer unit normal on the face given by face_index.
+ int face_outer_unit_normal_sign(const int& face_index) const
+ {
+  if(face_index < 0) {return 1;}
+  else if(face_index > 0) {return -1;}
+  else
+   {
+    std::string err = "Face index should be one of {-1, +1, -2, +2}.";
+    throw OomphLibError(err, OOMPH_EXCEPTION_LOCATION,
+                        OOMPH_CURRENT_FUNCTION);
+   }
+ }
+
+ /// Get a pointer to the function mapping face coordinates to bulk coordinates
+ CoordinateMappingFctPt face_to_bulk_coordinate_fct_pt
+ (const int& face_index) const
+ {
+  if(face_index == 1) {return &QElement2FaceToBulkCoordinates::face2;}
+  else if (face_index == -1) {return &QElement2FaceToBulkCoordinates::face0;}
+  else if (face_index == -2) {return &QElement2FaceToBulkCoordinates::face1;}
+  else if (face_index == 2) {return &QElement2FaceToBulkCoordinates::face3;}
+  else
+   {
+    std::string err = "Face index should be in {-1, +1}.";
+    throw OomphLibError(err, OOMPH_EXCEPTION_LOCATION,
+                        OOMPH_CURRENT_FUNCTION);
+   } 
+ }
+
+ /// Get a pointer to the derivative of the mapping from face to bulk
+ /// coordinates.
+ BulkCoordinateDerivativesFctPt bulk_coordinate_derivatives_fct_pt
+ (const int& face_index) const
+ {
+  if(face_index == 1) {return &QElement2BulkCoordinateDerivatives::faces0;}
+  else if (face_index == -1) {return &QElement2BulkCoordinateDerivatives::faces0;}
+  else if (face_index == -2) {return &QElement2BulkCoordinateDerivatives::faces1;}
+  else if (face_index == 2) {return &QElement2BulkCoordinateDerivatives::faces1;}
+  else
+   {
+    std::string err = "Face index should be in {-1, +1}.";
+    throw OomphLibError(err, OOMPH_EXCEPTION_LOCATION,
+                        OOMPH_CURRENT_FUNCTION);
+   } 
+ }
+
+
+
 };
 
 //=======================================================================
@@ -1350,19 +1472,82 @@ void write_paraview_output_offset_information(std::ofstream& file_out,
    return np;
   };
 
+ /// Get the number of the ith node on face face_index in the bulk node
+ /// vector. 
+ unsigned get_bulk_node_number(const int& face_index,
+                               const unsigned& i) const
+ {
+  face_node_number_error_check(i);
 
- /// \short Build the lower-dimensional FaceElement (an element of type
- /// QElement<2,NNODE_1D>). The face index takes one of 
- /// six values corresponding
- /// to the six possible faces:
- /// -1 (Left)   s[0] = -1.0
- /// +1 (Right)  s[0] =  1.0
- /// -2 (Down)   s[1] = -1.0
- /// +2 (Up)     s[1] =  1.0
- /// -3 (Back)   s[2] = -1.0
- /// +3 (Front)  s[2] =  1.0
- void build_face_element(const int &face_index,
-                         FaceElement* face_element_pt);
+  const unsigned nn1d = nnode_1d();
+
+  if(face_index == -1) {return i*nn1d;}
+  else if(face_index == +1) {return i*nn1d + (nn1d-1);}
+  else if(face_index == -2) {return i%nn1d + (i/nn1d)*nn1d*nn1d;}
+  else if(face_index == +2) {return i%nn1d + (i/nn1d)*nn1d*nn1d + (nn1d*(nn1d-1));} 
+  else if(face_index == -3) {return i;} 
+  else if(face_index == +3) {return i+(nn1d*nn1d)*(nn1d-1);}
+  else
+   {
+    std::string err = "Face index should be in {-1, +1, -2, +2, -3, +3}.";
+    throw OomphLibError(err, OOMPH_EXCEPTION_LOCATION,
+                        OOMPH_CURRENT_FUNCTION);
+   }
+ }
+
+ /// Get the sign of the outer unit normal on the face given by face_index.
+ int face_outer_unit_normal_sign(const int& face_index) const
+ {
+  if(face_index == -3) {return -1;} 
+  else if(face_index == +3) {return 1;}
+  else if(face_index == -2) {return 1;}
+  else if(face_index == 2) {return -1;}
+  else if(face_index == -1) {return -1;}
+  else if(face_index == 1) {return 1;}
+  else
+   {
+    std::string err = "Face index should be in {-1, +1, -2, +2, -3, +3}.";
+    throw OomphLibError(err, OOMPH_EXCEPTION_LOCATION,
+                        OOMPH_CURRENT_FUNCTION);
+   }
+ }
+
+ /// Get a pointer to the function mapping face coordinates to bulk coordinates
+ CoordinateMappingFctPt face_to_bulk_coordinate_fct_pt
+ (const int& face_index) const
+ {
+  if(face_index == 1) {return &QElement3FaceToBulkCoordinates::face3;}
+  else if (face_index == -1) {return &QElement3FaceToBulkCoordinates::face0;}
+  else if (face_index == -2) {return &QElement3FaceToBulkCoordinates::face1;}
+  else if (face_index == 2) {return &QElement3FaceToBulkCoordinates::face4;}
+  else if (face_index == -3) {return &QElement3FaceToBulkCoordinates::face2;}
+  else if (face_index == 3) {return &QElement3FaceToBulkCoordinates::face5;}
+  else
+   {
+    std::string err = "Face index should be in {-1, +1}.";
+    throw OomphLibError(err, OOMPH_EXCEPTION_LOCATION,
+                        OOMPH_CURRENT_FUNCTION);
+   } 
+ }
+
+ /// Get a pointer to the derivative of the mapping from face to bulk
+ /// coordinates.
+ BulkCoordinateDerivativesFctPt bulk_coordinate_derivatives_fct_pt
+ (const int& face_index) const
+ {
+  if(face_index == 1) {return &QElement3BulkCoordinateDerivatives::faces0;}
+  else if (face_index == -1) {return &QElement3BulkCoordinateDerivatives::faces0;}
+  else if (face_index == -2) {return &QElement3BulkCoordinateDerivatives::faces1;}
+  else if (face_index == 2) {return &QElement3BulkCoordinateDerivatives::faces1;}
+  else if (face_index == -3) {return &QElement3BulkCoordinateDerivatives::faces2;}
+  else if (face_index == 3) {return &QElement3BulkCoordinateDerivatives::faces2;}
+  else
+   {
+    std::string err = "Face index should be in {-1, +1}.";
+    throw OomphLibError(err, OOMPH_EXCEPTION_LOCATION,
+                        OOMPH_CURRENT_FUNCTION);
+   } 
+ }
 
 };
   
@@ -1416,7 +1601,6 @@ class SolidQElement<1,NNODE_1D> : public virtual QElement<1,NNODE_1D>,
 
  /// C_style output at n_plot points
  inline void output(FILE* file_pt, const unsigned &n_plot);
- 
 
  /// \short Build the lower-dimensional FaceElement (an element of type
  /// SolidQElement<0,NNODE_1D>).
@@ -1426,7 +1610,7 @@ class SolidQElement<1,NNODE_1D> : public virtual QElement<1,NNODE_1D>,
  /// +1 (Right) s[0] =  1.0
  inline void build_face_element(const int &face_index, 
                                 FaceElement* face_element_pt);
- 
+
 
 };
 
