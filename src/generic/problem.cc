@@ -11215,7 +11215,7 @@ void Problem::calculate_predictions()
 
     // Check we got the times right
 #ifdef PARANOID
-    if(std::abs(time() - backup_time) > 1e-15)
+    if(std::abs(time() - backup_time) > 1e-12)
      {
       using namespace StringConversion;
       std::string err = "Predictor landed at the wrong time!";
