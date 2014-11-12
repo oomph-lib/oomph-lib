@@ -234,67 +234,40 @@ fi
 
 
 
-# Autodetection of folders in user_drivers
+# Autodetection of folders in user_drivers etc.
 #============================================================================
 
-# ??ds clean this up, do we even need so many separate user directories?
-
-# Backup old file (use -f so it doesn't give an error if the file doesn't exist)
-touch "config/configure.ac_scripts/user_drivers.dir_list"
-mv -f "config/configure.ac_scripts/user_drivers.dir_list" "config/configure.ac_scripts/user_drivers.dir_list.backup"
+confdir="config/configure.ac_scripts"
 
 # Get a list of locations of files named Makefile.am, modify a little and
-# write to user_drivers.dir_list.
-find "user_drivers" -type f -name "Makefile.am" \
-    | grep -v "^user_drivers/Makefile.am" \
-    | sed 's:/Makefile.am$::' \
-    | sed "s:^./::" \
-    > "config/configure.ac_scripts/user_drivers.dir_list"
+# write to stdout.
+GetDirList ()
+{
+    basedir="$1"
 
-# The grep and sed commands above do the following: 1) Remove the line that
-# corresponds to the Makefile.am in user_drivers itself. 2) Remove
-# "/Makefile.am" from each line leaving only the directory (dirname doesn't
-# work with pipes). 3) Remove the start of the path from each line leaving
-# only the location relative to the oomph-lib root directory.
+    find "$1" -type f -name "Makefile.am" \
+        | grep -v "^${1}/Makefile.am" \
+        | sed 's:/Makefile.am$::' \
+        | sed "s:^./::"
 
-# Do the same things for the private user drivers folder
-mkdir -p "private/user_drivers/"
-touch "config/configure.ac_scripts/private_user_drivers.dir_list"
-mv -f "config/configure.ac_scripts/private_user_drivers.dir_list" "config/configure.ac_scripts/private_user_drivers.dir_list.backup"
-find "private/user_drivers" -type f -name "Makefile.am" \
-    | grep -v "^private/user_drivers/Makefile.am" \
-    | sed 's:/Makefile.am$::' \
-    | sed "s:^./::" \
-    > "config/configure.ac_scripts/private_user_drivers.dir_list"
+    # The grep and sed commands above do the following: 1) Remove the line that
+    # corresponds to the Makefile.am in user_drivers itself. 2) Remove
+    # "/Makefile.am" from each line leaving only the directory (dirname doesn't
+    # work with pipes). 3) Remove the start of the path from each line leaving
+    # only the location relative to the oomph-lib root directory. 
+}
 
-# Do the same things for the user src folder
-touch "config/configure.ac_scripts/user_src.dir_list"
-mv -f "config/configure.ac_scripts/user_src.dir_list" "config/configure.ac_scripts/user_src.dir_list.backup"
-find "user_src" -type f -name "Makefile.am" \
-    | grep -v "^user_src/Makefile.am" \
-    | sed 's:/Makefile.am$::' \
-    | sed "s:^./::" \
-    > "config/configure.ac_scripts/user_src.dir_list"
-
-# Do the same things for the private user src folder
-mkdir -p "private/user_src/"
-touch "config/configure.ac_scripts/private_user_src.dir_list"
-mv -f "config/configure.ac_scripts/private_user_src.dir_list" "config/configure.ac_scripts/private_user_src.dir_list.backup"
-find "private/user_src" -type f -name "Makefile.am" \
-    | grep -v "^private/user_src/Makefile.am" \
-    | sed 's:/Makefile.am$::' \
-    | sed "s:^./::" \
-    > "config/configure.ac_scripts/private_user_src.dir_list"
+# Ensure the private folders exist
+mkdir -p "private/user_src/" "private/user_drivers/"
 
 # Generate a sorted list of all the makefiles in the project, wrap it into
 # an autoconfigure command and put it into a file.
-confdir="config/configure.ac_scripts"
 cat "$confdir/core.dir_list" \
     "$confdir/doc.dir_list" \
-    "$confdir/user_drivers.dir_list" \
-    "$confdir/user_src.dir_list" \
-    "$confdir/private_user_drivers.dir_list" \
-    "$confdir/private_user_src.dir_list" \
+    <(GetDirList "user_drivers") \
+    <(GetDirList "private/user_drivers") \
+    <(GetDirList "user_src") \
+    <(GetDirList "private/user_src") \
     | sed -e 's|\(^.*$\)|\1/Makefile|' \
     | sort \
     | cat <(echo "# GENERATED FILE, DO NOT MODIFY.") \
@@ -311,7 +284,7 @@ then
 
     echo
     echo "User driver folders included are:"
-    cat "config/configure.ac_scripts/user_drivers.dir_list"
+    cat "$confdir/user_drivers.dir_list"
     echo
 
     mv "$confdir/new_makefile_list" "$confdir/makefile_list"
