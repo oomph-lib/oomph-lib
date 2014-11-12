@@ -2865,6 +2865,14 @@ public:
    outfile << "Output function undefined for exact solution \n";
   }
 
+ /// Output a time-dependent exact solution over the element.
+ virtual void output_fct(std::ostream &outfile, const unsigned &n_plot,
+                         const double& time, 
+                         const SolutionFunctorBase& exact_soln) const
+ {
+  outfile << "Output function undefined for exact solution \n";
+ }
+
 
 
  /// \short  Get cector of local coordinates of plot point i (when plotting 

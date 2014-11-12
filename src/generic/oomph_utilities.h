@@ -1039,5 +1039,134 @@ namespace MemoryUsage
  
 } // end of namespace MemoryUsage
 
+
+
+ ////////////////////////////////////////////////////////////////
+ ////////////////////////////////////////////////////////////////
+ ////////////////////////////////////////////////////////////////
+
+ // Forward decl.
+ class Problem;
+
+ /// Function base class for exact solutions/initial conditions/boundary
+ /// conditions. This is needed so that we can have solutions that depend
+ /// on problem parameters with resorting to global variables.
+ class SolutionFunctorBase
+ {
+ public:
+  // Some typedefs first:
+
+  /// General function of space and time which returns a double.
+  typedef double (*TimeSpaceToDoubleFctPt)(const double& t,
+                                           const Vector<double>&x);
+
+  /// General function of space and time which returns a vector of doubles.
+  typedef Vector<double> (*TimeSpaceToDoubleVectFctPt) (const double& t,
+                                                        const Vector<double>&x);
+
+  /// General function of time, space and a value vector which returns a
+  /// vector of doubles.
+  typedef Vector<double> (*TimeSpaceValueToDoubleVectFctPt)
+  (const double& t, const Vector<double>&x, const Vector<double>&u);
+
+  /// Virtual destructor
+  virtual ~SolutionFunctorBase() {}
+
+  /// Call the function.
+  virtual Vector<double> operator()(const double& t, 
+                                    const Vector<double>&x) const = 0;
+   
+  /// Call the derivative function.
+  virtual Vector<double> derivative(const double& t, const Vector<double>& x,
+                                    const Vector<double>& u) const = 0;
+
+  /// Overload to grab data from the problem.
+  virtual void initialise_from_problem(const Problem* problem_pt) {}
+ };
+
+
+
+ /// Function class for a simple function with no external parameters (just
+ /// stores a function pointer, only needed for compatability).
+ class SolutionFunctor : public SolutionFunctorBase
+ {
+  // This could easily be extended to take
+  // FiniteElement::UnsteadyExactSolutionFctPt function (i.e. functions
+  // where the output is placed into a given vector rather than returned)
+  // as well--just add the appropriate storage pointers and constructors.
+
+ public:
+  // Constructors:
+
+  SolutionFunctor()
+  {
+   Solution_fpt = 0;
+   Derivative_fpt = 0;
+  }
+
+  SolutionFunctor(TimeSpaceToDoubleVectFctPt solution_fpt)
+  {
+   Solution_fpt = solution_fpt;
+   Derivative_fpt = 0;
+  }
+
+  SolutionFunctor(TimeSpaceToDoubleVectFctPt solution_fpt,
+                  TimeSpaceValueToDoubleVectFctPt derivative_fpt)
+  {
+   Solution_fpt = solution_fpt;
+   Derivative_fpt = derivative_fpt;
+  }
+
+  virtual ~SolutionFunctor() {}
+
+  SolutionFunctor(const SolutionFunctor& that)
+  {
+   Solution_fpt = that.Solution_fpt;
+   Derivative_fpt = that.Derivative_fpt;
+  }
+
+  void operator=(const SolutionFunctor& that)
+  {
+   this->Solution_fpt = that.Solution_fpt;
+   this->Derivative_fpt = that.Derivative_fpt;
+  }
+
+  /// Call the function.
+  virtual Vector<double> operator()(const double& t, const Vector<double>&x) const
+  {
+#ifdef PARANOID
+   if(Solution_fpt == 0)
+    {
+     std::string err = "Solution_fpt is null!";
+     throw OomphLibError(err, OOMPH_CURRENT_FUNCTION,
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+   return Solution_fpt(t, x);
+  }
+
+  /// Call the derivative function.
+  virtual Vector<double> derivative(const double& t, const Vector<double>& x,
+                                    const Vector<double>& u) const
+  {
+#ifdef PARANOID
+   if(Derivative_fpt == 0)
+    {
+     std::string err = "Derivative_fpt is null!";
+     throw OomphLibError(err, OOMPH_CURRENT_FUNCTION,
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+   return Derivative_fpt(t, x, u);
+  }
+
+  /// Storage for solution
+  TimeSpaceToDoubleVectFctPt Solution_fpt;
+
+  /// Storage for derivative
+  TimeSpaceValueToDoubleVectFctPt Derivative_fpt;
+ };
+
+
 }
 #endif
