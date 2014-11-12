@@ -164,6 +164,19 @@ def error(*args):
     sys.exit(2)
 
 
+def get_oomph_root():
+    try:
+        print("Trying to extract the root dir from a Makefile in the pwd.")
+        oomph_root = variable_from_makefile("abs_top_srcdir")
+        print("Extracted oomph_root = " + oomph_root)
+        return oomph_root
+
+    # If no makefile exists we are stuck:
+    except NoMakefileError as e:
+        print(str(e))
+        error("You must either run this script from within an oomph-lib",
+              "directory or specify the path to oomph_root using -C.")
+
 # Validation functions
 # ============================================================
 
@@ -361,16 +374,7 @@ def main():
     # Attempt to get the oomph-lib root dir from a Makefile in the current
     # directory.
     if args.oomph_root is None:
-        try:
-            print("Trying to extract the root dir from a Makefile in the pwd.")
-            args.oomph_root = variable_from_makefile("abs_top_srcdir")
-            print("Extracted oomph_root = " + args.oomph_root)
-
-        # If no makefile exists we are stuck:
-        except NoMakefileError as e:
-            print(str(e))
-            error("You must either run this script from within an oomph-lib",
-                  "directory or specify the path to oomph_root using -C.")
+        args.oomph_root = get_oomph_root()
 
 
     # If we requested just checking the validate.sh scripts instead of
