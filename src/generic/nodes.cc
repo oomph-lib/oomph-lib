@@ -2767,36 +2767,41 @@ void BoundaryNodeBase::make_nodes_periodic(
 void BoundaryNodeBase::make_node_periodic(Node* const &node_pt, 
                                           Node* const &copied_node_pt)
 {
- //Don't allow the copying of a copy or an orignal node
- if((node_pt->is_a_copy()) || (copied_node_pt->is_a_copy()))
+ // Don't allow this node to already be a copy (you should clear it's
+ // copied status first).
+ if(node_pt->is_a_copy())
   {
    std::ostringstream error_stream;
    error_stream << 
-    "The node you are trying to make periodic is already periodic\n"
-                << 
-    "Or you are trying to make a copy of another already periodic node\n";
-   error_stream << "Please copy the original data if you can\n";
-   error_stream << 
-    "If you wish to make doubly periodic nodes, e.g. in the corners of a cell\n";
-   error_stream << "You should use the function \n\n"
-                << "Node::make_periodic_nodes()\n";
+    "The node you are trying to make into a periodic copy is already a copy\n.";
    throw OomphLibError(error_stream.str(),
                        OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
   }
 
- //Set the copied node pointer
- Copied_node_pt = copied_node_pt;
+ // If the node to be copied from is a copy then copy it's "copied_node_pt"
+ // instead.
+ if(copied_node_pt->is_a_copy())
+  {
+   make_node_periodic(node_pt, copied_node_pt->copied_node_pt());
+  }
 
- //First copy the data values
- //Delete the storage allocated in the copy
- node_pt->delete_value_storage();
- //Now set the Value and Equation number pointers to be the same
- node_pt->Value = copied_node_pt->Value;
- node_pt->Eqn_number = copied_node_pt->Eqn_number;
+ // Otherwise just do it
+ else
+  {
+   //Set the copied node pointer
+   Copied_node_pt = copied_node_pt;
 
- //Inform the node that it has been copied
- copied_node_pt->add_copy(node_pt);
+   //First copy the data values
+   //Delete the storage allocated in the copy
+   node_pt->delete_value_storage();
+   //Now set the Value and Equation number pointers to be the same
+   node_pt->Value = copied_node_pt->Value;
+   node_pt->Eqn_number = copied_node_pt->Eqn_number;
+
+   //Inform the node that it has been copied
+   copied_node_pt->add_copy(node_pt);
+  }
 }
 
 //======================================================================
