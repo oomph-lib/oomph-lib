@@ -53,7 +53,7 @@ while getopts ":hrd:c:j:b:" opt; do
 done
 
 
-# If this is a raw build then clean up the helper scripts
+# If we are regenerating config files then clean up the helper scripts
 #-----------------------------------------------
 if $generate_config_files == "true"; then
 
@@ -116,9 +116,8 @@ echo
 # Set up configure options
 #--------------------------------------------------------
 
-# If we are doing a raw build or if ./configure does not yet exist then generate
-# the config files needed.
-if [ $generate_config_files -o ! -e ./configure ]; then
+# generate the config files if needed.
+if [[ $generate_config_files == "true" ]] || [ ! -e ./configure ]; then
     $oomph_root/bin/regenerate_config_files.sh $oomph_root
 fi
 
