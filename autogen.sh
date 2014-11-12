@@ -345,7 +345,6 @@ fi
 
 #Continue asking if the options are OK until approved
 accept_configure_options=0
-full_list="false"
 list_changed="false"
 while (test $accept_configure_options -eq 0)
 do
@@ -392,12 +391,11 @@ do
         # Kill stray symlinks
         cd config/configure_options
         find . -type l -exec rm {} \; 
-        if test  "$full_list" = "true"; then
-            cd private_configure_options
-            private_configure_option_files=`ls `
-            cd ..
-            for file in $private_configure_option_files; do ln -s private_configure_options/$file ; done
-        fi
+
+        cd private_configure_options
+        private_configure_option_files=`ls `
+        cd ..
+        for file in $private_configure_option_files; do ln -s private_configure_options/$file ; done
         cd $return_dir_before_link_in_private
 
         # Ooops: Non-portable gnu extension to ls
@@ -421,11 +419,6 @@ do
         echo
 
         echo "Enter the Desired configuration file [1-"$count"]"
-        if test $full_list = "false"; then
-            echo "Enter -1 to show an extended list of options"
-        else 
-            echo "Enter -1 to show a short list of options"
-        fi
         echo "Enter 0 to specify the options on the command line"
         #Read in the Desired File
         file_number=`OptionRead`
@@ -439,13 +432,6 @@ do
             echo $configure_options > config/configure_options/current
 
             #Otherwise copy the desired options file to config/configure_options/current
-        elif (test $file_number -eq -1); then
-            list_changed="true"
-            if test $full_list = "true"; then
-                full_list="false"
-            else
-                full_list="true"
-            fi
         else   
             #Reset the counter
             count=0
