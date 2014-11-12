@@ -211,33 +211,33 @@ class LinearAlgebraDistribution
   }
 
  /// \short access function for the num of local rows on this processor. If 
- /// no MPI the nrow is returned
+ /// no MPI then Nrow is returned.
  unsigned nrow_local() const
-  {
+ {
+  // return the nrow_local
+#ifdef OOMPH_HAS_MPI
+  if (Distributed)
+   {
+
 #ifdef PARANOID
-   if (Comm_pt == 0)
-    { 
-     throw OomphLibError(
-      "LinearAlgebraDistribution has not been built : Comm_pt == 0.",
-      "LinearAlgebraDistribution::nrow_local()",     
-      OOMPH_EXCEPTION_LOCATION);
-    }                 
+    if (Comm_pt == 0)
+     {
+      throw OomphLibError("LinearAlgebraDistribution has not been built : Comm_pt == 0.",
+                          "LinearAlgebraDistribution::nrow_local()",
+                          OOMPH_EXCEPTION_LOCATION);
+     }
 #endif
 
-   // return the nrow_local
-#ifdef OOMPH_HAS_MPI
-   if (Distributed)
-    {
-     return Nrow_local[Comm_pt->my_rank()];
-    }
-   else
-    {
-     return Nrow;
-    }
+    return Nrow_local[Comm_pt->my_rank()];
+   }
+  else
+   {
+    return Nrow;
+   }
 #else
-   return Nrow;
+  return Nrow;
 #endif
-  }
+ }
 
  /// \short access function for the num of local rows on this processor. If 
  /// no MPI the nrow is returned
@@ -278,33 +278,35 @@ class LinearAlgebraDistribution
 #endif
   }
 
- /// \short access function for the first row on this processor
+ /// \short access function for the first row on this processor. If not
+ /// distributed then this is just zero.
  unsigned first_row() const
-  {
+ {
+  // return the first row
+#ifdef OOMPH_HAS_MPI
+  if (Distributed)
+   {
+
 #ifdef PARANOID
-   if (Comm_pt == 0)
-    { 
-     throw OomphLibError
-      ("LinearAlgebraDistribution has not been built : Comm_pt == 0.",
-       OOMPH_CURRENT_FUNCTION,     
-       OOMPH_EXCEPTION_LOCATION);
-    }                                             
+    if (Comm_pt == 0)
+     { 
+      throw OomphLibError
+       ("LinearAlgebraDistribution has not been built : Comm_pt == 0.",
+        OOMPH_CURRENT_FUNCTION,     
+        OOMPH_EXCEPTION_LOCATION);
+     }                                             
 #endif 
 
-      // return the first row
-#ifdef OOMPH_HAS_MPI
-   if (Distributed)
-    {
-     return First_row[Comm_pt->my_rank()];
-    }
-   else
-    {
-     return 0;
-    }
+    return First_row[Comm_pt->my_rank()];
+   }
+  else
+   {
+    return 0;
+   }
 #else
-   return 0;
+  return 0;
 #endif
-  }
+ }
 
  /// \short access function for the first row on the p-th processor
  unsigned first_row(const unsigned& p) const
