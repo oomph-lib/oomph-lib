@@ -174,6 +174,8 @@ class Data
  /// a copy.
  virtual void reset_copied_pointers();
 
+  public:
+
  /// \short Helper function that should be overloaded derived classes
  /// that contain copies of data. The function must
  /// unset (NULL out) the internal pointers to the copied data.
@@ -181,8 +183,6 @@ class Data
  /// valid. The default implementation throws an error because Data cannot
  /// be a copy.
  virtual void clear_copied_pointers();
-
-  public:
  
  /// \short Static "Magic number" used in place of the equation number to 
  ///indicate that the value is pinned.
@@ -536,10 +536,10 @@ class Data
    /// \short Reset the pointers to the copied data.
    void reset_copied_pointers();
 
+    public:
+
    /// \short Clear the pointers to the copied data
    void clear_copied_pointers();
-
-    public:
    
    ///\short Constructor
    HijackedData(const unsigned &copied_value, Data* const &data_pt);
@@ -603,10 +603,10 @@ class Data
    /// \short Reset the pointers to the copied data.
    void reset_copied_pointers();
 
+    public:
+
    /// \short Clear the pointers to the copied data
    void clear_copied_pointers();
-
-    public:
    
    ///\short Constructor
    CopiedData(Data* const &data_pt);
@@ -2141,6 +2141,9 @@ class BoundaryNode: public NODE_TYPE, public BoundaryNodeBase
    }
  }
 
+public:
+
+
  /// \short Clear pointers to the copied data used when we have periodic nodes.
  /// The shallow (pointer) copy is turned into a deep copy by allocating
  /// new data and copying the actual values across.
@@ -2190,8 +2193,6 @@ class BoundaryNode: public NODE_TYPE, public BoundaryNodeBase
    Copied_node_pt=0;
   }
 
-
-  public:
  
  /// \short Default Constructor
  BoundaryNode() : NODE_TYPE(), BoundaryNodeBase() { }
