@@ -1054,6 +1054,7 @@ namespace MemoryUsage
 
  // Forward decl.
  class Problem;
+ template <class T> class DenseMatrix;
 
  /// Function base class for exact solutions/initial conditions/boundary
  /// conditions. This is needed so that we can have solutions that depend
@@ -1086,6 +1087,22 @@ namespace MemoryUsage
   /// Call the derivative function.
   virtual Vector<double> derivative(const double& t, const Vector<double>& x,
                                     const Vector<double>& u) const = 0;
+
+  /// The derivatives of the derivative function with respect to u (note
+  /// that this is not quite the jacobian of the residuals for an ODE
+  /// problem defined by this solution: you also need the time derivative
+  /// part there). Broken virtual function because not often needed.
+  virtual void jacobian(const double& t, const Vector<double>& x,
+                        const Vector<double>& u, 
+                        DenseMatrix<double>& jacobian) const
+  {
+   std::string err = "No Jacobian function implemented";
+   throw OomphLibError(err, OOMPH_CURRENT_FUNCTION,
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+
+  /// Is a jacobian function implemented?
+  virtual bool have_jacobian() const {return false;}
 
   /// Overload to grab data from the problem.
   virtual void initialise_from_problem(const Problem* problem_pt) {}
