@@ -8541,6 +8541,7 @@ void Problem::newton_solve()
  // Initialise timers
  double total_linear_solver_time=0.0;
  double t_start = TimingHelpers::timer();
+ Max_res.clear();
 
  //Find total number of dofs
  unsigned long n_dofs = ndof();
@@ -8663,6 +8664,7 @@ void Problem::newton_solve()
 
        //Get maximum residuals
        double maxres = dx.max();
+       Max_res.push_back(maxres);
 
        if (!Shut_up_in_newton_solve)
         {
@@ -8810,6 +8812,7 @@ void Problem::newton_solve()
 
      //Get the maximum residuals
      maxres = dx.max();
+     Max_res.push_back(maxres);
 
      if (!Shut_up_in_newton_solve)
       {

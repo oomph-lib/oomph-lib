@@ -599,6 +599,9 @@ namespace oomph
  /// iteration
  unsigned Nnewton_iter_taken;
 
+ /// Maximum residuals at start and after each newton iteration
+ Vector<double> Max_res;
+
  /// \short Maximum desired residual:
  /// if the maximum residual exceeds this value, the program will exit
  double Max_residuals;
