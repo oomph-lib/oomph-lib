@@ -229,11 +229,10 @@ class TimeStepper
  /// adaptive
  bool Adaptive_Flag;
 
- /// \short Bool to indicate if the timestepper is steady, i.e. its 
- /// time-derivatives evaluate to zero. This status may be
- /// achieved temporarily by calling make_steady(). It's
- /// reset to the appropriate default by the pure virtual function
- /// undo_make_steady() implemented in all specific TimeSteppers
+ /// \short Bool to indicate if the timestepper is steady, i.e. its
+ /// time-derivatives evaluate to zero. This status may be achieved
+ /// temporarily by calling make_steady(). It can be reset to the
+ /// appropriate default by the function undo_make_steady().
  bool Is_steady;
 
  /// \short Boolean to indicate if the timestepper will output warnings when
@@ -330,14 +329,13 @@ public:
  /// is trivially achieved by setting all the weights to zero
  void make_steady()
   {
-   //Find out dimensions of the weights matrix
-   unsigned n_rows = Weight.nrow();
-   unsigned n_tstorage = ntstorage();
-   //Loop over all the non-zeroth order entries and zero the weights
-   for(unsigned i=1;i<n_rows;i++)
-    {
-     for(unsigned j=0;j<n_tstorage;j++) {Weight(i,j) = 0.0;}
-    }
+   // Zero the matrix
+   Weight.initialise(0);
+
+   // Weight of current step in calculation of current step is always 1 in
+   // steady state. All other entries left at zero.
+   Weight(0, 0) = 1.0;
+
    // Update flag
    Is_steady=true;
   }
@@ -362,10 +360,13 @@ public:
  /// \short Get a (const) pointer to the weights.
  const DenseMatrix<double>* weights_pt() const {return &Weight;}
 
- /// \short Pure virtual function to reset the is_steady status
- /// of a specific TimeStepper to its default and to re-assign
- /// the weights.
- virtual void undo_make_steady()=0;
+ /// \short Reset the is_steady status of a specific TimeStepper to its
+ /// default and re-assign the weights.
+ virtual void undo_make_steady()
+  {
+   Is_steady=false;
+   set_weights();
+  }
 
  /// \short Return string that indicates the type of the timestepper 
  /// (e.g. "BDF", "Newmark", etc.)
@@ -574,14 +575,6 @@ public:
  /// doesn't make much sense, though
  unsigned order() {return 0;}
    
- /// \short Reset the is_steady status to its default (true) and
- /// re-compute the weights
- void undo_make_steady() 
-  {
-   Is_steady=true;
-   set_weights();
-  }
-
  /// \short  Initialise the time-history for the Data values,
  /// corresponding to an impulsive start.
  void assign_initial_values_impulsive(Data* const &data_pt)
@@ -823,16 +816,6 @@ class Newmark : public TimeStepper
                    OOMPH_EXCEPTION_LOCATION);
    return 2;
   }
-
-
- /// \short Reset the is_steady status to its default (false) and
- /// re-compute the weights
- void undo_make_steady() 
-  {
-   Is_steady=false;
-   set_weights();
-  }
-
 
  /// \short Initialise the time-history for the values,
  /// corresponding to an impulsive start.
@@ -1085,15 +1068,6 @@ class BDF : public TimeStepper
  ///Return the actual order of the scheme
  unsigned order() {return NSTEPS;}
    
-
- /// \short Reset the is_steady status to its default (false) and
- /// re-compute the weights
- void undo_make_steady() 
-  {
-   Is_steady=false;
-   set_weights();
-  }
-
  /// \short  Initialise the time-history for the Data values,
  /// corresponding to an impulsive start.
  void assign_initial_values_impulsive(Data* const &data_pt)

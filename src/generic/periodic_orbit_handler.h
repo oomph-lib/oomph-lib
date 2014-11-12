@@ -85,16 +85,6 @@ class PeriodicOrbitTimeDiscretisation : public TimeStepper
  ///Return the actual order of the scheme
  unsigned order() {return 1;}
    
-
- /// \short Reset the is_steady status to its default (false) and
- /// re-compute the weights
- void undo_make_steady() 
-  {
-   Is_steady=false;
-   set_weights();
-  }
-
-
  /// \short Broken initialisation the time-history for the Data values
  /// corresponding to an impulsive start.
  void assign_initial_values_impulsive(Data* const &data_pt)
