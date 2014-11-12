@@ -47,12 +47,12 @@ namespace Factories
     // derivative estimates in e.g. energy derivatives.
     return new Steady<3>;
    }
-  // else if(ts_name == "tr")
-  //  {
-  //   // 2 steps so that we have enough space to do reasonable time
-  //   // derivative estimates in e.g. energy derivatives.
-  //   return new TR(adaptive_flag);
-  //  }
+  else if(ts_name == "tr")
+   {
+    // 2 steps so that we have enough space to do reasonable time
+    // derivative estimates in e.g. energy derivatives.
+    return new TR(adaptive_flag);
+   }
   else
    {
     std::string err = "Unrecognised time stepper name";
@@ -115,7 +115,7 @@ int main(int argc, char *argv[])
  // Set all dts to the value given in args
  problem.initialise_dt(dt);
 
- // Set values useing the initial condition function
+ // Set values using the initial condition function
  problem.set_initial_condition(*problem.Exact_solution_pt);
 
  problem.initial_doc();

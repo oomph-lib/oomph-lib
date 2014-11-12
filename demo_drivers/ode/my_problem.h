@@ -1047,12 +1047,12 @@ throw OomphLibError("Not implemented (yet?).", OOMPH_CURRENT_FUNCTION,
   /// initial conditions.
   void MyProblem::actions_after_set_initial_condition()
   {
-    // // If using TR calculate initial derivative with these initial conditions
-    // TR* tr_pt = dynamic_cast<TR*>(time_stepper_pt());
-    // if(tr_pt != 0)
-    //   {
-    //     tr_pt->setup_initial_derivative(this);
-    //   }
+    // If using TR calculate initial derivative with these initial conditions
+    TR* tr_pt = dynamic_cast<TR*>(time_stepper_pt());
+    if(tr_pt != 0)
+      {
+        tr_pt->setup_initial_derivative(this);
+      }
   }
 
   void MyProblem::initial_doc()

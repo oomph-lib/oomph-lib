@@ -11,3 +11,6 @@ dir="Validation/imr"
 mkdir -p $dir
 ./basic_ode -ts imr -outdir $dir
 
+dir="Validation/tr"
+mkdir -p $dir
+./basic_ode -ts tr -outdir $dir
