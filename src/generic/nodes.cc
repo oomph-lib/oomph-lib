@@ -221,6 +221,12 @@ long Data::Is_unclassified=-10;
 //================================================================
 long Data::Is_constrained=-2;
 
+/// \short Static "Magic number" used in place of the equation number to
+/// indicate that the value is pinned, but only for the duration of a
+/// segregated solve.
+long Data::Is_segregated_solve_pinned=-3;
+
+
 //================================================================
 /// Default constructor.
 //================================================================
@@ -782,7 +788,8 @@ void Data::assign_eqn_numbers(unsigned long &global_number,
     {
      //Boundary conditions test: if it's not a pinned or constrained variable,
      //The assign a new global equation number
-     if((!is_pinned(i)) && (!is_constrained(i))) 
+     if((!is_pinned(i)) && (!is_constrained(i)) 
+        && (!is_segregated_solve_pinned(i)))
       {
        //Assign the equation number and increment global equation number
        Eqn_number[i] = global_number++;

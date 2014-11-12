@@ -188,6 +188,11 @@ class Data
  ///indicate that the value is pinned.
  static long Is_pinned;
 
+ /// \short Static "Magic number" used in place of the equation number to
+ ///indicate that the value is pinned, but only for the duration of a
+ ///segregated solve.
+ static long Is_segregated_solve_pinned;
+
  /// \short Static "Magic number" used in place of the equation number to 
  /// denote a value that hasn't been classified as pinned or free.
  static long Is_unclassified;
@@ -389,6 +394,13 @@ class Data
 
  /// \short Test whether the i-th variable is pinned (1: true; 0: false).
  bool is_pinned(const unsigned &i) {return (Eqn_number[i]==Is_pinned);}
+
+ /// \short Test whether the i-th variable is temporaily pinned for a
+ /// segregated solve.
+ bool is_segregated_solve_pinned(const unsigned &i) 
+ {
+  return Eqn_number[i] == Is_segregated_solve_pinned;
+ }
 
  /// \short Constrain the i-th stored variable when making hanging data
  /// If the data is already pinned leave it along, otherwise mark as
