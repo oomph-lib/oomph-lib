@@ -3249,6 +3249,67 @@ ContinuationStorageScheme Problem::Continuation_time_stepper;
    }
  }
 
+ /// Set history values of dofs
+ void Problem::set_dofs(const unsigned& t, DoubleVector& dofs)
+ {
+#ifdef OOMPH_HAS_MPI
+  throw OomphLibError("Not designed for MPI! Might work but not tested.",
+                      OOMPH_EXCEPTION_LOCATION,
+                      OOMPH_CURRENT_FUNCTION);
+#endif
+
+  // First deal with global data
+  unsigned Nglobal_data = nglobal_data();
+  for(unsigned i=0; i<Nglobal_data; i++)
+   {
+    for(unsigned j=0, nj=Global_data_pt[i]->nvalue(); j<nj; j++)
+     {
+      // For each data get the equation number and copy out the value.
+      int eqn_number = Global_data_pt[i]->eqn_number(j);
+      if(eqn_number >= 0)
+       {
+        Global_data_pt[i]->set_value(t, j, dofs[eqn_number]);
+       }
+     }
+   }
+
+  // Next element internal data
+  for(unsigned i=0, ni=mesh_pt()->nelement(); i<ni; i++)
+   {
+
+    GeneralisedElement* ele_pt = mesh_pt()->element_pt(i);
+    for(unsigned j=0, nj=ele_pt->ninternal_data(); j<nj; j++)
+     {
+
+      Data* d_pt = ele_pt->internal_data_pt(j);
+      for(unsigned k=0, nk=d_pt->nvalue(); k<nk; k++)
+       {
+
+        int eqn_number = d_pt->eqn_number(k);
+        if(eqn_number >= 0)
+         {
+          d_pt->set_value(t, k, dofs[eqn_number]);
+         }
+       }
+     }
+   }
+
+  // Now the nodes
+  for(unsigned i=0, ni=mesh_pt()->nnode(); i<ni; i++)
+   {
+    Node* node_pt = mesh_pt()->node_pt(i);
+    for(unsigned j=0, nj=node_pt->nvalue(); j<nj; j++)
+     {
+      // For each node get the equation number and copy out the value.
+      int eqn_number = node_pt->eqn_number(j);
+      if(eqn_number >= 0)
+       {
+        node_pt->set_value(t, j, dofs[eqn_number]);
+       }
+     }
+   }
+ }
+
 //===================================================================
 ///Function that adds the values to the dofs
 //==================================================================

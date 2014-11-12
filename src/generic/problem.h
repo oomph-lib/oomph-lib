@@ -1608,6 +1608,9 @@ namespace oomph
  /// \short Set the values of the dofs
  void set_dofs(const DoubleVector &dofs);
 
+ /// \short Set the history values of the dofs
+ void set_dofs(const unsigned& t, DoubleVector& dofs);
+
  /// \short Add lambda x incremenet_dofs[l] to the l-th dof
  void add_to_dofs(const double &lambda, const DoubleVector &increment_dofs);
 
