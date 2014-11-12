@@ -93,10 +93,10 @@ public:
  virtual void get_inverse_mass_matrix_times_residuals(DoubleVector &minv_res);
   
  /// Function that gets the values of the dofs in the object
- virtual void get_dofs(DoubleVector &dofs);
+ virtual void get_dofs(DoubleVector &dofs) const;
 
  /// Function that gets the history values of the dofs in the object
- virtual void get_dofs(const unsigned &t, DoubleVector &dofs);
+ virtual void get_dofs(const unsigned &t, DoubleVector &dofs) const;
 
  /// Function that sets the values of the dofs in the object
  virtual void set_dofs(const DoubleVector &dofs);

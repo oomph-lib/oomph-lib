@@ -2323,7 +2323,7 @@ ContinuationStorageScheme Problem::Continuation_time_stepper;
 /// Get the vector of dofs, i.e. a vector containing the current
 /// values of all unknowns.
 //================================================================
- void Problem::get_dofs(DoubleVector& dofs)
+ void Problem::get_dofs(DoubleVector& dofs) const
  {
   //Find number of dofs
   const unsigned long n_dof = ndof();
@@ -2339,7 +2339,7 @@ ContinuationStorageScheme Problem::Continuation_time_stepper;
  }
 
  /// Get history values of dofs
- void Problem::get_dofs(const unsigned& t, DoubleVector& dofs)
+ void Problem::get_dofs(const unsigned& t, DoubleVector& dofs) const
  {
 #ifdef OOMPH_HAS_MPI
   throw OomphLibError("Not designed for MPI!",

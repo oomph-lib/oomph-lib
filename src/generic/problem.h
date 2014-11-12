@@ -1591,10 +1591,10 @@ namespace oomph
 
  /// \short Return the vector of dofs, i.e. a vector containing the current
  /// values of all unknowns.
- void get_dofs(DoubleVector& dofs);
+ void get_dofs(DoubleVector& dofs) const;
 
  /// \short Return vector of the t'th history value of all dofs.
- void get_dofs(const unsigned& t, DoubleVector& dofs);
+ void get_dofs(const unsigned& t, DoubleVector& dofs) const;
 
  /// \short Set the values of the dofs
  void set_dofs(const DoubleVector &dofs);

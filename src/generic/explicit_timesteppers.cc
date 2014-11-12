@@ -61,7 +61,7 @@ namespace oomph
  //=======================================================================
  /// Function that should get the values of the dofs in the object
  //=======================================================================
- void ExplicitTimeSteppableObject::get_dofs(DoubleVector &dofs)
+ void ExplicitTimeSteppableObject::get_dofs(DoubleVector &dofs) const
  {
   std::ostringstream error_stream;
   error_stream 
@@ -81,7 +81,7 @@ namespace oomph
  /// Function that should get the values of the dofs in the object
  //=======================================================================
  void ExplicitTimeSteppableObject::get_dofs(const unsigned& t, 
-                                            DoubleVector &dofs)
+                                            DoubleVector &dofs) const
  {
   std::ostringstream error_stream;
   error_stream 
