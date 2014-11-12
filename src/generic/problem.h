@@ -1903,6 +1903,23 @@ namespace oomph
  /// Problem data to file for restart.
  virtual void dump(std::ofstream& dump_file) const;
 
+ 
+ /// \short Dump refinement pattern of all refineable meshes and all generic
+ /// Problem data to file for restart. 
+ void dump(const std::string &dump_file_name) const
+ {
+  std::ofstream dump_stream(dump_file_name.c_str());
+#ifdef PARANOID
+  if(!dump_stream.is_open())
+   {
+    std::string err = "Couldn't open file "+dump_file_name;
+    throw OomphLibError(err, OOMPH_EXCEPTION_LOCATION,
+                        OOMPH_CURRENT_FUNCTION);
+   }
+#endif
+  dump(dump_stream);
+ }
+
 #ifdef OOMPH_HAS_MPI
 
  /// \short Get pointers to all possible halo data indexed by global

@@ -808,6 +808,21 @@ public:
  /// Dump the data in the mesh into a file for restart
  virtual void dump(std::ofstream &dump_file) const;
 
+ /// Dump the data in the mesh into a file for restart
+ void dump(const std::string &dump_file_name) const
+ {
+  std::ofstream dump_stream(dump_file_name.c_str());
+#ifdef PARANOID
+  if(!dump_stream.is_open())
+   {
+    std::string err = "Couldn't open file "+dump_file_name;
+    throw OomphLibError(err, OOMPH_EXCEPTION_LOCATION,
+                        OOMPH_CURRENT_FUNCTION);
+   }
+#endif
+  dump(dump_stream);
+ }
+
  /// \short Read solution from restart file
  virtual void read(std::ifstream &restart_file);
 
