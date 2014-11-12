@@ -288,6 +288,53 @@ void RungeKutta<4>::timestep(ExplicitTimeSteppableObject* const &object_pt,
  object_pt->actions_after_explicit_timestep();
 }
 
+ //===================================================================
+ ///Explicit specialisation for second-order RK scheme
+ //==================================================================
+ template<>
+ void RungeKutta<2>::timestep(ExplicitTimeSteppableObject* const &object_pt,
+                              const double &dt)
+ {
+  object_pt->actions_before_explicit_timestep();
+
+  // Store the initial values
+  DoubleVector u;
+  object_pt->get_dofs(u);
+
+  // Stage 1
+  // ============================================================
+  object_pt->actions_before_explicit_stage();
+
+  // Get f1 (time derivative at t0, y0) and add to dofs
+  DoubleVector f1;
+  object_pt->get_inverse_mass_matrix_times_residuals(f1);
+  object_pt->add_to_dofs(dt, f1);
+
+  // Advance time to t1 = t0 + dt
+  object_pt->time() += dt;
+
+  object_pt->actions_after_explicit_stage();
+
+
+  // Stage 2
+  // ============================================================
+  object_pt->actions_before_explicit_stage();
+
+  // get f2 (with t=t1, y = y0 + h f0)
+  DoubleVector f2;
+  object_pt->get_inverse_mass_matrix_times_residuals(f2);
+
+  // Final answer is starting dofs + h/2 * (f1 + f2)
+  object_pt->set_dofs(u);
+  object_pt->add_to_dofs(0.5*dt, f1);
+  object_pt->add_to_dofs(0.5*dt, f2);
+
+  object_pt->actions_after_explicit_stage();
+
+  // Done, do actions
+  object_pt->actions_after_explicit_timestep();
+ }
+
 
 //=================================================================
 //General constructor for LowOrder RK schemes
