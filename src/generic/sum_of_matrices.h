@@ -345,8 +345,8 @@ namespace oomph
 #ifdef PARANOID
     if(Main_matrix_pt==0)
      {
-      OomphLibError("Main_matrix_pt not set","SumOfMatrices::nrow()",
-                    OOMPH_EXCEPTION_LOCATION);
+      throw OomphLibError("Main_matrix_pt not set",
+                          OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
      }
 #endif
     return Main_matrix_pt->nrow();
@@ -359,8 +359,8 @@ namespace oomph
 #ifdef PARANOID
     if(Main_matrix_pt==0)
      {
-      OomphLibError("Main_matrix_pt not set","SumOfMatrices::nrow()",
-                    OOMPH_EXCEPTION_LOCATION);
+      throw OomphLibError("Main_matrix_pt not set",
+                          OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
      }
 #endif
     return Main_matrix_pt->ncol();
@@ -378,8 +378,7 @@ namespace oomph
   double& entry(const unsigned long& i, const unsigned long& j) const
    {
     throw OomphLibError("Broken write to entry: it does not make sense to write to a sum, you must write to one of the component matrices.",
-                        OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
+                        OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
    }
 
   /// Access function to get the total value of entries in position
@@ -413,8 +412,7 @@ namespace oomph
     std::ostringstream error_msg;
     error_msg << "Function not yet implemented.";
     throw OomphLibError(error_msg.str(),
-OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
+                        OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
 
     // Possible implementations (not really thought through):
     // - just call multiply transpose on submatrices?
