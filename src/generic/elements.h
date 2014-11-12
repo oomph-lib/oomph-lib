@@ -1324,8 +1324,7 @@ class FiniteElement : public virtual GeneralisedElement, public GeomObject
  /// via local coordinates
  static const double Node_location_tolerance;
  
-
-  protected:
+public:
 
  /// \short Set the dimension of the element and initially set
  /// the dimension of the nodes to be the same as the dimension of the
@@ -1333,16 +1332,12 @@ class FiniteElement : public virtual GeneralisedElement, public GeomObject
  void set_dimension(const unsigned &dim)
   {Elemental_dimension = dim; Nodal_dimension = dim;}
  
-  public:
-
  /// \short Set the dimension of the nodes in the element. This will
  /// typically only be required when constructing FaceElements or
  /// in beam and shell type elements where a lower dimensional surface
  /// is embedded in a higher dimensional space.
  void set_nodal_dimension(const unsigned &nodal_dim)
   {Nodal_dimension = nodal_dim;}
-
-  protected:
  
  /// \short Set the number of types required to interpolate the coordinate
  void set_nnodal_position_type(const unsigned &nposition_type)
@@ -1373,8 +1368,6 @@ class FiniteElement : public virtual GeneralisedElement, public GeomObject
    //Initialise all the pointers to NULL
    for(unsigned i=0;i<n;i++) {Node_pt[i] = 0;}
   }
-
-  public:
 
  /// \short Return the local equation number corresponding to the i-th
  /// value at the n-th local node.
