@@ -36,8 +36,6 @@
 #endif
 
 #include "matrices.h"
-#include "problem.h"
-#include <algorithm>
 
 
 
@@ -46,6 +44,9 @@ namespace oomph
 
  // Forward declaration of block preconditioners (for turn into subs.)
  template<typename MATRIX> class BlockPreconditioner;
+
+ // Forward declaration of problem class (for obsolete setup function)
+ class Problem;
 
  //=============================================================================
  /// \short Preconditioner base class. Gives an interface to call all other

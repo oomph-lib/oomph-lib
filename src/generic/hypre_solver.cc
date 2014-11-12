@@ -26,6 +26,9 @@
 //LIC// 
 //LIC//====================================================================
 #include "hypre_solver.h"
+
+// For problem->get_jacobian(...)
+#include "problem.h"
  
 
 namespace oomph
