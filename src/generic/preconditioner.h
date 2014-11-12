@@ -83,11 +83,13 @@ namespace oomph
 
   /// \short Setup the preconditioner: store the matrix pointer and the
   /// communicator pointer then call preconditioner specific setup()
-  /// function. If not in parallel then it is safe to use the default null
-  /// communicator pointer.
+  /// function.
   void setup(DoubleMatrixBase* matrix_pt)
   {
+   // Store matrix pointer
    set_matrix_pt(matrix_pt);
+
+   // Extract and store communicator pointer
    DistributableLinearAlgebraObject* dist_obj_pt=
     dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt);
    if (dist_obj_pt!=0)
