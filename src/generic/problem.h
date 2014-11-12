@@ -232,7 +232,9 @@ namespace oomph
  /// stored in the elements
  bool Store_local_dof_pt_in_elements;
 
-
+ /// \short Use values from the time stepper predictor as an initial guess
+ bool Use_predictor_values_as_initial_guess;
+ 
   protected:
 
  ///\short Vector of pointers to copies of the problem used in adaptive
@@ -1816,6 +1818,11 @@ namespace oomph
  bool jacobian_reuse_is_enabled()
   {
    return Jacobian_reuse_is_enabled;
+  }
+
+ bool& use_predictor_values_as_initial_guess()
+  {
+   return Use_predictor_values_as_initial_guess;
   }
 
  /// \short Use Newton method to solve the problem

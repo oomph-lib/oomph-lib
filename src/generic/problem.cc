@@ -130,6 +130,7 @@ ContinuationStorageScheme Problem::Continuation_time_stepper;
   Always_take_one_newton_step(false),
   Timestep_reduction_factor_after_nonconvergence(0.5)
  {
+  Use_predictor_values_as_initial_guess = false;
 
   /// Setup terminate helper
   TerminateHelper::setup();
@@ -11243,6 +11244,44 @@ void Problem::calculate_predictions()
      Global_data_pt[iglobal]->time_stepper_pt()->
       calculate_predicted_values(Global_data_pt[iglobal]);
     }
+  }
+
+ // If requested then copy the predicted value into the current time data
+ // slots, ready for the newton solver to use as an initial guess.
+ if(use_predictor_values_as_initial_guess())
+  {
+
+   // Not sure I know enough about distributed problems to implement
+   // this. Probably you just need to loop over ndof_local or something,
+   // but I can't really test it...
+#ifdef OOMPH_HAS_MPI
+   if(distributed()) 
+    {
+     throw OomphLibError("Not yet implemented for distributed problems",
+                         OOMPH_EXCEPTION_LOCATION, OOMPH_CURRENT_FUNCTION);
+    }
+#endif
+
+   // With multiple time steppers this is much more complex becuase you
+   // need to check the time stepper for each data to get the
+   // predictor_storage_index(). Do-able if you need it though.
+   if(Time_stepper_pt.size() != 1)
+    {
+     std::string err = "Not implemented for multiple time steppers";
+     throw OomphLibError(err, OOMPH_EXCEPTION_LOCATION,
+                         OOMPH_CURRENT_FUNCTION);
+    }
+
+   // Get predicted values
+   DoubleVector predicted_dofs;
+   get_dofs(time_stepper_pt()->predictor_storage_index(), predicted_dofs);
+
+   // Update dofs at current step
+   for(unsigned i=0; i<ndof(); i++)
+    {
+     dof(i) = predicted_dofs[i];
+    }
+   
   }
 }
 

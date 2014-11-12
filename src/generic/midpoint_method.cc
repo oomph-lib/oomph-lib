@@ -128,6 +128,28 @@ namespace oomph
 
    // Set the weights again because we just changed the step size
    set_weights();
+
+
+   if(problem_pt->use_predictor_values_as_initial_guess())
+    {
+     // Shift the initial guess to the midpoint so that it is an initial
+     // guess for the newton step that we actually take.
+
+     // ??ds optimisation possiblity: here we update all values three time
+     // (initial prediction, copy into initial guess, interpolate to
+     // midpoint), could probably avoid this with more fancy code if
+     // needed.
+
+     // Get dofs at previous time step
+     DoubleVector dof_n;
+     problem_pt->get_dofs(1, dof_n);
+
+     // Update dofs at current step to be the average of current and previous
+     for(unsigned i=0; i<problem_pt->ndof(); i++)
+      {
+       problem_pt->dof(i) = (problem_pt->dof(i) + dof_n[i])/2;
+      }
+    }
   }
 
  /// Take problem from t={n+1/2} to t=n+1 by algebraic update and restore
