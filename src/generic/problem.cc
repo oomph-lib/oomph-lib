@@ -10632,8 +10632,6 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
  unsigned ADAPTIVE_FLAG=0;
  //The value of the actual timestep, by default the same as desired timestep
  double dt_actual=dt_desired;
- //Timestep rescaling factor, 1.0 by default
- double dt_rescaling_factor = 1.0;
 
  //Determine the number of timesteppers
  unsigned n_time_steppers = ntime_stepper();
@@ -10650,106 +10648,71 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
  //Shift the time_values according to the control flag
  if(shift_values) {shift_time_values();}
 
- //This loop surrounds the adaptive time-stepping critera
+ //This loop surrounds the adaptive time-stepping and will not be broken
+ //until a timestep is accepted
  do
   {
-   //This loop surrounds the Newton solver and will not
-   //be broken until a timestep is accepted
-   do
+   // Initially we assume that this step will succeed and that this dt
+   // value is ok.
+   REJECT_TIMESTEP=0;
+   double dt_rescaling_factor = 1.0;
+
+   //Set the new time and value of dt
+   time_pt()->time() += dt_actual;
+   time_pt()->dt() = dt_actual;
+
+   //Loop over all timesteppers and set the weights and predictor weights
+   for(unsigned i=0;i<n_time_steppers;i++)
     {
-     //Initially the timestep is presumed to be accepted
-     REJECT_TIMESTEP=0;
+     //If the time_stepper is non-adaptive, this will be zero
+     time_stepper_pt(i)->set_predictor_weights();
+     time_stepper_pt(i)->set_weights();
+    }
 
-     //Set the new time and value of dt
-     time_pt()->time() += dt_actual;
-     time_pt()->dt() = dt_actual;
+   //Now calculate the predicted values for the all data and all positions
+   calculate_predictions();
 
-     //Loop over all timesteppers and set the weights and predictor weights
-     for(unsigned i=0;i<n_time_steppers;i++)
+   //Do any updates/boundary conditions changes here
+   actions_before_implicit_timestep();
+
+   //Attempt to solve the non-linear system
+   try
+    {
+     //Solve the non-linear problem at this timestep
+     newton_solve();
+    }
+   //Catch any exceptions thrown
+   catch(NewtonSolverError &error)
+    {
+     //If it's a solver error then die
+     if(error.linear_solver_error)
       {
-       //If the time_stepper is non-adaptive, this will be zero
-       time_stepper_pt(i)->set_predictor_weights();
-       time_stepper_pt(i)->set_weights();
-      }
+       std::string error_message =
+        "USER-DEFINED ERROR IN NEWTON SOLVER\n";
+       error_message +=  "ERROR IN THE LINEAR SOLVER\n";
 
-     //Now calculate the predicted values for the all data and all positions
-     calculate_predictions();
-
-     //Do any updates/boundary conditions changes here
-     actions_before_implicit_timestep();
-
-     //Attempt to solver the non-linear system
-     try
-      {
-       //Solve the non-linear problem at this timestep
-       newton_solve();
-      }
-     //Catch any exceptions thrown
-     catch(NewtonSolverError &error)
-      {
-       //If it's a solver error then die
-       if(error.linear_solver_error)
-        {
-         std::string error_message =
-          "USER-DEFINED ERROR IN NEWTON SOLVER\n";
-         error_message +=  "ERROR IN THE LINEAR SOLVER\n";
-
-         //Die
-         throw OomphLibError(error_message,
-                             OOMPH_CURRENT_FUNCTION,
-                             OOMPH_EXCEPTION_LOCATION);
-        }
-       else
-        {
-         oomph_info
-          << "TIMESTEP REJECTED -- HALVING TIMESTEP AND TRYING AGAIN"
-          << std::endl;
-         //Reject the timestep, if we have an exception
-         REJECT_TIMESTEP=1;
-         // Essentially all I do here is adjust (by default, half) 
-         // the next timestep
-         dt_actual *= Timestep_reduction_factor_after_nonconvergence; //0.5;
-         //Reset the time
-         time_pt()->time() = time_current;
-         //Reload the dofs
-         for(unsigned i=0;i<n_dof_local;i++) dof(i) = dofs_current[i];
-
-#ifdef OOMPH_HAS_MPI
-         // Synchronise the solution on different processors (on each submesh)
-       this->synchronise_all_dofs();
-#endif
-         //Call all "after" actions, e.g. to handle mesh updates
-         actions_after_newton_step();
-         actions_before_newton_convergence_check();
-         actions_after_newton_solve();
-         actions_after_implicit_timestep();
-         //Skip to the next iteration
-         continue;
-        }
-      }
-
-     //Break out of the loop if the timestep has become too small
-     if(dt_actual < Minimum_dt)
-      {
-       std::ostringstream error_message;
-       error_message
-        << "TIMESTEP (" << dt_actual
-        << ") HAS FALLEN BELOW SPECIFIED THRESHOLD: Problem::Minimum_dt="
-        << Minimum_dt << std::endl;
-
-       throw OomphLibError(error_message.str(),
+       //Die
+       throw OomphLibError(error_message,
                            OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
-
-     //Update anything that needs updating after the timestep
-     actions_after_implicit_timestep();
+     else
+      {
+       //Reject the timestep, if we have an exception
+       oomph_info << "TIMESTEP REJECTED" << std::endl;
+       REJECT_TIMESTEP=1;
+         
+       // Half the time step
+       dt_rescaling_factor = Timestep_reduction_factor_after_nonconvergence;
+      }
     }
-   //Keep looping until we accept the timestep
-   while(REJECT_TIMESTEP);
 
-   //If we have an adapative timestepper
-   if(ADAPTIVE_FLAG)
+   //Update anything that needs updating after the timestep
+   actions_after_implicit_timestep();
+
+   // If we have an adapative timestepper (and we haven't already failed)
+   // then calculate the error estimate and rescaling factor.
+   if(ADAPTIVE_FLAG && !REJECT_TIMESTEP)
     {
      //Once timestep has been accepted can do fancy error processing
      //Set the error weights
@@ -10759,99 +10722,121 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
       }
 
      // Get a global error norm to use in adaptivity (as specified by the
-     // problem sub-class writer).
-     double error = global_temporal_error_norm();
-
-     // Prevent a divide by zero if the solution gives very close to zero
-     // error.
-     if(std::abs(error < 1e-12)) error = 1e-12;
+     // problem sub-class writer). Prevent a divide by zero if the solution
+     // gives very close to zero error. Error norm should never be negative
+     // but use absolute value just in case.
+     double error = std::max(std::abs(global_temporal_error_norm()),
+                             1e-12);
 
      //Calculate the scaling  factor
-     dt_rescaling_factor = pow((epsilon/error),
-                (1.0/(1.0+time_stepper_pt()->order())));
+     dt_rescaling_factor = 
+      std::pow((epsilon/error), (1.0/(1.0+time_stepper_pt()->order())));
 
      oomph_info << "Timestep scaling factor is  " << dt_rescaling_factor << std::endl;
      oomph_info << "Estimated timestepping error is " << error << std::endl;
-
-     // Impose lower bound on timestep (i.e. accept timestep
-     // even though tolerance isn't satisfied)
-     if(dt_rescaling_factor <= DTSF_min_decrease)
-      {
-       double new_timestep=dt_actual*dt_rescaling_factor;
-
-       if (new_timestep<Minimum_dt_but_still_proceed)
-        {
-         oomph_info
-          << "Warning: Adaptation of timestep to ensure satisfaction\n"
-          << "         of error bounds during adaptive timestepping\n"
-          << "         would lower dt below \n"
-          << "         Problem::Minimum_dt_but_still_proceed="
-          <<           Minimum_dt_but_still_proceed << "\n"
-          << "         ---> We're continuing with present timestep.\n";
-         dt_rescaling_factor=1.0;
-        }
-      }
-
-     //Now decide what to do based upon dt_rescaling_factor
-     //If it's small reject the timestep
-     if(dt_rescaling_factor <= DTSF_min_decrease)
-      {
-       oomph_info << "TIMESTEP REJECTED" << std::endl;
-       //Reject the timestep
-       REJECT_TIMESTEP=1;
-       //Modify the actual timestep
-       dt_actual *= dt_rescaling_factor;
-       //Reset the time
-       time_pt()->time() = time_current;
-       //Reload the dofs
-       for(unsigned i=0;i<n_dof_local;i++) dof(i) = dofs_current[i];
-
-#ifdef OOMPH_HAS_MPI
-       // Synchronise the solution on different processors (on each submesh)
-       this->synchronise_all_dofs();
-#endif
-
-       //Call all "after" actions, e.g. to handle mesh updates
-       actions_after_newton_step();
-       actions_before_newton_convergence_check();
-       actions_after_newton_solve();
-       actions_after_implicit_timestep();
-
-       continue;
-      }
-     //If it's large change the timestep
-     if(dt_rescaling_factor >= 1.0)
-      {
-       //Restrict the increase
-       if(dt_rescaling_factor > DTSF_max_increase)
-        {
-         dt_rescaling_factor = DTSF_max_increase;
-         oomph_info << "TIMESTEP SCALING FACTOR LIMITED TO "
-                    << DTSF_max_increase << std::endl;
-        }
-      }
-
     } //End of if adaptive flag
 
+
+
+   // Calculate the next time step size and check it's ok
+   // ============================================================
+   
+   // Calculate the possible next time step, if no error conditions
+   // trigger.
+   double new_dt_candidate = dt_rescaling_factor * dt_actual;
+
+   // Check that the scaling factor is within the allowed range
+   if(dt_rescaling_factor > DTSF_max_increase)
+    {
+     oomph_info << "Tried to increase dt by the ratio " << dt_rescaling_factor
+                << " which is above the maximum (" << DTSF_max_increase
+                << "). Attempting to increase by the maximum ratio instead.";
+     new_dt_candidate = DTSF_max_increase * dt_actual;
+    }
+   // If we have already rejected the timestep then don't do this check
+   // because DTSF will definitely be too small.
+   else if((!REJECT_TIMESTEP) && (dt_rescaling_factor <= DTSF_min_decrease))
+    {
+     // Handle this special case where we want to continue anyway (usually
+     // Minimum_dt_but_still_proceed = -1 so this has no effect).
+     if(new_dt_candidate < Minimum_dt_but_still_proceed)
+      {
+       oomph_info
+        << "Warning: Adaptation of timestep to ensure satisfaction\n"
+        << "         of error bounds during adaptive timestepping\n"
+        << "         would lower dt below \n"
+        << "         Problem::Minimum_dt_but_still_proceed="
+        <<           Minimum_dt_but_still_proceed << "\n"
+        << "         ---> We're continuing with present timestep.\n";
+       dt_rescaling_factor=1.0;
+       // ??ds shouldn't we set new_dt_candidate =
+       // Minimum_dt_but_still_proceed here, rather than not changing dt at
+       // all?
+      }
+     else
+      {
+       // Otherwise reject
+       oomph_info << "Timestep would decrease by " << dt_rescaling_factor
+                  << " which is less than the minimum scaling factor " 
+                  << DTSF_min_decrease << std::endl
+                  << "TIMESTEP REJECTED" << std::endl;
+       REJECT_TIMESTEP=1;
+      }
+
+    }
+
+   // Now check that the new dt is within the allowed range
+   if(new_dt_candidate > Maximum_dt)
+    {
+     oomph_info << "Tried to increase dt to " << new_dt_candidate
+                << " which is above the maximum (" << Maximum_dt
+                << "). I increased it to the maximum value instead.";
+     dt_actual = Maximum_dt;
+    }
+   else if(new_dt_candidate < Minimum_dt)
+    {
+     std::ostringstream err;
+     err << "Tried to reduce dt to " << new_dt_candidate 
+         << " which is less than the minimum dt (" << Minimum_dt
+         << ")." << std::endl;
+     throw OomphLibError(err.str(), OOMPH_EXCEPTION_LOCATION,
+                         OOMPH_CURRENT_FUNCTION);
+    }
+   else
+    {
+     dt_actual = new_dt_candidate;
+    }
+
+
+   // If we are rejecting this attempt then revert the dofs etc.
+   if(REJECT_TIMESTEP)
+    {
+     //Reset the time
+     time_pt()->time() = time_current;
+
+     //Reload the dofs
+     unsigned ni = dofs_current.size();
+     for(unsigned i=0; i<ni; i++) {dof(i) = dofs_current[i];}
+
+#ifdef OOMPH_HAS_MPI
+     // Synchronise the solution on different processors (on each submesh)
+     this->synchronise_all_dofs();
+#endif
+
+     //Call all "after" actions, e.g. to handle mesh updates
+     actions_after_newton_step();
+     actions_before_newton_convergence_check();
+     actions_after_newton_solve();
+     actions_after_implicit_timestep();
+    }
+
   }
- //Keep this loop going, again until we accept the timestep
+ //Keep this loop going until we accept the timestep
  while(REJECT_TIMESTEP);
 
-
- //Make sure timestep doesn't get too large
- if ((dt_actual*dt_rescaling_factor) > Maximum_dt)
-  {
-   oomph_info << "TIMESTEP SCALING WOULD INCREASE TIMESTEP "
-              << "ABOVE SPECIFIED THRESHOLD: Problem::Maximum_dt="
-              <<  Maximum_dt << std::endl;
-   dt_rescaling_factor =  Maximum_dt/dt_actual;
-   oomph_info << "ADJUSTING TIMESTEP SCALING FACTOR TO " << dt_rescaling_factor << std::endl;
-  }
-
-
- //Once the timestep has been accepted, return the actual timestep taken,
- //suitably scaled, to be used the next time
- return (dt_actual*dt_rescaling_factor);
+ // Once the timestep has been accepted, return the time step that should be
+ // used next time.
+ return dt_actual;
 }
 
 
