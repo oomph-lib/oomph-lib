@@ -11,21 +11,6 @@ namespace oomph
  namespace InterpolatorHelpers
  {
 
-  /// Determine if an element contains any hanging nodes
-  inline bool has_hanging_nodes(const FiniteElement* ele_pt)
-  {
-   for(unsigned nd=0, nnode=ele_pt->nnode(); nd<nnode; nd++)
-    {
-     Node* nd_pt = ele_pt->node_pt(nd);
-     if(nd_pt->is_hanging())
-      {
-       return true; 
-      }
-    }
-   return false;
-  }
-
-
   /// If paranoid check that timesteppers in all nodes in the element are
   /// the same.
   inline void check_timesteppers_same(const FiniteElement* ele_pt)
@@ -263,7 +248,7 @@ namespace oomph
    Dtestdx = Dpsidx;
 
    // Find out if any nodes in this element are hanging
-   Has_hanging_nodes = InterpolatorHelpers::has_hanging_nodes(This_element);
+   Has_hanging_nodes = This_element->has_hanging_nodes();
 
    // If paranoid check that all nodes have the same nvalues.
    InterpolatorHelpers::check_nvalues_in_element_same(This_element);
@@ -745,7 +730,7 @@ public:
   Test = Psi;
 
   // Find out if any nodes in this element are hanging
-  Has_hanging_nodes = InterpolatorHelpers::has_hanging_nodes(This_element);
+  Has_hanging_nodes = This_element->has_hanging_nodes();
 
   // If paranoid check that all nodes have the same nvalues.
   InterpolatorHelpers::check_nvalues_in_element_same(This_element);

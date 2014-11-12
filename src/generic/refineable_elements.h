@@ -430,19 +430,6 @@ class RefineableElement : public virtual FiniteElement
  /// Must be overloaded for each different geometric element
  virtual void check_integrity(double &max_error)=0;
 
-
- /// \short Return boolean to indicate if any of the element's nodes
- /// are geometrically hanging
- bool has_hanging_nodes()
- {
-  unsigned nnod=nnode();
-  for (unsigned j=0;j<nnod;j++)
-   {
-    if (node_pt(j)->is_hanging()) return true;
-   }
-  return false;
- }
-
  /// \short Max. allowed discrepancy in element integrity check
  static double& max_integrity_tolerance()
   { return Max_integrity_tolerance;}

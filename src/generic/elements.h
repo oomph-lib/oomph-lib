@@ -2311,6 +2311,21 @@ public:
  /// the nodes. For Lagrange elements it is 1.
  unsigned nnodal_position_type() const {return Nnodal_position_type;}
 
+ /// \short Return boolean to indicate if any of the element's nodes
+ /// are geometrically hanging.
+ bool has_hanging_nodes() const
+ {
+  unsigned nnod=nnode();
+  for(unsigned j=0;j<nnod;j++)
+   {
+    if(node_pt(j)->is_hanging())
+     {
+      return true;
+     }
+   }
+  return false;
+ }
+
  /// Return the required Eulerian dimension of the nodes in this element
  unsigned nodal_dimension() const {return Nodal_dimension;}
 
@@ -4530,20 +4545,6 @@ class FaceElement: public virtual FiniteElement
 
  /// Output boundary coordinate zeta
  void output_zeta(std::ostream &outfile, const unsigned& nplot);
-
- /// \short Return boolean to indicate if any of the FaceElement's nodes
- /// are geometrically hanging (Same as version in RefineableElement
- /// but we can't inherit because FaceElements don't know if they
- /// are refineable (they're not).
- bool has_hanging_nodes()
- {
-  unsigned nnod=nnode();
-  for (unsigned j=0;j<nnod;j++)
-   {
-    if (node_pt(j)->is_hanging()) return true;
-   }
-  return false;
- }
  
 };
 
