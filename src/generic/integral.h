@@ -82,6 +82,14 @@ class Integral
  /// Return local coordinate s[j]  of i-th integration point.
  virtual double knot(const unsigned &i, const unsigned &j) const=0;
 
+ /// Return local coordinates of i-th intergration point.
+ virtual Vector<double> knot(const unsigned &i) const
+ {
+  throw OomphLibError("Not implemented for this integration scheme (yet?).",
+                      OOMPH_CURRENT_FUNCTION, 
+                      OOMPH_EXCEPTION_LOCATION);
+ }
+
  /// Return weight of i-th integration point.
  virtual double weight(const unsigned &i) const=0;
 
