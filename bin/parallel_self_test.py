@@ -306,6 +306,10 @@ def main():
                         help='Check all the validate.sh scripts using a simple '
                         + 'regex to make sure that they set an exit status.')
 
+    parser.add_argument('--serial-mode', action='store_true',
+                        help='Run the script without parallelism (for debugging'
+                        +' purposes).')
+
     args = parser.parse_args()
 
     if args.no_colour:
@@ -415,11 +419,14 @@ def main():
     # Construct final function to run on each directory
     f = pt(dispatch_dir, features=oomph_features)
 
-    # Run it in parallel.
-    Pool(processes=int(args.ncores)).map(f, validation_dirs, 1)
-    # Set chunksize to 1 (i.e. each "make check" call is in its own "chunk
-    # of work") to avoid the situation where multiple slow "make check"s
-    # end up in the same chunk and we have to wait ages for it to finish.
+    if args.serial_mode:
+        list(map(f, validation_dirs)) # list forces evaluation of the map
+    else:
+        # Run it in parallel.
+        Pool(processes=int(args.ncores)).map(f, validation_dirs, 1)
+        # Set chunksize to 1 (i.e. each "make check" call is in its own "chunk
+        # of work") to avoid the situation where multiple slow "make check"s
+        # end up in the same chunk and we have to wait ages for it to finish.
 
     # Done!
     return 0
