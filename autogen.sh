@@ -64,11 +64,11 @@ YesNoRead()
     return $bool
 }
 
-#This little function takes the input, removes anything following a #
-#deletes blanks lines and then replaces all newlines by spaces
+# This little function takes the input, removes anything following a #
+# deletes blanks lines and then replaces all newlines by spaces
 ProcessOptionsFile()
 {
-echo `cat $1 | sed 's/#.*$//' | sed '/^$/d' | tr '\012' ' '`
+    sed < $1 -e 's/#.*$//' -e '/^[ \t]*$/d' -e 's/\n/ /g'
 }
 
 
