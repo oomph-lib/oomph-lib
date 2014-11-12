@@ -4,7 +4,7 @@
 # Read an option using readline
 OptionRead()
 {
-    read Opt
+    read -e Opt
     echo $Opt
 }
 
