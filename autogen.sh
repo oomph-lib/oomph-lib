@@ -289,39 +289,6 @@ echo "============================================================= "
 echo " "
 
 
-# Wipe previous builds
-#---------------------
-if (test -d  $build_dir); then 
-    echo " "
-    echo "Note: Build directory " $build_dir " exists."
-    echo " "
-    OptionPrompt "Do you want to wipe it [y/n -- default: n]"
-    reply=`OptionRead`
-    if test "$reply" = "y" -o "$reply" = "Y" ; then 
-
-       echo " "
-       echo "Sorry to be over-cautious here, but we'd better double-check"
-       echo "before we delete some of your precious files..."
-       echo " "
-       echo "The contents of " $build_dir " are:"
-       echo " "
-       ls -l  $build_dir
-       echo " "
-       echo "What you should see above are the include and lib directories, "
-       echo "nothing else! "
-       echo " "
-       OptionPrompt "Are you still sure you want to wipe it [y/n -- default: n]"
-       reply2=`OptionRead`
-       if test "$reply2" = "y" -o "$reply2" = "Y" ; then 
-          echo " "
-          echo "Wiping it..."
-          rm -f -r $build_dir
-          echo "Done"
-       fi
-    fi
-fi
-
-
 # Create configure options file
 #------------------------------
 
