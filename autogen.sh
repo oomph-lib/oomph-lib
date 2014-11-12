@@ -79,14 +79,14 @@ fi
 # Load helper functions
 source "${oomph_root}/bin/autogen_helpers.sh"
 
-# Convert to absolute paths
+# Convert some things to absolute paths
 build_dir="$(AbsPath $build_dir)"
 configure_options_file="$(AbsPath $configure_options_file)"
 
-# Now move to the oomph lib directory
+# Now switch to the oomph lib directory
 cd "$oomph_root"
 
-# Print information about options
+# Print information about command line options selected
 echo
 echo "Using oomph lib in directory \"$PWD\""
 echo "Using configure options file \"$configure_options_file\""
@@ -134,7 +134,7 @@ fi
 
 
 
-# Autodetect folders in user_drivers
+# Autodetection of folders in user_drivers
 #-----------------------------------
 
 # Backup old file (use -f so it doesn't give an error if the file doesn't exist)
@@ -224,14 +224,14 @@ echo " "
 
 
 # Make all libraries
-echo " "
+echo
 echo "Running `make $make_options` in $PWD"
 make $make_options
 echo "done"
 
 
 # Install the libraries (in build directory specified above)
-echo " "
-echo "running `make $make_options install` in $PWD"
+# echo
+# echo "running `make $make_options install` in $PWD"
 make $make_options install
 echo "done"
