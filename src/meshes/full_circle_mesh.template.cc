@@ -46,6 +46,16 @@ FullCircleMesh<ELEMENT>::FullCircleMesh(GeomObject* area_pt,
                             TimeStepper* time_stepper_pt) :  
  Area_pt(area_pt)
 {
+
+// Check that the vectors are the correct sizes.
+#ifdef PARANOID
+ if(radius_box.size() != 4 || theta_positions.size() != 4)
+  {
+   std::string err = "This mesh is hard coded to only work for the case when there are 5 elements: the central square and 4 surrounding elements, but you gave vectors inconsistent with this.";
+   throw OomphLibError(err, OOMPH_CURRENT_FUNCTION,
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
  
  // Mesh can only be built with 2D Qelements.
  MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(2);
