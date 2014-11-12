@@ -724,7 +724,7 @@ public:
 
  /// \short Return string for tecplot zone header (when plotting 
  /// nplot points in each "coordinate direction)
- std::string tecplot_zone_string(const unsigned& nplot)
+ std::string tecplot_zone_string(const unsigned& nplot) const
  {
   std::ostringstream header;
   header << "ZONE I=" << nplot << "\n";
@@ -733,7 +733,7 @@ public:
 
  /// \short Return total number of plot points (when plotting 
  /// nplot points in each "coordinate direction)
- unsigned nplot_points(const unsigned& nplot) 
+ unsigned nplot_points(const unsigned& nplot) const
   {
    unsigned DIM=1;
    unsigned np=1;
@@ -1065,7 +1065,7 @@ public:
 
  /// \short Return string for tecplot zone header (when plotting 
  /// nplot points in each "coordinate direction)
- std::string tecplot_zone_string(const unsigned& nplot)
+ std::string tecplot_zone_string(const unsigned& nplot) const
   {
    std::ostringstream header;
    header << "ZONE I=" << nplot << ", J=" << nplot << "\n";
@@ -1074,7 +1074,7 @@ public:
 
  /// Return total number of plot points (when plotting 
  /// nplot points in each "coordinate direction)
- unsigned nplot_points(const unsigned& nplot) 
+ unsigned nplot_points(const unsigned& nplot) const
   {
    unsigned DIM=2;
    unsigned np=1;
@@ -1454,7 +1454,7 @@ void write_paraview_output_offset_information(std::ofstream& file_out,
 
  /// \short Return string for tecplot zone header (when plotting 
  /// nplot points in each "coordinate direction)
- std::string tecplot_zone_string(const unsigned& nplot)
+ std::string tecplot_zone_string(const unsigned& nplot) const
   {
    std::ostringstream header;
    header << "ZONE I=" << nplot << ", J=" << nplot << ", K=" 
@@ -1464,7 +1464,7 @@ void write_paraview_output_offset_information(std::ofstream& file_out,
 
  /// Return total number of plot points (when plotting 
  /// nplot points in each "coordinate direction)
- unsigned nplot_points(const unsigned& nplot) 
+ unsigned nplot_points(const unsigned& nplot) const
   {
    unsigned DIM=3;
    unsigned np=1;

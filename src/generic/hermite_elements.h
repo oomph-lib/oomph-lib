@@ -301,11 +301,11 @@ public:
 
  /// \short Return string for tecplot zone header (when plotting 
  /// nplot points in each "coordinate direction)
- std::string tecplot_zone_string(const unsigned& nplot);
+ std::string tecplot_zone_string(const unsigned& nplot) const;
 
  /// Return total number of plot points (when plotting 
  /// nplot points in each "coordinate direction)
- unsigned nplot_points(const unsigned& nplot);
+ unsigned nplot_points(const unsigned& nplot) const;
 
  /// \short Build the lower-dimensional FaceElement of the type
  /// QHermiteElement<DIM-1>. The face index takes a value that 
@@ -339,8 +339,8 @@ public:
 /// points in each coordinate direction).
 //=======================================================================
 template<> 
-inline void QHermiteElement<1>::get_s_plot(const unsigned& i, const 
-                                           unsigned& nplot,
+inline void QHermiteElement<1>::get_s_plot(const unsigned& i,
+                                           const unsigned& nplot,
                                            Vector<double>& s) const
  {
   if (nplot>1)
@@ -359,7 +359,7 @@ inline void QHermiteElement<1>::get_s_plot(const unsigned& i, const
 //=======================================================================
 template<> 
 inline std::string QHermiteElement<1>::
-tecplot_zone_string(const unsigned& nplot)
+tecplot_zone_string(const unsigned& nplot) const
   {
    std::ostringstream header;
    header << "ZONE I=" << nplot << "\n";
@@ -371,7 +371,7 @@ tecplot_zone_string(const unsigned& nplot)
 /// coordinate direction)
 //========================================================================
 template<> 
-inline unsigned QHermiteElement<1>::nplot_points(const unsigned& nplot) 
+inline unsigned QHermiteElement<1>::nplot_points(const unsigned& nplot) const
 {return nplot;}
 
 
@@ -380,8 +380,8 @@ inline unsigned QHermiteElement<1>::nplot_points(const unsigned& nplot)
 /// points in each "coordinate direction).
 //=======================================================================
 template<> 
-inline void QHermiteElement<2>::get_s_plot(const unsigned& i, const 
-                                           unsigned& nplot,
+inline void QHermiteElement<2>::get_s_plot(const unsigned& i,
+                                           const unsigned& nplot,
                                            Vector<double>& s) const
  {
   if (nplot>1)
@@ -405,7 +405,7 @@ inline void QHermiteElement<2>::get_s_plot(const unsigned& i, const
 //=======================================================================
 template<> 
 inline std::string QHermiteElement<2>::tecplot_zone_string(
- const unsigned& nplot)
+ const unsigned& nplot) const
 {
  std::ostringstream header;
  header << "ZONE I=" << nplot << ", J=" << nplot << "\n";
@@ -417,7 +417,7 @@ inline std::string QHermiteElement<2>::tecplot_zone_string(
 /// nplot points in each coordinate direction)
 //=======================================================================
 template<> 
-inline unsigned QHermiteElement<2>::nplot_points(const unsigned& nplot) 
+inline unsigned QHermiteElement<2>::nplot_points(const unsigned& nplot) const
 {return nplot*nplot;}
 
 //=====================================================================

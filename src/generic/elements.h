@@ -2870,7 +2870,7 @@ public:
  
  /// \short Return string for tecplot zone header (when plotting 
  /// nplot points in each "coordinate direction")
- virtual std::string tecplot_zone_string(const unsigned& nplot)
+ virtual std::string tecplot_zone_string(const unsigned& nplot) const
   {
    throw OomphLibError(
     "tecplot_zone_string(...) is not implemented for this element\n",
@@ -2884,18 +2884,20 @@ public:
  /// Empty by default -- can be used, e.g., to add FE connectivity
  /// lists to elements that need it.
  virtual void write_tecplot_zone_footer(std::ostream& outfile, 
-                                        const unsigned& nplot){};
+                                        const unsigned& nplot)
+ const {};
  
  /// \short Add tecplot zone "footer" to C-style output. (when plotting 
  /// nplot points in each "coordinate direction").
  /// Empty by default -- can be used, e.g., to add FE connectivity
  /// lists to elements that need it.
  virtual void write_tecplot_zone_footer(FILE* file_pt,
-                                        const unsigned& nplot){};
+                                        const unsigned& nplot)
+ const {};
  
  /// \short Return total number of plot points (when plotting 
  /// nplot points in each "coordinate direction")
- virtual unsigned nplot_points(const unsigned& nplot)
+ virtual unsigned nplot_points(const unsigned& nplot) const
   {
    throw OomphLibError(
     "nplot_points(...) is not implemented for this element",

@@ -1483,7 +1483,7 @@ public:
  
  /// \short Return string for tecplot zone header (when plotting 
  /// nplot points in each "coordinate direction)
- std::string tecplot_zone_string(const unsigned& nplot)
+ std::string tecplot_zone_string(const unsigned& nplot) const
  {
   std::ostringstream header;
   header << "ZONE I=" << nplot << "\n";
@@ -1492,7 +1492,7 @@ public:
  
  /// Return total number of plot points (when plotting 
  /// nplot points in each "coordinate direction)
- unsigned nplot_points(const unsigned& nplot) 
+ unsigned nplot_points(const unsigned& nplot) const
   {return nplot;}
 
  /// \short Build the lower-dimensional FaceElement (an element of type
@@ -1774,7 +1774,7 @@ public:
  
  /// \short Return string for tecplot zone header (when plotting 
  /// nplot points in each "coordinate direction)
- std::string tecplot_zone_string(const unsigned& nplot)
+ std::string tecplot_zone_string(const unsigned& nplot) const
  {
   std::ostringstream header;
   unsigned nel=0;
@@ -1789,7 +1789,7 @@ public:
  /// Empty by default -- can be used, e.g., to add FE connectivity
  /// lists to elements that need it.
  void write_tecplot_zone_footer(std::ostream& outfile, 
-                                const unsigned& nplot)
+                                const unsigned& nplot) const
   {
    //Output node lists for sub elements for Tecplot (node index 
    //must start at 1)
@@ -1819,7 +1819,7 @@ public:
  /// Empty by default -- can be used, e.g., to add FE connectivity
  /// lists to elements that need it.
  void write_tecplot_zone_footer(FILE* file_pt,
-                                const unsigned& nplot)
+                                const unsigned& nplot) const
   {
    //Output node lists for sub elements for Tecplot (node index 
    //must start at 1)
@@ -1845,7 +1845,7 @@ public:
  
  /// Return total number of plot points (when plotting 
  /// nplot points in each "coordinate direction)
- unsigned nplot_points(const unsigned& nplot) 
+ unsigned nplot_points(const unsigned& nplot) const
   {
    unsigned np=0;
    for (unsigned i=1;i<=nplot;i++) {np+=i;}
@@ -3273,7 +3273,7 @@ public:
 
   /// \short Return string for tecplot zone header (when plotting
   /// nplot points in each "coordinate direction)
-  std::string tecplot_zone_string(const unsigned& nplot)
+  std::string tecplot_zone_string(const unsigned& nplot) const
   {
    std::ostringstream header;
    unsigned nel=0;
@@ -3288,7 +3288,7 @@ public:
   /// Empty by default -- can be used, e.g., to add FE connectivity
   /// lists to elements that need it.
   void write_tecplot_zone_footer(std::ostream& outfile,
-                                 const unsigned& nplot)
+                                 const unsigned& nplot) const
    {
     
     //Output node lists for sub elements for Tecplot (node index
@@ -3354,7 +3354,7 @@ public:
  /// Empty by default -- can be used, e.g., to add FE connectivity
  /// lists to elements that need it.
   void write_tecplot_zone_footer(FILE* file_pt,
-                                 const unsigned& nplot)
+                                 const unsigned& nplot) const
    {
     //Output node lists for sub elements for Tecplot (node index
     //must start at 1)
@@ -3383,7 +3383,7 @@ public:
       
  /// \short Return total number of plot points (when plotting
  /// nplot points in each "coordinate direction)
- unsigned nplot_points(const unsigned& nplot)
+ unsigned nplot_points(const unsigned& nplot) const
   { 
    unsigned res=0;
    if(nplot>1)

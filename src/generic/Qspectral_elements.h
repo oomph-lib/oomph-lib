@@ -501,7 +501,7 @@ public:
  
  /// \short Return string for tecplot zone header (when plotting 
  /// nplot points in each "coordinate direction)
- std::string tecplot_zone_string(const unsigned& nplot)
+ std::string tecplot_zone_string(const unsigned& nplot) const
   {
    std::ostringstream header;
    header << "ZONE I=" << nplot << "\n";
@@ -510,7 +510,7 @@ public:
  
  /// \short Return total number of plot points (when plotting 
  /// nplot points in each "coordinate direction)
- unsigned nplot_points(const unsigned& nplot) 
+ unsigned nplot_points(const unsigned& nplot) const
   {
    unsigned DIM=1;
    unsigned np=1;
@@ -762,7 +762,7 @@ OOMPH_CURRENT_FUNCTION,
  
  /// \short Return string for tecplot zone header (when plotting 
  /// nplot points in each "coordinate direction)
- std::string tecplot_zone_string(const unsigned& nplot)
+ std::string tecplot_zone_string(const unsigned& nplot) const
   {
    std::ostringstream header;
    header << "ZONE I=" << nplot << ", J=" << nplot << "\n";
@@ -771,7 +771,7 @@ OOMPH_CURRENT_FUNCTION,
  
  /// \short Return total number of plot points (when plotting 
  /// nplot points in each "coordinate direction)
- unsigned nplot_points(const unsigned& nplot) 
+ unsigned nplot_points(const unsigned& nplot) const
   {
    unsigned DIM=2;
    unsigned np=1;
@@ -1064,7 +1064,7 @@ OOMPH_CURRENT_FUNCTION,
  
  /// \short Return string for tecplot zone header (when plotting 
  /// nplot points in each "coordinate direction)
- std::string tecplot_zone_string(const unsigned& nplot)
+ std::string tecplot_zone_string(const unsigned& nplot) const
   {
    std::ostringstream header;
    header << "ZONE I=" << nplot << ", J=" << nplot << ", K=" 
@@ -1074,7 +1074,7 @@ OOMPH_CURRENT_FUNCTION,
  
  /// \short Return total number of plot points (when plotting 
  /// nplot points in each "coordinate direction)
- unsigned nplot_points(const unsigned& nplot) 
+ unsigned nplot_points(const unsigned& nplot) const
   {
    unsigned DIM=3;
    unsigned np=1;
