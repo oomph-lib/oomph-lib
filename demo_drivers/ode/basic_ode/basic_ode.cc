@@ -3,64 +3,10 @@
 #include "ode.h"
 
 #include "../ode_problem.h"
-
+#include "../ode_element_for_imr.h"
 #include "../ode_example_functions.h"
 
 using namespace oomph;
-
-namespace Factories
-{
- /// \short Make a timestepper from an input argument using
- /// new.
- TimeStepper* time_stepper_factory(const std::string& ts_name)
- {
- 
-  // Always make timestepper adaptive, we can control adaptivity by
-  // calling adaptive or non adaptive newton solve.
-  bool adaptive_flag = true;
-
-  if(ts_name == "bdf1")
-   {
-    return new BDF<1>(adaptive_flag);
-   }
-  else if(ts_name == "bdf2")
-   {
-    return new BDF<2>(adaptive_flag);
-   }
-  else if((ts_name == "midpoint") || (ts_name == "old-imr"))
-   {
-    MidpointMethod* mp_pt = new MidpointMethod(adaptive_flag);
-    ExplicitTimeStepper* pred_pt = new EBDF3;
-    mp_pt->set_predictor_pt(pred_pt);
-    return mp_pt;
-   }
-  else if((ts_name == "midpoint-bdf") || (ts_name == "imr"))
-   {
-    MidpointMethodByBDF* mp_pt = new MidpointMethodByBDF(adaptive_flag);
-    ExplicitTimeStepper* pred_pt = new EBDF3;
-    mp_pt->set_predictor_pt(pred_pt);
-    return mp_pt;
-   }
-  else if(ts_name == "steady")
-   {
-    // 2 steps so that we have enough space to do reasonable time
-    // derivative estimates in e.g. energy derivatives.
-    return new Steady<3>;
-   }
-  else if(ts_name == "tr")
-   {
-    // 2 steps so that we have enough space to do reasonable time
-    // derivative estimates in e.g. energy derivatives.
-    return new TR(adaptive_flag);
-   }
-  else
-   {
-    std::string err = "Unrecognised time stepper name";
-    throw OomphLibError(err, OOMPH_CURRENT_FUNCTION,
-                        OOMPH_EXCEPTION_LOCATION);
-   }
- }
-}
 
 int main(int argc, char *argv[])
 {
@@ -90,6 +36,9 @@ int main(int argc, char *argv[])
  std::string outdir = "results";
  specify_command_line_flag("-outdir", &outdir, "Directory to write output to.");
 
+ std::string element_type = "normal";
+ specify_command_line_flag("-element-type", &element_type, "Element to use.");
+
  setup(argc, argv);
  parse_and_assign(argc, argv, true);
  doc_all_flags();
@@ -102,10 +51,22 @@ int main(int argc, char *argv[])
 
  TimeStepper* time_stepper_pt = Factories::time_stepper_factory(ts_name);
 
-
  Vector<Mesh*> mesh_pts;
  mesh_pts.push_back(new Mesh);
- mesh_pts[0]->add_element_pt(new ODEElement(time_stepper_pt, problem.Exact_solution_pt));
+ if(element_type == "normal")
+  {
+   mesh_pts[0]->add_element_pt(new ODEElement(time_stepper_pt, problem.Exact_solution_pt));
+  }
+ else if(element_type == "imr_element")
+  {
+   mesh_pts[0]->add_element_pt(new IMRODEElement(time_stepper_pt, problem.Exact_solution_pt));
+  }
+ else 
+  {
+   std::string err = "Unrecognised element type.";
+   throw OomphLibError(err, OOMPH_CURRENT_FUNCTION,
+                       OOMPH_EXCEPTION_LOCATION);
+  }
  problem.build(mesh_pts);
 
  problem.Doc_info.set_directory(outdir);
@@ -115,7 +76,9 @@ int main(int argc, char *argv[])
  // Set all dts to the value given in args
  problem.initialise_dt(dt);
 
- // Set values using the initial condition function
+ // Set values using the initial condition function (initialisation for
+ // trapezoid rule is automatically handled here by the
+ // actions_after_set_initial_conditions() function in MyProblem).
  problem.set_initial_condition(*problem.Exact_solution_pt);
 
  problem.initial_doc();
@@ -133,7 +96,7 @@ int main(int argc, char *argv[])
     << "=============================================" << std::endl
     << std::endl;
 
-   // Do the newton solve (different ones depending flags set)
+   // Do the newton solve (adaptive or not depending on tol)
    dt = problem.smart_time_step(dt, tol);
 
    // Output

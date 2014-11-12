@@ -159,7 +159,59 @@ namespace oomph
 
  };
 
+ namespace Factories
+ {
+  /// \short Make a timestepper from an input argument using
+  /// new.
+  TimeStepper* time_stepper_factory(const std::string& ts_name)
+  {
+ 
+   // Always make timestepper adaptive, we can control adaptivity by
+   // calling adaptive or non adaptive newton solve.
+   bool adaptive_flag = true;
 
+   if(ts_name == "bdf1")
+    {
+     return new BDF<1>(adaptive_flag);
+    }
+   else if(ts_name == "bdf2")
+    {
+     return new BDF<2>(adaptive_flag);
+    }
+   else if(ts_name == "real-imr")
+    {
+     IMR* mp_pt = new IMR(adaptive_flag);
+     ExplicitTimeStepper* pred_pt = new EBDF3;
+     mp_pt->set_predictor_pt(pred_pt);
+     return mp_pt;
+    }
+   else if(ts_name == "imr")
+    {
+     IMRByBDF* mp_pt = new IMRByBDF(adaptive_flag);
+     ExplicitTimeStepper* pred_pt = new EBDF3;
+     mp_pt->set_predictor_pt(pred_pt);
+     return mp_pt;
+    }
+   else if(ts_name == "steady")
+    {
+     // 2 steps so that we have enough space to do reasonable time
+     // derivative estimates in e.g. energy derivatives.
+     return new Steady<3>;
+    }
+   else if(ts_name == "tr")
+    {
+     // 2 steps so that we have enough space to do reasonable time
+     // derivative estimates in e.g. energy derivatives.
+     return new TR(adaptive_flag);
+    }
+   else
+    {
+     std::string err = "Unrecognised time stepper name";
+     throw OomphLibError(err, OOMPH_CURRENT_FUNCTION,
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+  }
+ }
 
 
 } // End of oomph namespace
