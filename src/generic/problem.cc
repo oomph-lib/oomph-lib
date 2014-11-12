@@ -10541,7 +10541,7 @@ void Problem::unsteady_newton_solve(const double &dt, const bool &shift_values)
   }
 
  // Run the individual timesteppers actions before timestep. These need to
- // be "outside" the problem's actions_before_implicit_timestep so that the
+ // be before the problem's actions_before_implicit_timestep so that the
  // boundary conditions are set consistently.
  for(unsigned i=0;i<n_time_steppers;i++)
   {time_stepper_pt(i)->actions_before_timestep(this);}
@@ -10587,12 +10587,16 @@ void Problem::unsteady_newton_solve(const double &dt, const bool &shift_values)
                        OOMPH_EXCEPTION_LOCATION);
   }
 
- //Now update anything that needs updating after the timestep
- actions_after_implicit_timestep();
-
- // Run the individual timesteppers actions
+ // Run the individual timesteppers actions, these need to be before the
+ // problem's actions_after_implicit_timestep so that the time step is
+ // finished before the problem does any auxiliary calculations (e.g. in
+ // semi-implicit micromagnetics the calculation of magnetostatic field).
  for(unsigned i=0;i<n_time_steppers;i++)
   {time_stepper_pt(i)->actions_after_timestep(this);}
+
+
+ //Now update anything that needs updating after the timestep
+ actions_after_implicit_timestep();
 }
 
 //=======================================================================
@@ -10684,7 +10688,9 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
    //Now calculate the predicted values for the all data and all positions
    calculate_predictions();
 
-   // Run the individual timesteppers actions before timestep
+   // Run the individual timesteppers actions before timestep. These need to
+   // be before the problem's actions_before_implicit_timestep so that the
+   // boundary conditions are set consistently.
    for(unsigned i=0;i<n_time_steppers;i++)
     {time_stepper_pt(i)->actions_before_timestep(this);}
 
@@ -10723,12 +10729,15 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
       }
     }
 
-   //Update anything that needs updating after the timestep
-   actions_after_implicit_timestep();
-
-   // Finally run the individual timesteppers actions
+   // Run the individual timesteppers actions, these need to be before the
+   // problem's actions_after_implicit_timestep so that the time step is
+   // finished before the problem does any auxiliary calculations (e.g. in
+   // semi-implicit micromagnetics the calculation of magnetostatic field).
    for(unsigned i=0;i<n_time_steppers;i++)
     {time_stepper_pt(i)->actions_after_timestep(this);}
+
+   //Update anything that needs updating after the timestep
+   actions_after_implicit_timestep();
 
    // If we have an adapative timestepper (and we haven't already failed)
    // then calculate the error estimate and rescaling factor.
