@@ -603,6 +603,11 @@ namespace oomph
  /// if the maximum residual exceeds this value, the program will exit
  double Max_residuals;
 
+ /// \short Bool to specify what to do if a Newton solve fails within a
+ /// time adaptive solve. Default (false) is to half the step and try
+ /// again. If true then crash instead. 
+ bool Time_adaptive_newton_crash_on_solve_fail;
+
  /// Is re-use of Jacobian in Newton iteration enabled? Default: false
  bool Jacobian_reuse_is_enabled;
 
@@ -1495,6 +1500,10 @@ namespace oomph
  /// \short Access function to max residuals in Newton iterations before giving
  /// up.
  double& max_residuals() {return Max_residuals;}
+
+ /// Access function for Time_adaptive_newton_crash_on_solve_fail.
+ bool& time_adaptive_newton_crash_on_solve_fail()
+ {return Time_adaptive_newton_crash_on_solve_fail;}
 
  /// \short Access function to tolererance of the Newton solver, i.e. the
  /// maximum value of the residuals that will be accepted.

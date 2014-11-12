@@ -93,6 +93,7 @@ ContinuationStorageScheme Problem::Continuation_time_stepper;
   Max_newton_iterations(10),
   Nnewton_iter_taken(0),
   Max_residuals(10.0),
+  Time_adaptive_newton_crash_on_solve_fail(false),
   Jacobian_reuse_is_enabled(false), Jacobian_has_been_computed(false),
   Problem_is_nonlinear(true),
   Pause_at_end_of_sparse_assembly(false),
@@ -10707,7 +10708,7 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
    catch(NewtonSolverError &error)
     {
      //If it's a solver error then die
-     if(error.linear_solver_error)
+     if(error.linear_solver_error || Time_adaptive_newton_crash_on_solve_fail)
       {
        std::string error_message =
         "USER-DEFINED ERROR IN NEWTON SOLVER\n";
