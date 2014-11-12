@@ -39,10 +39,10 @@ namespace oomph
 
   /// \short Given a global equation number in the lookup get the
   /// associated node number. Throw an error if not found.
-  int global_to_node(const int& global) const
+  unsigned global_to_node(const int& global) const
    {
     int result = unsafe_global_to_node(global);
-
+#ifdef PARANOID
     // If it's -1 then we failed to find it:
     if(result == -1)
      {
@@ -51,10 +51,16 @@ namespace oomph
       throw OomphLibError(err, OOMPH_EXCEPTION_LOCATION,
                           OOMPH_CURRENT_FUNCTION);
      }
-    else
+
+    if(result < 0)
      {
-      return result;
+      std::string err = "Something crazy went wrong here.";
+      throw OomphLibError(err, OOMPH_EXCEPTION_LOCATION,
+                          OOMPH_CURRENT_FUNCTION);
      }
+#endif
+
+    return unsigned(result);
    }
 
   /// \short Given a global equation number in the lookup get the
@@ -187,9 +193,6 @@ namespace oomph
 
  private:
 
-
-  typedef std::map<long unsigned, long unsigned> IndexMap;
-
   /// Pointer to the matrix which we are adding the others to
   DoubleMatrixBase* Main_matrix_pt;
 
@@ -238,12 +241,13 @@ namespace oomph
    {
     for(unsigned i_matrix=0; i_matrix<Added_matrix_pt.size(); i_matrix++)
      {
-      if(Should_delete_added_matrix[i_matrix] == 1)
-       delete Added_matrix_pt[i_matrix];
+      if(Should_delete_added_matrix[i_matrix] == 1) 
+       {
+        delete Added_matrix_pt[i_matrix];
+       }
      }
 
-    if(Should_delete_main_matrix)
-     delete Main_matrix_pt;
+    if(Should_delete_main_matrix) {delete Main_matrix_pt;}
    }
 
   /// Access to the main matrix
