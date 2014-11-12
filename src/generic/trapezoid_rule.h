@@ -7,10 +7,31 @@
 namespace oomph
 {
 
- /// Trapezoid rule time integration scheme
- // Warning: moving nodes not implemented (I have no test case)
+ /// Trapezoid rule time stepping scheme.
+ ///
+ /// This method requires a value of dy/dt at the initial time. The
+ /// implementation of this calculation is exactly the same as is used for
+ /// explicit time stepping. 
+ ///
+ /// The function setup_initial_derivative(Problem* problem_pt) should be
+ /// called after the initial conditions have been set, but before beginning
+ /// time stepping, to compute this initial value of dy/dt.
+ ///
+ /// Warning: moving nodes not implemented (I have no test case).
  class TR : public TimeStepper
  {
+  // The standard trapezoid rule is:
+
+  // y_{n+1} = y_n + dt_n (f(t_n, y_n) + f(t_{n+1}, y_{n+1}))/2
+
+  // where y is the vector of nodal values and f is the derivative function
+  // (as in standard ODE theory). However we want to calculate time steps
+  // using only one function evaluation (i.e. f) per time step because
+  // function evaluations are expensive. So we require f(t_0, y_0) as
+  // initial input and at each step store f(t_{n+1}, y_{n+1}) as a history
+  // value for use in the calculatio of the next time step.
+
+
  public:
   /// Constructor, storage for two history derivatives (one for TR and
   /// one for the predictor step), one history value, present value and
