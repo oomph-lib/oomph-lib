@@ -46,7 +46,6 @@
 #include "assembly_handler.h"
 #include "dg_elements.h"
 #include "partitioning.h"
-#include "convergence_data.h"
 #include "spines.h"
 
 //Include to fill in additional_setup_shared_node_scheme() function
@@ -77,7 +76,6 @@ ContinuationStorageScheme Problem::Continuation_time_stepper;
  Problem::Problem() :
   Mesh_pt(0), Time_pt(0), Explicit_time_stepper_pt(0), Saved_dof_pt(0),
   Default_set_initial_condition_called(false),
-  Convergence_data_pt(0),
   Use_globally_convergent_newton_method(false),
   Empty_actions_before_read_unstructured_meshes_has_been_called(false),
   Empty_actions_after_read_unstructured_meshes_has_been_called(false),
@@ -8590,10 +8588,6 @@ void Problem::newton_solve()
  //Update anything that needs updating
  actions_before_newton_solve();
 
- // Set up recording for this new newton solve
- if(record_convergence_data()) convergence_data_pt()->new_newton_solve();
-
-
  // Reset number of Newton iterations taken
  Nnewton_iter_taken=0;
 
@@ -8819,12 +8813,6 @@ void Problem::newton_solve()
        oomph_info << "Newton Step " << count << ": Maximum residuals "
                   << maxres << std::endl;
       }
-    }
-
-   // Store convergence data if a pointer for it exists
-   if(record_convergence_data())
-    {
-     convergence_data_pt()->add_step(maxres, Linear_solver_pt, time_pt());
     }
 
    //If we have converged jump straight to the test at the end of the loop

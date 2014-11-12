@@ -106,7 +106,7 @@ general_purpose_preconditioners.h block_preconditioner.h \
 general_purpose_block_preconditioners.h SuperLU_preconditioner.h \
 matrix_vector_product.h projection.h line_visualiser.h \
 Subparametric_Telements.h \
-sum_of_matrices.h convergence_data.h midpoint_method.h \
+sum_of_matrices.h midpoint_method.h \
 prettyprint.h \
 preconditioner_array.h pml_meshes.h prettyprint98.h \
 generalised_timesteppers.h vector_matrix.h face_mesh_project.h
