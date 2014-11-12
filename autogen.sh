@@ -218,17 +218,10 @@ if $generate_config_files == "true"; then
     fi
 
 
-    # Do all the autotools setup stuff
-    # ============================================================
-    
     # ??ds not really sure why this is here or what it does
     echo
     echo "Building Auxillary Files in /src/meshes"
     ./bin/build_mesh_makefile.sh .
-
-    # Run all the autotools and just do the right things to generate
-    # configure, Makefile.in and all the dependency relationships.
-    autoreconf --install
 
 fi
 
@@ -294,6 +287,14 @@ then
 fi
 
 
+# If this is a new build or a forced rebuild
+if $generate_config_files == "true"; then
+
+    # Run all the autotools and just do the right things to generate
+    # configure, Makefile.in and all the dependency relationships.
+    autoreconf --install
+
+fi
 
 # Set up configure options
 #============================================================================
