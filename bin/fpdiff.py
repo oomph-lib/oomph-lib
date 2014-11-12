@@ -59,12 +59,21 @@ def fpdiff_helper(filename1,filename2,relative_error,small,
      lines failed are written to details_stream. Warning: if run on
      large files the details_stream may be overwhelmingly long.
      
-     Returns 0 if the two files are the same, 1 if they are different or
-     5 if the files cannot be opened.
+     First return value: 0 if the two files are the same, 1 if they are
+     different or 5 if the files cannot be opened.
+
+     Second return value: the maximum relative error.
+
+     Third return value: the largest entry that caused an error
+     (i.e. what "small" would need to be set as for there to be no
+     differences).
  """
 
  import math
 
+ # Storage for worst case error sizes
+ max_rel_diff = 0
+ max_wrong_entry = 0 
  
  #Open the files
  try:
@@ -73,7 +82,7 @@ def fpdiff_helper(filename1,filename2,relative_error,small,
    #If there has been an IO error fail
    outstream.write("\n   [FAILED] : Unable to open the input file %s \n\n"
       % filename1)
-   return 5
+   return 5, 0, 0
 
  try:
    tmpfile2 = read_file(filename2)
@@ -81,7 +90,7 @@ def fpdiff_helper(filename1,filename2,relative_error,small,
    #If there has been an IO error fail
    outstream.write("\n   [FAILED] : Unable to open the input file %s \n\n"
       % filename2)
-   return 5
+   return 5, 0, 0
 
  #Find the number of lines in each file
  n1 = len(tmpfile1)
@@ -209,7 +218,16 @@ def fpdiff_helper(filename1,filename2,relative_error,small,
          nerr += 1
          #Put the appropriate symbols into the error line 
          outputline2 = stuff(outputline2,"-",fieldlength)
-   
+
+         # Record any changes in the worst case values
+         if diff > max_rel_diff:
+            max_rel_diff = diff
+
+         if math.fabs(x1) > max_wrong_entry:
+            max_wrong_entry = math.fabs(x1)
+         elif  math.fabs(x2) > max_wrong_entry:
+            max_wrong_entry = math.fabs(x2)
+
    #If there has been any sort of error, print it
    if problem == 1:
     nline_error += 1
@@ -222,6 +240,9 @@ def fpdiff_helper(filename1,filename2,relative_error,small,
   outstream.write("\n number of lines processed: %d" % count)
   outstream.write("\n number of lines containing errors: %d" % nline_error)
   outstream.write("\n number of errors: %d " % nerr)
+  outstream.write("\n largest relative error: %g " % max_rel_diff)
+  outstream.write("\n largest abs value of an entry which caused an error: %g "
+                   % max_wrong_entry)
   outstream.write("\n========================================================")
   outstream.write("\n    Parameters used:")
   outstream.write("\n        threshold for numerical zero : %g" % small)
@@ -233,7 +254,7 @@ def fpdiff_helper(filename1,filename2,relative_error,small,
   outstream.write("\n========================================================")
   outstream.write("\n\n   [FAILED]\n")
   # Return failure
-  return 2
+  return 2, max_rel_diff, max_wrong_entry
 
  else:
   outstream.write("\n\n In files %s %s" % (filename1, filename2))
@@ -243,15 +264,18 @@ def fpdiff_helper(filename1,filename2,relative_error,small,
   outstream.write(\
   "\n                                  - numerical zero  = %g\n" % small)
   # Return success
-  return 0
+  return 0, max_rel_diff, max_wrong_entry
 
 
 def fpdiff(filename1, filename2, relative_error=0.1, small=1e-14,
            outstream=sys.stdout, details_stream=sys.stdout):
     """Wrapper for using fpdiff inside python. Has default args and returns a
     bool."""
-    return fpdiff_helper(filename1, filename2, relative_error, small,
-                         outstream, details_stream) == 0
+    ok, max_rel_diff, max_wrong_entry = \
+       fpdiff_helper(filename1, filename2, relative_error, small,
+                         outstream, details_stream)
+
+    return (ok == 0), max_rel_diff, max_wrong_entry
 
 
 def run_as_script(argv):
@@ -290,8 +314,8 @@ def run_as_script(argv):
    small = float(argv[3])
  
  # Run the diff
- error_code = fpdiff_helper(argv[0], argv[1], maxreld, small,
-                            sys.stdout, sys.stdout)
+ error_code, _, _ = fpdiff_helper(argv[0], argv[1], maxreld, small,
+                                  sys.stdout, sys.stdout)
 
  return error_code
 
