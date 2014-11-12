@@ -85,10 +85,12 @@ echo " "
 # Choose configure options file
 #------------------------------
 
+configure_options_file="config/configure_options/current"
+
 # Ask if the initial options are OK
 echo " "
 echo "Configure options are: "
-cat "config/configure_options/current"
+cat "$configure_options_file"
 echo 
 if YesNoRead "Is this OK?" "y"; then
     accept_configure_options="true"
@@ -134,19 +136,17 @@ while [[ $accept_configure_options != "true" ]]; do
         echo 
         echo "Enter options"
         configure_options=$(OptionRead)
-        echo $configure_options > "config/configure_options/current"
+        echo $configure_options > "config/configure_options/new_options_file"
+        configure_options_file="config/configure_options/new_options_file"
 
     # Otherwise copy the desired options file to config/configure_options/current
     else 
         # Use cut to extract the nth entry in the list
         configure_options_file="$(echo $configure_option_files | cut -d \  -f $file_number)"
-
-        # Copy to current
-        cp -f "$configure_options_file" "config/configure_options/current"
     fi
 
     # Check that the options are in the correct order
-    configure_options_are_ok="$(CheckOptions config/configure_options/current)"
+    configure_options_are_ok="$(CheckOptions $configure_options_file)"
     if test "$configure_options_are_ok" != ""; then
 
         echo " " 1>&2
@@ -164,7 +164,7 @@ while [[ $accept_configure_options != "true" ]]; do
     # Ask if these options are OK
     echo " "
     echo "Configure options are: "
-    cat "config/configure_options/current"
+    cat "$configure_options_file"
     echo 
     if YesNoRead "Is this OK?" "y"; then
         accept_configure_options="true"
@@ -184,7 +184,9 @@ echo
 #====================================================================
 
 # Call real autogen
-./non_interactive_autogen.sh "$@" -b $build_dir -C $oomph_root -c "${oomph_root}config/configure_options/current"
+echo "Interactive process is over."
+echo "Running ./autogen -b $build_dir -c ${oomph_root}/$configure_options_file $@"
+./autogen.sh -b $build_dir -c "${oomph_root}/$configure_options_file" "$@"
 
 echo " "
 echo "autogen.sh has finished! If you can't spot any error messages" 
