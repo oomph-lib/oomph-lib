@@ -15,9 +15,7 @@ namespace oomph
  class Problem;
  
 
-  // =======================================================================
-  /// Implicit midpoint rule base class for the two implementations
-  //========================================================================
+  /// Implicit midpoint rule base class for the two implementations.
   class MidpointMethodBase : public TimeStepper
   {
   public:
@@ -62,7 +60,8 @@ namespace oomph
     /// Setup weights for time derivative calculations.
     virtual void set_weights()=0;
 
-   /// \short ??ds
+   /// Number of history values to interpolate over to get the "current"
+   /// value. 
    virtual unsigned nprev_values_for_value_at_evaluation_time() const=0;
 
     /// Actual order (accuracy) of the scheme
@@ -124,8 +123,14 @@ namespace oomph
     double temporal_error_in_value(Data* const &data_pt, const unsigned &i);
   };
 
- /// Implicit midpoint rule implemented by calculation of residuals etc. at
- /// half step.
+ /// The "real" implementation of the implicit midpoint rule. Implemented
+ /// by calculation of residuals etc. at half step. This requires
+ /// non-trivial modifications to the element's residual and Jacobian
+ /// calculation functions to interpolate values to the midpoint. As such
+ /// MidpointMethodByBDF should be preferred.
+ ///
+ /// However this class must be used when multiple different time steppers
+ /// are being used simultaneously for different parts of the problem.
 class MidpointMethod : public MidpointMethodBase
 {
 public:
@@ -156,7 +161,8 @@ public:
   Weight(1,1) = -1.0/dt;
  }
 
- /// \short ??ds
+ /// \short Number of history values to interpolate over to get the
+ /// "current" value.
  unsigned nprev_values_for_value_at_evaluation_time() const {return 2;}
 
 private:
@@ -170,7 +176,12 @@ private:
 
 
 /// Implementation of implicit midpoint rule by taking half a step of bdf1
-/// then applying an update to all dofs.
+/// then applying an update to all dofs. This implementation *should* work
+/// with any existing problem for which the BDF methods work. 
+///
+/// The exception is when multiple different time steppers are being used
+/// simultaneously for different parts of the problem. In this case the
+/// MidpointMethod class should be used.
 class MidpointMethodByBDF : public MidpointMethodBase
 {
 public:
@@ -192,8 +203,9 @@ public:
   Weight(1,1) = -1.0/dt;
  }
 
- /// \short Evaluation time is the end of the bdf1 "half-step", so only need one
- /// value.
+ /// \short Number of history values to interpolate over to get the
+ /// "current" value. Evaluation time is the end of the bdf1 "half-step",
+ /// so only need one value as normal. 
  unsigned nprev_values_for_value_at_evaluation_time() const {return 1;}
 
  /// Half the timestep before starting solve

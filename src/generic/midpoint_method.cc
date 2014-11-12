@@ -29,7 +29,7 @@ namespace oomph
  }
 
  ///\short This function advances the time history of the positions
- ///at a node. ??ds I have no idea what I'm doing here!
+ ///at a node. ??ds Untested: I have no problems with moving nodes.
  void MidpointMethodBase::shift_time_positions(Node* const &node_pt)
  {
   //Find the number of coordinates
@@ -101,7 +101,6 @@ namespace oomph
   if(adaptive_flag())
    {
     // predicted value is more accurate so just compare with that
-    //??ds is sign important? probably not...
     return data_pt->value(i) - data_pt->value(Predictor_storage_index, i);
    }
   else
@@ -140,7 +139,7 @@ namespace oomph
      // Shift the initial guess to the midpoint so that it is an initial
      // guess for the newton step that we actually take.
 
-     // ??ds optimisation possiblity: here we update all values three time
+     // Optimisation possiblity: here we update all values three time
      // (initial prediction, copy into initial guess, interpolate to
      // midpoint), could probably avoid this with more fancy code if
      // needed.
