@@ -231,13 +231,13 @@ namespace oomph
   /// List of pointers to the matrices that are added to the main matrix
   Vector<DoubleMatrixBase*> Added_matrix_pt;
 
-  /// \short List of maps from the row numbers of the main matrix to the
-  /// added matrix row numbers.
-  Vector<const AddedMainNumberingLookup* > Main_to_added_rows_pt;
+  /// \short List of maps between row numbers of the main matrix and the
+  /// added matrices.
+  Vector<const AddedMainNumberingLookup* > Row_map_pts;
 
-  /// \short List of maps from the col numbers of the main matrix to the
-  /// added matrix col numbers.
-  Vector<const AddedMainNumberingLookup* > Main_to_added_cols_pt;
+  /// \short List of maps between col numbers of the main matrix and the
+  /// added matrices.
+  Vector<const AddedMainNumberingLookup* > Col_map_pts;
 
   /// Should we delete the sub matrices when destructor is called?
   Vector<unsigned> Should_delete_added_matrix;
@@ -251,13 +251,13 @@ namespace oomph
   /// Default constructor
   SumOfMatrices()
    : Main_matrix_pt(0), Added_matrix_pt(0),
-     Main_to_added_rows_pt(0), Main_to_added_cols_pt(0),
+     Row_map_pts(0), Col_map_pts(0),
      Should_delete_added_matrix(0), Should_delete_main_matrix(0) {}
 
   /// Constructor taking a pointer to the main matrix as input.
   SumOfMatrices(DoubleMatrixBase* main_matrix_pt)
    : Main_matrix_pt(main_matrix_pt), Added_matrix_pt(0),
-     Main_to_added_rows_pt(0), Main_to_added_cols_pt(0),
+     Row_map_pts(0), Col_map_pts(0),
      Should_delete_added_matrix(0), Should_delete_main_matrix(0) {}
 
   /// Broken copy constructor
@@ -391,8 +391,8 @@ namespace oomph
 #endif
 
     Added_matrix_pt.push_back(added_matrix_pt_in);
-    Main_to_added_rows_pt.push_back(main_to_added_rows_pt);
-    Main_to_added_cols_pt.push_back(main_to_added_cols_pt);
+    Row_map_pts.push_back(main_to_added_rows_pt);
+    Col_map_pts.push_back(main_to_added_cols_pt);
     Should_delete_added_matrix.push_back(unsigned(should_delete_matrix));
    }
 
@@ -400,6 +400,12 @@ namespace oomph
   /// numbering).
   inline DoubleMatrixBase* added_matrix_pt(const unsigned& i) const
    {return Added_matrix_pt[i];}
+
+  /// Access to the maps
+  const AddedMainNumberingLookup* row_map_pt(const unsigned& i) const
+  {return Row_map_pts[i];}
+  const AddedMainNumberingLookup* col_map_pt(const unsigned& i) const
+  {return Col_map_pts[i];}
 
   /// Return the number of rows of the main matrix.
   inline unsigned long nrow() const
@@ -452,8 +458,8 @@ namespace oomph
     double sum = main_matrix_pt()->operator()(i,j);
     for(unsigned i_matrix=0; i_matrix<n_added_matrix(); i_matrix++)
      {
-      int li = Main_to_added_rows_pt[i_matrix]->unsafe_main_to_added(i);
-      int lj = Main_to_added_cols_pt[i_matrix]->unsafe_main_to_added(j);
+      int li = Row_map_pts[i_matrix]->unsafe_main_to_added(i);
+      int lj = Col_map_pts[i_matrix]->unsafe_main_to_added(j);
 
       // If the added matrix contributes to this entry then add it
       if(( li != -1) && (lj != -1))
