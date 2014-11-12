@@ -2334,13 +2334,17 @@ ContinuationStorageScheme Problem::Continuation_time_stepper;
    }
  }
 
- /// Get history values of dofs
+ /// Get history values of dofs in a double vector.
  void Problem::get_dofs(const unsigned& t, DoubleVector& dofs) const
  {
-#ifdef OOMPH_HAS_MPI
-  throw OomphLibError("Not designed for MPI!",
-                      OOMPH_EXCEPTION_LOCATION,
-                      OOMPH_CURRENT_FUNCTION);
+#ifdef PARANOID
+  if(distributed())
+   {
+    throw OomphLibError("Not designed for distributed problems",
+                        OOMPH_EXCEPTION_LOCATION,
+                        OOMPH_CURRENT_FUNCTION);
+    // might work, not sure
+   }
 #endif
 
   // Resize the vector
@@ -3247,10 +3251,14 @@ ContinuationStorageScheme Problem::Continuation_time_stepper;
  /// Set history values of dofs
  void Problem::set_dofs(const unsigned& t, DoubleVector& dofs)
  {
-#ifdef OOMPH_HAS_MPI
-  throw OomphLibError("Not designed for MPI! Might work but not tested.",
-                      OOMPH_EXCEPTION_LOCATION,
-                      OOMPH_CURRENT_FUNCTION);
+#ifdef PARANOID
+  if(distributed())
+   {
+    throw OomphLibError("Not designed for distributed problems",
+                        OOMPH_EXCEPTION_LOCATION,
+                        OOMPH_CURRENT_FUNCTION);
+    // might work if the dofs vector is distributed in the right way...
+   }
 #endif
 
   // First deal with global data
@@ -3304,6 +3312,74 @@ ContinuationStorageScheme Problem::Continuation_time_stepper;
      }
    }
  }
+
+
+ /// Set history values of dofs from the type of vector stored in
+ /// problem::Dof_pt.
+ void Problem::set_dofs(const unsigned& t, Vector<double*>& dof_pt) 
+ {
+#ifdef PARANOID
+  if(distributed())
+   {
+    throw OomphLibError("Not implemented for distributed problems!",
+                        OOMPH_EXCEPTION_LOCATION,
+                        OOMPH_CURRENT_FUNCTION);
+   }
+#endif
+
+   // If we have any spine meshes I think there might be more degrees
+   // of freedom there. I don't use them though so I'll let someone who
+   // knows what they are doing handle it. --David Shepherd
+
+   // First deal with global data
+   unsigned Nglobal_data = nglobal_data();
+   for(unsigned i=0; i<Nglobal_data; i++)
+    {
+     for(unsigned j=0, nj=Global_data_pt[i]->nvalue(); j<nj; j++)
+      {
+       // For each data get the equation number and copy in the value.
+       int eqn_number = Global_data_pt[i]->eqn_number(j);
+       if(eqn_number >= 0)
+        {
+         Global_data_pt[i]->set_value(t, j, *(dof_pt[eqn_number]));
+        }
+      }
+    }
+
+   // Now the mesh data
+   // nodes
+   for(unsigned i=0, ni=mesh_pt()->nnode(); i<ni; i++)
+    {
+     Node* node_pt = mesh_pt()->node_pt(i);
+     for(unsigned j=0, nj=node_pt->nvalue(); j<nj; j++)
+      {
+       // For each node get the equation number and copy in the value.
+       int eqn_number = node_pt->eqn_number(j);
+       if(eqn_number >= 0)
+        {
+         node_pt->set_value(t, j, *(dof_pt[eqn_number]));
+        }
+      }
+    }
+
+   // and non-nodal data inside elements
+   for(unsigned i=0, ni=mesh_pt()->nelement(); i<ni; i++)
+    {
+     GeneralisedElement* ele_pt = mesh_pt()->element_pt(i);
+     for(unsigned j=0, nj=ele_pt->ninternal_data(); j<nj; j++)
+      {
+       Data* data_pt = ele_pt->internal_data_pt(j);
+       // For each node get the equation number and copy in the value.
+       int eqn_number = data_pt->eqn_number(j);
+       if(eqn_number >= 0)
+        { 
+         data_pt->set_value(t, j, *(dof_pt[eqn_number]));
+        }
+      }
+    }
+
+   }
+
 
 //===================================================================
 ///Function that adds the values to the dofs
@@ -11282,7 +11358,7 @@ void Problem::calculate_predictions()
     this->explicit_timestep(dt, false);
 
     // Copy predicted dofs and time to their storage slots.
-    copy_dof_pt_to_data_history_value(Dof_pt, time_stepper_pt()->predictor_storage_index());
+    set_dofs(time_stepper_pt()->predictor_storage_index(), Dof_pt);
     time_stepper_pt()->update_predicted_time(time());
 
     // Check we got the times right
@@ -11356,68 +11432,6 @@ void Problem::calculate_predictions()
    
   }
 }
-
-void Problem::copy_dof_pt_to_data_history_value(Vector<double*>& dof_pt, 
-                                                const unsigned& t)
- {
-#ifdef OOMPH_HAS_MPI
-    throw OomphLibError("Not designed for MPI!",
-                        OOMPH_EXCEPTION_LOCATION,
-                        OOMPH_CURRENT_FUNCTION);
-#endif
-
-    // First deal with global data
-    unsigned Nglobal_data = nglobal_data();
-    for(unsigned i=0; i<Nglobal_data; i++)
-     {
-      for(unsigned j=0, nj=Global_data_pt[i]->nvalue(); j<nj; j++)
-       {
-        // For each data get the equation number and copy in the value.
-        int eqn_number = Global_data_pt[i]->eqn_number(j);
-        if(eqn_number >= 0)
-         {
-          Global_data_pt[i]->set_value(t, j, *(dof_pt[eqn_number]));
-         }
-       }
-     }
-
-    // Now the mesh data
-    // nodes
-    for(unsigned i=0, ni=mesh_pt()->nnode(); i<ni; i++)
-     {
-      Node* node_pt = mesh_pt()->node_pt(i);
-      for(unsigned j=0, nj=node_pt->nvalue(); j<nj; j++)
-       {
-        // For each node get the equation number and copy in the value.
-        int eqn_number = node_pt->eqn_number(j);
-        if(eqn_number >= 0)
-         {
-          node_pt->set_value(t, j, *(dof_pt[eqn_number]));
-         }
-       }
-     }
-
-    // and non-nodal data inside elements
-    for(unsigned i=0, ni=mesh_pt()->nelement(); i<ni; i++)
-     {
-      GeneralisedElement* ele_pt = mesh_pt()->element_pt(i);
-      for(unsigned j=0, nj=ele_pt->ninternal_data(); j<nj; j++)
-       {
-        Data* data_pt = ele_pt->internal_data_pt(j);
-        // For each node get the equation number and copy in the value.
-        int eqn_number = data_pt->eqn_number(j);
-        if(eqn_number >= 0)
-         { 
-          data_pt->set_value(t, j, *(dof_pt[eqn_number]));
-         }
-       }
-     }
-
-      // ??ds If there are spine meshes I think there might be more degrees
-      // of freedom there. I don't use them though so I'll let someone who
-      // knows what they are doing handle it...
- }
-
 
 //======================================================================
 ///\short Enable recycling of the mass matrix in explicit timestepping

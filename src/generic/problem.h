@@ -1610,6 +1610,10 @@ public:
  /// \short Set the history values of the dofs
  void set_dofs(const unsigned& t, DoubleVector& dofs);
 
+ /// Set history values of dofs from the type of vector stored in
+ /// problem::Dof_pt.
+ void set_dofs(const unsigned& t, Vector<double*>& dof_pt);
+
  /// \short Add lambda x incremenet_dofs[l] to the l-th dof
  void add_to_dofs(const double &lambda, const DoubleVector &increment_dofs);
 
@@ -2385,11 +2389,6 @@ public:
 
  /// \short Calculate predictions
  void calculate_predictions();
-
- /// \short Copy values from the provided vector of pointers to dofs into
- /// the t'th history value of the corresponding Data.
- void copy_dof_pt_to_data_history_value(Vector<double*>& dof_pt, 
-                                        const unsigned& t);
 
  ///\short Enable recycling of the mass matrix in explicit timestepping
  ///schemes. Useful for timestepping on fixed meshes when you want
