@@ -11256,15 +11256,19 @@ void Problem::calculate_predictions()
  if(time_stepper_pt()->predict_by_explicit_step() && 
     time_stepper_pt()->adaptive_flag())
   {
-    // ??ds assume midpoint method for now
-    MidpointMethodBase* mp_pt = checked_dynamic_cast<MidpointMethodBase*>
-     (time_stepper_pt());
-
-    // Copy the midpoint time stepper's predictor pt into problem's
-    // explicit time stepper pt (unless problem already has its own
-    // explicit time stepper).
-    ExplicitTimeStepper* ets_pt = mp_pt->predictor_pt();
+    // Copy the time stepper's predictor pt into problem's explicit time
+    // stepper pt (unless problem already has its own explicit time
+    // stepper).
+    ExplicitTimeStepper* ets_pt = time_stepper_pt()->explicit_predictor_pt();
 #ifdef PARANOID
+    if(ets_pt == 0)
+     {
+      std::string err = "Requested predictions by explicit step but explicit";
+      err += " predictor pt is null.";
+      throw OomphLibError(err, OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+
     if((explicit_time_stepper_pt() != ets_pt)
        && (explicit_time_stepper_pt() != 0))
      {
@@ -11293,8 +11297,8 @@ void Problem::calculate_predictions()
     this->explicit_timestep(dt, false);
 
     // Copy predicted dofs and time to their storage slots.
-    copy_dof_pt_to_data_history_value(Dof_pt, mp_pt->predictor_storage_index());
-    mp_pt->Predicted_time = time();
+    copy_dof_pt_to_data_history_value(Dof_pt, time_stepper_pt()->predictor_storage_index());
+    time_stepper_pt()->update_predicted_time(time());
 
     // Check we got the times right
 #ifdef PARANOID

@@ -28,11 +28,20 @@
 //Include the header
 #include "timesteppers.h"
 
+// Required so that we can delete the predictor.
+#include "explicit_timesteppers.h"
 
 
 namespace oomph
 {
 
+ /// Destructor for time stepper, in .cc file so that we don't have to
+ /// include explicit_timesteppers.h in header.
+TimeStepper::~TimeStepper()
+ {
+  // Make sure explicit predictor gets deleted if it was set
+  delete Explicit_predictor_pt; Explicit_predictor_pt = 0;
+ }
 
 
 ////////////////////////////////////////////////////////////////////////

@@ -50,6 +50,7 @@ namespace oomph
 {
 
  class Problem;
+ class ExplicitTimeStepper;
 
 //====================================================================
 /// \short Class to keep track of discrete/continous time. It is essential
@@ -246,6 +247,15 @@ class TimeStepper
  /// ExplicitTimeStepper object?
  bool Predict_by_explicit_step; 
 
+ /// Pointer to explicit time stepper to use as predictor if
+ /// Predict_by_explicit_step is set.
+ /// ??ds merge the two? predict by explicit if pointer is set?
+ ExplicitTimeStepper* Explicit_predictor_pt;
+
+ /// Store the time that the predicted values currently stored are at, to
+ /// compare for paranoid checks.
+ double Predicted_time; 
+
  /// \short The time-index in each Data object where predicted values are
  /// stored. -1 if not set.
  int Predictor_storage_index;
@@ -272,6 +282,8 @@ public:
    // cases where it has not been set to a correct value by the inheriting
    // constructor.
    Predictor_storage_index = -1;
+
+   Explicit_predictor_pt = 0;
   }
 
  /// Broken empty constructor
@@ -294,8 +306,8 @@ public:
    BrokenCopy::broken_assign("TimeStepper");
   } 
 
- /// Empty virtual destructor --- no memory is allocated in this class
- virtual ~TimeStepper(){}
+ /// virtual destructor
+ virtual ~TimeStepper();
 
  /// Highest order derivative that the scheme can compute
  unsigned highest_derivative() const
@@ -368,6 +380,37 @@ public:
  bool predict_by_explicit_step() const 
  {
   return Predict_by_explicit_step;
+ }
+
+ /// Get the pointer to the explicit timestepper to use as a predictor in
+ /// adaptivity if Predict_by_explicit_step is set.
+ ExplicitTimeStepper* explicit_predictor_pt() {return Explicit_predictor_pt;}
+
+ /// Set the pointer to the explicit timestepper to use as a predictor in
+ /// adaptivity if Predict_by_explicit_step is set.
+ void set_predictor_pt(ExplicitTimeStepper* _pred_pt)
+ {
+  Explicit_predictor_pt = _pred_pt;
+ }
+
+ /// Set the time that the current predictions apply for, only needed for
+ /// paranoid checks when doing Predict_by_explicit_step.
+ void update_predicted_time(const double& new_time)
+ {
+  Predicted_time = new_time;
+ }
+
+ /// Check that the predicted values are the ones we want.
+ void check_predicted_values_up_to_date() const
+ {
+#ifdef PARANOID
+  if(std::abs(time_pt()->time() - Predicted_time) > 1e-15)
+   {
+    throw OomphLibError("Predicted values are not from the correct time step",
+                        OOMPH_EXCEPTION_LOCATION,
+                        OOMPH_CURRENT_FUNCTION);
+   }
+#endif
  }
 
  /// \short Return the time-index in each Data where predicted values are
@@ -795,7 +838,6 @@ private:
  
  // Default Time object
  static Time Dummy_time;
- 
 };
 
 
@@ -1245,6 +1287,9 @@ class BDF : public TimeStepper
    //Storage for velocity need to be here to be in scope
    Vector<double> velocity(n_value);
 
+   // Find the number of history values that are stored
+   const unsigned nt_value = nprev_values();
+
    //If adaptive, find the velocities
    if(adaptive_flag()) {time_derivative(1,data_pt,velocity);}
    
@@ -1255,7 +1300,7 @@ class BDF : public TimeStepper
      if(data_pt->is_a_copy(j) == false)
       {
        //Loop over times, in reverse order
-       for(unsigned t=NSTEPS;t>0;t--)
+       for(unsigned t=nt_value;t>0;t--)
         {
          data_pt->set_value(t,j,data_pt->value(t-1,j));
         }
@@ -1264,7 +1309,7 @@ class BDF : public TimeStepper
        if(adaptive_flag())
         {
          //Set the velocity
-         data_pt->set_value(NSTEPS+1,j,velocity[j]);
+         data_pt->set_value(nt_value+1, j, velocity[j]);
         }
       } 
     }

@@ -30,7 +30,6 @@ namespace oomph
     Is_steady = false;
     Type = "Midpoint method";
     Predict_by_explicit_step=true;
-    Predictor_pt = 0;
 
     // If adaptive then we are storing predicted values in slot
     // 4. Otherwise we aren't storing them so leave it as -1.
@@ -58,10 +57,7 @@ namespace oomph
    }
 
     /// Destructor
-    virtual ~MidpointMethodBase() 
-    {
-     delete Predictor_pt; Predictor_pt = 0;
-    }
+    virtual ~MidpointMethodBase() {}
 
     /// Setup weights for time derivative calculations.
     virtual void set_weights()=0;
@@ -77,23 +73,6 @@ namespace oomph
 
     /// ??ds
     unsigned nprev_values() const {return 4;}
-
-    /// Get the pointer to the timestepper to use as a predictor in
-    /// adaptivity.
-    ExplicitTimeStepper* predictor_pt() {return Predictor_pt;}
-
-    /// Check that the predicted values are the ones we want.
-    void check_predicted_values_up_to_date() const
-     {
-#ifdef PARANOID
-      if(std::abs(time_pt()->time() - Predicted_time) > 1e-15)
-       {
-        throw OomphLibError("Predicted values are not from the correct time step",
-                            OOMPH_EXCEPTION_LOCATION,
-                            OOMPH_CURRENT_FUNCTION);
-       }
-#endif
-     }
 
     /// \short This function advances the Data's time history so that
     /// we can move on to the next timestep
@@ -143,21 +122,6 @@ namespace oomph
     // Adaptivity
     void calculate_predicted_values(Data* const &data_pt);
     double temporal_error_in_value(Data* const &data_pt, const unsigned &i);
-
-
-   /// Store the time that the predicted values currently stored are at,
-   /// to compare for paranoid checks.
-   double Predicted_time;
-
-   void set_predictor_pt(ExplicitTimeStepper* _pred_pt)
-    {
-     Predictor_pt = _pred_pt;
-    }
-
-  private:
-
-    /// Time stepper to use to calculate predictor value
-    ExplicitTimeStepper* Predictor_pt;
   };
 
  /// Implicit midpoint rule implemented by calculation of residuals etc. at
@@ -243,9 +207,6 @@ public:
  bool Update_pinned;
 
 private:
-
- /// Time stepper to use to calculate predictor value
- ExplicitTimeStepper* Predictor_pt;
 
  /// Inaccessible copy constructor.
  MidpointMethodByBDF(const MidpointMethodByBDF &dummy) {}
