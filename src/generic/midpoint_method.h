@@ -56,7 +56,10 @@ namespace oomph
     }
 
     /// Destructor
-    virtual ~MidpointMethod() {}
+    virtual ~MidpointMethod() 
+    {
+     delete Predictor_pt; Predictor_pt = 0;
+    }
 
     /// Setup weights for time derivative calculations.
     void set_weights()
