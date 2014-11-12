@@ -115,9 +115,10 @@ namespace StringConversion
  
  /// \short Conversion function that should work for anything with
  /// operator<< defined (at least all basic types).
- template<class T> std::string to_string(T object)
+ template<class T> std::string to_string(T object, unsigned float_precision=8)
  {
   std::stringstream ss;
+  ss.precision(float_precision);
   ss << object;
   return ss.str();
  }
