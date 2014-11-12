@@ -62,19 +62,45 @@ namespace Factories
  }
 }
 
-int main()
+int main(int argc, char *argv[])
 {
+ using namespace CommandLineArgs;
 
+ // Parse cli arguments
+ double dt = 0.1;
+ specify_command_line_flag("-dt", &dt, "Time step size");
+
+ double tmax = 5.0;
+ specify_command_line_flag("-tmax", &tmax, "Time at which to stop");
+
+ double tol = 0.0;
+ specify_command_line_flag("-tol", &tol,
+                           "Adaptive time step tolerance (default 0 = fixed step)");
+
+ double dt_initial = 1e-5;
+ specify_command_line_flag("-dt-initial", &dt_initial,
+                           "Initial dt for adaptive time step selection.");
+
+ std::string ts_name = "bdf2";
+ specify_command_line_flag("-ts", &ts_name, "The time stepper to use.");
+
+ std::string ode_name = "sin";
+ specify_command_line_flag("-ode", &ode_name, "The ODE to solve.");
+
+ std::string outdir = "results";
+ specify_command_line_flag("-outdir", &outdir, "Directory to write output to.");
+
+ setup(argc, argv);
+ parse_and_assign(argc, argv, true);
+ doc_all_flags();
+
+
+ // Build problem
  ODEProblem problem;
 
+ problem.Exact_solution_pt = ODEFactories::exact_solutions_factory(ode_name);
 
- problem.Exact_solution_pt = ODEFactories::exact_solutions_factory("damped_oscillation");
-
-
- TimeStepper* time_stepper_pt = Factories::time_stepper_factory("bdf2");
- double tmax = 5.0;
- double tol = 0;
- double dt = 0.1;
+ TimeStepper* time_stepper_pt = Factories::time_stepper_factory(ts_name);
 
 
  Vector<Mesh*> mesh_pts;
@@ -82,7 +108,7 @@ int main()
  mesh_pts[0]->add_element_pt(new ODEElement(time_stepper_pt, problem.Exact_solution_pt));
  problem.build(mesh_pts);
 
- problem.Doc_info.set_directory("Validation");
+ problem.Doc_info.set_directory(outdir);
 
 
 
