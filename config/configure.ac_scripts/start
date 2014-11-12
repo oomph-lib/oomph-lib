@@ -13,10 +13,10 @@ AC_INIT([oomph-lib],[0.90],[oomph-lib@maths.man.ac.uk])
 # config header file
 AC_CONFIG_HEADERS(config.h)
 
-# Intialise automake. Note that the following line may be modified between
-# the version in "start" and the version in configure.ac by
-# regenerate_config_files.sh. (Updated comment from David Shepherd)
-AM_INIT_AUTOMAKE
+# Intialise automake. Note that the following line may be modified by
+# autogen.sh depending on your version of automake. (Updated comment from
+# David Shepherd)
+AM_INIT_AUTOMAKE([1.12 serial-tests])
 
 # Checks for programs:
 #---------------------
