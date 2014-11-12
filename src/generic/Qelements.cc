@@ -305,8 +305,8 @@ template<unsigned NNODE_1D>
 void QElement<1,NNODE_1D>::build_face_element(const int &face_index,
                                               FaceElement *face_element_pt)
 {
- // Overload the nodal dimension by reading out the value from the node
- face_element_pt->set_nodal_dimension(node_pt(0)->ndim());
+ // Set the nodal dimension
+ face_element_pt->set_nodal_dimension(nodal_dimension());
  
  // Set the pointer to the "bulk" element
  face_element_pt->bulk_element_pt()=this;
@@ -734,8 +734,8 @@ template<unsigned NNODE_1D>
 void QElement<2,NNODE_1D>::build_face_element(const int &face_index,
                                               FaceElement* face_element_pt)
 {
- // Set the nodal dimension from the first node
- face_element_pt->set_nodal_dimension(node_pt(0)->ndim());
+ // Set the nodal dimension
+ face_element_pt->set_nodal_dimension(nodal_dimension());
 
  // Set the pointer to the "bulk" element
  face_element_pt->bulk_element_pt()=this;
@@ -1240,8 +1240,8 @@ void QElement<3,NNODE_1D>::output(FILE* file_pt, const unsigned &n_plot)
  void QElement<3,NNODE_1D>::build_face_element(const int &face_index,
                                                FaceElement* face_element_pt)
 {
- //Set the nodal dimension from the first node
- face_element_pt->set_nodal_dimension(node_pt(0)->ndim());
+ //Set the nodal dimension
+ face_element_pt->set_nodal_dimension(nodal_dimension());
 
  //Set the pointer to the orginal "bulk" element
  face_element_pt->bulk_element_pt()=this;
