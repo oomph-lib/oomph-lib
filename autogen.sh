@@ -13,6 +13,7 @@ OptionPrompt()
     printf "%s " "$1" 
 }
 
+
 # Another little function 'borrowed' from the tecplot installation script...
 OptionRead()
 {
@@ -20,19 +21,21 @@ OptionRead()
     echo $Opt
 }
 
+
 # Convert a string passed as argument to return true/false (ie a bool),
 # return value 255 indicates error.
-yntobool()
+YNToBool()
 {
     if [[ $1 == "y" || $1 == "Y" ]]; then
         return $(true) # 0 == true in bash
     elif [[ $1 == "n" || $1 == "N" ]]; then
         return $(false) # 1 is false in bash
     else
-        echo "I don't understand \"$1\", y/n only please."
+        echo "I don't understand \"$1\", y/n only please." 1>&2
         return 255
     fi
 }
+
 
 # Read a y/n answer from input, if the answer is not y/n then repeat until
 # it is. Turns out this can be nasty when combined with set -o errexit: you
@@ -50,10 +53,10 @@ YesNoRead()
     # Convert to a bool
     bool=""
     if [[ $Opt == "" ]]; then
-        yntobool $default
+        YNToBool $default
         bool=$?
     else
-        yntobool $Opt
+        YNToBool $Opt
         bool=$?
     fi
 
@@ -66,13 +69,13 @@ YesNoRead()
     return $bool
 }
 
+
 # This little function takes the input, removes anything following a #
 # deletes blanks lines and then replaces all newlines by spaces
 ProcessOptionsFile()
 {
     sed < $1 -e 's/#.*$//' -e '/^[ \t]*$/d' -e 's/\n/ /g'
 }
-
 
 
 #Check that the "--" options preceed other configure options.
@@ -110,23 +113,8 @@ CheckOptions()
       }
     }
     }' `echo $1`
-
-
-    #old echo `echo -n $@ | sed 's/^/ /' | sed -n '/[ ].[^-].* --/p'`
-    #echo `echo $@ | sed 's/^/ /' | sed -n '/[ ].[^-].* --/p'`
-    # echo `printf "$@" | sed 's/^/ /' | sed -n '/[ ].[^-].* --/p'`
 }
 
-
-#This function returns a match (non-null string) if the input string 
-#contains a long option (starting with --) after a short option 
-#(no --)
-#CheckOptions()
-#{
-##old echo `echo -n $@ | sed 's/^/ /' | sed -n '/[ ].[^-].* --/p'`
-#echo `echo $@ | sed 's/^/ /' | sed -n '/[ ].[^-].* --/p'`
-# echo `printf "$@" | sed 's/^/ /' | sed -n '/[ ].[^-].* --/p'`
-#}
 
 #This little function echo's the usage information
 EchoUsage()
@@ -156,10 +144,8 @@ echo "              oomph-lib installation script"
 echo "============================================================= "
 echo " "
 
-# Do you want to rebuild from scratch?
+# Do we want to rebuild from scratch?
 #-------------------------------------
-#If so specify --rebuild as command line argument. Default is 
-# to just do the normal ".configure, make, make install, make check -k" sequence.
 
 #Bail out if more than two command line arguments
 if (test $# -gt 2); then 
@@ -283,16 +269,10 @@ cat ${MY_HOME_WD}/config/configure.ac_scripts/user_drivers.dir_list
 echo
 
 
-# Set the build directory (for lib,include), relative to root
+# Choose build directory (for lib,include), relative to root
 #------------------------------------------------------------
-build_sub_dir=build
+build_dir=$MY_HOME_WD/build
 
-# Suggested build directory
-#--------------------------
-build_dir=$MY_HOME_WD/$build_sub_dir
-
-# Check build directory with user
-#--------------------------------
 echo " "
 echo " "
 echo "I'm going to install the distribution (the lib and include directories)"
@@ -306,9 +286,6 @@ if ! YesNoRead "Is this OK?" "y"; then
     build_dir=`OptionRead`
 fi
 
-
-# Summary of build info
-#----------------------
 echo " "
 echo "============================================================= "
 echo " "
@@ -330,7 +307,7 @@ echo "============================================================= "
 echo " "
 
 
-# Create configure options file
+# Choose configure options file
 #------------------------------
 
 # If "current" configure options file does not exist then copy in the
@@ -338,12 +315,6 @@ echo " "
 if (test ! -f config/configure_options/current); then
     cp config/configure_options/default config/configure_options/current
 fi
-
-# Process configure options from the file config/configure_options/current
-# Ignore any line that starts with "#";
-# Add continuation slash at the end of each
-# line. Check that all options (starting with "--") 
-# come first. 
 
 # Ask if the initial options are OK
 echo " "
@@ -366,58 +337,58 @@ while [[ $accept_configure_options != "true" ]]; do
     echo "======================================================================"
     echo 
     echo "Choose an alternative configuration file "
-    #Loop over files and display a menu
+    # Loop over files and display a menu
     count=0
     for file in $configure_option_files
     do
         #Increase the counter
         count=`expr $count + 1`
         echo $count ": " $(basename $file)
-    done #End of loop over files in config/configure_options
+    done
 
     echo
     echo "Enter the Desired configuration file [1-"$count"]"
     echo "Enter 0 to specify the options on the command line"
 
-    #Read in the Desired File and validate it
+    # Read in the Desired File and validate it
     file_number=$(OptionRead)
     if (( $file_number >= $count )) || (( $file_number < 0 )); then
         # Error and go to start of loop
-        Error "File number out of range, trying again."
+        echo "File number out of range, trying again." 1>&2
         continue
     fi
 
 
-    #If options are to be read from the command line then store the
-    #options in the file config/configure_options/current
+    # If options are to be read from the command line then store the
+    # options in the file config/configure_options/current
     if [[ "$file_number" == "0" ]]; then
         echo 
         echo "Enter options"
         configure_options=`OptionRead`  
-        echo $configure_options > config/configure_options/current
+        echo $configure_options > "config/configure_options/current"
 
-        #Otherwise copy the desired options file to config/configure_options/current
+    # Otherwise copy the desired options file to config/configure_options/current
     else 
         # Use cut to extract the nth entry in the list
-        configure_options_file=$(echo $configure_option_files | cut -d \  -f $file_number)
+        configure_options_file="$(echo $configure_option_files | cut -d \  -f $file_number)"
 
         # Copy to current
         cp -f "$configure_options_file" "config/configure_options/current"
     fi
 
-    #Check that the options are in the correct order
+    # Check that the options are in the correct order
     configure_options_are_ok="$(CheckOptions config/configure_options/current)"
     if test "$configure_options_are_ok" != ""; then
 
-        echo " "
-        echo "==============================================================="
-        echo "Error message from autogen.sh:"
-        echo " " 
-        echo $configure_options_are_ok
-        echo " " 
-        echo "==============================================================="
+        echo " " 1>&2
+        echo "===============================================================" 1>&2
+        echo "Error message from autogen.sh:" 1>&2
+        echo " "  1>&2
+        echo $configure_options_are_ok 1>&2
+        echo " "  1>&2
+        echo "===============================================================" 1>&2
         
-        # Fail, go back to start of loop
+        # Fail, go back to start of while loop
         continue
     fi
 
@@ -432,7 +403,7 @@ while [[ $accept_configure_options != "true" ]]; do
         accept_configure_options="false"
     fi
 
-done # End of while loop over customisation of configure options
+done
 
 
 echo " "
@@ -485,7 +456,6 @@ $MY_HOME_WD/bin/check_mpi_command.sh $MY_HOME_WD/Makefile
 
 
 # Make all libraries
-#-------------------
 echo " "
 echo "Running make $make_options" 
 make $make_options
@@ -493,11 +463,11 @@ echo "done"
 
 
 # Install the libraries (in build directory specified above)
-#-----------------------------------------------------------
 echo " "
 echo "running make $make_options install"
 make $make_options install
 echo "done" 
+
 
 echo " "
 echo "autogen.sh has finished! If you can't spot any error messages" 
