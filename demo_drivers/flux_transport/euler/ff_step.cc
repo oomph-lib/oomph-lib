@@ -88,15 +88,21 @@ void SSP_RungeKutta<ORDER>::timestep(
 }
 
 //===================================================================
-///Explicit specialisation for fourth-order RK scheme
+///Explicit specialisation for second-order RK scheme
 //==================================================================
 template<>
 void SSP_RungeKutta<2>::timestep(ExplicitTimeSteppableObject* const &object_pt,
                                  const double &dt)
 {
+ object_pt->actions_before_explicit_timestep();
+
  //Store the initial values and initial time
  DoubleVector u;
  object_pt->get_dofs(u);
+
+ // Stage 1
+ // ============================================================
+ object_pt->actions_before_explicit_stage();
 
  //Now get the first unknowns
  DoubleVector k1;
@@ -106,8 +112,12 @@ void SSP_RungeKutta<2>::timestep(ExplicitTimeSteppableObject* const &object_pt,
  object_pt->add_to_dofs(dt,k1);
  //Increment the time
  object_pt->time() += dt;
- object_pt->actions_after_explicit_timestep();
- 
+ object_pt->actions_after_explicit_stage();
+
+ // Stage 2
+ // ============================================================ 
+ object_pt->actions_before_explicit_stage();
+
  //Get the next unknowns
  DoubleVector k2;
  object_pt->get_inverse_mass_matrix_times_residuals(k2);
@@ -135,6 +145,9 @@ void SSP_RungeKutta<2>::timestep(ExplicitTimeSteppableObject* const &object_pt,
  object_pt->set_dofs(u_final);
 
  //Time remains the same
+
+ // Actions functions
+ object_pt->actions_after_explicit_stage();
  object_pt->actions_after_explicit_timestep();
 }
 

@@ -500,7 +500,7 @@ public:
     }
   }
 
- void actions_after_explicit_timestep()
+ void actions_after_explicit_stage()
   {
    apply_boundary_conditions(this->time());
   }

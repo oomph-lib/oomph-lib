@@ -178,6 +178,9 @@ namespace oomph
  void Euler::timestep(ExplicitTimeSteppableObject* const &object_pt,
                       const double &dt)
  {
+  object_pt->actions_before_explicit_timestep();
+  object_pt->actions_before_explicit_stage();
+
   //Vector that will hold the inverse mass matrix multiplied by the
   //residuals
   DoubleVector minv_res;
@@ -188,7 +191,9 @@ namespace oomph
   object_pt->add_to_dofs(dt,minv_res);
   //Increment the time by the appropriate amount
   object_pt->time() += dt;
+
   //Call any actions required after the change in the unknowns
+  object_pt->actions_after_explicit_stage();
   object_pt->actions_after_explicit_timestep();
  }
 
@@ -218,6 +223,12 @@ void RungeKutta<4>::timestep(ExplicitTimeSteppableObject* const &object_pt,
  DoubleVector u;
  object_pt->get_dofs(u);
 
+ object_pt->actions_before_explicit_timestep();
+
+ // Stage 1
+ // ============================================================
+ object_pt->actions_before_explicit_stage();
+
  //Now get the first unknowns
  DoubleVector k1;
  object_pt->get_inverse_mass_matrix_times_residuals(k1);
@@ -226,8 +237,13 @@ void RungeKutta<4>::timestep(ExplicitTimeSteppableObject* const &object_pt,
  object_pt->add_to_dofs(0.5*dt,k1);
  //Increment the time
  object_pt->time() += 0.5*dt;
- object_pt->actions_after_explicit_timestep();
- 
+ object_pt->actions_after_explicit_stage();
+
+
+ // Stage 2
+ // ============================================================
+ object_pt->actions_before_explicit_stage();
+
  //Get the next unknowns
  DoubleVector k2;
  object_pt->get_inverse_mass_matrix_times_residuals(k2);
@@ -236,8 +252,12 @@ void RungeKutta<4>::timestep(ExplicitTimeSteppableObject* const &object_pt,
  object_pt->set_dofs(u);
  object_pt->add_to_dofs(0.5*dt,k2);
  //Time remains the same
- object_pt->actions_after_explicit_timestep();
- 
+ object_pt->actions_after_explicit_stage();
+
+ // Stage 3
+ // ============================================================
+ object_pt->actions_before_explicit_stage();
+
  //Get the next unknowns
  DoubleVector k3;
  object_pt->get_inverse_mass_matrix_times_residuals(k3);
@@ -247,7 +267,11 @@ void RungeKutta<4>::timestep(ExplicitTimeSteppableObject* const &object_pt,
  object_pt->add_to_dofs(dt,k3);
  //Increment the time (now at initial_time + dt)
  object_pt->time() += 0.5*dt;
- object_pt->actions_after_explicit_timestep();
+ object_pt->actions_after_explicit_stage();
+
+ // Stage 4
+ // ============================================================
+ object_pt->actions_before_explicit_stage();
 
  //Get the final unknowns
  DoubleVector k4;
@@ -259,6 +283,8 @@ void RungeKutta<4>::timestep(ExplicitTimeSteppableObject* const &object_pt,
  object_pt->add_to_dofs((dt/3.0),k2);
  object_pt->add_to_dofs((dt/3.0),k3);
  object_pt->add_to_dofs((dt/6.0),k4);
+ object_pt->actions_after_explicit_stage();
+
  object_pt->actions_after_explicit_timestep();
 }
 
@@ -325,6 +351,8 @@ void LowStorageRungeKutta<4>::timestep(
  ExplicitTimeSteppableObject* const &object_pt,
  const double &dt)
 {
+ object_pt->actions_before_explicit_timestep();
+
  //Store the initial time
  const double initial_time = object_pt->time();
  //Temporary storage
@@ -336,6 +364,8 @@ void LowStorageRungeKutta<4>::timestep(
  //Loop over the number of steps in the scheme
  for(unsigned i=0;i<5;i++)
   {
+   object_pt->actions_before_explicit_stage();
+
    //Get the inverse mass matrix multiplied by the current value
    //of the residuals
    object_pt->get_inverse_mass_matrix_times_residuals(minv_res);
@@ -355,8 +385,11 @@ void LowStorageRungeKutta<4>::timestep(
    object_pt->add_to_dofs(B[i],k);
    //Set the new time
    object_pt->time() = initial_time + C[i]*dt;
-   object_pt->actions_after_explicit_timestep();
+   
+   object_pt->actions_after_explicit_stage();
   }
+
+ object_pt->actions_after_explicit_timestep();
 }
 
 // ??ds this could be heavily optimised if needed. Keeping it simple for
@@ -364,7 +397,10 @@ void LowStorageRungeKutta<4>::timestep(
 void EBDF3::timestep(ExplicitTimeSteppableObject* const &object_pt,
                      const double &dt)
 {
- using namespace StringConversion; //??ds debugging
+ using namespace StringConversion;
+
+ object_pt->actions_before_explicit_timestep();
+ object_pt->actions_before_explicit_stage();
 
  // Storage indicies for the history values that we need
  unsigned tn = 1;
@@ -417,6 +453,9 @@ void EBDF3::timestep(ExplicitTimeSteppableObject* const &object_pt,
  // Done, update things in the object
  object_pt->set_dofs(ynp1);
  object_pt->time() += dt;
+
+ // Actions functions
+ object_pt->actions_after_explicit_stage();
  object_pt->actions_after_explicit_timestep();
 }
 

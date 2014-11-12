@@ -105,10 +105,24 @@ public:
  virtual void add_to_dofs(const double &lambda,
                           const DoubleVector &increment_dofs);
 
- ///\short Empty virtual function that should be overloaded to 
- /// update and slaved data or boundary conditions that should be
- /// advanced after an explicit timestep
- virtual void actions_after_explicit_timestep() { }
+ /// \short Empty virtual function to do anything needed before a stage of
+ /// an explicit time step (Runge-Kutta steps contain multiple stages per
+ /// time step, most others only contain one).
+ virtual void actions_before_explicit_stage() {}
+
+ /// \short Empty virtual function that should be overloaded to update and
+ /// slaved data or boundary conditions that should be advanced after each
+ /// stage of an explicit time step (Runge-Kutta steps contain multiple
+ /// stages per time step, most others only contain one).
+ virtual void actions_after_explicit_stage() {}
+
+ /// \short Empty virtual function that can be overloaded to do anything
+ /// needed before an explicit step.
+ virtual void actions_before_explicit_timestep() {}
+
+ /// \short Empty virtual function that can be overloaded to do anything
+ /// needed after an explicit step.
+ virtual void actions_after_explicit_timestep() {}
 
  ///\short Broken virtual function that should be overloaded to
  ///return access to the local time in the object
