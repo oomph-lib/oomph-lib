@@ -305,7 +305,7 @@ if [[ "$new_configure_options" != "$old_configure_options" || "$generate_config_
     echo
 
     # Check that the options are in the correct order
-    configure_options_are_ok="$(CheckOptions config/configure_options/current)"
+    configure_options_are_ok="$(CheckOptions $configure_options_file)"
     if test "$configure_options_are_ok" != ""; then
 
         echo 1>&2
