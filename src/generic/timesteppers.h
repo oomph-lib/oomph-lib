@@ -246,6 +246,10 @@ class TimeStepper
  /// ExplicitTimeStepper object?
  bool Predict_by_explicit_step; 
 
+ /// \short The time-index in each Data object where predicted values are
+ /// stored. -1 if not set.
+ int Predictor_storage_index;
+
 public:
  
  /// \short Constructor. Pass the amount of storage required by
@@ -263,6 +267,11 @@ public:
 
    // Set the weight for zero-th derivative, which is always 1.0
    Weight(0,0)=1.0;
+
+   // Set predictor storage index to negative value so that we can catch
+   // cases where it has not been set to a correct value by the inheriting
+   // constructor.
+   Predictor_storage_index = -1;
   }
 
  /// Broken empty constructor
@@ -359,6 +368,30 @@ public:
  bool predict_by_explicit_step() const 
  {
   return Predict_by_explicit_step;
+ }
+
+ /// \short Return the time-index in each Data where predicted values are
+ /// stored if the timestepper is adaptive.
+ unsigned predictor_storage_index() const
+ {
+  // Error if time stepper is non-adaptive (because then the index doesn't
+  // exist so using it would give a potentially difficult to find
+  // segault). 
+#ifdef PARANOID
+  if(Predictor_storage_index > 0)
+   {
+    return unsigned(Predictor_storage_index);
+   }
+  else 
+   {
+    std::string err = "Predictor storage index is negative, this probably";
+    err += " means it hasn't been set for this timestepper.";
+    throw OomphLibError(err, OOMPH_EXCEPTION_LOCATION,
+                        OOMPH_CURRENT_FUNCTION);
+   }
+#else
+  return unsigned(Predictor_storage_index);
+#endif 
  }
 
  /// \short Enable the output of warnings due to possible fct pointer vector
@@ -1059,6 +1092,9 @@ class BDF : public TimeStepper
      
      //Resize the weights to the appropriate size
      Weight.resize(2, NSTEPS+3, 0.0);
+
+     // Storing predicted values in slot 4
+     Predictor_storage_index = 4;
     }
 
    //Set the weight for the zero-th derivative

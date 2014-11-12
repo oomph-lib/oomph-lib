@@ -24,14 +24,21 @@ namespace oomph
 
    /// Constructor with initialisation
    MidpointMethodBase(bool adaptive=false) :
-    TimeStepper(2,1), // initialise weights later
-    Predictor_storage_index(4)
+    TimeStepper(2,1) // initialise weights later
    {
     Adaptive_Flag = adaptive;
     Is_steady = false;
     Type = "Midpoint method";
     Predict_by_explicit_step=true;
     Predictor_pt = 0;
+
+    // If adaptive then we are storing predicted values in slot
+    // 4. Otherwise we aren't storing them so leave it as -1.
+    if(adaptive) 
+     {
+      Predictor_storage_index = 4;      
+     }
+
 
     // Storage for weights needs to be 2x(2 + 0/2) (the +2 is extra history
     // for ebdf3 predictor if adaptive). This means we provide ways to
@@ -120,17 +127,12 @@ namespace oomph
    /// to compare for paranoid checks.
    double Predicted_time;
 
-   unsigned predictor_storage_index() const {return Predictor_storage_index;}
-
    void set_predictor_pt(ExplicitTimeStepper* _pred_pt)
     {
      Predictor_pt = _pred_pt;
     }
 
   private:
-
-    /// Dummy time index of predictor values in data.
-    unsigned Predictor_storage_index;
 
     /// Time stepper to use to calculate predictor value
     ExplicitTimeStepper* Predictor_pt;
@@ -213,9 +215,6 @@ public:
  void actions_after_timestep(Problem* problem_pt);
 
 private:
-
- /// Dummy time index of predictor values in data.
- unsigned Predictor_storage_index;
 
  /// Time stepper to use to calculate predictor value
  ExplicitTimeStepper* Predictor_pt;

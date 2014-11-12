@@ -228,7 +228,7 @@ void BDF<2>::calculate_predicted_values(Data* const &data_pt)
         }
        //Store the predicted value
        //Note that predictor is stored as the FIFTH entry in this scheme
-       data_pt->set_value(4,j,predicted_value);
+       data_pt->set_value(Predictor_storage_index,j,predicted_value);
       }
     }
   }
@@ -260,8 +260,7 @@ void BDF<2>::calculate_predicted_positions(Node* const &node_pt)
            predicted_value += node_pt->x(i,j)*Predictor_weight[i];
           }
          //Store the predicted value
-         //Note that predictor is stored as the FIFTH entry in this scheme
-         node_pt->x(4,j) = predicted_value;
+         node_pt->x(Predictor_storage_index, j) = predicted_value;
         }
       }
     }
@@ -296,7 +295,7 @@ double BDF<2>::temporal_error_in_position(Node* const &node_pt,
  if(adaptive_flag())
   {
    //Just return the error
-   return Error_weight*(node_pt->x(i) - node_pt->x(4,i));
+   return Error_weight*(node_pt->x(i) - node_pt->x(Predictor_storage_index,i));
   }
  else
   {
@@ -315,7 +314,8 @@ double BDF<2>::temporal_error_in_value(Data* const &data_pt, const unsigned &i)
  if(adaptive_flag())
   {
    //Just return the error
-   return Error_weight*(data_pt->value(i) - data_pt->value(4,i));
+   return Error_weight*(data_pt->value(i) 
+                        - data_pt->value(Predictor_storage_index,i));
   }
  else
   {
