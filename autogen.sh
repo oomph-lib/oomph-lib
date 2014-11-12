@@ -5,6 +5,10 @@
 set -o errexit
 set -o nounset
 
+# Handle command line input
+# ============================================================
+
+
 # Default values for arguments
 oomph_root=""
 build_dir=""
@@ -13,7 +17,6 @@ extra_configure_options=""
 configure_options_file="config/configure_options/current"
 generate_config_files="false"
 echo_usage="false"
-
 
 
 while getopts ":hrd:c:b:j:sk" opt; do
@@ -111,7 +114,7 @@ fi
 
 
 # If we are regenerating config files then clean up the helper scripts
-#-----------------------------------------------
+#============================================================================
 if $generate_config_files == "true"; then
 
     SCRIPT_LIST="config.guess config.sub depcomp install-sh ltmain.sh missing aclocal.m4 mkinstalldirs"
@@ -144,7 +147,7 @@ fi
 
 
 # David Shepherd's automake compatability fix
-# ============================================================================
+#============================================================================
 if $generate_config_files == "true"; then
 
     # This is an awful hack but I can't find any other way to handle it :(
@@ -217,7 +220,7 @@ fi
 
 
 # Autodetection of folders in user_drivers
-#-----------------------------------
+#============================================================================
 
 # Backup old file (use -f so it doesn't give an error if the file doesn't exist)
 touch "config/configure.ac_scripts/user_drivers.dir_list"
@@ -236,17 +239,22 @@ find "user_drivers" -type f -name "Makefile.am" \
 # with pipes). 3) Remove the start of the path from each line leaving only the
 # location relative to the oomph-lib root directory.
 
-
+# Generate a sorted list of all the makefiles in the project, wrap it into
+# an autoconfigure command and put it into a file.
 confdir="config/configure.ac_scripts"
 cat "$confdir/core.dir_list" \
     "$confdir/doc.dir_list" \
     "$confdir/user_drivers.dir_list" \
     "$confdir/user_src.dir_list" \
-    | sort \
     | sed -e 's|\(^.*$\)|\1/Makefile|' \
+    | sort \
     | cat <(echo "AC_CONFIG_FILES([Makefile") - <(echo "])") \
     > "$confdir/new_makefile_list"
 
+# If we found some new dirs then write it into the list file that is
+# included in configure.ac and tell the user. The fact that we have
+# modified a file included in configure.ac will cause make to rerun
+# autoconf and configure.
 if ! diff -q "$confdir/new_makefile_list" "$confdir/makefile_list" > /dev/null 2>&1; 
 then
     echo "New/removed user dirs detected and $confdir/new_makefile_list updated, configure will be rerun automatically by make."
@@ -262,15 +270,18 @@ fi
 
 
 # Set up configure options
-#--------------------------------------------------------
-
+#============================================================================
 
 # Read the options from the files and convert them into a single one-line string
 new_configure_options=$(ProcessOptionsFile "$configure_options_file")
 old_configure_options=$(ProcessOptionsFile config/configure_options/current)
 
-# If configure options have changed then run configure command
+# If configure options have changed then we need to reconfigure
 if [[ "$new_configure_options" != "$old_configure_options" || "$generate_config_files" == "true" ]]; then
+
+    # Slight problem here: if we change the options and add a new
+    # driver at the same time then configure will end up being rerun twice.
+    # Don't think there's anything we can do about it
 
     echo "Using configure options:"
     cat "$configure_options_file"
@@ -311,17 +322,22 @@ if [[ "$new_configure_options" != "$old_configure_options" || "$generate_config_
     echo
     /bin/sh -c "./configure --prefix $build_dir $new_configure_options $extra_configure_options"
 
-    # Test that the mpi commands work (automatically passes if no variable
-    # MPI_RUN_COMMAND in makefile). This needs to go after configure so that we
-    # can use the generated Makefile to (robustly) get the run and compile
-    # commands.
+    # Test that the mpi commands work with these configure options
+    # (automatically passes if no variable MPI_RUN_COMMAND in makefile).
+    # This needs to go after configure so that we can use the generated
+    # Makefile to (robustly) get the run and compile commands.
     ./bin/check_mpi_command.sh Makefile
 fi
 
 
-# make is smart enough to automatically run automake, configure etc. if
+# make is smart enough to automatically rerun automake, configure etc. if
 # they are needed for other reasons (e.g if we have added new dirs to one
 # of the dir lists or modified a Makefile.am).
+
+
+
+# Build!
+# ============================================================
 
 
 # Make all libraries
