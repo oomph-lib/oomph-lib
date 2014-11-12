@@ -81,6 +81,14 @@ echo " "
 echo "============================================================= "
 echo " "
 
+echo "You can always run self tests in serial with 'make check' or in"
+echo "parallel with './bin/parallel_self_test.py'."
+if YesNoRead "Would you like to automatically run self tests (in serial) if the build is successful?" "n"; then
+    run_self_tests="true"
+else
+    run_self_tests="false"
+fi
+
 
 # Choose configure options file
 #------------------------------
@@ -183,10 +191,20 @@ echo
 # Start actual build process
 #====================================================================
 
+
 # Call real autogen
-echo "Interactive process is over."
-echo "Running ./autogen -b $build_dir -c ${oomph_root}/$configure_options_file $@"
-./autogen.sh -b $build_dir -c "${oomph_root}/$configure_options_file" "$@"
+build_command="./autogen.sh -b $build_dir -c ${oomph_root}/$configure_options_file $@"
+echo "The interactive part of the build process is over."
+echo "Running $build_command"
+$build_command
+
+# Run tests if requested
+if test "$run_self_tests" == "true"; then
+    self_test_command="make check -k"
+    echo "Running self test command: $self_test_command"
+    $self_test_command
+fi
+
 
 echo " "
 echo "autogen.sh has finished! If you can't spot any error messages" 
@@ -194,5 +212,13 @@ echo "above this, oomph-lib should now be ready to use... "
 echo " " 
 echo "If you encounter any problems, please study the installation" 
 echo "instructions and the FAQ before contacting the developers. " 
-echo " "
-echo "To run self tests use \"make check -k\" or ./bin/parallel_self_test.py"
+echo
+echo
+echo "To rerun autogen.sh with the selected options use the command:"
+echo "$build_command"
+echo
+echo "To run self tests you can use 'make check -k' or './bin/parallel_self_test.py',"
+echo "to run them automatically after a succesful build use the && operator,"
+echo "e.g. './autogen.sh && make check -k'."
+echo
+echo "To see other autogen.sh command line options run './autogen.sh -h'"
