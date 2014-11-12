@@ -1,6 +1,7 @@
 #! /bin/bash
 
 # TODO: automatically remove config.cache if options change?
+#       automatically detect if user_drivers has changed and regen config files?
 #       automatic hypre/trilinos pull source + install?
 #       move user driver detection to bin/regenerate_config_files.sh?
 #       merge scripts again?
@@ -13,6 +14,7 @@ generate_config_files="false"
 oomph_root=$(pwd)
 build_dir="${oomph_root}/build"
 make_options=""
+extra_configure_options=""
 configure_options_file="config/configure_options/current"
 
 while getopts ":hrd:c:b:j:sk" opt; do
@@ -30,15 +32,12 @@ while getopts ":hrd:c:b:j:sk" opt; do
           ;;
       d)
           oomph_root="$OPTARG"
-          echo "Building oomph-lib in $oomph_root"
           ;;
       c)
           configure_options_file="$OPTARG"
-          echo "Using configure options file $configure_options_file"
           ;;
       b)
           build_dir="$OPTARG"
-          echo "Building in directory $build_dir"
           ;;
 
       # flags for make
@@ -55,7 +54,8 @@ while getopts ":hrd:c:b:j:sk" opt; do
       s)
           silent_option="--silent LIBTOOLFLAGS=--silent"
           make_options="$make_options $silent_option"
-          echo "Added make option $silent_option"
+          extra_configure_options="$extra_configure_options -q"
+          echo "Added make option $silent_option, configure option -q"
           ;;
 
 
@@ -65,12 +65,9 @@ while getopts ":hrd:c:b:j:sk" opt; do
           ;;
   esac
 done
-echo "Using make options: \"$make_options\""
-
 
 # Load helper functions
 source "${oomph_root}/bin/autogen_helpers.sh"
-
 
 # Convert to absolute paths
 build_dir="$(AbsPath $build_dir)"
@@ -78,6 +75,18 @@ configure_options_file="$(AbsPath $configure_options_file)"
 
 # Now move to the oomph lib directory
 cd "$oomph_root"
+
+# Print information about options
+echo
+echo "Using oomph lib in directory \"$PWD\""
+echo "Using configure options file $configure_options_file"
+echo "Placing built files in \"$build_dir\""
+if [[ $make_options != "" ]]; then
+    echo "Using make options: \"$make_options\""
+fi
+if [[ $extra_configure_options != "" ]]; then
+    echo "Using extra configure options \"$extra_configure_options\""
+fi
 
 
 
@@ -187,9 +196,9 @@ configure_options=$(ProcessOptionsFile config/configure_options/current)
 
 # Run configure command
 echo " "
-echo "Running ./configure --prefix $build_dir $configure_options"
+echo "Running ./configure --prefix $build_dir $configure_options $extra_configure_options"
 echo " "
-/bin/sh -c "./configure --prefix $build_dir $configure_options"
+/bin/sh -c "./configure --prefix $build_dir $configure_options $extra_configure_options"
 
 echo " "
 echo " "

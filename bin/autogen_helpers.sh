@@ -136,7 +136,7 @@ EchoUsage()
     echo "      can save time but makes it harder to spot error messages)." 
     echo "  "
     echo "  s)"
-    echo "      Silent mode: don't output all the useless spam from make."
+    echo "      Silent mode: don't output so much useless spam from make and ./configure."
     echo "  "
 }
 
