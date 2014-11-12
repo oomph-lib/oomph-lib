@@ -8,6 +8,111 @@ namespace oomph
  class FiniteElement;
  class Time;
 
+ namespace InterpolatorHelpers
+ {
+
+  /// Determine if an element contains any hanging nodes
+  inline bool has_hanging_nodes(const FiniteElement* ele_pt)
+  {
+   for(unsigned nd=0, nnode=ele_pt->nnode(); nd<nnode; nd++)
+    {
+     Node* nd_pt = ele_pt->node_pt(nd);
+     if(nd_pt->is_hanging())
+      {
+       return true; 
+      }
+    }
+   return false;
+  }
+
+
+  /// If paranoid check that timesteppers in all nodes in the element are
+  /// the same.
+  inline void check_timesteppers_same(const FiniteElement* ele_pt)
+  {
+#ifdef PARANOID
+   for(unsigned nd=0, nnode=ele_pt->nnode(); nd<nnode; nd++)
+    {
+     Node* nd_pt = ele_pt->node_pt(nd);
+
+     // Check ts_pts are all the same
+     if(nd_pt->time_stepper_pt() != ele_pt->node_pt(0)->time_stepper_pt())
+      {
+       std::ostringstream error_msg;
+       error_msg << "Time steppers should all be the same within an element!";
+       throw OomphLibError(error_msg.str(), OOMPH_CURRENT_FUNCTION,
+                           OOMPH_EXCEPTION_LOCATION);
+      }
+
+     //??ds external data? internal data? etc?
+    }
+#endif
+  }
+
+
+  /// If paranoid check that all nodes in the element have the same
+  /// nvalues.
+  inline void check_nvalues_in_element_same(const FiniteElement* ele_pt)
+  {
+#ifdef PARANOID
+   unsigned Nvalue = ele_pt->node_pt(0)->nvalue();
+   for(unsigned nd=0, nnode=ele_pt->nnode(); nd<nnode; nd++)
+    {
+     Node* nd_pt = ele_pt->node_pt(nd);
+
+     // Check all number of values is the same for all nodes
+     if(nd_pt->nvalue() != Nvalue)
+      {
+       std::ostringstream error_msg;
+       error_msg << "Number of values must be the same at all nodes to use this interpolator.";
+       throw OomphLibError(error_msg.str(), OOMPH_CURRENT_FUNCTION,
+                           OOMPH_EXCEPTION_LOCATION);
+      }
+    }
+#endif
+  }
+
+
+  /// ??ds this is probably nasty, switch to using only pointers so we have
+  /// a sensible null value?
+  static double NotYetCalculatedValue;
+
+
+  /// Check to see if variables are initialised
+  inline bool uninitialised(double var) {return var == NotYetCalculatedValue;}
+
+
+  /// \short Check to see if a vector is initialised. Recusive checking
+  /// would be faster but takes a fairly large amount of time.
+  template<typename T>
+  inline bool uninitialised(Vector<T> var)
+  {
+   bool uninitialised_entry = false;
+   for(unsigned j=0; j<var.size(); j++)
+    {
+     if(uninitialised(var[j]))
+      {
+       uninitialised_entry = true;
+       break;
+      }
+    }
+   return var.empty() || uninitialised_entry;
+   // return var.empty();
+  }
+
+
+  /// Check to see if a pointer/array is uninitialised
+  inline bool uninitialised(const double* var)
+  {
+   if(var == 0) return true;
+   else return uninitialised(var[0]);
+  }
+
+ }
+
+ using namespace InterpolatorHelpers;
+
+
  /* Implementation notes:
 
   * Use memoization to ensure we don't duplicate calculations.
@@ -51,6 +156,7 @@ namespace oomph
  // ============================================================
  class GeneralInterpolator
  {
+
  public:
 
   /// Default constructor. Choose element to interpolate within and
@@ -58,11 +164,6 @@ namespace oomph
   GeneralInterpolator(const FiniteElement* this_element,
                       const Vector<double> &s)
    :
-
-   // ??ds a value to indicate that something hasn't been interpolated
-   // yet. Possibly dangerous?
-   NotYetCalculatedValue(-987654.321),
-
    // Cache some loop end conditions
    Nnode(this_element->nnode()),
    Dim(this_element->dim()),
@@ -100,22 +201,8 @@ namespace oomph
    Dvaluesdx(Nvalue),
    D2valuesdxdt(Nvalue)
    { 
-#ifdef PARANOID
-    for(unsigned nd=0, nnode=This_element->nnode(); nd<nnode; nd++)
-     {
-      Node* nd_pt = This_element->node_pt(nd);
-
-      // Check ts_pts in the element are the same in all nodes
-      if(nd_pt->time_stepper_pt() != This_element->node_pt(0)->time_stepper_pt())
-       {
-        std::ostringstream error_msg;
-        error_msg << "Time steppers should all be the same within an element!";
-        throw OomphLibError(error_msg.str(),
-                            OOMPH_CURRENT_FUNCTION,
-                            OOMPH_EXCEPTION_LOCATION);
-       }
-     }
-#endif
+    // If paranoid check that all nodes have the same nvalues.
+    InterpolatorHelpers::check_nvalues_in_element_same(this_element);
 
     build();
    }
@@ -129,10 +216,6 @@ namespace oomph
                       const Vector<double> &s,
                       const TimeStepper* ts_pt)
    :
-   // ??ds a value to indicate that something hasn't been interpolated
-   // yet. Possibly dangerous?
-   NotYetCalculatedValue(-987654.321),
-
    // Cache some loop end conditions
    Nnode(this_element->nnode()),
    Dim(this_element->dim()),
@@ -168,56 +251,22 @@ namespace oomph
    Dvaluesdx(Nvalue),
    D2valuesdxdt(Nvalue)
    {
-    // Check for incompatible time steppers ??ds
-#ifdef PARANOID
-    if(0)
-     {
-      std::string error_msg = "";
-      throw OomphLibError(error_msg, OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-     }
-#endif
-
     build();
    }
 
 
-  void build()
+  virtual void build()
   {
-
    // Set up shape + test functions
    J = This_element->dshape_eulerian(S, Psi, Dpsidx);
    Test = Psi;
    Dtestdx = Dpsidx;
 
    // Find out if any nodes in this element are hanging
-   Has_hanging_nodes = false;
-   for(unsigned nd=0, nnode=This_element->nnode(); nd<nnode; nd++)
-    {
-     Node* nd_pt = This_element->node_pt(nd);
-     if(nd_pt->is_hanging())
-      {
-       Has_hanging_nodes = true;
-       break;
-      }
-    }
+   Has_hanging_nodes = InterpolatorHelpers::has_hanging_nodes(This_element);
 
-#ifdef PARANOID
-   for(unsigned nd=0, nnode=This_element->nnode(); nd<nnode; nd++)
-    {
-     Node* nd_pt = This_element->node_pt(nd);
-
-     // Check all number of values is the same for all nodes
-     if(nd_pt->nvalue() != Nvalue)
-      {
-       std::ostringstream error_msg;
-       error_msg << "Number of values must be the same at all nodes to use this interpolator.";
-       throw OomphLibError(error_msg.str(),
-                           OOMPH_CURRENT_FUNCTION,
-                           OOMPH_EXCEPTION_LOCATION);
-      }
-    }
-#endif
+   // If paranoid check that all nodes have the same nvalues.
+   InterpolatorHelpers::check_nvalues_in_element_same(This_element);
   }
 
   /// Destructor
@@ -360,9 +409,6 @@ namespace oomph
   }
 
  protected:
-
-  // Magic number signifying that the value has not been calculated yet
-  const double NotYetCalculatedValue;
 
   // Loop end conditions etc.
   const unsigned Nnode;
@@ -667,6 +713,71 @@ namespace oomph
 
  };
 
+
+/// Modified version of the itnerpolator for face elements: 1) can't get x
+/// derivatives very easily here so throw errors if we try. 2) Don't try to
+/// get dpsi etc (because we can't), just get shape and Jacobian separately.
+class FaceElementInterpolator : public GeneralInterpolator
+{
+
+public:
+
+ /// Constructor, jsut use underlying interpolator
+ FaceElementInterpolator(const FaceElement* this_element,
+                                const Vector<double> &s)
+  : GeneralInterpolator(this_element, s) {}
+
+ /// More complex constructor. Choose element to interpolate within,
+ /// position in element to interpolate at and a time stepper to do time
+ /// interpolation. WARNING: if you use this construtor you need to make
+ /// sure that the previous values stored (in nodes) have the same meaning
+ /// in both the given time stepper and the nodes' time steppers.
+ FaceElementInterpolator(const FaceElement* this_element,
+                         const Vector<double> &s,
+                         const TimeStepper* ts_pt)
+  : GeneralInterpolator(this_element, s, ts_pt) {}
+
+ virtual void build()
+ {
+  // Set up shape + test functions
+  J = This_element->J_eulerian(s());
+  This_element->shape(s(), Psi);
+  Test = Psi;
+
+  // Find out if any nodes in this element are hanging
+  Has_hanging_nodes = InterpolatorHelpers::has_hanging_nodes(This_element);
+
+  // If paranoid check that all nodes have the same nvalues.
+  InterpolatorHelpers::check_nvalues_in_element_same(This_element);
+ }
+
+ double dpsidx(const unsigned &i, const unsigned &i_direc) const
+ {
+  broken_function_error();
+  return 0;
+ }
+
+ double dtestdx(const unsigned &i, const unsigned &i_direc) const
+ {
+  broken_function_error();
+  return 0;
+ }
+
+private:
+
+ void broken_function_error() const
+  {
+   std::string err = "Cannot calculate derivatives w.r.t. x in face elements";
+   throw OomphLibError(err, OOMPH_EXCEPTION_LOCATION,
+                       OOMPH_CURRENT_FUNCTION);
+  }
+
+ // /// Broken constructors
+ // // FaceElementInterpolator() {}
+ // FaceElementInterpolator(FaceElementInterpolator& d) {}
+ // void operator=(FaceElementInterpolator& d) {}
+
+};
 
 
 } // End of oomph namespace
