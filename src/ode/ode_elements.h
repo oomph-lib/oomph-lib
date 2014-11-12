@@ -18,9 +18,24 @@ namespace oomph
 
  public:
 
+  /// Default constructor: null any pointers
+  ODEElement()
+  {
+   Exact_solution_pt = 0; 
 
-  /// Constructor: Pass timestepper and a solution function pointer
-  ODEElement(TimeStepper* timestepper_pt,
+   Use_fd_jacobian = false;
+  }
+
+  /// Constructor: Pass time stepper and a solution function pointer, then
+  /// build the element.
+  ODEElement(TimeStepper* time_stepper_pt,
+             SolutionFunctorBase* exact_solution_pt)
+  {
+   build(time_stepper_pt, exact_solution_pt);
+  }
+
+  /// Store pointers, create internal data.
+  void build(TimeStepper* time_stepper_pt,
              SolutionFunctorBase* exact_solution_pt)
   {
    Exact_solution_pt = exact_solution_pt;
@@ -28,7 +43,7 @@ namespace oomph
    Vector<double> exact = this->exact_solution(0);
    unsigned nvalue = exact.size();
 
-   add_internal_data(new Data(timestepper_pt, nvalue));
+   add_internal_data(new Data(time_stepper_pt, nvalue));
 
    Use_fd_jacobian = false;
   }
@@ -42,7 +57,7 @@ namespace oomph
   }
 
   /// Get residuals
-  void fill_in_contribution_to_residuals(Vector<double>& residuals)
+  virtual void fill_in_contribution_to_residuals(Vector<double>& residuals)
   {
    // Get pointer to one-and-only internal data object
    Data* dat_pt = internal_data_pt(0);
@@ -51,26 +66,26 @@ namespace oomph
    Vector<double> u(nvalue(), 0.0);
    dat_pt->value(u);
 
-   // Get timestepper
-   TimeStepper* timestepper_pt = dat_pt->time_stepper_pt();
+   // Get time stepper
+   TimeStepper* time_stepper_pt = dat_pt->time_stepper_pt();
 
    // Get continuous time
-   double t = timestepper_pt->time();
+   double t = time_stepper_pt->time();
 
    Vector<double> deriv = derivative_function(t, u);
    for(unsigned j=0, nj=deriv.size(); j<nj; j++)
     {
-     // Get dudt approximation from timestepper
-     double dudt = timestepper_pt->time_derivative(1, dat_pt, j);
+     // Get dudt approximation from time stepper
+     double dudt = time_stepper_pt->time_derivative(1, dat_pt, j);
 
      // Residual is difference between the exact derivative and our
-     // timestepper's derivative estimate.
+     // time stepper's derivative estimate.
      residuals[j] = deriv[j] - dudt;
     }
   }
 
-  void fill_in_contribution_to_jacobian(Vector<double>& residuals,
-                                        DenseMatrix<double>& jacobian)
+  virtual void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                                DenseMatrix<double>& jacobian)
   {
    // Get residuals
    fill_in_contribution_to_residuals(residuals);
@@ -100,8 +115,8 @@ namespace oomph
     }
   }
 
-  void fill_in_contribution_to_mass_matrix(Vector<double>& residuals,
-                                           DenseMatrix<double>& mm)
+  virtual void fill_in_contribution_to_mass_matrix(Vector<double>& residuals,
+                                                   DenseMatrix<double>& mm)
   {
    fill_in_contribution_to_residuals(residuals);
    for(unsigned j=0, nj=nvalue(); j<nj; j++)
