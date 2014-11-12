@@ -11,8 +11,8 @@ set -o nounset
 
 # Default values for arguments
 generate_config_files="false"
-oomph_root=$(pwd)
-build_dir="${oomph_root}/build"
+oomph_root=""
+build_dir=""
 make_options=""
 extra_configure_options=""
 configure_options_file="config/configure_options/current"
@@ -66,6 +66,16 @@ while getopts ":hrd:c:b:j:sk" opt; do
   esac
 done
 
+# Default value for oomph_root if not set by args
+if [[ $oomph_root == "" ]]; then
+    oomph_root=$(pwd)
+fi
+
+# and for build dir 
+if [[ $build_dir == "" ]]; then
+    build_dir=${oomph_root}/build
+fi
+
 # Load helper functions
 source "${oomph_root}/bin/autogen_helpers.sh"
 
@@ -79,7 +89,7 @@ cd "$oomph_root"
 # Print information about options
 echo
 echo "Using oomph lib in directory \"$PWD\""
-echo "Using configure options file $configure_options_file"
+echo "Using configure options file \"$configure_options_file\""
 echo "Placing built files in \"$build_dir\""
 if [[ $make_options != "" ]]; then
     echo "Using make options: \"$make_options\""
