@@ -12,15 +12,14 @@ make_options=""
 extra_configure_options=""
 configure_options_file="config/configure_options/current"
 generate_config_files="false"
+echo_usage="false"
+
 
 
 while getopts ":hrd:c:b:j:sk" opt; do
   case $opt in
       h)
-          echo "Options for autogen.sh:"
-          echo
-          EchoUsage
-          exit 0
+          echo_usage="true"
           ;;
 
       r)
@@ -75,6 +74,14 @@ fi
 
 # Load helper functions
 source "${oomph_root}/bin/autogen_helpers.sh"
+
+# Just echo usage and exit if requested
+if [[ $echo_usage == "true" ]]; then
+    echo "Options for autogen.sh:"
+    echo
+    EchoUsage
+    exit 0
+fi
 
 # Convert some things to absolute paths
 build_dir="$(AbsPath $build_dir)"
