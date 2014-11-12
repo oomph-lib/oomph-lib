@@ -24,27 +24,15 @@ namespace oomph
   // Now add contribution for the added matrices
   for(unsigned i_matrix=0; i_matrix<Added_matrix_pt.size(); i_matrix++)
    {
-    // Try to cast to a distributed object to get a distribution pointer
-    DistributableLinearAlgebraObject* dist_obj_pt
-     = dynamic_cast < DistributableLinearAlgebraObject* >
-     (added_matrix_pt(i_matrix));
-
     // If possible copy the matrix distribution, otherwise it isn't
     // distributed so make a serial LinearAlgebraDistribution object.
-    LinearAlgebraDistribution dist;
-    LinearAlgebraDistribution* dist_pt = &dist;
+    LinearAlgebraDistribution col_dist, row_dist;
     OomphCommunicator serial_comm; // Serial communcator (does nothing)
-    if(dist_obj_pt == 0)
-     {
-      dist_pt->build(&serial_comm, added_matrix_pt(i_matrix)->nrow(), false);
-     }
-    else
-     {
-      dist_pt = dist_obj_pt->distribution_pt();
-     }
+    col_dist.build(&serial_comm, added_matrix_pt(i_matrix)->ncol(), false);
+    row_dist.build(&serial_comm, added_matrix_pt(i_matrix)->nrow(), false);
 
     // Create temporary output DoubleVector
-    DoubleVector temp_soln(dist_pt);
+    DoubleVector temp_soln(row_dist);
 
     // Create a const iterator for the map (faster than .find() or []
     // access, const means can't change the map via the iterator).
@@ -52,12 +40,15 @@ namespace oomph
     
     // Pull out the appropriate values into a temp vector
     //??ds not parallel
-    DoubleVector temp_x(dist_pt);
+    DoubleVector temp_x(col_dist);
     for(it = Col_map_pts[i_matrix]->main_to_added_mapping_pt()->begin();
         it != Col_map_pts[i_matrix]->main_to_added_mapping_pt()->end();
         it++)
      {
-      temp_x[it->second] = x[it->first];
+      if(it->second >= 0) // skip pinned nodes
+       {
+        temp_x[it->second] = x[it->first];
+       }
      }
     
     // Perform the multiplication
@@ -69,7 +60,10 @@ namespace oomph
         it != Row_map_pts[i_matrix]->main_to_added_mapping_pt()->end();
         it++)
      {
-      soln[it->first] += temp_soln[it->second];
+      if(it->second >= 0)  // skip pinned nodes
+       {
+        soln[it->first] += temp_soln[it->second];
+       }
      }
    }
 
