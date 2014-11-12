@@ -1686,6 +1686,14 @@ namespace oomph
  ///Virtual so that it can be overloaded for mpi problems
  virtual void get_inverse_mass_matrix_times_residuals(DoubleVector &Mres);
 
+ /// \short Get the time derivative of all values (using
+ /// get_inverse_mass_matrix_times_residuals(..) with all time steppers set
+ /// to steady) e.g. for use in explicit time steps. The approach used is
+ /// slighty hacky, beware if you have a residual which is non-linear or
+ /// implicit in the derivative or if you have overloaded
+ /// get_jacobian(...).
+ virtual void get_dvaluesdt(DoubleVector &f);
+
  /// \short Return the fully-assembled residuals Vector for the problem:
  /// Virtual so it can be overloaded in for mpi problems
  virtual void get_residuals(DoubleVector &residuals);

@@ -3434,6 +3434,33 @@ ContinuationStorageScheme Problem::Continuation_time_stepper;
    }
  }
 
+ void Problem::get_dvaluesdt(DoubleVector &f)
+ {
+  // Loop over timesteppers: make them (temporarily) steady and store their
+  // is_steady status.
+  unsigned n_time_steppers = this->ntime_stepper();
+  std::vector<bool> was_steady(n_time_steppers);
+  for(unsigned i=0;i<n_time_steppers;i++)
+   {
+    was_steady[i]=time_stepper_pt(i)->is_steady();
+    time_stepper_pt(i)->make_steady();
+   }
+
+  // Calculate f using the residual/jacobian machinary.
+  get_inverse_mass_matrix_times_residuals(f);
+
+  // Reset the is_steady status of all timesteppers that weren't already
+  // steady when we came in here and reset their weights
+  for(unsigned i=0;i<n_time_steppers;i++)
+   {
+    if (!was_steady[i])
+     {
+      time_stepper_pt(i)->undo_make_steady();
+     }
+   }
+ }
+
+
 
 //================================================================
 /// Get the total residuals Vector for the problem
@@ -10532,34 +10559,8 @@ void Problem::explicit_timestep(const double &dt, const bool &shift_values)
  //Set the current value of dt, if we can
  if(time_pt()->ndt() > 0) {time_pt()->dt() = dt;}
 
- //Make all the implicit timestepper steady
- //Find out how many timesteppers there are
- unsigned n_time_steppers = ntime_stepper();
-
- // Vector of bools to store the is_steady status of the various
- // timesteppers when we came in here
- std::vector<bool> was_steady(n_time_steppers);
-
- //Loop over them all and make them (temporarily) static
- for(unsigned i=0;i<n_time_steppers;i++)
-  {
-   was_steady[i]=time_stepper_pt(i)->is_steady();
-   time_stepper_pt(i)->make_steady();
-  }
-
  //Take the explicit step
  this->explicit_time_stepper_pt()->timestep(this,dt);
-
- // Reset the is_steady status of all timesteppers that
- // weren't already steady when we came in here and reset their
- // weights
- for(unsigned i=0;i<n_time_steppers;i++)
-  {
-   if (!was_steady[i])
-    {
-     time_stepper_pt(i)->undo_make_steady();
-    }
-  }
 }
 
 

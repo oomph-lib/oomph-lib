@@ -90,7 +90,7 @@ public:
 
  ///\short A single virtual function that returns the residuals
  ///vector multiplied by the inverse mass matrix
- virtual void get_inverse_mass_matrix_times_residuals(DoubleVector &minv_res);
+ virtual void get_dvaluesdt(DoubleVector &minv_res);
   
  /// Function that gets the values of the dofs in the object
  virtual void get_dofs(DoubleVector &dofs) const;

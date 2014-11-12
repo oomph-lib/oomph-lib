@@ -41,7 +41,7 @@ namespace oomph
  ///vector multiplied by the inverse mass matrix
  //=================================================================
  void ExplicitTimeSteppableObject::
- get_inverse_mass_matrix_times_residuals(DoubleVector &minv_res)
+ get_dvaluesdt(DoubleVector &minv_res)
  {
   std::ostringstream error_stream;
   error_stream 
@@ -130,7 +130,7 @@ namespace oomph
    << "input vector to the degrees of freedom in the object.\n"
    << "Note: It is the responsibility of the object to ensure that the\n"
    << "      the degrees of freedom are in the same order as those \n"
-   << "      returned by get_inverse_mass_matrix_times_residuals()\n";
+   << "      returned by get_dvaluesdt()\n";
   
   throw OomphLibError(error_stream.str(),
                       OOMPH_CURRENT_FUNCTION,
@@ -185,7 +185,7 @@ namespace oomph
   //residuals
   DoubleVector minv_res;
   //Get M^{-1} R
-  object_pt->get_inverse_mass_matrix_times_residuals(minv_res);
+  object_pt->get_dvaluesdt(minv_res);
   
   //Add the result to the unknowns
   object_pt->add_to_dofs(dt,minv_res);
@@ -231,7 +231,7 @@ void RungeKutta<4>::timestep(ExplicitTimeSteppableObject* const &object_pt,
 
  //Now get the first unknowns
  DoubleVector k1;
- object_pt->get_inverse_mass_matrix_times_residuals(k1);
+ object_pt->get_dvaluesdt(k1);
  
  //Add to the residuals
  object_pt->add_to_dofs(0.5*dt,k1);
@@ -246,7 +246,7 @@ void RungeKutta<4>::timestep(ExplicitTimeSteppableObject* const &object_pt,
 
  //Get the next unknowns
  DoubleVector k2;
- object_pt->get_inverse_mass_matrix_times_residuals(k2);
+ object_pt->get_dvaluesdt(k2);
  
  //Now reset the residuals
  object_pt->set_dofs(u);
@@ -260,7 +260,7 @@ void RungeKutta<4>::timestep(ExplicitTimeSteppableObject* const &object_pt,
 
  //Get the next unknowns
  DoubleVector k3;
- object_pt->get_inverse_mass_matrix_times_residuals(k3);
+ object_pt->get_dvaluesdt(k3);
  
  //Now reset the residuals
  object_pt->set_dofs(u);
@@ -275,7 +275,7 @@ void RungeKutta<4>::timestep(ExplicitTimeSteppableObject* const &object_pt,
 
  //Get the final unknowns
  DoubleVector k4;
- object_pt->get_inverse_mass_matrix_times_residuals(k4);
+ object_pt->get_dvaluesdt(k4);
  
  //Set the final values of the unknowns
  object_pt->set_dofs(u);
@@ -307,7 +307,7 @@ void RungeKutta<4>::timestep(ExplicitTimeSteppableObject* const &object_pt,
 
   // Get f1 (time derivative at t0, y0) and add to dofs
   DoubleVector f1;
-  object_pt->get_inverse_mass_matrix_times_residuals(f1);
+  object_pt->get_dvaluesdt(f1);
   object_pt->add_to_dofs(dt, f1);
 
   // Advance time to t1 = t0 + dt
@@ -322,7 +322,7 @@ void RungeKutta<4>::timestep(ExplicitTimeSteppableObject* const &object_pt,
 
   // get f2 (with t=t1, y = y0 + h f0)
   DoubleVector f2;
-  object_pt->get_inverse_mass_matrix_times_residuals(f2);
+  object_pt->get_dvaluesdt(f2);
 
   // Final answer is starting dofs + h/2 * (f1 + f2)
   object_pt->set_dofs(u);
@@ -415,7 +415,7 @@ void LowStorageRungeKutta<4>::timestep(
 
    //Get the inverse mass matrix multiplied by the current value
    //of the residuals
-   object_pt->get_inverse_mass_matrix_times_residuals(minv_res);
+   object_pt->get_dvaluesdt(minv_res);
    //Get the values of k
    const unsigned n_dof= minv_res.nrow();
 
@@ -478,7 +478,7 @@ void EBDF3::timestep(ExplicitTimeSteppableObject* const &object_pt,
  // step n+1, it's ok because we haven't changed the values in that slot
  // yet).
  DoubleVector fn;
- object_pt->get_inverse_mass_matrix_times_residuals(fn);
+ object_pt->get_dvaluesdt(fn);
  fn *= Fn_weight;
 
  // Extract history values and multiply by their weights

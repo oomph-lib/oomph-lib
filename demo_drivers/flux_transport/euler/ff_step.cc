@@ -106,7 +106,7 @@ void SSP_RungeKutta<2>::timestep(ExplicitTimeSteppableObject* const &object_pt,
 
  //Now get the first unknowns
  DoubleVector k1;
- object_pt->get_inverse_mass_matrix_times_residuals(k1);
+ object_pt->get_dvaluesdt(k1);
  
  //Add to the residuals
  object_pt->add_to_dofs(dt,k1);
@@ -120,7 +120,7 @@ void SSP_RungeKutta<2>::timestep(ExplicitTimeSteppableObject* const &object_pt,
 
  //Get the next unknowns
  DoubleVector k2;
- object_pt->get_inverse_mass_matrix_times_residuals(k2);
+ object_pt->get_dvaluesdt(k2);
  
  //Add to the residuals so that the current value of the unknowns
  //is the result of two forward Euler steps of time dt
