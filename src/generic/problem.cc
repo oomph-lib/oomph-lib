@@ -11206,7 +11206,10 @@ void Problem::calculate_predictions()
     
     // Backup dofs and time
     store_current_dof_values();
+
+#ifdef PARANOID
     double backup_time = time();
+#endif
 
     // Move time back so that we are at the start of the timestep (as
     // explicit_timestep functions expect). This is needed because the
