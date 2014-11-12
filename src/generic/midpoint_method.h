@@ -189,7 +189,10 @@ class MidpointMethodByBDF : public MidpointMethodBase
 {
 public:
  /// Constructor with initialisation
- MidpointMethodByBDF(bool adaptive=false) : MidpointMethodBase(adaptive) {}
+ MidpointMethodByBDF(bool adaptive=false) : MidpointMethodBase(adaptive) 
+ {
+  Update_pinned = true;
+ }
 
  /// Destructor
  virtual ~MidpointMethodByBDF() {}
@@ -213,6 +216,9 @@ public:
  /// Take problem from t={n+1/2} to t=n+1 by algebraic update and restore
  /// time step.
  void actions_after_timestep(Problem* problem_pt);
+
+ /// Should we update pinned variables after the half-step?
+ bool Update_pinned;
 
 private:
 

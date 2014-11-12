@@ -2,6 +2,11 @@
 #include "midpoint_method.h"
 #include "problem.h"
 
+// Needed for mipoint update...
+#include "mesh.h"
+#include "elements.h"
+#include "nodes.h"
+
 namespace oomph
 {
 
@@ -152,20 +157,59 @@ namespace oomph
     }
   }
 
+ /// Local (not exported in header) helper function to handle midpoint
+ /// update on a data object.
+ void post_midpoint_update(Data* dat_pt, bool update_pinned)
+ {
+  for(unsigned j=0, nj=dat_pt->nvalue(); j<nj; j++)
+   {
+    int eqn = dat_pt->eqn_number(j);
+    if(update_pinned || eqn >= 0)
+     {
+      double ynp1 = 2*dat_pt->value(0, j) - dat_pt->value(1, j);
+      dat_pt->set_value(0, j, ynp1);
+     }
+   }
+ }
+
  /// Take problem from t={n+1/2} to t=n+1 by algebraic update and restore
  /// time step.
  void MidpointMethodByBDF::actions_after_timestep(Problem* problem_pt)
-  {
-   const unsigned ndof = problem_pt->ndof();
+ {
+#ifdef PARANOID
+  // Do it as dofs too to compare
+  const unsigned ndof = problem_pt->ndof();
+  DoubleVector dof_n, dof_np1;
+  problem_pt->get_dofs(1, dof_n);
+  problem_pt->get_dofs(dof_np1);
 
-   // Get dofs at previous time step
-   DoubleVector dof_n;
-   problem_pt->get_dofs(1, dof_n);
+  for(unsigned i=0; i<ndof; i++)
+   {
+    dof_np1[i] += dof_np1[i] - dof_n[i];
+   }
+#endif
 
-   // Update dofs at current step
-   for(unsigned i=0; i<ndof; i++)
+   // First deal with global data
+   for(unsigned i=0, ni=problem_pt->nglobal_data(); i<ni; i++)
     {
-     problem_pt->dof(i) += problem_pt->dof(i) - dof_n[i];
+     post_midpoint_update(problem_pt->global_data_pt(i), Update_pinned);
+    }
+
+   // Next element internal data
+   for(unsigned i=0, ni=problem_pt->mesh_pt()->nelement(); i<ni; i++)
+    {
+     GeneralisedElement* ele_pt = problem_pt->mesh_pt()->element_pt(i);
+     for(unsigned j=0, nj=ele_pt->ninternal_data(); j<nj; j++)
+      {
+       post_midpoint_update(ele_pt->internal_data_pt(j), Update_pinned); 
+      }
+    }
+
+   // Now the nodes
+   for(unsigned i=0, ni=problem_pt->mesh_pt()->nnode(); i<ni; i++)
+    {
+     post_midpoint_update(problem_pt->mesh_pt()->node_pt(i), 
+                          Update_pinned);
     }
 
    // Update time
@@ -173,6 +217,24 @@ namespace oomph
 
    // Return step size to its full value
    problem_pt->time_pt()->dt() *= 2;
+
+#ifdef PARANOID
+   using namespace StringConversion;
+   DoubleVector actual_dof_np1;
+   problem_pt->get_dofs(actual_dof_np1);
+
+   for(unsigned j=0; j<actual_dof_np1.nrow(); j++)
+    {
+     if(std::abs(actual_dof_np1[j] - dof_np1[j]) > 1e-8)
+       {
+        std::string err = to_string(actual_dof_np1[j]) + " " 
+         + to_string(dof_np1[j]) + " wrong";
+        throw OomphLibError(err, OOMPH_EXCEPTION_LOCATION,
+                            OOMPH_CURRENT_FUNCTION);
+       }
+    }
+
+#endif
 
   }
 
