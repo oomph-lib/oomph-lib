@@ -491,10 +491,10 @@ void Mesh::node_update(const bool& update_all_solid_nodes)
 /// Reorder nodes in the order in which they are
 /// encountered when stepping through the elements
 //========================================================
- void Mesh::reorder_nodes()
+ void Mesh::reorder_nodes(bool use_old_ordering)
  {
   Vector<Node*> reordering;
-  get_node_reordering(reordering);
+  get_node_reordering(reordering, use_old_ordering);
 
   unsigned n_node = nnode();
   for(unsigned i=0; i<n_node; i++)
@@ -508,72 +508,89 @@ void Mesh::node_update(const bool& update_all_solid_nodes)
 /// when stepping through the elements (similar to reorder_nodes() but
 /// without changing the mesh's node vector).
 //========================================================
-void Mesh::get_node_reordering(Vector<Node*> &reordering) const
-{
+ void Mesh::get_node_reordering(Vector<Node*> &reordering,
+                                bool use_old_ordering) const
+ {
+  if(use_old_ordering)
+   {
+    // Setup map to check if nodes have been done yet
+    std::map<Node*,bool> done;
 
- // Setup map to check if nodes have been done yet
- std::map<Node*,bool> done;
+    // Loop over all nodes
+    unsigned nnod=nnode();
 
- // Loop over all nodes
- unsigned nnod=nnode();
+    // Initialise the vector
+    reordering.assign(nnod,0);
 
- // Initialise the vector
- reordering.assign(nnod,0);
+    // Return immediately if there are no nodes: Note assumption:
+    // Either all the elements' nodes stored here or none.
+    // If only a subset is stored in the Node_pt vector we'll get
+    // a range checking error below (only if run with range, checking,
+    // of course).
+    if (nnod==0) return;
+    for (unsigned j=0;j<nnod;j++)
+     {
+      done[node_pt(j)]=false;
+     }
 
- // Return immediately if there are no nodes: Note assumption:
- // Either all the elements' nodes stored here or none.
- // If only a subset is stored in the Node_pt vector we'll get
- // a range checking error below (only if run with range, checking,
- // of course).
- if (nnod==0) return;
- for (unsigned j=0;j<nnod;j++)
-  {
-   done[node_pt(j)]=false;
-  }
+    // Initialise counter for number of nodes
+    unsigned long count=0;
 
- // Initialise counter for number of nodes
- unsigned long count=0;
+    // Loop over all elements
+    unsigned nel=nelement();
+    for (unsigned e=0;e<nel;e++)
+     {
+      // Loop over nodes in element
+      FiniteElement* el_pt = checked_dynamic_cast<FiniteElement*>(element_pt(e));
+      unsigned nnod=el_pt->nnode();
+      for (unsigned j=0;j<nnod;j++)
+       {
+        Node* nod_pt=el_pt->node_pt(j);
+        // Has node been done yet?
+        if (!done[nod_pt])
+         {
+          // Insert into node vector. NOTE: If you get a seg fault/range checking
+          // error here then you probably haven't added all the elements' nodes
+          // to the Node_pt vector -- this is most likely to arise in the
+          // case of meshes of face elements (though they usually don't
+          // store the nodes at all so if you have any problems here there's
+          // something unusual/not quite right in any case... For this
+          // reason we don't range check here by default (not even under
+          // paranoia) but force you turn on proper (costly) range checking
+          // to track this down...
+          reordering[count]=nod_pt;
+          done[nod_pt]=true;
+          // Increase counter
+          count++;
+         }
+       }
+     }
 
- // Loop over all elements
- unsigned nel=nelement();
- for (unsigned e=0;e<nel;e++)
-  {
-   // Loop over nodes in element
-   FiniteElement* el_pt = checked_dynamic_cast<FiniteElement*>(element_pt(e));
-   unsigned nnod=el_pt->nnode();
-   for (unsigned j=0;j<nnod;j++)
-    {
-     Node* nod_pt=el_pt->node_pt(j);
-     // Has node been done yet?
-     if (!done[nod_pt])
-      {
-       // Insert into node vector. NOTE: If you get a seg fault/range checking
-       // error here then you probably haven't added all the elements' nodes
-       // to the Node_pt vector -- this is most likely to arise in the
-       // case of meshes of face elements (though they usually don't
-       // store the nodes at all so if you have any problems here there's
-       // something unusual/not quite right in any case... For this
-       // reason we don't range check here by default (not even under
-       // paranoia) but force you turn on proper (costly) range checking
-       // to track this down...
-       reordering[count]=nod_pt;
-       done[nod_pt]=true;
-       // Increase counter
-       count++;
-      }
-    }
-  }
+    // Sanity check
+    if (count!=nnod)
+     {
+      throw OomphLibError(
+                          "Trouble: Number of nodes hasn't stayed constant during reordering!\n",
+                          OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+     }
 
- // Sanity check
- if (count!=nnod)
-  {
-   throw OomphLibError(
-                       "Trouble: Number of nodes hasn't stayed constant during reordering!\n",
-                       OOMPH_CURRENT_FUNCTION,
-                       OOMPH_EXCEPTION_LOCATION);
-  }
+   }
+  else
+   {
+    // Copy node vector out
+    unsigned n_node = nnode();
+    reordering.resize(n_node);
+    for(unsigned i=0; i<n_node; i++)
+     {
+      reordering[i] = node_pt(i);
+     }
 
-}
+    // and sort it
+    std::sort(reordering.begin(), reordering.end(),
+              &NodeOrdering::node_global_position_comparison); 
+   }
+ }
 
 
 //========================================================
@@ -1017,13 +1034,13 @@ void Mesh::output_boundaries(std::ostream &outfile)
 /// Dump function for the mesh class.
 /// Loop over all nodes and elements and dump them
 //===================================================================
-void Mesh::dump(std::ofstream &dump_file) const
+ void Mesh::dump(std::ofstream &dump_file, bool use_old_ordering) const
 {
 
  // Get a reordering of the nodes so that the dump file is in a standard
  // ordering regardless of the sequence of mesh refinements etc.
  Vector<Node*> reordering;
- this->get_node_reordering(reordering);
+ this->get_node_reordering(reordering, use_old_ordering);
 
  // Find number of nodes
  unsigned long Node_pt_range = this->nnode();

@@ -569,12 +569,13 @@ public:
 
  /// \short Re-order nodes in the order in which they appear in elements --
  /// can be overloaded for more efficient re-ordering
- virtual void reorder_nodes();
+ virtual void reorder_nodes(bool use_old_ordering=true);
 
  /// \short Get a reordering of the nodes in the order in which they
  /// appear in elements -- can be overloaded for more efficient
  /// re-ordering
- virtual void get_node_reordering(Vector<Node*> &reordering) const;
+ virtual void get_node_reordering(Vector<Node*> &reordering,
+                                  bool use_old_ordering=true) const;
 
  /// \short Constuct a Mesh of FACE_ELEMENTs along the b-th boundary
  /// of the mesh (which contains elements of type BULK_ELEMENT)
@@ -806,10 +807,12 @@ public:
   }
 
  /// Dump the data in the mesh into a file for restart
- virtual void dump(std::ofstream &dump_file) const;
+ virtual void dump(std::ofstream &dump_file,
+                   bool use_old_ordering=true) const;
 
  /// Dump the data in the mesh into a file for restart
- void dump(const std::string &dump_file_name) const
+ void dump(const std::string &dump_file_name,
+           bool use_old_ordering=true) const
  {
   std::ofstream dump_stream(dump_file_name.c_str());
 #ifdef PARANOID
@@ -820,7 +823,7 @@ public:
                         OOMPH_CURRENT_FUNCTION);
    }
 #endif
-  dump(dump_stream);
+  dump(dump_stream, use_old_ordering);
  }
 
  /// \short Read solution from restart file
@@ -2431,7 +2434,40 @@ namespace ParaviewHelper
 ////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////
 
+namespace NodeOrdering 
+{
+ /// Function for ordering nodes. Return true if first node's position is
+ /// "before" second nodes. Dimension 0 checked first, then... until they
+ /// are different (by more than tol=1e-10). If they are both in exactly
+ /// the same place an error is thrown.
+ inline bool node_global_position_comparison(Node* nd1_pt, Node* nd2_pt) 
+ {
+  unsigned ndim = nd1_pt->ndim();
 
+  unsigned j;
+  for(j=0; j<ndim; j++)
+   {
+    if(std::abs(nd1_pt->x(j) - nd2_pt->x(j)) > 1e-10)
+     {
+      if(nd1_pt->x(j) < nd2_pt->x(j))
+       {
+        return true;
+       }
+      else 
+       {
+        return false;
+       }
+     }
+    // otherwise they are the same in this dimension, check next one.
+   }
+
+  std::string err = "Nodes are at the same point to ~ 1e-10!";
+  err += " difference is " +
+   StringConversion::to_string(std::abs(nd1_pt->x(j) - nd2_pt->x(j)));
+  throw OomphLibError(err, OOMPH_EXCEPTION_LOCATION,
+                      OOMPH_CURRENT_FUNCTION);
+ }
+}
 
 
 }
