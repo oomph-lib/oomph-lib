@@ -2345,6 +2345,15 @@ public:
                          OOMPH_EXCEPTION_LOCATION);
   }
 
+ /// \short Pointer to the j-th vertex node in the element. Broken virtual
+ /// function in "pure" finite elements.
+ virtual Node* vertex_node_pt(const unsigned& j) const
+ {
+  std::string error_msg = "Not implemented for FiniteElement.";
+  throw OomphLibError(error_msg, OOMPH_CURRENT_FUNCTION,
+                      OOMPH_EXCEPTION_LOCATION);
+ }
+
  /// \short Construct the local node n and return a pointer to the newly 
  /// created node object.
  virtual Node* construct_node(const unsigned &n)
