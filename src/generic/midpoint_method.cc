@@ -230,8 +230,9 @@ namespace oomph
     {
      if(std::abs(actual_dof_np1[j] - dof_np1[j]) > 1e-8)
        {
-        std::string err = to_string(actual_dof_np1[j]) + " " 
-         + to_string(dof_np1[j]) + " wrong";
+        std::string err = "Got different values doing midpoint update via extracted dofs than doing it in place!";
+        err += to_string(actual_dof_np1[j]) + " vs " 
+         + to_string(dof_np1[j]);
         throw OomphLibError(err, OOMPH_EXCEPTION_LOCATION,
                             OOMPH_CURRENT_FUNCTION);
        }
