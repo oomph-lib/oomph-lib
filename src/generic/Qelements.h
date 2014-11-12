@@ -599,7 +599,7 @@ public:
   }
  
  /// Get local coordinates of node j in the element; vector sets its own size
- void local_coordinate_of_node(const unsigned& j, Vector<double>& s)
+ void local_coordinate_of_node(const unsigned& j, Vector<double>& s) const
   {
    s.resize(1);
    s[0]=this->s_min()+double(j)/double(NNODE_1D-1)*
@@ -927,7 +927,7 @@ public:
  
 
  /// Get local coordinates of node j in the element; vector sets its own size
- void local_coordinate_of_node(const unsigned& j, Vector<double>& s)
+ void local_coordinate_of_node(const unsigned& j, Vector<double>& s) const
   {
    s.resize(2);
    unsigned j0=j%NNODE_1D;
@@ -1292,7 +1292,7 @@ public:
  }
 
  /// Get local coordinates of node j in the element; vector sets its own size
- void local_coordinate_of_node(const unsigned& j, Vector<double>& s)
+ void local_coordinate_of_node(const unsigned& j, Vector<double>& s) const
   {
    s.resize(3);
    unsigned j0=j%NNODE_1D;

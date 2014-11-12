@@ -243,7 +243,7 @@ template<>
 /// Return local coordinates of node j
 //=======================================================================
   void local_coordinate_of_node(const unsigned& j,
-                                Vector<double>& s)
+                                Vector<double>& s) const
    {
     s.resize(1);
     switch (j)
@@ -317,7 +317,7 @@ template<>
 /// Return local coordinates of node j
 //=======================================================================
   void local_coordinate_of_node(const unsigned& j,
-                                Vector<double>& s)
+                                Vector<double>& s) const
    {
     s.resize(1);
     switch (j)
@@ -400,7 +400,7 @@ template<>
 /// Return local coordinates of node j
 //=======================================================================
   void local_coordinate_of_node(const unsigned& j,
-                                Vector<double>& s)
+                                Vector<double>& s) const
    {
     s.resize(1);
     switch (j)
@@ -493,7 +493,7 @@ template<>
 /// Return local coordinates of node j
 //=======================================================================
   void local_coordinate_of_node(const unsigned& j,
-                                Vector<double>& s)
+                                Vector<double>& s) const
    {
     switch (j)
      {
@@ -583,7 +583,7 @@ template<>
 /// Return local coordinates of node j
 //=======================================================================
   void local_coordinate_of_node(const unsigned& j,
-                                Vector<double>& s)
+                                Vector<double>& s) const
    {
     switch (j)
      {
@@ -722,7 +722,7 @@ template<>
 /// Return local coordinates of node j
 //=======================================================================
   void local_coordinate_of_node(const unsigned& j,
-                                Vector<double>& s)
+                                Vector<double>& s) const
    {
     switch (j)
   {
@@ -930,7 +930,7 @@ template<>
 /// Return local coordinates of node j
 //=======================================================================
   void local_coordinate_of_node(const unsigned& j,
-                                Vector<double>& s)
+                                Vector<double>& s) const
    {
     switch (j)
      {
@@ -1388,7 +1388,7 @@ public:
  double s_max() const {return 1.0;}
 
  /// Return local coordinates of node j
- inline void local_coordinate_of_node(const unsigned& j,Vector<double>& s)
+ inline void local_coordinate_of_node(const unsigned& j,Vector<double>& s) const
   {TElementShape<1,NNODE_1D>::local_coordinate_of_node(j,s);}
 
  /// \short Return the number of actual plot points for paraview
@@ -1646,7 +1646,7 @@ public:
  double s_max() const {return 1.0;}
 
  /// Return local coordinates of node j
- inline void local_coordinate_of_node(const unsigned& j,Vector<double>& s)
+ inline void local_coordinate_of_node(const unsigned& j,Vector<double>& s) const
   {TElementShape<2,NNODE_1D>::local_coordinate_of_node(j,s);}
 
  /// \short Return the number of actual plot points for paraview
@@ -1878,7 +1878,7 @@ class TElementShape<3,2>
 {
   public:
  void local_coordinate_of_node(const unsigned& j,
-                               Vector<double>& s)
+                               Vector<double>& s) const
   {
    switch (j)
     {
@@ -2000,7 +2000,7 @@ template<>
  {
    public:
   void local_coordinate_of_node(const unsigned& j,
-                                Vector<double>& s)
+                                Vector<double>& s) const
 {
  switch (j)
   {
@@ -2272,7 +2272,7 @@ template<>
   unsigned n_enriched_nodes() {return 5;}
 
   void local_coordinate_of_node(const unsigned& j,
-                                Vector<double>& s)
+                                Vector<double>& s) const
 {
  switch (j)
   {
@@ -3087,7 +3087,7 @@ public:
   double s_max() const {return 1.0;}
   
   /// Return local coordinates of node j
-  inline void local_coordinate_of_node(const unsigned& j,Vector<double>& s)
+  inline void local_coordinate_of_node(const unsigned& j,Vector<double>& s) const
    {TElementShape<3,NNODE_1D>::local_coordinate_of_node(j,s);}
 
  /// \short Return the number of actual plot points for paraview
@@ -3539,7 +3539,7 @@ public:
   {TBubbleEnrichedElementShape<DIM,3>::d2shape_local(s,psi,dpsids,d2psids);}
  
  /// Return local coordinates of node j
- inline void local_coordinate_of_node(const unsigned& j,Vector<double>& s)
+ inline void local_coordinate_of_node(const unsigned& j,Vector<double>& s) const
   {TBubbleEnrichedElementShape<DIM,3>::local_coordinate_of_node(j,s);}
 
  /// \short Build the lower-dimensional FaceElement 

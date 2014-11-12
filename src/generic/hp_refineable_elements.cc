@@ -43,7 +43,7 @@ namespace oomph
 /// Get local coordinates of node j in the element; vector sets its own size
 template<unsigned INITIAL_NNODE_1D>
 void PRefineableQElement<1,INITIAL_NNODE_1D>::
-local_coordinate_of_node(const unsigned& n, Vector<double>& s)
+local_coordinate_of_node(const unsigned& n, Vector<double>& s) const
  {
   s.resize(1);
   
@@ -1189,7 +1189,7 @@ check_integrity(double& max_error)
 /// Get local coordinates of node j in the element; vector sets its own size
 template<unsigned INITIAL_NNODE_1D>
 void PRefineableQElement<2,INITIAL_NNODE_1D>::
-local_coordinate_of_node(const unsigned& n, Vector<double>& s)
+local_coordinate_of_node(const unsigned& n, Vector<double>& s) const
  {
   s.resize(2);
   unsigned Nnode_1d = this->nnode_1d();
@@ -4650,7 +4650,7 @@ interpolated_zeta_on_edge_before_p_refinement(const unsigned &boundary,
 /// Get local coordinates of node j in the element; vector sets its own size
 template<unsigned INITIAL_NNODE_1D>
 void PRefineableQElement<3,INITIAL_NNODE_1D>::
-local_coordinate_of_node(const unsigned& n, Vector<double>& s)
+local_coordinate_of_node(const unsigned& n, Vector<double>& s) const
  {
   OomphLibWarning(
    "3D PRefineableQElements have not been fully implemented.",

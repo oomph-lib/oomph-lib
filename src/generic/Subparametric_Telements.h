@@ -70,7 +70,7 @@ template<>
 /// Return local coordinates of node j
 //=======================================================================
   void local_coordinate_of_node(const unsigned& j,
-                                Vector<double>& s)
+                                Vector<double>& s) const
    {
     switch (j)
      {
@@ -1023,7 +1023,7 @@ template<>
 /// Return local coordinates of node j
 //=======================================================================
   void local_coordinate_of_node(const unsigned& j,
-                                Vector<double>& s)
+                                Vector<double>& s) const
    {
     switch (j)
      {
@@ -1147,7 +1147,7 @@ template<>
 /// Return local coordinates of node j
 //=======================================================================
   void local_coordinate_of_node(const unsigned& j,
-                                Vector<double>& s)
+                                Vector<double>& s) const
    {
     switch (j)
      {
@@ -1449,7 +1449,7 @@ template<unsigned DIM, unsigned NNODE_1D>
  /// Return local coordinates of node j
  //=======================================================================
   void local_coordinate_of_node(const unsigned& j,
-                                Vector<double>& s)
+                                Vector<double>& s) const
    {
     if(NNODE_1D == 2)                                
      {
@@ -5291,7 +5291,7 @@ class C1CurvedElement<2,NNODE_1D> : public virtual C1CurvedElementBase<NNODE_1D>
   }
 
  /// Return local coordinates of node j
- inline void local_coordinate_of_node(const unsigned& j,Vector<double>& s)
+ inline void local_coordinate_of_node(const unsigned& j,Vector<double>& s) const
   {C1CurvedElementShape<2,NNODE_1D>::local_coordinate_of_node(j,s);}
 
  /// Calculate the c1-shape functions associated with a straight-sided 

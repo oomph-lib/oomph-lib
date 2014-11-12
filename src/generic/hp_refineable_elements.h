@@ -103,7 +103,7 @@ public:
  
  // Overload nodal positions -- these elements have GLL-spaced nodes.
  /// Get local coordinates of node j in the element; vector sets its own size
- void local_coordinate_of_node(const unsigned& n, Vector<double>& s);
+ void local_coordinate_of_node(const unsigned& n, Vector<double>& s) const;
 
  /// Get the local fractino of node j in the element
  void local_fraction_of_node(const unsigned &n, Vector<double> &s_fraction);
@@ -188,7 +188,7 @@ public:
  
  // Overload nodal positions -- these elements have GLL-spaced nodes.
  /// Get local coordinates of node j in the element; vector sets its own size
- void local_coordinate_of_node(const unsigned& n, Vector<double>& s);
+ void local_coordinate_of_node(const unsigned& n, Vector<double>& s) const;
 
  /// Get the local fractino of node j in the element
  void local_fraction_of_node(const unsigned &n, Vector<double> &s_fraction);
@@ -314,7 +314,7 @@ public:
  
  // Overload nodal positions -- these elements have GLL-spaced nodes.
  /// Get local coordinates of node j in the element; vector sets its own size
- void local_coordinate_of_node(const unsigned& n, Vector<double>& s);
+ void local_coordinate_of_node(const unsigned& n, Vector<double>& s) const;
 
  /// Get the local fractino of node j in the element
  void local_fraction_of_node(const unsigned &n, Vector<double> &s_fraction);

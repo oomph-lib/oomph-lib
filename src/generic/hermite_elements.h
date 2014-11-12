@@ -238,7 +238,7 @@ public:
 
  
  /// Get local coordinates of node j in the element; vector sets its own size
- void local_coordinate_of_node(const unsigned& j, Vector<double>& s)
+ void local_coordinate_of_node(const unsigned& j, Vector<double>& s) const
   {
    s.resize(DIM);
    Vector<unsigned> j_sub(DIM);

@@ -1779,7 +1779,7 @@ public:
 
  /// \short Get local coordinates of node j in the element; vector 
  /// sets its own size (broken virtual)
- virtual void local_coordinate_of_node(const unsigned& j, Vector<double>& s)
+ virtual void local_coordinate_of_node(const unsigned& j, Vector<double>& s) const
   {
    throw OomphLibError(
     "local_coordinate_of_node(...) is not implemented for this element\n",
@@ -3146,7 +3146,7 @@ class PointElement : public virtual FiniteElement
  void shape(const Vector<double> &s, Shape &psi) const;
 
  /// Get local coordinates of node j in the element; vector sets its own size
- void local_coordinate_of_node(const unsigned& j, Vector<double>& s)
+ void local_coordinate_of_node(const unsigned& j, Vector<double>& s) const
   {
    s.resize(0);
   }

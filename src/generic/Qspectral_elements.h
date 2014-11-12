@@ -424,7 +424,7 @@ public:
   }
 
  /// Get local coordinates of node j in the element; vector sets its own size
- void local_coordinate_of_node(const unsigned& n, Vector<double>& s)
+ void local_coordinate_of_node(const unsigned& n, Vector<double>& s) const
   {
    s.resize(1);
    s[0] = OneDimensionalLegendreShape<NNODE_1D>::nodal_position(n);
@@ -673,7 +673,7 @@ OOMPH_CURRENT_FUNCTION,
  
 
  /// Get local coordinates of node j in the element; vector sets its own size
- void local_coordinate_of_node(const unsigned& n, Vector<double>& s)
+ void local_coordinate_of_node(const unsigned& n, Vector<double>& s) const
   {
    s.resize(2);
    unsigned n0 = n%NNODE_1D;
@@ -965,7 +965,7 @@ OOMPH_CURRENT_FUNCTION,
  
 
  /// Get local coordinates of node j in the element; vector sets its own size
- void local_coordinate_of_node(const unsigned& n, Vector<double>& s)
+ void local_coordinate_of_node(const unsigned& n, Vector<double>& s) const
   {
    s.resize(3);
    unsigned n0 = n%NNODE_1D;
