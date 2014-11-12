@@ -952,6 +952,10 @@ public:
   {
    BrokenCopy::broken_assign("Node");
   }
+
+ /// Output operator: output location and all values at all times, along with any extra
+ /// information stored for the timestepper.
+ friend std::ostream& operator<< (std::ostream &out, const Node& d);
  
  /// \short Number of coordinate 
  /// types needed in the mapping between local and global coordinates. 

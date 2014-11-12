@@ -328,7 +328,7 @@ Data::Data(TimeStepper* const &time_stepper_pt_,
   }
 }
 
- /// Output operator: output equation numbers and values at all times,
+ /// Data output operator: output equation numbers and values at all times,
  /// along with any extra information stored for the timestepper.
  std::ostream& operator<< (std::ostream &out, const Data& d)
   {
@@ -351,6 +351,34 @@ Data::Data(TimeStepper* const &time_stepper_pt_,
 
    return out;
   }
+
+ /// Node output operator: output equation numbers and values at all times,
+ /// along with any extra information stored for the timestepper.
+ std::ostream& operator<< (std::ostream &out, const Node& nd)
+ {
+  const unsigned nt = nd.ntstorage();
+  const unsigned dim = nd.ndim();
+
+  // Output position, only doing current value for now but add position
+  // history if you need it - David.
+  out << "Position: [";
+  for(unsigned j=0; j<dim; j++)
+   {
+    out << "dimension " << dim << ": [";
+    for(unsigned t=0; t<nt-1; t++)
+     {
+      out << nd.x(t, j) << ", ";
+     }
+    out << nd.x(nt-1, j) << "]" << std::endl;
+   }
+  out << "]" << std::endl;
+
+  // Use the function for data to output the data (we can't use overloading
+  // here because operator<< is not a class function, so instead we
+  // typecast the node to a data).
+  out << dynamic_cast<const Data&>(nd);
+  return out;
+ }
 
 
 //================================================================
