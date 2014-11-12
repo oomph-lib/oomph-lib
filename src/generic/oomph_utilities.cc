@@ -761,7 +761,15 @@ namespace CommandLineArgs
         Specified_command_line_string_pt.begin();
        it!=Specified_command_line_string_pt.end();it++)
    {
-    outstream << it->first << " " << *(it->second.second)
+    // Quote blank strings, otherwise trying to parse the output in any way
+    // will go wrong.
+    std::string arg_string = *(it->second.second);
+    if(arg_string == "") 
+     {
+      arg_string = "\"\"";
+     }
+
+    outstream << it->first << " " << arg_string
               << std::endl;
    }
  }
