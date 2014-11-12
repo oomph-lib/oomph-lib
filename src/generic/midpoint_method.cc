@@ -161,13 +161,16 @@ namespace oomph
  /// update on a data object.
  void post_midpoint_update(Data* dat_pt, bool update_pinned)
  {
-  for(unsigned j=0, nj=dat_pt->nvalue(); j<nj; j++)
+  if(!dat_pt->is_a_copy())
    {
-    int eqn = dat_pt->eqn_number(j);
-    if(update_pinned || eqn >= 0)
+    for(unsigned j=0, nj=dat_pt->nvalue(); j<nj; j++)
      {
-      double ynp1 = 2*dat_pt->value(0, j) - dat_pt->value(1, j);
-      dat_pt->set_value(0, j, ynp1);
+      int eqn = dat_pt->eqn_number(j);
+      if(update_pinned || eqn >= 0)
+       {
+        double ynp1 = 2*dat_pt->value(0, j) - dat_pt->value(1, j);
+        dat_pt->set_value(0, j, ynp1);
+       }
      }
    }
  }
