@@ -1215,18 +1215,36 @@ public:
     }
   }
 
-#ifdef OOMPH_HAS_MPI
 
  /// Boolean to indicate if Mesh has been distributed
- bool is_mesh_distributed() const {return (Comm_pt!=0);}
+ bool is_mesh_distributed() const 
+ {
+#ifdef OOMPH_HAS_MPI
+  return communicator_pt() != 0; 
+#else
+  // Can't be distributed without mpi
+  return false;
+#endif
+ }
 
- /// Function to set communicator (mesh is then assumed to be distributed)
- void set_communicator_pt(OomphCommunicator* comm_pt)
- {Comm_pt=comm_pt;}
+ /// Read-only access fct to communicator (Null if mesh is not distributed,
+ /// i.e. if we don't have mpi).
+ OomphCommunicator* communicator_pt() const 
+ {
+#ifdef OOMPH_HAS_MPI 
+  return Comm_pt;
+#else
+  return 0;
+#endif
+ }
 
- /// Read-only access fct to communicator (Null if mesh is not distributed)
- OomphCommunicator* communicator_pt() const
- {return Comm_pt;}
+
+#ifdef OOMPH_HAS_MPI
+
+ /// Function to set communicator (mesh is assumed to be distributed if the
+ /// communicator pointer is non-null). Only defined if mpi is enabled
+ /// becaus Comm_pt itself is only defined when mpi is enabled.
+ void set_communicator_pt(OomphCommunicator* comm_pt) {Comm_pt = comm_pt;} 
 
  /// \short Call this function to keep all the elements as halo elements
  void set_keep_all_elements_as_halos() {Keep_all_elements_as_halos=true;}
