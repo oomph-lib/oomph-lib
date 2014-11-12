@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 
+import sys
+
+
 def gettype(a): 
  """ Distinguish between a number and a string:
      
@@ -55,7 +58,10 @@ def fpdiff(filename1,filename2,relative_error,small):
      so that if two entries have a relative error less than the argument
      relative_error, they are counted as the same.
 
-     Returns nothing
+     Note that the relative error is percentage!
+
+     Returns zero if the two files are the same, 2 if they are
+     different or if there has been an error.
  """
 
  import math
@@ -182,7 +188,7 @@ def fpdiff(filename1,filename2,relative_error,small):
          diff = 100.0*(math.fabs(x1 - x2) / math.fabs(x2))
 
         #If the relative error is smaller than the tolerance, that's fine
-        if diff <= maxreld:
+        if diff <= relative_error:
          #Put spaces into the error line
          outputline2 = stuff(outputline2," ",fieldlength)
         #Otherwise issue an error
@@ -199,14 +205,15 @@ def fpdiff(filename1,filename2,relative_error,small):
     sys.stdout.write("%s\n%s\n%s\n" % (outputline1, outputline2, outputline3))
  
  #Final print out, once loop over lines is complete
- if nerr > 0: 
+ if nerr > 0:
+  sys.stdout.write("\n In files %s %s" % (filename1, filename2))
   sys.stdout.write("\n number of lines processed: %d" % count)
   sys.stdout.write("\n number of lines containing errors: %d" % nline_error)
   sys.stdout.write("\n number of errors: %d " % nerr)
   sys.stdout.write("\n========================================================")
   sys.stdout.write("\n    Parameters used:")
   sys.stdout.write("\n        threshold for numerical zero : %g" % small)
-  sys.stdout.write("\n        maximum rel. difference [percent] : %g" % maxreld)
+  sys.stdout.write("\n        maximum rel. difference [percent] : %g" % relative_error)
   sys.stdout.write("\n    Legend: ")
   sys.stdout.write("\n        *******  means differences in data type (string vs number)")
   sys.stdout.write("\n        -------  means real data exceeded the relative difference maximum") 
@@ -216,28 +223,33 @@ def fpdiff(filename1,filename2,relative_error,small):
   # Return non-zero since it failed
   return 2
  else:
+  sys.stdout.write("\n\n In files %s %s" % (filename1, filename2))
   sys.stdout.write(\
-  "\n\n   [OK] for fpdiff.py parameters: - max. rel. error = %g " % maxreld)
+  "\n   [OK] for fpdiff.py parameters: - max. rel. error = %g " % relative_error)
   sys.stdout.write("%")
   sys.stdout.write(\
   "\n                                  - numerical zero  = %g\n" % small)
   # Success: return 0
   return 0
 
-#What to do if this is run as a script, rather than loaded as a module
-if __name__ == "__main__":
- 
- import sys
 
+def run_as_script(argv):
+ """Run fpdiff as a script (handles argument parsing and some helpful
+    messages).
+ """
+ # Note that we shouldn't just put this code this under 'if __name__ ==
+ # "__main__":' because variables created there are global. This resulted
+ # in some bugs before.
+    
  #Set the defaults
  maxreld = 1.0e-1 # max relative difference in percent
  small = 1.0e-14  # small number -- essentially round-off error 
 
  #Remove the program name from the front of the argument list
- sys.argv.pop(0)
+ argv.pop(0)
  
  #Let's find the number of command line arguments
- narg = len(sys.argv)
+ narg = len(argv)
 
  #If we're out of range, issue a usage message 
  if narg < 2 or narg > 4:
@@ -252,12 +264,16 @@ if __name__ == "__main__":
  
  #Read any optional arguments
  if narg >= 3:
-  maxreld = float(sys.argv[2])
+  maxreld = float(argv[2])
   if narg == 4:
-   small = float(sys.argv[3])
+   small = float(argv[3])
  
  # Run the diff
- return_val = fpdiff(sys.argv[0],sys.argv[1],maxreld,small)
+ return fpdiff(argv[0], argv[1], maxreld, small)
 
- # Return whether it succeeded or not
- sys.exit(return_val)
+
+# What to do if this is run as a script, rather than loaded as a module
+if __name__ == "__main__":
+
+ # Run and return whether it succeeded or not
+ sys.exit(run_as_script(sys.argv))
