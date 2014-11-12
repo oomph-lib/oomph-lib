@@ -16,8 +16,11 @@ int main(int argc, char *argv[])
  double dt = 0.1;
  specify_command_line_flag("-dt", &dt, "Time step size");
 
- double tmax = 5.0;
+ double tmax = 99999.0;
  specify_command_line_flag("-tmax", &tmax, "Time at which to stop");
+
+ double max_step = 50;
+ specify_command_line_flag("-max-step", &max_step, "Maximum number of steps to run");
 
  double tol = 0.0;
  specify_command_line_flag("-tol", &tol,
@@ -84,7 +87,8 @@ int main(int argc, char *argv[])
  problem.initial_doc();
 
  // Time step to end or to max number of steps
- while(problem.time() < tmax)
+ while((problem.time() < tmax) 
+       && (problem.N_steps_taken < max_step))
   {
    // Output some basic info
    oomph_info
