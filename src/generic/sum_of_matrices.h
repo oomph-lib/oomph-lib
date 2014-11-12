@@ -5,11 +5,16 @@
 #include "mesh.h"
 #include "matrices.h"
 #include "Vector.h"
+#include "oomph_utilities.h"
 
 #include <map>
 
+
 namespace oomph
 {
+
+ using namespace StringConversion;
+
 
  // =================================================================
  /// Class to store node number to global and global to node lookups (could
@@ -33,34 +38,43 @@ namespace oomph
   ~NodeGlobalNumbersLookup() {}
 
   /// \short Given a global equation number in the lookup get the
-  /// associated node number.
+  /// associated node number. Throw an error if not found.
   int global_to_node(const int& global) const
    {
-#ifdef PARANOID
-    if(global < 0)
-     {
-      std::ostringstream error_msg;
-      error_msg << "Pinned equation numbers do not relate to nodes.";
-      throw OomphLibError(error_msg.str(),
-                          OOMPH_CURRENT_FUNCTION,
-                          OOMPH_EXCEPTION_LOCATION);
-     }
-#endif
+    int result = unsafe_global_to_node(global);
 
-    // Find the entry
-    std::map<unsigned, unsigned>::const_iterator
-     it = Global_to_node_mapping.find(unsigned(global));
-
-    // Check the entry existed, it not then return -1.
-    if(it == global_to_node_mapping_pt()->end())
+    // If it's -1 then we failed to find it:
+    if(result == -1)
      {
-      return -1;
+      std::string err = "Global equation number " + to_string(global) 
+       + " not found in lookup.";
+      throw OomphLibError(err, OOMPH_EXCEPTION_LOCATION,
+                          OOMPH_CURRENT_FUNCTION);
      }
     else
      {
-      return it->second;
+      return result;
      }
    }
+
+  /// \short Given a global equation number in the lookup get the
+  /// associated node number. Return -1 if not found.
+  int unsafe_global_to_node(const int& global) const
+  {
+   // Find the entry
+   std::map<unsigned, unsigned>::const_iterator
+    it = Global_to_node_mapping.find(unsigned(global));
+
+   // Check the entry existed, it not then return -1.
+   if(it == global_to_node_mapping_pt()->end())
+    {
+     return -1;
+    }
+   else
+    {
+     return it->second;
+    }
+  }
 
   /// Convert node number (in the mesh) to global equation number.
   unsigned node_to_global(const unsigned& node) const
@@ -374,8 +388,8 @@ namespace oomph
     double sum = main_matrix_pt()->operator()(i,j);
     for(unsigned i_matrix=0; i_matrix<n_added_matrix(); i_matrix++)
      {
-      int li = Main_to_individual_rows_pt[i_matrix]->global_to_node(i);
-      int lj = Main_to_individual_cols_pt[i_matrix]->global_to_node(j);
+      int li = Main_to_individual_rows_pt[i_matrix]->unsafe_global_to_node(i);
+      int lj = Main_to_individual_cols_pt[i_matrix]->unsafe_global_to_node(j);
 
       // If the global numbers are in the map then add the entry
       if(( li != -1) && (lj != -1))
