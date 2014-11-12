@@ -299,7 +299,7 @@ echo " "
 echo "    " $build_dir
 echo " "
 echo " "
-if ! YesNoRead "Is this OK?" "n"; then
+if ! YesNoRead "Is this OK?" "y"; then
     OptionPrompt "Specify build directory [e.g. /home/joe_user/build] :"
     build_dir=`OptionRead`
 fi
