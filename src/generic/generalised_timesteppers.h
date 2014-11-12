@@ -164,7 +164,7 @@ class ContinuationStorageScheme : public GeneralisedTimeStepper
 
  ///Return the actual order of the scheme. It's a steady
  ///scheme so it's zero, but that doesn't really make sense.
- unsigned order() {return 0;}
+ unsigned order() const {return 0;}
 
  /// \short This is a steady scheme, so you can't do this
  void undo_make_steady() {Is_steady=true;}
@@ -211,10 +211,10 @@ class ContinuationStorageScheme : public GeneralisedTimeStepper
  void set_weights() {}
 
  /// Number of previous values available.
- unsigned nprev_values(){return 0;}
+ unsigned nprev_values() const{return 0;}
 
  /// Number of timestep increments that need to be stored by the scheme
- unsigned ndt() {return 0;}
+ unsigned ndt() const {return 0;}
 
  /// \short Set consistent values of the derivatives and current value when the
  /// data is pinned. This must be done by the "timestepper" because only it

@@ -302,7 +302,7 @@ public:
  {return Weight.nrow()-1;} 
 
  /// Actual order (accuracy) of the scheme
- virtual unsigned order() {return 0;}
+ virtual unsigned order() const {return 0;}
 
  /// Return current value of continous time
  // (can't have a paranoid test for null pointers because this could be
@@ -324,7 +324,7 @@ public:
  }
 
  /// Number of timestep increments that are required by the scheme
- virtual unsigned ndt()=0;
+ virtual unsigned ndt() const=0;
 
  /// \short Number of previous values needed to calculate the value at the
  /// current time. i.e. how many previous values must we loop over to
@@ -334,7 +334,7 @@ public:
  virtual unsigned nprev_values_for_value_at_evaluation_time() const {return 1;}
 
  /// Number of previous values available: 0 for static, 1 for BDF<1>,...
- virtual unsigned nprev_values()=0;
+ virtual unsigned nprev_values() const=0;
 
  /// \short Function to set the weights for present timestep (don't
  /// need to pass present timestep or previous timesteps as they 
@@ -619,7 +619,7 @@ public:
 
  /// \short Return the actual order of the scheme. Returning zero here --
  /// doesn't make much sense, though
- unsigned order() {return 0;}
+ unsigned order() const {return 0;}
    
  /// \short  Initialise the time-history for the Data values,
  /// corresponding to an impulsive start.
@@ -767,10 +767,10 @@ public:
   }
 
  /// Number of previous values available.
- unsigned nprev_values(){return NSTEPS;}
+ unsigned nprev_values() const {return NSTEPS;}
 
  /// Number of timestep increments that need to be stored by the scheme
- unsigned ndt() {return NSTEPS;}
+ unsigned ndt() const {return NSTEPS;}
 
  /// Dummy: Access function for j-th weight for the i-th derivative
  double weight(const unsigned &i, const unsigned &j) const
@@ -852,7 +852,7 @@ class Newmark : public TimeStepper
 
 
  ///The actual order (accuracy of the scheme)
- unsigned order() 
+ unsigned order() const 
   {
    std::string error_message =
     "Can't remember the order of the Newmark scheme";
@@ -954,10 +954,10 @@ class Newmark : public TimeStepper
  void set_weights();
 
  /// Number of previous values available.
- unsigned nprev_values(){return NSTEPS;}
+ unsigned nprev_values() const {return NSTEPS;}
 
  /// Number of timestep increments that need to be stored by the scheme
- unsigned ndt() {return NSTEPS;}
+ unsigned ndt() const {return NSTEPS;}
 
  
   protected:
@@ -1133,7 +1133,7 @@ class BDF : public TimeStepper
   }
 
  ///Return the actual order of the scheme
- unsigned order() {return NSTEPS;}
+ unsigned order() const {return NSTEPS;}
    
  /// \short  Initialise the time-history for the Data values,
  /// corresponding to an impulsive start.
@@ -1333,10 +1333,10 @@ class BDF : public TimeStepper
  void set_weights();
 
  /// Number of previous values available.
- unsigned nprev_values(){return NSTEPS;}
+ unsigned nprev_values() const {return NSTEPS;}
 
  /// Number of timestep increments that need to be stored by the scheme
- unsigned ndt() {return NSTEPS;}
+ unsigned ndt() const {return NSTEPS;}
 
  /// Function to set the predictor weights
  void set_predictor_weights();

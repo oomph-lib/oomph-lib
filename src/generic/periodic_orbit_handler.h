@@ -83,7 +83,7 @@ class PeriodicOrbitTimeDiscretisation : public TimeStepper
   }
 
  ///Return the actual order of the scheme
- unsigned order() {return 1;}
+ unsigned order() const {return 1;}
    
  /// \short Broken initialisation the time-history for the Data values
  /// corresponding to an impulsive start.
@@ -163,10 +163,10 @@ class PeriodicOrbitTimeDiscretisation : public TimeStepper
   }
 
  /// Number of previous values available.
- unsigned nprev_values(){return ntstorage();}
+ unsigned nprev_values() const{return ntstorage();}
 
  /// Number of timestep increments that need to be stored by the scheme
- unsigned ndt() {return ntstorage();}
+ unsigned ndt() const {return ntstorage();}
 
 };
 

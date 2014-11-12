@@ -70,13 +70,13 @@ namespace oomph
    virtual unsigned nprev_values_for_value_at_evaluation_time() const=0;
 
     /// Actual order (accuracy) of the scheme
-    unsigned order() {return 2;}
+    unsigned order() const {return 2;}
 
     /// Number of timestep increments that are required by the scheme
-    unsigned ndt() {return nprev_values();}
+    unsigned ndt() const {return nprev_values();}
 
     /// ??ds
-    unsigned nprev_values() {return 4;}
+    unsigned nprev_values() const {return 4;}
 
     /// Get the pointer to the timestepper to use as a predictor in
     /// adaptivity.
