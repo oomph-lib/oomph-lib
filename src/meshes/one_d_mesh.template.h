@@ -64,8 +64,7 @@ namespace oomph
             TimeStepper* time_stepper_pt=&Mesh::Default_TimeStepper)
     : Xmin(0.0), Xmax(length), N(n_element)
    {
-    // Mesh can only be built with 1D Qelements.
-    MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(1);
+    check_1d();
     
      build_mesh(time_stepper_pt);
     }
@@ -77,13 +76,28 @@ namespace oomph
             TimeStepper* time_stepper_pt=&Mesh::Default_TimeStepper)
     : Xmin(xmin), Xmax(xmax), N(n_element)
     {
-     // Mesh can only be built with 1D Qelements.
-     MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(1);
-    
+     check_1d();
+
      build_mesh(time_stepper_pt);
     }
    
    protected:
+
+   /// Mesh can only be built with 1D elements (but can be either T or Q so
+   /// can't use the normal assert_geometric_element function.
+   void check_1d() const
+   {
+#ifdef PARANOID
+    FiniteElement* el_pt = new ELEMENT;
+    if(el_pt->dim() != 1)
+     {
+      std::string err = "OneDMesh is only for 1D elements";
+      throw OomphLibError(err, OOMPH_CURRENT_FUNCTION,
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+    delete el_pt; el_pt = 0;
+#endif
+   }
    
    /// Minimum coordinate
    double Xmin;

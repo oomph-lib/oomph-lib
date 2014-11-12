@@ -44,9 +44,6 @@ namespace oomph
  template <class ELEMENT>
  void OneDMesh<ELEMENT>::build_mesh(TimeStepper* time_stepper_pt) 
  {
-  // Mesh can only be built with 1D Qelements.
-  MeshChecker::assert_geometric_element<QElementGeometricBase,ELEMENT>(1);
-
   // Set the length of the domain
   Length = Xmax - Xmin;
   
