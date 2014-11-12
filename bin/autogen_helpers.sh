@@ -1,13 +1,7 @@
 
 # A few helper functions for autogen or other bash scripts
 
-# A little function 'borrowed' from the tecplot installation script...
-OptionPrompt() 
-{ 
-    printf "%s " "$1" 
-}
-
-# Another little function 'borrowed' from the tecplot installation script...
+# Read an option using readline
 OptionRead()
 {
     read Opt
@@ -105,7 +99,7 @@ CheckOptions()
         }
       }
     }
-    }' `echo $1`
+    }' $(echo $1)
 }
 
 

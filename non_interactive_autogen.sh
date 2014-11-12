@@ -40,8 +40,8 @@ fi
 
 # Temporary defaults
 raw_build="false"
-MY_HOME_WD=$(pwd)
-build_dir="${MY_HOME_WD}/build"
+oomph_root=$(pwd)
+build_dir="${oomph_root}/build"
 make_options=""
 configure_options_file="config/configure_options/current"
 
@@ -85,15 +85,15 @@ fi
 #-----------------------------------
 
 # Backup old file (use -f so it doesn't give an error if the file doesn't exist)
-touch ${MY_HOME_WD}/config/configure.ac_scripts/user_drivers.dir_list
-mv -f ${MY_HOME_WD}/config/configure.ac_scripts/user_drivers.dir_list ${MY_HOME_WD}/config/configure.ac_scripts/user_drivers.dir_list.backup
+touch ${oomph_root}/config/configure.ac_scripts/user_drivers.dir_list
+mv -f ${oomph_root}/config/configure.ac_scripts/user_drivers.dir_list ${oomph_root}/config/configure.ac_scripts/user_drivers.dir_list.backup
 
 # Get a list of locations of files named Makefile.am, modify a little and write to user_drivers.dir_list.
-find ${MY_HOME_WD}/user_drivers -type f -name "Makefile.am" \
-    | grep -v "^${MY_HOME_WD}/user_drivers/Makefile.am" \
+find ${oomph_root}/user_drivers -type f -name "Makefile.am" \
+    | grep -v "^${oomph_root}/user_drivers/Makefile.am" \
     | sed 's:/Makefile.am$::' \
-    | sed "s:^${MY_HOME_WD}/::" \
-    > ${MY_HOME_WD}/config/configure.ac_scripts/user_drivers.dir_list
+    | sed "s:^${oomph_root}/::" \
+    > ${oomph_root}/config/configure.ac_scripts/user_drivers.dir_list
 
 # The grep and sed commands above do the following: 1) Remove the line that
 # corresponds to the Makefile.am in user_drivers itself. 2) Remove
@@ -103,7 +103,7 @@ find ${MY_HOME_WD}/user_drivers -type f -name "Makefile.am" \
 
 echo
 echo "User driver folders included are:"
-cat ${MY_HOME_WD}/config/configure.ac_scripts/user_drivers.dir_list
+cat ${oomph_root}/config/configure.ac_scripts/user_drivers.dir_list
 echo
 
 
@@ -113,7 +113,7 @@ echo
 # If we are doing a raw build or if ./configure does not yet exist then generate
 # the config files needed.
 if [ $raw_build -o ! -e ./configure ]; then
-    $MY_HOME_WD/bin/regenerate_config_files.sh $MY_HOME_WD
+    $oomph_root/bin/regenerate_config_files.sh $oomph_root
 fi
 
 # If "current" configure options file does not exist then copy in the
@@ -141,7 +141,7 @@ if test "$configure_options_are_ok" != ""; then
 fi
 
 # Read the options from the file and convert them into a single one-line string
-configure_options=`ProcessOptionsFile config/configure_options/current`
+configure_options=$(ProcessOptionsFile config/configure_options/current)
 
 
 
@@ -164,7 +164,7 @@ echo " "
 # MPI_RUN_COMMAND in makefile). This needs to go after configure so that we
 # can use the generated Makefile to (robustly) get the run and compile
 # commands.
-$MY_HOME_WD/bin/check_mpi_command.sh $MY_HOME_WD/Makefile
+$oomph_root/bin/check_mpi_command.sh $oomph_root/Makefile
 
 
 # Make all libraries

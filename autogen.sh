@@ -2,7 +2,11 @@
 
 . bin/autogen_helpers.sh
 
+# Crash if any sub command crashes
 set -o errexit
+
+# Crash if any unset variables are used
+set -o nounset
 
 
 #====================================================================
@@ -11,24 +15,17 @@ set -o errexit
 
 echo " "
 echo "============================================================= "
-echo "              oomph-lib installation script" 
+echo "        oomph-lib interactive installation script" 
 echo "============================================================= "
 echo " "
 
 
-# Set the script to crash if any un set variables are used (we put this after
-# the options processsing since some command line arguments may legitimately not
-# exist).
-set -o nounset
-
 # Read out root install directory
-#--------------------------------
-MY_HOME_WD=`pwd`
+oomph_root=$(pwd)
 
 
-# Choose build directory (for lib,include), relative to root
-#------------------------------------------------------------
-build_dir=$MY_HOME_WD/build
+# Choose build directory (for lib,include)
+build_dir=$oomph_root/build
 
 echo " "
 echo " "
@@ -39,8 +36,8 @@ echo "    " $build_dir
 echo " "
 echo " "
 if ! YesNoRead "Is this OK?" "y"; then
-    OptionPrompt "Specify build directory [e.g. /home/joe_user/build] :"
-    build_dir=`OptionRead`
+    printf "Specify build directory [e.g. /home/joe_user/build] :"
+    build_dir=$(OptionRead)
 fi
 
 echo " "
@@ -93,7 +90,7 @@ while [[ $accept_configure_options != "true" ]]; do
     for file in $configure_option_files
     do
         #Increase the counter
-        count=`expr $count + 1`
+        count=$(expr $count + 1)
         echo $count ": " $(basename $file)
     done
 
@@ -115,7 +112,7 @@ while [[ $accept_configure_options != "true" ]]; do
     if [[ "$file_number" == "0" ]]; then
         echo 
         echo "Enter options"
-        configure_options=`OptionRead`  
+        configure_options=$(OptionRead)
         echo $configure_options > "config/configure_options/current"
 
     # Otherwise copy the desired options file to config/configure_options/current
