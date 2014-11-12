@@ -7,6 +7,7 @@
 SUBDIRS = \
 poisson \
 unsteady_heat \
+ode \
 heat_transfer_and_melting \
 advection_diffusion \
 helmholtz \
