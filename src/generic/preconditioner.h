@@ -143,8 +143,10 @@ namespace oomph
   virtual void set_matrix_pt(DoubleMatrixBase* matrix_pt) {Matrix_pt = matrix_pt;}
 
   /// Get function for comm pointer.
-  virtual const OomphCommunicator* comm_pt() const
+  virtual const OomphCommunicator* comm_pt() const 
   {
+   // If we are using MPI then the comm pointer should not be null.
+#ifdef OOMPH_HAS_MPI
 #ifdef PARANOID
    if(Comm_pt == 0)
     {
@@ -157,6 +159,7 @@ namespace oomph
                          OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
     }
+#endif
 #endif
    return Comm_pt;
   }
