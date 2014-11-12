@@ -42,8 +42,9 @@
 #include "../generic/oomph_utilities.h"
 
 
-//??ds
-#include "./interpolator.h"
+// Class for calculating interpolated values easily (required for the
+// midpoint method with current implementation of Elements).
+#include "../generic/interpolator.h"
 
 
 namespace oomph

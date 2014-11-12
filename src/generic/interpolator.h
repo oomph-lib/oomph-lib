@@ -1,35 +1,12 @@
 #ifndef OOMPH_INTERPOLATOR_H
 #define OOMPH_INTERPOLATOR_H
 
-/*
-  description of file goes here
-*/
-
-
 namespace oomph
 {
 
  // Forward decl.
  class FiniteElement;
  class Time;
-
- // class InterpolatorBase
- // {
- // public:
- //  virtual double time() = 0;
-
- //  virtual double x(const unsigned &i) = 0;
- //  virtual const Vector<double>& x() = 0;
-
- //  virtual double value(const unsigned &i) = 0;
- //  virtual double dvaluedt(const unsigned &i) = 0;
- //  virtual double dvaluedx(const unsigned &direction, const unsigned &i) = 0;
- //  virtual const Vector<double>& dvaluedx(const unsigned &i_val) = 0;
-
- //  //??ds shape + test + J
- //  virtual double J() = 0;
- // };
-
 
  /* Implementation notes:
 
@@ -38,8 +15,8 @@ namespace oomph
   * Lots of code is repeated because c++ function pointers suck
 
   * Use Vector<Vector<double> > rather than matrix so that we can easily
-  (and for "free") return vectors of a single row (i.e. all derivatives
-  of one value).
+  (and efficiently) return vectors of a single row (e.g. all derivatives of
+  one value).
 
   * No need to template by DIM or Nnode: it has no effect on speed (tested).
 
@@ -51,12 +28,26 @@ namespace oomph
   can swap the interpolator out without breaking any memoising.
 
   * Pass in parameter for time deriv order to interpolation (instead of
-  separate interpolate_dxxxxdt functions).
+  separate interpolate_dxxxxdt functions)?
+
+  LIMITATIONS:
+
+  * Can be slow due to creation/destruction of vectors. This could be fixed
+  by adding the option to clear the memory or (as I'm now using for
+  micromagnetics problems --David) by using raw C-arrays instead.
+
+  * Only simple shape functions are used. Fancier things should be easy
+  enough to implement if needed though.
+
+  * Number of values and time stepper pt must be the same at all nodes
+  within the element (so can't use it for Navier-Stokes). This can probably
+  be allowed if needed, possibly at a small speed penalty.
 
  */
 
  // ============================================================
- /// Interpolator that auto detects what to do (possibly slow?).
+ /// Interpolator to easily calculate values, positions, derivatives
+ /// etc. within elements.
  // ============================================================
  class GeneralInterpolator
  {
@@ -74,18 +65,15 @@ namespace oomph
    Nnode(this_element->nnode()),
    Dim(this_element->dim()),
    Nprev_value_zeroth_derivative(this_element->node_pt(0)->
-                                 time_stepper_pt()->nprev_values_for_value_at_evaluation_time()),
-   Nprev_value_zeroth_pos_derivative
-   (this_element->node_pt(0)->position_time_stepper_pt()->nprev_values_for_value_at_evaluation_time()),
-
-   //??ds weird!
-   // Nprev_value_derivative(this_element->node_pt(0)->
-   // time_stepper_pt()->nprev_values()),
+                                 time_stepper_pt()->
+                                 nprev_values_for_value_at_evaluation_time()),
+   Nprev_value_zeroth_pos_derivative(this_element->node_pt(0)->
+                                     position_time_stepper_pt()->
+                                     nprev_values_for_value_at_evaluation_time()),
    Nprev_value_derivative(this_element->node_pt(0)->
                           time_stepper_pt()->ntstorage()),
    Nprev_value_pos_derivative(this_element->node_pt(0)->
                               position_time_stepper_pt()->ntstorage()),
-
    Nvalue(this_element->node_pt(0)->nvalue()),
 
   // Initialise pointers
@@ -100,14 +88,17 @@ namespace oomph
    Dpsidx(Nnode, Dim),
    Dtestdx(Nnode, Dim),
    
-  // Negative time to signify that it has not been calculated yet
+  // Use negative time to signify that it has not been calculated yet
    Intp_time(NotYetCalculatedValue),
 
   // Initialise storage for value derivatives (because this is a two
   // dimensional array we need to do some initialisation now).
-   Dvaluesdx(Nvalue)
+   Dvaluesdx(Nvalue),
+   D2valuesdxdt(Nvalue)
   {
+
    // Set up shape + test functions
+   S = s;
    J = this_element->dshape_eulerian(s, Psi, Dpsidx);
    Test = Psi;
    Dtestdx = Dpsidx;
@@ -129,7 +120,7 @@ namespace oomph
     {
      Node* nd_pt = This_element->node_pt(nd);
 
-     // Check all number of values the same for all nodes
+     // Check all number of values is the same for all nodes
      if(nd_pt->nvalue() != Nvalue)
       {
        std::ostringstream error_msg;
@@ -154,7 +145,7 @@ namespace oomph
   }
 
   /// Destructor
-  ~GeneralInterpolator() {}
+  virtual ~GeneralInterpolator() {}
 
   double time()
   {
@@ -170,6 +161,11 @@ namespace oomph
    if(uninitialised(X)) X = interpolate_x();
    return X;
   }
+
+  const Vector<double> &s()
+   {
+    return S;
+   }
 
   double dxdt(const unsigned &i)
   {return dxdt()[i];}
@@ -209,6 +205,15 @@ namespace oomph
          Dvaluesdx[i_val] = interpolate_dvaluesdx(i_val);
        }
      return Dvaluesdx[i_val];
+   }
+
+  const Vector<double>& d2valuedxdt(const unsigned &i_val)
+   {
+     if(uninitialised(D2valuesdxdt[i_val]))
+       {
+         D2valuesdxdt[i_val] = interpolate_d2valuesdxdt(i_val);
+       }
+     return D2valuesdxdt[i_val];
    }
 
   // Access functions for Jacobian and shape/test functions
@@ -270,6 +275,12 @@ namespace oomph
    else {return interpolate_dvaluesdx_with_hanging_nodes(i_val);}
   }
 
+  virtual Vector<double> interpolate_d2valuesdxdt(const unsigned &i_val)
+  {
+   if(!Has_hanging_nodes) {return interpolate_d2valuesdxdt_raw(i_val);}
+   else {return interpolate_d2valuesdxdt_with_hanging_nodes(i_val);}
+  }
+
  protected:
 
   // Magic number signifying that the value has not been calculated yet
@@ -292,6 +303,7 @@ namespace oomph
   const DenseMatrix<double>* Position_ts_weights_pt;
 
   // Jacobian + shape/test functions
+  Vector<double> S;
   double J;
   Shape Psi;
   Shape Test;
@@ -308,13 +320,14 @@ namespace oomph
   Vector<double> Values;
   Vector<double> Dvaluesdt;
   Vector<Vector<double> > Dvaluesdx;
+  Vector<Vector<double> > D2valuesdxdt;
 
 
   // Checks to see if private variables are initialised
   bool uninitialised(double var) {return var == NotYetCalculatedValue;}
 
   /// \short Check to see if a vector is initialised. Recusive checking
-  /// would be faster but takes a fairly large amount of time.
+  /// is more robust but takes a fairly large amount of time.
   template<typename T> bool uninitialised(Vector<T> var)
   {
     bool uninitialised_entry = false;
@@ -327,7 +340,6 @@ namespace oomph
        }
      }
     return var.empty() || uninitialised_entry;
-    // return var.empty();
   }
 
 
@@ -432,6 +444,7 @@ namespace oomph
         }
       }
     }
+   
    return output;
   }
 
@@ -533,7 +546,44 @@ namespace oomph
     return output;
   }
 
+  // Interpolate derivatives of values w.r.t. position and time
+  // ============================================================
 
+
+  Vector<double> interpolate_d2valuesdxdt_raw(const unsigned &i_value) const
+  {
+    Vector<double> output(Dim, 0.0);
+    for(unsigned i_direc=0; i_direc<Dim; i_direc++)
+      {
+        for(unsigned i_nd=0; i_nd<Nnode; i_nd++)
+          {
+            for(unsigned i_tm=0; i_tm<Nprev_value_derivative; i_tm++)
+              {
+                output[i_direc] += This_element->raw_nodal_value(i_tm, i_nd, i_value)
+                  * Dpsidx(i_nd, i_direc) * (*Ts_weights_pt)(1, i_tm);
+              }
+          }
+      }
+    return output;
+  }
+
+  Vector<double> interpolate_d2valuesdxdt_with_hanging_nodes(const unsigned &i_value) const
+  {
+    Vector<double> output(Dim, 0.0);
+
+    for(unsigned i_direc=0; i_direc<Dim; i_direc++)
+      {
+        for(unsigned i_nd=0; i_nd<Nnode; i_nd++)
+          {
+            for(unsigned i_tm=0; i_tm<Nprev_value_derivative; i_tm++)
+              {
+                output[i_direc] += This_element->nodal_value(i_tm, i_nd, i_value)
+                  * Dpsidx(i_nd, i_direc) * (*Ts_weights_pt)(1, i_tm);
+              }
+          }
+      }
+    return output;
+  }
 
 
  };
