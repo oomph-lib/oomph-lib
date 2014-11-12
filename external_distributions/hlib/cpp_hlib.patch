@@ -1,0 +1,3105 @@
+diff --git a/Contrib/netcdfsupport.h b/Contrib/netcdfsupport.h
+index 09cb1ab..d9ee52f 100644
+--- a/Contrib/netcdfsupport.h
++++ b/Contrib/netcdfsupport.h
+@@ -13,6 +13,11 @@
+ #include "supermatrix.h"
+ #include "bem3d.h"
+ 
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++
+ int
+ netcdf_write_supermatrix(psupermatrix ps ,const char* dateiname);
+ 
+@@ -44,4 +49,6 @@ pclustertree
+ netcdf_read_clustertree(const char* dateiname);
+ #endif
+ 
+-
++#ifdef __cplusplus
++}
++#endif
+diff --git a/Examples/example_bem3d.c b/Examples/example_bem3d.c
+index 79e2dbd..9ec4ca2 100644
+--- a/Examples/example_bem3d.c
++++ b/Examples/example_bem3d.c
+@@ -56,7 +56,7 @@ main()
+   peval_powerdata epd;
+   ppowerdata pd;
+   double *x0, *x1, *x2;
+-  char buf[80], filename[80], operator, geometry;
++  char buf[80], filename[80], operator_char, geometry;
+   double norm, normfull, eta;
+   int acak, output, linear;
+   int compression_method, order_interpolation;
+@@ -83,7 +83,7 @@ main()
+ 
+   split = 16;
+   filename[0] = '\0';
+-  operator = 'd';
++  operator_char = 'd';
+   output = 0;
+ 
+   aca_eps = 1e-4;
+@@ -141,11 +141,11 @@ main()
+   }
+    
+   (void) printf("# D)ouble or S)ingle layer potential? [%c]\n",
+-		operator);
++		operator_char);
+   (void) fgets(buf, 80, stdin);
+   remove_newline(buf);
+-  sscanf(buf, "%c", &operator);
+-  operator = tolower(operator);
++  sscanf(buf, "%c", &operator_char);
++  operator_char = tolower(operator_char);
+ 
+   (void) printf("# Initial compression by\n");
+   (void) printf("# 0 ACA\n# 1 ACA+\n# 2 Interpolation\n");
+@@ -262,7 +262,7 @@ main()
+       (void) printf("# Creating supermatrix\n");
+     }
+     t1 = times(&buffer);
+-    if(operator == 'd'){
++    if(operator_char == 'd'){
+       bfactory = new_surfacebemfactory_dlp(gr, basisfunc, ct, basisfunc, ct,
+ 					   nfdeg, nfdeg, order_interpolation, 0.5);
+       lower = 0;
+@@ -292,19 +292,19 @@ main()
+       break;
+     case 3:
+       M = onthefly_hca_coarsen_supermatrix(root, root, bfactory,
+-					   (operator=='d' ? aca_eps/30.0 : aca_eps/4.0),
++					   (operator_char=='d' ? aca_eps/30.0 : aca_eps/4.0),
+ 					   acak, aca_eps, 1, HLIB_HCAI,lower,eta,0);
+       break;
+     default:
+     case 4:
+       M = onthefly_hca_coarsen_supermatrix(root, root, bfactory, 
+-					   (operator=='d' ? aca_eps/30.0 : aca_eps/4.0),
++					   (operator_char=='d' ? aca_eps/30.0 : aca_eps/4.0),
+ 					   acak, aca_eps, 1, HLIB_HCAII,lower,eta,0);
+       /*
+       blk = build_blockcluster(root, root, HLIB_MAXADMISSIBILITY, 
+ 			       HLIB_BLOCK_INHOMOGENEOUS, eta, nmin);
+       M = coarsen_hca_from_blockcluster(blk, bfactory,
+-					(operator=='d' ? aca_eps/30.0 : aca_eps/4.0),
++					(operator_char=='d' ? aca_eps/30.0 : aca_eps/4.0),
+ 					aca_eps,
+ 					1, acak);
+       */
+@@ -343,7 +343,7 @@ main()
+     normfull = norm2_supermatrix(M);
+     printf("  |M| = %g\n",normfull);
+     
+-    if(operator=='d'){
++    if(operator_char=='d'){
+       fill_vector(cols, x0, 1.0);
+       eval_supermatrix(M, x0, x1);
+       norm = norm2_lapack(rows, x1);    
+@@ -369,7 +369,7 @@ main()
+     t1 = times(&buffer);
+     maxiter = 1 + 8192 / rows;
+     for(i=0; i<maxiter; i++){
+-      if(operator=='d')
++      if(operator_char=='d')
+ 	mvm_supermatrix(M, HLIB_EVAL_NOTTRANSPOSED, HLIB_EVAL_DEFAULT, 
+ 			1.0, x0, 0.0, x1);
+       else
+@@ -395,14 +395,14 @@ main()
+   epd->typ = 1;
+   epd->e_A.A = M_full;
+   epd->e_B.A = M_compress;
+-  if(operator=='s'){
++  if(operator_char=='s'){
+     epd->e_A.mode_A = HLIB_EVAL_SYMM_LOWER;
+     epd->e_B.mode_A = HLIB_EVAL_SYMM_LOWER;
+   }
+   pd = new_powerdata(rows,cols,5);
+   pd->data = (void*) epd;
+   pd->eval = eval_power_general;
+-  if(operator=='d'){
++  if(operator_char=='d'){
+     pd->filter=1;
+     epd->e_A.A_Add = Kmod;
+     epd->e_B.A_Add = Kmod;
+@@ -410,7 +410,7 @@ main()
+   (void) printf("  apxerror = %g\n",norm2_power(pd)/normfull);
+    
+   printf("# Preparing preconditioner...\n");
+-  if(operator=='d'){
++  if(operator_char=='d'){
+     printf("# Coarsen\n");
+     M_precond = coarsenh2_supermatrix(M_compress,0.1,1,0);
+     addrk2_supermatrix(Kmod->r, M_precond, 0, 0);
+@@ -428,8 +428,8 @@ main()
+     epd->typ = 0;
+     epd->e_A.A = M_full;
+     epd->e_B.A = M_compress;
+-    if(operator=='s')epd->e_B.A_Pre_Cholesky = M_precond;
+-    if(operator=='d')epd->e_B.A_Pre_LU = M_precond;
++    if(operator_char=='s')epd->e_B.A_Pre_Cholesky = M_precond;
++    if(operator_char=='d')epd->e_B.A_Pre_LU = M_precond;
+     (void) printf("  |I-MM^-1| = %g\n",norm2_power(pd));
+   }
+   
+@@ -441,20 +441,20 @@ main()
+   solve_conjgrad_sparsematrix(Mass, x2, x0, 1e-8, 50,
+ 			      NULL, HLIB_PREC_JACOBI, NULL, 
+ 			      HLIB_EVAL_DEFAULT, 0);
+-  if(operator=='d') mvm_supermatrix(M_full, HLIB_EVAL_NOTTRANSPOSED, 
++  if(operator_char=='d') mvm_supermatrix(M_full, HLIB_EVAL_NOTTRANSPOSED,
+ 				    HLIB_EVAL_DEFAULT, 1.0, x0, 0.0, x1);
+   else mvm_supermatrix(M_full, HLIB_EVAL_NOTTRANSPOSED, 
+ 		       HLIB_EVAL_SYMM_LOWER, 1.0, x0, 0.0, x1);
+   printf("# Solving system for a quadratic rhs...\n");
+   fill_vector(cols, x2, 0.0);
+-  if(operator=='d') 
++  if(operator_char=='d')
+     j = solve_gmres_supermatrix(M_compress, x1, x2, 1e-8, 250, M_precond, 
+ 				HLIB_PREC_LU, 
+ 				Kmod, HLIB_EVAL_DEFAULT, 0);
+   else j = solve_gmres_supermatrix(M_compress, x1, x2, 1e-8, 250, M_precond, 
+ 				   HLIB_PREC_CHOLESKY,
+ 				   Kmod, HLIB_EVAL_SYMM_LOWER, 0);
+-  if(operator=='d'){
++  if(operator_char=='d'){
+     norm = 0.0; for(i=0; i<cols; i++) norm += x2[i];
+     norm /= (double)cols; for(i=0; i<cols; i++) x2[i] -= norm;
+   }
+@@ -466,12 +466,12 @@ main()
+ 
+   h_coarsen = aca_eps*sqrt(10.0);
+   mode = HLIB_EVAL_DEFAULT;
+-  if(operator=='s') mode = HLIB_EVAL_SYMM_LOWER;
++  if(operator_char=='s') mode = HLIB_EVAL_SYMM_LOWER;
+   
+   for(;h_coarsen > 0 && h_coarsen < 1.1; h_coarsen *= sqrt(10.0)){
+     if(h_coarsen > 0.9) h_coarsen = 1.0;
+     t1 = times(&buffer);
+-    if(operator=='d')
++    if(operator_char=='d')
+       M = coarsenh2_supermatrix(M_compress,h_coarsen,1,0);
+     else
+       M = coarsenh2low_supermatrix(M_compress,h_coarsen,1,0);
+@@ -494,14 +494,14 @@ main()
+     epd->e_B.A_Cholesky = 0;
+     epd->e_B.A_LU = 0;
+     epd->e_B.mode_A = mode;
+-    if(operator=='s')epd->e_B.A_Pre_Cholesky = M_precond;
+-    if(operator=='d')epd->e_B.A_Pre_LU = M_precond;
++    if(operator_char=='s')epd->e_B.A_Pre_Cholesky = M_precond;
++    if(operator_char=='d')epd->e_B.A_Pre_LU = M_precond;
+     (void) printf("  |I-MM^-1| = %g\n",norm2_power(pd));
+     
+-    if(operator=='d') addrk2_supermatrix(Kmod->r, M, 0, 0);
++    if(operator_char=='d') addrk2_supermatrix(Kmod->r, M, 0, 0);
+     rk_arithmetics_set_adaptive(0);
+     t1 = times(&buffer);
+-    if(operator == 'd') {
++    if(operator_char == 'd') {
+       ludecomposition_supermatrix(M);
+     } else {
+       choleskydecomposition_supermatrix(M);
+@@ -510,7 +510,7 @@ main()
+     t2 = times(&buffer);
+     (void) printf("  %.1f seconds for setup\n",(double) (t2-t1) / clk_tck);
+     
+-    if(operator == 'd') {
++    if(operator_char == 'd') {
+       epd->e_B.A = 0;
+       epd->e_B.A_Cholesky = 0;
+       epd->e_B.A_Pre_Cholesky = 0;
+@@ -532,7 +532,7 @@ main()
+     fill_vector(cols, x2, 0.0);
+     
+     t1 = times(&buffer);  
+-    if(operator == 'd') {
++    if(operator_char == 'd') {
+       (void) printf("# GMRES solve (LU-Preconditioner)");
+       i = solve_gmres_supermatrix(M_compress, x1, x2, 1e-6, 5000, M, 
+ 				  HLIB_PREC_LU, Kmod, mode, 0);
+diff --git a/Library/aca.h b/Library/aca.h
+index d029fa8..cf52e84 100644
+--- a/Library/aca.h
++++ b/Library/aca.h
+@@ -24,6 +24,12 @@ typedef enum {
+ #include "rkmatrix.h"
+ #include "surfacebem.h"
+ 
++#ifdef __cplusplus
++extern "C"{
++#endif
++
++
++
+ /* compute the entries of a row in a subblock 
+    given by start/size of a BEM stiffness matrix 
+    row: index of the row 
+@@ -201,4 +207,8 @@ bufaca_full2rk_coeff(pfullmatrix f, double **buf, int *bufsize,
+ 		     double *row_pivot, double *col_pivot, 
+ 		     double *diag_pivot, psurfacebemfactory bfactory);
+ 
++
++#ifdef __cplusplus
++}
++#endif
+ #endif
+diff --git a/Library/basic.h b/Library/basic.h
+index cbb917f..2c33eee 100644
+--- a/Library/basic.h
++++ b/Library/basic.h
+@@ -18,6 +18,11 @@
+ 
+ #include <stdlib.h>
+ 
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++
+ #ifdef __GNUC__
+ static double dsqr(double) __attribute__((unused,const));
+ static double dmax(double, double) __attribute__((unused,const));
+@@ -212,4 +217,8 @@ percent_progressbar(int mode, int step, int allsteps, void *data);
+ void
+ eta_progressbar(int mode, int step, int allsteps, void *data);
+ 
++#ifdef __cplusplus
++}
++#endif
++
+ #endif
+diff --git a/Library/bem2d.h b/Library/bem2d.h
+index 18e4404..5745334 100644
+--- a/Library/bem2d.h
++++ b/Library/bem2d.h
+@@ -18,6 +18,11 @@ typedef const bemgrid2d *pcbemgrid2d;
+ 
+ #include "cluster.h"
+ 
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++
+ struct _bemgrid2d {
+   double (*x)[2];		/* Coordinates of vertices */
+   int (*e)[2];			/* Vertices of edges */
+@@ -72,4 +77,8 @@ output_bemgrid2d(pcbemgrid2d gr,
+ 		 const char *filename,
+ 		 pcclustertree ct);
+ 
++#ifdef __cplusplus
++}
++#endif
++
+ #endif
+diff --git a/Library/bem3d.c b/Library/bem3d.c
+index 4ef55f2..0477714 100644
+--- a/Library/bem3d.c
++++ b/Library/bem3d.c
+@@ -1158,6 +1158,7 @@ buildvertexcluster_bemgrid3d(pcbemgrid3d gr,
+   double xmin[3], xmax[3];
+   int i, j, v0, v1, v2;
+ 
++
+   fac = new_clusterfactory(gr->vertices, gr->vertices, 3);
+ 
+   for(i=0; i<gr->vertices; i++) {
+@@ -1592,3 +1593,59 @@ box_macrogrid3d(double dx, double dy, double dz)
+ 
+   return mg;
+ }
++
++/* Extension by Matteo Franchin, University of Southampton, UK */
++
++pclustertree
++buildcustomcluster_bemgrid3d(pcbemgrid3d gr, int num_rows,
++                             int leafsize, int depth)
++{
++  pclustertree ct;
++  pclusterfactory fac;
++  const double (*x)[3] = (const double (*)[3]) gr->x;
++  const int (*t)[3] = (const int (*)[3]) gr->t;
++  double xmin[3], xmax[3];
++  int i, j, v0, v1, v2;
++
++
++  fac = new_clusterfactory(gr->vertices, gr->vertices, 3);
++
++  for(i=0; i<gr->vertices; i++) {
++    fac->x[i][0] = fac->smin[i][0] = fac->smax[i][0] = x[i][0];
++    fac->x[i][1] = fac->smin[i][1] = fac->smax[i][1] = x[i][1];
++    fac->x[i][2] = fac->smin[i][2] = fac->smax[i][2] = x[i][2];
++  }
++
++  for(i=0; i<gr->triangles; i++) {
++    v0 = t[i][0];
++    v1 = t[i][1];
++    v2 = t[i][2];
++
++    xmin[0] = dmin(x[v0][0], dmin(x[v1][0], x[v2][0]));
++    xmin[1] = dmin(x[v0][1], dmin(x[v1][1], x[v2][1]));
++    xmin[2] = dmin(x[v0][2], dmin(x[v1][2], x[v2][2]));
++
++    xmax[0] = dmax(x[v0][0], dmax(x[v1][0], x[v2][0]));
++    xmax[1] = dmax(x[v0][1], dmax(x[v1][1], x[v2][1]));
++    xmax[2] = dmax(x[v0][2], dmax(x[v1][2], x[v2][2]));
++
++    for(j=0; j<3; j++) {
++      v0 = t[i][j];
++      assert(0 <= v0 && v0 < gr->vertices);
++
++      fac->smin[v0][0] = dmin(fac->smin[v0][0], xmin[0]);
++      fac->smin[v0][1] = dmin(fac->smin[v0][1], xmin[1]);
++      fac->smin[v0][2] = dmin(fac->smin[v0][2], xmin[2]);
++
++      fac->smax[v0][0] = dmax(fac->smax[v0][0], xmax[0]);
++      fac->smax[v0][1] = dmax(fac->smax[v0][1], xmax[1]);
++      fac->smax[v0][2] = dmax(fac->smax[v0][2], xmax[2]);
++    }
++  }
++
++  ct = create_regular_clustertree(fac, num_rows, leafsize, depth);
++
++  del_clusterfactory(fac);
++
++  return ct;
++}
+diff --git a/Library/bem3d.h b/Library/bem3d.h
+index 8844bd5..8dc5ce2 100644
+--- a/Library/bem3d.h
++++ b/Library/bem3d.h
+@@ -27,6 +27,11 @@ typedef const macrogrid3d *pcmacrogrid3d;
+ #include <stdlib.h>
+ #include <assert.h>
+ 
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++
+ typedef void (*triangleparametrization3d)(double *x,
+ 					  double s, double t,
+ 					  void *data);
+@@ -152,4 +157,13 @@ ellipsoid_macrogrid3d(double rx, double ry, double rz);
+ pmacrogrid3d
+ box_macrogrid3d(double dx, double dy, double dz);
+ 
++#ifdef __cplusplus
++}
++#endif
++
++/* Extension by Matteo Franchin, University of Southampton, UK */
++pclustertree
++buildcustomcluster_bemgrid3d(pcbemgrid3d gr, int num_rows,
++                             int leafsize, int depth);
++
+ #endif
+diff --git a/Library/blockcluster.h b/Library/blockcluster.h
+index 4548180..7f1daa8 100644
+--- a/Library/blockcluster.h
++++ b/Library/blockcluster.h
+@@ -37,6 +37,11 @@ typedef enum {
+ #include "cluster.h"
+ #include "supermatrix.h"
+ 
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++
+ struct _blockcluster {
+   pccluster row;		/* Row cluster */
+   pccluster col;		/* Column cluster */
+@@ -123,4 +128,8 @@ psupermatrix
+ build_supermatrix2_from_blockcluster(pcblockcluster bc,
+ 				     pclusterbasis row, pclusterbasis col);
+ 
++#ifdef __cplusplus
++}
++#endif
++
+ #endif
+diff --git a/Library/cluster.c b/Library/cluster.c
+index 02fd7d1..85468aa 100644
+--- a/Library/cluster.c
++++ b/Library/cluster.c
+@@ -1575,3 +1575,105 @@ count_cluster(pccluster root)
+ 
+   return cl;
+ }
++
++
++
++
++
++
++
++/* Extension by Matteo Franchin, University of Southampton, UK */
++
++static pcluster
++do_regular_modified(pclusterfactory factory, int *index,
++                    int start, int sz, int jnext, int leafsize, int depth,
++                    int regbbox)
++{
++  const double * const *x = (const double * const *) factory->x;
++  double *vmin = factory->vmin;
++  double *vmax = factory->vmax;
++  int d = factory->d;
++  int i, j;
++
++  assert(sz > 0);
++  assert(sz <= factory->ndof);
++
++  for(j=0; j<d; j++) {
++    vmin[j] = vmax[j] = x[index[0]][j];
++    for(i=1; i<sz; i++) {
++      double xval = x[index[i]][j];
++      if(xval < vmin[j])
++        vmin[j] = xval;
++      else if(vmax[j] < xval)
++        vmax[j] = xval;
++    }
++  }
++
++  return split_regularly(factory, index, start, sz, jnext,
++                         leafsize, depth, regbbox);
++}
++
++static pcluster
++first_split(pclusterfactory factory, int num_rows,
++            int *index, int sz, int leafsize, int depth, int regbbox)
++{
++  pcluster this;
++  int l = num_rows;
++
++  assert(factory->nidx == factory->ndof);
++
++  if (l < sz) {
++    this = new_cluster(0, sz, factory->d, 2);
++#if MF_GEOMETRIC
++    this->son[0] = split_geometrically(factory, index, 0, l,
++                                       leafsize, depth);
++    this->son[1] = split_geometrically(factory, index+l, l, sz-l,
++                                       leafsize, depth);
++#else
++    this->son[0] = do_regular_modified(factory, index, 0, l,
++                                       0, leafsize, depth, regbbox);
++    this->son[1] = do_regular_modified(factory, index+l, l, sz-l,
++                                       0, leafsize, depth, regbbox);
++#endif
++
++  } else {
++    assert(l == sz);
++    this = new_cluster(0, sz, factory->d, 1);
++#if MF_GEOMETRIC
++    this->son[1] = split_geometrically(factory, index, 0, l, leafsize, depth);
++#else
++    this->son[0] = do_regular_modified(factory, index, 0, l,
++                                       0, leafsize, depth, regbbox);
++#endif
++  }
++  return this;
++}
++
++pclustertree
++create_regular_clustertree(pclusterfactory factory, int num_rows,
++                           int leafsize, int depth)
++{
++  pclustertree ct;
++  int n = factory->nidx;
++  int *dof2idx, *idx2dof;
++  int i, regbbox = 0;
++
++  assert(n == factory->ndof);
++
++  ct = new_clustertree(n, n);
++  dof2idx = ct->dof2idx;
++
++  for(i=0; i<n; i++)
++    dof2idx[i] = i;
++
++  ct->root = first_split(factory, num_rows,
++                         dof2idx, n, leafsize, depth, regbbox);
++
++  idx2dof = ct->idx2dof;
++  for(i=0; i<n; i++)
++    idx2dof[dof2idx[i]] = i;
++
++  (void) number_clustertree(ct);
++
++  return ct;
++}
+diff --git a/Library/cluster.h b/Library/cluster.h
+index 946da9b..7bbc310 100644
+--- a/Library/cluster.h
++++ b/Library/cluster.h
+@@ -51,6 +51,11 @@ typedef enum {
+ #include "rkmatrix.h"
+ #include "supermatrix.h"
+ 
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++
+ /* ============================================================
+    A clusterfactory contains all the information required for the
+    construction of a cluster tree, namely a spatial coordinate and
+@@ -293,4 +298,14 @@ depth_cluster(pccluster root);
+ int
+ count_cluster(pccluster root);
+ 
++#ifdef __cplusplus
++}
++#endif
++
++/* Extension by Matteo Franchin, University of Southampton, UK */
++
++pclustertree
++create_regular_clustertree(pclusterfactory factory, int num_rows,
++                           int leafsize, int depth);
++
+ #endif
+diff --git a/Library/clusterbasis.h b/Library/clusterbasis.h
+index 64dc245..b096b54 100644
+--- a/Library/clusterbasis.h
++++ b/Library/clusterbasis.h
+@@ -30,6 +30,11 @@ typedef const partialoperator *pcpartialoperator;
+ 
+ #include <stdlib.h>
+ 
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++
+ /* ============================================================
+    A clusterbasis object represents the basis used by a corresponding
+    cluster, either explicitly by the matrix V or implicitly by the
+@@ -211,4 +216,8 @@ reallocstructure_clusteroperator(pclusteroperator co, int kr, int kc);
+ pclusteroperator
+ newproduct_clusteroperator(pcclusterbasis row, pcclusterbasis col);
+ 
++#ifdef __cplusplus
++}
++#endif
++
+ #endif
+diff --git a/Library/curvebem.h b/Library/curvebem.h
+index 6f72ce5..705409e 100644
+--- a/Library/curvebem.h
++++ b/Library/curvebem.h
+@@ -23,6 +23,11 @@ typedef const curvebemfactory *pccurvebemfactory;
+ #include "quadrature1d.h"
+ #include "supermatrix.h"
+ 
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++
+ struct _curvebemfactory {
+   pbemgrid2d gr;		/* BEM grid */
+   pcclustertree rct;		/* Row cluster tree */
+@@ -152,4 +157,8 @@ l2norm_curvebem(const double *c, int usecolbasis,
+ 		double (*func)(const double *x, const double *n),
+ 		pcurvebemfactory bfactory);
+ 
++#ifdef __cplusplus
++}
++#endif
++
+ #endif
+diff --git a/Library/factorisations.h b/Library/factorisations.h
+index 5956b73..4692087 100644
+--- a/Library/factorisations.h
++++ b/Library/factorisations.h
+@@ -22,6 +22,11 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ 
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++
+ /* Solve lower-triangular system of equations */
+ void
+ lowersolve_supermatrix(psupermatrix s, double *v);
+@@ -121,4 +126,8 @@ norm2lu2_supermatrix(psupermatrix lu, psupermatrix s);
+ double 
+ norm2lu3_supermatrix(psupermatrix lu, psupermatrix s, psupermatrix smod);
+ 
++#ifdef __cplusplus
++}
++#endif
++
+ #endif
+diff --git a/Library/fem1d.h b/Library/fem1d.h
+index cabc4e6..eccf788 100644
+--- a/Library/fem1d.h
++++ b/Library/fem1d.h
+@@ -16,6 +16,11 @@
+ #include "rkmatrix.h"
+ #include "supermatrix.h"
+ 
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++
+ double 
+ entry_fem1d(int index1, int index2);
+ 
+@@ -47,4 +52,8 @@ build_supermatrix_mass1d(int index11, int index1n,
+ 			int index21, int index2n, 
+ 			int k, int level, int minsize, double eta);
+ 
++#ifdef __cplusplus
++}
++#endif
++
+ #endif
+diff --git a/Library/fem2d.h b/Library/fem2d.h
+index 7c725af..16551cd 100644
+--- a/Library/fem2d.h
++++ b/Library/fem2d.h
+@@ -22,6 +22,11 @@ typedef const grid2d *pcgrid2d;
+ 
+ #include <stdlib.h>
+ 
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++
+ struct _grid2d {
+   double (*p)[2];		/* Array of grid points */
+   int (*t)[3];			/* Array of triangles */
+@@ -76,4 +81,8 @@ ellipticpde_grid2d(pcgrid2d g2, pcclustertree ct,
+ pgrid2d
+ unitsquare_grid2d(int nx, int ny);
+ 
++#ifdef __cplusplus
++}
++#endif
++
+ #endif
+diff --git a/Library/finitedifferences.h b/Library/finitedifferences.h
+index 7e742bd..885021b 100644
+--- a/Library/finitedifferences.h
++++ b/Library/finitedifferences.h
+@@ -15,6 +15,11 @@
+ #include "lineariterations.h"
+ #include "sparsematrix.h"
+ 
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++
+ /* Create a sparsematrix representing the approximation of the
+    Poisson -(dx^2 + dy^2)u=f operator by the standard five-point stencil
+    on a rectangle.
+@@ -48,4 +53,8 @@ double *
+ interpolate_fd2d(int nx, int ny, double hx, double hy,
+ 		 double (*f)(double, double));
+ 
++#ifdef __cplusplus
++}
++#endif
++
+ #endif
+diff --git a/Library/fullmatrix.c b/Library/fullmatrix.c
+index 83bcc63..8987015 100644
+--- a/Library/fullmatrix.c
++++ b/Library/fullmatrix.c
+@@ -606,7 +606,7 @@ addfull2_rkmatrix(pfullmatrix f, prkmatrix rt, int  row_offset, int col_offset){
+     fullmatrix_c_flops += 60 * size * minsize;
+     if(info!=0){
+       printf("add_full2rkmatrix: info(dgesvd)=%d\n",info);
+-      exit(0);
++      abort();
+     }
+ 
+     if(rk_arithmetics_adaptive()==1 && rt->local_eps>=0){
+diff --git a/Library/fullmatrix.h b/Library/fullmatrix.h
+index d9b5351..9ddae41 100644
+--- a/Library/fullmatrix.h
++++ b/Library/fullmatrix.h
+@@ -26,6 +26,11 @@ typedef const fullmatrix *pcfullmatrix;
+ #include <stdio.h>
+ #include <stdlib.h>
+ 
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++
+ /* a fullmatrix represents a rows times cols matrix 
+    stored in the array e columnwise */
+ 
+@@ -283,6 +288,9 @@ outputleaf_fullmatrix(pfullmatrix f, FILE* datei, pblockcluster bc,
+ 		      int row_offset, int col_offset, int row_max, int col_max, 
+ 		      int rank, int fill, int border, double tol);
+ 
+-#endif
+ 
++#ifdef __cplusplus
++}
++#endif
+ 
++#endif
+diff --git a/Library/graphics.h b/Library/graphics.h
+index e8e5947..de8be60 100644
+--- a/Library/graphics.h
++++ b/Library/graphics.h
+@@ -19,6 +19,11 @@
+ 
+ #include <math.h>
+ 
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++
+ void
+ print_vector(const char *name, double* v, int n);
+ 
+@@ -29,4 +34,8 @@ void
+ print_spectrum(const char *name, int n, double *r, double *c, 
+ 	       int extraoffset);
+ 
++#ifdef __cplusplus
++}
++#endif
++
+ #endif
+diff --git a/Library/h2apriori.h b/Library/h2apriori.h
+index ea38057..913aa45 100644
+--- a/Library/h2apriori.h
++++ b/Library/h2apriori.h
+@@ -14,6 +14,11 @@
+ 
+ #include "supermatrix.h"
+ 
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++
+ /* ============================================================
+    This module contains functions for the fast H^2-matrix arithmetic.
+    If the block structure and the cluster bases of the result matrix
+@@ -64,4 +69,8 @@ void
+ checkh2product_supermatrix(double alpha, pcsupermatrix a, pcsupermatrix b,
+ 			   pcsupermatrix c);
+ 
++#ifdef __cplusplus
++}
++#endif
++
+ #endif
+diff --git a/Library/h2arithmetics.h b/Library/h2arithmetics.h
+index 5832fc6..b2e0eb1 100644
+--- a/Library/h2arithmetics.h
++++ b/Library/h2arithmetics.h
+@@ -24,6 +24,11 @@ typedef const mixedmatrix *pcmixedmatrix;
+ 
+ #include <stdlib.h>
+ 
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++
+ /* ============================================================
+    This module contains routines for computing the _exact_ product
+    of two H^2-matrices. This is only useful in very special situations,
+@@ -156,4 +161,8 @@ void
+ hmul2_supermatrix(psupermatrix a, psupermatrix b, psupermatrix c);
+ 
+ 
++#ifdef __cplusplus
++}
++#endif
++
+ #endif
+diff --git a/Library/h2conversion.h b/Library/h2conversion.h
+index 563b389..f75e1e2 100644
+--- a/Library/h2conversion.h
++++ b/Library/h2conversion.h
+@@ -15,6 +15,11 @@
+ #include "basic.h"
+ #include "supermatrix.h"
+ 
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++
+ /* Find an orthogonal row cluster basis that approximates a supermatrix.
+    s: Matrix
+    root: Root of the corresponding row cluster tree
+@@ -85,4 +90,8 @@ orthogonalize_supermatrix(psupermatrix s,
+ psupermatrix
+ buildrk_supermatrix(psupermatrix s);
+ 
++#ifdef __cplusplus
++}
++#endif
++
+ #endif
+diff --git a/Library/h2newconv.h b/Library/h2newconv.h
+index c35869e..79a83f5 100644
+--- a/Library/h2newconv.h
++++ b/Library/h2newconv.h
+@@ -15,6 +15,11 @@
+ #include "basic.h"
+ #include "supermatrix.h"
+ 
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++
+ /* ============================================================
+    In the rare case that the use of Gram matrices in the conversion
+    of an H-matrix to the H^2-matrix format leads to an inacceptable
+@@ -44,4 +49,8 @@ pclusterbasis
+ svdbuildcol2_supermatrix(psupermatrix s, pccluster ct,
+ 			 double eps, int kmax, TruncationStrategy strategy);
+ 
++#ifdef __cplusplus
++}
++#endif
++
+ #endif
+diff --git a/Library/h2virtual.h b/Library/h2virtual.h
+index 09d4a2d..c0945d2 100644
+--- a/Library/h2virtual.h
++++ b/Library/h2virtual.h
+@@ -25,6 +25,11 @@ typedef enum {
+ #include "blockcluster.h"
+ #include "supermatrix.h"
+ 
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++
+ /* ============================================================
+    Creating H^2 matrices directly (see the module surfacebemfactory)
+    is very fast, but requires also a large amount of memory. In
+@@ -183,4 +188,8 @@ aca2fill_supermatrix(psupermatrix s, pccluster rct, pccluster cct,
+ 		     double acaeps, int acakmax, ACAStrategy acastrategy,
+ 		     double (*entry)(int row, int col, void *data), void *data);
+ 
++#ifdef __cplusplus
++}
++#endif
++
+ #endif
+diff --git a/Library/hca.h b/Library/hca.h
+index e8eab48..84b1475 100644
+--- a/Library/hca.h
++++ b/Library/hca.h
+@@ -22,6 +22,11 @@
+ #include "sparsematrix.h"
+ #include "supermatrix.h"
+ 
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++
+ /* Compute the interpolation-based hybrid cross approximation for an
+    rkmatrix block
+    r: Rank k matrix
+@@ -69,4 +74,9 @@ void
+ hcafill_surfacebem_supermatrix(psupermatrix M, pccluster row,
+ 			       pccluster col, psurfacebemfactory bfactory,
+ 			       double eps, int kmax);
++
++#ifdef __cplusplus
++}
++#endif
++
+ #endif
+diff --git a/Library/hcoarsening.h b/Library/hcoarsening.h
+index def3062..7ee8ff5 100644
+--- a/Library/hcoarsening.h
++++ b/Library/hcoarsening.h
+@@ -23,6 +23,11 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ 
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++
+ typedef enum {
+   HLIB_ACA,
+   HLIB_ACAP,
+@@ -110,4 +115,8 @@ coarsen_hca_from_blockcluster(pcblockcluster bc,
+ 			      double hca_eps, double coarsen_eps,
+ 			      int diag, int kmax);
+ 
++#ifdef __cplusplus
++}
++#endif
++
+ #endif
+diff --git a/Library/ie1d.h b/Library/ie1d.h
+index f01b0cd..d1ec7e3 100644
+--- a/Library/ie1d.h
++++ b/Library/ie1d.h
+@@ -19,6 +19,11 @@
+ 
+ #include <math.h>
+ 
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++
+ double  
+ get_1d_entry(int n, int i, int j);
+ 
+@@ -64,4 +69,8 @@ double*
+ build_1d_rhs(int n, int nr);
+ 
+ 
++#ifdef __cplusplus
++}
++#endif
++
+ #endif
+diff --git a/Library/krylov.h b/Library/krylov.h
+index 750bd84..60fb205 100644
+--- a/Library/krylov.h
++++ b/Library/krylov.h
+@@ -38,6 +38,11 @@ typedef enum {
+ #include "factorisations.h"
+ #include "sparsematrix.h"
+ 
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++
+ struct _conjgrad {
+   double *r;			/* Residual */
+   double *p;			/* Search direction */
+@@ -139,4 +144,8 @@ solve_gmres_sparsematrix(psparsematrix s, double *rhs, double *u,
+ 			 psupermatrix addend, EvalMode mode_s,
+ 			 int verbosity);
+ 
++#ifdef __cplusplus
++}
++#endif
++
+ #endif
+diff --git a/Library/lapack.h b/Library/lapack.h
+index 1422403..b91b30c 100644
+--- a/Library/lapack.h
++++ b/Library/lapack.h
+@@ -17,6 +17,11 @@
+ #include <assert.h>
+ #include <math.h>
+ 
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++
+ #ifdef __GNUC__
+ static void eval_lapack(int rows, int cols, const double *a, const double *x, double *y) __attribute__((unused));
+ static void addeval_lapack(int rows, int cols, const double *a, const double *x, double *y) __attribute__((unused));
+@@ -423,6 +428,12 @@ muladdtrans12_lapack(int rows, int cols, int mid,
+ 	   deins_, a, &mid, b, &cols, deins_, c, &rows);
+ }
+ 
++
++#ifndef OOMPH_HAS_TRILINOS /* if we have trilinos then we already have blas */
++                           /* routines from it. C doesn't have namespaces */
++                           /* so we can't have two lots :( Hope they are */
++                           /* compatible! */
++
+ /* Solve the system A*X=B of linear equations for a tridiagonal matrix A */
+ 
+ extern void
+@@ -633,3 +644,9 @@ dgesvd_(const char *jobu,	/* Is U to be computed? Where to store it? */
+ #endif
+ 
+ 
++#ifdef __cplusplus
++}
++#endif
++
++
++#endif
+diff --git a/Library/laplacebem.c b/Library/laplacebem.c
+index bd764ed..ca8e1a0 100644
+--- a/Library/laplacebem.c
++++ b/Library/laplacebem.c
+@@ -1,8 +1,8 @@
+-
+ #include "laplacebem.h"
+ 
+ #include <math.h>
+ #include <string.h>
++#include <assert.h>
+ 
+ typedef enum {
+   HLIB_INTER_CHEBYSHEV,		/* Zeros of Chebyshev polynomials */
+@@ -2684,3 +2684,1588 @@ new_surfacebemfactory_dlp(pbemgrid3d gr,
+ 
+   return bfactory;
+ }
++
++/*The following code provides routines for computing a hierarchical
++  matrix approximation of the collocation matrix of the double layer
++  and the single layer potential. Furthermore separate grids for the
++  row and the column cluster are provided (implemented rather in a
++  makeshift way). This allows for the splitting of a hierarchical
++  matrix into slices, which in turn leads to an easy way to
++  parallelise the code.
++  (C) 2008/2009 Andreas Knittel, University of Southampton
++*/
++
++
++static int
++triangle_check(double* row_pos, const double (*x_source)[3], int* idx_triangle)
++{
++  int i,j;
++  double col_pos[3];
++  double accuracy = 1e-8;
++  double min, max;
++  int match = 0;
++  for(i=0; i<3; i++) {
++    match = 0;
++    for(j=0; j<3; j++) {
++	  col_pos[j] = x_source[idx_triangle[i]][j];
++	  if(col_pos[j]>0.0) {
++	    min = col_pos[j]*(1.0-accuracy);
++	    max = col_pos[j]*(1.0+accuracy);
++	  }
++	  else if(col_pos[j]<0.0) {
++	    min = col_pos[j]*(1.0+accuracy);
++	    max = col_pos[j]*(1.0-accuracy);
++	  }
++	  else {
++	    min = -1e-24;
++	    max = 1e-24;
++	  }
++
++	  if(row_pos[j]>min && row_pos[j]<max) {
++	    match++;
++	  }
++	  else
++	    break;
++    }
++    if(match==3)
++      return 1;
++  }
++  return 0;
++}
++
++static void
++lindholm_formula_slp(int rstart, int rsize, int cstart, int csize,
++		     psurfacebemfactory bfactory, double *X, int ldX)
++{
++  const double (*x_r)[3] = (const double (*)[3]) bfactory->gr_row->x;
++  const int *rdof2idx = bfactory->rct->dof2idx;
++  const double (*x_s)[3] = (const double (*)[3]) bfactory->gr->x;
++  const int (*t)[3] = (const int (*)[3]) bfactory->gr->t;
++  const double (*n)[3] = (const double (*)[3]) bfactory->gr->n;
++  const int *cidx2dof = bfactory->cct->idx2dof;
++  const int *cdof2tri = bfactory->cdof2tri;
++  const int *ctriangle = bfactory->ctriangle;
++  const int *ctri2dof = bfactory->ctri2dof;
++
++  int ld_cols = bfactory->ld_cols;
++  int *acol = bfactory->acol;
++  int first_col;
++
++  int corner[3];    /*index of the corners of a certain triangle*/
++  double t_area;       /*area of a triangle*/
++  double xx[3];
++  double rho[3][3];
++  double rho_scalar[3];
++  double rho_abs[3];
++  double xi[3][3], eta[3][3], zeta[3]; /*local coordinates of Lindholm formula*/
++  double eta_proj[3];
++  double zeta_proj;
++  double edge[3][3];
++  double edgelength[3];
++  double gamma[3][3];
++  double P[3];
++  double Q[3];
++  double solid_angle;
++  double buffer, buffer1, buffer2, fractionbuf;
++  int i, j, i1, i2, i3, j1, j2;
++
++  assert(ldX >= rsize);
++
++  for(j=0; j<csize; j++)
++    for(i=0; i<rsize; i++)
++      X[i+j*ldX] = 0.0;
++
++  first_col = end_of_list;
++  for(i=0; i<csize; i++) {
++    i1 = i+cstart;
++    for(j=cdof2tri[i1]; j<cdof2tri[i1+1]; j++) {
++      j1 = ctriangle[j];
++      if(acol[j1] == not_in_list) {
++	acol[j1] = first_col;
++	first_col = j1;
++      }
++    }
++  }
++
++  for(i=0; i<rsize; i++) {
++    i1 = i + rstart;
++    xx[0] = x_r[rdof2idx[i1]][0];  /*the coordinates of the reference point.*/
++    xx[1] = x_r[rdof2idx[i1]][1];
++    xx[2] = x_r[rdof2idx[i1]][2];
++    for(j=first_col; j>=0; j=acol[j]) {
++      corner[0] = t[j][0];
++      corner[1] = t[j][1];
++      corner[2] = t[j][2];
++
++      if(triangle_check(xx, x_s, corner))
++	continue; /*skip computation when reference point is part of triangle*/
++
++      /*computation of the local coordinate system and all variables defined
++       in the Lindholm formula for the single layer potential
++       (IEEE TRANSACTIONS ON MAGNETICS, VOL. MAG-20, NO. 5, SEPTEMBER 1984)*/
++
++      zeta[0] = n[j][0];
++      zeta[1] = n[j][1];
++      zeta[2] = n[j][2];
++
++      for(i2=0; i2<3; i2++) {
++	edgelength[i2] = 0.0;
++	rho_abs[i2] = 0.0;
++	for(j2=0; j2<3; j2++) {
++	  edge[i2][j2] = x_s[corner[(i2+1)%3]][j2] - x_s[corner[i2]][j2];
++	  edgelength[i2] += edge[i2][j2]*edge[i2][j2];
++	  rho[i2][j2] = x_s[corner[i2]][j2] - xx[j2];
++	  rho_abs[i2] += rho[i2][j2]*rho[i2][j2];
++	}
++	edgelength[i2] = sqrt(edgelength[i2]);
++	rho_abs[i2] = sqrt(rho_abs[i2]);
++	for(j2=0; j2<3; j2++)
++	  xi[i2][j2] = edge[i2][j2] / edgelength[i2];
++      }
++
++      t_area = 0.0;
++      for(i2=0; i2<3; i2++) {
++	buffer = edge[0][(i2+1)%3]*edge[1][(i2+2)%3] - edge[0][(i2+2)%3]*edge[1][(i2+1)%3];
++	t_area += buffer*buffer;
++      }
++      t_area = sqrt(t_area) / 2.0;
++
++      for(i2=0; i2<3; i2++) {
++	buffer=0.0;
++	for(j2=0; j2<3; j2++) {
++	  eta[i2][j2] = zeta[(j2+1)%3]*xi[i2][(j2+2)%3] - zeta[(j2+2)%3]*xi[i2][(j2+1)%3];
++	  buffer += eta[i2][j2]*xi[(i2+1)%3][j2];
++	}
++	if(buffer < 0.0)
++	  for(j2=0; j2<3; j2++)
++	    eta[i2][j2] = -1.0*eta[i2][j2];
++      }
++
++      for(i2=0; i2<3; i2++) {
++	eta_proj[i2]=0.0;
++	for(j2=0; j2<3; j2++)
++	  eta_proj[i2] += eta[i2][j2]*rho[i2][j2];
++      }
++
++      zeta_proj=0.0;
++      for(j2=0; j2<3; j2++)
++	zeta_proj += zeta[j2]*rho[0][j2];
++
++      for(i2=0; i2<3; i2++)
++	for(j2=0; j2<3; j2++) {
++	  gamma[i2][j2] = 0;
++	  for(i3=0; i3<3; i3++)
++	    gamma[i2][j2] += xi[(i2+1)%3][i3]*xi[j2][i3];
++	}
++
++      for(i2=0; i2<3; i2++) {
++	buffer1 = rho_abs[i2] + rho_abs[(i2+1)%3] + edgelength[i2];
++	buffer2 = rho_abs[i2] + rho_abs[(i2+1)%3] - edgelength[i2];
++	P[i2] = log(buffer1/buffer2);
++      }
++
++      for(i2=0; i2<3; i2++) {
++	buffer1 = (rho_abs[i2] + rho_abs[(i2+1)%3])/(2.0*edgelength[i2]);
++	buffer2 = (rho_abs[i2] - rho_abs[(i2+1)%3])/edgelength[i2];
++	Q[i2] = buffer1/(buffer2*buffer2 + 1);
++      }
++
++      for(i2=0; i2<3; i2++) {
++	rho_scalar[i2] = 0.0;
++	for(j2=0; j2<3; j2++)
++	  rho_scalar[i2] += rho[(i2+1)%3][j2]*rho[(i2+2)%3][j2];
++      }
++
++      buffer1 = rho_abs[0]*rho_abs[1]*rho_abs[2];
++      buffer2 = 2.0;
++      for(i2=0; i2<3; i2++) {
++	buffer1 += rho_abs[i2]*rho_scalar[i2];
++	buffer2 *= (rho_abs[(i2+1)%3]*rho_abs[(i2+2)%3] + rho_scalar[i2]);
++      }
++      buffer2 = sqrt(buffer2);
++
++      if(zeta_proj < 0.0)
++	solid_angle = -2.0;
++      else if(zeta_proj > 0.0)
++	solid_angle = 2.0;
++      else
++	solid_angle = 0.0;
++
++      fractionbuf = buffer1 / buffer2;
++      if(fractionbuf>1.0)
++	fractionbuf = 1.0;
++      else if(fractionbuf<-1.0)
++	fractionbuf = -1.0;
++      solid_angle *= acos(fractionbuf);
++
++      assert(ctri2dof[j+1] - ctri2dof[j] == ld_cols);
++
++      for(j1=0; j1<3; j1++) {
++	j2 = cidx2dof[corner[j1]] - cstart;
++	if(0 <= j2 && j2 < csize) {
++	  buffer1 = zeta_proj*solid_angle+eta_proj[0]*P[0]+eta_proj[1]*P[1]+eta_proj[2]*P[2];
++	  buffer1 *= eta_proj[(j1+1)%3];
++	  buffer2 = 0.0;
++	  for(i2=0; i2<3; i2++) {
++	    buffer2 += P[i2]*(zeta_proj*zeta_proj + eta_proj[i2]*eta_proj[i2]);
++	    buffer2 += Q[i2]*edgelength[i2]*edgelength[i2];
++	    buffer2 *= gamma[j1][i2];
++	  }
++	  X[i + j2*ldX] += edgelength[(j1+1)%3]*(buffer1-0.5*buffer2)/(8*M_PI*t_area);
++	}
++      }
++    }
++  }
++
++  while(first_col != end_of_list) {
++    i = acol[first_col];
++    acol[first_col] = not_in_list;
++    first_col = i;
++  }
++}
++
++#define LINDHOLM_DEBUG 0
++
++#if LINDHOLM_DEBUG > 0
++#define LINDHOLM_ASSERT(condition) \
++  do { \
++    if (condition) {\
++      int idx; \
++      printf("triangle has vertices:\n"); \
++      for(idx = 0; idx < 3; idx++) { \
++        const double *p = x_s[corner[idx]]; \
++        printf("vertex %d: (%g, %g, %g)\n", idx, p[0], p[1], p[2]); \
++      } \
++      printf("Reference point is (%g, %g, %g)\n", xx[0], xx[1], xx[2]); \
++    } \
++  } while (0)
++#else
++#  define LINDHOLM_ASSERT(condition)
++#endif
++
++#define LINDHOLM_VERY_SMALL 1e-10
++
++#define LINDHOLM_CHECK_DENOM(x) \
++  LINDHOLM_ASSERT(fabs(x) > LINDHOLM_VERY_SMALL)
++
++#define LINDHOLM_CHECK_POSITIVE(x) \
++  LINDHOLM_ASSERT((x) > LINDHOLM_VERY_SMALL)
++
++#define LINDHOLM_CHECK_NONNEGATIVE(x) \
++  LINDHOLM_ASSERT((x) >= 0.0)
++
++static void
++lindholm_formula_dlp(int rstart, int rsize, int cstart, int csize,
++		     psurfacebemfactory bfactory, double *X, int ldX)
++{
++  const double (*x_r)[3] = (const double (*)[3]) bfactory->gr_row->x;
++  const int *rdof2idx = bfactory->rct->dof2idx;
++  const double (*x_s)[3] = (const double (*)[3]) bfactory->gr->x;
++  const int (*t)[3] = (const int (*)[3]) bfactory->gr->t;
++  const double (*n)[3] = (const double (*)[3]) bfactory->gr->n;
++  const int *cidx2dof = bfactory->cct->idx2dof;
++  const int *cdof2tri = bfactory->cdof2tri;
++  const int *ctriangle = bfactory->ctriangle;
++  const int *ctri2dof = bfactory->ctri2dof;
++
++  int ld_cols = bfactory->ld_cols;
++  int *acol = bfactory->acol;
++  int first_col;
++
++  int corner[3];    /*index of the corners of a certain triangle*/
++  double t_area;       /*area of a triangle*/
++  double xx[3];
++  double rho[3][3];
++  double rho_scalar[3];
++  double rho_abs[3];
++  double xi[3][3], eta[3][3], zeta[3]; /*local coordinates of the Lindholm formula*/
++  double eta_proj[3];
++  double zeta_proj;
++  double edge[3][3];
++  double edgelength[3];
++  double gamma[3][3];
++  double P[3];
++  double solid_angle;
++
++  double buffer, buffer1, buffer2, fractionbuf;
++  int i, j, i1, i2, i3, j1, j2 ;
++
++  assert(ldX >= rsize);
++
++  for(j=0; j<csize; j++)
++    for(i=0; i<rsize; i++)
++      X[i+j*ldX] = 0.0;
++
++  first_col = end_of_list;
++  for(i=0; i<csize; i++) {
++    i1 = i+cstart;
++    for(j=cdof2tri[i1]; j<cdof2tri[i1+1]; j++) {
++      j1 = ctriangle[j];
++      if(acol[j1] == not_in_list) {
++	acol[j1] = first_col;
++	first_col = j1;
++      }
++    }
++  }
++
++  for(i=0; i<rsize; i++) {
++    int i1 = rdof2idx[i+rstart];
++    xx[0] = x_r[i1][0];  /*the coordinates of the reference point.*/
++    xx[1] = x_r[i1][1];
++    xx[2] = x_r[i1][2];
++
++    for(j=first_col; j>=0; j=acol[j]) {
++      corner[0] = t[j][0];
++      corner[1] = t[j][1];
++      corner[2] = t[j][2];
++
++      if(triangle_check(xx, x_s, corner))
++	continue; /*skip computation when reference point is part of triangle*/
++
++      /*computation of the local coordinate system and all variables defined
++       in the Lindholm formula for the double layer potential
++       (IEEE TRANSACTIONS ON MAGNETICS, VOL. MAG-20, NO. 5, SEPTEMBER 1984)*/
++
++      zeta[0] = n[j][0];
++      zeta[1] = n[j][1];
++      zeta[2] = n[j][2];
++
++      for(i2=0; i2<3; i2++) {
++	edgelength[i2] = 0.0;
++	rho_abs[i2] = 0.0;
++	for(j2=0; j2<3; j2++) {
++	  edge[i2][j2] = x_s[corner[(i2+1)%3]][j2] - x_s[corner[i2]][j2];
++	  edgelength[i2] += edge[i2][j2]*edge[i2][j2];
++	  rho[i2][j2] = x_s[corner[i2]][j2] - xx[j2];
++	  rho_abs[i2] += rho[i2][j2]*rho[i2][j2];
++	}
++	edgelength[i2] = sqrt(edgelength[i2]);
++	rho_abs[i2] = sqrt(rho_abs[i2]);
++	for(j2=0; j2<3; j2++) {
++          LINDHOLM_CHECK_DENOM(edgelength[i2]);
++	  xi[i2][j2] = edge[i2][j2] / edgelength[i2];
++        }
++      }
++
++      t_area = 0.0;
++      for(i2=0; i2<3; i2++) {
++	buffer = edge[0][(i2+1)%3]*edge[1][(i2+2)%3] - edge[0][(i2+2)%3]*edge[1][(i2+1)%3];
++	t_area += buffer*buffer;
++      }
++      t_area = sqrt(t_area) / 2.0;
++
++      for(i2=0; i2<3; i2++) {
++	buffer=0.0;
++	for(j2=0; j2<3; j2++) {
++	  eta[i2][j2] = zeta[(j2+1)%3]*xi[i2][(j2+2)%3] - zeta[(j2+2)%3]*xi[i2][(j2+1)%3];
++	  buffer += eta[i2][j2]*xi[(i2+1)%3][j2];
++	}
++	if(buffer<0.0) {
++	  for(j2=0; j2<3; j2++)
++	    eta[i2][j2] = -1.0*eta[i2][j2];
++	}
++      }
++
++      for(i2=0; i2<3; i2++) {
++	eta_proj[i2]=0.0;
++	for(j2=0; j2<3; j2++)
++	  eta_proj[i2] += eta[i2][j2]*rho[i2][j2];
++      }
++
++      zeta_proj=0.0;
++      for(j2=0; j2<3; j2++)
++	zeta_proj += zeta[j2]*rho[0][j2];
++
++      for(i2=0; i2<3; i2++)
++	for(j2=0; j2<3; j2++) {
++	  gamma[i2][j2] = 0;
++	  for(i3=0; i3<3; i3++) {
++	    gamma[i2][j2] += xi[(i2+1)%3][i3]*xi[j2][i3];
++	  }
++	}
++
++      for(i2=0; i2<3; i2++) {
++        double log_arg;
++	buffer1 = rho_abs[i2] + rho_abs[(i2+1)%3] + edgelength[i2];
++	buffer2 = rho_abs[i2] + rho_abs[(i2+1)%3] - edgelength[i2];
++        LINDHOLM_CHECK_DENOM(buffer2);
++        log_arg = buffer1/buffer2;
++        LINDHOLM_CHECK_POSITIVE(log_arg);
++	P[i2] = log(log_arg);
++      }
++
++      for(i2=0; i2<3; i2++) {
++	rho_scalar[i2] = 0.0;
++	for(j2=0; j2<3; j2++)
++	  rho_scalar[i2] += rho[(i2+1)%3][j2]*rho[(i2+2)%3][j2];
++      }
++
++      buffer1 = rho_abs[0]*rho_abs[1]*rho_abs[2];
++      buffer2 = 2.0;
++      for(i2=0; i2<3; i2++) {
++	buffer1 += rho_abs[i2]*rho_scalar[i2];
++	buffer2 *= (rho_abs[(i2+1)%3]*rho_abs[(i2+2)%3] + rho_scalar[i2]);
++      }
++      LINDHOLM_CHECK_NONNEGATIVE(buffer2);
++      buffer2 = sqrt(buffer2);
++
++      if(zeta_proj < 0.0)
++	solid_angle = -2.0;
++      else if(zeta_proj > 0.0)
++	solid_angle = 2.0;
++      else
++	solid_angle = 0.0;
++
++      LINDHOLM_CHECK_DENOM(buffer2);
++      fractionbuf = buffer1 / buffer2;
++      if(fractionbuf>1.0)
++	fractionbuf = 1.0;
++      else if(fractionbuf<-1.0)
++	fractionbuf = -1.0;
++      solid_angle *= acos(fractionbuf);
++
++      assert(ctri2dof[j+1] - ctri2dof[j] == ld_cols);
++      for(j1=0; j1<3; j1++) {
++	j2 = cidx2dof[corner[j1]] - cstart;
++	if(0 <= j2 && j2 < csize) {
++	  buffer = gamma[j1][0]*P[0] + gamma[j1][1]*P[1] + gamma[j1][2]*P[2];
++          LINDHOLM_CHECK_DENOM(t_area);
++	  X[i + j2*ldX] += edgelength[(j1+1)%3]
++	    *(eta_proj[(j1+1)%3]*solid_angle - zeta_proj*buffer)
++	    /(8*M_PI*t_area);
++	}
++      }
++    }
++  }
++
++  while(first_col != end_of_list) {
++    i = acol[first_col];
++    acol[first_col] = not_in_list;
++    first_col = i;
++  }
++}
++
++
++static void
++integrate_slp_ak(pccluster tau, pccluster sigma, psurfacebemfactory bfactory,
++		 int usecolbasis, double *X, int ldX)
++{
++  const double (*x)[3] = (const double (*)[3]) (usecolbasis ? bfactory->gr->x : bfactory->gr_row->x);
++  const int (*t)[3] = (const int (*)[3]) (usecolbasis ? bfactory->gr->t : bfactory->gr_row->t);
++  const double *gdet = (usecolbasis ? bfactory->gr->gdet : bfactory->gr_row->gdet);
++  double *qbuf = bfactory->qbuf;
++  const int *dof2tri = (usecolbasis ? bfactory->cdof2tri : bfactory->rdof2tri);
++  const int *triangle = (usecolbasis ? bfactory->ctriangle : bfactory->rtriangle);
++  const int *tri2dof = (usecolbasis ? bfactory->ctri2dof : bfactory->rtri2dof);
++  const int *dof = (usecolbasis ? bfactory->cdof : bfactory->rdof);
++  int *atau = (usecolbasis ? bfactory->acol : bfactory->arow);
++  int first_tau;
++  double (*l)[3] = bfactory->l;
++  int p = bfactory->p;
++  int qstd = bfactory->q;
++  const double (*xq)[2] = (const double (*)[2]) (usecolbasis ? bfactory->xq_col[qstd] : bfactory->xq_row[qstd]);
++  const double *wq = (usecolbasis ? bfactory->wq_col[qstd] : bfactory->wq_row[qstd]);
++  const double *wq2;
++  int q = (usecolbasis ? bfactory->q_col[qstd] : bfactory->q_row[qstd]);
++  double xx[3];
++  double a0, a1, a2;
++  int i, j, i1, i2, jx, jy, jz, k, order, minorder;
++  double dist, diam, diam_r;
++  int ei[3], ii, row;
++
++  assert(ldX >= tau->size);
++
++  order = bfactory->q;
++  minorder = bfactory->qmin;
++
++  if(bfactory->dist_adaptive && order > minorder) {
++    diam = 0;
++    for(row=tau->start; row<tau->start+tau->size; row++){
++      ii = triangle[dof2tri[row]];
++      ei[0] = t[ii][0];
++      ei[1] = t[ii][1];
++      ei[2] = t[ii][2];
++      diam_r = 0.0;
++      for(i=0;i<3;i++){
++	diam_r += dsqr(x[ei[1]][i] - x[ei[0]][i])
++	  +dsqr(x[ei[2]][i] - x[ei[1]][i]);
++      }
++      if(diam_r>diam)	diam = diam_r;
++    }
++    dist = distance_cluster(tau, sigma);
++    if(bfactory->q==2){
++      dist = dsqr(bfactory->dist_eta1) * dist;
++    }else{
++      dist = dsqr(bfactory->dist_eta) * dist;
++    }
++    while(dist>diam && order>1) {
++      diam *= dsqr(bfactory->dist_logbase);
++      order--;
++    }
++    xq = (const double (*)[2])
++      (usecolbasis ? bfactory->xq_col[order] : bfactory->xq_row[order]);
++    wq = (usecolbasis ? bfactory->wq_col[order] : bfactory->wq_row[order]);
++    q = (usecolbasis ? bfactory->q_col[order] : bfactory->q_row[order]);
++  }
++
++  for(j=0; j<p*p*p; j++)
++    for(i=0; i<tau->size; i++)
++      X[i+j*ldX] = 0.0;
++
++  first_tau = end_of_list;
++  for(i=0; i<tau->size; i++) {
++    i1 = i+tau->start;
++    for(i2=dof2tri[i1]; i2<dof2tri[i1+1]; i2++) {
++      k = triangle[i2];
++      if(atau[k] == not_in_list) {
++	atau[k] = first_tau;
++	first_tau = k;
++      }
++    }
++  }
++
++  transform_interpolation_points(sigma, bfactory, l);
++
++  for(i=first_tau; i>=0; i=atau[i]) {
++    for(jx=0; jx<p; jx++)
++      for(jy=0; jy<p; jy++)
++	for(jz=0; jz<p; jz++) {
++	  j = jx + p*(jy + p*jz);
++
++	  for(k=0; k<q; k++) {
++	    a2 = xq[k][1];
++	    a1 = xq[k][0];
++	    a0 = 1.0 - a1 - a2;
++
++	    xx[0] = a0 * x[t[i][0]][0] + a1 * x[t[i][1]][0] + a2 * x[t[i][2]][0];
++	    xx[1] = a0 * x[t[i][0]][1] + a1 * x[t[i][1]][1] + a2 * x[t[i][2]][1];
++	    xx[2] = a0 * x[t[i][0]][2] + a1 * x[t[i][1]][2] + a2 * x[t[i][2]][2];
++
++	    qbuf[k] = slp_kernel(l[jx][0], l[jy][1], l[jz][2],
++				 xx[0], xx[1], xx[2]);
++	  }
++
++	  wq2 = wq;
++	  for(i1=tri2dof[i]; i1<tri2dof[i+1]; i1++) {
++	    i2 = dof[i1] - tau->start;
++	    if(0 <= i2 && i2 < tau->size)
++	      X[i2 + j*ldX] += gdet[i] * ddot_(&q, qbuf, eins_,
++					       wq2, eins_);
++	    wq2 += q;
++	  }
++	}
++  }
++
++  while(first_tau != end_of_list) {
++    i = atau[first_tau];
++    atau[first_tau] = not_in_list;
++    first_tau = i;
++  }
++}
++
++
++static void
++integrate_col_slp_ak(pccluster tau, pccluster sigma, psurfacebemfactory bfactory,
++		     double *X, int ldX)
++{
++  integrate_slp_ak(tau, sigma, bfactory, 1, X, ldX);
++}
++
++
++static void
++integrate_slp_array_ak(pccluster tau, pccluster sigma, psurfacebemfactory bfactory,
++		       int usecolbasis, double *X, int ldX,
++		       double *coll_pts, int nr_coll_pts)
++{
++  const double (*x)[3] = (const double (*)[3]) (usecolbasis ? bfactory->gr->x : bfactory->gr_row->x);
++  const int (*t)[3] = (const int (*)[3]) (usecolbasis ? bfactory->gr->t : bfactory->gr_row->t);
++  const double *gdet = (usecolbasis ? bfactory->gr->gdet : bfactory->gr_row->gdet);
++  double *qbuf = bfactory->qbuf;
++  const int *dof2tri = (usecolbasis ? bfactory->cdof2tri : bfactory->rdof2tri);
++  const int *triangle = (usecolbasis ? bfactory->ctriangle : bfactory->rtriangle);
++  const int *tri2dof = (usecolbasis ? bfactory->ctri2dof : bfactory->rtri2dof);
++  const int *dof = (usecolbasis ? bfactory->cdof : bfactory->rdof);
++  int *atau = (usecolbasis ? bfactory->acol : bfactory->arow);
++  int first_tau;
++  int qstd = bfactory->q;
++  const double (*xq)[2] = (const double (*)[2]) (usecolbasis ? bfactory->xq_col[qstd] : bfactory->xq_row[qstd]);
++  const double *wq = (usecolbasis ? bfactory->wq_col[qstd] : bfactory->wq_row[qstd]);
++  const double *wq2;
++  int q = (usecolbasis ? bfactory->q_col[qstd] : bfactory->q_row[qstd]);
++  double xx[3];
++  double a0, a1, a2;
++  int i, j, i1, i2, k, order, minorder;
++  double dist, diam, diam_r;
++  int ei[3], ii,row;
++
++  assert(ldX >= tau->size);
++
++  order = bfactory->q;
++  minorder = bfactory->qmin;
++
++  if(bfactory->dist_adaptive && order > minorder) {
++    diam = 0;
++    for(row=tau->start; row<tau->start+tau->size; row++){
++      ii = triangle[dof2tri[row]];
++      ei[0] = t[ii][0];
++      ei[1] = t[ii][1];
++      ei[2] = t[ii][2];
++      diam_r = 0.0;
++      for(i=0;i<3;i++){
++	diam_r += dsqr(x[ei[1]][i] - x[ei[0]][i])
++	  +dsqr(x[ei[2]][i] - x[ei[1]][i]);
++      }
++      if(diam_r>diam)	diam = diam_r;
++    }
++    dist = distance_cluster(tau, sigma);
++    if(bfactory->q==2){
++      dist = dsqr(bfactory->dist_eta1) * dist;
++    }else{
++      dist = dsqr(bfactory->dist_eta) * dist;
++    }
++    while(dist>diam && order>1) {
++      diam *= dsqr(bfactory->dist_logbase);
++      order--;
++    }
++    xq = (const double (*)[2])
++      (usecolbasis ? bfactory->xq_col[order] : bfactory->xq_row[order]);
++    wq = (usecolbasis ? bfactory->wq_col[order] : bfactory->wq_row[order]);
++    q = (usecolbasis ? bfactory->q_col[order] : bfactory->q_row[order]);
++  }
++
++  for(j=0; j<nr_coll_pts; j++)
++    for(i=0; i<tau->size; i++)
++      X[i+j*ldX] = 0.0;
++
++  first_tau = end_of_list;
++  for(i=0; i<tau->size; i++) {
++    i1 = i+tau->start;
++    for(i2=dof2tri[i1]; i2<dof2tri[i1+1]; i2++) {
++      k = triangle[i2];
++      if(atau[k] == not_in_list) {
++	atau[k] = first_tau;
++	first_tau = k;
++      }
++    }
++  }
++
++  for(i=first_tau; i>=0; i=atau[i]) {
++    for(j=0; j<nr_coll_pts; j++){
++
++      for(k=0; k<q; k++) {
++	a2 = xq[k][1];
++	a1 = xq[k][0];
++	a0 = 1.0 - a1 - a2;
++
++	xx[0] = a0 * x[t[i][0]][0] + a1 * x[t[i][1]][0] + a2 * x[t[i][2]][0];
++	xx[1] = a0 * x[t[i][0]][1] + a1 * x[t[i][1]][1] + a2 * x[t[i][2]][1];
++	xx[2] = a0 * x[t[i][0]][2] + a1 * x[t[i][1]][2] + a2 * x[t[i][2]][2];
++
++	qbuf[k] = slp_kernel(coll_pts[3*j +0], coll_pts[3*j +1], coll_pts[3*j +2],
++			     xx[0], xx[1], xx[2]);
++      }
++
++      wq2 = wq;
++      for(i1=tri2dof[i]; i1<tri2dof[i+1]; i1++) {
++	i2 = dof[i1] - tau->start;
++	if(0 <= i2 && i2 < tau->size)
++	  X[i2 + j*ldX] += gdet[i] * ddot_(&q, qbuf, eins_,
++					   wq2, eins_);
++	wq2 += q;
++      }
++    }
++  }
++
++  while(first_tau != end_of_list) {
++    i = atau[first_tau];
++    atau[first_tau] = not_in_list;
++    first_tau = i;
++  }
++}
++
++
++static void
++integrate_row_slp_array_ak(pccluster tau, pccluster sigma, psurfacebemfactory bfactory,
++			   double *X, int ldX, double *coll_pts, int nr_coll_pts)
++{
++  integrate_slp_array_ak(tau, sigma, bfactory, 0, X, ldX,
++			 coll_pts, nr_coll_pts);
++}
++
++
++static void
++integrate_polynomial_ak(pccluster tau, psurfacebemfactory bfactory,
++			int usecolbasis, double *X, int ldX)
++{
++  const double (*x)[3] = (const double (*)[3]) (usecolbasis ? bfactory->gr->x : bfactory->gr_row->x);
++  const int (*t)[3] = (const int (*)[3]) (usecolbasis ? bfactory->gr->t : bfactory->gr_row->t);
++  const double *gdet = (usecolbasis ? bfactory->gr->gdet : bfactory->gr_row->gdet);
++  double *qbuf = bfactory->qbuf;
++  const int *dof2tri = (usecolbasis ? bfactory->cdof2tri : bfactory->rdof2tri);
++  const int *triangle = (usecolbasis ? bfactory->ctriangle : bfactory->rtriangle);
++  const int *tri2dof = (usecolbasis ? bfactory->ctri2dof : bfactory->rtri2dof);
++  const int *dof = (usecolbasis ? bfactory->cdof : bfactory->rdof);
++  int *atau = (usecolbasis ? bfactory->acol : bfactory->arow);
++  int first_tau;
++  double (*l)[3] = bfactory->l;
++  int p = bfactory->p;
++  int qstd = bfactory->q;
++  const double (*xq)[2] = (const double (*)[2]) (usecolbasis ? bfactory->xq_col[qstd] : bfactory->xq_row[qstd]);
++  const double *wq = (usecolbasis ? bfactory->wq_col[qstd] : bfactory->wq_row[qstd]);
++  const double *wq2;
++  int q = (usecolbasis ? bfactory->q_col[qstd] : bfactory->q_row[qstd]);
++  int size = tau->size;
++  double xx[3];
++  double a0, a1, a2, poly;
++  int i, j, i1, i2, jx, jy, jz, k, m;
++
++  assert(ldX == size);
++
++  for(j=0; j<p*p*p; j++)
++    for(i=0; i<tau->size; i++)
++      X[i+j*ldX] = 0.0;
++
++  first_tau = end_of_list;
++  for(i=0; i<size; i++) {
++    i1 = i+tau->start;
++    for(i2=dof2tri[i1]; i2<dof2tri[i1+1]; i2++) {
++      k = triangle[i2];
++      if(atau[k] == not_in_list) {
++	atau[k] = first_tau;
++	first_tau = k;
++      }
++    }
++  }
++
++  transform_interpolation_points(tau, bfactory, l);
++
++  for(i=first_tau; i>=0; i=atau[i]) {
++    for(jx=0; jx<p; jx++)
++      for(jy=0; jy<p; jy++)
++	for(jz=0; jz<p; jz++) {
++	  j = jx + p*(jy + p*jz);
++
++	  for(k=0; k<q; k++) {
++	    a2 = xq[k][1];
++	    a1 = xq[k][0];
++	    a0 = 1.0 - a1 - a2;
++
++	    xx[0] = a0 * x[t[i][0]][0] + a1 * x[t[i][1]][0] + a2 * x[t[i][2]][0];
++	    xx[1] = a0 * x[t[i][0]][1] + a1 * x[t[i][1]][1] + a2 * x[t[i][2]][1];
++	    xx[2] = a0 * x[t[i][0]][2] + a1 * x[t[i][1]][2] + a2 * x[t[i][2]][2];
++
++	    poly = 1.0;
++	    for(m=0; m<p; m++)
++	      if(m != jx)
++		poly *= (xx[0] - l[m][0]) / (l[jx][0] - l[m][0]);
++	    for(m=0; m<p; m++)
++	      if(m != jy)
++		poly *= (xx[1] - l[m][1]) / (l[jy][1] - l[m][1]);
++	    for(m=0; m<p; m++)
++	      if(m != jz)
++		poly *= (xx[2] - l[m][2]) / (l[jz][2] - l[m][2]);
++
++	    qbuf[k] = poly;
++	  }
++
++	  wq2 = wq;
++	  for(i1=tri2dof[i]; i1<tri2dof[i+1]; i1++) {
++	    i2 = dof[i1] - tau->start;
++	    if(0 <= i2 && i2 < size)
++	      X[i2 + j*ldX] += gdet[i] * ddot_(&q, qbuf, eins_,
++					       wq2, eins_);
++	    wq2 += q;
++	  }
++	}
++  }
++
++  while(first_tau != end_of_list) {
++    i = atau[first_tau];
++    atau[first_tau] = not_in_list;
++    first_tau = i;
++  }
++}
++
++
++static void
++integrate_col_polynomial_ak(pccluster tau, psurfacebemfactory bfactory,
++			 double *X, int ldX)
++{
++  integrate_polynomial_ak(tau, bfactory, 1, X, ldX);
++}
++
++
++static void
++integrate_dlp_ak(pccluster tau, pccluster sigma, psurfacebemfactory bfactory,
++		 int usecolbasis, double *X, int ldX)
++{
++  const double (*x)[3] = (const double (*)[3]) (usecolbasis ? bfactory->gr->x : bfactory->gr_row->x);
++  const int (*t)[3] = (const int (*)[3]) (usecolbasis ? bfactory->gr->t : bfactory->gr_row->t);
++  const double (*n)[3] = (const double (*)[3]) (usecolbasis ? bfactory->gr->n : bfactory->gr_row->n);
++  const double *gdet = (usecolbasis ? bfactory->gr->gdet : bfactory->gr_row->gdet);
++  double *qbuf = bfactory->qbuf;
++  const int *dof2tri = (usecolbasis ? bfactory->cdof2tri : bfactory->rdof2tri);
++  const int *triangle = (usecolbasis ? bfactory->ctriangle : bfactory->rtriangle);
++  const int *tri2dof = (usecolbasis ? bfactory->ctri2dof : bfactory->rtri2dof);
++  const int *dof = (usecolbasis ? bfactory->cdof : bfactory->rdof);
++  int *atau = (usecolbasis ? bfactory->acol : bfactory->arow);
++  int first_tau;
++  double (*l)[3] = bfactory->l;
++  int p = bfactory->p;
++  int qstd = bfactory->q;
++  const double (*xq)[2] = (const double (*)[2]) (usecolbasis ? bfactory->xq_col[qstd] : bfactory->xq_row[qstd]);
++  const double *wq = (usecolbasis ? bfactory->wq_col[qstd] : bfactory->wq_row[qstd]);
++  const double *wq2;
++  int q = (usecolbasis ? bfactory->q_col[qstd] : bfactory->q_row[qstd]);
++  int size = tau->size;
++  double xx[3], nn[3];
++  double a0, a1, a2;
++  int i, j, i1, i2, jx, jy, jz, k, order, minorder;
++  double dist, diam, diam_r;
++  int ei[3], ii,row;
++
++  assert(ldX == size);
++
++  order = bfactory->q;
++  minorder = bfactory->qmin;
++
++  if(bfactory->dist_adaptive && order > minorder) {
++    diam = 0;
++    for(row=tau->start; row<tau->start+tau->size; row++){
++      ii = triangle[dof2tri[row]];
++      ei[0] = t[ii][0];
++      ei[1] = t[ii][1];
++      ei[2] = t[ii][2];
++      diam_r = 0.0;
++      for(i=0;i<3;i++){
++	diam_r += dsqr(x[ei[1]][i] - x[ei[0]][i])
++	  +dsqr(x[ei[2]][i] - x[ei[1]][i]);
++      }
++      if(diam_r>diam)	diam = diam_r;
++    }
++    dist = distance_cluster(tau, sigma);
++    if(bfactory->q==2){
++      dist = dsqr(bfactory->dist_eta1) * dist;
++    }else{
++      dist = dsqr(bfactory->dist_eta) * dist;
++    }
++    while(dist>diam && order>1) {
++      diam *= dsqr(bfactory->dist_logbase);
++      order--;
++    }
++    xq =  (const double (*)[2])
++      (usecolbasis ? bfactory->xq_col[order] : bfactory->xq_row[order]);
++    wq = (usecolbasis ? bfactory->wq_col[order] : bfactory->wq_row[order]);
++    q = (usecolbasis ? bfactory->q_col[order] : bfactory->q_row[order]);
++  }
++
++  for(j=0; j<p*p*p; j++)
++    for(i=0; i<size; i++)
++      X[i+j*ldX] = 0.0;
++
++  first_tau = end_of_list;
++  for(i=0; i<size; i++) {
++    i1 = i+tau->start;
++    for(i2=dof2tri[i1]; i2<dof2tri[i1+1]; i2++) {
++      k = triangle[i2];
++      if(atau[k] == not_in_list) {
++	atau[k] = first_tau;
++	first_tau = k;
++      }
++    }
++  }
++
++  transform_interpolation_points(sigma, bfactory, l);
++
++  for(i=first_tau; i>=0; i=atau[i]) {
++    nn[0] = n[i][0];
++    nn[1] = n[i][1];
++    nn[2] = n[i][2];
++
++    for(jx=0; jx<p; jx++)
++      for(jy=0; jy<p; jy++)
++	for(jz=0; jz<p; jz++) {
++	  j = jx + p*(jy + p*jz);
++
++	  for(k=0; k<q; k++) {
++	    a2 = xq[k][1];
++	    a1 = xq[k][0];
++	    a0 = 1.0 - a1 - a2;
++
++	    xx[0] = a0 * x[t[i][0]][0] + a1 * x[t[i][1]][0] + a2 * x[t[i][2]][0];
++	    xx[1] = a0 * x[t[i][0]][1] + a1 * x[t[i][1]][1] + a2 * x[t[i][2]][1];
++	    xx[2] = a0 * x[t[i][0]][2] + a1 * x[t[i][1]][2] + a2 * x[t[i][2]][2];
++
++	    qbuf[k] = dlp_kernel(l[jx][0], l[jy][1], l[jz][2],
++				 xx[0], xx[1], xx[2],
++				 nn[0], nn[1], nn[2]);
++	  }
++
++	  wq2 = wq;
++	  for(i1=tri2dof[i]; i1<tri2dof[i+1]; i1++) {
++	    i2 = dof[i1] - tau->start;
++	    if(0 <= i2 && i2 < size)
++	      X[i2 + j*ldX] += gdet[i] * ddot_(&q, qbuf, eins_,
++					       wq2, eins_);
++	    wq2 += q;
++	  }
++	}
++  }
++
++  while(first_tau != end_of_list) {
++    i = atau[first_tau];
++    atau[first_tau] = not_in_list;
++    first_tau = i;
++  }
++}
++
++
++static void
++integrate_col_dlp_ak(pccluster tau, pccluster sigma, psurfacebemfactory bfactory,
++		     double *X, int ldX)
++{
++  integrate_dlp_ak(tau, sigma, bfactory, 1, X, ldX);
++}
++
++
++static void
++integrate_dlp_array_ak(pccluster tau, pccluster sigma, psurfacebemfactory bfactory,
++		       int usecolbasis, double *X, int ldX,
++		       double *coll_pts, int nr_coll_pts)
++{
++  const double (*x)[3] = (const double (*)[3]) (usecolbasis ? bfactory->gr->x : bfactory->gr_row->x);
++  const int (*t)[3] = (const int (*)[3]) (usecolbasis ? bfactory->gr->t : bfactory->gr_row->t);
++  const double (*n)[3] = (const double (*)[3]) (usecolbasis ? bfactory->gr->n : bfactory->gr_row->n);
++  const double *gdet = (usecolbasis ? bfactory->gr->gdet : bfactory->gr_row->gdet);
++  double *qbuf = bfactory->qbuf;
++  const int *dof2tri = (usecolbasis ? bfactory->cdof2tri : bfactory->rdof2tri);
++  const int *triangle = (usecolbasis ? bfactory->ctriangle : bfactory->rtriangle);
++  const int *tri2dof = (usecolbasis ? bfactory->ctri2dof : bfactory->rtri2dof);
++  const int *dof = (usecolbasis ? bfactory->cdof : bfactory->rdof);
++  int *atau = (usecolbasis ? bfactory->acol : bfactory->arow);
++  int first_tau;
++  int qstd = bfactory->q;
++  const double (*xq)[2] = (const double (*)[2]) (usecolbasis ? bfactory->xq_col[qstd] : bfactory->xq_row[qstd]);
++  const double *wq = (usecolbasis ? bfactory->wq_col[qstd] : bfactory->wq_row[qstd]);
++  const double *wq2;
++  int q = (usecolbasis ? bfactory->q_col[qstd] : bfactory->q_row[qstd]);
++  int size = tau->size;
++  double xx[3], nn[3];
++  double a0, a1, a2;
++  int i, j, i1, i2, k, order, minorder;
++  double dist, diam, diam_r;
++  int ei[3], ii,row;
++
++  assert(ldX == size);
++
++  order = bfactory->q;
++  minorder = bfactory->qmin;
++
++  if(bfactory->dist_adaptive && order > minorder) {
++    diam = 0;
++    for(row=tau->start; row<tau->start+tau->size; row++){
++      ii = triangle[dof2tri[row]];
++      ei[0] = t[ii][0];
++      ei[1] = t[ii][1];
++      ei[2] = t[ii][2];
++      diam_r = 0.0;
++      for(i=0;i<3;i++){
++	diam_r += dsqr(x[ei[1]][i] - x[ei[0]][i])
++	  +dsqr(x[ei[2]][i] - x[ei[1]][i]);
++      }
++      if(diam_r>diam)	diam = diam_r;
++    }
++    dist = distance_cluster(tau, sigma);
++    if(bfactory->q==2){
++      dist = dsqr(bfactory->dist_eta1) * dist;
++    }else{
++      dist = dsqr(bfactory->dist_eta) * dist;
++    }
++    while(dist>diam && order>1) {
++      diam *= dsqr(bfactory->dist_logbase);
++      order--;
++    }
++    xq = (const double (*)[2])
++      (usecolbasis ? bfactory->xq_col[order] : bfactory->xq_row[order]);
++    wq = (usecolbasis ? bfactory->wq_col[order] : bfactory->wq_row[order]);
++    q = (usecolbasis ? bfactory->q_col[order] : bfactory->q_row[order]);
++  }
++
++  for(j=0; j<nr_coll_pts; j++)
++    for(i=0; i<size; i++)
++      X[i+j*ldX] = 0.0;
++
++  first_tau = end_of_list;
++  for(i=0; i<size; i++) {
++    i1 = i+tau->start;
++    for(i2=dof2tri[i1]; i2<dof2tri[i1+1]; i2++) {
++      k = triangle[i2];
++      if(atau[k] == not_in_list) {
++	atau[k] = first_tau;
++	first_tau = k;
++      }
++    }
++  }
++
++  for(i=first_tau; i>=0; i=atau[i]) {
++    nn[0] = n[i][0];
++    nn[1] = n[i][1];
++    nn[2] = n[i][2];
++
++    for(j=0; j<nr_coll_pts; j++){
++
++      for(k=0; k<q; k++) {
++	a2 = xq[k][1];
++	a1 = xq[k][0];
++	a0 = 1.0 - a1 - a2;
++
++	xx[0] = a0 * x[t[i][0]][0] + a1 * x[t[i][1]][0] + a2 * x[t[i][2]][0];
++	xx[1] = a0 * x[t[i][0]][1] + a1 * x[t[i][1]][1] + a2 * x[t[i][2]][1];
++	xx[2] = a0 * x[t[i][0]][2] + a1 * x[t[i][1]][2] + a2 * x[t[i][2]][2];
++
++	qbuf[k] = dlp_kernel(coll_pts[3*j +0], coll_pts[3*j +1], coll_pts[3*j +2],
++			     xx[0], xx[1], xx[2],
++			     nn[0], nn[1], nn[2]);
++      }
++
++      wq2 = wq;
++      for(i1=tri2dof[i]; i1<tri2dof[i+1]; i1++) {
++	i2 = dof[i1] - tau->start;
++	if(0 <= i2 && i2 < size)
++	  X[i2 + j*ldX] += gdet[i] * ddot_(&q, qbuf, eins_,
++					   wq2, eins_);
++	wq2 += q;
++      }
++    }
++  }
++
++  while(first_tau != end_of_list) {
++    i = atau[first_tau];
++    atau[first_tau] = not_in_list;
++    first_tau = i;
++  }
++}
++
++
++static void
++integrate_col_dlp_array_ak(pccluster tau, pccluster sigma, psurfacebemfactory bfactory,
++			   double *X, int ldX, double *coll_pts, int nr_coll_pts)
++{
++  integrate_dlp_array_ak(tau, sigma, bfactory, 1, X, ldX,
++			 coll_pts, nr_coll_pts);
++}
++
++
++static void
++integrate_polynomial_dn_ak(pccluster tau, psurfacebemfactory bfactory,
++			   int usecolbasis, double *X, int ldX)
++{
++  const double (*x)[3] = (const double (*)[3]) (usecolbasis ? bfactory->gr->x : bfactory->gr_row->x);
++  const int (*t)[3] = (const int (*)[3]) (usecolbasis ? bfactory->gr->t : bfactory->gr_row->t);
++  const double (*n)[3] = (const double (*)[3]) (usecolbasis ? bfactory->gr->n : bfactory->gr_row->n);
++  const double *gdet = (usecolbasis ? bfactory->gr->gdet : bfactory->gr_row->gdet);
++  double *qbuf = bfactory->qbuf;
++  const int *dof2tri = (usecolbasis ? bfactory->cdof2tri : bfactory->rdof2tri);
++  const int *triangle = (usecolbasis ? bfactory->ctriangle : bfactory->rtriangle);
++  const int *tri2dof = (usecolbasis ? bfactory->ctri2dof : bfactory->rtri2dof);
++  const int *dof = (usecolbasis ? bfactory->cdof : bfactory->rdof);
++  int *atau = (usecolbasis ? bfactory->acol : bfactory->arow);
++  int first_tau;
++  double (*l)[3] = bfactory->l;
++  int p = bfactory->p;
++  int qstd = bfactory->q;
++  const double (*xq)[2] = (const double (*)[2]) (usecolbasis ? bfactory->xq_col[qstd] : bfactory->xq_row[qstd]);
++  const double *wq = (usecolbasis ? bfactory->wq_col[qstd] : bfactory->wq_row[qstd]);
++  const double *wq2;
++  int q = (usecolbasis ? bfactory->q_col[qstd] : bfactory->q_row[qstd]);
++  int size = tau->size;
++  double xx[3], nn[3];
++  double a0, a1, a2, monomial, dmonomial, poly, dpoly, poly3, dpoly3;
++  int i, j, i1, i2, jx, jy, jz, k, m;
++
++  assert(ldX == size);
++
++  for(j=0; j<p*p*p; j++)
++    for(i=0; i<size; i++)
++      X[i+j*ldX] = 0.0;
++
++  first_tau = end_of_list;
++  for(i=0; i<size; i++) {
++    i1 = i+tau->start;
++    for(i2=dof2tri[i1]; i2<dof2tri[i1+1]; i2++) {
++      k = triangle[i2];
++      if(atau[k] == not_in_list) {
++	atau[k] = first_tau;
++	first_tau = k;
++      }
++    }
++  }
++
++  transform_interpolation_points(tau, bfactory, l);
++
++  for(i=first_tau; i>=0; i=atau[i]) {
++    nn[0] = n[i][0];
++    nn[1] = n[i][1];
++    nn[2] = n[i][2];
++
++    for(jx=0; jx<p; jx++)
++      for(jy=0; jy<p; jy++)
++	for(jz=0; jz<p; jz++) {
++	  j = jx + p*(jy + p*jz);
++
++	  for(k=0; k<q; k++) {
++	    a2 = xq[k][1];
++	    a1 = xq[k][0];
++	    a0 = 1.0 - a1 - a2;
++
++	    xx[0] = a0 * x[t[i][0]][0] + a1 * x[t[i][1]][0] + a2 * x[t[i][2]][0];
++	    xx[1] = a0 * x[t[i][0]][1] + a1 * x[t[i][1]][1] + a2 * x[t[i][2]][1];
++	    xx[2] = a0 * x[t[i][0]][2] + a1 * x[t[i][1]][2] + a2 * x[t[i][2]][2];
++
++	    poly3 = 1.0;
++	    dpoly3 = 0.0;
++
++	    poly = 1.0;
++	    dpoly = 0.0;
++	    for(m=0; m<p; m++)
++	      if(m != jx) {
++		dmonomial = 1.0 / (l[jx][0] - l[m][0]);
++		monomial = (xx[0] - l[m][0]) * dmonomial;
++		dpoly = dpoly * monomial + poly * dmonomial;
++		poly *= monomial;
++	      }
++	    dpoly3 = dpoly3 * poly + poly3 * dpoly * nn[0];
++	    poly3 *= poly;
++
++	    poly = 1.0;
++	    dpoly = 0.0;
++	    for(m=0; m<p; m++)
++	      if(m != jy) {
++		dmonomial = 1.0 / (l[jy][1] - l[m][1]);
++		monomial = (xx[1] - l[m][1]) * dmonomial;
++		dpoly = dpoly * monomial + poly * dmonomial;
++		poly *= monomial;
++	      }
++	    dpoly3 = dpoly3 * poly + poly3 * dpoly * nn[1];
++	    poly3 *= poly;
++
++	    poly = 1.0;
++	    dpoly = 0.0;
++	    for(m=0; m<p; m++)
++	      if(m != jz) {
++		dmonomial = 1.0 / (l[jz][2] - l[m][2]);
++		monomial = (xx[2] - l[m][2]) * dmonomial;
++		dpoly = dpoly * monomial + poly * dmonomial;
++		poly *= monomial;
++	      }
++	    dpoly3 = dpoly3 * poly + poly3 * dpoly * nn[2];
++	    poly3 *= poly;
++
++	    qbuf[k] = dpoly3;
++	  }
++
++	  wq2 = wq;
++	  for(i1=tri2dof[i]; i1<tri2dof[i+1]; i1++) {
++	    i2 = dof[i1] - tau->start;
++	    if(0 <= i2 && i2 < size)
++	      X[i2 + j*ldX] += gdet[i] * ddot_(&q, qbuf, eins_,
++					       wq2, eins_);
++	    wq2 += q;
++	  }
++	}
++  }
++
++  while(first_tau != end_of_list) {
++    i = atau[first_tau];
++    atau[first_tau] = not_in_list;
++    first_tau = i;
++  }
++}
++
++
++static void
++integrate_col_polynomial_dn_ak(pccluster tau, psurfacebemfactory bfactory,
++			       double *X, int ldX)
++{
++  integrate_polynomial_dn_ak(tau, bfactory, 1, X, ldX);
++}
++
++
++static void
++pointeval_slp(pccluster tau, pccluster sigma, psurfacebemfactory bfactory,
++	      int usecolbasis, double *X, int ldX)
++{
++  const double (*x)[3] = (const double (*)[3]) (usecolbasis ? bfactory->gr->x : bfactory->gr_row->x);
++  const int *dof2idx = (usecolbasis ? bfactory->cct->dof2idx : bfactory->rct->dof2idx);
++  double (*l)[3] = bfactory->l;
++  int p = bfactory->p;
++  double xx[3];
++  int i, j, i1, jx, jy, jz;
++
++  assert(ldX >= tau->size);
++
++  for(j=0; j<p*p*p; j++)
++    for(i=0; i<tau->size; i++)
++      X[i+j*ldX] = 0.0;
++
++  transform_interpolation_points(sigma, bfactory, l);
++
++  i1 = tau->start;
++  for(i=0; i<tau->size; i++) {
++    xx[0] = x[dof2idx[i1]][0];
++    xx[1] = x[dof2idx[i1]][1];
++    xx[2] = x[dof2idx[i1]][2];
++    for(jx=0; jx<p; jx++)
++      for(jy=0; jy<p; jy++)
++	for(jz=0; jz<p; jz++) {
++	  j = jx + p*(jy + p*jz);
++	  X[i + j*ldX] = slp_kernel(l[jx][0], l[jy][1], l[jz][2],xx[0], xx[1], xx[2]);
++	}
++    i1++;
++  }
++}
++
++
++static void
++pointeval_row_slp(pccluster tau, pccluster sigma, psurfacebemfactory bfactory,
++		  double *X, int ldX)
++{
++  pointeval_slp(tau, sigma, bfactory, 0, X, ldX);
++}
++
++
++static void
++pointeval_slp_array(pccluster tau, pccluster sigma, psurfacebemfactory bfactory,
++		    int usecolbasis, double *X, int ldX,
++		    double *coll_pts, int nr_coll_pts)
++{
++  const double (*x)[3] = (const double (*)[3]) (usecolbasis ? bfactory->gr->x : bfactory->gr_row->x);
++  const int *dof2idx = (usecolbasis ? bfactory->cct->dof2idx : bfactory->rct->dof2idx);
++  double xx[3];
++  int i, j, i1;
++
++  assert(ldX >= tau->size);
++
++  for(j=0; j<nr_coll_pts; j++)
++    for(i=0; i<tau->size; i++)
++      X[i+j*ldX] = 0.0;
++
++  i1 = tau->start;
++  for(i=0; i<tau->size; i++) {
++      xx[0] = x[dof2idx[i1]][0];
++      xx[1] = x[dof2idx[i1]][1];
++      xx[2] = x[dof2idx[i1]][2];
++      for(j=0; j<nr_coll_pts; j++) {
++
++	X[i + j*ldX] = slp_kernel(coll_pts[3*j +0], coll_pts[3*j +1], coll_pts[3*j +2],
++				xx[0], xx[1], xx[2]);
++      }
++      i1++;
++  }
++}
++
++
++static void
++pointeval_row_slp_array(pccluster tau, pccluster sigma, psurfacebemfactory bfactory,
++			double *X, int ldX, double *coll_pts, int nr_coll_pts)
++{
++  pointeval_slp_array(tau, sigma, bfactory, 0, X, ldX,
++		      coll_pts, nr_coll_pts);
++}
++
++
++static void
++pointeval_col_slp_array(pccluster tau, pccluster sigma, psurfacebemfactory bfactory,
++			double *X, int ldX, double *coll_pts, int nr_coll_pts)
++{
++  pointeval_slp_array(tau, sigma, bfactory, 1, X, ldX,
++		      coll_pts, nr_coll_pts);
++}
++
++
++static void
++pointeval_polynomial(pccluster tau, psurfacebemfactory bfactory,
++		     int usecolbasis, double *X, int ldX)
++{
++  const double (*x)[3] = (const double (*)[3]) (usecolbasis ? bfactory->gr->x : bfactory->gr_row->x);
++  const int *dof2idx = (usecolbasis ? bfactory->cct->dof2idx : bfactory->rct->dof2idx);
++  double (*l)[3] = bfactory->l;
++  int p = bfactory->p;
++  int size = tau->size;
++  double xx[3];
++  double poly;
++  int i, j, i1, jx, jy, jz, m;
++
++  assert(ldX == size);
++
++  for(j=0; j<p*p*p; j++)
++    for(i=0; i<tau->size; i++)
++      X[i+j*ldX] = 0.0;
++
++  transform_interpolation_points(tau, bfactory, l);
++
++  i1 = tau->start;
++  for(i=0; i<size; i++) {
++    xx[0] = x[dof2idx[i1]][0];
++    xx[1] = x[dof2idx[i1]][1];
++    xx[2] = x[dof2idx[i1]][2];
++    for(jx=0; jx<p; jx++)
++      for(jy=0; jy<p; jy++)
++	for(jz=0; jz<p; jz++) {
++	  j = jx + p*(jy + p*jz);
++
++	  poly = 1.0;
++	  for(m=0; m<p; m++)
++	    if(m != jx)
++	      poly *= (xx[0] - l[m][0]) / (l[jx][0] - l[m][0]);
++	  for(m=0; m<p; m++)
++	    if(m != jy)
++	      poly *= (xx[1] - l[m][1]) / (l[jy][1] - l[m][1]);
++	  for(m=0; m<p; m++)
++	    if(m != jz)
++	      poly *= (xx[2] - l[m][2]) / (l[jz][2] - l[m][2]);
++	  X[i + j*ldX] = poly;
++	}
++    i1++;
++  }
++}
++
++
++static void
++pointeval_row_polynomial(pccluster tau, psurfacebemfactory bfactory,
++			 double *X, int ldX)
++{
++ pointeval_polynomial(tau, bfactory, 0, X, ldX);
++}
++
++
++static psurfacebemfactory
++collocation_initialization(pbemgrid3d gr_r, BEMBasis rbasis, pcclustertree rct,
++			   pbemgrid3d gr_c, BEMBasis cbasis, pcclustertree cct,
++			   int q, int qrhs, int p)
++{
++  psurfacebemfactory bfactory;
++  int rtriangles = gr_r->triangles;
++  int rvertices = gr_r->vertices;
++  int ctriangles = gr_c->triangles;
++  int cvertices = gr_c->vertices;
++  int ld_rows, nrdof, ld_cols, ncdof, nqmax, qmax;
++  int i, j;
++
++  assert(p > 0);
++
++  bfactory = (psurfacebemfactory) allocmem(sizeof(surfacebemfactory));
++  qmax = imax(q, qrhs);
++  bfactory->q_row = (int *) allocmem((size_t) sizeof(int) * (qmax+1));
++  bfactory->xq_row = (double (**)[2]) allocmem((size_t) sizeof(double (*)[2]) * (qmax+1));
++  bfactory->wq_row = (double **) allocmem((size_t) sizeof(double *) * (qmax+1));
++  bfactory->wqd_row = (double **) allocmem((size_t) sizeof(double *) * (qmax+1));
++  bfactory->q_col = (int *) allocmem((size_t) sizeof(int) * (qmax+1));
++  bfactory->xq_col = (double (**)[2]) allocmem((size_t) sizeof(double (*)[2]) * (qmax+1));
++  bfactory->wq_col = (double **) allocmem((size_t) sizeof(double *) * (qmax+1));
++  bfactory->wqd_col = (double **) allocmem((size_t) sizeof(double *) * (qmax+1));
++
++  ld_rows = 0;
++  nrdof = 0;
++  bfactory->roweval = NULL;
++  for(i=0; i<=qmax; i++)
++    build_triangle_gauss_l(i, bfactory->q_row+i,
++			   bfactory->xq_row+i, bfactory->wq_row+i,
++			   bfactory->wqd_row+i);
++  bfactory->roweval = eval_linear;
++  ld_rows = 3;
++  nrdof = rvertices;
++
++
++  ld_cols = 0;
++  ncdof = 0;
++  bfactory->coleval = NULL;
++  for(i=0; i<=qmax; i++)
++    build_triangle_gauss_l(i, bfactory->q_col+i,
++			   bfactory->xq_col+i, bfactory->wq_col+i,
++			   bfactory->wqd_col+i);
++  bfactory->coleval = eval_linear;
++  ld_cols = 3;
++  ncdof = cvertices;
++
++  bfactory->gr_row = gr_r;
++  bfactory->gr = gr_c;
++  bfactory->rct = rct;
++  bfactory->cct = cct;
++  bfactory->ld_cols = ld_cols;
++
++  bfactory->xp = (double *) allocmem((size_t) sizeof(double) * p);
++  bfactory->l = (double (*)[3]) allocmem((size_t) sizeof(double [3]) * p);
++  bfactory->l2 = (double (*)[3]) allocmem((size_t) sizeof(double [3]) * p);
++
++  switch(istra) {
++    default:
++    case HLIB_INTER_CHEBYSHEV:
++      for(i=0; i<p; i++)
++	bfactory->xp[i] = cos(M_PI*(2.0*i+1.0)/(2.0*p));
++      break;
++
++    case HLIB_INTER_CHEBPLUSB:
++      if(p == 1)
++	bfactory->xp[0] = 0.0;
++      else {
++	bfactory->xp[0] = -1.0;
++	bfactory->xp[p-1] = 1.0;
++	for(i=0; i<p-2; i++)
++	  bfactory->xp[i+1] = cos(M_PI*(2.0*i+1.0)/(2.0*(p-2)));
++      }
++      break;
++
++    case HLIB_INTER_CHEBLOBAT:
++      if(p == 1)
++	bfactory->xp[0] = 0.0;
++      else {
++	for(i=0; i<p; i++)
++	  bfactory->xp[i] = cos(M_PI*2.0*i/(2.0*(p-1)));
++      }
++      break;
++  }
++  bfactory->p = p;
++  bfactory->q = q;
++  bfactory->qrhs = qrhs;
++  bfactory->qmax = qmax;
++  bfactory->qmin = 2;
++  bfactory->dlp_lambda = 0.0;
++
++  bfactory->row_dof = NULL;
++  bfactory->col_dof = NULL;
++
++  bfactory->rdof2tri = (int *) allocmem((size_t) sizeof(int) * (nrdof+1));
++  bfactory->rtriangle = (int *) allocmem((size_t) sizeof(int) * ld_rows * rtriangles);
++  bfactory->rtri2dof = (int *) allocmem((size_t) sizeof(int) * (rtriangles+1));
++  bfactory->rdof = (int *) allocmem((size_t) sizeof(int) * ld_rows * rtriangles);
++
++  bfactory->cdof2tri = (int *) allocmem((size_t) sizeof(int) * (ncdof+1));
++  bfactory->ctriangle = (int *) allocmem((size_t) sizeof(int) * ld_cols * ctriangles);
++  bfactory->ctri2dof = (int *) allocmem((size_t) sizeof(int) * (ctriangles+1));
++  bfactory->cdof = (int *) allocmem((size_t) sizeof(int) * ld_cols * ctriangles);
++
++  bfactory->arow = (int *) allocmem((size_t) sizeof(int) * rtriangles);
++  bfactory->acol = (int *) allocmem((size_t) sizeof(int) * ctriangles);
++
++  for(i=0; i<rtriangles; i++)
++    bfactory->arow[i] = not_in_list;
++
++  for(i=0; i<ctriangles; i++)
++    bfactory->acol[i] = not_in_list;
++
++  bfactory->rowperm = NULL;
++  assert(rct->ndof == rvertices);
++  for(i=0; i<rtriangles; i++) {
++    bfactory->rtri2dof[i] = 3*i;
++    for(j=0; j<3; j++) {
++      bfactory->rdof[j+3*i] = rct->idx2dof[gr_r->t[i][j]];
++      assert(0 <= bfactory->rdof[j+3*i]);
++      assert(bfactory->rdof[j+3*i] < rvertices);
++    }
++  }
++  bfactory->rtri2dof[rtriangles] = 3*rtriangles;
++  build_invgraph(rtriangles, rvertices, 3*rtriangles,
++		 bfactory->rtri2dof, bfactory->rdof,
++		 bfactory->rdof2tri, bfactory->rtriangle);
++  bfactory->rowperm = permute_l;
++
++  bfactory->colperm = NULL;
++  assert(cct->ndof == cvertices);
++  for(i=0; i<ctriangles; i++) {
++    bfactory->ctri2dof[i] = 3*i;
++    for(j=0; j<3; j++) {
++      bfactory->cdof[j+3*i] = cct->idx2dof[gr_c->t[i][j]];
++      assert(0 <= bfactory->cdof[j+3*i]);
++      assert(bfactory->cdof[j+3*i] < cvertices);
++    }
++  }
++  bfactory->ctri2dof[ctriangles] = 3*ctriangles;
++  build_invgraph(ctriangles, cvertices, 3*ctriangles,
++		 bfactory->ctri2dof, bfactory->cdof,
++		 bfactory->cdof2tri, bfactory->ctriangle);
++  bfactory->colperm = permute_l;
++
++  bfactory->mass = NULL;
++  bfactory->q2 = NULL;
++
++  nqmax = (bfactory->q_col[qmax] > bfactory->q_row[qmax] ? bfactory->q_col[qmax] : bfactory->q_row[qmax]);
++  bfactory->qbuf = allocate_vector(nqmax);
++
++  bfactory->nearfield_entry = single_entry;
++  bfactory->transfer_row = transfer_lagrange;
++  bfactory->transfer_col = transfer_lagrange;
++#ifdef HAVE_SSE2
++  bfactory->kernel_coefficients = (p > 1 ?
++				   sse_interpolate_kernel :
++				   interpolate_kernel);
++#else
++  bfactory->kernel_coefficients = interpolate_kernel;
++#endif
++  bfactory->rkernel_coefficients = aca_interpolate_kernel;
++  bfactory->aca_coefficients = aca_coefficients;
++  bfactory->slp_kernel = slp_kernel;
++  bfactory->dlp_kernel = dlp_kernel;
++
++  bfactory->acabuf = NULL;
++  bfactory->acabufsize = 0;
++
++  bfactory->disp = NULL;
++
++  bfactory->dist_adaptive = 0;
++  bfactory->dist_logbase = 10.0;
++  bfactory->dist_eta = 0.4;
++  bfactory->dist_eta1 = 0.2;
++
++  return bfactory;
++}
++
++
++psurfacebemfactory
++new_surfacebemfactory_slp_collocation(pbemgrid3d gr_r, BEMBasis rbasis,
++				      pcclustertree rct, pbemgrid3d gr_c,
++				      BEMBasis cbasis, pcclustertree cct,
++				      int q, int qrhs, int p)
++{
++  psurfacebemfactory bfactory;
++
++  bfactory = collocation_initialization(gr_r, rbasis, rct, gr_c, cbasis, cct,
++					q, qrhs, p);
++
++  bfactory->integrate_nearfield = lindholm_formula_slp;
++
++  bfactory->integrate_row_kernel = pointeval_row_slp;
++  bfactory->integrate_row_kernel_array = pointeval_col_slp_array;
++  bfactory->integrate_row_lagrange = pointeval_row_polynomial;
++  bfactory->integrate_col_kernel = integrate_col_slp_ak;
++  bfactory->integrate_col_kernel_array = integrate_row_slp_array_ak;
++  bfactory->integrate_col_lagrange = integrate_col_polynomial_ak;
++
++  return bfactory;
++}
++
++
++psurfacebemfactory
++new_surfacebemfactory_dlp_collocation(pbemgrid3d gr_r, BEMBasis rbasis, pcclustertree rct,
++				      pbemgrid3d gr_c, BEMBasis cbasis, pcclustertree cct,
++				      int q, int qrhs, int p, double dlp_lambda)
++{
++  psurfacebemfactory bfactory;
++
++  bfactory = collocation_initialization(gr_r, rbasis, rct, gr_c, cbasis, cct,
++					q, qrhs, p);
++
++
++  bfactory->integrate_nearfield = lindholm_formula_dlp;
++
++  bfactory->integrate_row_kernel = pointeval_row_slp;
++  bfactory->integrate_row_kernel_array = pointeval_row_slp_array;
++  bfactory->integrate_row_lagrange = pointeval_row_polynomial;
++  bfactory->integrate_col_kernel = integrate_col_dlp_ak;
++  bfactory->integrate_col_kernel_array = integrate_col_dlp_array_ak;
++  bfactory->integrate_col_lagrange = integrate_col_polynomial_dn_ak;
++
++  return bfactory;
++}
++
++
+diff --git a/Library/laplacebem.h b/Library/laplacebem.h
+index dc8b24e..be6da03 100644
+--- a/Library/laplacebem.h
++++ b/Library/laplacebem.h
+@@ -4,6 +4,11 @@
+ 
+ #include "surfacebem.h"
+ 
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++
+ /* ============================================================
+    This module creates surfacebemfactory objects corresponding
+    to the classical single and double layer potential operators
+@@ -37,4 +42,21 @@ new_surfacebemfactory_dlp(pbemgrid3d gr,
+ 			  BEMBasis cbasis, pcclustertree cct,
+ 			  int q, int qh, int p, double dlp_lambda);
+ 
++
++psurfacebemfactory
++new_surfacebemfactory_slp_collocation(pbemgrid3d gr_r, BEMBasis rbasis,
++				      pcclustertree rct, pbemgrid3d gr_c,
++				      BEMBasis cbasis, pcclustertree cct,
++				      int q, int qh, int p);
++
++psurfacebemfactory
++new_surfacebemfactory_dlp_collocation(pbemgrid3d gr_r, BEMBasis rbasis,
++				      pcclustertree rct, pbemgrid3d gr_c,
++				      BEMBasis cbasis, pcclustertree cct,
++				      int q, int qh, int p, double dlp_lambda);
++
++#ifdef __cplusplus
++}
++#endif
++
+ #endif
+diff --git a/Library/lineariterations.h b/Library/lineariterations.h
+index 398dd0a..943d77a 100644
+--- a/Library/lineariterations.h
++++ b/Library/lineariterations.h
+@@ -19,6 +19,11 @@ typedef const dofblocks *pcdofblocks;
+ #include "basic.h"
+ #include "sparsematrix.h"
+ 
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++
+ struct _dofblocks {
+   int *block;
+   int *dof;
+@@ -120,4 +125,8 @@ void
+ ssor_sparsematrix(pcsparsematrix sp, const double *b,
+ 		  double *tmp, int prepared, double omega, double *v);
+ 
++#ifdef __cplusplus
++}
++#endif
++
+ #endif
+diff --git a/Library/norm.h b/Library/norm.h
+index 3e6e4a9..ac45875 100644
+--- a/Library/norm.h
++++ b/Library/norm.h
+@@ -24,6 +24,11 @@ typedef const powerdata *pcpowerdata;
+ #include "fullmatrix.h"
+ #include "krylov.h"
+ 
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++
+ struct _powerdata {
+   int rows;
+   int cols;
+@@ -86,4 +91,8 @@ del_eval_powerdata(peval_powerdata epd);
+ void 
+ eval_power_general(const double *v, double *w, void* data, EvalTrans trans);
+ 
++#ifdef __cplusplus
++}
++#endif
++
+ #endif
+diff --git a/Library/quadrature1d.h b/Library/quadrature1d.h
+index c80d8fe..fa74ea8 100644
+--- a/Library/quadrature1d.h
++++ b/Library/quadrature1d.h
+@@ -19,6 +19,11 @@ typedef const quadrature1d *pcquadrature1d;
+ 
+ #include "basic.h"
+ 
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++
+ struct _quadrature1d {
+   double *x_identical;		/* Quadrature for identical intervals */
+   double *y_identical;
+@@ -92,5 +97,9 @@ select_quadrature1d(pcquadrature1d q1,
+ 		    const int *t, const int *s,
+ 		    int *tp, int *sp,
+ 		    const double **x, const double **y,
++
++#ifdef __cplusplus
++}
++#endif
+ 		    const double **w, double *b, int *n);
+ #endif
+diff --git a/Library/quadrature2d.h b/Library/quadrature2d.h
+index 57b0277..30cb285 100644
+--- a/Library/quadrature2d.h
++++ b/Library/quadrature2d.h
+@@ -19,6 +19,11 @@ typedef const quadrature2d *pcquadrature2d;
+ 
+ #include "basic.h"
+ 
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++
+ struct _quadrature2d {
+   double (**x_identical)[2];	/* Quadratures for identical triangles */
+   double (**y_identical)[2];
+@@ -115,4 +120,8 @@ new_quadrature2d_sauter_cl(int order);
+ pquadrature2d
+ new_quadrature2d_sauter_ll(int order);
+ 
++#ifdef __cplusplus
++}
++#endif
++
+ #endif
+diff --git a/Library/rkmatrix.h b/Library/rkmatrix.h
+index 3f0f389..6a8ad16 100644
+--- a/Library/rkmatrix.h
++++ b/Library/rkmatrix.h
+@@ -26,6 +26,11 @@ typedef const rkmatrix *pcrkmatrix;
+ #include <stdlib.h>
+ #include <assert.h>
+ 
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++
+ /* An rkmatrix with paramters k,rows,cols is a factorisation
+    a*transpose(b) with rows times k matrix a and cols times k  
+    matrix b.
+@@ -297,4 +302,8 @@ getsv_rkmatrix(prkmatrix r, int nr);
+ double* 
+ getsigma_rkmatrix(prkmatrix r);
+ 
++#ifdef __cplusplus
++}
++#endif
++
+ #endif
+diff --git a/Library/solver.h b/Library/solver.h
+index b793850..3fe2755 100644
+--- a/Library/solver.h
++++ b/Library/solver.h
+@@ -18,6 +18,11 @@
+ 
+ #include <stdlib.h>
+ 
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++
+ double* 
+ solvecg_supermatrix(psupermatrix s, double* rhs, double eps);
+ 
+@@ -40,4 +45,8 @@ solvelupreconditionedcg3_supermatrix(psupermatrix s, prkmatrix rk,
+ 				     psupermatrix l, double* rhs,
+ 				     double eps);
+ 
++#ifdef __cplusplus
++}
++#endif
++
+ #endif
+diff --git a/Library/sparsematrix.h b/Library/sparsematrix.h
+index f10c895..4a33068 100644
+--- a/Library/sparsematrix.h
++++ b/Library/sparsematrix.h
+@@ -24,6 +24,11 @@ typedef const sparsematrix *pcsparsematrix;
+ #include "supermatrix.h"
+ #include "blockcluster.h"
+ 
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++
+ struct _sparsefactory {
+   int rows;			/* Number of rows */
+   int cols;			/* Number of columns */
+@@ -191,4 +196,8 @@ void
+ convertsparse3sym_supermatrix(pcsparsematrix sp, psupermatrix s, 
+ 			      pcblockcluster bc, int nmin);
+ 
++#ifdef __cplusplus
++}
++#endif
++
+ #endif
+diff --git a/Library/supermatrix.h b/Library/supermatrix.h
+index 3ab5d0c..1a7133f 100644
+--- a/Library/supermatrix.h
++++ b/Library/supermatrix.h
+@@ -25,6 +25,11 @@ typedef const supermatrix *pcsupermatrix;
+ #include <stdio.h>
+ #include <stdlib.h>
+ 
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++
+ /* a supermatrix is a rows times cols matrix consisting of
+    block_rows times block_cols submatrices. In some hierarchy
+    l is the level. The array s contains the pointers to the
+@@ -466,4 +471,9 @@ outputworstblock_supermatrix(psupermatrix s, char* dateiname,
+ void
+ outputerror_supermatrix(psupermatrix s, pfullmatrix f, char *dateiname);
+ 
++
++#ifdef __cplusplus
++}
++#endif
++
+ #endif
+diff --git a/Library/surfacebem.c b/Library/surfacebem.c
+index ba027ed..277bd05 100644
+--- a/Library/surfacebem.c
++++ b/Library/surfacebem.c
+@@ -36,14 +36,16 @@ del_surfacebemfactory(psurfacebemfactory bfactory)
+     freemem(bfactory->wq_row[i]);
+     freemem(bfactory->xq_row[i]);
+   }
+-  
++
++  if(bfactory->q2 != NULL)
++    del_quadrature2d(bfactory->q2);
++
+   freemem(bfactory->acol);
+   freemem(bfactory->arow);
+   freemem(bfactory->l2);
+   freemem(bfactory->l);
+   freemem(bfactory->xp);
+   freemem(bfactory->qbuf);
+-  del_quadrature2d(bfactory->q2);
+   freemem(bfactory->wq_col);
+   freemem(bfactory->xq_col);
+   freemem(bfactory->wq_row);
+@@ -67,9 +69,7 @@ recfill_surfacebem_supermatrix(psupermatrix M, pccluster row, pccluster col,
+   pfullmatrix f = M->f;
+   int p3 = bfactory->p * bfactory->p * bfactory->p;
+   int i, j;
+-
+   assert(M->u == NULL);
+-
+   if(r != NULL) {
+     assert(r->rows == row->size);
+     assert(r->cols == col->size);
+@@ -88,41 +88,35 @@ recfill_surfacebem_supermatrix(psupermatrix M, pccluster row, pccluster col,
+   }
+   else {
+     if(f != NULL)
++      {
+       bfactory->integrate_nearfield(row->start, row->size,
+ 				    col->start, col->size,
+ 				    bfactory, f->e, f->rows);
++      }
+     else
++      {
+       if(row->sons == 0) {
+-	assert(M->block_rows == 1);
+-	if(col->sons == 0) {
+-	  assert(M->block_cols == 1);
++	  if(col->sons == 0)
+ 	  recfill_surfacebem_supermatrix(M->s[0],
+ 					 row, col,
+ 					 bfactory);
+-	}
+-	else {
+-	  assert(M->block_cols == col->sons);
++	  else
+ 	  for(j=0; j<col->sons; j++)
+ 	    recfill_surfacebem_supermatrix(M->s[j],
+ 					   row, col->son[j],
+ 					   bfactory);
+ 	}
+-      }
+       else {
+-	assert(M->block_rows == row->sons);
+-	if(col->sons == 0) {
+-	  assert(M->block_cols == 1);
++	  if(col->sons == 0)
+ 	  for(i=0; i<row->sons; i++)
+ 	    recfill_surfacebem_supermatrix(M->s[i],
+ 					   row->son[i], col,
+ 					   bfactory);
+-	}
+-	else {
+-	  assert(M->block_cols == col->sons);
++	  else
+ 	  for(i=0; i<col->sons; i++)
+ 	    for(j=0; j<row->sons; j++)
+-	      recfill_surfacebem_supermatrix(M->s[j+i*row->sons],
+-					     row->son[j], col->son[i],
++		recfill_surfacebem_supermatrix(M->s[i+j*row->sons],
++					       row->son[i], col->son[j],
+ 					     bfactory);
+ 	}
+       }
+diff --git a/Library/surfacebem.h b/Library/surfacebem.h
+index 571c6ee..d538a40 100644
+--- a/Library/surfacebem.h
++++ b/Library/surfacebem.h
+@@ -26,6 +26,11 @@ typedef const surfacebemfactory *pcsurfacebemfactory;
+ #include "sparsematrix.h"
+ #include "supermatrix.h"
+ 
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++
+ typedef enum {
+   HLIB_CONSTANT_BASIS,		/* Piecewise constant functions */
+   HLIB_LINEAR_BASIS		/* Piecewise linear continuous functions */
+@@ -47,6 +52,8 @@ typedef enum {
+ 
+ struct _surfacebemfactory {
+   pbemgrid3d gr;		/* BEM grid */
++  pbemgrid3d gr_row;            /* Added second grid for studying interactions between different
++				   geometries */
+   pcclustertree rct;		/* Row cluster tree */
+   pcclustertree cct;		/* Column cluster tree */
+ 
+@@ -291,4 +298,8 @@ newrecompression_surfacebem(psurfacebemfactory bfactory,
+ 			    double eps, double orthoeps, int kmax,
+ 			    TruncationStrategy strategy);
+ 
++#ifdef __cplusplus
++}
++#endif
++
+ #endif
+diff --git a/Library/uniformmatrix.h b/Library/uniformmatrix.h
+index b68fdad..53946ce 100644
+--- a/Library/uniformmatrix.h
++++ b/Library/uniformmatrix.h
+@@ -23,6 +23,11 @@ typedef const uniformmatrix *pcuniformmatrix;
+ 
+ #include <stdio.h>
+ 
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++
+ struct _uniformmatrix {
+   pclusterbasis row;		/* Cluster basis for the row */
+   pclusterbasis col;		/* Cluster basis for the column */
+@@ -290,4 +295,8 @@ muladd_uniformmatrix(double alpha, pcsupermatrix s1, pcsupermatrix s2,
+ prkmatrix
+ getmul_uniformmatrix(psupermatrix a, psupermatrix b);
+ 
++#ifdef __cplusplus
++}
++#endif
++
+ #endif
+diff --git a/Viewer/callbacks.h b/Viewer/callbacks.h
+index be8d897..6498450 100644
+--- a/Viewer/callbacks.h
++++ b/Viewer/callbacks.h
+@@ -1,6 +1,11 @@
+ 
+ #include <gtk/gtk.h>
+ 
++#ifdef __cplusplus
++extern "C"{
++#endif
++
++
+ extern GtkWidget *mainwindow;
+ extern GtkWidget *select_grid_file;
+ extern GtkWidget *select_cluster_file;
+@@ -109,3 +114,7 @@ on_read_function                       (GtkMenuItem     *menuitem,
+ void
+ on_function_file_selected              (GtkButton       *button,
+                                         gpointer         user_data);
++
++#ifdef __cplusplus
++}
++#endif
+diff --git a/Viewer/operations.h b/Viewer/operations.h
+index 4e22aad..31e2e1e 100644
+--- a/Viewer/operations.h
++++ b/Viewer/operations.h
+@@ -1,6 +1,10 @@
+-
++#ifdef __cplusplus
+ #include "bem3d.h"
+ 
++extern "C"{
++#endif
++
++
+ pbemgrid3d
+ read_bemgrid3d_graphical(const char *filename);
+ 
+@@ -9,3 +13,7 @@ read2_bemgrid3d_graphical(const char *filename);
+ 
+ void
+ read_function_graphical(const char *filename, int *dim, double **val);
++
++#ifdef __cplusplus
++}
++#endif
+diff --git a/Viewer/support.h b/Viewer/support.h
+index 931bc5a..e085133 100644
+--- a/Viewer/support.h
++++ b/Viewer/support.h
+@@ -8,6 +8,11 @@
+ 
+ #include <gtk/gtk.h>
+ 
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++
+ /*
+  * Standard gettext macros.
+  */
+@@ -59,3 +64,6 @@ void        add_pixmap_directory       (const gchar     *directory);
+ GtkWidget*  create_pixmap              (GtkWidget       *widget,
+                                         const gchar     *filename);
+ 
++#ifdef __cplusplus
++}
++#endif
