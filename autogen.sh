@@ -296,7 +296,7 @@ if [[ "$new_configure_options" != "$old_configure_options" || "$generate_config_
     # Don't think there's anything we can do about it
 
     echo "Using configure options:"
-    cat "$configure_options_file"
+    cat "$configure_options_file" | ProcessOptionsFile
     echo
 
     # Check that the options are in the correct order

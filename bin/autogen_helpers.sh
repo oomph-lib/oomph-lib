@@ -110,31 +110,31 @@ CheckOptions()
 # This little function echo's the usage information
 EchoUsage()
 {
-    echo "  h)"
+    echo "  -h"
     echo "      Show this usage info"
     echo "  "
-    echo "  r)"
+    echo "  -r"
     echo "      Force regeneration of the configuration files before compliling, this"
     echo "      should never be needed unless either your build or autogen.sh is very broken."
     echo "  "
-    echo "  c)"
+    echo "  -c [PATH_TO_CONFIGURE_OPTIONS_FILE]"
     echo "      Set the path to the configure options file to use"
     echo "      (default: [oomph-root]/config/configure_options/current)."
     echo "  "
-    echo "  b)"
-    echo "      Set the directory to put object files etc. in (default [oomph-root]/build)."
+    echo "  -b [BUILD_DIRECTORY]"
+    echo "      Set the directory to put lib and include directories in (default [oomph-root]/build)."
     echo
     echo
     echo "Flags to control make:"
     echo
-    echo "  j)"
+    echo "  -j [NCORES]"
     echo "      Set the number of cores to use (default: 1)."
     echo "  "
-    echo "  k)"
+    echo "  -k"
     echo "      Keep compiling as far as possible even after errors occur (this"
     echo "      can save time but makes it harder to spot error messages)." 
     echo "  "
-    echo "  s)"
+    echo "  -s"
     echo "      Silent mode: don't output so much useless spam from make and ./configure."
     echo "  "
 }
