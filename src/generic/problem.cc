@@ -2380,7 +2380,7 @@ ContinuationStorageScheme Problem::Continuation_time_stepper;
         int eqn_number = d_pt->eqn_number(k);
          if(eqn_number >= 0)
           {
-           dofs[eqn_number] = d_pt->value(t, j);
+           dofs[eqn_number] = d_pt->value(t, k);
           }
        }
      }
