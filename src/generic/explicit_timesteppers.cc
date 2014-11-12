@@ -219,15 +219,15 @@ template<>
 void RungeKutta<4>::timestep(ExplicitTimeSteppableObject* const &object_pt,
                              const double &dt)
 {
- //Store the initial values and initial time
- DoubleVector u;
- object_pt->get_dofs(u);
-
  object_pt->actions_before_explicit_timestep();
 
  // Stage 1
  // ============================================================
  object_pt->actions_before_explicit_stage();
+
+ //Store the initial values and initial time
+ DoubleVector u;
+ object_pt->get_dofs(u);
 
  //Now get the first unknowns
  DoubleVector k1;
@@ -297,13 +297,13 @@ void RungeKutta<4>::timestep(ExplicitTimeSteppableObject* const &object_pt,
  {
   object_pt->actions_before_explicit_timestep();
 
-  // Store the initial values
-  DoubleVector u;
-  object_pt->get_dofs(u);
-
   // Stage 1
   // ============================================================
   object_pt->actions_before_explicit_stage();
+
+  // Store the initial values
+  DoubleVector u;
+  object_pt->get_dofs(u);
 
   // Get f1 (time derivative at t0, y0) and add to dofs
   DoubleVector f1;
