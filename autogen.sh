@@ -478,57 +478,6 @@ cd config/configure_options
 for file in $private_configure_option_files; do rm -f $file; done
 cd $return_dir_before_link_in_private
 
-
-echo " " 
-echo "=============================================================" 
-echo " " 
-
-
-# Automatic run of self tests? 
-#-----------------------------
-echo " " 
-echo "It is possible to execute the library's extensive self-test"
-echo "when the build is complete. Depending on the speed of your"
-echo "computer, this may take a long time as more than 450 test "
-echo "codes are run and validated."
-echo " " 
-echo "Do you want to build the demo codes and run the self-tests at the end "
-OptionPrompt "of the build procedure? [y/n -- default: n]"
-want_self_tests=`OptionRead`
-
-if test "$want_self_tests" = "y" -o "$want_self_tests" = "Y" ; then 
-  echo " "
-  echo "\"make check -k\" will be run at the end of the build procedure"
-  echo "to build/self-test the demo codes."
-  echo " "
-  echo "The results of the self-tests will be written to the"
-  echo "file validation.log in the top-level oomph-lib directory."
-  echo " "
-  if [ -e validation.log ]; then 
-    echo " " 
-    OptionPrompt "The file validation.log exists. Is it OK to wipe it? [y/n -- default: n]"
-    reply=`OptionRead`
-    if test "$reply" != "y" -a "$reply" != "Y" ; then 
-       echo " "
-       echo "In that case I am disabling the automatic self-test that you requested earlier."
-       want_self_tests="n"
-       echo " "
-       OptionPrompt "Hit enter to acknowledge"
-       tmp=`OptionRead`
-    else
-       rm -f validation.log
-       echo "I have wiped the validation.log file."
-    fi
-  fi
-else
-  echo " "
-  echo "The self-test procedure will not be run automatically."
-  echo "You may initiate the self-tests manually by typing \"make check -k\" "
-  echo "in the top-level oomph-lib directory when the build process "
-  echo "is complete."
-  echo " "
-fi
-
 echo " "
 echo "==================================================================="
 echo " "
@@ -590,41 +539,11 @@ echo "running make $make_options install"
 make $make_options install
 echo "done" 
 
-
-
-# Make the demo codes and run the ones that are listed in the TESTS
-#------------------------------------------------------------------
-# declaration in the "Makefile.am"s
-#-----------------------------------
-if test "$want_self_tests" = "y" -o "$reply" = "Y" ; then 
-   
-  # We have to turn off "crash on errors" here because we don't want everything
-  # to stop if a single self test fails.
-  set -o errexit false
-
-  # Use -k on make check so that make will keep going even if a demo driver
-  # fails to build.
-  echo " "
-  echo "Running check to build/self-test the demo codes."
-  echo "y" | make $make_options check -k
-  echo "Done self test"
-
-  # and now turn it back on (just in case...)
-  set -o errexit
-
-else
-  echo " "
-  echo "The build process is complete. You may now "
-  echo "initiate the self-tests by typing \"make check -k\". "
-  echo " " 
-fi
-
-
 echo " "
 echo "autogen.sh has finished! If you can't spot any error messages" 
 echo "above this, oomph-lib should now be ready to use... " 
 echo " " 
 echo "If you encounter any problems, please study the installation" 
 echo "instructions and the FAQ before contacting the developers. " 
-echo " " 
-
+echo " "
+echo "To run self tests use \"make check -k\" or ./bin/parallel_self_test.py"
