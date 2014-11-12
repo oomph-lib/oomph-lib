@@ -110,7 +110,7 @@ namespace oomph
   // ============================================================
 
   /// \short Const access function for Node_to_global_mapping.
-  const Vector<long>* node_to_global_mapping_pt() const
+  const Vector<unsigned>* node_to_global_mapping_pt() const
    {return &Node_to_global_mapping;}
 
   /// \short Const access function for Global_to_node_mapping_pt.
@@ -158,7 +158,7 @@ namespace oomph
    }
 
   /// Mapping from node numbers to global equation numbers.
-  Vector<long> Node_to_global_mapping;
+  Vector<unsigned> Node_to_global_mapping;
 
   /// Mapping from global equation numbers to node numbers. Note that we
   /// cannot use a vector here because the global equation numbers are
@@ -325,6 +325,17 @@ namespace oomph
       throw OomphLibError("Col mapping size should be less than or equal to ncol (less than if it is a sparse matrix and there are some empty cols).",
                           OOMPH_CURRENT_FUNCTION,
                           OOMPH_EXCEPTION_LOCATION);
+     }
+
+    const Vector<unsigned>* nd2gb_pt = main_to_individual_rows_pt->node_to_global_mapping_pt();
+    unsigned max_row = *std::max_element(nd2gb_pt->begin(), nd2gb_pt->end());
+    if(max_row > main_matrix_pt()->nrow())
+     {
+      std::string err = "Trying to add a matrix with a mapping which specifices";
+      err += " a max row of "+to_string(max_row)+" but the main matrix ";
+      err += "only has "+to_string(main_matrix_pt()->nrow()) +" rows!";
+      throw OomphLibError(err, OOMPH_EXCEPTION_LOCATION,
+                          OOMPH_CURRENT_FUNCTION);
      }
 #endif
 
