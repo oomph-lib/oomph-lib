@@ -58,6 +58,9 @@
 //header for cxx-prettyprint: A C++ Container Pretty-Printer
 #include "prettyprint98.h"
 
+// Header for name demangling
+#include <cxxabi.h>
+
 namespace oomph
 {
 
@@ -137,6 +140,43 @@ namespace StringConversion
  /// strings. Return by value.
  Vector<std::string> split_string(const std::string &s, char delim);
 
+}
+
+
+namespace TypeNames
+{
+
+ /// \short Get the type name of an object. Only for use in debugging, do
+ /// not write real code using this function as it is implementation
+ /// dependant!
+ template<class T> std::string get_type_name(T& obj)
+ {
+  using namespace StringConversion;
+
+  int status;
+  std::string typestr = to_string(abi::__cxa_demangle(typeid(obj).name(),0,0,&status));
+
+  // Throw if there was an error
+  if(status != 0)
+   {
+    std::string err = "Error code " + to_string(status) +
+     " in demangler, see documentation of abi::__cxa_demangle for the meaning";
+    throw OomphLibError(err, OOMPH_CURRENT_FUNCTION, OOMPH_EXCEPTION_LOCATION);
+   }
+
+  return typestr;
+ }
+
+ /// \short Get the type name of an object from a pointer to the object (we
+ /// usually want the type of the object itself not the pointer because the
+ /// type of the pointer may be a base class). Only for use in debugging,
+ /// do not write real code using this function as it is implementation
+ /// dependant!
+ template<class T> std::string get_type_name(T* obj)
+ {
+  return get_type_name(*obj);
+ }
+  
 }
 
 //////////////////////////////////////////////////////////////////
