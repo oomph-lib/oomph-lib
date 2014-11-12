@@ -138,7 +138,7 @@ ContinuationStorageScheme Problem::Continuation_time_stepper;
 
   //Set the linear solvers, eigensolver and assembly handler
   Linear_solver_pt = Default_linear_solver_pt = new SuperLUSolver;
-  Mass_matrix_solver_pt = Linear_solver_pt;
+  Mass_matrix_solver_for_explicit_timestepper_pt = Linear_solver_pt;
 
   Eigen_solver_pt = Default_eigen_solver_pt = new ARPACK;
 
@@ -3470,7 +3470,7 @@ ContinuationStorageScheme Problem::Continuation_time_stepper;
       this->get_residuals(residuals);
 
       // Resolve the linear system
-      this->mass_matrix_solver_pt()->resolve(residuals,Mres);
+      this->mass_matrix_solver_for_explicit_timestepper_pt()->resolve(residuals,Mres);
      }
     //Otherwise solve for the first time
     else
@@ -3482,7 +3482,7 @@ ContinuationStorageScheme Problem::Continuation_time_stepper;
          {
           oomph_info << "Enabling resolve in explicit timestep" << std::endl;
          }
-        this->mass_matrix_solver_pt()->enable_resolve();
+        this->mass_matrix_solver_for_explicit_timestepper_pt()->enable_resolve();
        }
 
       //Use a custom assembly handler to assemble and invert the mass matrix
@@ -3493,7 +3493,7 @@ ContinuationStorageScheme Problem::Continuation_time_stepper;
       this->assembly_handler_pt() = new ExplicitTimeStepHandler;
 
       //Solve the linear system
-      this->mass_matrix_solver_pt()->solve(this,Mres);
+      this->mass_matrix_solver_for_explicit_timestepper_pt()->solve(this,Mres);
       //The mass matrix has now been computed
       Mass_matrix_has_been_computed=true;
 
