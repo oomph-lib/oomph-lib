@@ -315,8 +315,10 @@ if [[ "$new_configure_options" != "$old_configure_options" || "$generate_config_
         exit 4
     fi
 
-    # Update current options
-    cp "$configure_options_file" "config/configure_options/current"
+    # Update current options, unless the files are the same
+    if [[ "$(AbsPath $configure_options_file)" != "$(AbsPath config/configure_options/current)" ]]; then
+        cp "$configure_options_file" "config/configure_options/current"
+    fi
 
     # Finally run configure itself to convert "Makefile.in"s into "Makefile"s
     echo
