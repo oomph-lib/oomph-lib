@@ -1586,6 +1586,13 @@ public:
  /// \short Number of vertex nodes in the element: One more
  /// than spatial dimension
  unsigned nvertex_node() const {return 3;}
+
+ /// \short Public access function for Node_on_face.
+ unsigned get_bulk_node_number(const unsigned& face_index,
+                               const unsigned& i) const
+ {
+  return Node_on_face[face_index][i];
+ }
  
  /// \short Pointer to the j-th vertex node in the element
  Node* vertex_node_pt(const unsigned& j) const
@@ -3017,6 +3024,13 @@ public:
  /// \short Number of vertex nodes in the element: One more
  /// than spatial dimension
  unsigned nvertex_node() const {return 4;}
+
+ /// \short Public access function for Node_on_face.
+ unsigned get_bulk_node_number(const unsigned& face_index,
+                               const unsigned& i) const
+  {
+   return Node_on_face[face_index][i];
+  }
  
  /// \short Pointer to the j-th vertex node in the element
  Node* vertex_node_pt(const unsigned& j) const
