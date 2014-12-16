@@ -937,7 +937,7 @@ public:
   {
    s.resize(2);
    unsigned j0=j%NNODE_1D;
-   unsigned j1=unsigned(double(j)/double(NNODE_1D));
+   unsigned j1=j/NNODE_1D;
    const double S_min = this->s_min();
    const double S_range = this->s_max() - S_min;
    s[0]=S_min+double(j0)/double(NNODE_1D-1)*S_range;
@@ -950,7 +950,7 @@ public:
   {
    s_fraction.resize(2);
    unsigned j0 = j%NNODE_1D;
-   unsigned j1 = unsigned(double(j)/double(NNODE_1D));
+   unsigned j1 = j/NNODE_1D;
    s_fraction[0] = double(j0)/double(NNODE_1D-1);
    s_fraction[1] = double(j1)/double(NNODE_1D-1);
   }
@@ -1302,8 +1302,8 @@ public:
   {
    s.resize(3);
    unsigned j0=j%NNODE_1D;
-   unsigned j1=unsigned(double(j)/double(NNODE_1D))%NNODE_1D;
-   unsigned j2=unsigned(double(j)/double(NNODE_1D*NNODE_1D));
+   unsigned j1=(j/NNODE_1D)%NNODE_1D;
+   unsigned j2=j/(NNODE_1D*NNODE_1D);
    const double S_min = this->s_min();
    const double S_range = this->s_max() - S_min;
 
@@ -1318,8 +1318,8 @@ public:
   {
    s_fraction.resize(3);
    unsigned j0 = j%NNODE_1D;
-   unsigned j1=unsigned(double(j)/double(NNODE_1D))%NNODE_1D;
-   unsigned j2=unsigned(double(j)/double(NNODE_1D*NNODE_1D));
+   unsigned j1=(j/NNODE_1D)%NNODE_1D;
+   unsigned j2=j/(NNODE_1D*NNODE_1D);
    s_fraction[0]= double(j0)/double(NNODE_1D-1);
    s_fraction[1]= double(j1)/double(NNODE_1D-1);
    s_fraction[2]= double(j2)/double(NNODE_1D-1);

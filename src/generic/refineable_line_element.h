@@ -94,9 +94,9 @@ namespace oomph
    Node* node_created_by_son_of_neighbour(const Vector<double> &s_fraction,
                                                   bool &is_periodic)
     {
-     /// BENFLAG: It is impossible for this situation to arise in meshes
-     ///          containing elements of uniform p-order, so there is nothing
-     ///          to do here. Instead we overload it for p-refineable elements.
+     // It is impossible for this situation to arise in meshes
+     // containing elements of uniform p-order. This is here so
+     // that it can be overloaded for p-refineable elements.
      return 0;
     }
   

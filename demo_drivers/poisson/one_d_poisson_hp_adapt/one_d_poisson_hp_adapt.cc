@@ -1056,7 +1056,7 @@ class ModalPRefineableQElement : public PRefineableQElement<DIM,2>
 public:
  ModalPRefineableQElement() : PRefineableQElement<DIM,2>() {}
  
- void initial_setup(Tree* const &adopted_father_pt=0);
+ void initial_setup(Tree* const &adopted_father_pt=0, const unsigned &initial_p_order=0);
  void pre_build();
  void further_build()
   {
@@ -1078,7 +1078,7 @@ public:
 };
 
 template<>
-void ModalPRefineableQElement<1>::initial_setup(Tree* const &adopted_father_pt)
+void ModalPRefineableQElement<1>::initial_setup(Tree* const &adopted_father_pt, const unsigned &initial_p_order)
 {
  // Create storage for internal data
  if (this->ninternal_data()==0)

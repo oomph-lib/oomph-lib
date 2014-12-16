@@ -1722,9 +1722,10 @@ public:
    return Shared_node_pt[p][j];
   }
 
- /// \short Get vector of pointers to shared nodes with processor p
- // BENFLAG: Required for faster search in
- //          Multi_domain_functions::add_external_haloed_master_node_helper()
+ /// \short Get vector of pointers to shared nodes with processor p.
+ /// Required for faster search in
+ /// Missing_masters_functions::add_external_haloed_node_helper() and
+ /// Missing_masters_functions::add_external_haloed_master_node_helper()
  void get_shared_node_pt(const unsigned& p, Vector<Node*>& shared_node_pt)
  {
   unsigned np=nshared_node(p);

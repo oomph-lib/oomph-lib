@@ -69,8 +69,8 @@ namespace Missing_masters_functions
   // Temporary vector of strings to enable full annotation of multi domain
   // comms (but keep alive because it would be such a bloody pain to
   // rewrite it if things ever go wrong again...)
-  //BENFLAG: This is left over from the multi-domain stuff and should work
-  //         in the same way, but it has not been tested.
+  // This is left over from the multi-domain stuff and should work
+  // in the same way, but it has not been tested.
   extern Vector<std::string> Flat_packed_unsigneds_string;
 
 #endif

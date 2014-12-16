@@ -25,6 +25,7 @@ AC_PROG_CPP
 
 # F77 compiler
 AC_PROG_F77
+AC_PROG_FC
 
 # Install
 AC_PROG_INSTALL

@@ -278,6 +278,7 @@ const double TGauss<2,4>::Weight[13] = {
 //"Full integration" weights for 2D triangles
 // accurate up to order 11
 // http://people.sc.fsu.edu/~jburkardt/datasets/quadrature_rules_tri/quadrature_rules_tri.html
+// [TOMS706_37, order 37, degree of precision 13, a rule from ACM TOMS algorithm #706.]
 //------------------------------------------------------------
  const double TGauss<2,13>::Knot[37][2]={
   {0.333333333333333333333333333333,  0.333333333333333333333333333333},
@@ -364,6 +365,7 @@ const double TGauss<2,4>::Weight[13] = {
 //"Full integration" weights for 2D triangles
 // accurate up to order 15
 // http://people.sc.fsu.edu/~jburkardt/datasets/quadrature_rules_tri/quadrature_rules_tri.html
+// [GAUSS8X8, order 64, degree of precision 15, (essentially a product of two 8 point 1D Gauss-Legendre rules).]
 //------------------------------------------------------------
   const double TGauss<2,5>::Knot[64][2]={
    {0.9553660447100000,        0.8862103848242247e-3},

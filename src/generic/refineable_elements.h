@@ -508,7 +508,7 @@ class RefineableElement : public virtual FiniteElement
  /// \short Initial setup of the element: e.g. set the appropriate internal
  /// p-order. If an adopted father is specified, information from this is
  /// used instead of using the father found from the tree.
- virtual void initial_setup(Tree* const &adopted_father_pt=0) {}
+ virtual void initial_setup(Tree* const &adopted_father_pt=0, const unsigned &initial_p_order=0) {}
 
  /// \short Pre-build the element
  virtual void pre_build(Mesh*& mesh_pt, Vector<Node*>& new_node_pt) {}

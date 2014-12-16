@@ -1861,12 +1861,103 @@ void PRefineableQCrouzeixRaviartElement<2>::further_build()
       {
        internal_data_pt(this->P_nst_internal_index)->set_value(0,press); 
       }
+     else if(this->npres_nst()==3)
+      {
+       internal_data_pt(this->P_nst_internal_index)->set_value(0,press);
+       internal_data_pt(this->P_nst_internal_index)->set_value(1,press);
+       internal_data_pt(this->P_nst_internal_index)->set_value(2,press);
+      }
      else
       {
        internal_data_pt(this->P_nst_internal_index)->set_value(0,press);
        internal_data_pt(this->P_nst_internal_index)->set_value(1,press);
        internal_data_pt(this->P_nst_internal_index)->set_value(2,press);
        internal_data_pt(this->P_nst_internal_index)->set_value(3,press);
+      }
+    }// Otherwise this is called after p-refinement
+  }
+}
+
+//======================================================================
+/// 2D Further build for Crouzeix_Raviart interpolates the internal 
+/// pressure dofs from father element: Make sure pressure values and 
+/// dp/ds agree between fathers and sons at the midpoints of the son 
+/// elements.
+//======================================================================
+template<>
+void PRefineableQCrouzeixRaviartElement<3>::further_build()
+{
+ if (this->tree_pt()->father_pt()!=0)
+  {
+   //Call the generic further build (if there is a father)
+   RefineableNavierStokesEquations<3>::further_build();
+  }
+ // Now do the PRefineableQElement further_build()
+ PRefineableQElement<3,3>::further_build();
+ 
+ // Resize internal pressure storage
+ if (this->internal_data_pt(this->P_nst_internal_index)->nvalue()
+       <= this->npres_nst())
+  {
+   this->internal_data_pt(this->P_nst_internal_index)
+       ->resize(this->npres_nst());
+  }
+ else
+  {
+   Data* new_data_pt = new Data(this->npres_nst());
+   delete internal_data_pt(this->P_nst_internal_index);
+   internal_data_pt(this->P_nst_internal_index) = new_data_pt;
+  }
+ 
+ if(this->tree_pt()->father_pt()!=0)
+  {
+   // Pointer to my father (in C-R element impersonation)
+   PRefineableQCrouzeixRaviartElement<3>* father_element_pt=
+    dynamic_cast<PRefineableQCrouzeixRaviartElement<3>*>
+      (octree_pt()->father_pt()->object_pt());
+   
+   // If element has same p-order as father then do the projection problem
+   // (called after h-refinement)
+   if(father_element_pt->p_order()==this->p_order())
+    {
+     using namespace OcTreeNames;
+     
+     // What type of son am I? Ask my quadtree representation...
+     int son_type=octree_pt()->son_type();
+     
+     Vector<double> s_father(3);
+     
+ 
+     // Son midpoint is located at the following coordinates in father element:
+     for(unsigned i=0;i<3;i++)
+      {
+       s_father[i]=0.5*OcTree::Direction_to_vector[son_type][i];
+      }
+     
+     // Get pressure value in father element
+     double press=father_element_pt->interpolated_p_nst(s_father);
+     
+     // Reset all pressures to zero
+     for(unsigned p=0; p<this->npres_nst(); p++)
+      {
+       internal_data_pt(this->P_nst_internal_index)->set_value(p,0.0); 
+      }
+     
+     // Set pressure values from father (BENFLAG: projection problem hack)
+     if(this->npres_nst()==1)
+      {
+       internal_data_pt(this->P_nst_internal_index)->set_value(0,press); 
+      }
+     else
+      {
+       internal_data_pt(this->P_nst_internal_index)->set_value(0,press);
+       internal_data_pt(this->P_nst_internal_index)->set_value(1,press);
+       internal_data_pt(this->P_nst_internal_index)->set_value(2,press);
+       internal_data_pt(this->P_nst_internal_index)->set_value(3,press);
+       internal_data_pt(this->P_nst_internal_index)->set_value(4,press);
+       internal_data_pt(this->P_nst_internal_index)->set_value(5,press);
+       internal_data_pt(this->P_nst_internal_index)->set_value(6,press);
+       internal_data_pt(this->P_nst_internal_index)->set_value(7,press);
       }
     }// Otherwise this is called after p-refinement
   }
@@ -1884,5 +1975,5 @@ template class RefineableQTaylorHoodElement<3>;
 template class RefineableQCrouzeixRaviartElement<2>;
 template class RefineableQCrouzeixRaviartElement<3>;
 template class PRefineableQCrouzeixRaviartElement<2>;
-//template class PRefineableQCrouzeixRaviartElement<3>;
+template class PRefineableQCrouzeixRaviartElement<3>;
 }

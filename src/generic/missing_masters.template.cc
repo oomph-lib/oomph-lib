@@ -200,7 +200,7 @@ template<class EXT_ELEMENT>
    }
   else
    {
-    //BENFLAG: Need to check which storage we should copy this halo node from
+    // Need to check which storage we should copy this halo node from
 #ifdef ANNOTATE_MISSING_MASTERS_COMMUNICATION
     oomph_info << "Rec:" << counter_for_recv_unsigneds 
                << "  Existing external halo node was found externally (0) or internally (1): " 
@@ -319,7 +319,7 @@ template<class EXT_ELEMENT>
   unsigned n_prev=1;
 
   //Just take timestepper from a node
-  //BENFLAG: Let's use first node of first element since this must exist(?)
+  //Let's use first node of first element since this must exist
   time_stepper_pt=mesh_pt->
    finite_element_pt(0)->node_pt(0)->time_stepper_pt();
 
@@ -684,6 +684,7 @@ template<class EXT_ELEMENT>
 
     // Add this as an external halo node
     mesh_pt->add_external_halo_node_pt(loc_p,new_master_nod_pt);
+    oomph_info << "Added external halo master node:" << new_master_nod_pt << " at [ " << new_master_nod_pt->x(0) << ", " << new_master_nod_pt->x(1) << " ]" << std::endl;
 
     // Create a new node update element for this master node if required
     FiniteElement *new_node_update_f_el_pt=0;
@@ -695,9 +696,20 @@ template<class EXT_ELEMENT>
 #endif
     if (recv_unsigneds[counter_for_recv_unsigneds++]==1)
      {
-      GeneralisedElement* new_node_update_el_pt = new EXT_ELEMENT; 
+      // Issue warning about adding a macro element to the external storage
+      std::ostringstream warn_stream;
+      warn_stream << "You are adding a MacroElementNodeUpdate element to the\n"
+                  << "external storage. This functionality is still being\n"
+                  << "developed and may cause problems later on, say during\n"
+                  << "Problem::remove_duplicate_data().";
+      OomphLibWarning(
+       warn_stream.str(),
+       "Missing_masters_functions::construct_new_external_halo_master_node_helper()",
+       OOMPH_EXCEPTION_LOCATION);
 
-      //Add external hal element to this mesh
+      GeneralisedElement* new_node_update_el_pt = new EXT_ELEMENT;
+
+      //Add external halo element to this mesh
       mesh_pt->add_external_halo_element_pt(
        loc_p,new_node_update_el_pt);
 
@@ -769,6 +781,49 @@ template<class EXT_ELEMENT>
          }
        }
 
+      // Check if haloed version was p-refineable
+#ifdef ANNOTATE_MISSING_MASTERS_COMMUNICATION
+      oomph_info << "Rec:" << counter_for_recv_unsigneds 
+                 << "  Element was p-refineable "
+                 << recv_unsigneds[counter_for_recv_unsigneds]
+                 << std::endl;
+#endif
+      unsigned el_was_p_refineable=
+       recv_unsigneds[counter_for_recv_unsigneds++];
+      if(el_was_p_refineable)
+       {
+        // Check created element is p-refineable
+        PRefineableElement* p_refineable_el_pt =
+         dynamic_cast<PRefineableElement*>(new_node_update_f_el_pt);
+        if(p_refineable_el_pt!=0)
+         {
+          // Recieve p-order
+#ifdef ANNOTATE_MISSING_MASTERS_COMMUNICATION
+          oomph_info << "Rec:" << counter_for_recv_unsigneds 
+                     << "  p-order: "
+                     << recv_unsigneds[counter_for_recv_unsigneds]
+                     << std::endl;
+#endif
+          unsigned p_order=
+           recv_unsigneds[counter_for_recv_unsigneds++];
+
+          // Do initial setup with original element as the clone's adopted father
+          p_refineable_el_pt->initial_setup(0,p_order);
+          //BENFLAG:
+          oomph_info << "New node update element: " << new_node_update_el_pt << " (p-order = " << p_order << ")" << std::endl;
+         }
+        else
+         {
+          std::ostringstream error_stream;
+          error_stream << "Created MacroElement node update element is not p-refineable\n"
+                       << "but the haloed version is.\n";
+          throw OomphLibError
+           (error_stream.str(),
+            "Missing_masters_functions::construct_new_external_halo_master_...()",
+            OOMPH_EXCEPTION_LOCATION);
+         }
+       }
+
       unsigned n_node=new_node_update_f_el_pt->nnode();
       for (unsigned j=0;j<n_node;j++)
        {
@@ -780,20 +835,85 @@ template<class EXT_ELEMENT>
           recv_unsigneds,
           counter_for_recv_doubles,
           recv_doubles);
+        // BENFLAG:
+        oomph_info << "Added node " << new_nod_pt << " at [ " << new_nod_pt->x(0) << ", " << new_nod_pt->x(1) << " ]" << std::endl;
        }
 
+      //BENFLAG:
+      oomph_info << "New node update element: " << new_node_update_f_el_pt << " (nnode_1d = " << new_node_update_f_el_pt->nnode_1d() << ")" << std::endl;
      }
     else // The node update element exists already
      {
+#ifdef ANNOTATE_MISSING_MASTERS_COMMUNICATION
+      oomph_info << "Rec:" << counter_for_recv_unsigneds 
+                 << "  Found internally? "
+                 << recv_unsigneds[counter_for_recv_unsigneds]
+                 << std::endl;
+#endif
+      unsigned found_internally = recv_unsigneds[counter_for_recv_unsigneds++];
 #ifdef ANNOTATE_MISSING_MASTERS_COMMUNICATION
       oomph_info << "Rec:" << counter_for_recv_unsigneds 
                  << "  Number of already existing external halo element "
                  << recv_unsigneds[counter_for_recv_unsigneds]
                  << std::endl;
 #endif
-      new_node_update_f_el_pt=dynamic_cast<FiniteElement*>(
-       mesh_pt->external_halo_element_pt
-       (loc_p,recv_unsigneds[counter_for_recv_unsigneds++]));
+      unsigned halo_element_index = recv_unsigneds[counter_for_recv_unsigneds++];
+      if(found_internally!=0)
+       {
+        new_node_update_f_el_pt=dynamic_cast<FiniteElement*>(
+         (mesh_pt->halo_element_pt(loc_p))[halo_element_index]);
+        //BENFLAG:
+        oomph_info << "Existing node update element: " << new_node_update_f_el_pt << " (nnode_1d = " << new_node_update_f_el_pt->nnode_1d() << ")" << std::endl;
+        oomph_info << "on proc " << loc_p << " at (internal) index " << halo_element_index << std::endl;
+
+//        //BENFLAG: Also add halo element to external storage
+//        oomph_info << "Adding to external halo storage..." << std::endl;
+//        GeneralisedElement* g_el_pt = dynamic_cast<GeneralisedElement*>(new_node_update_f_el_pt);
+//        mesh_pt->add_external_halo_element_pt(
+//         loc_p,g_el_pt);
+//
+//        // Check if also found externally
+//#ifdef ANNOTATE_MISSING_MASTERS_COMMUNICATION
+//        oomph_info << "Rec:" << counter_for_recv_unsigneds 
+//                   << "  Found externally too? "
+//                   << recv_unsigneds[counter_for_recv_unsigneds]
+//                   << std::endl;
+//#endif
+//        unsigned found_externally_too = recv_unsigneds[counter_for_recv_unsigneds++];
+//        std::cout << "received found_externally_too = " << found_externally_too << std::endl;
+//        if(found_externally_too==1234)
+//         {
+//#ifdef ANNOTATE_MISSING_MASTERS_COMMUNICATION
+//          oomph_info << "Rec:" << counter_for_recv_unsigneds 
+//                     << "  Number of already existing external halo element "
+//                     << recv_unsigneds[counter_for_recv_unsigneds]
+//                     << std::endl;
+//#endif
+//          unsigned ext_version_halo_element_index = recv_unsigneds[counter_for_recv_unsigneds++];
+//          std::cout << "received ext_version_halo_element_index = " << ext_version_halo_element_index << std::endl;
+//
+//          FiniteElement* ext_version_pt = dynamic_cast<FiniteElement*>(
+//           (mesh_pt->halo_element_pt(loc_p))[ext_version_halo_element_index]);
+//          //BENFLAG:
+//          oomph_info << "Existing node update element: " << ext_version_pt << " (nnode_1d = " << ext_version_pt->nnode_1d() << ")" << std::endl;
+//          oomph_info << "on proc " << loc_p << " is also at (external) index " << ext_version_halo_element_index << std::endl;
+//          for(unsigned j=0; j<ext_version_pt->nnode(); j++)
+//           {
+//            oomph_info << ext_version_pt->node_pt(j) << " at [ " << ext_version_pt->node_pt(j)->x(0) << ", " << ext_version_pt->node_pt(j)->x(1) << " ]" << std::endl;
+//           }
+//         }
+        
+       }
+      else
+       {
+        new_node_update_f_el_pt=dynamic_cast<FiniteElement*>(
+         mesh_pt->external_halo_element_pt
+         (loc_p,halo_element_index));
+        //BENFLAG:
+        oomph_info << "Existing node update element: " << new_node_update_f_el_pt << " (nnode_1d = " << new_node_update_f_el_pt->nnode_1d() << ")" << std::endl;
+        oomph_info << "on proc " << loc_p << " at (external) index " << recv_unsigneds[counter_for_recv_unsigneds-1] << std::endl;
+        //oomph_info << "...and doesn't exist in the external storage." << std::endl;
+       }
      }
 
     // Remaining required information to create functioning
@@ -816,17 +936,53 @@ template<class EXT_ELEMENT>
     macro_master_nod_pt->node_update_element_pt()=
      new_node_update_f_el_pt;
 
+    
+
+    ////print out nodes
+    //std::cout << "nodes are:" << std::endl;
+    //for(unsigned j=0; j<new_node_update_f_el_pt->nnode(); j++)
+    // {
+    //  std::cout << new_node_update_f_el_pt->node_pt(j) << " at [ " << new_node_update_f_el_pt->node_pt(j)->x(0) << ", " << new_node_update_f_el_pt->node_pt(j)->x(1) << " ]" << std::endl;
+    //  //std::cout << new_node_update_f_el_pt->node_pt(j) << std::endl;
+    // }
+    //std::cout << "should include: " << macro_master_nod_pt << " at [ " << macro_master_nod_pt->x(0) << ", " << macro_master_nod_pt->x(1) << " ]" << std::endl;
+
+    
+
     // Need to get the local node index of the macro_master_nod_pt
-    unsigned local_node_index;
+    unsigned local_node_index=0;
+    //std::cout << "before: " << local_node_index << std::endl;
     unsigned n_node=new_node_update_f_el_pt->nnode();
     for (unsigned j=0;j<n_node;j++)
      {
       if (macro_master_nod_pt==new_node_update_f_el_pt->node_pt(j))
        {
+        //std::cout << "Node " << macro_master_nod_pt << " found at index " << j << " in update element." << std::endl;
         local_node_index=j;
         break;
        }
+      //BENFLAG:
+      if(j==n_node-1)
+       {
+        //// Check if sons...
+        //RefineableElement* ref_el_pt = dynamic_cast<RefineableElement*>(new_node_update_f_el_pt);
+        //if(ref_el_pt->tree_pt()->nsons()!=0)
+        // {
+        //  std::cout << "update el has sons!" << std::endl;
+        // }
+        //else
+        // {
+        //  std::cout << "No sons." << std::endl;
+        // }
+
+        //oomph_info << "Node not found in update element!" << std::endl;
+        throw OomphLibError(
+               "Node not found in update element!",
+               "Missing_masters_functions::construct_new_external_halo_master_node_helper()",
+               OOMPH_EXCEPTION_LOCATION);
+       }
      }
+    //std::cout << "after: " << local_node_index << std::endl;
 
     Vector<double> s_in_macro_node_update_element;
     new_node_update_f_el_pt->local_coordinate_of_node

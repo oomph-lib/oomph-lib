@@ -1469,7 +1469,7 @@ public:
 
 
  /// Return FE interpolated pressure at local coordinate s
- double interpolated_p_nst(const Vector<double> &s) const
+ virtual double interpolated_p_nst(const Vector<double> &s) const
   {
    //Find number of nodes
    unsigned n_pres = npres_nst();

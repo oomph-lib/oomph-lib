@@ -119,9 +119,9 @@ public:
  /// a pointer to that node. If not, return NULL (0).
  virtual Node* node_created_by_son_of_neighbour(const Vector<double> &s_fraction)
   {
-   /// BENFLAG: It is impossible for this situation to arise in meshes
-   ///          containing elements of uniform p-order, so there is nothing
-   ///          to do here. Instead we overload it for p-refineable elements.
+   // It is impossible for this situation to arise in meshes
+   // containing elements of uniform p-order. This is here so
+   // that it can be overloaded for p-refineable elements.
    return 0;
   }
 
@@ -218,8 +218,8 @@ public:
  
  /// \short Internal helper function that is used to construct the
  /// hanging node schemes for the positions.
- void oc_hang_helper(const int &value_id,
-                     const int &my_edge, std::ofstream &output_hangfile);
+ virtual void oc_hang_helper(const int &value_id,
+                             const int &my_edge, std::ofstream &output_hangfile);
 
 };
 

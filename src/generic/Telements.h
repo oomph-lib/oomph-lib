@@ -1574,6 +1574,29 @@ public:
    //Assign default (full) spatial integration scheme
    set_integration_scheme(&Default_integration_scheme);
   }
+
+ /// Alternative constructor
+ TElement(const bool &allow_high_order)
+  {
+   // Check if we are overriding the restriction on NNODE_1D
+   if(!allow_high_order)
+    {
+     // Call the default constructor
+     TElement<2,NNODE_1D>();
+    }
+   else
+    {
+     // Set the number of nodes
+     unsigned n_node = (NNODE_1D*(NNODE_1D+1))/2;
+     this->set_n_node(n_node);
+
+     // Set the elemental and nodal dimension
+     set_dimension(2);
+
+     //Assign default (full) spatial integration scheme
+     set_integration_scheme(&Default_integration_scheme);
+    }
+  }
  
 
  /// Broken copy constructor

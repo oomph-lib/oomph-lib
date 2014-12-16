@@ -13,5 +13,6 @@ two_d_poisson_hp_adapt \
 fish_poisson2 \
 elastic_poisson \
 eighth_sphere_poisson \
+eighth_sphere_poisson_hp_adapt \
 spectral
 

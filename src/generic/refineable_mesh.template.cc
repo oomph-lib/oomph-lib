@@ -49,15 +49,21 @@ namespace oomph
  //========================================================================
  /// Additional actions required to synchronise halo nodes where master
  /// nodes could not be found during synchronise_hanging_nodes().
- /// BENFLAG: Overloaded from Mesh class to take care of master nodes on
- ///          the outer edge of the halo layer which do not exist on that
- ///          processor. This fixes problems with the synchronisation of
- ///          hanging nodes for elements with non-uniformly spaced nodes.
+ /// Overloaded from Mesh class to take care of master nodes on
+ /// the outer edge of the halo layer which do not exist on that
+ /// processor. This fixes problems with the synchronisation of
+ /// hanging nodes for elements with non-uniformly spaced nodes.
  //========================================================================
  template<class ELEMENT>
  void TreeBasedRefineableMesh<ELEMENT>::
  additional_synchronise_hanging_nodes(const unsigned& ncont_interpolated_values)
  {
+  // Check if additional synchronisation of hanging nodes is disabled
+  if(is_additional_synchronisation_of_hanging_nodes_disabled()==true)
+   {
+    return;
+   }
+
   //This provides all the node-adding helper functions required to reconstruct
   //the missing halo master nodes on this processor
   using namespace Missing_masters_functions;
@@ -77,10 +83,10 @@ namespace oomph
 
       
 #ifdef PARANOID
-  //BENFLAG: Paranoid check to make sure nothing else is using the
-  //         external storage. This will need to be changed at some
-  //         point if we are to use non-uniformly spaced nodes in
-  //         multi-domain problems.
+  // Paranoid check to make sure nothing else is using the
+  // external storage. This will need to be changed at some
+  // point if we are to use non-uniformly spaced nodes in
+  // multi-domain problems.
   bool err=false;
   //Print out external storage
   for(int d=0; d<n_proc; d++)
@@ -134,8 +140,7 @@ namespace oomph
 
 
 
-  // BENFLAG: Compare the halo and haloed nodes for discrepancies in hanging
-  //          status
+  // Compare the halo and haloed nodes for discrepancies in hanging status
   
   // Storage for the hanging status of halo/haloed nodes on elements
   Vector<Vector<int> > haloed_hanging(n_proc);
@@ -332,8 +337,8 @@ namespace oomph
 
   
 
-  // BENFLAG: Populate external halo(ed) node storage with master nodes of
-  //          halo(ed) nodes
+  // Populate external halo(ed) node storage with master nodes of halo(ed)
+  // nodes
 
   // Loop over domains: Each processor checks consistency of hang status
   // of its haloed nodes with proc d against the halo counterpart. Haloed
@@ -491,17 +496,12 @@ namespace oomph
             //Check if we have a MacroElementNodeUpdateNode
             if(dynamic_cast<MacroElementNodeUpdateNode*>(nod_pt))
              {
-              //BENFLAG: This currently doesn't work for
-              //         MacroElementNodeUpdateNodes because these require
-              //         MacroElementNodeUpdateElements to be created for
-              //         the missing halo nodes which will be added (which
-              //         doesn't currently work but I don't know why not)
-              //         We follow the convoluted logic in the multi-domain
-              //         functions because
-              //         a) it requires only minimal modifications to the
-              //            existing functions, and
-              //         b) this is probably the correct thing to do if we
-              //            are to fix this problem
+              //BENFLAG: The construction of missing master nodes for
+              //         MacroElementNodeUpdateNodes does not work as expected.
+              //         They require MacroElementNodeUpdateElements to be
+              //         created for the missing halo nodes which will be
+              //         added. It behaves as expected until duplicate nodes
+              //         are pruned at the problem level.
               std::ostringstream err_stream;
               err_stream << "This currently doesn't work for"
                          << std::endl
@@ -514,6 +514,9 @@ namespace oomph
               throw OomphLibError(err_stream.str(),
                                   OOMPH_CURRENT_FUNCTION,
                                   OOMPH_EXCEPTION_LOCATION);
+              //OomphLibWarning(err_stream.str(),
+              //                OOMPH_CURRENT_FUNCTION,
+              //                OOMPH_EXCEPTION_LOCATION);
              }
 #endif
             
@@ -541,8 +544,8 @@ namespace oomph
     t_start = TimingHelpers::timer();
    }
 
-  // BENFLAG: Populate external halo(ed) node storage with master nodes of
-  //          halo(ed) nodes [end]
+  // Populate external halo(ed) node storage with master nodes of halo(ed)
+  // nodes [end]
  
   //Count how many external halo/haloed nodes are added
   unsigned external_halo_count=0;
@@ -662,15 +665,18 @@ namespace oomph
   //If we added duplicate haloed nodes, throw an error
   if(duplicate_haloed_node_exists)
    {
-    //BENFLAG: Let my_rank==A. If this has happened then it means that
-    //         duplicate haloed nodes exist on another processor (B). This
-    //         problem arises if a master of a haloed node with a discrepancy
-    //         is haloed with a different processor (C). A copy is constructed
-    //         in the external halo storage on processor (B) because that node
-    //         is not found in the (internal) haloed storage on (A) with (B)
-    //         but that node already exists on processor (B) in the (internal)
-    //         halo storage with processor (C). Thus two copies of this master
-    //         node now exist on processor (B).
+    // This problem should now be avoided because we are using existing
+    // communication methods to locate nodes in this case. The error used
+    // to arise as follows:
+    //// Let my_rank==A. If this has happened then it means that
+    //// duplicate haloed nodes exist on another processor (B). This
+    //// problem arises if a master of a haloed node with a discrepancy
+    //// is haloed with a different processor (C). A copy is constructed
+    //// in the external halo storage on processor (B) because that node
+    //// is not found in the (internal) haloed storage on (A) with (B)
+    //// but that node already exists on processor (B) in the (internal)
+    //// halo storage with processor (C). Thus two copies of this master
+    //// node now exist on processor (B).
 
     std::ostringstream err_stream;
     err_stream << "Duplicate halo nodes exist on another processor!"

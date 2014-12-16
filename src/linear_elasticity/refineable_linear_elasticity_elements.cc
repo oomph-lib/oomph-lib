@@ -291,6 +291,103 @@ namespace oomph
        } //End of loop over shape functions
      } //End of loop over integration points
    }
+
+/// Get error against and norm of exact solution
+template<unsigned DIM>
+void PRefineableQLinearElasticityElement<DIM>::compute_energy_error(
+ std::ostream &outfile, FiniteElement::SteadyExactSolutionFctPt exact_grad_pt,
+ double& error, double& norm)
+ {
+  // Initialise
+  error=0.0;
+  norm=0.0;
+
+  //Vector of local coordinates
+  Vector<double> s(DIM);
+
+  // Vector for coordintes
+  Vector<double> x(DIM);
+  
+  //Set the value of n_intpt
+  unsigned n_intpt = this->integral_pt()->nweight();
+  
+  // Setup output structure: Conversion is fishy but it's only output...
+  unsigned nplot;
+  if (DIM==1)
+   {
+    nplot=n_intpt;
+   }
+  else 
+   {
+    nplot=unsigned(pow(n_intpt,1.0/double(DIM)));
+   }
+  
+  // Tecplot header info
+  outfile << this->tecplot_zone_string(nplot);
+  
+  // Exact gradient Vector
+  Vector<double> exact_grad(DIM);
+  
+  //Loop over the integration points
+  for(unsigned ipt=0;ipt<n_intpt;ipt++)
+   {
+    
+    //Assign values of s
+    for(unsigned i=0;i<DIM;i++)
+     {
+      s[i] = this->integral_pt()->knot(ipt,i);
+     }
+    
+    //Get the integral weight
+    double w = this->integral_pt()->weight(ipt);
+    
+    // Get jacobian of mapping
+    double J=this->J_eulerian(s);
+    
+    //Premultiply the weights and the Jacobian
+    double W = w*J;
+    
+    // Get x position as Vector
+    this->interpolated_x(s,x);
+    
+    // Get FE du/dx
+    Vector<double> dudx_fe(DIM);
+    
+    // Get exact gradient at this point
+    (*exact_grad_pt)(x,exact_grad);
+    
+    //Output x,y,...,error
+    for(unsigned i=0;i<DIM;i++)
+     {
+      outfile << x[i] << " ";
+     }
+    for(unsigned i=0;i<DIM;i++)
+     {
+      outfile << exact_grad[i] << " " << exact_grad[i]-dudx_fe[i] << std::endl;
+     }
+    
+    // Add to error and norm
+    for(unsigned i=0;i<DIM;i++)
+     {
+      //LinearElasticityEquations<DIM>::get_flux(s,i,dudx_fe);
+      norm+=exact_grad[i]*exact_grad[i]*W;
+      error+=(exact_grad[i]-dudx_fe[i])*(exact_grad[i]-dudx_fe[i])*W;
+     }
+    
+   }
+ }
+
+template<unsigned DIM>
+void PRefineableQLinearElasticityElement<DIM>::further_build()
+ {
+  if(this->tree_pt()->father_pt()!=0)
+   {
+    // Needed to set the source function pointer (if there is a father)
+    RefineableLinearElasticityEquations<DIM>::further_build();
+   }
+  // Now do the PRefineableQElement further_build()
+  //PRefineableQElement<DIM>::further_build();
+ }
   
 
 
@@ -300,5 +397,8 @@ namespace oomph
 //====================================================================
   template class RefineableLinearElasticityEquations<2>;
   template class RefineableLinearElasticityEquations<3>;
+
+template class PRefineableQLinearElasticityElement<2>;
+//template class PRefineableQLinearElasticityElement<3>;
 
 }

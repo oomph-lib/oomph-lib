@@ -50,7 +50,7 @@
 #include "multi_domain.h"
 #include "face_element_as_geometric_object.h"
 
-//BENFLAG: Needed to check if elements have nonuniformlyspaced nodes
+//Needed to check if elements have nonuniformly spaced nodes
 #include "refineable_elements.h"
 #include "Qspectral_elements.h"
 
@@ -606,8 +606,9 @@ namespace oomph
 
    //oomph_info << "OLD aux_setup_multi_domain_interaction\n";
 
-   //BENFLAG: Multi-domain setup will not work for elements with
-   //         nonuniformly spaced nodes
+   //Multi-domain setup will not work for elements with
+   //nonuniformly spaced nodes because the same storage is used for
+   //the missing master nodes as for the external halo/haloed nodes
 #ifdef PARANOID
    //Must check type of elements in the mesh and in the external mesh
    //(assume element type is the same for all elements in each mesh)
@@ -1419,8 +1420,8 @@ namespace oomph
    // Bail out?
    if (n_mesh==0) return;
 
-   //BENFLAG: Multi-domain setup will not work for elements with
-   //         nonuniformly spaced nodes
+   //Multi-domain setup will not work for elements with
+   //nonuniformly spaced nodes
    //Must check type of elements in the mesh and in the external mesh
    //(assume element type is the same for all elements in each mesh)
 

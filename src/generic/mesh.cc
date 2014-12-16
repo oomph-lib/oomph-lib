@@ -286,12 +286,6 @@ void Mesh::add_boundary_node(const unsigned &b, Node* const &node_pt)
 //========================================================
 void Mesh::node_update(const bool& update_all_solid_nodes)
 {
- //BENFLAG: Node update does not work for missing master nodes added as
- //         external halo nodes if they don't belong to an element on
- //         this processor. I can't see any way around this without
- //         communicating the updated position from the halo version.
- //         (But the whole point of setting all the node update info up
- //         is so that node updates can be local!)
 #ifdef PARANOID
 #ifdef OOMPH_HAS_MPI
  //Paranoid check to throw an error if node update is called for elements
@@ -322,10 +316,10 @@ void Mesh::node_update(const bool& update_all_solid_nodes)
        if(it != external_halo_node_pt.end())
         {
          //Throw error becase node update won't work
-         //BENFLAG: It's ok to throw an error here because this function is
-         //         overloaded for Algebraic and MacroElementNodeUpdate
-         //         Meshes. This is only a problem for meshes of ordinary
-         //         nodes.
+         //It's ok to throw an error here because this function is
+         //overloaded for Algebraic and MacroElementNodeUpdate
+         //Meshes. This is only a problem for meshes of ordinary
+         //nodes.
          std::ostringstream err_stream;
 
          err_stream << "Calling node_update() for a mesh which contains"
@@ -419,6 +413,24 @@ void Mesh::node_update(const bool& update_all_solid_nodes)
     }
   }
 
+ // Now update the external halo nodes before we adjust the positions of the
+ // hanging nodes incase any are masters of local nodes
+#ifdef OOMPH_HAS_MPI
+ // Loop over all external halo nodes with other processors
+ // and update them
+ for (std::map<unsigned, Vector<Node*> >::iterator it=
+       External_halo_node_pt.begin();it!=External_halo_node_pt.end();it++)
+  {
+   // Get vector of external halo nodes
+   Vector<Node*> ext_halo_node_pt=(*it).second;
+   unsigned nnod=ext_halo_node_pt.size();
+   for (unsigned j=0;j<nnod;j++)
+    {
+     ext_halo_node_pt[j]->node_update();
+    }
+  }
+#endif
+
  // Now loop over hanging nodes and adjust their position
  // in line with their hanging node constraints
  unsigned long n_node = nnode();
@@ -457,32 +469,6 @@ void Mesh::node_update(const bool& update_all_solid_nodes)
   {
    Node_pt[n]->perform_auxiliary_node_update_fct();
   }
-
-
- //BENFLAG: We may need to update the external halo nodes before we adjust
- //         the positions of the hanging nodes in case any masters live in
- //         the external storage. But we may need to update all (internal)
- //         nodes before updating the external mesh in multidomain problems.
- //         Need to think more about this.
-
-#ifdef OOMPH_HAS_MPI
-
- // Loop over all external halo nodes with other processors
- // and update them
- for (std::map<unsigned, Vector<Node*> >::iterator it=
-       External_halo_node_pt.begin();it!=External_halo_node_pt.end();it++)
-  {
-   // Get vector of external halo nodes
-   Vector<Node*> ext_halo_node_pt=(*it).second;
-   unsigned nnod=ext_halo_node_pt.size();
-   for (unsigned j=0;j<nnod;j++)
-    {
-     ext_halo_node_pt[j]->node_update();
-    }
-  }
-
-#endif
-
 
 }
 
@@ -3803,7 +3789,7 @@ void Mesh::resize_halo_nodes()
  MPI_Status status;
 
  // Nuffink needs to be done if mesh isn't distributed
- if (Comm_pt!=0)
+ if (is_mesh_distributed())
   {
 
    // Storage for current processor and number of processors
@@ -6405,7 +6391,6 @@ void Mesh::check_halo_schemes(DocInfo& doc_info,
    error_message
     << "If you believe this to be acceptable for your problem\n"
     << "increase Problem::Max_permitted_error_for_halo_check and re-run \n";
-   MPI_Barrier(Comm_pt->mpi_comm());
    throw OomphLibError(error_message.str(),
                        OOMPH_CURRENT_FUNCTION,
                        OOMPH_EXCEPTION_LOCATION);
@@ -6587,9 +6572,6 @@ void Mesh::check_halo_schemes(DocInfo& doc_info,
            //We can only check nodal stuff for meshes of finite elements
            if(dynamic_cast<FiniteElement*>(this->element_pt(0)))
             {
-             //BENFLAG: This assumes that all elements are 'the same', which
-             //         may not be the case. e.g. for elements with variable
-             //         p-order, elements may have different numbers of nodes
              // Get strung-together elemental nodal positions
              // from other processor
              //unsigned nnod_per_el=finite_element_pt(0)->nnode();
@@ -6863,10 +6845,10 @@ void Mesh::check_halo_schemes(DocInfo& doc_info,
        if(dynamic_cast<FiniteElement*>(this->element_pt(0)))
         {
          // Now string together the nodal positions of all halo nodes
-         //BENFLAG: Use this only to work out roughly how much space to
-         //         reserve for the vector. Then we can push data cheaply
-         //         while not assuming all elements have the same number
-         //         of nodes.
+         // Use this only to work out roughly how much space to
+         // reserve for the vector. Then we can push data cheaply
+         // while not assuming all elements have the same number
+         // of nodes.
          unsigned nnod_first_el=finite_element_pt(0)->nnode();
          unsigned nod_dim=finite_element_pt(0)->node_pt(0)->ndim();
          Vector<double> nodal_positions;
@@ -6888,7 +6870,7 @@ void Mesh::check_halo_schemes(DocInfo& doc_info,
                Node* nod_pt=finite_el_pt->node_pt(j);
                //unsigned nod_dim = nod_pt->ndim();
 
-               //BENFLAG: Throw error if node doesn't exist
+               //Throw error if node doesn't exist
                if(nod_pt==0)
                 {
                  //Print our nodes in element
@@ -7996,7 +7978,7 @@ OOMPH_CURRENT_FUNCTION,
 #ifdef OOMPH_HAS_MPI
 
  // If mesh is distributed
- if (Comm_pt != 0)
+ if (is_mesh_distributed())
   {
    // if more than one processor then
    // + ensure number of DOFs is consistent on each processor (PARANOID)
@@ -8386,12 +8368,13 @@ void Mesh::delete_all_external_storage()
 #ifdef OOMPH_HAS_MPI
 
  //Only do for distributed meshes
- if(Comm_pt!=0)
+ if(is_mesh_distributed())
   {
+   //Some of the external halo/haloed nodes are masters of nodes
+   //in this mesh. We must set to be non-hanging any nodes whose
+   //masters we are about to delete, to remove any dependencies.
 
-   //BENFLAG: Some of the external halo/haloed nodes are masters of nodes
-   //         in this mesh. We must set to be non-hanging any nodes whose
-   //         masters we are about to delete, to remove any dependencies.
+   // Loop over all the mesh nodes and check their masters
    for(unsigned i=0; i<nnode(); i++)
     {
      //Get pointer to the node
@@ -8489,8 +8472,8 @@ void Mesh::delete_all_external_storage()
               }
             }
 
-           //BENFLAG: No need to worry about geometrically hanging nodes
-           //         on boundaries (as in (p_)adapt_mesh())
+           //No need to worry about geometrically hanging nodes
+           //on boundaries (as in (p_)adapt_mesh())
            ////Now store geometrically hanging nodes on boundaries that
            ////may need updating after refinement.
            ////There will only be a problem if we have 3 spatial dimensions

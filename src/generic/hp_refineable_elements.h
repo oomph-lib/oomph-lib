@@ -58,11 +58,14 @@ public:
  /// Constructor
  PRefineableQElement() : PRefineableElement(), RefineableQElement<1>()
   {}
+
+ /// Destructor
+ virtual ~PRefineableQElement() {}
  
  /// \short Initial setup of element (set the correct p-order and
  /// integration scheme) If an adopted father is specified, information
  /// from this is used instead of using the father found from the tree.
- void initial_setup(Tree* const &adopted_father_pt=0);
+ void initial_setup(Tree* const &adopted_father_pt=0, const unsigned &initial_p_order=0);
  
  /// \short Pre-build (search father for required nodes which may already
  /// exist)
@@ -141,10 +144,13 @@ public:
  PRefineableQElement() : PRefineableElement(), RefineableQElement<2>()
   {}
 
+ /// Destructor
+ virtual ~PRefineableQElement() {}
+
  /// \short Initial setup of element (set the correct p-order and
  /// integration scheme) If an adopted father is specified, information
  /// from this is used instead of using the father found from the tree.
- void initial_setup(Tree* const &adopted_father_pt=0);
+ void initial_setup(Tree* const &adopted_father_pt=0, const unsigned &initial_p_order=0);
  
  /// \short Pre-build (search father for required nodes which may already
  /// exist)
@@ -216,38 +222,6 @@ protected:
  void quad_hang_helper(const int &value_id, const int &my_edge,
                        std::ofstream& output_hangfile);
  
- /// \short Return the value of the intrinsic boundary coordinate
- /// interpolated along the edge (S/W/N/E) of the element before
- /// p-refinement. Requires a vector of pointers to the element's
- /// original nodes and the original p-order of the element before
- /// refinement in addition to the arguments to the standard
- /// interpolated_zeta_on_edge(...) function.
- // BENFLAG: This is required during p-refinement because new nodes in
- //          elements with curvilinear boundaries normally interpolate
- //          their boundary coordinate from their element's father, but
- //          with p-refinement they should instead interpolate from the
- //          current element before it was refined.
- void interpolated_zeta_on_edge_before_p_refinement(
-       const unsigned &boundary,
-       const int &edge,
-       const Vector<double> &s,
-       const unsigned &old_p_order,
-       const Vector<Node*> &old_node_pt,
-       Vector<double> &zeta);
- 
- // Set up node update info for (newly created) algebraic node: Work out its
- // node update information by interpolation from its father element, 
- // based on pointer to father element and its local coordinate in 
- // the father element. We're creating the node update info
- // for update functions that are shared by all nodes in the
- // father element. 
- void bens_setup_algebraic_node_update_generic(
-       Node*& node_pt,
-       const Vector<double>& s,
-       FiniteElement* father_el_pt,
-       const unsigned& old_p_order,
-       const Vector<Node*>& old_node_pt) const;
- 
 };
 
 //=======================================================================
@@ -262,17 +236,15 @@ public:
 
  /// Constructor
  PRefineableQElement() : PRefineableElement(), RefineableQElement<3>()
-  {
-   throw OomphLibError(
-    "3-dimensional PRefineableQElements are not fully implemented yet!\n",
-    OOMPH_CURRENT_FUNCTION,
-    OOMPH_EXCEPTION_LOCATION);
-  }
+  {}
+
+ /// Destructor
+ virtual ~PRefineableQElement() {}
  
  /// \short Initial setup of element (set the correct p-order and
  /// integration scheme) If an adopted father is specified, information
  /// from this is used instead of using the father found from the tree.
- void initial_setup(Tree* const &adopted_father_pt=0);
+ void initial_setup(Tree* const &adopted_father_pt=0, const unsigned &initial_p_order=0);
  
  /// \short Pre-build (search father for required nodes which may already
  /// exist)
@@ -339,27 +311,8 @@ protected:
  /// Overloaded to implement the mortar method rather than constrained
  /// approximation. This enforces continuity weakly via an integral matching
  /// condition at non-conforming element boundaries.
- void oc_hang_helper(const int &value_id, const int &my_edge,
+ void oc_hang_helper(const int &value_id, const int &my_face,
                      std::ofstream& output_hangfile);
- 
-// /// \short Return the value of the intrinsic boundary coordinate
-// /// interpolated along the face (S/W/N/E) of the element before
-// /// p-refinement. Requires a vector of pointers to the element's
-// /// original nodes and the original p-order of the element before
-// /// refinement in addition to the arguments to the standard
-// /// interpolated_zeta_on_edge(...) function.
-// // BENFLAG: This is required during p-refinement because new nodes in
-// //          elements with curvilinear boundaries normally interpolate
-// //          their boundary coordinate from their element's father, but
-// //          with p-refinement they should instead interpolate from the
-// //          current element before it was refined.
-// void interpolated_zeta_on_face_before_p_refinement(
-//       const unsigned &boundary,
-//       const int &edge,
-//       const Vector<double> &s,
-//       const unsigned &old_p_order,
-//       const Vector<Node*> &old_node_pt,
-//       Vector<double> &zeta);
  
 };
 

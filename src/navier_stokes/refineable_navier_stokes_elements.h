@@ -1376,10 +1376,10 @@ public virtual PRefineableQElement<DIM,3>
    //Do p-refineable version
    PRefineableQElement<DIM,3>::rebuild_from_sons(mesh_pt);
    //Do Crouzeix-Raviart version
-   //BENFLAG: Need to reconstruct pressure manually!
+   //Need to reconstruct pressure manually!
    for(unsigned p=0; p<npres_nst(); p++)
     {
-     //BENFLAG: Set to zero for now -- don't do projection problem
+     //BENFLAG: Set to zero for now -- don't do projection problem yet
      this->internal_data_pt(this->P_nst_internal_index)->set_value(p,0.0);
     }
      
@@ -1932,6 +1932,64 @@ dshape_and_dtest_eulerian_at_knot_nst(const unsigned &ipt, Shape &psi,
 }
 
 //=======================================================================
+/// 3D
+/// Derivatives of the shape functions and test functions w.r.t. to global
+/// (Eulerian) coordinates. Return Jacobian of mapping between
+/// local and global coordinates.
+//=======================================================================
+template<>
+inline double PRefineableQCrouzeixRaviartElement<3>::
+dshape_and_dtest_eulerian_nst(const Vector<double> &s, Shape &psi, 
+                              DShape &dpsidx, Shape &test, 
+                              DShape &dtestdx) const
+{
+ //Call the geometrical shape functions and derivatives  
+ double J = this->dshape_eulerian(s,psi,dpsidx);
+ 
+ //Loop over the test functions and derivatives and set them equal to the
+ //shape functions
+ for(unsigned i=0;i<nnode_1d()*nnode_1d()*nnode_1d();i++)
+  {
+   test[i] = psi[i]; 
+   dtestdx(i,0) = dpsidx(i,0);
+   dtestdx(i,1) = dpsidx(i,1);
+   dtestdx(i,2) = dpsidx(i,2);
+  }
+  
+ //Return the jacobian
+ return J;
+}
+
+//=======================================================================
+/// 3D
+/// Derivatives of the shape functions and test functions w.r.t. to global
+/// (Eulerian) coordinates. Return Jacobian of mapping between
+/// local and global coordinates.
+//=======================================================================
+template<>
+inline double PRefineableQCrouzeixRaviartElement<3>::
+dshape_and_dtest_eulerian_at_knot_nst(const unsigned &ipt, Shape &psi, 
+                                      DShape &dpsidx, Shape &test, 
+                                      DShape &dtestdx) const
+{
+ //Call the geometrical shape functions and derivatives
+ double J = this->dshape_eulerian_at_knot(ipt,psi,dpsidx);
+ 
+ //Loop over the test functions and derivatives and set them equal to the
+ //shape functions
+ for(unsigned i=0;i<nnode_1d()*nnode_1d()*nnode_1d();i++)
+  {
+   test[i] = psi[i]; 
+   dtestdx(i,0) = dpsidx(i,0);
+   dtestdx(i,1) = dpsidx(i,1);
+   dtestdx(i,2) = dpsidx(i,2);
+  }
+ 
+ //Return the jacobian
+ return J;
+}
+
+//=======================================================================
 /// 2D :
 /// Pressure shape functions
 //=======================================================================
@@ -1970,6 +2028,65 @@ pshape_nst(const Vector<double> &s, Shape &psi) const
 ///Define the pressure shape and test functions
 template<>
 inline void PRefineableQCrouzeixRaviartElement<2>::
+pshape_nst(const Vector<double> &s, Shape &psi, Shape &test) const
+{
+ //Call the pressure shape functions
+ pshape_nst(s,psi);
+ 
+ //Loop over the test functions and set them equal to the shape functions
+ if (this->npres_nst()==1)
+  {
+   test[0] = psi[0];
+  }
+ else
+  {
+   for(unsigned i=0;i<this->npres_nst();i++) test[i] = psi[i];
+  }
+}
+
+//=======================================================================
+/// 3D :
+/// Pressure shape functions
+//=======================================================================
+template<>
+inline void PRefineableQCrouzeixRaviartElement<3>::
+pshape_nst(const Vector<double> &s, Shape &psi) const
+{
+ unsigned npres = this->npres_nst();
+ if (npres==1)
+  {
+   psi[0] = 1.0;
+  }
+ else
+  {
+   // Get number of pressure modes
+   unsigned npres_1d = (int) std::sqrt((double)npres);
+   
+   //Local storage
+   //Call the one-dimensional modal shape functions
+   OneDimensionalModalShape psi1(npres_1d,s[0]);
+   OneDimensionalModalShape psi2(npres_1d,s[1]);
+   OneDimensionalModalShape psi3(npres_1d,s[2]);
+   
+   //Now let's loop over the nodal points in the element
+   //s1 is the "x" coordinate, s2 the "y" 
+   for(unsigned i=0;i<npres_1d;i++)
+    {
+     for(unsigned j=0;j<npres_1d;j++)
+      {
+       for(unsigned k=0;k<npres_1d;k++)
+        {
+         //Multiply the two 1D functions together to get the 2D function
+         psi[i*npres_1d*npres_1d + j*npres_1d + k] = psi3[i]*psi2[j]*psi1[k];
+        }
+      }
+    }
+  }
+}
+
+///Define the pressure shape and test functions
+template<>
+inline void PRefineableQCrouzeixRaviartElement<3>::
 pshape_nst(const Vector<double> &s, Shape &psi, Shape &test) const
 {
  //Call the pressure shape functions

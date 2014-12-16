@@ -340,7 +340,10 @@ public MacroElementNodeUpdateElementBase
  /// rebuild_from_son() function (if it's a RefineableElement)
  void rebuild_from_sons(Mesh* &mesh_pt)
   {
-   // Loop over nodes in element
+   // First call the element's own rebuild_from_sons() function
+   ELEMENT::rebuild_from_sons(mesh_pt);
+
+   // Now loop over nodes in element
    unsigned n_node =this->nnode();
    for (unsigned j=0;j<n_node;j++)
     {
@@ -352,9 +355,6 @@ public MacroElementNodeUpdateElementBase
      static_cast<MacroElementNodeUpdateNode*>(this->node_pt(j))->
       set_node_update_info(this,s_in_node_update_element,Geom_object_pt);
     }
-   
-   // Now call the element's own rebuild_from_sons() function
-   ELEMENT::rebuild_from_sons(mesh_pt);
   }
 
 

@@ -223,6 +223,77 @@ namespace oomph
    void further_setup_hanging_nodes() {}
    
   };
+
+
+//======================================================================
+/// p-refineable version of 2D QLinearElasticityElement elements
+//======================================================================
+template<unsigned DIM>
+class PRefineableQLinearElasticityElement : public QLinearElasticityElement<DIM,2>,
+ public virtual RefineableLinearElasticityEquations<DIM>,
+ public virtual PRefineableQElement<DIM>
+{
+   public:
+
+ /// \short Constructor, simply call the other constructors 
+ PRefineableQLinearElasticityElement() : RefineableElement(),
+  RefineableLinearElasticityEquations<DIM>(),
+  PRefineableQElement<DIM>(),
+  QLinearElasticityElement<DIM,2>()
+   {
+    // Set integration scheme
+    // (To avoid memory leaks in pre-build and p-refine where new
+    // integration schemes are created)
+    this->set_integration_scheme(new GaussLobattoLegendre<DIM,2>);
+   }
+ 
+ /// Destructor (to avoid memory leaks)
+ ~PRefineableQLinearElasticityElement()
+  {
+   delete this->integral_pt();
+  }
+
+
+ /// Broken copy constructor
+ PRefineableQLinearElasticityElement(const PRefineableQLinearElasticityElement<DIM>& dummy) 
+  { 
+   BrokenCopy::broken_copy("PRefineableQLinearElasticityElement");
+  } 
+ 
+ /// Broken assignment operator
+ void operator=(const PRefineableQLinearElasticityElement<DIM>&) 
+  {
+   BrokenCopy::broken_assign("PRefineableQLinearElasticityElement");
+  }
+
+ void further_build();
+ 
+ /// Number of continuously interpolated values: 1
+ unsigned ncont_interpolated_values() const {return 1;}
+ 
+ /// \short Number of vertex nodes in the element
+ unsigned nvertex_node() const
+  {return QLinearElasticityElement<DIM,2>::nvertex_node();}
+ 
+ /// \short Pointer to the j-th vertex node in the element
+ Node* vertex_node_pt(const unsigned& j) const
+  {return QLinearElasticityElement<DIM,2>::vertex_node_pt(j);}
+
+ /// \short Order of recovery shape functions for Z2 error estimation:
+ /// - Same order as shape functions.
+ //unsigned nrecovery_order()
+ // {
+ //  if(this->nnode_1d() < 4) {return (this->nnode_1d()-1);}
+ //  else {return 3;}
+ // }
+ /// - Constant recovery order, since recovery order of the first element
+ ///   is used for the whole mesh.
+ unsigned nrecovery_order() {return 3;}
+ 
+ void compute_energy_error(std::ostream &outfile, 
+  FiniteElement::SteadyExactSolutionFctPt exact_grad_pt,
+  double& error, double& norm);
+};
  
 
 

@@ -54,8 +54,8 @@ namespace Missing_masters_functions
   // Temporary vector of strings to enable full annotation of multi domain
   // comms (but keep alive because it would be such a bloody pain to
   // rewrite it if things ever go wrong again...)
-  //BENFLAG: This is left over from the multi-domain stuff and should work
-  //         in the same way, but it has not been tested.
+  // This is left over from the multi-domain stuff and should work
+  // in the same way, but it has not been tested.
   Vector<std::string> Flat_packed_unsigneds_string;
 
 #endif
@@ -178,36 +178,49 @@ namespace Missing_masters_functions
                                        Vector<unsigned>& send_unsigneds,
                                        Vector<double>& send_doubles)
   {
-   // Attempt to add this node as an external haloed node
-   unsigned n_ext_haloed_nod=mesh_pt->nexternal_haloed_node(iproc);
-   unsigned external_haloed_node_index=
-    mesh_pt->add_external_haloed_node_pt(iproc,nod_pt);
+   //Check to see if this haloed node already exists in (internal)
+   //haloed node storage with any processor
+   bool found_internally = false;
+   unsigned shared_node_index=0;
 
-   // If it was added then the new index should match the size of the storage
-   if (external_haloed_node_index==n_ext_haloed_nod)
-    {
-     send_unsigneds.push_back(1);
+   //Get vector of all shared nodes with processor iproc
+   Vector<Node*> shared_node_pt;
+   mesh_pt->get_shared_node_pt(iproc,shared_node_pt);
  
-#ifdef ANNOTATE_MISSING_MASTERS_COMMUNICATION
-     std::stringstream junk;
-     junk << "Node needs to be constructed [size=" 
-          << send_unsigneds.size() << "]; last entry: "
-          << send_unsigneds[send_unsigneds.size()-1];
-     Flat_packed_unsigneds_string.push_back(junk.str());
-#endif
-
-     // This helper function gets all the required information for the 
-     // specified node and stores it into MPI-sendable information
-     // so that a halo copy can be made on the receiving process
-     get_required_nodal_information_helper(iproc,nod_pt,
-                                           mesh_pt,
-                                           n_cont_inter_values,
-                                           send_unsigneds,
-                                           send_doubles);
-    }
-   else // It was already added
+   //Search the internal haloed storage for this node
+   Vector<Node*>::iterator it
+    = std::find(shared_node_pt.begin(),
+                shared_node_pt.end(),
+                nod_pt);
+   
+   //Check if the node was found in shared storage
+   if(it != shared_node_pt.end())
     {
-     send_unsigneds.push_back(0); 
+     //Node found in (internal) haloed storage
+     found_internally = true;
+     //Store the index in this storage
+     shared_node_index = it - shared_node_pt.begin();
+    }
+
+   //// Slow search version without additional access function in Mesh class
+   ////Search the internal shared node storage for this node
+   //for(unsigned i=0; i<mesh_pt->nshared_node(iproc); i++)
+   // {
+   //  if(nod_pt == mesh_pt->shared_node_pt(iproc,i))
+   //   {
+   //    //Node found in (internal) shared storage
+   //    found_internally = true;
+   //    shared_node_index = i;
+   //    break;
+   //   }
+   // }
+
+   // If we've found the node internally
+   if(found_internally)
+    {
+     // Indicate that this node doesn not need to be constructed on
+     // the other process
+     send_unsigneds.push_back(0);
 #ifdef ANNOTATE_MISSING_MASTERS_COMMUNICATION
      std::stringstream junk;
      junk << "Node was already added [size=" 
@@ -217,12 +230,73 @@ namespace Missing_masters_functions
      Flat_packed_unsigneds_string.push_back(junk.str());
 #endif
 
-     // This node is already an external haloed node, so tell
-     // the other process its index in the equivalent external halo storage
-     send_unsigneds.push_back(external_haloed_node_index);
+     // This node is already shared with processor iproc, so tell the other
+     // processor its index in the shared node storage
+     send_unsigneds.push_back(1);
 #ifdef ANNOTATE_MISSING_MASTERS_COMMUNICATION
-     Flat_packed_unsigneds_string.push_back("external haloed node index");
+     Flat_packed_unsigneds_string.push_back("haloed node found internally");
 #endif
+     send_unsigneds.push_back(shared_node_index);
+#ifdef ANNOTATE_MISSING_MASTERS_COMMUNICATION
+     Flat_packed_unsigneds_string.push_back("(internal) haloed node index");
+#endif
+    }
+   else
+    {
+     // Attempt to add this node as an external haloed node
+     unsigned n_ext_haloed_nod=mesh_pt->nexternal_haloed_node(iproc);
+     unsigned external_haloed_node_index;
+     external_haloed_node_index=
+      mesh_pt->add_external_haloed_node_pt(iproc,nod_pt);
+
+     // If it was added then the new index should match the size of the storage
+     if (external_haloed_node_index==n_ext_haloed_nod)
+      {
+       // Indicate that this node needs to be constructed on
+       // the other process
+       send_unsigneds.push_back(1);
+#ifdef ANNOTATE_MISSING_MASTERS_COMMUNICATION
+       std::stringstream junk;
+       junk << "Node needs to be constructed [size=" 
+            << send_unsigneds.size() << "]; last entry: "
+            << send_unsigneds[send_unsigneds.size()-1];
+       Flat_packed_unsigneds_string.push_back(junk.str());
+#endif
+
+       // This helper function gets all the required information for the 
+       // specified node and stores it into MPI-sendable information
+       // so that a halo copy can be made on the receiving process
+       get_required_nodal_information_helper(iproc,nod_pt,
+                                             mesh_pt,
+                                             n_cont_inter_values,
+                                             send_unsigneds,
+                                             send_doubles);
+      }
+     else // It was already added
+      {
+       // Indicate that this node doesn not need to be constructed on
+       // the other process
+       send_unsigneds.push_back(0); 
+#ifdef ANNOTATE_MISSING_MASTERS_COMMUNICATION
+       std::stringstream junk;
+       junk << "Node was already added [size=" 
+            << send_unsigneds.size() << "]; last entry: "
+            << send_unsigneds[send_unsigneds.size()-1];
+
+       Flat_packed_unsigneds_string.push_back(junk.str());
+#endif
+
+       // This node is already an external haloed node, so tell
+       // the other process its index in the equivalent external halo storage
+       send_unsigneds.push_back(0);
+#ifdef ANNOTATE_MISSING_MASTERS_COMMUNICATION
+       Flat_packed_unsigneds_string.push_back("haloed node found externally");
+#endif
+       send_unsigneds.push_back(external_haloed_node_index);
+#ifdef ANNOTATE_MISSING_MASTERS_COMMUNICATION
+       Flat_packed_unsigneds_string.push_back("external haloed node index");
+#endif
+      }
     }
 
 
@@ -239,8 +313,8 @@ namespace Missing_masters_functions
                                              Vector<unsigned>& send_unsigneds,
                                              Vector<double>& send_doubles)
   {
-   //BENFLAG: Check to see if this haloed node already exists in (internal)
-   //         haloed node storage with any processor
+   //Check to see if this haloed node already exists in (internal)
+   //haloed node storage with any processor
    bool found_internally = false;
    unsigned shared_node_index=0;
 
@@ -263,8 +337,7 @@ namespace Missing_masters_functions
      shared_node_index = it - shared_node_pt.begin();
     }
 
-   ////BENFLAG: Slow search version without additional access function in
-   ////         Mesh class
+   //// Slow search version without additional access function in Mesh class
    ////Search the internal shared node storage for this node
    //for(unsigned i=0; i<mesh_pt->nshared_node(iproc); i++)
    // {
@@ -602,7 +675,6 @@ namespace Missing_masters_functions
 #ifdef ANNOTATE_MISSING_MASTERS_COMMUNICATION
    Flat_packed_unsigneds_string.push_back("Master node nvalue");
 #endif
-   //BENFLAG: Necessary?
    if(master_nod_pt->is_halo())
     {
      send_unsigneds.push_back(master_nod_pt->non_halo_proc_ID());
@@ -799,10 +871,115 @@ namespace Missing_masters_functions
     dynamic_cast<MacroElementNodeUpdateNode*>(master_nod_pt);
    if (macro_nod_pt!=0)
     {
+     oomph_info << "Adding external haloed master node: " << master_nod_pt << " at " << master_nod_pt->x(0) << ", " << master_nod_pt->x(1) << " ]" << std::endl;
      // Loop over current external haloed elements - has the element which
      // controls the node update for this node been added yet?
      GeneralisedElement* macro_node_update_el_pt=
       macro_nod_pt->node_update_element_pt();
+
+     //BENFLAG: Check that the node's macro element node update element actually contains the node
+     oomph_info << "Master node's macro update element:" << std::endl;
+     bool really_bad = true;
+     FiniteElement* mac_el_pt = dynamic_cast<FiniteElement*>(macro_node_update_el_pt);
+     for(unsigned j=0; j<mac_el_pt->nnode(); j++)
+      {
+       oomph_info << mac_el_pt->node_pt(j) << ": [ " << mac_el_pt->node_pt(j)->x(0) << ", " << mac_el_pt->node_pt(j)->x(1) << " ] " << std::endl;
+       if(mac_el_pt->node_pt(j)==master_nod_pt)
+        {
+         really_bad = false;
+         //oomph_info << "Found it!" << std::endl;
+        }
+      }
+     if(really_bad==true)
+      {
+       oomph_info << "This is REALLY BAD! The master node is not part of its own update element..." << std::endl;
+      }
+
+     //BENFLAG: Search internal storage for node update element
+     Vector<GeneralisedElement*> int_haloed_el_pt(mesh_pt->haloed_element_pt(iproc));
+     //unsigned n_int_haloed_el=int_haloed_el_pt.size();
+     Vector<GeneralisedElement*>::iterator it = std::find(int_haloed_el_pt.begin(),int_haloed_el_pt.end(),macro_node_update_el_pt);
+     if(it != int_haloed_el_pt.end())
+      {
+       // Found in internal haloed storage
+       unsigned int_haloed_el_index = it - int_haloed_el_pt.begin();
+       oomph_info << "Found internally at index " << int_haloed_el_index << std::endl;
+       //BENFLAG: Check index corresponds to correct element
+       if((mesh_pt->haloed_element_pt(iproc))[int_haloed_el_index]!=macro_node_update_el_pt)
+        {
+         oomph_info << "Found wrong index!!!" << std::endl;
+         throw;
+        }
+       else
+        {
+         oomph_info << "index and proc are correct in internal storage." << std::endl;
+         oomph_info << "i.e. " << (mesh_pt->haloed_element_pt(iproc))[int_haloed_el_index] << "==" << macro_node_update_el_pt << std::endl;
+        }
+
+       
+     
+       // Say haloed element already exists
+       send_unsigneds.push_back(0);
+#ifdef ANNOTATE_MISSING_MASTERS_COMMUNICATION
+       Flat_packed_unsigneds_string.push_back("External haloed element already exists");
+#endif
+       // Say found internally
+       send_unsigneds.push_back(1);
+#ifdef ANNOTATE_MISSING_MASTERS_COMMUNICATION
+       Flat_packed_unsigneds_string.push_back("Haloed element found internally");
+#endif
+       // Say what the index is
+       send_unsigneds.push_back(int_haloed_el_index);
+#ifdef ANNOTATE_MISSING_MASTERS_COMMUNICATION
+       Flat_packed_unsigneds_string.push_back("Index of existing internal haloed element");
+#endif
+       //BENFLAG:
+       FiniteElement* tmp_el_pt = dynamic_cast<FiniteElement*>((mesh_pt->haloed_element_pt(iproc))[int_haloed_el_index]);
+       oomph_info << "Internal haloed element (" << tmp_el_pt << ") already exists..." << std::endl;
+       oomph_info << "on proc " << iproc << " at index " << int_haloed_el_index << std::endl;
+       for(unsigned j=0; j<tmp_el_pt->nnode(); j++)
+        {
+         oomph_info << tmp_el_pt->node_pt(j) << "==" << dynamic_cast<FiniteElement*>((mesh_pt->haloed_element_pt(iproc))[int_haloed_el_index])->node_pt(j) << " at [ " << tmp_el_pt->node_pt(j)->x(0) << ", " << tmp_el_pt->node_pt(j)->x(1) << " ]" << std::endl;
+        }
+
+       //oomph_info << "now " << tmp_el_pt << "==" << (mesh_pt->haloed_element_pt(iproc))[int_haloed_el_index] << "==" << macro_node_update_el_pt << std::endl;
+
+//       //BENFLAG: Add to external storage too
+//       unsigned n_ext_haloed_el=mesh_pt->
+//        nexternal_haloed_element(iproc);
+//       unsigned external_haloed_el_index;
+//       external_haloed_el_index=mesh_pt->
+//        add_external_haloed_element_pt(iproc,macro_node_update_el_pt);
+//
+//       // If it was already added, say
+//       if (external_haloed_el_index!=n_ext_haloed_el)
+//        {
+//         oomph_info << "Element (" << tmp_el_pt << "==" << macro_node_update_el_pt << "==" << mesh_pt->external_haloed_element_pt(iproc,external_haloed_el_index) << ") also exists in external storage with proc " << iproc << " at index " << external_haloed_el_index << " of " << n_ext_haloed_el << "..." << std::endl;
+//         // Say also exists in external storage
+//         send_unsigneds.push_back(1234);
+//#ifdef ANNOTATE_MISSING_MASTERS_COMMUNICATION
+//         Flat_packed_unsigneds_string.push_back("Haloed element also found externally");
+//#endif
+//         // Say what the index is
+//         send_unsigneds.push_back(external_haloed_el_index);
+//#ifdef ANNOTATE_MISSING_MASTERS_COMMUNICATION
+//         Flat_packed_unsigneds_string.push_back("Index of existing internal haloed element");
+//#endif
+//         oomph_info << "sent external_haloed_el_index = " << external_haloed_el_index << std::endl;
+//         
+//        }
+//       else
+//        {
+//         oomph_info << "Element didn't exist in external storage with proc " << iproc << "..." << std::endl;
+//         // Say doesn't exists in external storage
+//         send_unsigneds.push_back(0);
+//#ifdef ANNOTATE_MISSING_MASTERS_COMMUNICATION
+//         Flat_packed_unsigneds_string.push_back("Haloed element not also found externally");
+//#endif
+//        }
+      }
+     else
+      {
 
      unsigned n_ext_haloed_el=mesh_pt->
       nexternal_haloed_element(iproc);
@@ -877,6 +1054,31 @@ namespace Missing_masters_functions
 #endif
         }
 
+       // If the element is p-refineable we need to send the p-order so that the halo
+       // version can be constructed correctly
+       PRefineableElement* p_refineable_el_pt =
+        dynamic_cast<PRefineableElement*>(macro_node_update_finite_el_pt);
+       if(p_refineable_el_pt!=0)
+        {
+         send_unsigneds.push_back(1);
+#ifdef ANNOTATE_MISSING_MASTERS_COMMUNICATION
+         Flat_packed_unsigneds_string.push_back("Element is p-refineable");
+#endif
+         // Send p-order of macro element node update element
+         unsigned p_order = p_refineable_el_pt->p_order();
+         send_unsigneds.push_back(p_order);
+#ifdef ANNOTATE_MISSING_MASTERS_COMMUNICATION
+         Flat_packed_unsigneds_string.push_back("p-order of element");
+#endif
+        }
+       else
+        {
+         send_unsigneds.push_back(0);
+#ifdef ANNOTATE_MISSING_MASTERS_COMMUNICATION
+         Flat_packed_unsigneds_string.push_back("Element is not p-refineable");
+#endif
+        }
+
        // This element needs to be fully functioning on the other
        // process, so send all the information required to create it
        unsigned n_node=macro_node_update_finite_el_pt->nnode();
@@ -892,15 +1094,30 @@ namespace Missing_masters_functions
       }
      else // The external haloed element already exists
       {
+       // Say haloed element already exists
        send_unsigneds.push_back(0);
 #ifdef ANNOTATE_MISSING_MASTERS_COMMUNICATION
        Flat_packed_unsigneds_string.push_back("External haloed element already exists");
+#endif
+       // Say found externally
+       send_unsigneds.push_back(0);
+#ifdef ANNOTATE_MISSING_MASTERS_COMMUNICATION
+       Flat_packed_unsigneds_string.push_back("Haloed element found externally");
 #endif
        send_unsigneds.push_back(external_haloed_el_index);
 #ifdef ANNOTATE_MISSING_MASTERS_COMMUNICATION
        Flat_packed_unsigneds_string.push_back("Index of existing external haloed element");
 #endif
+       //BENFLAG:
+       oomph_info << "External haloed element already exists..." << std::endl;
+       FiniteElement* tmp_el_pt = dynamic_cast<FiniteElement*>(mesh_pt->external_haloed_element_pt(iproc,external_haloed_el_index));
+       oomph_info << "on proc " << iproc << " at index " << external_haloed_el_index << std::endl;
+       for(unsigned j=0; j<tmp_el_pt->nnode(); j++)
+        {
+         oomph_info << tmp_el_pt->node_pt(j) << " at [ " << tmp_el_pt->node_pt(j)->x(0) << ", " << tmp_el_pt->node_pt(j)->x(1) << " ]" << std::endl;
+        }
       }
+      } // End of case where not found internally
 
     } // end of MacroElementNodeUpdateNode check 
 
@@ -980,6 +1197,33 @@ namespace Missing_masters_functions
    }
   else
    {
+    // Need to check which storage we should copy this halo node from
+#ifdef ANNOTATE_MISSING_MASTERS_COMMUNICATION
+    oomph_info << "Rec:" << counter_for_recv_unsigneds 
+               << "  Existing external halo node was found externally (0) or internally (1): " 
+               << recv_unsigneds[counter_for_recv_unsigneds]
+               << std::endl;
+#endif
+    unsigned node_found_internally
+     = recv_unsigneds[counter_for_recv_unsigneds++];
+    if(node_found_internally)
+     {
+#ifdef ANNOTATE_MISSING_MASTERS_COMMUNICATION
+    oomph_info 
+     << "Rec:" << counter_for_recv_unsigneds 
+     << "  index of existing (internal) halo master node "
+     << recv_unsigneds[counter_for_recv_unsigneds]
+     << std::endl;
+#endif
+
+    // Copy node from received location
+    new_nod_pt=mesh_pt->shared_node_pt
+     (loc_p,recv_unsigneds[counter_for_recv_unsigneds++]);
+
+    new_el_pt->node_pt(node_index)=new_nod_pt;
+     }
+    else
+     {
 #ifdef ANNOTATE_MISSING_MASTERS_COMMUNICATION
     oomph_info << "Rec:" << counter_for_recv_unsigneds 
                << "  Index of existing external halo node " 
@@ -992,6 +1236,7 @@ namespace Missing_masters_functions
      (loc_p,recv_unsigneds[counter_for_recv_unsigneds++]);
 
     new_el_pt->node_pt(node_index)=new_nod_pt;
+     }
 
 
    }
@@ -1029,7 +1274,7 @@ namespace Missing_masters_functions
   unsigned n_prev=1;
 
   //Just take timestepper from a node
-  //BENFLAG: Let's use first node of first element since this must exist(?)
+  //Let's use first node of first element since this must exist
   time_stepper_pt=mesh_pt->
    finite_element_pt(0)->node_pt(0)->time_stepper_pt();
 

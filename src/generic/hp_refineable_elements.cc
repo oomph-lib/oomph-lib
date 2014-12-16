@@ -196,10 +196,10 @@ node_created_by_son_of_neighbour(const Vector<double> &s_fraction,
 //==================================================================
 template<unsigned INITIAL_NNODE_1D>
 void PRefineableQElement<1,INITIAL_NNODE_1D>::
-initial_setup(Tree* const &adopted_father_pt)
+initial_setup(Tree* const &adopted_father_pt, const unsigned &initial_p_order)
 {
  //Storage for pointer to my father (in binarytree impersonation)
- BinaryTree* father_pt;
+ BinaryTree* father_pt = 0;
  
  // Check if an adopted father has been specified
  if (adopted_father_pt!=0)
@@ -213,25 +213,32 @@ initial_setup(Tree* const &adopted_father_pt)
    //Get pointer to my father (in binarytree impersonation)
    father_pt = dynamic_cast<BinaryTree*>(binary_tree_pt()->father_pt());
   }
- else
-  {
-   throw OomphLibError(
-          "Element not in a tree, and no adopted father has been specified!",
-          OOMPH_CURRENT_FUNCTION,
-          OOMPH_EXCEPTION_LOCATION);
-  }
+ //else
+ // {
+ //  throw OomphLibError(
+ //         "Element not in a tree, and no adopted father has been specified!",
+ //         OOMPH_CURRENT_FUNCTION,
+ //         OOMPH_EXCEPTION_LOCATION);
+ // }
 
  // Check if element has father
- if (father_pt!=0)
+ if (father_pt!=0 || initial_p_order!=0)
   {
-   PRefineableQElement<1,INITIAL_NNODE_1D>* father_el_pt
-    = dynamic_cast<PRefineableQElement<1,INITIAL_NNODE_1D>*>
-       (father_pt->object_pt());
-   if (father_el_pt!=0)
+   if(father_pt!=0)
     {
-     unsigned father_p_order = father_el_pt->p_order();
-     // Set p-order to that of father
-     P_order = father_p_order;
+     PRefineableQElement<1,INITIAL_NNODE_1D>* father_el_pt
+      = dynamic_cast<PRefineableQElement<1,INITIAL_NNODE_1D>*>
+      (father_pt->object_pt());
+     if (father_el_pt!=0)
+      {
+       unsigned father_p_order = father_el_pt->p_order();
+       // Set p-order to that of father
+       P_order = father_p_order;
+      }
+    }
+   else
+    {
+     P_order = initial_p_order;
     }
    
    // Now sort out the element...
@@ -337,10 +344,10 @@ void PRefineableQElement<1,INITIAL_NNODE_1D>::p_refine(
  else
   {
    //Flag to keep track of check
-   bool clone_is_ok=true;
+   bool clone_is_ok = true;
 
    //Does the clone have the correct p-order?
-   clone_is_ok = (clone_el_pt->p_order() == this->p_order());
+   clone_is_ok = clone_is_ok && (clone_el_pt->p_order() == this->p_order());
 
    if(!clone_is_ok)
     {
@@ -355,7 +362,7 @@ void PRefineableQElement<1,INITIAL_NNODE_1D>::p_refine(
     }
 
    //Does the clone have the same number of nodes as me?
-   clone_is_ok = (clone_el_pt->nnode() == this->nnode());
+   clone_is_ok = clone_is_ok && (clone_el_pt->nnode() == this->nnode());
 
    if(!clone_is_ok)
     {
@@ -372,7 +379,7 @@ void PRefineableQElement<1,INITIAL_NNODE_1D>::p_refine(
    //Does the clone have the same nodes as me?
    for(unsigned n=0; n<this->nnode(); n++)
     {
-     clone_is_ok = (clone_el_pt->node_pt(n) == this->node_pt(n));
+     clone_is_ok = clone_is_ok && (clone_el_pt->node_pt(n) == this->node_pt(n));
     }
 
    if(!clone_is_ok)
@@ -574,8 +581,11 @@ void PRefineableQElement<1,INITIAL_NNODE_1D>::p_refine(
         }
       } // End of loop over history values
      
-     // Add new node to mesh
-     mesh_pt->add_node_pt(created_node_pt);
+     // Add new node to mesh (if requested)
+     if(mesh_pt!=0)
+      {
+       mesh_pt->add_node_pt(created_node_pt);
+      }
  
      AlgebraicElementBase* alg_el_pt=
       dynamic_cast<AlgebraicElementBase*>(this);		
@@ -620,34 +630,6 @@ void PRefineableQElement<1,INITIAL_NNODE_1D>::p_refine(
    
   } // End of loop over all nodes in element
 
- 
- // Loop over all nodes in element again, to re-set the positions
- //BENFLAG: This must be done using the new element's macro-element
- //         representation, rather than the old version which may be
- //         of a different p-order!
- for(unsigned n=0;n<P_order;n++)
-  {
-   //Get the fractional position of the node in the direction of s[0]
-   s_fraction[0] = this->local_one_d_fraction_of_node(n,0);
-   // Local coordinate
-   s[0] = s_left[0] + (s_right[0]-s_left[0])*s_fraction[0];
-   
-   // Loop over # of history values
-   for (unsigned t=0;t<ntstorage;t++)
-    {
-     // Get position from father element -- this uses the macro
-     // element representation if appropriate. If the node
-     // turns out to be a hanging node later on, then
-     // its position gets adjusted in line with its
-     // hanging node interpolation.
-     Vector<double> x_prev(1);
-     this->get_x(t,s,x_prev);
-     
-       // Set previous positions of the new node
-     this->node_pt(n)->x(t,0) = x_prev[0];
-    }
-  }
-
 
  // If the element is a MacroElementNodeUpdateElement, set
  // the update parameters for the current element's nodes --
@@ -690,6 +672,34 @@ void PRefineableQElement<1,INITIAL_NNODE_1D>::p_refine(
    // when a node tries to update itself via an element that no
    // longer exists...
    m_el_pt->set_node_update_info(geom_object_pt);
+  }
+
+ 
+ // Loop over all nodes in element again, to re-set the positions
+ // This must be done using the new element's macro-element
+ // representation, rather than the old version which may be
+ // of a different p-order!
+ for(unsigned n=0;n<P_order;n++)
+  {
+   //Get the fractional position of the node in the direction of s[0]
+   s_fraction[0] = this->local_one_d_fraction_of_node(n,0);
+   // Local coordinate
+   s[0] = s_left[0] + (s_right[0]-s_left[0])*s_fraction[0];
+   
+   // Loop over # of history values
+   for (unsigned t=0;t<ntstorage;t++)
+    {
+     // Get position from father element -- this uses the macro
+     // element representation if appropriate. If the node
+     // turns out to be a hanging node later on, then
+     // its position gets adjusted in line with its
+     // hanging node interpolation.
+     Vector<double> x_prev(1);
+     this->get_x(t,s,x_prev);
+     
+     // Set previous positions of the new node
+     this->node_pt(n)->x(t,0) = x_prev[0];
+    }
   }
  
  // Not necessary to delete the old nodes since all original nodes are in the
@@ -1148,9 +1158,9 @@ rebuild_from_sons(Mesh* &mesh_pt)
     } // End of if this node has not been built
   } // End of loop over nodes in element
 
- //BENFLAG: This is done on all nodes in the element after reconstruction
- //         rather than as the nodes are built
  // Check if the element is an algebraic element
+ // This is done on all nodes in the element after reconstruction
+ // rather than as the nodes are built
  AlgebraicElementBase* alg_el_pt =
   dynamic_cast<AlgebraicElementBase*>(this);
          
@@ -1392,7 +1402,7 @@ node_created_by_neighbour(const Vector<double> &s_fraction, bool &is_periodic)
    if(neigh_pt!=0)
     {
      // Have any of its vertex nodes been created yet?
-     // (BENFLAG: Must look in incomplete neighbours because after the
+     // (Must look in incomplete neighbours because after the
      // pre-build they may contain pointers to the required nodes. e.g.
      // h-refinement of neighbouring linear and quadratic elements)
      bool a_vertex_node_is_built = false;
@@ -1602,10 +1612,10 @@ node_created_by_son_of_neighbour(const Vector<double> &s_fraction,
 //==================================================================
 template<unsigned INITIAL_NNODE_1D>
 void PRefineableQElement<2,INITIAL_NNODE_1D>::
-initial_setup(Tree* const &adopted_father_pt)
+initial_setup(Tree* const &adopted_father_pt, const unsigned &initial_p_order)
 {
  //Storage for pointer to my father (in quadtree impersonation)
- QuadTree* father_pt;
+ QuadTree* father_pt = 0;
  
  // Check if an adopted father has been specified
  if (adopted_father_pt!=0)
@@ -1619,25 +1629,32 @@ initial_setup(Tree* const &adopted_father_pt)
    //Get pointer to my father (in quadtree impersonation)
    father_pt = dynamic_cast<QuadTree*>(quadtree_pt()->father_pt());
   }
- else
-  {
-   throw OomphLibError(
-          "Element not in a tree, and no adopted father has been specified!",
-          OOMPH_CURRENT_FUNCTION,
-          OOMPH_EXCEPTION_LOCATION);
-  }
+ //else
+ // {
+ //  throw OomphLibError(
+ //         "Element not in a tree, and no adopted father has been specified!",
+ //         OOMPH_CURRENT_FUNCTION,
+ //         OOMPH_EXCEPTION_LOCATION);
+ // }
 
  // Check if we found a father
- if (father_pt!=0)
+ if (father_pt!=0 || initial_p_order!=0)
   {
-   PRefineableQElement<2,INITIAL_NNODE_1D>* father_el_pt
-    = dynamic_cast<PRefineableQElement<2,INITIAL_NNODE_1D>*>
-       (father_pt->object_pt());
-   if (father_el_pt!=0)
+   if(father_pt!=0)
     {
-     unsigned father_p_order = father_el_pt->p_order();
-     // Set p-order to that of father
-     P_order = father_p_order;
+     PRefineableQElement<2,INITIAL_NNODE_1D>* father_el_pt
+      = dynamic_cast<PRefineableQElement<2,INITIAL_NNODE_1D>*>
+      (father_pt->object_pt());
+     if (father_el_pt!=0)
+      {
+       unsigned father_p_order = father_el_pt->p_order();
+       // Set p-order to that of father
+       P_order = father_p_order;
+      }
+    }
+   else
+    {
+     P_order = initial_p_order;
     }
    
    // Now sort out the element...
@@ -1769,22 +1786,22 @@ void PRefineableQElement<2,INITIAL_NNODE_1D>::pre_build(
      break;
     }
    
-   //// Pass macro element pointer on to sons and
-   //// set coordinates in macro element
-   //// hierher why can I see this?
-   //if(father_el_pt->macro_elem_pt()!=0)
-   // {
-   //  set_macro_elem_pt(father_el_pt->macro_elem_pt());
-   //  for(unsigned i=0;i<2;i++)
-   //   {
-   //    s_macro_ll(i)=      father_el_pt->s_macro_ll(i)+
-   //     0.5*(s_lo[i]+1.0)*(father_el_pt->s_macro_ur(i)-
-   //                        father_el_pt->s_macro_ll(i));
-   //    s_macro_ur(i)=      father_el_pt->s_macro_ll(i)+
-   //     0.5*(s_hi[i]+1.0)*(father_el_pt->s_macro_ur(i)-
-   //                        father_el_pt->s_macro_ll(i));
-   //   }
-   // }
+   // Pass macro element pointer on to sons and
+   // set coordinates in macro element
+   // hierher why can I see this?
+   if(father_el_pt->macro_elem_pt()!=0)
+    {
+     set_macro_elem_pt(father_el_pt->macro_elem_pt());
+     for(unsigned i=0;i<2;i++)
+      {
+       s_macro_ll(i)=      father_el_pt->s_macro_ll(i)+
+        0.5*(s_lo[i]+1.0)*(father_el_pt->s_macro_ur(i)-
+                           father_el_pt->s_macro_ll(i));
+       s_macro_ur(i)=      father_el_pt->s_macro_ll(i)+
+        0.5*(s_hi[i]+1.0)*(father_el_pt->s_macro_ur(i)-
+                           father_el_pt->s_macro_ll(i));
+      }
+    }
    
    
    // If the father element hasn't been generated yet, we're stuck...
@@ -1883,6 +1900,29 @@ void PRefineableQElement<2,INITIAL_NNODE_1D>::pre_build(
     } // Sanity check: Father element has been generated
 	    
   } // End of nodes not built
+ else
+  {
+   // If this is element updates by macro element node update then we need
+   // to set the correct info in the nodes here since this won't get done
+   // later in build() because we already have all our nodes created.
+   MacroElementNodeUpdateElementBase* m_el_pt=dynamic_cast<
+    MacroElementNodeUpdateElementBase*>(this);
+   if (m_el_pt!=0)
+    {
+     // Get vector of geometric objects
+     Vector<GeomObject*> geom_object_pt = m_el_pt->geom_object_pt();
+     
+     //// Build update info by passing vector of geometric objects:
+     //// This sets the current element to be the update element
+     //// for all of the element's nodes -- this is reversed
+     //// if the element is ever un-refined in the father element's
+     //// rebuild_from_sons() function which overwrites this
+     //// assignment to avoid nasty segmentation faults that occur
+     //// when a node tries to update itself via an element that no
+     //// longer exists...
+     m_el_pt->set_node_update_info(geom_object_pt);
+    }
+  }
 }
 
 //==================================================================
@@ -1899,6 +1939,26 @@ void PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine(
  PRefineableQElement<2,INITIAL_NNODE_1D>* clone_el_pt
   = dynamic_cast<PRefineableQElement<2,INITIAL_NNODE_1D>*>(clone_pt);
 
+ // If it is a MacroElement then we need to copy the geometric data too.
+ MacroElementNodeUpdateElementBase* m_el_pt =
+  dynamic_cast<MacroElementNodeUpdateElementBase*>(this);
+  if(m_el_pt!=0)
+   {
+    MacroElementNodeUpdateElementBase* clone_m_el_pt =
+    dynamic_cast<MacroElementNodeUpdateElementBase*>(clone_pt);
+    
+    // Store local copy of geom object vector, so it can be passed on
+    // to son elements (and their nodes) during refinement
+    unsigned ngeom_object=m_el_pt->ngeom_object();
+    clone_m_el_pt->geom_object_pt().resize(ngeom_object);
+    for (unsigned i=0;i<ngeom_object;i++)
+    {
+     clone_m_el_pt->geom_object_pt()[i]=m_el_pt->geom_object_pt(i);
+    }
+
+    //clone_m_el_pt->set_node_update_info(m_el_pt->geom_object_pt());
+   }
+
  //Check if we can use it
  if(clone_el_pt==0)
   {
@@ -1912,10 +1972,10 @@ void PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine(
  else
   {
    //Flag to keep track of check
-   bool clone_is_ok=true;
+   bool clone_is_ok = true;
 
    //Does the clone have the correct p-order?
-   clone_is_ok = (clone_el_pt->p_order() == this->p_order());
+   clone_is_ok = clone_is_ok && (clone_el_pt->p_order() == this->p_order());
 
    if(!clone_is_ok)
     {
@@ -1930,7 +1990,7 @@ void PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine(
     }
 
    //Does the clone have the same number of nodes as me?
-   clone_is_ok = (clone_el_pt->nnode() == this->nnode());
+   clone_is_ok = clone_is_ok && (clone_el_pt->nnode() == this->nnode());
 
    if(!clone_is_ok)
     {
@@ -1947,7 +2007,7 @@ void PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine(
    //Does the clone have the same nodes as me?
    for(unsigned n=0; n<this->nnode(); n++)
     {
-     clone_is_ok = (clone_el_pt->node_pt(n) == this->node_pt(n));
+     clone_is_ok = clone_is_ok && (clone_el_pt->node_pt(n) == this->node_pt(n));
     }
 
    if(!clone_is_ok)
@@ -1960,6 +2020,38 @@ void PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine(
      throw OomphLibError(err_stream.str(),
                          OOMPH_CURRENT_FUNCTION,
                          OOMPH_EXCEPTION_LOCATION);
+    }
+
+   // Is this a macro element?
+   MacroElementNodeUpdateElementBase* m_el_pt =
+    dynamic_cast<MacroElementNodeUpdateElementBase*>(this);
+   if(m_el_pt!=0)
+    {
+     // Get macro element version of clone
+     MacroElementNodeUpdateElementBase* clone_m_el_pt =
+      dynamic_cast<MacroElementNodeUpdateElementBase*>(clone_el_pt);
+
+     //Does the clone have the same geometric objects?
+     Vector<GeomObject*> clone_geom_object_pt(clone_m_el_pt->geom_object_pt());
+     Vector<GeomObject*> geom_object_pt(m_el_pt->geom_object_pt());
+     
+     clone_is_ok = clone_is_ok && (geom_object_pt.size() == clone_geom_object_pt.size());
+     for(unsigned n=0; n<std::min(geom_object_pt.size(),clone_geom_object_pt.size()); n++)
+      {
+       clone_is_ok = clone_is_ok && (clone_geom_object_pt[n] == geom_object_pt[n]);
+      }
+
+     if(!clone_is_ok)
+      {
+       std::ostringstream err_stream;
+       err_stream << "The clone element has different geometric objects"
+                  << std::endl
+                  << "from mine, but it is supposed to be a copy!" << std::endl;
+     
+       throw OomphLibError(err_stream.str(),
+                           "PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine()",
+                           OOMPH_EXCEPTION_LOCATION);
+      }
     }
 
    //If we get to here then the clone has all the information we require
@@ -2196,7 +2288,10 @@ void PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine(
                created_node_pt->x(t,i) = x_prev[i];
               }
             }
-           
+
+           // Check if we need to add nodes to the mesh
+           if(mesh_pt!=0)
+            {
            // Next, we Update the boundary lookup schemes
            //Loop over the boundaries stored in the set
            for(std::set<unsigned>::iterator it = boundaries.begin();
@@ -2221,7 +2316,8 @@ void PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine(
             }
            
            //Make sure that we add the node to the mesh
-           mesh_pt->add_node_pt(created_node_pt);        
+           mesh_pt->add_node_pt(created_node_pt);
+            }
           } //End of periodic case
          //Otherwise the node is not periodic, so just set the 
          //pointer to the neighbours node
@@ -2327,6 +2423,9 @@ void PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine(
                 }
               }
              
+             // Check if we need to add nodes to the mesh
+             if(mesh_pt!=0)
+              {
              // Next, we Update the boundary lookup schemes
              //Loop over the boundaries stored in the set
              for(std::set<unsigned>::iterator it = boundaries.begin();
@@ -2352,6 +2451,7 @@ void PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine(
              
              //Make sure that we add the node to the mesh
              mesh_pt->add_node_pt(created_node_pt);        
+              }
             } //End of periodic case
            //Otherwise the node is not periodic, so just set the 
            //pointer to the neighbours node
@@ -2462,26 +2562,30 @@ void PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine(
 
              
 
-         // Next, we Update the boundary lookup schemes
-         //Loop over the boundaries stored in the set
-         for(std::set<unsigned>::iterator it = boundaries.begin();
-             it != boundaries.end(); ++it)
+         // Check if we need to add nodes to the mesh
+         if(mesh_pt!=0)
           {
-           //Add the node to the boundary
-           mesh_pt->add_boundary_node(*it,created_node_pt);
-               
-           //If we have set an intrinsic coordinate on this
-           //mesh boundary then it must also be interpolated on
-           //the new node
-           //Now interpolate the intrinsic boundary coordinate
-           if(mesh_pt->boundary_coordinate_exists(*it)==true)
+           // Next, we Update the boundary lookup schemes
+           //Loop over the boundaries stored in the set
+           for(std::set<unsigned>::iterator it = boundaries.begin();
+               it != boundaries.end(); ++it)
             {
-             Vector<double> zeta(1);
-             clone_el_pt->interpolated_zeta_on_edge(*it,
-                                                    my_bound,
-                                                    s,zeta);
+             //Add the node to the boundary
+             mesh_pt->add_boundary_node(*it,created_node_pt);
+               
+             //If we have set an intrinsic coordinate on this
+             //mesh boundary then it must also be interpolated on
+             //the new node
+             //Now interpolate the intrinsic boundary coordinate
+             if(mesh_pt->boundary_coordinate_exists(*it)==true)
+              {
+               Vector<double> zeta(1);
+               clone_el_pt->interpolated_zeta_on_edge(*it,
+                                                      my_bound,
+                                                      s,zeta);
 
-             created_node_pt->set_coordinates_on_boundary(*it,zeta);
+               created_node_pt->set_coordinates_on_boundary(*it,zeta);
+              }
             }
           }
         }
@@ -2538,8 +2642,11 @@ void PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine(
           }
         }
 
-       // Add new node to mesh
-       mesh_pt->add_node_pt(created_node_pt);
+       // Add new node to mesh (if requested)
+       if(mesh_pt!=0)
+        {
+         mesh_pt->add_node_pt(created_node_pt);
+        }
  
        AlgebraicElementBase* alg_el_pt=
         dynamic_cast<AlgebraicElementBase*>(this);		
@@ -2586,48 +2693,6 @@ void PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine(
    
   } // End of horizontal loop over nodes in element
 
- 
- // Loop over all nodes in element again, to re-set the positions
- //BENFLAG: This must be done using the new element's macro-element
- //         representation, rather than the old version which may be
- //         of a different p-order!
- for(unsigned i0=0;i0<P_order;i0++)
-  {
-   //Get the fractional position of the node in the direction of s[0]
-   s_fraction[0] = this->local_one_d_fraction_of_node(i0,0);
-   // Local coordinate
-   s[0] = s_lo[0] + (s_hi[0]-s_lo[0])*s_fraction[0];
-   
-   for(unsigned i1=0;i1<P_order;i1++)
-    {
-     //Get the fractional position of the node in the direction of s[1]
-     s_fraction[1] = this->local_one_d_fraction_of_node(i1,1);
-     // Local coordinate
-     s[1] = s_lo[1] + (s_hi[1]-s_lo[1])*s_fraction[1];
-     
-     // Local node number
-     jnod= i0 + P_order*i1;
-     
-     // Loop over # of history values
-     for (unsigned t=0;t<ntstorage;t++)
-      {
-       // Get position from father element -- this uses the macro
-       // element representation if appropriate. If the node
-       // turns out to be a hanging node later on, then
-       // its position gets adjusted in line with its
-       // hanging node interpolation.
-       Vector<double> x_prev(2);
-       this->get_x(t,s,x_prev);
-       
-       // Set previous positions of the new node
-       for(unsigned i=0;i<2;i++)
-        {
-         this->node_pt(jnod)->x(t,i) = x_prev[i];
-        }
-      }
-    }
-  }
-
 
  // If the element is a MacroElementNodeUpdateElement, set
  // the update parameters for the current element's nodes --
@@ -2670,6 +2735,88 @@ void PRefineableQElement<2,INITIAL_NNODE_1D>::p_refine(
    // when a node tries to update itself via an element that no
    // longer exists...
    m_el_pt->set_node_update_info(geom_object_pt);
+
+   //// Now loop over nodes in element
+   //unsigned n_node = this->nnode();
+   //for (unsigned j=0;j<n_node;j++)
+   // {
+   //  // Get local coordinate in element (Vector sets its own size)
+   //  Vector<double> s_in_node_update_element;
+   //  this->local_coordinate_of_node(j,s_in_node_update_element);
+   //  
+   //  // Pass the lot to the node
+   //  static_cast<MacroElementNodeUpdateNode*>(this->node_pt(j))->
+   //   set_node_update_info(this,s_in_node_update_element,m_el_pt->geom_object_pt());
+   // }
+
+   ////BENFLAG:
+   //std::cout << "Checking that all the nodes have this as their update element..." << std::endl;
+   ////std::cout << "this = " << this << std::endl;
+   //for(unsigned j=0; j<this->nnode(); j++)
+   // {
+   //  //std::cout << this->node_pt(j) << ":   [" << this->node_pt(j)->x(0) << "," << this->node_pt(j)->x(1) << "]   update element: " << dynamic_cast<MacroElementNodeUpdateNode*>(this->node_pt(j))->node_update_element_pt() << std::endl;
+   //  MacroElementNodeUpdateNode* mac_nod_pt = dynamic_cast<MacroElementNodeUpdateNode*>(this->node_pt(j));
+   //  if(mac_nod_pt->node_update_element_pt()!=this)
+   //   {
+   //    std::cout << "Something's not right! Update element is wrong..." << std::endl;
+   //   }
+   //  FiniteElement* up_el_pt = dynamic_cast<FiniteElement*>(mac_nod_pt->node_update_element_pt());
+   //  bool not_good = true;
+   //  for(unsigned l=0; l<up_el_pt->nnode(); l++)
+   //   {
+   //    if(up_el_pt->node_pt(l)==mac_nod_pt)
+   //     {
+   //      not_good = false;
+   //      break;
+   //     }
+   //   }
+   //  if(not_good==true)
+   //   {
+   //    std::cout << "Macro node doesn't belong to its update element!" << std::endl;
+   //   }
+   // }
+
+ 
+ // Loop over all nodes in element again, to re-set the positions
+ // This must be done using the new element's macro-element
+ // representation, rather than the old version which may be
+ // of a different p-order!
+ for(unsigned i0=0;i0<P_order;i0++)
+  {
+   //Get the fractional position of the node in the direction of s[0]
+   s_fraction[0] = this->local_one_d_fraction_of_node(i0,0);
+   // Local coordinate
+   s[0] = s_lo[0] + (s_hi[0]-s_lo[0])*s_fraction[0];
+   
+   for(unsigned i1=0;i1<P_order;i1++)
+    {
+     //Get the fractional position of the node in the direction of s[1]
+     s_fraction[1] = this->local_one_d_fraction_of_node(i1,1);
+     // Local coordinate
+     s[1] = s_lo[1] + (s_hi[1]-s_lo[1])*s_fraction[1];
+     
+     // Local node number
+     jnod= i0 + P_order*i1;
+     
+     // Loop over # of history values
+     for (unsigned t=0;t<ntstorage;t++)
+      {
+       // Get position from father element -- this uses the macro
+       // element representation if appropriate. If the node
+       // turns out to be a hanging node later on, then
+       // its position gets adjusted in line with its
+       // hanging node interpolation.
+       Vector<double> x_prev(2);
+       this->get_x(t,s,x_prev);
+       
+       // Set previous positions of the new node
+       for(unsigned i=0;i<2;i++)
+        {
+         this->node_pt(jnod)->x(t,i) = x_prev[i];
+        }
+      }
+    }
+  }
   }
  
  // Not necessary to delete the old nodes since all original nodes are in the
@@ -3433,7 +3580,78 @@ rebuild_from_sons(Mesh* &mesh_pt)
        
       } //End of the case when we build the node ourselves
     }
+  } // End of loop over all nodes in element
+
+ 
+ // If the element is a MacroElementNodeUpdateElement, set the update
+ // parameters for the current element's nodes. These need to be reset
+ // (as in MacroElementNodeUpdateElement<ELEMENT>::rebuild_from_sons())
+ // because the nodes in this element have changed
+ MacroElementNodeUpdateElementBase* m_el_pt=dynamic_cast<
+  MacroElementNodeUpdateElementBase*>(this);
+ if(m_el_pt!=0)
+  {
+   // Loop over the nodes
+   for (unsigned j=0;j<this->nnode();j++)
+    {
+     // Get local coordinate in element (Vector sets its own size)
+     Vector<double> s_in_node_update_element;
+     this->local_coordinate_of_node(j,s_in_node_update_element);
+   
+     // Get vector of geometric objects
+     Vector<GeomObject*> geom_object_pt(m_el_pt->geom_object_pt());
+   
+     // Pass the lot to the node
+     static_cast<MacroElementNodeUpdateNode*>(this->node_pt(j))->
+      set_node_update_info(this,s_in_node_update_element,geom_object_pt);
+    }
   }
+ 
+ //MacroElementNodeUpdateElementBase* m_el_pt=dynamic_cast<
+ // MacroElementNodeUpdateElementBase*>(this);
+ //if(m_el_pt!=0)
+ // {
+ // Loop over all nodes in element again, to re-set the positions
+ // This must be done using the new element's macro-element
+ // representation, rather than the old version which may be
+ // of a different p-order!
+ for(unsigned i0=0;i0<n_p;i0++)
+  {
+   //Get the fractional position of the node
+   s_fraction[0] = this->local_one_d_fraction_of_node(i0,0);
+   //Local coordinate
+   s[0] = -1.0 + 2.0*s_fraction[0];
+
+   for(unsigned i1=0;i1<n_p;i1++)
+    {
+     //Get the fractional position of the node in the direction of s[1]
+     s_fraction[1] = this->local_one_d_fraction_of_node(i1,1);
+     // Local coordinate in father element
+     s[1] = -1.0 + 2.0*s_fraction[1];
+ 
+     //Set the local node number
+     jnod = i0 + n_p*i1;
+   
+     // Loop over # of history values
+     for (unsigned t=0;t<ntstorage;t++)
+      {
+       // Get position from father element -- this uses the macro
+       // element representation if appropriate. If the node
+       // turns out to be a hanging node later on, then
+       // its position gets adjusted in line with its
+       // hanging node interpolation.
+       Vector<double> x_prev(2);
+       this->get_x(t,s,x_prev);
+     
+       // Set previous positions of the new node
+       for(unsigned i=0;i<2;i++)
+        {
+         this->node_pt(jnod)->x(t,i) = x_prev[i];
+        }
+      }
+    }
+  }
+ // }
 
 }
 
@@ -3448,14 +3666,14 @@ template<unsigned INITIAL_NNODE_1D>
 void PRefineableQElement<2,INITIAL_NNODE_1D>::
 check_integrity(double& max_error)
 {
- // BENFLAG: Overloaded to *not* check for continuity in value of interpolated
+ // Overloaded to *not* check for continuity in value of interpolated
  // variables. This is necessary because mortaring does not ensure continuity
  // across element boundaries. It therefore makes no sense to test for this.
        
  //Dummy set max_error to 0
  max_error = 0.0;
 
- // BENFLAG: With macro-elements, (strong) continuity in position is nolonger
+ // With macro-elements, (strong) continuity in position is nolonger
  // guaranteed either, so we don't check for this either. In fact, we do
  // nothing at all.
  if(this->macro_elem_pt()!=0)
@@ -3463,8 +3681,6 @@ check_integrity(double& max_error)
    //We have a macro element, so do nothing!
    return;
   }
-
- //BENFLAG: None of this gets done...
 
  using namespace QuadTreeNames;
 
@@ -3512,18 +3728,18 @@ check_integrity(double& max_error)
         this->tree_pt()->root_pt()->is_neighbour_periodic(edges[edge_counter]);
       }
 
-     //BENFLAG: Also need to exclude edges which may have hanging nodes
-     //         because mortaring does not guarantee (strong) continuity
-     //         in position or in value at nonconforming element boundaries
+     // We also need to exclude edges which may have hanging nodes
+     // because mortaring does not guarantee (strong) continuity
+     // in position or in value at nonconforming element boundaries
      bool exclude_this_edge = false;
      if(diff_level != 0)
       {
-       // h-type nonconformity (master)
+       // h-type nonconformity (slave)
        exclude_this_edge = true;
       }
      else if(neigh_pt->nsons() != 0)
       {
-       // h-type nonconformity (slave)
+       // h-type nonconformity (master)
        exclude_this_edge = true;
       }
      else
@@ -3538,7 +3754,7 @@ check_integrity(double& max_error)
         }
       }
 
-     // BENFLAG: With macro-elements, (strong) continuity in position is nolonger
+     // With macro-elements, (strong) continuity in position is nolonger
      // guaranteed either, so we don't check for this either. In fact, we do
      // nothing at all.
      if(dynamic_cast<FiniteElement*>
@@ -3707,35 +3923,33 @@ check_integrity(double& max_error)
 /// The algorithm works as follows:
 ///  - First the element determines if its edge my_edge is on the
 ///    master or slave side of the non-conformity. At h-type non-conformities
-///    short edges must be masters, and at p-type nonconformities the edge with
-///    lower p-order is the master.
+///    we choose long edges to be masters, and at p-type nonconformities the
+///    edge with lower p-order is the master.
 ///  - Mortaring is performed by the slave side.
-///  - The slave element constructs a list of all its neighbouring element
-///    which are leaves of the tree. These elements' nodes are the masters of
-///    its slave nodes.
-///  - The slave element then constructs a list of all master, slave and shared
-///    nodes.
+///  - If a vertex node of the mortar is shared between master and slave
+///    element then the vertex matching condition is enforced automatically.
+///    Otherwise it must be imposed by constraining its value to that at on
+///    the master side.
 ///  - The integral matching condition is discretised and the mortar test
 ///    functions \f$ \psi \f$ are chosen to be derivatives of Legendre
 ///    polynomials of degree p-1.
 ///  - The mortar mass matrix M is constructed. Its entries are the
 ///    mortar test functions evaluated at the slave nodal positions, so it is
 ///    diagonal.
-///  - Local projection matrices are constructed for each master element by
-///    applying the discretised integral matching condition along its non-
-///    conforming edge using the appropriate quadrature order.
-///  - These are then assembled by collecting together the unknowns
-///    corresponding to shared nodes and applying the vertex matching
-///    condition, giving the global projection matrix P.
+///  - The local projection matrix is constructed for the master element by
+///    applying the discretised integral matching condition along the mortar
+///    using the appropriate quadrature order.
+///  - The global projection matrix is then assembled by subtracting
+///    contributions from the mortar vertex nodes.
 ///  - The mortar system \f$ M\xi^s = P\hat{\xi^m} \f$ is constructed,
 ///    where \f$ \xi^m \f$ and \f$ \xi^s \f$ are the nodal values at the master
 ///    and slave nodes respectively.
 ///  - The conformity matrix \f$ C = M^{-1}P \f$ is computed. This is
 ///    straightforward since the mass matrix is diagonal.
 ///  - Finally, the master nodes and weights for each slave node are read from
-///    the conformity matrix and stored in the slave's hanging scheme.
+///    the conformity matrix and stored in the slaves' hanging schemes.
 ///
-/// The positions of the slave nodes are also set to be consistent with their
+/// The positions of the slave nodes are set to be consistent with their
 /// hanging schemes.
 //=================================================================
 template<unsigned INITIAL_NNODE_1D>
@@ -3743,8 +3957,6 @@ void PRefineableQElement<2,INITIAL_NNODE_1D>::
 quad_hang_helper(const int &value_id, const int &my_edge,
                  std::ofstream& output_hangfile)
 {
- //RefineableQElement<2>::quad_hang_helper(value_id, my_edge, output_hangfile);
- //return;
  using namespace QuadTreeNames;
  
  Vector<unsigned> translate_s(2);
@@ -3771,18 +3983,25 @@ quad_hang_helper(const int &value_id, const int &my_edge,
  // Neighbour exists and all nodes have been created
  if(neigh_pt!=0)
   {
-   // Different sized element?
+   // Check if neighbour is bigger than me
    if(diff_level!=0)
     {
-     // Master at h-type non-conformity
-     //h_type_master = true;
+     // Slave at h-type non-conformity
+     h_type_slave = true;
     }
+   // Check if neighbour is the same size as me
    else if(neigh_pt->nsons()==0)
     {
-     unsigned my_p_order = dynamic_cast<PRefineableQElement<2,INITIAL_NNODE_1D>*>
-      (this)->p_order();
-     unsigned neigh_p_order = dynamic_cast<PRefineableQElement<2,INITIAL_NNODE_1D>*>
-      (neigh_pt->object_pt())->p_order();
+     // Neighbour is same size as me
+     // Find p-orders of each element
+     unsigned my_p_order =
+      dynamic_cast<PRefineableQElement<2,INITIAL_NNODE_1D>*>
+       (this)->p_order();
+     unsigned neigh_p_order =
+      dynamic_cast<PRefineableQElement<2,INITIAL_NNODE_1D>*>
+       (neigh_pt->object_pt())->p_order();
+
+     // Check for p-type non-conformity
      if(neigh_p_order==my_p_order)
       {
        // At a conforming interface
@@ -3798,19 +4017,20 @@ quad_hang_helper(const int &value_id, const int &my_edge,
        //p_type_master = true;
       }
     }
+   // Neighbour must be smaller than me
    else
     {
-     // Slave at h-type non-conformity
-     h_type_slave = true;
+     // Master at h-type non-conformity
+     //h_type_master = true;
     }
   }
  else
   {
    // Edge is on a boundary
   }
-   
- // Now do the hanging nodes
- //-------------------------
+
+ // Now do the mortaring
+ //---------------------
  if (h_type_slave || p_type_slave)
   {
    //Compute the active coordinate index along the this side of mortar
@@ -3825,156 +4045,73 @@ quad_hang_helper(const int &value_id, const int &my_edge,
             OOMPH_EXCEPTION_LOCATION);
     }
    
-   //Set up storage for neighbouring leaf-finding
-   Vector<PRefineableQElement<2,INITIAL_NNODE_1D>*> neigh_obj_pt;
-   Vector<const QuadTree*> quadtree_neighbouring_node_pt;
-   //Vector<Vector<unsigned> > quadtree_neighbouring_translate_s;
-   Vector<Vector<double> > quadtree_neighbouring_s_lo,
-                           quadtree_neighbouring_s_hi;
-   Vector<int> quadtree_neighbouring_diff_level;
-   
-   // Get pointer to neighbour objects
-   neigh_pt->stick_neighbouring_leaves_into_vector(
-              quadtree_neighbouring_node_pt,
-              quadtree_neighbouring_s_lo,
-              quadtree_neighbouring_s_hi,
-              quadtree_neighbouring_diff_level,
-              this->quadtree_pt(),
-              neigh_edge);
+   // Get pointer to neighbouring master element (in p-refineable form)
+   PRefineableQElement<2,INITIAL_NNODE_1D>* neigh_obj_pt;
+   neigh_obj_pt = dynamic_cast<PRefineableQElement<2,INITIAL_NNODE_1D>*>
+                   (neigh_pt->object_pt());
 
-   //Loop over all the neighbouring tree nodes
-   for (unsigned e=0; e<quadtree_neighbouring_node_pt.size(); e++)
-    {
-     //Add object pointer to storage
-     neigh_obj_pt.push_back(
-         dynamic_cast<PRefineableQElement<2,INITIAL_NNODE_1D>*>
-                (quadtree_neighbouring_node_pt[e]->object_pt()));
-    }
-   
-   // Create vector of master, slave and shared nodes
-   //------------------------------------------------
-   Vector<Node*> master_node_pt, slave_node_pt, shared_node_pt,
-                 slave_element_node_pt;
-   std::set<Node*> master_node_pt_set;
-   Vector<unsigned> slave_pos, shared_pos;
-   
-   // Loop over neighbouring master elements to find master nodes
-   for(unsigned e=0; e<neigh_obj_pt.size(); e++)
-    {
-     //Test for the periodic node case
-     //Are we crossing a periodic boundary
-     bool is_periodic = false;
-     if(in_neighbouring_tree)
-      {is_periodic = this->tree_pt()->root_pt()->is_neighbour_periodic(my_edge);}
+   // Create vector of master and slave nodes
+   //----------------------------------------
+   Vector<Node*> master_node_pt, slave_node_pt;
+   Vector<unsigned> master_node_number, slave_node_number;
+   Vector<Vector<double> > slave_node_s_fraction;
      
-     //If it is periodic we actually need to get the node in
-     //the neighbour of the neighbour (which will be a parent of
-     //the present element) so that the "fixed" coordinate is
-     //correctly calculated.
-     //The idea is to replace the neigh_pt and associated data
-     //with those of the neighbour of the neighbour
-     if(is_periodic)
-      {
-       throw OomphLibError(
-              "Cannot do mortaring with periodic hanging nodes yet!",
-              OOMPH_CURRENT_FUNCTION,
-              OOMPH_EXCEPTION_LOCATION);
-      } //End of special treatment for periodic hanging nodes
-     
-     //Number of nodes in one dimension
-     unsigned neigh_n_p = neigh_obj_pt[e]->ninterpolating_node_1d(value_id);
-     
-     //Storage for the nodes along the master edge
-     Node* neighbour_node_pt=0;
-
-     // Loop over nodes along the edge
-     for(unsigned i0=0; i0<neigh_n_p; i0++)
-      {
-       // Find the neighbour's node
-       switch(neigh_edge)
-        {
-        case N:
-         neighbour_node_pt
-          = neigh_obj_pt[e]->interpolating_node_pt(i0 + neigh_n_p*(neigh_n_p-1),value_id);
-         break;
-         
-        case S:
-         neighbour_node_pt
-          = neigh_obj_pt[e]->interpolating_node_pt(i0,value_id);
-         break;
-        
-        case E:
-         neighbour_node_pt
-          = neigh_obj_pt[e]->interpolating_node_pt(neigh_n_p-1 + neigh_n_p*i0,value_id);
-         break;
-         
-        case W:
-         neighbour_node_pt
-          = neigh_obj_pt[e]->interpolating_node_pt(neigh_n_p*i0,value_id);
-         break;
-
-        default:
-         throw OomphLibError("my_edge not N, S, W, E\n",
-                             OOMPH_CURRENT_FUNCTION,
-                             OOMPH_EXCEPTION_LOCATION);
-        }
-       // Add to set
-       // (vertex nodes of master elements will be inserted more than once)
-       if(master_node_pt_set.insert(neighbour_node_pt).second)
-        {
-         // If successfully added to the set, node is a new master node, so
-         // add to end of master node vector
-         // (preserves node order along the interface, rather than sorting
-         // by pointer)
-         master_node_pt.push_back(neighbour_node_pt);
-        }
-      }
-    } //End of loop over neighbours
-   
-   //Storage for the local nodes along my edge
-   Node* local_node_pt=0;
-   
    //Number of nodes in one dimension
-   unsigned my_n_p = this->ninterpolating_node_1d(value_id);
-
-   //Storage for local coordinates of slave nodes
-   Vector<Vector<double> > s_of_local_node;
+   const unsigned my_n_p = this->ninterpolating_node_1d(value_id);
+   const unsigned neigh_n_p = neigh_obj_pt->ninterpolating_node_1d(value_id);
    
-   // Loop over the nodes along my edge
-   for(unsigned i0=0; i0<my_n_p; i0++)
-    {
-     //Storage for the fractional position of the node
-     Vector<double> s_fraction(2);
+   //Test for the periodic node case
+   //Are we crossing a periodic boundary
+   bool is_periodic = false;
+   if(in_neighbouring_tree)
+    {is_periodic = this->tree_pt()->root_pt()->is_neighbour_periodic(my_edge);}
      
-     // Find the local node and its fractional position in this element
-     switch(my_edge)
+   //If it is periodic we actually need to get the node in
+   //the neighbour of the neighbour (which will be a parent of
+   //the present element) so that the "fixed" coordinate is
+   //correctly calculated.
+   //The idea is to replace the neigh_pt and associated data
+   //with those of the neighbour of the neighbour
+   if(is_periodic)
+    {
+     throw OomphLibError(
+            "Cannot do mortaring with periodic hanging nodes yet! (Fix me!)",
+            "PRefineableQElement<2,INITIAL_NNODE_1D>::quad_hang_helper()",
+            OOMPH_EXCEPTION_LOCATION);
+    } //End of special treatment for periodic hanging nodes
+   
+   //Storage for pointers to the nodes and their numbers along the master edge
+   unsigned neighbour_node_number=0;
+   Node* neighbour_node_pt=0;
+
+   // Loop over nodes along the edge
+   for(unsigned i0=0; i0<neigh_n_p; i0++)
+    {
+     // Find the neighbour's node
+     switch(neigh_edge)
       {
       case N:
-       s_fraction[0] = 
-        this->local_one_d_fraction_of_interpolating_node(i0,0,value_id);
-       s_fraction[1] = 1.0;
-       local_node_pt = this->interpolating_node_pt(i0 + my_n_p*(my_n_p-1),value_id);
+       neighbour_node_number = i0 + neigh_n_p*(neigh_n_p-1);
+       neighbour_node_pt
+        = neigh_obj_pt->interpolating_node_pt(neighbour_node_number,value_id);
        break;
          
       case S:
-       s_fraction[0] = 
-        this->local_one_d_fraction_of_interpolating_node(i0,0,value_id);
-       s_fraction[1] = 0.0;
-       local_node_pt = this->interpolating_node_pt(i0,value_id);
+       neighbour_node_number = i0;
+       neighbour_node_pt
+        = neigh_obj_pt->interpolating_node_pt(neighbour_node_number,value_id);
        break;
-      
+        
       case E:
-       s_fraction[0] = 1.0;
-       s_fraction[1] = 
-        this->local_one_d_fraction_of_interpolating_node(i0,1,value_id);
-       local_node_pt = this->interpolating_node_pt(my_n_p-1 + my_n_p*i0,value_id);
+       neighbour_node_number = neigh_n_p-1 + neigh_n_p*i0;
+       neighbour_node_pt
+        = neigh_obj_pt->interpolating_node_pt(neighbour_node_number,value_id);
        break;
          
       case W:
-       s_fraction[0] = 0.0;
-       s_fraction[1] = 
-        this->local_one_d_fraction_of_interpolating_node(i0,1,value_id);
-       local_node_pt = this->interpolating_node_pt(my_n_p*i0,value_id);
+       neighbour_node_number = neigh_n_p*i0;
+       neighbour_node_pt
+        = neigh_obj_pt->interpolating_node_pt(neighbour_node_number,value_id);
        break;
 
       default:
@@ -3982,255 +4119,280 @@ quad_hang_helper(const int &value_id, const int &my_edge,
                            OOMPH_CURRENT_FUNCTION,
                            OOMPH_EXCEPTION_LOCATION);
       }
-     // Add node to vector of slave element nodes
-     slave_element_node_pt.push_back(local_node_pt);
-     
-     // Check if master node
-     bool repeat=false;
-     for(unsigned i=0; i<master_node_pt.size(); i++)
-      {
-       if(local_node_pt==master_node_pt[i])
-        {
-         repeat=true;
-         break;
-        }
-      }
-     
-     // This is a shared node
-     if(repeat==true)
-      {
-       //Add to storage
-       shared_node_pt.push_back(local_node_pt);
-       shared_pos.push_back(i0);
-      }
-     // Otherwise, must be a slave node
-     else
-      {
-       //Add to storage
-       slave_node_pt.push_back(local_node_pt);
-       slave_pos.push_back(i0);
 
-       //Compute this node's local coordinate
-       Vector<double> s_local(2);
-       for(unsigned i=0; i<2; i++)
-        {
-         s_local[i] = -1.0 + s_fraction[i]*2.0;
-        }
-       
-       //Store for use later when we adjust the slave positions
-       s_of_local_node.push_back(s_local);
-       
-      } //End of case where local_node_pt is a slave node
+     // Set node as master node
+     master_node_number.push_back(neighbour_node_number);
+     master_node_pt.push_back(neighbour_node_pt);
     }
+   
+   //Storage for pointers to the local nodes and their numbers along my edge
+   unsigned local_node_number=0;
+   Node* local_node_pt=0;
 
-#ifdef PARANOID
-   // Check that there are at least two shared nodes
-   // (Otherwise we cannot impose the vertex matching condition)
-   if(shared_node_pt.size()<2)
+   // Loop over the nodes along my edge
+   for(unsigned i0=0; i0<my_n_p; i0++)
     {
-     oomph_info << std::endl;
-     if(h_type_slave)
+     //Storage for the fractional position of the node in the element
+     Vector<double> s_fraction(2);
+
+     // Find the local node and the fractional position of the node
+     // which depends on the edge, of course
+     switch(my_edge)
       {
-       oomph_info << "h-type nonconformity:" << std::endl;
-       oomph_info << "    diff_level = " << diff_level << std::endl;
-      }
-     if(p_type_slave)
-      {
-       oomph_info << "p-type nonconformity:" << std::endl;
-       oomph_info << "    master nnode_1d = "
-                  << neigh_pt->object_pt()->nnode_1d()
-                  << std::endl;
-       oomph_info << "     slave nnode_1d = " << this->nnode_1d() << std::endl;
-      }
-     oomph_info << std::endl;
+      case N:
+       s_fraction[0] = 
+        local_one_d_fraction_of_interpolating_node(i0,0,value_id);
+       s_fraction[1] = 1.0;
+       local_node_number = i0 + my_n_p*(my_n_p-1);
+       local_node_pt = this->interpolating_node_pt(local_node_number,value_id);
+       break;
          
-     // Print nodal info
-     for(unsigned n=0; n<master_node_pt.size(); n++)
-      {
-       oomph_info << "master_node_pt["<<n<<"] = " << master_node_pt[n]
-                  << " at (" << master_node_pt[n]->x(0)
-                  << ", " << master_node_pt[n]->x(1) << ")" << std::endl;
+      case S:
+       s_fraction[0] = 
+        local_one_d_fraction_of_interpolating_node(i0,0,value_id);
+       s_fraction[1] = 0.0;
+       local_node_number = i0;
+       local_node_pt = this->interpolating_node_pt(local_node_number,value_id);
+       break;
+      
+      case E:
+       s_fraction[0] = 1.0;
+       s_fraction[1] = 
+        local_one_d_fraction_of_interpolating_node(i0,1,value_id);
+       local_node_number = my_n_p-1 + my_n_p*i0;
+       local_node_pt = this->interpolating_node_pt(local_node_number,value_id);
+       break;
+         
+      case W:
+       s_fraction[0] = 0.0;
+       s_fraction[1] = 
+        local_one_d_fraction_of_interpolating_node(i0,1,value_id);
+       local_node_number = my_n_p*i0;
+       local_node_pt = this->interpolating_node_pt(local_node_number,value_id);
+       break;
+
+      default:
+       throw OomphLibError("my_edge not N, S, W, E\n",
+                           OOMPH_CURRENT_FUNCTION,
+                           OOMPH_EXCEPTION_LOCATION);
       }
-     oomph_info << std::endl;
-     for(unsigned n=0; n<slave_node_pt.size(); n++)
-      {
-       oomph_info << "slave_node_pt["<<n<<"] = " << slave_node_pt[n]
-                  << " at (" << slave_node_pt[n]->x(0)
-                  << ", " << slave_node_pt[n]->x(1)
-                  << ")    slave_pos["<<n<<"] = " << slave_pos[n] << std::endl;
-      }
-     oomph_info << std::endl;
-     for(unsigned n=0; n<shared_node_pt.size(); n++)
-      {
-       oomph_info << "shared_node_pt["<<n<<"] = " << shared_node_pt[n]
-                  << " at (" << shared_node_pt[n]->x(0)
-                  << ", " << shared_node_pt[n]->x(1) << ")" << std::endl;
-      }
+
+     // Add node to vector of slave element nodes
+     slave_node_number.push_back(local_node_number);
+     slave_node_pt.push_back(local_node_pt);
        
-     std::string error_message =
-      "There are not enough shared nodes at the interface.\n";
-     error_message +=
-      "The mortar method requires at least two shared nodes.\n";
-       
-     throw OomphLibError(
-            error_message,
-            OOMPH_CURRENT_FUNCTION,
-            OOMPH_EXCEPTION_LOCATION);
+     // Store node's local fraction
+     slave_node_s_fraction.push_back(s_fraction);
     }
-#endif
      
    // Store the number of slave and master nodes for use later
-   unsigned n_slave_nodes = slave_node_pt.size();
-   unsigned n_master_nodes = master_node_pt.size();
-   unsigned slave_element_nnode_1d = this->nnode_1d();
-   Vector<unsigned> master_element_nnode_1d(neigh_obj_pt.size());
-   for(unsigned e=0; e<neigh_obj_pt.size(); e++)
-    {
-     master_element_nnode_1d[e] = neigh_obj_pt[e]->nnode_1d();
-    }
+   const unsigned n_slave_nodes = slave_node_pt.size();
+   const unsigned n_master_nodes = master_node_pt.size();
+   const unsigned slave_element_nnode_1d = my_n_p;
+   const unsigned master_element_nnode_1d = neigh_n_p;
+
+   // Storage for master shapes
+   Shape master_shapes(neigh_obj_pt->ninterpolating_node(value_id));
      
    // Get master and slave nodal positions
    //-------------------------------------
-   Vector<double> slave_nodal_position, slave_weight(this->nnode_1d());
+   Vector<double> slave_nodal_position;
+   Vector<double> slave_weight(slave_element_nnode_1d);
    Orthpoly::gll_nodes(slave_element_nnode_1d,
                        slave_nodal_position,slave_weight);
-   Vector<Vector<double> > master_nodal_position(neigh_obj_pt.size());
-   Vector<Vector<double> > master_weight(neigh_obj_pt.size());
-   for(unsigned e=0; e<neigh_obj_pt.size(); e++)
+   Vector<double> master_nodal_position;
+   Vector<double> master_weight(master_element_nnode_1d);
+   Orthpoly::gll_nodes(master_element_nnode_1d,
+                       master_nodal_position,master_weight);
+
+   // Apply the vertex matching condition
+   //------------------------------------
+   // Vertiex matching is ensured automatically in cases where there is a node
+   // at each end of the mortar that is shared between the master and slave
+   // elements. Where this is not the case, the vertex matching condition must
+   // be enforced by constraining the value of the unknown at the node on the
+   // slave side to be the same as the value at that location in the master.
+
+   // Store positions of the mortar vertex/non-vertex nodes in the slave element
+   const unsigned n_mortar_vertices = 2;
+   Vector<unsigned> vertex_pos(n_mortar_vertices);
+   vertex_pos[0] = 0;
+   vertex_pos[1] = this->ninterpolating_node_1d(value_id)-1;
+   Vector<unsigned> non_vertex_pos(my_n_p-n_mortar_vertices);
+   for(unsigned i=0; i<my_n_p-n_mortar_vertices; i++)
+    {non_vertex_pos[i] = i+1;}
+
+   // Check if the mortar vertices are shared
+   for (unsigned v=0; v<n_mortar_vertices; v++)
     {
-     master_weight[e].resize(neigh_obj_pt[e]->nnode_1d());
-     Orthpoly::gll_nodes(master_element_nnode_1d[e],
-                         master_nodal_position[e],master_weight[e]);
-    }
-     
-   // Assemble mass matrix for mortar
-   //--------------------------------
-   Vector<double> psi(n_slave_nodes);
-   Shape shapes(this->nnode());
-   Vector<double> diag_M(n_slave_nodes);
-   Vector<Vector<double> > shared_node_M(shared_node_pt.size());
-   for (unsigned i=0; i<shared_node_M.size(); i++)
-    {shared_node_M[i].resize(n_slave_nodes);}
-     
-   for (unsigned i=0; i<n_slave_nodes; i++)
-    {
-     // Use L'Hosptal's rule:
-     psi[i] = pow(-1.0,int(slave_element_nnode_1d-1-(slave_pos[i]-1)-1))
-               *-Orthpoly::ddlegendre(slave_element_nnode_1d-1,
-                             slave_nodal_position[(slave_pos[i]-1)+1]);
-    }
-   for (unsigned i=0; i<n_slave_nodes; i++)
-    {
-     diag_M[i] = psi[i]*slave_weight[(slave_pos[i]-1)+1];
-    }
-     
-   for(unsigned v=0; v<shared_node_M.size(); v++)
-    {
-     for (unsigned i=0; i<n_slave_nodes; i++)
+     // Search master node storage for the node
+     bool node_is_shared=false;
+     for(unsigned i=0; i<master_node_pt.size(); i++)
       {
-       // Check if denominator is zero
-       if (std::fabs(slave_nodal_position[(slave_pos[i]-1)+1]
-                 - slave_nodal_position[shared_pos[v]]) >= 1.0e-8 )
+       if(slave_node_pt[vertex_pos[v]]==master_node_pt[i])
         {
-         // We're ok
-         psi[i] = pow(-1.0,int(slave_element_nnode_1d-1-(slave_pos[i]-1)-1))
-                   * Orthpoly::dlegendre(slave_element_nnode_1d-1,
-                                slave_nodal_position[shared_pos[v]])
-                   / (slave_nodal_position[(slave_pos[i]-1)+1]
-                    - slave_nodal_position[shared_pos[v]]);
-        }
-       // Check if numerator is zero
-       else if (std::fabs(Orthpoly::dlegendre(slave_element_nnode_1d-1,
-                                         slave_nodal_position[shared_pos[v]]))
-                < 1.0e-8)
-        {
-         // We can use l'hopital's rule
-         psi[i] = pow(-1.0,int(slave_element_nnode_1d-1-(slave_pos[i]-1)-1))
-                   *-Orthpoly::ddlegendre(slave_element_nnode_1d-1,
-                                 slave_nodal_position[(slave_pos[i]-1)+1]);
-        }
-       else
-        {
-         // We can't use l'hopital's rule
-         throw
-          OomphLibError(
-           "Cannot use l'Hopital's rule. Dividing by zero is not allowed!",
-           "PRefineableQElement<2,INITIAL_NNODE_1D>::quad_hang_helper()",
-           OOMPH_EXCEPTION_LOCATION);
+         node_is_shared=true;
+         break;
         }
       }
-     for (unsigned i=0; i<shared_node_M[v].size(); i++)
+
+     // If the node is not shared then we must constrain its value by setting
+     // up a hanging scheme
+     if(!node_is_shared)
       {
-       shared_node_M[v][i] = psi[i]*slave_weight[shared_pos[v]];
-      }
-    }
-   
-   // Assemble local projection matrices for mortar
-   //----------------------------------------------
-   Vector<DenseDoubleMatrix*> P;
-   for(unsigned e=0; e<neigh_obj_pt.size(); e++)
-    {
-     // Create and initialise local projection matrix P^e
-     P.push_back(new DenseDoubleMatrix(n_slave_nodes,
-                                       master_element_nnode_1d[e],0.0));
-    }
-     
-   //Storage for local coordinate
-   Vector<double> s(2);
-   
-   // Take local coordinates along bottom edge for shapes
-   // (So that values are stored in the first nnode_1d() entries of shapes)
-   s[1] = -1.0;
-     
-   for(unsigned e=0; e<neigh_obj_pt.size(); e++)
-    {
-     // Resize shapes
-     Shape shapes(neigh_obj_pt[e]->nnode());
+       // Calculate weights. These are just the master shapes evaluated at
+       // this slave node's position
        
-     // Sum contributions from master element shapes (quadrature)
+       // Work out this node's location in the master
+       Vector<double> s_in_neigh(2);
+       for(unsigned i=0;i<2;i++)
+        {
+         s_in_neigh[i] = s_lo_neigh[i] +
+          slave_node_s_fraction[vertex_pos[v]][translate_s[i]]*
+          (s_hi_neigh[i] - s_lo_neigh[i]);
+        }
+
+       // Get master shapes at slave nodal positions
+       neigh_obj_pt->interpolating_basis(s_in_neigh,master_shapes,value_id);
+
+       // Remove any existing hanging node info
+       // (This may be a bit wasteful, but guarantees correctness)
+       slave_node_pt[vertex_pos[v]]->set_nonhanging();
+
+       // Set up hanging scheme for this node
+       HangInfo* explicit_hang_pt = new HangInfo(n_master_nodes);
+       for(unsigned m=0; m<n_master_nodes; m++)
+        {
+         explicit_hang_pt->set_master_node_pt(m,master_node_pt[m],master_shapes[master_node_number[m]]);
+        }
+
+       // Make node hang
+       slave_node_pt[vertex_pos[v]]->set_hanging_pt(explicit_hang_pt,-1);
+      }
+    }
+
+   // Check that there are actually slave nodes for which we still need to
+   // construct a hanging scheme. If not then there is nothing more to do.
+   if(n_slave_nodes-n_mortar_vertices > 0)
+    {
+
+     // Assemble mass matrix for mortar
+     //--------------------------------
+     Vector<double> psi(n_slave_nodes-n_mortar_vertices);
+     Vector<double> diag_M(n_slave_nodes-n_mortar_vertices);
+     Vector<Vector<double> > shared_node_M(n_mortar_vertices);
+     for (unsigned i=0; i<shared_node_M.size(); i++)
+      {shared_node_M[i].resize(n_slave_nodes-n_mortar_vertices);}
+
+     // Fill in part corresponding to slave nodal positions (unknown)
+     for (unsigned i=0; i<n_slave_nodes-n_mortar_vertices; i++)
+      {
+       // Use L'Hosptal's rule:
+       psi[i] = pow(-1.0,int((slave_element_nnode_1d-1)-i-1))
+                 *-Orthpoly::ddlegendre(slave_element_nnode_1d-1,
+                               slave_nodal_position[non_vertex_pos[i]]);
+       // Put in contribution
+       diag_M[i] = psi[i]*slave_weight[non_vertex_pos[i]];
+      }
+
+     // Fill in part corresponding to slave element vertices (known)
+     for(unsigned v=0; v<shared_node_M.size(); v++)
+      {
+       for (unsigned i=0; i<n_slave_nodes-n_mortar_vertices; i++)
+        {
+         // Check if denominator is zero
+         if (std::fabs(slave_nodal_position[non_vertex_pos[i]]
+                   - slave_nodal_position[vertex_pos[v]]) >= 1.0e-8 )
+          {
+           // We're ok
+           psi[i] = pow(-1.0,int((slave_element_nnode_1d-1)-i-1))
+                     * Orthpoly::dlegendre(slave_element_nnode_1d-1,
+                                  slave_nodal_position[vertex_pos[v]])
+                     / (slave_nodal_position[non_vertex_pos[i]]
+                     - slave_nodal_position[vertex_pos[v]]);
+          }
+         // Check if numerator is zero
+         else if (std::fabs(Orthpoly::dlegendre(slave_element_nnode_1d-1,
+                                           slave_nodal_position[vertex_pos[v]]))
+                  < 1.0e-8)
+          {
+           // We can use l'hopital's rule
+           psi[i] = pow(-1.0,int((slave_element_nnode_1d-1)-i-1))
+                     *-Orthpoly::ddlegendre(slave_element_nnode_1d-1,
+                                   slave_nodal_position[non_vertex_pos[i]]);
+          }
+         else
+          {
+           // We can't use l'hopital's rule
+           throw
+            OomphLibError(
+             "Cannot use l'Hopital's rule. Dividing by zero is not allowed!",
+             "PRefineableQElement<2,INITIAL_NNODE_1D>::quad_hang_helper()",
+             OOMPH_EXCEPTION_LOCATION);
+          }
+         // Put in contribution
+         shared_node_M[v][i] = psi[i]*slave_weight[vertex_pos[v]];
+        }
+      }
+
+     // Assemble local projection matrix for mortar
+     //--------------------------------------------
+   
+     // Have only one local projection matrix because there is just one master
+     Vector<Vector<double> > P(n_slave_nodes-n_mortar_vertices);
+     for(unsigned i=0; i<P.size(); i++) {P[i].resize(n_master_nodes,0.0);}
+     
+     //Storage for local coordinate
+     Vector<double> s(2);
+   
+     // Sum contributions from master element shapes (quadrature).
+     // The order of quadrature must be high enough to evaluate a polynomial
+     // of order N_s + N_m - 3 exactly, where N_s = n_slave_nodes, N_m =
+     // n_master_nodes.
      // (Use pointers for the quadrature knots and weights so that
      // data is not unnecessarily copied)
-     unsigned quadrature_order =
-      std::max(slave_element_nnode_1d,master_element_nnode_1d[e]);
+     //unsigned quadrature_order =
+     // std::max(slave_element_nnode_1d,master_element_nnode_1d);
      Vector<double> *quadrature_knot, *quadrature_weight;
-     if (slave_element_nnode_1d > master_element_nnode_1d[e])
+     if (slave_element_nnode_1d >= master_element_nnode_1d)
       {
+       // Use the same quadrature order as the slave element (me)
        quadrature_knot = &slave_nodal_position;
        quadrature_weight = &slave_weight;
       }
      else
       {
-       quadrature_knot = &master_nodal_position[e];
-       quadrature_weight = &master_weight[e];
+       // Use the same quadrature order as the master element (neighbour)
+       quadrature_knot = &master_nodal_position;
+       quadrature_weight = &master_weight;
       }
-     // Quadrature loop
-     for (unsigned q=0; q<quadrature_order; q++)
-      {
-       // Project local master coordinates into the slave element
-       s[0] = pow(2.0,quadtree_neighbouring_diff_level[e])
-               * ((*quadrature_knot)[q]+1.0)
-               + quadtree_neighbouring_s_lo[e][active_coord_index];
        
+     // Quadrature loop
+     for (unsigned q=0; q<(*quadrature_weight).size(); q++)
+      {
+       // Evaluate mortar test functions at the quadrature knots in the slave
+       //s[active_coord_index] = (*quadrature_knot)[q];
+       Vector<double> s_on_mortar(1);
+       s_on_mortar[0] = (*quadrature_knot)[q];
+
        // Get psi
-       for(unsigned k=0; k<n_slave_nodes; k++)
+       for(unsigned k=0; k<n_slave_nodes-n_mortar_vertices; k++)
         {
          // Check if denominator is zero
-         if (std::fabs(slave_nodal_position[(slave_pos[k]-1)+1]-s[0]) >= 1.0e-08)
+         if (std::fabs(slave_nodal_position[non_vertex_pos[k]]-s_on_mortar[0]) >= 1.0e-08)
           {
            // We're ok
-           psi[k] = pow(-1.0,
-                     int(slave_element_nnode_1d-1-(slave_pos[k]-1)-1))
-                      * Orthpoly::dlegendre(slave_element_nnode_1d-1,s[0])
-                      / (slave_nodal_position[(slave_pos[k]-1)+1]-s[0]);
+           psi[k] = pow(-1.0,int((slave_element_nnode_1d-1)-k-1))
+                     * Orthpoly::dlegendre(slave_element_nnode_1d-1,s_on_mortar[0])
+                     / (slave_nodal_position[non_vertex_pos[k]]-s_on_mortar[0]);
           }
          // Check if numerator is zero
-         else if (std::fabs(Orthpoly::dlegendre(slave_element_nnode_1d-1,s[0]))
+         else if (std::fabs(Orthpoly::dlegendre(slave_element_nnode_1d-1,s_on_mortar[0]))
                   < 1.0e-8)
           {
            // We can use l'Hopital's rule
-           psi[k] = pow(-1.0,
-                     int(slave_element_nnode_1d-1-(slave_pos[k]-1)-1))
-                      * -Orthpoly::ddlegendre(slave_element_nnode_1d-1,s[0]);
+           psi[k] = pow(-1.0,int((slave_element_nnode_1d-1)-k-1))
+                     * -Orthpoly::ddlegendre(slave_element_nnode_1d-1,s_on_mortar[0]);
           }
          else
           {
@@ -4242,404 +4404,229 @@ quad_hang_helper(const int &value_id, const int &my_edge,
              OOMPH_EXCEPTION_LOCATION);
           }
         }
-       
-       // Get shapes
-       s[0] = (*quadrature_knot)[q];
-       neigh_obj_pt[e]->shape(s,shapes);
-       
-       for(unsigned i=0; i<n_slave_nodes; i++)
+
+       // Convert coordinate on mortar to local fraction in slave element
+       Vector<double> s_fraction(2);
+       for(unsigned i=0; i<2; i++)
         {
-         for(unsigned j=0; j<master_element_nnode_1d[e]; j++)
+         s_fraction[i] = (i==active_coord_index)
+                          ? 0.5*(s_on_mortar[0]+1.0)
+                          : slave_node_s_fraction[vertex_pos[0]][i];
+        }
+
+       // Project active coordinate into master element
+       Vector<double> s_in_neigh(2);
+       for(unsigned i=0;i<2;i++)
+        {
+         s_in_neigh[i] = s_lo_neigh[i] + s_fraction[translate_s[i]]*
+          (s_hi_neigh[i] - s_lo_neigh[i]);
+        }
+
+       // Evaluate master shapes at projections of local quadrature knots
+       neigh_obj_pt->interpolating_basis(s_in_neigh,master_shapes,value_id);
+
+       // Populate local projection matrix
+       for(unsigned i=0; i<n_slave_nodes-n_mortar_vertices; i++)
+        {
+         for(unsigned j=0; j<n_master_nodes; j++)
           {
-           P[e]->entry(i,j) += pow(2.0,
-               quadtree_neighbouring_diff_level[e])*shapes[j]
-                 * psi[i]*(*quadrature_weight)[q];
+           P[i][j] += master_shapes[master_node_number[j]]*psi[i]*(*quadrature_weight)[q];
           }
         }
       }
-    }
-   
-   // Assemble global projection matrices for mortar
-   //-----------------------------------------------
-   DenseDoubleMatrix P_global(n_slave_nodes,n_master_nodes,0.0);
-   
-   // Assemble vertex nodes
-   for(unsigned v=0; v<shared_node_pt.size(); v++)
-    {
-     // Find master node corresponding to shared node v
-     for(unsigned k=0; k<master_node_pt.size(); k++)
+
+     // Assemble global projection matrices for mortar
+     //-----------------------------------------------
+     // Need to subtract contributions from the "known unknowns" corresponding
+     // to the nodes at the vertices of the mortar
+
+     // Assemble contributions from mortar vertex nodes
+     for(unsigned v=0; v<n_mortar_vertices; v++)
       {
-       if(master_node_pt[k]==shared_node_pt[v])
+       // Convert coordinate on mortar to local fraction in slave element
+       Vector<double> s_fraction(2);
+       for(unsigned i=0; i<2; i++)
         {
-         for(unsigned i=0; i<n_slave_nodes; i++)
-          {
-           P_global(i,k) -= shared_node_M[v][i];
-          }
+         s_fraction[i] = (i==active_coord_index)
+                          ? 0.5*(slave_nodal_position[vertex_pos[v]]+1.0)
+                          : slave_node_s_fraction[vertex_pos[0]][i];
         }
-      }
-    }
-   
-   // Assemble local matrices
-   for(unsigned e=0; e<neigh_obj_pt.size(); e++)
-    {
-     // Loop over slave element non-vertex nodes along edge
-     for(unsigned i=0; i<n_slave_nodes; i++)
-      {
-       // Loop over local master element nodes
-       for(unsigned j=0; j<master_element_nnode_1d[e]; j++)
+
+       // Project active coordinate into master element
+       Vector<double> s_in_neigh(2);
+       for(unsigned i=0;i<2;i++)
         {
-         // Get the curent local master node
-         Node* cur_local_master_node;
-         unsigned m_first=0, m_space=0;
-         switch(neigh_edge)
-          {
-          case S:
-           m_first=0;
-           m_space=1;
-           break;
-          case N:
-           m_first=neigh_obj_pt[e]->nnode_1d()*(neigh_obj_pt[e]->nnode_1d()-1);
-           m_space=1;
-           break;
-          case W:
-           m_first=0;
-           m_space=neigh_obj_pt[e]->nnode_1d();
-           break;
-          case E:
-           m_first=neigh_obj_pt[e]->nnode_1d()-1;
-           m_space=neigh_obj_pt[e]->nnode_1d();
-           break;
-          default:
-           // Should never get here
-           break;
-          }
-         cur_local_master_node = neigh_obj_pt[e]->node_pt(m_first+j*m_space);
-           
-         // Loop over global master nodes to find match
+         s_in_neigh[i] = s_lo_neigh[i] + s_fraction[translate_s[i]]*
+          (s_hi_neigh[i] - s_lo_neigh[i]);
+        }
+
+       // Get master shapes at slave nodal positions
+       neigh_obj_pt->interpolating_basis(s_in_neigh,master_shapes,value_id);
+
+       for(unsigned i=0; i<n_slave_nodes-n_mortar_vertices; i++)
+        {
          for(unsigned k=0; k<n_master_nodes; k++)
           {
-           if (master_node_pt[k]==cur_local_master_node)
-            {
-             P_global(i,k) += P[e]->get_entry(i,j);
-             break;
-            }
+           P[i][k] -= master_shapes[master_node_number[k]]*shared_node_M[v][i];
           }
         }
       }
-    }
-     
-   // Solve mortar system
-   //--------------------
-   for(unsigned i=0; i<n_slave_nodes; i++)
-    {
-     for(unsigned j=0; j<n_master_nodes; j++)
+
+     // Solve mortar system
+     //--------------------
+     for(unsigned i=0; i<n_slave_nodes-n_mortar_vertices; i++)
       {
-       P_global(i,j)/=diag_M[i];
+       for(unsigned j=0; j<n_master_nodes; j++)
+        {
+         P[i][j]/=diag_M[i];
+        }
       }
-    }
+   
+     // Create structures to hold the hanging info
+     //-------------------------------------------
+     Vector<HangInfo*> hang_info_pt(n_slave_nodes);
+     for (unsigned i=0; i<n_slave_nodes-n_mortar_vertices; i++)
+      {
+       hang_info_pt[i] = new HangInfo(n_master_nodes);
+      }
+
+     // Copy information to hanging nodes
+     //----------------------------------
+     for(unsigned i=0; i<n_slave_nodes-n_mortar_vertices; i++)
+      {
+       for(unsigned j=0; j<n_master_nodes; j++)
+        {
+         hang_info_pt[i]->set_master_node_pt(j,master_node_pt[j],P[i][j]);
+        }
+      }
      
-   // Create structures to hold the hanging info
-   //-------------------------------------------
-   Vector<HangInfo*> hang_info_pt(n_slave_nodes);
+     // Set pointers to hanging info
+     //-----------------------------
+     for (unsigned i=0; i<n_slave_nodes-n_mortar_vertices; i++)
+      {
+       // Check that the node shoule actually hang.
+       // That is, if the polynomial orders of the elements at a p-type
+       // non-conormity are both odd then the middle node on the edge is
+       // shared but a hanging scheme has been constructed for it.
+       bool node_is_really_shared = false;
+       for (unsigned m=0; m<hang_info_pt[i]->nmaster(); m++)
+        {
+         // We can simply check if the hanging scheme lists itself as a master
+         if (hang_info_pt[i]->master_node_pt(m)==slave_node_pt[non_vertex_pos[i]])
+          {
+           node_is_really_shared = true;
+
+#ifdef PARANOID
+           // Also check the corresponding weight: it should be 1
+           if(std::fabs(hang_info_pt[i]->master_weight(m)-1.0) > 1.0e-06)
+            {
+             throw
+              OomphLibError(
+               "Something fishy here -- with shared node at a mortar vertex",
+               "PRefineableQElemen<2,INITIAL_NNODE_1D>t::quad_hang_helper()",
+               OOMPH_EXCEPTION_LOCATION);
+            }
+#endif
+          }
+        }
+
+       // Now we can make the node hang, if it isn't a shared node
+       if(!node_is_really_shared)
+        {
+         slave_node_pt[non_vertex_pos[i]]->set_hanging_pt(hang_info_pt[i],-1);
+        }
+      }
+     
+    } // End of case where there are still slave nodes
+
+#ifdef PARANOID
+   // Check all slave nodes, hanging or otherwise
    for (unsigned i=0; i<n_slave_nodes; i++)
     {
-     hang_info_pt[i] = new HangInfo(n_master_nodes);
-    }
-     
-   // Set pointers to hanging info
-   //-----------------------------
-   for (unsigned i=0; i<n_slave_nodes; i++)
-    {
-     slave_node_pt[i]->set_hanging_pt(hang_info_pt[i],-1);
-    }
-     
-   // Copy information to hanging nodes
-   //----------------------------------
-   for(unsigned i=0; i<n_slave_nodes; i++)
-    {
-     for(unsigned j=0; j<n_master_nodes; j++)
+     // Check that weights sum to 1 for those that hang
+     if (slave_node_pt[i]->is_hanging())
       {
-       hang_info_pt[i]->set_master_node_pt(j,master_node_pt[j],P_global(i,j));
+       // Check that weights sum to 1
+       double weight_sum = 0.0;
+       for (unsigned m=0; m<slave_node_pt[i]->hanging_pt()->nmaster(); m++)
+        {
+         weight_sum += slave_node_pt[i]->hanging_pt()->master_weight(m);
+        }
+
+       // Warn if not
+       if (std::fabs(weight_sum-1.0) > 1.0e-08)
+        {
+         oomph_info << "Sum of master weights: " << weight_sum << std::endl;
+         OomphLibWarning(
+          "Weights in hanging scheme do not sum to 1",
+          "PRefineableQElement<2,INITIAL_NNODE_1D>::quad_hang_helper()",
+          OOMPH_EXCEPTION_LOCATION);
+        }
+      }
+     else
+      {
+       // Check that this node is shared with the master element if it
+       // isn't hanging
+       bool is_master = false;
+       for (unsigned n=0; n<n_master_nodes; n++)
+        {
+         if (slave_node_pt[i]==master_node_pt[n])
+          {
+           // Node is a master
+           is_master = true;
+           break;
+          }
+        }
+
+       if (!is_master)
+        {
+         // Throw error
+         std::ostringstream error_string;
+         error_string
+          << "This node in the slave element is neither" << std::endl
+          << "hanging or shared with a master element." << std::endl;
+         
+         throw OomphLibError(
+                error_string.str(),
+                "PRefineableQElement<2,INITIAL_NNODE_1D>::quad_hang_helper()",
+                OOMPH_EXCEPTION_LOCATION);
+        }
       }
     }
-     
-   // Free memory for local projection matrices
-   for(unsigned e=0; e<neigh_obj_pt.size(); e++)
-    {
-     delete P[e];
-    }
+#endif
 
    // Finally, Loop over all slave nodes and fine-tune their positions
    //-----------------------------------------------------------------
-   //BENFLAG: Here we simply set the node's positions to be consistent
-   //         with the hanging scheme. This is not strictly necessary
-   //         because it is done in the mesh adaptation before the node
-   //         becomes non-hanging later on. We make no attempt to ensure
-   //         (strong) continuity in the position across the mortar.
+   // Here we simply set the node's positions to be consistent
+   // with the hanging scheme. This is not strictly necessary
+   // because it is done in the mesh adaptation before the node
+   // becomes non-hanging later on. We make no attempt to ensure
+   // (strong) continuity in the position across the mortar.
    for(unsigned i=0; i<n_slave_nodes; i++)
     {
-     //If we are doing the position, then
-     if(value_id==-1)
+     // Only fine-tune hanging nodes
+     if(slave_node_pt[i]->is_hanging())
       {
-       // Get the position from interpolation in this element via
-       // the hanging scheme
-       Vector<double> x_in_neighb(2);
-       this->interpolated_x(s_of_local_node[i],x_in_neighb);
-
-       // Fine adjust the coordinates (macro map will pick up boundary
-       // accurately but will lead to different element edges)
-       slave_node_pt[i]->x(0)=x_in_neighb[0];
-       slave_node_pt[i]->x(1)=x_in_neighb[1];
+       //If we are doing the position, then
+       if(value_id==-1)
+        {
+         // Get the local coordinate of this slave node
+         Vector<double> s_local(2);
+         this->local_coordinate_of_node(slave_node_number[i],s_local);
+         
+         // Get the position from interpolation in this element via
+         // the hanging scheme
+         Vector<double> x_in_neighb(2);
+         this->interpolated_x(s_local,x_in_neighb);
+   
+         // Fine adjust the coordinates (macro map will pick up boundary
+         // accurately but will lead to different element edges)
+         slave_node_pt[i]->x(0)=x_in_neighb[0];
+         slave_node_pt[i]->x(1)=x_in_neighb[1];
+        }
       }
     }
-  } //End of case where this is the slave element
-}
-
-//=======================================================================
-/// Internal function to return the value of the intrinsic boundary
-/// coordinate interpolated along the edge (S/W/N/E) of the element
-/// before p-refinement. Requires a vector of pointers to the element's
-/// original nodes and the original p-order of the element before
-/// refinement in addition to the arguments to the standard
-/// interpolated_zeta_on_edge(...) function. This is required
-/// during p-refinement because new nodes in elements with curvilinear
-/// boundaries normally interpolate their boundary coordinate from their
-/// element's father, but with p-refinement they should instead
-/// interpolate from the current element before it was refined.
-//=======================================================================
-template<unsigned INITIAL_NNODE_1D>
-void PRefineableQElement<2,INITIAL_NNODE_1D>::
-interpolated_zeta_on_edge_before_p_refinement(const unsigned &boundary,
-                                              const int &edge,
-                                              const Vector<double> &s,
-                                              const unsigned &old_p_order,
-                                              const Vector<Node*> &old_node_pt,
-                                              Vector<double> &zeta)
-{
- using namespace QuadTreeNames;
-
- //Number of 1D nodes along an edge (of the original element)
- unsigned n_p = old_p_order;
- 
- //Storage for the shape functions (of the original element)
- Shape psi(n_p*n_p);
- 
- //Compute old shapes at this s
- switch(n_p)
-  {
-  case 2:
-   {
-    //Call the OneDimensional Shape functions
-    OneDimensionalLegendreShape<2>::calculate_nodal_positions();
-    OneDimensionalLegendreShape<2> psi1(s[0]), psi2(s[1]);
-    
-    //Now let's loop over the nodal points in the element
-    //and copy the values back in  
-    for(unsigned i=0;i<2;i++) 
-     {
-      for(unsigned j=0;j<2;j++)
-       {
-        psi(2*i + j) = psi2[i]*psi1[j];
-       }
-     }
-    break;
-   }
-  case 3:
-   {
-    //Call the OneDimensional Shape functions
-    OneDimensionalLegendreShape<3>::calculate_nodal_positions();
-    OneDimensionalLegendreShape<3> psi1(s[0]), psi2(s[1]);
- 
-    //Now let's loop over the nodal points in the element
-    //and copy the values back in  
-    for(unsigned i=0;i<3;i++) 
-     {
-      for(unsigned j=0;j<3;j++)
-       {
-        psi(3*i + j) = psi2[i]*psi1[j];
-       }
-     }
-    break;
-   }
-  case 4:
-   {
-    //Call the OneDimensional Shape functions
-    OneDimensionalLegendreShape<4>::calculate_nodal_positions();
-    OneDimensionalLegendreShape<4> psi1(s[0]), psi2(s[1]);
- 
-    //Now let's loop over the nodal points in the element
-    //and copy the values back in  
-    for(unsigned i=0;i<4;i++) 
-     {
-      for(unsigned j=0;j<4;j++)
-       {
-        psi(4*i + j) = psi2[i]*psi1[j];
-       }
-     }
-    break;
-   }
-  case 5:
-   {
-    //Call the OneDimensional Shape functions
-    OneDimensionalLegendreShape<5>::calculate_nodal_positions();
-    OneDimensionalLegendreShape<5> psi1(s[0]), psi2(s[1]);
- 
-    //Now let's loop over the nodal points in the element
-    //and copy the values back in  
-    for(unsigned i=0;i<5;i++) 
-     {
-      for(unsigned j=0;j<5;j++)
-       {
-        psi(5*i + j) = psi2[i]*psi1[j];
-       }
-     }
-    break;
-   }
-  case 6:
-   {
-    //Call the OneDimensional Shape functions
-    OneDimensionalLegendreShape<6>::calculate_nodal_positions();
-    OneDimensionalLegendreShape<6> psi1(s[0]), psi2(s[1]);
- 
-    //Now let's loop over the nodal points in the element
-    //and copy the values back in  
-    for(unsigned i=0;i<6;i++) 
-     {
-      for(unsigned j=0;j<6;j++)
-       {
-        psi(6*i + j) = psi2[i]*psi1[j];
-       }
-     }
-    break;
-   }
-  case 7:
-   {
-    //Call the OneDimensional Shape functions
-    OneDimensionalLegendreShape<7>::calculate_nodal_positions();
-    OneDimensionalLegendreShape<7> psi1(s[0]), psi2(s[1]);
- 
-    //Now let's loop over the nodal points in the element
-    //and copy the values back in  
-    for(unsigned i=0;i<7;i++) 
-     {
-      for(unsigned j=0;j<7;j++)
-       {
-        psi(7*i + j) = psi2[i]*psi1[j];
-       }
-     }
-    break;
-   }
-  default:
-   std::ostringstream error_message;
-   error_message <<"\nERROR: Exceeded maximum polynomial order for";
-   error_message <<"\n       polynomial order for shape functions.\n";
-   throw OomphLibError(error_message.str(),
-                       OOMPH_CURRENT_FUNCTION,
-                       OOMPH_EXCEPTION_LOCATION);
-  }
- 
- //Unsigned data that give starts and multipliers for the loop 
- //over the nodes on the edges.
- unsigned start=0, multiplier=1;
-
- //Which edge?
- switch(edge)
-  {
-  case S:
-#ifdef PARANOID
-   if(s[1] != -1.0) 
-    {
-     std::ostringstream error_stream;
-     error_stream<< "Coordinate " << s[0] << " " << s[1]
-                 << " is not on South edge\n";
-     
-     throw OomphLibError(error_stream.str(),
-                         OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-   //Start is zero and multiplier is one
-   break;
-
-  case N:
-#ifdef PARANOID
-   if(s[1] != 1.0) 
-    {
-     std::ostringstream error_stream;
-     error_stream<< "Coordinate " << s[0] << " " << s[1]
-                 << " is not on North edge\n";
-     
-     throw OomphLibError(error_stream.str(),
-                         OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-   //Start from the top left corner of the element, multiplier still one
-   start = n_p*(n_p-1);
-   break;
-
-  case W:
-#ifdef PARANOID
-   if(s[0] != -1.0) 
-    {
-     std::ostringstream error_stream;
-     error_stream<< "Coordinate " << s[0] << " " << s[1]
-                 << " is not on West edge\n";
-     
-     throw OomphLibError(error_stream.str(),
-                         OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-   //Loop over left-hand edge of element (start from zero)
-   multiplier = n_p;
-   break;
-
-  case E:
-#ifdef PARANOID
-   if(s[0] != 1.0) 
-    {
-     std::ostringstream error_stream;
-     error_stream<< "Coordinate " << s[0] << " " << s[1]
-                 << " is not on East edge\n";
-     
-     throw OomphLibError(error_stream.str(),
-                         OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-   //Start from the bottom right-hand corner
-   start = n_p-1;
-   //Loop over the right-hand edge of the element
-   multiplier = n_p;
-   break;
-
-
-  default:
-   std::ostringstream error_stream;
-   error_stream
-    << "Wrong edge " << edge << " passed" << std::endl;
-
-   throw OomphLibError(error_stream.str(),
-                       OOMPH_CURRENT_FUNCTION,
-                       OOMPH_EXCEPTION_LOCATION);
-  }
-
- //Initialise the intrinsic coordinate
- double inter_zeta = 0.0;
- //Loop over the nodes on the edge (of the original element)
- for(unsigned n=0;n<n_p;n++)
-  {
-   //Get the node number
-   unsigned node_number = start + multiplier*n;
-   //Now get the intrinsic coordinate
-   old_node_pt[node_number]->get_coordinates_on_boundary(boundary,zeta);
-   //Now multiply by the (old) shape function
-   inter_zeta += zeta[0]*psi(node_number);
-  }
-
- //Set the value of the intrinsic coordinate
- zeta[0] = inter_zeta;
+  } //End of case where this interface is to be mortared
 
 }
 
@@ -4652,11 +4639,6 @@ template<unsigned INITIAL_NNODE_1D>
 void PRefineableQElement<3,INITIAL_NNODE_1D>::
 local_coordinate_of_node(const unsigned& n, Vector<double>& s) const
  {
-  OomphLibWarning(
-   "3D PRefineableQElements have not been fully implemented.",
-   "PRefineableQElement<3,INITIAL_NNODE_1D>::local_coordinate_of_node()",
-   OOMPH_EXCEPTION_LOCATION);
-  
   s.resize(3);
   unsigned Nnode_1d = this->nnode_1d();
   unsigned n0 = n%Nnode_1d;
@@ -4717,11 +4699,6 @@ template<unsigned INITIAL_NNODE_1D>
 void PRefineableQElement<3,INITIAL_NNODE_1D>::
 local_fraction_of_node(const unsigned &n, Vector<double> &s_fraction)
  {
-  OomphLibWarning(
-   "3D PRefineableQElements have not been fully implemented.",
-   "PRefineableQElement<3,INITIAL_NNODE_1D>::local_fraction_of_node()",
-   OOMPH_EXCEPTION_LOCATION);
-  
   this->local_coordinate_of_node(n,s_fraction);
   s_fraction[0] = 0.5*(s_fraction[0] + 1.0);
   s_fraction[1] = 0.5*(s_fraction[1] + 1.0);
@@ -4732,11 +4709,6 @@ template<unsigned INITIAL_NNODE_1D>
 double PRefineableQElement<3,INITIAL_NNODE_1D>::
 local_one_d_fraction_of_node(const unsigned &n1d, const unsigned &i)
  {
-  OomphLibWarning(
-   "3D PRefineableQElements have not been fully implemented.",
-   "PRefineableQElement<3,INITIAL_NNODE_1D>::one_d_fraction_of_node()",
-   OOMPH_EXCEPTION_LOCATION);
-  
   switch(this->nnode_1d())
    {
   case 2:
@@ -4775,11 +4747,6 @@ template<unsigned INITIAL_NNODE_1D>
 Node* PRefineableQElement<3,INITIAL_NNODE_1D>::
 get_node_at_local_coordinate(const Vector<double> &s) const
 {
- OomphLibWarning(
-  "3D PRefineableQElements have not been fully implemented.",
-  "PRefineableQElement<3,INITIAL_NNODE_1D>::get_node_at_local_coordinate()",
-  OOMPH_EXCEPTION_LOCATION);
-  
  unsigned Nnode_1d = this->nnode_1d();
  //Load the tolerance into a local variable
  double tol = FiniteElement::Node_location_tolerance;
@@ -4844,11 +4811,6 @@ template<unsigned INITIAL_NNODE_1D>
 Node* PRefineableQElement<3,INITIAL_NNODE_1D>::
 node_created_by_neighbour(const Vector<double> &s_fraction) 
 {  
- OomphLibWarning(
-  "3D PRefineableQElements have not been fully implemented.",
-  "PRefineableQElement<3,INITIAL_NNODE_1D>::node_created_by_neighbour()",
-  OOMPH_EXCEPTION_LOCATION);
-  
  using namespace OcTreeNames;
  
  //Calculate the faces/edges on which the node lies
@@ -4924,9 +4886,9 @@ node_created_by_neighbour(const Vector<double> &s_fraction)
    if(neigh_pt!=0)
     {
      // Have any of its vertex nodes been created yet?
-     // (BS: Must look in incomplete neighbours because after the pre-build
-     // they may contain pointers to the required nodes. e.g. h-refinement of
-     // neighbouring linear and quadratic elements)
+     // (Must look in incomplete neighbours because after the
+     // pre-build they may contain pointers to the required nodes. e.g.
+     // h-refinement of neighbouring linear and quadratic elements)
      bool a_vertex_node_is_built = false;
      QElement<3,INITIAL_NNODE_1D>* neigh_obj_pt =
       dynamic_cast<QElement<3,INITIAL_NNODE_1D>*>(neigh_pt->object_pt());
@@ -4977,21 +4939,197 @@ node_created_by_neighbour(const Vector<double> &s_fraction)
  //------------------------------------------
  for(unsigned j=0;j<n_edge;j++)
   {
-   // Find pointer to neighbouring element along edge
+
+   // Even if we restrict ourselves to true edge neighbours (i.e.
+   // elements that are not also face neighbours) there may be multiple
+   // edge neighbours across the edges between multiple root octrees.
+   // When making the first call to OcTree::gteq_true_edge_neighbour(...)
+   // we simply return the first one of these multiple edge neighbours
+   // (if there are any at all, of course) and also return the total number
+   // of true edge neighbours. If the node in question already exists
+   // on the first edge neighbour we're done. If it doesn't it may exist
+   // on other edge neighbours so we repeat the process over all
+   // other edge neighbours (bailing out if a node is found, of course).
+
+   // Initially return the zero-th true edge neighbour
+   unsigned i_root_edge_neighbour=0;
+
+   // Initialise the total number of true edge neighbours
+   unsigned nroot_edge_neighbour=0;
+   
+   // Keep searching until we've found the node or until we've checked
+   // all available edge neighbours
+   bool keep_searching=true;
+   while (keep_searching)
+    {
+ 
+     // Find pointer to neighbouring element along edge
+     OcTree* neigh_pt;
+     neigh_pt = octree_pt()->
+      gteq_true_edge_neighbour(edges[j],
+                               i_root_edge_neighbour,
+                               nroot_edge_neighbour, 
+                               translate_s,
+                               s_lo_neigh,s_hi_neigh,neigh_face,
+                               diff_level);
+     
+     // Neighbour exists
+     if(neigh_pt!=0)
+      {
+       // Have any of its vertex nodes been created yet?
+       // (Must look in incomplete neighbours because after the
+       // pre-build they may contain pointers to the required nodes. e.g.
+       // h-refinement of neighbouring linear and quadratic elements)
+       bool a_vertex_node_is_built = false;
+       QElement<3,INITIAL_NNODE_1D>* neigh_obj_pt =
+        dynamic_cast<QElement<3,INITIAL_NNODE_1D>*>(neigh_pt->object_pt());
+       if(neigh_obj_pt==0)
+        {
+         throw
+          OomphLibError("Not a quad element!",
+           "PRefineableQElement<3,INITIAL_NNODE_1D>::node_created_by_neighbour()",
+           OOMPH_EXCEPTION_LOCATION);
+        }
+       for(unsigned vnode=0; vnode<neigh_obj_pt->nvertex_node(); vnode++)
+        {
+         if(neigh_obj_pt->vertex_node_pt(vnode)!=0)
+          a_vertex_node_is_built = true;
+         break;
+        }
+       if(a_vertex_node_is_built)
+        {
+         //We now need to translate the nodal location, defined in terms
+         //of the fractional coordinates of the present element into
+         //those of its neighbour. For this we use the information returned
+         //to use from the octree function.
+       
+         //Calculate the local coordinate in the neighbour
+         //Note that we need to use the translation scheme in case
+         //the local coordinates are swapped in the neighbour.
+         for(unsigned i=0;i<3;i++)
+          {
+           s[i] = s_lo_neigh[i] + s_fraction[translate_s[i]]*
+            (s_hi_neigh[i] - s_lo_neigh[i]);
+          }
+       
+         //Find the node in the neighbour
+         Node* neighbour_node_pt =
+          neigh_pt->object_pt()->get_node_at_local_coordinate(s);
+       
+         //If there is a node, return it
+         if(neighbour_node_pt!=0)
+          {
+           return neighbour_node_pt;
+          }
+        }
+      }
+     
+     // Keep searching, but only if there are further edge neighbours
+     // Try next root edge neighbour
+     i_root_edge_neighbour++;
+     
+     // Have we exhausted the search 
+     if (i_root_edge_neighbour>=nroot_edge_neighbour)
+      {
+       keep_searching=false;
+      }
+     
+    } // End of while keep searching over all true edge neighbours
+
+  } //End of loop over edges
+
+ //Node not found, return null
+ return 0;
+}
+
+//===================================================================
+/// If a neighbouring element's son has already created a node at
+/// a position corresponding to the local fractional position within the
+/// present element, s_fraction, return
+/// a pointer to that node. If not, return NULL (0). If the node is
+/// periodic the flag is_periodic will be true
+//===================================================================
+template<unsigned INITIAL_NNODE_1D>
+Node* PRefineableQElement<3,INITIAL_NNODE_1D>::
+node_created_by_son_of_neighbour(const Vector<double> &s_fraction)
+{
+ using namespace OcTreeNames;
+ 
+ //Calculate the faces/edges on which the node lies
+ Vector<int> faces;
+ Vector<int> edges;
+
+ if(s_fraction[0]==0.0)
+  {
+   faces.push_back(L);
+   if (s_fraction[1]==0.0) {edges.push_back(LD);}
+   if (s_fraction[2]==0.0) {edges.push_back(LB);}
+   if (s_fraction[1]==1.0) {edges.push_back(LU);}
+   if (s_fraction[2]==1.0) {edges.push_back(LF);}
+  }
+
+ if(s_fraction[0]==1.0) 
+  {
+   faces.push_back(R);
+   if (s_fraction[1]==0.0) {edges.push_back(RD);}
+   if (s_fraction[2]==0.0) {edges.push_back(RB);}
+   if (s_fraction[1]==1.0) {edges.push_back(RU);}
+   if (s_fraction[2]==1.0) {edges.push_back(RF);}
+  }
+
+ if(s_fraction[1]==0.0)
+  {
+   faces.push_back(D);
+   if (s_fraction[2]==0.0) {edges.push_back(DB);}
+   if (s_fraction[2]==1.0) {edges.push_back(DF);}
+  }
+
+ if(s_fraction[1]==1.0) 
+  {
+   faces.push_back(U);
+   if (s_fraction[2]==0.0) {edges.push_back(UB);}
+   if (s_fraction[2]==1.0) {edges.push_back(UF);}
+  }
+
+ if(s_fraction[2]==0.0)
+  {
+   faces.push_back(B);
+  }
+
+ if(s_fraction[2]==1.0)
+  {
+   faces.push_back(F);
+  }
+  
+ //Find the number of faces
+ unsigned n_face = faces.size();
+ 
+ //Find the number of edges
+ unsigned n_edge = edges.size();
+ 
+ Vector<unsigned> translate_s(3);
+ Vector<double> s_lo_neigh(3);
+ Vector<double> s_hi_neigh(3);
+ Vector<double> s(3);
+
+ int neigh_face, diff_level;
+ 
+ //Loop over the faces on which the node lies
+ //------------------------------------------
+ for(unsigned j=0;j<n_face;j++)
+  {
+   // Find pointer to neighbouring element along face 
    OcTree* neigh_pt;
-   // Warning, need to search additional trees than these:
-   unsigned i_root_edge_neighbour=0, nroot_edge_neighbour=0;
    neigh_pt = octree_pt()->
-    gteq_true_edge_neighbour(edges[j],
-                             i_root_edge_neighbour, nroot_edge_neighbour,
-                             translate_s,s_lo_neigh,s_hi_neigh,neigh_face,
-                             diff_level);
+    gteq_face_neighbour(faces[j],translate_s,s_lo_neigh,s_hi_neigh,neigh_face,
+                        diff_level);
    
    // Neighbour exists
    if(neigh_pt!=0)
     {
      // Have its nodes been created yet?
-     if(true || neigh_pt->object_pt()->nodes_built())
+     // (Must look in sons of unfinished neighbours too!!!)
+     if(true)
       {
        //We now need to translate the nodal location, defined in terms
        //of the fractional coordinates of the present element into
@@ -5007,45 +5145,322 @@ node_created_by_neighbour(const Vector<double> &s_fraction)
           (s_hi_neigh[i] - s_lo_neigh[i]);
         }
        
-       //Find the node in the neighbour
-       Node* neighbour_node_pt =
-        neigh_pt->object_pt()->get_node_at_local_coordinate(s);
-       
-       //If there is a node, return it
-       if(neighbour_node_pt!=0)
+       // Check if the element has sons
+       if(neigh_pt->nsons()!=0)
         {
-         return neighbour_node_pt;
+         //First, find the son element in which the node should live
+         
+         //Find coordinates in the sons
+         Vector<double> s_in_son(3);
+         int son=-10;
+         //On the left
+         if(s[0] < 0.0)
+          {
+           //On the bottom
+           if(s[1] < 0.0)
+            {
+             //On the back
+             if(s[2] < 0.0)
+              {
+               //It's the LDB son
+               son = OcTreeNames::LDB;
+               s_in_son[0] =  1.0 + 2.0*s[0];
+               s_in_son[1] =  1.0 + 2.0*s[1];
+               s_in_son[2] =  1.0 + 2.0*s[2];
+              }
+             //On the front
+             else
+              {
+               //It's the LDF son
+               son = OcTreeNames::LDF;
+               s_in_son[0] =  1.0 + 2.0*s[0];
+               s_in_son[1] =  1.0 + 2.0*s[1];
+               s_in_son[2] = -1.0 + 2.0*s[2];
+              }
+            }
+           //On the top
+           else
+            {
+             //On the back
+             if(s[2] < 0.0)
+              {
+               //It's the LUB son
+               son = OcTreeNames::LUB;
+               s_in_son[0] =  1.0 + 2.0*s[0];
+               s_in_son[1] = -1.0 + 2.0*s[1];
+               s_in_son[2] =  1.0 + 2.0*s[2];
+              }
+             //On the front
+             else
+              {
+               //It's the LUF son
+               son = OcTreeNames::LUF;
+               s_in_son[0] =  1.0 + 2.0*s[0];
+               s_in_son[1] = -1.0 + 2.0*s[1];
+               s_in_son[2] = -1.0 + 2.0*s[2];
+              }
+            }
+          }
+         //On the right
+         else
+          {
+           //On the bottom
+           if(s[1] < 0.0)
+            {
+             //On the back
+             if(s[2] < 0.0)
+              {
+               //It's the RDB son
+               son = OcTreeNames::RDB;
+               s_in_son[0] = -1.0 + 2.0*s[0];
+               s_in_son[1] =  1.0 + 2.0*s[1];
+               s_in_son[2] =  1.0 + 2.0*s[2];
+              }
+             //On the front
+             else
+              {
+               //It's the RDF son
+               son = OcTreeNames::RDF;
+               s_in_son[0] = -1.0 + 2.0*s[0];
+               s_in_son[1] =  1.0 + 2.0*s[1];
+               s_in_son[2] = -1.0 + 2.0*s[2];
+              }
+            }
+           //On the top
+           else
+            {
+             //On the back
+             if(s[2] < 0.0)
+              {
+               //It's the RUB son
+               son = OcTreeNames::RUB;
+               s_in_son[0] = -1.0 + 2.0*s[0];
+               s_in_son[1] = -1.0 + 2.0*s[1];
+               s_in_son[2] =  1.0 + 2.0*s[2];
+              }
+             //On the front
+             else
+              {
+               //It's the RUF son
+               son = OcTreeNames::RUF;
+               s_in_son[0] = -1.0 + 2.0*s[0];
+               s_in_son[1] = -1.0 + 2.0*s[1];
+               s_in_son[2] = -1.0 + 2.0*s[2];
+              }
+            }
+          }
+         
+         //Find the node in the neighbour's son
+         Node* neighbour_son_node_pt = 
+          neigh_pt->son_pt(son)->object_pt()->
+           get_node_at_local_coordinate(s_in_son);
+         
+         //If there is a node, return it
+         if(neighbour_son_node_pt!=0) 
+          {
+           //Return the pointer to the neighbouring node
+           return neighbour_son_node_pt;
+          }
         }
       }
     }
   } //End of loop over faces
 
+
+ //Loop over the edges on which the node lies
+ //------------------------------------------
+ for(unsigned j=0;j<n_edge;j++)
+  {
+
+   // Even if we restrict ourselves to true edge neighbours (i.e.
+   // elements that are not also face neighbours) there may be multiple
+   // edge neighbours across the edges between multiple root octrees.
+   // When making the first call to OcTree::gteq_true_edge_neighbour(...)
+   // we simply return the first one of these multiple edge neighbours
+   // (if there are any at all, of course) and also return the total number
+   // of true edge neighbours. If the node in question already exists
+   // on the first edge neighbour we're done. If it doesn't it may exist
+   // on other edge neighbours so we repeat the process over all
+   // other edge neighbours (bailing out if a node is found, of course).
+
+   // Initially return the zero-th true edge neighbour
+   unsigned i_root_edge_neighbour=0;
+
+   // Initialise the total number of true edge neighbours
+   unsigned nroot_edge_neighbour=0;
+   
+   // Keep searching until we've found the node or until we've checked
+   // all available edge neighbours
+   bool keep_searching=true;
+   while (keep_searching)
+    {
+ 
+     // Find pointer to neighbouring element along edge
+     OcTree* neigh_pt;
+     neigh_pt = octree_pt()->
+      gteq_true_edge_neighbour(edges[j],
+                               i_root_edge_neighbour,
+                               nroot_edge_neighbour, 
+                               translate_s,
+                               s_lo_neigh,s_hi_neigh,neigh_face,
+                               diff_level);
+     
+     // Neighbour exists
+     if(neigh_pt!=0)
+      {
+       // Have its nodes been created yet?
+       // (Must look in sons of unfinished neighbours too!!!)
+       if(true)
+        {
+         //We now need to translate the nodal location, defined in terms
+         //of the fractional coordinates of the present element into
+         //those of its neighbour. For this we use the information returned
+         //to use from the octree function.
+       
+         //Calculate the local coordinate in the neighbour
+         //Note that we need to use the translation scheme in case
+         //the local coordinates are swapped in the neighbour.
+         for(unsigned i=0;i<3;i++)
+          {
+           s[i] = s_lo_neigh[i] + s_fraction[translate_s[i]]*
+            (s_hi_neigh[i] - s_lo_neigh[i]);
+          }
+       
+         // Check if the element has sons
+         if(neigh_pt->nsons()!=0)
+          {
+           //First, find the son element in which the node should live
+         
+           //Find coordinates in the sons
+           Vector<double> s_in_son(3);
+           int son=-10;
+           //On the left
+           if(s[0] < 0.0)
+            {
+             //On the bottom
+             if(s[1] < 0.0)
+              {
+               //On the back
+               if(s[2] < 0.0)
+                {
+                 //It's the LDB son
+                 son = OcTreeNames::LDB;
+                 s_in_son[0] =  1.0 + 2.0*s[0];
+                 s_in_son[1] =  1.0 + 2.0*s[1];
+                 s_in_son[2] =  1.0 + 2.0*s[2];
+                }
+               //On the front
+               else
+                {
+                 //It's the LDF son
+                 son = OcTreeNames::LDF;
+                 s_in_son[0] =  1.0 + 2.0*s[0];
+                 s_in_son[1] =  1.0 + 2.0*s[1];
+                 s_in_son[2] = -1.0 + 2.0*s[2];
+                }
+              }
+             //On the top
+             else
+              {
+               //On the back
+               if(s[2] < 0.0)
+                {
+                 //It's the LUB son
+                 son = OcTreeNames::LUB;
+                 s_in_son[0] =  1.0 + 2.0*s[0];
+                 s_in_son[1] = -1.0 + 2.0*s[1];
+                 s_in_son[2] =  1.0 + 2.0*s[2];
+                }
+               //On the front
+               else
+                {
+                 //It's the LUF son
+                 son = OcTreeNames::LUF;
+                 s_in_son[0] =  1.0 + 2.0*s[0];
+                 s_in_son[1] = -1.0 + 2.0*s[1];
+                 s_in_son[2] = -1.0 + 2.0*s[2];
+                }
+              }
+            }
+           //On the right
+           else
+            {
+             //On the bottom
+             if(s[1] < 0.0)
+              {
+               //On the back
+               if(s[2] < 0.0)
+                {
+                 //It's the RDB son
+                 son = OcTreeNames::RDB;
+                 s_in_son[0] = -1.0 + 2.0*s[0];
+                 s_in_son[1] =  1.0 + 2.0*s[1];
+                 s_in_son[2] =  1.0 + 2.0*s[2];
+                }
+               //On the front
+               else
+                {
+                 //It's the RDF son
+                 son = OcTreeNames::RDF;
+                 s_in_son[0] = -1.0 + 2.0*s[0];
+                 s_in_son[1] =  1.0 + 2.0*s[1];
+                 s_in_son[2] = -1.0 + 2.0*s[2];
+                }
+              }
+             //On the top
+             else
+              {
+               //On the back
+               if(s[2] < 0.0)
+                {
+                 //It's the RUB son
+                 son = OcTreeNames::RUB;
+                 s_in_son[0] = -1.0 + 2.0*s[0];
+                 s_in_son[1] = -1.0 + 2.0*s[1];
+                 s_in_son[2] =  1.0 + 2.0*s[2];
+                }
+               //On the front
+               else
+                {
+                 //It's the RUF son
+                 son = OcTreeNames::RUF;
+                 s_in_son[0] = -1.0 + 2.0*s[0];
+                 s_in_son[1] = -1.0 + 2.0*s[1];
+                 s_in_son[2] = -1.0 + 2.0*s[2];
+                }
+              }
+            }
+         
+           //Find the node in the neighbour's son
+           Node* neighbour_son_node_pt = 
+            neigh_pt->son_pt(son)->object_pt()->
+            get_node_at_local_coordinate(s_in_son);
+         
+           //If there is a node, return it
+           if(neighbour_son_node_pt!=0) 
+            {
+             //Return the pointer to the neighbouring node
+             return neighbour_son_node_pt;
+            }
+          }
+        }
+      }
+     
+     // Keep searching, but only if there are further edge neighbours
+     // Try next root edge neighbour
+     i_root_edge_neighbour++;
+     
+     // Have we exhausted the search 
+     if (i_root_edge_neighbour>=nroot_edge_neighbour)
+      {
+       keep_searching=false;
+      }
+     
+    } // End of while keep searching over all true edge neighbours
+   
+  } //End of loop over edges
+
  //Node not found, return null
- return 0;
-}
-
-//===================================================================
-/// If a neighbouring element's son has already created a node at
-/// a position corresponding to the local fractional position within the
-/// present element, s_fraction, return
-/// a pointer to that node. If not, return NULL (0). If the node is
-/// periodic the flag is_periodic will be true
-//===================================================================
-template<unsigned INITIAL_NNODE_1D>
-Node* PRefineableQElement<3,INITIAL_NNODE_1D>::
-node_created_by_son_of_neighbour(const Vector<double> &s_fraction) 
-{
- OomphLibWarning(
-  "3D PRefineableQElements have not been fully implemented.",
-  "PRefineableQElement<3,INITIAL_NNODE_1D>::node_created_by_son_of_neighbour()",
-  OOMPH_EXCEPTION_LOCATION);
-
- throw
-  OomphLibError(
-   "This function has not yet been implemented.",
-   "PRefineableQElement<3,INITIAL_NNODE_1D>::node_created_by_son_of_neighbour()",
-   OOMPH_EXCEPTION_LOCATION);
-  
  return 0;
 }
 
@@ -5057,15 +5472,10 @@ node_created_by_son_of_neighbour(const Vector<double> &s_fraction)
 //==================================================================
 template<unsigned INITIAL_NNODE_1D>
 void PRefineableQElement<3,INITIAL_NNODE_1D>::
-initial_setup(Tree* const &adopted_father_pt)
+initial_setup(Tree* const &adopted_father_pt, const unsigned &initial_p_order)
 {
- OomphLibWarning(
-  "3D PRefineableQElements have not been fully implemented.",
-  "PRefineableQElement<3,INITIAL_NNODE_1D>::initial_setup()",
-  OOMPH_EXCEPTION_LOCATION);
- 
  //Storage for pointer to my father (in octree impersonation)
- OcTree* father_pt;
+ OcTree* father_pt = 0;
  
  // Check if an adopted father has been specified
  if (adopted_father_pt!=0)
@@ -5081,23 +5491,30 @@ initial_setup(Tree* const &adopted_father_pt)
   }
  else
   {
-   throw OomphLibError(
-          "Element not in a tree, and no adopted father has been specified!",
-          OOMPH_CURRENT_FUNCTION,
-          OOMPH_EXCEPTION_LOCATION);
+   //throw OomphLibError(
+   //       "Element not in a tree, and no adopted father has been specified!",
+   //       "PRefineableQElement<2,INITIAL_NNODE_1D>::initial_setup()",
+   //       OOMPH_EXCEPTION_LOCATION);
   }
 
  // Check if element has father
- if (father_pt!=0)
+ if (father_pt!=0 || initial_p_order!=0)
   {
-   PRefineableQElement<3,INITIAL_NNODE_1D>* father_el_pt
-    =dynamic_cast<PRefineableQElement<3,INITIAL_NNODE_1D>*>
-      (father_pt->object_pt());
-   if (father_el_pt!=0)
+   if(father_pt!=0)
     {
-     unsigned father_p_order = father_el_pt->p_order();
-     // Set p-order to that of father
-     P_order = father_p_order;
+     PRefineableQElement<3,INITIAL_NNODE_1D>* father_el_pt
+      = dynamic_cast<PRefineableQElement<3,INITIAL_NNODE_1D>*>
+      (father_pt->object_pt());
+     if (father_el_pt!=0)
+      {
+       unsigned father_p_order = father_el_pt->p_order();
+       // Set p-order to that of father
+       P_order = father_p_order;
+      }
+    }
+   else
+    {
+     P_order = initial_p_order;
     }
    
    // Now sort out the element...
@@ -5149,111 +5566,161 @@ void PRefineableQElement<3,INITIAL_NNODE_1D>::pre_build(
       Mesh*& mesh_pt,
       Vector<Node*>& new_node_pt)
 {
- OomphLibWarning(
-  "3D PRefineableQElements have not been fully implemented.",
-  "PRefineableQElement<3,INITIAL_NNODE_1D>::pre_build()",
-  OOMPH_EXCEPTION_LOCATION);
+ using namespace OcTreeNames;
+ 
+ //Get the number of 1d nodes
+ unsigned n_p = nnode_1d();
+ 
+ //Check whether static father_bound needs to be created
+ if(Father_bound[n_p].nrow()==0) {setup_father_bounds();}
   
  //Pointer to my father (in quadtree impersonation)
  OcTree* father_pt = dynamic_cast<OcTree*>(octree_pt()->father_pt());
  
- // Check if element has father
- if (father_pt!=0)
+ // What type of son am I? Ask my quadtree representation...
+ int son_type = Tree_pt->son_type();
+
+ // Has somebody build me already? (If any nodes have not been built)
+ if (!nodes_built())
   {
-   PRefineableQElement<3,INITIAL_NNODE_1D>* father_el_pt =
-          dynamic_cast<PRefineableQElement<3,INITIAL_NNODE_1D>*>
-              (this->tree_pt()->father_pt()->object_pt());
-   if (father_el_pt!=0)
+#ifdef PARANOID
+   if (father_pt==0)
     {
-     // Check nodes from father
-     //------------------------------------
-     unsigned n_p = this->nnode_1d();
-    
-     // What type of son am I? Ask my octree representation...
-     int son_type = Tree_pt->son_type();
+     std::string error_message =
+      "Something fishy here: I have no father and yet \n";
+     error_message +=
+      "I have no nodes. Who has created me then?!\n";
+   
+     throw OomphLibError(error_message,
+                         "PRefineableQElement<3,INITIAL_NNODE_1D>::pre_build()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+   
+   // Return pointer to father element
+   RefineableQElement<3>* father_el_pt
+    = dynamic_cast<RefineableQElement<3>*>(father_pt->object_pt());
+   
+   // Timestepper should be the same for all nodes in father
+   // element -- use it create timesteppers for new nodes
+   TimeStepper* time_stepper_pt=father_el_pt->node_pt(0)->time_stepper_pt();
+   
+   // Number of history values (incl. present)
+   unsigned ntstorage=time_stepper_pt->ntstorage();
+   
+   //// Pass pointer to time object:
+   //this->time_pt()=father_el_pt->time_pt();
+ 
+   Vector<double> s_lo(3);
+   Vector<double> s_hi(3);
+   Vector<double> s(3);
+   Vector<double> x(3);
      
-     Vector<double> s_lo(3);
-     Vector<double> s_hi(3);
-     Vector<double> s(3);
-     Vector<double> x(3);
-     
-     using namespace OcTreeNames;
-     
-     // Setup vertex coordinates in father element:
-     switch(son_type)
-      {
-      case LDB:
-       s_lo[0]=-1.0;
-       s_hi[0]= 0.0;
-       s_lo[1]=-1.0;
-       s_hi[1]= 0.0;
-       s_lo[2]=-1.0;
-       s_hi[2]= 0.0;
-       break;
+   // Setup vertex coordinates in father element:
+   //--------------------------------------------
+   switch(son_type)
+    {
+    case LDB:
+     s_lo[0]=-1.0;
+     s_hi[0]= 0.0;
+     s_lo[1]=-1.0;
+     s_hi[1]= 0.0;
+     s_lo[2]=-1.0;
+     s_hi[2]= 0.0;
+     break;
       
-      case LDF:
-       s_lo[0]=-1.0;
-       s_hi[0]= 0.0;
-       s_lo[1]=-1.0;
-       s_hi[1]= 0.0;
-       s_lo[2]= 0.0;
-       s_hi[2]= 1.0;
-       break;
+    case LDF:
+     s_lo[0]=-1.0;
+     s_hi[0]= 0.0;
+     s_lo[1]=-1.0;
+     s_hi[1]= 0.0;
+     s_lo[2]= 0.0;
+     s_hi[2]= 1.0;
+     break;
       
-      case LUB:
-       s_lo[0]=-1.0;
-       s_hi[0]= 0.0;
-       s_lo[1]= 0.0;
-       s_hi[1]= 1.0;
-       s_lo[2]=-1.0;
-       s_hi[2]= 0.0;
-       break;
+    case LUB:
+     s_lo[0]=-1.0;
+     s_hi[0]= 0.0;
+     s_lo[1]= 0.0;
+     s_hi[1]= 1.0;
+     s_lo[2]=-1.0;
+     s_hi[2]= 0.0;
+     break;
       
-      case LUF:
-       s_lo[0]=-1.0;
-       s_hi[0]= 0.0;
-       s_lo[1]= 0.0;
-       s_hi[1]= 1.0;
-       s_lo[2]= 0.0;
-       s_hi[2]= 1.0;
-       break;
+    case LUF:
+     s_lo[0]=-1.0;
+     s_hi[0]= 0.0;
+     s_lo[1]= 0.0;
+     s_hi[1]= 1.0;
+     s_lo[2]= 0.0;
+     s_hi[2]= 1.0;
+     break;
       
-      case RDB:
-       s_lo[0]= 0.0;
-       s_hi[0]= 1.0;
-       s_lo[1]=-1.0;
-       s_hi[1]= 0.0;
-       s_lo[2]=-1.0;
-       s_hi[2]= 0.0;
-       break;
+    case RDB:
+     s_lo[0]= 0.0;
+     s_hi[0]= 1.0;
+     s_lo[1]=-1.0;
+     s_hi[1]= 0.0;
+     s_lo[2]=-1.0;
+     s_hi[2]= 0.0;
+     break;
       
-      case RDF:
-       s_lo[0]= 0.0;
-       s_hi[0]= 1.0;
-       s_lo[1]=-1.0;
-       s_hi[1]= 0.0;
-       s_lo[2]= 0.0;
-       s_hi[2]= 1.0;
-       break;
+    case RDF:
+     s_lo[0]= 0.0;
+     s_hi[0]= 1.0;
+     s_lo[1]=-1.0;
+     s_hi[1]= 0.0;
+     s_lo[2]= 0.0;
+     s_hi[2]= 1.0;
+     break;
       
-      case RUB:
-       s_lo[0]= 0.0;
-       s_hi[0]= 1.0;
-       s_lo[1]= 0.0;
-       s_hi[1]= 1.0;
-       s_lo[2]=-1.0;
-       s_hi[2]= 0.0;
-       break;
+    case RUB:
+     s_lo[0]= 0.0;
+     s_hi[0]= 1.0;
+     s_lo[1]= 0.0;
+     s_hi[1]= 1.0;
+     s_lo[2]=-1.0;
+     s_hi[2]= 0.0;
+     break;
       
-      case RUF:
-       s_lo[0]= 0.0;
-       s_hi[0]= 1.0;
-       s_lo[1]= 0.0;
-       s_hi[1]= 1.0;
-       s_lo[2]= 0.0;
-       s_hi[2]= 1.0;
-       break;
-      }
+    case RUF:
+     s_lo[0]= 0.0;
+     s_hi[0]= 1.0;
+     s_lo[1]= 0.0;
+     s_hi[1]= 1.0;
+     s_lo[2]= 0.0;
+     s_hi[2]= 1.0;
+     break;
+    }
+   
+   //// Pass macro element pointer on to sons and
+   //// set coordinates in macro element
+   //// hierher why can I see this?
+   //if(father_el_pt->macro_elem_pt()!=0)
+   // {
+   //  set_macro_elem_pt(father_el_pt->macro_elem_pt());
+   //  for(unsigned i=0;i<2;i++)
+   //   {
+   //    s_macro_ll(i)=      father_el_pt->s_macro_ll(i)+
+   //     0.5*(s_lo[i]+1.0)*(father_el_pt->s_macro_ur(i)-
+   //                        father_el_pt->s_macro_ll(i));
+   //    s_macro_ur(i)=      father_el_pt->s_macro_ll(i)+
+   //     0.5*(s_hi[i]+1.0)*(father_el_pt->s_macro_ur(i)-
+   //                        father_el_pt->s_macro_ll(i));
+   //   }
+   // }
+   
+   
+   // If the father element hasn't been generated yet, we're stuck...
+   if(father_el_pt->node_pt(0)==0)
+    {
+     throw OomphLibError(
+      "Trouble: father_el_pt->node_pt(0)==0\n Can't build son element!\n",
+      "PRefineableQElement<3,INITIAL_NNODE_1D>::pre_build()",
+      OOMPH_EXCEPTION_LOCATION);
+    }
+   else
+    {
      unsigned jnod=0;
    
      Vector<double> s_fraction(3);
@@ -5274,7 +5741,7 @@ void PRefineableQElement<3,INITIAL_NNODE_1D>::pre_build(
    
          for(unsigned i2=0;i2<n_p;i2++)
           {
-           //Get the fractional position of the node in the direction of s[1]
+           //Get the fractional position of the node in the direction of s[2]
            s_fraction[2] = this->local_one_d_fraction_of_node(i2,2);
            // Local coordinate in father element
            s[2] = s_lo[2] + (s_hi[2]-s_lo[2])*s_fraction[2];
@@ -5292,20 +5759,41 @@ void PRefineableQElement<3,INITIAL_NNODE_1D>::pre_build(
             {
              // Copy node across
              this->node_pt(jnod) = created_node_pt;
+  
+             //Make sure that we update the values at the node so that
+             //they are consistent with the present representation.
+             //This is only need for mixed interpolation where the value
+             //at the father could now become active.
+          
+             // Loop over all history values
+             for(unsigned t=0;t<ntstorage;t++)
+              {
+               // Get values from father element
+               // Note: get_interpolated_values() sets Vector size itself.
+               Vector<double> prev_values;
+               father_el_pt->get_interpolated_values(t,s,prev_values);
+               //Find the minimum number of values
+               //(either those stored at the node, or those returned by
+               // the function)
+               unsigned n_val_at_node = created_node_pt->nvalue();
+               unsigned n_val_from_function = prev_values.size(); 
+               //Use the ternary conditional operator here
+               unsigned n_var = n_val_at_node < n_val_from_function ?
+                n_val_at_node : n_val_from_function;
+               //Assign the values that we can
+               for(unsigned k=0;k<n_var;k++)
+                {
+                 created_node_pt->set_value(t,k,prev_values[k]);
+                }
+              }
+             
             }
-          }
-        }
-      }
-    }
-   else
-    {
-     std::ostringstream error_message;
-     error_message <<"\nERROR: Dynamic cast failed!\n";
-     throw OomphLibError(error_message.str(),
-                         OOMPH_CURRENT_FUNCTION,
-                         OOMPH_EXCEPTION_LOCATION);
-    }
-  }
+          } // End of loop i2
+        } // End of loop i1
+      } // End of loop i0
+    } // Sanity check: Father element has been generated
+
+  } // End of nodes not built
 }
 
 //==================================================================
@@ -5318,11 +5806,6 @@ void PRefineableQElement<3,INITIAL_NNODE_1D>::p_refine(
       Mesh* const &mesh_pt,
       GeneralisedElement* const &clone_pt)
 {
- OomphLibWarning(
-  "3D PRefineableQElements have not been fully implemented.",
-  "PRefineableQElement<3,INITIAL_NNODE_1D>::p_refine()",
-  OOMPH_EXCEPTION_LOCATION);
- 
  //Cast clone to correct type
  PRefineableQElement<3,INITIAL_NNODE_1D>* clone_el_pt
   = dynamic_cast<PRefineableQElement<3,INITIAL_NNODE_1D>*>(clone_pt);
@@ -5340,10 +5823,10 @@ void PRefineableQElement<3,INITIAL_NNODE_1D>::p_refine(
  else
   {
    //Flag to keep track of check
-   bool clone_is_ok=true;
+   bool clone_is_ok = true;
 
    //Does the clone have the correct p-order?
-   clone_is_ok = (clone_el_pt->p_order() == this->p_order());
+   clone_is_ok = clone_is_ok && (clone_el_pt->p_order() == this->p_order());
 
    if(!clone_is_ok)
     {
@@ -5358,7 +5841,7 @@ void PRefineableQElement<3,INITIAL_NNODE_1D>::p_refine(
     }
 
    //Does the clone have the same number of nodes as me?
-   clone_is_ok = (clone_el_pt->nnode() == this->nnode());
+   clone_is_ok = clone_is_ok && (clone_el_pt->nnode() == this->nnode());
 
    if(!clone_is_ok)
     {
@@ -5375,7 +5858,7 @@ void PRefineableQElement<3,INITIAL_NNODE_1D>::p_refine(
    //Does the clone have the same nodes as me?
    for(unsigned n=0; n<this->nnode(); n++)
     {
-     clone_is_ok = (clone_el_pt->node_pt(n) == this->node_pt(n));
+     clone_is_ok = clone_is_ok && (clone_el_pt->node_pt(n) == this->node_pt(n));
     }
 
    if(!clone_is_ok)
@@ -5404,76 +5887,20 @@ void PRefineableQElement<3,INITIAL_NNODE_1D>::p_refine(
           OOMPH_CURRENT_FUNCTION,
           OOMPH_EXCEPTION_LOCATION);
   }
-
+ 
  // Timestepper should be the same for all nodes -- use it
  // to create timesteppers for new nodes
  TimeStepper* time_stepper_pt = this->node_pt(0)->time_stepper_pt();
  
- // Number of history values (incl. present)
+ // Get number of history values (incl. present)
  unsigned ntstorage = time_stepper_pt->ntstorage();
  
- // Back up pointers to old vertex nodes before they are lost
- unsigned n_vertex_node = this->nvertex_node();
- Vector<Node*> old_vertex_node_pt(n_vertex_node);
- for (unsigned n=0; n<n_vertex_node; n++)
-  {
-   old_vertex_node_pt[n] = this->vertex_node_pt(n);
-  }
- 
- // Compute new coordinates and projected values
- Vector<double> new_local_x((P_order + inc)*(P_order + inc)*(P_order + inc));
- Vector<Vector<double> > new_global_x((P_order + inc)*(P_order + inc)*(P_order + inc));
- for (unsigned i=0; i<(P_order + inc)*(P_order + inc)*(P_order + inc); i++)
-  {new_global_x[i].resize(3);}
- unsigned ncont = this->ncont_interpolated_values();
- Vector<Vector<Vector<double> > > projected_value(ntstorage);
- for(unsigned t=0;t<ntstorage;t++)
-  {
-   projected_value[t].resize((P_order + inc)*(P_order + inc)*(P_order + inc));
-   for (unsigned i=0; i<(P_order + inc)*(P_order + inc)*(P_order + inc); i++)
-    {
-     projected_value[t][i].resize(ncont);
-    }
-  }
- 
- // Compute Gauss-Lobatto-Legendre node spacing
- Orthpoly::gll_nodes(P_order + inc, new_local_x);
- 
- for (unsigned n=0; n<(P_order + inc)*(P_order + inc)*(P_order + inc); n++)
-  {
-   // Create coordinate vector
-   Vector<double> s(3);
-   unsigned n0 = n%(P_order+inc);
-   unsigned n1 = unsigned(double(n)/double(P_order+inc))%(P_order+inc);
-   unsigned n2 = unsigned(double(n)/double((P_order+inc)*(P_order+inc)));
-   s[0] = new_local_x[n0];
-   s[1] = new_local_x[n1];
-   s[2] = new_local_x[n2];
-   
-   new_global_x[n][0] = this->interpolated_x(s,0);
-   new_global_x[n][1] = this->interpolated_x(s,1);
-   new_global_x[n][2] = this->interpolated_x(s,2);
-   
-   // Loop over all history values
-   for(unsigned t=0;t<ntstorage;t++)
-    {
-     // Interpolate new nodal values
-     // (while still using old integration scheme and shape functions)
-     Vector<double> values(ncont);
-     this->get_interpolated_values(t,s,values);
-     for(unsigned i=0; i<ncont; i++)
-      {
-       projected_value[t][n][i] = values[i];
-      }
-    }
-  }
- 
  // Increment p-order of the element
- P_order += inc;
+ this->P_order += inc;
  
  // Change integration scheme
  delete this->integral_pt();
- switch(P_order)
+ switch(this->P_order)
  {
  case 2:
   this->set_integration_scheme(new GaussLobattoLegendre<3,2>);
@@ -5503,47 +5930,569 @@ void PRefineableQElement<3,INITIAL_NNODE_1D>::p_refine(
  }
  
  // Allocate new space for Nodes (at the element level)
- this->set_n_node(P_order*P_order*P_order);
- unsigned new_Nnode = this->nnode();
+ this->set_n_node(this->P_order*this->P_order*this->P_order);
  
  // Copy vertex nodes and create new edge and internal nodes
  //---------------------------------------------------------
  
- // Copy vertex nodes
- //for(unsigned n=0; n<n_vertex_node; n++)
- // {
- //  this->vertex_node_pt(n) = old_vertex_node_pt[n];
- // }
- this->node_pt(0                              ) = old_vertex_node_pt[0];
- this->node_pt(P_order-1                      ) = old_vertex_node_pt[1];
- this->node_pt(P_order*(P_order-1)            ) = old_vertex_node_pt[2];
- this->node_pt(P_order*P_order-1              ) = old_vertex_node_pt[3];
- this->node_pt(P_order*P_order*(P_order-1)    ) = old_vertex_node_pt[4];
- this->node_pt((P_order*P_order+1)*(P_order-1)) = old_vertex_node_pt[5];
- this->node_pt(P_order*(P_order+1)*(P_order-1)) = old_vertex_node_pt[6];
- this->node_pt(P_order*P_order*P_order-1      ) = old_vertex_node_pt[7];
+ // Setup vertex coordinates in element:
+ //-------------------------------------
+ Vector<double> s_lo(3);
+ Vector<double> s_hi(3);
+ s_lo[0]=-1.0;
+ s_hi[0]= 1.0;
+ s_lo[1]=-1.0;
+ s_hi[1]= 1.0;
+ s_lo[2]=-1.0;
+ s_hi[2]= 1.0;
 
+ //Local coordinate in element
+ Vector<double> s(3);
+ 
+ unsigned jnod=0;
+ 
+ Vector<double> s_fraction(3);
+ // Loop over nodes in element
+ for(unsigned i0=0;i0<this->P_order;i0++)
+  {
+   //Get the fractional position of the node in the direction of s[0]
+   s_fraction[0] = this->local_one_d_fraction_of_node(i0,0);
+   // Local coordinate
+   s[0] = s_lo[0] + (s_hi[0]-s_lo[0])*s_fraction[0];
+   
+   for(unsigned i1=0;i1<this->P_order;i1++)
+    {
+     //Get the fractional position of the node in the direction of s[1]
+     s_fraction[1] = this->local_one_d_fraction_of_node(i1,1);
+     // Local coordinate
+     s[1] = s_lo[1] + (s_hi[1]-s_lo[1])*s_fraction[1];
+   
+     for(unsigned i2=0;i2<this->P_order;i2++)
+      {
+       //Get the fractional position of the node in the direction of s[2]
+       s_fraction[2] = this->local_one_d_fraction_of_node(i2,2);
+       // Local coordinate
+       s[2] = s_lo[2] + (s_hi[2]-s_lo[2])*s_fraction[2];
+     
+       // Local node number
+       jnod= i0 + this->P_order*i1 + this->P_order*this->P_order*i2;
+     
+       // Initialise flag: So far, this node hasn't been built
+       // or copied yet
+       bool node_done=false; 
+     
+       //Get the pointer to the node in this element (or rather, its clone),
+       //returns NULL if there is not node
+       Node* created_node_pt = clone_el_pt->get_node_at_local_coordinate(s);
+       //created_node_pt = 0;
 
- //=======================================
- //Still to fill in:
- //Find/create all nodes in the element...
- //=======================================
+       // Does this node already exist in this element?
+       //----------------------------------------------
+       if (created_node_pt!=0)
+        {
+         // Copy node across
+         this->node_pt(jnod) = created_node_pt;
+
+         //Make sure that we update the values at the node so that
+         //they are consistent with the present representation.
+         //This is only need for mixed interpolation where the value
+         //at the father could now become active.
+
+         // Loop over all history values
+         for(unsigned t=0;t<ntstorage;t++)
+          {
+           // Get values from father element
+           // Note: get_interpolated_values() sets Vector size itself.
+           Vector<double> prev_values;
+           clone_el_pt->get_interpolated_values(t,s,prev_values);
+           //Find the minimum number of values
+           //(either those stored at the node, or those returned by
+           // the function)
+           unsigned n_val_at_node = created_node_pt->nvalue();
+           unsigned n_val_from_function = prev_values.size(); 
+           //Use the ternary conditional operator here
+           unsigned n_var = n_val_at_node < n_val_from_function ?
+            n_val_at_node : n_val_from_function;
+           //Assign the values that we can
+           for(unsigned k=0;k<n_var;k++)
+            {
+             created_node_pt->set_value(t,k,prev_values[k]);
+            }
+          }
+
+         // Node has been created by copy
+         node_done = true;
+        }
+       // Node does not exist in this element but might already
+       //------------------------------------------------------
+       // have been created by neighbouring elements
+       //-------------------------------------------
+       else
+        {
+         //Was the node created by one of its neighbours
+         //Whether or not the node lies on an edge can be calculated
+         //by from the fractional position
+         created_node_pt =
+          this->node_created_by_neighbour(s_fraction);
+
+         //If the node was so created, assign the pointers
+         if (created_node_pt!=0)
+          {
+           this->node_pt(jnod) = created_node_pt;
+           //Node has been created
+           node_done = true;
+          }
+         // Node does not exist in neighbour element but might already
+         //-----------------------------------------------------------
+         // have been created by a son of a neighbouring element
+         //-----------------------------------------------------
+         else
+          {
+           //Was the node created by one of its neighbours' sons
+           //Whether or not the node lies on an edge can be calculated
+           //by from the fractional position
+           created_node_pt =
+            this->node_created_by_son_of_neighbour(s_fraction);
+         
+           //If the node was so created, assign the pointers
+           if (created_node_pt!=0)
+            {
+             this->node_pt(jnod) = created_node_pt;
+             //Node has been created
+             node_done = true;
+            } //Node does not exist in son of neighbouring element
+          } //Node does not exist in neighbouring element
+        } // Node does not exist in this element
+     
+       // Node has not been built anywhere ---> build it here
+       if (!node_done)
+        {
+         //Firstly, we need to determine whether or not a node lies
+         //on the boundary before building it, because 
+         //we actually assign a different type of node on boundaries.
+
+         //Initially none
+         int my_bound=Tree::OMEGA;
+         //If we are on the left face
+         if(i0==0) {my_bound = OcTreeNames::L;}
+         //If we are on the right face
+         else if(i0==this->P_order-1) {my_bound = OcTreeNames::R;}
+         
+         //If we are on the bottom face
+         if(i1==0)
+          {
+           //If we already have already set the boundary, we're on an edge
+           switch(my_bound)
+            {
+            case OcTreeNames::L:
+             my_bound = OcTreeNames::LD;
+             break;
+            case OcTreeNames::R:
+             my_bound = OcTreeNames::RD;
+             break;
+             //Boundary not set
+            default:
+             my_bound = OcTreeNames::D;
+             break;
+            }
+          }
+         //If we are the top face
+         else if(i1==this->P_order-1)
+          {
+           //If we already have a boundary
+           switch(my_bound)
+            {
+            case OcTreeNames::L:
+             my_bound = OcTreeNames::LU;
+             break;
+            case OcTreeNames::R:
+             my_bound = OcTreeNames::RU;
+             break;
+            default:
+             my_bound = OcTreeNames::U;
+             break;
+            }
+          }
+         
+         //If we are on the back face
+         if(i2==0)
+          {
+           //If we already have already set the boundary, we're on an edge
+           switch(my_bound)
+            {
+            case OcTreeNames::L:
+             my_bound = OcTreeNames::LB;
+             break;
+            case OcTreeNames::LD:
+             my_bound = OcTreeNames::LDB;
+             break;
+            case OcTreeNames::LU:
+             my_bound = OcTreeNames::LUB;
+             break;
+            case OcTreeNames::R:
+             my_bound = OcTreeNames::RB;
+             break;
+            case OcTreeNames::RD:
+             my_bound = OcTreeNames::RDB;
+             break;
+            case OcTreeNames::RU:
+             my_bound = OcTreeNames::RUB;
+             break;
+            case OcTreeNames::D:
+             my_bound = OcTreeNames::DB;
+             break;
+            case OcTreeNames::U:
+             my_bound = OcTreeNames::UB;
+             break;
+             //Boundary not set
+            default:
+             my_bound = OcTreeNames::B;
+             break;
+            }
+          }
+         //If we are the front face
+         else if(i2==this->P_order-1)
+          {
+           //If we already have a boundary
+           switch(my_bound)
+            {
+            case OcTreeNames::L:
+             my_bound = OcTreeNames::LF;
+             break;
+            case OcTreeNames::LD:
+             my_bound = OcTreeNames::LDF;
+             break;
+            case OcTreeNames::LU:
+             my_bound = OcTreeNames::LUF;
+             break;
+            case OcTreeNames::R:
+             my_bound = OcTreeNames::RF;
+             break;
+            case OcTreeNames::RD:
+             my_bound = OcTreeNames::RDF;
+             break;
+            case OcTreeNames::RU:
+             my_bound = OcTreeNames::RUF;
+             break;
+            case OcTreeNames::D:
+             my_bound = OcTreeNames::DF;
+             break;
+            case OcTreeNames::U:
+             my_bound = OcTreeNames::UF;
+             break;
+            default:
+             my_bound = OcTreeNames::F;
+             break;
+            }
+          }
+
+         // Storage for the set of Mesh boundaries on which the 
+         // appropriate edge lives.
+         // [New nodes should always be mid-edge nodes and therefore
+         //only live on one boundary but just to play it safe...]
+         std::set<unsigned> boundaries;
+         //Only get the boundaries if we are at the edge of
+         //an element. Nodes in the centre of an element cannot be
+         //on Mesh boundaries
+         if(my_bound!=Tree::OMEGA)
+          clone_el_pt->get_boundaries(my_bound,boundaries);
+           
+#ifdef PARANOID
+         //Case where a new node lives on more than two boundaries
+         // seems fishy enough to flag
+         if (boundaries.size()>2)
+          {
+           throw OomphLibError(
+                  "boundaries.size()>2 seems a bit strange..\n",
+                  "PRefineableQElement<3,INITIAL_NNODE_1D>::p_refine()",
+                  OOMPH_EXCEPTION_LOCATION);
+          }
+#endif
+           
+         //If the node lives on a mesh boundary, 
+         //then we need to create a boundary node
+         if(boundaries.size()> 0)
+          {
+           // Create node and set the pointer to it from the element 
+           created_node_pt = this->construct_boundary_node(jnod,time_stepper_pt);
+
+           //Now we need to work out whether to pin the values at
+           //the new node based on the boundary conditions applied at
+           //its Mesh boundary 
+
+           //Get the boundary conditions from the father
+           Vector<int> bound_cons(this->ncont_interpolated_values());
+           clone_el_pt->get_bcs(my_bound,bound_cons);
+             
+           //Loop over the values and pin, if necessary
+           unsigned n_value = created_node_pt->nvalue();
+           for(unsigned k=0;k<n_value;k++)
+            {
+             if (bound_cons[k]) {created_node_pt->pin(k);}
+            }
+             
+           // Solid node? If so, deal with the positional boundary
+           // conditions:
+           SolidNode* solid_node_pt = 
+            dynamic_cast<SolidNode*>(created_node_pt);
+           if (solid_node_pt!=0)
+            {
+             //Get the positional boundary conditions from the father:
+             unsigned n_dim = created_node_pt->ndim();
+             Vector<int> solid_bound_cons(n_dim);
+             RefineableSolidQElement<3>* clone_solid_el_pt=
+              dynamic_cast<RefineableSolidQElement<3>*>(clone_el_pt);
+#ifdef PARANOID
+             if (clone_solid_el_pt==0)
+              {
+               std::string error_message =
+                "We have a SolidNode outside a refineable SolidElement\n";
+               error_message +=
+                "during mesh refinement -- this doesn't make sense";
+
+               throw OomphLibError(
+                      error_message,
+                      "PRefineableQElement<3,INITIAL_NNODE_1D>::p_refine()",
+                      OOMPH_EXCEPTION_LOCATION);
+              }
+#endif
+             clone_solid_el_pt->
+              get_solid_bcs(my_bound,solid_bound_cons);
+               
+             //Loop over the positions and pin, if necessary
+             for(unsigned k=0;k<n_dim;k++)
+              {
+               if (solid_bound_cons[k]) {solid_node_pt->pin_position(k);}
+              }
+            } //End of if solid_node_pt
+
+           // Next, we Update the boundary lookup schemes
+
+           // Check if we need to add nodes to the mesh
+           if(mesh_pt!=0)
+            {
+           //Loop over the boundaries stored in the set
+           for(std::set<unsigned>::iterator it = boundaries.begin();
+               it != boundaries.end(); ++it)
+            {
+             //Add the node to the boundary
+             mesh_pt->add_boundary_node(*it,created_node_pt);
+               
+             //If we have set an intrinsic coordinate on this
+             //mesh boundary then it must also be interpolated on
+             //the new node
+             //Now interpolate the intrinsic boundary coordinate
+             if(mesh_pt->boundary_coordinate_exists(*it)==true)
+              {
+               Vector<double> zeta(2);
+               clone_el_pt->interpolated_zeta_on_face(*it,
+                                                      my_bound,
+                                                      s,zeta);
+
+               created_node_pt->set_coordinates_on_boundary(*it,zeta);
+              }
+            }
+            }
+          }
+         //Otherwise the node is not on a Mesh boundary and
+         //we create a normal "bulk" node
+         else
+          {
+           // Create node and set the pointer to it from the element 
+           created_node_pt = this->construct_node(jnod,time_stepper_pt);
+          }
+
+         //Now we set the position and values at the newly created node
+       
+         // In the first instance use macro element or FE representation
+         // to create past and present nodal positions.
+         // (THIS STEP SHOULD NOT BE SKIPPED FOR ALGEBRAIC
+         // ELEMENTS AS NOT ALL OF THEM NECESSARILY IMPLEMENT
+         // NONTRIVIAL NODE UPDATE FUNCTIONS. CALLING
+         // THE NODE UPDATE FOR SUCH ELEMENTS/NODES WILL LEAVE
+         // THEIR NODAL POSITIONS WHERE THEY WERE (THIS IS APPROPRIATE
+         // ONCE THEY HAVE BEEN GIVEN POSITIONS) BUT WILL
+         // NOT ASSIGN SENSIBLE INITIAL POSITONS!
+             
+         // Loop over # of history values
+         for (unsigned t=0;t<ntstorage;t++)
+          {
+           // Get position from father element -- this uses the macro
+           // element representation if appropriate. If the node
+           // turns out to be a hanging node later on, then
+           // its position gets adjusted in line with its
+           // hanging node interpolation.
+           Vector<double> x_prev(3);
+           clone_el_pt->get_x(t,s,x_prev);
+             
+           // Set previous positions of the new node
+           for(unsigned i=0;i<3;i++)
+            {
+             created_node_pt->x(t,i) = x_prev[i];
+            }
+          }
+       
+         // Loop over all history values
+         for (unsigned t=0;t<ntstorage;t++)
+          {
+           // Get values from father element
+           // Note: get_interpolated_values() sets Vector size itself.
+           Vector<double> prev_values;
+           clone_el_pt->get_interpolated_values(t,s,prev_values);
+           
+           //Initialise the values at the new node
+           unsigned n_value = created_node_pt->nvalue();
+           for(unsigned k=0;k<n_value;k++)
+            {
+             created_node_pt->set_value(t,k,prev_values[k]);
+            }
+          }
+
+         // Add new node to mesh (if requested)
+         if(mesh_pt!=0)
+          {
+           mesh_pt->add_node_pt(created_node_pt);
+          }
+ 
+         AlgebraicElementBase* alg_el_pt=
+          dynamic_cast<AlgebraicElementBase*>(this);		
+
+         //If we do have an algebraic element
+         if(alg_el_pt!=0)
+          {
+           std::string error_message =
+            "Have not implemented p-refinement for";
+           error_message +=
+            "Algebraic p-refineable elements yet\n";
+         
+           throw 
+            OomphLibError(error_message,
+                          "PRefineableQElement<3,INITIAL_NNODE_1D>::p_refine()",
+                          OOMPH_EXCEPTION_LOCATION);
+          }
+         
+        } //End of case when we build the node ourselves
+ 
+       // Check if the element is an algebraic element
+       AlgebraicElementBase* alg_el_pt=
+        dynamic_cast<AlgebraicElementBase*>(this);		
+         
+       // If the element is an algebraic element, setup 
+       // node position (past and present) from algebraic node update
+       // function. This over-writes previous assingments that
+       // were made based on the macro-element/FE representation.
+       // NOTE: YES, THIS NEEDS TO BE CALLED REPEATEDLY IF THE
+       // NODE IS MEMBER OF MULTIPLE ELEMENTS: THEY ALL ASSIGN
+       // THE SAME NODAL POSITIONS BUT WE NEED TO ADD THE REMESH 
+       // INFO FOR *ALL* ROOT ELEMENTS!
+       if (alg_el_pt!=0)
+        {
+         // Build algebraic node update info for new node 
+         // This sets up the node update data for all node update
+         // functions that are shared by all nodes in the father
+         // element
+         alg_el_pt->setup_algebraic_node_update(this->node_pt(jnod),s,
+                                                clone_el_pt);
+        }
+
+      } // End of vertical loop over nodes in element (i2)
+   
+    } // End of horizontal loop over nodes in element (i1)
+   
+  } // End of horizontal loop over nodes in element (i0)
 
  
- // Set coordinates and project data
- for(unsigned t=0;t<ntstorage;t++)
+ // Loop over all nodes in element again, to re-set the positions
+ // This must be done using the new element's macro-element
+ // representation, rather than the old version which may be
+ // of a different p-order!
+ for(unsigned i0=0;i0<this->P_order;i0++)
   {
-   for (unsigned n=0; n<new_Nnode; n++)
+   //Get the fractional position of the node in the direction of s[0]
+   s_fraction[0] = this->local_one_d_fraction_of_node(i0,0);
+   // Local coordinate
+   s[0] = s_lo[0] + (s_hi[0]-s_lo[0])*s_fraction[0];
+   
+   for(unsigned i1=0;i1<this->P_order;i1++)
     {
-     for(unsigned i=0; i<3; i++)
+     //Get the fractional position of the node in the direction of s[1]
+     s_fraction[1] = this->local_one_d_fraction_of_node(i1,1);
+     // Local coordinate
+     s[1] = s_lo[1] + (s_hi[1]-s_lo[1])*s_fraction[1];
+   
+     for(unsigned i2=0;i2<this->P_order;i2++)
       {
-       this->node_pt(n)->x(i) = new_global_x[n][i];
-      }
-     for(unsigned i=0; i<ncont; i++)
-      {
-       this->node_pt(n)->set_value(t,i,projected_value[t][n][i]);
+       //Get the fractional position of the node in the direction of s[2]
+       s_fraction[2] = this->local_one_d_fraction_of_node(i2,2);
+       // Local coordinate
+       s[2] = s_lo[2] + (s_hi[2]-s_lo[2])*s_fraction[2];
+     
+       // Local node number
+       jnod= i0 + this->P_order*i1 + this->P_order*this->P_order*i2;
+     
+       // Loop over # of history values
+       for (unsigned t=0;t<ntstorage;t++)
+        {
+         // Get position from father element -- this uses the macro
+         // element representation if appropriate. If the node
+         // turns out to be a hanging node later on, then
+         // its position gets adjusted in line with its
+         // hanging node interpolation.
+         Vector<double> x_prev(3);
+         this->get_x(t,s,x_prev);
+       
+         // Set previous positions of the new node
+         for(unsigned i=0;i<3;i++)
+          {
+           this->node_pt(jnod)->x(t,i) = x_prev[i];
+          }
+        }
       }
     }
+  }
+
+
+ // If the element is a MacroElementNodeUpdateElement, set
+ // the update parameters for the current element's nodes --
+ // all this needs is the vector of (pointers to the) 
+ // geometric objects that affect the MacroElement-based
+ // node update -- this needs to be done to set the node
+ // update info for newly created nodes
+ MacroElementNodeUpdateElementBase* clone_m_el_pt=dynamic_cast<
+  MacroElementNodeUpdateElementBase*>(clone_el_pt);
+ if (clone_m_el_pt!=0)
+  {
+   // Get vector of geometric objects from father (construct vector
+   // via copy operation)
+   Vector<GeomObject*> geom_object_pt(clone_m_el_pt->geom_object_pt());
+
+   // Cast current element to MacroElementNodeUpdateElement:
+   MacroElementNodeUpdateElementBase* m_el_pt=dynamic_cast<
+    MacroElementNodeUpdateElementBase*>(this);
+
+#ifdef PARANOID
+   if (m_el_pt==0)
+    {
+     std::string error_message =
+      "Failed to cast to MacroElementNodeUpdateElementBase*\n";
+     error_message += 
+      "Strange -- if my clone is a MacroElementNodeUpdateElement\n";
+     error_message += "then I should be too....\n";
+
+     throw OomphLibError(error_message,
+                         "PRefineableQElement<3,INITIAL_NNODE_1D>::p_refine()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+   // Build update info by passing vector of geometric objects:
+   // This sets the current element to be the update element
+   // for all of the element's nodes -- this is reversed
+   // if the element is ever un-refined in the father element's
+   // rebuild_from_sons() function which overwrites this
+   // assignment to avoid nasty segmentation faults that occur
+   // when a node tries to update itself via an element that no
+   // longer exists...
+   m_el_pt->set_node_update_info(geom_object_pt);
   }
  
  // Not necessary to delete the old nodes since all original nodes are in the
@@ -5551,7 +6500,6 @@ void PRefineableQElement<3,INITIAL_NNODE_1D>::p_refine(
  
  // Do any further-build required
  this->further_build();
- 
 }
 
 //=======================================================================
@@ -5561,11 +6509,6 @@ template<unsigned INITIAL_NNODE_1D>
 void PRefineableQElement<3,INITIAL_NNODE_1D>::
 shape(const Vector<double> &s, Shape &psi) const
 {
- OomphLibWarning(
-  "3D PRefineableQElements have not been fully implemented.",
-  "PRefineableQElement<3,INITIAL_NNODE_1D>::shape()",
-  OOMPH_EXCEPTION_LOCATION);
-  
  switch(P_order)
  {
  case 2:
@@ -5706,11 +6649,6 @@ template<unsigned INITIAL_NNODE_1D>
 void PRefineableQElement<3,INITIAL_NNODE_1D>::
 dshape_local(const Vector<double> &s, Shape &psi, DShape &dpsids) const
 {
- OomphLibWarning(
-  "3D PRefineableQElements have not been fully implemented.",
-  "PRefineableQElement<3,INITIAL_NNODE_1D>::dshape_local()",
-  OOMPH_EXCEPTION_LOCATION);
-  
  switch(P_order)
  {
  case 2:
@@ -5916,10 +6854,649 @@ template<unsigned INITIAL_NNODE_1D>
 void PRefineableQElement<3,INITIAL_NNODE_1D>::
 rebuild_from_sons(Mesh* &mesh_pt)
 {
- throw
-  OomphLibError("This function is not yet implemented.",
-                "PRefineableQElement<3,INITIAL_NNODE_1D>::rebuild_from_sons()",
-                OOMPH_EXCEPTION_LOCATION);
+ // Get p-orders of sons
+ unsigned n_sons = this->tree_pt()->nsons();
+ Vector<unsigned> son_p_order(n_sons);
+ unsigned max_son_p_order = 0;
+ for (unsigned ison=0;ison<n_sons;ison++)
+  {
+   PRefineableElement* el_pt = dynamic_cast<PRefineableElement*>(this->tree_pt()->son_pt(ison)->object_pt());
+   son_p_order[ison] = el_pt->p_order();
+   if (son_p_order[ison] > max_son_p_order) max_son_p_order = son_p_order[ison];
+  }
+  
+ unsigned old_Nnode = this->nnode();
+ unsigned old_P_order = this->p_order();
+ // Set p-order of the element
+ this->p_order() = max_son_p_order;
+  
+ // Change integration scheme
+ delete this->integral_pt();
+ switch(this->p_order())
+  {
+  case 2:
+   this->set_integration_scheme(new GaussLobattoLegendre<3,2>);
+   break;
+  case 3:
+   this->set_integration_scheme(new GaussLobattoLegendre<3,3>);
+   break;
+  case 4:
+   this->set_integration_scheme(new GaussLobattoLegendre<3,4>);
+   break;
+  case 5:
+   this->set_integration_scheme(new GaussLobattoLegendre<3,5>);
+   break;
+  case 6:
+   this->set_integration_scheme(new GaussLobattoLegendre<3,6>);
+   break;
+  case 7:
+   this->set_integration_scheme(new GaussLobattoLegendre<3,7>);
+   break;
+  default:
+   std::ostringstream error_message;
+   error_message <<"\nERROR: Exceeded maximum polynomial order for";
+   error_message <<"\n       integration scheme.\n";
+   throw OomphLibError(error_message.str(),
+                       "PRefineableQElement<3,INITIAL_NNODE_1D>::rebuild_from_sons()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+
+ // Back up pointers to old nodes before they are lost
+ Vector<Node*> old_node_pt(old_Nnode);
+ for (unsigned n=0; n<old_Nnode; n++)
+  {
+   old_node_pt[n] = this->node_pt(n);
+  }
+  
+ // Allocate new space for Nodes (at the element level)
+ this->set_n_node(this->p_order()*this->p_order()*this->p_order());
+  
+ // Copy vertex nodes which were populated in the pre-build
+ this->node_pt(0)
+  = old_node_pt[0];
+ this->node_pt(this->p_order()-1)
+  = old_node_pt[old_P_order-1];
+ this->node_pt(this->p_order()*(this->p_order()-1))
+  = old_node_pt[(old_P_order)*(old_P_order-1)];
+ this->node_pt(this->p_order()*this->p_order()-1)
+  = old_node_pt[(old_P_order)*(old_P_order)-1];
+ this->node_pt(this->p_order()*this->p_order()*(this->p_order()-1))
+  = old_node_pt[old_P_order*old_P_order*(old_P_order-1)];
+ this->node_pt((this->p_order()*this->p_order()+1)*(this->p_order()-1))
+  = old_node_pt[(old_P_order*old_P_order+1)*(old_P_order-1)];
+ this->node_pt(this->p_order()*(this->p_order()+1)*(this->p_order()-1))
+  = old_node_pt[old_P_order*(old_P_order+1)*(old_P_order-1)];
+ this->node_pt(this->p_order()*this->p_order()*this->p_order()-1)
+  = old_node_pt[old_P_order*old_P_order*old_P_order-1];
+
+ // Copy midpoint nodes from sons if new p-order is odd
+ if(this->p_order() % 2 == 1)
+  {
+   //Work out which is midpoint node
+   unsigned n_p = this->p_order();
+   unsigned m = (n_p-1)/2;
+
+   unsigned s0space = m;
+   unsigned s1space = m*n_p;
+   unsigned s2space = m*n_p*n_p;
+
+   // Back face
+   // DB edge
+   this->node_pt(1*s0space + 0*s1space + 0*s2space)
+    = dynamic_cast<RefineableQElement<3>*>
+     (octree_pt()->son_pt(OcTreeNames::RDB)->object_pt())->vertex_node_pt(0);
+   // LB edge
+   this->node_pt(0*s0space + 1*s1space + 0*s2space)
+    = dynamic_cast<RefineableQElement<3>*>
+     (octree_pt()->son_pt(OcTreeNames::LUB)->object_pt())->vertex_node_pt(0);
+   // B centre
+   this->node_pt(1*s0space + 1*s1space + 0*s2space)
+    = dynamic_cast<RefineableQElement<3>*>
+     (octree_pt()->son_pt(OcTreeNames::RUB)->object_pt())->vertex_node_pt(0);
+   // RB edge
+   this->node_pt(2*s0space + 1*s1space + 0*s2space)
+    = dynamic_cast<RefineableQElement<3>*>
+     (octree_pt()->son_pt(OcTreeNames::RUB)->object_pt())->vertex_node_pt(1);
+   // UB edge
+   this->node_pt(1*s0space + 2*s1space + 0*s2space)
+    = dynamic_cast<RefineableQElement<3>*>
+     (octree_pt()->son_pt(OcTreeNames::RUB)->object_pt())->vertex_node_pt(2);
+
+   // Mid-way between between back and front faces
+   // LD edge
+   this->node_pt(0*s0space + 0*s1space + 1*s2space)
+    = dynamic_cast<RefineableQElement<3>*>
+     (octree_pt()->son_pt(OcTreeNames::LDF)->object_pt())->vertex_node_pt(0);
+   // D centre
+   this->node_pt(1*s0space + 0*s1space + 1*s2space)
+    = dynamic_cast<RefineableQElement<3>*>
+     (octree_pt()->son_pt(OcTreeNames::LDF)->object_pt())->vertex_node_pt(1);
+   // RD edge
+   this->node_pt(2*s0space + 0*s1space + 1*s2space)
+    = dynamic_cast<RefineableQElement<3>*>
+     (octree_pt()->son_pt(OcTreeNames::RDF)->object_pt())->vertex_node_pt(1);
+   // L centre
+   this->node_pt(0*s0space + 1*s1space + 1*s2space)
+    = dynamic_cast<RefineableQElement<3>*>
+     (octree_pt()->son_pt(OcTreeNames::LUF)->object_pt())->vertex_node_pt(0);
+   // Centre
+   this->node_pt(1*s0space + 1*s1space + 1*s2space)
+    = dynamic_cast<RefineableQElement<3>*>
+     (octree_pt()->son_pt(OcTreeNames::RUF)->object_pt())->vertex_node_pt(0);
+   // R centre
+   this->node_pt(2*s0space + 1*s1space + 1*s2space)
+    = dynamic_cast<RefineableQElement<3>*>
+     (octree_pt()->son_pt(OcTreeNames::RUF)->object_pt())->vertex_node_pt(1);
+   // LU edge
+   this->node_pt(0*s0space + 2*s1space + 1*s2space)
+    = dynamic_cast<RefineableQElement<3>*>
+     (octree_pt()->son_pt(OcTreeNames::LUF)->object_pt())->vertex_node_pt(2);
+   // U center
+   this->node_pt(1*s0space + 2*s1space + 1*s2space)
+    = dynamic_cast<RefineableQElement<3>*>
+     (octree_pt()->son_pt(OcTreeNames::RUF)->object_pt())->vertex_node_pt(2);
+   // RU edge
+   this->node_pt(2*s0space + 2*s1space + 1*s2space)
+    = dynamic_cast<RefineableQElement<3>*>
+     (octree_pt()->son_pt(OcTreeNames::RUF)->object_pt())->vertex_node_pt(3);
+
+   // Front face
+   // DF edge
+   this->node_pt(1*s0space + 0*s1space + 2*s2space)
+    = dynamic_cast<RefineableQElement<3>*>
+     (octree_pt()->son_pt(OcTreeNames::LDF)->object_pt())->vertex_node_pt(5);
+   // LF edge
+   this->node_pt(0*s0space + 1*s1space + 2*s2space)
+    = dynamic_cast<RefineableQElement<3>*>
+     (octree_pt()->son_pt(OcTreeNames::LUF)->object_pt())->vertex_node_pt(4);
+   // F centre
+   this->node_pt(1*s0space + 1*s1space + 2*s2space)
+    = dynamic_cast<RefineableQElement<3>*>
+     (octree_pt()->son_pt(OcTreeNames::RUF)->object_pt())->vertex_node_pt(4);
+   // RF edge
+   this->node_pt(2*s0space + 1*s1space + 2*s2space)
+    = dynamic_cast<RefineableQElement<3>*>
+     (octree_pt()->son_pt(OcTreeNames::RUF)->object_pt())->vertex_node_pt(5);
+   // UF edge
+   this->node_pt(1*s0space + 2*s1space + 2*s2space)
+    = dynamic_cast<RefineableQElement<3>*>
+     (octree_pt()->son_pt(OcTreeNames::RUF)->object_pt())->vertex_node_pt(6);
+  }
+
+ //The timestepper should be the same for all nodes and node 0 should
+ //never be deleted.
+ if(this->node_pt(0)==0)
+  {
+   throw OomphLibError("The Corner node (0) does not exist",
+                       "PRefineableQElement<3,INITIAL_NNODE_1D>::rebuild_from_sons()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+   
+ TimeStepper* time_stepper_pt = this->node_pt(0)->time_stepper_pt();
+ unsigned ntstorage = time_stepper_pt->ntstorage();
+
+ unsigned jnod=0;
+ Vector<double> s_fraction(3), s(3);
+ //Loop over the nodes in the element
+ unsigned n_p = this->nnode_1d();
+ for(unsigned i0=0;i0<n_p;i0++)
+  {
+   //Get the fractional position of the node
+   s_fraction[0] = this->local_one_d_fraction_of_node(i0,0);
+   //Local coordinate
+   s[0] = -1.0 + 2.0*s_fraction[0];
+
+   for(unsigned i1=0;i1<n_p;i1++)
+    {
+     //Get the fractional position of the node in the direction of s[1]
+     s_fraction[1] = this->local_one_d_fraction_of_node(i1,1);
+     // Local coordinate in father element
+     s[1] = -1.0 + 2.0*s_fraction[1];
+
+     for(unsigned i2=0;i2<n_p;i2++)
+      {
+       //Get the fractional position of the node in the direction of s[2]
+       s_fraction[2] = this->local_one_d_fraction_of_node(i2,2);
+       // Local coordinate in father element
+       s[2] = -1.0 + 2.0*s_fraction[2];
+ 
+       //Set the local node number
+       jnod = i0 + n_p*i1 + n_p*n_p*i2;
+     
+       // Initialise flag: So far, this node hasn't been built
+       // or copied yet
+       bool node_done=false; 
+     
+       //Get the pointer to the node in this element, returns NULL
+       //if there is not node
+       Node* created_node_pt = this->get_node_at_local_coordinate(s);
+
+       // Does this node already exist in this element?
+       //----------------------------------------------
+       if (created_node_pt!=0)
+        {
+         // Copy node across
+         this->node_pt(jnod) = created_node_pt;
+       
+         // Node has been created by copy
+         node_done = true;
+        }
+       // Node does not exist in this element but might already
+       //------------------------------------------------------
+       // have been created by neighbouring elements
+       //-------------------------------------------
+       else
+        {
+         //Was the node created by one of its neighbours
+         //Whether or not the node lies on an edge can be calculated
+         //by from the fractional position
+         created_node_pt =
+          node_created_by_neighbour(s_fraction);
+
+         //If the node was so created, assign the pointers
+         if(created_node_pt!=0)
+          {
+           this->node_pt(jnod) = created_node_pt;
+           //Node has been created
+           node_done = true;
+          }
+        } // Node does not exist in this element
+
+       // Node has not been built anywhere ---> build it here
+       if (!node_done)
+        {
+         //First, find the son element in which the node should live
+         
+         //Find coordinates in the sons
+         Vector<double> s_in_son(3);
+         //using namespace OcTreeNames;
+         int son=-10;
+         //On the left
+         if(s_fraction[0] < 0.5)
+          {
+           //On the bottom
+           if(s_fraction[1] < 0.5)
+            {
+             //On the back
+             if(s_fraction[2] < 0.5)
+              {
+               //It's the LDB son
+               son = OcTreeNames::LDB;
+               s_in_son[0] = -1.0 + 4.0*s_fraction[0];
+               s_in_son[1] = -1.0 + 4.0*s_fraction[1];
+               s_in_son[2] = -1.0 + 4.0*s_fraction[2];
+              }
+             //On the front
+             else
+              {
+               //It's the LDF son
+               son = OcTreeNames::LDF;
+               s_in_son[0] = -1.0 + 4.0*s_fraction[0];
+               s_in_son[1] = -1.0 + 4.0*s_fraction[1];
+               s_in_son[2] = -1.0 + 4.0*(s_fraction[2]-0.5);
+              }
+            }
+           //On the top
+           else
+            {
+             //On the back
+             if(s[2] < 0.0)
+              {
+               //It's the LUB son
+               son = OcTreeNames::LUB;
+               s_in_son[0] = -1.0 + 4.0*s_fraction[0];
+               s_in_son[1] = -1.0 + 4.0*(s_fraction[1]-0.5);
+               s_in_son[2] = -1.0 + 4.0*s_fraction[2];
+              }
+             //On the front
+             else
+              {
+               //It's the LUF son
+               son = OcTreeNames::LUF;
+               s_in_son[0] = -1.0 + 4.0*s_fraction[0];
+               s_in_son[1] = -1.0 + 4.0*(s_fraction[1]-0.5);
+               s_in_son[2] = -1.0 + 4.0*(s_fraction[2]-0.5);
+              }
+            }
+          }
+         //On the right
+         else
+          {
+           //On the bottom
+           if(s[1] < 0.0)
+            {
+             //On the back
+             if(s[2] < 0.0)
+              {
+               //It's the RDB son
+               son = OcTreeNames::RDB;
+               s_in_son[0] = -1.0 + 4.0*(s_fraction[0]-0.5);
+               s_in_son[1] = -1.0 + 4.0*s_fraction[1];
+               s_in_son[2] = -1.0 + 4.0*s_fraction[2];
+              }
+             //On the front
+             else
+              {
+               //It's the RDF son
+               son = OcTreeNames::RDF;
+               s_in_son[0] = -1.0 + 4.0*(s_fraction[0]-0.5);
+               s_in_son[1] = -1.0 + 4.0*s_fraction[1];
+               s_in_son[2] = -1.0 + 4.0*(s_fraction[2]-0.5);
+              }
+            }
+           //On the top
+           else
+            {
+             //On the back
+             if(s[2] < 0.0)
+              {
+               //It's the RUB son
+               son = OcTreeNames::RUB;
+               s_in_son[0] = -1.0 + 4.0*(s_fraction[0]-0.5);
+               s_in_son[1] = -1.0 + 4.0*(s_fraction[1]-0.5);
+               s_in_son[2] = -1.0 + 4.0*s_fraction[2];
+              }
+             //On the front
+             else
+              {
+               //It's the RUF son
+               son = OcTreeNames::RUF;
+               s_in_son[0] = -1.0 + 4.0*(s_fraction[0]-0.5);
+               s_in_son[1] = -1.0 + 4.0*(s_fraction[1]-0.5);
+               s_in_son[2] = -1.0 + 4.0*(s_fraction[2]-0.5);
+              }
+            }
+          }
+
+         //Get the pointer to the son element in which the new node
+         //would live
+         PRefineableQElement<3,INITIAL_NNODE_1D>* son_el_pt = 
+          dynamic_cast<PRefineableQElement<3,INITIAL_NNODE_1D>*>(
+           this->tree_pt()->son_pt(son)->object_pt());
+         
+         //If we are rebuilding, then worry about the boundary conditions
+         //Find the boundary of the node
+         //Initially none
+         int boundary=Tree::OMEGA;
+         //If we are on the left face
+         if(i0==0) {boundary = OcTreeNames::L;}
+         //If we are on the right face
+         else if(i0==n_p-1) {boundary = OcTreeNames::R;}
+         
+         //If we are on the bottom face
+         if(i1==0)
+          {
+           //If we already have already set the boundary, we're on an edge
+           switch(boundary)
+            {
+            case OcTreeNames::L:
+             boundary = OcTreeNames::LD;
+             break;
+            case OcTreeNames::R:
+             boundary = OcTreeNames::RD;
+             break;
+             //Boundary not set
+            default:
+             boundary = OcTreeNames::D;
+             break;
+            }
+          }
+         //If we are the top face
+         else if(i1==n_p-1)
+          {
+           //If we already have a boundary
+           switch(boundary)
+            {
+            case OcTreeNames::L:
+             boundary = OcTreeNames::LU;
+             break;
+            case OcTreeNames::R:
+             boundary = OcTreeNames::RU;
+             break;
+            default:
+             boundary = OcTreeNames::U;
+             break;
+            }
+          }
+         
+         //If we are on the back face
+         if(i2==0)
+          {
+           //If we already have already set the boundary, we're on an edge
+           switch(boundary)
+            {
+            case OcTreeNames::L:
+             boundary = OcTreeNames::LB;
+             break;
+            case OcTreeNames::LD:
+             boundary = OcTreeNames::LDB;
+             break;
+            case OcTreeNames::LU:
+             boundary = OcTreeNames::LUB;
+             break;
+            case OcTreeNames::R:
+             boundary = OcTreeNames::RB;
+             break;
+            case OcTreeNames::RD:
+             boundary = OcTreeNames::RDB;
+             break;
+            case OcTreeNames::RU:
+             boundary = OcTreeNames::RUB;
+             break;
+            case OcTreeNames::D:
+             boundary = OcTreeNames::DB;
+             break;
+            case OcTreeNames::U:
+             boundary = OcTreeNames::UB;
+             break;
+             //Boundary not set
+            default:
+             boundary = OcTreeNames::B;
+             break;
+            }
+          }
+         //If we are the front face
+         else if(i2==n_p-1)
+          {
+           //If we already have a boundary
+           switch(boundary)
+            {
+            case OcTreeNames::L:
+             boundary = OcTreeNames::LF;
+             break;
+            case OcTreeNames::LD:
+             boundary = OcTreeNames::LDF;
+             break;
+            case OcTreeNames::LU:
+             boundary = OcTreeNames::LUF;
+             break;
+            case OcTreeNames::R:
+             boundary = OcTreeNames::RF;
+             break;
+            case OcTreeNames::RD:
+             boundary = OcTreeNames::RDF;
+             break;
+            case OcTreeNames::RU:
+             boundary = OcTreeNames::RUF;
+             break;
+            case OcTreeNames::D:
+             boundary = OcTreeNames::DF;
+             break;
+            case OcTreeNames::U:
+             boundary = OcTreeNames::UF;
+             break;
+            default:
+             boundary = OcTreeNames::F;
+             break;
+            }
+          }
+
+         // set of boundaries that this edge in the son lives on
+         std::set<unsigned> boundaries;
+
+         //Now get the boundary conditions from the son
+         //The boundaries will be common to the son because there can be
+         //no rotations here
+         if(boundary!=Tree::OMEGA)
+          {son_el_pt->get_boundaries(boundary,boundaries);}
+         
+         // If the node lives on a boundary: 
+         // Construct a boundary node, 
+         // Get boundary conditions and
+         // update all lookup schemes
+         if(boundaries.size()>0)
+          {
+           //Construct the new node
+           created_node_pt = this->construct_boundary_node(jnod,time_stepper_pt);
+         
+           //Get the boundary conditions from the son
+           Vector<int> bound_cons(this->ncont_interpolated_values());
+           son_el_pt->get_bcs(boundary,bound_cons);
+           
+           //Loop over the values and pin if necessary
+           unsigned nval = created_node_pt->nvalue();
+           for(unsigned k=0;k<nval;k++)
+            {
+             if(bound_cons[k]) {created_node_pt->pin(k);}
+            }
+           
+           // Solid node? If so, deal with the positional boundary
+           // conditions:
+           SolidNode* solid_node_pt =
+            dynamic_cast<SolidNode*>(created_node_pt);
+           if (solid_node_pt!=0)
+            {
+             //Get the positional boundary conditions from the father:
+             unsigned n_dim = created_node_pt->ndim();
+             Vector<int> solid_bound_cons(n_dim);
+             RefineableSolidQElement<3>* son_solid_el_pt=
+              dynamic_cast<RefineableSolidQElement<3>*>(son_el_pt);
+#ifdef PARANOID
+             if (son_solid_el_pt==0)
+              {
+               std::string error_message =
+                "We have a SolidNode outside a refineable SolidElement\n";
+               error_message +=
+                "during mesh refinement -- this doesn't make sense\n";
+
+               throw OomphLibError(
+                      error_message,
+                      "PRefineableQElement<3,INITIAL_NNODE_1D>::rebuild_from_sons()",
+                      OOMPH_EXCEPTION_LOCATION);
+              }
+#endif
+             son_solid_el_pt->
+              get_solid_bcs(boundary,solid_bound_cons);
+             
+             //Loop over the positions and pin, if necessary
+             for(unsigned k=0;k<n_dim;k++)
+              {
+               if (solid_bound_cons[k]) {solid_node_pt->pin_position(k);}
+              }
+            } //End of if solid_node_pt
+
+         
+
+           //Next we update the boundary look-up schemes
+           //Loop over the boundaries stored in the set
+           for(std::set<unsigned>::iterator it = boundaries.begin();
+               it != boundaries.end(); ++it)
+            {
+             //Add the node to the boundary
+             mesh_pt->add_boundary_node(*it,created_node_pt);
+             
+             //If we have set an intrinsic coordinate on this
+             //mesh boundary then it must also be interpolated on
+             //the new node
+             //Now interpolate the intrinsic boundary coordinate
+             if(mesh_pt->boundary_coordinate_exists(*it)==true)
+              {
+               Vector<double> zeta(2);
+               son_el_pt->interpolated_zeta_on_face(*it,boundary,
+                                                    s_in_son,zeta);
+               
+               created_node_pt->set_coordinates_on_boundary(*it,zeta);
+              }
+            }
+          }
+         //Otherwise the node is not on a Mesh boundary 
+         //and we create a normal "bulk" node
+         else
+          {
+           //Construct the new node
+           created_node_pt = this->construct_node(jnod,time_stepper_pt);
+          }
+
+         //Now we set the position and values at the newly created node
+         
+         // In the first instance use macro element or FE representation
+         // to create past and present nodal positions.
+         // (THIS STEP SHOULD NOT BE SKIPPED FOR ALGEBRAIC
+         // ELEMENTS AS NOT ALL OF THEM NECESSARILY IMPLEMENT
+         // NONTRIVIAL NODE UPDATE FUNCTIONS. CALLING
+         // THE NODE UPDATE FOR SUCH ELEMENTS/NODES WILL LEAVE
+         // THEIR NODAL POSITIONS WHERE THEY WERE (THIS IS APPROPRIATE
+         // ONCE THEY HAVE BEEN GIVEN POSITIONS) BUT WILL
+         // NOT ASSIGN SENSIBLE INITIAL POSITONS!
+           
+         // Loop over # of history values
+         //Loop over # of history values
+         for(unsigned t=0;t<ntstorage;t++)
+          {
+           using namespace QuadTreeNames;
+           //Get the position from the son
+           Vector<double> x_prev(3);
+           
+           //Now let's fill in the value
+           son_el_pt->get_x(t,s_in_son,x_prev);
+           for(unsigned i=0;i<3;i++)
+            {
+             created_node_pt->x(t,i) = x_prev[i];
+            }
+          }
+
+         // Now set up the values
+         // Loop over all history values
+         for(unsigned t=0;t<ntstorage;t++)
+          {
+           // Get values from father element
+           // Note: get_interpolated_values() sets Vector size itself.
+           Vector<double> prev_values;
+           son_el_pt->get_interpolated_values(t,s_in_son,prev_values);
+           
+           //Initialise the values at the new node
+           for(unsigned k=0;k<created_node_pt->nvalue();k++)
+            {
+             created_node_pt->set_value(t,k,prev_values[k]);
+            }
+          }
+         
+         //Add the node to the mesh
+         mesh_pt->add_node_pt(created_node_pt);
+
+         // Check if the element is an algebraic element
+         AlgebraicElementBase* alg_el_pt =
+          dynamic_cast<AlgebraicElementBase*>(this);
+         
+         //If we do have an algebraic element
+         if(alg_el_pt!=0)
+          {
+           std::string error_message =
+            "Have not implemented rebuilding from sons for";
+           error_message +=
+            "Algebraic p-refineable elements yet\n";
+         
+           throw 
+            OomphLibError(error_message,
+                          "PRefineableQElement<3,INITIAL_NNODE_1D>::rebuild_from_sons()",
+                          OOMPH_EXCEPTION_LOCATION);
+          }
+       
+        } //End of the case when we build the node ourselves
+      }
+    }
+  }
+
 }
 
 //=================================================================
@@ -5933,17 +7510,11 @@ template<unsigned INITIAL_NNODE_1D>
 void PRefineableQElement<3,INITIAL_NNODE_1D>::
 check_integrity(double& max_error)
 {
- OomphLibWarning(
-  "3D PRefineableQElements have not been fully implemented.",
-  "PRefineableQElement<3,INITIAL_NNODE_1D>::check_integrity()",
-  OOMPH_EXCEPTION_LOCATION);
- 
- throw
-  OomphLibError("This function has not yet been implemented.",
-                "PRefineableQElement<3,INITIAL_NNODE_1D>::check_integrity()",
-                OOMPH_EXCEPTION_LOCATION);
- 
- //Not yet implemented
+ // Not yet implemented -- doing nothing for now.
+       
+ //Dummy set max_error to 0
+ max_error = 0.0;
+ return;
 }
 
 //=================================================================
@@ -5952,37 +7523,2117 @@ check_integrity(double& max_error)
 //=================================================================
 template<unsigned INITIAL_NNODE_1D>
 void PRefineableQElement<3,INITIAL_NNODE_1D>::
-oc_hang_helper(const int &value_id, const int &my_edge,
-               std::ofstream& output_hangfile)
+oc_hang_helper(const int &value_id,
+               const int &my_face, std::ofstream& output_hangfile)
 {
- OomphLibWarning(
-  "3D PRefineableQElements have not been fully implemented.",
-  "PRefineableQElement<3,INITIAL_NNODE_1D>::oc_hang_helper()",
-  OOMPH_EXCEPTION_LOCATION);
-  
- //Not implemented yet
- RefineableQElement<3>::oc_hang_helper(value_id, my_edge, output_hangfile);
-}
+ using namespace OcTreeNames;
 
-////===================================================================
-///// Internal function to return the value of the intrinsic boundary
-///// coordinate interpolated along the face (of the element as it was
-///// before p-refinement)
-////===================================================================
-//template<unsigned INITIAL_NNODE_1D>
-//void PRefineableQElement<3,INITIAL_NNODE_1D>::
-//interpolated_zeta_on_face_before_p_refinement(const unsigned &boundary,
-//                                              const int &face,
-//                                              const Vector<double> &s,
-//                                              const unsigned &old_p_order,
-//                                              const Vector<Node*> &old_node_pt,
-//                                              Vector<double> &zeta)
-//{
-// throw OomphLibError(
-//  "This function has not been implemented yet.",
-//  OOMPH_CURRENT_FUNCTION,
-//  OOMPH_EXCEPTION_LOCATION);
-//}
+ Vector<unsigned> translate_s(3);
+ Vector<double> s_lo_neigh(3);
+ Vector<double> s_hi_neigh(3);
+ int neigh_face,diff_level;
+ 
+ // Find pointer to neighbour in this direction
+ OcTree* neigh_pt;
+ neigh_pt=this->octree_pt()->
+  gteq_face_neighbour(my_face, translate_s, s_lo_neigh, 
+                      s_hi_neigh,neigh_face,diff_level);
+
+ // Work out master/slave faces
+ //----------------------------
+ 
+ // Set up booleans
+ //bool h_type_master = false;
+ bool h_type_slave  = false;
+ //bool p_type_master = false;
+ bool p_type_slave  = false;
+ 
+ // Neighbour exists
+ if(neigh_pt!=0)
+  {
+   // Check if neighbour is bigger than me
+   if(diff_level!=0)
+    {
+     // Slave at h-type non-conformity
+     h_type_slave = true;
+    }
+   // Check if neighbour is the same size as me
+   else if(neigh_pt->nsons()==0)
+    {
+     // Neighbour is same size as me
+     // Find p-orders of each element
+     unsigned my_p_order =
+      dynamic_cast<PRefineableQElement<3,INITIAL_NNODE_1D>*>
+       (this)->p_order();
+     unsigned neigh_p_order =
+      dynamic_cast<PRefineableQElement<3,INITIAL_NNODE_1D>*>
+       (neigh_pt->object_pt())->p_order();
+
+     // Check for p-type non-conformity
+     if(neigh_p_order==my_p_order)
+      {
+       // At a conforming interface
+      }
+     else if(neigh_p_order<my_p_order)
+      {
+       // Slave at p-type non-conformity
+       p_type_slave = true;
+      }
+     else
+      {
+       // Master at p-type non-conformity
+       //p_type_master = true;
+      }
+    }
+   // Neighbour must be smaller than me
+   else
+    {
+     // Master at h-type non-conformity
+     //h_type_master = true;
+    }
+  }
+ else
+  {
+   // Face is on a boundary
+  }
+
+ // Work out master/slave edges
+ //----------------------------
+ if (h_type_slave || p_type_slave || true)
+  {
+   // Get edges of face and the face that shares that edge
+   Vector<unsigned> face_edge(4), face_edge_other_face(4);
+   switch(my_face)
+    {
+    case L:
+     face_edge[0] = LB;
+     face_edge_other_face[0] = B;
+     face_edge[1] = LF;
+     face_edge_other_face[1] = F;
+     face_edge[2] = LD;
+     face_edge_other_face[2] = D;
+     face_edge[3] = LU;
+     face_edge_other_face[3] = U;
+     break;
+    case R:
+     face_edge[0] = RB;
+     face_edge_other_face[0] = B;
+     face_edge[1] = RF;
+     face_edge_other_face[1] = F;
+     face_edge[2] = RD;
+     face_edge_other_face[2] = D;
+     face_edge[3] = RU;
+     face_edge_other_face[3] = U;
+     break;
+    case U:
+     face_edge[0] = UB;
+     face_edge_other_face[0] = B;
+     face_edge[1] = UF;
+     face_edge_other_face[1] = F;
+     face_edge[2] = LU;
+     face_edge_other_face[2] = L;
+     face_edge[3] = RU;
+     face_edge_other_face[3] = R;
+     break;
+    case D:
+     face_edge[0] = DB;
+     face_edge_other_face[0] = B;
+     face_edge[1] = DF;
+     face_edge_other_face[1] = F;
+     face_edge[2] = LD;
+     face_edge_other_face[2] = L;
+     face_edge[3] = RD;
+     face_edge_other_face[3] = R;
+     break;
+    case B:
+     face_edge[0] = DB;
+     face_edge_other_face[0] = D;
+     face_edge[1] = UB;
+     face_edge_other_face[1] = U;
+     face_edge[2] = LB;
+     face_edge_other_face[2] = L;
+     face_edge[3] = RB;
+     face_edge_other_face[3] = R;
+     break;
+    case F:
+     face_edge[0] = DF;
+     face_edge_other_face[0] = D;
+     face_edge[1] = UF;
+     face_edge_other_face[1] = U;
+     face_edge[2] = LF;
+     face_edge_other_face[2] = L;
+     face_edge[3] = RF;
+     face_edge_other_face[3] = R;
+     break;
+    default:
+     throw OomphLibError("my_face not L, R, D, U, B, F\n",
+                         "PRefineableQElement<3,INITIAL_NNODE_1D>::oc_hang_helper()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+   
+   // Loop over edges of face
+   for(unsigned i=0; i<4; i++)
+    {
+     // Get edge
+     unsigned my_edge = face_edge[i];
+     
+     // Separate storage for edge mortaring
+     OcTree* edge_neigh_pt=0;
+     Vector<unsigned> edge_translate_s(3);
+     Vector<double> edge_s_lo_neigh(3);
+     Vector<double> edge_s_hi_neigh(3);
+     int neigh_edge=0,edge_diff_level=0;
+     unsigned edge_p_order=
+      dynamic_cast<PRefineableQElement<3,INITIAL_NNODE_1D>*>(this)->p_order();
+
+     // Temporary storage to keep track of master edge
+     Vector<unsigned> tmp_edge_translate_s(3);
+     Vector<double> tmp_edge_s_lo_neigh(3);
+     Vector<double> tmp_edge_s_hi_neigh(3);
+     int tmp_neigh_edge,tmp_edge_diff_level;
+
+     // Initially return the zero-th true edge neighbour
+     unsigned i_root_edge_neighbour=0;
+
+     // Initialise the total number of true edge neighbours
+     unsigned nroot_edge_neighbour=0;
+
+     // Flag to keep track of master status of my_edge
+     bool my_edge_is_master = true;
+     //unsigned master_edge_index=0;
+   
+     // Keep searching until we've found the node or until we've checked
+     // all available edge neighbours
+     bool keep_searching = true;
+     bool search_faces = false;
+     bool first_face_searched = false;
+     //unsigned index=0;
+     while (keep_searching)
+      {
+       // Pointer to edge neighbouring OcTree
+       OcTree* tmp_edge_neigh_pt;
+       
+       // Looking in edge neighbours that are also face neighbours
+       //if(index==0 || index==1)
+       if(search_faces)
+        {
+         if(!first_face_searched)
+          {
+           // Find pointer to neighbour in this direction
+           tmp_edge_neigh_pt=this->octree_pt()->
+            gteq_face_neighbour(my_face,
+                                tmp_edge_translate_s,
+                                tmp_edge_s_lo_neigh, tmp_edge_s_hi_neigh,
+                                tmp_neigh_edge, tmp_edge_diff_level);
+
+           // Mark first face as searched
+           first_face_searched = true;
+          }
+         else
+          {
+           // Find pointer to neighbour in this direction
+           tmp_edge_neigh_pt=this->octree_pt()->
+            gteq_face_neighbour(face_edge_other_face[i],
+                                tmp_edge_translate_s,
+                                tmp_edge_s_lo_neigh, tmp_edge_s_hi_neigh,
+                                tmp_neigh_edge, tmp_edge_diff_level);
+           
+           // Search is finally exhausted
+           keep_searching = false;
+          }
+
+        }
+       // Looking in a true edge neighbour
+       else
+        {
+         // Find pointer to neighbour in this direction
+         tmp_edge_neigh_pt=this->octree_pt()->
+          gteq_true_edge_neighbour(my_edge,
+                                   i_root_edge_neighbour,
+                                   nroot_edge_neighbour,
+                                   tmp_edge_translate_s,
+                                   tmp_edge_s_lo_neigh, tmp_edge_s_hi_neigh,
+                                   tmp_neigh_edge, tmp_edge_diff_level);
+        }
+
+       // Set up booleans
+       //bool h_type_edge_master = false;
+       //bool h_type_edge_slave  = false;
+       //bool p_type_edge_master = false;
+       //bool p_type_edge_slave  = false;
+
+       // Flag to check if we have a new edge master
+       bool new_edge_master = false;
+ 
+       // Edge neighbour exists
+       if(tmp_edge_neigh_pt!=0)
+        {
+         // Check if neighbour is bigger than my biggest neighbour
+         if(tmp_edge_diff_level<edge_diff_level)
+          {
+           // Slave at h-type non-conformity
+           //h_type_edge_slave = true;
+           new_edge_master = true;
+           // Update edge_diff_level and p-order
+           edge_diff_level = tmp_edge_diff_level;
+           edge_p_order =
+            dynamic_cast<PRefineableQElement<3,INITIAL_NNODE_1D>*>
+             (tmp_edge_neigh_pt->object_pt())->p_order();
+          }
+         // Check if neighbour is the same size as my biggest neighbour
+         else if(tmp_edge_diff_level==edge_diff_level && tmp_edge_neigh_pt->nsons()==0)
+          {
+           // Neighbour is same size as me
+           // Find p-orders of each element
+           //unsigned my_p_order =
+           // dynamic_cast<PRefineableQElement<3,INITIAL_NNODE_1D>*>
+           //  (this)->p_order();
+           unsigned tmp_edge_neigh_p_order =
+            dynamic_cast<PRefineableQElement<3,INITIAL_NNODE_1D>*>
+             (tmp_edge_neigh_pt->object_pt())->p_order();
+
+           // Check for p-type non-conformity
+           if(tmp_edge_neigh_p_order==edge_p_order)
+            {
+             // At a conforming interface
+            }
+           else if(tmp_edge_neigh_p_order<edge_p_order)
+            {
+             // Slave at p-type non-conformity
+             //p_type_edge_slave = true;
+             new_edge_master = true;
+             // Update edge_diff_level and p-order
+             edge_diff_level = tmp_edge_diff_level;
+             edge_p_order =
+              dynamic_cast<PRefineableQElement<3,INITIAL_NNODE_1D>*>
+               (tmp_edge_neigh_pt->object_pt())->p_order();
+            }
+           else
+            {
+             // Master at p-type non-conformity
+             //p_type_edge_master = true;
+            }
+          }
+         // Neighbour must be smaller than me
+         else
+          {
+           // Master at h-type non-conformity
+           //h_type_edge_master = true;
+          }
+        }
+       else
+        {
+         // Edge is on a boundary
+        }
+
+       // Update master neighbour information
+       if(new_edge_master)
+        {
+         // Store new master edge information
+         edge_neigh_pt    = tmp_edge_neigh_pt;
+         edge_translate_s = tmp_edge_translate_s;
+         edge_s_lo_neigh  = tmp_edge_s_lo_neigh;
+         edge_s_hi_neigh  = tmp_edge_s_hi_neigh;
+         neigh_edge       = tmp_neigh_edge;
+         edge_diff_level  = tmp_edge_diff_level;
+
+         // Set this edge as slave
+         my_edge_is_master = false;
+        }
+
+       // Keep searching, but only if there are further edge neighbours
+       // Try next root edge neighbour
+       i_root_edge_neighbour++;
+
+       // Increment counter
+       //index++;
+
+       // Have we exhausted the search over true edge neighbours
+       //if (index>2 && i_root_edge_neighbour>=nroot_edge_neighbour)
+       if (i_root_edge_neighbour >= nroot_edge_neighbour)
+        {
+         //keep_searching = false;
+         // Extend search to face neighours (these are edge neighbours too)
+         search_faces = true;
+        }
+
+      } // End of while keep searching over all face and true edge neighbours
+
+     // Now do edge mortaring to enforce the mortar vertex matching condition
+     if (!my_edge_is_master)
+      {
+       //Compute the active coordinate index along the this side of mortar
+       unsigned active_coord_index;
+       switch(my_edge)
+        {
+        case DB:
+        case DF:
+        case UB:
+        case UF:
+         active_coord_index = 0;
+         break;
+        case LB:
+        case RB:
+        case LF:
+        case RF:
+         active_coord_index = 1;
+         break;
+        case LD:
+        case RD:
+        case LU:
+        case RU:
+         active_coord_index = 2;
+         break;
+        default:
+         throw OomphLibError(
+                "Cannot transform coordinates",
+                "PRefineableQElement<3,INITIAL_NNODE_1D>::oc_hang_helper()",
+                OOMPH_EXCEPTION_LOCATION);
+        }
+   
+       // Get pointer to neighbouring master element (in p-refineable form)
+       PRefineableQElement<3,INITIAL_NNODE_1D>* edge_neigh_obj_pt;
+       edge_neigh_obj_pt = dynamic_cast<PRefineableQElement<3,INITIAL_NNODE_1D>*>
+                            (edge_neigh_pt->object_pt());
+
+       // Create vector of master and slave nodes
+       //----------------------------------------
+       Vector<Node*> master_node_pt, slave_node_pt;
+       Vector<unsigned> master_node_number, slave_node_number;
+       Vector<Vector<double> > slave_node_s_fraction;
+     
+       //Number of nodes in one dimension
+       const unsigned my_n_p = this->ninterpolating_node_1d(value_id);
+       const unsigned neigh_n_p = edge_neigh_obj_pt->ninterpolating_node_1d(value_id);
+   
+       //Storage for pointers to the nodes and their numbers along the master edge
+       unsigned neighbour_node_number=0;
+       Node* neighbour_node_pt=0;
+
+       // Loop over nodes along the edge
+       bool master_is_not_edge = false;
+       for(unsigned i0=0; i0<neigh_n_p; i0++)
+        {
+         const unsigned s0space = 1;
+         const unsigned s1space = neigh_n_p;
+         const unsigned s2space = neigh_n_p*neigh_n_p;
+         
+         // Find the neighbour's node
+         switch(neigh_edge)
+          {
+          case DB:
+           neighbour_node_number = i0*s0space;
+           neighbour_node_pt
+            = edge_neigh_obj_pt->interpolating_node_pt(neighbour_node_number,value_id);
+           break;
+          case UB:
+           neighbour_node_number = (neigh_n_p-1)*s1space + i0*s0space;
+           neighbour_node_pt
+            = edge_neigh_obj_pt->interpolating_node_pt(neighbour_node_number,value_id);
+           break;
+          case DF:
+           neighbour_node_number = (neigh_n_p-1)*s2space + i0*s0space;
+           neighbour_node_pt
+            = edge_neigh_obj_pt->interpolating_node_pt(neighbour_node_number,value_id);
+           break;
+          case UF:
+           neighbour_node_number = (neigh_n_p-1)*s1space + (neigh_n_p-1)*s2space + i0*s0space;
+           neighbour_node_pt
+            = edge_neigh_obj_pt->interpolating_node_pt(neighbour_node_number,value_id);
+           break;
+           
+          case LB:
+           neighbour_node_number = i0*s1space;
+           neighbour_node_pt
+            = edge_neigh_obj_pt->interpolating_node_pt(neighbour_node_number,value_id);
+           break;
+          case RB:
+           neighbour_node_number = (neigh_n_p-1)*s0space + i0*s1space;
+           neighbour_node_pt
+            = edge_neigh_obj_pt->interpolating_node_pt(neighbour_node_number,value_id);
+           break;
+          case LF:
+           neighbour_node_number = (neigh_n_p-1)*s2space + i0*s1space;
+           neighbour_node_pt
+            = edge_neigh_obj_pt->interpolating_node_pt(neighbour_node_number,value_id);
+           break;
+          case RF:
+           neighbour_node_number = (neigh_n_p-1)*s0space + (neigh_n_p-1)*s2space + i0*s1space;
+           neighbour_node_pt
+            = edge_neigh_obj_pt->interpolating_node_pt(neighbour_node_number,value_id);
+           break;
+           
+          case LD:
+           neighbour_node_number = i0*s2space;
+           neighbour_node_pt
+            = edge_neigh_obj_pt->interpolating_node_pt(neighbour_node_number,value_id);
+           break;
+          case RD:
+           neighbour_node_number = (neigh_n_p-1)*s0space + i0*s2space;
+           neighbour_node_pt
+            = edge_neigh_obj_pt->interpolating_node_pt(neighbour_node_number,value_id);
+           break;
+          case LU:
+           neighbour_node_number = (neigh_n_p-1)*s1space + i0*s2space;
+           neighbour_node_pt
+            = edge_neigh_obj_pt->interpolating_node_pt(neighbour_node_number,value_id);
+           break;
+          case RU:
+           neighbour_node_number = (neigh_n_p-1)*s0space + (neigh_n_p-1)*s1space + i0*s2space;
+           neighbour_node_pt
+            = edge_neigh_obj_pt->interpolating_node_pt(neighbour_node_number,value_id);
+           break;
+         
+          default:
+           // Master 'edge' may be a face instead, so no need to throw an error
+           master_is_not_edge = true;
+          }
+
+         if(master_is_not_edge) break;
+
+         // Set node as master node
+         master_node_number.push_back(neighbour_node_number);
+         master_node_pt.push_back(neighbour_node_pt);
+        }
+
+       // Now if edge is really a face (from an edge neighbour that isn't
+       // a true edge neighbour) each node on the face is (potentially) a
+       // master
+       if(master_is_not_edge)
+        {
+         // Loop over nodes along the face
+         for(unsigned i0=0; i0<neigh_n_p; i0++)
+          {
+           // Loop over nodes along the face
+           for(unsigned i1=0; i1<neigh_n_p; i1++)
+            {
+             const unsigned s0space = 1;
+             const unsigned s1space = neigh_n_p;
+             const unsigned s2space = neigh_n_p*neigh_n_p;
+
+             // Find the neighbour's node
+             switch(neigh_edge)
+              {
+              case B:
+               neighbour_node_number = i0*s0space + i1*s1space;
+               neighbour_node_pt
+                = edge_neigh_obj_pt->interpolating_node_pt(neighbour_node_number,value_id);
+               break;
+              case F:
+               neighbour_node_number = (neigh_n_p-1)*s2space + i0*s0space + i1*s1space;
+               neighbour_node_pt
+                = edge_neigh_obj_pt->interpolating_node_pt(neighbour_node_number,value_id);
+               break;
+              case D:
+               neighbour_node_number = i0*s0space + i1*s2space;
+               neighbour_node_pt
+                = edge_neigh_obj_pt->interpolating_node_pt(neighbour_node_number,value_id);
+               break;
+              case U:
+               neighbour_node_number = (neigh_n_p-1)*s1space + i0*s0space + i1*s2space;
+               neighbour_node_pt
+                = edge_neigh_obj_pt->interpolating_node_pt(neighbour_node_number,value_id);
+               break;
+              case L:
+               neighbour_node_number = i0*s1space + i1*s2space;
+               neighbour_node_pt
+                = edge_neigh_obj_pt->interpolating_node_pt(neighbour_node_number,value_id);
+               break;
+              case R:
+               neighbour_node_number = (neigh_n_p-1)*s0space + i0*s1space + i1*s2space;
+               neighbour_node_pt
+                = edge_neigh_obj_pt->interpolating_node_pt(neighbour_node_number,value_id);
+               break;
+
+              default:
+               throw OomphLibError("neigh_edge not recognised\n",
+                                   "PRefineableQElement<3,INITIAL_NNODE_1D>::oc_hang_helper()",
+                                   OOMPH_EXCEPTION_LOCATION);
+              }
+
+             // Set node as master node
+             master_node_number.push_back(neighbour_node_number);
+             master_node_pt.push_back(neighbour_node_pt);
+            }
+          }
+        }
+   
+       //Storage for pointers to the local nodes and their numbers along my edge
+       unsigned local_node_number=0;
+       Node* local_node_pt=0;
+
+       // Loop over the nodes along my edge
+       for(unsigned i0=0; i0<my_n_p; i0++)
+        {
+         //Storage for the fractional position of the node in the element
+         Vector<double> s_fraction(3);
+       
+         const unsigned s0space = 1;
+         const unsigned s1space = my_n_p;
+         const unsigned s2space = my_n_p*my_n_p;
+
+         // Find the local node and the fractional position of the node
+         // which depends on the edge, of course
+         switch(my_edge)
+          {
+          case DB:
+           s_fraction[0] = 
+            local_one_d_fraction_of_interpolating_node(i0,0,value_id);
+           s_fraction[1] = 0.0;
+           s_fraction[2] = 0.0;
+           local_node_number = i0*s0space;
+           local_node_pt
+            = this->interpolating_node_pt(local_node_number,value_id);
+           break;
+          case UB:
+           s_fraction[0] = 
+            local_one_d_fraction_of_interpolating_node(i0,0,value_id);
+           s_fraction[1] = 1.0;
+           s_fraction[2] = 0.0;
+           local_node_number = (my_n_p-1)*s1space + i0*s0space;
+           local_node_pt
+            = this->interpolating_node_pt(local_node_number,value_id);
+           break;
+          case DF:
+           s_fraction[0] = 
+            local_one_d_fraction_of_interpolating_node(i0,0,value_id);
+           s_fraction[1] = 0.0;
+           s_fraction[2] = 1.0;
+           local_node_number = (my_n_p-1)*s2space + i0*s0space;
+           local_node_pt
+            = this->interpolating_node_pt(local_node_number,value_id);
+           break;
+          case UF:
+           s_fraction[0] = 
+            local_one_d_fraction_of_interpolating_node(i0,0,value_id);
+           s_fraction[1] = 1.0;
+           s_fraction[2] = 1.0;
+           local_node_number = (my_n_p-1)*s1space + (my_n_p-1)*s2space + i0*s0space;
+           local_node_pt
+            = this->interpolating_node_pt(local_node_number,value_id);
+           break;
+           
+          case LB:
+           s_fraction[0] = 0.0;
+           s_fraction[1] = 
+            local_one_d_fraction_of_interpolating_node(i0,1,value_id);
+           s_fraction[2] = 0.0;
+           local_node_number = i0*s1space;
+           local_node_pt
+            = this->interpolating_node_pt(local_node_number,value_id);
+           break;
+          case RB:
+           s_fraction[0] = 1.0;
+           s_fraction[1] = 
+            local_one_d_fraction_of_interpolating_node(i0,1,value_id);
+           s_fraction[2] = 0.0;
+           local_node_number = (my_n_p-1)*s0space + i0*s1space;
+           local_node_pt
+            = this->interpolating_node_pt(local_node_number,value_id);
+           break;
+          case LF:
+           s_fraction[0] = 0.0;
+           s_fraction[1] = 
+            local_one_d_fraction_of_interpolating_node(i0,1,value_id);
+           s_fraction[2] = 1.0;
+           local_node_number = (my_n_p-1)*s2space + i0*s1space;
+           local_node_pt
+            = this->interpolating_node_pt(local_node_number,value_id);
+           break;
+          case RF:
+           s_fraction[0] = 1.0;
+           s_fraction[1] = 
+            local_one_d_fraction_of_interpolating_node(i0,1,value_id);
+           s_fraction[2] = 1.0;
+           local_node_number = (my_n_p-1)*s0space + (my_n_p-1)*s2space + i0*s1space;
+           local_node_pt
+            = this->interpolating_node_pt(local_node_number,value_id);
+           break;
+           
+          case LD:
+           s_fraction[0] = 0.0;
+           s_fraction[1] = 0.0;
+           s_fraction[2] = 
+            local_one_d_fraction_of_interpolating_node(i0,2,value_id);
+           local_node_number = i0*s2space;
+           local_node_pt
+            = this->interpolating_node_pt(local_node_number,value_id);
+           break;
+          case RD:
+           s_fraction[0] = 1.0;
+           s_fraction[1] = 0.0;
+           s_fraction[2] = 
+            local_one_d_fraction_of_interpolating_node(i0,2,value_id);
+           local_node_number = (my_n_p-1)*s0space + i0*s2space;
+           local_node_pt
+            = this->interpolating_node_pt(local_node_number,value_id);
+           break;
+          case LU:
+           s_fraction[0] = 0.0;
+           s_fraction[1] = 1.0;
+           s_fraction[2] = 
+            local_one_d_fraction_of_interpolating_node(i0,2,value_id);
+           local_node_number = (my_n_p-1)*s1space + i0*s2space;
+           local_node_pt
+            = this->interpolating_node_pt(local_node_number,value_id);
+           break;
+          case RU:
+           s_fraction[0] = 1.0;
+           s_fraction[1] = 1.0;
+           s_fraction[2] = 
+            local_one_d_fraction_of_interpolating_node(i0,2,value_id);
+           local_node_number = (my_n_p-1)*s0space + (my_n_p-1)*s1space + i0*s2space;
+           local_node_pt
+            = this->interpolating_node_pt(local_node_number,value_id);
+           break;
+
+          default:
+           throw OomphLibError("my_edge not recognised\n",
+                               "PRefineableQElement<3,INITIAL_NNODE_1D>::oc_hang_helper()",
+                               OOMPH_EXCEPTION_LOCATION);
+          }
+
+         // Add node to vector of slave element nodes
+         slave_node_number.push_back(local_node_number);
+         slave_node_pt.push_back(local_node_pt);
+
+         // Store node's local fraction
+         slave_node_s_fraction.push_back(s_fraction);
+        }
+     
+       // Store the number of slave and master nodes for use later
+       const unsigned n_slave_nodes = slave_node_pt.size();
+       const unsigned n_master_nodes = master_node_pt.size();
+       const unsigned slave_element_nnode_1d = my_n_p;
+       const unsigned master_element_nnode_1d = neigh_n_p;
+
+       // Storage for master shapes
+       Shape master_shapes(edge_neigh_obj_pt->ninterpolating_node(value_id));
+     
+       // Get master and slave nodal positions
+       //-------------------------------------
+       Vector<double> slave_nodal_position;
+       Vector<double> slave_weight(slave_element_nnode_1d);
+       Orthpoly::gll_nodes(slave_element_nnode_1d,
+                           slave_nodal_position,slave_weight);
+       Vector<double> master_nodal_position;
+       Vector<double> master_weight(master_element_nnode_1d);
+       Orthpoly::gll_nodes(master_element_nnode_1d,
+                           master_nodal_position,master_weight);
+
+       // Apply the (1D) vertex matching condition
+       //-----------------------------------------
+       // Vertiex matching is ensured automatically in cases where there is a node
+       // at each end of the mortar that is shared between the master and slave
+       // elements. Where this is not the case, the vertex matching condition must
+       // be enforced by constraining the value of the unknown at the node on the
+       // slave side to be the same as the value at that location in the master.
+
+       // Store positions of the mortar vertex/non-vertex nodes in the slave
+       // element
+       const unsigned n_mortar_vertices = 2;
+       Vector<unsigned> vertex_pos(n_mortar_vertices);
+       vertex_pos[0] = 0;
+       vertex_pos[1] = this->ninterpolating_node_1d(value_id)-1;
+       Vector<unsigned> non_vertex_pos(my_n_p-n_mortar_vertices);
+       for(unsigned i=0; i<my_n_p-n_mortar_vertices; i++)
+        {non_vertex_pos[i] = i+1;}
+
+       // If the node is on a master edge, we may be setting the
+       // hanging info incorrectly. Hanging schemes (if they are
+       // required) for such nodes are instead computed by the
+       // slave edge. We dont't want to overwrite them here!
+       std::vector<bool> mortar_vertex_on_master_edge(n_mortar_vertices);
+       for (unsigned v=0; v<n_mortar_vertices; v++)
+        {
+         // Check if each node is on the master edge
+         mortar_vertex_on_master_edge[v] = true;
+         unsigned non_extreme_coordinate = 0;
+         Vector<double> s_in_neigh(3);
+         for(unsigned i=0;i<3;i++)
+          {
+           // Work out this node's location in the master
+           s_in_neigh[i] = edge_s_lo_neigh[i] +
+            slave_node_s_fraction[vertex_pos[v]][edge_translate_s[i]]*
+            (edge_s_hi_neigh[i] - edge_s_lo_neigh[i]);
+
+           // Check if local coordinate in master element takes non-extreme value
+           if(std::fabs(std::fabs(s_in_neigh[i])-1.0) > 1.0e-14)
+            {
+             non_extreme_coordinate++;
+             if(non_extreme_coordinate>1)
+              {
+               mortar_vertex_on_master_edge[v] = false;
+               break;
+              }
+            }
+          }
+        }
+
+       // Now work out if my edge coincides with the master edge
+       bool my_edge_coincides_with_master = true;
+       for(unsigned v=0; v<n_mortar_vertices; v++)
+        {
+         my_edge_coincides_with_master = my_edge_coincides_with_master
+                                          && mortar_vertex_on_master_edge[v];
+        }
+
+       // Check if we need to apply the (1D) vertex matching condition at the
+       // mortar vertices. This is trivially satisfied if the node is shared
+       // with the master, but if not then we need to constrain it.
+       for (unsigned v=0; v<n_mortar_vertices; v++)
+        {
+         // Don't make hanging node if my edge doesn't coincide with
+         // the master edge *and* this node is on the master edge!
+         // (We are not in a position to determine its hanging status.)
+         if((!my_edge_coincides_with_master) && mortar_vertex_on_master_edge[v])
+          continue;
+         
+         // Search master node storage for the node
+         bool node_is_shared=false;
+         for(unsigned i=0; i<master_node_pt.size(); i++)
+          {
+           if(slave_node_pt[vertex_pos[v]]==master_node_pt[i])
+            {
+             node_is_shared=true;
+             break;
+            }
+          }
+
+         // If the node is not shared then we must constrain its value by setting
+         // up a hanging scheme
+         if(!node_is_shared)
+          {
+           // Calculate weights. These are just the master shapes evaluated at
+           // this slave node's position
+       
+           // Work out this node's location in the master
+           Vector<double> s_in_neigh(3);
+           for(unsigned i=0;i<3;i++)
+            {
+             s_in_neigh[i] = edge_s_lo_neigh[i] +
+              slave_node_s_fraction[vertex_pos[v]][edge_translate_s[i]]*
+              (edge_s_hi_neigh[i] - edge_s_lo_neigh[i]);
+            }
+
+           // Get master shapes at slave nodal positions
+           edge_neigh_obj_pt->interpolating_basis(s_in_neigh,master_shapes,value_id);
+
+           // Remove any existing hanging node info
+           // (This may be a bit wasteful, but guarantees correctness)
+           slave_node_pt[vertex_pos[v]]->set_nonhanging();
+
+           // Don't include master nodes with zero weights
+           Vector<unsigned> master_node_zero_weight;
+           for(unsigned m=0; m<n_master_nodes; m++)
+            {
+             // Compare weights to some (small) tolerance
+             if(std::fabs(master_shapes[master_node_number[m]]) < 1.0e-14)
+              {
+               // Store
+               master_node_zero_weight.push_back(m);
+              }
+            }
+
+           // Set up hanging scheme for this node
+           HangInfo* explicit_hang_pt =
+            new HangInfo(n_master_nodes-master_node_zero_weight.size());
+           unsigned mindex = 0;
+           for(unsigned m=0; m<n_master_nodes; m++)
+            {
+             // Check that master doesn't have zero weight
+             bool skip = false;
+             for(unsigned i=0; i<master_node_zero_weight.size(); i++)
+              {
+               if(m==master_node_zero_weight[i]) skip = true;
+              }
+
+             // Add pointer and weight to hang info
+             if(!skip)
+              explicit_hang_pt->set_master_node_pt(mindex++,master_node_pt[m],master_shapes[master_node_number[m]]);
+            }
+
+           //// Set up hanging scheme for this node
+           //HangInfo* explicit_hang_pt = new HangInfo(n_master_nodes);
+           //for(unsigned m=0; m<n_master_nodes; m++)
+           // {
+           //  explicit_hang_pt->set_master_node_pt(m,master_node_pt[m],master_shapes[master_node_number[m]]);
+           // }
+
+           // Make node hang
+           slave_node_pt[vertex_pos[v]]->set_hanging_pt(explicit_hang_pt,-1);
+
+           //// Print out hanging scheme
+           //std::cout << "Hanging node: "
+           //          << slave_node_pt[vertex_pos[v]]->x(0) << "  "
+           //          << slave_node_pt[vertex_pos[v]]->x(1) << "  "
+           //          << slave_node_pt[vertex_pos[v]]->x(2) << "  "
+           //          << std::endl;
+           //for(unsigned m=0; m<explicit_hang_pt->nmaster(); m++)
+           // {
+           //  std::cout << "   m = " << m << ": "
+           //            << explicit_hang_pt->master_node_pt(m)->x(0) << "  "
+           //            << explicit_hang_pt->master_node_pt(m)->x(1) << "  "
+           //            << explicit_hang_pt->master_node_pt(m)->x(2) << "  "
+           //            << "w = " << explicit_hang_pt->master_weight(m) << "  "
+           //            << std::endl;
+           // }
+
+           // Check there are no zero weights at this stage
+           for(unsigned m=0; m<explicit_hang_pt->nmaster(); m++)
+            {
+             if(std::fabs(explicit_hang_pt->master_weight(m))<1.0e-14)
+              {
+               throw
+                OomphLibError(
+                 "Master has zero weight!",
+                 "PRefineableQElement<3,INITIAL_NNODE_1D>::oc_hang_helper()",
+                 OOMPH_EXCEPTION_LOCATION);
+              }
+            }
+          }
+        }
+
+       // Check that there are actually slave nodes for which we still need to
+       // construct a hanging scheme. If not then there is nothing more to do.
+       if(n_slave_nodes-n_mortar_vertices > 0)
+        {
+
+         // Assemble mass matrix for mortar
+         //--------------------------------
+         Vector<double> psi(n_slave_nodes-n_mortar_vertices);
+         Vector<double> diag_M(n_slave_nodes-n_mortar_vertices);
+         Vector<Vector<double> > shared_node_M(n_mortar_vertices);
+         for (unsigned i=0; i<shared_node_M.size(); i++)
+          {shared_node_M[i].resize(n_slave_nodes-n_mortar_vertices);}
+
+         // Fill in part corresponding to slave nodal positions (unknown)
+         for (unsigned i=0; i<n_slave_nodes-n_mortar_vertices; i++)
+          {
+           // Use L'Hosptal's rule:
+           psi[i] = pow(-1.0,int((slave_element_nnode_1d-1)-i-1))
+                     *-Orthpoly::ddlegendre(slave_element_nnode_1d-1,
+                                   slave_nodal_position[non_vertex_pos[i]]);
+           // Put in contribution
+           diag_M[i] = psi[i]*slave_weight[non_vertex_pos[i]];
+          }
+
+         // Fill in part corresponding to slave element vertices (known)
+         for(unsigned v=0; v<shared_node_M.size(); v++)
+          {
+           for (unsigned i=0; i<n_slave_nodes-n_mortar_vertices; i++)
+            {
+             // Check if denominator is zero
+             if (std::fabs(slave_nodal_position[non_vertex_pos[i]]
+                       - slave_nodal_position[vertex_pos[v]]) >= 1.0e-8 )
+              {
+               // We're ok
+               psi[i] = pow(-1.0,int((slave_element_nnode_1d-1)-i-1))
+                         * Orthpoly::dlegendre(slave_element_nnode_1d-1,
+                                      slave_nodal_position[vertex_pos[v]])
+                         / (slave_nodal_position[non_vertex_pos[i]]
+                         - slave_nodal_position[vertex_pos[v]]);
+              }
+             // Check if numerator is zero
+             else if (std::fabs(Orthpoly::dlegendre(slave_element_nnode_1d-1,
+                                               slave_nodal_position[vertex_pos[v]]))
+                      < 1.0e-8)
+              {
+               // We can use l'hopital's rule
+               psi[i] = pow(-1.0,int((slave_element_nnode_1d-1)-i-1))
+                         *-Orthpoly::ddlegendre(slave_element_nnode_1d-1,
+                                       slave_nodal_position[non_vertex_pos[i]]);
+              }
+             else
+              {
+               // We can't use l'hopital's rule
+               throw
+                OomphLibError(
+                 "Cannot use l'Hopital's rule. Dividing by zero is not allowed!",
+                 "PRefineableQElement<3,INITIAL_NNODE_1D>::oc_hang_helper()",
+                 OOMPH_EXCEPTION_LOCATION);
+              }
+             // Put in contribution
+             shared_node_M[v][i] = psi[i]*slave_weight[vertex_pos[v]];
+            }
+          }
+
+         // Assemble local projection matrix for mortar
+         //--------------------------------------------
+   
+         // Have only one local projection matrix because there is just one master
+         Vector<Vector<double> > P(n_slave_nodes-n_mortar_vertices);
+         for(unsigned i=0; i<P.size(); i++) {P[i].resize(n_master_nodes,0.0);}
+     
+         //Storage for local coordinate
+         Vector<double> s(3);
+   
+         // Sum contributions from master element shapes (quadrature).
+         // The order of quadrature must be high enough to evaluate a polynomial
+         // of order N_s + N_m - 3 exactly, where N_s = n_slave_nodes, N_m =
+         // n_master_nodes.
+         // (Use pointers for the quadrature knots and weights so that
+         // data is not unnecessarily copied)
+         //unsigned quadrature_order =
+         // std::max(slave_element_nnode_1d,master_element_nnode_1d);
+         Vector<double> *quadrature_knot, *quadrature_weight;
+         if (slave_element_nnode_1d >= master_element_nnode_1d)
+          {
+           // Use the same quadrature order as the slave element (me)
+           quadrature_knot = &slave_nodal_position;
+           quadrature_weight = &slave_weight;
+          }
+         else
+          {
+           // Use the same quadrature order as the master element (neighbour)
+           quadrature_knot = &master_nodal_position;
+           quadrature_weight = &master_weight;
+          }
+       
+         // Quadrature loop
+         for (unsigned q=0; q<(*quadrature_weight).size(); q++)
+          {
+           // Evaluate mortar test functions at the quadrature knots in the slave
+           //s[active_coord_index] = (*quadrature_knot)[q];
+           Vector<double> s_on_mortar(1);
+           s_on_mortar[0] = (*quadrature_knot)[q];
+    
+           // Get psi
+           for(unsigned k=0; k<n_slave_nodes-n_mortar_vertices; k++)
+            {
+             // Check if denominator is zero
+             if (std::fabs(slave_nodal_position[non_vertex_pos[k]]-s_on_mortar[0]) >= 1.0e-08)
+              {
+               // We're ok
+               psi[k] = pow(-1.0,int((slave_element_nnode_1d-1)-k-1))
+                         * Orthpoly::dlegendre(slave_element_nnode_1d-1,s_on_mortar[0])
+                         / (slave_nodal_position[non_vertex_pos[k]]-s_on_mortar[0]);
+              }
+             // Check if numerator is zero
+             else if (std::fabs(Orthpoly::dlegendre(slave_element_nnode_1d-1,s_on_mortar[0]))
+                      < 1.0e-8)
+              {
+               // We can use l'Hopital's rule
+               psi[k] = pow(-1.0,int((slave_element_nnode_1d-1)-k-1))
+                         * -Orthpoly::ddlegendre(slave_element_nnode_1d-1,s_on_mortar[0]);
+              }
+             else
+              {
+               // We can't use l'hopital's rule
+               throw
+                OomphLibError(
+                 "Cannot use l'Hopital's rule. Dividing by zero is not allowed!",
+                 "PRefineableQElement<3,INITIAL_NNODE_1D>::oc_hang_helper()",
+                 OOMPH_EXCEPTION_LOCATION);
+              }
+            }
+    
+           // Convert coordinate on mortar to local fraction in slave element
+           Vector<double> s_fraction(3);
+           for(unsigned i=0; i<3; i++)
+            {
+             s_fraction[i] = (i==active_coord_index)
+                              ? 0.5*(s_on_mortar[0]+1.0)
+                              : slave_node_s_fraction[vertex_pos[0]][i];
+            }
+    
+           // Project active coordinate into master element
+           Vector<double> s_in_neigh(3);
+           for(unsigned i=0;i<3;i++)
+            {
+             s_in_neigh[i] = edge_s_lo_neigh[i] + s_fraction[edge_translate_s[i]]*
+              (edge_s_hi_neigh[i] - edge_s_lo_neigh[i]);
+            }
+    
+           // Evaluate master shapes at projections of local quadrature knots
+           edge_neigh_obj_pt->interpolating_basis(s_in_neigh,master_shapes,value_id);
+    
+           // Populate local projection matrix
+           for(unsigned i=0; i<n_slave_nodes-n_mortar_vertices; i++)
+            {
+             for(unsigned j=0; j<n_master_nodes; j++)
+              {
+               P[i][j] += master_shapes[master_node_number[j]]*psi[i]*(*quadrature_weight)[q];
+              }
+            }
+          }
+
+         //// Print out local projection matrix
+         //std::cout << "P_e:" << std::endl;
+         //for(unsigned i=0; i<P.size(); i++)
+         // {
+         //  for(unsigned j=0; j<P[i].size(); j++)
+         //   {
+         //    std::cout << "  " << P[i][j];
+         //   }
+         // }
+         //std::cout << std::endl;
+
+         // Assemble global projection matrices for mortar
+         //-----------------------------------------------
+         // Need to subtract contributions from the "known unknowns" corresponding
+         // to the nodes at the vertices of the mortar
+
+         // Assemble contributions from mortar vertex nodes
+         for(unsigned v=0; v<n_mortar_vertices; v++)
+          {
+           // Convert coordinate on mortar to local fraction in slave element
+           Vector<double> s_fraction(3);
+           for(unsigned i=0; i<3; i++)
+            {
+             s_fraction[i] = (i==active_coord_index)
+                              ? 0.5*(slave_nodal_position[vertex_pos[v]]+1.0)
+                              : slave_node_s_fraction[vertex_pos[0]][i];
+            }
+
+           // Project active coordinate into master element
+           Vector<double> s_in_neigh(3);
+           for(unsigned i=0;i<3;i++)
+            {
+             s_in_neigh[i] = edge_s_lo_neigh[i] + s_fraction[edge_translate_s[i]]*
+              (edge_s_hi_neigh[i] - edge_s_lo_neigh[i]);
+            }
+
+           // Get master shapes at slave nodal positions
+           edge_neigh_obj_pt->interpolating_basis(s_in_neigh,master_shapes,value_id);
+
+           for(unsigned i=0; i<n_slave_nodes-n_mortar_vertices; i++)
+            {
+             for(unsigned k=0; k<n_master_nodes; k++)
+              {
+               P[i][k] -= master_shapes[master_node_number[k]]*shared_node_M[v][i];
+              }
+            }
+          }
+
+         //// Print out global projection matrix
+         //std::cout << "P:" << std::endl;
+         //for(unsigned i=0; i<P.size(); i++)
+         // {
+         //  for(unsigned j=0; j<P[i].size(); j++)
+         //   {
+         //    std::cout << "  " << P[i][j];
+         //   }
+         //  std::cout << std::endl;
+         // }
+         //std::cout << std::endl;
+
+         // Solve mortar system
+         //--------------------
+         for(unsigned i=0; i<n_slave_nodes-n_mortar_vertices; i++)
+          {
+           for(unsigned j=0; j<n_master_nodes; j++)
+            {
+             P[i][j]/=diag_M[i];
+            }
+          }
+
+         //// Print out solved global projection matrix
+         //std::cout << "solved P:" << std::endl;
+         //for(unsigned i=0; i<P.size(); i++)
+         // {
+         //  for(unsigned j=0; j<P[i].size(); j++)
+         //   {
+         //    std::cout << "  " << P[i][j];
+         //   }
+         //  std::cout << std::endl;
+         // }
+         //std::cout << std::endl;
+
+         // Create and populate structures to hold the hanging info
+         //--------------------------------------------------------
+         Vector<HangInfo*> hang_info_pt(n_slave_nodes);
+         for (unsigned i=0; i<n_slave_nodes-n_mortar_vertices; i++)
+          {
+           // Don't include master nodes with zero weights
+           Vector<unsigned> master_node_zero_weight;
+           for(unsigned m=0; m<n_master_nodes; m++)
+            {
+             // Compare weights to some (small) tolerance
+             if(std::fabs(P[i][m]) < 1.0e-14)
+              {
+               // Store
+               master_node_zero_weight.push_back(m);
+              }
+            }
+
+           // Set up hanging scheme for this node
+           hang_info_pt[i] =
+            new HangInfo(n_master_nodes-master_node_zero_weight.size());
+           unsigned mindex = 0;
+           for(unsigned m=0; m<n_master_nodes; m++)
+            {
+             // Check that master doesn't have zero weight
+             bool skip = false;
+             for(unsigned k=0; k<master_node_zero_weight.size(); k++)
+              {
+               if(m==master_node_zero_weight[k]) skip = true;
+              }
+
+             // Add pointer and weight to hang info
+             if(!skip)
+              hang_info_pt[i]->set_master_node_pt(mindex++,master_node_pt[m],P[i][m]);
+            }
+          }
+
+         //// Create structures to hold the hanging info
+         ////-------------------------------------------
+         //Vector<HangInfo*> hang_info_pt(n_slave_nodes);
+         //for (unsigned i=0; i<n_slave_nodes-n_mortar_vertices; i++)
+         // {
+         //  hang_info_pt[i] = new HangInfo(n_master_nodes);
+         // }
+         //
+         //// Copy information to hanging nodes
+         ////----------------------------------
+         //for(unsigned i=0; i<n_slave_nodes-n_mortar_vertices; i++)
+         // {
+         //  for(unsigned j=0; j<n_master_nodes; j++)
+         //   {
+         //    hang_info_pt[i]->set_master_node_pt(j,master_node_pt[j],P[i][j]);
+         //   }
+         // }
+
+         // Set pointers to hanging info
+         //-----------------------------
+         for (unsigned i=0; i<n_slave_nodes-n_mortar_vertices; i++)
+          {
+           // Check that the node shoule actually hang.
+           // That is, if the polynomial orders of the elements at a p-type
+           // non-conormity are both odd then the middle node on the edge is
+           // shared but a hanging scheme has been constructed for it.
+           bool node_is_really_shared = false;
+           for (unsigned m=0; m<hang_info_pt[i]->nmaster(); m++)
+            {
+             // We can simply check if the hanging scheme lists itself as a master
+             if (hang_info_pt[i]->master_node_pt(m)==slave_node_pt[non_vertex_pos[i]])
+              {
+               node_is_really_shared = true;
+
+#ifdef PARANOID
+               // Also check the corresponding weight: it should be 1
+               if(std::fabs(hang_info_pt[i]->master_weight(m)-1.0) > 1.0e-06)
+                {
+                 throw
+                  OomphLibError(
+                   "Something fishy here -- with shared node at a mortar vertex",
+                   "PRefineableQElemen<2,INITIAL_NNODE_1D>t::quad_hang_helper()",
+                   OOMPH_EXCEPTION_LOCATION);
+                }
+    #endif
+              }
+            }
+
+           // Now we can make the node hang, if it isn't a shared node
+           if(!node_is_really_shared)
+            {
+             slave_node_pt[non_vertex_pos[i]]->set_hanging_pt(hang_info_pt[i],-1);
+
+             //// Print out hanging scheme
+             //std::cout << "Hanging node: "
+             //          << slave_node_pt[non_vertex_pos[i]]->x(0) << "  "
+             //          << slave_node_pt[non_vertex_pos[i]]->x(1) << "  "
+             //          << slave_node_pt[non_vertex_pos[i]]->x(2) << "  "
+             //          << std::endl;
+             //for(unsigned m=0; m<hang_info_pt[i]->nmaster(); m++)
+             // {
+             //  std::cout << "   m = " << m << ": "
+             //            << hang_info_pt[i]->master_node_pt(m)->x(0) << "  "
+             //            << hang_info_pt[i]->master_node_pt(m)->x(1) << "  "
+             //            << hang_info_pt[i]->master_node_pt(m)->x(2) << "  "
+             //            << "w = " << hang_info_pt[i]->master_weight(m) << "  "
+             //            << std::endl;
+             // }
+            }
+          }
+
+        } // End of case where there are still slave nodes
+
+      } // End of edge is slave
+
+    } //End of loop over face edges
+   
+  } // End of if face is slave
+
+ // Now do the mortaring
+ //---------------------
+ if (h_type_slave || p_type_slave)
+  {
+   //Compute the active coordinate indices along the this side of mortar
+   Vector<unsigned> active_coord_index(2);
+   if(my_face==B || my_face==F)
+    {
+     active_coord_index[0] = 0;
+     active_coord_index[1] = 1;
+    }
+   else if(my_face==D || my_face==U)
+    {
+     active_coord_index[0] = 0;
+     active_coord_index[1] = 2;
+    }
+   else if(my_face==L || my_face==R)
+    {
+     active_coord_index[0] = 1;
+     active_coord_index[1] = 2;
+    }
+   else
+    {
+     throw OomphLibError(
+            "Cannot transform coordinates",
+            "PRefineableQElement<3,INITIAL_NNODE_1D>::oc_hang_helper()",
+            OOMPH_EXCEPTION_LOCATION);
+    }
+   
+   // Get pointer to neighbouring master element (in p-refineable form)
+   PRefineableQElement<3,INITIAL_NNODE_1D>* neigh_obj_pt;
+   neigh_obj_pt = dynamic_cast<PRefineableQElement<3,INITIAL_NNODE_1D>*>
+                   (neigh_pt->object_pt());
+
+   // Create vector of master and slave nodes
+   //----------------------------------------
+   Vector<Node*> master_node_pt, slave_node_pt;
+   Vector<unsigned> master_node_number, slave_node_number;
+   Vector<Vector<double> > slave_node_s_fraction;
+   
+   //Number of nodes in one dimension
+   const unsigned my_n_p = this->ninterpolating_node_1d(value_id);
+   const unsigned neigh_n_p = neigh_obj_pt->ninterpolating_node_1d(value_id);
+     
+   //Storage for pointers to the nodes and their numbers along the master edge
+   unsigned neighbour_node_number=0;
+   Node* neighbour_node_pt=0;
+
+   // Loop over nodes on the face
+   for(unsigned i0=0; i0<neigh_n_p; i0++)
+    {
+     for(unsigned i1=0; i1<neigh_n_p; i1++)
+      {
+       const unsigned s0space = 1;
+       const unsigned s1space = neigh_n_p;
+       const unsigned s2space = neigh_n_p*neigh_n_p;
+
+       // Find the neighbour's node
+       switch(neigh_face)
+        {
+        case B:
+         neighbour_node_number = i0*s0space + i1*s1space;
+         neighbour_node_pt
+          = neigh_obj_pt->interpolating_node_pt(neighbour_node_number,value_id);
+         break;
+         
+        case F:
+         neighbour_node_number = (neigh_n_p-1)*s2space + i0*s0space + i1*s1space;
+         neighbour_node_pt
+          = neigh_obj_pt->interpolating_node_pt(neighbour_node_number,value_id);
+         break;
+        
+        case D:
+         neighbour_node_number = i0*s0space + i1*s2space;
+         neighbour_node_pt
+          = neigh_obj_pt->interpolating_node_pt(neighbour_node_number,value_id);
+         break;
+         
+        case U:
+         neighbour_node_number = (neigh_n_p-1)*s1space + i0*s0space + i1*s2space;
+         neighbour_node_pt
+          = neigh_obj_pt->interpolating_node_pt(neighbour_node_number,value_id);
+         break;
+        
+        case L:
+         neighbour_node_number = i0*s1space + i1*s2space;
+         neighbour_node_pt
+          = neigh_obj_pt->interpolating_node_pt(neighbour_node_number,value_id);
+         break;
+         
+        case R:
+         neighbour_node_number = (neigh_n_p-1)*s0space + i0*s1space + i1*s2space;
+         neighbour_node_pt
+          = neigh_obj_pt->interpolating_node_pt(neighbour_node_number,value_id);
+         break;
+
+        default:
+         throw OomphLibError("my_face not L, R, D, U, B, F\n",
+                             "PRefineableQElement<3,INITIAL_NNODE_1D>::oc_hang_helper()",
+                             OOMPH_EXCEPTION_LOCATION);
+        }
+
+       // Set node as master node
+       master_node_number.push_back(neighbour_node_number);
+       master_node_pt.push_back(neighbour_node_pt);
+      }
+    }
+   
+   //Storage for pointers to the local nodes and their numbers along my edge
+   unsigned local_node_number=0;
+   Node* local_node_pt=0;
+   
+   // Loop over the nodes along my edge
+   for(unsigned i0=0; i0<my_n_p; i0++)
+    {
+     for(unsigned i1=0; i1<my_n_p; i1++)
+      {
+       //Storage for the fractional position of the node in the element
+       Vector<double> s_fraction(3);
+       
+       const unsigned s0space = 1;
+       const unsigned s1space = my_n_p;
+       const unsigned s2space = my_n_p*my_n_p;
+
+       // Find the local node and the fractional position of the node
+       // which depends on the edge, of course
+       switch(my_face)
+        {
+        case B:
+         s_fraction[0] = 
+          local_one_d_fraction_of_interpolating_node(i0,0,value_id);
+         s_fraction[1] = 
+          local_one_d_fraction_of_interpolating_node(i1,1,value_id);
+         s_fraction[2] = 0.0;
+         local_node_number = i0*s0space + i1*s1space;
+         local_node_pt
+          = this->interpolating_node_pt(local_node_number,value_id);
+         break;
+         
+        case F:
+         s_fraction[0] = 
+          local_one_d_fraction_of_interpolating_node(i0,0,value_id);
+         s_fraction[1] = 
+          local_one_d_fraction_of_interpolating_node(i1,1,value_id);
+         s_fraction[2] = 1.0;
+         local_node_number = (my_n_p-1)*s2space + i0*s0space + i1*s1space;
+         local_node_pt
+          = this->interpolating_node_pt(local_node_number,value_id);
+         break;
+        
+        case D:
+         s_fraction[0] = 
+          local_one_d_fraction_of_interpolating_node(i0,0,value_id);
+         s_fraction[1] = 0.0;
+         s_fraction[2] = 
+          local_one_d_fraction_of_interpolating_node(i1,2,value_id);
+         local_node_number = i0*s0space + i1*s2space;
+         local_node_pt
+          = this->interpolating_node_pt(local_node_number,value_id);
+         break;
+         
+        case U:
+         s_fraction[0] = 
+          local_one_d_fraction_of_interpolating_node(i0,0,value_id);
+         s_fraction[1] = 1.0;
+         s_fraction[2] = 
+          local_one_d_fraction_of_interpolating_node(i1,2,value_id);
+         local_node_number = (my_n_p-1)*s1space + i0*s0space + i1*s2space;
+         local_node_pt
+          = this->interpolating_node_pt(local_node_number,value_id);
+         break;
+        
+        case L:
+         s_fraction[0] = 0.0;
+         s_fraction[1] = 
+          local_one_d_fraction_of_interpolating_node(i0,1,value_id);
+         s_fraction[2] = 
+          local_one_d_fraction_of_interpolating_node(i1,2,value_id);
+         local_node_number = i0*s1space + i1*s2space;
+         local_node_pt
+          = this->interpolating_node_pt(local_node_number,value_id);
+         break;
+         
+        case R:
+         s_fraction[0] = 1.0;
+         s_fraction[1] = 
+          local_one_d_fraction_of_interpolating_node(i0,1,value_id);
+         s_fraction[2] = 
+          local_one_d_fraction_of_interpolating_node(i1,2,value_id);
+         local_node_number = (my_n_p-1)*s0space + i0*s1space + i1*s2space;
+         local_node_pt
+          = this->interpolating_node_pt(local_node_number,value_id);
+         break;
+
+        default:
+         throw OomphLibError("my_face not L, R, D, U, B, F\n",
+                             "PRefineableQElement<3,INITIAL_NNODE_1D>::oc_hang_helper()",
+                             OOMPH_EXCEPTION_LOCATION);
+        }
+
+       // Add node to vector of slave element nodes
+       slave_node_number.push_back(local_node_number);
+       slave_node_pt.push_back(local_node_pt);
+       
+       // Store node's local fraction
+       slave_node_s_fraction.push_back(s_fraction);
+      }
+    }
+     
+   // Store the number of slave and master nodes for use later
+   const unsigned n_slave_nodes = slave_node_pt.size();
+   const unsigned n_master_nodes = master_node_pt.size();
+   const unsigned slave_element_nnode_1d = my_n_p;
+   const unsigned master_element_nnode_1d = neigh_n_p;
+
+   //// Print out slave and master node coords
+   //std::cout << "Slave nodes on face: " << OcTree::Direct_string[my_face] << std::endl;
+   //for(unsigned i=0; i<slave_node_pt.size(); i++)
+   // {
+   //  std::cout << i << ": "
+   //            << slave_node_pt[i]->x(0) << "  "
+   //            << slave_node_pt[i]->x(1) << "  "
+   //            << slave_node_pt[i]->x(2) << "  "
+   //            << std::endl;
+   // }
+   //std::cout << "Master nodes on face: " << OcTree::Direct_string[my_face] << std::endl;
+   //for(unsigned i=0; i<master_node_pt.size(); i++)
+   // {
+   //  std::cout << i << ": "
+   //            << master_node_pt[i]->x(0) << "  "
+   //            << master_node_pt[i]->x(1) << "  "
+   //            << master_node_pt[i]->x(2) << "  "
+   //            << std::endl;
+   // }
+
+   // Storage for master shapes
+   Shape master_shapes(neigh_obj_pt->ninterpolating_node(value_id));
+     
+   // Get master and slave nodal positions
+   //-------------------------------------
+   // Get in 1D
+   Vector<double> slave_nodal_position_1d;
+   Vector<double> slave_weight_1d(slave_element_nnode_1d);
+   Orthpoly::gll_nodes(slave_element_nnode_1d,
+                       slave_nodal_position_1d,slave_weight_1d);
+   Vector<double> master_nodal_position_1d;
+   Vector<double> master_weight_1d(master_element_nnode_1d);
+   Orthpoly::gll_nodes(master_element_nnode_1d,
+                       master_nodal_position_1d,master_weight_1d);
+   
+   // Storage for 2D
+   Vector<Vector<double> >
+    slave_nodal_position(slave_element_nnode_1d*slave_element_nnode_1d);
+   for(unsigned i=0; i<slave_nodal_position.size(); i++)
+    {slave_nodal_position[i].resize(2);}
+   Vector<double> slave_weight(slave_element_nnode_1d*slave_element_nnode_1d);
+   Vector<Vector<double> >
+    master_nodal_position(master_element_nnode_1d*master_element_nnode_1d);
+   for(unsigned i=0; i<master_nodal_position.size(); i++)
+    {master_nodal_position[i].resize(2);}
+   Vector<double> master_weight(master_element_nnode_1d*master_element_nnode_1d);
+
+   // Fill in coordinates and weights in 2D
+   unsigned slave_index = 0;
+   for (unsigned i=0; i<slave_element_nnode_1d; i++)
+    {
+     for (unsigned j=0; j<slave_element_nnode_1d; j++)
+      {
+       slave_nodal_position[slave_index][0] = slave_nodal_position_1d[i];
+       slave_nodal_position[slave_index][1] = slave_nodal_position_1d[j];
+       slave_weight[slave_index] = slave_weight_1d[i]*slave_weight_1d[j];
+       slave_index++;
+      }
+    }
+   unsigned master_index = 0;
+   for (unsigned i=0; i<master_element_nnode_1d; i++)
+    {
+     for (unsigned j=0; j<master_element_nnode_1d; j++)
+      {
+       master_nodal_position[master_index][0] = master_nodal_position_1d[i];
+       master_nodal_position[master_index][1] = master_nodal_position_1d[j];
+       master_weight[master_index] = master_weight_1d[i]*master_weight_1d[j];
+       master_index++;
+      }
+    }
+
+   // Apply the vertex matching condition
+   //------------------------------------
+   // Vertiex matching is ensured automatically in cases where there is a node
+   // at each end of the mortar that is shared between the master and slave
+   // elements. Where this is not the case, the vertex matching condition must
+   // be enforced by constraining the value of the unknown at the node on the
+   // slave side to be the same as the value at that location in the master.
+
+   // Store positions of the mortar vertex/non-vertex nodes in the slave element
+   //const unsigned n_mortar_vertices = 4;
+   //Vector<unsigned> vertex_pos(n_mortar_vertices);
+   //vertex_pos[0] = 0;
+   //vertex_pos[1] = my_n_p-1;
+   //vertex_pos[2] = my_n_p*(my_n_p-1);
+   //vertex_pos[3] = my_n_p*my_n_p-1;
+   Vector<unsigned> non_vertex_pos((slave_element_nnode_1d-2)*(slave_element_nnode_1d-2));
+   unsigned nvindex = 0;
+   for(unsigned i=1; i<slave_element_nnode_1d-1; i++)
+    {
+     for(unsigned j=1; j<slave_element_nnode_1d-1; j++)
+      {
+       non_vertex_pos[nvindex++] = i*slave_element_nnode_1d + j;
+      }
+    }
+   Vector<unsigned> vertex_pos;
+   for(unsigned i=0; i<n_slave_nodes; i++)
+    {
+     // Check if node number is in the non-vertex storage
+     bool node_is_vertex = true;
+     for(unsigned j=0; j<non_vertex_pos.size(); j++)
+      {
+       if(i==non_vertex_pos[j])
+        {
+         // Node is not a vertex
+         node_is_vertex = false;
+         break;
+        }
+      }
+     // If we get here and the node is a vertex then add it's index
+     if(node_is_vertex)
+      {
+       vertex_pos.push_back(i);
+      }
+    }
+   // Store number of mortar vertices
+   const unsigned n_mortar_vertices = vertex_pos.size();
+
+   // Check that there are actually slave nodes for which we still need to
+   // construct a hanging scheme. If not then there is nothing more to do.
+   if(n_slave_nodes-n_mortar_vertices > 0)
+    {
+
+     // Assemble mass matrix for mortar
+     //--------------------------------
+     Vector<double> psi(n_slave_nodes-n_mortar_vertices);
+     Vector<double> diag_M(n_slave_nodes-n_mortar_vertices);
+     Vector<Vector<double> > shared_node_M(n_mortar_vertices);
+     for (unsigned i=0; i<shared_node_M.size(); i++)
+      {shared_node_M[i].resize(n_slave_nodes-n_mortar_vertices);}
+
+     // Fill in part corresponding to slave nodal positions (unknown)
+     for (unsigned i=0; i<n_slave_nodes-n_mortar_vertices; i++)
+      {
+       // Mortar test functions in 2D are just the cross product of the 1D test
+       // functions
+       // Initialise to 1
+       psi[i] = 1.0;
+       // Take product in each direction
+       for(unsigned dir=0; dir<2; dir++)
+        {
+         unsigned index1d = (dir==0) ? i : i % (slave_element_nnode_1d-2);
+         // Use L'Hosptal's rule:
+         psi[i] *= pow(-1.0,int((slave_element_nnode_1d-1)-index1d-1))
+                    *-Orthpoly::ddlegendre(slave_element_nnode_1d-1,
+                                  slave_nodal_position[non_vertex_pos[i]][dir]);
+        }
+       // Put in contribution
+       diag_M[i] = psi[i]*slave_weight[non_vertex_pos[i]];
+      }
+
+     //// Print out diag(M)
+     //std::cout << "diag(M):" << std::endl;
+     //for(unsigned i=0; i<diag_M.size(); i++)
+     // {
+     //  std::cout << "  " << diag_M[i];
+     // }
+     //std::cout << std::endl;
+
+     // Fill in part corresponding to slave element vertices (known)
+     for(unsigned v=0; v<shared_node_M.size(); v++)
+      {
+       for (unsigned i=0; i<n_slave_nodes-n_mortar_vertices; i++)
+        {
+         // Mortar test functions in 2D are just the cross product of the 1D test
+         // functions
+         // Initialise to 1
+         psi[i] = 1.0;
+         // Take product in each direction
+         for(unsigned dir=0; dir<2; dir++)
+          {
+           unsigned index1d = (dir==0) ? i : i % (slave_element_nnode_1d-2);
+           // Check if denominator is zero
+           if (std::fabs(slave_nodal_position[non_vertex_pos[i]][dir]
+                     - slave_nodal_position[vertex_pos[v]][dir]) >= 1.0e-8 )
+            {
+             // We're ok
+             psi[i] *= pow(-1.0,int((slave_element_nnode_1d-1)-index1d-1))
+                        * Orthpoly::dlegendre(slave_element_nnode_1d-1,
+                                     slave_nodal_position[vertex_pos[v]][dir])
+                        / (slave_nodal_position[non_vertex_pos[i]][dir]
+                        - slave_nodal_position[vertex_pos[v]][dir]);
+            }
+           // Check if numerator is zero
+           else if (std::fabs(
+                     Orthpoly::dlegendre(slave_element_nnode_1d-1,
+                                slave_nodal_position[vertex_pos[v]][dir]))
+                    < 1.0e-8)
+            {
+             // We can use l'hopital's rule
+             psi[i] *= pow(-1.0,int((slave_element_nnode_1d-1)-index1d-1))
+                        *-Orthpoly::ddlegendre(slave_element_nnode_1d-1,
+                                      slave_nodal_position[non_vertex_pos[i]][dir]);
+            }
+           else
+            {
+             // We can't use l'hopital's rule
+             throw
+              OomphLibError(
+               "Cannot use l'Hopital's rule. Dividing by zero is not allowed!",
+               "PRefineableQElement<3,INITIAL_NNODE_1D>::quad_hang_helper()",
+               OOMPH_EXCEPTION_LOCATION);
+            }
+          }
+         // Put in contribution
+         shared_node_M[v][i] = psi[i]*slave_weight[vertex_pos[v]];
+        }
+      }
+
+     //// Print out diag(M)
+     //std::cout << "shared node M:" << std::endl;
+     //for(unsigned i=0; i<shared_node_M.size(); i++)
+     // {
+     //  for(unsigned j=0; j<shared_node_M[i].size(); j++)
+     //   {
+     //    std::cout << "  " << shared_node_M[i][j];
+     //   }
+     // }
+     //std::cout << std::endl;
+
+     // Assemble local projection matrix for mortar
+     //--------------------------------------------
+   
+     // Have only one local projection matrix because there is just one master
+     Vector<Vector<double> > P(n_slave_nodes-n_mortar_vertices);
+     for(unsigned i=0; i<P.size(); i++) {P[i].resize(n_master_nodes,0.0);}
+     
+     //Storage for local coordinate
+     Vector<double> s(3);
+   
+     // Sum contributions from master element shapes (quadrature).
+     // The order of quadrature must be high enough to evaluate a polynomial
+     // of order N_s + N_m - 3 exactly, where N_s = n_slave_nodes, N_m =
+     // n_master_nodes.
+     // (Use pointers for the quadrature knots and weights so that
+     // data is not unnecessarily copied)
+     //unsigned quadrature_order =
+     // std::max(slave_element_nnode_1d,master_element_nnode_1d);
+     Vector<Vector<double> > *quadrature_knot; 
+     Vector<double> *quadrature_weight;
+     if (slave_element_nnode_1d >= master_element_nnode_1d)
+      {
+       // Use the same quadrature order as the slave element (me)
+       quadrature_knot = &slave_nodal_position;
+       quadrature_weight = &slave_weight;
+      }
+     else
+      {
+       // Use the same quadrature order as the master element (neighbour)
+       quadrature_knot = &master_nodal_position;
+       quadrature_weight = &master_weight;
+      }
+
+     // Quadrature loop
+     for (unsigned q=0; q<(*quadrature_weight).size(); q++)
+      {
+       // Evaluate mortar test functions at the quadrature knots in the slave
+       Vector<double> s_on_mortar(2);
+       for(unsigned i=0; i<2; i++)
+        {s_on_mortar[i] = (*quadrature_knot)[q][i];}
+
+       // Get psi
+       for(unsigned k=0; k<n_slave_nodes-n_mortar_vertices; k++)
+        {
+         // Mortar test functions in 2D are just the cross product of the 1D test
+         // functions
+         // Initialise to 1
+         psi[k] = 1.0;
+         // Take product in each direction
+         for(unsigned dir=0; dir<2; dir++)
+          {
+           unsigned index1d = (dir==0) ? k : k % (slave_element_nnode_1d-2);
+           // Check if denominator is zero
+           if (std::fabs(
+                slave_nodal_position[non_vertex_pos[k]][dir]-s_on_mortar[dir])
+               >= 1.0e-08)
+            {
+             // We're ok
+             psi[k] *= pow(-1.0,int((slave_element_nnode_1d-1)-index1d-1))
+                        * Orthpoly::dlegendre(
+                           slave_element_nnode_1d-1,s_on_mortar[dir])
+                        / (slave_nodal_position[non_vertex_pos[k]][dir]-s_on_mortar[dir]);
+            }
+           // Check if numerator is zero
+           else if (std::fabs(
+                     Orthpoly::dlegendre(
+                      slave_element_nnode_1d-1,s_on_mortar[dir]))
+                    < 1.0e-8)
+            {
+             // We can use l'Hopital's rule
+             psi[k] *= pow(-1.0,int((slave_element_nnode_1d-1)-index1d-1))
+                        * -Orthpoly::ddlegendre(
+                            slave_element_nnode_1d-1,s_on_mortar[dir]);
+            }
+           else
+            {
+             // We can't use l'hopital's rule
+             throw
+              OomphLibError(
+               "Cannot use l'Hopital's rule. Dividing by zero is not allowed!",
+               "PRefineableQElement<3,INITIAL_NNODE_1D>::quad_hang_helper()",
+               OOMPH_EXCEPTION_LOCATION);
+            }
+          }
+        }
+
+       // Convert coordinate on mortar to local fraction in slave element
+       Vector<double> s_fraction(3);
+       for(unsigned i=0; i<3; i++)
+        {
+         if(i==active_coord_index[0])
+          {s_fraction[i] = 0.5*(s_on_mortar[0]+1.0);}
+         else if(i==active_coord_index[1])
+          {s_fraction[i] = 0.5*(s_on_mortar[1]+1.0);}
+         else
+          {s_fraction[i] = slave_node_s_fraction[vertex_pos[0]][i];}
+        }
+
+       // Project active coordinate into master element
+       Vector<double> s_in_neigh(3);
+       for(unsigned i=0;i<3;i++)
+        {
+         s_in_neigh[i] = s_lo_neigh[i] + s_fraction[translate_s[i]]*
+          (s_hi_neigh[i] - s_lo_neigh[i]);
+        }
+
+       // Evaluate master shapes at projections of local quadrature knots
+       neigh_obj_pt->interpolating_basis(s_in_neigh,master_shapes,value_id);
+
+       // Populate local projection matrix
+       for(unsigned i=0; i<n_slave_nodes-n_mortar_vertices; i++)
+        {
+         for(unsigned j=0; j<n_master_nodes; j++)
+          {
+           P[i][j] += master_shapes[master_node_number[j]]*psi[i]*(*quadrature_weight)[q];
+          }
+        }
+      }
+
+     //// Print out local projection matrix
+     //std::cout << "P_e:" << std::endl;
+     //for(unsigned i=0; i<P.size(); i++)
+     // {
+     //  for(unsigned j=0; j<P[i].size(); j++)
+     //   {
+     //    std::cout << "  " << P[i][j];
+     //   }
+     // }
+     //std::cout << std::endl;
+
+     // Assemble global projection matrices for mortar
+     //-----------------------------------------------
+     // Need to subtract contributions from the "known unknowns" corresponding
+     // to the nodes at the vertices of the mortar
+
+     // Assemble contributions from mortar vertex nodes
+     for(unsigned v=0; v<n_mortar_vertices; v++)
+      {
+       // Convert coordinate on mortar to local fraction in slave element
+       Vector<double> s_fraction(3);
+       for(unsigned i=0; i<3; i++)
+        {
+         if(i==active_coord_index[0])
+          {s_fraction[i] = 0.5*(slave_nodal_position[vertex_pos[v]][0]+1.0);}
+         else if(i==active_coord_index[1])
+          {s_fraction[i] = 0.5*(slave_nodal_position[vertex_pos[v]][1]+1.0);}
+         else
+          {s_fraction[i] = slave_node_s_fraction[vertex_pos[0]][i];}
+        }
+
+       // Project active coordinate into master element
+       Vector<double> s_in_neigh(3);
+       for(unsigned i=0;i<3;i++)
+        {
+         s_in_neigh[i] = s_lo_neigh[i] + s_fraction[translate_s[i]]*
+          (s_hi_neigh[i] - s_lo_neigh[i]);
+        }
+
+       // Get master shapes at slave nodal positions
+       neigh_obj_pt->interpolating_basis(s_in_neigh,master_shapes,value_id);
+
+       for(unsigned i=0; i<n_slave_nodes-n_mortar_vertices; i++)
+        {
+         for(unsigned k=0; k<n_master_nodes; k++)
+          {
+           P[i][k] -= master_shapes[master_node_number[k]]*shared_node_M[v][i];
+          }
+        }
+      }
+
+     //// Print out global projection matrix
+     //std::cout << "P:" << std::endl;
+     //for(unsigned i=0; i<P.size(); i++)
+     // {
+     //  for(unsigned j=0; j<P[i].size(); j++)
+     //   {
+     //    std::cout << "  " << P[i][j];
+     //   }
+     // }
+     //std::cout << std::endl;
+
+     // Solve mortar system
+     //--------------------
+     for(unsigned i=0; i<n_slave_nodes-n_mortar_vertices; i++)
+      {
+       for(unsigned j=0; j<n_master_nodes; j++)
+        {
+         P[i][j]/=diag_M[i];
+        }
+      }
+
+     //// Print out solved matrix
+     //std::cout << "solved P:" << std::endl;
+     //for(unsigned i=0; i<P.size(); i++)
+     // {
+     //  for(unsigned j=0; j<P[i].size(); j++)
+     //   {
+     //    std::cout << "  " << P[i][j];
+     //   }
+     // }
+     //std::cout << std::endl;
+   
+     // Create structures to hold the hanging info
+     //-------------------------------------------
+     Vector<HangInfo*> hang_info_pt(n_slave_nodes);
+     for (unsigned i=0; i<n_slave_nodes-n_mortar_vertices; i++)
+      {
+       hang_info_pt[i] = new HangInfo(n_master_nodes);
+      }
+
+     // Copy information to hanging nodes
+     //----------------------------------
+     for(unsigned i=0; i<n_slave_nodes-n_mortar_vertices; i++)
+      {
+       for(unsigned j=0; j<n_master_nodes; j++)
+        {
+         hang_info_pt[i]->set_master_node_pt(j,master_node_pt[j],P[i][j]);
+        }
+      }
+     
+     // Set pointers to hanging info
+     //-----------------------------
+     for (unsigned i=0; i<n_slave_nodes-n_mortar_vertices; i++)
+      {
+       // Check that the node shoule actually hang.
+       // That is, if the polynomial orders of the elements at a p-type
+       // non-conormity are both odd then the middle node on the edge is
+       // shared but a hanging scheme has been constructed for it.
+       bool node_is_really_shared = false;
+       for (unsigned m=0; m<hang_info_pt[i]->nmaster(); m++)
+        {
+         // We can simply check if the hanging scheme lists itself as a master
+         if (hang_info_pt[i]->master_node_pt(m)==slave_node_pt[non_vertex_pos[i]])
+          {
+           node_is_really_shared = true;
+
+#ifdef PARANOID
+           // Also check the corresponding weight: it should be 1
+           if(std::fabs(hang_info_pt[i]->master_weight(m)-1.0) > 1.0e-06)
+            {
+             throw
+              OomphLibError(
+               "Something fishy here -- with shared node at a mortar vertex",
+               "PRefineableQElement<3,INITIAL_NNODE_1D>::quad_hang_helper()",
+               OOMPH_EXCEPTION_LOCATION);
+            }
+#endif
+          }
+        }
+
+       // Now we can make the node hang, if it isn't a shared node
+       if(!node_is_really_shared)
+        {
+         slave_node_pt[non_vertex_pos[i]]->set_hanging_pt(hang_info_pt[i],-1);
+        }
+      }
+     
+    } // End of case where there are still slave nodes
+
+#ifdef PARANOID
+   // Check all slave nodes, hanging or otherwise
+   for (unsigned i=0; i<n_slave_nodes; i++)
+    {
+     // Check that weights sum to 1 for those that hang
+     if (slave_node_pt[i]->is_hanging())
+      {
+       // Check that weights sum to 1 and no zero weights
+       double weight_sum = 0.0;
+       bool zero_weight = false;
+       for (unsigned m=0; m<slave_node_pt[i]->hanging_pt()->nmaster(); m++)
+        {
+         weight_sum += slave_node_pt[i]->hanging_pt()->master_weight(m);
+         if(std::fabs(slave_node_pt[i]->hanging_pt()->master_weight(m)) < 1.0e-14)
+          {
+           zero_weight = true;
+           oomph_info << "In the hanging scheme for slave node " << i << ", master node " << m << " has weight " << slave_node_pt[i]->hanging_pt()->master_weight(m) << " < 1.0e-14" << std::endl;
+          }
+        }
+
+       // Warn if not
+       if (std::fabs(weight_sum-1.0) > 1.0e-08)
+        {
+         oomph_info << "Sum of master weights: " << weight_sum << std::endl;
+         OomphLibWarning(
+          "Weights in hanging scheme do not sum to 1",
+          "PRefineableQElement<3,INITIAL_NNODE_1D>::oc_hang_helper()",
+          OOMPH_EXCEPTION_LOCATION);
+        }
+       if (zero_weight)
+        {
+         OomphLibWarning(
+          "Zero weights present in hanging schemes",
+          "PRefineableQElement<3,INITIAL_NNODE_1D>::oc_hang_helper()",
+          OOMPH_EXCEPTION_LOCATION);
+        }
+
+       // Also check that slave nodes do not have themselves as masters
+       //bool slave_should_not_be_hanging = false;
+       for (unsigned m=0; m<slave_node_pt[i]->hanging_pt()->nmaster(); m++)
+        {
+         if(slave_node_pt[i] == slave_node_pt[i]->hanging_pt()->master_node_pt(m))
+          {
+           // This shouldn't happen!
+           throw OomphLibError(
+                  "Slave node has itself as a master!",
+                  "PRefineableQElement<3,INITIAL_NNODE_1D>::oc_hang_helper()",
+                  OOMPH_EXCEPTION_LOCATION);
+          }
+         if(slave_node_pt[i]->hanging_pt()->master_node_pt(m)->is_hanging())
+          {
+           // Check if node is master of master
+           Node* new_nod_pt = slave_node_pt[i]->hanging_pt()->master_node_pt(m);
+           for (unsigned mm=0; mm<new_nod_pt->hanging_pt()->nmaster(); mm++)
+            {
+             if(slave_node_pt[i] == new_nod_pt->hanging_pt()->master_node_pt(mm))
+              {
+               std::cout << "++++++++++++++++++++++++++++++++++++++++" << std::endl;
+               std::cout << "          Slave node: "
+                         << slave_node_pt[i] << " = "
+                         << slave_node_pt[i]->x(0) << " "
+                         << slave_node_pt[i]->x(1) << " "
+                         << slave_node_pt[i]->x(2) << " " << std::endl;
+               std::cout << "         Master node: "
+                         << slave_node_pt[i]->hanging_pt()->master_node_pt(m) << " = "
+                         << slave_node_pt[i]->hanging_pt()->master_node_pt(m)->x(0) << " "
+                         << slave_node_pt[i]->hanging_pt()->master_node_pt(m)->x(1) << " "
+                         << slave_node_pt[i]->hanging_pt()->master_node_pt(m)->x(2) << " " << std::endl;
+               std::cout << "Master's master node: "
+                         << slave_node_pt[i]->hanging_pt()->master_node_pt(m)->hanging_pt()->master_node_pt(mm) << " = "
+                         << slave_node_pt[i]->hanging_pt()->master_node_pt(m)->hanging_pt()->master_node_pt(mm)->x(0) << " "
+                         << slave_node_pt[i]->hanging_pt()->master_node_pt(m)->hanging_pt()->master_node_pt(mm)->x(1) << " "
+                         << slave_node_pt[i]->hanging_pt()->master_node_pt(m)->hanging_pt()->master_node_pt(mm)->x(2) << " " << std::endl;
+
+               
+
+       // Print out hanging scheme
+       std::cout << "Hanging node: "
+                 << slave_node_pt[i]->x(0) << "  "
+                 << slave_node_pt[i]->x(1) << "  "
+                 << slave_node_pt[i]->x(2) << "  "
+                 << std::endl;
+       for(unsigned m_tmp=0; m_tmp<slave_node_pt[i]->hanging_pt()->nmaster(); m_tmp++)
+        {
+         std::cout << "   m = " << m_tmp << ": "
+                   << slave_node_pt[i]->hanging_pt()->master_node_pt(m_tmp)->x(0) << "  "
+                   << slave_node_pt[i]->hanging_pt()->master_node_pt(m_tmp)->x(1) << "  "
+                   << slave_node_pt[i]->hanging_pt()->master_node_pt(m_tmp)->x(2) << "  "
+                   << "w = " << slave_node_pt[i]->hanging_pt()->master_weight(m_tmp) << "  "
+                   << std::endl;
+        }
+
+       // Print out hanging scheme
+       std::cout << "Master node " << m << " of Hanging node: "
+                 << new_nod_pt->x(0) << "  "
+                 << new_nod_pt->x(1) << "  "
+                 << new_nod_pt->x(2) << "  "
+                 << std::endl;
+       for(unsigned mm_tmp=0; mm_tmp<new_nod_pt->hanging_pt()->nmaster(); mm_tmp++)
+        {
+         std::cout << "   mm = " << mm_tmp << ": "
+                   << new_nod_pt->hanging_pt()->master_node_pt(mm_tmp)->x(0) << "  "
+                   << new_nod_pt->hanging_pt()->master_node_pt(mm_tmp)->x(1) << "  "
+                   << new_nod_pt->hanging_pt()->master_node_pt(mm_tmp)->x(2) << "  "
+                   << "w = " << new_nod_pt->hanging_pt()->master_weight(mm_tmp) << "  "
+                   << std::endl;
+        }
+               
+               // This shouldn't happen!
+               throw OomphLibError(
+                      "Slave node has itself as a master of a master!",
+                      "PRefineableQElement<3,INITIAL_NNODE_1D>::oc_hang_helper()",
+                      OOMPH_EXCEPTION_LOCATION);
+              }
+            }
+          }
+        }
+      }
+     else
+      {
+       // Check that this node is shared with the master element if it
+       // isn't hanging
+       bool is_master = false;
+       for (unsigned n=0; n<n_master_nodes; n++)
+        {
+         if (slave_node_pt[i]==master_node_pt[n])
+          {
+           // Node is a master
+           is_master = true;
+           break;
+          }
+        }
+
+       if (!is_master)
+        {
+         //// Throw error
+         //std::ostringstream error_string;
+         //error_string
+         // << "This node in the slave element is neither" << std::endl
+         // << "hanging or shared with a master element." << std::endl;
+         //
+         //throw OomphLibError(
+         //       error_string.str(),
+         //       "PRefineableQElement<3,INITIAL_NNODE_1D>::quad_hang_helper()",
+         //       OOMPH_EXCEPTION_LOCATION);
+        }
+      }
+    }
+#endif
+
+   // Finally, Loop over all slave nodes and fine-tune their positions
+   //-----------------------------------------------------------------
+   // Here we simply set the node's positions to be consistent
+   // with the hanging scheme. This is not strictly necessary
+   // because it is done in the mesh adaptation before the node
+   // becomes non-hanging later on. We make no attempt to ensure
+   // (strong) continuity in the position across the mortar.
+   for(unsigned i=0; i<n_slave_nodes; i++)
+    {
+     // Only fine-tune hanging nodes
+     if(slave_node_pt[i]->is_hanging())
+      {
+       //If we are doing the position, then
+       if(value_id==-1)
+        {
+         // Get the local coordinate of this slave node
+         Vector<double> s_local(3);
+         this->local_coordinate_of_node(slave_node_number[i],s_local);
+         
+         // Get the position from interpolation in this element via
+         // the hanging scheme
+         Vector<double> x_in_neighb(3);
+         this->interpolated_x(s_local,x_in_neighb);
+   
+         // Fine adjust the coordinates (macro map will pick up boundary
+         // accurately but will lead to different element edges)
+         slave_node_pt[i]->x(0)=x_in_neighb[0];
+         slave_node_pt[i]->x(1)=x_in_neighb[1];
+         slave_node_pt[i]->x(2)=x_in_neighb[2];
+        }
+      }
+    }
+  } //End of case where this interface is to be mortared
+
+}
 
 //===================================================================
 // Build required templates

@@ -78,6 +78,9 @@ public:
     
    // Do I p-adapt or not?
    P_adapt_flag=true;
+    
+   // Do I disable additional synchronisation of hanging nodes?
+   Additional_synchronisation_of_hanging_nodes_not_required=false;
  
    // Where do I write the documatation of the refinement process?
    Doc_info_pt=0;
@@ -180,12 +183,24 @@ public:
 
  /// Disable adaptation
  void disable_p_adaptation() {P_adapt_flag=false;}
+ 
+ /// Enable additional synchronisation of hanging nodes
+ void enable_additional_synchronisation_of_hanging_nodes()
+  {Additional_synchronisation_of_hanging_nodes_not_required=false;}
+
+ /// Disable additional synchronisation of hanging nodes
+ void disable_additional_synchronisation_of_hanging_nodes()
+  {Additional_synchronisation_of_hanging_nodes_not_required=true;}
 
  /// Return whether the mesh is to be adapted
  bool is_adaptation_enabled() const {return Adapt_flag;}
 
  /// Return whether the mesh is to be adapted
  bool is_p_adaptation_enabled() const {return P_adapt_flag;}
+
+ /// Return whether additional synchronisation is enabled
+ bool is_additional_synchronisation_of_hanging_nodes_disabled() const
+  {return Additional_synchronisation_of_hanging_nodes_not_required;}
  
  ///  Access fct for DocInfo
  DocInfo doc_info()
@@ -294,6 +309,9 @@ protected:
 
   /// Flag that requests p-adaptation
  bool P_adapt_flag;
+
+  /// Flag that disables additional synchronisation of hanging nodes
+ bool Additional_synchronisation_of_hanging_nodes_not_required;
 
  /// Pointer to DocInfo
  DocInfo* Doc_info_pt;
@@ -582,6 +600,11 @@ public:
     t_start = TimingHelpers::timer();
    }
   
+  // Communicate positions of non-hanging nodes that depend on non-existent
+  // neighbours (e.g. h-refinement of neighbouring elements with different
+  // p-orders where the shared edge is on the outer edge of the halo layer)
+  synchronise_nonhanging_nodes();
+
   // Get number of continously interpolated variables
   unsigned local_ncont_interpolated_values=0;
   
@@ -639,14 +662,19 @@ protected:
  void synchronise_hanging_nodes(const unsigned& ncont_interpolated_values);
 
  /// Additional synchronisation of hanging nodes
- // BENFLAG: Required for reconcilliation of hanging nodes on the outer
- //          edge of the halo layer when using elements with nonuniformly
- //          spaced nodes
- // BENFLAG: Must be implemented in templated derived class because ELEMENT
- //          template parameter is required for the node-creation functions
- //          in the Missing_masters_functions namespace
+ /// Required for reconcilliation of hanging nodes on the outer edge of the
+ /// halo layer when using elements with nonuniformly spaced nodes
+ /// Must be implemented in templated derived class because ELEMENT template
+ /// parameter is required for the node-creation functions in the
+ /// Missing_masters_functions namespace
  virtual void additional_synchronise_hanging_nodes(
                const unsigned& ncont_interpolated_values)=0;
+
+ /// Synchronise the positions of non-hanging nodes that depend on
+ /// non-existent neighbours (e.g. h-refinement of neighbouring elements
+ /// with different p-orders where the shared edge is on the outer edge of
+ /// the halo layer)
+ void synchronise_nonhanging_nodes();
  
 #endif
 
@@ -703,8 +731,8 @@ protected:
   double Weight;
   HangInfo* Hang_pt;
   unsigned Master_node_index;
-  //BENFLAG: Store pointer to node and index of value in case translation
-  //         attempt fails (see synchronise_hanging_nodes())
+  // Store pointer to node and index of value in case translation attempt fails
+  // (see synchronise_hanging_nodes())
   Node* Node_pt;
   int icont;
  };
@@ -772,12 +800,11 @@ class TreeBasedRefineableMesh : public TreeBasedRefineableMeshBase
 #ifdef OOMPH_HAS_MPI
   
   /// Additional setup of shared node scheme
-  /// BENFLAG: This is Required for reconcilliation of hanging nodes acrross
-  ///          processor boundaries when using elements with nonuniformly
-  ///          spaced nodes
-  /// BENFLAG: ELEMENT template parameter is required so that
-  ///          MacroElementNodeUpdateNodes which are added as external halo
-  ///          master nodes can be made fully functional
+  /// This is Required for reconcilliation of hanging nodes acrross processor
+  /// boundaries when using elements with nonuniformly spaced nodes.
+  /// ELEMENT template parameter is required so that
+  /// MacroElementNodeUpdateNodes which are added as external halo master nodes
+  /// can be made fully functional
   void additional_synchronise_hanging_nodes(
         const unsigned& ncont_interpolated_values);
 
