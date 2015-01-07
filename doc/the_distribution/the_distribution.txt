@@ -9,6 +9,7 @@ The latest version of the library is 0.90.
 -# \ref download
 -# \ref unpack
 -# \ref install
+  -# \ref manual_install
   -# \ref standard_install 
   -# \ref custom_install 
   .
@@ -67,71 +68,89 @@ The entire distribution will now be contained in the sub-directory
 
 \subsection standard_install Option 1: Standard installation
 
-Change into the \c oomph-lib directory and run the \c autogen.sh
+Change into the \c oomph-lib directory and run the \c interactive_autogen.sh
 build script:
 
 \code
 cd oomph-lib-0.90
-./autogen.sh
+./interactive_autogen.sh
 \endcode
 
-The build script will ask a few questions, e.g. to verify that the
-default build directory (<code> oomph-lib-0.90/build </code>) is appropriate --
-if you want to install the library elsewhere, you may specify an alternative
-directory.  The script then proceeds with the standard \c configure; \c make;
-\c make \c install; \c make \c check; sequence. The build script
-uses the shell script \c configure to determine the appropriate 
-compile/link options
-for your machine and disables certain (optional) parts of the build 
-process if the required tools are not found. For instance, the
-documentation will only be generated if a sufficiently recent
-version of <A HREF="http://www.doxygen.org">doxygen</A>
-can be found on your system.
+This build script will ask a few questions, e.g. to verify that the default
+build directory (<code> oomph-lib-0.90/build </code>) is appropriate before
+starting the build.
 
-The self-test
-(initiated by \c make \c check ) will compile and run (at least) all demo
-codes and verify their output. This is an optional (and time
-consuming) step, therefore the user is given the option to terminate
-the build process at this point. 
+By default, \c interactive_autogen.\c sh will build the library and the
+demo codes with certain default settings (using the gcc compilers with full
+optimisation, no debugging, no PARANOIA, and fully installed header files
+rather than symbolic links). These are appropriate if you wish to install
+the library once-and-for-all and do not anticipate any changes to their
+sources. The section \ref custom_install provides more details on the
+various options). `interactive_autogen.sh` will display the configure
+options and ask for confirmation that they are appropriate. If you are
+unsure if they are, simply answer "y" -- the default will be fine.
 
- By default, \c autogen.\c sh will build the library and the demo codes
-with certain default settings (using the gcc compilers with 
-full optimisation, no debugging, no PARANOIA, and fully installed header files
-rather than symbolic links -- these are appropriate if you
-wish to install the library once-and-for-all and do not anticipate
-any changes to their sources; the section \ref custom_install 
-provides more  details on the various options). \c autogen.\c sh  will 
-display the configure options and ask for confirmation that they are 
-appropriate. If you are unsure if they are, simply answer "y" -- the default
-will be fine...
+The following flags for `interactive_autogen.sh` may be of interest:
 
-<CENTER><B>New feature: Parallel make</B></CENTER>
+- `-j n`: Run the build process using `n` cores. This can greatly speed
+  up build times and is strongly recommended if you have a multicore
+  machine.
 
- \c oomph-lib's build script, \c autogen.\c sh now allows for
-parallel compilation. This can lead to considerable speedups
-on multicore processors that are now widely available. To 
-build \c oomph-lib in parallel, using up four threads
-run  \c autogen.\c sh as follows
-\code
-./autogen.sh --jobs=4 
-\endcode
+- `-r`: Rebuild the configuration files from scratch. This is useful if you
+  believe you may have somehow broken the build process, but should not be
+  necessary normally.
 
-or (if you are re-building) 
+- `-s`: Silent mode, greatly reduce the amount of output from `make` (all
+  error messages and warnings are still shown).
 
-\code
-./autogen.sh --jobs=4 --rebuild
-\endcode
 
-\n
+Under the hood `interactive_autogen.sh` simply collects settings in a
+question and answer manner then calls `autogen.sh` with the appropriate
+flags. If you prefer you can simply call `autogen.sh` directly. Important
+flags for `autogen.sh` are:
 
-If you're an experience linux/unix user, you may prefer to
-control the build/install process manually, using the
-standard \c configure; \c make; \c make \c install; \c make \c check; 
-sequence. In this case, the library will be compiled with GNU's default 
-compiler options ("-O2 -g") and the libraries and include files
-will be installed in \c /usr/local/ unless you specify 
-a different directory with the \c --prefix argument to the 
-\c configure command. Here's an example of a manual installation
+- `-C`: specify the path to the configure options file, by default the file
+  `current` is used (corresponding to the same options as the previous
+  build). If `current` does not exist the file `default` is used.
+
+- `-b`: specify the build directory, the default is `build`.
+
+In addition the flags discussed above for `interactive_autogen.sh` can be
+used.
+
+The self-tests can be initiated outside of `interactive_autogen.sh` using
+`make check -k` (to run on a single core) or `./bin/parallel_self_test.py`
+(to run on all available cores). These commands will compile and run all
+the demo codes and verify their output. This is an optional step and can be
+very time consuming, especially if run on a small number of cores.To run
+the self tests immediately after a successful `autogen.sh` simply use
+`bash`'s short-circuit and operator (`&&`), e.g.
+
+    ./autogen.sh && make check
+
+Running `interactive_autogen.sh -h` or `autogen.sh -h` will provide a
+complete list of the available command line flags for both . Note that
+command line flags specified to `interactive_autogen.sh -h` may overrule
+options selected by the question and answer process.
+
+
+A typical complete build and self-test command on a multicore machine might
+look like:
+
+    ./autogen.sh -C path/to/configure/options -j 8 -s && ./bin/parallel_self_tests.py
+
+
+\subsection manual_install Manual installation
+
+If you're an experienced linux/unix user, you may prefer to control the
+build/install process manually, using the standard \c configure; \c make;
+\c make \c install; \c make \c check; sequence. Note that this will *only*
+work when building the tar file version (i.e. not the version from svn
+which still requires the configure script to be generated). In this case,
+the library will be compiled with GNU's default compiler options ("-O2 -g")
+and the libraries and include files will be installed in \c /usr/local/
+unless you specify a different directory with the \c --prefix argument to
+the \c configure command. Here's an example of a manual installation
  
 - Unpack the distribution
   \code
@@ -170,27 +189,22 @@ a different directory with the \c --prefix argument to the
   make check -k
   \endcode
 .
-\subsection custom_install Option 2: Customised installation
 
-The build script allows you to customise the build/install options.
-For instance, you may wish to specify another compiler, change
-the optimisation level, allow for debugging or range checking, etc.
-In this case, reply "n" when prompted to confirm the 
-configure options. You are then given a list of previously used 
-options which are stored in various files in the sub-directory 
-\c config/configure_options/. (The default settings are in \c default; 
-the currently used ones are in \c current -- when you run \c autogen\c
-.sh for the first time, the two will be identical.) You may either
-overwrite the defaults on a command line -- your chosen
-options will then be stored in \c config/configure_options/current --
-or you may select one of the existing option files. It's a good
-idea to add your own option files to those that already exist.
+\subsection custom_install Configuration options
+
+The build scripts allow you to specify a file of configure options (either
+interactively or using the `-C` flag). For instance, you may wish to
+specify another compiler, change the optimisation level, allow for
+debugging or range checking, etc. Previously used sets of options are
+stored in various files in the sub-directory `config/configure_options/`.
+The default settings are in `default`; the currently used ones are in
+`current`.
 
 What options are there? You can get a complete list by typing
-\code
-./configure --help
-\endcode
-in \c oomph-lib's top level directory. Here are some options that 
+
+    ./configure --help
+
+in `oomph-lib`'s top level directory. Here are some options that
 we use frequently:
 
 
@@ -200,9 +214,9 @@ requires a significant amount of disk space. Since the documentation
 is also available from the <A href="http://www.oomph-lib.org">oomph-lib
 homepage</a> you may wish to suppress this step.
 To achieve this, specify the configure option
-\code
---enable-suppress-doc
-\endcode
+
+    --enable-suppress-doc
+
 \subsubsection sym_links Replace library headers by symbolic links to the sources
 During the build process \c oomph-lib's various libraries are installed in
 the subdirectory \c build/lib (or in whatever other directory you may
@@ -219,9 +233,9 @@ in \c build/include rather than the one in your source directory.
 This will encourage you to edit the copied file rather than the
 original -- clearly a recipe for disaster! To avoid it we provide 
 the configure option 
-\code
- --enable-symbolic-links-for-headers
-\endcode
+
+     --enable-symbolic-links-for-headers
+
 In this mode, the copies of the header files in \c build/include
 are replaced by symbolic links to the actual sources in 
 \c src or \c user_src. 
@@ -393,10 +407,7 @@ If these powerful tools are installed on your machine,
 you can incude your own libraries and driver codes into the
 fully-automated \c oomph-lib build process. Store your code in 
 suitably named sub-directories in \c user_src and \c user_drivers
-and update \c config/configure. \c ac_scripts/user_src. \c dir_list and
-\c config/configure. \c ac_scripts/user_drivers. \c dir_list, to 
-ensure that the sub-directories get included into the build 
-process. See \ref own for more details. 
+and update \c config/configure. See \ref own for more details.
 
 
 
@@ -671,7 +682,7 @@ then in directory
 external_distributions/mumps_and_scalapack/mumps_and_scalapack_default_installation
 \endcode
 
-Note that the installation of \c ScaLAPACK requires an
+Note that the installation of `ScaLAPACK` requires an
 active Internet connection because it automatically downloads
 additional files.
 
@@ -709,10 +720,8 @@ on your machine.
 \subsubsection add_driver Adding your own driver codes
 Let's start with the straightforward case: You want to use \c
 oomph-lib to solve one of your own problems. To do this within 
-\c oomph-lib's autotools framework, you will have to create a new
-directory in \c user_drivers, register this directory to ensure that
-it gets included in the overall build process, and, of course, 
-write your driver code. To facilitate
+\c oomph-lib's autotools framework, simply create a new
+directory in \c user_drivers and write your driver code. To facilitate
 these steps, the \c user_drivers directory already contains a 
 sample directory \c joe_cool for which all these steps have been
 performed. If you don't object to the directory name (or if your
@@ -724,39 +733,13 @@ If not, we suggest the following sequence of steps:
 cd user_drivers
 mkdir josephine_cool
 \endcode
-   \n\n
--# Add the entry \c user_drivers/josephine_cool  to 
-   the file \c config/configure. \c ac_scripts/user_drivers\c .dir_list
-   \n\n
+
 -# Copy the \c Makefile.am and the driver code \c joes_poisson_code.cc
    from \c user_drivers/joe_cool to \c user_drivers/josephine_cool.
-   \n\n
--# Return to \c oomph-lib's top-level directory and re-run
-   \c autogen\c .sh with the \c --rebuild flag:
-\code
-./autogen.sh --rebuild
-\endcode
-   \n
-   \b Note: There is no need to wipe any libraries that you might
-   already have installed previously. In fact, you can terminate
-   the (re-)build process as soon as
-\code
-[...]
 
-config.status: executing depfiles commands
+-# Return to \c oomph-lib's top-level directory and re-run `./autogen.sh`
+   to generate the required Makefile etc. in your own directory.
 
-
-done running ./configure
-
-
-Running make
-
-[...]
-\endcode
-    appears on the screen. This would be followed by the (in your case) 
-    needless re-generation of the existing libraries from the already compiled
-    sources.
-   \n\n
 -# You may now return to your own directory in \c user_drivers and
    make your own driver code:
 \code
@@ -853,31 +836,8 @@ mkdir jacqueline_cool
    from \c user_src/jack_cool to \c user_src/jacqueline_cool.
    \n\n
 -# Return to the top-level \c oomph-lib directory and re-run
-   \c autogen\c .sh with the \c --rebuild flag:
-\code
-./autogen.sh --rebuild
-\endcode
-   \n
-   \b Note: There is no need to wipe any libraries that you might
-   already have installed previously. In fact, you can terminate
-   the (re-)build process as soon as
-\code
-[...]
+   `autogen.sh`.
 
-config.status: executing depfiles commands
-
-
-done running ./configure
-
-
-Running make
-
-[...]
-\endcode
-   appears on the screen. This would be followed by the (in your case) 
-   needless re-generation of the existing libraries from the already compiled
-   sources.
-   \n\n 
 -# You may now return to your own directory in \c user_src and
    make and install our own library
 \code
