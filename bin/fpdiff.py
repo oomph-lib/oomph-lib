@@ -306,11 +306,22 @@ def run_as_script(argv):
  try:
     error_code, _, _ = fpdiff_helper(argv[0], argv[1], maxreld, small,
                                   sys.stdout, sys.stdout)
- except IOError, e:
-    #If there has been an IO error fail with a useful message
-    sys.stderr.write("\n   [FAILED] I/O error(%d): %s \"%s\"\n"
-                        % (e.errno, e.strerror, e.filename))
-    return 5
+
+ # If there has been an IO error then fail with a useful message
+ except IOError:
+
+     # Get the exception that was raised
+     _, err, _ = sys.exc_info()
+     # We have to get exceptions manually using this function instead of the
+     # usual `except IOError as err:` or `except IOError, err:` for
+     # compatibility with both the ancient version of python on the wulfling
+     # and python3+.
+
+     # Write the message
+     sys.stderr.write("\n   [FAILED] I/O error(%d): %s \"%s\"\n"
+                      % (err.errno, err.strerror, err.filename))
+
+     return 5
 
  return error_code
 
