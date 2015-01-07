@@ -30,9 +30,9 @@ generate_config_files="false"
 configure_options_file="config/configure_options/current"
 
 # If "current" configure options does not exist then use "default".
-if [[ ! -f "config/configure_options/current" ]]; then
+if [[ ! -f "${oomph_root}/config/configure_options/current" ]]; then
     echo "No current configure options found, copying over the default options"
-    cp "config/configure_options/default" "config/configure_options/current"
+    cp "${oomph_root}/config/configure_options/default" "${oomph_root}/config/configure_options/current"
 fi
 
 
