@@ -38,52 +38,52 @@ fi
 
 # Parse command line arguments
 while getopts ":hrd:c:b:j:sk" opt; do
-  case $opt in
-      h)
-          echo "Options for autogen.sh:"
-          echo
-          EchoUsage
-          exit 0 
-          ;;
+    case $opt in
+        h)
+            echo "Options for autogen.sh:"
+            echo
+            EchoUsage
+            exit 0
+            ;;
 
-      r)
-          generate_config_files="true"
-          echo "Doing a complete rebuild from scratch."
-          ;;
-      c)
-          configure_options_file="$OPTARG"
-          ;;
-      b)
-          build_dir="$OPTARG"
-          ;;
+        r)
+            generate_config_files="true"
+            echo "Doing a complete rebuild from scratch."
+            ;;
+        c)
+            configure_options_file="$OPTARG"
+            ;;
+        b)
+            build_dir="$OPTARG"
+            ;;
 
-      # flags for make
-      j)
-          job_option="--jobs $OPTARG"
-          make_options="$make_options $job_option"
-          echo "Added make option $job_option"
-          ;;
-      k)
-          k_option="--keep-going"
-          make_options="$make_options $k_option"
-          echo "Added make option $k_option"
-          ;;
-      s)
-          silent_option="--silent LIBTOOLFLAGS=--silent"
-          make_options="$make_options $silent_option"
-          extra_configure_options="$extra_configure_options -q"
-          echo "Added make option $silent_option, configure option -q"
-          ;;
+        # flags for make
+        j)
+            job_option="--jobs $OPTARG"
+            make_options="$make_options $job_option"
+            echo "Added make option $job_option"
+            ;;
+        k)
+            k_option="--keep-going"
+            make_options="$make_options $k_option"
+            echo "Added make option $k_option"
+            ;;
+        s)
+            silent_option="--silent LIBTOOLFLAGS=--silent"
+            make_options="$make_options $silent_option"
+            extra_configure_options="$extra_configure_options -q"
+            echo "Added make option $silent_option, configure option -q"
+            ;;
 
 
-      \?)
-          echo "Invalid option: -$OPTARG" >&2
-          echo "Valid options are:"
-          echo
-          EchoUsage
-          exit 3
-          ;;
-  esac
+        \?)
+            echo "Invalid option: -$OPTARG" >&2
+            echo "Valid options are:"
+            echo
+            EchoUsage
+            exit 3
+            ;;
+    esac
 done
 
 # and for build dir 
