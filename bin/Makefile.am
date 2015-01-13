@@ -21,16 +21,16 @@ txt2h.sh: txt2h.sh.in
 	rm -f txt2h.sh.aux
 	rm -f update_awk.sed
 
-EXTRA_DIST=build_mesh_makefile.sh change_headers_to_links.sh fpdiff.py\
-           regenerate_config_files.sh dummy_validate.sh headers.awk\
-           customise_dist.sh txt2h.sh.in apply_licence.sh\
+EXTRA_DIST=build_mesh_makefile.sh change_headers_to_links.sh fpdiff.py \
+           dummy_validate.sh headers.awk autogen_helpers.sh \
+           customise_dist.sh txt2h.sh.in apply_licence.sh \
 	   remove_licence.sh remove_licence.awk \
            cc_and_h_licence_block.txt \
 	   build_oomph_html_header.sh count_lines.sh \
            compare_file_length_with_tolerance.bash customise_latex.bash \
            oomph-convert  oomph-convert.py makePvd \
            find_missing_doxygen_hooks.sh big_diff.bash \
-           make_all_distributions.bash \
+           make_all_distributions.bash check_mpi_command.sh \
            destruct_test_distribution.bash \
            minimal_mpi_test.cc check_oomph-lib_links.bash strip_down.bash \
            validate_ok_count minimal_mpi_variablenp_test.cc \
