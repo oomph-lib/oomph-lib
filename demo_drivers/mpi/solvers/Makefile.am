@@ -70,8 +70,8 @@ fsi_channel_with_leaflet_LDADD = \
 #-----------------------------------------------------------------------
 
 # Sources for executable
-two_d_multi_poisson_SOURCES = two_d_multi_poisson.cc \
-	simple_block_preconditioners.h
+two_d_multi_poisson_SOURCES = two_d_multi_poisson.cc
+
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
