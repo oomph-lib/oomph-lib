@@ -486,20 +486,36 @@ void print_connectivity_matrix(const Problem* const problem_pt)
   // Loop through the number of elements
   for (unsigned ele_i = 0; ele_i < n_element; ele_i++) 
   {
+    outfile << "Element number: " << ele_i << std::endl;
+
       // Get pointer to the element
-  GeneralisedElement* elem_pt 
-    = mesh_pt->element_pt(ele_i);
+  FiniteElement* elem_pt 
+    = mesh_pt->finite_element_pt(ele_i);
 
-    // For each element, loop through it's degrees of freedom.
-    const unsigned n_element_dof = elem_pt->ndof();
+  unsigned nnod=elem_pt->nnode();
 
-    for (unsigned dof_i = 0; dof_i < n_element_dof; dof_i++)
+  for (unsigned nod_i = 0; nod_i < nnod; nod_i++) 
+  {
+    outfile << "Node number: " << nod_i << std::endl;
+    // Get the node
+    Node* nod_pt = elem_pt->node_pt(nod_i);
+    const unsigned nval = nod_pt->nvalue();
+
+    for (unsigned val_i = 0; val_i < nval; val_i++) 
     {
-      // Per dof, get the global equation number
-      unsigned long global_eqn = elem_pt->eqn_number(dof_i);
+      outfile << val_i << " ";
+      long eqn_num = nod_pt->eqn_number(val_i);
+      outfile << eqn_num << " ";
+      if(!nod_pt->is_pinned(val_i))
+      {
+        outfile << elem_pt->local_eqn_number(eqn_num) << " ";
+      }
 
-      outfile << dof_i << " " << global_eqn << "\n";
+      outfile << "\n";
     }
+  }
+
+
   }
 
   outfile.close();
