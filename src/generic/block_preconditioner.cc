@@ -5628,7 +5628,7 @@ namespace oomph
        const bool& ignore_replacement_block) const
    {
 #ifdef PARANOID
-     // the number of blocks RAYRAY change this to the block types the preconditioner expects
+     // the number of dof types.
      unsigned para_ndofs = ndof_types();
 
      // paranoid check that block i is in this block preconditioner

@@ -47,8 +47,6 @@ namespace oomph
  void TrilinosAztecOOSolver::solve(Problem* const &problem_pt,
                                    DoubleVector &solution)
  {
-   oomph_info << "RAYRAY: solve() begin" << std::endl; 
-   
 
 
 //   MemoryUsage::doc_memory_usage("start of TrilinosAztecOOSolver::solve");
@@ -60,8 +58,6 @@ namespace oomph
 
   // if we were previously using a problem based solve then we should delete
   // the oomphlib matrix as it was created during the last solve
-  oomph_info << "RAYRAY: Using_problem_based_solve: " << Using_problem_based_solve << std::endl; 
-  
   if (Using_problem_based_solve)
    {
     delete Oomph_matrix_pt;
@@ -88,52 +84,7 @@ namespace oomph
   // create the jacobian
   CRDoubleMatrix* cr_matrix_pt = new CRDoubleMatrix;
   Oomph_matrix_pt = cr_matrix_pt;
-  oomph_info << "RAYRAY: About to get Jacobian" << std::endl;
   problem_pt->get_jacobian(residual,*cr_matrix_pt);
-  oomph_info << "RAYRAY: Got Jacobian" << std::endl;
-
-  unsigned rnrow = cr_matrix_pt->nrow();
-  unsigned rncol = cr_matrix_pt->ncol();
-  unsigned rnrow_local = cr_matrix_pt->nrow_local();
-  unsigned rnnz = cr_matrix_pt->nnz();
-
-//  oomph_info << "rnrow = " << rnrow << std::endl; 
-//  oomph_info << "rncol = " << rncol << std::endl; 
-//  oomph_info << "rnrow_local = " << rnrow_local << std::endl; 
-//  oomph_info << "rnnz = " << rnnz << std::endl; 
-  
-
-  const OomphCommunicator* const comm_pt = MPI_Helpers::communicator_pt();
-  // my rank and number of processors. 
-  // This is used later for putting the data.
-  const unsigned my_rank = comm_pt->my_rank();
-  const unsigned nproc = comm_pt->nproc();
-
-  if(Dump_matrices || Dump_matrices_only)
-  {
-    oomph_info << "RAYRAY About to output jac and res" << std::endl;
-
-    std::ostringstream jac_ss;
-    jac_ss << "raw_lin_system/jac" 
-           << Tetgen_number << "_np" << nproc 
-                            << "r" << my_rank;
-    cr_matrix_pt->sparse_indexed_output(jac_ss.str(),15,true);
-
-    std::ostringstream residual_ss;
-    residual_ss << "raw_lin_system/residual" 
-                << Tetgen_number << "_np" << nproc 
-                                 << "r" << my_rank;
-    residual.output_local_values_with_offset(residual_ss.str(),15);
-
-    oomph_info << "Done output of jac and res" << std::endl;
-    if(Dump_matrices_only)
-    {
-      oomph_info << "Requested to dump stuff only." << std::endl;
-      oomph_info << "Will now exit" << std::endl;
-      exit(0);
-    }
-  }
-  
   this->build_distribution(residual.distribution_pt());
 
   // record the end time and compute the matrix setup time
@@ -144,221 +95,6 @@ namespace oomph
     oomph_info << "Time to generate Jacobian [sec]    : "
                << Jacobian_setup_time << std::endl;
    }
-
-
-  // RAYRAY new code, to read in the permuted matrix.
-  // How to do this... the files are (on two cores)
-  //
-  // Jacobian:
-  // (for rank 0)
-  // jac13_np2r0_val
-  // jac13_np2r0_row
-  // jac13_np2r0_col
-  //
-  // (for rank 1)
-  // jac13_np2r1_val
-  // jac13_np2r1_row
-  // jac13_np2r1_col
-  //
-  //
-  // Residual:
-  // res13_np2r0
-  // res13_np2r0
-  //
-  // The jac13 is stored in Replaced_mat_str.
-  // The res13 is stored in Replaced_res_str.
-  // If Use_replaced_mat_res is true, then we assume that the files exist
-  // and use them.
-  if(Use_replacement_mat_res)
-  {
-    oomph_info << "RAYRAY using replacement" << std::endl; 
-    
-    // Recall that we have my_rank and nproc
-    std::ostringstream np_rank_oss;
-    np_rank_oss << "np" << nproc << "r" << my_rank;
-
-    ////////////////////////////////////////////////////////////////////////
-    // create the val oss
-    std::ostringstream val_fname_oss;
-    val_fname_oss << "jac" << Tetgen_number << "_" 
-                  << np_rank_oss.str() << "_val";
-
-    // create the col oss
-    std::ostringstream col_fname_oss;
-    col_fname_oss << "jac" << Tetgen_number << "_"
-                  << np_rank_oss.str() << "_col";
-
-    // create the row oss
-    std::ostringstream row_fname_oss;
-    row_fname_oss << "jac" << Tetgen_number << "_" 
-                  << np_rank_oss.str() << "_row";
-    ////////////////////////////////////////////////////////////////////////
-    std::string val_nlines_fname = val_fname_oss.str() + "_nlines";
-    std::string col_nlines_fname = col_fname_oss.str() + "_nlines";
-    std::string row_nlines_fname = row_fname_oss.str() + "_nlines";
-    ////////////////////////////////////////////////////////////////////////
-
-    // We now read in the nlines
-    unsigned val_nlines = 0;
-    unsigned col_nlines = 0;
-    unsigned row_nlines = 0;
-
-    // Get val_nlines //////////////////////////////////////////////////////
-    std::string full_val_nlines_fname = "raw_lin_system/"+val_nlines_fname;
-    std::ifstream val_nline_file(full_val_nlines_fname.c_str());
-    if (!val_nline_file)
-    {
-      std::ostringstream error_message_stream;
-      error_message_stream
-       << "There was a problem opening file "
-       << full_val_nlines_fname  << std::endl;
-       throw OomphLibError(error_message_stream.str(),
-                           OOMPH_CURRENT_FUNCTION,
-                           OOMPH_EXCEPTION_LOCATION);
-    }
-    else
-    {
-      val_nline_file >> val_nlines;
-    }
-
-    // Get col_nlines //////////////////////////////////////////////////////
-    std::string full_col_nlines_fname = "raw_lin_system/"+col_nlines_fname;
-    std::ifstream col_nline_file(full_col_nlines_fname.c_str());
-    if (!col_nline_file)
-    {
-      std::ostringstream error_message_stream;
-      error_message_stream
-       << "There was a problem opening file "
-       << full_col_nlines_fname  << std::endl;
-       throw OomphLibError(error_message_stream.str(),
-                           OOMPH_CURRENT_FUNCTION,
-                           OOMPH_EXCEPTION_LOCATION);
-    }
-    else
-    {
-      col_nline_file >> col_nlines;
-    }
-
-    // Get row_nlines //////////////////////////////////////////////////////
-    std::string full_row_nlines_fname = "raw_lin_system/"+row_nlines_fname;
-    std::ifstream row_nline_file(full_row_nlines_fname.c_str());
-    if (!row_nline_file)
-    {
-      std::ostringstream error_message_stream;
-      error_message_stream
-       << "There was a problem opening file "
-       << full_row_nlines_fname  << std::endl;
-       throw OomphLibError(error_message_stream.str(),
-                           OOMPH_CURRENT_FUNCTION,
-                           OOMPH_EXCEPTION_LOCATION);
-    }
-    else
-    {
-      row_nline_file >> row_nlines;
-    }
-
-//    oomph_info << "val_nlines: " << val_nlines << std::endl; 
-//    oomph_info << "col_nlines: " << col_nlines << std::endl; 
-//    oomph_info << "row_nlines: " << row_nlines << std::endl; 
-   
-    // Now we load in the values in file jac1_np<NP>r<R>_val, this is in
-    // e.g. jac1_np2r0_val. This is located in val_fname_oss 
-    std::string full_val_fname = "raw_lin_system/"+val_fname_oss.str();
-    std::ifstream val_file(full_val_fname.c_str());
-    double* val_array = new double[val_nlines];
-    for (unsigned val_i = 0; val_i < val_nlines; val_i++) 
-    {
-      val_file >> val_array[val_i];
-    }
-
-//    oomph_info << "read in values are:" << std::endl; 
-//    
-//    for (unsigned val_i = 0; val_i < val_nlines; val_i++) 
-//    {
-//      oomph_info << val_array[val_i] << std::endl; 
-//    }
-//    pause("done!"); 
-
-
-    // Now we load in the values in file jac1_np<NP>r<R>_val, this is in
-    // e.g. jac1_np2r0_val. This is located in col_fname_oss 
-    std::string full_col_fname = "raw_lin_system/"+col_fname_oss.str();
-    std::ifstream col_file(full_col_fname.c_str());
-    int* col_array = new int[col_nlines];
-    for (unsigned col_i = 0; col_i < col_nlines; col_i++) 
-    {
-      col_file >> col_array[col_i];
-    }
-
-//    oomph_info << "read in col are:" << std::endl; 
-//    for (unsigned col_i = 0; col_i < col_nlines; col_i++) 
-//    {
-//      oomph_info << col_array[col_i] << std::endl; 
-//    }
-//    pause("done!"); 
-    
-
-
-    // Now we load in the values in file jac1_np<NP>r<R>_val, this is in
-    // e.g. jac1_np2r0_val. This is located in row_fname_oss 
-    std::string full_row_fname = "raw_lin_system/"+row_fname_oss.str();
-    std::ifstream row_file(full_row_fname.c_str());
-    int* row_array = new int[row_nlines];
-    for (unsigned row_i = 0; row_i < row_nlines; row_i++) 
-    {
-      row_file >> row_array[row_i];
-    }
-
-//    oomph_info << "read in row are:" << std::endl; 
-//    for (unsigned row_i = 0; row_i < row_nlines; row_i++) 
-//    {
-//      oomph_info << row_array[row_i] << std::endl; 
-//    }
-//    pause("done!"); 
-
-    cr_matrix_pt->build_without_copy(rncol,val_nlines,
-                                     val_array,col_array,row_array);
-
-    // Now build the residual this is stored in
-    // res<TETNUM>_np<NP>r<RANK>
-    std::ostringstream res_fname_oss;
-    res_fname_oss << "res" << Tetgen_number << "_"
-                  << np_rank_oss.str();
-
-    std::string full_res_fname = "raw_lin_system/"+res_fname_oss.str();
-    std::ifstream res_file(full_res_fname.c_str());
-
-    double* res_val_pt = residual.values_pt();
-    for (unsigned res_i = 0; res_i < rnrow_local; res_i++)
-    {
-      res_file >> res_val_pt[res_i];
-    }
-    ///// re-output this matrix to make sure it's correct?
-    if(Dump_replacement)
-    {
-    oomph_info << "About to output jac and res AGAIN" << std::endl;
-
-    std::ostringstream jac_ss;
-    jac_ss << "raw_lin_system/AAjac"
-           << Tetgen_number << "_np" << nproc 
-                            << "r" << my_rank;
-    cr_matrix_pt->sparse_indexed_output(jac_ss.str(),15,true);
-
-    std::ostringstream residual_ss;
-    residual_ss << "raw_lin_system/AAresidual" 
-                << Tetgen_number << "_np" << nproc 
-                                 << "r" << my_rank;
-    residual.output_local_values_with_offset(residual_ss.str(),15);
-
-    oomph_info << "AADone output of jac and res" << std::endl;
-    
-    pause("Hello again!"); 
-    }
-  }
-  else
-  {
-    oomph_info << "RAYRAY not using replacements" << std::endl; 
-  }
 
 
 //   MemoryUsage::doc_memory_usage("after get_jacobian() in trilinos solver");
@@ -378,12 +114,8 @@ namespace oomph
 //   MemoryUsage::doc_memory_usage("before trilinos solve");
 //   MemoryUsage::insert_comment_to_continous_top("before trilinos solve ");
 
-  oomph_info << "RAYRAY: About to solve" << std::endl; 
-  
   // continue solving using matrix based solve function
   solve(Oomph_matrix_pt, residual, solution);
-  oomph_info << "RAYRAY: End of solve" << std::endl; 
-  
 
 
 //   MemoryUsage::doc_memory_usage("after trilinos solve");
@@ -397,7 +129,6 @@ namespace oomph
 //    "end of TrilinosAztecOOSolver::solve");
 
 
-   oomph_info << "RAYRAY: solve() end" << std::endl; 
 }
 
 

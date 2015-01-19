@@ -465,12 +465,11 @@ class BlockSelector
    Block_to_dof_map_coarse.resize(0);
    Block_to_dof_map_fine.resize(0);
 
-   // RAYRAY remove.
-   Raydebug = false;
+   // Default the debug flag to false.
+   Recursive_debug_flag = false;
   } // EOFunc constructor
 
-  // Temporary viable for debugging purposes.
-  bool Raydebug;
+
 
   /// Destructor
   virtual ~BlockPreconditioner()
@@ -517,20 +516,24 @@ class BlockSelector
   } // EOFunc matrix_pt()
 
 
-  // RAYRAY REMOVE
-  void turn_on_raydebug()
+  /// \short Toggles on the debug flag up the block preconditioning 
+  /// hierarchy.
+  void turn_on_recursive_debug_flag()
   {
-    Raydebug = true;
+    Recursive_debug_flag = true;
     if(is_subsidiary_block_preconditioner())
-      this->master_block_preconditioner_pt()->turn_on_raydebug();
+      this->master_block_preconditioner_pt()
+            ->turn_on_recursive_debug_flag();
   }
 
-  // RAYRAY REMOVE
-  void turn_off_raydebug()
+  /// \short Toggles off the debug flag up the block preconditioning
+  /// hierarchy.
+  void turn_off_recursive_debug_flag()
   {
-    Raydebug = false;
+    Recursive_debug_flag = false;
     if(is_subsidiary_block_preconditioner())
-      this->master_block_preconditioner_pt()->turn_off_raydebug();
+      this->master_block_preconditioner_pt()
+            ->turn_off_recursive_debug_flag();
   }
 
   /// \short Function to turn this preconditioner into a
@@ -3342,6 +3345,12 @@ class BlockSelector
   unsigned Internal_ndof_types;
  
  private:
+
+  /// \short Debugging variable. Set true or false via the access functions
+  /// turn_on_recursive_debug_flag(...)
+  /// turn_off_recursive_debug_flag(...)
+  /// These will turn on/off the debug flag up the hierarchy.
+  bool Recursive_debug_flag;
 
   /// \short Stores any block-level distributions / concatenation of 
   /// block-level distributions required. The first in the pair 

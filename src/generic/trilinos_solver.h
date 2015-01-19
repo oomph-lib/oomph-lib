@@ -33,8 +33,6 @@
 
 #include "AztecOO.h"
 
-#include <iostream>
-#include <fstream>
 namespace oomph 
 {
 
@@ -327,12 +325,6 @@ class TrilinosAztecOOSolver : public IterativeLinearSolver
 
   // don't delete the matrix
   Delete_matrix = false;
-
-  Tetgen_number = 0;
-  Use_replacement_mat_res = false;
-  Dump_matrices = false;
-  Dump_matrices_only = false;
-  Dump_replacement = false;
  }
 
  /// Destructor - delete the solver and the matrices
@@ -483,14 +475,6 @@ class TrilinosAztecOOSolver : public IterativeLinearSolver
  // {
  //  return If_oomphlib_preconditioner_use_epetra_values;
  // }
-
- unsigned Tetgen_number;
-
- bool Use_replacement_mat_res;
- bool Dump_matrices;
- bool Dump_matrices_only;
- bool Dump_replacement;
-
 
  /// \short Enumerated list to define which AztecOO solver is used
  enum AztecOO_solver_types{CG,
