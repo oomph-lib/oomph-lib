@@ -434,11 +434,8 @@ public:
 
  void clear_current_time_step()
  {
-   if(Iterations_and_times.size() > 0)
-   {
-     Iterations_and_times.pop_back();
-     setup_new_time_step();
-   }
+   Iterations_and_times.pop_back();
+   setup_new_time_step();
  }
 
  /// \short Add a new iteration and time pair.
