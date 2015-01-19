@@ -432,6 +432,12 @@ public:
    Iterations_and_times.push_back(Vector<Vector<double> >());
  }
 
+ void clear_current_time_step()
+ {
+   Iterations_and_times.pop_back();
+   setup_new_time_step();
+ }
+
  /// \short Add a new iteration and time pair.
  void add_iteration_and_time
    (unsigned iter, double prec_setup_time, double linear_solver_time)
