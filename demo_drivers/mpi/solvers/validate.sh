@@ -5,7 +5,7 @@ OOMPH_ROOT_DIR=$(make -s --no-print-directory print-top_builddir)
 
 
 #Set the number of tests to be checked
-NUM_TESTS=44
+NUM_TESTS=46
 
 # Threshold for number of iterations in comparison of convergence histories
 # for multi_poisson
@@ -295,6 +295,44 @@ else
 fi
 
 mv RESLT RESLT_multi_poisson_coarse_two_plus_two_plus_one_prec
+
+
+# Validation for one plus four with two level coarsening.
+#------------------------------------------------
+
+echo "One plus four with two level coarsening block preconditioner for 'multi-poisson' "
+mkdir RESLT
+$MPI_RUN_COMMAND ../two_d_multi_poisson --use_validation_distribution --one_plus_four_with_two_coarse > RESLT/OUTPUT
+echo "done"
+echo " " >> validation.log
+echo "'Multi-Poisson' one plus four with two level coarsening preconditioner validation" >> validation.log
+echo "------------------------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat  RESLT/soln0_on_proc0.dat RESLT/soln0_on_proc1.dat \
+    > multi_poisson_one_plus_four_with_two_coarse_results.dat
+cat  RESLT/iterative_solver_convergence.dat > one_plus_four_with_two_coarse_iterative_solver_convergence.dat
+
+if test "$1" = "no_fpdiff"; then
+    echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+    # Compare results
+    ../$OOMPH_ROOT_DIR/bin/fpdiff.py ../validata/multi_poisson_one_plus_four_with_two_coarse_results.dat.gz  \
+        multi_poisson_one_plus_four_with_two_coarse_results.dat >> validation.log
+    
+    #Compare number of iterations against reference data and append
+    ../$OOMPH_ROOT_DIR/bin/compare_file_length_with_tolerance.bash \
+        one_plus_four_with_two_coarse_iterative_solver_convergence.dat \
+        ../validata/one_plus_four_with_two_coarse_iterative_solver_convergence.dat.gz \
+        $threshold_for_number_of_iterations \
+        >>  validation.log
+fi
+
+mv RESLT RESLT_multi_poisson_one_plus_four_with_two_coarse_prec
+
 
 
 # Validation for upper triangular block precond
