@@ -930,19 +930,14 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
     // For debugging
     bool Doc_time = false;
 
-
-    double some_time_variable = 0.0;
-
     double t_start_clean_up_memory = TimingHelpers::timer();
     // clean
     this->clean_up_memory();
     double t_end_clean_up_memory = TimingHelpers::timer();
     
-    some_time_variable = t_end_clean_up_memory - t_start_clean_up_memory;
+    double t_clean_up_memory = t_end_clean_up_memory - t_start_clean_up_memory;
 
-    oomph_info << "LGR_PREC:: clean_up_memory: " << some_time_variable << std::endl;
-    some_time_variable = 0.0;
-    
+    oomph_info << "LGR: clean_up_memory: " << t_clean_up_memory << std::endl;
 
 #ifdef PARANOID
     // Paranoid check that meshes have been set.
@@ -974,8 +969,6 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
     }
 
  //   std::cout << "ndof_types: " << this->ndof_types() << std::endl; 
-//    pause("lock me away"); 
-    
     
 
     // To construct the desired block structure for this preconditioner, with
@@ -1219,9 +1212,8 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
     this->block_setup(dof_to_block_map);
     double t_end_block_setup = TimingHelpers::timer();
     
-    some_time_variable = t_end_block_setup - t_start_block_setup;
-    oomph_info << "LGR_PREC:: block_setup: " << some_time_variable << std::endl;
-    some_time_variable = 0.0;
+    double t_block_setup = t_end_block_setup - t_start_block_setup;
+    oomph_info << "LGR: block_setup: " << t_block_setup << std::endl;
 
 
 //    pause("Lgr::setup() done block_setup, about to print dof block dist nrow"); 
@@ -1261,81 +1253,81 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
 
 
 
-    if(Doc_prec)
-    {
-      //    unsigned my_rank 
-      //     = master_distribution_pt()->communicator_pt()->my_rank();
-      //    unsigned nproc 
-      //     = master_distribution_pt()->communicator_pt()->nproc();
-      // This is for bebugging purposes.
-      //    std::stringstream curr_setting_stream;
-      //    curr_setting_stream << "NP" << nproc << "R" << my_rank;
-      //    std::string currentsetting = curr_setting_stream.str();
-      std::string currentsetting 
-        = *Label_pt + "NS"
-        + StringConversion::to_string(Doc_linear_solver_info_pt
-            ->current_nnewton_step());
-
-      // Output the spatial dimension,
-      // on a new line, output the number of dof types in each mesh
-      // This information allows us to assemble the preconditioner in, say, 
-      // MATLAB
-      std::ofstream precinfo_ofstream;
-      std::string precinfo_string = *Doc_prec_directory_pt + "/precinfo_" + currentsetting;
-      precinfo_ofstream.open(precinfo_string.c_str());
-      // The dimension
-      precinfo_ofstream << spatial_dim << " ";
-      // The number of blocks
-      unsigned nblock_types = this->nblock_types();
-
-      for (unsigned mesh_i = 0; mesh_i < My_nmesh; mesh_i++)
-      {
-        precinfo_ofstream << this->My_ndof_types_in_mesh[mesh_i] << " ";
-      }
-      precinfo_ofstream.close();
-
-      // Now output all the blocks.
-      // Loop through all the blocks and output them.
-      for(unsigned Mi=0; Mi<nblock_types; Mi++)
-      {
-        for(unsigned Mj=0; Mj<nblock_types; Mj++)
-        {
-          CRDoubleMatrix* sub_matrix_pt = new CRDoubleMatrix;
-          this->get_block(Mi,Mj,*sub_matrix_pt);
-          std::stringstream blockname;
-          blockname << *Doc_prec_directory_pt+"/j_"<< currentsetting<< "_"
-            << std::setw(2) << std::setfill('0') << Mi
-            << std::setw(2) << std::setfill('0') << Mj;
-          sub_matrix_pt->sparse_indexed_output(blockname.str(),true,15);
-          delete sub_matrix_pt;
-          sub_matrix_pt = 0;
-        }//for
-      }//for
-
-      // Now get the mass matrices for LSC solve
-
-      // Extract all of the inv_v_mass.
-      bool do_both=false;
-      CRDoubleMatrix* inv_v_mass_pt = 0;
-      CRDoubleMatrix* inv_p_mass_pt = 0;
-
-      for(unsigned dof_type_i = 0;
-          dof_type_i < N_velocity_doftypes; dof_type_i++)
-      {
-        unsigned required_block = dof_type_i; //Doftype_list_vpl[dof_type_i];
-        assemble_inv_press_and_veloc_mass_matrix_diagonal
-          (inv_p_mass_pt, inv_v_mass_pt,
-           do_both, required_block);
-
-        std::stringstream blockname;
-        blockname << *Doc_prec_directory_pt << "/vmm_"<< currentsetting<< "_"
-          << std::setw(2) << std::setfill('0') << required_block
-          << std::setw(2) << std::setfill('0') << required_block;
-        inv_v_mass_pt->sparse_indexed_output(blockname.str());
-        delete inv_v_mass_pt;
-        inv_v_mass_pt = 0;
-      }
-    }// if Doc_prec
+//    if(Doc_prec)
+//    {
+//      //    unsigned my_rank 
+//      //     = master_distribution_pt()->communicator_pt()->my_rank();
+//      //    unsigned nproc 
+//      //     = master_distribution_pt()->communicator_pt()->nproc();
+//      // This is for bebugging purposes.
+//      //    std::stringstream curr_setting_stream;
+//      //    curr_setting_stream << "NP" << nproc << "R" << my_rank;
+//      //    std::string currentsetting = curr_setting_stream.str();
+//      std::string currentsetting 
+//        = *Label_pt + "NS"
+//        + StringConversion::to_string(Doc_linear_solver_info_pt
+//            ->current_nnewton_step());
+//
+//      // Output the spatial dimension,
+//      // on a new line, output the number of dof types in each mesh
+//      // This information allows us to assemble the preconditioner in, say, 
+//      // MATLAB
+//      std::ofstream precinfo_ofstream;
+//      std::string precinfo_string = *Doc_prec_directory_pt + "/precinfo_" + currentsetting;
+//      precinfo_ofstream.open(precinfo_string.c_str());
+//      // The dimension
+//      precinfo_ofstream << spatial_dim << " ";
+//      // The number of blocks
+//      unsigned nblock_types = this->nblock_types();
+//
+//      for (unsigned mesh_i = 0; mesh_i < My_nmesh; mesh_i++)
+//      {
+//        precinfo_ofstream << this->My_ndof_types_in_mesh[mesh_i] << " ";
+//      }
+//      precinfo_ofstream.close();
+//
+//      // Now output all the blocks.
+//      // Loop through all the blocks and output them.
+//      for(unsigned Mi=0; Mi<nblock_types; Mi++)
+//      {
+//        for(unsigned Mj=0; Mj<nblock_types; Mj++)
+//        {
+//          CRDoubleMatrix* sub_matrix_pt = new CRDoubleMatrix;
+//          this->get_block(Mi,Mj,*sub_matrix_pt);
+//          std::stringstream blockname;
+//          blockname << *Doc_prec_directory_pt+"/j_"<< currentsetting<< "_"
+//            << std::setw(2) << std::setfill('0') << Mi
+//            << std::setw(2) << std::setfill('0') << Mj;
+//          sub_matrix_pt->sparse_indexed_output(blockname.str(),true,15);
+//          delete sub_matrix_pt;
+//          sub_matrix_pt = 0;
+//        }//for
+//      }//for
+//
+//      // Now get the mass matrices for LSC solve
+//
+//      // Extract all of the inv_v_mass.
+//      bool do_both=false;
+//      CRDoubleMatrix* inv_v_mass_pt = 0;
+//      CRDoubleMatrix* inv_p_mass_pt = 0;
+//
+//      for(unsigned dof_type_i = 0;
+//          dof_type_i < N_velocity_doftypes; dof_type_i++)
+//      {
+//        unsigned required_block = dof_type_i; //Doftype_list_vpl[dof_type_i];
+//        assemble_inv_press_and_veloc_mass_matrix_diagonal
+//          (inv_p_mass_pt, inv_v_mass_pt,
+//           do_both, required_block);
+//
+//        std::stringstream blockname;
+//        blockname << *Doc_prec_directory_pt << "/vmm_"<< currentsetting<< "_"
+//          << std::setw(2) << std::setfill('0') << required_block
+//          << std::setw(2) << std::setfill('0') << required_block;
+//        inv_v_mass_pt->sparse_indexed_output(blockname.str());
+//        delete inv_v_mass_pt;
+//        inv_v_mass_pt = 0;
+//      }
+//    }// if Doc_prec
 
 
     ///////////////////////////////////////////////////////////////////////////
@@ -1348,10 +1340,11 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
     // Extract the velocity block. Although we only require the infinity norm
     // a single direction of the velocity block, we extract them all since we
     // use the rest immediately (to perform the augmentation).
+
+    double t_start_get_v_aug_pt = TimingHelpers::timer();
     DenseMatrix<CRDoubleMatrix*> v_aug_pt(N_velocity_doftypes,
         N_velocity_doftypes,0);
     
-    double t_start_get_v_aug_pt = TimingHelpers::timer();
     for(unsigned row_i = 0; row_i < N_velocity_doftypes; row_i++)
     {
       for(unsigned col_i = 0; col_i < N_velocity_doftypes; col_i++)
@@ -1362,11 +1355,9 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
     } // for
     double t_end_get_v_aug_pt = TimingHelpers::timer();
 
-    some_time_variable = t_end_get_v_aug_pt - t_start_get_v_aug_pt;
+    double t_get_v_aug = t_end_get_v_aug_pt - t_start_get_v_aug_pt;
 
-    oomph_info << "LGR_PREC:: clean_up_memory: " << some_time_variable << std::endl;
-    some_time_variable = 0.0;
-
+    oomph_info << "LGR: t_get_v_aug " << t_get_v_aug << std::endl;
 
 
     if(Use_default_norm_of_f_scaling)
@@ -1403,7 +1394,7 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
 //      if(Doc_time)
       {
         double t_norm_time = t_norm_finish - t_norm_start;
-        oomph_info << "LGR_PREC:: t_norm_time: " << t_norm_time << std::endl;
+        oomph_info << "LGR: t_norm_time: " << t_norm_time << std::endl;
       }
     } // if(Use_default_f_scaling)
 
@@ -1746,12 +1737,9 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
 
     double t_end_big_loop = TimingHelpers::timer();
     
-    some_time_variable = t_end_big_loop - t_start_big_loop;
+    double t_big_loop = t_end_big_loop - t_start_big_loop;
 
-    oomph_info << "LGR_PREC:: big_loop: " << some_time_variable << std::endl;
-    some_time_variable = 0.0;
-
-
+    oomph_info << "LGR: big_loop: " << t_big_loop << std::endl;
 
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -2255,10 +2243,9 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
     double t_end_turn_into_subsidairy = TimingHelpers::timer();
       //pause("Lgr: Done turn_into_sub..."); 
       
-    some_time_variable = t_end_turn_into_subsidairy - t_start_turn_into_subsidairy;
+    double t_turn_into_sub = t_end_turn_into_subsidairy - t_start_turn_into_subsidairy;
 
-    oomph_info << "LGR_PREC:: turn_into_subsidairy: " << some_time_variable << std::endl;
-    some_time_variable = 0.0;
+    oomph_info << "LGR_PREC: turn_into_subsidairy: " << t_turn_into_sub << std::endl;
       //    pause("After turn_into..."); 
 
 
@@ -2290,11 +2277,9 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
 
     double t_end_ns_setup = TimingHelpers::timer();
     
-    some_time_variable = t_end_ns_setup - t_start_ns_setup;
+    double t_ns_setup = t_end_ns_setup - t_start_ns_setup;
 
-    oomph_info << "LGR_PREC:: ns_setup: " << some_time_variable << std::endl;
-    some_time_variable = 0.0;
-
+    oomph_info << "LGR: ns_setup: " << t_ns_setup << std::endl;
 
 //      pause("done NS setup"); 
       
@@ -2307,6 +2292,8 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
 //        }
 //      }
     } // else - NS prec is block preconditioner
+    
+    double t_start_delete_v_aug = TimingHelpers::timer();
 
     const unsigned v_aug_nrow = v_aug_pt.nrow();
     const unsigned v_aug_ncol = v_aug_pt.ncol();
@@ -2318,7 +2305,11 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
         v_aug_pt(v_row,v_col) = 0;
       }
     }
+    double t_end_delete_v_aug = TimingHelpers::timer();
+    
+    double t_delete_v_aug = t_end_delete_v_aug - t_start_delete_v_aug;
 
+    oomph_info << "LGR: delete_v_aug: " << t_delete_v_aug << std::endl;
 
     ///////////////////////////////////////////////////////////////////////////////
 
@@ -2366,15 +2357,23 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
 //    if(Doc_time)
     {
       double t_w_prec_time = t_w_prec_finish - t_w_prec_start;
-      oomph_info << "LGR_PREC:: t_w_prec_time: "
+      oomph_info << "LGR: t_w_prec_time: "
         << t_w_prec_time << "\n";
     }
+
+    double t_start_delete_w = TimingHelpers::timer();
 
     // Delete w_pt(0,N_lagrange_doftypes)
     for (unsigned l_i = 0; l_i < N_lagrange_doftypes; l_i++) 
     {
       delete w_pt[l_i];
     }
+    double t_end_delete_w = TimingHelpers::timer();
+
+    double t_delete_w = t_end_delete_w - t_start_delete_w;
+
+    oomph_info << "LGR: delete_w time: "
+        << t_delete_w << "\n";
 
     Mapping_info_calculated = true;
     

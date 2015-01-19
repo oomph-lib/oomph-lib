@@ -738,7 +738,7 @@ namespace oomph
     }
 
    /// Destructor
-   ~NavierStokesSchurComplementPreconditioner()
+   virtual ~NavierStokesSchurComplementPreconditioner()
     {
      clean_up_memory();
     }
