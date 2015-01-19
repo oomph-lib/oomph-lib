@@ -195,6 +195,7 @@ namespace oomph
     unsigned col_nlines = 0;
     unsigned row_nlines = 0;
 
+    // Get val_nlines //////////////////////////////////////////////////////
     std::string full_val_nlines_fname = "raw_lin_system/"+val_nlines_fname;
     std::ifstream val_nline_file(full_val_nlines_fname.c_str());
     if (!val_nline_file)
@@ -212,30 +213,118 @@ namespace oomph
       val_nline_file >> val_nlines;
     }
 
-    oomph_info << "val_nline is: " << val_nlines << std::endl; 
-    pause("fries"); 
+    // Get col_nlines //////////////////////////////////////////////////////
+    std::string full_col_nlines_fname = "raw_lin_system/"+col_nlines_fname;
+    std::ifstream col_nline_file(full_col_nlines_fname.c_str());
+    if (!col_nline_file)
+    {
+      std::ostringstream error_message_stream;
+      error_message_stream
+       << "There was a problem opening file "
+       << full_col_nlines_fname  << std::endl;
+       throw OomphLibError(error_message_stream.str(),
+                           OOMPH_CURRENT_FUNCTION,
+                           OOMPH_EXCEPTION_LOCATION);
+    }
+    else
+    {
+      col_nline_file >> col_nlines;
+    }
+
+    // Get row_nlines //////////////////////////////////////////////////////
+    std::string full_row_nlines_fname = "raw_lin_system/"+row_nlines_fname;
+    std::ifstream row_nline_file(full_row_nlines_fname.c_str());
+    if (!row_nline_file)
+    {
+      std::ostringstream error_message_stream;
+      error_message_stream
+       << "There was a problem opening file "
+       << full_row_nlines_fname  << std::endl;
+       throw OomphLibError(error_message_stream.str(),
+                           OOMPH_CURRENT_FUNCTION,
+                           OOMPH_EXCEPTION_LOCATION);
+    }
+    else
+    {
+      row_nline_file >> row_nlines;
+    }
+
+    oomph_info << "val_nlines: " << val_nlines << std::endl; 
+    oomph_info << "col_nlines: " << col_nlines << std::endl; 
+    oomph_info << "row_nlines: " << row_nlines << std::endl; 
+   
+    // Now we load in the values in file jac1_np<NP>r<R>_val, this is in
+    // e.g. jac1_np2r0_val. This is located in val_fname_oss 
+    std::string full_val_fname = "raw_lin_system/"+val_fname_oss.str();
+    std::ifstream val_file(full_val_fname.c_str());
+    double* val_array = new double[val_nlines];
+    for (unsigned val_i = 0; val_i < val_nlines; val_i++) 
+    {
+      val_file >> val_array[val_i];
+    }
+
+//    oomph_info << "read in values are:" << std::endl; 
+//    
+//    for (unsigned val_i = 0; val_i < val_nlines; val_i++) 
+//    {
+//      oomph_info << val_array[val_i] << std::endl; 
+//    }
+//    pause("done!"); 
 
 
+    // Now we load in the values in file jac1_np<NP>r<R>_val, this is in
+    // e.g. jac1_np2r0_val. This is located in col_fname_oss 
+    std::string full_col_fname = "raw_lin_system/"+col_fname_oss.str();
+    std::ifstream col_file(full_col_fname.c_str());
+    int* col_array = new int[col_nlines];
+    for (unsigned col_i = 0; col_i < col_nlines; col_i++) 
+    {
+      col_file >> col_array[col_i];
+    }
 
-// We want to use this function:
-//   void CRDoubleMatrix::build_without_copy(const unsigned& ncol,
-//					const unsigned& nnz,
-//					double* value,
-//					int* column_index,
-//					int* row_start) 
-// So we need to get the nnz, which is the length of the file
-// in jac_np_rank_col_nlines
-// We also need the number of lines in the row file. This should be the same
-// as the nrow_local + 1.
+//    oomph_info << "read in col are:" << std::endl; 
+//    for (unsigned col_i = 0; col_i < col_nlines; col_i++) 
+//    {
+//      oomph_info << col_array[col_i] << std::endl; 
+//    }
+//    pause("done!"); 
     
 
-    // Now create the matrix 
-    //
 
+    // Now we load in the values in file jac1_np<NP>r<R>_val, this is in
+    // e.g. jac1_np2r0_val. This is located in row_fname_oss 
+    std::string full_row_fname = "raw_lin_system/"+row_fname_oss.str();
+    std::ifstream row_file(full_row_fname.c_str());
+    int* row_array = new int[row_nlines];
+    for (unsigned row_i = 0; row_i < row_nlines; row_i++) 
+    {
+      row_file >> row_array[row_i];
+    }
 
+//    oomph_info << "read in row are:" << std::endl; 
+//    for (unsigned row_i = 0; row_i < row_nlines; row_i++) 
+//    {
+//      oomph_info << row_array[row_i] << std::endl; 
+//    }
+//    pause("done!"); 
 
+    cr_matrix_pt->build_without_copy(rncol,val_nlines,
+                                     val_array,col_array,row_array);
 
+    // Now build the residual this is stored in
+    // res<TETNUM>_np<NP>r<RANK>
+    std::ostringstream res_fname_oss;
+    res_fname_oss << "res" << Tetgen_number << "_"
+                  << np_rank_oss.str();
 
+    std::string full_res_fname = "raw_lin_system/"+res_fname_oss.str();
+    std::ifstream res_file(full_res_fname.c_str());
+
+    double* res_val_pt = residual.values_pt();
+    for (unsigned res_i = 0; res_i < rnrow_local; res_i++)
+    {
+      res_file >> res_val_pt[res_i];
+    }
   }
 
 
