@@ -331,6 +331,7 @@ class TrilinosAztecOOSolver : public IterativeLinearSolver
   Tetgen_number = 0;
   Use_replacement_mat_res = false;
   Dump_matrices = false;
+  Dump_replacement = false;
  }
 
  /// Destructor - delete the solver and the matrices
@@ -486,6 +487,7 @@ class TrilinosAztecOOSolver : public IterativeLinearSolver
 
  bool Use_replacement_mat_res;
  bool Dump_matrices;
+ bool Dump_replacement;
 
 
  /// \short Enumerated list to define which AztecOO solver is used

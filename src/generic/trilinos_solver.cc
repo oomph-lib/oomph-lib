@@ -150,7 +150,7 @@ namespace oomph
   // jac13_np2r0_col
   //
   // (for rank 1)
-  // jac13_np2r1_valhttps://www.youtube.com/watch?v=xHrhqtY2khc
+  // jac13_np2r1_val
   // jac13_np2r1_row
   // jac13_np2r1_col
   //
@@ -311,6 +311,10 @@ namespace oomph
     cr_matrix_pt->build_without_copy(rncol,val_nlines,
                                      val_array,col_array,row_array);
 
+    
+
+
+
     // Now build the residual this is stored in
     // res<TETNUM>_np<NP>r<RANK>
     std::ostringstream res_fname_oss;
@@ -325,6 +329,29 @@ namespace oomph
     {
       res_file >> res_val_pt[res_i];
     }
+    ///// re-output this matrix to make sure it's correct?
+    if(Dump_replacement)
+    {
+    oomph_info << "About to output jac and res AGAIN" << std::endl;
+
+    std::ostringstream jac_ss;
+    jac_ss << "raw_lin_system/AAjac"
+           << Tetgen_number << "_np" << nproc 
+                            << "r" << my_rank;
+    cr_matrix_pt->sparse_indexed_output(jac_ss.str(),15,true);
+
+    std::ostringstream residual_ss;
+    residual_ss << "raw_lin_system/AAresidual" 
+                << Tetgen_number << "_np" << nproc 
+                                 << "r" << my_rank;
+    residual.output_local_values_with_offset(residual_ss.str(),15);
+
+    oomph_info << "AADone output of jac and res" << std::endl;
+    
+    pause("Hello again!"); 
+    }
+
+
   }
 
 
