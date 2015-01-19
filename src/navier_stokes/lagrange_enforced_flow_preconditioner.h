@@ -930,8 +930,19 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
     // For debugging
     bool Doc_time = false;
 
+
+    double some_time_variable = 0.0;
+
+    double t_start_clean_up_memory = TimingHelpers::timer();
     // clean
     this->clean_up_memory();
+    double t_end_clean_up_memory = TimingHelpers::timer();
+    
+    some_time_variable = t_end_clean_up_memory - t_start_clean_up_memory;
+
+    std::cout << "RAYTIME: clean_up_memory: " << some_time_variable << std::endl;
+    some_time_variable = 0.0;
+    
 
 #ifdef PARANOID
     // Paranoid check that meshes have been set.
@@ -1203,8 +1214,15 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
 //    pause("I'm back"); 
     
 
+    double t_start_block_setup = TimingHelpers::timer();
     // Call the block setup
     this->block_setup(dof_to_block_map);
+    double t_end_block_setup = TimingHelpers::timer();
+    
+    some_time_variable = t_end_block_setup - t_start_block_setup;
+    std::cout << "RAYTIME: block_setup: " << some_time_variable << std::endl;
+    some_time_variable = 0.0;
+
 
 //    pause("Lgr::setup() done block_setup, about to print dof block dist nrow"); 
 
@@ -1332,6 +1350,8 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
     // use the rest immediately (to perform the augmentation).
     DenseMatrix<CRDoubleMatrix*> v_aug_pt(N_velocity_doftypes,
         N_velocity_doftypes,0);
+    
+    double t_start_get_v_aug_pt = TimingHelpers::timer();
     for(unsigned row_i = 0; row_i < N_velocity_doftypes; row_i++)
     {
       for(unsigned col_i = 0; col_i < N_velocity_doftypes; col_i++)
@@ -1340,6 +1360,14 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
         this->get_block(row_i,col_i,*v_aug_pt(row_i,col_i));
       } // for
     } // for
+    double t_end_get_v_aug_pt = TimingHelpers::timer();
+
+    some_time_variable = t_end_get_v_aug_pt - t_start_get_v_aug_pt;
+
+    std::cout << "RAYTIME: clean_up_memory: " << some_time_variable << std::endl;
+    some_time_variable = 0.0;
+
+
 
     if(Use_default_norm_of_f_scaling)
     {
@@ -1372,10 +1400,10 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
       //     *Scaling_sigma_multiplier;
 
       double t_norm_finish = TimingHelpers::timer();
-      if(Doc_time)
+//      if(Doc_time)
       {
         double t_norm_time = t_norm_finish - t_norm_start;
-        std::cout << "t_norm_time: " << t_norm_time << std::endl;
+        std::cout << "RAYTIME: t_norm_time: " << t_norm_time << std::endl;
       }
     } // if(Use_default_f_scaling)
 
@@ -1436,6 +1464,9 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
 
     // Storage for the W block.
     Vector<CRDoubleMatrix*> w_pt(N_lagrange_doftypes,0);
+
+
+    double t_start_big_loop = TimingHelpers::timer();
 
     // Note that we do not need to store all the inverse w_i since they
     // are only used once per Lagrange multiplier.
@@ -1712,6 +1743,16 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
         delete mmt_pt[m_i];
       }
     } // loop through Lagrange multipliers.
+
+    double t_end_big_loop = TimingHelpers::timer();
+    
+    some_time_variable = t_end_big_loop - t_start_big_loop;
+
+    std::cout << "RAYTIME: big_loop: " << some_time_variable << std::endl;
+    some_time_variable = 0.0;
+
+
+
 
     ///////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////
@@ -2207,13 +2248,17 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
       // structure:
       // 0  1  2  3  4  5  6
       // ub vb up vp ut vt p
+    double t_start_turn_into_subsidairy = TimingHelpers::timer();
       navier_stokes_block_preconditioner_pt
         ->turn_into_subsidiary_block_preconditioner(this, Subsidiary_list_bcpl,
             subsidiary_dof_type_coarsening_map);
-
+    double t_end_turn_into_subsidairy = TimingHelpers::timer();
       //pause("Lgr: Done turn_into_sub..."); 
       
+    some_time_variable = t_end_turn_into_subsidairy - t_start_turn_into_subsidairy;
 
+    std::cout << "RAYTIME: turn_into_subsidairy: " << some_time_variable << std::endl;
+    some_time_variable = 0.0;
       //    pause("After turn_into..."); 
 
 
@@ -2236,8 +2281,20 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
 
       //    pause("About to call setup of NS prec."); 
 
+
+    double t_start_ns_setup = TimingHelpers::timer();
+
+
       navier_stokes_block_preconditioner_pt
         ->setup(matrix_pt());
+
+    double t_end_ns_setup = TimingHelpers::timer();
+    
+    some_time_variable = t_end_ns_setup - t_start_ns_setup;
+
+    std::cout << "RAYTIME: ns_setup: " << some_time_variable << std::endl;
+    some_time_variable = 0.0;
+
 
 //      pause("done NS setup"); 
       
@@ -2306,10 +2363,10 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
     }
 
     double t_w_prec_finish = TimingHelpers::timer();
-    if(Doc_time)
+//    if(Doc_time)
     {
       double t_w_prec_time = t_w_prec_finish - t_w_prec_start;
-      std::cout << "t_w_prec_time: "
+      std::cout << "RAYTIME: t_w_prec_time: "
         << t_w_prec_time << "\n";
     }
 
