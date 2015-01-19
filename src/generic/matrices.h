@@ -172,12 +172,8 @@ class Matrix
   }
 
  /// \short Indexed output function to print a matrix to the stream outfile
- /// as i,j,a(i,j) for a(i,j)!=0 only. If optional boolean flag is set
- /// to true we also output the "bottom right" entry regardless of it being
- /// zero or not (this allows automatic detection of matrix size in
- /// e.g. matlab, python).
- virtual void sparse_indexed_output_helper(std::ostream &outfile,
-                     const bool& output_bottom_right_zero = false) const=0;
+ /// as i,j,a(i,j) for a(i,j)!=0 only.
+ virtual void sparse_indexed_output_helper(std::ostream &outfile) const=0;
 
  /// \short Indexed output function to print a matrix to the stream outfile
  /// as i,j,a(i,j) for a(i,j)!=0 only with specified precision (if
@@ -205,24 +201,24 @@ class Matrix
    }
 
   // Output as normal using the helper function defined in each matrix class
-  sparse_indexed_output_helper(outfile,output_bottom_right_zero);
+  sparse_indexed_output_helper(outfile);
 
-//  // If requested and there is no output for the last entry then output a
-//  // zero entry.
-//  if (output_bottom_right_zero)
-//   {
-//    int last_row_local = this->nrow_local()-1;
-//    int last_col = this->ncol()-1;
-//
-//    // Use this strange thingy because of the CRTP discussed above.
-//    T last_value = static_cast<MATRIX_TYPE const *>(this)->operator()(last_row_local, last_col);
-//    
-//    if(last_value == T(0))
-//     {
-//      outfile << last_row_local << " " << last_col << " " << T(0)
-//              << std::endl;
-//     }
-//   }
+  // If requested and there is no output for the last entry then output a
+  // zero entry.
+  if(output_bottom_right_zero && ncol() > 0 && nrow() > 0)
+   {
+    int last_row = this->nrow()-1;
+    int last_col = this->ncol()-1;
+
+    // Use this strange thingy because of the CRTP discussed above.
+    T last_value = static_cast<MATRIX_TYPE const *>(this)->operator()(last_row, last_col);
+    
+    if(last_value == T(0))
+     {
+      outfile << last_row << " " << last_col << " " << T(0)
+              << std::endl;
+     }
+   }
 
   // Restore the old value of the precision if we changed it
   if(precision != 0)
@@ -538,12 +534,7 @@ class DenseMatrix : public Matrix<T, DenseMatrix<T> >
 
  /// \short Indexed output function to print a matrix to the 
  /// stream outfile as i,j,a(i,j) for a(i,j)!=0 only.
- /// If optional boolean flag is set
- /// to true we also output the "bottom right" entry regardless of it being
- /// zero or not (this allows automatic detection of matrix size in
- /// e.g. matlab, python).
- void sparse_indexed_output_helper(std::ostream &outfile,
-     const bool& output_bottom_right_zero = false) const;
+ void sparse_indexed_output_helper(std::ostream &outfile) const;
 
 };
 
@@ -630,12 +621,7 @@ class SparseMatrix : public Matrix<T,MATRIX_TYPE>
   
   /// \short Indexed output function to print a matrix to the
   /// stream outfile as i,j,a(i,j) for a(i,j)!=0 only.
-  /// If optional boolean flag is set
-  /// to true we also output the "bottom right" entry regardless of it being
-  /// zero or not (this allows automatic detection of matrix size in
-  /// e.g. matlab, python).
-  virtual void sparse_indexed_output_helper(std::ostream &outfile,
-      const bool& output_bottom_right_zero = false) const
+  virtual void sparse_indexed_output_helper(std::ostream &outfile) const
    {
     std::string error_message = 
      "SparseMatrix::sparse_indexed_output_helper() is a virtual function.\n";
@@ -782,12 +768,7 @@ class CRMatrix : public SparseMatrix<T, CRMatrix<T> >
 
  /// \short Indexed output function to print a matrix to the
  /// stream outfile as i,j,a(i,j) for a(i,j)!=0 only.
- /// If optional boolean flag is set
- /// to true we also output the "bottom right" entry regardless of it being
- /// zero or not (this allows automatic detection of matrix size in
- /// e.g. matlab, python).
- void sparse_indexed_output_helper(std::ostream &outfile,
-     const bool& output_bottom_right_zero = false) const
+ void sparse_indexed_output_helper(std::ostream &outfile) const
   {
    for (unsigned long i=0;i<this->N;i++)
     {
@@ -797,25 +778,6 @@ class CRMatrix : public SparseMatrix<T, CRMatrix<T> >
                << std::endl;
       }
     }
-  
-  // If requested and there is no output for the last entry then output a
-  // zero entry.
-  if (output_bottom_right_zero)
-   {
-    int last_row_local = this->N-1;
-    int last_col = this->M-1;
-
-    // Use this strange thingy because of the CRTP discussed above.
-    T last_value = this->operator()(last_row_local, last_col);
-    
-    if(last_value == T(0))
-     {
-      outfile << last_row_local << " " << last_col << " " << T(0)
-              << std::endl;
-     }
-   }
-
-
   }
 
  /// Wipe matrix data and set all values to 0.
@@ -948,15 +910,9 @@ class CRDoubleMatrix : public Matrix<double, CRDoubleMatrix >,
 
  /// \short Indexed output function to print a matrix to the 
  /// stream outfile as i,j,a(i,j) for a(i,j)!=0 only.
- /// If optional boolean flag is set
- /// to true we also output the "bottom right" entry regardless of it being
- /// zero or not (this allows automatic detection of matrix size in
- /// e.g. matlab, python).
- void sparse_indexed_output_helper(std::ostream &outfile,
-     const bool& output_bottom_right_zero = false) const
+ void sparse_indexed_output_helper(std::ostream &outfile) const
   {
-   CR_matrix.sparse_indexed_output_helper(outfile,
-       output_bottom_right_zero);
+   CR_matrix.sparse_indexed_output_helper(outfile);
   }
 
   /// \short Indexed output function to print a matrix to a
@@ -2401,8 +2357,7 @@ class CCMatrix : public SparseMatrix<T, CCMatrix<T> >
 
  /// \short Indexed output function to print a matrix to the
  /// stream outfile as i,j,a(i,j) for a(i,j)!=0 only.
- void sparse_indexed_output_helper(std::ostream &outfile,
-    const bool& output_bottom_right_zero = false ) const
+ void sparse_indexed_output_helper(std::ostream &outfile) const
   {
    for (unsigned long j=0;j<this->N;j++)
     {
@@ -2412,25 +2367,6 @@ class CCMatrix : public SparseMatrix<T, CCMatrix<T> >
                <<  " " << this->Value[k] << std::endl;
       }
     }
-
-  // If requested and there is no output for the last entry then output a
-  // zero entry.
-  if (output_bottom_right_zero)
-   {
-    int last_row_local = this->N-1;
-    int last_col = this->M-1;
-
-    // Use this strange thingy because of the CRTP discussed above.
-    T last_value = this->operator()(last_row_local, last_col);
-    
-    if(last_value == T(0))
-     {
-      outfile << last_row_local << " " << last_col << " " << T(0)
-              << std::endl;
-     }
-   }
-
-
   }
 
  /// Wipe matrix data and set all values to 0.
@@ -2808,14 +2744,9 @@ void DenseMatrix<T>::indexed_output(std::string filename) const
 
 //============================================================================
 /// Sparse indexed output as i,j,a(i,j) for a(i,j)!=0 only.
-/// If optional boolean flag is set
-/// to true we also output the "bottom right" entry regardless of it being
-/// zero or not (this allows automatic detection of matrix size in
-/// e.g. matlab, python).
 //============================================================================
 template<class T>
-void DenseMatrix<T>::sparse_indexed_output_helper(std::ostream &outfile,
-    const bool& output_bottom_right_zero) const
+void DenseMatrix<T>::sparse_indexed_output_helper(std::ostream &outfile) const
 {
  //Loop over the rows
  for(unsigned i=0;i<N;i++)
@@ -2829,23 +2760,6 @@ void DenseMatrix<T>::sparse_indexed_output_helper(std::ostream &outfile,
       }
     }
   }
-
-  // If requested and there is no output for the last entry then output a
-  // zero entry.
-  if (output_bottom_right_zero)
-   {
-    int last_row_local = this->N-1;
-    int last_col = this->M-1;
-
-    // Use this strange thingy because of the CRTP discussed above.
-    T last_value = this->operator()(last_row_local, last_col);
-    
-    if(last_value == T(0))
-     {
-      outfile << last_row_local << " " << last_col << " " << T(0)
-              << std::endl;
-     }
-   }
 }
 
 

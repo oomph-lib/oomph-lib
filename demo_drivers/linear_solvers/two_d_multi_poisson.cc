@@ -521,8 +521,8 @@ int main(int argc, char* argv[])
  // Step number
  doc_info.number()=0;
  
- cout << "\n\nSolving for TanhSolnForMultiPoisson::Alpha="
-      << TanhSolnForMultiPoisson::Alpha << std::endl << std::endl;
+ std::cout << "\n\nSolving for TanhSolnForMultiPoisson::Alpha="
+           << TanhSolnForMultiPoisson::Alpha << std::endl << std::endl;
  
  // Solve the problem
  problem.newton_solve();
