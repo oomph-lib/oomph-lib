@@ -246,6 +246,8 @@ namespace oomph
     oomph_info << "Time for block_setup(...) [sec]: "
                << block_setup_time << "\n";
    }
+  oomph_info << "RAYNS: block_setup " << block_setup_time << std::endl; 
+  
 
   // determine whether the F preconditioner is a block preconditioner (and
   // therefore a subsidiary preconditioner)
@@ -263,12 +265,14 @@ namespace oomph
   this->get_block(1,0,*b_pt);
 
   double t_get_B_finish = TimingHelpers::timer();
+  double get_B_time = t_get_B_finish - t_get_B_start;
   if(Doc_time)
    {
-  double get_B_time = t_get_B_finish - t_get_B_start;
     oomph_info << "Time to get B [sec]: "
                << get_B_time << "\n";
    }
+
+  oomph_info << "RAYNS: get block B get_B_time " << get_B_time << std::endl; 
 
   if (doc_block_matrices)
    {
@@ -301,14 +305,18 @@ namespace oomph
    }
 
   double ivmm_assembly_finish_t = TimingHelpers::timer();
-  if (Doc_time)
-   {
+
     double 
      ivmm_assembly_time = ivmm_assembly_finish_t - ivmm_assembly_start_t;
+  if (Doc_time)
+   {
+
     oomph_info << "Time to assemble inverse diagonal velocity and pressure"
                << "mass matrices) [sec]: "
                << ivmm_assembly_time << "\n";
    }
+   oomph_info << "RAYNS: ivmm_assembly_time " << ivmm_assembly_time << std::endl; 
+
 
   if (doc_block_matrices)
    {
@@ -326,13 +334,14 @@ namespace oomph
   double t_get_Bt_start = TimingHelpers::timer();
   this->get_block(0,1,*bt_pt);
   double t_get_Bt_finish = TimingHelpers::timer();
+  
+    double t_get_Bt_time = t_get_Bt_finish - t_get_Bt_start;
   if(Doc_time)
    {
-    double t_get_Bt_time = t_get_Bt_finish - t_get_Bt_start;
     oomph_info << "Time to get Bt [sec]: "
                << t_get_Bt_time << std::endl;
    }
-  
+  oomph_info << "RAYNS: get block Bt t_get_Bt_time " << t_get_Bt_time << std::endl;  
 
   if (doc_block_matrices)   
    {
@@ -356,40 +365,48 @@ namespace oomph
   // Store product in bt_pt 
   bt_pt = qbt_pt;
   double t_QBt_matrix_finish = TimingHelpers::timer();
+
+    double t_QBt_time = t_QBt_matrix_finish - t_QBt_matrix_start;
   if(Doc_time)
    {
-    double t_QBt_time = t_QBt_matrix_finish - t_QBt_matrix_start;
     oomph_info << "Time to generate QBt [sec]: "
                << t_QBt_time << std::endl;
    }
   delete inv_v_mass_pt; inv_v_mass_pt = 0;
-  
+  oomph_info << "RAYNS: t_QBt_time (matrix multiplicaton) " << t_QBt_time << std::endl;  
   
   // Multiply B from left by divergence matrix B and store result in 
   // pressure Poisson matrix.
   double t_p_matrix_start = TimingHelpers::timer();
   b_pt->multiply(*bt_pt, *p_matrix_pt);
   double t_p_matrix_finish = TimingHelpers::timer();
+
+    double t_p_time = t_p_matrix_finish - t_p_matrix_start;
   if(Doc_time)
    {
-    double t_p_time = t_p_matrix_finish - t_p_matrix_start;
     oomph_info << "Time to generate P [sec]: "
                << t_p_time << std::endl;
    }
   // Kill divergence matrix because we don't need it any more
   delete b_pt; b_pt = 0;
-  
+ 
+  oomph_info << "RAYNS: t_p_time (matrix multiplication) " << t_p_time << std::endl;
+
+
   // Build the matvec operator for QBt
   double t_QBt_MV_start = TimingHelpers::timer();
   QBt_mat_vec_pt = new MatrixVectorProduct;
   this->setup_matrix_vector_product(QBt_mat_vec_pt,bt_pt,1);
   double t_QBt_MV_finish = TimingHelpers::timer();
+
+    double t_p_time2 = t_QBt_MV_finish - t_QBt_MV_start;
   if(Doc_time)
    {
-    double t_p_time = t_QBt_MV_finish - t_QBt_MV_start;
     oomph_info << "Time to build QBt matrix vector operator [sec]: "
-               << t_p_time << std::endl;
+               << t_p_time2 << std::endl;
    }
+
+  oomph_info << "RAYNS: QBt (setup MV product) " << t_p_time2 << std::endl;
   // Kill gradient matrix B^T (it's been overwritten anyway and
   // needs to be recomputed afresh below)
   delete bt_pt; bt_pt = 0;
@@ -442,24 +459,29 @@ namespace oomph
   double t_get_F_start = TimingHelpers::timer();
   this->get_block(0,0,*f_pt);
   double t_get_F_finish = TimingHelpers::timer();
+
+    double t_get_F_time = t_get_F_finish - t_get_F_start;
   if(Doc_time)
    {
-    double t_get_F_time = t_get_F_finish - t_get_F_start;
     oomph_info << "Time to get F [sec]: "
                << t_get_F_time << std::endl;
    }
+    oomph_info << "RAYNS: get_block t_get_F_time " << t_get_F_time << std::endl;
   
   // form the matrix vector product helper
   double t_F_MV_start = TimingHelpers::timer();
   F_mat_vec_pt = new MatrixVectorProduct;
   this->setup_matrix_vector_product(F_mat_vec_pt,f_pt,0);
   double t_F_MV_finish = TimingHelpers::timer();
+
+    double t_F_MV_time = t_F_MV_finish - t_F_MV_start;
   if(Doc_time)
    {
-    double t_F_MV_time = t_F_MV_finish - t_F_MV_start;
     oomph_info << "Time to build F Matrix Vector Operator [sec]: "
                << t_F_MV_time << std::endl;
    }
+    oomph_info << "RAYNS: MV product setup t_F_MV_time " << t_F_MV_time << std::endl;
+
   
   // if F is a block preconditioner then we can delete the F matrix
   if (F_preconditioner_is_block_preconditioner)
@@ -473,12 +495,14 @@ namespace oomph
   bt_pt = new CRDoubleMatrix;
   this->get_block(0,1,*bt_pt);
   t_get_Bt_finish = TimingHelpers::timer();
+    double t_get_Bt_time2 = t_get_Bt_finish - t_get_Bt_start;
   if(Doc_time)
    {
-    double t_get_Bt_time = t_get_Bt_finish - t_get_Bt_start;
+
     oomph_info << "Time to get Bt [sec]: "
-               << t_get_Bt_time << std::endl;
+               << t_get_Bt_time2 << std::endl;
    }
+  oomph_info << "RAYNS: get_block t_get_Bt_time2 " << t_get_Bt_time2 << std::endl;
  
 
   // form the matrix vector operator for Bt
@@ -486,12 +510,14 @@ namespace oomph
   Bt_mat_vec_pt = new MatrixVectorProduct;
   this->setup_matrix_vector_product(Bt_mat_vec_pt,bt_pt,1);
   double t_Bt_MV_finish = TimingHelpers::timer();
+
+    double t_Bt_MV_time = t_Bt_MV_finish - t_Bt_MV_start;
   if(Doc_time)
    {
-    double t_Bt_MV_time = t_Bt_MV_finish - t_Bt_MV_start;
     oomph_info << "Time to build Bt Matrix Vector Operator [sec]: "
                << t_Bt_MV_time << std::endl;
    }
+    oomph_info << "RAYNS: MV product setup t_Bt_MV_time " << t_Bt_MV_time << std::endl;
   delete bt_pt; bt_pt = 0;
 
   // if the P preconditioner has not been setup
@@ -516,12 +542,15 @@ namespace oomph
   P_preconditioner_pt->setup(p_matrix_pt);
   delete p_matrix_pt; p_matrix_pt = 0;
   double t_p_prec_finish = TimingHelpers::timer();
+
+    double t_p_prec_time = t_p_prec_finish - t_p_prec_start;
   if(Doc_time)
    {
-    double t_p_prec_time = t_p_prec_finish - t_p_prec_start;
     oomph_info << "P sub-preconditioner setup time [sec]: "
                << t_p_prec_time << "\n";
    }
+  oomph_info << "RAYNS: p_prec setup time " << t_p_prec_time << std::endl;
+
   
   // Set up solver for solution of system with momentum matrix
   // ----------------------------------------------------------
@@ -558,13 +587,14 @@ namespace oomph
     delete f_pt; f_pt = 0;
    }
   double t_f_prec_finish = TimingHelpers::timer();
+    double t_f_prec_time = t_f_prec_finish - t_f_prec_start;
   if(Doc_time)
    {
-    double t_f_prec_time = t_f_prec_finish - t_f_prec_start;
+
     oomph_info << "F sub-preconditioner setup time [sec]: "
                << t_f_prec_time << "\n";
    }
-  
+   oomph_info << "RAYNS: f_prec setup time " << t_f_prec_time << std::endl; 
   // Remember that the preconditioner has been setup so
   // the stored information can be wiped when we
   // come here next...

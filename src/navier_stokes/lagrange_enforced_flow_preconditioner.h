@@ -940,7 +940,7 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
     
     some_time_variable = t_end_clean_up_memory - t_start_clean_up_memory;
 
-    std::cout << "RAYTIME: clean_up_memory: " << some_time_variable << std::endl;
+    oomph_info << "LGR_PREC:: clean_up_memory: " << some_time_variable << std::endl;
     some_time_variable = 0.0;
     
 
@@ -1220,7 +1220,7 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
     double t_end_block_setup = TimingHelpers::timer();
     
     some_time_variable = t_end_block_setup - t_start_block_setup;
-    std::cout << "RAYTIME: block_setup: " << some_time_variable << std::endl;
+    std::cout << "LGR_PREC:: block_setup: " << some_time_variable << std::endl;
     some_time_variable = 0.0;
 
 
@@ -1364,7 +1364,7 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
 
     some_time_variable = t_end_get_v_aug_pt - t_start_get_v_aug_pt;
 
-    std::cout << "RAYTIME: clean_up_memory: " << some_time_variable << std::endl;
+    oomph_info << "LGR_PREC:: clean_up_memory: " << some_time_variable << std::endl;
     some_time_variable = 0.0;
 
 
@@ -1403,7 +1403,7 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
 //      if(Doc_time)
       {
         double t_norm_time = t_norm_finish - t_norm_start;
-        std::cout << "RAYTIME: t_norm_time: " << t_norm_time << std::endl;
+        oomph_info << "LGR_PREC:: t_norm_time: " << t_norm_time << std::endl;
       }
     } // if(Use_default_f_scaling)
 
@@ -1748,7 +1748,7 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
     
     some_time_variable = t_end_big_loop - t_start_big_loop;
 
-    std::cout << "RAYTIME: big_loop: " << some_time_variable << std::endl;
+    oomph_info << "LGR_PREC:: big_loop: " << some_time_variable << std::endl;
     some_time_variable = 0.0;
 
 
@@ -2257,7 +2257,7 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
       
     some_time_variable = t_end_turn_into_subsidairy - t_start_turn_into_subsidairy;
 
-    std::cout << "RAYTIME: turn_into_subsidairy: " << some_time_variable << std::endl;
+    oomph_info << "LGR_PREC:: turn_into_subsidairy: " << some_time_variable << std::endl;
     some_time_variable = 0.0;
       //    pause("After turn_into..."); 
 
@@ -2292,7 +2292,7 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
     
     some_time_variable = t_end_ns_setup - t_start_ns_setup;
 
-    std::cout << "RAYTIME: ns_setup: " << some_time_variable << std::endl;
+    oomph_info << "LGR_PREC:: ns_setup: " << some_time_variable << std::endl;
     some_time_variable = 0.0;
 
 
@@ -2366,7 +2366,7 @@ namespace Lagrange_Enforced_Flow_Preconditioner_Subsidiary_Operator_Helper
 //    if(Doc_time)
     {
       double t_w_prec_time = t_w_prec_finish - t_w_prec_start;
-      std::cout << "RAYTIME: t_w_prec_time: "
+      oomph_info << "LGR_PREC:: t_w_prec_time: "
         << t_w_prec_time << "\n";
     }
 
