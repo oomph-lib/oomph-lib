@@ -109,7 +109,7 @@ namespace oomph
   const unsigned my_rank = comm_pt->my_rank();
   const unsigned nproc = comm_pt->nproc();
 
-  if(Dump_matrices)
+  if(Dump_matrices || Dump_matrices_only)
   {
     oomph_info << "RAYRAY About to output jac and res" << std::endl;
 
@@ -126,6 +126,12 @@ namespace oomph
     residual.output_local_values_with_offset(residual_ss.str(),15);
 
     oomph_info << "Done output of jac and res" << std::endl;
+    if(Dump_matrices_only)
+    {
+      oomph_info << "Requested to dump stuff only." << std::endl;
+      oomph_info << "Will now exit" << std::endl;
+      exit(0);
+    }
   }
   
   this->build_distribution(residual.distribution_pt());

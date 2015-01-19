@@ -331,6 +331,7 @@ class TrilinosAztecOOSolver : public IterativeLinearSolver
   Tetgen_number = 0;
   Use_replacement_mat_res = false;
   Dump_matrices = false;
+  Dump_matrices_only = false;
   Dump_replacement = false;
  }
 
@@ -487,6 +488,7 @@ class TrilinosAztecOOSolver : public IterativeLinearSolver
 
  bool Use_replacement_mat_res;
  bool Dump_matrices;
+ bool Dump_matrices_only;
  bool Dump_replacement;
 
 
