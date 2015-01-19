@@ -109,19 +109,24 @@ namespace oomph
   const unsigned my_rank = comm_pt->my_rank();
   const unsigned nproc = comm_pt->nproc();
 
-  oomph_info << "About to output jac and res" << std::endl; 
-  
+  if(Dump_matrices)
+  {
+    oomph_info << "About to output jac and res" << std::endl;
 
-  std::ostringstream jac_ss;
-  jac_ss << "raw_lin_system/jac" << Tetgen_number << "_np" << nproc << "r" << my_rank;
-  cr_matrix_pt->sparse_indexed_output(jac_ss.str(),15,true);
+    std::ostringstream jac_ss;
+    jac_ss << "raw_lin_system/jac" 
+           << Tetgen_number << "_np" << nproc 
+                            << "r" << my_rank;
+    cr_matrix_pt->sparse_indexed_output(jac_ss.str(),15,true);
 
-  std::ostringstream residual_ss;
-  residual_ss << "raw_lin_system/residual" << Tetgen_number << "_np" << nproc << "r" << my_rank;
-  residual.output_local_values_with_offset(residual_ss.str(),15);
+    std::ostringstream residual_ss;
+    residual_ss << "raw_lin_system/residual" 
+                << Tetgen_number << "_np" << nproc 
+                                 << "r" << my_rank;
+    residual.output_local_values_with_offset(residual_ss.str(),15);
 
-
-  oomph_info << "Done output of jac and res" << std::endl; 
+    oomph_info << "Done output of jac and res" << std::endl;
+  }
   
   this->build_distribution(residual.distribution_pt());
 
@@ -133,6 +138,105 @@ namespace oomph
     oomph_info << "Time to generate Jacobian [sec]    : "
                << Jacobian_setup_time << std::endl;
    }
+
+
+  // RAYRAY new code, to read in the permuted matrix.
+  // How to do this... the files are (on two cores)
+  //
+  // Jacobian:
+  // (for rank 0)
+  // jac13_np2r0_val
+  // jac13_np2r0_row
+  // jac13_np2r0_col
+  //
+  // (for rank 1)
+  // jac13_np2r1_valhttps://www.youtube.com/watch?v=xHrhqtY2khc
+  // jac13_np2r1_row
+  // jac13_np2r1_col
+  //
+  //
+  // Residual:
+  // res13_np2r0
+  // res13_np2r0
+  //
+  // The jac13 is stored in Replaced_mat_str.
+  // The res13 is stored in Replaced_res_str.
+  // If Use_replaced_mat_res is true, then we assume that the files exist
+  // and use them.
+  if(Use_replacement_mat_res)
+  {
+    // Recall that we have my_rank and nproc
+    std::ostringstream np_rank_oss;
+    np_rank_oss << "np" << nproc << "r" << my_rank;
+
+    ////////////////////////////////////////////////////////////////////////
+    // create the val oss
+    std::ostringstream val_fname_oss;
+    val_fname_oss << "jac" << Tetgen_number << "_" 
+                  << np_rank_oss.str() << "_val";
+
+    // create the col oss
+    std::ostringstream col_fname_oss;
+    col_fname_oss << "jac" << Tetgen_number << "_"
+                  << np_rank_oss.str() << "_col";
+
+    // create the row oss
+    std::ostringstream row_fname_oss;
+    row_fname_oss << "jac" << Tetgen_number << "_" 
+                  << np_rank_oss.str() << "_row";
+    ////////////////////////////////////////////////////////////////////////
+    std::string val_nlines_fname = val_fname_oss.str() + "_nlines";
+    std::string col_nlines_fname = col_fname_oss.str() + "_nlines";
+    std::string row_nlines_fname = row_fname_oss.str() + "_nlines";
+    ////////////////////////////////////////////////////////////////////////
+
+    // We now read in the nlines
+    unsigned val_nlines = 0;
+    unsigned col_nlines = 0;
+    unsigned row_nlines = 0;
+
+    std::string full_val_nlines_fname = "raw_lin_system/"+val_nlines_fname;
+    std::ifstream val_nline_file(full_val_nlines_fname.c_str());
+    if (!val_nline_file)
+    {
+      std::ostringstream error_message_stream;
+      error_message_stream
+       << "There was a problem opening file "
+       << full_val_nlines_fname  << std::endl;
+       throw OomphLibError(error_message_stream.str(),
+                           OOMPH_CURRENT_FUNCTION,
+                           OOMPH_EXCEPTION_LOCATION);
+    }
+    else
+    {
+      val_nline_file >> val_nlines;
+    }
+
+    oomph_info << "val_nline is: " << val_nlines << std::endl; 
+    pause("fries"); 
+
+
+
+// We want to use this function:
+//   void CRDoubleMatrix::build_without_copy(const unsigned& ncol,
+//					const unsigned& nnz,
+//					double* value,
+//					int* column_index,
+//					int* row_start) 
+// So we need to get the nnz, which is the length of the file
+// in jac_np_rank_col_nlines
+// We also need the number of lines in the row file. This should be the same
+// as the nrow_local + 1.
+    
+
+    // Now create the matrix 
+    //
+
+
+
+
+
+  }
 
 
 //   MemoryUsage::doc_memory_usage("after get_jacobian() in trilinos solver");
